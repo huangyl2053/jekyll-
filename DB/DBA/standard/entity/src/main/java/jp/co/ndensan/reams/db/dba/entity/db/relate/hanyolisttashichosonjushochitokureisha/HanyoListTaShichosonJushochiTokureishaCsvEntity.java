@@ -74,7 +74,7 @@ public class HanyoListTaShichosonJushochiTokureishaCsvEntity {
     private RString 住定異動日;
     @CsvField(order = 28, name = "住定事由")
     private RString 住定事由;
-    @CsvField(order = 39, name = "住定届出日")
+    @CsvField(order = 29, name = "住定届出日")
     private RString 住定届出日;
     @CsvField(order = 30, name = "消除異動日")
     private RString 消除異動日;

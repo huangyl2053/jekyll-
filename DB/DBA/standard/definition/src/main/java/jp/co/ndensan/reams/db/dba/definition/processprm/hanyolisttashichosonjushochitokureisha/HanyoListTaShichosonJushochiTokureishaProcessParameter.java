@@ -240,7 +240,7 @@ public class HanyoListTaShichosonJushochiTokureishaProcessParameter implements I
                 psmSeinengappiYMD_End,
                 psmAgeKijunni,
                 psmChushutsu_Kubun,
-                chushutsunichiKubun,
+                hitsukeChushutsuKubun,
                 kijunYMDkubun,
                 kijunYMD,
                 chushutsunichiKubun,
