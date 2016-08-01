@@ -230,25 +230,25 @@
         <include refid="allColumns_DbT2001ChoshuHohoTemp" />
         FROM
         rgdb."DbV2001ChoshuHoho" as "DbT2001ChoshuHoho"
-        INNER JOIN rgdb."DbT1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
+        INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
         ON "DbT2001ChoshuHoho"."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
         AND "DbT1001HihokenshaDaicho"."shikibetsuCode" = #{識別コード}
         WHERE
-        "DbT2001ChoshuHoho". "fukaNendo" = #{処理年度}
+        "DbT2001ChoshuHoho". "fukaNendo" = #{処理年度} 
         <if test="開始月.toString() == '08'">
-            "DbT2001ChoshuHoho". "kariNenkinNo" = #{基礎年金番号}
-            "DbT2001ChoshuHoho". "kariNenkinCode" = #{年金コード}
-            "DbT2001ChoshuHoho". "kariHosokuM" = #{捕捉月}
+         AND   "DbT2001ChoshuHoho". "kariNenkinNo" = #{基礎年金番号}
+         AND   "DbT2001ChoshuHoho". "kariNenkinCode" = #{年金コード}
+         AND   "DbT2001ChoshuHoho". "kariHosokuM" = #{捕捉月}
         </if>
         <if test="開始月.toString() == '10' || 開始月.toString() == '12' || 開始月.toString() == '02'">
-            "DbT2001ChoshuHoho". "honNenkinNo" = #{基礎年金番号}
-            "DbT2001ChoshuHoho". "honNenkinCode" = #{年金コード}
-            "DbT2001ChoshuHoho". "honHosokuM"  = #{捕捉月}
+         AND   "DbT2001ChoshuHoho". "honNenkinNo" = #{基礎年金番号}
+         AND   "DbT2001ChoshuHoho". "honNenkinCode" = #{年金コード}
+         AND   "DbT2001ChoshuHoho". "honHosokuM"  = #{捕捉月}
         </if>
         <if test="開始月.toString() == '04' || 開始月.toString() == '06'">
-            "DbT2001ChoshuHoho". "yokunendoKariNenkinNo" = #{基礎年金番号}
-            "DbT2001ChoshuHoho". "yokunendoKariNenkinCode" = #{年金コード}
-            "DbT2001ChoshuHoho". "yokunendoKariHosokuM"  = #{捕捉月}
+         AND   "DbT2001ChoshuHoho". "yokunendoKariNenkinNo" = #{基礎年金番号}
+         AND   "DbT2001ChoshuHoho". "yokunendoKariNenkinCode" = #{年金コード}
+         AND   "DbT2001ChoshuHoho". "yokunendoKariHosokuM"  = #{捕捉月}
         </if>
     </select>
 

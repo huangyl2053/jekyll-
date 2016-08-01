@@ -590,7 +590,7 @@ public class TokuchoTaishoshaIchiranSakusei {
             徴収方法entity.setIraiSohuzumiFlag(false);
             徴収方法entity.setTsuikaIraiSohuzumiFlag(false);
             徴収方法entity.setTokuchoTeishiNichiji(null);
-            徴収方法entity.setTokuchoTeishiJiyuCode(RString.EMPTY);
+            徴収方法entity.setTokuchoTeishiJiyuCode(null);
             徴収方法entity.setState(EntityDataState.Added);
             徴収方法Dac.save(徴収方法entity);
             if (taishogaiModels == null || taishogaiModels.isEmpty()) {
@@ -684,18 +684,6 @@ public class TokuchoTaishoshaIchiranSakusei {
             }
         } else if (STR04.compareTo(開始月数) == NUM0) {
             for (DbT2001ChoshuHohoEntity 徴収方法entity : 徴収方法entityList) {
-                徴収方法entity.setChoshuHoho4gatsu(set徴収方法(徴収方法entity.getChoshuHoho4gatsu()));
-                徴収方法entity.setChoshuHoho5gatsu(set徴収方法(徴収方法entity.getChoshuHoho5gatsu()));
-                徴収方法entity.setChoshuHoho6gatsu(set徴収方法(徴収方法entity.getChoshuHoho6gatsu()));
-                徴収方法entity.setChoshuHoho7gatsu(set徴収方法(徴収方法entity.getChoshuHoho7gatsu()));
-                徴収方法entity.setChoshuHoho8gatsu(set徴収方法(徴収方法entity.getChoshuHoho8gatsu()));
-                徴収方法entity.setChoshuHoho9gatsu(set徴収方法(徴収方法entity.getChoshuHoho9gatsu()));
-                徴収方法entity.setChoshuHoho10gatsu(set徴収方法(徴収方法entity.getChoshuHoho10gatsu()));
-                徴収方法entity.setChoshuHoho11gatsu(set徴収方法(徴収方法entity.getChoshuHoho11gatsu()));
-                徴収方法entity.setChoshuHoho12gatsu(set徴収方法(徴収方法entity.getChoshuHoho12gatsu()));
-                徴収方法entity.setChoshuHoho1gatsu(set徴収方法(徴収方法entity.getChoshuHoho1gatsu()));
-                徴収方法entity.setChoshuHoho2gatsu(set徴収方法(徴収方法entity.getChoshuHoho2gatsu()));
-                徴収方法entity.setChoshuHoho3gatsu(set徴収方法(徴収方法entity.getChoshuHoho3gatsu()));
                 徴収方法entity.setChoshuHohoYoku4gatsu(set徴収方法(徴収方法entity.getChoshuHohoYoku4gatsu()));
                 徴収方法entity.setChoshuHohoYoku5gatsu(set徴収方法(徴収方法entity.getChoshuHohoYoku5gatsu()));
                 徴収方法entity.setChoshuHohoYoku6gatsu(set徴収方法(徴収方法entity.getChoshuHohoYoku6gatsu()));
@@ -708,20 +696,7 @@ public class TokuchoTaishoshaIchiranSakusei {
                 save徴収方法entity(徴収方法entity);
             }
         } else if (STR06.compareTo(開始月数) == NUM0) {
-            徴収方法entityList = mapper.select最新介護徴収方法情報取得(param);
             for (DbT2001ChoshuHohoEntity 徴収方法entity : 徴収方法entityList) {
-                徴収方法entity.setChoshuHoho6gatsu(set徴収方法(徴収方法entity.getChoshuHoho6gatsu()));
-                徴収方法entity.setChoshuHoho7gatsu(set徴収方法(徴収方法entity.getChoshuHoho7gatsu()));
-                徴収方法entity.setChoshuHoho8gatsu(set徴収方法(徴収方法entity.getChoshuHoho8gatsu()));
-                徴収方法entity.setChoshuHoho9gatsu(set徴収方法(徴収方法entity.getChoshuHoho9gatsu()));
-                徴収方法entity.setChoshuHoho10gatsu(set徴収方法(徴収方法entity.getChoshuHoho10gatsu()));
-                徴収方法entity.setChoshuHoho11gatsu(set徴収方法(徴収方法entity.getChoshuHoho11gatsu()));
-                徴収方法entity.setChoshuHoho12gatsu(set徴収方法(徴収方法entity.getChoshuHoho12gatsu()));
-                徴収方法entity.setChoshuHoho1gatsu(set徴収方法(徴収方法entity.getChoshuHoho1gatsu()));
-                徴収方法entity.setChoshuHoho2gatsu(set徴収方法(徴収方法entity.getChoshuHoho2gatsu()));
-                徴収方法entity.setChoshuHoho3gatsu(set徴収方法(徴収方法entity.getChoshuHoho3gatsu()));
-                徴収方法entity.setChoshuHohoYoku4gatsu(set徴収方法(徴収方法entity.getChoshuHohoYoku4gatsu()));
-                徴収方法entity.setChoshuHohoYoku5gatsu(set徴収方法(徴収方法entity.getChoshuHohoYoku5gatsu()));
                 徴収方法entity.setChoshuHohoYoku6gatsu(set徴収方法(徴収方法entity.getChoshuHohoYoku6gatsu()));
                 徴収方法entity.setChoshuHohoYoku7gatsu(set徴収方法(徴収方法entity.getChoshuHohoYoku7gatsu()));
                 徴収方法entity.setChoshuHohoYoku8gatsu(set徴収方法(徴収方法entity.getChoshuHohoYoku8gatsu()));
@@ -749,7 +724,7 @@ public class TokuchoTaishoshaIchiranSakusei {
         徴収方法entity.setIraiSohuzumiFlag(false);
         徴収方法entity.setTsuikaIraiSohuzumiFlag(false);
         徴収方法entity.setTokuchoTeishiNichiji(null);
-        徴収方法entity.setTokuchoTeishiJiyuCode(RString.EMPTY);
+        徴収方法entity.setTokuchoTeishiJiyuCode(null);
         徴収方法entity.setState(EntityDataState.Added);
         徴収方法Dac.save(徴収方法entity);
     }
