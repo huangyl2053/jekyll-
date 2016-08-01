@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -32,8 +31,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
-import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * 様式別連携情報作成のバッチ処理・一般状況（１１）～（１４）現物分に対応するのCSV出力のプロセスクラスです。
@@ -65,7 +62,6 @@ public class JigyoHokokuRenkei11_14GenbutsuProcess extends BatchProcessBase<DbT7
     private static final RString 番号_10 = new RString("10");
     private static final RString 番号_11 = new RString("11");
     private static final RString 番号_12 = new RString("12");
-    private FileSpoolManager manager;
     private RString eucFilePath;
     private RString csvFileName;
     private RDate 基準日;
@@ -95,8 +91,7 @@ public class JigyoHokokuRenkei11_14GenbutsuProcess extends BatchProcessBase<DbT7
 
     @Override
     protected void createWriter() {
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        RString spoolWorkPath = manager.getEucOutputDirectry();
+        RString spoolWorkPath = processParameter.getSpoolWorkPath();
         eucFilePath = Path.combinePath(spoolWorkPath, csvFileName);
         eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
                 setEncode(Encode.SJIS)
@@ -143,7 +138,6 @@ public class JigyoHokokuRenkei11_14GenbutsuProcess extends BatchProcessBase<DbT7
                 )
         );
         eucCsvWriter.close();
-        manager.spool(eucFilePath);
     }
 
     private void get様式１の６レコード１のCSV出力() {

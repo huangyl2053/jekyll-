@@ -25,6 +25,10 @@ import jp.co.ndensan.reams.db.dbu.definition.batchprm.jigyohokokurenkei.JigyoHok
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
+import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.ZipUtil;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 様式別連携情報作成のバッチフ処理クラスです。
@@ -53,6 +57,8 @@ public class JigyoHokokuRenkeiFlow extends BatchFlowBase<JigyoHokokuRenkeiBatchP
 
     @Override
     protected void defineFlow() {
+        RString spoolWorkPath = Directory.createTmpDirectory();
+        getParameter().setSpoolWorkPath(spoolWorkPath);
         if (getParameter().is出力_一般状況1_10()) {
             executeStep(YOUSIKIICHIPROCESS);
             executeStep(YOUSIKIICHI_NIPROCESS);
@@ -87,6 +93,8 @@ public class JigyoHokokuRenkeiFlow extends BatchFlowBase<JigyoHokokuRenkeiBatchP
             executeStep(GASSANYOUSIKINI_ICHIPROCESS);
             executeStep(GASSANYOUSIKINI_SITIPROCESS);
         }
+        RString zipPath = Path.combinePath(spoolWorkPath, new RString("spoolWorkPath.zip"));
+        ZipUtil.createFromFolder(zipPath, spoolWorkPath);
     }
 
     /**
