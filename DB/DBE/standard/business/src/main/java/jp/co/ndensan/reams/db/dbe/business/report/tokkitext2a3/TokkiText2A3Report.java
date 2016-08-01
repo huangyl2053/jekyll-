@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.tokkitext2a3;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitext2a3.TokkiText2A3Entity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.TokkiJikou;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.TokkiJikou;
 import jp.co.ndensan.reams.db.dbe.entity.report.tokkitext2a3.TokkiText2A3ReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
