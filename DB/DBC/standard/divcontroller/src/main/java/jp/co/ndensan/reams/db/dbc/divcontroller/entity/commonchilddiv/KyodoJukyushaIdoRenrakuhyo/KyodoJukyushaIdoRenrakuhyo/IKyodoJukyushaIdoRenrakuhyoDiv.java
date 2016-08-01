@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyodoJukyushaIdoRenrakuhyo.KyodoJukyushaIdoRenrakuhyo;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.param.KyodoshoriyoJukyushaIdoRenrakuhyoParam;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -47,4 +48,25 @@ public interface IKyodoJukyushaIdoRenrakuhyoDiv extends ICommonChildDivBasePrope
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs get一時差止日の関連チェック();
+
+    /**
+     * 「基本送付情報を追加する」チェックボックス。
+     *
+     * @return list
+     */
+    public List<RString> get基本送付情報を追加する();
+
+    /**
+     * 「償還送付情報を追加する」チェックボックス。
+     *
+     * @return list
+     */
+    public List<RString> get償還送付情報を追加する();
+
+    /**
+     * 「高額送付情報を追加する」チェックボックス。
+     *
+     * @return list
+     */
+    public List<RString> get高額送付情報を追加する();
 }
