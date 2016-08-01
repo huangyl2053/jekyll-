@@ -65,13 +65,11 @@ public class KogakuSabisuhiShikyuShinseiPanel {
      */
     public ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> onLoad(KogakuSabisuhiShikyuShinseiPanelDiv div) {
         TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-//        HihokenshaNo 被保険者番号 = 引継ぎデータ.get被保険者番号();
-        HihokenshaNo 被保険者番号 = new HihokenshaNo("0000000014");
+        HihokenshaNo 被保険者番号 = 引継ぎデータ.get被保険者番号();
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
-//        RString メニューID = ResponseHolder.getMenuID();
-        RString メニューID = new RString("DBCMN42001");
+        RString メニューID = ResponseHolder.getMenuID();
         ViewStateHolder.put(ViewStateKeys.メニューID, メニューID);
         //TODO  QA988
         RString 導入形態コード = new RString("111");

@@ -296,7 +296,6 @@ public class KogakuKyufuTaishoListHandler {
             FlexibleYearMonth サービス提供年月) {
         row.setData1(div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().getValue());
         row.setData2(div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaName().getValue());
-        row.setData3(div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().getValue());
         row.getData4().setValue(div.getMeisaiGokeiHenshuPanel().getTxtHyoGkei().getValue());
         row.getData5().setValue(div.getMeisaiGokeiHenshuPanel().getTxtRiyoshafutanGokei().getValue());
         if (div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().getValue() != null) {
@@ -310,8 +309,10 @@ public class KogakuKyufuTaishoListHandler {
                 add(div.getMeisaiGokeiHenshuPanel().getTxtRiyoshafutanGokei().getValue()));
         if (div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey().equals(ONE_RS)) {
             row.setData10(ONE_RS);
+            row.setData3(div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().getValue());
         } else {
             row.setData10(TWO_RS);
+            row.setData3(合計);
         }
         if (div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue() != null
                 && !div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue().isEmpty()) {
