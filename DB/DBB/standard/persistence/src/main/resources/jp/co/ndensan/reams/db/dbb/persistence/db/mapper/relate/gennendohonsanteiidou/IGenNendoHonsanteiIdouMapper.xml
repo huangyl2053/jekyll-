@@ -550,12 +550,6 @@
         FROM
             rgdb."DbT1001HihokenshaDaicho" AS A
         INNER JOIN
-            rgdb."DbV1001HihokenshaDaicho" AS DbV1001
-        ON 
-            A."hihokenshaNo" = DbV1001."hihokenshaNo"
-        AND A."idoYMD" = DbV1001."idoYMD"
-        AND A."edaNo" = DbV1001."edaNo"
-        INNER JOIN
             rgur."UrT0508SeikatsuHogoJukyusha" AS B
         ON
             A."shikibetsuCode" = B."shikibetsuCode"
@@ -566,13 +560,10 @@
         AND B."gyomuCode" = C."gyomuCode"
         AND B."jukyuKaishiYMD" = C."jukyuKaishiYMD"
         WHERE
-            A."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
-        AND A."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
-        AND B."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
+            B."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
         AND B."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
-        AND B."gyomuCode" = 'DB'
-        AND B."jukyuKaishiYMD" <![CDATA[<]]> A."idoYMD"
-        AND (B."jukyuHaishiYMD" IS NULL OR B."jukyuHaishiYMD" = '' OR B."jukyuHaishiYMD" <![CDATA[>]]> A."idoYMD")
+        AND C."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
+        AND C."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
     </select>
     
     <!-- 老齢の異動の取得 -->
@@ -583,20 +574,12 @@
         FROM
             rgdb."DbT1001HihokenshaDaicho" AS A
         INNER JOIN
-            rgdb."DbV1001HihokenshaDaicho" AS DbV1001
-        ON 
-            A."hihokenshaNo" = DbV1001."hihokenshaNo"
-        AND A."idoYMD" = DbV1001."idoYMD"
-        AND A."edaNo" = DbV1001."edaNo"
-        INNER JOIN
             rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS B
         ON
             A."shikibetsuCode" = B."shikibetsuCode"
         WHERE
             A."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
         AND A."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
-        AND A."idoYMD"  <![CDATA[>]]> B."jukyuKaishiYMD"
-        AND (B."jukyuHaishiYMD" IS NULL OR B."jukyuHaishiYMD" = '' OR B."jukyuHaishiYMD" <![CDATA[>]]> A."idoYMD")
     </select>
     
     <!-- 境界層の異動の取得 -->
@@ -610,12 +593,8 @@
             rgdb."DbT1007KyokaisoHokenryoDankai" AS B
         ON
             A."hihokenshaNo" = B."hihokenshaNo"
-        AND A."rirekiNo" = B."rirekiNo"
-        AND A."linkNo" = B."linkNo"
         WHERE
-            A."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
-        AND A."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
-        AND B."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
+            B."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
         AND B."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
     </select>
     
