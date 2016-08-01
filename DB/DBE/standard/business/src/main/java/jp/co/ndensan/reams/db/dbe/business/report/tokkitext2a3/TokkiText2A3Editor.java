@@ -125,7 +125,7 @@ public class TokkiText2A3Editor implements ITokkiText2A3Editor {
     }
 
     private TokkiText2A3ReportSource set特記事項テキスト(TokkiText2A3ReportSource source) {
-        for (int i = 0; i < item.getListChosa2().size(); i++) {
+        for (int i = 0; i < item.getListChosa1().size(); i++) {
             if (i == 0) {
                 source.tokkiText3 = item.getListChosa1().get(i).getテキストとイメージ();
             }
@@ -177,68 +177,70 @@ public class TokkiText2A3Editor implements ITokkiText2A3Editor {
             if (i == INT_16) {
                 source.tokkiText19 = item.getListChosa1().get(i).getテキストとイメージ();
             }
-            source = set特記事項テキスト2(source, i);
         }
+        source = set特記事項テキスト2(source);
         return source;
     }
 
-    private TokkiText2A3ReportSource set特記事項テキスト2(TokkiText2A3ReportSource source, int i) {
-        if (i == INT_17) {
-            source.tokkiText20 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_18) {
-            source.tokkiText21 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_19) {
-            source.tokkiText22 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_20) {
-            source.tokkiText23 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_21) {
-            source.tokkiText24 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_22) {
-            source.tokkiText25 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_23) {
-            source.tokkiText26 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_24) {
-            source.tokkiText27 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_25) {
-            source.tokkiText28 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_26) {
-            source.tokkiText29 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_27) {
-            source.tokkiText30 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_28) {
-            source.tokkiText31 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_29) {
-            source.tokkiText32 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_30) {
-            source.tokkiText33 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_31) {
-            source.tokkiText34 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_32) {
-            source.tokkiText35 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_33) {
-            source.tokkiText36 = item.getListChosa2().get(i).getテキストとイメージ();
+    private TokkiText2A3ReportSource set特記事項テキスト2(TokkiText2A3ReportSource source) {
+        for (int i = 0; i < item.getListChosa2().size(); i++) {
+            if (i == INT_17) {
+                source.tokkiText20 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_18) {
+                source.tokkiText21 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_19) {
+                source.tokkiText22 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_20) {
+                source.tokkiText23 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_21) {
+                source.tokkiText24 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_22) {
+                source.tokkiText25 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_23) {
+                source.tokkiText26 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_24) {
+                source.tokkiText27 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_25) {
+                source.tokkiText28 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_26) {
+                source.tokkiText29 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_27) {
+                source.tokkiText30 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_28) {
+                source.tokkiText31 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_29) {
+                source.tokkiText32 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_30) {
+                source.tokkiText33 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_31) {
+                source.tokkiText34 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_32) {
+                source.tokkiText35 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_33) {
+                source.tokkiText36 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
         }
         return source;
     }
 
     private TokkiText2A3ReportSource set特記事項イメージ(TokkiText2A3ReportSource source) {
-        for (int i = 0; i < item.getListChosa2().size(); i++) {
+        for (int i = 0; i < item.getListChosa1().size(); i++) {
             if (i == 0) {
                 source.tokkiImg3 = item.getListChosa1().get(i).getテキストとイメージ();
             }
@@ -290,62 +292,64 @@ public class TokkiText2A3Editor implements ITokkiText2A3Editor {
             if (i == INT_16) {
                 source.tokkiImg19 = item.getListChosa1().get(i).getテキストとイメージ();
             }
-            source = set特記事項イメージ2(source, i);
         }
+        source = set特記事項イメージ2(source);
         return source;
     }
 
-    private TokkiText2A3ReportSource set特記事項イメージ2(TokkiText2A3ReportSource source, int i) {
-        if (i == INT_17) {
-            source.tokkiImg20 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_18) {
-            source.tokkiImg21 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_19) {
-            source.tokkiImg22 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_20) {
-            source.tokkiImg23 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_21) {
-            source.tokkiImg24 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_22) {
-            source.tokkiImg25 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_23) {
-            source.tokkiImg26 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_24) {
-            source.tokkiImg27 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_25) {
-            source.tokkiImg28 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_26) {
-            source.tokkiImg29 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_27) {
-            source.tokkiImg30 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_28) {
-            source.tokkiImg31 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_29) {
-            source.tokkiImg32 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_30) {
-            source.tokkiImg33 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_31) {
-            source.tokkiImg34 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_32) {
-            source.tokkiImg35 = item.getListChosa2().get(i).getテキストとイメージ();
-        }
-        if (i == INT_33) {
-            source.tokkiImg36 = item.getListChosa2().get(i).getテキストとイメージ();
+    private TokkiText2A3ReportSource set特記事項イメージ2(TokkiText2A3ReportSource source) {
+        for (int i = 0; i < item.getListChosa2().size(); i++) {
+            if (i == INT_17) {
+                source.tokkiImg20 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_18) {
+                source.tokkiImg21 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_19) {
+                source.tokkiImg22 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_20) {
+                source.tokkiImg23 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_21) {
+                source.tokkiImg24 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_22) {
+                source.tokkiImg25 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_23) {
+                source.tokkiImg26 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_24) {
+                source.tokkiImg27 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_25) {
+                source.tokkiImg28 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_26) {
+                source.tokkiImg29 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_27) {
+                source.tokkiImg30 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_28) {
+                source.tokkiImg31 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_29) {
+                source.tokkiImg32 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_30) {
+                source.tokkiImg33 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_31) {
+                source.tokkiImg34 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_32) {
+                source.tokkiImg35 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
+            if (i == INT_33) {
+                source.tokkiImg36 = item.getListChosa2().get(i).getテキストとイメージ();
+            }
         }
         return source;
     }

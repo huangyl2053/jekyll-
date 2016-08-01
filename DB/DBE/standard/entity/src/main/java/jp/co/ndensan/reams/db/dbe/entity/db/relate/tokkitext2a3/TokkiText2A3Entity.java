@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitext2a3;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.TokkiJikou;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.TokkiJikou;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
