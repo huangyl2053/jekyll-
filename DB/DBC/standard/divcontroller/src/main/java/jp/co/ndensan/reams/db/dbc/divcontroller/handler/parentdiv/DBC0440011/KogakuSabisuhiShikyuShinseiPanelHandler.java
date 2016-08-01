@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0440011;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuKyufuTaishoshaGokei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuKyufuTaishoshaMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuShikyuHanteiKekka;
@@ -19,8 +21,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.kougakusabisuhishousainaiyou.Kou
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.dgTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0440011.KogakuSabisuhiShikyuShinseiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0440011.KogakuServicehiDetailParameter;
-import jp.co.ndensan.reams.db.dbc.service.core.basic.KogakuKyufuTaishoshaGokeiManager;
-import jp.co.ndensan.reams.db.dbc.service.core.basic.KogakuKyufuTaishoshaMeisaiManager;
 import jp.co.ndensan.reams.db.dbc.service.core.kougakusabisuhishikyuushinnseitouroku.KougakuSabisuhiShikyuuShinnseiTouroku;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
@@ -41,10 +41,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 画面設計_DBCMN42001_高額サービス費支給申請登録
@@ -65,6 +65,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
     private static final RString THREE = new RString("3");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
+    private static final RString アンダーライン = new RString("_");
     private static final Decimal NUMBER_0 = new Decimal(0);
     private static final NyuryokuShikibetsuNo 定値_識別番号 = new NyuryokuShikibetsuNo("3411");
     private static final KokanShikibetsuNo 定値_交換情報識別番号 = new KokanShikibetsuNo("1131");
@@ -144,7 +145,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
             履歴番号 = Integer.parseInt(Saiban.get(SubGyomuCode.DBB介護賦課,
                     被保険者番号.value(), サービス年月.getNendo()).nextString().toString());
         }
-        if (result != null) {
+        if (result != null && !追加モード.equals(画面モード)) {
             支給申請entity = result.get高額介護サービス費支給申請Entity();
             支給判定結果entity = result.get高額介護サービス費支給判定結果Entity();
         }
@@ -202,6 +203,32 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
      */
     public void save対象者情報(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, RString メニューID,
             List<KogakuKyuufuTaishouListEntityResult> 高額給付対象一覧list) {
+        Map<RString, KogakuKyufuTaishoshaMeisai> 明細map = new HashMap<>();
+        Map<RString, KogakuKyufuTaishoshaGokei> 合計map = new HashMap<>();
+        for (KogakuKyuufuTaishouListEntityResult result : 高額給付対象一覧list) {
+            if (result.get明細合計区分().equals(ONE)) {
+                RStringBuilder builder = new RStringBuilder();
+                builder.append(result.get給付対象者明細entity().get被保険者番号().value());
+                builder.append(アンダーライン);
+                builder.append(result.get給付対象者明細entity().getサービス提供年月().toDateString());
+                builder.append(アンダーライン);
+                builder.append(result.get給付対象者明細entity().get事業者番号().value());
+                builder.append(アンダーライン);
+                builder.append(result.get給付対象者明細entity().getサービス種類コード().value());
+                builder.append(アンダーライン);
+                builder.append(result.get給付対象者明細entity().get履歴番号());
+                明細map.put(builder.toRString(), result.get給付対象者明細entity());
+            }
+            if (result.get明細合計区分().equals(TWO)) {
+                RStringBuilder builder = new RStringBuilder();
+                builder.append(result.get給付対象者合計entity().get被保険者番号().value());
+                builder.append(アンダーライン);
+                builder.append(result.get給付対象者合計entity().getサービス提供年月().toDateString());
+                builder.append(アンダーライン);
+                builder.append(result.get給付対象者合計entity().get履歴番号().intValue());
+                合計map.put(builder.toRString(), result.get給付対象者合計entity());
+            }
+        }
         List<KougakuSabisuhiShikyuuShinnseiTourokuResult> entityList = new ArrayList<>();
         List<dgTaishoshaIchiran_Row> rowList = div.getCcdKogakuKyufuTaishoList().get給付対象一覧();
         for (dgTaishoshaIchiran_Row row : rowList) {
@@ -237,25 +264,31 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                 if (row.getData10().equals(ONE)) {
                     KougakuSabisuhiShikyuuShinnseiTourokuResult result
                             = new KougakuSabisuhiShikyuuShinnseiTourokuResult();
-                    KogakuKyufuTaishoshaMeisaiManager manage = InstanceProvider.
-                            create(KogakuKyufuTaishoshaMeisaiManager.class);
-                    KogakuKyufuTaishoshaMeisai 給付対象者明細entity = manage.get高額介護サービス費給付対象者明細(
-                            new HihokenshaNo(row.getData12().getValue()),
-                            new FlexibleYearMonth(row.getData13().getValue()),
-                            new JigyoshaNo(row.getData1()),
-                            new ServiceShuruiCode(row.getData11()), row.getData14().getValue().intValue());
-                    給付対象者明細entity = buid給付対象者明細entity(給付対象者明細entity, row);
+                    RStringBuilder builder = new RStringBuilder();
+                    builder.append(row.getData12().getValue());
+                    builder.append(アンダーライン);
+                    builder.append(row.getData13().getValue());
+                    builder.append(アンダーライン);
+                    builder.append(row.getData1());
+                    builder.append(アンダーライン);
+                    builder.append(row.getData11());
+                    builder.append(アンダーライン);
+                    builder.append(row.getData14().getValue().intValue());
+                    KogakuKyufuTaishoshaMeisai 給付対象者明細entity
+                            = buid給付対象者明細entity(明細map.get(builder.toRString()), row);
                     result.set高額介護サービス費給付対象者明細Entity(給付対象者明細entity);
                     entityList.add(result);
                 } else if (row.getData10().equals(TWO)) {
                     KougakuSabisuhiShikyuuShinnseiTourokuResult result
                             = new KougakuSabisuhiShikyuuShinnseiTourokuResult();
-                    KogakuKyufuTaishoshaGokeiManager manage = InstanceProvider.
-                            create(KogakuKyufuTaishoshaGokeiManager.class);
-                    KogakuKyufuTaishoshaGokei 給付対象者合計entity = manage.get高額介護サービス費給付対象者合計(
-                            new HihokenshaNo(row.getData12().getValue()),
-                            new FlexibleYearMonth(row.getData13().getValue()), row.getData14().getValue());
-                    給付対象者合計entity = buid給付対象者合計entity(給付対象者合計entity, row);
+                    RStringBuilder builder = new RStringBuilder();
+                    builder.append(row.getData12().getValue());
+                    builder.append(アンダーライン);
+                    builder.append(row.getData13().getValue());
+                    builder.append(アンダーライン);
+                    builder.append(row.getData14().getValue().intValue());
+                    KogakuKyufuTaishoshaGokei 給付対象者合計entity
+                            = buid給付対象者合計entity(合計map.get(builder.toRString()), row);
                     result.set高額介護サービス費支給対象者合計Entity(給付対象者合計entity);
                     entityList.add(result);
                 }
