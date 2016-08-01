@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HyojiCodeResearcher;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
+import jp.co.ndensan.reams.db.dbb.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
@@ -251,10 +252,18 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
 
         shoKyotsu.set編集後口座(editedKoza);
         FukaJoho 賦課情報 = 本算定通知書情報.get賦課の情報_更正後().get賦課情報();
-        shoKyotsu.set調定事由１(賦課情報.get調定事由1());
-        shoKyotsu.set調定事由２(賦課情報.get調定事由2());
-        shoKyotsu.set調定事由３(賦課情報.get調定事由3());
-        shoKyotsu.set調定事由４(賦課情報.get調定事由4());
+        if (!RString.isNullOrEmpty(賦課情報.get調定事由1())) {
+            shoKyotsu.set調定事由１(ChoteiJiyuCode.toValue(賦課情報.get調定事由1()).get名称());
+        }
+        if (!RString.isNullOrEmpty(賦課情報.get調定事由2())) {
+            shoKyotsu.set調定事由２(ChoteiJiyuCode.toValue(賦課情報.get調定事由2()).get名称());
+        }
+        if (!RString.isNullOrEmpty(賦課情報.get調定事由3())) {
+            shoKyotsu.set調定事由３(ChoteiJiyuCode.toValue(賦課情報.get調定事由3()).get名称());
+        }
+        if (!RString.isNullOrEmpty(賦課情報.get調定事由4())) {
+            shoKyotsu.set調定事由４(ChoteiJiyuCode.toValue(賦課情報.get調定事由4()).get名称());
+        }
         shoKyotsu.set普徴納期情報リスト(get納期情報リスト(本算定通知書情報.get普徴納期情報リスト()));
         shoKyotsu.set特徴納期情報リスト(get納期情報リスト(本算定通知書情報.get特徴納期情報リスト()));
         shoKyotsu.set普徴期数_現年度(本算定通知書情報.get普徴納期情報リスト().size());
