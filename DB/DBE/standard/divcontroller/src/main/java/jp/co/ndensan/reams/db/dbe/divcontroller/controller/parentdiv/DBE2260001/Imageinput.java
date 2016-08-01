@@ -22,20 +22,32 @@ import jp.co.ndensan.reams.db.dbe.service.core.ikensho.shujiiikenshojoho.ShujiiI
 import jp.co.ndensan.reams.db.dbe.service.core.imageinput.ImageinputFindler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -50,6 +62,7 @@ public class Imageinput {
     private static final RString 初期状態_メニューから = new RString("DBEMN32003");
     private static final RString チェックOK = new RString("OK");
     private static final RString チェックNG = new RString("NG");
+    private static final RString ファイル名 = new RString("OCRIKEN.CSV");
     private static final int CSV項目数 = 140;
 
     /**
@@ -102,13 +115,13 @@ public class Imageinput {
                 }
                 if (row.getSelected() && チェックNG.equals(row.getOkNg())) {
                     ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-                    validationMessages.add(getValidationHandler().check一覧対象未選択());
+                    validationMessages.add(getValidationHandler().check対象を選択());
                     return ResponseData.of(div).addValidationMessages(validationMessages).respond();
                 }
             }
             if (!選択Flag) {
                 ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-                validationMessages.add(getValidationHandler().check対象を選択());
+                validationMessages.add(getValidationHandler().check一覧対象未選択());
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
             db更新(div);
@@ -117,9 +130,72 @@ public class Imageinput {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 「アップロードする」ボタンを押します。
+     *
+     * @param div 画面情報
+     * @param files ファイル
+     * @return ResponseData<ImageinputDiv>
+     */
+    @SuppressWarnings("checkstyle:illegaltoken")
+    public ResponseData<ImageinputDiv> onclick_BtnUpload(ImageinputDiv div, FileData[] files) {
+        boolean 選択Flag = false;
+        for (dgshinseishaichiran_Row row : div.getDgshinseishaichiran().getDataSource()) {
+            if (row.getSelected()) {
+                選択Flag = true;
+            }
+        }
+        if (!選択Flag) {
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            validationMessages.add(getValidationHandler().check一覧対象未選択());
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
+        for (FileData file : files) {
+            save共有フォルダ(div, new FilesystemPath(file.getFilePath()));
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    private void save共有フォルダ(ImageinputDiv div, FilesystemPath path) {
+        List<TorokuData> dataList = ViewStateHolder.get(ViewStateKeys.イメージ取込み, TorokuDataCollection.class).getDataList();
+        for (TorokuData data : dataList) {
+            for (dgshinseishaichiran_Row row : div.getDgshinseishaichiran().getDataSource()) {
+                if (row.getHihokenshano().equals(data.get被保険者番号())
+                        && row.getNinteishinseiymd().equals(dateFormat(data.get申請日()))
+                        && row.getShoKisaiHokenshaNo().equals(data.get保険者番号())
+                        && row.getSelected()) {
+                    if (data.getT5115_イメージ共有ファイルID() == null) {
+                        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName
+                                .fromString(data.getT5101_証記載保険者番号().concat(data.getT5101_被保険者番号())));
+                        sfd = SharedFile.defineSharedFile(sfd);
+                        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
+                        SharedFileEntryDescriptor entity = SharedFile.copyToSharedFile(sfd, path, opts);
+                        updateDbT5115(new ShinseishoKanriNo(data.getT5101_申請書管理番号()), entity.getSharedFileId());
+                    } else {
+                        ReadOnlySharedFileEntryDescriptor or_sfd = new ReadOnlySharedFileEntryDescriptor(FilesystemName
+                                .fromString(data.getT5101_証記載保険者番号().concat(data.getT5101_被保険者番号())), data.getT5115_イメージ共有ファイルID());
+                        SharedFile.appendNewFile(or_sfd, path, "");
+                    }
+                }
+            }
+        }
+    }
+
+    private void updateDbT5115(ShinseishoKanriNo 申請書管理番号, RDateTime イメージ共有ファイルID) {
+        ImageManager mannger = new ImageManager();
+        Image image = mannger.getイメージ情報(申請書管理番号);
+        if (image == null) {
+            image = new Image(申請書管理番号);
+            image = image.createBuilderForEdit().setイメージ共有ファイルID(イメージ共有ファイルID).build();
+        } else {
+            image = image.createBuilderForEdit().setイメージ共有ファイルID(イメージ共有ファイルID).build().modifiedModel();
+        }
+        mannger.saveイメージ情報(image);
+    }
+
     private void csvCheck処理(List<TorokuData> dataList, ImageinputDiv div) {
         if (dataList.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.コードマスタなし.getMessage());
+            throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(ファイル名.toString()));
         }
         ImageinputFindler service = ImageinputFindler.createInstance();
         List<TorokuData> dB更新用 = new ArrayList<>();
@@ -130,13 +206,16 @@ public class Imageinput {
             if (csvData.get項目数() != CSV項目数) {
                 csvData.setOK_NG(チェックNG);
             } else {
-                if (!当該被保険者の申請データが存在するかどうかチェック(service, param)) {
+                csvData.setOK_NG(チェックOK);
+            }
+            List<ImageinputResult> 関連データList = service.get関連データ(param).records();
+            if (チェックOK.equals(csvData.getOK_NG())) {
+                if (関連データList.isEmpty()) {
                     csvData.setOK_NG(チェックNG);
                 } else {
                     csvData.setOK_NG(チェックOK);
                 }
             }
-            List<ImageinputResult> 関連データList = service.get関連データ(param).records();
             for (ImageinputResult 関連データ : 関連データList) {
                 csvData.setT5101_厚労省IF識別コード(関連データ.getT5101_厚労省IF識別コード());
                 csvData.setT5101_申請書管理番号(関連データ.getT5101_申請書管理番号());
@@ -269,10 +348,6 @@ public class Imageinput {
 
     private boolean isNotEmpty(RString data) {
         return !RString.isNullOrEmpty(data);
-    }
-
-    private boolean 当該被保険者の申請データが存在するかどうかチェック(ImageinputFindler service, ImageinputMapperParamter param) {
-        return service.get当該被保険者の申請データが存在するかどうかチェック(param);
     }
 
     private RString dateFormat(RString date) {

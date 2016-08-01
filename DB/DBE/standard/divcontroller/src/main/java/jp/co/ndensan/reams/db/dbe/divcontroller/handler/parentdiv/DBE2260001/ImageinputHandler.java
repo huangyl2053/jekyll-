@@ -24,10 +24,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomo
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKinyuMapping99A;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping99A;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -46,15 +42,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  */
 public class ImageinputHandler {
 
-    private static final RString 証記載保険者番号 = new RString("123456");
-    private static final RString 被保険者番号 = new RString("7890");
     private static final RString 空白 = RString.EMPTY;
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString ファイル名 = new RString("OCRIKEN.CSV");
-    private static final int 年 = 2016;
-    private static final int 月 = 07;
-    private static final int 日 = 25;
-    private static final int 時 = 12;
     private List<RString> 記入項目連番レスト;
     private List<RString> 意見項目連番レスト;
     private final ImageinputDiv div;
@@ -108,7 +98,7 @@ public class ImageinputHandler {
                     RDate.getNowDate().wareki().toDateString(),
                     dateFormat(data.get記入日()),
                     data.getT5101_申請書管理番号(),
-                    data.getT5115_イメージ共有ファイルID(),
+                    rDatetimeFormat(data.getT5115_イメージ共有ファイルID()),
                     生活自立度,
                     短期記憶,
                     認知能力,
@@ -119,6 +109,13 @@ public class ImageinputHandler {
             rowList.add(row);
         }
         div.getDgshinseishaichiran().setDataSource(rowList);
+    }
+
+    private RString rDatetimeFormat(RDateTime time) {
+        if (time == null) {
+            return RString.EMPTY;
+        }
+        return new RString(time.toString());
     }
 
     private DropDownList set生活自立度() {
@@ -184,11 +181,7 @@ public class ImageinputHandler {
     }
 
     private List<TorokuData> getCSVファイル() {
-        RDateTime イメージ共有ファイルID = RDateTime.of(年, 月, 日, 時, 時, 時);
-        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
-        ReadOnlySharedFileEntryDescriptor ro_sfed = new ReadOnlySharedFileEntryDescriptor(
-                new FilesystemName(証記載保険者番号.concat(被保険者番号)), イメージ共有ファイルID);
-        SharedFile.copyToLocal(ro_sfed, new FilesystemPath(imagePath));
+        RString imagePath = Path.combinePath(Path.getRootPath(空白), new RString("/home/D209007/shared/sharedFiles/xxx/"));
         RString csvReaderPath = Path.combinePath(imagePath, ファイル名);
         CsvReader csvReader = new CsvReader.InstanceBuilder(csvReaderPath, TorokuData.class)
                 .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8)
