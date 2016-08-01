@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class JigyoHokokuRenkeiBatchParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = -4784133600634129238L;
+    private RString spoolWorkPath;
     private static final String 過去集計年月キー = "過去集計年月";
     private static final String 集計年月1_10 = "一般状況1_10集計年月";
     private static final String 現物分_集計年月11_14 = "一般状況11_14現物分_集計年月";
@@ -161,6 +162,7 @@ public class JigyoHokokuRenkeiBatchParameter extends BatchParameterBase {
      */
     public JigyoHokokuRenkeiProcessParameter toJigyoHokokuRenkeiProcessParameter() {
         return new JigyoHokokuRenkeiProcessParameter(
+                spoolWorkPath,
                 過去集計年月,
                 一般状況1_10集計年月,
                 一般状況11_14現物分_集計年月,

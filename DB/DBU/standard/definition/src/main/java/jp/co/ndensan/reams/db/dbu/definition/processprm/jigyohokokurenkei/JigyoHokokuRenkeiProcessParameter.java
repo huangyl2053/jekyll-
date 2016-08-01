@@ -23,6 +23,7 @@ import lombok.Setter;
 @Setter
 public class JigyoHokokuRenkeiProcessParameter implements IBatchProcessParameter {
 
+    private RString spoolWorkPath;
     private static final int 桁数_４ = 4;
     private RString 過去集計年月;
     private RString 一般状況1_10集計年月;
@@ -48,6 +49,7 @@ public class JigyoHokokuRenkeiProcessParameter implements IBatchProcessParameter
     /**
      * コンストラクタです。
      *
+     * @param spoolWorkPath RString
      * @param 過去集計年月 RString
      * @param 一般状況1_10集計年月 RString
      * @param 一般状況11_14現物分_集計年月 RString
@@ -70,6 +72,7 @@ public class JigyoHokokuRenkeiProcessParameter implements IBatchProcessParameter
      * @param is構成市町村分 boolean
      */
     public JigyoHokokuRenkeiProcessParameter(
+            RString spoolWorkPath,
             RString 過去集計年月,
             RString 一般状況1_10集計年月,
             RString 一般状況11_14現物分_集計年月,
@@ -91,6 +94,7 @@ public class JigyoHokokuRenkeiProcessParameter implements IBatchProcessParameter
             boolean is旧保険者分,
             boolean is構成市町村分
     ) {
+        this.spoolWorkPath = spoolWorkPath;
         this.過去集計年月 = 過去集計年月;
         this.一般状況1_10集計年月 = 一般状況1_10集計年月;
         this.一般状況11_14現物分_集計年月 = 一般状況11_14現物分_集計年月;
