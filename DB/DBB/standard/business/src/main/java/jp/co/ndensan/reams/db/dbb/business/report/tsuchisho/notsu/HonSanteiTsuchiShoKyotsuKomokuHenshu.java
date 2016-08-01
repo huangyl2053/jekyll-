@@ -398,13 +398,17 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
                 fillType(FillType.BLANK).toDateString());
         更正前.set保険料算定段階2(edit段階(更正前_賦課情報.get保険料算定段階2()));
         更正前.set算定年額保険料2(更正前_賦課情報.get算定年額保険料2());
-        更正前.set月割開始年月2(更正前_賦課情報.get月割開始年月2().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+        更正前.set月割開始年月2(isYearMonthNullOrEmpty(更正前_賦課情報.get月割開始年月2()) ? RString.EMPTY
+                : 更正前_賦課情報.get月割開始年月2().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 fillType(FillType.BLANK).toDateString());
-        更正前.set月割開始年月2_西暦(更正前_賦課情報.get月割開始年月2().seireki().separator(Separator.SLASH).
+        更正前.set月割開始年月2_西暦(isYearMonthNullOrEmpty(更正前_賦課情報.get月割開始年月2()) ? RString.EMPTY
+                : 更正前_賦課情報.get月割開始年月2().seireki().separator(Separator.SLASH).
                 fillType(FillType.BLANK).toDateString());
-        更正前.set月割終了年月2(更正前_賦課情報.get月割終了年月2().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+        更正前.set月割終了年月2(isYearMonthNullOrEmpty(更正前_賦課情報.get月割終了年月2()) ? RString.EMPTY
+                : 更正前_賦課情報.get月割終了年月2().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 fillType(FillType.BLANK).toDateString());
-        更正前.set月割終了年月2_西暦(更正前_賦課情報.get月割終了年月2().seireki().separator(Separator.SLASH).
+        更正前.set月割終了年月2_西暦(isYearMonthNullOrEmpty(更正前_賦課情報.get月割終了年月2()) ? RString.EMPTY
+                : 更正前_賦課情報.get月割終了年月2().seireki().separator(Separator.SLASH).
                 fillType(FillType.BLANK).toDateString());
         edit期間_自と期間_至(更正前, 更正前_賦課情報);
         更正前.set市町村民税課税区分_本人(更正前_賦課情報.get課税区分());
