@@ -825,10 +825,12 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
         builder = new RStringBuilder();
         builder.append(FORMAT_LEFT.concat(定数_対象賦課年度).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE));
         for (int i = 0; i < 賦課年度リスト.size(); i++) {
-            if (i == 賦課年度リスト.size() - 1) {
-                builder.append(getWarekiYear(賦課年度リスト.get(i)));
-            } else {
-                builder.append(getWarekiYear(賦課年度リスト.get(i))).append(RString.FULL_SPACE);
+            if (!isFlexibleYearNullOrEmpty(賦課年度リスト.get(i))) {
+                if (i == 賦課年度リスト.size() - 1) {
+                    builder.append(getWarekiYear(賦課年度リスト.get(i)));
+                } else {
+                    builder.append(getWarekiYear(賦課年度リスト.get(i))).append(RString.FULL_SPACE);
+                }
             }
         }
         出力条件リスト.add(builder.toRString());
@@ -868,10 +870,12 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
         builder = new RStringBuilder();
         builder.append(FORMAT_LEFT.concat(定数_対象賦課年度).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE));
         for (int i = 0; i < 賦課年度リスト.size(); i++) {
-            if (i == 賦課年度リスト.size() - 1) {
-                builder.append(getWarekiYear(賦課年度リスト.get(i)));
-            } else {
-                builder.append(getWarekiYear(賦課年度リスト.get(i))).append(RString.FULL_SPACE);
+            if (!isFlexibleYearNullOrEmpty(賦課年度リスト.get(i))) {
+                if (i == 賦課年度リスト.size() - 1) {
+                    builder.append(getWarekiYear(賦課年度リスト.get(i)));
+                } else {
+                    builder.append(getWarekiYear(賦課年度リスト.get(i))).append(RString.FULL_SPACE);
+                }
             }
         }
         出力条件リスト.add(builder.toRString());
@@ -1162,6 +1166,10 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
             pageCount = pageCount + sourceData.getPageCount();
         }
         return new RString(pageCount);
+    }
+
+    private boolean isFlexibleYearNullOrEmpty(FlexibleYear data) {
+        return data == null || RString.EMPTY.equals(new RString(data.toString()));
     }
 
 }
