@@ -59,7 +59,7 @@ public class TokkiText2A4Report extends Report<TokkiText2A4ReportSource> {
         }
 
         if (!date.get短冊テキスト情報リスト().isEmpty()) {
-            for (TokkiTextEntity entity : date.get短冊イメージ情報リスト()) {
+            for (TokkiTextEntity entity : date.get短冊テキスト情報リスト()) {
                 bodyList.add(entity.get事項番号());
                 bodyList.add(entity.get項目名称());
             }

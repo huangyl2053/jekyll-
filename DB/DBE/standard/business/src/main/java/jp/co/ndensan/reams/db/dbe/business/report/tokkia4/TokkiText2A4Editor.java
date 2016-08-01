@@ -167,14 +167,14 @@ public class TokkiText2A4Editor implements ITokkiText2A4Editor {
     }
 
     private void editSource1(TokkiText2A4ReportSource source) {
-        if (index < item.get短冊テキスト情報リスト().size()) {
+        if (index < 特記事項List.size()) {
             source.listChosa1_1 = 特記事項List.get(index);
         }
 
     }
 
     private void editSource2(TokkiText2A4ReportSource source) {
-        if (index < item.get短冊イメージ情報リスト().size()) {
+        if (index < 特記事項List.size()) {
             source.listChosa_1 = 特記事項List.get(index);
         }
     }
