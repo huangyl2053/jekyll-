@@ -68,7 +68,7 @@
           INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051 
             ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo" 
           INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS T5105 
-            ON A."shinseishoKanriNo" = T5105."shinseishoKanriNo" 
+            ON T5101."shinseishoKanriNo" = T5105."shinseishoKanriNo" 
             AND T5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL 
             AND T5105."ninteichosaIraiKanryoYMD" IS NOT NULL 
             AND T5105."ninteiShinsakaiWariateKanryoYMD" IS NULL 
