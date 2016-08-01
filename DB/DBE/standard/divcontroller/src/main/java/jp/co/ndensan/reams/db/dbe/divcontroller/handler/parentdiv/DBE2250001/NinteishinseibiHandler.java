@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -156,6 +157,26 @@ public class NinteishinseibiHandler {
             一覧の編集_2(business, row);
             personalData.addExpandedInfo(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
                     business.get申請書管理番号().value()));
+            rowList.add(row);
+        }
+        div.getDgNinteiChosaData().setDataSource(rowList);
+    }
+
+    /**
+     * 認定調査データ取込に一覧編集を実行します。
+     *
+     * @param 認定調査一覧 List<NiTeiCyoSaiChiRanBusiness>
+     */
+    public void 一覧の再編集(List<NiTeiCyoSaiChiRanBusiness> 認定調査一覧) {
+
+        div.getTxtNinzu().setValue(new RString(String.valueOf(認定調査一覧.size())));
+        List<dgNinteiChosaData_Row> rowList = new ArrayList<>();
+        for (NiTeiCyoSaiChiRanBusiness business : 認定調査一覧) {
+
+            dgNinteiChosaData_Row row = new dgNinteiChosaData_Row();
+
+            一覧の編集_1(business, row);
+            一覧の編集_2(business, row);
             rowList.add(row);
         }
         div.getDgNinteiChosaData().setDataSource(rowList);
@@ -421,7 +442,8 @@ public class NinteishinseibiHandler {
         NinteichosahyoGaikyoChosaBuilder builder = entity.createBuilderForEdit();
         builder.set申請書管理番号(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
         builder.set認定調査依頼履歴番号(Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()));
-        builder.set概況調査テキストイメージ区分(TokkijikoTextImageKubun.valueOf(row.getGaikyoTokkiTextImageKubun().toString()).getコード());
+        builder.set概況調査テキストイメージ区分(TokkijikoTextImageKubun.valueOf(row.
+                getGaikyoTokkiTextImageKubun().toString()).getコード());
         builder.set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()));
         if (!RString.isNullOrEmpty(row.getNinteichousaIraiKubunCode())) {
 
@@ -450,7 +472,8 @@ public class NinteishinseibiHandler {
         }
         builder.set認定調査実施場所名称(row.getChosaJisshiBashoMeisho());
         if (!RString.isNullOrEmpty(row.getServiceKubunCode())) {
-            builder.set認定調査_サービス区分コード(new Code(row.getServiceKubunCode()));
+            builder.set認定調査_サービス区分コード(new Code(ServiceKubunCode.
+                    valueOf(row.getServiceKubunCode().toString()).getコード()));
         }
         builder.set利用施設名(row.getRiyoShisetsuShimei());
         if (!RString.isNullOrEmpty(row.getRiyoShisetsuJusho())) {
@@ -466,8 +489,8 @@ public class NinteishinseibiHandler {
         if (!RString.isNullOrEmpty(row.getTokkijikoUketsukeYMD())) {
             builder.set認定調査特記事項受付年月日(toFlexibleDate(row.getTokkijikoUketsukeYMD()));
         }
-        if (!RString.isNullOrEmpty(row.getNinteichosaJuryoYMD())) {
-            builder.set認定調査特記事項受領年月日(toFlexibleDate(row.getNinteichosaJuryoYMD()));
+        if (!RString.isNullOrEmpty(row.getTokkijikoJuryoYMD())) {
+            builder.set認定調査特記事項受領年月日(toFlexibleDate(row.getTokkijikoJuryoYMD()));
         }
         return builder;
     }
@@ -486,7 +509,8 @@ public class NinteishinseibiHandler {
         builder.set認定調査依頼履歴番号(Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()));
         if (!RString.isNullOrEmpty(row.getGaikyoTokkiTextImageKubun())) {
 
-            builder.set概況特記テキストイメージ区分(TokkijikoTextImageKubun.valueOf(row.getGaikyoTokkiTextImageKubun().toString()).getコード());
+            builder.set概況特記テキストイメージ区分(TokkijikoTextImageKubun.valueOf(row.
+                    getGaikyoTokkiTextImageKubun().toString()).getコード());
         }
         builder.set住宅改修(row.getJutakuKaishu());
         builder.set市町村特別給付サービス種類名(row.getTokubetsuKyufuService());
@@ -519,7 +543,7 @@ public class NinteishinseibiHandler {
             builder.set特記事項テキスト_イメージ区分(TokkijikoTextImageKubun.
                     valueOf(row.getGaikyoTokkiTextImageKubun().toString()).getコード());
         }
-        builder.set原本マスク区分(new Code(row.getGenponMaskKubun()));
+        builder.set原本マスク区分(new Code(GenponMaskKubun.valueOf(row.getGenponMaskKubun().toString()).getコード()));
         builder.set特記事項(row.getTokkiJiko());
         return builder;
     }
@@ -538,8 +562,10 @@ public class NinteishinseibiHandler {
         builder.set要介護認定調査履歴番号(Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()));
         builder.set要介護認定調査履歴番号(Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()));
         builder.set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()));
-        builder.set認定調査_認知症高齢者の日常生活自立度コード(new Code(row.getNinchishoNichijoSeikatsuJiritsudoCode()));
-        builder.set認定調査_障害高齢者の日常生活自立度コード(new Code(row.getShogaiNichijoSeikatsuJiritsudoCode()));
+        builder.set認定調査_認知症高齢者の日常生活自立度コード(new Code(NinchishoNichijoSeikatsuJiritsudoCode.
+                valueOf(row.getNinchishoNichijoSeikatsuJiritsudoCode().toString()).getコード()));
+        builder.set認定調査_障害高齢者の日常生活自立度コード(new Code(ShogaiNichijoSeikatsuJiritsudoCode.
+                valueOf(row.getShogaiNichijoSeikatsuJiritsudoCode().toString()).getコード()));
         return builder;
     }
 
