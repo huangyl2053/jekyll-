@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC16000",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "再審査申立書登録",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC1600011",
+     "toLayoutTitle": "再審査申立書登録",
+     "toState": "search"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1600011",
+     "layoutTitle": "再審査申立書登録",
+     "eventName": "kanryou",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
