@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 委員用一次判定結果票A4のReportです。
  *
- * @reamsid_L DBE-0150-130 lishengli
+ * @reamsid_L DBE-0150-300 lishengli
  */
 public class IchijihanteikekkahyoA4Report extends Report<IchijihanteikekkahyoA4ReportSource> {
 

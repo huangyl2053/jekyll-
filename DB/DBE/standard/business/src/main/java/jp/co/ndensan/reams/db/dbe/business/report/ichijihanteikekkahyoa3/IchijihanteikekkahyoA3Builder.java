@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 委員用一次判定結果票A3Builderクラスです。
  *
- * @reamsid_L DBE-0150-130 lishengli
+ * @reamsid_L DBE-0150-330 lishengli
  */
 class IchijihanteikekkahyoA3Builder implements IIchijihanteikekkahyoA3Builder {
 

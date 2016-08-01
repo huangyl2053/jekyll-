@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 /**
  * 委員用一次判定結果票A4のReportSourceクラスです。
  *
- * @reamsid_L DBE-0150-130 lishengli
+ * @reamsid_L DBE-0150-300 lishengli
  */
 public class IchijihanteikekkahyoA4ReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 /**
  * 委員用一次判定結果票A3のEditorです。
  *
- * @reamsid_L DBE-0150-130 lishengli
+ * @reamsid_L DBE-0150-330 lishengli
  */
 public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Editor {
 
