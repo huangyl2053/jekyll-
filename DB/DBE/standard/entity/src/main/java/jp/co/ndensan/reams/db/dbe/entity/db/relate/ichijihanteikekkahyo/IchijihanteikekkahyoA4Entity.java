@@ -3,29 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3;
+package jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo;
 
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 委員用一次判定結果票A3のEntityクラスです。
+ * 委員用一次判定結果票A4のEntityクラスです。
  *
- * @reamsid_L DBE-0150-330 lishengli
+ * @reamsid_L DBE-0150-300 lishengli
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class IchijihanteikekkahyoA3Entity {
+public class IchijihanteikekkahyoA4Entity {
 
-    private RString 審査人数;
-    private RString 審査人数合計;
     private RString 合議体番号;
+    private RString 審査順;
     private RString 被保険者区分;
     private RString 申請区分;
     private RString 年齢;
     private RString 性別;
+    private RString 現在の状況;
     private RString 前々回要介護度;
     private RString 前々回認定有効期間;
     private FlexibleDate 前々回認定有効期間開始年月日;
@@ -34,9 +34,9 @@ public class IchijihanteikekkahyoA3Entity {
     private RString 前回認定有効期間;
     private FlexibleDate 前回認定有効期間開始年月日;
     private FlexibleDate 前回認定有効期間終了年月日;
-    private RString 管理番号;
     private FlexibleDate 前回認定日;
     private RString 前回状態像;
+    private RString 管理番号;
     private FlexibleDate 審査会資料作成年月日;
     private FlexibleDate 今回認定申請年月日;
     private FlexibleDate 今回認定調査実施年月日;
@@ -44,6 +44,7 @@ public class IchijihanteikekkahyoA3Entity {
     private RString 被保険者氏名;
     private RString 被保険者番号;
     private RString 保険者番号;
+    private RString 支所名;
     private RString 市町村名;
     private RString 事業者番号;
     private RString 事業者名;
@@ -55,8 +56,9 @@ public class IchijihanteikekkahyoA3Entity {
     private RString 主治医番号;
     private RString 主治医氏名;
     private RString 一次判定結果;
+    private RString 特定疾病名;
+    private RString 状態像名称;
     private RString 要介護認定等基準時間;
-    private RString 前回要介護認定等基準時間;
     private RString 基準時間の積み上げグラフ;
     private RString 要介護認定等基準時間_食事;
     private RString 要介護認定等基準時間_排泄;
@@ -67,9 +69,6 @@ public class IchijihanteikekkahyoA3Entity {
     private RString 要介護認定等基準時間_機能訓練;
     private RString 要介護認定等基準時間_医療関連;
     private RString 要介護認定等基準時間_認知症加算;
-    private FlexibleDate 調査日;
-    private RString 調査実施場所;
-    private RString 特定疾病名;
     private RString 警告コード;
     private List<TyukanHyouka> 中間評価リスト;
     private List<NitijouSeikatsu> 日常生活自立度リスト;
@@ -121,66 +120,14 @@ public class IchijihanteikekkahyoA3Entity {
     private RString sabisuKaisu20;
     private RString sabisuName21;
     private RString sabisuKaisu21;
-    private List<TiyosaKekkaHuseiko> 不整合リスト１;
     private List<TiyosaKekka> 第１群リスト;
-    private List<TiyosaKekkaHuseiko> 不整合リスト２;
     private List<TiyosaKekka> 第２群リスト;
-    private List<TiyosaKekkaHuseiko> 不整合リスト３;
     private List<TiyosaKekka> 第３群リスト;
-    private List<TiyosaKekkaHuseiko> 不整合リスト４;
     private List<TiyosaKekka> 第４群リスト;
-    private List<TiyosaKekkaHuseiko> 不整合リスト５;
     private List<TiyosaKekka> 第５群リスト;
-    private List<TokubetsunaIryoTiyosaKekka> 特別な医療リスト１;
-    private List<TokubetsunaIryoTiyosaKekka> 特別な医療リスト２;
+    private List<TiyosaKekka> 特別な医療リスト１;
+    private List<TiyosaKekka> 特別な医療リスト２;
     private List<TiyosaKekka> 主治医意見書;
-    private RString 施設名テキスト;
-    private RString 施設名イメージ;
-    private RString 住所テキスト;
-    private RString 住所イメージ;
-    private RString 電話番号テキスト;
-    private RString 電話番号イメージ;
     private RString 申請書管理番号;
-
-    private RString 概況調査テキスト_イメージ区分;
-    private RString 概況特記のテキスト;
-    private RString 概況特記のイメージ;
-
-    private RString 特記事項テキスト_イメージ区分;
-    private RString 特記パターン;
-    private List<TokkiJikou> 特記事項_listChosa1;
-    private RString 特記事項_tokkiText;
-    private RString 特記事項_tokkiText1;
-    private RString 特記事項_tokkiText2;
-    private RString 特記事項_tokkiText3;
-    private RString 特記事項_tokkiText4;
-    private RString 特記事項_tokkiText5;
-    private RString 特記事項_tokkiText6;
-    private RString 特記事項_tokkiText7;
-    private RString 特記事項_tokkiText8;
-    private RString 特記事項_tokkiText9;
-    private RString 特記事項_tokkiText10;
-    private RString 特記事項_tokkiText11;
-    private RString 特記事項_tokkiText12;
-    private RString 特記事項_tokkiText13;
-    private RString 特記事項_tokkiText14;
-    private RString 特記事項_tokkiText15;
-    private List<TokkiJikou> 特記事項_listChosa;
-    private RString 特記事項_tokkiImg;
-    private RString 特記事項_tokkiImg1;
-    private RString 特記事項_tokkiImg2;
-    private RString 特記事項_tokkiImg3;
-    private RString 特記事項_tokkiImg4;
-    private RString 特記事項_tokkiImg5;
-    private RString 特記事項_tokkiImg6;
-    private RString 特記事項_tokkiImg7;
-    private RString 特記事項_tokkiImg8;
-    private RString 特記事項_tokkiImg9;
-    private RString 特記事項_tokkiImg10;
-    private RString 特記事項_tokkiImg11;
-    private RString 特記事項_tokkiImg12;
-    private RString 特記事項_tokkiImg13;
-    private RString 特記事項_tokkiImg14;
-    private RString 特記事項_tokkiImg15;
 
 }

@@ -3,20 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3;
+package jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 特記事項Entityクラスです。
+ * 中間評価Entityクラスです。
  *
  * @reamsid_L DBE-0150-330 lishengli
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokkiJikou {
+public class TyukanHyouka {
 
-    private RString 事項番号;
-    private RString 項目名称;
+    private RString 第1群;
+    private RString 第2群;
+    private RString 第3群;
+    private RString 第4群;
+    private RString 第5群;
 }

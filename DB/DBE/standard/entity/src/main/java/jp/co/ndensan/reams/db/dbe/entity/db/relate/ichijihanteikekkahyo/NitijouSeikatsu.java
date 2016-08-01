@@ -3,23 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3;
+package jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 特別な医療Entityクラスです。
+ * 日常生活自立Entityクラスです。
  *
  * @reamsid_L DBE-0150-330 lishengli
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokubetsunaIryoTiyosaKekka {
+public class NitijouSeikatsu {
 
-    private RString 調査結果;
-    private RString 認定調査と主治医意見書の結果比較;
-    private RString 特記事項有無;
-    private RString 段階改善;
+    private RString 認知症高齢者自立度;
+    private RString 特記事項フラグ;
 
 }

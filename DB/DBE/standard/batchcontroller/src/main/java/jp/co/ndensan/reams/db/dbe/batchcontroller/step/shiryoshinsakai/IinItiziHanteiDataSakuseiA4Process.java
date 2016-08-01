@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.Ninteichosahy
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ZenzenkayiJyohouEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoA4ReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA4Entity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
@@ -90,7 +91,10 @@ public class IinItiziHanteiDataSakuseiA4Process extends BatchKeyBreakBase<ItiziH
         IchijihanteikekkahyoItemSettei itemSettei = new IchijihanteikekkahyoItemSettei();
         item = itemSettei.set項目(entity, 特記事項情報, paramter, itiziHanteiEntityList, entityList,
                 dbT5116Entity, dbT5102Entity, 申請書管理番号の個数);
-        IchijihanteikekkahyoA4Report report = new IchijihanteikekkahyoA4Report(item);
+        //TODO IchijihanteikekkahyoA4Report IchijihanteikekkahyoA4Entity 変更
+        item = itemSettei.set事務局用項目(item, entity, null, null, null, null, itiziHanteiEntityList, null, dbT5116Entity, null);
+        IchijihanteikekkahyoA4Entity a4Entity = new IchijihanteikekkahyoA4Entity();
+        IchijihanteikekkahyoA4Report report = new IchijihanteikekkahyoA4Report(a4Entity);
         report.writeBy(reportSourceWriterA4);
     }
 
