@@ -161,50 +161,64 @@ public class IchijihanteikekkahyoA4Editor implements IIchijihanteikekkahyoA4Edit
             source.listtokki8_1 = item.get日常生活自立度リスト().get(index).get特記事項フラグ();
             source.ｌistNichijoseikatsujiritsudo_1 = item.get日常生活自立度リスト().get(index).get認知症高齢者自立度();
         }
+        if (index < item.get特記リスト１().size()) {
+            source.listtokki1_1 = item.get特記リスト１().get(index);
+        }
+        if (index < item.get特記リスト２().size()) {
+            source.listtokki2_1 = item.get特記リスト２().get(index);
+        }
+        if (index < item.get特記リスト３().size()) {
+            source.listtokki3_1 = item.get特記リスト３().get(index);
+        }
+        if (index < item.get特記リスト４().size()) {
+            source.listtokki4_1 = item.get特記リスト４().get(index);
+        }
+        if (index < item.get特記リスト５().size()) {
+            source.listtokki5_1 = item.get特記リスト５().get(index);
+        }
+        if (index < item.get特記リスト６().size()) {
+            source.listtokki6_1 = item.get特記リスト６().get(index);
+        }
+        if (index < item.get特記リスト７().size()) {
+            source.listtokki7_1 = item.get特記リスト７().get(index);
+        }
         if (index < item.get第１群リスト().size()) {
             source.listIchigun_1 = item.get第１群リスト().get(index).get調査結果();
             source.listIchigun_2 = item.get第１群リスト().get(index).get段階改善フラグ();
             source.listIchigun_3 = item.get第１群リスト().get(index).get段階改善値();
             source.listIchigun_4 = item.get第１群リスト().get(index).get前回結果();
-            source.listtokki1_1 = item.get第１群リスト().get(index).get特記事項有無();
         }
         if (index < item.get第２群リスト().size()) {
             source.listNigun_1 = item.get第２群リスト().get(index).get調査結果();
             source.listNigun_2 = item.get第２群リスト().get(index).get段階改善フラグ();
             source.listNigun_3 = item.get第２群リスト().get(index).get段階改善値();
             source.listNigun_4 = item.get第２群リスト().get(index).get前回結果();
-            source.listtokki2_1 = item.get第２群リスト().get(index).get特記事項有無();
         }
         if (index < item.get第３群リスト().size()) {
             source.listSangun_1 = item.get第３群リスト().get(index).get調査結果();
             source.listSangun_2 = item.get第３群リスト().get(index).get段階改善フラグ();
             source.listSangun_3 = item.get第３群リスト().get(index).get段階改善値();
             source.listSangun_4 = item.get第３群リスト().get(index).get前回結果();
-            source.listtokki3_1 = item.get第３群リスト().get(index).get特記事項有無();
         }
         if (index < item.get第４群リスト().size()) {
             source.listYongun_1 = item.get第４群リスト().get(index).get調査結果();
             source.listYongun_2 = item.get第４群リスト().get(index).get段階改善フラグ();
             source.listYongun_3 = item.get第４群リスト().get(index).get段階改善値();
             source.listYongun_4 = item.get第４群リスト().get(index).get前回結果();
-            source.listtokki4_1 = item.get第４群リスト().get(index).get特記事項有無();
         }
         if (index < item.get第５群リスト().size()) {
             source.listGogun_1 = item.get第５群リスト().get(index).get調査結果();
             source.listGogun_2 = item.get第５群リスト().get(index).get段階改善フラグ();
             source.listGogun_3 = item.get第５群リスト().get(index).get段階改善値();
             source.listGogun_4 = item.get第５群リスト().get(index).get前回結果();
-            source.listtokki5_1 = item.get第５群リスト().get(index).get特記事項有無();
         }
         if (index < item.get特別な医療リスト１().size()) {
             source.listtokubetsunaIryo1_1 = item.get特別な医療リスト１().get(index).get調査結果();
             source.listtokubetsunaIryo1_2 = item.get特別な医療リスト１().get(index).get段階改善フラグ();
-            source.listtokki6_1 = item.get特別な医療リスト１().get(index).get特記事項有無();
         }
         if (index < item.get特別な医療リスト２().size()) {
             source.listtokubetsunaIryo2_1 = item.get特別な医療リスト２().get(index).get調査結果();
             source.listtokubetsunaIryo2_2 = item.get特別な医療リスト２().get(index).get段階改善フラグ();
-            source.listtokki7_1 = item.get特別な医療リスト２().get(index).get特記事項有無();
         }
         return source;
     }

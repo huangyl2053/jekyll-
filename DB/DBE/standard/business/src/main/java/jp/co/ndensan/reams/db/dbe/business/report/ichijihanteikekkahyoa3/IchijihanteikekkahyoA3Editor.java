@@ -164,7 +164,7 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
             source.imgShisetsuTel = item.get電話番号イメージ();
         }
         source.shikibetuCode = ShikibetsuCode.EMPTY;
-        if (item.get申請書管理番号() != null) {
+        if (!RString.isNullOrEmpty(item.get申請書管理番号())) {
             source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
         }
         return source;
