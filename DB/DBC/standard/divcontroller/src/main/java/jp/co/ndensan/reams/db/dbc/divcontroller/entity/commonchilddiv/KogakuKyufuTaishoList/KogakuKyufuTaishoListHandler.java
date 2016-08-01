@@ -125,6 +125,9 @@ public class KogakuKyufuTaishoListHandler {
                 row.setData9(koEntity.get給付対象者明細entity().get高額給付根拠());
                 row.setData10(ONE_RS);
                 row.setData11(koEntity.get給付対象者明細entity().getサービス種類コード().value());
+                row.getData12().setValue(koEntity.get給付対象者明細entity().get被保険者番号().value());
+                row.getData13().setValue(new RString(koEntity.get給付対象者明細entity().getサービス提供年月().toString()));
+                row.getData14().setValue(new Decimal(koEntity.get給付対象者明細entity().get履歴番号()));
             } else if (TWO_RS.equals(koEntity.get明細合計区分())) {
                 row.setData3(合計);
                 row.getData4().setValue(koEntity.get給付対象者合計entity().getサービス費用合計額合計());
@@ -133,6 +136,9 @@ public class KogakuKyufuTaishoListHandler {
                 row.getData7().setValue(koEntity.get給付対象者合計entity().get支払済金額合計());
                 row.getData8().setValue(koEntity.get給付対象者合計entity().get高額支給額());
                 row.setData10(TWO_RS);
+                row.getData12().setValue(koEntity.get給付対象者合計entity().get被保険者番号().value());
+                row.getData13().setValue(koEntity.get給付対象者合計entity().getサービス提供年月().toDateString());
+                row.getData14().setValue(koEntity.get給付対象者合計entity().get履歴番号());
             }
             rowList.add(row);
         }

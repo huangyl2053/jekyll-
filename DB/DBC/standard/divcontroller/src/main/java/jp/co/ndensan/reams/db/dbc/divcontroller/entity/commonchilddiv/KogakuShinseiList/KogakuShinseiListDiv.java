@@ -354,6 +354,16 @@ public class KogakuShinseiListDiv extends Panel implements IKogakuShinseiListDiv
     }
 
     /**
+     * 決定情報フラグ
+     *
+     * @return boolean
+     */
+    @Override
+    public boolean is決定情報フラグ() {
+        return KogakuShinseiListDivHandler.of(this).is決定情報フラグ();
+    }
+
+    /**
      * 支給区分フラグ
      *
      * @return boolean

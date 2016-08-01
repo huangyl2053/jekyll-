@@ -191,6 +191,7 @@ public class KogakuKyufuTaishoList {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).modifyRow(row, モード, サービス提供年月);
         }
+        getHandler(div).clear高額明細合計データ編集エリア();
         return createResponse(div);
     }
 

@@ -231,7 +231,7 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
                 set受託なしと削除モードの給付実績情報(高額サービス費詳細内容Entity, 被保険者番号, サービス年月,
                         証記載保険者番号, 履歴番号);
             }
-        } else if (ZERO.equals(受託区分)) {
+        } else if (TWO.equals(受託区分)) {
             if (修正モード.equals(処理モード)) {
                 set受託ありと修正モードの給付実績情報(被保険者番号, サービス年月, 証記載保険者番号, 履歴番号);
             } else if (削除モード.equals(処理モード)) {

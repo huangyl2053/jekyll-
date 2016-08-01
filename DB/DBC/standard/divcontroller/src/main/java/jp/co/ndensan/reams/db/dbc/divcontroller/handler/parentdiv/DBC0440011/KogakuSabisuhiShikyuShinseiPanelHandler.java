@@ -6,9 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0440011;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuKyufuTaishoshaGokei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuKyufuTaishoshaMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuShikyuHanteiKekka;
@@ -21,6 +19,8 @@ import jp.co.ndensan.reams.db.dbc.business.core.kougakusabisuhishousainaiyou.Kou
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.dgTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0440011.KogakuSabisuhiShikyuShinseiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0440011.KogakuServicehiDetailParameter;
+import jp.co.ndensan.reams.db.dbc.service.core.basic.KogakuKyufuTaishoshaGokeiManager;
+import jp.co.ndensan.reams.db.dbc.service.core.basic.KogakuKyufuTaishoshaMeisaiManager;
 import jp.co.ndensan.reams.db.dbc.service.core.kougakusabisuhishikyuushinnseitouroku.KougakuSabisuhiShikyuuShinnseiTouroku;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
@@ -44,6 +44,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 画面設計_DBCMN42001_高額サービス費支給申請登録
@@ -203,17 +204,14 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
             List<KogakuKyuufuTaishouListEntityResult> 高額給付対象一覧list) {
         List<KougakuSabisuhiShikyuuShinnseiTourokuResult> entityList = new ArrayList<>();
         List<dgTaishoshaIchiran_Row> rowList = div.getCcdKogakuKyufuTaishoList().get給付対象一覧();
-        Map<RString, KogakuKyuufuTaishouListEntityResult> mapList = new HashMap<>();
-        KougakuSabisuhiShikyuuShinnseiTourokuResult result = new KougakuSabisuhiShikyuuShinnseiTourokuResult();
-        for (KogakuKyuufuTaishouListEntityResult shokanMeisaiResult : 高額給付対象一覧list) {
-            mapList.put(shokanMeisaiResult.get明細合計区分(), shokanMeisaiResult);
-        }
         for (dgTaishoshaIchiran_Row row : rowList) {
             if (row.getData0() == null || row.getData0().isEmpty()) {
                 continue;
             }
             if (追加.equals(row.getData0())) {
                 if (row.getData10().equals(ONE)) {
+                    KougakuSabisuhiShikyuuShinnseiTourokuResult result
+                            = new KougakuSabisuhiShikyuuShinnseiTourokuResult();
                     int 履歴番号 = KougakuSabisuhiShikyuuShinnseiTouroku.createInstance().
                             get高額介護給付対象者明細履歴番号(被保険者番号, サービス提供年月);
                     KogakuKyufuTaishoshaMeisai 給付対象者明細entity = new KogakuKyufuTaishoshaMeisai(
@@ -224,6 +222,8 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                     result.set高額介護サービス費給付対象者明細Entity(給付対象者明細entity);
                     entityList.add(result);
                 } else if (row.getData10().equals(TWO)) {
+                    KougakuSabisuhiShikyuuShinnseiTourokuResult result
+                            = new KougakuSabisuhiShikyuuShinnseiTourokuResult();
                     int 履歴番号 = KougakuSabisuhiShikyuuShinnseiTouroku.createInstance().
                             get高額介護給付対象者合計履歴番号(被保険者番号, サービス提供年月);
                     KogakuKyufuTaishoshaGokei 給付対象者合計entity = new KogakuKyufuTaishoshaGokei(
@@ -234,14 +234,27 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                     entityList.add(result);
                 }
             } else {
-                KogakuKyuufuTaishouListEntityResult entity = mapList.get(row.getData10());
                 if (row.getData10().equals(ONE)) {
-                    KogakuKyufuTaishoshaMeisai 給付対象者明細entity = entity.get給付対象者明細entity();
+                    KougakuSabisuhiShikyuuShinnseiTourokuResult result
+                            = new KougakuSabisuhiShikyuuShinnseiTourokuResult();
+                    KogakuKyufuTaishoshaMeisaiManager manage = InstanceProvider.
+                            create(KogakuKyufuTaishoshaMeisaiManager.class);
+                    KogakuKyufuTaishoshaMeisai 給付対象者明細entity = manage.get高額介護サービス費給付対象者明細(
+                            new HihokenshaNo(row.getData12().getValue()),
+                            new FlexibleYearMonth(row.getData13().getValue()),
+                            new JigyoshaNo(row.getData1()),
+                            new ServiceShuruiCode(row.getData11()), row.getData14().getValue().intValue());
                     給付対象者明細entity = buid給付対象者明細entity(給付対象者明細entity, row);
                     result.set高額介護サービス費給付対象者明細Entity(給付対象者明細entity);
                     entityList.add(result);
                 } else if (row.getData10().equals(TWO)) {
-                    KogakuKyufuTaishoshaGokei 給付対象者合計entity = entity.get給付対象者合計entity();
+                    KougakuSabisuhiShikyuuShinnseiTourokuResult result
+                            = new KougakuSabisuhiShikyuuShinnseiTourokuResult();
+                    KogakuKyufuTaishoshaGokeiManager manage = InstanceProvider.
+                            create(KogakuKyufuTaishoshaGokeiManager.class);
+                    KogakuKyufuTaishoshaGokei 給付対象者合計entity = manage.get高額介護サービス費給付対象者合計(
+                            new HihokenshaNo(row.getData12().getValue()),
+                            new FlexibleYearMonth(row.getData13().getValue()), row.getData14().getValue());
                     給付対象者合計entity = buid給付対象者合計entity(給付対象者合計entity, row);
                     result.set高額介護サービス費支給対象者合計Entity(給付対象者合計entity);
                     entityList.add(result);
@@ -254,12 +267,11 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
     private KogakuKyufuTaishoshaMeisai buid給付対象者明細entity(
             KogakuKyufuTaishoshaMeisai entity, dgTaishoshaIchiran_Row row) {
         entity = cleanKogakuKyufuTaishoshaMeisai(entity);
-        entity = entity.createBuilderForEdit().setサービス費用合計額(row.getData4().getValue()).build();
-        entity = entity.createBuilderForEdit().set利用者負担額(row.getData5().getValue()).build();
-        entity = entity.createBuilderForEdit().set高額給付根拠(row.getData9()).build();
+        entity = entity.createBuilderForEdit().setサービス費用合計額(row.getData4().getValue())
+                .set利用者負担額(row.getData5().getValue())
+                .set高額給付根拠(row.getData9())
+                .set対象者受取年月(new FlexibleYearMonth(RDate.getNowDate().getYearMonth().toString())).build();
         //TODO
-        entity = entity.createBuilderForEdit().set対象者受取年月(
-                new FlexibleYearMonth(RDate.getNowDate().getYearMonth().toString())).build();
         if (削除.equals(row.getData0())) {
             entity = entity.deleted();
         } else if (追加.equals(row.getData0())) {
@@ -300,6 +312,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
         entity = entity.createBuilderForEdit().set算定基準額(NUMBER_0).build();
         entity = entity.createBuilderForEdit().set支払済金額合計(NUMBER_0).build();
         entity = entity.createBuilderForEdit().set高額支給額(NUMBER_0).build();
+        entity = entity.createBuilderForEdit().set対象者判定審査年月(FlexibleYearMonth.EMPTY).build();
         return entity;
     }
 
@@ -453,6 +466,8 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                 .set申請者区分(null)
                 .set申請者氏名(null)
                 .set申請者氏名カナ(null)
+                .set申請者住所(RString.EMPTY)
+                .set閉庁内容(RString.EMPTY)
                 .set申請者電話番号(null)
                 .set支払方法区分コード(null)
                 .set支払場所(null)
@@ -470,6 +485,10 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                 .set支給金額(NUMBER_0)
                 .set不支給理由(null)
                 .set審査方法区分(null)
+                .set判定結果送付年月(FlexibleYearMonth.EMPTY)
+                .set審査結果反映区分(RString.EMPTY)
+                .set決定通知書作成年月日(FlexibleDate.EMPTY)
+                .set振込明細書作成年月日(FlexibleDate.EMPTY)
                 .set再送付フラグ(false).build();
         return entity;
     }

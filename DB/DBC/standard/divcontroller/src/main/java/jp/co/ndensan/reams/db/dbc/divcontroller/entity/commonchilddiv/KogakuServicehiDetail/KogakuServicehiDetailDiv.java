@@ -613,9 +613,20 @@ public class KogakuServicehiDetailDiv extends Panel implements IKogakuServicehiD
                 画面モード, メニューID, 被保険者番号, サービス年月, 証記載保険者番号, 履歴番号, 識別コード);
     }
 
+    /**
+     * clear画面内容
+     */
     @Override
     public void clear画面内容() {
         KogakuServicehiDetailDivHandler.of(this).clear画面内容();
+    }
+
+    /**
+     * release削除制御
+     */
+    @Override
+    public void release削除制御() {
+        KogakuServicehiDetailDivHandler.of(this).release削除制御();
     }
 
     /**

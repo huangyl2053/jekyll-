@@ -39,6 +39,11 @@ public interface IKogakuServicehiDetailDiv extends ICommonChildDivBaseProperties
     public void clear画面内容();
 
     /**
+     * release削除制御
+     */
+    public void release削除制御();
+
+    /**
      * 受付日と決定日のチェックです。
      *
      * @return ValidationMessageControlPairs
