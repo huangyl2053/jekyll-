@@ -57,6 +57,9 @@
         <result property="cyusakomokuremban" column="cyusakomokuremban" />
         <result property="researchItem" column="researchItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="serviceJokyoFlag" column="serviceJokyoFlag" />
+        <result property="sabisuremflagremban" column="sabisuremflagremban" />
+        <result property="kinyuitemremban" column="kinyuitemremban" />
+        <result property="shisetsuriyoremban" column="shisetsuriyoremban" />
     </resultMap>
 
     <select id="get認定調査一覧" resultMap="resultMap_NiTeiCyoSaiChiRanRelateEntity" 
@@ -111,7 +114,10 @@
         "DbT5203NinteichosahyoKihonChosa"."shogaiNichijoSeikatsuJiritsudoCode",                              
         "DbT5211NinteichosahyoChosaItem".remban  AS  "cyusakomokuremban",                                    
         "DbT5211NinteichosahyoChosaItem"."researchItem",
-        "DbT5208NinteichosahyoServiceJokyoFlag"."serviceJokyoFlag" 
+        "DbT5208NinteichosahyoServiceJokyoFlag"."serviceJokyoFlag",
+        "DbT5208NinteichosahyoServiceJokyoFlag".remban AS sabisuremflagremban,
+        "DbT5209NinteichosahyoKinyuItem".remban AS kinyuitemremban,
+        "DbT5210NinteichosahyoShisetsuRiyo".remban AS shisetsuriyoremban
     FROM                                                                           
      <include refid="検索条件" />
   </select>

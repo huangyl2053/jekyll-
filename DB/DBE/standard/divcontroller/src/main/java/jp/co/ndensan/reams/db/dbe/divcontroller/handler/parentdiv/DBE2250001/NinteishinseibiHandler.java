@@ -281,6 +281,10 @@ public class NinteishinseibiHandler {
             row.setTokkijikoJuryoYMD(business.get認定調査特記事項受領年月日().wareki().toDateString());
         }
         row.setServiceJokyoFlag(new RString(String.valueOf(business.isサービスの状況フラグ())));
+        row.setServiceJokyoRemban(new RString(String.valueOf(business.getサービスの状況連番())));
+        row.setServiceJokyoFlagRemban(new RString(String.valueOf(business.getサービスの状況フラグ連番())));
+        row.setServiceJokyoKinyuRemban(new RString(String.valueOf(business.get記入項目連番())));
+        row.setShisetsuRiyoFlagRemban(new RString(String.valueOf(business.get施設利用連番())));
     }
 
     /**
@@ -338,6 +342,10 @@ public class NinteishinseibiHandler {
         row.setTokkijikoUketsukeYMD(entity.getTokkijikoUketsukeYMD());
         row.setTokkijikoJuryoYMD(entity.getTokkijikoJuryoYMD());
         row.setServiceJokyoFlag(entity.getServiceJokyoFlag());
+        row.setServiceJokyoRemban(entity.getServiceJokyoRemban());
+        row.setServiceJokyoFlagRemban(entity.getServiceJokyoFlagRemban());
+        row.setServiceJokyoKinyuRemban(entity.getServiceJokyoKinyuRemban());
+        row.setShisetsuRiyoFlagRemban(entity.getShisetsuRiyoFlagRemban());
     }
 
     /**
@@ -365,7 +373,11 @@ public class NinteishinseibiHandler {
                 || !row.getNinteichosaJisshiYMD().equals(entity.getNinteichosaJisshiYMD())
                 || !row.getShinseishoKanriNo().equals(entity.getShinseishoKanriNo())
                 || !row.getNinteichosaIraiRirekiNo().equals(entity.getNinteichosaIraiRirekiNo())
-                || !row.getRemban().equals(entity.getResearchItemRemban());
+                || !row.getRemban().equals(entity.getResearchItemRemban())
+                || !row.getServiceJokyoRemban().equals(entity.getServiceJokyoRemban())
+                || !row.getServiceJokyoFlagRemban().equals(entity.getServiceJokyoFlagRemban())
+                || !row.getServiceJokyoKinyuRemban().equals(entity.getServiceJokyoKinyuRemban())
+                || !row.getShisetsuRiyoFlagRemban().equals(entity.getShisetsuRiyoFlagRemban());
     }
 
     private boolean 取込むの判定_2(dgNinteiChosaData_Row row, ChosaKekkaNyuryokuCsvEntity entity) {
@@ -599,9 +611,9 @@ public class NinteishinseibiHandler {
         NinteichosahyoServiceJokyoBuilder builder = entity.createBuilderForEdit();
         builder.set申請書管理番号(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
         builder.set認定調査依頼履歴番号(Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()));
-        builder.set連番(Integer.valueOf(row.getRemban().toString()));
+        builder.set連番(Integer.valueOf(row.getServiceJokyoRemban().toString()));
         builder.set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()));
-        builder.setサービスの状況(Integer.valueOf(row.getServiceJokyo().toString()));
+        builder.setサービスの状況(Integer.valueOf(row.getServiceJokyoRemban().toString()));
         return builder;
     }
 
@@ -617,7 +629,7 @@ public class NinteishinseibiHandler {
         NinteichosahyoServiceJokyoFlagBuilder builder = entity.createBuilderForEdit();
         builder.set申請書管理番号(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
         builder.set認定調査依頼履歴番号(Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()));
-        builder.set連番(Integer.valueOf(row.getRemban().toString()));
+        builder.set連番(Integer.valueOf(row.getServiceJokyoFlagRemban().toString()));
         builder.set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()));
         builder.setサービスの状況フラグ(Boolean.getBoolean(row.getServiceJokyoFlag().toString()));
         return builder;
@@ -635,7 +647,7 @@ public class NinteishinseibiHandler {
         NinteichosahyoKinyuItemBuilder builder = entity.createBuilderForEdit();
         builder.set申請書管理番号(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
         builder.set認定調査依頼履歴番号(Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()));
-        builder.set連番(Integer.valueOf(row.getRemban().toString()));
+        builder.set連番(Integer.valueOf(row.getServiceJokyoKinyuRemban().toString()));
         builder.set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()));
         builder.setサービスの状況記入(row.getServiceJokyoKinyu());
         return builder;
@@ -653,7 +665,7 @@ public class NinteishinseibiHandler {
         NinteichosahyoShisetsuRiyoBuilder builder = entity.createBuilderForEdit();
         builder.set申請書管理番号(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
         builder.set認定調査依頼履歴番号(Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()));
-        builder.set連番(Integer.valueOf(row.getRemban().toString()));
+        builder.set連番(Integer.valueOf(row.getShisetsuRiyoFlagRemban().toString()));
         builder.set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()));
         builder.set施設利用フラグ(Boolean.getBoolean(row.getShisetsuRiyoFlag().toString()));
         return builder;
