@@ -44,6 +44,11 @@ public interface IKogakuServicehiDetailDiv extends ICommonChildDivBaseProperties
     public void release削除制御();
 
     /**
+     * set画面tap
+     */
+    public void set画面tap();
+
+    /**
      * 受付日と決定日のチェックです。
      *
      * @return ValidationMessageControlPairs

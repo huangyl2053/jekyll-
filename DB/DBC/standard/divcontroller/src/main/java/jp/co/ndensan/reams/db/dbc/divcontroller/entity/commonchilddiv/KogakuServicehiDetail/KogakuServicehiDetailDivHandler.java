@@ -167,6 +167,13 @@ public class KogakuServicehiDetailDivHandler {
     }
 
     /**
+     * 画面tap
+     */
+    public void set画面tap() {
+        div.getTabKogakuServicehiDetail().setSelectedItem(div.getTplShinseisha());
+    }
+
+    /**
      * 申請日を取得します。
      *
      * @return RDate

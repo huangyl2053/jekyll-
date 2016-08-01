@@ -56,6 +56,7 @@ public class KogakuKyufuTaishoList {
      */
     public ResponseData<KogakuKyufuTaishoListDiv> onClick_modify(
             KogakuKyufuTaishoListDiv div) {
+        getHandler(div).clear高額明細合計データ編集エリア();
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         getHandler(div).set高額明細合計データ編集エリア(サービス提供年月);
         getHandler(div).画面制御(false);
@@ -72,6 +73,7 @@ public class KogakuKyufuTaishoList {
      */
     public ResponseData<KogakuKyufuTaishoListDiv> onClick_delete(
             KogakuKyufuTaishoListDiv div) {
+        getHandler(div).clear高額明細合計データ編集エリア();
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         getHandler(div).set高額明細合計データ編集エリア(サービス提供年月);
         getHandler(div).画面制御(true);
