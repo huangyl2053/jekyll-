@@ -48,52 +48,52 @@ public class ShujiiikenshoA4Editor implements IShujiiikenshoA4Editor {
         source.hokenshaNo = business.get保険者番号();
         source.hihokenshaNo = business.get被保険者番号();
         source.hihokenshaName = business.get名前();
-        source.shinseiGengo = get元号(business.get認定申請年月日());
-        source.shinseiYY = get年(business.get認定申請年月日()).replace(get元号(business.get認定申請年月日()), RString.EMPTY)
+        source.shinseiGengo = get元号(business.get今回認定申請年月日());
+        source.shinseiYY = get年(business.get今回認定申請年月日()).replace(get元号(business.get今回認定申請年月日()), RString.EMPTY)
                 .replace(年, RString.EMPTY);
-        source.shinseiMM = new RString(business.get認定申請年月日().getMonthValue());
-        source.shinseiDD = new RString(business.get認定申請年月日().getDayValue());
+        source.shinseiMM = new RString(business.get今回認定申請年月日().getMonthValue());
+        source.shinseiDD = new RString(business.get今回認定申請年月日().getDayValue());
         FlexibleDate システム日付 = FlexibleDate.getNowDate();
         source.sakuseiGengo = get元号(システム日付);
         source.sakuseiYY = get年(システム日付).replace(get元号(システム日付), RString.EMPTY)
                 .replace(年, RString.EMPTY);
         source.sakuseiMM = new RString(システム日付.getMonthValue());
         source.sakuseiDD = new RString(システム日付.getDayValue());
-        source.chosaGengo = get元号(business.get認定調査実施年月日());
-        source.chosaYY = get年(business.get認定調査実施年月日()).replace(get元号(business.get認定調査実施年月日()),
+        source.chosaGengo = get元号(business.get今回認定調査実施年月日());
+        source.chosaYY = get年(business.get今回認定調査実施年月日()).replace(get元号(business.get今回認定調査実施年月日()),
                 RString.EMPTY).replace(年, RString.EMPTY);
-        source.chosaMM = new RString(business.get認定調査実施年月日().getMonthValue());
-        source.chosaDD = new RString(business.get認定調査実施年月日().getDayValue());
-        source.shinsaGengo = get元号(business.get介護認定審査会開催年月日());
-        source.shinsaYY = get年(business.get介護認定審査会開催年月日()).replace(get元号(business.get介護認定審査会開催年月日()),
+        source.chosaMM = new RString(business.get今回認定調査実施年月日().getMonthValue());
+        source.chosaDD = new RString(business.get今回認定調査実施年月日().getDayValue());
+        source.shinsaGengo = get元号(business.get今回認定審査年月日());
+        source.shinsaYY = get年(business.get今回認定審査年月日()).replace(get元号(business.get今回認定審査年月日()),
                 RString.EMPTY).replace(年, RString.EMPTY);
-        source.shinsaMM = new RString(business.get介護認定審査会開催年月日().getMonthValue());
-        source.shinsaDD = new RString(business.get介護認定審査会開催年月日().getDayValue());
+        source.shinsaMM = new RString(business.get今回認定審査年月日().getMonthValue());
+        source.shinsaDD = new RString(business.get今回認定審査年月日().getDayValue());
         source.imgIkensho1 = business.get主治医意見書イメージ１();
 
         source.two_hokenshaNo = business.get保険者番号();
         source.two_hihokenshaNo = business.get被保険者番号();
         source.two_hihokenshaName = business.get名前();
-        source.two_shinseiGengo = get元号(business.get認定申請年月日());
-        source.two_shinseiYY = get年(business.get認定申請年月日()).replace(get元号(business.get認定申請年月日()), RString.EMPTY)
+        source.two_shinseiGengo = get元号(business.get今回認定申請年月日());
+        source.two_shinseiYY = get年(business.get今回認定申請年月日()).replace(get元号(business.get今回認定申請年月日()), RString.EMPTY)
                 .replace(年, RString.EMPTY);
-        source.two_shinseiMM = new RString(business.get認定申請年月日().getMonthValue());
-        source.two_shinseiDD = new RString(business.get認定申請年月日().getDayValue());
+        source.two_shinseiMM = new RString(business.get今回認定申請年月日().getMonthValue());
+        source.two_shinseiDD = new RString(business.get今回認定申請年月日().getDayValue());
         source.two_sakuseiGengo = get元号(システム日付);
         source.two_sakuseiYY = get年(システム日付).replace(get元号(システム日付), RString.EMPTY)
                 .replace(年, RString.EMPTY);
         source.two_sakuseiMM = new RString(システム日付.getMonthValue());
         source.two_sakuseiDD = new RString(システム日付.getDayValue());
-        source.two_chosaGengo = get元号(business.get認定調査実施年月日());
-        source.two_chosaYY = get年(business.get認定調査実施年月日()).replace(get元号(business.get認定調査実施年月日()),
+        source.two_chosaGengo = get元号(business.get今回認定調査実施年月日());
+        source.two_chosaYY = get年(business.get今回認定調査実施年月日()).replace(get元号(business.get今回認定調査実施年月日()),
                 RString.EMPTY).replace(年, RString.EMPTY);
-        source.two_chosaMM = new RString(business.get認定調査実施年月日().getMonthValue());
-        source.two_chosaDD = new RString(business.get認定調査実施年月日().getDayValue());
-        source.two_shinsaGengo = get元号(business.get介護認定審査会開催年月日());
-        source.two_shinsaYY = get年(business.get介護認定審査会開催年月日()).replace(get元号(business.get介護認定審査会開催年月日()),
+        source.two_chosaMM = new RString(business.get今回認定調査実施年月日().getMonthValue());
+        source.two_chosaDD = new RString(business.get今回認定調査実施年月日().getDayValue());
+        source.two_shinsaGengo = get元号(business.get今回認定審査年月日());
+        source.two_shinsaYY = get年(business.get今回認定審査年月日()).replace(get元号(business.get今回認定審査年月日()),
                 RString.EMPTY).replace(年, RString.EMPTY);
-        source.two_shinsaMM = new RString(business.get介護認定審査会開催年月日().getMonthValue());
-        source.two_shinsaDD = new RString(business.get介護認定審査会開催年月日().getDayValue());
+        source.two_shinsaMM = new RString(business.get今回認定審査年月日().getMonthValue());
+        source.two_shinsaDD = new RString(business.get今回認定審査年月日().getDayValue());
         source.two_imgIkensho2 = business.get主治医意見書イメージ２();
         source.shikibetuCode = ShikibetsuCode.EMPTY;
 
