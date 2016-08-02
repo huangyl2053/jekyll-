@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.service.report.dbd550003;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd550003.YokaigodoHenkoTshuchishoProperty;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd550003.YokaigodoHenkoTshuchishoReport;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.ninteikekkatshuchishohakko.YokaigodoHenkoTsuchishoEntity;
@@ -19,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -40,14 +38,13 @@ public class YokaigodoHenkoTshuchishoPrintService {
      * 帳票を出力
      *
      * @param entity YokaigodoHenkoTsuchishoEntity
-     * @param 通知書定型文リスト List
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param 発行日 発行日
      * @param 帳票分類ID 帳票分類ID
      * @param reportManager 帳票発行処理の制御機能
      */
-    public void print(YokaigodoHenkoTsuchishoEntity entity, List<RString> 通知書定型文リスト,
-            ChohyoSeigyoKyotsu 帳票制御共通, RDate 発行日, ReportId 帳票分類ID, ReportManager reportManager) {
+    public void print(YokaigodoHenkoTsuchishoEntity entity, ChohyoSeigyoKyotsu 帳票制御共通,
+            RDate 発行日, ReportId 帳票分類ID, ReportManager reportManager) {
         YokaigodoHenkoTshuchishoProperty property = new YokaigodoHenkoTshuchishoProperty();
         try (ReportAssembler<YokaigodoHenkoTshuchishoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<YokaigodoHenkoTshuchishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
@@ -55,7 +52,6 @@ public class YokaigodoHenkoTshuchishoPrintService {
                     new FlexibleDate(発行日.toDateString()), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                     KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             YokaigodoHenkoTshuchishoReport report = new YokaigodoHenkoTshuchishoReport(entity,
-                    通知書定型文リスト,
                     帳票制御共通,
                     ninshoshaSource);
             report.writeBy(reportSourceWriter);

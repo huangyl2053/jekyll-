@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd550001;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.ninteikekkatshuchishohakko.NinteikyakkaTsuchishoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd550001.YokaigoNinteiKyakkaTshuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
@@ -24,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 public class YokaigoNinteiKyakkaTshuchishoBodyEditor implements IYokaigoNinteiKyakkaTshuchishoEditor {
 
     private final NinteikyakkaTsuchishoEntity entity;
-    private final List<RString> 通知書定型文リスト;
     private final ChohyoSeigyoKyotsu 帳票制御共通;
     private final NinshoshaSource ninshoshaSource;
 
@@ -32,16 +30,13 @@ public class YokaigoNinteiKyakkaTshuchishoBodyEditor implements IYokaigoNinteiKy
      * インスタンスを生成します。
      *
      * @param entity 要介護認定却下通知書の一覧Entity
-     * @param 通知書定型文リスト List
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param ninshoshaSource NinshoshaSource
      */
     public YokaigoNinteiKyakkaTshuchishoBodyEditor(NinteikyakkaTsuchishoEntity entity,
-            List<RString> 通知書定型文リスト,
             ChohyoSeigyoKyotsu 帳票制御共通,
             NinshoshaSource ninshoshaSource) {
         this.entity = entity;
-        this.通知書定型文リスト = 通知書定型文リスト;
         this.帳票制御共通 = 帳票制御共通;
         this.ninshoshaSource = ninshoshaSource;
     }
@@ -78,19 +73,19 @@ public class YokaigoNinteiKyakkaTshuchishoBodyEditor implements IYokaigoNinteiKy
 
         RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
 
-        if (null != 通知書定型文リスト && new RString("1").equals(定型文文字サイズ)) {
+        if (new RString("1").equals(定型文文字サイズ)) {
             source.tsuchibun2 = entity.getTsuchibun2();
         } else {
             source.tsuchibun2 = RString.EMPTY;
         }
 
-        if (null != 通知書定型文リスト && new RString("2").equals(定型文文字サイズ)) {
+        if (new RString("2").equals(定型文文字サイズ)) {
             source.tsuchibun3 = entity.getTsuchibun3();
         } else {
             source.tsuchibun3 = RString.EMPTY;
         }
 
-        if (null != 通知書定型文リスト && new RString("3").equals(定型文文字サイズ)) {
+        if (new RString("3").equals(定型文文字サイズ)) {
             source.tsuchibun4 = entity.getTsuchibun4();
             source.tsuchibun5 = entity.getTsuchibun5();
         } else {
@@ -98,7 +93,7 @@ public class YokaigoNinteiKyakkaTshuchishoBodyEditor implements IYokaigoNinteiKy
             source.tsuchibun5 = RString.EMPTY;
         }
 
-        if (null != 通知書定型文リスト && new RString("4").equals(定型文文字サイズ)) {
+        if (new RString("4").equals(定型文文字サイズ)) {
             source.tsuchibun6 = entity.getTsuchibun6();
             source.tsuchibun7 = entity.getTsuchibun7();
         } else {
