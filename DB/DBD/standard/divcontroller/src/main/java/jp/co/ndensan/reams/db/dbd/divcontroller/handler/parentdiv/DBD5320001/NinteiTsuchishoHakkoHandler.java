@@ -88,6 +88,15 @@ public class NinteiTsuchishoHakkoHandler {
     private static final RString LIKE符号 = new RString("%");
     private static final RString 連絡符号 = new RString(",");
     private static final RString 首長名印字位置 = new RString("1");
+    private static final int 通知文_パターン番号_1 = 1;
+    private static final int 通知文_パターン番号_2 = 2;
+    private static final int 通知文_パターン番号_3 = 3;
+    private static final int 通知文_パターン番号_4 = 4;
+    private static final int 通知文_項目番号_1 = 1;
+    private static final int 通知文_項目番号_2 = 2;
+    private static final int 通知文_項目番号_33 = 33;
+    private static final int 通知文_項目番号_3 = 3;
+    private static final int 通知文_項目番号_4 = 4;
 
     public enum RadioValue {
 
@@ -332,7 +341,7 @@ public class NinteiTsuchishoHakkoHandler {
     private SourceDataCollection print個別発行認定結果通知書(YokaigoNinteiTsutisho 画面選択データ) {
         try (ReportManager reportManager = new ReportManager()) {
             YokaigoNinteiKekkaTshuchishoPrintService printService = new YokaigoNinteiKekkaTshuchishoPrintService();
-            printService.print(create個別発行認定結果通知書データ(), reportManager);
+//            printService.print(create個別発行認定結果通知書データ(), reportManager);
 
             HashMap<Code, RString> hashMap = new HashMap();
             hashMap.put(new Code(ChohyoHakkoRirekiSearchDefault.帳票ID.getCode()),
@@ -353,6 +362,12 @@ public class NinteiTsuchishoHakkoHandler {
         manager.insert帳票発行履歴(sourceData, 発行日, ChohyoHakkoRirekiJotai.新規作成, hashMap, shikibetsuCodeList);
     }
 
+    private RString get通知文情報通知文(PanelType パネル, int パターン番号, int 項目番号) {
+        Map<Integer, RString> 通知文情報 = ReportUtil.get通知文(SubGyomuCode.DBD介護受給,
+                パネル.getChohyoId(), KamokuCode.EMPTY, パターン番号);
+        return null != 通知文情報 ? 通知文情報.get(項目番号) : RString.EMPTY;
+    }
+
     private NinteiKekkaTsuchishoEntity create個別発行認定結果通知書データ() {
         ChohyoSeigyoHanyo 帳票制御情報 = get帳票制御情報(PanelType.個別発行認定結果通知書パネル);
         ChohyoSeigyoKyotsu 帳票共通情報 = get帳票共通情報(PanelType.個別発行認定結果通知書パネル);
@@ -364,8 +379,6 @@ public class NinteiTsuchishoHakkoHandler {
         // TODO.イメージファイルパス　＝　ReportSourceWriter.getImageFolderPath()　より取得
         boolean is公印に掛ける = 首長名印字位置.equals(帳票共通情報.get首長名印字位置());
         boolean is公印を省略 = !帳票共通情報.is電子公印印字有無();
-        Map<Integer, RString> 通知文情報通知文1 = ReportUtil.get通知文(SubGyomuCode.DBD介護受給,
-                PanelType.個別発行認定結果通知書パネル.getChohyoId(), KamokuCode.EMPTY, 1);
 
         IAtesakiGyomuHanteiKey key = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給);
         AtesakiPSMSearchKeyBuilder builder = new AtesakiPSMSearchKeyBuilder(key);
