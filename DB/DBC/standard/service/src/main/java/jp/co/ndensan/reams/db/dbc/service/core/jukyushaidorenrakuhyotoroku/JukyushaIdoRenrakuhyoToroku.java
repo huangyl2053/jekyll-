@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class JukyushaIdoRenrakuhyoToroku {
 
-    //private final MapperProvider mapperProvider;
     private final DbT3001JukyushaIdoRenrakuhyoDac dbT3001JukyushaIdoRenrakuhyoDac;
     private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
@@ -35,7 +34,6 @@ public class JukyushaIdoRenrakuhyoToroku {
      * コンストラクタです。
      */
     JukyushaIdoRenrakuhyoToroku() {
-        //this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         dbT3001JukyushaIdoRenrakuhyoDac = InstanceProvider.create(DbT3001JukyushaIdoRenrakuhyoDac.class);
     }
 
@@ -44,7 +42,6 @@ public class JukyushaIdoRenrakuhyoToroku {
      *
      */
     JukyushaIdoRenrakuhyoToroku(DbT3001JukyushaIdoRenrakuhyoDac dbT3001JukyushaIdoRenrakuhyoDac) {
-        //this.mapperProvider = mapperProvider;
         this.dbT3001JukyushaIdoRenrakuhyoDac = dbT3001JukyushaIdoRenrakuhyoDac;
     }
 
@@ -70,15 +67,11 @@ public class JukyushaIdoRenrakuhyoToroku {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
         requireNonNull(異動区分, UrSystemErrorMessages.値がnull.getReplacedMessage("異動区分"));
-        //IJukyushaIdoRenrakuhyoTorokuMapper mapper = mapperProvider.create(IJukyushaIdoRenrakuhyoTorokuMapper.class);
         List<DbT3001JukyushaIdoRenrakuhyoEntity> list = dbT3001JukyushaIdoRenrakuhyoDac.selectcount受給者異動送付テーブルを検索して既存の異動日を判断(被保険者番号, 異動日);
-        //int count = mapper.count受給者異動送付テーブルを検索して既存の異動日を判断
-        //(new JukyushaIdoRenrakuhyoTorokuMybatisParameter(被保険者番号, 異動日, RString.EMPTY, RString.EMPTY));
         if (0 != list.size()) {
             throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage().replace("既存の異動日"));
         } else {
             DbT3001JukyushaIdoRenrakuhyoEntity entity = dbT3001JukyushaIdoRenrakuhyoDac.select直近レコードを取得して判断(被保険者番号, 異動日);
-            //RString idoKubunCode = mapper.直近レコードを取得して判断(new JukyushaIdoRenrakuhyoTorokuMybatisParameter(被保険者番号, 異動日, RString.EMPTY, RString.EMPTY));
             if ((ONE.equals(異動区分) && THREE.equals(entity.getIdoKubunCode()))
                     || (TWO.equals(異動区分) && (ONE.equals(entity.getIdoKubunCode()) || TWO.equals(entity.getIdoKubunCode())))
                     || (THREE.equals(異動区分) && (ONE.equals(entity.getIdoKubunCode()) || TWO.equals(entity.getIdoKubunCode())))) {
@@ -104,8 +97,6 @@ public class JukyushaIdoRenrakuhyoToroku {
         requireNonNull(被保番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保番号"));
         requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
 
-        //IJukyushaIdoRenrakuhyoTorokuMapper mapper = mapperProvider.create(IJukyushaIdoRenrakuhyoTorokuMapper.class);
-        //return mapper.登録した受給者異動情報の取得(new JukyushaIdoRenrakuhyoTorokuMybatisParameter(RString.EMPTY, 異動日, RString.EMPTY, 被保番号));
         return dbT3001JukyushaIdoRenrakuhyoDac.select登録した受給者異動情報の取得(被保番号, 異動日);
     }
 }
