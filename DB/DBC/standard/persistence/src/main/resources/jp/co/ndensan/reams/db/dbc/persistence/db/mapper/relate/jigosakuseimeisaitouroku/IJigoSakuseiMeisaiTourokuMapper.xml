@@ -4,143 +4,48 @@
 <!-- @reamsid_L DBC-1930-060 xupeng -->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jigosakuseimeisaitouroku.IJigoSakuseiMeisaiTourokuMapper">
-    <select id="getサービス種類支給額"
-            resultMap="resultMap_ServiceTypeTotalEntity"
-            parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
-        SELECT
-        B."serviceShuruiRyakusho" as サービス種類略称,
-        CASE C."shikyuGendoTaniSu" 
-        WHEN NULL THEN A."shikyuGendoTaniSu"
-        ELSE C."shikyuGendoTaniSu" 
-        END as 支給限度単位数,
-        B."serviceShuruiCd" as サービス種類コード 
-        FROM
-        rgdb."DbT7111ServiceShuruiShikyuGendoGaku" A
-        INNER JOIN 
-        rgdb."DbT7130KaigoServiceShurui" B
-        ON
-        A."serviceShuruiCode" = B."serviceShuruiCd"
-        <!--TODO --> 
-        AND A."" = B."teikyoKaishiYM"
-        LEFT JOIN
-        rgdb."DbT7114UwanoseServiceShuruiShikyuGendoGaku" C
-        ON 
-        C."serviceShuruiCode" = A."serviceShuruiCode"
-        AND C."yoKaigoJotaiKubun" = A."yoKaigoJotaiKubun"
-        AND C."rirekiNo" = A."rirekiNo"
-        WHERE
-        A."tekiyoKaishiYM" <![CDATA[>=]]> #{利用年月}
-        AND A."tekiyoShuryoYM" <![CDATA[<=]]> #{利用年月}
-        AND C."tekiyoKaishiYM" <![CDATA[>=]]> #{利用年月}
-        AND C."tekiyoShuryoYM" <![CDATA[<=]]> #{利用年月}
-        ORDER BY
-        A."serviceShuruiCode" DESC
-    </select>
+    
     <resultMap id="resultMap_ServiceTypeTotalEntity" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.ServiceTypeTotalEntity">
         <result property="サービス種類略称" column="サービス種類略称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="支給限度単位数" column="支給限度単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="サービス種類コード" column="サービス種類コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
     </resultMap>
-    
-    <select id="getサービス利用票データ"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KyufuJikoSakuseiEntity"
-            resultMap="resultMap_KyufuJikoSakuseiEntity"
-            parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
+    <select resultOrdered="true" id="getサービス種類支給額" resultMap="resultMap_ServiceTypeTotalEntity"
+            parameterType="java.util.Map" fetchSize="500">
         SELECT
-        rgdb."DbT7060KaigoJigyosha"."jigyoshaName" as 事業者,
-        CASE WHEN A.サービス項目コード='' OR A.サービス項目コード IS NULL
-        THEN rgdb."DbT7130KaigoServiceShurui"."serviceShuruiRyakusho"							
-        ELSE rgdb."DbT7131KaigoServiceNaiyou"."serviceNameRyaku" 
-        END as サービス,
-        A.単位 as 単位,	
-        A.割引適用後率 as 割引適用後率,		
-        A.割引適用後単位 as 割引適用後単位,				
-        A.回数 as 回数,		
-        A.種類限度超過単位 as 種類限度超過単位,			
-        A.種類限度内単位	as 種類限度内単位,				
-        A.単位数単価 as 単位数単価,			
-        A.区分限度超過単位 as 区分限度超過単位,
-        A.区分限度内単位	as 区分限度内単位,
-        A.給付率	 as 給付率,
-        A.給付計画単位数 as 給付計画単位数,
-        A.サービス種類コード as サービス種類コード,
-        A.サービス項目コード as サービス項目コード,
-        A.事業者コード as 事業者コード,
-        A.合計フラグ as 合計フラグ,
-        A.定額利用者負担単価金額	as 定額利用者負担単価金額,
-        rgdb."DbT7131KaigoServiceNaiyou"."gendogakuTaishogaiFlag" as 限度額対象外フラグ
-        FROM(
-        SELECT
-        B."serviceTeikyoJigyoshaNo" as 事業者コード,
-        B."serviceShuruiCode" as サービス種類コード,
-        B."serviceKomokuCode" as サービス項目コード,
-        B."taniSu" as 単位,
-        B."waribikiGoTekiyoRitsu" as 割引適用後率,
-        B."waribikiGoTekiyoTaniSu" as 割引適用後単位,
-        B."kaisu_Nissu" as 回数,
-        B."shuruiGendoChokaTaniSu_Nissu" as 種類限度超過単位,
-        B."shuruiGendoNaiTaniSu_Nissu" as 種類限度内単位,
-        B."taniSuTanka" as 単位数単価,
-        B."kubunGendoChokaTaniSu_Nissu" as 区分限度超過単位,
-        B."kubunGendoNaiTaniSu_Nissu" as 区分限度内単位,
-        B."kyufuRitsu" as 給付率,
-        B."kyufuKeikakuTaniSu" as 給付計画単位数,
-        B."goukeiFlag" as 合計フラグ,
-        NULL as 定額利用者負担単価金額
+            B."serviceShuruiRyakusho" AS サービス種類略称,
+            (CASE 
+                WHEN 
+                    C."shikyuGendoTaniSu" IS NULL
+                THEN A."shikyuGendoTaniSu"
+                ELSE C."shikyuGendoTaniSu" 
+                END ) AS 支給限度単位数,
+            B."serviceShuruiCd" AS サービス種類コード 
         FROM
-        rgdb."DbT3119KyotakuKeikakuJikosakuseiKanri"  B
-        WHERE
-        B."hihokenshaNo" = #{被保険者番号}
-        AND  B."taishoYM" = #{対象年月}
-        AND  B."rirekiNo" = #{履歴番号}
-        AND  B."riyoYM"= #{利用年月}
-        UNION
-        SELECT
-        C."serviceTeikyoJigyoshaNo" as 事業者コード,
-        C."serviceShuruiCode" as サービス種類コード,
-        C."serviceKomokuCode" as サービス項目コード,
-        C."taniSu" as 単位,
-        C."waribikiGoTekiyoRitsu" as 割引適用後率,
-        C."waribikiGoTekiyoTaniSu" as 割引適用後単位,
-        C."kaisu_Nissu" as 回数,
-        C."shuruiGendoChokaTaniSu_Nissu" as 種類限度超過単位,
-        C."shuruiGendoNaiTaniSu_Nissu" as 種類限度内単位,
-        C."taniSuTanka" as 単位数単価,
-        C."kubunGendoChokaTaniSu_Nissu" as 区分限度超過単位,
-        C."kubunGendoNaiTaniSu_Nissu" as 区分限度内単位,
-        C."kyufuRitsu" as 給付率,
-        C."keikakuTaniSu" as 給付計画単位数,
-        C."goukeiFlag" as 合計フラグ,
-        C."teigakuRiyoshaFutanTankaKingaku" as 定額利用者負担単価金額
-        FROM
-        rgdb."DbT3120YoboKeikakuJikoSakuseiKanri"  C
-        WHERE
-        C."hihokenshaNo" = #{被保険者番号}
-        AND  C."taishoYM" = #{対象年月}
-        AND  C."rirekiNo" = #{履歴番号}
-        AND C."riyoYM"= #{利用年月}
-        )as A
+            rgdb."DbT7111ServiceShuruiShikyuGendoGaku" A
         INNER JOIN 
-        rgdb."DbT7060KaigoJigyosha"
+            rgdb."DbT7130KaigoServiceShurui" B
         ON
-        rgdb."DbT7060KaigoJigyosha"."jigyoshaName" = A.事業者コード
+            A."serviceShuruiCode" = B."serviceShuruiCd"
+            AND A."tekiyoKaishiYM" = B."teikyoKaishiYM"
         LEFT JOIN
-        rgdb."DbT7131KaigoServiceNaiyou"
-        ON
-        rgdb."DbT7131KaigoServiceNaiyou"."serviceShuruiCd" = A.サービス種類コード
-        AND rgdb."DbT7131KaigoServiceNaiyou"."serviceKoumokuCd" = A.サービス項目コード
-        LEFT JOIN									
-        rgdb."DbT7130KaigoServiceShurui"							
-        ON								
-        rgdb."DbT7130KaigoServiceShurui"."serviceShuruiCd" = A.サービス種類コード			
-        ORDER BY									
-        A.事業者コード ASC,								
-        A.サービス種類コード ASC,						
-        A.合計フラグ ASC							
+            rgdb."DbT7114UwanoseServiceShuruiShikyuGendoGaku" C
+        ON 
+            C."serviceShuruiCode" = A."serviceShuruiCode"
+            AND C."yoKaigoJotaiKubun" = A."yoKaigoJotaiKubun"
+            AND C."rirekiNo" = A."rirekiNo"
+        WHERE
+                A."tekiyoKaishiYM" <![CDATA[<=]]> #{利用年月}
+            AND (A."tekiyoShuryoYM" IS NULL OR A."tekiyoShuryoYM" = '' OR A."tekiyoShuryoYM" <![CDATA[>=]]> #{利用年月})
+            AND C."tekiyoKaishiYM" <![CDATA[>=]]> #{利用年月}
+            AND (C."tekiyoShuryoYM" IS NULL OR C."tekiyoShuryoYM" = '' OR C."tekiyoShuryoYM" <![CDATA[>=]]> #{利用年月})
+        ORDER BY
+            A."serviceShuruiCode" DESC
     </select>
-    <resultMap id="resultMap_KyufuJikoSakuseiEntity" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KyufuJikoSakuseiEntity">
+    
+    <resultMap id="resultMap_ServiceRiyohyoEntity" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.ServiceRiyohyoEntity">
         <result property="事業者" column="事業者" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="サービス" column="サービス" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="単位" column="単位" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
@@ -161,39 +66,135 @@
         <result property="定額利用者負担単価金額" column="定額利用者負担単価金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="限度額対象外フラグ" column="限度額対象外フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    
-    <select id="get区分限度額統計処理"
-            resultMap="resultMap_KubunGendoEntity"
-            parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
+    <select resultOrdered="true" id="getサービス利用票データ" resultMap="resultMap_ServiceRiyohyoEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
-        限度額."shikyuGendoTaniSu" as 支給限度単位数,
-        二次予防事業対象者."tekiyoKaishiYMD" as 適用開始年月日,
-        二次予防事業対象者."tekiyoShuryoYMD" as 適用終了年月日
-        FROM
-        rgdb."DbT7117SogoJigyoKubunShikyuGendoGaku" as 限度額
-        INNER JOIN
-        rgdb."DbT4001JukyushaDaicho" as 受給者台帳
+            DbT7060KaigoJigyosha."jigyoshaName" AS 事業者,
+            (CASE 
+                WHEN A.サービス項目コード IS NULL OR A.サービス項目コード = ''
+                THEN DbT7130KaigoServiceShurui."serviceShuruiRyakusho"				
+                ELSE DbT7131KaigoServiceNaiyou."serviceNameRyaku"
+                END ) AS サービス,
+            A.単位 AS 単位,
+            A.割引適用後率 AS 割引適用後率,
+            A.割引適用後単位 AS 割引適用後単位,
+            A.回数 AS 回数,
+            A.種類限度超過単位 AS 種類限度超過単位,
+            A.種類限度内単位 AS 種類限度内単位,
+            A.単位数単価 AS 単位数単価,
+            A.区分限度超過単位 AS 区分限度超過単位,
+            A.区分限度内単位 AS 区分限度内単位,
+            A.給付率 AS 給付率,
+            A.給付計画単位数 AS 給付計画単位数,
+            A.サービス種類コード AS サービス種類コード,
+            A.サービス項目コード AS サービス項目コード,
+            A.事業者コード AS 事業者コード,
+            A.合計フラグ AS 合計フラグ,
+            A.定額利用者負担単価金額 AS 定額利用者負担単価金額,
+            DbT7131KaigoServiceNaiyou."gendogakuTaishogaiFlag" AS 限度額対象外フラグ
+        FROM(
+            SELECT
+                B."serviceTeikyoJigyoshaNo" AS 事業者コード,
+                B."serviceShuruiCode" AS サービス種類コード,
+                B."serviceKomokuCode" AS サービス項目コード,
+                B."taniSu" AS 単位,
+                B."waribikiGoTekiyoRitsu" AS 割引適用後率,
+                B."waribikiGoTekiyoTaniSu" AS 割引適用後単位,
+                B."kaisu_Nissu" AS 回数,
+                B."shuruiGendoChokaTaniSu_Nissu" AS 種類限度超過単位,
+                B."shuruiGendoNaiTaniSu_Nissu" AS 種類限度内単位,
+                B."taniSuTanka" AS 単位数単価,
+                B."kubunGendoChokaTaniSu_Nissu" AS 区分限度超過単位,
+                B."kubunGendoNaiTaniSu_Nissu" AS 区分限度内単位,
+                B."kyufuRitsu" AS 給付率,
+                B."kyufuKeikakuTaniSu" AS 給付計画単位数,
+                B."goukeiFlag" AS 合計フラグ,
+                NULL AS 定額利用者負担単価金額
+            FROM
+                rgdb."DbT3119KyotakuKeikakuJikosakuseiKanri" AS B
+            WHERE
+                     B."hihokenshaNo" = #{被保険者番号}
+                AND  B."taishoYM" = #{対象年月}
+                AND  B."rirekiNo" = #{履歴番号}
+                AND  B."riyoYM"= #{利用年月}
+        UNION
+            SELECT
+                C."serviceTeikyoJigyoshaNo" AS 事業者コード,
+                C."serviceShuruiCode" AS サービス種類コード,
+                C."serviceKomokuCode" AS サービス項目コード,
+                C."taniSu" AS 単位,
+                C."waribikiGoTekiyoRitsu" AS 割引適用後率,
+                C."waribikiGoTekiyoTaniSu" AS 割引適用後単位,
+                C."kaisu_Nissu" AS 回数,
+                C."shuruiGendoChokaTaniSu_Nissu" AS 種類限度超過単位,
+                C."shuruiGendoNaiTaniSu_Nissu" AS 種類限度内単位,
+                C."taniSuTanka" AS 単位数単価,
+                C."kubunGendoChokaTaniSu_Nissu" AS 区分限度超過単位,
+                C."kubunGendoNaiTaniSu_Nissu" AS 区分限度内単位,
+                C."kyufuRitsu" AS 給付率,
+                C."keikakuTaniSu" AS 給付計画単位数,
+                C."goukeiFlag" AS 合計フラグ,
+                C."teigakuRiyoshaFutanTankaKingaku" AS 定額利用者負担単価金額
+            FROM
+                rgdb."DbT3120YoboKeikakuJikoSakuseiKanri"  C
+            WHERE
+                C."hihokenshaNo" = #{被保険者番号}
+                AND  C."taishoYM" = #{対象年月}
+                AND  C."rirekiNo" = #{履歴番号}
+                AND C."riyoYM"= #{利用年月}
+            ) AS A
+        INNER JOIN 
+            rgdb."DbT7060KaigoJigyosha" AS DbT7060KaigoJigyosha
         ON
-        受給者台帳."hihokenshaNo" = #{被保険者番号}
-        AND 受給者台帳."yokaigoJotaiKubunCode" = 限度額."yoKaigoJotaiKubun"
-        AND 受給者台帳."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{開始利用年月}
-        AND 受給者台帳."ninteiYukoKikanShuryoYMD" <![CDATA[>=]]> #{終了利用年月}
-        AND 受給者台帳."logicalDeletedFlag" = FALSE 
-        INNER JOIN
-        rgdb."DbT3100NijiYoboJigyoTaishosha" as 二次予防事業対象者
+            DbT7060KaigoJigyosha."jigyoshaNo" = A.事業者コード
+        LEFT JOIN
+            rgdb."DbT7131KaigoServiceNaiyou" AS DbT7131KaigoServiceNaiyou
         ON
-        二次予防事業対象者."hihokenshaNo" = #{被保険者番号}
-        WHERE 
-        限度額."tekiyoKaishiYM"<![CDATA[<=]]> #{利用年月}
-        AND 限度額."tekiyoShuryoYM"<![CDATA[>=]]> #{利用年月}
-        ORDER BY
-        限度額."shikyuGendoTaniSu" DESC 
-        LIMIT 1
+            DbT7131KaigoServiceNaiyou."serviceShuruiCd" = A.サービス種類コード
+            AND DbT7131KaigoServiceNaiyou."serviceKoumokuCd" = A.サービス項目コード
+        LEFT JOIN									
+            rgdb."DbT7130KaigoServiceShurui" AS DbT7130KaigoServiceShurui
+        ON								
+            DbT7130KaigoServiceShurui."serviceShuruiCd" = A.サービス種類コード			
+        ORDER BY									
+            A.事業者コード ASC,								
+            A.サービス種類コード ASC,						
+            A.合計フラグ ASC							
     </select>
+    
     <resultMap id="resultMap_KubunGendoEntity" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KubunGendoEntity">
         <result property="支給限度単位数" column="支給限度単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="適用開始年月日" column="適用開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="適用終了年月日" column="適用終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
+    
+    <select resultOrdered="true" id="get区分限度額統計処理" resultMap="resultMap_KubunGendoEntity"
+            parameterType="java.util.Map" fetchSize="500">
+        SELECT
+            限度額."shikyuGendoTaniSu" as 支給限度単位数,
+            二次予防事業対象者."tekiyoKaishiYMD" AS 適用開始年月日,
+            二次予防事業対象者."tekiyoShuryoYMD" AS 適用終了年月日
+        FROM
+            rgdb."DbT7117SogoJigyoKubunShikyuGendoGaku" AS 限度額
+       INNER JOIN
+            rgdb."DbT4001JukyushaDaicho" AS 受給者台帳
+        ON
+            受給者台帳."hihokenshaNo" = #{被保険者番号}
+            AND 受給者台帳."yokaigoJotaiKubunCode" = 限度額."yoKaigoJotaiKubun"
+            AND 受給者台帳."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{開始利用年月}
+            AND (受給者台帳."ninteiYukoKikanShuryoYMD" IS NULL OR 受給者台帳."ninteiYukoKikanShuryoYMD" = '' 
+                OR 受給者台帳."ninteiYukoKikanShuryoYMD" <![CDATA[>=]]> #{終了利用年月})
+            AND 受給者台帳."logicalDeletedFlag" = FALSE 
+        INNER JOIN
+            rgdb."DbT3100NijiYoboJigyoTaishosha" AS 二次予防事業対象者
+        ON
+            二次予防事業対象者."hihokenshaNo" = #{被保険者番号}
+        WHERE 
+            限度額."tekiyoKaishiYM"<![CDATA[<=]]> #{利用年月}
+            AND (限度額."tekiyoShuryoYM" IS NULL OR 限度額."tekiyoShuryoYM" = '' 
+                OR 限度額."tekiyoShuryoYM"<![CDATA[>=]]> #{利用年月})
+        ORDER BY
+            限度額."shikyuGendoTaniSu" DESC 
+        LIMIT 1
+    </select>
 </mapper>

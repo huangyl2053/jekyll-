@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jigosakuseimeisa
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KubunGendoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KyufuJikoSakuseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.ServiceRiyohyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.ServiceTypeTotalEntity;
 
 /**
@@ -30,9 +30,9 @@ public interface IJigoSakuseiMeisaiTourokuMapper {
      * サービス種類支給額取得
      *
      * @param param Map<String, Object>
-     * @return List<KyufuJikoSakuseiEntity>
+     * @return List<ServiceRiyohyoEntity>
      */
-    List<KyufuJikoSakuseiEntity> getサービス利用票データ(Map<String, Object> param);
+    List<ServiceRiyohyoEntity> getサービス利用票データ(Map<String, Object> param);
 
     /**
      * 区分限度額統計処理
