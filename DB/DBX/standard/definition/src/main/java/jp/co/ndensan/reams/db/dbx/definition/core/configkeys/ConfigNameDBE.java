@@ -1057,7 +1057,11 @@ public enum ConfigNameDBE {
     /**
      * OCRアップロード用ファイル格納パス
      */
-    OCRアップロード用ファイル格納パス("OCRアップロード用ファイル格納パス");
+    OCRアップロード用ファイル格納パス("OCRアップロード用ファイル格納パス"),
+    /**
+     * 経過日数
+     */
+    経過日数("経過日数");
 
     private final RString fullName;
 
