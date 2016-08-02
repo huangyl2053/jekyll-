@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninteishinsehhinseirirekininteikekkajoho.INinteishinsehhinseirirekininteikekkajohoMapper">
+    <resultMap id="NNinteishinsehhinseirirekininteikekkajohoResult" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5610001.KoshinTaishoshaKanriEntity">
+        <association  property="dbT4101NinteiShinseiJohoEntity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"/>
+        <association  property="dbT4121ShinseiRirekJohoEntity"  resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4121ShinseiRirekiJohoMapper.ResultMap_DbT4121ShinseiRirekiJohoEntity"/>
+        <association  property="dbT4102NinteiKekkaJohoEntity"   resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4102NinteiKekkaJohoMapper.ResultMap_DbT4102NinteiKekkaJohoEntity"/>
+        <association  property="seihoDbT4101NinteiShinseiJohoEntity"  resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"/>
+    </resultMap>
+<select id="get更新申請対象者情報"
+        resultMap="NNinteishinsehhinseirirekininteikekkajohoResult"
+        parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd5610001.KoshinTaishoshaKanriMyBatisParameter"
+        fetchSize="500" resultOrdered="true">
+    SELECT 
+<!--    <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.allColumns_DbT4101NinteiShinseiJoho" />,
+    <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4121ShinseiRirekiJohoMapper.allColumns_DbT4121ShinseiRirekiJoho" />,
+    <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.allColumns_DbT4101NinteiShinseiJoho" />,
+    <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4102NinteiKekkaJohoMapper.allColumns_DbT4102NinteiKekkaJoho" />,-->
+    A.*,A1.*,A2.*,B.*
+    FROM (SELECT * FROM (SELECT *, row_number() OVER	
+   (PARTITION BY "hihokenshaKana" ORDER BY "ninteiShinseiYMD" DESC) AS rnbn
+    FROM rgdb."DbT4101NinteiShinseiJoho"  WHERE  "logicalDeletedFlag"=false)AS Newest where rnbn = 1  ) as A
+    LEFT JOIN rgdb."DbT4121ShinseiRirekiJoho" as A1
+    ON A."shinseishoKanriNo" =A1."shinseishoKanriNo"
+    LEFT JOIN rgdb."DbT4101NinteiShinseiJoho" as A2
+    ON A1."zenkaiShinseishoKanriNo" =A2."shinseishoKanriNo"
+    LEFT JOIN rgdb."DbT4102NinteiKekkaJoho" as B
+    ON A."shinseishoKanriNo"=B."shinseishoKanriNo"
+    WHERE 
+    (A."ninteiShinseiShinseijiKubunCode"='2' 
+    OR A2."ninteiShinseiShinseijiKubunCode"='3')
+    AND (A."koshinTsuchiHakkoYMD" is not null AND A."koshinTsuchiHakkoYMD"!='')
+    AND (A."koshinTsuchiHakkoKanryoYMD" is not null  AND A."koshinTsuchiHakkoKanryoYMD"!='')
+    AND A."logicalDeletedFlag"=false 
+    AND A."shoriJotaiKubun"=#{shoriJotaiKubun}
+    <if test="前回以降の未処理分" >
+        AND LEFT(B."nijiHanteiNinteiYukoShuryoYMD",6)=#{対象月}
+        </if>
+        <if test="有効期間終了日を範囲指定する">
+            AND #{有効期間終了日From}<![CDATA[<=]]> B."nijiHanteiNinteiYukoShuryoYMD" <![CDATA[<=]]>#{有効期間終了日To}
+            AND A."shinseishoKanriNo" NOT IN (SELECT shinseishoKanriNo 
+                                                FROM rgdb."DbT4131Tenshutsu"
+                                                UNION  
+                                               SELECT shinseishoKanriNo
+                                                FROM rgdb."DbT4130Shibo")
+                     
+        </if>
+       
+</select>
+</mapper>
