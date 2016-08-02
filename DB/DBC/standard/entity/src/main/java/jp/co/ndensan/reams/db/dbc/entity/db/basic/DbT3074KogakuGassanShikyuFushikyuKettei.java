@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 高額合算支給不支給決定テーブルの項目定義クラスです。
  */
 public enum DbT3074KogakuGassanShikyuFushikyuKettei implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
      * insertDantaiCd
      */
@@ -155,7 +155,7 @@ public enum DbT3074KogakuGassanShikyuFushikyuKettei implements IColumnDefinition
     /**
      * 口座ID
      */
-    kozaID(2147483647, 0),
+    kozaID(19, 0),
     /**
      * 決定通知リアル発行フラグ
      */

@@ -3,9 +3,9 @@ package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * 高額合算給付実績テーブルの項目定義クラスです。
+ * 事業高額合算支給不支給決定テーブルの項目定義クラスです。
  */
-public enum DbT3075KogakuGassanKyufuJisseki implements IColumnDefinition {
+public enum DbT3174JigyoKogakuGassanShikyuFushikyuKettei implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
      * insertDantaiCd
@@ -40,21 +40,26 @@ public enum DbT3075KogakuGassanKyufuJisseki implements IColumnDefinition {
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
-     * 交換情報識別番号
-     */
-    kokanJohoShikibetsuNo(2147483647, 0),
-    /**
      * 被保険者番号
      */
     hihokenshaNo(2147483647, 0),
     /**
-     * 支給申請書整理番号
+     * 対象年度
      */
-    shikyuShinseiSeiriNo(17, 0),
+    taishoNendo(2147483647, 0),
     /**
-     * 整理番号
+     * 保険者番号
      */
-    seiriNo(10, 0),
+    hokenshaNo(2147483647, 0),
+    /**
+     * 支給申請書整理番号
+     * <br/>IF上は「連絡票整理番号」
+     */
+    shikyuSeiriNo(17, 0),
+    /**
+     * 履歴番号
+     */
+    rirekiNo(5, 0),
     /**
      * 自己負担額証明書整理番号
      */
@@ -64,17 +69,17 @@ public enum DbT3075KogakuGassanKyufuJisseki implements IColumnDefinition {
      */
     hokenSeidoCode(1, 0),
     /**
-     * 給付実績作成区分コード
-     */
-    kyufuJissekiSakuseiKubunCode(1, 0),
-    /**
-     * 証記載保険者番号
-     */
-    shoKisaiHokenshaNo(2147483647, 0),
-    /**
      * 国保 被保険者証記号
      */
     kokuho_HihokenshaShoKigo(20, 0),
+    /**
+     * 対象計算期間開始年月日
+     */
+    keisanKaishiYMD(2147483647, 0),
+    /**
+     * 対象計算期間終了年月日
+     */
+    keisanShuryoYMD(2147483647, 0),
     /**
      * 申請年月日
      */
@@ -88,30 +93,78 @@ public enum DbT3075KogakuGassanKyufuJisseki implements IColumnDefinition {
      */
     jikoFutanSogaku(10, 0),
     /**
+     * 支給区分コード
+     */
+    shikyuKubunCode(1, 0),
+    /**
      * 支給額
      */
-    shikyuGaku(10, 0),
+    shikyugaku(10, 0),
     /**
-     * 処理年月
+     * 給付の種類
      */
-    shoriYM(2147483647, 0),
+    kyufuShurui(50, 0),
+    /**
+     * 不支給理由
+     */
+    fushikyuRiyu(100, 0),
+    /**
+     * 備考
+     */
+    biko(100, 0),
+    /**
+     * 支払方法区分
+     */
+    shiharaiHohoKubun(1, 0),
+    /**
+     * 支払場所
+     */
+    shiharaiBasho(64, 0),
+    /**
+     * 支払期間開始年月日
+     */
+    shiharaiKaishiYMD(2147483647, 0),
+    /**
+     * 支払期間終了年月日
+     */
+    shiharaiShuryoYMD(2147483647, 0),
+    /**
+     * 閉庁内容
+     */
+    heichoNaiyo(50, 0),
+    /**
+     * 支払期間開始時間
+     */
+    shiharaiKaishiTime(4, 0),
+    /**
+     * 支払期間終了時間
+     */
+    shiharaiShuryoTime(4, 0),
+    /**
+     * 決定通知書作成年月日
+     */
+    ketteiTsuchiSakuseiYMD(2147483647, 0),
+    /**
+     * 振込通知書作成年月日
+     */
+    furikomiTsuchiSakuseiYMD(2147483647, 0),
     /**
      * 受取年月
      */
     uketoriYM(2147483647, 0),
     /**
-     * 送付年月
+     * 口座ID
      */
-    sofuYM(2147483647, 0),
+    kozaid(19, 0),
     /**
-     * データ区分
+     * データ作成区分
      */
-    dataKubun(1, 0);
+    dataSakuseiKubun(1, 0);
 
     private final int maxLength;
     private final int scale;
 
-    private DbT3075KogakuGassanKyufuJisseki(int maxLength, int scale) {
+    private DbT3174JigyoKogakuGassanShikyuFushikyuKettei(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }

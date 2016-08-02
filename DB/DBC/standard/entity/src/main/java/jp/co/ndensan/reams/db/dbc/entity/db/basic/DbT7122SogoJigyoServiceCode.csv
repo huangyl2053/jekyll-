@@ -1,5 +1,5 @@
-﻿serviceShuruiCode,DbUDD005ServiceShuruiCode,DbUDD005ServiceShuruiCode,,,,,サービス種類コード,A
-serviceKomokuCode,DbUDD006ServiceKomokuCode,DbUDD006ServiceKomokuCode,,,,,サービス項目コード,A
+﻿serviceShuruiCode,DbUDD005ServiceShuruiCode,ServiceShuruiCode,,,,,サービス種類コード,A
+serviceKomokuCode,DbUDD006ServiceKomokuCode,ServiceKomokuCode,,,,,サービス項目コード,A
 tekiyoKaishiYM,UDD014YM,FlexibleYearMonth,,,,,適用開始年月,A
 rirekiNo,int2,int,,,,,履歴番号,A
 tekiyoShuryoYM,UDD014YM,FlexibleYearMonth,,,,,適用終了年月,A
@@ -11,7 +11,15 @@ gaibuServiceRiyoKubun,varchar,RString,,,,,外部サービス利用型区分,A
 tokubetsuChiikiKasanFlag,varchar,RString,,,,,特別地域加算フラグ,A
 teiRitsu_TeiGakuKubun,varchar,RString,,,,,利用者負担定率／定額区分,A
 riyoshaFutanGaku,numeric,Decimal,,,,,利用者負担額,A
-kyufuRitsu,DbUDD011HokenKyufuRitsu,DbUDD011HokenKyufuRitsu,,,,,給付率,A
+kyufuRitsu,DbUDD011HokenKyufuRitsu,HokenKyufuRitsu,,,,,給付率,A
 nijiYoboTaishosha_JissiKubun,varchar,RString,,,,,二次予防事業対象者実施区分,A
 yoShien1_JisshiKubun,varchar,RString,,,,,要支援１受給者実施区分,A
 yoShien2_JisshiKubun,varchar,RString,,,,,要支援２受給者実施区分,A
+taishoJigyosha_JisshiKubun,varchar,RString,,,,,対象事業者実施区分,A
+santeiTaniKubun,varchar,RString,,,,,算定単位区分,A
+seigenNissuKaisu,int2,int,,,,,制限日数・回数,A
+santeiKaisuSeigenKikanKubun,varchar,RString,,,,,算定回数制限期間区分,A
+sofuKubun,varchar,RString,,,,,送付区分,A
+sofuYM,UDD014YM,FlexibleYearMonth,,,,,送付年月,A
+shinkiHenkoIdoYMD,UDD015YMD,FlexibleDate,,,,,新規・変更異動年月日,A
+shuryoIdoYMD,UDD015YMD,FlexibleDate,,,,,終了・異動年月日,A

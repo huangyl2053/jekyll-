@@ -16,12 +16,12 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 
 /**
- * 高額合算支給不支給決定テーブルのエンティティクラスです。
+ * 事業高額合算支給不支給決定テーブルのエンティティクラスです。
  */
-public class DbT3074KogakuGassanShikyuFushikyuKetteiEntity extends DbTableEntityBase<DbT3074KogakuGassanShikyuFushikyuKetteiEntity> implements IDbAccessable {
+public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableEntityBase<DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     @TableName
-    public static final RString TABLE_NAME = new RString("DbT3074KogakuGassanShikyuFushikyuKettei");
+    public static final RString TABLE_NAME = new RString("DbT3174JigyoKogakuGassanShikyuFushikyuKettei");
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
@@ -64,8 +64,8 @@ public class DbT3074KogakuGassanShikyuFushikyuKetteiEntity extends DbTableEntity
     private FlexibleDate ketteiTsuchiSakuseiYMD;
     private FlexibleDate furikomiTsuchiSakuseiYMD;
     private FlexibleYearMonth uketoriYM;
-    private long kozaID;
-    private RString ketteiTsuchiRealHakkoFlag;
+    private long kozaid;
+    private RString dataSakuseiKubun;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -650,47 +650,47 @@ public class DbT3074KogakuGassanShikyuFushikyuKetteiEntity extends DbTableEntity
      * @return 口座ID
      */
     @CheckForNull
-    public long getKozaID() {
-        return kozaID;
+    public long getKozaid() {
+        return kozaid;
     }
 
     /**
      * 口座IDのsetメソッドです。
      * 
-     * @param kozaID 口座ID
+     * @param kozaid 口座ID
      */
-    public void setKozaID(long kozaID) {
-        this.kozaID = kozaID;
+    public void setKozaid(long kozaid) {
+        this.kozaid = kozaid;
     }
 
     /**
-     * 決定通知リアル発行フラグのgetメソッドです。
+     * データ作成区分のgetメソッドです。
      * 
-     * @return 決定通知リアル発行フラグ
+     * @return データ作成区分
      */
     @CheckForNull
-    public RString getKetteiTsuchiRealHakkoFlag() {
-        return ketteiTsuchiRealHakkoFlag;
+    public RString getDataSakuseiKubun() {
+        return dataSakuseiKubun;
     }
 
     /**
-     * 決定通知リアル発行フラグのsetメソッドです。
+     * データ作成区分のsetメソッドです。
      * 
-     * @param ketteiTsuchiRealHakkoFlag 決定通知リアル発行フラグ
+     * @param dataSakuseiKubun データ作成区分
      */
-    public void setKetteiTsuchiRealHakkoFlag(RString ketteiTsuchiRealHakkoFlag) {
-        this.ketteiTsuchiRealHakkoFlag = ketteiTsuchiRealHakkoFlag;
+    public void setDataSakuseiKubun(RString dataSakuseiKubun) {
+        this.dataSakuseiKubun = dataSakuseiKubun;
     }
 
     /**
-     * このエンティティの主キーが他の{@literal DbT3074KogakuGassanShikyuFushikyuKetteiEntity}と等しいか判定します。
+     * このエンティティの主キーが他の{@literal DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
      * @return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT3074KogakuGassanShikyuFushikyuKetteiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
-    public boolean equalsPrimaryKeys(DbT3074KogakuGassanShikyuFushikyuKetteiEntity other) {
+    public boolean equalsPrimaryKeys(DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity other) {
         if (other == null) {
             return false;
         }
@@ -716,7 +716,7 @@ public class DbT3074KogakuGassanShikyuFushikyuKetteiEntity extends DbTableEntity
      * {@inheritDoc}
      */
     @Override
-    public void shallowCopy(DbT3074KogakuGassanShikyuFushikyuKetteiEntity entity) {
+    public void shallowCopy(DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity entity) {
         this.hihokenshaNo = entity.hihokenshaNo;
         this.taishoNendo = entity.taishoNendo;
         this.hokenshaNo = entity.hokenshaNo;
@@ -745,8 +745,8 @@ public class DbT3074KogakuGassanShikyuFushikyuKetteiEntity extends DbTableEntity
         this.ketteiTsuchiSakuseiYMD = entity.ketteiTsuchiSakuseiYMD;
         this.furikomiTsuchiSakuseiYMD = entity.furikomiTsuchiSakuseiYMD;
         this.uketoriYM = entity.uketoriYM;
-        this.kozaID = entity.kozaID;
-        this.ketteiTsuchiRealHakkoFlag = entity.ketteiTsuchiRealHakkoFlag;
+        this.kozaid = entity.kozaid;
+        this.dataSakuseiKubun = entity.dataSakuseiKubun;
     }
 
     /**
@@ -755,10 +755,8 @@ public class DbT3074KogakuGassanShikyuFushikyuKetteiEntity extends DbTableEntity
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hihokenshaNo, taishoNendo, hokenshaNo, shikyuSeiriNo, rirekiNo, jikoFutanSeiriNo, hokenSeidoCode, kokuho_HihokenshaShoKigo, keisanKaishiYMD, keisanShuryoYMD, shinseiYMD, ketteiYMD, jikoFutanSogaku, shikyuKubunCode, shikyugaku, kyufuShurui, fushikyuRiyu, biko, shiharaiHohoKubun, shiharaiBasho, shiharaiKaishiYMD, shiharaiShuryoYMD, heichoNaiyo, shiharaiKaishiTime, shiharaiShuryoTime, ketteiTsuchiSakuseiYMD, furikomiTsuchiSakuseiYMD, uketoriYM, kozaID, ketteiTsuchiRealHakkoFlag);
+        return super.toMd5(hihokenshaNo, taishoNendo, hokenshaNo, shikyuSeiriNo, rirekiNo, jikoFutanSeiriNo, hokenSeidoCode, kokuho_HihokenshaShoKigo, keisanKaishiYMD, keisanShuryoYMD, shinseiYMD, ketteiYMD, jikoFutanSogaku, shikyuKubunCode, shikyugaku, kyufuShurui, fushikyuRiyu, biko, shiharaiHohoKubun, shiharaiBasho, shiharaiKaishiYMD, shiharaiShuryoYMD, heichoNaiyo, shiharaiKaishiTime, shiharaiShuryoTime, ketteiTsuchiSakuseiYMD, furikomiTsuchiSakuseiYMD, uketoriYM, kozaid, dataSakuseiKubun);
     }
 
 // </editor-fold>
-
-
 }

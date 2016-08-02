@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 介護予防・日常生活支援総合事業サービスコードテーブルの項目定義クラスです。
  */
 public enum DbT7122SogoJigyoServiceCode implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
      * insertDantaiCd
      */
@@ -108,7 +108,42 @@ public enum DbT7122SogoJigyoServiceCode implements IColumnDefinition {
     /**
      * 要支援２受給者実施区分
      */
-    yoShien2_JisshiKubun(1, 0);
+    yoShien2_JisshiKubun(1, 0),
+    /**
+     * 対象事業者実施区分
+     */
+    taishoJigyosha_JisshiKubun(1, 0),
+    /**
+     * 算定単位区分
+     * <br/>01：1回につき、02：1日につき、03：1月につき、05：1週間につき
+     */
+    santeiTaniKubun(2, 0),
+    /**
+     * 制限日数・回数
+     */
+    seigenNissuKaisu(5, 0),
+    /**
+     * 算定回数制限期間区分
+     * <br/>01：1月につき、08：1日につき
+     */
+    santeiKaisuSeigenKikanKubun(2, 0),
+    /**
+     * 送付区分
+     * <br/>サービスコード異動連絡票の送付区分（1：送付不要、2：送付対象、3：送付済み）
+     */
+    sofuKubun(1, 0),
+    /**
+     * 送付年月
+     */
+    sofuYM(2147483647, 0),
+    /**
+     * 新規・変更異動年月日
+     */
+    shinkiHenkoIdoYMD(2147483647, 0),
+    /**
+     * 終了・異動年月日
+     */
+    shuryoIdoYMD(2147483647, 0);
 
     private final int maxLength;
     private final int scale;

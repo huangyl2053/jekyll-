@@ -6,8 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 住宅改修理由書作成手数料請求集計テーブルの項目定義クラスです。
  */
 public enum DbT3096JutakuKaishuRiyushoTesuryoShukei implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
      * insertDantaiCd
      */
@@ -45,21 +44,30 @@ public enum DbT3096JutakuKaishuRiyushoTesuryoShukei implements IColumnDefinition
      */
     shoKisaiHokenshaNo(2147483647, 0),
     /**
-     * 集計開始年月
+     * 介護住宅改修理由書作成事業者番号
      */
-    shukeiKaishiYM(2147483647, 0),
+    riyushoSakuseiJigyoshaNo(2147483647, 0),
+    /**
+     * 集計関連付け番号
+     * <br/>連番
+     */
+    shukeiNo(6, 0),
     /**
      * 履歴番号
      */
     rirekiNo(5, 0),
     /**
+     * 集計開始年月
+     */
+    shukeiKaishiYM(2147483647, 0),
+    /**
      * 集計終了年月
      */
     shukeiShuryoYM(2147483647, 0),
     /**
-     * 介護住宅改修理由書作成事業者番号
+     * 介護住宅改修事業者名称
      */
-    riyushoSakuseiJigyoshaNo(2147483647, 0),
+    jutakuKaishuJigyoshaMeisho(2147483647, 0),
     /**
      * 介護住宅改修理由書作成件数
      */
@@ -73,22 +81,38 @@ public enum DbT3096JutakuKaishuRiyushoTesuryoShukei implements IColumnDefinition
      */
     riyushoSakuseiSeikyuKingaku(9, 0),
     /**
-     * 介護住宅改修理由書作成申請年月日
+     * 識別コード
+     * <br/>住宅改修理由書作成事業者の法人口座取得用
      */
-    riyushoSakuseiShinseiYMD(2147483647, 0),
-    /**
-     * 介護住宅改修理由書作成受付年月日
-     */
-    riyushoSakuseiUketsukeYMD(2147483647, 0),
+    shikibetsuNo(2147483647, 0),
     /**
      * 介護支払方法区分
      */
     shiharaiHohoKubun(1, 0),
     /**
-     * 識別コード
-     * <br/>住宅改修理由書作成事業者の法人口座取得用
+     * 金融機関コード
      */
-    shikibetsuNo(2147483647, 0);
+    kinyuKikanCode(2147483647, 0),
+    /**
+     * 支店コード
+     */
+    shitenCode(2147483647, 0),
+    /**
+     * 口座種別
+     */
+    kozaShubetsu(1, 0),
+    /**
+     * 口座番号
+     */
+    kozaNo(10, 0),
+    /**
+     * 口座名義人
+     */
+    kozaMeiginin(2147483647, 0),
+    /**
+     * 口座名義人カナ
+     */
+    kozaMeigininKana(2147483647, 0);
 
     private final int maxLength;
     private final int scale;
@@ -100,7 +124,7 @@ public enum DbT3096JutakuKaishuRiyushoTesuryoShukei implements IColumnDefinition
 
     /**
      * 項目の最大長のgetメソッドです。
-     *
+     * 
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -109,7 +133,7 @@ public enum DbT3096JutakuKaishuRiyushoTesuryoShukei implements IColumnDefinition
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     *
+     * 
      * @return 小数点以下の桁数
      */
     public int getScale() {

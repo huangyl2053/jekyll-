@@ -26,5 +26,5 @@ shiharaiShuryoTime,varchar,RString,,,,,支払期間終了時間,A
 ketteiTsuchiSakuseiYMD,UDD015YMD,FlexibleDate,,,,,決定通知書作成年月日,A
 furikomiTsuchiSakuseiYMD,UDD015YMD,FlexibleDate,,,,,振込通知書作成年月日,A
 uketoriYM,UDD014YM,FlexibleYearMonth,,,,,受取年月,A
-kozaID,int8,long,,,,,口座ID,A
-ketteiTsuchiRealHakkoFlag,varchar,RString,,,,,決定通知リアル発行フラグ,A
+kozaid,int8,long,,,,,口座ID,A
+dataSakuseiKubun,varchar,RString,,,,,データ作成区分,A
