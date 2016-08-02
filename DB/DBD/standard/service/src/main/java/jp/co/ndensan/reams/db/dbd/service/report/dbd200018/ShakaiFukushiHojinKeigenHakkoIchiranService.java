@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbd.service.report.dbd200018;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200018.ShakaiFukushiHojinKeigenHakkoIchiranProerty;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200018.ShakaiFukushiHojinKeigenHakkoIchiranReport;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.ShakaiFukushiHojinKeigenHakkoIchiran.ShakaiFukushiHojinKeigenHakkoIchiranEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.shakaifukushihojinkeigenhakkoichiran.ShakaiFukushiHojinKeigenHakkoIchiranEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200018.ShakaiFukushiHojinKeigenHakkoIchiranReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;

@@ -7,8 +7,9 @@ package jp.co.ndensan.reams.db.dbd.business.report.dbd200018;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.ShakaiFukushiHojinKeigenHakkoIchiran.ShakaiFukushiHojinKeigenHakkoIchiranEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.shakaifukushihojinkeigenhakkoichiran.ShakaiFukushiHojinKeigenHakkoIchiranEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200018.ShakaiFukushiHojinKeigenHakkoIchiranReportSource;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -32,11 +33,17 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
     private static final int NOCOUNT_1 = 1;
     private static final int NOCOUNT_2 = 2;
     private static final int NOCOUNT_3 = 3;
+    private static final int LISTINDEX_0 = 0;
+    private static final int LISTINDEX_1 = 1;
+    private static final int LISTINDEX_2 = 2;
+    private static final int LISTINDEX_3 = 3;
+    private static final int LISTINDEX_4 = 4;
 
     private final List<ShakaiFukushiHojinKeigenHakkoIchiranEntity> 帳票情報リスト;
     private final Association association;
     private final IOutputOrder iOutputOrder;
     private final int index;
+    private final IKojin 個人情報;
 
     /**
      * インスタンスを生成します。
@@ -45,33 +52,41 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
      * @param association Association
      * @param iOutputOrder IOutputOrder
      * @param index int
+     * @param 個人情報 IKojin
      */
     public ShakaiFukushiHojinKeigenHakkoIchiranEditor(List<ShakaiFukushiHojinKeigenHakkoIchiranEntity> 帳票情報リスト,
-            Association association, IOutputOrder iOutputOrder, int index) {
+            Association association, IOutputOrder iOutputOrder, int index, IKojin 個人情報) {
         this.帳票情報リスト = 帳票情報リスト;
         this.association = association;
         this.iOutputOrder = iOutputOrder;
         this.index = index;
+        this.個人情報 = 個人情報;
     }
 
     @Override
     public ShakaiFukushiHojinKeigenHakkoIchiranReportSource edit(ShakaiFukushiHojinKeigenHakkoIchiranReportSource source) {
-        setLayer1(source);
+        setLayer1Step1(source);
+        setLayer1Step2(source);
+        setLayer1Step3(source);
+        setLayer1Step4(source);
         setAccessLogEditor(source);
         return source;
     }
 
-    private void setLayer1(ShakaiFukushiHojinKeigenHakkoIchiranReportSource source) {
+    private void setLayer1Step1(ShakaiFukushiHojinKeigenHakkoIchiranReportSource source) {
         source.printTimeStamp = get印刷日時();
         source.hokenshaNo = this.association.get地方公共団体コード().value();
         source.hokenshaName = this.association.get市町村名();
         List<ISetSortItem> 設定項目リスト = this.iOutputOrder.get設定項目リスト();
-        source.shutsuryokujun1 = 設定項目リスト.get(0).get項目名();
-        source.shutsuryokujun2 = 設定項目リスト.get(1).get項目名();
-        source.shutsuryokujun3 = 設定項目リスト.get(2).get項目名();
-        source.shutsuryokujun4 = 設定項目リスト.get(3).get項目名();
-        source.shutsuryokujun5 = 設定項目リスト.get(4).get項目名();
+        source.shutsuryokujun1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
+        source.shutsuryokujun2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
+        source.shutsuryokujun3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
+        source.shutsuryokujun4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
+        source.shutsuryokujun5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
         source.list_1 = new RString(String.valueOf(index + 1));
+    }
+
+    private void setLayer1Step2(ShakaiFukushiHojinKeigenHakkoIchiranReportSource source) {
         ShakaiFukushiHojinKeigenHakkoIchiranEntity 帳票情報 = this.帳票情報リスト.get(index);
         KetteiKubun 決定 = 帳票情報.get決定();
         KetteiKubun 決定区分承認 = KetteiKubun.承認する;
@@ -90,7 +105,7 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
         source.list_4 = 帳票情報.get被保険者番号().getColumnValue();
         //TODO個人情報に、被保険者氏名がない
 //        source.list_5 = 帳票情報.get個人情報().get被保険者氏名();
-        source.list_6 = 帳票情報.get個人情報().get住所().get住所();
+        source.list_6 = this.個人情報.get住所().get住所();
         source.list_7 = 帳票情報.get申請日().wareki().toDateString();
         source.list_8 = 帳票情報.get決定日().wareki().toDateString();
         source.list_9 = get適用日有効期限();
@@ -117,6 +132,13 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
         if (決定.equals(決定区分承認しない)) {
             source.list_12 = RString.EMPTY;
         }
+    }
+
+    private void setLayer1Step3(ShakaiFukushiHojinKeigenHakkoIchiranReportSource source) {
+        ShakaiFukushiHojinKeigenHakkoIchiranEntity 帳票情報 = this.帳票情報リスト.get(index);
+        KetteiKubun 決定 = 帳票情報.get決定();
+        KetteiKubun 決定区分承認 = KetteiKubun.承認する;
+        KetteiKubun 決定区分承認しない = KetteiKubun.承認しない;
         boolean 居宅サービス限定 = 帳票情報.is居宅サービス限定();
         if (決定.equals(決定区分承認) && 居宅サービス限定) {
             source.list_13 = new RString("宅").substring(0, NOCOUNT_1);
@@ -139,6 +161,10 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
             source.list_13 = RString.EMPTY;
         }
 
+    }
+
+    private void setLayer1Step4(ShakaiFukushiHojinKeigenHakkoIchiranReportSource source) {
+        ShakaiFukushiHojinKeigenHakkoIchiranEntity 帳票情報 = this.帳票情報リスト.get(index);
         if (帳票情報.is認定証発行フラグ() && 帳票情報.is認定証発行済み()) {
             source.list_14 = new RString("○");
         }
@@ -153,12 +179,11 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
         } else {
             source.list_15 = RString.EMPTY;
         }
-
     }
 
     private void setAccessLogEditor(ShakaiFukushiHojinKeigenHakkoIchiranReportSource source) {
         ShakaiFukushiHojinKeigenHakkoIchiranEntity 帳票情報 = this.帳票情報リスト.get(index);
-        source.shikibetsuCode = 帳票情報.get個人情報().get識別コード().getColumnValue();
+        source.shikibetsuCode = this.個人情報.get識別コード().getColumnValue();
     }
 
     private RString get印刷日時() {

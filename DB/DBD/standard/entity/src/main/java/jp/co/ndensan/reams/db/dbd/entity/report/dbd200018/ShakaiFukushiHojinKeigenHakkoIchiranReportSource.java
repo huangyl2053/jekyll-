@@ -6,6 +6,11 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
+/**
+ * 社会福祉法人軽減確認証・決定通知書発行一覧表ReportSourceです。
+ *
+ * @reamsid_L DBD-3981-070 b_liuyang2
+ */
 public class ShakaiFukushiHojinKeigenHakkoIchiranReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

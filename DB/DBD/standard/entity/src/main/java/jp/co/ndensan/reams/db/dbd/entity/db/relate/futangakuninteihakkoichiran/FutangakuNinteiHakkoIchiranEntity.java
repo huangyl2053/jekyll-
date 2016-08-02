@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.entity.db.relate.FutangakuNinteiHakkoIchiran;
+package jp.co.ndensan.reams.db.dbd.entity.db.relate.futangakuninteihakkoichiran;
 
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -21,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class FutangakuNinteiHakkoIchiranEntity {
 
     private HihokenshaNo 被保険者番号;
-    private IKojin 個人情報;
     private FlexibleDate 申請日;
     private FlexibleDate 決定日;
     private FlexibleDate 適用日;

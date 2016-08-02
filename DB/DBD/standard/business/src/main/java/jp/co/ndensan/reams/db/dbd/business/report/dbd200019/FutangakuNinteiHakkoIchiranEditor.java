@@ -7,8 +7,9 @@ package jp.co.ndensan.reams.db.dbd.business.report.dbd200019;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.FutangakuNinteiHakkoIchiran.FutangakuNinteiHakkoIchiranEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.futangakuninteihakkoichiran.FutangakuNinteiHakkoIchiranEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200019.FutangakuNinteiHakkoIchiranReportSource;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -28,10 +29,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  */
 public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoIchiranEditor {
 
+    private static final int LISTINDEX_0 = 0;
+    private static final int LISTINDEX_1 = 1;
+    private static final int LISTINDEX_2 = 2;
+    private static final int LISTINDEX_3 = 3;
+    private static final int LISTINDEX_4 = 4;
+
     private final List<FutangakuNinteiHakkoIchiranEntity> 帳票情報リスト;
     private final Association association;
     private final IOutputOrder iOutputOrder;
     private final int index;
+    private final IKojin 個人情報;
 
     /**
      * インスタンスを生成します。
@@ -40,13 +48,15 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
      * @param association Association
      * @param iOutputOrder IOutputOrder
      * @param index int
+     * @param 個人情報 IKojin
      */
     public FutangakuNinteiHakkoIchiranEditor(List<FutangakuNinteiHakkoIchiranEntity> 帳票情報リスト,
-            Association association, IOutputOrder iOutputOrder, int index) {
+            Association association, IOutputOrder iOutputOrder, int index, IKojin 個人情報) {
         this.帳票情報リスト = 帳票情報リスト;
         this.association = association;
         this.iOutputOrder = iOutputOrder;
         this.index = index;
+        this.個人情報 = 個人情報;
     }
 
     @Override
@@ -62,25 +72,25 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
         source.hokenshaNo = this.association.get地方公共団体コード().value();
         source.hokenshaName = this.association.get市町村名();
         List<ISetSortItem> 設定項目リスト = this.iOutputOrder.get設定項目リスト();
-        source.shutsuryokujun1 = 設定項目リスト.get(0).get項目名();
-        source.shutsuryokujun2 = 設定項目リスト.get(1).get項目名();
-        source.shutsuryokujun3 = 設定項目リスト.get(2).get項目名();
-        source.shutsuryokujun4 = 設定項目リスト.get(3).get項目名();
-        source.shutsuryokujun5 = 設定項目リスト.get(4).get項目名();
-        if (設定項目リスト.get(0).is改頁項目()) {
-            source.kaipage1 = 設定項目リスト.get(0).get項目名();
+        source.shutsuryokujun1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
+        source.shutsuryokujun2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
+        source.shutsuryokujun3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
+        source.shutsuryokujun4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
+        source.shutsuryokujun5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
+        if (設定項目リスト.get(LISTINDEX_0).is改頁項目()) {
+            source.kaipage1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
         }
-        if (設定項目リスト.get(1).is改頁項目()) {
-            source.kaipage2 = 設定項目リスト.get(1).get項目名();
+        if (設定項目リスト.get(LISTINDEX_1).is改頁項目()) {
+            source.kaipage2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
         }
-        if (設定項目リスト.get(2).is改頁項目()) {
-            source.kaipage3 = 設定項目リスト.get(2).get項目名();
+        if (設定項目リスト.get(LISTINDEX_2).is改頁項目()) {
+            source.kaipage3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
         }
-        if (設定項目リスト.get(3).is改頁項目()) {
-            source.kaipage4 = 設定項目リスト.get(3).get項目名();
+        if (設定項目リスト.get(LISTINDEX_3).is改頁項目()) {
+            source.kaipage4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
         }
-        if (設定項目リスト.get(4).is改頁項目()) {
-            source.kaipage5 = 設定項目リスト.get(4).get項目名();
+        if (設定項目リスト.get(LISTINDEX_4).is改頁項目()) {
+            source.kaipage5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
         }
         source.list_1 = new RString(String.valueOf(index + 1));
         FutangakuNinteiHakkoIchiranEntity 帳票情報 = this.帳票情報リスト.get(index);
@@ -93,7 +103,7 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
         source.list_3 = 帳票情報.get被保険者番号().getColumnValue();
         //TODO個人情報に、被保険者氏名がない
 //        source.list_4 = 帳票情報.get個人情報().get被保険者氏名();
-        source.list_5 = 帳票情報.get個人情報().get住所().get住所();
+        source.list_5 = this.個人情報.get住所().get住所();
         source.list_6 = 帳票情報.get申請日().wareki().toDateString();
         source.list_7 = 帳票情報.get決定日().wareki().toDateString();
         source.list_8 = get適用日有効期限();
@@ -127,7 +137,7 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
 
     private void setAccessLogEditor(FutangakuNinteiHakkoIchiranReportSource source) {
         FutangakuNinteiHakkoIchiranEntity 帳票情報 = this.帳票情報リスト.get(index);
-        source.shikibetsuCode = 帳票情報.get個人情報().get識別コード().getColumnValue();
+        source.shikibetsuCode = this.個人情報.get識別コード().getColumnValue();
     }
 
     private RString get印刷日時() {

@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbd.service.report.dbd200019;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200019.FutangakuNinteiHakkoIchiranProerty;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200019.FutangakuNinteiHakkoIchiranReport;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.FutangakuNinteiHakkoIchiran.FutangakuNinteiHakkoIchiranEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.futangakuninteihakkoichiran.FutangakuNinteiHakkoIchiranEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200019.FutangakuNinteiHakkoIchiranReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;

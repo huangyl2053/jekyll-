@@ -172,6 +172,10 @@ public enum ReportIdDBD {
      */
     DBD200018(new ReportId("DBD200018_ShakaiFukushiHojinKeigenHakkoIchiran"), new RString("社会福祉法人軽減確認証・決定通知書発行一覧表")),
     /**
+     * 介護認定審査判定依頼一覧表の帳票ＩＤです。
+     */
+    DBD503001(new ReportId("DBD503001_ShinsaHanteiIraiIchiranhyo"), new RString("介護認定審査判定依頼一覧表")),
+    /**
      * 要介護認定通知書一括発行の帳票ＩＤです。
      */
     DBD532999(new ReportId("DBD532999_YokaigoTshuchishoIkkatsu"), new RString("要介護認定通知書一括発行"));

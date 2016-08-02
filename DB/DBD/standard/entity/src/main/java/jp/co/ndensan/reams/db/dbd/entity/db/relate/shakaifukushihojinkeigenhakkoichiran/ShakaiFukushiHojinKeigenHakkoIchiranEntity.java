@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.entity.db.relate.ShakaiFukushiHojinKeigenHakkoIchiran;
+package jp.co.ndensan.reams.db.dbd.entity.db.relate.shakaifukushihojinkeigenhakkoichiran;
 
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shakaifukushihojinkeigen.GemmenKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -23,7 +22,6 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEntity {
 
     private RString 確認番号;
     private HihokenshaNo 被保険者番号;
-    private IKojin 個人情報;
     private FlexibleDate 申請日;
     private FlexibleDate 決定日;
     private FlexibleDate 適用日;
