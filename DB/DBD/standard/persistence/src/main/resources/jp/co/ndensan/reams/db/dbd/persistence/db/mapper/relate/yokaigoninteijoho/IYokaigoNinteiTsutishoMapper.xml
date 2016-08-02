@@ -22,6 +22,7 @@
     </resultMap>
     
     <select id="get対象者情報" resultMap="ResultMap_TaishoshaEntity" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.yokaigoninteijoho.YokaigoNinteiTsutishoMybatisParameter">
+        <!--
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.allColumns_DbT4101NinteiShinseiJoho"/>
         ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho"/>
@@ -72,9 +73,11 @@
         </if>
         ORDER BY "DbT4101NinteiShinseiJoho"."hihokenshaNo"
         LIMIT #{最大表示件数}
+        -->
      </select>
      
      <select id="get認定結果通知書情報" resultMap="ResultMap_NinteiKekkaTsutishoEntity" fetchSize="500">
+         <!--
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho"/>
         ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4102NinteiKekkaJohoMapper.allColumns_DbT4102NinteiKekkaJoho"/>
@@ -91,10 +94,12 @@
         ORDER BY #{出力順}
         
         LIMIT 1
+        -->
      </select>
      
      
      <select id="get受給者台帳情報" resultMap="ResultMap_JukyushaDaichoEntity" fetchSize="500">
+         <!--
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho"/>
         FROM
@@ -118,19 +123,21 @@
         ORDER BY #{出力順}
         
         LIMIT #{最大表示件数}
+        -->
      </select>
      
      
      <resultMap id="ResultMap_IkkatsuHakkoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiTsutishoIkkatsuHakkoEntity" autoMapping="true">
-        <result property="対象開始年月日" column="taishoKaishiYMD" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
-        <result property="対象終了年月日" column="taishoShuryoYMD" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
-        <result property="対象開始日時" column="taishoKaishiTimestamp" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
-        <result property="対象終了日時" column="taishoShuryoTimestamp" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"/>
-        <result property="年度" column="nendo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
-        <result property="年度内連番" column="nendoNaiRenban" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="対象開始年月日" column="taishoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="対象終了年月日" column="taishoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="対象開始日時" column="taishoKaishiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="対象終了日時" column="taishoShuryoTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="年度" column="nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="年度内連番" column="nendoNaiRenban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
      
      <select id="get一括発行データ" resultMap="ResultMap_IkkatsuHakkoEntity" fetchSize="500">
+         <!--
         SELECT
         "DbT7022ShoriDateKanri"."taishoKaishiYMD" as "taishoKaishiYMD"
         ,"DbT7022ShoriDateKanri"."taishoShuryoYMD" as "taishoShuryoYMD"
@@ -172,6 +179,7 @@
         AND "DbT7022ShoriDateKanri"."shoriEdaban" = A."shoriEdaban"
         AND "DbT7022ShoriDateKanri"."nendo" = A."nendo"
         AND "DbT7022ShoriDateKanri"."nendoNaiRenban" = A."nendoNaiRenban"
+        -->
      </select>
      
 </mapper>
