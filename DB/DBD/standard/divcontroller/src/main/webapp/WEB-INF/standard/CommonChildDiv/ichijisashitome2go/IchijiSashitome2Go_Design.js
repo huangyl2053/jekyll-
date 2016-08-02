@@ -4,6 +4,13 @@ var DBD;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_BtnKakutei = function () {
+                return "onClick_BtnKakutei";
+            };
+
+            Events.onClick_BtnTorikeshi = function () {
+                return "onClick_BtnTorikeshi";
+            };
             return Events;
         })();
         IchijiSashitome2Go.Events = Events;
