@@ -30,12 +30,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijiko
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.io.Path;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
@@ -1636,7 +1630,7 @@ public class IchijihanteikekkahyoItemSetteiTwoA3 {
                         break;
                 }
             }
-            setサービス(項目, 共通情報);
+//            setサービス(項目, 共通情報);
         } else if (介護給付サービス.equals(entity.getServiceKubunCode())) {
             項目.setSabisuKubun(new RString("介護給付"));
             for (DbT5207NinteichosahyoServiceJokyoEntity dbt5207Entity : 介護給付) {
@@ -1705,10 +1699,10 @@ public class IchijihanteikekkahyoItemSetteiTwoA3 {
                         break;
                 }
             }
-            setサービス(項目, 共通情報);
+//            setサービス(項目, 共通情報);
         } else {
             項目.setSabisuKubun(new RString("なし"));
-            setサービス(項目, null);
+//            setサービス(項目, null);
         }
     }
 
@@ -1969,51 +1963,30 @@ public class IchijihanteikekkahyoItemSetteiTwoA3 {
         return RString.EMPTY;
     }
 
-    private void setサービス(IchijihanteikekkahyoA3Entity 項目, ShinsakaiSiryoKyotsuEntity 共通情報) {
-        if (共通情報 == null) {
-            項目.set施設名テキスト(RString.EMPTY);
-            項目.set施設名イメージ(RString.EMPTY);
-            項目.set住所テキスト(RString.EMPTY);
-            項目.set住所イメージ(RString.EMPTY);
-            項目.set電話番号テキスト(RString.EMPTY);
-            項目.set電話番号イメージ(RString.EMPTY);
-        } else {
-            if (!RString.isNullOrEmpty(共通情報.getRiyoShisetsuShimei())) {
-                項目.set施設名テキスト(共通情報.getRiyoShisetsuShimei());
-            } else {
-                項目.set施設名イメージ(共有ファイルを引き出す(共通情報.getImageSharedFileId(), 施設名ファイル名));
-            }
-            if (!RString.isNullOrEmpty(共通情報.getRiyoShisetsuJusho())) {
-                項目.set住所テキスト(共通情報.getRiyoShisetsuJusho());
-            } else {
-                項目.set住所イメージ(共有ファイルを引き出す(共通情報.getImageSharedFileId(), 住所ファイル名));
-            }
-            if (!RString.isNullOrEmpty(共通情報.getRiyoShisetsuTelNo())) {
-                項目.set電話番号テキスト(共通情報.getRiyoShisetsuTelNo());
-            } else {
-                項目.set電話番号イメージ(共有ファイルを引き出す(共通情報.getImageSharedFileId(), 電話ファイル名));
-            }
-        }
-    }
-
-    private RString 共有ファイルを引き出す(RDateTime イメージID, RString イメージID01) {
-        RString imagePath = RString.EMPTY;
-        if (イメージID != null) {
-            imagePath = getFilePath(イメージID, イメージID01);
-        }
-        return imagePath;
-    }
-
-    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
-        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
-        ReadOnlySharedFileEntryDescriptor descriptor
-                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
-                        sharedFileId);
-        try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
-        } catch (Exception e) {
-            return RString.EMPTY;
-        }
-        return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
-    }
+//    private void setサービス(IchijihanteikekkahyoA3Entity 項目, ShinsakaiSiryoKyotsuEntity 共通情報) {
+//        if (共通情報 == null) {
+//            項目.set施設名テキスト(RString.EMPTY);
+//            項目.set施設名イメージ(RString.EMPTY);
+//            項目.set住所テキスト(RString.EMPTY);
+//            項目.set住所イメージ(RString.EMPTY);
+//            項目.set電話番号テキスト(RString.EMPTY);
+//            項目.set電話番号イメージ(RString.EMPTY);
+//        } else {
+//            if (!RString.isNullOrEmpty(共通情報.getRiyoShisetsuShimei())) {
+//                項目.set施設名テキスト(共通情報.getRiyoShisetsuShimei());
+//            } else {
+//                項目.set施設名イメージ(共有ファイルを引き出す(共通情報.getImageSharedFileId(), 施設名ファイル名));
+//            }
+//            if (!RString.isNullOrEmpty(共通情報.getRiyoShisetsuJusho())) {
+//                項目.set住所テキスト(共通情報.getRiyoShisetsuJusho());
+//            } else {
+//                項目.set住所イメージ(共有ファイルを引き出す(共通情報.getImageSharedFileId(), 住所ファイル名));
+//            }
+//            if (!RString.isNullOrEmpty(共通情報.getRiyoShisetsuTelNo())) {
+//                項目.set電話番号テキスト(共通情報.getRiyoShisetsuTelNo());
+//            } else {
+//                項目.set電話番号イメージ(共有ファイルを引き出す(共通情報.getImageSharedFileId(), 電話ファイル名));
+//            }
+//        }
+//    }
 }
