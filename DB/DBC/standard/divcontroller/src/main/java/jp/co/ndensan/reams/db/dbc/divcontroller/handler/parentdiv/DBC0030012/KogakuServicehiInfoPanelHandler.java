@@ -28,11 +28,9 @@ public class KogakuServicehiInfoPanelHandler {
 
     private final KogakuServicehiInfoPanelDiv div;
     private static final int INT_ゼロ = 0;
-    private static final RString 無 = new RString("無し");
-    private static final RString 被保険者番号R = new RString("被保険者番号");
-    private static final RString 個人番号_利用有無 = new RString("個人番号 利用有無");
-    private static final RString 法人番号_利用有無 = new RString("法人番号 利用有無");
-    private static final RString 照会モード = new RString("照会");
+    private static final RString CODE_ミ = new RString("0");
+    private static final RString 被保番号 = new RString("被保険者番号");
+    private static final RString 照会モード = new RString("照会モード");
 
     /**
      * 画面設計_DBCMN11004_高額介護サービス費照会のコンストラクタです。
@@ -62,9 +60,7 @@ public class KogakuServicehiInfoPanelHandler {
     }
 
     private PersonalData toPersonalData(ShikibetsuCode 識別コード, RString 被保険者番号) {
-        ExpandedInformation expandedInfo1 = new ExpandedInformation(new Code("0001"), 個人番号_利用有無, 無);
-        ExpandedInformation expandedInfo2 = new ExpandedInformation(new Code("0002"), 法人番号_利用有無, 無);
-        ExpandedInformation expandedInfo3 = new ExpandedInformation(new Code("0003"), 被保険者番号R, 被保険者番号);
-        return PersonalData.of(識別コード, expandedInfo1, expandedInfo2, expandedInfo3);
+        ExpandedInformation expandedInfo3 = new ExpandedInformation(new Code(CODE_ミ), 被保番号, 被保険者番号);
+        return PersonalData.of(識別コード, expandedInfo3);
     }
 }

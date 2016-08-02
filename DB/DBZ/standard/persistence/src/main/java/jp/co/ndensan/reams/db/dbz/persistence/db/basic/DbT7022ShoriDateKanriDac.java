@@ -1879,4 +1879,68 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(shoriName, ShoriName.特徴結果情報取込.get名称()))).//Error  更正対象給付実績一覧
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
+
+    /**
+     * 処理済の有効期間終了月と前回処理日の取得
+     *
+     * @param 市町村コード
+     * @return
+     * @throws NullPointerException
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select前回処理日(LasdecCode 市町村コード) throws
+            NullPointerException {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBD介護受給),
+                                eq(shichosonCode, 市町村コード),
+                                eq(shoriName, ShoriName.更新申請者管理.get名称()),
+                                eq(shoriEdaban, 処理枝番))).order(by(nendo, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタから直近の年次負担割合判定処理のデータを取得する。
+     *
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select直近の年次負担割合判定() throws NullPointerException {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBC介護給付),
+                                eq(shoriName, ShoriName.年次負担割合判定.get名称()),
+                                not(isNULL(kijunTimestamp)))
+                ).order(by(DbT7022ShoriDateKanri.nendo, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+
+    }
+
+    /**
+     * 当初発行チェックの判定処理のデータを取得する。
+     *
+     * @param 年度 FlexibleYear
+     * @param 処理枝番 RString
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select当初発行チェック(FlexibleYear 年度, RString 処理枝番) throws NullPointerException {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBC介護給付),
+                                eq(shoriName, ShoriName.年次負担割合判定.get名称()),
+                                eq(shoriEdaban, 処理枝番),
+                                eq(nendo, 年度))
+                ).order(by(DbT7022ShoriDateKanri.nendo, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+
+    }
 }

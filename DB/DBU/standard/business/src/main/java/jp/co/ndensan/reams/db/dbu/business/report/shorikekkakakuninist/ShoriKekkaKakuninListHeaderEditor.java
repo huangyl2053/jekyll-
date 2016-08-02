@@ -44,6 +44,7 @@ public class ShoriKekkaKakuninListHeaderEditor implements IShoriKekkaKakuninList
         source.keyKomoku2 = headItem.getKeyKomoku2();
         source.keyKomoku3 = headItem.getKeyKomoku3();
         source.keyKomoku4 = headItem.getKeyKomoku4();
+        source.keyKomoku5 = headItem.getKeyKomoku5();
         return source;
     }
 

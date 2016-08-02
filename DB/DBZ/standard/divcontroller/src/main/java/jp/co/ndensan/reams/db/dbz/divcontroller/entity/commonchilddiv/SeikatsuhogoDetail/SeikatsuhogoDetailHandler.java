@@ -191,6 +191,7 @@ public class SeikatsuhogoDetailHandler {
     public void onbtn_Cancel() {
         div.getTxtTeishiKaishiYMD().clearValue();
         div.getTxtTeishiShuryoYMD().clearValue();
+        div.getTeishiKikanInput().setDisabled(true);
     }
 
     /**

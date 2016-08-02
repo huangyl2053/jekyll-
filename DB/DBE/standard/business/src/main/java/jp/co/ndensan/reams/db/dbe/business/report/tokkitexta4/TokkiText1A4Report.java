@@ -21,8 +21,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class TokkiText1A4Report extends Report<TokkiText1A4ReportSource> {
 
-    private final TokkiText1A4Entity date;
-    private static final int ZERO = 0;
+    private final TokkiText1A4Entity data;
     private static final int MAXCOUNT = 30;
 
     /**
@@ -31,14 +30,14 @@ public class TokkiText1A4Report extends Report<TokkiText1A4ReportSource> {
      * @param date 申請に関する帳票発行のdata
      */
     public TokkiText1A4Report(TokkiText1A4Entity date) {
-        this.date = date;
+        this.data = date;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<TokkiText1A4ReportSource> reportSourceWriter) {
         List<RString> bodyList = getBodyList();
-        for (int i = ZERO; i < MAXCOUNT; i++) {
-            ITokkiText1A4Editor editor = new TokkiText1A4Editor(date, bodyList, i);
+        for (int i = 0; i < MAXCOUNT; i++) {
+            ITokkiText1A4Editor editor = new TokkiText1A4Editor(data, bodyList, i);
             ITokkiText1A4Builder builder = new TokkiText1A4Builder(editor);
             reportSourceWriter.writeLine(builder);
         }
@@ -46,15 +45,8 @@ public class TokkiText1A4Report extends Report<TokkiText1A4ReportSource> {
 
     private List<RString> getBodyList() {
         List<RString> bodyList = new ArrayList<>();
-        if (!date.get短冊イメージ情報リスト().isEmpty()) {
-            for (TokkiA4Entity entity : date.get短冊イメージ情報リスト()) {
-                bodyList.add(entity.get事項番号());
-                bodyList.add(entity.get項目名称());
-            }
-        }
-
-        if (!date.get短冊テキスト情報リスト().isEmpty()) {
-            for (TokkiA4Entity entity : date.get短冊テキスト情報リスト()) {
+        if (!data.get短冊情報リスト().isEmpty()) {
+            for (TokkiA4Entity entity : data.get短冊情報リスト()) {
                 bodyList.add(entity.get事項番号());
                 bodyList.add(entity.get項目名称());
             }

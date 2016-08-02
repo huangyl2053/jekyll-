@@ -34,6 +34,7 @@ public class HanyoRisutoKokiKoreishaBatchParameter extends BatchParameterBase {
     private static final String RENBANFUKA = "renbanfuka";
     private static final String HITSUKESURASYUHENSYU = "hitsukesurasyuhensyu";
     private static final String ATENACYUSYUTSUJYOKEN = "atenacyusyutsujyoken";
+    private static final String CYOHYOID = "cyohyoid";
     private static final String SYUTSURYOKUJUN = "syutsuryokujun";
     private static final String SYUTSURYOKUKOMOKU = "syutsuryokukomoku";
 
@@ -57,6 +58,8 @@ public class HanyoRisutoKokiKoreishaBatchParameter extends BatchParameterBase {
     private boolean isCsvrenbanfuka;
     @BatchParameter(key = HITSUKESURASYUHENSYU, name = "日付スラッシュ付加")
     private boolean isCsvhitsukesurasyuhensyu;
+    @BatchParameter(key = CYOHYOID, name = "帳票ID")
+    private RString cyohyoid;
     @BatchParameter(key = ATENACYUSYUTSUJYOKEN, name = "宛名抽出条件")
     private AtenaSelectBatchParameter atenacyusyutsujyoken;
     @BatchParameter(key = SYUTSURYOKUJUN, name = "出力順")
@@ -82,6 +85,7 @@ public class HanyoRisutoKokiKoreishaBatchParameter extends BatchParameterBase {
                 isCsvrenbanfuka,
                 isCsvhitsukesurasyuhensyu,
                 atenacyusyutsujyoken,
+                cyohyoid,
                 syutsuryokujun,
                 syutsuryokukomoku
         );

@@ -291,4 +291,34 @@ public class ShoriDateKanriManager {
         }
         return new ShoriDateKanri(entity);
     }
+
+    /**
+     * 処理日付管理マスタから直近の年次負担割合判定処理のデータを取得する。
+     *
+     * @return ShoriDateKanri
+     */
+    @Transaction
+    public ShoriDateKanri select直近の年次負担割合判定() {
+        DbT7022ShoriDateKanriEntity entity = dac.select直近の年次負担割合判定();
+        if (entity == null) {
+            return null;
+        }
+        return new ShoriDateKanri(entity);
+    }
+
+    /**
+     * 当初発行チェックの判定処理のデータを取得する。
+     *
+     * @param 年度 FlexibleYear
+     * @param 処理枝番 RString
+     * @return ShoriDateKanris
+     */
+    @Transaction
+    public ShoriDateKanri select当初発行チェック(FlexibleYear 年度, RString 処理枝番) {
+        DbT7022ShoriDateKanriEntity entity = dac.select当初発行チェック(年度, 処理枝番);
+        if (entity == null) {
+            return null;
+        }
+        return new ShoriDateKanri(entity);
+    }
 }

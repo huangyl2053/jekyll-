@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbdbt13011;
 
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt13011.GeneralPurposeListOutputExecProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBDBT13011.GeneralPurposeListOutputParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbdbt13011.GeneralPurposeListOutputParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt13011.GeneralPurposeListOutputProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

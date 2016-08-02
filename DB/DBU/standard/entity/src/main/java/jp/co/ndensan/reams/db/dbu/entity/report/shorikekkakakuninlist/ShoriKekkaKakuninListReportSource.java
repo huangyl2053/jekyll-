@@ -5,7 +5,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
- * 特記事項Sourceクラスです。
+ * 処理確認リストのReportSourceクラスです。
  *
  * @reamsid_L DBU-5590-040 wanghuafeng
  */

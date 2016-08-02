@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.controller.commonchilddiv.gemmen
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmenshokai.GemmenShokai.GemmenShokaiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1050001.DBD1050001TransitionEventName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1050001.HyojunFutanGemmenDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1050001.dgShinseiIchiran_Row;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1050001.HyojunFutangakuGemmenSinseiHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -70,7 +71,7 @@ public class HyojunFutanGemmen {
             div.getShinseiList().getDgShinseiIchiran().setDataSource(getHandler().setDgShinseiIchiran_Row(標準負担額減免情報データ));
             ViewStateHolder.put(ViewStateKeys.申請一覧情報, new ArrayList<>(標準負担額減免情報データ));
         }
-
+        getHandler().onload(div);
         PersonalData personalData = PersonalData.of(識別コード, new ExpandedInformation(CODE_0003, NAME_被保険者番号, 被保険者番号.getColumnValue()));
         AccessLogger.log(AccessLogType.照会, personalData);
         return ResponseData.of(div).respond();
@@ -108,7 +109,54 @@ public class HyojunFutanGemmen {
      * @param div {@link HyojunFutanGemmenDiv 標準負担額減免申請画面Div}
      * @return 標準負担額減免申請画面Divを持つResponseData
      */
-    public ResponseData<HyojunFutanGemmenDiv> onClick_btn申請情報詳細(HyojunFutanGemmenDiv div) {
+    public ResponseData<HyojunFutanGemmenDiv> onClick_btnSelectJoho(HyojunFutanGemmenDiv div) {
+
+        dgShinseiIchiran_Row row = div.getShinseiList().getDgShinseiIchiran().getActiveRow();
+        List<HyojunFutangakuGemmen> dbDatalist = ViewStateHolder.get(ViewStateKeys.申請一覧情報, ArrayList.class);
+        HyojunFutangakuGemmen selectedRowJoho = getHandler().get該当Joho(row, dbDatalist);
+
+        div.getShinseiDetail().getTxtShinseibi().setValue(selectedRowJoho.get申請年月日());
+
+        div.getShinseiDetail().getTxtKetteibi().setValue(selectedRowJoho.get決定年月日());
+        div.getShinseiDetail().getTxtTekiyobi().setValue(selectedRowJoho.get適用開始年月日());
+        div.getShinseiDetail().getTxtYukoKigen().setValue(selectedRowJoho.get適用終了年月日());
+        div.getShinseiDetail().getTxtHyojunFutangaku().setValue(selectedRowJoho.get減額後金額());
+        if (selectedRowJoho.get非承認理由() == null) {
+            div.getShinseiDetail().getTxtShoninShinaiRiyu().setValue(RString.EMPTY);
+        } else {
+            div.getShinseiDetail().getTxtShoninShinaiRiyu().setValue(selectedRowJoho.get非承認理由());
+        }
+
+        if (selectedRowJoho.get決定区分().equals(new RString("0"))) {
+            div.getShinseiDetail().getRadKetteiKubun().setSelectedKey(new RString("key0"));
+        } else {
+            div.getShinseiDetail().getRadKetteiKubun().setSelectedKey(new RString("key1"));
+        }
+
+        if (selectedRowJoho.get申請事由().equals(new RString("世帯非課税８０万以下"))) {
+            div.getShinseiDetail().getDdlShinseiRiyu().setSelectedKey(new RString("key0"));
+        } else if (selectedRowJoho.get申請事由().equals(new RString("世帯非課税８０万超"))) {
+            div.getShinseiDetail().getDdlShinseiRiyu().setSelectedKey(new RString("key1"));
+        } else if (selectedRowJoho.get申請事由().equals(new RString("生保"))) {
+            div.getShinseiDetail().getDdlShinseiRiyu().setSelectedKey(new RString("key2"));
+        } else if (selectedRowJoho.get申請事由().equals(new RString("世帯非課税"))) {
+            div.getShinseiDetail().getDdlShinseiRiyu().setSelectedKey(new RString("key3"));
+        } else if (selectedRowJoho.get申請事由().equals(new RString("老齢"))) {
+            div.getShinseiDetail().getDdlShinseiRiyu().setSelectedKey(new RString("key4"));
+        } else if (selectedRowJoho.get申請事由().equals(new RString("特例減額措置"))) {
+            div.getShinseiDetail().getDdlShinseiRiyu().setSelectedKey(new RString("key5"));
+        } else {
+            div.getShinseiDetail().getDdlShinseiRiyu().setSelectedKey(new RString("key6"));
+        }
+
+        if (selectedRowJoho.get減額区分().equals(new RString("市町"))) {
+            div.getShinseiDetail().getDdlGengakuKubun().setSelectedKey(new RString("key0"));
+        } else if (selectedRowJoho.get減額区分().equals(new RString("老齢"))) {
+            div.getShinseiDetail().getDdlGengakuKubun().setSelectedKey(new RString("key1"));
+        } else {
+            div.getShinseiDetail().getDdlGengakuKubun().setSelectedKey(new RString("key2"));
+        }
+
         div.getShinseiDetail().getTxtShinseibi().setDisabled(true);
         div.getShinseiDetail().getDdlShinseiRiyu().setDisabled(true);
         div.getShinseiDetail().getRadKetteiKubun().setDisabled(true);
@@ -118,7 +166,7 @@ public class HyojunFutanGemmen {
         div.getShinseiDetail().getTxtHyojunFutangaku().setDisabled(true);
         div.getShinseiDetail().getTxtShoninShinaiRiyu().setDisabled(true);
         div.getShinseiDetail().getDdlGengakuKubun().setDisabled(true);
-        div.getShinseiList().setIsOpen(false);
+
         return ResponseData.of(div).respond();
     }
 

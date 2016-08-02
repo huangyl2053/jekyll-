@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNy
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -27,7 +28,9 @@ public class ShisetsuNyutaishoRirekiKanri {
      * @return ResponseData<ShisetsuNyutaishoRirekiKanriDiv>
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onLoad(ShisetsuNyutaishoRirekiKanriDiv requestDiv) {
-        requestDiv.set表示モード(requestDiv.getSyokikaMode());
+        if (!RString.isNullOrEmpty(requestDiv.getSyokikaMode())) {
+            requestDiv.set表示モード(requestDiv.getSyokikaMode());
+        }
         getHandler(requestDiv).initialize(new ShikibetsuCode(requestDiv.getShikibetsuCode()));
         return ResponseData.of(requestDiv).respond();
     }

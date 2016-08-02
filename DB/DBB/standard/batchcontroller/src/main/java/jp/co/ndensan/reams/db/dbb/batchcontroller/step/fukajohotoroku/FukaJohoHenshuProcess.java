@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
@@ -194,9 +193,9 @@ public class FukaJohoHenshuProcess extends BatchProcessBase<DbT2002FukaJohoTempT
 
     private void saveTemp(DbT2002FukaJohoTempTableEntity 賦課情報, IShunoKamoku 科目, int 期別, RDate 納期限, Decimal 調定額) {
         dbT0700ShunoKanriTemp.insert(get収納管理(科目, 賦課情報, 期別));
-        dbT0705ChoteiKyotsuTemp.insert(get調定共通(賦課情報.getChoteiNendo(), 賦課情報.getChoteiNichiji(), 納期限, 調定額));
-        収納ID++;
-        調定ID++;
+        dbT0705ChoteiKyotsuTemp.insert(get調定共通(賦課情報, 納期限, 調定額));
+        収納ID = 収納ID + 1;
+        調定ID = 調定ID + 1;
     }
 
     private UrT0700ShunoKanriEntity get収納管理(IShunoKamoku 科目, DbT2002FukaJohoTempTableEntity 賦課情報, int 期別) {
@@ -221,18 +220,21 @@ public class FukaJohoHenshuProcess extends BatchProcessBase<DbT2002FukaJohoTempT
         return entity;
     }
 
-    private UrT0705ChoteiKyotsuEntity get調定共通(FlexibleYear 会計年度, YMDHMS 調定日時, RDate 納期限, Decimal 調定額) {
+    private UrT0705ChoteiKyotsuEntity get調定共通(DbT2002FukaJohoTempTableEntity 賦課情報, RDate 納期限, Decimal 調定額) {
         UrT0705ChoteiKyotsuEntity entity = new UrT0705ChoteiKyotsuEntity();
         entity.setChoteiId(調定ID);
         entity.setRirekiNo(0L);
         entity.setShunoId(収納ID);
-        entity.setKaikeiNendo(new RYear(会計年度.toString()));
+        entity.setKaikeiNendo(new RYear(賦課情報.getChoteiNendo().toString()));
         if (parameter.is当初処理()) {
             entity.setChoteiJiyuCode(当初処理);
         } else {
             entity.setChoteiJiyuCode(非当初処理);
         }
-        entity.setChoteiYMD(調定日時.getDate());
+        YMDHMS 調定日時 = 賦課情報.getChoteiNichiji();
+        if (調定日時 != null && !調定日時.isEmpty()) {
+            entity.setChoteiYMD(調定日時.getDate());
+        }
         entity.setChoteigaku(調定額);
         entity.setShohizei(Decimal.ZERO);
         entity.setNokigenYMD(納期限);

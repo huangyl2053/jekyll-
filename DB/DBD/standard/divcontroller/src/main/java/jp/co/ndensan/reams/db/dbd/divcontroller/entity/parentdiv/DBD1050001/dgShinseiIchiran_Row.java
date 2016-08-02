@@ -1,19 +1,24 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1050001;
 /*
  * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
+ * コードが再生成されるときに損失したりします。
+ * Tue Aug 02 09:28:55 CST 2016 
  */
+
+
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
+
 /**
- * dgShinseiIchiran_Row のクラスファイル
- *
+ * dgShinseiIchiran_Row のクラスファイル 
+ * 
  * @author 自動生成
  */
+
 public class dgShinseiIchiran_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
