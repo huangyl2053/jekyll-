@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuHante
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuHanteiDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuIkenshoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuIkenshoDataSakuseiA4Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuItiziHanteiDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuItiziHanteiDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuShinsakaiIinJohoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuShinsakaiIinJohoDataSakuseiA4Process;
@@ -39,31 +40,20 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
     private static final String 事務局_概況特記一覧表 = "jimuGaikyouTokkiIran";
     private static final String 事務局_一次判定結果 = "jimuItiziHantei";
     // TODO 凌護行　QA回答まち、帳票仕様にRSE記載不正、2016/07/10
-//    private static final String 事務局_特記事項 = "jimuTokkiJikou";
-//    private static final String 事務局_概況特記 = "jimuTokkiIran";
+    private static final String 事務局_特記事項 = "jimuTokkiJikou";
+    private static final String 事務局_概況特記 = "jimuTokkiIran";
     private static final RString 選択 = new RString("1");
-    private static final RString 作成条件_全件 = new RString("全件");
     private static final RString 作成条件_追加分 = new RString("追加分");
 
     @Override
     protected void defineFlow() {
-//        for (int i = 0; i < getParameter().getChoyoJimuHusu().intValue(); i++) {
-//            if (選択.equals(getParameter().getChoyoJimu_tuutishoFalg())) {
-        if (作成条件_全件.equals(getParameter().getSakuseiJoken())) {
+        if (選択.equals(getParameter().getChoyoJimu_taishoushaFalg())) {
             executeStep(事務局_審査対象者一覧);
-        } else if (作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
-            executeStep(事務局_追加資料鑑);
         }
-//            }
-
         if (選択.equals(getParameter().getChoyoJimu_hanteiFalg())) {
             executeStep(事務局_予備判定一覧);
         }
-        if ((選択.equals(getParameter().getChoyoJimu_tokkiJikouFalg())
-                && 選択.equals(getParameter().getChoyoJimu_itiziHanteiFalg())
-                && 選択.equals(getParameter().getChoyoJimu_ikenshoFalg()))
-                || (選択.equals(getParameter().getChoyoJimu_tokkiJikouHanteiFalg())
-                && 選択.equals(getParameter().getChoyoJimu_ikenshoFalg()))) {
+        if (選択.equals(getParameter().getChoyoJimu_sonotaSiryoFalg())) {
             executeStep(事務局_その他資料);
         }
         if (選択.equals(getParameter().getChoyoJimu_ikenshoFalg())) {
@@ -75,15 +65,17 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
         if (選択.equals(getParameter().getChoyoJimu_itiziHanteiFalg())) {
             executeStep(事務局_一次判定結果);
         }
-            // TODO 凌護行　QA回答まち、帳票仕様にRSE記載不正、2016/07/10
+        // TODO 凌護行　QA回答まち、帳票仕様にRSE記載不正、2016/07/10
 //            if (選択.equals(getParameter().getChoyoJimu_gaikyouTokkiFalg())) {
 //                executeStep(事務局_概況特記);
 //            }
-        // TODO 凌護行　QA回答まち、帳票仕様にRSE記載不正、2016/07/10
-//            if (選択.equals(getParameter().getChoyoJimu_tokkiJikouFalg())) {
-//                executeStep(事務局_特記事項);
-//            }
+//        if (選択.equals(getParameter().getChoyoJimu_taishoushaFalg())) {
+//            executeStep(事務局_特記事項);
 //        }
+
+        if (作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
+            executeStep(事務局_追加資料鑑);
+        }
     }
 
     /**
@@ -189,8 +181,13 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
      */
     @Step(事務局_一次判定結果)
     protected IBatchFlowCommand createJimuItiziHanteiData() {
-        return loopBatch(JimuItiziHanteiDataSakuseiA4Process.class)
-                .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
+        if (選択.equals(getParameter().getShuturyokuSutairu())) {
+            return loopBatch(JimuItiziHanteiDataSakuseiA4Process.class)
+                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
+        } else {
+            return loopBatch(JimuItiziHanteiDataSakuseiA3Process.class)
+                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
+        }
     }
 //    /**
 //     * 事務局概況特記情報データの作成を行います。
@@ -205,6 +202,22 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
 //        } else {
 //            return loopBatch(JimuTokkiIranDataSakuseiA3Process.class)
 //                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
+//        }
+//    }
+
+//    /**
+//     * 事務局用介護認定審査対象者一覧データの作成を行います。
+//     *
+//     * @return バッチコマンド
+//     */
+//    @Step(事務局_特記事項)
+//    protected IBatchFlowCommand createJimuTokkiJikouData() {
+//        if (選択.equals(getParameter().getShuturyokuSutairu())) {
+//            return loopBatch(JimuTokkiJikouDataSakuseiA4Process.class)
+//                    .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
+//        } else {
+//            return loopBatch(JimuTokkiJikouDataSakuseiA3Process.class)
+//                    .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
 //        }
 //    }
 }

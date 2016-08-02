@@ -7,18 +7,12 @@ package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyousiseturiy.GaikyoChosahyouNiteichosahyouSisetuRiy02A;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyousiseturiy.GaikyoChosahyouNiteichosahyouSisetuRiy06A;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyousiseturiy.GaikyoChosahyouNiteichosahyouSisetuRiy09A;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyousiseturiy.GaikyoChosahyouNiteichosahyouSisetuRiy09B;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyousiseturiy.GaikyoChosahyouNiteichosahyouSisetuRiy99A;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA4Entity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.NitijouSeikatsu;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.TiyosaKekka;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.TyukanHyouka;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ItiziHanteiEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
@@ -57,13 +51,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuRiyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
@@ -72,7 +63,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  *
  * @reamsid_L DBE-0150-190 linghuhang
  */
-public class IchijihanteikekkahyoItemSettei {
+public class IchijihanteikekkahyoItemSetteiA3 {
 
     private static final RString 月間 = new RString("月間");
     private static final Code A_99 = new Code("99A");
@@ -85,33 +76,140 @@ public class IchijihanteikekkahyoItemSettei {
     private static final RString 印字する = new RString("1");
     private static final RString 記号 = new RString("+");
 
-    /**
-     * 事務局一次判定結果票Entityの設定。
-     *
-     * @param entity ItiziHanteiEntity
-     * @param 認定調査票_特記情報 認定調査票_特記情報
-     * @param 調査票調査項目 調査票調査項目
-     * @param 前回調査票調査項目 前回調査票調査項目
-     * @param 主治医意見書項目情報 主治医意見書項目情報
-     * @param 前主治医意見書項目情報 前主治医意見書項目情報
-     * @param サービス状況フラグ サービス状況フラグ
-     * @param 予防給付 予防給付
-     * @param 介護給付 介護給付
-     * @param 現在状況 現在状況
-     * @return 事務局一次判定結果票のEntity
-     */
-    public IchijihanteikekkahyoA4Entity set項目(ItiziHanteiEntity entity,
+//    /**
+//     * 事務局一次判定結果票Entityの設定。
+//     *
+//     * @param entity ItiziHanteiEntity
+//     * @param 認定調査票_特記情報 認定調査票_特記情報
+//     * @param 調査票調査項目 調査票調査項目
+//     * @param 前回調査票調査項目 前回調査票調査項目
+//     * @param 主治医意見書項目情報 主治医意見書項目情報
+//     * @param 前主治医意見書項目情報 前主治医意見書項目情報
+//     * @param サービス状況フラグ サービス状況フラグ
+//     * @param 予防給付 予防給付
+//     * @param 介護給付 介護給付
+//     * @param 現在状況 現在状況
+//     * @return 事務局一次判定結果票のEntity
+//     */
+//    public IchijihanteikekkahyoA4Entity set項目(ItiziHanteiEntity entity,
+//            List<DbT5205NinteichosahyoTokkijikoEntity> 認定調査票_特記情報, List<DbT5211NinteichosahyoChosaItemEntity> 調査票調査項目,
+//            List<DbT5211NinteichosahyoChosaItemEntity> 前回調査票調査項目, List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書項目情報,
+//            List<DbT5304ShujiiIkenshoIkenItemEntity> 前主治医意見書項目情報, List<DbT5207NinteichosahyoServiceJokyoEntity> 予防給付,
+//            List<DbT5207NinteichosahyoServiceJokyoEntity> 介護給付, DbT5208NinteichosahyoServiceJokyoFlagEntity サービス状況フラグ,
+//            DbT5210NinteichosahyoShisetsuRiyoEntity 現在状況) {
+//        IchijihanteikekkahyoA4Entity 項目 = new IchijihanteikekkahyoA4Entity();
+//        IchijihanteikekkahyoItemSetteiTwo settei = new IchijihanteikekkahyoItemSetteiTwo();
+//        Code 厚労省IF識別コード = entity.getKoroshoIfShikibetsuCode();
+//        コード転換(項目, entity);
+//        項目.set現在の状況(get現在の状況(厚労省IF識別コード, new RString(現在状況.getRemban())));
+//        項目.set審査順(new RString(entity.getShinsakaiOrder()));
+//        項目.set年齢(new RString(entity.getAge()));
+//        項目.set前々回要介護度(set要介護度(entity.getZzKoroshoIfShikibetsuCode(), entity.getZzNijiHanteiYokaigoJotaiKubunCode()));
+//        項目.set前々回認定有効期間(set有効期間(entity.getZzNijiHanteiNinteiYukoKikan()));
+//        項目.set前々回認定有効期間開始年月日(entity.getZzNijiHanteiNinteiYukoKaishiYMD());
+//        項目.set前々回認定有効期間終了年月日(entity.getZzNijiHanteiNinteiYukoShuryoYMD());
+//        項目.set前回要介護度(set要介護度(entity.getZKoroshoIfShikibetsuCode(), entity.getZNijiHanteiYokaigoJotaiKubunCode()));
+//        項目.set前回認定有効期間(set有効期間(entity.getZNijiHanteiNinteiYukoKikan()));
+//        項目.set前回認定有効期間開始年月日(entity.getZNijiHanteiNinteiYukoKaishiYMD());
+//        項目.set前回認定有効期間終了年月日(entity.getZNijiHanteiNinteiYukoShuryoYMD());
+//        項目.set前回認定日(entity.getZNijiHanteiYMD());
+//        項目.set前回状態像(set状態像(entity.getZYokaigoJotaizoReiCode()));
+//        項目.set審査会資料作成年月日(FlexibleDate.getNowDate());
+//        項目.set今回認定申請年月日(entity.getNinteiShinseiYMD());
+//        項目.set今回認定調査実施年月日(entity.getNinteichosaJisshiYMD());
+//        項目.set今回認定審査年月日(entity.getShinsakaiKaisaiYMD());
+//        項目.set被保険者番号(entity.getHihokenshaNo());
+//        項目.set保険者番号(entity.getShoKisaiHokenshaNo());
+//        項目.set支所名(entity.getShishoMei());
+//        項目.set市町村名(entity.getShichosonMeisho());
+//        項目.set事業者番号(entity.getNinteichosaItakusakiCode());
+//        項目.set事業者名(entity.getJigyoshaMeisho());
+//        項目.set認定調査員番号(entity.getNinteiChosainCode());
+//        項目.set認定調査員氏名(entity.getChosainShimei());
+//        項目.set医療機関番号(entity.getShujiiIryokikanCode());
+//        項目.set医療機関名称(entity.getIryoKikanMeisho());
+//        項目.set主治医番号(entity.getShujiiCode());
+//        項目.set主治医氏名(entity.getShujiiName());
+//        項目.set一次判定結果(set一次判定結果(entity.getKoroshoIfShikibetsuCode(),
+//                entity.getIchijiHanteiKekkaCode(), entity.getIchijiHanteiKekkaNinchishoKasanCode()));
+//        項目.set状態像名称(entity.getJotaizo());
+//        項目.set要介護認定等基準時間(set要介護認定等基準時間(entity.getKijunJikanShokuji(), entity.getKijunJikanHaisetsu(),
+//                entity.getKijunJikanIdo(), entity.getKijunJikanSeiketsuHoji(), entity.getKijunJikanKansetsuCare(),
+//                entity.getKijunJikanBPSDKanren(), entity.getKijunJikanKinoKunren(), entity.getKijunJikanIryoKanren(),
+//                entity.getKijunJikanNinchishoKasan(), entity.getKijunJikan()));
+//        //TODO QA回答まち、
+////        項目.set基準時間の積み上げグラフ(月間);
+//        項目.set要介護認定等基準時間_食事(new RString(entity.getKijunJikanShokuji()));
+//        項目.set要介護認定等基準時間_排泄(new RString(entity.getKijunJikanHaisetsu()));
+//        項目.set要介護認定等基準時間_移動(new RString(entity.getKijunJikanIdo()));
+//        項目.set要介護認定等基準時間_清潔保持(new RString(entity.getKijunJikanSeiketsuHoji()));
+//        項目.set要介護認定等基準時間_間接(new RString(entity.getKijunJikanKansetsuCare()));
+//        項目.set要介護認定等基準時間_BPSD関連(new RString(entity.getKijunJikanBPSDKanren()));
+//        項目.set要介護認定等基準時間_機能訓練(new RString(entity.getKijunJikanKinoKunren()));
+//        項目.set要介護認定等基準時間_医療関連(new RString(entity.getKijunJikanIryoKanren()));
+//        項目.set要介護認定等基準時間_認知症加算(new RString(entity.getKijunJikanNinchishoKasan()));
+//        項目.set警告コード(entity.getIchijiHnateiKeikokuCode());
+//        TyukanHyouka 中間評価項目 = new TyukanHyouka();
+//        中間評価項目.set第1群(new RString(entity.getChukanHyokaKomoku1gun()));
+//        中間評価項目.set第2群(new RString(entity.getChukanHyokaKomoku2gun()));
+//        中間評価項目.set第3群(new RString(entity.getChukanHyokaKomoku3gun()));
+//        中間評価項目.set第4群(new RString(entity.getChukanHyokaKomoku4gun()));
+//        中間評価項目.set第5群(new RString(entity.getChukanHyokaKomoku5gun()));
+//        List<TyukanHyouka> 中間評価リスト = new ArrayList<>();
+//        中間評価リスト.add(中間評価項目);
+//        項目.set中間評価リスト(中間評価リスト);
+//        List<NitijouSeikatsu> 日常生活自立度リスト = new ArrayList<>();
+//        NitijouSeikatsu 障害高齢者自立度 = new NitijouSeikatsu();
+//        障害高齢者自立度.set特記事項フラグ(entity.getShogaiNichijoSeikatsuJiritsudo());
+//        障害高齢者自立度.set認知症高齢者自立度(set障害高齢者自立度(entity.getShogaiNichijoSeikatsuJiritsudoCode()));
+//        NitijouSeikatsu 認知症高齢者自立度 = new NitijouSeikatsu();
+//        認知症高齢者自立度.set特記事項フラグ(entity.getNinchishoNichijoSeikatsuJiritsudo());
+//        認知症高齢者自立度.set認知症高齢者自立度(set障害高齢者自立度(entity.getNinchishoNichijoSeikatsuJiritsudoCode()));
+//        日常生活自立度リスト.add(障害高齢者自立度);
+//        日常生活自立度リスト.add(認知症高齢者自立度);
+//        項目.set日常生活自立度リスト(日常生活自立度リスト);
+//
+//        項目.set認定調査結果認知症高齢者自立度(set認知症高齢者自立度(entity.getNinchishoNichijoSeikatsuJiritsudoCode()));
+//        項目.set意見書認知症高齢者自立度(set認知症高齢者自立度(entity.getNinchishoNichijoSeikatsuJiritsudoCode()));
+//        settei.setサービスの状況(entity, 項目, 予防給付, 介護給付, サービス状況フラグ, 厚労省IF識別コード);
+//        項目.set特記リスト１(settei.get特記リスト１(厚労省IF識別コード, 認定調査票_特記情報));
+//        項目.set特記リスト２(settei.get特記リスト２(厚労省IF識別コード, 認定調査票_特記情報));
+//        項目.set特記リスト３(settei.get特記リスト３(厚労省IF識別コード, 認定調査票_特記情報));
+//        項目.set特記リスト４(settei.get特記リスト４(厚労省IF識別コード, 認定調査票_特記情報));
+//        項目.set特記リスト５(settei.get特記リスト５(厚労省IF識別コード, 認定調査票_特記情報));
+//        項目.set特記リスト６(settei.get特記リスト６(厚労省IF識別コード, 認定調査票_特記情報));
+//        項目.set特別な医療リスト１(get特別な医療リスト１(厚労省IF識別コード, 調査票調査項目, 前回調査票調査項目));
+//        項目.set特記リスト７(settei.get特記リスト７(厚労省IF識別コード, 認定調査票_特記情報));
+//        項目.set特別な医療リスト２(get特別な医療リスト２(厚労省IF識別コード, 調査票調査項目, 前回調査票調査項目));
+//        RDate 日期 = RDate.getNowDate();
+//        boolean is前回結果 = false;
+//        if (印字する.equals(DbBusinessConfig.get(ConfigNameDBE.今回基本調査項目結果の正常選択肢印刷有無, 日期, SubGyomuCode.DBE認定支援))) {
+//            is前回結果 = true;
+//        } else {
+//            if (印字する.equals(DbBusinessConfig.get(ConfigNameDBE.今回前回比較で変化有で前回正常選択肢表示印刷有無, 日期, SubGyomuCode.DBE認定支援))) {
+//                is前回結果 = true;
+//            }
+//        }
+//        項目.set第１群リスト(get第１群リスト(厚労省IF識別コード, 調査票調査項目, 前回調査票調査項目, is前回結果));
+//        項目.set第２群リスト(get第２群リスト(厚労省IF識別コード, 調査票調査項目, 前回調査票調査項目, is前回結果));
+//        項目.set第３群リスト(get第３群リスト(厚労省IF識別コード, 調査票調査項目, 前回調査票調査項目, is前回結果));
+//        項目.set第４群リスト(get第４群リスト(厚労省IF識別コード, 調査票調査項目, 前回調査票調査項目, is前回結果));
+//        項目.set第５群リスト(get第５群リスト(厚労省IF識別コード, 調査票調査項目, 前回調査票調査項目, is前回結果));
+//        項目.set主治医意見書(get主治医意見書リスト(厚労省IF識別コード, 主治医意見書項目情報, 前主治医意見書項目情報, is前回結果));
+//        return 項目;
+//    }
+    public IchijihanteikekkahyoA3Entity set項目(ItiziHanteiEntity entity,
             List<DbT5205NinteichosahyoTokkijikoEntity> 認定調査票_特記情報, List<DbT5211NinteichosahyoChosaItemEntity> 調査票調査項目,
             List<DbT5211NinteichosahyoChosaItemEntity> 前回調査票調査項目, List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書項目情報,
             List<DbT5304ShujiiIkenshoIkenItemEntity> 前主治医意見書項目情報, List<DbT5207NinteichosahyoServiceJokyoEntity> 予防給付,
             List<DbT5207NinteichosahyoServiceJokyoEntity> 介護給付, DbT5208NinteichosahyoServiceJokyoFlagEntity サービス状況フラグ,
-            DbT5210NinteichosahyoShisetsuRiyoEntity 現在状況) {
-        IchijihanteikekkahyoA4Entity 項目 = new IchijihanteikekkahyoA4Entity();
-        IchijihanteikekkahyoItemSetteiTwo settei = new IchijihanteikekkahyoItemSetteiTwo();
+            int データ件数, ShinsakaiSiryoKyotsuEntity 共通情報) {
+        IchijihanteikekkahyoA3Entity 項目 = new IchijihanteikekkahyoA3Entity();
+        IchijihanteikekkahyoItemSetteiTwoA3 settei = new IchijihanteikekkahyoItemSetteiTwoA3();
         Code 厚労省IF識別コード = entity.getKoroshoIfShikibetsuCode();
         コード転換(項目, entity);
-        項目.set現在の状況(get現在の状況(厚労省IF識別コード, new RString(現在状況.getRemban())));
-        項目.set審査順(new RString(entity.getShinsakaiOrder()));
+        項目.set審査人数(new RString(entity.getShinsakaiOrder()));
+        項目.set審査人数合計(new RString(データ件数));
         項目.set年齢(new RString(entity.getAge()));
         項目.set前々回要介護度(set要介護度(entity.getZzKoroshoIfShikibetsuCode(), entity.getZzNijiHanteiYokaigoJotaiKubunCode()));
         項目.set前々回認定有効期間(set有効期間(entity.getZzNijiHanteiNinteiYukoKikan()));
@@ -129,23 +227,27 @@ public class IchijihanteikekkahyoItemSettei {
         項目.set今回認定審査年月日(entity.getShinsakaiKaisaiYMD());
         項目.set被保険者番号(entity.getHihokenshaNo());
         項目.set保険者番号(entity.getShoKisaiHokenshaNo());
-        項目.set支所名(entity.getShishoMei());
         項目.set市町村名(entity.getShichosonMeisho());
         項目.set事業者番号(entity.getNinteichosaItakusakiCode());
         項目.set事業者名(entity.getJigyoshaMeisho());
         項目.set認定調査員番号(entity.getNinteiChosainCode());
         項目.set認定調査員氏名(entity.getChosainShimei());
+        項目.set調査日(entity.getNinteichosaJisshiYMD());
+        項目.set調査実施場所(entity.getChosaJisshiBashoMeisho());
         項目.set医療機関番号(entity.getShujiiIryokikanCode());
         項目.set医療機関名称(entity.getIryoKikanMeisho());
         項目.set主治医番号(entity.getShujiiCode());
         項目.set主治医氏名(entity.getShujiiName());
         項目.set一次判定結果(set一次判定結果(entity.getKoroshoIfShikibetsuCode(),
                 entity.getIchijiHanteiKekkaCode(), entity.getIchijiHanteiKekkaNinchishoKasanCode()));
-        項目.set状態像名称(entity.getJotaizo());
         項目.set要介護認定等基準時間(set要介護認定等基準時間(entity.getKijunJikanShokuji(), entity.getKijunJikanHaisetsu(),
                 entity.getKijunJikanIdo(), entity.getKijunJikanSeiketsuHoji(), entity.getKijunJikanKansetsuCare(),
                 entity.getKijunJikanBPSDKanren(), entity.getKijunJikanKinoKunren(), entity.getKijunJikanIryoKanren(),
                 entity.getKijunJikanNinchishoKasan(), entity.getKijunJikan()));
+        項目.set前回要介護認定等基準時間(set要介護認定等基準時間(entity.getZKijunJikanShokuji(), entity.getZKijunJikanHaisetsu(),
+                entity.getZKijunJikanIdo(), entity.getZKijunJikanSeiketsuHoji(), entity.getZKijunJikanKansetsuCare(),
+                entity.getZKijunJikanBPSDKanren(), entity.getZKijunJikanKinoKunren(), entity.getZKijunJikanIryoKanren(),
+                entity.getZKijunJikanNinchishoKasan(), entity.getZKijunJikan()));
         //TODO QA回答まち、
 //        項目.set基準時間の積み上げグラフ(月間);
         項目.set要介護認定等基準時間_食事(new RString(entity.getKijunJikanShokuji()));
@@ -158,14 +260,21 @@ public class IchijihanteikekkahyoItemSettei {
         項目.set要介護認定等基準時間_医療関連(new RString(entity.getKijunJikanIryoKanren()));
         項目.set要介護認定等基準時間_認知症加算(new RString(entity.getKijunJikanNinchishoKasan()));
         項目.set警告コード(entity.getIchijiHnateiKeikokuCode());
+        List<TyukanHyouka> 中間評価リスト = new ArrayList<>();
         TyukanHyouka 中間評価項目 = new TyukanHyouka();
         中間評価項目.set第1群(new RString(entity.getChukanHyokaKomoku1gun()));
         中間評価項目.set第2群(new RString(entity.getChukanHyokaKomoku2gun()));
         中間評価項目.set第3群(new RString(entity.getChukanHyokaKomoku3gun()));
         中間評価項目.set第4群(new RString(entity.getChukanHyokaKomoku4gun()));
         中間評価項目.set第5群(new RString(entity.getChukanHyokaKomoku5gun()));
-        List<TyukanHyouka> 中間評価リスト = new ArrayList<>();
+        TyukanHyouka 前中間評価項目 = new TyukanHyouka();
+        前中間評価項目.set第1群(new RString(entity.getZChukanHyokaKomoku1gun()));
+        前中間評価項目.set第2群(new RString(entity.getZChukanHyokaKomoku2gun()));
+        前中間評価項目.set第3群(new RString(entity.getZChukanHyokaKomoku3gun()));
+        前中間評価項目.set第4群(new RString(entity.getZChukanHyokaKomoku4gun()));
+        前中間評価項目.set第5群(new RString(entity.getZChukanHyokaKomoku5gun()));
         中間評価リスト.add(中間評価項目);
+        中間評価リスト.add(前中間評価項目);
         項目.set中間評価リスト(中間評価リスト);
         List<NitijouSeikatsu> 日常生活自立度リスト = new ArrayList<>();
         NitijouSeikatsu 障害高齢者自立度 = new NitijouSeikatsu();
@@ -177,34 +286,10 @@ public class IchijihanteikekkahyoItemSettei {
         日常生活自立度リスト.add(障害高齢者自立度);
         日常生活自立度リスト.add(認知症高齢者自立度);
         項目.set日常生活自立度リスト(日常生活自立度リスト);
-
         項目.set認定調査結果認知症高齢者自立度(set認知症高齢者自立度(entity.getNinchishoNichijoSeikatsuJiritsudoCode()));
         項目.set意見書認知症高齢者自立度(set認知症高齢者自立度(entity.getNinchishoNichijoSeikatsuJiritsudoCode()));
-        settei.setサービスの状況(entity, 項目, 予防給付, 介護給付, サービス状況フラグ, 厚労省IF識別コード);
-        項目.set特記リスト１(settei.get特記リスト１(厚労省IF識別コード, 認定調査票_特記情報));
-        項目.set特記リスト２(settei.get特記リスト２(厚労省IF識別コード, 認定調査票_特記情報));
-        項目.set特記リスト３(settei.get特記リスト３(厚労省IF識別コード, 認定調査票_特記情報));
-        項目.set特記リスト４(settei.get特記リスト４(厚労省IF識別コード, 認定調査票_特記情報));
-        項目.set特記リスト５(settei.get特記リスト５(厚労省IF識別コード, 認定調査票_特記情報));
-        項目.set特記リスト６(settei.get特記リスト６(厚労省IF識別コード, 認定調査票_特記情報));
-        項目.set特別な医療リスト１(get特別な医療リスト１(厚労省IF識別コード, 調査票調査項目, 前回調査票調査項目));
-        項目.set特記リスト７(settei.get特記リスト７(厚労省IF識別コード, 認定調査票_特記情報));
-        項目.set特別な医療リスト２(get特別な医療リスト２(厚労省IF識別コード, 調査票調査項目, 前回調査票調査項目));
-        RDate 日期 = RDate.getNowDate();
-        boolean is前回結果 = false;
-        if (印字する.equals(DbBusinessConfig.get(ConfigNameDBE.今回基本調査項目結果の正常選択肢印刷有無, 日期, SubGyomuCode.DBE認定支援))) {
-            is前回結果 = true;
-        } else {
-            if (印字する.equals(DbBusinessConfig.get(ConfigNameDBE.今回前回比較で変化有で前回正常選択肢表示印刷有無, 日期, SubGyomuCode.DBE認定支援))) {
-                is前回結果 = true;
-            }
-        }
-        項目.set第１群リスト(get第１群リスト(厚労省IF識別コード, 調査票調査項目, 前回調査票調査項目, is前回結果));
-        項目.set第２群リスト(get第２群リスト(厚労省IF識別コード, 調査票調査項目, 前回調査票調査項目, is前回結果));
-        項目.set第３群リスト(get第３群リスト(厚労省IF識別コード, 調査票調査項目, 前回調査票調査項目, is前回結果));
-        項目.set第４群リスト(get第４群リスト(厚労省IF識別コード, 調査票調査項目, 前回調査票調査項目, is前回結果));
-        項目.set第５群リスト(get第５群リスト(厚労省IF識別コード, 調査票調査項目, 前回調査票調査項目, is前回結果));
-        項目.set主治医意見書(get主治医意見書リスト(厚労省IF識別コード, 主治医意見書項目情報, 前主治医意見書項目情報, is前回結果));
+        settei.setサービスの状況(entity, 項目, 予防給付, 介護給付, サービス状況フラグ, 厚労省IF識別コード, 共通情報);
+
         return 項目;
     }
 
@@ -1836,7 +1921,7 @@ public class IchijihanteikekkahyoItemSettei {
         return RString.EMPTY;
     }
 
-    private void コード転換(IchijihanteikekkahyoA4Entity 項目, ItiziHanteiEntity entity) {
+    private void コード転換(IchijihanteikekkahyoA3Entity 項目, ItiziHanteiEntity entity) {
         if (RString.isNullOrEmpty(entity.getHihokenshaKubunCode())) {
             項目.set被保険者区分(RString.EMPTY);
         } else {
@@ -1887,20 +1972,5 @@ public class IchijihanteikekkahyoItemSettei {
         } else {
             項目.set給付区分(SuiteiKyufuKubunCode.toValue(entity.getSuiteiKyufuKubunCode().getColumnValue()).get名称());
         }
-    }
-
-    private RString get現在の状況(Code 厚労省IF識別コード, RString 連番) {
-        if (A_99.equals(厚労省IF識別コード)) {
-            return GaikyoChosahyouNiteichosahyouSisetuRiy99A.toValue(連番).get名称();
-        } else if (A_06.equals(厚労省IF識別コード)) {
-            return GaikyoChosahyouNiteichosahyouSisetuRiy06A.toValue(連番).get名称();
-        } else if (A_02.equals(厚労省IF識別コード)) {
-            return GaikyoChosahyouNiteichosahyouSisetuRiy02A.toValue(連番).get名称();
-        } else if (A_09.equals(厚労省IF識別コード)) {
-            return GaikyoChosahyouNiteichosahyouSisetuRiy09A.toValue(連番).get名称();
-        } else if (B_09.equals(厚労省IF識別コード)) {
-            return GaikyoChosahyouNiteichosahyouSisetuRiy09B.toValue(連番).get名称();
-        }
-        return RString.EMPTY;
     }
 }
