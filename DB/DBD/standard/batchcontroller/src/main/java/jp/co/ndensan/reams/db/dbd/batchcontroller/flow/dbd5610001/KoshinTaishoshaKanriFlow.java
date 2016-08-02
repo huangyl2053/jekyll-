@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd5610001;
 
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd5610001.KoshinTaishoshaKanriSelectTableProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd5610001.KoshinTaishoshaKanriParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd5610001.KoshinTaishoshaKanriProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -34,5 +35,18 @@ public class KoshinTaishoshaKanriFlow extends BatchFlowBase<KoshinTaishoshaKanri
     protected IBatchFlowCommand selectTable() {
         return loopBatch(KoshinTaishoshaKanriSelectTableProcess.class)
                 .arguments(getParameter().toKoshinTaishoshaKanriProcessParameter()).define();
+    }
+
+    private KoshinTaishoshaKanriProcessParameter createProcessParameter() {
+        KoshinTaishoshaKanriParameter parameter = getParameter();
+        KoshinTaishoshaKanriProcessParameter processParameter = parameter.toKoshinTaishoshaKanriProcessParameter();
+        processParameter.set対象月(parameter.get対象月());
+        processParameter.set市町村コード(parameter.get市町村コード());
+        processParameter.set年度(parameter.get年度());
+        processParameter.set年度内連番(parameter.get年度内連番());
+        processParameter.set有効期間終了日From(parameter.get有効期間終了日From());
+        processParameter.set有効期間終了日To(parameter.get有効期間終了日To());
+        processParameter.set条件指定(parameter.get条件指定());
+        return processParameter;
     }
 }
