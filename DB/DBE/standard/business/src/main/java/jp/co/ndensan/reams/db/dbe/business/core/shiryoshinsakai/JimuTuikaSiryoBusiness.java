@@ -474,23 +474,6 @@ public class JimuTuikaSiryoBusiness {
         return RString.EMPTY;
     }
 
-    private RString get開催年月日() {
-        RStringBuilder 審査会開催年月日 = new RStringBuilder();
-        審査会開催年月日.append(パターン33(paramter.getShinsakaiKaisaiYoteiYMD()));
-        審査会開催年月日.append(paramter.getShinsakaiKaishiYoteiTime().substring(0, 2));
-        審査会開催年月日.append(new RString("時"));
-        審査会開催年月日.append(paramter.getShinsakaiKaishiYoteiTime().substring(2));
-        審査会開催年月日.append(new RString("分"));
-        return 審査会開催年月日.toRString();
-    }
-
-    private RString パターン33(FlexibleDate 年月日) {
-        if (年月日 != null && !年月日.isEmpty()) {
-            return 年月日.seireki().separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
-        }
-        return RString.EMPTY;
-    }
-
     private RString パターン13(FlexibleDate 年月日) {
         if (年月日 != null && !年月日.isEmpty()) {
             return 年月日.wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.GAN_NEN).
