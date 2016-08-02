@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShiharaiHenk
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShoriKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.TainoHanteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.TaishoHanteiKubun;
-import jp.co.ndensan.reams.db.dbd.service.core.shiharaihohohenko.ShiharaiHohoHenkoManager;
 import jp.co.ndensan.reams.db.dbd.service.core.shokanbaraika1go.ShokanBaraiKa1GoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -77,22 +76,20 @@ public class ShokanBaraiKa1GoHandler {
      */
     public void onLoad() {
         ShoriKubun 押下ボタン区分 = ShoriKubun.toValue(div.getKey_Button());
-        List<ShiharaiHohoHenko> 支払方法変更管理業務概念List = DataPassingConverter.deserialize(div.getKey_ShiharaiHohoHenkoKanri(), List.class);
+        ShiharaiHohoHenko shiharaiHohoHenko = DataPassingConverter.deserialize(div.getKey_ShiharaiHohoHenkoKanri(), ShiharaiHohoHenko.class);
         List<ShiharaiHohoHenko> 支払方法データ = new ArrayList();
         ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, null);
-        if (支払方法変更管理業務概念List != null) {
-            for (ShiharaiHohoHenko shiharaiHohoHenko : 支払方法変更管理業務概念List) {
-                if (shiharaiHohoHenko.get被保険者番号().value().equals(div.getKey_HihokenshaNo())
-                        && shiharaiHohoHenko.get管理区分().equals(ShiharaiHenkoKanriKubun._１号償還払い化.getコード())
-                        && shiharaiHohoHenko.get登録区分().equals(get登録区分())) {
-                    if ((ShoriKubun._1号予告者登録.equals(押下ボタン区分) && shiharaiHohoHenko.get予告登録年月日() == null)
-                            || (ShoriKubun.償還払い化登録.equals(押下ボタン区分) && shiharaiHohoHenko.get償還払化決定年月日() == null)) {
-                        div.setShinkiKubun(新規登録);
-                    } else if (ShoriKubun._1号予告者登録.equals(押下ボタン区分) || ShoriKubun.償還払い化登録.equals(押下ボタン区分)) {
-                        div.setShinkiKubun(新規区分_空);
-                    }
-                    支払方法データ.add(shiharaiHohoHenko);
+        if (shiharaiHohoHenko != null) {
+            if (shiharaiHohoHenko.get被保険者番号().value().equals(div.getKey_HihokenshaNo())
+                    && shiharaiHohoHenko.get管理区分().equals(ShiharaiHenkoKanriKubun._１号償還払い化.getコード())
+                    && shiharaiHohoHenko.get登録区分().equals(get登録区分())) {
+                if ((ShoriKubun._1号予告者登録.equals(押下ボタン区分) && shiharaiHohoHenko.get予告登録年月日() == null)
+                        || (ShoriKubun.償還払い化登録.equals(押下ボタン区分) && shiharaiHohoHenko.get償還払化決定年月日() == null)) {
+                    div.setShinkiKubun(新規登録);
+                } else if (ShoriKubun._1号予告者登録.equals(押下ボタン区分) || ShoriKubun.償還払い化登録.equals(押下ボタン区分)) {
+                    div.setShinkiKubun(新規区分_空);
                 }
+                支払方法データ.add(shiharaiHohoHenko);
             }
         }
         if (支払方法データ.isEmpty()) {
@@ -126,7 +123,6 @@ public class ShokanBaraiKa1GoHandler {
         if (pairs.iterator().hasNext()) {
             return pairs;
         }
-        ShiharaiHohoHenkoManager 支払方法変更Manager = ShiharaiHohoHenkoManager.createInstance();
         ShokanBaraiKa1GoManager manager = new ShokanBaraiKa1GoManager();
         TainoHanteiResultKohen 滞納判定結果 = DataPassingConverter.deserialize(div.getTainoHanteiKekka(), TainoHanteiResultKohen.class);
         switch (ShoriKubun.toValue(div.getKey_Button())) {
@@ -168,7 +164,8 @@ public class ShokanBaraiKa1GoHandler {
             default:
                 break;
         }
-        支払方法変更Manager.save(ViewStateHolder.get(一号償還払い化ダイアログキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class));
+        div.setKey_ShiharaiHohoHenkoKanri(
+                DataPassingConverter.serialize(ViewStateHolder.get(一号償還払い化ダイアログキー.支払方法変更管理業務概念, TainoHanteiResultKohen.class)));
         return pairs;
     }
 
