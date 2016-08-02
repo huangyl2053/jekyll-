@@ -2,16 +2,18 @@ package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 
 /**
  * 再審査決定明細テーブルのエンティティクラスです。
@@ -122,8 +124,10 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
     /**
      * 保険者区分のgetメソッドです。
      * <br/>
-     * <br/>1：保険者　2：公費負担者
-     * <br/>3：総合事業費保険者
+     * <br/>1：保険者　2：公費負担者
+
+     * <br/>3：総合事業費保険者
+
      * <br/>4：総合事業費公費負担者
      * 
      * @return 保険者区分
@@ -135,8 +139,10 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
     /**
      * 保険者区分のsetメソッドです。
      * <br/>
-     * <br/>1：保険者　2：公費負担者
-     * <br/>3：総合事業費保険者
+     * <br/>1：保険者　2：公費負担者
+
+     * <br/>3：総合事業費保険者
+
      * <br/>4：総合事業費公費負担者
      * 
      * @param hokenshaKubun 保険者区分

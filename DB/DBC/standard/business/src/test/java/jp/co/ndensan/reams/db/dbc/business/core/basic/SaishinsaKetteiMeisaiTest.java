@@ -34,7 +34,7 @@ public class SaishinsaKetteiMeisaiTest extends DbcTestBase {
 //TODO 主キーの数が足りない場合、追加してください。
     private static FlexibleYearMonth 主キー名1;
     private static RString 主キー名2;
-    private static Decimal 主キー名3;
+    private static int 主キー名3;
 
     @BeforeClass
     public static void setUpClass() {
@@ -58,24 +58,24 @@ public class SaishinsaKetteiMeisaiTest extends DbcTestBase {
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new SaishinsaKetteiMeisai(null, 主キー名2, 主キー名3);
+            sut = new SaishinsaKetteiMeisai(null, 主キー名2, new Decimal(主キー名3));
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new SaishinsaKetteiMeisai(主キー名1, null, 主キー名3);
+            sut = new SaishinsaKetteiMeisai(主キー名1, null, new Decimal(主キー名3));
         }
 
         @Test
         public void 指定したキーが保持するDbT3064SaishinsaKetteiMeisaiEntityにセットされている() {
-            sut = new SaishinsaKetteiMeisai(主キー名1, 主キー名2, 主キー名3);
+            sut = new SaishinsaKetteiMeisai(主キー名1, 主キー名2, new Decimal(主キー名3));
             assertThat(sut.get取扱年月(), is(主キー名1));
             assertThat(sut.get保険者区分(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するSaishinsaKetteiMeisaiIdentifierにセットされている() {
-            sut = new SaishinsaKetteiMeisai(主キー名1, 主キー名2, 主キー名3);
+            sut = new SaishinsaKetteiMeisai(主キー名1, 主キー名2, new Decimal(主キー名3));
             assertThat(sut.identifier().get取扱年月(), is(主キー名1));
             assertThat(sut.identifier().get保険者区分(), is(主キー名2));
         }
@@ -132,7 +132,7 @@ public class SaishinsaKetteiMeisaiTest extends DbcTestBase {
 
         @Test
         public void get履歴番号は_entityが持つ履歴番号を返す() {
-            assertThat(sut.get履歴番号(), is(SaishinsaKetteiMeisaiEntity.getRirekiNo()));
+            assertThat(sut.get履歴番号(), is(new Decimal(SaishinsaKetteiMeisaiEntity.getRirekiNo())));
         }
 
         @Test

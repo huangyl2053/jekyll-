@@ -27,7 +27,7 @@ public class SaishinsaKetteiMeisaiIdentifierTest extends DbcTestBase {
 //TODO 主キーの数が足りない場合、追加してください。
     private static FlexibleYearMonth 主キー名1;
     private static RString 主キー名2;
-    private static Decimal 主キー名3;
+    private static int 主キー名3;
 
     @BeforeClass
     public static void setUpClass() {
@@ -41,7 +41,7 @@ public class SaishinsaKetteiMeisaiIdentifierTest extends DbcTestBase {
 
         @Test
         public void シリアライズできる() {
-            SaishinsaKetteiMeisaiIdentifier sut = new SaishinsaKetteiMeisaiIdentifier(主キー名1, 主キー名2, 主キー名3);
+            SaishinsaKetteiMeisaiIdentifier sut = new SaishinsaKetteiMeisaiIdentifier(主キー名1, 主キー名2, new Decimal(主キー名3));
             assertThat(sut, is(serializable()));
         }
     }

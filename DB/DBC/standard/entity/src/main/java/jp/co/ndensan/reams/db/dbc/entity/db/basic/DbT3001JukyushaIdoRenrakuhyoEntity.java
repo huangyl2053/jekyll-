@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 
 /**
  * 受給者異動送付テーブルのエンティティクラスです。
@@ -915,8 +917,10 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
     /**
      * 減免申請中区分コードのgetメソッドです。
      * <br/>
-     * <br/>1:申請無し 
-     * <br/>2:申請中 
+     * <br/>1:申請無し 
+
+     * <br/>2:申請中 
+
      * <br/>3:決定済み
      * 
      * @return 減免申請中区分コード
@@ -929,8 +933,10 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
     /**
      * 減免申請中区分コードのsetメソッドです。
      * <br/>
-     * <br/>1:申請無し 
-     * <br/>2:申請中 
+     * <br/>1:申請無し 
+
+     * <br/>2:申請中 
+
      * <br/>3:決定済み
      * 
      * @param gemmenShinseichuKubunCode 減免申請中区分コード

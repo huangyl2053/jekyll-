@@ -2,14 +2,14 @@ package jp.co.ndensan.reams.db.dbx.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import java.util.Objects;
 import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 
 /**
  * 徴収方法Newestテーブルのエンティティクラスです。
@@ -19,6 +19,14 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
     @TableName
     public static final RString TABLE_NAME = new RString("DbV2001ChoshuHoho");
 
+    private RString insertDantaiCd;
+    private RDateTime insertTimestamp;
+    private RString insertReamsLoginId;
+    private UUID insertContextId;
+    private boolean isDeleted = false;
+    private int updateCount = 0;
+    private RDateTime lastUpdateTimestamp;
+    private RString lastUpdateReamsLoginId;
     private FlexibleYear fukaNendo;
     private HihokenshaNo hihokenshaNo;
     private int rirekiNo;
@@ -53,6 +61,52 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
     private boolean tsuikaIraiSohuzumiFlag;
     private YMDHMS tokuchoTeishiNichiji;
     private RString tokuchoTeishiJiyuCode;
+
+    /**
+     * insertDantaiCdのgetメソッドです。
+     * 
+     * @return insertDantaiCd
+     */
+    public RString getInsertDantaiCd() {
+        return insertDantaiCd;
+    }
+
+    /**
+     * insertDantaiCdのsetメソッドです。
+     * 
+     * @param insertDantaiCd insertDantaiCd
+     */
+    public void setInsertDantaiCd(RString insertDantaiCd) {
+        this.insertDantaiCd = insertDantaiCd;
+    }
+
+    /**
+     * isDeletedのgetメソッドです。
+     * 
+     * @return isDeleted
+     */
+    public boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    /**
+     * isDeletedのsetメソッドです。
+     * 
+     * @param isDeleted isDeleted
+     */
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+
+    /**
+     * lastUpdateReamsLoginIdのsetメソッドです。
+     * 
+     * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
+     */
+    public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
+        this.lastUpdateReamsLoginId = lastUpdateReamsLoginId;
+    }
 
     /**
      * fukaNendoのgetメソッドです。
@@ -701,6 +755,16 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
     }
 
     /**
+     * lastUpdateTimestampのgetメソッドです。
+     *
+     * @return lastUpdateTimestamp
+     */
+    @CheckForNull
+    public RDateTime getLastUpdateTimestamp() {
+        return lastUpdateTimestamp;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbV2001ChoshuHohoEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
@@ -766,4 +830,5 @@ public class DbV2001ChoshuHohoEntity extends DbTableEntityBase<DbV2001ChoshuHoho
     }
 
 // </editor-fold>
+
 }

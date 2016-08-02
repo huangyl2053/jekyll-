@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
@@ -197,7 +196,7 @@ public class DbT3096JutakuKaishuRiyushoTesuryoShukeiDacTest extends DbcTestDacBa
         public static void insert(
                 HokenshaNo 証記載保険者番号,
                 FlexibleYearMonth 集計開始年月,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT3096JutakuKaishuRiyushoTesuryoShukeiEntity entity = DbT3096JutakuKaishuRiyushoTesuryoShukeiEntityGenerator.createDbT3096JutakuKaishuRiyushoTesuryoShukeiEntity();
             entity.setShoKisaiHokenshaNo(証記載保険者番号);
             entity.setShukeiKaishiYM(集計開始年月);

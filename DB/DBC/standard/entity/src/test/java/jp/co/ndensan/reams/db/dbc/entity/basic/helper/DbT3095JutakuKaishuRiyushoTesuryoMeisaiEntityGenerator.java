@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 住宅改修理由書作成手数料請求明細エンティティのテスト用インスタンスを作成する補助クラスです。
@@ -22,7 +21,7 @@ public final class DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator {
 
     public static final HokenshaNo DEFAULT_証記載保険者番号 = new HokenshaNo("1");
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final int DEFAULT_履歴番号 = 0;
     public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("012340123400001");
     public static final ServiceCode DEFAULT_サービスコード = new ServiceCode("1");
     public static final AtenaMeisho DEFAULT_介護住宅改修事業者名称 = new AtenaMeisho("");
@@ -58,7 +57,7 @@ public final class DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator {
         entity.setRiyushoSakuseiYMD(DEFAULT_介護住宅改修理由書作成年月日);
         entity.setRiyushoSakuseiJigyoshaNo(DEFAULT_介護住宅改修理由書作成事業者番号);
         entity.setRiyushoSakuseishaMei(DEFAULT_介護住宅改修理由書作成者名);
-        entity.setRiyushoSakuseishaShikaku(DEFAULT_介護住宅改修理由書作成者資格);
+//        entity.setRiyushoSakuseishaShikaku(DEFAULT_介護住宅改修理由書作成者資格);
         entity.setRiyushoSakuseiShinseiYMD(DEFAULT_介護住宅改修理由書作成申請年月日);
         entity.setRiyushoSakuseiUketsukeYMD(DEFAULT_介護住宅改修理由書作成受付年月日);
         return entity;

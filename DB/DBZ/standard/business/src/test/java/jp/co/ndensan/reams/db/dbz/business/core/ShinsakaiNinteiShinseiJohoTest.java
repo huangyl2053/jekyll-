@@ -8,8 +8,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5101NinteiShinseiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -263,13 +261,13 @@ public class ShinsakaiNinteiShinseiJohoTest extends DbdTestBase {
 
         @Test
         public void 戻り値の主治医医療機関コードは_設定した値と同じ主治医医療機関コードを返す() {
-            assertThat(sut.get主治医医療機関コード(), is(DbT5101NinteiShinseiJohoEntityGenerator.DEFAULT_主治医医療機関コード));
+            assertThat(sut.get主治医医療機関コード(), is(DbT5101NinteiShinseiJohoEntityGenerator.DEFAULT_主治医医療機関コード.value()));
         }
 
-        @Test
-        public void 戻り値の主治医コードは_設定した値と同じ主治医コードを返す() {
-            assertThat(sut.get主治医コード(), is(DbT5101NinteiShinseiJohoEntityGenerator.DEFAULT_主治医コード));
-        }
+//        @Test
+//        public void 戻り値の主治医コードは_設定した値と同じ主治医コードを返す() {
+//            assertThat(sut.get主治医コード(), is(DbT5101NinteiShinseiJohoEntityGenerator.DEFAULT_主治医コード));
+//        }
 
         @Test
         public void 戻り値の指定医フラグは_設定した値と同じ指定医フラグを返す() {
@@ -728,14 +726,14 @@ public class ShinsakaiNinteiShinseiJohoTest extends DbdTestBase {
         @Test
         public void setShujiiIryokikanCodeで設定した値を_生成されたShinsakaiNinteiShinseiJohoも保持する() {
             ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setShujiiIryokikanCode(new RString("0000000001")).build();
-            assertThat(result.get主治医医療機関コード(), is(DbT5101NinteiShinseiJohoEntityGenerator.DEFAULT_主治医医療機関コード));
+            assertThat(result.get主治医医療機関コード(), is(DbT5101NinteiShinseiJohoEntityGenerator.DEFAULT_主治医医療機関コード.value()));
         }
 
-        @Test
-        public void setShujiiCodeで設定した値を_生成されたShinsakaiNinteiShinseiJohoも保持する() {
-            ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setShujiiCode(new RString("00000001")).build();
-            assertThat(result.get主治医コード(), is(DbT5101NinteiShinseiJohoEntityGenerator.DEFAULT_主治医コード));
-        }
+//        @Test
+//        public void setShujiiCodeで設定した値を_生成されたShinsakaiNinteiShinseiJohoも保持する() {
+//            ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setShujiiCode(new RString("00000001")).build();
+//            assertThat(result.get主治医コード(), is(DbT5101NinteiShinseiJohoEntityGenerator.DEFAULT_主治医コード));
+//        }
 
         @Test
         public void setShiteiiFlagで設定した値を_生成されたShinsakaiNinteiShinseiJohoも保持する() {

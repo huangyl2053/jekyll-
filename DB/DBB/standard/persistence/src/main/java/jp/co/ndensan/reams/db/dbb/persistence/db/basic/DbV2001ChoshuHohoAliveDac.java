@@ -6,11 +6,11 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbV2001ChoshuHoho;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbV2001ChoshuHoho.fukaNendo;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbV2001ChoshuHoho.hihokenshaNo;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbV2001ChoshuHoho.rirekiNo;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbV2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.fukaNendo;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.rirekiNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;

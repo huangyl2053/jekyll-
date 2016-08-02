@@ -2,14 +2,14 @@ package jp.co.ndensan.reams.db.dbx.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import java.util.Objects;
 import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 
 /**
  * 要介護認定インタフェース情報・福祉Viewテーブルのエンティティクラスです。
@@ -33,7 +33,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
     private FlexibleDate ikenshoToriyoseYMD;
     private FlexibleDate chosaItakuYMD;
     private FlexibleDate chosaShuryoYMD;
-    private DbUDD004JigyoshaNo chosaItakusakiCode;
+    private JigyoshaNo chosaItakusakiCode;
     private RString chosainCode;
     private FlexibleDate ichijiHanteiYMD;
     private RString ichijiHanteiKekkaCode;
@@ -340,7 +340,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
      * @return chosaItakusakiCode
      */
     @CheckForNull
-    public DbUDD004JigyoshaNo getChosaItakusakiCode() {
+    public JigyoshaNo getChosaItakusakiCode() {
         return chosaItakusakiCode;
     }
 
@@ -349,7 +349,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
      * 
      * @param chosaItakusakiCode chosaItakusakiCode
      */
-    public void setChosaItakusakiCode(DbUDD004JigyoshaNo chosaItakusakiCode) {
+    public void setChosaItakusakiCode(JigyoshaNo chosaItakusakiCode) {
         this.chosaItakusakiCode = chosaItakusakiCode;
     }
 

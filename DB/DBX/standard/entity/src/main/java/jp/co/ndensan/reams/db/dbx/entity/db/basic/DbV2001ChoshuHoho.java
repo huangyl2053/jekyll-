@@ -8,6 +8,38 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 public enum DbV2001ChoshuHoho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
+     * insertDantaiCd
+     */
+    insertDantaiCd(2147483647, 0),
+    /**
+     * insertTimestamp
+     */
+    insertTimestamp(29, 0),
+    /**
+     * insertReamsLoginId
+     */
+    insertReamsLoginId(2147483647, 0),
+    /**
+     * insertContextId
+     */
+    insertContextId(2147483647, 0),
+    /**
+     * isDeleted
+     */
+    isDeleted(1, 0),
+    /**
+     * updateCount
+     */
+    updateCount(10, 0),
+    /**
+     * lastUpdateTimestamp
+     */
+    lastUpdateTimestamp(29, 0),
+    /**
+     * lastUpdateReamsLoginId
+     */
+    lastUpdateReamsLoginId(2147483647, 0),
+    /**
      * fukaNendo
      */
     fukaNendo(2147483647, 0),

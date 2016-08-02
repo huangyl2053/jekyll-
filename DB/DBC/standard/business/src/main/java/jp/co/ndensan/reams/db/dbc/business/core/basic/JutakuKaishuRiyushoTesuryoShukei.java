@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -47,7 +46,7 @@ public class JutakuKaishuRiyushoTesuryoShukei
         this.entity = new DbT3096JutakuKaishuRiyushoTesuryoShukeiEntity();
         this.entity.setShoKisaiHokenshaNo(証記載保険者番号);
         this.entity.setShukeiKaishiYM(集計開始年月);
-        this.entity.setRirekiNo(履歴番号);
+        this.entity.setRirekiNo(履歴番号.intValue());
         this.id = new JutakuKaishuRiyushoTesuryoShukeiIdentifier(
                 証記載保険者番号,
                 集計開始年月,
@@ -66,7 +65,7 @@ public class JutakuKaishuRiyushoTesuryoShukei
         this.id = new JutakuKaishuRiyushoTesuryoShukeiIdentifier(
                 entity.getShoKisaiHokenshaNo(),
                 entity.getShukeiKaishiYM(),
-                entity.getRirekiNo());
+                new Decimal(entity.getRirekiNo()));
     }
 
     /**
@@ -108,7 +107,7 @@ public class JutakuKaishuRiyushoTesuryoShukei
      * @return 履歴番号
      */
     public Decimal get履歴番号() {
-        return entity.getRirekiNo();
+        return new Decimal(entity.getRirekiNo());
     }
 
     /**
@@ -161,18 +160,18 @@ public class JutakuKaishuRiyushoTesuryoShukei
      *
      * @return 介護住宅改修理由書作成申請年月日
      */
-    public FlexibleDate get介護住宅改修理由書作成申請年月日() {
-        return entity.getRiyushoSakuseiShinseiYMD();
-    }
+//    public FlexibleDate get介護住宅改修理由書作成申請年月日() {
+//        return entity.getRiyushoSakuseiShinseiYMD();
+//    }
 
     /**
      * 介護住宅改修理由書作成受付年月日を返します。
      *
      * @return 介護住宅改修理由書作成受付年月日
      */
-    public FlexibleDate get介護住宅改修理由書作成受付年月日() {
-        return entity.getRiyushoSakuseiUketsukeYMD();
-    }
+//    public FlexibleDate get介護住宅改修理由書作成受付年月日() {
+//        return entity.getRiyushoSakuseiUketsukeYMD();
+//    }
 
     /**
      * 介護支払方法区分を返します。

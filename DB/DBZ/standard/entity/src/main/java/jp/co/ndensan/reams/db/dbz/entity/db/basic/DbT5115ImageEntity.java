@@ -10,6 +10,7 @@ import java.util.UUID;
 import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 
 /**
  * イメージ情報テーブルのエンティティクラスです。

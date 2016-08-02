@@ -2,15 +2,13 @@ package jp.co.ndensan.reams.db.dbx.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import java.util.Objects;
 import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 
 /**
  * 介護保険施設入退所・福祉Viewテーブルのエンティティクラスです。
@@ -25,7 +23,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
     private LasdecCode shichosonCode;
     private RString daichoShubetsu;
     private RString nyushoShisetsuShurui;
-    private DbUDD004JigyoshaNo nyushoShisetsuCode;
+    private JigyoshaNo nyushoShisetsuCode;
     private FlexibleDate nyushoShoriYMD;
     private FlexibleDate nyushoYMD;
     private FlexibleDate taishoShoriYMD;
@@ -133,7 +131,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
      * @return nyushoShisetsuCode
      */
     @CheckForNull
-    public DbUDD004JigyoshaNo getNyushoShisetsuCode() {
+    public JigyoshaNo getNyushoShisetsuCode() {
         return nyushoShisetsuCode;
     }
 
@@ -142,7 +140,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
      * 
      * @param nyushoShisetsuCode nyushoShisetsuCode
      */
-    public void setNyushoShisetsuCode(DbUDD004JigyoshaNo nyushoShisetsuCode) {
+    public void setNyushoShisetsuCode(JigyoshaNo nyushoShisetsuCode) {
         this.nyushoShisetsuCode = nyushoShisetsuCode;
     }
 

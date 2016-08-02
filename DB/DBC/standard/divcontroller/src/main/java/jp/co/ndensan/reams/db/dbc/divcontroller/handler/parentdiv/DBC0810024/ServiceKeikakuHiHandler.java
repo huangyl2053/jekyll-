@@ -171,7 +171,7 @@ public class ServiceKeikakuHiHandler {
         if (設定不可.equals(shikibetsuNoKanriEntity.get明細住所地特例設定区分())) {
             div.getPanelHead().getBtnKyufuhiMeisaiJyutoku().setDisabled(true);
         }
-        if (設定可_任意.equals(shikibetsuNoKanriEntity.get特定疾患施設療養設定区分())
+        if (設定可_任意.equals(shikibetsuNoKanriEntity.get所定疾患施設療養設定区分())
                 && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
             div.getPanelHead().getBtnKinkyujiShoteiShikkan().setDisplayNone(false);
             div.getPanelHead().getBtnKinkyujiShoteiShikkan().setVisible(true);

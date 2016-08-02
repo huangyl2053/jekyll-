@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3095JutakuKaishuRiyush
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -52,25 +51,25 @@ public class JutakuKaishuRiyushoTesuryoMeisaiManagerTest {
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
             HihokenshaNo 主キー2 = DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー3 = DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_履歴番号;
+            Decimal 主キー3 = new Decimal(DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_履歴番号);
             sut.get住宅改修理由書作成手数料請求明細(null, 主キー2, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
             HokenshaNo 主キー1 = DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_証記載保険者番号;
-            Decimal 主キー3 = DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_履歴番号;
+            Decimal 主キー3 = new Decimal(DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_履歴番号);
             sut.get住宅改修理由書作成手数料請求明細(主キー1, null, 主キー3);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(HokenshaNo.class), any(HihokenshaNo.class), any(Decimal.class))).thenReturn(null);
+            when(dac.selectByKey(any(HokenshaNo.class), any(HihokenshaNo.class), any(int.class))).thenReturn(null);
 
             HokenshaNo 主キー1 = DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_証記載保険者番号;
             HihokenshaNo 主キー2 = DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー3 = DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_履歴番号;
+            Decimal 主キー3 = new Decimal(DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_履歴番号);
             JutakuKaishuRiyushoTesuryoMeisai result = sut.get住宅改修理由書作成手数料請求明細(主キー1, 主キー2, 主キー3);
 
             assertThat(result, is(nullValue()));
@@ -79,11 +78,11 @@ public class JutakuKaishuRiyushoTesuryoMeisaiManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity entity = DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.createDbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity();
-            when(dac.selectByKey(any(HokenshaNo.class), any(HihokenshaNo.class), any(Decimal.class))).thenReturn(entity);
+            when(dac.selectByKey(any(HokenshaNo.class), any(HihokenshaNo.class), any(int.class))).thenReturn(entity);
 
             HokenshaNo 主キー1 = DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_証記載保険者番号;
             HihokenshaNo 主キー2 = DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー3 = DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_履歴番号;
+            Decimal 主キー3 = new Decimal(DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_履歴番号);
             JutakuKaishuRiyushoTesuryoMeisai result = sut.get住宅改修理由書作成手数料請求明細(主キー1, 主キー2, 主キー3);
 
             assertThat(result.get証記載保険者番号().value(), is(DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_証記載保険者番号.value()));
@@ -143,7 +142,7 @@ public class JutakuKaishuRiyushoTesuryoMeisaiManagerTest {
             DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity entity = DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.createDbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity();
             entity.initializeMd5();
             JutakuKaishuRiyushoTesuryoMeisai 住宅改修理由書作成手数料請求明細 = new JutakuKaishuRiyushoTesuryoMeisai(entity);
-            住宅改修理由書作成手数料請求明細 = 住宅改修理由書作成手数料請求明細.createBuilderForEdit().set介護住宅改修理由書作成者資格(new RString("任意項目1を変更")).build();
+//            住宅改修理由書作成手数料請求明細 = 住宅改修理由書作成手数料請求明細.createBuilderForEdit().set介護住宅改修理由書作成者資格(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save住宅改修理由書作成手数料請求明細(住宅改修理由書作成手数料請求明細), is(true));
         }
@@ -155,7 +154,7 @@ public class JutakuKaishuRiyushoTesuryoMeisaiManagerTest {
             DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity entity = DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.createDbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity();
             entity.initializeMd5();
             JutakuKaishuRiyushoTesuryoMeisai 住宅改修理由書作成手数料請求明細 = new JutakuKaishuRiyushoTesuryoMeisai(entity);
-            住宅改修理由書作成手数料請求明細 = 住宅改修理由書作成手数料請求明細.createBuilderForEdit().set介護住宅改修理由書作成者資格(new RString("任意項目1を変更")).build();
+//            住宅改修理由書作成手数料請求明細 = 住宅改修理由書作成手数料請求明細.createBuilderForEdit().set介護住宅改修理由書作成者資格(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save住宅改修理由書作成手数料請求明細(住宅改修理由書作成手数料請求明細), is(false));
         }

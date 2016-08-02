@@ -2,16 +2,13 @@ package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import java.util.Objects;
 import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
 
 /**
  * 介護所得Newestテーブルのエンティティクラスです。
@@ -34,7 +31,7 @@ public class DbV2512KaigoShotokuNewestEntity extends DbTableEntityBase<DbV2512Ka
     private RString yusenKubun;
     private YMDHMS shoriTimeStamp;
     private int motoRirekiNo;
-    private unknown torokuGyomu;
+    private RString torokuGyomu;
 
     /**
      * shotokuNendoのgetメソッドです。
@@ -289,7 +286,7 @@ public class DbV2512KaigoShotokuNewestEntity extends DbTableEntityBase<DbV2512Ka
      * @return torokuGyomu
      */
     @CheckForNull
-    public unknown getTorokuGyomu() {
+    public RString getTorokuGyomu() {
         return torokuGyomu;
     }
 
@@ -298,7 +295,7 @@ public class DbV2512KaigoShotokuNewestEntity extends DbTableEntityBase<DbV2512Ka
      * 
      * @param torokuGyomu torokuGyomu
      */
-    public void setTorokuGyomu(unknown torokuGyomu) {
+    public void setTorokuGyomu(RString torokuGyomu) {
         this.torokuGyomu = torokuGyomu;
     }
 
