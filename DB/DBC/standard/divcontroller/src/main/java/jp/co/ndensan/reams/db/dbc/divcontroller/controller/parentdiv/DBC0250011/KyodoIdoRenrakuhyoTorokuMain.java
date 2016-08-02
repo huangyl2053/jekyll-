@@ -34,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class KyodoIdoRenrakuhyoTorokuMain {
 
     /**
-     * 画面初期化のメソッドます。
+     * 画面初期化のメソッドです。
      *
      * @param div KyodoIdoRenrakuhyoTorokuMainDiv
      * @return ResponseData
@@ -50,14 +50,14 @@ public class KyodoIdoRenrakuhyoTorokuMain {
     }
 
     /**
-     * 「連絡票を保存する」ボタンのメソッドます。
+     * 「連絡票を保存する」ボタンのメソッドです。
      *
      * @param div KyodoIdoRenrakuhyoTorokuMainDiv
      * @return ResponseData
      */
     public ResponseData<KyodoIdoRenrakuhyoTorokuMainDiv> onClick_btnSave(KyodoIdoRenrakuhyoTorokuMainDiv div) {
-        // TODO 入力チェック
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        ValidationMessageControlPairs pairs = div.getKyodoIdoRenrakuhyoTorokuInfo().get一時差止日の関連チェック();
+        pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().get一時差止日の入力チェック());
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
@@ -87,7 +87,7 @@ public class KyodoIdoRenrakuhyoTorokuMain {
     }
 
     /**
-     * 「発行」ボタンのメソッドます。
+     * 「発行」ボタンのメソッドです。
      *
      * @param div KyodoIdoRenrakuhyoTorokuMainDiv
      * @return ResponseData
@@ -98,7 +98,7 @@ public class KyodoIdoRenrakuhyoTorokuMain {
     }
 
     /**
-     * 「検索結果一覧へ」ボタンのメソッドます。
+     * 「検索結果一覧へ」ボタンのメソッドです。
      *
      * @param div KyodoIdoRenrakuhyoTorokuMainDiv
      * @return ResponseData
@@ -108,7 +108,7 @@ public class KyodoIdoRenrakuhyoTorokuMain {
     }
 
     /**
-     * 「再検索する」ボタンのメソッドます。
+     * 「再検索する」ボタンのメソッドです。
      *
      * @param div KyodoIdoRenrakuhyoTorokuMainDiv
      * @return ResponseData
@@ -141,7 +141,7 @@ public class KyodoIdoRenrakuhyoTorokuMain {
     }
 
     /**
-     * 「完了する」ボタンのメソッドます。
+     * 「完了する」ボタンのメソッドです。
      *
      * @param div KyodoIdoRenrakuhyoTorokuMainDiv
      * @return ResponseData

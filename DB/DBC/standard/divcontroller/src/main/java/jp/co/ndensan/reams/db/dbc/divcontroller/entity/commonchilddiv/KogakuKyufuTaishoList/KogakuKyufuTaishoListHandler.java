@@ -296,7 +296,6 @@ public class KogakuKyufuTaishoListHandler {
             FlexibleYearMonth サービス提供年月) {
         row.setData1(div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().getValue());
         row.setData2(div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaName().getValue());
-        row.setData3(div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().getValue());
         row.getData4().setValue(div.getMeisaiGokeiHenshuPanel().getTxtHyoGkei().getValue());
         row.getData5().setValue(div.getMeisaiGokeiHenshuPanel().getTxtRiyoshafutanGokei().getValue());
         if (div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().getValue() != null) {
@@ -310,8 +309,10 @@ public class KogakuKyufuTaishoListHandler {
                 add(div.getMeisaiGokeiHenshuPanel().getTxtRiyoshafutanGokei().getValue()));
         if (div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey().equals(ONE_RS)) {
             row.setData10(ONE_RS);
+            row.setData3(div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().getValue());
         } else {
             row.setData10(TWO_RS);
+            row.setData3(合計);
         }
         if (div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue() != null
                 && !div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue().isEmpty()) {
@@ -483,6 +484,7 @@ public class KogakuKyufuTaishoListHandler {
      *
      * @param row dgTaishoshaIchiran_Row
      * @param state RString
+     * @param サービス提供年月 FlexibleYearMonth
      */
     public void modifyRow(dgTaishoshaIchiran_Row row, RString state, FlexibleYearMonth サービス提供年月) {
         if (修正.equals(state)) {
@@ -490,14 +492,23 @@ public class KogakuKyufuTaishoListHandler {
             if (flag) {
                 row.setData0(修正);
             }
+            get高額明細合計データ編集エリア(row, state, サービス提供年月);
         } else if (追加.equals(state)) {
             row.setData0(追加);
+            get高額明細合計データ編集エリア(row, state, サービス提供年月);
         } else if (削除.equals(state)) {
-            row.setData0(削除);
-            div.getDgTaishoshaIchiran().getClickedItem().setDeleteButtonState(DataGridButtonState.Disabled);
-            div.getDgTaishoshaIchiran().getClickedItem().setModifyButtonState(DataGridButtonState.Disabled);
+            if (追加.equals(row.getData0())) {
+                div.getDgTaishoshaIchiran().getDataSource().remove(div.getRowId().getValue().intValue());
+                clear高額明細合計データ編集エリア();
+            } else {
+                row.setData0(削除);
+                div.getDgTaishoshaIchiran().getClickedItem().setDeleteButtonState(DataGridButtonState.Disabled);
+                div.getDgTaishoshaIchiran().getClickedItem().setModifyButtonState(DataGridButtonState.Disabled);
+                get高額明細合計データ編集エリア(row, state, サービス提供年月);
+            }
+
         }
-        get高額明細合計データ編集エリア(row, state, サービス提供年月);
+
         画面制御(true);
     }
 

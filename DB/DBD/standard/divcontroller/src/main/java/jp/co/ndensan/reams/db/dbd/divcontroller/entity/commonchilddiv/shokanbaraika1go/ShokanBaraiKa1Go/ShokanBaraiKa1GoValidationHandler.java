@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.shokanbaraika1go.ShokanBaraiKa1Go;
 
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
+import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShoriKubun;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
@@ -26,10 +27,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class ShokanBaraiKa1GoValidationHandler {
 
-    private final RString _１号予告者登録 = new RString("１号予告者登録");
-    private final RString 償還払い化登録 = new RString("償還払い化登録");
-    private final RString 償還払い化終了申請 = new RString("償還払い化終了申請");
-    private final RString _１号弁明書受理 = new RString("１号弁明書受理");
+//    private final RString _１号予告者登録 = new RString("１号予告者登録");
+//    private final RString 償還払い化登録 = new RString("償還払い化登録");
+//    private final RString 償還払い化終了申請 = new RString("償還払い化終了申請");
+//    private final RString _１号弁明書受理 = new RString("１号弁明書受理");
     private final RString 新規登録 = new RString("新規登録");
 
     /**
@@ -41,13 +42,14 @@ public class ShokanBaraiKa1GoValidationHandler {
      * @return バリデーション結果
      */
     public ValidationMessageControlPairs validateFor滞納状況情報(ValidationMessageControlPairs pairs, ShokanBaraiKa1GoDiv div, ShiharaiHohoHenko shiharaiHohoHenko) {
+        ShoriKubun 押下ボタン区分 = ShoriKubun.toValue(div.getKey_Button());
         if (div.getShinkiKubun().equals(新規登録)) {
-            if ((div.getKey_Button().equals(_１号予告者登録) || div.getKey_Button().equals(償還払い化登録))
+            if ((ShoriKubun._1号予告者登録.equals(押下ボタン区分) || ShoriKubun.償還払い化登録.equals(押下ボタン区分))
                     && div.getTainoHanteiKekka().isEmpty()) {
                 pairs.add(new ValidationMessageControlPair(ShokanBaraiKa1GoMessages.支払方法変更_要滞納状況確定));
             }
         } else {
-            if ((div.getKey_Button().equals(_１号予告者登録) || div.getKey_Button().equals(償還払い化登録))
+            if ((ShoriKubun._1号予告者登録.equals(押下ボタン区分) || ShoriKubun.償還払い化登録.equals(押下ボタン区分))
                     && (shiharaiHohoHenko.getShiharaiHohoHenkoTainoList().isEmpty() || div.getTainoHanteiKekka().isEmpty())) {
                 pairs.add(new ValidationMessageControlPair(ShokanBaraiKa1GoMessages.支払方法変更_要滞納状況確定));
             }
@@ -63,8 +65,9 @@ public class ShokanBaraiKa1GoValidationHandler {
      * @return バリデーション結果
      */
     public ValidationMessageControlPairs validateFor適用期間チェック(ValidationMessageControlPairs pairs, ShokanBaraiKa1GoDiv div) {
+        ShoriKubun 押下ボタン区分 = ShoriKubun.toValue(div.getKey_Button());
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(償還払い化終了申請) || div.getKey_Button().equals(償還払い化登録)) {
+        if (ShoriKubun.償還払い化終了申請.equals(押下ボタン区分) || ShoriKubun.償還払い化登録.equals(押下ボタン区分)) {
             messages.add(ValidateChain.validateStart(div).ifNot(ShokanBaraiKa1GoDivSpec.適用期間チェック)
                     .thenAdd(ShokanBaraiKa1GoMessages.期間が不正_追加メッセージあり2).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -83,7 +86,7 @@ public class ShokanBaraiKa1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor弁明受付日入力チェック(ValidationMessageControlPairs pairs, ShokanBaraiKa1GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(_１号弁明書受理)) {
+        if (ShoriKubun._1号弁明書受理.equals(ShoriKubun.toValue(div.getKey_Button()))) {
             messages.add(ValidateChain.validateStart(div).ifNot(ShokanBaraiKa1GoDivSpec.弁明受付日入力チェック)
                     .thenAdd(ShokanBaraiKa1GoMessages.弁明受付日未入力).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -102,7 +105,7 @@ public class ShokanBaraiKa1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor弁明内容決定日入力チェック(ValidationMessageControlPairs pairs, ShokanBaraiKa1GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(_１号弁明書受理)) {
+        if (ShoriKubun._1号弁明書受理.equals(ShoriKubun.toValue(div.getKey_Button()))) {
             messages.add(ValidateChain.validateStart(div).ifNot(ShokanBaraiKa1GoDivSpec.弁明内容決定日入力チェック)
                     .thenAdd(ShokanBaraiKa1GoMessages.弁明内容決定日未入力).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -121,7 +124,7 @@ public class ShokanBaraiKa1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor適用期間終了入力チェック(ValidationMessageControlPairs pairs, ShokanBaraiKa1GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(償還払い化終了申請)) {
+        if (ShoriKubun.償還払い化終了申請.equals(ShoriKubun.toValue(div.getKey_Button()))) {
             messages.add(ValidateChain.validateStart(div).ifNot(ShokanBaraiKa1GoDivSpec.適用期間終了入力チェック)
                     .thenAdd(ShokanBaraiKa1GoMessages.適用期間終了未入力).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -140,7 +143,7 @@ public class ShokanBaraiKa1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor申請受付日入力チェック(ValidationMessageControlPairs pairs, ShokanBaraiKa1GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(償還払い化終了申請)) {
+        if (ShoriKubun.償還払い化終了申請.equals(ShoriKubun.toValue(div.getKey_Button()))) {
             messages.add(ValidateChain.validateStart(div).ifNot(ShokanBaraiKa1GoDivSpec.申請受付日入力チェック)
                     .thenAdd(ShokanBaraiKa1GoMessages.申請受付日未入力).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -159,7 +162,7 @@ public class ShokanBaraiKa1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor申請日入力チェック(ValidationMessageControlPairs pairs, ShokanBaraiKa1GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(償還払い化終了申請)) {
+        if (ShoriKubun.償還払い化終了申請.equals(ShoriKubun.toValue(div.getKey_Button()))) {
             messages.add(ValidateChain.validateStart(div).ifNot(ShokanBaraiKa1GoDivSpec.申請日入力チェック)
                     .thenAdd(ShokanBaraiKa1GoMessages.申請日未入力).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -178,7 +181,7 @@ public class ShokanBaraiKa1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor申請内容決定日入力チェック(ValidationMessageControlPairs pairs, ShokanBaraiKa1GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(償還払い化終了申請)) {
+        if (ShoriKubun.償還払い化終了申請.equals(ShoriKubun.toValue(div.getKey_Button()))) {
             messages.add(ValidateChain.validateStart(div).ifNot(ShokanBaraiKa1GoDivSpec.申請内容決定日入力チェック)
                     .thenAdd(ShokanBaraiKa1GoMessages.申請内容決定日未入力).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -197,7 +200,7 @@ public class ShokanBaraiKa1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor弁明審査結果選択チェック(ValidationMessageControlPairs pairs, ShokanBaraiKa1GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(_１号弁明書受理)) {
+        if (ShoriKubun._1号弁明書受理.equals(ShoriKubun.toValue(div.getKey_Button()))) {
             messages.add(ValidateChain.validateStart(div).ifNot(ShokanBaraiKa1GoDivSpec.弁明審査結果選択チェック)
                     .thenAdd(ShokanBaraiKa1GoMessages.弁明審査結果未選択).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -216,7 +219,7 @@ public class ShokanBaraiKa1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor弁明理由選択チェック(ValidationMessageControlPairs pairs, ShokanBaraiKa1GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(_１号弁明書受理)) {
+        if (ShoriKubun._1号弁明書受理.equals(ShoriKubun.toValue(div.getKey_Button()))) {
             messages.add(ValidateChain.validateStart(div).ifNot(ShokanBaraiKa1GoDivSpec.弁明理由選択チェック)
                     .thenAdd(ShokanBaraiKa1GoMessages.弁明理由未選択).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -235,7 +238,7 @@ public class ShokanBaraiKa1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor申請審査結果選択チェック(ValidationMessageControlPairs pairs, ShokanBaraiKa1GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(償還払い化終了申請)) {
+        if (ShoriKubun.償還払い化終了申請.equals(ShoriKubun.toValue(div.getKey_Button()))) {
             messages.add(ValidateChain.validateStart(div).ifNot(ShokanBaraiKa1GoDivSpec.申請審査結果選択チェック)
                     .thenAdd(ShokanBaraiKa1GoMessages.申請審査結果未選択).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -254,7 +257,7 @@ public class ShokanBaraiKa1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor申請理由選択チェック(ValidationMessageControlPairs pairs, ShokanBaraiKa1GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(償還払い化終了申請)) {
+        if (ShoriKubun.償還払い化終了申請.equals(ShoriKubun.toValue(div.getKey_Button()))) {
             messages.add(ValidateChain.validateStart(div).ifNot(ShokanBaraiKa1GoDivSpec.申請理由選択チェック)
                     .thenAdd(ShokanBaraiKa1GoMessages.申請理由未選択).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -273,7 +276,7 @@ public class ShokanBaraiKa1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor終了状況選択チェック(ValidationMessageControlPairs pairs, ShokanBaraiKa1GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(償還払い化終了申請)) {
+        if (ShoriKubun.償還払い化終了申請.equals(ShoriKubun.toValue(div.getKey_Button()))) {
             messages.add(ValidateChain.validateStart(div).ifNot(ShokanBaraiKa1GoDivSpec.終了状況選択チェック)
                     .thenAdd(ShokanBaraiKa1GoMessages.終了状況未選択).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(

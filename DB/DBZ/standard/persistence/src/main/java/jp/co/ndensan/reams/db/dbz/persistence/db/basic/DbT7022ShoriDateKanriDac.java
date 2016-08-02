@@ -1879,4 +1879,25 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(shoriName, ShoriName.特徴結果情報取込.get名称()))).//Error  更正対象給付実績一覧
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
+
+    /**
+     * 処理済の有効期間終了月と前回処理日の取得
+     *
+     * @param 市町村コード
+     * @return
+     * @throws NullPointerException
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select前回処理日(LasdecCode 市町村コード) throws
+            NullPointerException {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBD介護受給),
+                                eq(shichosonCode, 市町村コード),
+                                eq(shoriName, ShoriName.更新申請者管理.get名称()),
+                                eq(shoriEdaban, 処理枝番))).order(by(nendo, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
 }

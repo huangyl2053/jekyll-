@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class SeikatsuhogoDetailValidationHandler {
 
+    private static final RString 表示モード_修正 = new RString("修正");
     private final SeikatsuhogoDetailDiv div;
 
     /**
@@ -47,7 +48,32 @@ public class SeikatsuhogoDetailValidationHandler {
             validPairs.add(new ValidationMessageControlPair(
                     IdocheckMessages.Validate停止期間が不正_追加メッセージあり, div.getTxtTeishiShuryoYMD(), div.getTxtTeishiKaishiYMD()));
         }
-        // TODO QA1198 "停止期間の期間重複チェック"はなんですか？
+        for (dgTeishiRireki_Row row : div.getTeishiKikan().getDgTeishiRireki().getDataSource()) {
+            if ((row.getTxtTeishiKaishiYMD().getValue() == null
+                    || div.getTeishiKikan().getTeishiKikanInput().getTxtTeishiKaishiYMD().getValue() == null
+                    || (row.getTxtTeishiKaishiYMD().getValue()
+                    .isBeforeOrEquals(div.getTeishiKikan().getTeishiKikanInput().getTxtTeishiKaishiYMD().getValue())
+                    && div.getTeishiKikan().getTeishiKikanInput().getTxtTeishiKaishiYMD().getValue()
+                    .isBeforeOrEquals(row.getTxtTeishiShuryoYMD().getValue())))
+                    || (row.getTxtTeishiKaishiYMD().getValue() == null
+                    || div.getTeishiKikan().getTeishiKikanInput().getTxtTeishiShuryoYMD().getValue() == null
+                    || (row.getTxtTeishiKaishiYMD().getValue()
+                    .isBeforeOrEquals(div.getTeishiKikan().getTeishiKikanInput().getTxtTeishiShuryoYMD().getValue())
+                    && div.getTeishiKikan().getTeishiKikanInput().getTxtTeishiShuryoYMD().getValue()
+                    .isBeforeOrEquals(row.getTxtTeishiShuryoYMD().getValue())))) {
+                if (表示モード_修正.equals(div.getHdnHyoujiMode())
+                        && (row.getTxtTeishiKaishiYMD().getValue().equals(
+                                div.getTeishiKikan().getDgTeishiRireki().getClickedItem().getTxtTeishiKaishiYMD().getValue())
+                        && row.getTxtTeishiShuryoYMD().getValue().equals(
+                                div.getTeishiKikan().getDgTeishiRireki().getClickedItem().getTxtTeishiShuryoYMD().getValue()))) {
+                    continue;
+                }
+                validPairs.add(new ValidationMessageControlPair(
+                        IdocheckMessages.Validate期間が重複, div.getTeishiKikan().getTeishiKikanInput(),
+                        div.getTeishiKikan().getDgTeishiRireki()));
+                break;
+            }
+        }
         return validPairs;
     }
 

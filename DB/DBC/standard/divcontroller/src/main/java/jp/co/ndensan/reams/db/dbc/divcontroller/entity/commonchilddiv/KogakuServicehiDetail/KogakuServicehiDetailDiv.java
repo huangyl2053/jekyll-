@@ -630,6 +630,14 @@ public class KogakuServicehiDetailDiv extends Panel implements IKogakuServicehiD
     }
 
     /**
+     * set画面tap
+     */
+    @Override
+    public void set画面tap() {
+        KogakuServicehiDetailDivHandler.of(this).set画面tap();
+    }
+
+    /**
      * 受付日と決定日のチェックです。
      *
      * @return ValidationMessageControlPairs

@@ -65,8 +65,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
      */
     public ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> onLoad(KogakuSabisuhiShikyuShinseiPanelDiv div) {
         TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-//        HihokenshaNo 被保険者番号 = 引継ぎデータ.get被保険者番号();
-        HihokenshaNo 被保険者番号 = new HihokenshaNo("0000000014");
+        HihokenshaNo 被保険者番号 = 引継ぎデータ.get被保険者番号();
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
@@ -339,6 +338,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
                 getHandler(div).save申請情報(被保険者番号, サービス年月,
                         証記載保険者番号, メニューID, 画面モード, 履歴番号, result);
                 getHandler(div).clear申請情報();
+                div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().set画面tap();
                 return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
             } else {
                 return ResponseData.of(div).respond();
@@ -355,6 +355,8 @@ public class KogakuSabisuhiShikyuShinseiPanel {
                 getHandler(div).save申請情報(被保険者番号, サービス年月,
                         証記載保険者番号, メニューID, 画面モード, 履歴番号, result);
                 getHandler(div).clear申請情報();
+                div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().set画面tap();
+                div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().release削除制御();
                 return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
             } else {
                 return ResponseData.of(div).respond();
@@ -388,6 +390,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
         if (削除モード.equals(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class))) {
             getHandler(div).clear申請情報();
             div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().release削除制御();
+            div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().set画面tap();
             return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
         } else {
             flag = getHandler(div).is申請情報登録内容変更状態(para);
@@ -403,6 +406,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 getHandler(div).clear申請情報();
                 release送付済制御(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class), div);
+                div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().set画面tap();
                 return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
             } else {
                 return ResponseData.of(div).respond();
@@ -410,6 +414,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
         } else {
             getHandler(div).clear申請情報();
             release送付済制御(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class), div);
+            div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().set画面tap();
             return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
         }
     }

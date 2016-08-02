@@ -41,7 +41,7 @@ public class ShinseihakkoMeiseiHandler {
     private static final RString 被保険者番号 = new RString("2190000003");
     private static final RString 画面区分 = new RString("2");
     private static final RString 正 = new RString("○");
-    private static final int NO_10 = 10;
+    private static final long NO_10 = 10;
     private static final int NO_1 = 1;
     private static final int NO_2 = 2;
     private static final int NO_3 = 3;
@@ -99,7 +99,7 @@ public class ShinseihakkoMeiseiHandler {
         KaigoNinteiAtenaInfoDiv kaigoNinteiAtenaInfoDiv = (KaigoNinteiAtenaInfoDiv) ninteishinseihakkodiv.getCcdKaigoNinteiAtenaInfo();
         if (radShinseishaKubunSelectIndex == 0) {
             shinseiShoEntity.set被保険者番号(kaigoninteiShikakuInfoDiv.getTxtHihokenshaNo().getText());
-            int hihokenshaNo = Integer.parseInt(kaigoninteiShikakuInfoDiv.getTxtHihokenshaNo().getText().toString());
+            long hihokenshaNo = Long.parseLong(kaigoninteiShikakuInfoDiv.getTxtHihokenshaNo().getValue().toString());
             shinseiShoEntity = set被保険者番号(hihokenshaNo, shinseiShoEntity);
             RString year = kaigoNinteiAtenaInfoDiv.getTxtBirthYMD().getValue().getYear().wareki().getYear();
             if (year.startsWith("明")) {
@@ -165,8 +165,8 @@ public class ShinseihakkoMeiseiHandler {
         }
     }
 
-    private ShinseiShoEntity set被保険者番号(int hihokenshaNo, ShinseiShoEntity shinseiShoEntity) {
-        int num;
+    private ShinseiShoEntity set被保険者番号(long hihokenshaNo, ShinseiShoEntity shinseiShoEntity) {
+        long num;
         for (int i = 1; i <= shinseiShoEntity.get被保険者番号().length(); i++) {
             num = hihokenshaNo % NO_10;
             hihokenshaNo = hihokenshaNo / NO_10;

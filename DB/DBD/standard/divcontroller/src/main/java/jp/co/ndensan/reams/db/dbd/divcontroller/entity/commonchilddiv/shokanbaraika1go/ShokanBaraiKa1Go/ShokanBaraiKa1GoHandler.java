@@ -17,21 +17,18 @@ import jp.co.ndensan.reams.db.dbd.business.core.taino.TainoKiSummary;
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShiharaiHenkoBenmeiRiyuCode;
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShiharaiHenkoBenmeiShinsaKekkaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShiharaiHenkoShuryoShinseiRiyuCode;
-import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShiharaiHenkoShuryoShinseiShinsaKekkaKubun;
+import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShoriKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.TainoHanteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.TaishoHanteiKubun;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4022ShiharaiHohoHenkoTainoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenko.ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbd.service.core.shiharaihohohenko.ShiharaiHohoHenkoManager;
+import jp.co.ndensan.reams.db.dbd.service.core.shokanbaraika1go.ShokanBaraiKa1GoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoKanriKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoMukoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoShuryoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoTorokuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.taino.JikoKubun;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -52,9 +49,6 @@ public class ShokanBaraiKa1GoHandler {
 
     private final ShokanBaraiKa1GoDiv div;
 
-    private final RString _１号予告者登録 = new RString("１号予告者登録");
-    private final RString _１号弁明書受理 = new RString("１号弁明書受理");
-    private final RString 償還払い化登録 = new RString("償還払い化登録");
     private final RString 新規登録 = new RString("新規登録");
     private final RString 新規区分_空 = new RString("空");
 
@@ -82,7 +76,7 @@ public class ShokanBaraiKa1GoHandler {
      * 画面初期化処理です。
      */
     public void onLoad() {
-        RString 押下ボタン = div.getKey_Button();
+        ShoriKubun 押下ボタン区分 = ShoriKubun.toValue(div.getKey_Button());
         List<ShiharaiHohoHenko> 支払方法変更管理業務概念List = DataPassingConverter.deserialize(div.getKey_ShiharaiHohoHenkoKanri(), List.class);
         List<ShiharaiHohoHenko> 支払方法データ = new ArrayList();
         ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, null);
@@ -91,10 +85,10 @@ public class ShokanBaraiKa1GoHandler {
                 if (shiharaiHohoHenko.get被保険者番号().value().equals(div.getKey_HihokenshaNo())
                         && shiharaiHohoHenko.get管理区分().equals(ShiharaiHenkoKanriKubun._１号償還払い化.getコード())
                         && shiharaiHohoHenko.get登録区分().equals(get登録区分())) {
-                    if ((押下ボタン.equals(_１号予告者登録) && shiharaiHohoHenko.get予告登録年月日() == null)
-                            || (押下ボタン.equals(償還払い化登録) && shiharaiHohoHenko.get償還払化決定年月日() == null)) {
+                    if ((ShoriKubun._1号予告者登録.equals(押下ボタン区分) && shiharaiHohoHenko.get予告登録年月日() == null)
+                            || (ShoriKubun.償還払い化登録.equals(押下ボタン区分) && shiharaiHohoHenko.get償還払化決定年月日() == null)) {
                         div.setShinkiKubun(新規登録);
-                    } else if (押下ボタン.equals(_１号予告者登録) || 押下ボタン.equals(償還払い化登録)) {
+                    } else if (ShoriKubun._1号予告者登録.equals(押下ボタン区分) || ShoriKubun.償還払い化登録.equals(押下ボタン区分)) {
                         div.setShinkiKubun(新規区分_空);
                     }
                     支払方法データ.add(shiharaiHohoHenko);
@@ -102,7 +96,7 @@ public class ShokanBaraiKa1GoHandler {
             }
         }
         if (支払方法データ.isEmpty()) {
-            if (div.getKey_Button().equals(_１号予告者登録)) {
+            if (ShoriKubun._1号予告者登録.equals(押下ボタン区分)) {
                 div.setShinkiKubun(新規登録);
             } else {
                 throw new ApplicationException(UrErrorMessages.対象ファイルが存在しない.getMessage().replace("支払方法変更"));
@@ -132,40 +126,49 @@ public class ShokanBaraiKa1GoHandler {
         if (pairs.iterator().hasNext()) {
             return pairs;
         }
-        ShiharaiHohoHenkoManager manager = ShiharaiHohoHenkoManager.createInstance();
+        ShiharaiHohoHenkoManager 支払方法変更Manager = ShiharaiHohoHenkoManager.createInstance();
+        ShokanBaraiKa1GoManager manager = new ShokanBaraiKa1GoManager();
         TainoHanteiResultKohen 滞納判定結果 = DataPassingConverter.deserialize(div.getTainoHanteiKekka(), TainoHanteiResultKohen.class);
-        ShiharaiHohoHenkoEntity 支払方法変更Entity = new ShiharaiHohoHenkoEntity();
-        switch (div.getKey_Button().toString()) {
-            case "１号予告者登録":
+        switch (ShoriKubun.toValue(div.getKey_Button())) {
+            case _1号予告者登録:
                 if (div.getShinkiKubun().equals(新規登録)) {
-                    支払方法変更Entity.set支払方法変更Entity(get1号予告者登録の登録Entity());
-                    支払方法変更Entity.set支払方法変更滞納Entity(get支払方法変更滞納Entity(滞納判定結果, TainoHanteiKubun.予告登録.getコード()));
-                    ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, new ShiharaiHohoHenko(支払方法変更Entity));
+                    ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念,
+                            manager.createShiharaiHohoHenkoFor1号予告者登録(
+                                    滞納判定結果,
+                                    new HihokenshaNo(div.getKey_HihokenshaNo()),
+                                    div.getTxtYokokuTorokuYMD().getValue(),
+                                    div.getTxtBemmeishoTeishutsuKigenYMD().getValue(),
+                                    div.getKey_MaxRirekiNo()));
                 } else {
                     update支払方法変更_1号予告者();
                     update支払方法変更滞納(滞納判定結果, TainoHanteiKubun.予告登録.getコード());
                 }
                 break;
-            case "１号弁明書受理":
+            case _1号弁明書受理:
                 update支払方法変更_1号弁明書受理();
                 break;
-            case "償還払い化登録":
+            case 償還払い化登録:
                 if (div.getShinkiKubun().equals(新規登録)) {
-                    支払方法変更Entity.set支払方法変更Entity(get償還払い化登録の登録Entity());
-                    支払方法変更Entity.set支払方法変更滞納Entity(get支払方法変更滞納Entity(滞納判定結果, TainoHanteiKubun.償還払化登録.getコード()));
-                    ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, new ShiharaiHohoHenko(支払方法変更Entity));
+                    ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念,
+                            manager.createShiharaiHohoHenkoFor償還払い化登録(
+                                    滞納判定結果,
+                                    new HihokenshaNo(div.getKey_HihokenshaNo()),
+                                    div.getTxtTekiyoKikanKaishi().getValue(),
+                                    div.getTxtHenkoKetteiYMD().getValue(),
+                                    div.getTxtHokenshoTeishutsuKigenYMD().getValue(),
+                                    div.getKey_MaxRirekiNo()));
                 } else {
                     update支払方法変更_償還払い化登録();
                     update支払方法変更滞納(滞納判定結果, TainoHanteiKubun.償還払化登録.getコード());
                 }
                 break;
-            case "償還払い化終了申請":
+            case 償還払い化終了申請:
                 update支払方法変更_償還払い化終了申請();
                 break;
             default:
                 break;
         }
-        manager.save(ViewStateHolder.get(一号償還払い化ダイアログキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class));
+        支払方法変更Manager.save(ViewStateHolder.get(一号償還払い化ダイアログキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class));
         return pairs;
     }
 
@@ -173,9 +176,10 @@ public class ShokanBaraiKa1GoHandler {
      * 滞納状況ダイアログを開く前に実行されるイベントを設定します。
      */
     public void onBeforeOpenDialog_BtnTainoJokyo() {
+        ShoriKubun 押下ボタン区分 = ShoriKubun.toValue(div.getKey_Button());
         div.setHihokenshaNo(div.getKey_HihokenshaNo());
         div.setKanriKubun(ShiharaiHenkoKanriKubun._１号償還払い化.getコード());
-        if ((div.getKey_Button().equals(_１号予告者登録) || div.getKey_Button().equals(_１号弁明書受理))) {
+        if ((ShoriKubun._1号予告者登録.equals(押下ボタン区分) || ShoriKubun._1号弁明書受理.equals(押下ボタン区分))) {
             div.setTainoHanteiKubun(TainoHanteiKubun.予告登録.getコード());
         } else {
             div.setTainoHanteiKubun(TainoHanteiKubun.償還払化登録.getコード());
@@ -187,17 +191,18 @@ public class ShokanBaraiKa1GoHandler {
      * 滞納状況ダイアログが確定クローズイベントで閉じられたときにダイアログが完全に閉じた後に実行されるイベントを設定します。
      */
     public void onOkClose_BtnTainoJokyo() {
+        ShoriKubun 押下ボタン区分 = ShoriKubun.toValue(div.getKey_Button());
         TainoHanteiResultKohen 滞納判定結果 = ViewStateHolder.get(ViewStateKeys.滞納判定結果, TainoHanteiResultKohen.class);
         if (滞納判定結果 != null && 滞納判定結果.get滞納情報() != null) {
             div.setTainoHanteiKekka(DataPassingConverter.serialize(滞納判定結果));
-            if (div.getKey_Button().equals(_１号予告者登録) || div.getKey_Button().equals(償還払い化登録)) {
+            if (ShoriKubun._1号予告者登録.equals(押下ボタン区分) || ShoriKubun._1号弁明書受理.equals(押下ボタン区分)) {
                 div.getBtnTainoJokyo().setIconNameEnum(IconName.Check);
             }
         }
     }
 
     private void initializeDisplayData(ShiharaiHohoHenko shiharaiHohoHenko) {
-        div.setTitle(div.getKey_Button());
+        div.setTitle(ShoriKubun.toValue(div.getKey_Button()).get名称());
         List<KeyValueDataSource> shiryoJokyoSource = new ArrayList();
         List<ShiharaiHenkoShuryoKubun> shuyoKubunList = ShiharaiHenkoShuryoKubun.valuesAt償還払い化終了申請();
         for (ShiharaiHenkoShuryoKubun shuyoKubun : shuyoKubunList) {
@@ -238,13 +243,13 @@ public class ShokanBaraiKa1GoHandler {
 
     private RString get登録区分() {
         RString torokuKubun = new RString("");
-        switch (div.getKey_Button().toString()) {
-            case "１号予告者登録":
-            case "１号弁明書受理":
+        switch (ShoriKubun.toValue(div.getKey_Button())) {
+            case _1号予告者登録:
+            case _1号弁明書受理:
                 torokuKubun = ShiharaiHenkoTorokuKubun._１号予告登録者.getコード();
                 break;
-            case "償還払い化登録":
-            case "償還払い化終了申請":
+            case 償還払い化登録:
+            case 償還払い化終了申請:
                 torokuKubun = ShiharaiHenkoTorokuKubun._１号償還払い化登録.getコード();
                 break;
             default:
@@ -329,66 +334,6 @@ public class ShokanBaraiKa1GoHandler {
         return new ShokanBaraiKa1GoValidationHandler();
     }
 
-    private DbT4021ShiharaiHohoHenkoEntity get1号予告者登録の登録Entity() {
-        DbT4021ShiharaiHohoHenkoEntity entity = new DbT4021ShiharaiHohoHenkoEntity();
-        entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo("209007"));
-        entity.setHihokenshaNo(new HihokenshaNo(div.getKey_HihokenshaNo()));
-        entity.setKanriKubun(ShiharaiHenkoKanriKubun._１号償還払い化.getコード());
-        entity.setRirekiNo(get最大履歴番号() + 1);
-        entity.setTorokuKubun(ShiharaiHenkoTorokuKubun._１号予告登録者.getコード());
-        entity.setShuryoKubun(ShiharaiHenkoShuryoKubun._空.getコード());
-        entity.setYokoku_TorokuYMD(div.getTxtYokokuTorokuYMD().getValue());
-        entity.setYokoku_TsuchiSaiHakkoFlag(false);
-        entity.setBemmei_TeishutsuYMD(div.getTxtBemmeishoTeishutsuKigenYMD().getValue());
-        entity.setBemmei_RiyuCode(ShiharaiHenkoBenmeiRiyuCode._空.getコード());
-        entity.setBemmei_ShinsaKekkaKubun(ShiharaiHenkoBenmeiShinsaKekkaKubun._空.getコード());
-        entity.setShokan_TsuchiSaiHakkoFlag(false);
-        entity.setSashitome_Flag(false);
-        entity.setShuryoShinsei_RiyuCode(ShiharaiHenkoShuryoShinseiRiyuCode._空.getコード());
-        entity.setShuryoShinsei_ShinsaKekkaKubun(ShiharaiHenkoShuryoShinseiShinsaKekkaKubun._空.getコード());
-        entity.setMukoKubun(ShiharaiHenkoMukoKubun.有効.getコード());
-        entity.setLogicalDeletedFlag(false);
-        return entity;
-    }
-
-    private List<DbT4022ShiharaiHohoHenkoTainoEntity> get支払方法変更滞納Entity(TainoHanteiResultKohen 滞納判定結果, RString 滞納判定区分) {
-        List<DbT4022ShiharaiHohoHenkoTainoEntity> 支払方法変更滞納Entity = new ArrayList();
-        List<ShiharaiHohoHenkoTaino> 支払方法変更滞納情報 = new ArrayList();
-        List<TainoKiSummary> tainoKiSummary = 滞納判定結果.get滞納情報();
-        int 連番 = 0;
-        for (TainoKiSummary summary : tainoKiSummary) {
-            TaishoHanteiKubun 対象管理区分 = get対象管理区分(連番++, summary.get時効区分().getコード(), 支払方法変更滞納情報);
-            DbT4022ShiharaiHohoHenkoTainoEntity entity = new DbT4022ShiharaiHohoHenkoTainoEntity();
-            entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo("209007"));
-            entity.setHihokenshaNo(new HihokenshaNo(div.getKey_HihokenshaNo()));
-            entity.setKanriKubun(ShiharaiHenkoKanriKubun._１号償還払い化.getコード());
-            entity.setRirekiNo(get最大履歴番号() + 1);
-            entity.setTainoHanteiKubun(滞納判定区分);
-            entity.setRenNo(連番++);
-            entity.setChoteiNendo(summary.get調定年度());
-            entity.setFukaNendo(summary.get賦課年度());
-            entity.setTsuchishoNo(summary.get通知書番号());
-            entity.setTokucho_fuchoKubun(summary.get徴収方法().getコード());
-            entity.setShuno_Ki_Tsuki(summary.get期());
-            entity.setTainoHanteiYMD(FlexibleDate.getNowDate());
-            entity.setHanteiKijunYMD(滞納判定結果.get滞納判定基準日());
-            entity.setJikoKisanYMD(summary.get時効起算日());
-            entity.setJikoKisanKubun(summary.get時効起算日区分().getコード());
-            entity.setKanno_MinoKubun(summary.get未納完納区分().getコード());
-            entity.setJikoKubun(summary.get時効区分().getコード());
-            entity.setJikoAtoShunyuKubun(summary.get時効後収入区分().getコード());
-            entity.setTaishoKanriKubun(対象管理区分.getコード());
-            entity.setChoteigaku(summary.get調定額());
-            entity.setKojoGaku(summary.get控除額());
-            entity.setTainoGaku(summary.get滞納額());
-            entity.setNokigen(new FlexibleDate(summary.get納期限().toDateString()));
-            entity.setLogicalDeletedFlag(false);
-            支払方法変更滞納Entity.add(entity);
-            支払方法変更滞納情報.add(new ShiharaiHohoHenkoTaino(entity));
-        }
-        return 支払方法変更滞納Entity;
-    }
-
     private void update支払方法変更_1号弁明書受理() {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(一号償還払い化ダイアログキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         ShiharaiHohoHenkoBuilder builder = 支払方法変更管理業務概念.createBuilderForEdit();
@@ -458,29 +403,6 @@ public class ShokanBaraiKa1GoHandler {
         ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, builder.build());
     }
 
-    private DbT4021ShiharaiHohoHenkoEntity get償還払い化登録の登録Entity() {
-        DbT4021ShiharaiHohoHenkoEntity entity = new DbT4021ShiharaiHohoHenkoEntity();
-        entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo("209007"));
-        entity.setHihokenshaNo(new HihokenshaNo(div.getKey_HihokenshaNo()));
-        entity.setKanriKubun(ShiharaiHenkoKanriKubun._１号償還払い化.getコード());
-        entity.setRirekiNo(get最大履歴番号() + 1);
-        entity.setTorokuKubun(ShiharaiHenkoTorokuKubun._１号償還払い化登録.getコード());
-        entity.setTekiyoKaishiYMD(div.getTxtTekiyoKikanKaishi().getValue());
-        entity.setShuryoKubun(ShiharaiHenkoShuryoKubun._空.getコード());
-        entity.setYokoku_TsuchiSaiHakkoFlag(false);
-        entity.setBemmei_RiyuCode(ShiharaiHenkoBenmeiRiyuCode._空.getコード());
-        entity.setBemmei_ShinsaKekkaKubun(ShiharaiHenkoBenmeiShinsaKekkaKubun._空.getコード());
-        entity.setShokan_KetteiYMD(div.getTxtHenkoKetteiYMD().getValue());
-        entity.setShokan_TsuchiSaiHakkoFlag(false);
-        entity.setHihokenshaShoTeishutsuYMD(div.getTxtHokenshoTeishutsuKigenYMD().getValue());
-        entity.setSashitome_Flag(false);
-        entity.setShuryoShinsei_RiyuCode(ShiharaiHenkoShuryoShinseiRiyuCode._空.getコード());
-        entity.setShuryoShinsei_ShinsaKekkaKubun(ShiharaiHenkoShuryoShinseiShinsaKekkaKubun._空.getコード());
-        entity.setMukoKubun(ShiharaiHenkoMukoKubun.有効.getコード());
-        entity.setLogicalDeletedFlag(false);
-        return entity;
-    }
-
     private void update支払方法変更_償還払い化登録() {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(一号償還払い化ダイアログキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         ShiharaiHohoHenkoBuilder builder = 支払方法変更管理業務概念.createBuilderForEdit();
@@ -514,8 +436,8 @@ public class ShokanBaraiKa1GoHandler {
     }
 
     private void setStatus() {
-        switch (div.getKey_Button().toString()) {
-            case "１号予告者登録":
+        switch (ShoriKubun.toValue(div.getKey_Button())) {
+            case _1号予告者登録:
                 div.getTxtTorokuJokyo().setReadOnly(true);
                 div.getTxtTekiyoKikanKaishi().setReadOnly(true);
                 div.getTxtTekiyoKikanShuryo().setReadOnly(true);
@@ -527,7 +449,7 @@ public class ShokanBaraiKa1GoHandler {
                 DisplayNone_償還払い化登録(true);
                 DisplayNone_償還払い化終了申請(true);
                 break;
-            case "１号弁明書受理":
+            case _1号弁明書受理:
                 div.getTxtTorokuJokyo().setReadOnly(true);
                 div.getTxtTekiyoKikanKaishi().setReadOnly(true);
                 div.getTxtTekiyoKikanShuryo().setReadOnly(true);
@@ -547,7 +469,7 @@ public class ShokanBaraiKa1GoHandler {
                 DisplayNone_償還払い化登録(true);
                 DisplayNone_償還払い化終了申請(true);
                 break;
-            case "償還払い化登録":
+            case 償還払い化登録:
                 div.getTxtTorokuJokyo().setReadOnly(true);
                 div.getTxtTekiyoKikanKaishi().setDisabled(false);
                 div.getTxtTekiyoKikanShuryo().setReadOnly(true);
@@ -558,7 +480,7 @@ public class ShokanBaraiKa1GoHandler {
                 DisplayNone_１号弁明書受理(true);
                 DisplayNone_償還払い化終了申請(true);
                 break;
-            case "償還払い化終了申請":
+            case 償還払い化終了申請:
                 div.getTxtTorokuJokyo().setReadOnly(true);
                 div.getTxtTekiyoKikanKaishi().setReadOnly(true);
                 div.getTxtTekiyoKikanShuryo().setDisabled(false);
@@ -586,8 +508,8 @@ public class ShokanBaraiKa1GoHandler {
     private void setValue(ShiharaiHohoHenko shiharaiHohoHenko) {
         if (div.getShinkiKubun().equals(新規登録)) {
             div.getBtnTainoJokyo().setIconNameEnum(IconName.Incomplete);
-            switch (div.getKey_Button().toString()) {
-                case "１号予告者登録":
+            switch (ShoriKubun.toValue(div.getKey_Button())) {
+                case _1号予告者登録:
                     div.getTxtTorokuJokyo().setValue(ShiharaiHenkoTorokuKubun._１号予告登録者.get名称());
                     div.getTxtTekiyoKikanKaishi().setValue(null);
                     div.getTxtTekiyoKikanShuryo().setValue(null);
@@ -596,7 +518,7 @@ public class ShokanBaraiKa1GoHandler {
                     div.getTxtBemmeishoTeishutsuKigenYMD().setValue(FlexibleDate.getNowDate());
                     div.getTxtYokokuTsuchiHakkoYMD().setValue(null);
                     break;
-                case "償還払い化登録":
+                case 償還払い化登録:
                     div.getTxtTorokuJokyo().setValue(ShiharaiHenkoTorokuKubun._１号償還払い化登録.get名称());
                     div.getTxtTekiyoKikanKaishi().setValue(FlexibleDate.getNowDate());
                     div.getTxtTekiyoKikanShuryo().setValue(null);
@@ -612,25 +534,25 @@ public class ShokanBaraiKa1GoHandler {
             div.getTxtTorokuJokyo().setValue(shiharaiHohoHenko.get登録区分());
             div.getTxtTekiyoKikanKaishi().setValue(shiharaiHohoHenko.get適用開始年月日());
             div.getTxtTekiyoKikanShuryo().setValue(shiharaiHohoHenko.get適用終了年月日());
-            switch (div.getKey_Button().toString()) {
-                case "１号予告者登録":
+            switch (ShoriKubun.toValue(div.getKey_Button())) {
+                case _1号予告者登録:
                     div.getTxtIraiJuriYMD().setValue(null);
                     div.getTxtYokokuTorokuYMD().setValue(shiharaiHohoHenko.get予告登録年月日());
                     div.getTxtBemmeishoTeishutsuKigenYMD().setValue(shiharaiHohoHenko.get弁明書提出期限());
                     div.getTxtYokokuTsuchiHakkoYMD().setValue(shiharaiHohoHenko.get予告通知書発行年月日());
                     break;
-                case "１号弁明書受理":
+                case _1号弁明書受理:
                     div.getTxtBemmeiUketsukeYMD().setValue(shiharaiHohoHenko.get弁明書受付年月日());
                     div.getTxtBemmeiNaiyoKetteiYMD().setValue(shiharaiHohoHenko.get弁明審査決定年月日());
                     div.getDdlBemmeiRiyu().setSelectedKey(shiharaiHohoHenko.get弁明理由コード());
                     div.getDdlBemmeiShinsaKekka().setSelectedKey(shiharaiHohoHenko.get弁明審査結果区分());
                     break;
-                case "償還払い化登録":
+                case 償還払い化登録:
                     div.getTxtHenkoKetteiYMD().setValue(shiharaiHohoHenko.get償還払化決定年月日());
                     div.getTxtHokenshoTeishutsuKigenYMD().setValue(shiharaiHohoHenko.get被保険者証提出期限());
                     div.getTxtHenkoTsuchiHakkoYMD().setValue(shiharaiHohoHenko.get償還払化通知書発行年月日());
                     break;
-                case "償還払い化終了申請":
+                case 償還払い化終了申請:
                     div.getTxtShinseiUketsukeYMD().setValue(shiharaiHohoHenko.get終了申請書受付年月日());
                     div.getTxtShinseiYMD().setValue(shiharaiHohoHenko.get終了申請年月日());
                     div.getTxtShinseiNaiyoKetteiYMD().setValue(shiharaiHohoHenko.get終了申請審査決定年月日());

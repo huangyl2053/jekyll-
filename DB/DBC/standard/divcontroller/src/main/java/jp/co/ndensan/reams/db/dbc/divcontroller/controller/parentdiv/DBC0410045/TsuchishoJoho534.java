@@ -62,38 +62,44 @@ public class TsuchishoJoho534 {
      * @return ResponseData
      */
     public ResponseData<KogakuKyufuKetteiInBatchParameter> onClick_btnExcute(TsuchishoJoho534Div div) {
+        if (setBatchParameter(div) != null) {
+            return ResponseData.of(setBatchParameter(div)).respond();
+        }
         return ResponseData.of(new KogakuKyufuKetteiInBatchParameter()).respond();
     }
 
     /**
-     * 「実行する」ボタン事件のメソッドます。
+     * 「実行する」ボタン事件のメソッドです。
      *
      * @param div TsuchishoJoho534Div
      * @return KogakuKyufuKetteiInBatchParameter
      */
     public KogakuKyufuKetteiInBatchParameter setBatchParameter(TsuchishoJoho534Div div) {
-        //TODO QA1005 QA963
-        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder iOutputOrder = finder.get出力順(
-                SubGyomuCode.DBC介護給付,
-                REPORTID,
-                Long.valueOf(div.getCcdKokurenJohoTorikomi().get出力順ID().toString()));
-        if (iOutputOrder != null) {
-            IChohyoShutsuryokujunManager manager = new _ChohyoShutsuryokujunManager();
-            manager.save前回出力順(iOutputOrder);
+        //TODO QA993
+        if (div.getCcdKokurenJohoTorikomi().get出力順ID() != null) {
+            long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
+            IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+            IOutputOrder iOutputOrder = finder.get出力順(
+                    SubGyomuCode.DBC介護給付,
+                    REPORTID,
+                    出力順ID);
+            if (iOutputOrder != null) {
+                IChohyoShutsuryokujunManager manager = new _ChohyoShutsuryokujunManager();
+                manager.save前回出力順(iOutputOrder);
+            }
+            KogakuKyufuKetteiInBatchParameter parameter = new KogakuKyufuKetteiInBatchParameter();
+            RDate 処理年月 = div.getCcdKokurenJohoTorikomi().get処理年月();
+            SaiShoriKubun 再処理区分 = null;
+            if (SaiShoriKubun.再処理.get名称().equals(div.getCcdKokurenJohoTorikomi().get再処理区分())) {
+                再処理区分 = SaiShoriKubun.再処理;
+            } else if (SaiShoriKubun.空白.get名称().equals(div.getCcdKokurenJohoTorikomi().get再処理区分())) {
+                再処理区分 = SaiShoriKubun.空白;
+            }
+            parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toDateString()));
+            parameter.setSaishoriKubun(再処理区分);
+            parameter.setShutsuryokujunId(出力順ID);
+            return parameter;
         }
-        KogakuKyufuKetteiInBatchParameter parameter = new KogakuKyufuKetteiInBatchParameter();
-        RDate 処理年月 = div.getCcdKokurenJohoTorikomi().get処理年月();
-        SaiShoriKubun 再処理区分 = null;
-        if (SaiShoriKubun.再処理.get名称().equals(div.getCcdKokurenJohoTorikomi().get再処理区分())) {
-            再処理区分 = SaiShoriKubun.toValue(SaiShoriKubun.再処理.getコード());
-        } else if (SaiShoriKubun.空白.get名称().equals(div.getCcdKokurenJohoTorikomi().get再処理区分())) {
-            再処理区分 = SaiShoriKubun.toValue(SaiShoriKubun.空白.getコード());
-        }
-        long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
-        parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toDateString()));
-        parameter.setSaishoriKubun(再処理区分);
-        parameter.setShutsuryokujunId(出力順ID);
-        return parameter;
+        return null;
     }
 }

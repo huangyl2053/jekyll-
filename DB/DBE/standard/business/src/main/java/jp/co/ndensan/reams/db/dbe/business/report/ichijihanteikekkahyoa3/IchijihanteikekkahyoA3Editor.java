@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 /**
  * 委員用一次判定結果票A3のEditorです。
  *
- * @reamsid_L DBE-0150-130 lishengli
+ * @reamsid_L DBE-0150-330 lishengli
  */
 public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Editor {
 
@@ -164,7 +164,7 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
             source.imgShisetsuTel = item.get電話番号イメージ();
         }
         source.shikibetuCode = ShikibetsuCode.EMPTY;
-        if (item.get申請書管理番号() != null) {
+        if (!RString.isNullOrEmpty(item.get申請書管理番号())) {
             source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
         }
         return source;

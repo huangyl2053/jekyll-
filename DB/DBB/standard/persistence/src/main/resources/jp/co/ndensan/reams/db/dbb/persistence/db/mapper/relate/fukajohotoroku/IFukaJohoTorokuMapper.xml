@@ -188,7 +188,8 @@
         ON
         choteiIdToroku."choteiNendo" = dbT2002."choteiNendo"
         AND choteiIdToroku."kazeiNendo" = dbT2002."fukaNendo"
-        AND choteiIdToroku."tsuchishoNo" = dbT2002."tsuchishoNo"
+        <!--TODO QA1470一時案対応 2016/08/01 王暁冬-->
+        AND choteiIdToroku."tsuchishoNo" = (CAST(dbT2002."tsuchishoNo" AS numeric))
         ORDER BY
         dbT2002."choteiNendo",
         dbT2002."fukaNendo",

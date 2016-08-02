@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.UploadPanel;
 
 /**
  * RenkeiDataTorikomi のクラスファイル
@@ -31,6 +32,8 @@ public class RenkeiDataTorikomiDiv extends Panel {
     private RenkeiDataTorikomiBatchParameterDiv RenkeiDataTorikomiBatchParameter;
     @JsonProperty("torikomiichiran")
     private torikomiichiranDiv torikomiichiran;
+    @JsonProperty("uploadArea")
+    private uploadAreaDiv uploadArea;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -72,6 +75,24 @@ public class RenkeiDataTorikomiDiv extends Panel {
     @JsonProperty("torikomiichiran")
     public void setTorikomiichiran(torikomiichiranDiv torikomiichiran) {
         this.torikomiichiran = torikomiichiran;
+    }
+
+    /*
+     * getuploadArea
+     * @return uploadArea
+     */
+    @JsonProperty("uploadArea")
+    public uploadAreaDiv getUploadArea() {
+        return uploadArea;
+    }
+
+    /*
+     * setuploadArea
+     * @param uploadArea uploadArea
+     */
+    @JsonProperty("uploadArea")
+    public void setUploadArea(uploadAreaDiv uploadArea) {
+        this.uploadArea = uploadArea;
     }
 
     /*
@@ -120,6 +141,16 @@ public class RenkeiDataTorikomiDiv extends Panel {
     @JsonIgnore
     public void setDgtorikomidataichiran(DataGrid<dgtorikomidataichiran_Row> dgtorikomidataichiran) {
         this.getTorikomiichiran().setDgtorikomidataichiran(dgtorikomidataichiran);
+    }
+
+    @JsonIgnore
+    public UploadPanel getUploadTool() {
+        return this.getUploadArea().getUploadTool();
+    }
+
+    @JsonIgnore
+    public void setUploadTool(UploadPanel uploadTool) {
+        this.getUploadArea().setUploadTool(uploadTool);
     }
 
     // </editor-fold>
