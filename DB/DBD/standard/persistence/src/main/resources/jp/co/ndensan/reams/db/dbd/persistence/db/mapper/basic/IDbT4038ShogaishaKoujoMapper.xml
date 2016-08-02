@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT4038ShogaishaKoujoマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4038ShogaishaKoujoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT4038ShogaishaKoujo">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4038ShogaishaKoujoMapper.allColumns_DbT4038ShogaishaKoujo" />
+     FROM
+         rgdb."DbT4038ShogaishaKoujo"
+     WHERE
+         rgdb."DbT4038ShogaishaKoujo"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT4038ShogaishaKoujo">
+         "DbT4038ShogaishaKoujo"."shoKisaiHokenshaNo" as "dbT4038ShogaishaKoujo_shoKisaiHokenshaNo",
+         "DbT4038ShogaishaKoujo"."hihokenshaNo" as "dbT4038ShogaishaKoujo_hihokenshaNo",
+         "DbT4038ShogaishaKoujo"."rirekiNo" as "dbT4038ShogaishaKoujo_rirekiNo",
+         "DbT4038ShogaishaKoujo"."insertDantaiCd" as "dbT4038ShogaishaKoujo_insertDantaiCd",
+         "DbT4038ShogaishaKoujo"."insertTimestamp" as "dbT4038ShogaishaKoujo_insertTimestamp",
+         "DbT4038ShogaishaKoujo"."insertReamsLoginId" as "dbT4038ShogaishaKoujo_insertReamsLoginId",
+         "DbT4038ShogaishaKoujo"."insertContextId" as "dbT4038ShogaishaKoujo_insertContextId",
+         "DbT4038ShogaishaKoujo"."isDeleted" as "dbT4038ShogaishaKoujo_isDeleted",
+         "DbT4038ShogaishaKoujo"."updateCount" as "dbT4038ShogaishaKoujo_updateCount",
+         "DbT4038ShogaishaKoujo"."lastUpdateTimestamp" as "dbT4038ShogaishaKoujo_lastUpdateTimestamp",
+         "DbT4038ShogaishaKoujo"."lastUpdateReamsLoginId" as "dbT4038ShogaishaKoujo_lastUpdateReamsLoginId",
+         "DbT4038ShogaishaKoujo"."shinseiYMD" as "dbT4038ShogaishaKoujo_shinseiYMD",
+         "DbT4038ShogaishaKoujo"."ketteiYMD" as "dbT4038ShogaishaKoujo_ketteiYMD",
+         "DbT4038ShogaishaKoujo"."tekiyoKaishiYMD" as "dbT4038ShogaishaKoujo_tekiyoKaishiYMD",
+         "DbT4038ShogaishaKoujo"."tekiyoShuryoYMD" as "dbT4038ShogaishaKoujo_tekiyoShuryoYMD",
+         "DbT4038ShogaishaKoujo"."ketteiKubun" as "dbT4038ShogaishaKoujo_ketteiKubun",
+         "DbT4038ShogaishaKoujo"."hiShoninRiyu" as "dbT4038ShogaishaKoujo_hiShoninRiyu",
+         "DbT4038ShogaishaKoujo"."taishoNendo" as "dbT4038ShogaishaKoujo_taishoNendo",
+         "DbT4038ShogaishaKoujo"."kijunYMD" as "dbT4038ShogaishaKoujo_kijunYMD",
+         "DbT4038ShogaishaKoujo"."haakuYMD" as "dbT4038ShogaishaKoujo_haakuYMD",
+         "DbT4038ShogaishaKoujo"."shinseiJiyu" as "dbT4038ShogaishaKoujo_shinseiJiyu",
+         "DbT4038ShogaishaKoujo"."ninteiKubun" as "dbT4038ShogaishaKoujo_ninteiKubun",
+         "DbT4038ShogaishaKoujo"."ninteiNaiyo" as "dbT4038ShogaishaKoujo_ninteiNaiyo",
+         "DbT4038ShogaishaKoujo"."kyufuritsu" as "dbT4038ShogaishaKoujo_kyufuritsu",
+         "DbT4038ShogaishaKoujo"."ninchishoNichijoSeikatsuJiritsudoCode" as "dbT4038ShogaishaKoujo_ninchishoNichijoSeikatsuJiritsudoCode",
+         "DbT4038ShogaishaKoujo"."shogaiNichijoSeikatsuJiritsudoCode" as "dbT4038ShogaishaKoujo_shogaiNichijoSeikatsuJiritsudoCode",
+         "DbT4038ShogaishaKoujo"."shogaishaTechoUmu" as "dbT4038ShogaishaKoujo_shogaishaTechoUmu",
+         "DbT4038ShogaishaKoujo"."shikakuSoshitsuJiyuCode" as "dbT4038ShogaishaKoujo_shikakuSoshitsuJiyuCode",
+         "DbT4038ShogaishaKoujo"."shikakuSoshitsuYMD" as "dbT4038ShogaishaKoujo_shikakuSoshitsuYMD",
+         "DbT4038ShogaishaKoujo"."ninteishoHakkoTaishogai" as "dbT4038ShogaishaKoujo_ninteishoHakkoTaishogai"
+    </sql>
+
+
+    <!--テーブルDbT4038ShogaishaKoujoの項目をDbT4038ShogaishaKoujoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT4038ShogaishaKoujoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4038ShogaishaKoujoEntity" autoMapping="true">
+        <id property="shoKisaiHokenshaNo" column="dbT4038ShogaishaKoujo_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <id property="hihokenshaNo" column="dbT4038ShogaishaKoujo_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="rirekiNo" column="dbT4038ShogaishaKoujo_rirekiNo" />
+        <result property="insertDantaiCd" column="dbT4038ShogaishaKoujo_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4038ShogaishaKoujo_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4038ShogaishaKoujo_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4038ShogaishaKoujo_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4038ShogaishaKoujo_isDeleted" />
+        <result property="updateCount" column="dbT4038ShogaishaKoujo_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4038ShogaishaKoujo_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4038ShogaishaKoujo_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseiYMD" column="dbT4038ShogaishaKoujo_shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ketteiYMD" column="dbT4038ShogaishaKoujo_ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tekiyoKaishiYMD" column="dbT4038ShogaishaKoujo_tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tekiyoShuryoYMD" column="dbT4038ShogaishaKoujo_tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ketteiKubun" column="dbT4038ShogaishaKoujo_ketteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hiShoninRiyu" column="dbT4038ShogaishaKoujo_hiShoninRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="taishoNendo" column="dbT4038ShogaishaKoujo_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="kijunYMD" column="dbT4038ShogaishaKoujo_kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="haakuYMD" column="dbT4038ShogaishaKoujo_haakuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinseiJiyu" column="dbT4038ShogaishaKoujo_shinseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiKubun" column="dbT4038ShogaishaKoujo_ninteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiNaiyo" column="dbT4038ShogaishaKoujo_ninteiNaiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyufuritsu" column="dbT4038ShogaishaKoujo_kyufuritsu" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenKyufuRitsuTypeHandler"/>
+        <result property="ninchishoNichijoSeikatsuJiritsudoCode" column="dbT4038ShogaishaKoujo_ninchishoNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="shogaiNichijoSeikatsuJiritsudoCode" column="dbT4038ShogaishaKoujo_shogaiNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="shogaishaTechoUmu" column="dbT4038ShogaishaKoujo_shogaishaTechoUmu" />
+        <result property="shikakuSoshitsuJiyuCode" column="dbT4038ShogaishaKoujo_shikakuSoshitsuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuSoshitsuYMD" column="dbT4038ShogaishaKoujo_shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteishoHakkoTaishogai" column="dbT4038ShogaishaKoujo_ninteishoHakkoTaishogai" />
+    </resultMap>
+
+</mapper>
