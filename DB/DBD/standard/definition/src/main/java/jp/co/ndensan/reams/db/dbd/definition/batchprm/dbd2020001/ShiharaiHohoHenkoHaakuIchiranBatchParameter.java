@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD2020001;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd2020001;
 
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd2020001.ShiharaiHohoHenkoHaakuIchiranProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;

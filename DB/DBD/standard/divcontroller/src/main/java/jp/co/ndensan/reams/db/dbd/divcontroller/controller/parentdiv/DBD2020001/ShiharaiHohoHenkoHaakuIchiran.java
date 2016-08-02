@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD2020001;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD2020001.ShiharaiHohoHenkoHaakuIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd2020001.ShiharaiHohoHenkoHaakuIchiranBatchParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020001.ShiharaiHohoHenkoHakuListMainDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;

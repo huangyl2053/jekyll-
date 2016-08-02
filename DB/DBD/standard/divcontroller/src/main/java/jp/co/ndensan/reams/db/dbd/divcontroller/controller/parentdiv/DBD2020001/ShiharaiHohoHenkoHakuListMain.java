@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD2020001;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD2020001.ShiharaiHohoHenkoHaakuIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd2020001.ShiharaiHohoHenkoHaakuIchiranBatchParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020001.ShiharaiHohoHenkoHakuListMainDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2020001.DBD2020001ValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
@@ -302,9 +302,9 @@ public class ShiharaiHohoHenkoHakuListMain {
      * @return ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> onClick_btnCheck(ShiharaiHohoHenkoHakuListMainDiv div) {
-        ValidationMessageControlPairs validPairs = getHandler(div).バッチ実行前チェック();
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        ValidationMessageControlPairs pairs = getHandler(div).バッチ実行前チェック();
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
 
         return createResponse(div);
