@@ -95,24 +95,25 @@
         <result property="shishoMei" column="shishoMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shinsakaiOrder" column="shinsakaiOrder" />
     </resultMap>
-
-    <resultMap id="Result_ShinseiJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinseiJohoEntity" autoMapping="true">
-        <result property="shinseishoKanriNo" column="dbt5502_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
-        <result property="shinsakaiOrder" column="dbt5502_shinsakaiOrder" />
-        <result property="shoKisaiHokenshaNo" column="dbt5101_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="hihokenshaNo" column="dbt5101_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="hihokenshaName" column="dbt5101_hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
-        <result property="seibetsu" column="dbt5101_seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
-        <result property="age" column="dbt5101_age" />
-        <result property="koroshoCode" column="dbt5101Zen_koroshoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
-        <result property="nijiHanteiCode" column="dbt5102Zen_nijiHanteiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
-        <result property="nijiHanteiKikan" column="dbt5102Zen_nijiHanteiKikan" />
-        <result property="nijiHanteiKaishiYMD" column="dbt5102Zen_nijiHanteiKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="nijiHanteiShuryoYMD" column="dbt5102Zen_nijiHanteiShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="ichijiHanteiKekkaCode" column="dbt5116_ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
-        <result property="ichijiHnateiKeikokuCode" column="dbt5116_ichijiHnateiKeikokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="kijunJikan" column="dbt5116_kijunJikan" />
-        <result property="ichijiHanteiKasanCode" column="dbt5116_ichijiHanteiKasanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+    
+<resultMap id="Result_ShinseiJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiTaiyosyaJohoEntity" autoMapping="true">
+        <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
+        <result property="shinsakaiOrder" column="shinsakaiOrder" />
+        <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="seibetsu" column="seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="age" column="age" />
+        <result property="koroshoIfShikibetsuCode" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="nijiHanteiYokaigoJotaiKubunCode" column="nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="nijiHanteiNinteiYukoKikan" column="nijiHanteiNinteiYukoKikan" />
+        <result property="nijiHanteiNinteiYukoKaishiYMD" column="nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="nijiHanteiNinteiYukoShuryoYMD" column="nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="ichijiHanteiKekkaCode" column="ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="ichijiHanteiKekkaNinchishoKasanCode" column="ichijiHanteiKekkaNinchishoKasanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="ichijiHnateiKeikokuCode" column="ichijiHnateiKeikokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kijunJikan" column="kijunJikan" />
+        <!--<result property="jotaiKubunCode" column="dbT5102_jotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />-->
     </resultMap>
     
 
@@ -250,62 +251,45 @@
      
     <select id="get事務局情報" resultMap="Result_ShinseiJoho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
-            SELECT
-            dbt5502."shinseishoKanriNo" AS dbt5502_shinseishoKanriNo,
-            dbt5502."shinsakaiOrder" AS dbt5502_shinsakaiOrder,
-            dbt5101."shoKisaiHokenshaNo" AS dbt5101_shoKisaiHokenshaNo,
-            dbt5101."hihokenshaNo" AS dbt5101_hihokenshaNo,
-            dbt5101."hihokenshaName" AS dbt5101_hihokenshaName,
-            dbt5101."seibetsu" AS dbt5101_seibetsu,
-            dbt5101."age" AS dbt5101_age,
-            ZenJoho.dbt5101Zen_koroshoCode AS dbt5101Zen_koroshoCode,
-            ZenJoho.dbt5102Zen_nijiHanteiCode AS dbt5102Zen_nijiHanteiCode,
-            ZenJoho.dbt5102Zen_nijiHanteiKikan AS dbt5102Zen_nijiHanteiKikan,
-            ZenJoho.dbt5102Zen_nijiHanteiKaishiYMD AS dbt5102Zen_nijiHanteiKaishiYMD,
-            ZenJoho.dbt5102Zen_nijiHanteiShuryoYMD AS dbt5102Zen_nijiHanteiShuryoYMD,
-            dbt5116."ichijiHanteiKekkaCode" AS dbt5116_ichijiHanteiKekkaCode,
-            dbt5116."ichijiHnateiKeikokuCode" AS dbt5116_ichijiHnateiKeikokuCode,
-            dbt5116."kijunJikan" AS dbt5116_kijunJikan,
-        dbt5116."ichijiHanteiKekkaNinchishoKasanCode" AS dbt5116_ichijiHanteiKasanCode
-        FROM
-                rgdb."DbT5502ShinsakaiWariateJoho" AS dbt5502
-        INNER JOIN
-                rgdb."DbT5101NinteiShinseiJoho" AS dbt5101
-        ON
-                dbt5101."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
-        AND (dbt5101."shoriJotaiKubun" = #{shoriJotaiKubun0} OR dbt5101."shoriJotaiKubun" = #{shoriJotaiKubun3})
-        AND dbt5101."logicalDeletedFlag" = False
-        INNER JOIN
-                rgdb."DbT5116IchijiHanteiKekkaJoho" AS dbt5116
-        ON
-                dbt5116."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
-        LEFT JOIN
-                (
-                        SELECT
-                                dbt5121."shinseishoKanriNo" AS dbt5121_shinseishoKanriNo,
-                                dbt5101Zen."koroshoIfShikibetsuCode" AS dbt5101Zen_koroshoCode,
-                                dbt5102Zen."nijiHanteiYokaigoJotaiKubunCode" AS dbt5102Zen_nijiHanteiCode,
-                                dbt5102Zen."nijiHanteiNinteiYukoKikan" AS dbt5102Zen_nijiHanteiKikan,
-                                dbt5102Zen."nijiHanteiNinteiYukoKaishiYMD" AS dbt5102Zen_nijiHanteiKaishiYMD,
-                                dbt5102Zen."nijiHanteiNinteiYukoShuryoYMD" AS dbt5102Zen_nijiHanteiShuryoYMD
-                        FROM
-                                rgdb."DbT5121ShinseiRirekiJoho" AS dbt5121
-                        INNER JOIN
-                                rgdb."DbT5101NinteiShinseiJoho" AS dbt5101Zen
-                        ON
-                                dbt5101Zen."shinseishoKanriNo" = dbt5121."zenkaiShinseishoKanriNo"
-                        AND (dbt5101Zen."shoriJotaiKubun" = #{shoriJotaiKubun0} OR dbt5101Zen."shoriJotaiKubun" = #{shoriJotaiKubun3})
-                        AND dbt5101Zen."logicalDeletedFlag" = False
-                        INNER JOIN
-                                rgdb."DbT5102NinteiKekkaJoho" AS dbt5102Zen
-                        ON 
-                                dbt5102Zen."shinseishoKanriNo" = dbt5101Zen."shinseishoKanriNo"
-                ) AS ZenJoho
-        ON 
-                ZenJoho.dbt5121_shinseishoKanriNo = dbt5502."shinseishoKanriNo"
-        WHERE
-                dbt5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
-        AND dbt5502."shinsakaiOrderKakuteiFlag" = #{isOrderKakuteiFlg}
+         SELECT dbt5502."shinseishoKanriNo"
+        , dbt5502."shinsakaiOrder"
+        , dbt5101."shoKisaiHokenshaNo"
+        , dbt5101."hihokenshaNo"
+        , dbt5101."hihokenshaName"
+        , dbt5101."seibetsu"
+        , dbt5101."age"
+        , zenkaiJoho."koroshoIfShikibetsuCode"
+        , zenkaiJoho."nijiHanteiYokaigoJotaiKubunCode"
+        , zenkaiJoho."nijiHanteiNinteiYukoKikan"
+        , zenkaiJoho."nijiHanteiNinteiYukoKaishiYMD"
+        , zenkaiJoho."nijiHanteiNinteiYukoShuryoYMD"
+        , dbt5116."ichijiHanteiKekkaCode"
+        , dbt5116."ichijiHanteiKekkaNinchishoKasanCode"
+        , dbt5116."ichijiHnateiKeikokuCode"
+        , dbt5116."kijunJikan"
+        FROM rgdb."DbT5502ShinsakaiWariateJoho" dbt5502
+        INNER JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101
+        ON dbt5101."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
+        AND (dbt5101."shoriJotaiKubun" = '0' OR dbt5101."shoriJotaiKubun" = '3')
+        AND dbt5101."logicalDeletedFlag" = FALSE
+        INNER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" dbt5116
+        ON dbt5116."shinseishoKanriNo" = dbt5101."shinseishoKanriNo"
+        LEFT JOIN (SELECT dbt5121."shinseishoKanriNo"
+        , dbt5101Zenkai."koroshoIfShikibetsuCode"
+        , dbt5102."nijiHanteiYokaigoJotaiKubunCode"
+        , dbt5102."nijiHanteiNinteiYukoKikan"
+        , dbt5102."nijiHanteiNinteiYukoKaishiYMD"
+        , dbt5102."nijiHanteiNinteiYukoShuryoYMD"
+        FROM rgdb."DbT5121ShinseiRirekiJoho" dbt5121
+        INNER JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101Zenkai
+        ON dbt5101Zenkai."shinseishoKanriNo" = dbt5121."shinseishoKanriNo"
+        AND (dbt5101Zen."shoriJotaiKubun" = #{shoriJotaiKubun0} OR dbt5101Zen."shoriJotaiKubun" = #{shoriJotaiKubun3})
+        AND dbt5101Zenkai."logicalDeletedFlag" = FALSE
+        INNER JOIN rgdb."DbT5102NinteiKekkaJoho" dbt5102
+        ON dbt5102."shinseishoKanriNo" = dbt5101Zenkai."shinseishoKanriNo") AS zenkaiJoho
+        ON zenkaiJoho."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
+        WHERE dbt5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
+                AND dbt5502."shinsakaiOrderKakuteiFlag" = #{isOrderKakuteiFlg}
         <if test="isSakuseiJokenHani">
             AND #{bangoStart} <![CDATA[<=]]> dbT5502."shinsakaiOrder"
             AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
@@ -313,12 +297,12 @@
         <if test="isSakuseiJokenTuika">
             AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
         </if>
-<!--                            ORDER BY
+        <!--            ORDER BY
         <if test="isIsShuturyokuJun">
            NinteiJoho.dbT5502_shinsakaiOrder
-        </if>
-        TODO 出力順　実装しない
-                        <if test="!isIsShuturyokuJun">
+        </if>-->
+        <!--TODO 出力順　実装しない-->
+        <!--                <if test="!isIsShuturyokuJun">
            #{shuturyokuJun}
         </if>-->
         LIMIT

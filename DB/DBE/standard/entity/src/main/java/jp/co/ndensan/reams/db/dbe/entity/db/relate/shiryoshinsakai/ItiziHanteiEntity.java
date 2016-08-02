@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -89,4 +90,20 @@ public class ItiziHanteiEntity {
     private Code suiteiKyufuKubunCode;
     private Code serviceKubunCode;
     private ShinseishoKanriNo zShinseishoKanriNo;
+    private AtenaMeisho hihokenshaName;
+    private RString hihokenshaNo;
+    private RString shoKisaiHokenshaNo;
+    private RString shichosonMeisho;
+    private RString ninteichosaItakusakiCode;
+    private RString jigyoshaMeisho;
+    private RString ninteiChosainCode;
+    private RString chosainShimei;
+    private RString chosainShikaku;
+    private RString shujiiCode;
+    private RString shujiiName;
+    private RString shujiiIryokikanCode;
+    private RString iryoKikanMeisho;
+    private RString jotaizo;
+    private RString shishoMei;
+    private int shinsakaiOrder;
 }

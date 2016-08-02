@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakute
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiTaiyosyaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishiryoa4.ShinsakaishiryoA4ReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.IsHaishi;
@@ -39,10 +39,10 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-0150-190 linghuhang
  */
-public class JimuShinsakaiIinJohoDataSakuseiA4Process extends BatchProcessBase<ShinseiJohoEntity> {
+public class JimuShinsakaiIinJohoDataSakuseiA4Process extends BatchProcessBase<ShinsakaiTaiyosyaJohoEntity> {
 
     private static final RString SELECT_JIMUSHINASKAIIINJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
-            + ".mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper.get事務局対象者情報");
+            + ".mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper.get事務局情報");
     private static final int INT_4 = 4;
     private IinShinsakaiIinJohoProcessParameter paramter;
     private IJimuShiryoShinsakaiIinMapper mapper;
@@ -79,7 +79,7 @@ public class JimuShinsakaiIinJohoDataSakuseiA4Process extends BatchProcessBase<S
     }
 
     @Override
-    protected void process(ShinseiJohoEntity entity) {
+    protected void process(ShinsakaiTaiyosyaJohoEntity entity) {
         JimuShinsakaishiryoBusiness business = new JimuShinsakaishiryoBusiness(paramter, entity, shinsakaiIinJohoList, no, count);
         ShinsakaishiryoA4Report report = new ShinsakaishiryoA4Report(business);
         report.writeBy(reportSourceWriterA4);
@@ -109,7 +109,7 @@ public class JimuShinsakaiIinJohoDataSakuseiA4Process extends BatchProcessBase<S
 
     private List<RString> contribute() {
         List<RString> 出力条件 = new ArrayList<>();
-        出力条件.add(条件(new RString("合議体番号"), paramter.getGogitaiNo()));
+        出力条件.add(条件(new RString("合議体番号"), new RString(paramter.getGogitaiNo())));
         出力条件.add(条件(new RString("介護認定審査会開催予定年月日"), paramter.getShinsakaiKaisaiYoteiYMD().wareki().toDateString()));
         出力条件.add(条件(new RString("介護認定審査会開催番号"), paramter.getShinsakaiKaisaiNo()));
         return 出力条件;

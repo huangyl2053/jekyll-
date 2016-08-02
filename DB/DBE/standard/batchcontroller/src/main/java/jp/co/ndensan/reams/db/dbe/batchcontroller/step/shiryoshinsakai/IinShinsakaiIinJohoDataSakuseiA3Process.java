@@ -85,7 +85,7 @@ public class IinShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<Sh
     @Override
     protected void process(ShinseiJohoEntity entity) {
         DbT5102NinteiKekkaJohoEntity dbT5102Entity = get前回要介護認定結果情報(entity.getShinseishoKanriNo());
-        JimuShinsakaishiryoBusiness business = new JimuShinsakaishiryoBusiness(paramter, entity, dbT5102Entity, shinsakaiIinJohoList, no, count);
+        JimuShinsakaishiryoBusiness business = new JimuShinsakaishiryoBusiness(paramter, entity, shinsakaiIinJohoList, no, count);
         ShinsakaishiryoA3Report report = new ShinsakaishiryoA3Report(business);
         report.writeBy(reportSourceWriterA3);
         no = no + 1;

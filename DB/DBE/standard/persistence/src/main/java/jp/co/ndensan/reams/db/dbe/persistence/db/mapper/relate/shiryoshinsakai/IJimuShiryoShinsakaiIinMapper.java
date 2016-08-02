@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ImjJohoEntity
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ItiziHanteiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiTaiyosyaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
@@ -52,7 +52,7 @@ public interface IJimuShiryoShinsakaiIinMapper {
      * @param parameter JimuShinsakaiIinJohoMyBatisParameter
      * @return List<ShinseiJohoEntity> 要介護認定申請者
      */
-    List<ShinseiJohoEntity> get事務局情報(JimuShinsakaiIinJohoMyBatisParameter parameter);
+    List<ShinsakaiTaiyosyaJohoEntity> get事務局情報(JimuShinsakaiIinJohoMyBatisParameter parameter);
 
     /**
      * 事務局用介護認定審査対象者一覧表情報を取得します。

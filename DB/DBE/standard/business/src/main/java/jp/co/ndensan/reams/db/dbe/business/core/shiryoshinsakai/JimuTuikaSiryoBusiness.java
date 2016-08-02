@@ -231,7 +231,7 @@ public class JimuTuikaSiryoBusiness {
      * @return 合議体番号
      */
     public RString get合議体番号() {
-        return paramter.getGogitaiNo();
+        return new RString(paramter.getGogitaiNo());
     }
 
     /**

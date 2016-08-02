@@ -51,7 +51,6 @@ public class JimuSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
     @BatchWriter
     private BatchReportWriter<SonotashiryoA4ReportSource> batchWriteA4;
     private ReportSourceWriter<SonotashiryoA4ReportSource> reportSourceWriterA4;
-    private int 番号 = 0;
 
     @Override
     protected void initialize() {
@@ -68,10 +67,9 @@ public class JimuSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
 
     @Override
     protected void usualProcess(ShinsakaiSiryoKyotsuEntity entity) {
-        business = new JimuSonotashiryoBusiness(entity, 番号);
+        business = new JimuSonotashiryoBusiness(entity);
         SonotashiryoA4Report reportA4 = new SonotashiryoA4Report(business);
         reportA4.writeBy(reportSourceWriterA4);
-        番号 = 番号 + 1;
     }
 
     @Override
