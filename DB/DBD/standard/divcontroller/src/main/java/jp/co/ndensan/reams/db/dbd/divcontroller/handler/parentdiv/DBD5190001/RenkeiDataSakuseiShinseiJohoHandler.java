@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5190001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.core.ninteishinseijoho.YokaigoNinteiGaibuDataOutputHistory;
 import jp.co.ndensan.reams.db.dbd.business.core.ninteishinseijoho.NinteiShinseiJohoBusiness;
+import jp.co.ndensan.reams.db.dbd.business.core.ninteishinseijoho.YokaigoNinteiGaibuDataOutputHistory;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5190001.RenkeiDataSakuseiShinseiJohoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5190001.dgTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbd.service.core.dbd5190001.RenkeiDataSakuseiShinseiJohoManager;
@@ -51,6 +51,7 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
      *
      * @param div RenkeiDataSakuseiShinseiJohoDiv
      * @param dataKubun Code
+     * @param 新ファイル名 RString
      */
     public void get保険者リスト取得(RenkeiDataSakuseiShinseiJohoDiv div, Code dataKubun, RString 新ファイル名) {
         div.getCommonChildDiv1().loadHokenshaList();
@@ -59,42 +60,44 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
         RTime zenkaikaishitime = null;
         RDate zenkaishuryoday = null;
         RTime zenkaishuryotime = null;
-        if (outPutHistory.getDataOutputKaishiYMDHM() != null) {
-            zenkaikaishiday = outPutHistory.getDataOutputKaishiYMDHM().getDate();
-            zenkaikaishitime = outPutHistory.getDataOutputKaishiYMDHM().getTime();
-        }
-        if (outPutHistory.getDataOutputShuryoYMDHM() != null) {
-            zenkaishuryoday = outPutHistory.getDataOutputShuryoYMDHM().getDate();
-            zenkaishuryotime = outPutHistory.getDataOutputShuryoYMDHM().getTime();
-        }
-        if (zenkaikaishiday != null) {
-            div.getTxtZenkaiKaishiDay().setValue(zenkaikaishiday);
-        }
-        if (zenkaikaishitime != null) {
-            div.getTxtZenkaiKaishiTime().setValue(zenkaikaishitime);
-        }
-        if (zenkaishuryoday != null) {
-            div.getTxtZenkaiShuryoDay().setValue(zenkaishuryoday);
-        }
-        if (zenkaishuryotime != null) {
-            div.getTxtZenkaiShuryoTime().setValue(zenkaishuryotime);
-        }
-        if (zenkaikaishiday != null) {
-            div.getTxtKonkaiKaishiDay().setValue(zenkaikaishiday);
-            if (zenkaikaishitime.toString().equals("23:59:59")) {
-                div.getTxtKonkaiKaishiDay().setValue(zenkaikaishiday.plusDay(1));
+        if (outPutHistory != null) {
+            if (outPutHistory.getDataOutputKaishiYMDHM() != null) {
+                zenkaikaishiday = outPutHistory.getDataOutputKaishiYMDHM().getDate();
+                zenkaikaishitime = outPutHistory.getDataOutputKaishiYMDHM().getTime();
             }
-        } else {
-            div.getTxtKonkaiKaishiDay().setValue(RDate.getNowDate());
-        }
-        if (zenkaikaishitime != null) {
-            div.getTxtKonkaiKaishiTime().setValue(zenkaikaishitime.plusSeconds(1));
-        } else {
-            div.getTxtKonkaiKaishiTime().setValue(RTime.now());
-        }
+            if (outPutHistory.getDataOutputShuryoYMDHM() != null) {
+                zenkaishuryoday = outPutHistory.getDataOutputShuryoYMDHM().getDate();
+                zenkaishuryotime = outPutHistory.getDataOutputShuryoYMDHM().getTime();
+            }
+            if (zenkaikaishiday != null) {
+                div.getTxtZenkaiKaishiDay().setValue(zenkaikaishiday);
+            }
+            if (zenkaikaishitime != null) {
+                div.getTxtZenkaiKaishiTime().setValue(zenkaikaishitime);
+            }
+            if (zenkaishuryoday != null) {
+                div.getTxtZenkaiShuryoDay().setValue(zenkaishuryoday);
+            }
+            if (zenkaishuryotime != null) {
+                div.getTxtZenkaiShuryoTime().setValue(zenkaishuryotime);
+            }
+            if (zenkaikaishiday != null) {
+                div.getTxtKonkaiKaishiDay().setValue(zenkaikaishiday);
+                if (zenkaikaishitime.toString().equals("23:59:59")) {
+                    div.getTxtKonkaiKaishiDay().setValue(zenkaikaishiday.plusDay(1));
+                }
+            } else {
+                div.getTxtKonkaiKaishiDay().setValue(RDate.getNowDate());
+            }
+            if (zenkaikaishitime != null) {
+                div.getTxtKonkaiKaishiTime().setValue(zenkaikaishitime.plusSeconds(1));
+            } else {
+                div.getTxtKonkaiKaishiTime().setValue(RTime.now());
+            }
 
-        div.getTxtKonkaiShuryoDay().setValue(RDate.getNowDate());
-        div.getTxtKonkaiShuryoTime().setValue(RTime.now());
+            div.getTxtKonkaiShuryoDay().setValue(RDate.getNowDate());
+            div.getTxtKonkaiShuryoTime().setValue(RTime.now());
+        }
         div.getTxtNewFileName().setValue(新ファイル名);
 
     }

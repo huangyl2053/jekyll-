@@ -77,9 +77,11 @@ public enum RenkeiDataSakuseiShinseiJohoDivSpec implements IPredicate<RenkeiData
                 public boolean apply(RenkeiDataSakuseiShinseiJohoDiv div
                 ) {
                     boolean dayflag = false;
-                    boolean daycompare = (div.getTxtKonkaiKaishiDay().getValue().compareTo(div.getTxtKonkaiShuryoDay().getValue()) < 0);
-                    if (div.getTxtKonkaiKaishiDay().getValue() != null && div.getTxtKonkaiShuryoDay().getValue() != null && daycompare) {
-                        dayflag = true;
+                    if (div.getTxtKonkaiKaishiDay() != null && div.getTxtKonkaiShuryoDay().getValue() != null) {
+                        boolean daycompare = (div.getTxtKonkaiKaishiDay().getValue().compareTo(div.getTxtKonkaiShuryoDay().getValue()) < 0);
+                        if (daycompare) {
+                            dayflag = true;
+                        }
                     }
                     return dayflag;
                 }
