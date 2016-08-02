@@ -1,0 +1,15 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,hihokenshaNo,A
+taishoYM,UDD014YM,FlexibleYearMonth,,,,,taishoYM,A
+rirekiNo,int2,int,,,,,rirekiNo,A
+kyotaku_SogoJigyoKubun,varchar,RString,,,,,kyotaku_SogoJigyoKubun,A
+todokedeKubun,varchar,RString,,,,,todokedeKubun,A
+sakuseiKubunCode,bpchar,RString,,,,,sakuseiKubunCode,A
+keikakuJigyoshaNo,varchar,RString,,,,,keikakuJigyoshaNo,A
+tekiyoKaishiYMD,UDD015YMD,FlexibleDate,,,,,tekiyoKaishiYMD,A
+tekiyoShuryoYMD,UDD015YMD,FlexibleDate,,,,,tekiyoShuryoYMD,A
+sakuseiYMD,varchar,RString,,,,,sakuseiYMD,A
+todokedeYMD,UDD015YMD,FlexibleDate,,,,,todokedeYMD,A
+henkoYMD,UDD015YMD,FlexibleDate,,,,,henkoYMD,A
+henkoJiyu,text,RString,,,,,henkoJiyu,A
+zanteiKubun,varchar,RString,,,,,zanteiKubun,A
+itakusakiJigyoshaNo,varchar,RString,,,,,itakusakiJigyoshaNo,A

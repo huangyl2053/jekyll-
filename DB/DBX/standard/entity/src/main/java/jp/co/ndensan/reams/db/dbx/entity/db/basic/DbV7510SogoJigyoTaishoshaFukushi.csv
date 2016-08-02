@@ -1,0 +1,7 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,hihokenshaNo,A
+rirekiNo,int2,int,,,,,rirekiNo,A
+tekiyoKaishiYMD,UDD015YMD,FlexibleDate,,,,,tekiyoKaishiYMD,A
+tekiyoShuryoYMD,UDD015YMD,FlexibleDate,,,,,tekiyoShuryoYMD,A
+uketsukeYMD,UDD015YMD,FlexibleDate,,,,,uketsukeYMD,A
+ketteiYMD,UDD015YMD,FlexibleDate,,,,,ketteiYMD,A
+checklistJisshiYMD,UDD015YMD,FlexibleDate,,,,,checklistJisshiYMD,A

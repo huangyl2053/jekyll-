@@ -1,0 +1,5 @@
+﻿tsuchishoNo,DbUDD008TsuchishoNo,TsuchishoNo,,,,,tsuchishoNo,A
+choteiNendo,UDD012YSeireki,FlexibleYear,,,,,choteiNendo,A
+kazeiNendo,UDD012YSeireki,FlexibleYear,,,,,kazeiNendo,A
+ki,int4,int,,,,,ki,A
+isHikazeiNenkin,bool,boolean,,,,,isHikazeiNenkin,A
