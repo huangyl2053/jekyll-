@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai;
 
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinShinsakaiIinJohoMyBatisParameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -22,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParameter {
 
-    private RString gogitaiNo;
+    private int gogitaiNo;
     private FlexibleDate shinsakaiKaisaiYoteiYMD;
     private RString shinsakaiKaisaiNo;
     private RString shuturyokuJun;
@@ -44,7 +43,7 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
      * @param shinsakaiKaishiYoteiTime 介護認定審査会開始予定時刻
      */
     public IinShinsakaiIinJohoProcessParameter(
-            RString gogitaiNo,
+            int gogitaiNo,
             FlexibleDate shinsakaiKaisaiYoteiYMD,
             RString shinsakaiKaisaiNo,
             RString shuturyokuJun,
@@ -75,16 +74,16 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
         return new IinShinsakaiIinJohoMyBatisParameter(gogitaiNo, shinsakaiKaisaiYoteiYMD, shinsakaiKaisaiNo, shuturyokuJun, isShuturyokuJun);
     }
 
-    /**
-     * 事務局用介護認定審査対象者一覧表情報のMyBatisParameterに転換します。
-     *
-     * @return JimuShinsakaiIinJohoMyBatisParameter
-     */
-    public JimuShinsakaiIinJohoMyBatisParameter toJimuShinsakaiIinJohoMyBatisParameter() {
-        boolean isShuturyokuJun = false;
-        if (RString.isNullOrEmpty(shuturyokuJun)) {
-            isShuturyokuJun = true;
-        }
-        return new JimuShinsakaiIinJohoMyBatisParameter(gogitaiNo, shinsakaiKaisaiYoteiYMD, shinsakaiKaisaiNo, shuturyokuJun, isShuturyokuJun);
-    }
+//    /**
+//     * 事務局用介護認定審査対象者一覧表情報のMyBatisParameterに転換します。
+//     *
+//     * @return JimuShinsakaiIinJohoMyBatisParameter
+//     */
+//    public JimuShinsakaiIinJohoMyBatisParameter toJimuShinsakaiIinJohoMyBatisParameter() {
+//        boolean isShuturyokuJun = false;
+//        if (RString.isNullOrEmpty(shuturyokuJun)) {
+//            isShuturyokuJun = true;
+//        }
+//        return new JimuShinsakaiIinJohoMyBatisParameter(gogitaiNo, shinsakaiKaisaiYoteiYMD, shinsakaiKaisaiNo, shuturyokuJun, isShuturyokuJun);
+//    }
 }

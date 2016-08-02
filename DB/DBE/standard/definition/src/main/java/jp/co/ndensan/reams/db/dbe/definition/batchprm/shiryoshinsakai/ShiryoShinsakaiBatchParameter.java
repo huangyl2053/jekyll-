@@ -253,7 +253,7 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
      * @return IinTokkiJikouItiziHanteiProcessParameter
      */
     public IinShinsakaiIinJohoProcessParameter toIinShinsakaiIinJohoProcessParameter() {
-        return new IinShinsakaiIinJohoProcessParameter(gogitaiNo,
+        return new IinShinsakaiIinJohoProcessParameter(Integer.parseInt(gogitaiNo.toString()),
                 shinsakaiKaisaiYoteiYMD,
                 shinsakaiKaisaiNo,
                 shuturyokuJun,

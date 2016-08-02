@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiWariateJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -22,19 +22,26 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class JimuShinsakaiWariateJohoBusiness {
 
-    private final ShinsakaiWariateJohoEntity entity;
     private static final RString ファイルID_E0001 = new RString("E0001.png");
-    private static final RString ファイルID_E0001_BAK = new RString("E0001_BAK.png");
     private static final RString ファイルID_E0002 = new RString("E0002.png");
-    private static final RString ファイルID_E0002_BAK = new RString("E0002_BAK.png");
+    private final ShinsakaiSiryoKyotsuEntity entity;
 
     /**
      * コンストラクタです。
      *
-     * @param entity ShinsakaiWariateJohoEntity
+     * @param entity ShinsakaiSiryoKyotsuEntity
      */
-    public JimuShinsakaiWariateJohoBusiness(ShinsakaiWariateJohoEntity entity) {
+    public JimuShinsakaiWariateJohoBusiness(ShinsakaiSiryoKyotsuEntity entity) {
         this.entity = entity;
+    }
+
+    /**
+     * 申請書管理番号を取得します。
+     *
+     * @return 申請書管理番号
+     */
+    public RString get申請書管理番号() {
+        return entity.getShinseishoKanriNo().value();
     }
 
     /**
@@ -61,9 +68,6 @@ public class JimuShinsakaiWariateJohoBusiness {
      * @return 名前
      */
     public RString get名前() {
-        if (entity.getHihokenshaName() == null || RString.isNullOrEmpty(entity.getHihokenshaName().getColumnValue())) {
-            return RString.EMPTY;
-        }
         return entity.getHihokenshaName().getColumnValue();
     }
 
@@ -86,29 +90,11 @@ public class JimuShinsakaiWariateJohoBusiness {
     }
 
     /**
-     * 認定申請年月日を取得します。
-     *
-     * @return 認定申請年月日
-     */
-    public FlexibleDate get認定申請年月日() {
-        return entity.getNinteiShinseiYMD();
-    }
-
-    /**
      * 今回認定調査実施年月日を取得します。
      *
      * @return 今回認定調査実施年月日
      */
     public FlexibleDate get今回認定調査実施年月日() {
-        return entity.getNinteichosaJisshiYMD();
-    }
-
-    /**
-     * 認定調査実施年月日を取得します。
-     *
-     * @return 認定調査実施年月日
-     */
-    public FlexibleDate get認定調査実施年月日() {
         return entity.getNinteichosaJisshiYMD();
     }
 
@@ -122,30 +108,12 @@ public class JimuShinsakaiWariateJohoBusiness {
     }
 
     /**
-     * 介護認定審査会開催年月日を取得します。
-     *
-     * @return 介護認定審査会開催年月日
-     */
-    public FlexibleDate get介護認定審査会開催年月日() {
-        return entity.getShinsakaiKaisaiYMD();
-    }
-
-    /**
      * 事務局用と委員用を取得します。
      *
      * @return is事務局
      */
     public boolean is事務局() {
-        return true;
-    }
-
-    /**
-     * 申請書管理番号を取得します。
-     *
-     * @return 申請書管理番号
-     */
-    public RString get申請書管理番号() {
-        return new RString("123456789");
+        return entity.isJimukyoku();
     }
 
     /**
@@ -188,9 +156,6 @@ public class JimuShinsakaiWariateJohoBusiness {
         RString imagePath = RString.EMPTY;
         if (イメージID != null) {
             imagePath = getFilePath(イメージID, イメージID01);
-            if (RString.isNullOrEmpty(imagePath)) {
-                imagePath = getFilePath(イメージID, ファイルID_E0001_BAK);
-            }
         }
         return imagePath;
     }
@@ -199,9 +164,6 @@ public class JimuShinsakaiWariateJohoBusiness {
         RString imagePath = RString.EMPTY;
         if (イメージID != null) {
             imagePath = getFilePath(イメージID, イメージID01);
-            if (RString.isNullOrEmpty(imagePath)) {
-                imagePath = getFilePath(イメージID, ファイルID_E0002_BAK);
-            }
         }
         return imagePath;
     }
