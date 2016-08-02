@@ -36,7 +36,12 @@ public class JimuTuikaSiryoBusiness {
 
     private static final RString 警告_有 = new RString("有");
     private static final int INDEX_2 = 2;
+    private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
+    private static final int INDEX_6 = 6;
+    private static final int INDEX_7 = 7;
+    private static final int INDEX_1 = 7;
     private static final int INDEX_0 = 0;
     private final ShinseiJohoEntity entity;
     private final List<ShinsakaiIinJohoEntity> 審査員;
@@ -190,21 +195,116 @@ public class JimuTuikaSiryoBusiness {
     }
 
     /**
-     * 審査員一覧を取得します。
-     *
-     * @return 審査員一覧
-     */
-    public List<ShinsakaiIinJohoEntity> get審査員一覧() {
-        return 審査員;
-    }
-
-    /**
      * 申請書管理番号を取得します。
      *
      * @return 申請書管理番号
      */
     public RString get申請書管理番号() {
         return entity.getShinseishoKanriNo().getColumnValue();
+    }
+
+    /**
+     * 審査員1を取得します。
+     *
+     * @return 審査員1
+     */
+    public RString get審査員1() {
+        if (INDEX_0 < 審査員.size() && 審査員.get(INDEX_0) != null && 審査員.get(INDEX_0).getShinsakaiIinShimei() != null
+                && !RString.isNullOrEmpty(審査員.get(INDEX_0).getShinsakaiIinShimei().value())) {
+            return 審査員.get(INDEX_0).getShinsakaiIinShimei().value();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 審査員2を取得します。
+     *
+     * @return 審査員2
+     */
+    public RString get審査員2() {
+        if (INDEX_1 < 審査員.size() && 審査員.get(INDEX_1) != null && 審査員.get(INDEX_1).getShinsakaiIinShimei() != null
+                && !RString.isNullOrEmpty(審査員.get(INDEX_1).getShinsakaiIinShimei().value())) {
+            return 審査員.get(INDEX_1).getShinsakaiIinShimei().value();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 審査員3を取得します。
+     *
+     * @return 審査員3
+     */
+    public RString get審査員3() {
+        if (INDEX_2 < 審査員.size() && 審査員.get(INDEX_2) != null && 審査員.get(INDEX_2).getShinsakaiIinShimei() != null
+                && !RString.isNullOrEmpty(審査員.get(INDEX_2).getShinsakaiIinShimei().value())) {
+            return 審査員.get(INDEX_2).getShinsakaiIinShimei().value();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 審査員4を取得します。
+     *
+     * @return 審査員4
+     */
+    public RString get審査員4() {
+        if (INDEX_3 < 審査員.size() && 審査員.get(INDEX_3) != null && 審査員.get(INDEX_3).getShinsakaiIinShimei() != null
+                && !RString.isNullOrEmpty(審査員.get(INDEX_3).getShinsakaiIinShimei().value())) {
+            return 審査員.get(INDEX_3).getShinsakaiIinShimei().value();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 審査員5を取得します。
+     *
+     * @return 審査員5
+     */
+    public RString get審査員5() {
+        if (INDEX_4 < 審査員.size() && 審査員.get(INDEX_4) != null && 審査員.get(INDEX_4).getShinsakaiIinShimei() != null
+                && !RString.isNullOrEmpty(審査員.get(INDEX_4).getShinsakaiIinShimei().value())) {
+            return 審査員.get(INDEX_4).getShinsakaiIinShimei().value();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 審査員6を取得します。
+     *
+     * @return 審査員6
+     */
+    public RString get審査員6() {
+        if (INDEX_5 < 審査員.size() && 審査員.get(INDEX_5) != null && 審査員.get(INDEX_5).getShinsakaiIinShimei() != null
+                && !RString.isNullOrEmpty(審査員.get(INDEX_5).getShinsakaiIinShimei().value())) {
+            return 審査員.get(INDEX_5).getShinsakaiIinShimei().value();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 審査員7を取得します。
+     *
+     * @return 審査員7
+     */
+    public RString get審査員7() {
+        if (INDEX_6 < 審査員.size() && 審査員.get(INDEX_6) != null && 審査員.get(INDEX_6).getShinsakaiIinShimei() != null
+                && !RString.isNullOrEmpty(審査員.get(INDEX_6).getShinsakaiIinShimei().value())) {
+            return 審査員.get(INDEX_6).getShinsakaiIinShimei().value();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 審査員8を取得します。
+     *
+     * @return 審査員8
+     */
+    public RString get審査員8() {
+        if (INDEX_7 < 審査員.size() && 審査員.get(INDEX_7) != null && 審査員.get(INDEX_7).getShinsakaiIinShimei() != null
+                && !RString.isNullOrEmpty(審査員.get(INDEX_7).getShinsakaiIinShimei().value())) {
+            return 審査員.get(INDEX_7).getShinsakaiIinShimei().value();
+        }
+        return RString.EMPTY;
     }
 
     /**
