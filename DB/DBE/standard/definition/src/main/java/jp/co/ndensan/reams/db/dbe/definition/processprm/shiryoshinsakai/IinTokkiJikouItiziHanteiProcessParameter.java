@@ -26,8 +26,8 @@ public class IinTokkiJikouItiziHanteiProcessParameter implements IBatchProcessPa
     private RString shinsakaiKaisaiNo;
     private RString shuturyokuJun;
     private RString sakuseiJoken;
-    private Decimal bangoStart;
-    private Decimal bangoEnd;
+    private int bangoStart;
+    private int bangoEnd;
     private final RString 作成条件_範囲指定 = new RString("範囲指定");
     private final RString 作成条件_追加分 = new RString("追加分");
     private RString shuturyokuSutairu;
@@ -58,8 +58,8 @@ public class IinTokkiJikouItiziHanteiProcessParameter implements IBatchProcessPa
             RString shinsakaiKaisaiNo,
             RString shuturyokuJun,
             RString sakuseiJoken,
-            Decimal bangoStart,
-            Decimal bangoEnd,
+            int bangoStart,
+            int bangoEnd,
             RString shuturyokuSutairu,
             RString printHou,
             Decimal chohyoIinHusu,
@@ -99,7 +99,7 @@ public class IinTokkiJikouItiziHanteiProcessParameter implements IBatchProcessPa
         if (RString.isNullOrEmpty(shuturyokuJun)) {
             isShuturyokuJun = true;
         }
-        return new IinTokkiJikouItiziHanteiMyBatisParameter(shinsakaiKaisaiNo, shuturyokuJun, bangoStart.intValue(), bangoEnd.intValue(),
+        return new IinTokkiJikouItiziHanteiMyBatisParameter(shinsakaiKaisaiNo, shuturyokuJun, bangoStart, bangoEnd,
                 isSakuseiJokenHani, isSakuseiJokenTuika, isShuturyokuJun);
     }
 

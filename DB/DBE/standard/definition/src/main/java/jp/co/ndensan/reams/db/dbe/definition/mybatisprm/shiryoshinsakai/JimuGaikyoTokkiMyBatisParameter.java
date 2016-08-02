@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 事務局用概況特記一覧表情報のMyBatisParameterです。
@@ -22,8 +21,8 @@ public class JimuGaikyoTokkiMyBatisParameter implements IMyBatisParameter {
 
     private RString shinsakaiKaisaiNo;
     private RString shuturyokuJun;
-    private Decimal bangoStart;
-    private Decimal bangoEnd;
+    private int bangoStart;
+    private int bangoEnd;
     private ShinseishoKanriNo shinseishoKanri;
     private int ninteichosaRirekiNo;
     private RString genponKubun;
@@ -47,8 +46,8 @@ public class JimuGaikyoTokkiMyBatisParameter implements IMyBatisParameter {
     public JimuGaikyoTokkiMyBatisParameter(
             RString shinsakaiKaisaiNo,
             RString shuturyokuJun,
-            Decimal bangoStart,
-            Decimal bangoEnd,
+            int bangoStart,
+            int bangoEnd,
             boolean isSakuseiJokenHani,
             boolean isSakuseiJokenTuika,
             boolean isIsShuturyokuJun) {

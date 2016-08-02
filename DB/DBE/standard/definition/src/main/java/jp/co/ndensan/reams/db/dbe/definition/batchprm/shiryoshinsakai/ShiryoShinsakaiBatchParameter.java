@@ -76,9 +76,9 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
     @BatchParameter(key = SAKUSEIJOKEN, name = "作成条件")
     private RString sakuseiJoken;
     @BatchParameter(key = BANGOSTART, name = "開始資料番号")
-    private Decimal bangoStart;
+    private int bangoStart;
     @BatchParameter(key = BANGOEND, name = "終了資料番号")
-    private Decimal bangoEnd;
+    private int bangoEnd;
     @BatchParameter(key = CHOYOJIMU_TAISHOUSHAFALG, name = "事務局審査会対象者一覧フラグ")
     private RString choyoJimu_taishoushaFalg;
     @BatchParameter(key = CHOYOJIMU_TOKKIJIKOUFALG, name = "事務局特記事項フラグ")
@@ -162,8 +162,8 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
             RString shuturyokuSutairu,
             RString printHou,
             RString sakuseiJoken,
-            Decimal bangoStart,
-            Decimal bangoEnd,
+            int bangoStart,
+            int bangoEnd,
             RString choyoJimu_taishoushaFalg,
             RString choyoJimu_tokkiJikouFalg,
             RString choyoJimu_itiziHanteiFalg,
