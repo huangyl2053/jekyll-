@@ -613,7 +613,7 @@ public class NinteishinseibiHandler {
         builder.set認定調査依頼履歴番号(Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()));
         builder.set連番(Integer.valueOf(row.getServiceJokyoRemban().toString()));
         builder.set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()));
-        builder.setサービスの状況(Integer.valueOf(row.getServiceJokyoRemban().toString()));
+        builder.setサービスの状況(Integer.valueOf(row.getServiceJokyo().toString()));
         return builder;
     }
 
