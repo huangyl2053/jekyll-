@@ -93,7 +93,7 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
         source.chosaJisshiBasho = item.get調査実施場所();
         source.tokuteishippeiName = item.get特定疾病名();
         source.kijunGokeiTime = item.get要介護認定等基準時間();
-        source.zenkaiKijunGokeiTime = item.get要介護認定等基準時間();
+        source.zenkaiKijunGokeiTime = item.get前回要介護認定等基準時間();
         source.gurafuKijunTime = item.get基準時間の積み上げグラフ();
         source.listKijunTime_1 = item.get要介護認定等基準時間_食事();
         source.listKijunTime_2 = item.get要介護認定等基準時間_排泄();
@@ -183,7 +183,7 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
             source.ｌistSeikatsujiritsu_2 = item.get日常生活自立度リスト().get(index).get特記事項フラグ();
         }
         if (index < item.get第１群リスト().size()) {
-            source.listIchigun_1 = item.get第１群リスト().get(index).get前回結果();
+            source.listIchigun_1 = item.get第１群リスト().get(index).get調査結果();
             source.listIchigun_2 = item.get第１群リスト().get(index).get段階改善フラグ();
             source.listIchigun_3 = item.get第１群リスト().get(index).get段階改善値();
             source.listIchigun_4 = item.get第１群リスト().get(index).get前回結果();
