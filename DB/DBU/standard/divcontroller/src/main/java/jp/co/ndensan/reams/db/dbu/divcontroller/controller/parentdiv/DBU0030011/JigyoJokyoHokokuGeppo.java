@@ -7,9 +7,11 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0030011
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.yoshikibetsurenkeijoho.JigyoHokokuTokei;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.jigyohokokurenkei.JigyoHokokuRenkeiBatchParameter;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0030011.JigyoJokyoHokokuGeppoDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0030011.JigyoJokyoHokokuGeppoHandler;
+import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0030011.JigyoJokyoHokokuGeppoValidationHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.yoshikibetsurenkeijoho.ShukeiYearMouthGetterFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
@@ -17,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -136,7 +139,40 @@ public class JigyoJokyoHokokuGeppo {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * バッチの実行の処理です。
+     *
+     * @param div 様式別連携情報Div
+     * @return ResponseData<JigyoHokokuRenkeiBatchParameter>
+     */
+    public ResponseData<JigyoHokokuRenkeiBatchParameter> onClick_btnJikko(JigyoJokyoHokokuGeppoDiv div) {
+        return ResponseData.of(getHandler(div).onClick_btnJikko()).respond();
+    }
+
+    /**
+     * チェックです。
+     *
+     * @param div 画面情報
+     * @return ResponseData<HoshushiharaiJumbiDiv>
+     */
+    public ResponseData<JigyoJokyoHokokuGeppoDiv> onClick_Check(JigyoJokyoHokokuGeppoDiv div) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).過去報告年月未指定チェック(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        validPairs = getValidationHandler(div).市町村チェック(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
     private JigyoJokyoHokokuGeppoHandler getHandler(JigyoJokyoHokokuGeppoDiv div) {
         return new JigyoJokyoHokokuGeppoHandler(div);
+    }
+
+    private JigyoJokyoHokokuGeppoValidationHandler getValidationHandler(JigyoJokyoHokokuGeppoDiv div) {
+        return new JigyoJokyoHokokuGeppoValidationHandler(div);
     }
 }
