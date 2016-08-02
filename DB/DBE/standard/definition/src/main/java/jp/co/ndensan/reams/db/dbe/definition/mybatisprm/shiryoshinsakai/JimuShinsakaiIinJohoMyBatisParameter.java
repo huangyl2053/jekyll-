@@ -39,6 +39,7 @@ public class JimuShinsakaiIinJohoMyBatisParameter implements IMyBatisParameter {
     private int ninteichosaRirekiNo;
     private int ikenshoIraiRirekiNo;
     private ShinseishoKanriNo shinseishoKanriNoZ;
+    private RString genponMaskKubun;
 
     /**
      * コンストラクタです。

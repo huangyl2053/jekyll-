@@ -113,7 +113,6 @@
         <result property="ichijiHanteiKekkaNinchishoKasanCode" column="ichijiHanteiKekkaNinchishoKasanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="ichijiHnateiKeikokuCode" column="ichijiHnateiKeikokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="kijunJikan" column="kijunJikan" />
-        <!--<result property="jotaiKubunCode" column="dbT5102_jotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />-->
     </resultMap>
     
 
@@ -736,7 +735,7 @@
               ON dbt5102ZenZenkai."shinseishoKanriNo" = dbt5101Zenkai."shinseishoKanriNo"
         WHERE
             dbt5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
-            AND dbt5502."shinsakaiOrderKakuteiFlag" =#{isOrderKakuteiFlg}
+            AND dbt5502."shinsakaiOrderKakuteiFlag" = #{isOrderKakuteiFlg}
             <if test="isSakuseiJokenHani">
                     AND #{bangoStart} <![CDATA[<=]]> dbT5502."shinsakaiOrder"
                     AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
