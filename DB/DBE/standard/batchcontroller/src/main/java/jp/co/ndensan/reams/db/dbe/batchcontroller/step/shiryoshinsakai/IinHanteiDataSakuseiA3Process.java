@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokki
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.HanteiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iinyobihanteikinyuhyo.IinYobihanteiKinyuhyoReportSource;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -59,8 +58,8 @@ public class IinHanteiDataSakuseiA3Process extends BatchKeyBreakBase<HanteiJohoE
         データ件数 = 0;
         myBatisParameter = paramter.toIinTokkiJikouItiziHanteiMyBatisParameter();
         myBatisParameter.setOrderKakuteiFlg(ShinsakaiOrderKakuteiFlg.確定.is介護認定審査会審査順確定());
-        myBatisParameter.setIsShoriJotaiKubun0(ShoriJotaiKubun.通常.getコード());
-        myBatisParameter.setIsShoriJotaiKubun3(ShoriJotaiKubun.延期.getコード());
+//        myBatisParameter.setIsShoriJotaiKubun0(ShoriJotaiKubun.通常.getコード());
+//        myBatisParameter.setIsShoriJotaiKubun3(ShoriJotaiKubun.延期.getコード());
     }
 
     @Override
