@@ -11,12 +11,13 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KubunGendo;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KyufuJikoSakuseiEntityResult;
+import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KyufuJikoSakuseiResult;
+import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.ServiceTypeDetails;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.ServiceTypeTotal;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.TankiRiyoNissuResult;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.TeikyohyoBeppyoEntityResult;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KyufuJikoSakuseiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.ServiceTypeDetails;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.teikyohyobeppyo.TankiRiyoNissuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.teikyohyobeppyo.TeikyohyoBeppyoEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.teikyohyobeppyo.ITeikyohyoBeppyoMapper;
@@ -102,7 +103,7 @@ public class TeikyohyoBeppyoManager {
             FlexibleYearMonth 対象年月, int 履歴番号, FlexibleYearMonth 自己作成計画年月) {
         TeikyohyoBeppyoEntityResult result = get被保険者情報(被保険者番号, 対象年月, 履歴番号, 自己作成計画年月);
         JigoSakuseiMeisaiTouroku jigoSakuseiMeisaiTouroku = JigoSakuseiMeisaiTouroku.createInstance();
-        KubunGendo 合計Entity = jigoSakuseiMeisaiTouroku.getKubunGendo(被保険者番号.value(), result.get総合事業区分(), 自己作成計画年月);
+        KubunGendo 合計Entity = jigoSakuseiMeisaiTouroku.getKubunGendo(被保険者番号, result.get総合事業区分(), 自己作成計画年月);
 
         return 合計Entity;
     }
@@ -121,14 +122,16 @@ public class TeikyohyoBeppyoManager {
         Map<JigyoshaNo, List<KyufuJikoSakuseiEntityResult>> 事業者別マップ = new HashMap<>();
         JigoSakuseiMeisaiTouroku touroku = new JigoSakuseiMeisaiTouroku();
         List<KyufuJikoSakuseiEntityResult> 計画EntityResutl = new ArrayList<>();
-        List<KyufuJikoSakuseiEntity> 計画Entity = touroku.getServiceRiyouHyo(被保険者番号.value(), 対象年月, 履歴番号, 自己作成計画年月);
+        List<KyufuJikoSakuseiResult> 計画Entity = touroku.getServiceRiyouHyo(被保険者番号, 対象年月, 履歴番号, 自己作成計画年月);
         if (計画Entity.isEmpty()) {
             throw new ApplicationException(DbcErrorMessages.帳票印刷不可.getMessage().replace(
                     自己作成0件.toString()));
         } else {
-            for (KyufuJikoSakuseiEntity entity : 計画Entity) {
+
+            for (KyufuJikoSakuseiResult kyufuJikoSakuseiResult : 計画Entity) {
+                KyufuJikoSakuseiEntity entity = kyufuJikoSakuseiResult.getEntity();
                 KyufuJikoSakuseiEntityResult result = new KyufuJikoSakuseiEntityResult();
-                result.setEntity(entity.getEntity());
+//                result.setEntity(entity.getEntity());
                 result.setサービス(entity.getサービス());
                 result.setサービス単位(entity.getサービス単位());
                 result.setサービス種類コード(entity.getサービス種類コード());
@@ -178,12 +181,13 @@ public class TeikyohyoBeppyoManager {
     public List<ServiceTypeTotal> get種類別支給限度情報(HihokenshaNo 被保険者番号, FlexibleYearMonth 対象年月, int 履歴番号, FlexibleYearMonth 自己作成計画年月) {
         JigoSakuseiMeisaiTouroku touroku = new JigoSakuseiMeisaiTouroku();
         List<ServiceTypeDetails> details = new ArrayList<>();
-        List<KyufuJikoSakuseiEntity> 計画Entity = touroku.getServiceRiyouHyo(被保険者番号.value(), 対象年月, 履歴番号, 自己作成計画年月);
+        List<KyufuJikoSakuseiResult> 計画Entity = touroku.getServiceRiyouHyo(被保険者番号, 対象年月, 履歴番号, 自己作成計画年月);
         if (計画Entity.isEmpty()) {
             throw new ApplicationException(DbcErrorMessages.帳票印刷不可.getMessage().replace(
                     自己作成0件.toString()));
         } else {
-            for (KyufuJikoSakuseiEntity askuseiEntity : 計画Entity) {
+            for (KyufuJikoSakuseiResult kyufuJikoSakuseiResult : 計画Entity) {
+                KyufuJikoSakuseiEntity askuseiEntity = kyufuJikoSakuseiResult.getEntity();
                 ServiceTypeDetails detail = new ServiceTypeDetails();
                 detail.setサービス単位(askuseiEntity.getサービス単位());
                 detail.setサービス種類コード(askuseiEntity.getサービス種類コード());
