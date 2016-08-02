@@ -40,8 +40,8 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
     private static final String 事務局_概況特記一覧表 = "jimuGaikyouTokkiIran";
     private static final String 事務局_一次判定結果 = "jimuItiziHantei";
     // TODO 凌護行　QA回答まち、帳票仕様にRSE記載不正、2016/07/10
-    private static final String 事務局_特記事項 = "jimuTokkiJikou";
-    private static final String 事務局_概況特記 = "jimuTokkiIran";
+//    private static final String 事務局_特記事項 = "jimuTokkiJikou";
+//    private static final String 事務局_概況特記 = "jimuTokkiIran";
     private static final RString 選択 = new RString("1");
     private static final RString 作成条件_追加分 = new RString("追加分");
 

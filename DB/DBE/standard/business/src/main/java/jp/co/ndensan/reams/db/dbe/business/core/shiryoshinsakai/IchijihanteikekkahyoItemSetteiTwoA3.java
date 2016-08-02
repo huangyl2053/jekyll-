@@ -69,9 +69,9 @@ public class IchijihanteikekkahyoItemSetteiTwoA3 {
     private static final Code 介護給付サービス = new Code("2");
     private static final RString 単位 = new RString(":");
     private static final RString 特記事項有 = new RString("※");
-    private static final RString 施設名ファイル名 = new RString("C0004.png");
-    private static final RString 住所ファイル名 = new RString("C0005.png");
-    private static final RString 電話ファイル名 = new RString("C0006.png");
+//    private static final RString 施設名ファイル名 = new RString("C0004.png");
+//    private static final RString 住所ファイル名 = new RString("C0005.png");
+//    private static final RString 電話ファイル名 = new RString("C0006.png");
 
     /**
      * 特記リスト１を取得します。

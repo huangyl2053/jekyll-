@@ -71,5 +71,7 @@ public class JimuShinsakaiIinJohoMyBatisParameter implements IMyBatisParameter {
         this.isSakuseiJokenHani = isSakuseiJokenHani;
         this.isSakuseiJokenTuika = isSakuseiJokenTuika;
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
+        this.gogitaiNo = gogitaiNo;
+        this.shinsakaiKaisaiYoteiYMD = shinsakaiKaisaiYoteiYMD;
     }
 }
