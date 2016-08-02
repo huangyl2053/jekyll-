@@ -9,14 +9,11 @@ import jp.co.ndensan.reams.db.dbd.definition.core.jukyunintei.yokaigointerface.D
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5190001.RenkeiDataSakuseiShinseiJohoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5190001.RenkeiDataSakuseiShinseiJohoHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5190001.RenkeiDataSakuseiShinseiJohoValidationHandler;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -44,8 +41,7 @@ public class RenkeiDataSakuseiShinseiJoho {
      */
     public ResponseData<RenkeiDataSakuseiShinseiJohoDiv> onLoad(RenkeiDataSakuseiShinseiJohoDiv div) {
         Code データ区分 = new Code(Datakubun.申請情報.getコード());
-        RString 新ファイル名 = get要介護認定申請連携データ送信ファイル名();
-        getHandler(div).get保険者リスト取得(div, データ区分, 新ファイル名);
+        getHandler(div).get保険者リスト取得(div, データ区分);
         return ResponseData.of(div).respond();
     }
 
@@ -60,8 +56,17 @@ public class RenkeiDataSakuseiShinseiJoho {
     public ResponseData<RenkeiDataSakuseiShinseiJohoDiv> checkInput(RenkeiDataSakuseiShinseiJohoDiv div) {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         getValidationHandler().validateFor保険者の非空チェック(pairs, div);
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
         getValidationHandler().validateFor今回開始時間の非空チェック(pairs, div);
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
         getValidationHandler().validateFor今回終了時間の非空チェック(pairs, div);
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
         getValidationHandler().validateFor対象期間時間チェック(pairs, div);
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -192,10 +197,6 @@ public class RenkeiDataSakuseiShinseiJoho {
 
     private RenkeiDataSakuseiShinseiJohoValidationHandler getValidationHandler() {
         return new RenkeiDataSakuseiShinseiJohoValidationHandler();
-    }
-
-    private RString get要介護認定申請連携データ送信ファイル名() {
-        return DbBusinessConfig.get(ConfigNameDBD.要介護認定申請連携データ送信ファイル名, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
     }
 
 }
