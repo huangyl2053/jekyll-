@@ -26,8 +26,8 @@ public class IinIkenshoDataSakuseiProcessParameter implements IBatchProcessParam
     private RString shinsakaiKaisaiNo;
     private RString shuturyokuJun;
     private RString sakuseiJoken;
-    private Decimal bangoStart;
-    private Decimal bangoEnd;
+    private int bangoStart;
+    private int bangoEnd;
     private RString shuturyokuSutairu;
     private RString printHou;
     private Decimal chohyoIinHusu;
@@ -56,8 +56,8 @@ public class IinIkenshoDataSakuseiProcessParameter implements IBatchProcessParam
             RString shinsakaiKaisaiNo,
             RString shuturyokuJun,
             RString sakuseiJoken,
-            Decimal bangoStart,
-            Decimal bangoEnd,
+            int bangoStart,
+            int bangoEnd,
             RString shuturyokuSutairu,
             RString printHou,
             Decimal chohyoIinHusu,
@@ -97,7 +97,7 @@ public class IinIkenshoDataSakuseiProcessParameter implements IBatchProcessParam
         if (RString.isNullOrEmpty(shuturyokuJun)) {
             isShuturyokuJunEmpty = true;
         }
-        return new IinIkenshoDataSakuseiMyBatisParameter(shinsakaiKaisaiNo, shuturyokuJun, bangoStart.intValue(), bangoEnd.intValue(),
+        return new IinIkenshoDataSakuseiMyBatisParameter(shinsakaiKaisaiNo, shuturyokuJun, bangoStart, bangoEnd,
                 isSakuseiJokenHani, isSakuseiJokenTuika, isShuturyokuJunEmpty);
     }
 }

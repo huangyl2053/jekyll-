@@ -8,10 +8,12 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.shiryoshinsakai;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinHanteiDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinHanteiDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinIkenshoDataSakuseiA3Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinIkenshoDataSakuseiA4NihirameProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinIkenshoDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinItiziHanteiDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinShinsakaiIinJohoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinShinsakaiIinJohoDataSakuseiA4Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinSonotaJohoDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTokkiIranDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTokkiIranDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTokkiJikouDataSakuseiA3Process;
@@ -163,8 +165,10 @@ public class ShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchParam
     @Step(委員_主治医意見書)
     protected IBatchFlowCommand createIinIkenshoData() {
         if (選択.equals(getParameter().getShuturyokuSutairu())) {
-            return loopBatch(IinIkenshoDataSakuseiA4Process.class)
+            loopBatch(IinIkenshoDataSakuseiA4Process.class)
                     .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
+            return loopBatch(IinIkenshoDataSakuseiA4NihirameProcess.class)
+                    .arguments(getParameter().toIinIkenshoDataSakuseiProcessParameter()).define();
         } else {
             return loopBatch(IinIkenshoDataSakuseiA3Process.class)
                     .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
@@ -243,7 +247,9 @@ public class ShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchParam
     @Step(委員_その他資料)
     protected IBatchFlowCommand createSonotaJohoData() {
         if (選択.equals(getParameter().getShuturyokuSutairu())) {
-            return loopBatch(SonotaJohoDataSakuseiA4Process.class)
+            loopBatch(SonotaJohoDataSakuseiA4Process.class)
+                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
+            return loopBatch(IinSonotaJohoDataSakuseiA4Process.class)
                     .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
         } else {
             return loopBatch(SonotaJohoDataSakuseiA3Process.class)
