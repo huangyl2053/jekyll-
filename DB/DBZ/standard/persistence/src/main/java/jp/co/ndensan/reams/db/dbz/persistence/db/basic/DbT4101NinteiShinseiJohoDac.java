@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
+import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
@@ -25,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.in;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -97,6 +99,25 @@ public class DbT4101NinteiShinseiJohoDac implements IModifiable<INinteiShinseiJo
                                 eq(hihokenshaNo, 被保番号),
                                 eq(logicalDeletedFlag, false))).order(by(ninteiShinseiYMD, Order.DESC)).limit(1).
                 toObject(DbT4101NinteiShinseiJohoEntity.class);
+    }
+
+    /**
+     * 主キーで要介護認定申請情報を取得します。
+     *
+     * @param 申請書管理番号List 申請書管理番号List
+     * @return DbT4101NinteiShinseiJohoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT4101NinteiShinseiJohoEntity> selectByZenkaiShinseishoKanriNoList(List<RString> 申請書管理番号List) throws NullPointerException {
+        requireNonNull(申請書管理番号List, UrSystemErrorMessages.値がnull.getReplacedMessage(SHINSEISHOKANRINO.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT4101NinteiShinseiJoho.class).
+                where(
+                        in(shinseishoKanriNo, 申請書管理番号List)).
+                toList(DbT4101NinteiShinseiJohoEntity.class);
     }
 
     /**
