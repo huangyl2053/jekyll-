@@ -9,4 +9,5 @@ isSeikatsuHogoJukyusha,bool,boolean,,,,,生保受給者フラグ,A
 riyoshaFutanDankai,varchar,RString,,,,,利用者負担段階,A
 gokeiShotokuKingaku,numeric,Decimal,,,,,合計所得金額,A
 nenkinShunyuGaku,numeric,Decimal,,,,,年金収入額,A
+hikazeinenkinKananGaku,numeric,Decimal,,,,,非課税年金勘案額,A
 jigyoshaNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,事業者番号,A
