@@ -164,6 +164,14 @@ public enum ReportIdDBD {
      */
     DBD100025(new ReportId("DBD100025_ShogaishaKojoNinteisho"), new RString("障害者控除認定書")),
     /**
+     * 負担額認定証・決定通知書発行一覧表の帳票ＩＤです。
+     */
+    DBD200019(new ReportId("DBD200019_FutangakuNinteiHakkoIchiran"), new RString("負担額認定証・決定通知書発行一覧表")),
+    /**
+     * 社会福祉法人軽減確認証・決定通知書発行一覧表の帳票ＩＤです。
+     */
+    DBD200018(new ReportId("DBD200018_ShakaiFukushiHojinKeigenHakkoIchiran"), new RString("社会福祉法人軽減確認証・決定通知書発行一覧表")),
+    /**
      * 要介護認定通知書一括発行の帳票ＩＤです。
      */
     DBD532999(new ReportId("DBD532999_YokaigoTshuchishoIkkatsu"), new RString("要介護認定通知書一括発行"));

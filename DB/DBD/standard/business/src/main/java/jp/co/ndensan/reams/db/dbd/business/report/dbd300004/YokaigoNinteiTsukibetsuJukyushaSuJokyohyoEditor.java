@@ -58,12 +58,7 @@ public class YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEditor implements IYokaigo
         return source;
     }
 
-    /**
-     * YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSourceを設定
-     *
-     * @param source YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource
-     */
-    public void setYokaigoNinteiTsukibetsuJukyushaSuJokyohyo(YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource source) {
+    private void setYokaigoNinteiTsukibetsuJukyushaSuJokyohyo(YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource source) {
         source.kijunbi = this.基準日.wareki().toDateString();
         source.nenrei = this.年齢;
         source.chiku = this.地区;

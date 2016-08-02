@@ -16,8 +16,22 @@
      "toLayoutTitle": "対象者検索",
      "toState": "検索条件"
     },
-    {
+	{
      "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZ0200001",
+     "layoutTitle": "対象者検索",
+     "eventName": "対象者特定",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD2010002",
+     "toLayoutTitle": "支払方法変更管理各種通知書発行",
+     "toState": "default"
+    },
+    {
+     "id": "3",
      "type": "end",
      "layoutSubGyomuCode": "DBD",
      "layoutName": "DBD2010002",
