@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.business.report.shorikekkakakuninist;
 
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.shorikekkakakuninlist.ShoriKekkaKakuninListEntity;
 import jp.co.ndensan.reams.db.dbu.entity.report.shorikekkakakuninlist.ShoriKekkaKakuninListReportSource;
 
 /**
@@ -15,14 +14,14 @@ import jp.co.ndensan.reams.db.dbu.entity.report.shorikekkakakuninlist.ShoriKekka
  */
 class ShoriKekkaKakuninListBodyEditor implements IShoriKekkaKakuninListEditor {
 
-    private final ShoriKekkaKakuninListEntity tempItem;
+    private final ShoriKekkaKakuninListBodyItem tempItem;
 
     /**
      * インスタンスを生成します。
      *
-     * @param tempItem {@link ShoriKekkaKakuninListBodyTempItem}
+     * @param tempItem {@link ShoriKekkaKakuninListBodyItem}
      */
-    protected ShoriKekkaKakuninListBodyEditor(ShoriKekkaKakuninListEntity tempItem) {
+    protected ShoriKekkaKakuninListBodyEditor(ShoriKekkaKakuninListBodyItem tempItem) {
         this.tempItem = tempItem;
     }
 
@@ -38,16 +37,15 @@ class ShoriKekkaKakuninListBodyEditor implements IShoriKekkaKakuninListEditor {
     }
 
     private ShoriKekkaKakuninListReportSource editBody(ShoriKekkaKakuninListReportSource source) {
-
-        source.listUpper_1 = tempItem.getプログラムID();
-        source.listUpper_2 = tempItem.get項目値1();
-        source.listUpper_3 = tempItem.get項目値2();
-        source.listUpper_4 = tempItem.get項目値3();
-        source.listUpper_5 = tempItem.get項目値4();
-        source.listUpper_6 = tempItem.get項目値5();
-        source.listUpper_7 = tempItem.get内容1();
-        source.listLower_1 = tempItem.get処理名称();
-        source.listLower_2 = tempItem.get内容2();
+        source.listUpper_1 = tempItem.getListUpper_1();
+        source.listUpper_2 = tempItem.getListUpper_2();
+        source.listUpper_3 = tempItem.getListUpper_3();
+        source.listUpper_4 = tempItem.getListUpper_4();
+        source.listUpper_5 = tempItem.getListUpper_5();
+        source.listUpper_6 = tempItem.getListUpper_6();
+        source.listUpper_7 = tempItem.getListUpper_7();
+        source.listLower_1 = tempItem.getListLower_1();
+        source.listLower_2 = tempItem.getListLower_2();
         return source;
     }
 
