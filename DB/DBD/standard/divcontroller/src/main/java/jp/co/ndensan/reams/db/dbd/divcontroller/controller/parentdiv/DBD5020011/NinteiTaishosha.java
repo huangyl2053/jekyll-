@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  *
  * @reamsid_L DBD-1531-010 chenxin
  */
-public class YokaigoNinteiTaishoshaList {
+public class NinteiTaishosha {
 
     /**
      * 画面初期化

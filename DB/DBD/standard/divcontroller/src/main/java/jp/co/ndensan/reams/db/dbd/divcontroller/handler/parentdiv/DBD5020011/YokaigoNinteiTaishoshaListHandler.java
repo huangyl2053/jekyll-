@@ -32,7 +32,10 @@ public class YokaigoNinteiTaishoshaListHandler {
      */
     public List<dgNinteiTaishosha_Row> onLoad() {
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
-        RString 導入形態コード = 市町村セキュリティ情報.get導入形態コード().getColumnValue();
+        RString 導入形態コード = null;
+        if (市町村セキュリティ情報.get導入形態コード() != null) {
+            導入形態コード = 市町村セキュリティ情報.get導入形態コード().getColumnValue();
+        }
 
         List<dgNinteiTaishosha_Row> 画面情報一覧 = new ArrayList<>();
         if (DonyuKeitaiCode.認定広域.getCode().equals(導入形態コード)) {
@@ -50,6 +53,9 @@ public class YokaigoNinteiTaishoshaListHandler {
      * @return 要介護認定インターフェース更新用情報
      */
     public ArrayList<YokaigoNinteiInterface> get要介護認定インターフェース情報(List<dgNinteiTaishosha_Row> ninteiTaishoshalist) {
+        if (ninteiTaishoshalist.isEmpty()) {
+            return new ArrayList<>();
+        }
         YokaigoNinteiTaisyosyaIchiranManager manager = YokaigoNinteiTaisyosyaIchiranManager.createInstance();
         List<RString> 申請書管理番号リスト = new ArrayList<>();
         for (dgNinteiTaishosha_Row ninteiTaishoshaRow : ninteiTaishoshalist) {
