@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5230001;
 
-import java.util.Collection;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJohoBuilder;
@@ -199,11 +198,11 @@ public class ShinsakaiKekkaToroku {
         Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho
                 = ViewStateHolder.get(ViewStateKeys.要介護認定結果情報, Models.class);
         RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
-        Collection<NinteiKekkaJoho> ninteiKekkaJohoList = ninteiKekkaJoho.values();
         for (dgTaishoshaIchiran_Row row : rowList) {
             upd介護認定審査会割当情報(row, 開催番号);
+            NinteiKekkaJohoIdentifier dentifier = new NinteiKekkaJohoIdentifier(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
             if (HASDATA.equals(row.getUpDateFlag()) && 認定_01.equals(row.getHanteiKekka())) {
-                if (ninteiKekkaJohoList.isEmpty()) {
+                if (ninteiKekkaJoho.get(dentifier) == null) {
                     ins要介護認定結果情報(row, 開催番号);
                     upd要介護認定申請情報(row);
                 } else {
@@ -212,7 +211,7 @@ public class ShinsakaiKekkaToroku {
             }
             if (HASDATA.equals(row.getUpDateFlag()) && !認定_01.equals(row.getHanteiKekka())) {
                 upd要介護認定完了情報(row);
-                if (!ninteiKekkaJohoList.isEmpty()) {
+                if (ninteiKekkaJoho.get(dentifier) != null) {
                     del要介護認定結果情報(row);
                 }
             }

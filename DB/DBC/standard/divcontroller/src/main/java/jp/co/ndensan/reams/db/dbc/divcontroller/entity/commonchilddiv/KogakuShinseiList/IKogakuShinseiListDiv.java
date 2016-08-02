@@ -28,6 +28,13 @@ public interface IKogakuShinseiListDiv extends ICommonChildDivBaseProperties {
     public boolean is審査決定フラグ();
 
     /**
+     * 決定情報フラグ
+     *
+     * @return boolean
+     */
+    public boolean is決定情報フラグ();
+
+    /**
      * 支給区分フラグ
      *
      * @return boolean

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyodoJuky
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.param.KyodoshoriyoJukyushaIdoRenrakuhyoParam;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -644,5 +645,38 @@ public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyus
     @Override
     public ValidationMessageControlPairs get一時差止日の関連チェック() {
         return KyodoJukyushaIdoRenrakuhyoDivHandler.of(this).一時差止日の関連チェック();
+    }
+
+    /**
+     * 「基本送付情報を追加する」チェックボックス。
+     *
+     * @return list
+     */
+    @JsonIgnore
+    @Override
+    public List<RString> get基本送付情報を追加する() {
+        return this.getChkKihonSofuAdd().getSelectedKeys();
+    }
+
+    /**
+     * 「償還送付情報を追加する」チェックボックス。
+     *
+     * @return list
+     */
+    @JsonIgnore
+    @Override
+    public List<RString> get償還送付情報を追加する() {
+        return this.getChkShokanSofuAdd().getSelectedKeys();
+    }
+
+    /**
+     * 「高額送付情報を追加する」チェックボックス。
+     *
+     * @return list
+     */
+    @JsonIgnore
+    @Override
+    public List<RString> get高額送付情報を追加する() {
+        return this.getChkKogakuSofuAdd().getSelectedKeys();
     }
 }

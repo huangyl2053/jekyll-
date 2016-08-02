@@ -142,6 +142,7 @@ public class KaigoNinteiShinseiKensaku {
      */
     public ResponseData<KaigoNinteiShinseiKensakuDiv> onClick_btnModoru(KaigoNinteiShinseiKensakuDiv div) {
 
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号, RString.EMPTY);
         return ResponseData.of(div).forwardWithEventName(DBZ5100001TransitionEventName.検索結果選択).respond();
     }
 

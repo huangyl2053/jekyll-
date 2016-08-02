@@ -590,7 +590,7 @@ public class TokuchoTaishoshaIchiranSakusei {
             徴収方法entity.setIraiSohuzumiFlag(false);
             徴収方法entity.setTsuikaIraiSohuzumiFlag(false);
             徴収方法entity.setTokuchoTeishiNichiji(null);
-            徴収方法entity.setTokuchoTeishiJiyuCode(RString.EMPTY);
+            徴収方法entity.setTokuchoTeishiJiyuCode(null);
             徴収方法entity.setState(EntityDataState.Added);
             徴収方法Dac.save(徴収方法entity);
             if (taishogaiModels == null || taishogaiModels.isEmpty()) {
@@ -601,7 +601,8 @@ public class TokuchoTaishoshaIchiranSakusei {
                 entity = taishogaiModel.toEntity();
                 entity = entity.clone();
                 if (確認状況区分_同定済み.compareTo(entity.getKakuninJokyoKbn()) == NUM0) {
-                    その他候補者データを登録する(開始月数, 処理年度, entity, 基礎年金番号, 年金コード, 捕捉月);
+                    その他候補者データを登録する(開始月数, 処理年度, entity,
+                            基礎年金番号, 年金コード, 捕捉月, 被保険者番号Temp);
                 }
                 entity.setKakuninJokyoKbn(確認状況区分_対象外);
                 entity.setState(EntityDataState.Modified);
@@ -612,7 +613,7 @@ public class TokuchoTaishoshaIchiranSakusei {
 
     private void その他候補者データを登録する(RString 開始月数, FlexibleYear 処理年度,
             DbT2019TokuchoMidoteiJohoEntity 特徴未同定情報entity, RString 基礎年金番号,
-            RString 年金コード, RString 捕捉月) {
+            RString 年金コード, RString 捕捉月, HihokenshaNo 被保険者番号) {
         TokuchoTaishoshaIchiranSakuseiMybatisParameter param = new TokuchoTaishoshaIchiranSakuseiMybatisParameter();
         param.set開始月(開始月数);
         param.set処理年度(処理年度);
@@ -624,6 +625,9 @@ public class TokuchoTaishoshaIchiranSakusei {
         List<DbT2001ChoshuHohoEntity> 徴収方法entityList = mapper.select最新介護徴収方法情報取得(param);
         if (STR08.compareTo(開始月数) == NUM0) {
             for (DbT2001ChoshuHohoEntity 徴収方法entity : 徴収方法entityList) {
+                if (被保険者番号.equals(徴収方法entity.getHihokenshaNo())) {
+                    continue;
+                }
                 徴収方法entity.setChoshuHoho8gatsu(set徴収方法(徴収方法entity.getChoshuHoho8gatsu()));
                 徴収方法entity.setChoshuHoho9gatsu(set徴収方法(徴収方法entity.getChoshuHoho9gatsu()));
                 徴収方法entity.setKariNenkinNo(基礎年金番号);
@@ -633,6 +637,9 @@ public class TokuchoTaishoshaIchiranSakusei {
             }
         } else if (STR10.compareTo(開始月数) == NUM0) {
             for (DbT2001ChoshuHohoEntity 徴収方法entity : 徴収方法entityList) {
+                if (被保険者番号.equals(徴収方法entity.getHihokenshaNo())) {
+                    continue;
+                }
                 徴収方法entity.setChoshuHoho10gatsu(set徴収方法(徴収方法entity.getChoshuHoho10gatsu()));
                 徴収方法entity.setChoshuHoho11gatsu(set徴収方法(徴収方法entity.getChoshuHoho11gatsu()));
                 徴収方法entity.setChoshuHoho12gatsu(set徴収方法(徴収方法entity.getChoshuHoho12gatsu()));
@@ -652,6 +659,9 @@ public class TokuchoTaishoshaIchiranSakusei {
             }
         } else if (STR12.compareTo(開始月数) == NUM0) {
             for (DbT2001ChoshuHohoEntity 徴収方法entity : 徴収方法entityList) {
+                if (被保険者番号.equals(徴収方法entity.getHihokenshaNo())) {
+                    continue;
+                }
                 徴収方法entity.setChoshuHoho12gatsu(set徴収方法(徴収方法entity.getChoshuHoho12gatsu()));
                 徴収方法entity.setChoshuHoho1gatsu(set徴収方法(徴収方法entity.getChoshuHoho1gatsu()));
                 徴収方法entity.setChoshuHoho2gatsu(set徴収方法(徴収方法entity.getChoshuHoho2gatsu()));
@@ -669,6 +679,9 @@ public class TokuchoTaishoshaIchiranSakusei {
             }
         } else if (STR02.compareTo(開始月数) == NUM0) {
             for (DbT2001ChoshuHohoEntity 徴収方法entity : 徴収方法entityList) {
+                if (被保険者番号.equals(徴収方法entity.getHihokenshaNo())) {
+                    continue;
+                }
                 徴収方法entity.setChoshuHoho2gatsu(set徴収方法(徴収方法entity.getChoshuHoho2gatsu()));
                 徴収方法entity.setChoshuHoho3gatsu(set徴収方法(徴収方法entity.getChoshuHoho3gatsu()));
                 徴収方法entity.setChoshuHohoYoku4gatsu(set徴収方法(徴収方法entity.getChoshuHohoYoku4gatsu()));
@@ -684,18 +697,9 @@ public class TokuchoTaishoshaIchiranSakusei {
             }
         } else if (STR04.compareTo(開始月数) == NUM0) {
             for (DbT2001ChoshuHohoEntity 徴収方法entity : 徴収方法entityList) {
-                徴収方法entity.setChoshuHoho4gatsu(set徴収方法(徴収方法entity.getChoshuHoho4gatsu()));
-                徴収方法entity.setChoshuHoho5gatsu(set徴収方法(徴収方法entity.getChoshuHoho5gatsu()));
-                徴収方法entity.setChoshuHoho6gatsu(set徴収方法(徴収方法entity.getChoshuHoho6gatsu()));
-                徴収方法entity.setChoshuHoho7gatsu(set徴収方法(徴収方法entity.getChoshuHoho7gatsu()));
-                徴収方法entity.setChoshuHoho8gatsu(set徴収方法(徴収方法entity.getChoshuHoho8gatsu()));
-                徴収方法entity.setChoshuHoho9gatsu(set徴収方法(徴収方法entity.getChoshuHoho9gatsu()));
-                徴収方法entity.setChoshuHoho10gatsu(set徴収方法(徴収方法entity.getChoshuHoho10gatsu()));
-                徴収方法entity.setChoshuHoho11gatsu(set徴収方法(徴収方法entity.getChoshuHoho11gatsu()));
-                徴収方法entity.setChoshuHoho12gatsu(set徴収方法(徴収方法entity.getChoshuHoho12gatsu()));
-                徴収方法entity.setChoshuHoho1gatsu(set徴収方法(徴収方法entity.getChoshuHoho1gatsu()));
-                徴収方法entity.setChoshuHoho2gatsu(set徴収方法(徴収方法entity.getChoshuHoho2gatsu()));
-                徴収方法entity.setChoshuHoho3gatsu(set徴収方法(徴収方法entity.getChoshuHoho3gatsu()));
+                if (被保険者番号.equals(徴収方法entity.getHihokenshaNo())) {
+                    continue;
+                }
                 徴収方法entity.setChoshuHohoYoku4gatsu(set徴収方法(徴収方法entity.getChoshuHohoYoku4gatsu()));
                 徴収方法entity.setChoshuHohoYoku5gatsu(set徴収方法(徴収方法entity.getChoshuHohoYoku5gatsu()));
                 徴収方法entity.setChoshuHohoYoku6gatsu(set徴収方法(徴収方法entity.getChoshuHohoYoku6gatsu()));
@@ -708,20 +712,10 @@ public class TokuchoTaishoshaIchiranSakusei {
                 save徴収方法entity(徴収方法entity);
             }
         } else if (STR06.compareTo(開始月数) == NUM0) {
-            徴収方法entityList = mapper.select最新介護徴収方法情報取得(param);
             for (DbT2001ChoshuHohoEntity 徴収方法entity : 徴収方法entityList) {
-                徴収方法entity.setChoshuHoho6gatsu(set徴収方法(徴収方法entity.getChoshuHoho6gatsu()));
-                徴収方法entity.setChoshuHoho7gatsu(set徴収方法(徴収方法entity.getChoshuHoho7gatsu()));
-                徴収方法entity.setChoshuHoho8gatsu(set徴収方法(徴収方法entity.getChoshuHoho8gatsu()));
-                徴収方法entity.setChoshuHoho9gatsu(set徴収方法(徴収方法entity.getChoshuHoho9gatsu()));
-                徴収方法entity.setChoshuHoho10gatsu(set徴収方法(徴収方法entity.getChoshuHoho10gatsu()));
-                徴収方法entity.setChoshuHoho11gatsu(set徴収方法(徴収方法entity.getChoshuHoho11gatsu()));
-                徴収方法entity.setChoshuHoho12gatsu(set徴収方法(徴収方法entity.getChoshuHoho12gatsu()));
-                徴収方法entity.setChoshuHoho1gatsu(set徴収方法(徴収方法entity.getChoshuHoho1gatsu()));
-                徴収方法entity.setChoshuHoho2gatsu(set徴収方法(徴収方法entity.getChoshuHoho2gatsu()));
-                徴収方法entity.setChoshuHoho3gatsu(set徴収方法(徴収方法entity.getChoshuHoho3gatsu()));
-                徴収方法entity.setChoshuHohoYoku4gatsu(set徴収方法(徴収方法entity.getChoshuHohoYoku4gatsu()));
-                徴収方法entity.setChoshuHohoYoku5gatsu(set徴収方法(徴収方法entity.getChoshuHohoYoku5gatsu()));
+                if (被保険者番号.equals(徴収方法entity.getHihokenshaNo())) {
+                    continue;
+                }
                 徴収方法entity.setChoshuHohoYoku6gatsu(set徴収方法(徴収方法entity.getChoshuHohoYoku6gatsu()));
                 徴収方法entity.setChoshuHohoYoku7gatsu(set徴収方法(徴収方法entity.getChoshuHohoYoku7gatsu()));
                 徴収方法entity.setChoshuHohoYoku8gatsu(set徴収方法(徴収方法entity.getChoshuHohoYoku8gatsu()));
@@ -749,7 +743,18 @@ public class TokuchoTaishoshaIchiranSakusei {
         徴収方法entity.setIraiSohuzumiFlag(false);
         徴収方法entity.setTsuikaIraiSohuzumiFlag(false);
         徴収方法entity.setTokuchoTeishiNichiji(null);
-        徴収方法entity.setTokuchoTeishiJiyuCode(RString.EMPTY);
+        徴収方法entity.setTokuchoTeishiJiyuCode(null);
+//        徴収方法entity.setKariNenkinNo(null);
+//        徴収方法entity.setKariNenkinCode(null);
+//        徴収方法entity.setKariHosokuM(null);
+//        徴収方法entity.setHonNenkinNo(null);
+//        徴収方法entity.setHonNenkinCode(null);
+//        徴収方法entity.setHonHosokuM(null);
+//        徴収方法entity.setYokunendoKariNenkinNo(null);
+//        徴収方法entity.setYokunendoKariNenkinCode(null);
+//        徴収方法entity.setYokunendoKariHosokuM(null);
+//        徴収方法entity.setTokuchoTeishiNichiji(null);
+//        徴収方法entity.setTokuchoTeishiJiyuCode(null);
         徴収方法entity.setState(EntityDataState.Added);
         徴収方法Dac.save(徴収方法entity);
     }

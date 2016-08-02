@@ -6,8 +6,9 @@
 package jp.co.ndensan.reams.db.dbe.business.report.jimukyokuyouichijihanteikekkahyoa3;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoA3Entity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimukyokuyouichijihanteikekkahyo.IchijihanteikekkahyoA3ReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -30,6 +31,18 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
     private static final RString イメージ = new RString("2");
     private static final RString 全面 = new RString("1");
     private static final RString 短冊 = new RString("2");
+    private static final int INT_3 = 3;
+    private static final int INT_4 = 4;
+    private static final int INT_5 = 5;
+    private static final int INT_6 = 6;
+    private static final int INT_7 = 7;
+    private static final int INT_8 = 8;
+    private static final int INT_9 = 9;
+    private static final int INT_10 = 10;
+    private static final int INT_11 = 11;
+    private static final int INT_12 = 12;
+    private static final int INT_13 = 13;
+    private static final int INT_14 = 14;
     private final IchijihanteikekkahyoA3Entity item;
     private final int index;
     private final List<RString> 特記事項List;
@@ -163,7 +176,7 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
             source.imgShisetsuTel = item.get電話番号イメージ();
         }
         source.shikibetuCode = ShikibetsuCode.EMPTY;
-        if (item.get申請書管理番号() != null) {
+        if (!RString.isNullOrEmpty(item.get申請書管理番号())) {
             source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
         }
         return editSource1(source);
@@ -181,55 +194,45 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
             source.ｌistSeikatsujiritsu_1 = item.get日常生活自立度リスト().get(index).get認知症高齢者自立度();
             source.ｌistSeikatsujiritsu_2 = item.get日常生活自立度リスト().get(index).get特記事項フラグ();
         }
-        if (index < item.get不整合リスト１().size()) {
-            source.listFuseigo1_1 = item.get不整合リスト１().get(index).get認定調査と主治医意見書の結果比較();
-            source.listFuseigo1_2 = item.get不整合リスト１().get(index).get特記事項有無();
-        }
-        if (index < item.get不整合リスト２().size()) {
-            source.listFuseigo2_1 = item.get不整合リスト２().get(index).get認定調査と主治医意見書の結果比較();
-            source.listFuseigo2_2 = item.get不整合リスト２().get(index).get特記事項有無();
-        }
-        if (index < item.get不整合リスト３().size()) {
-            source.listFuseigo3_1 = item.get不整合リスト３().get(index).get認定調査と主治医意見書の結果比較();
-            source.listFuseigo3_2 = item.get不整合リスト３().get(index).get特記事項有無();
-        }
-        if (index < item.get不整合リスト４().size()) {
-            source.listFuseigo4_1 = item.get不整合リスト４().get(index).get認定調査と主治医意見書の結果比較();
-            source.listFuseigo4_2 = item.get不整合リスト４().get(index).get特記事項有無();
-        }
-        if (index < item.get不整合リスト５().size()) {
-            source.listFuseigo5_1 = item.get不整合リスト５().get(index).get認定調査と主治医意見書の結果比較();
-            source.listFuseigo5_2 = item.get不整合リスト５().get(index).get特記事項有無();
-        }
         if (index < item.get第１群リスト().size()) {
             source.listIchigun_1 = item.get第１群リスト().get(index).get調査結果();
             source.listIchigun_2 = item.get第１群リスト().get(index).get段階改善フラグ();
             source.listIchigun_3 = item.get第１群リスト().get(index).get段階改善値();
             source.listIchigun_4 = item.get第１群リスト().get(index).get前回結果();
+            source.listFuseigo1_1 = item.get第１群リスト().get(index).get認定調査と主治医意見書の結果比較();
+            source.listFuseigo1_2 = item.get第１群リスト().get(index).get特記事項有無();
         }
         if (index < item.get第２群リスト().size()) {
             source.listNigun_1 = item.get第２群リスト().get(index).get調査結果();
             source.listNigun_2 = item.get第２群リスト().get(index).get段階改善フラグ();
             source.listNigun_3 = item.get第２群リスト().get(index).get段階改善値();
             source.listNigun_4 = item.get第２群リスト().get(index).get前回結果();
+            source.listFuseigo2_1 = item.get第２群リスト().get(index).get認定調査と主治医意見書の結果比較();
+            source.listFuseigo2_2 = item.get第２群リスト().get(index).get特記事項有無();
         }
         if (index < item.get第３群リスト().size()) {
             source.listSangun_1 = item.get第３群リスト().get(index).get調査結果();
             source.listSangun_2 = item.get第３群リスト().get(index).get段階改善フラグ();
             source.listSangun_3 = item.get第３群リスト().get(index).get段階改善値();
             source.listSangun_4 = item.get第３群リスト().get(index).get前回結果();
+            source.listFuseigo3_1 = item.get第３群リスト().get(index).get認定調査と主治医意見書の結果比較();
+            source.listFuseigo3_2 = item.get第３群リスト().get(index).get特記事項有無();
         }
         if (index < item.get第４群リスト().size()) {
             source.listYongun_1 = item.get第４群リスト().get(index).get調査結果();
             source.listYongun_2 = item.get第４群リスト().get(index).get段階改善フラグ();
             source.listYongun_3 = item.get第４群リスト().get(index).get段階改善値();
             source.listYongun_4 = item.get第４群リスト().get(index).get前回結果();
+            source.listFuseigo4_1 = item.get第４群リスト().get(index).get認定調査と主治医意見書の結果比較();
+            source.listFuseigo4_2 = item.get第４群リスト().get(index).get特記事項有無();
         }
         if (index < item.get第５群リスト().size()) {
             source.listGogun_1 = item.get第５群リスト().get(index).get調査結果();
             source.listGogun_2 = item.get第５群リスト().get(index).get段階改善フラグ();
             source.listGogun_3 = item.get第５群リスト().get(index).get段階改善値();
             source.listGogun_4 = item.get第５群リスト().get(index).get前回結果();
+            source.listFuseigo5_1 = item.get第５群リスト().get(index).get認定調査と主治医意見書の結果比較();
+            source.listFuseigo5_2 = item.get第５群リスト().get(index).get特記事項有無();
         }
         if (index < item.get特別な医療リスト１().size()) {
             source.listtokubetsunaIryo1_1 = item.get特別な医療リスト１().get(index).get調査結果();
@@ -258,47 +261,17 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
         } else if (イメージ.equals(item.get概況調査テキスト_イメージ区分())) {
             source.gaikyotokkiImg = item.get概況特記のイメージ();
         }
-        if (テキスト.equals(item.get特記事項テキスト_イメージ区分())) {
+        if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
                 source.tokkiText = item.get特記事項_tokkiText();
             } else if (短冊.equals(item.get特記パターン())) {
                 source = set特記事項テキスト連番_名称(source);
-                source.tokkiText1 = item.get特記事項_tokkiText1();
-                source.tokkiText2 = item.get特記事項_tokkiText2();
-                source.tokkiText3 = item.get特記事項_tokkiText3();
-                source.tokkiText4 = item.get特記事項_tokkiText4();
-                source.tokkiText5 = item.get特記事項_tokkiText5();
-                source.tokkiText6 = item.get特記事項_tokkiText6();
-                source.tokkiText7 = item.get特記事項_tokkiText7();
-                source.tokkiText8 = item.get特記事項_tokkiText8();
-                source.tokkiText9 = item.get特記事項_tokkiText9();
-                source.tokkiText10 = item.get特記事項_tokkiText10();
-                source.tokkiText11 = item.get特記事項_tokkiText11();
-                source.tokkiText12 = item.get特記事項_tokkiText12();
-                source.tokkiText13 = item.get特記事項_tokkiText13();
-                source.tokkiText14 = item.get特記事項_tokkiText14();
-                source.tokkiText15 = item.get特記事項_tokkiText15();
             }
-        } else if (イメージ.equals(item.get特記事項テキスト_イメージ区分())) {
+        } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
                 source.tokkiImg = item.get特記事項_tokkiImg();
             } else if (短冊.equals(item.get特記パターン())) {
                 source = set特記事項イメージ連番_名称(source);
-                source.tokkiImg1 = item.get特記事項_tokkiImg1();
-                source.tokkiImg2 = item.get特記事項_tokkiImg2();
-                source.tokkiImg3 = item.get特記事項_tokkiImg3();
-                source.tokkiImg4 = item.get特記事項_tokkiImg4();
-                source.tokkiImg5 = item.get特記事項_tokkiImg5();
-                source.tokkiImg6 = item.get特記事項_tokkiImg6();
-                source.tokkiImg7 = item.get特記事項_tokkiImg7();
-                source.tokkiImg8 = item.get特記事項_tokkiImg8();
-                source.tokkiImg9 = item.get特記事項_tokkiImg9();
-                source.tokkiImg10 = item.get特記事項_tokkiImg10();
-                source.tokkiImg11 = item.get特記事項_tokkiImg11();
-                source.tokkiImg12 = item.get特記事項_tokkiImg12();
-                source.tokkiImg13 = item.get特記事項_tokkiImg13();
-                source.tokkiImg14 = item.get特記事項_tokkiImg14();
-                source.tokkiImg15 = item.get特記事項_tokkiImg15();
             }
         }
         return source;
@@ -308,12 +281,106 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
         if (index < 特記事項List.size()) {
             source.listChosa_1 = 特記事項List.get(index);
         }
+        for (int i = 0; i < item.get特記事項_listChosa1().size(); i++) {
+            if (i == 0) {
+                source.tokkiImg1 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == 1) {
+                source.tokkiImg2 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == 2) {
+                source.tokkiImg3 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == INT_3) {
+                source.tokkiImg4 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == INT_4) {
+                source.tokkiImg5 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == INT_5) {
+                source.tokkiImg6 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == INT_6) {
+                source.tokkiImg7 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == INT_7) {
+                source.tokkiImg8 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == INT_8) {
+                source.tokkiImg9 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == INT_9) {
+                source.tokkiImg10 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == INT_10) {
+                source.tokkiImg11 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == INT_11) {
+                source.tokkiImg12 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == INT_12) {
+                source.tokkiImg13 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == INT_13) {
+                source.tokkiImg14 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == INT_14) {
+                source.tokkiImg15 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+        }
         return source;
     }
 
     private IchijihanteikekkahyoA3ReportSource set特記事項テキスト連番_名称(IchijihanteikekkahyoA3ReportSource source) {
         if (index < 特記事項List.size()) {
             source.listChosa1_1 = 特記事項List.get(index);
+        }
+        for (int i = 0; i < item.get特記事項_listChosa1().size(); i++) {
+            if (i == 0) {
+                source.tokkiText1 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == 1) {
+                source.tokkiText2 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == 2) {
+                source.tokkiText3 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == INT_3) {
+                source.tokkiText4 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == INT_4) {
+                source.tokkiText5 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == INT_5) {
+                source.tokkiText6 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == INT_6) {
+                source.tokkiText7 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == INT_7) {
+                source.tokkiText8 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == INT_8) {
+                source.tokkiText9 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == INT_9) {
+                source.tokkiText10 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == INT_10) {
+                source.tokkiText11 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == INT_11) {
+                source.tokkiText12 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == INT_12) {
+                source.tokkiText13 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == INT_13) {
+                source.tokkiText14 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
+            if (i == INT_14) {
+                source.tokkiText15 = item.get特記事項_listChosa1().get(i).getテキストとイメージ();
+            }
         }
         return source;
     }

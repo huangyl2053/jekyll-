@@ -15,7 +15,8 @@ public enum DBD5190001TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     被保険者検索("被保険者検索"),
-    完了状態("完了状態");
+    完了状態("完了状態"),
+    被保険者番号選択("被保険者番号選択");
 
     private final RString name;
 

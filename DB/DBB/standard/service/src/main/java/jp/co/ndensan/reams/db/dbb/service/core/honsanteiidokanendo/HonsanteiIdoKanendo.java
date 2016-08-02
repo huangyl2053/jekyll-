@@ -203,9 +203,11 @@ public class HonsanteiIdoKanendo {
         RString 決定_変更通知書区分 = RString.EMPTY;
         if (parameter.get決定_チェックボックス().equals(oneRS)) {
             決定_変更通知書区分 = oneRS;
-        } else if (parameter.get変更_チェックボックス().equals(oneRS)) {
+        }
+        if (parameter.get変更_チェックボックス().equals(oneRS)) {
             決定_変更通知書区分 = twoRS;
-        } else if (parameter.get決定_チェックボックス().equals(oneRS)
+        }
+        if (parameter.get決定_チェックボックス().equals(oneRS)
                 && parameter.get変更_チェックボックス().equals(oneRS)) {
             決定_変更通知書区分 = threeRS;
         }
@@ -244,9 +246,11 @@ public class HonsanteiIdoKanendo {
         RString 決定_変更通知書区分 = RString.EMPTY;
         if (parameter.get決定_チェックボックス().equals(oneRS)) {
             決定_変更通知書区分 = oneRS;
-        } else if (parameter.get変更_チェックボックス().equals(oneRS)) {
+        }
+        if (parameter.get変更_チェックボックス().equals(oneRS)) {
             決定_変更通知書区分 = twoRS;
-        } else if (parameter.get決定_チェックボックス().equals(oneRS)
+        }
+        if (parameter.get決定_チェックボックス().equals(oneRS)
                 && parameter.get変更_チェックボックス().equals(oneRS)) {
             決定_変更通知書区分 = threeRS;
         }

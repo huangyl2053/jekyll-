@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2250001
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.niteicyosaichiran.NiTeiCyoSaiChiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.niteicyosaichiran.NiTeiCyoSaiChiRanBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.niteicyosaichiran.NinteichosahyoGaikyoChosaRelateBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.niteicyosaichiran.NiTeiCyoSaiChiRanParameter;
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2250001.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2250001.dgNinteiChosaData_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2250001.NinteishinseibiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2250001.NinteishinseibiValidatisonHandler;
-import jp.co.ndensan.reams.db.dbe.service.report.shinsakainenkansukejuruhyo.NiTeiCyoSaiChiRanManager;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakainenkansukejuruhyo.NiTeiCyoSaiChiRanManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -166,6 +167,9 @@ public class Ninteishinseibi {
         }
         PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
         getHandler(div).検索処理(business.records(), personalData);
+        NiTeiCyoSaiChiBusiness niTeiCyoSaiChiBusiness = new NiTeiCyoSaiChiBusiness();
+        niTeiCyoSaiChiBusiness.set認定調査一覧Lsit(business.records());
+        ViewStateHolder.put(ViewStateKeys.認定調査一覧, niTeiCyoSaiChiBusiness);
         ValidationMessageControlPairs validationMessage = getValidatisonHandler(div).データ空のチェック();
         if (validationMessage.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessage).respond();
@@ -196,6 +200,8 @@ public class Ninteishinseibi {
             if (vallidation.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(vallidation).respond();
             }
+            NiTeiCyoSaiChiBusiness business = ViewStateHolder.get(ViewStateKeys.認定調査一覧, NiTeiCyoSaiChiBusiness.class);
+            getHandler(div).一覧の再編集(business.get認定調査一覧Lsit());
             List<dgNinteiChosaData_Row> rowList = div.getDgNinteiChosaData().getDataSource();
             List<RString> shinseishoKanriNoList = new ArrayList<>();
             for (int i = 0; i < rowList.size(); i++) {

@@ -5,16 +5,16 @@
  "steps": [
   {
    "id": 1,
-   "name": "支払方法変更各種通知書発行",
+   "name": "支払方法変更管理",
    "transitionList": [
     {
      "id": "1",
      "type": "start",
      "condition": "",
-     "toLayoutSubGyomuCode": "DBD",
-     "toLayoutName": "DBD2010002",
-     "toLayoutTitle": "支払方法変更管理各種通知書発行",
-     "toState": "default"
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "検索条件"
     },
     {
      "id": "2",

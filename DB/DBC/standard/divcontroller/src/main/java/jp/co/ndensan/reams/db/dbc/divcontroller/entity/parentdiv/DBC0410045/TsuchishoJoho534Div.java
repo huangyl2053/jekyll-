@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 /**
  * TsuchishoJoho534 のクラスファイル 
  * 
- * @author 自動生成
+ * @reamsid_L DBC-2740-030 baojikui
  */
 public class TsuchishoJoho534Div extends PanelBatchParameter {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">

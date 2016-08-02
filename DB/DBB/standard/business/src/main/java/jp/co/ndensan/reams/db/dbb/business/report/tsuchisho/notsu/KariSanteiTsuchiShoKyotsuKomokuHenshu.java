@@ -283,9 +283,6 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     }
 
     private void set更正前ByIsNotEmpty(EditedKariSanteiTsuchiShoKyotsuBeforeCorrection 更正前, FukaJoho 賦課情報_更正前) {
-        if (賦課情報_更正前 == null) {
-            return;
-        }
         更正前.set更正前介護保険料減免額(nullToZero(賦課情報_更正前.get減免額()));
         更正前.set更正前特徴期別金額01(nullToZero(賦課情報_更正前.get特徴期別金額01()));
         更正前.set更正前特徴期別金額02(nullToZero(賦課情報_更正前.get特徴期別金額02()));
@@ -331,7 +328,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         更正前.set保険料段階(!RString.isNullOrEmpty(賦課情報_更正前.get保険料算定段階2())
                 ? 賦課情報_更正前.get保険料算定段階2() : 賦課情報_更正前.get保険料算定段階1());
         更正前.set保険料率(get保険料率(賦課情報_更正前));
-        更正前.set更正後口座区分(KozaKubun.toValue(賦課情報_更正前.get口座区分()));
+        更正前.set更正後口座区分(RString.isNullOrEmpty(賦課情報_更正前.get口座区分()) ? null : KozaKubun.toValue(賦課情報_更正前.get口座区分()));
         更正前.set生保開始日(isNullOrEmpty(賦課情報_更正前.get生保開始日()) ? RString.EMPTY : 賦課情報_更正前.get生保開始日().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         更正前.set生保開始日_西暦(isNullOrEmpty(賦課情報_更正前.get生保開始日()) ? RString.EMPTY : 賦課情報_更正前.get生保開始日().seireki()
@@ -438,7 +435,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         更正後.set保険料段階(!RString.isNullOrEmpty(賦課情報_更正後.get保険料算定段階2())
                 ? 賦課情報_更正後.get保険料算定段階2() : 賦課情報_更正後.get保険料算定段階1());
         更正後.set保険料率(get保険料率(賦課情報_更正後));
-        更正後.set更正後口座区分(KozaKubun.toValue(賦課情報_更正後.get口座区分()));
+        更正後.set更正後口座区分(RString.isNullOrEmpty(賦課情報_更正後.get口座区分()) ? null : KozaKubun.toValue(賦課情報_更正後.get口座区分()));
         更正後.set生保開始日(isNullOrEmpty(賦課情報_更正後.get生保開始日()) ? RString.EMPTY : 賦課情報_更正後.get生保開始日().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         更正後.set生保開始日_西暦(isNullOrEmpty(賦課情報_更正後.get生保開始日()) ? RString.EMPTY : 賦課情報_更正後.get生保開始日().seireki()

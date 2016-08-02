@@ -41,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
@@ -64,6 +65,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
     private static final RString THREE = new RString("3");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
+    private static final RString アンダーライン = new RString("_");
     private static final Decimal NUMBER_0 = new Decimal(0);
     private static final NyuryokuShikibetsuNo 定値_識別番号 = new NyuryokuShikibetsuNo("3411");
     private static final KokanShikibetsuNo 定値_交換情報識別番号 = new KokanShikibetsuNo("1131");
@@ -143,7 +145,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
             履歴番号 = Integer.parseInt(Saiban.get(SubGyomuCode.DBB介護賦課,
                     被保険者番号.value(), サービス年月.getNendo()).nextString().toString());
         }
-        if (result != null) {
+        if (result != null && !追加モード.equals(画面モード)) {
             支給申請entity = result.get高額介護サービス費支給申請Entity();
             支給判定結果entity = result.get高額介護サービス費支給判定結果Entity();
         }
@@ -201,19 +203,42 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
      */
     public void save対象者情報(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, RString メニューID,
             List<KogakuKyuufuTaishouListEntityResult> 高額給付対象一覧list) {
+        Map<RString, KogakuKyufuTaishoshaMeisai> 明細map = new HashMap<>();
+        Map<RString, KogakuKyufuTaishoshaGokei> 合計map = new HashMap<>();
+        for (KogakuKyuufuTaishouListEntityResult result : 高額給付対象一覧list) {
+            if (result.get明細合計区分().equals(ONE)) {
+                RStringBuilder builder = new RStringBuilder();
+                builder.append(result.get給付対象者明細entity().get被保険者番号().value());
+                builder.append(アンダーライン);
+                builder.append(result.get給付対象者明細entity().getサービス提供年月().toDateString());
+                builder.append(アンダーライン);
+                builder.append(result.get給付対象者明細entity().get事業者番号().value());
+                builder.append(アンダーライン);
+                builder.append(result.get給付対象者明細entity().getサービス種類コード().value());
+                builder.append(アンダーライン);
+                builder.append(result.get給付対象者明細entity().get履歴番号());
+                明細map.put(builder.toRString(), result.get給付対象者明細entity());
+            }
+            if (result.get明細合計区分().equals(TWO)) {
+                RStringBuilder builder = new RStringBuilder();
+                builder.append(result.get給付対象者合計entity().get被保険者番号().value());
+                builder.append(アンダーライン);
+                builder.append(result.get給付対象者合計entity().getサービス提供年月().toDateString());
+                builder.append(アンダーライン);
+                builder.append(result.get給付対象者合計entity().get履歴番号().intValue());
+                合計map.put(builder.toRString(), result.get給付対象者合計entity());
+            }
+        }
         List<KougakuSabisuhiShikyuuShinnseiTourokuResult> entityList = new ArrayList<>();
         List<dgTaishoshaIchiran_Row> rowList = div.getCcdKogakuKyufuTaishoList().get給付対象一覧();
-        Map<RString, KogakuKyuufuTaishouListEntityResult> mapList = new HashMap<>();
-        KougakuSabisuhiShikyuuShinnseiTourokuResult result = new KougakuSabisuhiShikyuuShinnseiTourokuResult();
-        for (KogakuKyuufuTaishouListEntityResult shokanMeisaiResult : 高額給付対象一覧list) {
-            mapList.put(shokanMeisaiResult.get明細合計区分(), shokanMeisaiResult);
-        }
         for (dgTaishoshaIchiran_Row row : rowList) {
             if (row.getData0() == null || row.getData0().isEmpty()) {
                 continue;
             }
             if (追加.equals(row.getData0())) {
                 if (row.getData10().equals(ONE)) {
+                    KougakuSabisuhiShikyuuShinnseiTourokuResult result
+                            = new KougakuSabisuhiShikyuuShinnseiTourokuResult();
                     int 履歴番号 = KougakuSabisuhiShikyuuShinnseiTouroku.createInstance().
                             get高額介護給付対象者明細履歴番号(被保険者番号, サービス提供年月);
                     KogakuKyufuTaishoshaMeisai 給付対象者明細entity = new KogakuKyufuTaishoshaMeisai(
@@ -224,6 +249,8 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                     result.set高額介護サービス費給付対象者明細Entity(給付対象者明細entity);
                     entityList.add(result);
                 } else if (row.getData10().equals(TWO)) {
+                    KougakuSabisuhiShikyuuShinnseiTourokuResult result
+                            = new KougakuSabisuhiShikyuuShinnseiTourokuResult();
                     int 履歴番号 = KougakuSabisuhiShikyuuShinnseiTouroku.createInstance().
                             get高額介護給付対象者合計履歴番号(被保険者番号, サービス提供年月);
                     KogakuKyufuTaishoshaGokei 給付対象者合計entity = new KogakuKyufuTaishoshaGokei(
@@ -234,15 +261,34 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                     entityList.add(result);
                 }
             } else {
-                KogakuKyuufuTaishouListEntityResult entity = mapList.get(row.getData10());
                 if (row.getData10().equals(ONE)) {
-                    KogakuKyufuTaishoshaMeisai 給付対象者明細entity = entity.get給付対象者明細entity();
-                    給付対象者明細entity = buid給付対象者明細entity(給付対象者明細entity, row);
+                    KougakuSabisuhiShikyuuShinnseiTourokuResult result
+                            = new KougakuSabisuhiShikyuuShinnseiTourokuResult();
+                    RStringBuilder builder = new RStringBuilder();
+                    builder.append(row.getData12().getValue());
+                    builder.append(アンダーライン);
+                    builder.append(row.getData13().getValue());
+                    builder.append(アンダーライン);
+                    builder.append(row.getData1());
+                    builder.append(アンダーライン);
+                    builder.append(row.getData11());
+                    builder.append(アンダーライン);
+                    builder.append(row.getData14().getValue().intValue());
+                    KogakuKyufuTaishoshaMeisai 給付対象者明細entity
+                            = buid給付対象者明細entity(明細map.get(builder.toRString()), row);
                     result.set高額介護サービス費給付対象者明細Entity(給付対象者明細entity);
                     entityList.add(result);
                 } else if (row.getData10().equals(TWO)) {
-                    KogakuKyufuTaishoshaGokei 給付対象者合計entity = entity.get給付対象者合計entity();
-                    給付対象者合計entity = buid給付対象者合計entity(給付対象者合計entity, row);
+                    KougakuSabisuhiShikyuuShinnseiTourokuResult result
+                            = new KougakuSabisuhiShikyuuShinnseiTourokuResult();
+                    RStringBuilder builder = new RStringBuilder();
+                    builder.append(row.getData12().getValue());
+                    builder.append(アンダーライン);
+                    builder.append(row.getData13().getValue());
+                    builder.append(アンダーライン);
+                    builder.append(row.getData14().getValue().intValue());
+                    KogakuKyufuTaishoshaGokei 給付対象者合計entity
+                            = buid給付対象者合計entity(合計map.get(builder.toRString()), row);
                     result.set高額介護サービス費支給対象者合計Entity(給付対象者合計entity);
                     entityList.add(result);
                 }
@@ -254,12 +300,11 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
     private KogakuKyufuTaishoshaMeisai buid給付対象者明細entity(
             KogakuKyufuTaishoshaMeisai entity, dgTaishoshaIchiran_Row row) {
         entity = cleanKogakuKyufuTaishoshaMeisai(entity);
-        entity = entity.createBuilderForEdit().setサービス費用合計額(row.getData4().getValue()).build();
-        entity = entity.createBuilderForEdit().set利用者負担額(row.getData5().getValue()).build();
-        entity = entity.createBuilderForEdit().set高額給付根拠(row.getData9()).build();
+        entity = entity.createBuilderForEdit().setサービス費用合計額(row.getData4().getValue())
+                .set利用者負担額(row.getData5().getValue())
+                .set高額給付根拠(row.getData9())
+                .set対象者受取年月(new FlexibleYearMonth(RDate.getNowDate().getYearMonth().toString())).build();
         //TODO
-        entity = entity.createBuilderForEdit().set対象者受取年月(
-                new FlexibleYearMonth(RDate.getNowDate().getYearMonth().toString())).build();
         if (削除.equals(row.getData0())) {
             entity = entity.deleted();
         } else if (追加.equals(row.getData0())) {
@@ -300,6 +345,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
         entity = entity.createBuilderForEdit().set算定基準額(NUMBER_0).build();
         entity = entity.createBuilderForEdit().set支払済金額合計(NUMBER_0).build();
         entity = entity.createBuilderForEdit().set高額支給額(NUMBER_0).build();
+        entity = entity.createBuilderForEdit().set対象者判定審査年月(FlexibleYearMonth.EMPTY).build();
         return entity;
     }
 
@@ -453,6 +499,8 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                 .set申請者区分(null)
                 .set申請者氏名(null)
                 .set申請者氏名カナ(null)
+                .set申請者住所(RString.EMPTY)
+                .set閉庁内容(RString.EMPTY)
                 .set申請者電話番号(null)
                 .set支払方法区分コード(null)
                 .set支払場所(null)
@@ -470,6 +518,10 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                 .set支給金額(NUMBER_0)
                 .set不支給理由(null)
                 .set審査方法区分(null)
+                .set判定結果送付年月(FlexibleYearMonth.EMPTY)
+                .set審査結果反映区分(RString.EMPTY)
+                .set決定通知書作成年月日(FlexibleDate.EMPTY)
+                .set振込明細書作成年月日(FlexibleDate.EMPTY)
                 .set再送付フラグ(false).build();
         return entity;
     }

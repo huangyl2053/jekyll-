@@ -19,4 +19,5 @@ public class TokkiTextEntity {
 
     private RString 事項番号;
     private RString 項目名称;
+    private RString 特記事項テキスト_イメージ;
 }
