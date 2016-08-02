@@ -44,7 +44,7 @@ public class JutakuKaishuRiyushoTesuryoKettei
         this.entity = new DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity();
         this.entity.setRiyushoSakuseiJigyoshaNo(介護住宅改修理由書作成事業者番号);
         this.entity.setKetteiYMD(決定年月日);
-        this.entity.setRirekiNo(履歴番号);
+        this.entity.setRirekiNo(履歴番号.intValue());
         this.id = new JutakuKaishuRiyushoTesuryoKetteiIdentifier(
                 介護住宅改修理由書作成事業者番号,
                 決定年月日,
@@ -63,7 +63,7 @@ public class JutakuKaishuRiyushoTesuryoKettei
         this.id = new JutakuKaishuRiyushoTesuryoKetteiIdentifier(
                 entity.getRiyushoSakuseiJigyoshaNo(),
                 entity.getKetteiYMD(),
-                entity.getRirekiNo());
+                new Decimal(entity.getRirekiNo()));
     }
 
     /**
@@ -105,7 +105,7 @@ public class JutakuKaishuRiyushoTesuryoKettei
      * @return 履歴番号
      */
     public Decimal get履歴番号() {
-        return entity.getRirekiNo();
+        return new Decimal(entity.getRirekiNo());
     }
 
     /**

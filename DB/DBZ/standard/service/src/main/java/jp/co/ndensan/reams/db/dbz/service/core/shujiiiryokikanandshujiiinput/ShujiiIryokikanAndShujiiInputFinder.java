@@ -114,14 +114,14 @@ public class ShujiiIryokikanAndShujiiInputFinder {
         if (entity == null) {
             return result;
         }
-        RString 主治医医療機関名称 = getIryoKikanMeisho(市町村コード, entity.getShujiiIryokikanCode());
+        RString 主治医医療機関名称 = getIryoKikanMeisho(市町村コード, entity.getShujiiIryokikanCode().value());
         DbT5912ShujiiJohoEntity dbt5912entity = dbt5912dac.selectByKeyAndJokyoFlg(
-                市町村コード, entity.getShujiiIryokikanCode(), entity.getShujiiCode());
+                市町村コード, entity.getShujiiIryokikanCode().value(), entity.getShujiiCode().value());
         if (dbt5912entity == null) {
             return result;
         }
-        result.set主治医コード(entity.getShujiiCode());
-        result.set主治医医療機関コード(entity.getShujiiIryokikanCode());
+        result.set主治医コード(entity.getShujiiCode().value());
+        result.set主治医医療機関コード(entity.getShujiiIryokikanCode().value());
         result.set主治医医療機関名称(主治医医療機関名称);
         result.set主治医氏名(dbt5912entity.getShujiiName());
         result.set指定医フラグ(dbt5912entity.getShiteiiFlag());

@@ -11,6 +11,9 @@ kaishuNaiyo_kasho_Kibo,varchar,RString,,,,,改修内容・箇所及び規模,A
 riyushoSakuseiYMD,UDD015YMD,FlexibleDate,,,,,介護住宅改修理由書作成年月日,A
 riyushoSakuseiJigyoshaNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,介護住宅改修理由書作成事業者番号,A
 riyushoSakuseishaMei,UDD042AtenaMeisho,AtenaMeisho,,,,,介護住宅改修理由書作成者名,A
-riyushoSakuseishaShikaku,varchar,RString,,,,,介護住宅改修理由書作成者資格,A
+riyushoSakuseishaMeiKana,varchar,RString,,,,,介護住宅改修理由書作成者名カナ,A
 riyushoSakuseiShinseiYMD,UDD015YMD,FlexibleDate,,,,,介護住宅改修理由書作成申請年月日,A
 riyushoSakuseiUketsukeYMD,UDD015YMD,FlexibleDate,,,,,介護住宅改修理由書作成受付年月日,A
+shukeiNo,varchar,RString,,,,,集計関連付け番号,A
+TaishogaiFlag,bool,boolean,,,,,対象外フラグ,A
+shukeiFlag,bool,boolean,,,,,集計フラグ,A

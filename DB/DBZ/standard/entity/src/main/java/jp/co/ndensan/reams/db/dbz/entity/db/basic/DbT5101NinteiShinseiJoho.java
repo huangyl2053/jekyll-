@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 要介護認定申請情報テーブルの項目定義クラスです。
  */
 public enum DbT5101NinteiShinseiJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
      * insertDantaiCd
      */

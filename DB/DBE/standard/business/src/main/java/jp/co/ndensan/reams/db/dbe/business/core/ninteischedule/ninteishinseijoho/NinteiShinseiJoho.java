@@ -468,7 +468,7 @@ public class NinteiShinseiJoho
      * @return 主治医医療機関コード
      */
     public RString get主治医医療機関コード() {
-        return entity.getShujiiIryokikanCode();
+        return entity.getShujiiIryokikanCode().value();
     }
 
     /**
@@ -477,7 +477,7 @@ public class NinteiShinseiJoho
      * @return 主治医コード
      */
     public RString get主治医コード() {
-        return entity.getShujiiCode();
+        return entity.getShujiiCode().value();
     }
 
     /**

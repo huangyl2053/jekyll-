@@ -1,16 +1,16 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  * 識別番号管理テーブルのエンティティクラスです。
@@ -19,8 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  * @reamsid_L DBC-9999-012 panhe
  */
 public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118ShikibetsuNoKanriEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3118ShikibetsuNoKanri");
 
@@ -86,7 +85,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
     private RString tokuteinyushoshaSetteiKubun;
     private RString shakaifukushiKeigenSetteiKubun;
     private RString careManagementSetteiKubun;
-    private RString tokuteiShikkanSetteiKubun;
+    private RString shoteiShikkanSetteiKubun;
     private RString meisaiJushochitokureiSetteiKubun;
     private RString shukeiSetteiKubun;
     private int hyoujiJun;
@@ -94,7 +93,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -103,7 +102,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -112,7 +111,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -121,16 +120,17 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -139,7 +139,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 識別番号のgetメソッドです。
-     *
+     * 
      * @return 識別番号
      */
     public RString getShikibetsuNo() {
@@ -148,7 +148,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 識別番号のsetメソッドです。
-     *
+     * 
      * @param shikibetsuNo 識別番号
      */
     public void setShikibetsuNo(@Nonnull RString shikibetsuNo) {
@@ -157,7 +157,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 適用開始年月のgetメソッドです。
-     *
+     * 
      * @return 適用開始年月
      */
     public FlexibleYearMonth getTekiyoKaishiYM() {
@@ -166,7 +166,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 適用開始年月のsetメソッドです。
-     *
+     * 
      * @param tekiyoKaishiYM 適用開始年月
      */
     public void setTekiyoKaishiYM(@Nonnull FlexibleYearMonth tekiyoKaishiYM) {
@@ -175,7 +175,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 適用終了年月のgetメソッドです。
-     *
+     * 
      * @return 適用終了年月
      */
     @CheckForNull
@@ -185,7 +185,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 適用終了年月のsetメソッドです。
-     *
+     * 
      * @param tekiyoShuryoYM 適用終了年月
      */
     public void setTekiyoShuryoYM(FlexibleYearMonth tekiyoShuryoYM) {
@@ -194,7 +194,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 名称のgetメソッドです。
-     *
+     * 
      * @return 名称
      */
     @CheckForNull
@@ -204,7 +204,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 名称のsetメソッドです。
-     *
+     * 
      * @param meisho 名称
      */
     public void setMeisho(RString meisho) {
@@ -213,7 +213,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 略称のgetメソッドです。
-     *
+     * 
      * @return 略称
      */
     @CheckForNull
@@ -223,7 +223,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 略称のsetメソッドです。
-     *
+     * 
      * @param ryakusho 略称
      */
     public void setRyakusho(RString ryakusho) {
@@ -232,7 +232,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 名称２のgetメソッドです。
-     *
+     * 
      * @return 名称２
      */
     @CheckForNull
@@ -242,7 +242,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 名称２のsetメソッドです。
-     *
+     * 
      * @param meisho2 名称２
      */
     public void setMeisho2(RString meisho2) {
@@ -253,7 +253,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 識別番号区分のgetメソッドです。
      * <br/>
      * <br/>1：交換情報識別番号、2：入力識別番号
-     *
+     * 
      * @return 識別番号区分
      */
     @CheckForNull
@@ -265,7 +265,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 識別番号区分のsetメソッドです。
      * <br/>
      * <br/>1：交換情報識別番号、2：入力識別番号
-     *
+     * 
      * @param shikibetsuNoKubon 識別番号区分
      */
     public void setShikibetsuNoKubon(RString shikibetsuNoKubon) {
@@ -276,7 +276,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 給付実績区分のgetメソッドです。
      * <br/>
      * <br/>1：現物、2：償還、0：区分なし
-     *
+     * 
      * @return 給付実績区分
      */
     @CheckForNull
@@ -288,7 +288,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 給付実績区分のsetメソッドです。
      * <br/>
      * <br/>1：現物、2：償還、0：区分なし
-     *
+     * 
      * @param kyufujissekiKubun 給付実績区分
      */
     public void setKyufujissekiKubun(RString kyufujissekiKubun) {
@@ -299,7 +299,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 給付分類区分のgetメソッドです。
      * <br/>
      * <br/>1：介護給付、2：予防給付、3：介護給付+予防給付、4：総合事業（経過措置）、5：総合事業、0：区分なし
-     *
+     * 
      * @return 給付分類区分
      */
     @CheckForNull
@@ -311,7 +311,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 給付分類区分のsetメソッドです。
      * <br/>
      * <br/>1：介護給付、2：予防給付、3：介護給付+予防給付、4：総合事業（経過措置）、5：総合事業、0：区分なし
-     *
+     * 
      * @param kyufuBunruiKubun 給付分類区分
      */
     public void setKyufuBunruiKubun(RString kyufuBunruiKubun) {
@@ -320,7 +320,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード01のgetメソッドです。
-     *
+     * 
      * @return 選択可能サービス種類コード01
      */
     @CheckForNull
@@ -330,7 +330,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード01のsetメソッドです。
-     *
+     * 
      * @param sentakuKanoShuruiCode01 選択可能サービス種類コード01
      */
     public void setSentakuKanoShuruiCode01(RString sentakuKanoShuruiCode01) {
@@ -339,7 +339,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード02のgetメソッドです。
-     *
+     * 
      * @return 選択可能サービス種類コード02
      */
     @CheckForNull
@@ -349,7 +349,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード02のsetメソッドです。
-     *
+     * 
      * @param sentakuKanoShuruiCode02 選択可能サービス種類コード02
      */
     public void setSentakuKanoShuruiCode02(RString sentakuKanoShuruiCode02) {
@@ -358,7 +358,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード03のgetメソッドです。
-     *
+     * 
      * @return 選択可能サービス種類コード03
      */
     @CheckForNull
@@ -368,7 +368,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード03のsetメソッドです。
-     *
+     * 
      * @param sentakuKanoShuruiCode03 選択可能サービス種類コード03
      */
     public void setSentakuKanoShuruiCode03(RString sentakuKanoShuruiCode03) {
@@ -377,7 +377,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード04のgetメソッドです。
-     *
+     * 
      * @return 選択可能サービス種類コード04
      */
     @CheckForNull
@@ -387,7 +387,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード04のsetメソッドです。
-     *
+     * 
      * @param sentakuKanoShuruiCode04 選択可能サービス種類コード04
      */
     public void setSentakuKanoShuruiCode04(RString sentakuKanoShuruiCode04) {
@@ -396,7 +396,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード05のgetメソッドです。
-     *
+     * 
      * @return 選択可能サービス種類コード05
      */
     @CheckForNull
@@ -406,7 +406,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード05のsetメソッドです。
-     *
+     * 
      * @param sentakuKanoShuruiCode05 選択可能サービス種類コード05
      */
     public void setSentakuKanoShuruiCode05(RString sentakuKanoShuruiCode05) {
@@ -415,7 +415,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード06のgetメソッドです。
-     *
+     * 
      * @return 選択可能サービス種類コード06
      */
     @CheckForNull
@@ -425,7 +425,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード06のsetメソッドです。
-     *
+     * 
      * @param sentakuKanoShuruiCode06 選択可能サービス種類コード06
      */
     public void setSentakuKanoShuruiCode06(RString sentakuKanoShuruiCode06) {
@@ -434,7 +434,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード07のgetメソッドです。
-     *
+     * 
      * @return 選択可能サービス種類コード07
      */
     @CheckForNull
@@ -444,7 +444,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード07のsetメソッドです。
-     *
+     * 
      * @param sentakuKanoShuruiCode07 選択可能サービス種類コード07
      */
     public void setSentakuKanoShuruiCode07(RString sentakuKanoShuruiCode07) {
@@ -453,7 +453,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード08のgetメソッドです。
-     *
+     * 
      * @return 選択可能サービス種類コード08
      */
     @CheckForNull
@@ -463,7 +463,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード08のsetメソッドです。
-     *
+     * 
      * @param sentakuKanoShuruiCode08 選択可能サービス種類コード08
      */
     public void setSentakuKanoShuruiCode08(RString sentakuKanoShuruiCode08) {
@@ -472,7 +472,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード09のgetメソッドです。
-     *
+     * 
      * @return 選択可能サービス種類コード09
      */
     @CheckForNull
@@ -482,7 +482,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード09のsetメソッドです。
-     *
+     * 
      * @param sentakuKanoShuruiCode09 選択可能サービス種類コード09
      */
     public void setSentakuKanoShuruiCode09(RString sentakuKanoShuruiCode09) {
@@ -491,7 +491,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード10のgetメソッドです。
-     *
+     * 
      * @return 選択可能サービス種類コード10
      */
     @CheckForNull
@@ -501,7 +501,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード10のsetメソッドです。
-     *
+     * 
      * @param sentakuKanoShuruiCode10 選択可能サービス種類コード10
      */
     public void setSentakuKanoShuruiCode10(RString sentakuKanoShuruiCode10) {
@@ -510,7 +510,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード11のgetメソッドです。
-     *
+     * 
      * @return 選択可能サービス種類コード11
      */
     @CheckForNull
@@ -520,7 +520,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード11のsetメソッドです。
-     *
+     * 
      * @param sentakuKanoShuruiCode11 選択可能サービス種類コード11
      */
     public void setSentakuKanoShuruiCode11(RString sentakuKanoShuruiCode11) {
@@ -529,7 +529,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード12のgetメソッドです。
-     *
+     * 
      * @return 選択可能サービス種類コード12
      */
     @CheckForNull
@@ -539,7 +539,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード12のsetメソッドです。
-     *
+     * 
      * @param sentakuKanoShuruiCode12 選択可能サービス種類コード12
      */
     public void setSentakuKanoShuruiCode12(RString sentakuKanoShuruiCode12) {
@@ -548,7 +548,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード13のgetメソッドです。
-     *
+     * 
      * @return 選択可能サービス種類コード13
      */
     @CheckForNull
@@ -558,7 +558,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード13のsetメソッドです。
-     *
+     * 
      * @param sentakuKanoShuruiCode13 選択可能サービス種類コード13
      */
     public void setSentakuKanoShuruiCode13(RString sentakuKanoShuruiCode13) {
@@ -567,7 +567,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード14のgetメソッドです。
-     *
+     * 
      * @return 選択可能サービス種類コード14
      */
     @CheckForNull
@@ -577,7 +577,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード14のsetメソッドです。
-     *
+     * 
      * @param sentakuKanoShuruiCode14 選択可能サービス種類コード14
      */
     public void setSentakuKanoShuruiCode14(RString sentakuKanoShuruiCode14) {
@@ -586,7 +586,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード15のgetメソッドです。
-     *
+     * 
      * @return 選択可能サービス種類コード15
      */
     @CheckForNull
@@ -596,7 +596,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード15のsetメソッドです。
-     *
+     * 
      * @param sentakuKanoShuruiCode15 選択可能サービス種類コード15
      */
     public void setSentakuKanoShuruiCode15(RString sentakuKanoShuruiCode15) {
@@ -605,7 +605,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード16のgetメソッドです。
-     *
+     * 
      * @return 選択可能サービス種類コード16
      */
     @CheckForNull
@@ -615,7 +615,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード16のsetメソッドです。
-     *
+     * 
      * @param sentakuKanoShuruiCode16 選択可能サービス種類コード16
      */
     public void setSentakuKanoShuruiCode16(RString sentakuKanoShuruiCode16) {
@@ -624,7 +624,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード17のgetメソッドです。
-     *
+     * 
      * @return 選択可能サービス種類コード17
      */
     @CheckForNull
@@ -634,7 +634,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード17のsetメソッドです。
-     *
+     * 
      * @param sentakuKanoShuruiCode17 選択可能サービス種類コード17
      */
     public void setSentakuKanoShuruiCode17(RString sentakuKanoShuruiCode17) {
@@ -643,7 +643,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード18のgetメソッドです。
-     *
+     * 
      * @return 選択可能サービス種類コード18
      */
     @CheckForNull
@@ -653,7 +653,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード18のsetメソッドです。
-     *
+     * 
      * @param sentakuKanoShuruiCode18 選択可能サービス種類コード18
      */
     public void setSentakuKanoShuruiCode18(RString sentakuKanoShuruiCode18) {
@@ -662,7 +662,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード19のgetメソッドです。
-     *
+     * 
      * @return 選択可能サービス種類コード19
      */
     @CheckForNull
@@ -672,7 +672,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード19のsetメソッドです。
-     *
+     * 
      * @param sentakuKanoShuruiCode19 選択可能サービス種類コード19
      */
     public void setSentakuKanoShuruiCode19(RString sentakuKanoShuruiCode19) {
@@ -681,7 +681,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード20のgetメソッドです。
-     *
+     * 
      * @return 選択可能サービス種類コード20
      */
     @CheckForNull
@@ -691,7 +691,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 選択可能サービス種類コード20のsetメソッドです。
-     *
+     * 
      * @param sentakuKanoShuruiCode20 選択可能サービス種類コード20
      */
     public void setSentakuKanoShuruiCode20(RString sentakuKanoShuruiCode20) {
@@ -700,7 +700,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 社福選択可能種類コード01のgetメソッドです。
-     *
+     * 
      * @return 社福選択可能種類コード01
      */
     @CheckForNull
@@ -710,7 +710,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 社福選択可能種類コード01のsetメソッドです。
-     *
+     * 
      * @param shafukuSentakuKanoShuruiCode01 社福選択可能種類コード01
      */
     public void setShafukuSentakuKanoShuruiCode01(RString shafukuSentakuKanoShuruiCode01) {
@@ -719,7 +719,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 社福選択可能種類コード02のgetメソッドです。
-     *
+     * 
      * @return 社福選択可能種類コード02
      */
     @CheckForNull
@@ -729,7 +729,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 社福選択可能種類コード02のsetメソッドです。
-     *
+     * 
      * @param shafukuSentakuKanoShuruiCode02 社福選択可能種類コード02
      */
     public void setShafukuSentakuKanoShuruiCode02(RString shafukuSentakuKanoShuruiCode02) {
@@ -738,7 +738,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 社福選択可能種類コード03のgetメソッドです。
-     *
+     * 
      * @return 社福選択可能種類コード03
      */
     @CheckForNull
@@ -748,7 +748,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 社福選択可能種類コード03のsetメソッドです。
-     *
+     * 
      * @param shafukuSentakuKanoShuruiCode03 社福選択可能種類コード03
      */
     public void setShafukuSentakuKanoShuruiCode03(RString shafukuSentakuKanoShuruiCode03) {
@@ -757,7 +757,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 社福選択可能種類コード04のgetメソッドです。
-     *
+     * 
      * @return 社福選択可能種類コード04
      */
     @CheckForNull
@@ -767,7 +767,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 社福選択可能種類コード04のsetメソッドです。
-     *
+     * 
      * @param shafukuSentakuKanoShuruiCode04 社福選択可能種類コード04
      */
     public void setShafukuSentakuKanoShuruiCode04(RString shafukuSentakuKanoShuruiCode04) {
@@ -776,7 +776,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 社福選択可能種類コード05のgetメソッドです。
-     *
+     * 
      * @return 社福選択可能種類コード05
      */
     @CheckForNull
@@ -786,7 +786,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 社福選択可能種類コード05のsetメソッドです。
-     *
+     * 
      * @param shafukuSentakuKanoShuruiCode05 社福選択可能種類コード05
      */
     public void setShafukuSentakuKanoShuruiCode05(RString shafukuSentakuKanoShuruiCode05) {
@@ -795,7 +795,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 社福選択可能種類コード06のgetメソッドです。
-     *
+     * 
      * @return 社福選択可能種類コード06
      */
     @CheckForNull
@@ -805,7 +805,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 社福選択可能種類コード06のsetメソッドです。
-     *
+     * 
      * @param shafukuSentakuKanoShuruiCode06 社福選択可能種類コード06
      */
     public void setShafukuSentakuKanoShuruiCode06(RString shafukuSentakuKanoShuruiCode06) {
@@ -814,7 +814,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 社福選択可能種類コード07のgetメソッドです。
-     *
+     * 
      * @return 社福選択可能種類コード07
      */
     @CheckForNull
@@ -824,7 +824,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 社福選択可能種類コード07のsetメソッドです。
-     *
+     * 
      * @param shafukuSentakuKanoShuruiCode07 社福選択可能種類コード07
      */
     public void setShafukuSentakuKanoShuruiCode07(RString shafukuSentakuKanoShuruiCode07) {
@@ -833,7 +833,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 社福選択可能種類コード08のgetメソッドです。
-     *
+     * 
      * @return 社福選択可能種類コード08
      */
     @CheckForNull
@@ -843,7 +843,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 社福選択可能種類コード08のsetメソッドです。
-     *
+     * 
      * @param shafukuSentakuKanoShuruiCode08 社福選択可能種類コード08
      */
     public void setShafukuSentakuKanoShuruiCode08(RString shafukuSentakuKanoShuruiCode08) {
@@ -852,7 +852,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 社福選択可能種類コード09のgetメソッドです。
-     *
+     * 
      * @return 社福選択可能種類コード09
      */
     @CheckForNull
@@ -862,7 +862,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 社福選択可能種類コード09のsetメソッドです。
-     *
+     * 
      * @param shafukuSentakuKanoShuruiCode09 社福選択可能種類コード09
      */
     public void setShafukuSentakuKanoShuruiCode09(RString shafukuSentakuKanoShuruiCode09) {
@@ -871,7 +871,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 社福選択可能種類コード10のgetメソッドです。
-     *
+     * 
      * @return 社福選択可能種類コード10
      */
     @CheckForNull
@@ -881,7 +881,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 社福選択可能種類コード10のsetメソッドです。
-     *
+     * 
      * @param shafukuSentakuKanoShuruiCode10 社福選択可能種類コード10
      */
     public void setShafukuSentakuKanoShuruiCode10(RString shafukuSentakuKanoShuruiCode10) {
@@ -892,7 +892,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 基本設定区分のgetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @return 基本設定区分
      */
     @CheckForNull
@@ -904,7 +904,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 基本設定区分のsetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @param kihonSetteiKubun 基本設定区分
      */
     public void setKihonSetteiKubun(RString kihonSetteiKubun) {
@@ -915,7 +915,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 明細設定区分のgetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @return 明細設定区分
      */
     @CheckForNull
@@ -927,7 +927,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 明細設定区分のsetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @param meisaiSetteiKubun 明細設定区分
      */
     public void setMeisaiSetteiKubun(RString meisaiSetteiKubun) {
@@ -938,7 +938,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 緊急時施設療養設定区分のgetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @return 緊急時施設療養設定区分
      */
     @CheckForNull
@@ -950,7 +950,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 緊急時施設療養設定区分のsetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @param kinkyuShisetsuRyoyoSetteiKubun 緊急時施設療養設定区分
      */
     public void setKinkyuShisetsuRyoyoSetteiKubun(RString kinkyuShisetsuRyoyoSetteiKubun) {
@@ -961,7 +961,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 特定診療費設定区分のgetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @return 特定診療費設定区分
      */
     @CheckForNull
@@ -973,7 +973,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 特定診療費設定区分のsetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @param tokuteiShinryoSetteiKubun 特定診療費設定区分
      */
     public void setTokuteiShinryoSetteiKubun(RString tokuteiShinryoSetteiKubun) {
@@ -984,7 +984,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 食事費用設定区分のgetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @return 食事費用設定区分
      */
     @CheckForNull
@@ -996,7 +996,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 食事費用設定区分のsetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @param shokujiHiyosetteiKubun 食事費用設定区分
      */
     public void setShokujiHiyosetteiKubun(RString shokujiHiyosetteiKubun) {
@@ -1007,7 +1007,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 居宅計画費設定区分のgetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @return 居宅計画費設定区分
      */
     @CheckForNull
@@ -1019,7 +1019,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 居宅計画費設定区分のsetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @param kyotakuKeikakuSetteiKubun 居宅計画費設定区分
      */
     public void setKyotakuKeikakuSetteiKubun(RString kyotakuKeikakuSetteiKubun) {
@@ -1030,7 +1030,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 福祉用具購入費設定区分のgetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @return 福祉用具購入費設定区分
      */
     @CheckForNull
@@ -1042,7 +1042,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 福祉用具購入費設定区分のsetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @param fukushoyouguKonyuSetteiKubun 福祉用具購入費設定区分
      */
     public void setFukushoyouguKonyuSetteiKubun(RString fukushoyouguKonyuSetteiKubun) {
@@ -1053,7 +1053,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 住宅改修費設定区分のgetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @return 住宅改修費設定区分
      */
     @CheckForNull
@@ -1065,7 +1065,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 住宅改修費設定区分のsetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @param jutakukaishuSetteiKubun 住宅改修費設定区分
      */
     public void setJutakukaishuSetteiKubun(RString jutakukaishuSetteiKubun) {
@@ -1076,7 +1076,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 高額介護サービス費設定区分のgetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @return 高額介護サービス費設定区分
      */
     @CheckForNull
@@ -1088,7 +1088,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 高額介護サービス費設定区分のsetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @param kogakuKaigoSetteiKubun 高額介護サービス費設定区分
      */
     public void setKogakuKaigoSetteiKubun(RString kogakuKaigoSetteiKubun) {
@@ -1099,7 +1099,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 特定診療特別療養設定区分のgetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @return 特定診療特別療養設定区分
      */
     @CheckForNull
@@ -1111,7 +1111,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 特定診療特別療養設定区分のsetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @param tokuteishinryoTokubetsuryoyoSetteiKubun 特定診療特別療養設定区分
      */
     public void setTokuteishinryoTokubetsuryoyoSetteiKubun(RString tokuteishinryoTokubetsuryoyoSetteiKubun) {
@@ -1122,7 +1122,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 特定入所者設定区分のgetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @return 特定入所者設定区分
      */
     @CheckForNull
@@ -1134,7 +1134,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 特定入所者設定区分のsetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @param tokuteinyushoshaSetteiKubun 特定入所者設定区分
      */
     public void setTokuteinyushoshaSetteiKubun(RString tokuteinyushoshaSetteiKubun) {
@@ -1145,7 +1145,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 社会福祉法人軽減設定区分のgetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @return 社会福祉法人軽減設定区分
      */
     @CheckForNull
@@ -1157,7 +1157,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 社会福祉法人軽減設定区分のsetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @param shakaifukushiKeigenSetteiKubun 社会福祉法人軽減設定区分
      */
     public void setShakaifukushiKeigenSetteiKubun(RString shakaifukushiKeigenSetteiKubun) {
@@ -1168,7 +1168,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * ケアマネジメント設定区分のgetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @return ケアマネジメント設定区分
      */
     @CheckForNull
@@ -1180,7 +1180,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * ケアマネジメント設定区分のsetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @param careManagementSetteiKubun ケアマネジメント設定区分
      */
     public void setCareManagementSetteiKubun(RString careManagementSetteiKubun) {
@@ -1188,33 +1188,33 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
     }
 
     /**
-     * 特定疾患施設療養設定区分のgetメソッドです。
+     * 所定疾患施設療養設定区分のgetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
-     * @return 特定疾患施設療養設定区分
+     * 
+     * @return 所定疾患施設療養設定区分
      */
     @CheckForNull
-    public RString getTokuteiShikkanSetteiKubun() {
-        return tokuteiShikkanSetteiKubun;
+    public RString getShoteiShikkanSetteiKubun() {
+        return shoteiShikkanSetteiKubun;
     }
 
     /**
-     * 特定疾患施設療養設定区分のsetメソッドです。
+     * 所定疾患施設療養設定区分のsetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
-     * @param tokuteiShikkanSetteiKubun 特定疾患施設療養設定区分
+     * 
+     * @param shoteiShikkanSetteiKubun 所定疾患施設療養設定区分
      */
-    public void setTokuteiShikkanSetteiKubun(RString tokuteiShikkanSetteiKubun) {
-        this.tokuteiShikkanSetteiKubun = tokuteiShikkanSetteiKubun;
+    public void setShoteiShikkanSetteiKubun(RString shoteiShikkanSetteiKubun) {
+        this.shoteiShikkanSetteiKubun = shoteiShikkanSetteiKubun;
     }
 
     /**
      * 明細住所地特例設定区分のgetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @return 明細住所地特例設定区分
      */
     @CheckForNull
@@ -1226,7 +1226,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 明細住所地特例設定区分のsetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @param meisaiJushochitokureiSetteiKubun 明細住所地特例設定区分
      */
     public void setMeisaiJushochitokureiSetteiKubun(RString meisaiJushochitokureiSetteiKubun) {
@@ -1237,7 +1237,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 集計設定区分のgetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @return 集計設定区分
      */
     @CheckForNull
@@ -1249,7 +1249,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 集計設定区分のsetメソッドです。
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
-     *
+     * 
      * @param shukeiSetteiKubun 集計設定区分
      */
     public void setShukeiSetteiKubun(RString shukeiSetteiKubun) {
@@ -1258,7 +1258,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 表示順のgetメソッドです。
-     *
+     * 
      * @return 表示順
      */
     @CheckForNull
@@ -1268,7 +1268,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * 表示順のsetメソッドです。
-     *
+     * 
      * @param hyoujiJun 表示順
      */
     public void setHyoujiJun(int hyoujiJun) {
@@ -1279,7 +1279,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 過誤申立様式番号のgetメソッドです。
      * <br/>
      * <br/>過誤申立事由（様式）コードを設定する
-     *
+     * 
      * @return 過誤申立様式番号
      */
     @CheckForNull
@@ -1291,7 +1291,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * 過誤申立様式番号のsetメソッドです。
      * <br/>
      * <br/>過誤申立事由（様式）コードを設定する
-     *
+     * 
      * @param kagoMoshitateYoshikiNo 過誤申立様式番号
      */
     public void setKagoMoshitateYoshikiNo(RString kagoMoshitateYoshikiNo) {
@@ -1300,9 +1300,9 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * このエンティティの主キーが他の{@literal DbT3118ShikibetsuNoKanriEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3118ShikibetsuNoKanriEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -1376,7 +1376,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
         this.tokuteinyushoshaSetteiKubun = entity.tokuteinyushoshaSetteiKubun;
         this.shakaifukushiKeigenSetteiKubun = entity.shakaifukushiKeigenSetteiKubun;
         this.careManagementSetteiKubun = entity.careManagementSetteiKubun;
-        this.tokuteiShikkanSetteiKubun = entity.tokuteiShikkanSetteiKubun;
+        this.shoteiShikkanSetteiKubun = entity.shoteiShikkanSetteiKubun;
         this.meisaiJushochitokureiSetteiKubun = entity.meisaiJushochitokureiSetteiKubun;
         this.shukeiSetteiKubun = entity.shukeiSetteiKubun;
         this.hyoujiJun = entity.hyoujiJun;
@@ -1385,13 +1385,13 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shikibetsuNo, tekiyoKaishiYM, tekiyoShuryoYM, meisho, ryakusho, meisho2, shikibetsuNoKubon, kyufujissekiKubun, kyufuBunruiKubun, sentakuKanoShuruiCode01, sentakuKanoShuruiCode02, sentakuKanoShuruiCode03, sentakuKanoShuruiCode04, sentakuKanoShuruiCode05, sentakuKanoShuruiCode06, sentakuKanoShuruiCode07, sentakuKanoShuruiCode08, sentakuKanoShuruiCode09, sentakuKanoShuruiCode10, sentakuKanoShuruiCode11, sentakuKanoShuruiCode12, sentakuKanoShuruiCode13, sentakuKanoShuruiCode14, sentakuKanoShuruiCode15, sentakuKanoShuruiCode16, sentakuKanoShuruiCode17, sentakuKanoShuruiCode18, sentakuKanoShuruiCode19, sentakuKanoShuruiCode20, shafukuSentakuKanoShuruiCode01, shafukuSentakuKanoShuruiCode02, shafukuSentakuKanoShuruiCode03, shafukuSentakuKanoShuruiCode04, shafukuSentakuKanoShuruiCode05, shafukuSentakuKanoShuruiCode06, shafukuSentakuKanoShuruiCode07, shafukuSentakuKanoShuruiCode08, shafukuSentakuKanoShuruiCode09, shafukuSentakuKanoShuruiCode10, kihonSetteiKubun, meisaiSetteiKubun, kinkyuShisetsuRyoyoSetteiKubun, tokuteiShinryoSetteiKubun, shokujiHiyosetteiKubun, kyotakuKeikakuSetteiKubun, fukushoyouguKonyuSetteiKubun, jutakukaishuSetteiKubun, kogakuKaigoSetteiKubun, tokuteishinryoTokubetsuryoyoSetteiKubun, tokuteinyushoshaSetteiKubun, shakaifukushiKeigenSetteiKubun, careManagementSetteiKubun, tokuteiShikkanSetteiKubun, meisaiJushochitokureiSetteiKubun, shukeiSetteiKubun, hyoujiJun, kagoMoshitateYoshikiNo);
+        return super.toMd5(shikibetsuNo, tekiyoKaishiYM, tekiyoShuryoYM, meisho, ryakusho, meisho2, shikibetsuNoKubon, kyufujissekiKubun, kyufuBunruiKubun, sentakuKanoShuruiCode01, sentakuKanoShuruiCode02, sentakuKanoShuruiCode03, sentakuKanoShuruiCode04, sentakuKanoShuruiCode05, sentakuKanoShuruiCode06, sentakuKanoShuruiCode07, sentakuKanoShuruiCode08, sentakuKanoShuruiCode09, sentakuKanoShuruiCode10, sentakuKanoShuruiCode11, sentakuKanoShuruiCode12, sentakuKanoShuruiCode13, sentakuKanoShuruiCode14, sentakuKanoShuruiCode15, sentakuKanoShuruiCode16, sentakuKanoShuruiCode17, sentakuKanoShuruiCode18, sentakuKanoShuruiCode19, sentakuKanoShuruiCode20, shafukuSentakuKanoShuruiCode01, shafukuSentakuKanoShuruiCode02, shafukuSentakuKanoShuruiCode03, shafukuSentakuKanoShuruiCode04, shafukuSentakuKanoShuruiCode05, shafukuSentakuKanoShuruiCode06, shafukuSentakuKanoShuruiCode07, shafukuSentakuKanoShuruiCode08, shafukuSentakuKanoShuruiCode09, shafukuSentakuKanoShuruiCode10, kihonSetteiKubun, meisaiSetteiKubun, kinkyuShisetsuRyoyoSetteiKubun, tokuteiShinryoSetteiKubun, shokujiHiyosetteiKubun, kyotakuKeikakuSetteiKubun, fukushoyouguKonyuSetteiKubun, jutakukaishuSetteiKubun, kogakuKaigoSetteiKubun, tokuteishinryoTokubetsuryoyoSetteiKubun, tokuteinyushoshaSetteiKubun, shakaifukushiKeigenSetteiKubun, careManagementSetteiKubun, shoteiShikkanSetteiKubun, meisaiJushochitokureiSetteiKubun, shukeiSetteiKubun, hyoujiJun, kagoMoshitateYoshikiNo);
     }
 
 // </editor-fold>
+
 }

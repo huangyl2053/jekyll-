@@ -96,7 +96,7 @@
         <result property="ketteiTsuchiSakuseiYMD" column="dbT3074KogakuGassanShikyuFushikyuKettei_ketteiTsuchiSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="furikomiTsuchiSakuseiYMD" column="dbT3074KogakuGassanShikyuFushikyuKettei_furikomiTsuchiSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="uketoriYM" column="dbT3074KogakuGassanShikyuFushikyuKettei_uketoriYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="kozaID" column="dbT3074KogakuGassanShikyuFushikyuKettei_kozaID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kozaID" column="dbT3074KogakuGassanShikyuFushikyuKettei_kozaID" />
         <result property="ketteiTsuchiRealHakkoFlag" column="dbT3074KogakuGassanShikyuFushikyuKettei_ketteiTsuchiRealHakkoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 

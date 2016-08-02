@@ -89,8 +89,8 @@
         <result property="shinseishoKanriNo" column="dbT4003YokaigoNinteiInterface_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="hihokenshaNo" column="dbT4003YokaigoNinteiInterface_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="rirekiNo" column="dbT4003YokaigoNinteiInterface_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="torikomiTimestamp" column="dbT4003YokaigoNinteiInterface_torikomiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="torikomiKubun" column="dbT4003YokaigoNinteiInterface_torikomiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="torikomiTimestamp" column="dbT4003YokaigoNinteiInterface_torikomiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="torikomiKubun" column="dbT4003YokaigoNinteiInterface_torikomiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinseiShubetsuCode" column="dbT4003YokaigoNinteiInterface_shinseiShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="torisageKubunCode" column="dbT4003YokaigoNinteiInterface_torisageKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinseiYMD" column="dbT4003YokaigoNinteiInterface_shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>

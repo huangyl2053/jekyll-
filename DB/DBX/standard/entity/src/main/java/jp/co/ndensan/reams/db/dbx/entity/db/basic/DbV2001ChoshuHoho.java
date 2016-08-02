@@ -3,10 +3,10 @@ package jp.co.ndensan.reams.db.dbx.entity.db.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * 徴収方法Aliveテーブルの項目定義クラスです。
+ * 徴収方法Newestテーブルの項目定義クラスです。
  */
 public enum DbV2001ChoshuHoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
      * insertDantaiCd
      */

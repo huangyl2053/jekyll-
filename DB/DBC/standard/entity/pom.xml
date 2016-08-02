@@ -20,6 +20,10 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbcDefinition</artifactId>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbd</groupId>
+            <artifactId>DbdEntity</artifactId>
+        </dependency>
         <!-- DBD -->
         <!-- DBX -->
         <!-- DBZ -->
@@ -27,17 +31,11 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzEntity</artifactId>
         </dependency>
-        <!-- å…¬é–‹ç³» -->
-        <!-- ï¿½?ï¿½ï¿½ï¿½?-->
-        <!-- ï¿½??ãƒ« -->
+        <!-- ŒöŠJŒn -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxEntity</artifactId>
             <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbd</groupId>
-            <artifactId>DbdEntity</artifactId>
         </dependency>
     </dependencies>
 </project>

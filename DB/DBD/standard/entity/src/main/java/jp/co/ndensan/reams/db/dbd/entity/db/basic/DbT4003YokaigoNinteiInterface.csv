@@ -1,8 +1,8 @@
 ﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,申請書管理番号,A
 hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 rirekiNo,varchar,RString,,,,,履歴番号,A
-torikomiTimestamp,varchar,RString,,,,,取込日時,A
-torikomiKubun,UDD018YMDHMS,YMDHMS,,,,,取込区分,A
+torikomiTimestamp,UDD018YMDHMS,YMDHMS,,,,,取込日時,A
+torikomiKubun,varchar,RString,,,,,取込区分,A
 shinseiShubetsuCode,varchar,RString,,,,,申請種別コード,A
 torisageKubunCode,varchar,RString,,,,,取下区分コード,A
 shinseiYMD,UDD015YMD,FlexibleDate,,,,,認定申請日,A
@@ -12,7 +12,7 @@ ikenshoIraiYMD,UDD015YMD,FlexibleDate,,,,,意見書依頼年月日,A
 ikenshoToriyoseYMD,UDD015YMD,FlexibleDate,,,,,意見書取寄せ年月日,A
 chosaItakuYMD,UDD015YMD,FlexibleDate,,,,,調査委託年月日,A
 chosaShuryoYMD,UDD015YMD,FlexibleDate,,,,,調査終了年月日,A
-chosaItakusakiCode,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,調査委託先コード,A
+chosaItakusakiCode,DbUDD004JigyoshaNo,JigyoshaNo,,,,,調査委託先コード,A
 chosainCode,varchar,RString,,,,,調査員コード,A
 ichijiHanteiYMD,UDD015YMD,FlexibleDate,,,,,一次判定日,A
 ichijiHanteiKekkaCode,varchar,RString,,,,,一次判定結果,A

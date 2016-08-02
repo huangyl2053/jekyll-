@@ -669,9 +669,9 @@ public class ShikibetsuNoKanriBuilder {
      * @param 特定疾患施設療養設定区分 特定疾患施設療養設定区分
      * @return {@link ShikibetsuNoKanriBuilder}
      */
-    public ShikibetsuNoKanriBuilder set特定疾患施設療養設定区分(RString 特定疾患施設療養設定区分) {
+    public ShikibetsuNoKanriBuilder set所定疾患施設療養設定区分(RString 特定疾患施設療養設定区分) {
         requireNonNull(特定疾患施設療養設定区分, UrSystemErrorMessages.値がnull.getReplacedMessage("特定疾患施設療養設定区分"));
-        entity.setTokuteiShikkanSetteiKubun(特定疾患施設療養設定区分);
+        entity.setShoteiShikkanSetteiKubun(特定疾患施設療養設定区分);
         return this;
     }
 

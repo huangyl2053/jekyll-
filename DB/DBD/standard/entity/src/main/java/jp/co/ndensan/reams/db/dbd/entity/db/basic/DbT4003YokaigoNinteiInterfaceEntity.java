@@ -12,14 +12,12 @@ import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
  * 要介護認定インターフェース情報テーブルのエンティティクラスです。
  */
 public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT4003YokaigoNinteiInterfaceEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
-
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4003YokaigoNinteiInterface");
 
@@ -31,12 +29,11 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
     private int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
-    @PrimaryKey
     private ShinseishoKanriNo shinseishoKanriNo;
     private HihokenshaNo hihokenshaNo;
     private RString rirekiNo;
-    private RString torikomiTimestamp;
-    private YMDHMS torikomiKubun;
+    private YMDHMS torikomiTimestamp;
+    private RString torikomiKubun;
     private RString shinseiShubetsuCode;
     private RString torisageKubunCode;
     private FlexibleDate shinseiYMD;
@@ -83,7 +80,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -92,7 +89,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -101,7 +98,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -110,16 +107,17 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -128,7 +126,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 申請書管理番号のgetメソッドです。
-     *
+     * 
      * @return 申請書管理番号
      */
     @CheckForNull
@@ -138,7 +136,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 申請書管理番号のsetメソッドです。
-     *
+     * 
      * @param shinseishoKanriNo 申請書管理番号
      */
     public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
@@ -147,7 +145,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 被保険者番号のgetメソッドです。
-     *
+     * 
      * @return 被保険者番号
      */
     @CheckForNull
@@ -157,7 +155,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 被保険者番号のsetメソッドです。
-     *
+     * 
      * @param hihokenshaNo 被保険者番号
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
@@ -166,7 +164,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 履歴番号のgetメソッドです。
-     *
+     * 
      * @return 履歴番号
      */
     @CheckForNull
@@ -176,7 +174,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 履歴番号のsetメソッドです。
-     *
+     * 
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(RString rirekiNo) {
@@ -185,45 +183,45 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 取込日時のgetメソッドです。
-     *
+     * 
      * @return 取込日時
      */
     @CheckForNull
-    public RString getTorikomiTimestamp() {
+    public YMDHMS getTorikomiTimestamp() {
         return torikomiTimestamp;
     }
 
     /**
      * 取込日時のsetメソッドです。
-     *
+     * 
      * @param torikomiTimestamp 取込日時
      */
-    public void setTorikomiTimestamp(RString torikomiTimestamp) {
+    public void setTorikomiTimestamp(YMDHMS torikomiTimestamp) {
         this.torikomiTimestamp = torikomiTimestamp;
     }
 
     /**
      * 取込区分のgetメソッドです。
-     *
+     * 
      * @return 取込区分
      */
     @CheckForNull
-    public YMDHMS getTorikomiKubun() {
+    public RString getTorikomiKubun() {
         return torikomiKubun;
     }
 
     /**
      * 取込区分のsetメソッドです。
-     *
+     * 
      * @param torikomiKubun 取込区分
      */
-    public void setTorikomiKubun(YMDHMS torikomiKubun) {
+    public void setTorikomiKubun(RString torikomiKubun) {
         this.torikomiKubun = torikomiKubun;
     }
 
     /**
      * 申請種別コードのgetメソッドです。
-     *
+     * 
      * @return 申請種別コード
      */
     @CheckForNull
@@ -233,7 +231,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 申請種別コードのsetメソッドです。
-     *
+     * 
      * @param shinseiShubetsuCode 申請種別コード
      */
     public void setShinseiShubetsuCode(RString shinseiShubetsuCode) {
@@ -242,7 +240,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 取下区分コードのgetメソッドです。
-     *
+     * 
      * @return 取下区分コード
      */
     @CheckForNull
@@ -252,7 +250,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 取下区分コードのsetメソッドです。
-     *
+     * 
      * @param torisageKubunCode 取下区分コード
      */
     public void setTorisageKubunCode(RString torisageKubunCode) {
@@ -261,7 +259,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 認定申請日のgetメソッドです。
-     *
+     * 
      * @return 認定申請日
      */
     @CheckForNull
@@ -271,7 +269,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 認定申請日のsetメソッドです。
-     *
+     * 
      * @param shinseiYMD 認定申請日
      */
     public void setShinseiYMD(FlexibleDate shinseiYMD) {
@@ -280,7 +278,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 医療機関コードのgetメソッドです。
-     *
+     * 
      * @return 医療機関コード
      */
     @CheckForNull
@@ -290,7 +288,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 医療機関コードのsetメソッドです。
-     *
+     * 
      * @param iryoKikanCode 医療機関コード
      */
     public void setIryoKikanCode(RString iryoKikanCode) {
@@ -299,7 +297,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 主治医コードのgetメソッドです。
-     *
+     * 
      * @return 主治医コード
      */
     @CheckForNull
@@ -309,7 +307,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 主治医コードのsetメソッドです。
-     *
+     * 
      * @param shujiiCode 主治医コード
      */
     public void setShujiiCode(RString shujiiCode) {
@@ -318,7 +316,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 意見書依頼年月日のgetメソッドです。
-     *
+     * 
      * @return 意見書依頼年月日
      */
     @CheckForNull
@@ -328,7 +326,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 意見書依頼年月日のsetメソッドです。
-     *
+     * 
      * @param ikenshoIraiYMD 意見書依頼年月日
      */
     public void setIkenshoIraiYMD(FlexibleDate ikenshoIraiYMD) {
@@ -337,7 +335,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 意見書取寄せ年月日のgetメソッドです。
-     *
+     * 
      * @return 意見書取寄せ年月日
      */
     @CheckForNull
@@ -347,7 +345,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 意見書取寄せ年月日のsetメソッドです。
-     *
+     * 
      * @param ikenshoToriyoseYMD 意見書取寄せ年月日
      */
     public void setIkenshoToriyoseYMD(FlexibleDate ikenshoToriyoseYMD) {
@@ -356,7 +354,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 調査委託年月日のgetメソッドです。
-     *
+     * 
      * @return 調査委託年月日
      */
     @CheckForNull
@@ -366,7 +364,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 調査委託年月日のsetメソッドです。
-     *
+     * 
      * @param chosaItakuYMD 調査委託年月日
      */
     public void setChosaItakuYMD(FlexibleDate chosaItakuYMD) {
@@ -375,7 +373,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 調査終了年月日のgetメソッドです。
-     *
+     * 
      * @return 調査終了年月日
      */
     @CheckForNull
@@ -385,7 +383,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 調査終了年月日のsetメソッドです。
-     *
+     * 
      * @param chosaShuryoYMD 調査終了年月日
      */
     public void setChosaShuryoYMD(FlexibleDate chosaShuryoYMD) {
@@ -394,7 +392,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 調査委託先コードのgetメソッドです。
-     *
+     * 
      * @return 調査委託先コード
      */
     @CheckForNull
@@ -404,7 +402,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 調査委託先コードのsetメソッドです。
-     *
+     * 
      * @param chosaItakusakiCode 調査委託先コード
      */
     public void setChosaItakusakiCode(JigyoshaNo chosaItakusakiCode) {
@@ -413,7 +411,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 調査員コードのgetメソッドです。
-     *
+     * 
      * @return 調査員コード
      */
     @CheckForNull
@@ -423,7 +421,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 調査員コードのsetメソッドです。
-     *
+     * 
      * @param chosainCode 調査員コード
      */
     public void setChosainCode(RString chosainCode) {
@@ -432,7 +430,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 一次判定日のgetメソッドです。
-     *
+     * 
      * @return 一次判定日
      */
     @CheckForNull
@@ -442,7 +440,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 一次判定日のsetメソッドです。
-     *
+     * 
      * @param ichijiHanteiYMD 一次判定日
      */
     public void setIchijiHanteiYMD(FlexibleDate ichijiHanteiYMD) {
@@ -451,7 +449,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 一次判定結果のgetメソッドです。
-     *
+     * 
      * @return 一次判定結果
      */
     @CheckForNull
@@ -461,7 +459,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 一次判定結果のsetメソッドです。
-     *
+     * 
      * @param ichijiHanteiKekkaCode 一次判定結果
      */
     public void setIchijiHanteiKekkaCode(RString ichijiHanteiKekkaCode) {
@@ -470,7 +468,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 一次判定結果（認知症加算）のgetメソッドです。
-     *
+     * 
      * @return 一次判定結果（認知症加算）
      */
     @CheckForNull
@@ -480,7 +478,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 一次判定結果（認知症加算）のsetメソッドです。
-     *
+     * 
      * @param ichijiHanteiKekkaKasanCode 一次判定結果（認知症加算）
      */
     public void setIchijiHanteiKekkaKasanCode(RString ichijiHanteiKekkaKasanCode) {
@@ -489,7 +487,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 審査会資料作成年月日のgetメソッドです。
-     *
+     * 
      * @return 審査会資料作成年月日
      */
     @CheckForNull
@@ -499,7 +497,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 審査会資料作成年月日のsetメソッドです。
-     *
+     * 
      * @param shinsakaiShiryoSakuseiYMD 審査会資料作成年月日
      */
     public void setShinsakaiShiryoSakuseiYMD(FlexibleDate shinsakaiShiryoSakuseiYMD) {
@@ -508,7 +506,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 審査会予定年月日のgetメソッドです。
-     *
+     * 
      * @return 審査会予定年月日
      */
     @CheckForNull
@@ -518,7 +516,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 審査会予定年月日のsetメソッドです。
-     *
+     * 
      * @param shinsakaiYoteiYMD 審査会予定年月日
      */
     public void setShinsakaiYoteiYMD(FlexibleDate shinsakaiYoteiYMD) {
@@ -527,7 +525,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 合議体番号のgetメソッドです。
-     *
+     * 
      * @return 合議体番号
      */
     @CheckForNull
@@ -537,7 +535,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 合議体番号のsetメソッドです。
-     *
+     * 
      * @param gogitaiNo 合議体番号
      */
     public void setGogitaiNo(int gogitaiNo) {
@@ -546,7 +544,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 二次判定日のgetメソッドです。
-     *
+     * 
      * @return 二次判定日
      */
     @CheckForNull
@@ -556,7 +554,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 二次判定日のsetメソッドです。
-     *
+     * 
      * @param nijiHanteiYMD 二次判定日
      */
     public void setNijiHanteiYMD(FlexibleDate nijiHanteiYMD) {
@@ -565,7 +563,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 二次判定結果のgetメソッドです。
-     *
+     * 
      * @return 二次判定結果
      */
     @CheckForNull
@@ -575,7 +573,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 二次判定結果のsetメソッドです。
-     *
+     * 
      * @param nijiHanteiKekkaCode 二次判定結果
      */
     public void setNijiHanteiKekkaCode(RString nijiHanteiKekkaCode) {
@@ -584,7 +582,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 認定有効開始年月日のgetメソッドです。
-     *
+     * 
      * @return 認定有効開始年月日
      */
     @CheckForNull
@@ -594,7 +592,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 認定有効開始年月日のsetメソッドです。
-     *
+     * 
      * @param ninteiYukoKikanStart 認定有効開始年月日
      */
     public void setNinteiYukoKikanStart(FlexibleDate ninteiYukoKikanStart) {
@@ -603,7 +601,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 認定有効終了年月日のgetメソッドです。
-     *
+     * 
      * @return 認定有効終了年月日
      */
     @CheckForNull
@@ -613,7 +611,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 認定有効終了年月日のsetメソッドです。
-     *
+     * 
      * @param ninteiYukoKikanEnd 認定有効終了年月日
      */
     public void setNinteiYukoKikanEnd(FlexibleDate ninteiYukoKikanEnd) {
@@ -622,7 +620,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * サービス変更理由コードのgetメソッドです。
-     *
+     * 
      * @return サービス変更理由コード
      */
     @CheckForNull
@@ -632,7 +630,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * サービス変更理由コードのsetメソッドです。
-     *
+     * 
      * @param serviceHenkoRiyuCode サービス変更理由コード
      */
     public void setServiceHenkoRiyuCode(RString serviceHenkoRiyuCode) {
@@ -641,7 +639,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 特定疾病コードのgetメソッドです。
-     *
+     * 
      * @return 特定疾病コード
      */
     @CheckForNull
@@ -651,7 +649,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 特定疾病コードのsetメソッドです。
-     *
+     * 
      * @param tokuteiShippeiCode 特定疾病コード
      */
     public void setTokuteiShippeiCode(RString tokuteiShippeiCode) {
@@ -660,7 +658,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 障害高齢者自立度のgetメソッドです。
-     *
+     * 
      * @return 障害高齢者自立度
      */
     @CheckForNull
@@ -670,7 +668,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 障害高齢者自立度のsetメソッドです。
-     *
+     * 
      * @param shogaiKoreiJiritsudo 障害高齢者自立度
      */
     public void setShogaiKoreiJiritsudo(RString shogaiKoreiJiritsudo) {
@@ -679,7 +677,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 認知症高齢者自立度のgetメソッドです。
-     *
+     * 
      * @return 認知症高齢者自立度
      */
     @CheckForNull
@@ -689,7 +687,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 認知症高齢者自立度のsetメソッドです。
-     *
+     * 
      * @param ninchishoKoreiJiritsudo 認知症高齢者自立度
      */
     public void setNinchishoKoreiJiritsudo(RString ninchishoKoreiJiritsudo) {
@@ -698,7 +696,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 審査会意見のgetメソッドです。
-     *
+     * 
      * @return 審査会意見
      */
     @CheckForNull
@@ -708,7 +706,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 審査会意見のsetメソッドです。
-     *
+     * 
      * @param shinsakaiIken 審査会意見
      */
     public void setShinsakaiIken(RString shinsakaiIken) {
@@ -717,7 +715,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 版番号のgetメソッドです。
-     *
+     * 
      * @return 版番号
      */
     @CheckForNull
@@ -727,7 +725,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 版番号のsetメソッドです。
-     *
+     * 
      * @param versionNo 版番号
      */
     public void setVersionNo(RString versionNo) {
@@ -736,7 +734,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 一次判定内容のgetメソッドです。
-     *
+     * 
      * @return 一次判定内容
      */
     @CheckForNull
@@ -746,7 +744,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 一次判定内容のsetメソッドです。
-     *
+     * 
      * @param ichijiHanteiNaiyo 一次判定内容
      */
     public void setIchijiHanteiNaiyo(RString ichijiHanteiNaiyo) {
@@ -755,7 +753,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 一次判定内容２のgetメソッドです。
-     *
+     * 
      * @return 一次判定内容２
      */
     @CheckForNull
@@ -765,7 +763,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 一次判定内容２のsetメソッドです。
-     *
+     * 
      * @param ichijiHanteiNaiyo2 一次判定内容２
      */
     public void setIchijiHanteiNaiyo2(RString ichijiHanteiNaiyo2) {
@@ -774,7 +772,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 前回取込日時のgetメソッドです。
-     *
+     * 
      * @return 前回取込日時
      */
     @CheckForNull
@@ -784,7 +782,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 前回取込日時のsetメソッドです。
-     *
+     * 
      * @param zenTorikomiTimestamp 前回取込日時
      */
     public void setZenTorikomiTimestamp(YMDHMS zenTorikomiTimestamp) {
@@ -793,7 +791,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 消し込みフラグのgetメソッドです。
-     *
+     * 
      * @return 消し込みフラグ
      */
     @CheckForNull
@@ -803,7 +801,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 消し込みフラグのsetメソッドです。
-     *
+     * 
      * @param keshikomiFlag 消し込みフラグ
      */
     public void setKeshikomiFlag(RString keshikomiFlag) {
@@ -812,7 +810,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 消し込み日時のgetメソッドです。
-     *
+     * 
      * @return 消し込み日時
      */
     @CheckForNull
@@ -822,7 +820,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * 消し込み日時のsetメソッドです。
-     *
+     * 
      * @param keshikomiTimestamp 消し込み日時
      */
     public void setKeshikomiTimestamp(YMDHMS keshikomiTimestamp) {
@@ -833,7 +831,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
      * 予備項目１のgetメソッドです。
      * <br/>
      * <br/>未使用
-     *
+     * 
      * @return 予備項目１
      */
     @CheckForNull
@@ -845,7 +843,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
      * 予備項目１のsetメソッドです。
      * <br/>
      * <br/>未使用
-     *
+     * 
      * @param yobiKomoku1 予備項目１
      */
     public void setYobiKomoku1(RString yobiKomoku1) {
@@ -856,7 +854,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
      * 予備項目２のgetメソッドです。
      * <br/>
      * <br/>未使用
-     *
+     * 
      * @return 予備項目２
      */
     @CheckForNull
@@ -868,7 +866,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
      * 予備項目２のsetメソッドです。
      * <br/>
      * <br/>未使用
-     *
+     * 
      * @param yobiKomoku2 予備項目２
      */
     public void setYobiKomoku2(RString yobiKomoku2) {
@@ -879,7 +877,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
      * 予備項目３のgetメソッドです。
      * <br/>
      * <br/>未使用
-     *
+     * 
      * @return 予備項目３
      */
     @CheckForNull
@@ -891,7 +889,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
      * 予備項目３のsetメソッドです。
      * <br/>
      * <br/>未使用
-     *
+     * 
      * @param yobiKomoku3 予備項目３
      */
     public void setYobiKomoku3(RString yobiKomoku3) {
@@ -902,7 +900,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
      * 予備項目４のgetメソッドです。
      * <br/>
      * <br/>未使用
-     *
+     * 
      * @return 予備項目４
      */
     @CheckForNull
@@ -914,7 +912,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
      * 予備項目４のsetメソッドです。
      * <br/>
      * <br/>未使用
-     *
+     * 
      * @param yobiKomoku4 予備項目４
      */
     public void setYobiKomoku4(RString yobiKomoku4) {
@@ -925,7 +923,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
      * 予備項目５のgetメソッドです。
      * <br/>
      * <br/>未使用
-     *
+     * 
      * @return 予備項目５
      */
     @CheckForNull
@@ -937,7 +935,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
      * 予備項目５のsetメソッドです。
      * <br/>
      * <br/>未使用
-     *
+     * 
      * @param yobiKomoku5 予備項目５
      */
     public void setYobiKomoku5(RString yobiKomoku5) {
@@ -948,7 +946,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
      * 予備区分１のgetメソッドです。
      * <br/>
      * <br/>未使用
-     *
+     * 
      * @return 予備区分１
      */
     @CheckForNull
@@ -960,7 +958,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
      * 予備区分１のsetメソッドです。
      * <br/>
      * <br/>未使用
-     *
+     * 
      * @param yobiKubun1 予備区分１
      */
     public void setYobiKubun1(RString yobiKubun1) {
@@ -971,7 +969,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
      * 予備区分２のgetメソッドです。
      * <br/>
      * <br/>未使用
-     *
+     * 
      * @return 予備区分２
      */
     @CheckForNull
@@ -983,7 +981,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
      * 予備区分２のsetメソッドです。
      * <br/>
      * <br/>未使用
-     *
+     * 
      * @param yobiKubun2 予備区分２
      */
     public void setYobiKubun2(RString yobiKubun2) {
@@ -994,7 +992,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
      * 予備区分３のgetメソッドです。
      * <br/>
      * <br/>未使用
-     *
+     * 
      * @return 予備区分３
      */
     @CheckForNull
@@ -1006,7 +1004,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
      * 予備区分３のsetメソッドです。
      * <br/>
      * <br/>未使用
-     *
+     * 
      * @param yobiKubun3 予備区分３
      */
     public void setYobiKubun3(RString yobiKubun3) {
@@ -1017,7 +1015,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
      * 予備区分４のgetメソッドです。
      * <br/>
      * <br/>申請区分（法令）コード
-     *
+     * 
      * @return 予備区分４
      */
     @CheckForNull
@@ -1029,7 +1027,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
      * 予備区分４のsetメソッドです。
      * <br/>
      * <br/>申請区分（法令）コード
-     *
+     * 
      * @param yobiKubun4 予備区分４
      */
     public void setYobiKubun4(RString yobiKubun4) {
@@ -1040,7 +1038,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
      * 予備区分５のgetメソッドです。
      * <br/>
      * <br/>未使用
-     *
+     * 
      * @return 予備区分５
      */
     @CheckForNull
@@ -1052,7 +1050,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
      * 予備区分５のsetメソッドです。
      * <br/>
      * <br/>未使用
-     *
+     * 
      * @param yobiKubun5 予備区分５
      */
     public void setYobiKubun5(RString yobiKubun5) {
@@ -1063,7 +1061,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
      * リザーブのgetメソッドです。
      * <br/>
      * <br/>未使用
-     *
+     * 
      * @return リザーブ
      */
     @CheckForNull
@@ -1075,7 +1073,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
      * リザーブのsetメソッドです。
      * <br/>
      * <br/>未使用
-     *
+     * 
      * @param reserve リザーブ
      */
     public void setReserve(RString reserve) {
@@ -1084,9 +1082,10 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * このエンティティの主キーが他の{@literal DbT4003YokaigoNinteiInterfaceEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT4003YokaigoNinteiInterfaceEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT4003YokaigoNinteiInterfaceEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT4003YokaigoNinteiInterfaceEntity other) {
@@ -1153,7 +1152,6 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override

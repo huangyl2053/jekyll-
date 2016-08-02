@@ -27,7 +27,7 @@ public class JutakuKaishuRiyushoTesuryoMeisaiIdentifierTest extends DbcTestBase 
 //TODO 主キーの数が足りない場合、追加してください。
     private static HokenshaNo 主キー名1;
     private static HihokenshaNo 主キー名2;
-    private static Decimal 主キー名3;
+    private static int 主キー名3;
 
     @BeforeClass
     public static void setUpClass() {
@@ -41,7 +41,7 @@ public class JutakuKaishuRiyushoTesuryoMeisaiIdentifierTest extends DbcTestBase 
 
         @Test
         public void シリアライズできる() {
-            JutakuKaishuRiyushoTesuryoMeisaiIdentifier sut = new JutakuKaishuRiyushoTesuryoMeisaiIdentifier(主キー名1, 主キー名2, 主キー名3);
+            JutakuKaishuRiyushoTesuryoMeisaiIdentifier sut = new JutakuKaishuRiyushoTesuryoMeisaiIdentifier(主キー名1, 主キー名2, new Decimal(主キー名3));
             assertThat(sut, is(serializable()));
         }
     }

@@ -29,7 +29,7 @@ public class SaishinsaKetteiMeisaiBuilderTest extends DbcTestBase {
 //TODO 主キーの数が足りない場合、追加してください。
     private static FlexibleYearMonth 主キー名1;
     private static RString 主キー名2;
-    private static Decimal 主キー名3;
+    private static int 主キー名3;
 
     @BeforeClass
     public static void setUpClass() {
@@ -70,8 +70,8 @@ public class SaishinsaKetteiMeisaiBuilderTest extends DbcTestBase {
 
         @Test
         public void 戻り値の履歴番号は_設定した値と同じ履歴番号を返す() {
-            business = sut.set履歴番号(DbT3064SaishinsaKetteiMeisaiEntityGenerator.DEFAULT_履歴番号).build();
-            assertThat(business.get履歴番号(), is(DbT3064SaishinsaKetteiMeisaiEntityGenerator.DEFAULT_履歴番号));
+            business = sut.set履歴番号(new Decimal(DbT3064SaishinsaKetteiMeisaiEntityGenerator.DEFAULT_履歴番号)).build();
+            assertThat(business.get履歴番号(), is(new Decimal(DbT3064SaishinsaKetteiMeisaiEntityGenerator.DEFAULT_履歴番号)));
         }
 
         @Test

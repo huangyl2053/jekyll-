@@ -136,7 +136,7 @@ public class KyufuShiharayiMeisaiJyuTokuHandler {
         if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get社会福祉法人軽減設定区分())) {
             div.getPanelTwo().getBtnShafukukeigenGaku().setDisabled(true);
         }
-        if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().get特定疾患施設療養設定区分())
+        if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().get所定疾患施設療養設定区分())
                 && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
             div.getPanelTwo().getBtnKinkyujiShoteiShikkan().setDisplayNone(false);
             div.getPanelTwo().getBtnKinkyujiShoteiShikkan().setVisible(true);
@@ -144,7 +144,7 @@ public class KyufuShiharayiMeisaiJyuTokuHandler {
             div.getPanelTwo().getBtnKinkyushisetuRyoyouhi().setDisplayNone(true);
         } else {
             div.getPanelTwo().getBtnKinkyujiShoteiShikkan().setVisible(false);
-            if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get特定疾患施設療養設定区分())) {
+            if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get所定疾患施設療養設定区分())) {
                 div.getPanelTwo().getBtnKinkyushisetuRyoyouhi().setDisabled(true);
             }
         }

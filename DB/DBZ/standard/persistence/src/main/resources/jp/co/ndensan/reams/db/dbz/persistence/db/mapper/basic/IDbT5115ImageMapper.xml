@@ -8,25 +8,25 @@
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5115Image">
-        SELECT
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5115ImageMapper.allColumns_DbT5115Image" />
-        FROM
-        rgdb."DbT5115Image"
-        WHERE
-        rgdb."DbT5115Image"."isDeleted" = FALSE
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5115ImageMapper.allColumns_DbT5115Image" />
+     FROM
+         rgdb."DbT5115Image"
+     WHERE
+         rgdb."DbT5115Image"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT5115Image">
-        "DbT5115Image"."shinseishoKanriNo" as "dbT5115Image_shinseishoKanriNo",
-        "DbT5115Image"."insertDantaiCd" as "dbT5115Image_insertDantaiCd",
-        "DbT5115Image"."insertTimestamp" as "dbT5115Image_insertTimestamp",
-        "DbT5115Image"."insertReamsLoginId" as "dbT5115Image_insertReamsLoginId",
-        "DbT5115Image"."insertContextId" as "dbT5115Image_insertContextId",
-        "DbT5115Image"."isDeleted" as "dbT5115Image_isDeleted",
-        "DbT5115Image"."updateCount" as "dbT5115Image_updateCount",
-        "DbT5115Image"."lastUpdateTimestamp" as "dbT5115Image_lastUpdateTimestamp",
-        "DbT5115Image"."lastUpdateReamsLoginId" as "dbT5115Image_lastUpdateReamsLoginId",
-        "DbT5115Image"."imageSharedFileId" as "dbT5115Image_imageSharedFileId"
+         "DbT5115Image"."shinseishoKanriNo" as "dbT5115Image_shinseishoKanriNo",
+         "DbT5115Image"."insertDantaiCd" as "dbT5115Image_insertDantaiCd",
+         "DbT5115Image"."insertTimestamp" as "dbT5115Image_insertTimestamp",
+         "DbT5115Image"."insertReamsLoginId" as "dbT5115Image_insertReamsLoginId",
+         "DbT5115Image"."insertContextId" as "dbT5115Image_insertContextId",
+         "DbT5115Image"."isDeleted" as "dbT5115Image_isDeleted",
+         "DbT5115Image"."updateCount" as "dbT5115Image_updateCount",
+         "DbT5115Image"."lastUpdateTimestamp" as "dbT5115Image_lastUpdateTimestamp",
+         "DbT5115Image"."lastUpdateReamsLoginId" as "dbT5115Image_lastUpdateReamsLoginId",
+         "DbT5115Image"."imageSharedFileId" as "dbT5115Image_imageSharedFileId"
     </sql>
 
 
@@ -43,10 +43,5 @@
         <result property="lastUpdateReamsLoginId" column="dbT5115Image_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="imageSharedFileId" column="dbT5115Image_imageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
     </resultMap>
-    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5115ImageEntity">
-        <!--SELECT
-        <include refid="allColumns_DbT5115Image"/>
-        FROM
-        rgdb."DbT5115Image"-->
-    </select>
+
 </mapper>

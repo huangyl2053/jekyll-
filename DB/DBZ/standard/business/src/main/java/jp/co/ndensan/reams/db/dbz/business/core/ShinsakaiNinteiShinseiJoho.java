@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.INinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -497,7 +499,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
      */
     @Override
     public RString get主治医医療機関コード() {
-        return entity.getShujiiIryokikanCode();
+        return entity.getShujiiIryokikanCode().value();
     }
 
     /**
@@ -507,7 +509,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
      */
     @Override
     public RString get主治医コード() {
-        return entity.getShujiiCode();
+        return entity.getShujiiCode().value();
     }
 
     /**
@@ -1483,7 +1485,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
         @Override
         public Builder setShujiiIryokikanCode(RString shujiiIryokikanCode) {
             Objects.requireNonNull(shujiiIryokikanCode);
-            this.entity.setShujiiIryokikanCode(shujiiIryokikanCode);
+            this.entity.setShujiiIryokikanCode(new ShujiiIryokikanCode(shujiiIryokikanCode));
             return this;
         }
 
@@ -1496,7 +1498,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
         @Override
         public Builder setShujiiCode(RString shujiiCode) {
             Objects.requireNonNull(shujiiCode);
-            this.entity.setShujiiCode(shujiiCode);
+            this.entity.setShujiiCode(new ShujiiCode(shujiiCode));
             return this;
         }
 

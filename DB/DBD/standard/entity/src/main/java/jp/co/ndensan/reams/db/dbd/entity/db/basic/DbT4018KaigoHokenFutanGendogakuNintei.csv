@@ -33,3 +33,5 @@ yochokinGaku,numeric,Decimal,,,,,預貯金額,A
 yukashoukenGaisangaku,numeric,Decimal,,,,,有価証券評価概算額,A
 sonotaKingaku,numeric,Decimal,,,,,その他金額,A
 ninteiBatchExecutedTimestamp,UDD018YMDHMS,YMDHMS,,,,,一括認定バッチ処理日時,A
+izokuNenkinJukyuFlag,bool,boolean,,,,,遺族年金受給フラグ,A
+shogaiNenkinJukyuFlag,bool,boolean,,,,,障害年金受給フラグ,A

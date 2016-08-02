@@ -76,7 +76,7 @@ public class JutakuKaishuRiyushoTesuryoMeisaiBuilder {
      */
     public JutakuKaishuRiyushoTesuryoMeisaiBuilder set履歴番号(Decimal 履歴番号) {
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        entity.setRirekiNo(履歴番号);
+        entity.setRirekiNo(履歴番号.intValue());
         return this;
     }
 
@@ -206,11 +206,11 @@ public class JutakuKaishuRiyushoTesuryoMeisaiBuilder {
      * @param 介護住宅改修理由書作成者資格 介護住宅改修理由書作成者資格
      * @return {@link JutakuKaishuRiyushoTesuryoMeisaiBuilder}
      */
-    public JutakuKaishuRiyushoTesuryoMeisaiBuilder set介護住宅改修理由書作成者資格(RString 介護住宅改修理由書作成者資格) {
-        requireNonNull(介護住宅改修理由書作成者資格, UrSystemErrorMessages.値がnull.getReplacedMessage("介護住宅改修理由書作成者資格"));
-        entity.setRiyushoSakuseishaShikaku(介護住宅改修理由書作成者資格);
-        return this;
-    }
+//    public JutakuKaishuRiyushoTesuryoMeisaiBuilder set介護住宅改修理由書作成者資格(RString 介護住宅改修理由書作成者資格) {
+//        requireNonNull(介護住宅改修理由書作成者資格, UrSystemErrorMessages.値がnull.getReplacedMessage("介護住宅改修理由書作成者資格"));
+//        entity.setRiyushoSakuseishaShikaku(介護住宅改修理由書作成者資格);
+//        return this;
+//    }
 
     /**
      * 介護住宅改修理由書作成申請年月日を設定します。
