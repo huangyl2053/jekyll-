@@ -342,7 +342,7 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      */
     public RString get審査会意見種類() {
         RString 審査会意見種類 = entity.get審査会意見種類();
-        if (!RString.isNullOrEmpty(審査会意見種類)) {
+        if (!RString.isNullOrEmpty(審査会意見種類) && !new RString(" ").equals(審査会意見種類)) {
             return NinteiShinsakaiIkenShurui.toValue(entity.get審査会意見種類()).get名称();
         }
         return RString.EMPTY;
