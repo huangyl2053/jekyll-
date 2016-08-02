@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class TokkiText2A4Report extends Report<TokkiText2A4ReportSource> {
 
-    private final TokkiText2A4Entity date;
+    private final TokkiText2A4Entity entity;
     private static final int ZERO = 0;
     private static final int MAXCOUNT = 30;
 
@@ -31,7 +31,7 @@ public class TokkiText2A4Report extends Report<TokkiText2A4ReportSource> {
      * @param entity 特記事項2枚目以降（A4版）Entity
      */
     public TokkiText2A4Report(TokkiText2A4Entity entity) {
-        this.date = entity;
+        this.entity = entity;
     }
 
     /**
@@ -43,7 +43,7 @@ public class TokkiText2A4Report extends Report<TokkiText2A4ReportSource> {
     public void writeBy(ReportSourceWriter<TokkiText2A4ReportSource> reportSourceWriter) {
         List<RString> bodyList = getBodyList();
         for (int i = ZERO; i < MAXCOUNT; i++) {
-            ITokkiText2A4Editor editor = new TokkiText2A4Editor(date, bodyList, i);
+            ITokkiText2A4Editor editor = new TokkiText2A4Editor(entity, bodyList, i);
             ITokkiText2A4Builder buildera = new TokkiText2A4Builder(editor);
             reportSourceWriter.writeLine(buildera);
         }
@@ -51,17 +51,11 @@ public class TokkiText2A4Report extends Report<TokkiText2A4ReportSource> {
 
     private List<RString> getBodyList() {
         List<RString> bodyList = new ArrayList<>();
-        if (!date.get短冊イメージ情報リスト().isEmpty()) {
-            for (TokkiTextEntity entity : date.get短冊イメージ情報リスト()) {
-                bodyList.add(entity.get事項番号());
-                bodyList.add(entity.get項目名称());
-            }
-        }
 
-        if (!date.get短冊テキスト情報リスト().isEmpty()) {
-            for (TokkiTextEntity entity : date.get短冊テキスト情報リスト()) {
-                bodyList.add(entity.get事項番号());
-                bodyList.add(entity.get項目名称());
+        if (!entity.get短冊情報リスト().isEmpty()) {
+            for (TokkiTextEntity tokkiTextEntity : entity.get短冊情報リスト()) {
+                bodyList.add(tokkiTextEntity.get事項番号());
+                bodyList.add(tokkiTextEntity.get項目名称());
             }
         }
         return bodyList;
