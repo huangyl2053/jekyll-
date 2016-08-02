@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoChild;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -422,9 +423,9 @@ public class NinteiEnkiTsuchishoHakkoHandler {
         NinteiEnkiTsuchishoHakkoParameter parameter = new NinteiEnkiTsuchishoHakkoParameter();
         if (検索.getName().equals(ResponseHolder.getState())) {
             parameter.set画面モード(画面モード_1);
-            parameter.set処理見込み日From(div.getTxtMikomiDateIchiran().getFromValue());
-            parameter.set処理見込み日To(div.getTxtMikomiDateIchiran().getToValue());
-            parameter.set通知書発行日(div.getTxtInsatsuDate().getValue());
+            parameter.set処理見込み日From(new FlexibleDate(div.getTxtMikomiDateIchiran().getFromValue().toDateString()));
+            parameter.set処理見込み日To(new FlexibleDate(div.getTxtMikomiDateIchiran().getToValue().toDateString()));
+            parameter.set通知書発行日(new FlexibleDate(div.getTxtInsatsuDate().getValue().toDateString()));
         } else if (通知書.getName().equals(ResponseHolder.getState())) {
             parameter.set画面モード(画面モード_2);
             parameter.set申請書管理番号リスト(get申請書管理番号リスト());
@@ -432,11 +433,11 @@ public class NinteiEnkiTsuchishoHakkoHandler {
         return parameter;
     }
 
-    private List<RString> get申請書管理番号リスト() {
-        List<RString> 申請書管理番号リスト = new ArrayList<>();
+    private List<ShinseishoKanriNo> get申請書管理番号リスト() {
+        List<ShinseishoKanriNo> 申請書管理番号リスト = new ArrayList<>();
         List<dgHakkotaishosha_Row> rowList = div.getDgHakkotaishosha().getSelectedItems();
         for (dgHakkotaishosha_Row row : rowList) {
-            申請書管理番号リスト.add(row.getShinseishokanrino());
+            申請書管理番号リスト.add(new ShinseishoKanriNo(row.getShinseishokanrino()));
         }
         return 申請書管理番号リスト;
     }
