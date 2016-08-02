@@ -1,0 +1,12 @@
+﻿nendo,UDD012YSeireki,FlexibleYear,,,,,nendo,A
+hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,hihokenshaNo,A
+rirekiNo,int2,int,,,,,rirekiNo,A
+hakoFuyoFlag,bool,boolean,,,,,hakoFuyoFlag,A
+shokenFlag,bool,boolean,,,,,shokenFlag,A
+hanteiYMD,UDD015YMD,FlexibleDate,,,,,hanteiYMD,A
+hanteiKubun,varchar,RString,,,,,hanteiKubun,A
+koseiJiyu,UDD035Code,Code,,,,,koseiJiyu,A
+hakoKubun,varchar,RString,,,,,hakoKubun,A
+hakoYMD,UDD015YMD,FlexibleDate,,,,,hakoYMD,A
+kofuYMD,UDD015YMD,FlexibleDate,,,,,kofuYMD,A
+logicalDeletedFlag,bool,boolean,,,,,logicalDeletedFlag,A

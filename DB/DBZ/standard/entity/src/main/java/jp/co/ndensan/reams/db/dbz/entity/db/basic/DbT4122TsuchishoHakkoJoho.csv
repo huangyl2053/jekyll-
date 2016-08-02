@@ -1,0 +1,8 @@
+﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,申請書管理番号,A
+tsuchiKubun,UDD035Code,Code,,,,,通知区分,A
+tsuchiRiyu,text,RString,,,,,通知理由,A
+tsuchiYMD,UDD015YMD,FlexibleDate,,,,,通知年月日,A
+tsuchiKaishiYMD,UDD015YMD,FlexibleDate,,,,,通知開始年月日,A
+tsuchiShuryoYMD,UDD015YMD,FlexibleDate,,,,,通知終了年月日,A
+tsuchiKubunKigenYMD,UDD015YMD,FlexibleDate,,,,,通知区分期限,A
+tsuchiKanryoYMD,UDD015YMD,FlexibleDate,,,,,通知完了年月日,A

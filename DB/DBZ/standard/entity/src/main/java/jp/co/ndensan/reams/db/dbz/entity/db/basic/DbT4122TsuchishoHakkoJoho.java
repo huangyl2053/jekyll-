@@ -3,10 +3,9 @@ package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * イメージ情報テーブルの項目定義クラスです。
- * <br/> 認定調査票や主治医意見書以外の書類のイメージ
+ * 通知書発行情報テーブルの項目定義クラスです。
  */
-public enum DbT5115Image implements IColumnDefinition {
+public enum DbT4122TsuchishoHakkoJoho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
      * insertDantaiCd
@@ -46,14 +45,39 @@ public enum DbT5115Image implements IColumnDefinition {
      */
     shinseishoKanriNo(2147483647, 0),
     /**
-     * イメージ共有ファイルID
+     * 通知区分
+     * <br/>00:認定、01:変更、02:サ変、03:却下、04:取消、05:延期、06:区却
      */
-    imageSharedFileId(29, 0);
+    tsuchiKubun(2147483647, 0),
+    /**
+     * 通知理由
+     */
+    tsuchiRiyu(2147483647, 0),
+    /**
+     * 通知年月日
+     */
+    tsuchiYMD(2147483647, 0),
+    /**
+     * 通知開始年月日
+     */
+    tsuchiKaishiYMD(2147483647, 0),
+    /**
+     * 通知終了年月日
+     */
+    tsuchiShuryoYMD(2147483647, 0),
+    /**
+     * 通知区分期限
+     */
+    tsuchiKubunKigenYMD(2147483647, 0),
+    /**
+     * 通知完了年月日
+     */
+    tsuchiKanryoYMD(2147483647, 0);
 
     private final int maxLength;
     private final int scale;
 
-    private DbT5115Image(int maxLength, int scale) {
+    private DbT4122TsuchishoHakkoJoho(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }

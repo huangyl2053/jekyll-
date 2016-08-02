@@ -10,15 +10,13 @@ import java.util.UUID;
 import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 
 /**
  * イメージ情報テーブルのエンティティクラスです。
  * <br/> 認定調査票や主治医意見書以外の書類のイメージ
  */
 public class DbT5115ImageEntity extends DbTableEntityBase<DbT5115ImageEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5115Image");
 
@@ -27,7 +25,7 @@ public class DbT5115ImageEntity extends DbTableEntityBase<DbT5115ImageEntity> im
     private RString insertReamsLoginId;
     private UUID insertContextId;
     private boolean isDeleted = false;
-    private final int updateCount = 0;
+    private int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
@@ -36,7 +34,7 @@ public class DbT5115ImageEntity extends DbTableEntityBase<DbT5115ImageEntity> im
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -45,7 +43,7 @@ public class DbT5115ImageEntity extends DbTableEntityBase<DbT5115ImageEntity> im
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -54,7 +52,7 @@ public class DbT5115ImageEntity extends DbTableEntityBase<DbT5115ImageEntity> im
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -63,16 +61,17 @@ public class DbT5115ImageEntity extends DbTableEntityBase<DbT5115ImageEntity> im
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -83,7 +82,7 @@ public class DbT5115ImageEntity extends DbTableEntityBase<DbT5115ImageEntity> im
      * 申請書管理番号のgetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     *
+     * 
      * @return 申請書管理番号
      */
     public ShinseishoKanriNo getShinseishoKanriNo() {
@@ -94,7 +93,7 @@ public class DbT5115ImageEntity extends DbTableEntityBase<DbT5115ImageEntity> im
      * 申請書管理番号のsetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     *
+     * 
      * @param shinseishoKanriNo 申請書管理番号
      */
     public void setShinseishoKanriNo(@Nonnull ShinseishoKanriNo shinseishoKanriNo) {
@@ -103,7 +102,7 @@ public class DbT5115ImageEntity extends DbTableEntityBase<DbT5115ImageEntity> im
 
     /**
      * イメージ共有ファイルIDのgetメソッドです。
-     *
+     * 
      * @return イメージ共有ファイルID
      */
     @CheckForNull
@@ -113,7 +112,7 @@ public class DbT5115ImageEntity extends DbTableEntityBase<DbT5115ImageEntity> im
 
     /**
      * イメージ共有ファイルIDのsetメソッドです。
-     *
+     * 
      * @param imageSharedFileId イメージ共有ファイルID
      */
     public void setImageSharedFileId(RDateTime imageSharedFileId) {
@@ -122,9 +121,9 @@ public class DbT5115ImageEntity extends DbTableEntityBase<DbT5115ImageEntity> im
 
     /**
      * このエンティティの主キーが他の{@literal DbT5115ImageEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5115ImageEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -132,13 +131,14 @@ public class DbT5115ImageEntity extends DbTableEntityBase<DbT5115ImageEntity> im
         if (other == null) {
             return false;
         }
-        return Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo);
+        if (!Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo)) {
+            return false;
+        }
+        return true;
     }
 
     /**
      * {@inheritDoc}
-     *
-     * @param entity
      */
     @Override
     public void shallowCopy(DbT5115ImageEntity entity) {
@@ -148,7 +148,6 @@ public class DbT5115ImageEntity extends DbTableEntityBase<DbT5115ImageEntity> im
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
@@ -157,4 +156,5 @@ public class DbT5115ImageEntity extends DbTableEntityBase<DbT5115ImageEntity> im
     }
 
 // </editor-fold>
+
 }

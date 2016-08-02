@@ -3,57 +3,63 @@ package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * イメージ情報テーブルの項目定義クラスです。
- * <br/> 認定調査票や主治医意見書以外の書類のイメージ
+ * 利用者負担割合Newestテーブルの項目定義クラスです。
  */
-public enum DbT5115Image implements IColumnDefinition {
+public enum DbV3113RiyoshaFutanWariai implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
-     * insertDantaiCd
+     * nendo
      */
-    insertDantaiCd(2147483647, 0),
+    nendo(2147483647, 0),
     /**
-     * insertTimestamp
+     * hihokenshaNo
      */
-    insertTimestamp(29, 0),
+    hihokenshaNo(2147483647, 0),
     /**
-     * insertReamsLoginId
+     * rirekiNo
      */
-    insertReamsLoginId(2147483647, 0),
+    rirekiNo(5, 0),
     /**
-     * insertContextId
+     * hakoFuyoFlag
      */
-    insertContextId(2147483647, 0),
+    hakoFuyoFlag(1, 0),
     /**
-     * isDeleted
+     * shokenFlag
      */
-    isDeleted(1, 0),
+    shokenFlag(1, 0),
     /**
-     * updateCount
+     * hanteiYMD
      */
-    updateCount(10, 0),
+    hanteiYMD(2147483647, 0),
     /**
-     * lastUpdateTimestamp
+     * hanteiKubun
      */
-    lastUpdateTimestamp(29, 0),
+    hanteiKubun(1, 0),
     /**
-     * lastUpdateReamsLoginId
+     * koseiJiyu
      */
-    lastUpdateReamsLoginId(2147483647, 0),
+    koseiJiyu(2147483647, 0),
     /**
-     * 申請書管理番号
-     * <br/>要介護認定申請情報
+     * hakoKubun
      */
-    shinseishoKanriNo(2147483647, 0),
+    hakoKubun(1, 0),
     /**
-     * イメージ共有ファイルID
+     * hakoYMD
      */
-    imageSharedFileId(29, 0);
+    hakoYMD(2147483647, 0),
+    /**
+     * kofuYMD
+     */
+    kofuYMD(2147483647, 0),
+    /**
+     * logicalDeletedFlag
+     */
+    logicalDeletedFlag(1, 0);
 
     private final int maxLength;
     private final int scale;
 
-    private DbT5115Image(int maxLength, int scale) {
+    private DbV3113RiyoshaFutanWariai(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }
