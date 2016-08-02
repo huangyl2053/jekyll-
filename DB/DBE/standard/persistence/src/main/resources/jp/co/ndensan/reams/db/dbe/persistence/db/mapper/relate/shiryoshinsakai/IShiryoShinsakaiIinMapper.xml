@@ -81,7 +81,7 @@
         <result property="imageSharedFileId" column="imageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler" />
     </resultMap>
 
-<!--    <select id="get開催予定情報" resultMap="Result_KaisaiYoteiJoho"
+    <select id="get開催予定情報" resultMap="Result_KaisaiYoteiJoho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.KaisaiYoteiJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
         SELECT
         dbt5501."shinsakaiKaisaiNo" AS dbt5501_shinsakaiKaisaiNo,
@@ -109,7 +109,7 @@
         dbt5501."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
         LIMIT
         1
-    </select>
+    </select><!--
 
     <select id="getShinsakaiIinCode" resultMap="Result_ShinsakaiIinCode"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTuutishoMyBatisParameter" fetchSize="500"  resultOrdered="true">
@@ -1389,14 +1389,23 @@
         ON zenkaiJoho."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
         WHERE dbt5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
         AND dbt5502."shinsakaiOrderKakuteiFlag" = TRUE
-        <!--            ORDER BY
-        <if test="isIsShuturyokuJun">
-           NinteiJoho.dbT5502_shinsakaiOrder
-        </if>-->
-        <!--TODO 出力順　実装しない-->
-        <!--                <if test="!isIsShuturyokuJun">
-           #{shuturyokuJun}
-        </if>-->
+       <if test="isSakuseiJokenHani">
+            AND #{bangoStart} <![CDATA[<=]]> dbt5502."shinsakaiOrder"
+            AND dbt5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
+        </if>
+        <if test="isSakuseiJokenTuika">
+            AND (dbt5502."shinsakaiShiryoSakuseiYMD" IS NULL
+                OR dbt5502."shinsakaiShiryoSakuseiYMD" = '')
+        </if>
+        ORDER BY
+        <choose>
+            <when test="isShuturyokuJunEmpty">
+                dbt5502."shinsakaiOrder"
+            </when>
+            <otherwise>
+                #{shuturyokuJun}
+            </otherwise>
+        </choose>
     </select>
 
     <!--    <select id="getIinShimei" resultMap="Result_ShinsakaiIinJoho"

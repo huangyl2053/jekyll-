@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinShinsakaiIinJohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.KaisaiYoteiJohoMyBatisParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.KaisaiYoteiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiTaiyosyaJohoEntity;
@@ -28,13 +30,13 @@ public interface IShiryoShinsakaiIinMapper {
      */
     List<ShinsakaiSiryoKyotsuEntity> getShinsakaiSiryoKyotsu(IinTokkiJikouItiziHanteiMyBatisParameter parameter);
 
-//    /**
-//     * 介護認定審査会開催予定情報を取得します。
-//     *
-//     * @param parameter KaisaiYoteiJohoMyBatisParameter
-//     * @return 介護認定審査会開催予定情報
-//     */
-//    KaisaiYoteiJohoEntity get開催予定情報(KaisaiYoteiJohoMyBatisParameter parameter);
+    /**
+     * 介護認定審査会開催予定情報を取得します。
+     *
+     * @param parameter KaisaiYoteiJohoMyBatisParameter
+     * @return 介護認定審査会開催予定情報
+     */
+    KaisaiYoteiJohoEntity get開催予定情報(KaisaiYoteiJohoMyBatisParameter parameter);
 //
 //    /**
 //     * 委員情報を取得します。
@@ -282,6 +284,7 @@ public interface IShiryoShinsakaiIinMapper {
 //     */
 //    List<HanteiJohoEntity> getHanteiJoho(IinTokkiJikouItiziHanteiMyBatisParameter parameter);
 //
+
     /**
      * 介護認定審査対象者一覧表を取得する。
      *
