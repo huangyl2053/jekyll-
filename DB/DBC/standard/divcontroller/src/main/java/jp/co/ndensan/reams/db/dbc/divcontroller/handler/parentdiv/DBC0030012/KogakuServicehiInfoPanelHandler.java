@@ -32,7 +32,7 @@ public class KogakuServicehiInfoPanelHandler {
     private static final RString 被保険者番号R = new RString("被保険者番号");
     private static final RString 個人番号_利用有無 = new RString("個人番号 利用有無");
     private static final RString 法人番号_利用有無 = new RString("法人番号 利用有無");
-    private static final RString 照会モード = new RString("照会");
+    private static final RString 照会モード = new RString("照会モード");
 
     /**
      * 画面設計_DBCMN11004_高額介護サービス費照会のコンストラクタです。
