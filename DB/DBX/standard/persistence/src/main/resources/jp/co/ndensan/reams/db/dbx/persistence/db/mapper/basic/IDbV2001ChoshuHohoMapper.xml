@@ -4,7 +4,7 @@
 <!-- 作者： LDNS王肖 -->
 <!-- @reamsid_L DBB-9060-010 duanzhanli -->
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper">
 
     <sql id="allColumns_DbV2001ChoshuHoho">
          "DbV2001ChoshuHoho"."fukaNendo" as "dbV2001ChoshuHoho_fukaNendo",
@@ -53,7 +53,7 @@
 
 
     <!--テーブルDbV2001ChoshuHohoの項目をDbV2001ChoshuHohoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbV2001ChoshuHohoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbV2001ChoshuHohoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbV2001ChoshuHohoEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHohoEntity" autoMapping="true">
         <id property="fukaNendo" column="dbV2001ChoshuHoho_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="hihokenshaNo" column="dbV2001ChoshuHoho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="rirekiNo" column="dbV2001ChoshuHoho_rirekiNo" />
@@ -108,7 +108,7 @@
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbV2001ChoshuHoho">
      SELECT
-         <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho" />
+         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho" />
      FROM
          rgdb."DbV2001ChoshuHoho"
      WHERE
