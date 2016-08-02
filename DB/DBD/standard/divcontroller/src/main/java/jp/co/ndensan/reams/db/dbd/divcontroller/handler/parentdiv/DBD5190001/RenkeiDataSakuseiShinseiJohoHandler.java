@@ -80,9 +80,6 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
             if (zenkaikaishiday != null) {
                 div.getTxtZenkaiKaishiDay().setValue(zenkaikaishiday);
                 div.getTxtKonkaiKaishiDay().setValue(zenkaikaishiday);
-                if (zenkaikaishitime.toString().equals("23:59:59")) {
-                    div.getTxtKonkaiKaishiDay().setValue(zenkaikaishiday.plusDay(1));
-                }
             }
             if (zenkaikaishitime != null) {
                 div.getTxtZenkaiKaishiTime().setValue(zenkaikaishitime);
@@ -99,6 +96,9 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
             }
             if (zenkaikaishitime == null) {
                 div.getTxtKonkaiKaishiTime().setValue(RTime.now());
+            }
+            if (zenkaikaishiday != null && zenkaikaishitime.toString().equals("23:59:59")) {
+                div.getTxtKonkaiKaishiDay().setValue(zenkaikaishiday.plusDay(1));
             }
             div.getTxtKonkaiShuryoDay().setValue(RDate.getNowDate());
             div.getTxtKonkaiShuryoTime().setValue(RTime.now());
