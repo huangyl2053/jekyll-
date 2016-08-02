@@ -35,7 +35,7 @@ public class TsuikashiryokagamiA3Editor implements ITsuikashiryokagamiA3Editor {
     public TsuikashiryokagamiA3ReportSource edit(TsuikashiryokagamiA3ReportSource source) {
         source.shinsakaiNo = business.get審査会開催番号();
         source.tsuchibun = business.get通知文1();
-        source.listShinsainName_1 = business.get審査員一覧();
+//        source.listShinsainName_1 = business.get審査員一覧();
         source.shinsakaiKaisaiYMD = business.get審査会開催年月日();
         source.gogitaiNo = business.get合議体番号();
         source.shinsakaiTsuikasha = business.get追加審査対象者数();
