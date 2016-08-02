@@ -99,7 +99,7 @@ public class IinTokkiJikouItiziHanteiProcessParameter implements IBatchProcessPa
         if (RString.isNullOrEmpty(shuturyokuJun)) {
             isShuturyokuJun = true;
         }
-        return new IinTokkiJikouItiziHanteiMyBatisParameter(shinsakaiKaisaiNo, shuturyokuJun, bangoStart, bangoEnd,
+        return new IinTokkiJikouItiziHanteiMyBatisParameter(shinsakaiKaisaiNo, shuturyokuJun, bangoStart.intValue(), bangoEnd.intValue(),
                 isSakuseiJokenHani, isSakuseiJokenTuika, isShuturyokuJun);
     }
 
