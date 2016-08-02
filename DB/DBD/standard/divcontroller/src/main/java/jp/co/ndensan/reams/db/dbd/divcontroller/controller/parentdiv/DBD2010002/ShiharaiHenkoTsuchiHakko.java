@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.jukyu.shiharaihohohenko.KanriK
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -54,7 +53,6 @@ public class ShiharaiHenkoTsuchiHakko {
      * @return レスポンスデータ
      */
     public ResponseData<ShiharaiHenkoTsuchiHakkoDiv> onLoad(ShiharaiHenkoTsuchiHakkoDiv div) {
-        ViewStateHolder.put(ViewStateKeys.資格対象者, new TaishoshaKey(new HihokenshaNo("1000000001"), new ShikibetsuCode("900000000000001"), new SetaiCode("22")));
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
