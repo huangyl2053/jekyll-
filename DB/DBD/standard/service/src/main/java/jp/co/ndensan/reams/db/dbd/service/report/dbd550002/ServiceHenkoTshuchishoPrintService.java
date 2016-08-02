@@ -16,8 +16,6 @@ import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -39,17 +37,16 @@ public class ServiceHenkoTshuchishoPrintService {
      *
      * @param entity ServiceHenkoTsuchishoEntity
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
-     * @param 発行日 発行日
      * @param 帳票分類ID 帳票分類ID
      * @param reportManager 帳票発行処理の制御機能
      */
     public void print(ServiceHenkoTsuchishoEntity entity, ChohyoSeigyoKyotsu 帳票制御共通,
-            RDate 発行日, ReportId 帳票分類ID, ReportManager reportManager) {
+            ReportId 帳票分類ID, ReportManager reportManager) {
         ServiceHenkoTshuchishoProperty property = new ServiceHenkoTshuchishoProperty();
         try (ReportAssembler<ServiceHenkoTshuchishoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<ServiceHenkoTshuchishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, 帳票分類ID,
-                    new FlexibleDate(発行日.toDateString()), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
+                    entity.getHakkoYMD(), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                     KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             ServiceHenkoTshuchishoReport report = new ServiceHenkoTshuchishoReport(entity,
                     帳票制御共通,

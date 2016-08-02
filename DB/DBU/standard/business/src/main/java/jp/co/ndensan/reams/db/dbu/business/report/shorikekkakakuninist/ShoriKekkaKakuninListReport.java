@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 処理確認リストのレポートです。
+ * 処理確認リストのReportです。
  *
  * @reamsid_L DBU-5590-040 wanghuafeng
  */

@@ -42,10 +42,8 @@ public class SeikatsuhogoTorokuDiv extends Panel {
     private RString hdnKey_AgeArrivalDay;
     @JsonProperty("hdnKey_OutShikibetsuCode")
     private RString hdnKey_OutShikibetsuCode;
-    @JsonProperty("hdnKey_OutSetaiCode")
-    private RString hdnKey_OutSetaiCode;
-    @JsonProperty("hdnHihokenshaCode")
-    private RString hdnHihokenshaCode;
+    @JsonProperty("hdnGyoseikuCode")
+    private RString hdnGyoseikuCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -180,39 +178,21 @@ public class SeikatsuhogoTorokuDiv extends Panel {
     }
 
     /*
-     * gethdnKey_OutSetaiCode
-     * @return hdnKey_OutSetaiCode
+     * gethdnGyoseikuCode
+     * @return hdnGyoseikuCode
      */
-    @JsonProperty("hdnKey_OutSetaiCode")
-    public RString getHdnKey_OutSetaiCode() {
-        return hdnKey_OutSetaiCode;
+    @JsonProperty("hdnGyoseikuCode")
+    public RString getHdnGyoseikuCode() {
+        return hdnGyoseikuCode;
     }
 
     /*
-     * sethdnKey_OutSetaiCode
-     * @param hdnKey_OutSetaiCode hdnKey_OutSetaiCode
+     * sethdnGyoseikuCode
+     * @param hdnGyoseikuCode hdnGyoseikuCode
      */
-    @JsonProperty("hdnKey_OutSetaiCode")
-    public void setHdnKey_OutSetaiCode(RString hdnKey_OutSetaiCode) {
-        this.hdnKey_OutSetaiCode = hdnKey_OutSetaiCode;
-    }
-
-    /*
-     * gethdnHihokenshaCode
-     * @return hdnHihokenshaCode
-     */
-    @JsonProperty("hdnHihokenshaCode")
-    public RString getHdnHihokenshaCode() {
-        return hdnHihokenshaCode;
-    }
-
-    /*
-     * sethdnHihokenshaCode
-     * @param hdnHihokenshaCode hdnHihokenshaCode
-     */
-    @JsonProperty("hdnHihokenshaCode")
-    public void setHdnHihokenshaCode(RString hdnHihokenshaCode) {
-        this.hdnHihokenshaCode = hdnHihokenshaCode;
+    @JsonProperty("hdnGyoseikuCode")
+    public void setHdnGyoseikuCode(RString hdnGyoseikuCode) {
+        this.hdnGyoseikuCode = hdnGyoseikuCode;
     }
 
     /*
