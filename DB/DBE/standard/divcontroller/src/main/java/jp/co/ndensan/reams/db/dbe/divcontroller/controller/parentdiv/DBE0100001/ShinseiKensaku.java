@@ -109,7 +109,62 @@ public class ShinseiKensaku {
         if (MENUID_DBEMN11001.equals(menuID)) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_BTNITIRANPRINT, false);
         }
+        if (searchResult.records().size() == 1) {
+            return forwardNextOrStay(div, Events.検索結果1件);
+        }
         return ResponseData.of(div).setState(DBE0100001StateName.検索結果一覧);
+    }
+
+    private static enum Events {
+
+        検索結果1件,
+        対象選択;
+    }
+
+    private ResponseData<ShinseiKensakuDiv> forwardNextOrStay(ShinseiKensakuDiv div, Events event) {
+        RString menuID = ResponseHolder.getMenuID();
+        dgShinseiJoho_Row row = (event == Events.検索結果1件) ? div.getDgShinseiJoho().getDataSource().get(0)
+                                : (event == Events.対象選択) ? div.getDgShinseiJoho().getClickedItem()
+                                  : null;
+        if (row == null) {
+            return ResponseData.of(div).respond();
+        }
+
+        RString 申請書管理番号 = row.getShinseishoKanriNo();
+        if (MENUID_DBEMN11001.equals(menuID)) {
+            ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
+            return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定個人状況照会へ).respond();
+        }
+
+        if (MENUID_DBEMN11003.equals(menuID)) {
+            ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
+            return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定個人状況照会へ).respond();
+        }
+
+        if (MENUID_DBEMN14001.equals(menuID)) {
+            RString 証記載保険者番号 = row.getShoKisaiHokenshaNo();
+            RString 被保険者番号 = row.getHihokenshaNo();
+            ViewStateHolder.put(ViewStateKeys.証記載保険者番号, 証記載保険者番号);
+            ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
+            return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定情報提供へ).respond();
+        }
+
+        if (MENUID_DBEMN32002.equals(menuID)) {
+            RString 主治医意見書作成依頼履歴番号 = row.getIkenshoIraiRirekiNo();
+            ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
+            ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, 主治医意見書作成依頼履歴番号);
+            return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.主治医意見書登録へ).respond();
+        }
+
+        if (MENUID_DBEMN31005.equals(menuID)) {
+            ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.申請書管理番号,
+                    new ShinseishoKanriNo(申請書管理番号));
+            ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.認定調査履歴番号,
+                    Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()));
+            return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.認定調査結果登録1へ).respond();
+        }
+
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -119,38 +174,10 @@ public class ShinseiKensaku {
      * @return ResponseData<ShinseiKensakuDiv>
      */
     public ResponseData<ShinseiKensakuDiv> onSelect_dgShinseiJoho(ShinseiKensakuDiv div) {
-        IUrControlData controlData = UrControlDataFactory.createInstance();
-        RString menuID = controlData.getMenuID();
-        dgShinseiJoho_Row row = div.getDgShinseiJoho().getActiveRow();
-        RString 申請書管理番号 = row.getShinseishoKanriNo();
-        RString 証記載保険者番号 = row.getShoKisaiHokenshaNo();
-        RString 被保険者番号 = row.getHihokenshaNo();
-        RString 主治医意見書作成依頼履歴番号 = row.getIkenshoIraiRirekiNo();
         div.getBtnClear().setDisabled(false);
         div.getTxtMaxDisp().setDisabled(false);
         div.getBtnKensaku().setDisabled(false);
-        if (MENUID_DBEMN11001.equals(menuID)) {
-            ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
-            return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定個人状況照会へ).respond();
-        } else if (MENUID_DBEMN11003.equals(menuID)) {
-            ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
-            return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定個人状況照会へ).respond();
-        } else if (MENUID_DBEMN14001.equals(menuID)) {
-            ViewStateHolder.put(ViewStateKeys.証記載保険者番号, 証記載保険者番号);
-            ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
-            return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定情報提供へ).respond();
-        } else if (MENUID_DBEMN32002.equals(menuID)) {
-            ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
-            ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, 主治医意見書作成依頼履歴番号);
-            return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.主治医意見書登録へ).respond();
-        } else if (MENUID_DBEMN31005.equals(menuID)) {
-            ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.申請書管理番号,
-                    new ShinseishoKanriNo(申請書管理番号));
-            ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.認定調査履歴番号,
-                    Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()));
-            return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.認定調査結果登録1へ).respond();
-        }
-        return ResponseData.of(div).respond();
+        return forwardNextOrStay(div, Events.対象選択);
     }
 
     /**

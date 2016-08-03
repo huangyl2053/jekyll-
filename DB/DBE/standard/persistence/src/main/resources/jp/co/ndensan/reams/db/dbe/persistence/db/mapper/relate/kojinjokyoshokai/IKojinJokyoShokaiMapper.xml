@@ -207,13 +207,13 @@
             INNER JOIN
                 rgdb."DbT5101NinteiShinseiJoho" AS DbT5101Nintei
             ON  DbT5101Nintei."shinseishoKanriNo" = DbT5123Nintei."shinseishoKanriNo"
-            INNER JOIN
+            LEFT JOIN
                 rgdb."DbT5105NinteiKanryoJoho" AS DbT5105Nintei
             ON  DbT5105Nintei."shinseishoKanriNo" = DbT5123Nintei."shinseishoKanriNo"
             LEFT JOIN
                 rgdb."DbT5102NinteiKekkaJoho" AS DbT5102Nintei
             ON  DbT5102Nintei."shinseishoKanriNo" = DbT5123Nintei."shinseishoKanriNo"
-            INNER JOIN
+            LEFT JOIN
                 rgdb."DbT5116IchijiHanteiKekkaJoho" AS DbT5116Ichiji
             ON  DbT5116Ichiji."shinseishoKanriNo" = DbT5123Nintei."shinseishoKanriNo"
             LEFT JOIN
