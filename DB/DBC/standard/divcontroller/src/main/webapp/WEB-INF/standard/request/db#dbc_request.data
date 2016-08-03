@@ -140,7 +140,6 @@ dbc/db/dbc/KashitsukekinKihon/onLoad
 dbc/db/dbc/Ketteijoho/onClick_btnSearch
 dbc/db/dbc/Ketteijoho/onLoad
 dbc/db/dbc/KihonInfo/onLoad
-dbc/db/dbc/KihonInfoMainPanel/onClick_btnDelete
 dbc/db/dbc/KihonInfoMainPanel/onClick_btnFree
 dbc/db/dbc/KihonInfoMainPanel/onClick_btnGokeiinfo
 dbc/db/dbc/KihonInfoMainPanel/onClick_btnKinkyujiShisetsu
@@ -208,21 +207,11 @@ dbc/db/dbc/KinkyujiShoteiShikanPanel/onClick_btnTokuteiNyushosya
 dbc/db/dbc/KinkyujiShoteiShikanPanel/onClick_btnTokuteiShinryohi
 dbc/db/dbc/KinkyujiShoteiShikanPanel/onLoad
 dbc/db/dbc/KogakuKaigoKyufuhiTaishoshaTorokuPanel/onLoad
-dbc/db/dbc/KogakuKyufuTaishoList/onBeforeOpenDialog_btnJgyosha
-dbc/db/dbc/KogakuKyufuTaishoList/onBeforeOpenDialog_btnServiceSyurui
-dbc/db/dbc/KogakuKyufuTaishoList/onClick_btnTorikeshi
-dbc/db/dbc/KogakuKyufuTaishoList/onClick_btnTsuika
-dbc/db/dbc/KogakuKyufuTaishoList/onClick_btnkakutei
-dbc/db/dbc/KogakuKyufuTaishoList/onClick_delete
-dbc/db/dbc/KogakuKyufuTaishoList/onClick_modify
-dbc/db/dbc/KogakuKyufuTaishoList/onOkClose_btnJgyosha
-dbc/db/dbc/KogakuKyufuTaishoList/onOkClose_btnServiceSyurui
 dbc/db/dbc/KogakuServicehiPanel/onChange_radSearchKubun
 dbc/db/dbc/KogakuServicehiPanel/onClick_ShowDetail
 dbc/db/dbc/KogakuServicehiPanel/onClick_btnClear
 dbc/db/dbc/KogakuServicehiPanel/onClick_btnResearch
 dbc/db/dbc/KogakuServicehiPanel/onClick_btnSearch
-dbc/db/dbc/KogakuServicehiPanel/onClick_btnSearchHihokensha
 dbc/db/dbc/KogakuServicehiPanel/onLoad
 dbc/db/dbc/KogakuShikyuKetteiTsuchiSakusei/onLoad
 dbc/db/dbc/KokuhorenJohoTorikomiBatchKido/onLoad
@@ -501,8 +490,6 @@ dbc/db/dbc/ServiceTeikyoShomeishoPanel/onClick_btnShinseiInfo
 dbc/db/dbc/ServiceTeikyoShomeishoPanel/onClick_btnShokanKeteiInfo
 dbc/db/dbc/ServiceTeikyoShomeishoPanel/onLoad
 dbc/db/dbc/SetaiJoho/getOnLoadData
-dbc/db/dbc/ServiceTeikyohyoBeppyoPrintMain/onClick_btnReportPublish
-dbc/db/dbc/ServiceTeikyohyoBeppyoPrintMain/onLoad
 dbc/db/dbc/ShafukuKeigenGaku/onClick_btnClose
 dbc/db/dbc/ShafukuKeigenGaku/onClick_selectButton
 dbc/db/dbc/ShafukuKeigenGaku/onLoad
@@ -625,7 +612,7 @@ dbc/db/dbc/ShokujiHiyoPanel/onClick_btnCal2
 dbc/db/dbc/ShokujiHiyoPanel/onClick_btnClear
 dbc/db/dbc/ShokujiHiyoPanel/onClick_btnClear2
 dbc/db/dbc/ShokujiHiyoPanel/onClick_btnConfirm2
-dbc/db/dbc/ShokujiHiyoPanel/onClick_btnDelete
+dbc/db/dbc/ShokujiHiyoPanel/onClick_btnFree
 dbc/db/dbc/ShokujiHiyoPanel/onClick_btnGoukeiInfo
 dbc/db/dbc/ShokujiHiyoPanel/onClick_btnKihonInfo
 dbc/db/dbc/ShokujiHiyoPanel/onClick_btnKinkyujiShoteiShikan
@@ -640,7 +627,6 @@ dbc/db/dbc/ShokujiHiyoPanel/onClick_btnShafukukeigenGaku
 dbc/db/dbc/ShokujiHiyoPanel/onClick_btnShukei
 dbc/db/dbc/ShokujiHiyoPanel/onClick_btnTokuteiNyushosya
 dbc/db/dbc/ShokujiHiyoPanel/onClick_btnTokuteiShinryohi
-dbc/db/dbc/ShokujiHiyoPanel/onClick_btnTorikeshi
 dbc/db/dbc/ShokujiHiyoPanel/onClick_ddgDelete
 dbc/db/dbc/ShokujiHiyoPanel/onClick_ddgModify
 dbc/db/dbc/ShokujiHiyoPanel/onLoad
@@ -668,7 +654,6 @@ dbc/db/dbc/TokuteiNyushoshaHiyoPanel/onClick_btnAdd
 dbc/db/dbc/TokuteiNyushoshaHiyoPanel/onClick_btnCancel
 dbc/db/dbc/TokuteiNyushoshaHiyoPanel/onClick_btnClear
 dbc/db/dbc/TokuteiNyushoshaHiyoPanel/onClick_btnConfirm
-dbc/db/dbc/TokuteiNyushoshaHiyoPanel/onClick_btnDelete
 dbc/db/dbc/TokuteiNyushoshaHiyoPanel/onClick_btnFree
 dbc/db/dbc/TokuteiNyushoshaHiyoPanel/onClick_btnGokeiinfo
 dbc/db/dbc/TokuteiNyushoshaHiyoPanel/onClick_btnKeisan
@@ -697,7 +682,6 @@ dbc/db/dbc/TokuteiShinryohiPanel/onClick_btnClear
 dbc/db/dbc/TokuteiShinryohiPanel/onClick_btnClear2
 dbc/db/dbc/TokuteiShinryohiPanel/onClick_btnConfirm
 dbc/db/dbc/TokuteiShinryohiPanel/onClick_btnConfirm2
-dbc/db/dbc/TokuteiShinryohiPanel/onClick_btnDelete
 dbc/db/dbc/TokuteiShinryohiPanel/onClick_btnFree
 dbc/db/dbc/TokuteiShinryohiPanel/onClick_btnGokeiinfo
 dbc/db/dbc/TokuteiShinryohiPanel/onClick_btnKeisan
@@ -780,8 +764,6 @@ dbc/db/dbc/TsuchishoJoho652/onClick_btnExcute
 dbc/db/dbc/TsuchishoJoho652/onLoad
 dbc/db/dbc/TsuchishoJoho741/onClick_btnExcute
 dbc/db/dbc/TsuchishoJoho741/onLoad
-dbc/db/dbc/UnyoKanri/onClick_btnUpdate
-dbc/db/dbc/UnyoKanri/onLoad
 dbc/db/dbc/YoguKonyuhiShikyuKetteiTsuchisho/onLoad
 dbc/db/dbc/YoguKonyuhiShikyuKetteishaList/onLoad
 dbc/db/dbc/YoguKonyuhiShikyuShinseiContents/onClick_btnAdd
@@ -812,5 +794,3 @@ dbc/db/dbc/YoguKonyuhiShikyuShinseiPnlTotal/onSelectByModifyButton
 dbc/db/dbc/YoguKonyuhiShikyuShinseiPnlTotal/onSelectBySelectButton
 dbc/db/dbc/YoguKonyuhiShikyuShinseiShinsazumiSearchPanel/onClick_btnSearchMishinsa
 dbc/db/dbc/YoguKonyuhiShikyuShinseiShinsazumiSearchPanel/onLoad
-dbc/db/dbc/PanelAll/onLoad
-dbc/db/dbc/PanelAll/onClick_Batch

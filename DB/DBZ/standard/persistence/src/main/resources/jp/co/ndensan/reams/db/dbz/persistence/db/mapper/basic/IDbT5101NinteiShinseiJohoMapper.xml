@@ -156,8 +156,8 @@
         <result property="ninteiChosaItakusakiCode" column="dbT5101NinteiShinseiJoho_ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ChosaItakusakiCodeTypeHandler"/>
         <result property="ninteiChosainCode" column="dbT5101NinteiShinseiJoho_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ChosainCodeTypeHandler"/>
         <result property="renrakuJikoToChosain" column="dbT5101NinteiShinseiJoho_renrakuJikoToChosain" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shujiiIryokikanCode" column="dbT5101NinteiShinseiJoho_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shujiiCode" column="dbT5101NinteiShinseiJoho_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shujiiIryokikanCode" column="dbT5101NinteiShinseiJoho_shujiiIryokikanCode" />
+        <result property="shujiiCode" column="dbT5101NinteiShinseiJoho_shujiiCode" />
         <result property="shiteiiFlag" column="dbT5101NinteiShinseiJoho_shiteiiFlag" />
         <result property="ikenshoDataShubetsu" column="dbT5101NinteiShinseiJoho_ikenshoDataShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="renrakuJikoToShujii" column="dbT5101NinteiShinseiJoho_renrakuJikoToShujii" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -192,10 +192,4 @@
         <result property="logicalDeletedFlag" column="dbT5101NinteiShinseiJoho_logicalDeletedFlag" />
     </resultMap>
 
-    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5101NinteiShinseiJohoEntity">
-        <!--SELECT
-        <include refid="allColumns_DbT5101NinteiShinseiJoho"/>
-        FROM
-        rgdb."DbT5101NinteiShinseiJoho"-->
-    </select>
 </mapper>

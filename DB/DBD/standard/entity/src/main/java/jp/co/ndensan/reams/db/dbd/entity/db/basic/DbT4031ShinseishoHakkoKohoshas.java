@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * <br/> 申請書把握処理で候補者として判断された情報を保持する。
  */
 public enum DbT4031ShinseishoHakkoKohoshas implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
      * insertDantaiCd
      */
@@ -84,6 +84,11 @@ public enum DbT4031ShinseishoHakkoKohoshas implements IColumnDefinition {
      * 年金収入額
      */
     nenkinShunyuGaku(12, 0),
+    /**
+     * 非課税年金勘案額
+     * <br/>減免減額申請書発行用対象者把握時に把握された、非課税年金対象者テーブルから引用する金額
+     */
+    hikazeinenkinKananGaku(12, 0),
     /**
      * 事業者番号
      */

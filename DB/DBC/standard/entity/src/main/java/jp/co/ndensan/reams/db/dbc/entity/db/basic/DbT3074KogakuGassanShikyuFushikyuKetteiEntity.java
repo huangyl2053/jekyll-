@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
  * 高額合算支給不支給決定テーブルのエンティティクラスです。
  */
 public class DbT3074KogakuGassanShikyuFushikyuKetteiEntity extends DbTableEntityBase<DbT3074KogakuGassanShikyuFushikyuKetteiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3074KogakuGassanShikyuFushikyuKettei");
 
@@ -66,7 +66,7 @@ public class DbT3074KogakuGassanShikyuFushikyuKetteiEntity extends DbTableEntity
     private FlexibleDate ketteiTsuchiSakuseiYMD;
     private FlexibleDate furikomiTsuchiSakuseiYMD;
     private FlexibleYearMonth uketoriYM;
-    private RString kozaID;
+    private long kozaID;
     private RString ketteiTsuchiRealHakkoFlag;
 
     /**
@@ -652,7 +652,7 @@ public class DbT3074KogakuGassanShikyuFushikyuKetteiEntity extends DbTableEntity
      * @return 口座ID
      */
     @CheckForNull
-    public RString getKozaID() {
+    public long getKozaID() {
         return kozaID;
     }
 
@@ -661,7 +661,7 @@ public class DbT3074KogakuGassanShikyuFushikyuKetteiEntity extends DbTableEntity
      * 
      * @param kozaID 口座ID
      */
-    public void setKozaID(RString kozaID) {
+    public void setKozaID(long kozaID) {
         this.kozaID = kozaID;
     }
 
@@ -761,5 +761,6 @@ public class DbT3074KogakuGassanShikyuFushikyuKetteiEntity extends DbTableEntity
     }
 
 // </editor-fold>
+
 
 }

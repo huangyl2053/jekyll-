@@ -52,14 +52,14 @@ public class JutakuKaishuRiyushoTesuryoKetteiManagerTest {
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
             FlexibleDate 主キー2 = DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.DEFAULT_決定年月日;
-            Decimal 主キー3 = DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.DEFAULT_履歴番号;
+            Decimal 主キー3 = new Decimal(DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.DEFAULT_履歴番号);
             sut.get住宅改修理由書作成手数料請求決定(null, 主キー2, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
             JigyoshaNo 主キー1 = DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.DEFAULT_介護住宅改修理由書作成事業者番号;
-            Decimal 主キー3 = DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.DEFAULT_履歴番号;
+            Decimal 主キー3 = new Decimal(DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.DEFAULT_履歴番号);
             sut.get住宅改修理由書作成手数料請求決定(主キー1, null, 主キー3);
         }
 
@@ -73,11 +73,11 @@ public class JutakuKaishuRiyushoTesuryoKetteiManagerTest {
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(JigyoshaNo.class), any(FlexibleDate.class), any(Decimal.class))).thenReturn(null);
+            when(dac.selectByKey(any(JigyoshaNo.class), any(FlexibleDate.class), any(int.class))).thenReturn(null);
 
             JigyoshaNo 主キー1 = DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.DEFAULT_介護住宅改修理由書作成事業者番号;
             FlexibleDate 主キー2 = DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.DEFAULT_決定年月日;
-            Decimal 主キー3 = DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.DEFAULT_履歴番号;
+            Decimal 主キー3 = new Decimal(DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.DEFAULT_履歴番号);
             JutakuKaishuRiyushoTesuryoKettei result = sut.get住宅改修理由書作成手数料請求決定(主キー1, 主キー2, 主キー3);
 
             assertThat(result, is(nullValue()));
@@ -86,11 +86,11 @@ public class JutakuKaishuRiyushoTesuryoKetteiManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity entity = DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.createDbT3094JutakuKaishuRiyushoTesuryoKetteiEntity();
-            when(dac.selectByKey(any(JigyoshaNo.class), any(FlexibleDate.class), any(Decimal.class))).thenReturn(entity);
+            when(dac.selectByKey(any(JigyoshaNo.class), any(FlexibleDate.class), any(int.class))).thenReturn(entity);
 
             JigyoshaNo 主キー1 = DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.DEFAULT_介護住宅改修理由書作成事業者番号;
             FlexibleDate 主キー2 = DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.DEFAULT_決定年月日;
-            Decimal 主キー3 = DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.DEFAULT_履歴番号;
+            Decimal 主キー3 = new Decimal(DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.DEFAULT_履歴番号);
             JutakuKaishuRiyushoTesuryoKettei result = sut.get住宅改修理由書作成手数料請求決定(主キー1, 主キー2, 主キー3);
 
             assertThat(result.get介護住宅改修理由書作成事業者番号().value(), is(DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.DEFAULT_介護住宅改修理由書作成事業者番号.value()));

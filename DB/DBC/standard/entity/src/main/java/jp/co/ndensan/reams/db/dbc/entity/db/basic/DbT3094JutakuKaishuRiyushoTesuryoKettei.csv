@@ -5,3 +5,8 @@ shikyu_FushikyuKetteiYMD,UDD015YMD,FlexibleDate,,,,,支給・不支給決定年�
 shikyu_FushikyuKubun,varchar,RString,,,,,支給・不支給区分,A
 fushikyuRiyu,varchar,RString,,,,,償還不支給理由等,A
 tesuryoShiharaiYoteiYMD,UDD015YMD,FlexibleDate,,,,,住宅改修理由書作成手数料支払予定日,A
+shukeiNo,varchar,RString,,,,,集計関連付け番号,A
+ketteiTsuchiSakuseiYMD,UDD015YMD,FlexibleDate,,,,,決定通知書作成年月日,A
+furikomiTsuchiSakuseiYMD,UDD015YMD,FlexibleDate,,,,,振込通知書作成年月日,A
+uketoriYM,UDD014YM,FlexibleYearMonth,,,,,受取年月,A
+kozaID,int8,long,,,,,口座ID,A

@@ -54,11 +54,11 @@ public enum DbT4003YokaigoNinteiInterface implements IColumnDefinition {
     /**
      * 取込日時
      */
-    torikomiTimestamp(1, 0),
+    torikomiTimestamp(2147483647, 0),
     /**
      * 取込区分
      */
-    torikomiKubun(2147483647, 0),
+    torikomiKubun(1, 0),
     /**
      * 申請種別コード
      */

@@ -50,7 +50,7 @@ tokuteishinryoTokubetsuryoyoSetteiKubun,bpchar,RString,,,,,特定診療特別療
 tokuteinyushoshaSetteiKubun,bpchar,RString,,,,,特定入所者設定区分,A
 shakaifukushiKeigenSetteiKubun,bpchar,RString,,,,,社会福祉法人軽減設定区分,A
 careManagementSetteiKubun,bpchar,RString,,,,,ケアマネジメント設定区分,A
-shoteiShikkanSetteiKubun,bpchar,RString,,,,,特定疾患施設療養設定区分,A
+shoteiShikkanSetteiKubun,bpchar,RString,,,,,所定疾患施設療養設定区分,A
 meisaiJushochitokureiSetteiKubun,bpchar,RString,,,,,明細住所地特例設定区分,A
 shukeiSetteiKubun,bpchar,RString,,,,,集計設定区分,A
 hyoujiJun,int2,int,,,,,表示順,A

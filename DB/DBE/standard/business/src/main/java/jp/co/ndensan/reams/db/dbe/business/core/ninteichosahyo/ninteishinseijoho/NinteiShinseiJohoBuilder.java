@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosairaijo
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -558,7 +560,7 @@ public class NinteiShinseiJohoBuilder {
      */
     public NinteiShinseiJohoBuilder set主治医医療機関コード(RString 主治医医療機関コード) {
         requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関コード"));
-        entity.setShujiiIryokikanCode(主治医医療機関コード);
+        entity.setShujiiIryokikanCode(new ShujiiIryokikanCode(主治医医療機関コード));
         return this;
     }
 
@@ -570,7 +572,7 @@ public class NinteiShinseiJohoBuilder {
      */
     public NinteiShinseiJohoBuilder set主治医コード(RString 主治医コード) {
         requireNonNull(主治医コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医コード"));
-        entity.setShujiiCode(主治医コード);
+        entity.setShujiiCode(new ShujiiCode(主治医コード));
         return this;
     }
 

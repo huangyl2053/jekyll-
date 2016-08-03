@@ -98,7 +98,7 @@
         <result property="tokuchoTeishiJiyuCode" column="dbV2001ChoshuHoho_tokuchoTeishiJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
-    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbV2001ChoshuHohoEntity">
+    <select id="getEntity" resultMap="ResultMap_DbV2001ChoshuHohoEntity">
         SELECT
         <include refid="allColumns_DbV2001ChoshuHoho" />
         FROM

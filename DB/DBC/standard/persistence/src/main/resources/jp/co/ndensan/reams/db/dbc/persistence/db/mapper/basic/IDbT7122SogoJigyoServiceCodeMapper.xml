@@ -17,61 +17,77 @@
     </sql>
 
     <sql id="allColumns_DbT7122SogoJigyoServiceCode">
-         "DbT7122SogoJigyoServiceCode"."serviceShuruiCode" as "dbT7122SogoJigyoServiceCode_serviceShuruiCode",
-         "DbT7122SogoJigyoServiceCode"."serviceKomokuCode" as "dbT7122SogoJigyoServiceCode_serviceKomokuCode",
-         "DbT7122SogoJigyoServiceCode"."tekiyoKaishiYM" as "dbT7122SogoJigyoServiceCode_tekiyoKaishiYM",
-         "DbT7122SogoJigyoServiceCode"."rirekiNo" as "dbT7122SogoJigyoServiceCode_rirekiNo",
-         "DbT7122SogoJigyoServiceCode"."insertDantaiCd" as "dbT7122SogoJigyoServiceCode_insertDantaiCd",
-         "DbT7122SogoJigyoServiceCode"."insertTimestamp" as "dbT7122SogoJigyoServiceCode_insertTimestamp",
-         "DbT7122SogoJigyoServiceCode"."insertReamsLoginId" as "dbT7122SogoJigyoServiceCode_insertReamsLoginId",
-         "DbT7122SogoJigyoServiceCode"."insertContextId" as "dbT7122SogoJigyoServiceCode_insertContextId",
-         "DbT7122SogoJigyoServiceCode"."isDeleted" as "dbT7122SogoJigyoServiceCode_isDeleted",
-         "DbT7122SogoJigyoServiceCode"."updateCount" as "dbT7122SogoJigyoServiceCode_updateCount",
-         "DbT7122SogoJigyoServiceCode"."lastUpdateTimestamp" as "dbT7122SogoJigyoServiceCode_lastUpdateTimestamp",
-         "DbT7122SogoJigyoServiceCode"."lastUpdateReamsLoginId" as "dbT7122SogoJigyoServiceCode_lastUpdateReamsLoginId",
-         "DbT7122SogoJigyoServiceCode"."tekiyoShuryoYM" as "dbT7122SogoJigyoServiceCode_tekiyoShuryoYM",
-         "DbT7122SogoJigyoServiceCode"."serviceMeisho" as "dbT7122SogoJigyoServiceCode_serviceMeisho",
-         "DbT7122SogoJigyoServiceCode"."taniSu" as "dbT7122SogoJigyoServiceCode_taniSu",
-         "DbT7122SogoJigyoServiceCode"."gendoGakuTaishogaiFlag" as "dbT7122SogoJigyoServiceCode_gendoGakuTaishogaiFlag",
-         "DbT7122SogoJigyoServiceCode"."taniSuShikibetsuCode" as "dbT7122SogoJigyoServiceCode_taniSuShikibetsuCode",
-         "DbT7122SogoJigyoServiceCode"."gaibuServiceRiyoKubun" as "dbT7122SogoJigyoServiceCode_gaibuServiceRiyoKubun",
-         "DbT7122SogoJigyoServiceCode"."tokubetsuChiikiKasanFlag" as "dbT7122SogoJigyoServiceCode_tokubetsuChiikiKasanFlag",
-         "DbT7122SogoJigyoServiceCode"."teiRitsu_TeiGakuKubun" as "dbT7122SogoJigyoServiceCode_teiRitsu_TeiGakuKubun",
-         "DbT7122SogoJigyoServiceCode"."riyoshaFutanGaku" as "dbT7122SogoJigyoServiceCode_riyoshaFutanGaku",
-         "DbT7122SogoJigyoServiceCode"."kyufuRitsu" as "dbT7122SogoJigyoServiceCode_kyufuRitsu",
-         "DbT7122SogoJigyoServiceCode"."nijiYoboTaishosha_JissiKubun" as "dbT7122SogoJigyoServiceCode_nijiYoboTaishosha_JissiKubun",
-         "DbT7122SogoJigyoServiceCode"."yoShien1_JisshiKubun" as "dbT7122SogoJigyoServiceCode_yoShien1_JisshiKubun",
-         "DbT7122SogoJigyoServiceCode"."yoShien2_JisshiKubun" as "dbT7122SogoJigyoServiceCode_yoShien2_JisshiKubun"
+         "DbT7122SogoJigyoServiceCode"."serviceShuruiCode" as "SogoJigyoServiceCode_serviceShuruiCode",
+         "DbT7122SogoJigyoServiceCode"."serviceKomokuCode" as "SogoJigyoServiceCode_serviceKomokuCode",
+         "DbT7122SogoJigyoServiceCode"."tekiyoKaishiYM" as "SogoJigyoServiceCode_tekiyoKaishiYM",
+         "DbT7122SogoJigyoServiceCode"."rirekiNo" as "SogoJigyoServiceCode_rirekiNo",
+         "DbT7122SogoJigyoServiceCode"."insertDantaiCd" as "SogoJigyoServiceCode_insertDantaiCd",
+         "DbT7122SogoJigyoServiceCode"."insertTimestamp" as "SogoJigyoServiceCode_insertTimestamp",
+         "DbT7122SogoJigyoServiceCode"."insertReamsLoginId" as "SogoJigyoServiceCode_insertReamsLoginId",
+         "DbT7122SogoJigyoServiceCode"."insertContextId" as "SogoJigyoServiceCode_insertContextId",
+         "DbT7122SogoJigyoServiceCode"."isDeleted" as "SogoJigyoServiceCode_isDeleted",
+         "DbT7122SogoJigyoServiceCode"."updateCount" as "SogoJigyoServiceCode_updateCount",
+         "DbT7122SogoJigyoServiceCode"."lastUpdateTimestamp" as "SogoJigyoServiceCode_lastUpdateTimestamp",
+         "DbT7122SogoJigyoServiceCode"."lastUpdateReamsLoginId" as "SogoJigyoServiceCode_lastUpdateReamsLoginId",
+         "DbT7122SogoJigyoServiceCode"."tekiyoShuryoYM" as "SogoJigyoServiceCode_tekiyoShuryoYM",
+         "DbT7122SogoJigyoServiceCode"."serviceMeisho" as "SogoJigyoServiceCode_serviceMeisho",
+         "DbT7122SogoJigyoServiceCode"."taniSu" as "SogoJigyoServiceCode_taniSu",
+         "DbT7122SogoJigyoServiceCode"."gendoGakuTaishogaiFlag" as "SogoJigyoServiceCode_gendoGakuTaishogaiFlag",
+         "DbT7122SogoJigyoServiceCode"."taniSuShikibetsuCode" as "SogoJigyoServiceCode_taniSuShikibetsuCode",
+         "DbT7122SogoJigyoServiceCode"."gaibuServiceRiyoKubun" as "SogoJigyoServiceCode_gaibuServiceRiyoKubun",
+         "DbT7122SogoJigyoServiceCode"."tokubetsuChiikiKasanFlag" as "SogoJigyoServiceCode_tokubetsuChiikiKasanFlag",
+         "DbT7122SogoJigyoServiceCode"."teiRitsu_TeiGakuKubun" as "SogoJigyoServiceCode_teiRitsu_TeiGakuKubun",
+         "DbT7122SogoJigyoServiceCode"."riyoshaFutanGaku" as "SogoJigyoServiceCode_riyoshaFutanGaku",
+         "DbT7122SogoJigyoServiceCode"."kyufuRitsu" as "SogoJigyoServiceCode_kyufuRitsu",
+         "DbT7122SogoJigyoServiceCode"."nijiYoboTaishosha_JissiKubun" as "SogoJigyoServiceCode_nijiYoboTaishosha_JissiKubun",
+         "DbT7122SogoJigyoServiceCode"."yoShien1_JisshiKubun" as "SogoJigyoServiceCode_yoShien1_JisshiKubun",
+         "DbT7122SogoJigyoServiceCode"."yoShien2_JisshiKubun" as "SogoJigyoServiceCode_yoShien2_JisshiKubun",
+         "DbT7122SogoJigyoServiceCode"."taishoJigyosha_JisshiKubun" as "SogoJigyoServiceCode_taishoJigyosha_JisshiKubun",
+         "DbT7122SogoJigyoServiceCode"."santeiTaniKubun" as "SogoJigyoServiceCode_santeiTaniKubun",
+         "DbT7122SogoJigyoServiceCode"."seigenNissuKaisu" as "SogoJigyoServiceCode_seigenNissuKaisu",
+         "DbT7122SogoJigyoServiceCode"."santeiKaisuSeigenKikanKubun" as "SogoJigyoServiceCode_santeiKaisuSeigenKikanKubun",
+         "DbT7122SogoJigyoServiceCode"."sofuKubun" as "SogoJigyoServiceCode_sofuKubun",
+         "DbT7122SogoJigyoServiceCode"."sofuYM" as "SogoJigyoServiceCode_sofuYM",
+         "DbT7122SogoJigyoServiceCode"."shinkiHenkoIdoYMD" as "SogoJigyoServiceCode_shinkiHenkoIdoYMD",
+         "DbT7122SogoJigyoServiceCode"."shuryoIdoYMD" as "SogoJigyoServiceCode_shuryoIdoYMD"
     </sql>
 
 
     <!--テーブルDbT7122SogoJigyoServiceCodeの項目をDbT7122SogoJigyoServiceCodeEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT7122SogoJigyoServiceCodeEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7122SogoJigyoServiceCodeEntity" autoMapping="true">
-        <id property="serviceShuruiCode" column="dbT7122SogoJigyoServiceCode_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <id property="serviceKomokuCode" column="dbT7122SogoJigyoServiceCode_serviceKomokuCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceKomokuCodeTypeHandler"/>
-        <id property="tekiyoKaishiYM" column="dbT7122SogoJigyoServiceCode_tekiyoKaishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <id property="rirekiNo" column="dbT7122SogoJigyoServiceCode_rirekiNo" />
-        <result property="insertDantaiCd" column="dbT7122SogoJigyoServiceCode_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="insertTimestamp" column="dbT7122SogoJigyoServiceCode_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
-        <result property="insertReamsLoginId" column="dbT7122SogoJigyoServiceCode_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="insertContextId" column="dbT7122SogoJigyoServiceCode_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
-        <result property="isDeleted" column="dbT7122SogoJigyoServiceCode_isDeleted" />
-        <result property="updateCount" column="dbT7122SogoJigyoServiceCode_updateCount" />
-        <result property="lastUpdateTimestamp" column="dbT7122SogoJigyoServiceCode_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
-        <result property="lastUpdateReamsLoginId" column="dbT7122SogoJigyoServiceCode_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="tekiyoShuryoYM" column="dbT7122SogoJigyoServiceCode_tekiyoShuryoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="serviceMeisho" column="dbT7122SogoJigyoServiceCode_serviceMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="taniSu" column="dbT7122SogoJigyoServiceCode_taniSu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="gendoGakuTaishogaiFlag" column="dbT7122SogoJigyoServiceCode_gendoGakuTaishogaiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="taniSuShikibetsuCode" column="dbT7122SogoJigyoServiceCode_taniSuShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="gaibuServiceRiyoKubun" column="dbT7122SogoJigyoServiceCode_gaibuServiceRiyoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="tokubetsuChiikiKasanFlag" column="dbT7122SogoJigyoServiceCode_tokubetsuChiikiKasanFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="teiRitsu_TeiGakuKubun" column="dbT7122SogoJigyoServiceCode_teiRitsu_TeiGakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="riyoshaFutanGaku" column="dbT7122SogoJigyoServiceCode_riyoshaFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="kyufuRitsu" column="dbT7122SogoJigyoServiceCode_kyufuRitsu" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenKyufuRitsuTypeHandler"/>
-        <result property="nijiYoboTaishosha_JissiKubun" column="dbT7122SogoJigyoServiceCode_nijiYoboTaishosha_JissiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="yoShien1_JisshiKubun" column="dbT7122SogoJigyoServiceCode_yoShien1_JisshiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="yoShien2_JisshiKubun" column="dbT7122SogoJigyoServiceCode_yoShien2_JisshiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="serviceShuruiCode" column="SogoJigyoServiceCode_serviceShuruiCode" />
+        <id property="serviceKomokuCode" column="SogoJigyoServiceCode_serviceKomokuCode" />
+        <id property="tekiyoKaishiYM" column="SogoJigyoServiceCode_tekiyoKaishiYM" />
+        <id property="rirekiNo" column="SogoJigyoServiceCode_rirekiNo" />
+        <result property="insertDantaiCd" column="SogoJigyoServiceCode_insertDantaiCd" />
+        <result property="insertTimestamp" column="SogoJigyoServiceCode_insertTimestamp" />
+        <result property="insertReamsLoginId" column="SogoJigyoServiceCode_insertReamsLoginId" />
+        <result property="insertContextId" column="SogoJigyoServiceCode_insertContextId" />
+        <result property="isDeleted" column="SogoJigyoServiceCode_isDeleted" />
+        <result property="updateCount" column="SogoJigyoServiceCode_updateCount" />
+        <result property="lastUpdateTimestamp" column="SogoJigyoServiceCode_lastUpdateTimestamp" />
+        <result property="lastUpdateReamsLoginId" column="SogoJigyoServiceCode_lastUpdateReamsLoginId" />
+        <result property="tekiyoShuryoYM" column="SogoJigyoServiceCode_tekiyoShuryoYM" />
+        <result property="serviceMeisho" column="SogoJigyoServiceCode_serviceMeisho" />
+        <result property="taniSu" column="SogoJigyoServiceCode_taniSu" />
+        <result property="gendoGakuTaishogaiFlag" column="SogoJigyoServiceCode_gendoGakuTaishogaiFlag" />
+        <result property="taniSuShikibetsuCode" column="SogoJigyoServiceCode_taniSuShikibetsuCode" />
+        <result property="gaibuServiceRiyoKubun" column="SogoJigyoServiceCode_gaibuServiceRiyoKubun" />
+        <result property="tokubetsuChiikiKasanFlag" column="SogoJigyoServiceCode_tokubetsuChiikiKasanFlag" />
+        <result property="teiRitsu_TeiGakuKubun" column="SogoJigyoServiceCode_teiRitsu_TeiGakuKubun" />
+        <result property="riyoshaFutanGaku" column="SogoJigyoServiceCode_riyoshaFutanGaku" />
+        <result property="kyufuRitsu" column="SogoJigyoServiceCode_kyufuRitsu" />
+        <result property="nijiYoboTaishosha_JissiKubun" column="SogoJigyoServiceCode_nijiYoboTaishosha_JissiKubun" />
+        <result property="yoShien1_JisshiKubun" column="SogoJigyoServiceCode_yoShien1_JisshiKubun" />
+        <result property="yoShien2_JisshiKubun" column="SogoJigyoServiceCode_yoShien2_JisshiKubun" />
+        <result property="taishoJigyosha_JisshiKubun" column="SogoJigyoServiceCode_taishoJigyosha_JisshiKubun" />
+        <result property="santeiTaniKubun" column="SogoJigyoServiceCode_santeiTaniKubun" />
+        <result property="seigenNissuKaisu" column="SogoJigyoServiceCode_seigenNissuKaisu" />
+        <result property="santeiKaisuSeigenKikanKubun" column="SogoJigyoServiceCode_santeiKaisuSeigenKikanKubun" />
+        <result property="sofuKubun" column="SogoJigyoServiceCode_sofuKubun" />
+        <result property="sofuYM" column="SogoJigyoServiceCode_sofuYM" />
+        <result property="shinkiHenkoIdoYMD" column="SogoJigyoServiceCode_shinkiHenkoIdoYMD" />
+        <result property="shuryoIdoYMD" column="SogoJigyoServiceCode_shuryoIdoYMD" />
     </resultMap>
 
 </mapper>

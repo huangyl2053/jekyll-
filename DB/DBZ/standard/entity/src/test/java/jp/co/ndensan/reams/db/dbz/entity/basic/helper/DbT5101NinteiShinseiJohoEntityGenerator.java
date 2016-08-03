@@ -73,8 +73,8 @@ public final class DbT5101NinteiShinseiJohoEntityGenerator {
     public static final ChosaItakusakiCode DEFAULT_認定調査委託先コード = new ChosaItakusakiCode("0000000001");
     public static final ChosainCode DEFAULT_認定調査員コード = new ChosainCode("00000001");
     public static final RString DEFAULT_調査員への連絡事項 = new RString("調査員への連絡事項");
-    public static final RString DEFAULT_主治医医療機関コード = new RString("0000000001");
-    public static final RString DEFAULT_主治医コード = new RString("00000001");
+    public static final ShujiiIryokikanCode DEFAULT_主治医医療機関コード = new ShujiiIryokikanCode("0000000001");
+    public static final ShujiiCode DEFAULT_主治医コード = new ShujiiCode("00000001");
     public static final boolean DEFAULT_指定医フラグ = false;
     public static final Code DEFAULT_意見書データ種別 = new Code("01");
     public static final RString DEFAULT_主治医への連絡事項 = new RString("主治医への連絡事項");

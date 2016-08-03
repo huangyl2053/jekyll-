@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>jp.co.ndensan.reams.db.dbx</groupId>
     <artifactId>dbx</artifactId>
-    <version>1.10.0-SNAPSHOT</version>
+    <version>1.12.0</version>
     <packaging>pom</packaging>
     <name>DBX</name>
     <parent>
@@ -11,7 +11,7 @@
         <artifactId>db</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../../</relativePath>
-    </parent>
+    </parent> 
     <modules>
         <module>entity</module>
         <module>business</module>
@@ -24,10 +24,10 @@
     </modules>
     <properties>
         <!-- UZ -->
-        <jp.co.ndensan.reams.uz.version>1.10.0</jp.co.ndensan.reams.uz.version>
+        <jp.co.ndensan.reams.uz.version>1.12.0</jp.co.ndensan.reams.uz.version>
         <!-- 公開系 -->
-        <jp.co.ndensan.reams.ur.version>1.10.0</jp.co.ndensan.reams.ur.version>
-        <jp.co.ndensan.reams.uax.version>1.10.0</jp.co.ndensan.reams.uax.version>
+        <jp.co.ndensan.reams.ur.version>1.12.0</jp.co.ndensan.reams.ur.version>
+        <jp.co.ndensan.reams.uax.version>1.12.0</jp.co.ndensan.reams.uax.version>
         <!-- other -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>

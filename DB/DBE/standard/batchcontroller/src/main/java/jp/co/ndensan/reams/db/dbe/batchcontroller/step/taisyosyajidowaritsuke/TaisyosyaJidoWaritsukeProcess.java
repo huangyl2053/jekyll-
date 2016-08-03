@@ -107,8 +107,8 @@ public class TaisyosyaJidoWaritsukeProcess extends SimpleBatchProcessBase {
                 対象者.getShinseishoKanriNo().value(),
                 要介護認定申請情報.getNinteiChosaItakusakiCode(),
                 要介護認定申請情報.getNinteiChosainCode(),
-                要介護認定申請情報.getShujiiIryokikanCode(),
-                要介護認定申請情報.getShujiiCode(),
+                要介護認定申請情報.getShujiiIryokikanCode().value(),
+                要介護認定申請情報.getShujiiCode().value(),
                 要介護認定申請情報.getNyushoShisetsuCode(),
                 オブザーバー_機関.equals(DbBusinessConfig.get(
                                 ConfigNameDBE.オブザーバーチェック, RDate.getNowDate(), SubGyomuCode.DBE認定支援)));

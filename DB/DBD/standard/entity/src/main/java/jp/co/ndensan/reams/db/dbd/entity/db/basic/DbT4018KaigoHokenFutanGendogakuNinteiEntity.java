@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
  * 介護保険負担限度額認定テーブルのエンティティクラスです。
  */
 public class DbT4018KaigoHokenFutanGendogakuNinteiEntity extends DbTableEntityBase<DbT4018KaigoHokenFutanGendogakuNinteiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4018KaigoHokenFutanGendogakuNintei");
 
@@ -74,6 +74,8 @@ public class DbT4018KaigoHokenFutanGendogakuNinteiEntity extends DbTableEntityBa
     private Decimal yukashoukenGaisangaku;
     private Decimal sonotaKingaku;
     private YMDHMS ninteiBatchExecutedTimestamp;
+    private boolean izokuNenkinJukyuFlag;
+    private boolean shogaiNenkinJukyuFlag;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -920,6 +922,52 @@ public class DbT4018KaigoHokenFutanGendogakuNinteiEntity extends DbTableEntityBa
     }
 
     /**
+     * 遺族年金受給フラグのgetメソッドです。
+     * <br/>
+     * <br/>tureの場合、申告有り。
+     * 
+     * @return 遺族年金受給フラグ
+     */
+    @CheckForNull
+    public boolean getIzokuNenkinJukyuFlag() {
+        return izokuNenkinJukyuFlag;
+    }
+
+    /**
+     * 遺族年金受給フラグのsetメソッドです。
+     * <br/>
+     * <br/>tureの場合、申告有り。
+     * 
+     * @param izokuNenkinJukyuFlag 遺族年金受給フラグ
+     */
+    public void setIzokuNenkinJukyuFlag(boolean izokuNenkinJukyuFlag) {
+        this.izokuNenkinJukyuFlag = izokuNenkinJukyuFlag;
+    }
+
+    /**
+     * 障害年金受給フラグのgetメソッドです。
+     * <br/>
+     * <br/>tureの場合、申告有り。
+     * 
+     * @return 障害年金受給フラグ
+     */
+    @CheckForNull
+    public boolean getShogaiNenkinJukyuFlag() {
+        return shogaiNenkinJukyuFlag;
+    }
+
+    /**
+     * 障害年金受給フラグのsetメソッドです。
+     * <br/>
+     * <br/>tureの場合、申告有り。
+     * 
+     * @param shogaiNenkinJukyuFlag 障害年金受給フラグ
+     */
+    public void setShogaiNenkinJukyuFlag(boolean shogaiNenkinJukyuFlag) {
+        this.shogaiNenkinJukyuFlag = shogaiNenkinJukyuFlag;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbT4018KaigoHokenFutanGendogakuNinteiEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
@@ -983,6 +1031,8 @@ public class DbT4018KaigoHokenFutanGendogakuNinteiEntity extends DbTableEntityBa
         this.yukashoukenGaisangaku = entity.yukashoukenGaisangaku;
         this.sonotaKingaku = entity.sonotaKingaku;
         this.ninteiBatchExecutedTimestamp = entity.ninteiBatchExecutedTimestamp;
+        this.izokuNenkinJukyuFlag = entity.izokuNenkinJukyuFlag;
+        this.shogaiNenkinJukyuFlag = entity.shogaiNenkinJukyuFlag;
     }
 
     /**
@@ -991,10 +1041,11 @@ public class DbT4018KaigoHokenFutanGendogakuNinteiEntity extends DbTableEntityBa
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinseiYMD, ketteiYMD, tekiyoKaishiYMD, tekiyoShuryoYMD, ketteiKubun, hiShoninRiyu, shoKisaiHokenshaNo, hihokenshaNo, rirekiNo, kyusochishaKubun, shinseiRiyuKubun, riyoshaFutanDankai, kyokaisoGaitoshaKubun, gekihenKanwaSochiTaishoshaKubun, kyoshitsuShubetsu, shokuhiFutanGendogaku, unitTypeKoshitsu, unitTypeJunKoshitsu, juraiTypeKoshitsu_Tokuyo, juraiTypeKoshitsu_Roken_Ryoyo, tashoshitsu, haigushaUmuFlag, haigushaShimei, haigushaShimeiKana, haigushaSeinenGappiYMD, haigushaJusho, haigushaRenrakusaki, haigushaJusho2, haigushaKazeiKubun, haigushaShikibetsuCd, yochokinShinkokuKubun, yochokinGaku, yukashoukenGaisangaku, sonotaKingaku, ninteiBatchExecutedTimestamp);
+        return super.toMd5(shinseiYMD, ketteiYMD, tekiyoKaishiYMD, tekiyoShuryoYMD, ketteiKubun, hiShoninRiyu, shoKisaiHokenshaNo, hihokenshaNo, rirekiNo, kyusochishaKubun, shinseiRiyuKubun, riyoshaFutanDankai, kyokaisoGaitoshaKubun, gekihenKanwaSochiTaishoshaKubun, kyoshitsuShubetsu, shokuhiFutanGendogaku, unitTypeKoshitsu, unitTypeJunKoshitsu, juraiTypeKoshitsu_Tokuyo, juraiTypeKoshitsu_Roken_Ryoyo, tashoshitsu, haigushaUmuFlag, haigushaShimei, haigushaShimeiKana, haigushaSeinenGappiYMD, haigushaJusho, haigushaRenrakusaki, haigushaJusho2, haigushaKazeiKubun, haigushaShikibetsuCd, yochokinShinkokuKubun, yochokinGaku, yukashoukenGaisangaku, sonotaKingaku, ninteiBatchExecutedTimestamp, izokuNenkinJukyuFlag, shogaiNenkinJukyuFlag);
     }
 
 // </editor-fold>
+
 
 
 }

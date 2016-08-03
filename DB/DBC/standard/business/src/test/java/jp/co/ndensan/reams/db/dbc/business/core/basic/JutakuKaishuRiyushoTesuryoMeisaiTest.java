@@ -34,7 +34,7 @@ public class JutakuKaishuRiyushoTesuryoMeisaiTest extends DbcTestBase {
 //TODO 主キーの数が足りない場合、追加してください。
     private static HokenshaNo 主キー名1;
     private static HihokenshaNo 主キー名2;
-    private static Decimal 主キー名3;
+    private static int 主キー名3;
 
     @BeforeClass
     public static void setUpClass() {
@@ -58,24 +58,24 @@ public class JutakuKaishuRiyushoTesuryoMeisaiTest extends DbcTestBase {
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new JutakuKaishuRiyushoTesuryoMeisai(null, 主キー名2, 主キー名3);
+            sut = new JutakuKaishuRiyushoTesuryoMeisai(null, 主キー名2, new Decimal(主キー名3));
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new JutakuKaishuRiyushoTesuryoMeisai(主キー名1, null, 主キー名3);
+            sut = new JutakuKaishuRiyushoTesuryoMeisai(主キー名1, null, new Decimal(主キー名3));
         }
 
         @Test
         public void 指定したキーが保持するDbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityにセットされている() {
-            sut = new JutakuKaishuRiyushoTesuryoMeisai(主キー名1, 主キー名2, 主キー名3);
+            sut = new JutakuKaishuRiyushoTesuryoMeisai(主キー名1, 主キー名2, new Decimal(主キー名3));
             assertThat(sut.get証記載保険者番号(), is(主キー名1));
             assertThat(sut.get被保険者番号(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するJutakuKaishuRiyushoTesuryoMeisaiIdentifierにセットされている() {
-            sut = new JutakuKaishuRiyushoTesuryoMeisai(主キー名1, 主キー名2, 主キー名3);
+            sut = new JutakuKaishuRiyushoTesuryoMeisai(主キー名1, 主キー名2, new Decimal(主キー名3));
             assertThat(sut.identifier().get証記載保険者番号(), is(主キー名1));
             assertThat(sut.identifier().get被保険者番号(), is(主キー名2));
         }
@@ -132,7 +132,7 @@ public class JutakuKaishuRiyushoTesuryoMeisaiTest extends DbcTestBase {
 
         @Test
         public void get履歴番号は_entityが持つ履歴番号を返す() {
-            assertThat(sut.get履歴番号(), is(JutakuKaishuRiyushoTesuryoMeisaiEntity.getRirekiNo()));
+            assertThat(sut.get履歴番号(), is(new Decimal(JutakuKaishuRiyushoTesuryoMeisaiEntity.getRirekiNo())));
         }
 
         @Test
@@ -185,10 +185,10 @@ public class JutakuKaishuRiyushoTesuryoMeisaiTest extends DbcTestBase {
             assertThat(sut.get介護住宅改修理由書作成者名(), is(JutakuKaishuRiyushoTesuryoMeisaiEntity.getRiyushoSakuseishaMei()));
         }
 
-        @Test
-        public void get介護住宅改修理由書作成者資格は_entityが持つ介護住宅改修理由書作成者資格を返す() {
-            assertThat(sut.get介護住宅改修理由書作成者資格(), is(JutakuKaishuRiyushoTesuryoMeisaiEntity.getRiyushoSakuseishaShikaku()));
-        }
+//        @Test
+//        public void get介護住宅改修理由書作成者資格は_entityが持つ介護住宅改修理由書作成者資格を返す() {
+//            assertThat(sut.get介護住宅改修理由書作成者資格(), is(JutakuKaishuRiyushoTesuryoMeisaiEntity.getRiyushoSakuseishaShikaku()));
+//        }
 
         @Test
         public void get介護住宅改修理由書作成申請年月日は_entityが持つ介護住宅改修理由書作成申請年月日を返す() {

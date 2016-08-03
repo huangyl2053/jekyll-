@@ -96,7 +96,7 @@ public class KihonInfoHandler {
         if (設定不可.equals(entity.get明細住所地特例設定区分())) {
             div.getPanelTwo().getBtnKyufuhiMeisaiJutoku().setDisabled(true);
         }
-        if (設定可_任意.equals(entity.get特定疾患施設療養設定区分())
+        if (設定可_任意.equals(entity.get所定疾患施設療養設定区分())
                 && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
             div.getPanelTwo().getBtnKinkyujiShoteiShokan().setDisplayNone(false);
             div.getPanelTwo().getBtnKinkyujiShoteiShokan().setVisible(true);
