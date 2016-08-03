@@ -12,7 +12,7 @@ import lombok.Setter;
 /**
  * 要介護認定申請書のEntityです。
  *
- * @reamsid_L DBD-1400-020&DBD-1400-030 b_zhengs
+ * @reamsid_L DBD-1400-030 b_zhengs
  */
 @Getter
 @Setter
