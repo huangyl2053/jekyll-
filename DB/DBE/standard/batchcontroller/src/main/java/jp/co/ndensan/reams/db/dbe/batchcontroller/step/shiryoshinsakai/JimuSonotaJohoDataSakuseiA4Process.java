@@ -42,7 +42,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class JimuSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<ShinsakaiSiryoKyotsuEntity> {
 
     private static final RString SELECT_JIMUTSONOTAJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
-            + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.get共通情報");
+            + ".mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper.get共通情報");
     private static final List<RString> PAGE_BREAK_KEYS_A4 = Collections.unmodifiableList(Arrays.asList(
             new RString(SonotashiryoA4ReportSource.ReportSourceFields.hokenshaNo.name())));
     private IinShinsakaiIinJohoProcessParameter paramter;
