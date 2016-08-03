@@ -17,6 +17,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<ChohyoShutsuryokuJohoShutokuResultEntity> {
 
     @Override
+    protected void initialize() {
+        //事前準備とデータの初期化 TODO
+    }
+
+    @Override
     protected IBatchReader createReader() {
         //SQLを使用、
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
