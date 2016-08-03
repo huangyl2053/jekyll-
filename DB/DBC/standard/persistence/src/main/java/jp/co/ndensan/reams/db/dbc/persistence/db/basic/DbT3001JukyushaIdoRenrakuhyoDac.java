@@ -14,6 +14,7 @@ import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenra
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.logicalDeletedFlag;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.rirekiNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.shoKisaiHokenshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.sofuYM;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -28,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.lt;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -103,20 +104,22 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
      * 受給者異動送付を全件返します。
      *
      * @param 被保番号 hiHokenshaNo
-     * @param 異動日 idoYMD
+     * @param 送付年月 sofuYM
      * @return List<DbT3001JukyushaIdoRenrakuhyoEntity>
      */
     @Transaction
-    public List<DbT3001JukyushaIdoRenrakuhyoEntity> select登録した受給者異動情報の取得(RString 被保番号, RDate 異動日) {
+    public DbT3001JukyushaIdoRenrakuhyoEntity select登録した受給者異動情報の取得(RString 被保番号, RDate 送付年月) {
+        requireNonNull(被保番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保番号"));
+        requireNonNull(送付年月, UrSystemErrorMessages.値がnull.getReplacedMessage("送付年月"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT3001JukyushaIdoRenrakuhyo.class).
                 where(and(
                                 eq(hiHokenshaNo, 被保番号),
-                                eq(idoYMD, 異動日),
+                                eq(sofuYM, 送付年月),
                                 eq(logicalDeletedFlag, 論理削除フラグ),
                                 eq(rirekiNo, ONE))).
-                toList(DbT3001JukyushaIdoRenrakuhyoEntity.class);
+                toObject(DbT3001JukyushaIdoRenrakuhyoEntity.class);
     }
 
     /**
@@ -127,13 +130,15 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
      * @return List<DbT3001JukyushaIdoRenrakuhyoEntity>
      */
     @Transaction
-    public DbT3001JukyushaIdoRenrakuhyoEntity select直近レコードを取得して判断(RString 被保険者番号, RDate 異動日) {
+    public DbT3001JukyushaIdoRenrakuhyoEntity select異動区分(RString 被保険者番号, RDate 異動日) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT3001JukyushaIdoRenrakuhyo.class).
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
-                                leq(idoYMD, 異動日))).
+                                lt(idoYMD, 異動日))).
                 order(by(DbT3001JukyushaIdoRenrakuhyo.idoYMD, Order.DESC)).
                 limit(1).
                 toObject(DbT3001JukyushaIdoRenrakuhyoEntity.class);
@@ -147,14 +152,16 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
      * @return List<DbT3001JukyushaIdoRenrakuhyoEntity>
      */
     @Transaction
-    public List<DbT3001JukyushaIdoRenrakuhyoEntity> selectcount受給者異動送付テーブルを検索して既存の異動日を判断(RString 被保険者番号, RDate 異動日) {
+    public int selectCount(RString 被保険者番号, RDate 異動日) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT3001JukyushaIdoRenrakuhyo.class).
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(idoYMD, 異動日))).
-                toList(DbT3001JukyushaIdoRenrakuhyoEntity.class);
+                getCount();
     }
 
     /**
