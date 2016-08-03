@@ -14,11 +14,15 @@ import jp.co.ndensan.reams.db.dba.entity.report.shikakushasho.ShikakushashoRepor
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
-import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
-import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -60,12 +64,11 @@ public class ShikakushashoPrintService {
                 } else {
                     認証者電子公印種別コード = NinshoshaDenshikoinshubetsuCode.印の字.getコード();
                 }
-                INinshoshaSourceBuilderCreator builderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-                INinshoshaSourceBuilder ninshoshaSource = builderCreator.create(
-                        GyomuCode.DB介護保険,
-                        認証者電子公印種別コード,
-                        null,
-                        reportSourceWriter.getImageFolderPath());
+                Ninshosha nishosha = NinshoshaFinderFactory.createInstance().get帳票認証者(
+                        GyomuCode.DB介護保険, 認証者電子公印種別コード);
+                Association association = AssociationFinderFactory.createInstance().getAssociation();
+                INinshoshaSourceBuilder ninshoshaSource = NinshoshaSourceBuilderFactory.createInstance(
+                        nishosha, association, reportSourceWriter.getImageFolderPath(), RDate.getNowDate());
                 for (ShikakushashoBodyItem item : reportJoho.getBodyItem()) {
                     item.setDenshiKoin(ninshoshaSource.buildSource().denshiKoin);
                 }
