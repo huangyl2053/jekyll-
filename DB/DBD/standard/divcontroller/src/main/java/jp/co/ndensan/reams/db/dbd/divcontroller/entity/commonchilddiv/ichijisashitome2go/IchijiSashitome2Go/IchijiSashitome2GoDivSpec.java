@@ -197,7 +197,7 @@ public enum IchijiSashitome2GoDivSpec implements IPredicate<IchijiSashitome2GoDi
                  */
                 @Override
                 public boolean apply(IchijiSashitome2GoDiv div) {
-                    return !div.getDdlIraiShinsaKekka().getSelectedValue().equals(new RString("申請不要")) || div.getTxtIraiUketsukeYMD().getValue() != null;
+                    return !div.getDdlIraiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || div.getTxtIraiUketsukeYMD().getValue() != null;
                 }
             },
     依頼日未入力 {
@@ -209,7 +209,7 @@ public enum IchijiSashitome2GoDivSpec implements IPredicate<IchijiSashitome2GoDi
                  */
                 @Override
                 public boolean apply(IchijiSashitome2GoDiv div) {
-                    return !div.getDdlIraiShinsaKekka().getSelectedValue().equals(new RString("申請不要")) || div.getTxtIraiYMD().getValue() != null;
+                    return !div.getDdlIraiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || div.getTxtIraiYMD().getValue() != null;
                 }
             },
     依頼理由未選択 {
@@ -221,7 +221,7 @@ public enum IchijiSashitome2GoDivSpec implements IPredicate<IchijiSashitome2GoDi
                  */
                 @Override
                 public boolean apply(IchijiSashitome2GoDiv div) {
-                    return !div.getDdlIraiShinsaKekka().getSelectedValue().equals(new RString("申請不要")) || !div.getDdlIraiRiyu().getSelectedValue().isEmpty();
+                    return !div.getDdlIraiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || !div.getDdlIraiRiyu().getSelectedValue().isEmpty();
                 }
             },
     依頼内容決定日未入力 {
@@ -233,7 +233,7 @@ public enum IchijiSashitome2GoDivSpec implements IPredicate<IchijiSashitome2GoDi
                  */
                 @Override
                 public boolean apply(IchijiSashitome2GoDiv div) {
-                    return !div.getDdlIraiShinsaKekka().getSelectedValue().equals(new RString("申請不要")) || div.getTxtIraiNaiyoKetteiYMD().getValue() != null;
+                    return !div.getDdlIraiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || div.getTxtIraiNaiyoKetteiYMD().getValue() != null;
                 }
             };
 
@@ -241,4 +241,7 @@ public enum IchijiSashitome2GoDivSpec implements IPredicate<IchijiSashitome2GoDi
         return new RString("申請受理");
     }
 
+    private static RString getValue_申請不要() {
+        return new RString("申請不要");
+    }
 }
