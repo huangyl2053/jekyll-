@@ -3,7 +3,7 @@
 <!-- @reamsid_L DBB-1830-050 liuyang -->
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujohosakusei.ITokuChoSoufuJohoSakuseiMapper">
 
-    <select id="selectUe10122T0511NenkinTokuchoKaifuJohotemp" resultMap ="resultMap_TokuChoSoufuJohoSakuseiEntity">
+    <select resultOrdered="true" id="selectUe10122T0511NenkinTokuchoKaifuJohotemp" resultMap ="resultMap_TokuChoSoufuJohoSakuseiEntity">
          SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.allColumns_UeT0511NenkinTokuchoKaifuJoho" />,
         <include refid="allColumns_DbV2001ChoshuHoho" />,
@@ -34,7 +34,7 @@
         INNER JOIN rgdb."UrT0705ChoteiKyotsu"  AS  "UrT0705"
         ON "DbT2003Kibetsu"."choteiId" = "UrT0705"."choteiId"
     </select>
-    <select id="select46UeT0511NenkinTokuchoKaifuJohotemp" resultMap ="resultMap_TokuChoSoufuJohoSakuseiEntity">
+    <select resultOrdered="true" id="select46UeT0511NenkinTokuchoKaifuJohotemp" resultMap ="resultMap_TokuChoSoufuJohoSakuseiEntity">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.allColumns_UeT0511NenkinTokuchoKaifuJoho" />,
         <include refid="allColumns_DbV2001ChoshuHoho" />,
@@ -65,7 +65,7 @@
         INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS  "UrT0705"
         ON "DbT2003Kibetsu"."choteiId" = "UrT0705"."choteiId"
     </select>
-    <select id="select8UeT0511NenkinTokuchoKaifuJohotemp"  resultMap ="resultMap_TokuChoSoufuJohoSakuseiEntity">
+    <select resultOrdered="true"  id="select8UeT0511NenkinTokuchoKaifuJohotemp"  resultMap ="resultMap_TokuChoSoufuJohoSakuseiEntity">
        SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.allColumns_UeT0511NenkinTokuchoKaifuJoho" />,
         <include refid="allColumns_DbV2001ChoshuHoho" />,
@@ -97,7 +97,7 @@
         ON "DbT2003Kibetsu"."choteiId" = "UrT0705"."choteiId"
     </select>
 
-    <select id="selectUeT0515KaigohokenNenkinTokuchoTaishoshaJoho550tempAll"  resultMap ="ResultMap_UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity">
+    <select  resultOrdered="true" id="selectUeT0515KaigohokenNenkinTokuchoTaishoshaJoho550tempAll"  resultMap ="ResultMap_UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity">
         SELECT
         <include refid="allColumns_UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550" />
         FROM
