@@ -7,13 +7,9 @@ package jp.co.ndensan.reams.db.dbd.business.report.dbd522001;
 
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.enkitsuchisho.YokaigoNinteiEnkiTshuchishoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd522001.YokaigoNinteiEnkiTshuchishoReportSource;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
@@ -49,7 +45,7 @@ class YokaigoNinteiEnkiTshuchishoEditor implements IYokaigoNinteiEnkiTshuchishoE
 
     private void edit基本情報(YokaigoNinteiEnkiTshuchishoReportSource source) {
         source.bunshoNo = entity.get文書番号();
-        source.title = DbBusinessConfig.get(ConfigNameDBE.要介護認定延期通知書, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+//       TODO  source.title = DbBusinessConfig.get(ConfigNameDBE.要介護認定延期通知書, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         source.tsuchibun1 = entity.get通知文1();
         source.hihokenshaNo1 = entity.getEntity().getHihokenshaNo().substring(1);
         source.hihokenshaNo2 = entity.getEntity().getHihokenshaNo().substring(2);
