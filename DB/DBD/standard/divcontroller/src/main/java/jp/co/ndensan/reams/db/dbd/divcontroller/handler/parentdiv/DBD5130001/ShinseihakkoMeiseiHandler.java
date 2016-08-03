@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5130001.NinteishinseihakkoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5130001.ShinseihakkoMeiseiDiv;
 import jp.co.ndensan.reams.db.dbd.service.core.ninteikanryoninteishinseijoho.NinteiKanryoNinteiShinseiJohoManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunHorei;
+import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoChild;
@@ -142,8 +144,10 @@ public class ShinseihakkoMeiseiHandler {
     }
 
     private void setZenkaiShinseiNaiyoinfo(RString 認定申請区分法令, RString 認定申請区分申請時, RDate ninteiShinseiYMD) {
-        div.getZenkaiShinseiNaiyo().getTxtShinseiKubunShinseiji().setValue(認定申請区分法令);
-        div.getZenkaiShinseiNaiyo().getTxtShinseiKubunHorei().setValue(認定申請区分申請時);
+        div.getZenkaiShinseiNaiyo().getTxtShinseiKubunShinseiji().setValue(new RString(NinteiShinseiKubunHorei.toValue(
+                Integer.parseInt(認定申請区分法令.toString())).name()));
+        div.getZenkaiShinseiNaiyo().getTxtShinseiKubunHorei().setValue(new RString(NinteiShinseiKubunShinsei.toValue(
+                Integer.parseInt(認定申請区分申請時.toString())).name()));
         div.getZenkaiShinseiNaiyo().getTxtZenkaiShinseiDate().setValue(ninteiShinseiYMD);
     }
 

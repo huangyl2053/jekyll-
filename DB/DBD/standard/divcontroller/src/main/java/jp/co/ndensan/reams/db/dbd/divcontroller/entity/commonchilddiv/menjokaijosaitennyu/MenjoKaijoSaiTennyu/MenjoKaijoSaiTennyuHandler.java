@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHe
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenkoBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.gengaku.ShiharaiHohoHenkoGengaku;
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.TainoHanteiKubun;
-import jp.co.ndensan.reams.db.dbd.service.core.shiharaihohohenko.ShiharaiHohoHenkoManager;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoKanriKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoTorokuKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -104,8 +103,6 @@ public class MenjoKaijoSaiTennyuHandler {
         if (pairs.iterator().hasNext()) {
             return pairs;
         }
-        int index = Integer.parseInt(div.getKey_hannteiIndex().toString());
-        ShiharaiHohoHenkoManager manager = ShiharaiHohoHenkoManager.createInstance();
         update支払方法変更減額();
         div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(ViewStateHolder.get(免除解除再転入ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class)));
         div.getDgMenjoKaijoOrSaitennyu().getClickedItem().setJotai(new RString("修正"));

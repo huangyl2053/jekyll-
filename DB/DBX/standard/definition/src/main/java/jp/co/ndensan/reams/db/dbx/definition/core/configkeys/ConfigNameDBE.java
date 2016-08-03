@@ -1061,7 +1061,11 @@ public enum ConfigNameDBE {
     /**
      * 経過日数
      */
-    経過日数("経過日数");
+    経過日数("経過日数"),
+    /**
+     * 要介護認定延期通知書
+     */
+    要介護認定延期通知書("要介護認定延期通知書");
 
     private final RString fullName;
 

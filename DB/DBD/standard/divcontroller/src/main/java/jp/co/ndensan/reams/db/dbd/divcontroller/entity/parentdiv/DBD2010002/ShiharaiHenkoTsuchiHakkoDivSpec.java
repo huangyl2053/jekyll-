@@ -60,7 +60,7 @@ public enum ShiharaiHenkoTsuchiHakkoDivSpec implements IPredicate<ShiharaiHenkoT
                  */
                 @Override
                 public boolean apply(ShiharaiHenkoTsuchiHakkoDiv div) {
-                    return div.getSashitomeTsuchisho().getTxtSashitomeTsuchishoHakkoDate() != null;
+                    return div.getSashitomeTsuchisho().getTxtSashitomeTsuchishoHakkoDate().getValue() != null;
                 }
             },
     減額発行日の必須入力 {
@@ -72,7 +72,7 @@ public enum ShiharaiHenkoTsuchiHakkoDivSpec implements IPredicate<ShiharaiHenkoT
                  */
                 @Override
                 public boolean apply(ShiharaiHenkoTsuchiHakkoDiv div) {
-                    return div.getGengakuTsuchisho().getTxtGengakuTsuchishoHakkoDate() != null;
+                    return div.getGengakuTsuchisho().getTxtGengakuTsuchishoHakkoDate().getValue() != null;
                 }
             }
 }

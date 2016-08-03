@@ -38,7 +38,7 @@ public class YokaigoNinteiShinseishoBodyEditor implements IYokaigoNinteiShinseis
     }
 
     private YokaigoNinteiShinseishoReportSource bodyEdit(YokaigoNinteiShinseishoReportSource source) {
-        // TODO     RSE項目名が設計書と違い
+
         source.ninshoshaYakushokuMei = entity.get市町村名称();
         source.hihokenshaNo1 = entity.get被保険者番号第1桁();
         source.hihokenshaNo2 = entity.get被保険者番号第2桁();

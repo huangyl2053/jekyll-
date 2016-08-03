@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 /**
  * 帳票設計_DBD522001_要介護認定延期通知書タイトルバッチパラメタークラスです．
  *
- * @reamsid_L DBD-5220-001 chenxin
+ * @reamsid_L DBD-1410-020 chenxin
  */
 @lombok.Getter
 @lombok.Setter

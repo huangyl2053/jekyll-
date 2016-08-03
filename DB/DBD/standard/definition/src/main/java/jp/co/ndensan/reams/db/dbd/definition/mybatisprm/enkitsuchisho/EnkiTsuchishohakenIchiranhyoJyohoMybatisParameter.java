@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 /**
  * バッチ設計_DBD522001_延期通知書出力バッチパラメタークラスです．
  *
- * @reamsid_L DBD-5220-001 chenxin
+ * @reamsid_L DBD-1410-020 chenxin
  */
 @lombok.Getter
 @lombok.Setter

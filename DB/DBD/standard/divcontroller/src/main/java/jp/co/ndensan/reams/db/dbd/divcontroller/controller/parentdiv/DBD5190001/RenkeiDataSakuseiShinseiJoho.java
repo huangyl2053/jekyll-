@@ -37,7 +37,6 @@ public class RenkeiDataSakuseiShinseiJoho {
      * @param div RenkeiDataSakuseiShinseiJohoDiv
      *
      * @return ResponseData<RenkeiDataSakuseiShinseiJohoDiv>
-     * @reamsid_L DBD-1480-010 zhuxiaojun
      */
     public ResponseData<RenkeiDataSakuseiShinseiJohoDiv> onLoad(RenkeiDataSakuseiShinseiJohoDiv div) {
         Code データ区分 = new Code(Datakubun.申請情報.getコード());
@@ -51,7 +50,6 @@ public class RenkeiDataSakuseiShinseiJoho {
      * @param div RenkeiDataSakuseiShinseiJohoDiv
      *
      * @return ResponseData<RenkeiDataSakuseiShinseiJohoDiv>
-     * @reamsid_L DBD-1480-010 zhuxiaojun
      */
     public ResponseData<RenkeiDataSakuseiShinseiJohoDiv> checkInput(RenkeiDataSakuseiShinseiJohoDiv div) {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
@@ -98,7 +96,6 @@ public class RenkeiDataSakuseiShinseiJoho {
      * @param div RenkeiDataSakuseiShinseiJohoDiv
      *
      * @return ResponseData<RenkeiDataSakuseiShinseiJohoDiv>
-     * @reamsid_L DBD-1480-010 zhuxiaojun
      */
     public ResponseData<RenkeiDataSakuseiShinseiJohoDiv> onActive(RenkeiDataSakuseiShinseiJohoDiv div) {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
@@ -113,7 +110,6 @@ public class RenkeiDataSakuseiShinseiJoho {
      * @param div RenkeiDataSakuseiShinseiJohoDiv
      *
      * @return ResponseData<RenkeiDataSakuseiShinseiJohoDiv>
-     * @reamsid_L DBD-1480-010 zhuxiaojun
      */
     public ResponseData<RenkeiDataSakuseiShinseiJohoDiv> btnJokenClear_onClick(RenkeiDataSakuseiShinseiJohoDiv div) {
         getHandler(div).条件をクリア(div);
@@ -126,7 +122,6 @@ public class RenkeiDataSakuseiShinseiJoho {
      * @param div RenkeiDataSakuseiShinseiJohoDiv
      *
      * @return ResponseData<RenkeiDataSakuseiShinseiJohoDiv>
-     * @reamsid_L DBD-1480-010 zhuxiaojun
      */
     public ResponseData<RenkeiDataSakuseiShinseiJohoDiv> onChangeRadioButton(RenkeiDataSakuseiShinseiJohoDiv div) {
         getHandler(div).checkRadioButton();
@@ -139,7 +134,6 @@ public class RenkeiDataSakuseiShinseiJoho {
      * @param div RenkeiDataSakuseiShinseiJohoDiv
      *
      * @return ResponseData<RenkeiDataSakuseiShinseiJohoDiv>
-     * @reamsid_L DBD-1480-010 zhuxiaojun
      */
     public ResponseData<RenkeiDataSakuseiShinseiJohoDiv> validate_check(RenkeiDataSakuseiShinseiJohoDiv div) {
         if (!ResponseHolder.isReRequest()) {
@@ -166,7 +160,6 @@ public class RenkeiDataSakuseiShinseiJoho {
      * @param div RenkeiDataSakuseiShinseiJohoDiv
      *
      * @return ResponseData<DBD519001_NinteishinseiInfoIfParameter>
-     * @reamsid_L DBD-1480-010 zhuxiaojun
      */
 //    public ResponseData<DBD519001_NinteishinseiInfoIfParameter> batch_paramter(RenkeiDataSakuseiShinseiJohoDiv div) {
 //        DBD519001_NinteishinseiInfoIfParameter parameters = new DBD519001_NinteishinseiInfoIfParameter();
