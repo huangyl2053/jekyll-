@@ -5,12 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.enkitsuchisho;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd522002.NinteiEnkiTsuchishoHakkoIchiranhyoReport;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.enkitsuchisho.EnkiTsuchishohakenIchiranhyoJyohoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.enkitsuchisho.EnkiTsuchishoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd522002.NinteiEnkiTsuchishoHakkoIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.enkitsuchisho.IEnkiTsuchishoMapper;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
+import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -19,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -56,10 +64,11 @@ public class EnkiTsuchishohakenIchiranhyoJyohoReportProcess extends BatchProcess
         reportSourceWriter = new ReportSourceWriter(batchReportWriter);
     }
 
-//    @Override
-//    protected void afterExecute() {
-//        outputJokenhyoFactory();
-//    }
+    @Override
+    protected void afterExecute() {
+        outputJokenhyoFactory();
+    }
+
     @Override
     protected void process(EnkiTsuchishoEntity entity) {
         if (entity == null) {
@@ -74,28 +83,39 @@ public class EnkiTsuchishohakenIchiranhyoJyohoReportProcess extends BatchProcess
         }
     }
 
-//    private void outputJokenhyoFactory() {
-//        Association association = AssociationFinderFactory.createInstance().getAssociation();
-//        RString id = ReportIdDBD.DBD522002.getReportId().getColumnValue();
-//        RString ページ数 = new RString(reportSourceWriterA3.pageCount().value());
-//        ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-//                id,
-//                association.getLasdecCode_().getColumnValue(),
-//                association.get市町村名(),
-//                new RString(String.valueOf(JobContextHolder.getJobId())),
-//                get帳票名(),
-//                ページ数,
-//                RString.EMPTY,
-//                RString.EMPTY,
-//                contribute());
-//        OutputJokenhyoFactory.createInstance(item).print();
-//    }
-//
-//    private RString get帳票名() {
-//        RString 介護認定審査会開催番号 = paramter.getShinsakaiKaisaiNo();
-//        RStringBuilder 帳票名 = new RStringBuilder();
-//        帳票名.append(介護認定審査会開催番号.substring(介護認定審査会開催番号.length() - INT_4));
-//        帳票名.append(new RString("　審査会"));
-//        return 帳票名.toRString();
-//    }
+    private void outputJokenhyoFactory() {
+        Association association = AssociationFinderFactory.createInstance().getAssociation();
+        RString id = ReportIdDBD.DBD522002.getReportId().getColumnValue();
+        RString ページ数 = new RString(reportSourceWriter.pageCount().value());
+        ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
+                id,
+                association.getLasdecCode_().getColumnValue(),
+                association.get市町村名(),
+                new RString(String.valueOf(JobContextHolder.getJobId())),
+                new RString("要介護認定延期通知書発行一覧表"),
+                ページ数,
+                new RString("無し"),
+                RString.EMPTY,
+                contribute());
+        OutputJokenhyoFactory.createInstance(item).print();
+    }
+
+    private List<RString> contribute() {
+        List<RString> 出力条件 = new ArrayList<>();
+        出力条件.add(条件(new RString("処理見込み日From"), parameter.get処理見込み日From().wareki().toDateString()));
+        出力条件.add(条件(new RString("処理見込み日To"), parameter.get処理見込み日To().wareki().toDateString()));
+        出力条件.add(条件(new RString("通知書発行日"), parameter.get通知書発行日().wareki().toDateString()));
+        出力条件.add(条件(new RString("申請書管理番号リスト"), new RString("無し")));
+        return 出力条件;
+    }
+
+    private RString 条件(RString バッチパラメータ名, RString 値) {
+        RStringBuilder 条件 = new RStringBuilder();
+        条件.append(new RString("【"));
+        条件.append(バッチパラメータ名);
+        条件.append(new RString("】"));
+        条件.append(値);
+        return 条件.toRString();
+    }
+
 }
