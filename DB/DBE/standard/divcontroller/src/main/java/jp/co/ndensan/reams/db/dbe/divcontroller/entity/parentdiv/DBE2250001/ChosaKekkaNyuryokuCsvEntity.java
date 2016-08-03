@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 画面設計_DBE2250001_認定調査データ取込（モバイル）データCSVEntityクラスです。
  *
- * @reamsid_L DBE-225-0001 houtianpeng
+ * @reamsid_L DBE-1870-010 houtianpeng
  */
 @lombok.Setter
 @lombok.Getter
