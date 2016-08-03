@@ -32,7 +32,7 @@ public class ShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchParam
                 || 選択.equals(getParameter().getChohyoIin_itiziHanteiFalg())
                 || 選択.equals(getParameter().getChohyoIin_tokkiJikouHanteiFalg())
                 || 選択.equals(getParameter().getChohyoIin_ikenshoFalg())
-                || 選択.equals(getParameter().getChoyoIin_sonotaSiryoFalg())
+                || 選択.equals(getParameter().getChohyoIin_sonotaSiryoFalg())
                 || 選択.equals(getParameter().getChohyoIin_tuutishoFalg())
                 || 選択.equals(getParameter().getChohyoIin_hanteiFalg())) {
             executeStep(委員_審査会資料一括作成);

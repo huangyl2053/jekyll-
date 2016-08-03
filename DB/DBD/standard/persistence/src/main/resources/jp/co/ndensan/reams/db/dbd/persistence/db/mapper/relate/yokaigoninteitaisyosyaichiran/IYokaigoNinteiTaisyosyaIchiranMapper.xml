@@ -59,7 +59,7 @@
 																		
 	WHERE	rgdb."DbT4001JukyushaDaicho"."rirekiNo" = '0000'
             AND	rgdb."DbT4102NinteiKekkaJoho"."nijiHanteiYokaigoJotaiKubunCode" != ''
-            AND	rgdb."DbT4102NinteiKekkaJoho"."nijiHanteiYokaigoJotaiKubunCode" != NULL
+            AND	rgdb."DbT4102NinteiKekkaJoho"."nijiHanteiYokaigoJotaiKubunCode" IS NOT NULL
         
         ORDER BY rgdb."DbT4102NinteiKekkaJoho"."nijiHanteiYMD"
     </select>

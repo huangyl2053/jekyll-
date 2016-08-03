@@ -91,4 +91,14 @@ public enum TsukiShorkiKubun implements ITsukiShorkiKubun {
     public RString getName() {
         return RString.EMPTY;
     }
+
+    /**
+     * 区分を返します。
+     *
+     * @return 区分
+     */
+    @Override
+    public RString get区分() {
+        return fullName;
+    }
 }

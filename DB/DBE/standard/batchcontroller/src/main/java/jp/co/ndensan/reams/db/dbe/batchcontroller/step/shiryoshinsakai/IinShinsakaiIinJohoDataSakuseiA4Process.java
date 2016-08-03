@@ -101,7 +101,7 @@ public class IinShinsakaiIinJohoDataSakuseiA4Process extends BatchProcessBase<Sh
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
                 new RString(JobContextHolder.getJobId()),
-                paramter.getShinsakaiKaisaiNo().substring(paramter.getShinsakaiKaisaiNo().length() - INT_4),
+                get帳票名(),
                 new RString(1),
                 RString.EMPTY,
                 RString.EMPTY,
@@ -124,5 +124,13 @@ public class IinShinsakaiIinJohoDataSakuseiA4Process extends BatchProcessBase<Sh
         条件.append(new RString("】"));
         条件.append(値);
         return 条件.toRString();
+    }
+
+    private RString get帳票名() {
+        RString 介護認定審査会開催番号 = paramter.getShinsakaiKaisaiNo();
+        RStringBuilder 帳票名 = new RStringBuilder();
+        帳票名.append(介護認定審査会開催番号.substring(介護認定審査会開催番号.length() - INT_4));
+        帳票名.append(new RString("　審査会"));
+        return 帳票名.toRString();
     }
 }

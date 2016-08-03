@@ -10,13 +10,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWariateJohoBusiness;
-import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoa4.ShujiiikenshoA4Report;
+import jp.co.ndensan.reams.db.dbe.business.report.shujiiikensho1a4.Shujiiikensho1A4Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikensho1a4.ShujiiikenshoA4ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoa3.Shujiiikensho1A4ReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -43,12 +43,12 @@ public class JimuIkenshoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsakai
     private static final RString SELECT_JIMUWARIATEJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper.get共通情報");
     private static final List<RString> PAGE_BREAK_KEYS_A4 = Collections.unmodifiableList(Arrays.asList(
-            new RString(ShujiiikenshoA4ReportSource.ReportSourceFields.hokenshaNo.name())));
+            new RString(Shujiiikensho1A4ReportSource.ReportSourceFields.hokenshaNo.name())));
     private IinShinsakaiIinJohoProcessParameter paramter;
     private JimuShinsakaiIinJohoMyBatisParameter myBatisParameter;
     @BatchWriter
-    private BatchReportWriter<ShujiiikenshoA4ReportSource> batchWriteA4;
-    private ReportSourceWriter<ShujiiikenshoA4ReportSource> reportSourceWriterA4;
+    private BatchReportWriter<Shujiiikensho1A4ReportSource> batchWriteA4;
+    private ReportSourceWriter<Shujiiikensho1A4ReportSource> reportSourceWriterA4;
     private JimuShinsakaiWariateJohoBusiness business;
 
     @Override
@@ -65,14 +65,14 @@ public class JimuIkenshoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsakai
     @Override
     protected void usualProcess(ShinsakaiSiryoKyotsuEntity entity) {
         business = new JimuShinsakaiWariateJohoBusiness(entity);
-        ShujiiikenshoA4Report reportA4 = new ShujiiikenshoA4Report(business);
+        Shujiiikensho1A4Report reportA4 = new Shujiiikensho1A4Report(business);
         reportA4.writeBy(reportSourceWriterA4);
     }
 
     @Override
     protected void createWriter() {
         batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517151.getReportId().value())
-                .addBreak(new BreakerCatalog<ShujiiikenshoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A4))
+                .addBreak(new BreakerCatalog<Shujiiikensho1A4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A4))
                 .create();
         reportSourceWriterA4 = new ReportSourceWriter<>(batchWriteA4);
     }

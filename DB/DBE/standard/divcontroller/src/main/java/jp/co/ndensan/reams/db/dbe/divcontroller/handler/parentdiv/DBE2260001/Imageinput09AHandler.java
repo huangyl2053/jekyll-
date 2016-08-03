@@ -1330,6 +1330,33 @@ public class Imageinput09AHandler {
             }
             builder.setShujiiIkenshoIkenItem(なしデータ).build();
         }
+        if (!意見項目連番レスト.contains(IkenshoKomokuMapping09A.麻痺_右下肢.getコード())) {
+            ShujiiIkenshoIkenItem なしデータ = new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
+                    data.getT5301_主治医意見書作成依頼履歴番号(), rStringToInt(IkenshoKomokuMapping09A.麻痺_右下肢.getコード()));
+            なしデータ = なしデータ.createBuilderForEdit().set意見項目(data.get麻痺_右下肢()).build();
+            if (isNotEmpty(data.getT5101_厚労省IF識別コード())) {
+                なしデータ = なしデータ.createBuilderForEdit().set厚労省IF識別コード(new Code(data.getT5101_厚労省IF識別コード())).build();
+            }
+            builder.setShujiiIkenshoIkenItem(なしデータ).build();
+        }
+        if (!意見項目連番レスト.contains(IkenshoKomokuMapping09A.失調_不随意運動_上肢_右.getコード())) {
+            ShujiiIkenshoIkenItem なしデータ = new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
+                    data.getT5301_主治医意見書作成依頼履歴番号(), rStringToInt(IkenshoKomokuMapping09A.失調_不随意運動_上肢_右.getコード()));
+            なしデータ = なしデータ.createBuilderForEdit().set意見項目(data.get上肢_右()).build();
+            if (isNotEmpty(data.getT5101_厚労省IF識別コード())) {
+                なしデータ = なしデータ.createBuilderForEdit().set厚労省IF識別コード(new Code(data.getT5101_厚労省IF識別コード())).build();
+            }
+            builder.setShujiiIkenshoIkenItem(なしデータ).build();
+        }
+        if (!意見項目連番レスト.contains(IkenshoKomokuMapping09A.介護サービスの留意事項_運動.getコード())) {
+            ShujiiIkenshoIkenItem なしデータ = new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
+                    data.getT5301_主治医意見書作成依頼履歴番号(), rStringToInt(IkenshoKomokuMapping09A.介護サービスの留意事項_運動.getコード()));
+            なしデータ = なしデータ.createBuilderForEdit().set意見項目(data.get運動()).build();
+            if (isNotEmpty(data.getT5101_厚労省IF識別コード())) {
+                なしデータ = なしデータ.createBuilderForEdit().set厚労省IF識別コード(new Code(data.getT5101_厚労省IF識別コード())).build();
+            }
+            builder.setShujiiIkenshoIkenItem(なしデータ).build();
+        }
     }
 
     private ShujiiIkenshoKinyuItem set09A記入項目1(
@@ -1961,6 +1988,10 @@ public class Imageinput09AHandler {
         if (IkenshoKomokuMapping09A.生活機能の維持_改善の見通し.getコード().equals(new RString(item.get連番()))) {
             item = item.createBuilderForEdit().set意見項目(空白).build();
             意見項目連番レスト.add(IkenshoKomokuMapping09A.生活機能の維持_改善の見通し.getコード());
+        }
+        if (IkenshoKomokuMapping09A.介護サービスの留意事項_運動.getコード().equals(new RString(item.get連番()))) {
+            item = item.createBuilderForEdit().set意見項目(data.get運動()).build();
+            意見項目連番レスト.add(IkenshoKomokuMapping09A.介護サービスの留意事項_運動.getコード());
         }
         return item;
     }

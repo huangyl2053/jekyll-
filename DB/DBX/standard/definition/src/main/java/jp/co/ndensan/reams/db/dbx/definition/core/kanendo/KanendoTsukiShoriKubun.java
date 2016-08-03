@@ -86,4 +86,14 @@ public enum KanendoTsukiShoriKubun implements ITsukiShorkiKubun {
     public RString getName() {
         return fullName;
     }
+
+    /**
+     * 区分を返します。
+     *
+     * @return 区分
+     */
+    @Override
+    public RString get区分() {
+        return fullName;
+    }
 }

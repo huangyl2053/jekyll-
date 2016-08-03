@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 /**
  * 委員用主治医意見書A3のReportSourceクラスです。
  *
- * @reamsid_L DBE-0150-140 lishengli
+ * @reamsid_L DBE-0150-240 lishengli
  */
 public class ShujiiikenshoA3ReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

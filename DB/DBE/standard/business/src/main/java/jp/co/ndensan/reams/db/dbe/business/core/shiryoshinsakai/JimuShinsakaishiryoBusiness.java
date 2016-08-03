@@ -168,6 +168,9 @@ public class JimuShinsakaishiryoBusiness {
      * @return 年齢
      */
     public RString get年齢() {
+        if (johoEntity.getAge() == 0) {
+            return RString.EMPTY;
+        }
         return new RString(johoEntity.getAge());
     }
 
@@ -220,24 +223,6 @@ public class JimuShinsakaishiryoBusiness {
     }
 
     /**
-     * 二時判定認定有効開始年月日を取得します。
-     *
-     * @return 二時判定認定有効開始年月日
-     */
-    public FlexibleDate get二時判定認定有効開始年月日() {
-        return johoEntity.getNijiHanteiNinteiYukoKaishiYMD();
-    }
-
-    /**
-     * 二時判定認定有効終了年月日を取得します。
-     *
-     * @return 二時判定認定有効終了年月日
-     */
-    public FlexibleDate get二時判定認定有効終了年月日() {
-        return johoEntity.getNijiHanteiNinteiYukoShuryoYMD();
-    }
-
-    /**
      * 性別を取得します。
      *
      * @return 性別
@@ -255,19 +240,34 @@ public class JimuShinsakaishiryoBusiness {
         return get要介護状態区分(johoEntity.getNijiHanteiYokaigoJotaiKubunCode());
     }
 
-    private RString get前回期間(int 期間) {
-        RStringBuilder 前回期間 = new RStringBuilder(期間);
-        前回期間.append(new RString("ヵ月"));
-        return 前回期間.toRString();
-    }
-
     /**
      * 前回期間_下を取得します。
      *
      * @return 前回期間_下
      */
     public RString get前回期間_下() {
-        return new RString("H02.01.01～H03.01.01");
+        RStringBuilder 前回期間_下 = new RStringBuilder();
+        if (johoEntity.getNijiHanteiNinteiYukoKaishiYMD() != null && !johoEntity.getNijiHanteiNinteiYukoKaishiYMD().isEmpty()) {
+            前回期間_下.append(パターン33(johoEntity.getNijiHanteiNinteiYukoKaishiYMD()));
+        }
+        if (johoEntity.getNijiHanteiNinteiYukoKaishiYMD() != null && !johoEntity.getNijiHanteiNinteiYukoKaishiYMD().isEmpty()
+                && johoEntity.getNijiHanteiNinteiYukoShuryoYMD() != null && !johoEntity.getNijiHanteiNinteiYukoShuryoYMD().isEmpty()) {
+            前回期間_下.append("～");
+        }
+        if (johoEntity.getNijiHanteiNinteiYukoShuryoYMD() != null && !johoEntity.getNijiHanteiNinteiYukoShuryoYMD().isEmpty()) {
+            前回期間_下.append(パターン33(johoEntity.getNijiHanteiNinteiYukoShuryoYMD()));
+        }
+        return 前回期間_下.toRString();
+    }
+
+    private RString get前回期間(int 期間) {
+        if (期間 == 0) {
+            return RString.EMPTY;
+        }
+        RStringBuilder 前回期間 = new RStringBuilder();
+        前回期間.append(期間);
+        前回期間.append(new RString("ヵ月"));
+        return 前回期間.toRString();
     }
 
     private RString get要介護状態区分(Code 状態区分コード) {
