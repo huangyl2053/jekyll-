@@ -15,7 +15,7 @@ import org.apache.ibatis.annotations.Param;
 /**
  * 要介護認定通知書発行の処理します。
  *
- * @reamsid_L DBE-1430-010 lit
+ * @reamsid_L DBD-1430-010 lit
  */
 public interface IYokaigoNinteiTsutishoMapper {
 

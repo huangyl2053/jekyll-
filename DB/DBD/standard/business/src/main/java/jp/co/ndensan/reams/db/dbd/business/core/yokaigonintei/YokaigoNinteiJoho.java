@@ -1013,7 +1013,7 @@ public class YokaigoNinteiJoho implements Serializable {
      * @return 介護認定審査会意見
      */
     public RString get介護認定審査会意見() {
-        return null == 要介護認定結果情報Entity ? RString.EMPTY : 要介護認定結果情報Entity.getNinteishinsakaiIkenShurui();
+        return null == 要介護認定結果情報Entity ? RString.EMPTY : 要介護認定結果情報Entity.getShinsakaiIken();
     }
 
     /**

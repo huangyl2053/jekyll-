@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * {@link YokaigoNinteiTsutisho}の編集を行うビルダークラスです。
  *
- * @reamsid_L DBE-1430-010 lit
+ * @reamsid_L DBD-1430-010 lit
  */
 public class YokaigoNinteiTsutishoBuilder {
 
