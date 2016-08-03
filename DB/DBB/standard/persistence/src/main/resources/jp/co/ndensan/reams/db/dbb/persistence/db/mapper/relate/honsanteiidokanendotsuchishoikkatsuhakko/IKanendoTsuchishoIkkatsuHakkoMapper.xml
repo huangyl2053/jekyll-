@@ -2984,7 +2984,7 @@
     </update>
     
     <select id="select異動賦課情報一時" resultMap="resultMap_IdoFukaJohoTemp"
-            parameterType="java.util.Map" fetchSize="500">
+            parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
         SELECT
             A.*
         FROM
@@ -3003,7 +3003,7 @@
     </select>
     
     <select id="select通知書発行後異動者" resultMap="resultMap_IdoFukaJohoTemp"
-            parameterType="java.util.Map" fetchSize="500">
+            parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
         SELECT
             A.*
         FROM
@@ -3021,7 +3021,7 @@
     </select>
     
     <select id="select異動賦課情報一時変更" resultMap="resultMap_IdoFukaJohoTemp"
-            parameterType="java.util.Map" fetchSize="500">
+            parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
         SELECT
             A.*
         FROM
@@ -3046,7 +3046,7 @@
     </select>
     
     <select id="select変更通知書発行後異動者" resultMap="resultMap_IdoFukaJohoTemp"
-            parameterType="java.util.Map" fetchSize="500">
+            parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
         SELECT
             A.*
         FROM
@@ -3070,7 +3070,7 @@
     </select>
     
     <select id="select異動賦課情報一時納入" resultMap="resultMap_IdoFukaJohoTemp"
-            parameterType="java.util.Map" fetchSize="500">
+            parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
         SELECT
             A.*
         FROM
@@ -3095,7 +3095,7 @@
     </select>
     
     <select id="select納入通知書発行後異動者" resultMap="resultMap_IdoFukaJohoTemp"
-            parameterType="java.util.Map" fetchSize="500">
+            parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
         SELECT
             A.*
         FROM
