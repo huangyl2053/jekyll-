@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class NinteishinseihakkoHandler {
 
     private final NinteishinseihakkoDiv div;
-    private static final RString 市町村コード = new RString("209007");
+    private static final RString 市町村コード = new RString("123456");
     private static final RString 識別コード = new RString("000000001011002");
     private static final RString HDN_SETAI_KODO = new RString("1234567");
     private static final RString 被保険者番号 = new RString("2190000003");
