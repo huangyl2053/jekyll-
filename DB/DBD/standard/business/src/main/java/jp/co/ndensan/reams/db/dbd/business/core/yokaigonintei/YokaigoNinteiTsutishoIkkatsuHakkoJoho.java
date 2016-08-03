@@ -53,7 +53,7 @@ public class YokaigoNinteiTsutishoIkkatsuHakkoJoho {
      * @return 対象開始日時 RTime
      */
     public RTime get対象開始日時() {
-        return null == entity ? null : entity.get対象開始日時();
+        return null; //== entity ? null : entity.get対象開始日時();
     }
 
     /**
@@ -62,7 +62,7 @@ public class YokaigoNinteiTsutishoIkkatsuHakkoJoho {
      * @return 対象終了日時 RTime
      */
     public RTime get対象終了日時() {
-        return null == entity ? null : entity.get対象終了日時();
+        return null; //== entity ? null : entity.get対象終了日時();
     }
 
     /**
@@ -71,7 +71,7 @@ public class YokaigoNinteiTsutishoIkkatsuHakkoJoho {
      * @return 年度 RString
      */
     public RString get年度() {
-        return null == entity ? RString.EMPTY : entity.get年度();
+        return null; // == entity ? RString.EMPTY : entity.get年度();
     }
 
     /**
@@ -80,6 +80,6 @@ public class YokaigoNinteiTsutishoIkkatsuHakkoJoho {
      * @return 年度内連番 Integer
      */
     public Integer get年度内連番() {
-        return null == entity ? null : entity.get年度内連番();
+        return null; // == entity ? null : entity.get年度内連番();
     }
 }
