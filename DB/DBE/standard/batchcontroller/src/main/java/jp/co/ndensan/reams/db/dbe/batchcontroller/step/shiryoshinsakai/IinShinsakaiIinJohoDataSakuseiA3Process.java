@@ -7,12 +7,16 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishiryoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.report.shinsakaishiryoa3.ShinsakaishiryoA3Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinShinsakaiIinJohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiTaiyosyaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishiryoa3.ShinsakaishiryoA3ReportSource;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.IsHaishi;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -25,8 +29,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -36,37 +40,36 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-0150-200 linghuhang
  */
-public class IinShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<ShinseiJohoEntity> {
+public class IinShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<ShinsakaiTaiyosyaJohoEntity> {
 
-    private static final RString SELECT_SHINASKAIIINJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
-            + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getShinseiJoho");
+    private static final RString SELECT_SHINSAKAITAIYOSYAJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
+            + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getShinsakaiTaiyosyaJoho");
     private static final int INT_4 = 4;
     private IinShinsakaiIinJohoProcessParameter paramter;
-//    private IShiryoShinsakaiIinMapper mapper;
-    private IinShinsakaiIinJohoMyBatisParameter myBatisParameter;
-//    private List<ShinsakaiIinJohoEntity> shinsakaiIinJohoList;
+    private IShiryoShinsakaiIinMapper mapper;
+    private List<ShinsakaiIinJohoEntity> shinsakaiIinJohoList;
     private int no;
-//    private int count;
+    private int count;
     @BatchWriter
     private BatchReportWriter<ShinsakaishiryoA3ReportSource> batchWriteA3;
     private ReportSourceWriter<ShinsakaishiryoA3ReportSource> reportSourceWriterA3;
 
     @Override
     protected void initialize() {
-//        mapper = getMapper(IShiryoShinsakaiIinMapper.class);
-        myBatisParameter = paramter.toIinShinsakaiIinJohoMyBatisParameter();
+        mapper = getMapper(IShiryoShinsakaiIinMapper.class);
+        IinShinsakaiIinJohoMyBatisParameter myBatisParameter = paramter.toIinShinsakaiIinJohoMyBatisParameter();
         myBatisParameter.setOrderKakuteiFlg(ShinsakaiOrderKakuteiFlg.確定.is介護認定審査会審査順確定());
         myBatisParameter.setHaishiFlag_False(IsHaishi.有効.is廃止());
         myBatisParameter.setHaishiFlag_True(IsHaishi.廃止.is廃止());
-        myBatisParameter.setSisutemuYMD(new FlexibleDate(RDate.getNowDate().toDateString()));
-//        shinsakaiIinJohoList = mapper.getShinsakaiIinJoho(myBatisParameter);
-//        count = mapper.getShinseiJohoCount(myBatisParameter);
+        myBatisParameter.setSisutemuYMD(FlexibleDate.getNowDate());
+        shinsakaiIinJohoList = mapper.getShinsakaiIinJoho(myBatisParameter);
+        count = mapper.getShinsakaiTaiyosyaJohoCount(myBatisParameter);
         no = 0;
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(SELECT_SHINASKAIIINJOHO, myBatisParameter);
+        return new BatchDbReader(SELECT_SHINSAKAITAIYOSYAJOHO, paramter.toIinShinsakaiIinJohoMyBatisParameter());
     }
 
     @Override
@@ -76,11 +79,13 @@ public class IinShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<Sh
     }
 
     @Override
-    protected void process(ShinseiJohoEntity entity) {
-//        DbT5102NinteiKekkaJohoEntity dbT5102Entity = get前回要介護認定結果情報(entity.getShinseishoKanriNo());
-//        JimuShinsakaishiryoBusiness business = new JimuShinsakaishiryoBusiness(paramter, entity, shinsakaiIinJohoList, no, count);
-//        ShinsakaishiryoA3Report report = new ShinsakaishiryoA3Report(business);
-//        report.writeBy(reportSourceWriterA3);
+    protected void process(ShinsakaiTaiyosyaJohoEntity entity) {
+        entity.setShoKisaiHokenshaNo(RString.EMPTY);
+        entity.setHihokenshaNo(RString.EMPTY);
+        entity.setHihokenshaName(AtenaMeisho.EMPTY);
+        JimuShinsakaishiryoBusiness business = new JimuShinsakaishiryoBusiness(paramter, entity, shinsakaiIinJohoList, no, count);
+        ShinsakaishiryoA3Report report = new ShinsakaishiryoA3Report(business);
+        report.writeBy(reportSourceWriterA3);
         no = no + 1;
     }
 
@@ -89,23 +94,15 @@ public class IinShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<Sh
         outputJokenhyoFactory();
     }
 
-//    private DbT5102NinteiKekkaJohoEntity get前回要介護認定結果情報(ShinseishoKanriNo 申請管理番号) {
-//        myBatisParameter.setShinseishoKanriNo(申請管理番号);
-//        DbT5121ShinseiRirekiJohoEntity dbT5121Entity = mapper.get前回の申請管理番号(myBatisParameter);
-//        myBatisParameter.setShinseishoKanriNo(dbT5121Entity.getZenkaiShinseishoKanriNo());
-//        return mapper.get前回二次判定(myBatisParameter);
-//    }
     private void outputJokenhyoFactory() {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
-        RString id = ReportIdDBE.DBE517001.getReportId().getColumnValue();
-        RString ページ数 = new RString(reportSourceWriterA3.pageCount().value());
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                id,
+                ReportIdDBE.DBE517001.getReportId().value(),
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
-                new RString(String.valueOf(JobContextHolder.getJobId())),
+                new RString(JobContextHolder.getJobId()),
                 get帳票名(),
-                ページ数,
+                new RString(1),
                 RString.EMPTY,
                 RString.EMPTY,
                 contribute());
