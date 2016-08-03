@@ -7,28 +7,21 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashik
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidationMessage;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidator;
-//import jp.co.ndensan.reams.db.dbz.business.hokensha.IKoikiKoseiShichoson;
-//import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko.HihokenshaShikakuHakkoDiv.HakkoshoType.被保険者証;
-import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionary;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
-//// TODO N8187 久保田 以下のimportはURF.IKaigoJigyoshaDaichoManager 等が使用可能になったら有効にする。
-////import jp.co.ndensan.reams.ur.urf.model.relate.KaigoJigyoshaRelateModel;
-////import jp.co.ndensan.reams.ur.urf.realservice.IKaigoJigyoshaDaichoManager;
-////import jp.co.ndensan.reams.ur.urf.realservice.KaigoJigyoshaDaichoManagerFactory;
-////import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 
 /**
  * 共有子Div「被保険者証資格者証発行」のHandlerクラスです。
@@ -855,9 +848,9 @@ public class HihokenshaShikakuHakkoHandler {
 
         IValidationMessages messages = new HihokenshaShikakuHakkoValidator(div.getYukoKigenInfo().getDdlKofuJiyu().getSelectedValue()).validate();
 
-        ValidationMessageControlDictionary dictionay = new ValidationMessageControlDictionary(
-                new ValidationMessageControlPair(HihokenshaShikakuHakkoValidationMessage.交付事由が未選択, div.getYukoKigenInfo().getDdlKofuJiyu())
-        );
+        ValidationMessageControlDictionary dictionay = new ValidationMessageControlDictionaryBuilder()
+                .add(HihokenshaShikakuHakkoValidationMessage.交付事由が未選択, div.getYukoKigenInfo().getDdlKofuJiyu())
+                .build();
         return dictionay.check(messages);
     }
 
