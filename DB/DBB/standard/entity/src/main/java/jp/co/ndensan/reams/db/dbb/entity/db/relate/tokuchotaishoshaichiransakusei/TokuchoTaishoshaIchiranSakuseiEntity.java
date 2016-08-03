@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.entity.db.tokuchotaishoshaichiransakusei;
+package jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchotaishoshaichiransakusei;
 
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2019TokuchoMidoteiJohoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;

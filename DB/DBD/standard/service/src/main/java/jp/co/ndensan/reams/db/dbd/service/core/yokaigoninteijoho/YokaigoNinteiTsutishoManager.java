@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 要介護認定通知書発行の処理します。
  *
- * @reamsid_L DBE-1430-010 lit
+ * @reamsid_L DBD-1430-010 lit
  */
 public class YokaigoNinteiTsutishoManager {
 

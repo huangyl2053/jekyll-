@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei;
 
-import jp.co.ndensan.reams.db.dbb.entity.db.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
 import jp.co.ndensan.reams.ue.uex.definition.core.SeibetsuCodeNenkinTokucho;

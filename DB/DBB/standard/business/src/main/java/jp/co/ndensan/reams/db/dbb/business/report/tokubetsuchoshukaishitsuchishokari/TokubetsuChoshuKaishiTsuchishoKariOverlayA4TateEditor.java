@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesak
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -26,16 +27,10 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor implements
         ITokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor {
 
-    private static final int INDEX_0 = 0;
-    private static final int INDEX_1 = 1;
-    private static final int INDEX_2 = 2;
-    private static final int INDEX_4 = 4;
     private static final int INDEX_5 = 5;
     private static final int INDEX_7 = 7;
     private static final int INDEX_8 = 8;
     private static final int INDEX_10 = 10;
-
-    private static final RString HEI = new RString("平");
 
     private final KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報;
     private final RString 通知書定型文１;
@@ -129,19 +124,10 @@ public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor implements
 
         if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人() != null
                 && 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日() != null) {
-            RString 生年月日_first = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日().substring(INDEX_0, INDEX_1);
-            if (HEI.equals(生年月日_first)) {
-                RString 生年月日の年度 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日().substring(INDEX_2, INDEX_4);
-                source.birthYYYY = HEI.concat(生年月日の年度);
-                source.birthMM = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日().substring(INDEX_5, INDEX_7);
-                source.birthDD = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日().substring(INDEX_8, INDEX_10);
-            } else {
-                RString 生年月日 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日();
-                FlexibleYear 年度 = new FlexibleYear(生年月日.substring(INDEX_0, INDEX_4).toString());
-                source.birthYYYY = 年度.wareki().toDateString();
-                source.birthMM = 生年月日.substring(INDEX_5, INDEX_7);
-                source.birthDD = 生年月日.substring(INDEX_8, INDEX_10);
-            }
+            FlexibleDate 生年月日 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日_A4();
+            source.birthYYYY = 生年月日.getYear().wareki().toDateString();
+            source.birthMM = new RString(生年月日.toString()).substring(INDEX_5, INDEX_7);
+            source.birthDD = new RString(生年月日.toString()).substring(INDEX_8, INDEX_10);
         }
     }
 

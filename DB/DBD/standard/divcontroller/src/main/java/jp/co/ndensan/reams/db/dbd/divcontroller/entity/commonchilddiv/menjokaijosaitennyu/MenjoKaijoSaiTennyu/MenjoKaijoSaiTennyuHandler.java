@@ -53,17 +53,14 @@ public class MenjoKaijoSaiTennyuHandler {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = DataPassingConverter.deserialize(div.getKey_ShiharaiHohoHenkoKanri(), ShiharaiHohoHenko.class);
         ViewStateHolder.put(免除解除再転入ダイアロググキー.支払方法変更管理業務概念, 支払方法変更管理業務概念);
         List<ShiharaiHohoHenko> 支払方法変更レコード = new ArrayList();
-        if (支払方法変更管理業務概念 != null) {
-            if (支払方法変更管理業務概念.get被保険者番号().value().equals(div.getKey_HihokenshaNo())
-                    && 支払方法変更管理業務概念.get管理区分().equals(ShiharaiHenkoKanriKubun._１号給付額減額.getコード())
-                    && 支払方法変更管理業務概念.get登録区分().equals(ShiharaiHenkoTorokuKubun._１号給付額減額登録.getコード())) {
-                if (支払方法変更管理業務概念.getShiharaiHohoHenkoGengakuList().isEmpty()) {
-                    throw new ApplicationException(UrErrorMessages.対象ファイルが存在しない.getMessage().replace("支払方法変更"));
-                }
-                支払方法変更レコード.add(支払方法変更管理業務概念);
-            }
+        if (支払方法変更管理業務概念 != null
+                && 支払方法変更管理業務概念.get被保険者番号().value().equals(div.getKey_HihokenshaNo())
+                && 支払方法変更管理業務概念.get管理区分().equals(ShiharaiHenkoKanriKubun._１号給付額減額.getコード())
+                && 支払方法変更管理業務概念.get登録区分().equals(ShiharaiHenkoTorokuKubun._１号給付額減額登録.getコード())
+                && !支払方法変更管理業務概念.getShiharaiHohoHenkoGengakuList().isEmpty()) {
+            支払方法変更レコード.add(支払方法変更管理業務概念);
         }
-        if (支払方法変更管理業務概念 == null || 支払方法変更レコード.isEmpty()) {
+        if (支払方法変更管理業務概念 == null || 支払方法変更レコード.isEmpty() || 支払方法変更管理業務概念.getShiharaiHohoHenkoGengakuList().isEmpty()) {
             throw new ApplicationException(UrErrorMessages.対象ファイルが存在しない.getMessage().replace("支払方法変更"));
         }
         initializeDisplayData(ViewStateHolder.get(免除解除再転入ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class));

@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  *
  * 要介護認定通知書発行画面のDivControllerです。
  *
- * @reamsid_L DBE-1430-010 lit
+ * @reamsid_L DBD-1430-010 lit
  */
 public class NinteiTsuchishoHakko {
 
