@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.commonchilddiv.ShuruiGendoInfo;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.ServiceTypeDetails;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShuruiGendoInfo.ShuruiGendoInfoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShuruiGendoInfo.ShuruiGendoInfoHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -28,13 +29,13 @@ public class ShuruiGendoInfo {
      */
     public ResponseData<ShuruiGendoInfoDiv> onLoad(ShuruiGendoInfoDiv div) {
         FlexibleYearMonth riyoYM = ViewStateHolder.get(ViewStateKeys.利用年月, FlexibleYearMonth.class);
-        List 給付計画自己作成List = ViewStateHolder.get(ViewStateKeys.給付計画自己作成EntityList, List.class);
+        List<ServiceTypeDetails> 給付計画自己作成List = ViewStateHolder.get(ViewStateKeys.給付計画自己作成EntityList, List.class);
         getHandler(div).init(riyoYM, 給付計画自己作成List);
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 「閉じる」ボタン上のメソッドます。
+     * 「閉じる」ボタン上のメソッドです。
      *
      * @param div ShuruiGendoInfoDiv
      * @return ResponseData

@@ -64,6 +64,7 @@ public class IchijihanteikekkahyoA4Editor implements IIchijihanteikekkahyoA4Edit
         source.zenkaiNijishuryoYMD = パターン17(item.get前回認定有効期間終了年月日());
         source.zenkaiNijihanteiDATE = パターン17(item.get前回認定日());
         source.zenkaiJotaizo = item.get前回状態像();
+        source.kanriNo = item.get管理番号();
         source.sakuseiGengo = get元号(item.get審査会資料作成年月日());
         source.sakuseiYY = get年(item.get審査会資料作成年月日());
         source.sakuseiMM = get月(item.get審査会資料作成年月日());

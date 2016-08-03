@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.shiryoshinsakai;
 
+import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinIkenshoDataSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
@@ -76,9 +77,9 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
     @BatchParameter(key = SAKUSEIJOKEN, name = "作成条件")
     private RString sakuseiJoken;
     @BatchParameter(key = BANGOSTART, name = "開始資料番号")
-    private Decimal bangoStart;
+    private int bangoStart;
     @BatchParameter(key = BANGOEND, name = "終了資料番号")
-    private Decimal bangoEnd;
+    private int bangoEnd;
     @BatchParameter(key = CHOYOJIMU_TAISHOUSHAFALG, name = "事務局審査会対象者一覧フラグ")
     private RString choyoJimu_taishoushaFalg;
     @BatchParameter(key = CHOYOJIMU_TOKKIJIKOUFALG, name = "事務局特記事項フラグ")
@@ -108,7 +109,7 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
     @BatchParameter(key = CHOHYOIIN_IKENSHOFALG, name = "委員用主治医意見書フラグ")
     private RString chohyoIin_ikenshoFalg;
     @BatchParameter(key = CHOYOIIN_SONOTASIRYOFALG, name = "委員用その他資料フラグ")
-    private RString choyoIin_sonotaSiryoFalg;
+    private RString chohyoIin_sonotaSiryoFalg;
     @BatchParameter(key = CHOHYOIIN_TUUTISHOFALG, name = "委員用審査会開催通知書フラグ")
     private RString chohyoIin_tuutishoFalg;
     @BatchParameter(key = CHOHYOIIN_HANTEIFALG, name = "委員用予備判定記入表フラグ")
@@ -148,7 +149,7 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
      * @param chohyoIin_tokkiJikouFalg 委員_特記事項フラグ
      * @param chohyoIin_itiziHanteiFalg 委員_一次判定結果票フラグ
      * @param chohyoIin_tokkiJikouHanteiFalg 委員_特記事項_一次判定フラグ
-     * @param choyoIin_sonotaSiryoFalg 委員用その他資料フラグ
+     * @param chohyoIin_sonotaSiryoFalg 委員用その他資料フラグ
      * @param chohyoIin_ikenshoFalg 委員_主治医意見書フラグ
      * @param chohyoIin_hanteiFalg 委員_予備判定記入表フラグ
      */
@@ -162,8 +163,8 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
             RString shuturyokuSutairu,
             RString printHou,
             RString sakuseiJoken,
-            Decimal bangoStart,
-            Decimal bangoEnd,
+            int bangoStart,
+            int bangoEnd,
             RString choyoJimu_taishoushaFalg,
             RString choyoJimu_tokkiJikouFalg,
             RString choyoJimu_itiziHanteiFalg,
@@ -178,7 +179,7 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
             RString chohyoIin_itiziHanteiFalg,
             RString chohyoIin_tokkiJikouHanteiFalg,
             RString chohyoIin_ikenshoFalg,
-            RString choyoIin_sonotaSiryoFalg,
+            RString chohyoIin_sonotaSiryoFalg,
             RString chohyoIin_tuutishoFalg,
             RString chohyoIin_hanteiFalg) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
@@ -206,7 +207,7 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
         this.chohyoIin_itiziHanteiFalg = chohyoIin_itiziHanteiFalg;
         this.chohyoIin_tokkiJikouHanteiFalg = chohyoIin_tokkiJikouHanteiFalg;
         this.chohyoIin_ikenshoFalg = chohyoIin_ikenshoFalg;
-        this.choyoIin_sonotaSiryoFalg = choyoIin_sonotaSiryoFalg;
+        this.chohyoIin_sonotaSiryoFalg = chohyoIin_sonotaSiryoFalg;
         this.chohyoIin_tuutishoFalg = chohyoIin_tuutishoFalg;
         this.chohyoIin_hanteiFalg = chohyoIin_hanteiFalg;
     }
@@ -248,12 +249,32 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
     }
 
     /**
+     * 主治医意見書2回目以降ProcessParameterに転換します。
+     *
+     * @return IinTokkiJikouItiziHanteiProcessParameter
+     */
+    public IinIkenshoDataSakuseiProcessParameter toIinIkenshoDataSakuseiProcessParameter() {
+        return new IinIkenshoDataSakuseiProcessParameter(shinsakaiKaisaiNo,
+                shuturyokuJun,
+                sakuseiJoken,
+                bangoStart,
+                bangoEnd,
+                shuturyokuSutairu,
+                printHou,
+                Decimal.ZERO,
+                shinsakaiKaisaiYoteiYMD,
+                shinsakaiKaishiYoteiTime,
+                gogitaiName,
+                Integer.parseInt(gogitaiNo.toString()));
+    }
+
+    /**
      * 委員用介護認定審査対象者一覧表情報ProcessParameterに転換します。
      *
      * @return IinTokkiJikouItiziHanteiProcessParameter
      */
     public IinShinsakaiIinJohoProcessParameter toIinShinsakaiIinJohoProcessParameter() {
-        return new IinShinsakaiIinJohoProcessParameter(gogitaiNo,
+        return new IinShinsakaiIinJohoProcessParameter(Integer.parseInt(gogitaiNo.toString()),
                 shinsakaiKaisaiYoteiYMD,
                 shinsakaiKaisaiNo,
                 shuturyokuJun,

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelec
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -135,6 +136,7 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
         set抽出方法区分(cyusyutsuhohokubun);
         set年齢層抽出方法(atenacyusyutsujyoken);
         set地区区分(atenacyusyutsujyoken);
+        set市町村コード(atenacyusyutsujyoken);
         if (SoshitsuKubun.資格取得者のみ.getコード().equals(soshitsukubun)) {
             is資格取得者のみ = true;
         } else if (SoshitsuKubun.資格喪失者のみ.getコード().equals(soshitsukubun)) {
@@ -147,6 +149,13 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
             is基準日 = true;
         } else if (ChushutsuHohoKubun.範囲.getコード().equals(cyusyutsuhohokubun)) {
             is範囲 = true;
+        }
+    }
+
+    private void set市町村コード(AtenaSelectBatchParameter atenacyusyutsujyoken) {
+        if (nullHandan(atenacyusyutsujyoken.getShichoson_Code())) {
+            has市町村コード = true;
+            市町村コード = atenacyusyutsujyoken.getShichoson_Code().code市町村RString();
         }
     }
 
@@ -248,5 +257,9 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
 
     private static boolean nullHandan(RDate 生年月日) {
         return 生年月日 != null;
+    }
+
+    private static boolean nullHandan(LasdecCode 市町村コード) {
+        return 市町村コード != null && !市町村コード.isEmpty();
     }
 }

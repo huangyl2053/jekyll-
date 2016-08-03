@@ -128,14 +128,14 @@ public class TokkiText2A4Editor implements ITokkiText2A4Editor {
             if (全面.equals(item.get特記パターン())) {
                 source.tokkiText = item.get特記事項Text();
             } else if (短冊.equals(item.get特記パターン())) {
-                editSource1(source);
+                editテキスト(source);
                 set特記事項テキスト(source);
             }
         } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
                 source.tokkiImg = item.get特記事項Img();
             } else if (短冊.equals(item.get特記パターン())) {
-                editSource2(source);
+                editイメージ(source);
                 set特記事項イメージ(source);
             }
         }
@@ -151,51 +151,37 @@ public class TokkiText2A4Editor implements ITokkiText2A4Editor {
     }
 
     private TokkiText2A4ReportSource set特記事項テキスト(TokkiText2A4ReportSource source) {
-        for (int i = 0; i < item.get短冊テキスト情報リスト().size(); i++) {
+        for (int i = 0; i < item.get短冊情報リスト().size(); i++) {
             if (i == 0) {
-                source.tokkiText1 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == 1) {
-                source.tokkiText2 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == 2) {
-                source.tokkiText3 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == INT_3) {
-                source.tokkiText4 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == INT_4) {
-                source.tokkiText5 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == INT_5) {
-                source.tokkiText6 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == INT_6) {
-                source.tokkiText7 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == INT_7) {
-                source.tokkiText8 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == INT_8) {
-                source.tokkiText9 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == INT_9) {
-                source.tokkiText10 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == INT_10) {
-                source.tokkiText11 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == INT_11) {
-                source.tokkiText12 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == INT_12) {
-                source.tokkiText13 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == INT_13) {
-                source.tokkiText14 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == INT_14) {
-                source.tokkiText15 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiText1 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == 1) {
+                source.tokkiText2 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == 2) {
+                source.tokkiText3 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == INT_3) {
+                source.tokkiText4 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == INT_4) {
+                source.tokkiText5 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == INT_5) {
+                source.tokkiText6 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == INT_6) {
+                source.tokkiText7 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == INT_7) {
+                source.tokkiText8 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == INT_8) {
+                source.tokkiText9 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == INT_9) {
+                source.tokkiText10 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == INT_10) {
+                source.tokkiText11 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == INT_11) {
+                source.tokkiText12 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == INT_12) {
+                source.tokkiText13 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == INT_13) {
+                source.tokkiText14 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == INT_14) {
+                source.tokkiText15 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
             }
 
         }
@@ -203,65 +189,51 @@ public class TokkiText2A4Editor implements ITokkiText2A4Editor {
     }
 
     private TokkiText2A4ReportSource set特記事項イメージ(TokkiText2A4ReportSource source) {
-        for (int i = 0; i < item.get短冊イメージ情報リスト().size(); i++) {
+        for (int i = 0; i < item.get短冊情報リスト().size(); i++) {
             if (i == 0) {
-                source.tokkiImg1 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == 1) {
-                source.tokkiImg2 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == 2) {
-                source.tokkiImg3 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == INT_3) {
-                source.tokkiImg4 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == INT_4) {
-                source.tokkiImg5 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == INT_5) {
-                source.tokkiImg6 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == INT_6) {
-                source.tokkiImg7 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == INT_7) {
-                source.tokkiImg8 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == INT_8) {
-                source.tokkiImg9 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == INT_9) {
-                source.tokkiImg10 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == INT_10) {
-                source.tokkiImg11 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == INT_11) {
-                source.tokkiImg12 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == INT_12) {
-                source.tokkiImg13 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == INT_13) {
-                source.tokkiImg14 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
-            }
-            if (i == INT_14) {
-                source.tokkiImg15 = item.get短冊テキスト情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg1 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == 1) {
+                source.tokkiImg2 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == 2) {
+                source.tokkiImg3 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == INT_3) {
+                source.tokkiImg4 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == INT_4) {
+                source.tokkiImg5 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == INT_5) {
+                source.tokkiImg6 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == INT_6) {
+                source.tokkiImg7 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == INT_7) {
+                source.tokkiImg8 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == INT_8) {
+                source.tokkiImg9 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == INT_9) {
+                source.tokkiImg10 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == INT_10) {
+                source.tokkiImg11 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == INT_11) {
+                source.tokkiImg12 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == INT_12) {
+                source.tokkiImg13 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == INT_13) {
+                source.tokkiImg14 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+            } else if (i == INT_14) {
+                source.tokkiImg15 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
             }
 
         }
         return source;
     }
 
-    private void editSource1(TokkiText2A4ReportSource source) {
+    private void editテキスト(TokkiText2A4ReportSource source) {
         if (index < 特記事項List.size()) {
             source.listChosa1_1 = 特記事項List.get(index);
         }
 
     }
 
-    private void editSource2(TokkiText2A4ReportSource source) {
+    private void editイメージ(TokkiText2A4ReportSource source) {
         if (index < 特記事項List.size()) {
             source.listChosa_1 = 特記事項List.get(index);
         }

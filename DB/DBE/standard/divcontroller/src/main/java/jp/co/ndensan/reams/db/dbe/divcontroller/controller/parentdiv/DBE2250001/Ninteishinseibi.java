@@ -421,14 +421,14 @@ public class Ninteishinseibi {
         NinteichosahyoServiceJokyoIdentifier key = new NinteichosahyoServiceJokyoIdentifier(
                 new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                 Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
-                Integer.valueOf(row.getRemban().toString()));
+                Integer.valueOf(row.getServiceJokyoRemban().toString()));
         NinteichosahyoServiceJokyo ninteichosahyoServiceJokyo = サービスの状況Models.get(key);
         if (ninteichosahyoServiceJokyo == null) {
 
             ninteichosahyoServiceJokyo = new NinteichosahyoServiceJokyo(
                     new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                     Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
-                    Integer.valueOf(row.getRemban().toString()));
+                    Integer.valueOf(row.getServiceJokyoRemban().toString()));
         }
         NinteichosahyoServiceJokyoBuilder serviceJokyoBuilder = getHandler(div).認定調査票概況調査サービスの状況の編集(row, ninteichosahyoServiceJokyo);
         return serviceJokyoBuilder.build();
@@ -440,14 +440,14 @@ public class Ninteishinseibi {
         NinteichosahyoServiceJokyoFlagIdentifier key = new NinteichosahyoServiceJokyoFlagIdentifier(
                 new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                 Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
-                Integer.valueOf(row.getRemban().toString()));
+                Integer.valueOf(row.getServiceJokyoFlagRemban().toString()));
         NinteichosahyoServiceJokyoFlag ninteichosahyoServiceJokyoFlag = サービスの状況フラグModels.get(key);
         if (ninteichosahyoServiceJokyoFlag == null) {
 
             ninteichosahyoServiceJokyoFlag = new NinteichosahyoServiceJokyoFlag(
                     new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                     Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
-                    Integer.valueOf(row.getRemban().toString()));
+                    Integer.valueOf(row.getServiceJokyoFlagRemban().toString()));
         }
         NinteichosahyoServiceJokyoFlagBuilder serviceJokyoFlagBuilder = getHandler(div).
                 認定調査票概況調査サービスの状況フラグの編集(row, ninteichosahyoServiceJokyoFlag);
@@ -460,13 +460,13 @@ public class Ninteishinseibi {
         NinteichosahyoKinyuItemIdentifier key = new NinteichosahyoKinyuItemIdentifier(
                 new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                 Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
-                Integer.valueOf(row.getRemban().toString()));
+                Integer.valueOf(row.getServiceJokyoKinyuRemban().toString()));
         NinteichosahyoKinyuItem ninteichosahyoKinyuItem = 記入項目Models.get(key);
         if (ninteichosahyoKinyuItem == null) {
             ninteichosahyoKinyuItem = new NinteichosahyoKinyuItem(
                     new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                     Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
-                    Integer.valueOf(row.getRemban().toString()));
+                    Integer.valueOf(row.getServiceJokyoKinyuRemban().toString()));
         }
         NinteichosahyoKinyuItemBuilder ninteichosahyoKinyuItemBuilder = getHandler(div).
                 認定調査票概況調査記入項目の編集(row, ninteichosahyoKinyuItem);
@@ -479,14 +479,14 @@ public class Ninteishinseibi {
         NinteichosahyoShisetsuRiyoIdentifier key = new NinteichosahyoShisetsuRiyoIdentifier(
                 new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                 Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
-                Integer.valueOf(row.getRemban().toString()));
+                Integer.valueOf(row.getShisetsuRiyoFlagRemban().toString()));
         NinteichosahyoShisetsuRiyo ninteichosahyoShisetsuRiyo = 施設利用Models.get(key);
         if (ninteichosahyoShisetsuRiyo == null) {
 
             ninteichosahyoShisetsuRiyo = new NinteichosahyoShisetsuRiyo(
                     new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                     Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
-                    Integer.valueOf(row.getRemban().toString()));
+                    Integer.valueOf(row.getShisetsuRiyoFlagRemban().toString()));
         }
         NinteichosahyoShisetsuRiyoBuilder shisetsuRiyoBuilder = getHandler(div).
                 認定調査票概況調査施設利用の編集(row, ninteichosahyoShisetsuRiyo);

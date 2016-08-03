@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.business.report.shorikekkakakuninist;
 
-import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
@@ -18,15 +17,15 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShoriKekkaKakuninListBodyItem {
 
-    private final List<RString> listUpper_1;
-    private final List<RString> listUpper_2;
-    private final List<RString> listUpper_3;
-    private final List<RString> listUpper_4;
-    private final List<RString> listUpper_5;
-    private final List<RString> listUpper_6;
-    private final List<RString> listUpper_7;
-    private final List<RString> listLower_1;
-    private final List<RString> listLower_2;
+    private final RString listUpper_1;
+    private final RString listUpper_2;
+    private final RString listUpper_3;
+    private final RString listUpper_4;
+    private final RString listUpper_5;
+    private final RString listUpper_6;
+    private final RString listUpper_7;
+    private final RString listLower_1;
+    private final RString listLower_2;
 
     /**
      * インスタンスを生成します。
@@ -36,21 +35,21 @@ public class ShoriKekkaKakuninListBodyItem {
      * @param listUpper_3 項目値2
      * @param listUpper_4 項目値3
      * @param listUpper_5 項目値4
-     * @param listUpper_7 項目値5
-     * @param listUpper_6 内容1
+     * @param listUpper_6 項目値5
+     * @param listUpper_7 内容1
      * @param listLower_1 処理名称
      * @param listLower_2 内容2
      */
     public ShoriKekkaKakuninListBodyItem(
-            List<RString> listUpper_1,
-            List<RString> listUpper_2,
-            List<RString> listUpper_3,
-            List<RString> listUpper_4,
-            List<RString> listUpper_5,
-            List<RString> listUpper_6,
-            List<RString> listUpper_7,
-            List<RString> listLower_1,
-            List<RString> listLower_2) {
+            RString listUpper_1,
+            RString listUpper_2,
+            RString listUpper_3,
+            RString listUpper_4,
+            RString listUpper_5,
+            RString listUpper_6,
+            RString listUpper_7,
+            RString listLower_1,
+            RString listLower_2) {
 
         this.listUpper_1 = listUpper_1;
         this.listUpper_2 = listUpper_2;

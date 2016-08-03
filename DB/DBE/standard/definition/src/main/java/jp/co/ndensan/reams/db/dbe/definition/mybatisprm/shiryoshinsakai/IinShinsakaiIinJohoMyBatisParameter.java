@@ -20,11 +20,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class IinShinsakaiIinJohoMyBatisParameter implements IMyBatisParameter {
 
-    private RString gogitaiNo;
+    private int gogitaiNo;
     private FlexibleDate shinsakaiKaisaiYoteiYMD;
     private RString shinsakaiKaisaiNo;
     private RString shuturyokuJun;
     private boolean isIsShuturyokuJun;
+    private boolean isSakuseiJokenHani;
+    private boolean isSakuseiJokenTuika;
+    private boolean isShuturyokuJunEmpty;
     private boolean isHaishiFlag_False;
     private boolean isHaishiFlag_True;
     private boolean isOrderKakuteiFlg;
@@ -38,18 +41,24 @@ public class IinShinsakaiIinJohoMyBatisParameter implements IMyBatisParameter {
      * @param shinsakaiKaisaiYoteiYMD 介護認定審査会開催予定年月日
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
      * @param shuturyokuJun 出力順
-     * @param isIsShuturyokuJun 出力順ファグ
+     * @param isShuturyokuJunEmpty 出力順ファグ
+     * @param isSakuseiJokenHani 作成条件_範囲指定ファグ
+     * @param isSakuseiJokenTuika 作成条件_追加分ファグ
      */
     public IinShinsakaiIinJohoMyBatisParameter(
-            RString gogitaiNo,
+            int gogitaiNo,
             FlexibleDate shinsakaiKaisaiYoteiYMD,
             RString shinsakaiKaisaiNo,
             RString shuturyokuJun,
-            boolean isIsShuturyokuJun) {
+            boolean isSakuseiJokenHani,
+            boolean isSakuseiJokenTuika,
+            boolean isShuturyokuJunEmpty) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shuturyokuJun = shuturyokuJun;
         this.gogitaiNo = gogitaiNo;
         this.shinsakaiKaisaiYoteiYMD = shinsakaiKaisaiYoteiYMD;
-        this.isIsShuturyokuJun = isIsShuturyokuJun;
+        this.isShuturyokuJunEmpty = isShuturyokuJunEmpty;
+        this.isSakuseiJokenHani = isSakuseiJokenHani;
+        this.isSakuseiJokenTuika = isSakuseiJokenTuika;
     }
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.yoshikibetsurenkeijoho.JigyoHokokuTokei;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.jigyohokokurenkei.JigyoHokokuRenkeiBatchParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0030011.JigyoJokyoHokokuGeppoDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -34,6 +35,7 @@ public class JigyoJokyoHokokuGeppoHandler {
     private static final RString 決定年月 = new RString("keiteiYM4");
     private static final RString 一般状況14 = new RString("ippan12_14Genbutsu");
     private static final RString ALL = new RString("all");
+    private static final RString 決定状況償還分 = new RString("hokenKyufuShokan");
     private static final List<RString> 一般状況10 = new ArrayList<>();
     private static final List<RString> 一般状況_合算 = new ArrayList<>();
     private static final List<RString> 一般状況14_現物分 = new ArrayList<>();
@@ -295,7 +297,7 @@ public class JigyoJokyoHokokuGeppoHandler {
             }
             if (!div.getCblHokenKyufuShokan().isDisabled()) {
                 決定状況合算_償還分.clear();
-                決定状況合算_償還分.add(new RString("hokenKyufuShokan"));
+                決定状況合算_償還分.add(決定状況償還分);
                 div.getCblHokenKyufuShokan().setSelectedItemsByKey(決定状況合算_償還分);
             }
         } else {
@@ -393,7 +395,7 @@ public class JigyoJokyoHokokuGeppoHandler {
         }
         if (div.getTxtShukeiYM5().getValue() != null && !div.getTxtShukeiYM5().getValue().isEmpty()) {
             決定状況合算_償還分.clear();
-            決定状況合算_償還分.add(new RString("hokenKyufuShokan"));
+            決定状況合算_償還分.add(決定状況償還分);
             div.getCblHokenKyufuShokan().setSelectedItemsByKey(決定状況合算_償還分);
         }
     }
@@ -511,5 +513,53 @@ public class JigyoJokyoHokokuGeppoHandler {
         } else {
             div.getCblShutsuryokuAll().setDisabled(false);
         }
+    }
+
+    /**
+     * 実行ボタン処理です
+     *
+     * @return HoshuShiharaiJunbiBatchParameter
+     */
+    public JigyoHokokuRenkeiBatchParameter onClick_btnJikko() {
+        List<RString> 市町村コードリスト = new ArrayList<>();
+        市町村コードリスト.add(div.getShichosonCode());
+        JigyoHokokuRenkeiBatchParameter batchParameter = new JigyoHokokuRenkeiBatchParameter(
+                div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedKey(),
+                dateToRString(div.getTblShutsuryokuTaisho().getTxtShukeiYM1().getValue()),
+                dateToRString(div.getTblShutsuryokuTaisho().getTxtShukeiYM2().getValue()),
+                dateToRString(div.getTblShutsuryokuTaisho().getTxtShukeiYM3().getValue()),
+                dateToRString(div.getTblShutsuryokuTaisho().getTxtShukeiYM4().getValue()),
+                dateToRString(div.getTblShutsuryokuTaisho().getTxtShukeiYM5().getValue()),
+                div.getCblIppan1to10().getSelectedKeys().contains(new RString("ippan1_11")),
+                div.getCblIppanGembutsu().getSelectedKeys().contains(一般状況14),
+                div.getCblIppanShokan().getSelectedKeys().contains(一般状況14)
+                && div.getRadShukeiType3().getSelectedKey().equals(審査年月),
+                div.getCblIppanShokan().getSelectedKeys().contains(一般状況14)
+                && div.getRadShukeiType3().getSelectedKey().equals(決定年月),
+                div.getCblGassan1().getSelectedKeys().contains(ALL)
+                && div.getRadShukeiType3().getSelectedKey().equals(審査年月),
+                div.getCblIppanShokan().getSelectedKeys().contains(ALL)
+                && div.getRadShukeiType3().getSelectedKey().equals(決定年月),
+                div.getCblHokenKyufuGembutsu().getSelectedKeys().contains(new RString("hokenKyufuGenbutsu")),
+                div.getCblHokenKyufuShokan().getSelectedKeys().contains(決定状況償還分)
+                && div.getRadShukeiType5().getSelectedKey().equals(審査年月),
+                div.getCblHokenKyufuShokan().getSelectedKeys().contains(決定状況償還分)
+                && div.getRadShukeiType5().getSelectedKey().equals(決定年月),
+                div.getCblGassan2().getSelectedKeys().contains(ALL)
+                && div.getRadShukeiType5().getSelectedKey().equals(審査年月),
+                div.getCblGassan2().getSelectedKeys().contains(ALL)
+                && div.getRadShukeiType5().getSelectedKey().equals(決定年月),
+                市町村コードリスト,
+                div.getJikkoTanni().getRadHokenshaKyuShichoson().getSelectedKey().equals(new RString("gappei")),
+                div.getJikkoTanni().getRadKoikiKoseiShichoson().getSelectedKey().equals(new RString("koseiShichoson"))
+        );
+        return batchParameter;
+    }
+
+    private RString dateToRString(FlexibleDate date) {
+        if (date == null) {
+            return RString.EMPTY;
+        }
+        return new RString(date.toString());
     }
 }

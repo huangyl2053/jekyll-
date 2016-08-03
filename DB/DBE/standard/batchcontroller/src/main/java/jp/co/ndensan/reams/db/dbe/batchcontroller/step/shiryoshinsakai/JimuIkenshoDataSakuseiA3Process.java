@@ -9,13 +9,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWariateJohoBusiness;
-import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoa4.ShujiiikenshoA3Report;
+import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoa3.ShujiiikenshoA3Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuTokkiJikouItiziHanteiMyBatisParameter;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiWariateJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikensho1a4.ShujiiikenshoA3ReportSource;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoa3.ShujiiikenshoA3ReportSource;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -31,14 +31,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-0150-190 linghuhang
  */
-public class JimuIkenshoDataSakuseiA3Process extends BatchKeyBreakBase<ShinsakaiWariateJohoEntity> {
+public class JimuIkenshoDataSakuseiA3Process extends BatchKeyBreakBase<ShinsakaiSiryoKyotsuEntity> {
 
     private static final RString SELECT_JIMUWARIATEJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
-            + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getJimuShinsakaiWariateJoho");
+            + ".mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper.get共通情報");
     private static final List<RString> PAGE_BREAK_KEYS_A3 = Collections.unmodifiableList(Arrays.asList(
             new RString(ShujiiikenshoA3ReportSource.ReportSourceFields.hokenshaNo.name())));
-    private IinTokkiJikouItiziHanteiProcessParameter paramter;
-    private JimuTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
+    private IinShinsakaiIinJohoProcessParameter paramter;
+    private JimuShinsakaiIinJohoMyBatisParameter myBatisParameter;
     private JimuShinsakaiWariateJohoBusiness business;
     @BatchWriter
     private BatchReportWriter<ShujiiikenshoA3ReportSource> batchWriteA3;
@@ -46,7 +46,7 @@ public class JimuIkenshoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsakai
 
     @Override
     protected void initialize() {
-        myBatisParameter = paramter.toJimuTokkiJikouItiziHanteiMyBatisParameter();
+        myBatisParameter = paramter.toJimuShinsakaiIinJohoMyBatisParameter();
         myBatisParameter.setOrderKakuteiFlg(ShinsakaiOrderKakuteiFlg.確定.is介護認定審査会審査順確定());
     }
 
@@ -56,7 +56,7 @@ public class JimuIkenshoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsakai
     }
 
     @Override
-    protected void usualProcess(ShinsakaiWariateJohoEntity entity) {
+    protected void usualProcess(ShinsakaiSiryoKyotsuEntity entity) {
         business = new JimuShinsakaiWariateJohoBusiness(entity);
         ShujiiikenshoA3Report reportA3 = new ShujiiikenshoA3Report(business);
         reportA3.writeBy(reportSourceWriterA3);
@@ -71,11 +71,11 @@ public class JimuIkenshoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsakai
     }
 
     @Override
-    protected void keyBreakProcess(ShinsakaiWariateJohoEntity current) {
+    protected void keyBreakProcess(ShinsakaiSiryoKyotsuEntity current) {
         hasBrek(getBefore(), current);
     }
 
-    private boolean hasBrek(ShinsakaiWariateJohoEntity before, ShinsakaiWariateJohoEntity current) {
+    private boolean hasBrek(ShinsakaiSiryoKyotsuEntity before, ShinsakaiSiryoKyotsuEntity current) {
         return before.getShinsakaiOrder() != current.getShinsakaiOrder();
     }
 

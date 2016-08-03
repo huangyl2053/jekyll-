@@ -68,7 +68,9 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
         this.改頁項目List = inputEntity.get改頁項目List();
         調定日時 = inputEntity.get調定日時();
         計算後情報_宛名_口座_更正前Entity = inputEntity.get計算後情報_宛名_口座_更正前Entity();
-        計算後情報_宛名_口座_更正前Entity.set更正前後区分(更正前後区分_更正前);
+        if (null != 計算後情報_宛名_口座_更正前Entity) {
+            計算後情報_宛名_口座_更正前Entity.set更正前後区分(更正前後区分_更正前);
+        }
         計算後情報_宛名_口座_更正後Entity = inputEntity.get計算後情報_宛名_口座_更正後Entity();
         計算後情報_宛名_口座_更正後Entity.set更正前後区分(更正前後区分_更正後);
         association = inputEntity.getAssociation();
@@ -83,26 +85,28 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
             source.hokenshaName = association.get市町村名();
         }
         set出力順And改ページ(source);
-        if (null != 計算後情報_宛名_口座_更正前Entity.get通知書番号()) {
-            source.list1_1 = 計算後情報_宛名_口座_更正前Entity.get通知書番号().value();
+        if (null != 計算後情報_宛名_口座_更正前Entity) {
+            if (null != 計算後情報_宛名_口座_更正前Entity.get通知書番号()) {
+                source.list1_1 = 計算後情報_宛名_口座_更正前Entity.get通知書番号().value();
+            }
+            set宛名口座_更正前(source);
+            if (null != 計算後情報_宛名_口座_更正前Entity.get調定年度()) {
+                source.list2_1 = 計算後情報_宛名_口座_更正前Entity.get調定年度().toDateString();
+            }
+            if (null != 計算後情報_宛名_口座_更正前Entity.get賦課年度()) {
+                source.list2_2 = 計算後情報_宛名_口座_更正前Entity.get賦課年度().toDateString();
+            }
+            if (null != 計算後情報_宛名_口座_更正前Entity.get確定介護保険料_年額()) {
+                source.list2_3 = new RString(計算後情報_宛名_口座_更正前Entity.get確定介護保険料_年額().toString());
+            }
+            if (null != 計算後情報_宛名_口座_更正前Entity.get減免前介護保険料_年額()) {
+                source.list2_4 = new RString(計算後情報_宛名_口座_更正前Entity.get減免前介護保険料_年額().toString());
+            }
+            if (null != 計算後情報_宛名_口座_更正前Entity.get減免額()) {
+                source.list2_5 = new RString(計算後情報_宛名_口座_更正前Entity.get減免額().toString());
+            }
+            set月別取得段階(計算後情報_宛名_口座_更正前Entity, source);
         }
-        set宛名口座_更正前(source);
-        if (null != 計算後情報_宛名_口座_更正前Entity.get調定年度()) {
-            source.list2_1 = 計算後情報_宛名_口座_更正前Entity.get調定年度().toDateString();
-        }
-        if (null != 計算後情報_宛名_口座_更正前Entity.get賦課年度()) {
-            source.list2_2 = 計算後情報_宛名_口座_更正前Entity.get賦課年度().toDateString();
-        }
-        if (null != 計算後情報_宛名_口座_更正前Entity.get確定介護保険料_年額()) {
-            source.list2_3 = new RString(計算後情報_宛名_口座_更正前Entity.get確定介護保険料_年額().toString());
-        }
-        if (null != 計算後情報_宛名_口座_更正前Entity.get減免前介護保険料_年額()) {
-            source.list2_4 = new RString(計算後情報_宛名_口座_更正前Entity.get減免前介護保険料_年額().toString());
-        }
-        if (null != 計算後情報_宛名_口座_更正前Entity.get減免額()) {
-            source.list2_5 = new RString(計算後情報_宛名_口座_更正前Entity.get減免額().toString());
-        }
-        set月別取得段階(計算後情報_宛名_口座_更正前Entity, source);
         if (null != 計算後情報_宛名_口座_更正後Entity.get特徴歳出還付額()) {
             source.list2_18 = new RString(計算後情報_宛名_口座_更正後Entity.get特徴歳出還付額().toString());
         }
@@ -159,7 +163,7 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
                 source.list1_4 = koza.get金融機関コード().value();
             }
             if (null != koza.get預金種別()) {
-                source.list1_5 = koza.get預金種別().get預金種別略称();
+                source.list1_5 = koza.get預金種別().get預金種別略称().substringReturnAsPossible(NUM_0, NUM_2);
             }
             source.list1_6 = koza.get口座番号();
             if (null != koza.get金融機関()) {

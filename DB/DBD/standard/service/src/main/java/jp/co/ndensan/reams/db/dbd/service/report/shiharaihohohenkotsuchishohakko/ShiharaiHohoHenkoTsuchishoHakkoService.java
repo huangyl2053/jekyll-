@@ -72,7 +72,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * 支払方法変更管理各種通知書発行（画面）というビジネスクラスです。
  *
- * @reamsid_L DBD-3640-010 panxiaobo
+ * @reamsid_L DBD-3640-030 panxiaobo
  */
 public class ShiharaiHohoHenkoTsuchishoHakkoService {
 

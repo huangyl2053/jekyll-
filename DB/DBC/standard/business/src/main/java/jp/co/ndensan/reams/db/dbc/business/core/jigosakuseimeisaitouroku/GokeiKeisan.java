@@ -17,14 +17,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class GokeiKeisan {
 
-    private Decimal 利用者負担額;
-    private Decimal 種類限度超過単位;
-    private Decimal 種類限度内単位;
-    private Decimal 単位数単価;
-    private Decimal 区分限度超過単位;
-    private Decimal 区分限度内単位;
-    private Decimal 給付率;
-    private Decimal サービス単位;
     private Decimal 費用総額;
     private Decimal 保険給付額;
     private Decimal 保険対象利用者負担額;

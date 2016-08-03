@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 要介護認定通知書発行情報のパラメータ
  *
- * @reamsid_L DBE-1430-010 lit
+ * @reamsid_L DBD-1430-010 lit
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

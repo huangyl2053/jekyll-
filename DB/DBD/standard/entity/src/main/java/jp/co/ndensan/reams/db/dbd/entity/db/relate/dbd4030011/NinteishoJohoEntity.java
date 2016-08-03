@@ -25,14 +25,12 @@ public class NinteishoJohoEntity {
     private RString 申請者;
     private RString 申請者住所;
     private RString 申請者氏名;
-    private RString 対象者住所;
-    private RString 対象者氏名;
-    private FlexibleDate 対象者生年月日;
-    private RString 対象者性別;
     private RString 障害理由区分;
     private RString 障害理由内容;
     private FlexibleDate 要介護認定日;
     private FlexibleDate 申告年;
+    private RString 文書番号;
     private UaFt200FindShikibetsuTaishoEntity psmEntity;
+    private NinshoshaDenshiKoinDataEntity ninshoshaDenshiKoinDataEntity;
 
 }

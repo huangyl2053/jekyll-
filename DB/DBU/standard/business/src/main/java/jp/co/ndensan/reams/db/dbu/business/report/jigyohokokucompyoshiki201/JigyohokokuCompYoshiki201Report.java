@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki201;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokucompyoshiki201.JigyohokokuCompYoshiki201Business;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki201.JigyohokokuCompResultEntity;
@@ -142,6 +144,17 @@ public class JigyohokokuCompYoshiki201Report extends Report<JigyohokokuCompYoshi
     public void writeBy(ReportSourceWriter<JigyohokokuCompYoshiki201ReportSource> reportSourceWriter) {
         RString 集計番号 = RString.EMPTY;
         RString 給付実績区分コード = RString.EMPTY;
+        Collections.sort(business.get事業報告資料(), new Comparator<JigyohokokuCompYoshiki201Entity>() {
+            @Override
+            public int compare(JigyohokokuCompYoshiki201Entity entity1, JigyohokokuCompYoshiki201Entity entity2) {
+                int flag = entity1.get縦番号().compareTo(entity2.get縦番号());
+                if (flag == 0) {
+                    return entity1.get横番号().compareTo(entity2.get横番号());
+                } else {
+                    return flag;
+                }
+            }
+        });
         for (JigyohokokuCompYoshiki201Entity entity : business.get事業報告資料()) {
             if (isValueChanged(entity.get縦番号(), entity.get横番号())) {
                 cleanValue();

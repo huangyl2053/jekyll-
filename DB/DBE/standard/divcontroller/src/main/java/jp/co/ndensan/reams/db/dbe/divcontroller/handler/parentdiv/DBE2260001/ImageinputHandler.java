@@ -88,6 +88,11 @@ public class ImageinputHandler {
         DropDownList 食事行為 = set食事行為();
         List<dgshinseishaichiran_Row> rowList = new ArrayList<>();
         for (TorokuData data : dataList) {
+            生活自立度.setSelectedKey(data.get障害高齢者の自立度());
+            短期記憶.setSelectedKey(data.get短期記憶());
+            認知能力.setSelectedKey(data.get認知能力());
+            伝達能力.setSelectedKey(data.get伝達能力());
+            食事行為.setSelectedKey(data.get食事行為());
             dgshinseishaichiran_Row row = new dgshinseishaichiran_Row(new RString(連番),
                     data.getOK_NG(),
                     data.getT7051_市町村名称(),

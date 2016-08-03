@@ -14,9 +14,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTuutishoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTuikaSiryoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.IinTuikaSiryoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.tsuikashiryokagamia3.TsuikashiryokagamiA3ReportSource;
-import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -40,7 +38,7 @@ public class IinTuikaSiryoDataSakuseiA3Process extends BatchKeyBreakBase<IinTuik
             new RString(TsuikashiryokagamiA3ReportSource.ReportSourceFields.shinsakaiNo.name())));
     private static final int 満ページ件数 = 10;
     private IinTuikaSiryoProcessParameter paramter;
-    private IShiryoShinsakaiIinMapper mapper;
+//    private IShiryoShinsakaiIinMapper mapper;
     private IinTuutishoMyBatisParameter myBatisParameter;
     private JimuTuikaSiryoBusiness business;
     private int データ件数;
@@ -51,7 +49,7 @@ public class IinTuikaSiryoDataSakuseiA3Process extends BatchKeyBreakBase<IinTuik
     @Override
     protected void initialize() {
         myBatisParameter = paramter.toIinTuutishoMyBatisParameter();
-        mapper = getMapper(IShiryoShinsakaiIinMapper.class);
+//        mapper = getMapper(IShiryoShinsakaiIinMapper.class);
         データ件数 = 0;
     }
 
@@ -78,14 +76,14 @@ public class IinTuikaSiryoDataSakuseiA3Process extends BatchKeyBreakBase<IinTuik
 
     @Override
     protected void usualProcess(IinTuikaSiryoEntity entity) {
-        List<ShinsakaiIinJohoEntity> 審査員 = mapper.getIinShimei(myBatisParameter);
-        IinTuikaSiryoEntity siryoEntity = mapper.getShinsakaiKaisaiKekkaJoho(myBatisParameter);
-        business = new JimuTuikaSiryoBusiness(entity,
-                審査員,
-                paramter,
-                mapper.getShinsakaiWariateJohoCount(myBatisParameter),
-                siryoEntity,
-                RString.EMPTY);
+//        List<ShinsakaiIinJohoEntity> 審査員 = mapper.getIinShimei(myBatisParameter);
+//        IinTuikaSiryoEntity siryoEntity = mapper.getShinsakaiKaisaiKekkaJoho(myBatisParameter);
+//        business = new JimuTuikaSiryoBusiness(entity,
+//                審査員,
+//                paramter,
+//                mapper.getShinsakaiWariateJohoCount(myBatisParameter),
+//                siryoEntity,
+//                RString.EMPTY);
 
         TsuikashiryokagamiA3Report report = new TsuikashiryokagamiA3Report(business);
         report.writeBy(reportSourceWriterA3);

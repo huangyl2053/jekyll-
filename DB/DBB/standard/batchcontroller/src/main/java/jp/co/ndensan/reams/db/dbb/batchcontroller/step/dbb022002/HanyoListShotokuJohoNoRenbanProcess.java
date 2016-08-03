@@ -139,7 +139,7 @@ public class HanyoListShotokuJohoNoRenbanProcess extends BatchProcessBase<HanyoL
         csvEditor = new HanyoListShotokuJohoNoRenbanCsvEditor();
         personalDataList = new ArrayList<>();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-        HokenryoDankaiSettings hokenryoDankaiSettings = new HokenryoDankaiSettings();
+        HokenryoDankaiSettings hokenryoDankaiSettings = HokenryoDankaiSettings.createInstance();
         保険料段階リスト = hokenryoDankaiSettings.get保険料段階ListIn(processParameter.get賦課年度());
         構成市町村マスタlist = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
     }

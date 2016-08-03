@@ -171,7 +171,7 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     private EucCsvWriter<GeneralPurposeListOutputNotContainNoEucCsvEntity> eucNotContainNoCsvWriter;
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.generalPurposeListOutput."
+            "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.generalpurposelistoutput."
             + "IGeneralPurposeListOutputMapper.getGeneralPurposeListOutputInfo");
 
     private Association 地方公共団体情報;

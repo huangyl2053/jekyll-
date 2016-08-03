@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 事務局用予備判定記入表情報のMyBatisParameterです。
@@ -25,8 +24,8 @@ public class JimuTokkiJikouItiziHanteiMyBatisParameter implements IMyBatisParame
 
     private RString shinsakaiKaisaiNo;
     private RString shuturyokuJun;
-    private Decimal bangoStart;
-    private Decimal bangoEnd;
+    private int bangoStart;
+    private int bangoEnd;
     private ShinseishoKanriNo shinseishoKanri;
     private int ninteichosaRirekiNo;
     private RString genponKubun;
@@ -57,8 +56,8 @@ public class JimuTokkiJikouItiziHanteiMyBatisParameter implements IMyBatisParame
     public JimuTokkiJikouItiziHanteiMyBatisParameter(
             RString shinsakaiKaisaiNo,
             RString shuturyokuJun,
-            Decimal bangoStart,
-            Decimal bangoEnd,
+            int bangoStart,
+            int bangoEnd,
             boolean isSakuseiJokenHani,
             boolean isSakuseiJokenTuika,
             boolean isIsShuturyokuJun) {

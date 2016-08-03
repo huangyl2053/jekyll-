@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShuruiGendoInfo;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.ServiceTypeDetails;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.ServiceTypeTotal;
 import jp.co.ndensan.reams.db.dbc.service.core.jigosakuseimeisaitouroku.JigoSakuseiMeisaiTouroku;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -38,12 +39,8 @@ public class ShuruiGendoInfoHandler {
      * @param 利用年月 利用年月
      * @param 給付計画自己作成EntityList
      */
-    public void init(FlexibleYearMonth 利用年月, List 給付計画自己作成EntityList) {
+    public void init(FlexibleYearMonth 利用年月, List<ServiceTypeDetails> 給付計画自己作成EntityList) {
         List<ServiceTypeTotal> list = new JigoSakuseiMeisaiTouroku().getServiceTypeGendo(利用年月, 給付計画自己作成EntityList);
-        if (list.isEmpty()) {
-            div.getDgGendoInfo().init();
-            return;
-        }
         for (ServiceTypeTotal serviceTypeTotal : list) {
             dgGendoInfo_Row row = new dgGendoInfo_Row();
             row.setサービス種類(serviceTypeTotal.getサービス種類());
@@ -55,6 +52,6 @@ public class ShuruiGendoInfoHandler {
     }
 
     private RString get金額のカンマ編集(Decimal 金額) {
-        return DecimalFormatter.toRString(金額, NUM_0);
+        return 金額 == null ? null : DecimalFormatter.toRString(金額, NUM_0);
     }
 }

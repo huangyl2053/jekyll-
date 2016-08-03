@@ -42,7 +42,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class JimuHanteiDataSakuseiA3Process extends BatchKeyBreakBase<HanteiJohoEntity> {
 
     private static final RString SELECT_JIMUHANTEIJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
-            + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getJimuHanteiJoho");
+            + ".mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper.getJimuHanteiJoho");
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
             new RString(JimukyokuyoYobihanteiKinyuhyoReportSource.ReportSourceFields.shinsakaiKaisaiNo.name())));
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
@@ -116,11 +116,19 @@ public class JimuHanteiDataSakuseiA3Process extends BatchKeyBreakBase<HanteiJoho
 
     private List<RString> 出力条件() {
         List<RString> list = new ArrayList<>();
-        RStringBuilder builder = new RStringBuilder();
-        builder.append("【介護認定審査会開催番号】")
+        RStringBuilder builder1 = new RStringBuilder();
+        builder1.append("【合議体番号】")
+                .append(" ")
+                .append(paramter.getGogitaiNo());
+        RStringBuilder builder2 = new RStringBuilder();
+        builder2.append("【介護認定審査会開催予定年月日】")
+                .append(" ")
+                .append(paramter.getShinsakaiKaisaiYoteiYMD().wareki().toDateString());
+        RStringBuilder builder3 = new RStringBuilder();
+        builder3.append("【介護認定審査会開催番号】")
                 .append(" ")
                 .append(paramter.getShinsakaiKaisaiNo());
-        list.add(builder.toRString());
+        list.add(builder1.toRString());
         return list;
     }
 }

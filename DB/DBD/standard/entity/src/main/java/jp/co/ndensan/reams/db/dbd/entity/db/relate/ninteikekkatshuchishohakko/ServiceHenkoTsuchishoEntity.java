@@ -75,5 +75,6 @@ public class ServiceHenkoTsuchishoEntity {
     private RString kakkoRight1;
     private RString kakkoRight2;
     private RString customerBarCode;
+    private FlexibleDate hakkoYMD;
 
 }

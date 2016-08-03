@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4102NinteiKekkaJohoEntity;
 /**
  * 要介護認定通知書発行Entityのクラスです。
  *
- * @reamsid_L DBE-1430-010 lit
+ * @reamsid_L DBD-1430-010 lit
  */
 @lombok.Getter
 @lombok.Setter

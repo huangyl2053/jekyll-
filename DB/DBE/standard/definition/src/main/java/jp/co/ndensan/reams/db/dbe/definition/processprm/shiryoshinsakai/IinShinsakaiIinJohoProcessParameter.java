@@ -22,7 +22,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParameter {
 
-    private RString gogitaiNo;
+    private int gogitaiNo;
+    private int bangoStart;
+    private int bangoEnd;
     private FlexibleDate shinsakaiKaisaiYoteiYMD;
     private RString shinsakaiKaisaiNo;
     private RString shuturyokuJun;
@@ -30,6 +32,8 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
     private RString printHou;
     private Decimal chohyoIinHusu;
     private RString shinsakaiKaishiYoteiTime;
+    private boolean isSakuseiJokenHani;
+    private boolean isSakuseiJokenTuika;
 
     /**
      * コンストラクタです。
@@ -44,7 +48,7 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
      * @param shinsakaiKaishiYoteiTime 介護認定審査会開始予定時刻
      */
     public IinShinsakaiIinJohoProcessParameter(
-            RString gogitaiNo,
+            int gogitaiNo,
             FlexibleDate shinsakaiKaisaiYoteiYMD,
             RString shinsakaiKaisaiNo,
             RString shuturyokuJun,
@@ -68,11 +72,12 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
      * @return IinTokkiJikouItiziHanteiMyBatisParameter
      */
     public IinShinsakaiIinJohoMyBatisParameter toIinShinsakaiIinJohoMyBatisParameter() {
-        boolean isShuturyokuJun = false;
+        boolean isShuturyokuJunEmpty = false;
         if (RString.isNullOrEmpty(shuturyokuJun)) {
-            isShuturyokuJun = true;
+            isShuturyokuJunEmpty = true;
         }
-        return new IinShinsakaiIinJohoMyBatisParameter(gogitaiNo, shinsakaiKaisaiYoteiYMD, shinsakaiKaisaiNo, shuturyokuJun, isShuturyokuJun);
+        return new IinShinsakaiIinJohoMyBatisParameter(gogitaiNo,
+                shinsakaiKaisaiYoteiYMD, shinsakaiKaisaiNo, shuturyokuJun, isSakuseiJokenHani, isSakuseiJokenTuika, isShuturyokuJunEmpty);
     }
 
     /**
@@ -85,6 +90,7 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
         if (RString.isNullOrEmpty(shuturyokuJun)) {
             isShuturyokuJun = true;
         }
-        return new JimuShinsakaiIinJohoMyBatisParameter(gogitaiNo, shinsakaiKaisaiYoteiYMD, shinsakaiKaisaiNo, shuturyokuJun, isShuturyokuJun);
+        return new JimuShinsakaiIinJohoMyBatisParameter(bangoStart, bangoEnd, new RString(gogitaiNo),
+                isShuturyokuJun, isSakuseiJokenHani, isSakuseiJokenTuika, shinsakaiKaisaiNo, shuturyokuJun, shinsakaiKaisaiYoteiYMD);
     }
 }

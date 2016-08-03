@@ -41,6 +41,7 @@ public class HanyoListFukaDaichoParamHandler {
     private final RString 定数KEY0 = new RString("key0");
     private final ReportId 出力順帳票ID = new ReportId("DBB200033_HanyoListFukaDaicho");
     private final RString 出力項目帳票ID = new RString("DBB200033_HanyoListFukaDaicho");
+    private final RString 実行ボタンNAME = new RString("Execute");
     private static final int INDEX_ZERO = 0;
     private static final int INDEX_FOUR = 4;
 
@@ -201,7 +202,7 @@ public class HanyoListFukaDaichoParamHandler {
         div.getChushutsuJokenPanel().getDdlJukyushaHantei().setDisabled(false);
         div.getChushutsuJokenPanel().getDdlChosyuHoho().setDisabled(false);
         div.getChushutsuJokenPanel().getChkHokenryoDankai().setDisabled(false);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("Execute"), false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(実行ボタンNAME, false);
     }
 
     private void set初期項目内容() {
@@ -229,15 +230,15 @@ public class HanyoListFukaDaichoParamHandler {
         div.getNendoKijumbiSitei().getTxtKijyunbi().clearValue();
         div.getNendoKijumbiSitei().getRadKijumbiSentaku().setSelectedKey(定数KEY0);
         //TODO DBBEnum.賦課台帳.資格区分 DBBEnum.賦課台帳.受給者判定 (QA#1027)
-        List<KeyValueDataSource> dataSource1 = new ArrayList<>();
+        List<KeyValueDataSource> 徴収方法_dataSource = new ArrayList<>();
         for (ChoshuHoho 徴収方法 : ChoshuHoho.values()) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(徴収方法.getコード());
             keyValue.setValue(徴収方法.get名称());
-            dataSource1.add(keyValue);
+            徴収方法_dataSource.add(keyValue);
         }
-        div.getChushutsuJokenPanel().getDdlChosyuHoho().setDataSource(dataSource1);
-        if (!dataSource1.isEmpty()) {
+        div.getChushutsuJokenPanel().getDdlChosyuHoho().setDataSource(徴収方法_dataSource);
+        if (!徴収方法_dataSource.isEmpty()) {
             div.getChushutsuJokenPanel().getDdlChosyuHoho().setSelectedIndex(INDEX_ZERO);
         }
         div.getChushutsuJokenPanel().getChkHokenryoDankai().setIsAllSelectable(true);

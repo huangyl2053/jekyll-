@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
@@ -69,6 +70,15 @@ public class EditedKojin {
         } else {
             return 個人.get生年月日().toFlexibleDate().seireki().toDateString();
         }
+    }
+
+    /**
+     * 生年月日を返します。
+     *
+     * @return 生年月日
+     */
+    public FlexibleDate get生年月日_A4() {
+        return 個人.get生年月日().toFlexibleDate();
     }
 
     /**

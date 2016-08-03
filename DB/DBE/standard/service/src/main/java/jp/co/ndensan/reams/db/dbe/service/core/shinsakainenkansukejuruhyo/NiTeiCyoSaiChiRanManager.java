@@ -55,7 +55,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * 画面設計_DBE2250001_認定調査データ取込（モバイル）クラスです。
  *
- * @reamsid_L DBZ-1870-010 houtianpeng
+ * @reamsid_L DBE-1870-010 houtianpeng
  */
 public class NiTeiCyoSaiChiRanManager {
 

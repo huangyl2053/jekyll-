@@ -6,15 +6,17 @@
 package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTuikaSiryoProcessParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.IinTuikaSiryoEntity;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaNinchishoKasanCode;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -41,35 +43,37 @@ public class JimuTuikaSiryoBusiness {
     private static final int INDEX_7 = 7;
     private static final int INDEX_1 = 7;
     private static final int INDEX_0 = 0;
-    private final IinTuikaSiryoEntity entity;
-    private final IinTuikaSiryoEntity siryoEntity;
+    private final ShinseiJohoEntity entity;
     private final List<ShinsakaiIinJohoEntity> 審査員;
-    private final IinTuikaSiryoProcessParameter paramter;
+    private final IinShinsakaiIinJohoProcessParameter paramter;
     private final int 審査対象者数;
     private final RString 通知文1;
+    private static final RString 前回二次_固定文字 = new RString("要介護状態区分コード");
+    private static final RString A_99 = new RString("99A");
+    private static final RString A_02 = new RString("02A");
+    private static final RString A_06 = new RString("06A");
+    private static final RString A_09 = new RString("09A");
+    private static final RString B_09 = new RString("09B");
 
     /**
      * コンストラクタです。
      *
      * @param entity IinTuikaSiryoEntity
      * @param 審査員 List<ShinsakaiIinJohoEntity>
-     * @param paramter IinTuikaSiryoProcessParameter
+     * @param paramter IinShinsakaiIinJohoProcessParameter
      * @param 審査対象者数 int
-     * @param siryoEntity IinTuikaSiryoEntity
      * @param 通知文1 通知文1
      */
     public JimuTuikaSiryoBusiness(
-            IinTuikaSiryoEntity entity,
+            ShinseiJohoEntity entity,
             List<ShinsakaiIinJohoEntity> 審査員,
-            IinTuikaSiryoProcessParameter paramter,
+            IinShinsakaiIinJohoProcessParameter paramter,
             int 審査対象者数,
-            IinTuikaSiryoEntity siryoEntity,
             RString 通知文1) {
         this.entity = entity;
         this.審査員 = 審査員;
         this.paramter = paramter;
         this.審査対象者数 = 審査対象者数;
-        this.siryoEntity = siryoEntity;
         this.通知文1 = 通知文1;
     }
 
@@ -125,51 +129,12 @@ public class JimuTuikaSiryoBusiness {
     }
 
     /**
-     * 申請日を取得します。
-     *
-     * @return 申請日
-     */
-    public RString get申請日() {
-        if (entity.getNinteiShinseiYMD() == null || entity.getNinteiShinseiYMD().isEmpty()) {
-            return RString.EMPTY;
-        }
-        return entity.getNinteiShinseiYMD().wareki().toDateString();
-    }
-
-    /**
-     * 申請区分を取得します。
-     *
-     * @return 申請区分
-     */
-    public RString get申請区分() {
-        if (entity.getShinseijiKubunCode() == null || entity.getShinseijiKubunCode().isEmpty()) {
-            return RString.EMPTY;
-        }
-        return NinteiShinseiShinseijiKubunCode.toValue(entity.getShinseijiKubunCode().value()).get名称();
-    }
-
-    /**
-     * 前回一次を取得します。
-     *
-     * @return 前回一次
-     */
-    public RString get前回一次() {
-        if (entity.getZenIchijiHanteiKekkaCode() == null || entity.getZenIchijiHanteiKekkaCode().isEmpty()) {
-            return RString.EMPTY;
-        }
-        return IchijiHanteiKekkaCode09.toValue(entity.getZenIchijiHanteiKekkaCode().value()).get名称();
-    }
-
-    /**
      * 前回二次を取得します。
      *
      * @return 前回二次
      */
     public RString get前回二次() {
-        if (entity.getJotaiKubunCode() == null || entity.getJotaiKubunCode().isEmpty()) {
-            return RString.EMPTY;
-        }
-        return YokaigoJotaiKubun09.toValue(entity.getJotaiKubunCode().value()).get略称();
+        return get要介護状態区分(entity.getNijiHanteiCode());
     }
 
     /**
@@ -178,31 +143,7 @@ public class JimuTuikaSiryoBusiness {
      * @return 前回期間
      */
     public RString get前回期間() {
-        return new RString(entity.getYukoKikan());
-    }
-
-    /**
-     * 寝たきり度を取得します。
-     *
-     * @return 寝たきり度
-     */
-    public RString get寝たきり度() {
-        if (entity.getNinchishoCode() == null || entity.getNinchishoCode().isEmpty()) {
-            return RString.EMPTY;
-        }
-        return ShogaiNichijoSeikatsuJiritsudoCode.toValue(entity.getNinchishoCode().value()).get名称();
-    }
-
-    /**
-     * 認知度を取得します。
-     *
-     * @return 認知度
-     */
-    public RString get認知度() {
-        if (entity.getNinchishoCode() == null || entity.getNinchishoCode().isEmpty()) {
-            return RString.EMPTY;
-        }
-        return NinchishoNichijoSeikatsuJiritsudoCode.toValue(entity.getNinchishoCode().value()).get名称();
+        return get前回期間(entity.getNijiHanteiKikan());
     }
 
     /**
@@ -220,10 +161,7 @@ public class JimuTuikaSiryoBusiness {
      * @return 一次判定
      */
     public RString get一次判定() {
-        if (entity.getIchijiHanteiKekkaCode() == null || entity.getIchijiHanteiKekkaCode().isEmpty()) {
-            return RString.EMPTY;
-        }
-        return IchijiHanteiKekkaCode09.toValue(entity.getIchijiHanteiKekkaCode().value()).get名称();
+        return get要介護認定一次判定結果(entity.getIchijiHanteiKekkaCode(), entity.getIchijiHanteiKasanCode());
     }
 
     /**
@@ -236,57 +174,12 @@ public class JimuTuikaSiryoBusiness {
     }
 
     /**
-     * 審査結果を取得します。
-     *
-     * @return 審査結果
-     */
-    public RString get審査結果() {
-        return RString.EMPTY;
-    }
-
-    /**
-     * 期間を取得します。
-     *
-     * @return 期間
-     */
-    public RString get期間() {
-        return RString.EMPTY;
-    }
-
-    /**
-     * 有効期間を取得します。
-     *
-     * @return 期間
-     */
-    public RString get有効期間() {
-        return RString.EMPTY;
-    }
-
-    /**
-     * 有効期間_上を取得します。
-     *
-     * @return 期間
-     */
-    public RString get有効期間_上() {
-        return RString.EMPTY;
-    }
-
-    /**
-     * 有効期間_下を取得します。
-     *
-     * @return 期間
-     */
-    public RString get有効期間_下() {
-        return RString.EMPTY;
-    }
-
-    /**
      * 前回期間_上を取得します。
      *
      * @return 前回期間
      */
     public RString get前回期間_上() {
-        return new RString(entity.getYukoKikan());
+        return RString.EMPTY;
     }
 
     /**
@@ -295,17 +188,10 @@ public class JimuTuikaSiryoBusiness {
      * @return 前回期間
      */
     public RString get前回期間_下() {
-        return new RString(entity.getYukoKikan());
-    }
-
-    /**
-     * 審査員一覧を取得します。
-     *
-     * @return 審査員一覧
-     */
-    public RString get審査員一覧() {
-
-        return RString.EMPTY;
+        RStringBuilder builder = new RStringBuilder();
+        return builder.append(パターン13(entity.getNijiHanteiKaishiYMD()))
+                .append("～")
+                .append(パターン13(entity.getNijiHanteiShuryoYMD())).toRString();
     }
 
     /**
@@ -314,7 +200,7 @@ public class JimuTuikaSiryoBusiness {
      * @return 申請書管理番号
      */
     public RString get申請書管理番号() {
-        return RString.EMPTY;
+        return entity.getShinseishoKanriNo().getColumnValue();
     }
 
     /**
@@ -445,7 +331,7 @@ public class JimuTuikaSiryoBusiness {
      * @return 合議体番号
      */
     public RString get合議体番号() {
-        return new RString(siryoEntity.getGogitaiNo());
+        return new RString(paramter.getGogitaiNo());
     }
 
     /**
@@ -454,8 +340,8 @@ public class JimuTuikaSiryoBusiness {
      * @return 審査会開催年月日
      */
     public RString get審査会開催年月日() {
-        return get審査会開催年月日(fromatパターン9(siryoEntity.getShinsakaiKaisaiYMD()),
-                日時転換(siryoEntity.getShinsakaiKaishiTime()));
+        return get審査会開催年月日(fromatパターン9(paramter.getShinsakaiKaisaiYoteiYMD()),
+                日時転換(paramter.getShinsakaiKaishiYoteiTime()));
     }
 
     /**
@@ -464,10 +350,10 @@ public class JimuTuikaSiryoBusiness {
      * @return 保険者
      */
     public RString get保険者() {
-        if (RString.isNullOrEmpty(entity.getShichosonMeisho())) {
+        if (RString.isNullOrEmpty(entity.getShoKisaiHokenshaNo())) {
             return RString.EMPTY;
         }
-        return entity.getShichosonMeisho();
+        return entity.getShoKisaiHokenshaNo();
     }
 
     /**
@@ -545,5 +431,54 @@ public class JimuTuikaSiryoBusiness {
                 .append(" ")
                 .append(日時)
                 .toRString();
+    }
+
+    private RString get前回期間(int 期間) {
+        RStringBuilder 前回期間 = new RStringBuilder();
+        前回期間.append(期間);
+        前回期間.append(new RString("ヵ月"));
+        return 前回期間.toRString();
+    }
+
+    private RString get要介護状態区分(Code 状態区分コード) {
+        RStringBuilder builder = new RStringBuilder();
+        if (状態区分コード != null && !状態区分コード.isEmpty()) {
+            RString 厚労省IF識別コード = entity.getKoroshoCode().getColumnValue();
+            if (A_99.equals(厚労省IF識別コード)) {
+                return builder.append(前回二次_固定文字).append(YokaigoJotaiKubun99.toValue(状態区分コード.getColumnValue()).get名称()).toRString();
+            } else if (A_02.equals(厚労省IF識別コード)) {
+                return builder.append(前回二次_固定文字).append(YokaigoJotaiKubun02.toValue(状態区分コード.getColumnValue()).get名称()).toRString();
+            } else if (A_06.equals(厚労省IF識別コード)) {
+                return builder.append(前回二次_固定文字).append(YokaigoJotaiKubun06.toValue(状態区分コード.getColumnValue()).get名称()).toRString();
+            } else if (A_09.equals(厚労省IF識別コード) || B_09.equals(厚労省IF識別コード)) {
+                return builder.append(前回二次_固定文字).append(YokaigoJotaiKubun09.toValue(状態区分コード.getColumnValue()).get名称()).toRString();
+            }
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get要介護認定一次判定結果(Code 判定結果コード, Code 判定結果コード_認知症加算) {
+        RStringBuilder builder = new RStringBuilder();
+        if (判定結果コード != null && !判定結果コード.isEmpty()
+                && 判定結果コード_認知症加算 != null && !判定結果コード_認知症加算.isEmpty()) {
+            RString 判定結果コード名称 = IchijiHanteiKekkaCode09.toValue(判定結果コード.getColumnValue()).get名称();
+            RString 判定結果コード_認知症加算名称 = IchijiHanteiKekkaNinchishoKasanCode.toValue(判定結果コード_認知症加算.getColumnValue()).get名称();
+            if (判定結果コード.equals(判定結果コード_認知症加算)) {
+                return 判定結果コード名称;
+            } else {
+                return builder.append(判定結果コード名称)
+                        .append("→")
+                        .append(判定結果コード_認知症加算名称).toRString();
+            }
+        }
+        return RString.EMPTY;
+    }
+
+    private RString パターン13(FlexibleDate 年月日) {
+        if (年月日 != null && !年月日.isEmpty()) {
+            return 年月日.wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
+        }
+        return RString.EMPTY;
     }
 }

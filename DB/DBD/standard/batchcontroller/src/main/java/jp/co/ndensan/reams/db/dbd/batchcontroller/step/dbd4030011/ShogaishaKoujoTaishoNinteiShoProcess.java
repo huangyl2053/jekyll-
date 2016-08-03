@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd4030011;
 
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100025.ShogaishaKojoNinteishoReport;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd4030011.ShogaishaKojoTaishoshaListMyBatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd4030011.ShogaishakojoTaishoshaListProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
@@ -56,13 +57,13 @@ public class ShogaishaKoujoTaishoNinteiShoProcess extends BatchProcessBase<Ninte
     @Override
     protected void createWriter() {
         batchReportWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBD100025.getColumnValue(), SubGyomuCode.DBD介護受給).create();
-        reportSourceWriter = new ReportSourceWriter(batchReportWrite);
+        reportSourceWriter = new ReportSourceWriter<>(batchReportWrite);
     }
 
     @Override
     protected void process(NinteishoJohoEntity entity) {
-//         ShogaishaKoujoTaishoNinteiShoReport report = new ShogaishaKoujoTaishoNinteiShoReport(entity,交付日,申告年);
-//         report.writeBy(reportSourceWriter);
+        ShogaishaKojoNinteishoReport report = new ShogaishaKojoNinteishoReport(entity);
+        report.writeBy(reportSourceWriter);
     }
 
 }

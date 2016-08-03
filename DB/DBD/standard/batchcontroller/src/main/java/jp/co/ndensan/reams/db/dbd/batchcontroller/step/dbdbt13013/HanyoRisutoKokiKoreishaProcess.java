@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt13013;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuHohoKubun;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.SoshitsuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.hanyorisutokokikoreisha.HanyoRisutoKokiKoreishaProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutokokikoreisha.HanyoRisutoKokiKoreishaEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutokokikoreisha.HanyoRisutoKokiKoreishaEucCsvEntity;
@@ -20,6 +22,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseishaKankeiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotakuservicekeikaku.KyotakuservicekeikakuSakuseikubunCode;
@@ -41,9 +45,13 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
@@ -54,6 +62,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -125,12 +134,26 @@ public class HanyoRisutoKokiKoreishaProcess extends BatchProcessBase<HanyoRisuto
     private static final RString SHINKI = new RString("新規");
     private static final RString HENKO = new RString("変更");
     private static final RString ZATEI = new RString("暫定");
-    private static final RString SEPARATOR = new RString(" ＞ ");
-    private static final RString COMMA = new RString(",");
     private static final RString CYUSYUTSUTAISYOSHA = new RString("【抽出対象者】");
     private static final RString HOKENSHA = new RString("保険者：");
-    private static final RString SHIKIBETSUCODE = new RString("後期高齢者情報.識別コード");
-    private static final RString RIREKIBANGO = new RString("後期高齢者情報.履歴番号");
+    private static final RString KIZYUNNICHI = new RString("基準日：");
+    private static final RString CHOKINNOMI = new RString("対象データ：直近のみ");
+    private static final RString SOSHITSUKUBEN = new RString("喪失区分：");
+    private static final RString SHIKIBETSUCODE = new RString("識別コード");
+    private static final RString RIREKIBANGO = new RString("履歴番号");
+    private static final RString CHIKI_1 = new RString("地区１");
+    private static final RString CHIKI_2 = new RString("地区２");
+    private static final RString CHIKI_3 = new RString("地区３");
+    private static final RString GYOSEIKU = new RString("行政区");
+    private static final RString JUSYO = new RString("住所");
+    private static final RString NENLEI = new RString("年齢");
+    private static final RString SEINENGAPPI = new RString("生年月日");
+    private static final RString SPACE = new RString(" ");
+    private static final RString COMMA = new RString(",");
+    private static final RString COLON = new RString(":");
+    private static final RString カラ = new RString("～");
+    private static final RString 左記号 = new RString("(");
+    private static final RString 右記号 = new RString(")");
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hanyorisutokokikoreisha."
             + "IHanyoRisutoKokiKoreishaMapper.get汎用リスト");
@@ -152,7 +175,7 @@ public class HanyoRisutoKokiKoreishaProcess extends BatchProcessBase<HanyoRisuto
 
     @Override
     protected IBatchReader createReader() {
-        RString 出力順 = get出力順(processParamter.getSyutsuryokukomoku());
+        RString 出力順 = get出力順();
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
@@ -195,6 +218,38 @@ public class HanyoRisutoKokiKoreishaProcess extends BatchProcessBase<HanyoRisuto
         AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
         manager.spool(eucFilePath, log);
         バッチ出力条件リストの出力();
+    }
+
+    private RString get出力順() {
+        RStringBuilder orderByClause = new RStringBuilder("order by");
+        List<RString> 出力DB項目名 = new ArrayList();
+        List<RString> 出力DB項目 = new ArrayList();
+        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+        IOutputOrder order = finder.get出力順(SubGyomuCode.DBD介護受給, new ReportId(processParamter.getCyohyoid()),
+                processParamter.getSyutsuryokujun());
+        List<ISetSortItem> 設定項目リスト = order.get設定項目リスト();
+        for (ISetSortItem item : 設定項目リスト) {
+            出力DB項目名.add(item.getDB項目名());
+            出力DB項目.add(item.getDB項目名().concat(SPACE).concat(item.get昇降順().getOrder()));
+        }
+        if (出力DB項目名.contains(SHIKIBETSUCODE) && !出力DB項目名.contains(RIREKIBANGO)) {
+            for (int index = 0; index < 出力DB項目.size(); index++) {
+                if (出力DB項目.get(index).startsWith(SHIKIBETSUCODE)) {
+                    出力DB項目.add(index + 1, RIREKIBANGO);
+                }
+            }
+        } else if (!出力DB項目名.contains(SHIKIBETSUCODE) && !出力DB項目名.contains(RIREKIBANGO)) {
+            出力DB項目.add(SHIKIBETSUCODE);
+            出力DB項目.add(RIREKIBANGO);
+        }
+        for (int j = 0; j < 出力DB項目.size(); j++) {
+            if (j != 0) {
+                orderByClause = orderByClause.append(SPACE).append(COMMA).append(SPACE).append(出力DB項目.get(j));
+            } else {
+                orderByClause = orderByClause.append(SPACE).append(出力DB項目.get(j));
+            }
+        }
+        return orderByClause.toRString();
     }
 
     private HanyoRisutoKokiKoreishaEucCsvEntity setBlank() {
@@ -931,12 +986,115 @@ public class HanyoRisutoKokiKoreishaProcess extends BatchProcessBase<HanyoRisuto
         List<RString> 出力条件 = new ArrayList<>();
         出力条件.add(CYUSYUTSUTAISYOSHA);
         RStringBuilder builder = new RStringBuilder();
-        builder.append(HOKENSHA);
-        IAssociationFinder finder = AssociationFinderFactory.createInstance();
-        Association 地方公共団体 = finder.getAssociation(processParamter.getAtenacyusyutsujyoken().getShichoson_Code());
-        builder.append(地方公共団体.get市町村名());
+        if (null != processParamter.getAtenacyusyutsujyoken()
+                && null != processParamter.getAtenacyusyutsujyoken().getShichoson_Code()
+                && !processParamter.getAtenacyusyutsujyoken().getShichoson_Code().equals(LasdecCode.EMPTY)) {
+            builder.append(HOKENSHA);
+            IAssociationFinder finder = AssociationFinderFactory.createInstance();
+            Association 地方公共団体 = finder.getAssociation(processParamter.getAtenacyusyutsujyoken().getShichoson_Code());
+            builder.append(地方公共団体.get市町村名());
+            出力条件.add(builder.toRString());
+        }
+        if (null != processParamter.getKizyunnichi()) {
+            builder.append(KIZYUNNICHI);
+            builder.append(processParamter.getKizyunnichi().wareki().toDateString());
+            出力条件.add(builder.toRString());
+        }
+        builder.append(ChushutsuHohoKubun.toValue(processParamter.getCyusyutsuhohokubun()));
+        builder.append(SPACE);
+        builder.append(COLON);
+        builder.append(SPACE);
+        if (null != processParamter.getHitsukehanifrom()) {
+            builder.append(processParamter.getHitsukehanifrom().wareki().toDateString());
+            builder.append(SPACE);
+        }
+        builder.append(カラ);
+        if (null == processParamter.getHitsukehanito()) {
+            builder.append(SPACE);
+            builder.append(processParamter.getHitsukehanito().wareki().toDateString());
+        }
         出力条件.add(builder.toRString());
-        //TODO QA確認を待ち
+        if (processParamter.isChokindatacyusyutsu()) {
+            builder.append(CHOKINNOMI);
+            出力条件.add(builder.toRString());
+        }
+        if (!RString.isNullOrEmpty(processParamter.getSoshitsukubun())
+                && !SoshitsuKubun.資格判定なし.getコード().equals(processParamter.getSoshitsukubun())) {
+            builder.append(SOSHITSUKUBEN);
+            builder.append(SoshitsuKubun.toValue(processParamter.getSoshitsukubun()));
+            出力条件.add(builder.toRString());
+        }
+        if (null != processParamter.getAtenacyusyutsujyoken()
+                && null != processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun()) {
+            if (NenreiSoChushutsuHoho.年齢範囲.equals(processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun())) {
+                builder.append(NENLEI);
+                builder.append(COLON);
+                if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom()) {
+                    builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom().toString()));
+                }
+                builder.append(SPACE);
+                builder.append(カラ);
+                if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo()) {
+                    builder.append(SPACE);
+                    builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo().toString()));
+                }
+            } else if (NenreiSoChushutsuHoho.生年月日範囲.equals(processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun())) {
+                builder.append(SEINENGAPPI);
+                builder.append(COLON);
+                if (null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom()) {
+                    builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom().toString()));
+                }
+                builder.append(SPACE);
+                builder.append(カラ);
+                if (null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo()) {
+                    builder.append(SPACE);
+                    builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo().toString()));
+                }
+            }
+            出力条件.add(builder.toRString());
+        }
+        if (null != processParamter.getAtenacyusyutsujyoken()
+                && null != processParamter.getAtenacyusyutsujyoken().getChiku_Kubun()) {
+            if (Chiku.地区.equals(processParamter.getAtenacyusyutsujyoken().getChiku_Kubun())) {
+                if (!RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getChiku1_From()) && !RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getChiku1_To())) {
+                    builder.append(CHIKI_1);
+                    builder.append(COLON);
+                    builder.append(get地区区間出力条件(processParamter.getAtenacyusyutsujyoken().getChiku1_From(),
+                            processParamter.getAtenacyusyutsujyoken().getChiku1_FromMesho(),
+                            processParamter.getAtenacyusyutsujyoken().getChiku1_To(),
+                            processParamter.getAtenacyusyutsujyoken().getChiku1_ToMesho()));
+                } else if (!RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getChiku2_From()) && RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getChiku2_To())) {
+                    builder.append(CHIKI_2);
+                    builder.append(COLON);
+                    builder.append(get地区区間出力条件(processParamter.getAtenacyusyutsujyoken().getChiku2_From(),
+                            processParamter.getAtenacyusyutsujyoken().getChiku2_FromMesho(),
+                            RString.EMPTY,
+                            RString.EMPTY));
+                } else if (RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getChiku3_From()) && !RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getChiku3_To())) {
+                    builder.append(CHIKI_3);
+                    builder.append(COLON);
+                    builder.append(get地区区間出力条件(RString.EMPTY,
+                            RString.EMPTY,
+                            processParamter.getAtenacyusyutsujyoken().getChiku3_To(),
+                            processParamter.getAtenacyusyutsujyoken().getChiku3_ToMesho()));
+                }
+            } else if (Chiku.行政区.equals(processParamter.getAtenacyusyutsujyoken().getChiku_Kubun())) {
+                builder.append(GYOSEIKU);
+                builder.append(COLON);
+                builder.append(get地区区間出力条件(processParamter.getAtenacyusyutsujyoken().getGyoseiku_From(),
+                        processParamter.getAtenacyusyutsujyoken().getGyoseiku_FromMesho(),
+                        processParamter.getAtenacyusyutsujyoken().getGyoseiku_To(),
+                        processParamter.getAtenacyusyutsujyoken().getGyoseiku_ToMesho()));
+            } else if (Chiku.住所.equals(processParamter.getAtenacyusyutsujyoken().getChiku_Kubun())) {
+                builder.append(JUSYO);
+                builder.append(COLON);
+                builder.append(get地区区間出力条件(processParamter.getAtenacyusyutsujyoken().getJusho_From(),
+                        processParamter.getAtenacyusyutsujyoken().getJusho_FromMesho(),
+                        processParamter.getAtenacyusyutsujyoken().getJusho_To(),
+                        processParamter.getAtenacyusyutsujyoken().getJusho_ToMesho()));
+            }
+            出力条件.add(builder.toRString());
+        }
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 new RString("DBD701012"),
                 導入団体コード,
@@ -951,25 +1109,25 @@ public class HanyoRisutoKokiKoreishaProcess extends BatchProcessBase<HanyoRisuto
         printer.print();
     }
 
-    private RString get出力順(RString 出力項目) {
-        RString 出力順 = new RString("");
-        List<RString> shutsuryokuItems = 出力項目.split(SEPARATOR.toString());
-        if (shutsuryokuItems.contains(SHIKIBETSUCODE) && !shutsuryokuItems.contains(RIREKIBANGO)) {
-            if (shutsuryokuItems.indexOf(SHIKIBETSUCODE) != shutsuryokuItems.size() - 1) {
-                shutsuryokuItems.add(shutsuryokuItems.indexOf(SHIKIBETSUCODE) + 1, RIREKIBANGO);
-            } else {
-                shutsuryokuItems.add(RIREKIBANGO);
-            }
-        } else if (!shutsuryokuItems.contains(SHIKIBETSUCODE) && !shutsuryokuItems.contains(RIREKIBANGO)) {
-            shutsuryokuItems.add(SHIKIBETSUCODE);
-            shutsuryokuItems.add(RIREKIBANGO);
+    private RString get地区区間出力条件(RString codeFrom, RString fromMesho, RString codeTo, RString toMesho) {
+        RStringBuilder builder = new RStringBuilder();
+        if (!RString.isNullOrEmpty(codeFrom)) {
+            builder.append(左記号);
+            builder.append(codeFrom);
+            builder.append(右記号);
+            builder.append(SPACE);
+            builder.append(fromMesho);
+            builder.append(SPACE);
         }
-        for (int j = 0; j < shutsuryokuItems.size(); ++j) {
-            if (j != 0) {
-                出力順 = 出力順.concat(COMMA);
-            }
-            出力順 = 出力順.concat(shutsuryokuItems.get(j));
+        builder.append(カラ);
+        if (!RString.isNullOrEmpty(codeTo)) {
+            builder.append(SPACE);
+            builder.append(左記号);
+            builder.append(codeTo);
+            builder.append(右記号);
+            builder.append(SPACE);
+            builder.append(toMesho);
         }
-        return 出力順;
+        return builder.toRString();
     }
 }

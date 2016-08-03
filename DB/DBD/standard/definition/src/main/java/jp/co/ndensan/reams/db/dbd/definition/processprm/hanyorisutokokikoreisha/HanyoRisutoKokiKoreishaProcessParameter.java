@@ -34,6 +34,7 @@ public class HanyoRisutoKokiKoreishaProcessParameter implements IBatchProcessPar
     private boolean isCsvrenbanfuka;
     private boolean isCsvhitsukesurasyuhensyu;
     private AtenaSelectBatchParameter atenacyusyutsujyoken;
+    private RString cyohyoid;
     private Long syutsuryokujun;
     private RString syutsuryokukomoku;
 
@@ -51,13 +52,14 @@ public class HanyoRisutoKokiKoreishaProcessParameter implements IBatchProcessPar
      * @param isCsvrenbanfuka CSV連番付加
      * @param isCsvhitsukesurasyuhensyu CSV日付スラッシュ編集
      * @param atenacyusyutsujyoken 宛名抽出条件
+     * @param cyohyoid 帳票ID
      * @param syutsuryokujun 出力順
      * @param syutsuryokukomoku 出力項目
      */
     public HanyoRisutoKokiKoreishaProcessParameter(RString cyusyutsuhohokubun, RString cyusyutsukomokukubun,
             FlexibleDate kizyunnichi, FlexibleDate hitsukehanifrom, FlexibleDate hitsukehanito, boolean chokindatacyusyutsu,
             RString soshitsukubun, boolean isCsvkomokumeifuka, boolean isCsvrenbanfuka, boolean isCsvhitsukesurasyuhensyu,
-            AtenaSelectBatchParameter atenacyusyutsujyoken, Long syutsuryokujun, RString syutsuryokukomoku) {
+            AtenaSelectBatchParameter atenacyusyutsujyoken, RString cyohyoid, Long syutsuryokujun, RString syutsuryokukomoku) {
         this.cyusyutsuhohokubun = cyusyutsuhohokubun;
         this.cyusyutsukomokukubun = cyusyutsukomokukubun;
         this.kizyunnichi = kizyunnichi;
@@ -69,6 +71,7 @@ public class HanyoRisutoKokiKoreishaProcessParameter implements IBatchProcessPar
         this.isCsvrenbanfuka = isCsvrenbanfuka;
         this.isCsvhitsukesurasyuhensyu = isCsvhitsukesurasyuhensyu;
         this.atenacyusyutsujyoken = atenacyusyutsujyoken;
+        this.cyohyoid = cyohyoid;
         this.syutsuryokujun = syutsuryokujun;
         this.syutsuryokukomoku = syutsuryokukomoku;
     }
