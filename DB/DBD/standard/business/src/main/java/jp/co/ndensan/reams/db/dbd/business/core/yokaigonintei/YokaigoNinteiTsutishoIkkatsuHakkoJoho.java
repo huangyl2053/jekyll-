@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 /**
  * 要介護認定通知書一括発行情報です。
  *
- * @reamsid_L DBE-1430-010 lit
+ * @reamsid_L DBD-1430-010 lit
  */
 public class YokaigoNinteiTsutishoIkkatsuHakkoJoho {
 
