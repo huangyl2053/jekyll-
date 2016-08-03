@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei.T
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokubetsuchoshudoteimidoteiichiran.TokubetsuChoshuDoteiMiDoteiIchiranBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiMybatisParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2019TokuchoMidoteiJohoEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2019TokuchoMidoteiJohoDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchotaishoshaichiransakusei.ITokuchoTaishoshaIchiranSakuseiMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
