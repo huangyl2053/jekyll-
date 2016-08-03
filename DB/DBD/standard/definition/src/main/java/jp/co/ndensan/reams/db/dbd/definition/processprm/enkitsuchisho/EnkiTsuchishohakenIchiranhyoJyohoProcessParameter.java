@@ -18,7 +18,7 @@ import lombok.Setter;
 /**
  * バッチ設計_DBD522001_延期通知書出力パラメタークラスです．
  *
- * @reamsid_L DBD-5220-001 chenxin
+ * @reamsid_L DBD-1410-020 chenxin
  */
 @Getter
 @Setter

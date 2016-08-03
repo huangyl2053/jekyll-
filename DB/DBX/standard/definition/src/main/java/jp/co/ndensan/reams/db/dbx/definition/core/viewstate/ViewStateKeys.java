@@ -13,6 +13,14 @@ package jp.co.ndensan.reams.db.dbx.definition.core.viewstate;
 public enum ViewStateKeys {
 
     /**
+     * イメージ情報_存在
+     */
+    イメージ情報_存在,
+    /**
+     * イメージ区分
+     */
+    イメージ区分,
+    /**
      * 国保連取込情報
      */
     国保連取込情報,

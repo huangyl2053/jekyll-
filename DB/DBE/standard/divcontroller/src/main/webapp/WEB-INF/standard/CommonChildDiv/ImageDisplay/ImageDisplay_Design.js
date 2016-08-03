@@ -4,6 +4,17 @@ var DBE;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnBefore = function () {
+                return "onClick_btnBefore";
+            };
+
+            Events.onClick_btnBack = function () {
+                return "onClick_btnBack";
+            };
+
+            Events.onClick_btnAfterImg = function () {
+                return "onClick_btnAfterImg";
+            };
             return Events;
         })();
         ImageDisplay.Events = Events;
@@ -48,12 +59,12 @@ var DBE;
                 return new UZA.Button(this.convFiledName("btnBefore"));
             };
 
-            Controls.prototype.btnAfterImg = function () {
-                return new UZA.Button(this.convFiledName("btnAfterImg"));
-            };
-
             Controls.prototype.btnBack = function () {
                 return new UZA.Button(this.convFiledName("btnBack"));
+            };
+
+            Controls.prototype.btnAfterImg = function () {
+                return new UZA.Button(this.convFiledName("btnAfterImg"));
             };
             return Controls;
         })();
