@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbd.business.report.dbd200019.FutangakuNinteiHakko
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200019.FutangakuNinteiHakkoIchiranReport;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.futangakuninteihakkoichiran.FutangakuNinteiHakkoIchiranEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200019.FutangakuNinteiHakkoIchiranReportSource;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
@@ -34,15 +35,16 @@ public class FutangakuNinteiHakkoIchiranService {
      * @param 帳票情報リスト List<FutangGendoGakuNinteiEntity>
      * @param association Association
      * @param iOutputOrder IOutputOrder
+     * @param 個人情報 IKojin
      * @param reportManager 帳票発行処理の制御機能
      */
     public void print(List<FutangakuNinteiHakkoIchiranEntity> 帳票情報リスト, Association association,
-            IOutputOrder iOutputOrder, ReportManager reportManager) {
+            IOutputOrder iOutputOrder, IKojin 個人情報, ReportManager reportManager) {
         FutangakuNinteiHakkoIchiranProerty property = new FutangakuNinteiHakkoIchiranProerty();
         try (ReportAssembler<FutangakuNinteiHakkoIchiranReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<FutangakuNinteiHakkoIchiranReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             FutangakuNinteiHakkoIchiranReport report = FutangakuNinteiHakkoIchiranReport.createReport(帳票情報リスト,
-                    association, iOutputOrder);
+                    association, iOutputOrder, 個人情報);
             report.writeBy(reportSourceWriter);
 
         }

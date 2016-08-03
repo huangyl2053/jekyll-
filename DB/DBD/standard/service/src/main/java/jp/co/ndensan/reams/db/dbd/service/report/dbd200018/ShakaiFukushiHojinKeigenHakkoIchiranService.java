@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbd.business.report.dbd200018.ShakaiFukushiHojinKe
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200018.ShakaiFukushiHojinKeigenHakkoIchiranReport;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shakaifukushihojinkeigenhakkoichiran.ShakaiFukushiHojinKeigenHakkoIchiranEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200018.ShakaiFukushiHojinKeigenHakkoIchiranReportSource;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
@@ -34,17 +35,18 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranService {
      * @param 帳票情報リスト List<ShakaiFukushiHojinKeigenHakkoIchiranEntity>
      * @param association Association
      * @param iOutputOrder IOutputOrder
+     * @param 個人情報 IKojin
      * @param reportManager 帳票発行処理の制御機能
      */
     public void print(List<ShakaiFukushiHojinKeigenHakkoIchiranEntity> 帳票情報リスト, Association association,
-            IOutputOrder iOutputOrder, ReportManager reportManager) {
+            IOutputOrder iOutputOrder, IKojin 個人情報, ReportManager reportManager) {
         ShakaiFukushiHojinKeigenHakkoIchiranProerty property = new ShakaiFukushiHojinKeigenHakkoIchiranProerty();
         try (ReportAssembler<ShakaiFukushiHojinKeigenHakkoIchiranReportSource> assembler
                 = createAssembler(property, reportManager)) {
             ReportSourceWriter<ShakaiFukushiHojinKeigenHakkoIchiranReportSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
             ShakaiFukushiHojinKeigenHakkoIchiranReport report = ShakaiFukushiHojinKeigenHakkoIchiranReport.createReport(
-                    帳票情報リスト, association, iOutputOrder);
+                    帳票情報リスト, association, iOutputOrder, 個人情報);
             report.writeBy(reportSourceWriter);
 
         }
