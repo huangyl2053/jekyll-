@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -53,18 +54,21 @@ public class ShinseiKensaku {
     public ResponseData<ShinseiKensakuDiv> onLoad(ShinseiKensakuDiv div) {
         div.getCcdNinteishinseishaFinder().initialize();
         getHandler(div).load();
-        IUrControlData controlData = UrControlDataFactory.createInstance();
-        RString menuID = controlData.getMenuID();
+        return ResponseData.of(div).setState(findStateAt条件指定());
+    }
+
+    private static DBE0100001StateName findStateAt条件指定() {
+        RString menuID = ResponseHolder.getMenuID();
         if (MENUID_DBEMN11001.equals(menuID)) {
-            return ResponseData.of(div).setState(DBE0100001StateName.申請検索);
+            return DBE0100001StateName.申請検索;
         } else if (MENUID_DBEMN11003.equals(menuID)) {
-            return ResponseData.of(div).setState(DBE0100001StateName.個人照会);
+            return DBE0100001StateName.個人照会;
         } else if (MENUID_DBEMN14001.equals(menuID)
                    || MENUID_DBEMN32002.equals(menuID)
                    || MENUID_DBEMN31005.equals(menuID)) {
-            return ResponseData.of(div).setState(DBE0100001StateName.情報提供);
+            return DBE0100001StateName.情報提供;
         }
-        return ResponseData.of(div).respond();
+        return DBE0100001StateName.条件指定;
     }
 
     /**
@@ -105,7 +109,7 @@ public class ShinseiKensaku {
         if (MENUID_DBEMN11001.equals(menuID)) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_BTNITIRANPRINT, false);
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE0100001StateName.検索結果一覧);
     }
 
     /**
@@ -161,7 +165,7 @@ public class ShinseiKensaku {
         div.getTxtMaxDisp().setDisabled(false);
         div.getBtnKensaku().setDisabled(false);
         div.getBtnModoru().setDisabled(true);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(findStateAt条件指定());
     }
 
     /**
