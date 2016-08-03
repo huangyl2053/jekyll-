@@ -15,6 +15,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.h
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.jukyuShinseiJiyu;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.jukyuShinseiYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.logicalDeletedFlag;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.ninteiYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.ninteiYukoKikanKaishiYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.ninteiYukoKikanShuryoYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.rirekiNo;
@@ -523,6 +524,24 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                                 leq(終了利用年月, ninteiYukoKikanShuryoYMD))).
                 order(by(shikyuGendoTanisu, Order.DESC)).
                 limit(1).
+                toObject(DbT4001JukyushaDaichoEntity.class);
+    }
+
+    /**
+     * select認定年月日
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT4001JukyushaDaichoEntity
+     */
+    @Transaction
+    public DbT4001JukyushaDaichoEntity select認定年月日(HihokenshaNo 被保険者番号) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(ninteiYMD).
+                table(DbT4001JukyushaDaicho.class).
+                where(eq(hihokenshaNo, 被保険者番号)).
+                order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).limit(1).
                 toObject(DbT4001JukyushaDaichoEntity.class);
     }
 }

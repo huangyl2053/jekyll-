@@ -44,7 +44,7 @@
     </select>
 
     <resultMap id="resultMap_getTokuchoTaishoListJoho" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbb.entity.db.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity">
+               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity">
         <id column="ueT0511NenkinTokuchoKaifuJoho_gyomuCode"/>
         <id column="ueT0511NenkinTokuchoKaifuJoho_shoriNendo"/>
         <id column="ueT0511NenkinTokuchoKaifuJoho_tsuchiNaiyoCode"/>
@@ -87,7 +87,7 @@
     </select>
 
     <resultMap id="resultMap_getTokuchoMiTaishoListJoho" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbb.entity.db.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity">
+               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity">
         <id column="dbT2019TokuchoMidoteiJoho_shoriNendo"/>
         <id column="dbT2019TokuchoMidoteiJoho_kisoNenkinNo"/>
         <id column="dbT2019TokuchoMidoteiJoho_nenkinCode"/>
@@ -129,7 +129,7 @@
     </select>
 
     <resultMap id="resultMap_getTokuchoTaishoKouhosyaListJoho" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbb.entity.db.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity">
+               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity">
         <id column="dbT2019TokuchoMidoteiJoho_shoriNendo"/>
         <id column="dbT2019TokuchoMidoteiJoho_kisoNenkinNo"/>
         <id column="dbT2019TokuchoMidoteiJoho_nenkinCode"/>
@@ -180,7 +180,7 @@
     </select>
 
     <resultMap id="resultMap_getTokuchoTaishoKouhosyaDetailJoho" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbb.entity.db.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity">
+               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity">
         <id column="dbT2019TokuchoMidoteiJoho_shoriNendo"/>
         <id column="dbT2019TokuchoMidoteiJoho_kisoNenkinNo"/>
         <id column="dbT2019TokuchoMidoteiJoho_nenkinCode"/>
@@ -215,7 +215,7 @@
     </select>
 
     <resultMap id="resultMap_getHihokenshaJoho" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbb.entity.db.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity">
+               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity">
         <association property="uet0511entity" resultMap="resultMap_UeT0511NenkinTokuchoKaifuJohoEntity"/>
         <association property="dbt2019entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2019TokuchoMidoteiJohoMapper.ResultMap_DbT2019TokuchoMidoteiJohoEntity"/>
         <association property="dbt1001entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>

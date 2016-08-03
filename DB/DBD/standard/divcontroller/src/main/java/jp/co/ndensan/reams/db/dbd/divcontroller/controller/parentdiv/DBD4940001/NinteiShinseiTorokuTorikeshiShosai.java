@@ -176,7 +176,7 @@ public class NinteiShinseiTorokuTorikeshiShosai {
             }
 
             ViewStateHolder.put(要介護認定取消画面キー.画面ダイアローグ番号, 1);
-            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
 
         int 画面ダイアローグ番号 = ViewStateHolder.get(要介護認定取消画面キー.画面ダイアローグ番号, Integer.class);
