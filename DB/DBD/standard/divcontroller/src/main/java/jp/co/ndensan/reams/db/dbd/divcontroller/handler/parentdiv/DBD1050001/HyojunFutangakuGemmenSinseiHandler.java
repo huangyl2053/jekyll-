@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1050001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.hyojunfutangakugemmen.HyojunFutangakuGemmen;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.hyojunfutangakugemmen.GengakuKubun;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1050001.HyojunFutanGemmenDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1050001.dgShinseiIchiran_Row;
@@ -95,7 +96,11 @@ public class HyojunFutangakuGemmenSinseiHandler {
             TextBoxFlexibleDate 決定年月日 = new TextBoxFlexibleDate();
             決定年月日.setValue(new FlexibleDate(dbT4012HyojunFutangakuGemmen.get決定年月日().toString()));
             hyojunFutangakuGemmen.setTxtKetteiYMD(決定年月日);
-            hyojunFutangakuGemmen.setTxtKetteiKubun(dbT4012HyojunFutangakuGemmen.get決定区分());
+            if (dbT4012HyojunFutangakuGemmen.get決定区分().equals(KetteiKubun.承認しない.getコード())) {
+                hyojunFutangakuGemmen.setTxtKetteiKubun(KetteiKubun.承認しない.get名称());
+            } else {
+                hyojunFutangakuGemmen.setTxtKetteiKubun(KetteiKubun.承認する.get名称());
+            }
             if (dbT4012HyojunFutangakuGemmen.get減額後金額() == null) {
                 hyojunFutangakuGemmen.setTxtHyojunFutangaku(RString.EMPTY);
             } else {
@@ -114,12 +119,8 @@ public class HyojunFutangakuGemmenSinseiHandler {
                     hyojunFutangakuGemmen.setTxtGengakuKubun(GengakuKubun.その他.get名称());
                 }
             }
-            TextBoxFlexibleDate 適用終了年月日 = new TextBoxFlexibleDate();
-            TextBoxFlexibleDate 適用開始年月日 = new TextBoxFlexibleDate();
-            適用開始年月日.setValue(new FlexibleDate(dbT4012HyojunFutangakuGemmen.get適用開始年月日().toString()));
-            適用終了年月日.setValue(new FlexibleDate(dbT4012HyojunFutangakuGemmen.get適用終了年月日().toString()));
-            hyojunFutangakuGemmen.setTxtTekiyoYMD(適用開始年月日);
-            hyojunFutangakuGemmen.setTxtYukoKigen(適用終了年月日.getText());
+            hyojunFutangakuGemmen.getTxtTekiyoYMD().setValue(new FlexibleDate(dbT4012HyojunFutangakuGemmen.get適用開始年月日().toString()));
+            hyojunFutangakuGemmen.getTxtYukoKigen().setValue(new FlexibleDate(dbT4012HyojunFutangakuGemmen.get適用終了年月日().toString()));
 
             if (dbT4012HyojunFutangakuGemmen.get非承認理由() == null) {
                 hyojunFutangakuGemmen.setTxtShoninShinaiRiyu(RString.EMPTY);
