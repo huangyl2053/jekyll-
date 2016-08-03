@@ -109,7 +109,7 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
     @BatchParameter(key = CHOHYOIIN_IKENSHOFALG, name = "委員用主治医意見書フラグ")
     private RString chohyoIin_ikenshoFalg;
     @BatchParameter(key = CHOYOIIN_SONOTASIRYOFALG, name = "委員用その他資料フラグ")
-    private RString choyoIin_sonotaSiryoFalg;
+    private RString chohyoIin_sonotaSiryoFalg;
     @BatchParameter(key = CHOHYOIIN_TUUTISHOFALG, name = "委員用審査会開催通知書フラグ")
     private RString chohyoIin_tuutishoFalg;
     @BatchParameter(key = CHOHYOIIN_HANTEIFALG, name = "委員用予備判定記入表フラグ")
@@ -149,7 +149,7 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
      * @param chohyoIin_tokkiJikouFalg 委員_特記事項フラグ
      * @param chohyoIin_itiziHanteiFalg 委員_一次判定結果票フラグ
      * @param chohyoIin_tokkiJikouHanteiFalg 委員_特記事項_一次判定フラグ
-     * @param choyoIin_sonotaSiryoFalg 委員用その他資料フラグ
+     * @param chohyoIin_sonotaSiryoFalg 委員用その他資料フラグ
      * @param chohyoIin_ikenshoFalg 委員_主治医意見書フラグ
      * @param chohyoIin_hanteiFalg 委員_予備判定記入表フラグ
      */
@@ -179,7 +179,7 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
             RString chohyoIin_itiziHanteiFalg,
             RString chohyoIin_tokkiJikouHanteiFalg,
             RString chohyoIin_ikenshoFalg,
-            RString choyoIin_sonotaSiryoFalg,
+            RString chohyoIin_sonotaSiryoFalg,
             RString chohyoIin_tuutishoFalg,
             RString chohyoIin_hanteiFalg) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
@@ -207,7 +207,7 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
         this.chohyoIin_itiziHanteiFalg = chohyoIin_itiziHanteiFalg;
         this.chohyoIin_tokkiJikouHanteiFalg = chohyoIin_tokkiJikouHanteiFalg;
         this.chohyoIin_ikenshoFalg = chohyoIin_ikenshoFalg;
-        this.choyoIin_sonotaSiryoFalg = choyoIin_sonotaSiryoFalg;
+        this.chohyoIin_sonotaSiryoFalg = chohyoIin_sonotaSiryoFalg;
         this.chohyoIin_tuutishoFalg = chohyoIin_tuutishoFalg;
         this.chohyoIin_hanteiFalg = chohyoIin_hanteiFalg;
     }

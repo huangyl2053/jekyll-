@@ -56,7 +56,10 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
 
     @Override
     protected void defineFlow() {
-//        for (int i = 0; i < getParameter().getChohyoIinHusu().intValue(); i++) {
+        if (選択.equals(getParameter().getChohyoIin_taishoushaFalg())) {
+            executeStep(委員_審査対象者一覧);
+        }
+
         if (選択.equals(getParameter().getChohyoIin_tuutishoFalg())
                 && !作成条件_範囲指定.equals(getParameter().getSakuseiJoken())) {
             executeStep(委員_審査会開催通知書);
@@ -85,11 +88,7 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
                 || (選択.equals(getParameter().getChohyoIin_tokkiJikouHanteiFalg())
                 && 選択.equals(getParameter().getChohyoIin_ikenshoFalg()))
                 && 作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
-            if (作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
-                executeStep(委員_追加資料鑑);
-            } else {
-                executeStep(委員_審査対象者一覧);
-            }
+            executeStep(委員_追加資料鑑);
         }
 ////        // TODO　凌護行　 QA回答まち、帳票にRSE記載が不正、2016/07/10
 //////        executeStep(委員_概況特記);
