@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 標準負担額減免申請（画面）です。
  *
- * @reamsid_L DBD-3700-010 liuwei2
+ * @reamsid_L DBD-3700-030 liuwei2
  */
 public class HyojunFutangakuGemmenService {
 
