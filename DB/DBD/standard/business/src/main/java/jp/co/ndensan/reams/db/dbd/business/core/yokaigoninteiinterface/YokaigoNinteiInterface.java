@@ -51,7 +51,7 @@ public class YokaigoNinteiInterface extends
      */
     public YokaigoNinteiInterface(ShinseishoKanriNo 申請書管理番号,
             HihokenshaNo 被保険者番号,
-            RString 取込日時,
+            YMDHMS 取込日時,
             RString 申請種別コード,
             RString 取下区分コード,
             FlexibleDate 認定申請日,
@@ -248,7 +248,7 @@ public class YokaigoNinteiInterface extends
      *
      * @return 取込日時
      */
-    public RString get取込日時() {
+    public YMDHMS get取込日時() {
         return entity.getTorikomiTimestamp();
     }
 
@@ -257,7 +257,7 @@ public class YokaigoNinteiInterface extends
      *
      * @return 取込区分
      */
-    public YMDHMS get取込区分() {
+    public RString get取込区分() {
         return entity.getTorikomiKubun();
     }
 

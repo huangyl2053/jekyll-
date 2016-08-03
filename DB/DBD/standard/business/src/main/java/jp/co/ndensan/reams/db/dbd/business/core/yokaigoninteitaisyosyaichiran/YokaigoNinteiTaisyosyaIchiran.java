@@ -266,7 +266,7 @@ public class YokaigoNinteiTaisyosyaIchiran implements Serializable {
      * @return 取込日時
      */
     public RString get取込日時() {
-        return 要介護認定インターフェース情報Entity.getTorikomiTimestamp();
+        return 要介護認定インターフェース情報Entity.getTorikomiTimestamp().toDateString();
     }
 
     /**
