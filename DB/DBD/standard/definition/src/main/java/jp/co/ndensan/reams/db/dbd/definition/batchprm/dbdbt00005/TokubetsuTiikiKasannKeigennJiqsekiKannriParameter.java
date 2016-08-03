@@ -15,7 +15,7 @@ import lombok.Setter;
 /**
  * 特別地域加算軽減実績管理リスト作成バッチパラメタークラスです．
  *
- * @author LDNS 李利歓
+ * @reamsid_L DBD-3880-030 x_lilh
  */
 @Getter
 @Setter
