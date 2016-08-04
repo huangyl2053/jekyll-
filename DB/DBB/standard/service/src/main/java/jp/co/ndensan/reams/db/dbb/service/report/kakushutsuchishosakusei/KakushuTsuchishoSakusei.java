@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ca.cax.entity.db.relate.TotalShunyuRelateEntity;
-import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.choshuyuyojoho.ChoshuYuyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukaatena.FukaAtena;
 import jp.co.ndensan.reams.db.dbb.business.core.fukadaichodatahenshu.FukaDaichoInfo;
@@ -98,6 +97,7 @@ import jp.co.ndensan.reams.db.dbb.service.report.nonyutsuchishocvsmulti.NonyuTsu
 import jp.co.ndensan.reams.db.dbb.service.report.tokubetsuchoshukaishitsuchisho.TokubetsuChoshuKaishiTsuchishoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.tsuchisho.notsu.NonyuTsuchiShoJohoFactory;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
@@ -186,7 +186,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
     private static final ReportId 特別徴収開始通知書仮算定_帳票分類ID = new ReportId("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
     private static final ReportId 仮算定額変更通知書_帳票分類ID = new ReportId("DBB100010_KarisanteiHenkoTsuchishoDaihyo");
     private static final ReportId 保険料納入通知書仮算定_帳票分類ID = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
-    private static final ReportId 賦課台帳仮算定_帳票分類ID = new ReportId("DBB100031_KarisanteiFukaDaicho");
+    private static final ReportId 賦課台帳仮算定_帳票分類ID = new ReportId("DBB100031_FukaDaichoDaihyo");
     private static final ReportId 特別徴収開始通知書本算定_帳票分類ID = new ReportId("DBB100032_TokubetsuChoshuKaishiTsuchishoDaihyo");
     private static final ReportId 保険料納入通知書_帳票分類ID = new ReportId("DBB100045_HokenryoNonyuTsuchishoDaihyo");
     private static final ReportId 決定通知書_帳票分類ID = new ReportId("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoDaihyo");
@@ -198,7 +198,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
             = new ReportId("DBB100081_KaigoHokenHokenryoChoshuyoyoKetteiTsuchishoDaihyo");
     private static final ReportId 介護保険料徴収猶予取消通知書_帳票分類ID
             = new ReportId("DBB100083_KaigoHokenHokenryoChoshuyoyoTorikeshiTsuchishoDaihyo");
-    private static final ReportId 賦課台帳本算定_帳票分類ID = new ReportId("DBB100065_FukaDaicho");
+    private static final ReportId 賦課台帳本算定_帳票分類ID = new ReportId("DBB100031_FukaDaichoDaihyo");
     private static final FlexibleYear 管理年度 = new FlexibleYear("0000");
     private static final RString 項目名 = new RString("通知書タイプ");
     private static final RString 通知書タイプ_B5横 = new RString("001");
