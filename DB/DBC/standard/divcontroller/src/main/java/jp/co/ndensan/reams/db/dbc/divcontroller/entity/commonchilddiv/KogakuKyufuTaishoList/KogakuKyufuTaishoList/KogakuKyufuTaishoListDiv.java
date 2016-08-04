@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.KogakuKyufuTaishoList;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -14,26 +14,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * 画面設計_DBCKD00006_高額給付対象一覧共有子Div
- *
- * @reamsid_L DBC-2020-030 quxiaodong
+ * KogakuKyufuTaishoList のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaishoListDiv {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
@@ -424,6 +409,26 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     @JsonIgnore
+    public TextBoxNum getTxtSetaiSyuyakuBango() {
+        return this.getMeisaiGokeiHenshuPanel().getGokeiPanel().getTxtSetaiSyuyakuBango();
+    }
+
+    @JsonIgnore
+    public void  setTxtSetaiSyuyakuBango(TextBoxNum txtSetaiSyuyakuBango) {
+        this.getMeisaiGokeiHenshuPanel().getGokeiPanel().setTxtSetaiSyuyakuBango(txtSetaiSyuyakuBango);
+    }
+
+    @JsonIgnore
+    public RadioButton getRdbKogakuJidoSyokanTaisyo() {
+        return this.getMeisaiGokeiHenshuPanel().getGokeiPanel().getRdbKogakuJidoSyokanTaisyo();
+    }
+
+    @JsonIgnore
+    public void  setRdbKogakuJidoSyokanTaisyo(RadioButton rdbKogakuJidoSyokanTaisyo) {
+        this.getMeisaiGokeiHenshuPanel().getGokeiPanel().setRdbKogakuJidoSyokanTaisyo(rdbKogakuJidoSyokanTaisyo);
+    }
+
+    @JsonIgnore
     public HorizontalLine getLin1() {
         return this.getMeisaiGokeiHenshuPanel().getLin1();
     }
@@ -535,194 +540,5 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-    /**
-     * 画面初期化
-     *
-     * @param メニューID RString
-     * @param 画面モード RString
-     * @param 被保険者番号 HihokenshaNo
-     * @param サービス提供年月 FlexibleYearMonth
-     * @param 履歴番号 int
-     */
-    @Override
-    public void initialize(RString メニューID, RString 画面モード, HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス提供年月, int 履歴番号) {
-        KogakuKyufuTaishoListHandler.of(this).画面初期化(メニューID, 画面モード, 被保険者番号, サービス提供年月, 履歴番号);
-        ViewStateHolder.put(ViewStateKeys.サービス提供年月, サービス提供年月);
-    }
 
-    @Override
-    public void clear画面内容() {
-        KogakuKyufuTaishoListHandler.of(this).clear高額明細合計データ編集エリア();
-    }
-
-    /**
-     * 給付対象一覧を取得します。
-     *
-     * @return List<dgTaishoshaIchiran_Row>
-     */
-    @Override
-    public List<dgTaishoshaIchiran_Row> get給付対象一覧() {
-        return KogakuKyufuTaishoListHandler.of(this).get給付対象一覧();
-    }
-
-    /**
-     * 明細合計区分を取得します。
-     *
-     * @return RString
-     */
-    @Override
-    public RString get明細合計区分() {
-        return KogakuKyufuTaishoListHandler.of(this).get明細合計区分();
-    }
-
-    /**
-     * 事業者コードを取得します。
-     *
-     * @return RString
-     */
-    @Override
-    public RString get事業者コード() {
-        return KogakuKyufuTaishoListHandler.of(this).get事業者コード();
-    }
-
-    /**
-     * 事業者名称を取得します。
-     *
-     * @return RString
-     */
-    @Override
-    public RString get事業者名称() {
-        return KogakuKyufuTaishoListHandler.of(this).get事業者名称();
-    }
-
-    /**
-     * サービス種類を取得します。
-     *
-     * @return RString
-     */
-    @Override
-    public RString getサービス種類() {
-        return KogakuKyufuTaishoListHandler.of(this).getサービス種類();
-    }
-
-    /**
-     * サービス種類名称を取得します。
-     *
-     * @return RString
-     */
-    @Override
-    public RString getサービス種類名称() {
-        return KogakuKyufuTaishoListHandler.of(this).getサービス種類名称();
-    }
-
-    /**
-     * サービス費用合計を取得します。
-     *
-     * @return Decimal
-     */
-    @Override
-    public Decimal getサービス費用合計() {
-        return KogakuKyufuTaishoListHandler.of(this).getサービス費用合計();
-    }
-
-    /**
-     * 利用者負担合計を取得します。
-     *
-     * @return Decimal
-     */
-    @Override
-    public Decimal get利用者負担合計() {
-        return KogakuKyufuTaishoListHandler.of(this).get利用者負担合計();
-    }
-
-    /**
-     * 算定基準額を取得します。
-     *
-     * @return Decimal
-     */
-    @Override
-    public Decimal get算定基準額() {
-        return KogakuKyufuTaishoListHandler.of(this).get算定基準額();
-    }
-
-    /**
-     * 支払済額を取得します。
-     *
-     * @return Decimal
-     */
-    @Override
-    public Decimal get支払済額() {
-        return KogakuKyufuTaishoListHandler.of(this).get支払済額();
-    }
-
-    /**
-     * 月遅れ区分を取得します。
-     *
-     * @return RString
-     */
-    @Override
-    public RString get月遅れ区分() {
-        return KogakuKyufuTaishoListHandler.of(this).get月遅れ区分();
-    }
-
-    /**
-     * 世帯所得区分を取得します。
-     *
-     * @return RString
-     */
-    @Override
-    public RString get世帯所得区分() {
-        return KogakuKyufuTaishoListHandler.of(this).get世帯所得区分();
-    }
-
-    /**
-     * 本人所得区分を取得します。
-     *
-     * @return RString
-     */
-    @Override
-    public RString get本人所得区分() {
-        return KogakuKyufuTaishoListHandler.of(this).get本人所得区分();
-    }
-
-    /**
-     * 合算区分を取得します。
-     *
-     * @return RString
-     */
-    @Override
-    public RString get合算区分() {
-        return KogakuKyufuTaishoListHandler.of(this).get合算区分();
-    }
-
-    /**
-     * 老齢福祉年金を取得します。
-     *
-     * @return RString
-     */
-    @Override
-    public RString get老齢福祉年金() {
-        return KogakuKyufuTaishoListHandler.of(this).get老齢福祉年金();
-    }
-
-    /**
-     * 利用者負担第２段階を取得します。
-     *
-     * @return RString
-     */
-    @Override
-    public RString get利用者負担第２段階() {
-        return KogakuKyufuTaishoListHandler.of(this).get利用者負担第２段階();
-    }
-
-    /**
-     * 利用者負担第２段階を取得します。
-     *
-     * @return RString
-     */
-    @Override
-    public RString get激変緩和区分() {
-        return KogakuKyufuTaishoListHandler.of(this).get激変緩和区分();
-    }
 }

@@ -1,6 +1,6 @@
-/// <reference path="../../d.ts/jquery.d.ts" />
-/// <reference path="../../d.ts/UzViewControls.d.ts" />
-/// <reference path="../../d.ts/UzaConverter.d.ts" />
+/// <reference path="../d.ts/jquery.d.ts" />
+/// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
 
 module DBC {
 
@@ -135,14 +135,6 @@ module DBC {
 
             public txtKogakuShikyuGaku(): UZA.TextBoxNum {
                 return new UZA.TextBoxNum(this.convFiledName("txtKogakuShikyuGaku"));
-            }
-
-            public txtSetaiSyuyakuBango(): UZA.TextBoxNum {
-                return new UZA.TextBoxNum(this.convFiledName("txtSetaiSyuyakuBango"));
-            }
-
-            public rdbKogakuJidoSyokanTaisyo(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("rdbKogakuJidoSyokanTaisyo"));
             }
 
             public lin1(): UZA.HorizontalLine {

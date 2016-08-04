@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.KogakuKyufuTaishoList;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -10,9 +10,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * 画面設計_DBCKD00006_高額給付対象一覧共有子Div
- *
- * @reamsid_L DBC-2020-030 quxiaodong
+ * MeisaiGokeiHenshuPanel のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class MeisaiGokeiHenshuPanelDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
@@ -340,6 +340,26 @@ public class MeisaiGokeiHenshuPanelDiv extends Panel {
     @JsonIgnore
     public void  setTxtKogakuShikyuGaku(TextBoxNum txtKogakuShikyuGaku) {
         this.getGokeiPanel().setTxtKogakuShikyuGaku(txtKogakuShikyuGaku);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtSetaiSyuyakuBango() {
+        return this.getGokeiPanel().getTxtSetaiSyuyakuBango();
+    }
+
+    @JsonIgnore
+    public void  setTxtSetaiSyuyakuBango(TextBoxNum txtSetaiSyuyakuBango) {
+        this.getGokeiPanel().setTxtSetaiSyuyakuBango(txtSetaiSyuyakuBango);
+    }
+
+    @JsonIgnore
+    public RadioButton getRdbKogakuJidoSyokanTaisyo() {
+        return this.getGokeiPanel().getRdbKogakuJidoSyokanTaisyo();
+    }
+
+    @JsonIgnore
+    public void  setRdbKogakuJidoSyokanTaisyo(RadioButton rdbKogakuJidoSyokanTaisyo) {
+        this.getGokeiPanel().setRdbKogakuJidoSyokanTaisyo(rdbKogakuJidoSyokanTaisyo);
     }
 
     @JsonIgnore

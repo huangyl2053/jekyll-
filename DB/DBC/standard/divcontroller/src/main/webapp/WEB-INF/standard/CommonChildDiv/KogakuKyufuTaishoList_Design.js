@@ -131,14 +131,6 @@ var DBC;
                 return new UZA.TextBoxNum(this.convFiledName("txtKogakuShikyuGaku"));
             };
 
-            Controls.prototype.txtSetaiSyuyakuBango = function () {
-                return new UZA.TextBoxNum(this.convFiledName("txtSetaiSyuyakuBango"));
-            };
-
-            Controls.prototype.rdbKogakuJidoSyokanTaisyo = function () {
-                return new UZA.RadioButton(this.convFiledName("rdbKogakuJidoSyokanTaisyo"));
-            };
-
             Controls.prototype.lin1 = function () {
                 return new UZA.HorizontalLine(this.convFiledName("lin1"));
             };
