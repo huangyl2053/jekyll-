@@ -3,18 +3,23 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Feb 29 19:02:27 CST 2016
+ * Thu Aug 04 11:07:12 JST 2016 
  */
+
+
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
+
 /**
- * dgShinsakaiKaisaiYoteiIchiran_Row のクラスファイル。
- *
+ * dgShinsakaiKaisaiYoteiIchiran_Row のクラスファイル 
+ * 
+ * @author 自動生成
  */
+
 public class dgShinsakaiKaisaiYoteiIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     private RString kaisaiYoteibi;
     private RString kaisaiYoteiYobi;

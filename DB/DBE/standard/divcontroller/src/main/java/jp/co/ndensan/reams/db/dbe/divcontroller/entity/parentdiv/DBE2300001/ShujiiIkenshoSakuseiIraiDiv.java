@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiIkenshoSakuseiIraiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -198,6 +198,16 @@ public class ShujiiIkenshoSakuseiIraiDiv extends Panel {
     }
 
     @JsonIgnore
+    public HorizontalLine getLin1() {
+        return this.getShujiiIkenshoIraiJohoInput().getLin1();
+    }
+
+    @JsonIgnore
+    public void  setLin1(HorizontalLine lin1) {
+        this.getShujiiIkenshoIraiJohoInput().setLin1(lin1);
+    }
+
+    @JsonIgnore
     public TextBoxDate getTxtShujiiIkensahoSakuseiIraiDay() {
         return this.getShujiiIkenshoIraiJohoInput().getTxtShujiiIkensahoSakuseiIraiDay();
     }
@@ -205,16 +215,6 @@ public class ShujiiIkenshoSakuseiIraiDiv extends Panel {
     @JsonIgnore
     public void  setTxtShujiiIkensahoSakuseiIraiDay(TextBoxDate txtShujiiIkensahoSakuseiIraiDay) {
         this.getShujiiIkenshoIraiJohoInput().setTxtShujiiIkensahoSakuseiIraiDay(txtShujiiIkensahoSakuseiIraiDay);
-    }
-
-    @JsonIgnore
-    public Button getBtnHozon() {
-        return this.getShujiiIkenshoIraiJohoInput().getBtnHozon();
-    }
-
-    @JsonIgnore
-    public void  setBtnHozon(Button btnHozon) {
-        this.getShujiiIkenshoIraiJohoInput().setBtnHozon(btnHozon);
     }
 
     @JsonIgnore

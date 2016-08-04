@@ -5,16 +5,15 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * UploadFileTorokuBatch のクラスファイル 
+ * GogitaiShinsakaiIinSentaku のクラスファイル 
  * 
  * @author 自動生成
  */
-public class UploadFileTorokuBatchDiv extends PanelBatchParameter {
+public class GogitaiShinsakaiIinSentakuDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -22,10 +21,10 @@ public class UploadFileTorokuBatchDiv extends PanelBatchParameter {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("uplUploadPanel")
-    private UploadPanel uplUploadPanel;
-    @JsonProperty("uploadFileID")
-    private RString uploadFileID;
+    @JsonProperty("lblShinsain")
+    private Label lblShinsain;
+    @JsonProperty("btnShinsainSelect")
+    private ButtonDialog btnShinsainSelect;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -34,39 +33,39 @@ public class UploadFileTorokuBatchDiv extends PanelBatchParameter {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getuplUploadPanel
-     * @return uplUploadPanel
+     * getlblShinsain
+     * @return lblShinsain
      */
-    @JsonProperty("uplUploadPanel")
-    public UploadPanel getUplUploadPanel() {
-        return uplUploadPanel;
+    @JsonProperty("lblShinsain")
+    public Label getLblShinsain() {
+        return lblShinsain;
     }
 
     /*
-     * setuplUploadPanel
-     * @param uplUploadPanel uplUploadPanel
+     * setlblShinsain
+     * @param lblShinsain lblShinsain
      */
-    @JsonProperty("uplUploadPanel")
-    public void setUplUploadPanel(UploadPanel uplUploadPanel) {
-        this.uplUploadPanel = uplUploadPanel;
+    @JsonProperty("lblShinsain")
+    public void setLblShinsain(Label lblShinsain) {
+        this.lblShinsain = lblShinsain;
     }
 
     /*
-     * getuploadFileID
-     * @return uploadFileID
+     * getbtnShinsainSelect
+     * @return btnShinsainSelect
      */
-    @JsonProperty("uploadFileID")
-    public RString getUploadFileID() {
-        return uploadFileID;
+    @JsonProperty("btnShinsainSelect")
+    public ButtonDialog getBtnShinsainSelect() {
+        return btnShinsainSelect;
     }
 
     /*
-     * setuploadFileID
-     * @param uploadFileID uploadFileID
+     * setbtnShinsainSelect
+     * @param btnShinsainSelect btnShinsainSelect
      */
-    @JsonProperty("uploadFileID")
-    public void setUploadFileID(RString uploadFileID) {
-        this.uploadFileID = uploadFileID;
+    @JsonProperty("btnShinsainSelect")
+    public void setBtnShinsainSelect(ButtonDialog btnShinsainSelect) {
+        this.btnShinsainSelect = btnShinsainSelect;
     }
 
     // </editor-fold>

@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinsakaiIinGuide.NinteiShinsakaiIinGuide;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -9,12 +9,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShinsakaiIinIchiran のクラスファイル 
+ * GogitaiVerticalLine1 のクラスファイル 
  * 
- * @reamsid_L DBE-3000-030  lijia
- * 
+ * @author 自動生成
  */
-public class ShinsakaiIinIchiranDiv extends Panel {
+public class GogitaiVerticalLine1Div extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -22,8 +21,8 @@ public class ShinsakaiIinIchiranDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("dgShinsakaiIinIchiran")
-    private DataGrid<dgShinsakaiIinIchiran_Row> dgShinsakaiIinIchiran;
+    @JsonProperty("lin2")
+    private VerticalLine lin2;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,21 +31,21 @@ public class ShinsakaiIinIchiranDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getdgShinsakaiIinIchiran
-     * @return dgShinsakaiIinIchiran
+     * getlin2
+     * @return lin2
      */
-    @JsonProperty("dgShinsakaiIinIchiran")
-    public DataGrid<dgShinsakaiIinIchiran_Row> getDgShinsakaiIinIchiran() {
-        return dgShinsakaiIinIchiran;
+    @JsonProperty("lin2")
+    public VerticalLine getLin2() {
+        return lin2;
     }
 
     /*
-     * setdgShinsakaiIinIchiran
-     * @param dgShinsakaiIinIchiran dgShinsakaiIinIchiran
+     * setlin2
+     * @param lin2 lin2
      */
-    @JsonProperty("dgShinsakaiIinIchiran")
-    public void setDgShinsakaiIinIchiran(DataGrid<dgShinsakaiIinIchiran_Row> dgShinsakaiIinIchiran) {
-        this.dgShinsakaiIinIchiran = dgShinsakaiIinIchiran;
+    @JsonProperty("lin2")
+    public void setLin2(VerticalLine lin2) {
+        this.lin2 = lin2;
     }
 
     // </editor-fold>

@@ -75,10 +75,6 @@ var DBZ;
                 return new UZA.DropDownList(this.convFiledName("ddlShinsainShikakuCode"));
             };
 
-            Controls.prototype.ccdHokensha = function () {
-                return new DBZ.HokenshaList.ModeController(this.convFiledName("ccdHokensha"));
-            };
-
             Controls.prototype.txtMaxKensu = function () {
                 return new UZA.TextBoxNum(this.convFiledName("txtMaxKensu"));
             };
