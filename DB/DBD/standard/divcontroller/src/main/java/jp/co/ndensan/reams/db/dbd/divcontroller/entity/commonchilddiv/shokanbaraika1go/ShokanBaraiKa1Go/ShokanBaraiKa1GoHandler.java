@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -343,6 +344,7 @@ public class ShokanBaraiKa1GoHandler {
                     .set弁明理由コード(div.getDdlBemmeiRiyu().getSelectedKey())
                     .set弁明審査決定年月日(div.getTxtBemmeiNaiyoKetteiYMD().getValue())
                     .set弁明審査結果区分(div.getDdlBemmeiShinsaKekka().getSelectedKey());
+            builder.setState(EntityDataState.Modified);
             ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, builder.build());
         }
     }
@@ -356,6 +358,7 @@ public class ShokanBaraiKa1GoHandler {
                 && 支払方法変更管理業務概念.get履歴番号() == get最大履歴番号()) {
             builder.set予告登録年月日(div.getTxtYokokuTorokuYMD().getValue())
                     .set弁明書提出期限(div.getTxtBemmeishoTeishutsuKigenYMD().getValue());
+            builder.setState(EntityDataState.Modified);
             ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, builder.build());
         }
     }
@@ -393,6 +396,7 @@ public class ShokanBaraiKa1GoHandler {
                             .set調定額(summary.get調定額());
                     shiharaiHohoHenkoTaino.createBuilderForEdit().build();
                     builder.setShiharaiHohoHenkoTaino(shiharaiHohoHenkoTaino);
+                    builder.setState(EntityDataState.Modified);
                     break;
                 }
             }
@@ -410,6 +414,7 @@ public class ShokanBaraiKa1GoHandler {
             builder.set適用開始年月日(div.getTxtTekiyoKikanKaishi().getValue())
                     .set償還払化決定年月日(div.getTxtHenkoKetteiYMD().getValue())
                     .set被保険者証提出期限(div.getTxtHokenshoTeishutsuKigenYMD().getValue());
+            builder.setState(EntityDataState.Modified);
             ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, builder.build());
         }
     }
@@ -428,6 +433,7 @@ public class ShokanBaraiKa1GoHandler {
                     .set終了申請理由コード(div.getDdlShinseiRiyu().getSelectedKey())
                     .set終了申請審査決定年月日(div.getTxtShinseiNaiyoKetteiYMD().getValue())
                     .set終了申請審査結果区分(div.getDdlShinseiShinsaKekka().getSelectedKey());
+            builder.setState(EntityDataState.Modified);
             ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, builder.build());
         }
     }

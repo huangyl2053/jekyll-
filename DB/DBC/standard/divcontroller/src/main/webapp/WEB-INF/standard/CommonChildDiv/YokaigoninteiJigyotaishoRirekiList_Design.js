@@ -4,6 +4,9 @@ var DBC;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_BtnClose = function () {
+                return "onClick_BtnClose";
+            };
             return Events;
         })();
         YokaigoninteiJigyotaishoRirekiList.Events = Events;
