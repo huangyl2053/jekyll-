@@ -113,13 +113,13 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblMonth() {
-        return this.getShinsakaiKaisaiYoteiIchiran().getLblMonth();
+    public Label getLblMonth2() {
+        return this.getShinsakaiKaisaiYoteiIchiran().getLblMonth2();
     }
 
     @JsonIgnore
-    public void  setLblMonth(Label lblMonth) {
-        this.getShinsakaiKaisaiYoteiIchiran().setLblMonth(lblMonth);
+    public void  setLblMonth2(Label lblMonth2) {
+        this.getShinsakaiKaisaiYoteiIchiran().setLblMonth2(lblMonth2);
     }
 
     @JsonIgnore
@@ -130,6 +130,16 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     @JsonIgnore
     public void  setBtnRight(Button btnRight) {
         this.getShinsakaiKaisaiYoteiIchiran().setBtnRight(btnRight);
+    }
+
+    @JsonIgnore
+    public Label getLblMonth() {
+        return this.getShinsakaiKaisaiYoteiIchiran().getLblMonth();
+    }
+
+    @JsonIgnore
+    public void  setLblMonth(Label lblMonth) {
+        this.getShinsakaiKaisaiYoteiIchiran().setLblMonth(lblMonth);
     }
 
     @JsonIgnore

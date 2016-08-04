@@ -25,10 +25,12 @@ public class ShinsakaiKaisaiYoteiIchiranDiv extends Panel {
     private Label lblHyojiMonth;
     @JsonProperty("btnMonthBefore")
     private Button btnMonthBefore;
-    @JsonProperty("lblMonth")
-    private Label lblMonth;
+    @JsonProperty("lblMonth2")
+    private Label lblMonth2;
     @JsonProperty("btnRight")
     private Button btnRight;
+    @JsonProperty("lblMonth")
+    private Label lblMonth;
     @JsonProperty("dgShinsakaiKaisaiYoteiIchiran")
     private DataGrid<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaiKaisaiYoteiIchiran;
     @JsonProperty("txtCopyFrom")
@@ -87,21 +89,21 @@ public class ShinsakaiKaisaiYoteiIchiranDiv extends Panel {
     }
 
     /*
-     * getlblMonth
-     * @return lblMonth
+     * getlblMonth2
+     * @return lblMonth2
      */
-    @JsonProperty("lblMonth")
-    public Label getLblMonth() {
-        return lblMonth;
+    @JsonProperty("lblMonth2")
+    public Label getLblMonth2() {
+        return lblMonth2;
     }
 
     /*
-     * setlblMonth
-     * @param lblMonth lblMonth
+     * setlblMonth2
+     * @param lblMonth2 lblMonth2
      */
-    @JsonProperty("lblMonth")
-    public void setLblMonth(Label lblMonth) {
-        this.lblMonth = lblMonth;
+    @JsonProperty("lblMonth2")
+    public void setLblMonth2(Label lblMonth2) {
+        this.lblMonth2 = lblMonth2;
     }
 
     /*
@@ -120,6 +122,24 @@ public class ShinsakaiKaisaiYoteiIchiranDiv extends Panel {
     @JsonProperty("btnRight")
     public void setBtnRight(Button btnRight) {
         this.btnRight = btnRight;
+    }
+
+    /*
+     * getlblMonth
+     * @return lblMonth
+     */
+    @JsonProperty("lblMonth")
+    public Label getLblMonth() {
+        return lblMonth;
+    }
+
+    /*
+     * setlblMonth
+     * @param lblMonth lblMonth
+     */
+    @JsonProperty("lblMonth")
+    public void setLblMonth(Label lblMonth) {
+        this.lblMonth = lblMonth;
     }
 
     /*

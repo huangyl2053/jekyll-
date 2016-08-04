@@ -38,11 +38,11 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
  */
 public class ShinseiKensaku {
 
-    private static final RString MENUID_DBEMN11001 = new RString("DBEMN11001");
-    private static final RString MENUID_DBEMN11003 = new RString("DBEMN11003");
-    private static final RString MENUID_DBEMN14001 = new RString("DBEMN14001");
-    private static final RString MENUID_DBEMN32002 = new RString("DBEMN32002");
-    private static final RString MENUID_DBEMN31005 = new RString("DBEMN31005");
+    private static final RString MENUID_DBEMN11001 = new RString("DBEMN21001");
+    private static final RString MENUID_DBEMN11003 = new RString("DBEMN21003");
+    private static final RString MENUID_DBEMN14001 = new RString("DBEMN24001");
+    private static final RString MENUID_DBEMN32002 = new RString("DBEMN42002");
+    private static final RString MENUID_DBEMN31005 = new RString("DBEMN41005");
     private static final RString BUTTON_BTNITIRANPRINT = new RString("btnitiranprint");
 
     /**
