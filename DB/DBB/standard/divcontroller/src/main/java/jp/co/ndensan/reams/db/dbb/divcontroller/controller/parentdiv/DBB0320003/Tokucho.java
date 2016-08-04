@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320003
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
@@ -17,6 +16,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320003.Toku
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320003.TokuchoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320003.dgTokuChoIdoAndIrai_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320003.dgTokuchoKekka_Row;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysTokuchoHosoku;
 import jp.co.ndensan.reams.db.dbz.definition.core.config.TokuchoHosokuConfig;
@@ -26,8 +26,8 @@ import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.ue.uex.definition.core.KakushuKubun;
 import jp.co.ndensan.reams.ue.uex.definition.core.ShoriKekka;
 import jp.co.ndensan.reams.ue.uex.service.core.NenkinTokuchoKaifuJohoManager;
-import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.CodeShubetsus;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -121,7 +121,7 @@ public class Tokucho {
         div.getTxtNenkinCode2().setValue(model.get仮徴収_年金コード());
         div.getTxtKaishiYM().setValue(new FlexibleDate(build開始年月(model.get仮徴収_捕捉月(), model.get賦課年度().minusYear(1))));
         RString nenkinCode = createNenkinCode(model.get仮徴収_年金コード());
-        RString nenkinCodeMeisho = CodeMasterNoOption.getCodeMeisho(SubGyomuCode.UEX分配集約公開, CodeShubetsus.年金コード, new Code(nenkinCode));
+        RString nenkinCodeMeisho = CodeMasterNoOption.getCodeMeisho(SubGyomuCode.UEX分配集約公開, new CodeShubetsu("0046"), new Code(nenkinCode));
         div.getTxtTokubetsuChoshuTaishoNenkin().setValue(nenkinCode.concat(nenkinCodeMeisho));
         set年金保険者突合Div(div,
                 new FukaNendo(model.get賦課年度().minusYear(1)), model.get仮徴収_基礎年金番号(), model.get仮徴収_年金コード(), model.get仮徴収_捕捉月());
@@ -135,7 +135,7 @@ public class Tokucho {
         div.getTxtNenkinCode2().setValue(model.get本徴収_年金コード());
         div.getTxtKaishiYM().setValue(new FlexibleDate(build開始年月(model.get本徴収_捕捉月(), model.get賦課年度())));
         RString nenkinCode = createNenkinCode(model.get本徴収_年金コード());
-        RString nenkinCodeMeisho = CodeMasterNoOption.getCodeMeisho(SubGyomuCode.UEX分配集約公開, CodeShubetsus.年金コード, new Code(nenkinCode));
+        RString nenkinCodeMeisho = CodeMasterNoOption.getCodeMeisho(SubGyomuCode.UEX分配集約公開, new CodeShubetsu("0046"), new Code(nenkinCode));
         div.getTxtTokubetsuChoshuTaishoNenkin().setValue(nenkinCode.concat(nenkinCodeMeisho));
         set年金保険者突合Div(div,
                 new FukaNendo(model.get賦課年度()), model.get本徴収_基礎年金番号(), model.get本徴収_年金コード(), model.get本徴収_捕捉月());
@@ -157,7 +157,7 @@ public class Tokucho {
             div.getTxtNenkinCode2().setValue(model.get翌年度仮徴収_年金コード());
             div.getTxtKaishiYM().setValue(new FlexibleDate(build開始年月(model.get翌年度仮徴収_捕捉月(), model.get賦課年度())));
             RString nenkinCode = createNenkinCode(model.get翌年度仮徴収_年金コード());
-            RString nenkinCodeMeisho = CodeMasterNoOption.getCodeMeisho(SubGyomuCode.UEX分配集約公開, CodeShubetsus.年金コード, new Code(nenkinCode));
+            RString nenkinCodeMeisho = CodeMasterNoOption.getCodeMeisho(SubGyomuCode.UEX分配集約公開, new CodeShubetsu("0046"), new Code(nenkinCode));
             div.getTxtTokubetsuChoshuTaishoNenkin().setValue(nenkinCode.concat(nenkinCodeMeisho));
             set年金保険者突合Div(div,
                     new FukaNendo(model.get賦課年度()), model.get翌年度仮徴収_基礎年金番号(), model.get翌年度仮徴収_年金コード(), model.get翌年度仮徴収_捕捉月());
@@ -207,7 +207,7 @@ public class Tokucho {
             return;
         }
         div.getTxtHosokuYM().setValue(new FlexibleDate(kaifuJoho.get処理年度().toDateString().concat(捕捉月)));
-        RString tokubetsuChoshuCodeMeisho = CodeMasterNoOption.getCodeMeisho(SubGyomuCode.UEX分配集約公開, CodeShubetsus.特別徴収義務者コード, kaifuJoho.getDT特別徴収義務者コード().value());
+        RString tokubetsuChoshuCodeMeisho = CodeMasterNoOption.getCodeMeisho(SubGyomuCode.UEX分配集約公開, new CodeShubetsu("0047"), kaifuJoho.getDT特別徴収義務者コード().value());
         div.getTxtTokuChoGimusha().setValue(kaifuJoho.getDT特別徴収義務者コード().value().value().concat(tokubetsuChoshuCodeMeisho));
 
         div.getNenkinHokenshaTotsugoJoho().getTxtShimeiKana().setValue(kaifuJoho.getDTカナ氏名());
