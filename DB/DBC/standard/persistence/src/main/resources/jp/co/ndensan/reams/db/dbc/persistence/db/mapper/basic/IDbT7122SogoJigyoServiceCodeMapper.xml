@@ -55,8 +55,8 @@
 
     <!--テーブルDbT7122SogoJigyoServiceCodeの項目をDbT7122SogoJigyoServiceCodeEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT7122SogoJigyoServiceCodeEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7122SogoJigyoServiceCodeEntity" autoMapping="true">
-        <id property="serviceShuruiCode" column="SogoJigyoServiceCode_serviceShuruiCode" />
-        <id property="serviceKomokuCode" column="SogoJigyoServiceCode_serviceKomokuCode" />
+        <id property="serviceShuruiCode" column="SogoJigyoServiceCode_serviceShuruiCode"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <!-- <id property="serviceKomokuCode" column="SogoJigyoServiceCode_serviceKomokuCode" />
         <id property="tekiyoKaishiYM" column="SogoJigyoServiceCode_tekiyoKaishiYM" />
         <id property="rirekiNo" column="SogoJigyoServiceCode_rirekiNo" />
         <result property="insertDantaiCd" column="SogoJigyoServiceCode_insertDantaiCd" />
@@ -87,7 +87,7 @@
         <result property="sofuKubun" column="SogoJigyoServiceCode_sofuKubun" />
         <result property="sofuYM" column="SogoJigyoServiceCode_sofuYM" />
         <result property="shinkiHenkoIdoYMD" column="SogoJigyoServiceCode_shinkiHenkoIdoYMD" />
-        <result property="shuryoIdoYMD" column="SogoJigyoServiceCode_shuryoIdoYMD" />
+        <result property="shuryoIdoYMD" column="SogoJigyoServiceCode_shuryoIdoYMD" /> -->
     </resultMap>
 
 </mapper>
