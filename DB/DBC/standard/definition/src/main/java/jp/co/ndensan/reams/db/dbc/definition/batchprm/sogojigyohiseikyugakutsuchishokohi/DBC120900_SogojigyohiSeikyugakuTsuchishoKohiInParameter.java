@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KokuhorenDataTorikomiBatchParameter extends BatchParameterBase {
+public class DBC120900_SogojigyohiSeikyugakuTsuchishoKohiInParameter extends BatchParameterBase {
 
     private static final String KEY_SHORIYM = "shoriYM";
     private static final String NAME_SHORIYM = "処理年月";
