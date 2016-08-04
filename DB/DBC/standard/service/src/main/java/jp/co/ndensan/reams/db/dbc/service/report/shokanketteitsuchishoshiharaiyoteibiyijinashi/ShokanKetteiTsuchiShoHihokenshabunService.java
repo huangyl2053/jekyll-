@@ -11,10 +11,13 @@ import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishohihokensh
 import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishohihokenshabun.ShokanKetteiTsuchiShoHihokenshabunProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishohihokenshabun.ShokanKetteiTsuchiShoHihokenshabunReport;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishoshiharaiyotei.ShokanKetteiTsuchiShoHihokenshabunReportSource;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
-import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -46,9 +49,11 @@ public class ShokanKetteiTsuchiShoHihokenshabunService {
         ShokanKetteiTsuchiShoHihokenshabunProperty property = new ShokanKetteiTsuchiShoHihokenshabunProperty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<ShokanKetteiTsuchiShoHihokenshabunReportSource> assembler = createAssembler(property, reportManager)) {
-                INinshoshaSourceBuilderCreator builderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-                INinshoshaSourceBuilder builder = builderCreator.create(GyomuCode.DB介護保険, RString.EMPTY,
-                        RDate.getNowDate(), assembler.getImageFolderPath());
+                Ninshosha nishosha = NinshoshaFinderFactory.createInstance().get帳票認証者(
+                        GyomuCode.DB介護保険, RString.EMPTY);
+                Association association = AssociationFinderFactory.createInstance().getAssociation();
+                INinshoshaSourceBuilder builder = NinshoshaSourceBuilderFactory.createInstance(
+                        nishosha, association, assembler.getImageFolderPath(), RDate.getNowDate());
                 for (ShokanKetteiTsuchiShoHihokenshabunReport report : toReports(itemList, builder.buildSource())) {
                     ReportSourceWriter<ShokanKetteiTsuchiShoHihokenshabunReportSource> reportWriter = new ReportSourceWriter(assembler);
                     report.writeBy(reportWriter);

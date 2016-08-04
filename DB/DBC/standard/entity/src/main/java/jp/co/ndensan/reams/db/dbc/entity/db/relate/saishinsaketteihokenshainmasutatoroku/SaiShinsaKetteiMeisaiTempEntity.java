@@ -33,7 +33,7 @@ public class SaiShinsaKetteiMeisaiTempEntity extends
     @TempTableColumnOrder(1)
     private FlexibleYearMonth 取扱年月;
     @TempTableColumnOrder(2)
-    private Decimal 履歴番号;
+    private int 履歴番号;
     @TempTableColumnOrder(3)
     private Decimal 決定明細連番;
     @TempTableColumnOrder(4)
