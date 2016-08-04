@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410048;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.sogojigyohiseikyugakutsuchishokohi.KokuhorenDataTorikomiBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.sogojigyohiseikyugakutsuchishokohi.DBC120900_SogojigyohiSeikyugakuTsuchishoKohiInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410048.DBC0410048TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410048.TsuchishoJoho632Div;
@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class TsuchishoJoho632 {
 
     /**
-     * onLoad
+     * 画面の初期化メソッドです。
      *
      * @param div TsuchishoJoho632Div
      * @return ResponseData
@@ -38,27 +38,13 @@ public class TsuchishoJoho632 {
     }
 
     /**
-     * onImplement 事件
+     * 「実行」ボタンを押下した際に実行します。
      *
      * @param div TsuchishoJoho632Div
      * @return ResponseData
      */
-    public ResponseData<TsuchishoJoho632Div> onImplement(TsuchishoJoho632Div div) {
-        // TODO QA471 パラメータ作成ビジネスを呼び出して、バッチを起動する
-        div.getCcdKokurenJohoTorikomi().get再処理区分();
-        div.getCcdKokurenJohoTorikomi().get処理年月();
-        return ResponseData.of(div).respond();
-
-    }
-
-    /**
-     * onClick_btnExcute
-     *
-     * @param div TsuchishoJoho632Div
-     * @return ResponseData
-     */
-    public ResponseData<KokuhorenDataTorikomiBatchParameter> onClick_btnExcute(TsuchishoJoho632Div div) {
-        KokuhorenDataTorikomiBatchParameter parameter = setBatchParameter(div);
+    public ResponseData<DBC120900_SogojigyohiSeikyugakuTsuchishoKohiInParameter> onClick_btnExcute(TsuchishoJoho632Div div) {
+        DBC120900_SogojigyohiSeikyugakuTsuchishoKohiInParameter parameter = setBatchParameter(div);
         return ResponseData.of(parameter).respond();
     }
 
@@ -68,8 +54,8 @@ public class TsuchishoJoho632 {
      * @param div TsuchishoJoho632Div
      * @return KokuhorenDataTorikomiBatchParameter
      */
-    public KokuhorenDataTorikomiBatchParameter setBatchParameter(TsuchishoJoho632Div div) {
-        KokuhorenDataTorikomiBatchParameter parameter = new KokuhorenDataTorikomiBatchParameter();
+    private DBC120900_SogojigyohiSeikyugakuTsuchishoKohiInParameter setBatchParameter(TsuchishoJoho632Div div) {
+        DBC120900_SogojigyohiSeikyugakuTsuchishoKohiInParameter parameter = new DBC120900_SogojigyohiSeikyugakuTsuchishoKohiInParameter();
         RDate 処理年月 = div.getCcdKokurenJohoTorikomi().get処理年月();
         SaiShoriKubun 再処理区分 = null;
         if (SaiShoriKubun.再処理.get名称().equals(div.getCcdKokurenJohoTorikomi().get再処理区分())) {
