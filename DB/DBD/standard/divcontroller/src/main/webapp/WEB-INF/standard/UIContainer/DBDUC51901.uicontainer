@@ -14,7 +14,7 @@
      "toLayoutSubGyomuCode": "DBD",
      "toLayoutName": "DBD5190001",
      "toLayoutTitle": "要介護認定申請連携データ作成（申請情報）",
-     "toState": "初期状態"
+     "toState": "初期表示"
     },
     {
      "id": "2",
@@ -42,7 +42,7 @@
      "toLayoutSubGyomuCode": "DBD",
      "toLayoutName": "DBD5190001",
      "toLayoutTitle": "要介護認定申請連携データ作成（申請情報）",
-     "toState": "初期状態"
+     "toState": "初期表示"
     },
     {
      "id": "4",
