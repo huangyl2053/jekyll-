@@ -429,6 +429,9 @@ public class NinteiEnkiTsuchishoHakkoHandler {
         } else if (通知書.getName().equals(ResponseHolder.getState())) {
             parameter.set画面モード(画面モード_2);
             parameter.set申請書管理番号リスト(get申請書管理番号リスト());
+            parameter.set処理見込み日From(FlexibleDate.EMPTY);
+            parameter.set処理見込み日To(FlexibleDate.EMPTY);
+            parameter.set通知書発行日(FlexibleDate.EMPTY);
         }
         return parameter;
     }

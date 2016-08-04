@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class YokaigoNinteiEnkiTshuchishoReport extends Report<YokaigoNinteiEnkiTshuchishoReportSource> {
 
-    private YokaigoNinteiEnkiTshuchishoEntity target;
+    private final YokaigoNinteiEnkiTshuchishoEntity target;
 
     /**
      * インスタンスを生成します。

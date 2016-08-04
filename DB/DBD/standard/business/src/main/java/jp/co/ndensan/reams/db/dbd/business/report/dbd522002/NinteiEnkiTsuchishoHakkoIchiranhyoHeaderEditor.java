@@ -69,24 +69,26 @@ class NinteiEnkiTsuchishoHakkoIchiranhyoHeaderEditor implements INinteiEnkiTsuch
     }
 
     private void edit処理見込期間(NinteiEnkiTsuchishoHakkoIchiranhyoReportSource source) {
-        source.shoriMikomiKigen = entity.get処理見込み日From() == null ? RString.EMPTY : entity.get処理見込み日From()
+        source.shoriMikomiKigen = null == entity.get処理見込み日From() ? RString.EMPTY : entity.get処理見込み日From()
                 .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString()
-                + " ～ "
-                + entity.get処理見込み日To() == null ? RString.EMPTY : entity.get処理見込み日To()
-                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                .concat(" ～ ")
+                .concat(entity.get処理見込み日To() == null ? RString.EMPTY : entity.get処理見込み日To()
+                        .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
 
     }
 
     private void edit通知書発行日(NinteiEnkiTsuchishoHakkoIchiranhyoReportSource source) {
-        source.tsuchishoHakkoYMD = entity.get通知書発行日() == null ? RString.EMPTY : entity.get通知書発行日()
+        source.tsuchishoHakkoYMD = null == entity.get通知書発行日() ? RString.EMPTY : entity.get通知書発行日()
                 .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
     private void edit市町村コード(NinteiEnkiTsuchishoHakkoIchiranhyoReportSource source) {
-        source.cityCode = entity.get市町村コード().code市町村RString();
+        if (entity.get市町村コード() != null) {
+            source.cityCode = entity.get市町村コード().code市町村RString();
+        }
     }
 
     private void edit市町村名(NinteiEnkiTsuchishoHakkoIchiranhyoReportSource source) {

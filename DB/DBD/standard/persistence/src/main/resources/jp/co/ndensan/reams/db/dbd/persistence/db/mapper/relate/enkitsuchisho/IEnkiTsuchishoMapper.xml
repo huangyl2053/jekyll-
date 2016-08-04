@@ -8,7 +8,7 @@
     <select id="get延期通知書発行一覧表情報" 
         parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.enkitsuchisho.EnkiTsuchishohakenIchiranhyoJyohoMybatisParameter"
         resultMap="ResultMap_EnkiTsuchishoHakkenichiranhyoJyohoEntity" 
-        fetchSize="500">
+        fetchSize="500" resultOrdered="true">
         SELECT
             rgdb."DbT4101NinteiShinseiJoho"."koroshoIfShikibetsuCode" AS 厚労省IF識別コード,
             rgdb."DbT4101NinteiShinseiJoho"."hihokenshaNo" AS 被保番号,
@@ -46,7 +46,7 @@
              rgdb."DbT4101NinteiShinseiJoho"."enkiTsuchiHakkoYMD" = #{tsuchishohakkonbi}
             </if>
             <if test="tsuchishohakkonbi == null or tsuchishohakkonbi.isEmpty()">
-                rgdb."DbT4101NinteiShinseiJoho"."enkiTsuchiHakkoYMD" = null
+                rgdb."DbT4101NinteiShinseiJoho"."enkiTsuchiHakkoYMD" IS NULL
             </if>
             <if test="shorimikomibiFrom != null and !shorimikomibiFrom.isEmpty()">
                 AND #{shorimikomibiFrom} <![CDATA[<=]]>  rgdb."DbT4101NinteiShinseiJoho"."enkiKetteiYMD"
@@ -95,22 +95,21 @@
     </resultMap>
     
     <select id ="selectBy申請書管理番号リスト"
-            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.enkitsuchisho.EnkiTsuchishoJyohoMybatisParameter"
-            fetchSize="500">
+            fetchSize="500" resultOrdered="true">
         SELECT
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.allColumns_DbT4101NinteiShinseiJoho" />
+            A.*
         FROM
-            rgdb."DbT4101NinteiShinseiJoho"
-        <where>
-            rgdb."DbT4101NinteiShinseiJoho"."shinseishoKanriNo" IN
+            rgdb."DbT4101NinteiShinseiJoho" AS A
+        WHERE
+            A."shinseishoKanriNo" IN
             <foreach item="shinseishokanribangorisuto" index="index" collection="shinseishokanribangorisuto" open="(" separator="," close=")">
                 #{shinseishokanribangorisuto}
             </foreach>  
-            AND rgdb."DbT4101NinteiShinseiJoho"."logicalDeletedFlag" = False
-        </where>
+            AND A."logicalDeletedFlag" = False
         ORDER BY
-            rgdb."DbT4101NinteiShinseiJoho"."hihokenshaKana",
-            rgdb."DbT4101NinteiShinseiJoho"."ninteiShinseiYMD"
+            A."hihokenshaKana",
+            A."ninteiShinseiYMD"
     </select>
 </mapper>

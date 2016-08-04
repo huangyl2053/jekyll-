@@ -57,11 +57,4 @@ public class EnkiTsuchishoFlow extends BatchFlowBase<NinteiEnkiTsuchishoHakkoPar
                 .arguments(getParameter().toEnkiTsuchishohakenIchiranhyoJyohoProcessParameter())
                 .define();
     }
-
-//    @Step(バッチ出力条件リストの出力)
-//    protected IBatchFlowCommand batchShutsuryokuJyokenRisuto() {
-//        return loopBatch()
-//                .arguments(getParameter().toEnkiTsuchishohakenIchiranhyoJyohoProcessParameter())
-//                .define();
-//    }
 }
