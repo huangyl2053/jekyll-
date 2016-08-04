@@ -238,9 +238,11 @@ public class ShiharaiHohoHenkoTsuchishoHakkoService {
             RString 帳票タイプ, ReportId 帳票分類ID, ShiharaiHohoHenko 帳票情報, FlexibleDate 差止通知書発行年月日, RString 差止文書番号, ReportManager reportManager) {
         DbT7065ChohyoSeigyoKyotsuEntity dbT7065Entity = load帳票制御共通(帳票分類ID);
         List<RString> 通知書定型文List = get通知書定型文List(帳票分類ID, dbT7065Entity, 帳票タイプ);
+        List<ShokanKihonJihoEntiy> shokanKihonJihoEntiyList = selectShokanKihon(帳票情報.get被保険者番号(),
+                KanriKubun.一号償還払い化.code(), 帳票情報.get履歴番号(), ShiharaiHenkoJohoBunruiKubun.差止情報.getコード());
         ShiharaiIchijiSashitomeTsuchishoPrintService service = new ShiharaiIchijiSashitomeTsuchishoPrintService();
         service.print(ShikibetsuTaishoFactory.createKojin(宛名情報), AtesakiFactory.createInstance(宛先情報), new ChohyoSeigyoKyotsu(dbT7065Entity), 地方公共団体,
-                差止通知書発行年月日, 差止文書番号, 通知書定型文List, 帳票分類ID, 帳票情報, null, reportManager);
+                差止通知書発行年月日, 差止文書番号, 通知書定型文List, 帳票分類ID, 帳票情報, shokanKihonJihoEntiyList, reportManager);
         for (ShiharaiHohoHenkoSashitome entity : 帳票情報.getShiharaiHohoHenkoSashitomeList()) {
             dac4024.updateSashitomeTsuchiHakkoYMD(entity.get証記載保険者番号(), entity.get被保険者番号(),
                     entity.get管理区分(), entity.get履歴番号(), entity.get情報分類区分(), entity.get連番(), 差止通知書発行年月日);
@@ -277,9 +279,10 @@ public class ShiharaiHohoHenkoTsuchishoHakkoService {
             RString 帳票タイプ, ReportId 帳票分類ID, ShiharaiHohoHenko 帳票情報, FlexibleDate 予告通知書発行年月日, RString 予告文書番号, ReportManager reportManager) {
         DbT7065ChohyoSeigyoKyotsuEntity dbT7065Entity = load帳票制御共通(帳票分類ID);
         List<RString> 通知書定型文List = get通知書定型文List(帳票分類ID, dbT7065Entity, 帳票タイプ);
+        List<ShokanKihonJihoEntiy> shokanKihonJihoEntiyList = new ArrayList();
         SashitomeYokokuTsuchishoNigoPrintService service = new SashitomeYokokuTsuchishoNigoPrintService();
         service.print(ShikibetsuTaishoFactory.createKojin(宛名情報), AtesakiFactory.createInstance(宛先情報), new ChohyoSeigyoKyotsu(dbT7065Entity), 地方公共団体,
-                予告通知書発行年月日, 予告文書番号, 通知書定型文List, 帳票分類ID, 帳票情報, null, reportManager);
+                予告通知書発行年月日, 予告文書番号, 通知書定型文List, 帳票分類ID, 帳票情報, shokanKihonJihoEntiyList, reportManager);
         dac4021.updateYokokuTsuchiHakkoYMD(帳票情報.get証記載保険者番号(), 帳票情報.get被保険者番号(),
                 帳票情報.get管理区分(), 帳票情報.get履歴番号(), 予告通知書発行年月日);
     }
