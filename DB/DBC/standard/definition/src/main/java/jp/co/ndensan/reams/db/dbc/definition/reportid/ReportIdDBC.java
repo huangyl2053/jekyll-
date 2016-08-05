@@ -24,6 +24,10 @@ public enum ReportIdDBC {
      */
     DBC200080(new ReportId("DBC200080_KyufujissekiKoshinkekkaIchiran"), new RString("総合事業費過再審査定通知書情報")),
     /**
+     * 総合事業費過誤決定通知書情報取込一覧表
+     */
+    DBC200085(new ReportId("DBC200085_SogojigyohiKagoKetteiTsuchishoTorikomiIchiran"), new RString("総合事業費過誤決定通知書情報取込一覧表")),
+    /**
      * 給付実績更新結果情報一覧表
      */
     DBC200054(new ReportId("DBC200054_KyufujissekiKoshinkekkaIchiran"), new RString("給付実績更新結果情報一覧表")),

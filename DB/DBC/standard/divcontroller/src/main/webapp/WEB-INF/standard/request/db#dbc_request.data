@@ -732,6 +732,8 @@ dbc/db/dbc/TsuchishoJoho172/onImplement
 dbc/db/dbc/TsuchishoJoho172/onLoad
 dbc/db/dbc/TsuchishoJoho175/onImplement
 dbc/db/dbc/TsuchishoJoho175/onLoad
+dbc/db/dbc/TsuchishoJoho177/onClick_btnExcute
+dbc/db/dbc/TsuchishoJoho177/onLoad
 dbc/db/dbc/TsuchishoJoho221/onClick_btnExcute
 dbc/db/dbc/TsuchishoJoho221/onLoad
 dbc/db/dbc/TsuchishoJoho222/onClick_btnExcute
