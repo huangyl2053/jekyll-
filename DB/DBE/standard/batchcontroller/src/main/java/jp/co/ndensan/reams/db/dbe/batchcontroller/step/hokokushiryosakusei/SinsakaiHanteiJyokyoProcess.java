@@ -4,7 +4,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsahanteijokyo.ShinsaHanteiJokyoItem;
-import jp.co.ndensan.reams.db.dbe.business.report.shinsahanteijokyo.ShinsaHanteiJokyoReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.yokaigonintei.shinsei.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.SinsakaiHanteiJyokyoMyBatisParameter;
@@ -144,8 +143,8 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
 
     @Override
     protected void afterExecute() {
-        ShinsaHanteiJokyoReport report = ShinsaHanteiJokyoReport.createFrom(itemList);
-        report.writeBy(reportSourceWriter);
+        //ShinsaHanteiJokyoReport report = ShinsaHanteiJokyoReport.createFrom(itemList);
+        //report.writeBy(reportSourceWriter);
         outputJokenhyo();
     }
 

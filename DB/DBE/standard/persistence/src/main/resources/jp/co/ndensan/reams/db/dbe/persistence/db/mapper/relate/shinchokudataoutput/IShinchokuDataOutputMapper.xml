@@ -37,6 +37,8 @@
         )
        AND
           DbT5207.remban <![CDATA[<=]]> '20'
+        AND
+          '1' <![CDATA[<=]]> DbT5207.remban    
        AND
          DbT5207."koroshoIfShikibetsuCode" = (
                                  SELECT
@@ -75,6 +77,8 @@
         )
        AND
           DbT5211.remban <![CDATA[<=]]> '85'
+      AND
+          '1' <![CDATA[<=]]> DbT5211.remban    
        AND
          DbT5211."koroshoIfShikibetsuCode" = (
                                  SELECT
@@ -158,6 +162,8 @@
         AND
           DbT5207.remban <![CDATA[<=]]> '20'
         AND
+          '1' <![CDATA[<=]]> DbT5207.remban  
+        AND
          DbT5207."koroshoIfShikibetsuCode" = (
                                  SELECT
                                     "koroshoIfShikibetsuCode"
@@ -183,7 +189,7 @@
         DbT5121."zenkaiShinseishoKanriNo" as "DbT5121_zenkaiShinseishoKanriNo",
         DbT5211."koroshoIfShikibetsuCode" as "DbT5207_koroshoIfShikibetsuCode",  
         DbT5211.remban as "DbT5207_remban",
-        DbT5211."researchItem" as "DbT5211_researchItem"
+        DbT5211."researchItem" as "DbT5207_researchItem"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
         LEFT JOIN
@@ -206,6 +212,8 @@
         )
         AND
           DbT5211.remban <![CDATA[<=]]> '85'
+        AND
+          '1' <![CDATA[<=]]> DbT5211.remban
         AND
          DbT5211."koroshoIfShikibetsuCode" = (
                                  SELECT

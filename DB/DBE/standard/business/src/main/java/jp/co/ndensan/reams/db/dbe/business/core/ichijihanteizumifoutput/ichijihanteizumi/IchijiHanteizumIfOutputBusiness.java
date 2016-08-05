@@ -8,13 +8,15 @@ package jp.co.ndensan.reams.db.dbe.business.core.ichijihanteizumifoutput.ichijih
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.ichijihanteizumifoutput.IchijiHanteizumIfOutputProcessParamter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.itizihanteishori.ItziHanteiShoriProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteizumifoutput.IchijiHanteizumIfOutputEucCsvEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteizumifoutput.IchijiHanteizumIfOutputRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ChosaItemJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.NinteichosaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.NinteichosahyoServiceJokyoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ShujiiIkenshoJohoTempTableEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ZenKaiChosaItemJohoTempTableEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ZenKaiNinteichosaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
@@ -38,20 +40,78 @@ public class IchijiHanteizumIfOutputBusiness {
     private static final RString 厚労省IF識別コード_02A = new RString("02A");
     private static final RString 厚労省IF識別コード_06A = new RString("06A");
     private static final RString 厚労省IF識別コード_09B = new RString("09B");
+    private final RString 要介護認定一次判定警告コード = new RString("０");
 
     /**
      *
      * @param entity NinteichosahyoServiceJokyoRelateEntity
+     * @param temoTableEntity ZenKaiNinteichosaJohoTempTableEntity
+     * @param map Map<String, RString>
+     * @param サービスの状況一時リスト List<ZenKaiNinteichosaJohoTempTableEntity>
+     * @return temoTableEntity ZenKaiNinteichosaJohoTempTableEntity
+     */
+    public ZenKaiNinteichosaJohoTempTableEntity get前回サービスの状況一時テーブル(NinteichosahyoServiceJokyoRelateEntity entity,
+            ZenKaiNinteichosaJohoTempTableEntity temoTableEntity, Map<RString, RString> map,
+            List<ZenKaiNinteichosaJohoTempTableEntity> サービスの状況一時リスト) {
+        if (map.get(申請書管理番号).equals(nullToEmpty(entity.getShinseishoKanriNo()))
+                && map.get(厚労省IF識別コード).equals(nullToEmpty(entity.getKoroshoIfShikibetsuCode()))) {
+            switch (nullToEmpty(entity.getRemban()).toString()) {
+                case "2":
+                    temoTableEntity.setRemban2(nullToEmpty(entity.getServiceJokyo()));
+                    break;
+                case "3":
+                    temoTableEntity.setRemban3(nullToEmpty(entity.getServiceJokyo()));
+                    break;
+                case "4":
+                    temoTableEntity.setRemban4(nullToEmpty(entity.getServiceJokyo()));
+                    break;
+                case "5":
+                    temoTableEntity.setRemban5(nullToEmpty(entity.getServiceJokyo()));
+                    break;
+                case "6":
+                    temoTableEntity.setRemban6(nullToEmpty(entity.getServiceJokyo()));
+                    break;
+                case "7":
+                    temoTableEntity.setRemban7(nullToEmpty(entity.getServiceJokyo()));
+                    break;
+                case "8":
+                    temoTableEntity.setRemban8(nullToEmpty(entity.getServiceJokyo()));
+                    break;
+                case "9":
+                    temoTableEntity.setRemban9(nullToEmpty(entity.getServiceJokyo()));
+                    break;
+                case "10":
+                    temoTableEntity.setRemban10(nullToEmpty(entity.getServiceJokyo()));
+                    break;
+                default:
+                    break;
+            }
+            前回項番編集(entity, temoTableEntity);
+        } else {
+            temoTableEntity = new ZenKaiNinteichosaJohoTempTableEntity();
+            temoTableEntity.setShinseishoKanriNo(nullToEmpty(entity.getShinseishoKanriNo()));
+            temoTableEntity.setKoroshoIfShikibetsuCode(nullToEmpty(entity.getKoroshoIfShikibetsuCode()));
+            temoTableEntity.setRemban1(nullToEmpty(entity.getServiceJokyo()));
+            サービスの状況一時リスト.add(temoTableEntity);
+            map.put(申請書管理番号, nullToEmpty(entity.getShinseishoKanriNo()));
+            map.put(厚労省IF識別コード, nullToEmpty(entity.getKoroshoIfShikibetsuCode()));
+        }
+        return temoTableEntity;
+    }
+
+    /**
+     *
+     * @param entity NinteichosaJohoTempTableEntity
      * @param temoTableEntity NinteichosaJohoTempTableEntity
      * @param map Map<String, RString>
-     * @param サービスの状況一時リスト List<NinteichosaJohoTempTableEntity>
+     * @param サービスの状況一時リスト List<ZenKaiNinteichosaJohoTempTableEntity>
      * @return temoTableEntity NinteichosaJohoTempTableEntity
      */
     public NinteichosaJohoTempTableEntity getサービスの状況一時テーブル(NinteichosahyoServiceJokyoRelateEntity entity,
-            NinteichosaJohoTempTableEntity temoTableEntity, Map<String, RString> map,
+            NinteichosaJohoTempTableEntity temoTableEntity, Map<RString, RString> map,
             List<NinteichosaJohoTempTableEntity> サービスの状況一時リスト) {
-        if (map.get(申請書管理番号.toString()).equals(nullToEmpty(entity.getShinseishoKanriNo()))
-                && map.get(厚労省IF識別コード.toString()).equals(nullToEmpty(entity.getKoroshoIfShikibetsuCode()))) {
+        if (map.get(申請書管理番号).equals(nullToEmpty(entity.getShinseishoKanriNo()))
+                && map.get(厚労省IF識別コード).equals(nullToEmpty(entity.getKoroshoIfShikibetsuCode()))) {
             switch (nullToEmpty(entity.getRemban()).toString()) {
                 case "2":
                     temoTableEntity.setRemban2(nullToEmpty(entity.getServiceJokyo()));
@@ -88,10 +148,11 @@ public class IchijiHanteizumIfOutputBusiness {
             temoTableEntity = new NinteichosaJohoTempTableEntity();
             temoTableEntity.setShinseishoKanriNo(nullToEmpty(entity.getShinseishoKanriNo()));
             temoTableEntity.setKoroshoIfShikibetsuCode(nullToEmpty(entity.getKoroshoIfShikibetsuCode()));
+            temoTableEntity.setZenkaiShinseishoKanriNo(entity.getZenkaiShinseishoKanriNo());
             temoTableEntity.setRemban1(nullToEmpty(entity.getServiceJokyo()));
             サービスの状況一時リスト.add(temoTableEntity);
-            map.put(申請書管理番号.toString(), nullToEmpty(entity.getShinseishoKanriNo()));
-            map.put(厚労省IF識別コード.toString(), nullToEmpty(entity.getKoroshoIfShikibetsuCode()));
+            map.put(申請書管理番号, nullToEmpty(entity.getShinseishoKanriNo()));
+            map.put(厚労省IF識別コード, nullToEmpty(entity.getKoroshoIfShikibetsuCode()));
         }
         return temoTableEntity;
     }
@@ -99,16 +160,16 @@ public class IchijiHanteizumIfOutputBusiness {
     /**
      *
      * @param entity NinteichosahyoServiceJokyoRelateEntity
-     * @param temoTableEntity NinteichosaJohoTempTableEntity
+     * @param temoTableEntity ZenKaiChosaItemJohoTempTableEntity
      * @param map Map<String, RString>
-     * @param 調査調査項目リスト List<ChosaItemJohoTempTableEntity>
-     * @return temoTableEntity ChosaItemJohoTempTableEntity
+     * @param 調査調査項目リスト List<ZenKaiChosaItemJohoTempTableEntity>
+     * @return temoTableEntity ZenKaiChosaItemJohoTempTableEntity
      */
-    public ChosaItemJohoTempTableEntity get認定調査票基本調査(NinteichosahyoServiceJokyoRelateEntity entity,
-            ChosaItemJohoTempTableEntity temoTableEntity, Map<String, RString> map,
-            List<ChosaItemJohoTempTableEntity> 調査調査項目リスト) {
-        if (map.get(申請書管理番号.toString()).equals(entity.getShinseishoKanriNo())
-                && map.get(厚労省IF識別コード.toString()).equals(entity.getKoroshoIfShikibetsuCode())) {
+    public ZenKaiChosaItemJohoTempTableEntity get前回認定調査票基本調査(NinteichosahyoServiceJokyoRelateEntity entity,
+            ZenKaiChosaItemJohoTempTableEntity temoTableEntity, Map<RString, RString> map,
+            List<ZenKaiChosaItemJohoTempTableEntity> 調査調査項目リスト) {
+        if (map.get(申請書管理番号).equals(entity.getShinseishoKanriNo())
+                && map.get(厚労省IF識別コード).equals(entity.getKoroshoIfShikibetsuCode())) {
             switch (entity.getRemban().toString()) {
                 case "2":
                     temoTableEntity.setRemban2(nullToEmpty(entity.getResearchItem()));
@@ -140,7 +201,7 @@ public class IchijiHanteizumIfOutputBusiness {
                 default:
                     break;
             }
-            項番編集(entity, temoTableEntity);
+            認定調査項番編集(entity, temoTableEntity);
             項番編集2(entity, temoTableEntity);
             項番編集3(entity, temoTableEntity);
             項番編集4(entity, temoTableEntity);
@@ -151,7 +212,7 @@ public class IchijiHanteizumIfOutputBusiness {
             項番編集8(entity, temoTableEntity);
         } else {
             if (new RString("1").equals(entity.getRemban())) {
-                temoTableEntity = new ChosaItemJohoTempTableEntity();
+                temoTableEntity = new ZenKaiChosaItemJohoTempTableEntity();
                 temoTableEntity.setShinseishoKanriNo(entity.getShinseishoKanriNo());
                 temoTableEntity.setKoroshoIfShikibetsuCode(entity.getKoroshoIfShikibetsuCode());
                 temoTableEntity.setRemban1(nullToEmpty(entity.getResearchItem()));
@@ -159,8 +220,78 @@ public class IchijiHanteizumIfOutputBusiness {
             if (temoTableEntity != null) {
                 調査調査項目リスト.add(temoTableEntity);
             }
-            map.put(申請書管理番号.toString(), nullToEmpty(entity.getShinseishoKanriNo()));
-            map.put(厚労省IF識別コード.toString(), nullToEmpty(entity.getKoroshoIfShikibetsuCode()));
+            map.put(申請書管理番号, nullToEmpty(entity.getShinseishoKanriNo()));
+            map.put(厚労省IF識別コード, nullToEmpty(entity.getKoroshoIfShikibetsuCode()));
+        }
+        return temoTableEntity;
+    }
+
+    /**
+     *
+     * @param entity NinteichosahyoServiceJokyoRelateEntity
+     * @param temoTableEntity NinteichosaJohoTempTableEntity
+     * @param map Map<String, RString>
+     * @param 調査調査項目リスト List<ChosaItemJohoTempTableEntity>
+     * @return temoTableEntity ChosaItemJohoTempTableEntity
+     */
+    public ChosaItemJohoTempTableEntity get調査票基本調査(NinteichosahyoServiceJokyoRelateEntity entity,
+            ChosaItemJohoTempTableEntity temoTableEntity, Map<RString, RString> map,
+            List<ChosaItemJohoTempTableEntity> 調査調査項目リスト) {
+        if (map.get(申請書管理番号).equals(entity.getShinseishoKanriNo())
+                && map.get(厚労省IF識別コード).equals(entity.getKoroshoIfShikibetsuCode())) {
+            switch (entity.getRemban().toString()) {
+                case "2":
+                    temoTableEntity.setRemban2(nullToEmpty(entity.getResearchItem()));
+                    break;
+                case "3":
+                    temoTableEntity.setRemban3(nullToEmpty(entity.getResearchItem()));
+                    break;
+                case "4":
+                    temoTableEntity.setRemban4(nullToEmpty(entity.getResearchItem()));
+                    break;
+                case "5":
+                    temoTableEntity.setRemban5(nullToEmpty(entity.getResearchItem()));
+                    break;
+                case "6":
+                    temoTableEntity.setRemban6(nullToEmpty(entity.getResearchItem()));
+                    break;
+                case "7":
+                    temoTableEntity.setRemban7(nullToEmpty(entity.getResearchItem()));
+                    break;
+                case "8":
+                    temoTableEntity.setRemban8(nullToEmpty(entity.getResearchItem()));
+                    break;
+                case "9":
+                    temoTableEntity.setRemban9(nullToEmpty(entity.getResearchItem()));
+                    break;
+                case "10":
+                    temoTableEntity.setRemban10(nullToEmpty(entity.getResearchItem()));
+                    break;
+                default:
+                    break;
+            }
+            調査票項番編集(entity, temoTableEntity);
+            前回項番編集2(entity, temoTableEntity);
+            前回項番編集3(entity, temoTableEntity);
+            前回項番編集4(entity, temoTableEntity);
+            前回項番編集5(entity, temoTableEntity);
+            前回項番編集6(entity, temoTableEntity);
+            前回項番編集7(entity, temoTableEntity);
+            前回項番編集7(entity, temoTableEntity);
+            前回項番編集8(entity, temoTableEntity);
+        } else {
+            if (new RString("1").equals(entity.getRemban())) {
+                temoTableEntity = new ChosaItemJohoTempTableEntity();
+                temoTableEntity.setShinseishoKanriNo(entity.getShinseishoKanriNo());
+                temoTableEntity.setKoroshoIfShikibetsuCode(entity.getKoroshoIfShikibetsuCode());
+                temoTableEntity.setZenkaiShinseishoKanriNo(entity.getZenkaiShinseishoKanriNo());
+                temoTableEntity.setRemban1(nullToEmpty(entity.getResearchItem()));
+            }
+            if (temoTableEntity != null) {
+                調査調査項目リスト.add(temoTableEntity);
+            }
+            map.put(申請書管理番号, nullToEmpty(entity.getShinseishoKanriNo()));
+            map.put(厚労省IF識別コード, nullToEmpty(entity.getKoroshoIfShikibetsuCode()));
         }
         return temoTableEntity;
     }
@@ -174,10 +305,10 @@ public class IchijiHanteizumIfOutputBusiness {
      * @return temoTableEntity ShujiiIkenshoJohoTempTableEntity
      */
     public ShujiiIkenshoJohoTempTableEntity get要介護認定主治医意見(NinteichosahyoServiceJokyoRelateEntity entity,
-            ShujiiIkenshoJohoTempTableEntity temoTableEntity, Map<String, RString> map,
+            ShujiiIkenshoJohoTempTableEntity temoTableEntity, Map<RString, RString> map,
             List<ShujiiIkenshoJohoTempTableEntity> 要介護認定主治医リスト) {
-        if (map.get(申請書管理番号.toString()).equals(entity.getShinseishoKanriNo())
-                && map.get(厚労省IF識別コード.toString()).equals(entity.getKoroshoIfShikibetsuCode())) {
+        if (map.get(申請書管理番号).equals(entity.getShinseishoKanriNo())
+                && map.get(厚労省IF識別コード).equals(entity.getKoroshoIfShikibetsuCode())) {
             switch (entity.getRemban().toString()) {
                 case "15":
                     temoTableEntity.setRemban15(nullToEmpty(entity.getIkenItem()));
@@ -211,8 +342,8 @@ public class IchijiHanteizumIfOutputBusiness {
             if (temoTableEntity != null) {
                 要介護認定主治医リスト.add(temoTableEntity);
             }
-            map.put(申請書管理番号.toString(), nullToEmpty(entity.getShinseishoKanriNo()));
-            map.put(厚労省IF識別コード.toString(), nullToEmpty(entity.getKoroshoIfShikibetsuCode()));
+            map.put(申請書管理番号, nullToEmpty(entity.getShinseishoKanriNo()));
+            map.put(厚労省IF識別コード, nullToEmpty(entity.getKoroshoIfShikibetsuCode()));
         }
         return temoTableEntity;
 
@@ -236,7 +367,7 @@ public class IchijiHanteizumIfOutputBusiness {
      * @param paramter ShinchokuDataOutputProcessParamter
      * @return List<RString> 出力条件List
      */
-    public List<RString> get出力条件(IchijiHanteizumIfOutputProcessParamter paramter) {
+    public List<RString> get出力条件(ItziHanteiShoriProcessParamter paramter) {
         RStringBuilder jokenBuilder = new RStringBuilder();
         List<RString> 出力条件List = new ArrayList<>();
         jokenBuilder.append(new RString("【申請書管理番号リスト】"));
@@ -296,58 +427,48 @@ public class IchijiHanteizumIfOutputBusiness {
         eucEntity.set委託区分(nullToEmpty(entity.getChosaItakuKubun()));
         eucEntity.set認定調査員番号(nullToEmpty(entity.getNinteiChosainCode()));
         eucEntity.set認定調査員資格コード(nullToEmpty(entity.getChosainShikaku()));
-        eucEntity.set一次判定日(RString.EMPTY);
-        eucEntity.set一次判定結果(RString.EMPTY);
-        eucEntity.set一次判定結果認知症加算(RString.EMPTY);
-        eucEntity.set要介護認定等基準時間(RString.EMPTY);
-        eucEntity.set要介護認定等基準時間食事(RString.EMPTY);
-        eucEntity.set要介護認定等基準時間排泄(RString.EMPTY);
-        eucEntity.set要介護認定等基準時間移動(RString.EMPTY);
-        eucEntity.set要介護認定等基準時間清潔保持(RString.EMPTY);
-        eucEntity.set要介護認定等基準時間間接ケア(RString.EMPTY);
-        eucEntity.set要介護認定等基準時間BPSD関連(RString.EMPTY);
-        eucEntity.set要介護認定等基準時間機能訓練(RString.EMPTY);
-        eucEntity.set要介護認定等基準時間医療関連(RString.EMPTY);
-        eucEntity.set要介護認定等基準時間認知症加算(RString.EMPTY);
-        eucEntity.set中間評価項目得点第１群(RString.EMPTY);
-        eucEntity.set中間評価項目得点第２群(RString.EMPTY);
-        eucEntity.set中間評価項目得点第３群(RString.EMPTY);
-        eucEntity.set中間評価項目得点第４群(RString.EMPTY);
-        eucEntity.set中間評価項目得点第５群(RString.EMPTY);
-        eucEntity.set一次判定警告配列コード(RString.EMPTY);
-        eucEntity.set状態の安定性(RString.EMPTY);
-        eucEntity.set認知症自立度Ⅱ以上の蓋然性(RString.EMPTY);
-        eucEntity.set認知機能及び状態安定性から推定される給付区分(RString.EMPTY);
-        eucEntity.set認定審査会資料作成日(RString.EMPTY);
-        eucEntity.set認定審査会予定日(RString.EMPTY);
-        eucEntity.set合議体番号(RString.EMPTY);
-        eucEntity.set審査会資料番号(RString.EMPTY);
-        eucEntity.set二次判定日(RString.EMPTY);
-        eucEntity.set二次判定結果(RString.EMPTY);
-        eucEntity.set認定有効期間開始(RString.EMPTY);
-        eucEntity.set認定有効期間終了(RString.EMPTY);
-        eucEntity.set特定疾病コード(RString.EMPTY);
-        eucEntity.set要介護１の場合の状態像(nullToEmpty(entity.getZenYokaigoKubunCode()));
-        eucEntity.set現在のサービス区分コード(nullToEmpty(entity.getServiceKubunCode()));
-        eucEntity.set現在の状況(nullToEmpty(entity.getRemban()));
-        eucEntity.set訪問介護ホームヘルプサービス(nullToEmpty(entity.getサービスremban1()));
-        eucEntity.set訪問入浴介護(nullToEmpty(entity.getサービスremban2()));
-        eucEntity.set訪問看護(nullToEmpty(entity.getサービスremban3()));
-        eucEntity.set訪問リハビリテーション(nullToEmpty(entity.getサービスremban4()));
-        eucEntity.set居宅療養管理指導(nullToEmpty(entity.getサービスremban5()));
-        eucEntity.set通所介護デイサービス(nullToEmpty(entity.getサービスremban6()));
-        eucEntity.set通所リハビリテーション(nullToEmpty(entity.getサービスremban7()));
+        if (entity.getIchijiHnateiKeikokuCode() == null) {
+            eucEntity.set一次判定警告配列コード(要介護認定一次判定警告コード);
+        } else {
+            eucEntity.set一次判定警告配列コード(entity.getIchijiHnateiKeikokuCode());
+        }
         eucEntity.set住宅改修介護給付(nullToEmpty(entity.getServiceJokyoFlag()));
-        eucEntity.set介護予防訪問介護ホームヘルプサービス(nullToEmpty(entity.getサービスremban1()));
-        eucEntity.set介護予防訪問入浴介護(nullToEmpty(entity.getサービスremban2()));
-        eucEntity.set介護予防訪問看護(nullToEmpty(entity.getサービスremban3()));
-        eucEntity.set介護予防訪問リハビリテーション(nullToEmpty(entity.getサービスremban4()));
-        eucEntity.set介護予防居宅療養管理指導(nullToEmpty(entity.getサービスremban5()));
-        eucEntity.set介護予防通所介護デイサービス(nullToEmpty(entity.getサービスremban6()));
-        eucEntity.set介護予防通所リハビリテーション(nullToEmpty(entity.getサービスremban7()));
-        eucEntity.set住宅改修予防給付(nullToEmpty(entity.getServiceJokyoFlag()));
         if (ServiceKubunCode.予防給付サービス.getコード().equals(entity.getServiceKubunCode())) {
+            eucEntity.set要介護１の場合の状態像(nullToEmpty(entity.getZenYokaigoKubunCode()));
+            eucEntity.set現在のサービス区分コード(nullToEmpty(entity.getServiceKubunCode()));
+            eucEntity.set現在の状況(nullToEmpty(entity.getRemban()));
+            eucEntity.set訪問介護ホームヘルプサービス(nullToEmpty(entity.getサービスremban1()));
+            eucEntity.set訪問入浴介護(nullToEmpty(entity.getサービスremban2()));
+            eucEntity.set訪問看護(nullToEmpty(entity.getサービスremban3()));
+            eucEntity.set訪問リハビリテーション(nullToEmpty(entity.getサービスremban4()));
+            eucEntity.set居宅療養管理指導(nullToEmpty(entity.getサービスremban5()));
+            eucEntity.set通所介護デイサービス(nullToEmpty(entity.getサービスremban6()));
+            eucEntity.set通所リハビリテーション(nullToEmpty(entity.getサービスremban7()));
+            eucEntity.set介護予防訪問介護ホームヘルプサービス(nullToEmpty(entity.getサービスremban1()));
+            eucEntity.set介護予防訪問入浴介護(nullToEmpty(entity.getサービスremban2()));
+            eucEntity.set介護予防訪問看護(nullToEmpty(entity.getサービスremban3()));
+            eucEntity.set介護予防訪問リハビリテーション(nullToEmpty(entity.getサービスremban4()));
+            eucEntity.set介護予防居宅療養管理指導(nullToEmpty(entity.getサービスremban5()));
+            eucEntity.set介護予防通所介護デイサービス(nullToEmpty(entity.getサービスremban6()));
+            eucEntity.set介護予防通所リハビリテーション(nullToEmpty(entity.getサービスremban7()));
             予防給付サービス(entity, eucEntity);
+        }
+        if (ServiceKubunCode.予防給付サービス.getコード().equals(entity.get前回serviceKubunCode())) {
+            eucEntity.set前回結果_訪問介護ホームヘルプサービス(nullToEmpty(entity.get前回サービスremban1()));
+            eucEntity.set前回結果_訪問入浴介護(nullToEmpty(entity.get前回サービスremban2()));
+            eucEntity.set前回結果_訪問看護(nullToEmpty(entity.get前回サービスremban3()));
+            eucEntity.set前回結果_訪問リハビリテーション(nullToEmpty(entity.get前回サービスremban4()));
+            eucEntity.set前回結果_居宅療養管理指導(nullToEmpty(entity.get前回サービスremban5()));
+            eucEntity.set前回結果_通所介護デイサービス(nullToEmpty(entity.get前回サービスremban6()));
+            eucEntity.set前回結果_通所リハビリテーション(nullToEmpty(entity.get前回サービスremban7()));
+            eucEntity.set前回結果_介護予防訪問介護ホームヘルプサービス(entity.getサービスremban1());
+            eucEntity.set前回結果_介護予防訪問入浴介護(entity.getサービスremban2());
+            eucEntity.set前回結果_介護予防訪問看護(entity.getサービスremban3());
+            eucEntity.set前回結果_介護予防訪問リハビリテーション(entity.getサービスremban4());
+            eucEntity.set前回結果_介護予防居宅療養管理指導(entity.getサービスremban5());
+            eucEntity.set前回結果_介護予防通所介護デイサービス(entity.getサービスremban6());
+            eucEntity.set介護予防通所リハビリテーション(entity.getサービスremban7());
+            eucEntity.set前回結果_住宅改修介護給付(entity.get前回serviceJokyoFlag());
             前回予防給付サービス(entity, eucEntity);
         }
         eucEntity.set麻痺左上肢(nullToEmpty(entity.get認定調査remban1()));
@@ -391,13 +512,6 @@ public class IchijiHanteizumIfOutputBusiness {
         eucEntity.set前回結果_二次判定日(nullToEmpty(entity.get前回nijiHanteiYMD()));
         eucEntity.set前回結果_現在のサービス区分コード(nullToEmpty(entity.get前回serviceKubunCode()));
         eucEntity.set前回結果_現在の状況(nullToEmpty(entity.getPo2remban()));
-        eucEntity.set前回結果_訪問介護ホームヘルプサービス(nullToEmpty(entity.get前回サービスremban1()));
-        eucEntity.set前回結果_訪問入浴介護(nullToEmpty(entity.get前回サービスremban2()));
-        eucEntity.set前回結果_訪問看護(nullToEmpty(entity.get前回サービスremban3()));
-        eucEntity.set前回結果_訪問リハビリテーション(nullToEmpty(entity.get前回サービスremban4()));
-        eucEntity.set前回結果_居宅療養管理指導(nullToEmpty(entity.get前回サービスremban5()));
-        eucEntity.set前回結果_通所介護デイサービス(nullToEmpty(entity.get前回サービスremban6()));
-        eucEntity.set前回結果_通所リハビリテーション(nullToEmpty(entity.get前回サービスremban7()));
         eucEntity.set前回識別コード(nullToEmpty(entity.get前回koroshoIfShikibetsuCode()));
         eucEntity.set認定審査会意見等(RString.EMPTY);
         eucEntity.setコメント等(nullToEmpty(entity.get前回shinsakaiMemo()));
@@ -415,6 +529,52 @@ public class IchijiHanteizumIfOutputBusiness {
         if (NinteiShinseiHoreiCode.区分変更申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode())
                 && NinteiShinseiHoreiCode.更新申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode())) {
             eucEntity.set前回の認定有効期間終了(nullToEmpty(entity.getZenkaiYukoKikanEnd()));
+        }
+        eucEntity.set一次判定日(RString.EMPTY);
+        eucEntity.set一次判定結果(RString.EMPTY);
+        eucEntity.set一次判定結果認知症加算(RString.EMPTY);
+        eucEntity.set要介護認定等基準時間(RString.EMPTY);
+        eucEntity.set要介護認定等基準時間食事(RString.EMPTY);
+        eucEntity.set要介護認定等基準時間排泄(RString.EMPTY);
+        eucEntity.set要介護認定等基準時間移動(RString.EMPTY);
+        eucEntity.set要介護認定等基準時間清潔保持(RString.EMPTY);
+        eucEntity.set要介護認定等基準時間間接ケア(RString.EMPTY);
+        eucEntity.set要介護認定等基準時間BPSD関連(RString.EMPTY);
+        eucEntity.set要介護認定等基準時間機能訓練(RString.EMPTY);
+        eucEntity.set要介護認定等基準時間医療関連(RString.EMPTY);
+        eucEntity.set要介護認定等基準時間認知症加算(RString.EMPTY);
+        eucEntity.set中間評価項目得点第１群(RString.EMPTY);
+        eucEntity.set中間評価項目得点第２群(RString.EMPTY);
+        eucEntity.set中間評価項目得点第３群(RString.EMPTY);
+        eucEntity.set中間評価項目得点第４群(RString.EMPTY);
+        eucEntity.set中間評価項目得点第５群(RString.EMPTY);
+        eucEntity.set状態の安定性(RString.EMPTY);
+        eucEntity.set認知症自立度Ⅱ以上の蓋然性(RString.EMPTY);
+        eucEntity.set認知機能及び状態安定性から推定される給付区分(RString.EMPTY);
+        eucEntity.set認定審査会資料作成日(RString.EMPTY);
+        eucEntity.set認定審査会予定日(RString.EMPTY);
+        eucEntity.set合議体番号(RString.EMPTY);
+        eucEntity.set審査会資料番号(RString.EMPTY);
+        eucEntity.set二次判定日(RString.EMPTY);
+        eucEntity.set二次判定結果(RString.EMPTY);
+        eucEntity.set認定有効期間開始(RString.EMPTY);
+        eucEntity.set認定有効期間終了(RString.EMPTY);
+        eucEntity.set特定疾病コード(RString.EMPTY);
+        if (entity.getKoroshoIfShikibetsuCode() != null
+                && (厚労省IF識別コード_99A.equals(entity.getKoroshoIfShikibetsuCode())
+                || (厚労省IF識別コード_02A.equals(entity.getKoroshoIfShikibetsuCode())))) {
+            eucEntity.set意見書短期記憶(nullToEmpty(entity.get主治医一時remban16()));
+            eucEntity.set意見書認知能力(nullToEmpty(entity.get主治医一時remban17()));
+            eucEntity.set意見書伝達能力(nullToEmpty(entity.get主治医一時remban18()));
+            eucEntity.set意見書食事行為(nullToEmpty(entity.get主治医一時remban19()));
+            eucEntity.set意見書認知症高齢者の日常生活自立度(nullToEmpty(entity.get主治医一時remban15()));
+
+        } else {
+            eucEntity.set意見書短期記憶(nullToEmpty(entity.get主治医一時remban15()));
+            eucEntity.set意見書認知能力(nullToEmpty(entity.get主治医一時remban16()));
+            eucEntity.set意見書伝達能力(nullToEmpty(entity.get主治医一時remban17()));
+            eucEntity.set意見書食事行為(nullToEmpty(entity.get主治医一時remban69()));
+            eucEntity.set意見書認知症高齢者の日常生活自立度(nullToEmpty(entity.get主治医一時remban14()));
         }
     }
 
@@ -587,7 +747,7 @@ public class IchijiHanteizumIfOutputBusiness {
             eucEntity.set移乗(nullToEmpty(entity.get認定調査remban21()));
             eucEntity.set移動(nullToEmpty(entity.get認定調査remban22()));
             eucEntity.setえん下(nullToEmpty(entity.get認定調査remban23()));
-            eucEntity.set食事摂取(nullToEmpty(entity.get認定調査remban31()));
+            eucEntity.set食事摂取(nullToEmpty(entity.get認定調査remban24()));
             eucEntity.set排尿(nullToEmpty(entity.get認定調査remban25()));
             eucEntity.set排便(nullToEmpty(entity.get認定調査remban26()));
             eucEntity.set口腔清潔(nullToEmpty(entity.get認定調査remban27()));
@@ -803,7 +963,7 @@ public class IchijiHanteizumIfOutputBusiness {
             eucEntity.set前回結果_移乗(nullToEmpty(entity.get前回認定remban21()));
             eucEntity.set前回結果_移動(nullToEmpty(entity.get前回認定remban22()));
             eucEntity.set前回結果_えん下(nullToEmpty(entity.get前回認定remban23()));
-            eucEntity.set前回結果_食事摂取(nullToEmpty(entity.get前回認定remban31()));
+            eucEntity.set前回結果_食事摂取(nullToEmpty(entity.get前回認定remban24()));
             eucEntity.set前回結果_排尿(nullToEmpty(entity.get前回認定remban25()));
             eucEntity.set前回結果_排便(nullToEmpty(entity.get前回認定remban26()));
             eucEntity.set前回結果_口腔清潔(nullToEmpty(entity.get前回認定remban27()));
@@ -855,10 +1015,6 @@ public class IchijiHanteizumIfOutputBusiness {
         if (entity.getKoroshoIfShikibetsuCode() != null
                 && (厚労省IF識別コード_99A.equals(entity.getKoroshoIfShikibetsuCode())
                 || (厚労省IF識別コード_02A.equals(entity.getKoroshoIfShikibetsuCode())))) {
-            eucEntity.set意見書短期記憶(nullToEmpty(entity.get主治医一時remban16()));
-            eucEntity.set意見書認知能力(nullToEmpty(entity.get主治医一時remban17()));
-            eucEntity.set意見書伝達能力(nullToEmpty(entity.get主治医一時remban18()));
-            eucEntity.set意見書食事行為(nullToEmpty(entity.get主治医一時remban19()));
             eucEntity.set意見書認知症高齢者の日常生活自立度(nullToEmpty(entity.get主治医一時remban15()));
             eucEntity.set短期入所生活介護ショートステイ(nullToEmpty(entity.getサービスremban9()));
             eucEntity.set短期入所療養介護(nullToEmpty(entity.getサービスremban10()));
@@ -873,10 +1029,6 @@ public class IchijiHanteizumIfOutputBusiness {
             eucEntity.set特定介護予防福祉用具販売(nullToEmpty(entity.getサービスremban13()));
             eucEntity.set介護予防認知症対応型共同生活介護グループホーム(nullToEmpty(entity.getサービスremban11()));
         } else {
-            eucEntity.set意見書短期記憶(nullToEmpty(entity.get主治医一時remban15()));
-            eucEntity.set意見書認知能力(nullToEmpty(entity.get主治医一時remban16()));
-            eucEntity.set意見書伝達能力(nullToEmpty(entity.get主治医一時remban17()));
-            eucEntity.set意見書食事行為(nullToEmpty(entity.get主治医一時remban69()));
             eucEntity.set意見書認知症高齢者の日常生活自立度(nullToEmpty(entity.get主治医一時remban14()));
             eucEntity.set短期入所生活介護ショートステイ(nullToEmpty(entity.getサービスremban8()));
             eucEntity.set短期入所療養介護(nullToEmpty(entity.getサービスremban9()));
@@ -891,9 +1043,9 @@ public class IchijiHanteizumIfOutputBusiness {
             eucEntity.set特定介護予防福祉用具販売(nullToEmpty(entity.getサービスremban12()));
             eucEntity.set介護予防認知症対応型共同生活介護グループホーム(nullToEmpty(entity.getサービスremban16()));
         }
-        if (entity.get前回koroshoIfShikibetsuCode() != null
-                && (厚労省IF識別コード_99A.equals(entity.get前回koroshoIfShikibetsuCode())
-                || (厚労省IF識別コード_02A.equals(entity.get前回koroshoIfShikibetsuCode())))) {
+        if (entity.getKoroshoIfShikibetsuCode() != null
+                && (厚労省IF識別コード_99A.equals(entity.getKoroshoIfShikibetsuCode())
+                || (厚労省IF識別コード_02A.equals(entity.getKoroshoIfShikibetsuCode())))) {
             eucEntity.set夜間対応型訪問介護(RString.EMPTY);
             eucEntity.set認知症対応型通所介護(RString.EMPTY);
             eucEntity.set小規模多機能型居宅介護(RString.EMPTY);
@@ -914,9 +1066,11 @@ public class IchijiHanteizumIfOutputBusiness {
                 && 厚労省IF識別コード_09B.equals(entity.getKoroshoIfShikibetsuCode())) {
             eucEntity.set定期巡回随時対応型訪問介護看護(RString.EMPTY);
             eucEntity.set複合型サービス(RString.EMPTY);
-        } else {
             eucEntity.set定期巡回随時対応型訪問介護看護(nullToEmpty(entity.getサービスremban19()));
             eucEntity.set複合型サービス(entity.getサービスremban20());
+        } else {
+            eucEntity.set定期巡回随時対応型訪問介護看護(RString.EMPTY);
+            eucEntity.set複合型サービス(RString.EMPTY);
         }
     }
 
@@ -971,11 +1125,11 @@ public class IchijiHanteizumIfOutputBusiness {
         }
         if (entity.getKoroshoIfShikibetsuCode() != null
                 && 厚労省IF識別コード_09B.equals(entity.getKoroshoIfShikibetsuCode())) {
-            eucEntity.set前回結果_定期巡回随時対応型訪問介護看護(RString.EMPTY);
-            eucEntity.set前回結果_複合型サービス(RString.EMPTY);
-        } else {
             eucEntity.set前回結果_定期巡回随時対応型訪問介護看護(nullToEmpty(entity.getサービスremban19()));
             eucEntity.set前回結果_複合型サービス(entity.getサービスremban20());
+        } else {
+            eucEntity.set前回結果_定期巡回随時対応型訪問介護看護(RString.EMPTY);
+            eucEntity.set前回結果_複合型サービス(RString.EMPTY);
         }
     }
 
@@ -1016,7 +1170,82 @@ public class IchijiHanteizumIfOutputBusiness {
         }
     }
 
-    private void 項番編集(NinteichosahyoServiceJokyoRelateEntity entity,
+    private void 前回項番編集(NinteichosahyoServiceJokyoRelateEntity entity, ZenKaiNinteichosaJohoTempTableEntity temoTableEntity) {
+        switch (nullToEmpty(entity.getRemban()).toString()) {
+            case "11":
+                temoTableEntity.setRemban11(nullToEmpty(entity.getServiceJokyo()));
+                break;
+            case "12":
+                temoTableEntity.setRemban12(nullToEmpty(entity.getServiceJokyo()));
+                break;
+            case "13":
+                temoTableEntity.setRemban13(nullToEmpty(entity.getServiceJokyo()));
+                break;
+            case "14":
+                temoTableEntity.setRemban14(nullToEmpty(entity.getServiceJokyo()));
+                break;
+            case "15":
+                temoTableEntity.setRemban15(nullToEmpty(entity.getServiceJokyo()));
+                break;
+            case "16":
+                temoTableEntity.setRemban16(nullToEmpty(entity.getServiceJokyo()));
+                break;
+            case "17":
+                temoTableEntity.setRemban17(nullToEmpty(entity.getServiceJokyo()));
+                break;
+            case "18":
+                temoTableEntity.setRemban18(nullToEmpty(entity.getServiceJokyo()));
+                break;
+            case "19":
+                temoTableEntity.setRemban19(nullToEmpty(entity.getServiceJokyo()));
+                break;
+            case "20":
+                temoTableEntity.setRemban20(nullToEmpty(entity.getServiceJokyo()));
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void 認定調査項番編集(NinteichosahyoServiceJokyoRelateEntity entity,
+            ZenKaiChosaItemJohoTempTableEntity temoTableEntity) {
+        switch (entity.getRemban().toString()) {
+            case "11":
+                temoTableEntity.setRemban11(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "12":
+                temoTableEntity.setRemban12(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "13":
+                temoTableEntity.setRemban13(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "14":
+                temoTableEntity.setRemban14(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "15":
+                temoTableEntity.setRemban15(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "16":
+                temoTableEntity.setRemban16(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "17":
+                temoTableEntity.setRemban17(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "18":
+                temoTableEntity.setRemban18(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "19":
+                temoTableEntity.setRemban19(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "20":
+                temoTableEntity.setRemban20(nullToEmpty(entity.getResearchItem()));
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void 調査票項番編集(NinteichosahyoServiceJokyoRelateEntity entity,
             ChosaItemJohoTempTableEntity temoTableEntity) {
         switch (entity.getRemban().toString()) {
             case "11":
@@ -1055,7 +1284,7 @@ public class IchijiHanteizumIfOutputBusiness {
     }
 
     private void 項番編集2(NinteichosahyoServiceJokyoRelateEntity entity,
-            ChosaItemJohoTempTableEntity temoTableEntity) {
+            ZenKaiChosaItemJohoTempTableEntity temoTableEntity) {
         switch (entity.getRemban().toString()) {
             case "21":
                 temoTableEntity.setRemban21(nullToEmpty(entity.getResearchItem()));
@@ -1093,7 +1322,7 @@ public class IchijiHanteizumIfOutputBusiness {
     }
 
     private void 項番編集3(NinteichosahyoServiceJokyoRelateEntity entity,
-            ChosaItemJohoTempTableEntity temoTableEntity) {
+            ZenKaiChosaItemJohoTempTableEntity temoTableEntity) {
         switch (entity.getRemban().toString()) {
             case "31":
                 temoTableEntity.setRemban31(nullToEmpty(entity.getResearchItem()));
@@ -1131,7 +1360,7 @@ public class IchijiHanteizumIfOutputBusiness {
     }
 
     private void 項番編集4(NinteichosahyoServiceJokyoRelateEntity entity,
-            ChosaItemJohoTempTableEntity temoTableEntity) {
+            ZenKaiChosaItemJohoTempTableEntity temoTableEntity) {
         switch (entity.getRemban().toString()) {
             case "41":
                 temoTableEntity.setRemban41(nullToEmpty(entity.getResearchItem()));
@@ -1169,7 +1398,7 @@ public class IchijiHanteizumIfOutputBusiness {
     }
 
     private void 項番編集5(NinteichosahyoServiceJokyoRelateEntity entity,
-            ChosaItemJohoTempTableEntity temoTableEntity) {
+            ZenKaiChosaItemJohoTempTableEntity temoTableEntity) {
         switch (entity.getRemban().toString()) {
             case "51":
                 temoTableEntity.setRemban51(nullToEmpty(entity.getResearchItem()));
@@ -1207,7 +1436,7 @@ public class IchijiHanteizumIfOutputBusiness {
     }
 
     private void 項番編集6(NinteichosahyoServiceJokyoRelateEntity entity,
-            ChosaItemJohoTempTableEntity temoTableEntity) {
+            ZenKaiChosaItemJohoTempTableEntity temoTableEntity) {
         switch (entity.getRemban().toString()) {
             case "61":
                 temoTableEntity.setRemban61(nullToEmpty(entity.getResearchItem()));
@@ -1245,7 +1474,7 @@ public class IchijiHanteizumIfOutputBusiness {
     }
 
     private void 項番編集7(NinteichosahyoServiceJokyoRelateEntity entity,
-            ChosaItemJohoTempTableEntity temoTableEntity) {
+            ZenKaiChosaItemJohoTempTableEntity temoTableEntity) {
         switch (entity.getRemban().toString()) {
             case "71":
                 temoTableEntity.setRemban71(nullToEmpty(entity.getResearchItem()));
@@ -1283,6 +1512,257 @@ public class IchijiHanteizumIfOutputBusiness {
     }
 
     private void 項番編集8(NinteichosahyoServiceJokyoRelateEntity entity,
+            ZenKaiChosaItemJohoTempTableEntity temoTableEntity) {
+        switch (entity.getRemban().toString()) {
+            case "81":
+                temoTableEntity.setRemban81(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "82":
+                temoTableEntity.setRemban82(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "83":
+                temoTableEntity.setRemban83(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "84":
+                temoTableEntity.setRemban84(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "85":
+                temoTableEntity.setRemban85(nullToEmpty(entity.getResearchItem()));
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void 前回項番編集2(NinteichosahyoServiceJokyoRelateEntity entity,
+            ChosaItemJohoTempTableEntity temoTableEntity) {
+        switch (entity.getRemban().toString()) {
+            case "21":
+                temoTableEntity.setRemban21(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "22":
+                temoTableEntity.setRemban22(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "23":
+                temoTableEntity.setRemban23(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "24":
+                temoTableEntity.setRemban24(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "25":
+                temoTableEntity.setRemban25(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "26":
+                temoTableEntity.setRemban26(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "27":
+                temoTableEntity.setRemban27(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "28":
+                temoTableEntity.setRemban28(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "29":
+                temoTableEntity.setRemban29(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "30":
+                temoTableEntity.setRemban30(nullToEmpty(entity.getResearchItem()));
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void 前回項番編集3(NinteichosahyoServiceJokyoRelateEntity entity,
+            ChosaItemJohoTempTableEntity temoTableEntity) {
+        switch (entity.getRemban().toString()) {
+            case "31":
+                temoTableEntity.setRemban31(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "32":
+                temoTableEntity.setRemban32(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "33":
+                temoTableEntity.setRemban33(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "34":
+                temoTableEntity.setRemban34(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "35":
+                temoTableEntity.setRemban35(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "36":
+                temoTableEntity.setRemban36(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "37":
+                temoTableEntity.setRemban37(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "38":
+                temoTableEntity.setRemban38(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "39":
+                temoTableEntity.setRemban39(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "40":
+                temoTableEntity.setRemban40(nullToEmpty(entity.getResearchItem()));
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void 前回項番編集4(NinteichosahyoServiceJokyoRelateEntity entity,
+            ChosaItemJohoTempTableEntity temoTableEntity) {
+        switch (entity.getRemban().toString()) {
+            case "41":
+                temoTableEntity.setRemban41(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "42":
+                temoTableEntity.setRemban42(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "43":
+                temoTableEntity.setRemban43(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "44":
+                temoTableEntity.setRemban44(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "45":
+                temoTableEntity.setRemban45(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "46":
+                temoTableEntity.setRemban46(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "47":
+                temoTableEntity.setRemban47(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "48":
+                temoTableEntity.setRemban48(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "49":
+                temoTableEntity.setRemban49(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "50":
+                temoTableEntity.setRemban50(nullToEmpty(entity.getResearchItem()));
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void 前回項番編集5(NinteichosahyoServiceJokyoRelateEntity entity,
+            ChosaItemJohoTempTableEntity temoTableEntity) {
+        switch (entity.getRemban().toString()) {
+            case "51":
+                temoTableEntity.setRemban51(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "52":
+                temoTableEntity.setRemban52(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "53":
+                temoTableEntity.setRemban53(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "54":
+                temoTableEntity.setRemban54(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "55":
+                temoTableEntity.setRemban55(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "56":
+                temoTableEntity.setRemban56(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "57":
+                temoTableEntity.setRemban57(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "58":
+                temoTableEntity.setRemban58(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "59":
+                temoTableEntity.setRemban59(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "60":
+                temoTableEntity.setRemban60(nullToEmpty(entity.getResearchItem()));
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void 前回項番編集6(NinteichosahyoServiceJokyoRelateEntity entity,
+            ChosaItemJohoTempTableEntity temoTableEntity) {
+        switch (entity.getRemban().toString()) {
+            case "61":
+                temoTableEntity.setRemban61(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "62":
+                temoTableEntity.setRemban62(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "63":
+                temoTableEntity.setRemban63(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "64":
+                temoTableEntity.setRemban64(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "65":
+                temoTableEntity.setRemban65(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "66":
+                temoTableEntity.setRemban66(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "67":
+                temoTableEntity.setRemban67(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "68":
+                temoTableEntity.setRemban68(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "69":
+                temoTableEntity.setRemban69(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "70":
+                temoTableEntity.setRemban70(nullToEmpty(entity.getResearchItem()));
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void 前回項番編集7(NinteichosahyoServiceJokyoRelateEntity entity,
+            ChosaItemJohoTempTableEntity temoTableEntity) {
+        switch (entity.getRemban().toString()) {
+            case "71":
+                temoTableEntity.setRemban71(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "72":
+                temoTableEntity.setRemban72(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "73":
+                temoTableEntity.setRemban73(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "74":
+                temoTableEntity.setRemban74(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "75":
+                temoTableEntity.setRemban75(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "76":
+                temoTableEntity.setRemban76(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "77":
+                temoTableEntity.setRemban77(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "78":
+                temoTableEntity.setRemban78(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "79":
+                temoTableEntity.setRemban79(nullToEmpty(entity.getResearchItem()));
+                break;
+            case "80":
+                temoTableEntity.setRemban80(nullToEmpty(entity.getResearchItem()));
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void 前回項番編集8(NinteichosahyoServiceJokyoRelateEntity entity,
             ChosaItemJohoTempTableEntity temoTableEntity) {
         switch (entity.getRemban().toString()) {
             case "81":

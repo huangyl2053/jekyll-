@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteizumifoutput;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijihanteizumifoutput.IchijiHanteizumIfOutputMybitisParamter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.itizihanteishori.ItziHanteiShoriMybitisParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.NinteichosahyoServiceJokyoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ShinchokuDataOutputRelateEntity;
 
@@ -23,7 +23,7 @@ public interface IchijiHanteizumIfOutputMapper {
      * @param paramter IchijiHanteizumIfOutputMybitisParamter
      * @return NinteichosahyoServiceJokyoRelateEntity
      */
-    List<NinteichosahyoServiceJokyoRelateEntity> getNinteiShinseiJohoEntity(IchijiHanteizumIfOutputMybitisParamter paramter);
+    List<NinteichosahyoServiceJokyoRelateEntity> getNinteiShinseiJohoEntity(ItziHanteiShoriMybitisParamter paramter);
 
     /**
      * 認定調査票（基本調査）調査項目一時テーブルをキー検索で取得します。
@@ -31,7 +31,7 @@ public interface IchijiHanteizumIfOutputMapper {
      * @param paramter IchijiHanteizumIfOutputMybitisParamter
      * @return NinteichosahyoServiceJokyoRelateEntity
      */
-    List<NinteichosahyoServiceJokyoRelateEntity> getNinteichosahyoChosa(IchijiHanteizumIfOutputMybitisParamter paramter);
+    List<NinteichosahyoServiceJokyoRelateEntity> getNinteichosahyoChosa(ItziHanteiShoriMybitisParamter paramter);
 
     /**
      * 要介護認定主治医意見書意見項目一時テーブルをキー検索で取得します。
@@ -39,7 +39,7 @@ public interface IchijiHanteizumIfOutputMapper {
      * @param paramter IchijiHanteizumIfOutputMybitisParamter
      * @return NinteichosahyoServiceJokyoRelateEntity
      */
-    List<NinteichosahyoServiceJokyoRelateEntity> get要介護認定主治医意見書意見項目(IchijiHanteizumIfOutputMybitisParamter paramter);
+    List<NinteichosahyoServiceJokyoRelateEntity> get要介護認定主治医意見書意見項目(ItziHanteiShoriMybitisParamter paramter);
 
     /**
      * 前回調査票（概況調査）サービスの状況一時テーブルをキー検索で取得します。
@@ -47,7 +47,7 @@ public interface IchijiHanteizumIfOutputMapper {
      * @param paramter IchijiHanteizumIfOutputMybitisParamter
      * @return NinteichosahyoServiceJokyoRelateEntity
      */
-    List<NinteichosahyoServiceJokyoRelateEntity> get前回調査票概況調査サービスの状況(IchijiHanteizumIfOutputMybitisParamter paramter);
+    List<NinteichosahyoServiceJokyoRelateEntity> get前回調査票概況調査サービスの状況(ItziHanteiShoriMybitisParamter paramter);
 
     /**
      * 前回調査票（概況調査）サービスの状況一時テーブルをキー検索で取得します。
@@ -55,7 +55,7 @@ public interface IchijiHanteizumIfOutputMapper {
      * @param paramter IchijiHanteizumIfOutputMybitisParamter
      * @return NinteichosahyoServiceJokyoRelateEntity
      */
-    List<NinteichosahyoServiceJokyoRelateEntity> get前回認定調査票基本調査調査項目(IchijiHanteizumIfOutputMybitisParamter paramter);
+    List<NinteichosahyoServiceJokyoRelateEntity> get前回認定調査票基本調査調査項目(ItziHanteiShoriMybitisParamter paramter);
 
     /**
      * 日次進捗データ作成CSV出力をキー検索で取得します。
@@ -63,5 +63,5 @@ public interface IchijiHanteizumIfOutputMapper {
      * @param paramter IchijiHanteizumIfOutputMybitisParamter
      * @return NinteichosahyoServiceJokyoRelateEntity
      */
-    List<ShinchokuDataOutputRelateEntity> get日次進捗データ作成CSV出力(IchijiHanteizumIfOutputMybitisParamter paramter);
+    List<ShinchokuDataOutputRelateEntity> get日次進捗データ作成CSV出力(ItziHanteiShoriMybitisParamter paramter);
 }

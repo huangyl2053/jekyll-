@@ -30,43 +30,45 @@ public class NinteichosaJohoTempTableEntity extends DbTableEntityBase<Ninteichos
     @TempTableColumnOrder(2)
     private RString koroshoIfShikibetsuCode;
     @TempTableColumnOrder(3)
-    private RString remban1;
+    private RString zenkaiShinseishoKanriNo;
     @TempTableColumnOrder(4)
-    private RString remban2;
+    private RString remban1;
     @TempTableColumnOrder(5)
-    private RString remban3;
+    private RString remban2;
     @TempTableColumnOrder(6)
-    private RString remban4;
+    private RString remban3;
     @TempTableColumnOrder(7)
-    private RString remban5;
+    private RString remban4;
     @TempTableColumnOrder(8)
-    private RString remban6;
+    private RString remban5;
     @TempTableColumnOrder(9)
-    private RString remban7;
+    private RString remban6;
     @TempTableColumnOrder(10)
-    private RString remban8;
+    private RString remban7;
     @TempTableColumnOrder(11)
-    private RString remban9;
+    private RString remban8;
     @TempTableColumnOrder(12)
-    private RString remban10;
+    private RString remban9;
     @TempTableColumnOrder(13)
-    private RString remban11;
+    private RString remban10;
     @TempTableColumnOrder(14)
-    private RString remban12;
+    private RString remban11;
     @TempTableColumnOrder(15)
-    private RString remban13;
+    private RString remban12;
     @TempTableColumnOrder(16)
-    private RString remban14;
+    private RString remban13;
     @TempTableColumnOrder(17)
-    private RString remban15;
+    private RString remban14;
     @TempTableColumnOrder(18)
-    private RString remban16;
+    private RString remban15;
     @TempTableColumnOrder(19)
-    private RString remban17;
+    private RString remban16;
     @TempTableColumnOrder(20)
-    private RString remban18;
+    private RString remban17;
     @TempTableColumnOrder(21)
-    private RString remban19;
+    private RString remban18;
     @TempTableColumnOrder(22)
+    private RString remban19;
+    @TempTableColumnOrder(23)
     private RString remban20;
 }

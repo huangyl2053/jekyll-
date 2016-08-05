@@ -15,7 +15,7 @@
     </resultMap>
     <select id="getNinteiShinseiJohoEntity"
             resultMap="resultMap_NinteiChosaHoshuJissekiJohoRelateEntity"
-     parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijihanteizumifoutput.IchijiHanteizumIfOutputMybitisParamter" fetchSize="500" resultOrdered="true">
+     parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.itizihanteishori.ItziHanteiShoriMybitisParamter" fetchSize="500" resultOrdered="true">
         SELECT
         DbT5207."shinseishoKanriNo" as "DbT5207_shinseishoKanriNo",
         DbT5207."koroshoIfShikibetsuCode" as "DbT5207_koroshoIfShikibetsuCode",
@@ -39,6 +39,8 @@
        AND
           DbT5207.remban <![CDATA[<=]]> '20'
        AND
+          '1' <![CDATA[<=]]> DbT5207.remban
+       AND
          DbT5207."koroshoIfShikibetsuCode" = (
                                  SELECT
                                     "koroshoIfShikibetsuCode"
@@ -53,7 +55,7 @@
         DbT5207."shinseishoKanriNo" asc,DbT5207.remban asc    
 </select>
 <select resultOrdered="true" id="getNinteichosahyoChosa" resultMap="resultMap_NinteiChosaHoshuJissekiJohoRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijihanteizumifoutput.IchijiHanteizumIfOutputMybitisParamter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.itizihanteishori.ItziHanteiShoriMybitisParamter" fetchSize="500">
         SELECT
         DbT5211."shinseishoKanriNo" as "DbT5207_shinseishoKanriNo",
         DbT5211."koroshoIfShikibetsuCode" as "DbT5207_koroshoIfShikibetsuCode",
@@ -77,6 +79,8 @@
        AND
           DbT5211.remban <![CDATA[<=]]> '85'
        AND
+          '1' <![CDATA[<=]]> DbT5211.remban   
+       AND
          DbT5211."koroshoIfShikibetsuCode" = (
                                  SELECT
                                     "koroshoIfShikibetsuCode"
@@ -91,7 +95,7 @@
         DbT5211."shinseishoKanriNo"asc, DbT5211.remban asc    
     </select>
     <select resultOrdered="true" id="get要介護認定主治医意見書意見項目" resultMap="resultMap_NinteiChosaHoshuJissekiJohoRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijihanteizumifoutput.IchijiHanteizumIfOutputMybitisParamter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.itizihanteishori.ItziHanteiShoriMybitisParamter" fetchSize="500">
         SELECT
         DbT5304."shinseishoKanriNo" as "DbT5207_shinseishoKanriNo",
         DbT5304."koroshoIfShikibetsuCode" as "DbT5207_koroshoIfShikibetsuCode",
@@ -129,7 +133,7 @@
         DbT5304."shinseishoKanriNo" asc,DbT5304.remban asc
       </select>
       <select resultOrdered="true" id="get前回調査票概況調査サービスの状況" resultMap="resultMap_NinteiChosaHoshuJissekiJohoRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijihanteizumifoutput.IchijiHanteizumIfOutputMybitisParamter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.itizihanteishori.ItziHanteiShoriMybitisParamter" fetchSize="500">
         SELECT
         DbT5101."shinseishoKanriNo" as "DbT5207_shinseishoKanriNo",
         DbT5121."zenkaiShinseishoKanriNo" as "DbT5121_zenkaiShinseishoKanriNo",
@@ -159,6 +163,8 @@
         AND
           DbT5207.remban <![CDATA[<=]]> '20'
         AND
+          '1' <![CDATA[<=]]> DbT5207.remban
+        AND
          DbT5207."koroshoIfShikibetsuCode" = (
                                  SELECT
                                     "koroshoIfShikibetsuCode"
@@ -178,13 +184,13 @@
         DbT5101."shinseishoKanriNo"asc,  DbT5207.remban asc
       </select>
       <select resultOrdered="true" id="get前回認定調査票基本調査調査項目" resultMap="resultMap_NinteiChosaHoshuJissekiJohoRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijihanteizumifoutput.IchijiHanteizumIfOutputMybitisParamter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.itizihanteishori.ItziHanteiShoriMybitisParamter" fetchSize="500">
         SELECT
         DbT5101."shinseishoKanriNo" as "DbT5207_shinseishoKanriNo",
         DbT5121."zenkaiShinseishoKanriNo" as "DbT5121_zenkaiShinseishoKanriNo",
         DbT5211."koroshoIfShikibetsuCode" as "DbT5207_koroshoIfShikibetsuCode",  
         DbT5211.remban as "DbT5207_remban",
-        DbT5211."researchItem" as "DbT5211_researchItem"
+        DbT5211."researchItem" as "DbT5207_researchItem"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
         LEFT JOIN
@@ -207,6 +213,8 @@
         )
         AND
           DbT5211.remban <![CDATA[<=]]> '85'
+        AND
+          '1' <![CDATA[<=]]> DbT5211.remban
         AND
          DbT5211."koroshoIfShikibetsuCode" = (
                                  SELECT
@@ -516,7 +524,7 @@
         <result property="前回shinsakaiMemo" column= "N_shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
        <select resultOrdered="true" id="get日次進捗データ作成CSV出力" resultMap="resultMap_ShinchokuDataOutputRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijihanteizumifoutput.IchijiHanteizumIfOutputMybitisParamter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.itizihanteishori.ItziHanteiShoriMybitisParamter" fetchSize="500">
          SELECT
              A."shinseishoKanriNo"                      AS "A_shinseishoKanriNo"
            , A."koroshoIfShikibetsuCode"                AS "A_koroshoIfShikibetsuCode"
