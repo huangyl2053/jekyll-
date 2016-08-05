@@ -99,6 +99,18 @@ public class DbT2006ChoshuYuyoDac implements ISaveable<DbT2006ChoshuYuyoEntity> 
     }
 
     /**
+     * DbT2006ChoshuYuyoEntityを削除します。物理削除する。
+     *
+     * @param entity entity
+     * @return 削除件数
+     */
+    @Transaction
+    public int delete(DbT2006ChoshuYuyoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護賦課徴収猶予エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
      * 主キーで介護賦課徴収猶予を取得します。
      *
      * @param 調定年度 ChoteiNendo

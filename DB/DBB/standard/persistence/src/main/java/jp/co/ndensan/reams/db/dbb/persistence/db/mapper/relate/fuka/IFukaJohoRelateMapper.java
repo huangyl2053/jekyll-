@@ -72,4 +72,12 @@ public interface IFukaJohoRelateMapper {
      * @return FukaJohoRelateEntity
      */
     List<FukaJohoRelateEntity> select履歴番号最大の賦課の情報(FukaJohoRelateMapperParameter 賦課の情報検索条件);
+
+    /**
+     * 履歴番号最大の賦課の情報をキー検索で１件取得します。
+     *
+     * @param 賦課の情報検索条件 賦課の情報検索条件
+     * @return FukaJohoRelateEntity
+     */
+    FukaJohoRelateEntity select賦課の情報_最新(FukaJohoRelateMapperParameter 賦課の情報検索条件);
 }
