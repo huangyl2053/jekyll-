@@ -56,7 +56,7 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
     }
 
     private void edit文書番号(NinteishoJohoReportSource source) {
-        source.title = entity.get文書番号();
+//        source.title = entity.get文書番号();
     }
 
     private void edit発行日(NinteishoJohoReportSource source) {
@@ -70,8 +70,8 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
     }
 
     private void edit認証者(NinteishoJohoReportSource source) {
-        source.title = entity.getNinshoshaDenshiKoinDataEntity().get認職者氏名();
-        source.title = entity.getNinshoshaDenshiKoinDataEntity().get電子公印();
+//        source.title = entity.getNinshoshaDenshiKoinDataEntity().get認職者氏名();
+//        source.title = entity.getNinshoshaDenshiKoinDataEntity().get電子公印();
     }
 
     private void edit申請者住所(NinteishoJohoReportSource source) {

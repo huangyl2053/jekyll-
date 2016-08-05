@@ -73,7 +73,7 @@ public final class TainoHokenryoKojoTsuchishoReport extends Report<TainoHokenryo
     @Override
     public void writeBy(ReportSourceWriter<TainoHokenryoKojoTsuchishoReportSource> writer) {
 
-        for (int index = 0; index < 償還払集計情報リスト.size() && index < this.帳票情報.getShiharaiHohoHenkoTainoList().size(); index++) {
+        for (int index = 0; index < 償還払集計情報リスト.size() || index < this.帳票情報.getShiharaiHohoHenkoTainoList().size(); index++) {
             ITainoHokenryoKojoTsuchishoEditor bodyEditor = new TainoHokenryoKojoTsuchishoEditor(個人情報, 宛先, 帳票制御共通,
                     地方公共団体, 文書番号, 通知書定型文リスト, 認証者ソースビルダー, 帳票情報, 償還払集計情報リスト, index);
             ITainoHokenryoKojoTsuchishoBuilder builder = new TainoHokenryoKojoTsuchishoBuilder(bodyEditor);

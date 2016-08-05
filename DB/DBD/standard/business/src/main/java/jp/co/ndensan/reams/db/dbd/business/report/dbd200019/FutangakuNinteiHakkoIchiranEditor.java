@@ -61,83 +61,94 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
 
     @Override
     public FutangakuNinteiHakkoIchiranReportSource edit(FutangakuNinteiHakkoIchiranReportSource source) {
-        setLayer1(source);
+        setLayer1Step1(source);
+        setLayer1Step2(source);
         setAccessLogEditor(source);
         return source;
     }
 
-    private void setLayer1(FutangakuNinteiHakkoIchiranReportSource source) {
+    private void setLayer1Step1(FutangakuNinteiHakkoIchiranReportSource source) {
         source.printTimeStamp = get印刷日時();
         source.title = new RString("負担限度額認定証・決定通知書発行一覧表");
-        source.hokenshaNo = this.association.get地方公共団体コード().value();
-        source.hokenshaName = this.association.get市町村名();
-        List<ISetSortItem> 設定項目リスト = this.iOutputOrder.get設定項目リスト();
-        source.shutsuryokujun1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
-        source.shutsuryokujun2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
-        source.shutsuryokujun3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
-        source.shutsuryokujun4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
-        source.shutsuryokujun5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
-        if (設定項目リスト.get(LISTINDEX_0).is改頁項目()) {
-            source.kaipage1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
+        if (association != null) {
+            source.hokenshaNo = this.association.get地方公共団体コード().value();
+            source.hokenshaName = this.association.get市町村名();
         }
-        if (設定項目リスト.get(LISTINDEX_1).is改頁項目()) {
-            source.kaipage2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
-        }
-        if (設定項目リスト.get(LISTINDEX_2).is改頁項目()) {
-            source.kaipage3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
-        }
-        if (設定項目リスト.get(LISTINDEX_3).is改頁項目()) {
-            source.kaipage4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
-        }
-        if (設定項目リスト.get(LISTINDEX_4).is改頁項目()) {
-            source.kaipage5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
+        if (iOutputOrder != null) {
+            List<ISetSortItem> 設定項目リスト = this.iOutputOrder.get設定項目リスト();
+            source.shutsuryokujun1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
+            source.shutsuryokujun2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
+            source.shutsuryokujun3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
+            source.shutsuryokujun4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
+            source.shutsuryokujun5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
+            if (設定項目リスト.get(LISTINDEX_0).is改頁項目()) {
+                source.kaipage1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
+            }
+            if (設定項目リスト.get(LISTINDEX_1).is改頁項目()) {
+                source.kaipage2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
+            }
+            if (設定項目リスト.get(LISTINDEX_2).is改頁項目()) {
+                source.kaipage3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
+            }
+            if (設定項目リスト.get(LISTINDEX_3).is改頁項目()) {
+                source.kaipage4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
+            }
+            if (設定項目リスト.get(LISTINDEX_4).is改頁項目()) {
+                source.kaipage5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
+            }
         }
         source.list_1 = new RString(String.valueOf(index + 1));
-        FutangakuNinteiHakkoIchiranEntity 帳票情報 = this.帳票情報リスト.get(index);
-        FlexibleDate 喪失年月日 = 帳票情報.get喪失年月日();
-        if (null != 喪失年月日 && !喪失年月日.isEmpty()) {
-            source.list_2 = new RString("*");
-        } else {
-            source.list_2 = RString.EMPTY;
-        }
-        source.list_3 = 帳票情報.get被保険者番号().getColumnValue();
-        //TODO個人情報に、被保険者氏名がない
-//        source.list_4 = 帳票情報.get個人情報().get被保険者氏名();
-        source.list_5 = this.個人情報.get住所().get住所();
-        source.list_6 = 帳票情報.get申請日().wareki().toDateString();
-        source.list_7 = 帳票情報.get決定日().wareki().toDateString();
-        source.list_8 = get適用日有効期限();
-        if (帳票情報.get決定().equals(KetteiKubun.承認する)) {
-            source.list_9 = new RString("承認");
-        } else if (帳票情報.get決定().equals(KetteiKubun.承認しない)) {
-            source.list_9 = new RString("却下");
-        }
-        if (帳票情報.get決定().equals(KetteiKubun.承認する)) {
-            source.list_10 = 帳票情報.get負担段階();
-        } else if (帳票情報.get決定().equals(KetteiKubun.承認しない)) {
-            source.list_10 = RString.EMPTY;
-        }
-        if (帳票情報.is認定証発行フラグ() && 帳票情報.is認定証発行済み()) {
-            source.list_11 = new RString("○");
-        }
-        if (帳票情報.is認定証発行フラグ() && !帳票情報.is認定証発行済み()) {
-            source.list_11 = new RString("却下");
-        }
-        if (!帳票情報.is認定証発行フラグ()) {
-            source.list_11 = RString.EMPTY;
-        }
-        if (帳票情報.is通知書発行フラグ()) {
-            source.list_12 = new RString("○");
-        } else {
-            source.list_12 = RString.EMPTY;
-        }
-        source.list_13 = 帳票情報.get入所施設CD();
 
     }
 
+    private void setLayer1Step2(FutangakuNinteiHakkoIchiranReportSource source) {
+        if (帳票情報リスト != null && !帳票情報リスト.isEmpty()) {
+            FutangakuNinteiHakkoIchiranEntity 帳票情報 = this.帳票情報リスト.get(index);
+            FlexibleDate 喪失年月日 = 帳票情報.get喪失年月日();
+            if (null != 喪失年月日 && !喪失年月日.isEmpty()) {
+                source.list_2 = new RString("*");
+            } else {
+                source.list_2 = RString.EMPTY;
+            }
+            source.list_3 = 帳票情報.get被保険者番号().value();
+            //TODO個人情報に、被保険者氏名がない
+//        source.list_4 = this.個人情報.get被保険者氏名();
+            source.list_5 = this.個人情報.get住所().get住所();
+            source.list_6 = 帳票情報.get申請日().wareki().toDateString();
+            source.list_7 = 帳票情報.get決定日().wareki().toDateString();
+            source.list_8 = get適用日有効期限();
+            if (帳票情報.get決定().equals(KetteiKubun.承認する)) {
+                source.list_9 = new RString("承認");
+            } else if (帳票情報.get決定().equals(KetteiKubun.承認しない)) {
+                source.list_9 = new RString("却下");
+            }
+            if (帳票情報.get決定().equals(KetteiKubun.承認する)) {
+                source.list_10 = 帳票情報.get負担段階();
+            } else if (帳票情報.get決定().equals(KetteiKubun.承認しない)) {
+                source.list_10 = RString.EMPTY;
+            }
+            if (帳票情報.is認定証発行フラグ() && 帳票情報.is認定証発行済み()) {
+                source.list_11 = new RString("○");
+            }
+            if (帳票情報.is認定証発行フラグ() && !帳票情報.is認定証発行済み()) {
+                source.list_11 = new RString("却下");
+            }
+            if (!帳票情報.is認定証発行フラグ()) {
+                source.list_11 = RString.EMPTY;
+            }
+            if (帳票情報.is通知書発行フラグ()) {
+                source.list_12 = new RString("○");
+            } else {
+                source.list_12 = RString.EMPTY;
+            }
+            source.list_13 = 帳票情報.get入所施設CD();
+        }
+    }
+
     private void setAccessLogEditor(FutangakuNinteiHakkoIchiranReportSource source) {
-        FutangakuNinteiHakkoIchiranEntity 帳票情報 = this.帳票情報リスト.get(index);
-        source.shikibetsuCode = this.個人情報.get識別コード().getColumnValue();
+        if (個人情報 != null) {
+            source.shikibetsuCode = this.個人情報.get識別コード().getColumnValue();
+        }
     }
 
     private RString get印刷日時() {

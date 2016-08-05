@@ -184,6 +184,10 @@ public enum ReportIdDBD {
      */
     DBD522001(new ReportId("DBD522001_YokaigoNinteiEnkiTshuchisho"), new RString("要介護認定延期通知書タイトル")),
     /**
+     * 負担限度額認定申請書発行一覧表の帳票ＩＤです。
+     */
+    DBD200022(new ReportId("DBD200022_FutanGendogakuNinteiShinseishoHakkoIchiran"), new RString("負担限度額認定申請書発行一覧表")),
+    /**
      * 要介護認定延期通知書発行一覧表の帳票ＩＤです。
      */
     DBD522002(new ReportId("DBD522002_NinteiEnkiTsuchishoHakkoIchiranhyo"), new RString("要介護認定延期通知書発行一覧表"));
