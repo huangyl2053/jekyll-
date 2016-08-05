@@ -10,13 +10,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuSonotashiryoBusiness;
-import jp.co.ndensan.reams.db.dbe.business.report.sonotashiryoa4.SonotashiryoA4Report;
+import jp.co.ndensan.reams.db.dbe.business.report.sonotashiryoa3.SonotashiryoA3Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.sonotashiryoa4.SonotashiryoA4ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.sonotashiryoa3.SonotashiryoA3ReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -39,19 +39,19 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-0150-200 wangxiaodong
  */
-public class IinSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<ShinsakaiSiryoKyotsuEntity> {
+public class IinSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<ShinsakaiSiryoKyotsuEntity> {
 
     private static final RString SELECT_TSONOTAJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getShinsakaiSiryoKyotsu");
-    private static final List<RString> PAGE_BREAK_KEYS_A4 = Collections.unmodifiableList(Arrays.asList(
-            new RString(SonotashiryoA4ReportSource.ReportSourceFields.hokenshaNo.name())));
+    private static final List<RString> PAGE_BREAK_KEYS_A3 = Collections.unmodifiableList(Arrays.asList(
+            new RString(SonotashiryoA3ReportSource.ReportSourceFields.hokenshaNo.name())));
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
     private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
     private JimuSonotashiryoBusiness その他資料;
 
     @BatchWriter
-    private BatchReportWriter<SonotashiryoA4ReportSource> batchWriteA4;
-    private ReportSourceWriter<SonotashiryoA4ReportSource> reportSourceWriterA4;
+    private BatchReportWriter<SonotashiryoA3ReportSource> batchWriteA3;
+    private ReportSourceWriter<SonotashiryoA3ReportSource> reportSourceWriterA3;
 
     @Override
     protected void initialize() {
@@ -66,10 +66,10 @@ public class IinSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
 
     @Override
     protected void createWriter() {
-        batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517016.getReportId().value())
-                .addBreak(new BreakerCatalog<SonotashiryoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A4))
+        batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517006.getReportId().value())
+                .addBreak(new BreakerCatalog<SonotashiryoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A3))
                 .create();
-        reportSourceWriterA4 = new ReportSourceWriter<>(batchWriteA4);
+        reportSourceWriterA3 = new ReportSourceWriter<>(batchWriteA3);
     }
 
     @Override
@@ -84,8 +84,8 @@ public class IinSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
         entity.setShoKisaiHokenshaNo(RString.EMPTY);
         entity.setJimukyoku(false);
         その他資料 = new JimuSonotashiryoBusiness(entity);
-        SonotashiryoA4Report reportA4 = new SonotashiryoA4Report(その他資料);
-        reportA4.writeBy(reportSourceWriterA4);
+        SonotashiryoA3Report reportA3 = new SonotashiryoA3Report(その他資料);
+        reportA3.writeBy(reportSourceWriterA3);
     }
 
     @Override
@@ -104,8 +104,8 @@ public class IinSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
                 new RString(JobContextHolder.getJobId()),
-                ReportIdDBE.DBE517016.getReportName(),
-                new RString(batchWriteA4.getPageCount()),
+                ReportIdDBE.DBE517006.getReportName(),
+                new RString(batchWriteA3.getPageCount()),
                 RString.EMPTY,
                 RString.EMPTY,
                 出力条件());
