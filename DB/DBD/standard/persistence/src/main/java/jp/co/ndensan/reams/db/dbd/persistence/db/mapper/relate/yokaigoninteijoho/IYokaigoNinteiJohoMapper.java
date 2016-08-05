@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.yokaigoninteijoh
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiJohoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoRirekiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.apache.ibatis.annotations.Param;
 
@@ -73,5 +74,13 @@ public interface IYokaigoNinteiJohoMapper {
      * @return 更新かどうか。
      */
     boolean updDbt4003YokaigoNinteiInterface(DbT4003YokaigoNinteiInterfaceEntity entity);
+
+    /**
+     * 今回前回履歴情報を取得します。
+     *
+     * @param 履歴用被保険者番号 RString
+     * @return 今回前回履歴情報 List<YokaigoRirekiJohoEntity>
+     */
+    List<YokaigoRirekiJohoEntity> get今回前回履歴情報(@Param("履歴用被保険者番号") RString 履歴用被保険者番号);
 
 }
