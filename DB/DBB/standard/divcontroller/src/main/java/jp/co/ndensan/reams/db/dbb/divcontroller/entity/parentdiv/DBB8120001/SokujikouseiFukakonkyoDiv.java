@@ -4,16 +4,18 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8120001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * SokujikouseiFukakonkyo のクラスファイル 
- * 
- * @author 自動生成
+ * SokujikouseiFukakonkyo のクラスファイル
+ *
+ * @reamsid_L DBB-0660-010 tianshuai
  */
 public class SokujikouseiFukakonkyoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -31,24 +33,40 @@ public class SokujikouseiFukakonkyoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getFukakonkyoMae
+     * @return FukakonkyoMae
+     */
     @JsonProperty("FukakonkyoMae")
     public FukakonkyoMaeDiv getFukakonkyoMae() {
         return FukakonkyoMae;
     }
 
+    /*
+     * setFukakonkyoMae
+     * @param FukakonkyoMae FukakonkyoMae
+     */
     @JsonProperty("FukakonkyoMae")
     public void setFukakonkyoMae(FukakonkyoMaeDiv FukakonkyoMae) {
-        this.FukakonkyoMae=FukakonkyoMae;
+        this.FukakonkyoMae = FukakonkyoMae;
     }
 
+    /*
+     * getFukakonkyoAto
+     * @return FukakonkyoAto
+     */
     @JsonProperty("FukakonkyoAto")
     public FukakonkyoAtoDiv getFukakonkyoAto() {
         return FukakonkyoAto;
     }
 
+    /*
+     * setFukakonkyoAto
+     * @param FukakonkyoAto FukakonkyoAto
+     */
     @JsonProperty("FukakonkyoAto")
     public void setFukakonkyoAto(FukakonkyoAtoDiv FukakonkyoAto) {
-        this.FukakonkyoAto=FukakonkyoAto;
+        this.FukakonkyoAto = FukakonkyoAto;
     }
 
     // </editor-fold>

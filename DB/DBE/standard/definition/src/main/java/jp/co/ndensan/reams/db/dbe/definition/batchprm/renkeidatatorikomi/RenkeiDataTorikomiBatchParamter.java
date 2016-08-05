@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.renkeidatatorikomi;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.renkeidatatorikomi.RenkeiDataTorikomiProcessParamter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -23,6 +24,10 @@ public class RenkeiDataTorikomiBatchParamter extends BatchParameterBase {
     private static final String SHICHOSONCODE = "shichosonCode";
     private static final String TORIKOMIFILELIST = "torikomifilelist";
     private static final String SHINSEIJOHODATALIST = "shinseiJohoDataList";
+    private static final String PATH = "path";
+
+    private boolean 厚労省フラグ;
+    private boolean 東芝版フラグ;
 
     @BatchParameter(key = SHICHOSONCODE, name = "市町村コード")
     private RString 市町村コード;
@@ -30,15 +35,19 @@ public class RenkeiDataTorikomiBatchParamter extends BatchParameterBase {
     private List<RString> 取込み対象ファイルリスト;
     @BatchParameter(key = SHINSEIJOHODATALIST, name = "要介護認定申請情報データリスト")
     private List<ShiseiDataParameter> 申請情報データリスト;
+    @BatchParameter(key = PATH, name = "格納パス")
+    private RString 格納パス;
 
     /**
      * mybatisのパラメータを生成します。
      *
      * @return NinteiChosaIraiMybitisParamter
      */
-//    public RenkeiDataTorikomiProcessParamter toRenkeiDataTorikomiProcessParamter() {
-//        return new RenkeiDataTorikomiProcessParamter(市町村コード,
-//                取込み対象ファイルリスト,
-//                申請情報データリスト);
-//    }
+    public RenkeiDataTorikomiProcessParamter toRenkeiDataTorikomiProcessParamter() {
+        return new RenkeiDataTorikomiProcessParamter(市町村コード,
+                取込み対象ファイルリスト,
+                申請情報データリスト,
+                厚労省フラグ,
+                東芝版フラグ);
+    }
 }

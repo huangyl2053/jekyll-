@@ -241,6 +241,15 @@ public class JimuShinsakaishiryoBusiness {
     }
 
     /**
+     * 事務局を判定します。
+     *
+     * @return is事務局、「true」を返却する場合、事務局です、それ以外、事務局ではない。
+     */
+    public boolean is事務局() {
+        return johoEntity.isJimukyoku();
+    }
+
+    /**
      * 前回期間_下を取得します。
      *
      * @return 前回期間_下

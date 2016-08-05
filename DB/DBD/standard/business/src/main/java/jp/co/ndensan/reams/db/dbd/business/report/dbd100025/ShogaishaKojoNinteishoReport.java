@@ -30,5 +30,4 @@ public class ShogaishaKojoNinteishoReport extends Report<NinteishoJohoReportSour
         writer.writeLine(builder);
 
     }
-
 }

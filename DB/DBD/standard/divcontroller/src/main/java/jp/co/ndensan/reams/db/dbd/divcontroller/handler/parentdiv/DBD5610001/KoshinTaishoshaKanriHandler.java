@@ -14,6 +14,9 @@ import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecuri
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 更新申請対象者管理リスト作成画面のHandlerクラスです。
@@ -61,31 +64,40 @@ public class KoshinTaishoshaKanriHandler {
     /**
      * 画面側からバッチパラメータを取得します。
      *
-     * @param shoriDateKanri ShoriDateKanri
      * @return KoshinTaishoshaKanriParameter KoshinTaishoshaKanriParameter
      */
-    public KoshinTaishoshaKanriParameter getParameter(ShoriDateKanri shoriDateKanri) {
+    public KoshinTaishoshaKanriParameter getParameter() {
         KoshinTaishoshaKanriParameter parameter = new KoshinTaishoshaKanriParameter();
         if (div.getZenkaiJoho().getTxtTaishoTsuki().getText() != null) {
             parameter.set対象月(new FlexibleDate(div.getZenkaiJoho().getTxtTaishoTsuki().getText()).getYearMonth());
 
         } else {
-            parameter.set対象月(null);
+            parameter.set対象月(FlexibleYearMonth.EMPTY);
         }
-        parameter.set市町村コード(shoriDateKanri.get市町村コード());
-        parameter.set年度(shoriDateKanri.get年度());
-        parameter.set年度内連番(shoriDateKanri.get年度内連番());
+        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        LasdecCode 市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();
+        ShoriDateKanriService shoriDateKanriService = ShoriDateKanriService.createInstance();
+        ShoriDateKanri shoriDateKanri = shoriDateKanriService.getDbT7022ShoriDateKanriEntity(市町村コード);
+        parameter.set市町村コード(市町村コード);
+        if (shoriDateKanri != null) {
+            parameter.set年度(shoriDateKanri.get年度());
+            parameter.set年度内連番(shoriDateKanri.get年度内連番());
+        } else {
+            parameter.set年度(FlexibleYear.EMPTY);
+            parameter.set年度内連番(RString.EMPTY);
+        }
         parameter.set条件指定(div.getSelectJoken().getRadDataSelect().getSelectedValue());
         if (div.getYukoKikanSelect().getTxtYukokikanSelect().getFromValue() != null) {
             parameter.set有効期間終了日From(new FlexibleDate(div.getYukoKikanSelect().getTxtYukokikanSelect().getFromValue().toString()));
         } else {
-            parameter.set有効期間終了日From(null);
+            parameter.set有効期間終了日From(FlexibleDate.EMPTY);
         }
         if (div.getYukoKikanSelect().getTxtYukokikanSelect().getToValue() != null) {
             parameter.set有効期間終了日To(new FlexibleDate(div.getYukoKikanSelect().getTxtYukokikanSelect().getToValue().toString()));
         } else {
-            parameter.set有効期間終了日To(null);
+            parameter.set有効期間終了日To(FlexibleDate.EMPTY);
         }
         return parameter;
     }
+
 }

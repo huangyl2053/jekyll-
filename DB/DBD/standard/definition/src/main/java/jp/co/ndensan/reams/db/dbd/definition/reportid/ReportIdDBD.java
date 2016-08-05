@@ -148,6 +148,10 @@ public enum ReportIdDBD {
      */
     DBD550003(new ReportId("DBD550003_YokaigodoHenkoTshuchisho"), new RString("要介護度変更通知書")),
     /**
+     * 要介護認定取消通知書の帳票ＩＤです。
+     */
+    DBD550004(new ReportId("DBD550004_YokaigoNinteiTorikeshiTshuchisho"), new RString("要介護認定取消通知書")),
+    /**
      * 要介護認定却下通知書の帳票ＩＤです。
      */
     DBD550001(new ReportId("DBD550001_YokaigoNinteiKyakkaTshuchisho"), new RString("要介護認定却下通知書")),
@@ -167,6 +171,10 @@ public enum ReportIdDBD {
      * 負担額認定証・決定通知書発行一覧表の帳票ＩＤです。
      */
     DBD200019(new ReportId("DBD200019_FutangakuNinteiHakkoIchiran"), new RString("負担額認定証・決定通知書発行一覧表")),
+    /**
+     * 社会福祉法人軽減認定者リストの帳票ＩＤです。
+     */
+    DBD200004(new ReportId("DBD200004_ShakaiFukushiHojinKeigenGaitoshaIchiran"), new RString("社会福祉法人軽減認定者リスト")),
     /**
      * 社会福祉法人軽減確認証・決定通知書発行一覧表の帳票ＩＤです。
      */
