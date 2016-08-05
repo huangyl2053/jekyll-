@@ -230,28 +230,26 @@ public class ImageinputHandler {
         List<ShujiiIkenshoIkenItem> 意見項目List = joho.getShujiiIkenshoIkenItemList();
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(data.getT5101_厚労省IF識別コード())) {
             ShujiiIkenshoJohoBuilder builder = joho.createBuilderForEdit();
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(data.getT5101_厚労省IF識別コード())) {
-                for (ShujiiIkenshoKinyuItem item : itemList) {
-                    item = set99A記入項目1(data, item);
-                    item = set99A記入項目2(data, item);
-                    item = set99A記入項目3(data, item);
-                    item = set99A記入項目4(data, item);
-                    builder.setShujiiIkenshoKinyuItem(item.modifiedModel());
-                }
-                for (ShujiiIkenshoIkenItem 意見項目 : 意見項目List) {
-                    意見項目 = set99A意見項目1(data, 意見項目);
-                    意見項目 = set99A意見項目2(row, data, 意見項目);
-                    意見項目 = set99A意見項目3(data, 意見項目);
-                    意見項目 = set99A意見項目4(data, 意見項目);
-                    意見項目 = set99A意見項目5(data, 意見項目);
-                    意見項目 = set99A意見項目6(data, 意見項目);
-                    意見項目 = set99A意見項目7(data, 意見項目);
-                    意見項目 = set99A意見項目8(data, 意見項目);
-                    意見項目 = set99A意見項目9(data, 意見項目);
-                    意見項目 = set99A意見項目10(data, 意見項目);
-                    意見項目 = set99A意見項目11(data, 意見項目);
-                    builder.setShujiiIkenshoIkenItem(意見項目.modifiedModel());
-                }
+            for (ShujiiIkenshoKinyuItem item : itemList) {
+                item = set99A記入項目1(data, item);
+                item = set99A記入項目2(data, item);
+                item = set99A記入項目3(data, item);
+                item = set99A記入項目4(data, item);
+                builder.setShujiiIkenshoKinyuItem(item.modifiedModel());
+            }
+            for (ShujiiIkenshoIkenItem 意見項目 : 意見項目List) {
+                意見項目 = set99A意見項目1(data, 意見項目);
+                意見項目 = set99A意見項目2(row, data, 意見項目);
+                意見項目 = set99A意見項目3(data, 意見項目);
+                意見項目 = set99A意見項目4(data, 意見項目);
+                意見項目 = set99A意見項目5(data, 意見項目);
+                意見項目 = set99A意見項目6(data, 意見項目);
+                意見項目 = set99A意見項目7(data, 意見項目);
+                意見項目 = set99A意見項目8(data, 意見項目);
+                意見項目 = set99A意見項目9(data, 意見項目);
+                意見項目 = set99A意見項目10(data, 意見項目);
+                意見項目 = set99A意見項目11(data, 意見項目);
+                builder.setShujiiIkenshoIkenItem(意見項目.modifiedModel());
             }
             set新規の記入項目1(builder, row, data);
             set新規の記入項目2(builder, row, data);
@@ -1341,6 +1339,24 @@ public class ImageinputHandler {
             }
             builder.setShujiiIkenshoIkenItem(なしデータ).build();
         }
+        if (!意見項目連番レスト.contains(IkenshoKomokuMapping99A.不潔行為.getコード())) {
+            ShujiiIkenshoIkenItem なしデータ = new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
+                    data.getT5301_主治医意見書作成依頼履歴番号(), rStringToInt(IkenshoKomokuMapping99A.不潔行為.getコード()));
+            なしデータ = なしデータ.createBuilderForEdit().set意見項目(data.get不潔行為()).build();
+            if (isNotEmpty(data.getT5101_厚労省IF識別コード())) {
+                なしデータ = なしデータ.createBuilderForEdit().set厚労省IF識別コード(new Code(data.getT5101_厚労省IF識別コード())).build();
+            }
+            builder.setShujiiIkenshoIkenItem(なしデータ).build();
+        }
+        if (!意見項目連番レスト.contains(IkenshoKomokuMapping99A.関節の拘縮_膝関節_左.getコード())) {
+            ShujiiIkenshoIkenItem なしデータ = new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
+                    data.getT5301_主治医意見書作成依頼履歴番号(), rStringToInt(IkenshoKomokuMapping99A.関節の拘縮_膝関節_左.getコード()));
+            なしデータ = なしデータ.createBuilderForEdit().set意見項目(空白).build();
+            if (isNotEmpty(data.getT5101_厚労省IF識別コード())) {
+                なしデータ = なしデータ.createBuilderForEdit().set厚労省IF識別コード(new Code(data.getT5101_厚労省IF識別コード())).build();
+            }
+            builder.setShujiiIkenshoIkenItem(なしデータ).build();
+        }
     }
 
     private ShujiiIkenshoKinyuItem set99A記入項目1(
@@ -1434,11 +1450,11 @@ public class ImageinputHandler {
         }
         if (IkenshoKinyuMapping99A.介護サービスの留意事項_その他.getコード().equals(new RString(item.get連番()))) {
             item.createBuilderForEdit().set記入項目(空白).build();
-            記入項目連番レスト.add(IkenshoKinyuMapping99A.その他.getコード());
+            記入項目連番レスト.add(IkenshoKinyuMapping99A.介護サービスの留意事項_その他.getコード());
         }
         if (IkenshoKinyuMapping99A.感染症の有無.getコード().equals(new RString(item.get連番()))) {
             item.createBuilderForEdit().set記入項目(data.get感染症()).build();
-            記入項目連番レスト.add(IkenshoKinyuMapping99A.その他.getコード());
+            記入項目連番レスト.add(IkenshoKinyuMapping99A.感染症の有無.getコード());
         }
         return item;
     }
