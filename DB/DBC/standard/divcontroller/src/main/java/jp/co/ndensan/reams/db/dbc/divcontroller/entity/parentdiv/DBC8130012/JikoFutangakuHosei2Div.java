@@ -7,15 +7,18 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8130012;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * JikoFutangakuHosei2 のクラスファイル 
- * 
- * @author 自動生成
+ * JikoFutangakuHosei2 のクラスファイル
+ *
+ * @reamsid_L DBC-4800-030 xuhao
  */
 public class JikoFutangakuHosei2Div extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -139,7 +142,7 @@ public class JikoFutangakuHosei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTblNendo(tblNendoDiv tblNendo) {
+    public void setTblNendo(tblNendoDiv tblNendo) {
         this.getJikoFutangakuHosei2a().setTblNendo(tblNendo);
     }
 
