@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 高額合算_データ作成区分を表す列挙型です。
+ *
+ * @reamsid_L DBC-9999-022 zhujun
  */
 public enum KaigoGassan_DataSakuseiKubun {
 
