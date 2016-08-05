@@ -85,6 +85,11 @@ public enum ReportIdDBC {
     DBC100004(
             new ReportId("DBC100004_ShokanKetteiTsuchiShoSealer"), new RString("償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ）")),
     /**
+     * 受給者異動連絡票（紙媒体）の帳票ＩＤです。
+     */
+    DBC100013(
+            new ReportId("DBC100013_JukyushaIdoRenrakuhyo"), new RString("受給者異動連絡票（紙媒体）")),
+    /**
      * 共同処理用受給者異動連絡票（紙媒体）の帳票ＩＤです。
      */
     DBC100015(new ReportId("DBC100015_KyodoShoriJukyushaIdoRenrakuhyo"), new RString("共同処理用受給者異動連絡票（紙媒体）")),
