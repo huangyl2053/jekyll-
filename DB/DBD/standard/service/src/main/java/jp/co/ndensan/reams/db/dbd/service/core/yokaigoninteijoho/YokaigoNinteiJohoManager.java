@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiJoho;
+import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoRirekiJoho;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiJohoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.yokaigoninteijoho.IYokaigoNinteiJohoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntity;
@@ -244,4 +246,24 @@ public class YokaigoNinteiJohoManager {
         }
         return resultList;
     }
+
+    /**
+     * 今回前回履歴情報情報を返す。
+     *
+     * @param 被保険者番号 被保険者番号
+     *
+     * @return 今回前回履歴情報 List<YokaigoRirekiJohoEntity>
+     */
+    public List<YokaigoRirekiJoho> get今回前回履歴情報(RString 被保険者番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        IYokaigoNinteiJohoMapper mapper = mapperProvider.create(IYokaigoNinteiJohoMapper.class);
+        List<YokaigoRirekiJohoEntity> 今回前回履歴情報リスト = mapper.get今回前回履歴情報(被保険者番号);
+        List<YokaigoRirekiJoho> resultList = new ArrayList<>();
+        for (YokaigoRirekiJohoEntity entity : 今回前回履歴情報リスト) {
+            entity.initializeMd5ToEntities();
+            resultList.add(new YokaigoRirekiJoho(entity));
+        }
+        return resultList;
+    }
+
 }

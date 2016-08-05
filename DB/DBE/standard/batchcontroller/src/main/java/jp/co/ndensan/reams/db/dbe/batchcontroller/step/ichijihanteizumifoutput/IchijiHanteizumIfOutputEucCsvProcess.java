@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteizumifoutput.ichijihanteizumi.IchijiHanteizumIfOutputBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput.NinteiChosaDataOutputResult;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.ichijihanteizumifoutput.IchijiHanteizumIfOutputProcessParamter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.itizihanteishori.ItziHanteiShoriProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteizumifoutput.IchijiHanteizumIfOutputEucCsvEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteizumifoutput.IchijiHanteizumIfOutputRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -52,7 +52,7 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteizumifoutput."
             + "IchijiHanteizumIfOutputMapper.get日次進捗データ作成CSV出力");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE309001"));
-    private IchijiHanteizumIfOutputProcessParamter paramter;
+    private ItziHanteiShoriProcessParamter paramter;
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     List<IchijiHanteizumIfOutputRelateEntity> kaigoJuminhyoEntityList = new ArrayList<>();
@@ -63,6 +63,7 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
     @Override
     protected void initialize() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        //RString 一次判定IF文字コードファイル名 = DbBusinessConfig.get(ConfigNameDBE.一次判定IF文字コード, RDate.getNowDate());
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("NCI221.CSV"));
         RString イメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate());
         paramter.setイメージ区分(イメージ区分);
@@ -86,14 +87,14 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, paramter.toIchijiHanteizumIfOutputMybitisParamter());
+        return new BatchDbReader(MYBATIS_SELECT_ID, paramter.toItziHanteiShoriMybitisParamter());
     }
     @BatchWriter
     private EucCsvWriter<IchijiHanteizumIfOutputEucCsvEntity> eucCsvWriterJunitoJugo;
 
     @Override
     protected void process(IchijiHanteizumIfOutputRelateEntity entity) {
-        getファイル名(entity);
+        //getファイル名(entity);
         eucCsvWriterJunitoJugo.writeLine(business.setEucCsvEntity(entity));
         new NinteiChosaDataOutputResult().getアクセスログ(entity.getShinseishoKanriNo());
         kaigoJuminhyoEntityList.add(entity);

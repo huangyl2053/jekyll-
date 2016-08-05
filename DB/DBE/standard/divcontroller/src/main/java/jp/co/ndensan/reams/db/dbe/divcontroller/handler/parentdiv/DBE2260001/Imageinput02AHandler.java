@@ -1151,6 +1151,24 @@ public class Imageinput02AHandler {
             }
             builder.setShujiiIkenshoIkenItem(なしデータ).build();
         }
+        if (!意見項目連番レスト.contains(IkenshoKomokuMapping02A.不潔行為.getコード())) {
+            ShujiiIkenshoIkenItem なしデータ = new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
+                    data.getT5301_主治医意見書作成依頼履歴番号(), rStringToInt(IkenshoKomokuMapping02A.不潔行為.getコード()));
+            なしデータ = なしデータ.createBuilderForEdit().set意見項目(data.get不潔行為()).build();
+            if (isNotEmpty(data.getT5101_厚労省IF識別コード())) {
+                なしデータ = なしデータ.createBuilderForEdit().set厚労省IF識別コード(new Code(data.getT5101_厚労省IF識別コード())).build();
+            }
+            builder.setShujiiIkenshoIkenItem(なしデータ).build();
+        }
+        if (!意見項目連番レスト.contains(IkenshoKomokuMapping02A.関節の拘縮_膝関節_左.getコード())) {
+            ShujiiIkenshoIkenItem なしデータ = new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
+                    data.getT5301_主治医意見書作成依頼履歴番号(), rStringToInt(IkenshoKomokuMapping02A.関節の拘縮_膝関節_左.getコード()));
+            なしデータ = なしデータ.createBuilderForEdit().set意見項目(空白).build();
+            if (isNotEmpty(data.getT5101_厚労省IF識別コード())) {
+                なしデータ = なしデータ.createBuilderForEdit().set厚労省IF識別コード(new Code(data.getT5101_厚労省IF識別コード())).build();
+            }
+            builder.setShujiiIkenshoIkenItem(なしデータ).build();
+        }
     }
 
     private ShujiiIkenshoKinyuItem set02A記入項目1(
@@ -1244,11 +1262,11 @@ public class Imageinput02AHandler {
         }
         if (IkenshoKinyuMapping02A.介護サービスの留意事項_その他.getコード().equals(new RString(item.get連番()))) {
             item.createBuilderForEdit().set記入項目(空白).build();
-            記入項目連番レスト.add(IkenshoKinyuMapping02A.その他.getコード());
+            記入項目連番レスト.add(IkenshoKinyuMapping02A.介護サービスの留意事項_その他.getコード());
         }
         if (IkenshoKinyuMapping02A.感染症の有無.getコード().equals(new RString(item.get連番()))) {
             item.createBuilderForEdit().set記入項目(data.get感染症()).build();
-            記入項目連番レスト.add(IkenshoKinyuMapping02A.その他.getコード());
+            記入項目連番レスト.add(IkenshoKinyuMapping02A.感染症の有無.getコード());
         }
         return item;
     }

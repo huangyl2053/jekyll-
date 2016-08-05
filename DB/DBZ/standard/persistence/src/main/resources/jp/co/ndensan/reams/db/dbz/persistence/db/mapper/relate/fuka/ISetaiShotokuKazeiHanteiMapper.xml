@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 調定簿作成のマッピング用XMLです。 -->
+<!-- @reamsid_L DBB-0640-020 chenaoqi -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.fuka.ISetaiShotokuKazeiHanteiMapper">
+    <!--世帯員所得情報一時テーブルを作成します -->
+    <insert id="createTmpSetaiShotoku">
+        CREATE TEMP TABLE "TmpSetaiShotoku"
+        (
+        "kijunYMD" rshare."UDD015YMD",
+        "jushochiTokureiFlag" character varying(1),
+        "setaiCode" rshare."UDD051SetaiCode",
+        "honninKubun" character varying(1),
+        "kazeiKubun" character varying(1),
+        "kazeiKubunGemmenGo" character varying(1),
+        "gekihenKanwaKubun" character varying(1),
+        "gokeiShotokuGaku" numeric(12,0),
+        "nenkiniShunyuGaku" numeric(12,0),
+        "nenkiniShotokuGaku" numeric(12,0),
+        "kazeiShotokuGaku" numeric(12,0),
+        "torokuGyomu" character varying(1),
+        "hihokenshaNo" rgdb."DbUDD002HihokenshaNo",
+        "shikibetsuCode" rshare."UDD001ShikibetsuCode",
+        "shotokuNendo" rshare."UDD012YSeireki"
+        )
+    </insert>
+    
+     <resultMap id="resultMap_SetaiHakuEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.fuka.SetaiHakuEntity" autoMapping="true">
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="shotokuNendo" column="shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="kijunYMD" column="kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochiTokureiFlag" column="jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+     <!-- 世帯員把握入力のデータの取得-->
+    <select resultOrdered="true" id="get世帯員把握入力Temp" resultMap="resultMap_SetaiHakuEntity" fetchSize="500">
+        SELECT 
+        A."hihokenshaNo",
+        A."shikibetsuCode",
+        A."kijunYMD",
+        A."jushochiTokureiFlag",
+        A."shotokuNendo"
+        from "TmpSetaiHaaku" AS A
+        WHERE A."hihokenshaNo" not in(SELECT DISTINCT
+        B."hihokenshaNo" from "TmpSetaiShotoku" AS B)
+        ORDER BY A."shikibetsuCode" ASC
+    </select>
+    
+    <!-- 世帯員把握入力のデータの取得-->
+    <select resultOrdered="true" id="selectNotNull" resultMap="resultMap_SetaiHakuEntity" fetchSize="500">
+        SELECT 
+        "hihokenshaNo",
+        "shikibetsuCode",
+        "kijunYMD",
+        "jushochiTokureiFlag",
+        "shotokuNendo"
+        FROM "TmpSetaiHaaku"
+        WHERE "shotokuNendo" is not null
+    </select> 
+    
+    <resultMap id="resultMap_DbV2502KaigoShotokuEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotokuEntity" autoMapping="true">
+        <result property="kazeiKubun" column="kazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kazeiKubunGemmenGo" column="kazeiKubunGemmenGo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gekihenKanwaKubun" column="gekihenKanwaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gokeiShotokuGaku" column="gokeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="nenkiniShunyuGaku" column="nenkiniShunyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="nenkiniShotokuGaku" column="nenkiniShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kazeiShotokuGaku" column="kazeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="torokuGyomu" column="torokuGyomu"/>
+    </resultMap>
+    
+    
+    <!-- 介護所得のデータの取得-->
+    <select resultOrdered="true" id="select介護所得" resultMap="resultMap_DbV2502KaigoShotokuEntity" fetchSize="500">
+        SELECT
+        介護所得."shikibetsuCode",
+        介護所得."shotokuNendo",
+        介護所得."kazeiKubun",
+        介護所得."kazeiKubunGemmenGo",
+        介護所得."gekihenKanwaKubun",
+        介護所得."gokeiShotokuGaku",
+        介護所得."nenkiniShunyuGaku",
+        介護所得."nenkiniShotokuGaku",
+        介護所得."kazeiShotokuGaku",
+        介護所得."torokuGyomu"
+        from rgdb."DbV2502KaigoShotoku" AS 介護所得
+    </select>
+    
+
+<!-- insert世帯員所得情報一時が1-->
+    <insert id="insert世帯員所得情報一時が1">
+        INSERT INTO "TmpSetaiShotoku"("hihokenshaNo","shikibetsuCode","kijunYMD","shotokuNendo","jushochiTokureiFlag",
+        "setaiCode","honninKubun")
+        SELECT
+        A."hihokenshaNo",
+        A."shikibetsuCode",
+        A."kijunYMD",
+        A."shotokuNendo",
+        A."jushochiTokureiFlag",
+        宛名."setaiCode",
+	'1'
+        from "TmpSetaiHaaku" AS A
+        inner join rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')
+        as 宛名
+        on 宛名."shikibetsuCode" = A."shikibetsuCode"
+        and 宛名."shoriYMD" = A."kijunYMD"
+        where A."jushochiTokureiFlag"= '1'
+    </insert>
+    
+    
+    <!-- insert世帯員所得情報一時が1以外-->
+    <insert id="insert世帯員所得情報一時が1以外"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.fuka.SetaiShotokuKazeiHanteiMybatisParameter">
+        INSERT INTO "TmpSetaiShotoku"("hihokenshaNo","shikibetsuCode","kijunYMD",
+        "shotokuNendo","jushochiTokureiFlag","setaiCode","honninKubun")
+        SELECT
+        B."hihokenshaNo",
+        B."setaiInshikibetsuCode",
+        B."setaiHaakuKijunYMD",
+        A."shotokuNendo",
+        A."jushochiTokureiFlag",
+        宛名."setaiCode",
+        B."honninKubun"
+        from "TmpSetaiHaaku" AS A
+        inner join rgdb."DbT7014KaigoSetai" AS B
+        ON A."hihokenshaNo"=B."hihokenshaNo"
+        AND A."kijunYMD" = B."setaiHaakuKijunYMD"
+        inner join rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')
+        as 宛名
+        on 宛名."shikibetsuCode" = A."shikibetsuCode"
+        and 宛名."shoriYMD" = A."kijunYMD"
+        where A."jushochiTokureiFlag" <![CDATA[!=]]> '1'
+        AND B."kanriShikibetsuKubun" = #{管理識別区分}
+    </insert>
+    
+     <!-- insert世帯員所得情報一時-->
+     <insert id="insert世帯員所得情報一時"
+            parameterType="jp.co.ndensan.reams.db.dbz.entity.db.relate.fuka.SetaiShotokuEntity">
+         INSERT INTO "TmpSetaiShotoku"("hihokenshaNo","shikibetsuCode","kijunYMD",
+        "shotokuNendo","jushochiTokureiFlag","setaiCode","honninKubun")
+         VALUES(
+         #{hihokenshaNo},
+         #{shikibetsuCode},
+         #{kijunYMD},
+         #{shotokuNendo},
+         #{jushochiTokureiFlag},
+         #{setaiCode},
+         #{honninKubun})
+     </insert>
+    
+    <!-- update世帯員所得情報一時-->
+    <update id="update世帯員所得情報" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotokuEntity">
+        UPDATE "TmpSetaiShotoku"
+        SET 
+        "kazeiKubun" = #{kazeiKubun},
+        "kazeiKubunGemmenGo"=#{kazeiKubunGemmenGo}, 
+        "gokeiShotokuGaku"=#{gokeiShotokuGaku},
+        "nenkiniShunyuGaku"=#{nenkiniShunyuGaku},
+        "nenkiniShotokuGaku"=#{nenkiniShotokuGaku}, 
+        "kazeiShotokuGaku"=#{kazeiShotokuGaku}, 
+        "gekihenKanwaKubun"=#{gekihenKanwaKubun},
+        "torokuGyomu"=#{torokuGyomu}
+         where "shikibetsuCode" = #{shikibetsuCode}
+         AND "shotokuNendo" = #{shotokuNendo}
+    </update>   
+     
+   
+     <!-- update世帯員把握入力Temp-->
+    <update id="update世帯員把握入力Temp" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.relate.fuka.SetaiHakuEntity">
+       UPDATE "TmpSetaiHaaku"
+       SET "shotokuNendo" = #{shotokuNendo}
+       WHERE "shotokuNendo" IS NULL
+    </update>
+    
+</mapper>

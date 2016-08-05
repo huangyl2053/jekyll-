@@ -24,13 +24,25 @@ public enum ReportIdDBC {
      */
     DBC200080(new ReportId("DBC200080_KyufujissekiKoshinkekkaIchiran"), new RString("総合事業費過再審査定通知書情報")),
     /**
+     * 総合事業費過誤決定通知書情報取込一覧表
+     */
+    DBC200085(new ReportId("DBC200085_SogojigyohiKagoKetteiTsuchishoTorikomiIchiran"), new RString("総合事業費過誤決定通知書情報取込一覧表")),
+    /**
      * 給付実績更新結果情報一覧表
      */
     DBC200054(new ReportId("DBC200054_KyufujissekiKoshinkekkaIchiran"), new RString("給付実績更新結果情報一覧表")),
     /**
-     * 利用者負担２割対応・利用者負担割合更正
+     * 負担割合証（カット紙）
      */
-    DBC100065(new ReportId("DBC100065_FutanWariaiSho"), new RString("利用者負担２割対応・利用者負担割合更正 ")),
+    DBC100065(new ReportId("DBC100065_FutanWariaiSho"), new RString("負担割合証（カット紙）")),
+    /**
+     * 負担割合証（連帳　縦）
+     */
+    DBC100066(new ReportId("DBC100066_FutanWariaiShoRenchoTate"), new RString("負担割合証（連帳　縦）")),
+    /**
+     * 負担割合証（連帳　横）
+     */
+    DBC100067(new ReportId("DBC100067_FutanWariaiShoRenchoYoko"), new RString("負担割合証（連帳　横）")),
     /**
      * 高額総合事業サービス費判定エラーリスト
      */
@@ -84,6 +96,11 @@ public enum ReportIdDBC {
      */
     DBC100004(
             new ReportId("DBC100004_ShokanKetteiTsuchiShoSealer"), new RString("償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ）")),
+    /**
+     * 受給者異動連絡票（紙媒体）の帳票ＩＤです。
+     */
+    DBC100013(
+            new ReportId("DBC100013_JukyushaIdoRenrakuhyo"), new RString("受給者異動連絡票（紙媒体）")),
     /**
      * 共同処理用受給者異動連絡票（紙媒体）の帳票ＩＤです。
      */

@@ -83,6 +83,7 @@ public class IinShinsakaiIinJohoDataSakuseiA4Process extends BatchProcessBase<Sh
         entity.setShoKisaiHokenshaNo(RString.EMPTY);
         entity.setHihokenshaNo(RString.EMPTY);
         entity.setHihokenshaName(AtenaMeisho.EMPTY);
+        entity.setJimukyoku(false);
         JimuShinsakaishiryoBusiness business = new JimuShinsakaishiryoBusiness(paramter, entity, shinsakaiIinJohoList, no, count);
         ShinsakaishiryoA4Report report = new ShinsakaishiryoA4Report(business);
         report.writeBy(reportSourceWriterA4);

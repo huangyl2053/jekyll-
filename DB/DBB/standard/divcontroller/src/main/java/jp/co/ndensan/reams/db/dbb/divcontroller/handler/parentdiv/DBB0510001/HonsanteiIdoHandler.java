@@ -63,6 +63,9 @@ public class HonsanteiIdoHandler {
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
     private static final RString 月 = new RString("月分");
+    private static final RString 月分_2 = new RString("2月分");
+    private static final RString 月分_10 = new RString("10月分");
+    private static final RString 月分_12 = new RString("12月分");
     private static final RString 未 = new RString("未");
     private static final RString 済 = new RString("済");
     private static final RString 遷移元区分_0 = new RString("0");
@@ -108,8 +111,12 @@ public class HonsanteiIdoHandler {
     private static final RString 特徴開始月_4 = new RString("特徴開始月：4月（捕捉月：10月）");
     private static final RString 待機_4 = new RString("特徴開始月：4月（捕捉月：6,8,10月）");
     private static final RString 処理対象なし = new RString("処理対象なし");
-    private static final RString 本算定異動賦課 = new RString("DBB0510001");
-    private static final RString 現年度異動_通知書作成 = new RString("DBB0510003");
+    private static final RString 本算定異動現年度_10と12月 = new RString("DBB05100012");
+    private static final RString 本算定異動現年度_2月 = new RString("DBB05100013");
+    private static final RString 本算定異動現年度_通常月 = new RString("DBB0510001");
+    private static final RString 本算定異動現年度通知書一括発行_10と12月 = new RString("DBB05100032");
+    private static final RString 本算定異動現年度通知書一括発行_2月 = new RString("DBB05100033");
+    private static final RString 本算定異動現年度通知書一括発行_通常月 = new RString("DBB0510003");
     private static final RString 口座対象者プリント条件KEY = new RString("口座対象者プリント条件");
 
     /**
@@ -150,16 +157,6 @@ public class HonsanteiIdoHandler {
 
         boolean flag = set処理状態(調定年度, date);
         if (現年度異動賦課.equals(ResponseHolder.getMenuID())) {
-            RString 算定月 = div.getShotiJokyo().getHonsanteiIdoShoriNaiyo().getDdlShoritsuki().getSelectedKey();
-            Shoriku 処理区分 = HonsanteiIdoGennendo.createInstance().setShorikubun(
-                    new RString(Integer.valueOf(算定月.toString())), 調定年度);
-            if (処理区分 != null) {
-                set対象補足月テキストボックス(処理区分, date);
-            } else {
-                div.getXtTaishoTokuchoKaishiTsuki().setDisplayNone(false);
-                div.getXtTaishoTokuchoKaishiTsuki().setValue(処理対象なし);
-            }
-            div.getXtTaishoTokuchoKaishiTsuki().setReadOnly(false);
             set抽出条件(調定年度);
         }
         set帳票作成個別情報(調定年度, date);
@@ -343,13 +340,52 @@ public class HonsanteiIdoHandler {
         return 異動賦課確定の基準日時.isBefore(異動賦課の基準日時);
     }
 
-    private void set帳票作成個別情報(FlexibleYear 調定年度, RDate date) {
+    /**
+     * 帳票グループIDの設定
+     *
+     * @param date システム日時
+     */
+    public void set帳票グループ(RDate date) {
+        RString 処理対象 = div.getShotiJokyo().getHonsanteiIdoShoriNaiyo().getDdlShoritsuki().getSelectedValue();
         if (現年度異動賦課.equals(ResponseHolder.getMenuID())) {
-            div.getHonsanteiIdoChohyoHakko().getCcdChohyoIchiran().load(SubGyomuCode.DBB介護賦課, 本算定異動賦課);
+            RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
+                    SubGyomuCode.DBB介護賦課);
+            if (月分_10.equals(処理対象) || 月分_12.equals(処理対象)) {
+                div.getHonsanteiIdoChohyoHakko().getCcdChohyoIchiran().load(
+                        SubGyomuCode.DBB介護賦課, 本算定異動現年度_10と12月);
+            } else if (月分_2.equals(処理対象)) {
+                div.getHonsanteiIdoChohyoHakko().getCcdChohyoIchiran().load(
+                        SubGyomuCode.DBB介護賦課, 本算定異動現年度_2月);
+            } else {
+                div.getHonsanteiIdoChohyoHakko().getCcdChohyoIchiran().load(
+                        SubGyomuCode.DBB介護賦課, 本算定異動現年度_通常月);
+            }
+            RString 算定月 = div.getShotiJokyo().getHonsanteiIdoShoriNaiyo().getDdlShoritsuki().getSelectedKey();
+            Shoriku 処理区分 = HonsanteiIdoGennendo.createInstance().setShorikubun(
+                    new RString(Integer.valueOf(算定月.toString())), new FlexibleYear(調定年度.toString()));
+            if (処理区分 != null) {
+                set対象補足月テキストボックス(処理区分, date);
+            } else {
+                div.getXtTaishoTokuchoKaishiTsuki().setDisplayNone(false);
+                div.getXtTaishoTokuchoKaishiTsuki().setValue(処理対象なし);
+            }
+            div.getXtTaishoTokuchoKaishiTsuki().setReadOnly(false);
         } else {
-            div.getHonsanteiIdoChohyoHakko().getCcdChohyoIchiran().load(SubGyomuCode.DBB介護賦課, 現年度異動_通知書作成);
+            if (月分_10.equals(処理対象) || 月分_12.equals(処理対象)) {
+                div.getHonsanteiIdoChohyoHakko().getCcdChohyoIchiran().load(
+                        SubGyomuCode.DBB介護賦課, 本算定異動現年度通知書一括発行_10と12月);
+            } else if (月分_2.equals(処理対象)) {
+                div.getHonsanteiIdoChohyoHakko().getCcdChohyoIchiran().load(
+                        SubGyomuCode.DBB介護賦課, 本算定異動現年度通知書一括発行_2月);
+            } else {
+                div.getHonsanteiIdoChohyoHakko().getCcdChohyoIchiran().load(
+                        SubGyomuCode.DBB介護賦課, 本算定異動現年度通知書一括発行_通常月);
+            }
         }
+    }
 
+    private void set帳票作成個別情報(FlexibleYear 調定年度, RDate date) {
+        set帳票グループ(date);
         KoseiTsukiHantei 更正月判定 = new KoseiTsukiHantei();
         Kitsuki 更正月 = 更正月判定.find更正月(date);
         Noki 普徴納期 = FukaNokiResearcher.createInstance().get普徴納期(更正月.get期AsInt());

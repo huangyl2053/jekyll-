@@ -127,6 +127,18 @@ public class HonsanteiIdo {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 「処理対象」コンボボックスのメソッドます。
+     *
+     * @param div KarisanteiIdoFukaPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<HonsanteiIdoDiv> onChange_ddlShoritsuki(HonsanteiIdoDiv div) {
+        RDate date = RDate.getNowDate();
+        getHandler(div).set帳票グループ(date);
+        return ResponseData.of(div).respond();
+    }
+
     private HonsanteiIdoHandler getHandler(HonsanteiIdoDiv div) {
         return new HonsanteiIdoHandler(div);
     }

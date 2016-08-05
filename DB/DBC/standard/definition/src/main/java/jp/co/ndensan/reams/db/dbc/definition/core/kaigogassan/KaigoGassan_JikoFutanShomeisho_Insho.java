@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護合算_自己負担額証明書_印書を表す列挙型です。
+ *
+ * @reamsid_L DBC-9999-022 zhujun
  */
 public enum KaigoGassan_JikoFutanShomeisho_Insho {
 
@@ -65,6 +67,6 @@ public enum KaigoGassan_JikoFutanShomeisho_Insho {
                 return insho;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("媒体区分"));
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("介護合算_自己負担額証明書_印書"));
     }
 }

@@ -36,7 +36,7 @@ public class ZenkaiNinteichosahyoChosaItemProcess extends BatchProcessBase<Ninte
     private static final RString 厚労省IF識別コード = new RString("厚労省IF識別コード");
     private ChosaItemJohoTempTableEntity temoTableEntity;
     private ShinchokuDataOutputBusiness business;
-    private Map<String, RString> map;
+    private Map<RString, RString> map;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 前回調査票概況調査調査調査項目TempTable;
 
@@ -45,8 +45,8 @@ public class ZenkaiNinteichosahyoChosaItemProcess extends BatchProcessBase<Ninte
         サービスの状況一時リスト = new ArrayList<>();
         business = new ShinchokuDataOutputBusiness();
         map = new HashMap<>();
-        map.put(申請書管理番号.toString(), RString.EMPTY);
-        map.put(厚労省IF識別コード.toString(), RString.EMPTY);
+        map.put(申請書管理番号, RString.EMPTY);
+        map.put(厚労省IF識別コード, RString.EMPTY);
     }
 
     @Override

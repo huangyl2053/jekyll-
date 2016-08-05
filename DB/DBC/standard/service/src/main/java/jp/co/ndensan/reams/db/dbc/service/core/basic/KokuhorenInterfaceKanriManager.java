@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 国保連インターフェース管理を管理するクラスです。
+ *
+ * @reamsid_L DBC-2380-010 yuqingzhang
  */
 public class KokuhorenInterfaceKanriManager {
 
@@ -94,6 +96,23 @@ public class KokuhorenInterfaceKanriManager {
         }
         entity.initializeMd5();
         return entity;
+    }
+
+    /**
+     * 国保連インターフェース管理処理が実行された最新のデータを取得します。
+     *
+     * @param 交換情報識別番号 RString
+     * @return KokuhorenInterfaceKanri 検索項目がなしの場合、nullを戻ります。
+     */
+    @Transaction
+    public KokuhorenInterfaceKanri get実行された最新のデータ(RString 交換情報識別番号) {
+        DbT3104KokuhorenInterfaceKanriEntity entity
+                = dac.select国保連インターフェース管理処理が実行された最新のデータ(交換情報識別番号);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new KokuhorenInterfaceKanri(entity);
     }
 
     /**
