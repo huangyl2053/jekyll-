@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT1001HihokenshaDaichoEntityのマッピング用XMLです。 -->
+<!-- @reamsid_L DBE-1490-020 duanzhanli -->
+<!--SelectMethod : getHihokenshaShutokuJyoho-->
+<!--ParentResultMap : resultMap_getHihokenshaShutokuJyoho-->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5910TempMapper">
+
+   <sql id="allColumns_DbT5910Temp">
+        "シーケンシャル番号",
+        "機能コード",
+        "識別コード",
+        "委託先コード",
+        "委託先名称",
+        "郵便番号",
+        "住所",
+        "電話番号",
+        "状況",
+        "委託区分コード",
+        "委託先名称カナ"
+    </sql> 
+    <sql id="allColumns_DbT5910ErrorTemp">
+        "シーケンシャル番号",
+        "機能コード",
+        "識別コード",
+        "委託先コード",
+        "委託先名称",
+        "郵便番号",
+        "住所",
+        "電話番号",
+        "状況",
+        "委託区分コード",
+        "委託区分名称",
+        "委託先名称カナ",
+        "エラー内容"
+    </sql> 
+    
+    <sql id="allColumns_DbT5910KoroshoTemp">
+        "シーケンシャル番号",
+        "機能コード",
+        "識別コード",
+        "委託先コード",
+        "委託先名称",
+        "郵便番号",
+        "住所",
+        "電話番号",
+        "状況",
+        "委託区分コード"
+    </sql> 
+    <sql id="allColumns_DbT5910KoroshoErrorTemp">
+        "シーケンシャル番号",
+        "機能コード",
+        "識別コード",
+        "委託先コード",
+        "委託先名称",
+        "郵便番号",
+        "住所",
+        "電話番号",
+        "状況",
+        "委託区分コード",
+        "委託区分名称",
+        "エラー内容"
+    </sql> 
+    <resultMap id="ResultMap_DbT5910TempEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5910TempEntity" autoMapping="true">
+        <result property="シーケンシャル番号" column="シーケンシャル番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="機能コード" column="機能コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="委託先コード" column="委託先コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="委託先名称" column="委託先名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="電話番号" column="電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況" column="状況" />
+        <result property="委託区分コード" column="委託区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="委託先名称カナ" column="委託先名称カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+     </resultMap>  
+     
+     <resultMap id="ResultMap_DbT5910ErrorTempEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5910ErrorTempEntity" autoMapping="true">
+        <result property="シーケンシャル番号" column="シーケンシャル番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="機能コード" column="機能コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="委託先コード" column="委託先コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="委託先名称" column="委託先名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="電話番号" column="電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況" column="状況" />
+        <result property="委託区分コード" column="委託区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="委託区分名称" column="委託区分名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="委託先名称カナ" column="委託先名称カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="エラー内容" column="エラー内容" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+     </resultMap>  
+     
+     <select resultOrdered="true" id="get委託先一時情報_電算" resultMap="ResultMap_DbT5910TempEntity" fetchSize="500">
+        SELECT
+            <include refid="allColumns_DbT5910Temp" />
+        FROM
+            "DbT5910Temp"
+     </select>
+     
+     <select resultOrdered="true" id="get委託先一時エラー情報_電算" resultMap="ResultMap_DbT5910ErrorTempEntity" fetchSize="500">
+        SELECT
+            <include refid="allColumns_DbT5910ErrorTemp" />
+        FROM
+            "DbT5910ErrorTemp"
+     </select>
+     
+     <select resultOrdered="true" id="get委託先情報_厚労省" resultMap="ResultMap_DbT5910TempEntity" fetchSize="500">
+        SELECT
+            <include refid="allColumns_DbT5910KoroshoTemp" />
+        FROM
+            "DbT5910Temp"
+     </select>
+     
+     <select resultOrdered="true" id="get委託先エラー情報_厚労省" resultMap="ResultMap_DbT5910ErrorTempEntity" fetchSize="500">
+        SELECT
+            <include refid="allColumns_DbT5910KoroshoErrorTemp" />
+        FROM
+            "DbT5910ErrorTemp"
+     </select>
+   
+   <resultMap id="ResultMap_DbT5910chosaItakusakiJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5910RelateEntity" autoMapping="true">
+        <id column="dbT5910NinteichosaItakusakiJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <id column="dbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="dbT5910Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5910NinteichosaItakusakiJohoMapper.ResultMap_DbT5910NinteichosaItakusakiJohoEntity"/>
+        <association property="dbt5910TempEntity" resultMap="ResultMap_DbT5910TempEntity"/>
+    </resultMap>
+    <select resultOrdered="true" id="get委託先更新対象情報_電算" resultMap="ResultMap_DbT5910chosaItakusakiJoho" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.renkeidatatorikomi.RenkeiDataTorikomiMybitisParamter" fetchSize="500">
+        SELECT
+            <include refid="allColumns_DbT5910Temp" />,
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5910NinteichosaItakusakiJohoMapper.allColumns_DbT5910NinteichosaItakusakiJoho" />
+        FROM
+            "DbT5910Temp" AS temp
+        LEFT JOIN 
+            rgdb."DbT5910NinteichosaItakusakiJoho"
+        ON
+            "ninteichosaItakusakiCode" = temp."委託先コード"
+        AND "shichosonCode" = #{市町村コード}
+    </select>
+    
+    <select resultOrdered="true" id="get委託先更新対象情報_厚労省" resultMap="ResultMap_DbT5910chosaItakusakiJoho" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.renkeidatatorikomi.RenkeiDataTorikomiMybitisParamter" fetchSize="500">
+        SELECT
+            <include refid="allColumns_DbT5910KoroshoTemp" />,
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5910NinteichosaItakusakiJohoMapper.allColumns_DbT5910NinteichosaItakusakiJoho" />
+        FROM
+            "DbT5910Temp" AS temp
+        LEFT JOIN 
+            rgdb."DbT5910NinteichosaItakusakiJoho"
+        ON
+            "ninteichosaItakusakiCode" = temp."委託先コード"
+        AND "shichosonCode" = #{市町村コード}
+    </select>
+  
+</mapper>

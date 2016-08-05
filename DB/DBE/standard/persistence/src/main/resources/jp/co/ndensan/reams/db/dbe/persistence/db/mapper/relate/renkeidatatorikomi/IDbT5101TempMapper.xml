@@ -1,0 +1,721 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT1001HihokenshaDaichoEntityのマッピング用XMLです。 -->
+<!-- @reamsid_L DBE-1490-020 duanzhanli -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5101TempMapper">
+
+    <sql id="allColumns_DbT5101Temp">
+       "シーケンシャル番号",
+        "機能コード",
+        "識別コード",
+        "保険者番号",
+        "被保険者番号",
+        "認定申請日",
+        "主キー補助項目",
+        "申請区分_法令コード",
+        "申請区分_申請時コード",
+        "取下区分コード",
+        "被保険者区分コード",
+        "申請代行区分コード",
+        "生年月日",
+        "年齢",
+        "性別",
+        "氏名_カナ",
+        "氏名",
+        "郵便番号",
+        "住所",
+        "本人連絡先1",
+        "病院施設等の名称",
+        "病院施設等の住所",
+        "前回の審査会結果",
+        "前回の認定有効開始期間",
+        "前回の認定有効終了期間",
+        "主治医医療機関コード",
+        "主治医番号",
+        "意見書依頼日",
+        "意見書入手日",
+        "意見書短期記憶",
+        "意見書認知能力",
+        "意見書伝達能力",
+        "意見書食事",
+        "認知症高齢者の日常生活自立度",
+        "麻痺_左上肢",
+        "麻痺_右上肢",
+        "麻痺_左下肢",
+        "麻痺_右下肢",
+        "麻痺_その他",
+        "拘縮_肩関節",
+        "拘縮_股関節",
+        "拘縮_膝関節",
+        "拘縮_その他",
+        "寝返り",
+        "起き上がり",
+        "座位保持",
+        "両足での立位",
+        "歩行",
+        "立ち上がり",
+        "片足での立位",
+        "洗身",
+        "つめ切り",
+        "視力",
+        "聴力",
+        "移乗",
+        "移動",
+        "えん下",
+        "食事摂取",
+        "排尿",
+        "排便",
+        "口腔清潔",
+        "洗顔",
+        "整髪",
+        "上衣の着脱",
+        "ズボン等の着脱",
+        "外出頻度",
+        "意思の伝達",
+        "毎日の日課を理解",
+        "生年月日をいう",
+        "短期記憶",
+        "自分の名前をいう",
+        "今の季節を理解",
+        "場所の理解",
+        "常時の徘徊",
+        "外出して戻れない",
+        "被害的",
+        "作話",
+        "感情が不安定",
+        "昼夜逆転",
+        "同じ話をする",
+        "大声をだす",
+        "介護に抵抗",
+        "落ち着きなし",
+        "一人で出たがる",
+        "収集癖",
+        "物や衣類を壊す",
+        "ひどい物忘れ",
+        "独り言独り笑い",
+        "自分勝手に行動する",
+        "話がまとまらない",
+        "薬の内服",
+        "金銭の管理",
+        "日常の意思決定",
+        "集団への不適応",
+        "買い物",
+        "簡単な調理",
+        "点滴管理",
+        "中心静脈栄養",
+        "透析",
+        "ストーマの処置",
+        "酸素療法",
+        "レスピレーター",
+        "気管切開の処置",
+        "疼痛の看護",
+        "経管栄養",
+        "モニター測定",
+        "じょくそうの処置",
+        "カテーテル",
+        "障害高齢者自立度",
+        "認知症高齢者自立度",
+        "一次判定結果",
+        "一次判定結果_認知症加算",
+        "要介護認定等基準時間",
+        "食事",
+        "排泄",
+        "等基準時間移動",
+        "清潔保持",
+        "間接ケア",
+        "bPSD関連",
+        "機能訓練",
+        "医療関連",
+        "認知症加算",
+        "第1群",
+        "第2群",
+        "第3群",
+        "第4群",
+        "第5群",
+        "一次判定警告コード",
+        "状態の安定性",
+        "蓋然性",
+        "給付区分",
+        "申請日",
+        "二次判定日",
+        "現在のサービス区分コード",
+        "現在の状況",
+        "訪問介護_ホームヘルプサービ",
+        "訪問入浴介護",
+        "訪問看護",
+        "訪問リハビリテーション",
+        "居宅療養管理指導",
+        "通所介護_デイサービス",
+        "通所リハビリテーション",
+        "ショートステイ",
+        "短期入所療養介護",
+        "特定施設入居者生活介護",
+        "福祉用具貸与",
+        "特定福祉用具販売",
+        "住宅改修_介護給付",
+        "夜間対応型訪問介護",
+        "認知症対応型通所介護",
+        "小規模多機能型居宅介護",
+        "共同生活介護_グループホーム",
+        "地域特定施設入居者生活介護",
+        "老人福祉施設入所者生活介護",
+        "随時対応型訪問介護看護",
+        "複合型サービス",
+        "ホームヘルプサービス",
+        "介護予防訪問入浴介護",
+        "介護予防訪問看護",
+        "予防訪問リハビリテーション",
+        "介護予防居宅療養管理指導",
+        "予防通所介護_デイサービス",
+        "予防通所リハビリテーション",
+        "生活介護ショートステイ",
+        "療養介護",
+        "予防特定施設入居者生活介護",
+        "介護予防福祉用具貸与",
+        "特定介護予防福祉用具販売",
+        "住宅改修_予防給付",
+        "通所介護",
+        "予防小規模多機能型居宅介護",
+        "介護予防認知症",
+        "前回識別コード",
+        "コメント等",
+        "市町村コード",
+        "本人連絡先2",
+        "特定疾病コード",
+        "入所事業所コード",
+        "入所施設名_カナ",
+        "入所施設郵便番号",
+        "入所施設電話番号",
+        "本人緊急連絡先名称1",
+        "本人緊急連絡先住所1",
+        "本人緊急連絡先番号1",
+        "本人緊急連絡先名称2",
+        "本人緊急連絡先住所2",
+        "本人緊急連絡先番号2",
+        "申請者関係コード",
+        "本人との関係",
+        "申請者氏名",
+        "申請者氏名カナ",
+        "申請代行事業者名",
+        "申請代行事業者名カナ",
+        "申請者郵便番号",
+        "申請者住所",
+        "申請者連絡先",
+        "調査委託先コード"
+    </sql>
+    
+    <sql id="allColumns_DbT5101KoroshoTemp">
+       "シーケンシャル番号",
+        "機能コード",
+        "識別コード",
+        "保険者番号",
+        "被保険者番号",
+        "認定申請日",
+        "主キー補助項目",
+        "申請区分_法令コード",
+        "申請区分_申請時コード",
+        "取下区分コード",
+        "被保険者区分コード",
+        "申請代行区分コード",
+        "生年月日",
+        "年齢",
+        "性別",
+        "氏名_カナ",
+        "氏名",
+        "郵便番号",
+        "住所",
+        "本人連絡先1",
+        "病院施設等の名称",
+        "病院施設等の住所",
+        "前回の審査会結果",
+        "前回の認定有効開始期間",
+        "前回の認定有効終了期間",
+        "主治医医療機関コード",
+        "主治医番号",
+        "意見書依頼日",
+        "意見書入手日",
+        "意見書短期記憶",
+        "意見書認知能力",
+        "意見書伝達能力",
+        "意見書食事",
+        "認知症高齢者の日常生活自立度",
+        "麻痺_左上肢",
+        "麻痺_右上肢",
+        "麻痺_左下肢",
+        "麻痺_右下肢",
+        "麻痺_その他",
+        "拘縮_肩関節",
+        "拘縮_股関節",
+        "拘縮_膝関節",
+        "拘縮_その他",
+        "寝返り",
+        "起き上がり",
+        "座位保持",
+        "両足での立位",
+        "歩行",
+        "立ち上がり",
+        "片足での立位",
+        "洗身",
+        "つめ切り",
+        "視力",
+        "聴力",
+        "移乗",
+        "移動",
+        "えん下",
+        "食事摂取",
+        "排尿",
+        "排便",
+        "口腔清潔",
+        "洗顔",
+        "整髪",
+        "上衣の着脱",
+        "ズボン等の着脱",
+        "外出頻度",
+        "意思の伝達",
+        "毎日の日課を理解",
+        "生年月日をいう",
+        "短期記憶",
+        "自分の名前をいう",
+        "今の季節を理解",
+        "場所の理解",
+        "常時の徘徊",
+        "外出して戻れない",
+        "被害的",
+        "作話",
+        "感情が不安定",
+        "昼夜逆転",
+        "同じ話をする",
+        "大声をだす",
+        "介護に抵抗",
+        "落ち着きなし",
+        "一人で出たがる",
+        "収集癖",
+        "物や衣類を壊す",
+        "ひどい物忘れ",
+        "独り言独り笑い",
+        "自分勝手に行動する",
+        "話がまとまらない",
+        "薬の内服",
+        "金銭の管理",
+        "日常の意思決定",
+        "集団への不適応",
+        "買い物",
+        "簡単な調理",
+        "点滴管理",
+        "中心静脈栄養",
+        "透析",
+        "ストーマの処置",
+        "酸素療法",
+        "レスピレーター",
+        "気管切開の処置",
+        "疼痛の看護",
+        "経管栄養",
+        "モニター測定",
+        "じょくそうの処置",
+        "カテーテル",
+        "障害高齢者自立度",
+        "認知症高齢者自立度",
+        "一次判定結果",
+        "一次判定結果_認知症加算",
+        "要介護認定等基準時間",
+        "食事",
+        "排泄",
+        "等基準時間移動",
+        "清潔保持",
+        "間接ケア",
+        "bPSD関連",
+        "機能訓練",
+        "医療関連",
+        "認知症加算",
+        "第1群",
+        "第2群",
+        "第3群",
+        "第4群",
+        "第5群",
+        "一次判定警告コード",
+        "状態の安定性",
+        "蓋然性",
+        "給付区分",
+        "申請日",
+        "二次判定日",
+        "現在のサービス区分コード",
+        "現在の状況",
+        "訪問介護_ホームヘルプサービ",
+        "訪問入浴介護",
+        "訪問看護",
+        "訪問リハビリテーション",
+        "居宅療養管理指導",
+        "通所介護_デイサービス",
+        "通所リハビリテーション",
+        "ショートステイ",
+        "短期入所療養介護",
+        "特定施設入居者生活介護",
+        "福祉用具貸与",
+        "特定福祉用具販売",
+        "住宅改修_介護給付",
+        "夜間対応型訪問介護",
+        "認知症対応型通所介護",
+        "小規模多機能型居宅介護",
+        "共同生活介護_グループホーム",
+        "地域特定施設入居者生活介護",
+        "老人福祉施設入所者生活介護",
+        "随時対応型訪問介護看護",
+        "複合型サービス",
+        "ホームヘルプサービス",
+        "介護予防訪問入浴介護",
+        "介護予防訪問看護",
+        "予防訪問リハビリテーション",
+        "介護予防居宅療養管理指導",
+        "予防通所介護_デイサービス",
+        "予防通所リハビリテーション",
+        "生活介護ショートステイ",
+        "療養介護",
+        "予防特定施設入居者生活介護",
+        "介護予防福祉用具貸与",
+        "特定介護予防福祉用具販売",
+        "住宅改修_予防給付",
+        "通所介護",
+        "予防小規模多機能型居宅介護",
+        "介護予防認知症",
+        "前回識別コード",
+        "コメント等"
+    </sql>
+
+    <resultMap id="ResultMap_DbT5101TempEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101TempEntity" autoMapping="true">
+        <result property="シーケンシャル番号" column="シーケンシャル番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="機能コード" column="機能コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="保険者番号" column="保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定申請日" column="認定申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="主キー補助項目" column="主キー補助項目" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請区分_法令コード" column="申請区分_法令コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請区分_申請時コード" column="申請区分_申請時コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="取下区分コード" column="取下区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者区分コード" column="被保険者区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請代行区分コード" column="申請代行区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="生年月日" column="生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="年齢" column="年齢" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="性別" column="性別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="氏名_カナ" column="氏名_カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="氏名" column="氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="本人連絡先1" column="本人連絡先1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="病院施設等の名称" column="病院施設等の名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="病院施設等の住所" column="病院施設等の住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回の審査会結果" column="前回の審査会結果" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回の認定有効開始期間" column="前回の認定有効開始期間" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回の認定有効終了期間" column="前回の認定有効終了期間" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="主治医医療機関コード" column="主治医医療機関コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="主治医番号" column="主治医番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="意見書依頼日" column="意見書依頼日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="意見書入手日" column="意見書入手日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="意見書短期記憶" column="意見書短期記憶" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="意見書認知能力" column="意見書認知能力" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="意見書伝達能力" column="意見書伝達能力" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="意見書食事" column="意見書食事" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認知症高齢者の日常生活自立度" column="認知症高齢者の日常生活自立度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="麻痺_左上肢" column="麻痺_左上肢" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="麻痺_右上肢" column="麻痺_右上肢" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="麻痺_左下肢" column="麻痺_左下肢" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="麻痺_右下肢" column="麻痺_右下肢" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="麻痺_その他" column="麻痺_その他" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="拘縮_肩関節" column="拘縮_肩関節" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="拘縮_股関節" column="拘縮_股関節" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="拘縮_膝関節" column="拘縮_膝関節" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="拘縮_その他" column="拘縮_その他" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="寝返り" column="寝返り" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="起き上がり" column="起き上がり" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="座位保持" column="座位保持" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="両足での立位" column="両足での立位" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="歩行" column="歩行" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="立ち上がり" column="立ち上がり" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="片足での立位" column="片足での立位" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="洗身" column="洗身" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="つめ切り" column="つめ切り" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="視力" column="視力" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="聴力" column="聴力" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="移乗" column="移乗" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="移動" column="移動" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="えん下" column="えん下" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="食事摂取" column="食事摂取" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="排尿" column="排尿" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="排便" column="排便" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="口腔清潔" column="口腔清潔" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="洗顔" column="洗顔" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="整髪" column="整髪" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="上衣の着脱" column="上衣の着脱" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ズボン等の着脱" column="ズボン等の着脱" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="外出頻度" column="外出頻度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="意思の伝達" column="意思の伝達" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="毎日の日課を理解" column="毎日の日課を理解" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="生年月日をいう" column="生年月日をいう" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="短期記憶" column="短期記憶" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="自分の名前をいう" column="自分の名前をいう" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="今の季節を理解" column="今の季節を理解" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="場所の理解" column="場所の理解" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="常時の徘徊" column="常時の徘徊" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="外出して戻れない" column="外出して戻れない" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被害的" column="被害的" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="作話" column="作話" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="感情が不安定" column="感情が不安定" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="昼夜逆転" column="昼夜逆転" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="同じ話をする" column="同じ話をする" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="大声をだす" column="大声をだす" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="介護に抵抗" column="介護に抵抗" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="落ち着きなし" column="落ち着きなし" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="一人で出たがる" column="一人で出たがる" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="収集癖" column="収集癖" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="物や衣類を壊す" column="物や衣類を壊す" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ひどい物忘れ" column="ひどい物忘れ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="独り言独り笑い" column="独り言独り笑い" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="自分勝手に行動する" column="自分勝手に行動する" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="話がまとまらない" column="話がまとまらない" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="薬の内服" column="薬の内服" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="金銭の管理" column="金銭の管理" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="日常の意思決定" column="日常の意思決定" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="集団への不適応" column="集団への不適応" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="買い物" column="買い物" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="簡単な調理" column="簡単な調理" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="点滴管理" column="点滴管理" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="中心静脈栄養" column="中心静脈栄養" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="透析" column="透析" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ストーマの処置" column="ストーマの処置" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="酸素療法" column="酸素療法" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="レスピレーター" column="レスピレーター" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="気管切開の処置" column="気管切開の処置" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="疼痛の看護" column="疼痛の看護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="経管栄養" column="経管栄養" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="モニター測定" column="モニター測定" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="じょくそうの処置" column="じょくそうの処置" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="カテーテル" column="カテーテル" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="障害高齢者自立度" column="障害高齢者自立度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認知症高齢者自立度" column="認知症高齢者自立度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="一次判定結果" column="一次判定結果" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="一次判定結果_認知症加算" column="一次判定結果_認知症加算" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="要介護認定等基準時間" column="要介護認定等基準時間" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="食事" column="食事" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="排泄" column="排泄" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="等基準時間移動" column="等基準時間移動" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="清潔保持" column="清潔保持" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="間接ケア" column="間接ケア" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="bPSD関連" column="bPSD関連" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="機能訓練" column="機能訓練" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="医療関連" column="医療関連" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認知症加算" column="認知症加算" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="第1群" column="第1群" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="第2群" column="第2群" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="第3群" column="第3群" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="第4群" column="第4群" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="第5群" column="第5群" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="一次判定警告コード" column="一次判定警告コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状態の安定性" column="状態の安定性" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="蓋然性" column="蓋然性" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付区分" column="給付区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請日" column="申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="二次判定日" column="二次判定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="現在のサービス区分コード" column="現在のサービス区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="現在の状況" column="現在の状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="訪問介護_ホームヘルプサービ" column="訪問介護_ホームヘルプサービ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="訪問入浴介護" column="訪問入浴介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="訪問看護" column="訪問看護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="訪問リハビリテーション" column="訪問リハビリテーション" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="居宅療養管理指導" column="居宅療養管理指導" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="通所介護_デイサービス" column="通所介護_デイサービス" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="通所リハビリテーション" column="通所リハビリテーション" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ショートステイ" column="ショートステイ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="短期入所療養介護" column="短期入所療養介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="特定施設入居者生活介護" column="特定施設入居者生活介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="福祉用具貸与" column="福祉用具貸与" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="特定福祉用具販売" column="特定福祉用具販売" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住宅改修_介護給付" column="住宅改修_介護給付" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="夜間対応型訪問介護" column="夜間対応型訪問介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認知症対応型通所介護" column="認知症対応型通所介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="小規模多機能型居宅介護" column="小規模多機能型居宅介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="共同生活介護_グループホーム" column="共同生活介護_グループホーム" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="地域特定施設入居者生活介護" column="地域特定施設入居者生活介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="老人福祉施設入所者生活介護" column="老人福祉施設入所者生活介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="随時対応型訪問介護看護" column="随時対応型訪問介護看護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="複合型サービス" column="複合型サービス" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ホームヘルプサービス" column="ホームヘルプサービス" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="介護予防訪問入浴介護" column="介護予防訪問入浴介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="介護予防訪問看護" column="介護予防訪問看護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="予防訪問リハビリテーション" column="予防訪問リハビリテーション" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="介護予防居宅療養管理指導" column="介護予防居宅療養管理指導" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="予防通所介護_デイサービス" column="予防通所介護_デイサービス" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="予防通所リハビリテーション" column="予防通所リハビリテーション" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="生活介護ショートステイ" column="生活介護ショートステイ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="療養介護" column="療養介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="予防特定施設入居者生活介護" column="予防特定施設入居者生活介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="介護予防福祉用具貸与" column="介護予防福祉用具貸与" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="特定介護予防福祉用具販売" column="特定介護予防福祉用具販売" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住宅改修_予防給付" column="住宅改修_予防給付" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="通所介護" column="通所介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="予防小規模多機能型居宅介護" column="予防小規模多機能型居宅介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="介護予防認知症" column="介護予防認知症" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回識別コード" column="前回識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="コメント等" column="コメント等" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="本人連絡先2" column="本人連絡先2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="特定疾病コード" column="特定疾病コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="入所事業所コード" column="入所事業所コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="入所施設名_カナ" column="入所施設名_カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="入所施設郵便番号" column="入所施設郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="入所施設電話番号" column="入所施設電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="本人緊急連絡先名称1" column="本人緊急連絡先名称1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="本人緊急連絡先住所1" column="本人緊急連絡先住所1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="本人緊急連絡先番号1" column="本人緊急連絡先番号1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="本人緊急連絡先名称2" column="本人緊急連絡先名称2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="本人緊急連絡先住所2" column="本人緊急連絡先住所2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="本人緊急連絡先番号2" column="本人緊急連絡先番号2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請者関係コード" column="申請者関係コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="本人との関係" column="本人との関係" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請者氏名" column="申請者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請者氏名カナ" column="申請者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請代行事業者名" column="申請代行事業者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請代行事業者名カナ" column="申請代行事業者名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請者郵便番号" column="申請者郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請者住所" column="申請者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請者連絡先" column="申請者連絡先" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査委託先コード" column="調査委託先コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="get申請中間一時テーブル" resultMap="ResultMap_DbT5101TempEntity"
+        parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.renkeidatatorikomi.RenkeiDataTorikomiMybitisParamter" fetchSize="500">
+        SELECT
+            <include refid="allColumns_DbT5101Temp" />
+        FROM
+            "DbT5101TyukanTemp"
+        WHERE
+         <foreach  
+            collection="申請情報データリスト"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">  
+           ("保険者番号" =  #{item.保険者番号} 
+            AND "被保険者番号" = #{item.被保険者番号} 
+            AND "認定申請日" =  #{item.認定申請日}
+            AND "申請区分_申請時コード" =  #{item.申請種別コード}
+             )
+        </foreach>
+    </select>
+    
+    <select resultOrdered="true" id="get申請一時電算_東芝情報" resultMap="ResultMap_DbT5101TempEntity" fetchSize="500">
+        SELECT
+            <include refid="allColumns_DbT5101Temp" />
+        FROM
+            "DbT5101Temp"
+    </select>
+    
+    <select resultOrdered="true" id="get申請一時厚労省情報" resultMap="ResultMap_DbT5101TempEntity" fetchSize="500">
+        SELECT
+            <include refid="allColumns_DbT5101KoroshoTemp" />
+        FROM
+            "DbT5101Temp"
+    </select>
+
+    <resultMap id="ResultMap_DbT5101ErrorTempEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101ErrorTempEntity" autoMapping="true">
+        <result property="シーケンシャル番号" column="シーケンシャル番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="機能コード" column="機能コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="保険者番号" column="保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定申請日" column="認定申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="主キー補助項目" column="主キー補助項目" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請種別コード" column="申請種別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請種別名称" column="申請種別名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="取下区分コード" column="取下区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="取下区分名称" column="取下区分名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者区分コード" column="被保険者区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者区分名称" column="被保険者区分名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請代行区分コード" column="申請代行区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請代行区分名称" column="申請代行区分名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="生年月日" column="生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="年齢" column="年齢" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="性別コード" column="性別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="性別" column="性別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="氏名カナ" column="氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="氏名" column="氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="エラー内容" column="エラー内容" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>  
+     
+    <sql id="allColumns_DbT5101ErrorTemp">
+        "シーケンシャル番号",
+        "機能コード",
+        "識別コード",
+        "保険者番号",
+        "被保険者番号",
+        "認定申請日",
+        "主キー補助項目",
+        "申請種別コード",
+        "申請種別名称",
+        "取下区分コード",
+        "取下区分名称",
+        "被保険者区分コード",
+        "被保険者区分名称",
+        "申請代行区分コード",
+        "申請代行区分名称",
+        "生年月日",
+        "年齢",
+        "性別コード",
+        "性別",
+        "氏名カナ",
+        "氏名",
+        "郵便番号",
+        "住所",
+        "エラー内容"
+    </sql> 
+    
+    <select resultOrdered="true" id="get申請エラー一時テーブル" resultMap="ResultMap_DbT5101ErrorTempEntity" fetchSize="500">
+        SELECT
+            <include refid="allColumns_DbT5101ErrorTemp" />
+        FROM
+            "DbT5101ErrorTemp"
+    </select>    
+    
+    <resultMap id="ResultMap_DbT5101NinteiShinseiJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101RelateEntity" autoMapping="true">
+        <id column="dbT5101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <association property="dbt5101TempEntity" resultMap="ResultMap_DbT5101TempEntity"/>
+        <association property="dbT5101Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"/>
+        <association property="dbt5123Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5123NinteiKeikakuJohoMapper.ResultMap_DbT5123NinteiKeikakuJohoEntity"/>
+    </resultMap>
+    <select resultOrdered="true" id="get更新対象情報_電算東芝版" resultMap="ResultMap_DbT5101NinteiShinseiJoho" fetchSize="500">
+        SELECT
+            <include refid="allColumns_DbT5101Temp" />,
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />,
+            <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5123NinteiKeikakuJohoMapper.allColumns_DbT5123NinteiKeikakuJoho" />
+        FROM
+            "DbT5101Temp" AS temp
+        LEFT JOIN 
+            rgdb."DbT5101NinteiShinseiJoho"
+        ON
+            "hihokenshaNo" = temp."被保険者番号"
+        AND "shoKisaiHokenshaNo" = temp."保険者番号"
+        LEFT JOIN 
+            rgdb."DbT5123NinteiKeikakuJoho"
+        ON "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5123NinteiKeikakuJoho"."shinseishoKanriNo"
+    </select>
+    
+    <select resultOrdered="true" id="get更新対象情報_厚労省" resultMap="ResultMap_DbT5101NinteiShinseiJoho" fetchSize="500">
+        SELECT
+            <include refid="allColumns_DbT5101Temp" />,
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />,
+            <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5123NinteiKeikakuJohoMapper.allColumns_DbT5123NinteiKeikakuJoho" />
+        FROM
+            "DbT5101Temp" AS temp
+        LEFT JOIN 
+            rgdb."DbT5101NinteiShinseiJoho"
+        ON
+            "hihokenshaNo" = temp."被保険者番号"
+        AND "shoKisaiHokenshaNo" = temp."保険者番号"
+        LEFT JOIN 
+            rgdb."DbT5123NinteiKeikakuJoho"
+        ON "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5123NinteiKeikakuJoho"."shinseishoKanriNo"
+    </select>
+  
+</mapper>
