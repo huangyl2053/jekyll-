@@ -4,6 +4,9 @@ var DBC;
         var Events = (function () {
             function Events() {
             }
+            Events.onClose = function () {
+                return "onClose";
+            };
             return Events;
         })();
         KyufuseigenRirekiList.Events = Events;
