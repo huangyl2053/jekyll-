@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakaijizenshinsakekkaichiran
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5200001.DgBeforeShinsakaiResult_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5200001.ShinsakaiJIzenShinsakekkaTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5200001.ShinsakaikekkaIchiranInputCsvEntity;
-import jp.co.ndensan.reams.db.dbe.service.core.shinsakaijizenshinsakekkaichiran.ShinsakaiJIzenShinsakekkaIchiranManager;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakaijizenshinsakekkaichiran.ShinsakaiJIzenshinsakekkaIchiranManager;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -113,18 +113,18 @@ public class ShinsakaiJIzenShinsakekkaTorokuHandler {
                     csvEntity.getShinsakaiKaisaiNo(), csvEntity.getShinsakaiIinCode(), Integer.parseInt(csvEntity.getShinsakaiOrder().toString()));
             kekkaEntity.createBuilderForEdit().set二次判定結果コード(new Code(csvEntity.getNijiHanteiKekkaCode()))
                     .set有効期間(Integer.parseInt(csvEntity.getYukokikan().toString())).build();
-            return ShinsakaiJIzenShinsakekkaIchiranManager.createInstance().saveCsvDataInput(kekkaEntity);
+            return ShinsakaiJIzenshinsakekkaIchiranManager.createInstance().saveCsvDataInput(kekkaEntity);
         } else {
             dacEntity.createBuilderForEdit().set二次判定結果コード(new Code(csvEntity.getNijiHanteiKekkaCode()))
                     .set有効期間(Integer.parseInt(csvEntity.getYukokikan().toString())).build();
-            return ShinsakaiJIzenShinsakekkaIchiranManager.createInstance().saveCsvDataInput(dacEntity);
+            return ShinsakaiJIzenshinsakekkaIchiranManager.createInstance().saveCsvDataInput(dacEntity);
         }
     }
 
     private boolean selectByKey(List<ShinsakaikekkaIchiranInputCsvEntity> csvEntityList) {
         boolean 判定ふらぐ = false;
         for (ShinsakaikekkaIchiranInputCsvEntity csvEntity : csvEntityList) {
-            ShinsakaiJizenKekkaJoho dacEntity = new ShinsakaiJizenKekkaJoho(ShinsakaiJIzenShinsakekkaIchiranManager.createInstance()
+            ShinsakaiJizenKekkaJoho dacEntity = new ShinsakaiJizenKekkaJoho(ShinsakaiJIzenshinsakekkaIchiranManager.createInstance()
                     .selectByKey(csvEntity.getShinsakaiKaisaiNo(), csvEntity.getShinsakaiIinCode(),
                             Integer.parseInt(csvEntity.getShinsakaiOrder().toString())));
             if (dacEntity.get介護認定審査会開催番号() == null) {
