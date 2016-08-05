@@ -14,7 +14,7 @@ import lombok.Setter;
 /**
  * 事業報告月報様式_02のデータです。
  *
- * @reamsid_L DBU-5560-050 wanghuafeng
+ * @reamsid_L DBU-5590-050 wanghuafeng
  */
 @Getter
 @Setter
@@ -22,7 +22,7 @@ import lombok.Setter;
 public class JigyohokokuCompYoshiki272Entity {
 
     private RString 作成日時;
-    private RString 集計区分;
+    private RString 年報月報区分;
     private List<DbT7021JigyoHokokuTokeiDataEntity> 事業報告統計データ;
     private RString 集計年月;
     private RString 集計年度;
