@@ -1936,7 +1936,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 table(DbT7022ShoriDateKanri.class).
                 where(and(
                                 eq(subGyomuCode, SubGyomuCode.DBC介護給付),
-                                eq(shoriName, ShoriName.年次負担割合判定.get名称()),
+                                eq(shoriName, ShoriName.負担割合証発行一括.get名称()),
                                 eq(shoriEdaban, 処理枝番),
                                 eq(nendo, 年度))
                 ).order(by(DbT7022ShoriDateKanri.nendo, Order.DESC)).limit(1).
