@@ -6,8 +6,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310012;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
@@ -17,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 public class PnlPrintDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -26,8 +27,8 @@ public class PnlPrintDiv extends Panel {
      */
     @JsonProperty("txtChitibi")
     private TextBoxDate txtChitibi;
-    @JsonProperty("txtBonsyoNo")
-    private TextBoxCode txtBonsyoNo;
+    @JsonProperty("ccdBunshoBangoInput")
+    private BunshoBangoInputDiv ccdBunshoBangoInput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -54,21 +55,12 @@ public class PnlPrintDiv extends Panel {
     }
 
     /*
-     * gettxtBonsyoNo
-     * @return txtBonsyoNo
+     * getccdBunshoBangoInput
+     * @return ccdBunshoBangoInput
      */
-    @JsonProperty("txtBonsyoNo")
-    public TextBoxCode getTxtBonsyoNo() {
-        return txtBonsyoNo;
-    }
-
-    /*
-     * settxtBonsyoNo
-     * @param txtBonsyoNo txtBonsyoNo
-     */
-    @JsonProperty("txtBonsyoNo")
-    public void setTxtBonsyoNo(TextBoxCode txtBonsyoNo) {
-        this.txtBonsyoNo = txtBonsyoNo;
+    @JsonProperty("ccdBunshoBangoInput")
+    public IBunshoBangoInputDiv getCcdBunshoBangoInput() {
+        return ccdBunshoBangoInput;
     }
 
     // </editor-fold>

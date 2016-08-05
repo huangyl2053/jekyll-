@@ -136,6 +136,9 @@ public class PnlTotalPanel {
         ViewStateHolder.put(ViewStateKeys.契約者一覧情報, shokanData);
         HihokenshaNo 被保険者番号 = new HihokenshaNo(parameter.get被保番号());
         div.getPnlCommon().getCcdKaigoShikakuKihon().initialize(被保険者番号);
+        if (!RString.isNullOrEmpty(parameter.get識別コード())) {
+            div.getPnlCommon().getCcdAtena().initialize(new ShikibetsuCode(parameter.get識別コード()));
+        }
 
         getHandler(div).set初期データ状態(画面モード, shokanData);
         getHandler(div).set初期データ(shokanData, parameter);
@@ -320,7 +323,7 @@ public class PnlTotalPanel {
      * @return ResponseData<PnlTotalPanelDiv>
      */
     public ResponseData<PnlTotalPanelDiv> onClick_btnPublish(PnlTotalPanelDiv div) {
-        // TODO　QA No.474(Redmine#:79881)
+        // TODO　QAのNo.1011(Redmine#:92958)
         return ResponseData.of(div).respond();
     }
 }
