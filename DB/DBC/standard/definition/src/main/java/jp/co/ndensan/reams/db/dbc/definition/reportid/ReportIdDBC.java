@@ -28,9 +28,17 @@ public enum ReportIdDBC {
      */
     DBC200054(new ReportId("DBC200054_KyufujissekiKoshinkekkaIchiran"), new RString("給付実績更新結果情報一覧表")),
     /**
-     * 利用者負担２割対応・利用者負担割合更正
+     * 負担割合証（カット紙）
      */
-    DBC100065(new ReportId("DBC100065_FutanWariaiSho"), new RString("利用者負担２割対応・利用者負担割合更正 ")),
+    DBC100065(new ReportId("DBC100065_FutanWariaiSho"), new RString("負担割合証（カット紙）")),
+    /**
+     * 負担割合証（連帳　縦）
+     */
+    DBC100066(new ReportId("DBC100066_FutanWariaiShoRenchoTate"), new RString("負担割合証（連帳　縦）")),
+    /**
+     * 負担割合証（連帳　横）
+     */
+    DBC100067(new ReportId("DBC100067_FutanWariaiShoRenchoYoko"), new RString("負担割合証（連帳　横）")),
     /**
      * 高額総合事業サービス費判定エラーリスト
      */
