@@ -15,7 +15,7 @@ public enum DBC0490011StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    作成("作成");
+    高額介護サービス費支給決定通知書作成("高額介護サービス費支給決定通知書作成");
 
     private final RString name;
 
