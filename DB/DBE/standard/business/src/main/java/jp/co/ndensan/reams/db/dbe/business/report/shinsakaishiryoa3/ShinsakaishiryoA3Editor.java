@@ -80,9 +80,11 @@ public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
             source.listZenkaiｙukokikan1_1 = business.get前回期間_下();
             source.listYukokikan1_1 = RString.EMPTY;
         }
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
-        if (business.get申請書管理番号() != null || !RString.isNullOrEmpty(business.get申請書管理番号().getColumnValue())) {
-            source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号().getColumnValue());
+        if (business.is事務局()) {
+            source.shikibetuCode = ShikibetsuCode.EMPTY;
+            if (business.get申請書管理番号() != null && !business.get申請書管理番号().isEmpty()) {
+                source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号().getColumnValue());
+            }
         }
         return source;
     }
