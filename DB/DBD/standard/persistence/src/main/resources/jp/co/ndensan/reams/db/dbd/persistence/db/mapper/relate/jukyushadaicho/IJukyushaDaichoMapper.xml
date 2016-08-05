@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.jukyushadaicho.IJukyushaDaichoMapper">
+    <resultMap id="ResultMap_DbT4001JukyushaDaichoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity" autoMapping="true"/>
+    <select id="get受給者台帳" fetchSize="500" resultMap="ResultMap_DbT4001JukyushaDaichoEntity" 
+              resultOrdered="true"  parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.jukyushajaicho.JukyushaDaichoParameter">
+        SELECT 
+            A.* 
+        FROM rgdb."DbT4001JukyushaDaicho" AS A
+        INNER JOIN 
+            ( SELECT rgdb."DbT4101NinteiShinseiJoho"."shinseishoKanriNo" 
+                FROM 
+                    rgdb."DbT4101NinteiShinseiJoho" 
+                WHERE
+                    rgdb."DbT4101NinteiShinseiJoho"."shoKisaiHokenshaNo" = #{証記載保険者番号}
+                      AND rgdb."DbT4101NinteiShinseiJoho"."hihokenshaNo"=#{被保険者番号} )
+                      AS B
+                      ON A."shinseishoKanriNo"=B."shinseishoKanriNo"
+        AND A."shichosonCode" =#{市町村コード}
+        AND    A."hihokenshaNo"=#{被保険者番号} 
+        ORDER BY A."ninteiYMD" 
+        limit 1
+    </select>
+</mapper>

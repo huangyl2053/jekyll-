@@ -41,9 +41,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 障がい者控除対象者認定証のFindです。
  *
- * @reamsid_L DBD-3860-030 donghj
+ * @reamsid_L DBD-3870-030 donghj
  */
-public class NinteiShoJohoFind {
+public class NinteiShoJohoFinder {
 
     private static final ReportId 帳票分類ID = ReportIdDBD.DBD100025.getReportId();
     private final DbT4001JukyushaDaichoDac 受給者台帳dac;
@@ -52,7 +52,7 @@ public class NinteiShoJohoFind {
     /**
      * コンストラクタです。
      */
-    public NinteiShoJohoFind() {
+    public NinteiShoJohoFinder() {
         受給者台帳dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
         ninteishoJohoentity = new NinteishoJohoEntity();
     }
@@ -63,7 +63,7 @@ public class NinteiShoJohoFind {
      * @param 受給者台帳dac {@link DbT4001JukyushaDaichoDac}
      * @param ninteishoJohoentity {@link NinteishoJohoEntity}
      */
-    NinteiShoJohoFind(DbT4001JukyushaDaichoDac 受給者台帳dac,
+    NinteiShoJohoFinder(DbT4001JukyushaDaichoDac 受給者台帳dac,
             NinteishoJohoEntity ninteishoJohoentity) {
         this.受給者台帳dac = 受給者台帳dac;
         this.ninteishoJohoentity = ninteishoJohoentity;
@@ -73,10 +73,10 @@ public class NinteiShoJohoFind {
     /**
      * 障がい者控除対象者認定証FindのIntanceを作成します。
      *
-     * @return NinteiShoJohoFind
+     * @return NinteiShoJohoFinder
      */
-    public static NinteiShoJohoFind createInstance() {
-        return InstanceProvider.create(NinteiShoJohoFind.class);
+    public static NinteiShoJohoFinder createInstance() {
+        return InstanceProvider.create(NinteiShoJohoFinder.class);
     }
 
     /**

@@ -341,6 +341,11 @@ public class KaigoninteiShikakuInfoDiv extends Panel implements IKaigoninteiShik
         getHandler().initialize(hdnShinchsonCode, hdnShikibetsuCode, hdnSetaikodo, hdnHihokenShaNo);
     }
 
+    @Override
+    public TextBox getTxtYokaigodo() {
+        return txtYokaigoJotaiKubun;
+    }
+
     private KaigoNinteiShikakuInfoHandler getHandler() {
         return new KaigoNinteiShikakuInfoHandler(this);
     }

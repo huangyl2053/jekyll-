@@ -350,11 +350,8 @@ public class PnlTotalSearch {
                 row.getTxtKeiyakuKeteibi().getValue() == null ? null
                 : new FlexibleDate(row.getTxtKeiyakuKeteibi().getValue().toDateString()),
                 row.getTxtKeiyakuJigyoshaNo(),
-                row.getTxtKeiyakuJigyoshamei());
-        ViewStateHolder.put(ViewStateKeys.契約者一覧情報, pnlTotalSearchParameter);
-        ViewStateHolder.put(ViewStateKeys.最大件数, div.getPnlSearch().getTxtMaxCount().getValue());
-        ViewStateHolder.put(ViewStateKeys.表示モード, 契約者選択);
-        ViewStateHolder.put(ViewStateKeys.画面モード, 画面モード);
+                row.getTxtKeiyakuJigyoshamei(),
+                row.getTxtShikibetsuCode());
         ShokanJuryoininKeiyakushaFinder finder = ShokanJuryoininKeiyakushaFinder.createInstance();
         ShokanJuryoininKeiyakusha shokanData = finder.getShokanJuryoininKeiyakusha(
                 new HihokenshaNo(pnlTotalSearchParameter.get被保番号()),
@@ -364,6 +361,10 @@ public class PnlTotalSearch {
         if (shokanData == null) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
+        ViewStateHolder.put(ViewStateKeys.契約者一覧情報, pnlTotalSearchParameter);
+        ViewStateHolder.put(ViewStateKeys.最大件数, div.getPnlSearch().getTxtMaxCount().getValue());
+        ViewStateHolder.put(ViewStateKeys.表示モード, 契約者選択);
+        ViewStateHolder.put(ViewStateKeys.画面モード, 画面モード);
     }
 
     /**

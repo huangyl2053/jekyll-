@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KubunGe
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KyufuJikoSakuseiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.ServiceTypeDetails;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.ServiceTypeTotal;
+import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.TankiNyushoResult;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KubunGendoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KyufuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.ServiceRiyohyoEntity;
@@ -37,7 +38,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
- * ビジネス設計_DBC0120031_サービス利用票情報
+ * サービス利用票情報のビジネスクラスです。
  *
  * @reamsid_L DBC-1930-060 xupeng
  */
@@ -49,7 +50,7 @@ public class JigoSakuseiMeisaiTouroku {
     private static final RString 限度対象外フラグ = new RString("0");
     private static final RString 設定してないR = new RString("ー");
     private static final RString 事業者 = new RString("合計");
-    private static final RString 事業者コード = new RString("*******");
+    private static final RString 事業者コード = new RString("*");
     private static final RString 総合事業 = new RString("2");
     private static final RString 居宅 = new RString("1");
     private static final RString 日_1 = new RString("01");
@@ -68,12 +69,6 @@ public class JigoSakuseiMeisaiTouroku {
         this.dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
     }
 
-    JigoSakuseiMeisaiTouroku(MapperProvider mapperProvider,
-            DbT4001JukyushaDaichoDac dac) {
-        this.mapperProvider = mapperProvider;
-        this.dac = dac;
-    }
-
     /**
      * {@link InstanceProvider#create}にて生成した{@link JigoSakuseiMeisaiTouroku}のインスタンスを返します。
      *
@@ -84,7 +79,7 @@ public class JigoSakuseiMeisaiTouroku {
     }
 
     /**
-     * 合計計算処理
+     * 合計計算処理メソッドです。
      *
      * @param 利用者負担額 Decimal
      * @param 種類限度超過単位 Decimal
@@ -117,7 +112,10 @@ public class JigoSakuseiMeisaiTouroku {
             合計計算情報.set保険対象利用者負担額(利用者負担額);
             合計計算情報.set保険給付額(合計計算情報.get費用総額().subtract(合計計算情報.get保険対象利用者負担額()));
         } else {
-            if (Decimal.ZERO.equals(給付率)) {
+            if (給付率 == null) {
+                給付率 = HokenKyufuRitsu.ZERO;
+            }
+            if (Decimal.ZERO.equals(給付率.getColumnValue())) {
                 合計計算情報.set保険給付額(合計計算情報.get費用総額());
             } else {
                 Decimal 保険給付額 = 合計計算情報.get費用総額().divide(率).multiply(給付率.getColumnValue());
@@ -133,7 +131,7 @@ public class JigoSakuseiMeisaiTouroku {
     }
 
     /**
-     * 明細・合計一覧Grid整理処理
+     * 明細・合計一覧Grid整理処理メソッドです。
      *
      * @param 明細合計リスト List<KyufuJikoSakuseiResult>
      * @return KyufuJikoSakuseiResult
@@ -201,7 +199,7 @@ public class JigoSakuseiMeisaiTouroku {
     }
 
     /**
-     * サービス種類限度額統計処理
+     * サービス種類限度額統計処理メソッドです。
      *
      * @param 利用年月 FlexibleYearMonth
      * @param サービス種類詳細List List<ServiceTypeDetails>
@@ -250,7 +248,7 @@ public class JigoSakuseiMeisaiTouroku {
     }
 
     /**
-     * サービス利用票取得処理
+     * サービス利用票取得処理メソッドです。
      *
      * @param 被保険者番号 HihokenshaNo
      * @param 対象年月 FlexibleYearMonth
@@ -331,7 +329,7 @@ public class JigoSakuseiMeisaiTouroku {
     }
 
     /**
-     * 区分限度額統計処理
+     * 区分限度額統計処理メソッドです。
      *
      * @param 被保険者番号 HihokenshaNo
      * @param 居宅総合事業区分 RString
@@ -372,5 +370,20 @@ public class JigoSakuseiMeisaiTouroku {
             return null;
         }
         return new Decimal(DecimalFormatter.toコンマ区切りRString(decimal, 0).toString());
+    }
+
+    /**
+     * 短期入所情報を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年月 FlexibleYearMonth
+     * @param 履歴番号 int
+     * @param 利用年月 FlexibleYearMonth
+     * @return TankiNyushoResult
+     */
+    public TankiNyushoResult getTankiNyuryo(HihokenshaNo 被保険者番号, FlexibleYearMonth 対象年月, int 履歴番号,
+            FlexibleYearMonth 利用年月) {
+
+        return null;
     }
 }

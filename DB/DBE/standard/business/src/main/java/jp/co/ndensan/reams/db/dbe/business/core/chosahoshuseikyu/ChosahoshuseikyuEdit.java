@@ -37,7 +37,7 @@ public class ChosahoshuseikyuEdit {
      */
     public Chosahoshuseikyu getChosahoshuseikyu(HoshuShiharaiJunbiRelateEntity entity, RString 消費税率, Map<Integer, RString> 通知文) {
         Chosahoshuseikyu shuseikyu = new Chosahoshuseikyu();
-        shuseikyu.set郵便番号(entity.getYubinNo().value());
+        shuseikyu.set郵便番号(RString.isNullOrEmpty(entity.getYubinNo().value()) ? RString.EMPTY : entity.getYubinNo().value());
         shuseikyu.set住所(entity.getJusho());
         shuseikyu.set調査機関(entity.getJigyoshaMeisho());
         shuseikyu.set代表者名(entity.getDaihyoshaName());

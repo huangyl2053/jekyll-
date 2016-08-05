@@ -109,6 +109,20 @@
      "toLayoutName": "DBB8110001",
      "toLayoutTitle": "各種通知書作成（個別）",
      "toState": "通知書発行"
+    },
+    {
+     "id": "9",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB8120001",
+     "layoutTitle": "介護保険料即時賦課更正",
+     "eventName": "前画面に戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0020001",
+     "toLayoutTitle": "通知書発行後異動把握",
+     "toState": "異動把握"
     }
    ]
   }
