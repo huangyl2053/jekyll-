@@ -17,7 +17,9 @@ public enum DBC8130011TransitionEventName implements IContainerEvents {
     自己負担額一覧("自己負担額一覧"),
     自己負担額管理情報入力("自己負担額管理情報入力"),
     完了("完了"),
-    自己負担額入力へ("自己負担額入力へ");
+    自己負担額入力へ("自己負担額入力へ"),
+    再検索("再検索"),
+    検索結果一覧("検索結果一覧");
 
     private final RString name;
 
