@@ -106,8 +106,12 @@ public class HanyoListParamHandler {
                     toString()).toDateString().substring(INDEX_ZERO, INDEX_FOUR));
             parameter.set賦課年度(賦課年度);
         }
-        if (div.getChushutsuJokenPanel() != null && div.getChushutsuJokenPanel().getTxtChushutsuKikan() != null) {
+        if (div.getChushutsuJokenPanel() != null && div.getChushutsuJokenPanel().getTxtChushutsuKikan() != null
+                && div.getChushutsuJokenPanel().getTxtChushutsuKikan().getFromValue() != null) {
             parameter.set抽出期間From(new YMDHMS(div.getChushutsuJokenPanel().getTxtChushutsuKikan().getFromValue(), RTime.now()));
+        }
+        if (div.getChushutsuJokenPanel() != null && div.getChushutsuJokenPanel().getTxtChushutsuKikan() != null
+                && div.getChushutsuJokenPanel().getTxtChushutsuKikan().getToValue() != null) {
             parameter.set抽出期間To(new YMDHMS(div.getChushutsuJokenPanel().getTxtChushutsuKikan().getToValue(), RTime.now()));
         }
         課税区分減免前後(parameter);

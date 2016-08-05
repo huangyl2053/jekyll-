@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolistshotokujoho;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.hanyolistshotokujoho.HanyoListShotokuJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -69,8 +68,6 @@ public class HanyoListShotokuJohoBatchParameter extends BatchParameterBase {
     private List<RString> 課税区分減免前s;
     @BatchParameter(key = KEY_13, name = "課税区分減免後s")
     private List<RString> 課税区分減免後s;
-    @BatchParameter(key = KEY_14, name = "宛名検索条件")
-    private IShikibetsuTaishoPSMSearchKey 宛名検索条件;
 
     /**
      * toProcessParameter
@@ -79,7 +76,7 @@ public class HanyoListShotokuJohoBatchParameter extends BatchParameterBase {
      */
     public HanyoListShotokuJohoProcessParameter toProcessParameter() {
         return new HanyoListShotokuJohoProcessParameter(帳票ID, 宛名抽出条件, 出力順ID, 出力項目ID, 項目名付加, 連番付加, 日付編集,
-                賦課年度, 抽出期間From, 抽出期間To, 住民税減免前後表示区分, 課税区分減免前s, 課税区分減免後s, 宛名検索条件);
+                賦課年度, 抽出期間From, 抽出期間To, 住民税減免前後表示区分, 課税区分減免前s, 課税区分減免後s);
     }
 
 }
