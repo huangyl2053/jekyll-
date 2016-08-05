@@ -172,6 +172,10 @@ public enum ReportIdDBD {
      */
     DBD200019(new ReportId("DBD200019_FutangakuNinteiHakkoIchiran"), new RString("負担額認定証・決定通知書発行一覧表")),
     /**
+     * 社会福祉法人軽減認定者リストの帳票ＩＤです。
+     */
+    DBD200004(new ReportId("DBD200004_ShakaiFukushiHojinKeigenGaitoshaIchiran"), new RString("社会福祉法人軽減認定者リスト")),
+    /**
      * 社会福祉法人軽減確認証・決定通知書発行一覧表の帳票ＩＤです。
      */
     DBD200018(new ReportId("DBD200018_ShakaiFukushiHojinKeigenHakkoIchiran"), new RString("社会福祉法人軽減確認証・決定通知書発行一覧表")),
