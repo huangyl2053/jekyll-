@@ -54,7 +54,7 @@
         </if>
         ORDER BY
         <choose>
-            <when test="isShuturyokuJun">
+            <when test="isShuturyokuJunEmpty">
                 dbt5502."shinsakaiOrder"
             </when>
             <otherwise>
@@ -1381,7 +1381,7 @@
         , dbt5102."nijiHanteiNinteiYukoShuryoYMD"
         FROM rgdb."DbT5121ShinseiRirekiJoho" dbt5121
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101Zenkai
-        ON dbt5101Zenkai."shinseishoKanriNo" = dbt5121."shinseishoKanriNo"
+        ON dbt5101Zenkai."shinseishoKanriNo" = dbt5121."zenkaiShinseishoKanriNo"
         AND (dbt5101Zenkai."shoriJotaiKubun" = '0' OR dbt5101Zenkai."shoriJotaiKubun" = '3')
         AND dbt5101Zenkai."logicalDeletedFlag" = FALSE
         INNER JOIN rgdb."DbT5102NinteiKekkaJoho" dbt5102

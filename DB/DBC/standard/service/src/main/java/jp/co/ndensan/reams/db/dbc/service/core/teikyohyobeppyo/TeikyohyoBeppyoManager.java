@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 画面設計_DBC0150011_サービス提供票別表 印刷処理
  *
- * @reamsid_L DBC-5110-010 xupeng
+ * @reamsid_L DBC-5100-010 xuxin
  */
 public class TeikyohyoBeppyoManager {
 

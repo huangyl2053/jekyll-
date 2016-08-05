@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 画面設計_DBC0150011_サービス提供票別表 Result
  *
- * @reamsid_L DBC-5110-010 xupeng
+ * @reamsid_L DBC-5100-010 xuxin
  */
 @lombok.Getter
 @lombok.Setter
