@@ -86,6 +86,32 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     private static final RString 処理枝番_01 = new RString("01");
     private static final RString 処理枝番_02 = new RString("02");
     private static final RString 処理枝番_03 = new RString("03");
+    private static final RString サブ業務コード_DBC = new RString("DBC");
+    private static final RString 処理名_自己負担証明書作成_一括 = new RString("自己負担証明書作成_一括");
+
+    /**
+     * 実行情報 を取得します。
+     *
+     * @param 市町村コード ShichosonCode
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select前回の実行情報(LasdecCode 市町村コード) throws NullPointerException {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(市町村コードメッセージ.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, サブ業務コード_DBC),
+                                eq(shichosonCode, 市町村コード),
+                                eq(shoriName, 処理名_自己負担証明書作成_一括),
+                                eq(shoriEdaban, 処理枝番_0001))).
+                order(by(DbT7022ShoriDateKanri.nendo, Order.DESC),
+                        by(DbT7022ShoriDateKanri.nendoNaiRenban, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
 
     /**
      * 主キーで処理日付管理マスタを取得します。
@@ -1948,7 +1974,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 toObject(DbT7022ShoriDateKanriEntity.class);
 
     }
-    
+
     /**
      * 前回対象日を取得する。
      *
