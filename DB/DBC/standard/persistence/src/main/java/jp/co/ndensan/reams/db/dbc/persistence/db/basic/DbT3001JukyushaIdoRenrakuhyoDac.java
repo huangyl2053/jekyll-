@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
@@ -108,7 +107,7 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
      * @return List<DbT3001JukyushaIdoRenrakuhyoEntity>
      */
     @Transaction
-    public DbT3001JukyushaIdoRenrakuhyoEntity select登録した受給者異動情報の取得(RString 被保番号, RDate 送付年月) {
+    public DbT3001JukyushaIdoRenrakuhyoEntity select登録した受給者異動情報の取得(RString 被保番号, RString 送付年月) {
         requireNonNull(被保番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保番号"));
         requireNonNull(送付年月, UrSystemErrorMessages.値がnull.getReplacedMessage("送付年月"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -130,11 +129,11 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
      * @return List<DbT3001JukyushaIdoRenrakuhyoEntity>
      */
     @Transaction
-    public DbT3001JukyushaIdoRenrakuhyoEntity select異動区分(RString 被保険者番号, RDate 異動日) {
+    public DbT3001JukyushaIdoRenrakuhyoEntity select異動区分(RString 被保険者番号, RString 異動日) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.select().
+        return accessor.selectSpecific(idoKubunCode).
                 table(DbT3001JukyushaIdoRenrakuhyo.class).
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
@@ -152,7 +151,7 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
      * @return List<DbT3001JukyushaIdoRenrakuhyoEntity>
      */
     @Transaction
-    public int selectCount(RString 被保険者番号, RDate 異動日) {
+    public int selectCount(RString 被保険者番号, RString 異動日) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
