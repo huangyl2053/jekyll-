@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.definition.batchprm.SogojigyohiSaishinsaKette
 
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
+import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBC120870_SogojigyohiSaishinsaKetteiKohifutanshaInParameter {
+public class DBC120870_SogojigyohiSaishinsaKetteiKohifutanshaInParameter extends BatchParameterBase{
 
     private static final String KEY_SHORIYM = "shoriYM";
     private static final String NAME_SHORIYM = "処理年月";
