@@ -11,13 +11,8 @@ import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD56100
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5610001.KoshinTaishoshaKanriDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5610001.KoshinTaishoshaKanriHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5610001.KoshinTaishoshaKanriValidationHandler;
-import jp.co.ndensan.reams.db.dbd.service.core.basic.shoridatekanri.ShoriDateKanriService;
-import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -28,6 +23,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class KoshinTaishoshaKanri {
 
+    private final RString 前回以降の未処理分 = new RString("前回以降の未処理分");
+    private final RString 有効期間終了日を範囲指定する = new RString("有効期間終了日を範囲指定する");
+
     /**
      * 画面初期化処理です。
      *
@@ -36,6 +34,22 @@ public class KoshinTaishoshaKanri {
      */
     public ResponseData<KoshinTaishoshaKanriDiv> onLoad(KoshinTaishoshaKanriDiv div) {
         creatKoshinTaishoshaKanriHandler(div).onLoad();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 条件指定状態変更処理です。
+     *
+     * @param div KoshinTaishoshaKanriDiv
+     * @return ResponseData<KoshinTaishoshaKanriDiv>
+     */
+    public ResponseData<KoshinTaishoshaKanriDiv> onChange(KoshinTaishoshaKanriDiv div) {
+        RString selectedKey = div.getSelectJoken().getRadDataSelect().getSelectedValue();
+        if (selectedKey.equals(前回以降の未処理分)) {
+            return ResponseData.of(div).setState(初期表示);
+        } else if (selectedKey.equals(有効期間終了日を範囲指定する)) {
+            return ResponseData.of(div).setState(範囲指定);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -68,11 +82,7 @@ public class KoshinTaishoshaKanri {
      * @return ResponseData<KoshinTaishoshaKanriParameter>
      */
     public ResponseData<KoshinTaishoshaKanriParameter> onClick_btnprint(KoshinTaishoshaKanriDiv div) {
-        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        LasdecCode 市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();
-        ShoriDateKanriService shoriDateKanriService = ShoriDateKanriService.createInstance();
-        ShoriDateKanri shoriDateKanri = shoriDateKanriService.getDbT7022ShoriDateKanriEntity(市町村コード);
-        KoshinTaishoshaKanriParameter parameter = creatKoshinTaishoshaKanriHandler(div).getParameter(shoriDateKanri);
+        KoshinTaishoshaKanriParameter parameter = creatKoshinTaishoshaKanriHandler(div).getParameter();
         return ResponseData.of(parameter).respond();
     }
 

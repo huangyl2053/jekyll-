@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd5610001;
 
-import java.util.Date;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd5610001.KoshinTaishoshaKanriProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5610001.KoshinTaishoshaKanriEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT7202KaigoNinteiHokaiseiKanriMapper;
@@ -62,6 +61,7 @@ public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<Kos
     private static final RString 更新申請対象者管理 = new RString("更新申請対象者管理");
     private static final RString 処理枝番 = new RString("0001");
     private static final Code 処理状態区分 = new Code(new RString("0"));
+    private static final Code 取下区分コード = new Code(new RString("1"));
     private KoshinTaishoshaKanriProcessParameter parameter;
     private boolean isInsert = false;
     private RString 厚労省IF識別コード;
@@ -176,7 +176,7 @@ public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<Kos
         entity.setShinsakaiYusenWaritsukeKubunCode(dbEntity.getShinsakaiYusenWaritsukeKubunCode());
         entity.setNinteiShinseiHoreiKubunCode(Code.EMPTY);
         entity.setNinteiShinseiShinseijiKubunCode(認定申請区分申請時コード);
-        entity.setTorisageKubunCode(Code.EMPTY);
+        entity.setTorisageKubunCode(取下区分コード);
         entity.setAge(FlexibleDate.getNowDate().getYearValue() - entity.getSeinengappiYMD().getYearValue());
         entity.setChikuCode(ChikuCode.EMPTY);
         entity.setMinashiNigoEtcTaishoFlag(false);
@@ -224,7 +224,7 @@ public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<Kos
     }
 
     private FlexibleYear get年度(FlexibleYear 年度, RString 年度内連番) {
-        if (parameter.get年度内連番() != null) {
+        if (!parameter.get年度内連番().isNullOrEmpty()) {
             if (parameter.get年度内連番().equals(認定年度内連番)) {
                 年度 = new FlexibleYear(new RString((parameter.get年度().getYearValue() + 1)));
                 return 年度;
@@ -232,14 +232,14 @@ public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<Kos
                 return parameter.get年度();
             }
         } else {
-            return new FlexibleYear(new Date().toString());
+            return new FlexibleYear(FlexibleDate.getNowDate().toString());
         }
     }
 
     private RString get年度内連番(FlexibleYear 年度, RString 年度内連番) {
-        if (年度内連番 != null) {
+        if (!年度内連番.isNullOrEmpty()) {
             if (年度内連番.equals(認定年度内連番)) {
-                return 年度内連番;
+                return 新年度内連番;
             }
             int i = 0;
             while (i < 年度内連番.length()) {
@@ -283,7 +283,7 @@ public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<Kos
         entity.setNinteiShinsakaiWariateKanryoYMD(FlexibleDate.EMPTY);
         entity.setNinteiShinseiJohoTorokuKanryoYMD(FlexibleDate.EMPTY);
         entity.setNinteichosaKanryoYMD(FlexibleDate.EMPTY);
-        entity.setNinteichosaIraiKanryoYMD(FlexibleDate.MIN);
+        entity.setNinteichosaIraiKanryoYMD(FlexibleDate.EMPTY);
         entity.setNinteichosaKanryoYMD(FlexibleDate.EMPTY);
         return entity;
     }

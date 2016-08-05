@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7202KaigoNinteiHokaiseiKanr
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
- * {@link DbT7202KaigoNinteiHokaiseiKanriEntity}を取得します
+ * {@link DbT7202KaigoNinteiHokaiseiKanriEntity}のマッパーIFです。
  *
  * @reamsid_L DBD-1460-020 liuyl
  */
