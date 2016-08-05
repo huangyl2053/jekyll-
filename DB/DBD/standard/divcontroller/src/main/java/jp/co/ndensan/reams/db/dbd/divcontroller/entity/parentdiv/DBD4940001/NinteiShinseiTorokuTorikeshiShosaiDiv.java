@@ -50,20 +50,24 @@ public class NinteiShinseiTorokuTorikeshiShosaiDiv extends Panel {
     private ShujiiAndShujiiIryoKikanDiv ShujiiAndShujiiIryoKikan;
     @JsonProperty("ccdKaigoNinteiAtenaInfo")
     private KaigoNinteiAtenaInfoDiv ccdKaigoNinteiAtenaInfo;
-    @JsonProperty("ccdKaigoNinteiShinseiKihon")
-    private KaigoNinteiShinseiKihonJohoInputDiv ccdKaigoNinteiShinseiKihon;
-    @JsonProperty("ccdKaigoNinteiShikakuInfo")
-    private KaigoninteiShikakuInfoDiv ccdKaigoNinteiShikakuInfo;
     @JsonProperty("ccdNinteiInput")
     private NinteiInputDiv ccdNinteiInput;
+    @JsonProperty("ccdKaigoNinteiShikakuInfo")
+    private KaigoninteiShikakuInfoDiv ccdKaigoNinteiShikakuInfo;
     @JsonProperty("ccdZenkaiNinteiKekkaJoho")
     private ZenkaiNinteiKekkaJohoDiv ccdZenkaiNinteiKekkaJoho;
+    @JsonProperty("ccdKaigoNinteiShinseiKihon")
+    private KaigoNinteiShinseiKihonJohoInputDiv ccdKaigoNinteiShinseiKihon;
     @JsonProperty("ccdSonotaJoho")
     private ShinseiSonotaJohoInputDiv ccdSonotaJoho;
     @JsonProperty("hdnKaigoJimuCode")
     private RString hdnKaigoJimuCode;
     @JsonProperty("hdnKaigoNinteiCode")
     private RString hdnKaigoNinteiCode;
+    @JsonProperty("hdnSyokikaMode")
+    private RString hdnSyokikaMode;
+    @JsonProperty("hdnShikibetsuKey")
+    private RString hdnShikibetsuKey;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -171,12 +175,12 @@ public class NinteiShinseiTorokuTorikeshiShosaiDiv extends Panel {
     }
 
     /*
-     * getccdKaigoNinteiShinseiKihon
-     * @return ccdKaigoNinteiShinseiKihon
+     * getccdNinteiInput
+     * @return ccdNinteiInput
      */
-    @JsonProperty("ccdKaigoNinteiShinseiKihon")
-    public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihon() {
-        return ccdKaigoNinteiShinseiKihon;
+    @JsonProperty("ccdNinteiInput")
+    public INinteiInputDiv getCcdNinteiInput() {
+        return ccdNinteiInput;
     }
 
     /*
@@ -189,21 +193,21 @@ public class NinteiShinseiTorokuTorikeshiShosaiDiv extends Panel {
     }
 
     /*
-     * getccdNinteiInput
-     * @return ccdNinteiInput
-     */
-    @JsonProperty("ccdNinteiInput")
-    public INinteiInputDiv getCcdNinteiInput() {
-        return ccdNinteiInput;
-    }
-
-    /*
      * getccdZenkaiNinteiKekkaJoho
      * @return ccdZenkaiNinteiKekkaJoho
      */
     @JsonProperty("ccdZenkaiNinteiKekkaJoho")
     public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
         return ccdZenkaiNinteiKekkaJoho;
+    }
+
+    /*
+     * getccdKaigoNinteiShinseiKihon
+     * @return ccdKaigoNinteiShinseiKihon
+     */
+    @JsonProperty("ccdKaigoNinteiShinseiKihon")
+    public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihon() {
+        return ccdKaigoNinteiShinseiKihon;
     }
 
     /*
@@ -249,6 +253,42 @@ public class NinteiShinseiTorokuTorikeshiShosaiDiv extends Panel {
     @JsonProperty("hdnKaigoNinteiCode")
     public void setHdnKaigoNinteiCode(RString hdnKaigoNinteiCode) {
         this.hdnKaigoNinteiCode = hdnKaigoNinteiCode;
+    }
+
+    /*
+     * gethdnSyokikaMode
+     * @return hdnSyokikaMode
+     */
+    @JsonProperty("hdnSyokikaMode")
+    public RString getHdnSyokikaMode() {
+        return hdnSyokikaMode;
+    }
+
+    /*
+     * sethdnSyokikaMode
+     * @param hdnSyokikaMode hdnSyokikaMode
+     */
+    @JsonProperty("hdnSyokikaMode")
+    public void setHdnSyokikaMode(RString hdnSyokikaMode) {
+        this.hdnSyokikaMode = hdnSyokikaMode;
+    }
+
+    /*
+     * gethdnShikibetsuKey
+     * @return hdnShikibetsuKey
+     */
+    @JsonProperty("hdnShikibetsuKey")
+    public RString getHdnShikibetsuKey() {
+        return hdnShikibetsuKey;
+    }
+
+    /*
+     * sethdnShikibetsuKey
+     * @param hdnShikibetsuKey hdnShikibetsuKey
+     */
+    @JsonProperty("hdnShikibetsuKey")
+    public void setHdnShikibetsuKey(RString hdnShikibetsuKey) {
+        this.hdnShikibetsuKey = hdnShikibetsuKey;
     }
 
     /*
