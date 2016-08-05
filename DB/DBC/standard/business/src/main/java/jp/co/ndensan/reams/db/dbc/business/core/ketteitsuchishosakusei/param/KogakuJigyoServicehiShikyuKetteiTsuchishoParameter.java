@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package jp.co.ndensan.reams.db.dbc.business.core.kougakusabisuhishikyuuketteitsuchishosakusei.param;
+package jp.co.ndensan.reams.db.dbc.business.core.ketteitsuchishosakusei.param;
 
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
