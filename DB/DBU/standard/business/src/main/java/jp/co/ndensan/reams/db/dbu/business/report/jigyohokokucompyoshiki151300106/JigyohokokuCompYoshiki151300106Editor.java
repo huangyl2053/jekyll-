@@ -27,6 +27,7 @@ public class JigyohokokuCompYoshiki151300106Editor implements IJigyohokokuCompYo
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
+    private static final RString 作成 = new RString("作成");
     private static final RString 月報 = new RString("1");
     private static final RString 年報 = new RString("2");
     private final JigyohokokuCompYoshiki151300106Data data;
@@ -58,6 +59,7 @@ public class JigyohokokuCompYoshiki151300106Editor implements IJigyohokokuCompYo
         printTimeStampSb.append(DATE_分);
         printTimeStampSb.append(String.format("%02d", printdate.getSecond()));
         printTimeStampSb.append(DATE_秒);
+        printTimeStampSb.append(作成);
         source.printTimeStamp = printTimeStampSb.toRString();
         if (月報.equals(data.get年報月報区分())) {
             source.shukeiKubun = new RString("月報");
