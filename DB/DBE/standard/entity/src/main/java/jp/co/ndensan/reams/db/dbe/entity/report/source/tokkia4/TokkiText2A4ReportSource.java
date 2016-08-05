@@ -122,48 +122,6 @@ public class TokkiText2A4ReportSource implements IReportSource {
     public RString shinsaDD;
     @ReportItem(name = "tokkiText", order = 53)
     public RString tokkiText;
-    @ReportItem(name = "gaikyotokkiImg", order = 54)
-    public RString gaikyotokkiImg;
-    @ReportItem(name = "hihokenshaName", length = 30, order = 55)
-    public RString two_hihokenshaName;
-    @ReportItem(name = "hokenshaNo", length = 6, order = 56)
-    public RString two_hokenshaNo;
-    @ReportItem(name = "shinseiYY", length = 2, order = 57)
-    public RString two_shinseiYY;
-    @ReportItem(name = "shinseiMM", length = 2, order = 58)
-    public RString two_shinseiMM;
-    @ReportItem(name = "shinseiDD", length = 2, order = 59)
-    public RString two_shinseiDD;
-    @ReportItem(name = "sakuseiGengo", length = 2, order = 60)
-    public RString two_sakuseiGengo;
-    @ReportItem(name = "chosaGengo", length = 2, order = 61)
-    public RString two_chosaGengo;
-    @ReportItem(name = "sakuseiYY", length = 2, order = 62)
-    public RString two_sakuseiYY;
-    @ReportItem(name = "sakuseiMM", length = 2, order = 63)
-    public RString two_sakuseiMM;
-    @ReportItem(name = "sakuseiDD", length = 2, order = 64)
-    public RString two_sakuseiDD;
-    @ReportItem(name = "hihokenshaNo", length = 10, order = 65)
-    public RString two_hihokenshaNo;
-    @ReportItem(name = "shinseiGengo", length = 2, order = 66)
-    public RString two_shinseiGengo;
-    @ReportItem(name = "shinsaGengo", length = 2, order = 67)
-    public RString two_shinsaGengo;
-    @ReportItem(name = "shinsaYY", length = 2, order = 68)
-    public RString two_shinsaYY;
-    @ReportItem(name = "shinsaMM", length = 2, order = 69)
-    public RString two_shinsaMM;
-    @ReportItem(name = "shinsaDD", length = 2, order = 70)
-    public RString two_shinsaDD;
-    @ReportItem(name = "chosaYY", length = 2, order = 71)
-    public RString two_chosaYY;
-    @ReportItem(name = "chosaMM", length = 2, order = 72)
-    public RString two_chosaMM;
-    @ReportItem(name = "chosaDD", length = 2, order = 73)
-    public RString two_chosaDD;
-    @ReportItem(name = "gaikyotokkiText", order = 74)
-    public RString gaikyotokkiText;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
