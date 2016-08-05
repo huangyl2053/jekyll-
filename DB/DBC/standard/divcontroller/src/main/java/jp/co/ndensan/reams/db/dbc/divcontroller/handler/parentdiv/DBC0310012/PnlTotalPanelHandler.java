@@ -461,8 +461,8 @@ public class PnlTotalPanelHandler {
                 && div.getPnlCommon().getPnlDetail().getRdoKettekubun().getSelectedKey().isEmpty()) {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(決定区分.toString()).evaluate());
         }
-        if (ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
-                .getRdoKettekubun().getSelectedKey())) {
+        if (div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().getValue() != null
+                && ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail().getRdoKettekubun().getSelectedKey())) {
             if (div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().getSelectedKey().isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(年度.toString()).evaluate());
             }

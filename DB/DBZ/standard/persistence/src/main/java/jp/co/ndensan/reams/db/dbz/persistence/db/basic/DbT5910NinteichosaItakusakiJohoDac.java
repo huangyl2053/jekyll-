@@ -159,4 +159,22 @@ public class DbT5910NinteichosaItakusakiJohoDac implements ISaveable<DbT5910Nint
                                 eq(jokyoFlag, true))).
                 toList(DbT5910NinteichosaItakusakiJohoEntity.class);
     }
+
+    /**
+     * 主キーで認定調査委託先情報を取得します。
+     *
+     * @param 認定調査委託先コード 認定調査委託先コード
+     * @return DbT5910NinteichosaItakusakiJohoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT5910NinteichosaItakusakiJohoEntity> selectBy認定調査委託先コード(RString 認定調査委託先コード) throws NullPointerException {
+        requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5910NinteichosaItakusakiJoho.class).
+                where((eq(ninteichosaItakusakiCode, 認定調査委託先コード))).
+                toList(DbT5910NinteichosaItakusakiJohoEntity.class);
+    }
 }

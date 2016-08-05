@@ -9,6 +9,7 @@ import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3078ShokanJuryoininKeiyakushaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
  * 契約者一覧Entityクラスです。
@@ -23,4 +24,5 @@ public class ShokanJuryoininKeiyakushaEntity implements Cloneable, Serializable 
     private DbT3078ShokanJuryoininKeiyakushaEntity dbt3078entity;
     private DbT3077JuryoininKeiyakuJigyoshaEntity dbt3077entity;
     private IName 氏名;
+    private ShikibetsuCode 識別コード;
 }

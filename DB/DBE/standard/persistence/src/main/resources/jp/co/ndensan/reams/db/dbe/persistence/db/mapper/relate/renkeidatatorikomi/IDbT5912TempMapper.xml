@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT1001HihokenshaDaichoEntityのマッピング用XMLです。 -->
+<!-- @reamsid_L DBE-1490-020 duanzhanli -->
+<!--SelectMethod : getHihokenshaShutokuJyoho-->
+<!--ParentResultMap : resultMap_getHihokenshaShutokuJyoho-->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5912TempMapper">
+      
+    <sql id="allColumns_DbT5912Temp">
+        "シーケンシャル番号",
+        "機能コード",
+        "識別コード",
+        "医療機関コード",
+        "主治医コード",
+        "主治医名称",
+        "状況",
+        "主治医名称カナ"
+    </sql> 
+    <sql id="allColumns_DbT5912ErrorTemp">
+        "シーケンシャル番号",
+        "機能コード",
+        "識別コード",
+        "医療機関コード",
+        "主治医コード",
+        "主治医名称",
+        "状況",
+        "主治医名称カナ",
+        "エラー内容"
+    </sql> 
+    
+     <sql id="allColumns_DbT5912KoroshoTemp">
+        "シーケンシャル番号",
+        "機能コード",
+        "識別コード",
+        "医療機関コード",
+        "主治医コード",
+        "主治医名称",
+        "状況"
+    </sql> 
+    
+    <sql id="allColumns_DbT5912KoroshoErrorTemp">
+        "シーケンシャル番号",
+        "機能コード",
+        "識別コード",
+        "医療機関コード",
+        "主治医コード",
+        "主治医名称",
+        "状況",
+        "エラー内容"
+    </sql> 
+    
+    <resultMap id="ResultMap_DbT5912TempEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5912TempEntity" autoMapping="true">
+        <result property="シーケンシャル番号" column="シーケンシャル番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="機能コード" column="機能コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="医療機関コード" column="医療機関コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="主治医コード" column="主治医コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="主治医名称" column="主治医名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況" column="状況" />
+        <result property="主治医名称カナ" column="主治医名称カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+     </resultMap>  
+     
+     <resultMap id="ResultMap_DbT5912ErrorTempEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5912ErrorTempEntity" autoMapping="true">
+        <result property="シーケンシャル番号" column="シーケンシャル番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="機能コード" column="機能コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="医療機関コード" column="医療機関コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="主治医コード" column="主治医コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="主治医名称" column="主治医名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況" column="状況" />
+        <result property="主治医名称カナ" column="主治医名称カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="エラー内容" column="エラー内容" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+     </resultMap>  
+     
+     <select resultOrdered="true" id="get主治医情報_電算" resultMap="ResultMap_DbT5912TempEntity" fetchSize="500">
+        SELECT
+            <include refid="allColumns_DbT5912Temp" />
+        FROM
+            "DbT5912Temp"
+     </select>
+     
+     <select resultOrdered="true" id="get主治医エラー情報_電算" resultMap="ResultMap_DbT5912ErrorTempEntity" fetchSize="500">
+        SELECT
+            <include refid="allColumns_DbT5912ErrorTemp" />
+        FROM
+            "DbT5912ErrorTemp"
+     </select>
+     
+     
+     <select resultOrdered="true" id="get主治医情報_厚労省" resultMap="ResultMap_DbT5912TempEntity" fetchSize="500">
+        SELECT
+            <include refid="allColumns_DbT5912KoroshoTemp" />
+        FROM
+            "DbT5912Temp"
+     </select>
+     
+     <select resultOrdered="true" id="get主治医エラー情報_厚労省" resultMap="ResultMap_DbT5912ErrorTempEntity" fetchSize="500">
+        SELECT
+            <include refid="allColumns_DbT5912KoroshoErrorTemp" />
+        FROM
+            "DbT5912ErrorTemp"
+     </select>
+   
+   <resultMap id="ResultMap_DbT5912ChosainJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5912RelateEntity" autoMapping="true">
+        <id column="dbT5912ShujiiJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <id column="dbT5912ShujiiJoho_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id column="dbT5912ShujiiJoho_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="dbT5912Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.ResultMap_DbT5912ShujiiJohoEntity"/>
+        <association property="dbt5912TempEntity" resultMap="ResultMap_DbT5912TempEntity"/>
+    </resultMap>
+    <select resultOrdered="true" id="get主治医更新対象情報_電算" resultMap="ResultMap_DbT5912ChosainJoho" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.renkeidatatorikomi.RenkeiDataTorikomiMybitisParamter" fetchSize="500">
+        SELECT
+            <include refid="allColumns_DbT5912Temp" />,
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.allColumns_DbT5912ShujiiJoho" />
+        FROM
+            "DbT5912Temp" AS temp
+        LEFT JOIN 
+            rgdb."DbT5912ShujiiJoho"
+        ON
+            "shujiiIryokikanCode" = temp."医療機関コード"
+        AND "shujiiCode" =temp."主治医コード"
+        AND "shichosonCode" = #{市町村コード}
+    </select>
+    
+    <select resultOrdered="true" id="get主治医更新対象情報_厚労省" resultMap="ResultMap_DbT5912ChosainJoho" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.renkeidatatorikomi.RenkeiDataTorikomiMybitisParamter" fetchSize="500">
+        SELECT
+            <include refid="allColumns_DbT5912KoroshoTemp" />,
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.allColumns_DbT5912ShujiiJoho" />
+        FROM
+            "DbT5912Temp" AS temp
+        LEFT JOIN 
+            rgdb."DbT5912ShujiiJoho"
+        ON
+            "shujiiIryokikanCode" = temp."医療機関コード"
+        AND "shujiiCode" =temp."主治医コード"
+        AND "shichosonCode" = #{市町村コード}
+    </select>
+</mapper>

@@ -180,7 +180,7 @@ public class ServiceRiyohyoBeppyoBodyEditor implements IServiceRiyohyoBeppyoBody
                 method = CLS.getMethod(HOKEN1.concat(new RString(i)).toString(), RString.class);
                 method.invoke(source, get金額のカンマ編集(サービス提供票別表.get保険対象利用者負担額()));
                 method = CLS.getMethod(ZENGAKU1.concat(new RString(i)).toString(), RString.class);
-                method.invoke(source, get金額のカンマ編集(サービス提供票別表.get保険対象利用者負担額()));
+                method.invoke(source, get金額のカンマ編集(サービス提供票別表.get全額利用者負担額()));
             } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
                 Logger.getLogger(ServiceRiyohyoBeppyoSource.class.getName()).log(Level.SEVERE, null, ex);
             }
