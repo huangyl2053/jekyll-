@@ -22,7 +22,7 @@ public class NinteishinseihakkoHandler {
     private final NinteishinseihakkoDiv div;
     private static final RString 識別コード = new RString("000000001011002");
     private static final RString 被保険者番号 = new RString("2190000003");
-    private static final RString コード = new RString("DBD");
+    private static final RString コード = new RString("3");
     private static final RString コード111 = new RString("111");
     private static final RString コード112 = new RString("112");
     private static final RString コード120 = new RString("120");
@@ -65,6 +65,6 @@ public class NinteishinseihakkoHandler {
         div.getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(ShinseishoKanriNo.EMPTY, shikibetsuCode);
         div.getCcdKaigoNinteiAtenaInfo().initialize();
         div.getCcdKaigoninteiShikakuInfo().initialize(shichosonSecurityJoho.get市町村情報().get市町村コード().code市町村RString(),
-                null, null, 被保険者番号);
+                RString.EMPTY, RString.EMPTY, 被保険者番号);
     }
 }
