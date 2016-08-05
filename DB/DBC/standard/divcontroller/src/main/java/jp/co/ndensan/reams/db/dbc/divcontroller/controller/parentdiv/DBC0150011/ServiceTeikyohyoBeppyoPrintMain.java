@@ -11,8 +11,10 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0150011.Serv
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0150011.ServiceTeikyohyoBeppyoPrintMainHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -23,15 +25,20 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  * 画面設計_DBC0150011_サービス提供票別表のクラスです。
  *
- * @reamsid_L DBC-5110-010 xupeng
+ * @reamsid_L DBC-5100-010 xuxin
  */
 public class ServiceTeikyohyoBeppyoPrintMain {
 
+    private static final RString 引数 = new RString("被保険者番号なし");
     private static final RString KEY_被保険者番号 = new RString("被保険者番号");
     private static final RString KEY_対象年月 = new RString("対象年月");
     private static final RString KEY_履歴番号 = new RString("履歴番号");
     private static final RString KEY_作成年月日 = new RString("作成年月日");
     private static final RString KEY_自己作成計画年月 = new RString("自己作成計画年月");
+
+    private ServiceTeikyohyoBeppyoPrintMainHandler getHandler(ServiceTeikyohyoBeppyoPrintMainDiv div) {
+        return ServiceTeikyohyoBeppyoPrintMainHandler.of(div);
+    }
 
     /**
      * 画面初期化のメソッドます。
@@ -40,13 +47,18 @@ public class ServiceTeikyohyoBeppyoPrintMain {
      * @return ResponseData
      */
     public ResponseData<ServiceTeikyohyoBeppyoPrintMainDiv> onLoad(ServiceTeikyohyoBeppyoPrintMainDiv div) {
+//        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
+//        HihokenshaNo 被保険者番号 = new HihokenshaNo("0000000001");
+
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        // ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
-        // HihokenshaNo 被保険者番号 = new HihokenshaNo("0000000001");
         div.getCcdKaigoAtenaInfo().initialize(識別コード);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        getHandler(div).initialize(被保険者番号);
-
+        if (被保険者番号.isEmpty() || 被保険者番号 == null) {
+            throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().
+                    replace(引数.toString()));
+        } else {
+            div.getCccKaigoShiKakuKihon().initialize(被保険者番号);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -60,9 +72,9 @@ public class ServiceTeikyohyoBeppyoPrintMain {
         RDate 作成年月日 = div.getPrintShiji().getTxtSakuseiYmd().getValue();
         RYearMonth 自己作成計画年月 = div.getPrintShiji().getTxtJikoSakuseiKeikakuYm().getValue().getYearMonth();
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        //HihokenshaNo 被保険者番号 = new HihokenshaNo("0000000001");
-        //FlexibleYearMonth 対象年月 = new FlexibleYearMonth("201607");
-        //int 履歴番号 = 10;
+//        HihokenshaNo 被保険者番号 = new HihokenshaNo("0000000001");
+//        FlexibleYearMonth 対象年月 = new FlexibleYearMonth("201608");
+//        int 履歴番号 = 10;
         FlexibleYearMonth 対象年月 = ViewStateHolder.get(ViewStateKeys.対象年月, FlexibleYearMonth.class);
         int 履歴番号 = ViewStateHolder.get(ViewStateKeys.履歴番号, int.class);
         Map<RString, Object> map = new HashMap<>();
@@ -75,7 +87,4 @@ public class ServiceTeikyohyoBeppyoPrintMain {
         return ResponseData.of(dataCollection).respond();
     }
 
-    private ServiceTeikyohyoBeppyoPrintMainHandler getHandler(ServiceTeikyohyoBeppyoPrintMainDiv div) {
-        return ServiceTeikyohyoBeppyoPrintMainHandler.of(div);
-    }
 }
