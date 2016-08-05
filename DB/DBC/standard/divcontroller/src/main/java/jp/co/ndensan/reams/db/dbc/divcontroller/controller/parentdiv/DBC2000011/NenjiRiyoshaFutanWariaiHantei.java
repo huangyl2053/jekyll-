@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC2000011;
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.nenjiriyoshafutanwariaihantei.NenjiRiyoshaFutanwariaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
-import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000011.NenjiRiyoshaFutanWariaiHanteiDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
@@ -17,6 +15,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -34,12 +33,14 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
  * @reamsid_L DBC-4980-010 lihang
  */
 public class NenjiRiyoshaFutanWariaiHantei {
-     private static final RString 処理済 = new RString("処理済");
+
+    private static final RString 処理済 = new RString("処理済");
     private static final RString 再処理前 = new RString("再処理前");
     private static final RString 未処理 = new RString("未処理");
+    private static final RString 実行するボタン = new RString("btnBatchRegister");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
-    private static final RYear TZOF = new RYear("2014");
+    private final RDate 現在時刻 = RDate.getNowDate();
 
     /**
      * 画面の初期化です。
@@ -49,34 +50,35 @@ public class NenjiRiyoshaFutanWariaiHantei {
      */
     public ResponseData<NenjiRiyoshaFutanWariaiHanteiDiv> onLoad(NenjiRiyoshaFutanWariaiHanteiDiv div) {
 
-        RYear 年度 = new RYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, RDate.getNowDate(),
+        RYear 年度 = new RYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, 現在時刻,
                 SubGyomuCode.DBB介護賦課).toString());
         div.getTxtNendo().setValue(new RDate(年度.toString()));
-
-        RYear 年次負担割合処理済年度 = new RYear(DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理済年度, RDate.getNowDate(),
+        // TODO QA 1096 「イベント定義」と「初期取得」の表示の処理 回復待ち  2016/8/01まで
+        RYear 年次負担割合処理済年度 = new RYear(DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理済年度, 現在時刻,
                 SubGyomuCode.DBC介護給付));
-        RString 処理状態 = DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理状態, RDate.getNowDate(),
+        RString 処理状態 = DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理状態, 現在時刻,
                 SubGyomuCode.DBC介護給付);
         div.getTxtShoriJotai().setValue(未処理);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(実行するボタン, false);
 
         if (年次負担割合処理済年度.equals(年度)) {
             if (ONE.equals(処理状態)) {
                 div.getTxtShoriJotai().setValue(処理済);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(実行するボタン, true);
 
             } else if (TWO.equals(処理状態)) {
                 div.getTxtShoriJotai().setValue(再処理前);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(実行するボタン, false);
 
             }
         }
-        RString 月日 = DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年度終了月日, RDate.getNowDate(),
+        RString 月日 = DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年度終了月日, 現在時刻,
                 SubGyomuCode.DBC介護給付);
         RDate 基準 = new RDate(((年度.toDateString()).concat(月日)).toString());
         RDate 基準日 = 基準.plusDay(1);
-        div.getTxtKijunbi().setValue(new RDate(基準日.toString()));
-        if (年度.isBeforeOrEquals(TZOF)) {
-            throw new IllegalStateException(DbcErrorMessages.年次判定処理不可.toString());
-        }
+        div.getTxtKijunbi().setValue(基準日);
         // TODO QA 1064 「実行するボタン」と「注記２」の表示非表示の処理 回復待ち  2016/8/01まで
+
         return ResponseData.of(div).respond();
     }
 
@@ -97,7 +99,7 @@ public class NenjiRiyoshaFutanWariaiHantei {
 
         if (処理状態.equals(再処理前) && !ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(DbcQuestionMessages.年次負担割合再処理.getMessage().getCode(),
-                    DbcQuestionMessages.年次負担割合再処理.getMessage().evaluate());
+                    DbcQuestionMessages.年次負担割合再処理.getMessage().replace(div.getTxtNendo().getValue().getYear().wareki().fillType(FillType.BLANK).getYear().toString()).evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(DbcQuestionMessages.年次負担割合再処理.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
@@ -109,9 +111,6 @@ public class NenjiRiyoshaFutanWariaiHantei {
             return ResponseData.of(div).addMessage(message).respond();
 
         }
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(未処理, false);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(処理済, true);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(再処理前, false);
         return ResponseData.of(div).respond();
     }
 
@@ -124,7 +123,7 @@ public class NenjiRiyoshaFutanWariaiHantei {
     public ResponseData<NenjiRiyoshaFutanwariaiHanteiParameter> onClick_Batch(NenjiRiyoshaFutanWariaiHanteiDiv div) {
         NenjiRiyoshaFutanwariaiHanteiParameter parameter = new NenjiRiyoshaFutanwariaiHanteiParameter();
         RYear 年 = div.getTxtNendo().getValue().getYear().plusYear(1);
-        RString 月日 = DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年度終了月日, RDate.getNowDate(),
+        RString 月日 = DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年度終了月日, 現在時刻,
                 SubGyomuCode.DBC介護給付);
         parameter.set対象年度(new FlexibleYear(div.getTxtNendo().getValue().getYear().toDateString()));
         parameter.set処理区分(SaiShoriKubun.toValue(ONE));
