@@ -116,6 +116,25 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
     }
 
     /**
+     * 国保連インターフェース管理を審査年月取得返します。
+     *
+     * @param 交換情報識別番号 RString
+     * @return DbT3104KokuhorenInterfaceKanriEntity
+     */
+    @Transaction
+    public DbT3104KokuhorenInterfaceKanriEntity select国保連インターフェース管理処理が実行された最新のデータ(RString 交換情報識別番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3104KokuhorenInterfaceKanri.class).
+                where(and(
+                                eq(kokanShikibetsuNo, 交換情報識別番号),
+                                eq(shoriJotaiKubun, ShoriJotaiKubun.終了.getコード()))).
+                order(by(DbT3104KokuhorenInterfaceKanri.shoriYM, Order.DESC)).limit(1)
+                .toObject(DbT3104KokuhorenInterfaceKanriEntity.class);
+    }
+
+    /**
      * 国保連インターフェース管理を全件返します。
      *
      * @return List<DbT3104KokuhorenInterfaceKanriEntity>
