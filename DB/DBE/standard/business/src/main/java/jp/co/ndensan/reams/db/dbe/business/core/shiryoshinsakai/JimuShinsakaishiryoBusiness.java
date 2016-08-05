@@ -23,7 +23,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 介護認定審査対象者一覧表情報のBusinessの編集クラスです。
@@ -32,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class JimuShinsakaishiryoBusiness {
 
+    private static final int LENGTH_5 = 5;
     private final IinShinsakaiIinJohoProcessParameter paramter;
     private final ShinsakaiTaiyosyaJohoEntity johoEntity;
     private final List<ShinsakaiIinJohoEntity> shinsakaiIinJohoList;
@@ -312,10 +315,9 @@ public class JimuShinsakaishiryoBusiness {
     private RString get開催年月日() {
         RStringBuilder 審査会開催年月日 = new RStringBuilder();
         審査会開催年月日.append(パターン33(paramter.getShinsakaiKaisaiYoteiYMD()));
-        審査会開催年月日.append(paramter.getShinsakaiKaishiYoteiTime().substring(0, 2));
-        審査会開催年月日.append(new RString("時"));
-        審査会開催年月日.append(paramter.getShinsakaiKaishiYoteiTime().substring(2));
-        審査会開催年月日.append(new RString("分"));
+        List<RString> 時分 = paramter.getShinsakaiKaishiYoteiTime().padZeroToLeft(LENGTH_5).split(":");
+        審査会開催年月日.append(RTime.of(Integer.parseInt(時分.get(0).toString()),
+                Integer.parseInt(時分.get(1).toString())).toFormattedTimeString(DisplayTimeFormat.HH時mm分));
         return 審査会開催年月日.toRString();
     }
 
