@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
+import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
@@ -81,6 +82,10 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     private static final RString 処理枝番 = new RString("0001");
     private static final RString FORMAT_補00 = new RString("00%s");
     private static final RString 処理枝番_0001 = new RString("0001");
+    private static final RString 年度_0000 = new RString("0000");
+    private static final RString 処理枝番_01 = new RString("01");
+    private static final RString 処理枝番_02 = new RString("02");
+    private static final RString 処理枝番_03 = new RString("03");
 
     /**
      * 主キーで処理日付管理マスタを取得します。
@@ -1942,5 +1947,33 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 ).order(by(DbT7022ShoriDateKanri.nendo, Order.DESC)).limit(1).
                 toObject(DbT7022ShoriDateKanriEntity.class);
 
+    }
+    
+    /**
+     * 前回対象日を取得する。
+     *
+     * @param 市町村コード LasdecCode
+     * @return List<DbT7022ShoriDateKanriEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT7022ShoriDateKanriEntity> select前回対象日(LasdecCode 市町村コード) throws NullPointerException {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        List<RString> 処理枝番List = new ArrayList<>();
+        処理枝番List.add(処理枝番_01);
+        処理枝番List.add(処理枝番_02);
+        処理枝番List.add(処理枝番_03);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBC介護給付),
+                                eq(shichosonCode, 市町村コード),
+                                eq(shoriName, ShoriName.高額サービス費支給決定通知書作成.get名称()),
+                                in(shoriEdaban, 処理枝番List),
+                                eq(nendo, 年度_0000),
+                                eq(nendoNaiRenban, 年度内連番_0))).
+                order(by(shoriEdaban, Order.ASC)).
+                toList(DbT7022ShoriDateKanriEntity.class);
     }
 }

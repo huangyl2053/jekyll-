@@ -794,3 +794,9 @@ dbc/db/dbc/YoguKonyuhiShikyuShinseiPnlTotal/onSelectByModifyButton
 dbc/db/dbc/YoguKonyuhiShikyuShinseiPnlTotal/onSelectBySelectButton
 dbc/db/dbc/YoguKonyuhiShikyuShinseiShinsazumiSearchPanel/onClick_btnSearchMishinsa
 dbc/db/dbc/YoguKonyuhiShikyuShinseiShinsazumiSearchPanel/onLoad
+dbc/db/dbc/ShikyuketteituchishoSakuseiJyoken/onClick_batch1
+dbc/db/dbc/ShikyuketteituchishoSakuseiJyoken/onClick_batch2
+dbc/db/dbc/ShikyuketteituchishoSakuseiJyoken/onClick_btnExcute
+dbc/db/dbc/ShikyuketteituchishoSakuseiJyoken/onClick_radHizukeSentaku
+dbc/db/dbc/ShikyuketteituchishoSakuseiJyoken/onClick_radKetteibiIkkatsuKoshinKubun
+dbc/db/dbc/ShikyuketteituchishoSakuseiJyoken/onLoad
