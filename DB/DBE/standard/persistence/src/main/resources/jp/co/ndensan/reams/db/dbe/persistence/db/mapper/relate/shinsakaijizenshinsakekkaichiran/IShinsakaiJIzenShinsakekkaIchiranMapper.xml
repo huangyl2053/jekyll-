@@ -108,6 +108,7 @@
             T5508."shinsakaiIinCode",
             T5508."shinsakaiOrder",
             T5508."nijiHanteiKekkaCode",
+            T5508."yukokikan",
             T5101."koroshoIfShikibetsuCode"
         FROM rgdb."DbT5508ShinsakaiJizenKekkaJoho" AS T5508
         INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" AS T5502
