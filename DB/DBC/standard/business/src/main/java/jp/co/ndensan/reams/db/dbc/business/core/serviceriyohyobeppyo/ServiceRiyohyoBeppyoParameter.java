@@ -16,9 +16,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 
 /**
- * 帳票設計_DBC0150011_1_サービス提供票別表 Parameter
+ * 帳票設計_DBC0150011_1_サービス提供票別表のParameterクラスです。
  *
- * @reamsid_L DBC-5110-030 xupeng
+ * @reamsid_L DBC-5100-010 xuxin
  */
 @lombok.Getter
 @lombok.Setter
