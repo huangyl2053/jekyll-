@@ -8,12 +8,13 @@ package jp.co.ndensan.reams.db.dbe.business.core.basic;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5032ShujiiIkenshoHoshuTankaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ShujiiIkenshoHoshuTanka}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBE-9999-021 dingyi
  */
 public class ShujiiIkenshoHoshuTankaBuilder {
 
@@ -34,44 +35,6 @@ public class ShujiiIkenshoHoshuTankaBuilder {
         this.entity = entity.clone();
         this.id = id;
 
-    }
-
-//TODO Key項目のsetterメソッドは削除してください。
-//TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
-    /**
-     * 在宅施設区分を設定します。
-     *
-     * @param 在宅施設区分 在宅施設区分
-     * @return {@link ShujiiIkenshoHoshuTankaBuilder}
-     */
-    public ShujiiIkenshoHoshuTankaBuilder set在宅施設区分(Code 在宅施設区分) {
-        requireNonNull(在宅施設区分, UrSystemErrorMessages.値がnull.getReplacedMessage("在宅施設区分"));
-        entity.setZaitakuShisetsuKubun(在宅施設区分);
-        return this;
-    }
-
-    /**
-     * 意見書作成回数区分を設定します。
-     *
-     * @param 意見書作成回数区分 意見書作成回数区分
-     * @return {@link ShujiiIkenshoHoshuTankaBuilder}
-     */
-    public ShujiiIkenshoHoshuTankaBuilder set意見書作成回数区分(Code 意見書作成回数区分) {
-        requireNonNull(意見書作成回数区分, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書作成回数区分"));
-        entity.setIkenshoSakuseiKaisuKubun(意見書作成回数区分);
-        return this;
-    }
-
-    /**
-     * 開始年月を設定します。
-     *
-     * @param 開始年月 開始年月
-     * @return {@link ShujiiIkenshoHoshuTankaBuilder}
-     */
-    public ShujiiIkenshoHoshuTankaBuilder set開始年月(FlexibleYearMonth 開始年月) {
-        requireNonNull(開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("開始年月"));
-        entity.setKaishiYM(開始年月);
-        return this;
     }
 
     /**
