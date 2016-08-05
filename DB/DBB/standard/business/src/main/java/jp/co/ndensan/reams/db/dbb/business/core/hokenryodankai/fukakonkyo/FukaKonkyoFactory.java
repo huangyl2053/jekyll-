@@ -45,7 +45,7 @@ public class FukaKonkyoFactory {
 
         List<KazeiKubun> 課税区分リスト = new ArrayList<>();
         for (SetaiinShotoku 世帯員 : param.get世帯員所得情報List()) {
-            if (世帯員.get課税区分_住民税減免前() != null && 世帯員.get課税区分_住民税減免前().isEmpty()) {
+            if (世帯員.get課税区分_住民税減免前() != null && !世帯員.get課税区分_住民税減免前().isEmpty()) {
                 課税区分リスト.add(KazeiKubun.toValue(世帯員.get課税区分_住民税減免前()));
             }
             if (HonninKubun.本人.getCode().equals(世帯員.get本人区分())) {
