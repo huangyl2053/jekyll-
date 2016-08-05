@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain;
+package jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KohifutanshaGetFileProcessParameter implements IBatchProcessParameter {
+public class KokuhorenkyotsuGetFileProcessParameter implements IBatchProcessParameter {
 
     private RString 交換情報識別番号;
     private RString ファイル格納フォルダ名;

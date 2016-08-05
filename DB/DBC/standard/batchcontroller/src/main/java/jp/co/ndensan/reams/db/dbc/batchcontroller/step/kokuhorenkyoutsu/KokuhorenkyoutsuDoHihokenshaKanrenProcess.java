@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120170;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu;
 
 import jp.co.ndensan.reams.db.dbc.service.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuHihokansyaKanrenManager;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
  *
  * @reamsid_L DBC-0980-420 zhangrui
  */
-public class KohifutanshaDoHihokenshaKanrenProcess extends SimpleBatchProcessBase {
+public class KokuhorenkyoutsuDoHihokenshaKanrenProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void process() {

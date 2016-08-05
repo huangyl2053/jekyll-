@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain;
+package jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu;
 
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -19,10 +18,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KohifutanshaDeleteReveicedFileProcessParameter implements IBatchProcessParameter {
+public class KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter implements IBatchProcessParameter {
 
     private FlexibleYearMonth 処理年月;
-    private RString 保存先フォルダ;
-    private List<SharedFileEntryDescriptor> エントリ情報List;
+    private RString 交換情報識別番号;
+    private FlexibleYearMonth 処理対象年月;
+    private int レコード件数合計;
+    private List<RString> fileNameList;
 
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain;
+package jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu;
 
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KohifutanshaDoShoriKekkaListSakuseiProcessParameter implements IBatchProcessParameter {
+public class KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter implements IBatchProcessParameter {
 
     private KokuhorenJoho_TorikomiErrorListType エラーリストタイプ;
 

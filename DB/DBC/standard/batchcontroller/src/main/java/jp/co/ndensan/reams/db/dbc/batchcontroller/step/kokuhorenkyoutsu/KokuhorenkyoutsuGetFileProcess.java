@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120170;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu;
 
 import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetReturnEntity;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaGetFileProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuGetFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetManager;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
@@ -17,14 +17,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-0980-420 zhangrui
  */
-public class KohifutanshaGetFileProcess extends SimpleBatchProcessBase {
+public class KokuhorenkyoutsuGetFileProcess extends SimpleBatchProcessBase {
 
     /**
      * returnEntity
      */
     public static final RString PARAMETER_OUT_RETURNENTITY;
 
-    private KohifutanshaGetFileProcessParameter parameter;
+    private KokuhorenkyotsuGetFileProcessParameter parameter;
 
     static {
         PARAMETER_OUT_RETURNENTITY = new RString("returnEntity");

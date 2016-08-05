@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-0980-421 surun -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper">
+    <!--被保険者一時テーブルを作成します-->
+    <insert id="create被保険者一時TBL">
+        CREATE TEMP TABLE "DbWT0001Hihokensha"
+        (
+        "meisaiRenban" smallint,
+        "shoHokenshaNo" rgdb."DbUDD003HokenshaNo",
+        "orgHihokenshaNo" rgdb."DbUDD002HihokenshaNo",
+        "serviceTeikyoYmd" rshare."UDD015YMD",
+        "orgHihokenshaKanaShimei" character varying(40),   
+        "orgHihokenshaShimei" character varying(40),
+        "oldShichosonCode" rshare."UDD023LasdecCode",
+        "henkanHihokenshaNo" rgdb."DbUDD002HihokenshaNo",
+        "hihokenshaNo" rgdb."DbUDD002HihokenshaNo",
+        "shichosonCode" rshare."UDD023LasdecCode",
+        "KannaiKangaiKubun" character varying(40),
+        "yubinNo" character varying(40),
+        "choikiCode" character varying(40),
+        "gyoseikuCode" character varying(40),
+        "gyoseikuMei" character varying(40),
+        "jusho" character varying(40),
+        "banchi" character varying(40),
+        "katagaki" character varying(40),
+        "kanaMeisho" character varying(40),
+        "meisho" character varying(40),
+        "shimei50onKana" character varying(40),
+        "shikakuShutokuYmd" rshare."UDD015YMD",
+        "shikakuShutokuJiyuCode" character varying(2),
+        "shikakuSoshitsuYmd" rshare."UDD015YMD",
+        "shikakuSoshitsuJiyuCode" character varying(2),
+        "setaiShuyakuNo" character varying(40),
+        "shikibetsuCode" rshare."UDD001ShikibetsuCode",
+        CONSTRAINT "DbWT0001_pkey" PRIMARY KEY ("meisaiRenban")
+        )
+    </insert>
+    
+    <!--被保険者一時テーブルに登録します-->
+    <insert id="被保険者一時TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity">
+        INSERT INTO "DbWT0001Hihokensha"
+        VALUES 
+        (
+        #{連番},
+        #{証記載保険者番号},
+        #{被保険者番号},
+        #{サービス提供年月末日},
+        #{被保険者カナ氏名},
+        #{被保険者氏名},
+        #{旧市町村コード},
+        #{変換被保険者番号},
+        #{登録被保険者番号},
+        #{市町村コード},
+        #{管内管外区分},
+        #{郵便番号},
+        #{町域コード},
+        #{行政区コード},
+        #{行政区名},
+        #{住所},
+        #{番地},
+        #{方書},
+        #{宛名カナ名称},
+        #{宛名名称},
+        #{氏名50音カナ},
+        #{資格取得日},
+        #{資格取得事由コード},
+        #{資格喪失日},
+        #{資格喪失事由コード},
+        #{世帯集約番号},
+        #{識別コード}
+        )
+    </insert>
+    
+    <!--処理結果リスト一時テーブルを作成します-->
+    <insert id="create処理結果リスト一時TBL">
+        CREATE TEMP TABLE "DbWT0002KokuhorenTorikomiError"
+        (
+        "errorKubun" character varying(40),
+        "shoHokanehshaNo" rgdb."DbUDD003HokenshaNo",
+        "hihokenshaNo" rgdb."DbUDD002HihokenshaNo",
+        "key1" character varying(40),
+        "key2" character varying(40),
+        "key3" character varying(40),
+        "key4" character varying(40),
+        "key5" character varying(40),
+        "hihokenshaKanaShimei" character varying(40),
+        "hihokenshaShimei" character varying(40),
+        "biko" character varying(40)
+        )
+    </insert>
+    
+    <!--処理結果リスト一時TBLに登録します-->
+    <insert id="処理結果リスト一時TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity">
+        INSERT INTO "DbWT0002KokuhorenTorikomiError" 
+        ("errorKubun", "shoHokanehshaNo", "hihokenshaNo", "key1", "key2", "key3", "key4", "key5", "hihokenshaKanaShimei", "hihokenshaShimei", "biko")
+        VALUES 
+        (
+        #{エラー区分},
+        #{証記載保険者番号},
+        #{被保険者番号},
+        #{キー1},
+        #{キー2},
+        #{キー3},
+        #{キー4},
+        #{キー5},
+        #{被保険者カナ氏名},
+        #{被保険者氏名},
+        #{備考}
+        )
+    </insert>
+    
+    <select resultOrdered="true" id="get被保険者一時TBLの全件" resultMap="resultMap_DbWT0001HihokenshaTempEntity" fetchSize="500">
+        SELECT <include refid="allColumns_DbWT0001Hihokensha"/>
+        FROM "DbWT0001Hihokensha" as TEMP
+    </select>
+    
+    <select resultOrdered="true" id="get処理結果リスト一時TBLの全件" resultMap="resultMap_ShoriKekkaList" fetchSize="500">
+        SELECT *
+        FROM "DbWT0002KokuhorenTorikomiError"
+        ORDER BY "errorKubun" ASC,
+        "shoHokanehshaNo" ASC,
+        "hihokenshaNo" ASC,
+        "key1" ASC,
+        "key2" ASC,
+        "key3" ASC,
+        "key4" ASC,
+        "key5" ASC
+    </select>
+    
+    <resultMap id="resultMap_ShoriKekkaList" type="jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity" autoMapping="true">
+        <result property="エラー区分" column="errorKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者番号" column="shoHokanehshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="キー1" column="key1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="キー2" column="key2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="キー3" column="key3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="キー4" column="key4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="キー5" column="key5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者カナ氏名" column="hihokenshaKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者氏名" column="hihokenshaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="備考" column="biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <!--テーブルHihokenshaItijiEntityの項目をDbWT0001HihokenshaTempEntityの項目にマッピングします。-->
+    <resultMap id="resultMap_DbWT0001HihokenshaTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity" autoMapping="true">
+        <id property="連番" column="dbWT0001HihokenshaTemp_meisaiRenban" />
+        <result property="証記載保険者番号" column="dbWT0001HihokenshaTemp_shoHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="被保険者番号" column="dbWT0001HihokenshaTemp_orgHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="サービス提供年月末日" column="dbWT0001HihokenshaTemp_serviceTeikyoYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="被保険者カナ氏名" column="dbWT0001HihokenshaTemp_orgHihokenshaKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者氏名" column="dbWT0001HihokenshaTemp_orgHihokenshaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="旧市町村コード" column="dbWT0001HihokenshaTemp_oldShichosonCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="変換被保険者番号" column="dbWT0001HihokenshaTemp_henkanHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="登録被保険者番号" column="dbWT0001HihokenshaTemp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="市町村コード" column="dbWT0001HihokenshaTemp_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="管内管外区分" column="dbWT0001HihokenshaTemp_kannaiKangaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="郵便番号" column="dbWT0001HihokenshaTemp_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="町域コード" column="dbWT0001HihokenshaTemp_choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="行政区コード" column="dbWT0001HihokenshaTemp_gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="行政区名" column="dbWT0001HihokenshaTemp_gyoseikuMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所" column="dbWT0001HihokenshaTemp_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="番地" column="dbWT0001HihokenshaTemp_banchi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="方書" column="dbWT0001HihokenshaTemp_katagaki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="宛名カナ名称" column="dbWT0001HihokenshaTemp_kanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="宛名名称" column="dbWT0001HihokenshaTemp_meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="氏名50音カナ" column="dbWT0001HihokenshaTemp_shimei50onKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格取得日" column="dbWT0001HihokenshaTemp_shikakuShutokuYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="資格取得事由コード" column="dbWT0001HihokenshaTemp_shikakuShutokuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="資格喪失日" column="dbWT0001HihokenshaTemp_shikakuSoshitsuYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"  />
+        <result property="資格喪失事由コード" column="dbWT0001HihokenshaTemp_shikakuSoshitsuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="世帯集約番号" column="dbWT0001HihokenshaTemp_setaiShuyakuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="識別コード" column="dbWT0001HihokenshaTemp_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <sql id="allColumns_DbWT0001Hihokensha">
+        TEMP."meisaiRenban" as dbWT0001HihokenshaTemp_meisaiRenban,
+        TEMP."shoHokenshaNo" as dbWT0001HihokenshaTemp_shoHokenshaNo,
+        TEMP."orgHihokenshaNo" as dbWT0001HihokenshaTemp_orgHihokenshaNo,
+        TEMP."serviceTeikyoYmd" as dbWT0001HihokenshaTemp_serviceTeikyoYmd,
+        TEMP."orgHihokenshaKanaShimei" as dbWT0001HihokenshaTemp_orgHihokenshaKanaShimei,
+        TEMP."orgHihokenshaShimei" as dbWT0001HihokenshaTemp_orgHihokenshaShimei,
+        TEMP."oldShichosonCode" as dbWT0001HihokenshaTemp_oldShichosonCode,
+        TEMP."henkanHihokenshaNo" as dbWT0001HihokenshaTemp_henkanHihokenshaNo,
+        TEMP."hihokenshaNo" as dbWT0001HihokenshaTemp_hihokenshaNo,
+        TEMP."shichosonCode" as dbWT0001HihokenshaTemp_shichosonCode,
+        TEMP."KannaiKangaiKubun" as dbWT0001HihokenshaTemp_kannaiKangaiKubun,
+        TEMP."yubinNo" as dbWT0001HihokenshaTemp_yubinNo,
+        TEMP."choikiCode" as dbWT0001HihokenshaTemp_choikiCode,
+        TEMP."gyoseikuCode" as dbWT0001HihokenshaTemp_gyoseikuCode,
+        TEMP."gyoseikuMei" as dbWT0001HihokenshaTemp_gyoseikuMei,
+        TEMP."jusho" as dbWT0001HihokenshaTemp_jusho,
+        TEMP."banchi" as dbWT0001HihokenshaTemp_banchi,
+        TEMP."katagaki" as dbWT0001HihokenshaTemp_katagaki,
+        TEMP."kanaMeisho" as dbWT0001HihokenshaTemp_kanaMeisho,
+        TEMP."meisho" as dbWT0001HihokenshaTemp_meisho,
+        TEMP."shimei50onKana" as dbWT0001HihokenshaTemp_shimei50onKana,
+        TEMP."shikakuShutokuYmd" as dbWT0001HihokenshaTemp_shikakuShutokuYmd,
+        TEMP."shikakuShutokuJiyuCode" as dbWT0001HihokenshaTemp_shikakuShutokuJiyuCode,
+        TEMP."shikakuSoshitsuYmd" as dbWT0001HihokenshaTemp_shikakuSoshitsuYmd,
+        TEMP."shikakuSoshitsuJiyuCode" as dbWT0001HihokenshaTemp_shikakuSoshitsuJiyuCode,
+        TEMP."setaiShuyakuNo" as dbWT0001HihokenshaTemp_setaiShuyakuNo,
+        TEMP."shikibetsuCode" as dbWT0001HihokenshaTemp_shikibetsuCode
+    </sql>
+    
+</mapper>

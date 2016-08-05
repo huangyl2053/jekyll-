@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.DBC120010;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc120010;
 
 import java.util.HashMap;
 import java.util.Map;
