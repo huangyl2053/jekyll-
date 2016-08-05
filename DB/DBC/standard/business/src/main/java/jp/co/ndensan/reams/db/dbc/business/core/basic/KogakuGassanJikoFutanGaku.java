@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 高額合算自己負担額を管理するクラスです。
+ *
+ * @reamsid_L DBC-4800-010 huzongcheng
  */
 public class KogakuGassanJikoFutanGaku
         extends ModelBase<KogakuGassanJikoFutanGakuIdentifier, DbT3070KogakuGassanJikoFutanGakuEntity, KogakuGassanJikoFutanGaku>
@@ -596,6 +598,15 @@ public class KogakuGassanJikoFutanGaku
     }
 
     /**
+     * リアル補正実施年月日を返します。
+     *
+     * @return リアル補正実施年月日
+     */
+    public FlexibleDate getリアル補正実施年月日() {
+        return entity.getRealHoseiJissiYMD();
+    }
+
+    /**
      * {@link DbT3070KogakuGassanJikoFutanGakuEntity}のクローンを返します。
      *
      * @return {@link DbT3070KogakuGassanJikoFutanGakuEntity}のクローン
@@ -645,7 +656,7 @@ public class KogakuGassanJikoFutanGaku
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 総合事業対象者のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-4800-010 huzongcheng
  */
 public class DbT3105SogoJigyoTaishoshaDac implements ISaveable<DbT3105SogoJigyoTaishoshaEntity> {
 
@@ -81,5 +83,25 @@ public class DbT3105SogoJigyoTaishoshaDac implements ISaveable<DbT3105SogoJigyoT
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 被保険者番号より事業対象者を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return DbT3105SogoJigyoTaishoshaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3105SogoJigyoTaishoshaEntity> selectBy被保険者番号(
+            HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3105SogoJigyoTaishosha.class).
+                where(eq(hihokenshaNo, 被保険者番号)).
+                toList(DbT3105SogoJigyoTaishoshaEntity.class);
     }
 }
