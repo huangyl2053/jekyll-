@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoTaishosha;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3105SogoJigyoTaishoshaDac;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 総合事業対象者を管理するクラスです。
+ *
+ * @reamsid_L DBC-4800-010 huzongcheng
  */
 public class SogoJigyoTaishoshaManager {
 
@@ -73,6 +75,24 @@ public class SogoJigyoTaishoshaManager {
         List<SogoJigyoTaishosha> businessList = new ArrayList<>();
 
         for (DbT3105SogoJigyoTaishoshaEntity entity : dac.selectAll()) {
+            entity.initializeMd5();
+            businessList.add(new SogoJigyoTaishosha(entity));
+        }
+
+        return businessList;
+    }
+
+    /**
+     * 被保険者番号より事業対象者を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return List<SogoJigyoTaishosha>
+     */
+    @Transaction
+    public List<SogoJigyoTaishosha> get総合事業対象者情報(HihokenshaNo 被保険者番号) {
+        List<SogoJigyoTaishosha> businessList = new ArrayList<>();
+
+        for (DbT3105SogoJigyoTaishoshaEntity entity : dac.selectBy被保険者番号(被保険者番号)) {
             entity.initializeMd5();
             businessList.add(new SogoJigyoTaishosha(entity));
         }
