@@ -43,7 +43,7 @@ import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
- * バッチ設計_DBE491001_日次進捗データCSVを作成Processクラスです。
+ * バッチ設計_DBE309001_一次判定IF作成CSVを作成Processクラスです。
  *
  * @reamsid_L DBE-1470-021 wanghui
  */
@@ -63,8 +63,8 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
     @Override
     protected void initialize() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        //RString 一次判定IF文字コードファイル名 = DbBusinessConfig.get(ConfigNameDBE.一次判定IF文字コード, RDate.getNowDate());
-        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("NCI221.CSV"));
+        RString 一次判定IF文字コードファイル名 = DbBusinessConfig.get(ConfigNameDBE.一次判定IF文字コード, RDate.getNowDate());
+        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), 一次判定IF文字コードファイル名);
         RString イメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate());
         paramter.setイメージ区分(イメージ区分);
     }
@@ -94,7 +94,7 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
 
     @Override
     protected void process(IchijiHanteizumIfOutputRelateEntity entity) {
-        //getファイル名(entity);
+        getファイル名(entity);
         eucCsvWriterJunitoJugo.writeLine(business.setEucCsvEntity(entity));
         new NinteiChosaDataOutputResult().getアクセスログ(entity.getShinseishoKanriNo());
         kaigoJuminhyoEntityList.add(entity);
