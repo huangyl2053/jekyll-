@@ -29,5 +29,15 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbzTestHelper</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbzPersistence</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbzBusiness</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>
