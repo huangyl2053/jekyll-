@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTuikaS
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTuikaSiryoDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTuutishoDataSakuseiProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.ShinsakaiKaisaiYoteiJohoUpdateProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.SonotaJohoDataSakuseiA3Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.SonotaJohoDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.shiryoshinsakai.ShiryoShinsakaiBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -253,10 +255,14 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
     @Step(委員_その他資料)
     protected IBatchFlowCommand createSonotaJohoData() {
         if (選択.equals(getParameter().getShuturyokuSutairu())) {
-            return loopBatch(IinSonotaJohoDataSakuseiA4Process.class)
+            loopBatch(IinSonotaJohoDataSakuseiA4Process.class)
+                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
+            return loopBatch(SonotaJohoDataSakuseiA4Process.class)
                     .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
         } else {
-            return loopBatch(IinSonotaJohoDataSakuseiA3Process.class)
+            loopBatch(IinSonotaJohoDataSakuseiA3Process.class)
+                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
+            return loopBatch(SonotaJohoDataSakuseiA3Process.class)
                     .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
         }
     }
