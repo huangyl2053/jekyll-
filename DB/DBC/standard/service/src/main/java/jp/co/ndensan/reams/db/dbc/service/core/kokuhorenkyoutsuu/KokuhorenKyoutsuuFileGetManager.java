@@ -7,8 +7,10 @@ package jp.co.ndensan.reams.db.dbc.service.core.kokuhorenkyoutsuu;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetReturnEntity;
@@ -35,6 +37,7 @@ public class KokuhorenKyoutsuuFileGetManager {
     private static final RString MSG_交換情報識別番号 = new RString("交換情報識別番号");
     private static final RString MSG_ファイル格納フォルダ名 = new RString("ファイル格納フォルダ名");
     private static final RString PREFIX = new RString("1_");
+    private static final RString FILTER = new RString("1_*.csv");
 
     /**
      * 国保連情報取込共通処理（ファイル取得）のコンストラクタ。
@@ -76,7 +79,7 @@ public class KokuhorenKyoutsuuFileGetManager {
                     .replace(PREFIX.concat(交換情報識別番号).toString()).toString());
         }
         List<SharedFileEntryDescriptor> fileEntryList = new ArrayList<>();
-        List<RString> fileNameList = new ArrayList<>();
+        Set<RString> fileNameSet = new HashSet<>();
         for (UzT0885SharedFileEntryEntity entity : entityList) {
             FilesystemPath localFilePath = FilesystemPath.fromString(ファイル格納フォルダ名);
             ReadOnlySharedFileEntryDescriptor ro_sfed
@@ -86,16 +89,18 @@ public class KokuhorenKyoutsuuFileGetManager {
             try {
                 FilesystemPath 保存先フォルダのパス = SharedFile.copyToLocal(ro_sfed, localFilePath);
                 result.set保存先フォルダのパス(保存先フォルダのパス);
-                Collections.addAll(fileNameList, Directory.getFiles(保存先フォルダのパス.toRString()));
+                Collections.addAll(fileNameSet, Directory.getFiles(保存先フォルダのパス.toRString(), FILTER, false));
             } catch (Exception ex) {
                 Logger.getLogger(KokuhorenKyoutsuuFileGetManager.class.getName()).log(Level.SEVERE, null, ex);
                 throw new BatchInterruptedException(ex.getMessage());
             }
         }
-        if (null == fileNameList || fileNameList.isEmpty()) {
+        if (null == fileNameSet || fileNameSet.isEmpty()) {
             throw new BatchInterruptedException(DbcErrorMessages.取込対象ファイルが存在しない.getMessage()
                     .replace(PREFIX.concat(交換情報識別番号).toString()).toString());
         }
+        List<RString> fileNameList = new ArrayList<>();
+        fileNameList.addAll(fileNameSet);
         result.setEntityList(fileEntryList);
         result.setFileNameList(fileNameList);
         return result;
