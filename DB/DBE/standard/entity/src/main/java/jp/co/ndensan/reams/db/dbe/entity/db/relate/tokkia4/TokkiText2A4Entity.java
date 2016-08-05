@@ -29,9 +29,6 @@ public class TokkiText2A4Entity {
     private List<TokkiTextEntity> 短冊情報リスト;
     private RString 特記パターン;
     private RString 特記事項テキスト_イメージ区分;
-    private RString 概況特記テキスト_イメージ区分;
-    private RString 概況調査の特記事項テキスト;
-    private RString 概況調査の特記事項イメージ;
     private boolean is委員用;
     private RString 特記事項Img;
     private RString 特記事項Text;
