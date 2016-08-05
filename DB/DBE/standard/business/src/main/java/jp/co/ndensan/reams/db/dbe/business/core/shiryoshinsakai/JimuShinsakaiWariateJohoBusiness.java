@@ -131,7 +131,7 @@ public class JimuShinsakaiWariateJohoBusiness {
      * @return 右の主治医意見書イメージ
      */
     public RString get右の主治医意見書イメージ() {
-        return 共有ファイル2を引き出す(entity.getImageSharedFileId(), ファイルID_E0002);
+        return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0002);
     }
 
     /**
@@ -152,18 +152,10 @@ public class JimuShinsakaiWariateJohoBusiness {
         return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0002);
     }
 
-    private RString 共有ファイルを引き出す(RDateTime イメージID, RString イメージID01) {
+    private RString 共有ファイルを引き出す(RDateTime イメージID, RString sharedFileName) {
         RString imagePath = RString.EMPTY;
         if (イメージID != null) {
-            imagePath = getFilePath(イメージID, イメージID01);
-        }
-        return imagePath;
-    }
-
-    private RString 共有ファイル2を引き出す(RDateTime イメージID, RString イメージID01) {
-        RString imagePath = RString.EMPTY;
-        if (イメージID != null) {
-            imagePath = getFilePath(イメージID, イメージID01);
+            imagePath = getFilePath(イメージID, sharedFileName);
         }
         return imagePath;
     }

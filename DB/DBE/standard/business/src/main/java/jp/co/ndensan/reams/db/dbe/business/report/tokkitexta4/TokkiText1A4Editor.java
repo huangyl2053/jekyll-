@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.tokkitexta4;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitexta4.TokkiText1A4Entity;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.TokkiText1A4Business;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkitexta4.TokkiText1A4ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -29,7 +29,7 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
 
     private static final RString 全面 = new RString("1");
     private static final RString 短冊 = new RString("2");
-    private final TokkiText1A4Entity item;
+    private final TokkiText1A4Business item;
     private final int index;
     private final List<RString> 特記事項List;
     private static final int INT_3 = 3;
@@ -52,7 +52,7 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
      * @param index Index
      * @param 特記事項List List<RString>
      */
-    protected TokkiText1A4Editor(TokkiText1A4Entity item, List<RString> 特記事項List, int index) {
+    protected TokkiText1A4Editor(TokkiText1A4Business item, List<RString> 特記事項List, int index) {
         this.item = item;
         this.index = index;
         this.特記事項List = 特記事項List;
