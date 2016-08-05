@@ -51,46 +51,30 @@ public class ImageDisplay {
      */
     public ResponseData<ImageDisplayDiv> onLoad(ImageDisplayDiv div) {
         ImagekanriJoho イメージ情報 = ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class);
+        if (イメージ情報.getイメージ共有ファイルID() == null) {
+            ValidationMessageControlPairs validPairs = getValidationHandler().イメージ存在チェック();
+            this.get_メッセージ(div, validPairs);
+        }
         RString イメージ区分 = ViewStateHolder.get(ViewStateKeys.イメージ区分, RString.class);
         ReadOnlySharedFileEntryDescriptor descriptor = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(
                 イメージ情報.get証記載保険者番号().concat(イメージ情報.get被保険者番号())),
                 イメージ情報.getイメージ共有ファイルID());
         List<RString> 存在したイメージファイル名 = YokaigoninteiimagesakujoManager.createInstance().get存在したイメージファイル名(descriptor);
-        if (イメージ情報.getイメージ共有ファイルID() == null) {
-            ValidationMessageControlPairs validPairs = getValidationHandler().イメージ存在チェック();
-            this.get_メッセージ(div, validPairs);
-        }
-        if (イメージ区分_1.equals(イメージ区分) && getHandler().is調査票概況のイメージファイルが存在しない(存在したイメージファイル名)) {
-            getValidationHandler().調査票概況イメージファイル存在チェック();
-            ValidationMessageControlPairs validPairs = getValidationHandler().調査票概況イメージファイル存在チェック();
-            this.get_メッセージ(div, validPairs);
-        } else if (イメージ区分_2.equals(イメージ区分) && イメージファイルが存在区分_存在しない == getHandler().
-                getその他資料のイメージファイルが存在区分(存在したイメージファイル名)) {
-            ValidationMessageControlPairs validPairs = getValidationHandler().その他資料イメージファイル存在チェック();
-            this.get_メッセージ(div, validPairs);
-        } else if (イメージ区分_3.equals(イメージ区分) && イメージファイルが存在区分_存在しない == getHandler().
-                get主治医意見書のイメージファイルが存在区分(存在したイメージファイル名)) {
-            ValidationMessageControlPairs validPairs = getValidationHandler().主治医意見書イメージファイル存在チェック();
-            this.get_メッセージ(div, validPairs);
-        }
+        this.チェック(イメージ区分, div, 存在したイメージファイル名);
         HashMap<Integer, List<RString>> 初期化のイメージ = this.getFilePath(イメージ区分);
         ViewStateHolder.put(ViewStateKeys.イメージ情報_存在, 初期化のイメージ);
         if (!初期化のイメージ.isEmpty()) {
             RString 初期化のイメージ_1 = 初期化のイメージ.get(1).get(0);
-            RString 初期化のイメージまで = 初期化のイメージ.get(初期化のイメージ.size()).get(0);
             div.getImgGenbon().setSrc(初期化のイメージ_1);
             div.getImgMask().setSrc(初期化のイメージ.get(1).get(1));
-
             div.setHdnImageDisplay(イメージ区分_1);
-            if (イメージ区分_1.equals(イメージ区分) || 初期化のイメージ_1.endsWith("D1001.png")
-                    || 初期化のイメージ_1.endsWith("F1401A01.png") || 初期化のイメージ_1.endsWith("F1401A01_BAK.png")) {
-                div.getImgGenbon().setDisplayNone(true);
+            div.getBtnBefore().setDisabled(true);
+            if (1 == 初期化のイメージ.size()) {
+                div.getBtnAfterImg().setDisabled(true);
             }
-            if (初期化のイメージまで.endsWith("E0002.png") || 初期化のイメージまで.endsWith("E0002_BAK.png")
-                    || 初期化のイメージまで.endsWith("D1031.png") || 初期化のイメージまで.endsWith("F1401F06.png")
-                    || 初期化のイメージまで.endsWith("F1401F06_BAK.png")) {
-                div.getImgMask().setDisplayNone(true);
-            }
+        } else {
+            div.getBtnBefore().setDisabled(true);
+            div.getBtnAfterImg().setDisabled(true);
         }
         return ResponseData.of(div).respond();
     }
@@ -105,11 +89,14 @@ public class ImageDisplay {
         if (!RString.EMPTY.equals(div.getHdnImageDisplay())) {
             int index = Integer.parseInt(div.getHdnImageDisplay().toString());
             HashMap<Integer, List<RString>> 初期化のイメージ = ViewStateHolder.get(ViewStateKeys.イメージ情報_存在, HashMap.class);
+            index = index + 1;
             if (index < 初期化のイメージ.size()) {
-                index = index + 1;
+                div.getBtnBefore().setDisabled(false);
                 div.setHdnImageDisplay(new RString(index));
                 div.getImgGenbon().setSrc(初期化のイメージ.get(index).get(0));
                 div.getImgMask().setSrc(初期化のイメージ.get(index).get(1));
+            } else {
+                div.getBtnAfterImg().setDisabled(true);
             }
         }
         return ResponseData.of(div).respond();
@@ -127,9 +114,12 @@ public class ImageDisplay {
             index = index - 1;
             HashMap<Integer, List<RString>> 初期化のイメージ = ViewStateHolder.get(ViewStateKeys.イメージ情報_存在, HashMap.class);
             if (index > 0) {
+                div.getBtnAfterImg().setDisabled(false);
                 div.setHdnImageDisplay(new RString(index));
                 div.getImgGenbon().setSrc(初期化のイメージ.get(index).get(0));
                 div.getImgMask().setSrc(初期化のイメージ.get(index).get(1));
+            } else {
+                div.getBtnBefore().setDisabled(true);
             }
         }
         return ResponseData.of(div).respond();
@@ -161,15 +151,31 @@ public class ImageDisplay {
         return ResponseData.of(div).respond();
     }
 
+    private void チェック(RString イメージ区分, ImageDisplayDiv div, List<RString> 存在したイメージファイル名) {
+        if (イメージ区分_1.equals(イメージ区分) && getHandler().is調査票概況のイメージファイルが存在しない(存在したイメージファイル名)) {
+            getValidationHandler().調査票概況イメージファイル存在チェック();
+            ValidationMessageControlPairs validPairs = getValidationHandler().調査票概況イメージファイル存在チェック();
+            this.get_メッセージ(div, validPairs);
+        } else if (イメージ区分_2.equals(イメージ区分) && イメージファイルが存在区分_存在しない.equals(getHandler().
+                getその他資料のイメージファイルが存在区分(存在したイメージファイル名))) {
+            ValidationMessageControlPairs validPairs = getValidationHandler().その他資料イメージファイル存在チェック();
+            this.get_メッセージ(div, validPairs);
+        } else if (イメージ区分_3.equals(イメージ区分) && イメージファイルが存在区分_存在しない.equals(getHandler().
+                get主治医意見書のイメージファイルが存在区分(存在したイメージファイル名))) {
+            ValidationMessageControlPairs validPairs = getValidationHandler().主治医意見書イメージファイル存在チェック();
+            this.get_メッセージ(div, validPairs);
+        }
+    }
+
     private HashMap<Integer, List<RString>> getFilePath(RString イメージ区分) {
         imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
         List<RString> イメージ管理資料_2 = this.イメージ管理資料();
         List<RString> イメージ管理資料_3 = this.イメージ管理資料_3();
         HashMap<Integer, List<RString>> dataMap = new HashMap<>();
         int index = 1;
-        List<RString> イメージファイル = new ArrayList<>();
         ImagekanriJoho イメージ情報 = ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class);
         if (イメージ区分_1.equals(イメージ区分)) {
+            List<RString> イメージファイル = new ArrayList<>();
             RString ファイル = new RString("G0001.png");
             try {
                 ReadOnlySharedFileEntryDescriptor descriptor_2
@@ -186,6 +192,7 @@ public class ImageDisplay {
             }
         } else if (イメージ区分_2.equals(イメージ区分)) {
             for (RString ファイル : イメージ管理資料_2) {
+                List<RString> イメージファイル = new ArrayList<>();
                 try {
                     ReadOnlySharedFileEntryDescriptor descriptor_2
                             = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(ファイル),
@@ -193,7 +200,7 @@ public class ImageDisplay {
                     SharedFile.copyToLocal(descriptor_2, new FilesystemPath(imagePath.concat(ファイル)));
                     イメージファイル.add(Path.combinePath(イメージパス, ファイル));
                     if (ファイル.endsWith(ファイルまで.toString())) {
-                        イメージファイル.add(Path.combinePath(イメージパス, ファイル.replace(ファイルまで.toString(), "")));
+                        イメージファイル.add(Path.combinePath(イメージパス, ファイル.replace(ファイルまで.toString(), ".png")));
                     } else {
                         イメージファイル.add(RString.EMPTY);
                     }
@@ -207,6 +214,7 @@ public class ImageDisplay {
             }
         } else if (イメージ区分_3.equals(イメージ区分)) {
             for (RString ファイル : イメージ管理資料_3) {
+                List<RString> イメージファイル = new ArrayList<>();
                 try {
                     ReadOnlySharedFileEntryDescriptor descriptor_2
                             = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(ファイル),
@@ -214,7 +222,7 @@ public class ImageDisplay {
                     SharedFile.copyToLocal(descriptor_2, new FilesystemPath(imagePath.concat(ファイル)));
                     イメージファイル.add(Path.combinePath(イメージパス, ファイル));
                     if (ファイル.endsWith(ファイルまで.toString())) {
-                        イメージファイル.add(Path.combinePath(イメージパス, ファイル.replace(ファイルまで.toString(), "")));
+                        イメージファイル.add(Path.combinePath(イメージパス, ファイル.replace(ファイルまで.toString(), ".png")));
                     } else {
                         イメージファイル.add(RString.EMPTY);
                     }
