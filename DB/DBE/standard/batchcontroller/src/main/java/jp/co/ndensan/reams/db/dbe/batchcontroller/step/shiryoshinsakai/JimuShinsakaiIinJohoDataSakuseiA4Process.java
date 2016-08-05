@@ -80,6 +80,7 @@ public class JimuShinsakaiIinJohoDataSakuseiA4Process extends BatchProcessBase<S
 
     @Override
     protected void process(ShinsakaiTaiyosyaJohoEntity entity) {
+        entity.setJimukyoku(true);
         JimuShinsakaishiryoBusiness business = new JimuShinsakaishiryoBusiness(paramter, entity, shinsakaiIinJohoList, no, count);
         ShinsakaishiryoA4Report report = new ShinsakaishiryoA4Report(business);
         report.writeBy(reportSourceWriterA4);
