@@ -30,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 高額合算自己負担額明細のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-4800-010 huzongcheng
  */
 public class DbT3071KogakuGassanJikoFutanGakuMeisaiDac implements ISaveable<DbT3071KogakuGassanJikoFutanGakuMeisaiEntity> {
 
@@ -75,6 +77,43 @@ public class DbT3071KogakuGassanJikoFutanGakuMeisaiDac implements ISaveable<DbT3
                                 eq(taishoM, 対象月),
                                 eq(rirekiNo, 履歴番号))).
                 toObject(DbT3071KogakuGassanJikoFutanGakuMeisaiEntity.class);
+    }
+
+    /**
+     * 対象月除く合致する高額合算自己負担額明細を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年度 TaishoNendo
+     * @param 保険者番号 HokenshaNo
+     * @param 支給申請書整理番号 ShikyuShinseishoSeiriNo
+     * @param 履歴番号 RirekiNo
+     * @return List<DbT3071KogakuGassanJikoFutanGakuMeisaiEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3071KogakuGassanJikoFutanGakuMeisaiEntity> selectMeisai(
+            HihokenshaNo 被保険者番号,
+            FlexibleYear 対象年度,
+            HokenshaNo 保険者番号,
+            RString 支給申請書整理番号,
+            int 履歴番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年度"));
+        requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
+        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3071KogakuGassanJikoFutanGakuMeisai.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(taishoNendo, 対象年度),
+                                eq(hokenshaNo, 保険者番号),
+                                eq(shikyuShinseishoSeiriNo, 支給申請書整理番号),
+                                eq(rirekiNo, 履歴番号))).
+                toList(DbT3071KogakuGassanJikoFutanGakuMeisaiEntity.class);
     }
 
     /**

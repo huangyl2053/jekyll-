@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 高額合算自己負担額を管理するクラスです。
+ *
+ * @reamsid_L DBC-4800-010 huzongcheng
  */
 public class KogakuGassanJikoFutanGakuManager {
 
@@ -93,6 +95,57 @@ public class KogakuGassanJikoFutanGakuManager {
         }
 
         return businessList;
+    }
+
+    /**
+     * 被保険者番号で高額合算自己負担額を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return List<KogakuGassanJikoFutanGaku>
+     */
+    @Transaction
+    public List<KogakuGassanJikoFutanGaku> getBy被保険者番号(HihokenshaNo 被保険者番号) {
+        List<KogakuGassanJikoFutanGaku> businessList = new ArrayList<>();
+
+        for (DbT3070KogakuGassanJikoFutanGakuEntity entity : dac.selectByHihokenshaNo(被保険者番号)) {
+            entity.initializeMd5();
+            businessList.add(new KogakuGassanJikoFutanGaku(entity));
+        }
+
+        return businessList;
+    }
+
+    /**
+     * 主キーに合致する高額合算自己負担額を返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年度 TaishoNendo
+     * @param 保険者番号 HokenshaNo
+     * @param 支給申請書整理番号 ShikyuShinseishoSeiriNo
+     * @return KogakuGassanJikoFutanGaku
+     */
+    @Transaction
+    public KogakuGassanJikoFutanGaku getMax履歴番号(
+            HihokenshaNo 被保険者番号,
+            FlexibleYear 対象年度,
+            HokenshaNo 保険者番号,
+            RString 支給申請書整理番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年度"));
+        requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
+        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
+
+        DbT3070KogakuGassanJikoFutanGakuEntity entity = dac.selectMaxRirekiNo(
+                被保険者番号,
+                対象年度,
+                保険者番号,
+                支給申請書整理番号
+        );
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new KogakuGassanJikoFutanGaku(entity);
     }
 
     /**
