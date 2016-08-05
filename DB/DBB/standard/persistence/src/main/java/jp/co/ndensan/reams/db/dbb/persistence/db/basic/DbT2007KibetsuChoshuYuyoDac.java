@@ -6,8 +6,13 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2007KibetsuChoshuYuyo.*;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2007KibetsuChoshuYuyo;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2007KibetsuChoshuYuyo.choshuHoho;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2007KibetsuChoshuYuyo.choteiNendo;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2007KibetsuChoshuYuyo.fukaNendo;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2007KibetsuChoshuYuyo.ki;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2007KibetsuChoshuYuyo.rirekiNo;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2007KibetsuChoshuYuyo.tsuchishoNo;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2007KibetsuChoshuYuyoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
@@ -98,5 +103,17 @@ public class DbT2007KibetsuChoshuYuyoDac implements ISaveable<DbT2007KibetsuChos
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessors.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * DbT2007KibetsuChoshuYuyoEntityを削除します。物理削除する。
+     *
+     * @param entity entity
+     * @return 削除件数
+     */
+    @Transaction
+    public int delete(DbT2007KibetsuChoshuYuyoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護期別徴収猶予エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
 }

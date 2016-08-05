@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRel
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaJohoRelateMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.core.fukajoho.kibetsu.KibetsuManager;
-import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -62,7 +61,8 @@ public class FukaJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link FukaJohoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link FukaJohoManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link FukaJohoManager}のインスタンス
      */
     public static FukaJohoManager createInstance() {
         return InstanceProvider.create(FukaJohoManager.class);
@@ -150,7 +150,7 @@ public class FukaJohoManager {
     }
 
     /**
-     * 介護賦課{@link Fuka}を保存します。
+     * 介護賦課{@link FukaJoho}を保存します。
      *
      * @param 介護賦課 介護賦課
      * @return 更新あり:true、更新なし:false <br>
@@ -241,4 +241,23 @@ public class FukaJohoManager {
         }
         return 履歴番号最大の賦課の情報List;
     }
+
+    /**
+     * 平準化後の賦課の情報を取得します。
+     *
+     * @param 賦課の情報検索条件 賦課の情報検索条件
+     * @return List<FukaJoho> nullが返る可能性があります。
+     */
+    @Transaction
+    public FukaJoho select賦課の情報_最新(FukaJohoRelateMapperParameter 賦課の情報検索条件) {
+        IFukaJohoRelateMapper mapper = mapperProvider.create(IFukaJohoRelateMapper.class);
+
+        FukaJohoRelateEntity relateEntity = mapper.select賦課の情報_最新(賦課の情報検索条件);
+        if (relateEntity == null) {
+            return null;
+        }
+        relateEntity.initializeMd5ToEntities();
+        return new FukaJoho(relateEntity);
+    }
+
 }
