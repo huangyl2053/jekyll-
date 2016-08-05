@@ -56,17 +56,15 @@ public class TsuchishoJoho153 {
      */
     public DBC120890_SogojigyohiSeikyugakuTsuchishoInParameter setBatchParameter(TsuchishoJoho153Div div) {
         DBC120890_SogojigyohiSeikyugakuTsuchishoInParameter parameter = new DBC120890_SogojigyohiSeikyugakuTsuchishoInParameter();
-        RDate 処理年月 = div.getCcdKokurenJohoTorikomi().get処理年月();
         SaiShoriKubun 再処理区分 = null;
         if (SaiShoriKubun.再処理.get名称().equals(div.getCcdKokurenJohoTorikomi().get再処理区分())) {
             再処理区分 = SaiShoriKubun.再処理;
         } else if (SaiShoriKubun.空白.get名称().equals(div.getCcdKokurenJohoTorikomi().get再処理区分())) {
             再処理区分 = SaiShoriKubun.空白;
         }
-        RString 出力順ID = RString.EMPTY;
         parameter.setSaishoriKubun(再処理区分);
-        parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toString()));
-        parameter.setShutsuryokujunId(出力順ID);
+        parameter.setShoriYM(new FlexibleYearMonth(div.getCcdKokurenJohoTorikomi().get処理年月().getYearMonth().toString()));
+        parameter.setShutsuryokujunId(RString.EMPTY);
         return parameter;
     }
 
