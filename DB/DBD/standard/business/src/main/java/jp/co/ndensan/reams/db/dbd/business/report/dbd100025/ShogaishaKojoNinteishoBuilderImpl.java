@@ -17,14 +17,13 @@ public class ShogaishaKojoNinteishoBuilderImpl implements IShogaishaKojoNinteish
 
     private final IShogaishaKojoNinteishoEditor shogaishaKojoNinteishoEditorImpl;
 
-    public ShogaishaKojoNinteishoBuilderImpl(IShogaishaKojoNinteishoEditor shogaishaKojoNinteishoEditorImpl) {
+    ShogaishaKojoNinteishoBuilderImpl(IShogaishaKojoNinteishoEditor shogaishaKojoNinteishoEditorImpl) {
         this.shogaishaKojoNinteishoEditorImpl = shogaishaKojoNinteishoEditorImpl;
     }
 
     @Override
     public NinteishoJohoReportSource build() {
-        return ReportEditorJoiner.from(new NinteishoJohoReportSource())
-                .join(shogaishaKojoNinteishoEditorImpl).buildSource();
+        return ReportEditorJoiner.from(new NinteishoJohoReportSource()).join(shogaishaKojoNinteishoEditorImpl).buildSource();
     }
 
 }

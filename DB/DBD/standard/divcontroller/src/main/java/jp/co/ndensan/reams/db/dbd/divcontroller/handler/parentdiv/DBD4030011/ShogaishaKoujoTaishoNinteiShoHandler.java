@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4030011;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.shogaishakojotaishoshalist.ShogaishaKojoTaishoshaListParameter;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shogaishakoujo.NinteiNaiyoKubun;
@@ -14,6 +15,12 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4030011.Shog
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
@@ -24,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  */
 public class ShogaishaKoujoTaishoNinteiShoHandler {
 
-    private ShogaishaKoujoTaishoNinteiShoDiv div;
+    private final ShogaishaKoujoTaishoNinteiShoDiv div;
 
     /**
      * コンストラクタです。
@@ -37,75 +44,114 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
 
     /**
      * 画面初期化処理です。
-     *
      */
     public void onLoad() {
-        setDdlNinteiKbnDataSource(div.getTyusyutuJyokenPanel().getDdlNinteiKbn().getDataSource());
-
-        setDdlNinteiNaiyoDataSource(div.getTyusyutuJyokenPanel().getDdlNinteiNaiyo().getDataSource());
-
-        setDdlDataSource(div.getTyusyutuJyokenPanel().getDdlninchishoNichijoSeikatsuJiritsudo().getDataSource());
-
-        setDdlShogaiDataSource(div.getTyusyutuJyokenPanel().getDdlShogaiNichijoSeikatsuJiritsudo().getDataSource());
-
-        setDdlSoshituJiyuDataSource(div.getTyusyutuJyokenPanel().getDdlSoshituJiyu().getDataSource());
-
-        setDdlShogaishaTechoDataSource(div.getTyusyutuJyokenPanel().getDdlShogaishaTecho().getDataSource(),
-                new RString("key1"), new RString("あり"));
-        setDdlShogaishaTechoDataSource(div.getTyusyutuJyokenPanel().getDdlShogaishaTecho().getDataSource(),
-                new RString("key2"), new RString("なし"));
-
-        setDdlShogaishaTechoDataSource(div.getTyusyutuJyokenPanel().getDropDownList1().getDataSource(),
-                new RString("key1"), new RString("含む"));
-        setDdlShogaishaTechoDataSource(div.getTyusyutuJyokenPanel().getDropDownList1().getDataSource(),
-                new RString("key2"), new RString("含まない"));
-
+        div.getTyusyutuJyokenPanel().getDdlNinteiKbn().setDataSource(setDdlNinteiKbnDataSource());
+        div.getTyusyutuJyokenPanel().getDdlNinteiNaiyo().setDataSource(setDdlNinteiNaiyoDataSource());
+        div.getTyusyutuJyokenPanel().getDdlninchishoNichijoSeikatsuJiritsudo().setDataSource(setDdlDataSource());
+        div.getTyusyutuJyokenPanel().getDdlShogaiNichijoSeikatsuJiritsudo().setDataSource(setDdlShogaiDataSource());
+        div.getTyusyutuJyokenPanel().getDdlSoshituJiyu().setDataSource(setDdlSoshituJiyuDataSource());
+        div.getTyusyutuJyokenPanel().getDdlShogaishaTecho().setDataSource(setDdlShogaishaTechoDataSource());
+        div.getTyusyutuJyokenPanel().getDropDownList1().setDataSource(setDropDownListDataSource());
     }
 
-    /**
-     * DataSourceの设定
-     *
-     * @param dataSource List<KeyValueDataSource>
-     */
-    public void setDdlNinteiKbnDataSource(List<KeyValueDataSource> dataSource) {
+    private List<KeyValueDataSource> setDdlNinteiKbnDataSource() {
+        List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (Ninteikubun num : Ninteikubun.values()) {
-            KeyValueDataSource data = new KeyValueDataSource(num.getコード(), num.get名称());
-            dataSource.add(data);
+            dataSourceList.add(new KeyValueDataSource(num.getコード(), num.get名称()));
         }
+        return dataSourceList;
     }
 
-    private void setDdlNinteiNaiyoDataSource(List<KeyValueDataSource> dataSource) {
+    private List<KeyValueDataSource> setDdlNinteiNaiyoDataSource() {
+        List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (NinteiNaiyoKubun num : NinteiNaiyoKubun.values()) {
-            KeyValueDataSource data = new KeyValueDataSource(num.getコード(), num.get名称());
-            dataSource.add(data);
+            dataSourceList.add(new KeyValueDataSource(num.getコード(), num.get名称()));
         }
+        return dataSourceList;
     }
 
-    private void setDdlDataSource(List<KeyValueDataSource> dataSource) {
+    private List<KeyValueDataSource> setDdlDataSource() {
+        List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (NinchishoNichijoSeikatsuJiritsudoCode num : NinchishoNichijoSeikatsuJiritsudoCode.values()) {
-            KeyValueDataSource data = new KeyValueDataSource(num.getコード(), num.get名称());
-            dataSource.add(data);
+            dataSourceList.add(new KeyValueDataSource(num.getコード(), num.get名称()));
         }
+        return dataSourceList;
     }
 
-    private void setDdlShogaiDataSource(List<KeyValueDataSource> dataSource) {
+    private List<KeyValueDataSource> setDdlShogaiDataSource() {
+        List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (ShogaiNichijoSeikatsuJiritsudoCode num : ShogaiNichijoSeikatsuJiritsudoCode.values()) {
-            KeyValueDataSource data = new KeyValueDataSource(num.getコード(), num.get名称());
-            dataSource.add(data);
+            dataSourceList.add(new KeyValueDataSource(num.getコード(), num.get名称()));
         }
+        return dataSourceList;
     }
 
-    private void setDdlSoshituJiyuDataSource(List<KeyValueDataSource> dataSource) {
+    private List<KeyValueDataSource> setDdlSoshituJiyuDataSource() {
+        List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (ShikakuSoshitsuJiyu num : ShikakuSoshitsuJiyu.values()) {
-            KeyValueDataSource data = new KeyValueDataSource(num.getコード(), num.get名称());
-            dataSource.add(data);
+            dataSourceList.add(new KeyValueDataSource(num.getコード(), num.get名称()));
+        }
+        return dataSourceList;
+    }
+
+    private List<KeyValueDataSource> setDdlShogaishaTechoDataSource() {
+        List<KeyValueDataSource> dataSourceList = new ArrayList<>();
+        for (DdlShogaishaTecho num : DdlShogaishaTecho.values()) {
+            dataSourceList.add(new KeyValueDataSource(num.getコード(), num.get名称()));
+        }
+        return dataSourceList;
+    }
+
+    private List<KeyValueDataSource> setDropDownListDataSource() {
+        List<KeyValueDataSource> dataSourceList = new ArrayList<>();
+        for (DropDownList num : DropDownList.values()) {
+            dataSourceList.add(new KeyValueDataSource(num.getコード(), num.get名称()));
+        }
+        return dataSourceList;
+    }
+
+    private enum DdlShogaishaTecho {
+
+        あり("key1", "あり"),
+        なし("key2", "なし");
+
+        private final RString code;
+        private final RString fullName;
+
+        private DdlShogaishaTecho(String code, String fullname) {
+            this.code = new RString(code);
+            this.fullName = new RString(fullname);
+        }
+
+        private RString getコード() {
+            return code;
+        }
+
+        private RString get名称() {
+            return fullName;
         }
     }
 
-    private void setDdlShogaishaTechoDataSource(List<KeyValueDataSource> dataSource,
-            RString keyNum, RString keyValues) {
-        KeyValueDataSource data = new KeyValueDataSource(keyNum, keyValues);
-        dataSource.add(data);
+    private enum DropDownList {
+
+        含む("key1", "含む"),
+        含まない("key2", "含まない");
+        private final RString code;
+        private final RString fullName;
+
+        private DropDownList(String code, String fullname) {
+            this.code = new RString(code);
+            this.fullName = new RString(fullname);
+        }
+
+        private RString getコード() {
+            return code;
+        }
+
+        private RString get名称() {
+            return fullName;
+        }
     }
 
     /**
@@ -121,10 +167,8 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
         tempData.set氏名(div.getTyusyutuJyokenPanel().getTxtShimei().getValue());
         tempData.set認定区分(div.getTyusyutuJyokenPanel().getDdlNinteiKbn().getSelectedValue());
         tempData.set認定内容(div.getTyusyutuJyokenPanel().getDdlNinteiNaiyo().getSelectedValue());
-        tempData.set認知症高齢者の日常生活自立度(div.getTyusyutuJyokenPanel().
-                getDdlninchishoNichijoSeikatsuJiritsudo().getSelectedValue());
-        tempData.set障害高齢者の日常生活自立度(div.getTyusyutuJyokenPanel().
-                getDdlShogaiNichijoSeikatsuJiritsudo().getSelectedValue());
+        tempData.set認知症高齢者の日常生活自立度(div.getTyusyutuJyokenPanel().getDdlninchishoNichijoSeikatsuJiritsudo().getSelectedValue());
+        tempData.set障害高齢者の日常生活自立度(div.getTyusyutuJyokenPanel().getDdlShogaiNichijoSeikatsuJiritsudo().getSelectedValue());
         tempData.set障がい者手帳(div.getTyusyutuJyokenPanel().getDdlShogaishaTecho().getSelectedValue());
         tempData.set喪失事由(div.getTyusyutuJyokenPanel().getDdlSoshituJiyu().getSelectedValue());
         tempData.set喪失日FROM(div.getTyusyutuJyokenPanel().getTxtSoshituDay().getFromValue());
@@ -145,14 +189,48 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
      * @return ShogaishaKojoTaishoshaListParameter 障がい者控除対象者認定書一括発行リスト_バッチ用のパラメータです。
      */
     public RString get画面出力順() {
-
-//TODO        RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
-//TODO        IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給,
-//TODO                div.getShogaishaKojoNinteishoOutput().getCommonChildDiv1().get帳票ID(), reamsLoginID,
-//TODO                div.getShogaishaKojoNinteishoOutput().getCommonChildDiv1().get出力順ID());
-        RString 出力順 = null;     //TODO  = MyBatisOrderByClauseCreator.create(.class, outputOrder);
-        return 出力順;
+        RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
+        IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給,
+                div.getShogaishaKojoNinteishoOutput().getCommonChildDiv1().get帳票ID(), reamsLoginID,
+                div.getShogaishaKojoNinteishoOutput().getCommonChildDiv1().get出力順ID());
+        // TODO
+        return MyBatisOrderByClauseCreator.create(BreakerFieldsEnum.class, outputOrder);
 
     }
 
+    /**
+     * 帳票設計_DBD100025_障がい者控除対象者認定証 出力順設定可能項目です。
+     */
+    public enum BreakerFieldsEnum implements IReportItems {
+
+        /**
+         * 対象年度
+         */
+        対象年度(new RString("0002"), new RString(""), new RString("\"").concat(new RString("")).concat(new RString("\""))),;
+
+        private final RString 項目ID;
+        private final RString フォームフィールド名;
+        private final RString myBatis項目名;
+
+        private BreakerFieldsEnum(RString 項目ID, RString フォームフィールド名, RString myBatis項目名) {
+            this.項目ID = 項目ID;
+            this.フォームフィールド名 = フォームフィールド名;
+            this.myBatis項目名 = myBatis項目名;
+        }
+
+        @Override
+        public RString get項目ID() {
+            return 項目ID;
+        }
+
+        @Override
+        public RString getフォームフィールド名() {
+            return フォームフィールド名;
+        }
+
+        @Override
+        public RString getMyBatis項目名() {
+            return myBatis項目名;
+        }
+    }
 }

@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd4030011.NinteishoJohoEntit
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100025.NinteishoJohoReportSource;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -22,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteishoEditor {
 
-    private NinteishoJohoEntity entity;
+    private final NinteishoJohoEntity entity;
 
     protected ShogaishaKojoNinteishoEditorImpl(NinteishoJohoEntity entity) {
         this.entity = entity;
@@ -42,6 +44,7 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
         edit申請者住所(source);
         edit申請者氏名(source);
         edit対象者住所(source);
+        edit対象者氏名(source);
         edit生年月日(source);
         edit性別(source);
         edit障害理由(source);
@@ -56,7 +59,7 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
     }
 
     private void edit文書番号(NinteishoJohoReportSource source) {
-//        source.title = entity.get文書番号();
+        source.title = entity.get文書番号();
     }
 
     private void edit発行日(NinteishoJohoReportSource source) {
@@ -70,8 +73,8 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
     }
 
     private void edit認証者(NinteishoJohoReportSource source) {
-//        source.title = entity.getNinshoshaDenshiKoinDataEntity().get認職者氏名();
-//        source.title = entity.getNinshoshaDenshiKoinDataEntity().get電子公印();
+        source.title = entity.getNinshoshaDenshiKoinDataEntity().get認職者氏名();
+        source.title = entity.getNinshoshaDenshiKoinDataEntity().get電子公印();
     }
 
     private void edit申請者住所(NinteishoJohoReportSource source) {
@@ -83,19 +86,22 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
     }
 
     private void edit対象者住所(NinteishoJohoReportSource source) {
-        //TODO source.title = entity.getPsmEntity().getJusho();
+        AtenaJusho jusho = entity.getPsmEntity().getJusho();
+        source.title = jusho.getColumnValue();
     }
 
     private void edit対象者氏名(NinteishoJohoReportSource source) {
-        //TODO source.title = entity.getPsmEntity().get対象者氏名()
+        AtenaMeisho meisho = entity.getPsmEntity().getMeisho();
+        if (RString.isNullOrEmpty(meisho.getColumnValue())) {
+            source.title = meisho.getColumnValue();
+        }
     }
 
     private void edit生年月日(NinteishoJohoReportSource source) {
         IKojin ikojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
-        boolean ikojinFlag = ikojin.is日本人();
-        if (ikojinFlag == true) {
-            source.title = entity.getPsmEntity().getSeinengappiYMD().wareki()
-                    .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+        if (ikojin.is日本人()) {
+            source.title = entity.getPsmEntity().getSeinengappiYMD().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                     .fillType(FillType.BLANK).toDateString();
         } else {
             source.title = entity.getPsmEntity().getSeinengappiYMD().seireki().separator(Separator.JAPANESE)
@@ -104,7 +110,7 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
     }
 
     private void edit性別(NinteishoJohoReportSource source) {
-        //TODO source.title = entity.getPsmEntity().getSeibetsuCode();
+        source.title = entity.getPsmEntity().getSeibetsuCode();
     }
 
     private void edit障害理由(NinteishoJohoReportSource source) {

@@ -23,5 +23,4 @@ public class ShogaishaKojoNinteishoProperty extends ReportPropertyBase<Ninteisho
     public ShogaishaKojoNinteishoProperty() {
         super(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD100025.getReportId());
     }
-
 }
