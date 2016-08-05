@@ -61,9 +61,11 @@ public class ShinsakaishiryoA4Editor implements IShinsakaishiryoA4Editor {
         source.listShinsei_11 = business.get基準時間();
         source.listShinsei_12 = RString.EMPTY;
         source.listShinsei_13 = RString.EMPTY;
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
-        if (business.get申請書管理番号() != null || !RString.isNullOrEmpty(business.get申請書管理番号().getColumnValue())) {
-            source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号().getColumnValue());
+        if (business.is事務局()) {
+            source.shikibetuCode = ShikibetsuCode.EMPTY;
+            if (business.get申請書管理番号() != null && !business.get申請書管理番号().isEmpty()) {
+                source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号().getColumnValue());
+            }
         }
         return source;
     }

@@ -56,7 +56,7 @@ public class JigyohokokuCompYoshiki300103Report extends Report<JigyohokokuCompYo
                 data.getその他_居住費_1(),
                 data.get合計_食費_1(),
                 data.get合計_居住費_1(),
-                data.get免除認定表の利用者負担_1(),
+                data.get利用者負担減額_免除認定表の利用者負担_1(),
                 data.get減免認定表の特定負担限度額_食費_1(),
                 data.get減免認定表の特定負担限度額_居住費_1(),
                 data.get免除認定表の利用者負担_1()));
@@ -72,7 +72,7 @@ public class JigyohokokuCompYoshiki300103Report extends Report<JigyohokokuCompYo
                 data.getその他_居住費_2(),
                 data.get合計_食費_2(),
                 data.get合計_居住費_2(),
-                data.get免除認定表の利用者負担_2(),
+                data.get利用者負担減額_免除認定表の利用者負担_2(),
                 data.get減免認定表の特定負担限度額_食費_2(),
                 data.get減免認定表の特定負担限度額_居住費_2(),
                 data.get免除認定表の利用者負担_2()));
@@ -88,7 +88,7 @@ public class JigyohokokuCompYoshiki300103Report extends Report<JigyohokokuCompYo
                 data.getその他_居住費_3(),
                 data.get合計_食費_3(),
                 data.get合計_居住費_3(),
-                data.get免除認定表の利用者負担_3(),
+                data.get利用者負担減額_免除認定表の利用者負担_3(),
                 data.get減免認定表の特定負担限度額_食費_3(),
                 data.get減免認定表の特定負担限度額_居住費_3(),
                 data.get免除認定表の利用者負担_3()));
@@ -104,7 +104,7 @@ public class JigyohokokuCompYoshiki300103Report extends Report<JigyohokokuCompYo
                 data.getその他_居住費_4(),
                 data.get合計_食費_4(),
                 data.get合計_居住費_4(),
-                data.get免除認定表の利用者負担_4(),
+                data.get利用者負担減額_免除認定表の利用者負担_4(),
                 data.get減免認定表の特定負担限度額_食費_4(),
                 data.get減免認定表の特定負担限度額_居住費_4(),
                 data.get免除認定表の利用者負担_4()));
@@ -120,7 +120,7 @@ public class JigyohokokuCompYoshiki300103Report extends Report<JigyohokokuCompYo
                 data.getその他_居住費_5(),
                 data.get合計_食費_5(),
                 data.get合計_居住費_5(),
-                data.get免除認定表の利用者負担_5(),
+                data.get利用者負担減額_免除認定表の利用者負担_5(),
                 data.get減免認定表の特定負担限度額_食費_5(),
                 data.get減免認定表の特定負担限度額_居住費_5(),
                 data.get免除認定表の利用者負担_5()));
@@ -136,7 +136,7 @@ public class JigyohokokuCompYoshiki300103Report extends Report<JigyohokokuCompYo
                 data.getその他_居住費_6(),
                 data.get合計_食費_6(),
                 data.get合計_居住費_6(),
-                data.get免除認定表の利用者負担_6(),
+                data.get利用者負担減額_免除認定表の利用者負担_6(),
                 data.get減免認定表の特定負担限度額_食費_6(),
                 data.get減免認定表の特定負担限度額_居住費_6(),
                 data.get免除認定表の利用者負担_6()));
