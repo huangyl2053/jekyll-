@@ -19,6 +19,14 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbzEntity</artifactId>
         </dependency>
+         <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbzPersistence</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbzService</artifactId>
+        </dependency>
         <!-- DBX -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
