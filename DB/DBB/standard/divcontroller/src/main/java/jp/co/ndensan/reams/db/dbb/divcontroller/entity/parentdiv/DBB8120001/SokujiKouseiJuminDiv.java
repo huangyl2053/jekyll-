@@ -15,19 +15,19 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * SokujiKouseiJumin のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBB-0660-010 tianshuai
  */
 public class SokujiKouseiJuminDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("SokujiKouseiKihon")
-    private KaigoFukaKihonDiv SokujiKouseiKihon;
+    @JsonProperty("ccdSokujiKouseiKihon")
+    private KaigoFukaKihonDiv ccdSokujiKouseiKihon;
     @JsonProperty("SokujiKouseiAtena")
     private KaigoAtenaInfoDiv SokujiKouseiAtena;
 
@@ -37,11 +37,19 @@ public class SokujiKouseiJuminDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("SokujiKouseiKihon")
-    public IKaigoFukaKihonDiv getSokujiKouseiKihon() {
-        return SokujiKouseiKihon;
+    /*
+     * getccdSokujiKouseiKihon
+     * @return ccdSokujiKouseiKihon
+     */
+    @JsonProperty("ccdSokujiKouseiKihon")
+    public IKaigoFukaKihonDiv getCcdSokujiKouseiKihon() {
+        return ccdSokujiKouseiKihon;
     }
 
+    /*
+     * getSokujiKouseiAtena
+     * @return SokujiKouseiAtena
+     */
     @JsonProperty("SokujiKouseiAtena")
     public IKaigoAtenaInfoDiv getSokujiKouseiAtena() {
         return SokujiKouseiAtena;

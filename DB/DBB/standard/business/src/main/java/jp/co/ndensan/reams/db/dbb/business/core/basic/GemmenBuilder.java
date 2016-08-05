@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2004GemmenEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoGemmenShurui;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoGemmenTorikeshiShurui;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -156,6 +157,18 @@ public class GemmenBuilder {
     public GemmenBuilder set減免取消事由(RString 減免取消事由) {
         requireNonNull(減免取消事由, UrSystemErrorMessages.値がnull.getReplacedMessage("減免取消事由"));
         entity.setGemmenTorikeshiJiyu(減免取消事由);
+        return this;
+    }
+
+    /**
+     * 減免種類コードを設定します。
+     *
+     * @param 減免種類コード 減免種類コード
+     * @return {@link GemmenBuilder}
+     */
+    public GemmenBuilder set減免種類コード(Code 減免種類コード) {
+        requireNonNull(減免種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("減免種類コード"));
+        entity.setGemmenJiyuCode(減免種類コード);
         return this;
     }
 
