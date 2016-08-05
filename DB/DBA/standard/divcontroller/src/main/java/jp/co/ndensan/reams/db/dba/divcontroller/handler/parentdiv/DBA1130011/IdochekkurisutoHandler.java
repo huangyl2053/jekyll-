@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 異動チェックリストの抽象Handlerクラスです。
@@ -46,13 +45,12 @@ public class IdochekkurisutoHandler {
      *
      * 異動チェックリスト初期化の設定します。
      *
-     * @param result IdoCheckListResult
+     * @param idoCheckResult IdoCheckListResult
      */
-    public void setLoad(SearchResult<IdoCheckListResult> result) {
-        IdoCheckListResult idoCheckResult = result.records().get(0);
+    public void setLoad(IdoCheckListResult idoCheckResult) {
         FlexibleDate nowDate = FlexibleDate.getNowDate();
-        if (result.records().isEmpty() || (idoCheckResult.get対象終了年月日() == null
-                && idoCheckResult.get対象開始年月日() == null)) {
+        if (idoCheckResult == null || isEmptyOrNull(idoCheckResult.get対象終了年月日(),
+                idoCheckResult.get対象開始年月日())) {
             div.getTxtkonkaikaishi().setValue(nowDate);
             div.getTxtkonkaishuryo().setValue(nowDate);
         } else if (nowDate.isBeforeOrEquals(idoCheckResult.get対象終了年月日())) {
@@ -79,4 +77,7 @@ public class IdochekkurisutoHandler {
         CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("BatchRegister"), false);
     }
 
+    private boolean isEmptyOrNull(FlexibleDate 対象終了年月日, FlexibleDate 対象開始年月日) {
+        return !((対象終了年月日 != null && !対象終了年月日.isEmpty()) || (対象開始年月日 != null && !対象開始年月日.isEmpty()));
+    }
 }
