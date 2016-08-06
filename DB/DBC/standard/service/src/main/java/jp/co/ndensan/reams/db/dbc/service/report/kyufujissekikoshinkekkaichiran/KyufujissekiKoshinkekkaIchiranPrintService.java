@@ -114,7 +114,7 @@ public class KyufujissekiKoshinkekkaIchiranPrintService {
             });
             List<RString> indexList = new ArrayList<>();
             for (int j = INDEX_0; j < entityList.size() - INDEX_1; j++) {
-                if (!entityList.get(j).get給付実績_コントロールレコード保険者番号().equals(entityList.get(++j).
+                if (!entityList.get(j).get給付実績_コントロールレコード保険者番号().equals(entityList.get(j + INDEX_1).
                         get給付実績_コントロールレコード保険者番号())) {
                     indexList.add(new RString(j + INDEX_1));
                 }
