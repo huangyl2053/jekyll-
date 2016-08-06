@@ -37,7 +37,7 @@ public class JigyohokokuCompYoshikinenho201Editor implements IJigyohokokuCompYos
     /**
      * インスタンスを生成します。
      *
-     * @param item JigyohokokuCompYoshiki201Data
+     * @param item JigyohokokuCompYoshikinenho201Data
      */
     protected JigyohokokuCompYoshikinenho201Editor(JigyohokokuCompYoshikinenho201Data item) {
         this.item = item;
