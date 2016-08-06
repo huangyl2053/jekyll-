@@ -138,6 +138,7 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
             div.getTxtKonkaiKaishiTime().setDisabled(false);
             div.getTxtKonkaiShuryoDay().setDisabled(false);
             div.getTxtKonkaiShuryoTime().setDisabled(false);
+            div.getBtnhihokensha().setDisabled(true);
         }
         if (radChushutsu.equals(被保険者番号)) {
             div.getTxtHihokenshaNo().clearValue();
@@ -146,6 +147,7 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
             div.getTxtKonkaiShuryoDay().setDisabled(true);
             div.getTxtKonkaiShuryoTime().setDisabled(true);
             div.getTxtHihokenshaNo().setDisabled(false);
+            div.getBtnhihokensha().setDisabled(false);
             div.getBtnhihokensha().setDisabled(false);
         }
     }
