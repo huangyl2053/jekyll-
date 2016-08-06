@@ -41,7 +41,6 @@ public class TokkiText1A4Business {
 
     private static final RString ファイルID_C0007 = new RString("C0007.png");
     private static final RString ファイルID_C4101 = new RString("C4101.png");
-    private static final RString ファイルID_C4101_BAK = new RString("C4101_BAK.png");
     private static final RString テキスト全面イメージ = new RString("1");
     private static final RString テキスト = new RString("1");
     private static final RString イメージ = new RString("2");
@@ -203,11 +202,7 @@ public class TokkiText1A4Business {
      * @return 全面特記事項イメージを取得します
      */
     public RString getTokkiImg() {
-        RString tokkiImg = getFilePath(kyotsuEntity.getImageSharedFileId(), ファイルID_C4101);
-        if (RString.isNullOrEmpty(tokkiImg)) {
-            tokkiImg = getFilePath(kyotsuEntity.getImageSharedFileId(), ファイルID_C4101_BAK);
-        }
-        return tokkiImg;
+        return getFilePath(kyotsuEntity.getImageSharedFileId(), ファイルID_C4101);
     }
 
     /**
@@ -279,16 +274,19 @@ public class TokkiText1A4Business {
     private RString getFilePathByRemban(RString 特記事項番号, int 特記事項連番) {
         RStringBuilder イメージファイル = new RStringBuilder();
         RString ファイル名 = getファイル名By特記番号(特記事項番号);
-        if (RString.isNullOrEmpty(ファイル名)) {
-            イメージファイル.append(テキスト);
+        if (!RString.isNullOrEmpty(ファイル名)) {
             for (int i = 0; i <= 最大連番; i++) {
                 if (i == 特記事項連番) {
                     イメージファイル.append(new RString(特記事項連番).padZeroToLeft(2));
                     break;
                 }
             }
+            if (kyotsuEntity.isJimukyoku()) {
+                イメージファイル.append("_BAK");
+            }
+            return イメージファイル.append(".png").toRString();
         }
-        return イメージファイル.append(".png").toRString();
+        return RString.EMPTY;
     }
 
     private RString getFilePath(RDateTime sharedFileId, RString filename) {

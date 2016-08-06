@@ -1689,47 +1689,4 @@ public class IchijihanteikekkahyoItemSetteiThreeA3 {
         }
         return RString.EMPTY;
     }
-
-    /**
-     * 麻痺_左上肢コードを取得します。
-     *
-     * @param 厚労省IF識別コード 厚労省IF識別コード
-     * @return 麻痺_左上肢
-     */
-    public RString get主治医意見麻痺_左上肢(Code 厚労省IF識別コード) {
-        if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
-        } else if (A_02.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
-        } else if (A_06.equals(厚労省IF識別コード)) {
-            return IkenshoKomokuMapping06A.麻痺_左上肢.getコード();
-        } else if (A_09.equals(厚労省IF識別コード)) {
-            return IkenshoKomokuMapping09A.麻痺_左上肢.getコード();
-        } else if (B_09.equals(厚労省IF識別コード)) {
-            return IkenshoKomokuMapping09B.麻痺_左上肢.getコード();
-        }
-        return RString.EMPTY;
-    }
-
-    /**
-     * 麻痺等_左下肢コードを取得します。
-     *
-     * @param 厚労省IF識別コード 厚労省IF識別コード
-     * @return 麻痺等_左下肢
-     */
-    public RString get主治医意見麻痺_左下肢(Code 厚労省IF識別コード) {
-        if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
-        } else if (A_02.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
-        } else if (A_06.equals(厚労省IF識別コード)) {
-            return IkenshoKomokuMapping06A.麻痺_左下肢.getコード();
-        } else if (A_09.equals(厚労省IF識別コード)) {
-            return IkenshoKomokuMapping09A.麻痺_左下肢.getコード();
-        } else if (B_09.equals(厚労省IF識別コード)) {
-            return IkenshoKomokuMapping09B.麻痺_左下肢.getコード();
-        }
-        return RString.EMPTY;
-    }
-
 }

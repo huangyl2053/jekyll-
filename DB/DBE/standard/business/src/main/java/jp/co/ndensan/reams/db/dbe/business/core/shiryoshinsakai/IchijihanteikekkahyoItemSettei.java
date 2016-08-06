@@ -98,6 +98,7 @@ public class IchijihanteikekkahyoItemSettei {
      * @param 予防給付 予防給付
      * @param 介護給付 介護給付
      * @param 現在状況 現在状況
+     * @param 合議体番号 合議体番号
      * @return 事務局一次判定結果票のEntity
      */
     public IchijihanteikekkahyoA4Entity set項目(ItiziHanteiEntity entity,
@@ -105,12 +106,15 @@ public class IchijihanteikekkahyoItemSettei {
             List<DbT5211NinteichosahyoChosaItemEntity> 前回調査票調査項目, List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書項目情報,
             List<DbT5304ShujiiIkenshoIkenItemEntity> 前主治医意見書項目情報, List<DbT5207NinteichosahyoServiceJokyoEntity> 予防給付,
             List<DbT5207NinteichosahyoServiceJokyoEntity> 介護給付, DbT5208NinteichosahyoServiceJokyoFlagEntity サービス状況フラグ,
-            DbT5210NinteichosahyoShisetsuRiyoEntity 現在状況) {
+            DbT5210NinteichosahyoShisetsuRiyoEntity 現在状況, RString 合議体番号) {
         IchijihanteikekkahyoA4Entity 項目 = new IchijihanteikekkahyoA4Entity();
         IchijihanteikekkahyoItemSetteiTwo settei = new IchijihanteikekkahyoItemSetteiTwo();
         Code 厚労省IF識別コード = entity.getKoroshoIfShikibetsuCode();
         コード転換(項目, entity);
-        項目.set現在の状況(get現在の状況(厚労省IF識別コード, new RString(現在状況.getRemban())));
+        項目.set合議体番号(合議体番号);
+        if (現在状況 != null) {
+            項目.set現在の状況(get現在の状況(厚労省IF識別コード, new RString(現在状況.getRemban())));
+        }
         項目.set審査順(new RString(entity.getShinsakaiOrder()));
         項目.set年齢(new RString(entity.getAge()));
         項目.set前々回要介護度(set要介護度(entity.getZzKoroshoIfShikibetsuCode(), entity.getZzNijiHanteiYokaigoJotaiKubunCode()));
@@ -173,7 +177,7 @@ public class IchijihanteikekkahyoItemSettei {
         障害高齢者自立度.set認知症高齢者自立度(set障害高齢者自立度(entity.getShogaiNichijoSeikatsuJiritsudoCode()));
         NitijouSeikatsu 認知症高齢者自立度 = new NitijouSeikatsu();
         認知症高齢者自立度.set特記事項フラグ(entity.getNinchishoNichijoSeikatsuJiritsudo());
-        認知症高齢者自立度.set認知症高齢者自立度(set障害高齢者自立度(entity.getNinchishoNichijoSeikatsuJiritsudoCode()));
+        認知症高齢者自立度.set認知症高齢者自立度(set認知症高齢者自立度(entity.getNinchishoNichijoSeikatsuJiritsudoCode()));
         日常生活自立度リスト.add(障害高齢者自立度);
         日常生活自立度リスト.add(認知症高齢者自立度);
         項目.set日常生活自立度リスト(日常生活自立度リスト);
@@ -295,7 +299,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString set認知症高齢者自立度(Code 認知症高齢者自立度コード) {
         if (認知症高齢者自立度コード != null && !認知症高齢者自立度コード.isEmpty()) {
-            NinchishoNichijoSeikatsuJiritsudoCode.toValue(認知症高齢者自立度コード.getColumnValue()).get名称();
+            return NinchishoNichijoSeikatsuJiritsudoCode.toValue(認知症高齢者自立度コード.getColumnValue()).get名称();
         }
         return RString.EMPTY;
     }
