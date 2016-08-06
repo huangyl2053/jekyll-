@@ -126,8 +126,8 @@ public class IchijihanteikekkahyoA3Entity {
     private List<TiyosaKekka> 第３群リスト;
     private List<TiyosaKekka> 第４群リスト;
     private List<TiyosaKekka> 第５群リスト;
-    private List<TokubetsunaIryoTiyosaKekka> 特別な医療リスト１;
-    private List<TokubetsunaIryoTiyosaKekka> 特別な医療リスト２;
+    private List<TiyosaKekka> 特別な医療リスト１;
+    private List<TiyosaKekka> 特別な医療リスト２;
     private List<TiyosaKekka> 主治医意見書;
     private RString 施設名テキスト;
     private RString 施設名イメージ;
