@@ -32,7 +32,8 @@ public class ShogaishaKojoTaishoshaListFlow extends BatchFlowBase<ShogaishaKojoT
      */
     @Step(障がい者控除対象者認定書)
     protected IBatchFlowCommand shogaishaKoujoTaishoNinteiSho() {
-        return loopBatch(ShogaishaKoujoTaishoNinteiShoProcess.class).define();
+        return loopBatch(ShogaishaKoujoTaishoNinteiShoProcess.class).
+                arguments(getParameter().toShogaishakojoTaishoshaListProcessParameter()).define();
     }
 
 }
