@@ -3,48 +3,47 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshikinenho202;
+package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshikinenho2115;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshikinenno202.JigyohokokuCompYoshikiNenho202Data;
-import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshikinenho202.JigyohokokuCompYoshikiNenho202ReportSource;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshikinenno2115.JigyohokokuCompYoshikiNenho2115Data;
+import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshikinenho2115.JigyohokokuCompYoshikiNenho2115ReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 介護事業状況報告年報（様式2）のReportです。
+ * 介護事業状況報告年報（様式2-4）のReportです。
  *
- * @reamsid_L DBU-5600-190 zhaoran
+ * @reamsid_L DBU-5600-240 zhaoran
  */
-public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuCompYoshikiNenho202ReportSource> {
+public class JigyohokokuCompYoshikiNenho2115Report extends Report<JigyohokokuCompYoshikiNenho2115ReportSource> {
 
-    private final JigyohokokuCompYoshikiNenho202Data data;
+    private final JigyohokokuCompYoshikiNenho2115Data data;
 
     /**
      * インスタンスを生成します。
      *
-     * @param data JigyohokokuCompYoshikiNenho202Data
+     * @param data JigyohokokuCompYoshikiNenho2115Data
      */
-    public JigyohokokuCompYoshikiNenho202Report(JigyohokokuCompYoshikiNenho202Data data) {
+    public JigyohokokuCompYoshikiNenho2115Report(JigyohokokuCompYoshikiNenho2115Data data) {
         this.data = data;
     }
 
     @Override
-
-    public void writeBy(ReportSourceWriter<JigyohokokuCompYoshikiNenho202ReportSource> reportSourceWriter) {
-        for (JigyohokokuCompYoshikiNenho202BodyData dataBody : getBodyData()) {
-            IJigyohokokuCompYoshikiNenho202Editor editor = new JigyohokokuCompYoshikiNenho202Editor(data);
-            IJigyohokokuCompYoshikiNenho202Editor bodyEditor = new JigyohokokuCompYoshikiNenho202BodyEditor(dataBody);
-            IJigyohokokuCompYoshikiNenho202Builder builder = new JigyohokokuCompYoshikiNenho202Builder(editor, bodyEditor);
+    public void writeBy(ReportSourceWriter<JigyohokokuCompYoshikiNenho2115ReportSource> reportSourceWriter) {
+        for (JigyohokokuCompYoshikiNenho2115BodyData dataBody : getBodyData()) {
+            IJigyohokokuCompYoshikiNenho2115Editor editor = new JigyohokokuCompYoshikiNenho2115Editor(data);
+            IJigyohokokuCompYoshikiNenho2115Editor bodyEditor = new JigyohokokuCompYoshikiNenho2115BodyEditor(dataBody);
+            IJigyohokokuCompYoshikiNenho2115Builder builder = new JigyohokokuCompYoshikiNenho2115Builder(editor, bodyEditor);
             reportSourceWriter.writeLine(builder);
         }
 
     }
 
-    private List<JigyohokokuCompYoshikiNenho202BodyData> getBodyData() {
-        List<JigyohokokuCompYoshikiNenho202BodyData> dataBodyList = new ArrayList<>();
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+    private List<JigyohokokuCompYoshikiNenho2115BodyData> getBodyData() {
+        List<JigyohokokuCompYoshikiNenho2115BodyData> dataBodyList = new ArrayList<>();
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get居宅_介護予防_サービス_要支援１(),
                 data.get居宅_介護予防_サービス_要支援２(),
                 data.get居宅_介護予防_サービス_予防計(),
@@ -57,7 +56,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get居宅_介護予防_サービス_要介護５(),
                 data.get居宅_介護予防_サービス_介護計(),
                 data.get居宅_介護予防_サービス_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get訪問サービス_要支援１(),
                 data.get訪問サービス_要支援２(),
                 data.get訪問サービス_予防計(),
@@ -70,7 +69,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get訪問サービス_要介護５(),
                 data.get訪問サービス_介護計(),
                 data.get訪問サービス_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get訪問介護_要支援１(),
                 data.get訪問介護_要支援２(),
                 data.get訪問介護_予防計(),
@@ -84,7 +83,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get訪問介護_介護計(),
                 data.get訪問介護_合計()));
 
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get訪問入浴介護_要支援１(),
                 data.get訪問入浴介護_要支援２(),
                 data.get訪問入浴介護_予防計(),
@@ -97,7 +96,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get訪問入浴介護_要介護５(),
                 data.get訪問入浴介護_介護計(),
                 data.get訪問入浴介護_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get訪問看護_要支援１(),
                 data.get訪問看護_要支援２(),
                 data.get訪問看護_予防計(),
@@ -110,7 +109,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get訪問看護_要介護５(),
                 data.get訪問看護_介護計(),
                 data.get訪問看護_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get訪問リハビリテーション_要支援１(),
                 data.get訪問リハビリテーション_要支援２(),
                 data.get訪問リハビリテーション_予防計(),
@@ -123,7 +122,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get訪問リハビリテーション_要介護５(),
                 data.get訪問リハビリテーション_介護計(),
                 data.get訪問リハビリテーション_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get居宅療養管理指導_要支援１(),
                 data.get居宅療養管理指導_要支援２(),
                 data.get居宅療養管理指導_予防計(),
@@ -136,7 +135,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get居宅療養管理指導_要介護５(),
                 data.get居宅療養管理指導_介護計(),
                 data.get居宅療養管理指導_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get通所サービス_要支援１(),
                 data.get通所サービス_要支援２(),
                 data.get通所サービス_予防計(),
@@ -149,7 +148,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get通所サービス_要介護５(),
                 data.get通所サービス_介護計(),
                 data.get通所サービス_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get通所介護_要支援１(),
                 data.get通所介護_要支援２(),
                 data.get通所介護_予防計(),
@@ -162,7 +161,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get通所介護_要介護５(),
                 data.get通所介護_介護計(),
                 data.get通所介護_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get通所リハビリテーション_要支援１(),
                 data.get通所リハビリテーション_要支援２(),
                 data.get通所リハビリテーション_予防計(),
@@ -178,8 +177,8 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
         return getBodyData1(dataBodyList);
     }
 
-    private List<JigyohokokuCompYoshikiNenho202BodyData> getBodyData1(List<JigyohokokuCompYoshikiNenho202BodyData> dataBodyList) {
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+    private List<JigyohokokuCompYoshikiNenho2115BodyData> getBodyData1(List<JigyohokokuCompYoshikiNenho2115BodyData> dataBodyList) {
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get短期入所サービス_要支援１(),
                 data.get短期入所サービス_要支援２(),
                 data.get短期入所サービス_予防計(),
@@ -192,7 +191,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get短期入所サービス_要介護５(),
                 data.get短期入所サービス_介護計(),
                 data.get短期入所サービス_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get短期入所生活介護_要支援１(),
                 data.get短期入所生活介護_要支援２(),
                 data.get短期入所生活介護_予防計(),
@@ -205,7 +204,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get短期入所生活介護_要介護５(),
                 data.get短期入所生活介護_介護計(),
                 data.get短期入所生活介護_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get短期入所療養介護_介護老人保健施設_要支援１(),
                 data.get短期入所療養介護_介護老人保健施設_要支援２(),
                 data.get短期入所療養介護_介護老人保健施設_予防計(),
@@ -221,8 +220,8 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
         return getBodyData2(dataBodyList);
     }
 
-    private List<JigyohokokuCompYoshikiNenho202BodyData> getBodyData2(List<JigyohokokuCompYoshikiNenho202BodyData> dataBodyList) {
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+    private List<JigyohokokuCompYoshikiNenho2115BodyData> getBodyData2(List<JigyohokokuCompYoshikiNenho2115BodyData> dataBodyList) {
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get短期入所療養介護_介護療養型医療施設等_要支援１(),
                 data.get短期入所療養介護_介護療養型医療施設等_要支援２(),
                 data.get短期入所療養介護_介護療養型医療施設等_予防計(),
@@ -235,7 +234,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get短期入所療養介護_介護療養型医療施設等_要介護５(),
                 data.get短期入所療養介護_介護療養型医療施設等_介護計(),
                 data.get短期入所療養介護_介護療養型医療施設等_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get福祉用具_住宅改修サービス_要支援１(),
                 data.get福祉用具_住宅改修サービス_要支援２(),
                 data.get福祉用具_住宅改修サービス_予防計(),
@@ -248,7 +247,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get福祉用具_住宅改修サービス_要介護５(),
                 data.get福祉用具_住宅改修サービス_介護計(),
                 data.get福祉用具_住宅改修サービス_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get福祉用具貸与_要支援１(),
                 data.get福祉用具貸与_要支援２(),
                 data.get福祉用具貸与_予防計(),
@@ -261,7 +260,33 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get福祉用具貸与_要介護５(),
                 data.get福祉用具貸与_介護計(),
                 data.get福祉用具貸与_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
+                data.get福祉用具購入費_要支援１(),
+                data.get福祉用具購入費_要支援２(),
+                data.get福祉用具購入費_予防計(),
+                data.get福祉用具購入費_非該当(),
+                data.get福祉用具購入費_経過的要介護(),
+                data.get福祉用具購入費_要介護１(),
+                data.get福祉用具購入費_要介護２(),
+                data.get福祉用具購入費_要介護３(),
+                data.get福祉用具購入費_要介護４(),
+                data.get福祉用具購入費_要介護５(),
+                data.get福祉用具購入費_介護計(),
+                data.get福祉用具購入費_合計()));
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
+                data.get住宅改修費_要支援１(),
+                data.get住宅改修費_要支援２(),
+                data.get住宅改修費_予防計(),
+                data.get住宅改修費_非該当(),
+                data.get住宅改修費_経過的要介護(),
+                data.get住宅改修費_要介護１(),
+                data.get住宅改修費_要介護２(),
+                data.get住宅改修費_要介護３(),
+                data.get住宅改修費_要介護４(),
+                data.get住宅改修費_要介護５(),
+                data.get住宅改修費_介護計(),
+                data.get住宅改修費_合計()));
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get特定施設入居者生活介護_要支援１(),
                 data.get特定施設入居者生活介護_要支援２(),
                 data.get特定施設入居者生活介護_予防計(),
@@ -274,7 +299,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get特定施設入居者生活介護_要介護５(),
                 data.get特定施設入居者生活介護_介護計(),
                 data.get特定施設入居者生活介護_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get介護予防支援_居宅介護支援_要支援１(),
                 data.get介護予防支援_居宅介護支援_要支援２(),
                 data.get介護予防支援_居宅介護支援_予防計(),
@@ -287,7 +312,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get介護予防支援_居宅介護支援_要介護５(),
                 data.get介護予防支援_居宅介護支援_介護計(),
                 data.get介護予防支援_居宅介護支援_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get地域密着型_介護予防_サービス_要支援１(),
                 data.get地域密着型_介護予防_サービス_要支援２(),
                 data.get地域密着型_介護予防_サービス_予防計(),
@@ -300,7 +325,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get地域密着型_介護予防_サービス_要介護５(),
                 data.get地域密着型_介護予防_サービス_介護計(),
                 data.get地域密着型_介護予防_サービス_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get定期巡回_随時対応型訪問介護看護_要支援１(),
                 data.get定期巡回_随時対応型訪問介護看護_要支援２(),
                 data.get定期巡回_随時対応型訪問介護看護_予防計(),
@@ -313,7 +338,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get定期巡回_随時対応型訪問介護看護_要介護５(),
                 data.get定期巡回_随時対応型訪問介護看護_介護計(),
                 data.get定期巡回_随時対応型訪問介護看護_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get夜間対応型訪問介護_要支援１(),
                 data.get夜間対応型訪問介護_要支援２(),
                 data.get夜間対応型訪問介護_予防計(),
@@ -326,7 +351,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get夜間対応型訪問介護_要介護５(),
                 data.get夜間対応型訪問介護_介護計(),
                 data.get夜間対応型訪問介護_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get地域密着型通所介護_要支援１(),
                 data.get地域密着型通所介護_要支援２(),
                 data.get地域密着型通所介護_予防計(),
@@ -342,8 +367,8 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
         return getBodyData3(dataBodyList);
     }
 
-    private List<JigyohokokuCompYoshikiNenho202BodyData> getBodyData3(List<JigyohokokuCompYoshikiNenho202BodyData> dataBodyList) {
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+    private List<JigyohokokuCompYoshikiNenho2115BodyData> getBodyData3(List<JigyohokokuCompYoshikiNenho2115BodyData> dataBodyList) {
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get認知症対応型通所介護_要支援１(),
                 data.get認知症対応型通所介護_要支援２(),
                 data.get認知症対応型通所介護_予防計(),
@@ -356,7 +381,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get認知症対応型通所介護_要介護５(),
                 data.get認知症対応型通所介護_介護計(),
                 data.get認知症対応型通所介護_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get小規模多機能型居宅介護_要支援１(),
                 data.get小規模多機能型居宅介護_要支援２(),
                 data.get小規模多機能型居宅介護_予防計(),
@@ -369,7 +394,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get小規模多機能型居宅介護_要介護５(),
                 data.get小規模多機能型居宅介護_介護計(),
                 data.get小規模多機能型居宅介護_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get認知症対応型共同生活介護_要支援１(),
                 data.get認知症対応型共同生活介護_要支援２(),
                 data.get認知症対応型共同生活介護_予防計(),
@@ -382,7 +407,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get認知症対応型共同生活介護_要介護５(),
                 data.get認知症対応型共同生活介護_介護計(),
                 data.get認知症対応型共同生活介護_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get地域密着型特定施設入居者生活介護_要支援１(),
                 data.get地域密着型特定施設入居者生活介護_要支援２(),
                 data.get地域密着型特定施設入居者生活介護_予防計(),
@@ -395,7 +420,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get地域密着型特定施設入居者生活介護_要介護５(),
                 data.get地域密着型特定施設入居者生活介護_介護計(),
                 data.get地域密着型特定施設入居者生活介護_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get地域密着型介護老人福祉施設入居者生活介護_要支援１(),
                 data.get地域密着型介護老人福祉施設入居者生活介護_要支援２(),
                 data.get地域密着型介護老人福祉施設入居者生活介護_予防計(),
@@ -408,7 +433,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get地域密着型介護老人福祉施設入居者生活介護_要介護５(),
                 data.get地域密着型介護老人福祉施設入居者生活介護_介護計(),
                 data.get地域密着型介護老人福祉施設入居者生活介護_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get複合型サービス_看護小規模多機能型居宅介護_要支援１(),
                 data.get複合型サービス_看護小規模多機能型居宅介護_要支援２(),
                 data.get複合型サービス_看護小規模多機能型居宅介護_予防計(),
@@ -421,7 +446,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get複合型サービス_看護小規模多機能型居宅介護_要介護５(),
                 data.get複合型サービス_看護小規模多機能型居宅介護_介護計(),
                 data.get複合型サービス_看護小規模多機能型居宅介護_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get施設介護サービス_要支援１(),
                 data.get施設介護サービス_要支援２(),
                 data.get施設介護サービス_予防計(),
@@ -434,7 +459,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get施設介護サービス_要介護５(),
                 data.get施設介護サービス_介護計(),
                 data.get施設介護サービス_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get介護老人福祉施設_要支援１(),
                 data.get介護老人福祉施設_要支援２(),
                 data.get介護老人福祉施設_予防計(),
@@ -447,7 +472,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get介護老人福祉施設_要介護５(),
                 data.get介護老人福祉施設_介護計(),
                 data.get介護老人福祉施設_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get介護老人保健施設_要支援１(),
                 data.get介護老人保健施設_要支援２(),
                 data.get介護老人保健施設_予防計(),
@@ -460,7 +485,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get介護老人保健施設_要介護５(),
                 data.get介護老人保健施設_介護計(),
                 data.get介護老人保健施設_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get介護療養型医療施設_要支援１(),
                 data.get介護療養型医療施設_要支援２(),
                 data.get介護療養型医療施設_予防計(),
@@ -473,7 +498,7 @@ public class JigyohokokuCompYoshikiNenho202Report extends Report<JigyohokokuComp
                 data.get介護療養型医療施設_要介護５(),
                 data.get介護療養型医療施設_介護計(),
                 data.get介護療養型医療施設_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshikiNenho202BodyData(
+        dataBodyList.add(new JigyohokokuCompYoshikiNenho2115BodyData(
                 data.get総計_要支援１(),
                 data.get総計_要支援２(),
                 data.get総計_予防計(),

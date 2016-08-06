@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshikinenno202;
+package jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshikinenno2112;
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -13,14 +13,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 介護事業状況報告年報（様式2）のパラメータクラスです。
+ * 介護事業状況報告年報（様式2-2）のパラメータクラスです。
  *
- * @reamsid_L DBU-5600-190 zhaoran
+ * @reamsid_L DBU-5600-210 zhaoran
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JigyohokokuCompYoshikiNenho202Data {
+public class JigyohokokuCompYoshikiNenho2112Data {
 
     private RString 年報月報区分;
     private RDateTime 処理日時;
