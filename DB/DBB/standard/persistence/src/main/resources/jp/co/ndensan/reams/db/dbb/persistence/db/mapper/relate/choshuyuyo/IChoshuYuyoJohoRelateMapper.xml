@@ -93,7 +93,7 @@
         <collection property="介護期別徴収猶予Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2007KibetsuChoshuYuyoMapper.ResultMap_DbT2007KibetsuChoshuYuyoEntity"/>
     </resultMap>
     
-    <select resultOrdered="true" id="selsect徴収猶予の情報_最新" resultMap="resultMap_ChoshuYuyoJohoRelateEntity" fetchSize="500">
+    <select resultOrdered="true" id="select徴収猶予の情報_最新" resultMap="resultMap_ChoshuYuyoJohoRelateEntity" fetchSize="500">
         <include refid="selectChoshuYuyoJohoJokyo" />
     </select>
 
