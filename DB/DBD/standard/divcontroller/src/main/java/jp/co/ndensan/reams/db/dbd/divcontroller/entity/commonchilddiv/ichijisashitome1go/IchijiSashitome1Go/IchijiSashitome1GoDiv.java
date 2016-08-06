@@ -56,6 +56,10 @@ public class IchijiSashitome1GoDiv extends Panel implements IIchijiSashitome1GoD
     private RString rirekiNo;
     @JsonProperty("tainoHanteiKekka")
     private RString tainoHanteiKekka;
+    @JsonProperty("PTN")
+    private RString PTN;
+    @JsonProperty("button_Name")
+    private RString button_Name;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -349,6 +353,42 @@ public class IchijiSashitome1GoDiv extends Panel implements IIchijiSashitome1GoD
     @JsonProperty("tainoHanteiKekka")
     public void setTainoHanteiKekka(RString tainoHanteiKekka) {
         this.tainoHanteiKekka = tainoHanteiKekka;
+    }
+
+    /*
+     * getPTN
+     * @return PTN
+     */
+    @JsonProperty("PTN")
+    public RString getPTN() {
+        return PTN;
+    }
+
+    /*
+     * setPTN
+     * @param PTN PTN
+     */
+    @JsonProperty("PTN")
+    public void setPTN(RString PTN) {
+        this.PTN = PTN;
+    }
+
+    /*
+     * getbutton_Name
+     * @return button_Name
+     */
+    @JsonProperty("button_Name")
+    public RString getButton_Name() {
+        return button_Name;
+    }
+
+    /*
+     * setbutton_Name
+     * @param button_Name button_Name
+     */
+    @JsonProperty("button_Name")
+    public void setButton_Name(RString button_Name) {
+        this.button_Name = button_Name;
     }
 
     /*
