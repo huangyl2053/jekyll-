@@ -47,6 +47,7 @@ public class JigyohokokuGeppoYoshiki26BodyData {
     private final RString listList2_12;
 
     /**
+     * コンストラクタです。
      *
      * @param listList1_1 empty
      * @param listList1_2 要支援1
