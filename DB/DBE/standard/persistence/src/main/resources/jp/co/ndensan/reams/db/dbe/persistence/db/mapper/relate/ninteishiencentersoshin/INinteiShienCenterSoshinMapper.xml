@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： センター送信準備用XMLです。 -->
+<!-- @reamsid_L DBE-1520-011 lishengli-->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteishiencentersoshin.INinteiShienCenterSoshinMapper">
+
+    <select id="get対象者一覧情報" resultMap="resultMap_NinteiShienCenterSoshinEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ninteishiencentersoshin.NinteiShienCenterSoshinParameter" fetchSize="500" resultOrdered="true">
+        SELECT
+            dbT5101."shoKisaiHokenshaNo" AS shoKisaiHokenshaNo,
+            dbT7051."shichosonMeisho" AS shichosonMeisho,
+            dbT5101."hihokenshaNo" AS hihokenshaNo,
+            dbT5101."hihokenshaName" AS hihokenshaName,
+            dbT5101."hihokenshaKana" AS hihokenshaKana,
+            dbT5101.seibetsu AS seibetsu,
+            dbT5101."seinengappiYMD" AS seinengappiYMD,
+            dbT5101."ninteiShinseiYMD" AS ninteiShinseiYMD,
+            dbT5101."ninteiShinseiShinseijiKubunCode" AS ninteiShinseiShinseijiKubunCode,
+            dbT5101."ninteiShinseiHoreiKubunCode" AS ninteiShinseiHoreiKubunCode,
+            dbT5101."shinseishoKanriNo" AS shinseishoKanriNo,
+            dbT5101."koroshoIfShikibetsuCode" AS koroshoIfShikibetsuCode,
+            dbT5101."ifSofuYMD" AS ifSofuYMD,
+            dbT5102."nijiHanteiYokaigoJotaiKubunCode" AS nijiHanteiYokaigoJotaiKubunCode,
+            dbT5102."nijiHanteiNinteiYukoKikan" AS nijiHanteiNinteiYukoKikan,
+            dbT5102."nijiHanteiNinteiYukoKaishiYMD" AS nijiHanteiNinteiYukoKaishiYMD,
+            dbT5102."nijiHanteiNinteiYukoShuryoYMD" AS nijiHanteiNinteiYukoShuryoYMD
+        FROM rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
+            ON dbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
+        INNER JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102
+            ON dbT5101."shinseishoKanriNo" = dbT5102."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS dbT5105
+            ON dbT5105."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"
+            AND dbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+            AND dbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
+            AND dbT5105."ninteichosaKanryoYMD" IS NOT NULL
+            AND dbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
+            AND dbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
+            AND dbT5105."ichijiHanteiKanryoYMD" IS NOT NULL
+            AND dbT5105."maskingKanryoYMD" IS NOT NULL
+            AND dbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
+            AND dbT5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
+            AND dbT5105."centerSoshinYMD" IS NOT NULL
+        LEFT JOIN rgdb."DbT7211GaibuRenkeiDataoutputJoho" AS dbT7211
+            ON dbT7211."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"
+        WHERE dbT5101."logicalDeletedFlag" = False
+            <if test="is未出力">
+                <!--AND dbT7211."CenterSoshinChushutsuYMD" IS NULL-->
+            </if>
+            <if test="has二次判定日_開始">
+                AND #{二次判定日_開始} <![CDATA[<=]]> dbT5102."nijiHanteiNinteiYukoKaishiYMD"
+            </if>
+            <if test="has二次判定日_終了">
+                AND dbT5102."nijiHanteiNinteiYukoShuryoYMD" <![CDATA[<=]]> #{二次判定日_終了}
+            </if>
+        ORDER BY dbT5101."hihokenshaNo"
+        LIMIT(#{件数})
+    </select>
+
+    <resultMap id="resultMap_NinteiShienCenterSoshinEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishiencentersoshin.NinteiShienCenterSoshinEntity" autoMapping="true">
+        <result property="介護認定審査会委員コード" column="介護認定審査会委員コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+</mapper>
