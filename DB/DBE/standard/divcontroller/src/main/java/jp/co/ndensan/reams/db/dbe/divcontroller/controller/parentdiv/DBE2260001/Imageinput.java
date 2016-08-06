@@ -309,9 +309,9 @@ public class Imageinput {
                 joho = joho.createBuilderForEdit().set意見書作成回数区分(new Code(data.get意見書作成回数())).build();
             }
             if (data.isT5101_施設入所の有無()) {
-                joho = joho.createBuilderForEdit().set在宅_施設区分(new Code(ZaitakuShisetsuKubun.在宅.getコード())).build();
-            } else {
                 joho = joho.createBuilderForEdit().set在宅_施設区分(new Code(ZaitakuShisetsuKubun.施設.getコード())).build();
+            } else {
+                joho = joho.createBuilderForEdit().set在宅_施設区分(new Code(ZaitakuShisetsuKubun.在宅.getコード())).build();
             }
 
             joho = joho.createBuilderForEdit().set意見書同意フラグ(rStringToBeelan(data.get同意の有無())).build();
