@@ -76,11 +76,10 @@ public class JukyushaIdoRenrakuhyoTorokuEntity {
     private RString 広域保険者番号;
     private RString 老人保健市町村番号;
     private RString 老人保健受給者番号;
-    private RString 老人保健公費負担者番号;
     private RString 軽減率;
     private FlexibleDate 軽減率適用開始年月日;
     private FlexibleDate 軽減率適用終了年月日;
-    private RString 小規模居宅ｻｰﾋﾞｽ利用;
+    private Boolean 小規模居宅ｻｰﾋﾞｽ利用;
     private RString 二次予防事業区分;
     private FlexibleDate 二次予防有効期間開始年月日;
     private FlexibleDate 二次予防有効期間終了年月日;
