@@ -1,4 +1,4 @@
-{
+﻿{
  "uiContainerName": "DBUUC01100",
  "displayWizard": false,
  "subGyomuCode": "DBU",
@@ -37,7 +37,7 @@
      "layoutName": "DBU0110011",
      "layoutTitle": "老齢福祉年金情報管理",
      "eventName": "再検索",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",
@@ -51,7 +51,7 @@
      "layoutName": "DBU0110011",
      "layoutTitle": "老齢福祉年金情報管理",
      "eventName": "一覧戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",
