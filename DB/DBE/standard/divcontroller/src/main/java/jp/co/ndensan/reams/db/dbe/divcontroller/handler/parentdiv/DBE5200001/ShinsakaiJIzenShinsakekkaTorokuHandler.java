@@ -111,11 +111,11 @@ public class ShinsakaiJIzenShinsakekkaTorokuHandler {
         if (flg == ZERO) {
             ShinsakaiJizenKekkaJoho kekkaEntity = new ShinsakaiJizenKekkaJoho(
                     csvEntity.getShinsakaiKaisaiNo(), csvEntity.getShinsakaiIinCode(), Integer.parseInt(csvEntity.getShinsakaiOrder().toString()));
-            kekkaEntity.createBuilderForEdit().set二次判定結果コード(new Code(csvEntity.getNijiHanteiKekkaCode()))
+            kekkaEntity = kekkaEntity.createBuilderForEdit().set二次判定結果コード(new Code(csvEntity.getNijiHanteiKekkaCode()))
                     .set有効期間(Integer.parseInt(csvEntity.getYukokikan().toString())).build();
             return ShinsakaiJIzenshinsakekkaIchiranManager.createInstance().saveCsvDataInput(kekkaEntity);
         } else {
-            dacEntity.createBuilderForEdit().set二次判定結果コード(new Code(csvEntity.getNijiHanteiKekkaCode()))
+            dacEntity = dacEntity.createBuilderForEdit().set二次判定結果コード(new Code(csvEntity.getNijiHanteiKekkaCode()))
                     .set有効期間(Integer.parseInt(csvEntity.getYukokikan().toString())).build();
             return ShinsakaiJIzenshinsakekkaIchiranManager.createInstance().saveCsvDataInput(dacEntity);
         }
@@ -124,13 +124,14 @@ public class ShinsakaiJIzenShinsakekkaTorokuHandler {
     private boolean selectByKey(List<ShinsakaikekkaIchiranInputCsvEntity> csvEntityList) {
         boolean 判定ふらぐ = false;
         for (ShinsakaikekkaIchiranInputCsvEntity csvEntity : csvEntityList) {
-            ShinsakaiJizenKekkaJoho dacEntity = new ShinsakaiJizenKekkaJoho(ShinsakaiJIzenshinsakekkaIchiranManager.createInstance()
+            if (ShinsakaiJIzenshinsakekkaIchiranManager.createInstance()
                     .selectByKey(csvEntity.getShinsakaiKaisaiNo(), csvEntity.getShinsakaiIinCode(),
-                            Integer.parseInt(csvEntity.getShinsakaiOrder().toString())));
-            if (dacEntity.get介護認定審査会開催番号() == null) {
+                            Integer.parseInt(csvEntity.getShinsakaiOrder().toString())) == null) {
                 判定ふらぐ = saveCsvDataInput(csvEntity, null, ZERO);
             } else {
-                判定ふらぐ = saveCsvDataInput(csvEntity, dacEntity, ITI);
+                判定ふらぐ = saveCsvDataInput(csvEntity, new ShinsakaiJizenKekkaJoho(ShinsakaiJIzenshinsakekkaIchiranManager.createInstance()
+                        .selectByKey(csvEntity.getShinsakaiKaisaiNo(), csvEntity.getShinsakaiIinCode(),
+                                Integer.parseInt(csvEntity.getShinsakaiOrder().toString()))), ITI);
             }
         }
         return 判定ふらぐ;
