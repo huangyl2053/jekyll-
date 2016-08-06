@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuGaiky
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuHanteiDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuHanteiDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuIkenshoDataSakuseiA3Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuIkenshoDataSakuseiA42Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuIkenshoDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuItiziHanteiDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuItiziHanteiDataSakuseiA4Process;
@@ -151,7 +152,9 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
     @Step(事務局_主治医意見書)
     protected IBatchFlowCommand createJimuIkenshoData() {
         if (選択.equals(getParameter().getShuturyokuSutairu())) {
-            return loopBatch(JimuIkenshoDataSakuseiA4Process.class)
+            loopBatch(JimuIkenshoDataSakuseiA4Process.class)
+                    .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
+            return loopBatch(JimuIkenshoDataSakuseiA42Process.class)
                     .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
         } else {
             return loopBatch(JimuIkenshoDataSakuseiA3Process.class)
