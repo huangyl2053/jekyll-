@@ -780,4 +780,16 @@ public class KetteiTsuchishoInfoTempEntity extends DbTableEntityBase<KetteiTsuch
     private SetaiCode atesaki_honninSetaiCode;
     @TempTableColumnOrder(358)
     private SetaiCode atesaki_dainoninSetaiCode;
+    @TempTableColumnOrder(359)
+    private ChikuCode atesaki_setainushiChikuCode1;
+    @TempTableColumnOrder(360)
+    private RString atesaki_setainushiChiku1;
+    @TempTableColumnOrder(361)
+    private ChikuCode atesaki_setainushiChikuCode2;
+    @TempTableColumnOrder(362)
+    private RString atesaki_setainushiChiku2;
+    @TempTableColumnOrder(363)
+    private ChikuCode atesaki_setainushiChikuCode3;
+    @TempTableColumnOrder(364)
+    private RString atesaki_setainushiChiku3;
 }
