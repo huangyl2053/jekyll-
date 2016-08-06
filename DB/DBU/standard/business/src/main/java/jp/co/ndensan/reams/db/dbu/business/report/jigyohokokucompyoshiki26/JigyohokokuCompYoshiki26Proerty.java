@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki26;
 
 import jp.co.ndensan.reams.db.dbu.definition.reportid.ReportIdDBU;
-import jp.co.ndensan.reams.db.dbu.entity.report.JigyohokokuCompYoshiki26.JigyohokokuCompYoshikiReportSource;
+import jp.co.ndensan.reams.db.dbu.entity.report.JigyohokokuCompYoshiki26.JigyohokokuCompYoshiki26ReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
@@ -15,13 +15,13 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  *
  * @reamsid_L DBU-5600-270 guoqilin
  */
-public class JigyohokokuCompYoshiki26Proerty extends ReportPropertyBase<JigyohokokuCompYoshikiReportSource> {
+public class JigyohokokuCompYoshiki26Proerty extends ReportPropertyBase<JigyohokokuCompYoshiki26ReportSource> {
 
     /**
      * コンストラクタです。
      */
     public JigyohokokuCompYoshiki26Proerty() {
-        super(SubGyomuCode.DBU介護統計報告, ReportIdDBU.DBU30018.getReportId());
+        super(SubGyomuCode.DBU介護統計報告, ReportIdDBU.DBU300018.getReportId());
     }
 
 }

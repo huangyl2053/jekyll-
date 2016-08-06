@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
  *
  * @reamsid_L DBU-5600-260 guoqilin
  */
-public class JigyohokokuCompYoshikiReportSource implements IReportSource {
+public class JigyohokokuCompYoshiki25ReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     @ReportItem(name = "yoshiki", length = 7, order = 1)

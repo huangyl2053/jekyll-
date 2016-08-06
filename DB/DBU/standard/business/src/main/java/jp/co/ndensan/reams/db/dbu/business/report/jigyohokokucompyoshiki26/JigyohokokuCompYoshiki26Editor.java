@@ -6,12 +6,13 @@
 package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki26;
 
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki26.JigyohokokuCompYoshiki26;
-import jp.co.ndensan.reams.db.dbu.entity.report.JigyohokokuCompYoshiki26.JigyohokokuCompYoshikiReportSource;
+import jp.co.ndensan.reams.db.dbu.entity.report.JigyohokokuCompYoshiki26.JigyohokokuCompYoshiki26ReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -24,9 +25,13 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class JigyohokokuCompYoshiki26Editor implements IJigyohokokuCompYoshiki26Editor {
 
-    private static final RString 現物分 = new RString("02");
-    private static final RString 償還審査分 = new RString("04");
-    private static final RString 償還決定分 = new RString("06");
+    private static final RString DATE_時 = new RString("時");
+    private static final RString DATE_分 = new RString("分");
+    private static final RString DATE_秒 = new RString("秒");
+    private static final RString 作成 = new RString("作成");
+    private static final RString 現物分 = new RString("1");
+    private static final RString 償還審査分 = new RString("2");
+    private static final RString 償還決定分 = new RString("3");
     private static final RString 月報 = new RString("1");
     private static final RString 年報 = new RString("2");
     private final JigyohokokuCompYoshiki26 item;
@@ -41,14 +46,31 @@ public class JigyohokokuCompYoshiki26Editor implements IJigyohokokuCompYoshiki26
     }
 
     @Override
-    public JigyohokokuCompYoshikiReportSource edit(JigyohokokuCompYoshikiReportSource source) {
+    public JigyohokokuCompYoshiki26ReportSource edit(JigyohokokuCompYoshiki26ReportSource source) {
         return editSource(source);
     }
 
-    private JigyohokokuCompYoshikiReportSource editSource(JigyohokokuCompYoshikiReportSource source) {
+    private JigyohokokuCompYoshiki26ReportSource editSource(JigyohokokuCompYoshiki26ReportSource source) {
+        RStringBuilder printTimeStampSb = new RStringBuilder();
+        RDateTime printdate = item.get処理日時();
+        printTimeStampSb.append(printdate.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        printTimeStampSb.append(RString.HALF_SPACE);
+        printTimeStampSb.append(String.format("%02d", printdate.getHour()));
+        printTimeStampSb.append(DATE_時);
+        printTimeStampSb.append(String.format("%02d", printdate.getMinute()));
+        printTimeStampSb.append(DATE_分);
+        printTimeStampSb.append(String.format("%02d", printdate.getSecond()));
+        printTimeStampSb.append(DATE_秒);
+        printTimeStampSb.append(作成);
+        source.printTimeStamp = printTimeStampSb.toRString();
         source.yoshiki = item.get様式();
-        source.printTimeStamp = item.get処理日時();
-        source.shukeiKubun = item.get年報月報区分();
+        if (月報.equals(item.get年報月報区分())) {
+            source.shukeiKubun = new RString("月報");
+        } else if (年報.equals(item.get年報月報区分())) {
+            source.shukeiKubun = new RString("年報");
+        }
         source.shuukeiHani = get集計範囲();
         source.hokenshaNo = item.get保険者番号();
         source.hokenshaName = item.get保険者名();

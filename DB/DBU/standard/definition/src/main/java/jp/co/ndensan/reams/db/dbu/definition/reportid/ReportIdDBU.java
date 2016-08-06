@@ -89,11 +89,15 @@ public enum ReportIdDBU {
     /**
      * 介護事業状況報告月報（様式2-5）の帳票ＩＤです。
      */
-    DBU30017(new ReportId("DBU300017_JigyohokokuCompYoshiki2_5"), new RString("介護事業状況報告月報（様式2-5）")),
+    DBU300017(new ReportId("DBU300017_JigyohokokuCompYoshiki2_5"), new RString("介護事業状況報告月報（様式2-5）")),
     /**
      * 介護事業状況報告月報（様式2-6）の帳票ＩＤです。
      */
-    DBU30018(new ReportId("DBU300017_JigyohokokuCompYoshiki2_5"), new RString("介護事業状況報告月報（様式2-6）")),
+    DBU300018(new ReportId("DBU300017_JigyohokokuCompYoshiki2_5"), new RString("介護事業状況報告月報（様式2-6）")),
+    /**
+     * 介護事業状況報告年報（様式2-4）の帳票ＩＤです。
+     */
+    DBU300011(new ReportId("DBU300010_JigyohokokuCompYoshiki2_0_2"), new RString("介護事業状況報告年報（様式2-4)")),
     /**
      * 介護事業状況報告月報・保険給付決定状況（様式2-7-1）の帳票ＩＤです。
      */
