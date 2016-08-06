@@ -259,7 +259,6 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
                 shuturyokuJun,
                 shuturyokuSutairu,
                 printHou,
-                Decimal.ZERO,
                 shinsakaiKaishiYoteiTime);
     }
 

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -26,6 +27,7 @@ public class JimuSonotashiryoBusiness {
     private final ShinsakaiSiryoKyotsuEntity entity;
     private final List<RString> ファイル名List;
     private int index;
+    private final RString ファイル名_G0001 = new RString("G0001.png");
 
     /**
      * コンストラクタです。
@@ -121,6 +123,15 @@ public class JimuSonotashiryoBusiness {
      */
     public RString get右のその他資料イメージ() {
         return getその他資料();
+    }
+
+    /**
+     * 事務局概況特記イメージを取得します。
+     *
+     * @return 事務局概況特記イメージ
+     */
+    public RString get事務局概況特記イメージ() {
+        return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイル名_G0001);
     }
 
     /**
@@ -229,5 +240,26 @@ public class JimuSonotashiryoBusiness {
         ファイル名.add(new RString("F1401F05_BAK.png"));
         ファイル名.add(new RString("F1401F06_BAK.png"));
         return ファイル名;
+    }
+
+    private RString 共有ファイルを引き出す(RDateTime イメージID, RString sharedFileName) {
+        RString imagePath = RString.EMPTY;
+        if (イメージID != null) {
+            imagePath = getFilePath(イメージID, sharedFileName);
+        }
+        return imagePath;
+    }
+
+    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
+        ReadOnlySharedFileEntryDescriptor descriptor
+                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
+                        sharedFileId);
+        try {
+            SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+        } catch (Exception e) {
+            return RString.EMPTY;
+        }
+        return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
     }
 }

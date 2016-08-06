@@ -44,7 +44,6 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
      * @param shuturyokuJun 出力順
      * @param shuturyokuSutairu 出力スタイル
      * @param printHou 印刷方法
-     * @param chohyoIinHusu 審査会委員用部数
      * @param shinsakaiKaishiYoteiTime 介護認定審査会開始予定時刻
      */
     public IinShinsakaiIinJohoProcessParameter(
@@ -54,7 +53,6 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
             RString shuturyokuJun,
             RString shuturyokuSutairu,
             RString printHou,
-            Decimal chohyoIinHusu,
             RString shinsakaiKaishiYoteiTime) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shuturyokuJun = shuturyokuJun;
@@ -62,7 +60,6 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
         this.shinsakaiKaisaiYoteiYMD = shinsakaiKaisaiYoteiYMD;
         this.shuturyokuSutairu = shuturyokuSutairu;
         this.printHou = printHou;
-        this.chohyoIinHusu = chohyoIinHusu;
         this.shinsakaiKaishiYoteiTime = shinsakaiKaishiYoteiTime;
     }
 
@@ -90,7 +87,7 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
         if (RString.isNullOrEmpty(shuturyokuJun)) {
             isShuturyokuJun = true;
         }
-        return new JimuShinsakaiIinJohoMyBatisParameter(bangoStart, bangoEnd, new RString(gogitaiNo),
-                isShuturyokuJun, isSakuseiJokenHani, isSakuseiJokenTuika, shinsakaiKaisaiNo, shuturyokuJun, shinsakaiKaisaiYoteiYMD);
+        return new JimuShinsakaiIinJohoMyBatisParameter(bangoStart, bangoEnd, shuturyokuJun,
+                isShuturyokuJun, isSakuseiJokenHani, isSakuseiJokenTuika, shinsakaiKaisaiNo, new RString(gogitaiNo), shinsakaiKaisaiYoteiYMD);
     }
 }

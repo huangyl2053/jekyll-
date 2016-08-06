@@ -9,14 +9,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWariateJohoBusiness;
-import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoa3.ShujiiikenshoA3Report;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuSonotashiryoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.report.sonotashiryoa4.SonotashiryoA4Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoa3.ShujiiikenshoA3ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.sonotashiryoa4.SonotashiryoA4ReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -34,48 +35,48 @@ import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 事務局用主治医意見書情報バッチクラスです。
  *
- * @reamsid_L DBE-0150-190 linghuhang
+ * @author soft863
  */
-public class JimuIkenshoDataSakuseiA3Process extends BatchKeyBreakBase<ShinsakaiSiryoKyotsuEntity> {
+public class JimuGaikyotokkiSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<ShinsakaiSiryoKyotsuEntity> {
 
-    private static final RString SELECT_JIMUWARIATEJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
-            + ".mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper.get共通情報");
-    private static final List<RString> PAGE_BREAK_KEYS_A3 = Collections.unmodifiableList(Arrays.asList(
-            new RString(ShujiiikenshoA3ReportSource.ReportSourceFields.hokenshaNo.name())));
+    private static final RString SELECT_JIMUTSONOTAJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
+            + ".mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper.get概況特記イメージ");
+    private static final List<RString> PAGE_BREAK_KEYS_A4 = Collections.unmodifiableList(Arrays.asList(
+            new RString(SonotashiryoA4ReportSource.ReportSourceFields.hokenshaNo.name())));
     private IinShinsakaiIinJohoProcessParameter paramter;
     private JimuShinsakaiIinJohoMyBatisParameter myBatisParameter;
-    private JimuShinsakaiWariateJohoBusiness business;
+    private JimuSonotashiryoBusiness business;
     @BatchWriter
-    private BatchReportWriter<ShujiiikenshoA3ReportSource> batchWriteA3;
-    private ReportSourceWriter<ShujiiikenshoA3ReportSource> reportSourceWriterA3;
+    private BatchReportWriter<SonotashiryoA4ReportSource> batchWriteA4;
+    private ReportSourceWriter<SonotashiryoA4ReportSource> reportSourceWriterA4;
 
     @Override
     protected void initialize() {
         myBatisParameter = paramter.toJimuShinsakaiIinJohoMyBatisParameter();
         myBatisParameter.setOrderKakuteiFlg(ShinsakaiOrderKakuteiFlg.確定.is介護認定審査会審査順確定());
+        myBatisParameter.setShoriJotaiKubun0(ShoriJotaiKubun.通常.getコード());
+        myBatisParameter.setShoriJotaiKubun3(ShoriJotaiKubun.延期.getコード());
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(SELECT_JIMUWARIATEJOHO, myBatisParameter);
+        return new BatchDbReader(SELECT_JIMUTSONOTAJOHO, myBatisParameter);
     }
 
     @Override
     protected void usualProcess(ShinsakaiSiryoKyotsuEntity entity) {
-        entity.setJimukyoku(true);
-        business = new JimuShinsakaiWariateJohoBusiness(entity);
-        ShujiiikenshoA3Report reportA3 = new ShujiiikenshoA3Report(business);
-        reportA3.writeBy(reportSourceWriterA3);
+        business = new JimuSonotashiryoBusiness(entity);
+        SonotashiryoA4Report reportA4 = new SonotashiryoA4Report(business);
+        reportA4.writeBy(reportSourceWriterA4);
     }
 
     @Override
     protected void createWriter() {
-        batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517005.getReportId().value())
-                .addBreak(new BreakerCatalog<ShujiiikenshoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A3))
+        batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517016.getReportId().value())
+                .addBreak(new BreakerCatalog<SonotashiryoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A4))
                 .create();
-        reportSourceWriterA3 = new ReportSourceWriter<>(batchWriteA3);
+        reportSourceWriterA4 = new ReportSourceWriter<>(batchWriteA4);
     }
 
     @Override
@@ -93,15 +94,15 @@ public class JimuIkenshoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsakai
     }
 
     private void outputJokenhyoFactory() {
-        RString id = ReportIdDBE.DBE517005.getReportId().getColumnValue();
-        RString 総ページ数 = new RString(batchWriteA3.getPageCount());
+        RString id = ReportIdDBE.DBE517016.getReportId().getColumnValue();
+        RString 総ページ数 = new RString(batchWriteA4.getPageCount());
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem jokenhyoItem = new ReportOutputJokenhyoItem(
                 id,
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                new RString("主治医意見書"),
+                new RString("概況特記"),
                 総ページ数,
                 RString.EMPTY,
                 RString.EMPTY,
@@ -111,19 +112,21 @@ public class JimuIkenshoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsakai
 
     private List<RString> 出力条件() {
         List<RString> list = new ArrayList<>();
-        RStringBuilder builder1 = new RStringBuilder();
-        builder1.append("【合議体番号】")
+        RStringBuilder builder = new RStringBuilder();
+        builder.append("【合議体番号】")
                 .append(" ")
                 .append(paramter.getGogitaiNo());
-        RStringBuilder builder2 = new RStringBuilder();
-        builder2.append("【介護認定審査会開催予定年月日】")
+        RStringBuilder stringBuilder = new RStringBuilder();
+        stringBuilder.append("【介護認定審査会開催予定年月日】")
                 .append(" ")
                 .append(paramter.getShinsakaiKaisaiYoteiYMD().wareki());
-        RStringBuilder builder3 = new RStringBuilder();
-        builder3.append("【介護認定審査会開催番号】")
+        RStringBuilder 開催番号 = new RStringBuilder();
+        stringBuilder.append("【介護認定審査会開催番号】")
                 .append(" ")
                 .append(paramter.getShinsakaiKaisaiNo());
-        list.add(builder1.toRString());
+        list.add(builder.toRString());
+        list.add(stringBuilder.toRString());
+        list.add(開催番号.toRString());
         return list;
     }
 }

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -40,6 +41,8 @@ public class JimuShinsakaiIinJohoMyBatisParameter implements IMyBatisParameter {
     private int ikenshoIraiRirekiNo;
     private ShinseishoKanriNo shinseishoKanriNoZ;
     private RString genponMaskKubun;
+    private List<ShinseishoKanriNo> shinseishoKanriNoList;
+    private List<Integer> ninteichosaRirekiNoList;
 
     /**
      * コンストラクタです。
