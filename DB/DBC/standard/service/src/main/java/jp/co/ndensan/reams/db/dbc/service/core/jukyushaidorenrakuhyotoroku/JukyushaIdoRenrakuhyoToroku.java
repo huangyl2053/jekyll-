@@ -69,7 +69,16 @@ public class JukyushaIdoRenrakuhyoToroku {
             throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage().replace(既存の異動日.toString()));
         } else {
             DbT3001JukyushaIdoRenrakuhyoEntity entity = dac.select異動区分(被保険者番号, new RString(異動日.toString()));
-            RString idoKubunCode = entity.getIdoKubunCode();
+            if (entity != null) {
+                RString idoKubunCode = entity.getIdoKubunCode();
+                return checkNgorOk(異動区分, idoKubunCode);
+            }
+        }
+        return null;
+    }
+
+    private RString checkNgorOk(RString 異動区分, RString idoKubunCode) {
+        if (idoKubunCode != null) {
             if ((ONE.equals(異動区分) && THREE.equals(idoKubunCode))
                     || (TWO.equals(異動区分) && (ONE.equals(idoKubunCode) || TWO.equals(idoKubunCode)))
                     || (THREE.equals(異動区分) && (ONE.equals(idoKubunCode) || TWO.equals(idoKubunCode)))) {
