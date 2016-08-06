@@ -35,7 +35,14 @@ public class TsuikashiryokagamiA3Editor implements ITsuikashiryokagamiA3Editor {
     public TsuikashiryokagamiA3ReportSource edit(TsuikashiryokagamiA3ReportSource source) {
         source.shinsakaiNo = business.get審査会開催番号();
         source.tsuchibun = business.get通知文1();
-//        source.listShinsainName_1 = business.get審査員一覧();
+        source.ShinsainName1 = business.get審査員1();
+        source.ShinsainName2 = business.get審査員2();
+        source.ShinsainName3 = business.get審査員3();
+        source.ShinsainName4 = business.get審査員4();
+        source.ShinsainName5 = business.get審査員5();
+        source.ShinsainName6 = business.get審査員6();
+        source.ShinsainName7 = business.get審査員7();
+        source.ShinsainName8 = business.get審査員8();
         source.shinsakaiKaisaiYMD = business.get審査会開催年月日();
         source.gogitaiNo = business.get合議体番号();
         source.shinsakaiTsuikasha = business.get追加審査対象者数();
@@ -46,7 +53,7 @@ public class TsuikashiryokagamiA3Editor implements ITsuikashiryokagamiA3Editor {
         source.listShinsei_5 = business.get性別();
         source.listShinsei_6 = business.get年齢();
         source.listShinsei_7 = business.get前回二次();
-        source.listShinsei_8 = business.get前回期間_上();
+        source.listShinsei_8 = business.get前回期間();
         source.listShinsei_9 = business.get一次判定();
         source.listShinsei_10 = RString.EMPTY;
         source.listShinsei_11 = RString.EMPTY;
