@@ -31,7 +31,6 @@ public class JigyohokokuCompYoshikinenho201Report extends Report<JigyohokokuComp
     }
 
     @Override
-
     public void writeBy(ReportSourceWriter<JigyohokokuCompYoshikinenho201ReportSource> reportSourceWriter) {
         for (JigyohokokuCompYoshikinenho201BodyData dataBody : getBodyData()) {
             IJigyohokokuCompYoshikinenho201Editor editor = new JigyohokokuCompYoshikinenho201Editor(data);

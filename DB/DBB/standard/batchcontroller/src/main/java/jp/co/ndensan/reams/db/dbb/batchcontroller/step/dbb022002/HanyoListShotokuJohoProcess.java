@@ -81,7 +81,6 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
     private static final RString 定数_課税区分減免前 = new RString("課税区分（減免前）：");
     private static final RString 定数_課税区分減免後 = new RString("課税区分（減免後）：");
     private static final ReportId EUC_ID = new ReportId("DBB200034");
-    private static final RString ジョブ番号 = new RString("【ジョブ番号】");
     private static final RString CSV出力有無 = new RString("");
     private static final RString CODE = new RString("0003");
     private static final RString 定数_年度 = new RString("年度");

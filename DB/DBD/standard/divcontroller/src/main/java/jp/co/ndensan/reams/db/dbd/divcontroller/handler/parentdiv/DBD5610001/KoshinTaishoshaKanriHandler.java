@@ -68,8 +68,8 @@ public class KoshinTaishoshaKanriHandler {
      */
     public KoshinTaishoshaKanriParameter getParameter() {
         KoshinTaishoshaKanriParameter parameter = new KoshinTaishoshaKanriParameter();
-        if (div.getZenkaiJoho().getTxtTaishoTsuki().getText() != null) {
-            parameter.set対象月(new FlexibleDate(div.getZenkaiJoho().getTxtTaishoTsuki().getText()).getYearMonth());
+        if (div.getZenkaiJoho().getTxtTaishoTsuki().getValue() != null) {
+            parameter.set対象月(new FlexibleDate(div.getZenkaiJoho().getTxtTaishoTsuki().getValue().toDateString()).getYearMonth());
 
         } else {
             parameter.set対象月(FlexibleYearMonth.EMPTY);
