@@ -45,6 +45,22 @@ public class RenkeiDataSakuseiShinseiJoho {
     }
 
     /**
+     * 最大件数のチェック。
+     *
+     * @param div RenkeiDataSakuseiShinseiJohoDiv
+     *
+     * @return ResponseData<RenkeiDataSakuseiShinseiJohoDiv>
+     */
+    public ResponseData<RenkeiDataSakuseiShinseiJohoDiv> check_Maxkensu(RenkeiDataSakuseiShinseiJohoDiv div) {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        getValidationHandler().validateFor最大件数チェック(pairs, div);
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 対象者一覧情報初期化のチェック。 対象者一覧情報初期化
      *
      * @param div RenkeiDataSakuseiShinseiJohoDiv

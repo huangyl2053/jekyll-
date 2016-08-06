@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -226,8 +227,9 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
         if (!(johos.isEmpty())) {
             for (NinteiShinseiJohoBusiness joho : johos) {
                 row = new dgTaishoshaIchiran_Row();
+                row.setSelected(Boolean.TRUE);
                 row.setHihokenshaNo(joho.get被保険者番号());
-                row.setHihokenshaShimei(joho.get被保険者カナ().value());
+                row.setHihokenshaKanaShimei(joho.get被保険者カナ().value());
                 row.setHihokenshaShimei(joho.get被保険者名前().value());
                 row.getBirthYMD().setValue(new RDate(joho.get生年月日().toString()));
                 row.setSeibetsu(Seibetsu.toValue(joho.get性別().value()).get名称());
@@ -238,6 +240,8 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
             }
         }
         div.getDgTaishoshaIchiran().setDataSource(rowList);
+        div.getHanteiIraiIchiranhyo().setIsOpen(true);
+        div.getHanteiIraiIchiranhyo().getTxtInsatsuDay().setValue(new RString(FlexibleDate.getNowDate().toString()));
     }
 
     private void 取得の処理(List<NinteiShinseiJohoBusiness> johos, RenkeiDataSakuseiShinseiJohoDiv div) {
