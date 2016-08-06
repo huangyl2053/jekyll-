@@ -143,7 +143,7 @@ public class FutanGendogakuNinteiShinseishoHakkoIchiranEditor implements IFutanG
                 負担段階名称 = new RString(RiyoshaFutanDankai.toValue(負担段階).name());
             }
             source.listUpper_11 = 負担段階名称;
-            source.listUpper_12 = DecimalFormatter.toコンマ区切りRString(帳票情報.getユニット型順個室(), 0);
+            source.listUpper_12 = DecimalFormatter.toコンマ区切りRString(帳票情報.getユニット型準個室(), 0);
             source.listUpper_13 = DecimalFormatter.toコンマ区切りRString(帳票情報.get多床室(), 0);
             source.listCenter_3 = 帳票情報.get入所施設コード();
             source.listCenter_4 = 帳票情報.get入所施設名();
