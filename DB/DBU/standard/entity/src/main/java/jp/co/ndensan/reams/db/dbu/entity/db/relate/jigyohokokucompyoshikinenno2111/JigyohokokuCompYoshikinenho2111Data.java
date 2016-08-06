@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshikinenno202;
+package jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshikinenno2111;
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -13,14 +13,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 介護事業状況報告年報（様式2）のパラメータクラスです。
+ * 介護事業状況報告年報（様式2-2）のパラメータクラスです。
  *
- * @reamsid_L DBU-5600-190 zhaoran
+ * @reamsid_L DBU-5600-200 zhaoran
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JigyohokokuCompYoshikiNenho202Data {
+public class JigyohokokuCompYoshikinenho2111Data {
 
     private RString 年報月報区分;
     private RDateTime 処理日時;
@@ -32,6 +32,7 @@ public class JigyohokokuCompYoshikiNenho202Data {
     private RString 様式;
     private RString タイトル1;
     private RString タイトル2;
+    private RString タイトル3;
     private RString 給付集計区分;
     private RString 居宅_介護予防_サービス_要支援１;
     private RString 居宅_介護予防_サービス_要支援２;
@@ -225,6 +226,30 @@ public class JigyohokokuCompYoshikiNenho202Data {
     private RString 福祉用具貸与_要介護５;
     private RString 福祉用具貸与_介護計;
     private RString 福祉用具貸与_合計;
+    private RString 福祉用具購入費_要支援１;
+    private RString 福祉用具購入費_要支援２;
+    private RString 福祉用具購入費_予防計;
+    private RString 福祉用具購入費_非該当;
+    private RString 福祉用具購入費_経過的要介護;
+    private RString 福祉用具購入費_要介護１;
+    private RString 福祉用具購入費_要介護２;
+    private RString 福祉用具購入費_要介護３;
+    private RString 福祉用具購入費_要介護４;
+    private RString 福祉用具購入費_要介護５;
+    private RString 福祉用具購入費_介護計;
+    private RString 福祉用具購入費_合計;
+    private RString 住宅改修費_要支援１;
+    private RString 住宅改修費_要支援２;
+    private RString 住宅改修費_予防計;
+    private RString 住宅改修費_非該当;
+    private RString 住宅改修費_経過的要介護;
+    private RString 住宅改修費_要介護１;
+    private RString 住宅改修費_要介護２;
+    private RString 住宅改修費_要介護３;
+    private RString 住宅改修費_要介護４;
+    private RString 住宅改修費_要介護５;
+    private RString 住宅改修費_介護計;
+    private RString 住宅改修費_合計;
     private RString 特定施設入居者生活介護_要支援１;
     private RString 特定施設入居者生活介護_要支援２;
     private RString 特定施設入居者生活介護_予防計;
