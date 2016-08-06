@@ -14,7 +14,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBC-9999-021 zhangzhiming
  */
 public enum ReportIdDBC {
-
+ /**
+     * 総合事業分自己負担額計算結果一覧表
+     */
+    DBC200203(new ReportId("DBC200203_GassanJigyobunJikofutangakuKeisanKekkaIchiran"), new RString("総合事業分自己負担額計算結果一覧表")),
     /**
      * 総合事業費過再審査定通知書情報
      */
