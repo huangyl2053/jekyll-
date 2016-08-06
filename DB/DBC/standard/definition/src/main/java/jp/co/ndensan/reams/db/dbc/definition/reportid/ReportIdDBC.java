@@ -44,6 +44,10 @@ public enum ReportIdDBC {
      */
     DBC100067(new ReportId("DBC100067_FutanWariaiShoRenchoYoko"), new RString("負担割合証（連帳　横）")),
     /**
+     * 負担割合証発行一覧表
+     */
+    DBC200090(new ReportId("DBC200090_FutanWariaiShoHakkoIchiran"), new RString("負担割合証発行一覧表")),
+    /**
      * 高額総合事業サービス費判定エラーリスト
      */
     DBC200076(new ReportId("DBC200076_KogakuSogoJigyoServicehiHanteiErrorIchiran"), new RString("高額総合事業サービス費判定エラーリスト ")),

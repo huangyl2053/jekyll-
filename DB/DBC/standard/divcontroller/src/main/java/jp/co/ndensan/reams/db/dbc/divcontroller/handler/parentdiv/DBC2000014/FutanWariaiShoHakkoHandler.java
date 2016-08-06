@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 画面設計_DBCMNK3001_負担割合証発行（一括）のHandlerクラスです。
@@ -43,6 +44,7 @@ public class FutanWariaiShoHakkoHandler {
     private static final RString 処理枝番_0000 = new RString("0000");
     private static final RString 処理枝番_0001 = new RString("0001");
     private static final RString 処理枝番_0002 = new RString("0002");
+    private static final RString 実行 = new RString("btnBatchRegister");
 
     /**
      * コンストラクタです。
@@ -192,6 +194,7 @@ public class FutanWariaiShoHakkoHandler {
         if (entity == null || entity.get年度().isBefore(処理年度)) {
             throw new ApplicationException(DbcErrorMessages.年次判定未処理.getMessage());
         }
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, false);
         div.setReadOnly(false);
         FlexibleYear 年次判定年度 = entity.get年度();
         if (処理年度.equals(年次判定年度)) {
@@ -232,27 +235,58 @@ public class FutanWariaiShoHakkoHandler {
             } else {
                 shoriDateKanri = manager.select当初発行チェック(年度, 処理枝番_0002);
             }
-            div.getPanelKikan().getTxtZenkaiKaishiDate().setValue(shoriDateKanri.get対象開始日時().getRDateTime().getDate());
-            div.getPanelKikan().getTxtZenkaiKaishiTime().setValue(shoriDateKanri.get対象開始日時().getRDateTime().getTime());
-            div.getPanelKikan().getTxtZenkaiShuryoDate().setValue(shoriDateKanri.get対象終了日時().getRDateTime().getDate());
-            div.getPanelKikan().getTxtZenkaiShuryoTime().setValue(shoriDateKanri.get対象終了日時().getRDateTime().getTime());
-            div.getPanelKikan().getTxtKonkaiKaishiDate().setValue(shoriDateKanri.get対象終了日時().getRDateTime().getDate());
-            div.getPanelKikan().getTxtKonkaiKaishiTime().setValue(shoriDateKanri.get対象終了日時().getRDateTime().getTime());
+            if (shoriDateKanri == null) {
+                div.getPanelKikan().getTxtZenkaiKaishiDate().clearValue();
+                div.getPanelKikan().getTxtZenkaiKaishiTime().clearValue();
+                div.getPanelKikan().getTxtZenkaiShuryoDate().clearValue();
+                div.getPanelKikan().getTxtZenkaiShuryoTime().clearValue();
+                div.getPanelKikan().getTxtKonkaiKaishiDate().clearValue();
+                div.getPanelKikan().getTxtKonkaiKaishiTime().clearValue();
+            } else {
+                div.getPanelKikan().getTxtZenkaiKaishiDate().setValue(shoriDateKanri.get対象開始日時().getRDateTime().getDate());
+                div.getPanelKikan().getTxtZenkaiKaishiTime().setValue(shoriDateKanri.get対象開始日時().getRDateTime().getTime());
+                div.getPanelKikan().getTxtZenkaiShuryoDate().setValue(shoriDateKanri.get対象終了日時().getRDateTime().getDate());
+                div.getPanelKikan().getTxtZenkaiShuryoTime().setValue(shoriDateKanri.get対象終了日時().getRDateTime().getTime());
+                div.getPanelKikan().getTxtKonkaiKaishiDate().setValue(shoriDateKanri.get対象終了日時().getRDateTime().getDate());
+                div.getPanelKikan().getTxtKonkaiKaishiTime().setValue(shoriDateKanri.get対象終了日時().getRDateTime().getTime());
+            }
             div.getPanelKikan().getTxtKonkaiShuryoDate().setValue(RDate.getNowDate());
             div.getPanelKikan().getTxtKonkaiShuryoTime().setValue(RDate.getNowDateTime().getTime());
+            div.getPanelKikan().getTxtZenkaiKaishiDate().setReadOnly(true);
+            div.getPanelKikan().getTxtZenkaiKaishiTime().setReadOnly(true);
+            div.getPanelKikan().getTxtZenkaiShuryoDate().setReadOnly(true);
+            div.getPanelKikan().getTxtZenkaiShuryoTime().setReadOnly(true);
             div.getPanelKikan().getTxtKonkaiKaishiDate().setReadOnly(false);
             div.getPanelKikan().getTxtKonkaiKaishiTime().setReadOnly(false);
+            div.getPanelKikan().getTxtKonkaiShuryoDate().setReadOnly(true);
+            div.getPanelKikan().getTxtKonkaiShuryoTime().setReadOnly(true);
         } else if (ONE.equals(今回処理区分)) {
             clearIdoTaishoKikan();
         } else {
-            ShoriDateKanri shoriDateKanri = manager.select当初発行チェック(年度, 処理枝番_0001);
-            div.getPanelKikan().getTxtZenkaiShuryoDate().setValue(shoriDateKanri.get基準日時().getRDateTime().getDate());
-            div.getPanelKikan().getTxtZenkaiShuryoTime().setValue(shoriDateKanri.get基準日時().getRDateTime().getTime());
-            div.getPanelKikan().getTxtKonkaiKaishiDate().setValue(shoriDateKanri.get基準日時().getRDateTime().getDate());
-            div.getPanelKikan().getTxtKonkaiKaishiTime().setValue(shoriDateKanri.get基準日時().getRDateTime().getTime());
+            ShoriDateKanri shoriDateKanri = manager.select当初発行チェック(年度, 処理枝番_0000);
+            div.getPanelKikan().getTxtZenkaiKaishiDate().clearValue();
+            div.getPanelKikan().getTxtZenkaiKaishiTime().clearValue();
+            if (shoriDateKanri == null) {
+                div.getPanelKikan().getTxtZenkaiShuryoDate().clearValue();
+                div.getPanelKikan().getTxtZenkaiShuryoTime().clearValue();
+                div.getPanelKikan().getTxtKonkaiKaishiDate().clearValue();
+                div.getPanelKikan().getTxtKonkaiKaishiTime().clearValue();
+            } else {
+                div.getPanelKikan().getTxtZenkaiShuryoDate().setValue(shoriDateKanri.get基準日時().getRDateTime().getDate());
+                div.getPanelKikan().getTxtZenkaiShuryoTime().setValue(shoriDateKanri.get基準日時().getRDateTime().getTime());
+                div.getPanelKikan().getTxtKonkaiKaishiDate().setValue(shoriDateKanri.get基準日時().getRDateTime().getDate());
+                div.getPanelKikan().getTxtKonkaiKaishiTime().setValue(shoriDateKanri.get基準日時().getRDateTime().getTime());
+            }
             div.getPanelKikan().getTxtKonkaiShuryoDate().setValue(RDate.getNowDate());
             div.getPanelKikan().getTxtKonkaiShuryoTime().setValue(RDate.getNowDateTime().getTime());
-
+            div.getPanelKikan().getTxtZenkaiKaishiDate().setReadOnly(true);
+            div.getPanelKikan().getTxtZenkaiKaishiTime().setReadOnly(true);
+            div.getPanelKikan().getTxtZenkaiShuryoDate().setReadOnly(true);
+            div.getPanelKikan().getTxtZenkaiShuryoTime().setReadOnly(true);
+            div.getPanelKikan().getTxtKonkaiKaishiDate().setReadOnly(false);
+            div.getPanelKikan().getTxtKonkaiKaishiTime().setReadOnly(false);
+            div.getPanelKikan().getTxtKonkaiShuryoDate().setReadOnly(true);
+            div.getPanelKikan().getTxtKonkaiShuryoTime().setReadOnly(true);
         }
     }
 
