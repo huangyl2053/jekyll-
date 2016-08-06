@@ -93,10 +93,7 @@ public class IinTuikaSiryoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
 
     @Override
     protected void keyBreakProcess(ShinsakaiTaiyosyaJohoEntity entity) {
-        if (データ件数 % 満ページ件数 == 0) {
-            TsuikashiryokagamiA4Report report = new TsuikashiryokagamiA4Report(business);
-            report.writeBy(reportSourceWriterA4);
-        }
+        hasBreak();
     }
 
     @Override
@@ -115,6 +112,10 @@ public class IinTuikaSiryoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
     @Override
     protected void afterExecute() {
         outputJokenhyoFactory();
+    }
+
+    private boolean hasBreak() {
+        return データ件数 % 満ページ件数 == 0;
     }
 
     private void outputJokenhyoFactory() {
