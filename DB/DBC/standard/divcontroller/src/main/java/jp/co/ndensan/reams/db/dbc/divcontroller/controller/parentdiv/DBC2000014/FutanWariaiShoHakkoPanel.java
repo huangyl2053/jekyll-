@@ -24,8 +24,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class FutanWariaiShoHakkoPanel {
 
-    private static final RString ZERO = new RString("0");
-
     /**
      * 画面初期化のメソッドます。
      *

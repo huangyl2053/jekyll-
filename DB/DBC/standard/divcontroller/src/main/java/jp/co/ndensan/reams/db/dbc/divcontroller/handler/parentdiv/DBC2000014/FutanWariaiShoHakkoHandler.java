@@ -195,7 +195,7 @@ public class FutanWariaiShoHakkoHandler {
             throw new ApplicationException(DbcErrorMessages.年次判定未処理.getMessage());
         }
         CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, false);
-        div.setReadOnly(false);
+        div.setDisabled(false);
         FlexibleYear 年次判定年度 = entity.get年度();
         if (処理年度.equals(年次判定年度)) {
             KeyValueDataSource keyValueData = new KeyValueDataSource(処理年度.toDateString(), 処理年度.wareki().toDateString());
