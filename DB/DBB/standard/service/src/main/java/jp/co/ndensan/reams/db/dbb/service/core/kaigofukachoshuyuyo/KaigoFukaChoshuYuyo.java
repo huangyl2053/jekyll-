@@ -86,7 +86,7 @@ public class KaigoFukaChoshuYuyo {
      */
     public ChoshuYuyoJoho getJokyo(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号) {
         ChoshuYuyoJohoRelateMapperParameter parameter = ChoshuYuyoJohoRelateMapperParameter.createSelectByKeyParam(調定年度, 賦課年度, 通知書番号);
-        return 徴収猶予情報Manager.selsect徴収猶予の情報_最新(parameter);
+        return 徴収猶予情報Manager.select徴収猶予の情報_最新(parameter);
     }
 
     /**
@@ -99,7 +99,7 @@ public class KaigoFukaChoshuYuyo {
         RString 状況 = 画面情報param.get状況();
         boolean 決定区分 = 画面情報param.is決定区分();
         boolean 登録flag = false;
-        int 履歴番号 = 徴収猶予の情報.toEntity().getRirekiNo();
+        int 履歴番号 = 徴収猶予の情報.get履歴番号();
         if ((画面状況_申請中.equals(状況) && 決定区分)
                 || (画面状況_決定済.equals(状況))) {
             設定登録用賦課情報(徴収猶予の情報, 画面情報param);
@@ -115,10 +115,9 @@ public class KaigoFukaChoshuYuyo {
         if (介護期別徴収猶予データList == null || 介護期別徴収猶予データList.isEmpty()) {
             return;
         }
-        DbT2002FukaEntity 介護賦課Entity = 徴収猶予の情報.toEntity();
-        FlexibleYear 調定年度 = 介護賦課Entity.getChoteiNendo();
-        FlexibleYear 賦課年度 = 介護賦課Entity.getFukaNendo();
-        TsuchishoNo 通知書番号 = 介護賦課Entity.getTsuchishoNo();
+        FlexibleYear 調定年度 = 徴収猶予の情報.get調定年度();
+        FlexibleYear 賦課年度 = 徴収猶予の情報.get賦課年度();
+        TsuchishoNo 通知書番号 = 徴収猶予の情報.get通知書番号();
         DbT2007KibetsuChoshuYuyoEntity 介護期別徴収猶予Entity = new DbT2007KibetsuChoshuYuyoEntity();
         介護期別徴収猶予Entity.setChoteiNendo(調定年度);
         介護期別徴収猶予Entity.setFukaNendo(賦課年度);
@@ -161,10 +160,9 @@ public class KaigoFukaChoshuYuyo {
     private void 設定登録用徴収猶予情報(int 履歴番号, ChoshuYuyoJoho 徴収猶予の情報, KaigoFukaChoshuYuyoParam 画面情報param, boolean 登録flag) {
         RString 減免状態区分 = get区分(区分_1, 画面情報param);
         RString 減免作成区分 = get区分(区分_2, 画面情報param);
-        DbT2002FukaEntity 介護賦課Entity = 徴収猶予の情報.toEntity();
-        FlexibleYear 調定年度 = 介護賦課Entity.getChoteiNendo();
-        FlexibleYear 賦課年度 = 介護賦課Entity.getFukaNendo();
-        TsuchishoNo 通知書番号 = 介護賦課Entity.getTsuchishoNo();
+        FlexibleYear 調定年度 = 徴収猶予の情報.get調定年度();
+        FlexibleYear 賦課年度 = 徴収猶予の情報.get賦課年度();
+        TsuchishoNo 通知書番号 = 徴収猶予の情報.get通知書番号();
         List<ChoshuYuyo> list = 徴収猶予の情報.getChoshuYuyoList();
         if (!登録flag && list != null && !list.isEmpty()) {
             DbT2006ChoshuYuyoEntity del介護賦課徴収猶予 = list.get(0).toEntity();
@@ -196,8 +194,7 @@ public class KaigoFukaChoshuYuyo {
         FlexibleDate 取消日 = 画面情報param.get取消日();
         FukaJohoRelateEntity 賦課の情報RelateEntity = 徴収猶予の情報.get賦課の情報RelateEntity();
         DbT2002FukaEntity 賦課情報_介護賦課 = 賦課の情報RelateEntity.get介護賦課Entity();
-        DbT2002FukaEntity 減免介護賦課 = 徴収猶予の情報.toEntity();
-        賦課情報_介護賦課.setRirekiNo(減免介護賦課.getRirekiNo() + 定値_イチ);
+        賦課情報_介護賦課.setRirekiNo(徴収猶予の情報.get履歴番号() + 定値_イチ);
         賦課情報_介護賦課.setChoteiNichiji(YMDHMS.now());
         賦課情報_介護賦課.setKoseiM(new RString(YMDHMS.now().getMonthValue()));
         if (取消日 != null && !取消日.isEmpty()) {
@@ -266,7 +263,7 @@ public class KaigoFukaChoshuYuyo {
      */
     public ChoshuYuyoJoho getChoshuYuyoJoho(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号) {
         ChoshuYuyoJohoRelateMapperParameter parameter = ChoshuYuyoJohoRelateMapperParameter.createSelectByKeyParam(調定年度, 賦課年度, 通知書番号);
-        return 徴収猶予情報Manager.selsect徴収猶予の情報_最新(parameter);
+        return 徴収猶予情報Manager.select徴収猶予の情報_最新(parameter);
     }
 
     /**
