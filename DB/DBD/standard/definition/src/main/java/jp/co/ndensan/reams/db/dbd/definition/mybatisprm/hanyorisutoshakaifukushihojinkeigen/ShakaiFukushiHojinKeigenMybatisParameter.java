@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyorisutokokikoreisha;
+package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyorisutoshakaifukushihojinkeigen;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuHohoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuKomokuKubun;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.Kyakasha;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.SoshitsuKubun;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
@@ -23,37 +25,41 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 汎用リスト出力(後期高齢者)のMyBatis用パラメータクラスです。
+ * 汎用リスト出力(社会福祉法人軽減)のMyBatis用パラメータクラスです。
  *
- * @reamsid_L DBD-5520-030 mawy
+ * @reamsid_L DBD-3900-030 mawy
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParameter {
+public class ShakaiFukushiHojinKeigenMybatisParameter implements IMyBatisParameter {
 
     private static final int 年の月数 = 12;
     private static final int 月の日数 = 31;
 
     private RString cyusyutsuhohokubun;
     private RString cyusyutsukomokukubun;
+    private FlexibleYear nendo;
     private FlexibleDate kizyunnichi;
     private FlexibleDate hitsukehanifrom;
     private FlexibleDate hitsukehanito;
-    private boolean chokindatacyusyutsu;
+    private boolean isChokindatacyusyutsu;
+    private boolean hobetsukubun;
     private RString soshitsukubun;
-    private boolean isCsvkomokumeifuka;
-    private boolean isCsvrenbanfuka;
-    private boolean isCsvhitsukesurasyuhensyu;
+    private RString kyakasha;
     private AtenaSelectBatchParameter atenacyusyutsujyoken;
-    private RString syutsuryokujun;
-    private RString syutsuryokukomoku;
+    private RString 決定区分_承認しない;
+    private RString 決定区分_承認する;
     private boolean is基準日;
     private boolean is範囲;
-    private boolean is取得日;
-    private boolean is喪失日;
+    private boolean is申請日;
+    private boolean is適用日;
+    private boolean is有効期限;
+    private boolean is決定日;
     private boolean has日付範囲From;
     private boolean has日付範囲To;
+    private boolean is却下者;
+    private boolean is却下他;
     private boolean is資格取得者のみ;
     private boolean is資格喪失者のみ;
     private boolean is年齢;
@@ -94,31 +100,23 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
      * @param kizyunnichi 基準日
      * @param hitsukehanifrom 日付範囲From
      * @param hitsukehanito 日付範囲To
-     * @param chokindatacyusyutsu 直近データ抽出
+     * @param isChokindatacyusyutsu 直近データ抽出
      * @param soshitsukubun 喪失区分
-     * @param csvkomokumeifuka CSV項目名付加
-     * @param csvrenbanfuka CSV連番付加
-     * @param csvhitsukesurasyuhensyu CSV日付スラッシュ編集
+     * @param kyakasha 却下者
      * @param atenacyusyutsujyoken 宛名抽出条件
-     * @param syutsuryokujun 出力順
-     * @param syutsuryokukomoku 出力項目
      * @param psmShikibetsuTaisho 宛名識別対象PSM
      * @param psmAtesaki 宛名識別対象PSM
      */
-    public HanyoRisutoKokiKoreishaMybatisParameter(
+    public ShakaiFukushiHojinKeigenMybatisParameter(
             RString cyusyutsuhohokubun,
             RString cyusyutsukomokukubun,
             FlexibleDate kizyunnichi,
             FlexibleDate hitsukehanifrom,
             FlexibleDate hitsukehanito,
-            boolean chokindatacyusyutsu,
+            boolean isChokindatacyusyutsu,
             RString soshitsukubun,
-            boolean csvkomokumeifuka,
-            boolean csvrenbanfuka,
-            boolean csvhitsukesurasyuhensyu,
+            RString kyakasha,
             AtenaSelectBatchParameter atenacyusyutsujyoken,
-            RString syutsuryokujun,
-            RString syutsuryokukomoku,
             RString psmShikibetsuTaisho,
             RString psmAtesaki) {
         this.cyusyutsuhohokubun = cyusyutsuhohokubun;
@@ -126,20 +124,23 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
         this.kizyunnichi = kizyunnichi;
         this.hitsukehanifrom = hitsukehanifrom;
         this.hitsukehanito = hitsukehanito;
-        this.chokindatacyusyutsu = chokindatacyusyutsu;
+        this.isChokindatacyusyutsu = isChokindatacyusyutsu;
         this.soshitsukubun = soshitsukubun;
-        this.isCsvkomokumeifuka = csvkomokumeifuka;
-        this.isCsvrenbanfuka = csvrenbanfuka;
-        this.isCsvhitsukesurasyuhensyu = csvhitsukesurasyuhensyu;
+        this.kyakasha = kyakasha;
         this.atenacyusyutsujyoken = atenacyusyutsujyoken;
-        this.syutsuryokujun = syutsuryokujun;
-        this.syutsuryokukomoku = syutsuryokukomoku;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
         this.psmAtesaki = psmAtesaki;
-        set抽出方法区分(cyusyutsuhohokubun);
-        set年齢層抽出方法(atenacyusyutsujyoken);
-        set地区区分(atenacyusyutsujyoken);
-        set市町村コード(atenacyusyutsujyoken);
+        this.決定区分_承認しない = KetteiKubun.承認しない.getコード();
+        this.決定区分_承認する = KetteiKubun.承認する.getコード();
+        set抽出方法区分();
+        set年齢層抽出方法();
+        set地区区分();
+        set市町村コード();
+        if (Kyakasha.却下他.getコード().equals(kyakasha)) {
+            is却下他 = true;
+        } else if (Kyakasha.却下者.getコード().equals(kyakasha)) {
+            is却下者 = true;
+        }
         if (SoshitsuKubun.資格取得者のみ.getコード().equals(soshitsukubun)) {
             is資格取得者のみ = true;
         } else if (SoshitsuKubun.資格喪失者のみ.getコード().equals(soshitsukubun)) {
@@ -147,15 +148,19 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
         }
     }
 
-    private void set抽出方法区分(RString cyusyutsuhohokubun) {
+    private void set抽出方法区分() {
         if (ChushutsuHohoKubun.基準日.getコード().equals(cyusyutsuhohokubun)) {
             is基準日 = true;
         } else if (ChushutsuHohoKubun.範囲.getコード().equals(cyusyutsuhohokubun)) {
             is範囲 = true;
-            if (ChushutsuKomokuKubun.取得日.getコード().equals(cyusyutsukomokukubun)) {
-                is取得日 = true;
-            } else if (ChushutsuKomokuKubun.喪失日.getコード().equals(cyusyutsukomokukubun)) {
-                is喪失日 = true;
+            if (ChushutsuKomokuKubun.申請日.getコード().equals(cyusyutsukomokukubun)) {
+                is申請日 = true;
+            } else if (ChushutsuKomokuKubun.適用年月日.getコード().equals(cyusyutsukomokukubun)) {
+                is適用日 = true;
+            } else if (ChushutsuKomokuKubun.有効期限.getコード().equals(cyusyutsukomokukubun)) {
+                is有効期限 = true;
+            } else if (ChushutsuKomokuKubun.決定日.getコード().equals(cyusyutsukomokukubun)) {
+                is決定日 = true;
             }
         }
         if (nullHandan(hitsukehanifrom)) {
@@ -166,14 +171,7 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
         }
     }
 
-    private void set市町村コード(AtenaSelectBatchParameter atenacyusyutsujyoken) {
-        if (nullHandan(atenacyusyutsujyoken.getShichoson_Code())) {
-            has市町村コード = true;
-            市町村コード = atenacyusyutsujyoken.getShichoson_Code().code市町村RString();
-        }
-    }
-
-    private void set年齢層抽出方法(AtenaSelectBatchParameter atenacyusyutsujyoken) {
+    private void set年齢層抽出方法() {
         if (NenreiSoChushutsuHoho.年齢範囲.equals(atenacyusyutsujyoken.getAgeSelectKijun())) {
             is年齢 = true;
             Range<Decimal> 年齢範囲 = atenacyusyutsujyoken.getNenreiRange();
@@ -197,7 +195,14 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
         }
     }
 
-    private void set地区区分(AtenaSelectBatchParameter atenacyusyutsujyoken) {
+    private void set市町村コード() {
+        if (nullHandan(atenacyusyutsujyoken.getShichoson_Code())) {
+            has市町村コード = true;
+            市町村コード = atenacyusyutsujyoken.getShichoson_Code().code市町村RString();
+        }
+    }
+
+    private void set地区区分() {
         if (Chiku.住所.equals(atenacyusyutsujyoken.getChiku_Kubun())) {
             is住所 = true;
             if (nullHandan(atenacyusyutsujyoken.getJusho_From())) {
@@ -220,30 +225,7 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
             }
         } else if (Chiku.地区.equals(atenacyusyutsujyoken.getChiku_Kubun())) {
             is地区 = true;
-            if (nullHandan(atenacyusyutsujyoken.getChiku1_From())) {
-                地区選択コードFrom = atenacyusyutsujyoken.getChiku1_From();
-                has地区１From = true;
-            }
-            if (nullHandan(atenacyusyutsujyoken.getChiku1_To())) {
-                地区選択コードTo = atenacyusyutsujyoken.getChiku1_To();
-                has地区１To = true;
-            }
-            if (nullHandan(atenacyusyutsujyoken.getChiku2_From())) {
-                地区選択コードFrom = atenacyusyutsujyoken.getChiku2_From();
-                has地区２From = true;
-            }
-            if (nullHandan(atenacyusyutsujyoken.getChiku2_To())) {
-                地区選択コードTo = atenacyusyutsujyoken.getChiku2_To();
-                has地区２To = true;
-            }
-            if (nullHandan(atenacyusyutsujyoken.getChiku3_From())) {
-                地区選択コードFrom = atenacyusyutsujyoken.getChiku3_From();
-                has地区３From = true;
-            }
-            if (nullHandan(atenacyusyutsujyoken.getChiku3_To())) {
-                地区選択コードTo = atenacyusyutsujyoken.getChiku3_To();
-                has地区３To = true;
-            }
+            set地区情報();
         }
     }
 
@@ -255,6 +237,33 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
     private FlexibleDate get逆算した生年月日To(Decimal 年齢範囲To) {
         FlexibleYear year = FlexibleDate.getNowDate().getYear().minusYear(年齢範囲To.intValue());
         return new FlexibleDate(year.getYearValue(), 1, 1);
+    }
+
+    private void set地区情報() {
+        if (nullHandan(atenacyusyutsujyoken.getChiku1_From())) {
+            地区選択コードFrom = atenacyusyutsujyoken.getChiku1_From();
+            has地区１From = true;
+        }
+        if (nullHandan(atenacyusyutsujyoken.getChiku1_To())) {
+            地区選択コードTo = atenacyusyutsujyoken.getChiku1_To();
+            has地区１To = true;
+        }
+        if (nullHandan(atenacyusyutsujyoken.getChiku2_From())) {
+            地区選択コードFrom = atenacyusyutsujyoken.getChiku2_From();
+            has地区２From = true;
+        }
+        if (nullHandan(atenacyusyutsujyoken.getChiku2_To())) {
+            地区選択コードTo = atenacyusyutsujyoken.getChiku2_To();
+            has地区２To = true;
+        }
+        if (nullHandan(atenacyusyutsujyoken.getChiku3_From())) {
+            地区選択コードFrom = atenacyusyutsujyoken.getChiku3_From();
+            has地区３From = true;
+        }
+        if (nullHandan(atenacyusyutsujyoken.getChiku3_To())) {
+            地区選択コードTo = atenacyusyutsujyoken.getChiku3_To();
+            has地区３To = true;
+        }
     }
 
     private static boolean nullHandan(RString handan) {
