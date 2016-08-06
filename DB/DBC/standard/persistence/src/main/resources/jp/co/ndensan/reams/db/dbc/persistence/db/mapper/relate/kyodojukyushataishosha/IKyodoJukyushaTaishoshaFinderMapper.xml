@@ -106,4 +106,16 @@
             order by DbT3004."idoYMD" DESC
     </sql>
     
+    <select id="get被保険者情報" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyodojukyushataishosha.KyodoIdoRenrakuhyoTaishoshaKensakuParameter"
+            resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
+            fetchSize="500" resultOrdered="true">
+        SELECT 
+             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+            FROM rgdb."DbV1001HihokenshaDaicho" AS DbV1001
+            INNER JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
+            AS "ShikibetsuTaisho"
+            ON DbV1001."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
+            WHERE DbV1001."hihokenshaNo" = #{被保険者番号}
+    </select>
 </mapper>

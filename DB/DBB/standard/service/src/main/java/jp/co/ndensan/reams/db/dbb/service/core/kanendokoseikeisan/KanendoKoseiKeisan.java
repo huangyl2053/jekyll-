@@ -53,6 +53,8 @@ public class KanendoKoseiKeisan {
     private static final RString 賦課の情報_空白メッセージ = new RString("賦課の情報");
     private static final RString 徴収方法の情報_空白メッセージ = new RString("徴収方法の情報");
     private static final RString 関係_メッセージ = new RString("調定年度ー賦課年度　が　0,1,2,3,4,5以外");
+    private static final RString 定数_翌年度4月 = new RString("104");
+    private static final RString 定数_翌年度5月 = new RString("105");
     private static final RString 定数_0 = new RString("0");
     private static final RString 定数_1 = new RString("1");
     private static final RString 定数_2 = new RString("2");
@@ -372,12 +374,11 @@ public class KanendoKoseiKeisan {
 
         KoseiTsukiHantei 更正月判定 = new KoseiTsukiHantei();
         Kitsuki 過年度期月 = 更正月判定.find過年度更正月(算定日時.getDate());
-        int 過年度算定月 = 過年度期月.get月AsInt();
         int 過年度算定期 = 過年度期月.get期AsInt();
 
         ITsukiShorkiKubun 過年期区分 = 過年度期月.get月処理区分();
         kiwariKeisanInput.set現在調定年度(調定年度);
-        kiwariKeisanInput.set現在月(new RString(過年度算定月).padZeroToLeft(INT_3));
+        kiwariKeisanInput.set現在月(get現在月(過年度期月));
         kiwariKeisanInput.set現在期(過年度算定期);
         kiwariKeisanInput.set現在期区分(INT_5);
         kiwariKeisanInput.set特徴停止可能期(0);
@@ -445,7 +446,7 @@ public class KanendoKoseiKeisan {
         kiwariKeisanInput.set業務コンフィグ情報(業務コンフィグ情報);
 
         kiwariKeisanInput.set賦課更正情報(get賦課更正情報(賦課の情報1, 賦課の情報2, 賦課の情報3, 賦課の情報4,
-                賦課の情報5, 賦課の情報6, 調定年度, 前回保険料));
+                賦課の情報5, 賦課の情報6, 前回保険料));
 
         kiwariKeisanInput.set変更後_確定年税額(今回保険料);
         kiwariKeisanInput.set減免額(Decimal.ZERO);
@@ -458,6 +459,18 @@ public class KanendoKoseiKeisan {
         kiwariKeisanInput.set期別徴収方法区分(get期別徴収方法区分(徴収方法の情報));
 
         return kiwariKeisanInput;
+    }
+
+    private RString get現在月(Kitsuki 過年度期月) {
+        if (Tsuki._1月.equals(過年度期月.get月()) || Tsuki._2月.equals(過年度期月.get月())
+                || Tsuki._3月.equals(過年度期月.get月())) {
+            return 定数_1.concat(new RString(過年度期月.get月AsInt()).padZeroToLeft(INT_2));
+        } else if (Tsuki.翌年度4月.equals(過年度期月.get月())) {
+            return 定数_翌年度4月;
+        } else if (Tsuki.翌年度5月.equals(過年度期月.get月())) {
+            return 定数_翌年度5月;
+        }
+        return new RString(過年度期月.get月AsInt()).padZeroToLeft(INT_3);
     }
 
     private List<RString> get期別徴収方法区分(ChoshuHoho 徴収方法の情報) {
@@ -478,20 +491,20 @@ public class KanendoKoseiKeisan {
     }
 
     private FukaKoseiJohoClass get賦課更正情報(FukaJoho 賦課の情報1, FukaJoho 賦課の情報2, FukaJoho 賦課の情報3,
-            FukaJoho 賦課の情報4, FukaJoho 賦課の情報5, FukaJoho 賦課の情報6, FlexibleYear 調定年度, Decimal 前回保険料) {
+            FukaJoho 賦課の情報4, FukaJoho 賦課の情報5, FukaJoho 賦課の情報6, Decimal 前回保険料) {
         FukaKoseiJohoClass 賦課更正情報 = new FukaKoseiJohoClass();
         if (賦課の情報1 != null) {
-            賦課更正情報.set課税年度(調定年度);
+            賦課更正情報.set課税年度(賦課の情報1.get賦課年度());
         } else if (賦課の情報2 != null) {
-            賦課更正情報.set課税年度(調定年度);
+            賦課更正情報.set課税年度(賦課の情報2.get賦課年度());
         } else if (賦課の情報3 != null) {
-            賦課更正情報.set課税年度(調定年度);
+            賦課更正情報.set課税年度(賦課の情報3.get賦課年度());
         } else if (賦課の情報4 != null) {
-            賦課更正情報.set課税年度(調定年度);
+            賦課更正情報.set課税年度(賦課の情報4.get賦課年度());
         } else if (賦課の情報5 != null) {
-            賦課更正情報.set課税年度(調定年度);
+            賦課更正情報.set課税年度(賦課の情報5.get賦課年度());
         } else if (賦課の情報6 != null) {
-            賦課更正情報.set課税年度(調定年度);
+            賦課更正情報.set課税年度(賦課の情報6.get賦課年度());
         }
 
         賦課更正情報.set変更前_確定年税額(前回保険料);

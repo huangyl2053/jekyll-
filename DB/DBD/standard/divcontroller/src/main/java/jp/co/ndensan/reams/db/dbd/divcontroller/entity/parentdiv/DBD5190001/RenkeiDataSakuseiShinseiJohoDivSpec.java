@@ -79,7 +79,10 @@ public enum RenkeiDataSakuseiShinseiJohoDivSpec implements IPredicate<RenkeiData
                     boolean dayflag = false;
                     if (div.getTxtKonkaiKaishiDay() != null && div.getTxtKonkaiShuryoDay().getValue() != null
                     && div.getTxtKonkaiKaishiTime() != null && div.getTxtKonkaiShuryoTime() != null
-                    && div.getTxtKonkaiKaishiDay().getValue().compareTo(div.getTxtKonkaiShuryoDay().getValue()) <= 0
+                    && div.getTxtKonkaiKaishiDay().getValue().compareTo(div.getTxtKonkaiShuryoDay().getValue()) < 0) {
+                        dayflag = true;
+                    }
+                    if (div.getTxtKonkaiKaishiDay().getValue().compareTo(div.getTxtKonkaiShuryoDay().getValue()) == 0
                     && div.getTxtKonkaiKaishiTime().getValue().compareTo(div.getTxtKonkaiShuryoTime().getValue()) <= 0) {
                         dayflag = true;
                     }
@@ -123,6 +126,24 @@ public enum RenkeiDataSakuseiShinseiJohoDivSpec implements IPredicate<RenkeiData
                 ) {
                     List<dgTaishoshaIchiran_Row> dayishouSelectedItems = div.getDgTaishoshaIchiran().getSelectedItems();
                     return !dayishouSelectedItems.isEmpty();
+                }
+            },
+    最大件数のチェック {
+                /**
+                 * 最大件数のチェック。
+                 *
+                 * @param div 要介護認定申請連携データ作成画面Div
+                 * @return true:最大件数999は超過しない、false:最大件数999は超過する。
+                 */
+                @Override
+                public boolean apply(RenkeiDataSakuseiShinseiJohoDiv div
+                ) {
+                    boolean kensuFlag = false;
+                    long kensu = div.getShinseiJohoKensaku().getTxtMaxKensu().getValue().longValue();
+                    if (kensu <= 999) {
+                        kensuFlag = true;
+                    }
+                    return kensuFlag;
                 }
             },
 }

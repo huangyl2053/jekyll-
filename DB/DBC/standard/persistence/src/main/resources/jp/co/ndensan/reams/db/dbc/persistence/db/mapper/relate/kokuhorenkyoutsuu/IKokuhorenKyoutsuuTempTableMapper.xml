@@ -94,19 +94,35 @@
     <insert id="処理結果リスト一時TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity">
         INSERT INTO "DbWT0002KokuhorenTorikomiError" 
         ("errorKubun", "shoHokanehshaNo", "hihokenshaNo", "key1", "key2", "key3", "key4", "key5", "hihokenshaKanaShimei", "hihokenshaShimei", "biko")
-        VALUES 
-        (
-        #{エラー区分},
-        #{証記載保険者番号},
-        #{被保険者番号},
-        #{キー1},
-        #{キー2},
-        #{キー3},
-        #{キー4},
-        #{キー5},
-        #{被保険者カナ氏名},
-        #{被保険者氏名},
-        #{備考}
+        SELECT 
+        #{エラー区分},#{証記載保険者番号},#{被保険者番号},#{キー1},#{キー2},#{キー3},#{キー4},#{キー5},#{被保険者カナ氏名},#{被保険者氏名},#{備考}
+        WHERE NOT EXISTS 
+        (SELECT * FROM "DbWT0002KokuhorenTorikomiError"
+        WHERE "errorKubun" = #{エラー区分}
+        AND 
+        <if test="証記載保険者番号 != null ">
+        "shoHokanehshaNo" = #{証記載保険者番号}
+        </if>
+        <if test="証記載保険者番号 == null ">
+        "shoHokanehshaNo" is null
+        </if>
+        AND 
+        <if test="被保険者番号 != null ">
+        "hihokenshaNo" = #{被保険者番号} 
+        </if>
+        <if test="被保険者番号 == null ">
+        "hihokenshaNo" is null
+        </if>
+        AND 
+        "key1" = #{キー1} 
+        AND 
+        "key2" = #{キー2} 
+        AND 
+        "key3" = #{キー3} 
+        AND 
+        "key4" = #{キー4} 
+        AND 
+        "key5" = #{キー5} 
         )
     </insert>
     

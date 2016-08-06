@@ -624,55 +624,60 @@ public class IchijiSashitome1GoHandler {
         dgSashitomeKojoIchiran_Row row = new dgSashitomeKojoIchiran_Row();
         div.getTxtSagakuKingakuGokei().setValue(null);
         if (div.getKey_Button().equals(_給付一時差止登録)) {
-            for (ShiharaiHohoHenkoSashitome shiharaiHohoHenkoSashitome : 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList()) {
-                if (shiharaiHohoHenkoSashitome.get情報分類区分().equals(ShiharaiHenkoJohoBunruiKubun.保険料控除情報.getコード())) {
-                    row.setKojo(shiharaiHohoHenkoSashitome.get差止控除状態区分());
+            for (int i = 0; i < 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().size(); i++) {
+                if (支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get情報分類区分()
+                        .equals(ShiharaiHenkoJohoBunruiKubun.保険料控除情報.getコード())) {
+                    row.setKojo(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除状態区分());
                 }
-                if (shiharaiHohoHenkoSashitome.get情報分類区分().equals(ShiharaiHenkoJohoBunruiKubun.差止情報.getコード())) {
-                    row.setSashitome(shiharaiHohoHenkoSashitome.get差止控除状態区分());
-                    row.setSashitome2(shiharaiHohoHenkoSashitome.get差止控除状態区分());
-                    row.setSeiriNo(shiharaiHohoHenkoSashitome.get差止償還整理番号());
-                    row.getTxtTeikyoYM().setValue(new FlexibleDate(shiharaiHohoHenkoSashitome.get差止サービス提供年月().toString()));
-                    row.getTxtSashitomeTorokuYMD().setValue(shiharaiHohoHenkoSashitome.get差止決定年月日());
-                    row.getTxtSashitomeKaijoYMD().setValue(shiharaiHohoHenkoSashitome.get差止解除年月日());
-                    row.getTxtNofuKigenYMD().setValue(shiharaiHohoHenkoSashitome.get差止納付期限());
-                    if (shiharaiHohoHenkoSashitome.get差止通知書発行年月日().isEmpty()) {
+                if (支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get情報分類区分()
+                        .equals(ShiharaiHenkoJohoBunruiKubun.差止情報.getコード())) {
+                    row.setSashitome(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除状態区分());
+                    row.setSashitome2(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除状態区分());
+                    row.setSeiriNo(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止償還整理番号());
+                    row.getTxtTeikyoYM().setValue(new FlexibleDate(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止サービス提供年月().toString()));
+                    row.getTxtSashitomeTorokuYMD().setValue(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止決定年月日());
+                    row.getTxtSashitomeKaijoYMD().setValue(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止解除年月日());
+                    row.getTxtNofuKigenYMD().setValue(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止納付期限());
+                    if (支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止通知書発行年月日().isEmpty()) {
                         row.setSashitomeTsuchi(RString.EMPTY);
                     } else {
                         row.setSashitomeTsuchi(new RString("発行済"));
                     }
                 }
-                if (shiharaiHohoHenkoSashitome.get差止控除状態区分().equals(ShiharaiHenkoSashitomeKojoJotaiKubun.登録.getコード())
-                        && shiharaiHohoHenkoSashitome.get差止控除番号().isEmpty()) {
+                if (支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除状態区分()
+                        .equals(ShiharaiHenkoSashitomeKojoJotaiKubun.登録.getコード())
+                        && 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除番号().isEmpty()) {
                     row.getKaijo().setDisabled(false);
                 } else {
                     row.getKaijo().setDisabled(true);
                 }
+                row.setId(i);
                 rowList.add(row);
             }
         } else if (div.getKey_Button().equals(_保険料控除登録)) {
-            for (ShiharaiHohoHenkoSashitome shiharaiHohoHenkoSashitome : 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList()) {
-                if (shiharaiHohoHenkoSashitome.get情報分類区分().equals(ShiharaiHenkoJohoBunruiKubun.差止情報.getコード())) {
-                    row.setSashitome2(shiharaiHohoHenkoSashitome.get差止控除状態区分());
-                    row.setSeiriNo(shiharaiHohoHenkoSashitome.get差止償還整理番号());
-                    row.getTxtTeikyoYM().setValue(new FlexibleDate(shiharaiHohoHenkoSashitome.get差止サービス提供年月().toString()));
+            for (int i = 0; i < 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().size(); i++) {
+                if (支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get情報分類区分().equals(ShiharaiHenkoJohoBunruiKubun.差止情報.getコード())) {
+                    row.setSashitome2(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除状態区分());
+                    row.setSeiriNo(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止償還整理番号());
+                    row.getTxtTeikyoYM().setValue(new FlexibleDate(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止サービス提供年月().toString()));
                 }
-                row.setKojoNo(shiharaiHohoHenkoSashitome.get差止控除番号());
-                row.getTxtKojoTorokuYMD().setValue(shiharaiHohoHenkoSashitome.get控除決定年月日());
+                row.setKojoNo(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除番号());
+                row.getTxtKojoTorokuYMD().setValue(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get控除決定年月日());
                 row.getTxtShoTeishutsuKigenYMD().setValue(支払方法変更管理業務概念.get被保険者証提出期限());
-                if (shiharaiHohoHenkoSashitome.get情報分類区分().equals(ShiharaiHenkoJohoBunruiKubun.保険料控除情報.getコード())) {
-                    row.setKojo(shiharaiHohoHenkoSashitome.get差止控除状態区分());
-                    if (shiharaiHohoHenkoSashitome.get控除通知書発行年月日().isEmpty()) {
+                if (支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get情報分類区分().equals(ShiharaiHenkoJohoBunruiKubun.保険料控除情報.getコード())) {
+                    row.setKojo(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除状態区分());
+                    if (支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get控除通知書発行年月日().isEmpty()) {
                         row.setKaijoTsuchi(RString.EMPTY);
                     } else {
                         row.setKaijoTsuchi(new RString("発行済"));
                     }
                 }
-                if (!shiharaiHohoHenkoSashitome.get差止控除番号().isEmpty()) {
+                if (!支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除番号().isEmpty()) {
                     row.getKaijo().setDisabled(false);
                 } else {
                     row.getKaijo().setDisabled(true);
                 }
+                row.setId(i);
                 rowList.add(row);
             }
         }

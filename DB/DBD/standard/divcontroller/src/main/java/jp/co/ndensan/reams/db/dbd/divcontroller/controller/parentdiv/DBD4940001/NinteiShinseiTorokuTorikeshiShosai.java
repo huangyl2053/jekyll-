@@ -5,9 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD4940001;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiJoho;
-import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoRirekiJoho;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4940001.DBD4940001TransitionEventName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4940001.NinteiShinseiTorokuTorikeshiShosaiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4940001.NinteiShinseiTorokuTorikeshiShosaiHandler;
@@ -119,7 +117,7 @@ public class NinteiShinseiTorokuTorikeshiShosai {
         // TODO. 実装しない。
 
         RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
-        List<YokaigoRirekiJoho> 今回前回履歴情報 = getHandler(div).get今回前回履歴情報(被保険者番号);
+        //List<YokaigoRirekiJoho> 今回前回履歴情報 = getHandler(div).get今回前回履歴情報(被保険者番号);
 
 //        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
 //        getHandler(div).onBeforeOpenDialog_btnDispGemmenJoho(taishoshaKey);
