@@ -8,11 +8,13 @@ package jp.co.ndensan.reams.db.dbc.service.core.jukyushaidorenrakuhyotoroku;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoTorokuEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3001JukyushaIdoRenrakuhyoDac;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -96,15 +98,15 @@ public class JukyushaIdoRenrakuhyoToroku {
      * 登録した受給者異動情報の取得します。
      *
      * @param 被保番号 被保番号
-     * @param 送付年月 送付年月
+     * @param 異動日 異動日
      * @return JukyushaIdoRenrakuhyoTorokuEntity
      */
     @Transaction
-    public JukyushaIdoRenrakuhyoTorokuEntity editJukyushaIdoRenrakuhyo(RString 被保番号, RDate 送付年月) {
-        DbT3001JukyushaIdoRenrakuhyoEntity entity = dac.select登録した受給者異動情報の取得(被保番号, new RString(送付年月.getYearMonth().toString()));
+    public JukyushaIdoRenrakuhyoTorokuEntity editJukyushaIdoRenrakuhyo(RString 被保番号, RDate 異動日) {
+        DbT3001JukyushaIdoRenrakuhyoEntity entity = dac.select登録した受給者異動情報の取得(被保番号, new RString(異動日.getYearMonth().toString()));
         JukyushaIdoRenrakuhyoTorokuEntity jukyuEntity = new JukyushaIdoRenrakuhyoTorokuEntity();
         if (entity != null) {
-            //TODO
+            //TODO QA #94406
             jukyuEntity.set作成年月日(new FlexibleDate(RString.EMPTY));
             if (entity.getShoKisaiHokenshaNo() != null) {
                 jukyuEntity.set証記載保険者番号(entity.getShoKisaiHokenshaNo().getColumnValue());
@@ -114,7 +116,7 @@ public class JukyushaIdoRenrakuhyoToroku {
             }
             jukyuEntity.set異動年月日(entity.getIdoYMD());
             jukyuEntity.set異動区分(entity.getIdoKubunCode());
-            //TODO
+            //TODO QA #94406
             jukyuEntity.set氏名性別生年月日を印字する(RString.EMPTY);
             jukyuEntity.set性別(entity.getSeibetsuCode());
             jukyuEntity.set異動事由(entity.getJukyushaIdoJiyu());
@@ -138,18 +140,24 @@ public class JukyushaIdoRenrakuhyoToroku {
             jukyuEntity.set居宅適用終了年月日(new FlexibleDate(entity.getKyotakuServiceTekiyoShuryoYMD()));
             jukyuEntity.set減免申請中区分(entity.getGemmenShinseichuKubunCode());
             jukyuEntity.set利用者負担区分(entity.getRiyoshaFutanKubunCode());
-            jukyuEntity.set利用給付率(new RString(entity.getKyufuritsu().toString()));
+            Decimal kyufuritsu = entity.getKyufuritsu();
+            if (kyufuritsu != null) {
+                jukyuEntity.set利用給付率(new RString(kyufuritsu.toString()));
+            }
             jukyuEntity.set利用適用開始年月日(new FlexibleDate(entity.getTekiyoKaishiYMD()));
             jukyuEntity.set利用適用終了年月日(new FlexibleDate(entity.getTekiyoShuryoYMD()));
             jukyuEntity.set標準負担区分(entity.getHyojunFutanKubunCode());
-            jukyuEntity.set標準負担額(new RString(entity.getFutangaku().toString()));
+            Decimal futangaku = entity.getFutangaku();
+            if (futangaku != null) {
+                jukyuEntity.set標準負担額(new RString(futangaku.toString()));
+            }
             jukyuEntity.set標準適用開始年月日(new FlexibleDate(entity.getFutangakuTekiyoKaishiYMD()));
             jukyuEntity.set標準適用終了年月日(new FlexibleDate(entity.getFutangakuTekiyoShuryoYMD()));
             jukyuEntity.set公費負担上限額減額(entity.getKohiFutanJogenGengakuAriFlag());
             jukyuEntity.set償還払化適用開始年月日(new FlexibleDate(entity.getShokanbaraikaKaishiYMD()));
             jukyuEntity.set償還払化適用終了年月日(new FlexibleDate(entity.getShokanbaraikaShuryoYMD()));
             jukyuEntity.set給付率引下げ適用開始年月日(new FlexibleDate(entity.getKyufuritsuHikisageKaishiYMD()));
-            jukyuEntity.set給付率引下げ適用終了年月日(new FlexibleDate(entity.getKyufuritsuHikisageKaishiYMD()));
+            jukyuEntity.set給付率引下げ適用終了年月日(new FlexibleDate(entity.getKyufuritsuHikisageShuryoYMD()));
             jukyuEntity.set認定申請中区分(entity.getTokuteiNyushoshaNinteiShinseichuKubunCode());
             jukyuEntity.setｻｰﾋﾞｽ区分(entity.getTokuteiNyushoshaKaigoServiceKubunCode());
             jukyuEntity.set特例減額措置対象(entity.getKaizeisoTokureiGengakuSochiTaishoFlag());
@@ -162,18 +170,21 @@ public class JukyushaIdoRenrakuhyoToroku {
             jukyuEntity.set新１(entity.getKyotakuhiShin1FutanGendogaku());
             jukyuEntity.set新２(entity.getKyotakuhiShin2FutanGendogaku());
             jukyuEntity.set新３(entity.getKyotakuhiShin3FutanGendogaku());
-            //TODO
+            //TODO QA #94406
             jukyuEntity.set特定入所者適用開始年月日(new FlexibleDate(RString.EMPTY));
-            //TODO
+            //TODO QA #94406
             jukyuEntity.set特定入所者適用終了年月日(new FlexibleDate(RString.EMPTY));
-            jukyuEntity.set広域保険者番号(entity.getKoikiRengoHokenshaNo().getColumnValue());
+            ShoKisaiHokenshaNo koikiRengoHokenshaNo = entity.getKoikiRengoHokenshaNo();
+            if (koikiRengoHokenshaNo != null) {
+                jukyuEntity.set広域保険者番号(koikiRengoHokenshaNo.getColumnValue());
+            }
             jukyuEntity.set老人保健市町村番号(entity.getRojinHokenShichosonNo());
             jukyuEntity.set老人保健受給者番号(entity.getRojinHokenJukyushaNo());
             jukyuEntity.set老人保健公費負担者番号(entity.getKohiFutanshaNo());
             jukyuEntity.set軽減率(entity.getKeigenritsu());
             jukyuEntity.set軽減率適用開始年月日(new FlexibleDate(entity.getKeigenritsuTekiyoKaishiYMD()));
             jukyuEntity.set軽減率適用終了年月日(new FlexibleDate(entity.getKeigenritsuTekiyoShuryoYMD()));
-            //TODO
+            //TODO QA #94406
             jukyuEntity.set小規模居宅ｻｰﾋﾞｽ利用(RString.EMPTY);
             jukyuEntity.set二次予防事業区分(entity.getNijiyoboJigyoKubunCode());
             jukyuEntity.set二次予防有効期間開始年月日(entity.getNijiyoboJigyoYukoKikanKaishiYMD());
@@ -191,7 +202,7 @@ public class JukyushaIdoRenrakuhyoToroku {
             jukyuEntity.set住特適用開始年月日(new FlexibleDate(entity.getJushochiTokureiTekiyoKaishiYMD()));
             jukyuEntity.set住特適用終了年月日(new FlexibleDate(entity.getJushochiTokureiTekiyoShuryoYMD()));
             jukyuEntity.set送付年月(entity.getSofuYM());
-            //TODO
+            //TODO QA #94406
             jukyuEntity.set二割負担適用開始年月日(new FlexibleDate(RString.EMPTY));
             jukyuEntity.set二割負担適用終了年月日(new FlexibleDate(RString.EMPTY));
         }
