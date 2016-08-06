@@ -206,7 +206,8 @@ public class HanyoListShotokuJohoNoRenbanProcess extends BatchProcessBase<HanyoL
         builder2.append(賦課年度);
         FlexibleYear 賦課年度2 = processParameter.get賦課年度();
         if (賦課年度2 != null && !賦課年度2.isEmpty()) {
-            builder2.append(賦課年度2.wareki().toDateString()).append(定数_年度);
+            builder2.append(賦課年度2.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK)
+                    .toDateString()).append(定数_年度);
         } else {
             builder2.append(RString.EMPTY);
         }
@@ -249,7 +250,7 @@ public class HanyoListShotokuJohoNoRenbanProcess extends BatchProcessBase<HanyoL
                 EUC_ID.value(),
                 導入団体コード,
                 市町村名,
-                ジョブ番号.concat(String.valueOf(JobContextHolder.getJobId())),
+                new RString(String.valueOf(JobContextHolder.getJobId())),
                 日本語ファイル名,
                 出力件数,
                 CSV出力有無,
@@ -313,7 +314,7 @@ public class HanyoListShotokuJohoNoRenbanProcess extends BatchProcessBase<HanyoL
             RDate 年齢基準日 = processParameter.get宛名抽出条件().getNenreiKijunbi();
             if (年齢基準日 != null) {
                 RString 変数_年齢基準日 = 年齢基準日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                        .fillType(FillType.ZERO).toDateString();
+                        .fillType(FillType.BLANK).toDateString();
                 builder.append(変数_年齢基準日).append(右記号);
             } else {
                 builder.append(RString.FULL_SPACE).append(右記号);
@@ -325,9 +326,9 @@ public class HanyoListShotokuJohoNoRenbanProcess extends BatchProcessBase<HanyoL
                 RDate 生年月日From = processParameter.get宛名抽出条件().getSeinengappiRange().getFrom();
                 RDate 生年月日To = processParameter.get宛名抽出条件().getSeinengappiRange().getTo();
                 RString 変数_生年月日From = 生年月日From.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                        .fillType(FillType.ZERO).toDateString();
+                        .fillType(FillType.BLANK).toDateString();
                 RString 変数_生年月日To = 生年月日To.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                        .fillType(FillType.ZERO).toDateString();
+                        .fillType(FillType.BLANK).toDateString();
                 builder.append(変数_生年月日From).append(LINE).append(変数_生年月日To);
             } else {
                 builder.append(RString.EMPTY);

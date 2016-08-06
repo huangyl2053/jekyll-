@@ -157,7 +157,7 @@ public class HanyoListShotokuJohoCsvEntity {
     @CsvField(order = 690, name = "公的年金等所得")
     private RString 公的年金等所得;
     @CsvField(order = 700, name = "住民税更正年月日")
-    private RString 住民税更正年月日;
+    private RString 住民税更正日;
     @CsvField(order = 710, name = "激変緩和区分")
     private RString 激変緩和区分;
 }

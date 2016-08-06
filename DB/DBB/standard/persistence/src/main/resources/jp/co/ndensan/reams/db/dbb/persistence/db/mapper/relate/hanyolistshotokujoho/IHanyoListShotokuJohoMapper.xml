@@ -12,7 +12,7 @@
         SELECT
         DbV2502."shotokuNendo"                                              AS 所得年度,
 	DbV2502."shikibetsuCode"                                            AS 識別コード,
-        DbV2502."rirekino"                                                  AS 履歴番号,
+        DbV2502."rirekiNo"                                                  AS 履歴番号,
 	DbV2502."kazeiKubun"                                                AS 課税区分減免前,
 	DbV2502."kazeiKubunGemmenGo"                                        AS 課税区分減免後,
 	DbV2502."gokeiShotokuGaku"                                          AS 合計所得金額,
