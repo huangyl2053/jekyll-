@@ -11,16 +11,24 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuTuikaSiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.tsuikashiryokagamia4.TsuikashiryokagamiA4Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTuutishoMyBatisParameter;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTuikaSiryoProcessParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.IinTuikaSiryoEntity;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinShinsakaiIinJohoMyBatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiTaiyosyaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.tsuikashiryokagamia4.TsuikashiryokagamiA4ReportSource;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.IsHaishi;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -28,19 +36,21 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 介護認定追加資料鑑情報バッチクラスです。
  *
- * @reamsid_L DBE-0150-200 linghuhang
+ * @reamsid_L DBE-0150-200 wangxiaodong
  */
-public class IinTuikaSiryoDataSakuseiA4Process extends BatchKeyBreakBase<IinTuikaSiryoEntity> {
+public class IinTuikaSiryoDataSakuseiA4Process extends BatchKeyBreakBase<ShinsakaiTaiyosyaJohoEntity> {
 
-    private static final RString SELECT_IINTUIKASIRYO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
-            + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getIinTuikaSiryo");
+    private static final RString SELECT_SHINSAKAITAIYOSYAJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
+            + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getShinsakaiTaiyosyaJoho");
     private static final List<RString> PAGE_BREAK_KEYS_A4 = Collections.unmodifiableList(Arrays.asList(
             new RString(TsuikashiryokagamiA4ReportSource.ReportSourceFields.shinsakaiNo.name())));
     private static final int 満ページ件数 = 10;
-    private IinTuikaSiryoProcessParameter paramter;
-//    private IShiryoShinsakaiIinMapper mapper;
-    private IinTuutishoMyBatisParameter myBatisParameter;
+    private IinShinsakaiIinJohoProcessParameter paramter;
+    private IShiryoShinsakaiIinMapper mapper;
+    private IinShinsakaiIinJohoMyBatisParameter myBatisParameter;
+    private List<ShinsakaiIinJohoEntity> shinsakaiIinJohoList;
     private JimuTuikaSiryoBusiness business;
+    private int count;
     private int データ件数;
     @BatchWriter
     private BatchReportWriter<TsuikashiryokagamiA4ReportSource> batchWriterA4;
@@ -48,14 +58,20 @@ public class IinTuikaSiryoDataSakuseiA4Process extends BatchKeyBreakBase<IinTuik
 
     @Override
     protected void initialize() {
-        myBatisParameter = paramter.toIinTuutishoMyBatisParameter();
-//        mapper = getMapper(IShiryoShinsakaiIinMapper.class);
         データ件数 = 0;
+        mapper = getMapper(IShiryoShinsakaiIinMapper.class);
+        IinShinsakaiIinJohoMyBatisParameter myBatisParameter = paramter.toIinShinsakaiIinJohoMyBatisParameter();
+        myBatisParameter.setOrderKakuteiFlg(ShinsakaiOrderKakuteiFlg.確定.is介護認定審査会審査順確定());
+        myBatisParameter.setHaishiFlag_False(IsHaishi.有効.is廃止());
+        myBatisParameter.setHaishiFlag_True(IsHaishi.廃止.is廃止());
+        myBatisParameter.setSisutemuYMD(FlexibleDate.getNowDate());
+        shinsakaiIinJohoList = mapper.getShinsakaiIinJoho(myBatisParameter);
+        count = mapper.getShinsakaiTaiyosyaJohoCount(myBatisParameter);
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(SELECT_IINTUIKASIRYO, myBatisParameter);
+        return new BatchDbReader(SELECT_SHINSAKAITAIYOSYAJOHO, myBatisParameter);
     }
 
     @Override
@@ -67,7 +83,7 @@ public class IinTuikaSiryoDataSakuseiA4Process extends BatchKeyBreakBase<IinTuik
     }
 
     @Override
-    protected void keyBreakProcess(IinTuikaSiryoEntity entity) {
+    protected void keyBreakProcess(ShinsakaiTaiyosyaJohoEntity entity) {
         if (データ件数 % 満ページ件数 == 0) {
             TsuikashiryokagamiA4Report report = new TsuikashiryokagamiA4Report(business);
             report.writeBy(reportSourceWriterA4);
@@ -75,19 +91,13 @@ public class IinTuikaSiryoDataSakuseiA4Process extends BatchKeyBreakBase<IinTuik
     }
 
     @Override
-    protected void usualProcess(IinTuikaSiryoEntity entity) {
-//        List<ShinsakaiIinJohoEntity> 審査員 = mapper.getIinShimei(myBatisParameter);
-//        IinTuikaSiryoEntity siryoEntity = mapper.getShinsakaiKaisaiKekkaJoho(myBatisParameter);
-//        business = new JimuTuikaSiryoBusiness(entity,
-//                審査員,
-//                paramter,
-//                mapper.getShinsakaiWariateJohoCount(myBatisParameter),
-//                siryoEntity,
-//                ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517009.getReportId(),
-//                        KamokuCode.EMPTY, 1, 1, FlexibleDate.getNowDate()));
-//        TsuikashiryokagamiA4Report report = new TsuikashiryokagamiA4Report(business);
-//        report.writeBy(reportSourceWriterA4);
-        データ件数++;
+    protected void usualProcess(ShinsakaiTaiyosyaJohoEntity entity) {
+        business = new JimuTuikaSiryoBusiness(entity, shinsakaiIinJohoList, paramter, count,
+                ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517019.getReportId(),
+                        KamokuCode.EMPTY, 1, 1, FlexibleDate.getNowDate()));
+        TsuikashiryokagamiA4Report report = new TsuikashiryokagamiA4Report(business);
+        report.writeBy(reportSourceWriterA4);
+        データ件数 = データ件数 + 1;
     }
 
     @Override
