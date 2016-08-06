@@ -69,7 +69,7 @@
         <result property="延期見込期間終了年月日" column="延期見込期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="延期理由" column="延期理由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="延期通知発行年月日" column="延期通知発行年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="延期通知発行回数" column="延期通知発行回数"/>
+        <result property="延期通知発行回数" column="延期通知発行回数" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
     </resultMap>
 
     <select resultOrdered="true" id="get初期化情報"
