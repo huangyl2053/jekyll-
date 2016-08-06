@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * DoInterfaceKanriKousinProcessパラメータです。
+ * DeleteReveicedFileProcessパラメータです。
  *
  * @reamsid_L DBC-0980-420 zhangrui
  */

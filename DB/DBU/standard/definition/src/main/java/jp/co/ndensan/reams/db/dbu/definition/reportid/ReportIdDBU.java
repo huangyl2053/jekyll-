@@ -15,6 +15,26 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBU {
 
     /**
+     * 介護事業状況報告年報（様式2）の帳票ＩＤです。
+     */
+    DBU300109(new ReportId("DBU300009_JigyohokokuCompYoshiki2_0_1"), new RString("介護事業状況報告年報（様式2）")),
+    /**
+     * 介護事業状況報告年報（様式2）の帳票ＩＤです。
+     */
+    DBU300110(new ReportId("DBU300010_JigyohokokuCompYoshiki2_0_2"), new RString("介護事業状況報告年報（様式2）")),
+    /**
+     * 介護事業状況報告年報（様式2-2）の帳票ＩＤです。
+     */
+    DBU300111(new ReportId("DBU300009_JigyohokokuCompYoshiki2_0_1"), new RString("介護事業状況報告年報（様式2-2）")),
+    /**
+     * 介護事業状況報告年報（様式2-2）の帳票ＩＤです。
+     */
+    DBU300112(new ReportId("DBU300010_JigyohokokuCompYoshiki2_0_2"), new RString("介護事業状況報告年報（様式2-2）")),
+    /**
+     * 介護事業状況報告年報（様式2-4）の帳票ＩＤです。
+     */
+    DBU300115(new ReportId("DBU300009_JigyohokokuCompYoshiki2_0_1"), new RString("介護事業状況報告年報（様式2-4）")),
+    /**
      * 介護事業状況報告月報・保険給付決定状況（様式2）の帳票ID。
      */
     DBU300022(new ReportId("DBU300022_JigyohokokuGeppoYoshiki2_2_2016"), new RString("介護事業状況報告月報・保険給付決定状況（様式2）")),
