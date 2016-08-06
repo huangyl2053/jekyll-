@@ -255,7 +255,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             source.shaTekiyoEDYMD = entity.get軽減率適用終了年月日().wareki()
                     .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
-            source.ShokiboKyotakuUmu = entity.get小規模居宅ｻｰﾋﾞｽ利用();
+            //source.ShokiboKyotakuUmu = entity.get小規模居宅ｻｰﾋﾞｽ利用();
             source.nijiYoboTaishoKbn = entity.get二次予防事業区分();
             source.nijiYoboSTNengo = entity.get二次予防有効期間開始年月日().wareki()
                     .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
