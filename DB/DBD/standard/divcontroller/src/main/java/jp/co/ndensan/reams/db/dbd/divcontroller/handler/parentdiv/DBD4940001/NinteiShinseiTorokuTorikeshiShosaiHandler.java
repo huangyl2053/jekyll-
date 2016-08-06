@@ -7,10 +7,8 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4940001;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiJoho;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiJohoBuilder;
-import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoRirekiJoho;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4940001.NinteiShinseiTorokuTorikeshiShosaiDiv;
 import jp.co.ndensan.reams.db.dbd.service.core.yokaigoninteijoho.YokaigoNinteiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
@@ -110,17 +108,16 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
 
     }
 
-    /**
-     * 今回前回履歴情報情報を返す。
-     *
-     * @param 被保険者番号 被保険者番号
-     *
-     * @return 今回前回履歴情報 List<YokaigoRirekiJohoEntity>
-     */
-    public List<YokaigoRirekiJoho> get今回前回履歴情報(RString 被保険者番号) {
-        return YokaigoNinteiJohoManager.createInstance().get今回前回履歴情報(被保険者番号);
-    }
-
+//    /**
+//     * 今回前回履歴情報情報を返す。
+//     *
+//     * @param 被保険者番号 被保険者番号
+//     *
+//     * @return 今回前回履歴情報 List<YokaigoRirekiJohoEntity>
+//     */
+//    public List<YokaigoRirekiJoho> get今回前回履歴情報(RString 被保険者番号) {
+//        return YokaigoNinteiJohoManager.createInstance().get今回前回履歴情報(被保険者番号);
+//    }
     private YokaigoNinteiJoho get認定情報(RString 被保険者番号, boolean is受給) {
         YokaigoNinteiJoho 認定情報;
         if (is受給) {
