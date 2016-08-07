@@ -15,13 +15,14 @@ import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7901ShikakuSearch;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7901ShikakuSearchEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearch;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.fukaNendo;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.shikibetsuCode;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.*;
+import static jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaisho.*;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearchEntity;
 //import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7901ShikakuSearch.shikibetsuCode;
 //import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearch.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.FukaTaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.TaishoshaRelateEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaisho;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -130,14 +131,17 @@ public class TaishoshaRelateDac {
     @Transaction
     public IItemList<TaishoshaRelateEntity> select資格対象者(ITrueFalseCriteria 条件, IPsmCriteria psm, boolean is内部結合, int 最大件数) {
         ITableClause table = create資格対象者TableClause(psm, is内部結合);
-        return to資格ModelList(((条件 != null) ? table.where(条件).limit(最大件数) : table.limit(最大件数)).toList(TaishoshaRelateEntity.class));
+        return to資格ModelList(((条件 != null)
+                ? table.where(条件).order(new OrderBy(UaFt200FindShikibetsuTaisho.kanaMeisho, Order.ASC, NullsOrder.LAST)).limit(最大件数)
+                : table.order(new OrderBy(UaFt200FindShikibetsuTaisho.kanaMeisho, Order.ASC, NullsOrder.LAST))
+                .limit(最大件数)).toList(TaishoshaRelateEntity.class));
     }
 
     private ITableClause create資格対象者TableClause(IPsmCriteria psm, boolean is内部結合) {
         DbAccessorForAppendType accessor = new DbAccessorForAppendType(session);
         ITableClause table = (is内部結合)
-                             ? accessor.select().table(psm).innerJoin(DbV7901ShikakuSearch.class, using(DbV7901ShikakuSearch.shikibetsuCode))
-                             : accessor.select().table(psm).leftJoin(DbV7901ShikakuSearch.class, using(DbV7901ShikakuSearch.shikibetsuCode));
+                ? accessor.select().table(psm).innerJoin(DbV7901ShikakuSearch.class, using(DbV7901ShikakuSearch.shikibetsuCode))
+                : accessor.select().table(psm).leftJoin(DbV7901ShikakuSearch.class, using(DbV7901ShikakuSearch.shikibetsuCode));
         return table;
     }
 
@@ -168,15 +172,15 @@ public class TaishoshaRelateDac {
     public IItemList<FukaTaishoshaRelateEntity> select賦課対象者(ITrueFalseCriteria 条件, IPsmCriteria psm, boolean is内部結合, int 最大件数) {
         ITableClause table = create賦課対象者TableClause(psm, is内部結合);
         return to賦課ModelList(((条件 != null)
-                              ? createOrderByClause(table.where(条件)).limit(最大件数)
-                              : createOrderByClause(table).limit(最大件数)).toList(FukaTaishoshaRelateEntity.class));
+                ? createOrderByClause(table.where(条件)).limit(最大件数)
+                : createOrderByClause(table).limit(最大件数)).toList(FukaTaishoshaRelateEntity.class));
     }
 
     private ITableClause create賦課対象者TableClause(IPsmCriteria psm, boolean is内部結合) {
         DbAccessorForAppendType accessor = new DbAccessorForAppendType(session);
         ITableClause table = (is内部結合)
-                             ? accessor.select().table(psm).innerJoin(DbV7902FukaSearch.class, using(DbV7902FukaSearch.shikibetsuCode))
-                             : accessor.select().table(psm).leftJoin(DbV7902FukaSearch.class, using(DbV7902FukaSearch.shikibetsuCode));
+                ? accessor.select().table(psm).innerJoin(DbV7902FukaSearch.class, using(DbV7902FukaSearch.shikibetsuCode))
+                : accessor.select().table(psm).leftJoin(DbV7902FukaSearch.class, using(DbV7902FukaSearch.shikibetsuCode));
         return table;
     }
 
@@ -217,7 +221,7 @@ public class TaishoshaRelateDac {
 
         DbT2002FukaEntity entity = accessor.select().
                 table(DbT2002Fuka.class).
-                where(eq(shikibetsuCode, 識別コード)).
+                where(eq(DbT2002Fuka.shikibetsuCode, 識別コード)).
                 order(new OrderBy(fukaNendo, Order.DESC, NullsOrder.LAST)).
                 limit(1).
                 toObject(DbT2002FukaEntity.class);

@@ -63,7 +63,7 @@ public class HihokenshaShokaiTotal {
         if (shikibetsuCode.isEmpty()) {
             div.setDisabled(true);
             div.getHihokenshaShokaiPanel().setDisplayNone(true);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BTN_KAKUTEI, true);
+            //CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BTN_KAKUTEI, true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BTN_PUBLISH, true);
             return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
