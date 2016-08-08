@@ -55,7 +55,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.searchcondition.SearchCondition
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.StringOperator;
 
 /**
- * 全国保険者マスタ更新のDivです。
+ * 全国保険者マスタ更新のDivControllerです。
  *
  * @reamsid_L DBU-4230-010 chenxiangyu
  */

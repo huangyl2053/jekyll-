@@ -105,19 +105,24 @@ public class ShinsakaiJIzenShinsakekkaIchiranFinder {
 
         for (int i = 0; i < 事前審査結果List.size(); i++) {
             for (JizenShinsaKekkaRelateEntity 審査結果 : 審査結果リスト) {
-                if (事前審査結果List.get(i).getShinsakaiOrder().equals(new RString(審査結果.getShinsakaiOrder()))) {
+                if (事前審査結果List.get(i).getShinsakaiOrder().equals(new RString(審査結果.getShinsakaiOrder()))
+                        && 審査員名リスト.get(ZERO).getShinsakaiIinCode().equalsIgnoreCase(審査結果.getShinsakaiIinCode())) {
                     事前審査結果List.get(i).setShisain1(審査結果.getNijiHanteiKekkaCode());
                 }
-                if (事前審査結果List.get(i).getShinsakaiOrder().equals(new RString(審査結果.getShinsakaiOrder()))) {
+                if (事前審査結果List.get(i).getShinsakaiOrder().equals(new RString(審査結果.getShinsakaiOrder()))
+                        && 審査員名リスト.get(ITI).getShinsakaiIinCode().equalsIgnoreCase(審査結果.getShinsakaiIinCode())) {
                     事前審査結果List.get(i).setShisain2(審査結果.getNijiHanteiKekkaCode());
                 }
-                if (事前審査結果List.get(i).getShinsakaiOrder().equals(new RString(審査結果.getShinsakaiOrder()))) {
+                if (事前審査結果List.get(i).getShinsakaiOrder().equals(new RString(審査結果.getShinsakaiOrder()))
+                        && 審査員名リスト.get(NI).getShinsakaiIinCode().equalsIgnoreCase(審査結果.getShinsakaiIinCode())) {
                     事前審査結果List.get(i).setShisain3(審査結果.getNijiHanteiKekkaCode());
                 }
-                if (事前審査結果List.get(i).getShinsakaiOrder().equals(new RString(審査結果.getShinsakaiOrder()))) {
+                if (事前審査結果List.get(i).getShinsakaiOrder().equals(new RString(審査結果.getShinsakaiOrder()))
+                        && 審査員名リスト.get(SAN).getShinsakaiIinCode().equalsIgnoreCase(審査結果.getShinsakaiIinCode())) {
                     事前審査結果List.get(i).setShisain4(審査結果.getNijiHanteiKekkaCode());
                 }
-                if (事前審査結果List.get(i).getShinsakaiOrder().equals(new RString(審査結果.getShinsakaiOrder()))) {
+                if (事前審査結果List.get(i).getShinsakaiOrder().equals(new RString(審査結果.getShinsakaiOrder()))
+                        && 審査員名リスト.get(YON).getShinsakaiIinCode().equalsIgnoreCase(審査結果.getShinsakaiIinCode())) {
                     事前審査結果List.get(i).setShisain5(審査結果.getNijiHanteiKekkaCode());
                 }
             }

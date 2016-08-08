@@ -38,7 +38,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class ShinsakaiJIzenShinsakekkaToroku {
 
-    private static final RString 審査会開催番号 = new RString("20150505");
     private final RString 出力名 = new RString("JizenShinsaKekka");
     private final RString 下線 = new RString("_");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
@@ -53,11 +52,10 @@ public class ShinsakaiJIzenShinsakekkaToroku {
      * @return ResponseData<ShinsakaiJIzenShinsakekkaTorokuDiv>
      */
     public ResponseData<ShinsakaiJIzenShinsakekkaTorokuDiv> onLoad(ShinsakaiJIzenShinsakekkaTorokuDiv div) {
-        ViewStateHolder.get(ViewStateKeys.審査会開催番号, RString.class);
         getHandler(div).set事前審査会用結果(ShinsakaiJIzenShinsakekkaIchiranFinder.createInstance()
-                .get事前審査会用結果(審査会開催番号).records());
+                .get事前審査会用結果(ViewStateHolder.get(ViewStateKeys.審査会開催番号, RString.class)).records());
         getHandler(div).set事前審査結果(ShinsakaiJIzenShinsakekkaIchiranFinder.createInstance().
-                get事前審査結果(審査会開催番号).records());
+                get事前審査結果(ViewStateHolder.get(ViewStateKeys.審査会開催番号, RString.class)).records());
         return ResponseData.of(div).respond();
     }
 
@@ -69,8 +67,9 @@ public class ShinsakaiJIzenShinsakekkaToroku {
      */
     public ResponseData onclick_btnGetResult(ShinsakaiJIzenShinsakekkaTorokuDiv requestDiv) {
 
-        List<RString> 審査員 = ShinsakaiJIzenShinsakekkaIchiranFinder.createInstance().get審査員(審査会開催番号).records();
-        List<RString> fileName = setFileName(審査会開催番号, 審査員);
+        List<RString> 審査員 = ShinsakaiJIzenShinsakekkaIchiranFinder.createInstance().
+                get審査員(ViewStateHolder.get(ViewStateKeys.審査会開催番号, RString.class)).records();
+        List<RString> fileName = setFileName(ViewStateHolder.get(ViewStateKeys.審査会開催番号, RString.class), 審査員);
         ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv)
                 .入力チェック_btnGetResult(new RStringBuilder(Path.getTmpDirectoryPath()), fileName);
         if (vallidation.iterator().hasNext()) {
@@ -108,7 +107,7 @@ public class ShinsakaiJIzenShinsakekkaToroku {
      * @return ResponseData
      */
     public ResponseData onclick_btnBack(ShinsakaiJIzenShinsakekkaTorokuDiv div) {
-        ViewStateHolder.put(ViewStateKeys.審査会開催番号, 審査会開催番号);
+        ViewStateHolder.put(ViewStateKeys.審査会開催番号, ViewStateHolder.get(ViewStateKeys.審査会開催番号, RString.class));
         return ResponseData.of(div).forwardWithEventName(DBE5200001TransitionEventName.一覧に戻る).respond();
     }
 

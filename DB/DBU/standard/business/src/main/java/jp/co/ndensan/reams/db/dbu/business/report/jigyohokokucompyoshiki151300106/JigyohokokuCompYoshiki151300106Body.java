@@ -35,6 +35,7 @@ public class JigyohokokuCompYoshiki151300106Body {
     private final RString list2_11;
 
     /**
+     * コンストラクタです。
      *
      * @param list1_1 第1号被保険者
      * @param list1_2 第2号被保険者

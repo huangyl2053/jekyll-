@@ -324,43 +324,51 @@ public class IchijihanteikekkahyoItemSetteiA3 {
             } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見日常の意思決定(厚労省IF識別コード))) {
                 主治医意見書コード = IkenKomoku05.toValue(主治医意見書.getIkenItem()).getコード();
                 settei.set日常の意思決定認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
-            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見点滴の管理(厚労省IF識別コード))) {
-                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
-                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
-            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見中心静脈栄養(厚労省IF識別コード))) {
-                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
-                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
-            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見透析(厚労省IF識別コード))) {
-                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
-                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
-            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見ストーマの処置(厚労省IF識別コード))) {
-                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
-                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
-            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見酸素療法(厚労省IF識別コード))) {
-                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
-                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
-            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見レスピレーター(厚労省IF識別コード))) {
-                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
-                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
-            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見気管切開の処置(厚労省IF識別コード))) {
-                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
-                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
-            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見疼痛の看護(厚労省IF識別コード))) {
-                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
-                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
-            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見経管栄養(厚労省IF識別コード))) {
-                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
-                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
-            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見モニター測定(厚労省IF識別コード))) {
-                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
-                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
-            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見じょくそうの処置(厚労省IF識別コード))) {
-                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
-                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
-            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見カテーテル(厚労省IF識別コード))) {
-                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
-                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
             }
+            set項目主治医意見書(厚労省IF識別コード, 今回結果コード, 第１群, 主治医意見書);
+        }
+    }
+
+    private void set項目主治医意見書(Code 厚労省IF識別コード, RString 今回結果コード,
+            TiyosaKekka 第１群, DbT5304ShujiiIkenshoIkenItemEntity 主治医意見書) {
+        RString 主治医意見書コード;
+        SabisuJyoukyoA3 settei = new SabisuJyoukyoA3();
+        if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見点滴の管理(厚労省IF識別コード))) {
+            主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+            settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+        } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見中心静脈栄養(厚労省IF識別コード))) {
+            主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+            settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+        } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見透析(厚労省IF識別コード))) {
+            主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+            settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+        } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見ストーマの処置(厚労省IF識別コード))) {
+            主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+            settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+        } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見酸素療法(厚労省IF識別コード))) {
+            主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+            settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+        } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見レスピレーター(厚労省IF識別コード))) {
+            主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+            settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+        } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見気管切開の処置(厚労省IF識別コード))) {
+            主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+            settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+        } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見疼痛の看護(厚労省IF識別コード))) {
+            主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+            settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+        } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見経管栄養(厚労省IF識別コード))) {
+            主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+            settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+        } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見モニター測定(厚労省IF識別コード))) {
+            主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+            settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+        } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見じょくそうの処置(厚労省IF識別コード))) {
+            主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+            settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+        } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見カテーテル(厚労省IF識別コード))) {
+            主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+            settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
         }
     }
 

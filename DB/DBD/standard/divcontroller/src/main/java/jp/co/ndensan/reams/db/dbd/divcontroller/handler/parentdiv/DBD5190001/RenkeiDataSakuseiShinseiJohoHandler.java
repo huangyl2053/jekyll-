@@ -110,8 +110,10 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
             div.getTxtKonkaiShuryoTime().setValue(RTime.now());
 
         }
-        div.getTxtNewFileName().setValue(新ファイル名);
+
         div.getTxtMaxKensu().setValue(saidikensu);
+        div.getTxtNewFileName().setValue(新ファイル名);
+        div.getDgTaishoshaIchiran().getGridSetting().setLimitRowCount(saidikensu.intValue());
         div.getTaishoshaIchiran().setIsOpen(false);
         div.getHanteiIraiIchiranhyo().setIsOpen(false);
 

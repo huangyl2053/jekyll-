@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1060001;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * このコードはツールによって生成されました。</br>

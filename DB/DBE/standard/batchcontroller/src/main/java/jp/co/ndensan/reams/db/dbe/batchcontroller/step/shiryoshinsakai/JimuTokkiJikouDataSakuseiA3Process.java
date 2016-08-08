@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakute
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitext2a3.TokkiText2A3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkitexta4.TokkiText1A4ReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.tokkitext2a3.TokkiText2A3ReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper;
@@ -93,7 +94,7 @@ public class JimuTokkiJikouDataSakuseiA3Process extends BatchKeyBreakBase<Shinsa
         kyotsuEntity.setHihokenshaName(AtenaMeisho.EMPTY);
         List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List = get特記情報(kyotsuEntity);
         TokkiText1A4Business business = new TokkiText1A4Business(kyotsuEntity, 特記情報List);
-        TokkiText2A3Report report = new TokkiText2A3Report(business);
+        TokkiText2A3Report report = new TokkiText2A3Report(new TokkiText2A3Entity());
         report.writeBy(reportSourceWriterA3);
         ページ表示行数 = business.getページ表示行数();
     }

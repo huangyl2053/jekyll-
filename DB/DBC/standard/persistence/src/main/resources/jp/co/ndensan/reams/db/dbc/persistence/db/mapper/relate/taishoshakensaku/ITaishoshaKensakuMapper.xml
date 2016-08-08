@@ -8,7 +8,7 @@
     <select resultOrdered="true" id="selectJukyushaIdoTaishosha"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.taishoshakensaku.TaishoshaKensakuParameter"
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity"
-            fetchSize="500" autoMapping="true">
+            fetchSize="500">
         SELECT "C".*
         FROM
         (SELECT

@@ -45,14 +45,14 @@ public class ShinsakaishiryoA4Editor implements IShinsakaishiryoA4Editor {
     private ShinsakaishiryoA4ReportSource editItem(ShinsakaishiryoA4ReportSource source) {
         source.shinsakaiNo = get審査会番号(business.get審査会番号());
         source.shinsakaiKaisaiYMD = business.get審査会開催年月日();
-        source.ShinsainName1 = business.getshinsakaiIinJohoList1();
-        source.ShinsainName2 = business.getshinsakaiIinJohoList2();
-        source.ShinsainName3 = business.getshinsakaiIinJohoList3();
-        source.ShinsainName4 = business.getshinsakaiIinJohoList4();
-        source.ShinsainName5 = business.getshinsakaiIinJohoList5();
-        source.ShinsainName6 = business.getshinsakaiIinJohoList6();
-        source.ShinsainName7 = business.getshinsakaiIinJohoList7();
-        source.ShinsainName8 = business.getshinsakaiIinJohoList8();
+        source.shinsainName1 = business.getshinsakaiIinJohoList1();
+        source.shinsainName2 = business.getshinsakaiIinJohoList2();
+        source.shinsainName3 = business.getshinsakaiIinJohoList3();
+        source.shinsainName4 = business.getshinsakaiIinJohoList4();
+        source.shinsainName5 = business.getshinsakaiIinJohoList5();
+        source.shinsainName6 = business.getshinsakaiIinJohoList6();
+        source.shinsainName7 = business.getshinsakaiIinJohoList7();
+        source.shinsainName8 = business.getshinsakaiIinJohoList8();
         source.gogitaiNo = business.get合議体番号();
         source.shinsaTaishoshaCount = business.get審査対象者数();
         source.listShinsei_1 = business.get審査会審査順();

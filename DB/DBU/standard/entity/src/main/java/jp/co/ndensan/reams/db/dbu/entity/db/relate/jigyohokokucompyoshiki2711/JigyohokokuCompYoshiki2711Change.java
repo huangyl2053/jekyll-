@@ -30,10 +30,7 @@ public class JigyohokokuCompYoshiki2711Change {
 
     /**
      *
-     * @param listUpper_1 件数
-     * @param listLower_1 給付額
-     */
-    /**
+     * コンストラクタです。
      *
      * @param listUpper_1 件数（世帯合算）
      * @param listUpper_2 件数（その他）
