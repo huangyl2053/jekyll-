@@ -91,7 +91,7 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
         if (RString.isNullOrEmpty(shuturyokuJun)) {
             isShuturyokuJunEmpty = true;
         }
-        return new IinShinsakaiIinJohoMyBatisParameter(gogitaiNo,
+        return new IinShinsakaiIinJohoMyBatisParameter(gogitaiNo, bangoStart, bangoEnd,
                 shinsakaiKaisaiYoteiYMD, shinsakaiKaisaiNo, shuturyokuJun, isSakuseiJokenHani, isSakuseiJokenTuika, isShuturyokuJunEmpty);
     }
 
