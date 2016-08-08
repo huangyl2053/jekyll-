@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class IchiGojiHanteiKekkaJohoMapperParameter {
+public final class IchiGojiHanteiKekkaJohoMapperParameter {
 
     private final RString shinseishoKanriNo;
 
