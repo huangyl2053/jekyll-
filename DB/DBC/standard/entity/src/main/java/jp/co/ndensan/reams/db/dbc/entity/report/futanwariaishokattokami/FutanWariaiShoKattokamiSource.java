@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItemGroup;
  *
  * @reamsid_L DBC-4990-061 pengxingyi
  */
-public class FutanWariaiShoSource implements IReportSource {
+public class FutanWariaiShoKattokamiSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     @ReportItem(name = "kofuYmd", length = 20, order = 1)

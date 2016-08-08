@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.futanwariaishokattokami;
 
-import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishokattokami.FutanWariaiShoSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishokattokami.FutanWariaiShoKattokamiSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
@@ -13,6 +13,6 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
  *
  * @reamsid_L DBC-4990-040 pengxingyi
  */
-interface IFutanWariaiShoEditor extends IReportEditor<FutanWariaiShoSource> {
+interface IFutanWariaiShoKattokamiEditor extends IReportEditor<FutanWariaiShoKattokamiSource> {
 
 }
