@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要：一五次判定結果情報のマッピング用XMLです。 -->
+<!-- @reamsid_L DBE-3000-290 chenxiangyu -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichigojihanteikekkajoho.IIchiGojiHanteiKekkaJohoMapper">
+    <resultMap id="resultMap_IchiGojiHanteiKekkaJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJohoEntity" autoMapping="true">
+        <result property="厚労省IF識別コード" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="判定年月日" column="ichiGojiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"  />
+        <result property="判定結果コード" column="ichiGojiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"  />
+        <result property="基準時間" column="kijunJikan"/>
+        <result property="基準時間_食事" column="kijunJikanShokuji"/>
+        <result property="基準時間_排泄" column="kijunJikanHaisetsu" />
+        <result property="基準時間_移動" column="kijunJikanIdo"/>
+        <result property="基準時間_清潔保持" column="kijunJikanSeiketsuHoji"/>
+        <result property="基準時間_間接ケア" column="kijunJikanKansetsuCare" />
+        <result property="基準時間_BPSD関連" column="kijunJikanBPSDKanren"/>
+        <result property="基準時間_機能訓練" column="kijunJikanKinoKunren"/>
+        <result property="基準時間_医療関連" column="kijunJikanIryoKanren" />
+        <result property="基準時間_認知症加算" column="kijunJikanNinchishoKasan"/>
+        <result property="中間評価項目得点第一群" column="chukanHyokaKomoku1gun"/>
+        <result property="中間評価項目得点第二群" column="chukanHyokaKomoku2gun" />
+        <result property="中間評価項目得点第三群" column="chukanHyokaKomoku3gun"/>
+        <result property="中間評価項目得点第四群" column="chukanHyokaKomoku4gun"/>
+        <result property="中間評価項目得点第五群" column="chukanHyokaKomoku5gun" />
+        <result property="認知症自立度Ⅱ_蓋然性" column="ninchishoJiritsudoIIijoNoGaizensei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="安定性コード" column="jotaiAnteiseiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="給付区分コード" column="suiteiKyufuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="判定警告コード" column="ichiGojiHnateiKeikokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="基本調査項目" column="researchItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="主治医意見書項目" column="ikenItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査_障害自立度コード" column="shogaiNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査_認知症自立度コード" column="ninchishoNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="主治医意見書_認知症自立度" column="主治医意見書_認知症自立度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <select id="getKoroshoIfShikibetsuCode"
+                resultMap="resultMap_IchiGojiHanteiKekkaJohoEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJohoMapperParameter" fetchSize="500" resultOrdered="true">
+        SELECT
+          A."koroshoIfShikibetsuCode"
+        FROM
+          rgdb."DbT5101NinteiShinseiJoho" AS A 
+        WHERE
+          A."shinseishoKanriNo" = #{shinseishoKanriNo}
+          AND A."logicalDeletedFlag" = False
+    </select>
+
+    
+    <select id="getIchiGojiHanteiKekkaJoho"
+                resultMap="resultMap_IchiGojiHanteiKekkaJohoEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJohoMapperParameter" fetchSize="500" resultOrdered="true">
+        SELECT
+          A."ichiGojiHanteiYMD",
+          A."ichiGojiHanteiKekkaCode",
+          A."kijunJikan",
+          A."kijunJikanShokuji",
+          A."kijunJikanHaisetsu",
+          A."kijunJikanIdo",
+          A."kijunJikanSeiketsuHoji",
+          A."kijunJikanKansetsuCare",
+          A."kijunJikanBPSDKanren",
+          A."kijunJikanKinoKunren",
+          A."kijunJikanIryoKanren",
+          A."kijunJikanNinchishoKasan",
+          A."chukanHyokaKomoku1gun",
+          A."chukanHyokaKomoku2gun",
+          A."chukanHyokaKomoku3gun",
+          A."chukanHyokaKomoku4gun",
+          A."chukanHyokaKomoku5gun",
+          A."ninchishoJiritsudoIIijoNoGaizensei",
+          A."jotaiAnteiseiCode",
+          A."suiteiKyufuKubunCode",
+          A."ichiGojiHnateiKeikokuCode"
+        FROM
+          rgdb."DbT5510IchiGojiHanteiKekkaJoho" AS A
+        WHERE
+          A."shinseishoKanriNo" = #{shinseishoKanriNo}
+    </select>
+    
+    <select id="get認定調査結果件数"
+                resultType="int" 
+                parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJohoMapperParameter" fetchSize="500" resultOrdered="true">
+        SELECT
+          COUNT(1) 
+        FROM
+          rgdb."DbT5203NinteichosahyoKihonChosa" AS A 
+        WHERE
+          A."shinseishoKanriNo" = #{shinseishoKanriNo}
+    </select>
+    
+    <select id="get主治医意見書件数"
+                resultType="int" 
+                parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJohoMapperParameter" fetchSize="500" resultOrdered="true">
+        SELECT
+          COUNT(1) 
+        FROM
+          rgdb."DbT5302ShujiiIkenshoJoho" AS A 
+        WHERE
+          A."shinseishoKanriNo" = #{shinseishoKanriNo}
+    </select>
+    
+    <!-- @reamsid_L DBE-3000-300 chenxiangyu -->
+    <!-- 2 -->
+    <select id="get基本調査項目"
+                resultMap="resultMap_IchiGojiHanteiKekkaJohoEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJohoMapperParameter" fetchSize="500" resultOrdered="true">
+        SELECT
+          A."researchItem"
+        FROM
+          rgdb."DbT5211NinteichosahyoChosaItem" AS A 
+        WHERE
+          A."shinseishoKanriNo"=#{shinseishoKanriNo} 
+          AND NOT EXISTS ( 
+            SELECT
+              'X' 
+            FROM
+              rgdb."DbT5211NinteichosahyoChosaItem" AS A1 
+            WHERE
+              A."shinseishoKanriNo"=A1."shinseishoKanriNo" 
+              AND A."ninteichosaRirekiNo" <![CDATA[<]]> A1."ninteichosaRirekiNo"
+          ) 
+          AND (A."koroshoIfShikibetsuCode"='09A' OR A."koroshoIfShikibetsuCode" = '09B') 
+        ORDER BY
+          A."remban" ASC
+    </select>
+    
+<!--     3 -->
+    <select id="get主治医意見書項目"
+                resultMap="resultMap_IchiGojiHanteiKekkaJohoEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJohoMapperParameter" fetchSize="500" resultOrdered="true">
+        SELECT
+          A."ikenItem"
+        FROM
+          rgdb."DbT5304ShujiiIkenshoIkenItem" AS A 
+        WHERE
+          A."shinseishoKanriNo"='000082'
+          AND NOT EXISTS ( 
+            SELECT
+              'X' 
+            FROM
+              rgdb."DbT5304ShujiiIkenshoIkenItem" AS A1 
+            WHERE
+              A."shinseishoKanriNo"=A1."shinseishoKanriNo" 
+              AND A."ikenshoIraiRirekiNo" <![CDATA[<]]> A1."ikenshoIraiRirekiNo"
+          ) 
+          AND (A."koroshoIfShikibetsuCode"='09A' OR A."koroshoIfShikibetsuCode" = '09B') 
+          AND A."remban" IN (15, 16, 17, 69) 
+        ORDER BY
+          A."remban" ASC
+    </select>
+    
+     <!--4--> 
+    <select id="get認定調査高齢者自立度"
+                resultMap="resultMap_IchiGojiHanteiKekkaJohoEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJohoMapperParameter" fetchSize="500" resultOrdered="true">
+        SELECT
+          A."shogaiNichijoSeikatsuJiritsudoCode"
+          , A."ninchishoNichijoSeikatsuJiritsudoCode"
+        FROM
+          rgdb."DbT5203NinteichosahyoKihonChosa" AS A 
+        WHERE
+          A."shinseishoKanriNo"=#{shinseishoKanriNo} 
+          AND NOT EXISTS ( 
+            SELECT
+              'X' 
+            FROM
+              rgdb."DbT5203NinteichosahyoKihonChosa" AS A1 
+            WHERE
+              A."shinseishoKanriNo"=A1."shinseishoKanriNo" 
+              AND A."ninteichosaRirekiNo" <![CDATA[<]]> A1."ninteichosaRirekiNo"
+          ) 
+          AND (A."koroshoIfShikibetsuCode"='09A' OR A."koroshoIfShikibetsuCode" = '09B')
+    </select>
+    
+     <!--5--> 
+    <select id="get主治医意見書高齢者自立度"
+                resultMap="resultMap_IchiGojiHanteiKekkaJohoEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJohoMapperParameter" fetchSize="500" resultOrdered="true">
+        SELECT
+          A."ikenItem" AS 主治医意見書_認知症自立度
+        FROM
+          rgdb."DbT5304ShujiiIkenshoIkenItem" AS A 
+        WHERE
+          A."shinseishoKanriNo"='000082'
+          AND NOT EXISTS ( 
+            SELECT
+              'X' 
+            FROM
+              rgdb."DbT5304ShujiiIkenshoIkenItem" AS A1 
+            WHERE
+              A."shinseishoKanriNo"=A1."shinseishoKanriNo"
+              AND A."ikenshoIraiRirekiNo" <![CDATA[<]]> A1."ikenshoIraiRirekiNo"
+          ) 
+          AND A."remban" = 14 
+          AND (A."koroshoIfShikibetsuCode"='09A' OR A."koroshoIfShikibetsuCode" = '09B')
+    </select>
+</mapper>

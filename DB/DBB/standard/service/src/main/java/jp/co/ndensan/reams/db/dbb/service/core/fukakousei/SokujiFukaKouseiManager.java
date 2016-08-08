@@ -27,7 +27,7 @@ public class SokujiFukaKouseiManager {
     private final DbT2004GemmenDac 賦課の減免manager;
     private final FukaJohoManager 賦課の情報manager;
     private final ChoshuHohoManager 介護徴収方法manager;
-    private static final RString 即時賦課更正entity = new RString("即時賦課更正");
+    private static final RString 即時賦課更正ENTITY = new RString("即時賦課更正");
 
     /**
      * コンストラクタです。
@@ -70,7 +70,7 @@ public class SokujiFukaKouseiManager {
      */
     @Transaction
     public void do即時賦課更正(SokujiFukaKousei sokujiFukaKousei) {
-        requireNonNull(sokujiFukaKousei, UrSystemErrorMessages.値がnull.getReplacedMessage(即時賦課更正entity.toString()));
+        requireNonNull(sokujiFukaKousei, UrSystemErrorMessages.値がnull.getReplacedMessage(即時賦課更正ENTITY.toString()));
         for (FukaJoho fukaJoho : sokujiFukaKousei.get賦課の情報リスト()) {
             賦課の情報manager.save(fukaJoho);
         }

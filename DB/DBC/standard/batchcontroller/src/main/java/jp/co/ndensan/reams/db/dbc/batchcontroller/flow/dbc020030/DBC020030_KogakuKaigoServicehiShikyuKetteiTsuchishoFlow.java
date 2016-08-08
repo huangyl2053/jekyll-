@@ -22,10 +22,14 @@ public class DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoFlow
         extends BatchFlowBase<DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter> {
 
     private static final String 高額サービス一時テーブルの登録 = "insertKogakuKaigoKetteiTsuchishoInfoTempProcess";
+    private static final String 高額サービス一時テーブルの設定 = "updateKogakuKaigoKetteiTsuchishoInfoTempProcess";
+    private static final String 高額介護サービス費支給判定結果の更新 = "updateKogakuShikyuHanteiKekkaProcess";
 
     @Override
     protected void defineFlow() {
         executeStep(高額サービス一時テーブルの登録);
+        executeStep(高額サービス一時テーブルの設定);
+        executeStep(高額介護サービス費支給判定結果の更新);
     }
 
     /**
@@ -42,7 +46,7 @@ public class DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoFlow
         DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter parameter = getParameter();
         return new KogakuKaigoServiceProcessParameter(parameter.get抽出モード(), parameter.get抽出条件日付From(),
                 parameter.get抽出条件日付To(), parameter.get決定者受付年月(),
-                parameter.get印書(), parameter.get高額自動償還(), parameter.get発行日(), parameter.get支払い予定日(),
+                parameter.get印書(), parameter.get高額自動償還(), parameter.get発行日(),
                 parameter.get文書番号(), parameter.getテスト出力フラグ(), parameter.get決定日一括更新区分(), parameter.get決定日(),
                 parameter.get利用者向け決定通知書フラグ(), parameter.get受領委任者向け決定通知書フラグ(),
                 parameter.get振込予定日(), parameter.get支払場所(), parameter.get支払期間From(), parameter.get支払期間To(),

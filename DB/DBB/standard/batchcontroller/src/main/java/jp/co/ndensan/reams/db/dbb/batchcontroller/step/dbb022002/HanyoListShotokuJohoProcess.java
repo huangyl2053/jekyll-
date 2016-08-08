@@ -305,10 +305,7 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
         if (年齢PARAMETER.equals(processParameter.get宛名抽出条件().getAgeSelectKijun().get名称())) {
             builder.append(年齢SHOW);
             if (processParameter.get宛名抽出条件().getNenreiRange() != null) {
-                Decimal 年齢From = processParameter.get宛名抽出条件().getNenreiRange().getFrom();
-                Decimal 年齢To = processParameter.get宛名抽出条件().getNenreiRange().getTo();
-                builder.append(new RString(年齢From.toString())).append(定数_歳).append(LINE).
-                        append(new RString(年齢To.toString())).append(定数_歳).append(RString.FULL_SPACE);
+                set年齢(builder);
             } else {
                 builder.append(RString.FULL_SPACE);
             }
@@ -325,18 +322,43 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
         } else if (生年月日PARAMETER.equals(processParameter.get宛名抽出条件().getAgeSelectKijun().get名称())) {
             builder.append(生年月日SHOW);
             if (processParameter.get宛名抽出条件().getSeinengappiRange() != null) {
-                RDate 生年月日From = processParameter.get宛名抽出条件().getSeinengappiRange().getFrom();
-                RDate 生年月日To = processParameter.get宛名抽出条件().getSeinengappiRange().getTo();
-                RString 変数_生年月日From = 生年月日From.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                        .fillType(FillType.BLANK).toDateString();
-                RString 変数_生年月日To = 生年月日To.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                        .fillType(FillType.BLANK).toDateString();
-                builder.append(変数_生年月日From).append(LINE).append(変数_生年月日To);
+                set生年月日(builder);
             } else {
                 builder.append(RString.EMPTY);
             }
             出力条件.add(builder.toRString());
         }
+    }
+
+    private void set年齢(RStringBuilder builder) {
+        Decimal 年齢From = processParameter.get宛名抽出条件().getNenreiRange().getFrom();
+        Decimal 年齢To = processParameter.get宛名抽出条件().getNenreiRange().getTo();
+        RString 変数_年齢From = null;
+        RString 変数_年齢To = null;
+        if (年齢From != null) {
+            変数_年齢From = new RString(年齢From.toString());
+        }
+        if (年齢To != null) {
+            変数_年齢To = new RString(年齢To.toString());
+        }
+        builder.append(変数_年齢From).append(定数_歳).append(LINE).
+                append(変数_年齢To).append(定数_歳).append(RString.FULL_SPACE);
+    }
+
+    private void set生年月日(RStringBuilder builder) {
+        RDate 生年月日From = processParameter.get宛名抽出条件().getSeinengappiRange().getFrom();
+        RDate 生年月日To = processParameter.get宛名抽出条件().getSeinengappiRange().getTo();
+        RString 変数_生年月日From = null;
+        RString 変数_生年月日To = null;
+        if (生年月日From != null) {
+            変数_生年月日From = 生年月日From.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                    .fillType(FillType.BLANK).toDateString();
+        }
+        if (生年月日To != null) {
+            変数_生年月日To = 生年月日To.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                    .fillType(FillType.BLANK).toDateString();
+        }
+        builder.append(変数_生年月日From).append(LINE).append(変数_生年月日To);
     }
 
     private void set課税区分前後(RStringBuilder builder, List<RString> list) {

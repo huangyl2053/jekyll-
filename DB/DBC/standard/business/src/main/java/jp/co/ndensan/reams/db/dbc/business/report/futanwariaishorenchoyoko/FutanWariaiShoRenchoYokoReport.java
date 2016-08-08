@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.futanwariaishorenchoyoko;
 
-import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishokattokami.FutanWariaiShoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishokattokami.FutanWariaiShoKattokamiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishorenchoyoko.FutanWariaiShoRenchoYokoSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -17,14 +17,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class FutanWariaiShoRenchoYokoReport extends Report<FutanWariaiShoRenchoYokoSource> {
 
-    private final FutanWariaiShoEntity entity;
+    private final FutanWariaiShoKattokamiEntity entity;
 
     /**
      * インスタンスを生成します。
      *
-     * @param entity {@link FutanWariaiShoEntity}
+     * @param entity {@link FutanWariaiShoKattokamiEntity}
      */
-    public FutanWariaiShoRenchoYokoReport(FutanWariaiShoEntity entity) {
+    public FutanWariaiShoRenchoYokoReport(FutanWariaiShoKattokamiEntity entity) {
         this.entity = entity;
     }
 
