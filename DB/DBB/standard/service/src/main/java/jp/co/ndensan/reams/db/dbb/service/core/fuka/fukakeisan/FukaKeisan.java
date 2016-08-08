@@ -1095,15 +1095,12 @@ public class FukaKeisan {
         if (扶助種類リスト == null || 扶助種類リスト.isEmpty()) {
             return RString.EMPTY;
         }
-        // TODO QAのNo.950(Redmine#91760)
-        // 以下がDummy data
-        return new RString("01");
-//        List<RString> 扶助種類 = new ArrayList<>();
-//        for (SeikatsuHogoFujoShurui shurui : 扶助種類リスト) {
-//            扶助種類.add(shurui.get扶助種類コード().getColumnValue().getColumnValue());
-//        }
-//        Collections.sort(扶助種類);
-//        return 扶助種類.get(0);
+        List<RString> 扶助種類 = new ArrayList<>();
+        for (SeikatsuHogoFujoShurui shurui : 扶助種類リスト) {
+            扶助種類.add(shurui.get扶助種類コード().getColumnValue().getColumnValue());
+        }
+        Collections.sort(扶助種類);
+        return 扶助種類.get(0);
     }
 
     private void set老齢福祉年金(FukaJohoBuilder builder, List<RoreiFukushiNenkinJukyusha> 老福の情報リスト,
