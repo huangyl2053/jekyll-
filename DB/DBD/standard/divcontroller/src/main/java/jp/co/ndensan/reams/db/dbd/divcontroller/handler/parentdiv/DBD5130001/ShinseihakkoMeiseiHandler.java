@@ -99,13 +99,13 @@ public class ShinseihakkoMeiseiHandler {
         ninteishinseihakkodiv.getCcdKaigoNinteiAtenaInfo().setShoriType(コード);
         ninteishinseihakkodiv.getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(ShinseishoKanriNo.EMPTY, shikibetsuCode);
         ninteishinseihakkodiv.getCcdKaigoNinteiAtenaInfo().initialize();
-        ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().initialize(shichosonSecurityJoho.get市町村情報().get市町村コード().value(),
-                RString.EMPTY, RString.EMPTY, 被保険者番号);
+//        ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().initialize(shichosonSecurityJoho.get市町村情報().get市町村コード().value(),
+//                RString.EMPTY, RString.EMPTY, 被保険者番号); TODO
 
         NinteiKanryoNinteiShinseiJohoManager manager = NinteiKanryoNinteiShinseiJohoManager.createInstance();
-        ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().getHookenshaCode();
-        NinteiShinseiJohoChild entity = manager.get要介護認定申請情報(ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().getHookenshaCode(),
-                ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue());
+//        ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().getHookenshaCode(); TODO
+//        NinteiShinseiJohoChild entity = manager.get要介護認定申請情報(ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().getHookenshaCode(),
+//                ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue());
         NinteiKanryoJoho ninteiKanryoJoho = manager.selectByShinseishoKanriNo(entity.get申請書管理番号());
         if (ninteiKanryoJoho == null) {
             checkninteiKanryoJoho(entity);
