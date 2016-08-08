@@ -151,15 +151,4 @@ public class ZenkokuHokenshaMasterKoshinHandler {
             div.getDgHokenshas().getDataSource().add(row);
         }
     }
-
-    /**
-     * 「削除状態」を設定します。
-     */
-    public void onClick_iconDelete() {
-        div.getHokenshaJoho().getTxtHokenshaNo().setReadOnly(true);
-        div.getHokenshaJoho().getTxtHokenshaName().setReadOnly(true);
-        div.getHokenshaJoho().getTxtHokenshaTelNo().setReadOnly(true);
-        div.getHokenshaJoho().getTxtHokenshaYubinNo().setReadOnly(true);
-        div.getHokenshaJoho().getTxtHokenshaJusho().setReadOnly(true);
-    }
 }

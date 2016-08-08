@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0800011
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.business.core.zenkokuhokenshamasterkoshin.UrT0507HokenjaEntityBusiness;
+import jp.co.ndensan.reams.db.dbu.business.core.zenkokuhokenshamasterkoshin.HokenshaMasterKoshinBusiness;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0800011.DBU0800011StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0800011.DBU0800011TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0800011.ZenkokuHokenshaMasterKoshinDiv;
@@ -289,7 +289,7 @@ public class ZenkokuHokenshaMasterKoshin {
                 builder.setTelNo(new TelNo(row.getTelNo()));
                 builder.setYubinNo(new YubinNo(row.getYubinNo()));
                 Hokenja hknj = builder.build();
-                UrT0507HokenjaEntityBusiness business = new UrT0507HokenjaEntityBusiness(hknj.toEntity());
+                HokenshaMasterKoshinBusiness business = new HokenshaMasterKoshinBusiness(hknj.toEntity());
                 if (追加状態.equals(row.getJotai())) {
                     business.setState(EntityDataState.Added);
                     flag = (1 == manager.save保険者(new Hokenja(business.getEntity())));
