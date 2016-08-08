@@ -240,23 +240,28 @@ public enum JikoFutangakuHoseiSpec implements IPredicate<JikoFutangakuHoseiDiv> 
         }
 
         private static boolean is対象計算期間大小関係(JikoFutangakuHoseiDiv div) {
-            return div.getTxtTaishouKeisanKikan().getFromValue().isBeforeOrEquals(div.getTxtTaishouKeisanKikan().getToValue());
+            return div.getTxtTaishouKeisanKikan().getFromValue().isBeforeOrEquals(
+                    div.getTxtTaishouKeisanKikan().getToValue());
         }
 
         private static boolean is被保険者期間大小関係(JikoFutangakuHoseiDiv div) {
-            return div.getTxtHihokenshaKikan().getFromValue().isBeforeOrEquals(div.getTxtHihokenshaKikan().getToValue());
+            return div.getTxtHihokenshaKikan().getFromValue().isBeforeOrEquals(
+                    div.getTxtHihokenshaKikan().getToValue());
         }
 
         private static boolean is対象計算と被保険者期間大小関係開始(JikoFutangakuHoseiDiv div) {
-            return div.getTxtTaishouKeisanKikan().getFromValue().isBeforeOrEquals(div.getTxtHihokenshaKikan().getFromValue());
+            return div.getTxtTaishouKeisanKikan().getFromValue().isBeforeOrEquals(
+                    div.getTxtHihokenshaKikan().getFromValue());
         }
 
         private static boolean is対象計算と被保険者期間大小関係終了(JikoFutangakuHoseiDiv div) {
-            return div.getTxtTaishouKeisanKikan().getToValue().isBeforeOrEquals(div.getTxtHihokenshaKikan().getToValue());
+            return div.getTxtTaishouKeisanKikan().getToValue().isBeforeOrEquals(
+                    div.getTxtHihokenshaKikan().getToValue());
         }
 
         private static boolean is窓口払情報年月日大小関係(JikoFutangakuHoseiDiv div) {
-            return div.getTxtMadoguchiKaishiYMD().getValue().isBeforeOrEquals(div.getTxtMadoguchiShuryoYMD().getValue());
+            return div.getTxtMadoguchiKaishiYMD().getValue().isBeforeOrEquals(
+                    div.getTxtMadoguchiShuryoYMD().getValue());
         }
 
         private static boolean is対象計算期間開始の年度チェック(JikoFutangakuHoseiDiv div) {
@@ -318,7 +323,8 @@ public enum JikoFutangakuHoseiSpec implements IPredicate<JikoFutangakuHoseiDiv> 
 
         private static boolean is判定コードより支払場所チェック(JikoFutangakuHoseiDiv div) {
             RString 判定コード = div.getTxtMadoguchiTaishoushaHantei().getValue();
-            return !(該当.equals(判定コード) && RString.isNullOrEmpty(div.getTxtMadoguchiShiharaiBasho().getValue()));
+            return !(該当.equals(判定コード) && RString.isNullOrEmpty(
+                    div.getTxtMadoguchiShiharaiBasho().getValue()));
         }
 
         private static boolean is判定コードより開始日年月日チェック(JikoFutangakuHoseiDiv div) {

@@ -79,9 +79,6 @@ public class JikoFutangakuHosei {
                         .getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
             return ResponseData.of(div).respond();
         }
-        //TODO TEST
-//        TaishoshaKey 対象者1 = new TaishoshaKey(new HihokenshaNo("88888888"), new ShikibetsuCode("000000000000012"), new SetaiCode("000000000033333"));
-//        ViewStateHolder.put(ViewStateKeys.資格対象者, 対象者1);
         TaishoshaKey 対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = 対象者.get被保険者番号();
         JikoFutangakuHoseiHandler handler = getHandler(div);
@@ -299,12 +296,15 @@ public class JikoFutangakuHosei {
      * @param div JikoFutangakuHoseiDiv
      * @return ResponseData
      */
-    public ResponseData<JikoFutangakuHoseiDiv> onClick_btnTaishoshaModoru(JikoFutangakuHoseiDiv div) {
+    public ResponseData<JikoFutangakuHoseiDiv> onClick_btnTaishoshaModoru(
+            JikoFutangakuHoseiDiv div) {
         JikoFutangakuHoseiHandler handler = getHandler(div);
-        KogakuGassanJikoFutanGaku result = ViewStateHolder.get(ViewStateKeys.高額合算自己負担額, KogakuGassanJikoFutanGaku.class);
+        KogakuGassanJikoFutanGaku result = ViewStateHolder.get(
+                ViewStateKeys.高額合算自己負担額, KogakuGassanJikoFutanGaku.class);
         boolean 内容が編集フラグ = handler.onClick_btnJikofutangakuJohoNiModoru(result);
         if (内容が編集フラグ && !ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.検索画面遷移の確認.getMessage()).respond();
+            return ResponseData.of(div).addMessage(
+                    UrQuestionMessages.検索画面遷移の確認.getMessage()).respond();
         }
         if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
             //TODO QA1085
