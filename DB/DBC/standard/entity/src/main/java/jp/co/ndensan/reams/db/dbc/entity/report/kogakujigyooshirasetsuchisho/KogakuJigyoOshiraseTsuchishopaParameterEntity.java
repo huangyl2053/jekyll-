@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KogakuJigyoOshiraseTsuchishopaParameterEntity {
 
     private ShinseiJohoChohyoTempEntity 申請情報帳票発行一時;
-    private SofubutsuAtesakiSource 送付別宛先List;
+    private SofubutsuAtesakiSource 送付別宛先;
     private NinshoshaSource 認証者;
     private RString タイトル;
     private RString バッチパラメータ;
