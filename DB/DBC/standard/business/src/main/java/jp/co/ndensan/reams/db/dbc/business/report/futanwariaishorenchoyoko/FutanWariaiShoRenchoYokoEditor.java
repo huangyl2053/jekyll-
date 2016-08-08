@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.futanwariaishorenchoyoko;
 
-import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishokattokami.FutanWariaiShoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishokattokami.FutanWariaiShoKattokamiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishorenchoyoko.FutanWariaiShoRenchoYokoSource;
 
 /**
@@ -15,14 +15,14 @@ import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishorenchoyoko.FutanWa
  */
 public class FutanWariaiShoRenchoYokoEditor implements IFutanWariaiShoRenchoYokoEditor {
 
-    private final FutanWariaiShoEntity entity;
+    private final FutanWariaiShoKattokamiEntity entity;
 
     /**
      * インスタンスを生成します。
      *
-     * @param entity {@link FutanWariaiShoEntity}
+     * @param entity {@link FutanWariaiShoKattokamiEntity}
      */
-    public FutanWariaiShoRenchoYokoEditor(FutanWariaiShoEntity entity) {
+    public FutanWariaiShoRenchoYokoEditor(FutanWariaiShoKattokamiEntity entity) {
         this.entity = entity;
     }
 
@@ -52,7 +52,7 @@ public class FutanWariaiShoRenchoYokoEditor implements IFutanWariaiShoRenchoYoko
         source.tel = entity.get被保険者番号();
         source.ninshosha_denshiKoin = entity.get電子公印();
         source.renban = entity.get連番();
-        source.ocrRenban = entity.getOCR連番();
+        source.ocrRenban = entity.getOcr連番();
         //source.compSofubutsuAtesakiSource = entity.get送付物宛先();
         return source;
     }

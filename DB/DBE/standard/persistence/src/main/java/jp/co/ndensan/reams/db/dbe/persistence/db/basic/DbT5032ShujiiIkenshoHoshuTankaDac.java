@@ -156,7 +156,7 @@ public class DbT5032ShujiiIkenshoHoshuTankaDac implements ISaveable<DbT5032Shuji
      * @return 削除件数
      */
     @Transaction
-    public int saveByForDeletePhysical(DbT5032ShujiiIkenshoHoshuTankaEntity entity) {
+    public int saveOrDeletePhysicalBy(DbT5032ShujiiIkenshoHoshuTankaEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書作成報酬単価エンティティ"));
         return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }

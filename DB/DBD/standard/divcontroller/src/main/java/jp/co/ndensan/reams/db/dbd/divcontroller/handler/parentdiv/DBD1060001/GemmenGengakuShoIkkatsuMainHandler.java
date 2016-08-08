@@ -105,7 +105,7 @@ public class GemmenGengakuShoIkkatsuMainHandler {
         div.getFutanGendogaku().getFutanGendogakuNinteisho().getTxtFutanGendogakuNinteishoKofuYmd().setValue(FlexibleDate.getNowDate());
         div.getFutanGendogaku().getFutanGendogakuKetteiTsuchisho().getTxtFutanGendogakuKetteiTsuchishoHakkoYmd().setValue(FlexibleDate.getNowDate());
         FlexibleDate 発行日 = div.getFutanGendogaku().getFutanGendogakuKetteiTsuchisho().getTxtFutanGendogakuKetteiTsuchishoHakkoYmd().getValue();
-        div.getFutanGendogaku().getFutanGendogakuNinteisho().getCcdFutanGendogakuNinteishoBunshoNo().initialize(負担帳票のID, 発行日);
+        div.getFutanGendogaku().getCcdFutanGendogakuKetteiTsuchishoBunshoNo().initialize(負担帳票のID, 発行日);
         div.getFutanGendogaku().getCcdFutanGendogakuShutsuryokuJun().load(SubGyomuCode.DBD介護受給, 負担出力帳票ID);
     }
 
@@ -136,8 +136,7 @@ public class GemmenGengakuShoIkkatsuMainHandler {
         div.getShafukuKeigen().getShafukuKeigenChushutsuJoken().getTxtShafukuKeigenKonkaiTaishoYmdTo().setValue(FlexibleDate.getNowDate());
         div.getShafukuKeigen().getShafukuKeigenKakuninSho().getTxtShafukuKeigenKakuninShoKofuYmd().clearValue();
         div.getShafukuKeigen().getShafukuKeigenKetteiTsuchisho().getTxtShafukuKeigenKetteiTsuchishoHakkoYmd().clearValue();
-        //FlexibleDate 交付日 = div.getShafukuKeigen().getShafukuKeigenKakuninSho().getTxtShafukuKeigenKakuninShoKofuYmd().getValue();
-        div.getShafukuKeigen().getShafukuKeigenKetteiTsuchisho().getCcdShafukuKeigenKetteiTsuchishoBunshoNo().initialize(社会福祉帳票のID, FlexibleDate.getNowDate());
+        div.getShafukuKeigen().getShafukuKeigenKetteiTsuchisho().getCcdShafukuKeigenKetteiTsuchishoBunshoNo().initialize(社会福祉帳票のID);
         div.getShafukuKeigen().getCcdShafukuKeigenShutsuryokuJun().load(SubGyomuCode.DBD介護受給, 社会福祉出力帳票ID);
     }
 
@@ -182,7 +181,6 @@ public class GemmenGengakuShoIkkatsuMainHandler {
         div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getTxtFutanGendogakuKonkaiTaishoYmdTo().setValue(FlexibleDate.getNowDate());
         div.getFutanGendogaku().getFutanGendogakuNinteisho().getTxtFutanGendogakuNinteishoKofuYmd().clearValue();
         div.getFutanGendogaku().getFutanGendogakuKetteiTsuchisho().getTxtFutanGendogakuKetteiTsuchishoHakkoYmd().clearValue();
-        //FlexibleDate 交付日 = div.getFutanGendogaku().getFutanGendogakuKetteiTsuchisho().getTxtFutanGendogakuKetteiTsuchishoHakkoYmd().getValue();
         div.getFutanGendogaku().getFutanGendogakuKetteiTsuchisho().getCcdFutanGendogakuKetteiTsuchishoBunshoNo().initialize(負担帳票のID);
         div.getFutanGendogaku().getCcdFutanGendogakuShutsuryokuJun().load(SubGyomuCode.DBD介護受給, 負担出力帳票ID);
     }
@@ -261,7 +259,10 @@ public class GemmenGengakuShoIkkatsuMainHandler {
                 .getFutanGendogakuKetteiTsuchisho().getTxtFutanGendogakuKetteiTsuchishoHakkoYmd().getValue();
         RString 通知書の文書番号 = div.getFutanGendogaku()
                 .getFutanGendogakuKetteiTsuchisho().getCcdFutanGendogakuKetteiTsuchishoBunshoNo().get文書番号();
-        RString 改頁出力順ID = null;
+        RString 改頁出力順ID = new RString("");
+        if (div.getFutanGendogaku().getCcdFutanGendogakuShutsuryokuJun().isSelected()) {
+            改頁出力順ID = div.getShafukuKeigen().getCcdShafukuKeigenShutsuryokuJun().getSelected出力順().get改頁項目ID();
+        }
         if (単票発行区分.equals(TanpyoHakkoKubun.出力する.get名称())) {
             tanpyokubun = true;
         }
@@ -297,7 +298,10 @@ public class GemmenGengakuShoIkkatsuMainHandler {
         FlexibleDate tsuchishoHakkoYMD = div.getShafukuKeigen()
                 .getShafukuKeigenKetteiTsuchisho().getTxtShafukuKeigenKetteiTsuchishoHakkoYmd().getValue();
         RString 通知書の文書番号 = div.getShafukuKeigen().getShafukuKeigenKetteiTsuchisho().getCcdShafukuKeigenKetteiTsuchishoBunshoNo().get文書番号();
-        RString 改頁出力順ID = null;
+        RString 改頁出力順ID = new RString("");
+        if (div.getShafukuKeigen().getCcdShafukuKeigenShutsuryokuJun().isSelected()) {
+            改頁出力順ID = div.getShafukuKeigen().getCcdShafukuKeigenShutsuryokuJun().getSelected出力順().get改頁項目ID();
+        }
         if (単票発行区分.equals(TanpyoHakkoKubun.出力する.get名称())) {
             tanpyokubun = true;
         }
@@ -341,7 +345,7 @@ public class GemmenGengakuShoIkkatsuMainHandler {
      */
     public void futanBunshoSaiseisei(GemmenGengakuShoIkkatsuMainDiv div) {
         FlexibleDate 基準日 = div.getFutanGendogaku().getFutanGendogakuKetteiTsuchisho().getTxtFutanGendogakuKetteiTsuchishoHakkoYmd().getValue();
-        div.getFutanGendogaku().getFutanGendogakuKetteiTsuchisho().getCcdFutanGendogakuKetteiTsuchishoBunshoNo().initialize(負担帳票のID, 基準日);
+        div.getFutanGendogaku().getCcdFutanGendogakuKetteiTsuchishoBunshoNo().initialize(負担帳票のID, 基準日);
     }
 
     /**
@@ -352,9 +356,12 @@ public class GemmenGengakuShoIkkatsuMainHandler {
     public void shakaiBunshoSaiseisei(GemmenGengakuShoIkkatsuMainDiv div) {
         FlexibleDate 基準日 = div.getShafukuKeigen().getShafukuKeigenKetteiTsuchisho().getTxtShafukuKeigenKetteiTsuchishoHakkoYmd().getValue();
         div.getShafukuKeigen().getShafukuKeigenKetteiTsuchisho().getCcdShafukuKeigenKetteiTsuchishoBunshoNo().initialize(社会福祉帳票のID, 基準日);
-
     }
 
+    /**
+     * 減免・減額種類選択のKEY。
+     *
+     */
     public enum SelectKey {
 
         /**

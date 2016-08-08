@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KaigoKibetsuChoshuYuyoParam {
 
-    int 期;
-    FlexibleDate 徴収猶予開始日;
-    FlexibleDate 徴収猶予終了日;
+    private int 期;
+    private FlexibleDate 徴収猶予開始日;
+    private FlexibleDate 徴収猶予終了日;
 }

@@ -18,11 +18,10 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
  */
 public class DBC0140011KeikakuTodokeJohoList {
 
-//    private final ReportId 帳票ID = new ReportId("DBC200060_KyotakuSerivceKeikakuSakuseiIraitodokedeJyokyoIchiran");
-    private final ReportId 帳票ID = new ReportId("DBC120810_KokuhorenJukyushaIn");
+    private final ReportId 帳票ID = new ReportId("DBC200060_KyotakuSerivceKeikakuSakuseiIraitodokedeJyokyoIchiran");
 
     /**
-     * 画面初期化のメソッドます。
+     * 画面初期化のメソッドです。
      *
      * @param div DBC0140011KeikakuTodokeJohoListDiv
      * @return ResponseData
@@ -30,14 +29,13 @@ public class DBC0140011KeikakuTodokeJohoList {
     public ResponseData<DBC0140011KeikakuTodokeJohoListDiv> onLoad(DBC0140011KeikakuTodokeJohoListDiv div) {
 
         div.getPrintOrderCv().load(SubGyomuCode.DBC介護給付, 帳票ID);
-//        KaigoChohyoShutsuryokujunDiv para = new KaigoChohyoShutsuryokujunDiv();
-//        para.loadChohyoMode(SubGyomuCode.DBC介護給付, 帳票ID);
+
         return ResponseData.of(div).respond();
 
     }
 
     /**
-     * バッチ処理のメソッドます。
+     * バッチ処理のメソッドです。
      *
      * @param div DBC0140011KeikakuTodokeJohoListDiv
      * @return ResponseData

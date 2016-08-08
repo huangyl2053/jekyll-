@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.NinteiChosaHoshuTanka;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.NinteiChosaHoshuTankaIdentifier;
+import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiIinBetsuTanka;
+import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiIinBetsuTankaIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiIinHoshuTanka;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiIinHoshuTankaIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShujiiIkenshoHoshuTanka;
@@ -18,6 +20,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6910001.Hosh
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6910001.dgChosainhoshuTankaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6910001.dgHomonChosahoshuTankaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6910001.dgIkenShohoshuTankaIchiran_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6910001.dgShinsakaiIinBetuTanka_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6910001.HoshuMasutaKoshinHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6910001.HoshuMasutaKoshinValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.hoshumasutakoshin.HoshuMasutaKoshinManager;
@@ -266,6 +269,65 @@ public class HoshuMasutaKoshin {
     }
 
     /**
+     * 審査会委員別単価マスタ追加するボタンを押下するの場合、明細パネルを表示します。
+     *
+     * @param div 報酬マスタメンテナンスDiv
+     * @return ResponseData<HoshuMasutaKoshinDiv>
+     */
+    public ResponseData<HoshuMasutaKoshinDiv> onClick_btnBetuTsuika(HoshuMasutaKoshinDiv div) {
+        getHandler(div).onClick_btnBetuTsuika();
+        return ResponseData.of(div).setState(DBE6910001StateName.委員別明細);
+    }
+
+    /**
+     * 審査会委員別単価マスタ一覧Gridの修正ボタンを押下するの場合、明細パネルを表示します。
+     *
+     * @param div 報酬マスタメンテナンスDiv
+     * @return ResponseData<HoshuMasutaKoshinDiv>
+     */
+    public ResponseData<HoshuMasutaKoshinDiv> onSelect_btnShinsakaiIinBetuModify(HoshuMasutaKoshinDiv div) {
+        getHandler(div).onSelect_btnShinsakaiIinBetuModify(div.getHoshuMasutaTab().getDgShinsakaiIinBetuTanka().getActiveRow());
+        return ResponseData.of(div).setState(DBE6910001StateName.委員別明細);
+    }
+
+    /**
+     * 審査会委員別単価マスタ一覧Gridの削除ボタンを押下するの場合、明細パネルを表示します。
+     *
+     * @param div 報酬マスタメンテナンスDiv
+     * @return ResponseData<HoshuMasutaKoshinDiv>
+     */
+    public ResponseData<HoshuMasutaKoshinDiv> onSelect_btnShinsakaiIinBetuDelete(HoshuMasutaKoshinDiv div) {
+        getHandler(div).onSelect_btnShinsakaiIinBetuDelete(div.getHoshuMasutaTab().getDgShinsakaiIinBetuTanka().getActiveRow());
+        return ResponseData.of(div).setState(DBE6910001StateName.委員別明細);
+    }
+
+    /**
+     * 審査会委員別単価マスタ入力を取りやめるボタンを押下するの場合、内容を破棄して一覧状態に戻ります。
+     *
+     * @param div 報酬マスタメンテナンスDiv
+     * @return ResponseData<HoshuMasutaKoshinDiv>
+     */
+    public ResponseData<HoshuMasutaKoshinDiv> onClick_btnBetuTorikesu(HoshuMasutaKoshinDiv div) {
+        getHandler(div).onClick_btnBetuTorikesu();
+        return ResponseData.of(div).setState(DBE6910001StateName.照会);
+    }
+
+    /**
+     * 審査会委員別単価マスタ更新するボタンを押下するの場合、審査会委員別単価マスタ一覧を更新します。
+     *
+     * @param div 報酬マスタメンテナンスDiv
+     * @return ResponseData<HoshuMasutaKoshinDiv>
+     */
+    public ResponseData<HoshuMasutaKoshinDiv> onClick_btnBetuKousin(HoshuMasutaKoshinDiv div) {
+        ValidationMessageControlPairs controlPairs = check審査会委員別単価マスタ(div);
+        if (controlPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(controlPairs).respond();
+        }
+        getHandler(div).onClick_btnBetuKousin();
+        return ResponseData.of(div).setState(DBE6910001StateName.照会);
+    }
+
+    /**
      * 保存するボタンを押下するの場合、入力データをＤＢに更新します。
      *
      * @param div 報酬マスタメンテナンスDiv
@@ -310,14 +372,13 @@ public class HoshuMasutaKoshin {
     }
 
     private void set審査会委員別単価マスタ情報(HoshuMasutaKoshinDiv div) {
-        // TODO 該当テーブルがDBにありません。 1.11FWを待ち
-//        List<NinteiChosaHoshuTanka> 審査会委員別単価マスタ情報 = HoshuMasutaKoshinManager.createInstance().get審査会委員別単価マスタ情報().records();
-//        if (審査会委員別単価マスタ情報 != null && !審査会委員別単価マスタ情報.isEmpty()) {
-//            ViewStateHolder.put(ViewStateKeys.審査会委員別単価マスタ情報, Models.create(審査会委員別単価マスタ情報));
-//        } else {
-        ViewStateHolder.put(ViewStateKeys.審査会委員別単価マスタ情報, Models.create(new ArrayList()));
-//        }
-        getHandler(div).set審査会委員別単価マスタタブ();
+        List<ShinsakaiIinBetsuTanka> 審査会委員別単価マスタ情報 = HoshuMasutaKoshinManager.createInstance().get審査会委員別単価マスタ情報().records();
+        if (審査会委員別単価マスタ情報 != null && !審査会委員別単価マスタ情報.isEmpty()) {
+            ViewStateHolder.put(ViewStateKeys.審査会委員別単価マスタ情報, Models.create(審査会委員別単価マスタ情報));
+        } else {
+            ViewStateHolder.put(ViewStateKeys.審査会委員別単価マスタ情報, Models.create(new ArrayList()));
+        }
+        getHandler(div).set審査会委員別単価マスタタブ(審査会委員別単価マスタ情報);
     }
 
     private ValidationMessageControlPairs check審査員報酬単価マスタ(HoshuMasutaKoshinDiv div) {
@@ -341,16 +402,13 @@ public class HoshuMasutaKoshin {
             for (dgChosainhoshuTankaIchiran_Row row : 審査員報酬単価一覧情報) {
                 if (row.getKaigoNinteiShinsaIinShubetsuCode().equals(
                         div.getHoshuMasutaTab().getDdlKaigoNinteiShinsaIinShubetsu().getSelectedKey())
-                        && row.getKaishiYM().getValue().getYearMonth().compareTo(
-                                div.getHoshuMasutaTab().getTxtChoKaishiYM().getDomain()) == 0
-                        && row.getShuryoYM().getValue().getYearMonth().compareTo(
-                                div.getHoshuMasutaTab().getTxtChoShuryoYM().getDomain()) == 0) {
+                        && row.getKaishiYM().getValue().getYearMonth().compareTo(開始年月.getDomain()) == 0
+                        && row.getShuryoYM().getValue().getYearMonth().compareTo(終了年月.getDomain()) == 0) {
                     return getValidationHandler().checkデータが既に存在();
                 }
                 if (div.getHoshuMasutaTab().getDdlKaigoNinteiShinsaIinShubetsu().getSelectedKey().equals(
                         row.getKaigoNinteiShinsaIinShubetsuCode())
-                        && is期間重複(div.getHoshuMasutaTab().getTxtChoKaishiYM().getDomain(),
-                                row.getShuryoYM().getValue().getYearMonth())) {
+                        && is期間重複(開始年月.getDomain(), row.getShuryoYM().getValue().getYearMonth())) {
                     return getValidationHandler().check期間が重複();
                 }
             }
@@ -366,8 +424,10 @@ public class HoshuMasutaKoshin {
         List<ShinsakaiIinHoshuTanka> 審査員報酬単価マスタ更新情報 = update審査員報酬単価マスタ情報(div);
         List<ShujiiIkenshoHoshuTanka> 意見書報酬単価マスタ更新情報 = update意見書報酬単価マスタ情報(div);
         List<NinteiChosaHoshuTanka> 認定調査報酬単価マスタ更新情報 = update訪問調査報酬単価マスタ情報(div);
+        List<ShinsakaiIinBetsuTanka> 審査会委員別単価マスタ更新情報 = update審査会委員別単価マスタ情報(div);
         HoshuMasutaKoshinManager.createInstance().updateマスタ情報(
-                審査員報酬単価マスタ更新情報, 意見書報酬単価マスタ更新情報, 認定調査報酬単価マスタ更新情報);
+                審査員報酬単価マスタ更新情報, 意見書報酬単価マスタ更新情報,
+                認定調査報酬単価マスタ更新情報, 審査会委員別単価マスタ更新情報);
     }
 
     private List<ShinsakaiIinHoshuTanka> update審査員報酬単価マスタ情報(HoshuMasutaKoshinDiv div) {
@@ -429,16 +489,14 @@ public class HoshuMasutaKoshin {
                         div.getHoshuMasutaTab().getIkenShohoshuTankaNyuryoku().getDdlZaitakuShisetsuKubun().getSelectedKey())
                         && row.getIkenshoSakuseiKaisuKubunCode().equals(div.getHoshuMasutaTab().
                                 getIkenShohoshuTankaNyuryoku().getDdlIkenshoSakuseiKaisuKubun().getSelectedKey())
-                        && row.getKaishiYM().getValue().getYearMonth().compareTo(
-                                div.getHoshuMasutaTab().getIkenShohoshuTankaNyuryoku().getTxtIkenKaishiYM().getDomain()) == 0) {
+                        && row.getKaishiYM().getValue().getYearMonth().compareTo(開始年月.getDomain()) == 0) {
                     return getValidationHandler().checkデータが既に存在();
                 }
                 if (div.getHoshuMasutaTab().getIkenShohoshuTankaNyuryoku().getDdlZaitakuShisetsuKubun().getSelectedKey().equals(
                         row.getZaitakuShisetsuKubunCode())
                         && div.getHoshuMasutaTab().getIkenShohoshuTankaNyuryoku().getDdlIkenshoSakuseiKaisuKubun().getSelectedKey().equals(
                                 row.getIkenshoSakuseiKaisuKubunCode())
-                        && is期間重複(div.getHoshuMasutaTab().getIkenShohoshuTankaNyuryoku().getTxtIkenKaishiYM().getDomain(),
-                                row.getShuryoYM().getValue().getYearMonth())) {
+                        && is期間重複(開始年月.getDomain(), row.getShuryoYM().getValue().getYearMonth())) {
                     return getValidationHandler().check期間が重複();
                 }
             }
@@ -509,18 +567,15 @@ public class HoshuMasutaKoshin {
                         div.getHoshuMasutaTab().getHomonChosahoshuTankaNyuryoku().getDdlChosaKubun().getSelectedKey())
                         && row.getHomonShubetsuCode().equals(div.getHoshuMasutaTab().
                                 getHomonChosahoshuTankaNyuryoku().getDdlHomonShubetsu().getSelectedKey())
-                        && row.getKaishiYM().getValue().getYearMonth().compareTo(
-                                div.getHoshuMasutaTab().getHomonChosahoshuTankaNyuryoku().getTxtHomkaishiYM().getDomain()) == 0
-                        && row.getShuryoYM().getValue().getYearMonth().compareTo(
-                                div.getHoshuMasutaTab().getHomonChosahoshuTankaNyuryoku().getTxtHomshuryoYM().getDomain()) == 0) {
+                        && row.getKaishiYM().getValue().getYearMonth().compareTo(開始年月.getDomain()) == 0
+                        && row.getShuryoYM().getValue().getYearMonth().compareTo(終了年月.getDomain()) == 0) {
                     return getValidationHandler().checkデータが既に存在();
                 }
                 if (div.getHoshuMasutaTab().getHomonChosahoshuTankaNyuryoku().getDdlChosaKubun().getSelectedKey().equals(
                         row.getChosaKubunCode())
                         && div.getHoshuMasutaTab().getHomonChosahoshuTankaNyuryoku().getDdlHomonShubetsu().getSelectedKey().equals(
                                 row.getHomonShubetsuCode())
-                        && is期間重複(div.getHoshuMasutaTab().getHomonChosahoshuTankaNyuryoku().getTxtHomkaishiYM().getDomain(),
-                                row.getShuryoYM().getValue().getYearMonth())) {
+                        && is期間重複(開始年月.getDomain(), row.getShuryoYM().getValue().getYearMonth())) {
                     return getValidationHandler().check期間が重複();
                 }
             }
@@ -563,6 +618,81 @@ public class HoshuMasutaKoshin {
             }
         }
         return 訪問調査報酬単価マスタ更新情報;
+    }
+
+    private ValidationMessageControlPairs check審査会委員別単価マスタ(HoshuMasutaKoshinDiv div) {
+        TextBoxFlexibleYearMonth 開始年月 = div.getHoshuMasutaTab().getTxtBetuKaishiYM();
+        TextBoxFlexibleYearMonth 終了年月 = div.getHoshuMasutaTab().getTxtBetuShuryoYM();
+        ValidationMessageControlPairs controlPairs = getValidationHandler().check開始年月が必須(開始年月);
+        if (controlPairs.iterator().hasNext()) {
+            return controlPairs;
+        }
+        controlPairs = getValidationHandler().check終了年月が必須(終了年月);
+        if (controlPairs.iterator().hasNext()) {
+            return controlPairs;
+        }
+        controlPairs = getValidationHandler().check審査委員コードが必須(
+                div.getHoshuMasutaTab().getTxtShinsaIinKodo().getValue());
+        if (controlPairs.iterator().hasNext()) {
+            return controlPairs;
+        }
+        if (追加モード.equals(div.getHomonChosahoshuTankaState())) {
+            controlPairs = getValidationHandler().check期間が不正(開始年月, 終了年月);
+            if (controlPairs.iterator().hasNext()) {
+                return controlPairs;
+            }
+            List<dgShinsakaiIinBetuTanka_Row> 審査会委員別単価一覧情報
+                    = div.getHoshuMasutaTab().getDgShinsakaiIinBetuTanka().getDataSource();
+            for (dgShinsakaiIinBetuTanka_Row row : 審査会委員別単価一覧情報) {
+                if (row.getShinsakaiIinCode().equals(
+                        div.getHoshuMasutaTab().getTxtShinsaIinKodo().getValue())
+                        && row.getKaishiYM().getValue().getYearMonth().compareTo(開始年月.getDomain()) == 0
+                        && row.getShuryoYM().getValue().getYearMonth().compareTo(終了年月.getDomain()) == 0) {
+                    return getValidationHandler().checkデータが既に存在();
+                }
+                if (div.getHoshuMasutaTab().getTxtShinsaIinKodo().getValue().equals(row.getShinsakaiIinCode())
+                        && is期間重複(開始年月.getDomain(), row.getShuryoYM().getValue().getYearMonth())) {
+                    return getValidationHandler().check期間が重複();
+                }
+            }
+        }
+        return new ValidationMessageControlPairs();
+    }
+
+    private List<ShinsakaiIinBetsuTanka> update審査会委員別単価マスタ情報(HoshuMasutaKoshinDiv div) {
+        List<dgShinsakaiIinBetuTanka_Row> 審査会委員別単価一覧情報 = div.getHoshuMasutaTab().
+                getDgShinsakaiIinBetuTanka().getDataSource();
+        List<ShinsakaiIinBetsuTanka> 審査会委員別単価マスタ更新情報 = new ArrayList<>();
+        Models<ShinsakaiIinBetsuTankaIdentifier, ShinsakaiIinBetsuTanka> 審査会委員別単価情報Model
+                = ViewStateHolder.get(ViewStateKeys.審査会委員別単価マスタ情報, Models.class);
+        for (dgShinsakaiIinBetuTanka_Row row : 審査会委員別単価一覧情報) {
+            if (追加モード.equals(row.getColumnState())) {
+                ShinsakaiIinBetsuTanka 新規情報 = new ShinsakaiIinBetsuTanka(
+                        row.getShinsakaiIinCode(),
+                        row.getKaishiYM().getValue().getYearMonth(),
+                        row.getShuryoYM().getValue().getYearMonth());
+                審査会委員別単価マスタ更新情報.add(新規情報.createBuilderForEdit().
+                        set単価(row.getTanka().getValue()).
+                        set単価(row.getSonotaTanka().getValue()).
+                        build());
+            } else if (更新モード.equals(row.getColumnState())) {
+                ShinsakaiIinBetsuTankaIdentifier 識別子 = new ShinsakaiIinBetsuTankaIdentifier(
+                        row.getShinsakaiIinCode(),
+                        row.getKaishiYM().getValue().getYearMonth(),
+                        row.getShuryoYM().getValue().getYearMonth());
+                審査会委員別単価マスタ更新情報.add(審査会委員別単価情報Model.get(識別子).createBuilderForEdit().
+                        set単価(row.getTanka().getValue()).
+                        set単価(row.getSonotaTanka().getValue()).
+                        build());
+            } else if (削除モード.equals(row.getColumnState())) {
+                ShinsakaiIinBetsuTankaIdentifier 識別子 = new ShinsakaiIinBetsuTankaIdentifier(
+                        row.getShinsakaiIinCode(),
+                        row.getKaishiYM().getValue().getYearMonth(),
+                        row.getShuryoYM().getValue().getYearMonth());
+                審査会委員別単価マスタ更新情報.add(審査会委員別単価情報Model.get(識別子).deleted());
+            }
+        }
+        return 審査会委員別単価マスタ更新情報;
     }
 
     private HoshuMasutaKoshinHandler getHandler(HoshuMasutaKoshinDiv div) {

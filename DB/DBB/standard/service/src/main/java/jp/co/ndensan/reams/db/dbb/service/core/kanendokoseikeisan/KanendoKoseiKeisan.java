@@ -85,6 +85,8 @@ public class KanendoKoseiKeisan {
     private static final RString 重複させる_12期 = new RString("12");
     private static final RString 重複させる_13期 = new RString("13");
     private static final RString 重複させる_14期 = new RString("14");
+    private static final RString 特別徴収_厚生労働省 = new RString("1");
+    private static final RString 特別徴収_地共済 = new RString("2");
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
     private static final int INT_3 = 3;
@@ -475,19 +477,27 @@ public class KanendoKoseiKeisan {
 
     private List<RString> get期別徴収方法区分(ChoshuHoho 徴収方法の情報) {
         List<RString> 期別徴収方法区分 = new ArrayList<>();
-        期別徴収方法区分.add(徴収方法の情報.get徴収方法4月());
-        期別徴収方法区分.add(徴収方法の情報.get徴収方法5月());
-        期別徴収方法区分.add(徴収方法の情報.get徴収方法6月());
-        期別徴収方法区分.add(徴収方法の情報.get徴収方法7月());
-        期別徴収方法区分.add(徴収方法の情報.get徴収方法8月());
-        期別徴収方法区分.add(徴収方法の情報.get徴収方法9月());
-        期別徴収方法区分.add(徴収方法の情報.get徴収方法10月());
-        期別徴収方法区分.add(徴収方法の情報.get徴収方法11月());
-        期別徴収方法区分.add(徴収方法の情報.get徴収方法12月());
-        期別徴収方法区分.add(徴収方法の情報.get徴収方法1月());
-        期別徴収方法区分.add(徴収方法の情報.get徴収方法2月());
-        期別徴収方法区分.add(徴収方法の情報.get徴収方法3月());
+        期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法4月()));
+        期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法5月()));
+        期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法6月()));
+        期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法7月()));
+        期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法8月()));
+        期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法9月()));
+        期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法10月()));
+        期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法11月()));
+        期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法12月()));
+        期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法1月()));
+        期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法2月()));
+        期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法3月()));
         return 期別徴収方法区分;
+    }
+
+    private RString set期別徴収方法(RString 徴収方法) {
+        if (特別徴収_厚生労働省.equals(徴収方法) || 特別徴収_地共済.equals(徴収方法)) {
+            return 定数_1;
+        } else {
+            return 定数_0;
+        }
     }
 
     private FukaKoseiJohoClass get賦課更正情報(FukaJoho 賦課の情報1, FukaJoho 賦課の情報2, FukaJoho 賦課の情報3,
