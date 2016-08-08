@@ -75,11 +75,11 @@ public class FutanGendogakuNinteiShinseishoHakkoIchiranEditor implements IFutanG
 
     private void setLayer1Step1(FutanGendogakuNinteiShinseishoHakkoIchiranReportSource source) {
         source.printTimeStamp = get印刷日時();
-        if (this.association != null) {
+        if (null != association) {
             source.hokenshaNo = this.association.get地方公共団体コード().value();
             source.hokenshaName = this.association.get市町村名();
         }
-        if (this.iOutputOrder != null) {
+        if (null != iOutputOrder) {
             List<ISetSortItem> 設定項目リスト = this.iOutputOrder.get設定項目リスト();
             source.shutsuryokujun1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
             source.shutsuryokujun2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
@@ -104,7 +104,7 @@ public class FutanGendogakuNinteiShinseishoHakkoIchiranEditor implements IFutanG
         }
         source.hdrGekihenKanwa = RString.EMPTY;
         source.listUpper_1 = new RString(String.valueOf(index + 1));
-        if (帳票情報リスト != null && !帳票情報リスト.isEmpty()) {
+        if (null != 帳票情報リスト && !帳票情報リスト.isEmpty()) {
             FutanGendogakuNinteiShinseishoHakkoIchiran 帳票情報 = this.帳票情報リスト.get(index);
             source.listUpper_2 = 帳票情報.get被保番号().value();
             source.listUpper_4 = 帳票情報.get計画事業者コード();
@@ -130,12 +130,12 @@ public class FutanGendogakuNinteiShinseishoHakkoIchiranEditor implements IFutanG
     }
 
     private void setLayer1Step2(FutanGendogakuNinteiShinseishoHakkoIchiranReportSource source) {
-        if (個人 != null) {
+        if (null != 個人) {
             source.listUpper_3 = 個人.get名称().getName().value();
             source.listCenter_1 = 個人.get住所().get郵便番号().getEditedYubinNo();
             source.listCenter_2 = 個人.get住所().get住所();
         }
-        if (帳票情報リスト != null && !帳票情報リスト.isEmpty()) {
+        if (null != 帳票情報リスト && !帳票情報リスト.isEmpty()) {
             FutanGendogakuNinteiShinseishoHakkoIchiran 帳票情報 = this.帳票情報リスト.get(index);
             RString 負担段階 = 帳票情報.get利用者負担段階().getコード();
             RString 負担段階名称 = RString.EMPTY;
@@ -164,7 +164,7 @@ public class FutanGendogakuNinteiShinseishoHakkoIchiranEditor implements IFutanG
     }
 
     private void setLayer1Step3(FutanGendogakuNinteiShinseishoHakkoIchiranReportSource source) {
-        if (帳票情報リスト != null && !帳票情報リスト.isEmpty()) {
+        if (null != 帳票情報リスト && !帳票情報リスト.isEmpty()) {
             FutanGendogakuNinteiShinseishoHakkoIchiran 帳票情報 = this.帳票情報リスト.get(index);
             source.listLower_1 = 帳票情報.get認定開始日().wareki().toDateString();
             source.listLower_2 = 帳票情報.get認定終了日().wareki().toDateString();
@@ -208,7 +208,7 @@ public class FutanGendogakuNinteiShinseishoHakkoIchiranEditor implements IFutanG
     }
 
     private void setAccessLogEditor(FutanGendogakuNinteiShinseishoHakkoIchiranReportSource source) {
-        if (個人 != null) {
+        if (null != 個人) {
             source.shikibetsuCode = this.個人.get識別コード().getColumnValue();
         }
     }
