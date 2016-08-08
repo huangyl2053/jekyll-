@@ -73,7 +73,7 @@ public class ShinsakaiJIzenShinsakekkaTorokuValidationHandler {
         if (csvEntityList.isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(
                     new ShinsakaiJIzenShinsakekkaTorokuValidationHandler.ValidationCheckMessages(
-                            UrErrorMessages.対象ファイルが存在しない, name.toString())));
+                            UrErrorMessages.対象データなし_追加メッセージあり, name.toString())));
         } else {
             for (ShinsakaikekkaIchiranInputCsvEntity csvEntity : csvEntityList) {
                 if (csvEntity.getShinsakaiKaisaiNo().isNullOrEmpty() || csvEntity.getShinsakaiIinCode().isNullOrEmpty()
@@ -81,7 +81,7 @@ public class ShinsakaiJIzenShinsakekkaTorokuValidationHandler {
                         || csvEntity.getYukokikan().isNullOrEmpty()) {
                     validationMessages.add(new ValidationMessageControlPair(
                             new ShinsakaiJIzenShinsakekkaTorokuValidationHandler.ValidationCheckMessages(
-                                    UrErrorMessages.対象ファイルが存在しない, name.toString())));
+                                    UrErrorMessages.対象データなし_追加メッセージあり, name.toString())));
                 }
             }
         }
