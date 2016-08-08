@@ -30,10 +30,10 @@
             <name>r5 maven repository</name>
             <url>http://zrtechwiki.ndensan.co.jp/mvn/repo/</url>
             <releases>
-                <updatePolicy>daily</updatePolicy>
+                <updatePolicy>always</updatePolicy>
             </releases>
             <snapshots>
-                <updatePolicy>daily</updatePolicy>
+                <updatePolicy>always</updatePolicy>
             </snapshots>
         </repository>
     </repositories>
@@ -310,20 +310,6 @@
                         <version>1.9.0</version>
                     </dependency>
                 </dependencies>
-            </plugin>
-            
-            <plugin>
-                <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>
-                <artifactId>myBatis-maven-plugin</artifactId>
-                <version>1.9.1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>createMyBatisSettings</goal>
-                        </goals>
-                        <phase>process-sources</phase>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>
