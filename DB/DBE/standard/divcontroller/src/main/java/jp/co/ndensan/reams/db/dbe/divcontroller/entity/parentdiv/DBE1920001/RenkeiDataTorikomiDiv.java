@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -34,6 +35,8 @@ public class RenkeiDataTorikomiDiv extends Panel {
     private torikomiichiranDiv torikomiichiran;
     @JsonProperty("uploadArea")
     private uploadAreaDiv uploadArea;
+    @JsonProperty("path")
+    private RString path;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -96,6 +99,24 @@ public class RenkeiDataTorikomiDiv extends Panel {
     }
 
     /*
+     * getpath
+     * @return path
+     */
+    @JsonProperty("path")
+    public RString getPath() {
+        return path;
+    }
+
+    /*
+     * setpath
+     * @param path path
+     */
+    @JsonProperty("path")
+    public void setPath(RString path) {
+        this.path = path;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -116,16 +137,6 @@ public class RenkeiDataTorikomiDiv extends Panel {
     @JsonIgnore
     public void setDgTorikomiTaisho(DataGrid<dgTorikomiTaisho_Row> dgTorikomiTaisho) {
         this.getRenkeiDataTorikomiBatchParameter().setDgTorikomiTaisho(dgTorikomiTaisho);
-    }
-
-    @JsonIgnore
-    public Button getBtnDataTorikomi() {
-        return this.getRenkeiDataTorikomiBatchParameter().getBtnDataTorikomi();
-    }
-
-    @JsonIgnore
-    public void setBtnDataTorikomi(Button btnDataTorikomi) {
-        this.getRenkeiDataTorikomiBatchParameter().setBtnDataTorikomi(btnDataTorikomi);
     }
 
     @JsonIgnore
@@ -151,6 +162,16 @@ public class RenkeiDataTorikomiDiv extends Panel {
     @JsonIgnore
     public void setUploadTool(UploadPanel uploadTool) {
         this.getUploadArea().setUploadTool(uploadTool);
+    }
+
+    @JsonIgnore
+    public Button getBtnDataTorikomi() {
+        return this.getUploadArea().getBtnDataTorikomi();
+    }
+
+    @JsonIgnore
+    public void setBtnDataTorikomi(Button btnDataTorikomi) {
+        this.getUploadArea().setBtnDataTorikomi(btnDataTorikomi);
     }
 
     // </editor-fold>

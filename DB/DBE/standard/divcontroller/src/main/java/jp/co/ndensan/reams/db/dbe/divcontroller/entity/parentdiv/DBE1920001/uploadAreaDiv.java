@@ -23,6 +23,8 @@ public class uploadAreaDiv extends Panel {
      */
     @JsonProperty("uploadTool")
     private UploadPanel uploadTool;
+    @JsonProperty("btnDataTorikomi")
+    private Button btnDataTorikomi;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -46,6 +48,24 @@ public class uploadAreaDiv extends Panel {
     @JsonProperty("uploadTool")
     public void setUploadTool(UploadPanel uploadTool) {
         this.uploadTool = uploadTool;
+    }
+
+    /*
+     * getbtnDataTorikomi
+     * @return btnDataTorikomi
+     */
+    @JsonProperty("btnDataTorikomi")
+    public Button getBtnDataTorikomi() {
+        return btnDataTorikomi;
+    }
+
+    /*
+     * setbtnDataTorikomi
+     * @param btnDataTorikomi btnDataTorikomi
+     */
+    @JsonProperty("btnDataTorikomi")
+    public void setBtnDataTorikomi(Button btnDataTorikomi) {
+        this.btnDataTorikomi = btnDataTorikomi;
     }
 
     // </editor-fold>
