@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.jukyushaidorenrakuhyo;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoTorokuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.jukyushaidorenrakuhyo.JukyushaIdoRenrakuhyoSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -19,19 +20,23 @@ public class JukyushaIdoRenrakuhyoReport extends
         Report<JukyushaIdoRenrakuhyoSource> {
 
     private final JukyushaIdoRenrakuhyoTorokuEntity entity;
+    private final RString 市町村名称;
 
     /**
      * コンストラクタです。
      *
      * @param entity JukyushaIdoRenrakuhyoTorokuEntity
+     * @param 市町村名称 RString
      */
-    public JukyushaIdoRenrakuhyoReport(JukyushaIdoRenrakuhyoTorokuEntity entity) {
+    public JukyushaIdoRenrakuhyoReport(JukyushaIdoRenrakuhyoTorokuEntity entity, RString 市町村名称) {
         this.entity = entity;
+        this.市町村名称 = 市町村名称;
+
     }
 
     @Override
     public void writeBy(ReportSourceWriter<JukyushaIdoRenrakuhyoSource> writer) {
-        IJukyushaIdoRenrakuhyoEditor editor = new JukyushaIdoRenrakuhyoEditor(entity);
+        IJukyushaIdoRenrakuhyoEditor editor = new JukyushaIdoRenrakuhyoEditor(entity, 市町村名称);
         IJukyushaIdoRenrakuhyoBuilder builder = new JukyushaIdoRenrakuhyoBuilder(editor);
         writer.writeLine(builder);
     }

@@ -9,6 +9,9 @@ import jp.co.ndensan.reams.db.dbc.business.report.jukyushaidorenrakuhyo.Jukyusha
 import jp.co.ndensan.reams.db.dbc.business.report.jukyushaidorenrakuhyo.JukyushaIdoRenrakuhyoReport;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoTorokuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.jukyushaidorenrakuhyo.JukyushaIdoRenrakuhyoSource;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
+import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -18,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 帳票設計_DBCMN81001_受給者異動連絡票（紙媒体) PrintSevice
@@ -35,7 +39,10 @@ public class JukyushaIdoRenrakuhyoPrintSevice {
     public SourceDataCollection printSingle(JukyushaIdoRenrakuhyoTorokuEntity entity) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            print(reportManager, entity);
+            KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
+            SearchResult<KoikiZenShichosonJoho> list = finder.koseiShichosonJoho();
+            RString 市町村名称 = list.records().get(0).get市町村名称();
+            print(reportManager, entity, 市町村名称);
             collection = reportManager.publish();
         }
         return collection;
@@ -52,12 +59,12 @@ public class JukyushaIdoRenrakuhyoPrintSevice {
         return builder.<T>create();
     }
 
-    private void print(ReportManager reportManager, JukyushaIdoRenrakuhyoTorokuEntity entity) {
+    private void print(ReportManager reportManager, JukyushaIdoRenrakuhyoTorokuEntity entity, RString 市町村名称) {
         JukyushaIdoRenrakuhyoProperty property = new JukyushaIdoRenrakuhyoProperty();
         try (ReportAssembler<JukyushaIdoRenrakuhyoSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<JukyushaIdoRenrakuhyoSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
-            new JukyushaIdoRenrakuhyoReport(entity).writeBy(reportSourceWriter);
+            new JukyushaIdoRenrakuhyoReport(entity, 市町村名称).writeBy(reportSourceWriter);
         }
     }
 }
