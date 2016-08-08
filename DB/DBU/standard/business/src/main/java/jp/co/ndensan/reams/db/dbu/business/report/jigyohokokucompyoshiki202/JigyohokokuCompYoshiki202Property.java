@@ -11,16 +11,16 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- * 介護事業状況報告月報（様式2-4）のProertyです。
+ * 介護事業状況報告月報（様式2-4）のPropertyです。
  *
  * @reamsid_L DBU-5600-250 guoqilin
  */
-public class JigyohokokuCompYoshiki202Proerty extends ReportPropertyBase<JigyohokokuCompYoshiki202ReportSource> {
+public class JigyohokokuCompYoshiki202Property extends ReportPropertyBase<JigyohokokuCompYoshiki202ReportSource> {
 
     /**
      * コンストラクタです。
      */
-    public JigyohokokuCompYoshiki202Proerty() {
+    public JigyohokokuCompYoshiki202Property() {
         super(SubGyomuCode.DBU介護統計報告, ReportIdDBU.DBU300011.getReportId());
     }
 
