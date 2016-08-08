@@ -184,19 +184,19 @@ public class SokujiFukaKouseiMain {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
         valid = validationHandler.validate普徴警告();
-        if (valid.iterator().hasNext()) {
-            if (!ResponseHolder.isWarningIgnoredRequest() || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                return ResponseData.of(div).addValidationMessages(valid).respond();
-            }
+        if (valid.iterator().hasNext()
+                && (!ResponseHolder.isWarningIgnoredRequest()
+                || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
+            return ResponseData.of(div).addValidationMessages(valid).respond();
         }
         valid = validationHandler.validate特徴警告();
-        if (valid.iterator().hasNext() && !チェック済み.equals(div.getIsHasWarningFlag())) {
-            if (!ResponseHolder.isWarningIgnoredRequest()
-                    || (ResponseHolder.getButtonType() == null && ResponseHolder.isWarningIgnoredRequest())
-                    || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                div.setIsHasWarningFlag(チェック済み);
-                return ResponseData.of(div).addValidationMessages(valid).respond();
-            }
+        if (valid.iterator().hasNext()
+                && !チェック済み.equals(div.getIsHasWarningFlag())
+                && (!ResponseHolder.isWarningIgnoredRequest()
+                || (ResponseHolder.getButtonType() == null && ResponseHolder.isWarningIgnoredRequest())
+                || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
+            div.setIsHasWarningFlag(チェック済み);
+            return ResponseData.of(div).addValidationMessages(valid).respond();
         }
         NendobunFukaList 更正前 = ViewStateHolder.get(ViewStateKeys.更正前, NendobunFukaList.class);
         NendobunFukaList 更正後 = ViewStateHolder.get(ViewStateKeys.更正後, NendobunFukaList.class);
