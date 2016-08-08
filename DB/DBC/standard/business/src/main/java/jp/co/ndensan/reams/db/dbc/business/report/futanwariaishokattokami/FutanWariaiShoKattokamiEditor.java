@@ -5,29 +5,29 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.futanwariaishokattokami;
 
-import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishokattokami.FutanWariaiShoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishokattokami.FutanWariaiShoSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishokattokami.FutanWariaiShoKattokamiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishokattokami.FutanWariaiShoKattokamiSource;
 
 /**
  * 帳票設計_DBC100065_負担割合証（カット紙）のEditorです。
  *
  * @reamsid_L DBC-4990-040 pengxingyi
  */
-public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
+public class FutanWariaiShoKattokamiEditor implements IFutanWariaiShoKattokamiEditor {
 
-    private final FutanWariaiShoEntity entity;
+    private final FutanWariaiShoKattokamiEntity entity;
 
     /**
      * インスタンスを生成します。
      *
-     * @param entity {@link FutanWariaiShoEntity}
+     * @param entity {@link FutanWariaiShoKattokamiEntity}
      */
-    public FutanWariaiShoEditor(FutanWariaiShoEntity entity) {
+    public FutanWariaiShoKattokamiEditor(FutanWariaiShoKattokamiEntity entity) {
         this.entity = entity;
     }
 
     @Override
-    public FutanWariaiShoSource edit(FutanWariaiShoSource source) {
+    public FutanWariaiShoKattokamiSource edit(FutanWariaiShoKattokamiSource source) {
         source.kofuYmd = entity.get交付年月日();
         source.hihokenshaNo = entity.get被保険者番号();
         source.jusho = entity.get住所();
@@ -52,7 +52,7 @@ public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
         source.tel = entity.get被保険者番号();
         source.ninshosha_denshiKoin = entity.get電子公印();
         source.renban = entity.get連番();
-        source.ocrRenban = entity.getOCR連番();
+        source.ocrRenban = entity.getOcr連番();
         //       source.compSofubutsuAtesakiSource = entity.get送付物宛先();
         return source;
     }
