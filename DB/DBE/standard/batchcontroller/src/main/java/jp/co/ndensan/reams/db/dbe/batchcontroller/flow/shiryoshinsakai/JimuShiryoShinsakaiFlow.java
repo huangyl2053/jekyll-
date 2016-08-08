@@ -7,9 +7,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.shiryoshinsakai;
 
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuGaikyotokkiDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuGaikyotokkiSonotaJohoDataSakuseiA4Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuGaikyouTokkiIranDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuGaikyouTokkiIranDataSakuseiA4Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuHanteiDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuHanteiDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuIkenshoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuIkenshoDataSakuseiA42Process;
@@ -21,6 +19,7 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuShins
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuSonotaJohoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuSonotaJohoDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuTokkiJikouDataSakuseiA3Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuTokkiJikouDataSakuseiA42Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuTokkiJikouDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuTuikaSiryoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuTuikaSiryoDataSakuseiA4Process;
@@ -119,13 +118,8 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
      */
     @Step(事務局_予備判定一覧)
     protected IBatchFlowCommand createJimuHanteiData() {
-        if (選択.equals(getParameter().getShuturyokuSutairu())) {
-            return loopBatch(JimuHanteiDataSakuseiA4Process.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-        } else {
-            return loopBatch(JimuHanteiDataSakuseiA3Process.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-        }
+        return loopBatch(JimuHanteiDataSakuseiA4Process.class)
+                .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
     }
 
     /**
@@ -169,13 +163,8 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
      */
     @Step(事務局_概況特記一覧表)
     protected IBatchFlowCommand createJimuGaikyouTokkiIranData() {
-        if (選択.equals(getParameter().getShuturyokuSutairu())) {
-            return loopBatch(JimuGaikyouTokkiIranDataSakuseiA4Process.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-        } else {
-            return loopBatch(JimuGaikyouTokkiIranDataSakuseiA3Process.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-        }
+        return loopBatch(JimuGaikyouTokkiIranDataSakuseiA4Process.class)
+                .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
     }
 
     /**
@@ -216,7 +205,15 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
      */
     @Step(事務局_特記事項)
     protected IBatchFlowCommand createJimuTokkiJikouData() {
-        return loopBatch(JimuTokkiJikouDataSakuseiA4Process.class)
+        // TODO 特記事項A3の実装しない。　
+//        if (選択.equals(getParameter().getShuturyokuSutairu())) {
+        loopBatch(JimuTokkiJikouDataSakuseiA4Process.class)
                 .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
+        return loopBatch(JimuTokkiJikouDataSakuseiA42Process.class)
+                .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
+//        } else {
+//            return loopBatch(JimuTokkiJikouDataSakuseiA32Process.class)
+//                    .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
+//        }
     }
 }

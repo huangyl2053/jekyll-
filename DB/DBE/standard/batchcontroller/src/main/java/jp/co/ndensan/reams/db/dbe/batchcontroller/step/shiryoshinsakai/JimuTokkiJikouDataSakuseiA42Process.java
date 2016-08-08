@@ -10,12 +10,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.TokkiText1A4Business;
-import jp.co.ndensan.reams.db.dbe.business.report.tokkitexta4.TokkiText1A4Report;
+import jp.co.ndensan.reams.db.dbe.business.report.tokkia4.TokkiText2A4Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkia4.TokkiText2A4ReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkitexta4.TokkiText1A4ReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -43,7 +44,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-0150-190 linghuhang
  */
-public class JimuTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<ShinsakaiSiryoKyotsuEntity> {
+public class JimuTokkiJikouDataSakuseiA42Process extends BatchKeyBreakBase<ShinsakaiSiryoKyotsuEntity> {
 
     private static final RString SELECT_SHINSAKAISIRYOKYOTSU = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper.get共通情報");
@@ -56,8 +57,8 @@ public class JimuTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
     private int ページ表示行数;
 
     @BatchWriter
-    private BatchReportWriter<TokkiText1A4ReportSource> batchWriteA4;
-    private ReportSourceWriter<TokkiText1A4ReportSource> reportSourceWriterA4;
+    private BatchReportWriter<TokkiText2A4ReportSource> batchWriteA4;
+    private ReportSourceWriter<TokkiText2A4ReportSource> reportSourceWriterA4;
 
     @Override
     protected void initialize() {
@@ -70,7 +71,7 @@ public class JimuTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
 
     @Override
     protected void createWriter() {
-        batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517141.getReportId().value())
+        batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517134.getReportId().value())
                 .addBreak(new BreakerCatalog<TokkiText1A4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .create();
         reportSourceWriterA4 = new ReportSourceWriter<>(batchWriteA4);
@@ -88,15 +89,14 @@ public class JimuTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
         kyotsuEntity.setJimukyoku(true);
         List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List = get特記情報(kyotsuEntity);
         TokkiText1A4Business business = new TokkiText1A4Business(kyotsuEntity, 特記情報List);
-        TokkiText1A4Report report = new TokkiText1A4Report(business);
+        TokkiText2A4Report report = new TokkiText2A4Report(business);
         report.writeBy(reportSourceWriterA4);
         ページ表示行数 = business.getページ表示行数();
     }
 
     @Override
     protected void afterExecute() {
-        出力条件表(ReportIdDBE.DBE517141.getReportId().value(), new RString("概況調査の特記"));
-        出力条件表(ReportIdDBE.DBE517131.getReportId().value(), new RString("特記事項（1枚目）"));
+        outputJokenhyoFactory();
     }
 
     private List<DbT5205NinteichosahyoTokkijikoEntity> get特記情報(ShinsakaiSiryoKyotsuEntity entity) {
@@ -114,14 +114,14 @@ public class JimuTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
         return !(before.getShinsakaiOrder() == current.getShinsakaiOrder()) || ページ表示行数 % 最大表示行数 == 0;
     }
 
-    private void 出力条件表(RString 帳票, RString 帳票名) {
+    private void outputJokenhyoFactory() {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                帳票,
+                ReportIdDBE.DBE517134.getReportId().value(),
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
                 new RString(JobContextHolder.getJobId()),
-                帳票名,
+                new RString("特記事項（2枚目以降）"),
                 new RString(reportSourceWriterA4.pageCount().value()),
                 RString.EMPTY,
                 RString.EMPTY,
