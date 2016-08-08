@@ -37,8 +37,6 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
     private static final RString 高額サービス費支給決定通知書作成帳票ID = new RString("DBC100007_KogakuKetteiTsuchiSho");
     private static final RString 高額総合事業サービス費支給決定通知書帳票ID = new RString("DBC100061_JigyoKogakuKetteiTsuchisho");
     private static final RString 処理枝番_01 = new RString("01");
-    private static final RString 処理枝番_02 = new RString("02");
-    private static final RString 処理枝番_03 = new RString("03");
     private static final RString KEY0 = new RString("key0");
     private static final RString KEY1 = new RString("key1");
     private static final RString KEY2 = new RString("key2");
