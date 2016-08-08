@@ -54,8 +54,7 @@ public class Imageinput09AHandler {
                 builder.setShujiiIkenshoKinyuItem(item.modifiedModel());
             }
             for (ShujiiIkenshoIkenItem 意見項目 : 意見項目List) {
-                意見項目 = set09A意見項目1(data, 意見項目);
-                意見項目 = set09A意見項目2(row, data, 意見項目);
+                意見項目 = set09A意見項目1(row, data, 意見項目);
                 意見項目 = set09A意見項目3(data, 意見項目);
                 意見項目 = set09A意見項目5(data, 意見項目);
                 意見項目 = set09A意見項目6(data, 意見項目);
@@ -1475,7 +1474,7 @@ public class Imageinput09AHandler {
         return item;
     }
 
-    private ShujiiIkenshoIkenItem set09A意見項目1(
+    private ShujiiIkenshoIkenItem set09A意見項目1(dgshinseishaichiran_Row row,
             TorokuData data,
             ShujiiIkenshoIkenItem item) {
         if (IkenshoKomokuMapping09A.点滴の管理.getコード().equals(new RString(item.get連番()))) {
@@ -1510,13 +1509,6 @@ public class Imageinput09AHandler {
             item = item.createBuilderForEdit().set意見項目(data.get疼痛の看護()).build();
             意見項目連番レスト.add(IkenshoKomokuMapping09A.疼痛の看護.getコード());
         }
-        return item;
-    }
-
-    private ShujiiIkenshoIkenItem set09A意見項目2(
-            dgshinseishaichiran_Row row,
-            TorokuData data,
-            ShujiiIkenshoIkenItem item) {
         if (IkenshoKomokuMapping09A.経管栄養.getコード().equals(new RString(item.get連番()))) {
             item = item.createBuilderForEdit().set意見項目(data.get経管栄養()).build();
             意見項目連番レスト.add(IkenshoKomokuMapping09A.経管栄養.getコード());
