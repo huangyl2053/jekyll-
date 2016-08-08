@@ -20,6 +20,7 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShogaishaKojoTaishoshaListMyBatisParameter implements IMyBatisParameter {
 
+    private final RDate 対象年度;
     private final HihokenshaNo 被保険者番号;
     private final RString 氏名;
     private final RString 認定区分;
@@ -32,10 +33,12 @@ public class ShogaishaKojoTaishoshaListMyBatisParameter implements IMyBatisParam
     private final RDate 喪失日TO;
     private final RDate 決定日FROM;
     private final RDate 決定日TO;
+    private final RDate 交付日;
 
     /**
      * コンストラクタです。
      *
+     * @param 対象年度 対象年度
      * @param 被保険者番号 被保険者番号
      * @param 氏名 氏名
      * @param 認定区分 認定区分
@@ -48,10 +51,12 @@ public class ShogaishaKojoTaishoshaListMyBatisParameter implements IMyBatisParam
      * @param 喪失日TO 喪失日TO
      * @param 決定日FROM 決定日FROM
      * @param 決定日TO 決定日TO
+     * @param 交付日 交付日
      */
-    public ShogaishaKojoTaishoshaListMyBatisParameter(HihokenshaNo 被保険者番号, RString 氏名, RString 認定区分,
+    public ShogaishaKojoTaishoshaListMyBatisParameter(RDate 対象年度, HihokenshaNo 被保険者番号, RString 氏名, RString 認定区分,
             RString 認定内容, RString 認知症高齢者の日常生活自立度, RString 障害高齢者の日常生活自立度, RString 障がい者手帳,
-            RString 喪失事由, RDate 喪失日FROM, RDate 喪失日TO, RDate 決定日FROM, RDate 決定日TO) {
+            RString 喪失事由, RDate 喪失日FROM, RDate 喪失日TO, RDate 決定日FROM, RDate 決定日TO, RDate 交付日) {
+        this.対象年度 = 対象年度;
         this.被保険者番号 = 被保険者番号;
         this.氏名 = 氏名;
         this.認定区分 = 認定区分;
@@ -64,6 +69,7 @@ public class ShogaishaKojoTaishoshaListMyBatisParameter implements IMyBatisParam
         this.喪失日TO = 喪失日TO;
         this.決定日FROM = 決定日FROM;
         this.決定日TO = 決定日TO;
+        this.交付日 = 交付日;
 
     }
 

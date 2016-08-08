@@ -17,10 +17,20 @@ public class ShogaishaKojoNinteishoBuilderImpl implements IShogaishaKojoNinteish
 
     private final IShogaishaKojoNinteishoEditor shogaishaKojoNinteishoEditorImpl;
 
+    /**
+     * インスタンスを生成します。
+     *
+     * @param shogaishaKojoNinteishoEditorImpl {@link IShogaishaKojoNinteishoEditor}
+     */
     ShogaishaKojoNinteishoBuilderImpl(IShogaishaKojoNinteishoEditor shogaishaKojoNinteishoEditorImpl) {
         this.shogaishaKojoNinteishoEditorImpl = shogaishaKojoNinteishoEditorImpl;
     }
 
+    /**
+     * 帳票ソースをビルドします。
+     *
+     * @return {@link NinteishoJohoReportSource}
+     */
     @Override
     public NinteishoJohoReportSource build() {
         return ReportEditorJoiner.from(new NinteishoJohoReportSource()).join(shogaishaKojoNinteishoEditorImpl).buildSource();

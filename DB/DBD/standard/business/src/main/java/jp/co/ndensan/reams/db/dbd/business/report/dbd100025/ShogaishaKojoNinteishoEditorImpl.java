@@ -9,8 +9,6 @@ import jp.co.ndensan.reams.db.dbd.business.core.dbt4030011.NinteishoJohoBusiness
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100025.NinteishoJohoReportSource;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -26,10 +24,21 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
 
     private final NinteishoJohoBusiness target;
 
+    /**
+     * インスタンスを生成します。
+     *
+     * @param target {@link NinteishoJohoBusiness}
+     */
     protected ShogaishaKojoNinteishoEditorImpl(NinteishoJohoBusiness target) {
         this.target = target;
     }
 
+    /**
+     * 障がい者控除対象者認定証Editorです。
+     *
+     * @param source NinteishoJohoReportSource
+     * @return NinteishoJohoReportSource
+     */
     @Override
     public NinteishoJohoReportSource edit(NinteishoJohoReportSource source) {
         return edit項目(source);
@@ -68,8 +77,8 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
     }
 
     private void edit認証者(NinteishoJohoReportSource source) {
-        source.ninshoshaShimeiKakenai = target.getNinshoshaDenshiKoinDataEntity().get認職者氏名();
-        source.ninshoshaShimeiKakeru = target.getNinshoshaDenshiKoinDataEntity().get電子公印();
+        source.ninshoshaShimeiKakenai = target.get認職者氏名();
+        source.ninshoshaShimeiKakeru = target.get電子公印();
     }
 
     private void edit申請者住所(NinteishoJohoReportSource source) {
@@ -81,31 +90,25 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
     }
 
     private void edit対象者住所(NinteishoJohoReportSource source) {
-        AtenaJusho jusho = target.getPsmEntity().getJusho();
-        source.hihokenshaJusho = jusho.getColumnValue();
+        source.hihokenshaJusho = target.get対象者住所();
     }
 
     private void edit対象者氏名(NinteishoJohoReportSource source) {
-        AtenaMeisho meisho = target.getPsmEntity().getMeisho();
-        if (RString.isNullOrEmpty(meisho.getColumnValue())) {
-            source.hihokenshaName = meisho.getColumnValue();
-        }
+        source.hihokenshaName = target.get対象者氏名();
     }
 
     private void edit生年月日(NinteishoJohoReportSource source) {
         IKojin ikojin = ShikibetsuTaishoFactory.createKojin(target.getPsmEntity());
         if (ikojin.is日本人()) {
-            source.birthYMD = target.getPsmEntity().getSeinengappiYMD().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                    .fillType(FillType.BLANK).toDateString();
+            source.birthYMD = target.get対象者生年月日().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         } else {
-            source.birthYMD = target.getPsmEntity().getSeinengappiYMD().seireki().separator(Separator.JAPANESE)
-                    .fillType(FillType.BLANK).toDateString();
+            source.birthYMD = target.get対象者生年月日().seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
     }
 
     private void edit性別(NinteishoJohoReportSource source) {
-        source.seibetsu = target.getPsmEntity().getSeibetsuCode();
+        source.seibetsu = target.get対象者性別();
     }
 
     private void edit障害理由(NinteishoJohoReportSource source) {
@@ -115,14 +118,13 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
 
     private void edit要介護認定日(NinteishoJohoReportSource source) {
         source.ninteiYMD = target.get要介護認定日() == null ? RString.EMPTY : target.get要介護認定日().wareki()
-                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                .fillType(FillType.ZERO).toDateString();
+                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
+                fillType(FillType.ZERO).toDateString();
     }
 
     private void edit申告年(NinteishoJohoReportSource source) {
-        source.shiyoMokuteki = target.get申告年() == null ? RString.EMPTY : target.get申告年().wareki()
-                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .fillType(FillType.BLANK).toDateString();
+        source.shiyoMokuteki = target.get申告年() == null ? RString.EMPTY : target.get申告年().wareki().
+                eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
     }
 
 }
