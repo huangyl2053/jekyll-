@@ -104,16 +104,18 @@ public enum GemmenGengakuShoIkkatsuMainDivSpec implements IPredicate<GemmenGenga
                     && !div.getFutanGendogaku().getFutanGendogakuKetteiTsuchisho()
                     .getCcdFutanGendogakuKetteiTsuchishoBunshoNo().get文書番号().isNull()
                     && !div.getFutanGendogaku().getFutanGendogakuKetteiTsuchisho()
-                    .getCcdFutanGendogakuKetteiTsuchishoBunshoNo().get文書番号().isEmpty()) {
+                    .getCcdFutanGendogakuKetteiTsuchishoBunshoNo().get文書番号().isEmpty()
+                    && !div.getFutanGendogaku().getFutanGendogakuKetteiTsuchisho()
+                    .getCcdFutanGendogakuKetteiTsuchishoBunshoNo().get文書番号().toString().equals("第号")) {
                         設定Flag = true;
                     }
                     if (div.getSakuseiTaisho().getDdlGemmenGengakuShurui().getSelectedKey().equals(SelectKey.key1.getValue())
                     && !div.getShafukuKeigen().getShafukuKeigenKetteiTsuchisho()
                     .getCcdShafukuKeigenKetteiTsuchishoBunshoNo().get文書番号().isNull()
                     && !div.getShafukuKeigen().getShafukuKeigenKetteiTsuchisho()
-                    .getCcdShafukuKeigenKetteiTsuchishoBunshoNo().get文書番号().isEmpty()
-                    && !div.getFutanGendogaku().getFutanGendogakuKetteiTsuchisho()
-                    .getCcdFutanGendogakuKetteiTsuchishoBunshoNo().get文書番号().toString().equals("")) {
+                    .getCcdShafukuKeigenKetteiTsuchishoBunshoNo().get文書番号().trim().isEmpty()
+                    && !div.getShafukuKeigen().getShafukuKeigenKetteiTsuchisho()
+                    .getCcdShafukuKeigenKetteiTsuchishoBunshoNo().get文書番号().toString().equals("第号")) {
                         設定Flag = true;
                     }
 
