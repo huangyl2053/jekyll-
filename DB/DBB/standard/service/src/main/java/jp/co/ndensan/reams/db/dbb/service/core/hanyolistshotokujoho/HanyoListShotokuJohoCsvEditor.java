@@ -54,11 +54,7 @@ public class HanyoListShotokuJohoCsvEditor {
     private static final RString 特例状態住特 = new RString("住特");
     private static final RString FLAG = new RString("1");
     private static final RString 定数対象外 = new RString("対象外");
-    private static final RString LINE = new RString("-");
     private static final int 定数_ZERO = 0;
-    private static final int 定数_THREE = 3;
-    private static final int 定数_FIVE = 5;
-    private static final int 定数_SEVEN = 7;
 
     /**
      * editor
