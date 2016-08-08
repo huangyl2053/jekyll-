@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -467,7 +469,11 @@ public class NinteiShinseiJoho2
      * @return 主治医医療機関コード
      */
     public RString get主治医医療機関コード() {
-        return entity.getShujiiIryokikanCode().getColumnValue();
+        ShujiiIryokikanCode shujiiIryokikanCode = entity.getShujiiIryokikanCode();
+        if (shujiiIryokikanCode != null) {
+            return shujiiIryokikanCode.value();
+        }
+        return RString.EMPTY;
     }
 
     /**
@@ -476,7 +482,11 @@ public class NinteiShinseiJoho2
      * @return 主治医コード
      */
     public RString get主治医コード() {
-        return entity.getShujiiCode().getColumnValue();
+        ShujiiCode shujiiCode = entity.getShujiiCode();
+        if (shujiiCode != null) {
+            return shujiiCode.value();
+        }
+        return RString.EMPTY;
     }
 
     /**
@@ -834,6 +844,7 @@ public class NinteiShinseiJoho2
     }
 
     private static final class _SerializationProxy implements Serializable {
+        private static final long serialVersionUID = -4378135424871593254L;
 
         private final DbT5101NinteiShinseiJohoEntity entity;
         private final NinteiShinseiJoho2Identifier id;
