@@ -57,12 +57,12 @@ module DBZ {
                 return new UZA.TextBoxDateRange(this.convFiledName("txtdrYukokikan"));
             }
 
-            public txtfutanWariaiKubun(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtfutanWariaiKubun"));
+            public txtFutanWariai(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtFutanWariai"));
             }
 
-            public txtfutanWariai(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtfutanWariai"));
+            public txtFutanwariGaito(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtFutanwariGaito"));
             }
 
             public cblInji(): UZA.CheckBoxList {

@@ -52,12 +52,12 @@ var DBZ;
                 return new UZA.TextBoxDateRange(this.convFiledName("txtdrYukokikan"));
             };
 
-            Controls.prototype.txtfutanWariaiKubun = function () {
-                return new UZA.TextBox(this.convFiledName("txtfutanWariaiKubun"));
+            Controls.prototype.txtFutanWariai = function () {
+                return new UZA.TextBox(this.convFiledName("txtFutanWariai"));
             };
 
-            Controls.prototype.txtfutanWariai = function () {
-                return new UZA.TextBox(this.convFiledName("txtfutanWariai"));
+            Controls.prototype.txtFutanwariGaito = function () {
+                return new UZA.TextBox(this.convFiledName("txtFutanwariGaito"));
             };
 
             Controls.prototype.cblInji = function () {
