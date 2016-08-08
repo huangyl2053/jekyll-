@@ -15,7 +15,7 @@ import lombok.Getter;
  * @reamsid_L　DBU-4230-010 chenxiangyu
  */
 @Getter
-public class UrT0507HokenjaEntityBusiness {
+public class HokenshaMasterKoshinBusiness {
 
     private final UrT0507HokenjaEntity entity;
 
@@ -24,7 +24,7 @@ public class UrT0507HokenjaEntityBusiness {
      *
      * @param entity 保険者情報のEntity
      */
-    public UrT0507HokenjaEntityBusiness(UrT0507HokenjaEntity entity) {
+    public HokenshaMasterKoshinBusiness(UrT0507HokenjaEntity entity) {
         this.entity = entity;
     }
 
