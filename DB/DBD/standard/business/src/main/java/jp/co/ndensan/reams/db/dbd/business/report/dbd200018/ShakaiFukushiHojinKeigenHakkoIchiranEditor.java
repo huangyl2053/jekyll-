@@ -133,7 +133,6 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
                     && !帳票情報.get軽減率_分母().equals(new RString("0"))) {
                 Decimal 軽減率_分子 = new Decimal(帳票情報.get軽減率_分子().toString());
                 Decimal 軽減率_分母 = new Decimal(帳票情報.get軽減率_分母().toString());
-                //TODO軽減率_分母は0の場合、どんな情報表示されますか
                 source.list_12 = new RString(軽減率_分子.divide(軽減率_分母).toString());
             }
             if (決定.equals(決定区分承認しない)) {
