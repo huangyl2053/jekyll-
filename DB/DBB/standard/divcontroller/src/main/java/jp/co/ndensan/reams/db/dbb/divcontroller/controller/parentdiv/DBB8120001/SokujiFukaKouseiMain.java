@@ -470,11 +470,11 @@ public class SokujiFukaKouseiMain {
         年度分賦課リスト.set賦課年度(賦課年度);
         年度分賦課リスト.set通知書番号(通知書番号);
         FukaJoho 最新賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度);
-        FukaJoho 過年度1賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.minusYear(INT_1));
-        FukaJoho 過年度2賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.minusYear(INT_2));
-        FukaJoho 過年度3賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.minusYear(INT_3));
-        FukaJoho 過年度4賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.minusYear(INT_4));
-        FukaJoho 過年度5賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.minusYear(INT_5));
+        FukaJoho 過年度1賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.plusYear(INT_1));
+        FukaJoho 過年度2賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.plusYear(INT_2));
+        FukaJoho 過年度3賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.plusYear(INT_3));
+        FukaJoho 過年度4賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.plusYear(INT_4));
+        FukaJoho 過年度5賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.plusYear(INT_5));
         boolean has過年度賦課 = Boolean.FALSE;
         年度分賦課リスト.set現年度(最新賦課の情報);
         年度分賦課リスト.set賦課期日(最新賦課の情報.get賦課期日());
