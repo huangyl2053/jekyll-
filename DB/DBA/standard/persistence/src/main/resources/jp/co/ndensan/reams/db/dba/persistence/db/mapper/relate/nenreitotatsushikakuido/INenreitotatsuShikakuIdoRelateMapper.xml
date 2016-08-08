@@ -47,6 +47,10 @@
             <foreach item="識別コード" index="index" collection="識別コード" open="(" separator="," close=")">
                 #{識別コード}
             </foreach>
+            AND
+            "seinengappiYMD" <![CDATA[>=]]> #{開始日}
+            AND 
+            "seinengappiYMD" <![CDATA[<=]]> #{終了日}
         </if>
     </select>
 
