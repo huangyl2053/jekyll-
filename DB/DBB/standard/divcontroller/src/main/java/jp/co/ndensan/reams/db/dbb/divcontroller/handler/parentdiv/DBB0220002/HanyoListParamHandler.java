@@ -153,10 +153,10 @@ public class HanyoListParamHandler {
             }
             parameter.set課税区分減免前s(listコード課税区分減免前);
         }
-        if (div.getChushutsuJokenPanel() != null && div.getChushutsuJokenPanel().getChkKazeiKubunGenmenMae() != null
-                && div.getChushutsuJokenPanel().getChkKazeiKubunGenmenMae().getSelectedValues() != null) {
+        if (div.getChushutsuJokenPanel() != null && div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo() != null
+                && div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo().getSelectedValues() != null) {
             List<RString> listコード課税区分減免後 = new ArrayList<>();
-            List<RString> list課税区分減免後 = div.getChushutsuJokenPanel().getChkKazeiKubunGenmenMae().getSelectedValues();
+            List<RString> list課税区分減免後 = div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo().getSelectedValues();
             Iterator<RString> it減免後 = list課税区分減免後.iterator();
             while (it減免後.hasNext()) {
                 RString 減免後 = it減免後.next();
