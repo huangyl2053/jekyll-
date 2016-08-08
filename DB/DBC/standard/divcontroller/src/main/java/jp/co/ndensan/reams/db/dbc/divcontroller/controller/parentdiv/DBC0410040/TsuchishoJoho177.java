@@ -52,7 +52,7 @@ public class TsuchishoJoho177 {
     public ResponseData<KokuhorenDataTorikomiBatchParameter> onClick_btnExcute(TsuchishoJoho177Div div) {
         
         IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200080.getReportId(),
+        IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200085.getReportId(),
                 div.getCcdKokurenJohoTorikomi().get出力順ID());
         ChohyoShutsuryokujunManagerFactory.createInstance().save前回出力順(outputOrder);
         KokuhorenDataTorikomiBatchParameter parameter = new KokuhorenDataTorikomiBatchParameter();

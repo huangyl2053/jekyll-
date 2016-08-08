@@ -49,8 +49,8 @@ public class HanyoRisutoRiyoshaFutanWariaiMybatisParameter implements IMyBatisPa
     private RString 地区選択コードFrom;
     private RString 地区選択コードTo;
     private boolean is住所;
-    private boolean has町域From;
-    private boolean has町域To;
+    private boolean has地区選択From;
+    private boolean has地区選択To;
     private boolean is行政区;
     private boolean has行政区From;
     private boolean has行政区To;
@@ -128,11 +128,11 @@ public class HanyoRisutoRiyoshaFutanWariaiMybatisParameter implements IMyBatisPa
             is住所 = true;
             if (nullHandan(atenacyusyutsujyoken.getJusho_From())) {
                 地区選択コードFrom = atenacyusyutsujyoken.getJusho_From();
-                has町域From = true;
+                has地区選択From = true;
             }
             if (nullHandan(atenacyusyutsujyoken.getJusho_To())) {
                 地区選択コードTo = atenacyusyutsujyoken.getJusho_To();
-                has町域To = true;
+                has地区選択To = true;
             }
         } else if (Chiku.行政区.equals(atenacyusyutsujyoken.getChiku_Kubun())) {
             is行政区 = true;

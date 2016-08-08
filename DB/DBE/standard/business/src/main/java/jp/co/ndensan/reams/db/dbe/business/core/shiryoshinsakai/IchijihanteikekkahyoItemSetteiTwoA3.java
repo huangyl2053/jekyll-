@@ -5,33 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 
-import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk02A;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk06A;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk09A;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk09B;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk99A;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyoukflg.GaikyoChosahyouServiceJyoukFlg02A;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyoukflg.GaikyoChosahyouServiceJyoukFlg06A;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyoukflg.GaikyoChosahyouServiceJyoukFlg09A;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyoukflg.GaikyoChosahyouServiceJyoukFlg09B;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyoukflg.GaikyoChosahyouServiceJyoukFlg99A;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ItiziHanteiEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku02A;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku06A;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku09A;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku99A;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.IsJutakuKaishu;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 事務局一次判定結果票のEntityの編集クラスです。
@@ -45,502 +26,944 @@ public class IchijihanteikekkahyoItemSetteiTwoA3 {
     private static final Code A_06 = new Code("06A");
     private static final Code A_09 = new Code("09A");
     private static final Code B_09 = new Code("09B");
-    private static final int 連番_1 = 1;
-    private static final int 連番_2 = 2;
-    private static final int 連番_3 = 3;
-    private static final int 連番_4 = 4;
-    private static final int 連番_5 = 5;
-    private static final int 連番_6 = 6;
-    private static final int 連番_7 = 7;
-    private static final int 連番_8 = 8;
-    private static final int 連番_9 = 9;
-    private static final int 連番_10 = 10;
-    private static final int 連番_11 = 11;
-    private static final int 連番_12 = 12;
-    private static final int 連番_13 = 13;
-    private static final int 連番_14 = 14;
-    private static final int 連番_15 = 15;
-    private static final int 連番_16 = 16;
-    private static final int 連番_17 = 17;
-    private static final int 連番_18 = 18;
-    private static final int 連番_19 = 19;
-    private static final int 連番_20 = 20;
-    private static final Code 予防給付サービス = new Code("1");
-    private static final Code 介護給付サービス = new Code("2");
-    private static final RString 単位 = new RString(":");
     private static final RString 特記事項有 = new RString("※");
-//    private static final RString 施設名ファイル名 = new RString("C0004.png");
-//    private static final RString 住所ファイル名 = new RString("C0005.png");
-//    private static final RString 電話ファイル名 = new RString("C0006.png");
 
     /**
-     * 特記リスト１を取得します。
+     * 麻痺特記事項有無を取得します。
      *
      * @param 厚労省IF識別コード 厚労省IF識別コード
-     * @param 認定調査票_特記情報 認定調査票_特記情報
-     * @return 特記リスト１
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 麻痺特記事項有無
      */
-    public List<RString> get特記リスト１(Code 厚労省IF識別コード,
-            List<DbT5205NinteichosahyoTokkijikoEntity> 認定調査票_特記情報) {
-        List<RString> 認定調査特記事項番号 = new ArrayList<>();
-        List<RString> 特記事項有無 = new ArrayList<>();
-        for (DbT5205NinteichosahyoTokkijikoEntity entity : 認定調査票_特記情報) {
-            認定調査特記事項番号.add(entity.getNinteichosaTokkijikoNo());
-        }
+    public RString get麻痺特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get麻痺調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-            特記事項有無.add(特記事項有);
-            特記事項有無.add(特記事項有);
-            特記事項有無.add(特記事項有);
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
-            特記事項有無.add(RString.EMPTY);
-            特記事項有無.add(RString.EMPTY);
-            特記事項有無.add(RString.EMPTY);
-            特記事項有無.add(RString.EMPTY);
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 拘縮特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 拘縮特記事項有無
+     */
+    public RString get拘縮特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get拘縮調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-            特記事項有無.add(特記事項有);
-            特記事項有無.add(特記事項有);
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
-            特記事項有無.add(RString.EMPTY);
-            特記事項有無.add(RString.EMPTY);
-            特記事項有無.add(RString.EMPTY);
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 寝返特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 寝返特記事項有無
+     */
+    public RString get寝返特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get寝返調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 起き上特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 起き上特記事項有無
+     */
+    public RString get起き上特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get起き上調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 座位保持特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 座位保持特記事項有無
+     */
+    public RString get座位保持特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get座位保持調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 両足での立位特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 両足での立位特記事項有無
+     */
+    public RString get両足での立位特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get両足での立位調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 歩行特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 歩行特記事項有無
+     */
+    public RString get歩行特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get歩行調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 立ち上特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 立ち上特記事項有無
+     */
+    public RString get立ち上特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get立ち上調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 片足での立位特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 片足での立位特記事項有無
+     */
+    public RString get片足での立位特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get片足での立位調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 洗身特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 洗身特記事項有無
+     */
+    public RString get洗身特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get洗身調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * つめ切り特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return つめ切り特記事項有無
+     */
+    public RString getつめ切り特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(getつめ切り調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 視力特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 視力特記事項有無
+     */
+    public RString get視力特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get視力調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 聴力特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 聴力特記事項有無
+     */
+    public RString get聴力特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get聴力調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
-        return 特記事項有無;
+        return RString.EMPTY;
     }
 
     /**
-     * 特記リスト２を取得します。
+     * 移乗特記事項有無を取得します。
      *
      * @param 厚労省IF識別コード 厚労省IF識別コード
-     * @param 認定調査票_特記情報 認定調査票_特記情報
-     * @return 特記リスト２
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 移乗特記事項有無
      */
-    public List<RString> get特記リスト２(Code 厚労省IF識別コード,
-            List<DbT5205NinteichosahyoTokkijikoEntity> 認定調査票_特記情報) {
-        List<RString> 認定調査特記事項番号 = new ArrayList<>();
-        List<RString> 特記事項有無 = new ArrayList<>();
-        for (DbT5205NinteichosahyoTokkijikoEntity entity : 認定調査票_特記情報) {
-            認定調査特記事項番号.add(entity.getNinteichosaTokkijikoNo());
-        }
+    public RString get移乗特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get移乗調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 移動特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 移動特記事項有無
+     */
+    public RString get移動特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get移動調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * えん下特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return えん下特記事項有無
+     */
+    public RString getえん下特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(getえん下調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 食事摂取特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 食事摂取特記事項有無
+     */
+    public RString get食事摂取特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get食事摂取調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 排尿特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 排尿特記事項有無
+     */
+    public RString get排尿特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get排尿調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 排便特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 排便特記事項有無
+     */
+    public RString get排便特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get排便調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 口腔清潔特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 口腔清潔特記事項有無
+     */
+    public RString get口腔清潔特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get口腔清潔調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 洗顔特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 洗顔特記事項有無
+     */
+    public RString get洗顔特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get洗顔調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 整髪特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 整髪特記事項有無
+     */
+    public RString get整髪特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get整髪調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 上衣の着脱特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 上衣の着脱特記事項有無
+     */
+    public RString get上衣の着脱特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get上衣の着脱調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * ズボン等の着脱特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return ズボン等の着脱特記事項有無
+     */
+    public RString getズボン等の着脱特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(getズボン等の着脱調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 外出頻度特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 外出頻度特記事項有無
+     */
+    public RString get外出頻度特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get外出頻度調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
-        return 特記事項有無;
+        return RString.EMPTY;
     }
 
     /**
-     * 特記リスト３を取得します。
+     * 意思の伝達特記事項有無を取得します。
      *
      * @param 厚労省IF識別コード 厚労省IF識別コード
-     * @param 認定調査票_特記情報 認定調査票_特記情報
-     * @return 特記リスト３
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 意思の伝達特記事項有無
      */
-    public List<RString> get特記リスト３(Code 厚労省IF識別コード,
-            List<DbT5205NinteichosahyoTokkijikoEntity> 認定調査票_特記情報) {
-        List<RString> 認定調査特記事項番号 = new ArrayList<>();
-        List<RString> 特記事項有無 = new ArrayList<>();
-        for (DbT5205NinteichosahyoTokkijikoEntity entity : 認定調査票_特記情報) {
-            認定調査特記事項番号.add(entity.getNinteichosaTokkijikoNo());
-        }
+    public RString get意思の伝達特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get意思の伝達調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 毎日の日課を理解特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 毎日の日課を理解特記事項有無
+     */
+    public RString get毎日の日課を理解特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get毎日の日課を理解調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 生年月日特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 生年月日特記事項有無
+     */
+    public RString get生年月日特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get生年月日調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 短期記憶特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 短期記憶特記事項有無
+     */
+    public RString get短期記憶特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get短期記憶調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 自分の名前特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 自分の名前特記事項有無
+     */
+    public RString get自分の名前特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get自分の名前調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 今の季節を理解特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 今の季節を理解特記事項有無
+     */
+    public RString get今の季節を理解特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get今の季節を理解調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 場所の理解特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 場所の理解特記事項有無
+     */
+    public RString get場所の理解特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get場所の理解調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 徘徊特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 徘徊特記事項有無
+     */
+    public RString get徘徊特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get徘徊調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 外出して戻特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 外出して戻特記事項有無
+     */
+    public RString get外出して戻特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get外出して戻調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
-        return 特記事項有無;
+        return RString.EMPTY;
     }
 
     /**
-     * 特記リスト４を取得します。
+     * 被害的特記事項有無を取得します。
      *
      * @param 厚労省IF識別コード 厚労省IF識別コード
-     * @param 認定調査票_特記情報 認定調査票_特記情報
-     * @return 特記リスト４
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 被害的特記事項有無
      */
-    public List<RString> get特記リスト４(Code 厚労省IF識別コード,
-            List<DbT5205NinteichosahyoTokkijikoEntity> 認定調査票_特記情報) {
-        List<RString> 認定調査特記事項番号 = new ArrayList<>();
-        List<RString> 特記事項有無 = new ArrayList<>();
-        for (DbT5205NinteichosahyoTokkijikoEntity entity : 認定調査票_特記情報) {
-            認定調査特記事項番号.add(entity.getNinteichosaTokkijikoNo());
-        }
+    public RString get被害的特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get被害的調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 作話特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 作話特記事項有無
+     */
+    public RString get作話特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get作話調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 感情が不安定特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 感情が不安定特記事項有無
+     */
+    public RString get感情が不安定特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get感情が不安定調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 昼夜逆転特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 昼夜逆転特記事項有無
+     */
+    public RString get昼夜逆転特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get昼夜逆転調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 同じ話をする特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 同じ話をする特記事項有無
+     */
+    public RString get同じ話をする特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get同じ話をする調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 大声を出す特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 大声を出す特記事項有無
+     */
+    public RString get大声を出す特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get大声を出す調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 介護に抵抗特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 介護に抵抗特記事項有無
+     */
+    public RString get介護に抵抗特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get介護に抵抗調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 落ち着きなし特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 落ち着きなし特記事項有無
+     */
+    public RString get落ち着きなし特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get落ち着きなし調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 一人で出たがる特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 一人で出たがる特記事項有無
+     */
+    public RString get一人で出たがる特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get一人で出たがる調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 収集癖特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 収集癖特記事項有無
+     */
+    public RString get収集癖特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get収集癖調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 物や衣類を壊す特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 物や衣類を壊す特記事項有無
+     */
+    public RString get物や衣類を壊す特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get物や衣類を壊す調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * ひどい物忘れ特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return ひどい物忘れ特記事項有無
+     */
+    public RString getひどい物忘れ特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(getひどい物忘れ調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 独り言独り笑い特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 独り言独り笑い特記事項有無
+     */
+    public RString get独り言独り笑い特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get独り言独り笑い調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 自分勝手特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 自分勝手特記事項有無
+     */
+    public RString get自分勝手特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get自分勝手調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 話がまとまらない特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 話がまとまらない特記事項有無
+     */
+    public RString get話がまとまらない特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get話がまとまらない調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
-        return 特記事項有無;
+        return RString.EMPTY;
     }
 
     /**
-     * 特記リスト５を取得します。
+     * 薬の内服特記事項有無を取得します。
      *
      * @param 厚労省IF識別コード 厚労省IF識別コード
-     * @param 認定調査票_特記情報 認定調査票_特記情報
-     * @return 特記リスト５
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 薬の内服特記事項有無
      */
-    public List<RString> get特記リスト５(Code 厚労省IF識別コード,
-            List<DbT5205NinteichosahyoTokkijikoEntity> 認定調査票_特記情報) {
-        List<RString> 認定調査特記事項番号 = new ArrayList<>();
-        List<RString> 特記事項有無 = new ArrayList<>();
-        for (DbT5205NinteichosahyoTokkijikoEntity entity : 認定調査票_特記情報) {
-            認定調査特記事項番号.add(entity.getNinteichosaTokkijikoNo());
-        }
+    public RString get薬の内服特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get薬の内服調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 金銭の管理特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 金銭の管理特記事項有無
+     */
+    public RString get金銭の管理特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get金銭の管理調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 日常の意思決定特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 日常の意思決定特記事項有無
+     */
+    public RString get日常の意思決定特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get日常の意思決定調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 集団への不適応特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 集団への不適応特記事項有無
+     */
+    public RString get集団への不適応特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get集団への不適応調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 買い物特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 買い物特記事項有無
+     */
+    public RString get買い物特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get買い物調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 簡単な調理特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 簡単な調理特記事項有無
+     */
+    public RString get簡単な調理特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get簡単な調理調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
-        return 特記事項有無;
+        return RString.EMPTY;
     }
 
     /**
-     * 特記リスト６を取得します。
+     * 点滴の管理特記事項有無を取得します。
      *
      * @param 厚労省IF識別コード 厚労省IF識別コード
-     * @param 認定調査票_特記情報 認定調査票_特記情報
-     * @return 特記リスト６
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 点滴の管理特記事項有無
      */
-    public List<RString> get特記リスト６(Code 厚労省IF識別コード,
-            List<DbT5205NinteichosahyoTokkijikoEntity> 認定調査票_特記情報) {
-        List<RString> 認定調査特記事項番号 = new ArrayList<>();
-        List<RString> 特記事項有無 = new ArrayList<>();
-        for (DbT5205NinteichosahyoTokkijikoEntity entity : 認定調査票_特記情報) {
-            認定調査特記事項番号.add(entity.getNinteichosaTokkijikoNo());
-        }
+    public RString get点滴の管理特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get点滴の管理調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
-        if (認定調査特記事項番号.contains(get中心静脈栄養調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
-        }
-        if (認定調査特記事項番号.contains(get透析調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
-        }
-        if (認定調査特記事項番号.contains(getストーマの処置調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
-        }
-        if (認定調査特記事項番号.contains(get酸素療法調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
-        }
-        if (認定調査特記事項番号.contains(getレスピレーター調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
-        }
-        return 特記事項有無;
+        return RString.EMPTY;
     }
 
     /**
-     * 特記リスト７を取得します。
+     * 中心静脈栄養特記事項有無を取得します。
      *
      * @param 厚労省IF識別コード 厚労省IF識別コード
-     * @param 認定調査票_特記情報 認定調査票_特記情報
-     * @return 特記リスト７
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 中心静脈栄養特記事項有無
      */
-    public List<RString> get特記リスト７(Code 厚労省IF識別コード,
-            List<DbT5205NinteichosahyoTokkijikoEntity> 認定調査票_特記情報) {
-        List<RString> 認定調査特記事項番号 = new ArrayList<>();
-        List<RString> 特記事項有無 = new ArrayList<>();
-        for (DbT5205NinteichosahyoTokkijikoEntity entity : 認定調査票_特記情報) {
-            認定調査特記事項番号.add(entity.getNinteichosaTokkijikoNo());
+    public RString get中心静脈栄養特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
+        if (認定調査特記事項番号.contains(get中心静脈栄養調査特記事項番号(厚労省IF識別コード))) {
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 透析特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 透析特記事項有無
+     */
+    public RString get透析特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
+        if (認定調査特記事項番号.contains(get透析調査特記事項番号(厚労省IF識別コード))) {
+            return 特記事項有;
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * ストーマの処置特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return ストーマの処置特記事項有無
+     */
+    public RString getストーマの処置特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
+        if (認定調査特記事項番号.contains(getストーマの処置調査特記事項番号(厚労省IF識別コード))) {
+            return 特記事項有;
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 酸素療法特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 酸素療法特記事項有無
+     */
+    public RString get酸素療法特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
+        if (認定調査特記事項番号.contains(get酸素療法調査特記事項番号(厚労省IF識別コード))) {
+            return 特記事項有;
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * レスピレーター特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return レスピレーター特記事項有無
+     */
+    public RString getレスピレーター特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
+        if (認定調査特記事項番号.contains(getレスピレーター調査特記事項番号(厚労省IF識別コード))) {
+            return 特記事項有;
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 気管切開の処置特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 気管切開の処置特記事項有無
+     */
+    public RString get気管切開の処置特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get気管切開の処置調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 疼痛の看護特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 疼痛の看護特記事項有無
+     */
+    public RString get疼痛の看護特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get疼痛の看護調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 経管栄養特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 経管栄養特記事項有無
+     */
+    public RString get経管栄養特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(get経管栄養調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * モニター測定特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return モニター測定特記事項有無
+     */
+    public RString getモニター測定特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(getモニター測定調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * じょくそうの処置特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return じょくそうの処置特記事項有無
+     */
+    public RString getじょくそうの処置特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(getじょくそうの処置調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
+        return RString.EMPTY;
+    }
+
+    /**
+     * カテーテル特記事項有無を取得します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return カテーテル特記事項有無
+     */
+    public RString getカテーテル特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査特記事項番号) {
         if (認定調査特記事項番号.contains(getカテーテル調査特記事項番号(厚労省IF識別コード))) {
-            特記事項有無.add(特記事項有);
-        } else {
-            特記事項有無.add(RString.EMPTY);
+            return 特記事項有;
         }
-        return 特記事項有無;
+        return RString.EMPTY;
     }
 
     private RString get麻痺調査特記事項番号(Code 厚労省IF識別コード) {
@@ -1547,446 +1970,4 @@ public class IchijihanteikekkahyoItemSetteiTwoA3 {
         }
         return RString.EMPTY;
     }
-
-    /**
-     * サービスの状況を設定します。
-     *
-     * @param entity ItiziHanteiEntity
-     * @param 項目 IchijihanteikekkahyoA4Entity
-     * @param 予防給付 予防給付
-     * @param 介護給付 介護給付
-     * @param サービス状況フラグ サービス状況フラグ
-     * @param 厚労省IF識別コード 厚労省IF識別コード
-     * @param 共通情報 ShinsakaiSiryoKyotsuEntity
-     */
-    public void setサービスの状況(ItiziHanteiEntity entity, IchijihanteikekkahyoA3Entity 項目,
-            List<DbT5207NinteichosahyoServiceJokyoEntity> 予防給付, List<DbT5207NinteichosahyoServiceJokyoEntity> 介護給付,
-            DbT5208NinteichosahyoServiceJokyoFlagEntity サービス状況フラグ, Code 厚労省IF識別コード, ShinsakaiSiryoKyotsuEntity 共通情報) {
-        RStringBuilder builder;
-        if (予防給付サービス.equals(entity.getServiceKubunCode())) {
-            項目.setSabisuKubun(new RString("予防給付・総合事業"));
-            for (DbT5207NinteichosahyoServiceJokyoEntity dbt5207Entity : 予防給付) {
-                switch (dbt5207Entity.getRemban()) {
-                    case 連番_1:
-                        builder = new RStringBuilder();
-                        項目.setSabisuName1(get帳票上の文言(厚労省IF識別コード, new RString(連番_1)));
-                        項目.setSabisuKaisu1(builder.append(単位)
-                                .append(dbt5207Entity.getServiceJokyo())
-                                .append(get単位1(厚労省IF識別コード, new RString(連番_1)))
-                                .append(get単位2(厚労省IF識別コード, new RString(連番_1))).toRString());
-                        項目.setSabisuName13(get帳票上の文言状況フラグ(厚労省IF識別コード, new RString(連番_1)));
-                        項目.setSabisuKaisu13(IsJutakuKaishu.toValue(サービス状況フラグ.getServiceJokyoFlag()).get名称());
-                        break;
-                    case 連番_2:
-                        builder = new RStringBuilder();
-                        項目.setSabisuName2(get帳票上の文言(厚労省IF識別コード, new RString(連番_2)));
-                        項目.setSabisuKaisu2(builder.append(単位)
-                                .append(dbt5207Entity.getServiceJokyo())
-                                .append(get単位1(厚労省IF識別コード, new RString(連番_2)))
-                                .append(get単位2(厚労省IF識別コード, new RString(連番_2))).toRString());
-                        break;
-                    case 連番_3:
-                        builder = new RStringBuilder();
-                        項目.setSabisuName3(get帳票上の文言(厚労省IF識別コード, new RString(連番_3)));
-                        項目.setSabisuKaisu3(builder.append(単位)
-                                .append(dbt5207Entity.getServiceJokyo())
-                                .append(get単位1(厚労省IF識別コード, new RString(連番_3)))
-                                .append(get単位2(厚労省IF識別コード, new RString(連番_3))).toRString());
-                        break;
-                    case 連番_4:
-                        builder = new RStringBuilder();
-                        項目.setSabisuName4(get帳票上の文言(厚労省IF識別コード, new RString(連番_4)));
-                        項目.setSabisuKaisu4(builder.append(単位)
-                                .append(dbt5207Entity.getServiceJokyo())
-                                .append(get単位1(厚労省IF識別コード, new RString(連番_4)))
-                                .append(get単位2(厚労省IF識別コード, new RString(連番_4))).toRString());
-                        break;
-                    case 連番_5:
-                        builder = new RStringBuilder();
-                        項目.setSabisuName5(get帳票上の文言(厚労省IF識別コード, new RString(連番_5)));
-                        項目.setSabisuKaisu5(builder.append(単位)
-                                .append(dbt5207Entity.getServiceJokyo())
-                                .append(get単位1(厚労省IF識別コード, new RString(連番_5)))
-                                .append(get単位2(厚労省IF識別コード, new RString(連番_5))).toRString());
-                        break;
-                    case 連番_6:
-                        builder = new RStringBuilder();
-                        項目.setSabisuName6(get帳票上の文言(厚労省IF識別コード, new RString(連番_6)));
-                        項目.setSabisuKaisu6(builder.append(単位)
-                                .append(dbt5207Entity.getServiceJokyo())
-                                .append(get単位1(厚労省IF識別コード, new RString(連番_6)))
-                                .append(get単位2(厚労省IF識別コード, new RString(連番_6))).toRString());
-                        break;
-                    case 連番_7:
-                        builder = new RStringBuilder();
-                        項目.setSabisuName7(get帳票上の文言(厚労省IF識別コード, new RString(連番_7)));
-                        項目.setSabisuKaisu7(builder.append(単位)
-                                .append(dbt5207Entity.getServiceJokyo())
-                                .append(get単位1(厚労省IF識別コード, new RString(連番_7)))
-                                .append(get単位2(厚労省IF識別コード, new RString(連番_7))).toRString());
-                        break;
-                    default:
-                        予防給付サービスの状況(dbt5207Entity, 項目, 厚労省IF識別コード);
-                        break;
-                }
-            }
-//            setサービス(項目, 共通情報);
-        } else if (介護給付サービス.equals(entity.getServiceKubunCode())) {
-            項目.setSabisuKubun(new RString("介護給付"));
-            for (DbT5207NinteichosahyoServiceJokyoEntity dbt5207Entity : 介護給付) {
-                switch (dbt5207Entity.getRemban()) {
-                    case 連番_1:
-                        builder = new RStringBuilder();
-                        項目.setSabisuName1(get帳票上の文言(厚労省IF識別コード, new RString(連番_1)));
-                        項目.setSabisuKaisu1(builder.append(単位)
-                                .append(dbt5207Entity.getServiceJokyo())
-                                .append(get単位1(厚労省IF識別コード, new RString(連番_1)))
-                                .append(get単位2(厚労省IF識別コード, new RString(連番_1))).toRString());
-                        項目.setSabisuName13(get帳票上の文言状況フラグ(厚労省IF識別コード, new RString(連番_1)));
-                        項目.setSabisuKaisu13(IsJutakuKaishu.toValue(サービス状況フラグ.getServiceJokyoFlag()).get名称());
-                        break;
-                    case 連番_2:
-                        builder = new RStringBuilder();
-                        項目.setSabisuName2(get帳票上の文言(厚労省IF識別コード, new RString(連番_2)));
-                        項目.setSabisuKaisu2(builder.append(単位)
-                                .append(dbt5207Entity.getServiceJokyo())
-                                .append(get単位1(厚労省IF識別コード, new RString(連番_2)))
-                                .append(get単位2(厚労省IF識別コード, new RString(連番_2))).toRString());
-                        break;
-                    case 連番_3:
-                        builder = new RStringBuilder();
-                        項目.setSabisuName3(get帳票上の文言(厚労省IF識別コード, new RString(連番_3)));
-                        項目.setSabisuKaisu3(builder.append(単位)
-                                .append(dbt5207Entity.getServiceJokyo())
-                                .append(get単位1(厚労省IF識別コード, new RString(連番_3)))
-                                .append(get単位2(厚労省IF識別コード, new RString(連番_3))).toRString());
-                        break;
-                    case 連番_4:
-                        builder = new RStringBuilder();
-                        項目.setSabisuName4(get帳票上の文言(厚労省IF識別コード, new RString(連番_4)));
-                        項目.setSabisuKaisu4(builder.append(単位)
-                                .append(dbt5207Entity.getServiceJokyo())
-                                .append(get単位1(厚労省IF識別コード, new RString(連番_4)))
-                                .append(get単位2(厚労省IF識別コード, new RString(連番_4))).toRString());
-                        break;
-                    case 連番_5:
-                        builder = new RStringBuilder();
-                        項目.setSabisuName5(get帳票上の文言(厚労省IF識別コード, new RString(連番_5)));
-                        項目.setSabisuKaisu5(builder.append(単位)
-                                .append(dbt5207Entity.getServiceJokyo())
-                                .append(get単位1(厚労省IF識別コード, new RString(連番_5)))
-                                .append(get単位2(厚労省IF識別コード, new RString(連番_5))).toRString());
-                        break;
-                    case 連番_6:
-                        builder = new RStringBuilder();
-                        項目.setSabisuName6(get帳票上の文言(厚労省IF識別コード, new RString(連番_6)));
-                        項目.setSabisuKaisu6(builder.append(単位)
-                                .append(dbt5207Entity.getServiceJokyo())
-                                .append(get単位1(厚労省IF識別コード, new RString(連番_6)))
-                                .append(get単位2(厚労省IF識別コード, new RString(連番_6))).toRString());
-                        break;
-                    case 連番_7:
-                        builder = new RStringBuilder();
-                        項目.setSabisuName7(get帳票上の文言(厚労省IF識別コード, new RString(連番_7)));
-                        項目.setSabisuKaisu7(builder.append(単位)
-                                .append(dbt5207Entity.getServiceJokyo())
-                                .append(get単位1(厚労省IF識別コード, new RString(連番_7)))
-                                .append(get単位2(厚労省IF識別コード, new RString(連番_7))).toRString());
-                        break;
-
-                    default:
-                        介護給付サービスの状況(dbt5207Entity, 項目, 厚労省IF識別コード);
-                        break;
-                }
-            }
-//            setサービス(項目, 共通情報);
-        } else {
-            項目.setSabisuKubun(new RString("なし"));
-//            setサービス(項目, null);
-        }
-    }
-
-    private void 予防給付サービスの状況(DbT5207NinteichosahyoServiceJokyoEntity dbt5207Entity,
-            IchijihanteikekkahyoA3Entity 項目,
-            Code 厚労省IF識別コード) {
-        RStringBuilder builder;
-        switch (dbt5207Entity.getRemban()) {
-            case 連番_8:
-                builder = new RStringBuilder();
-                項目.setSabisuName8(get帳票上の文言(厚労省IF識別コード, new RString(連番_8)));
-                項目.setSabisuKaisu8(builder.append(単位)
-                        .append(dbt5207Entity.getServiceJokyo())
-                        .append(get単位1(厚労省IF識別コード, new RString(連番_8)))
-                        .append(get単位2(厚労省IF識別コード, new RString(連番_8))).toRString());
-                break;
-            case 連番_9:
-                builder = new RStringBuilder();
-                項目.setSabisuName9(get帳票上の文言(厚労省IF識別コード, new RString(連番_9)));
-                項目.setSabisuKaisu9(builder.append(単位)
-                        .append(dbt5207Entity.getServiceJokyo())
-                        .append(get単位1(厚労省IF識別コード, new RString(連番_9)))
-                        .append(get単位2(厚労省IF識別コード, new RString(連番_9))).toRString());
-                break;
-            case 連番_10:
-                builder = new RStringBuilder();
-                項目.setSabisuName10(get帳票上の文言(厚労省IF識別コード, new RString(連番_10)));
-                項目.setSabisuKaisu10(builder.append(単位)
-                        .append(dbt5207Entity.getServiceJokyo())
-                        .append(get単位1(厚労省IF識別コード, new RString(連番_10)))
-                        .append(get単位2(厚労省IF識別コード, new RString(連番_10))).toRString());
-                break;
-            case 連番_11:
-                builder = new RStringBuilder();
-                項目.setSabisuName11(get帳票上の文言(厚労省IF識別コード, new RString(連番_11)));
-                項目.setSabisuKaisu11(builder.append(単位)
-                        .append(dbt5207Entity.getServiceJokyo())
-                        .append(get単位1(厚労省IF識別コード, new RString(連番_11))).toRString());
-                break;
-            case 連番_12:
-                builder = new RStringBuilder();
-                項目.setSabisuName12(get帳票上の文言(厚労省IF識別コード, new RString(連番_12)));
-                項目.setSabisuKaisu12(builder.append(単位)
-                        .append(dbt5207Entity.getServiceJokyo())
-                        .append(get単位1(厚労省IF識別コード, new RString(連番_12)))
-                        .append(get単位2(厚労省IF識別コード, new RString(連番_12))).toRString());
-                break;
-            case 連番_14:
-                builder = new RStringBuilder();
-                項目.setSabisuName14(get帳票上の文言(厚労省IF識別コード, new RString(連番_14)));
-                項目.setSabisuKaisu14(builder.append(単位)
-                        .append(dbt5207Entity.getServiceJokyo())
-                        .append(get単位1(厚労省IF識別コード, new RString(連番_14)))
-                        .append(get単位2(厚労省IF識別コード, new RString(連番_14))).toRString());
-                break;
-            case 連番_15:
-                builder = new RStringBuilder();
-                項目.setSabisuName15(get帳票上の文言(厚労省IF識別コード, new RString(連番_15)));
-                項目.setSabisuKaisu15(builder.append(単位)
-                        .append(dbt5207Entity.getServiceJokyo())
-                        .append(get単位1(厚労省IF識別コード, new RString(連番_15)))
-                        .append(get単位2(厚労省IF識別コード, new RString(連番_15))).toRString());
-                break;
-            case 連番_16:
-                builder = new RStringBuilder();
-                項目.setSabisuName16(get帳票上の文言(厚労省IF識別コード, new RString(連番_16)));
-                項目.setSabisuKaisu16(builder.append(単位)
-                        .append(dbt5207Entity.getServiceJokyo())
-                        .append(get単位1(厚労省IF識別コード, new RString(連番_16)))
-                        .append(get単位2(厚労省IF識別コード, new RString(連番_16))).toRString());
-                break;
-            default:
-                項目.setSabisuName17(RString.EMPTY);
-                項目.setSabisuKaisu17(RString.EMPTY);
-                項目.setSabisuName18(RString.EMPTY);
-                項目.setSabisuKaisu18(RString.EMPTY);
-                項目.setSabisuName19(RString.EMPTY);
-                項目.setSabisuKaisu19(RString.EMPTY);
-                項目.setSabisuName20(RString.EMPTY);
-                項目.setSabisuKaisu20(RString.EMPTY);
-                項目.setSabisuName21(RString.EMPTY);
-                項目.setSabisuKaisu21(RString.EMPTY);
-                break;
-
-        }
-    }
-
-    private void 介護給付サービスの状況(DbT5207NinteichosahyoServiceJokyoEntity dbt5207Entity,
-            IchijihanteikekkahyoA3Entity 項目,
-            Code 厚労省IF識別コード) {
-        RStringBuilder builder;
-        switch (dbt5207Entity.getRemban()) {
-            case 連番_8:
-                builder = new RStringBuilder();
-                項目.setSabisuName8(get帳票上の文言(厚労省IF識別コード, new RString(連番_8)));
-                項目.setSabisuKaisu8(builder.append(単位)
-                        .append(dbt5207Entity.getServiceJokyo())
-                        .append(get単位1(厚労省IF識別コード, new RString(連番_8)))
-                        .append(get単位2(厚労省IF識別コード, new RString(連番_8))).toRString());
-                break;
-            case 連番_9:
-                builder = new RStringBuilder();
-                項目.setSabisuName9(get帳票上の文言(厚労省IF識別コード, new RString(連番_9)));
-                項目.setSabisuKaisu9(builder.append(単位)
-                        .append(dbt5207Entity.getServiceJokyo())
-                        .append(get単位1(厚労省IF識別コード, new RString(連番_9)))
-                        .append(get単位2(厚労省IF識別コード, new RString(連番_9))).toRString());
-                break;
-            case 連番_10:
-                builder = new RStringBuilder();
-                項目.setSabisuName10(get帳票上の文言(厚労省IF識別コード, new RString(連番_10)));
-                項目.setSabisuKaisu10(builder.append(単位)
-                        .append(dbt5207Entity.getServiceJokyo())
-                        .append(get単位1(厚労省IF識別コード, new RString(連番_10)))
-                        .append(get単位2(厚労省IF識別コード, new RString(連番_10))).toRString());
-                break;
-            case 連番_11:
-                builder = new RStringBuilder();
-                項目.setSabisuName11(get帳票上の文言(厚労省IF識別コード, new RString(連番_11)));
-                項目.setSabisuKaisu11(builder.append(単位)
-                        .append(dbt5207Entity.getServiceJokyo())
-                        .append(get単位1(厚労省IF識別コード, new RString(連番_11))).toRString());
-                break;
-            case 連番_12:
-                builder = new RStringBuilder();
-                項目.setSabisuName12(get帳票上の文言(厚労省IF識別コード, new RString(連番_12)));
-                項目.setSabisuKaisu12(builder.append(単位)
-                        .append(dbt5207Entity.getServiceJokyo())
-                        .append(get単位1(厚労省IF識別コード, new RString(連番_12)))
-                        .append(get単位2(厚労省IF識別コード, new RString(連番_12))).toRString());
-                break;
-            case 連番_13:
-                builder = new RStringBuilder();
-                項目.setSabisuName14(get帳票上の文言(厚労省IF識別コード, new RString(連番_13)));
-                項目.setSabisuKaisu14(builder.append(単位)
-                        .append(dbt5207Entity.getServiceJokyo())
-                        .append(get単位1(厚労省IF識別コード, new RString(連番_13)))
-                        .append(get単位2(厚労省IF識別コード, new RString(連番_13))).toRString());
-                break;
-            case 連番_14:
-                builder = new RStringBuilder();
-                項目.setSabisuName15(get帳票上の文言(厚労省IF識別コード, new RString(連番_14)));
-                項目.setSabisuKaisu15(builder.append(単位)
-                        .append(dbt5207Entity.getServiceJokyo())
-                        .append(get単位1(厚労省IF識別コード, new RString(連番_14)))
-                        .append(get単位2(厚労省IF識別コード, new RString(連番_14))).toRString());
-                break;
-            case 連番_15:
-                builder = new RStringBuilder();
-                項目.setSabisuName16(get帳票上の文言(厚労省IF識別コード, new RString(連番_15)));
-                項目.setSabisuKaisu16(builder.append(単位)
-                        .append(dbt5207Entity.getServiceJokyo())
-                        .append(get単位1(厚労省IF識別コード, new RString(連番_15)))
-                        .append(get単位2(厚労省IF識別コード, new RString(連番_15))).toRString());
-                break;
-            case 連番_16:
-                builder = new RStringBuilder();
-                項目.setSabisuName17(get帳票上の文言(厚労省IF識別コード, new RString(連番_16)));
-                項目.setSabisuKaisu17(builder.append(単位)
-                        .append(dbt5207Entity.getServiceJokyo())
-                        .append(get単位1(厚労省IF識別コード, new RString(連番_16)))
-                        .append(get単位2(厚労省IF識別コード, new RString(連番_16))).toRString());
-                break;
-            case 連番_17:
-                builder = new RStringBuilder();
-                項目.setSabisuName18(get帳票上の文言(厚労省IF識別コード, new RString(連番_17)));
-                項目.setSabisuKaisu18(builder.append(単位)
-                        .append(dbt5207Entity.getServiceJokyo())
-                        .append(get単位1(厚労省IF識別コード, new RString(連番_17)))
-                        .append(get単位2(厚労省IF識別コード, new RString(連番_17))).toRString());
-                break;
-            case 連番_18:
-                builder = new RStringBuilder();
-                項目.setSabisuName19(get帳票上の文言(厚労省IF識別コード, new RString(連番_18)));
-                項目.setSabisuKaisu19(builder.append(単位)
-                        .append(dbt5207Entity.getServiceJokyo())
-                        .append(get単位1(厚労省IF識別コード, new RString(連番_18)))
-                        .append(get単位2(厚労省IF識別コード, new RString(連番_18))).toRString());
-                break;
-            case 連番_19:
-                builder = new RStringBuilder();
-                項目.setSabisuName20(get帳票上の文言(厚労省IF識別コード, new RString(連番_19)));
-                項目.setSabisuKaisu20(builder.append(単位)
-                        .append(dbt5207Entity.getServiceJokyo())
-                        .append(get単位1(厚労省IF識別コード, new RString(連番_19)))
-                        .append(get単位2(厚労省IF識別コード, new RString(連番_19))).toRString());
-                break;
-            case 連番_20:
-                builder = new RStringBuilder();
-                項目.setSabisuName21(get帳票上の文言(厚労省IF識別コード, new RString(連番_20)));
-                項目.setSabisuKaisu21(builder.append(単位)
-                        .append(dbt5207Entity.getServiceJokyo())
-                        .append(get単位1(厚労省IF識別コード, new RString(連番_20)))
-                        .append(get単位2(厚労省IF識別コード, new RString(連番_20))).toRString());
-                break;
-            default:
-                break;
-        }
-    }
-
-    private RString get帳票上の文言(Code 厚労省IF識別コード, RString 連番) {
-        if (A_99.equals(厚労省IF識別コード)) {
-            return GaikyoChosahyouServiceJyouk99A.toValue(連番).get名称();
-        } else if (A_06.equals(厚労省IF識別コード)) {
-            return GaikyoChosahyouServiceJyouk06A.toValue(連番).get名称();
-        } else if (A_02.equals(厚労省IF識別コード)) {
-            return GaikyoChosahyouServiceJyouk02A.toValue(連番).get名称();
-        } else if (A_09.equals(厚労省IF識別コード)) {
-            return GaikyoChosahyouServiceJyouk09A.toValue(連番).get名称();
-        } else if (B_09.equals(厚労省IF識別コード)) {
-            return GaikyoChosahyouServiceJyouk09B.toValue(連番).get名称();
-        }
-        return RString.EMPTY;
-    }
-
-    private RString get帳票上の文言状況フラグ(Code 厚労省IF識別コード, RString 連番) {
-        if (A_99.equals(厚労省IF識別コード)) {
-            return GaikyoChosahyouServiceJyoukFlg99A.toValue(連番).get名称();
-        } else if (A_06.equals(厚労省IF識別コード)) {
-            return GaikyoChosahyouServiceJyoukFlg06A.toValue(連番).get名称();
-        } else if (A_02.equals(厚労省IF識別コード)) {
-            return GaikyoChosahyouServiceJyoukFlg02A.toValue(連番).get名称();
-        } else if (A_09.equals(厚労省IF識別コード)) {
-            return GaikyoChosahyouServiceJyoukFlg09A.toValue(連番).get名称();
-        } else if (B_09.equals(厚労省IF識別コード)) {
-            return GaikyoChosahyouServiceJyoukFlg09B.toValue(連番).get名称();
-        }
-        return RString.EMPTY;
-    }
-
-    private RString get単位1(Code 厚労省IF識別コード, RString 連番) {
-        if (A_99.equals(厚労省IF識別コード)) {
-            return GaikyoChosahyouServiceJyouk99A.toValue(連番).get単位1();
-        } else if (A_06.equals(厚労省IF識別コード)) {
-            return GaikyoChosahyouServiceJyouk06A.toValue(連番).get単位1();
-        } else if (A_02.equals(厚労省IF識別コード)) {
-            return GaikyoChosahyouServiceJyouk02A.toValue(連番).get単位1();
-        } else if (A_09.equals(厚労省IF識別コード)) {
-            return GaikyoChosahyouServiceJyouk09A.toValue(連番).get単位1();
-        } else if (B_09.equals(厚労省IF識別コード)) {
-            return GaikyoChosahyouServiceJyouk09B.toValue(連番).get単位1();
-        }
-        return RString.EMPTY;
-    }
-
-    private RString get単位2(Code 厚労省IF識別コード, RString 連番) {
-        if (A_99.equals(厚労省IF識別コード)) {
-            return GaikyoChosahyouServiceJyouk99A.toValue(連番).get単位2();
-        } else if (A_06.equals(厚労省IF識別コード)) {
-            return GaikyoChosahyouServiceJyouk06A.toValue(連番).get単位2();
-        } else if (A_02.equals(厚労省IF識別コード)) {
-            return GaikyoChosahyouServiceJyouk02A.toValue(連番).get単位2();
-        } else if (A_09.equals(厚労省IF識別コード)) {
-            return GaikyoChosahyouServiceJyouk09A.toValue(連番).get単位2();
-        } else if (B_09.equals(厚労省IF識別コード)) {
-            return GaikyoChosahyouServiceJyouk09B.toValue(連番).get単位2();
-        }
-        return RString.EMPTY;
-    }
-
-//    private void setサービス(IchijihanteikekkahyoA3Entity 項目, ShinsakaiSiryoKyotsuEntity 共通情報) {
-//        if (共通情報 == null) {
-//            項目.set施設名テキスト(RString.EMPTY);
-//            項目.set施設名イメージ(RString.EMPTY);
-//            項目.set住所テキスト(RString.EMPTY);
-//            項目.set住所イメージ(RString.EMPTY);
-//            項目.set電話番号テキスト(RString.EMPTY);
-//            項目.set電話番号イメージ(RString.EMPTY);
-//        } else {
-//            if (!RString.isNullOrEmpty(共通情報.getRiyoShisetsuShimei())) {
-//                項目.set施設名テキスト(共通情報.getRiyoShisetsuShimei());
-//            } else {
-//                項目.set施設名イメージ(共有ファイルを引き出す(共通情報.getImageSharedFileId(), 施設名ファイル名));
-//            }
-//            if (!RString.isNullOrEmpty(共通情報.getRiyoShisetsuJusho())) {
-//                項目.set住所テキスト(共通情報.getRiyoShisetsuJusho());
-//            } else {
-//                項目.set住所イメージ(共有ファイルを引き出す(共通情報.getImageSharedFileId(), 住所ファイル名));
-//            }
-//            if (!RString.isNullOrEmpty(共通情報.getRiyoShisetsuTelNo())) {
-//                項目.set電話番号テキスト(共通情報.getRiyoShisetsuTelNo());
-//            } else {
-//                項目.set電話番号イメージ(共有ファイルを引き出す(共通情報.getImageSharedFileId(), 電話ファイル名));
-//            }
-//        }
-//    }
 }

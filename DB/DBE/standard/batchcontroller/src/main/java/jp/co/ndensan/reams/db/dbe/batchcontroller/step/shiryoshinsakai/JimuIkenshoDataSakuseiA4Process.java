@@ -61,9 +61,10 @@ public class JimuIkenshoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsakai
     protected IBatchReader createReader() {
         return new BatchDbReader(SELECT_JIMUWARIATEJOHO, myBatisParameter);
     }
-
+    
     @Override
     protected void usualProcess(ShinsakaiSiryoKyotsuEntity entity) {
+        entity.setJimukyoku(true);
         business = new JimuShinsakaiWariateJohoBusiness(entity);
         Shujiiikensho1A4Report reportA4 = new Shujiiikensho1A4Report(business);
         reportA4.writeBy(reportSourceWriterA4);

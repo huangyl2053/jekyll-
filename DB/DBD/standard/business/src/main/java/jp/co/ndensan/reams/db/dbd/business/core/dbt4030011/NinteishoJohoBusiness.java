@@ -5,33 +5,33 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.core.dbt4030011;
 
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd4030011.NinteishoJohoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd4030011.NinshoshaDenshiKoinDataEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定書情報を取得するクラス
  *
  * @reamsid_L DBD-3860-030 donghj
  */
+@lombok.Getter
+@lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class NinteishoJohoBusiness {
 
-    private final NinteishoJohoEntity entity;
-
-    /**
-     * 認定書情報を返します。
-     *
-     * @param entity NinteishoJohoEntity
-     */
-    public NinteishoJohoBusiness(NinteishoJohoEntity entity) {
-        this.entity = entity;
-    }
-
-    /**
-     * 認定書情報Entityを返します。
-     *
-     * @return NinteishoJohoEntity
-     */
-    public NinteishoJohoEntity getEntity() {
-        return entity;
-    }
+    private HihokenshaNo 被保険者番号;
+    private FlexibleDate 発行日;
+    private RString 申請者;
+    private RString 申請者住所;
+    private RString 申請者氏名;
+    private RString 障害理由区分;
+    private RString 障害理由内容;
+    private FlexibleDate 要介護認定日;
+    private FlexibleDate 申告年;
+    private RString 文書番号;
+    private UaFt200FindShikibetsuTaishoEntity psmEntity;
+    private NinshoshaDenshiKoinDataEntity ninshoshaDenshiKoinDataEntity;
 
 }

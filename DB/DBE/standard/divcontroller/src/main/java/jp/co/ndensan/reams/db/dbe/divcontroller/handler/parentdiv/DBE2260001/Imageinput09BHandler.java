@@ -50,7 +50,6 @@ public class Imageinput09BHandler {
                 item = set09B記入項目1(data, item);
                 item = set09B記入項目2(data, item);
                 item = set09B記入項目3(data, item);
-                item = set09B記入項目4(data, item);
                 builder.setShujiiIkenshoKinyuItem(item.modifiedModel());
             }
             for (ShujiiIkenshoIkenItem 意見項目 : 意見項目List) {
@@ -1407,8 +1406,7 @@ public class Imageinput09BHandler {
         return item;
     }
 
-    private ShujiiIkenshoKinyuItem set09B記入項目3(
-            TorokuData data,
+    private ShujiiIkenshoKinyuItem set09B記入項目3(TorokuData data,
             ShujiiIkenshoKinyuItem item) {
         if (IkenshoKinyuMapping09B.関節の痛み.getコード().equals(new RString(item.get連番()))) {
             item = item.createBuilderForEdit().set記入項目(data.get間接の痛み()).build();
@@ -1442,12 +1440,6 @@ public class Imageinput09BHandler {
             item = item.createBuilderForEdit().set記入項目(data.get血圧()).build();
             記入項目連番レスト.add(IkenshoKinyuMapping09B.介護サービスの留意事項_血圧.getコード());
         }
-        return item;
-    }
-
-    private ShujiiIkenshoKinyuItem set09B記入項目4(
-            TorokuData data,
-            ShujiiIkenshoKinyuItem item) {
         if (IkenshoKinyuMapping09B.介護サービスの留意事項_嚥下.getコード().equals(new RString(item.get連番()))) {
             item = item.createBuilderForEdit().set記入項目(data.get嚥下()).build();
             記入項目連番レスト.add(IkenshoKinyuMapping09B.介護サービスの留意事項_嚥下.getコード());
@@ -1475,8 +1467,7 @@ public class Imageinput09BHandler {
         return item;
     }
 
-    private ShujiiIkenshoIkenItem set09B意見項目1(
-            TorokuData data,
+    private ShujiiIkenshoIkenItem set09B意見項目1(TorokuData data,
             ShujiiIkenshoIkenItem item) {
         if (IkenshoKomokuMapping09B.点滴の管理.getコード().equals(new RString(item.get連番()))) {
             item = item.createBuilderForEdit().set意見項目(data.get点滴の管理()).build();

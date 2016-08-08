@@ -16,8 +16,9 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 全国保険者マスタ更新のHandlerです。
  *
- * @author ChenXiangyu
+ * @reamsid_L DBU-4230-010 chenxiangyu
  */
 public class ZenkokuHokenshaMasterKoshinHandler {
 

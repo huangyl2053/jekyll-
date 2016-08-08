@@ -39,7 +39,7 @@ public class JigyohokokuCompYoshiki26Editor implements IJigyohokokuCompYoshiki26
     /**
      * インスタンスを生成します。
      *
-     * @param item JigyohokokuCompYoshiki
+     * @param item JigyohokokuCompYoshiki26
      */
     protected JigyohokokuCompYoshiki26Editor(JigyohokokuCompYoshiki26 item) {
         this.item = item;

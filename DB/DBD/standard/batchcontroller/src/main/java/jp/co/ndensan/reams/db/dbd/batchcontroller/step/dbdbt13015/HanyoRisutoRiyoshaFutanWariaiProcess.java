@@ -108,6 +108,7 @@ public class HanyoRisutoRiyoshaFutanWariaiProcess extends BatchProcessBase<Hanyo
     private static final RString JUSYO = new RString("住所");
     private static final RString NENLEI = new RString("年齢");
     private static final RString SEINENGAPPI = new RString("生年月日");
+    private static final RString SAI = new RString("歳");
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hanyorisutoriyoshafutanwariai."
             + "IHanyoRisutoRiyoshaFutanWariaiMapper.get汎用リスト");
@@ -568,12 +569,14 @@ public class HanyoRisutoRiyoshaFutanWariaiProcess extends BatchProcessBase<Hanyo
             builder.append(COLON);
             if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom()) {
                 builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom().toString()));
+                builder.append(SAI);
             }
             builder.append(SPACE);
             builder.append(カラ);
             if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo()) {
                 builder.append(SPACE);
                 builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo().toString()));
+                builder.append(SAI);
             }
         } else if (NenreiSoChushutsuHoho.生年月日範囲.equals(processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun())) {
             builder.append(SEINENGAPPI);

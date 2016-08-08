@@ -48,6 +48,8 @@ public class JigyohokokuGeppoYoshiki25BodyData {
 
     /**
      *
+     * コンストラクタです。
+     *
      * @param listList1_1 empty
      * @param listList1_2 要支援１
      * @param listList1_3 要支援２

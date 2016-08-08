@@ -27,7 +27,7 @@ public class JigyohokokuCompYoshiki26Report extends Report<JigyohokokuCompYoshik
     /**
      * インスタンスを生成します。
      *
-     * @param data JigyohokokuCompYoshiki
+     * @param data JigyohokokuCompYoshiki26
      */
     public JigyohokokuCompYoshiki26Report(JigyohokokuCompYoshiki26 data) {
         this.data = data;

@@ -168,31 +168,36 @@ public class ShiharaiIchijiSashitomeTsuchishoEditor implements IShiharaiIchijiSa
 
     private void setLayer1(ShiharaiIchijiSashitomeTsuchishoReportSource source) {
         EditedKojin 編集後個人 = getEditedKojin(this.個人情報, this.帳票制御共通, this.地方公共団体);
-        RString 被保険者番号 = this.帳票情報.get被保険者番号().getColumnValue();
+        if (null != 編集後個人) {
+            source.hihokenshaName = 編集後個人.get名称().getName().getColumnValue();
+        }
         source.bunshoNo = this.文書番号;
-        source.hihokenshaName = 編集後個人.get名称().getName().getColumnValue();
-        source.hihokenshaNo1 = 被保険者番号.substring(0, NOCOUNT_1);
-        source.hihokenshaNo2 = 被保険者番号.substring(NOCOUNT_1, NOCOUNT_2);
-        source.hihokenshaNo3 = 被保険者番号.substring(NOCOUNT_2, NOCOUNT_3);
-        source.hihokenshaNo4 = 被保険者番号.substring(NOCOUNT_3, NOCOUNT_4);
-        source.hihokenshaNo5 = 被保険者番号.substring(NOCOUNT_4, NOCOUNT_5);
-        source.hihokenshaNo6 = 被保険者番号.substring(NOCOUNT_5, NOCOUNT_6);
-        source.hihokenshaNo7 = 被保険者番号.substring(NOCOUNT_6, NOCOUNT_7);
-        source.hihokenshaNo8 = 被保険者番号.substring(NOCOUNT_7, NOCOUNT_8);
-        source.hihokenshaNo9 = 被保険者番号.substring(NOCOUNT_8, NOCOUNT_9);
-        source.hihokenshaNo10 = 被保険者番号.substring(NOCOUNT_9, NOCOUNT_10);
-
-        RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-        if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
-            source.tsuchibun1 = 通知書定型文リスト.get(0);
+        if (null != 帳票情報) {
+            RString 被保険者番号 = this.帳票情報.get被保険者番号().getColumnValue();
+            source.hihokenshaNo1 = 被保険者番号.substring(0, NOCOUNT_1);
+            source.hihokenshaNo2 = 被保険者番号.substring(NOCOUNT_1, NOCOUNT_2);
+            source.hihokenshaNo3 = 被保険者番号.substring(NOCOUNT_2, NOCOUNT_3);
+            source.hihokenshaNo4 = 被保険者番号.substring(NOCOUNT_3, NOCOUNT_4);
+            source.hihokenshaNo5 = 被保険者番号.substring(NOCOUNT_4, NOCOUNT_5);
+            source.hihokenshaNo6 = 被保険者番号.substring(NOCOUNT_5, NOCOUNT_6);
+            source.hihokenshaNo7 = 被保険者番号.substring(NOCOUNT_6, NOCOUNT_7);
+            source.hihokenshaNo8 = 被保険者番号.substring(NOCOUNT_7, NOCOUNT_8);
+            source.hihokenshaNo9 = 被保険者番号.substring(NOCOUNT_8, NOCOUNT_9);
+            source.hihokenshaNo10 = 被保険者番号.substring(NOCOUNT_9, NOCOUNT_10);
         }
-        if (null != 通知書定型文リスト && 通知書定型文リスト.size() >= 2) {
-            source.tsuchibun2 = 通知書定型文リスト.get(1);
-        }
-        if (null != 通知書定型文リスト && new RString("1").equals(定型文文字サイズ)) {
-            source.renrakusakiHoka = 通知書定型文リスト.get(2);
-        } else {
-            source.renrakusakiHoka = RString.EMPTY;
+        if (null != 帳票制御共通) {
+            RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
+            if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
+                source.tsuchibun1 = 通知書定型文リスト.get(0);
+            }
+            if (null != 通知書定型文リスト && 通知書定型文リスト.size() >= 2) {
+                source.tsuchibun2 = 通知書定型文リスト.get(1);
+            }
+            if (null != 通知書定型文リスト && new RString("1").equals(定型文文字サイズ)) {
+                source.renrakusakiHoka = 通知書定型文リスト.get(2);
+            } else {
+                source.renrakusakiHoka = RString.EMPTY;
+            }
         }
         RString サービス種類コード = RString.EMPTY;
         for (int i = 0; i < NOCOUNT_13 || i < 償還払集計情報リスト.size(); i++) {
@@ -209,66 +214,74 @@ public class ShiharaiIchijiSashitomeTsuchishoEditor implements IShiharaiIchijiSa
         source.nendoTitle1 = 最新賦課年度.minusYear(2).toDateString();
         source.nendoTitle2 = 最新賦課年度.minusYear(1).toDateString();
         source.nendoTitle3 = 最新賦課年度.toDateString();
-        ShiharaiHohoHenkoTaino 支払方法変更滞納 = this.帳票情報.getShiharaiHohoHenkoTainoList().get(index);
-        if (null != 年度1リスト && 年度1リスト.size() > index) {
-            source.listTainoJokyo_1 = 支払方法変更滞納.get収納期_月();
-            source.listTainoJokyo_2 = DecimalFormatter.toコンマ区切りRString(
-                    支払方法変更滞納.get収入額(支払方法変更滞納.get調定額(), 支払方法変更滞納.get滞納額()), 0);
-            source.listTainoJokyo_3 = DecimalFormatter.toコンマ区切りRString(支払方法変更滞納.get滞納額(), 0);
-            source.hokenGokei1 = DecimalFormatter.toコンマ区切りRString(get保険料合計(), 0);
-            source.entaiGokei1 = DecimalFormatter.toコンマ区切りRString(get滞納額合計(), 0);
-        }
-        if (null != 年度2リスト && 年度2リスト.size() > index) {
-            source.listTainoJokyo_4 = 支払方法変更滞納.get収納期_月();
-            source.listTainoJokyo_5 = DecimalFormatter.toコンマ区切りRString(
-                    支払方法変更滞納.get収入額(支払方法変更滞納.get調定額(), 支払方法変更滞納.get滞納額()), 0);
-            source.listTainoJokyo_6 = DecimalFormatter.toコンマ区切りRString(支払方法変更滞納.get滞納額(), 0);
-            source.hokenGokei2 = DecimalFormatter.toコンマ区切りRString(get保険料合計(), 0);
-            source.entaiGokei2 = DecimalFormatter.toコンマ区切りRString(get滞納額合計(), 0);
-        }
-        if (null != 年度3リスト && 年度3リスト.size() > index) {
-            source.listTainoJokyo_7 = 支払方法変更滞納.get収納期_月();
-            source.listTainoJokyo_8 = DecimalFormatter.toコンマ区切りRString(
-                    支払方法変更滞納.get収入額(支払方法変更滞納.get調定額(), 支払方法変更滞納.get滞納額()), 0);
-            source.listTainoJokyo_9 = DecimalFormatter.toコンマ区切りRString(支払方法変更滞納.get滞納額(), 0);
-            source.hokenGokei3 = DecimalFormatter.toコンマ区切りRString(get保険料合計(), 0);
-            source.entaiGokei3 = DecimalFormatter.toコンマ区切りRString(get滞納額合計(), 0);
-        }
-        source.hanteiYMD = 支払方法変更滞納.get滞納判定年月日().wareki().toDateString();
-        source.izen_hokenryo = new RString(支払方法変更滞納.get滞納額().toString());
-        if (null != 通知書定型文リスト && 通知書定型文リスト.size() >= 2) {
-            source.tsuchibun2 = 通知書定型文リスト.get(1);
+        if (null != 帳票情報.getShiharaiHohoHenkoTainoList()) {
+            ShiharaiHohoHenkoTaino 支払方法変更滞納 = this.帳票情報.getShiharaiHohoHenkoTainoList().get(index);
+            if (null != 年度1リスト && 年度1リスト.size() > index) {
+                source.listTainoJokyo_1 = 支払方法変更滞納.get収納期_月();
+                source.listTainoJokyo_2 = DecimalFormatter.toコンマ区切りRString(
+                        支払方法変更滞納.get収入額(支払方法変更滞納.get調定額(), 支払方法変更滞納.get滞納額()), 0);
+                source.listTainoJokyo_3 = DecimalFormatter.toコンマ区切りRString(支払方法変更滞納.get滞納額(), 0);
+                source.hokenGokei1 = DecimalFormatter.toコンマ区切りRString(get保険料合計(), 0);
+                source.entaiGokei1 = DecimalFormatter.toコンマ区切りRString(get滞納額合計(), 0);
+            }
+            if (null != 年度2リスト && 年度2リスト.size() > index) {
+                source.listTainoJokyo_4 = 支払方法変更滞納.get収納期_月();
+                source.listTainoJokyo_5 = DecimalFormatter.toコンマ区切りRString(
+                        支払方法変更滞納.get収入額(支払方法変更滞納.get調定額(), 支払方法変更滞納.get滞納額()), 0);
+                source.listTainoJokyo_6 = DecimalFormatter.toコンマ区切りRString(支払方法変更滞納.get滞納額(), 0);
+                source.hokenGokei2 = DecimalFormatter.toコンマ区切りRString(get保険料合計(), 0);
+                source.entaiGokei2 = DecimalFormatter.toコンマ区切りRString(get滞納額合計(), 0);
+            }
+            if (null != 年度3リスト && 年度3リスト.size() > index) {
+                source.listTainoJokyo_7 = 支払方法変更滞納.get収納期_月();
+                source.listTainoJokyo_8 = DecimalFormatter.toコンマ区切りRString(
+                        支払方法変更滞納.get収入額(支払方法変更滞納.get調定額(), 支払方法変更滞納.get滞納額()), 0);
+                source.listTainoJokyo_9 = DecimalFormatter.toコンマ区切りRString(支払方法変更滞納.get滞納額(), 0);
+                source.hokenGokei3 = DecimalFormatter.toコンマ区切りRString(get保険料合計(), 0);
+                source.entaiGokei3 = DecimalFormatter.toコンマ区切りRString(get滞納額合計(), 0);
+            }
+            source.hanteiYMD = 支払方法変更滞納.get滞納判定年月日().wareki().toDateString();
+            source.izen_hokenryo = new RString(支払方法変更滞納.get滞納額().toString());
+            if (null != 通知書定型文リスト && 通知書定型文リスト.size() >= 2) {
+                source.tsuchibun2 = 通知書定型文リスト.get(1);
+            }
         }
     }
 
     private void setLayerFontLarge(ShiharaiIchijiSashitomeTsuchishoReportSource source) {
-        RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-        if (null != 通知書定型文リスト && new RString("2").equals(定型文文字サイズ)) {
-            source.renrakusakiHokaLarge = 通知書定型文リスト.get(2);
-        } else {
-            source.renrakusakiHokaLarge = RString.EMPTY;
+        if (null != 帳票制御共通) {
+            RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
+            if (null != 通知書定型文リスト && new RString("2").equals(定型文文字サイズ)) {
+                source.renrakusakiHokaLarge = 通知書定型文リスト.get(2);
+            } else {
+                source.renrakusakiHokaLarge = RString.EMPTY;
+            }
         }
     }
 
     private void setLayerFontKonzai(ShiharaiIchijiSashitomeTsuchishoReportSource source) {
-        RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-        if (null != 通知書定型文リスト && new RString("3").equals(定型文文字サイズ)) {
-            source.renrakusakiHokaJodanSmall = 通知書定型文リスト.get(2);
-            source.renrakusakiHokaGedanLarge = 通知書定型文リスト.get(NOCOUNT_3);
-        } else {
-            source.renrakusakiHokaJodanSmall = RString.EMPTY;
-            source.renrakusakiHokaGedanLarge = RString.EMPTY;
+        if (null != 帳票制御共通) {
+            RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
+            if (null != 通知書定型文リスト && new RString("3").equals(定型文文字サイズ)) {
+                source.renrakusakiHokaJodanSmall = 通知書定型文リスト.get(2);
+                source.renrakusakiHokaGedanLarge = 通知書定型文リスト.get(NOCOUNT_3);
+            } else {
+                source.renrakusakiHokaJodanSmall = RString.EMPTY;
+                source.renrakusakiHokaGedanLarge = RString.EMPTY;
+            }
         }
     }
 
     private void setLayerFontKonzai2(ShiharaiIchijiSashitomeTsuchishoReportSource source) {
-        RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-        if (null != 通知書定型文リスト && new RString("4").equals(定型文文字サイズ)) {
-            source.renrakusakiHokaJodanLarge = 通知書定型文リスト.get(2);
-            source.renrakusakiHokaGedanSmall = 通知書定型文リスト.get(NOCOUNT_3);
-        } else {
-            source.renrakusakiHokaJodanLarge = RString.EMPTY;
-            source.renrakusakiHokaGedanSmall = RString.EMPTY;
+        if (null != 帳票制御共通) {
+            RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
+            if (null != 通知書定型文リスト && new RString("4").equals(定型文文字サイズ)) {
+                source.renrakusakiHokaJodanLarge = 通知書定型文リスト.get(2);
+                source.renrakusakiHokaGedanSmall = 通知書定型文リスト.get(NOCOUNT_3);
+            } else {
+                source.renrakusakiHokaJodanLarge = RString.EMPTY;
+                source.renrakusakiHokaGedanSmall = RString.EMPTY;
+            }
         }
     }
 

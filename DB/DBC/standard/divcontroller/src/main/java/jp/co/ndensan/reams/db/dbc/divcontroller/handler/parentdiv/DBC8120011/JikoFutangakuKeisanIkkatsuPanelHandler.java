@@ -45,7 +45,6 @@ public class JikoFutangakuKeisanIkkatsuPanelHandler {
     private static final RString 被保険者番号入力 = new RString("1210431");
     private static final RString NUM_4 = new RString("4");
     private static final RString NUM_10 = new RString("10");
-   
 
     /**
      * コンストラクタです。
@@ -75,16 +74,19 @@ public class JikoFutangakuKeisanIkkatsuPanelHandler {
         KokuhorenInterfaceKanri 国保連インターフェース管理;
         KokuhorenInterfaceKanriManager 国保連インターフェース管理Manager = new KokuhorenInterfaceKanriManager();
         国保連インターフェース管理 = 国保連インターフェース管理Manager.get新国保連インターフェース管理(処理状態区分, 交換情報識別番号);
-        FlexibleYearMonth 受取年月TXT = 国保連インターフェース管理.get処理年月();
-        div.getTxtUketoriYM().setValue(new RDate(受取年月TXT.toString()));
-        //TODO　QA.1050
+        if (国保連インターフェース管理 != null) {
+            FlexibleYearMonth 受取年月TXT = 国保連インターフェース管理.get処理年月();
+            div.getTxtUketoriYM().setValue(new RDate(受取年月TXT.toString()));
+        } else {
+            div.getTxtUketoriYM().setValue(null);
+        }
         div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200203.getReportId());
         RString システム日付Year = RDate.getNowDate().getYear().toDateString();
         RString システム日付 = RDate.getNowDate().toDateString();
         int difference = Integer.parseInt(システム日付Year.toString()) - Integer.parseInt(開始年度.toString());
         RString システム日付MonthDay = new RString(システム日付.toString().substring(Integer.parseInt(NUM_4.toString())));
         List<KeyValueDataSource> datasource;
-        if (システム日付MonthDay.compareTo(開始MONTHDAY) > 0 && システム日付MonthDay.compareTo(終了MONTHDAY) < 0) {
+        if (システム日付MonthDay.compareTo(開始MONTHDAY) >= 0 && システム日付MonthDay.compareTo(終了MONTHDAY) <= 0) {
             datasource = insertIntoDatasource(difference - 1);
         } else {
             datasource = insertIntoDatasource(difference);
@@ -139,7 +141,7 @@ public class JikoFutangakuKeisanIkkatsuPanelHandler {
      * 被保険者番号のonBlur事件です。
      */
     public void onBlur被保険者番号() {
-        
+
         if (div.getTxtHihokenshaNo().getValue().toString().length() < Integer.parseInt(NUM_10.toString())
                 && !div.getTxtHihokenshaNo().getValue().toString().isEmpty()) {
             div.getTxtHihokenshaNo().setValue(div.getTxtHihokenshaNo().getValue().
