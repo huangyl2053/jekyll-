@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaShubetsu;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaShubetsuType;
 import jp.co.ndensan.reams.ur.urz.definition.core.zenkokujusho.ZenkokuJushoDataKubunType;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrNotificationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.hokenja.HokenjaManagerFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.hokenja.HokenjaSearchItem;
@@ -217,6 +218,8 @@ public class ZenkokuHokenshaMasterKoshin {
             }
             save(div);
             RealInitialLocker.release(前排他ロックキー);
+            div.getCcdKanryoMessage().setSuccessMessage(new RString(UrNotificationMessages.保存終了.getMessage().evaluate()),
+                    RString.EMPTY, RString.EMPTY);
             return ResponseData.of(div).setState(DBU0800011StateName.完了);
         }
         return ResponseData.of(div).respond();
