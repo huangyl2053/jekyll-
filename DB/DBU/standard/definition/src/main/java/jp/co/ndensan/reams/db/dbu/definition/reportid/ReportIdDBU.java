@@ -129,7 +129,12 @@ public enum ReportIdDBU {
     /**
      * 事業状況報告年報（様式１・２　所得段階）の帳票ID。
      */
-    DBU301125(new ReportId("DBU301125_JigyohokokuNenpoKyuyoshiki1_2015"), new RString("事業状況報告年報（様式１・２　所得段階）"));
+    DBU301125(new ReportId("DBU301125_JigyohokokuNenpoKyuyoshiki1_2015"), new RString("事業状況報告年報（様式１・２　所得段階）")),
+    /**
+     * 事業状況報告年報（様式１・２　市町村特別給付の帳票ＩＤです。
+     */
+    DBU300121(
+    new ReportId("DBU300121_JigyohokokuNenpoYoshiki2_8"), new RString("事業状況報告年報（様式１・２　市町村特別給付"));
 
     private final ReportId reportId;
 
