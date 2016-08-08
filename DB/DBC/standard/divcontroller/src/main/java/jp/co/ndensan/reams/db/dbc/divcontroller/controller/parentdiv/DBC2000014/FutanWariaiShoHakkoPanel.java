@@ -94,9 +94,9 @@ public class FutanWariaiShoHakkoPanel {
     private FutanwariaishoHakkoBatchParameter setBatchParameter(FutanWariaiShoHakkoPanelDiv div) {
         FutanwariaishoHakkoIkkatsu futanwariaishoHakkoIkkatsu = new FutanwariaishoHakkoIkkatsu();
         RDateTime 抽出期間開始日時 = RDateTime.of(div.getPanelKikan().getTxtKonkaiKaishiDate().getValue().toDateString(),
-                div.getPanelKikan().getTxtKonkaiKaishiTime().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm));
+                div.getPanelKikan().getTxtKonkaiKaishiTime().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
         RDateTime 抽出期間終了日時 = RDateTime.of(div.getPanelKikan().getTxtKonkaiShuryoDate().getValue().toDateString(),
-                div.getPanelKikan().getTxtKonkaiShuryoTime().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm));
+                div.getPanelKikan().getTxtKonkaiShuryoTime().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
         RString 出力順 = div.getCcdShutsuryokuJun().get出力順ID() == null ? RString.EMPTY
                 : new RString(div.getCcdShutsuryokuJun().get出力順ID());
         return futanwariaishoHakkoIkkatsu.getBatchiParameter(
