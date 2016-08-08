@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.business.core.ketteitsuchishosakusei.param;
 
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -19,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakuJigyoServicehiShikyuKetteiTsuchishoParameter {
+
     private RString 抽出モード;
     private RDate 抽出条件日付From;
     private RDate 抽出条件日付To;
@@ -26,7 +26,6 @@ public class KogakuJigyoServicehiShikyuKetteiTsuchishoParameter {
     private RString 印書;
     private RString 高額自動償還;
     private RDate 発行日;
-    private RDate 支払い予定日;
     private RString 文書番号;
     private RString テスト出力フラグ;
     private RString 決定日一括更新区分;

@@ -21,25 +21,25 @@ public class TsuikashiryokagamiA3ReportSource implements IReportSource {
     @ReportItem(name = "tsuchibun", order = 2)
     public RString tsuchibun;
     @ReportItem(name = "ShinsainName1", length = 20, order = 3)
-    public RString ShinsainName1;
+    public RString shinsainName1;
     @ReportItem(name = "ShinsainName2", length = 20, order = 4)
-    public RString ShinsainName2;
+    public RString shinsainName2;
     @ReportItem(name = "ShinsainName3", length = 20, order = 5)
-    public RString ShinsainName3;
+    public RString shinsainName3;
     @ReportItem(name = "ShinsainName4", length = 20, order = 6)
-    public RString ShinsainName4;
+    public RString shinsainName4;
     @ReportItem(name = "ShinsainName5", length = 20, order = 7)
-    public RString ShinsainName5;
+    public RString shinsainName5;
     @ReportItem(name = "ShinsainName6", length = 20, order = 8)
-    public RString ShinsainName6;
+    public RString shinsainName6;
     @ReportItem(name = "shinsakaiKaisaiYMD", length = 21, order = 9)
     public RString shinsakaiKaisaiYMD;
     @ReportItem(name = "ShinsainName7", length = 20, order = 10)
-    public RString ShinsainName7;
+    public RString shinsainName7;
     @ReportItem(name = "gogitaiNo", length = 2, order = 11)
     public RString gogitaiNo;
     @ReportItem(name = "ShinsainName8", length = 20, order = 12)
-    public RString ShinsainName8;
+    public RString shinsainName8;
     @ReportItem(name = "shinsakaiTsuikasha", length = 2, order = 13)
     public RString shinsakaiTsuikasha;
     @ReportItem(name = "listShinsei_1", length = 2, order = 14)

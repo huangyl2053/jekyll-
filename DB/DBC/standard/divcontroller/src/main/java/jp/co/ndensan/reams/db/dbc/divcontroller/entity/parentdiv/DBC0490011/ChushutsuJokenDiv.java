@@ -4,18 +4,22 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0490011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 
 /**
- * ChushutsuJoken のクラスファイル 
- * 
+ * ChushutsuJoken のクラスファイル
+ *
  * @reamsid_L DBC-2000-010 chenhui
  */
 public class ChushutsuJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -138,7 +142,7 @@ public class ChushutsuJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtUketukebi(TextBoxDateRange txtUketukebi) {
+    public void setTxtUketukebi(TextBoxDateRange txtUketukebi) {
         this.getChushutsubiNyuryokuEria().setTxtUketukebi(txtUketukebi);
     }
 
@@ -148,7 +152,7 @@ public class ChushutsuJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKetteibi(TextBoxDateRange txtKetteibi) {
+    public void setTxtKetteibi(TextBoxDateRange txtKetteibi) {
         this.getChushutsubiNyuryokuEria().setTxtKetteibi(txtKetteibi);
     }
 
@@ -158,7 +162,7 @@ public class ChushutsuJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKetteishaUketukeNengetsu(TextBoxDate txtKetteishaUketukeNengetsu) {
+    public void setTxtKetteishaUketukeNengetsu(TextBoxDate txtKetteishaUketukeNengetsu) {
         this.getChushutsubiNyuryokuEria().setTxtKetteishaUketukeNengetsu(txtKetteishaUketukeNengetsu);
     }
 
