@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.source.kojinshinchokujokyohyo.KojinShinchokuJokyohyoReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -109,7 +110,7 @@ class KojinShinchokuJokyohyoHeadEditor implements IKojinShinchokuJokyohyoEditor 
             source.birthYMD = birthYMD.toRString();
         }
         source.age = item.getAge();
-        source.yubinNo1 = item.getYubinNo1();
+        source.yubinNo1 = editedYubinNo(item.getYubinNo1());
         source.hihokenshaJusho = item.getHihokenshaJusho();
         source.telNo1 = item.getTelNo1();
         source.shinseiRiyu = item.getShinseiRiyu();
@@ -117,12 +118,16 @@ class KojinShinchokuJokyohyoHeadEditor implements IKojinShinchokuJokyohyoEditor 
         source.shinseiDaikoJigyoshaName = item.getShinseiDaikoJigyoshaName();
         source.shinseishaKankei = item.getShinseishaKankei();
         source.honninKankei = item.getHonninKankei();
-        source.yubinNo2 = item.getYubinNo2();
+        source.yubinNo2 = editedYubinNo(item.getYubinNo2());
         source.shinseishaJusho = item.getShinseishaJusho();
         source.telNo2 = item.getTelNo2();
         source.shisetsuName = item.getShisetsuName();
         source.shisetsujusho = item.getShisetsujusho();
         source.telNo3 = item.getTelNo3();
         return source;
+    }
+
+    private RString editedYubinNo(RString yubinNo) {
+        return yubinNo == null ? RString.EMPTY : new YubinNo(yubinNo).getEditedYubinNo();
     }
 }

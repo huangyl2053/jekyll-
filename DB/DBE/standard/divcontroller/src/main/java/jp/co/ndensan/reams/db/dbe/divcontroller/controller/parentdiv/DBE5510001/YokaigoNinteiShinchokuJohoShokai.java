@@ -87,6 +87,9 @@ public class YokaigoNinteiShinchokuJohoShokai {
         if (searchResult.records().isEmpty()) {
             return ResponseData.of(div).addMessage(DbzNotificationMessage.該当データなし.getMessage()).respond();
         }
+        div.getSerchFromHohokensha().setIsOpen(false);
+        div.getSerchFromShinchokuJokyo().setIsOpen(false);
+        div.getShinseiJohoIchiran().setIsOpen(true);
         return ResponseData.of(div).respond();
     }
 
@@ -132,11 +135,6 @@ public class YokaigoNinteiShinchokuJohoShokai {
      * @return ResponseData<SourceDataCollection>
      */
     public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> btnPrintAfter(YokaigoNinteiShinchokuJohoShokaiDiv div) {
-// 挙動があやしいため、一旦、コメントアウト
-//        if (!ResponseHolder.isReRequest()) {
-//            return ResponseData.of(div).addMessage(
-//                    UrInformationMessages.正常終了.getMessage().replace("進捗状況一覧印刷")).respond();
-//        }
         return ResponseData.of(div).respond();
     }
 

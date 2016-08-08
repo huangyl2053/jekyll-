@@ -223,36 +223,6 @@
             <if test="useShishoCode">
                  AND DbT5101NinteiShinseiJoho."shishoCode" = #{shishoCode}
             </if>
-            <choose>
-                <when test="useHihokenshaName">
-                      <if test="is前方一致">
-                         AND DbT5101NinteiShinseiJoho."hihokenshaName" LIKE #{hihokenshaName} || '%'
-                      </if>
-                      <if test="is後方一致">
-                          AND DbT5101NinteiShinseiJoho."hihokenshaName" LIKE '%' || #{hihokenshaName}
-                      </if>
-                      <if test="is部分一致">
-                          AND DbT5101NinteiShinseiJoho."hihokenshaName" LIKE '%' || #{hihokenshaName} || '%'
-                      </if>
-                      <if test="is完全一致">
-                          AND DbT5101NinteiShinseiJoho."hihokenshaName" = #{hihokenshaName}
-                      </if>
-                </when>
-                <when test="useHihokenshaKana">
-                      <if test="is前方一致">
-                         AND DbT5101NinteiShinseiJoho."hihokenshaKana" LIKE #{hihokenshaName} || '%'
-                      </if>
-                      <if test="is後方一致">
-                          AND DbT5101NinteiShinseiJoho."hihokenshaKana" LIKE '%' || #{hihokenshaName}
-                      </if>
-                      <if test="is部分一致">
-                          AND DbT5101NinteiShinseiJoho."hihokenshaKana" LIKE '%' || #{hihokenshaName} || '%'
-                      </if>
-                      <if test="is完全一致">
-                          AND DbT5101NinteiShinseiJoho."hihokenshaKana" = #{hihokenshaName}
-                      </if>
-                </when>
-            </choose>
             AND DbT5101NinteiShinseiJoho."minashiNigoEtcTaishoFlag" = #{minashiNigoEtcTaishoFlag}
             <if test="useNinteiShinseiYMDFrom">
                   AND DbT5101NinteiShinseiJoho."ninteiShinseiYMD"  <![CDATA[>=]]> #{ninteiShinseiYMDFrom}
@@ -589,6 +559,36 @@
                     AND DbT5105NinteiKanryoJoho."centerSoshinYMD" IS NULL
                 </if>
             </if>
+            <choose>
+                <when test="useHihokenshaName">
+                      <if test="is前方一致">
+                         AND replace(replace(DbT5101NinteiShinseiJoho."hihokenshaName",' ',''),'　','') LIKE #{hihokenshaName} || '%'
+                      </if>
+                      <if test="is後方一致">
+                          AND replace(replace(DbT5101NinteiShinseiJoho."hihokenshaName",' ',''),'　','') LIKE '%' || #{hihokenshaName}
+                      </if>
+                      <if test="is部分一致">
+                          AND replace(replace(DbT5101NinteiShinseiJoho."hihokenshaName",' ',''),'　','') LIKE '%' || #{hihokenshaName} || '%'
+                      </if>
+                      <if test="is完全一致">
+                          AND replace(replace(DbT5101NinteiShinseiJoho."hihokenshaName",' ',''),'　','') = #{hihokenshaName}
+                      </if>
+                </when>
+                <when test="useHihokenshaKana">
+                      <if test="is前方一致">
+                         AND replace(replace(DbT5101NinteiShinseiJoho."hihokenshaKana",' ',''),'　','') LIKE #{hihokenshaName} || '%'
+                      </if>
+                      <if test="is後方一致">
+                          AND replace(replace(DbT5101NinteiShinseiJoho."hihokenshaKana",' ',''),'　','') LIKE '%' || #{hihokenshaName}
+                      </if>
+                      <if test="is部分一致">
+                          AND replace(replace(DbT5101NinteiShinseiJoho."hihokenshaKana",' ',''),'　','') LIKE '%' || #{hihokenshaName} || '%'
+                      </if>
+                      <if test="is完全一致">
+                          AND replace(replace(DbT5101NinteiShinseiJoho."hihokenshaKana",' ',''),'　','') = #{hihokenshaName}
+                      </if>
+                </when>
+            </choose>
     </sql>
 
 </mapper>

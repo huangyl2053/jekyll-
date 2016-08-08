@@ -281,6 +281,7 @@ public class ShinseiKensakuMapperParameter {
     /**
      * 検索に用いる被保険者氏名を設定します。
      * 指定された被保険者氏名がカタカナのみの場合は、カナ検索を行います。
+     * 検索用の文字列からはスペース(半角/全角 どちらも)を取り除きます。
      *
      * @param hihokenshaName 検索に用いる被保険者氏名
      */
@@ -291,7 +292,9 @@ public class ShinseiKensakuMapperParameter {
             this.useHihokenshaName = false;
             return;
         }
-        RString converted = RStrings.to半角カナOnlyOrRawTryToConvertかなto半角カナ(hihokenshaName);
+        RString converted = RStrings.to半角カナOnlyOrRawTryToConvertかなto半角カナ(
+                RStrings.removedSpaces(RStringUtil.removeSqlSpecialChars(hihokenshaName))
+        );
         this.hihokenshaName = converted;
         this.useHihokenshaKana = RStringUtil.is半角カナOnly(converted);
         this.useHihokenshaName = !this.useHihokenshaKana;
