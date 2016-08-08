@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.core.dbc180020;
+package jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei;
 
 import java.util.ArrayList;
 import java.util.Arrays;
