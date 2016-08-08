@@ -126,7 +126,11 @@ public class SokujiFukaKouseiMainHandler {
      * @param 通知書番号 通知書番号
      * @param 更正前後徴収方法 更正前後徴収方法
      */
-    public void initializeヘッダエリア(boolean is特殊処理, FlexibleYear 賦課年度, List<KoseiZengoFuka> 更正前後賦課のリスト, TsuchishoNo 通知書番号,
+    public void initializeヘッダエリア(
+            boolean is特殊処理,
+            FlexibleYear 賦課年度,
+            List<KoseiZengoFuka> 更正前後賦課のリスト,
+            TsuchishoNo 通知書番号,
             KoseiZengoChoshuHoho 更正前後徴収方法) {
         RDate システム日付 = RDate.getNowDate();
         init更正年月エリア(is特殊処理, 賦課年度, システム日付, 更正前後賦課のリスト, 通知書番号, 更正前後徴収方法);
@@ -139,9 +143,14 @@ public class SokujiFukaKouseiMainHandler {
      * @param 更正前賦課リスト 更正前賦課リスト
      * @param 更正後賦課リスト 更正後賦課リスト
      * @param 更正前後徴収方法 更正前後徴収方法
+     * @param is本算定処理済フラグ is本算定処理済フラグ
      */
-    public void initialize更正前後データ(boolean is特殊処理, NendobunFukaList 更正前賦課リスト, NendobunFukaList 更正後賦課リスト,
-            KoseiZengoChoshuHoho 更正前後徴収方法) {
+    public void initialize更正前後データ(
+            boolean is特殊処理,
+            NendobunFukaList 更正前賦課リスト,
+            NendobunFukaList 更正後賦課リスト,
+            KoseiZengoChoshuHoho 更正前後徴収方法,
+            boolean is本算定処理済フラグ) {
         HokenryoDankaiSettings 保険料段階取得共通クラス = HokenryoDankaiSettings.createInstance();
         HokenryoDankaiList 保険料段階List = 保険料段階取得共通クラス.getCurrent保険料段階List();
         set賦課根拠期割額(更正前賦課リスト, 更正後賦課リスト, 保険料段階List);
@@ -149,7 +158,7 @@ public class SokujiFukaKouseiMainHandler {
         set現年度の特別徴収情報(更正前賦課リスト, 更正後賦課リスト);
         set現年度の普通徴収情報(更正前賦課リスト, 更正後賦課リスト);
         if (!is特殊処理) {
-            set現年度の特別徴収情報の入力制御(更正前後徴収方法, 更正後賦課リスト);
+            set現年度の特別徴収情報の入力制御(更正前後徴収方法, 更正後賦課リスト, is本算定処理済フラグ);
             set現年度の普通徴収情報の入力制御(更正後賦課リスト);
         }
         set過年度の徴収情報(更正前賦課リスト, 更正後賦課リスト);
@@ -939,7 +948,10 @@ public class SokujiFukaKouseiMainHandler {
         tablePanel.getLblTokuchoNofugakuSum().setText(get特別徴収の納付額合計());
     }
 
-    private void set現年度の特別徴収情報の入力制御(KoseiZengoChoshuHoho 更正前後徴収方法, NendobunFukaList 更正後賦課リスト) {
+    private void set現年度の特別徴収情報の入力制御(
+            KoseiZengoChoshuHoho 更正前後徴収方法,
+            NendobunFukaList 更正後賦課リスト,
+            boolean is本算定処理済フラグ) {
         TokuchoIraiJohoSakuseiJokyo 特徴依頼情報作成状況 = new TokuchoIraiJohoSakuseiJokyo();
         boolean is1期入力可 = Boolean.TRUE;
         boolean is2期入力可 = Boolean.TRUE;
@@ -955,8 +967,7 @@ public class SokujiFukaKouseiMainHandler {
             is5期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法12月());
             is6期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法2月());
         }
-        HonsanteiIkoHantei honsanteiIkoHantei = HonsanteiIkoHantei.createInstance();
-        if (honsanteiIkoHantei.is本算定後(更正後賦課リスト.get現年度())) {
+        if (is本算定処理済フラグ) {
             boolean is両方とも未処理 = is特徴異動情報作成前であれば(特徴依頼情報作成状況, TokuchoHosokuMonth.特徴10月捕捉)
                     && is特徴異動情報作成前であれば(特徴依頼情報作成状況, TokuchoHosokuMonth.特徴4月捕捉);
             boolean is4月捕捉未処理 = is特徴異動情報作成前であれば(特徴依頼情報作成状況, TokuchoHosokuMonth.特徴4月捕捉);
