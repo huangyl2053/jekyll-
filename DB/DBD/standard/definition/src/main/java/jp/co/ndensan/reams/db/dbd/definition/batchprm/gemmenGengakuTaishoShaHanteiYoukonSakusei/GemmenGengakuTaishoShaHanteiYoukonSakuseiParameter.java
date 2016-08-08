@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmenGengakuTaishoShaHanteiYoukonSakusei;
 
 import jp.co.ndensan.reams.db.dbd.definition.processprm.gemmenGengakuTaishoShaHanteiYoukonSakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter;
-import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -49,9 +48,16 @@ public class GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter extends BatchPar
      * @return processパラメータ
      */
     public GemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter toGemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter() {
-        if (所得年度 == null || 所得年度.isEmpty()) {
-            return new GemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter(new HizukeConfig().get所得年度());
-        }
+        return new GemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter(所得年度);
+    }
+
+    /**
+     * processのパラメータを生成します。
+     *
+     * @param 所得年度
+     * @return processパラメータ
+     */
+    public GemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter toGemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter(FlexibleYear 所得年度) {
         return new GemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter(所得年度);
     }
 }
