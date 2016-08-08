@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.tokkia4;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkia4.TokkiText2A4Entity;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.TokkiText1A4Business;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkia4.TokkiText2A4ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
  */
 public class TokkiText2A4Editor implements ITokkiText2A4Editor {
 
-    private final TokkiText2A4Entity item;
+    private final TokkiText1A4Business item;
     private static final RString 全面 = new RString("1");
     private static final RString 短冊 = new RString("2");
     private final int index;
@@ -48,11 +48,11 @@ public class TokkiText2A4Editor implements ITokkiText2A4Editor {
     /**
      * インスタンスを生成します。
      *
-     * @param item TokkiText2A4Entity
+     * @param item TokkiText1A4Business
      * @param index Index
      * @param 特記事項List List<RString>
      */
-    protected TokkiText2A4Editor(TokkiText2A4Entity item, List<RString> 特記事項List, int index) {
+    protected TokkiText2A4Editor(TokkiText1A4Business item, List<RString> 特記事項List, int index) {
         this.item = item;
         this.index = index;
         this.特記事項List = 特記事項List;
@@ -93,14 +93,14 @@ public class TokkiText2A4Editor implements ITokkiText2A4Editor {
 
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
-                source.tokkiText = item.get特記事項Text();
+                source.tokkiText = item.getTokkiText();
             } else if (短冊.equals(item.get特記パターン())) {
                 editテキスト(source);
                 set特記事項テキスト(source);
             }
         } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
-                source.tokkiImg = item.get特記事項Img();
+                source.tokkiImg = item.getTokkiImg();
             } else if (短冊.equals(item.get特記パターン())) {
                 editイメージ(source);
                 set特記事項イメージ(source);
