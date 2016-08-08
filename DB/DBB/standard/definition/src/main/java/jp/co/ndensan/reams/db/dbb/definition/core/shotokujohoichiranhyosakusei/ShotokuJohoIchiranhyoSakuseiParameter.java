@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * ビジネス設計_DBBBZ51003_1_所得情報一覧表作成（バッチ）のMapper
  *
- * @reamsid_L DBB-1650-050 lijunjun
+ * @reamsid_L DBB-1650-040 lijunjun
  */
 @lombok.Getter
 @lombok.Setter
