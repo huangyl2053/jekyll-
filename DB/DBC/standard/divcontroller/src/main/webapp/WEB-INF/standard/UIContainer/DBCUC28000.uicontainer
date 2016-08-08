@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC28000",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "受給者突合依頼情報作成",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC2800011",
+     "toLayoutTitle": "受給者突合依頼情報作成",
+     "toState": "受給者突合依頼情報作成"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC2800011",
+     "layoutTitle": "受給者突合依頼情報作成",
+     "eventName": "実行",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
