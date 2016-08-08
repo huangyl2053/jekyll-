@@ -19,27 +19,27 @@ public class ShinsakaishiryoA3ReportSource implements IReportSource {
     @ReportItem(name = "shinsakaiNo", length = 4, order = 1)
     public RString shinsakaiNo;
     @ReportItem(name = "ShinsainName1", length = 20, order = 2)
-    public RString ShinsainName1;
+    public RString shinsainName1;
     @ReportItem(name = "ShinsainName2", length = 20, order = 3)
-    public RString ShinsainName2;
+    public RString shinsainName2;
     @ReportItem(name = "shinsakaiKaisaiYMD", length = 21, order = 4)
     public RString shinsakaiKaisaiYMD;
     @ReportItem(name = "ShinsainName3", length = 20, order = 5)
-    public RString ShinsainName3;
+    public RString shinsainName3;
     @ReportItem(name = "ShinsainName4", length = 20, order = 6)
-    public RString ShinsainName4;
+    public RString shinsainName4;
     @ReportItem(name = "ShinsainName5", length = 20, order = 7)
-    public RString ShinsainName5;
+    public RString shinsainName5;
     @ReportItem(name = "gogitaiNo", length = 2, order = 8)
     public RString gogitaiNo;
     @ReportItem(name = "ShinsainName6", length = 20, order = 9)
-    public RString ShinsainName6;
+    public RString shinsainName6;
     @ReportItem(name = "shinsaTaishoshaCount", length = 2, order = 10)
     public RString shinsaTaishoshaCount;
     @ReportItem(name = "ShinsainName7", length = 20, order = 11)
-    public RString ShinsainName7;
+    public RString shinsainName7;
     @ReportItem(name = "ShinsainName8", length = 20, order = 12)
-    public RString ShinsainName8;
+    public RString shinsainName8;
     @ReportItem(name = "listShinsei1_1", length = 2, order = 13)
     public RString listShinsei1_1;
     @ReportItem(name = "listShinsei1_2", length = 6, order = 14)
