@@ -242,10 +242,10 @@ public class IchijihanteikekkahyoA4Editor implements IIchijihanteikekkahyoA4Edit
             source.listTokubetsunaIryo2_2 = item.get特別な医療リスト２().get(index).get段階改善フラグ();
         }
         if (index < item.get主治医意見書().size()) {
-            source.listshujiiikensho_1 = item.get特別な医療リスト２().get(index).get調査結果();
-            source.listshujiiikensho_2 = item.get特別な医療リスト２().get(index).get段階改善フラグ();
-            source.listshujiiikensho_3 = item.get特別な医療リスト２().get(index).get段階改善値();
-            source.listshujiiikensho_4 = item.get特別な医療リスト２().get(index).get前回結果();
+            source.listshujiiikensho_1 = item.get主治医意見書().get(index).get調査結果();
+            source.listshujiiikensho_2 = item.get主治医意見書().get(index).get段階改善フラグ();
+            source.listshujiiikensho_3 = item.get主治医意見書().get(index).get段階改善値();
+            source.listshujiiikensho_4 = item.get主治医意見書().get(index).get前回結果();
         }
         return source;
     }
