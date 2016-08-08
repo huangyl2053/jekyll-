@@ -368,12 +368,15 @@
         FROM
             rgdb."DbT5101NinteiShinseiJoho" AS DbT5101Nintei
             INNER JOIN
-                rgdb."DbT5120ShinseitodokedeJoho" AS DbT5120Shinsei
-            ON  DbT5101Nintei."shinseishoKanriNo" = DbT5120Shinsei."shinseishoKanriNo"
-            INNER JOIN
                 rgdb."DbT5123NinteiKeikakuJoho" AS DbT5123Nintei
             ON  DbT5123Nintei."shinseishoKanriNo" = DbT5101Nintei."shinseishoKanriNo"
             INNER JOIN
+                rgdb."DbT5105NinteiKanryoJoho" AS DbT5105Nintei
+            ON  DbT5105Nintei."shinseishoKanriNo" = DbT5123Nintei."shinseishoKanriNo"
+            LEFT JOIN
+                rgdb."DbT5120ShinseitodokedeJoho" AS DbT5120Shinsei
+            ON  DbT5101Nintei."shinseishoKanriNo" = DbT5120Shinsei."shinseishoKanriNo"
+            LEFT JOIN
                 rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201Nintei
             ON  DbT5201Nintei."shinseishoKanriNo" = DbT5101Nintei."shinseishoKanriNo"
             AND DbT5201Nintei."ninteichosaIraiRirekiNo" = (
@@ -384,7 +387,7 @@
                     WHERE
                         DbT5201Nin."shinseishoKanriNo" = #{shinseishoKanriNo}
                 )
-            INNER JOIN
+            LEFT JOIN
                 rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT4202Nintei
             ON  DbT4202Nintei."shinseishoKanriNo" = DbT5101Nintei."shinseishoKanriNo"
             AND DbT4202Nintei."ninteichosaRirekiNo" = (
@@ -395,7 +398,7 @@
                     WHERE
                         DbT4202Nin."shinseishoKanriNo" = #{shinseishoKanriNo}
                 )
-            INNER JOIN
+            LEFT JOIN
                 rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301Shujii
             ON  DbT5301Shujii."shinseishoKanriNo" = DbT5101Nintei."shinseishoKanriNo"
             AND DbT5301Shujii."ikenshoIraiRirekiNo" = (
@@ -406,7 +409,7 @@
                     WHERE
                         DbT5301Shu."shinseishoKanriNo" = #{shinseishoKanriNo}
                 )
-            INNER JOIN
+            LEFT JOIN
                 rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302Shujii
             ON  DbT5302Shujii."shinseishoKanriNo" = DbT5101Nintei."shinseishoKanriNo"
             AND DbT5302Shujii."ikenshoIraiRirekiNo" = (
@@ -417,26 +420,24 @@
                     WHERE
                         DbT5302Shu."shinseishoKanriNo" = #{shinseishoKanriNo}
                 )
-            INNER JOIN
-                rgdb."DbT5105NinteiKanryoJoho" AS DbT5105Nintei
-            ON  DbT5105Nintei."shinseishoKanriNo" = DbT5123Nintei."shinseishoKanriNo"
-            INNER JOIN
+
+            LEFT JOIN
                 rgdb."DbT7051KoseiShichosonMaster" AS DbT7051Kosei
             ON  DbT7051Kosei."shoKisaiHokenshaNo" = DbT5101Nintei."shoKisaiHokenshaNo"
-            INNER JOIN
+            LEFT JOIN
                 rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910Nintei
             ON  DbT5910Nintei."shichosonCode" = DbT7051Kosei."shichosonCode"
             AND DbT5910Nintei."ninteichosaItakusakiCode" = DbT5101Nintei."ninteiChosaItakusakiCode"
-            INNER JOIN
+            LEFT JOIN
                 rgdb."DbT5913ChosainJoho" AS DbT5913Chosai
             ON  DbT5913Chosai."shichosonCode" = DbT7051Kosei."shichosonCode"
             AND DbT5913Chosai."ninteiChosaItakusakiCode" = DbT5101Nintei."ninteiChosaItakusakiCode"
             AND DbT5913Chosai."ninteiChosainCode" = DbT5101Nintei."ninteiChosainCode"
-            INNER JOIN
+            LEFT JOIN
                 rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911Shujii
             ON  DbT5911Shujii."shichosonCode" = DbT7051Kosei."shichosonCode"
             AND DbT5911Shujii."shujiiIryokikanCode" = DbT5101Nintei."shujiiIryokikanCode"
-            INNER JOIN
+            LEFT JOIN
                 rgdb."DbT5912ShujiiJoho" AS DbT5912Shujii
             ON  DbT5912Shujii."shichosonCode" = DbT7051Kosei."shichosonCode"
             AND DbT5912Shujii."shujiiIryokikanCode" = DbT5101Nintei."shujiiIryokikanCode"
