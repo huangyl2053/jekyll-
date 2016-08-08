@@ -27,6 +27,7 @@ public class JigyohokokuCompYoshikiNenho2115Editor implements IJigyohokokuCompYo
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
+    private static final RString 作成 = new RString("作成");
     private static final RString 現物分 = new RString("1");
     private static final RString 償還審査分 = new RString("2");
     private static final RString 償還決定分 = new RString("3");
@@ -49,19 +50,20 @@ public class JigyohokokuCompYoshikiNenho2115Editor implements IJigyohokokuCompYo
     }
 
     private JigyohokokuCompYoshikiNenho2115ReportSource editSource(JigyohokokuCompYoshikiNenho2115ReportSource source) {
-        RStringBuilder printTimeStampSb = new RStringBuilder();
+        RStringBuilder printTimeStamp = new RStringBuilder();
         RDateTime printdate = item.get処理日時();
-        printTimeStampSb.append(printdate.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+        printTimeStamp.append(printdate.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
                 fillType(FillType.BLANK).toDateString());
-        printTimeStampSb.append(RString.HALF_SPACE);
-        printTimeStampSb.append(String.format("%02d", printdate.getHour()));
-        printTimeStampSb.append(DATE_時);
-        printTimeStampSb.append(String.format("%02d", printdate.getMinute()));
-        printTimeStampSb.append(DATE_分);
-        printTimeStampSb.append(String.format("%02d", printdate.getSecond()));
-        printTimeStampSb.append(DATE_秒);
-        source.sakuseinichiji = printTimeStampSb.toRString();
+        printTimeStamp.append(RString.HALF_SPACE);
+        printTimeStamp.append(String.format("%02d", printdate.getHour()));
+        printTimeStamp.append(DATE_時);
+        printTimeStamp.append(String.format("%02d", printdate.getMinute()));
+        printTimeStamp.append(DATE_分);
+        printTimeStamp.append(String.format("%02d", printdate.getSecond()));
+        printTimeStamp.append(DATE_秒);
+        printTimeStamp.append(作成);
+        source.sakuseinichiji = printTimeStamp.toRString();
         source.yoshiki = item.get様式();
         if (月報.equals(item.get年報月報区分())) {
             source.shorikbn = new RString("月報");
