@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0140011;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.keikakutodokedejokyoichiran.KeikakuTodokedeJokyoIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.keikakutodokedejokyoichiran.DBC160010_KeikakuTodokedeJokyoIchiranParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0140011.DBC0140011KeikakuTodokeJohoListDiv;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -28,11 +28,10 @@ public final class DBC0140011KeikakuTodokeJohoListHandler {
     /**
      * バッチのパラメタです。
      *
-     *
      * @return KeikakuTodokedeJokyoIchiranBatchParameter　parameter
      */
-    public ResponseData<KeikakuTodokedeJokyoIchiranBatchParameter> onClick_btnBatchRegister() {
-        KeikakuTodokedeJokyoIchiranBatchParameter parameter = new KeikakuTodokedeJokyoIchiranBatchParameter();
+    public ResponseData<DBC160010_KeikakuTodokedeJokyoIchiranParameter> onClick_btnBatchRegister() {
+        DBC160010_KeikakuTodokedeJokyoIchiranParameter parameter = new DBC160010_KeikakuTodokedeJokyoIchiranParameter();
 
         parameter.set受給申請日From(new YMDHMS(div.getTbJukyuShinseibi().getFromValue().toDateString()));
         parameter.set受給申請日To(new YMDHMS(div.getTbJukyuShinseibi().getToValue().toDateString()));
@@ -48,6 +47,7 @@ public final class DBC0140011KeikakuTodokeJohoListHandler {
      * コンストラクタです
      *
      * @param div DBC0140011KeikakuTodokeJohoListDiv
+     * 
      * @return ハンドラ
      */
     public static DBC0140011KeikakuTodokeJohoListHandler of(DBC0140011KeikakuTodokeJohoListDiv div) {
