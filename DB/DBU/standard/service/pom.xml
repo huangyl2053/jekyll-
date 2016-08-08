@@ -79,7 +79,6 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxPersistence</artifactId>
-            <version>${jp.co.ndensan.reams.uax.version}</version>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbe</groupId>
