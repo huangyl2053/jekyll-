@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 介護所得一時テーブルから対象データを抽出しのParameter
  *
- * @reamsid_L DBB-1650-050 lijunjun
+ * @reamsid_L DBB-1650-040 lijunjun
  */
 @lombok.Getter
 @lombok.Setter
