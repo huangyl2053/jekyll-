@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.batchprm.SogojigyohiSaishinsaKetteiKohifutanshaIn;
+package jp.co.ndensan.reams.db.dbc.definition.batchprm.sogojigyohisaishinsaketteikohifutanshain;
 
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -13,14 +13,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 国保連情報受取データ取込_[662]総合事業費再審査決定通知書（公費）情報
+ * 国保連情報受取データ取込_[662]総合事業費再審査決定通知書（公費）情報のバッチパラメータです
  *
  * @reamsid_L DBC-4730-010 changying
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBC120870_SogojigyohiSaishinsaKetteiKohifutanshaInParameter extends BatchParameterBase{
+public class DBC120870_SogojigyohiSaishinsaKetteiKohifutanshaInParameter extends BatchParameterBase {
 
     private static final String KEY_SHORIYM = "shoriYM";
     private static final String NAME_SHORIYM = "処理年月";

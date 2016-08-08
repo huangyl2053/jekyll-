@@ -5,9 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410047;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.SogojigyohiSeikyugakuTsuchishoIn.DBC120890_SogojigyohiSeikyugakuTsuchishoInParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.sogojigyohiseikyugakutsuchishoin.DBC120890_SogojigyohiSeikyugakuTsuchishoInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410047.DBC0410047TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410047.TsuchishoJoho153Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
@@ -17,14 +16,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * 国保連情報受取データ取込_[153]総合事業費等請求額通知書情報
+ * 国保連情報受取データ取込_[153]総合事業費等請求額通知書情報のクラスです。
  *
  * @reamsid_L DBC-2480-040 changying
  */
 public class TsuchishoJoho153 {
 
     /**
-     * onLoad
+     * 画面の初期化メソッドです。
      *
      * @param div TsuchishoJoho153Div
      * @return ResponseData
@@ -37,7 +36,7 @@ public class TsuchishoJoho153 {
     }
 
     /**
-     * onClick_btnExcute
+     * 「実行する」ボタン事件のメソッドです。
      *
      * @param div TsuchishoJoho153Div
      * @return ResponseData
@@ -48,7 +47,7 @@ public class TsuchishoJoho153 {
     }
 
     /**
-     * 「実行する」を処理します。
+     * 「実行する」詳細処理のメソッドです。
      *
      * @param div TsuchishoJoho153Div
      * @return DBC120890_SogojigyohiSeikyugakuTsuchishoInParameter
@@ -66,15 +65,4 @@ public class TsuchishoJoho153 {
         parameter.setShutsuryokujunId(RString.EMPTY);
         return parameter;
     }
-
-    /**
-     * 国保連情報データ取込画面へ遷移する。
-     *
-     * @param div 画面DIV
-     * @return 国保連情報データ取込へ遷移
-     */
-    public ResponseData<TsuchishoJoho153Div> onClick_btnBack(TsuchishoJoho153Div div) {
-        return ResponseData.of(div).forwardWithEventName(DBC0410047TransitionEventName.戻る).respond();
-    }
-
 }

@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.batchprm.SogojigyohiSeikyugakuTsuchishoIn;
+package jp.co.ndensan.reams.db.dbc.definition.batchprm.sogojigyohiseikyugakutsuchishoin;
 
+import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,7 +20,8 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class DBC120890_SogojigyohiSeikyugakuTsuchishoInBacthParameter extends BatchParameterBase {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public class DBC120890_SogojigyohiSeikyugakuTsuchishoInParameter extends BatchParameterBase {
 
     private static final String KEY_SHORIYM = "shoriYM";
     private static final String NAME_SHORIYM = "処理年月";
@@ -29,9 +31,9 @@ public class DBC120890_SogojigyohiSeikyugakuTsuchishoInBacthParameter extends Ba
     private static final String NAME_SHUTSURYOKUJUNID = "出力順ID";
 
     @BatchParameter(key = KEY_SHORIYM, name = NAME_SHORIYM)
-    private RYearMonth shoriYM;
+    private FlexibleYearMonth shoriYM;
     @BatchParameter(key = KEY_SAISHORIKUBUN, name = NAME_SAISHORIKUBUN)
-    private RString saishoriKubun;
+    private SaiShoriKubun saishoriKubun;
     @BatchParameter(key = KEY_SHUTSURYOKUJUNID, name = NAME_SHUTSURYOKUJUNID)
-    private Long shutsuryokujunId;
+    private RString shutsuryokujunId;
 }
