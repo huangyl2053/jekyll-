@@ -1457,8 +1457,7 @@
         <id property="shikibetsuCode" column="UrT0526SeikatsuHogoFujoShurui_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <id property="gyomuCode" column="UrT0526SeikatsuHogoFujoShurui_gyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyomuCodeTypeHandler"/>
         <id property="jukyuKaishiYMD" column="UrT0526SeikatsuHogoFujoShurui_jukyuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <!--// TODO QAのNo.949(Redmine#91760) -->
-        <!--<id property="fujoShuruiCode" column="UrT0526SeikatsuHogoFujoShurui_fujoShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>-->
+        <id property="fujoShuruiCode" column="UrT0526SeikatsuHogoFujoShurui_fujoShuruiCode" typeHandler="jp.co.ndensan.reams.ur.urd.entity.typehandlers.FujoShuruiCodeValueTypeHandler"/>
         <result property="insertDantaiCd" column="UrT0526SeikatsuHogoFujoShurui_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="UrT0526SeikatsuHogoFujoShurui_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="UrT0526SeikatsuHogoFujoShurui_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -1590,7 +1589,7 @@
             koza.*
         FROM
             "TmpHonsantei" AS "TmpHonsantei"
-        INNER JOIN "TmpTsukibetsuRanku" AS "TmpTsukibetsuRanku"
+        LEFT JOIN "TmpTsukibetsuRanku" AS "TmpTsukibetsuRanku"
         ON  "TmpHonsantei"."hihokenshaNo" = "TmpTsukibetsuRanku"."hihokenshaNo"
         INNER JOIN "TmpSetaiShotoku" AS "TmpSetaiShotoku"
         ON "TmpHonsantei"."hihokenshaNo" = "TmpSetaiShotoku"."hihokenshaNo"
@@ -1960,7 +1959,7 @@
            "DbT2015KeisangoJoho"."choteiNendo" = #{調定年度}
         AND "DbT2015KeisangoJoho"."fukaNendo" = #{賦課年度}
         AND "DbT2015KeisangoJoho"."sakuseiShoriName" = '異動賦課'
-        AND "DbT2015KeisangoJoho"."choteiNichiji" = #{調定日時}
+        <!--AND "DbT2015KeisangoJoho"."choteiNichiji" = #{調定日時}-->
         ${出力順}
     </select>
 </mapper>
