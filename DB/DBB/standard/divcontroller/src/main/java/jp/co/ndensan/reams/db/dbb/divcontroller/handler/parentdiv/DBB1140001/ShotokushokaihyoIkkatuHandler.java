@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.shotokushokaihyohakko.SaiH
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.shotokushokaihyohakko.ShotokuShokaihyoHakkoBatchParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140001.ShotokushokaihyoIkkatuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140001.dgSaihakko_Row;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.saihakkofinder.SaiHakkoEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.saihakkofinder.SaiHakkoFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -134,11 +133,10 @@ public class ShotokushokaihyoIkkatuHandler {
         List<SaiHakko> 再発行対象リスト = SaiHakkoFinder.createInstance().getSaiHakko(処理年度);
         if (再発行対象リスト != null && !再発行対象リスト.isEmpty()) {
             for (SaiHakko saiHakko : 再発行対象リスト) {
-                SaiHakkoEntity 再発行対象Entity = saiHakko.getEntity();
-                row.setTxtShoriNendo(new RString(再発行対象Entity.get処理年度().toString()));
-                row.setTxtShoriNichiji(new RString(再発行対象Entity.get処理日時().toString()));
-                row.setTxtHakkoKensu(new RString(String.valueOf(再発行対象Entity.get発行件数())));
-                row.setTxtUser(再発行対象Entity.getユーザ());
+                row.setTxtShoriNendo(new RString(saiHakko.getEntity().get処理年度().toString()));
+                row.setTxtShoriNichiji(new RString(saiHakko.getEntity().get処理日時().toString()));
+                row.setTxtHakkoKensu(new RString(String.valueOf(saiHakko.getEntity().get発行件数())));
+                row.setTxtUser(saiHakko.getEntity().getユーザ());
             }
         }
     }
@@ -257,7 +255,7 @@ public class ShotokushokaihyoIkkatuHandler {
      *
      * @return boolean
      */
-    public boolean getテストプリント() {
+    public boolean isテストプリント() {
         return div.getChkTestPrint().isAllSelected();
     }
 
@@ -266,7 +264,7 @@ public class ShotokushokaihyoIkkatuHandler {
      *
      * @return boolean
      */
-    public boolean get再発行する() {
+    public boolean is再発行する() {
         return div.getChkSaihakko().isAllSelected();
     }
 
