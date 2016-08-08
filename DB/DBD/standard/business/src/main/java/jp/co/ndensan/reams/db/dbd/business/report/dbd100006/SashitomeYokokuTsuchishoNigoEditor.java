@@ -143,18 +143,22 @@ public class SashitomeYokokuTsuchishoNigoEditor implements ISashitomeYokokuTsuch
     private void setLayer1(SashitomeYokokuTsuchishoNigoReportSource source) {
         source.bunshoNo = this.文書番号;
         EditedKojin 編集後個人 = getEditedKojin(this.個人情報, this.帳票制御共通, this.地方公共団体);
-        source.hihokenshaName = 編集後個人.get名称().getName().getColumnValue();
-        RString 被保険者番号 = this.帳票情報.get被保険者番号().getColumnValue();
-        source.hihokenshaNo1 = 被保険者番号.substring(0, NOCOUNT_1);
-        source.hihokenshaNo2 = 被保険者番号.substring(NOCOUNT_1, NOCOUNT_2);
-        source.hihokenshaNo3 = 被保険者番号.substring(NOCOUNT_2, NOCOUNT_3);
-        source.hihokenshaNo4 = 被保険者番号.substring(NOCOUNT_3, NOCOUNT_4);
-        source.hihokenshaNo5 = 被保険者番号.substring(NOCOUNT_4, NOCOUNT_5);
-        source.hihokenshaNo6 = 被保険者番号.substring(NOCOUNT_5, NOCOUNT_6);
-        source.hihokenshaNo7 = 被保険者番号.substring(NOCOUNT_6, NOCOUNT_7);
-        source.hihokenshaNo8 = 被保険者番号.substring(NOCOUNT_7, NOCOUNT_8);
-        source.hihokenshaNo9 = 被保険者番号.substring(NOCOUNT_8, NOCOUNT_9);
-        source.hihokenshaNo10 = 被保険者番号.substring(NOCOUNT_9, NOCOUNT_10);
+        if (null != 編集後個人) {
+            source.hihokenshaName = 編集後個人.get名称().getName().getColumnValue();
+        }
+        if (null != 帳票情報) {
+            RString 被保険者番号 = this.帳票情報.get被保険者番号().getColumnValue();
+            source.hihokenshaNo1 = 被保険者番号.substring(0, NOCOUNT_1);
+            source.hihokenshaNo2 = 被保険者番号.substring(NOCOUNT_1, NOCOUNT_2);
+            source.hihokenshaNo3 = 被保険者番号.substring(NOCOUNT_2, NOCOUNT_3);
+            source.hihokenshaNo4 = 被保険者番号.substring(NOCOUNT_3, NOCOUNT_4);
+            source.hihokenshaNo5 = 被保険者番号.substring(NOCOUNT_4, NOCOUNT_5);
+            source.hihokenshaNo6 = 被保険者番号.substring(NOCOUNT_5, NOCOUNT_6);
+            source.hihokenshaNo7 = 被保険者番号.substring(NOCOUNT_6, NOCOUNT_7);
+            source.hihokenshaNo8 = 被保険者番号.substring(NOCOUNT_7, NOCOUNT_8);
+            source.hihokenshaNo9 = 被保険者番号.substring(NOCOUNT_8, NOCOUNT_9);
+            source.hihokenshaNo10 = 被保険者番号.substring(NOCOUNT_9, NOCOUNT_10);
+        }
         if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
             source.tsuchibun1 = 通知書定型文リスト.get(0);
         }
