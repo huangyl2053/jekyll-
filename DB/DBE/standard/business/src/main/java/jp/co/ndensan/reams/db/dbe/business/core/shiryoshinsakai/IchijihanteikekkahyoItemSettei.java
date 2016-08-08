@@ -56,7 +56,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class IchijihanteikekkahyoItemSettei {
 
-    private static final RString 月間 = new RString("月間");
     private static final Code A_99 = new Code("99A");
     private static final Code A_02 = new Code("02A");
     private static final Code A_06 = new Code("06A");
@@ -65,7 +64,6 @@ public class IchijihanteikekkahyoItemSettei {
     private static final RString 段階悪化 = new RString("▲");
     private static final RString 段階改善 = new RString("▽");
     private static final RString 印字する = new RString("1");
-    private static final RString 記号 = new RString("+");
 
     /**
      * 事務局一次判定結果票Entityの設定。
