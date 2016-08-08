@@ -88,13 +88,15 @@ public class TokuChoSoufuJohoSakuseiBatch {
     private static final RString LINE = new RString("|");
 
     private static final RString STR5 = new RString("5");
-    private static final RString 特徴制度間IF全件作成 = new RString("特徴制度間IF全件作成");
+    private static final RString 特徴制度間IF全件作成 = new RString("DBBMN84002");
     private static final RString 特徴制度間IF作成 = new RString("DBBMN84001");
     private static final RString 依頼金額計算 = new RString("依頼金額計算");
     private static final RString 本算定賦課 = new RString("本算定賦課");
     private static final RString 金額あり = new RString("1");
     private static final RString 金額なし = new RString("2");
-    private static final RString GENERICKEY = new RString("UeT1704KaigoTokuchoTorikomiRireki_renban");
+    private static final RString GENERICKEY_UET1704 = new RString("UeT1704KaigoTokuchoTorikomiRireki_renban");
+    private static final RString GENERICKEY_UET0515
+            = new RString("UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550_renban");
     private final FlexibleYear 年度 = new FlexibleYear("0000");
     private final MapperProvider mapperProvider;
     private final DbT7022ShoriDateKanriDac 処理日付管理マスタdac;
@@ -114,7 +116,8 @@ public class TokuChoSoufuJohoSakuseiBatch {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiBatch}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiBatch}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiBatch}のインスタンス
      */
     public static TokuChoSoufuJohoSakuseiBatch createInstance() {
         return InstanceProvider.create(TokuChoSoufuJohoSakuseiBatch.class);
@@ -202,7 +205,7 @@ public class TokuChoSoufuJohoSakuseiBatch {
      */
     public UeT1704KaigoTokuchoTorikomiRirekiEntity intTokuChoJohoTorikomiRireki(FlexibleYear 処理年度, RDate 特徴開始月, RString 遷移元メニュー, RDateTime 処理日時) {
         UeT1704KaigoTokuchoTorikomiRirekiEntity 介護特別徴収情報取込履歴entity = new UeT1704KaigoTokuchoTorikomiRirekiEntity();
-        CountedItem countedItem = Saiban.get(SubGyomuCode.UEA特別徴収分配集約, GENERICKEY, 年度);
+        CountedItem countedItem = Saiban.get(SubGyomuCode.UEA特別徴収分配集約, GENERICKEY_UET1704, 年度);
         int 連番 = (int) countedItem.next();
         if (特徴制度間IF作成.equals(遷移元メニュー)) {
             YMDHMS 基準日時 = chkTokuchoIraikinKeisan(特徴開始月, 処理年度);
@@ -240,7 +243,10 @@ public class TokuChoSoufuJohoSakuseiBatch {
         }
         List<UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity> uet0515Entitys = new ArrayList();
         List<TokuChoSoufuJohoSakuseiResult> resultlist = TokuChoSoufuJohoSakuseiResult.getTokuChoSoufuJohoSakuseiResultList(resultentitylist);
-        int 連番 = (int) Saiban.get(SubGyomuCode.UEA特別徴収分配集約, GENERICKEY, 年度).next();
+        int 連番 = 0;
+        if (resultlist != null && !resultlist.isEmpty()) {
+            連番 = (int) Saiban.get(SubGyomuCode.UEA特別徴収分配集約, GENERICKEY_UET0515, 年度).next();
+        }
         int シーケンス;
         Map<RString, Integer> シーケンスMap = new HashMap<>();
         for (TokuChoSoufuJohoSakuseiResult entity : resultlist) {
@@ -266,14 +272,12 @@ public class TokuChoSoufuJohoSakuseiBatch {
             if (entity.get対象者の情報().getDT特別徴収義務者コード() != null) {
                 tokuchotempentity.setDtTokubetsuChoshuGimushaCode(entity.get対象者の情報().getDT特別徴収義務者コード().value());
             }
-            if (entity.get対象者の情報().getDT通知内容コード() != null) {
-                if (TsuchiNaiyoCodeType.特別徴収対象者情報.get通知内容コード().equals(
-                        entity.get対象者の情報().getDT通知内容コード())) {
-                    tokuchotempentity.setDtTsuchiNaiyoCode(TsuchiNaiyoCodeType.特別徴収依頼通知.get通知内容コード());
-                } else if (TsuchiNaiyoCodeType.特別徴収追加候補者情報.get通知内容コード().equals(
-                        entity.get対象者の情報().getDT通知内容コード())) {
-                    tokuchotempentity.setDtTsuchiNaiyoCode(TsuchiNaiyoCodeType.特別徴収追加依頼通知.get通知内容コード());
-                }
+            if (TsuchiNaiyoCodeType.特別徴収対象者情報.get通知内容コード().equals(
+                    entity.get対象者の情報().getDT通知内容コード())) {
+                tokuchotempentity.setDtTsuchiNaiyoCode(TsuchiNaiyoCodeType.特別徴収依頼通知.get通知内容コード());
+            } else if (TsuchiNaiyoCodeType.特別徴収追加候補者情報.get通知内容コード().equals(
+                    entity.get対象者の情報().getDT通知内容コード())) {
+                tokuchotempentity.setDtTsuchiNaiyoCode(TsuchiNaiyoCodeType.特別徴収追加依頼通知.get通知内容コード());
             }
             tokuchotempentity.setDtBaitaiCode(定値_DT媒体コード);
             if (entity.get対象者の情報().getDT特別徴収制度コード() != null) {
@@ -496,8 +500,10 @@ public class TokuChoSoufuJohoSakuseiBatch {
     /**
      * Entity転換のメソドです。
      *
-     * @param entity jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
-     * @return jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
+     * @param entity
+     * jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
+     * @return
+     * jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
      */
     public jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity entityCopy(
             UeT0511NenkinTokuchoKaifuJohoEntity entity) {
@@ -576,8 +582,10 @@ public class TokuChoSoufuJohoSakuseiBatch {
     /**
      * Entity転換のメソドです。
      *
-     * @param entity jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
-     * @return jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
+     * @param entity
+     * jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
+     * @return
+     * jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
      */
     public UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity entityCopy(
             jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity entity) {

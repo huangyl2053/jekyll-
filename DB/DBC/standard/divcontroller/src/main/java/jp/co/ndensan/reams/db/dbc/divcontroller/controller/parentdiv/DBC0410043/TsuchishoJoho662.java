@@ -5,9 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410043;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.SogojigyohiSaishinsaKetteiKohifutanshaIn.DBC120870_SogojigyohiSaishinsaKetteiKohifutanshaInParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.sogojigyohisaishinsaketteikohifutanshain.DBC120870_SogojigyohiSaishinsaKetteiKohifutanshaInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410043.DBC0410043TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410043.TsuchishoJoho662Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
@@ -24,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * 国保連情報受取データ取込_[662]総合事業費再審査決定通知書（公費）情報
+ * 国保連情報受取データ取込_[662]総合事業費再審査決定通知書（公費）情報のクラスです。
  *
  * @reamsid_L DBC-4730-010 changying
  */
@@ -33,7 +32,7 @@ public class TsuchishoJoho662 {
     private static final ReportId REPORTID = new ReportId("DBC200081_SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohi");
 
     /**
-     * onLoad
+     * 画面の初期化メソッドです。
      *
      * @param div TsuchishoJoho662Div
      * @return ResponseData
@@ -46,12 +45,13 @@ public class TsuchishoJoho662 {
     }
 
     /**
-     * onClick_btnExcute
+     * 「実行する」ボタン事件のメソッドです。
      *
      * @param div TsuchishoJoho662Div
      * @return ResponseData
      */
-    public ResponseData<DBC120870_SogojigyohiSaishinsaKetteiKohifutanshaInParameter> onClick_btnExcute(TsuchishoJoho662Div div) {
+    public ResponseData<DBC120870_SogojigyohiSaishinsaKetteiKohifutanshaInParameter> onClick_btnExcute(
+            TsuchishoJoho662Div div) {
         if (setBatchParameter(div) != null) {
             return ResponseData.of(setBatchParameter(div)).respond();
         }
@@ -59,10 +59,10 @@ public class TsuchishoJoho662 {
     }
 
     /**
-     * 「実行する」ボタン事件のメソッドです。
+     * 「実行する」詳細処理のメソッドです。
      *
      * @param div TsuchishoJoho662Div
-     * @return DBC120870_DBC120870_SogojigyohiSaishinsaKetteiKohifutanshaInParameter
+     * @return DBC120870_SogojigyohiSaishinsaKetteiKohifutanshaInParameter
      */
     public DBC120870_SogojigyohiSaishinsaKetteiKohifutanshaInParameter setBatchParameter(TsuchishoJoho662Div div) {
         if (div.getCcdKokurenJohoTorikomi().get出力順ID() != null) {
@@ -76,7 +76,8 @@ public class TsuchishoJoho662 {
                 IChohyoShutsuryokujunManager manager = new _ChohyoShutsuryokujunManager();
                 manager.save前回出力順(iOutputOrder);
             }
-            DBC120870_SogojigyohiSaishinsaKetteiKohifutanshaInParameter parameter = new DBC120870_SogojigyohiSaishinsaKetteiKohifutanshaInParameter();
+            DBC120870_SogojigyohiSaishinsaKetteiKohifutanshaInParameter parameter
+                    = new DBC120870_SogojigyohiSaishinsaKetteiKohifutanshaInParameter();
             RDate 処理年月 = div.getCcdKokurenJohoTorikomi().get処理年月();
             SaiShoriKubun 再処理区分 = null;
             if (SaiShoriKubun.再処理.get名称().equals(div.getCcdKokurenJohoTorikomi().get再処理区分())) {
@@ -90,15 +91,5 @@ public class TsuchishoJoho662 {
             return parameter;
         }
         return null;
-    }
-
-    /**
-     * 国保連情報データ取込画面へ遷移する。
-     *
-     * @param div 画面DIV
-     * @return 国保連情報データ取込へ遷移
-     */
-    public ResponseData<TsuchishoJoho662Div> onClick_btnBack(TsuchishoJoho662Div div) {
-        return ResponseData.of(div).forwardWithEventName(DBC0410043TransitionEventName.戻る).respond();
     }
 }

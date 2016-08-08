@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakute
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiTaiyosyaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.tsuikashiryokagamia4.TsuikashiryokagamiA4ReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.IsHaishi;
@@ -45,7 +45,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-0150-190 linghuhang
  */
-public class JimuTuikaSiryoDataSakuseiA4Process extends BatchKeyBreakBase<ShinseiJohoEntity> {
+public class JimuTuikaSiryoDataSakuseiA4Process extends BatchKeyBreakBase<ShinsakaiTaiyosyaJohoEntity> {
 
     private static final RString SELECT_JIMUTUIKASIRYO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper.get事務局情報");
@@ -89,7 +89,7 @@ public class JimuTuikaSiryoDataSakuseiA4Process extends BatchKeyBreakBase<Shinse
     }
 
     @Override
-    protected void keyBreakProcess(ShinseiJohoEntity entity) {
+    protected void keyBreakProcess(ShinsakaiTaiyosyaJohoEntity entity) {
         if (データ件数 % 満ページ件数 == 0) {
             TsuikashiryokagamiA4Report report = new TsuikashiryokagamiA4Report(business);
             report.writeBy(reportSourceWriterA4);
@@ -97,12 +97,12 @@ public class JimuTuikaSiryoDataSakuseiA4Process extends BatchKeyBreakBase<Shinse
     }
 
     @Override
-    protected void usualProcess(ShinseiJohoEntity entity) {
+    protected void usualProcess(ShinsakaiTaiyosyaJohoEntity entity) {
         business = new JimuTuikaSiryoBusiness(entity,
                 審査員,
                 paramter,
                 データ件数,
-                ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517009.getReportId(),
+                ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517019.getReportId(),
                         KamokuCode.EMPTY, 1, 1, FlexibleDate.getNowDate()));
         TsuikashiryokagamiA4Report report = new TsuikashiryokagamiA4Report(business);
         report.writeBy(reportSourceWriterA4);

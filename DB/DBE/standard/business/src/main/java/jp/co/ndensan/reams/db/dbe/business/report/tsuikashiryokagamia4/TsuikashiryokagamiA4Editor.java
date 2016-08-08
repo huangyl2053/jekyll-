@@ -35,7 +35,14 @@ public class TsuikashiryokagamiA4Editor implements ITsuikashiryokagamiA4Editor {
     public TsuikashiryokagamiA4ReportSource edit(TsuikashiryokagamiA4ReportSource source) {
         source.shinsakaiNo = business.get審査会開催番号();
         source.tsuchibun = business.get通知文1();
-//        source.listshinsainName_1 = business.get審査員一覧();
+        source.shinsainName1 = business.get審査員1();
+        source.shinsainName2 = business.get審査員2();
+        source.shinsainName3 = business.get審査員3();
+        source.shinsainName4 = business.get審査員4();
+        source.shinsainName5 = business.get審査員5();
+        source.shinsainName6 = business.get審査員6();
+        source.shinsainName7 = business.get審査員7();
+        source.shinsainName8 = business.get審査員8();
         source.shinsakaiKaisaiYMD = business.get審査会開催年月日();
         source.gogitaiNo = business.get合議体番号();
         source.shinsakaiTsuikasha = business.get追加審査対象者数();

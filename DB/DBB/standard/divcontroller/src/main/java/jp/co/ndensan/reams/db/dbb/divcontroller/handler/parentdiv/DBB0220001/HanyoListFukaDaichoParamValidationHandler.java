@@ -38,7 +38,7 @@ public class HanyoListFukaDaichoParamValidationHandler {
      */
     public ValidationMessageControlPairs validateForAction() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getNendoKijumbiSitei().getTxtKijyunbi().getValue() == null) {
+        if (!div.getNendoKijumbiSitei().getChkKijyunbiSiteiUmu().isAllSelected() && div.getNendoKijumbiSitei().getTxtKijyunbi().getValue() == null) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須項目),
                     div.getNendoKijumbiSitei().getTxtKijyunbi()));
         }

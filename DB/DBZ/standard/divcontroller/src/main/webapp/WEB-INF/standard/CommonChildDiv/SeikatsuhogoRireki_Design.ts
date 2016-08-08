@@ -8,6 +8,14 @@ module DBZ {
 
         export class Events {
 
+            public static onOk_Cancel(): string {
+                return "onOk_Cancel";
+            }
+
+            public static onbtn_AddRow(): string {
+                return "onbtn_AddRow";
+            }
+
         }
 
         export class Controls {

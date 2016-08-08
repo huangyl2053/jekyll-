@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 public class KaigoninteiShikakuInfoDiv extends Panel implements IKaigoninteiShikakuInfoDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -51,10 +51,6 @@ public class KaigoninteiShikakuInfoDiv extends Panel implements IKaigoninteiShik
     private TextBox txtHokensha;
     @JsonProperty("hdnShinchsonCode")
     private RString hdnShinchsonCode;
-    @JsonProperty("hdnShikibetsuCode")
-    private RString hdnShikibetsuCode;
-    @JsonProperty("hdnSetaikodo")
-    private RString hdnSetaikodo;
     @JsonProperty("hdnHihokenShaNo")
     private RString hdnHihokenShaNo;
 
@@ -281,42 +277,6 @@ public class KaigoninteiShikakuInfoDiv extends Panel implements IKaigoninteiShik
     }
 
     /*
-     * gethdnShikibetsuCode
-     * @return hdnShikibetsuCode
-     */
-    @JsonProperty("hdnShikibetsuCode")
-    public RString getHdnShikibetsuCode() {
-        return hdnShikibetsuCode;
-    }
-
-    /*
-     * sethdnShikibetsuCode
-     * @param hdnShikibetsuCode hdnShikibetsuCode
-     */
-    @JsonProperty("hdnShikibetsuCode")
-    public void setHdnShikibetsuCode(RString hdnShikibetsuCode) {
-        this.hdnShikibetsuCode = hdnShikibetsuCode;
-    }
-
-    /*
-     * gethdnSetaikodo
-     * @return hdnSetaikodo
-     */
-    @JsonProperty("hdnSetaikodo")
-    public RString getHdnSetaikodo() {
-        return hdnSetaikodo;
-    }
-
-    /*
-     * sethdnSetaikodo
-     * @param hdnSetaikodo hdnSetaikodo
-     */
-    @JsonProperty("hdnSetaikodo")
-    public void setHdnSetaikodo(RString hdnSetaikodo) {
-        this.hdnSetaikodo = hdnSetaikodo;
-    }
-
-    /*
      * gethdnHihokenShaNo
      * @return hdnHihokenShaNo
      */
@@ -337,8 +297,8 @@ public class KaigoninteiShikakuInfoDiv extends Panel implements IKaigoninteiShik
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
     @Override
-    public void initialize(RString hdnShinchsonCode, RString hdnShikibetsuCode, RString hdnSetaikodo, RString hdnHihokenShaNo) {
-        getHandler().initialize(hdnShinchsonCode, hdnShikibetsuCode, hdnSetaikodo, hdnHihokenShaNo);
+    public void initialize(RString hdnShinchsonCode, RString hdnHihokenShaNo) {
+        getHandler().initialize(hdnShinchsonCode, hdnHihokenShaNo);
     }
 
     @Override

@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 帳票設計_DBC200054_給付実績更新結果情報一覧表 Builder
  *
- * @reamsid_L DBC-2470-030 sunhui
+ * @reamsid_L DBC-2470-030 surun
  */
 public class KyufujissekiKoshinkekkaIchiranBuilder implements IKyufujissekiKoshinkekkaIchiranBuilder {
 

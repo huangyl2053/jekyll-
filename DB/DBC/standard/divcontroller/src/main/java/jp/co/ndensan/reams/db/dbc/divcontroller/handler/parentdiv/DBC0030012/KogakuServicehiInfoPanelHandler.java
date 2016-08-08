@@ -28,7 +28,7 @@ public class KogakuServicehiInfoPanelHandler {
 
     private final KogakuServicehiInfoPanelDiv div;
     private static final int INT_ゼロ = 0;
-    private static final RString CODE_ミ = new RString("0");
+    private static final RString CODE_ミ = new RString("0003");
     private static final RString 被保番号 = new RString("被保険者番号");
     private static final RString 照会モード = new RString("照会モード");
 

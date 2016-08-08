@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.kyodojukyushataishosha.KyodoJukyushaTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyodojukyushataishosha.KyodoIdoRenrakuhyoTaishoshaKensakuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyodojukyushataishosha.KyodoJukyushaTaishoshaParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity;
@@ -17,6 +18,12 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3004KyodoShoriyoJukyushaIdo
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyodojukyushataishosha.IKyodoJukyushaTaishoshaFinderMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -33,6 +40,7 @@ public class KyodoJukyushaTaishoshaFinder {
     private static final RString SPIT = new RString("～");
     private static final RString 定数_1 = new RString("1");
     private static final RString 定数_0 = new RString("0");
+    private static final int NUM_ZERO = 0;
 
     private final MapperProvider mapperProvider;
 
@@ -180,4 +188,22 @@ public class KyodoJukyushaTaishoshaFinder {
         return 基本送付情報list.get(0).getHiHokenshaName();
     }
 
+    /**
+     * 被保険者情報の取得のメソッドです。
+     *
+     * @param searchKey IShikibetsuTaishoPSMSearchKey
+     * @param 被保険者番号 HihokenshaNo
+     * @return 被保険者情報 IShikibetsuTaisho
+     */
+    public IShikibetsuTaisho get被保険者情報(IShikibetsuTaishoPSMSearchKey searchKey, HihokenshaNo 被保険者番号) {
+        KyodoIdoRenrakuhyoTaishoshaKensakuParameter parameter = new KyodoIdoRenrakuhyoTaishoshaKensakuParameter(
+                searchKey, 被保険者番号);
+        IKyodoJukyushaTaishoshaFinderMapper mapper = mapperProvider.create(IKyodoJukyushaTaishoshaFinderMapper.class);
+        List<UaFt200FindShikibetsuTaishoEntity> 宛名PSMlist = mapper.get被保険者情報(parameter);
+        if (宛名PSMlist == null || 宛名PSMlist.isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
+        } else {
+            return ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名PSMlist.get(NUM_ZERO));
+        }
+    }
 }

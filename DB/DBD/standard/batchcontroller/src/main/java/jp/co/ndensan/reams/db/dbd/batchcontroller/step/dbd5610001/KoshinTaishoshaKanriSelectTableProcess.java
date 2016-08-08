@@ -232,7 +232,7 @@ public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<Kos
                 return parameter.get年度();
             }
         } else {
-            return new FlexibleYear(FlexibleDate.getNowDate().toString());
+            return FlexibleDate.getNowDate().getYear();
         }
     }
 

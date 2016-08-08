@@ -64,9 +64,9 @@
             resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaijizenshinsakekkaichiran.JizenShinsaKekkaRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaijizenshinsakekkaichiran.ShinsakaiJIzenShinsakekkaIchiranMybitisParamter"
             fetchSize="500" resultOrdered="true">
-        SELECT T5508."shinsakaiIinCode",<!--介護認定審査会委員コード-->
-               T5508."shinsakaiOrder",<!--介護認定審査会審査順-->
-               T5508."nijiHanteiKekkaCode"<!--二次判定結果コード-->
+        SELECT T5508."shinsakaiIinCode",
+               T5508."shinsakaiOrder",
+               T5508."nijiHanteiKekkaCode"
 	FROM rgdb."DbT5508ShinsakaiJizenKekkaJoho" AS T5508
 	WHERE "shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
     </select>
@@ -85,8 +85,6 @@
             T5101."ninteiShinseiShinseijiKubunCode"
         FROM 
         rgdb."DbT5502ShinsakaiWariateJoho" AS T5502
-        INNER JOIN rgdb."DbT5102NinteiKekkaJoho" AS T5102
-        ON T5502."shinseishoKanriNo" = T5102."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS T5101
         ON T5502."shinseishoKanriNo" = T5101."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" As T5116

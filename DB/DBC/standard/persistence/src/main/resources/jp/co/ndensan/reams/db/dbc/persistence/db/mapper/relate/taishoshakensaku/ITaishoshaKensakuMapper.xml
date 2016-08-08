@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 受給者異動対象者検索処理のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-2101-040 quxiaodong -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.taishoshakensaku.ITaishoshaKensakuMapper">
+    <select resultOrdered="true" id="selectJukyushaIdoTaishosha"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.taishoshakensaku.TaishoshaKensakuParameter"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity"
+            fetchSize="500">
+        SELECT "C".*
+        FROM
+        (SELECT
+        "B".*
+        FROM(
+        SELECT
+        "A".*,
+        ROW_NUMBER() OVER (
+        PARTITION BY
+        "A"."hiHokenshaNo",
+        "A"."idoYMD",
+        "A"."rirekiNo"
+        ORDER BY
+        "A"."rirekiNo" DESC
+        ) AS rrkno
+        FROM
+        rgdb."DbT3001JukyushaIdoRenrakuhyo" AS "A")
+        AS "B"
+        WHERE
+        "B".rrkno  =  1) AS "C"
+        WHERE
+        "C"."logicalDeletedFlag" = #{削除データ検索}
+        <if test="異動日From != null and !異動日From.isEmpty()">
+            AND  #{異動日From}<![CDATA[<=]]>"C"."idoYMD"
+        </if>
+        <if test="異動日To != null and !異動日To.isEmpty()">
+            AND "C"."idoYMD"<![CDATA[<=]]>#{異動日To}
+        </if>
+        <if test="被保険者番号 != null and !被保険者番号.isEmpty()">
+            AND  "C"."hiHokenshaNo" = #{被保険者番号}
+        </if>
+    </select>
+</mapper>

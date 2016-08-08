@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki26;
 
-import jp.co.ndensan.reams.db.dbu.entity.report.JigyohokokuCompYoshiki26.JigyohokokuCompYoshikiReportSource;
+import jp.co.ndensan.reams.db.dbu.entity.report.JigyohokokuCompYoshiki26.JigyohokokuCompYoshiki26ReportSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
@@ -31,7 +31,7 @@ public class JigyohokokuCompYoshiki26Builder implements IJigyohokokuCompYoshiki2
     }
 
     @Override
-    public JigyohokokuCompYoshikiReportSource build() {
-        return ReportEditorJoiner.from(new JigyohokokuCompYoshikiReportSource()).join(editor).join(bodyeditor).buildSource();
+    public JigyohokokuCompYoshiki26ReportSource build() {
+        return ReportEditorJoiner.from(new JigyohokokuCompYoshiki26ReportSource()).join(editor).join(bodyeditor).buildSource();
     }
 }

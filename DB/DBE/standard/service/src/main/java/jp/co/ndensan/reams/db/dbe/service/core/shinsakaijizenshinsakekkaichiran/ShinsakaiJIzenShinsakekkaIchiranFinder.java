@@ -90,38 +90,38 @@ public class ShinsakaiJIzenShinsakekkaIchiranFinder {
         List<JizenShinsaKekkaRelateEntity> 審査結果リスト = mapper.get審査結果(ShinsakaiJIzenShinsakekkaIchiranMybitisParamter.createParamter(paramter));
         List<JizenShinsaKekkaRelateEntity> 審査員名リスト = mapper.get審査員名(ShinsakaiJIzenShinsakekkaIchiranMybitisParamter.createParamter(paramter));
         事前審査結果状況.setShinsakaiOrder(new RString("審査会審査順"));
-
-        事前審査結果状況.setShisain1(審査員名リスト.get(ZERO).getShinsakaiIinShimei());
-        事前審査結果状況.setShisain2(審査員名リスト.get(ITI).getShinsakaiIinShimei());
-        事前審査結果状況.setShisain3(審査員名リスト.get(NI).getShinsakaiIinShimei());
-        事前審査結果状況.setShisain4(審査員名リスト.get(SAN).getShinsakaiIinShimei());
-        事前審査結果状況.setShisain5(審査員名リスト.get(YON).getShinsakaiIinShimei());
+        try {
+            事前審査結果状況.setShisain1(審査員名リスト.get(ZERO).getShinsakaiIinShimei());
+        } catch (Exception e) {
+            事前審査結果状況.setShisain1(RString.EMPTY);
+        }
+        try {
+            事前審査結果状況.setShisain2(審査員名リスト.get(ITI).getShinsakaiIinShimei());
+        } catch (Exception e) {
+            事前審査結果状況.setShisain2(RString.EMPTY);
+        }
+        try {
+            事前審査結果状況.setShisain3(審査員名リスト.get(NI).getShinsakaiIinShimei());
+        } catch (Exception e) {
+            事前審査結果状況.setShisain3(RString.EMPTY);
+        }
+        try {
+            事前審査結果状況.setShisain4(審査員名リスト.get(SAN).getShinsakaiIinShimei());
+        } catch (Exception e) {
+            事前審査結果状況.setShisain4(RString.EMPTY);
+        }
+        try {
+            事前審査結果状況.setShisain5(審査員名リスト.get(YON).getShinsakaiIinShimei());
+        } catch (Exception e) {
+            事前審査結果状況.setShisain5(RString.EMPTY);
+        }
         事前審査結果List.add(事前審査結果状況);
         for (JizenShinsaKekkaRelateEntity 審査順 : 審査順リスト) {
             JizenShinsaKekkaJokyo 審査順設定 = new JizenShinsaKekkaJokyo();
             審査順設定.setShinsakaiOrder(new RString(審査順.getShinsakaiOrder()));
             事前審査結果List.add(審査順設定);
         }
-
-        for (int i = 0; i < 事前審査結果List.size(); i++) {
-            for (JizenShinsaKekkaRelateEntity 審査結果 : 審査結果リスト) {
-                if (事前審査結果List.get(i).getShinsakaiOrder().equals(new RString(審査結果.getShinsakaiOrder()))) {
-                    事前審査結果List.get(i).setShisain1(審査結果.getNijiHanteiKekkaCode());
-                }
-                if (事前審査結果List.get(i).getShinsakaiOrder().equals(new RString(審査結果.getShinsakaiOrder()))) {
-                    事前審査結果List.get(i).setShisain2(審査結果.getNijiHanteiKekkaCode());
-                }
-                if (事前審査結果List.get(i).getShinsakaiOrder().equals(new RString(審査結果.getShinsakaiOrder()))) {
-                    事前審査結果List.get(i).setShisain3(審査結果.getNijiHanteiKekkaCode());
-                }
-                if (事前審査結果List.get(i).getShinsakaiOrder().equals(new RString(審査結果.getShinsakaiOrder()))) {
-                    事前審査結果List.get(i).setShisain4(審査結果.getNijiHanteiKekkaCode());
-                }
-                if (事前審査結果List.get(i).getShinsakaiOrder().equals(new RString(審査結果.getShinsakaiOrder()))) {
-                    事前審査結果List.get(i).setShisain5(審査結果.getNijiHanteiKekkaCode());
-                }
-            }
-        }
+        事前審査結果List = set事前審査結果(事前審査結果List, 審査結果リスト, 審査員名リスト);
         return SearchResult.of(事前審査結果List, 0, false);
     }
 
@@ -141,5 +141,55 @@ public class ShinsakaiJIzenShinsakekkaIchiranFinder {
             審査員コードリスト.add(審査員コード);
         }
         return SearchResult.of(審査員コードリスト, 0, false);
+    }
+
+    private List<JizenShinsaKekkaJokyo> set事前審査結果(List<JizenShinsaKekkaJokyo> 事前審査結果List, List<JizenShinsaKekkaRelateEntity> 審査結果リスト,
+            List<JizenShinsaKekkaRelateEntity> 審査員名リスト) {
+        for (int i = 0; i < 事前審査結果List.size(); i++) {
+            for (JizenShinsaKekkaRelateEntity 審査結果 : 審査結果リスト) {
+                JizenShinsaKekkaJokyo 事前審査結果 = 事前審査結果List.get(i);
+                try {
+                    if (事前審査結果.getShinsakaiOrder().equals(new RString(審査結果.getShinsakaiOrder()))
+                            && 審査員名リスト.get(ZERO).getShinsakaiIinCode().equals(審査結果.getShinsakaiIinCode())) {
+                        事前審査結果.setShisain1(審査結果.getNijiHanteiKekkaCode());
+                    }
+                } catch (Exception e) {
+                    事前審査結果.setShisain1(RString.EMPTY);
+                }
+                try {
+                    if (事前審査結果.getShinsakaiOrder().equals(new RString(審査結果.getShinsakaiOrder()))
+                            && 審査員名リスト.get(ITI).getShinsakaiIinCode().equals(審査結果.getShinsakaiIinCode())) {
+                        事前審査結果.setShisain2(審査結果.getNijiHanteiKekkaCode());
+                    }
+                } catch (Exception e) {
+                    事前審査結果.setShisain2(RString.EMPTY);
+                }
+                try {
+                    if (事前審査結果.getShinsakaiOrder().equals(new RString(審査結果.getShinsakaiOrder()))
+                            && 審査員名リスト.get(NI).getShinsakaiIinCode().equals(審査結果.getShinsakaiIinCode())) {
+                        事前審査結果.setShisain3(審査結果.getNijiHanteiKekkaCode());
+                    }
+                } catch (Exception e) {
+                    事前審査結果.setShisain3(RString.EMPTY);
+                }
+                try {
+                    if (事前審査結果.getShinsakaiOrder().equals(new RString(審査結果.getShinsakaiOrder()))
+                            && 審査員名リスト.get(SAN).getShinsakaiIinCode().equals(審査結果.getShinsakaiIinCode())) {
+                        事前審査結果.setShisain4(審査結果.getNijiHanteiKekkaCode());
+                    }
+                } catch (Exception e) {
+                    事前審査結果.setShisain4(RString.EMPTY);
+                }
+                try {
+                    if (事前審査結果.getShinsakaiOrder().equals(new RString(審査結果.getShinsakaiOrder()))
+                            && 審査員名リスト.get(YON).getShinsakaiIinCode().equals(審査結果.getShinsakaiIinCode())) {
+                        事前審査結果.setShisain5(審査結果.getNijiHanteiKekkaCode());
+                    }
+                } catch (Exception e) {
+                    事前審査結果.setShisain5(RString.EMPTY);
+                }
+            }
+        }
+        return 事前審査結果List;
     }
 }

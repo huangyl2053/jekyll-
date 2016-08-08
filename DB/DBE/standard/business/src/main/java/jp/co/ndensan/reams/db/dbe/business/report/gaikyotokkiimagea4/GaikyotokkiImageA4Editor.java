@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.gaikyotokkiimagea4;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.gaikyotokkiimagea4.GaikyotokkiImageA4Entity;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuGaikyouBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.gaikyotokkiimagea4.GaikyotokkiImageA4ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -26,14 +26,14 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
  */
 public class GaikyotokkiImageA4Editor implements IGaikyotokkiImageA4Editor {
 
-    private final GaikyotokkiImageA4Entity item;
+    private final JimuGaikyouBusiness item;
 
     /**
      * コンストラクタです。
      *
-     * @param item {@link GaikyotokkiImageA4Entity}
+     * @param item {@link JimuGaikyouBusiness}
      */
-    protected GaikyotokkiImageA4Editor(GaikyotokkiImageA4Entity item) {
+    protected GaikyotokkiImageA4Editor(JimuGaikyouBusiness item) {
         this.item = item;
     }
 

@@ -23,9 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 介護認定審査対象者一覧表情報のBusinessの編集クラスです。
@@ -34,7 +32,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  */
 public class JimuShinsakaishiryoBusiness {
 
-    private static final int LENGTH_5 = 5;
+    private static final int SIZE_3 = 3;
+    private static final int SIZE_4 = 4;
+    private static final int SIZE_5 = 5;
+    private static final int SIZE_6 = 6;
+    private static final int SIZE_7 = 7;
     private final IinShinsakaiIinJohoProcessParameter paramter;
     private final ShinsakaiTaiyosyaJohoEntity johoEntity;
     private final List<ShinsakaiIinJohoEntity> shinsakaiIinJohoList;
@@ -109,13 +111,97 @@ public class JimuShinsakaishiryoBusiness {
     }
 
     /**
-     * 審査員一覧を取得します。
+     * shinsakaiIinJohoList1を取得します。
      *
-     * @return 審査員一覧
+     * @return shinsakaiIinJohoList1
      */
-    public RString get審査員一覧() {
-        if (no < shinsakaiIinJohoList.size()) {
-            return shinsakaiIinJohoList.get(no).getShinsakaiIinShimei().getColumnValue();
+    public RString getshinsakaiIinJohoList1() {
+        if (0 < shinsakaiIinJohoList.size()) {
+            return shinsakaiIinJohoList.get(0).getShinsakaiIinShimei().value();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * shinsakaiIinJohoList2を取得します。
+     *
+     * @return shinsakaiIinJohoList2
+     */
+    public RString getshinsakaiIinJohoList2() {
+        if (1 < shinsakaiIinJohoList.size()) {
+            return shinsakaiIinJohoList.get(1).getShinsakaiIinShimei().value();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * shinsakaiIinJohoList3を取得します。
+     *
+     * @return shinsakaiIinJohoList3
+     */
+    public RString getshinsakaiIinJohoList3() {
+        if (2 < shinsakaiIinJohoList.size()) {
+            return shinsakaiIinJohoList.get(2).getShinsakaiIinShimei().value();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * shinsakaiIinJohoList4を取得します。
+     *
+     * @return shinsakaiIinJohoList4
+     */
+    public RString getshinsakaiIinJohoList4() {
+        if (SIZE_3 < shinsakaiIinJohoList.size()) {
+            return shinsakaiIinJohoList.get(SIZE_3).getShinsakaiIinShimei().value();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * shinsakaiIinJohoList5を取得します。
+     *
+     * @return shinsakaiIinJohoList5
+     */
+    public RString getshinsakaiIinJohoList5() {
+        if (SIZE_4 < shinsakaiIinJohoList.size()) {
+            return shinsakaiIinJohoList.get(SIZE_4).getShinsakaiIinShimei().value();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * shinsakaiIinJohoList6を取得します。
+     *
+     * @return shinsakaiIinJohoList6
+     */
+    public RString getshinsakaiIinJohoList6() {
+        if (SIZE_5 < shinsakaiIinJohoList.size()) {
+            return shinsakaiIinJohoList.get(SIZE_5).getShinsakaiIinShimei().value();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * shinsakaiIinJohoList7を取得します。
+     *
+     * @return shinsakaiIinJohoList7
+     */
+    public RString getshinsakaiIinJohoList7() {
+        if (SIZE_6 < shinsakaiIinJohoList.size()) {
+            return shinsakaiIinJohoList.get(SIZE_6).getShinsakaiIinShimei().value();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * shinsakaiIinJohoList8を取得します。
+     *
+     * @return shinsakaiIinJohoList8
+     */
+    public RString getshinsakaiIinJohoList8() {
+        if (SIZE_7 < shinsakaiIinJohoList.size()) {
+            return shinsakaiIinJohoList.get(SIZE_7).getShinsakaiIinShimei().value();
         }
         return RString.EMPTY;
     }
@@ -261,10 +347,11 @@ public class JimuShinsakaishiryoBusiness {
         RStringBuilder 前回期間_下 = new RStringBuilder();
         if (johoEntity.getNijiHanteiNinteiYukoKaishiYMD() != null && !johoEntity.getNijiHanteiNinteiYukoKaishiYMD().isEmpty()) {
             前回期間_下.append(パターン33(johoEntity.getNijiHanteiNinteiYukoKaishiYMD()));
-        }
-        if (johoEntity.getNijiHanteiNinteiYukoKaishiYMD() != null && !johoEntity.getNijiHanteiNinteiYukoKaishiYMD().isEmpty()
-                && johoEntity.getNijiHanteiNinteiYukoShuryoYMD() != null && !johoEntity.getNijiHanteiNinteiYukoShuryoYMD().isEmpty()) {
-            前回期間_下.append("～");
+            if (johoEntity.getNijiHanteiNinteiYukoShuryoYMD() != null && !johoEntity.getNijiHanteiNinteiYukoShuryoYMD().isEmpty()) {
+                前回期間_下.append("～");
+            } else {
+                return 前回期間_下.toRString();
+            }
         }
         if (johoEntity.getNijiHanteiNinteiYukoShuryoYMD() != null && !johoEntity.getNijiHanteiNinteiYukoShuryoYMD().isEmpty()) {
             前回期間_下.append(パターン33(johoEntity.getNijiHanteiNinteiYukoShuryoYMD()));
@@ -314,10 +401,17 @@ public class JimuShinsakaishiryoBusiness {
 
     private RString get開催年月日() {
         RStringBuilder 審査会開催年月日 = new RStringBuilder();
-        審査会開催年月日.append(パターン33(paramter.getShinsakaiKaisaiYoteiYMD()));
-        List<RString> 時分 = paramter.getShinsakaiKaishiYoteiTime().padZeroToLeft(LENGTH_5).split(":");
-        審査会開催年月日.append(RTime.of(Integer.parseInt(時分.get(0).toString()),
-                Integer.parseInt(時分.get(1).toString())).toFormattedTimeString(DisplayTimeFormat.HH時mm分));
+        List<RString> 時分 = paramter.getShinsakaiKaishiYoteiTime().padZeroToLeft(SIZE_5).split(":");
+        審査会開催年月日.append(paramter.getShinsakaiKaisaiYoteiYMD().getYear())
+                .append(new RString("年 "))
+                .append(new RString(paramter.getShinsakaiKaisaiYoteiYMD().getMonthValue()).padZeroToLeft(2))
+                .append(new RString("月 "))
+                .append(new RString(paramter.getShinsakaiKaisaiYoteiYMD().getDayValue()).padZeroToLeft(2))
+                .append(new RString("日 "))
+                .append(時分.get(0).padZeroToLeft(2))
+                .append(new RString("時 "))
+                .append(時分.get(1).padZeroToLeft(2))
+                .append(new RString("分"));
         return 審査会開催年月日.toRString();
     }
 

@@ -9,14 +9,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.NinteiChosaHoshuTanka;
+import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiIinBetsuTanka;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiIinHoshuTanka;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShujiiIkenshoHoshuTanka;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5031NinteiChosaHoshuTankaEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5032ShujiiIkenshoHoshuTankaEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5033ShinsakaiIinHoshuTankaEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5034ShinsakaiIinBetsuTankaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5031NinteiChosaHoshuTankaDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5032ShujiiIkenshoHoshuTankaDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5033ShinsakaiIinHoshuTankaDac;
+import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5034ShinsakaiIinBetsuTankaDac;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -32,7 +35,7 @@ public class HoshuMasutaKoshinManager {
     private final DbT5031NinteiChosaHoshuTankaDac dbT5031Dac;
     private final DbT5032ShujiiIkenshoHoshuTankaDac dbT5032Dac;
     private final DbT5033ShinsakaiIinHoshuTankaDac dbT5033Dac;
-//    private final DbT5034ShinsakaiIinBetsuTankaDac dbT5034Dac;
+    private final DbT5034ShinsakaiIinBetsuTankaDac dbT5034Dac;
 
     /**
      * コンストラクタです。
@@ -41,6 +44,7 @@ public class HoshuMasutaKoshinManager {
         dbT5031Dac = InstanceProvider.create(DbT5031NinteiChosaHoshuTankaDac.class);
         dbT5032Dac = InstanceProvider.create(DbT5032ShujiiIkenshoHoshuTankaDac.class);
         dbT5033Dac = InstanceProvider.create(DbT5033ShinsakaiIinHoshuTankaDac.class);
+        dbT5034Dac = InstanceProvider.create(DbT5034ShinsakaiIinBetsuTankaDac.class);
     }
 
     /**
@@ -49,12 +53,15 @@ public class HoshuMasutaKoshinManager {
      * @param dac {@link DbT5031NinteiChosaHoshuTankaDac}
      * @param dac {@link DbT5032ShujiiIkenshoHoshuTankaDac}
      * @param dac {@link DbT5033ShinsakaiIinHoshuTankaDac}
+     * @param dac {@link DbT5034ShinsakaiIinBetsuTankaDac}
      */
     HoshuMasutaKoshinManager(DbT5031NinteiChosaHoshuTankaDac dbT5031Dac,
-            DbT5032ShujiiIkenshoHoshuTankaDac dbT5032Dac, DbT5033ShinsakaiIinHoshuTankaDac dbT5033Dac) {
+            DbT5032ShujiiIkenshoHoshuTankaDac dbT5032Dac, DbT5033ShinsakaiIinHoshuTankaDac dbT5033Dac,
+            DbT5034ShinsakaiIinBetsuTankaDac dbT5034Dac) {
         this.dbT5031Dac = dbT5031Dac;
         this.dbT5032Dac = dbT5032Dac;
         this.dbT5033Dac = dbT5033Dac;
+        this.dbT5034Dac = dbT5034Dac;
     }
 
     /**
@@ -121,17 +128,36 @@ public class HoshuMasutaKoshinManager {
     }
 
     /**
+     * 審査会委員別単価マスタ情報の取得します。
+     *
+     * @return 審査会委員別単価マスタ情報
+     */
+    @Transaction
+    public SearchResult<ShinsakaiIinBetsuTanka> get審査会委員別単価マスタ情報() {
+        List<ShinsakaiIinBetsuTanka> list = new ArrayList<>();
+        List<DbT5034ShinsakaiIinBetsuTankaEntity> entityList = dbT5034Dac.selectAllOrderBy();
+        if (entityList == null || entityList.isEmpty()) {
+            return SearchResult.of(Collections.<ShinsakaiIinBetsuTanka>emptyList(), 0, false);
+        }
+        for (DbT5034ShinsakaiIinBetsuTankaEntity entity : entityList) {
+            list.add(new ShinsakaiIinBetsuTanka(entity));
+        }
+        return SearchResult.of(list, 0, false);
+    }
+
+    /**
      * 入力データをＤＢに更新します。
      *
      * @param 審査員報酬単価マスタ更新情報 審査員報酬単価マスタ更新情報
      * @param 意見書報酬単価マスタ更新情報 意見書報酬単価マスタ更新情報
      * @param 認定調査報酬単価マスタ更新情報 認定調査報酬単価マスタ更新情報
-     *
+     * @param 審査会委員別単価マスタ更新情報 審査会委員別単価マスタ更新情報
      */
     @Transaction
     public void updateマスタ情報(List<ShinsakaiIinHoshuTanka> 審査員報酬単価マスタ更新情報,
             List<ShujiiIkenshoHoshuTanka> 意見書報酬単価マスタ更新情報,
-            List<NinteiChosaHoshuTanka> 認定調査報酬単価マスタ更新情報) {
+            List<NinteiChosaHoshuTanka> 認定調査報酬単価マスタ更新情報,
+            List<ShinsakaiIinBetsuTanka> 審査会委員別単価マスタ更新情報) {
         for (ShinsakaiIinHoshuTanka 審査員報酬単価マスタ : 審査員報酬単価マスタ更新情報) {
             DbT5033ShinsakaiIinHoshuTankaEntity entity = 審査員報酬単価マスタ.toEntity();
             if (EntityDataState.Deleted.equals(entity.getState())) {
@@ -143,7 +169,7 @@ public class HoshuMasutaKoshinManager {
         for (ShujiiIkenshoHoshuTanka 意見書報酬単価マスタ : 意見書報酬単価マスタ更新情報) {
             DbT5032ShujiiIkenshoHoshuTankaEntity entity = 意見書報酬単価マスタ.toEntity();
             if (EntityDataState.Deleted.equals(entity.getState())) {
-                dbT5032Dac.saveByForDeletePhysical(entity);
+                dbT5032Dac.saveOrDeletePhysicalBy(entity);
             } else {
                 dbT5032Dac.save(entity);
             }
@@ -154,6 +180,14 @@ public class HoshuMasutaKoshinManager {
                 dbT5031Dac.saveOrDeletePhysicalBy(entity);
             } else {
                 dbT5031Dac.save(entity);
+            }
+        }
+        for (ShinsakaiIinBetsuTanka 審査会委員別単価マスタ : 審査会委員別単価マスタ更新情報) {
+            DbT5034ShinsakaiIinBetsuTankaEntity entity = 審査会委員別単価マスタ.toEntity();
+            if (EntityDataState.Deleted.equals(entity.getState())) {
+                dbT5034Dac.saveOrDeletePhysicalBy(entity);
+            } else {
+                dbT5034Dac.save(entity);
             }
         }
     }

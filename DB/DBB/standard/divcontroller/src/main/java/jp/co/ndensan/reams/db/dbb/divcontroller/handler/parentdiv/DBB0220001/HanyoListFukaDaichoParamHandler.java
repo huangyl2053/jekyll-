@@ -145,6 +145,7 @@ public class HanyoListFukaDaichoParamHandler {
         div.getChushutsuPanel2().getCcdAtenaJoken().initialize();
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBB介護賦課, 出力順帳票ID);
         div.getCcdShutsuryokuKoumoku().load(出力項目帳票ID, SubGyomuCode.DBB介護賦課);
+        div.getCcdShutsuryokuKoumoku().setDisplayNone(false);
         div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setDisabled(false);
         div.getNendoKijumbiSitei().getDdlChoteiNendo().setDisabled(false);
         div.getNendoKijumbiSitei().getDdlFukaNendo().setDisabled(false);

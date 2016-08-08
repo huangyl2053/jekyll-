@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0800011
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.business.core.zenkokuhokenshamasterkoshin.UrT0507HokenjaEntityBusiness;
+import jp.co.ndensan.reams.db.dbu.business.core.zenkokuhokenshamasterkoshin.HokenshaMasterKoshinBusiness;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0800011.DBU0800011StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0800011.DBU0800011TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0800011.ZenkokuHokenshaMasterKoshinDiv;
@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaShubetsu;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaShubetsuType;
 import jp.co.ndensan.reams.ur.urz.definition.core.zenkokujusho.ZenkokuJushoDataKubunType;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrNotificationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.hokenja.HokenjaManagerFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.hokenja.HokenjaSearchItem;
@@ -55,7 +56,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.searchcondition.SearchCondition
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.StringOperator;
 
 /**
- * 全国保険者マスタ更新のDivです。
+ * 全国保険者マスタ更新のDivControllerです。
  *
  * @reamsid_L DBU-4230-010 chenxiangyu
  */
@@ -217,6 +218,8 @@ public class ZenkokuHokenshaMasterKoshin {
             }
             save(div);
             RealInitialLocker.release(前排他ロックキー);
+            div.getCcdKanryoMessage().setSuccessMessage(new RString(UrNotificationMessages.保存終了.getMessage().evaluate()),
+                    RString.EMPTY, RString.EMPTY);
             return ResponseData.of(div).setState(DBU0800011StateName.完了);
         }
         return ResponseData.of(div).respond();
@@ -289,7 +292,7 @@ public class ZenkokuHokenshaMasterKoshin {
                 builder.setTelNo(new TelNo(row.getTelNo()));
                 builder.setYubinNo(new YubinNo(row.getYubinNo()));
                 Hokenja hknj = builder.build();
-                UrT0507HokenjaEntityBusiness business = new UrT0507HokenjaEntityBusiness(hknj.toEntity());
+                HokenshaMasterKoshinBusiness business = new HokenshaMasterKoshinBusiness(hknj.toEntity());
                 if (追加状態.equals(row.getJotai())) {
                     business.setState(EntityDataState.Added);
                     flag = (1 == manager.save保険者(new Hokenja(business.getEntity())));

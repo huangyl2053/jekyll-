@@ -7,12 +7,12 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc120010;
 
 import java.util.HashMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.KokuhorenIFUpdataProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.KokuhorenIFUpdateCtrlRecordProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.KyufuKanrihyoDeleteProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.KyufuKanrihyoInBatchRegistFileReadProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.KyufuKanrihyoInBatchRegistTempSaveProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.SharedFileCopyProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120010.KokuhorenIFUpdataProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120010.KokuhorenIFUpdateCtrlRecordProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120010.KyufuKanrihyoDeleteProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120010.KyufuKanrihyoInBatchRegistFileReadProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120010.KyufuKanrihyoInBatchRegistTempSaveProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120010.SharedFileCopyProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.KyufuKanrihyoInBatchRegistCsvOutputProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.KyufuKanrihyoInBatchRegistGetEditInfoProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.KokuhorenJohoTorikomiBatchParameter;

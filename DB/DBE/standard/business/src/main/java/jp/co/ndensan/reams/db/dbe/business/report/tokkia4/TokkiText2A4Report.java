@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.business.report.tokkia4;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkia4.TokkiText2A4Entity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkia4.TokkiTextEntity;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.TokkiText1A4Business;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitexta4.TokkiA4Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkia4.TokkiText2A4ReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class TokkiText2A4Report extends Report<TokkiText2A4ReportSource> {
 
-    private final TokkiText2A4Entity entity;
+    private final TokkiText1A4Business entity;
     private static final int ZERO = 0;
     private static final int MAXCOUNT = 30;
 
@@ -30,7 +30,7 @@ public class TokkiText2A4Report extends Report<TokkiText2A4ReportSource> {
      *
      * @param entity 特記事項2枚目以降（A4版）Entity
      */
-    public TokkiText2A4Report(TokkiText2A4Entity entity) {
+    public TokkiText2A4Report(TokkiText1A4Business entity) {
         this.entity = entity;
     }
 
@@ -53,7 +53,7 @@ public class TokkiText2A4Report extends Report<TokkiText2A4ReportSource> {
         List<RString> bodyList = new ArrayList<>();
 
         if (!entity.get短冊情報リスト().isEmpty()) {
-            for (TokkiTextEntity tokkiTextEntity : entity.get短冊情報リスト()) {
+            for (TokkiA4Entity tokkiTextEntity : entity.get短冊情報リスト()) {
                 bodyList.add(tokkiTextEntity.get事項番号());
                 bodyList.add(tokkiTextEntity.get項目名称());
             }

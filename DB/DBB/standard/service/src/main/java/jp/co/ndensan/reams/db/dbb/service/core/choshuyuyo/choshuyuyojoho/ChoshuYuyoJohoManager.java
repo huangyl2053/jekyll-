@@ -139,10 +139,10 @@ public class ChoshuYuyoJohoManager {
      * @param 徴収猶予の情報検索条件 徴収猶予の情報検索条件
      * @return ChoshuYuyoJoho nullが返る可能性があります。
      */
-    public ChoshuYuyoJoho selsect徴収猶予の情報_最新(ChoshuYuyoJohoRelateMapperParameter 徴収猶予の情報検索条件) {
+    public ChoshuYuyoJoho select徴収猶予の情報_最新(ChoshuYuyoJohoRelateMapperParameter 徴収猶予の情報検索条件) {
         requireNonNull(徴収猶予の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage(検索条件.toString()));
         IChoshuYuyoJohoRelateMapper mapper = mapperProvider.create(IChoshuYuyoJohoRelateMapper.class);
-        ChoshuYuyoJohoRelateEntity relateEntity = mapper.selsect徴収猶予の情報_最新(徴収猶予の情報検索条件);
+        ChoshuYuyoJohoRelateEntity relateEntity = mapper.select徴収猶予の情報_最新(徴収猶予の情報検索条件);
         if (relateEntity == null) {
             return null;
         }

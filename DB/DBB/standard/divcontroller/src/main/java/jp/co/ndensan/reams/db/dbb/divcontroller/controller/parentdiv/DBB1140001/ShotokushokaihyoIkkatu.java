@@ -48,8 +48,8 @@ public class ShotokushokaihyoIkkatu {
      * @return ResponseData<SourceDataCollection>
      */
     public ResponseData<ShotokuShokaihyoHakkoBatchParameter> onClick_Register(ShotokushokaihyoIkkatuDiv div) {
-        boolean テストプリント = getHandler(div).getテストプリント();
-        boolean 再発行する = getHandler(div).get再発行する();
+        boolean テストプリント = getHandler(div).isテストプリント();
+        boolean 再発行する = getHandler(div).is再発行する();
         if (getHandler(div).is再発行対象のチェック(再発行する)) {
             throw new ApplicationException(UrErrorMessages.選択されていない.getMessage()
                     .replace(MSG_再発行対象.toString()));
@@ -87,7 +87,7 @@ public class ShotokushokaihyoIkkatu {
      */
     public ResponseData<ShotokushokaihyoIkkatuDiv> onChange_ddlShoriNendo(ShotokushokaihyoIkkatuDiv div) {
 
-        boolean 再発行する = getHandler(div).get再発行する();
+        boolean 再発行する = getHandler(div).is再発行する();
         if (再発行する) {
             getHandler(div).set再発行対象();
             return ResponseData.of(div).respond();

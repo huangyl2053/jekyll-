@@ -67,6 +67,7 @@ public class JimuSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
 
     @Override
     protected void usualProcess(ShinsakaiSiryoKyotsuEntity entity) {
+        entity.setJimukyoku(true);
         business = new JimuSonotashiryoBusiness(entity);
         SonotashiryoA4Report reportA4 = new SonotashiryoA4Report(business);
         reportA4.writeBy(reportSourceWriterA4);

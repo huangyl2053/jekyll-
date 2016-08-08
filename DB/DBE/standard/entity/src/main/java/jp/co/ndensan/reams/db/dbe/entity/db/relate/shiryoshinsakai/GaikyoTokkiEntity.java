@@ -22,4 +22,5 @@ public class GaikyoTokkiEntity {
     private RString dbt5206_kazokuJokyo;
     private RString dbt5206_kyojuKankyo;
     private RString dbt5206_kikaiKiki;
+    private boolean isJimukyoku;
 }
