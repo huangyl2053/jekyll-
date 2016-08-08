@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.report.futanwariaishorenchoyoko;
+package jp.co.ndensan.reams.db.dbc.business.report.futanwariaishokattokami;
 
 import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishokattokami.FutanWariaiShoKattokamiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishorenchoyoko.FutanWariaiShoRenchoYokoSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishokattokami.FutanWariaiShoKattokamiSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBC-4990-040 pengxingyi
  */
-public class FutanWariaiShoRenchoYokoReport extends Report<FutanWariaiShoRenchoYokoSource> {
+public class FutanWariaiShoKattokamiReport extends Report<FutanWariaiShoKattokamiSource> {
 
     private final FutanWariaiShoKattokamiEntity entity;
 
@@ -24,14 +24,15 @@ public class FutanWariaiShoRenchoYokoReport extends Report<FutanWariaiShoRenchoY
      *
      * @param entity {@link FutanWariaiShoKattokamiEntity}
      */
-    public FutanWariaiShoRenchoYokoReport(FutanWariaiShoKattokamiEntity entity) {
+    public FutanWariaiShoKattokamiReport(FutanWariaiShoKattokamiEntity entity) {
         this.entity = entity;
     }
 
     @Override
-    public void writeBy(ReportSourceWriter<FutanWariaiShoRenchoYokoSource> reportSourceWriter) {
-        IFutanWariaiShoRenchoYokoEditor editor = new FutanWariaiShoRenchoYokoEditor(entity);
-        IFutanWariaiShoRenchoYokoBuilder builder = new FutanWariaiShoRenchoYokoBuilder(editor);
+    public void writeBy(ReportSourceWriter<FutanWariaiShoKattokamiSource> reportSourceWriter) {
+        IFutanWariaiShoKattokamiEditor editor = new FutanWariaiShoKattokamiEditor(entity);
+        IFutanWariaiShoKattokamiBuilder builder = new FutanWariaiShoKattokamiBuilder(editor);
         reportSourceWriter.writeLine(builder);
     }
+
 }

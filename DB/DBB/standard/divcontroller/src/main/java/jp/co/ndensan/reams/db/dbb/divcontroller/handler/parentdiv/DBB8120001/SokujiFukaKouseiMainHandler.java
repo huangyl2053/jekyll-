@@ -589,7 +589,7 @@ public class SokujiFukaKouseiMainHandler {
                     Kibetsu 介護期別情報 = 介護期別.createBuilderForEdit().setKibetsu(choteiKyotsuBuilder.build().modifiedModel()).build();
                     賦課の情報.createBuilderForEdit().setKibetsu(介護期別情報);
                 }
-                return Boolean.TRUE;
+                return is差異がある;
             }
         }
         return is差異がある;

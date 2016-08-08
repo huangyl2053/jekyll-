@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120010;
 
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufukanrihyo200004.IKyufuKanrihyo200004Mapper;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufukanrihyo200604.IKyufuKanrihyo200604Mapper;
