@@ -46,7 +46,7 @@ public class TsuchishoJoho537 {
     }
 
     /**
-     * 「戻る」ボタン事件のメソッドます。
+     * 「戻る」ボタン事件のメソッドです。
      *
      * @param div TsuchishoJoho537Div
      * @return ResponseData
@@ -56,7 +56,7 @@ public class TsuchishoJoho537 {
     }
 
     /**
-     * onClick_btnExcute
+     * 「実行する」ボタン事件のメソッドです。
      *
      * @param div TsuchishoJoho537Div
      * @return ResponseData
@@ -68,13 +68,7 @@ public class TsuchishoJoho537 {
         return ResponseData.of(new KokuhorenDataTorikomiBatchParameter()).respond();
     }
 
-    /**
-     * 「実行する」ボタン事件のメソッドです。
-     *
-     * @param div TsuchishoJoho537Div
-     * @return KogakuKyufuKetteiInBatchParameter
-     */
-    public KokuhorenDataTorikomiBatchParameter setBatchParameter(TsuchishoJoho537Div div) {
+    private KokuhorenDataTorikomiBatchParameter setBatchParameter(TsuchishoJoho537Div div) {
         //TODO QA1119
         if (div.getCcdKokurenJohoTorikomi().get出力順ID() != null) {
             long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
