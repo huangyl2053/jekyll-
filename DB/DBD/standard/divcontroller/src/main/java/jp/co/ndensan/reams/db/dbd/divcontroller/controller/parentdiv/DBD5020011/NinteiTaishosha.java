@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5020011.Yok
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -27,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class NinteiTaishosha {
 
+    private LockingKey 排他キー;
+
     /**
      * 画面初期化
      *
@@ -36,7 +40,7 @@ public class NinteiTaishosha {
     public ResponseData<NinteiTaishoshaDiv> onLoad(NinteiTaishoshaDiv div) {
         List<dgNinteiTaishosha_Row> ninteiTaishoshalist = getHandler().onLoad();
 
-        ViewStateHolder.put(ViewStateKeys.申請書管理番号, getHandler().get要介護認定インターフェース情報(ninteiTaishoshalist));
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号リスト, getHandler().get要介護認定インターフェース情報(ninteiTaishoshalist));
 
         if (ninteiTaishoshalist.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
@@ -44,6 +48,12 @@ public class NinteiTaishosha {
 
         div.getTxtGaitosha().setValue(new RString(ninteiTaishoshalist.size()));
         div.getDgNinteiTaishosha().setDataSource(ninteiTaishoshalist);
+        //TODO アクセスログを出力する。
+//        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY,
+//                new ExpandedInformation(new Code("0003"),
+//                        new RString("被保番号"),
+//                        div.getDgNinteiTaishosha().getActiveRow().get被保険者番号()));
+//        AccessLogger.log(AccessLogType.照会, personalData);
         return ResponseData.of(div).setState(DBD5020011StateName.初期表示);
     }
 
@@ -54,8 +64,9 @@ public class NinteiTaishosha {
      * @return ResponseData
      */
     public ResponseData<NinteiTaishoshaDiv> onSelectBySelectButton(NinteiTaishoshaDiv div) {
-        // TODO 申請区分（法令）コードのEnum設定表を確認要
-        // TODO ViewStateに選択されたレコードの申請書管理番号をセットし　確認要
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号, div.getDgNinteiTaishosha().getActiveRow().get更新key());
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, div.getDgNinteiTaishosha().getActiveRow().get被保険者番号());
+
         if (div.getDgNinteiTaishosha().getActiveRow().get申請法().equals(new RString("新規申請"))
                 || div.getDgNinteiTaishosha().getActiveRow().get申請法().equals(new RString("更新申請"))) {
             return ResponseData.of(div).forwardWithEventName(DBD5020011TransitionEventName.新規更新選択).respond();
@@ -71,9 +82,12 @@ public class NinteiTaishosha {
      * @return ResponseData
      */
     public ResponseData<NinteiTaishoshaDiv> onClick_btnKeshikomi(NinteiTaishoshaDiv div) {
+        排他キー = new LockingKey(new RString("DBEShinseishoKanriNo").concat(div.getDgNinteiTaishosha().getActiveRow().get更新key()));
+        RealInitialLocker.lock(排他キー);
         RString 申請書管理番号 = div.getDgNinteiTaishosha().getActiveRow().get更新key();
-        ArrayList<YokaigoNinteiInterface> yokaigoNinteiInterfaceList = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ArrayList.class);
+        ArrayList<YokaigoNinteiInterface> yokaigoNinteiInterfaceList = ViewStateHolder.get(ViewStateKeys.申請書管理番号リスト, ArrayList.class);
         getHandler().save消込(申請書管理番号, yokaigoNinteiInterfaceList);
+        RealInitialLocker.release(排他キー);
         return ResponseData.of(div).setState(DBD5020011StateName.初期表示);
     }
 

@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
@@ -40,5 +41,6 @@ public class YokaigoNinteiTaisyosyaIchiranEntity {
 
     private FlexibleDate 要介護認定一次判定年月日;
     private Code 要介護認定一次判定結果コード認知症加算;
+    private YMDHMS 取込日時2;
 
 }
