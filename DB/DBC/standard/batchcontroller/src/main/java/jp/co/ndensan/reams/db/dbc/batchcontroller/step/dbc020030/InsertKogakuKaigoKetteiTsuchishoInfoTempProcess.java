@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020030;
 
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.KogakukaigoKetteiTsuchishoInfoTempParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehishikyuketteitsuchisho.KogakuKaigoServiceProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KetteiTsuchishoInfoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KetteiTsuchishoInfoTempResultEntity;
@@ -19,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * 高額サービス費支給（不支給）決定通知書作成のバッチフロークラスです。
+ * 高額サービス等支給（不支給）決定通知書情報一時TBLの登録処理のクラスです。
  *
  * @reamsid_L DBC-2000-030 xicongwang
  */
@@ -30,7 +29,7 @@ public class InsertKogakuKaigoKetteiTsuchishoInfoTempProcess extends BatchProces
 
     private static final RString 高額サービス決定通知書情報一時_TABLE_NAME = new RString("KetteiTsuchishoInfoTempEntity");
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "kogakukaigoservicehishikyuketteitsuchisho.IKogakuKaigoServicehiShikyuKetteiTsuchishoMapper.select高額サービス情報");
+            + "kogakukaigoservice.IKogakuKaigoServicehiShikyuKetteiTsuchishoMapper.select高額サービス情報");
 
     private KogakuKaigoServiceProcessParameter parameter;
     ServicehiShikyuKetteiTsuchisho manager;
@@ -48,9 +47,7 @@ public class InsertKogakuKaigoKetteiTsuchishoInfoTempProcess extends BatchProces
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MAPPERPATH, new KogakukaigoKetteiTsuchishoInfoTempParameter(parameter.get抽出モード(),
-                parameter.get印書(), parameter.get高額自動償還(), parameter.get抽出条件日付From(),
-                parameter.get抽出条件日付To(), parameter.get決定者受付年月()));
+        return new BatchDbReader(MAPPERPATH, parameter.toパラメータ());
     }
 
     @Override
