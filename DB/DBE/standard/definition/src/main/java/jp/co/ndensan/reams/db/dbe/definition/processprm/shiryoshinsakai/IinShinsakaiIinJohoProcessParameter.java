@@ -32,8 +32,9 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
     private RString printHou;
     private Decimal chohyoIinHusu;
     private RString shinsakaiKaishiYoteiTime;
-    private boolean isSakuseiJokenHani;
-    private boolean isSakuseiJokenTuika;
+    private RString sakuseiJoken;
+    private final RString 作成条件_範囲指定 = new RString("範囲指定");
+    private final RString 作成条件_追加分 = new RString("追加分");
 
     /**
      * コンストラクタです。
@@ -45,6 +46,9 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
      * @param shuturyokuSutairu 出力スタイル
      * @param printHou 印刷方法
      * @param shinsakaiKaishiYoteiTime 介護認定審査会開始予定時刻
+     * @param sakuseiJoken 作成条件
+     * @param bangoStart 開始資料番号
+     * @param bangoEnd 終了資料番号
      */
     public IinShinsakaiIinJohoProcessParameter(
             int gogitaiNo,
@@ -53,7 +57,10 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
             RString shuturyokuJun,
             RString shuturyokuSutairu,
             RString printHou,
-            RString shinsakaiKaishiYoteiTime) {
+            RString shinsakaiKaishiYoteiTime,
+            RString sakuseiJoken,
+            int bangoStart,
+            int bangoEnd) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shuturyokuJun = shuturyokuJun;
         this.gogitaiNo = gogitaiNo;
@@ -61,6 +68,9 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
         this.shuturyokuSutairu = shuturyokuSutairu;
         this.printHou = printHou;
         this.shinsakaiKaishiYoteiTime = shinsakaiKaishiYoteiTime;
+        this.sakuseiJoken = sakuseiJoken;
+        this.bangoStart = bangoStart;
+        this.bangoEnd = bangoEnd;
     }
 
     /**
@@ -70,6 +80,14 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
      */
     public IinShinsakaiIinJohoMyBatisParameter toIinShinsakaiIinJohoMyBatisParameter() {
         boolean isShuturyokuJunEmpty = false;
+        boolean isSakuseiJokenHani = false;
+        boolean isSakuseiJokenTuika = false;
+        if (作成条件_範囲指定.equals(sakuseiJoken)) {
+            isSakuseiJokenHani = true;
+        }
+        if (作成条件_追加分.equals(sakuseiJoken)) {
+            isSakuseiJokenTuika = true;
+        }
         if (RString.isNullOrEmpty(shuturyokuJun)) {
             isShuturyokuJunEmpty = true;
         }
@@ -84,10 +102,18 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
      */
     public JimuShinsakaiIinJohoMyBatisParameter toJimuShinsakaiIinJohoMyBatisParameter() {
         boolean isShuturyokuJun = false;
+        boolean isSakuseiJokenHani = false;
+        boolean isSakuseiJokenTuika = false;
+        if (作成条件_範囲指定.equals(sakuseiJoken)) {
+            isSakuseiJokenHani = true;
+        }
+        if (作成条件_追加分.equals(sakuseiJoken)) {
+            isSakuseiJokenTuika = true;
+        }
         if (RString.isNullOrEmpty(shuturyokuJun)) {
             isShuturyokuJun = true;
         }
         return new JimuShinsakaiIinJohoMyBatisParameter(bangoStart, bangoEnd, shuturyokuJun,
-                isShuturyokuJun, isSakuseiJokenHani, isSakuseiJokenTuika, shinsakaiKaisaiNo, new RString(gogitaiNo), shinsakaiKaisaiYoteiYMD);
+                isShuturyokuJun, isSakuseiJokenHani, isSakuseiJokenTuika, shinsakaiKaisaiNo, gogitaiNo, shinsakaiKaisaiYoteiYMD);
     }
 }

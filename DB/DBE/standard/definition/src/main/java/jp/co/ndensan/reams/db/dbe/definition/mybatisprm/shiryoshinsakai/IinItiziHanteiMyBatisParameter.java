@@ -21,8 +21,8 @@ public class IinItiziHanteiMyBatisParameter implements IMyBatisParameter {
 
     private RString shinsakaiKaisaiNo;
     private RString shuturyokuJun;
-    private RString bangoStart;
-    private RString bangoEnd;
+    private int bangoStart;
+    private int bangoEnd;
     private ShinseishoKanriNo shinseishoKanri;
     private int ninteichosaRirekiNo;
     private RString genponKubun;
@@ -44,8 +44,8 @@ public class IinItiziHanteiMyBatisParameter implements IMyBatisParameter {
     public IinItiziHanteiMyBatisParameter(
             RString shinsakaiKaisaiNo,
             RString shuturyokuJun,
-            RString bangoStart,
-            RString bangoEnd,
+            int bangoStart,
+            int bangoEnd,
             boolean isSakuseiJokenHani,
             boolean isSakuseiJokenTuika,
             boolean isIsShuturyokuJun) {

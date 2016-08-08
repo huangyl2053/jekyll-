@@ -1211,11 +1211,16 @@ public class SabisuJyoukyoA3 {
         項目.set日常生活自立度リスト(日常生活自立度リスト);
         項目.set認定調査結果認知症高齢者自立度(set認知症高齢者自立度(entity.getNinchishoNichijoSeikatsuJiritsudoCode()));
         項目.set意見書認知症高齢者自立度(set認知症高齢者自立度(entity.getNinchishoNichijoSeikatsuJiritsudoCode()));
-
         if (RString.isNullOrEmpty(entity.getHihokenshaKubunCode())) {
             項目.set被保険者区分(RString.EMPTY);
         } else {
             項目.set被保険者区分(HihokenshaKubunCode.toValue(entity.getHihokenshaKubunCode()).get名称());
+            if (HihokenshaKubunCode.第１号被保険者.getコード().equals(entity.getHihokenshaKubunCode())
+                    || entity.getNigoTokuteiShippeiCode() == null || entity.getNigoTokuteiShippeiCode().isEmpty()) {
+                項目.set特定疾病名(RString.EMPTY);
+            } else {
+                項目.set特定疾病名(TokuteiShippei.toValue(entity.getNigoTokuteiShippeiCode().getColumnValue()).get名称());
+            }
         }
         if (entity.getNinteiShinseiShinseijiKubunCode() == null || entity.getNinteiShinseiShinseijiKubunCode().isEmpty()) {
             項目.set申請区分(RString.EMPTY);

@@ -143,7 +143,7 @@ public class IinTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
 
     private List<RString> contribute() {
         List<RString> 出力条件 = new ArrayList<>();
-        出力条件.add(条件(new RString("合議体番号"), paramter.getGogitaiNo()));
+        出力条件.add(条件(new RString("合議体番号"), new RString(paramter.getGogitaiNo())));
         出力条件.add(条件(new RString("介護認定審査会開催予定年月日"), paramter.getShinsakaiKaisaiYoteiYMD().wareki().toDateString()));
         出力条件.add(条件(new RString("介護認定審査会開催番号"), paramter.getShinsakaiKaisaiNo()));
         return 出力条件;

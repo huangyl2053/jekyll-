@@ -124,6 +124,12 @@ public class SabisuJyoukyoA4 {
             項目.set被保険者区分(RString.EMPTY);
         } else {
             項目.set被保険者区分(HihokenshaKubunCode.toValue(entity.getHihokenshaKubunCode()).get名称());
+            if (HihokenshaKubunCode.第１号被保険者.getコード().equals(entity.getHihokenshaKubunCode())
+                    || entity.getNigoTokuteiShippeiCode() == null || entity.getNigoTokuteiShippeiCode().isEmpty()) {
+                項目.set特定疾病名(RString.EMPTY);
+            } else {
+                項目.set特定疾病名(TokuteiShippei.toValue(entity.getNigoTokuteiShippeiCode().getColumnValue()).get名称());
+            }
         }
         if (entity.getNinteiShinseiShinseijiKubunCode() == null || entity.getNinteiShinseiShinseijiKubunCode().isEmpty()) {
             項目.set申請区分(RString.EMPTY);
@@ -149,11 +155,6 @@ public class SabisuJyoukyoA4 {
             項目.set調査員資格(RString.EMPTY);
         } else {
             項目.set調査員資格(Sikaku.toValue(entity.getChosainShikaku()).get名称());
-        }
-        if (entity.getNigoTokuteiShippeiCode() == null || entity.getNigoTokuteiShippeiCode().isEmpty()) {
-            項目.set特定疾病名(RString.EMPTY);
-        } else {
-            項目.set特定疾病名(TokuteiShippei.toValue(entity.getNigoTokuteiShippeiCode().getColumnValue()).get名称());
         }
         if (entity.getNinchishoJiritsudoIIijoNoGaizensei() == null) {
             項目.set認知症自立度Ⅱ以上の蓋然性(RString.EMPTY);
