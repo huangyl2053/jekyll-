@@ -106,15 +106,15 @@ public class ShinseihakkoMeiseiHandler {
 //        ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().getHookenshaCode(); TODO
 //        NinteiShinseiJohoChild entity = manager.get要介護認定申請情報(ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().getHookenshaCode(),
 //                ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue());
-        NinteiKanryoJoho ninteiKanryoJoho = manager.selectByShinseishoKanriNo(entity.get申請書管理番号());
-        if (ninteiKanryoJoho == null) {
-            checkninteiKanryoJoho(entity);
-        } else {
-            setZenkaiShinseiNaiyoinfo(entity.get認定申請区分_法令_コード().getColumnValue(),
-                    entity.get認定申請区分_申請時_コード().getColumnValue(),
-                    new RDate(entity.get認定申請年月日().toString()));
-        }
-        div.getCcdZenkaiNinteiKekkaJoho().onLoad(SubGyomuCode.DBD介護受給, entity.get申請書管理番号(), 画面区分);
+//        NinteiKanryoJoho ninteiKanryoJoho = manager.selectByShinseishoKanriNo(entity.get申請書管理番号());
+//        if (ninteiKanryoJoho == null) {
+//            checkninteiKanryoJoho(entity);
+//        } else {
+//            setZenkaiShinseiNaiyoinfo(entity.get認定申請区分_法令_コード().getColumnValue(),
+//                    entity.get認定申請区分_申請時_コード().getColumnValue(),
+//                    new RDate(entity.get認定申請年月日().toString()));
+//        }
+//        div.getCcdZenkaiNinteiKekkaJoho().onLoad(SubGyomuCode.DBD介護受給, entity.get申請書管理番号(), 画面区分);
         div.getCcdKyotakuServiceKeikakuInfo().initialize(new HihokenshaNo(被保険者番号));
         div.getCcdShusetSunyushoInfo().onLoad(shikibetsuCode);
     }
