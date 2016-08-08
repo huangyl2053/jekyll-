@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.entity.report.source.SogojigyohiKagoKetteiIn;
+package jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohiKagoKetteiIn;
 
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
