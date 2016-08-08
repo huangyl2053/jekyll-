@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.service.core.kougakusabisuhishikyuuketteitsuchishosakusei;
 
 import java.util.ArrayList;
@@ -23,17 +22,17 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  * @reamsid_L DBC-2000-120 chenhui
  */
 public class KougakuSabisuhiShikyuuKetteiTsuchishoSakusei {
-    
+
     private final DbT7022ShoriDateKanriDac dbt7022Dac;
-    
-     /**
+
+    /**
      * コンストラクタです。
      */
     KougakuSabisuhiShikyuuKetteiTsuchishoSakusei() {
         this.dbt7022Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
     }
-    
-     /**
+
+    /**
      * にて生成した{@link KougakuSabisuhiShikyuuKetteiTsuchishoSakusei}のインスタンスを返します。
      *
      * @return TokuchoHeijunkaKakutei
@@ -41,11 +40,12 @@ public class KougakuSabisuhiShikyuuKetteiTsuchishoSakusei {
     public static KougakuSabisuhiShikyuuKetteiTsuchishoSakusei createInstance() {
         return InstanceProvider.create(KougakuSabisuhiShikyuuKetteiTsuchishoSakusei.class);
     }
+
     /**
      * 前回対象日のデータの取得のメソッドです。
      *
      * @param 市町村コード LasdecCode
-     * 
+     *
      * @return List<ShoriDateKanri>
      *
      */
@@ -60,16 +60,18 @@ public class KougakuSabisuhiShikyuuKetteiTsuchishoSakusei {
         }
         return kanriList;
     }
+
     /**
      * 高額サービス費支給決定通知書作成画面入力するデータより、バッチ用パラメータクラスを作成する。
      *
      * @param parameter ShikyuketteituchishoSakuseiJyokenParameter
-     * @return {@link DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter}
+     * @return
+     * {@link DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter}
      */
-    public DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter 
-        getDBC020030_KougakuSabisuhiShikyuuKetteiTsuchishoBatchParameter(KogakuJigyoServicehiShikyuKetteiTsuchishoParameter parameter) {
-        DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter batchParameter = 
-                new DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter();
+    public DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter
+            getDBC020030_KougakuSabisuhiShikyuuKetteiTsuchishoBatchParameter(KogakuJigyoServicehiShikyuKetteiTsuchishoParameter parameter) {
+        DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter batchParameter
+                = new DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter();
         batchParameter.set抽出モード(parameter.get抽出モード());
         batchParameter.set抽出条件日付From(parameter.get抽出条件日付From());
         batchParameter.set抽出条件日付To(parameter.get抽出条件日付To());
@@ -77,7 +79,6 @@ public class KougakuSabisuhiShikyuuKetteiTsuchishoSakusei {
         batchParameter.set印書(parameter.get印書());
         batchParameter.set高額自動償還(parameter.get高額自動償還());
         batchParameter.set発行日(parameter.get発行日());
-        batchParameter.set支払い予定日(parameter.get支払い予定日());
         batchParameter.set文書番号(parameter.get文書番号());
         batchParameter.setテスト出力フラグ(parameter.getテスト出力フラグ());
         batchParameter.set決定日一括更新区分(parameter.get決定日一括更新区分());
@@ -94,17 +95,18 @@ public class KougakuSabisuhiShikyuuKetteiTsuchishoSakusei {
         batchParameter.set出力順ID(parameter.get出力順ID());
         return batchParameter;
     }
-        
-     /**
+
+    /**
      * 高額総合事業サービス費支給決定通知書作成画面入力するデータより、バッチ用パラメータクラスを作成する。
      *
      * @param parameter ShikyuketteituchishoSakuseiJyokenParameter
-     * @return {@link DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter}
+     * @return
+     * {@link DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter}
      */
-    public DBC020060_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter 
-        getDBC020060_KougakuSabisuhiShikyuuKetteiTsuchishoBatchParameter(KogakuJigyoServicehiShikyuKetteiTsuchishoParameter parameter) {
-        DBC020060_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter batchParameter = 
-                new DBC020060_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter();
+    public DBC020060_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter
+            getDBC020060_KougakuSabisuhiShikyuuKetteiTsuchishoBatchParameter(KogakuJigyoServicehiShikyuKetteiTsuchishoParameter parameter) {
+        DBC020060_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter batchParameter
+                = new DBC020060_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter();
         batchParameter.set抽出モード(parameter.get抽出モード());
         batchParameter.set抽出条件日付From(parameter.get抽出条件日付From());
         batchParameter.set抽出条件日付To(parameter.get抽出条件日付To());
@@ -112,7 +114,6 @@ public class KougakuSabisuhiShikyuuKetteiTsuchishoSakusei {
         batchParameter.set印書(parameter.get印書());
         batchParameter.set高額自動償還(parameter.get高額自動償還());
         batchParameter.set発行日(parameter.get発行日());
-        batchParameter.set支払い予定日(parameter.get支払い予定日());
         batchParameter.set文書番号(parameter.get文書番号());
         batchParameter.setテスト出力フラグ(parameter.getテスト出力フラグ());
         batchParameter.set決定日一括更新区分(parameter.get決定日一括更新区分());
