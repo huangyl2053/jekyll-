@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.shiryoshinsakai;
 
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.ShinsakaiKaisaiYoteiJohoUpdateProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.shiryoshinsakai.ShiryoShinsakaiBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -23,10 +24,12 @@ public class ShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchParam
     private static final RString 事務局_審査会資料一括作成ID = new RString("DBE517001_ShinsakaiShiryoJImukyoku");
     private static final String 委員_審査会資料一括作成 = "iinShiryoShinsakaiFlow";
     private static final RString 委員_審査会資料一括作成ID = new RString("DBE517002_ShinsakaiShiryoIin");
+    private static final String 審査会開催予定情報更新 = "kousin";
     private static final RString 選択 = new RString("1");
 
     @Override
     protected void defineFlow() {
+        boolean is資料作成済 = false;
         if (選択.equals(getParameter().getChohyoIin_taishoushaFalg())
                 || 選択.equals(getParameter().getChohyoIin_tokkiJikouFalg())
                 || 選択.equals(getParameter().getChohyoIin_itiziHanteiFalg())
@@ -36,6 +39,7 @@ public class ShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchParam
                 || 選択.equals(getParameter().getChohyoIin_tuutishoFalg())
                 || 選択.equals(getParameter().getChohyoIin_hanteiFalg())) {
             executeStep(委員_審査会資料一括作成);
+            is資料作成済 = true;
         }
         if (選択.equals(getParameter().getChoyoJimu_taishoushaFalg())
                 || 選択.equals(getParameter().getChoyoJimu_tokkiJikouFalg())
@@ -47,6 +51,10 @@ public class ShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchParam
                 || 選択.equals(getParameter().getChoyoJimu_hanteiFalg())
                 || 選択.equals(getParameter().getChoyoJimu_gaikyouTokkiIranFalg())) {
             executeStep(事務局_審査会資料一括作成);
+            is資料作成済 = true;
+        }
+        if (is資料作成済) {
+            executeStep(審査会開催予定情報更新);
         }
     }
 
@@ -68,5 +76,16 @@ public class ShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchParam
     @Step(事務局_審査会資料一括作成)
     protected IBatchFlowCommand callJimuShiryoShinsakaiFlow() {
         return otherBatchFlow(事務局_審査会資料一括作成ID, SubGyomuCode.DBE認定支援, getParameter()).define();
+    }
+
+    /**
+     * 審査会開催予定情報更新の作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(審査会開催予定情報更新)
+    protected IBatchFlowCommand createKosinData() {
+        return loopBatch(ShinsakaiKaisaiYoteiJohoUpdateProcess.class)
+                .arguments(getParameter().toIinItiziHanteiProcessParameter()).define();
     }
 }
