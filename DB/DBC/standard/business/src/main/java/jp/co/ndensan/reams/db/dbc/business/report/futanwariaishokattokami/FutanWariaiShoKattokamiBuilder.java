@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.futanwariaishokattokami;
 
-import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishokattokami.FutanWariaiShoSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishokattokami.FutanWariaiShoKattokamiSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
@@ -13,22 +13,22 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  *
  * @reamsid_L DBC-4990-040 pengxingyi
  */
-public class FutanWariaiShoBuilder implements IFutanWariaiShoBuilder {
+public class FutanWariaiShoKattokamiBuilder implements IFutanWariaiShoKattokamiBuilder {
 
-    private final IFutanWariaiShoEditor editor;
+    private final IFutanWariaiShoKattokamiEditor editor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param editor {@link IFutanWariaiShoEditor}
+     * @param editor {@link IFutanWariaiShoKattokamiEditor}
      */
-    FutanWariaiShoBuilder(IFutanWariaiShoEditor editor) {
+    FutanWariaiShoKattokamiBuilder(IFutanWariaiShoKattokamiEditor editor) {
         this.editor = editor;
     }
 
     @Override
-    public FutanWariaiShoSource build() {
-        return ReportEditorJoiner.from(new FutanWariaiShoSource()).join(editor).buildSource();
+    public FutanWariaiShoKattokamiSource build() {
+        return ReportEditorJoiner.from(new FutanWariaiShoKattokamiSource()).join(editor).buildSource();
     }
 
 }

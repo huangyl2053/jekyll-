@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.report.futanwariaishokattokami;
 
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
-import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishokattokami.FutanWariaiShoSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishokattokami.FutanWariaiShoKattokamiSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
@@ -15,12 +15,12 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  *
  * @reamsid_L DBC-4990-061 pengxingyi
  */
-public class FutanWariaiShoProperty extends ReportPropertyBase<FutanWariaiShoSource> {
+public class FutanWariaiShoKattokamiProperty extends ReportPropertyBase<FutanWariaiShoKattokamiSource> {
 
     /**
      * インスタンスを生成します。
      */
-    public FutanWariaiShoProperty() {
+    public FutanWariaiShoKattokamiProperty() {
         super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100065.getReportId());
     }
 
