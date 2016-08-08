@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.NinteiChosaHoshuTanka;
+import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiIinBetsuTanka;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiIinHoshuTanka;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShujiiIkenshoHoshuTanka;
 import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.HomonShubetsu;
@@ -19,6 +20,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6910001.Hosh
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6910001.dgChosainhoshuTankaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6910001.dgHomonChosahoshuTankaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6910001.dgIkenShohoshuTankaIchiran_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6910001.dgShinsakaiIinBetuTanka_Row;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
@@ -86,12 +88,12 @@ public class HoshuMasutaKoshinHandler {
     /**
      * 審査会委員別単価マスタを選択する画面の初期化処理です。
      *
+     * @param 審査会委員別単価マスタ情報 審査会委員別単価マスタ情報
      */
-    public void set審査会委員別単価マスタタブ() {
-        // TODO 該当テーブルがDBにありません。 1.11FWを待ち
-//        if (審査会委員別単価マスタ情報 != null && !審査会委員別単価マスタ情報.isEmpty()) {
-        set審査会委員別単価一覧情報();
-//        }
+    public void set審査会委員別単価マスタタブ(List<ShinsakaiIinBetsuTanka> 審査会委員別単価マスタ情報) {
+        if (審査会委員別単価マスタ情報 != null && !審査会委員別単価マスタ情報.isEmpty()) {
+            set審査会委員別単価一覧情報(審査会委員別単価マスタ情報);
+        }
         div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().setSelectedItem(div.getHoshuMasutaTab().getTbShinsakaiIinBetuTanka());
     }
 
@@ -415,6 +417,95 @@ public class HoshuMasutaKoshinHandler {
         }
     }
 
+    /**
+     * 審査会委員別単価マスタ追加するボタンを押下するの場合、明細パネルを表示します。
+     */
+    public void onClick_btnBetuTsuika() {
+        set審査会委員別単価マスタ明細状態_活性();
+        div.getHoshuMasutaTab().getTxtBetuKaishiYM().clearDomain();
+        div.getHoshuMasutaTab().getTxtBetuShuryoYM().clearDomain();
+        div.getHoshuMasutaTab().getTxtShinsaIinKodo().clearValue();
+        div.getHoshuMasutaTab().getTxtBetuTanka().clearValue();
+        div.getHoshuMasutaTab().getTxtBetuSonotaTanka().clearValue();
+        div.setShinsakaiIinBetuTankaState(追加モード);
+    }
+
+    /**
+     * 審査会委員別単価マスタ一覧Gridの修正ボタンを押下するの場合、明細パネルを表示します。
+     *
+     * @param 選択行の審査会委員別単価情報 選択行の審査会委員別単価情報
+     */
+    public void onSelect_btnShinsakaiIinBetuModify(dgShinsakaiIinBetuTanka_Row 選択行の審査会委員別単価情報) {
+        set審査会委員別単価マスタ明細状態_活性();
+        set審査会委員別単価マスタ明細内容(選択行の審査会委員別単価情報);
+        div.getHoshuMasutaTab().getTxtBetuKaishiYM().setDisabled(true);
+        div.getHoshuMasutaTab().getTxtBetuShuryoYM().setDisabled(true);
+        div.getHoshuMasutaTab().getTxtShinsaIinKodo().setDisabled(true);
+        div.setShinsakaiIinBetuTankaState(更新モード);
+    }
+
+    /**
+     * 審査会委員別単価マスタ一覧Gridの削除ボタンを押下するの場合、明細パネルを表示します。
+     *
+     * @param 選択行の審査会委員別単価情報 選択行の審査会委員別単価情報
+     */
+    public void onSelect_btnShinsakaiIinBetuDelete(dgShinsakaiIinBetuTanka_Row 選択行の審査会委員別単価情報) {
+        set審査会委員別単価マスタ明細内容(選択行の審査会委員別単価情報);
+        set審査会委員別単価マスタ明細状態_非活性();
+        div.setShinsakaiIinBetuTankaState(削除モード);
+    }
+
+    /**
+     * 審査会委員別単価マスタ入力を取りやめるボタンを押下するの場合、内容を破棄して一覧状態に戻ります。
+     */
+    public void onClick_btnBetuTorikesu() {
+        div.getHoshuMasutaTab().getTxtBetuKaishiYM().clearDomain();
+        div.getHoshuMasutaTab().getTxtBetuShuryoYM().clearDomain();
+        div.getHoshuMasutaTab().getTxtShinsaIinKodo().clearValue();
+        div.getHoshuMasutaTab().getTxtBetuTanka().clearValue();
+        div.getHoshuMasutaTab().getTxtBetuSonotaTanka().clearValue();
+        div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().setSelectedItem(div.getHoshuMasutaTab().getTbShinsakaiIinBetuTanka());
+    }
+
+    /**
+     * 審査会委員別単価マスタ更新するボタンを押下するの場合、審査会委員別単価マスタ一覧を更新します。
+     */
+    public void onClick_btnBetuKousin() {
+        RString 処理モード = div.getShinsakaiIinBetuTankaState();
+        List<dgShinsakaiIinBetuTanka_Row> 審査会委員別単価マスタ一覧情報
+                = div.getHoshuMasutaTab().getDgShinsakaiIinBetuTanka().getDataSource();
+        dgShinsakaiIinBetuTanka_Row 選択したデータ
+                = div.getHoshuMasutaTab().getDgShinsakaiIinBetuTanka().getActiveRow();
+        if (追加モード.equals(処理モード)) {
+            dgShinsakaiIinBetuTanka_Row 新規データ = new dgShinsakaiIinBetuTanka_Row();
+            新規データ.setColumnState(追加モード);
+            新規データ.getKaishiYM().setValue(new FlexibleDate(div.getHoshuMasutaTab().getTxtBetuKaishiYM().getDomain().toDateString()));
+            新規データ.getShuryoYM().setValue(new FlexibleDate(div.getHoshuMasutaTab().getTxtBetuShuryoYM().getDomain().toDateString()));
+            新規データ.setShinsakaiIinCode(div.getHoshuMasutaTab().getTxtShinsaIinKodo().getValue());
+            新規データ.getTanka().setValue(div.getHoshuMasutaTab().getTxtBetuTanka().getValue());
+            新規データ.getSonotaTanka().setValue(div.getHoshuMasutaTab().getTxtBetuSonotaTanka().getValue());
+            審査会委員別単価マスタ一覧情報.add(新規データ);
+            Collections.sort(審査会委員別単価マスタ一覧情報, new DateComparatorShinsakaiIinBetu());
+        } else if (更新モード.equals(処理モード)) {
+            if (isデータ変更(選択したデータ) && !追加モード.equals(選択したデータ.getColumnState())) {
+                選択したデータ.setColumnState(更新モード);
+            }
+            if (isデータ変更(選択したデータ)) {
+                選択したデータ.getKaishiYM().setValue(new FlexibleDate(div.getHoshuMasutaTab().getTxtBetuKaishiYM().getDomain().toDateString()));
+                選択したデータ.getShuryoYM().setValue(new FlexibleDate(div.getHoshuMasutaTab().getTxtBetuShuryoYM().getDomain().toDateString()));
+                選択したデータ.setShinsakaiIinCode(div.getHoshuMasutaTab().getTxtShinsaIinKodo().getValue());
+                選択したデータ.getTanka().setValue(div.getHoshuMasutaTab().getTxtBetuTanka().getValue());
+                選択したデータ.getSonotaTanka().setValue(div.getHoshuMasutaTab().getTxtBetuSonotaTanka().getValue());
+            }
+        } else if (削除モード.equals(処理モード)) {
+            if (追加モード.equals(選択したデータ.getColumnState())) {
+                審査会委員別単価マスタ一覧情報.remove(選択したデータ);
+            } else {
+                選択したデータ.setColumnState(削除モード);
+            }
+        }
+    }
+
     private void set審査員報酬単価一覧情報(List<ShinsakaiIinHoshuTanka> 審査員報酬単価マスタ情報) {
         List<dgChosainhoshuTankaIchiran_Row> 審査員報酬単価一覧情報 = new ArrayList<>();
         for (ShinsakaiIinHoshuTanka 審査員報酬単価 : 審査員報酬単価マスタ情報) {
@@ -514,18 +605,18 @@ public class HoshuMasutaKoshinHandler {
                 getDdlHomonShubetsu().setDataSource(訪問種別List);
     }
 
-    private void set審査会委員別単価一覧情報() {
-//        List<dgShinsakaiIinBetuTanka_Row> 審査会委員別単価一覧情報 = new ArrayList<>();
-//        for (ShinsakaiIinHoshuTanka 審査会委員別単価 : 審査会委員別単価マスタ情報) {
-//            dgShinsakaiIinBetuTanka_Row row = new dgShinsakaiIinBetuTanka_Row();
-//            row.getKaishiYM().setValue(new FlexibleDate(審査会委員別単価.get開始年月().toDateString()));
-//            row.getShuryoYM().setValue(new FlexibleDate(審査会委員別単価.get終了年月().toDateString()));
-//            row.setShinsakaiIinCode(審査会委員別単価.get介護認定審査委員種別().value());
-//            row.getTanka().setValue(審査会委員別単価.get単価());
-//            row.getSonotaTanka().setValue(審査会委員別単価.get単価());
-//            審査会委員別単価一覧情報.add(row);
-//        }
-//        div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().getDgShinsakaiIinBetuTanka().setDataSource(審査会委員別単価一覧情報);
+    private void set審査会委員別単価一覧情報(List<ShinsakaiIinBetsuTanka> 審査会委員別単価マスタ情報) {
+        List<dgShinsakaiIinBetuTanka_Row> 審査会委員別単価一覧情報 = new ArrayList<>();
+        for (ShinsakaiIinBetsuTanka 審査会委員別単価 : 審査会委員別単価マスタ情報) {
+            dgShinsakaiIinBetuTanka_Row row = new dgShinsakaiIinBetuTanka_Row();
+            row.getKaishiYM().setValue(new FlexibleDate(審査会委員別単価.get開始年月().toDateString()));
+            row.getShuryoYM().setValue(new FlexibleDate(審査会委員別単価.get終了年月().toDateString()));
+            row.setShinsakaiIinCode(審査会委員別単価.get介護認定審査会委員コード());
+            row.getTanka().setValue(審査会委員別単価.get単価());
+            row.getSonotaTanka().setValue(審査会委員別単価.getその他単価());
+            審査会委員別単価一覧情報.add(row);
+        }
+        div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().getDgShinsakaiIinBetuTanka().setDataSource(審査会委員別単価一覧情報);
     }
 
     private void set審査員報酬単価マスタ明細状態_非活性() {
@@ -696,6 +787,60 @@ public class HoshuMasutaKoshinHandler {
                 if (o2.getHomonShubetsuCode().compareTo(o1.getHomonShubetsuCode()) != 0) {
                     return o2.getHomonShubetsuCode().compareTo(o1.getHomonShubetsuCode());
                 } else if (o2.getKaishiYM().getValue().compareTo(o1.getKaishiYM().getValue()) != 0) {
+                    return o2.getKaishiYM().getValue().compareTo(o1.getKaishiYM().getValue());
+                } else {
+                    return o2.getShuryoYM().getValue().compareTo(o1.getShuryoYM().getValue());
+                }
+            }
+        }
+    }
+
+    private void set審査会委員別単価マスタ明細状態_非活性() {
+        div.getHoshuMasutaTab().getTxtBetuKaishiYM().setDisabled(true);
+        div.getHoshuMasutaTab().getTxtBetuShuryoYM().setDisabled(true);
+        div.getHoshuMasutaTab().getTxtShinsaIinKodo().setDisabled(true);
+        div.getHoshuMasutaTab().getTxtBetuTanka().setDisabled(true);
+        div.getHoshuMasutaTab().getTxtBetuSonotaTanka().setDisabled(true);
+    }
+
+    private void set審査会委員別単価マスタ明細状態_活性() {
+        div.getHoshuMasutaTab().getTxtBetuKaishiYM().setDisabled(false);
+        div.getHoshuMasutaTab().getTxtBetuShuryoYM().setDisabled(false);
+        div.getHoshuMasutaTab().getTxtShinsaIinKodo().setDisabled(false);
+        div.getHoshuMasutaTab().getTxtBetuTanka().setDisabled(false);
+        div.getHoshuMasutaTab().getTxtBetuSonotaTanka().setDisabled(false);
+    }
+
+    private void set審査会委員別単価マスタ明細内容(dgShinsakaiIinBetuTanka_Row 選択行の審査会委員別単価情報) {
+        div.getHoshuMasutaTab().getTxtBetuKaishiYM().setDomain(選択行の審査会委員別単価情報.getKaishiYM().getValue().getYearMonth());
+        div.getHoshuMasutaTab().getTxtBetuShuryoYM().setDomain(選択行の審査会委員別単価情報.getShuryoYM().getValue().getYearMonth());
+        div.getHoshuMasutaTab().getTxtShinsaIinKodo().setValue(選択行の審査会委員別単価情報.getShinsakaiIinCode());
+        div.getHoshuMasutaTab().getTxtBetuTanka().setValue(選択行の審査会委員別単価情報.getTanka().getValue());
+        div.getHoshuMasutaTab().getTxtBetuSonotaTanka().setValue(選択行の審査会委員別単価情報.getTanka().getValue());
+    }
+
+    private boolean isデータ変更(dgShinsakaiIinBetuTanka_Row 選択データ) {
+        return !(選択データ.getKaishiYM().getValue().getYearMonth().compareTo(
+                div.getHoshuMasutaTab().getTxtBetuKaishiYM().getDomain()) == 0
+                && 選択データ.getShuryoYM().getValue().getYearMonth().compareTo(
+                        div.getHoshuMasutaTab().getTxtBetuShuryoYM().getDomain()) == 0
+                && 選択データ.getShinsakaiIinCode().equals(div.getHoshuMasutaTab().getTxtShinsaIinKodo().getValue())
+                && (選択データ.getTanka().getValue() != null && 選択データ.getTanka().getValue().equals(
+                        div.getHoshuMasutaTab().getTxtBetuTanka().getValue()))
+                && (選択データ.getSonotaTanka().getValue() != null && 選択データ.getSonotaTanka().getValue().equals(
+                        div.getHoshuMasutaTab().getTxtBetuSonotaTanka().getValue())));
+    }
+
+    private static class DateComparatorShinsakaiIinBetu implements Comparator<dgShinsakaiIinBetuTanka_Row>, Serializable {
+
+        private static final long serialVersionUID = -7836273439314933445L;
+
+        @Override
+        public int compare(dgShinsakaiIinBetuTanka_Row o1, dgShinsakaiIinBetuTanka_Row o2) {
+            if (o2.getShinsakaiIinCode().compareTo(o1.getShinsakaiIinCode()) != 0) {
+                return o2.getShinsakaiIinCode().compareTo(o1.getShinsakaiIinCode());
+            } else {
+                if (o2.getKaishiYM().getValue().compareTo(o1.getKaishiYM().getValue()) != 0) {
                     return o2.getKaishiYM().getValue().compareTo(o1.getKaishiYM().getValue());
                 } else {
                     return o2.getShuryoYM().getValue().compareTo(o1.getShuryoYM().getValue());
