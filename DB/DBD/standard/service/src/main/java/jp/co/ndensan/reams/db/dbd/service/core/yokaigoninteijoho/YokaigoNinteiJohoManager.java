@@ -244,4 +244,24 @@ public class YokaigoNinteiJohoManager {
         }
         return resultList;
     }
+
+//    /**
+//     * 今回前回履歴情報情報を返す。
+//     *
+//     * @param 被保険者番号 被保険者番号
+//     *
+//     * @return 今回前回履歴情報 List<YokaigoRirekiJohoEntity>
+//     */
+//    public List<YokaigoRirekiJoho> get今回前回履歴情報(RString 被保険者番号) {
+//        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+//        IYokaigoNinteiJohoMapper mapper = mapperProvider.create(IYokaigoNinteiJohoMapper.class);
+//        List<YokaigoRirekiJohoEntity> 今回前回履歴情報リスト = mapper.get今回前回履歴情報(被保険者番号);
+//        List<YokaigoRirekiJoho> resultList = new ArrayList<>();
+//        for (YokaigoRirekiJohoEntity entity : 今回前回履歴情報リスト) {
+//            entity.initializeMd5ToEntities();
+//            resultList.add(new YokaigoRirekiJoho(entity));
+//        }
+//        return resultList;
+//    }
+
 }

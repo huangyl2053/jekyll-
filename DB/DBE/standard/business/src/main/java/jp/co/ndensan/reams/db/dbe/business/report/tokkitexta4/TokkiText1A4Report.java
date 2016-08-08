@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.business.report.tokkitexta4;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.TokkiText1A4Business;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitexta4.TokkiA4Entity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitexta4.TokkiText1A4Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkitexta4.TokkiText1A4ReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -21,16 +21,16 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class TokkiText1A4Report extends Report<TokkiText1A4ReportSource> {
 
-    private final TokkiText1A4Entity data;
+    private final TokkiText1A4Business data;
     private static final int MAXCOUNT = 30;
 
     /**
      * インスタンスを生成します。
      *
-     * @param date 申請に関する帳票発行のdata
+     * @param data 申請に関する帳票発行のdata
      */
-    public TokkiText1A4Report(TokkiText1A4Entity date) {
-        this.data = date;
+    public TokkiText1A4Report(TokkiText1A4Business data) {
+        this.data = data;
     }
 
     @Override

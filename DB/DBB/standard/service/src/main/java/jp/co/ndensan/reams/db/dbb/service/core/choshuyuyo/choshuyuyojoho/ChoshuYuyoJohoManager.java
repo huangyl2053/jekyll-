@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.choshuyuyo.choshuyuyo.ChoshuYuyoM
 import jp.co.ndensan.reams.db.dbb.service.core.choshuyuyo.kibetsu.KibetsuManager;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -32,6 +33,8 @@ public class ChoshuYuyoJohoManager {
     private final DbT2002FukaDac 介護賦課Dac;
     private final KibetsuManager 介護期別Manager;
     private final ChoshuYuyoManager 介護賦課徴収猶予Manager;
+
+    private static final RString 検索条件 = new RString("徴収猶予の情報検索条件");
 
     /**
      * コンストラクタです。
@@ -66,7 +69,8 @@ public class ChoshuYuyoJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ChoshuYuyoJohoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ChoshuYuyoJohoManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ChoshuYuyoJohoManager}のインスタンス
      */
     public static ChoshuYuyoJohoManager createInstance() {
         return InstanceProvider.create(ChoshuYuyoJohoManager.class);
@@ -80,7 +84,7 @@ public class ChoshuYuyoJohoManager {
      */
     @Transaction
     public ChoshuYuyoJoho get徴収猶予の情報(ChoshuYuyoJohoRelateMapperParameter 徴収猶予の情報検索条件) {
-        requireNonNull(徴収猶予の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収猶予の情報検索条件"));
+        requireNonNull(徴収猶予の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage(検索条件.toString()));
         IChoshuYuyoJohoRelateMapper mapper = mapperProvider.create(IChoshuYuyoJohoRelateMapper.class);
 
         ChoshuYuyoJohoRelateEntity relateEntity = mapper.select徴収猶予の情報ByKey(徴収猶予の情報検索条件);
@@ -99,7 +103,7 @@ public class ChoshuYuyoJohoManager {
      */
     @Transaction
     public ChoshuYuyoJoho get徴収猶予の情報_決定更正後(ChoshuYuyoJohoRelateSonotaMapperParameter 徴収猶予の情報検索条件) {
-        requireNonNull(徴収猶予の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収猶予の情報検索条件"));
+        requireNonNull(徴収猶予の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage(検索条件.toString()));
         IChoshuYuyoJohoRelateMapper mapper = mapperProvider.create(IChoshuYuyoJohoRelateMapper.class);
 
         ChoshuYuyoJohoRelateEntity relateEntity = mapper.select徴収猶予の情報_決定更正後(徴収猶予の情報検索条件);
@@ -118,10 +122,27 @@ public class ChoshuYuyoJohoManager {
      */
     @Transaction
     public ChoshuYuyoJoho get徴収猶予の情報_取消更正後(ChoshuYuyoJohoRelateSonotaMapperParameter 徴収猶予の情報検索条件) {
-        requireNonNull(徴収猶予の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収猶予の情報検索条件"));
+        requireNonNull(徴収猶予の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage(検索条件.toString()));
         IChoshuYuyoJohoRelateMapper mapper = mapperProvider.create(IChoshuYuyoJohoRelateMapper.class);
 
         ChoshuYuyoJohoRelateEntity relateEntity = mapper.select徴収猶予の情報_取消更正後(徴収猶予の情報検索条件);
+        if (relateEntity == null) {
+            return null;
+        }
+        relateEntity.initializeMd5ToEntities();
+        return new ChoshuYuyoJoho(relateEntity);
+    }
+
+    /**
+     * 主キーに合致する徴収猶予の情報を返します。
+     *
+     * @param 徴収猶予の情報検索条件 徴収猶予の情報検索条件
+     * @return ChoshuYuyoJoho nullが返る可能性があります。
+     */
+    public ChoshuYuyoJoho select徴収猶予の情報_最新(ChoshuYuyoJohoRelateMapperParameter 徴収猶予の情報検索条件) {
+        requireNonNull(徴収猶予の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage(検索条件.toString()));
+        IChoshuYuyoJohoRelateMapper mapper = mapperProvider.create(IChoshuYuyoJohoRelateMapper.class);
+        ChoshuYuyoJohoRelateEntity relateEntity = mapper.select徴収猶予の情報_最新(徴収猶予の情報検索条件);
         if (relateEntity == null) {
             return null;
         }

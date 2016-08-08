@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.teikyohyobeppyo.TeikyohyoBepp
 /**
  * 画面設計_DBC0150011_サービス提供票別表 Mapper
  *
- * @reamsid_L DBC-5110-010 xupeng
+ * @reamsid_L DBC-5100-010 xuxin
  */
 public interface ITeikyohyoBeppyoMapper {
 

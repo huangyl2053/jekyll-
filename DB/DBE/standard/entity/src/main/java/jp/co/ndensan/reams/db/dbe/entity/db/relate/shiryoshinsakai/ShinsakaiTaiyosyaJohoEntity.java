@@ -37,4 +37,5 @@ public class ShinsakaiTaiyosyaJohoEntity {
     private Code ichijiHanteiKekkaNinchishoKasanCode;
     private RString ichijiHnateiKeikokuCode;
     private int kijunJikan;
+    private boolean isJimukyoku;
 }

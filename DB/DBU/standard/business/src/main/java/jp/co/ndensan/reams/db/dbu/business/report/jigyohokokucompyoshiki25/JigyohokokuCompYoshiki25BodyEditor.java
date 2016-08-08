@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki25;
 
-import jp.co.ndensan.reams.db.dbu.entity.report.JigyohokokuCompYoshiki25.JigyohokokuCompYoshikiReportSource;
+import jp.co.ndensan.reams.db.dbu.entity.report.JigyohokokuCompYoshiki25.JigyohokokuCompYoshiki25ReportSource;
 
 /**
  *
@@ -27,11 +27,11 @@ public class JigyohokokuCompYoshiki25BodyEditor implements IJigyohokokuCompYoshi
     }
 
     @Override
-    public JigyohokokuCompYoshikiReportSource edit(JigyohokokuCompYoshikiReportSource source) {
+    public JigyohokokuCompYoshiki25ReportSource edit(JigyohokokuCompYoshiki25ReportSource source) {
         return editSource(source);
     }
 
-    private JigyohokokuCompYoshikiReportSource editSource(JigyohokokuCompYoshikiReportSource source) {
+    private JigyohokokuCompYoshiki25ReportSource editSource(JigyohokokuCompYoshiki25ReportSource source) {
         source.list1_1 = item.getListList1_1();
         source.list1_2 = item.getListList1_2();
         source.list1_3 = item.getListList1_3();

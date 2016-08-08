@@ -76,12 +76,11 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
      */
     public YokaigoNinteiJoho onLoad(RString 被保険者番号) {
 
-        setHdnArea();
-
-        YokaigoNinteiJoho 認定情報 = get認定情報(被保険者番号, is受給());
+        YokaigoNinteiJoho 認定情報 = get認定情報(被保険者番号, true);
         if (null == 認定情報) {
             return null;
         }
+        setHdnArea(認定情報);
 
         initialize(
                 //                被保険者番号,
@@ -109,6 +108,16 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
 
     }
 
+//    /**
+//     * 今回前回履歴情報情報を返す。
+//     *
+//     * @param 被保険者番号 被保険者番号
+//     *
+//     * @return 今回前回履歴情報 List<YokaigoRirekiJohoEntity>
+//     */
+//    public List<YokaigoRirekiJoho> get今回前回履歴情報(RString 被保険者番号) {
+//        return YokaigoNinteiJohoManager.createInstance().get今回前回履歴情報(被保険者番号);
+//    }
     private YokaigoNinteiJoho get認定情報(RString 被保険者番号, boolean is受給) {
         YokaigoNinteiJoho 認定情報;
         if (is受給) {
@@ -252,10 +261,11 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnkousin"), !is申請中);
     }
 
-    private void setHdnArea() {
+    private void setHdnArea(YokaigoNinteiJoho 認定情報) {
         YokaigoNinteiJohoManager manger = YokaigoNinteiJohoManager.createInstance();
         div.setHdnKaigoJimuCode(convertCodeToRString(manger.get介護導入形態コード(GyomuBunrui.介護事務.code())));
         div.setHdnKaigoNinteiCode(convertCodeToRString(manger.get介護導入形態コード(GyomuBunrui.介護認定.code())));
+        div.setHdnShikibetsuKey(null != 認定情報.get識別コード受給() ? 認定情報.get識別コード受給().value() : RString.EMPTY);
     }
 
     private YokaigoNinteiJoho edit受給者台帳(YokaigoNinteiJoho 認定情報) {

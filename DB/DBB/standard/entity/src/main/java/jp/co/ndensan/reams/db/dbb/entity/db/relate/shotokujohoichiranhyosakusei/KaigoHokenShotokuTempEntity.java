@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
  * 介護保険所得Temp
@@ -22,22 +23,65 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KaigoHokenShotokuTempEntity {
+public class KaigoHokenShotokuTempEntity implements IDbAccessable {
 
-    private ShikibetsuCode 識別コード;
-    private HihokenshaNo 被保険者番号;
-    private AtenaKanaMeisho カナ名称;
-    private AtenaMeisho 名称;
-    private FlexibleYear 所得年度;
-    private FlexibleDate 生年月日;
-    private int 年齢;
-    private RString 性別コード;
-    private RString 住民種別コード;
-    private RString 課税区分減免前;
-    private RString 課税区分減免後;
-    private Decimal 合計所得金額;
-    private Decimal 公的年金収入額;
-    private Decimal 公的年金所得額;
-    private Decimal 課税所得額;
-    private RString 登録業務;
+    private static final RString INDEX_22 = new RString("22");
+
+    private ShikibetsuCode shikibetsuCode;
+    private HihokenshaNo hihokenshaNo;
+    private AtenaKanaMeisho kanaMeisho;
+    private AtenaMeisho meisho;
+    private FlexibleYear shotokuNendo;
+    private FlexibleDate seinengappiYMD;
+    private RString shojoJiyuCode;
+    private FlexibleDate shojoIdoYMD;
+    private int age;
+    private RString seibetsuCode;
+    private RString juminShubetsuCode;
+    private RString kazeiKubun;
+    private RString kazeiKubunGemmenGo;
+    private Decimal gokeiShotokuGaku;
+    private Decimal nenkiniShunyuGaku;
+    private Decimal nenkiniShotokuGaku;
+    private Decimal kazeiShotokuGaku;
+    private RString torokuGyomu;
+
+    /**
+     * 介護保険所得を作成します。
+     *
+     * @param temp KaigoHokenShotokuTempEntity
+     * @return KaigoHokenShotokuTempEntity
+     */
+    public KaigoHokenShotokuTempEntity toKaigoHokenShotokuTempEntity(KaigoHokenShotokuTempEntity temp) {
+        KaigoHokenShotokuTempEntity entity = new KaigoHokenShotokuTempEntity();
+        entity.setShikibetsuCode(temp.getShikibetsuCode());
+        entity.setHihokenshaNo(temp.getHihokenshaNo());
+        entity.setKanaMeisho(temp.getKanaMeisho());
+        entity.setMeisho(temp.getMeisho());
+        entity.setShotokuNendo(temp.getShotokuNendo());
+        entity.setSeinengappiYMD(temp.getSeinengappiYMD());
+        entity.setShojoJiyuCode(temp.getShojoJiyuCode());
+        entity.setShojoIdoYMD(temp.getShojoIdoYMD());
+        RString 消除事由コード = temp.getShojoJiyuCode();
+        FlexibleDate 生年月日 = temp.getSeinengappiYMD();
+        if (INDEX_22.equals(消除事由コード)) {
+            FlexibleDate 消除異動年月日 = temp.getShojoIdoYMD();
+            int 年齢 = 消除異動年月日.getYearValue() - 生年月日.getYearValue();
+            entity.setAge(年齢);
+        } else {
+            int システム年 = FlexibleDate.getNowDate().getYearValue();
+            int 年齢 = システム年 - 生年月日.getYearValue();
+            entity.setAge(年齢);
+        }
+        entity.setSeibetsuCode(temp.getSeibetsuCode());
+        entity.setJuminShubetsuCode(temp.getJuminShubetsuCode());
+        entity.setKazeiKubun(temp.getKazeiKubun());
+        entity.setKazeiKubunGemmenGo(temp.getKazeiKubunGemmenGo());
+        entity.setGokeiShotokuGaku(temp.getGokeiShotokuGaku());
+        entity.setNenkiniShunyuGaku(temp.getNenkiniShunyuGaku());
+        entity.setNenkiniShotokuGaku(temp.getNenkiniShotokuGaku());
+        entity.setKazeiShotokuGaku(temp.getKazeiShotokuGaku());
+        entity.setTorokuGyomu(temp.getTorokuGyomu());
+        return entity;
+    }
 }

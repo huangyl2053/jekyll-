@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbz.service.core.shujiiiryokikanandshujiiinput;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanAndShujiiInputResult;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
@@ -114,14 +116,24 @@ public class ShujiiIryokikanAndShujiiInputFinder {
         if (entity == null) {
             return result;
         }
-        RString 主治医医療機関名称 = getIryoKikanMeisho(市町村コード, entity.getShujiiIryokikanCode().value());
+        ShujiiIryokikanCode shujiiIryokikanCode = entity.getShujiiIryokikanCode();
+        ShujiiCode shujiiCode = entity.getShujiiCode();
+        RString 主治医医療機関コード = RString.EMPTY;
+        RString 主治医コード = RString.EMPTY;
+        if (shujiiIryokikanCode != null) {
+            主治医医療機関コード = shujiiIryokikanCode.value();
+        }
+        if (shujiiCode != null) {
+            主治医コード = shujiiCode.value();
+        }
+        RString 主治医医療機関名称 = getIryoKikanMeisho(市町村コード, 主治医医療機関コード);
         DbT5912ShujiiJohoEntity dbt5912entity = dbt5912dac.selectByKeyAndJokyoFlg(
-                市町村コード, entity.getShujiiIryokikanCode().value(), entity.getShujiiCode().value());
+                市町村コード, 主治医医療機関コード, 主治医コード);
         if (dbt5912entity == null) {
             return result;
         }
-        result.set主治医コード(entity.getShujiiCode().value());
-        result.set主治医医療機関コード(entity.getShujiiIryokikanCode().value());
+        result.set主治医コード(主治医コード);
+        result.set主治医医療機関コード(主治医医療機関コード);
         result.set主治医医療機関名称(主治医医療機関名称);
         result.set主治医氏名(dbt5912entity.getShujiiName());
         result.set指定医フラグ(dbt5912entity.getShiteiiFlag());

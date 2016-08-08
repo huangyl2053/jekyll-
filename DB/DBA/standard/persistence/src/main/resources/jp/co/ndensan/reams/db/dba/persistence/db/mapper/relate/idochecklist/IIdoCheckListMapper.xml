@@ -453,28 +453,28 @@
             NULL                                AS "喪失情報_後_異動年月日",    
             NULL                                AS "喪失情報_後_届出年月日",    
            CASE  WHEN    A."jukyuKaishiYMD" IS NOT NULL  THEN (
-                 CASE  WHEN  A."jukyuShuryoYMD" IS NULL
+                 CASE  WHEN  A."jukyuHaishiYMD" IS NULL
                  THEN
                      A."jukyuKaishiYMD"
-                 WHEN  A."jukyuShuryoYMD" IS NOT NULL  THEN
+                 WHEN  A."jukyuHaishiYMD" IS NOT NULL  THEN
                      NULL END
                )
            ELSE NULL END  AS 開始年月日データ_後,
 
            CASE  WHEN    A."jukyuKaishiYMD" IS NOT NULL  THEN (
-                 CASE  WHEN  A."jukyuShuryoYMD" IS NULL
+                 CASE  WHEN  A."jukyuHaishiYMD" IS NULL
                  THEN
                      NULL
-                 WHEN  A."jukyuShuryoYMD" IS NOT NULL  THEN
-                     A."jukyuShuryoYMD"  END
+                 WHEN  A."jukyuHaishiYMD" IS NOT NULL  THEN
+                     A."jukyuHaishiYMD"  END
                )
            ELSE NULL END  AS 終了年月日データ_後,
 
            CASE  WHEN    A."jukyuKaishiYMD" IS NOT NULL  THEN (
-                 CASE  WHEN  A."jukyuShuryoYMD" IS NULL
+                 CASE  WHEN  A."jukyuHaishiYMD" IS NULL
                  THEN
                      '開始異動'
-                 WHEN  A."jukyuShuryoYMD" IS NOT NULL  THEN
+                 WHEN  A."jukyuHaishiYMD" IS NOT NULL  THEN
                      '終了異動'  END
                )
            ELSE NULL END  AS 異動情報データ4             

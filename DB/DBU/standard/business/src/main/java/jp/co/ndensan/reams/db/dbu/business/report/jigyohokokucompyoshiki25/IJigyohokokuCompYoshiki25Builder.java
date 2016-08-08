@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki25;
 
-import jp.co.ndensan.reams.db.dbu.entity.report.JigyohokokuCompYoshiki25.JigyohokokuCompYoshikiReportSource;
+import jp.co.ndensan.reams.db.dbu.entity.report.JigyohokokuCompYoshiki25.JigyohokokuCompYoshiki25ReportSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
@@ -15,5 +15,5 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
  *
  * @reamsid_L DBU-5600-260 guoqilin
  */
-public interface IJigyohokokuCompYoshiki25Builder extends IReportBuilder<JigyohokokuCompYoshikiReportSource> {
+public interface IJigyohokokuCompYoshiki25Builder extends IReportBuilder<JigyohokokuCompYoshiki25ReportSource> {
 }

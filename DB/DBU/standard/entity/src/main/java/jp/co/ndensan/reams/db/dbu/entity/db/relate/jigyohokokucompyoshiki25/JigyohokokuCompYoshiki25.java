@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki25;
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +24,7 @@ import lombok.Setter;
 public class JigyohokokuCompYoshiki25 {
 
     private RString 年報月報区分;
-    private RString 処理日時;
+    private RDateTime 処理日時;
     private RString 保険者番号;
     private RString 保険者名;
     private FlexibleYear 集計年度;
@@ -34,24 +35,6 @@ public class JigyohokokuCompYoshiki25 {
     private RString タイトル1;
     private RString タイトル2;
     private RString 給付集計区分;
-
-    private RString 件数_非該当_1;
-    private RString 件数_非該当_2;
-    private RString 件数_非該当_3;
-    private RString 件数_非該当_4;
-    private RString 件数_非該当_5;
-    private RString 件数_非該当_6;
-    private RString 件数_非該当_7;
-    private RString 件数_非該当_8;
-    private RString 件数_非該当_9;
-    private RString 件数_非該当_10;
-    private RString 件数_非該当_11;
-    private RString 件数_非該当_12;
-    private RString 件数_非該当_13;
-    private RString 件数_非該当_14;
-    private RString 件数_非該当_15;
-    private RString 件数_非該当_16;
-    private RString 件数_非該当_17;
 
     private RString 件数_要支援1_1;
     private RString 件数_要支援1_2;
@@ -250,24 +233,6 @@ public class JigyohokokuCompYoshiki25 {
     private RString 件数_合計_15;
     private RString 件数_合計_16;
     private RString 件数_合計_17;
-
-    private RString 給付費_非該当_1;
-    private RString 給付費_非該当_2;
-    private RString 給付費_非該当_3;
-    private RString 給付費_非該当_4;
-    private RString 給付費_非該当_5;
-    private RString 給付費_非該当_6;
-    private RString 給付費_非該当_7;
-    private RString 給付費_非該当_8;
-    private RString 給付費_非該当_9;
-    private RString 給付費_非該当_10;
-    private RString 給付費_非該当_11;
-    private RString 給付費_非該当_12;
-    private RString 給付費_非該当_13;
-    private RString 給付費_非該当_14;
-    private RString 給付費_非該当_15;
-    private RString 給付費_非該当_16;
-    private RString 給付費_非該当_17;
 
     private RString 給付費_要支援1_1;
     private RString 給付費_要支援1_2;

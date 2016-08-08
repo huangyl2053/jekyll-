@@ -29,6 +29,7 @@ public class PnlTotalSearchParameter implements Serializable {
     private final FlexibleDate 契約決定日;
     private final RString 契約事業者番号;
     private final RString 契約事業者名;
+    private final RString 識別コード;
 
     /**
      * パラメータを作成する。
@@ -41,6 +42,7 @@ public class PnlTotalSearchParameter implements Serializable {
      * @param 契約決定日 FlexibleDate
      * @param 契約事業者番号 RString
      * @param 契約事業者名 RString
+     * @param 識別コード RString
      */
     public PnlTotalSearchParameter(RString 契約番号,
             RString 契約サービス種類,
@@ -49,7 +51,8 @@ public class PnlTotalSearchParameter implements Serializable {
             FlexibleDate 契約申請日,
             FlexibleDate 契約決定日,
             RString 契約事業者番号,
-            RString 契約事業者名) {
+            RString 契約事業者名,
+            RString 識別コード) {
         this.契約番号 = 契約番号;
         this.契約サービス種類 = 契約サービス種類;
         this.被保番号 = 被保番号;
@@ -58,5 +61,6 @@ public class PnlTotalSearchParameter implements Serializable {
         this.契約決定日 = 契約決定日;
         this.契約事業者番号 = 契約事業者番号;
         this.契約事業者名 = 契約事業者名;
+        this.識別コード = 識別コード;
     }
 }

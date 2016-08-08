@@ -6,73 +6,96 @@
 package jp.co.ndensan.reams.db.dbc.business.report.kyufujissekikoshinkekkaichiran;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.core.keikoku.KeikokuKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.chohyoshutsuryokutaishodate.ChohyoShutsuryokuTaishoDateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinkekkaichiran.KyufujissekiKoshinkekkaIchiranSource;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
  * 帳票設計_DBC200054_給付実績更新結果情報一覧表 Editor
  *
- * @reamsid_L DBC-2470-030 sunhui
+ * @reamsid_L DBC-2470-030 surun
  */
 public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshinkekkaIchiranEditor {
 
     private final FlexibleYearMonth 処理年月;
-    private final List<ChohyoShutsuryokuTaishoDateEntity> entityList;
-    private final Association association;
+    private final ChohyoShutsuryokuTaishoDateEntity entity;
     private final RString 並び順の１件目;
     private final RString 並び順の２件目;
     private final RString 並び順の３件目;
     private final RString 並び順の４件目;
     private final RString 並び順の５件目;
     private final List<RString> 改頁項目List;
+    private final YMDHMS システム日時;
+    private final int 連番;
+    private final List<RString> indexList;
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
+    private static final int NUM_8 = 8;
+    private static final int NUM_9 = 9;
+    private static final int NUM_16 = 16;
+    private static final int NUM_17 = 17;
+    private static final RString NUM_ONE = new RString("1");
     private static final RString SAKUSEI = new RString("作成");
+    private static final RString 図形_ONE = new RString("○");
+    private static final RString 図形_TWO = new RString("◎");
+    private static final RString 図形_THREE = new RString("●");
+    private static final RString 事業者名不明_定数 = new RString("事業者名不明");
+    private static final RString 合計件数タイトル = new RString("合計件数");
 
     /**
      * コンストラクタです
      *
      * @param 処理年月 FlexibleYearMonth
-     * @param entityList List<ChohyoShutsuryokuTaishoDateEntity>
-     * @param association Association
+     * @param entity ChohyoShutsuryokuTaishoDateEntity
      * @param 並び順の１件目 RString
      * @param 並び順の２件目 RString
      * @param 並び順の３件目 RString
      * @param 並び順の４件目 RString
      * @param 並び順の５件目 RString
      * @param 改頁項目List List<RString>
+     * @param システム日時 YMDHMS
+     * @param 連番 int
+     * @param indexList List<RString>
      */
     public KyufujissekiKoshinkekkaIchiranEditor(
             FlexibleYearMonth 処理年月,
-            List<ChohyoShutsuryokuTaishoDateEntity> entityList,
-            Association association,
+            ChohyoShutsuryokuTaishoDateEntity entity,
             RString 並び順の１件目,
             RString 並び順の２件目,
             RString 並び順の３件目,
             RString 並び順の４件目,
             RString 並び順の５件目,
-            List<RString> 改頁項目List) {
+            List<RString> 改頁項目List,
+            YMDHMS システム日時,
+            int 連番,
+            List<RString> indexList) {
         this.処理年月 = 処理年月;
-        this.entityList = entityList;
-        this.association = association;
+        this.entity = entity;
         this.並び順の１件目 = 並び順の１件目;
         this.並び順の２件目 = 並び順の２件目;
         this.並び順の３件目 = 並び順の３件目;
         this.並び順の４件目 = 並び順の４件目;
         this.並び順の５件目 = 並び順の５件目;
         this.改頁項目List = 改頁項目List;
+        this.システム日時 = システム日時;
+        this.連番 = 連番;
+        this.indexList = indexList;
     }
 
     /**
@@ -83,134 +106,163 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
      */
     @Override
     public KyufujissekiKoshinkekkaIchiranSource edit(KyufujissekiKoshinkekkaIchiranSource source) {
-        RString 帳票作成年月日 = YMDHMS.now().getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+        RString 帳票作成年月日 = システム日時.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        RString 帳票作成時 = YMDHMS.now().getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+        RString 帳票作成時 = システム日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
         source.printTimeStamp = 帳票作成年月日.concat(RString.HALF_SPACE).concat(帳票作成時)
                 .concat(RString.HALF_SPACE).concat(SAKUSEI);
         source.shoriYM = 処理年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        if (entityList != null) {
-            source.hokenshaNo = entityList.get(0).get保険者番号();
-            source.hokenshaName = entityList.get(0).get保険者名();
-            source.shutsuryokujun1 = 並び順の１件目;
-            source.shutsuryokujun2 = 並び順の２件目;
-            source.shutsuryokujun3 = 並び順の３件目;
-            source.shutsuryokujun4 = 並び順の４件目;
-            source.shutsuryokujun5 = 並び順の５件目;
+        if (entity != null) {
+            source.hokenshaNo = entity.get給付実績_コントロールレコード保険者番号();
+            source.hokenshaName = entity.get給付実績_コントロールレコード保険者名();
             set出力順And改ページ(source);
-            int i = 1;
-            source.listUpper_1 = new RString(i);
-            source.listUpper_2 = entityList.get(0).get入力識別番号();
-            source.listUpper_3 = entityList.get(0).get入力識別名称_上段();
-            source.listUpper_4 = entityList.get(0).get作成区分コード();
-            source.listUpper_5 = entityList.get(0).get被保険者番号();
-            source.listUpper_6 = entityList.get(0).get宛名カナ名称();
-            source.listUpper_7 = entityList.get(0).getサービス提供年月().wareki().separator(Separator.PERIOD)
-                    .fillType(FillType.BLANK).toDateString();
-            source.listUpper_8 = entityList.get(0).get給付実績区分();
-            source.listUpper_9 = entityList.get(0).get事業者番号();
-            source.listUpper_10 = entityList.get(0).get整理番号();
-            if (entityList.get(0).getレコード件数_H1().compareTo("1") == -1) {
-                source.listUpper_11 = RString.EMPTY;
-            } else {
-                source.listUpper_11 = new RString("○");
+            source.listUpper_1 = new RString(連番);
+            source.listUpper_2 = entity.get給付実績_入力識別番号();
+            source.listUpper_3 = entity.get給付実績_入力識別名称().substring(NUM_0, NUM_8);
+            if (entity.get給付実績_給付実績情報作成区分コード() != null) {
+                source.listUpper_4 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, DBCCodeShubetsu.給付実績情報作成区分.getコード(),
+                        new Code(entity.get給付実績_給付実績情報作成区分コード()), FlexibleDate.getNowDate());
             }
-            if (entityList.get(0).getレコード件数_D1().compareTo("1") >= 1
-                    && entityList.get(0).getレコード件数_DD().compareTo("1") >= 1) {
-                source.listUpper_12 = new RString("◎");
-            } else if (entityList.get(0).getレコード件数_D1().compareTo("1") >= 1
-                    && entityList.get(0).getレコード件数_DD().compareTo("1") == 0) {
-                source.listUpper_12 = new RString("○");
-            } else if (entityList.get(0).getレコード件数_D1().compareTo("1") == 0
-                    && entityList.get(0).getレコード件数_DD().compareTo("1") >= 1) {
-                source.listUpper_12 = new RString("●");
-            } else {
-                source.listUpper_12 = RString.EMPTY;
+            source.listUpper_5 = entity.get被保険者_登録被保険者番号();
+            source.listUpper_6 = entity.get被保険者_宛名カナ名称();
+            source.listUpper_7 = entity.get給付実績_サービス提供年月().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+            if (entity.get給付実績_給付実績区分() != null) {
+                source.listUpper_8 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, DBCCodeShubetsu.給付実績区分.getコード(),
+                        new Code(entity.get給付実績_給付実績区分()), FlexibleDate.getNowDate());
             }
-            if (entityList.get(0).getレコード件数_D2().compareTo("1") == -1) {
-                source.listUpper_13 = RString.EMPTY;
-            } else {
-                source.listUpper_13 = new RString("○");
-            }
-            if (entityList.get(0).getレコード件数_D3().compareTo("1") == -1) {
-                source.listUpper_14 = RString.EMPTY;
-            } else {
-                source.listUpper_14 = new RString("○");
-            }
-            if (entityList.get(0).getレコード件数_D4().compareTo("1") == -1) {
-                source.listUpper_15 = RString.EMPTY;
-            } else {
-                source.listUpper_15 = new RString("○");
-            }
-            if (entityList.get(0).getレコード件数_D5().compareTo("1") == -1) {
-                source.listUpper_16 = RString.EMPTY;
-            } else {
-                source.listUpper_16 = new RString("○");
-            }
-            if (entityList.get(0).getレコード件数_D6().compareTo("1") == -1) {
-                source.listUpper_17 = RString.EMPTY;
-            } else {
-                source.listUpper_17 = new RString("○");
-            }
-            if (entityList.get(0).getレコード件数_D7().compareTo("1") == -1) {
-                source.listUpper_18 = RString.EMPTY;
-            } else {
-                source.listUpper_18 = new RString("○");
-            }
-            if (entityList.get(0).getレコード件数_D8().compareTo("1") >= 1) {
-                source.listUpper_19 = new RString("○");
-            } else if (entityList.get(0).getレコード件数_DE().compareTo("1") >= 1) {
-                source.listUpper_19 = new RString("○");
-            } else if (entityList.get(0).getレコード件数_D8().compareTo("1") == 0
-                    && entityList.get(0).getレコード件数_DE().compareTo("1") == 0) {
-                source.listUpper_19 = RString.EMPTY;
-            }
-
+            source.listUpper_9 = entity.get給付実績_事業所番号();
+            source.listUpper_10 = entity.get給付実績_整理番号();
+            editor給付実績_レコード件数(source);
             editorAdd(source);
-//            source.gokeiKensuTitle = new RString("合計件数");
-//            source.gokeiKensu = DecimalFormatter.toコンマ区切りRString(null, 0);
-            entityList.add(entityList.get(0));
+            editor集計(source);
+        }
+        return source;
+    }
+
+    private KyufujissekiKoshinkekkaIchiranSource editor給付実績_レコード件数(KyufujissekiKoshinkekkaIchiranSource source) {
+        if (entity.get給付実績_レコード件数H1() >= NUM_1) {
+            source.listUpper_11 = 図形_ONE;
+        } else {
+            source.listUpper_11 = RString.EMPTY;
+        }
+        if (entity.get給付実績_レコード件数D1() >= NUM_1
+                && entity.get給付実績_レコード件数DD() >= NUM_1) {
+            source.listUpper_12 = 図形_TWO;
+        } else if (entity.get給付実績_レコード件数D1() >= NUM_1
+                && entity.get給付実績_レコード件数DD() == NUM_0) {
+            source.listUpper_12 = 図形_ONE;
+        } else if (entity.get給付実績_レコード件数D1() == NUM_0
+                && entity.get給付実績_レコード件数DD() >= NUM_1) {
+            source.listUpper_12 = 図形_THREE;
+        } else {
+            source.listUpper_12 = RString.EMPTY;
+        }
+        if (entity.get給付実績_レコード件数D2() >= NUM_1) {
+            source.listUpper_13 = 図形_ONE;
+        } else {
+            source.listUpper_13 = RString.EMPTY;
+        }
+        if (entity.get給付実績_レコード件数D3() >= NUM_1) {
+            source.listUpper_14 = 図形_ONE;
+        } else {
+            source.listUpper_14 = RString.EMPTY;
+        }
+        if (entity.get給付実績_レコード件数D4() >= NUM_1) {
+            source.listUpper_15 = 図形_ONE;
+        } else {
+            source.listUpper_15 = RString.EMPTY;
+        }
+        if (entity.get給付実績_レコード件数D5() >= NUM_1) {
+            source.listUpper_16 = 図形_ONE;
+        } else {
+            source.listUpper_16 = RString.EMPTY;
+        }
+        if (entity.get給付実績_レコード件数D6() >= NUM_1) {
+            source.listUpper_17 = 図形_ONE;
+        } else {
+            source.listUpper_17 = RString.EMPTY;
+        }
+        if (entity.get給付実績_レコード件数D7() >= NUM_1) {
+            source.listUpper_18 = 図形_ONE;
+        } else {
+            source.listUpper_18 = RString.EMPTY;
+        }
+        if (entity.get給付実績_レコード件数D8() >= NUM_1) {
+            source.listUpper_19 = 図形_ONE;
+        } else if (entity.get給付実績_レコード件数DE() >= NUM_1) {
+            source.listUpper_19 = 図形_ONE;
+        } else if (entity.get給付実績_レコード件数D8() == NUM_0
+                && entity.get給付実績_レコード件数DE() == NUM_0) {
+            source.listUpper_19 = RString.EMPTY;
+        }
+        return source;
+    }
+
+    private KyufujissekiKoshinkekkaIchiranSource editor集計(KyufujissekiKoshinkekkaIchiranSource source) {
+        RString value = new RString(連番);
+        if (indexList.contains(value)) {
+            int index = indexList.indexOf(value);
+            if (index == NUM_0) {
+                source.gokeiKensuTitle = 合計件数タイトル;
+                source.gokeiKensu = value;
+            } else {
+                int frontValue = Integer.parseInt(indexList.get(index - NUM_1).toString());
+                source.gokeiKensuTitle = 合計件数タイトル;
+                source.gokeiKensu = new RString(連番 - frontValue);
+            }
+        } else {
+            source.gokeiKensuTitle = RString.EMPTY;
+            source.gokeiKensu = RString.EMPTY;
         }
         return source;
     }
 
     private KyufujissekiKoshinkekkaIchiranSource editorAdd(KyufujissekiKoshinkekkaIchiranSource source) {
-        if (entityList.get(0).getレコード件数_T1().compareTo("1") == -1) {
+        if (entity.get給付実績_レコード件数T1() >= NUM_1) {
+            source.listUpper_20 = 図形_ONE;
+        } else {
             source.listUpper_20 = RString.EMPTY;
-        } else {
-            source.listUpper_20 = new RString("○");
         }
-        if (entityList.get(0).getレコード件数_D9().compareTo("1") == -1) {
+        if (entity.get給付実績_レコード件数D9() >= NUM_1) {
+            source.listUpper_21 = 図形_ONE;
+        } else {
             source.listUpper_21 = RString.EMPTY;
-        } else {
-            source.listUpper_21 = new RString("○");
         }
-        if (entityList.get(0).getレコード件数_DA().compareTo("1") == -1) {
+        if (entity.get給付実績_レコード件数DA() >= NUM_1) {
+            source.listUpper_22 = 図形_ONE;
+        } else {
             source.listUpper_22 = RString.EMPTY;
-        } else {
-            source.listUpper_22 = new RString("○");
         }
-        if (entityList.get(0).getレコード件数_DC().compareTo("1") == -1) {
+        if (entity.get給付実績_レコード件数DC() >= NUM_1) {
+            source.listUpper_23 = 図形_ONE;
+        } else {
             source.listUpper_23 = RString.EMPTY;
-        } else {
-            source.listUpper_23 = new RString("○");
         }
-        if (new RString("1").equals(entityList.get(0).get警告区分コード())) {
+        if (NUM_ONE.equals(entity.get給付実績_警告区分コード())) {
             source.listUpper_24 = RString.EMPTY;
         } else {
-            source.listUpper_24 = entityList.get(0).get警告区分コード();
+            source.listUpper_24 = KeikokuKubun.toValue(entity.get給付実績_警告区分コード()).get名称();
         }
-        if (new RString(entityList.get(0).get入力識別名称().length()).compareTo("9") == 1) {
-            source.listLower_1 = entityList.get(0).get入力識別名称_下段();
+        int 入力識別名称Length = entity.get給付実績_入力識別名称().length();
+        if (入力識別名称Length >= NUM_9 && 入力識別名称Length < NUM_16) {
+            source.listLower_1 = entity.get給付実績_入力識別名称().substring(NUM_8, 入力識別名称Length);
+        } else if (入力識別名称Length >= NUM_16) {
+            source.listLower_1 = entity.get給付実績_入力識別名称().substring(NUM_8, NUM_16);
         } else {
             source.listLower_1 = RString.EMPTY;
         }
-        source.listLower_2 = entityList.get(0).get宛名名称();
-        if (!entityList.get(0).get事業者番号().isEmpty() && entityList.get(0).get事業者名称().isEmpty()) {
-            source.listLower_3 = new RString("事業者名不明");
+        int 宛名名称Length = entity.get被保険者_宛名名称().length();
+        if (宛名名称Length < NUM_17) {
+            source.listLower_2 = entity.get被保険者_宛名名称().substring(NUM_0, 宛名名称Length);
         } else {
-            source.listLower_3 = entityList.get(0).get事業者名称();
+            source.listLower_2 = entity.get被保険者_宛名名称().substring(NUM_0, NUM_17);
+        }
+        if (!entity.get給付実績_事業所番号().isEmpty() && entity.get給付実績_事業者名称().isEmpty()) {
+            source.listLower_3 = 事業者名不明_定数;
+        } else {
+            source.listLower_3 = entity.get給付実績_事業者名称();
         }
         return source;
     }

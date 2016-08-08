@@ -98,7 +98,8 @@ public class JimuTuikaSiryoDataSakuseiA4Process extends BatchKeyBreakBase<Shinse
 
     @Override
     protected void usualProcess(ShinseiJohoEntity entity) {
-        business = new JimuTuikaSiryoBusiness(entity,
+//        business = new JimuTuikaSiryoBusiness(entity,
+        business = new JimuTuikaSiryoBusiness(null,
                 審査員,
                 paramter,
                 データ件数,

@@ -47,11 +47,12 @@ public class JigyohokokuGeppoYoshiki26BodyData {
     private final RString listList2_12;
 
     /**
+     * コンストラクタです。
      *
-     * @param listList1_1 要支援１
-     * @param listList1_2 要支援２
-     * @param listList1_3 要支援計
-     * @param listList1_4 非該当
+     * @param listList1_1 empty
+     * @param listList1_2 要支援1
+     * @param listList1_3 要支援2
+     * @param listList1_4 要支援計
      * @param listList1_5 経過的要介護
      * @param listList1_6 要介護１
      * @param listList1_7 要介護２
@@ -61,10 +62,10 @@ public class JigyohokokuGeppoYoshiki26BodyData {
      * @param listList1_11 要介護計
      * @param listList1_12 合計
      *
-     * @param listList2_1 要支援１
-     * @param listList2_2 要支援２
-     * @param listList2_3 要支援計
-     * @param listList2_4 非該当
+     * @param listList2_1 empty
+     * @param listList2_2 要支援１
+     * @param listList2_3 要支援２
+     * @param listList2_4 要支援計
      * @param listList2_5 経過的要介護
      * @param listList2_6 要介護１
      * @param listList2_7 要介護２

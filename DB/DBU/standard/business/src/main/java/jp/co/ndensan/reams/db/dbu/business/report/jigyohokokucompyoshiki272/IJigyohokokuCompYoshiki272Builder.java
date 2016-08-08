@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbu.entity.report.ｊigyohokokucompyoshiki272.Jigy
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- * 介護事業状況報告月報・保険給付決定状況（様式2-7） のBuilderのインタフェスです。
+ * 介護事業状況報告月報・保険給付決定状況（様式2-7） のBuilderのインタ—フェ—スです。
  *
  * @reamsid_L DBU-5590-050 wanghuafeng
  */

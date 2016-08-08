@@ -147,6 +147,7 @@ public class HanyoRisutoKokiKoreishaProcess extends BatchProcessBase<HanyoRisuto
     private static final RString GYOSEIKU = new RString("行政区");
     private static final RString JUSYO = new RString("住所");
     private static final RString NENLEI = new RString("年齢");
+    private static final RString SAI = new RString("歳");
     private static final RString SEINENGAPPI = new RString("生年月日");
     private static final RString SPACE = new RString(" ");
     private static final RString COMMA = new RString(",");
@@ -1075,12 +1076,14 @@ public class HanyoRisutoKokiKoreishaProcess extends BatchProcessBase<HanyoRisuto
             builder.append(COLON);
             if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom()) {
                 builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom().toString()));
+                builder.append(SAI);
             }
             builder.append(SPACE);
             builder.append(カラ);
             if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo()) {
                 builder.append(SPACE);
                 builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo().toString()));
+                builder.append(SAI);
             }
         } else if (NenreiSoChushutsuHoho.生年月日範囲.equals(processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun())) {
             builder.append(SEINENGAPPI);

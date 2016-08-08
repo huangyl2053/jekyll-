@@ -1,0 +1,1041 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBA-5800-030 zhangzhiming -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.seigoseichekkurisutosakusei.ISeigoseiChekkuRisutoMapper">
+    
+    <resultMap id="result_SeigoseiChekkuEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.seigoseichekkurisutosakusei.SeigoseiChekkuRisutoEntity" autoMapping="true">
+        <result property="取得事由コード" column="取得事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="比較適用年月日" column="比較適用年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="比較解除年月日" column="比較解除年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="宛名識別コード" column="宛名識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="対象外フラグ" column="対象外フラグ"/>
+        <result property="不整合理由コード" column="不整合理由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="登録日時" column="登録日時" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="履歴番号" column="履歴番号"/>
+        <result property="異動年月日" column="異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="届出年月日" column="届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="異動事由コード" column="異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="処理事由コード" column="処理事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="処理年月日" column="処理年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住民種別コード" column="住民種別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住民状態コード" column="住民状態コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="生年月日" column="生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="登録事由コード" column="登録事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="登録異動年月日" column="登録異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="登録届出年月日" column="登録届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="消除事由コード" column="消除事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="消除異動年月日" column="消除異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="消除届出年月日" column="消除届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="消除通知フラグ" column="消除通知フラグ"/>
+       <result property="転出予定異動年月日" column="転出予定異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="転出確定異動年月日" column="転出確定異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="転出確定通知年月日" column="転出確定通知年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="台帳種別" column="台帳種別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格異動日" column="資格異動日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格異動枝番" column="資格異動枝番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格異動事由コード" column="資格異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="取得適用事由コード" column="取得適用事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="取得適用年月日" column="取得適用年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="取得適用届出年月日" column="取得適用届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="喪失解除事由コード" column="喪失解除事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="喪失解除年月日" column="喪失解除年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="喪失解除届出年月日" column="喪失解除届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="第1号取得年月日" column="第1号取得年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="被保険者区分コード" column="被保険者区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格変更事由コード" column="資格変更事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格変更年月日" column="資格変更年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格変更届出年月日" column="資格変更届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住特適用事由コード" column="住特適用事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住特適用年月日" column="住特適用年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住特適用届出年月日" column="住特適用届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住特解除事由コード" column="住特解除事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住特解除年月日" column="住特解除年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住特解除届出年月日" column="住特解除届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="除外識別コード" column="除外識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+    </resultMap>
+    <select resultOrdered="true" id="get宛名入力情報" resultMap="result_SeigoseiChekkuEntity"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.seigoseichekkurisutosakusei.SeigoseiChekkuMybitisParamter">
+      SELECT
+        daityou."取得事由コード" AS 取得事由コード
+        ,daityou."比較適用年月日" AS 比較適用年月日
+        ,daityou."比較解除年月日" AS 比較解除年月日
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" AS 宛名識別コード
+        ,FALSE AS 対象外フラグ
+        ,'11' AS 不整合理由コード
+        ,NULL AS 登録日時
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."rirekiNo" AS 履歴番号
+        , CASE 
+            WHEN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."idoYMD" IS NULL 
+            THEN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."todokedeYMD" 
+            ELSE <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."idoYMD" 
+            END AS 異動年月日
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."todokedeYMD" AS 届出年月日
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."idoJiyuCode" AS 異動事由コード
+        ,'' AS 処理事由コード
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shoriYMD" AS 処理年月日
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."juminShubetsuCode" AS 住民種別コード
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."juminJotaiCode" AS 住民状態コード
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD" AS 生年月日
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."torokuJiyuCode" AS 登録事由コード
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."torokuIdoYMD" AS 登録異動年月日
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."torokuTodokedeYMD" AS 登録届出年月日
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shojoJiyuCode" AS 消除事由コード
+        , CASE 
+            WHEN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shojoIdoYMD" IS NULL 
+            THEN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shojoTodokedeYMD" 
+            ELSE <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shojoIdoYMD" 
+            END AS 消除異動年月日
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shojoTodokedeYMD" AS 消除届出年月日
+        ,FALSE AS 消除通知フラグ
+        , CASE 
+            WHEN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."tenshutsuYoteiIdoYMD" IS NULL 
+            THEN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."todokedeYMD" 
+            ELSE <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."tenshutsuYoteiIdoYMD" 
+            END AS 転出予定異動年月日
+        , CASE 
+            WHEN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."tenshutsuKakuteiIdoYMD" IS NULL 
+            THEN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."todokedeYMD" 
+            ELSE <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."tenshutsuKakuteiIdoYMD" 
+            END AS 転出確定異動年月日
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."tenshutsuKakuteiTsuchiYMD" AS 転出確定通知年月日
+        ,daityou."台帳種別" AS 台帳種別
+        ,daityou."資格異動日" AS 資格異動日
+        ,daityou."資格異動枝番" AS 資格異動枝番
+        ,daityou."資格異動事由コード" AS 資格異動事由コード
+        ,daityou."被保険者番号" AS 被保険者番号
+        ,daityou."市町村コード" AS 市町村コード
+        ,daityou."取得適用事由コード" AS 取得適用事由コード
+        ,daityou."取得適用年月日" AS 取得適用年月日
+        ,daityou."取得適用届出年月日" AS 取得適用届出年月日
+        ,daityou."喪失解除事由コード" AS 喪失解除事由コード
+        ,daityou."喪失解除年月日" AS 喪失解除年月日
+        ,daityou."喪失解除届出年月日" AS 喪失解除届出年月日
+        ,daityou."第1号取得年月日" AS 第1号取得年月日
+        ,daityou."被保険者区分コード" AS 被保険者区分コード
+        ,daityou."資格変更事由コード" AS 資格変更事由コード
+        ,daityou."資格変更年月日" AS 資格変更年月日
+        ,daityou."資格変更届出年月日" AS 資格変更届出年月日
+        ,daityou."住特適用事由コード" AS 住特適用事由コード
+        ,daityou."住特適用年月日" AS 住特適用年月日
+        ,daityou."住特適用届出年月日" AS 住特適用届出年月日
+        ,daityou."住特解除事由コード" AS 住特解除事由コード
+        ,daityou."住特解除年月日" AS 住特解除年月日
+        ,daityou."住特解除届出年月日" AS 住特解除届出年月日
+        ,jyogai."shikibetsuCode" AS 除外識別コード
+      FROM
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+        AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+        LEFT JOIN
+        ( 
+          WITH 台帳 AS ( 
+            SELECT
+              台帳."識別コード"
+              , 台帳."取得事由コード"
+              , 台帳."比較適用年月日"
+              , 台帳."比較解除年月日"
+              , 台帳."台帳種別"
+              , 台帳."資格異動日"
+              , 台帳."資格異動枝番"
+              , 台帳."資格異動事由コード"
+              , 台帳."被保険者番号"
+              , 台帳."市町村コード"
+              , 台帳."取得適用事由コード"
+              , 台帳."取得適用年月日"
+              , 台帳."取得適用届出年月日"
+              , 台帳."喪失解除事由コード"
+             , 台帳."喪失解除年月日"
+             , 台帳."喪失解除届出年月日"
+             , 台帳."第1号取得年月日"
+             , 台帳."被保険者区分コード"
+             , 台帳."資格変更事由コード"
+             , 台帳."資格変更年月日"
+             , 台帳."資格変更届出年月日"
+             , 台帳."住特適用事由コード"
+             , 台帳."住特適用年月日"
+             , 台帳."住特適用届出年月日"
+             , 台帳."住特解除事由コード"
+             , 台帳."住特解除年月日"
+             , 台帳."住特解除届出年月日" 
+           FROM
+            ( 
+              SELECT
+                "shikibetsuCode" AS "識別コード"
+                , "shikakuShutokuJiyuCode" AS "取得事由コード"
+                , "shikakuShutokuYMD" AS "比較適用年月日"
+                , CASE 
+                  WHEN "shikakuSoshitsuYMD" IS NULL 
+                THEN '99991231' 
+                ELSE "shikakuSoshitsuYMD" 
+                END AS "比較解除年月日"
+                , '1' AS "台帳種別"
+                , "idoYMD" AS "資格異動日"
+                , "edaNo" AS "資格異動枝番"
+                , "idoJiyuCode" AS "資格異動事由コード"
+                , "hihokenshaNo" AS "被保険者番号"
+                , "shichosonCode" AS "市町村コード"
+                , "shikakuShutokuJiyuCode" AS "取得適用事由コード"
+                , "jushochitokureiTekiyoYMD" AS "取得適用年月日"
+                , "jushochitokureiTekiyoTodokedeYMD" AS "取得適用届出年月日"
+                , "shikakuSoshitsuJiyuCode" AS "喪失解除事由コード"
+                , "shikakuSoshitsuYMD" AS "喪失解除年月日"
+                , "shikakuSoshitsuTodokedeYMD" AS "喪失解除届出年月日"
+                , "ichigoShikakuShutokuYMD" AS "第1号取得年月日"
+                , "hihokennshaKubunCode" AS "被保険者区分コード"
+                , "shikakuHenkoJiyuCode" AS "資格変更事由コード"
+                , "shikakuHenkoYMD" AS "資格変更年月日"
+                , "shikakuHenkoTodokedeYMD" AS "資格変更届出年月日"
+                , "jushochitokureiTekiyoJiyuCode" AS "住特適用事由コード"
+                , "jushochitokureiTekiyoYMD" AS "住特適用年月日"
+                , "jushochitokureiKaijoTodokedeYMD" AS "住特適用届出年月日"
+                , "jushochitokureiKaijoJiyuCode" AS "住特解除事由コード"
+                , "jushochitokureiKaijoYMD" AS "住特解除年月日"
+                , "jushochitokureiKaijoTodokedeYMD" AS "住特解除届出年月日" 
+            FROM
+                rgdb."DbV1001HihokenshaDaicho" 
+            UNION 
+            SELECT
+              "shikibetsuCode" AS "識別コード"
+              , '00' AS "取得事由コード"
+              , "tekiyoYMD" AS "比較適用年月日"
+              , CASE 
+                WHEN "kaijoYMD" IS NULL 
+                THEN '99991231' 
+                ELSE "kaijoYMD" 
+                END AS "比較解除年月日"
+              , '2' AS "台帳種別"
+              , "idoYMD" AS "資格異動日"
+              , "edaNo" AS "資格異動枝番"
+              , "idoJiyuCode" AS "資格異動事由コード"
+              , "sochiHokenshaNo" AS "被保険者番号"
+              , "shichosonCode" AS "市町村コード"
+              , "tekiyoJiyuCode" AS "取得適用事由コード"
+              , "tekiyoYMD" AS "取得適用年月日"
+              , "tekiyoTodokedeYMD" AS "取得適用届出年月日"
+              , "kaijoJiyuCode" AS "喪失解除事由コード"
+              , "kaijoYMD" AS "喪失解除年月日"
+              , "kaijoTodokedeYMD" AS "喪失解除届出年月日"
+              , NULL AS "第1号取得年月日"
+              , '' AS "被保険者区分コード"
+              , '' AS "資格変更事由コード"
+              , NULL AS "資格変更年月日"
+              , NULL AS "資格変更届出年月日"
+              , '' AS "住特適用事由コード"
+              , NULL AS "住特適用年月日"
+              , NULL AS "住特適用届出年月日"
+              , '' AS "住特解除事由コード"
+              , NULL AS "住特解除年月日"
+              , NULL AS "住特解除届出年月日" 
+           FROM
+            rgdb."DbV1003TashichosonJushochiTokurei" 
+                UNION 
+                SELECT
+                  "shikibetsuCode" AS 識別コード
+                  , '00' AS 取得事由コード
+                  , "tekiyoYMD" AS 比較適用年月日
+                  , CASE 
+                    WHEN "kaijoYMD" IS NULL 
+                    THEN '99991231' 
+                    ELSE "kaijoYMD" 
+                    END AS 比較解除年月日
+                  , '3' AS "台帳種別"
+                  , "idoYMD" AS "資格異動日"
+                  , "edaNo" AS "資格異動枝番"
+                  , "idoJiyuCode" AS "資格異動事由コード"
+                  , '' AS "被保険者番号"
+                  , "shichosonCode" AS "市町村コード"
+                  , "tekiyoJogaiTekiyoJiyuCode" AS "取得適用事由コード"
+                  , "tekiyoYMD" AS "取得適用年月日"
+                  , "tekiyoTodokedeYMD" AS "取得適用届出年月日"
+                  , "tekiyoJogaikaijokaijoJiyuCode" AS "喪失解除事由コード"
+                  , "kaijoYMD" AS "喪失解除年月日"
+                  , "kaijoTodokedeYMD" AS "喪失解除届出年月日"
+                  , NULL AS "第1号取得年月日"
+                  , '' AS "被保険者区分コード"
+                  , '' AS "資格変更事由コード"
+                  , NULL AS "資格変更年月日"
+                  , NULL AS "資格変更届出年月日"
+                  , '' AS "住特適用事由コード"
+                  , NULL AS "住特適用年月日"
+                  , NULL AS "住特適用届出年月日"
+                  , '' AS "住特解除事由コード"
+                  , NULL AS "住特解除年月日"
+                  , NULL AS "住特解除届出年月日" 
+                FROM
+                  rgdb."DbV1002TekiyoJogaisha"
+              ) AS 台帳
+          ) 
+          SELECT
+                台帳."識別コード"
+                , 台帳."取得事由コード"
+                , 台帳."比較適用年月日"
+                , 台帳."比較解除年月日"
+                , 台帳."台帳種別"
+                , 台帳."資格異動日"
+                , 台帳."資格異動枝番"
+                , 台帳."資格異動事由コード"
+                , 台帳."被保険者番号"
+                , 台帳."市町村コード"
+                , 台帳."取得適用事由コード"
+                , 台帳."取得適用年月日"
+                , 台帳."取得適用届出年月日"
+                , 台帳."喪失解除事由コード"
+                , 台帳."喪失解除年月日"
+                , 台帳."喪失解除届出年月日"
+                , 台帳."第1号取得年月日"
+                , 台帳."被保険者区分コード"
+                , 台帳."資格変更事由コード"
+                , 台帳."資格変更年月日"
+                , 台帳."資格変更届出年月日"
+                , 台帳."住特適用事由コード"
+                , 台帳."住特適用年月日"
+                , 台帳."住特適用届出年月日"
+                , 台帳."住特解除事由コード"
+                , 台帳."住特解除年月日"
+                , 台帳."住特解除届出年月日" 
+          FROM
+            台帳 
+            INNER JOIN ( 
+              SELECT
+                T1."識別コード" AS "識別コード"
+                , MAX(T1."取得適用年月日") AS "取得適用年月日" 
+              FROM
+                台帳 AS T1 
+              GROUP BY
+                T1."識別コード"
+            ) AS 台帳2 
+              ON 台帳2."識別コード" = 台帳."識別コード" 
+              AND 台帳2."取得適用年月日" = 台帳."取得適用年月日" 
+          ORDER BY
+            "識別コード"
+        ) AS daityou 
+        ON
+        daityou."識別コード" =
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
+        LEFT JOIN ( 
+          SELECT
+            "shikibetsuCode"
+            , "shikakuShutokuJogaiYMD"
+            , CASE 
+              WHEN "shikakuShutokuJogaiKaijoYMD" IS NULL 
+              THEN '99991231' 
+              ELSE "shikakuShutokuJogaiKaijoYMD" 
+              END 
+          FROM
+            rgdb."DbT1009ShikakuShutokuJogaisha" 
+          WHERE
+            "shikibetsuCode" IN ( 
+              SELECT
+                dbt1009."shikibetsuCode" 
+              FROM
+                rgdb."DbT1009ShikakuShutokuJogaisha" AS dbt1009 
+              GROUP BY
+                dbt1009."shikibetsuCode"
+            ) 
+            AND "rirekiNo" IN ( 
+              SELECT
+                MAX(dbt1009."rirekiNo") 
+              FROM
+                rgdb."DbT1009ShikakuShutokuJogaisha" AS dbt1009 
+              GROUP BY
+                dbt1009."shikibetsuCode"
+            ) 
+            AND #{年齢到達の設定日} <![CDATA[<]]> "shikakuShutokuJogaiYMD" 
+            AND ( 
+              "shikakuShutokuJogaiKaijoYMD" <![CDATA[<]]> #{年齢到達の設定日} 
+              OR "shikakuShutokuJogaiKaijoYMD" IS NULL
+            ) 
+          ORDER BY
+            "shikibetsuCode"
+        ) AS jyogai 
+          ON
+        jyogai."shikibetsuCode" =
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
+        WHERE NOT(#{対象生年月日} <![CDATA[<]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD")
+        AND jyogai."shikibetsuCode" IS NULL
+        ORDER BY
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
+    </select>
+    
+    <select resultOrdered="true" id="get整合性チェック情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1014SeigoseiCheckMapper.ResultMap_DbT1014SeigoseiCheckEntity">
+      SELECT 
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1014SeigoseiCheckMapper.allColumns_DbT1014SeigoseiCheck" />
+      FROM
+        rgdb."DbT1014SeigoseiCheck"
+        WHERE
+        rgdb."DbT1014SeigoseiCheck"."taishogaiFlag" = FALSE
+    </select>
+    
+    <delete id="del整合性情報事前削除">
+      DELETE
+        FROM rgdb."DbT1014SeigoseiCheck"
+        WHERE "shikibetsuCode" IN (
+        SELECT SeigoseiChekkuRisutoTemp."識別コード"
+        FROM 
+        "SeigoseiChekkuRisutoTemp" AS SeigoseiChekkuRisutoTemp
+        INNER JOIN rgdb."DbT1014SeigoseiCheck" AS dbt1014
+        ON SeigoseiChekkuRisutoTemp."識別コード" = dbt1014."shikibetsuCode"
+        WHERE 
+        dbt1014."rierkiNo" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."履歴番号" OR
+        dbt1014."idoYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."異動年月日" OR
+        dbt1014."todokedeYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."届出年月日" OR
+        dbt1014."idoJiyuCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."異動事由コード" OR
+        dbt1014."shoriJiyuCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."処理事由コード" OR
+        dbt1014."shoriYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."処理年月日" OR
+        dbt1014."juminShubetsuCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."住民種別コード" OR
+        dbt1014."juminJotaiCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."住民状態コード" OR
+        dbt1014."seinengappiYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."生年月日" OR
+        dbt1014."torokuJiyuCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."登録事由コード" OR
+        dbt1014."torokuIdoYMD"<![CDATA[<>]]> SeigoseiChekkuRisutoTemp."登録異動年月日" OR
+        dbt1014."torokuTodokedeYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."登録届出年月日" OR
+        dbt1014."shojoJiyuCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."消除事由コード" OR
+        dbt1014."shojoIdoYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."消除異動年月日" OR
+        dbt1014."shojoTodokedeYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."消除届出年月日" OR
+        dbt1014."shojoTsuchiFlag" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."消除通知フラグ" OR
+        dbt1014."tenshutsuYoteiIdoYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."転出予定異動年月日" OR
+        dbt1014."tenshutsuKakuteiIdoYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."転出確定異動年月日" OR
+        dbt1014."tenshutsuKakuteiTsuchiYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."転出確定通知年月日" OR
+        dbt1014."daichoShubetsu" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."台帳種別" OR
+        dbt1014."shikakuIdoYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."資格異動日" OR
+        dbt1014."shikakuIdoEdaNo" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."資格異動枝番" OR
+        dbt1014."shikakuIdoJiyuCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."資格異動事由コード" OR
+        dbt1014."hihokenshaNo" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."被保険者番号" OR
+        dbt1014."shichosonCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."市町村コード" OR
+        dbt1014."shutokuTekiyoJiyuCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."取得適用事由コード" OR
+        dbt1014."shutokuTekiyoYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."取得適用年月日" OR
+        dbt1014."shutokuTekiyoTodokedeYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."取得適用届出年月日" OR
+        dbt1014."soshitsuKaijoJiyuCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."喪失解除事由コード" OR
+        dbt1014."soshitsuKaijoYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."喪失解除年月日" OR
+        dbt1014."soshitsuKaijoTodokedeYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."喪失解除届出年月日" OR
+        dbt1014."ichigoShutokuYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."第1号取得年月日" OR
+        dbt1014."hihokenshaKubunCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."被保険者区分コード" OR
+        dbt1014."shikakuHenkoJiyuCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."資格変更事由コード" OR
+        dbt1014."shikakuHenkoYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."資格変更年月日" OR
+        dbt1014."shikakuHenkoTodokedeYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."資格変更届出年月日" OR
+        dbt1014."jutokuTekiyoJiyuCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."住特適用事由コード" OR
+        dbt1014."jutokuTekiyoYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."住特適用年月日" OR
+        dbt1014."jutokuTekiyoTodokedeYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."住特適用届出年月日" OR
+        dbt1014."jutokuKaijoJiyuCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."住特解除事由コード" OR
+        dbt1014."jutokuKaijoYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."住特解除年月日" OR
+        dbt1014."jutokuKaijoTodokedeYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."住特解除届出年月日")
+    </delete>
+    
+    <resultMap id="result_CheckEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.seigoseichekkurisutosakusei.SeigoseiChekkuRisutoEntity" autoMapping="true">
+        <result property="宛名識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="対象外フラグ" column="対象外フラグ"/>
+        <result property="不整合理由コード" column="不整合理由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="登録日時" column="登録日時" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="履歴番号" column="履歴番号"/>
+        <result property="異動年月日" column="異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="届出年月日" column="届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="異動事由コード" column="異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="処理事由コード" column="処理事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="処理年月日" column="処理年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住民種別コード" column="住民種別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住民状態コード" column="住民状態コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="生年月日" column="生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="登録事由コード" column="登録事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="登録異動年月日" column="登録異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="登録届出年月日" column="登録届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="消除事由コード" column="消除事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="消除異動年月日" column="消除異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="消除届出年月日" column="消除届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="消除通知フラグ" column="消除通知フラグ"/>
+        <result property="転出予定異動年月日" column="転出予定異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="転出確定異動年月日" column="転出確定異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="転出確定通知年月日" column="転出確定通知年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="台帳種別" column="台帳種別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格異動日" column="資格異動日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格異動枝番" column="資格異動枝番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格異動事由コード" column="資格異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="取得適用事由コード" column="取得適用事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="取得適用年月日" column="取得適用年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="取得適用届出年月日" column="取得適用届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="喪失解除事由コード" column="喪失解除事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="喪失解除年月日" column="喪失解除年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="喪失解除届出年月日" column="喪失解除届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="第1号取得年月日" column="第1号取得年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="被保険者区分コード" column="被保険者区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格変更事由コード" column="資格変更事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格変更年月日" column="資格変更年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格変更届出年月日" column="資格変更届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住特適用事由コード" column="住特適用事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住特適用年月日" column="住特適用年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住特適用届出年月日" column="住特適用届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住特解除事由コード" column="住特解除事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住特解除年月日" column="住特解除年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住特解除届出年月日" column="住特解除届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="select整合性チェック情報" resultMap="result_CheckEntity">
+        SELECT
+            SeigoseiChekkuRisutoTemp."識別コード",
+            SeigoseiChekkuRisutoTemp."対象外フラグ",
+            SeigoseiChekkuRisutoTemp."不整合理由コード",
+            SeigoseiChekkuRisutoTemp."登録日時",
+            SeigoseiChekkuRisutoTemp."履歴番号",
+            SeigoseiChekkuRisutoTemp."異動年月日",
+            SeigoseiChekkuRisutoTemp."届出年月日",
+            SeigoseiChekkuRisutoTemp."異動事由コード",
+            SeigoseiChekkuRisutoTemp."処理事由コード",
+            SeigoseiChekkuRisutoTemp."処理年月日",
+            SeigoseiChekkuRisutoTemp."住民種別コード",
+            SeigoseiChekkuRisutoTemp."住民状態コード",
+            SeigoseiChekkuRisutoTemp."生年月日",
+            SeigoseiChekkuRisutoTemp."登録事由コード",
+            SeigoseiChekkuRisutoTemp."登録異動年月日",
+            SeigoseiChekkuRisutoTemp."登録届出年月日",
+            SeigoseiChekkuRisutoTemp."消除事由コード",
+            SeigoseiChekkuRisutoTemp."消除異動年月日",
+            SeigoseiChekkuRisutoTemp."消除届出年月日",
+            SeigoseiChekkuRisutoTemp."消除通知フラグ",
+            SeigoseiChekkuRisutoTemp."転出予定異動年月日",
+            SeigoseiChekkuRisutoTemp."転出確定異動年月日",
+            SeigoseiChekkuRisutoTemp."転出確定通知年月日",
+            SeigoseiChekkuRisutoTemp."台帳種別",
+            SeigoseiChekkuRisutoTemp."資格異動日",
+            SeigoseiChekkuRisutoTemp."資格異動枝番",
+            SeigoseiChekkuRisutoTemp."資格異動事由コード",
+            SeigoseiChekkuRisutoTemp."被保険者番号",
+            SeigoseiChekkuRisutoTemp."市町村コード",
+            SeigoseiChekkuRisutoTemp."取得適用事由コード",
+            SeigoseiChekkuRisutoTemp."取得適用年月日",
+            SeigoseiChekkuRisutoTemp."取得適用届出年月日",
+            SeigoseiChekkuRisutoTemp."喪失解除事由コード",
+            SeigoseiChekkuRisutoTemp."喪失解除年月日",
+            SeigoseiChekkuRisutoTemp."喪失解除届出年月日",
+            SeigoseiChekkuRisutoTemp."第1号取得年月日",
+            SeigoseiChekkuRisutoTemp."被保険者区分コード",
+            SeigoseiChekkuRisutoTemp."資格変更事由コード",
+            SeigoseiChekkuRisutoTemp."資格変更年月日",
+            SeigoseiChekkuRisutoTemp."資格変更届出年月日",
+            SeigoseiChekkuRisutoTemp."住特適用事由コード",
+            SeigoseiChekkuRisutoTemp."住特適用年月日",
+            SeigoseiChekkuRisutoTemp."住特適用届出年月日",
+            SeigoseiChekkuRisutoTemp."住特解除事由コード",
+            SeigoseiChekkuRisutoTemp."住特解除年月日",
+            SeigoseiChekkuRisutoTemp."住特解除届出年月日"
+        FROM
+          "SeigoseiChekkuRisutoTemp" AS SeigoseiChekkuRisutoTemp 
+        WHERE NOT EXISTS(
+            SELECT dbt1014."shikibetsuCode"
+                FROM rgdb."DbT1014SeigoseiCheck" AS dbt1014
+                WHERE dbt1014."shikibetsuCode" = SeigoseiChekkuRisutoTemp."識別コード"
+        )
+    </select>
+    
+    <resultMap id="result_DaityouCheckEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.seigoseichekkurisutosakusei.SeigoseiChekkuRisutoEntity" autoMapping="true">
+        <result property="取得事由コード" column="取得事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="比較適用年月日" column="比較適用年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="比較解除年月日" column="比較解除年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="台帳識別コード" column="台帳識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="対象外フラグ" column="対象外フラグ"/>
+        <result property="不整合理由コード" column="不整合理由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="登録日時" column="登録日時" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="履歴番号" column="履歴番号"/>
+        <result property="異動年月日" column="異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="届出年月日" column="届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="異動事由コード" column="異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="処理事由コード" column="処理事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="処理年月日" column="処理年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住民種別コード" column="住民種別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住民状態コード" column="住民状態コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="生年月日" column="生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="登録事由コード" column="登録事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="登録異動年月日" column="登録異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="登録届出年月日" column="登録届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="消除事由コード" column="消除事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="消除異動年月日" column="消除異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="消除届出年月日" column="消除届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="消除通知フラグ" column="消除通知フラグ"/>
+       <result property="転出予定異動年月日" column="転出予定異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="転出確定異動年月日" column="転出確定異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="転出確定通知年月日" column="転出確定通知年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="台帳種別" column="台帳種別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格異動日" column="資格異動日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格異動枝番" column="資格異動枝番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格異動事由コード" column="資格異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="取得適用事由コード" column="取得適用事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="取得適用年月日" column="取得適用年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="取得適用届出年月日" column="取得適用届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="喪失解除事由コード" column="喪失解除事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="喪失解除年月日" column="喪失解除年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="喪失解除届出年月日" column="喪失解除届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="第1号取得年月日" column="第1号取得年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="被保険者区分コード" column="被保険者区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格変更事由コード" column="資格変更事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格変更年月日" column="資格変更年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格変更届出年月日" column="資格変更届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住特適用事由コード" column="住特適用事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住特適用年月日" column="住特適用年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住特適用届出年月日" column="住特適用届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住特解除事由コード" column="住特解除事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住特解除年月日" column="住特解除年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住特解除届出年月日" column="住特解除届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="宛名識別コード" column="宛名識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="除外識別コード" column="除外識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+    </resultMap>
+    <select resultOrdered="true" id="get被保険者台帳情報" resultMap="result_DaityouCheckEntity"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.seigoseichekkurisutosakusei.SeigoseiChekkuMybitisParamter">
+      SELECT
+        daityou."取得事由コード" AS 取得事由コード
+        ,daityou."比較適用年月日" AS 比較適用年月日
+        ,daityou."比較解除年月日" AS 比較解除年月日
+        ,daityou."識別コード" AS 台帳識別コード
+        ,FALSE AS 対象外フラグ
+        ,'11' AS 不整合理由コード
+        ,NULL AS 登録日時
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."rirekiNo" AS 履歴番号
+        , CASE 
+            WHEN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."idoYMD" IS NULL 
+            THEN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."todokedeYMD" 
+            ELSE <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."idoYMD" 
+            END AS 異動年月日
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."todokedeYMD" AS 届出年月日
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."idoJiyuCode" AS 異動事由コード
+        ,'' AS 処理事由コード
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shoriYMD" AS 処理年月日
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."juminShubetsuCode" AS 住民種別コード
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."juminJotaiCode" AS 住民状態コード
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD" AS 生年月日
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."torokuJiyuCode" AS 登録事由コード
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."torokuIdoYMD" AS 登録異動年月日
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."torokuTodokedeYMD" AS 登録届出年月日
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shojoJiyuCode" AS 消除事由コード
+        , CASE 
+            WHEN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shojoIdoYMD" IS NULL 
+            THEN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shojoTodokedeYMD" 
+            ELSE <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shojoIdoYMD" 
+            END AS 消除異動年月日
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shojoTodokedeYMD" AS 消除届出年月日
+        ,FALSE AS 消除通知フラグ
+        , CASE 
+            WHEN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."tenshutsuYoteiIdoYMD" IS NULL 
+            THEN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."todokedeYMD" 
+            ELSE <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."tenshutsuYoteiIdoYMD" 
+            END AS 転出予定異動年月日
+        , CASE 
+            WHEN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."tenshutsuKakuteiIdoYMD" IS NULL 
+            THEN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."todokedeYMD" 
+            ELSE <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."tenshutsuKakuteiIdoYMD" 
+            END AS 転出確定異動年月日
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."tenshutsuKakuteiTsuchiYMD" AS 転出確定通知年月日
+        ,daityou."台帳種別" AS 台帳種別
+        ,daityou."資格異動日" AS 資格異動日
+        ,daityou."資格異動枝番" AS 資格異動枝番
+        ,daityou."資格異動事由コード" AS 資格異動事由コード
+        ,daityou."被保険者番号" AS 被保険者番号
+        ,daityou."市町村コード" AS 市町村コード
+        ,daityou."取得適用事由コード" AS 取得適用事由コード
+        ,daityou."取得適用年月日" AS 取得適用年月日
+        ,daityou."取得適用届出年月日" AS 取得適用届出年月日
+        ,daityou."喪失解除事由コード" AS 喪失解除事由コード
+        ,daityou."喪失解除年月日" AS 喪失解除年月日
+        ,daityou."喪失解除届出年月日" AS 喪失解除届出年月日
+        ,daityou."第1号取得年月日" AS 第1号取得年月日
+        ,daityou."被保険者区分コード" AS 被保険者区分コード
+        ,daityou."資格変更事由コード" AS 資格変更事由コード
+        ,daityou."資格変更年月日" AS 資格変更年月日
+        ,daityou."資格変更届出年月日" AS 資格変更届出年月日
+        ,daityou."住特適用事由コード" AS 住特適用事由コード
+        ,daityou."住特適用年月日" AS 住特適用年月日
+        ,daityou."住特適用届出年月日" AS 住特適用届出年月日
+        ,daityou."住特解除事由コード" AS 住特解除事由コード
+        ,daityou."住特解除年月日" AS 住特解除年月日
+        ,daityou."住特解除届出年月日" AS 住特解除届出年月日
+        ,jyogai."shikibetsuCode" AS 除外識別コード
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" AS 宛名識別コード
+      FROM
+        ( 
+          WITH 台帳 AS ( 
+            SELECT
+              台帳."識別コード"
+              , 台帳."取得事由コード"
+              , 台帳."比較適用年月日"
+              , 台帳."比較解除年月日"
+              , 台帳."台帳種別"
+              , 台帳."資格異動日"
+              , 台帳."資格異動枝番"
+              , 台帳."資格異動事由コード"
+              , 台帳."被保険者番号"
+              , 台帳."市町村コード"
+              , 台帳."取得適用事由コード"
+              , 台帳."取得適用年月日"
+              , 台帳."取得適用届出年月日"
+              , 台帳."喪失解除事由コード"
+             , 台帳."喪失解除年月日"
+             , 台帳."喪失解除届出年月日"
+             , 台帳."第1号取得年月日"
+             , 台帳."被保険者区分コード"
+             , 台帳."資格変更事由コード"
+             , 台帳."資格変更年月日"
+             , 台帳."資格変更届出年月日"
+             , 台帳."住特適用事由コード"
+             , 台帳."住特適用年月日"
+             , 台帳."住特適用届出年月日"
+             , 台帳."住特解除事由コード"
+             , 台帳."住特解除年月日"
+             , 台帳."住特解除届出年月日" 
+           FROM
+            ( 
+              SELECT
+                "shikibetsuCode" AS "識別コード"
+                , "shikakuShutokuJiyuCode" AS "取得事由コード"
+                , "shikakuShutokuYMD" AS "比較適用年月日"
+                , CASE 
+                  WHEN "shikakuSoshitsuYMD" IS NULL 
+                THEN '99991231' 
+                ELSE "shikakuSoshitsuYMD" 
+                END AS "比較解除年月日"
+                , '1' AS "台帳種別"
+                , "idoYMD" AS "資格異動日"
+                , "edaNo" AS "資格異動枝番"
+                , "idoJiyuCode" AS "資格異動事由コード"
+                , "hihokenshaNo" AS "被保険者番号"
+                , "shichosonCode" AS "市町村コード"
+                , "shikakuShutokuJiyuCode" AS "取得適用事由コード"
+                , "jushochitokureiTekiyoYMD" AS "取得適用年月日"
+                , "jushochitokureiTekiyoTodokedeYMD" AS "取得適用届出年月日"
+                , "shikakuSoshitsuJiyuCode" AS "喪失解除事由コード"
+                , "shikakuSoshitsuYMD" AS "喪失解除年月日"
+                , "shikakuSoshitsuTodokedeYMD" AS "喪失解除届出年月日"
+                , "ichigoShikakuShutokuYMD" AS "第1号取得年月日"
+                , "hihokennshaKubunCode" AS "被保険者区分コード"
+                , "shikakuHenkoJiyuCode" AS "資格変更事由コード"
+                , "shikakuHenkoYMD" AS "資格変更年月日"
+                , "shikakuHenkoTodokedeYMD" AS "資格変更届出年月日"
+                , "jushochitokureiTekiyoJiyuCode" AS "住特適用事由コード"
+                , "jushochitokureiTekiyoYMD" AS "住特適用年月日"
+                , "jushochitokureiKaijoTodokedeYMD" AS "住特適用届出年月日"
+                , "jushochitokureiKaijoJiyuCode" AS "住特解除事由コード"
+                , "jushochitokureiKaijoYMD" AS "住特解除年月日"
+                , "jushochitokureiKaijoTodokedeYMD" AS "住特解除届出年月日" 
+            FROM
+                rgdb."DbV1001HihokenshaDaicho" 
+            UNION 
+            SELECT
+              "shikibetsuCode" AS "識別コード"
+              , '00' AS "取得事由コード"
+              , "tekiyoYMD" AS "比較適用年月日"
+              , CASE 
+                WHEN "kaijoYMD" IS NULL 
+                THEN '99991231' 
+                ELSE "kaijoYMD" 
+                END AS "比較解除年月日"
+              , '2' AS "台帳種別"
+              , "idoYMD" AS "資格異動日"
+              , "edaNo" AS "資格異動枝番"
+              , "idoJiyuCode" AS "資格異動事由コード"
+              , "sochiHokenshaNo" AS "被保険者番号"
+              , "shichosonCode" AS "市町村コード"
+              , "tekiyoJiyuCode" AS "取得適用事由コード"
+              , "tekiyoYMD" AS "取得適用年月日"
+              , "tekiyoTodokedeYMD" AS "取得適用届出年月日"
+              , "kaijoJiyuCode" AS "喪失解除事由コード"
+              , "kaijoYMD" AS "喪失解除年月日"
+              , "kaijoTodokedeYMD" AS "喪失解除届出年月日"
+              , NULL AS "第1号取得年月日"
+              , '' AS "被保険者区分コード"
+              , '' AS "資格変更事由コード"
+              , NULL AS "資格変更年月日"
+              , NULL AS "資格変更届出年月日"
+              , '' AS "住特適用事由コード"
+              , NULL AS "住特適用年月日"
+              , NULL AS "住特適用届出年月日"
+              , '' AS "住特解除事由コード"
+              , NULL AS "住特解除年月日"
+              , NULL AS "住特解除届出年月日" 
+           FROM
+            rgdb."DbV1003TashichosonJushochiTokurei" 
+                UNION 
+                SELECT
+                  "shikibetsuCode" AS 識別コード
+                  , '00' AS 取得事由コード
+                  , "tekiyoYMD" AS 比較適用年月日
+                  , CASE 
+                    WHEN "kaijoYMD" IS NULL 
+                    THEN '99991231' 
+                    ELSE "kaijoYMD" 
+                    END AS 比較解除年月日
+                  , '3' AS "台帳種別"
+                  , "idoYMD" AS "資格異動日"
+                  , "edaNo" AS "資格異動枝番"
+                  , "idoJiyuCode" AS "資格異動事由コード"
+                  , '' AS "被保険者番号"
+                  , "shichosonCode" AS "市町村コード"
+                  , "tekiyoJogaiTekiyoJiyuCode" AS "取得適用事由コード"
+                  , "tekiyoYMD" AS "取得適用年月日"
+                  , "tekiyoTodokedeYMD" AS "取得適用届出年月日"
+                  , "tekiyoJogaikaijokaijoJiyuCode" AS "喪失解除事由コード"
+                  , "kaijoYMD" AS "喪失解除年月日"
+                  , "kaijoTodokedeYMD" AS "喪失解除届出年月日"
+                  , NULL AS "第1号取得年月日"
+                  , '' AS "被保険者区分コード"
+                  , '' AS "資格変更事由コード"
+                  , NULL AS "資格変更年月日"
+                  , NULL AS "資格変更届出年月日"
+                  , '' AS "住特適用事由コード"
+                  , NULL AS "住特適用年月日"
+                  , NULL AS "住特適用届出年月日"
+                  , '' AS "住特解除事由コード"
+                  , NULL AS "住特解除年月日"
+                  , NULL AS "住特解除届出年月日" 
+                FROM
+                  rgdb."DbV1002TekiyoJogaisha"
+              ) AS 台帳
+          ) 
+          SELECT
+                台帳."識別コード"
+                , 台帳."取得事由コード"
+                , 台帳."比較適用年月日"
+                , 台帳."比較解除年月日"
+                , 台帳."台帳種別"
+                , 台帳."資格異動日"
+                , 台帳."資格異動枝番"
+                , 台帳."資格異動事由コード"
+                , 台帳."被保険者番号"
+                , 台帳."市町村コード"
+                , 台帳."取得適用事由コード"
+                , 台帳."取得適用年月日"
+                , 台帳."取得適用届出年月日"
+                , 台帳."喪失解除事由コード"
+                , 台帳."喪失解除年月日"
+                , 台帳."喪失解除届出年月日"
+                , 台帳."第1号取得年月日"
+                , 台帳."被保険者区分コード"
+                , 台帳."資格変更事由コード"
+                , 台帳."資格変更年月日"
+                , 台帳."資格変更届出年月日"
+                , 台帳."住特適用事由コード"
+                , 台帳."住特適用年月日"
+                , 台帳."住特適用届出年月日"
+                , 台帳."住特解除事由コード"
+                , 台帳."住特解除年月日"
+                , 台帳."住特解除届出年月日" 
+          FROM
+            台帳 
+            INNER JOIN ( 
+              SELECT
+                T1."識別コード" AS "識別コード"
+                , MAX(T1."取得適用年月日") AS "取得適用年月日" 
+              FROM
+                台帳 AS T1 
+              GROUP BY
+                T1."識別コード"
+            ) AS 台帳2 
+              ON 台帳2."識別コード" = 台帳."識別コード" 
+              AND 台帳2."取得適用年月日" = 台帳."取得適用年月日" 
+          ORDER BY
+            "識別コード"
+        ) AS daityou 
+        LEFT JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+        AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+        ON daityou."識別コード" =
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
+        LEFT JOIN ( 
+          SELECT
+            "shikibetsuCode"
+            , "shikakuShutokuJogaiYMD"
+            , CASE 
+              WHEN "shikakuShutokuJogaiKaijoYMD" IS NULL 
+              THEN '99991231' 
+              ELSE "shikakuShutokuJogaiKaijoYMD" 
+              END 
+          FROM
+            rgdb."DbT1009ShikakuShutokuJogaisha" 
+          WHERE
+            "shikibetsuCode" IN ( 
+              SELECT
+                dbt1009."shikibetsuCode" 
+              FROM
+                rgdb."DbT1009ShikakuShutokuJogaisha" AS dbt1009 
+              GROUP BY
+                dbt1009."shikibetsuCode"
+            ) 
+            AND "rirekiNo" IN ( 
+              SELECT
+                MAX(dbt1009."rirekiNo") 
+              FROM
+                rgdb."DbT1009ShikakuShutokuJogaisha" AS dbt1009 
+              GROUP BY
+                dbt1009."shikibetsuCode"
+            ) 
+            AND #{年齢到達の設定日} <![CDATA[<]]> "shikakuShutokuJogaiYMD" 
+            AND ( 
+              "shikakuShutokuJogaiKaijoYMD" <![CDATA[<]]> #{年齢到達の設定日} 
+              OR "shikakuShutokuJogaiKaijoYMD" IS NULL
+            ) 
+          ORDER BY
+            "shikibetsuCode"
+        ) AS jyogai 
+          ON
+        jyogai."shikibetsuCode" = daityou."識別コード"
+        ORDER BY <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
+    </select>
+    
+    <delete id="del被保険者台帳情報削除">
+      DELETE
+        FROM rgdb."DbT1014SeigoseiCheck"
+        WHERE "shikibetsuCode" IN (
+        SELECT SeigoseiChekkuRisutoTemp."識別コード"
+        FROM 
+        "SeigoseiChekkuRisutoDTemp" AS SeigoseiChekkuRisutoTemp
+        INNER JOIN rgdb."DbT1014SeigoseiCheck" AS dbt1014
+        ON SeigoseiChekkuRisutoTemp."識別コード" = dbt1014."shikibetsuCode"
+        WHERE 
+        dbt1014."rierkiNo" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."履歴番号" OR
+        dbt1014."idoYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."異動年月日" OR
+        dbt1014."todokedeYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."届出年月日" OR
+        dbt1014."idoJiyuCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."異動事由コード" OR
+        dbt1014."shoriJiyuCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."処理事由コード" OR
+        dbt1014."shoriYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."処理年月日" OR
+        dbt1014."juminShubetsuCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."住民種別コード" OR
+        dbt1014."juminJotaiCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."住民状態コード" OR
+        dbt1014."seinengappiYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."生年月日" OR
+        dbt1014."torokuJiyuCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."登録事由コード" OR
+        dbt1014."torokuIdoYMD"<![CDATA[<>]]> SeigoseiChekkuRisutoTemp."登録異動年月日" OR
+        dbt1014."torokuTodokedeYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."登録届出年月日" OR
+        dbt1014."shojoJiyuCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."消除事由コード" OR
+        dbt1014."shojoIdoYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."消除異動年月日" OR
+        dbt1014."shojoTodokedeYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."消除届出年月日" OR
+        dbt1014."shojoTsuchiFlag" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."消除通知フラグ" OR
+        dbt1014."tenshutsuYoteiIdoYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."転出予定異動年月日" OR
+        dbt1014."tenshutsuKakuteiIdoYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."転出確定異動年月日" OR
+        dbt1014."tenshutsuKakuteiTsuchiYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."転出確定通知年月日" OR
+        dbt1014."daichoShubetsu" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."台帳種別" OR
+        dbt1014."shikakuIdoYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."資格異動日" OR
+        dbt1014."shikakuIdoEdaNo" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."資格異動枝番" OR
+        dbt1014."shikakuIdoJiyuCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."資格異動事由コード" OR
+        dbt1014."hihokenshaNo" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."被保険者番号" OR
+        dbt1014."shichosonCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."市町村コード" OR
+        dbt1014."shutokuTekiyoJiyuCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."取得適用事由コード" OR
+        dbt1014."shutokuTekiyoYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."取得適用年月日" OR
+        dbt1014."shutokuTekiyoTodokedeYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."取得適用届出年月日" OR
+        dbt1014."soshitsuKaijoJiyuCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."喪失解除事由コード" OR
+        dbt1014."soshitsuKaijoYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."喪失解除年月日" OR
+        dbt1014."soshitsuKaijoTodokedeYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."喪失解除届出年月日" OR
+        dbt1014."ichigoShutokuYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."第1号取得年月日" OR
+        dbt1014."hihokenshaKubunCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."被保険者区分コード" OR
+        dbt1014."shikakuHenkoJiyuCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."資格変更事由コード" OR
+        dbt1014."shikakuHenkoYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."資格変更年月日" OR
+        dbt1014."shikakuHenkoTodokedeYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."資格変更届出年月日" OR
+        dbt1014."jutokuTekiyoJiyuCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."住特適用事由コード" OR
+        dbt1014."jutokuTekiyoYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."住特適用年月日" OR
+        dbt1014."jutokuTekiyoTodokedeYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."住特適用届出年月日" OR
+        dbt1014."jutokuKaijoJiyuCode" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."住特解除事由コード" OR
+        dbt1014."jutokuKaijoYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."住特解除年月日" OR
+        dbt1014."jutokuKaijoTodokedeYMD" <![CDATA[<>]]> SeigoseiChekkuRisutoTemp."住特解除届出年月日")
+    </delete>
+    
+    <resultMap id="result_DaityouJyuhoukEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.seigoseichekkurisutosakusei.SeigoseiChekkuRisutoEntity" autoMapping="true">
+        <result property="台帳識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="対象外フラグ" column="対象外フラグ"/>
+        <result property="不整合理由コード" column="不整合理由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="登録日時" column="登録日時" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="履歴番号" column="履歴番号"/>
+        <result property="異動年月日" column="異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="届出年月日" column="届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="異動事由コード" column="異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="処理事由コード" column="処理事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="処理年月日" column="処理年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住民種別コード" column="住民種別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住民状態コード" column="住民状態コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="生年月日" column="生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="登録事由コード" column="登録事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="登録異動年月日" column="登録異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="登録届出年月日" column="登録届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="消除事由コード" column="消除事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="消除異動年月日" column="消除異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="消除届出年月日" column="消除届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="消除通知フラグ" column="消除通知フラグ"/>
+        <result property="転出予定異動年月日" column="転出予定異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="転出確定異動年月日" column="転出確定異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="転出確定通知年月日" column="転出確定通知年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="台帳種別" column="台帳種別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格異動日" column="資格異動日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格異動枝番" column="資格異動枝番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格異動事由コード" column="資格異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="取得適用事由コード" column="取得適用事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="取得適用年月日" column="取得適用年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="取得適用届出年月日" column="取得適用届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="喪失解除事由コード" column="喪失解除事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="喪失解除年月日" column="喪失解除年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="喪失解除届出年月日" column="喪失解除届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="第1号取得年月日" column="第1号取得年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="被保険者区分コード" column="被保険者区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格変更事由コード" column="資格変更事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格変更年月日" column="資格変更年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格変更届出年月日" column="資格変更届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住特適用事由コード" column="住特適用事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住特適用年月日" column="住特適用年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住特適用届出年月日" column="住特適用届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住特解除事由コード" column="住特解除事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住特解除年月日" column="住特解除年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住特解除届出年月日" column="住特解除届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="select被保険者台帳情報" resultMap="result_DaityouJyuhoukEntity">
+        SELECT
+            SeigoseiChekkuRisutoDTemp."識別コード",
+            SeigoseiChekkuRisutoDTemp."対象外フラグ",
+            SeigoseiChekkuRisutoDTemp."不整合理由コード",
+            SeigoseiChekkuRisutoDTemp."登録日時",
+            SeigoseiChekkuRisutoDTemp."履歴番号",
+            SeigoseiChekkuRisutoDTemp."異動年月日",
+            SeigoseiChekkuRisutoDTemp."届出年月日",
+            SeigoseiChekkuRisutoDTemp."異動事由コード",
+            SeigoseiChekkuRisutoDTemp."処理事由コード",
+            SeigoseiChekkuRisutoDTemp."処理年月日",
+            SeigoseiChekkuRisutoDTemp."住民種別コード",
+            SeigoseiChekkuRisutoDTemp."住民状態コード",
+            SeigoseiChekkuRisutoDTemp."生年月日",
+            SeigoseiChekkuRisutoDTemp."登録事由コード",
+            SeigoseiChekkuRisutoDTemp."登録異動年月日",
+            SeigoseiChekkuRisutoDTemp."登録届出年月日",
+            SeigoseiChekkuRisutoDTemp."消除事由コード",
+            SeigoseiChekkuRisutoDTemp."消除異動年月日",
+            SeigoseiChekkuRisutoDTemp."消除届出年月日",
+            SeigoseiChekkuRisutoDTemp."消除通知フラグ",
+            SeigoseiChekkuRisutoDTemp."転出予定異動年月日",
+            SeigoseiChekkuRisutoDTemp."転出確定異動年月日",
+            SeigoseiChekkuRisutoDTemp."転出確定通知年月日",
+            SeigoseiChekkuRisutoDTemp."台帳種別",
+            SeigoseiChekkuRisutoDTemp."資格異動日",
+            SeigoseiChekkuRisutoDTemp."資格異動枝番",
+            SeigoseiChekkuRisutoDTemp."資格異動事由コード",
+            SeigoseiChekkuRisutoDTemp."被保険者番号",
+            SeigoseiChekkuRisutoDTemp."市町村コード",
+            SeigoseiChekkuRisutoDTemp."取得適用事由コード",
+            SeigoseiChekkuRisutoDTemp."取得適用年月日",
+            SeigoseiChekkuRisutoDTemp."取得適用届出年月日",
+            SeigoseiChekkuRisutoDTemp."喪失解除事由コード",
+            SeigoseiChekkuRisutoDTemp."喪失解除年月日",
+            SeigoseiChekkuRisutoDTemp."喪失解除届出年月日",
+            SeigoseiChekkuRisutoDTemp."第1号取得年月日",
+            SeigoseiChekkuRisutoDTemp."被保険者区分コード",
+            SeigoseiChekkuRisutoDTemp."資格変更事由コード",
+            SeigoseiChekkuRisutoDTemp."資格変更年月日",
+            SeigoseiChekkuRisutoDTemp."資格変更届出年月日",
+            SeigoseiChekkuRisutoDTemp."住特適用事由コード",
+            SeigoseiChekkuRisutoDTemp."住特適用年月日",
+            SeigoseiChekkuRisutoDTemp."住特適用届出年月日",
+            SeigoseiChekkuRisutoDTemp."住特解除事由コード",
+            SeigoseiChekkuRisutoDTemp."住特解除年月日",
+            SeigoseiChekkuRisutoDTemp."住特解除届出年月日"
+        FROM
+          "SeigoseiChekkuRisutoDTemp" AS SeigoseiChekkuRisutoDTemp 
+        WHERE NOT EXISTS(
+            SELECT dbt1014."shikibetsuCode"
+                FROM rgdb."DbT1014SeigoseiCheck" AS dbt1014
+                WHERE dbt1014."shikibetsuCode" = SeigoseiChekkuRisutoDTemp."識別コード"
+        )
+    </select>
+</mapper>

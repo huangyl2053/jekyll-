@@ -24,6 +24,8 @@ public class JimuShinsakaiWariateJohoBusiness {
 
     private static final RString ファイルID_E0001 = new RString("E0001.png");
     private static final RString ファイルID_E0002 = new RString("E0002.png");
+    private static final RString ファイルID_E0001BAK = new RString("E0001_BAK.png");
+    private static final RString ファイルID_E0002BAK = new RString("E0002_BAK.png");
     private final ShinsakaiSiryoKyotsuEntity entity;
 
     /**
@@ -122,7 +124,11 @@ public class JimuShinsakaiWariateJohoBusiness {
      * @return 左の主治医意見書イメージ
      */
     public RString get左の主治医意見書イメージ() {
-        return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001);
+        if (entity.isJimukyoku()) {
+            return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001);
+        } else {
+            return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001BAK);
+        }
     }
 
     /**
@@ -131,7 +137,11 @@ public class JimuShinsakaiWariateJohoBusiness {
      * @return 右の主治医意見書イメージ
      */
     public RString get右の主治医意見書イメージ() {
-        return 共有ファイル2を引き出す(entity.getImageSharedFileId(), ファイルID_E0002);
+        if (entity.isJimukyoku()) {
+            return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0002);
+        } else {
+            return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0002BAK);
+        }
     }
 
     /**
@@ -140,7 +150,11 @@ public class JimuShinsakaiWariateJohoBusiness {
      * @return 主治医意見書イメージ１
      */
     public RString get主治医意見書イメージ１() {
-        return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001);
+        if (entity.isJimukyoku()) {
+            return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001);
+        } else {
+            return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001BAK);
+        }
     }
 
     /**
@@ -149,21 +163,17 @@ public class JimuShinsakaiWariateJohoBusiness {
      * @return 主治医意見書イメージ２
      */
     public RString get主治医意見書イメージ２() {
-        return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0002);
-    }
-
-    private RString 共有ファイルを引き出す(RDateTime イメージID, RString イメージID01) {
-        RString imagePath = RString.EMPTY;
-        if (イメージID != null) {
-            imagePath = getFilePath(イメージID, イメージID01);
+        if (entity.isJimukyoku()) {
+            return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0002);
+        } else {
+            return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0002BAK);
         }
-        return imagePath;
     }
 
-    private RString 共有ファイル2を引き出す(RDateTime イメージID, RString イメージID01) {
+    private RString 共有ファイルを引き出す(RDateTime イメージID, RString sharedFileName) {
         RString imagePath = RString.EMPTY;
         if (イメージID != null) {
-            imagePath = getFilePath(イメージID, イメージID01);
+            imagePath = getFilePath(イメージID, sharedFileName);
         }
         return imagePath;
     }

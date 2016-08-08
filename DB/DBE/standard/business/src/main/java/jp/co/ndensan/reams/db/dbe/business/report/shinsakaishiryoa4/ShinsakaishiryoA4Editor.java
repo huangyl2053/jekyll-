@@ -45,7 +45,14 @@ public class ShinsakaishiryoA4Editor implements IShinsakaishiryoA4Editor {
     private ShinsakaishiryoA4ReportSource editItem(ShinsakaishiryoA4ReportSource source) {
         source.shinsakaiNo = get審査会番号(business.get審査会番号());
         source.shinsakaiKaisaiYMD = business.get審査会開催年月日();
-        source.listshinsainName_1 = business.get審査員一覧();
+        source.shinsainName1 = business.getshinsakaiIinJohoList1();
+        source.shinsainName2 = business.getshinsakaiIinJohoList2();
+        source.shinsainName3 = business.getshinsakaiIinJohoList3();
+        source.shinsainName4 = business.getshinsakaiIinJohoList4();
+        source.shinsainName5 = business.getshinsakaiIinJohoList5();
+        source.shinsainName6 = business.getshinsakaiIinJohoList6();
+        source.shinsainName7 = business.getshinsakaiIinJohoList7();
+        source.shinsainName8 = business.getshinsakaiIinJohoList8();
         source.gogitaiNo = business.get合議体番号();
         source.shinsaTaishoshaCount = business.get審査対象者数();
         source.listShinsei_1 = business.get審査会審査順();
@@ -61,9 +68,11 @@ public class ShinsakaishiryoA4Editor implements IShinsakaishiryoA4Editor {
         source.listShinsei_11 = business.get基準時間();
         source.listShinsei_12 = RString.EMPTY;
         source.listShinsei_13 = RString.EMPTY;
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
-        if (business.get申請書管理番号() != null || !RString.isNullOrEmpty(business.get申請書管理番号().getColumnValue())) {
-            source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号().getColumnValue());
+        if (business.is事務局()) {
+            source.shikibetuCode = ShikibetsuCode.EMPTY;
+            if (business.get申請書管理番号() != null && !business.get申請書管理番号().isEmpty()) {
+                source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号().getColumnValue());
+            }
         }
         return source;
     }

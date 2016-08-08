@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-4930-040 wangjie2 -->
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.houshold.IHousholdMapper">
+
+    <resultMap id="resultMap_非課税年金対象者情報" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.houshold.HousholdEntity" autoMapping="true">
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="カナ氏名" column="カナ氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="漢字氏名" column="漢字氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="生年月日" column="生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="性別" column="性別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="年金保険者" column="年金保険者" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="基礎年金番号" column="基礎年金番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="現基礎年金番号" column="現基礎年金番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="年金コード" column="年金コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="対象年" column="対象年" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="作成年月日" column="作成年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="通知内容" column="通知内容" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="登録区分" column="登録区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="住所カナ" column="住所カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="住所漢字" column="住所漢字" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="金額" column="金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+
+    <select resultOrdered="true" id="非課税年金対象情報取得"
+            resultMap = "resultMap_非課税年金対象者情報"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.houshold.HousholdParameter"
+            fetchSize="500">
+        SELECT 
+            A.hihokenshaNo AS 被保険者番号,
+            A."dtkanashimei" AS カナ氏名,
+            A."dtkanjishimei" AS 漢字氏名,
+            A."dtbirthday" AS 生年月日,
+            A."dtseibetsu" AS 性別,
+            A."dtnenkinhokenshacode" AS 年金保険者,
+            A."dtkisonenkinno" AS 基礎年金番号,
+            A."genkisonenkinno" AS 現基礎年金番号,
+            A."dtnenkincode" AS 年金コード,
+            A."dttaishoy" AS 対象年,
+            A."dtsakuseiymd" AS 作成年月日,
+            A."shorikubun" AS 通知内容,
+            A."torokukubun" AS 登録区分,
+            A."dtkanajusho" AS 住所カナ,
+            A."dtkanjijusho" AS 住所漢字,
+            A."dtkingaku1" AS 金額
+        FROM 
+            rgdb."DbT4037HikazeNenkinTaishosha" AS A
+        WHERE 
+            '1' = '1'
+        <if test="is年度NotNull">
+            AND A."nendo" = #{年度}
+        </if>
+        <if test="is対象年NotNull">
+            AND A."dttaishoy" = #{対象年}
+        </if>
+        <if test="is被保険者番号NotNull">
+            AND A."hihokenshano" = #{被保険者番号}
+        </if>
+        <if test="is年金保険者コードNotNull">
+            AND A."dtnenkinhokenshacode" = #{年金保険者コード}
+        </if>
+        <if test="is基礎年金番号NotNull">
+            AND A."kisonenkinno" = #{基礎年金番号}
+        </if>
+        <if test="is年金コードNotNull">
+            AND A."nenkincode" = #{年金コード}
+        </if>
+        ORDER BY
+            A."dttaishoy" DESC,
+            A."dtnenkinhokenshacode" ASC,
+            A."genkisonenkinno" ASC,
+            subString(A."nenkincode",1,3) ASC,
+            A."dtsakuseiymd" DESC
+    </select>
+    
+</mapper>

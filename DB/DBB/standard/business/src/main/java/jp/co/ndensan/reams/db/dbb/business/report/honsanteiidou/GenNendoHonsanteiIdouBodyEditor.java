@@ -510,6 +510,9 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
         }
         RString 更正前後区分 = entity.get更正前後区分();
         FlexibleYearMonth 月割開始年月1 = entity.get月割開始年月1();
+        if (月割開始年月1 == null) {
+            return;
+        }
         int 開始月1 = 月割開始年月1.getMonthValue();
         FlexibleYearMonth 月割終了年月1 = entity.get月割終了年月1();
         int 終了月1 = 月割終了年月1.getMonthValue();
@@ -518,6 +521,9 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
             set月別取得段階(item, 開始月1, 終了月1, 保険料算定段階1, 更正前後区分);
         }
         FlexibleYearMonth 月割開始年月2 = entity.get月割開始年月2();
+        if (月割開始年月2 == null) {
+            return;
+        }
         int 開始月2 = 月割開始年月2.getMonthValue();
         FlexibleYearMonth 月割終了年月2 = entity.get月割終了年月2();
         int 終了月2 = 月割終了年月2.getMonthValue();

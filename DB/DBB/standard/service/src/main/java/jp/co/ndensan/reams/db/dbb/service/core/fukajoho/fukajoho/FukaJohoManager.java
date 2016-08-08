@@ -150,7 +150,7 @@ public class FukaJohoManager {
     }
 
     /**
-     * 介護賦課{@link Fuka}を保存します。
+     * 介護賦課{@link FukaJoho}を保存します。
      *
      * @param 介護賦課 介護賦課
      * @return 更新あり:true、更新なし:false <br>
@@ -218,4 +218,46 @@ public class FukaJohoManager {
         return fukajohoList;
 
     }
+
+    /**
+     * 主キーに合致する履歴番号最大の賦課の情報を返します。
+     *
+     * @param 賦課の情報検索条件 FukaJohoRelateMapperParameter
+     * @return FukaJoho nullが返る可能性があります。
+     */
+    @Transaction
+    public List<FukaJoho> get履歴番号最大の賦課の情報(FukaJohoRelateMapperParameter 賦課の情報検索条件) {
+        requireNonNull(賦課の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課の情報検索条件"));
+        IFukaJohoRelateMapper mapper = mapperProvider.create(IFukaJohoRelateMapper.class);
+
+        List<FukaJohoRelateEntity> relateEntityList = mapper.select履歴番号最大の賦課の情報(賦課の情報検索条件);
+        if (relateEntityList == null || relateEntityList.isEmpty()) {
+            return null;
+        }
+        List<FukaJoho> 履歴番号最大の賦課の情報List = new ArrayList<>();
+        for (FukaJohoRelateEntity relateEntity : relateEntityList) {
+            relateEntity.initializeMd5ToEntities();
+            履歴番号最大の賦課の情報List.add(new FukaJoho(relateEntity));
+        }
+        return 履歴番号最大の賦課の情報List;
+    }
+
+    /**
+     * 平準化後の賦課の情報を取得します。
+     *
+     * @param 賦課の情報検索条件 賦課の情報検索条件
+     * @return List<FukaJoho> nullが返る可能性があります。
+     */
+    @Transaction
+    public FukaJoho select賦課の情報_最新(FukaJohoRelateMapperParameter 賦課の情報検索条件) {
+        IFukaJohoRelateMapper mapper = mapperProvider.create(IFukaJohoRelateMapper.class);
+
+        FukaJohoRelateEntity relateEntity = mapper.select賦課の情報_最新(賦課の情報検索条件);
+        if (relateEntity == null) {
+            return null;
+        }
+        relateEntity.initializeMd5ToEntities();
+        return new FukaJoho(relateEntity);
+    }
+
 }

@@ -1,4 +1,5 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput;
+
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -77,7 +78,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
+ /*
      * gettxtIryoKikanCode
      * @return txtIryoKikanCode
      */
@@ -91,6 +92,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
      * @param txtIryoKikanCode txtIryoKikanCode
      */
     @JsonProperty("txtIryoKikanCode")
+    @Override
     public void setTxtIryoKikanCode(TextBoxCode txtIryoKikanCode) {
         this.txtIryoKikanCode = txtIryoKikanCode;
     }
@@ -127,6 +129,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
      * @param txtIryoKikanName txtIryoKikanName
      */
     @JsonProperty("txtIryoKikanName")
+    @Override
     public void setTxtIryoKikanName(TextBox txtIryoKikanName) {
         this.txtIryoKikanName = txtIryoKikanName;
     }
@@ -181,6 +184,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
      * @param txtShujiiCode txtShujiiCode
      */
     @JsonProperty("txtShujiiCode")
+    @Override
     public void setTxtShujiiCode(TextBoxCode txtShujiiCode) {
         this.txtShujiiCode = txtShujiiCode;
     }
@@ -217,6 +221,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
      * @param txtShujiiName txtShujiiName
      */
     @JsonProperty("txtShujiiName")
+    @Override
     public void setTxtShujiiName(TextBox txtShujiiName) {
         this.txtShujiiName = txtShujiiName;
     }
@@ -407,6 +412,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
         return (ShoriType) _CommonChildDivModeUtil.getMode(this.modes, ShoriType.class);
     }
 
+    @Override
     public void setMode_ShoriType(ShoriType value) {
         _CommonChildDivModeUtil.setMode(this.modes, ShoriType.class, value);
     }

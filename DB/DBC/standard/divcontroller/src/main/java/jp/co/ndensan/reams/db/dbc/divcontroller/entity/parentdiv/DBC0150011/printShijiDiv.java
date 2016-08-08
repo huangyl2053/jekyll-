@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 /**
  * printShiji のクラスファイル
  *
- * @reamsid_L DBC-5110-010 xupeng
+ * @reamsid_L DBC-5100-010 xuxin
  */
 public class printShijiDiv extends Panel {
 

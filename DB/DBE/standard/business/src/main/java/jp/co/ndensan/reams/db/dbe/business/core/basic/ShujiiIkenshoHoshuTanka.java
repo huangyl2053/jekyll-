@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
 import java.io.Serializable;
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5032ShujiiIkenshoHoshuTankaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -13,16 +14,19 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.ParentModelBase;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 意見書作成報酬単価を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-021 dingyi
  */
 public class ShujiiIkenshoHoshuTanka
-        extends ParentModelBase<ShujiiIkenshoHoshuTankaIdentifier, DbT5032ShujiiIkenshoHoshuTankaEntity, ShujiiIkenshoHoshuTanka>
+        extends ModelBase<ShujiiIkenshoHoshuTankaIdentifier, DbT5032ShujiiIkenshoHoshuTankaEntity, ShujiiIkenshoHoshuTanka>
         implements Serializable {
 
+    private static final long serialVersionUID = -5059272010711467817L;
     private final DbT5032ShujiiIkenshoHoshuTankaEntity entity;
     private final ShujiiIkenshoHoshuTankaIdentifier id;
 
@@ -151,7 +155,6 @@ public class ShujiiIkenshoHoshuTanka
      *
      * @return 変更対象処理実施後の{@link ShujiiIkenshoHoshuTanka}
      */
-    @Override
     public ShujiiIkenshoHoshuTanka modifiedModel() {
         DbT5032ShujiiIkenshoHoshuTankaEntity modifiedEntity = this.toEntity();
         if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
@@ -191,7 +194,7 @@ public class ShujiiIkenshoHoshuTanka
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
@@ -220,5 +223,29 @@ public class ShujiiIkenshoHoshuTanka
         return new ShujiiIkenshoHoshuTankaBuilder(entity, id);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.entity);
+        hash = 23 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ShujiiIkenshoHoshuTanka other = (ShujiiIkenshoHoshuTanka) obj;
+        if (!Objects.equals(this.entity, other.entity)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
 }

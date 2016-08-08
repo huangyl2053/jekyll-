@@ -54,7 +54,7 @@ public class JukyushaIdoRenrakuhyoTorokuEntity {
     private RString 標準負担額;
     private FlexibleDate 標準適用開始年月日;
     private FlexibleDate 標準適用終了年月日;
-    private RString 公費負担上限額減額;
+    private Boolean 公費負担上限額減額;
     private FlexibleDate 償還払化適用開始年月日;
     private FlexibleDate 償還払化適用終了年月日;
     private FlexibleDate 給付率引下げ適用開始年月日;
@@ -76,17 +76,16 @@ public class JukyushaIdoRenrakuhyoTorokuEntity {
     private RString 広域保険者番号;
     private RString 老人保健市町村番号;
     private RString 老人保健受給者番号;
-    private RString 老人保健公費負担者番号;
     private RString 軽減率;
     private FlexibleDate 軽減率適用開始年月日;
     private FlexibleDate 軽減率適用終了年月日;
-    private RString 小規模居宅ｻｰﾋﾞｽ利用;
+    private Boolean 小規模居宅ｻｰﾋﾞｽ利用;
     private RString 二次予防事業区分;
     private FlexibleDate 二次予防有効期間開始年月日;
     private FlexibleDate 二次予防有効期間終了年月日;
     private RString 申請種別;
     private RString 変更申請中区分;
-    private FlexibleYearMonth 申請年月日;
+    private FlexibleDate 申請年月日;
     private RString 国保保険者番号;
     private RString 国保被保険者証番号;
     private RString 国保個人番号;

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.shiryoshinsakai;
 
-import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinIkenshoDataSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
@@ -249,26 +248,6 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
     }
 
     /**
-     * 主治医意見書2回目以降ProcessParameterに転換します。
-     *
-     * @return IinTokkiJikouItiziHanteiProcessParameter
-     */
-    public IinIkenshoDataSakuseiProcessParameter toIinIkenshoDataSakuseiProcessParameter() {
-        return new IinIkenshoDataSakuseiProcessParameter(shinsakaiKaisaiNo,
-                shuturyokuJun,
-                sakuseiJoken,
-                bangoStart,
-                bangoEnd,
-                shuturyokuSutairu,
-                printHou,
-                Decimal.ZERO,
-                shinsakaiKaisaiYoteiYMD,
-                shinsakaiKaishiYoteiTime,
-                gogitaiName,
-                Integer.parseInt(gogitaiNo.toString()));
-    }
-
-    /**
      * 委員用介護認定審査対象者一覧表情報ProcessParameterに転換します。
      *
      * @return IinTokkiJikouItiziHanteiProcessParameter
@@ -280,7 +259,6 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
                 shuturyokuJun,
                 shuturyokuSutairu,
                 printHou,
-                Decimal.ZERO,
                 shinsakaiKaishiYoteiTime);
     }
 

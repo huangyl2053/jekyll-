@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
  * 不正な動作の原因になります。</br>
  * DBC0410046の状態名定義クラスです
  *
- * @author 自動生成
+ * @reamsid_L DBC-2760-030 qinzhen
  */
 public enum DBC0410046StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">

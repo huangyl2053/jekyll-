@@ -105,7 +105,20 @@ public class ShokanJuryoininKeiyakushaFinder {
             return kushaList;
         }
         for (ShokanJuryoininKeiyakushaEntity entity : entityList) {
-            entity.set氏名(get氏名(entity.getDbt3078entity().getHihokenshaNo()));
+            DbT1001HihokenshaDaichoEntity dbt1001entity
+                    = 被保険者台帳管理Dac.get被保険者証資格証発行情報(entity.getDbt3078entity().getHihokenshaNo());
+            if (dbt1001entity != null) {
+                entity.set識別コード(dbt1001entity.getShikibetsuCode());
+                IAtesakiGyomuHanteiKey 宛先業務判定キー
+                        = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
+                IAtesakiPSMSearchKey searchKey = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー)
+                        .set識別コード(dbt1001entity.getShikibetsuCode())
+                        .build();
+                List<IAtesaki> 宛先s = ShikibetsuTaishoService.getAtesakiFinder().get宛先s(searchKey);
+                if (宛先s != null && !宛先s.isEmpty()) {
+                    entity.set氏名(宛先s.get(0).get宛先本人名称());
+                }
+            }
             kushaList.add(new ShokanJuryoininKeiyakushaResult(entity));
         }
         return kushaList;

@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
+ * {@link JigyohokokuCompYoshiki272Property}のプロパティです。
  *
- * @author zhanghongli
+ * @reamsid_L DBU-5590-050 wanghuafeng
  */
 public class JigyohokokuCompYoshiki272Property extends ReportPropertyBase<JigyohokokuCompYoshiki272ReportSource> {
 

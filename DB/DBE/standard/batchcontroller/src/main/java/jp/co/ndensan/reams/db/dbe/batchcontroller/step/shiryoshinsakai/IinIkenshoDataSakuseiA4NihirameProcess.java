@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWar
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikensho2a4.Shujiiikensho2A4Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinIkenshoDataSakuseiMyBatisParameter;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinIkenshoDataSakuseiProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoa3.Shujiiikensho2A4ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
@@ -41,8 +41,8 @@ public class IinIkenshoDataSakuseiA4NihirameProcess extends BatchProcessBase<Shi
 
     private static final RString SELECT_SHINSAKAISIRYOKYOTSU = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getShinsakaiSiryoKyotsu");
-    private IinIkenshoDataSakuseiProcessParameter paramter;
-    private IinIkenshoDataSakuseiMyBatisParameter myBatisParameter;
+    private IinTokkiJikouItiziHanteiProcessParameter paramter;
+    private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
     private JimuShinsakaiWariateJohoBusiness 主治医意見書;
 
     @BatchWriter
@@ -51,7 +51,7 @@ public class IinIkenshoDataSakuseiA4NihirameProcess extends BatchProcessBase<Shi
 
     @Override
     protected void initialize() {
-        myBatisParameter = paramter.toIinIkenshoDataSakuseiMyBatisParameter();
+        myBatisParameter = paramter.toIinTokkiJikouItiziHanteiMyBatisParameter();
         List<RString> shoriJotaiKubunList = new ArrayList<>();
         shoriJotaiKubunList.add(ShoriJotaiKubun.通常.getコード());
         shoriJotaiKubunList.add(ShoriJotaiKubun.延期.getコード());
@@ -103,7 +103,7 @@ public class IinIkenshoDataSakuseiA4NihirameProcess extends BatchProcessBase<Shi
 
     private List<RString> contribute() {
         List<RString> 出力条件 = new ArrayList<>();
-        出力条件.add(条件(new RString("合議体番号"), new RString(paramter.getGogitaiNo())));
+        出力条件.add(条件(new RString("合議体番号"), paramter.getGogitaiNo()));
         出力条件.add(条件(new RString("介護認定審査会開催予定年月日"), paramter.getShinsakaiKaisaiYoteiYMD().wareki().toDateString()));
         出力条件.add(条件(new RString("介護認定審査会開催番号"), paramter.getShinsakaiKaisaiNo()));
         return 出力条件;

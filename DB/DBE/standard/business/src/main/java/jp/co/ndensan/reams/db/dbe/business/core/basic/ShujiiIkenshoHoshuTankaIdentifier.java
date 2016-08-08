@@ -11,11 +11,14 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 
 /**
  * 意見書作成報酬単価の識別子です。
+ *
+ * @reamsid_L DBE-9999-021 dingyi
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value
 public class ShujiiIkenshoHoshuTankaIdentifier implements Serializable {
 
+    private static final long serialVersionUID = -1181186379015561671L;
     private final Code 在宅施設区分;
     private final Code 意見書作成回数区分;
     private final FlexibleYearMonth 開始年月;

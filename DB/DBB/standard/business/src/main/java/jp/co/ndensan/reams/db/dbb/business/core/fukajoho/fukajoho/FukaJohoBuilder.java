@@ -5,12 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho;
 
+import java.util.ArrayList;
+import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsuIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.KibetsuIdentifier;
+import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -27,10 +34,24 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 /**
  * {@link FukaJoho}の編集を行うビルダークラスです。
  *
- * @reamsid_L DBB-9999-013 huangh
+ * @reamsid_L DBB-9999-013 xicongwang
  */
 public class FukaJohoBuilder {
 
+    private static final int INT_1 = 1;
+    private static final int INT_2 = 2;
+    private static final int INT_3 = 3;
+    private static final int INT_4 = 4;
+    private static final int INT_5 = 5;
+    private static final int INT_6 = 6;
+    private static final int INT_7 = 7;
+    private static final int INT_8 = 8;
+    private static final int INT_9 = 9;
+    private static final int INT_10 = 10;
+    private static final int INT_11 = 11;
+    private static final int INT_12 = 12;
+    private static final int INT_13 = 13;
+    private static final int INT_14 = 14;
     private final DbT2002FukaEntity entity;
     private final FukaJohoIdentifier id;
     private final Models<KibetsuIdentifier, Kibetsu> kibetsu;
@@ -596,6 +617,255 @@ public class FukaJohoBuilder {
     public FukaJohoBuilder set普徴歳出還付額(Decimal 普徴歳出還付額) {
         entity.setFuSaishutsuKampuGaku(普徴歳出還付額);
         return this;
+    }
+
+    /**
+     * 特徴期別金額01を設定します。
+     *
+     * @param 特徴期別金額 Decimal
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set特徴期別金額01(Decimal 特徴期別金額) {
+        set期別金額(INT_1, ChoshuHohoKibetsu.特別徴収.getコード(), 特徴期別金額);
+        return this;
+    }
+
+    /**
+     * 特徴期別金額02を設定します。
+     *
+     * @param 特徴期別金額 Decimal
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set特徴期別金額02(Decimal 特徴期別金額) {
+        set期別金額(INT_2, ChoshuHohoKibetsu.特別徴収.getコード(), 特徴期別金額);
+        return this;
+    }
+
+    /**
+     * 特徴期別金額03を設定します。
+     *
+     * @param 特徴期別金額 Decimal
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set特徴期別金額03(Decimal 特徴期別金額) {
+        set期別金額(INT_3, ChoshuHohoKibetsu.特別徴収.getコード(), 特徴期別金額);
+        return this;
+    }
+
+    /**
+     * 特徴期別金額04を設定します。
+     *
+     * @param 特徴期別金額 Decimal
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set特徴期別金額04(Decimal 特徴期別金額) {
+        set期別金額(INT_4, ChoshuHohoKibetsu.特別徴収.getコード(), 特徴期別金額);
+        return this;
+    }
+
+    /**
+     * 特徴期別金額05を設定します。
+     *
+     * @param 特徴期別金額 Decimal
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set特徴期別金額05(Decimal 特徴期別金額) {
+        set期別金額(INT_5, ChoshuHohoKibetsu.特別徴収.getコード(), 特徴期別金額);
+        return this;
+    }
+
+    /**
+     * 特徴期別金額06を設定します。
+     *
+     * @param 特徴期別金額 Decimal
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set特徴期別金額06(Decimal 特徴期別金額) {
+        set期別金額(INT_6, ChoshuHohoKibetsu.特別徴収.getコード(), 特徴期別金額);
+        return this;
+    }
+
+    /**
+     * 普徴期別金額01を設定します。
+     *
+     * @param 普徴期別金額 Decimal
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set普徴期別金額01(Decimal 普徴期別金額) {
+        set期別金額(INT_1, ChoshuHohoKibetsu.普通徴収.getコード(), 普徴期別金額);
+        return this;
+    }
+
+    /**
+     * 普徴期別金額02を設定します。
+     *
+     * @param 普徴期別金額 Decimal
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set普徴期別金額02(Decimal 普徴期別金額) {
+        set期別金額(INT_2, ChoshuHohoKibetsu.普通徴収.getコード(), 普徴期別金額);
+        return this;
+    }
+
+    /**
+     * 普徴期別金額03を設定します。
+     *
+     * @param 普徴期別金額 Decimal
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set普徴期別金額03(Decimal 普徴期別金額) {
+        set期別金額(INT_3, ChoshuHohoKibetsu.普通徴収.getコード(), 普徴期別金額);
+        return this;
+    }
+
+    /**
+     * 普徴期別金額04を設定します。
+     *
+     * @param 普徴期別金額 Decimal
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set普徴期別金額04(Decimal 普徴期別金額) {
+        set期別金額(INT_4, ChoshuHohoKibetsu.普通徴収.getコード(), 普徴期別金額);
+        return this;
+    }
+
+    /**
+     * 普徴期別金額05を設定します。
+     *
+     * @param 普徴期別金額 Decimal
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set普徴期別金額05(Decimal 普徴期別金額) {
+        set期別金額(INT_5, ChoshuHohoKibetsu.普通徴収.getコード(), 普徴期別金額);
+        return this;
+    }
+
+    /**
+     * 普徴期別金額06を設定します。
+     *
+     * @param 普徴期別金額 Decimal
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set普徴期別金額06(Decimal 普徴期別金額) {
+        set期別金額(INT_6, ChoshuHohoKibetsu.普通徴収.getコード(), 普徴期別金額);
+        return this;
+    }
+
+    /**
+     * 普徴期別金額07を設定します。
+     *
+     * @param 普徴期別金額 Decimal
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set普徴期別金額07(Decimal 普徴期別金額) {
+        set期別金額(INT_7, ChoshuHohoKibetsu.普通徴収.getコード(), 普徴期別金額);
+        return this;
+    }
+
+    /**
+     * 普徴期別金額08を設定します。
+     *
+     * @param 普徴期別金額 Decimal
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set普徴期別金額08(Decimal 普徴期別金額) {
+        set期別金額(INT_8, ChoshuHohoKibetsu.普通徴収.getコード(), 普徴期別金額);
+        return this;
+    }
+
+    /**
+     * 普徴期別金額09を設定します。
+     *
+     * @param 普徴期別金額 Decimal
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set普徴期別金額09(Decimal 普徴期別金額) {
+        set期別金額(INT_9, ChoshuHohoKibetsu.普通徴収.getコード(), 普徴期別金額);
+        return this;
+    }
+
+    /**
+     * 普徴期別金額10を設定します。
+     *
+     * @param 普徴期別金額 Decimal
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set普徴期別金額10(Decimal 普徴期別金額) {
+        set期別金額(INT_10, ChoshuHohoKibetsu.普通徴収.getコード(), 普徴期別金額);
+        return this;
+    }
+
+    /**
+     * 普徴期別金額11を設定します。
+     *
+     * @param 普徴期別金額 Decimal
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set普徴期別金額11(Decimal 普徴期別金額) {
+        set期別金額(INT_11, ChoshuHohoKibetsu.普通徴収.getコード(), 普徴期別金額);
+        return this;
+    }
+
+    /**
+     * 普徴期別金額12を設定します。
+     *
+     * @param 普徴期別金額 Decimal
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set普徴期別金額12(Decimal 普徴期別金額) {
+        set期別金額(INT_12, ChoshuHohoKibetsu.普通徴収.getコード(), 普徴期別金額);
+        return this;
+    }
+
+    /**
+     * 普徴期別金額13を設定します。
+     *
+     * @param 普徴期別金額 Decimal
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set普徴期別金額13(Decimal 普徴期別金額) {
+        set期別金額(INT_13, ChoshuHohoKibetsu.普通徴収.getコード(), 普徴期別金額);
+        return this;
+    }
+
+    /**
+     * 普徴期別金額14を設定します。
+     *
+     * @param 普徴期別金額 Decimal
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set普徴期別金額14(Decimal 普徴期別金額) {
+        set期別金額(INT_14, ChoshuHohoKibetsu.普通徴収.getコード(), 普徴期別金額);
+        return this;
+    }
+
+    /**
+     * 期別金額を設定します。
+     *
+     * @param 特徴期別金額 Decimal
+     * @return {@link FukaJohoBuilder}
+     */
+    private void set期別金額(int 期, RString 徴収方法期別, Decimal 特徴期別金額) {
+        if (kibetsu == null || kibetsu.values() == null || kibetsu.values().isEmpty()) {
+            return;
+        }
+        List<Kibetsu> 介護期別List = new ArrayList<>(kibetsu.values());
+        for (Kibetsu 介護期別 : 介護期別List) {
+            if (徴収方法期別.equals(介護期別.get徴収方法()) && 期 == 介護期別.get期()) {
+                KibetsuEntity kibetsuEntity = new KibetsuEntity();
+                kibetsuEntity.set介護期別Entity(介護期別.toEntity());
+                List<UrT0705ChoteiKyotsuEntity> 調定共通Entity = new ArrayList<>();
+                ChoteiKyotsuIdentifier identifier = new ChoteiKyotsuIdentifier(介護期別.get調定ID().longValue());
+                ChoteiKyotsu choteiKyotsu = 介護期別.getChoteiKyotsu(identifier).createBuilderForEdit().set調定額(特徴期別金額).build();
+                調定共通Entity.add(choteiKyotsu.toEntity());
+                kibetsuEntity.set調定共通Entity(調定共通Entity);
+                KibetsuIdentifier kibetsuIdentifier = new KibetsuIdentifier(介護期別.get調定年度(), 介護期別.get賦課年度(),
+                        介護期別.get通知書番号(), 介護期別.get履歴番号(), 介護期別.get徴収方法(), 介護期別.get期());
+                kibetsu.deleteOrRemove(kibetsuIdentifier);
+                Kibetsu 介護期別entity = new Kibetsu(kibetsuEntity);
+                kibetsu.add(介護期別entity);
+            }
+        }
     }
 
     /**

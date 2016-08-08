@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 審査会事前審査結果一覧表のデータ取得のMapperXMLです。 -->
+<!-- @reamsid_L DBE-1640-010 zhaoyao -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaijizenshinsakekkaichiran.IShinsakaiJIzenShinsakekkaIchiranMapper">
+
+    <select id="get事前審査会用結果"
+            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaijizenshinsakekkaichiran.JizenShinsakaiShiryoRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaijizenshinsakekkaichiran.ShinsakaiJIzenShinsakekkaIchiranMybitisParamter"
+            fetchSize="500" resultOrdered="true">
+        SELECT 
+            T5501."shinsakaiKaisaiNo",
+            T5501."shinsakaiKaisaiYoteiYMD",
+            T5592."shinsakaiKaisaiBashoName",
+            T5501."shinsakaiKaishiYoteiTime",
+            T5501."shiryoSakuseiZumiFlag",
+            T5501."gogitaiNo",
+            T5591."gogitaiMei",
+            T5501."shinsakaiYoteiTeiin",
+            T5501."shinsakaiWariateZumiNinzu"
+        FROM rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS T5501
+        INNER JOIN rgdb."DbT5591GogitaiJoho" AS T5591
+        ON T5501."gogitaiNo" = T5591."gogitaiNo"
+        AND T5591."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> T5501."shinsakaiKaisaiYoteiYMD"
+        AND T5501."shinsakaiKaisaiYoteiYMD" <![CDATA[<=]]> T5591."gogitaiYukoKikanShuryoYMD"
+        INNER JOIN rgdb."DbT5592ShinsakaiKaisaiBashoJoho" AS T5592
+        ON T5591."shinsakaiKaisaiBashoCode" = T5592."shinsakaiKaisaiBashoCode"
+        WHERE T5501."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
+    </select>
+    
+    <select id="get審査員名"
+            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaijizenshinsakekkaichiran.JizenShinsaKekkaRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaijizenshinsakekkaichiran.ShinsakaiJIzenShinsakekkaIchiranMybitisParamter"
+            fetchSize="500" resultOrdered="true">
+            SELECT
+            T5594."shinsakaiIinShimei",
+            A."kaigoninteiShinsakaiGichoKubunCode",
+            A."shinsakaiIinCode"
+            FROM rgdb."DbT5594ShinsakaiIinJoho" AS T5594 
+            INNER JOIN 
+            (
+                SELECT 
+                "shinsakaiIinCode","kaigoninteiShinsakaiGichoKubunCode","shinsakaiKaisaiNo"
+                FROM rgdb."DbT5503ShinsakaiWariateIinJoho" AS T5503
+                WHERE T5503."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
+            )AS A
+            ON T5594."shinsakaiIinCode" = A."shinsakaiIinCode"
+            ORDER BY A."kaigoninteiShinsakaiGichoKubunCode" DESC,A."shinsakaiIinCode"ASC
+    </select>
+    
+    <select id="get審査順"
+            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaijizenshinsakekkaichiran.JizenShinsaKekkaRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaijizenshinsakekkaichiran.ShinsakaiJIzenShinsakekkaIchiranMybitisParamter"
+            fetchSize="500" resultOrdered="true">
+        SELECT T5502."shinsakaiOrder"
+        FROM rgdb."DbT5502ShinsakaiWariateJoho" AS T5502 
+        WHERE "shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
+        ORDER BY "shinsakaiOrder"
+        
+    </select>
+    
+    <select id="get審査結果"
+            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaijizenshinsakekkaichiran.JizenShinsaKekkaRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaijizenshinsakekkaichiran.ShinsakaiJIzenShinsakekkaIchiranMybitisParamter"
+            fetchSize="500" resultOrdered="true">
+        SELECT T5508."shinsakaiIinCode",<!--介護認定審査会委員コード-->
+               T5508."shinsakaiOrder",<!--介護認定審査会審査順-->
+               T5508."nijiHanteiKekkaCode"<!--二次判定結果コード-->
+	FROM rgdb."DbT5508ShinsakaiJizenKekkaJoho" AS T5508
+	WHERE "shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
+    </select>
+    
+    <select id="get審査会対象者情報"
+            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaijizenshinsakekkaichiran.ShinsakaiJizenshinsakekkaIchiranRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaijizenshinsakekkaichiran.ShinsakaiJIzenShinsakekkaIchiranMybitisParamter"
+            fetchSize="500" resultOrdered="true">
+        SELECT 
+            T5502."shinsakaiOrder",
+            T5101."hihokenshaNo",
+            T5101."koroshoIfShikibetsuCode",
+            T5101."nigoTokuteiShippeiCode",
+            T5102_2."nijiHanteiYokaigoJotaiKubunCode",
+            T5116."ichijiHanteiKekkaCode",
+            T5101."ninteiShinseiShinseijiKubunCode"
+        FROM 
+        rgdb."DbT5502ShinsakaiWariateJoho" AS T5502
+        INNER JOIN rgdb."DbT5102NinteiKekkaJoho" AS T5102
+        ON T5502."shinseishoKanriNo" = T5102."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS T5101
+        ON T5502."shinseishoKanriNo" = T5101."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" As T5116
+        ON T5502."shinseishoKanriNo" = T5116."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT5121ShinseiRirekiJoho" T5121
+        ON T5502."shinseishoKanriNo" = T5121."shinseishoKanriNo"
+        LEFT OUTER JOIN rgdb."DbT5102NinteiKekkaJoho" AS T5102_2
+        ON T5121."zenkaiShinseishoKanriNo" = T5102_2."shinseishoKanriNo"
+        WHERE T5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
+        ORDER BY T5502."shinsakaiOrder" ASC
+    </select>
+    
+    <select id="get事前審査会結果情報"
+            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaijizenshinsakekkaichiran.ShinsakaiJizenshinsakekkaIchiranRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaijizenshinsakekkaichiran.ShinsakaiJIzenShinsakekkaIchiranMybitisParamter"
+            fetchSize="500" resultOrdered="true">
+        SELECT
+            T5508."shinsakaiKaisaiNo",
+            T5508."shinsakaiIinCode",
+            T5508."shinsakaiOrder",
+            T5508."nijiHanteiKekkaCode",
+            T5508."yukokikan",
+            T5101."koroshoIfShikibetsuCode"
+        FROM rgdb."DbT5508ShinsakaiJizenKekkaJoho" AS T5508
+        INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" AS T5502
+        ON T5508."shinsakaiKaisaiNo" = T5502."shinsakaiKaisaiNo" 
+        AND T5508."shinsakaiOrder" = T5502."shinsakaiOrder"
+        INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS T5101
+        ON T5502."shinseishoKanriNo" = T5101."shinseishoKanriNo"
+        WHERE T5508."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
+        ORDER BY T5508."shinsakaiOrder"
+    
+    </select>
+    <select id="get審査会情報"
+            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaijizenshinsakekkaichiran.ShinsakaiJizenshinsakekkaIchiranRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaijizenshinsakekkaichiran.ShinsakaiJIzenShinsakekkaIchiranMybitisParamter"
+            fetchSize="500" resultOrdered="true">
+        SELECT 
+            T5501."shinsakaiKaisaiNo",
+            T5501."gogitaiNo",
+            T5501."shinsakaiKaisaiYoteiYMD",
+            T5501."shinsakaiKaishiYoteiTime"
+        FROM rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS T5501
+        WHERE T5501."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
+    </select>
+</mapper>

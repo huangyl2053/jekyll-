@@ -96,8 +96,8 @@ public class DBD2020001ValidationHandler {
      */
     public ShiharaiHohoHenkoHaakuIchiranBatchParameter setBatchParameter() {
 
-        ShiharaiHohoHenkoHaakuIchiran shiharaiHohoHenkoHaakuIchiran = new ShiharaiHohoHenkoHaakuIchiran(div);
-        return shiharaiHohoHenkoHaakuIchiran.createShiharaiHohoHenkoHaakuIchiranParameter();
+        ShiharaiHohoHenkoHaakuIchiran shiharaiHohoHenkoHaakuIchiran = new ShiharaiHohoHenkoHaakuIchiran();
+        return shiharaiHohoHenkoHaakuIchiran.createShiharaiHohoHenkoHaakuIchiranParameter(div);
     }
 
     /**

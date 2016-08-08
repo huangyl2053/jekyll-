@@ -16,7 +16,8 @@ public enum DBU0800011StateName implements IStateEnumerations {
 
     NoChange(""),
     更新("更新"),
-    完了("完了");
+    完了("完了"),
+    保険者情報登録("保険者情報登録");
 
     private final RString name;
 

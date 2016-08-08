@@ -47,7 +47,7 @@ public class JigyohokokuCompYoshiki272Editor implements IJigyohokokuCompYoshiki2
 
     private JigyohokokuCompYoshiki272ReportSource editSource(JigyohokokuCompYoshiki272ReportSource source) {
         source.printTimeStamp = data.get作成日時();
-        source.shukeiKubun = data.get集計区分();
+        source.shukeiKubun = data.get年報月報区分();
         source.shuukeiHani = set集計範囲(data);
         source.hokenshaNo = data.get保険者番号();
         source.hokenshaName = data.get保険者名();
@@ -58,12 +58,17 @@ public class JigyohokokuCompYoshiki272Editor implements IJigyohokokuCompYoshiki2
 
     private RString set集計範囲(JigyohokokuCompYoshiki272Entity data) {
         RStringBuilder 集計範囲_SB = new RStringBuilder();
-        if (月報.equals(data.get集計区分())) {
-            集計範囲_SB.append("（" + data.get集計年月() + "分）");
+        if (月報.equals(data.get年報月報区分())) {
+            集計範囲_SB.append("（");
+            集計範囲_SB.append(data.get集計年月());
+            集計範囲_SB.append("分）");
         }
-        if (年報.equals(data.get集計区分())) {
-            集計範囲_SB.append("（" + data.get集計年度() + "分）");
-            集計範囲_SB.append(data.get集計期間FROM() + " ～ ");
+        if (年報.equals(data.get年報月報区分())) {
+            集計範囲_SB.append("（");
+            集計範囲_SB.append(data.get集計年度());
+            集計範囲_SB.append("分）");
+            集計範囲_SB.append(data.get集計期間FROM());
+            集計範囲_SB.append(" ～ ");
             集計範囲_SB.append(data.get集計期間TO());
         }
         return 集計範囲_SB.toRString();

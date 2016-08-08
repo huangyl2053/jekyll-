@@ -177,7 +177,33 @@
             resultMap="resultMap_HanyoRisutoKokiKoreishaEntity"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyorisutokokikoreisha.HanyoRisutoKokiKoreishaMybatisParameter"
             fetchSize="500">
-        WITH																												
+        WITH																								
+	最新介護事業者  AS　																					
+	(																							
+	SELECT																							
+		dbT7060."jigyoshaNo",																					
+		dbT7060."jigyoshaName",   
+                dbT7060."jigyoshaNameKana",   
+                dbT7060."jigyoshaAddress",    
+                dbT7060."telNo",              
+                dbT7060."faxNo",              
+                dbT7060."shozokuNinzu",       
+                dbT7060."riyoshaSu",          
+                dbT7060."yukoKaishiYMD",      
+                dbT7060."yukoShuryoYMD",      
+                dbT7060."serviceJisshiChiiki"																					
+	FROM																							
+		rgdb."DbT7060KaigoJigyosha"  AS  dbT7060																						
+	WHERE																							
+		NOT EXISTS (																						
+			SELECT  1																					
+			FROM																					
+				rgdb."DbT7060KaigoJigyosha"  AS  dbT7060_2																				
+			WHERE	
+                            dbT7060."jigyoshaNo" = dbT7060_2."jigyoshaNo"
+                            AND dbT7060."yukoKaishiYMD" <![CDATA[<]]> dbT7060_2."yukoKaishiYMD"																			
+		)																						
+	), 																												
 	受給者台帳枝番MAX　AS　　 																		
 	(																												
             SELECT	*  FROM  (																												
@@ -219,8 +245,8 @@
                 受給者台帳."homninKankei" AS 受給者台帳_本人との関係,
                 今回申請届出."shinseiTodokedeshaShimei" AS 今回申請届出_申請届出者氏名,
                 今回申請届出."shinseiTodokedeshaKanaShimei" AS 今回申請届出_申請届出者氏名カナ,
-                今回申請届出事業者."jigyoshaName" AS 申請届出事業者_事業者名称,
-                今回申請届出事業者."jigyoshaNameKana" AS 申請届出事業者_事業者名称カナ,
+                申請届出事業者."jigyoshaName" AS 申請届出事業者_事業者名称,
+                申請届出事業者."jigyoshaNameKana" AS 申請届出事業者_事業者名称カナ,
                 今回申請届出."shinseiTodokedeshaYubinNo" AS 今回申請届出_申請届出者郵便番号,
                 今回申請届出."shinseiTodokedeshaJusho" AS 今回申請届出_申請届出者住所,
                 今回申請届出."shinseiTodokedeshaTelNo" AS 今回申請届出_申請届出者電話番号,
@@ -409,8 +435,8 @@
 			ON　 今回申請届出."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																										
 																													
 		LEFT  JOIN																											
-			rgdb."DbT7060KaigoJigyosha"  AS   今回申請届出事業者																										
-			ON　 今回申請届出事業者."jigyoshaNo" = 今回申請届出."shinseiTodokedeDaikoJigyoshaNo"																										
+			最新介護事業者  AS   申請届出事業者																										
+			ON　 申請届出事業者."jigyoshaNo" = 今回申請届出."shinseiTodokedeDaikoJigyoshaNo"																										
 																													
 		LEFT  JOIN																											
 			rgdb."DbT5910NinteichosaItakusakiJoho"  AS  今回調査委託先																										
@@ -520,7 +546,7 @@
 			　　　　事業者作成."rirekiNo" = 居宅届出."rirekiNo"																										
 																													
 		LEFT  JOIN																											
-			rgdb."DbT7060KaigoJigyosha"  AS  計画事業者																										
+			最新介護事業者  AS  計画事業者																										
 			ON 　計画事業者."jigyoshaNo" = 事業者作成."keikakuJigyoshaNo"																										
 																													
 		LEFT JOIN																											
@@ -577,11 +603,17 @@
                     AND  後期高齢者情報."shikakuShutokuYMD" <![CDATA[<=]]> #{kizyunnichi})
             </if>
             <if test="is範囲">
-                <if test="is取得日">
+                <if test="is取得日 and has日付範囲From">
                     AND #{hitsukehanifrom} <![CDATA[<=]]> 後期高齢者情報."shikakuShutokuYMD"
                 </if>
-                <if test="is喪失日">
-                    AND 後期高齢者情報."shikakuShutokuYMD"  <![CDATA[<=]]> #{hitsukehanito}
+                <if test="is取得日 and has日付範囲To">
+                    AND 後期高齢者情報."shikakuShutokuYMD" <![CDATA[<=]]> #{hitsukehanito}
+                </if>
+                <if test="is喪失日 and has日付範囲From">
+                    AND #{hitsukehanifrom}  <![CDATA[<=]]> 後期高齢者情報."shikakuSoshitsuYMD"
+                </if>
+                <if test="is喪失日 and has日付範囲To">
+                    AND 後期高齢者情報."shikakuSoshitsuYMD"  <![CDATA[<=]]> #{hitsukehanito}
                 </if>
             </if>
             <if test="is資格取得者のみ">

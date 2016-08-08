@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  */
 public enum DbV2502KaigoShotoku implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     /**
      * shotokuNendo
      */
@@ -16,9 +17,9 @@ public enum DbV2502KaigoShotoku implements IColumnDefinition {
      */
     shikibetsuCode(2147483647, 0),
     /**
-     * rirekino
+     * rirekiNo
      */
-    rirekino(19, 0),
+    rirekiNo(19, 0),
     /**
      * kazeiKubun
      */
@@ -74,7 +75,7 @@ public enum DbV2502KaigoShotoku implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     * 
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -83,7 +84,7 @@ public enum DbV2502KaigoShotoku implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     * 
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

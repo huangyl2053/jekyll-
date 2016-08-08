@@ -148,7 +148,7 @@ public interface IJimuShiryoShinsakaiIinMapper {
      * @param parameter JimuShinsakaiIinJohoMyBatisParameter
      * @return ItiziHanteiEntity 事務局一次判定結果
      */
-    ItiziHanteiEntity get事務局一次判定結果(JimuShinsakaiIinJohoMyBatisParameter parameter);
+    List<ItiziHanteiEntity> get事務局一次判定結果(JimuShinsakaiIinJohoMyBatisParameter parameter);
 
     /**
      * 要介護認定申請者に関する予備判定記入情報を取得する。
@@ -180,7 +180,7 @@ public interface IJimuShiryoShinsakaiIinMapper {
      * @param parameter JimuShinsakaiIinJohoMyBatisParameter
      * @return ItiziHanteiEntity 事務局一次判定結果
      */
-    ItiziHanteiEntity get事務局一次判定(JimuShinsakaiIinJohoMyBatisParameter parameter);
+    List<ItiziHanteiEntity> get事務局一次判定(JimuShinsakaiIinJohoMyBatisParameter parameter);
 
     /**
      * 事務局一次判定結果を取得します。
@@ -189,4 +189,20 @@ public interface IJimuShiryoShinsakaiIinMapper {
      * @return int 事務局一次判定結果件数
      */
     int get事務局一次判定件数(JimuShinsakaiIinJohoMyBatisParameter parameter);
+
+    /**
+     * 概況特記テキストを取得します。
+     *
+     * @param parameter JimuShinsakaiIinJohoMyBatisParameter
+     * @return ShinsakaiSiryoKyotsuEntity 概況特記テキスト
+     */
+    List<ShinsakaiSiryoKyotsuEntity> get概況特記テキスト(JimuShinsakaiIinJohoMyBatisParameter parameter);
+
+    /**
+     * 概況特記イメージを取得します。
+     *
+     * @param parameter JimuShinsakaiIinJohoMyBatisParameter
+     * @return ShinsakaiSiryoKyotsuEntity 概況特記イメージ
+     */
+    List<ShinsakaiSiryoKyotsuEntity> get概況特記イメージ(JimuShinsakaiIinJohoMyBatisParameter parameter);
 }

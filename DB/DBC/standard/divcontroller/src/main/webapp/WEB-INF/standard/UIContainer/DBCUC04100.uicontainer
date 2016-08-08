@@ -837,6 +837,62 @@
      "eventName": "戻る",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "61",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410011",
+     "layoutTitle": "国保連情報取込",
+     "eventName": "バッチ起動",
+     "destroy": false,
+     "condition": "47",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410047",
+     "toLayoutTitle": "総合事業費等請求額通知書情報",
+     "toState": "初期状態"
+    },
+    {
+     "id": "62",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410047",
+     "layoutTitle": "総合事業費等請求額通知書情報",
+     "eventName": "戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410011",
+     "toLayoutTitle": "国保連情報取込",
+     "toState": "国保連情報取込一覧"
+    },
+    {
+     "id": "63",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410011",
+     "layoutTitle": "国保連情報取込",
+     "eventName": "バッチ起動",
+     "destroy": false,
+     "condition": "43",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410043",
+     "toLayoutTitle": "総合事業費再審査決定通知書（公費）情報",
+     "toState": "初期状態"
+    },
+    {
+     "id": "64",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410043",
+     "layoutTitle": "総合事業費再審査決定通知書（公費）情報",
+     "eventName": "戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410011",
+     "toLayoutTitle": "",
+     "toState": "国保連情報取込一覧"
     }
    ]
   }

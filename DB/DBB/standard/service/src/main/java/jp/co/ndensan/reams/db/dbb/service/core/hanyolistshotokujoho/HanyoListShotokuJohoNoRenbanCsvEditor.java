@@ -54,11 +54,7 @@ public class HanyoListShotokuJohoNoRenbanCsvEditor {
     private static final RString 特例状態住特 = new RString("住特");
     private static final RString FLAG = new RString("1");
     private static final RString 定数対象外 = new RString("対象外");
-    private static final RString LINE = new RString("-");
     private static final int 定数_ZERO = 0;
-    private static final int 定数_THREE = 3;
-    private static final int 定数_FIVE = 5;
-    private static final int 定数_SEVEN = 7;
 
     /**
      * editor
@@ -419,7 +415,7 @@ public class HanyoListShotokuJohoNoRenbanCsvEditor {
         csvEntity.set公的年金等所得(numToRString(entity.get公的年金所得額()));
         if (entity.get処理日時() != null) {
             FlexibleDate 処理日付 = new FlexibleDate(entity.get処理日時().toDateString());
-            csvEntity.set住民税更正年月日(dataToRString(処理日付, parameter));
+            csvEntity.set住民税更正日(dataToRString(処理日付, parameter));
         }
         if (GekihenkanwaSochi.対象外.getコード().equals(entity.get激変緩和措置区分())) {
             csvEntity.set激変緩和区分(定数対象外);
@@ -466,7 +462,7 @@ public class HanyoListShotokuJohoNoRenbanCsvEditor {
             return RString.EMPTY;
         }
         if (!parameter.is日付編集()) {
-            return 日付.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
+            return new RString(日付.toString());
         } else {
             return 日付.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         }

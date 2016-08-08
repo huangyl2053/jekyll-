@@ -61,10 +61,20 @@ public class ShogaishaKoujoTaishoNinteiSho {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-            ShogaishaKojoTaishoshaListParameter parameter = getHandler(div).getParameter();
-            return null;
+            onClick_btnJiko(div);
         }
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 実行確認ダイアログYesを実行する。
+     *
+     * @param div ShogaishaKoujoTaishoNinteiShoDiv
+     * @return ResponseData<ShogaishaKojoTaishoshaListParameter>
+     */
+    public ResponseData<ShogaishaKojoTaishoshaListParameter> onClick_btnJiko(ShogaishaKoujoTaishoNinteiShoDiv div) {
+        ShogaishaKojoTaishoshaListParameter parameter = getHandler(div).getParameter();
+        return ResponseData.of(parameter).respond();
     }
 
     private ShogaishaKoujoTaishoNinteiShoHandler getHandler(ShogaishaKoujoTaishoNinteiShoDiv div) {
