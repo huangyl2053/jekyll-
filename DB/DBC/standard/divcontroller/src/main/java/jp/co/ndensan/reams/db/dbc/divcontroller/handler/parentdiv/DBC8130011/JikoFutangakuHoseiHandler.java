@@ -96,7 +96,7 @@ public class JikoFutangakuHoseiHandler {
      * @param 対象者 TaishoshaKey
      */
     public void initializeDisplay(TaishoshaKey 対象者) {
-//        div.getKogakuGassanShikyuShinseiTorokuKihon().initialize(対象者.get識別コード());
+        div.getKogakuGassanShikyuShinseiTorokuKihon().initialize(対象者.get識別コード());
         div.getKogakuGassanShikyuShinseiTorokuKaigoKihon().initialize(対象者.get被保険者番号());
         div.getJikoFutangakuHoseiList().getChkRirekiHyouji().setSelectedItemsByKey(Collections.EMPTY_LIST);
         div.getJikoFutangakuHoseiList().getDgJohoIchiran().init();
