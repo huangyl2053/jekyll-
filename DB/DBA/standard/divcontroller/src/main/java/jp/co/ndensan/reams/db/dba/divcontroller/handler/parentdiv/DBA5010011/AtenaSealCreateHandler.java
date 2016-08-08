@@ -35,6 +35,8 @@ public class AtenaSealCreateHandler {
     private static final RString 抽出対象者_1 = new RString("1");
     private static final RString 抽出対象者_2 = new RString("2");
     private static final RString 抽出対象者_3 = new RString("3");
+    private static final RString 抽出対象者_4 = new RString("4");
+    private static final RString 抽出対象者_5 = new RString("5");
     private static final RString 資格区分_1号日本人 = new RString("1");
     private static final RString 資格区分_2号日本人 = new RString("2");
     private static final RString 資格区分_1号外国人 = new RString("3");
@@ -87,9 +89,13 @@ public class AtenaSealCreateHandler {
             if (市町村識別ID_00.equals(市町村識別ID)) {
                 List<KeyValueDataSource> list市町村指定 = new ArrayList<>();
                 KeyValueDataSource dataSource = new KeyValueDataSource();
+                KeyValueDataSource dataSources = new KeyValueDataSource();
                 dataSource.setKey(全市町村_KEY);
                 dataSource.setValue(全市町村_VALUE);
                 list市町村指定.add(dataSource);
+                dataSources.setKey(shichosonSecurityJoho.get市町村情報().get市町村コード().value());
+                dataSources.setValue(shichosonSecurityJoho.get市町村情報().get市町村名称());
+                list市町村指定.add(dataSources);
                 div.getCyushutsuJoken().getDdlZensisyouson().setDataSource(list市町村指定);
                 div.getCyushutsuJoken().getDdlZensisyouson().setDisabled(false);
             } else if (!市町村識別ID_00.equals(市町村識別ID)) {
@@ -232,8 +238,12 @@ public class AtenaSealCreateHandler {
         } else {
             if (listKey.contains(NENREITOTATSU)) {
                 抽出対象者 = 抽出対象者_2;
-            } else {
+            } else if (listKey.contains(SHIKAKUSHUTOKU)) {
                 抽出対象者 = 抽出対象者_1;
+            } else if (listKey.contains(JUTOKUNOMI)) {
+                抽出対象者 = 抽出対象者_4;
+            } else {
+                抽出対象者 = 抽出対象者_5;
             }
         }
         RString 抽出期間 = RString.EMPTY;
@@ -254,14 +264,17 @@ public class AtenaSealCreateHandler {
         return new AtenaSealCreateBatchParameter(
                 抽出対象者,
                 抽出期間,
-                抽出期間開始日,
-                抽出期間終了日,
+                dateFormat(new RString(抽出期間開始日.toString())),
+                dateFormat(new RString(抽出期間終了日.toString())),
                 code,
                 div.getCyushutsuJoken().getDdlZensisyouson().getSelectedKey(),
                 div.getHensyuHoho().getDdlSaiyusenJusho().getSelectedKey(),
                 div.getHensyuHoho().getDdlKeisho().getSelectedKey(),
                 div.getHensyuHoho().getRadIsPrintHihokenshaNo().getSelectedKey(),
-                div.getHensyuHoho().getCcdJushoSettei().get町域編集方法(),
+                div.getHensyuHoho().getCcdJushoSettei().is方書表示(),
+                div.getHensyuHoho().getCcdJushoSettei().is市町村名表示(),
+                div.getHensyuHoho().getCcdJushoSettei().is都道府県名表示(),
+                div.getHensyuHoho().getCcdJushoSettei().is郡名表示(),
                 div.getCcdShutsuryokuJun().get出力順ID(),
                 SubGyomuCode.DBA介護資格.value());
     }
@@ -426,4 +439,10 @@ public class AtenaSealCreateHandler {
         div.getCyushutsuJoken().getChkTaishosha().setSelectedItemsByKey(key);
     }
 
+    private RString dateFormat(RString obj) {
+        if (obj == null) {
+            return RString.EMPTY;
+        }
+        return new FlexibleDate(obj).wareki().toDateString();
+    }
 }

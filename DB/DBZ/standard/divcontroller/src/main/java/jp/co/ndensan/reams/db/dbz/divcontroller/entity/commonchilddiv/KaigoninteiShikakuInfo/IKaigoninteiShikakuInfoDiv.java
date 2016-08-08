@@ -16,11 +16,9 @@ public interface IKaigoninteiShikakuInfoDiv extends ICommonChildDivBasePropertie
      * 初期化。
      *
      * @param hdnShinchsonCode
-     * @param hdnShikibetsuCode
-     * @param hdnSetaikodo
      * @param hdnHihokenShaNo
      */
-    void initialize(RString hdnShinchsonCode, RString hdnShikibetsuCode, RString hdnSetaikodo, RString hdnHihokenShaNo);
+    void initialize(RString hdnShinchsonCode, RString hdnHihokenShaNo);
 
     TextBox getTxtYokaigodo();
 

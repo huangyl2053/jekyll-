@@ -181,22 +181,23 @@ public class DbT7067ChohyoSeigyoHanyoDac implements ISaveable<DbT7067ChohyoSeigy
                                 eq(kanriNendo, 管理年度))).
                 toList(DbT7067ChohyoSeigyoHanyoEntity.class);
     }
- /**
+    
+   /**
      * 帳票制御汎用をキーから取得します。
      *
+     * @param サブ業務コード  SubGyomuCode
      * @param 管理年度 FlexibleYear
      * @return List<DbT7067ChohyoSeigyoHanyoEntity>
      */
     @Transaction
     public List<DbT7067ChohyoSeigyoHanyoEntity> get帳票制御汎用(
-            FlexibleYear 管理年度) {
+            SubGyomuCode サブ業務コード, FlexibleYear 管理年度) {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
-                table(DbT7067ChohyoSeigyoHanyo.class).
-                where(
-                                   eq(kanriNendo, 管理年度)).
+               table(DbT7067ChohyoSeigyoHanyo.class).
+                where(and(eq(subGyomuCode, サブ業務コード),eq(kanriNendo, 管理年度))).
                 toList(DbT7067ChohyoSeigyoHanyoEntity.class);
     }
 

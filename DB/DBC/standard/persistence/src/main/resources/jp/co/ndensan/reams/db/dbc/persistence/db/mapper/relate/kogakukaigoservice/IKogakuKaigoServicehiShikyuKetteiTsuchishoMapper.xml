@@ -3,7 +3,7 @@
 <!-- 概要： 高額サービス費支給（不支給）決定通知書作成する用マッピング用XMLです。 -->
 <!-- @reamsid_L DBC-2000-030 xicongwang -->
 
-<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehishikyuketteitsuchisho.IKogakuKaigoServicehiShikyuKetteiTsuchishoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservice.IKogakuKaigoServicehiShikyuKetteiTsuchishoMapper">
                     
 <!--    <select id="select高額サービス情報"
             resultMap="resultMap_KetteiTsuchishoInfoTempResult"

@@ -691,7 +691,7 @@
 			  ON dbt5913."shichosonCode" = dbt7051."shichosonCode"
 			  AND dbt5913."ninteiChosaItakusakiCode" = dbt5201."ninteichosaItakusakiCode"
 			  AND dbt5913."ninteiChosainCode" = dbt5201."ninteiChosainCode"
-			  AND dbt5913."jokyoFlag" = FALSE
+			  AND dbt5913."jokyoFlag" = TRUE
               INNER JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" dbt5301
               ON dbt5101."shinseishoKanriNo" = dbt5301."shinseishoKanriNo"
               AND dbt5301."logicalDeletedFlag" = FALSE
@@ -1116,7 +1116,7 @@
 			  ON dbt5913."shichosonCode" = dbt7051."shichosonCode"
 			  AND dbt5913."ninteiChosaItakusakiCode" = dbt5201."ninteichosaItakusakiCode"
 			  AND dbt5913."ninteiChosainCode" = dbt5201."ninteiChosainCode"
-			  AND dbt5913."jokyoFlag" = FALSE
+			  AND dbt5913."jokyoFlag" = TRUE
               INNER JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" dbt5301
               ON dbt5101."shinseishoKanriNo" = dbt5301."shinseishoKanriNo"
               AND dbt5301."logicalDeletedFlag" = FALSE
@@ -1213,7 +1213,7 @@
 			  ON dbt5913."shichosonCode" = dbt7051."shichosonCode"
 			  AND dbt5913."ninteiChosaItakusakiCode" = dbt5201."ninteichosaItakusakiCode"
 			  AND dbt5913."ninteiChosainCode" = dbt5201."ninteiChosainCode"
-			  AND dbt5913."jokyoFlag" = FALSE
+			  AND dbt5913."jokyoFlag" = TRUE
               INNER JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" dbt5301
               ON dbt5101."shinseishoKanriNo" = dbt5301."shinseishoKanriNo"
               AND dbt5301."logicalDeletedFlag" = FALSE

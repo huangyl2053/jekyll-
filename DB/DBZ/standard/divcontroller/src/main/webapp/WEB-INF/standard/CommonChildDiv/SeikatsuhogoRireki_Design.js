@@ -4,6 +4,13 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onOk_Cancel = function () {
+                return "onOk_Cancel";
+            };
+
+            Events.onbtn_AddRow = function () {
+                return "onbtn_AddRow";
+            };
             return Events;
         })();
         SeikatsuhogoRireki.Events = Events;

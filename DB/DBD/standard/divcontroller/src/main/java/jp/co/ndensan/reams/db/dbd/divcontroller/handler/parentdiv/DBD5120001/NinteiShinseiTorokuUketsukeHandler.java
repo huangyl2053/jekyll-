@@ -112,8 +112,9 @@ public class NinteiShinseiTorokuUketsukeHandler {
         NinteiShinseiTorokuUketsukeBusiness result = manager.get初期化情報(param);
 
         div.getCcdKaigoNinteiAtenaInfo().initialize();
+        div.getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(申請書管理番号, 識別コード);
         //TODO
-        //div.getCcdKaigoNinteiShikakuInfo().initialize(DBDMN51001, DBDMN51001, DBDMN51001, DBDMN51001);
+//        div.getCcdKaigoNinteiShikakuInfo().initialize(DBDMN51001, DBDMN51001, DBDMN51001, DBDMN51001);
 
         if (result != null) {
 
@@ -192,13 +193,12 @@ public class NinteiShinseiTorokuUketsukeHandler {
      */
     public void onClick_btnUpdate() {
 
-        if (DBD5120001StateName.申請追加.getName().equals(ResponseHolder.getState())
-                || DBD5120001StateName.区分変更追加.getName().equals(ResponseHolder.getState())
-                || DBD5120001StateName.サービス変更追加.getName().equals(ResponseHolder.getState())) {
-
-            return;
-        }
-
+//        if (DBD5120001StateName.申請追加.getName().equals(ResponseHolder.getState())
+//                || DBD5120001StateName.区分変更追加.getName().equals(ResponseHolder.getState())
+//                || DBD5120001StateName.サービス変更追加.getName().equals(ResponseHolder.getState())) {
+//
+//            return;
+//        }
     }
 
     /**
@@ -660,49 +660,49 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
     private void set介護認定申請基本情報(NinteiShinseiTorokuUketsukeBusiness result) {
 
-        KaigoNinteiShinseiKihonJohoInputDiv kaigoNinteiShinseiKihonJohoInputDiv
+        KaigoNinteiShinseiKihonJohoInputDiv 介護認定申請Div
                 = div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv();
-        kaigoNinteiShinseiKihonJohoInputDiv.initialize();
-        kaigoNinteiShinseiKihonJohoInputDiv.setRadShinseishoKubun(result.getEntity().get申請書区分());
-        kaigoNinteiShinseiKihonJohoInputDiv.setTxtShinseiJokyo(result.getEntity().get申請状況());
+        介護認定申請Div.initialize();
+        介護認定申請Div.setRadShinseishoKubun(result.getEntity().get申請書区分());
+        介護認定申請Div.setTxtShinseiJokyo(result.getEntity().get申請状況());
         if (result.getEntity().get申請日() != null) {
-            kaigoNinteiShinseiKihonJohoInputDiv.setTxtShinseiYMD(new RDate(result.getEntity().get申請日().toString()));
+            介護認定申請Div.setTxtShinseiYMD(new RDate(result.getEntity().get申請日().toString()));
         }
         if (result.getEntity().get申請種別() != null) {
-            kaigoNinteiShinseiKihonJohoInputDiv.setShinseiShubetsu(JukyuShinseiJiyu.toValue(result.getEntity().get申請種別().getColumnValue()));
+            介護認定申請Div.setShinseiShubetsu(JukyuShinseiJiyu.toValue(result.getEntity().get申請種別().getColumnValue()));
         }
         if (result.getEntity().get認定申請区分コード_申請時() != null) {
-            kaigoNinteiShinseiKihonJohoInputDiv.setShinseiKubunShinseiji(
+            介護認定申請Div.setShinseiKubunShinseiji(
                     NinteiShinseiShinseijiKubunCode.toValue(result.getEntity().get認定申請区分コード_申請時().getColumnValue()));
         }
         if (result.getEntity().get認定申請区分コード_法令() != null) {
-            kaigoNinteiShinseiKihonJohoInputDiv.setShinseiKubunHorei(
+            介護認定申請Div.setShinseiKubunHorei(
                     NinteiShinseiHoreiCode.toValue(result.getEntity().get認定申請区分コード_法令().getColumnValue()));
         }
-        kaigoNinteiShinseiKihonJohoInputDiv.setShisho(
+        介護認定申請Div.setShisho(
                 new ShishoCode(result.getEntity().get支所コード()));
 
         List<RString> dataSource = new ArrayList<>();
         if (result.getEntity().is旧措置者フラグ()) {
             dataSource.add(SELECT_KEY0);
         }
-        kaigoNinteiShinseiKihonJohoInputDiv.setKyuSochisha(dataSource);
+        介護認定申請Div.setKyuSochisha(dataSource);
 
-        kaigoNinteiShinseiKihonJohoInputDiv.setHihokenshaKubun(
+        介護認定申請Div.setHihokenshaKubun(
                 HihokenshaKubunCode.toValue(result.getEntity().get被保険者区分コード()));
 
         List<RString> dataSource1 = new ArrayList<>();
         if (result.getEntity().is資格取得前申請フラグ()) {
             dataSource1.add(SELECT_KEY0);
         }
-        kaigoNinteiShinseiKihonJohoInputDiv.setChkShikakuShutokuMae(dataSource1);
+        介護認定申請Div.setChkShikakuShutokuMae(dataSource1);
 
         if (result.getEntity().get二号特定疾病コード() != null) {
-            kaigoNinteiShinseiKihonJohoInputDiv.setTokuteiShippei(
+            介護認定申請Div.setTokuteiShippei(
                     TokuteiShippei.toValue(result.getEntity().get二号特定疾病コード().getColumnValue()));
         }
-        kaigoNinteiShinseiKihonJohoInputDiv.setServiceSakujoTeikeibun(result.getEntity().get申請サービス削除の理由());
-        kaigoNinteiShinseiKihonJohoInputDiv.setNinteiShinseRiyuTeikeibun(result.getEntity().get認定申請理由());
+        介護認定申請Div.setServiceSakujoTeikeibun(result.getEntity().get申請サービス削除の理由());
+        介護認定申請Div.setNinteiShinseRiyuTeikeibun(result.getEntity().get認定申請理由());
     }
 
     private void set認定申請届出者(NinteiShinseiTorokuUketsukeBusiness result) {
