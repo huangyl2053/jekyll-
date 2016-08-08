@@ -16,12 +16,12 @@ import jp.co.ndensan.reams.db.dbb.definition.core.tsuchishohakkogoido.IdoNaiyo;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tsuchishohakkogoidosha.IdoshaParamter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tsuchishohakkogoidosha.QualificationsParamter;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2017TsuchishoHakkogoIdoshaEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tsuchishohakkogoidosha.DbT2017Uaft200EntityResult;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tsuchishohakkogoidosha.Dbv2001EntityResult;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2017TsuchishoHakkogoIdoshaDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tsuchishohakkogoidohaaku.ITsuchiShoHakkogoIdoHaakuMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.idoruiseki.ShikibetsuTaishoIdoJoho;
 import jp.co.ndensan.reams.ua.uax.business.core.idoruiseki.ShikibetsuTaishoIdoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.idoruiseki.ShikibetsuTaishoIdoChushutsuKubun;
@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.report.api.ReportInfo;
@@ -422,7 +423,10 @@ public class TsuchiShoHakkogoIdoHaaku {
 
     private DbT2017TsuchishoHakkogoIdoshaEntity set資格異動(
             DbT2017TsuchishoHakkogoIdoshaEntity dbt2017Entity, DbV2001ChoshuHohoEntity dbv2001Entity) {
-        dbt2017Entity.setIdoYMD(new FlexibleDate(dbv2001Entity.getLastUpdateTimestamp().getDate().toString()));
+        RDateTime time = dbv2001Entity.getLastUpdateTimestamp();
+        if (time != null && time.getDate() != null) {
+            dbt2017Entity.setIdoYMD(new FlexibleDate(time.getDate().toString()));
+        }
         dbt2017Entity.setIdoNaiyo(IdoNaiyo.資格の異動.getコード());
         dbt2017Entity.setIdoAriFlag(true);
         dbt2017Entity.setState(EntityDataState.Modified);

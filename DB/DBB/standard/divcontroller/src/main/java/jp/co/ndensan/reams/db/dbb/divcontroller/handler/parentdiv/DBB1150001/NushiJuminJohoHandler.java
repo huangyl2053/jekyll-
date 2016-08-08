@@ -733,9 +733,9 @@ public final class NushiJuminJohoHandler {
             }
             世帯員.set転入異動日(所得照会票発行対象世帯員_row.get識別対象().to個人().get登録異動年月日());
             世帯員.set識別コード(所得照会票発行対象世帯員_row.get識別対象().get識別コード());
-            世帯員.setカナ氏名(所得照会票発行対象世帯員.get識別対象().get名称().getKana().value());
-            世帯員.set氏名(所得照会票発行対象世帯員.get識別対象().get名称().getName().value());
-            世帯員.set生年月日(所得照会票発行対象世帯員.get識別対象().to個人().get生年月日().toFlexibleDate());
+            世帯員.setカナ氏名(所得照会票発行対象世帯員_row.get識別対象().get名称().getKana().value());
+            世帯員.set氏名(所得照会票発行対象世帯員_row.get識別対象().get名称().getName().value());
+            世帯員.set生年月日(所得照会票発行対象世帯員_row.get識別対象().to個人().get生年月日().toFlexibleDate());
             世帯員リスト.add(世帯員);
         }
         所得照会票.set世帯員リスト(世帯員リスト);
