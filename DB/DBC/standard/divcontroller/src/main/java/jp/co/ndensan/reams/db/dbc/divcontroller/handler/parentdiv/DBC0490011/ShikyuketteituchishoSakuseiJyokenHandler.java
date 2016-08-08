@@ -49,6 +49,8 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
     private static final RString 受領委任者向け決定通知書 = new RString("ForJuryoininsha");
     private static final RString 実行するボタン1 = new RString("Execute1");
     private static final RString 実行するボタン2 = new RString("Execute2");
+    private static final int INT_1 = 1;
+    private static final int INT_2 = 2;
 
     /**
      * コンストラクタです。
@@ -74,11 +76,11 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
             }
             if (前回対象日List.get(0).get対象終了年月日() != null) {
                 前回対象日To = new RDate(前回対象日List.get(0).get対象終了年月日().toString());
-                div.getChushutsuJoken().getTxtUketukebi().setFromValue(前回対象日To.plusDay(1));
+                div.getChushutsuJoken().getTxtUketukebi().setFromValue(前回対象日To.plusDay(INT_1));
             }
         }
         if (前回対象日To != null) {
-            RDate 前回対象日Toの次日 = 前回対象日To.plusDay(1);
+            RDate 前回対象日Toの次日 = 前回対象日To.plusDay(INT_1);
             div.getChushutsuJoken().getTxtUketukebi().setFromValue(前回対象日Toの次日);
             div.getChushutsuJoken().getTxtKetteibi().setFromValue(前回対象日Toの次日);
         }
@@ -100,7 +102,7 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
             code = ChohyoBunruiKanriManager.createInstance().get帳票分類管理(SubGyomuCode.DBC介護給付,
                     new ReportId(高額総合事業サービス費支給決定通知書帳票ID));
             CommonButtonHolder.setVisibleByCommonButtonFieldName(実行するボタン1, false);
-            div.getChushutsuJoken().getRadHizukeSentaku().getDataSource().remove(2);
+            div.getChushutsuJoken().getRadHizukeSentaku().getDataSource().remove(INT_2);
             div.getChushutsuJoken().getTxtKetteishaUketukeNengetsu().setVisible(false);
             div.getShikyuKetteiTsuchisho().getCcdBunshoBangoInput().initialize(new ReportId(高額総合事業サービス費支給決定通知書帳票ID));
         }
