@@ -76,6 +76,7 @@ public class NinteiShinsakaiKekkaDataTorikomiValidationHandler {
         while (read.readLine() != null) {
             size++;
         }
+        read.close();
         return size;
     }
 
