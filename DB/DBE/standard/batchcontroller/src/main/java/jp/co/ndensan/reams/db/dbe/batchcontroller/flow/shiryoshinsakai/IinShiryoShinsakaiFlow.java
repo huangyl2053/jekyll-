@@ -192,10 +192,10 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
     protected IBatchFlowCommand createIinTuikaSiryoData() {
         if (選択.equals(getParameter().getShuturyokuSutairu())) {
             return loopBatch(IinTuikaSiryoDataSakuseiA4Process.class)
-                    .arguments(getParameter().toIinTuikaSiryoProcessParameter()).define();
+                    .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
         } else {
             return loopBatch(IinTuikaSiryoDataSakuseiA3Process.class)
-                    .arguments(getParameter().toIinTuikaSiryoProcessParameter()).define();
+                    .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
         }
     }
 

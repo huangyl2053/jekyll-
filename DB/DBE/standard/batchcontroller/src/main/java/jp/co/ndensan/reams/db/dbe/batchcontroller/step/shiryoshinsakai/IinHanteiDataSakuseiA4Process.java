@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokki
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.HanteiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iinyobihanteikinyuhyo.IinYobihanteiKinyuhyoReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -44,11 +45,12 @@ public class IinHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJohoE
             + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getHanteiJoho");
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
             new RString(IinYobihanteiKinyuhyoReportSource.ReportSourceFields.shinsakaiKaisaiNo.name())));
+    private static final int 満ページ件数 = 10;
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
     private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
     private IinYobihanteiKinyuhyoBusiness business;
     private int データ件数;
-    private static final int 満ページ件数 = 10;
+
     @BatchWriter
     private BatchReportWriter<IinYobihanteiKinyuhyoReportSource> batchWrite;
     private ReportSourceWriter<IinYobihanteiKinyuhyoReportSource> reportSourceWriter;
@@ -58,8 +60,10 @@ public class IinHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJohoE
         データ件数 = 0;
         myBatisParameter = paramter.toIinTokkiJikouItiziHanteiMyBatisParameter();
         myBatisParameter.setOrderKakuteiFlg(ShinsakaiOrderKakuteiFlg.確定.is介護認定審査会審査順確定());
-//        myBatisParameter.setIsShoriJotaiKubun0(ShoriJotaiKubun.通常.getコード());
-//        myBatisParameter.setIsShoriJotaiKubun3(ShoriJotaiKubun.延期.getコード());
+        List<RString> shoriJotaiKubunList = new ArrayList<>();
+        shoriJotaiKubunList.add(ShoriJotaiKubun.通常.getコード());
+        shoriJotaiKubunList.add(ShoriJotaiKubun.延期.getコード());
+        myBatisParameter.setShoriJotaiKubunList(shoriJotaiKubunList);
     }
 
     @Override

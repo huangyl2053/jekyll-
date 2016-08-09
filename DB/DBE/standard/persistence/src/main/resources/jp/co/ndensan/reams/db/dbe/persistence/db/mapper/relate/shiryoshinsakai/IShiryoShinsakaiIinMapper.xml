@@ -1261,7 +1261,7 @@
         dbT5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
     </select>
 
-    <select id="getHanteiJoho" resultMap="Result_HanteiJoho"
+-->    <select id="getHanteiJoho" resultMap="Result_HanteiJoho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter" fetchSize="500"  resultOrdered="true">
         SELECT
         dbt5502."shinsakaiOrder" AS dbt5502_shinsakaiOrder,
@@ -1283,7 +1283,8 @@
         rgdb."DbT5101NinteiShinseiJoho" AS dbt5101
         ON
         dbt5101."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
-        AND ( dbt5101."shoriJotaiKubun" = #{isShoriJotaiKubun0} OR dbt5101."shoriJotaiKubun" = #{isShoriJotaiKubun3} )
+        AND dbt5101."shoriJotaiKubun" IN
+        <foreach collection="shoriJotaiKubunList" item="code" open="(" separator="," close=")">#{code}</foreach>
         AND dbt5101."logicalDeletedFlag" = False
         INNER JOIN
         rgdb."DbT7051KoseiShichosonMaster" AS dbt7051
@@ -1328,7 +1329,7 @@
                         <if test="!isIsShuturyokuJun">
            #{shuturyokuJun}
         </if>
-    </select>-->
+    </select>
 
     <select id="getShinsakaiIinJoho" resultMap="Result_ShinsakaiIinJoho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
@@ -1406,6 +1407,7 @@
                 #{shuturyokuJun}
             </otherwise>
         </choose>
+        LIMIT 50
     </select>
 
     <!--    <select id="getIinShimei" resultMap="Result_ShinsakaiIinJoho"

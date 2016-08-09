@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokki
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTuutishoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.KaisaiYoteiJohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.HanteiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ItiziHanteiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.KaisaiYoteiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.PsmJohoEntity;
@@ -354,14 +355,14 @@ public interface IShiryoShinsakaiIinMapper {
 //     * @return 申請書管理番号の個数
 //     */
 //    int getJimu申請書管理番号の個数(JimuTokkiJikouItiziHanteiMyBatisParameter parameter);
-//    /**
-//     * 要介護認定申請者に関する予備判定記入情報を取得する。
-//     *
-//     * @param parameter IinTokkiJikouItiziHanteiMyBatisParameter
-//     * @return List<HanteiJohoEntity> 予備判定記入情報
-//     */
-//    List<HanteiJohoEntity> getHanteiJoho(IinTokkiJikouItiziHanteiMyBatisParameter parameter);
-//
+    /**
+     * 要介護認定申請者に関する予備判定記入情報を取得する。
+     *
+     * @param parameter IinTokkiJikouItiziHanteiMyBatisParameter
+     * @return List<HanteiJohoEntity> 予備判定記入情報
+     */
+    List<HanteiJohoEntity> getHanteiJoho(IinTokkiJikouItiziHanteiMyBatisParameter parameter);
+
     /**
      * 介護認定審査対象者一覧表を取得する。
      *
