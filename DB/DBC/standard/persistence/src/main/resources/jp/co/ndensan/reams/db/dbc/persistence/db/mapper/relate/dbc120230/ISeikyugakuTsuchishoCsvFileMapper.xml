@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-2480-013 sunqingzhu -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc120230.ISeikyugakuTsuchishoCsvFileMapper">
+    <!--請求額通知書一時テーブルを作成します-->
+    <insert id="create請求額通知書一時TBL">
+        CREATE TEMP TABLE "DbWT1511SeikyugakuTsuchisho"
+        (
+        "renban" smallint,
+        "hokenshaNo" rgdb."DbUDD003HokenshaNo",
+        "hokenshaName" character varying(40),
+        "shoKisaiHokenshaNo" rgdb."DbUDD003HokenshaNo",
+        "shoKisaiHokenshaName" character varying(40),
+        "kohiFutanshaNo" character varying(40),
+        "kohiFutanshaName" character varying(40),
+        "kanCode" character varying(40),
+        "kanName" character varying(40),
+        "kouCode" character varying(40),
+        "kouName" character varying(40),
+        "shinsaYM" rshare."UDD014YM",
+        "kokuhorenName" character varying(40),
+        "mokuCode" character varying(40),
+        "mokuName" character varying(40),
+        "serviceShuruiCode" character varying(40),
+        "serviceShuruiMei" character varying(40),
+        "t_Kensu" character varying(40),
+        "t_JitsuNissu" character varying(40),
+        "t_Tanisu" character varying(40),
+        "t_Kingaku" character varying(40),
+        "s_Kensu" character varying(40),
+        "s_Tanisu" character varying(40),
+        "s_Choseigaku" character varying(40),
+        "kaigokyufuSogojigyohi" character varying(40),
+        "riyoshaFutangaku" character varying(40),
+        "kohiFutangaku" character varying(40),
+        "gokeiChohyoRecordShubetsu" character varying(40),
+        "t_GokeiKensu"  numeric(13,0),
+        "t_GokeiTanisu" numeric(13,0),
+        "t_GokeiKingaku" numeric(13,0),
+        "s_GokeiKensu" numeric(13,0),
+        "s_GokeiTanisu" numeric(13,0),
+        "s_GokeiChoseigaku" numeric(13,0),
+        "gokeiKaigokyufuSogojigyohi" numeric(13,0),
+        "gokeiRiyoshaFutangaku" numeric(13,0),
+        "gokeiKohiFutangaku" numeric(13,0),
+        "ruisekiChohyoRecordShubetsu" character varying(40),
+        "t_RuisekiKensu" numeric(13,0),
+        "t_RuisekiTanisu" numeric(13,0),
+        "t_RuisekiKingaku" numeric(13,0),
+        "s_RuisekiKensu" numeric(13,0),
+        "s_RuisekiTanisu" numeric(13,0),
+        "s_RuisekiChoseigaku" numeric(13,0),
+        "ruisekiKaigokyufuSogojigyohi" numeric(13,0),
+        "ruisekiRiyoshaFutangaku" numeric(13,0),
+        "ruisekiKohiFutangaku" numeric(13,0),
+        "tesuryoChohyoRecordShubetsu" character varying(40),
+        "tesuryoSeikyugaku" numeric(13,0),
+        "tesuiryoRuisekiSeikyugaku" numeric(13,0)
+        )
+    </insert>
+    
+    <insert id="create処理結果リスト一時TBL">
+        CREATE TEMP TABLE "DbWT0002KokuhorenTorikomiError"
+        (
+        "errorKubun" character varying(40),
+        "shoHokanehshaNo" rgdb."DbUDD003HokenshaNo",
+        "hihokenshaNo" rgdb."DbUDD002HihokenshaNo",
+        "key1" character varying(40),
+        "key2" character varying(40),
+        "key3" character varying(40),
+        "key4" character varying(40),
+        "key5" character varying(40),
+        "hihokenshaKanaShimei" character varying(40),
+        "hihokenshaShimei" character varying(40),
+        "biko" character varying(40)
+        )
+    </insert>
+    
+    <!--請求額通知書一時テーブルに登録します-->
+    <insert id="請求額通知書一時TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.DbWT1511SeikyugakuTsuchishoTempEntity">
+        INSERT INTO "DbWT1511SeikyugakuTsuchisho" 
+        VALUES 
+        (
+        #{連番},
+        #{保険者番号},
+        #{保険者名},
+        #{証記載保険者番号},
+        #{証記載保険者名},
+        #{公費負担者番号},
+        #{公費負担者名},
+        #{款コード},
+        #{款名},
+        #{項コード},
+        #{項名},
+        #{審査年月},
+        #{国保連合会名},
+        #{目コード},
+        #{目名},
+        #{サービス種類コード},
+        #{サービス種類名},
+        #{通常分_件数},
+        #{通常分_実日数},
+        #{通常分_単位数},
+        #{通常分_金額},
+        #{再審査_過誤_件数},
+        #{再審査_過誤_単位数},
+        #{再審査_過誤_調整額},
+        #{介護給付_総合事業費},
+        #{利用者負担額},
+        #{公費負担額},
+        #{合計_帳票レコード種別},
+        #{合計_通常分_件数},
+        #{合計_通常分_単位数},
+        #{合計_通常分_金額},
+        #{合計_再審査_過誤_件数},
+        #{合計_再審査_過誤_単位数},
+        #{合計_再審査_過誤_調整額},
+        #{合計_介護給付_総合事業費},
+        #{合計_利用者負担額},
+        #{合計_公費負担額},
+        #{累計_帳票レコード種別},
+        #{累計_通常分_件数},
+        #{累計_通常分_単位数},
+        #{累計_通常分_金額},
+        #{累計_再審査_過誤_件数},
+        #{累計_再審査_過誤_単位数},
+        #{累計_再審査_過誤_調整額},
+        #{累計_介護給付_総合事業費},
+        #{累計_利用者負担額},
+        #{累計_公費負担額},
+        #{手数料_帳票レコード種別},
+        #{手数料_請求額},
+        #{手数料_累計請求額})
+    </insert>
+    
+    <!--処理結果リスト一時TBLに登録します-->
+    <insert id="処理結果リスト一時TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity">
+        INSERT INTO "DbWT0002KokuhorenTorikomiError"
+        VALUES 
+        (
+        #{エラー区分},
+        #{証記載保険者番号},
+        #{被保険者番号},
+        #{キー1},
+        #{キー2},
+        #{キー3},
+        #{キー4},
+        #{キー5},
+        #{被保険者カナ氏名},
+        #{被保険者氏名},
+        #{備考}
+        )
+    </insert>
+</mapper>

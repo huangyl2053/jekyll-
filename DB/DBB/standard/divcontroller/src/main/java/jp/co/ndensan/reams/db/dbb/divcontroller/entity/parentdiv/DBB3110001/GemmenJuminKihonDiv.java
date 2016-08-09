@@ -12,7 +12,9 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kaigofukak
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kaigofukakihon.KaigoFukaKihon.KaigoFukaKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
@@ -30,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 public class GemmenJuminKihonDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -47,6 +49,14 @@ public class GemmenJuminKihonDiv extends Panel {
     private KaigoFukaKihonDiv ccdKaigoFukaKihon;
     @JsonProperty("ccdKaigoAtenaKihon")
     private KaigoAtenaInfoDiv ccdKaigoAtenaKihon;
+    @JsonProperty("GemmenShuruiCode")
+    private RString GemmenShuruiCode;
+    @JsonProperty("GemmenShuruiHyojiMongon")
+    private RString GemmenShuruiHyojiMongon;
+    @JsonProperty("GemmenTorikeshiShuruiCode")
+    private RString GemmenTorikeshiShuruiCode;
+    @JsonProperty("GemmenTorikeshiShuruiHyojiMongon")
+    private RString GemmenTorikeshiShuruiHyojiMongon;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -127,6 +137,78 @@ public class GemmenJuminKihonDiv extends Panel {
     }
 
     /*
+     * getGemmenShuruiCode
+     * @return GemmenShuruiCode
+     */
+    @JsonProperty("GemmenShuruiCode")
+    public RString getGemmenShuruiCode() {
+        return GemmenShuruiCode;
+    }
+
+    /*
+     * setGemmenShuruiCode
+     * @param GemmenShuruiCode GemmenShuruiCode
+     */
+    @JsonProperty("GemmenShuruiCode")
+    public void setGemmenShuruiCode(RString GemmenShuruiCode) {
+        this.GemmenShuruiCode = GemmenShuruiCode;
+    }
+
+    /*
+     * getGemmenShuruiHyojiMongon
+     * @return GemmenShuruiHyojiMongon
+     */
+    @JsonProperty("GemmenShuruiHyojiMongon")
+    public RString getGemmenShuruiHyojiMongon() {
+        return GemmenShuruiHyojiMongon;
+    }
+
+    /*
+     * setGemmenShuruiHyojiMongon
+     * @param GemmenShuruiHyojiMongon GemmenShuruiHyojiMongon
+     */
+    @JsonProperty("GemmenShuruiHyojiMongon")
+    public void setGemmenShuruiHyojiMongon(RString GemmenShuruiHyojiMongon) {
+        this.GemmenShuruiHyojiMongon = GemmenShuruiHyojiMongon;
+    }
+
+    /*
+     * getGemmenTorikeshiShuruiCode
+     * @return GemmenTorikeshiShuruiCode
+     */
+    @JsonProperty("GemmenTorikeshiShuruiCode")
+    public RString getGemmenTorikeshiShuruiCode() {
+        return GemmenTorikeshiShuruiCode;
+    }
+
+    /*
+     * setGemmenTorikeshiShuruiCode
+     * @param GemmenTorikeshiShuruiCode GemmenTorikeshiShuruiCode
+     */
+    @JsonProperty("GemmenTorikeshiShuruiCode")
+    public void setGemmenTorikeshiShuruiCode(RString GemmenTorikeshiShuruiCode) {
+        this.GemmenTorikeshiShuruiCode = GemmenTorikeshiShuruiCode;
+    }
+
+    /*
+     * getGemmenTorikeshiShuruiHyojiMongon
+     * @return GemmenTorikeshiShuruiHyojiMongon
+     */
+    @JsonProperty("GemmenTorikeshiShuruiHyojiMongon")
+    public RString getGemmenTorikeshiShuruiHyojiMongon() {
+        return GemmenTorikeshiShuruiHyojiMongon;
+    }
+
+    /*
+     * setGemmenTorikeshiShuruiHyojiMongon
+     * @param GemmenTorikeshiShuruiHyojiMongon GemmenTorikeshiShuruiHyojiMongon
+     */
+    @JsonProperty("GemmenTorikeshiShuruiHyojiMongon")
+    public void setGemmenTorikeshiShuruiHyojiMongon(RString GemmenTorikeshiShuruiHyojiMongon) {
+        this.GemmenTorikeshiShuruiHyojiMongon = GemmenTorikeshiShuruiHyojiMongon;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -162,6 +244,46 @@ public class GemmenJuminKihonDiv extends Panel {
     @JsonIgnore
     public void setBtnTorikeshi(Button btnTorikeshi) {
         this.getGemmenMain().getShinseiJokyo().setBtnTorikeshi(btnTorikeshi);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtTorikeshiYMD() {
+        return this.getGemmenMain().getTorikeshiInfo().getTxtTorikeshiYMD();
+    }
+
+    @JsonIgnore
+    public void setTxtTorikeshiYMD(TextBoxDate txtTorikeshiYMD) {
+        this.getGemmenMain().getTorikeshiInfo().setTxtTorikeshiYMD(txtTorikeshiYMD);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnTorikeshiShurui() {
+        return this.getGemmenMain().getTorikeshiInfo().getBtnTorikeshiShurui();
+    }
+
+    @JsonIgnore
+    public void setBtnTorikeshiShurui(ButtonDialog btnTorikeshiShurui) {
+        this.getGemmenMain().getTorikeshiInfo().setBtnTorikeshiShurui(btnTorikeshiShurui);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtTorikeshiShurui() {
+        return this.getGemmenMain().getTorikeshiInfo().getTxtTorikeshiShurui();
+    }
+
+    @JsonIgnore
+    public void setTxtTorikeshiShurui(TextBox txtTorikeshiShurui) {
+        this.getGemmenMain().getTorikeshiInfo().setTxtTorikeshiShurui(txtTorikeshiShurui);
+    }
+
+    @JsonIgnore
+    public TextBoxMultiLine getTxtTorikeshiRiyu() {
+        return this.getGemmenMain().getTorikeshiInfo().getTxtTorikeshiRiyu();
+    }
+
+    @JsonIgnore
+    public void setTxtTorikeshiRiyu(TextBoxMultiLine txtTorikeshiRiyu) {
+        this.getGemmenMain().getTorikeshiInfo().setTxtTorikeshiRiyu(txtTorikeshiRiyu);
     }
 
     @JsonIgnore
@@ -205,12 +327,12 @@ public class GemmenJuminKihonDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnGemmenShurui() {
+    public ButtonDialog getBtnGemmenShurui() {
         return this.getGemmenMain().getShinseiinfo().getBtnGemmenShurui();
     }
 
     @JsonIgnore
-    public void setBtnGemmenShurui(Button btnGemmenShurui) {
+    public void setBtnGemmenShurui(ButtonDialog btnGemmenShurui) {
         this.getGemmenMain().getShinseiinfo().setBtnGemmenShurui(btnGemmenShurui);
     }
 

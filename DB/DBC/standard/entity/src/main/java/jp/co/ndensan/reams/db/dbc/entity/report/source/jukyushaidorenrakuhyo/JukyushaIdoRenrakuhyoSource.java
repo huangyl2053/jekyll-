@@ -20,8 +20,8 @@ public class JukyushaIdoRenrakuhyoSource implements IReportSource {
     public RString sakuseiMM;
     @ReportItem(name = "sakuseiDD", length = 2, order = 4)
     public RString sakuseiDD;
-    @ReportItem(name = "PageCount", length = 4, order = 5)
-    public RString PageCount;
+    @ReportItem(name = "pageCount", length = 4, order = 5)
+    public RString pageCount;
     @ReportItem(name = "hokenshaName", length = 20, order = 6)
     public RString hokenshaName;
     @ReportItem(name = "idoKbn3", length = 1, order = 7)
@@ -30,8 +30,8 @@ public class JukyushaIdoRenrakuhyoSource implements IReportSource {
     public RString shoHokenshaNo;
     @ReportItem(name = "hihokenshaNo", length = 10, order = 9)
     public RString hihokenshaNo;
-    @ReportItem(name = "IdoNengo", length = 2, order = 10)
-    public RString IdoNengo;
+    @ReportItem(name = "idoNengo", length = 2, order = 10)
+    public RString idoNengo;
     @ReportItem(name = "idoYMD", length = 6, order = 11)
     public RString idoYMD;
     @ReportItem(name = "idoKbn1", length = 1, order = 12)
@@ -144,8 +144,8 @@ public class JukyushaIdoRenrakuhyoSource implements IReportSource {
     public RString hyojunTekiyoEDYMD;
     @ReportItem(name = "shoTekiyoSTNengo", length = 2, order = 66)
     public RString shoTekiyoSTNengo;
-    @ReportItem(name = "ShoTekiyoSTYMD", length = 6, order = 67)
-    public RString ShoTekiyoSTYMD;
+    @ReportItem(name = "shoTekiyoSTYMD", length = 6, order = 67)
+    public RString shoTekiyoSTYMD;
     @ReportItem(name = "shoTekiyoEDNengo", length = 2, order = 68)
     public RString shoTekiyoEDNengo;
     @ReportItem(name = "shoTekiyoEDYMD", length = 6, order = 69)
@@ -180,8 +180,8 @@ public class JukyushaIdoRenrakuhyoSource implements IReportSource {
     public RString shin1;
     @ReportItem(name = "shin2", length = 4, order = 84)
     public RString shin2;
-    @ReportItem(name = "Shin3", length = 4, order = 85)
-    public RString Shin3;
+    @ReportItem(name = "shin3", length = 4, order = 85)
+    public RString shin3;
     @ReportItem(name = "tokuTekiyoSTNengo", length = 2, order = 86)
     public RString tokuTekiyoSTNengo;
     @ReportItem(name = "tokuTekiyoSTYMD", length = 6, order = 87)
@@ -206,8 +206,8 @@ public class JukyushaIdoRenrakuhyoSource implements IReportSource {
     public RString shaTekiyoEDNengo;
     @ReportItem(name = "shaTekiyoEDYMD", length = 6, order = 97)
     public RString shaTekiyoEDYMD;
-    @ReportItem(name = "ShokiboKyotakuUmu", length = 1, order = 98)
-    public RString ShokiboKyotakuUmu;
+    @ReportItem(name = "shokiboKyotakuUmu", length = 1, order = 98)
+    public RString shokiboKyotakuUmu;
     @ReportItem(name = "nijiYoboTaishoKbn", length = 1, order = 99)
     public RString nijiYoboTaishoKbn;
     @ReportItem(name = "nijiYoboSTNengo", length = 2, order = 100)

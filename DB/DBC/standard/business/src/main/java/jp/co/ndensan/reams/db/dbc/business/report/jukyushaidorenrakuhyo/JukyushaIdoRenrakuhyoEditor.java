@@ -69,7 +69,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             source.hokenshaName = 市町村名称;
             source.shoHokenshaNo = entity.get証記載保険者番号();
             source.hihokenshaNo = entity.get被保険者番号();
-            source.IdoNengo = commonEra(entity.get異動年月日());
+            source.idoNengo = commonEra(entity.get異動年月日());
             source.idoYMD = commonYMD(entity.get異動年月日());
             if (ONE.equals(entity.get異動区分())) {
                 source.idoKbn1 = CIRCLE;
@@ -138,7 +138,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             source.hyojunTekiyoEDNengo = commonEra(entity.get標準適用終了年月日());
             source.hyojunTekiyoEDYMD = commonYMD(entity.get標準適用終了年月日());
             source.shoTekiyoSTNengo = commonEra(entity.get償還払化適用開始年月日());
-            source.ShoTekiyoSTYMD = commonYMD(entity.get償還払化適用開始年月日());
+            source.shoTekiyoSTYMD = commonYMD(entity.get償還払化適用開始年月日());
             source.shoTekiyoEDNengo = commonEra(entity.get償還払化適用終了年月日());
             source.shoTekiyoEDYMD = commonYMD(entity.get償還払化適用終了年月日());
             source.kyuTekiyoSTNengo = commonEra(entity.get給付率引下げ適用開始年月日());
@@ -156,7 +156,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             source.tashoshitsu = entity.get多床室();
             source.shin1 = entity.get新１();
             source.shin2 = entity.get新２();
-            source.Shin3 = entity.get新３();
+            source.shin3 = entity.get新３();
             source.tokuTekiyoSTNengo = commonEra(entity.get特定入所者適用開始年月日());
             source.tokuTekiyoSTYMD = commonYMD(entity.get特定入所者適用開始年月日());
             source.tokuTekiyoEDNengo = commonEra(entity.get特定入所者適用終了年月日());
@@ -170,7 +170,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             source.shaTekiyoEDNengo = commonEra(entity.get軽減率適用終了年月日());
             source.shaTekiyoEDYMD = commonYMD(entity.get軽減率適用終了年月日());
             Boolean 小規模居宅ｻｰﾋﾞｽ = entity.get小規模居宅ｻｰﾋﾞｽ利用();
-            source.ShokiboKyotakuUmu = new RString(小規模居宅ｻｰﾋﾞｽ.toString());
+            source.shokiboKyotakuUmu = new RString(小規模居宅ｻｰﾋﾞｽ.toString());
             source.nijiYoboTaishoKbn = entity.get二次予防事業区分();
             source.nijiYoboSTNengo = commonEra(entity.get二次予防有効期間開始年月日());
             source.nijiYoboSTYMD = commonYMD(entity.get二次予防有効期間開始年月日());
