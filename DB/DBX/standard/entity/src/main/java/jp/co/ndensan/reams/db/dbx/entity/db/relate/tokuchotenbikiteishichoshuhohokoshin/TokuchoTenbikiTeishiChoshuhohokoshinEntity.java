@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbx.entity.db.relate.tokuchotenbikiteishichoshuho
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
