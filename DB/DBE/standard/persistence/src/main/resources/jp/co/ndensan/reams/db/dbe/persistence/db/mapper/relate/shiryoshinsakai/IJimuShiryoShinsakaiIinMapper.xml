@@ -162,14 +162,13 @@
         <if test="isSakuseiJokenTuika">
             AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
         </if>
-<!--                    ORDER BY
+                    ORDER BY
         <if test="isIsShuturyokuJun">
-           NinteiJoho.dbT5502_shinsakaiOrder
+           dbt5502.shinsakaiOrder
         </if>
-        TODO 出力順　実装しない
                         <if test="!isIsShuturyokuJun">
            #{shuturyokuJun}
-        </if>-->
+        </if>
     </select>
     
     <resultMap id="Result_共通情報" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity" autoMapping="true">
@@ -240,14 +239,13 @@
         <if test="isSakuseiJokenTuika">
             AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
         </if>
-<!--                            ORDER BY
+                    ORDER BY
         <if test="isIsShuturyokuJun">
-           NinteiJoho.dbT5502_shinsakaiOrder
+           dbt5502.shinsakaiOrder
         </if>
-        TODO 出力順　実装しない
                         <if test="!isIsShuturyokuJun">
            #{shuturyokuJun}
-        </if>-->
+        </if>
     </select>
      
     <select id="get事務局情報" resultMap="Result_ShinseiJoho"
@@ -298,14 +296,13 @@
         <if test="isSakuseiJokenTuika">
             AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
         </if>
-        <!--            ORDER BY
+                    ORDER BY
         <if test="isIsShuturyokuJun">
-           NinteiJoho.dbT5502_shinsakaiOrder
-        </if>-->
-        <!--TODO 出力順　実装しない-->
-        <!--                <if test="!isIsShuturyokuJun">
+           dbt5502.shinsakaiOrder
+        </if>
+                        <if test="!isIsShuturyokuJun">
            #{shuturyokuJun}
-        </if>-->
+        </if>
         LIMIT
             50
     </select>
@@ -358,14 +355,13 @@
         <if test="isSakuseiJokenTuika">
             AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
         </if>
-        <!--            ORDER BY
+                    ORDER BY
         <if test="isIsShuturyokuJun">
-           NinteiJoho.dbT5502_shinsakaiOrder
-        </if>-->
-        <!--TODO 出力順　実装しない-->
-        <!--                <if test="!isIsShuturyokuJun">
+           dbt5502.shinsakaiOrder
+        </if>
+                        <if test="!isIsShuturyokuJun">
            #{shuturyokuJun}
-        </if>-->
+        </if>
     </select>
     
     <select id="get事務局委員氏名" resultMap="Result_ShinsakaiIinJoho"
@@ -803,14 +799,13 @@
                 <if test="isSakuseiJokenTuika">
                     AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
                 </if>
-<!--                                    ORDER BY
+                    ORDER BY
         <if test="isIsShuturyokuJun">
-           NinteiJoho.dbT5502_shinsakaiOrder
+           dbt5502.shinsakaiOrder
         </if>
-        TODO 出力順　実装しない
                         <if test="!isIsShuturyokuJun">
            #{shuturyokuJun}
-        </if>-->
+        </if>
 </select>
 <select id="getJimuHanteiJoho" resultMap="Result_HanteiJoho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuTokkiJikouItiziHanteiMyBatisParameter" fetchSize="500"  resultOrdered="true">
@@ -871,14 +866,13 @@
         dbt5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
         AND
         dbt5502."shinsakaiOrderKakuteiFlag" = #{isOrderKakuteiFlg}
-        <!--            ORDER BY
+                    ORDER BY
         <if test="isIsShuturyokuJun">
-           NinteiJoho.dbT5502_shinsakaiOrder
-        </if>-->
-        <!--TODO 出力順　実装しない-->
-        <!--                <if test="!isIsShuturyokuJun">
+           dbt5502.shinsakaiOrder
+        </if>
+                        <if test="!isIsShuturyokuJun">
            #{shuturyokuJun}
-        </if>-->
+        </if>
     </select>
     
         <resultMap id="Result_HanteiJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.HanteiJohoEntity" autoMapping="true">
@@ -949,14 +943,13 @@
             ) AS GaikyoTokkiJoho
             WHERE
                 ShinsakaiW.dbt5502_shinseishoKanriNo = GaikyoTokkiJoho.dbt5206_shinseishoKanriNo
-        <!--            ORDER BY
+                    ORDER BY
         <if test="isIsShuturyokuJun">
-           ShinsakaiW.dbT5502_shinsakaiOrder
-        </if>-->
-        <!--TODO 出力順　実装しない-->
-        <!--                <if test="!isIsShuturyokuJun">
+           dbt5502.shinsakaiOrder
+        </if>
+                        <if test="!isIsShuturyokuJun">
            #{shuturyokuJun}
-        </if>-->
+        </if>
     </select>
     
     <resultMap id="Result_GaikyoTokki" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.GaikyoTokkiEntity" autoMapping="true">
@@ -1228,14 +1221,13 @@
                 <if test="isSakuseiJokenTuika">
                     AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
                 </if>
-<!--                                    ORDER BY
+                    ORDER BY
         <if test="isIsShuturyokuJun">
-           NinteiJoho.dbT5502_shinsakaiOrder
+           dbt5502.shinsakaiOrder
         </if>
-        TODO 出力順　実装しない
                         <if test="!isIsShuturyokuJun">
            #{shuturyokuJun}
-        </if>-->
+        </if>
 </select>
 <select id="get事務局一次判定件数" resultType="java.lang.Integer"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
@@ -1325,14 +1317,13 @@
                 <if test="isSakuseiJokenTuika">
                     AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
                 </if>
-<!--                                    ORDER BY
+                    ORDER BY
         <if test="isIsShuturyokuJun">
-           NinteiJoho.dbT5502_shinsakaiOrder
+           dbt5502.shinsakaiOrder
         </if>
-        TODO 出力順　実装しない
                         <if test="!isIsShuturyokuJun">
            #{shuturyokuJun}
-        </if>-->
+        </if>
 </select>
 <resultMap id="Result_JimuItiziHanteiASan" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ItiziHanteiEntity" autoMapping="true">
         <result property="ninteichosaIraiRirekiNo" column="ninteichosaIraiRirekiNo" />
