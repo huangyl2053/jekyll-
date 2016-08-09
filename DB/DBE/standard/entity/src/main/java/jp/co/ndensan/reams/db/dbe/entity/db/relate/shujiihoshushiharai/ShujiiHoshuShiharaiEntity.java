@@ -30,6 +30,7 @@ public class ShujiiHoshuShiharaiEntity {
     private RString 認証者氏名カナ;
     private RString 認証者氏名掛ける;
     private RString 公印省略;
+    private RString 主治医医療機関コード;
     private YubinNo 郵便番号;
     private RString 住所;
     private RString 医療機関;

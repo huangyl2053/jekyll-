@@ -33,13 +33,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ChosaHoshuShiharaiEdit {
 
-    private int 在宅新規件数;
-    private int 在宅再調査件数;
-    private int 施設新規件数;
-    private int 施設再調査件数;
-    private int その他の件数;
-    private Decimal その他の金額 = Decimal.ZERO;
-    private RString ninteichosaItakusakiCode = RString.EMPTY;
+    private int 件数;
 
     /**
      * 認定調査報酬支払通知書の編集処理です。
@@ -49,11 +43,14 @@ public class ChosaHoshuShiharaiEdit {
      * @param 認証者 認証者
      * @param 通知文 通知文
      * @param 口座情報 口座情報
+     * @param shiharaientity 認定調査報酬支払通知書
+     * @param flag 状態
+     * @param ninteichosaItakusakiCode 認定調査委託先コード
      * @return ChosaHoshuShiharaiEntity
      */
     public ChosaHoshuShiharaiEntity getChosaHoshuShiharaiEntity(HoshuShiharaiJunbiRelateEntity entity, RString 消費税率,
-            NinshoshaSource 認証者, Map<Integer, RString> 通知文, Koza 口座情報) {
-        ChosaHoshuShiharaiEntity shiharaientity = new ChosaHoshuShiharaiEntity();
+            NinshoshaSource 認証者, Map<Integer, RString> 通知文, Koza 口座情報, ChosaHoshuShiharaiEntity shiharaientity, boolean flag,
+            RString ninteichosaItakusakiCode) {
         shiharaientity.set電子公印(認証者.denshiKoin);
         shiharaientity.set発行日(認証者.hakkoYMD);
         shiharaientity.set認証者役職名(認証者.ninshoshaYakushokuMei);
@@ -81,87 +78,86 @@ public class ChosaHoshuShiharaiEdit {
         shiharaientity.set帳票タイトル(DbBusinessConfig.get(ConfigNameDBE.認定調査報酬支払通知書, RDate.getNowDate(),
                 SubGyomuCode.DBE認定支援));
         Decimal 単価税込 = nullOrZero(entity.getTanka()).multiply(rstringToDecimal(消費税率)).roundUpTo(0);
-        その他の金額 = rstringToDecimal(消費税率).multiply(entity.getChosaItakuryo());
         if (!ninteichosaItakusakiCode.equals(entity.getNinteichosaItakusakiCode())) {
+            件数 = 1;
             if (entity.getNinteiChosaKubunCode() != null && entity.getChosaJisshiBashoCode() != null
                     && ChosaKubun.新規調査.getコード().equals(entity.getNinteiChosaKubunCode().value())
                     && ChosaJisshiBashoCode.自宅内.getコード().equals(entity.getChosaJisshiBashoCode().value())) {
-                在宅新規件数 = 1;
-                shiharaientity.set在宅新規件数(intToRString(在宅新規件数));
+                shiharaientity.set在宅新規件数(intToRString(件数));
                 shiharaientity.set在宅新規単価税込(decimalToRString(単価税込));
             } else if (entity.getNinteiChosaKubunCode() != null && entity.getChosaJisshiBashoCode() != null
                     && ChosaKubun.再調査.getコード().equals(entity.getNinteiChosaKubunCode().value())
                     && ChosaJisshiBashoCode.自宅内.getコード().equals(entity.getChosaJisshiBashoCode().value())) {
-                在宅再調査件数 = 1;
-                shiharaientity.set在宅再調査件数(intToRString(在宅再調査件数));
+                shiharaientity.set在宅再調査件数(intToRString(件数));
                 shiharaientity.set在宅再調査単価税込(decimalToRString(単価税込));
             } else if (entity.getNinteiChosaKubunCode() != null && entity.getChosaJisshiBashoCode() != null
                     && ChosaKubun.新規調査.getコード().equals(entity.getNinteiChosaKubunCode().value())
                     && ChosaJisshiBashoCode.自宅外.getコード().equals(entity.getChosaJisshiBashoCode().value())) {
-                施設新規件数 = 1;
-                shiharaientity.set施設新規件数(intToRString(施設新規件数));
+                shiharaientity.set施設新規件数(intToRString(件数));
                 shiharaientity.set施設新規単価税込(decimalToRString(単価税込));
             } else if (entity.getNinteiChosaKubunCode() != null && entity.getChosaJisshiBashoCode() != null
                     && ChosaKubun.再調査.getコード().equals(entity.getNinteiChosaKubunCode().value())
                     && ChosaJisshiBashoCode.自宅外.getコード().equals(entity.getChosaJisshiBashoCode().value())) {
-                施設再調査件数 = 1;
-                shiharaientity.set施設再調査件数(intToRString(施設再調査件数));
+                shiharaientity.set施設再調査件数(intToRString(件数));
                 shiharaientity.set施設再調査単価税込(decimalToRString(単価税込));
             } else {
-                その他の件数 = 1;
-                shiharaientity.setその他の設定件数(intToRString(その他の件数));
+                shiharaientity.setその他の設定件数(intToRString(件数));
+                shiharaientity.setその他の金額合計(decimalToRString(rstringToDecimal(消費税率).multiply(entity.getChosaItakuryo()).roundUpTo(0)));
             }
         }
-        getChosaHoshuShihaEntity(entity, shiharaientity, 単価税込, 消費税率);
-        ninteichosaItakusakiCode = entity.getNinteichosaItakusakiCode();
-        Decimal 在宅新規合計 = 単価税込.multiply(在宅新規件数);
-        Decimal 在宅再調査合計 = 単価税込.multiply(在宅再調査件数);
-        Decimal 施設新規合計 = 単価税込.multiply(施設新規件数);
-        Decimal 施設再調査合計 = 単価税込.multiply(施設再調査件数);
+        shiharaientity = getShiharaientity(entity, shiharaientity, 単価税込, 消費税率, ninteichosaItakusakiCode, flag);
+        Decimal 在宅新規合計 = 単価税込.multiply(rstringToInt(shiharaientity.get在宅新規件数()));
+        Decimal 在宅再調査合計 = 単価税込.multiply(rstringToInt(shiharaientity.get在宅再調査件数()));
+        Decimal 施設新規合計 = 単価税込.multiply(rstringToInt(shiharaientity.get施設新規件数()));
+        Decimal 施設再調査合計 = 単価税込.multiply(rstringToInt(shiharaientity.get施設再調査件数()));
         shiharaientity.set在宅新規合計(decimalToRString(在宅新規合計.roundUpTo(0)));
         shiharaientity.set在宅再調査合計(decimalToRString(在宅再調査合計.roundUpTo(0)));
         shiharaientity.set施設新規合計(decimalToRString(施設新規合計.roundUpTo(0)));
         shiharaientity.set施設再調査合計(decimalToRString(施設再調査合計.roundUpTo(0)));
-        shiharaientity.setその他の設定件数(intToRString(その他の件数));
         shiharaientity.setその他の単価税込(RString.EMPTY);
-        shiharaientity.setその他の金額合計(decimalToRString(その他の金額.roundUpTo(0)));
-        Decimal 合計金額 = 在宅新規合計.add(在宅再調査合計).add(施設新規合計).add(施設再調査合計).add(その他の金額);
+        Decimal 合計金額 = 在宅新規合計.add(在宅再調査合計).add(施設新規合計).add(施設再調査合計).
+                add(rstringToDecimal(shiharaientity.getその他の金額合計()));
         shiharaientity.set合計金額(decimalToRString(合計金額.roundUpTo(0)));
         shiharaientity.setバーコード(getバーコード(entity));
         return shiharaientity;
     }
 
+    private ChosaHoshuShiharaiEntity getShiharaientity(HoshuShiharaiJunbiRelateEntity entity,
+            ChosaHoshuShiharaiEntity shiharaientity, Decimal 単価税込, RString 消費税率, RString ninteichosaItakusakiCode, boolean flag) {
+        if (flag) {
+            shiharaientity = getChosaHoshuShihaEntity(entity, shiharaientity, 単価税込, 消費税率, ninteichosaItakusakiCode);
+        }
+        return shiharaientity;
+    }
+
     private ChosaHoshuShiharaiEntity getChosaHoshuShihaEntity(HoshuShiharaiJunbiRelateEntity entity,
-            ChosaHoshuShiharaiEntity shiharaientity, Decimal 単価税込, RString 消費税率) {
-        その他の金額 = rstringToDecimal(消費税率).multiply(entity.getChosaItakuryo()).roundUpTo(0);
+            ChosaHoshuShiharaiEntity shiharaientity, Decimal 単価税込, RString 消費税率, RString ninteichosaItakusakiCode) {
+        Decimal その他の金額 = rstringToDecimal(消費税率).multiply(entity.getChosaItakuryo()).roundUpTo(0);
         if (ninteichosaItakusakiCode.equals(entity.getNinteichosaItakusakiCode())) {
             if (entity.getNinteiChosaKubunCode() != null && entity.getChosaJisshiBashoCode() != null
                     && ChosaKubun.新規調査.getコード().equals(entity.getNinteiChosaKubunCode().value())
                     && ChosaJisshiBashoCode.自宅内.getコード().equals(entity.getChosaJisshiBashoCode().value())) {
-                在宅新規件数 = 在宅新規件数 + 1;
-                shiharaientity.set在宅新規件数(intToRString(在宅新規件数));
+                shiharaientity.set在宅新規件数(intToRString(rstringToInt(shiharaientity.get在宅新規件数()) + 1));
                 shiharaientity.set在宅新規単価税込(decimalToRString(単価税込));
             } else if (entity.getNinteiChosaKubunCode() != null && entity.getChosaJisshiBashoCode() != null
                     && ChosaKubun.再調査.getコード().equals(entity.getNinteiChosaKubunCode().value())
                     && ChosaJisshiBashoCode.自宅内.getコード().equals(entity.getChosaJisshiBashoCode().value())) {
-                在宅再調査件数 = 在宅再調査件数 + 1;
-                shiharaientity.set在宅再調査件数(intToRString(在宅再調査件数));
+                shiharaientity.set在宅再調査件数(intToRString(rstringToInt(shiharaientity.get在宅再調査件数()) + 1));
                 shiharaientity.set在宅再調査単価税込(decimalToRString(単価税込));
             } else if (entity.getNinteiChosaKubunCode() != null && entity.getChosaJisshiBashoCode() != null
                     && ChosaKubun.新規調査.getコード().equals(entity.getNinteiChosaKubunCode().value())
                     && ChosaJisshiBashoCode.自宅外.getコード().equals(entity.getChosaJisshiBashoCode().value())) {
-                施設新規件数 = 施設新規件数 + 1;
-                shiharaientity.set施設新規件数(intToRString(施設新規件数));
+                shiharaientity.set施設新規件数(intToRString(rstringToInt(shiharaientity.get施設新規件数()) + 1));
                 shiharaientity.set施設新規単価税込(decimalToRString(単価税込));
             } else if (entity.getNinteiChosaKubunCode() != null && entity.getChosaJisshiBashoCode() != null
                     && ChosaKubun.再調査.getコード().equals(entity.getNinteiChosaKubunCode().value())
                     && ChosaJisshiBashoCode.自宅外.getコード().equals(entity.getChosaJisshiBashoCode().value())) {
-                施設再調査件数 = 施設再調査件数 + 1;
-                shiharaientity.set施設再調査件数(intToRString(施設再調査件数));
+                shiharaientity.set施設再調査件数(intToRString(rstringToInt(shiharaientity.get施設再調査件数()) + 1));
                 shiharaientity.set施設再調査単価税込(decimalToRString(単価税込));
             } else {
-                その他の件数 = その他の件数 + 1;
-                その他の金額 = その他の金額.add(その他の金額).roundUpTo(0);
+                shiharaientity.setその他の設定件数(intToRString(rstringToInt(shiharaientity.getその他の設定件数()) + 1));
+                その他の金額 = その他の金額.add(rstringToDecimal(shiharaientity.getその他の金額合計())).roundUpTo(0);
+                shiharaientity.setその他の金額合計(decimalToRString(その他の金額));
             }
         }
         return shiharaientity;
@@ -176,6 +172,13 @@ public class ChosaHoshuShiharaiEdit {
 
     private RString intToRString(int date) {
         return new RString(date);
+    }
+
+    private int rstringToInt(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return 0;
+        }
+        return Integer.valueOf(date.toString());
     }
 
     private Decimal rstringToDecimal(RString date) {

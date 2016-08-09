@@ -63,6 +63,7 @@ public class ChosaHoshuShiharaiEditor implements IChosaHoshuShiharaiEditor {
         source.kinyukikan = item.get金融機関();
         source.meiginin = item.get名議人();
         source.tsuchibun2 = item.get通知文2();
+        source.ninteichosaItakusakiCode = item.get認定調査委託先コード();
         return source;
     }
 

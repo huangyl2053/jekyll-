@@ -37,6 +37,26 @@ public class NinteiKekkaJohoManager {
     }
 
     /**
+     * 主キーに合致する要介護認定結果情報を返します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return NinteiKekkaJoho
+     */
+    @Transaction
+    public NinteiKekkaJoho get要介護認定結果情報(
+            ShinseishoKanriNo 申請書管理番号) {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+
+        DbT5102NinteiKekkaJohoEntity entity = 要介護認定結果情報Dac.selectByKey(
+                申請書管理番号);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new NinteiKekkaJoho(entity);
+    }
+
+    /**
      * 要介護認定結果情報{@link NinteiKekkaJoho}を保存します。
      *
      * @param 要介護認定結果情報 要介護認定結果情報

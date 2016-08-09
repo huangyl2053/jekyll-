@@ -28,6 +28,7 @@ public class ChosaHoshuShiharaiEntity {
     private RString 認証者氏名カナ;
     private RString 認証者氏名掛ける;
     private RString 公印省略;
+    private RString 認定調査委託先コード;
     private RString 郵便番号;
     private RString 住所;
     private RString 調査機関;

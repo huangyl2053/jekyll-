@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.hoshushiharaijunbi;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiihoshushiharai.ShujiiHoshuShiharaiEdit;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiihoshushiharai.ShujiiHoshuShiharaiReport;
@@ -24,7 +26,7 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJok
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -45,6 +47,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -52,12 +55,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-1980-020 suguangjun
  */
-public class ShujiiHoshuShiharaiProcess extends BatchProcessBase<HoshuShiharaiJunbiRelateEntity> {
+public class ShujiiHoshuShiharaiProcess extends BatchKeyBreakBase<HoshuShiharaiJunbiRelateEntity> {
 
     private static final ReportId REPORT_ID = ReportIdDBE.DBE621002.getReportId();
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hoshushiharaijunbi."
             + "IHoshuShiharaiJunbiMapper.get主治医意見書作成報酬支払通知書");
+    private static final List<RString> PAGE_BREAK_KEYS = Collections
+            .unmodifiableList(Arrays.asList(new RString(ShujiiHoshuShiharaiReportSource.ReportSourceFields.shujiiIryokikanCode.name())));
     private HoshuShiharaiJunbiProcessParameter processParameter;
     private static final RString MIDDLELINE = new RString("なし");
     private static final RString なし = new RString("なし");
@@ -68,6 +73,8 @@ public class ShujiiHoshuShiharaiProcess extends BatchProcessBase<HoshuShiharaiJu
     private RString 導入団体コード;
     private RString 市町村名;
     private RString 消費税率;
+    private RString shujiiIryokikanCode = RString.EMPTY;
+    private ShujiiHoshuShiharaiEntity shiharaiEntity = new ShujiiHoshuShiharaiEntity();
 
     @Override
     protected void beforeExecute() {
@@ -85,26 +92,42 @@ public class ShujiiHoshuShiharaiProcess extends BatchProcessBase<HoshuShiharaiJu
 
     @Override
     protected void createWriter() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
+        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
+                .addBreak(new BreakerCatalog<ShujiiHoshuShiharaiReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                .create();
         reportSourceWriter = new ReportSourceWriter<>(batchWrite);
     }
 
     @Override
     protected void afterExecute() {
+        ShujiiHoshuShiharaiReport report = new ShujiiHoshuShiharaiReport(shiharaiEntity);
+        report.writeBy(reportSourceWriter);
         バッチ出力条件リストの出力();
     }
 
     @Override
-    protected void process(HoshuShiharaiJunbiRelateEntity entity) {
+    protected void keyBreakProcess(HoshuShiharaiJunbiRelateEntity current) {
+    }
+
+    @Override
+    protected void usualProcess(HoshuShiharaiJunbiRelateEntity entity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
         ShujiiHoshuShiharaiEdit edit = new ShujiiHoshuShiharaiEdit();
         List<RString> 業務固有キー = new ArrayList<>();
         業務固有キー.add(entity.getShujiiIryoKikanCode());
-        ShujiiHoshuShiharaiEntity shiharaiEntity = edit.getShujiiHoshuShiharaiEntity(entity, 消費税率, get認証者(),
-                ChosaHoshuShiharaiProcess.get通知文(), ChosaHoshuShiharaiProcess.get口座情報(new KamokuCode("002"), 業務固有キー));
+        if (!RString.isNullOrEmpty(shujiiIryokikanCode) && !shujiiIryokikanCode.equals(entity.getShujiiIryoKikanCode())) {
+            ShujiiHoshuShiharaiEntity shiharaiEntity_bak = shiharaiEntity;
+            shiharaiEntity_bak = edit.getShujiiHoshuShiharaiEntity(getBefore(), 消費税率, get認証者(),
+                    ChosaHoshuShiharaiProcess.get通知文(), ChosaHoshuShiharaiProcess.get口座情報(new KamokuCode("002"), 業務固有キー),
+                    shiharaiEntity_bak, shujiiIryokikanCode, false);
+            ShujiiHoshuShiharaiReport report = new ShujiiHoshuShiharaiReport(shiharaiEntity_bak);
+            report.writeBy(reportSourceWriter);
+        }
+        shiharaiEntity = edit.getShujiiHoshuShiharaiEntity(entity, 消費税率, get認証者(),
+                ChosaHoshuShiharaiProcess.get通知文(), ChosaHoshuShiharaiProcess.get口座情報(new KamokuCode("002"), 業務固有キー),
+                shiharaiEntity, shujiiIryokikanCode, true);
         shiharaiEntity.set対象期間(get対象期間());
-        ShujiiHoshuShiharaiReport report = new ShujiiHoshuShiharaiReport(shiharaiEntity);
-        report.writeBy(reportSourceWriter);
+        shujiiIryokikanCode = entity.getShujiiIryoKikanCode();
     }
 
     private PersonalData toPersonalData(HoshuShiharaiJunbiRelateEntity entity) {
