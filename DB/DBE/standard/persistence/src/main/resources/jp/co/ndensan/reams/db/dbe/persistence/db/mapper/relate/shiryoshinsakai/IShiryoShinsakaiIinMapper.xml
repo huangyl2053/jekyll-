@@ -8,7 +8,7 @@
 
  <select id="getShinsakaiSiryoKyotsu"
          resultMap="Result_ShinsakaiSiryoKyotsu"
-         parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.KaisaiYoteiJohoMyBatisParameter"
+         parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter"
          fetchSize="500"
          resultOrdered="true">
         SELECT dbt5502."shinseishoKanriNo"
