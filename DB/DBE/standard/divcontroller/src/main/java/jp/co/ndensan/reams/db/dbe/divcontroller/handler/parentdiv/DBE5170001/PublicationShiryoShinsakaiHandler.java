@@ -399,7 +399,6 @@ public class PublicationShiryoShinsakaiHandler {
             事務局_印刷帳票.add(印刷帳票_すべて選択);
             事務局_印刷帳票.add(印刷帳票_審査会資料);
 
-            事務局_概況特記.add(印刷帳票_概況特記);
             事務局_概況特記.add(印刷帳票_予備判定記入票);
             事務局_概況特記.add(印刷帳票_概況特記一覧);
 
