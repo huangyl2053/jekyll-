@@ -104,7 +104,7 @@ public class JukyushaIdoRenrakuhyoToroku {
      */
     @Transaction
     public JukyushaIdoRenrakuhyoTorokuEntity editJukyushaIdoRenrakuhyo(RString 被保番号, RDate 異動日, RString チェック場合) {
-        DbT3001JukyushaIdoRenrakuhyoEntity entity = dac.select登録した受給者異動情報の取得(被保番号, new RString(異動日.getYearMonth().toString()));
+        DbT3001JukyushaIdoRenrakuhyoEntity entity = dac.select登録した受給者異動情報の取得(被保番号, new RString(異動日.toString()));
         JukyushaIdoRenrakuhyoTorokuEntity jukyuEntity = new JukyushaIdoRenrakuhyoTorokuEntity();
         if (entity != null) {
             jukyuEntity.set作成年月日(new FlexibleDate(RDate.getNowDate().toDateString()));
