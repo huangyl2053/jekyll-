@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.taishoshasearch.TaishoshaRelateB
 import jp.co.ndensan.reams.db.dbz.definition.core.HihoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.jushochitokureisha.JushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.helper.TaishoshaSearchValidationHelper;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokenshafinder.HihokenshaFinder.HihokenshaFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokenshafinder.HihokenshaFinder.IHihokenshaFinderDiv;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.DBZ0200001StateName.検索条件;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.DBZ0200001StateName.該当者一覧;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.TaishoshaSearchDiv;
@@ -39,6 +39,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoGyomuHanteiKey;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 //import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -50,6 +51,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.FlexibleDateOperator;
@@ -148,7 +150,7 @@ public class TaishoshaSearch {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
 
         // 検索条件未指定チェック
-        HihokenshaFinderDiv 検索条件Div = div.getSearchCondition().getCcdSearchCondition();
+        IHihokenshaFinderDiv 検索条件Div = div.getSearchCondition().getCcdSearchCondition();
         boolean 検索条件Flag = 検索条件Div.getKaigoFinder().getTxtHihokenshaNo().getValue().isEmpty()
                 && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkHihokenshaDaicho().getSelectedItems().isEmpty()
                 && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkJukyushaDaicho().getSelectedItems().isEmpty()
@@ -273,12 +275,12 @@ public class TaishoshaSearch {
         return ResponseData.of(div).setState(検索条件);
     }
 
-    private SearchResult<TaishoshaRelateBusiness> get対象者(HihokenshaFinderDiv div) {
+    private SearchResult<TaishoshaRelateBusiness> get対象者(IHihokenshaFinderDiv div) {
         TaishoshaFinder finder = new TaishoshaFinder();
         return finder.get資格対象者(get介護条件(div), get介護除外条件(div), div.get宛名条件(), 最大取得件数);
     }
 
-    private ISearchCondition get介護条件(HihokenshaFinderDiv div) {
+    private ISearchCondition get介護条件(IHihokenshaFinderDiv div) {
         List<INewSearchCondition> 条件List = new ArrayList<>();
 
         IIgnoredValueJudge judge = new IIgnoredValueJudge() {
@@ -308,7 +310,7 @@ public class TaishoshaSearch {
         return 介護条件;
     }
 
-    private ISearchCondition get介護除外条件(HihokenshaFinderDiv div) {
+    private ISearchCondition get介護除外条件(IHihokenshaFinderDiv div) {
         List<INewSearchCondition> 条件List = new ArrayList<>();
 
         IIgnoredValueJudge judge = new IIgnoredValueJudge() {
@@ -342,12 +344,12 @@ public class TaishoshaSearch {
     }
 
     private TaishoshaKey create対象者Key(TaishoshaRelateBusiness entity) {
+        UaFt200FindShikibetsuTaishoEntity shikibetsuTaisho = entity.get住基個人住登外エンティティ();
         DbV7901ShikakuSearchBusiness 資格検索 = new DbV7901ShikakuSearchBusiness(entity.get資格検索エンティティ());
         IKojin 個人 = createKojin(entity.get住基個人住登外エンティティ());
-        資格検索.getShikibetsuCode();
         return new TaishoshaKey(
                 資格検索.getHihokenshaNo() != null ? 資格検索.getHihokenshaNo() : new HihokenshaNo(RString.EMPTY),
-                資格検索.getShikibetsuCode() != null ? 資格検索.getShikibetsuCode() : new ShikibetsuCode(RString.EMPTY),
+                shikibetsuTaisho.getShikibetsuCode() != null ? shikibetsuTaisho.getShikibetsuCode() : new ShikibetsuCode(RString.EMPTY),
                 個人.get世帯コード() != null ? 個人.get世帯コード() : new SetaiCode(RString.EMPTY));
     }
 
@@ -363,7 +365,7 @@ public class TaishoshaSearch {
 
     private void save最近処理者(TaishoshaSearchDiv div, TaishoshaRelateBusiness entity) {
         div.getSearchCondition().getCcdSearchCondition().save最近処理者(
-                entity.get資格検索エンティティ().getShikibetsuCode(),
+                entity.get住基個人住登外エンティティ().getShikibetsuCode(),
                 createKojin(entity.get住基個人住登外エンティティ()).get名称().getName());
     }
 
@@ -408,7 +410,7 @@ public class TaishoshaSearch {
         RString 番地 = 識別対象.get住所().get番地() != null ? 識別対象.get住所().get番地().getBanchi().value() : RString.EMPTY;
         RString 住所番地 = 住所.concat(番地);
 
-        return new dgGaitoshaList_Row(
+        dgGaitoshaList_Row newRow = new dgGaitoshaList_Row(
                 資格検索結果.getHihokenshaNo() != null ? 資格検索結果.getHihokenshaNo().value() : RString.EMPTY,
                 識別対象.get識別コード() != null ? 識別対象.get識別コード().getColumnValue() : RString.EMPTY,
                 被保険者区分 != null ? 被保険者区分.getName() : RString.EMPTY,
@@ -416,6 +418,7 @@ public class TaishoshaSearch {
                 名称カナ,
                 識別対象.get名称() != null ? 名称.concat(名称カナ) : RString.EMPTY,
                 個人.get性別() != null ? (個人.get性別().getName() != null ? 個人.get性別().getName().getShortJapanese() : RString.EMPTY) : RString.EMPTY,
+                new TextBoxNum(),
                 生年月日,
                 個人.get年齢算出().get年齢(),
                 郵便番号,
@@ -423,6 +426,11 @@ public class TaishoshaSearch {
                 個人.get個人番号() != null ? 個人.get個人番号().value() : RString.EMPTY,
                 個人.get住民状態() != null ? 個人.get住民状態().住民状態略称() : RString.EMPTY,
                 個人.get世帯コード() != null ? 個人.get世帯コード().value() : RString.EMPTY);
+
+        if (!個人.get年齢算出().get年齢().isEmpty()) {
+            newRow.getIntNenrei().setValue(new Decimal(個人.get年齢算出().get年齢().toString()));
+        }
+        return newRow;
     }
 
 }

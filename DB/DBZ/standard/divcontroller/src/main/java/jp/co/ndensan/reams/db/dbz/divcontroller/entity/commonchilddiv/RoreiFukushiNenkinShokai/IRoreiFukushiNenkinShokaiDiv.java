@@ -31,4 +31,10 @@ public interface IRoreiFukushiNenkinShokaiDiv extends ICommonChildDivBasePropert
      */
     public List<datagridRireki_Row> getDataGridList();
 
+    /**
+     * 保存可能な状態かチェックします。
+     *
+     * @return 保存可能ならtrue
+     */
+    public boolean isSavable();
 }

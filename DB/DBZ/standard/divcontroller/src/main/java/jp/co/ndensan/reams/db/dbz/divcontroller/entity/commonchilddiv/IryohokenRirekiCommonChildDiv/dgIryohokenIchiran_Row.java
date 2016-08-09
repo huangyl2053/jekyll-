@@ -3,13 +3,14 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.Iryohoken
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jul 27 11:37:37 JST 2016 
+ * Tue Aug 09 09:44:03 JST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
@@ -20,211 +21,183 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgIryohokenIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
 
-    private RString defaultDataName0;
-    private RString defaultDataName1;
-    private RString defaultDataName2;
-    private RString defaultDataName3;
-    private RString defaultDataName4;
-    private RString defaultDataName5;
-    private RString defaultDataName10;
-    private RString defaultDataName6;
-    private RString defaultDataName8;
-    private RString defaultDataName7;
-    private TextBoxNum defaultDataName9;
-    private RString defaultDataName11;
-    private RString defaultDataName12;
-    private RString defaultDataName13;
+    private RString shikibetsuCode;
+    private RString shichosonCode;
+    private RString state;
+    private TextBoxFlexibleDate kanyuDate;
+    private TextBoxFlexibleDate dattaiDate;
+    private RString shubetsu;
+    private RString shubetsuCode;
+    private RString hokensha;
+    private RString hokenshaCode;
+    private RString hokenshaName;
+    private RString kigoNo;
+    private TextBoxNum rirekiNo;
 
     public dgIryohokenIchiran_Row() {
         super();
-        this.defaultDataName0 = RString.EMPTY;
-        this.defaultDataName1 = RString.EMPTY;
-        this.defaultDataName2 = RString.EMPTY;
-        this.defaultDataName3 = RString.EMPTY;
-        this.defaultDataName4 = RString.EMPTY;
-        this.defaultDataName5 = RString.EMPTY;
-        this.defaultDataName10 = RString.EMPTY;
-        this.defaultDataName6 = RString.EMPTY;
-        this.defaultDataName8 = RString.EMPTY;
-        this.defaultDataName7 = RString.EMPTY;
-        this.defaultDataName9 = new TextBoxNum();
-        this.defaultDataName11 = RString.EMPTY;
-        this.defaultDataName12 = RString.EMPTY;
-        this.defaultDataName13 = RString.EMPTY;
-        this.setOriginalData("defaultDataName0", defaultDataName0);
-        this.setOriginalData("defaultDataName1", defaultDataName1);
-        this.setOriginalData("defaultDataName2", defaultDataName2);
-        this.setOriginalData("defaultDataName3", defaultDataName3);
-        this.setOriginalData("defaultDataName4", defaultDataName4);
-        this.setOriginalData("defaultDataName5", defaultDataName5);
-        this.setOriginalData("defaultDataName10", defaultDataName10);
-        this.setOriginalData("defaultDataName6", defaultDataName6);
-        this.setOriginalData("defaultDataName8", defaultDataName8);
-        this.setOriginalData("defaultDataName7", defaultDataName7);
-        this.setOriginalData("defaultDataName9", defaultDataName9);
-        this.setOriginalData("defaultDataName11", defaultDataName11);
-        this.setOriginalData("defaultDataName12", defaultDataName12);
-        this.setOriginalData("defaultDataName13", defaultDataName13);
+        this.shikibetsuCode = RString.EMPTY;
+        this.shichosonCode = RString.EMPTY;
+        this.state = RString.EMPTY;
+        this.kanyuDate = new TextBoxFlexibleDate();
+        this.dattaiDate = new TextBoxFlexibleDate();
+        this.shubetsu = RString.EMPTY;
+        this.shubetsuCode = RString.EMPTY;
+        this.hokensha = RString.EMPTY;
+        this.hokenshaCode = RString.EMPTY;
+        this.hokenshaName = RString.EMPTY;
+        this.kigoNo = RString.EMPTY;
+        this.rirekiNo = new TextBoxNum();
+        this.setOriginalData("shikibetsuCode", shikibetsuCode);
+        this.setOriginalData("shichosonCode", shichosonCode);
+        this.setOriginalData("state", state);
+        this.setOriginalData("kanyuDate", kanyuDate);
+        this.setOriginalData("dattaiDate", dattaiDate);
+        this.setOriginalData("shubetsu", shubetsu);
+        this.setOriginalData("shubetsuCode", shubetsuCode);
+        this.setOriginalData("hokensha", hokensha);
+        this.setOriginalData("hokenshaCode", hokenshaCode);
+        this.setOriginalData("hokenshaName", hokenshaName);
+        this.setOriginalData("kigoNo", kigoNo);
+        this.setOriginalData("rirekiNo", rirekiNo);
     }
 
-    public dgIryohokenIchiran_Row(RString defaultDataName0, RString defaultDataName1, RString defaultDataName2, RString defaultDataName3, RString defaultDataName4, RString defaultDataName5, RString defaultDataName10, RString defaultDataName6, RString defaultDataName8, RString defaultDataName7, TextBoxNum defaultDataName9, RString defaultDataName11, RString defaultDataName12, RString defaultDataName13) {
+    public dgIryohokenIchiran_Row(RString shikibetsuCode, RString shichosonCode, RString state, TextBoxFlexibleDate kanyuDate, TextBoxFlexibleDate dattaiDate, RString shubetsu, RString shubetsuCode, RString hokensha, RString hokenshaCode, RString hokenshaName, RString kigoNo, TextBoxNum rirekiNo) {
         super();
-        this.setOriginalData("defaultDataName0", defaultDataName0);
-        this.setOriginalData("defaultDataName1", defaultDataName1);
-        this.setOriginalData("defaultDataName2", defaultDataName2);
-        this.setOriginalData("defaultDataName3", defaultDataName3);
-        this.setOriginalData("defaultDataName4", defaultDataName4);
-        this.setOriginalData("defaultDataName5", defaultDataName5);
-        this.setOriginalData("defaultDataName10", defaultDataName10);
-        this.setOriginalData("defaultDataName6", defaultDataName6);
-        this.setOriginalData("defaultDataName8", defaultDataName8);
-        this.setOriginalData("defaultDataName7", defaultDataName7);
-        this.setOriginalData("defaultDataName9", defaultDataName9);
-        this.setOriginalData("defaultDataName11", defaultDataName11);
-        this.setOriginalData("defaultDataName12", defaultDataName12);
-        this.setOriginalData("defaultDataName13", defaultDataName13);
-        this.defaultDataName0 = defaultDataName0;
-        this.defaultDataName1 = defaultDataName1;
-        this.defaultDataName2 = defaultDataName2;
-        this.defaultDataName3 = defaultDataName3;
-        this.defaultDataName4 = defaultDataName4;
-        this.defaultDataName5 = defaultDataName5;
-        this.defaultDataName10 = defaultDataName10;
-        this.defaultDataName6 = defaultDataName6;
-        this.defaultDataName8 = defaultDataName8;
-        this.defaultDataName7 = defaultDataName7;
-        this.defaultDataName9 = defaultDataName9;
-        this.defaultDataName11 = defaultDataName11;
-        this.defaultDataName12 = defaultDataName12;
-        this.defaultDataName13 = defaultDataName13;
+        this.setOriginalData("shikibetsuCode", shikibetsuCode);
+        this.setOriginalData("shichosonCode", shichosonCode);
+        this.setOriginalData("state", state);
+        this.setOriginalData("kanyuDate", kanyuDate);
+        this.setOriginalData("dattaiDate", dattaiDate);
+        this.setOriginalData("shubetsu", shubetsu);
+        this.setOriginalData("shubetsuCode", shubetsuCode);
+        this.setOriginalData("hokensha", hokensha);
+        this.setOriginalData("hokenshaCode", hokenshaCode);
+        this.setOriginalData("hokenshaName", hokenshaName);
+        this.setOriginalData("kigoNo", kigoNo);
+        this.setOriginalData("rirekiNo", rirekiNo);
+        this.shikibetsuCode = shikibetsuCode;
+        this.shichosonCode = shichosonCode;
+        this.state = state;
+        this.kanyuDate = kanyuDate;
+        this.dattaiDate = dattaiDate;
+        this.shubetsu = shubetsu;
+        this.shubetsuCode = shubetsuCode;
+        this.hokensha = hokensha;
+        this.hokenshaCode = hokenshaCode;
+        this.hokenshaName = hokenshaName;
+        this.kigoNo = kigoNo;
+        this.rirekiNo = rirekiNo;
     }
 
-    public RString getDefaultDataName0() {
-        return defaultDataName0;
+    public RString getShikibetsuCode() {
+        return shikibetsuCode;
     }
 
-    public RString getDefaultDataName1() {
-        return defaultDataName1;
+    public RString getShichosonCode() {
+        return shichosonCode;
     }
 
-    public RString getDefaultDataName2() {
-        return defaultDataName2;
+    public RString getState() {
+        return state;
     }
 
-    public RString getDefaultDataName3() {
-        return defaultDataName3;
+    public TextBoxFlexibleDate getKanyuDate() {
+        return kanyuDate;
     }
 
-    public RString getDefaultDataName4() {
-        return defaultDataName4;
+    public TextBoxFlexibleDate getDattaiDate() {
+        return dattaiDate;
     }
 
-    public RString getDefaultDataName5() {
-        return defaultDataName5;
+    public RString getShubetsu() {
+        return shubetsu;
     }
 
-    public RString getDefaultDataName10() {
-        return defaultDataName10;
+    public RString getShubetsuCode() {
+        return shubetsuCode;
     }
 
-    public RString getDefaultDataName6() {
-        return defaultDataName6;
+    public RString getHokensha() {
+        return hokensha;
     }
 
-    public RString getDefaultDataName8() {
-        return defaultDataName8;
+    public RString getHokenshaCode() {
+        return hokenshaCode;
     }
 
-    public RString getDefaultDataName7() {
-        return defaultDataName7;
+    public RString getHokenshaName() {
+        return hokenshaName;
     }
 
-    public TextBoxNum getDefaultDataName9() {
-        return defaultDataName9;
+    public RString getKigoNo() {
+        return kigoNo;
     }
 
-    public RString getDefaultDataName11() {
-        return defaultDataName11;
+    public TextBoxNum getRirekiNo() {
+        return rirekiNo;
     }
 
-    public RString getDefaultDataName12() {
-        return defaultDataName12;
+    public void setShikibetsuCode(RString shikibetsuCode) {
+        this.setOriginalData("shikibetsuCode", shikibetsuCode);
+        this.shikibetsuCode = shikibetsuCode;
     }
 
-    public RString getDefaultDataName13() {
-        return defaultDataName13;
+    public void setShichosonCode(RString shichosonCode) {
+        this.setOriginalData("shichosonCode", shichosonCode);
+        this.shichosonCode = shichosonCode;
     }
 
-    public void setDefaultDataName0(RString defaultDataName0) {
-        this.setOriginalData("defaultDataName0", defaultDataName0);
-        this.defaultDataName0 = defaultDataName0;
+    public void setState(RString state) {
+        this.setOriginalData("state", state);
+        this.state = state;
     }
 
-    public void setDefaultDataName1(RString defaultDataName1) {
-        this.setOriginalData("defaultDataName1", defaultDataName1);
-        this.defaultDataName1 = defaultDataName1;
+    public void setKanyuDate(TextBoxFlexibleDate kanyuDate) {
+        this.setOriginalData("kanyuDate", kanyuDate);
+        this.kanyuDate = kanyuDate;
     }
 
-    public void setDefaultDataName2(RString defaultDataName2) {
-        this.setOriginalData("defaultDataName2", defaultDataName2);
-        this.defaultDataName2 = defaultDataName2;
+    public void setDattaiDate(TextBoxFlexibleDate dattaiDate) {
+        this.setOriginalData("dattaiDate", dattaiDate);
+        this.dattaiDate = dattaiDate;
     }
 
-    public void setDefaultDataName3(RString defaultDataName3) {
-        this.setOriginalData("defaultDataName3", defaultDataName3);
-        this.defaultDataName3 = defaultDataName3;
+    public void setShubetsu(RString shubetsu) {
+        this.setOriginalData("shubetsu", shubetsu);
+        this.shubetsu = shubetsu;
     }
 
-    public void setDefaultDataName4(RString defaultDataName4) {
-        this.setOriginalData("defaultDataName4", defaultDataName4);
-        this.defaultDataName4 = defaultDataName4;
+    public void setShubetsuCode(RString shubetsuCode) {
+        this.setOriginalData("shubetsuCode", shubetsuCode);
+        this.shubetsuCode = shubetsuCode;
     }
 
-    public void setDefaultDataName5(RString defaultDataName5) {
-        this.setOriginalData("defaultDataName5", defaultDataName5);
-        this.defaultDataName5 = defaultDataName5;
+    public void setHokensha(RString hokensha) {
+        this.setOriginalData("hokensha", hokensha);
+        this.hokensha = hokensha;
     }
 
-    public void setDefaultDataName10(RString defaultDataName10) {
-        this.setOriginalData("defaultDataName10", defaultDataName10);
-        this.defaultDataName10 = defaultDataName10;
+    public void setHokenshaCode(RString hokenshaCode) {
+        this.setOriginalData("hokenshaCode", hokenshaCode);
+        this.hokenshaCode = hokenshaCode;
     }
 
-    public void setDefaultDataName6(RString defaultDataName6) {
-        this.setOriginalData("defaultDataName6", defaultDataName6);
-        this.defaultDataName6 = defaultDataName6;
+    public void setHokenshaName(RString hokenshaName) {
+        this.setOriginalData("hokenshaName", hokenshaName);
+        this.hokenshaName = hokenshaName;
     }
 
-    public void setDefaultDataName8(RString defaultDataName8) {
-        this.setOriginalData("defaultDataName8", defaultDataName8);
-        this.defaultDataName8 = defaultDataName8;
+    public void setKigoNo(RString kigoNo) {
+        this.setOriginalData("kigoNo", kigoNo);
+        this.kigoNo = kigoNo;
     }
 
-    public void setDefaultDataName7(RString defaultDataName7) {
-        this.setOriginalData("defaultDataName7", defaultDataName7);
-        this.defaultDataName7 = defaultDataName7;
-    }
-
-    public void setDefaultDataName9(TextBoxNum defaultDataName9) {
-        this.setOriginalData("defaultDataName9", defaultDataName9);
-        this.defaultDataName9 = defaultDataName9;
-    }
-
-    public void setDefaultDataName11(RString defaultDataName11) {
-        this.setOriginalData("defaultDataName11", defaultDataName11);
-        this.defaultDataName11 = defaultDataName11;
-    }
-
-    public void setDefaultDataName12(RString defaultDataName12) {
-        this.setOriginalData("defaultDataName12", defaultDataName12);
-        this.defaultDataName12 = defaultDataName12;
-    }
-
-    public void setDefaultDataName13(RString defaultDataName13) {
-        this.setOriginalData("defaultDataName13", defaultDataName13);
-        this.defaultDataName13 = defaultDataName13;
+    public void setRirekiNo(TextBoxNum rirekiNo) {
+        this.setOriginalData("rirekiNo", rirekiNo);
+        this.rirekiNo = rirekiNo;
     }
 
     // </editor-fold>
