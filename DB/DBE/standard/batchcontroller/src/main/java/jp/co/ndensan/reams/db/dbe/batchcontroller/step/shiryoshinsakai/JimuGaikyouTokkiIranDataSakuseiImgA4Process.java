@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuGaikyoTokkiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.GaikyoTokkiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ImjJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.gaikyotokkiichiran.GaikyoTokkiIchiranReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper;
@@ -38,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-0150-190 linghuhang
  */
-public class JimuGaikyouTokkiIranDataSakuseiImgA4Process extends BatchProcessBase<GaikyoTokkiEntity> {
+public class JimuGaikyouTokkiIranDataSakuseiImgA4Process extends BatchProcessBase<ImjJohoEntity> {
 
     private static final RString SELECT_JIMUGAIKYO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper.getJimuImjJoho");
@@ -69,9 +68,9 @@ public class JimuGaikyouTokkiIranDataSakuseiImgA4Process extends BatchProcessBas
     }
 
     @Override
-    protected void process(GaikyoTokkiEntity entity) {
+    protected void process(ImjJohoEntity entity) {
         entity.setJimukyoku(true);
-        business = new JimuGaikyouTokkiBusiness(entity, null, 概況特記イメージ情報, paramter, no);
+        business = new JimuGaikyouTokkiBusiness(null, null, 概況特記イメージ情報, paramter, no, entity);
         GaikyoTokkiIchiranReport report = new GaikyoTokkiIchiranReport(business);
         report.writeBy(reportSourceWriterA4);
         no = no + 1;

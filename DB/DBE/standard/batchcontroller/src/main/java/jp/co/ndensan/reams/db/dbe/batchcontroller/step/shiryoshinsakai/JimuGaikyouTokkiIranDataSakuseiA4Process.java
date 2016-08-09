@@ -70,7 +70,7 @@ public class JimuGaikyouTokkiIranDataSakuseiA4Process extends BatchProcessBase<G
     @Override
     protected void process(GaikyoTokkiEntity entity) {
         entity.setJimukyoku(true);
-        business = new JimuGaikyouTokkiBusiness(entity, 概況特記一覧表情報, null, paramter, no);
+        business = new JimuGaikyouTokkiBusiness(entity, 概況特記一覧表情報, null, paramter, no, null);
         GaikyoTokkiIchiranReport report = new GaikyoTokkiIchiranReport(business);
         report.writeBy(reportSourceWriterA4);
         no = no + 1;

@@ -27,6 +27,7 @@ public class JimuGaikyouTokkiBusiness {
 
     private final IinTokkiJikouItiziHanteiProcessParameter paramter;
     private final GaikyoTokkiEntity entity;
+    private final ImjJohoEntity entityImg;
     private final List<GaikyoTokkiEntity> 概況特記一覧表情報;
     private final List<ImjJohoEntity> 概況特記イメージ情報;
     private final int no;
@@ -52,18 +53,21 @@ public class JimuGaikyouTokkiBusiness {
      * @param 概況特記イメージ情報 List<ImjJohoEntity>
      * @param paramter IinTokkiJikouItiziHanteiProcessParameter
      * @param no no
+     * @param entityImg entityImg
      */
     public JimuGaikyouTokkiBusiness(
             GaikyoTokkiEntity entity,
             List<GaikyoTokkiEntity> 概況特記一覧表情報,
             List<ImjJohoEntity> 概況特記イメージ情報,
             IinTokkiJikouItiziHanteiProcessParameter paramter,
-            int no) {
+            int no,
+            ImjJohoEntity entityImg) {
         this.entity = entity;
         this.概況特記一覧表情報 = 概況特記一覧表情報;
         this.概況特記イメージ情報 = 概況特記イメージ情報;
         this.paramter = paramter;
         this.no = no;
+        this.entityImg = entityImg;
     }
 
     /**
@@ -81,7 +85,10 @@ public class JimuGaikyouTokkiBusiness {
      * @return No
      */
     public RString getNo() {
-        return new RString(entity.getDbt5502_shinsakaiOrder());
+        if (entity != null) {
+            return new RString(entity.getDbt5502_shinsakaiOrder());
+        }
+        return new RString(entityImg.getDbt5502_shinsakaiOrder());
     }
 
     /**
@@ -293,14 +300,14 @@ public class JimuGaikyouTokkiBusiness {
                 return getイメージ(index + (no / 件数) * 件数);
             }
             if (概況特記イメージ情報.size() < 件数 && index < 概況特記イメージ情報.size()) {
-                return get項目(index);
+                return getイメージ(index);
             }
         }
         return RString.EMPTY;
     }
 
     private RString getイメージ(int index) {
-        if (entity.isJimukyoku()) {
+        if (entityImg.isJimukyoku()) {
             return 共有ファイルを引き出す(概況特記イメージ情報.get(index).getDbt5115_imageSharedFileId(), ファイルID_C0007_BAK);
         } else {
             return 共有ファイルを引き出す(概況特記イメージ情報.get(index).getDbt5115_imageSharedFileId(), ファイルID_C0007);
