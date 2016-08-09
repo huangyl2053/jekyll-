@@ -41,6 +41,8 @@ public class TokkiText1A4Business {
 
     private static final RString ファイルID_C0007 = new RString("C0007.png");
     private static final RString ファイルID_C4101 = new RString("C4101.png");
+    private static final RString ファイルID_C4101BAK = new RString("C4101_BAK.png");
+    private static final RString ファイルID_C0007BAK = new RString("C0007_BAK.png");
     private static final RString テキスト全面イメージ = new RString("1");
     private static final RString テキスト = new RString("1");
     private static final RString イメージ = new RString("2");
@@ -157,7 +159,11 @@ public class TokkiText1A4Business {
      */
     public RString get概況調査の特記事項イメージ() {
         if (イメージ.equals(kyotsuEntity.getGaikyoChosaTextImageKubun())) {
-            return getFilePath(kyotsuEntity.getImageSharedFileId(), ファイルID_C0007);
+            if (kyotsuEntity.isJimukyoku()) {
+                return getFilePath(kyotsuEntity.getImageSharedFileId(), ファイルID_C0007BAK);
+            } else {
+                return getFilePath(kyotsuEntity.getImageSharedFileId(), ファイルID_C0007);
+            }
         }
         return RString.EMPTY;
     }
@@ -202,7 +208,11 @@ public class TokkiText1A4Business {
      * @return 全面特記事項イメージを取得します
      */
     public RString getTokkiImg() {
-        return getFilePath(kyotsuEntity.getImageSharedFileId(), ファイルID_C4101);
+        if (kyotsuEntity.isJimukyoku()) {
+            return getFilePath(kyotsuEntity.getImageSharedFileId(), ファイルID_C4101BAK);
+        } else {
+            return getFilePath(kyotsuEntity.getImageSharedFileId(), ファイルID_C4101);
+        }
     }
 
     /**

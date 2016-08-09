@@ -41,10 +41,9 @@ public class JikoFutangakuHosei2 {
         if (文字列_0.equals(事業高額合算自己負担額補正保持Entity.get呼び出しフラグ())) {
             getHandler(div).initilize_初回(事業高額合算自己負担額補正保持Entity);
             getJikoFutangakuHoseiHandler(div).onChange_txt70Kara74FutangakuGatsuGo();
-            事業高額合算自己負担額補正保持Entity = getHandler(div).変更前補正後金額の設定(事業高額合算自己負担額補正保持Entity);
+            getHandler(div).変更前補正後金額の設定(事業高額合算自己負担額補正保持Entity);
             ViewStateHolder.put(ViewStateKeys.事業高額合算自己負担額補正保持Entity, 事業高額合算自己負担額補正保持Entity);
-        }
-        if (文字列_1.equals(事業高額合算自己負担額補正保持Entity.get呼び出しフラグ())) {
+        } else if (文字列_1.equals(事業高額合算自己負担額補正保持Entity.get呼び出しフラグ())) {
             getJikoFutangakuHoseiHandler(div).initialize_２回目以降(事業高額合算自己負担額補正保持Entity);
         }
         return ResponseData.of(div).respond();
@@ -367,7 +366,7 @@ public class JikoFutangakuHosei2 {
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
-        事業高額合算自己負担額補正保持Entity = getHandler(div).事業高額合算自己負担額保持Entityの設定(事業高額合算自己負担額補正保持Entity);
+        getHandler(div).事業高額合算自己負担額保持Entityの設定(事業高額合算自己負担額補正保持Entity);
         ViewStateHolder.put(ViewStateKeys.事業高額合算自己負担額補正保持Entity, 事業高額合算自己負担額補正保持Entity);
         return ResponseData.of(div).forwardWithEventName(DBC8130012TransitionEventName.一覧へ).respond();
     }

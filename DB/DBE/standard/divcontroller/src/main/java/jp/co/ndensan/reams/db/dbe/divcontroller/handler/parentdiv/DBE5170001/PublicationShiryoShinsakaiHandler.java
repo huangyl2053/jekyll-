@@ -337,7 +337,8 @@ public class PublicationShiryoShinsakaiHandler {
                 div.getTxtShinsakaiKaisaiNo().getValue(),
                 div.getTxtShinsakaiYoteiDate().getValue(),
                 new RString(div.getTxtShinsakaiKaishiYoteiTime().getValue().toString()),
-                div.getTxtGogitaiNo().getValue(),
+                div.getTxtGogitaiNo() == null || RString.isNullOrEmpty(div.getTxtGogitaiNo().getValue())
+                ? 0 : Integer.parseInt(div.getTxtGogitaiNo().getValue().toString()),
                 div.getTxtGogitaiName().getValue(),
                 div.getTxtShutsuryokuJun().getValue(),
                 div.getDdlShutsuryokuStyleZenken().getSelectedKey(),

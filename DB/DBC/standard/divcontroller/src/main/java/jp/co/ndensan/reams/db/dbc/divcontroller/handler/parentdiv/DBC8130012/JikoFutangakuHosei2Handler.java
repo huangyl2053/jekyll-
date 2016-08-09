@@ -59,18 +59,19 @@ public class JikoFutangakuHosei2Handler {
         HokenshaNo 保険者番号 = 事業高額合算自己負担額補正保持Entity.get保険者番号();
         RString 支給申請書整理番号 = 事業高額合算自己負担額補正保持Entity.get支給申請書整理番号();
         int 履歴番号 = Integer.valueOf(事業高額合算自己負担額補正保持Entity.get履歴番号().toString());
-        initialize_事業高額合算自己負担額明細_8月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号);
-        initialize_事業高額合算自己負担額明細_9月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号);
-        initialize_事業高額合算自己負担額明細_10月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号);
-        initialize_事業高額合算自己負担額明細_11月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号);
-        initialize_事業高額合算自己負担額明細_12月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号);
-        initialize_事業高額合算自己負担額明細_1月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号);
-        initialize_事業高額合算自己負担額明細_2月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号);
-        initialize_事業高額合算自己負担額明細_3月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号);
-        initialize_事業高額合算自己負担額明細_4月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号);
-        initialize_事業高額合算自己負担額明細_5月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号);
-        initialize_事業高額合算自己負担額明細_6月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号);
-        initialize_事業高額合算自己負担額明細_7月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号);
+        KogakuGassanJikoFutanGakuMeisaiManager manager = new KogakuGassanJikoFutanGakuMeisaiManager();
+        initialize_事業高額合算自己負担額明細_8月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, manager);
+        initialize_事業高額合算自己負担額明細_9月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, manager);
+        initialize_事業高額合算自己負担額明細_10月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, manager);
+        initialize_事業高額合算自己負担額明細_11月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, manager);
+        initialize_事業高額合算自己負担額明細_12月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, manager);
+        initialize_事業高額合算自己負担額明細_1月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, manager);
+        initialize_事業高額合算自己負担額明細_2月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, manager);
+        initialize_事業高額合算自己負担額明細_3月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, manager);
+        initialize_事業高額合算自己負担額明細_4月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, manager);
+        initialize_事業高額合算自己負担額明細_5月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, manager);
+        initialize_事業高額合算自己負担額明細_6月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, manager);
+        initialize_事業高額合算自己負担額明細_7月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, manager);
         補正前_自己負担額の合計();
         補正前_うち70_74歳に係る負担額の合計();
         補正前_高額総合事業サービス費の合計();
@@ -81,7 +82,7 @@ public class JikoFutangakuHosei2Handler {
     }
 
     private void initialize_事業高額合算自己負担額明細_7月分(HihokenshaNo 被保険者番号, FlexibleYear 対象年度,
-            HokenshaNo 保険者番号, RString 支給申請書整理番号, int 履歴番号) {
+            HokenshaNo 保険者番号, RString 支給申請書整理番号, int 履歴番号, KogakuGassanJikoFutanGakuMeisaiManager manager) {
         KogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_7月分 = new KogakuGassanJikoFutanGakuMeisaiManager()
                 .get高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 対象月_107, 履歴番号);
         if (事業高額合算自己負担額明細_7月分 != null) {
@@ -113,7 +114,7 @@ public class JikoFutangakuHosei2Handler {
     }
 
     private void initialize_事業高額合算自己負担額明細_6月分(HihokenshaNo 被保険者番号, FlexibleYear 対象年度, HokenshaNo 保険者番号,
-            RString 支給申請書整理番号, int 履歴番号) {
+            RString 支給申請書整理番号, int 履歴番号, KogakuGassanJikoFutanGakuMeisaiManager manager) {
         KogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_6月分 = new KogakuGassanJikoFutanGakuMeisaiManager()
                 .get高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 対象月_106, 履歴番号);
         if (事業高額合算自己負担額明細_6月分 != null) {
@@ -145,7 +146,7 @@ public class JikoFutangakuHosei2Handler {
     }
 
     private void initialize_事業高額合算自己負担額明細_5月分(HihokenshaNo 被保険者番号, FlexibleYear 対象年度, HokenshaNo 保険者番号,
-            RString 支給申請書整理番号, int 履歴番号) {
+            RString 支給申請書整理番号, int 履歴番号, KogakuGassanJikoFutanGakuMeisaiManager manager) {
         KogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_5月分 = new KogakuGassanJikoFutanGakuMeisaiManager()
                 .get高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 対象月_105, 履歴番号);
         if (事業高額合算自己負担額明細_5月分 != null) {
@@ -177,7 +178,7 @@ public class JikoFutangakuHosei2Handler {
     }
 
     private void initialize_事業高額合算自己負担額明細_4月分(HihokenshaNo 被保険者番号, FlexibleYear 対象年度, HokenshaNo 保険者番号,
-            RString 支給申請書整理番号, int 履歴番号) {
+            RString 支給申請書整理番号, int 履歴番号, KogakuGassanJikoFutanGakuMeisaiManager manager) {
         KogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_4月分 = new KogakuGassanJikoFutanGakuMeisaiManager()
                 .get高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 対象月_104, 履歴番号);
         if (事業高額合算自己負担額明細_4月分 != null) {
@@ -209,7 +210,7 @@ public class JikoFutangakuHosei2Handler {
     }
 
     private void initialize_事業高額合算自己負担額明細_3月分(HihokenshaNo 被保険者番号, FlexibleYear 対象年度, HokenshaNo 保険者番号,
-            RString 支給申請書整理番号, int 履歴番号) {
+            RString 支給申請書整理番号, int 履歴番号, KogakuGassanJikoFutanGakuMeisaiManager manager) {
         KogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_3月分 = new KogakuGassanJikoFutanGakuMeisaiManager()
                 .get高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 対象月_103, 履歴番号);
         if (事業高額合算自己負担額明細_3月分 != null) {
@@ -241,7 +242,7 @@ public class JikoFutangakuHosei2Handler {
     }
 
     private void initialize_事業高額合算自己負担額明細_2月分(HihokenshaNo 被保険者番号, FlexibleYear 対象年度, HokenshaNo 保険者番号,
-            RString 支給申請書整理番号, int 履歴番号) {
+            RString 支給申請書整理番号, int 履歴番号, KogakuGassanJikoFutanGakuMeisaiManager manager) {
         KogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_2月分 = new KogakuGassanJikoFutanGakuMeisaiManager()
                 .get高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 対象月_102, 履歴番号);
         if (事業高額合算自己負担額明細_2月分 != null) {
@@ -273,7 +274,7 @@ public class JikoFutangakuHosei2Handler {
     }
 
     private void initialize_事業高額合算自己負担額明細_1月分(HihokenshaNo 被保険者番号, FlexibleYear 対象年度, HokenshaNo 保険者番号,
-            RString 支給申請書整理番号, int 履歴番号) {
+            RString 支給申請書整理番号, int 履歴番号, KogakuGassanJikoFutanGakuMeisaiManager manager) {
         KogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_1月分 = new KogakuGassanJikoFutanGakuMeisaiManager()
                 .get高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 対象月_101, 履歴番号);
         if (事業高額合算自己負担額明細_1月分 != null) {
@@ -305,7 +306,7 @@ public class JikoFutangakuHosei2Handler {
     }
 
     private void initialize_事業高額合算自己負担額明細_12月分(HihokenshaNo 被保険者番号, FlexibleYear 対象年度, HokenshaNo 保険者番号,
-            RString 支給申請書整理番号, int 履歴番号) {
+            RString 支給申請書整理番号, int 履歴番号, KogakuGassanJikoFutanGakuMeisaiManager manager) {
         KogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_12月分 = new KogakuGassanJikoFutanGakuMeisaiManager()
                 .get高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 対象月_012, 履歴番号);
         if (事業高額合算自己負担額明細_12月分 != null) {
@@ -342,7 +343,7 @@ public class JikoFutangakuHosei2Handler {
     }
 
     private void initialize_事業高額合算自己負担額明細_11月分(HihokenshaNo 被保険者番号, FlexibleYear 対象年度, HokenshaNo 保険者番号,
-            RString 支給申請書整理番号, int 履歴番号) {
+            RString 支給申請書整理番号, int 履歴番号, KogakuGassanJikoFutanGakuMeisaiManager manager) {
         KogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_11月分 = new KogakuGassanJikoFutanGakuMeisaiManager()
                 .get高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 対象月_011, 履歴番号);
         if (事業高額合算自己負担額明細_11月分 != null) {
@@ -379,7 +380,7 @@ public class JikoFutangakuHosei2Handler {
     }
 
     private void initialize_事業高額合算自己負担額明細_10月分(HihokenshaNo 被保険者番号, FlexibleYear 対象年度, HokenshaNo 保険者番号,
-            RString 支給申請書整理番号, int 履歴番号) {
+            RString 支給申請書整理番号, int 履歴番号, KogakuGassanJikoFutanGakuMeisaiManager manager) {
         KogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_10月分 = new KogakuGassanJikoFutanGakuMeisaiManager()
                 .get高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 対象月_010, 履歴番号);
         if (事業高額合算自己負担額明細_10月分 != null) {
@@ -416,7 +417,7 @@ public class JikoFutangakuHosei2Handler {
     }
 
     private void initialize_事業高額合算自己負担額明細_9月分(HihokenshaNo 被保険者番号, FlexibleYear 対象年度, HokenshaNo 保険者番号,
-            RString 支給申請書整理番号, int 履歴番号) {
+            RString 支給申請書整理番号, int 履歴番号, KogakuGassanJikoFutanGakuMeisaiManager manager) {
         KogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_9月分 = new KogakuGassanJikoFutanGakuMeisaiManager()
                 .get高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 対象月_009, 履歴番号);
         if (事業高額合算自己負担額明細_9月分 != null) {
@@ -453,7 +454,7 @@ public class JikoFutangakuHosei2Handler {
     }
 
     private void initialize_事業高額合算自己負担額明細_8月分(HihokenshaNo 被保険者番号, FlexibleYear 対象年度, HokenshaNo 保険者番号,
-            RString 支給申請書整理番号, int 履歴番号) {
+            RString 支給申請書整理番号, int 履歴番号, KogakuGassanJikoFutanGakuMeisaiManager manager) {
         KogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_8月分 = new KogakuGassanJikoFutanGakuMeisaiManager()
                 .get高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 対象月_008, 履歴番号);
         if (事業高額合算自己負担額明細_8月分 != null) {
@@ -493,9 +494,8 @@ public class JikoFutangakuHosei2Handler {
      * 変更前補正後金額の設定のメソッドです。
      *
      * @param 事業高額合算自己負担額補正保持Entity JigyoKogakuGassanJikofutangakuHosei
-     * @return 事業高額合算自己負担額補正保持Entity
      */
-    public JigyoKogakuGassanJikofutangakuHosei 変更前補正後金額の設定(JigyoKogakuGassanJikofutangakuHosei 事業高額合算自己負担額補正保持Entity) {
+    public void 変更前補正後金額の設定(JigyoKogakuGassanJikofutangakuHosei 事業高額合算自己負担額補正保持Entity) {
         事業高額合算自己負担額補正保持Entity.set変更前_補正後_自己負担額_8月分(div.getJikoFutangakuHosei2a()
                 .getTxtJikofutangaku8GatsuMae().getValue());
         事業高額合算自己負担額補正保持Entity.set変更前_補正後_自己負担額_9月分(div.getJikoFutangakuHosei2a()
@@ -592,7 +592,6 @@ public class JikoFutangakuHosei2Handler {
                 .getTxtJissaiJikofutangakuYoku6GatsuMae().getValue());
         事業高額合算自己負担額補正保持Entity.set変更前_補正後_実際の自己負担額_7月分(div.getJikoFutangakuHosei2a()
                 .getTxtJissaiJikofutangakuYoku7GatsuMae().getValue());
-        return 事業高額合算自己負担額補正保持Entity;
     }
 
     /**
@@ -1179,9 +1178,7 @@ public class JikoFutangakuHosei2Handler {
                 .add(補正前_うち70_74歳に係る負担額_1月分).add(補正前_うち70_74歳に係る負担額_2月分).add(補正前_うち70_74歳に係る負担額_3月分)
                 .add(補正前_うち70_74歳に係る負担額_4月分).add(補正前_うち70_74歳に係る負担額_5月分).add(補正前_うち70_74歳に係る負担額_6月分)
                 .add(補正前_うち70_74歳に係る負担額_7月分);
-        if (うち70_74歳に係る負担額の合計 != null) {
-            div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuGoukeiMae().setValue(うち70_74歳に係る負担額の合計);
-        }
+        div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuGoukeiMae().setValue(うち70_74歳に係る負担額の合計);
 
     }
 
@@ -1241,9 +1238,7 @@ public class JikoFutangakuHosei2Handler {
         Decimal 自己負担額の合計 = 補正後_自己負担額_8月分.add(補正後_自己負担額_9月分).add(補正後_自己負担額_10月分).add(補正後_自己負担額_11月分)
                 .add(補正後_自己負担額_12月分).add(補正後_自己負担額_1月分).add(補正後_自己負担額_2月分).add(補正後_自己負担額_3月分)
                 .add(補正後_自己負担額_4月分).add(補正後_自己負担額_5月分).add(補正後_自己負担額_6月分).add(補正後_自己負担額_7月分);
-        if (自己負担額の合計 != null) {
-            div.getJikoFutangakuHosei2a().getTxtJikofutangakuGoukeiGo().setValue(自己負担額の合計);
-        }
+        div.getJikoFutangakuHosei2a().getTxtJikofutangakuGoukeiGo().setValue(自己負担額の合計);
     }
 
     private void 補正前_自己負担額の合計() {
@@ -1298,9 +1293,7 @@ public class JikoFutangakuHosei2Handler {
         Decimal 自己負担額の合計 = 補正前_自己負担額_8月分.add(補正前_自己負担額_9月分).add(補正前_自己負担額_10月分).add(補正前_自己負担額_11月分)
                 .add(補正前_自己負担額_12月分).add(補正前_自己負担額_1月分).add(補正前_自己負担額_2月分).add(補正前_自己負担額_3月分)
                 .add(補正前_自己負担額_4月分).add(補正前_自己負担額_5月分).add(補正前_自己負担額_6月分).add(補正前_自己負担額_7月分);
-        if (自己負担額の合計 != null) {
-            div.getJikoFutangakuHosei2a().getTxtJikofutangakuGoukeiMae().setValue(自己負担額の合計);
-        }
+        div.getJikoFutangakuHosei2a().getTxtJikofutangakuGoukeiMae().setValue(自己負担額の合計);
     }
 
     private void 補正後_高額総合事業サービス費の合計() {
@@ -1357,9 +1350,7 @@ public class JikoFutangakuHosei2Handler {
                 .add(補正後_高額総合事業サービス費_1月分).add(補正後_高額総合事業サービス費_2月分).add(補正後_高額総合事業サービス費_3月分)
                 .add(補正後_高額総合事業サービス費_4月分).add(補正後_高額総合事業サービス費_5月分).add(補正後_高額総合事業サービス費_6月分)
                 .add(補正後_高額総合事業サービス費_7月分);
-        if (高額総合事業サービス費の合計 != null) {
-            div.getJikoFutangakuHosei2a().getTxtKougakuSogoJigyoServicehiGoukeiGo().setValue(高額総合事業サービス費の合計);
-        }
+        div.getJikoFutangakuHosei2a().getTxtKougakuSogoJigyoServicehiGoukeiGo().setValue(高額総合事業サービス費の合計);
     }
 
     private void 補正前_高額総合事業サービス費の合計() {
@@ -1416,9 +1407,7 @@ public class JikoFutangakuHosei2Handler {
                 .add(補正前_高額総合事業サービス費_1月分).add(補正前_高額総合事業サービス費_2月分).add(補正前_高額総合事業サービス費_3月分)
                 .add(補正前_高額総合事業サービス費_4月分).add(補正前_高額総合事業サービス費_5月分).add(補正前_高額総合事業サービス費_6月分)
                 .add(補正前_高額総合事業サービス費_7月分);
-        if (高額総合事業サービス費の合計 != null) {
-            div.getJikoFutangakuHosei2a().getTxtKougakuSogoJigyoServicehiGoukeiMae().setValue(高額総合事業サービス費の合計);
-        }
+        div.getJikoFutangakuHosei2a().getTxtKougakuSogoJigyoServicehiGoukeiMae().setValue(高額総合事業サービス費の合計);
     }
 
     private void 補正後_実際の自己負担額の合計() {
@@ -1474,9 +1463,7 @@ public class JikoFutangakuHosei2Handler {
                 .add(補正後_実際の自己負担額_11月分).add(補正後_実際の自己負担額_12月分).add(補正後_実際の自己負担額_1月分)
                 .add(補正後_実際の自己負担額_2月分).add(補正後_実際の自己負担額_3月分).add(補正後_実際の自己負担額_4月分)
                 .add(補正後_実際の自己負担額_5月分).add(補正後_実際の自己負担額_6月分).add(補正後_実際の自己負担額_7月分);
-        if (実際の自己負担額の合計 != null) {
-            div.getJikoFutangakuHosei2a().getTxtJissaiJikofutangakuGoukeiGo().setValue(実際の自己負担額の合計);
-        }
+        div.getJikoFutangakuHosei2a().getTxtJissaiJikofutangakuGoukeiGo().setValue(実際の自己負担額の合計);
     }
 
     private void 補正前_実際の自己負担額の合計() {
@@ -1532,18 +1519,15 @@ public class JikoFutangakuHosei2Handler {
                 .add(補正前_実際の自己負担額_11月分).add(補正前_実際の自己負担額_12月分).add(補正前_実際の自己負担額_1月分)
                 .add(補正前_実際の自己負担額_2月分).add(補正前_実際の自己負担額_3月分).add(補正前_実際の自己負担額_4月分)
                 .add(補正前_実際の自己負担額_5月分).add(補正前_実際の自己負担額_6月分).add(補正前_実際の自己負担額_7月分);
-        if (実際の自己負担額の合計 != null) {
-            div.getJikoFutangakuHosei2a().getTxtJissaiJikofutangakuGoukeiMae().setValue(実際の自己負担額の合計);
-        }
+        div.getJikoFutangakuHosei2a().getTxtJissaiJikofutangakuGoukeiMae().setValue(実際の自己負担額の合計);
     }
 
     /**
      * 事業高額合算自己負担額保持Entityの設定のメソッドです。
      *
      * @param 事業高額合算自己負担額補正保持Entity JigyoKogakuGassanJikofutangakuHosei
-     * @return 事業高額合算自己負担額保持Entity
      */
-    public JigyoKogakuGassanJikofutangakuHosei 事業高額合算自己負担額保持Entityの設定(
+    public void 事業高額合算自己負担額保持Entityの設定(
             JigyoKogakuGassanJikofutangakuHosei 事業高額合算自己負担額補正保持Entity) {
         事業高額合算自己負担額補正保持Entity.set補正前_自己負担額_8月分(div.getJikoFutangakuHosei2a()
                 .getTxtJikofutangaku8GatsuMae().getValue());
@@ -1598,7 +1582,6 @@ public class JikoFutangakuHosei2Handler {
             事業高額合算自己負担額補正保持Entity.set変更フラグ(変更なし);
         }
         事業高額合算自己負担額補正保持Entity.set呼び出しフラグ(呼び出しフラグ);
-        return 事業高額合算自己負担額補正保持Entity;
     }
 
     private void set変更後_補正後_実際の自己負担額(JigyoKogakuGassanJikofutangakuHosei 事業高額合算自己負担額補正保持Entity) {
@@ -1793,50 +1776,28 @@ public class JikoFutangakuHosei2Handler {
     private boolean is変更(JigyoKogakuGassanJikofutangakuHosei 事業高額合算自己負担額補正保持Entity) {
         boolean flag = false;
         if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_自己負担額_8月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_自己負担額_8月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_自己負担額_9月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_自己負担額_9月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_自己負担額_10月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_自己負担額_10月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_自己負担額_11月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_自己負担額_11月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_自己負担額_12月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_自己負担額_12月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_自己負担額_1月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_自己負担額_1月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_自己負担額_2月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_自己負担額_2月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_自己負担額_3月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_自己負担額_3月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_自己負担額_4月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_自己負担額_4月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_自己負担額_5月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_自己負担額_5月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_自己負担額_6月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_自己負担額_6月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_自己負担額_7月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_自己負担額_8月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_自己負担額_9月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_自己負担額_9月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_自己負担額_10月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_自己負担額_10月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_自己負担額_11月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_自己負担額_11月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_自己負担額_12月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_自己負担額_12月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_自己負担額_1月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_自己負担額_1月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_自己負担額_2月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_自己負担額_2月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_自己負担額_3月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_自己負担額_3月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_自己負担額_4月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_自己負担額_4月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_自己負担額_5月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_自己負担額_5月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_自己負担額_6月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_自己負担額_6月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_自己負担額_7月分()
                 != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_自己負担額_7月分()) {
             return true;
         }
@@ -1850,100 +1811,56 @@ public class JikoFutangakuHosei2Handler {
     }
 
     private boolean is変更_高額総合事業サービス費(JigyoKogakuGassanJikofutangakuHosei 事業高額合算自己負担額補正保持Entity) {
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_高額総合事業サービス費_8月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_高額総合事業サービス費_8月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_高額総合事業サービス費_9月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_高額総合事業サービス費_9月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_高額総合事業サービス費_10月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_高額総合事業サービス費_10月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_高額総合事業サービス費_11月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_高額総合事業サービス費_11月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_高額総合事業サービス費_12月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_高額総合事業サービス費_12月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_高額総合事業サービス費_1月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_高額総合事業サービス費_1月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_高額総合事業サービス費_2月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_高額総合事業サービス費_2月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_高額総合事業サービス費_3月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_高額総合事業サービス費_3月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_高額総合事業サービス費_4月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_高額総合事業サービス費_4月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_高額総合事業サービス費_5月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_高額総合事業サービス費_5月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_高額総合事業サービス費_6月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_高額総合事業サービス費_6月分()) {
-            return true;
-        }
-        return 事業高額合算自己負担額補正保持Entity.get変更前_補正後_高額総合事業サービス費_7月分()
+        return 事業高額合算自己負担額補正保持Entity.get変更前_補正後_高額総合事業サービス費_8月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_高額総合事業サービス費_8月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_高額総合事業サービス費_9月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_高額総合事業サービス費_9月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_高額総合事業サービス費_10月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_高額総合事業サービス費_10月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_高額総合事業サービス費_11月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_高額総合事業サービス費_11月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_高額総合事業サービス費_12月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_高額総合事業サービス費_12月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_高額総合事業サービス費_1月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_高額総合事業サービス費_1月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_高額総合事業サービス費_2月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_高額総合事業サービス費_2月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_高額総合事業サービス費_3月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_高額総合事業サービス費_3月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_高額総合事業サービス費_4月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_高額総合事業サービス費_4月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_高額総合事業サービス費_5月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_高額総合事業サービス費_5月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_高額総合事業サービス費_6月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_高額総合事業サービス費_6月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_高額総合事業サービス費_7月分()
                 != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_高額総合事業サービス費_7月分();
     }
 
     private boolean is変更_うち70_74歳に係る負担額(JigyoKogakuGassanJikofutangakuHosei 事業高額合算自己負担額補正保持Entity) {
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_うち70_74歳に係る負担額_8月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_うち70_74歳に係る負担額_8月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_うち70_74歳に係る負担額_9月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_うち70_74歳に係る負担額_9月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_うち70_74歳に係る負担額_10月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_うち70_74歳に係る負担額_10月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_うち70_74歳に係る負担額_11月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_うち70_74歳に係る負担額_11月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_うち70_74歳に係る負担額_12月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_うち70_74歳に係る負担額_12月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_うち70_74歳に係る負担額_1月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_うち70_74歳に係る負担額_1月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_うち70_74歳に係る負担額_2月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_うち70_74歳に係る負担額_2月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_うち70_74歳に係る負担額_3月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_うち70_74歳に係る負担額_3月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_うち70_74歳に係る負担額_4月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_うち70_74歳に係る負担額_4月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_うち70_74歳に係る負担額_5月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_うち70_74歳に係る負担額_5月分()) {
-            return true;
-        }
-        if (事業高額合算自己負担額補正保持Entity.get変更前_補正後_うち70_74歳に係る負担額_6月分()
-                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_うち70_74歳に係る負担額_6月分()) {
-            return true;
-        }
-        return 事業高額合算自己負担額補正保持Entity.get変更前_補正後_うち70_74歳に係る負担額_7月分()
+        return 事業高額合算自己負担額補正保持Entity.get変更前_補正後_うち70_74歳に係る負担額_8月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_うち70_74歳に係る負担額_8月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_うち70_74歳に係る負担額_9月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_うち70_74歳に係る負担額_9月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_うち70_74歳に係る負担額_10月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_うち70_74歳に係る負担額_10月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_うち70_74歳に係る負担額_11月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_うち70_74歳に係る負担額_11月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_うち70_74歳に係る負担額_12月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_うち70_74歳に係る負担額_12月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_うち70_74歳に係る負担額_1月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_うち70_74歳に係る負担額_1月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_うち70_74歳に係る負担額_2月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_うち70_74歳に係る負担額_2月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_うち70_74歳に係る負担額_3月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_うち70_74歳に係る負担額_3月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_うち70_74歳に係る負担額_4月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_うち70_74歳に係る負担額_4月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_うち70_74歳に係る負担額_5月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_うち70_74歳に係る負担額_5月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_うち70_74歳に係る負担額_6月分()
+                != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_うち70_74歳に係る負担額_6月分()
+                || 事業高額合算自己負担額補正保持Entity.get変更前_補正後_うち70_74歳に係る負担額_7月分()
                 != 事業高額合算自己負担額補正保持Entity.get変更後_補正後_うち70_74歳に係る負担額_7月分();
     }
 
