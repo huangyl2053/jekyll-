@@ -144,11 +144,12 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
 
     @Override
     protected void afterExecute() {
-        outputJokenhyoFactory();
+        outputJokenhyoFactory(ReportIdDBE.DBE517141.getReportId().value(), new RString("概況調査の特記"));
+        outputJokenhyoFactory(ReportIdDBE.DBE517131.getReportId().value(), new RString("特記事項（1枚目）"));
+        outputJokenhyoFactory(ReportIdDBE.DBE517081.getReportId().value(), new RString("一次判定結果票"));
     }
 
-    private void outputJokenhyoFactory() {
-        RString id = ReportIdDBE.DBE517081.getReportId().getColumnValue();
+    private void outputJokenhyoFactory(RString id, RString 帳票名) {
         RString 総ページ数 = new RString(batchWriteA3.getPageCount());
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem jokenhyoItem = new ReportOutputJokenhyoItem(
@@ -156,7 +157,7 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                new RString("一次判定結果票"),
+                帳票名,
                 総ページ数,
                 RString.EMPTY,
                 RString.EMPTY,
