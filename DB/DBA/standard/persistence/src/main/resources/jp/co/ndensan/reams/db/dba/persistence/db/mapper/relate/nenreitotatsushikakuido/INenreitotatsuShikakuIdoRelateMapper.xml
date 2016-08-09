@@ -6,19 +6,6 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nenreitotatsushikakuido.INenreitotatsuShikakuIdoRelateMapper">
 
-    <!-- UaFt200FindShikibetsuTaishoEntityの項目にマッピングします。-->
-    <select resultOrdered="true" id="select識別コード"
-            resultType="jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsushikakuido.AtenaMybatisParameter"
-            fetchSize="500">
-        SELECT
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" AS shikibetsuCode
-        FROM
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
-        AS  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
-    </select>
-
-
     <!-- ShikakuIdoTaishoshaEntityの項目にマッピングします。-->
     <resultMap id="resultMap_ShikakuIdoTaishoshaEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichokoshin.ShikakuIdoTaishoshaEntity" autoMapping="true">
         <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
@@ -41,17 +28,10 @@
         "seinengappiYMD" AS 生年月日
         FROM
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
-        <if test="識別コード!=null">
-            WHERE
-            "shikibetsuCode" IN
-            <foreach item="識別コード" index="index" collection="識別コード" open="(" separator="," close=")">
-                #{識別コード}
-            </foreach>
-            AND
-            "seinengappiYMD" <![CDATA[>=]]> #{開始日}
-            AND 
-            "seinengappiYMD" <![CDATA[<=]]> #{終了日}
-        </if>
+        WHERE
+        "seinengappiYMD" <![CDATA[>=]]> #{開始日}
+        AND 
+        "seinengappiYMD" <![CDATA[<=]]> #{終了日}
     </select>
 
 </mapper>
