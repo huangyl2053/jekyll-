@@ -260,7 +260,9 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
             parameter.set受領委任者向け決定通知書フラグ(フラグ_TRUE);
         }
         parameter.set振込予定日(div.getCcdShiharaiHoho().get振込予定日());
-        parameter.set支払場所(div.getCcdShiharaiHoho().get支払場所());
+        if (div.getCcdShiharaiHoho().get支払場所() != null && !div.getCcdShiharaiHoho().get支払場所().isEmpty()) {
+            parameter.set支払場所(div.getCcdShiharaiHoho().get支払場所());
+        }
         parameter.set支払期間From(div.getCcdShiharaiHoho().get支払期間FROM());
         parameter.set支払期間To(div.getCcdShiharaiHoho().get支払期間TO());
         parameter.set開始時間(div.getCcdShiharaiHoho().get開始時間());
