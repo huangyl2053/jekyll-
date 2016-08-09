@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchosoufujohosakusei.TokuChoSoufuJohoSakuseiResult;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosoufujohosakusei.TokuChoSoufuJohoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujohosakusei.ITokuChoSoufuJohoSakuseiMapper;
@@ -247,6 +248,9 @@ public class TokuChoSoufuJohoSakuseiBatch {
         }
         int シーケンス;
         Map<RString, Integer> シーケンスMap = new HashMap<>();
+        if (resultlist == null || resultlist.isEmpty()) {
+            return uet0515Entitys;
+        }
         for (TokuChoSoufuJohoSakuseiResult entity : resultlist) {
             UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity tokuchotempentity = new UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity();
             tokuchotempentity.setRenban(連番);
@@ -402,31 +406,46 @@ public class TokuChoSoufuJohoSakuseiBatch {
 
     private void setDT各種金額欄12(UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity tokuchotempentity,
             TokuChoSoufuJohoSakuseiResult entity, RDate 特徴開始月) {
+        FukaJoho 賦課の情報 = entity.get賦課の情報();
         if (TsuchiNaiyoCodeType.特別徴収対象者情報.get通知内容コード().equals(
                 entity.get対象者の情報().getDT通知内容コード())) {
-            tokuchotempentity.setDtKakushuKingaku1(new RString(entity.get賦課の情報().get特徴期別金額04().toString()));
-            tokuchotempentity.setDtKakushuKingaku2(new RString(entity.get賦課の情報().get特徴期別金額05().toString()));
+            if (賦課の情報.get特徴期別金額04() != null) {
+                tokuchotempentity.setDtKakushuKingaku1(new RString(賦課の情報.get特徴期別金額04().toString()));
+            }
+            if (賦課の情報.get特徴期別金額05() != null) {
+                tokuchotempentity.setDtKakushuKingaku2(new RString(賦課の情報.get特徴期別金額05().toString()));
+            }
         } else if (TsuchiNaiyoCodeType.特別徴収追加候補者情報.get通知内容コード().equals(
                 entity.get対象者の情報().getDT通知内容コード())) {
             TokuchoKiUtil tokuchokiutil = new TokuchoKiUtil();
             RString 期 = tokuchokiutil.get期月リスト().get月の期(Tsuki.toValue(
                     new RString(特徴開始月.getMonthValue()).padZeroToLeft(NUM2))).get期();
-            if (!RString.isNullOrEmpty(期) && RS01.equals(期)) {
-                tokuchotempentity.setDtKakushuKingaku1(new RString(entity.get賦課の情報().get特徴期別金額01().toString()));
-            } else if (!RString.isNullOrEmpty(期) && RS02.equals(期)) {
-                tokuchotempentity.setDtKakushuKingaku1(new RString(entity.get賦課の情報().get特徴期別金額02().toString()));
-            } else if (!RString.isNullOrEmpty(期) && RS03.equals(期)) {
-                tokuchotempentity.setDtKakushuKingaku1(new RString(entity.get賦課の情報().get特徴期別金額03().toString()));
-            } else if (!RString.isNullOrEmpty(期) && RS04.equals(期)) {
-                tokuchotempentity.setDtKakushuKingaku1(new RString(entity.get賦課の情報().get特徴期別金額04().toString()));
-            } else if (!RString.isNullOrEmpty(期) && RS05.equals(期)) {
-                tokuchotempentity.setDtKakushuKingaku1(new RString(entity.get賦課の情報().get特徴期別金額05().toString()));
-            } else if (!RString.isNullOrEmpty(期) && RS06.equals(期)) {
-                tokuchotempentity.setDtKakushuKingaku1(new RString(entity.get賦課の情報().get特徴期別金額06().toString()));
-            }
+            setDT各種金額欄1(期, tokuchotempentity, 賦課の情報);
             tokuchotempentity.setDtKakushuKingaku2(RS0);
         } else {
             tokuchotempentity.setDtKakushuKingaku2(RS0);
+        }
+    }
+
+    private void setDT各種金額欄1(RString 期, UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity tokuchotempentity,
+            FukaJoho 賦課の情報) {
+        if (RS01.equals(期) && 賦課の情報.get特徴期別金額01() != null) {
+            tokuchotempentity.setDtKakushuKingaku1(new RString(賦課の情報.get特徴期別金額01().toString()));
+        }
+        if (RS02.equals(期) && 賦課の情報.get特徴期別金額02() != null) {
+            tokuchotempentity.setDtKakushuKingaku1(new RString(賦課の情報.get特徴期別金額02().toString()));
+        }
+        if (RS03.equals(期) && 賦課の情報.get特徴期別金額03() != null) {
+            tokuchotempentity.setDtKakushuKingaku1(new RString(賦課の情報.get特徴期別金額03().toString()));
+        }
+        if (RS04.equals(期) && 賦課の情報.get特徴期別金額04() != null) {
+            tokuchotempentity.setDtKakushuKingaku1(new RString(賦課の情報.get特徴期別金額04().toString()));
+        }
+        if (RS05.equals(期) && 賦課の情報.get特徴期別金額05() != null) {
+            tokuchotempentity.setDtKakushuKingaku1(new RString(賦課の情報.get特徴期別金額05().toString()));
+        }
+        if (RS06.equals(期) && 賦課の情報.get特徴期別金額06() != null) {
+            tokuchotempentity.setDtKakushuKingaku1(new RString(賦課の情報.get特徴期別金額06().toString()));
         }
     }
 
