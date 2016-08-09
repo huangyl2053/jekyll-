@@ -49,6 +49,8 @@ public class HanyoListParamHandler {
     private final RString 定数3 = new RString("3");
     private final RString 定数4 = new RString("4");
     private final RString 定数5 = new RString("5");
+    private final RString 時間_START = new RString("00:00:00");
+    private final RString 時間_END = new RString("23:59:59");
     private static final int INDEX_ZERO = 0;
     private static final int INDEX_FOUR = 4;
 
@@ -109,12 +111,12 @@ public class HanyoListParamHandler {
         if (div.getChushutsuJokenPanel() != null && div.getChushutsuJokenPanel().getTxtChushutsuKikan() != null
                 && div.getChushutsuJokenPanel().getTxtChushutsuKikan().getFromValue() != null) {
             parameter.set抽出期間From(new YMDHMS(div.getChushutsuJokenPanel().getTxtChushutsuKikan().getFromValue(),
-                    new RTime(new RString("00:00:00"))));
+                    new RTime(時間_START)));
         }
         if (div.getChushutsuJokenPanel() != null && div.getChushutsuJokenPanel().getTxtChushutsuKikan() != null
                 && div.getChushutsuJokenPanel().getTxtChushutsuKikan().getToValue() != null) {
             parameter.set抽出期間To(new YMDHMS(div.getChushutsuJokenPanel().getTxtChushutsuKikan().getToValue(),
-                    new RTime(new RString("23:59:59"))));
+                    new RTime(時間_END)));
         }
         課税区分減免前後(parameter);
         宛名抽出条件と出力順と出力項目(parameter);

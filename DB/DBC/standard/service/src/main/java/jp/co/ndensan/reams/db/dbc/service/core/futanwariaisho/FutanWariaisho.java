@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.service.report.futanwariaisho;
+package jp.co.ndensan.reams.db.dbc.service.core.futanwariaisho;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho.FutanWariaiShoEntity;
@@ -53,17 +53,16 @@ import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- * 帳票設計_DBC100065_負担割合証PrintService
+ * ビジネス設計_DBCMNK2001_負担割合証ソースファイル作成（service）
  *
- * @reamsid_L DBC-5010-030 surun
+ * @reamsid_L DBC-5010-041 surun
  */
-public class FutanWariaiShoPrintService {
+public class FutanWariaisho {
 
     private final DbV1001HihokenshaDaichoAliveDac dac;
     private static final RString 種別コード = NinshoshaDenshikoinshubetsuCode.保険者印.getコード();
@@ -74,7 +73,7 @@ public class FutanWariaiShoPrintService {
     /**
      * コンストラクタです。
      */
-    public FutanWariaiShoPrintService() {
+    public FutanWariaisho() {
         this.dac = InstanceProvider.create(DbV1001HihokenshaDaichoAliveDac.class);
     }
 
@@ -83,39 +82,30 @@ public class FutanWariaiShoPrintService {
      *
      * @param dac DbV1001HihokenshaDaichoAliveDac
      */
-    public FutanWariaiShoPrintService(DbV1001HihokenshaDaichoAliveDac dac) {
+    public FutanWariaisho(DbV1001HihokenshaDaichoAliveDac dac) {
         this.dac = dac;
     }
 
     /**
-     * printSingle
+     * createInstance
      *
-     * @param 識別コード ShikibetsuCode
-     * @param 被保険者番号 HihokenshaNo
-     * @param entity FutanWariaiShoEntity
-     * @param flag RString
-     * @return SourceDataCollection
+     * @return FutanWariaisho
      */
-    public SourceDataCollection printSingle(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FutanWariaiShoEntity entity, RString flag) {
-        SourceDataCollection collection;
-        try (ReportManager reportManager = new ReportManager()) {
-            print(識別コード, 被保険者番号, entity, flag, reportManager);
-            collection = reportManager.publish();
-        }
-        return collection;
-
+    public static FutanWariaisho createInstance() {
+        return InstanceProvider.create(FutanWariaisho.class);
     }
 
     /**
-     * print
+     * ソースデータ取得
      *
      * @param 識別コード ShikibetsuCode
      * @param 被保険者番号 HihokenshaNo
      * @param entity FutanWariaiShoEntity
      * @param flag RString
-     * @param reportManager ReportManager
      */
-    public void print(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FutanWariaiShoEntity entity, RString flag, ReportManager reportManager) {
+    public void getSourceData(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FutanWariaiShoEntity entity, RString flag) {
+
+        ReportManager reportManager = new ReportManager();
         FutanWariaiShoProperty property = new FutanWariaiShoProperty();
         try (ReportAssembler<FutanWariaiShoSource> assembler = createAssembler(property, reportManager)) {
             Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, 種別コード,
@@ -166,7 +156,9 @@ public class FutanWariaiShoPrintService {
             FutanWariaiShoReport report = new FutanWariaiShoReport(entity, 認証者ソースデータ, 被保険者番号, 編集後個人,
                     利用者負担割合明細List, 保険者コード取得, flag, kojinList);
             report.writeBy(reportSourceWriter);
+
         }
+
     }
 
     /**
@@ -209,5 +201,4 @@ public class FutanWariaiShoPrintService {
         builder.isKojinNo(property.containsKojinNo());
         return builder.<T>create();
     }
-
 }
