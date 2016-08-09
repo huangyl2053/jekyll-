@@ -88,7 +88,7 @@ public class JimuTokkiJikouDataSakuseiA42Process extends BatchKeyBreakBase<Shins
     protected void usualProcess(ShinsakaiSiryoKyotsuEntity kyotsuEntity) {
         kyotsuEntity.setJimukyoku(true);
         List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List = get特記情報(kyotsuEntity);
-        TokkiText1A4Business business = new TokkiText1A4Business(kyotsuEntity, 特記情報List);
+        TokkiText1A4Business business = new TokkiText1A4Business(true, 2, kyotsuEntity, 特記情報List);
         TokkiText2A4Report report = new TokkiText2A4Report(business);
         report.writeBy(reportSourceWriterA4);
         ページ表示行数 = business.getページ表示行数();
