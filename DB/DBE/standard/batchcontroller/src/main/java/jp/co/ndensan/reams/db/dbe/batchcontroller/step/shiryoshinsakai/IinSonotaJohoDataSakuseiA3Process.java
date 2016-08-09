@@ -49,6 +49,8 @@ public class IinSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsak
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
     private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
     private JimuSonotashiryoBusiness その他資料;
+    private int shinsakaiOrder;
+    private int 存在ファイルindex;
 
     @BatchWriter
     private BatchReportWriter<SonotashiryoA3ReportSource> batchWriteA3;
@@ -56,6 +58,8 @@ public class IinSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsak
 
     @Override
     protected void initialize() {
+        shinsakaiOrder = -1;
+        存在ファイルindex = 0;
         myBatisParameter = paramter.toIinTokkiJikouItiziHanteiMyBatisParameter();
         List<RString> shoriJotaiKubunList = new ArrayList<>();
         shoriJotaiKubunList.add(ShoriJotaiKubun.延期.getコード());
@@ -88,9 +92,15 @@ public class IinSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsak
         entity.setHihokenshaName(AtenaMeisho.EMPTY);
         entity.setShoKisaiHokenshaNo(RString.EMPTY);
         entity.setJimukyoku(false);
-        その他資料 = new JimuSonotashiryoBusiness(entity);
+        その他資料 = new JimuSonotashiryoBusiness(entity, 存在ファイルindex);
         SonotashiryoA3Report reportA3 = new SonotashiryoA3Report(その他資料);
         reportA3.writeBy(reportSourceWriterA3);
+        if (shinsakaiOrder == entity.getShinsakaiOrder()) {
+            存在ファイルindex = その他資料.get存在ファイルIndex();
+        } else {
+            存在ファイルindex = 0;
+        }
+        shinsakaiOrder = entity.getShinsakaiOrder();
     }
 
     @Override
