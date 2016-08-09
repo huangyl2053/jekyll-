@@ -24,9 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 介護認定追加資料鑑情報のBusinessの編集クラスです。
@@ -323,8 +321,7 @@ public class JimuTuikaSiryoBusiness {
      * @return 審査会開催年月日
      */
     public RString get審査会開催年月日() {
-        return get審査会開催年月日(fromatパターン9(paramter.getShinsakaiKaisaiYoteiYMD()),
-                日時転換(paramter.getShinsakaiKaishiYoteiTime()));
+        return get開催年月日();
     }
 
     /**
@@ -348,29 +345,20 @@ public class JimuTuikaSiryoBusiness {
         return 通知文;
     }
 
-    private RString fromatパターン9(FlexibleDate date) {
-        if (date != null && !date.isEmpty()) {
-            return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
-        }
-        return RString.EMPTY;
-    }
-
-    private RString 日時転換(RString 日時) {
-        if (!RString.isNullOrEmpty(日時)) {
-            日時 = 日時.padZeroToLeft(SIZE_4);
-            return RTime.of(Integer.parseInt(日時.substring(0, 2).toString()),
-                    Integer.parseInt(日時.substring(2).toString())).toFormattedTimeString(DisplayTimeFormat.HH時mm分);
-        }
-        return RString.EMPTY;
-    }
-
-    private RString get審査会開催年月日(RString 開催年月日, RString 日時) {
-        RStringBuilder builder = new RStringBuilder();
-        return builder.append(開催年月日)
-                .append(" ")
-                .append(日時)
-                .toRString();
+    private RString get開催年月日() {
+        RStringBuilder 審査会開催年月日 = new RStringBuilder();
+        List<RString> 時分 = paramter.getShinsakaiKaishiYoteiTime().padZeroToLeft(SIZE_5).split(":");
+        審査会開催年月日.append(paramter.getShinsakaiKaisaiYoteiYMD().getYear())
+                .append(new RString("年 "))
+                .append(new RString(paramter.getShinsakaiKaisaiYoteiYMD().getMonthValue()).padZeroToLeft(2))
+                .append(new RString("月 "))
+                .append(new RString(paramter.getShinsakaiKaisaiYoteiYMD().getDayValue()).padZeroToLeft(2))
+                .append(new RString("日 "))
+                .append(時分.get(0).padZeroToLeft(2))
+                .append(new RString("時 "))
+                .append(時分.get(1).padZeroToLeft(2))
+                .append(new RString("分"));
+        return 審査会開催年月日.toRString();
     }
 
     private RString get前回期間(int 期間) {
