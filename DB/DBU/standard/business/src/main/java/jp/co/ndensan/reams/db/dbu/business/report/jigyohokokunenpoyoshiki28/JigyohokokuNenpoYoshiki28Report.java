@@ -19,9 +19,16 @@ public class JigyohokokuNenpoYoshiki28Report extends Report<JigyohokokuNenpoYosh
 
     private final JigyohokokuNenpoYoshiki28Entity entity;
 
+    /**
+     * インスタンスを生成します。
+     *
+     * @param entity 事業状況報告年報（様式１・２　市町村特別給付）entity。
+     *
+     */
     public JigyohokokuNenpoYoshiki28Report(JigyohokokuNenpoYoshiki28Entity entity) {
         this.entity = entity;
     }
+
     /**
      * インスタンスを生成します。
      *
@@ -31,6 +38,7 @@ public class JigyohokokuNenpoYoshiki28Report extends Report<JigyohokokuNenpoYosh
     public static JigyohokokuNenpoYoshiki28Report createReport(JigyohokokuNenpoYoshiki28Entity entity) {
         return new JigyohokokuNenpoYoshiki28Report(entity);
     }
+
     @Override
     public void writeBy(ReportSourceWriter<JigyohokokuNenpoYoshiki28ReportSource> reportSourceWriter) {
         IJigyohokokuNenpoYoshiki28Editor editor = new JigyohokokuNenpoYoshiki28Editor(entity);
