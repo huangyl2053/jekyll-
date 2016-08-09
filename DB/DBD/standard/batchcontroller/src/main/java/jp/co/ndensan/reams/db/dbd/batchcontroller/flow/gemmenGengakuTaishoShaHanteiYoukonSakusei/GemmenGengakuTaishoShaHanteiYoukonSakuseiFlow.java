@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.gemmenGengakuTaishoShaHa
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.gemmenGengakuTaishoShaHanteiYoukonSakusei.GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.gemmenGengakuTaishoShaHanteiYoukonSakusei.SetaiinHaakuInputSakusei;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmenGengakuTaishoShaHanteiYoukonSakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter;
+import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -49,9 +50,15 @@ public class GemmenGengakuTaishoShaHanteiYoukonSakuseiFlow extends BatchFlowBase
 
     @Step(減免減額対象者判定用根拠作成)
     protected IBatchFlowCommand GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei() {
-        return loopBatch(GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei.class)
-                .arguments(getParameter().toGemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter())
-                .define();
+        if (getParameter().get所得年度() == null || getParameter().get所得年度().isEmpty()) {
+            return loopBatch(GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei.class)
+                    .arguments(getParameter().toGemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter(new HizukeConfig().get所得年度()))
+                    .define();
+        } else {
+            return loopBatch(GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei.class)
+                    .arguments(getParameter().toGemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter())
+                    .define();
+        }
     }
 
     private SetaiShotokuKazeiHanteiBatchParameter getSetaiShotokuKazeiHanteiBatchParameter() {

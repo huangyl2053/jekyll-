@@ -34,7 +34,7 @@ public class JimuShinsakaiIinJohoMyBatisParameter implements IMyBatisParameter {
     private boolean isHaishiFlag_False;
     private boolean isHaishiFlag_True;
     private FlexibleDate sisutemuYMD;
-    private RString gogitaiNo;
+    private int gogitaiNo;
     private FlexibleDate shinsakaiKaisaiYoteiYMD;
     private ShinseishoKanriNo shinseishoKanriNo;
     private int ninteichosaRirekiNo;
@@ -65,7 +65,7 @@ public class JimuShinsakaiIinJohoMyBatisParameter implements IMyBatisParameter {
             boolean isSakuseiJokenHani,
             boolean isSakuseiJokenTuika,
             RString shinsakaiKaisaiNo,
-            RString gogitaiNo,
+            int gogitaiNo,
             FlexibleDate shinsakaiKaisaiYoteiYMD) {
         this.bangoStart = bangoStart;
         this.bangoEnd = bangoEnd;

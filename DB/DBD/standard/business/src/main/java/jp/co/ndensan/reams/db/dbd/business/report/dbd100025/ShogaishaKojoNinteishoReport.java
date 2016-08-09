@@ -19,6 +19,11 @@ public class ShogaishaKojoNinteishoReport extends Report<NinteishoJohoReportSour
 
     private final NinteishoJohoBusiness target;
 
+    /**
+     * インスタンスを生成します。
+     *
+     * @param target NinteishoJohoBusiness
+     */
     public ShogaishaKojoNinteishoReport(NinteishoJohoBusiness target) {
         this.target = target;
     }

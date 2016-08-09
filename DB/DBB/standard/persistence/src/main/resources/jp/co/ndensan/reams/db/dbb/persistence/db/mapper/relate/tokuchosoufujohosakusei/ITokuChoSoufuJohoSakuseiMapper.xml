@@ -105,6 +105,14 @@
     </select>
 
     <resultMap id="resultMap_TokuChoSoufuJohoSakuseiEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosoufujohosakusei.TokuChoSoufuJohoSakuseiEntity" autoMapping="true">
+        <id column="ueT0511NenkinTokuchoKaifuJoho_gyomuCode" />
+        <id column="ueT0511NenkinTokuchoKaifuJoho_shoriNendo" />
+        <id column="ueT0511NenkinTokuchoKaifuJoho_tsuchiNaiyoCode" />
+        <id column="ueT0511NenkinTokuchoKaifuJoho_shoriTaishoYM" />
+        <id column="ueT0511NenkinTokuchoKaifuJoho_kisoNenkinNo" />
+        <id column="ueT0511NenkinTokuchoKaifuJoho_nenkinCode" />
+        <id column="ueT0511NenkinTokuchoKaifuJoho_koseiCityCode" />
+        <id column="ueT0511NenkinTokuchoKaifuJoho_renban"/>
         <result property="ki" column="DbT2003_ki"/>
         <result property="choteigaku" column="UrT0705_choteigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="choteiId" column="DbT2003_choteiId" typeHandler="org.apache.ibatis.type.LongTypeHandler" />

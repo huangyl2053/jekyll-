@@ -111,7 +111,7 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
         item = new IchijihanteikekkahyoItemSetteiA3().set項目(entity, 特記事項,
                 調査票調査項目, 前回調査票調査項目, 主治医意見書,
                 前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, データ件数,
-                get共通情報(共通情報, 申請書管理番号), 主治医意見書, myBatisParameter.getGogitaiNo());
+                get共通情報(共通情報, 申請書管理番号), 主治医意見書, new RString(myBatisParameter.getGogitaiNo()));
 
         IchijihanteikekkahyoA3Report report = new IchijihanteikekkahyoA3Report(item);
         report.writeBy(reportSourceWriterA3);

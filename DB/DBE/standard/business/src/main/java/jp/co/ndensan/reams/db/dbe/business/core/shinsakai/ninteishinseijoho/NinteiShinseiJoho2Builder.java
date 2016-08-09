@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.ninteishinseijoho.NinteiShinseiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
@@ -41,7 +40,7 @@ public class NinteiShinseiJoho2Builder {
      * {@link DbT5101NinteiShinseiJohoEntity}より{@link NinteiShinseiJoho}の編集用Builderクラスを生成します。
      *
      * @param entity {@link DbT5101NinteiShinseiJohoEntity}
-     * @param id {@link NinteiShinseiJohoIdentifier}
+     * @param id {@link NinteiShinseiJoho2Identifier}
      *
      */
     NinteiShinseiJoho2Builder(

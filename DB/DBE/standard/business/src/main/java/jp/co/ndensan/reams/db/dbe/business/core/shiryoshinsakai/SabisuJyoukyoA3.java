@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNi
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.JotaiAnteiseiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.SuiteiKyufuKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku01;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku03;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku04;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku05;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku06;
@@ -57,6 +58,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -75,6 +77,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  */
 public class SabisuJyoukyoA3 {
 
+    private static final RString 段階悪化 = new RString("▲");
+    private static final RString 段階改善 = new RString("▽");
     private static final RString 記号 = new RString("+");
     private static final RString 月間 = new RString("月間");
     private static final Code A_99 = new Code("99A");
@@ -1207,11 +1211,16 @@ public class SabisuJyoukyoA3 {
         項目.set日常生活自立度リスト(日常生活自立度リスト);
         項目.set認定調査結果認知症高齢者自立度(set認知症高齢者自立度(entity.getNinchishoNichijoSeikatsuJiritsudoCode()));
         項目.set意見書認知症高齢者自立度(set認知症高齢者自立度(entity.getNinchishoNichijoSeikatsuJiritsudoCode()));
-
         if (RString.isNullOrEmpty(entity.getHihokenshaKubunCode())) {
             項目.set被保険者区分(RString.EMPTY);
         } else {
             項目.set被保険者区分(HihokenshaKubunCode.toValue(entity.getHihokenshaKubunCode()).get名称());
+            if (HihokenshaKubunCode.第１号被保険者.getコード().equals(entity.getHihokenshaKubunCode())
+                    || entity.getNigoTokuteiShippeiCode() == null || entity.getNigoTokuteiShippeiCode().isEmpty()) {
+                項目.set特定疾病名(RString.EMPTY);
+            } else {
+                項目.set特定疾病名(TokuteiShippei.toValue(entity.getNigoTokuteiShippeiCode().getColumnValue()).get名称());
+            }
         }
         if (entity.getNinteiShinseiShinseijiKubunCode() == null || entity.getNinteiShinseiShinseijiKubunCode().isEmpty()) {
             項目.set申請区分(RString.EMPTY);
@@ -1551,5 +1560,282 @@ public class SabisuJyoukyoA3 {
         } else {
             第１群.set認定調査と主治医意見書の結果比較(RString.EMPTY);
         }
+    }
+
+    /**
+     * 認定調査と主治医意見書比較設定する。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 今回結果コード 今回結果コード
+     * @param 第１群 第１群
+     * @param 主治医意見書項目 主治医意見書項目
+     */
+    public void set認定調査と主治医意見書比較(Code 厚労省IF識別コード, RString 今回結果コード, TiyosaKekka 第１群,
+            List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書項目) {
+        SabisuJyoukyoA3 settei = new SabisuJyoukyoA3();
+        for (DbT5304ShujiiIkenshoIkenItemEntity 主治医意見書 : 主治医意見書項目) {
+            RString 主治医意見書コード;
+            if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見麻痺_左上肢(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見麻痺_右上肢(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見麻痺_左下肢(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見麻痺_右下肢(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見麻痺_その他(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見拘縮_肩関節(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見食事摂取(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku14.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set食事摂取認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見意思の伝達(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku06.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set意思の伝達認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見短期記憶(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku04.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set短期記憶認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見徘徊(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set徘徊認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見被害的(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set徘徊認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見昼夜逆転(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set徘徊認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見介護に抵抗(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set徘徊認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見日常の意思決定(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku05.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set日常の意思決定認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            }
+        }
+        set項目主治医意見書(厚労省IF識別コード, 今回結果コード, 第１群, 主治医意見書項目);
+    }
+
+    private void set項目主治医意見書(Code 厚労省IF識別コード, RString 今回結果コード,
+            TiyosaKekka 第１群, List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書項目) {
+        SabisuJyoukyoA3 settei = new SabisuJyoukyoA3();
+        for (DbT5304ShujiiIkenshoIkenItemEntity 主治医意見書 : 主治医意見書項目) {
+            RString 主治医意見書コード;
+            if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見点滴の管理(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見中心静脈栄養(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見透析(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見ストーマの処置(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見酸素療法(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見レスピレーター(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見気管切開の処置(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見疼痛の看護(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見経管栄養(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見モニター測定(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見じょくそうの処置(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            } else if (new RString(主治医意見書.getRemban()).equals(settei.get主治医意見カテーテル(厚労省IF識別コード))) {
+                主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+                settei.set麻痺認定調査と主治医意見書結果比(今回結果コード, 主治医意見書コード, 第１群);
+                主治医意見書項目.remove(主治医意見書);
+                return;
+            }
+        }
+    }
+
+    /**
+     * 日常生活自立度今回結果前回結果設定する。
+     *
+     * @param 今回結果コード 今回結果コード
+     * @param 前回調査結果コード 前回調査結果コード
+     * @param 第２群 第２群
+     */
+    public void set日常生活自立度今回結果前回結果比(RString 今回結果コード, RString 前回調査結果コード, TiyosaKekka 第２群) {
+        if (is日常生活自立度今回前回比１(今回結果コード, 前回調査結果コード) || is日常生活自立度今回前回比２(今回結果コード, 前回調査結果コード)
+                || is日常生活自立度今回前回比３(今回結果コード, 前回調査結果コード) || is日常生活自立度今回前回比４(今回結果コード, 前回調査結果コード)) {
+            第２群.set段階改善フラグ(段階悪化);
+            第２群.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
+        } else if (is日常生活自立度前回今回比１(今回結果コード, 前回調査結果コード) || is日常生活自立度前回今回比２(今回結果コード, 前回調査結果コード)
+                || is日常生活自立度前回今回比３(今回結果コード, 前回調査結果コード) || is日常生活自立度前回今回比４(今回結果コード, 前回調査結果コード)) {
+            第２群.set段階改善フラグ(段階改善);
+            第２群.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+        } else {
+            第２群.set段階改善フラグ(RString.EMPTY);
+            第２群.set段階改善値(RString.EMPTY);
+        }
+    }
+
+    private boolean is日常生活自立度今回前回比１(RString 今回結果コード, RString 前回調査結果コード) {
+        boolean is今回前回結果 = false;
+        if (IkenKomoku03.M.getコード().equals(今回結果コード) && (IkenKomoku03.Ⅳ.getコード().equals(前回調査結果コード)
+                || IkenKomoku03.Ⅲb.getコード().equals(前回調査結果コード) || IkenKomoku03.Ⅲa.getコード().equals(前回調査結果コード)
+                || IkenKomoku03.Ⅱb.getコード().equals(前回調査結果コード) || IkenKomoku03.Ⅱa.getコード().equals(前回調査結果コード)
+                || IkenKomoku03.Ⅰ.getコード().equals(前回調査結果コード) || IkenKomoku03.自立.getコード().equals(前回調査結果コード))) {
+            is今回前回結果 = true;
+        }
+        return is今回前回結果;
+    }
+
+    private boolean is日常生活自立度今回前回比２(RString 今回結果コード, RString 前回調査結果コード) {
+        boolean is今回前回結果 = false;
+        if (IkenKomoku03.Ⅳ.getコード().equals(今回結果コード) && (IkenKomoku03.Ⅲb.getコード().equals(前回調査結果コード)
+                || IkenKomoku03.Ⅲa.getコード().equals(前回調査結果コード) || IkenKomoku03.Ⅱb.getコード().equals(前回調査結果コード)
+                || IkenKomoku03.Ⅱa.getコード().equals(前回調査結果コード) || IkenKomoku03.Ⅰ.getコード().equals(前回調査結果コード)
+                || IkenKomoku03.自立.getコード().equals(前回調査結果コード))) {
+            is今回前回結果 = true;
+        }
+        return is今回前回結果;
+    }
+
+    private boolean is日常生活自立度今回前回比３(RString 今回結果コード, RString 前回調査結果コード) {
+        boolean is今回前回結果 = false;
+        if ((IkenKomoku03.Ⅲb.getコード().equals(今回結果コード) && (IkenKomoku03.Ⅲa.getコード().equals(前回調査結果コード)
+                || IkenKomoku03.Ⅱb.getコード().equals(前回調査結果コード) || IkenKomoku03.Ⅱa.getコード().equals(前回調査結果コード)
+                || IkenKomoku03.Ⅰ.getコード().equals(前回調査結果コード) || IkenKomoku03.自立.getコード().equals(前回調査結果コード)))
+                || (IkenKomoku03.Ⅲa.getコード().equals(今回結果コード) && (IkenKomoku03.Ⅱb.getコード().equals(前回調査結果コード)
+                || IkenKomoku03.Ⅱa.getコード().equals(前回調査結果コード) || IkenKomoku03.Ⅰ.getコード().equals(前回調査結果コード)
+                || IkenKomoku03.自立.getコード().equals(前回調査結果コード)))) {
+            is今回前回結果 = true;
+        }
+        return is今回前回結果;
+    }
+
+    private boolean is日常生活自立度今回前回比４(RString 今回結果コード, RString 前回調査結果コード) {
+        boolean is今回前回結果 = false;
+        if ((IkenKomoku03.Ⅱb.getコード().equals(今回結果コード) && (IkenKomoku03.Ⅱa.getコード().equals(前回調査結果コード)
+                || IkenKomoku03.Ⅰ.getコード().equals(前回調査結果コード) || IkenKomoku03.自立.getコード().equals(前回調査結果コード)))
+                || (IkenKomoku03.Ⅱa.getコード().equals(今回結果コード) && (IkenKomoku03.Ⅰ.getコード().equals(前回調査結果コード)
+                || IkenKomoku03.自立.getコード().equals(前回調査結果コード))) || (IkenKomoku03.Ⅰ.getコード().equals(今回結果コード)
+                && IkenKomoku03.自立.getコード().equals(前回調査結果コード))) {
+            is今回前回結果 = true;
+        }
+        return is今回前回結果;
+    }
+
+    private boolean is日常生活自立度前回今回比１(RString 今回結果コード, RString 前回調査結果コード) {
+        boolean is前回今回結果 = false;
+        if ((IkenKomoku03.M.getコード().equals(前回調査結果コード) && (IkenKomoku03.Ⅳ.getコード().equals(今回結果コード)
+                || IkenKomoku03.Ⅲb.getコード().equals(今回結果コード) || IkenKomoku03.Ⅲa.getコード().equals(今回結果コード)
+                || IkenKomoku03.Ⅱb.getコード().equals(今回結果コード) || IkenKomoku03.Ⅱa.getコード().equals(今回結果コード)
+                || IkenKomoku03.Ⅰ.getコード().equals(今回結果コード) || IkenKomoku03.自立.getコード().equals(今回結果コード)))) {
+            is前回今回結果 = true;
+        }
+        return is前回今回結果;
+
+    }
+
+    private boolean is日常生活自立度前回今回比２(RString 今回結果コード, RString 前回調査結果コード) {
+        boolean is前回今回結果 = false;
+        if ((IkenKomoku03.Ⅳ.getコード().equals(前回調査結果コード) && (IkenKomoku03.Ⅲb.getコード().equals(今回結果コード)
+                || IkenKomoku03.Ⅲa.getコード().equals(今回結果コード) || IkenKomoku03.Ⅱb.getコード().equals(今回結果コード)
+                || IkenKomoku03.Ⅱa.getコード().equals(今回結果コード) || IkenKomoku03.Ⅰ.getコード().equals(今回結果コード)
+                || IkenKomoku03.自立.getコード().equals(今回結果コード)))) {
+            is前回今回結果 = true;
+        }
+        return is前回今回結果;
+
+    }
+
+    private boolean is日常生活自立度前回今回比３(RString 今回結果コード, RString 前回調査結果コード) {
+        boolean is前回今回結果 = false;
+        if ((IkenKomoku03.Ⅲb.getコード().equals(前回調査結果コード) && (IkenKomoku03.Ⅲa.getコード().equals(今回結果コード)
+                || IkenKomoku03.Ⅱb.getコード().equals(今回結果コード) || IkenKomoku03.Ⅱa.getコード().equals(今回結果コード)
+                || IkenKomoku03.Ⅰ.getコード().equals(今回結果コード) || IkenKomoku03.自立.getコード().equals(今回結果コード)))
+                || (IkenKomoku03.Ⅲa.getコード().equals(前回調査結果コード) && (IkenKomoku03.Ⅱb.getコード().equals(今回結果コード)
+                || IkenKomoku03.Ⅱa.getコード().equals(今回結果コード) || IkenKomoku03.Ⅰ.getコード().equals(今回結果コード)
+                || IkenKomoku03.自立.getコード().equals(今回結果コード)))) {
+            is前回今回結果 = true;
+        }
+        return is前回今回結果;
+
+    }
+
+    private boolean is日常生活自立度前回今回比４(RString 今回結果コード, RString 前回調査結果コード) {
+        boolean is前回今回結果 = false;
+        if ((IkenKomoku03.Ⅱb.getコード().equals(前回調査結果コード) && (IkenKomoku03.Ⅱa.getコード().equals(今回結果コード)
+                || IkenKomoku03.Ⅰ.getコード().equals(今回結果コード) || IkenKomoku03.自立.getコード().equals(今回結果コード)))
+                || (IkenKomoku03.Ⅱa.getコード().equals(前回調査結果コード) && (IkenKomoku03.Ⅰ.getコード().equals(今回結果コード)
+                || IkenKomoku03.自立.getコード().equals(今回結果コード))) || (IkenKomoku03.Ⅰ.getコード().equals(前回調査結果コード)
+                && IkenKomoku03.自立.getコード().equals(今回結果コード))) {
+            is前回今回結果 = true;
+        }
+        return is前回今回結果;
+
     }
 }

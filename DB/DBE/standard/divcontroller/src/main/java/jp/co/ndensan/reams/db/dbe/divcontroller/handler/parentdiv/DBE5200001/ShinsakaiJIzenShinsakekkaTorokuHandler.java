@@ -154,8 +154,12 @@ public class ShinsakaiJIzenShinsakekkaTorokuHandler {
         if (状態 == null) {
             return RString.EMPTY;
         } else {
-            return new RStringBuilder(YokaigoJotaiKubun09.toValue(状態)
-                    .get略称()).append(KAKO_HITARI).append(状態).append(KAKO_MIGI).toRString();
+            try {
+                return new RStringBuilder(YokaigoJotaiKubun09.toValue(状態)
+                        .get略称()).append(KAKO_HITARI).append(状態).append(KAKO_MIGI).toRString();
+            } catch (Exception e) {
+                return RString.EMPTY;
+            }
         }
     }
 }

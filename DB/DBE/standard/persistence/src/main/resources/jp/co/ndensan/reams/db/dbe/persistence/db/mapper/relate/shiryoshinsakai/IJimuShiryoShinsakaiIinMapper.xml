@@ -284,7 +284,7 @@
         FROM rgdb."DbT5121ShinseiRirekiJoho" dbt5121
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101Zenkai
         ON dbt5101Zenkai."shinseishoKanriNo" = dbt5121."shinseishoKanriNo"
-        AND (dbt5101Zen."shoriJotaiKubun" = #{shoriJotaiKubun0} OR dbt5101Zen."shoriJotaiKubun" = #{shoriJotaiKubun3})
+        AND (dbt5101Zenkai."shoriJotaiKubun" = #{shoriJotaiKubun0} OR dbt5101Zenkai."shoriJotaiKubun" = #{shoriJotaiKubun3})
         AND dbt5101Zenkai."logicalDeletedFlag" = FALSE
         INNER JOIN rgdb."DbT5102NinteiKekkaJoho" dbt5102
         ON dbt5102."shinseishoKanriNo" = dbt5101Zenkai."shinseishoKanriNo") AS zenkaiJoho

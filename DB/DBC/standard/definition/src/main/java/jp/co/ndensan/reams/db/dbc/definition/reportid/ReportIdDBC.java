@@ -161,6 +161,10 @@ public enum ReportIdDBC {
      */
     DBC200077(new ReportId("DBC200077_KogakuSogoJigyoServiceHiTaishoshaIchiran"), new RString("高額総合事業サービス費対象者一覧表")),
     /**
+     * 高額総合事業サービス費申請書発行一覧表 の帳票ＩＤです。
+     */
+    DBC200091(new ReportId("DBC200091_KogakuJigyoShinseishoHakkoIchiran"), new RString("高額総合事業サービス費申請書発行一覧表")),
+    /**
      * 基準収入額適用決定通知一覧表 の帳票ＩＤです。
      */
     DBC200092(new ReportId("DBC200092_KijunShunyugakuTekiyoKetteiTsuchiIchiran"), new RString("基準収入額適用決定通知一覧表")),

@@ -147,7 +147,7 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
         item.set開催予定年月日(paramter.getShinsakaiKaisaiYoteiYMD());
         item.set予定時刻(paramter.getShinsakaiKaishiYoteiTime());
         item.set開催会場(paramter.getShinsakaiKaisaiBashoName());
-        item.set合議体(paramter.getGogitaiNo());
+        item.set合議体(new RString(paramter.getGogitaiNo()));
         if (委員情報 != null) {
             if (委員情報.getShinsakaiIinShimei() != null && !委員情報.getShinsakaiIinShimei().isEmpty()) {
                 item.set宛名氏名(委員情報.getShinsakaiIinShimei().getColumnValue());

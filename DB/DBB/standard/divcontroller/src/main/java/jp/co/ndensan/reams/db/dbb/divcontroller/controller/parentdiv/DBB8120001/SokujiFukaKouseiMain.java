@@ -129,19 +129,15 @@ public class SokujiFukaKouseiMain {
             if (is更正前と状態変更なし && !ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(DbbInformationMessages.更正前と状態変更なし.getMessage()).respond();
             }
-            if (!is更正前と状態変更なし) {
-                handler.set更正前後賦課のリスト降順(更正前後賦課のリスト);
-                if (!更正前後賦課のリスト.isEmpty()) {
-                    通知書番号選択 = 更正前後賦課のリスト.get(0).get通知書番号();
-                    更正前賦課リスト = 更正前後賦課のリスト.get(0).get更正前();
-                    更正後賦課リスト = 更正前後賦課のリスト.get(0).get更正後();
-                }
-            } else {
-                KoseiZengoFuka 更正前後賦課 = get更正前後賦課By通知書番号(更正前後賦課のリスト, 通知書番号);
-                if (更正前後賦課 != null) {
-                    更正前賦課リスト = 更正前後賦課.get更正前();
-                    更正後賦課リスト = 更正前後賦課.get更正後();
-                }
+            handler.set更正前後賦課のリスト降順(更正前後賦課のリスト);
+            KoseiZengoFuka 更正前後賦課 = get更正前後賦課By通知書番号(更正前後賦課のリスト, 通知書番号);
+            if (!is更正前と状態変更なし && !更正前後賦課のリスト.isEmpty()) {
+                通知書番号選択 = 更正前後賦課のリスト.get(0).get通知書番号();
+                更正前賦課リスト = 更正前後賦課のリスト.get(0).get更正前();
+                更正後賦課リスト = 更正前後賦課のリスト.get(0).get更正後();
+            } else if (is更正前と状態変更なし && 更正前後賦課 != null) {
+                更正前賦課リスト = 更正前後賦課.get更正前();
+                更正後賦課リスト = 更正前後賦課.get更正後();
                 div.setDisabled(true);
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, true);
             }
