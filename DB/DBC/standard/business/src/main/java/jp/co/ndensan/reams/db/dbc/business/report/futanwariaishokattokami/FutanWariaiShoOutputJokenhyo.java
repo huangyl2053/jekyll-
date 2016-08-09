@@ -36,11 +36,22 @@ public class FutanWariaiShoOutputJokenhyo {
     private final FutanwariaishoHakkoProcessParameter parameter;
     private final IOutputOrder 出力順;
 
+    /**
+     * インスタンスを生成します。
+     *
+     * @param parameter parameter
+     * @param 出力順 出力順
+     */
     public FutanWariaiShoOutputJokenhyo(FutanwariaishoHakkoProcessParameter parameter, IOutputOrder 出力順) {
         this.parameter = parameter;
         this.出力順 = 出力順;
     }
 
+    /**
+     * 出力条件取得です。
+     *
+     * @return List<RString>
+     */
     public List<RString> getOutputJokenhyoParam() {
         List<RString> outputJokenhyo = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
@@ -79,6 +90,11 @@ public class FutanWariaiShoOutputJokenhyo {
         return outputJokenhyo;
     }
 
+    /**
+     * 出力条件取得です。
+     *
+     * @return List<RString>
+     */
     public List<RString> getDaikoParam() {
         List<RString> outputJokenhyo = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();

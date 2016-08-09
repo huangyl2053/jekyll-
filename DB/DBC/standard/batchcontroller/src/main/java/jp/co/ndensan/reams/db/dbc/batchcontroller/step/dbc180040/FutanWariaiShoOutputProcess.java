@@ -53,12 +53,12 @@ public class FutanWariaiShoOutputProcess extends BatchProcessBase<RiyoshaFutanwa
     private ChohyoSeigyoKyotsu 帳票制御共通;
     private int 連番;
     private IOutputOrder 出力順;
-    private RString CSV出力Flag;
-    private RString CSVファイル名;
+    private RString csv出力Flag;
+    private RString csvファイル名;
     List<RString> 出力順BODY;
     @BatchWriter
-    private BatchReportWriter<FutanWariaiShoKattokamiSource> BatchReportWriter;
-    private ReportSourceWriter<FutanWariaiShoKattokamiSource> ReportSourceWriter;
+    private BatchReportWriter<FutanWariaiShoKattokamiSource> batchReportWriter;
+    private ReportSourceWriter<FutanWariaiShoKattokamiSource> reportSourceWriter;
 
     private static final RString コンマ = new RString(",");
     private static final RString ZERO = new RString("0");
@@ -74,8 +74,8 @@ public class FutanWariaiShoOutputProcess extends BatchProcessBase<RiyoshaFutanwa
     @Override
     protected void initialize() {
         連番 = 1;
-        CSV出力Flag = なし;
-        CSVファイル名 = CONNECTOR;
+        csv出力Flag = なし;
+        csvファイル名 = CONNECTOR;
         service = new FutanWariaishoIkkatsu();
         帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100065.getReportId());
         出力順BODY = new ArrayList<>();
@@ -83,8 +83,9 @@ public class FutanWariaiShoOutputProcess extends BatchProcessBase<RiyoshaFutanwa
             IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
             出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.FCZ医療費共通,
                     ReportIdDBC.DBC100065.getReportId(), Long.valueOf(parameter.get出力順().toString()));
-            出力順BODY = MyBatisOrderByClauseCreator.create(SaishinsaKetteiTsuchishoIchiranKohifutanshaProperty.KagoKetteiKohifutanshaInBreakerFieldsEnum.class, 出力順)
-                    .split(コンマ.toString());
+            出力順BODY = MyBatisOrderByClauseCreator.create(
+                    SaishinsaKetteiTsuchishoIchiranKohifutanshaProperty.KagoKetteiKohifutanshaInBreakerFieldsEnum.class, 出力順).
+                    split(コンマ.toString());
         }
     }
 
@@ -95,18 +96,18 @@ public class FutanWariaiShoOutputProcess extends BatchProcessBase<RiyoshaFutanwa
 
     @Override
     protected void createWriter() {
-        BatchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100065.getReportId().value()).create();
-        ReportSourceWriter = new ReportSourceWriter<>(BatchReportWriter);
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100065.getReportId().value()).create();
+        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
 
     @Override
     protected void process(RiyoshaFutanwariaishoTempEntity entity) {
-        CSV出力Flag = あり;
-        CSVファイル名 = 負担割合証発行一覧;
-        FutanWariaiShoKattokamiEntity futanWariaiShoEntity = service.getFutanWariaiSourceData(帳票制御共通, BatchReportWriter.getImageFolderPath(),
+        csv出力Flag = あり;
+        csvファイル名 = 負担割合証発行一覧;
+        FutanWariaiShoKattokamiEntity futanWariaiShoEntity = service.getFutanWariaiSourceData(帳票制御共通, batchReportWriter.getImageFolderPath(),
                 entity, parameter.get交付年月日(), new RString(連番));
         FutanWariaiShoKattokamiReport futanWariaiShoreport = new FutanWariaiShoKattokamiReport(futanWariaiShoEntity);
-        futanWariaiShoreport.writeBy(ReportSourceWriter);
+        futanWariaiShoreport.writeBy(reportSourceWriter);
         連番++;
     }
 
@@ -121,18 +122,18 @@ public class FutanWariaiShoOutputProcess extends BatchProcessBase<RiyoshaFutanwa
                 導入団体クラス.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 ReportIdDBC.DBC100065.getReportName(),
-                new RString(ReportSourceWriter.getPageGroupCount()),
-                CSV出力Flag,
-                CSVファイル名,
+                new RString(reportSourceWriter.getPageGroupCount()),
+                csv出力Flag,
+                csvファイル名,
                 outputJokenhyoList
         );
         OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem)
                 .print();
-        if (!帳票制御共通.is代行プリント有無() && ZERO.equals(parameter.get出力対象()) && あり.equals(CSV出力Flag)) {
+        if (帳票制御共通.is代行プリント有無() && ZERO.equals(parameter.get出力対象()) && あり.equals(csv出力Flag)) {
             List<RString> 帳票名 = new ArrayList<>();
             帳票名.add(利用者負担割合証);
             List<Decimal> ページ数 = new ArrayList<>();
-            ページ数.add(new Decimal(ReportSourceWriter.getPageGroupCount()));
+            ページ数.add(new Decimal(reportSourceWriter.getPageGroupCount()));
             List<RString> 改頁条件 = new ArrayList<>();
             List<RString> 詳細設定 = new ArrayList<>();
             詳細設定.add(交付年月日.concat(parameter.get交付年月日().wareki().toDateString()));

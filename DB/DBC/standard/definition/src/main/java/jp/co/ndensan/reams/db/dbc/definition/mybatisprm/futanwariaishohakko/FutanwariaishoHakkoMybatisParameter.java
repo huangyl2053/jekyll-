@@ -54,6 +54,19 @@ public class FutanwariaishoHakkoMybatisParameter extends UaFt200FindShikibetsuTa
     private RDateTime 抽出期間終了日時;
     private RString 出力順;
 
+    /**
+     * インスタンスを生成します。
+     *
+     * @param atesakiKey atesakiKey
+     * @param 年度 年度
+     * @param 交付年月日 交付年月日
+     * @param 発行区分 発行区分
+     * @param 出力対象 出力対象
+     * @param 抽出期間開始日時 抽出期間開始日時
+     * @param 抽出期間終了日時 抽出期間終了日時
+     * @param 出力順 出力順
+     * @param searchKey searchKey
+     */
     public FutanwariaishoHakkoMybatisParameter(IAtesakiPSMSearchKey atesakiKey, FlexibleYear 年度, RDate 交付年月日,
             RString 発行区分, RString 出力対象, RDateTime 抽出期間開始日時, RDateTime 抽出期間終了日時,
             RString 出力順, IShikibetsuTaishoPSMSearchKey searchKey) {
