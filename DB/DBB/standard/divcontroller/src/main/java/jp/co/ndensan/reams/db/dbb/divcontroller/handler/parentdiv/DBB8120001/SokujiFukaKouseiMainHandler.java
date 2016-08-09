@@ -673,7 +673,7 @@ public class SokujiFukaKouseiMainHandler {
     }
 
     private void set減免額(NendobunFukaList 更正後賦課リスト) {
-        if (更正後賦課リスト == null) {
+        if (更正後賦課リスト == null || 更正後賦課リスト.get最新賦課の情報().get減免額() == null) {
             return;
         }
         if (更正後賦課リスト.get最新賦課の情報().get減免額().compareTo(Decimal.ZERO) > 0) {

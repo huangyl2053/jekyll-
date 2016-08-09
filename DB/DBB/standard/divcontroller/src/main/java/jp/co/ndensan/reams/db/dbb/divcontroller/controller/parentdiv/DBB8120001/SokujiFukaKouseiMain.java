@@ -149,7 +149,7 @@ public class SokujiFukaKouseiMain {
         ViewStateHolder.put(ViewStateKeys.更正前後徴収方法, 更正前後徴収方法);
         ViewStateHolder.put(ViewStateKeys.更正前後賦課のリスト, (Serializable) 更正前後賦課のリスト);
         ViewStateHolder.put(ViewStateKeys.本算定処理済フラグ, is本算定処理済フラグ);
-        AccessLogger.log(AccessLogType.照会, PersonalData.withKojinNo(識別コード));
+        AccessLogger.log(AccessLogType.照会, PersonalData.of(識別コード));
         LockingKey 前排他キー = new LockingKey(DBB_HIHOKENSHANO.concat(被保険者番号.getColumnValue()));
         if (!RealInitialLocker.tryGetLock(前排他キー)) {
             throw new PessimisticLockingException();
@@ -599,7 +599,7 @@ public class SokujiFukaKouseiMain {
 
     private PersonalData toPersonalData(ShikibetsuCode 識別コード, RString 被保険者番号) {
         ExpandedInformation expandedInfo = new ExpandedInformation(CODE_003, 業務固有の識別情報名称, 被保険者番号);
-        return PersonalData.withKojinNo(識別コード, expandedInfo);
+        return PersonalData.of(識別コード, expandedInfo);
     }
 
     private boolean is本算定後(NendobunFukaList 更正前賦課リスト) {
