@@ -19,8 +19,7 @@
         ROW_NUMBER() OVER (
         PARTITION BY
         "A"."hiHokenshaNo",
-        "A"."idoYMD",
-        "A"."rirekiNo"
+        "A"."idoYMD"
         ORDER BY
         "A"."rirekiNo" DESC
         ) AS rrkno
@@ -30,7 +29,10 @@
         WHERE
         "B".rrkno  =  1) AS "C"
         WHERE
-        "C"."logicalDeletedFlag" = #{削除データ検索}
+        1=1
+        <if test="!削除データ検索">
+            AND "C"."logicalDeletedFlag" = #{削除データ検索}
+        </if>
         <if test="異動日From != null and !異動日From.isEmpty()">
             AND  #{異動日From}<![CDATA[<=]]>"C"."idoYMD"
         </if>
@@ -40,5 +42,7 @@
         <if test="被保険者番号 != null and !被保険者番号.isEmpty()">
             AND  "C"."hiHokenshaNo" = #{被保険者番号}
         </if>
+        ORDER BY
+        "C"."idoYMD" DESC
     </select>
 </mapper>
