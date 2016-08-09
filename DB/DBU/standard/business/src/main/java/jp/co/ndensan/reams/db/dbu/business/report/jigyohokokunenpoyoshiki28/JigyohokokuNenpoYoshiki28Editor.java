@@ -33,6 +33,9 @@ public class JigyohokokuNenpoYoshiki28Editor implements IJigyohokokuNenpoYoshiki
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
+    private static final RString 件数 = new RString("件数");
+    private static final RString 費用額 = new RString("費用額");
+    private static final RString 給付額 = new RString("給付額");
 
     private final JigyohokokuNenpoYoshiki28Entity entity;
 
@@ -54,25 +57,24 @@ public class JigyohokokuNenpoYoshiki28Editor implements IJigyohokokuNenpoYoshiki
     private JigyohokokuNenpoYoshiki28ReportSource editSource(JigyohokokuNenpoYoshiki28ReportSource source) {
 
         if (集計番号_0601.equals(entity.get集計番号())) {
-            source.hyoSubTitle = entity.get集計番号();
+            source.jijifanhao = entity.get集計番号();
+            source.hyoSubTitle = 件数;
             setValue(source);
         }
         if (集計番号_0602.equals(entity.get集計番号())) {
-            source.hyoSubTitle = entity.get集計番号();
+            source.jijifanhao = entity.get集計番号();
+            source.hyoSubTitle = 費用額;
             setValue(source);
         }
         if (集計番号_0603.equals(entity.get集計番号())) {
-            source.hyoSubTitle = entity.get集計番号();
+            source.jijifanhao = entity.get集計番号();
+            source.hyoSubTitle = 給付額;
             setValue(source);
         }
         return source;
     }
 
-    /**
-     *
-     * @param source
-     */
-    public void setValue(JigyohokokuNenpoYoshiki28ReportSource source) {
+    private void setValue(JigyohokokuNenpoYoshiki28ReportSource source) {
         source.yoshiki = 様式２;
         source.shukeiKubun = 年報;
         source.hyoTitle = 市町村特別給付;
