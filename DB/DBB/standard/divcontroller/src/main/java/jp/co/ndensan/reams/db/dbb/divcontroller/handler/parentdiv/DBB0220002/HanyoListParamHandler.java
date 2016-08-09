@@ -108,11 +108,13 @@ public class HanyoListParamHandler {
         }
         if (div.getChushutsuJokenPanel() != null && div.getChushutsuJokenPanel().getTxtChushutsuKikan() != null
                 && div.getChushutsuJokenPanel().getTxtChushutsuKikan().getFromValue() != null) {
-            parameter.set抽出期間From(new YMDHMS(div.getChushutsuJokenPanel().getTxtChushutsuKikan().getFromValue(), RTime.now()));
+            parameter.set抽出期間From(new YMDHMS(div.getChushutsuJokenPanel().getTxtChushutsuKikan().getFromValue(),
+                    new RTime(new RString("00:00:00"))));
         }
         if (div.getChushutsuJokenPanel() != null && div.getChushutsuJokenPanel().getTxtChushutsuKikan() != null
                 && div.getChushutsuJokenPanel().getTxtChushutsuKikan().getToValue() != null) {
-            parameter.set抽出期間To(new YMDHMS(div.getChushutsuJokenPanel().getTxtChushutsuKikan().getToValue(), RTime.now()));
+            parameter.set抽出期間To(new YMDHMS(div.getChushutsuJokenPanel().getTxtChushutsuKikan().getToValue(),
+                    new RTime(new RString("23:59:59"))));
         }
         課税区分減免前後(parameter);
         宛名抽出条件と出力順と出力項目(parameter);

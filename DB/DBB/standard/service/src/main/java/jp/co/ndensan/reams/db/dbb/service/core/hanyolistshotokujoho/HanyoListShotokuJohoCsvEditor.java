@@ -416,7 +416,7 @@ public class HanyoListShotokuJohoCsvEditor {
         csvEntity.set公的年金等収入(numToRString(entity.get公的年金収入額()));
         csvEntity.set公的年金等所得(numToRString(entity.get公的年金所得額()));
         if (entity.get処理日時() != null) {
-            FlexibleDate 処理日付 = new FlexibleDate(entity.get処理日時().toDateString());
+            FlexibleDate 処理日付 = new FlexibleDate(entity.get処理日時().getDate().toDateString());
             csvEntity.set住民税更正日(dataToRString(処理日付, parameter));
         }
         if (GekihenkanwaSochi.対象外.getコード().equals(entity.get激変緩和措置区分())) {

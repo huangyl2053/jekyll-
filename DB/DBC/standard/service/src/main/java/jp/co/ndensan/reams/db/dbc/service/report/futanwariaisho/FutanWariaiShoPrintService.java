@@ -5,9 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.report.futanwariaisho;
 
+import jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho.FutanWariaiShoEntity;
 import jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho.FutanWariaiShoProperty;
-import jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho.FutanWariaiShoReport;
-import jp.co.ndensan.reams.db.dbc.entity.report.source.futanwariaisho.FutanWariaiShoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.futanwariaisho.FutanWariaiShoSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
@@ -96,8 +95,8 @@ public class FutanWariaiShoPrintService {
 
             ReportSourceWriter<FutanWariaiShoSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
-            FutanWariaiShoReport report = new FutanWariaiShoReport(entity, sourceBuilder);
-            report.writeBy(reportSourceWriter);
+//            FutanWariaiShoReport report = new FutanWariaiShoReport(entity, sourceBuilder);
+//            report.writeBy(reportSourceWriter);
         }
     }
 

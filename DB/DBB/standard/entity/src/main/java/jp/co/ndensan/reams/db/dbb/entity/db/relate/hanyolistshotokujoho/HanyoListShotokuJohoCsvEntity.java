@@ -138,17 +138,17 @@ public class HanyoListShotokuJohoCsvEntity {
     private RString 資格区分;
     @CsvField(order = 600, name = "住所地特例状態")
     private RString 住所地特例状態;
-    @CsvField(order = 610, name = "資格証記載保険者番号")
+    @CsvField(order = 610, name = "（資格）証記載保険者番号")
     private RString 資格証記載保険者番号;
     @CsvField(order = 620, name = "保険料段階")
     private RString 保険料段階;
-    @CsvField(order = 630, name = "保険料段階仮算定時")
+    @CsvField(order = 630, name = "保険料段階（仮算定時）")
     private RString 保険料段階仮算定時;
     @CsvField(order = 640, name = "賦課年度")
     private RString 賦課年度;
-    @CsvField(order = 650, name = "課税区分減免前")
+    @CsvField(order = 650, name = "課税区分（減免前）")
     private RString 課税区分減免前;
-    @CsvField(order = 660, name = "課税区分減免後")
+    @CsvField(order = 660, name = "課税区分（減免後）")
     private RString 課税区分減免後;
     @CsvField(order = 670, name = "合計所得金額")
     private RString 合計所得金額;
