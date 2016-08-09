@@ -64,8 +64,8 @@ public class TaishoshaKensaku {
             return null;
         }
         List<TaishoshaKensakuResult> 対象者一覧情報 = new ArrayList<>();
-        TaishoshaKensakuResult taikensakuenEntity = new TaishoshaKensakuResult();
         for (DbT3001JukyushaIdoRenrakuhyoEntity entity : taikensakuenList) {
+            TaishoshaKensakuResult taikensakuenEntity = new TaishoshaKensakuResult();
             taikensakuenEntity.set対象者一覧情報Entity(new JukyushaIdoRenrakuhyo(entity));
             対象者一覧情報.add(taikensakuenEntity);
         }
