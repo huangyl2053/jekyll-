@@ -210,17 +210,17 @@ public class SabisuJyoukyoA4 {
                 一次判定結果 = YokaigoJotaiKubun09.toValue(一次判定結果コード.getColumnValue()).get名称();
             }
         }
-        if (一次判定結果コード_認知症加算 != null && !一次判定結果コード_認知症加算.isEmpty()) {
-            if (A_99.equals(厚労省IF識別コード)) {
-                一次判定結果_認知症加算 = YokaigoJotaiKubun99.toValue(一次判定結果コード_認知症加算.getColumnValue()).get名称();
-            } else if (A_02.equals(厚労省IF識別コード)) {
-                一次判定結果_認知症加算 = YokaigoJotaiKubun02.toValue(一次判定結果コード_認知症加算.getColumnValue()).get名称();
-            } else if (A_06.equals(厚労省IF識別コード)) {
-                一次判定結果_認知症加算 = YokaigoJotaiKubun06.toValue(一次判定結果コード_認知症加算.getColumnValue()).get名称();
-            } else if (A_09.equals(厚労省IF識別コード) || B_09.equals(厚労省IF識別コード)) {
-                一次判定結果_認知症加算 = YokaigoJotaiKubun09.toValue(一次判定結果コード_認知症加算.getColumnValue()).get名称();
-            }
-        }
+//        if (一次判定結果コード_認知症加算 != null && !一次判定結果コード_認知症加算.isEmpty()) {
+//            if (A_99.equals(厚労省IF識別コード)) {
+//                一次判定結果_認知症加算 = YokaigoJotaiKubun99.toValue(一次判定結果コード_認知症加算.getColumnValue()).get名称();
+//            } else if (A_02.equals(厚労省IF識別コード)) {
+//                一次判定結果_認知症加算 = YokaigoJotaiKubun02.toValue(一次判定結果コード_認知症加算.getColumnValue()).get名称();
+//            } else if (A_06.equals(厚労省IF識別コード)) {
+//                一次判定結果_認知症加算 = YokaigoJotaiKubun06.toValue(一次判定結果コード_認知症加算.getColumnValue()).get名称();
+//            } else if (A_09.equals(厚労省IF識別コード) || B_09.equals(厚労省IF識別コード)) {
+//                一次判定結果_認知症加算 = YokaigoJotaiKubun09.toValue(一次判定結果コード_認知症加算.getColumnValue()).get名称();
+//            }
+//        }
         return builder.append(一次判定結果)
                 .append("→")
                 .append(一次判定結果_認知症加算).toRString();

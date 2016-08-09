@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiry
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoA3ReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity;
@@ -84,7 +85,6 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
     @Override
     protected void usualProcess(ItiziHanteiEntity entity) {
         item = new IchijihanteikekkahyoA3Entity();
-
         ShinseishoKanriNo 申請書管理番号 = entity.getShinseishoKanriNo();
         ShinseishoKanriNo 前申請書管理番号 = entity.getZShinseishoKanriNo();
         int 認定調査依頼履歴番号 = entity.getNinteichosaIraiRirekiNo();
@@ -108,10 +108,15 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
         List<DbT5211NinteichosahyoChosaItemEntity> 調査票調査項目 = mapper.get調査票項目(myBatisParameter);
         List<DbT5211NinteichosahyoChosaItemEntity> 前回調査票調査項目 = mapper.get前回調査票項目(myBatisParameter);
         List<DbT5304ShujiiIkenshoIkenItemEntity> 前回主治医意見書 = mapper.get前回主治医意見書(myBatisParameter);
+        List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報 = new ArrayList<>();
+        if (get共通情報(共通情報, 申請書管理番号) != null) {
+            特記情報 = get特記情報(get共通情報(共通情報, 申請書管理番号));
+        }
+
         item = new IchijihanteikekkahyoItemSetteiA3().set項目(entity, 特記事項,
                 調査票調査項目, 前回調査票調査項目, 主治医意見書,
                 前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, データ件数,
-                get共通情報(共通情報, 申請書管理番号), 主治医意見書, new RString(myBatisParameter.getGogitaiNo()));
+                get共通情報(共通情報, 申請書管理番号), 主治医意見書, new RString(myBatisParameter.getGogitaiNo()), 特記情報);
 
         IchijihanteikekkahyoA3Report report = new IchijihanteikekkahyoA3Report(item);
         report.writeBy(reportSourceWriterA3);
@@ -185,5 +190,16 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
             }
         }
         return null;
+    }
+
+    private List<DbT5205NinteichosahyoTokkijikoEntity> get特記情報(ShinsakaiSiryoKyotsuEntity entity) {
+        List<ShinseishoKanriNo> 申請書管理番号リスト = new ArrayList<>();
+        List<Integer> 認定調査依頼履歴番号リスト = new ArrayList<>();
+        申請書管理番号リスト.add(entity.getShinseishoKanriNo());
+        認定調査依頼履歴番号リスト.add(entity.getNinteichosaRirekiNo());
+        myBatisParameter.setGenponMaskKubun(GenponMaskKubun.原本.getコード());
+        myBatisParameter.setShinseishoKanriNoList(申請書管理番号リスト);
+        myBatisParameter.setNinteichosaRirekiNoList(認定調査依頼履歴番号リスト);
+        return mapper.get事務局特記情報(myBatisParameter);
     }
 }
