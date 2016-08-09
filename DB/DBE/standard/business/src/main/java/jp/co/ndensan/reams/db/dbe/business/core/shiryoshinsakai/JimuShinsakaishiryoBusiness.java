@@ -19,7 +19,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibe
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaNinchishoKasanCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -269,7 +271,7 @@ public class JimuShinsakaishiryoBusiness {
      * @return 前回二次
      */
     public RString get前回二次() {
-        return get要介護状態区分(johoEntity.getNijiHanteiYokaigoJotaiKubunCode());
+        return get要介護状態区分(johoEntity.getKoroshoIfShikibetsuCode(), johoEntity.getNijiHanteiYokaigoJotaiKubunCode());
     }
 
     /**
@@ -326,7 +328,7 @@ public class JimuShinsakaishiryoBusiness {
      * @return 二次判定
      */
     public RString get二次判定() {
-        return get要介護状態区分(johoEntity.getNijiHanteiYokaigoJotaiKubunCode());
+        return get要介護状態区分(johoEntity.getKoroshoIfShikibetsuCode(), johoEntity.getNijiHanteiYokaigoJotaiKubunCode());
     }
 
     /**
@@ -346,7 +348,7 @@ public class JimuShinsakaishiryoBusiness {
     public RString get前回期間_下() {
         RStringBuilder 前回期間_下 = new RStringBuilder();
         if (johoEntity.getNijiHanteiNinteiYukoKaishiYMD() != null && !johoEntity.getNijiHanteiNinteiYukoKaishiYMD().isEmpty()) {
-            前回期間_下.append(パターン33(johoEntity.getNijiHanteiNinteiYukoKaishiYMD()));
+            前回期間_下.append(パターン13(johoEntity.getNijiHanteiNinteiYukoKaishiYMD()));
             if (johoEntity.getNijiHanteiNinteiYukoShuryoYMD() != null && !johoEntity.getNijiHanteiNinteiYukoShuryoYMD().isEmpty()) {
                 前回期間_下.append("～");
             } else {
@@ -354,7 +356,7 @@ public class JimuShinsakaishiryoBusiness {
             }
         }
         if (johoEntity.getNijiHanteiNinteiYukoShuryoYMD() != null && !johoEntity.getNijiHanteiNinteiYukoShuryoYMD().isEmpty()) {
-            前回期間_下.append(パターン33(johoEntity.getNijiHanteiNinteiYukoShuryoYMD()));
+            前回期間_下.append(パターン13(johoEntity.getNijiHanteiNinteiYukoShuryoYMD()));
         }
         return 前回期間_下.toRString();
     }
@@ -369,21 +371,20 @@ public class JimuShinsakaishiryoBusiness {
         return 前回期間.toRString();
     }
 
-    private RString get要介護状態区分(Code 状態区分コード) {
+    private RString get要介護状態区分(Code 厚労省IF識別コード, Code 状態区分コード) {
         if (状態区分コード != null && !状態区分コード.isEmpty()) {
-            RStringBuilder 要介護状態区分 = new RStringBuilder("要介護状態区分コード");
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(状態区分コード.value())) {
-                return 要介護状態区分.append(YokaigoJotaiKubun99.toValue(状態区分コード.value()).get名称()).toRString();
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード.value())) {
+                return YokaigoJotaiKubun99.toValue(状態区分コード.value()).get略称();
             }
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(状態区分コード.value())) {
-                return 要介護状態区分.append(YokaigoJotaiKubun02.toValue(状態区分コード.value()).get名称()).toRString();
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード.value())) {
+                return YokaigoJotaiKubun02.toValue(状態区分コード.value()).get略称();
             }
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(状態区分コード.value())) {
-                return 要介護状態区分.append(YokaigoJotaiKubun06.toValue(状態区分コード.value()).get名称()).toRString();
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード.value())) {
+                return YokaigoJotaiKubun06.toValue(状態区分コード.value()).get略称();
             }
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(状態区分コード.value())
-                    || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(状態区分コード.value())) {
-                return 要介護状態区分.append(YokaigoJotaiKubun09.toValue(状態区分コード.value()).get名称()).toRString();
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード.value())
+                    || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード.value())) {
+                return YokaigoJotaiKubun09.toValue(状態区分コード.value()).get略称();
             }
         }
         return RString.EMPTY;
@@ -415,9 +416,10 @@ public class JimuShinsakaishiryoBusiness {
         return 審査会開催年月日.toRString();
     }
 
-    private RString パターン33(FlexibleDate 年月日) {
+    private RString パターン13(FlexibleDate 年月日) {
         if (年月日 != null && !年月日.isEmpty()) {
-            return 年月日.seireki().separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+            return 年月日.wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
         }
         return RString.EMPTY;
     }
