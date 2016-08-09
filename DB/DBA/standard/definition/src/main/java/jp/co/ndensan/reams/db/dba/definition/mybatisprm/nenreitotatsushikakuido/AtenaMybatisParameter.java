@@ -5,11 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsushikakuido;
 
-import java.util.List;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 宛名識別対象PSM_DB検索用のパラメータです。
@@ -20,16 +19,19 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class AtenaMybatisParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
 
-    private final List<ShikibetsuCode> 識別コード;
+    private final FlexibleDate 開始日;
+    private final FlexibleDate 終了日;
 
     /**
      * 宛名識別対象PSMの取得のパラメータ作成を行います。
      *
      * @param shikibetsuTaishoPSMSearchKey 宛名識別対象PSM検索キー
-     * @param 識別コード 識別コード
+     * @param 開始日
+     * @param 終了日
      */
-    public AtenaMybatisParameter(IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey, List<ShikibetsuCode> 識別コード) {
+    public AtenaMybatisParameter(IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey, FlexibleDate 開始日, FlexibleDate 終了日) {
         super(shikibetsuTaishoPSMSearchKey);
-        this.識別コード = 識別コード;
+        this.開始日 = 開始日;
+        this.終了日 = 開始日;
     }
 }
