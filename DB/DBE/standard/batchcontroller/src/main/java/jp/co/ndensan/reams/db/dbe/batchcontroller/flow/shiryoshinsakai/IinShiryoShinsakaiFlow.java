@@ -41,6 +41,7 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
     private static final String 委員_審査対象者一覧 = "iinShinsakaiIinJoho";
     private static final String 委員_追加資料鑑 = "iinTuikaSiryo";
     private static final String 委員_その他資料 = "iinSonotaJoho";
+    private static final String 委員_特記事項_一次判定結果 = "iinTokkiJikouItiziHantei";
     private static final RString 選択 = new RString("1");
     private static final RString 作成条件_追加分 = new RString("追加分");
 
@@ -70,6 +71,9 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
         if (選択.equals(getParameter().getChohyoIin_hanteiFalg())) {
             executeStep(委員_予備判定一覧);
         }
+        if (選択.equals(getParameter().getChohyoIin_tokkiJikouHanteiFalg())) {
+            executeStep(委員_特記事項_一次判定結果);
+        }
     }
 
     /**
@@ -90,13 +94,19 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
      */
     @Step(委員_特記事項)
     protected IBatchFlowCommand createIinTokkiJikouData() {
-        if (選択.equals(getParameter().getShuturyokuSutairu())) {
-            return loopBatch(IinTokkiJikouDataSakuseiA4Process.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-        } else {
-            return loopBatch(IinTokkiJikouItiziHanteiDataSakuseiA3Process.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-        }
+        return loopBatch(IinTokkiJikouDataSakuseiA4Process.class)
+                .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
+    }
+
+    /**
+     * 委員特記事項+一次判定結果情報データの作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(委員_特記事項_一次判定結果)
+    protected IBatchFlowCommand createIinTokkiJikouItiziHanteiData() {
+        return loopBatch(IinTokkiJikouItiziHanteiDataSakuseiA3Process.class)
+                .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
     }
 
     /**

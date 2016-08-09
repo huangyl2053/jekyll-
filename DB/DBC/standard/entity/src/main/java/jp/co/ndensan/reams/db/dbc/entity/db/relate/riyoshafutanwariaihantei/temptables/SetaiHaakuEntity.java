@@ -26,6 +26,7 @@ public class SetaiHaakuEntity implements IDbAccessable {
     private ShikibetsuCode shikibetsuCode1;
     private ShikibetsuCode shikibetsuCode2;
     private FlexibleDate kijunYMD;
+    private FlexibleDate kijunYMD2;
     private FlexibleYear shotokuNendo;
     private RString jushochiTokureiFlag;
 

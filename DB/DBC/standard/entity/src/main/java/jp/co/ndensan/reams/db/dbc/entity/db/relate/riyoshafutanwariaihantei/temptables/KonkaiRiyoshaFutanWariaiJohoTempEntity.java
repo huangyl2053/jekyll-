@@ -18,7 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KonkaiRiyoshaFutanWariaiJohoTempEntity extends DbTableEntityBase<KonkaiRiyoshaFutanWariaiJohoTempEntity> implements IDbAccessable {
+public class KonkaiRiyoshaFutanWariaiJohoTempEntity
+        extends DbTableEntityBase<KonkaiRiyoshaFutanWariaiJohoTempEntity> implements IDbAccessable {
 
     @TempTableColumnOrder(1)
     //年度

@@ -43,6 +43,7 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
     private static final String 事務局_主治医意見書 = "jimuIkensho";
     private static final String 事務局_概況特記一覧表 = "jimuGaikyouTokkiIran";
     private static final String 事務局_一次判定結果 = "jimuItiziHantei";
+    private static final String 事務局_特記事項_一次判定結果 = "jimuTokkiJikouItiziHantei";
     private static final String 事務局_特記事項 = "jimuTokkiJikou";
     private static final String 事務局_概況特記 = "jimuTokkiIran";
     private static final RString 選択 = new RString("1");
@@ -73,6 +74,9 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
         }
         if (選択.equals(getParameter().getChoyoJimu_taishoushaFalg())) {
             executeStep(事務局_特記事項);
+        }
+        if (選択.equals(getParameter().getChoyoJimu_tokkiJikouHanteiFalg())) {
+            executeStep(事務局_特記事項_一次判定結果);
         }
         if (作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
             executeStep(事務局_追加資料鑑);
@@ -174,15 +178,8 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
      */
     @Step(事務局_一次判定結果)
     protected IBatchFlowCommand createJimuItiziHanteiData() {
-        if (選択.equals(getParameter().getShuturyokuSutairu())) {
-            return loopBatch(JimuItiziHanteiDataSakuseiA4Process.class)
-                    .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
-        } else {
-            loopBatch(JimuItiziHanteiDataSakuseiA3Process.class)
-                    .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
-            return loopBatch(JimuTokkiJikouDataSakuseiA3Process.class)
-                    .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
-        }
+        return loopBatch(JimuItiziHanteiDataSakuseiA4Process.class)
+                .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
     }
 
     /**
@@ -195,6 +192,19 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
         loopBatch(JimuGaikyotokkiDataSakuseiA4Process.class)
                 .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
         return loopBatch(JimuGaikyotokkiSonotaJohoDataSakuseiA4Process.class)
+                .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
+    }
+
+    /**
+     * 事務局概況特記情報データの作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(事務局_特記事項_一次判定結果)
+    protected IBatchFlowCommand createJimuTokkiJikouItiziHanteiData() {
+        loopBatch(JimuItiziHanteiDataSakuseiA3Process.class)
+                .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
+        return loopBatch(JimuTokkiJikouDataSakuseiA3Process.class)
                 .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
     }
 

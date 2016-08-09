@@ -130,7 +130,7 @@ public class FutanWariaiShoRenchoYokoOutputProcess extends BatchProcessBase<Riyo
         );
         OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem)
                 .print();
-        if (!帳票制御共通.is代行プリント有無() && ZERO.equals(parameter.get出力対象()) && あり.equals(csv出力Flag)) {
+        if (帳票制御共通.is代行プリント有無() && ZERO.equals(parameter.get出力対象()) && あり.equals(csv出力Flag)) {
             List<RString> 帳票名 = new ArrayList<>();
             帳票名.add(利用者負担割合証);
             List<Decimal> ページ数 = new ArrayList<>();

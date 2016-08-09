@@ -98,8 +98,8 @@ public class ShinsakaiJizenshinsakekkaIchiranProcess extends BatchProcessBase<Sh
     @Override
     protected void process(ShinsakaiJizenshinsakekkaIchiranRelateEntity 審査会対象者情報) {
         ShinsakaiJizenshinsakekkaIchiranEntity entity = new ShinsakaiJizenshinsakekkaIchiranEntity(
-                new RString(審査会情報.get(ZERO).getGogitaiNo()),
-                審査会情報.get(ZERO).getShinsakaiKaisaiNo().substring(審査会情報.get(ZERO).getShinsakaiKaisaiNo().length() - YON),
+                set合議体番号(),
+                set介護認定審査会開催番号(),
                 dateFormat(),
                 get審査員(ZERO).getShinsakaiIinShimei(),
                 get審査員(ITI).getShinsakaiIinShimei(),
@@ -157,6 +157,22 @@ public class ShinsakaiJizenshinsakekkaIchiranProcess extends BatchProcessBase<Sh
         OutputJokenhyoFactory.createInstance(item).print();
     }
 
+    private RString set合議体番号() {
+        if (審査会情報.size() == ZERO) {
+            return RString.EMPTY;
+        } else {
+            return new RString(審査会情報.get(ZERO).getGogitaiNo());
+        }
+    }
+
+    private RString set介護認定審査会開催番号() {
+        if (審査会情報.size() == ZERO) {
+            return RString.EMPTY;
+        } else {
+            return 審査会情報.get(ZERO).getShinsakaiKaisaiNo().substring(審査会情報.get(ZERO).getShinsakaiKaisaiNo().length() - YON);
+        }
+    }
+
     private RString set特定疾病(RString 特定疾病) {
         if (!RString.isNullOrEmpty(特定疾病)) {
             return NULLNONE;
@@ -204,9 +220,8 @@ public class ShinsakaiJizenshinsakekkaIchiranProcess extends BatchProcessBase<Sh
         }
         if (コード09A.equals(厚労省IF識別コード) || コード09B.equals(厚労省IF識別コード)) {
             return YokaigoJotaiKubun09.toValue(二次判定要介護状態区分コード).get略称();
-        } else {
-            return RString.EMPTY;
         }
+        return RString.EMPTY;
     }
 
     private RString set一次判定結果(RString 要介護認定一次判定結果コード, RString 厚労省IF識別コード) {
@@ -224,9 +239,8 @@ public class ShinsakaiJizenshinsakekkaIchiranProcess extends BatchProcessBase<Sh
         }
         if (コード09A.equals(厚労省IF識別コード) || コード09B.equals(厚労省IF識別コード)) {
             return YokaigoJotaiKubun09.toValue(要介護認定一次判定結果コード).get名称();
-        } else {
-            return RString.EMPTY;
         }
+        return RString.EMPTY;
     }
 
     private RString set区分(ShinsakaiJizenshinsakekkaIchiranRelateEntity 審査会対象者情報) {
@@ -264,8 +278,7 @@ public class ShinsakaiJizenshinsakekkaIchiranProcess extends BatchProcessBase<Sh
         }
         if (審査員名.size() > YON && 審査員フラグ == YON) {
             return 審査員名.get(審査員フラグ);
-        } else {
-            return new JizenShinsaKekkaRelateEntity();
         }
+        return new JizenShinsaKekkaRelateEntity();
     }
 }
