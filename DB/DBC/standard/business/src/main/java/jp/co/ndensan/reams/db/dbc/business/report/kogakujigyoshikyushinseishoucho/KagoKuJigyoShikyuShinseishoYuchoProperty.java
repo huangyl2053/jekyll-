@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- * 過誤決定通知書情報取込一覧表（公費負担者分）帳票のプロパティです。
+ * 帳票設計_DBC100071_介護保険高額総合事業サービス費支給申請書（ゆうちょ銀行）のプロパティです。
  *
- * @reamsid_L DBC-0980-510 surun
+ * @reamsid_L DBC-4770-090 jianglaisheng
  */
 @lombok.Getter
 @lombok.Setter

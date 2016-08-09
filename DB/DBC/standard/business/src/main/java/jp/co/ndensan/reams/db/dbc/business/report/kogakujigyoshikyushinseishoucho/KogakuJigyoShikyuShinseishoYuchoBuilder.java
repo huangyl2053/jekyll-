@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 帳票設計_DBC100071_介護保険高額総合事業サービス費支給申請書（ゆうちょ銀行）Builder
  *
- * @reamsid_L DBC-4770-090 lifei
+ * @reamsid_L DBC-4770-090 jianglaisheng
  */
 public class KogakuJigyoShikyuShinseishoYuchoBuilder implements IKogakuJigyoShikyuShinseishoYuchoBuilder {
 
