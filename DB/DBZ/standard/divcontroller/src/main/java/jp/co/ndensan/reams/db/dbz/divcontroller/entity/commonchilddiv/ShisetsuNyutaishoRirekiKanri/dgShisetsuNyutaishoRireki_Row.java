@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuN
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jun 14 11:21:55 CST 2016 
+ * Tue Aug 09 16:17:06 JST 2016 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 
 public class dgShisetsuNyutaishoRireki_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
 
     private RString state;
     private TextBoxFlexibleDate nyushoDate;
@@ -33,6 +33,7 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
     private RString shisetsuShuruiKey;
     private RString shisetsuShurui;
     private RString rirekiNo;
+    private RString txtTenshutsusakiHokenshaBango;
 
     public dgShisetsuNyutaishoRireki_Row() {
         super();
@@ -47,6 +48,7 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
         this.shisetsuShuruiKey = RString.EMPTY;
         this.shisetsuShurui = RString.EMPTY;
         this.rirekiNo = RString.EMPTY;
+        this.txtTenshutsusakiHokenshaBango = RString.EMPTY;
         this.setOriginalData("state", state);
         this.setOriginalData("nyushoDate", nyushoDate);
         this.setOriginalData("taishoDate", taishoDate);
@@ -58,9 +60,10 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
         this.setOriginalData("shisetsuShuruiKey", shisetsuShuruiKey);
         this.setOriginalData("shisetsuShurui", shisetsuShurui);
         this.setOriginalData("rirekiNo", rirekiNo);
+        this.setOriginalData("txtTenshutsusakiHokenshaBango", txtTenshutsusakiHokenshaBango);
     }
 
-    public dgShisetsuNyutaishoRireki_Row(RString state, TextBoxFlexibleDate nyushoDate, TextBoxFlexibleDate taishoDate, RString shisetsuCode, RString shisetsuMeisho, RString shisetsu, RString daichoShubetsuKey, RString daichoShubetsu, RString shisetsuShuruiKey, RString shisetsuShurui, RString rirekiNo) {
+    public dgShisetsuNyutaishoRireki_Row(RString state, TextBoxFlexibleDate nyushoDate, TextBoxFlexibleDate taishoDate, RString shisetsuCode, RString shisetsuMeisho, RString shisetsu, RString daichoShubetsuKey, RString daichoShubetsu, RString shisetsuShuruiKey, RString shisetsuShurui, RString rirekiNo, RString txtTenshutsusakiHokenshaBango) {
         super();
         this.setOriginalData("state", state);
         this.setOriginalData("nyushoDate", nyushoDate);
@@ -73,6 +76,7 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
         this.setOriginalData("shisetsuShuruiKey", shisetsuShuruiKey);
         this.setOriginalData("shisetsuShurui", shisetsuShurui);
         this.setOriginalData("rirekiNo", rirekiNo);
+        this.setOriginalData("txtTenshutsusakiHokenshaBango", txtTenshutsusakiHokenshaBango);
         this.state = state;
         this.nyushoDate = nyushoDate;
         this.taishoDate = taishoDate;
@@ -84,6 +88,7 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
         this.shisetsuShuruiKey = shisetsuShuruiKey;
         this.shisetsuShurui = shisetsuShurui;
         this.rirekiNo = rirekiNo;
+        this.txtTenshutsusakiHokenshaBango = txtTenshutsusakiHokenshaBango;
     }
 
     public RString getState() {
@@ -128,6 +133,10 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
 
     public RString getRirekiNo() {
         return rirekiNo;
+    }
+
+    public RString getTxtTenshutsusakiHokenshaBango() {
+        return txtTenshutsusakiHokenshaBango;
     }
 
     public void setState(RString state) {
@@ -183,6 +192,11 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
     public void setRirekiNo(RString rirekiNo) {
         this.setOriginalData("rirekiNo", rirekiNo);
         this.rirekiNo = rirekiNo;
+    }
+
+    public void setTxtTenshutsusakiHokenshaBango(RString txtTenshutsusakiHokenshaBango) {
+        this.setOriginalData("txtTenshutsusakiHokenshaBango", txtTenshutsusakiHokenshaBango);
+        this.txtTenshutsusakiHokenshaBango = txtTenshutsusakiHokenshaBango;
     }
 
     // </editor-fold>

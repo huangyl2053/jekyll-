@@ -4,9 +4,10 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuN
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 import java.util.HashSet;
@@ -24,8 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
  * @reamsid_L DBA-0360-030 linghuhang
  */
 public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuNyutaishoRirekiKanriDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -205,7 +205,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
             DataGridHeight[] enumArray = DataGridHeight.values();
 
             for (DataGridHeight enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -220,11 +220,11 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     }
 
     public DataGridHeight getMode_DataGridHeight() {
-        return (DataGridHeight) _CommonChildDivModeUtil.getMode(this.modes, DataGridHeight.class);
+        return (DataGridHeight) _CommonChildDivModeUtil.getMode( this.modes, DataGridHeight.class );
     }
 
-    public void setMode_DataGridHeight(DataGridHeight value) {
-        _CommonChildDivModeUtil.setMode(this.modes, DataGridHeight.class, value);
+    public void setMode_DataGridHeight( DataGridHeight value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, DataGridHeight.class , value );
     }
 
     public static enum DataGridWidth implements ICommonChildDivMode {
@@ -245,7 +245,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
             DataGridWidth[] enumArray = DataGridWidth.values();
 
             for (DataGridWidth enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -260,11 +260,11 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     }
 
     public DataGridWidth getMode_DataGridWidth() {
-        return (DataGridWidth) _CommonChildDivModeUtil.getMode(this.modes, DataGridWidth.class);
+        return (DataGridWidth) _CommonChildDivModeUtil.getMode( this.modes, DataGridWidth.class );
     }
 
-    public void setMode_DataGridWidth(DataGridWidth value) {
-        _CommonChildDivModeUtil.setMode(this.modes, DataGridWidth.class, value);
+    public void setMode_DataGridWidth( DataGridWidth value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, DataGridWidth.class , value );
     }
 
     public static enum DisplayMode implements ICommonChildDivMode {
@@ -284,7 +284,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
             DisplayMode[] enumArray = DisplayMode.values();
 
             for (DisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -299,11 +299,11 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     }
 
     public DisplayMode getMode_DisplayMode() {
-        return (DisplayMode) _CommonChildDivModeUtil.getMode(this.modes, DisplayMode.class);
+        return (DisplayMode) _CommonChildDivModeUtil.getMode( this.modes, DisplayMode.class );
     }
 
-    public void setMode_DisplayMode(DisplayMode value) {
-        _CommonChildDivModeUtil.setMode(this.modes, DisplayMode.class, value);
+    public void setMode_DisplayMode( DisplayMode value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, DisplayMode.class , value );
     }
 
     public static enum MeisaiMode implements ICommonChildDivMode {
@@ -323,7 +323,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
             MeisaiMode[] enumArray = MeisaiMode.values();
 
             for (MeisaiMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -338,11 +338,11 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     }
 
     public MeisaiMode getMode_MeisaiMode() {
-        return (MeisaiMode) _CommonChildDivModeUtil.getMode(this.modes, MeisaiMode.class);
+        return (MeisaiMode) _CommonChildDivModeUtil.getMode( this.modes, MeisaiMode.class );
     }
 
-    public void setMode_MeisaiMode(MeisaiMode value) {
-        _CommonChildDivModeUtil.setMode(this.modes, MeisaiMode.class, value);
+    public void setMode_MeisaiMode( MeisaiMode value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, MeisaiMode.class , value );
     }
 
     public static enum Riyou implements ICommonChildDivMode {
@@ -363,7 +363,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
             Riyou[] enumArray = Riyou.values();
 
             for (Riyou enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -378,11 +378,44 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     }
 
     public Riyou getMode_Riyou() {
-        return (Riyou) _CommonChildDivModeUtil.getMode(this.modes, Riyou.class);
+        return (Riyou) _CommonChildDivModeUtil.getMode( this.modes, Riyou.class );
     }
 
-    public void setMode_Riyou(Riyou value) {
-        _CommonChildDivModeUtil.setMode(this.modes, Riyou.class, value);
+    public void setMode_Riyou( Riyou value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, Riyou.class , value );
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public TextBox getTxtHokensha() {
+        return this.getShisetsuNyutaishoInput().getTenshutsusakiJohoPanel().getTxtHokensha();
+    }
+
+    @JsonIgnore
+    public void  setTxtHokensha(TextBox txtHokensha) {
+        this.getShisetsuNyutaishoInput().getTenshutsusakiJohoPanel().setTxtHokensha(txtHokensha);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnHokenshaKensaku() {
+        return this.getShisetsuNyutaishoInput().getTenshutsusakiJohoPanel().getBtnHokenshaKensaku();
+    }
+
+    @JsonIgnore
+    public void  setBtnHokenshaKensaku(ButtonDialog btnHokenshaKensaku) {
+        this.getShisetsuNyutaishoInput().getTenshutsusakiJohoPanel().setBtnHokenshaKensaku(btnHokenshaKensaku);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtHokensyaMeisho() {
+        return this.getShisetsuNyutaishoInput().getTenshutsusakiJohoPanel().getTxtHokensyaMeisho();
+    }
+
+    @JsonIgnore
+    public void  setTxtHokensyaMeisho(TextBox txtHokensyaMeisho) {
+        this.getShisetsuNyutaishoInput().getTenshutsusakiJohoPanel().setTxtHokensyaMeisho(txtHokensyaMeisho);
     }
 
     // </editor-fold>

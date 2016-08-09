@@ -25,6 +25,14 @@ module DBZ {
                 return "onSelectByDeleteButton_dgShisetsuNyutaishoRireki";
             }
 
+            public static onBlur_nyuryokuHokensyaCode(): string {
+                return "onBlur_nyuryokuHokensyaCode";
+            }
+
+            public static onClick_BtnHokenshaInputGuide(): string {
+                return "onClick_BtnHokenshaInputGuide";
+            }
+
             public static onClick_btnShisetsuNyutaishoKakutei(): string {
                 return "onClick_btnShisetsuNyutaishoKakutei";
             }
@@ -80,6 +88,22 @@ module DBZ {
 
             public ccdShisetsuJoho(): DBZ.ShisetsuJohoCommonChildDiv.ModeController {
                 return new DBZ.ShisetsuJohoCommonChildDiv.ModeController(this.convFiledName("ccdShisetsuJoho"));
+            }
+
+            public TenshutsusakiJohoPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("TenshutsusakiJohoPanel"));
+            }
+
+            public txtHokensha(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtHokensha"));
+            }
+
+            public btnHokenshaKensaku(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnHokenshaKensaku"));
+            }
+
+            public txtHokensyaMeisho(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtHokensyaMeisho"));
             }
 
             public btnShisetsuNyutaishoKakutei(): UZA.Button {
