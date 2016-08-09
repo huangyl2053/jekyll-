@@ -228,15 +228,13 @@ public class HonsanteiIdoGennendo {
      * @return ShoriDateKanri
      */
     public ShoriDateKanri getChushutsuKaishiNichiji(FlexibleYear 調定年度) {
-        DbT7022ShoriDateKanriEntity kanriEntity;
-        kanriEntity = 処理日付管理Dac.selectByFourKeys(SubGyomuCode.DBB介護賦課,
+        List<DbT7022ShoriDateKanriEntity> kanriEntityList = new ArrayList<>();
+        DbT7022ShoriDateKanriEntity kanriEntity = 処理日付管理Dac.selectByFourKeys(SubGyomuCode.DBB介護賦課,
                 ShoriName.異動賦課.get名称(), 処理_枝番, 調定年度);
         if (kanriEntity == null) {
-            kanriEntity = 処理日付管理Dac.selectBySomeKeysLimits(SubGyomuCode.DBB介護賦課,
-                    ShoriName.本算定賦課.get名称(), 処理_枝番,
-                    調定年度, 処理_枝番);
+            kanriEntityList = 処理日付管理Dac.selectBySomeKeys(SubGyomuCode.DBB介護賦課, ShoriName.本算定賦課.get名称(), 処理_枝番, 調定年度, 処理_枝番);
         }
-        return new ShoriDateKanri(kanriEntity);
+        return new ShoriDateKanri(kanriEntityList.get(0));
     }
 
     /**

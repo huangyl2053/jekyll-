@@ -51,6 +51,7 @@ public class ShoriDateKanriManager {
     ShoriDateKanriManager(DbT7022ShoriDateKanriDac dac) {
         this.dac = dac;
     }
+
     /**
      * 主キーに合致する処理日付管理マスタを返します。
      *
@@ -146,18 +147,18 @@ public class ShoriDateKanriManager {
         requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(年度メッセージ.toString()));
         requireNonNull(年度内連番, UrSystemErrorMessages.値がnull.getReplacedMessage(年度内連番メッセージ.toString()));
 
-        DbT7022ShoriDateKanriEntity entity = dac.selectBySomeKeysLimits(
+        List<DbT7022ShoriDateKanriEntity> entityList = dac.selectBySomeKeys(
                 サブ業務コード,
                 処理名,
                 処理枝番,
                 年度,
                 年度内連番);
-        if (entity == null) {
+        if (entityList.isEmpty()) {
             return null;
         }
 
-        entity.initializeMd5();
-        return new ShoriDateKanri(entity);
+        entityList.get(0).initializeMd5();
+        return new ShoriDateKanri(entityList.get(0));
     }
 
     /**

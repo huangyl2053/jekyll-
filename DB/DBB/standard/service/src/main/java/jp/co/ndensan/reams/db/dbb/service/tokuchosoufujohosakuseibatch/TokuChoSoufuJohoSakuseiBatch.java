@@ -115,8 +115,7 @@ public class TokuChoSoufuJohoSakuseiBatch {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiBatch}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiBatch}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiBatch}のインスタンス
      */
     public static TokuChoSoufuJohoSakuseiBatch createInstance() {
         return InstanceProvider.create(TokuChoSoufuJohoSakuseiBatch.class);
@@ -505,22 +504,20 @@ public class TokuChoSoufuJohoSakuseiBatch {
             年度内年番 = RS0006;
             処理名 = 依頼金額計算;
         }
-        DbT7022ShoriDateKanriEntity shoridatekanrientity = 処理日付管理マスタdac.selectBySomeKeysLimits(
+        List<DbT7022ShoriDateKanriEntity> shoridatekanrientityList = 処理日付管理マスタdac.selectBySomeKeys(
                 SubGyomuCode.DBB介護賦課, 処理名, RS0001, 年度, 年度内年番);
-        if (shoridatekanrientity == null) {
+        if (shoridatekanrientityList.isEmpty()) {
             return null;
         } else {
-            return shoridatekanrientity.getKijunTimestamp();
+            return shoridatekanrientityList.get(0).getKijunTimestamp();
         }
     }
 
     /**
      * Entity転換のメソドです。
      *
-     * @param entity
-     * jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
-     * @return
-     * jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
+     * @param entity jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
+     * @return jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
      */
     public jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity entityCopy(
             UeT0511NenkinTokuchoKaifuJohoEntity entity) {
@@ -599,10 +596,8 @@ public class TokuChoSoufuJohoSakuseiBatch {
     /**
      * Entity転換のメソドです。
      *
-     * @param entity
-     * jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
-     * @return
-     * jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
+     * @param entity jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
+     * @return jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
      */
     public UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity entityCopy(
             jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity entity) {

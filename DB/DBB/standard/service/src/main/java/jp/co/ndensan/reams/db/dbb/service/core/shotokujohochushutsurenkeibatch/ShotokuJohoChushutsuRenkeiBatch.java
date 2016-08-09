@@ -364,22 +364,22 @@ public class ShotokuJohoChushutsuRenkeiBatch {
         for (DbtKaigoShotokuTempEntity entity : shichosonList) {
             entity.get市町村識別ID();
             if (当初_広域.equals(処理区分)) {
-                DbT7022ShoriDateKanriEntity 当初_広域処理日付管理Entity = 処理日付管理dac.selectBySomeKeysLimits(
+                List<DbT7022ShoriDateKanriEntity> 当初_広域処理日付管理EntityList = 処理日付管理dac.selectBySomeKeys(
                         SubGyomuCode.DBB介護賦課, ShoriName.当初所得引出.get名称(), new RString(
                                 String.format(FORMAT_補00.toString(), entity.get市町村識別ID())), 処理年度, 年度内連番);
-                当初_広域処理日付管理Entity.setKijunTimestamp(バッチ起動処理日時);
-                当初_広域処理日付管理Entity.setTaishoShuryoTimestamp(バッチ起動処理日時);
-                当初_広域処理日付管理Entity.setState(EntityDataState.Modified);
-                処理日付管理dac.save(当初_広域処理日付管理Entity);
+                当初_広域処理日付管理EntityList.get(0).setKijunTimestamp(バッチ起動処理日時);
+                当初_広域処理日付管理EntityList.get(0).setTaishoShuryoTimestamp(バッチ起動処理日時);
+                当初_広域処理日付管理EntityList.get(0).setState(EntityDataState.Modified);
+                処理日付管理dac.save(当初_広域処理日付管理EntityList.get(0));
             }
             if (当初_単一.equals(処理区分)) {
-                DbT7022ShoriDateKanriEntity 当初_単一処理日付管理Entity = 処理日付管理dac
-                        .selectBySomeKeysLimits(SubGyomuCode.DBB介護賦課, ShoriName.当初所得引出.get名称(),
+                List<DbT7022ShoriDateKanriEntity> 当初_単一処理日付管理EntityList = 処理日付管理dac
+                        .selectBySomeKeys(SubGyomuCode.DBB介護賦課, ShoriName.当初所得引出.get名称(),
                                 処理枝番, 処理年度, 年度内連番);
-                当初_単一処理日付管理Entity.setKijunTimestamp(バッチ起動処理日時);
-                当初_単一処理日付管理Entity.setTaishoShuryoTimestamp(バッチ起動処理日時);
-                当初_単一処理日付管理Entity.setState(EntityDataState.Modified);
-                処理日付管理dac.save(当初_単一処理日付管理Entity);
+                当初_単一処理日付管理EntityList.get(0).setKijunTimestamp(バッチ起動処理日時);
+                当初_単一処理日付管理EntityList.get(0).setTaishoShuryoTimestamp(バッチ起動処理日時);
+                当初_単一処理日付管理EntityList.get(0).setState(EntityDataState.Modified);
+                処理日付管理dac.save(当初_単一処理日付管理EntityList.get(0));
             }
             if (異動_広域.equals(処理区分)) {
                 異動_広域場合Handle(entity, 処理区分, 処理年度, バッチ起動処理日時);
