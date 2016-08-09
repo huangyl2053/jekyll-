@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 汎用リスト出力(事業対象者)のRelateEntityクラスです。
  *
- * @reamsid_L DBD-5520-030 mawy
+ * @reamsid_L DBD-5080-030 mawy
  */
 @lombok.Getter
 @lombok.Setter

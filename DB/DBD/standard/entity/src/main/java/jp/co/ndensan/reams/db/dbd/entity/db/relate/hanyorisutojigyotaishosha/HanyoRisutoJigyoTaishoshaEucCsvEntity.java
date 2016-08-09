@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 汎用リスト出力(事業対象者)CSV用データEntity。
  *
- * @reamsid_L DBD-3900-030 mawy
+ * @reamsid_L DBD-5080-030 mawy
  */
 @lombok.Getter
 @lombok.Setter
