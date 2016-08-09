@@ -47,6 +47,7 @@ public class JimuGaikyouTokkiIranDataSakuseiImgA4Process extends BatchProcessBas
     private JimuGaikyoTokkiMyBatisParameter myBatisParameter;
     private List<ImjJohoEntity> 概況特記イメージ情報;
     private JimuGaikyouTokkiBusiness business;
+    private int no;
     @BatchWriter
     private BatchReportWriter<GaikyoTokkiIchiranReportSource> batchWriteA4;
     private ReportSourceWriter<GaikyoTokkiIchiranReportSource> reportSourceWriterA4;
@@ -59,6 +60,7 @@ public class JimuGaikyouTokkiIranDataSakuseiImgA4Process extends BatchProcessBas
         myBatisParameter.setImageKubun(TokkijikoTextImageKubun.テキスト.getコード());
         myBatisParameter.setGenponKubun(TokkijikoTextImageKubun.イメージ.getコード());
         概況特記イメージ情報 = mapper.getJimuImjJoho(myBatisParameter);
+        no = 0;
     }
 
     @Override
@@ -69,9 +71,10 @@ public class JimuGaikyouTokkiIranDataSakuseiImgA4Process extends BatchProcessBas
     @Override
     protected void process(GaikyoTokkiEntity entity) {
         entity.setJimukyoku(true);
-        business = new JimuGaikyouTokkiBusiness(entity, null, 概況特記イメージ情報, paramter);
+        business = new JimuGaikyouTokkiBusiness(entity, null, 概況特記イメージ情報, paramter, no);
         GaikyoTokkiIchiranReport report = new GaikyoTokkiIchiranReport(business);
         report.writeBy(reportSourceWriterA4);
+        no = no + 1;
     }
 
     @Override
