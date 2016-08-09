@@ -187,7 +187,7 @@ public class JimuGaikyouTokkiBusiness {
      * @return 概況特記イメージ１
      */
     public RString get概況特記イメージ１() {
-        return get概況特記イメージ(INT_1);
+        return get概況特記イメージ(INT_0);
     }
 
     /**
@@ -196,7 +196,7 @@ public class JimuGaikyouTokkiBusiness {
      * @return 概況特記イメージ２
      */
     public RString get概況特記イメージ２() {
-        return get概況特記イメージ(INT_2);
+        return get概況特記イメージ(INT_1);
     }
 
     /**
@@ -205,7 +205,7 @@ public class JimuGaikyouTokkiBusiness {
      * @return 概況特記イメージ３
      */
     public RString get概況特記イメージ３() {
-        return get概況特記イメージ(INT_3);
+        return get概況特記イメージ(INT_2);
     }
 
     /**
@@ -214,7 +214,7 @@ public class JimuGaikyouTokkiBusiness {
      * @return 概況特記イメージ４
      */
     public RString get概況特記イメージ４() {
-        return get概況特記イメージ(INT_4);
+        return get概況特記イメージ(INT_3);
     }
 
     /**
@@ -223,7 +223,7 @@ public class JimuGaikyouTokkiBusiness {
      * @return 概況特記イメージ５
      */
     public RString get概況特記イメージ５() {
-        return get概況特記イメージ(INT_5);
+        return get概況特記イメージ(INT_4);
     }
 
     /**
@@ -232,7 +232,7 @@ public class JimuGaikyouTokkiBusiness {
      * @return 概況特記イメージ６
      */
     public RString get概況特記イメージ６() {
-        return get概況特記イメージ(INT_6);
+        return get概況特記イメージ(INT_5);
     }
 
     /**
@@ -241,7 +241,7 @@ public class JimuGaikyouTokkiBusiness {
      * @return 概況特記イメージ７
      */
     public RString get概況特記イメージ７() {
-        return get概況特記イメージ(INT_7);
+        return get概況特記イメージ(INT_6);
     }
 
     /**
@@ -250,7 +250,7 @@ public class JimuGaikyouTokkiBusiness {
      * @return 概況特記イメージ８
      */
     public RString get概況特記イメージ８() {
-        return get概況特記イメージ(INT_8);
+        return get概況特記イメージ(INT_7);
     }
 
     /**
@@ -259,7 +259,7 @@ public class JimuGaikyouTokkiBusiness {
      * @return 概況特記イメージ９
      */
     public RString get概況特記イメージ９() {
-        return get概況特記イメージ(INT_9);
+        return get概況特記イメージ(INT_8);
     }
 
     /**
@@ -268,7 +268,7 @@ public class JimuGaikyouTokkiBusiness {
      * @return 概況特記イメージ１０
      */
     public RString get概況特記イメージ１０() {
-        return get概況特記イメージ(INT_0);
+        return get概況特記イメージ(INT_9);
     }
 
     private RString get概況特記テキスト(int index) {
