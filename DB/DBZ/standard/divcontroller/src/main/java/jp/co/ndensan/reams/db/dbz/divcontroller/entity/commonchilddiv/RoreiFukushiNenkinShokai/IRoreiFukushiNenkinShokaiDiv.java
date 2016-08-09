@@ -28,6 +28,7 @@ public interface IRoreiFukushiNenkinShokaiDiv extends ICommonChildDivBasePropert
      * 老福年金情報を取得します。
      *
      * @return List<datagridRireki_Row>
+     * @deprecated オブジェクト指向を知らない人が実装したメソッドです。
      */
     public List<datagridRireki_Row> getDataGridList();
 
@@ -37,4 +38,11 @@ public interface IRoreiFukushiNenkinShokaiDiv extends ICommonChildDivBasePropert
      * @return 保存可能ならtrue
      */
     public boolean isSavable();
+
+    /**
+     * 変更がある場合は{@code true}、無い場合は{@code false}を返却します。
+     *
+     * @return 変更がある場合は{@code true}、無い場合は{@code false}.
+     */
+    public boolean hasChanged();
 }

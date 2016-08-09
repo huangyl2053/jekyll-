@@ -15,16 +15,15 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001.dgSh
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -49,8 +48,8 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
 
     private enum KensakuHoho {
 
-        被保険者から検索する場合(DATE_SOURCE_KEY0, "484px"),
-        進捗状況から検索する場合(DATE_SOURCE_KEY1, "359px");
+        被保険者から検索する場合(DATE_SOURCE_KEY0, "330px"),
+        進捗状況から検索する場合(DATE_SOURCE_KEY1, "330px");
 
         private final RString key;
         private final RString dgShinseiJohoHeigh;
@@ -77,6 +76,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
     public void onload() {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getRadKensakuHoho().setSelectedKey(KensakuHoho.被保険者から検索する場合.key);
+        div.getShinseiJohoIchiran().setIsOpen(false);
         div.getDgShinseiJoho().setHeight(KensakuHoho.被保険者から検索する場合.dgShinseiJohoHeigh);
         div.getDdlNameMatchType().setSelectedKey(DATE_SOURCE_KEY0);
         div.getRadHizukeHani().setSelectedKey(DATE_SOURCE_KEY0);
@@ -99,15 +99,26 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
      * 検索する場合、選択変更します。
      */
     public void radKensakuHohoChange() {
-        if (KensakuHoho.被保険者から検索する場合.key.equals(div.getRadKensakuHoho().getSelectedKey())) {
-            div.getSerchFromHohokensha().setDisplayNone(false);
-            div.getSerchFromShinchokuJokyo().setDisplayNone(true);
-            div.getDgShinseiJoho().setHeight(KensakuHoho.被保険者から検索する場合.dgShinseiJohoHeigh);
-        } else if (KensakuHoho.進捗状況から検索する場合.key.equals(div.getRadKensakuHoho().getSelectedKey())) {
-            div.getSerchFromHohokensha().setDisplayNone(true);
-            div.getSerchFromShinchokuJokyo().setDisplayNone(false);
-            div.getDgShinseiJoho().setHeight(KensakuHoho.進捗状況から検索する場合.dgShinseiJohoHeigh);
+        switch (get検索方法()) {
+            case 進捗状況から検索する場合:
+                div.getSerchFromHohokensha().setDisplayNone(true);
+                div.getSerchFromShinchokuJokyo().setDisplayNone(false);
+                div.getSerchFromShinchokuJokyo().setIsOpen(true);
+                div.getDgShinseiJoho().setHeight(KensakuHoho.進捗状況から検索する場合.dgShinseiJohoHeigh);
+                return;
+            case 被保険者から検索する場合:
+                div.getSerchFromHohokensha().setDisplayNone(false);
+                div.getSerchFromHohokensha().setIsOpen(true);
+                div.getSerchFromShinchokuJokyo().setDisplayNone(true);
+                div.getDgShinseiJoho().setHeight(KensakuHoho.被保険者から検索する場合.dgShinseiJohoHeigh);
         }
+    }
+
+    public KensakuHoho get検索方法() {
+        if (KensakuHoho.進捗状況から検索する場合.key.equals(div.getRadKensakuHoho().getSelectedKey())) {
+            return KensakuHoho.進捗状況から検索する場合;
+        }
+        return KensakuHoho.被保険者から検索する場合;
     }
 
     /**
@@ -276,9 +287,8 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         }
         row.setKaigoNinteiShinsakaiKaisaiNo(nullToEmpty(joho.get介護認定審査会開催番号()));
         row.setKaigoNinteiShinsakaiGogitai(new RString(String.valueOf(joho.get合議体名())));
-        row.setKaigoNinteiShinsakaiYokaigodo((joho.get二次判定要介護状態区分コード() == null || new RString("99")
-                                              .equals(joho.get二次判定要介護状態区分コード())) ? RString.EMPTY : YokaigoJotaiKubun09
-                .toValue(joho.get二次判定要介護状態区分コード()).get名称());
+        IYokaigoJotaiKubun yokaigodo = YokaigoJotaiKubunSupport.toValueOrEmpty(joho.get二次判定要介護状態区分コード());
+        row.setKaigoNinteiShinsakaiYokaigodo(yokaigodo.getCode().equals(new RString("99")) ? RString.EMPTY : yokaigodo.getName());
         row.setHihokenshaYubinNo(new YubinNo(nullToEmpty(joho.get郵便番号())).getEditedYubinNo());
         row.setHihokenshaJusho(nullToEmpty(joho.get住所()));
         row.setHihokenshaSeibetsu(Seibetsu.toValue(joho.get性別()).get名称());
@@ -339,5 +349,10 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         div.getChkShinsakaiJisshi().setSelectedItemsByKey(CHK_BOX_NASI);
         div.getChkKensakuOption().setSelectedItemsByKey(CHK_BOX_NASI);
         init最大表示件数();
+
+        boolean is被保険者から検索 = (get検索方法() == KensakuHoho.被保険者から検索する場合);
+        div.getSerchFromHohokensha().setDisplayNone(is被保険者から検索);
+        div.getSerchFromShinchokuJokyo().setDisplayNone(!is被保険者から検索);
+        div.getShinseiJohoIchiran().setIsOpen(false);
     }
 }

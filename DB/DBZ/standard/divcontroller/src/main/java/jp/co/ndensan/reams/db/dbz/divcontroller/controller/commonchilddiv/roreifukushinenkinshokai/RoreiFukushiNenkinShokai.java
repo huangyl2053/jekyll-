@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.RoreiFukushiNenkinShokai;
+package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.roreifukushinenkinshokai;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyusha;
@@ -86,73 +86,62 @@ public class RoreiFukushiNenkinShokai {
      * @return ResponseData<RoreiFukushiNenkinShokaiDiv> 老齢福祉年金情報Div
      */
     public ResponseData<RoreiFukushiNenkinShokaiDiv> onClick_btnSave(RoreiFukushiNenkinShokaiDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+        if (ResponseHolder.isReRequest()) {
+            if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(
+                    ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                this.applyInputItem(div);
+            }
+            return ResponseData.of(div).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(
-                ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (div.getPanelInput().getTxtStartDate().getValue() != null
-                    && div.getPanelInput().getTxtEndDate().getValue() != null
-                    && !div.getPanelInput().getTxtStartDate().getValue().isBeforeOrEquals(div.getPanelInput().getTxtEndDate().getValue())) {
-                ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-                return ResponseData.of(div).addValidationMessages(getHandler(div).addMessage(validPairs,
-                        div.getPanelInput().getTxtStartDate().getValue().toString(),
-                        div.getPanelInput().getTxtEndDate().getValue().toString())).
-                        respond();
-            }
-            RString イベント状態 = div.getPanelInput().getState();
-            ValidationMessageControlPairs 受給開始日重複チェック = getHandler(div).set受給開始日の重複チェック();
-            if (状態_追加.equals(イベント状態) && 受給開始日重複チェック.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(受給開始日重複チェック).respond();
-            }
-            ValidationMessageControlPairs validPairs = getHandler(div).set受給期間の重複チェック(イベント状態);
-            if (validPairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validPairs).respond();
-            }
-            this.onClick_はい(div);
+
+        ValidationMessageControlPairs pairs = getHandler(div).validate();
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        return ResponseData.of(div).respond();
+        if (状態_追加.equals(div.getPanelInput().getState())) {
+            return this.applyInputItem(div);
+        }
+        return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
     }
 
-    private ResponseData<RoreiFukushiNenkinShokaiDiv> onClick_はい(RoreiFukushiNenkinShokaiDiv div) {
-        RString イベント状態 = div.getPanelInput().getState();
+    private ResponseData<RoreiFukushiNenkinShokaiDiv> applyInputItem(RoreiFukushiNenkinShokaiDiv div) {
+        RString state = div.getPanelInput().getState();
         Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> models
                 = ViewStateHolder.get(ViewStateKeys.老齢福祉年金情報検索結果一覧, Models.class);
-        if (状態_追加.equals(イベント状態)) {
+        boolean hasChanged = true;
+
+        if (状態_追加.equals(state)) {
             RoreiFukushiNenkinJukyusha busiRoreiFukushiNenkin = new RoreiFukushiNenkinJukyusha(
                     new ShikibetsuCode(div.getShikibetsuCode()),
                     new FlexibleDate(div.getPanelInput().getTxtStartDate().getValue().toDateString()));
-            busiRoreiFukushiNenkin = getHandler(div).set年金確定ボタン押下の追加(busiRoreiFukushiNenkin);
+            busiRoreiFukushiNenkin = getHandler(div).set老齢福祉年金確定ボタン押下の追加(busiRoreiFukushiNenkin);
             models.add(busiRoreiFukushiNenkin);
+            hasChanged = true;
         }
-        if (状態_更新.equals(イベント状態)) {
+
+        if (状態_更新.equals(state)) {
             RoreiFukushiNenkinJukyushaIdentifier key = new RoreiFukushiNenkinJukyushaIdentifier(
                     new ShikibetsuCode(div.getShikibetsuCode()),
                     new FlexibleDate(div.getPanelInput().getTxtStartDate().getValue().toString()));
             RoreiFukushiNenkinJukyusha busiRoreiFukushiNenkin
-                    = getHandler(div).set老齢福祉年金確定ボタン押下の更新処理(models.get(key).modifiedModel());
-            models.deleteOrRemove(key);
+                    = getHandler(div).set老齢福祉年金確定ボタン押下の更新処理(models.get(key));
             models.add(busiRoreiFukushiNenkin);
+            hasChanged = busiRoreiFukushiNenkin.isModified();
         }
-        if (状態_削除.equals(イベント状態)
-                && !状態_追加.equals(div.getDatagridRireki().getActiveRow().getJotai())) {
-            RoreiFukushiNenkinJukyushaIdentifier key = new RoreiFukushiNenkinJukyushaIdentifier(
-                    new ShikibetsuCode(div.getShikibetsuCode()),
-                    new FlexibleDate(div.getPanelInput().getTxtStartDate().getValue().toString()));
-            RoreiFukushiNenkinJukyusha roreifukushinenkinjukyusha
-                    = getHandler(div).set老齢福祉年金確定ボタン押下の削除処理(models.get(key).deleted());
-            models.deleteOrRemove(key);
-            models.add(roreifukushinenkinjukyusha);
-        } else if (状態_削除.equals(イベント状態)
-                && 状態_追加.equals(div.getDatagridRireki().getActiveRow().getJotai())) {
+
+        if (状態_削除.equals(state)) {
             RoreiFukushiNenkinJukyushaIdentifier key = new RoreiFukushiNenkinJukyushaIdentifier(
                     new ShikibetsuCode(div.getShikibetsuCode()),
                     new FlexibleDate(div.getPanelInput().getTxtStartDate().getValue().toString()));
             models.deleteOrRemove(key);
+            hasChanged = true;
         }
+
         ViewStateHolder.put(ViewStateKeys.老齢福祉年金情報検索結果一覧, models);
-        getHandler(div).setDatagridRirekichiran(イベント状態);
-        getHandler(div).set確定ボタン画面表示();
+
+        RoreiFukushiNenkinShokaiHandler handler = getHandler(div);
+        handler.setDatagridRirekichiran(state, hasChanged);
+        handler.set確定ボタン画面表示();
         return ResponseData.of(div).respond();
     }
 

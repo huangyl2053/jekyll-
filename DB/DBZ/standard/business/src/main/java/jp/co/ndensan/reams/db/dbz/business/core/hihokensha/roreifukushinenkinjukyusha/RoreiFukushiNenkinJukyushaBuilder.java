@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * {@link RoreiFukushiNenkinJukyusha}の編集を行うビルダークラスです。
+ *
  * @reamsid_L DBA-0220-020 dongyabin
  */
 public class RoreiFukushiNenkinJukyushaBuilder {
@@ -33,7 +34,7 @@ public class RoreiFukushiNenkinJukyushaBuilder {
     ) {
         this.entity = entity.clone();
         this.id = id;
-
+        this.entity.unsetState();
     }
 
     /**
