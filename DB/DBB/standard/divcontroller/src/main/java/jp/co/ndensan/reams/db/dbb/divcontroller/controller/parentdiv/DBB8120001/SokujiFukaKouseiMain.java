@@ -76,15 +76,13 @@ public class SokujiFukaKouseiMain {
     private static final RString DBB_HIHOKENSHANO = new RString("DBBHihokenshaNo");
     private static final RString 翌年度の情報を表示する = new RString("翌年度の情報を表示する");
     private static final RString 前年度の情報を表示する = new RString("前年度の情報を表示する");
-    private static final RString 個人番号_利用有無名称 = new RString("個人番号 利用有無");
-    private static final RString 法人番号_利用有無名称 = new RString("法人番号 利用有無");
     private static final RString 業務固有の識別情報名称 = new RString("業務固有の識別情報");
-    private static final RString 無し = new RString("無し");
     private static final RString 四月一日 = new RString("0401");
     private static final RString チェック済み = new RString("チェック済み");
     private static final RString メニューID_通知書発行後異動把握 = new RString("DBBMN32001");
     private static final RString メニューID_特徴仮算定賦課エラー一覧 = new RString("DBBMN33004");
     private static final RString メニューID_即時賦課更正 = new RString("DBBMN13001");
+    private static final Code CODE_003 = new Code("0003");
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
     private static final int INT_3 = 3;
@@ -131,13 +129,13 @@ public class SokujiFukaKouseiMain {
             if (is更正前と状態変更なし && !ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(DbbInformationMessages.更正前と状態変更なし.getMessage()).respond();
             }
-            if (!is更正前と状態変更なし) {
-                handler.set更正前後賦課のリスト降順(更正前後賦課のリスト);
+            handler.set更正前後賦課のリスト降順(更正前後賦課のリスト);
+            KoseiZengoFuka 更正前後賦課 = get更正前後賦課By通知書番号(更正前後賦課のリスト, 通知書番号);
+            if (!is更正前と状態変更なし && !更正前後賦課のリスト.isEmpty()) {
                 通知書番号選択 = 更正前後賦課のリスト.get(0).get通知書番号();
                 更正前賦課リスト = 更正前後賦課のリスト.get(0).get更正前();
                 更正後賦課リスト = 更正前後賦課のリスト.get(0).get更正後();
-            } else {
-                KoseiZengoFuka 更正前後賦課 = get更正前後賦課By通知書番号(更正前後賦課のリスト, 通知書番号);
+            } else if (is更正前と状態変更なし && 更正前後賦課 != null) {
                 更正前賦課リスト = 更正前後賦課.get更正前();
                 更正後賦課リスト = 更正前後賦課.get更正後();
                 div.setDisabled(true);
@@ -508,7 +506,7 @@ public class SokujiFukaKouseiMain {
             has過年度賦課 = Boolean.TRUE;
         }
         if (過年度5賦課の情報 != null) {
-            年度分賦課リスト.set過年度1(過年度5賦課の情報);
+            年度分賦課リスト.set過年度5(過年度5賦課の情報);
             最新賦課の情報 = 過年度5賦課の情報;
             has過年度賦課 = Boolean.TRUE;
         }
@@ -600,10 +598,8 @@ public class SokujiFukaKouseiMain {
     }
 
     private PersonalData toPersonalData(ShikibetsuCode 識別コード, RString 被保険者番号) {
-        ExpandedInformation expandedInfo1 = new ExpandedInformation(new Code("0001"), 個人番号_利用有無名称, 無し);
-        ExpandedInformation expandedInfo2 = new ExpandedInformation(new Code("0002"), 法人番号_利用有無名称, 無し);
-        ExpandedInformation expandedInfo3 = new ExpandedInformation(new Code("0003"), 業務固有の識別情報名称, 被保険者番号);
-        return PersonalData.of(識別コード, expandedInfo1, expandedInfo2, expandedInfo3);
+        ExpandedInformation expandedInfo = new ExpandedInformation(CODE_003, 業務固有の識別情報名称, 被保険者番号);
+        return PersonalData.withKojinNo(識別コード, expandedInfo);
     }
 
     private boolean is本算定後(NendobunFukaList 更正前賦課リスト) {

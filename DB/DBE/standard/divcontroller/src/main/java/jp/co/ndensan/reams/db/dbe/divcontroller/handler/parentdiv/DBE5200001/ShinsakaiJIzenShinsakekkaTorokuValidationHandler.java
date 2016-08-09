@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5200001;
 import java.io.File;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5200001.ShinsakaiJIzenShinsakekkaTorokuDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5200001.ShinsakaikekkaIchiranInputCsvEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -56,6 +57,33 @@ public class ShinsakaiJIzenShinsakekkaTorokuValidationHandler {
             validationMessages.add(new ValidationMessageControlPair(
                     new ShinsakaiJIzenShinsakekkaTorokuValidationHandler.ValidationCheckMessages(
                             UrErrorMessages.対象ファイルが存在しない, name.toString())));
+        }
+        return validationMessages;
+    }
+
+    /**
+     * ヌルチェック
+     *
+     * @param csvEntityList csvEntityList
+     * @param name 対象ファイルname
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs ヌルチェック_btnGetResult(List<ShinsakaikekkaIchiranInputCsvEntity> csvEntityList, RString name) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (csvEntityList.isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(
+                    new ShinsakaiJIzenShinsakekkaTorokuValidationHandler.ValidationCheckMessages(
+                            UrErrorMessages.対象データなし_追加メッセージあり, name.toString())));
+        } else {
+            for (ShinsakaikekkaIchiranInputCsvEntity csvEntity : csvEntityList) {
+                if (csvEntity.getShinsakaiKaisaiNo().isNullOrEmpty() || csvEntity.getShinsakaiIinCode().isNullOrEmpty()
+                        || csvEntity.getShinsakaiOrder().isNullOrEmpty() || csvEntity.getNijiHanteiKekkaCode().isNullOrEmpty()
+                        || csvEntity.getYukokikan().isNullOrEmpty()) {
+                    validationMessages.add(new ValidationMessageControlPair(
+                            new ShinsakaiJIzenShinsakekkaTorokuValidationHandler.ValidationCheckMessages(
+                                    UrErrorMessages.対象データなし_追加メッセージあり, name.toString())));
+                }
+            }
         }
         return validationMessages;
     }

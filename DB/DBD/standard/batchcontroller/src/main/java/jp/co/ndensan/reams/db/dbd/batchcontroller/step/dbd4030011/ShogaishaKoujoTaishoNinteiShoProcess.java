@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbd.business.report.dbd100025.ShogaishaKojoNinteis
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd4030011.ShogaishakojoTaishoshaListProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100025.NinteishoJohoReportSource;
+import jp.co.ndensan.reams.db.dbd.service.core.ninteishojoho.NinteiShoJohoFinder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -50,6 +51,10 @@ public class ShogaishaKoujoTaishoNinteiShoProcess extends BatchProcessBase<Ninte
 
     @Override
     protected void process(NinteishoJohoBusiness target) {
+
+        NinteiShoJohoFinder finder = NinteiShoJohoFinder.createInstance();
+        target = finder.setTarget(target, parameter, reportSourceWriter);
+
         ShogaishaKojoNinteishoReport report = new ShogaishaKojoNinteishoReport(target);
         report.writeBy(reportSourceWriter);
     }

@@ -50,11 +50,11 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -121,7 +121,7 @@ public class HanyoRisutoRiyoshaFutanWariaiProcess extends BatchProcessBase<Hanyo
     private FileSpoolManager manager;
     private RString eucFilePath;
     private HanyoRisutoRiyoshaFutanWariaiProcessParameter processParamter;
-    private EucCsvWriter<HanyoRisutoRiyoshaFutanWariaiEucCsvEntity> eucCsvWriter;
+    private CsvWriter<HanyoRisutoRiyoshaFutanWariaiEucCsvEntity> eucCsvWriter;
     private Association association;
     private HokenshaList hokenshaList;
     private List<PersonalData> personalDataList;
@@ -154,7 +154,7 @@ public class HanyoRisutoRiyoshaFutanWariaiProcess extends BatchProcessBase<Hanyo
     protected void createWriter() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("UzUDE0831EucAccesslogFileType.csv"));
-        eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.UTF_8withBOM).
@@ -205,6 +205,12 @@ public class HanyoRisutoRiyoshaFutanWariaiProcess extends BatchProcessBase<Hanyo
                 if (出力DB項目.get(index).startsWith(HIHOKENSHANO)) {
                     出力DB項目.add(index + 1, RIREKIBANGO);
                     出力DB項目.add(index + 2, EDANO);
+                }
+            }
+        } else if (!出力DB項目名.contains(HIHOKENSHANO) && 出力DB項目名.contains(RIREKIBANGO) && !出力DB項目名.contains(EDANO)) {
+            for (int index = 0; index < 出力DB項目.size(); index++) {
+                if (出力DB項目.get(index).startsWith(RIREKIBANGO)) {
+                    出力DB項目.add(index + 1, EDANO);
                 }
             }
         } else if (!出力DB項目名.contains(HIHOKENSHANO) && !出力DB項目名.contains(RIREKIBANGO) && !出力DB項目名.contains(EDANO)) {

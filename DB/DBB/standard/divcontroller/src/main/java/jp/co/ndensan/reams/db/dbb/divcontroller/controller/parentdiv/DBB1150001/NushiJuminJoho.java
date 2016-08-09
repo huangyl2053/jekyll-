@@ -227,12 +227,6 @@ public class NushiJuminJoho {
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
-
-//        if (!ResponseHolder.isReRequest()) {
-//            return ResponseData.of(div).addMessage(NushiJuminJohoMessage.確認.createMessage(ButtonSelectPattern.OKCancel,
-//                    "選択された住民の住所情報と異なります。所得照会票を発行しても")).respond();
-//        }
-//        return ResponseData.of(div).respond();
         RString hdnFlag = div.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel()
                 .getSofusakiNyuryokuPanel().getTextNO1().getValue();
         RString flag = div.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel()

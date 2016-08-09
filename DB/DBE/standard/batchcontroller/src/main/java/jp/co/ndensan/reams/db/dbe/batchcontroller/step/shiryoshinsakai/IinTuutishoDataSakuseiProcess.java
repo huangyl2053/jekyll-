@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.report.shinsakaikaisaioshirasetsuchi.ShinsakaiKaisaiOshiraseTsuchiReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTuutishoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTuutishoProcessParameter;
@@ -17,9 +18,11 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinC
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiYoteiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaikaisaioshirasetsuchi.ShinsakaiKaisaiOshiraseTsuchiItem;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaikaisaioshirasetsuchi.ShinsakaiKaisaiOshiraseTsuchiReportSource;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -52,7 +55,7 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
     private static final RString SELECT_IINCODE = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getShinsakaiIinCode");
     private IinTuutishoProcessParameter paramter;
-//    private IShiryoShinsakaiIinMapper mapper;
+    private IShiryoShinsakaiIinMapper mapper;
     private IinTuutishoMyBatisParameter myBatisParameter;
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
             new RString(ShinsakaiKaisaiOshiraseTsuchiReportSource.ReportSourceFields.gogitaiNo.name())));
@@ -65,7 +68,7 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
 
     @Override
     protected void initialize() {
-//        mapper = getMapper(IShiryoShinsakaiIinMapper.class);
+        mapper = getMapper(IShiryoShinsakaiIinMapper.class);
         myBatisParameter = paramter.toIinTuutishoMyBatisParameter();
     }
 
@@ -78,32 +81,32 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
     protected void usualProcess(ShinsakaiIinCodeEntity entity) {
         myBatisParameter.setShinsakaiIinCode(entity.getShinsakaiIinCode());
         通知文設定(new ShinsakaiYoteiJohoEntity(), new PsmJohoEntity());
-//        List<ShinsakaiYoteiJohoEntity> 委員情報 = mapper.getShinsakaiYoteiJoho(myBatisParameter);
-//        DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity dbT5595Entity = mapper.get宛先情報(myBatisParameter);
-//        PsmJohoEntity psmJohoEntity = new PsmJohoEntity();
-//        if (dbT5595Entity != null) {
-//            if (!RString.isNullOrEmpty(dbT5595Entity.getShujiiCode())) {
-//                myBatisParameter.setShujiiIryokikanCode(dbT5595Entity.getShujiiIryokikanCode());
-//                myBatisParameter.setShujiiCode(dbT5595Entity.getShujiiCode());
-//                myBatisParameter.setShoKisaiHokenshaNo(dbT5595Entity.getShoKisaiHokenshaNo());
-//                psmJohoEntity = mapper.get主治医宛名情報(myBatisParameter);
-//            } else if (!RString.isNullOrEmpty(dbT5595Entity.getNinteiChosainNo())) {
-//                myBatisParameter.setNinteiChosaItakusakiCode(dbT5595Entity.getNinteichosaItakusakiCode());
-//                myBatisParameter.setNinteiChosainCode(dbT5595Entity.getNinteiChosainNo());
-//                myBatisParameter.setShoKisaiHokenshaNo(dbT5595Entity.getShoKisaiHokenshaNo());
-//                psmJohoEntity = mapper.get認定調査員宛名情報(myBatisParameter);
-//            } else if (!RString.isNullOrEmpty(dbT5595Entity.getSonotaKikanCode())) {
-//                myBatisParameter.setSonotaKikanCode(dbT5595Entity.getSonotaKikanCode());
-//                myBatisParameter.setShoKisaiHokenshaNo(dbT5595Entity.getShoKisaiHokenshaNo());
-//                psmJohoEntity = mapper.getその他宛名情報(myBatisParameter);
-//            }
-//        }
-//        for (ShinsakaiYoteiJohoEntity 情報 : 委員情報) {
-//            item = new ShinsakaiKaisaiOshiraseTsuchiItem();
-//            通知文設定(情報, psmJohoEntity);
-//            ShinsakaiKaisaiOshiraseTsuchiReport report = new ShinsakaiKaisaiOshiraseTsuchiReport(item);
-//            report.writeBy(reportSourceWriter);
-//        }
+        List<ShinsakaiYoteiJohoEntity> 委員情報 = mapper.getShinsakaiYoteiJoho(myBatisParameter);
+        DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity dbT5595Entity = mapper.get宛先情報(myBatisParameter);
+        PsmJohoEntity psmJohoEntity = new PsmJohoEntity();
+        if (dbT5595Entity != null) {
+            if (!RString.isNullOrEmpty(dbT5595Entity.getShujiiCode())) {
+                myBatisParameter.setShujiiIryokikanCode(dbT5595Entity.getShujiiIryokikanCode());
+                myBatisParameter.setShujiiCode(dbT5595Entity.getShujiiCode());
+                myBatisParameter.setShoKisaiHokenshaNo(dbT5595Entity.getShoKisaiHokenshaNo());
+                psmJohoEntity = mapper.get主治医宛名情報(myBatisParameter);
+            } else if (!RString.isNullOrEmpty(dbT5595Entity.getNinteiChosainNo())) {
+                myBatisParameter.setNinteiChosaItakusakiCode(dbT5595Entity.getNinteichosaItakusakiCode());
+                myBatisParameter.setNinteiChosainCode(dbT5595Entity.getNinteiChosainNo());
+                myBatisParameter.setShoKisaiHokenshaNo(dbT5595Entity.getShoKisaiHokenshaNo());
+                psmJohoEntity = mapper.get認定調査員宛名情報(myBatisParameter);
+            } else if (!RString.isNullOrEmpty(dbT5595Entity.getSonotaKikanCode())) {
+                myBatisParameter.setSonotaKikanCode(dbT5595Entity.getSonotaKikanCode());
+                myBatisParameter.setShoKisaiHokenshaNo(dbT5595Entity.getShoKisaiHokenshaNo());
+                psmJohoEntity = mapper.getその他宛名情報(myBatisParameter);
+            }
+        }
+        for (ShinsakaiYoteiJohoEntity 情報 : 委員情報) {
+            item = new ShinsakaiKaisaiOshiraseTsuchiItem();
+            通知文設定(情報, psmJohoEntity);
+            ShinsakaiKaisaiOshiraseTsuchiReport report = new ShinsakaiKaisaiOshiraseTsuchiReport(item);
+            report.writeBy(reportSourceWriter);
+        }
     }
 
     @Override
@@ -147,7 +150,7 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
         item.set開催予定年月日(paramter.getShinsakaiKaisaiYoteiYMD());
         item.set予定時刻(paramter.getShinsakaiKaishiYoteiTime());
         item.set開催会場(paramter.getShinsakaiKaisaiBashoName());
-        item.set合議体(paramter.getGogitaiNo());
+        item.set合議体(new RString(paramter.getGogitaiNo()));
         if (委員情報 != null) {
             if (委員情報.getShinsakaiIinShimei() != null && !委員情報.getShinsakaiIinShimei().isEmpty()) {
                 item.set宛名氏名(委員情報.getShinsakaiIinShimei().getColumnValue());

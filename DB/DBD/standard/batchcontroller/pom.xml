@@ -29,8 +29,10 @@
             <artifactId>DbxDefinition</artifactId>
         </dependency>
         <!-- DBZ -->
-        <!-- ���J�n -->
-        <!-- �e�X�g -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzBatchController</artifactId>
+        </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>

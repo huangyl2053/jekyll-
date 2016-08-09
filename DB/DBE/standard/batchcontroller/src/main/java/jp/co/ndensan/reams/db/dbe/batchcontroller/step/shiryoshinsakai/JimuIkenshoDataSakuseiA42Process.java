@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShin
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoa3.Shujiiikensho2A4ReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -54,6 +55,8 @@ public class JimuIkenshoDataSakuseiA42Process extends BatchKeyBreakBase<Shinsaka
     @Override
     protected void initialize() {
         myBatisParameter = paramter.toJimuShinsakaiIinJohoMyBatisParameter();
+        myBatisParameter.setShoriJotaiKubun0(ShoriJotaiKubun.通常.getコード());
+        myBatisParameter.setShoriJotaiKubun3(ShoriJotaiKubun.延期.getコード());
         myBatisParameter.setOrderKakuteiFlg(ShinsakaiOrderKakuteiFlg.確定.is介護認定審査会審査順確定());
     }
 

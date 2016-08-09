@@ -38,6 +38,7 @@ public class KoshinTaishoshaKanriProcessParameter implements IBatchProcessParame
     private RString 年度内連番;
 
     /**
+     * Mybatisのパラメータを作成します。
      *
      * @return KoshinTaishoshaKanriMyBatisParameter
      */
@@ -55,6 +56,7 @@ public class KoshinTaishoshaKanriProcessParameter implements IBatchProcessParame
     }
 
     /**
+     * コンストラクタです。
      *
      * @param 条件指定 条件指定
      * @param 有効期間終了日From 有効期間終了日From

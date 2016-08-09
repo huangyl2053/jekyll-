@@ -80,18 +80,17 @@ public class ShokanBaraiKa1GoHandler {
         ShiharaiHohoHenko shiharaiHohoHenko = DataPassingConverter.deserialize(div.getKey_ShiharaiHohoHenkoKanri(), ShiharaiHohoHenko.class);
         List<ShiharaiHohoHenko> 支払方法データ = new ArrayList();
         ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, null);
-        if (shiharaiHohoHenko != null) {
-            if (shiharaiHohoHenko.get被保険者番号().value().equals(div.getKey_HihokenshaNo())
-                    && shiharaiHohoHenko.get管理区分().equals(ShiharaiHenkoKanriKubun._１号償還払い化.getコード())
-                    && shiharaiHohoHenko.get登録区分().equals(get登録区分())) {
-                if ((ShoriKubun._1号予告者登録.equals(押下ボタン区分) && shiharaiHohoHenko.get予告登録年月日() == null)
-                        || (ShoriKubun.償還払い化登録.equals(押下ボタン区分) && shiharaiHohoHenko.get償還払化決定年月日() == null)) {
-                    div.setShinkiKubun(新規登録);
-                } else if (ShoriKubun._1号予告者登録.equals(押下ボタン区分) || ShoriKubun.償還払い化登録.equals(押下ボタン区分)) {
-                    div.setShinkiKubun(新規区分_空);
-                }
-                支払方法データ.add(shiharaiHohoHenko);
+        if (shiharaiHohoHenko != null
+                && shiharaiHohoHenko.get被保険者番号().value().equals(div.getKey_HihokenshaNo())
+                && shiharaiHohoHenko.get管理区分().equals(ShiharaiHenkoKanriKubun._１号償還払い化.getコード())
+                && shiharaiHohoHenko.get登録区分().equals(get登録区分())) {
+            if ((ShoriKubun._1号予告者登録.equals(押下ボタン区分) && shiharaiHohoHenko.get予告登録年月日() == null)
+                    || (ShoriKubun.償還払い化登録.equals(押下ボタン区分) && shiharaiHohoHenko.get償還払化決定年月日() == null)) {
+                div.setShinkiKubun(新規登録);
+            } else if (ShoriKubun._1号予告者登録.equals(押下ボタン区分) || ShoriKubun.償還払い化登録.equals(押下ボタン区分)) {
+                div.setShinkiKubun(新規区分_空);
             }
+            支払方法データ.add(shiharaiHohoHenko);
         }
         if (支払方法データ.isEmpty()) {
             if (ShoriKubun._1号予告者登録.equals(押下ボタン区分)) {
@@ -441,64 +440,25 @@ public class ShokanBaraiKa1GoHandler {
     private void setStatus() {
         switch (ShoriKubun.toValue(div.getKey_Button())) {
             case _1号予告者登録:
-                div.getTxtTorokuJokyo().setReadOnly(true);
-                div.getTxtTekiyoKikanKaishi().setReadOnly(true);
-                div.getTxtTekiyoKikanShuryo().setReadOnly(true);
-                div.getDdlShuryoJokyo().setReadOnly(true);
-                div.getBtnTainoJokyo().setIconNameEnum(IconName.Incomplete);
-                div.getTxtIraiJuriYMD().setReadOnly(true);
-                div.getTxtYokokuTsuchiHakkoYMD().setReadOnly(true);
+                setState_1号予告者登録();
                 DisplayNone_１号弁明書受理(true);
                 DisplayNone_償還払い化登録(true);
                 DisplayNone_償還払い化終了申請(true);
                 break;
             case _1号弁明書受理:
-                div.getTxtTorokuJokyo().setReadOnly(true);
-                div.getTxtTekiyoKikanKaishi().setReadOnly(true);
-                div.getTxtTekiyoKikanShuryo().setReadOnly(true);
-                div.getDdlShuryoJokyo().setReadOnly(true);
-                div.getBtnTainoJokyo().setIconNameEnum(IconName.Info);
-                List<KeyValueDataSource> bemmeiRiyuSource = new ArrayList();
-                for (ShiharaiHenkoBenmeiRiyuCode riyuCode : ShiharaiHenkoBenmeiRiyuCode.values()) {
-                    bemmeiRiyuSource.add(new KeyValueDataSource(riyuCode.getコード(), riyuCode.get名称()));
-                }
-                div.getDdlBemmeiRiyu().setDataSource(bemmeiRiyuSource);
-                List<KeyValueDataSource> bemmeiShinsaKekkaSource = new ArrayList();
-                for (ShiharaiHenkoBenmeiShinsaKekkaKubun bemmeiShinsaKekka : ShiharaiHenkoBenmeiShinsaKekkaKubun.values()) {
-                    bemmeiShinsaKekkaSource.add(new KeyValueDataSource(bemmeiShinsaKekka.getコード(), bemmeiShinsaKekka.get名称()));
-                }
-                div.getDdlBemmeiShinsaKekka().setDataSource(bemmeiShinsaKekkaSource);
+                setState_1号弁明書受理();
                 DisplayNone_１号予告者登録(true);
                 DisplayNone_償還払い化登録(true);
                 DisplayNone_償還払い化終了申請(true);
                 break;
             case 償還払い化登録:
-                div.getTxtTorokuJokyo().setReadOnly(true);
-                div.getTxtTekiyoKikanKaishi().setDisabled(false);
-                div.getTxtTekiyoKikanShuryo().setReadOnly(true);
-                div.getDdlShuryoJokyo().setDisabled(true);
-                div.getBtnTainoJokyo().setIconNameEnum(IconName.Incomplete);
-                div.getTxtHenkoTsuchiHakkoYMD().setDisabled(true);
+                setState_償還払い化登録();
                 DisplayNone_１号予告者登録(true);
                 DisplayNone_１号弁明書受理(true);
                 DisplayNone_償還払い化終了申請(true);
                 break;
             case 償還払い化終了申請:
-                div.getTxtTorokuJokyo().setReadOnly(true);
-                div.getTxtTekiyoKikanKaishi().setReadOnly(true);
-                div.getTxtTekiyoKikanShuryo().setDisabled(false);
-                div.getDdlShuryoJokyo().setDisabled(false);
-                div.getBtnTainoJokyo().setIconNameEnum(IconName.Info);
-                List<KeyValueDataSource> shinseiRiyuSource = new ArrayList();
-                for (ShiharaiHenkoShuryoShinseiRiyuCode shinseRriyuCode : ShiharaiHenkoShuryoShinseiRiyuCode.values()) {
-                    shinseiRiyuSource.add(new KeyValueDataSource(shinseRriyuCode.getコード(), shinseRriyuCode.get名称()));
-                }
-                div.getDdlShinseiRiyu().setDataSource(shinseiRiyuSource);
-                List<KeyValueDataSource> shinsaKekkaSource = new ArrayList();
-                for (ShiharaiHenkoBenmeiShinsaKekkaKubun shinsaKekka : ShiharaiHenkoBenmeiShinsaKekkaKubun.values()) {
-                    shinsaKekkaSource.add(new KeyValueDataSource(shinsaKekka.getコード(), shinsaKekka.get名称()));
-                }
-                div.getDdlShinseiShinsaKekka().setDataSource(shinsaKekkaSource);
+                setState_償還払い化終了申請();
                 DisplayNone_１号予告者登録(true);
                 DisplayNone_１号弁明書受理(true);
                 DisplayNone_償還払い化登録(true);
@@ -506,6 +466,61 @@ public class ShokanBaraiKa1GoHandler {
             default:
                 break;
         }
+    }
+
+    private void setState_1号予告者登録() {
+        div.getTxtTorokuJokyo().setReadOnly(true);
+        div.getTxtTekiyoKikanKaishi().setReadOnly(true);
+        div.getTxtTekiyoKikanShuryo().setReadOnly(true);
+        div.getDdlShuryoJokyo().setReadOnly(true);
+        div.getBtnTainoJokyo().setIconNameEnum(IconName.Incomplete);
+        div.getTxtIraiJuriYMD().setReadOnly(true);
+        div.getTxtYokokuTsuchiHakkoYMD().setReadOnly(true);
+    }
+
+    private void setState_1号弁明書受理() {
+        div.getTxtTorokuJokyo().setReadOnly(true);
+        div.getTxtTekiyoKikanKaishi().setReadOnly(true);
+        div.getTxtTekiyoKikanShuryo().setReadOnly(true);
+        div.getDdlShuryoJokyo().setReadOnly(true);
+        div.getBtnTainoJokyo().setIconNameEnum(IconName.Info);
+        List<KeyValueDataSource> bemmeiRiyuSource = new ArrayList();
+        for (ShiharaiHenkoBenmeiRiyuCode riyuCode : ShiharaiHenkoBenmeiRiyuCode.values()) {
+            bemmeiRiyuSource.add(new KeyValueDataSource(riyuCode.getコード(), riyuCode.get名称()));
+        }
+        div.getDdlBemmeiRiyu().setDataSource(bemmeiRiyuSource);
+        List<KeyValueDataSource> bemmeiShinsaKekkaSource = new ArrayList();
+        for (ShiharaiHenkoBenmeiShinsaKekkaKubun bemmeiShinsaKekka : ShiharaiHenkoBenmeiShinsaKekkaKubun.values()) {
+            bemmeiShinsaKekkaSource.add(new KeyValueDataSource(bemmeiShinsaKekka.getコード(), bemmeiShinsaKekka.get名称()));
+        }
+        div.getDdlBemmeiShinsaKekka().setDataSource(bemmeiShinsaKekkaSource);
+    }
+
+    private void setState_償還払い化登録() {
+        div.getTxtTorokuJokyo().setReadOnly(true);
+        div.getTxtTekiyoKikanKaishi().setDisabled(false);
+        div.getTxtTekiyoKikanShuryo().setReadOnly(true);
+        div.getDdlShuryoJokyo().setDisabled(true);
+        div.getBtnTainoJokyo().setIconNameEnum(IconName.Incomplete);
+        div.getTxtHenkoTsuchiHakkoYMD().setDisabled(true);
+    }
+
+    private void setState_償還払い化終了申請() {
+        div.getTxtTorokuJokyo().setReadOnly(true);
+        div.getTxtTekiyoKikanKaishi().setReadOnly(true);
+        div.getTxtTekiyoKikanShuryo().setDisabled(false);
+        div.getDdlShuryoJokyo().setDisabled(false);
+        div.getBtnTainoJokyo().setIconNameEnum(IconName.Info);
+        List<KeyValueDataSource> shinseiRiyuSource = new ArrayList();
+        for (ShiharaiHenkoShuryoShinseiRiyuCode shinseRriyuCode : ShiharaiHenkoShuryoShinseiRiyuCode.values()) {
+            shinseiRiyuSource.add(new KeyValueDataSource(shinseRriyuCode.getコード(), shinseRriyuCode.get名称()));
+        }
+        div.getDdlShinseiRiyu().setDataSource(shinseiRiyuSource);
+        List<KeyValueDataSource> shinsaKekkaSource = new ArrayList();
+        for (ShiharaiHenkoBenmeiShinsaKekkaKubun shinsaKekka : ShiharaiHenkoBenmeiShinsaKekkaKubun.values()) {
+            shinsaKekkaSource.add(new KeyValueDataSource(shinsaKekka.getコード(), shinsaKekka.get名称()));
+        }
+        div.getDdlShinseiShinsaKekka().setDataSource(shinsaKekkaSource);
     }
 
     private void setValue(ShiharaiHohoHenko shiharaiHohoHenko) {

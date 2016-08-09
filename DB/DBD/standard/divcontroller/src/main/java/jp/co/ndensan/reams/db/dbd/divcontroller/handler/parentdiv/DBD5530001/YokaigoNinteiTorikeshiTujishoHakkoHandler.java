@@ -49,13 +49,14 @@ public class YokaigoNinteiTorikeshiTujishoHakkoHandler {
      * 画面初期化処理です。
      */
     public void onLoad() {
-        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().
+                getShichosonSecurityJoho(GyomuBunrui.介護事務);
         div.getTujishoHakkoJoken().getCcdKaigoNinteiAtenaInfo().setShoriType(コード);
-//      TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         div.getTujishoHakkoJoken().getCcdKaigoNinteiAtenaInfo().setKaigoDonyuKeitai(shichosonSecurityJoho.get介護導入区分().code());
-        div.getTujishoHakkoJoken().getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(ShinseishoKanriNo.EMPTY, new ShikibetsuCode(識別コード));
+        div.getTujishoHakkoJoken().getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(ShinseishoKanriNo.EMPTY,
+                new ShikibetsuCode(識別コード));
         div.getTujishoHakkoJoken().getCcdKaigoNinteiAtenaInfo().initialize();
-        div.getTujishoHakkoJoken().getCcdKaigoninteiShikakuInfo().initialize(市町村コード, 識別コード, HDN_SETAI_KODO, 被保険者番号);
+        div.getTujishoHakkoJoken().getCcdKaigoninteiShikakuInfo().initialize(市町村コード, 被保険者番号);
         div.getTujishoHakkoMeisai().getTxtSakuseibi().setValue(RDate.getNowDate());
         div.getTujishoHakkoMeisai().getTxtTorikeshibi().setValue(RDate.getNowDate());
         div.getTujishoHakkoMeisai().getTxtYokaigodo().setValue(div.getCcdKaigoninteiShikakuInfo().getTxtYokaigodo().getValue());

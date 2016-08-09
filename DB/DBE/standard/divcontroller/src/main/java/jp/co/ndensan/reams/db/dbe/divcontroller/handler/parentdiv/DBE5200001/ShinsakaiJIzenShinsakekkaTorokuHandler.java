@@ -38,63 +38,67 @@ public class ShinsakaiJIzenShinsakekkaTorokuHandler {
     /**
      * 画面初期状態の設定です。
      *
-     * @param jizenShinsakaiShiryo jizenShinsakaiShiryo
+     * @param 事前審査会用結果リスト 事前審査会用結果リスト
      */
-    public void set事前審査会用結果(List<JizenShinsakaiShiryo> jizenShinsakaiShiryo) {
-
-        div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtShinsakaiKaisaiNo()
-                .setValue(jizenShinsakaiShiryo.get(ZERO).getShinsakaiKaisaiNo());
-        div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtShinsakaiYoteiDate()
-                .setValue(new FlexibleDate(jizenShinsakaiShiryo.get(ZERO).getShinsakaiKaisaiYoteiYMD()));
-        div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtShinsakaiKaijo()
-                .setValue(jizenShinsakaiShiryo.get(ZERO).getShinsakaiKaisaiBashoName());
-        div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtShinsakaiKaishiYoteiTime()
-                .setValue(new RTime(jizenShinsakaiShiryo.get(ZERO).getShinsakaiKaishiYoteiTime()));
-        div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtShiryoSakusei()
-                .setValue(new RString(Boolean.valueOf(jizenShinsakaiShiryo.get(ZERO).isShiryoSakuseiZumiFlag()).toString()));
-        div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtGogitaiNo()
-                .setValue(jizenShinsakaiShiryo.get(ZERO).getShinsakaiKaisaiNo());
-        div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtGogitaiName()
-                .setValue(jizenShinsakaiShiryo.get(ZERO).getGogitaiMei());
-        div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtYoteiTeiin()
-                .setValue(new Decimal(jizenShinsakaiShiryo.get(ZERO).getShinsakaiYoteiTeiin()));
-        div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtWariateNinzu()
-                .setValue(new Decimal(jizenShinsakaiShiryo.get(ZERO).getShinsakaiWariateZumiNinzu()));
+    public void set事前審査会用結果(List<JizenShinsakaiShiryo> 事前審査会用結果リスト) {
+        if (!事前審査会用結果リスト.isEmpty()) {
+            JizenShinsakaiShiryo 事前審査会用結果 = 事前審査会用結果リスト.get(ZERO);
+            div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtShinsakaiKaisaiNo()
+                    .setValue(事前審査会用結果.getShinsakaiKaisaiNo());
+            div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtShinsakaiYoteiDate()
+                    .setValue(new FlexibleDate(事前審査会用結果.getShinsakaiKaisaiYoteiYMD()));
+            div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtShinsakaiKaijo()
+                    .setValue(事前審査会用結果.getShinsakaiKaisaiBashoName());
+            div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtShinsakaiKaishiYoteiTime()
+                    .setValue(new RTime(事前審査会用結果.getShinsakaiKaishiYoteiTime()));
+            div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtShiryoSakusei()
+                    .setValue(new RString(Boolean.valueOf(事前審査会用結果.isShiryoSakuseiZumiFlag()).toString()));
+            div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtGogitaiNo()
+                    .setValue(事前審査会用結果.getShinsakaiKaisaiNo());
+            div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtGogitaiName()
+                    .setValue(事前審査会用結果.getGogitaiMei());
+            div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtYoteiTeiin()
+                    .setValue(new Decimal(事前審査会用結果.getShinsakaiYoteiTeiin()));
+            div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtWariateNinzu()
+                    .setValue(new Decimal(事前審査会用結果.getShinsakaiWariateZumiNinzu()));
+        }
     }
 
     /**
      * 画面初期状態の設定です。
      *
-     * @param jizenShinsaKekkaJokyo jizenShinsaKekkaJokyo
+     * @param 事前審査結果リスト 事前審査結果リスト
      */
-    public void set事前審査結果(List<JizenShinsaKekkaJokyo> jizenShinsaKekkaJokyo) {
-        List<DgBeforeShinsakaiResult_Row> rowList = new ArrayList<>();
-        int flg = ZERO;
-        div.getPublicationResult().getDgBeforeShinsakaiResult().getGridSetting().getColumn(new RString("shinsain1"))
-                .setColumnName(jizenShinsaKekkaJokyo.get(0).getShisain1());
-        div.getPublicationResult().getDgBeforeShinsakaiResult().getGridSetting().getColumn(new RString("shinsain2"))
-                .setColumnName(jizenShinsaKekkaJokyo.get(0).getShisain2());
-        div.getPublicationResult().getDgBeforeShinsakaiResult().getGridSetting().getColumn(new RString("shinsain3"))
-                .setColumnName(jizenShinsaKekkaJokyo.get(0).getShisain3());
-        div.getPublicationResult().getDgBeforeShinsakaiResult().getGridSetting().getColumn(new RString("shinsain4"))
-                .setColumnName(jizenShinsaKekkaJokyo.get(0).getShisain4());
-        div.getPublicationResult().getDgBeforeShinsakaiResult().getGridSetting().getColumn(new RString("shinsain5"))
-                .setColumnName(jizenShinsaKekkaJokyo.get(0).getShisain5());
-        for (JizenShinsaKekkaJokyo data : jizenShinsaKekkaJokyo) {
-            if (flg == ZERO) {
-                flg = ITI;
-                continue;
+    public void set事前審査結果(List<JizenShinsaKekkaJokyo> 事前審査結果リスト) {
+        if (!事前審査結果リスト.isEmpty()) {
+            List<DgBeforeShinsakaiResult_Row> rowList = new ArrayList<>();
+            int flg = ZERO;
+            div.getPublicationResult().getDgBeforeShinsakaiResult().getGridSetting().getColumn(new RString("shinsain1"))
+                    .setColumnName(事前審査結果リスト.get(ZERO).getShisain1());
+            div.getPublicationResult().getDgBeforeShinsakaiResult().getGridSetting().getColumn(new RString("shinsain2"))
+                    .setColumnName(事前審査結果リスト.get(ZERO).getShisain2());
+            div.getPublicationResult().getDgBeforeShinsakaiResult().getGridSetting().getColumn(new RString("shinsain3"))
+                    .setColumnName(事前審査結果リスト.get(ZERO).getShisain3());
+            div.getPublicationResult().getDgBeforeShinsakaiResult().getGridSetting().getColumn(new RString("shinsain4"))
+                    .setColumnName(事前審査結果リスト.get(ZERO).getShisain4());
+            div.getPublicationResult().getDgBeforeShinsakaiResult().getGridSetting().getColumn(new RString("shinsain5"))
+                    .setColumnName(事前審査結果リスト.get(ZERO).getShisain5());
+            for (JizenShinsaKekkaJokyo data : 事前審査結果リスト) {
+                if (flg == ZERO) {
+                    flg = ITI;
+                    continue;
+                }
+                DgBeforeShinsakaiResult_Row row = new DgBeforeShinsakaiResult_Row(
+                        data.getShinsakaiOrder(),
+                        toValue(data.getShisain1()),
+                        toValue(data.getShisain2()),
+                        toValue(data.getShisain3()),
+                        toValue(data.getShisain4()),
+                        toValue(data.getShisain5()));
+                rowList.add(row);
             }
-            DgBeforeShinsakaiResult_Row row = new DgBeforeShinsakaiResult_Row(
-                    data.getShinsakaiOrder(),
-                    toValue(data.getShisain1()),
-                    toValue(data.getShisain2()),
-                    toValue(data.getShisain3()),
-                    toValue(data.getShisain4()),
-                    toValue(data.getShisain5()));
-            rowList.add(row);
+            div.getPublicationResult().getDgBeforeShinsakaiResult().setDataSource(rowList);
         }
-        div.getPublicationResult().getDgBeforeShinsakaiResult().setDataSource(rowList);
     }
 
     /**
@@ -150,8 +154,12 @@ public class ShinsakaiJIzenShinsakekkaTorokuHandler {
         if (状態 == null) {
             return RString.EMPTY;
         } else {
-            return new RStringBuilder(YokaigoJotaiKubun09.toValue(状態)
-                    .get略称()).append(KAKO_HITARI).append(状態).append(KAKO_MIGI).toRString();
+            try {
+                return new RStringBuilder(YokaigoJotaiKubun09.toValue(状態)
+                        .get略称()).append(KAKO_HITARI).append(状態).append(KAKO_MIGI).toRString();
+            } catch (Exception e) {
+                return RString.EMPTY;
+            }
         }
     }
 }

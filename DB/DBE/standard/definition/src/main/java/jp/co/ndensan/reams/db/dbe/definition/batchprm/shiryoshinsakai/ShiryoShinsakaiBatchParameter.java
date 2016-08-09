@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -64,7 +63,7 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
     @BatchParameter(key = SHINSAKAIKAISHIYOTEITIME, name = "介護認定審査会開始予定時刻")
     private RString shinsakaiKaishiYoteiTime;
     @BatchParameter(key = GOGITAINO, name = "合議体番号")
-    private RString gogitaiNo;
+    private int gogitaiNo;
     @BatchParameter(key = GOGITAINAME, name = "合議体名称")
     private RString gogitaiName;
     @BatchParameter(key = SHUTURYOKUJUN, name = "出力順")
@@ -156,7 +155,7 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
             RString shinsakaiKaisaiNo,
             FlexibleDate shinsakaiKaisaiYoteiYMD,
             RString shinsakaiKaishiYoteiTime,
-            RString gogitaiNo,
+            int gogitaiNo,
             RString gogitaiName,
             RString shuturyokuJun,
             RString shuturyokuSutairu,
@@ -221,7 +220,6 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
                 shinsakaiKaisaiNo,
                 shuturyokuSutairu,
                 printHou,
-                Decimal.ZERO,
                 shinsakaiKaisaiYoteiYMD,
                 shinsakaiKaishiYoteiTime,
                 RString.EMPTY,
@@ -241,7 +239,6 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
                 bangoEnd,
                 shuturyokuSutairu,
                 printHou,
-                Decimal.ZERO,
                 shinsakaiKaisaiYoteiYMD,
                 shinsakaiKaishiYoteiTime,
                 gogitaiName, gogitaiNo);
@@ -253,13 +250,13 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
      * @return IinTokkiJikouItiziHanteiProcessParameter
      */
     public IinShinsakaiIinJohoProcessParameter toIinShinsakaiIinJohoProcessParameter() {
-        return new IinShinsakaiIinJohoProcessParameter(Integer.parseInt(gogitaiNo.toString()),
+        return new IinShinsakaiIinJohoProcessParameter(gogitaiNo,
                 shinsakaiKaisaiYoteiYMD,
                 shinsakaiKaisaiNo,
                 shuturyokuJun,
                 shuturyokuSutairu,
                 printHou,
-                shinsakaiKaishiYoteiTime);
+                shinsakaiKaishiYoteiTime, sakuseiJoken, bangoStart, bangoEnd);
     }
 
     /**
@@ -270,8 +267,7 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
     public IinTuikaSiryoProcessParameter toIinTuikaSiryoProcessParameter() {
         return new IinTuikaSiryoProcessParameter(shinsakaiKaisaiNo,
                 shuturyokuSutairu,
-                printHou,
-                Decimal.ZERO);
+                printHou);
     }
 
     /**
@@ -280,6 +276,6 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
      * @return IinItiziHanteiProcessParameter
      */
     public IinItiziHanteiProcessParameter toIinItiziHanteiProcessParameter() {
-        return new IinItiziHanteiProcessParameter(shinsakaiKaisaiNo, shuturyokuJun, sakuseiJoken, gogitaiNo, printHou);
+        return new IinItiziHanteiProcessParameter(shinsakaiKaisaiNo, shuturyokuJun, sakuseiJoken, bangoStart, bangoEnd, gogitaiNo);
     }
 }

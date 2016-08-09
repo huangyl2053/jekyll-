@@ -35,7 +35,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
@@ -88,10 +87,7 @@ public class JimuTokkiJikouDataSakuseiA3Process extends BatchKeyBreakBase<Shinsa
 
     @Override
     protected void usualProcess(ShinsakaiSiryoKyotsuEntity kyotsuEntity) {
-        kyotsuEntity.setJimukyoku(false);
-        kyotsuEntity.setShoKisaiHokenshaNo(RString.EMPTY);
-        kyotsuEntity.setHihokenshaNo(RString.EMPTY);
-        kyotsuEntity.setHihokenshaName(AtenaMeisho.EMPTY);
+        kyotsuEntity.setJimukyoku(true);
         List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List = get特記情報(kyotsuEntity);
         TokkiText1A4Business business = new TokkiText1A4Business(kyotsuEntity, 特記情報List);
         TokkiText2A3Report report = new TokkiText2A3Report(new TokkiText2A3Entity());
@@ -109,7 +105,7 @@ public class JimuTokkiJikouDataSakuseiA3Process extends BatchKeyBreakBase<Shinsa
         List<Integer> 認定調査依頼履歴番号リスト = new ArrayList<>();
         申請書管理番号リスト.add(entity.getShinseishoKanriNo());
         認定調査依頼履歴番号リスト.add(entity.getNinteichosaRirekiNo());
-        myBatisParameter.setGenponMaskKubun(GenponMaskKubun.マスク.getコード());
+        myBatisParameter.setGenponMaskKubun(GenponMaskKubun.原本.getコード());
         myBatisParameter.setShinseishoKanriNoList(申請書管理番号リスト);
         myBatisParameter.setNinteichosaRirekiNoList(認定調査依頼履歴番号リスト);
         return mapper.get事務局特記情報(myBatisParameter);

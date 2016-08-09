@@ -54,8 +54,15 @@ public class ShokanBaraiKa1GoManager {
             FlexibleDate 弁明書提出期限,
             RString 最大履歴番号) {
         ShiharaiHohoHenkoEntity 支払方法変更Entity = new ShiharaiHohoHenkoEntity();
-        支払方法変更Entity.set支払方法変更Entity(get1号予告者登録の登録Entity(被保険者番号, 予告登録日, 弁明書提出期限, 最大履歴番号));
-        支払方法変更Entity.set支払方法変更滞納Entity(get支払方法変更滞納Entity(滞納判定結果, TainoHanteiKubun.予告登録.getコード(), 被保険者番号, 最大履歴番号));
+        支払方法変更Entity.set支払方法変更Entity(get1号予告者登録の登録Entity(
+                被保険者番号,
+                予告登録日,
+                弁明書提出期限,
+                最大履歴番号));
+        支払方法変更Entity.set支払方法変更滞納Entity(get支払方法変更滞納Entity(
+                滞納判定結果,
+                TainoHanteiKubun.予告登録.getコード(),
+                被保険者番号, 最大履歴番号));
         return new ShiharaiHohoHenko(支払方法変更Entity);
     }
 
@@ -78,12 +85,25 @@ public class ShokanBaraiKa1GoManager {
             FlexibleDate 保険者証提出期限,
             RString 最大履歴番号) {
         ShiharaiHohoHenkoEntity 支払方法変更Entity = new ShiharaiHohoHenkoEntity();
-        支払方法変更Entity.set支払方法変更Entity(get償還払い化登録の登録Entity(被保険者番号, 提出期限_開始, 変更決定日, 保険者証提出期限, 最大履歴番号));
-        支払方法変更Entity.set支払方法変更滞納Entity(get支払方法変更滞納Entity(滞納判定結果, TainoHanteiKubun.償還払化登録.getコード(), 被保険者番号, 最大履歴番号));
+        支払方法変更Entity.set支払方法変更Entity(get償還払い化登録の登録Entity(
+                被保険者番号,
+                提出期限_開始,
+                変更決定日,
+                保険者証提出期限,
+                最大履歴番号));
+        支払方法変更Entity.set支払方法変更滞納Entity(get支払方法変更滞納Entity(
+                滞納判定結果,
+                TainoHanteiKubun.償還払化登録.getコード(),
+                被保険者番号,
+                最大履歴番号));
         return new ShiharaiHohoHenko(支払方法変更Entity);
     }
 
-    private DbT4021ShiharaiHohoHenkoEntity get1号予告者登録の登録Entity(HihokenshaNo 被保険者番号, FlexibleDate 予告登録日, FlexibleDate 弁明書提出期限, RString 最大履歴番号) {
+    private DbT4021ShiharaiHohoHenkoEntity get1号予告者登録の登録Entity(
+            HihokenshaNo 被保険者番号,
+            FlexibleDate 予告登録日,
+            FlexibleDate 弁明書提出期限,
+            RString 最大履歴番号) {
         DbT4021ShiharaiHohoHenkoEntity entity = new DbT4021ShiharaiHohoHenkoEntity();
         entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo("209007"));
         entity.setHihokenshaNo(被保険者番号);
@@ -105,7 +125,12 @@ public class ShokanBaraiKa1GoManager {
         return entity;
     }
 
-    private DbT4021ShiharaiHohoHenkoEntity get償還払い化登録の登録Entity(HihokenshaNo 被保険者番号, FlexibleDate 提出期限_開始, FlexibleDate 変更決定日, FlexibleDate 保険者証提出期限, RString 最大履歴番号) {
+    private DbT4021ShiharaiHohoHenkoEntity get償還払い化登録の登録Entity(
+            HihokenshaNo 被保険者番号,
+            FlexibleDate 提出期限_開始,
+            FlexibleDate 変更決定日,
+            FlexibleDate 保険者証提出期限,
+            RString 最大履歴番号) {
         DbT4021ShiharaiHohoHenkoEntity entity = new DbT4021ShiharaiHohoHenkoEntity();
         entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo("209007"));
         entity.setHihokenshaNo(被保険者番号);
@@ -128,7 +153,11 @@ public class ShokanBaraiKa1GoManager {
         return entity;
     }
 
-    private List<DbT4022ShiharaiHohoHenkoTainoEntity> get支払方法変更滞納Entity(TainoHanteiResultKohen 滞納判定結果, RString 滞納判定区分, HihokenshaNo 被保険者番号, RString 最大履歴番号) {
+    private List<DbT4022ShiharaiHohoHenkoTainoEntity> get支払方法変更滞納Entity(
+            TainoHanteiResultKohen 滞納判定結果,
+            RString 滞納判定区分,
+            HihokenshaNo 被保険者番号,
+            RString 最大履歴番号) {
         List<DbT4022ShiharaiHohoHenkoTainoEntity> 支払方法変更滞納Entity = new ArrayList();
         List<ShiharaiHohoHenkoTaino> 支払方法変更滞納情報 = new ArrayList();
         List<TainoKiSummary> tainoKiSummary = 滞納判定結果.get滞納情報();
@@ -178,13 +207,13 @@ public class ShokanBaraiKa1GoManager {
         TaishoHanteiKubun 対象管理区分 = TaishoHanteiKubun._空;
         if (連番 > 1) {
             for (ShiharaiHohoHenkoTaino shiharaiHohoHenkoTaino : 支払方法変更滞納情報) {
-                if (shiharaiHohoHenkoTaino.get連番() == 連番 - 1) {
-                    if (JikoKubun.時効到来.getコード().equals(shiharaiHohoHenkoTaino.get時効区分())) {
-                        対象管理区分 = TaishoHanteiKubun.前回対象;
-                    } else if (JikoKubun.時効未到来.getコード().equals(shiharaiHohoHenkoTaino.get時効区分())
-                            && JikoKubun.時効到来.getコード().equals(時効区分)) {
-                        対象管理区分 = TaishoHanteiKubun.今回対象;
-                    }
+                if (shiharaiHohoHenkoTaino.get連番() == 連番 - 1
+                        && JikoKubun.時効到来.getコード().equals(shiharaiHohoHenkoTaino.get時効区分())) {
+                    対象管理区分 = TaishoHanteiKubun.前回対象;
+                } else if (shiharaiHohoHenkoTaino.get連番() == 連番 - 1
+                        && JikoKubun.時効未到来.getコード().equals(shiharaiHohoHenkoTaino.get時効区分())
+                        && JikoKubun.時効到来.getコード().equals(時効区分)) {
+                    対象管理区分 = TaishoHanteiKubun.今回対象;
                 }
             }
         } else {

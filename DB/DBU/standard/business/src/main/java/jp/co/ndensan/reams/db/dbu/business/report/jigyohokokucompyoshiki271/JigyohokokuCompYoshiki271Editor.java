@@ -59,9 +59,11 @@ public class JigyohokokuCompYoshiki271Editor implements IJigyohokokuCompYoshiki2
         return source;
     }
 
-    private RString set範囲(RString 集計範囲) {
+    private RString set範囲(RString 集計年月) {
         RStringBuilder 範囲_SB = new RStringBuilder();
-        範囲_SB.append("（" + 集計範囲 + "分）");
+        範囲_SB.append("（");
+        範囲_SB.append(集計年月);
+        範囲_SB.append("分）");
         return 範囲_SB.toRString();
     }
 

@@ -75,6 +75,9 @@ public class NinteishinseihakkoDiv extends Panel {
     public void setHdnShinseishoKanrino(RString hdnShinseishoKanrino) {
         this.hdnShinseishoKanrino = hdnShinseishoKanrino;
     }
-
+    /*
+     * getHookenshaCode
+     *
+     */
     // </editor-fold>
 }

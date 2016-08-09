@@ -38,9 +38,9 @@
             rgdb."DbT4101NinteiShinseiJoho"."ninteiShinseiShinseijiKubunCode" as DbT4101NinteiShinseiJoho_ninteiShinseiShinseijiKubunCode,
             rgdb."DbT4101NinteiShinseiJoho"."ninteiShinseiHoreiKubunCode" as DbT4101NinteiShinseiJoho_ninteiShinseiHoreiKubunCode,
             rgdb."DbT4101NinteiShinseiJoho"."ninteiShinseiYMD" as DbT4101NinteiShinseiJoho_ninteiShinseiYMD,
-            rgdb."DbT4003YokaigoNinteiInterface"."torikomiTimestamp" , 
+            rgdb."DbT4003YokaigoNinteiInterface"."torikomiTimestamp" as DbT4003YokaigoNinteiInterface_torikomiTimestamp,  
             rgdb."DbT4116IchijiHanteiKekkaJoho"."ichijiHanteiYMD" as DbT4116IchijiHanteiKekkaJoho_ichijiHanteiYMD,
-            rgdb."DbT4116IchijiHanteiKekkaJoho"."ichijiHanteiKekkaNinchishoKasanCode" as DbT4116IchijiHanteiKekkaJoho_ichijiHanteiKekkaNinchishoKasanCode,
+            rgdb."DbT4116IchijiHanteiKekkaJoho"."ichijiHanteiKekkaNinchishoKasanCode" as DbT4116_ichijiHanteiKekkaNinchishoKasanCode,
             rgdb."DbT4102NinteiKekkaJoho"."nijiHanteiYMD" as DbT4102NinteiKekkaJoho_nijiHanteiYMD,
             rgdb."DbT4102NinteiKekkaJoho"."nijiHanteiYokaigoJotaiKubunCode" as DbT4102NinteiKekkaJoho_nijiHanteiYokaigoJotaiKubunCode,
             rgdb."DbT4102NinteiKekkaJoho"."nijiHanteiNinteiYukoKaishiYMD" as DbT4102NinteiKekkaJoho_nijiHanteiNinteiYukoKaishiYMD,
@@ -53,8 +53,7 @@
             ON      rgdb."DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = rgdb."DbT4116IchijiHanteiKekkaJoho"."shinseishoKanriNo"
 	INNER JOIN  rgdb."DbT4102NinteiKekkaJoho"
             ON      rgdb."DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = rgdb."DbT4102NinteiKekkaJoho"."shinseishoKanriNo"
-<!--       todo-->
-            INNER JOIN rgdb."DbT4003YokaigoNinteiInterface" 
+        LEFT JOIN rgdb."DbT4003YokaigoNinteiInterface" 
 		ON  rgdb."DbT4001JukyushaDaicho"."shinseishoKanriNo" = rgdb."DbT4003YokaigoNinteiInterface"."shinseishoKanriNo"
 																		
 	WHERE	rgdb."DbT4001JukyushaDaicho"."rirekiNo" = '0000'
@@ -72,9 +71,9 @@
         <result property="認定申請区分申請時コード" column="DbT4101NinteiShinseiJoho_ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="認定申請区分法令コード" column="DbT4101NinteiShinseiJoho_ninteiShinseiHoreiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="認定申請年月日" column="DbT4101NinteiShinseiJoho_ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-<!--        <result property="torikomiTimestamp" column="torikomiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler" />-->
+        <result property="取込日時2" column="DbT4003YokaigoNinteiInterface_torikomiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler" />
         <result property="要介護認定一次判定年月日" column="DbT4116IchijiHanteiKekkaJoho_ichijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="要介護認定一次判定結果コード認知症加算" column="DbT4116IchijiHanteiKekkaJoho_ichijiHanteiKekkaNinchishoKasanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="要介護認定一次判定結果コード認知症加算" column="DbT4116_ichijiHanteiKekkaNinchishoKasanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="二次判定年月日" column="DbT4102NinteiKekkaJoho_nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="二次判定要介護状態区分コード" column="DbT4102NinteiKekkaJoho_nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="二次判定認定有効開始年月日" column="DbT4102NinteiKekkaJoho_nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />

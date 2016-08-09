@@ -9,11 +9,7 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc020030.DBC020030_Kogaku
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc020060.DBC020060_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0490011.ShikyuketteituchishoSakuseiJyokenDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0490011.ShikyuketteituchishoSakuseiJyokenHandler;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 画面設計_DBCMN43002_高額サービス費支給決定通知書作成のクラスです。
@@ -54,25 +50,6 @@ public class ShikyuketteituchishoSakuseiJyoken {
     public ResponseData<ShikyuketteituchishoSakuseiJyokenDiv>
             onClick_radKetteibiIkkatsuKoshinKubun(ShikyuketteituchishoSakuseiJyokenDiv div) {
         getHandler(div).onClick_radKetteibiIkkatsuKoshinKubun();
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 「実行する」ボタンのメソッドです。
-     *
-     * @param div HeijunkaKakuteiDiv
-     * @return ResponseData
-     */
-    public ResponseData<ShikyuketteituchishoSakuseiJyokenDiv>
-            onClick_btnExcute(ShikyuketteituchishoSakuseiJyokenDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(
-                    new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                            UrQuestionMessages.処理実行の確認.getMessage().evaluate())).respond();
-        }
-        if (ResponseHolder.getButtonType() != MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).respond();
-        }
         return ResponseData.of(div).respond();
     }
 

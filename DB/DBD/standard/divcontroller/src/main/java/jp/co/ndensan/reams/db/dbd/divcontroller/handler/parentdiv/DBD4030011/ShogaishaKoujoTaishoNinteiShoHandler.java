@@ -204,7 +204,7 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
         /**
          * 対象年度
          */
-        対象年度(new RString("0002"), new RString(""), new RString("\"").concat(new RString("")).concat(new RString("\""))),;
+        対象年度(new RString("0002"), new RString(""), new RString("\"").concat(new RString("")).concat(new RString("\"")));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

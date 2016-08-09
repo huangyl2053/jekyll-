@@ -23,9 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 介護認定審査対象者一覧表情報のBusinessの編集クラスです。
@@ -110,18 +108,6 @@ public class JimuShinsakaishiryoBusiness {
      */
     public RString get審査対象者数() {
         return new RString(count);
-    }
-
-    /**
-     * shinsakaiIinJohoList一覧を取得します。
-     *
-     * @return shinsakaiIinJohoList一覧
-     */
-    public RString getshinsakaiIinJohoList一覧() {
-        if (no < shinsakaiIinJohoList.size()) {
-            return shinsakaiIinJohoList.get(no).getShinsakaiIinShimei().getColumnValue();
-        }
-        return RString.EMPTY;
     }
 
     /**
@@ -415,10 +401,17 @@ public class JimuShinsakaishiryoBusiness {
 
     private RString get開催年月日() {
         RStringBuilder 審査会開催年月日 = new RStringBuilder();
-        審査会開催年月日.append(パターン33(paramter.getShinsakaiKaisaiYoteiYMD()));
         List<RString> 時分 = paramter.getShinsakaiKaishiYoteiTime().padZeroToLeft(SIZE_5).split(":");
-        審査会開催年月日.append(RTime.of(Integer.parseInt(時分.get(0).toString()),
-                Integer.parseInt(時分.get(1).toString())).toFormattedTimeString(DisplayTimeFormat.HH時mm分));
+        審査会開催年月日.append(paramter.getShinsakaiKaisaiYoteiYMD().getYear())
+                .append(new RString("年 "))
+                .append(new RString(paramter.getShinsakaiKaisaiYoteiYMD().getMonthValue()).padZeroToLeft(2))
+                .append(new RString("月 "))
+                .append(new RString(paramter.getShinsakaiKaisaiYoteiYMD().getDayValue()).padZeroToLeft(2))
+                .append(new RString("日 "))
+                .append(時分.get(0).padZeroToLeft(2))
+                .append(new RString("時 "))
+                .append(時分.get(1).padZeroToLeft(2))
+                .append(new RString("分"));
         return 審査会開催年月日.toRString();
     }
 

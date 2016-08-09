@@ -14,7 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBC-9999-021 zhangzhiming
  */
 public enum ReportIdDBC {
- /**
+
+    /**
      * 総合事業分自己負担額計算結果一覧表
      */
     DBC200203(new ReportId("DBC200203_GassanJigyobunJikofutangakuKeisanKekkaIchiran"), new RString("総合事業分自己負担額計算結果一覧表")),
@@ -46,6 +47,11 @@ public enum ReportIdDBC {
      * 負担割合証（連帳　横）
      */
     DBC100067(new ReportId("DBC100067_FutanWariaiShoRenchoYoko"), new RString("負担割合証（連帳　横）")),
+    /**
+     * 基準収入額適用決定通知書
+     */
+    DBC100074(
+            new ReportId("DBC100074_KijunShunyugakuTekiyoKetteiTsuchisho"), new RString("基準収入額適用決定通知書")),
     /**
      * 負担割合証発行一覧表
      */
@@ -155,6 +161,14 @@ public enum ReportIdDBC {
      */
     DBC200077(new ReportId("DBC200077_KogakuSogoJigyoServiceHiTaishoshaIchiran"), new RString("高額総合事業サービス費対象者一覧表")),
     /**
+     * 高額総合事業サービス費申請書発行一覧表 の帳票ＩＤです。
+     */
+    DBC200091(new ReportId("DBC200091_KogakuJigyoShinseishoHakkoIchiran"), new RString("高額総合事業サービス費申請書発行一覧表")),
+    /**
+     * 基準収入額適用決定通知一覧表 の帳票ＩＤです。
+     */
+    DBC200092(new ReportId("DBC200092_KijunShunyugakuTekiyoKetteiTsuchiIchiran"), new RString("基準収入額適用決定通知一覧表")),
+    /**
      * 介護保険高額介護（予防）サービス費支給（受領委任払）申請書の帳票ＩＤです。
      */
     DBC800015(new ReportId("DBC800015_KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyo"),
@@ -162,7 +176,11 @@ public enum ReportIdDBC {
     /**
      * 第三者行為による被害届（介護保険用）の帳票ＩＤです。
      */
-    DBC800020(new ReportId("DBC800020_DaisanshaKouiHigaitodokeKaigoHokenyo"), new RString("第三者行為による被害届（介護保険用）"));
+    DBC800020(new ReportId("DBC800020_DaisanshaKouiHigaitodokeKaigoHokenyo"), new RString("第三者行為による被害届（介護保険用）")),
+    /**
+     * 高額総合事業サービス費給付お知らせ通知書（提出期限あり）帳票ＩＤです。
+     */
+    DBC100072(new ReportId("DBC100072_KogakuJigyoOshiraseTsuchisho"), new RString("帳票設計_DBC100072_高額総合事業サービス費給付お知らせ通知書（提出期限あり）"));
 
     private final ReportId reportId;
     private final RString reportName;

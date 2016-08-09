@@ -294,8 +294,8 @@ public class JimuGaikyouTokkiBusiness {
     }
 
     private RString getイメージ(int index) {
-        if (INT_0 == index) {
-            return 共有ファイルを引き出す(概況特記イメージ情報.get(INT_9).getDbt5115_imageSharedFileId(), ファイルID_C0007);
+        if (INT_0 == index && entity.isJimukyoku()) {
+            return 共有ファイルを引き出す(概況特記イメージ情報.get(INT_9).getDbt5115_imageSharedFileId(), ファイルID_C0007_BAK);
         } else {
             return 共有ファイルを引き出す(概況特記イメージ情報.get(index - 1).getDbt5115_imageSharedFileId(), ファイルID_C0007);
         }

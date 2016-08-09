@@ -100,8 +100,7 @@ public class YokaigoNinteiTaishoshaListHandler {
             画面情報.set申請申(yokaigoNinteiTaisyosyaIchiran.get申請情報認定申請区分申請時コード());
             画面情報.set申請法(yokaigoNinteiTaisyosyaIchiran.get申請情報認定申請区分法令コード());
             画面情報.set申請日(yokaigoNinteiTaisyosyaIchiran.get申請情報認定申請年月日());
-            // TODO
-            画面情報.set取込日時(new RString("平27.02.21　9時41分"));
+            画面情報.set取込日時(yokaigoNinteiTaisyosyaIchiran.get取込日時2());
             画面情報.set一次判定日(yokaigoNinteiTaisyosyaIchiran.get要介護認定一次判定年月日());
             画面情報.set一次判定(yokaigoNinteiTaisyosyaIchiran.get要介護認定一次判定結果コード認知症加算());
             画面情報.set二次判定日(yokaigoNinteiTaisyosyaIchiran.get結果情報二次判定年月日());

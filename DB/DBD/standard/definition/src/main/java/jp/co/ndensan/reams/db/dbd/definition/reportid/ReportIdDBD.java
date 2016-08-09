@@ -188,6 +188,10 @@ public enum ReportIdDBD {
      */
     DBD503001(new ReportId("DBD503001_ShinsaHanteiIraiIchiranhyo"), new RString("介護認定審査判定依頼一覧表")),
     /**
+     * 特別地域加算軽減実績管理リストの帳票ＩＤです。
+     */
+    DBD200012(new ReportId("DBD200012_TokubetsuChiikiKasanKeigenJissekiKanriIchiran"), new RString("特別地域加算軽減実績管理リスト")),
+    /**
      * 要介護認定通知書一括発行の帳票ＩＤです。
      */
     DBD532999(new ReportId("DBD532999_YokaigoTshuchishoIkkatsu"), new RString("要介護認定通知書一括発行")),

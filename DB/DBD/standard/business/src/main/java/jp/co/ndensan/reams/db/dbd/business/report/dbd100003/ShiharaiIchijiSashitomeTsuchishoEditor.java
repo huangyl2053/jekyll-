@@ -200,11 +200,12 @@ public class ShiharaiIchijiSashitomeTsuchishoEditor implements IShiharaiIchijiSa
             }
         }
         RString サービス種類コード = RString.EMPTY;
-        for (int i = 0; i < NOCOUNT_13 || i < 償還払集計情報リスト.size(); i++) {
+        for (int i = 0; i < NOCOUNT_13 && i < 償還払集計情報リスト.size(); i++) {
             サービス種類コード = サービス種類コード.concat(償還払集計情報リスト.get(i).getサービス種類コード()).
                     concat(new RString(","));
         }
-        source.serviceName = サービス種類コード;
+
+        source.serviceName = サービス種類コード.substring(0, サービス種類コード.length() - 1);
         source.hoka = 償還払集計情報リスト.size() <= NOCOUNT_13 ? RString.EMPTY : new RString("他");
         source.kyufuGaku = DecimalFormatter.toコンマ区切りRString(get支払金額合計(), 0);
 

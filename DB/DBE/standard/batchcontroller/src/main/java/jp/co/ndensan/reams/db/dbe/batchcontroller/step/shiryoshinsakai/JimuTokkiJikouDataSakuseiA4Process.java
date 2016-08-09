@@ -33,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
@@ -86,10 +85,7 @@ public class JimuTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
 
     @Override
     protected void usualProcess(ShinsakaiSiryoKyotsuEntity kyotsuEntity) {
-        kyotsuEntity.setJimukyoku(false);
-        kyotsuEntity.setShoKisaiHokenshaNo(RString.EMPTY);
-        kyotsuEntity.setHihokenshaNo(RString.EMPTY);
-        kyotsuEntity.setHihokenshaName(AtenaMeisho.EMPTY);
+        kyotsuEntity.setJimukyoku(true);
         List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List = get特記情報(kyotsuEntity);
         TokkiText1A4Business business = new TokkiText1A4Business(kyotsuEntity, 特記情報List);
         TokkiText1A4Report report = new TokkiText1A4Report(business);
@@ -99,7 +95,8 @@ public class JimuTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
 
     @Override
     protected void afterExecute() {
-        outputJokenhyoFactory();
+        出力条件表(ReportIdDBE.DBE517141.getReportId().value(), new RString("概況調査の特記"));
+        出力条件表(ReportIdDBE.DBE517131.getReportId().value(), new RString("特記事項（1枚目）"));
     }
 
     private List<DbT5205NinteichosahyoTokkijikoEntity> get特記情報(ShinsakaiSiryoKyotsuEntity entity) {
@@ -107,7 +104,7 @@ public class JimuTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
         List<Integer> 認定調査依頼履歴番号リスト = new ArrayList<>();
         申請書管理番号リスト.add(entity.getShinseishoKanriNo());
         認定調査依頼履歴番号リスト.add(entity.getNinteichosaRirekiNo());
-        myBatisParameter.setGenponMaskKubun(GenponMaskKubun.マスク.getコード());
+        myBatisParameter.setGenponMaskKubun(GenponMaskKubun.原本.getコード());
         myBatisParameter.setShinseishoKanriNoList(申請書管理番号リスト);
         myBatisParameter.setNinteichosaRirekiNoList(認定調査依頼履歴番号リスト);
         return mapper.get事務局特記情報(myBatisParameter);
@@ -117,14 +114,14 @@ public class JimuTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
         return !(before.getShinsakaiOrder() == current.getShinsakaiOrder()) || ページ表示行数 % 最大表示行数 == 0;
     }
 
-    private void outputJokenhyoFactory() {
+    private void 出力条件表(RString 帳票, RString 帳票名) {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                ReportIdDBE.DBE517141.getReportId().value(),
+                帳票,
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
                 new RString(JobContextHolder.getJobId()),
-                new RString("概況調査の特記"),
+                帳票名,
                 new RString(reportSourceWriterA4.pageCount().value()),
                 RString.EMPTY,
                 RString.EMPTY,
@@ -153,5 +150,4 @@ public class JimuTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
     protected IBatchReader createReader() {
         return new BatchDbReader(SELECT_SHINSAKAISIRYOKYOTSU, myBatisParameter);
     }
-
 }

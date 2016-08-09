@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.Ic
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
@@ -68,6 +69,8 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
     protected void initialize() {
         mapper = getMapper(IJimuShiryoShinsakaiIinMapper.class);
         myBatisParameter = paramter.toJimuShinsakaiIinJohoMyBatisParameter();
+        myBatisParameter.setShoriJotaiKubun0(ShoriJotaiKubun.通常.getコード());
+        myBatisParameter.setShoriJotaiKubun3(ShoriJotaiKubun.延期.getコード());
         myBatisParameter.setOrderKakuteiFlg(ShinsakaiOrderKakuteiFlg.確定.is介護認定審査会審査順確定());
         データ件数 = mapper.get事務局一次判定件数(myBatisParameter);
         共通情報 = mapper.get共通情報(myBatisParameter);
@@ -108,7 +111,8 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
         item = new IchijihanteikekkahyoItemSetteiA3().set項目(entity, 特記事項,
                 調査票調査項目, 前回調査票調査項目, 主治医意見書,
                 前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, データ件数,
-                get共通情報(共通情報, 申請書管理番号), 主治医意見書, myBatisParameter.getGogitaiNo());
+                get共通情報(共通情報, 申請書管理番号), 主治医意見書, new RString(myBatisParameter.getGogitaiNo()));
+
         IchijihanteikekkahyoA3Report report = new IchijihanteikekkahyoA3Report(item);
         report.writeBy(reportSourceWriterA3);
     }

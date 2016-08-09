@@ -86,31 +86,31 @@ public class SokujiFukaKouseiMainValidationHandler {
                     tablePanel.getLblTsuki4().getText()));
         }
         if (is期別端数不整合(特別徴収_期別端数, tablePanel.getTxtTokuchoKoseiGo06())) {
-            該当する期 = 該当する期.isNullOrEmpty() ? RString.EMPTY : 該当する期.concat(コンマ);
+            該当する期 = RString.isNullOrEmpty(該当する期) ? RString.EMPTY : 該当する期.concat(コンマ);
             該当する期 = 該当する期.concat(getFormat該当する月(tablePanel.getLblTokuchoKi06().getText(),
                     tablePanel.getLblTsuki6().getText()));
         }
         if (is期別端数不整合(特別徴収_期別端数, tablePanel.getTxtTokuchoKoseiGo08())) {
-            該当する期 = 該当する期.isNullOrEmpty() ? RString.EMPTY : 該当する期.concat(コンマ);
+            該当する期 = RString.isNullOrEmpty(該当する期) ? RString.EMPTY : 該当する期.concat(コンマ);
             該当する期 = 該当する期.concat(getFormat該当する月(tablePanel.getLblTokuchoKi08().getText(),
                     tablePanel.getLblTsuki8().getText()));
         }
         if (is期別端数不整合(特別徴収_期別端数, tablePanel.getTxtTokuchoKoseiGo10())) {
-            該当する期 = 該当する期.isNullOrEmpty() ? RString.EMPTY : 該当する期.concat(コンマ);
+            該当する期 = RString.isNullOrEmpty(該当する期) ? RString.EMPTY : 該当する期.concat(コンマ);
             該当する期 = 該当する期.concat(getFormat該当する月(tablePanel.getLblTokuchoKi10().getText(),
                     tablePanel.getLblTsuki10().getText()));
         }
         if (is期別端数不整合(特別徴収_期別端数, tablePanel.getTxtTokuchoKoseiGo12())) {
-            該当する期 = 該当する期.isNullOrEmpty() ? RString.EMPTY : 該当する期.concat(コンマ);
+            該当する期 = RString.isNullOrEmpty(該当する期) ? RString.EMPTY : 該当する期.concat(コンマ);
             該当する期 = 該当する期.concat(getFormat該当する月(tablePanel.getLblTokuchoKi12().getText(),
                     tablePanel.getLblTsuki12().getText()));
         }
         if (is期別端数不整合(特別徴収_期別端数, tablePanel.getTxtTokuchoKoseiGo02())) {
-            該当する期 = 該当する期.isNullOrEmpty() ? RString.EMPTY : 該当する期.concat(コンマ);
+            該当する期 = RString.isNullOrEmpty(該当する期) ? RString.EMPTY : 該当する期.concat(コンマ);
             該当する期 = 該当する期.concat(getFormat該当する月(tablePanel.getLblTokuchoKi02().getText(),
                     tablePanel.getLblTsuki2().getText()));
         }
-        if (!該当する期.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(該当する期)) {
             validPairs.add(new ValidationMessageControlPair(new SokujiFukaKouseiMainValidationMessages(DbbWarningMessages.特徴期割額端数不整合,
                     該当する期.toString(), 特別徴収_期別端数.toString())));
         }
@@ -196,7 +196,7 @@ public class SokujiFukaKouseiMainValidationHandler {
             該当する期 = 該当する期.concat(getFormat該当する月(tablePanel.getLblFuchoKiYoku05().getText(),
                     tablePanel.getLblTsukiYoku5().getText()));
         }
-        if (!該当する期.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(該当する期)) {
             validPairs.add(new ValidationMessageControlPair(new SokujiFukaKouseiMainValidationMessages(DbbWarningMessages.普徴期割額端数不整合,
                     該当する期.toString(), 普通徴収_期別端数.toString())));
         }
@@ -293,24 +293,20 @@ public class SokujiFukaKouseiMainValidationHandler {
     }
 
     private RString setコンマ(RString 該当する期) {
-        return 該当する期.isNullOrEmpty() ? RString.EMPTY : 該当する期.concat(コンマ);
+        return RString.isNullOrEmpty(該当する期) ? RString.EMPTY : 該当する期.concat(コンマ);
     }
 
     private boolean is期別端数不整合(RString 期別端数, TextBoxNum textBoxNum) {
-        if (textBoxNum.isReadOnly()) {
-            return Boolean.FALSE;
-        }
-        if (textBoxNum.getValue().compareTo(Decimal.ZERO) == 0) {
-            return Boolean.FALSE;
-        }
-        if (期別端数.isNullOrEmpty()) {
+        if (textBoxNum.isReadOnly()
+                || textBoxNum.getValue().compareTo(Decimal.ZERO) == 0
+                || RString.isNullOrEmpty(期別端数)) {
             return Boolean.FALSE;
         }
         return !textBoxNum.getValue().remainder(new Decimal(期別端数.toString())).equals(Decimal.ZERO);
     }
 
     private Decimal getFormat金額(RString 金額) {
-        if (金額.isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(金額)) {
             return Decimal.ZERO;
         }
         return new Decimal(金額.replace(読点, RString.EMPTY).trim().toString());

@@ -85,8 +85,8 @@ public class ShogaishakojoTaishoshaListProcessParameter implements IBatchProcess
      * @return ShogaishaKojoTaishoshaListMyBatisParameter
      */
     public ShogaishaKojoTaishoshaListMyBatisParameter toShogaishaKojoTaishoshaListMyBatisParameter() {
-        return new ShogaishaKojoTaishoshaListMyBatisParameter(被保険者番号, 氏名, 認定区分, 認定内容,
-                認知症高齢者の日常生活自立度, 障害高齢者の日常生活自立度, 障がい者手帳, 喪失事由, 喪失日FROM, 喪失日TO, 決定日FROM, 決定日TO);
+        return new ShogaishaKojoTaishoshaListMyBatisParameter(対象年度, 被保険者番号, 氏名, 認定区分, 認定内容,
+                認知症高齢者の日常生活自立度, 障害高齢者の日常生活自立度, 障がい者手帳, 喪失事由, 喪失日FROM, 喪失日TO, 決定日FROM, 決定日TO, 交付日);
     }
 
 }
