@@ -160,7 +160,7 @@
             AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
         </if>
         <if test="isSakuseiJokenTuika">
-            AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+            AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
         </if>
                     ORDER BY
            dbt5502."shinsakaiOrder"
@@ -232,7 +232,7 @@
             AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
         </if>
         <if test="isSakuseiJokenTuika">
-            AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+            AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
         </if>
     </select>
      
@@ -282,7 +282,7 @@
             AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
         </if>
         <if test="isSakuseiJokenTuika">
-            AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+            AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
         </if>
                     ORDER BY
            dbt5502."shinsakaiOrder"
@@ -336,7 +336,7 @@
             AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
         </if>
         <if test="isSakuseiJokenTuika">
-            AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+            AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
         </if>
                     ORDER BY
            dbt5502."shinsakaiOrder"
@@ -775,7 +775,7 @@
                     AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
                 </if>
                 <if test="isSakuseiJokenTuika">
-                    AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+                    AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
                 </if>
                     ORDER BY
            dbt5502."shinsakaiOrder"
@@ -882,7 +882,7 @@
                     AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
                 </if>
                 <if test="isSakuseiJokenTuika">
-                    AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+                    AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
                 </if>
                 ORDER BY
                     dbt5502."shinseishoKanriNo"
@@ -943,7 +943,7 @@
                     AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
                 </if>
                 <if test="isSakuseiJokenTuika">
-                    AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+                    AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
                 </if>
                 ORDER BY
                     dbt5502."shinseishoKanriNo"
@@ -1182,7 +1182,7 @@
                     AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
                 </if>
                 <if test="isSakuseiJokenTuika">
-                    AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+                    AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
                 </if>
                     ORDER BY
            dbt5502."shinsakaiOrder"
@@ -1273,7 +1273,7 @@
                     AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
                 </if>
                 <if test="isSakuseiJokenTuika">
-                    AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+                    AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
                 </if>
 </select>
 <resultMap id="Result_JimuItiziHanteiASan" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ItiziHanteiEntity" autoMapping="true">

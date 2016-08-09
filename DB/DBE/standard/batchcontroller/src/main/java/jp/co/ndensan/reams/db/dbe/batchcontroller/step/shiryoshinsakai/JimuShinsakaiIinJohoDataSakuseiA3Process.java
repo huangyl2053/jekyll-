@@ -50,6 +50,7 @@ public class JimuShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<S
     private JimuShinsakaiIinJohoMyBatisParameter myBatisParameter;
     private List<ShinsakaiIinJohoEntity> shinsakaiIinJohoList;
     private ShinsakaishiryoA3Report report;
+    private List<JimuShinsakaishiryoBusiness> businessList;
     private int no;
     private int count;
     @BatchWriter
@@ -68,7 +69,7 @@ public class JimuShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<S
         myBatisParameter.setSisutemuYMD(FlexibleDate.getNowDate());
         shinsakaiIinJohoList = mapper.get事務局委員氏名(myBatisParameter);
         count = mapper.get事務局情報件数(myBatisParameter);
-        List<JimuShinsakaishiryoBusiness> businessList = new ArrayList<>();
+        businessList = new ArrayList<>();
         report = new ShinsakaishiryoA3Report(businessList);
         no = 0;
     }
