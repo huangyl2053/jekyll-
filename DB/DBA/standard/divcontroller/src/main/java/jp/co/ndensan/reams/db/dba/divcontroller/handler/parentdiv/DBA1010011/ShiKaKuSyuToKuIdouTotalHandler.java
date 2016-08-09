@@ -66,8 +66,9 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
     private static final RString 追加 = new RString("追加");
     private static final RString 表示モード = new RString("HihokenrirekiNashiMode");
     private static final RString FIRSTREQUEST以外 = new RString("2");
-    private HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
-    private ShikibetsuCode 識別コード = ShikibetsuCode.EMPTY;
+
+    private final HihokenshaNo 被保険者番号;
+    private final ShikibetsuCode 識別コード;
 
     private final ShikakuShutokuIdoTotalDiv div;
 
@@ -79,8 +80,12 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
      */
     public ShiKaKuSyuToKuIdouTotalHandler(ShikakuShutokuIdoTotalDiv div, TaishoshaKey key) {
         this.div = div;
-        被保険者番号 = key.get被保険者番号();
         識別コード = key.get識別コード();
+        if (key.get被保険者番号() == null || key.get被保険者番号().isEmpty()) {
+            被保険者番号 = HihokenshanotsukibanFinder.createInstance().getHihokenshanotsukiban(識別コード);
+        } else {
+            被保険者番号 = key.get被保険者番号();
+        }
     }
 
     /**
@@ -91,10 +96,7 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
     public RString get前排他キー() {
         RStringBuilder rstrBuilder = new RStringBuilder("ShikakuShutokuIdo");
         if (被保険者番号 == null || 被保険者番号.isEmpty()) {
-            HihokenshaNo hihokenshaNo = HihokenshanotsukibanFinder.createInstance().getHihokenshanotsukiban(識別コード);
-            if (!(hihokenshaNo == null || hihokenshaNo.isEmpty())) {
-                rstrBuilder.append("HihokenshaNo");
-            }
+            rstrBuilder.append(被保険者番号.getColumnValue());
         } else {
             rstrBuilder.append("HihokenshaNo");
         }
@@ -130,6 +132,28 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
         }
         get被保番号表示有無制御();
         return 状態_被保履歴タブ;
+    }
+
+    /**
+     * 資格得喪履歴のグリッドに設定されているデータを確認し、資格取得中であるかを判定する。
+     * グリッドにデータが0件、もしくは最新データ（グリッド上の1件目）の資格取得・喪失日がEMPTYではない場合、資格取得中と判定する。
+     *
+     * @return 資格取得中と判定出来たらtrue
+     */
+    public boolean is資格取得中() {
+        List<dgShikakuShutokuRireki_Row> dataSource
+                = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().getDataGridDataSource();
+
+        if (dataSource.isEmpty()) {
+            return false;
+        }
+
+        dgShikakuShutokuRireki_Row newestData = dataSource.get(0);
+        if (!newestData.getShutokuDate().getValue().isEmpty() && !newestData.getSoshitsuDate().getValue().isEmpty()) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -181,7 +205,7 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
     public RString onOpenTplIryou(RString 状態_医療保険タブ) {
         if (RString.isNullOrEmpty(状態_医療保険タブ) || !FIRSTREQUEST以外.equals(状態_医療保険タブ)) {
             div.getShikakuShutokuJoho().getTplIryoHoken().getIryoHokenRirekiMain().getCcdIryoHokenRireki()
-                    .initialize(状態_登録, 識別コード.getColumnValue());
+                    .initialize(状態_登録, 識別コード.getColumnValue(), 被保険者番号);
             状態_医療保険タブ = new RString("2");
         }
         return 状態_医療保険タブ;
@@ -223,6 +247,22 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
         div.getShikakuShutokuJoho().getTplIryoHoken().getIryoHokenRirekiMain().getCcdIryoHokenRireki().save();
         div.getShikakuShutokuJoho().getTplRofukuNenkin().getRohukuNenkin().getCcdRohukuNenkin().click_Save();
         div.getShikakuShutokuJoho().getTplShisetsuNyutaisho().getCcdShisetsuNyutaishoRirekiKanri().saveShisetsuNyutaisho();
+    }
+
+    /**
+     * セーブ可能かどうかをチェックします。
+     *
+     * @return セーブ可能ならtrue
+     */
+    public boolean isSavable() {
+        List<dgShikakuShutokuRireki_Row> rowList = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
+                .getCcdShikakuTokusoRireki().getDataGridDataSource();
+        for (dgShikakuShutokuRireki_Row row : rowList) {
+            if (追加.equals(row.getState())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -352,7 +392,7 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
     private LasdecCode get導入形態チェック() {
         ShichosonSecurityJoho 市町村情報セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (市町村情報セキュリティ情報 != null && 市町村情報セキュリティ情報.get導入形態コード() != null) {
-            get市町村コード(市町村情報セキュリティ情報);
+            return get市町村コード(市町村情報セキュリティ情報);
         }
         return LasdecCode.EMPTY;
     }
@@ -410,4 +450,5 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
             }
         }
     }
+
 }

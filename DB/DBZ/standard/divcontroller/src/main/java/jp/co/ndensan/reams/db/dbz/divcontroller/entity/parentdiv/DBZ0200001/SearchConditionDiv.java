@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokenshafinder.HihokenshaFinder.HihokenshaFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokenshafinder.HihokenshaFinder.IHihokenshaFinderDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class SearchConditionDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,7 +36,7 @@ public class SearchConditionDiv extends Panel {
      * @return ccdSearchCondition
      */
     @JsonProperty("ccdSearchCondition")
-    public HihokenshaFinderDiv getCcdSearchCondition() {
+    public IHihokenshaFinderDiv getCcdSearchCondition() {
         return ccdSearchCondition;
     }
 

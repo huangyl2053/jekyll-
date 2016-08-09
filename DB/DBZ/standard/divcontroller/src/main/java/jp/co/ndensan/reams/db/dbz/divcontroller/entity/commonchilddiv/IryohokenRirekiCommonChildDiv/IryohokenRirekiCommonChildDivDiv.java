@@ -8,10 +8,12 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.Iryohoken
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -23,7 +25,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  *
  */
 public class IryohokenRirekiCommonChildDivDiv extends Panel implements IIryohokenRirekiCommonChildDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -38,6 +41,8 @@ public class IryohokenRirekiCommonChildDivDiv extends Panel implements IIryohoke
     private RString 識別コード;
     @JsonProperty("市町村コード")
     private RString 市町村コード;
+    @JsonProperty("被保険者番号")
+    private RString 被保険者番号;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -118,6 +123,24 @@ public class IryohokenRirekiCommonChildDivDiv extends Panel implements IIryohoke
     }
 
     /*
+     * get被保険者番号
+     * @return 被保険者番号
+     */
+    @JsonProperty("被保険者番号")
+    public RString get被保険者番号() {
+        return 被保険者番号;
+    }
+
+    /*
+     * set被保険者番号
+     * @param 被保険者番号 被保険者番号
+     */
+    @JsonProperty("被保険者番号")
+    public void set被保険者番号(RString 被保険者番号) {
+        this.被保険者番号 = 被保険者番号;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -126,7 +149,7 @@ public class IryohokenRirekiCommonChildDivDiv extends Panel implements IIryohoke
     }
 
     @JsonIgnore
-    public void  setBtnIryohokenTsuika(Button btnIryohokenTsuika) {
+    public void setBtnIryohokenTsuika(Button btnIryohokenTsuika) {
         this.getPlIryohokenRireki().setBtnIryohokenTsuika(btnIryohokenTsuika);
     }
 
@@ -136,7 +159,7 @@ public class IryohokenRirekiCommonChildDivDiv extends Panel implements IIryohoke
     }
 
     @JsonIgnore
-    public void  setDgIryohokenIchiran(DataGrid<dgIryohokenIchiran_Row> dgIryohokenIchiran) {
+    public void setDgIryohokenIchiran(DataGrid<dgIryohokenIchiran_Row> dgIryohokenIchiran) {
         this.getPlIryohokenRireki().setDgIryohokenIchiran(dgIryohokenIchiran);
     }
 
@@ -146,7 +169,7 @@ public class IryohokenRirekiCommonChildDivDiv extends Panel implements IIryohoke
     }
 
     @JsonIgnore
-    public void  setPnlIryohokenJoho(pnlIryohokenJohoDiv pnlIryohokenJoho) {
+    public void setPnlIryohokenJoho(pnlIryohokenJohoDiv pnlIryohokenJoho) {
         this.getPlIryohokenRireki().setPnlIryohokenJoho(pnlIryohokenJoho);
     }
 
@@ -156,7 +179,7 @@ public class IryohokenRirekiCommonChildDivDiv extends Panel implements IIryohoke
     }
 
     @JsonIgnore
-    public void  setBtnIryohokenKakute(Button btnIryohokenKakute) {
+    public void setBtnIryohokenKakute(Button btnIryohokenKakute) {
         this.getPlIryohokenRireki().setBtnIryohokenKakute(btnIryohokenKakute);
     }
 
@@ -166,7 +189,7 @@ public class IryohokenRirekiCommonChildDivDiv extends Panel implements IIryohoke
     }
 
     @JsonIgnore
-    public void  setBtnCancel(Button btnCancel) {
+    public void setBtnCancel(Button btnCancel) {
         this.getPlIryohokenRireki().setBtnCancel(btnCancel);
     }
 
@@ -177,9 +200,21 @@ public class IryohokenRirekiCommonChildDivDiv extends Panel implements IIryohoke
     }
 
     @Override
-    public void initialize(RString モード, RString 識別コード) {
+    public void initialize(RString モード, RString 識別コード, HihokenshaNo 被保険者番号, LasdecCode 市町村コード) {
         createHandlerOf(this).initialize(モード, 識別コード);
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
+        this.set被保険者番号(被保険者番号.getColumnValue());
+        this.set市町村コード(市町村コード.getColumnValue());
+    }
+
+    @Override
+    public void initialize(RString モード, RString 識別コード, HihokenshaNo 被保険者番号) {
+        createHandlerOf(this).initialize(モード, 識別コード);
+        ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
+        this.set被保険者番号(被保険者番号.getColumnValue());
+
+        LasdecCode lasdecCode = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード();
+        this.set市町村コード(lasdecCode.getColumnValue());
     }
 
     @Override
@@ -195,5 +230,10 @@ public class IryohokenRirekiCommonChildDivDiv extends Panel implements IIryohoke
     @Override
     public List<dgIryohokenIchiran_Row> getDataGridList() {
         return this.getDgIryohokenIchiran().getDataSource();
+    }
+
+    @Override
+    public boolean isSavable() {
+        return createHandlerOf(this).isSavable(this);
     }
 }

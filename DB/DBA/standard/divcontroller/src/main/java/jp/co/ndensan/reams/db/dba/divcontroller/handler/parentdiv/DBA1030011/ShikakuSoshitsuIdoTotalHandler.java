@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.TokusoRireki;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
@@ -107,8 +109,9 @@ public class ShikakuSoshitsuIdoTotalHandler {
      */
     public RString onOpenTplIryou(RString 状態_医療保険タブ) {
         if (RString.isNullOrEmpty(状態_医療保険タブ) || !FIRSTREQUEST以外.equals(状態_医療保険タブ)) {
+
             div.getShikakuSoshitsuJoho().getTplIryoHoken().getIryoHokenRirekiMain().getCcdIryoHokenRireki()
-                    .initialize(状態_登録, 識別コード.getColumnValue());
+                    .initialize(状態_登録, 識別コード.getColumnValue(), 被保険者番号);
             状態_医療保険タブ = new RString("2");
         }
         return 状態_医療保険タブ;

@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenR
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.datagridRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -64,9 +65,12 @@ public class SikakuIdouTeiseiHandler {
             throw new ApplicationException(
                     UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("被保履歴情報"));
         }
+
         setButtonDisable();
+
         div.getShikakuShutokuJoho().getTplIryoHoken().getIryoHokenRirekii().getCcdIryoHokenRireki().
-                initialize(状態_登録, 識別コード.getColumnValue());
+                initialize(状態_登録, 識別コード.getColumnValue(), 被保険者番号);
+
         div.getShikakuShutokuJoho().getTplRofukuNenkin().getRohukuNenkin().getCcdRohukuNenkin()
                 .initialize(識別コード, 被保険者番号);
         SikakuIdouTeiseiJoho joho = new SikakuIdouTeiseiJoho();
@@ -93,15 +97,15 @@ public class SikakuIdouTeiseiHandler {
         for (dgIryohokenIchiran_Row row : div.getShikakuShutokuJoho().getTplIryoHoken()
                 .getIryoHokenRirekii().getCcdIryoHokenRireki().getDataGridList()) {
             IryoHokenJoho joho = new IryoHokenJoho();
-            joho.set医療保険加入年月日(stringToFlexibleDate(row.getDefaultDataName3()));
-            joho.set医療保険種別コード(row.getDefaultDataName5());
-            joho.set医療保険者名称(row.getDefaultDataName13());
-            joho.set医療保険者番号(row.getDefaultDataName12());
-            joho.set医療保険脱退年月日(stringToFlexibleDate(row.getDefaultDataName4()));
-            joho.set医療保険記号番号(row.getDefaultDataName7());
-            joho.set履歴番号(row.getDefaultDataName9().getValue().intValue());
-            joho.set市町村コード(new LasdecCode(row.getDefaultDataName1()));
-            joho.set識別コード(new ShikibetsuCode(row.getDefaultDataName0()));
+            joho.set医療保険加入年月日(row.getKanyuDate().getValue());
+            joho.set医療保険種別コード(row.getShubetsuCode());
+            joho.set医療保険者名称(row.getHokenshaName());
+            joho.set医療保険者番号(row.getHokenshaCode());
+            joho.set医療保険脱退年月日(row.getDattaiDate().getValue());
+            joho.set医療保険記号番号(row.getKigoNo());
+            joho.set履歴番号(row.getRirekiNo().getValue().intValue());
+            joho.set市町村コード(new LasdecCode(row.getShichosonCode()));
+            joho.set識別コード(new ShikibetsuCode(row.getShikibetsuCode()));
             oldList.add(joho);
         }
         return oldList;

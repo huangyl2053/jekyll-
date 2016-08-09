@@ -5,11 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dba.definition.processprm.nenreitotatsushikakuido;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsushikakuido.AtenaMybatisParameter;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,12 +29,13 @@ public class HihokenshaDaichoKoshinProcessParameter implements IBatchProcessPara
      * 抽出条件の生成のMybatisパラメータを作成します。
      *
      * @param shikibetsuTaishoPSMSearchKey 宛名識別対象PSM検索キー
-     * @param shikibetsuCode 識別コード
+     * @param 開始日
+     * @param 終了日
      * @return 抽出条件の生成のMybatisパラメータ
      */
     public AtenaMybatisParameter toAtenaMybatisParameter(IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey,
-            List<ShikibetsuCode> shikibetsuCode) {
+            FlexibleDate 開始日, FlexibleDate 終了日) {
 
-        return new AtenaMybatisParameter(shikibetsuTaishoPSMSearchKey, shikibetsuCode);
+        return new AtenaMybatisParameter(shikibetsuTaishoPSMSearchKey, this.開始日, this.終了日);
     }
 }

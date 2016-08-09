@@ -542,6 +542,19 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         }
     }
 
+    public boolean isSavable() {
+        List<dgShisetsuNyutaishoRireki_Row> listRow = div.getDgShisetsuNyutaishoRireki().getDataSource();
+        for (dgShisetsuNyutaishoRireki_Row row : listRow) {
+            if (RString.isNullOrEmpty(row.getState())) {
+                continue;
+            }
+            if (追加.equals(row.getState()) || 更新.equals(row.getState()) || 削除.equals(row.getState())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private static class RirekiNoDateComparator implements Comparator<dgShisetsuNyutaishoRireki_Row>, Serializable {
 
         @Override
