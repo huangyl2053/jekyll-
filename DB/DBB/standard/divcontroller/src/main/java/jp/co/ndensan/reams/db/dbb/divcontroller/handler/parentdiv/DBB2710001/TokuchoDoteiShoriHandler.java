@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.tokuchoteishitaisyosyadoutei.Toku
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysHizuke;
+import jp.co.ndensan.reams.db.dbx.definition.core.config.ConfigKeysHizuke;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

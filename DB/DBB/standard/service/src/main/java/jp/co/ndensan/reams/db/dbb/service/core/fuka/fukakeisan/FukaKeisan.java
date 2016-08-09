@@ -56,7 +56,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ShokkenKubun;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiShotokuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
-import jp.co.ndensan.reams.db.dbb.service.core.choshuhoho.ChoshuHohoKoshin;
+import jp.co.ndensan.reams.db.dbx.service.core.choshuhoho.ChoshuHohoKoshin;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.choteijiyu.ChoteiJiyuHantei;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoRank;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;

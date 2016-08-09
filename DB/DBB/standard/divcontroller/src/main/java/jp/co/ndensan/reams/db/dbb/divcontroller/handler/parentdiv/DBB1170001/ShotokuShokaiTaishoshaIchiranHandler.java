@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.shotokushokai.ShotokuShokaihyoIkk
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.config.ShotokuHikidashiConfig;
-import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysHizuke;
+import jp.co.ndensan.reams.db.dbx.definition.core.config.ConfigKeysHizuke;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.business.core.chihokokyodantai.ShichosonAtesaki;
