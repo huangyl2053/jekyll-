@@ -107,7 +107,7 @@
                 and DbT2002Fuka."dbT2002Fuka_tsuchishoNo" = #{通知書番号}
             </if>
         </where>
-        ORDER BY DbT2002Fuka."dbT2002Fuka_rirekiNo" DESC LIMIT 1
+        ORDER BY DbT2002Fuka."dbT2002Fuka_rirekiNo" DESC
     </sql>
 
     <resultMap id="resultMap_GemmenJohoRelateEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.gemmen.GemmenJohoRelateEntity" autoMapping="true">

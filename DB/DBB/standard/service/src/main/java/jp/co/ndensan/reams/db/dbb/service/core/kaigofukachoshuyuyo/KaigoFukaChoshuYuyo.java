@@ -147,7 +147,7 @@ public class KaigoFukaChoshuYuyo {
                 && del介護賦課徴収猶予.getKibetsuChoshuYuyoList() != null
                 && !del介護賦課徴収猶予.getKibetsuChoshuYuyoList().isEmpty()) {
             for (KibetsuChoshuYuyo 期別徴収猶予 : del介護賦課徴収猶予.getKibetsuChoshuYuyoList()) {
-                if (期別徴収猶予.get期() == 期) {
+                if (期別徴収猶予.get期() == 期 && ChoshuHohoKibetsu.普通徴収.getコード().equals(期別徴収猶予.get徴収方法())) {
                     DbT2007KibetsuChoshuYuyoEntity entity = 期別徴収猶予.toEntity();
                     entity.setState(EntityDataState.Deleted);
                     介護期別徴収猶予Dac.delete(entity);
@@ -202,6 +202,7 @@ public class KaigoFukaChoshuYuyo {
         } else {
             賦課情報_介護賦課.setChoteiJiyu1(Dミ);
         }
+        賦課の情報RelateEntity.set介護賦課Entity(賦課情報_介護賦課);
         FukaManager.createInstance().save賦課(new FukaJoho(賦課の情報RelateEntity));
     }
 
