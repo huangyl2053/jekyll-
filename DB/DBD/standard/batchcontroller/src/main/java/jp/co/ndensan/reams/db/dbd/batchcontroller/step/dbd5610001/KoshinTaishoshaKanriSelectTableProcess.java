@@ -104,7 +104,6 @@ public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<Kos
     @Override
     protected void process(KoshinTaishoshaKanriEntity entity) {
         isInsert = true;
-
         DbT4101NinteiShinseiJohoEntity dbT4101Entity = entity.getDbT4101NinteiShinseiJohoEntity();
         DbT4102NinteiKekkaJohoEntity dbT4102Entity = entity.getDbT4102NinteiKekkaJohoEntity();
         RString 申請書管理番号 = new RString(getCountedItem(SubGyomuCode.DBD介護受給,
@@ -124,7 +123,6 @@ public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<Kos
 
     @Override
     protected void afterExecute() {
-
         if (isInsert) {
             dbT7022tableWriter.insert(getDbT7022ShoriDateKanriEntity(parameter.get条件指定()));
         }
@@ -223,7 +221,7 @@ public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<Kos
         entity.setZenkaiShinseishoKanriNo(ninteiEntity.getShinseishoKanriNo());
     }
 
-    private FlexibleYear get年度(FlexibleYear 年度, RString 年度内連番) {
+    private FlexibleYear get年度(FlexibleYear 年度) {
         if (!parameter.get年度内連番().isNullOrEmpty()) {
             if (parameter.get年度内連番().equals(認定年度内連番)) {
                 年度 = new FlexibleYear(new RString((parameter.get年度().getYearValue() + 1)));
@@ -236,7 +234,7 @@ public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<Kos
         }
     }
 
-    private RString get年度内連番(FlexibleYear 年度, RString 年度内連番) {
+    private RString get年度内連番(RString 年度内連番) {
         if (!年度内連番.isNullOrEmpty()) {
             if (年度内連番.equals(認定年度内連番)) {
                 return 新年度内連番;
@@ -255,7 +253,6 @@ public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<Kos
             return result;
         }
         return 新年度内連番;
-
     }
 
     private DbT4123NinteiKeikakuJohoEntity getDbT4123NinteiKeikakuJohoEntity(RString 申請書管理番号) {
@@ -295,8 +292,8 @@ public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<Kos
             entity.setShichosonCode(AssociationFinderFactory.createInstance().getAssociation().getLasdecCode_());
             entity.setShoriName(更新申請対象者管理);
             entity.setShoriEdaban(処理枝番);
-            entity.setNendo(get年度(parameter.get年度(), parameter.get年度内連番()));
-            entity.setNendoNaiRenban(get年度内連番(parameter.get年度(), parameter.get年度内連番()));
+            entity.setNendo(get年度(parameter.get年度()));
+            entity.setNendoNaiRenban(get年度内連番(parameter.get年度内連番()));
             entity.setKijunYMD(FlexibleDate.EMPTY);
             entity.setKijunTimestamp(YMDHMS.now());
             entity.setTaishoKaishiYMD(FlexibleDate.EMPTY);
@@ -310,8 +307,8 @@ public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<Kos
             entity.setShichosonCode(AssociationFinderFactory.createInstance().getAssociation().getLasdecCode_());
             entity.setShoriName(更新申請対象者管理);
             entity.setShoriEdaban(処理枝番);
-            entity.setNendo(get年度(parameter.get年度(), parameter.get年度内連番()));
-            entity.setNendoNaiRenban(get年度内連番(parameter.get年度(), parameter.get年度内連番()));
+            entity.setNendo(get年度(parameter.get年度()));
+            entity.setNendoNaiRenban(get年度内連番(parameter.get年度内連番()));
             entity.setKijunYMD(FlexibleDate.EMPTY);
             entity.setKijunTimestamp(YMDHMS.now());
             entity.setTaishoKaishiYMD(FlexibleDate.EMPTY);

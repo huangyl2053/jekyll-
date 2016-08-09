@@ -74,14 +74,14 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
     List<RString> 出力順BODY;
     private final List<PersonalData> personalDataList = new ArrayList<>();
     @BatchWriter
-    private BatchReportWriter<FutanWariaiShoHakkoIchiranSource> BatchReportWriter;
-    private ReportSourceWriter<FutanWariaiShoHakkoIchiranSource> ReportSourceWriter;
+    private BatchReportWriter<FutanWariaiShoHakkoIchiranSource> batchReportWriter;
+    private ReportSourceWriter<FutanWariaiShoHakkoIchiranSource> reportSourceWriter;
 
     @BatchWriter
-    BatchPermanentTableWriter RiyoshaFutanWariaiWriter;
+    BatchPermanentTableWriter riyoshaFutanWariaiWriter;
 
     @BatchWriter
-    BatchPermanentTableWriter ShoKofuKaishuWriter;
+    BatchPermanentTableWriter shoKofuKaishuWriter;
 
     private static final RString コンマ = new RString(",");
     private static final RString ZERO = new RString("0");
@@ -128,7 +128,8 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
             IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
             出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.FCZ医療費共通,
                     ReportIdDBC.DBC100065.getReportId(), Long.valueOf(parameter.get出力順().toString()));
-            出力順BODY = MyBatisOrderByClauseCreator.create(SaishinsaKetteiTsuchishoIchiranKohifutanshaProperty.KagoKetteiKohifutanshaInBreakerFieldsEnum.class, 出力順)
+            出力順BODY = MyBatisOrderByClauseCreator.create(
+                    SaishinsaKetteiTsuchishoIchiranKohifutanshaProperty.KagoKetteiKohifutanshaInBreakerFieldsEnum.class, 出力順)
                     .split(コンマ.toString());
         }
 
@@ -142,10 +143,10 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
 
     @Override
     protected void createWriter() {
-        BatchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200090.getReportId().value()).create();
-        ReportSourceWriter = new ReportSourceWriter<>(BatchReportWriter);
-        RiyoshaFutanWariaiWriter = new BatchPermanentTableWriter(DbT3113RiyoshaFutanWariaiEntity.class);
-        ShoKofuKaishuWriter = new BatchPermanentTableWriter(DbT7037ShoKofuKaishuEntity.class);
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200090.getReportId().value()).create();
+        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
+        riyoshaFutanWariaiWriter = new BatchPermanentTableWriter(DbT3113RiyoshaFutanWariaiEntity.class);
+        shoKofuKaishuWriter = new BatchPermanentTableWriter(DbT7037ShoKofuKaishuEntity.class);
 
         futanwariaiShoHakkoIchiranManager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, FUATANWARIAI_EUC_ENTITY_ID,
                 UzUDE0831EucAccesslogFileType.Csv);
@@ -180,7 +181,7 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
                 entity, parameter, ソート順１, コンマ, ソート順１, ソート順２, ソート順３, ソート順４, ソート順５,
                 new RString(ページ), parameter.getバッチ起動時処理日時(), new RString(連番));
         FutanWariaiShoHakkoIchiranReport report = new FutanWariaiShoHakkoIchiranReport(futanWariaiShoHakkoIchiranEntity);
-        report.writeBy(ReportSourceWriter);
+        report.writeBy(reportSourceWriter);
         FutanwariaiShoHakkoIchiranCSVEntity futanwariaiShoHakkoIchiranCSVEntity
                 = service.getHakkoIchiranCSVData(帳票制御共通, entity, new RString(連番));
         futanwariaiShoHakkoIchiranEucCsvWriter.writeLine(futanwariaiShoHakkoIchiranCSVEntity);
@@ -204,7 +205,7 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
         item.setHakoKubun(ONE);
         item.setHakoYMD(new FlexibleDate(parameter.getバッチ起動時処理日時().getDate().toDateString()));
         item.setKofuYMD(new FlexibleDate(parameter.get交付年月日().toDateString()));
-        RiyoshaFutanWariaiWriter.update(item);
+        riyoshaFutanWariaiWriter.update(item);
     }
 
     private void insertShoKofuKaishu(RiyoshaFutanwariaishoTempEntity entity) {
@@ -229,7 +230,7 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
         item.setTanpyoHakkoUmuFlag(false);
         item.setHakkoShoriTimestamp(new YMDHMS(parameter.getバッチ起動時処理日時()));
         item.setLogicalDeletedFlag(false);
-        ShoKofuKaishuWriter.update(item);
+        shoKofuKaishuWriter.update(item);
     }
 
     private RString get交付事由(RiyoshaFutanwariaishoTempEntity entity) {

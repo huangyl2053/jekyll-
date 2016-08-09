@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000014;
 
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000014.FutanWariaiShoHakkoPanelDiv;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationDictionary;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationDictionaryBuilder;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
@@ -23,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  *
  * @reamsid_L DBC-4990-010 pengxingyi
  */
-public class FutanWariaiShoHakkoValidationHandler {
+public final class FutanWariaiShoHakkoValidationHandler {
 
     private final FutanWariaiShoHakkoPanelDiv div;
 
@@ -92,8 +91,7 @@ public class FutanWariaiShoHakkoValidationHandler {
 
     private static enum FutanWariaiShoHakkoValidationMessage implements IValidationMessage {
 
-        抽出期間不正(DbcErrorMessages.抽出期間不正),
-        入力必須(UrErrorMessages.必須項目);
+        抽出期間不正(DbcErrorMessages.抽出期間不正);
 
         private final Message message;
 

@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-4990-030 pengxingyi
  */
-public class FutanwariaishoHakkoFlow extends BatchFlowBase<FutanwariaishoHakkoBatchParameter> {
+public class DBC180040_FutanwariaishoHakko extends BatchFlowBase<FutanwariaishoHakkoBatchParameter> {
 
     private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
@@ -64,6 +64,11 @@ public class FutanwariaishoHakkoFlow extends BatchFlowBase<FutanwariaishoHakkoBa
         executeStep(処理日付管理);
     }
 
+    /**
+     * 利用者負担割合期間Insertです。
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(利用者負担割合期間)
     protected IBatchFlowCommand createReport1() {
         return loopBatch(FutanWariaiInsertProcess.class)
@@ -71,6 +76,11 @@ public class FutanwariaishoHakkoFlow extends BatchFlowBase<FutanwariaishoHakkoBa
                 .define();
     }
 
+    /**
+     * 負担割合証出力です。
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(負担割合証)
     protected IBatchFlowCommand createReport2() {
         return loopBatch(FutanWariaiShoOutputProcess.class)
@@ -78,6 +88,11 @@ public class FutanwariaishoHakkoFlow extends BatchFlowBase<FutanwariaishoHakkoBa
                 .define();
     }
 
+    /**
+     * 負担割合証連帳縦出力です。
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(負担割合証連帳縦)
     protected IBatchFlowCommand createReport3() {
         return loopBatch(FutanWariaiShoRenchoTateOutputProcess.class)
@@ -85,6 +100,11 @@ public class FutanwariaishoHakkoFlow extends BatchFlowBase<FutanwariaishoHakkoBa
                 .define();
     }
 
+    /**
+     * 負担割合証連帳横出力です。
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(負担割合証連帳横)
     protected IBatchFlowCommand createReport4() {
         return loopBatch(FutanWariaiShoRenchoYokoOutputProcess.class)
@@ -92,6 +112,11 @@ public class FutanwariaishoHakkoFlow extends BatchFlowBase<FutanwariaishoHakkoBa
                 .define();
     }
 
+    /**
+     * 負担割合証発行一覧表出力です。
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(負担割合証発行一覧表)
     protected IBatchFlowCommand createReport5() {
         return loopBatch(FutanWariaiShoHakkoIchiranOutputProcess.class)
@@ -99,6 +124,11 @@ public class FutanwariaishoHakkoFlow extends BatchFlowBase<FutanwariaishoHakkoBa
                 .define();
     }
 
+    /**
+     * 処理日付管理です。
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(処理日付管理)
     protected IBatchFlowCommand createReport6() {
         return loopBatch(ShoriDateKanriUpdateProcess.class)
