@@ -94,13 +94,7 @@ public class NinteiShinsakaiKekkaDataTorikomi {
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
             }
-
-            RString path = Path.combinePath(Path.getRootPath(RString.EMPTY), SERVER_PATH);
-            File サーバ = new File(path.toString());
-            File local = new File(file.getFilePath().toString());
-            if (サーバ.exists() && local.exists()) {
-                local.renameTo(new File(サーバ, file.getFileName().toString()));
-            }
+            savaCsvファイル(file);
         }
         return ResponseData.of(div).respond();
     }
@@ -122,6 +116,16 @@ public class NinteiShinsakaiKekkaDataTorikomi {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         return ResponseData.of(div).respond();
+    }
+
+    private boolean savaCsvファイル(FileData file) {
+        RString path = Path.combinePath(Path.getRootPath(RString.EMPTY), SERVER_PATH);
+        File サーバ = new File(path.toString());
+        File local = new File(file.getFilePath().toString());
+        if (サーバ.exists() && local.exists()) {
+            return local.renameTo(new File(サーバ, file.getFileName().toString()));
+        }
+        return true;
     }
 
     private NinteiShinsakaiKekkaDataTorikomiHandler getHandler(NinteiShinsakaiKekkaDataTorikomiDiv div) {
