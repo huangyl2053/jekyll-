@@ -482,4 +482,33 @@
                 #{kijyuYMD} between koseiShichosonMaster."kanyuYMD" and koseiShichosonMaster."ridatsuYMD"
         </if>        
     </select>
+    
+    <!-- 広域全合併市町村情報の取得処理 -->
+    <select resultOrdered="true" id="getKouikigappeijohoWithSort" resultMap="gappeiJyohoKouikiResultMap"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
+        SELECT 
+            <include refid="allColumn_KouikiSearch"></include>
+        FROM 
+            rgdb."DbT7055GappeiJoho" AS gappei 
+        INNER JOIN
+            rgdb."DbT7051KoseiShichosonMaster" AS kosei
+        ON
+            gappei."chiikiNo" = kosei."gappeiChiikiNo" 
+        WHERE 
+            1 = 1
+        <if test="useHyoujium">
+            AND 
+                kosei."gappeiKyuShichosonHyojiUmu" = '1'  
+        </if>
+        <if test="null!=gappeiJohoSortOrder and gappeiJohoSortOrder.getコード() == 1">
+            ORDER BY 
+                gappei."gappeiYMD" DESC,
+                gappei."chiikiNo" DESC
+        </if>
+        <if test="null!=gappeiJohoSortOrder and gappeiJohoSortOrder.getコード() == 2">
+            ORDER BY 
+                gappei."kokuhorenDataFromYMD" DESC,
+                gappei."chiikiNo" DESC
+        </if>                 
+    </select>  
 </mapper>
