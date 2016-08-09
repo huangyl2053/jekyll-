@@ -129,16 +129,21 @@ public class IinSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsak
 
     private List<RString> 出力条件() {
         List<RString> list = new ArrayList<>();
-        RStringBuilder builder = new RStringBuilder();
-        builder.append("【開始資料番号】")
+        RStringBuilder builder1 = new RStringBuilder();
+        builder1.append("【合議体番号】")
                 .append(" ")
-                .append(paramter.getBangoStart());
-        RStringBuilder stringBuilder = new RStringBuilder();
-        stringBuilder.append("【終了資料番号】")
+                .append(paramter.getGogitaiNo());
+        RStringBuilder builder2 = new RStringBuilder();
+        builder2.append("【介護認定審査会開催予定年月日】")
                 .append(" ")
-                .append(paramter.getBangoEnd());
-        list.add(builder.toRString());
-        list.add(stringBuilder.toRString());
+                .append(paramter.getShinsakaiKaisaiYoteiYMD().wareki().toDateString());
+        RStringBuilder builder3 = new RStringBuilder();
+        builder3.append("【介護認定審査会開催番号】")
+                .append(" ")
+                .append(paramter.getShinsakaiKaisaiNo());
+        list.add(builder1.toRString());
+        list.add(builder2.toRString());
+        list.add(builder3.toRString());
         return list;
     }
 }

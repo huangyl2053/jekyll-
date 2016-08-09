@@ -132,6 +132,8 @@ public class IinHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJohoE
                 .append(" ")
                 .append(paramter.getShinsakaiKaisaiNo());
         list.add(builder1.toRString());
+        list.add(builder2.toRString());
+        list.add(builder3.toRString());
         return list;
     }
 }
