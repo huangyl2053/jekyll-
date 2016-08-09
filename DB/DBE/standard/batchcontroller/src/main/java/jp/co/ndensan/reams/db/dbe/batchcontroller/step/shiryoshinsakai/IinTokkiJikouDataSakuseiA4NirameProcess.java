@@ -10,13 +10,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.TokkiText1A4Business;
-import jp.co.ndensan.reams.db.dbe.business.report.tokkitexta4.TokkiText1A4Report;
+import jp.co.ndensan.reams.db.dbe.business.report.tokkia4.TokkiText2A4Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkitexta4.TokkiText1A4ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkia4.TokkiText2A4ReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
@@ -44,24 +44,26 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-0150-200 linghuhang
  */
-public class IinTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<ShinsakaiSiryoKyotsuEntity> {
+public class IinTokkiJikouDataSakuseiA4NirameProcess extends BatchKeyBreakBase<ShinsakaiSiryoKyotsuEntity> {
 
     private static final RString SELECT_SHINSAKAISIRYOKYOTSU = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getShinsakaiSiryoKyotsu");
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
-            new RString(TokkiText1A4ReportSource.ReportSourceFields.hokenshaNo.name())));
-    private static final int 最大表示行数 = 15;
+            new RString(TokkiText2A4ReportSource.ReportSourceFields.hokenshaNo.name())));
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
     private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
     private IShiryoShinsakaiIinMapper mapper;
-    private int ページ表示行数;
+    private int ページ数;
+    private boolean hasBreak;
 
     @BatchWriter
-    private BatchReportWriter<TokkiText1A4ReportSource> batchWriteA4;
-    private ReportSourceWriter<TokkiText1A4ReportSource> reportSourceWriterA4;
+    private BatchReportWriter<TokkiText2A4ReportSource> batchWriteA4;
+    private ReportSourceWriter<TokkiText2A4ReportSource> reportSourceWriterA4;
 
     @Override
     protected void initialize() {
+        ページ数 = 2;
+        hasBreak = false;
         mapper = getMapper(IShiryoShinsakaiIinMapper.class);
         myBatisParameter = paramter.toIinTokkiJikouItiziHanteiMyBatisParameter();
         List<RString> shoriJotaiKubunList = new ArrayList<>();
@@ -78,17 +80,15 @@ public class IinTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
 
     @Override
     protected void createWriter() {
-        batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517141.getReportId().value())
-                .addBreak(new BreakerCatalog<TokkiText1A4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+        batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517134.getReportId().value())
+                .addBreak(new BreakerCatalog<TokkiText2A4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .create();
         reportSourceWriterA4 = new ReportSourceWriter<>(batchWriteA4);
     }
 
     @Override
     protected void keyBreakProcess(ShinsakaiSiryoKyotsuEntity current) {
-        if (hasBrek(getBefore(), current)) {
-            ページ表示行数 = 0;
-        }
+        hasBrek(getBefore(), current);
     }
 
     @Override
@@ -99,16 +99,18 @@ public class IinTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
         kyotsuEntity.setHihokenshaName(AtenaMeisho.EMPTY);
 
         List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List = get特記情報(kyotsuEntity);
-        TokkiText1A4Business business = new TokkiText1A4Business(false, 1, kyotsuEntity, 特記情報List);
-        TokkiText1A4Report report = new TokkiText1A4Report(business);
+        TokkiText1A4Business business = new TokkiText1A4Business(true, ページ数, kyotsuEntity, 特記情報List);
+        TokkiText2A4Report report = new TokkiText2A4Report(business);
         report.writeBy(reportSourceWriterA4);
-        ページ表示行数 = business.getページ表示行数();
+        if (business.hasBreak()) {
+            ページ数 = ページ数 + 1;
+            hasBreak = true;
+        }
     }
 
     @Override
     protected void afterExecute() {
-        outputJokenhyoFactory(ReportIdDBE.DBE517141.getReportId().value(), new RString("概況調査の特記"));
-        outputJokenhyoFactory(ReportIdDBE.DBE517131.getReportId().value(), new RString("特記事項（1枚目）"));
+        outputJokenhyoFactory(ReportIdDBE.DBE517134.getReportId().value(), new RString("特記事項（2枚目以降）"));
     }
 
     private List<DbT5205NinteichosahyoTokkijikoEntity> get特記情報(ShinsakaiSiryoKyotsuEntity entity) {
@@ -123,7 +125,7 @@ public class IinTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
     }
 
     private boolean hasBrek(ShinsakaiSiryoKyotsuEntity before, ShinsakaiSiryoKyotsuEntity current) {
-        return !(before.getShinsakaiOrder() == current.getShinsakaiOrder()) || ページ表示行数 % 最大表示行数 == 0;
+        return !(before.getShinsakaiOrder() == current.getShinsakaiOrder()) || hasBreak;
     }
 
     private void outputJokenhyoFactory(RString id, RString 帳票名) {
