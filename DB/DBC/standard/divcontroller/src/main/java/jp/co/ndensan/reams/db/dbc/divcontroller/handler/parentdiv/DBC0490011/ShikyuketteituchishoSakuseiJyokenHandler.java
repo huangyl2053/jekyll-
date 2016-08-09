@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0490011;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.ketteitsuchishosakusei.param.KogakuJigyoServicehiShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc020030.DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc020060.DBC020060_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter;
@@ -37,6 +39,8 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
     private static final RString 高額サービス費支給決定通知書作成帳票ID = new RString("DBC100007_KogakuKetteiTsuchiSho");
     private static final RString 高額総合事業サービス費支給決定通知書帳票ID = new RString("DBC100061_JigyoKogakuKetteiTsuchisho");
     private static final RString 処理枝番_01 = new RString("01");
+    private static final RString 処理枝番_02 = new RString("02");
+    private static final RString 処理枝番_03 = new RString("03");
     private static final RString KEY0 = new RString("key0");
     private static final RString KEY1 = new RString("key1");
     private static final RString KEY2 = new RString("key2");
@@ -119,24 +123,47 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
         RString 選択Key = div.getChushutsuJoken().getRadHizukeSentaku().getSelectedKey();
         RDate 前回対象日From = null;
         RDate 前回対象日To = null;
+        RDate システム日付 = RDate.getNowDate();
+        Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
+        List<ShoriDateKanri> 前回対象日List
+                = KougakuSabisuhiShikyuuKetteiTsuchishoSakusei.createInstance().getZenkaiTaisyobiData(導入団体クラス.get地方公共団体コード());
+        Map<RString, ShoriDateKanri> 前回対象日Map = new HashMap<>();
+        for (ShoriDateKanri 前回対象日 : 前回対象日List) {
+            前回対象日Map.put(前回対象日.get処理枝番(), 前回対象日);
+        }
         if (KEY0.equals(選択Key)) {
             div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setReadOnly(false);
             div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setReadOnly(true);
             div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteishaUketukeNengetsu().setReadOnly(true);
-            前回対象日From = div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().getFromValue();
-            前回対象日To = div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().getToValue();
+            if (前回対象日Map.containsKey(処理枝番_01)) {
+                前回対象日From = new RDate(前回対象日Map.get(処理枝番_01).get対象開始年月日().toString());
+                前回対象日To = new RDate(前回対象日Map.get(処理枝番_01).get対象終了年月日().toString());
+            }
+            if (前回対象日To != null) {
+                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setFromValue(前回対象日To.plusDay(INT_1));
+            }
+            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setToValue(システム日付);
         } else if (KEY1.equals(選択Key)) {
             div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setReadOnly(true);
             div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setReadOnly(false);
             div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteishaUketukeNengetsu().setReadOnly(true);
-            前回対象日From = div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().getFromValue();
-            前回対象日To = div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().getToValue();
+            if (前回対象日Map.containsKey(処理枝番_02)) {
+                前回対象日From = new RDate(前回対象日Map.get(処理枝番_02).get対象開始年月日().toString());
+                前回対象日To = new RDate(前回対象日Map.get(処理枝番_02).get対象終了年月日().toString());
+            }
+            if (前回対象日To != null) {
+                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setFromValue(前回対象日To.plusDay(INT_1));
+            }
+            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setToValue(システム日付);
         } else if (KEY2.equals(選択Key)) {
             div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setReadOnly(true);
             div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setReadOnly(true);
             div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteishaUketukeNengetsu().setReadOnly(false);
-            前回対象日From = div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteishaUketukeNengetsu().getValue();
-            前回対象日To = 前回対象日From;
+            if (前回対象日Map.containsKey(処理枝番_03)) {
+                前回対象日From = new RDate(前回対象日Map.get(処理枝番_03).get対象開始年月日().toString());
+                前回対象日To = new RDate(前回対象日Map.get(処理枝番_03).get対象終了年月日().toString());
+            }
+            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteishaUketukeNengetsu().setValue(システム日付);
         }
         div.getChushutsuJoken().getTxtZenkaiTaishobi().setFromValue(前回対象日From);
         div.getChushutsuJoken().getTxtZenkaiTaishobi().setToValue(前回対象日To);

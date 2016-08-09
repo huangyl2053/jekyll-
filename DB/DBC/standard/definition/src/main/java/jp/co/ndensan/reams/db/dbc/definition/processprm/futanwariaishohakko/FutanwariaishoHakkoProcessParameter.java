@@ -39,6 +39,11 @@ public class FutanwariaishoHakkoProcessParameter implements IBatchProcessParamet
     private IShikibetsuTaishoPSMSearchKey searchKey;
     private IAtesakiPSMSearchKey atesakiKey;
 
+    /**
+     * MybatisParameter取得です。
+     *
+     * @return {@link FutanwariaishoHakkoMybatisParameter}
+     */
     public FutanwariaishoHakkoMybatisParameter toMybatisParameter() {
         return new FutanwariaishoHakkoMybatisParameter(atesakiKey, 年度, 交付年月日, 発行区分, 出力対象, 抽出期間開始日時,
                 抽出期間終了日時, 出力順, searchKey);

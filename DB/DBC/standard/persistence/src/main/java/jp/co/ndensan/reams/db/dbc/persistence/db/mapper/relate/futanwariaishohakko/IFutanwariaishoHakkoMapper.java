@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 public interface IFutanwariaishoHakkoMapper {
 
     /**
+     * 利用者負担割合明細取得です。
      *
      * @param para {@link FutanwariaishoHakkoMybatisParameter}
      * @return {@link List<DbT3113RiyoshaFutanWariaiEntity>}
@@ -27,6 +28,7 @@ public interface IFutanwariaishoHakkoMapper {
     List<DbT3114RiyoshaFutanWariaiMeisaiEntity> select利用者負担割合明細(FutanwariaishoHakkoMybatisParameter para);
 
     /**
+     * 処理日付管理取得です。
      *
      * @param para {@link FutanwariaishoHakkoMybatisParameter}
      * @return {@link List<DbT7022ShoriDateKanriEntity>}
@@ -34,6 +36,7 @@ public interface IFutanwariaishoHakkoMapper {
     List<DbT7022ShoriDateKanriEntity> select処理日付管理(FutanwariaishoHakkoMybatisParameter para);
 
     /**
+     * 利用者負担割合証取得です。
      *
      * @param para {@link FutanwariaishoHakkoMybatisParameter}
      * @return {@link List<RiyoshaFutanwariaishoTempEntity>}

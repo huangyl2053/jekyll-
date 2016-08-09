@@ -94,9 +94,7 @@ public class TokuChoSoufuJohoSakuseiBatch {
     private static final RString 本算定賦課 = new RString("本算定賦課");
     private static final RString 金額あり = new RString("1");
     private static final RString 金額なし = new RString("2");
-    private static final RString GENERICKEY_UET1704 = new RString("UeT1704KaigoTokuchoTorikomiRireki_renban");
-    private static final RString GENERICKEY_UET0515
-            = new RString("UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550_renban");
+    private static final RString GENERICKEY = new RString("UeT1704KaigoTokuchoTorikomiRireki_renban");
     private final FlexibleYear 年度 = new FlexibleYear("0000");
     private final MapperProvider mapperProvider;
     private final DbT7022ShoriDateKanriDac 処理日付管理マスタdac;
@@ -205,7 +203,7 @@ public class TokuChoSoufuJohoSakuseiBatch {
      */
     public UeT1704KaigoTokuchoTorikomiRirekiEntity intTokuChoJohoTorikomiRireki(FlexibleYear 処理年度, RDate 特徴開始月, RString 遷移元メニュー, RDateTime 処理日時) {
         UeT1704KaigoTokuchoTorikomiRirekiEntity 介護特別徴収情報取込履歴entity = new UeT1704KaigoTokuchoTorikomiRirekiEntity();
-        CountedItem countedItem = Saiban.get(SubGyomuCode.UEA特別徴収分配集約, GENERICKEY_UET1704, 年度);
+        CountedItem countedItem = Saiban.get(SubGyomuCode.UEA特別徴収分配集約, GENERICKEY, 年度);
         int 連番 = (int) countedItem.next();
         if (特徴制度間IF作成.equals(遷移元メニュー)) {
             YMDHMS 基準日時 = chkTokuchoIraikinKeisan(特徴開始月, 処理年度);
@@ -245,7 +243,7 @@ public class TokuChoSoufuJohoSakuseiBatch {
         List<TokuChoSoufuJohoSakuseiResult> resultlist = TokuChoSoufuJohoSakuseiResult.getTokuChoSoufuJohoSakuseiResultList(resultentitylist);
         int 連番 = 0;
         if (resultlist != null && !resultlist.isEmpty()) {
-            連番 = (int) Saiban.get(SubGyomuCode.UEA特別徴収分配集約, GENERICKEY_UET0515, 年度).next();
+            連番 = (int) Saiban.get(SubGyomuCode.UEA特別徴収分配集約, GENERICKEY, 年度).next();
         }
         int シーケンス;
         Map<RString, Integer> シーケンスMap = new HashMap<>();

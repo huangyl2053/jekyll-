@@ -21,12 +21,9 @@ import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
-import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
-import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -98,14 +95,15 @@ public class FutanWariaishoIkkatsu {
      */
     public FutanWariaiShoKattokamiEntity getFutanWariaiSourceData(ChohyoSeigyoKyotsu 帳票制御共通, RString imageFolderPath,
             RiyoshaFutanwariaishoTempEntity 利用者負担割合証Temp, RDate 交付年月日, RString 連番) {
-        IAtesaki 宛先 = AtesakiFactory.createInstance(利用者負担割合証Temp.get宛先());
+//        IAtesaki 宛先 = AtesakiFactory.createInstance(利用者負担割合証Temp.get宛先());
         IShikibetsuTaisho 宛名 = ShikibetsuTaishoFactory.createShikibetsuTaisho(利用者負担割合証Temp.get宛名());
         Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().
                 get帳票認証者(GyomuCode.DB介護保険, new RString("0001"), FlexibleDate.getNowDate());
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         NinshoshaSource compNinshosha = NinshoshaSourceBuilderFactory.
-                createInstance(認証者, 地方公共団体, imageFolderPath, RDate.getNowDate(), 0, false, false, KenmeiFuyoKubunType.付与なし).buildSource();
-        EditedAtesaki 編集後宛先 = new EditedAtesaki(宛先, 地方公共団体, 帳票制御共通);
+                createInstance(認証者, 地方公共団体, imageFolderPath, RDate.getNowDate(), 0, false, false, KenmeiFuyoKubunType.付与なし).
+                buildSource();
+//        EditedAtesaki 編集後宛先 = new EditedAtesaki(宛先, 地方公共団体, 帳票制御共通);
 //        SofubutsuAtesakiSource 送付物宛先ソースデータ = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
         SofubutsuAtesakiSource 送付物宛先ソースデータ = null;
         EditedKojin 編集後個人 = new EditedKojin(宛名.to個人(), 帳票制御共通, 地方公共団体);
@@ -192,10 +190,10 @@ public class FutanWariaishoIkkatsu {
             RiyoshaFutanwariaishoTempEntity 利用者負担割合証, FutanwariaishoHakkoProcessParameter param, RString 保険者番号,
             RString 保険者名, RString ソート順１, RString ソート順２, RString ソート順３, RString ソート順４, RString ソート順５,
             RString ページ, RDateTime 作成日時, RString 連番) {
-        IAtesaki 宛先 = AtesakiFactory.createInstance(利用者負担割合証.get宛先());
+//        IAtesaki 宛先 = AtesakiFactory.createInstance(利用者負担割合証.get宛先());
         IShikibetsuTaisho 宛名 = ShikibetsuTaishoFactory.createShikibetsuTaisho(利用者負担割合証.get宛名());
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-        EditedAtesaki 編集後宛先 = new EditedAtesaki(宛先, 地方公共団体, 帳票制御共通);
+//        EditedAtesaki 編集後宛先 = new EditedAtesaki(宛先, 地方公共団体, 帳票制御共通);
         EditedKojin 編集後個人 = new EditedKojin(宛名.to個人(), 帳票制御共通, 地方公共団体);
         FutanWariaiShoHakkoIchiranEntity source = new FutanWariaiShoHakkoIchiranEntity();
         source.set年度(dateFormatパターン107(param.get年度()));
@@ -266,10 +264,10 @@ public class FutanWariaishoIkkatsu {
      */
     public FutanwariaiShoHakkoIchiranCSVEntity getHakkoIchiranCSVData(ChohyoSeigyoKyotsu 帳票制御共通,
             RiyoshaFutanwariaishoTempEntity 利用者負担割合証Temp, RString 連番) {
-        IAtesaki 宛先 = AtesakiFactory.createInstance(利用者負担割合証Temp.get宛先());
+//        IAtesaki 宛先 = AtesakiFactory.createInstance(利用者負担割合証Temp.get宛先());
         IShikibetsuTaisho 宛名 = ShikibetsuTaishoFactory.createShikibetsuTaisho(利用者負担割合証Temp.get宛名());
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-        EditedAtesaki 編集後宛先 = new EditedAtesaki(宛先, 地方公共団体, 帳票制御共通);
+//        EditedAtesaki 編集後宛先 = new EditedAtesaki(宛先, 地方公共団体, 帳票制御共通);
         EditedKojin 編集後個人 = new EditedKojin(宛名.to個人(), 帳票制御共通, 地方公共団体);
         FutanwariaiShoHakkoIchiranCSVEntity csvEntity = new FutanwariaiShoHakkoIchiranCSVEntity();
         csvEntity.set連番(連番);

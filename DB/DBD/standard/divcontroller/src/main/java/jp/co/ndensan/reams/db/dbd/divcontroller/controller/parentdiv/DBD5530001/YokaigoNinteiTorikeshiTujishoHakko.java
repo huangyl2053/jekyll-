@@ -120,8 +120,8 @@ public class YokaigoNinteiTorikeshiTujishoHakko {
         RString hihokenshaNo = div.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue();
         try (ReportManager reportManager = new ReportManager()) {
             YokaigoNinteiTorikeshiTshuchishoPrintService printService = new YokaigoNinteiTorikeshiTshuchishoPrintService();
-            printService.print(reportManager, div.getTujishoHakkoMeisai().getTxtSakuseibi().getValue(), div.getTujishoHakkoMeisai().getCcdBunshoBango().get文書番号(),
-                    hihokenshaNo, div.getTujishoHakkoMeisai().getTxtTorikeshiRiyu().getValue());
+            printService.print(reportManager, div.getTujishoHakkoMeisai().getTxtSakuseibi().getValue(), div.getTujishoHakkoMeisai().
+                    getCcdBunshoBango().get文書番号(), hihokenshaNo, div.getTujishoHakkoMeisai().getTxtTorikeshiRiyu().getValue());
             SourceDataCollection collection = reportManager.publish();
             response.data = collection;
         }
@@ -136,21 +136,27 @@ public class YokaigoNinteiTorikeshiTujishoHakko {
      */
     public ResponseData<YokaigoNinteiTorikeshiTujishoHakkoDiv> afterPublish(YokaigoNinteiTorikeshiTujishoHakkoDiv div) {
         creatYokaigoNinteiTorikeshiTujishoHakkoHandler(div).排他の設定(div.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue());
-        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().
+                getShichosonSecurityJoho(GyomuBunrui.介護事務);
         LasdecCode 市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();
         JukyushaDaichoParameter parameter = new JukyushaDaichoParameter(市町村コード, div.getTujishoHakkoJoken().
-                getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue(), shichosonSecurityJoho.get市町村情報().get証記載保険者番号().value());
+                getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue(), shichosonSecurityJoho.
+                get市町村情報().get証記載保険者番号().value());
         insert(parameter, div);
-        creatYokaigoNinteiTorikeshiTujishoHakkoHandler(div).排他制御の解除(div.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue());
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(div.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue()),
-                new RString("0003"), div.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue());
+        creatYokaigoNinteiTorikeshiTujishoHakkoHandler(div).排他制御の解除(div.getCcdKaigoninteiShikakuInfo()
+                .getTxtHihokenshaNo().getValue());
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(div.getCcdKaigoninteiShikakuInfo().
+                getTxtHihokenshaNo().getValue()), new RString("0003"), div.getCcdKaigoninteiShikakuInfo().
+                getTxtHihokenshaNo().getValue());
         AccessLogger.log(AccessLogType.照会, PersonalData.withHojinNo(new ShikibetsuCode(RString.EMPTY), expandedInfo));
-        div.getCcdKanryoMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY, true);
+        div.getCcdKanryoMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY,
+                RString.EMPTY, true);
         return ResponseData.of(div).setState(DBD5530001StateName.完了);
 
     }
 
-    private YokaigoNinteiTorikeshiTujishoHakkoHandler creatYokaigoNinteiTorikeshiTujishoHakkoHandler(YokaigoNinteiTorikeshiTujishoHakkoDiv div) {
+    private YokaigoNinteiTorikeshiTujishoHakkoHandler creatYokaigoNinteiTorikeshiTujishoHakkoHandler(
+            YokaigoNinteiTorikeshiTujishoHakkoDiv div) {
         return new YokaigoNinteiTorikeshiTujishoHakkoHandler(div);
 
     }

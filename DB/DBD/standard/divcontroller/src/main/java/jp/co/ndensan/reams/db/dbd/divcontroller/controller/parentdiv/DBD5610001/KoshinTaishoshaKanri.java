@@ -86,12 +86,7 @@ public class KoshinTaishoshaKanri {
         return ResponseData.of(parameter).respond();
     }
 
-    /**
-     *
-     * @param div KoshinTaishoshaKanriDiv
-     * @return KoshinTaishoshaKanriHandler
-     */
-    public KoshinTaishoshaKanriHandler creatKoshinTaishoshaKanriHandler(KoshinTaishoshaKanriDiv div) {
+    private KoshinTaishoshaKanriHandler creatKoshinTaishoshaKanriHandler(KoshinTaishoshaKanriDiv div) {
         return new KoshinTaishoshaKanriHandler(div);
     }
 

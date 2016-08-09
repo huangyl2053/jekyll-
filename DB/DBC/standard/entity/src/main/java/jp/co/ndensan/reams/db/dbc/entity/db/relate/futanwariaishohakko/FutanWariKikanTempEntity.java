@@ -13,8 +13,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
+ * 負担割合期間TempのEntityです。
  *
- * @author Saku
+ * @reamsid_L DBC-4990-030 pengxingyi
  */
 @lombok.Getter
 @lombok.Setter

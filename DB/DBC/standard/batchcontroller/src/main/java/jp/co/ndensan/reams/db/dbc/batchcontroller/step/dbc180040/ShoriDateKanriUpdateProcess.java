@@ -31,7 +31,7 @@ public class ShoriDateKanriUpdateProcess extends BatchProcessBase<DbT7022ShoriDa
     private FutanwariaishoHakkoProcessParameter parameter;
     private boolean updateFlag;
     @BatchWriter
-    BatchPermanentTableWriter TableWriter;
+    BatchPermanentTableWriter tableWriter;
     Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
 
     private static final RString 処理名 = new RString("負担割合証発行（一括）");
@@ -55,19 +55,19 @@ public class ShoriDateKanriUpdateProcess extends BatchProcessBase<DbT7022ShoriDa
 
     @Override
     protected void createWriter() {
-        TableWriter = new BatchPermanentTableWriter(DbT7022ShoriDateKanriEntity.class);
+        tableWriter = new BatchPermanentTableWriter(DbT7022ShoriDateKanriEntity.class);
     }
 
     @Override
     protected void process(DbT7022ShoriDateKanriEntity entity) {
         updateFlag = false;
-        TableWriter.update(get処理日付管理());
+        tableWriter.update(get処理日付管理());
     }
 
     @Override
     protected void afterExecute() {
         if (updateFlag) {
-            TableWriter.insert(get処理日付管理());
+            tableWriter.insert(get処理日付管理());
         }
     }
 
