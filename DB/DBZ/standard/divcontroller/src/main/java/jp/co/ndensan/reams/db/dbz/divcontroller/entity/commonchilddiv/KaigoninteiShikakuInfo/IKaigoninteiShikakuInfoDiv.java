@@ -27,4 +27,6 @@ public interface IKaigoninteiShikakuInfoDiv extends ICommonChildDivBasePropertie
     TextBoxDate getTxtNinteiShuryoYmd();
 
     TextBox getTxtHihokenshaNo();
+
+    RString getHookenshaCode();
 }
