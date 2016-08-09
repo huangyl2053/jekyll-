@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.db.dba.service.core.hihokenshashikakusoshitsu.Hihoken
 import jp.co.ndensan.reams.db.dba.service.core.jushochitokurei.shisetsunyutaisho.ShisetsuNyutaishoManager;
 import jp.co.ndensan.reams.db.dba.service.core.tajushochito.TaJushochiTokureisyaKanriManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1002TekiyoJogaishaEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1002TekiyoJogaishaAliveDac;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
 import jp.co.ndensan.reams.db.dbz.definition.core.jogaiidojiyu.JogaiKaijoJiyu;
@@ -75,6 +77,7 @@ public class TekiyoJogaishaManager {
     private final MapperProvider mapperProvider;
     private final DbT1002TekiyoJogaishaDac 適用除外者Dac;
     private final ShisetsuNyutaishoManager 介護保険施設入退所Manager;
+    private final DbV1002TekiyoJogaishaAliveDac viewDac;
     private boolean 退所日ありフラグ;
 
     /**
@@ -84,6 +87,7 @@ public class TekiyoJogaishaManager {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.適用除外者Dac = InstanceProvider.create(DbT1002TekiyoJogaishaDac.class);
         this.介護保険施設入退所Manager = new ShisetsuNyutaishoManager();
+        this.viewDac = InstanceProvider.create(DbV1002TekiyoJogaishaAliveDac.class);
     }
 
     /**
@@ -96,16 +100,19 @@ public class TekiyoJogaishaManager {
     TekiyoJogaishaManager(
             MapperProvider mapperProvider,
             DbT1002TekiyoJogaishaDac 適用除外者Dac,
-            ShisetsuNyutaishoManager 介護保険施設入退所Manager) {
+            ShisetsuNyutaishoManager 介護保険施設入退所Manager,
+            DbV1002TekiyoJogaishaAliveDac viewDac) {
         this.mapperProvider = mapperProvider;
         this.適用除外者Dac = 適用除外者Dac;
         this.介護保険施設入退所Manager = 介護保険施設入退所Manager;
+        this.viewDac = viewDac;
     }
 
     /**
      * {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaManager}のインスタンス
      */
     public static TekiyoJogaishaManager createInstance() {
         return InstanceProvider.create(TekiyoJogaishaManager.class);
@@ -192,6 +199,42 @@ public class TekiyoJogaishaManager {
         tekiyoJogaishaBusiness.set適用除外者List(適用除外者List);
         tekiyoJogaishaBusiness.set施設入退所Lsit(施設入退所Lsit);
         return tekiyoJogaishaBusiness;
+    }
+
+    /**
+     * 識別コードで適用除外者Aliveを検索し、最新の適用除外者情報を1件取得します。
+     *
+     * @param 識別コード 識別コード
+     * @return 識別コードに対応する最新の適用除外者情報。データが取得できなかった場合はnullを返す。
+     */
+    @Transaction
+    public TekiyoJogaisha getNewestTekiyoJogaisha(ShikibetsuCode 識別コード) {
+        DbV1002TekiyoJogaishaEntity entity = viewDac.select(識別コード);
+        if (entity == null) {
+            return null;
+        }
+        return new TekiyoJogaisha(toTableEntity(entity));
+    }
+
+    private DbT1002TekiyoJogaishaEntity toTableEntity(DbV1002TekiyoJogaishaEntity entity) {
+        DbT1002TekiyoJogaishaEntity tableEntity = new DbT1002TekiyoJogaishaEntity();
+        tableEntity.setIdoYMD(entity.getIdoYMD());
+        tableEntity.setEdaNo(entity.getEdaNo());
+        tableEntity.setIdoJiyuCode(entity.getIdoJiyuCode());
+        tableEntity.setShichosonCode(entity.getShichosonCode());
+        tableEntity.setTekiyoJogaiTekiyoJiyuCode(entity.getTekiyoJogaiTekiyoJiyuCode());
+        tableEntity.setTekiyoYMD(entity.getTekiyoYMD());
+        tableEntity.setTekiyoTodokedeYMD(entity.getTekiyoTodokedeYMD());
+        tableEntity.setTekiyoUketsukeYMD(entity.getTekiyoUketsukeYMD());
+        tableEntity.setTekiyoJogaikaijokaijoJiyuCode(entity.getTekiyoJogaikaijokaijoJiyuCode());
+        tableEntity.setKaijoYMD(entity.getKaijoYMD());
+        tableEntity.setKaijoTodokedeYMD(entity.getKaijoTodokedeYMD());
+        tableEntity.setKaijoUketsukeYMD(entity.getKaijoUketsukeYMD());
+        tableEntity.setNyushoTsuchiHakkoYMD(entity.getNyushoTsuchiHakkoYMD());
+        tableEntity.setTaishoTsuchiHakkoYMD(entity.getTaishoTsuchiHakkoYMD());
+        tableEntity.setHenkoTsuchiHakkoYMD(entity.getHenkoTsuchiHakkoYMD());
+        tableEntity.setLogicalDeletedFlag(entity.getLogicalDeletedFlag());
+        return tableEntity;
     }
 
     /**
