@@ -310,6 +310,64 @@
             50
     </select>
     
+    <select id="get審査会追加分" resultMap="Result_ShinseiJoho"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
+         SELECT dbt5502."shinseishoKanriNo"
+        , dbt5502."shinsakaiOrder"
+        , dbt5101."shoKisaiHokenshaNo"
+        , dbt5101."hihokenshaNo"
+        , dbt5101."hihokenshaName"
+        , dbt5101."seibetsu"
+        , dbt5101."age"
+        , zenkaiJoho."koroshoIfShikibetsuCode"
+        , zenkaiJoho."nijiHanteiYokaigoJotaiKubunCode"
+        , zenkaiJoho."nijiHanteiNinteiYukoKikan"
+        , zenkaiJoho."nijiHanteiNinteiYukoKaishiYMD"
+        , zenkaiJoho."nijiHanteiNinteiYukoShuryoYMD"
+        , dbt5116."ichijiHanteiKekkaCode"
+        , dbt5116."ichijiHanteiKekkaNinchishoKasanCode"
+        , dbt5116."ichijiHnateiKeikokuCode"
+        , dbt5116."kijunJikan"
+        FROM rgdb."DbT5502ShinsakaiWariateJoho" dbt5502
+        INNER JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101
+        ON dbt5101."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
+        AND (dbt5101."shoriJotaiKubun" = '0' OR dbt5101."shoriJotaiKubun" = '3')
+        AND dbt5101."logicalDeletedFlag" = FALSE
+        INNER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" dbt5116
+        ON dbt5116."shinseishoKanriNo" = dbt5101."shinseishoKanriNo"
+        LEFT JOIN (SELECT dbt5121."shinseishoKanriNo"
+        , dbt5101Zenkai."koroshoIfShikibetsuCode"
+        , dbt5102."nijiHanteiYokaigoJotaiKubunCode"
+        , dbt5102."nijiHanteiNinteiYukoKikan"
+        , dbt5102."nijiHanteiNinteiYukoKaishiYMD"
+        , dbt5102."nijiHanteiNinteiYukoShuryoYMD"
+        FROM rgdb."DbT5121ShinseiRirekiJoho" dbt5121
+        INNER JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101Zenkai
+        ON dbt5101Zenkai."shinseishoKanriNo" = dbt5121."shinseishoKanriNo"
+        AND (dbt5101Zenkai."shoriJotaiKubun" = #{shoriJotaiKubun0} OR dbt5101Zenkai."shoriJotaiKubun" = #{shoriJotaiKubun3})
+        AND dbt5101Zenkai."logicalDeletedFlag" = FALSE
+        INNER JOIN rgdb."DbT5102NinteiKekkaJoho" dbt5102
+        ON dbt5102."shinseishoKanriNo" = dbt5101Zenkai."shinseishoKanriNo") AS zenkaiJoho
+        ON zenkaiJoho."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
+        WHERE dbt5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
+                AND dbt5502."shinsakaiOrderKakuteiFlag" = #{isOrderKakuteiFlg}
+        <if test="isSakuseiJokenHani">
+            AND #{bangoStart} <![CDATA[<=]]> dbT5502."shinsakaiOrder"
+            AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
+        </if>
+        <if test="isSakuseiJokenTuika">
+            AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+        </if>
+        <!--            ORDER BY
+        <if test="isIsShuturyokuJun">
+           NinteiJoho.dbT5502_shinsakaiOrder
+        </if>-->
+        <!--TODO 出力順　実装しない-->
+        <!--                <if test="!isIsShuturyokuJun">
+           #{shuturyokuJun}
+        </if>-->
+    </select>
+    
     <select id="get事務局委員氏名" resultMap="Result_ShinsakaiIinJoho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
         SELECT

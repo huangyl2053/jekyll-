@@ -55,6 +55,14 @@ public interface IJimuShiryoShinsakaiIinMapper {
     List<ShinsakaiTaiyosyaJohoEntity> get事務局情報(JimuShinsakaiIinJohoMyBatisParameter parameter);
 
     /**
+     * 事務局用要介護認定申請者の一覧を取得します。
+     *
+     * @param parameter JimuShinsakaiIinJohoMyBatisParameter
+     * @return List<ShinseiJohoEntity> 要介護認定申請者
+     */
+    List<ShinsakaiTaiyosyaJohoEntity> get審査会追加分(JimuShinsakaiIinJohoMyBatisParameter parameter);
+
+    /**
      * 事務局用介護認定審査対象者一覧表情報を取得します。
      *
      * @param parameter IinShinsakaiIinJohoMyBatisParameter
