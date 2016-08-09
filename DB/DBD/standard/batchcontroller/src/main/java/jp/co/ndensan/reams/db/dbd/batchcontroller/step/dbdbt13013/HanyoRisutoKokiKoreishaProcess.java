@@ -67,11 +67,11 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -161,7 +161,7 @@ public class HanyoRisutoKokiKoreishaProcess extends BatchProcessBase<HanyoRisuto
     private FileSpoolManager manager;
     private RString eucFilePath;
     private HanyoRisutoKokiKoreishaProcessParameter processParamter;
-    private EucCsvWriter<HanyoRisutoKokiKoreishaEucCsvEntity> eucCsvWriter;
+    private CsvWriter<HanyoRisutoKokiKoreishaEucCsvEntity> eucCsvWriter;
     private Association association;
     private HokenshaList hokenshaList;
     private List<PersonalData> personalDataList;
@@ -193,7 +193,7 @@ public class HanyoRisutoKokiKoreishaProcess extends BatchProcessBase<HanyoRisuto
     protected void createWriter() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("HanyoList_KokiKoreisha.csv"));
-        eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.UTF_8withBOM).
