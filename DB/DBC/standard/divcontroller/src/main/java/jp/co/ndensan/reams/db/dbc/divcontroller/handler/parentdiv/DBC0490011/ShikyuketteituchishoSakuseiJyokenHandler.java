@@ -213,8 +213,8 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
             抽出条件日付To = div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().getToValue();
         } else if (KEY1.equals(div.getChushutsuJoken().getRadHizukeSentaku().getSelectedKey())) {
             抽出モード = STR_2;
-            抽出条件日付From = div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().getFromValue();
-            抽出条件日付To = div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().getToValue();
+            抽出条件日付From = div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().getFromValue();
+            抽出条件日付To = div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().getToValue();
         } else if (KEY2.equals(div.getChushutsuJoken().getRadHizukeSentaku().getSelectedKey())) {
             抽出モード = STR_3;
         }
@@ -237,7 +237,10 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
             parameter.set高額自動償還(STR_3);
         }
         parameter.set発行日(div.getShikyuKetteiTsuchisho().getＴｘｔHakkobi().getValue());
-        parameter.set文書番号(div.getShikyuKetteiTsuchisho().getCcdBunshoBangoInput().get文書番号());
+        RString 文書番号 = div.getShikyuKetteiTsuchisho().getCcdBunshoBangoInput().get文書番号();
+        if (文書番号 != null && !文書番号.isEmpty()) {
+            parameter.set文書番号(div.getShikyuKetteiTsuchisho().getCcdBunshoBangoInput().get文書番号());
+        }
         if (div.getShikyuKetteiTsuchisho().getChkTesutoShuturyoku().getSelectedKeys().isEmpty()) {
             parameter.setテスト出力フラグ(フラグ_FALSE);
         } else {
@@ -249,15 +252,15 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
             parameter.set決定日一括更新区分(STR_2);
         }
         parameter.set決定日(div.getShikyuKetteiTsuchisho().getTxtketteibi2().getValue());
-        if (div.getShikyuKetteiTsuchisho().getChkTesutoShuturyoku().getSelectedKeys().contains(利用者向け決定通知書)) {
-            parameter.set利用者向け決定通知書フラグ(フラグ_FALSE);
-        } else {
+        if (div.getShikyuKetteiTsuchisho().getChkShutsuryokuTaishoKubun().getSelectedKeys().contains(利用者向け決定通知書)) {
             parameter.set利用者向け決定通知書フラグ(フラグ_TRUE);
-        }
-        if (div.getShikyuKetteiTsuchisho().getChkTesutoShuturyoku().getSelectedKeys().contains(受領委任者向け決定通知書)) {
-            parameter.set受領委任者向け決定通知書フラグ(フラグ_FALSE);
         } else {
+            parameter.set利用者向け決定通知書フラグ(フラグ_FALSE);
+        }
+        if (div.getShikyuKetteiTsuchisho().getChkShutsuryokuTaishoKubun().getSelectedKeys().contains(受領委任者向け決定通知書)) {
             parameter.set受領委任者向け決定通知書フラグ(フラグ_TRUE);
+        } else {
+            parameter.set受領委任者向け決定通知書フラグ(フラグ_FALSE);
         }
         parameter.set振込予定日(div.getCcdShiharaiHoho().get振込予定日());
         if (div.getCcdShiharaiHoho().get支払場所() != null && !div.getCcdShiharaiHoho().get支払場所().isEmpty()) {
