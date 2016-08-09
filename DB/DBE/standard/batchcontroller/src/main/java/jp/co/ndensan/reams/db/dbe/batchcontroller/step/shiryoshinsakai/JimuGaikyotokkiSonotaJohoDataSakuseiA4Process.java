@@ -35,8 +35,9 @@ import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
+ * 事務局用概況特記情報バッチクラスです。
  *
- * @author soft863
+ * @reamsid_L DBE-0150-190 linghuhang
  */
 public class JimuGaikyotokkiSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<ShinsakaiSiryoKyotsuEntity> {
 
