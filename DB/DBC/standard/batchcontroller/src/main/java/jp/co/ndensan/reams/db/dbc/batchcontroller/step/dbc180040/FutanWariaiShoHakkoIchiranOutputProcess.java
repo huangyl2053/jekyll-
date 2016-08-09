@@ -271,9 +271,9 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
     @Override
     protected void afterExecute() {
         futanwariaiShoHakkoIchiranEucCsvWriter.close();
-//        futanwariaiShoHakkoIchiranManager.spool(futanwariaiShoHakkoIchiranEucFilePath);
+        futanwariaiShoHakkoIchiranManager.spool(futanwariaiShoHakkoIchiranEucFilePath);
         shoriKekkaKakuninListEucCsvWriter.close();
-//        shoriKekkaKakuninListManager.spool(shoriKekkaKakuninListEucFilePath);
+        shoriKekkaKakuninListManager.spool(shoriKekkaKakuninListEucFilePath);
         AccessLogger.logReport(personalDataList);
     }
 
