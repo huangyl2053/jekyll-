@@ -42,6 +42,7 @@ public class KoshinTaishoshaKanriParameter extends BatchParameterBase {
     private RString 年度内連番;
 
     /**
+     * Processのパラメータを作成します。
      *
      * @return KoshinTaishoshaKanriProcessParameter
      */
