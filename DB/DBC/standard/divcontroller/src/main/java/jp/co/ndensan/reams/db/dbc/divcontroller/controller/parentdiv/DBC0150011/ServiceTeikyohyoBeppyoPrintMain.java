@@ -53,7 +53,7 @@ public class ServiceTeikyohyoBeppyoPrintMain {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         div.getCcdKaigoAtenaInfo().initialize(識別コード);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        if (被保険者番号.isEmpty() || 被保険者番号 == null) {
+        if (被保険者番号.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().
                     replace(引数.toString()));
         } else {
