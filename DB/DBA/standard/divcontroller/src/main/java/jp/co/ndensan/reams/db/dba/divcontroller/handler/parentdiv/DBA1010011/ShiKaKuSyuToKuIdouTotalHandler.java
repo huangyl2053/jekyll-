@@ -147,13 +147,8 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
         if (dataSource.isEmpty()) {
             return false;
         }
-
         dgShikakuShutokuRireki_Row newestData = dataSource.get(0);
-        if (!newestData.getShutokuDate().getValue().isEmpty() && !newestData.getSoshitsuDate().getValue().isEmpty()) {
-            return false;
-        }
-
-        return true;
+        return !(!newestData.getShutokuDate().getValue().isEmpty() && !newestData.getSoshitsuDate().getValue().isEmpty());
     }
 
     /**
@@ -450,5 +445,4 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
             }
         }
     }
-
 }
