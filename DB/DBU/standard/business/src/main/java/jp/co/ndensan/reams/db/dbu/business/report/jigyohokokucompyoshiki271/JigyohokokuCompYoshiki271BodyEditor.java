@@ -6,29 +6,23 @@
 package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki271;
 
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki271.JigyohokokuCompYoshiki271Change;
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki271.JigyohokokuCompYoshiki271Data;
 import jp.co.ndensan.reams.db.dbu.entity.report.ｊigyohokokucompyoshiki271.JigyohokokuCompYoshiki271ReportSource;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 介護事業状況報告月報・保険給付決定状況（様式2-7-1）のEditorクラスです。
  *
  * @reamsid_L DBU-5580-040　wanghuafeng
  */
-public class JigyohokokuCompYoshiki271Editor implements IJigyohokokuCompYoshiki271Editor {
+public class JigyohokokuCompYoshiki271BodyEditor implements IJigyohokokuCompYoshiki271Editor {
 
-    private final JigyohokokuCompYoshiki271Data data;
     private final JigyohokokuCompYoshiki271Change change;
 
     /**
      * インスタンスを生成します。
      *
-     * @param data JigyohokokuCompYoshiki271Data
      * @param change JigyohokokuCompYoshiki271Change
      */
-    protected JigyohokokuCompYoshiki271Editor(JigyohokokuCompYoshiki271Data data, JigyohokokuCompYoshiki271Change change) {
-        this.data = data;
+    protected JigyohokokuCompYoshiki271BodyEditor(JigyohokokuCompYoshiki271Change change) {
         this.change = change;
     }
 
@@ -44,12 +38,6 @@ public class JigyohokokuCompYoshiki271Editor implements IJigyohokokuCompYoshiki2
     }
 
     private JigyohokokuCompYoshiki271ReportSource editSource(JigyohokokuCompYoshiki271ReportSource source) {
-
-        source.printTimeStamp = data.get作成日時();
-        source.shukeiKubun = data.get年報月報区分();
-        source.shuukeiHani = set範囲(data.get集計年月());
-        source.hokenshaNo = data.get保険者番号();
-        source.hokenshaName = data.get保険者名();
         source.listUpper_1 = change.getListUpper_1();
         source.listUpper_2 = change.getListUpper_2();
         source.listUpper_3 = change.getListUpper_3();
@@ -57,14 +45,6 @@ public class JigyohokokuCompYoshiki271Editor implements IJigyohokokuCompYoshiki2
         source.listLower_2 = change.getListLower_2();
         source.listLower_3 = change.getListLower_3();
         return source;
-    }
-
-    private RString set範囲(RString 集計年月) {
-        RStringBuilder 範囲_SB = new RStringBuilder();
-        範囲_SB.append("（");
-        範囲_SB.append(集計年月);
-        範囲_SB.append("分）");
-        return 範囲_SB.toRString();
     }
 
 }

@@ -41,8 +41,9 @@ public class JigyohokokuCompYoshiki271Report extends Report<JigyohokokuCompYoshi
     @Override
     public void writeBy(ReportSourceWriter<JigyohokokuCompYoshiki271ReportSource> writer) {
         for (JigyohokokuCompYoshiki271Change change : getData()) {
-            IJigyohokokuCompYoshiki271Editor editor = new JigyohokokuCompYoshiki271Editor(data, change);
-            IJigyohokokuCompYoshiki271Builder builder = new JigyohokokuCompYoshiki271Builder(editor);
+            IJigyohokokuCompYoshiki271Editor headeditor = new JigyohokokuCompYoshiki271HeadEditor(data);
+            IJigyohokokuCompYoshiki271Editor bodyeditor = new JigyohokokuCompYoshiki271BodyEditor(change);
+            IJigyohokokuCompYoshiki271Builder builder = new JigyohokokuCompYoshiki271Builder(headeditor, bodyeditor);
             writer.writeLine(builder);
         }
     }
@@ -50,40 +51,34 @@ public class JigyohokokuCompYoshiki271Report extends Report<JigyohokokuCompYoshi
     private Iterable<JigyohokokuCompYoshiki271Change> getData() {
         List<JigyohokokuCompYoshiki271Change> dataList = new ArrayList<>();
         List<DbT7021JigyoHokokuTokeiDataEntity> jigyohokokutokeis = data.get事業報告統計データ();
-        Decimal 件数世帯合算 = set件数世帯合算(jigyohokokutokeis);
-        Decimal 件数その他 = set件数その他(jigyohokokutokeis);
-        Decimal 給付額世帯合算 = set給付額世帯合算(jigyohokokutokeis);
-        Decimal 給付額その他 = set給付額その他(jigyohokokutokeis);
-        dataList.add(new JigyohokokuCompYoshiki271Change(new RString(件数世帯合算.toString()),
-                new RString(件数その他.toString()),
-                new RString(set件数計(件数世帯合算, 件数その他).toString()),
-                new RString(給付額世帯合算.toString()),
-                new RString(給付額その他.toString()),
-                new RString(set給付額計(給付額世帯合算, 給付額その他).toString())));
+        for (DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei : jigyohokokutokeis) {
+            Decimal 件数世帯合算 = set件数世帯合算(jigyohokokutokei);
+            Decimal 件数その他 = set件数その他(jigyohokokutokei);
+            Decimal 給付額世帯合算 = set給付額世帯合算(jigyohokokutokei);
+            Decimal 給付額その他 = set給付額その他(jigyohokokutokei);
+            dataList.add(new JigyohokokuCompYoshiki271Change(new RString(件数世帯合算.toString()),
+                    new RString(件数その他.toString()),
+                    new RString(set件数計(件数世帯合算, 件数その他).toString()),
+                    new RString(給付額世帯合算.toString()),
+                    new RString(給付額その他.toString()),
+                    new RString(set給付額計(給付額世帯合算, 給付額その他).toString())));
+        }
 
         return dataList;
     }
 
-    private Decimal set件数世帯合算(List<DbT7021JigyoHokokuTokeiDataEntity> jigyohokokutokeis) {
+    private Decimal set件数世帯合算(DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei) {
         Decimal 件数世帯合算 = Decimal.ZERO;
-        if (jigyohokokutokeis != null) {
-            for (DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei : jigyohokokutokeis) {
-                if (縦番号1.equals(jigyohokokutokei.getTateNo()) && 横番号1.equals(jigyohokokutokei.getYokoNo())) {
-                    件数世帯合算 = jigyohokokutokei.getShukeiKekkaAtai();
-                }
-            }
+        if (縦番号1.equals(jigyohokokutokei.getTateNo()) && 横番号1.equals(jigyohokokutokei.getYokoNo())) {
+            件数世帯合算 = jigyohokokutokei.getShukeiKekkaAtai();
         }
         return 件数世帯合算;
     }
 
-    private Decimal set件数その他(List<DbT7021JigyoHokokuTokeiDataEntity> jigyohokokutokeis) {
+    private Decimal set件数その他(DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei) {
         Decimal 件数その他 = Decimal.ZERO;
-        if (jigyohokokutokeis != null) {
-            for (DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei : jigyohokokutokeis) {
-                if (縦番号1.equals(jigyohokokutokei.getTateNo()) && 横番号2.equals(jigyohokokutokei.getYokoNo())) {
-                    件数その他 = jigyohokokutokei.getShukeiKekkaAtai();
-                }
-            }
+        if (縦番号1.equals(jigyohokokutokei.getTateNo()) && 横番号2.equals(jigyohokokutokei.getYokoNo())) {
+            件数その他 = jigyohokokutokei.getShukeiKekkaAtai();
         }
         return 件数その他;
     }
@@ -92,26 +87,18 @@ public class JigyohokokuCompYoshiki271Report extends Report<JigyohokokuCompYoshi
         return 件数世帯合算.add(件数その他);
     }
 
-    private Decimal set給付額世帯合算(List<DbT7021JigyoHokokuTokeiDataEntity> jigyohokokutokeis) {
+    private Decimal set給付額世帯合算(DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei) {
         Decimal 給付額世帯合算 = Decimal.ZERO;
-        if (jigyohokokutokeis != null) {
-            for (DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei : jigyohokokutokeis) {
-                if (縦番号2.equals(jigyohokokutokei.getTateNo()) && 横番号1.equals(jigyohokokutokei.getYokoNo())) {
-                    給付額世帯合算 = jigyohokokutokei.getShukeiKekkaAtai();
-                }
-            }
+        if (縦番号2.equals(jigyohokokutokei.getTateNo()) && 横番号1.equals(jigyohokokutokei.getYokoNo())) {
+            給付額世帯合算 = jigyohokokutokei.getShukeiKekkaAtai();
         }
         return 給付額世帯合算;
     }
 
-    private Decimal set給付額その他(List<DbT7021JigyoHokokuTokeiDataEntity> jigyohokokutokeis) {
+    private Decimal set給付額その他(DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei) {
         Decimal 給付額その他 = Decimal.ZERO;
-        if (jigyohokokutokeis != null) {
-            for (DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei : jigyohokokutokeis) {
-                if (縦番号2.equals(jigyohokokutokei.getTateNo()) && 横番号2.equals(jigyohokokutokei.getYokoNo())) {
-                    給付額その他 = jigyohokokutokei.getShukeiKekkaAtai();
-                }
-            }
+        if (縦番号2.equals(jigyohokokutokei.getTateNo()) && 横番号2.equals(jigyohokokutokei.getYokoNo())) {
+            給付額その他 = jigyohokokutokei.getShukeiKekkaAtai();
         }
         return 給付額その他;
     }

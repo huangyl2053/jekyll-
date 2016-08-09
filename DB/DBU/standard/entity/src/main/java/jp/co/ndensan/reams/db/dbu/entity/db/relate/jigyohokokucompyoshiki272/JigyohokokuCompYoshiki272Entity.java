@@ -23,6 +23,7 @@ public class JigyohokokuCompYoshiki272Entity {
 
     private RString 作成日時;
     private RString 年報月報区分;
+    private RString 市町村コード;
     private List<DbT7021JigyoHokokuTokeiDataEntity> 事業報告統計データ;
     private RString 集計年月;
     private RString 集計年度;
