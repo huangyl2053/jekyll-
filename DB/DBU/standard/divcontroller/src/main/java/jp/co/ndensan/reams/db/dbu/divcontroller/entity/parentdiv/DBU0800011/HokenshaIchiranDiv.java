@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0800011;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HokenshaIchiranDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,6 +28,8 @@ public class HokenshaIchiranDiv extends Panel {
     private Button btnAddHokensha;
     @JsonProperty("dgHokenshas")
     private DataGrid<dgHokenshas_Row> dgHokenshas;
+    @JsonProperty("hdnTodofuken")
+    private RString hdnTodofuken;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -86,6 +89,24 @@ public class HokenshaIchiranDiv extends Panel {
     @JsonProperty("dgHokenshas")
     public void setDgHokenshas(DataGrid<dgHokenshas_Row> dgHokenshas) {
         this.dgHokenshas = dgHokenshas;
+    }
+
+    /*
+     * gethdnTodofuken
+     * @return hdnTodofuken
+     */
+    @JsonProperty("hdnTodofuken")
+    public RString getHdnTodofuken() {
+        return hdnTodofuken;
+    }
+
+    /*
+     * sethdnTodofuken
+     * @param hdnTodofuken hdnTodofuken
+     */
+    @JsonProperty("hdnTodofuken")
+    public void setHdnTodofuken(RString hdnTodofuken) {
+        this.hdnTodofuken = hdnTodofuken;
     }
 
     // </editor-fold>
