@@ -72,14 +72,13 @@ public class JimuGaikyotokkiSonotaJohoDataSakuseiA4Process extends BatchKeyBreak
 
     @Override
     protected void usualProcess(ShinsakaiSiryoKyotsuEntity entity) {
+        if (shinsakaiOrder != entity.getShinsakaiOrder()) {
+            存在ファイルindex = 0;
+        }
         business = new JimuSonotashiryoBusiness(entity, 存在ファイルindex);
         SonotashiryoA4Report reportA4 = new SonotashiryoA4Report(business);
         reportA4.writeBy(reportSourceWriterA4);
-        if (shinsakaiOrder == entity.getShinsakaiOrder()) {
-            存在ファイルindex = business.get存在ファイルIndex();
-        } else {
-            存在ファイルindex = 0;
-        }
+        存在ファイルindex = business.get存在ファイルIndex();
         shinsakaiOrder = entity.getShinsakaiOrder();
     }
 

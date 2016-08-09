@@ -73,14 +73,13 @@ public class JimuSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsa
     @Override
     protected void usualProcess(ShinsakaiSiryoKyotsuEntity entity) {
         entity.setJimukyoku(true);
+        if (shinsakaiOrder != entity.getShinsakaiOrder()) {
+            存在ファイルindex = 0;
+        }
         business = new JimuSonotashiryoBusiness(entity, 存在ファイルindex);
         SonotashiryoA3Report reportA3 = new SonotashiryoA3Report(business);
         reportA3.writeBy(reportSourceWriterA3);
-        if (shinsakaiOrder == entity.getShinsakaiOrder()) {
-            存在ファイルindex = business.get存在ファイルIndex();
-        } else {
-            存在ファイルindex = 0;
-        }
+        存在ファイルindex = business.get存在ファイルIndex();
         shinsakaiOrder = entity.getShinsakaiOrder();
     }
 

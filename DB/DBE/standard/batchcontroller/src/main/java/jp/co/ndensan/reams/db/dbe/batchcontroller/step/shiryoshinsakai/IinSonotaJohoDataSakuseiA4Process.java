@@ -92,14 +92,14 @@ public class IinSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
         entity.setHihokenshaName(AtenaMeisho.EMPTY);
         entity.setShoKisaiHokenshaNo(RString.EMPTY);
         entity.setJimukyoku(false);
+        if (shinsakaiOrder != entity.getShinsakaiOrder()) {
+            存在ファイルindex = 0;
+        }
+
         その他資料 = new JimuSonotashiryoBusiness(entity, 存在ファイルindex);
         SonotashiryoA4Report reportA4 = new SonotashiryoA4Report(その他資料);
         reportA4.writeBy(reportSourceWriterA4);
-        if (shinsakaiOrder == entity.getShinsakaiOrder()) {
-            存在ファイルindex = その他資料.get存在ファイルIndex();
-        } else {
-            存在ファイルindex = 0;
-        }
+        存在ファイルindex = その他資料.get存在ファイルIndex();
         shinsakaiOrder = entity.getShinsakaiOrder();
     }
 
