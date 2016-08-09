@@ -22,18 +22,17 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBC160010_KeikakuTodokedeJokyoIchiranParameter extends BatchParameterBase {
 
-    private static final String KEY_受給申請日From = "受給申請日From";
-    private static final String KEY_受給申請日To = "受給申請日To";
+    private static final String KEY_受給申請日FROM = "受給申請日From";
+    private static final String KEY_受給申請日TO = "受給申請日To";
     private static final String KEY_対象者抽出 = "対象者抽出";
     private static final String KEY_届出状況 = "届出状況";
     private static final String KEY_基準日 = "基準日";
     private static final String KEY_出力順ID = "出力順ID";
 
-    @BatchParameter(key = KEY_受給申請日From, name = "受給申請日From")
-    private YMDHMS 受給申請日From;
-    @BatchParameter(key = KEY_受給申請日To, name = "受給申請日To")
-    private YMDHMS 受給申請日To;
-    @BatchParameter(key = KEY_対象者抽出, name = "KEY_対象者抽出")
+    @BatchParameter(key = KEY_受給申請日FROM, name = "受給申請日From")
+    private YMDHMS 受給申請日FROM;
+    @BatchParameter(key = KEY_受給申請日TO, name = "受給申請日To")
+    private YMDHMS 受給申請日TO;
     private RString 対象者抽出;
     @BatchParameter(key = KEY_届出状況, name = "届出状況")
     private RString 届出状況;
