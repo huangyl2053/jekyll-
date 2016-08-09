@@ -86,10 +86,13 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     private static final RString 処理枝番_01 = new RString("01");
     private static final RString 処理枝番_02 = new RString("02");
     private static final RString 処理枝番_03 = new RString("03");
+    private static final RString INDEX_112 = new RString("112");
+    private static final RString INDEX_120 = new RString("120");
+    private static final RString INDEX_111 = new RString("111");
     private static final RString サブ業務コード_DBC = new RString("DBC");
     private static final RString 処理名_自己負担証明書作成_一括 = new RString("自己負担証明書作成_一括");
 
-     /**
+    /**
      * 主キーで処理日付管理マスタを取得します。
      *
      * @param サブ業務コード SubGyomuCode
@@ -119,11 +122,11 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(shichosonCode, 市町村コード),
                                 eq(shoriName, 処理名),
                                 eq(shoriEdaban, 処理枝番))).
-                 order(by(DbT7022ShoriDateKanri.nendo, Order.DESC),
+                order(by(DbT7022ShoriDateKanri.nendo, Order.DESC),
                         by(DbT7022ShoriDateKanri.nendoNaiRenban, Order.DESC)).limit(1).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
-    
+
     /**
      * 実行情報 を取得します。
      *
@@ -2037,4 +2040,55 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 order(by(shoriEdaban, Order.ASC)).
                 toList(DbT7022ShoriDateKanriEntity.class);
     }
+
+    /**
+     * 対象終了日時を取得する。
+     *
+     * @param 導入形態コード RString
+     * @param 市町村コードリスト List<LasdecCode>
+     * @param 市町村識別IDリスト List<RString>
+     * @param 市町村コード LasdecCode
+     * @param 処理年度 FlexibleYear
+     * @return List<DbT7022ShoriDateKanriEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT7022ShoriDateKanriEntity> selec対象終了日時(RString 導入形態コード,
+            List<LasdecCode> 市町村コードリスト,
+            List<RString> 市町村識別IDリスト,
+            LasdecCode 市町村コード,
+            FlexibleYear 処理年度) throws NullPointerException {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(処理年度, UrSystemErrorMessages.値がnull.getReplacedMessage("処理年度"));
+        requireNonNull(導入形態コード, UrSystemErrorMessages.値がnull.getReplacedMessage("導入形態コード"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        if (INDEX_112.equals(導入形態コード) || INDEX_120.equals(導入形態コード)) {
+            return accessor.selectSpecific(max(nendoNaiRenban), shichosonCode, taishoShuryoTimestamp).
+                    table(DbT7022ShoriDateKanri.class).
+                    where(and(
+                                    eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                    eq(shichosonCode, 市町村コード),
+                                    eq(shoriName, ShoriName.所得情報一覧表作成.get名称()),
+                                    eq(shoriEdaban, 処理枝番_0001),
+                                    eq(nendo, 処理年度)))
+                    .groupBy(nendoNaiRenban, shichosonCode, taishoShuryoTimestamp).
+                    order(by(shichosonCode, Order.ASC)).
+                    toList(DbT7022ShoriDateKanriEntity.class);
+        } else if (INDEX_111.equals(導入形態コード)) {
+            return accessor.selectSpecific(max(nendoNaiRenban), shichosonCode, taishoShuryoTimestamp).
+                    table(DbT7022ShoriDateKanri.class).
+                    where(and(
+                                    eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                    in(shichosonCode, 市町村コードリスト),
+                                    eq(shoriName, ShoriName.所得情報一覧表作成.get名称()),
+                                    in(shoriEdaban, 市町村識別IDリスト),
+                                    eq(nendo, 処理年度)))
+                    .groupBy(nendoNaiRenban, shichosonCode, taishoShuryoTimestamp).
+                    order(by(shichosonCode, Order.ASC)).
+                    toList(DbT7022ShoriDateKanriEntity.class);
+        } else {
+            return null;
+        }
+    }
+
 }
