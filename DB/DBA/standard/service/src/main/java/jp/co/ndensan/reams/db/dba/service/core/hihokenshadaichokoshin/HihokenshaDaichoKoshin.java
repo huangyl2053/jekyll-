@@ -141,7 +141,6 @@ public class HihokenshaDaichoKoshin {
         List<ShikakuIdoTaishoshaEntity> 資格異動対象者List = mapper.select資格異動対象者(parameter
                 .toAtenaMybatisParameter(shikibetsuTaishoPSMSearchKey, 年齢到達期間開始日, 年齢到達期間終了日));
 
-        資格異動対象者List.clear();
         List<DbT1003TashichosonJushochiTokureiEntity> 他市町村住所地特例List;
         List<DbT1002TekiyoJogaishaEntity> 適用除外者List;
         List<DbT1009ShikakuShutokuJogaishaEntity> 資格取得除外者List;
