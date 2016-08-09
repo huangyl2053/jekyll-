@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -130,7 +131,32 @@ public class RiyoshaFutanWariaiHantei {
         if (負担割合判定結果 != null) {
             return 負担割合判定結果;
         }
+        Decimal 合計所得金額 = noMinusDecimal(負担割合判定情報.get判定対象者Temp().getGokeiShotokuGaku());
+        Decimal 年金収入 = get公的年金収入額世帯員分の合計(介護所得情報);
+        Decimal その他の合計所得金額 = getその他の合計所得金額世帯員分の合計(介護所得情報);
+        int 世帯員数 = 介護所得情報.size();
+        RString 負担割合区分 = getFutanWariaiKubun(合計所得金額, 年金収入, その他の合計所得金額, 世帯員数);
+        負担割合判定結果 = new FutanWariaiHanteiResult();
+        負担割合判定結果.set負担割合区分(負担割合区分);
+        負担割合判定結果.set判定区分(HanteiKubunType.負担割合判定.code());
         return 負担割合判定結果;
+    }
+
+    private Decimal get公的年金収入額世帯員分の合計(List<DbT2008ShotokuKanriEntity> 介護所得情報リスト) {
+        Decimal sum = Decimal.ZERO;
+        for (DbT2008ShotokuKanriEntity 介護所得情報 : 介護所得情報リスト) {
+            sum.add(介護所得情報.getNenkiniShunyuGaku());
+        }
+        return sum;
+    }
+
+    private Decimal getその他の合計所得金額世帯員分の合計(List<DbT2008ShotokuKanriEntity> 介護所得情報リスト) {
+        Decimal sum = Decimal.ZERO;
+        for (DbT2008ShotokuKanriEntity 介護所得情報 : 介護所得情報リスト) {
+            sum.add(noMinusDecimal(nonullSubstract(介護所得情報.getGokeiShotokuGaku(),
+                    介護所得情報.getNenkiniShotokuGaku())));
+        }
+        return sum;
     }
 
     private FutanWariaiHanteiResult 課税区分負担割合判定(HanteiTaishoshaTempEntity 判定対象者Temp) {
@@ -142,9 +168,9 @@ public class RiyoshaFutanWariaiHantei {
         if (RString.isNullOrEmpty(課税区分)) {
             負担割合判定結果.set負担割合区分(FutanwariaiKubun._１割.getコード());
             負担割合判定結果.set判定区分(HanteiKubunType.非課税.code());
-        }
-        if (課税区分未申告.equals(課税区分)) {
-            RString 本人未申告区分 = BusinessConfig.get(ConfigNameDBC.利用者負担割合判定基準_本人未申告区分, SubGyomuCode.DBC介護給付);
+        } else if (課税区分未申告.equals(課税区分)) {
+            RString 本人未申告区分 = BusinessConfig.get(ConfigNameDBC.利用者負担割合判定基準_本人未申告区分,
+                    RDate.getNowDate(), SubGyomuCode.DBC介護給付);
             if (ONE.equals(本人未申告区分)) {
                 負担割合判定結果.set負担割合区分(FutanwariaiKubun._１割.getコード());
             }
@@ -152,9 +178,9 @@ public class RiyoshaFutanWariaiHantei {
                 負担割合判定結果.set負担割合区分(FutanwariaiKubun._２割.getコード());
             }
             負担割合判定結果.set判定区分(HanteiKubunType.非課税.code());
-        }
-        if (課税区分所得調査中.equals(課税区分)) {
-            RString 本人所得調査中区分 = BusinessConfig.get(ConfigNameDBC.利用者負担割合判定基準_本人所得調査中区分, SubGyomuCode.DBC介護給付);
+        } else if (課税区分所得調査中.equals(課税区分)) {
+            RString 本人所得調査中区分 = BusinessConfig.get(ConfigNameDBC.利用者負担割合判定基準_本人所得調査中区分,
+                    RDate.getNowDate(), SubGyomuCode.DBC介護給付);
             if (ONE.equals(本人所得調査中区分)) {
                 負担割合判定結果.set負担割合区分(FutanwariaiKubun._１割.getコード());
             }
@@ -162,12 +188,20 @@ public class RiyoshaFutanWariaiHantei {
                 負担割合判定結果.set負担割合区分(FutanwariaiKubun._２割.getコード());
             }
             負担割合判定結果.set判定区分(HanteiKubunType.非課税.code());
-        }
-        if (課税区分非課税.equals(課税区分)) {
+        } else if (課税区分非課税.equals(課税区分)) {
             負担割合判定結果.set負担割合区分(FutanwariaiKubun._１割.getコード());
             負担割合判定結果.set判定区分(HanteiKubunType.非課税.code());
+        } else {
+            負担割合判定結果 = null;
         }
         return 負担割合判定結果;
+    }
+
+    private Decimal rstringToDecimal(RString rstr) {
+        if (RString.isNullOrEmpty(rstr)) {
+            return Decimal.ZERO;
+        }
+        return new Decimal(rstr.toString().trim());
     }
 
     /**
@@ -177,17 +211,21 @@ public class RiyoshaFutanWariaiHantei {
      * @param 年金収入 年金収入
      * @param その他の合計所得金額 その他の合計所得金額
      * @param 世帯員数 世帯員数
-     * @param 本人合計所得金額基準 業務コンフィグ.本人合計所得金額基準
-     * @param 世帯年金収入等基準単身 業務コンフィグ.世帯年金収入等基準単身
-     * @param 世帯年金収入等基準複数 業務コンフィグ.世帯年金収入等基準複数
      * @return 負担割合区分[10:１割、20:２割]
      */
-    public RString getFutanWariaiKubun(Decimal 合計所得金額, Decimal 年金収入, Decimal その他の合計所得金額, int 世帯員数,
-            Decimal 本人合計所得金額基準, Decimal 世帯年金収入等基準単身, Decimal 世帯年金収入等基準複数) {
-        if (合計所得金額 == null || 年金収入 == null || その他の合計所得金額 == null
-                || 本人合計所得金額基準 == null || 世帯年金収入等基準単身 == null || 世帯年金収入等基準複数 == null) {
+    public RString getFutanWariaiKubun(Decimal 合計所得金額, Decimal 年金収入, Decimal その他の合計所得金額, int 世帯員数) {
+        if (合計所得金額 == null || 年金収入 == null || その他の合計所得金額 == null) {
             return null;
         }
+        Decimal 本人合計所得金額基準 = rstringToDecimal(BusinessConfig.get(
+                ConfigNameDBC.利用者負担割合判定基準_本人合計所得金額基準,
+                RDate.getNowDate(), SubGyomuCode.DBC介護給付));
+        Decimal 世帯年金収入等基準単身 = rstringToDecimal(BusinessConfig.get(
+                ConfigNameDBC.利用者負担割合判定基準_世帯年金収入等基準単身,
+                RDate.getNowDate(), SubGyomuCode.DBC介護給付));
+        Decimal 世帯年金収入等基準複数 = rstringToDecimal(BusinessConfig.get(
+                ConfigNameDBC.利用者負担割合判定基準_世帯年金収入等基準複数,
+                RDate.getNowDate(), SubGyomuCode.DBC介護給付));
         Decimal 合計所得金額Temp = noMinusDecimal(合計所得金額);
         Decimal その他の合計所得金額Temp = noMinusDecimal(その他の合計所得金額);
         Decimal 合計Temp = 年金収入.add(その他の合計所得金額Temp);
@@ -358,7 +396,7 @@ public class RiyoshaFutanWariaiHantei {
         }
         List<RiyoshaFutanWariaiMeisaiTempEntity> result = new ArrayList<>();
         List<Boolean> flags = new ArrayList<>();
-        int oldSize = result.size();
+        int oldSize = 利用者負担割合明細情報.size();
         for (int i = 0; i < oldSize; i++) {
             flags.add(Boolean.TRUE);
         }
@@ -385,7 +423,7 @@ public class RiyoshaFutanWariaiHantei {
         for (int i = 0; i < newSize; i++) {
             result.get(i).setEdaNo(i + 1);
         }
-//   TODO     ２．更正事由、有効開始日 ３．有効終了日
+//     ２．更正事由、有効開始日 ３．有効終了日
         RiyoshaFutanWariaiMeisaiTempEntity before = null;
         RString beforeKubn = null;
         RString nowKubun;
@@ -402,48 +440,7 @@ public class RiyoshaFutanWariaiHantei {
             nowKubun = now.getFutanWariaiKubun();
             現判定区分 = now.getHanteiKubun();
             if (!equalsRString(nowKubun, beforeKubn)) {
-                //1,2,3,4,5-0
-                if (HanteiKubunType.対象外.code().equals(前判定区分)
-                        && Arrays.asList(HanteiKubunType.values()).contains(HanteiKubunType.toValue(現判定区分))
-                        && !HanteiKubunType.対象外.code().equals(現判定区分)) {
-//TODO QA
-                    now.setKoseiJiyu(KoseiJiyuType.当初_継続_新規認定.getコード());
-                    now.setYukoKaishiYMD(now.getNinteiYukoKaishiDate());
-                }
-                //4-5
-                if (HanteiKubunType.非課税.code().equals(現判定区分)
-                        && HanteiKubunType.負担割合判定.code().equals(前判定区分)) {
-                    //TODO QA
-                    now.setKoseiJiyu(KoseiJiyuType.本人所得更正.getコード());
-                    now.setYukoKaishiYMD(get有効開始日１(対象年度, now.getNinteiYukoKaishiDate()));
-                }
-                //5-1||5-5
-                if (HanteiKubunType.負担割合判定.code().equals(現判定区分)
-                        && (HanteiKubunType.第２号被保険者.code().equals(前判定区分)
-                        || HanteiKubunType.負担割合判定.code().equals(前判定区分))) {
-                    handle数額変更(now, before, 対象年度);
-                }
-                //5-2
-                if (HanteiKubunType.負担割合判定.code().equals(現判定区分)
-                        && HanteiKubunType.生活保護.code().equals(前判定区分)) {
-                    now.setKoseiJiyu(KoseiJiyuType.その他.getコード());
-                    FlexibleDate 受給廃止日 = now.getJukyuHaishiYMD();
-                    if (受給廃止日 != null) {
-                        now.setYukoKaishiYMD(new FlexibleDate(受給廃止日.getYearValue(), 受給廃止日.getMonthValue() + 1, 1));
-                    }
-                }
-                //5-3
-                if (HanteiKubunType.負担割合判定.code().equals(現判定区分)
-                        && HanteiKubunType.旧措置.code().equals(前判定区分)) {
-                    now.setKoseiJiyu(KoseiJiyuType.本人所得更正.getコード());
-                    now.setYukoKaishiYMD(get有効開始日１(対象年度, now.getNinteiYukoKaishiDate()));
-                }
-                //5-4
-                if (HanteiKubunType.負担割合判定.code().equals(現判定区分)
-                        && HanteiKubunType.非課税.code().equals(前判定区分)) {
-                    now.setKoseiJiyu(KoseiJiyuType.その他.getコード());
-                    now.setYukoKaishiYMD(get有効開始日１(対象年度, now.getNinteiYukoKaishiDate()));
-                }
+                負担割合判定マージ(前判定区分, 現判定区分, now, 対象年度, before);
 
             } else {
                 now.setKoseiJiyu(before.getKoseiJiyu());
@@ -452,6 +449,52 @@ public class RiyoshaFutanWariaiHantei {
         }
         result.get(result.size() - 1).setYukoShuryoYMD(new FlexibleDate(対象年度.getYearValue() + 1, NUM七月, NUM三十一日));
         return result;
+    }
+
+    private void 負担割合判定マージ(RString 前判定区分, RString 現判定区分, RiyoshaFutanWariaiMeisaiTempEntity now,
+            FlexibleYear 対象年度, RiyoshaFutanWariaiMeisaiTempEntity before) {
+        //1,2,3,4,5-0
+        if (HanteiKubunType.対象外.code().equals(前判定区分)
+                && Arrays.asList(HanteiKubunType.values()).contains(HanteiKubunType.toValue(現判定区分))
+                && !HanteiKubunType.対象外.code().equals(現判定区分)) {
+//TODO QA
+            now.setKoseiJiyu(KoseiJiyuType.当初_継続_新規認定.getコード());
+            now.setYukoKaishiYMD(now.getNinteiYukoKaishiDate());
+        }
+        //4-5
+        if (HanteiKubunType.非課税.code().equals(現判定区分)
+                && HanteiKubunType.負担割合判定.code().equals(前判定区分)) {
+//TODO QA
+            now.setKoseiJiyu(KoseiJiyuType.本人所得更正.getコード());
+            now.setYukoKaishiYMD(get有効開始日１(対象年度, now.getNinteiYukoKaishiDate()));
+        }
+        //5-1||5-5
+        if (HanteiKubunType.負担割合判定.code().equals(現判定区分)
+                && (HanteiKubunType.第２号被保険者.code().equals(前判定区分)
+                || HanteiKubunType.負担割合判定.code().equals(前判定区分))) {
+            handle数額変更(now, before, 対象年度);
+        }
+        //5-2
+        if (HanteiKubunType.負担割合判定.code().equals(現判定区分)
+                && HanteiKubunType.生活保護.code().equals(前判定区分)) {
+            now.setKoseiJiyu(KoseiJiyuType.その他.getコード());
+            FlexibleDate 受給廃止日 = now.getJukyuHaishiYMD();
+            if (受給廃止日 != null) {
+                now.setYukoKaishiYMD(new FlexibleDate(受給廃止日.getYearValue(), 受給廃止日.getMonthValue() + 1, 1));
+            }
+        }
+        //5-3
+        if (HanteiKubunType.負担割合判定.code().equals(現判定区分)
+                && HanteiKubunType.旧措置.code().equals(前判定区分)) {
+            now.setKoseiJiyu(KoseiJiyuType.本人所得更正.getコード());
+            now.setYukoKaishiYMD(get有効開始日１(対象年度, now.getNinteiYukoKaishiDate()));
+        }
+        //5-4
+        if (HanteiKubunType.負担割合判定.code().equals(現判定区分)
+                && HanteiKubunType.非課税.code().equals(前判定区分)) {
+            now.setKoseiJiyu(KoseiJiyuType.その他.getコード());
+            now.setYukoKaishiYMD(get有効開始日１(対象年度, now.getNinteiYukoKaishiDate()));
+        }
     }
 
     private void handle数額変更(RiyoshaFutanWariaiMeisaiTempEntity now, RiyoshaFutanWariaiMeisaiTempEntity before,
@@ -501,6 +544,10 @@ public class RiyoshaFutanWariaiHantei {
             }
         }
         return date;
+    }
+
+    private Decimal nonullSubstract(Decimal d1, Decimal d2) {
+        return nonullDecimal(d1).subtract(nonullDecimal(d2));
     }
 
     private boolean equalsRString(RString r1, RString r2) {
