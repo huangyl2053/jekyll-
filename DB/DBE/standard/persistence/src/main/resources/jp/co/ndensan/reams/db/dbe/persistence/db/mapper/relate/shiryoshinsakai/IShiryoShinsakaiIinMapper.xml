@@ -1304,6 +1304,13 @@
         dbt5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
         AND
         dbt5502."shinsakaiOrderKakuteiFlag" = #{isOrderKakuteiFlg}
+               <if test="isSakuseiJokenHani">
+            AND #{bangoStart} <![CDATA[<=]]> dbt5502."shinsakaiOrder"
+            AND dbt5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
+        </if>
+        <if test="isSakuseiJokenTuika">
+            AND dbt5502."shinsakaiShiryoSakuseiYMD" IS NULL
+        </if>
                     ORDER BY
            dbt5502."shinsakaiOrder"
     </select>

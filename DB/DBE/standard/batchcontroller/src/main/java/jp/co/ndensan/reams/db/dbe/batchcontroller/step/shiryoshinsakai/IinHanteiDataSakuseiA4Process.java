@@ -119,11 +119,19 @@ public class IinHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJohoE
 
     private List<RString> 出力条件() {
         List<RString> list = new ArrayList<>();
-        RStringBuilder builder = new RStringBuilder();
-        builder.append("【介護認定審査会開催番号】")
+        RStringBuilder builder1 = new RStringBuilder();
+        builder1.append("【合議体番号】")
+                .append(" ")
+                .append(paramter.getGogitaiNo());
+        RStringBuilder builder2 = new RStringBuilder();
+        builder2.append("【介護認定審査会開催予定年月日】")
+                .append(" ")
+                .append(paramter.getShinsakaiKaisaiYoteiYMD().wareki().toDateString());
+        RStringBuilder builder3 = new RStringBuilder();
+        builder3.append("【介護認定審査会開催番号】")
                 .append(" ")
                 .append(paramter.getShinsakaiKaisaiNo());
-        list.add(builder.toRString());
+        list.add(builder1.toRString());
         return list;
     }
 }
