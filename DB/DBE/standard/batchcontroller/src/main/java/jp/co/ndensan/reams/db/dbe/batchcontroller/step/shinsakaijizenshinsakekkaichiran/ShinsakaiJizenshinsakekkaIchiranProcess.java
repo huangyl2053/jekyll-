@@ -142,18 +142,11 @@ public class ShinsakaiJizenshinsakekkaIchiranProcess extends BatchProcessBase<Sh
 
     private void 帳票バッチ出力条件リストの出力() {
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
-        List<RString> 出力条件 = new ArrayList<>();
-        RString 条件 = new RStringBuilder("【審査会開催年度】")
-                .append(parameter.get介護認定審査会開催番号().substring(ZERO, YON))
-                .append(new RString("【審査会開催番号】"))
-                .append(parameter.get介護認定審査会開催番号().substring(parameter.get介護認定審査会開催番号().length() - YON))
-                .toRString();
-        出力条件.add(条件);
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 ReportIdDBE.DBE520001.getReportId().value(), 導入団体クラス.getLasdecCode_().value(),
                 導入団体クラス.get市町村名(), new RString(JobContextHolder.getJobId()),
                 ReportIdDBE.DBE520001.getReportName(), new RString(reportSourceWriter.pageCount().value()),
-                なし, なし, 出力条件);
+                なし, なし, set出力条件());
         OutputJokenhyoFactory.createInstance(item).print();
     }
 
@@ -280,5 +273,21 @@ public class ShinsakaiJizenshinsakekkaIchiranProcess extends BatchProcessBase<Sh
             return 審査員名.get(審査員フラグ);
         }
         return new JizenShinsaKekkaRelateEntity();
+    }
+
+    private List<RString> set出力条件() {
+        List<RString> 出力条件 = new ArrayList<>();
+        RString 条件;
+        if (RString.isNullOrEmpty(parameter.get介護認定審査会開催番号())) {
+            条件 = RString.EMPTY;
+        } else {
+            条件 = new RStringBuilder("【審査会開催年度】")
+                    .append(parameter.get介護認定審査会開催番号().substring(ZERO, YON))
+                    .append(new RString("【審査会開催番号】"))
+                    .append(parameter.get介護認定審査会開催番号().substring(parameter.get介護認定審査会開催番号().length() - YON))
+                    .toRString();
+        }
+        出力条件.add(条件);
+        return 出力条件;
     }
 }
