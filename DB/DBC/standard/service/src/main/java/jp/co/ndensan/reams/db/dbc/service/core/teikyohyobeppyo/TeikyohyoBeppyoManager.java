@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.Service
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.TankiRiyoNissuResult;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.TeikyohyoBeppyoEntityResult;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KyufuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.teikyohyobeppyo.TankiRiyoNissuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.teikyohyobeppyo.TeikyohyoBeppyoEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.teikyohyobeppyo.ITeikyohyoBeppyoMapper;
@@ -128,8 +127,7 @@ public class TeikyohyoBeppyoManager {
                     自己作成0件.toString()));
         } else {
 
-            for (KyufuJikoSakuseiResult kyufuJikoSakuseiResult : 計画Entity) {
-                KyufuJikoSakuseiEntity entity = kyufuJikoSakuseiResult.getEntity();
+            for (KyufuJikoSakuseiResult entity : 計画Entity) {
                 KyufuJikoSakuseiEntityResult result = new KyufuJikoSakuseiEntityResult();
 //                result.setEntity(entity.getEntity());
                 result.setサービス(entity.getサービス());
@@ -186,8 +184,7 @@ public class TeikyohyoBeppyoManager {
             throw new ApplicationException(DbcErrorMessages.帳票印刷不可.getMessage().replace(
                     自己作成0件.toString()));
         } else {
-            for (KyufuJikoSakuseiResult kyufuJikoSakuseiResult : 計画Entity) {
-                KyufuJikoSakuseiEntity askuseiEntity = kyufuJikoSakuseiResult.getEntity();
+            for (KyufuJikoSakuseiResult askuseiEntity : 計画Entity) {
                 ServiceTypeDetails detail = new ServiceTypeDetails();
                 detail.setサービス単位(askuseiEntity.getサービス単位());
                 detail.setサービス種類コード(askuseiEntity.getサービス種類コード());
