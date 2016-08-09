@@ -99,22 +99,19 @@ public class ShinseihakkoMeiseiHandler {
         ninteishinseihakkodiv.getCcdKaigoNinteiAtenaInfo().setShoriType(コード);
         ninteishinseihakkodiv.getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(ShinseishoKanriNo.EMPTY, shikibetsuCode);
         ninteishinseihakkodiv.getCcdKaigoNinteiAtenaInfo().initialize();
-//        ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().initialize(shichosonSecurityJoho.get市町村情報().get市町村コード().value(),
-//                RString.EMPTY, RString.EMPTY, 被保険者番号); TODO
-
+        ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().initialize(shichosonSecurityJoho.get市町村情報().get市町村コード().value(), 被保険者番号);
         NinteiKanryoNinteiShinseiJohoManager manager = NinteiKanryoNinteiShinseiJohoManager.createInstance();
-//        ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().getHookenshaCode(); TODO
-//        NinteiShinseiJohoChild entity = manager.get要介護認定申請情報(ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().getHookenshaCode(),
-//                ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue());
-//        NinteiKanryoJoho ninteiKanryoJoho = manager.selectByShinseishoKanriNo(entity.get申請書管理番号());
-//        if (ninteiKanryoJoho == null) {
-//            checkninteiKanryoJoho(entity);
-//        } else {
-//            setZenkaiShinseiNaiyoinfo(entity.get認定申請区分_法令_コード().getColumnValue(),
-//                    entity.get認定申請区分_申請時_コード().getColumnValue(),
-//                    new RDate(entity.get認定申請年月日().toString()));
-//        }
-//        div.getCcdZenkaiNinteiKekkaJoho().onLoad(SubGyomuCode.DBD介護受給, entity.get申請書管理番号(), 画面区分);
+        NinteiShinseiJohoChild entity = manager.get要介護認定申請情報(ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().getHookenshaCode(),
+                ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue());
+        NinteiKanryoJoho ninteiKanryoJoho = manager.selectByShinseishoKanriNo(entity.get申請書管理番号());
+        if (ninteiKanryoJoho == null) {
+            checkninteiKanryoJoho(entity);
+        } else {
+            setZenkaiShinseiNaiyoinfo(entity.get認定申請区分_法令_コード().getColumnValue(),
+                    entity.get認定申請区分_申請時_コード().getColumnValue(),
+                    new RDate(entity.get認定申請年月日().toString()));
+        }
+        div.getCcdZenkaiNinteiKekkaJoho().onLoad(SubGyomuCode.DBD介護受給, entity.get申請書管理番号(), 画面区分);
         div.getCcdKyotakuServiceKeikakuInfo().initialize(new HihokenshaNo(被保険者番号));
         div.getCcdShusetSunyushoInfo().onLoad(shikibetsuCode);
     }
