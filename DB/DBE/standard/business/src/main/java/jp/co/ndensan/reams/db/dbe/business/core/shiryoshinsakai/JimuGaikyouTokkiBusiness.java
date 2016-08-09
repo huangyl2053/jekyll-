@@ -29,6 +29,7 @@ public class JimuGaikyouTokkiBusiness {
     private final GaikyoTokkiEntity entity;
     private final List<GaikyoTokkiEntity> 概況特記一覧表情報;
     private final List<ImjJohoEntity> 概況特記イメージ情報;
+    private final int no;
     private static final int 件数 = 10;
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
@@ -50,16 +51,19 @@ public class JimuGaikyouTokkiBusiness {
      * @param 概況特記一覧表情報 List<GaikyoTokkiEntity>
      * @param 概況特記イメージ情報 List<ImjJohoEntity>
      * @param paramter IinTokkiJikouItiziHanteiProcessParameter
+     * @param no no
      */
     public JimuGaikyouTokkiBusiness(
             GaikyoTokkiEntity entity,
             List<GaikyoTokkiEntity> 概況特記一覧表情報,
             List<ImjJohoEntity> 概況特記イメージ情報,
-            IinTokkiJikouItiziHanteiProcessParameter paramter) {
+            IinTokkiJikouItiziHanteiProcessParameter paramter,
+            int no) {
         this.entity = entity;
         this.概況特記一覧表情報 = 概況特記一覧表情報;
         this.概況特記イメージ情報 = 概況特記イメージ情報;
         this.paramter = paramter;
+        this.no = no;
     }
 
     /**
@@ -86,7 +90,7 @@ public class JimuGaikyouTokkiBusiness {
      * @return 概況特記テキスト１
      */
     public RString get概況特記テキスト１() {
-        return get概況特記テキスト(INT_1);
+        return get概況特記テキスト(INT_0);
     }
 
     /**
@@ -95,7 +99,7 @@ public class JimuGaikyouTokkiBusiness {
      * @return 概況特記テキスト２
      */
     public RString get概況特記テキスト２() {
-        return get概況特記テキスト(INT_2);
+        return get概況特記テキスト(INT_1);
     }
 
     /**
@@ -104,7 +108,7 @@ public class JimuGaikyouTokkiBusiness {
      * @return 概況特記テキスト３
      */
     public RString get概況特記テキスト３() {
-        return get概況特記テキスト(INT_3);
+        return get概況特記テキスト(INT_2);
     }
 
     /**
@@ -113,7 +117,7 @@ public class JimuGaikyouTokkiBusiness {
      * @return 概況特記テキスト４
      */
     public RString get概況特記テキスト４() {
-        return get概況特記テキスト(INT_4);
+        return get概況特記テキスト(INT_3);
     }
 
     /**
@@ -122,7 +126,7 @@ public class JimuGaikyouTokkiBusiness {
      * @return 概況特記テキスト５
      */
     public RString get概況特記テキスト５() {
-        return get概況特記テキスト(INT_5);
+        return get概況特記テキスト(INT_4);
     }
 
     /**
@@ -131,7 +135,7 @@ public class JimuGaikyouTokkiBusiness {
      * @return 概況特記テキスト６
      */
     public RString get概況特記テキスト６() {
-        return get概況特記テキスト(INT_6);
+        return get概況特記テキスト(INT_5);
     }
 
     /**
@@ -140,7 +144,7 @@ public class JimuGaikyouTokkiBusiness {
      * @return 概況特記テキスト７
      */
     public RString get概況特記テキスト７() {
-        return get概況特記テキスト(INT_7);
+        return get概況特記テキスト(INT_6);
     }
 
     /**
@@ -149,7 +153,7 @@ public class JimuGaikyouTokkiBusiness {
      * @return 概況特記テキスト８
      */
     public RString get概況特記テキスト８() {
-        return get概況特記テキスト(INT_8);
+        return get概況特記テキスト(INT_7);
     }
 
     /**
@@ -158,7 +162,7 @@ public class JimuGaikyouTokkiBusiness {
      * @return 概況特記テキスト９
      */
     public RString get概況特記テキスト９() {
-        return get概況特記テキスト(INT_9);
+        return get概況特記テキスト(INT_8);
     }
 
     /**
@@ -167,7 +171,7 @@ public class JimuGaikyouTokkiBusiness {
      * @return 概況特記テキスト１０
      */
     public RString get概況特記テキスト１０() {
-        return get概況特記テキスト(INT_0);
+        return get概況特記テキスト(INT_9);
     }
 
     /**
@@ -261,23 +265,21 @@ public class JimuGaikyouTokkiBusiness {
     }
 
     private RString get概況特記テキスト(int index) {
-        if (概況特記一覧表情報 != null && !概況特記一覧表情報.isEmpty()
-                && index <= 概況特記一覧表情報.size() % 件数) {
-            return get項目(index);
+
+        if (概況特記一覧表情報 != null && !概況特記一覧表情報.isEmpty()) {
+            if (件数 < 概況特記一覧表情報.size() && (index + (no / 件数) * 件数) < 概況特記一覧表情報.size()) {
+                return get項目(index + (no / 件数) * 件数);
+            }
+            if (概況特記一覧表情報.size() < 件数 && index < 概況特記一覧表情報.size()) {
+                return get項目(index);
+            }
         }
         return RString.EMPTY;
     }
 
     private RString get項目(int index) {
         RStringBuilder builder = new RStringBuilder();
-        GaikyoTokkiEntity 概況特記一覧;
-        if (INT_0 == index && INT_9 < 概況特記一覧表情報.size()) {
-            概況特記一覧 = 概況特記一覧表情報.get(INT_9);
-        } else if (INT_0 != index) {
-            概況特記一覧 = 概況特記一覧表情報.get(index - 1);
-        } else {
-            概況特記一覧 = new GaikyoTokkiEntity();
-        }
+        GaikyoTokkiEntity 概況特記一覧 = 概況特記一覧表情報.get(index);
         return builder.append(概況特記一覧.getDbt5206_shuso())
                 .append(概況特記一覧.getDbt5206_kazokuJokyo())
                 .append(概況特記一覧.getDbt5206_kyojuKankyo())
@@ -286,18 +288,22 @@ public class JimuGaikyouTokkiBusiness {
     }
 
     private RString get概況特記イメージ(int index) {
-        if (概況特記イメージ情報 != null && !概況特記イメージ情報.isEmpty()
-                && 概況特記イメージ情報.size() % 件数 == index) {
-            return getイメージ(index);
+        if (概況特記イメージ情報 != null && !概況特記イメージ情報.isEmpty()) {
+            if (件数 < 概況特記イメージ情報.size() && (index + (no / 件数) * 件数) < 概況特記イメージ情報.size()) {
+                return getイメージ(index + (no / 件数) * 件数);
+            }
+            if (概況特記イメージ情報.size() < 件数 && index < 概況特記イメージ情報.size()) {
+                return get項目(index);
+            }
         }
         return RString.EMPTY;
     }
 
     private RString getイメージ(int index) {
-        if (INT_0 == index && entity.isJimukyoku()) {
-            return 共有ファイルを引き出す(概況特記イメージ情報.get(INT_9).getDbt5115_imageSharedFileId(), ファイルID_C0007_BAK);
+        if (entity.isJimukyoku()) {
+            return 共有ファイルを引き出す(概況特記イメージ情報.get(index).getDbt5115_imageSharedFileId(), ファイルID_C0007_BAK);
         } else {
-            return 共有ファイルを引き出す(概況特記イメージ情報.get(index - 1).getDbt5115_imageSharedFileId(), ファイルID_C0007);
+            return 共有ファイルを引き出す(概況特記イメージ情報.get(index).getDbt5115_imageSharedFileId(), ファイルID_C0007);
         }
     }
 
@@ -305,9 +311,6 @@ public class JimuGaikyouTokkiBusiness {
         RString imagePath = RString.EMPTY;
         if (イメージID != null) {
             imagePath = getFilePath(イメージID, イメージID01);
-            if (RString.isNullOrEmpty(imagePath)) {
-                imagePath = getFilePath(イメージID, ファイルID_C0007_BAK);
-            }
         }
         return imagePath;
     }
