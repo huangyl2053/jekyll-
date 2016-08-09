@@ -121,15 +121,15 @@
             SELECT
                 dbt5502."shinseishoKanriNo",
                 dbt5502."shinsakaiOrder" ,
-                dbt5202N.dbt5202_ninteichosaRirekiNo AS ninteichosaRirekiNo,
+                dbt5202."ninteichosaRirekiNo",
                 dbt5101."shoKisaiHokenshaNo",
                 dbt5101."hihokenshaNo" ,
                 dbt5101."hihokenshaName" ,
                 dbt5101."ninteiShinseiYMD" ,
-                dbt5202N.dbt5202_ninteichosaJisshiYMD AS ninteichosaJisshiYMD,
+                dbt5202."ninteichosaJisshiYMD",
                 dbt5502."shinsakaiKaisaiYMD",
-                dbt5202N.dbt5202_gaikyoChosaTextImageKubun AS gaikyoChosaTextImageKubun ,
-                dbt5202N.dbt5202_tokki AS tokki,
+                dbt5202."gaikyoChosaTextImageKubun" ,
+                dbt5202."tokki",
                 dbt5115."imageSharedFileId" AS imageSharedFileId
             FROM
                     rgdb."DbT5502ShinsakaiWariateJoho" AS dbt5502

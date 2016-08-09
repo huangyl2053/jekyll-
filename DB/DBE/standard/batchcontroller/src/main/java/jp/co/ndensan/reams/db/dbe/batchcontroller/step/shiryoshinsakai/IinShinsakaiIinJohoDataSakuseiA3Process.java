@@ -48,6 +48,7 @@ public class IinShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<Sh
     private IinShinsakaiIinJohoProcessParameter paramter;
     private IShiryoShinsakaiIinMapper mapper;
     private List<ShinsakaiIinJohoEntity> shinsakaiIinJohoList;
+    private IinShinsakaiIinJohoMyBatisParameter myBatisParameter;
     private int no;
     private int count;
     @BatchWriter
@@ -57,7 +58,7 @@ public class IinShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<Sh
     @Override
     protected void initialize() {
         mapper = getMapper(IShiryoShinsakaiIinMapper.class);
-        IinShinsakaiIinJohoMyBatisParameter myBatisParameter = paramter.toIinShinsakaiIinJohoMyBatisParameter();
+        myBatisParameter = paramter.toIinShinsakaiIinJohoMyBatisParameter();
         myBatisParameter.setOrderKakuteiFlg(ShinsakaiOrderKakuteiFlg.確定.is介護認定審査会審査順確定());
         myBatisParameter.setHaishiFlag_False(IsHaishi.有効.is廃止());
         myBatisParameter.setHaishiFlag_True(IsHaishi.廃止.is廃止());
@@ -69,7 +70,7 @@ public class IinShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<Sh
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(SELECT_SHINSAKAITAIYOSYAJOHO, paramter.toIinShinsakaiIinJohoMyBatisParameter());
+        return new BatchDbReader(SELECT_SHINSAKAITAIYOSYAJOHO, myBatisParameter);
     }
 
     @Override

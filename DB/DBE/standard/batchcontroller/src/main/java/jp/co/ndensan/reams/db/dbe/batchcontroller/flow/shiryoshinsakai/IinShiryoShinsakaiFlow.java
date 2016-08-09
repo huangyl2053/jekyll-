@@ -15,10 +15,8 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinShinsa
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinShinsakaiIinJohoDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinSonotaJohoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinSonotaJohoDataSakuseiA4Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTokkiJikouDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTokkiJikouDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTokkiJikouItiziHanteiDataSakuseiA3Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTokkiJikouItiziHanteiDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTuikaSiryoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTuikaSiryoDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTuutishoDataSakuseiProcess;
@@ -38,7 +36,6 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
     private static final String 委員_審査会開催通知書 = "iinTuutisho";
     private static final String 委員_特記事項 = "iinTokkiJikou";
     private static final String 委員_一次判定結果 = "iinItiziHantei";
-    private static final String 委員_特記事項_一次判定結果 = "iinTokkiJikouItiziHantei";
     private static final String 委員_主治医意見書 = "iinIkensho";
     private static final String 委員_予備判定一覧 = "iinHantei";
     private static final String 委員_審査対象者一覧 = "iinShinsakaiIinJoho";
@@ -73,9 +70,6 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
         if (選択.equals(getParameter().getChohyoIin_hanteiFalg())) {
             executeStep(委員_予備判定一覧);
         }
-//        if (選択.equals(getParameter().getChohyoIin_tokkiJikouHanteiFalg())) {
-//            executeStep(委員_特記事項_一次判定結果);
-//        }
     }
 
     /**
@@ -100,7 +94,7 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
             return loopBatch(IinTokkiJikouDataSakuseiA4Process.class)
                     .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
         } else {
-            return loopBatch(IinTokkiJikouDataSakuseiA3Process.class)
+            return loopBatch(IinTokkiJikouItiziHanteiDataSakuseiA3Process.class)
                     .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
         }
     }
@@ -114,23 +108,6 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
     protected IBatchFlowCommand createIinItiziHanteiData() {
         return loopBatch(IinItiziHanteiDataSakuseiA4Process.class)
                 .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-    }
-
-    /**
-     * 委員用特記事項と一次判定結果票情報データの作成を行います。
-     *
-     * @return バッチコマンド
-     */
-    @Step(委員_特記事項_一次判定結果)
-    protected IBatchFlowCommand createIinTokkiJikouItiziHanteiData() {
-        if (選択.equals(getParameter().getShuturyokuSutairu())) {
-            return loopBatch(IinTokkiJikouItiziHanteiDataSakuseiA4Process.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-        } else {
-            return loopBatch(IinTokkiJikouItiziHanteiDataSakuseiA3Process.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-
-        }
     }
 
     /**
