@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokunenpoyoshiki28;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -32,13 +31,13 @@ public class JigyohokokuNenpoYoshiki28Property extends ReportPropertyBase<Jigyoh
     public JigyohokokuNenpoYoshiki28Property() {
         super(SubGyomuCode.DBU介護統計報告, ReportIdDBU.DBU300121.getReportId());
     }
-    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString(JigyohokokuNenpoYoshiki28ReportSource.ReportsSourceFields.jijifanhao.name())));
+    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("jijifanhao")));
 
     @Override
     public Breakers<JigyohokokuNenpoYoshiki28ReportSource> defineBreakers(
             Breakers<JigyohokokuNenpoYoshiki28ReportSource> breakers,
             BreakerCatalog<JigyohokokuNenpoYoshiki28ReportSource> catalog) {
-        return breakers.add(catalog.new SimplePageBreaker(            
+        return breakers.add(catalog.new SimplePageBreaker(
              
              
             PAGE_BREAK_KEYS) {
