@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gappeijoho;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.sortjun.GappeiJohoSortOrder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -36,6 +37,7 @@ public final class GappeiJyohoSpecificParameter {
     private final boolean useKokuhorenDataFromYMD;
     private final FlexibleDate kijyuYMD;
     private final boolean useKijyuYMD;
+    private final GappeiJohoSortOrder gappeiJohoSortOrder;
 
     private GappeiJyohoSpecificParameter(
             RString hyoujium,
@@ -56,7 +58,8 @@ public final class GappeiJyohoSpecificParameter {
             FlexibleDate kokuhorenDataFromYMD,
             boolean useKokuhorenDataFromYMD,
             FlexibleDate kijyuYMD,
-            boolean useKijyuYMD) {
+            boolean useKijyuYMD,
+            GappeiJohoSortOrder gappeiJohoSortOrder) {
         this.hyoujium = hyoujium;
         this.useHyoujium = useHyoujium;
         this.shichosonCode = shichosonCode;
@@ -76,6 +79,7 @@ public final class GappeiJyohoSpecificParameter {
         this.useKokuhorenDataFromYMD = useKokuhorenDataFromYMD;
         this.kijyuYMD = kijyuYMD;
         this.useKijyuYMD = useKijyuYMD;
+        this.gappeiJohoSortOrder = gappeiJohoSortOrder;
     }
 
     private static GappeiJyohoSpecificParameter createParam_common(
@@ -87,7 +91,8 @@ public final class GappeiJyohoSpecificParameter {
             FlexibleDate gappeiYMD,
             FlexibleDate kyuJohoFuyoToYMD,
             FlexibleDate kokuhorenDataFromYMD,
-            FlexibleDate kijyuYMD) {
+            FlexibleDate kijyuYMD,
+            GappeiJohoSortOrder gappeiJohoSortOrder) {
 
         boolean useHyoujium = false;
         boolean useShichosonCode = false;
@@ -135,7 +140,7 @@ public final class GappeiJyohoSpecificParameter {
                 hyoujium, useHyoujium, shichosonCode, useShichosonCode, hokenshaNo, useHokenshaNo,
                 chiikiNo, useChiikiNoLike, useChiikiNo, gappeiShurui, useGappeiShurui, gappeiYMD, useGappeiYMD,
                 kyuJohoFuyoToYMD, useKyuJohoFuyoToYMD, kokuhorenDataFromYMD, useKokuhorenDataFromYMD,
-                kijyuYMD, useKijyuYMD);
+                kijyuYMD, useKijyuYMD, gappeiJohoSortOrder);
     }
 
     /**
@@ -154,7 +159,8 @@ public final class GappeiJyohoSpecificParameter {
                 FlexibleDate.EMPTY,
                 FlexibleDate.EMPTY,
                 FlexibleDate.EMPTY,
-                FlexibleDate.EMPTY);
+                FlexibleDate.EMPTY,
+                null);
     }
 
     /**
@@ -176,7 +182,8 @@ public final class GappeiJyohoSpecificParameter {
                 FlexibleDate.EMPTY,
                 FlexibleDate.EMPTY,
                 FlexibleDate.EMPTY,
-                FlexibleDate.EMPTY);
+                FlexibleDate.EMPTY,
+                null);
     }
 
     /**
@@ -195,7 +202,8 @@ public final class GappeiJyohoSpecificParameter {
                 FlexibleDate.EMPTY,
                 FlexibleDate.EMPTY,
                 FlexibleDate.EMPTY,
-                FlexibleDate.EMPTY);
+                FlexibleDate.EMPTY,
+                null);
     }
 
     /**
@@ -217,7 +225,8 @@ public final class GappeiJyohoSpecificParameter {
                 FlexibleDate.EMPTY,
                 FlexibleDate.EMPTY,
                 FlexibleDate.EMPTY,
-                FlexibleDate.EMPTY);
+                FlexibleDate.EMPTY,
+                null);
     }
 
     /**
@@ -236,7 +245,8 @@ public final class GappeiJyohoSpecificParameter {
                 FlexibleDate.EMPTY,
                 FlexibleDate.EMPTY,
                 FlexibleDate.EMPTY,
-                FlexibleDate.EMPTY);
+                FlexibleDate.EMPTY,
+                null);
     }
 
     /**
@@ -255,7 +265,8 @@ public final class GappeiJyohoSpecificParameter {
                 FlexibleDate.EMPTY,
                 FlexibleDate.EMPTY,
                 FlexibleDate.EMPTY,
-                FlexibleDate.EMPTY);
+                FlexibleDate.EMPTY,
+                null);
     }
 
     /**
@@ -276,7 +287,8 @@ public final class GappeiJyohoSpecificParameter {
                 FlexibleDate.EMPTY,
                 FlexibleDate.EMPTY,
                 FlexibleDate.EMPTY,
-                FlexibleDate.EMPTY);
+                FlexibleDate.EMPTY,
+                null);
     }
 
     /**
@@ -307,7 +319,30 @@ public final class GappeiJyohoSpecificParameter {
                 gappeiYMD,
                 kyuJohoFuyoToYMD,
                 kokuhorenDataFromYMD,
-                kijyuYMD);
+                kijyuYMD,
+                null);
+    }
+
+    /**
+     * 最新広域合併市町村情報の取得処理の検索パラメータ設定します。
+     *
+     * @param hyoujium 表示有無区分
+     * @param gappeiJohoSortOrder 合併情報ソート順
+     * @return GappeiJyohoSpecificParameter パラメータ
+     */
+    public static GappeiJyohoSpecificParameter createParamForKouikigappeijohoWithSort(RString hyoujium,
+            GappeiJohoSortOrder gappeiJohoSortOrder) {
+        return createParam_common(
+                hyoujium,
+                null,
+                HokenshaNo.EMPTY,
+                RString.EMPTY,
+                RString.HALF_SPACE,
+                FlexibleDate.EMPTY,
+                FlexibleDate.EMPTY,
+                FlexibleDate.EMPTY,
+                FlexibleDate.EMPTY,
+                gappeiJohoSortOrder);
     }
 
     /**
@@ -479,5 +514,14 @@ public final class GappeiJyohoSpecificParameter {
      */
     public boolean isUseKijyuYMD() {
         return useKijyuYMD;
+    }
+
+    /**
+     * gappeiJohoSortOrderを取得します。
+     *
+     * @return gappeiJohoSortOrder
+     */
+    public GappeiJohoSortOrder getGappeiJohoSortOrder() {
+        return gappeiJohoSortOrder;
     }
 }
