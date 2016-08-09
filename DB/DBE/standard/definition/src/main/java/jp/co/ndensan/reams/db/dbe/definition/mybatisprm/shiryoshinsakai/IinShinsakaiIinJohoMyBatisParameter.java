@@ -66,5 +66,7 @@ public class IinShinsakaiIinJohoMyBatisParameter implements IMyBatisParameter {
         this.isShuturyokuJunEmpty = isShuturyokuJunEmpty;
         this.isSakuseiJokenHani = isSakuseiJokenHani;
         this.isSakuseiJokenTuika = isSakuseiJokenTuika;
+        this.bangoEnd = bangoEnd;
+        this.bangoStart = bangoStart;
     }
 }
