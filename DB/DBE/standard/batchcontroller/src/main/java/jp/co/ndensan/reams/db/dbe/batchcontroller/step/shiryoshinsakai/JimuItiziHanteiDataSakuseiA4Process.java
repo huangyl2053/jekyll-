@@ -103,7 +103,8 @@ public class JimuItiziHanteiDataSakuseiA4Process extends BatchKeyBreakBase<Itizi
         List<DbT5304ShujiiIkenshoIkenItemEntity> 前回主治医意見書 = mapper.get前回主治医意見書(myBatisParameter);
         item = new IchijihanteikekkahyoItemSettei().set項目(entity, 特記事項,
                 調査票調査項目, 前回調査票調査項目, 主治医意見書,
-                前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, 現在状況, myBatisParameter.getGogitaiNo());
+                前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, 現在状況,
+                new RString(myBatisParameter.getGogitaiNo()));
         IchijihanteikekkahyoA4Report report = new IchijihanteikekkahyoA4Report(item);
         report.writeBy(reportSourceWriterA4);
     }

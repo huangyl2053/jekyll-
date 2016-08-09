@@ -22,8 +22,9 @@ public class IinItiziHanteiProcessParameter implements IBatchProcessParameter {
     private RString shinsakaiKaisaiNo;
     private RString shuturyokuJun;
     private RString sakuseiJoken;
-    private RString bangoStart;
-    private RString bangoEnd;
+    private int bangoStart;
+    private int bangoEnd;
+    private int gogitaiNo;
     private final RString 作成条件_範囲指定 = new RString("範囲指定");
     private final RString 作成条件_追加分 = new RString("追加分");
 
@@ -35,18 +36,21 @@ public class IinItiziHanteiProcessParameter implements IBatchProcessParameter {
      * @param sakuseiJoken 作成条件
      * @param bangoStart 開始資料番号
      * @param bangoEnd 終了資料番号
+     * @param gogitaiNo 合議体番号
      */
     public IinItiziHanteiProcessParameter(
             RString shinsakaiKaisaiNo,
             RString shuturyokuJun,
             RString sakuseiJoken,
-            RString bangoStart,
-            RString bangoEnd) {
+            int bangoStart,
+            int bangoEnd,
+            int gogitaiNo) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shuturyokuJun = shuturyokuJun;
         this.sakuseiJoken = sakuseiJoken;
         this.bangoStart = bangoStart;
         this.bangoEnd = bangoEnd;
+        this.gogitaiNo = gogitaiNo;
     }
 
     /**

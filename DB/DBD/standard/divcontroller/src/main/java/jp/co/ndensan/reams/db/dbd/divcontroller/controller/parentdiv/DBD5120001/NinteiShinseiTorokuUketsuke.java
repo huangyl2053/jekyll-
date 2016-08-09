@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5120001
 
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5120001.NinteiShinseiTorokuUketsukeDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5120001.NinteiShinseiTorokuUketsukeHandler;
-import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5120001.NinteiShinseiTorokuUketsukeValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -53,6 +53,18 @@ public class NinteiShinseiTorokuUketsuke {
     }
 
     /**
+     * 医療保険OkCloseの処理を行う
+     *
+     * @param div NinteiShinseiTorokuUketsukeDiv
+     * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
+     */
+    public ResponseData<NinteiShinseiTorokuUketsukeDiv> onOkClose_IryoHoken(NinteiShinseiTorokuUketsukeDiv div) {
+
+        div.getBtnIryohokenGuide().setIconNameEnum(IconName.Complete);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 連絡先ボタン用のデータを準備する
      *
      * @param div NinteiShinseiTorokuUketsukeDiv
@@ -60,6 +72,18 @@ public class NinteiShinseiTorokuUketsuke {
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnRenrakusaki(NinteiShinseiTorokuUketsukeDiv div) {
 
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 連絡先OkCloseの処理を行う
+     *
+     * @param div NinteiShinseiTorokuUketsukeDiv
+     * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
+     */
+    public ResponseData<NinteiShinseiTorokuUketsukeDiv> onOkClose_Renrakuski(NinteiShinseiTorokuUketsukeDiv div) {
+
+        div.getBtnRenrakusaki().setIconNameEnum(IconName.Complete);
         return ResponseData.of(div).respond();
     }
 
@@ -75,13 +99,14 @@ public class NinteiShinseiTorokuUketsuke {
     }
 
     /**
-     * 除外審査員ボタン用のデータを準備する
+     * 入院/施設入所OkCloseの処理を行う
      *
      * @param div NinteiShinseiTorokuUketsukeDiv
      * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
      */
-    public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnJogaiShinsakaiIinGuide(NinteiShinseiTorokuUketsukeDiv div) {
+    public ResponseData<NinteiShinseiTorokuUketsukeDiv> onOkClose_ShisetsuNyutaisho(NinteiShinseiTorokuUketsukeDiv div) {
 
+        div.getBtnNyuinAndShisetsuNyusho().setIconNameEnum(IconName.Complete);
         return ResponseData.of(div).respond();
     }
 
@@ -97,6 +122,18 @@ public class NinteiShinseiTorokuUketsuke {
     }
 
     /**
+     * 市町村連絡事項OkCloseの処理を行う
+     *
+     * @param div NinteiShinseiTorokuUketsukeDiv
+     * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
+     */
+    public ResponseData<NinteiShinseiTorokuUketsukeDiv> onOkClose_ShichosonRenrakuJiko(NinteiShinseiTorokuUketsukeDiv div) {
+
+        div.getBtnShichosonRenrakuJiko().setIconNameEnum(IconName.Complete);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 調査状況ボタン用のデータを準備する
      *
      * @param div NinteiShinseiTorokuUketsukeDiv
@@ -104,6 +141,18 @@ public class NinteiShinseiTorokuUketsuke {
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnChosaJokyo(NinteiShinseiTorokuUketsukeDiv div) {
 
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 調査状況OkCloseの処理を行う
+     *
+     * @param div NinteiShinseiTorokuUketsukeDiv
+     * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
+     */
+    public ResponseData<NinteiShinseiTorokuUketsukeDiv> onOkClose_ChosaJokyo(NinteiShinseiTorokuUketsukeDiv div) {
+
+        div.getBtnChosaJokyo().setIconNameEnum(IconName.Complete);
         return ResponseData.of(div).respond();
     }
 
@@ -119,12 +168,35 @@ public class NinteiShinseiTorokuUketsuke {
     }
 
     /**
+     * 滞納状況OkCloseの処理を行う
+     *
+     * @param div NinteiShinseiTorokuUketsukeDiv
+     * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
+     */
+    public ResponseData<NinteiShinseiTorokuUketsukeDiv> onOkClose_TainoJokyo(NinteiShinseiTorokuUketsukeDiv div) {
+
+        div.getBtnTainoJokyo().setIconNameEnum(IconName.Complete);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 定型文ボタン用のデータを準備する
      *
      * @param div NinteiShinseiTorokuUketsukeDiv
      * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnEnkiRiyuTeikeibun(NinteiShinseiTorokuUketsukeDiv div) {
+
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 定型文ボタンOkCloseの処理を行う
+     *
+     * @param div NinteiShinseiTorokuUketsukeDiv
+     * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
+     */
+    public ResponseData<NinteiShinseiTorokuUketsukeDiv> onOkClose_btnEnkiRiyuTeikeibun(NinteiShinseiTorokuUketsukeDiv div) {
 
         return ResponseData.of(div).respond();
     }
@@ -147,7 +219,7 @@ public class NinteiShinseiTorokuUketsuke {
         return new NinteiShinseiTorokuUketsukeHandler(div);
     }
 
-    private NinteiShinseiTorokuUketsukeValidationHandler getValidationHandler() {
-        return new NinteiShinseiTorokuUketsukeValidationHandler();
-    }
+//    private NinteiShinseiTorokuUketsukeValidationHandler getValidationHandler() {
+//        return new NinteiShinseiTorokuUketsukeValidationHandler();
+//    }
 }

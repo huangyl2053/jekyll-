@@ -13,7 +13,7 @@
         <relativePath>../../</relativePath>
     </parent>
     <properties>
-        <jp.co.ndensan.reams.dbz.version>1.0-SNAPSHOT</jp.co.ndensan.reams.dbz.version>
+        <jp.co.ndensan.reams.dbzVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.dbzVersion>
     </properties>
     <modules>
         <module>entity</module>
@@ -30,33 +30,33 @@
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbx</groupId>
                 <artifactId>DbxTestHelper</artifactId>
-                <version>${jp.co.ndensan.reams.dbx.version}</version>
+                <version>${jp.co.ndensan.reams.dbxVersion}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbx</groupId>
                 <artifactId>DbxDefinition</artifactId>
-                <version>${jp.co.ndensan.reams.dbx.version}</version>
+                <version>${jp.co.ndensan.reams.dbxVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbx</groupId>
                 <artifactId>DbxEntity</artifactId>
-                <version>${jp.co.ndensan.reams.dbx.version}</version>
+                <version>${jp.co.ndensan.reams.dbxVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbx</groupId>
                 <artifactId>DbxPersistence</artifactId>
-                <version>${jp.co.ndensan.reams.dbx.version}</version>
+                <version>${jp.co.ndensan.reams.dbxVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbx</groupId>
                 <artifactId>DbxBusiness</artifactId>
-                <version>${jp.co.ndensan.reams.dbx.version}</version>
+                <version>${jp.co.ndensan.reams.dbxVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbx</groupId>
                 <artifactId>DbxService</artifactId>
-                <version>${jp.co.ndensan.reams.dbx.version}</version>
+                <version>${jp.co.ndensan.reams.dbxVersion}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>jp.co.ndensan.reams.db.dbx</groupId>
@@ -67,59 +67,59 @@
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbx</groupId>
                 <artifactId>DbxDivController</artifactId>
-                <version>${jp.co.ndensan.reams.dbx.version}</version>
+                <version>${jp.co.ndensan.reams.dbxVersion}</version>
                 <classifier>classes</classifier>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbx</groupId>
                 <artifactId>DbxBatchController</artifactId>
-                <version>${jp.co.ndensan.reams.dbx.version}</version>
+                <version>${jp.co.ndensan.reams.dbxVersion}</version>
             </dependency>
             <!-- DBZ -->
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbz</groupId>
                 <artifactId>DbzTestHelper</artifactId>
-                <version>${jp.co.ndensan.reams.dbz.version}</version>
+                <version>${jp.co.ndensan.reams.dbzVersion}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbz</groupId>
                 <artifactId>DbzDefinition</artifactId>
-                <version>${jp.co.ndensan.reams.dbz.version}</version>
+                <version>${jp.co.ndensan.reams.dbzVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbz</groupId>
                 <artifactId>DbzEntity</artifactId>
-                <version>${jp.co.ndensan.reams.dbz.version}</version>
+                <version>${jp.co.ndensan.reams.dbzVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbz</groupId>
                 <artifactId>DbzEntity</artifactId>
-                <version>${jp.co.ndensan.reams.dbz.version}</version>
+                <version>${jp.co.ndensan.reams.dbzVersion}</version>
                 <type>test-jar</type>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbz</groupId>
                 <artifactId>DbzPersistence</artifactId>
-                <version>${jp.co.ndensan.reams.dbz.version}</version>
+                <version>${jp.co.ndensan.reams.dbzVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbz</groupId>
                 <artifactId>DbzBusiness</artifactId>
-                <version>${jp.co.ndensan.reams.dbz.version}</version>
+                <version>${jp.co.ndensan.reams.dbzVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbz</groupId>
                 <artifactId>DbzBusiness</artifactId>
-                <version>${jp.co.ndensan.reams.dbz.version}</version>
+                <version>${jp.co.ndensan.reams.dbzVersion}</version>
                 <type>test-jar</type>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbz</groupId>
                 <artifactId>DbzService</artifactId>
-                <version>${jp.co.ndensan.reams.dbz.version}</version>
+                <version>${jp.co.ndensan.reams.dbzVersion}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>jp.co.ndensan.reams.db.dbz</groupId>
@@ -130,13 +130,13 @@
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbz</groupId>
                 <artifactId>DbzDivController</artifactId>
-                <version>${jp.co.ndensan.reams.dbz.version}</version>
+                <version>${jp.co.ndensan.reams.dbzVersion}</version>
                 <classifier>classes</classifier>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbz</groupId>
                 <artifactId>DbzBatchController</artifactId>
-                <version>${jp.co.ndensan.reams.dbz.version}</version>
+                <version>${jp.co.ndensan.reams.dbzVersion}</version>
             </dependency>
             <!-- DBA -->
             <dependency>

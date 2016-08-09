@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class IinShinsakaiIinJohoMyBatisParameter implements IMyBatisParameter {
 
     private int gogitaiNo;
+    private int bangoStart;
+    private int bangoEnd;
     private FlexibleDate shinsakaiKaisaiYoteiYMD;
     private RString shinsakaiKaisaiNo;
     private RString shuturyokuJun;
@@ -38,6 +40,8 @@ public class IinShinsakaiIinJohoMyBatisParameter implements IMyBatisParameter {
      * コンストラクタです。
      *
      * @param gogitaiNo 合議体番号
+     * @param bangoStart 開始番号
+     * @param bangoEnd End番号
      * @param shinsakaiKaisaiYoteiYMD 介護認定審査会開催予定年月日
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
      * @param shuturyokuJun 出力順
@@ -47,6 +51,8 @@ public class IinShinsakaiIinJohoMyBatisParameter implements IMyBatisParameter {
      */
     public IinShinsakaiIinJohoMyBatisParameter(
             int gogitaiNo,
+            int bangoStart,
+            int bangoEnd,
             FlexibleDate shinsakaiKaisaiYoteiYMD,
             RString shinsakaiKaisaiNo,
             RString shuturyokuJun,

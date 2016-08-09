@@ -42,7 +42,6 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ca.cax</groupId>
             <artifactId>CaxEntity</artifactId>
-            <version>${jp.co.ndensan.reams.cax.version}</version>
         </dependency>
     </dependencies>
 </project>

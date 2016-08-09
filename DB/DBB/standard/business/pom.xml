@@ -74,7 +74,7 @@
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxEntity</artifactId>
             <scope>test</scope>
-            <version>${jp.co.ndensan.reams.dbx.version}</version>
+            <version>${jp.co.ndensan.reams.dbxVersion}</version>
             <classifier>tests</classifier>
         </dependency>
     </dependencies>

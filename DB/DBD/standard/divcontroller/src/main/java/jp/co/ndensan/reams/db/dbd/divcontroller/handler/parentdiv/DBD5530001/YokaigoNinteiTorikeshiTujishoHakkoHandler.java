@@ -55,7 +55,7 @@ public class YokaigoNinteiTorikeshiTujishoHakkoHandler {
         div.getTujishoHakkoJoken().getCcdKaigoNinteiAtenaInfo().setKaigoDonyuKeitai(shichosonSecurityJoho.get介護導入区分().code());
         div.getTujishoHakkoJoken().getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(ShinseishoKanriNo.EMPTY, new ShikibetsuCode(識別コード));
         div.getTujishoHakkoJoken().getCcdKaigoNinteiAtenaInfo().initialize();
-        div.getTujishoHakkoJoken().getCcdKaigoninteiShikakuInfo().initialize(市町村コード, 識別コード, HDN_SETAI_KODO, 被保険者番号);
+//        div.getTujishoHakkoJoken().getCcdKaigoninteiShikakuInfo().initialize(市町村コード, 識別コード, HDN_SETAI_KODO, 被保険者番号); TODO
         div.getTujishoHakkoMeisai().getTxtSakuseibi().setValue(RDate.getNowDate());
         div.getTujishoHakkoMeisai().getTxtTorikeshibi().setValue(RDate.getNowDate());
         div.getTujishoHakkoMeisai().getTxtYokaigodo().setValue(div.getCcdKaigoninteiShikakuInfo().getTxtYokaigodo().getValue());

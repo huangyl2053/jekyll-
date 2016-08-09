@@ -101,30 +101,30 @@ public class ShinsakaiJizenshinsakekkaIchiranProcess extends BatchProcessBase<Sh
                 new RString(審査会情報.get(ZERO).getGogitaiNo()),
                 審査会情報.get(ZERO).getShinsakaiKaisaiNo().substring(審査会情報.get(ZERO).getShinsakaiKaisaiNo().length() - YON),
                 dateFormat(),
-                審査員名.get(ZERO).getShinsakaiIinShimei(),
-                審査員名.get(ITI).getShinsakaiIinShimei(),
-                審査員名.get(NI).getShinsakaiIinShimei(),
-                審査員名.get(SAN).getShinsakaiIinShimei(),
-                審査員名.get(YON).getShinsakaiIinShimei(),
+                get審査員(ZERO).getShinsakaiIinShimei(),
+                get審査員(ITI).getShinsakaiIinShimei(),
+                get審査員(NI).getShinsakaiIinShimei(),
+                get審査員(SAN).getShinsakaiIinShimei(),
+                get審査員(YON).getShinsakaiIinShimei(),
                 new RString(審査会対象者情報.getShinsakaiOrder()),
                 set特定疾病(審査会対象者情報.getNigoTokuteiShippeiCode()),
                 審査会対象者情報.getHihokenshaNo(),
                 set前回介護度(審査会対象者情報.getNijiHanteiYokaigoJotaiKubunCode(), 審査会対象者情報.getKoroshoIfShikibetsuCode()),
                 RString.EMPTY,
-                set対応結果(審査員名.get(ZERO).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
-                set有効期間(審査員名.get(ZERO).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
+                set対応結果(get審査員(ZERO).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
+                set有効期間(get審査員(ZERO).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
                 RString.EMPTY,
-                set対応結果(審査員名.get(ITI).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
-                set有効期間(審査員名.get(ITI).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
+                set対応結果(get審査員(ITI).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
+                set有効期間(get審査員(ITI).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
                 RString.EMPTY,
-                set対応結果(審査員名.get(NI).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
-                set有効期間(審査員名.get(NI).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
+                set対応結果(get審査員(NI).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
+                set有効期間(get審査員(NI).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
                 RString.EMPTY,
-                set対応結果(審査員名.get(SAN).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
-                set有効期間(審査員名.get(SAN).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
+                set対応結果(get審査員(SAN).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
+                set有効期間(get審査員(SAN).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
                 RString.EMPTY,
-                set対応結果(審査員名.get(YON).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
-                set有効期間(審査員名.get(YON).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
+                set対応結果(get審査員(YON).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
+                set有効期間(get審査員(YON).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
                 set一次判定結果(審査会対象者情報.getIchijiHanteiKekkaCode(), 審査会対象者情報.getKoroshoIfShikibetsuCode()),
                 RString.EMPTY,
                 NinteiShinseiShinseijiKubunCode.toValue(審査会対象者情報.getNinteiShinseiShinseijiKubunCode()).get名称(),
@@ -158,10 +158,10 @@ public class ShinsakaiJizenshinsakekkaIchiranProcess extends BatchProcessBase<Sh
     }
 
     private RString set特定疾病(RString 特定疾病) {
-        if (RString.EMPTY.equals(特定疾病)) {
-            return RString.EMPTY;
-        } else {
+        if (!特定疾病.isNullOrEmpty()) {
             return NULLNONE;
+        } else {
+            return RString.EMPTY;
         }
     }
 
@@ -223,11 +223,6 @@ public class ShinsakaiJizenshinsakekkaIchiranProcess extends BatchProcessBase<Sh
         }
     }
 
-    /**
-     * 年月日
-     *
-     * @return
-     */
     private RString dateFormat() {
         RString 年月日 = 審査会情報.get(ZERO).getShinsakaiKaisaiYoteiYMD();
         RString 時分 = 審査会情報.get(ZERO).getShinsakaiKaishiYoteiTime();
@@ -235,5 +230,14 @@ public class ShinsakaiJizenshinsakekkaIchiranProcess extends BatchProcessBase<Sh
                 .append("月").append(年月日.substring(LOKU)).append("日")
                 .append(" ").append(時分.substring(ZERO, NI)).append("時")
                 .append(時分.substring(NI)).append("分").toRString();
+    }
+
+    private JizenShinsaKekkaRelateEntity get審査員(int 審査員フラグ) {
+        try {
+            return 審査員名.get(審査員フラグ);
+        } catch (Exception e) {
+            return new JizenShinsaKekkaRelateEntity();
+        }
+
     }
 }
