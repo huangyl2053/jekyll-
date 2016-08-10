@@ -10,7 +10,11 @@ import jp.co.ndensan.reams.ca.cax.entity.db.psm.CaFt703FindNokumiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.DbTKeisangoJohoTempTableEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt310FindKozaEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0301YokinShubetsuPatternEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0302KinyuKikanEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0303KinyuKikanShitenEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0310KozaEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
 import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 
 /**
@@ -28,7 +32,7 @@ public class KarisanteiGakuHenkoEntity implements Serializable {
     private UaFt200FindShikibetsuTaishoEntity 宛名;
     private UaFt250FindAtesakiEntity 宛先;
     private CaFt703FindNokumiEntity 納組;
-    private UaFt310FindKozaEntity 口座;
+    private TokuteiKozaRelateEntity 口座;
     private UeT0511NenkinTokuchoKaifuJohoEntity 対象者_追加含む情報_更正後;
 
     /**
@@ -49,39 +53,69 @@ public class KarisanteiGakuHenkoEntity implements Serializable {
     }
 
     private void set口座の全項目(DbT2002FukaTempTableEntity entity) {
-        entity.setKoza_kozaId(口座.get口座ID());
-        entity.setKoza_shikibetsuCode(口座.get識別コード());
-        entity.setKoza_gyomuCode(口座.get業務コード());
-        entity.setKoza_subGyomuCode(口座.getサブ業務コード());
-        entity.setKoza_kamokuCode(口座.get科目コード());
-        entity.setKoza_gyomuKoyuKey(口座.get業務固有キー());
-        entity.setKoza_yotoKubun(口座.get用途区分());
-        entity.setKoza_yotoKubunMeisho(口座.get用途区分名称());
-        entity.setKoza_kinyuKikanCode(口座.get金融機関コード());
-        entity.setKoza_kinyuKikanMeisho(口座.get金融機関名称());
-        entity.setKoza_kinyuKikanShitenCode(口座.get支店コード());
-        entity.setKoza_kinyuKikanShitenMeisho(口座.get支店名称());
-        entity.setKoza_yokinShubetsu(口座.get預金種別());
-        entity.setKoza_yokinShubetsuMeisho(口座.get預金種別名称());
-        entity.setKoza_kozaNo(口座.get口座番号());
-        entity.setKoza_tsuchoKigo(口座.get通帳記号());
-        entity.setKoza_tsuchoNo(口座.get通帳番号());
-        entity.setKoza_kozaMeigininShikibetsuCode(口座.get口座名義人識別コード());
-        entity.setKoza_kozaMeiginin(口座.get口座名義人());
-        entity.setKoza_kozaMeigininKanji(口座.get口座名義人漢字());
-        entity.setKoza_kaishiYMD(口座.get開始年月日());
-        entity.setKoza_shuryoYMD(口座.get終了年月日());
-        entity.setKoza_kensakuyoMeiginin(口座.get口座名義人());
-        entity.setKoza_kozaHyojiKubun(口座.get口座表示区分());
-        entity.setKoza_nayoseKubun(口座.has名寄区分());
-        entity.setKoza_zumitsuHakkoYohi(口座.is領収済通知書発行要否());
-        entity.setKoza_kozaFurikaeKaishiTsuchiHakkozumi(口座.is口座振替開始通知書発行済());
-        entity.setKoza_kozaTorokuNo(口座.get口座登録番号());
-        entity.setKoza_kozaTorokuKubunCode(口座.get口座登録区分コード());
-        entity.setKoza_kozaKaishiUketsukeYMD(口座.get口座開始受付年月日());
-        entity.setKoza_kozaShuryoUketsukeYMD(口座.get口座終了受付年月日());
-        entity.setKoza_kozaTorokuYMD(口座.get口座登録年月日());
-        entity.setKoza_temban(口座.get店番());
+        UaT0310KozaEntity 口座Entity = 口座.getUaT0310KozaEntity();
+        entity.setUaT0310Koza_insertDantaiCd(口座Entity.getInsertDantaiCd());
+        entity.setUaT0310Koza_isDeleted(口座Entity.getIsDeleted());
+        entity.setUaT0310Koza_kozaId(口座Entity.getKozaId());
+        entity.setUaT0310Koza_shikibetsuCode(口座Entity.getShikibetsuCode());
+        entity.setUaT0310Koza_gyomubetsuPrimaryKey(口座Entity.getGyomubetsuPrimaryKey());
+        entity.setUaT0310Koza_gyomuKoyuKey(口座Entity.getGyomuKoyuKey());
+        entity.setUaT0310Koza_yotoKubun(口座Entity.getYotoKubun());
+        entity.setUaT0310Koza_torokuRenban(口座Entity.getTorokuRenban());
+        entity.setUaT0310Koza_kaishiYMD(口座Entity.getKaishiYMD());
+        entity.setUaT0310Koza_shuryoYMD(口座Entity.getShuryoYMD());
+        entity.setUaT0310Koza_kinyuKikanCode(口座Entity.getKinyuKikanCode());
+        entity.setUaT0310Koza_kinyuKikanShitenCode(口座Entity.getKinyuKikanShitenCode());
+        entity.setUaT0310Koza_yokinShubetsu(口座Entity.getYokinShubetsu());
+        entity.setUaT0310Koza_kozaNo(口座Entity.getKozaNo());
+        entity.setUaT0310Koza_tsuchoKigo(口座Entity.getTsuchoKigo());
+        entity.setUaT0310Koza_tsuchoNo(口座Entity.getTsuchoNo());
+        entity.setUaT0310Koza_kozaMeigininShikibetsuCode(口座Entity.getKozaMeigininShikibetsuCode());
+        entity.setUaT0310Koza_kozaMeiginin(口座Entity.getKozaMeiginin());
+        entity.setUaT0310Koza_kozaMeigininKanji(口座Entity.getKozaMeigininKanji());
+        entity.setUaT0310Koza_kensakuyoMeiginin(口座Entity.getKensakuyoMeiginin());
+        entity.setUaT0310Koza_kozaHyojiKubun(口座Entity.getKozaHyojiKubun());
+        entity.setUaT0310Koza_nayoseKubun(口座Entity.getNayoseKubun());
+        entity.setUaT0310Koza_zumitsuHakkoYohi(口座Entity.getZumitsuHakkoYohi());
+        entity.setUaT0310Koza_kozaFurikaeKaishiTsuchiHakkozumi(口座Entity.getKozaFurikaeKaishiTsuchiHakkozumi());
+        entity.setUaT0310Koza_kozaTorokuNo(口座Entity.getKozaTorokuNo());
+        entity.setUaT0310Koza_kozaTorokuKubunCode(口座Entity.getKozaTorokuKubunCode());
+        entity.setUaT0310Koza_kozaKaishiUketsukeYMD(口座Entity.getKozaKaishiUketsukeYMD());
+        entity.setUaT0310Koza_kozaShuryoUketsukeYMD(口座Entity.getKozaShuryoUketsukeYMD());
+        entity.setUaT0310Koza_kozaTorokuYMD(口座Entity.getKozaTorokuYMD());
+        entity.setUaT0310Koza_temban(口座Entity.getTemban());
+
+        UaT0302KinyuKikanEntity 記入機関Entity = 口座.getKinyuKikanEntity();
+        entity.setUaT0302KinyuKikan_insertDantaiCd(記入機関Entity.getInsertDantaiCd());
+        entity.setUaT0302KinyuKikan_isDeleted(記入機関Entity.getIsDeleted());
+        entity.setUaT0302KinyuKikan_kinyuKikanCode(記入機関Entity.getKinyuKikanCode());
+        entity.setUaT0302KinyuKikan_kaishiYMD(記入機関Entity.getKaishiYMD());
+        entity.setUaT0302KinyuKikan_shuryoYMD(記入機関Entity.getShuryoYMD());
+        entity.setUaT0302KinyuKikan_name(記入機関Entity.getName());
+        entity.setUaT0302KinyuKikan_kanaName(記入機関Entity.getKanaName());
+        entity.setUaT0302KinyuKikan_yokinShubetsuPatternCode(記入機関Entity.getYokinShubetsuPatternCode());
+        entity.setUaT0302KinyuKikan_hyojijun(記入機関Entity.getHyojijun());
+
+        UaT0303KinyuKikanShitenEntity 記入機関支店Entity = 口座.getKinyuKikanShitenEntity();
+        entity.setUaT0303KinyuKikanShiten_insertDantaiCd(記入機関支店Entity.getInsertDantaiCd());
+        entity.setUaT0303KinyuKikanShiten_isDeleted(記入機関支店Entity.getIsDeleted());
+        entity.setUaT0303KinyuKikanShiten_kinyuKikanCode(記入機関支店Entity.getKinyuKikanCode());
+        entity.setUaT0303KinyuKikanShiten_kinyuKikanShitenCode(記入機関支店Entity.getKinyuKikanShitenCode());
+        entity.setUaT0303KinyuKikanShiten_kaishiYMD(記入機関支店Entity.getKaishiYMD());
+        entity.setUaT0303KinyuKikanShiten_shuryoYMD(記入機関支店Entity.getShuryoYMD());
+        entity.setUaT0303KinyuKikanShiten_name(記入機関支店Entity.getName());
+        entity.setUaT0303KinyuKikanShiten_kanaName(記入機関支店Entity.getKanaName());
+        entity.setUaT0303KinyuKikanShiten_hyojijun(記入機関支店Entity.getHyojijun());
+
+        UaT0301YokinShubetsuPatternEntity 預金種別 = 口座.getYokinShubetsuPatternEntity();
+        entity.setUaT0301YokinShubetsuPattern_insertDantaiCd(預金種別.getInsertDantaiCd());
+        entity.setUaT0301YokinShubetsuPattern_isDeleted(預金種別.getIsDeleted());
+        entity.setUaT0301YokinShubetsuPattern_yokinShubetsuPatternCode(預金種別.getYokinShubetsuPatternCode());
+        entity.setUaT0301YokinShubetsuPattern_yokinShubetsuCode(預金種別.getYokinShubetsuCode());
+        entity.setUaT0301YokinShubetsuPattern_yokinShubetsuMeisho(預金種別.getYokinShubetsuMeisho());
+        entity.setUaT0301YokinShubetsuPattern_yokinShubetsuRyakusho(預金種別.getYokinShubetsuRyakusho());
+
+        entity.setShunoKensu(口座.getShunoKensu());
     }
 
     private void set納組の全項目(DbT2002FukaTempTableEntity entity) {
@@ -92,7 +126,7 @@ public class KarisanteiGakuHenkoEntity implements Serializable {
         entity.setCaT0714SeikyuHoho_gyomubetsuPrimaryKey(納組.getSeikyuHoho().getGyomubetsuPrimaryKey());
         entity.setCaT0714SeikyuHoho_gyomuKoyuKey(納組.getSeikyuHoho().getGyomuKoyuKey());
         entity.setCaT0714SeikyuHoho_shiharaiHoho(納組.getSeikyuHoho().getShiharaiHoho());
-        //entity.setCaT0714SeikyuHoho_zennoKubun(納組.getSeikyuHoho().getZennoKubun());
+        entity.setCaT0714SeikyuHoho_zennoKubun(納組.getSeikyuHoho().getZennoKubun());
         entity.setCaT0714SeikyuHoho_creditKeizokuTorokuKey(納組.getSeikyuHoho().getCreditKeizokuTorokuKey());
         entity.setCaT0714SeikyuHoho_kaishiYMD(納組.getSeikyuHoho().getKaishiYMD());
         entity.setCaT0714SeikyuHoho_shuryoYMD(納組.getSeikyuHoho().getShuryoYMD());
