@@ -80,7 +80,6 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
     @Override
     protected void usualProcess(ShinsakaiIinCodeEntity entity) {
         myBatisParameter.setShinsakaiIinCode(entity.getShinsakaiIinCode());
-        通知文設定(new ShinsakaiYoteiJohoEntity(), new PsmJohoEntity());
         List<ShinsakaiYoteiJohoEntity> 委員情報 = mapper.getShinsakaiYoteiJoho(myBatisParameter);
         DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity dbT5595Entity = mapper.get宛先情報(myBatisParameter);
         PsmJohoEntity psmJohoEntity = new PsmJohoEntity();
