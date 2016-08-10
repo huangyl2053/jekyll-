@@ -458,8 +458,6 @@ public class NonyuTsuchiShoDataHenshu {
                 納入通知書期情報.setOcrid(空白);
                 納入通知書期情報.setOcr(getNewOCR(請求情報, 空白));
             }
-            納入通知書期情報.setOcrid(請求情報.getOcr().getOCRID());
-            納入通知書期情報.setOcr(null);
             納入通知書期情報.setバーコード情報((HyojiUmu.表示する.equals(納入通知書制御情報.getコンビニバーコード表示())
                     ? 請求情報.getCvs().getバーコード情報() : 空白));
             納入通知書期情報.setバーコード情報上段((HyojiUmu.表示する.equals(納入通知書制御情報.getコンビニバーコード表示())
@@ -474,7 +472,8 @@ public class NonyuTsuchiShoDataHenshu {
             納入通知書期情報.set確認番号(空白);
             納入通知書期情報.set納付区分(空白);
             納入通知書期情報.setOcrid(空白);
-            納入通知書期情報.setOcr(null);
+            Map<Integer, RString> newOCR = new HashMap<>();
+            納入通知書期情報.setOcr(newOCR);
             納入通知書期情報.setバーコード情報(空白);
             納入通知書期情報.setバーコード情報上段(空白);
             納入通知書期情報.setバーコード情報下段(空白);
