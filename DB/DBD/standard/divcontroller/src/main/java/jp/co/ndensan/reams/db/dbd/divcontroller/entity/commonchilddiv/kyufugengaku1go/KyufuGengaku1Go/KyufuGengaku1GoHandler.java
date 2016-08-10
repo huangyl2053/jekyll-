@@ -54,7 +54,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  *
  * 【共有子Div】1号給付額減額ダイアログのハンドラクラスです。
  *
- * @reamsid_L DBD-0620-043 panxiaobo
+ * @reamsid_L DBD-3620-043 panxiaobo
  */
 public class KyufuGengaku1GoHandler {
 

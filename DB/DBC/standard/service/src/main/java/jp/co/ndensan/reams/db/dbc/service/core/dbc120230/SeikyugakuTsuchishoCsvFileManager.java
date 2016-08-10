@@ -193,16 +193,16 @@ public class SeikyugakuTsuchishoCsvFileManager {
                     shoTempentity.set目名(listMeisaiCsvEntity.get(j).get目名());
                     shoTempentity.setサービス種類コード(listMeisaiCsvEntity.get(j).getサービス種類コード());
                     shoTempentity.setサービス種類名(listMeisaiCsvEntity.get(j).getサービス種類名());
-                    shoTempentity.set通常分_件数(listMeisaiCsvEntity.get(j).get通常分_件数());
-                    shoTempentity.set通常分_実日数(listMeisaiCsvEntity.get(j).get通常分_実日数());
-                    shoTempentity.set通常分_単位数(listMeisaiCsvEntity.get(j).get通常分_単位数());
-                    shoTempentity.set通常分_金額(listMeisaiCsvEntity.get(j).get通常分_金額());
-                    shoTempentity.set再審査_過誤_件数(listMeisaiCsvEntity.get(j).get再審査_過誤_件数());
-                    shoTempentity.set再審査_過誤_単位数(listMeisaiCsvEntity.get(j).get再審査_過誤_単位数());
-                    shoTempentity.set再審査_過誤_調整額(listMeisaiCsvEntity.get(j).get再審査_過誤_調整額());
-                    shoTempentity.set介護給付_総合事業費(listMeisaiCsvEntity.get(j).get介護給付費_総合事業費());
-                    shoTempentity.set利用者負担額(listMeisaiCsvEntity.get(j).get利用者負担額());
-                    shoTempentity.set公費負担額(listMeisaiCsvEntity.get(j).get公費負担額());
+                    shoTempentity.set通常分_件数(getDecimal(listMeisaiCsvEntity.get(j).get通常分_件数()));
+                    shoTempentity.set通常分_実日数(getDecimal(listMeisaiCsvEntity.get(j).get通常分_実日数()));
+                    shoTempentity.set通常分_単位数(getDecimal(listMeisaiCsvEntity.get(j).get通常分_単位数()));
+                    shoTempentity.set通常分_金額(getDecimal(listMeisaiCsvEntity.get(j).get通常分_金額()));
+                    shoTempentity.set再審査_過誤_件数(getDecimal(listMeisaiCsvEntity.get(j).get再審査_過誤_件数()));
+                    shoTempentity.set再審査_過誤_単位数(getDecimal(listMeisaiCsvEntity.get(j).get再審査_過誤_単位数()));
+                    shoTempentity.set再審査_過誤_調整額(getDecimal(listMeisaiCsvEntity.get(j).get再審査_過誤_調整額()));
+                    shoTempentity.set介護給付_総合事業費(getDecimal(listMeisaiCsvEntity.get(j).get介護給付費_総合事業費()));
+                    shoTempentity.set利用者負担額(getDecimal(listMeisaiCsvEntity.get(j).get利用者負担額()));
+                    shoTempentity.set公費負担額(getDecimal(listMeisaiCsvEntity.get(j).get公費負担額()));
 
                     if (j == listMeisaiCsvEntity.size() - 1) {
                         合計 = true;

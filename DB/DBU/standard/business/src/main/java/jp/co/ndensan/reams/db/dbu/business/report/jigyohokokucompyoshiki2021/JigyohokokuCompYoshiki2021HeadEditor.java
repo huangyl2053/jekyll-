@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki2021;
 
 import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokucompyoshiki201.JigyohokokuCompYoshiki201Business;
-import jp.co.ndensan.reams.db.dbu.entity.report.ｊigyohokokucompyoshiki202.JigyohokokuCompYoshiki202ReportSource;
+import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki2021.JigyohokokuCompYoshiki2021ReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
@@ -55,15 +55,15 @@ public class JigyohokokuCompYoshiki2021HeadEditor implements IJigyohokokuCompYos
     /**
      * 事業報告月報様式_02のEditです
      *
-     * @param source JigyohokokuCompYoshiki202ReportSource
-     * @return JigyohokokuCompYoshiki202ReportSource
+     * @param source JigyohokokuCompYoshiki2021ReportSource
+     * @return JigyohokokuCompYoshiki2021ReportSource
      */
     @Override
-    public JigyohokokuCompYoshiki202ReportSource edit(JigyohokokuCompYoshiki202ReportSource source) {
+    public JigyohokokuCompYoshiki2021ReportSource edit(JigyohokokuCompYoshiki2021ReportSource source) {
         return editSource(source);
     }
 
-    private JigyohokokuCompYoshiki202ReportSource editSource(JigyohokokuCompYoshiki202ReportSource source) {
+    private JigyohokokuCompYoshiki2021ReportSource editSource(JigyohokokuCompYoshiki2021ReportSource source) {
         source.sakuseinichiji = business.get処理日時();
         source.shorikbn = business.get年報月報区分();
         source.shukeihani = business.get集計年月();

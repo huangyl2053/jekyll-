@@ -26,16 +26,6 @@ public enum ReportIdDBC {
     DBC100011_償還分(new ReportId("DBC100011_KogakuOshiraseTsuchiShoTeshutsuKigenAriJidoShokan"),
             new RString("高額サービス給付のお知らせ通知書（自動償還分）（提出期限あり）")),
     /**
-     * 高額サービス給付のお知らせ通知書（初回申請分）（提出期限あり）
-     */
-    DBC100011_131011_申請分(new ReportId("DBC100011_KogakuOshiraseTsuchiShoTeshutsuKigenAriShokai_131011"),
-            new RString("高額サービス給付のお知らせ通知書（初回申請分）（提出期限あり）")),
-    /**
-     * 高額サービス給付のお知らせ通知書（初回申請分）（提出期限あり）
-     */
-    DBC100011_131011_償還分(new ReportId("DBC100011_KogakuOshiraseTsuchiShoTeshutsuKigenAriJidoShokan_131011"),
-            new RString("高額サービス給付のお知らせ通知書（自動償還分）（提出期限あり）")),
-    /**
      * 総合事業分自己負担額計算結果一覧表
      */
     DBC200203(new ReportId("DBC200203_GassanJigyobunJikofutangakuKeisanKekkaIchiran"), new RString("総合事業分自己負担額計算結果一覧表")),
@@ -200,7 +190,7 @@ public enum ReportIdDBC {
     /**
      * 高額総合事業サービス費給付お知らせ通知書（提出期限あり）帳票ＩＤです。
      */
-    DBC100072(new ReportId("DBC100072_KogakuJigyoOshiraseTsuchisho"), new RString("帳票設計_DBC100072_高額総合事業サービス費給付お知らせ通知書（提出期限あり）")),
+    DBC100072(new ReportId("DBC100072_KogakuJigyoOshiraseTsuchishoKigenAri"), new RString("高額総合事業サービス費給付お知らせ通知書")),
     /**
      * 介護保険高額総合事業サービス費支給申請書（ゆうちょ銀行）
      */

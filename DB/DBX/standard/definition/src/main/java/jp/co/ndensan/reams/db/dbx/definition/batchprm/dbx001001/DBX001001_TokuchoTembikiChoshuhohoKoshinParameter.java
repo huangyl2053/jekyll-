@@ -28,7 +28,7 @@ public class DBX001001_TokuchoTembikiChoshuhohoKoshinParameter extends BatchPara
     private RString nendo;
 
     /**
-     * のコンストラクタです。
+     * DBX001001_TokuchoTembikiChoshuhohoKoshinParameterのコンストラクタです。
      */
     public DBX001001_TokuchoTembikiChoshuhohoKoshinParameter() {
     }

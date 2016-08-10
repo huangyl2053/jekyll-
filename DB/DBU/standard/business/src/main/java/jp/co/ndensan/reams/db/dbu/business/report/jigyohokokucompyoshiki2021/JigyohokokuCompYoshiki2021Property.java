@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki2021;
 
 import jp.co.ndensan.reams.db.dbu.definition.reportid.ReportIdDBU;
-import jp.co.ndensan.reams.db.dbu.entity.report.ｊigyohokokucompyoshiki202.JigyohokokuCompYoshiki202ReportSource;
+import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki2021.JigyohokokuCompYoshiki2021ReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  *
  * @reamsid_L DBU-5560-050 wanghuafeng
  */
-public class JigyohokokuCompYoshiki2021Property extends ReportPropertyBase<JigyohokokuCompYoshiki202ReportSource> {
+public class JigyohokokuCompYoshiki2021Property extends ReportPropertyBase<JigyohokokuCompYoshiki2021ReportSource> {
 
     /**
      * インスタンスを生成します。

@@ -10,7 +10,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.KubunGendoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.KyufuJikoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KubunGendoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.ServiceRiyohyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KyufuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.ServiceTypeTotalEntity;
 
 /**
@@ -32,9 +32,9 @@ public interface IJigoSakuseiMeisaiTourokuMapper {
      * サービス種類支給額を取得します。
      *
      * @param param KyufuJikoSakuseiParameter
-     * @return List<ServiceRiyohyoEntity>
+     * @return List<KyufuJikoSakuseiEntity>
      */
-    List<ServiceRiyohyoEntity> getサービス利用票データ(KyufuJikoSakuseiParameter param);
+    List<KyufuJikoSakuseiEntity> getサービス利用票データ(KyufuJikoSakuseiParameter param);
 
     /**
      * 区分限度額統計データを取得します。

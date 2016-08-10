@@ -32,7 +32,8 @@ public class JigyohokokuCompYoshiki272Property extends ReportPropertyBase<Jigyoh
         super(SubGyomuCode.DBU介護統計報告, ReportIdDBU.DBU300020.getReportId());
     }
 
-    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString(JigyohokokuCompYoshiki272ReportSource.ReportsSourceFields.shichosonkodo.name())));
+    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
+            new RString(JigyohokokuCompYoshiki272ReportSource.ReportsSourceFields.shichosonkodo.name())));
 
     @Override
     public Breakers<JigyohokokuCompYoshiki272ReportSource> defineBreakers(

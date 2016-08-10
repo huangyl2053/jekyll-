@@ -115,7 +115,8 @@ public class TokuChoSoufuJohoSakuseiBatch {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiBatch}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiBatch}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiBatch}のインスタンス
      */
     public static TokuChoSoufuJohoSakuseiBatch createInstance() {
         return InstanceProvider.create(TokuChoSoufuJohoSakuseiBatch.class);
@@ -454,14 +455,9 @@ public class TokuChoSoufuJohoSakuseiBatch {
      * @return List<UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity>
      */
     public List<UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity> intNenkinTokuChoTaishosyaJoho() {
-        List<UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity> dbzEntitis = new ArrayList<>();
-        for (jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity entity
-                : mapper.selectUeT0515KaigohokenNenkinTokuchoTaishoshaJoho550tempAll()) {
-            if (entity != null) {
-                dbzEntitis.add(entityCopy(entity));
-            }
-        }
-        return dbzEntitis;
+        List<UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity> uet0515List
+                = mapper.selectUeT0515KaigohokenNenkinTokuchoTaishoshaJoho550tempAll();
+        return uet0515List;
     }
 
     /**
@@ -516,8 +512,10 @@ public class TokuChoSoufuJohoSakuseiBatch {
     /**
      * Entity転換のメソドです。
      *
-     * @param entity jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
-     * @return jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
+     * @param entity
+     * jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
+     * @return
+     * jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
      */
     public jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity entityCopy(
             UeT0511NenkinTokuchoKaifuJohoEntity entity) {
@@ -592,65 +590,4 @@ public class TokuChoSoufuJohoSakuseiBatch {
         dbzEntity.setKokuhoYoteiSoshitsuKubun(entity.getKokuhoYoteiSoshitsuKubun());
         return dbzEntity;
     }
-
-    /**
-     * Entity転換のメソドです。
-     *
-     * @param entity jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
-     * @return jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
-     */
-    public UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity entityCopy(
-            jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity entity) {
-        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity dbzEntity
-                = new UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity();
-        if (entity == null) {
-            return dbzEntity;
-        }
-        dbzEntity.setRenban(entity.getRenban());
-        dbzEntity.setKisoNenkinNo(entity.getKisoNenkinNo());
-        dbzEntity.setNenkinCode(entity.getNenkinCode());
-        dbzEntity.setSeq(entity.getSeq());
-        dbzEntity.setShoriTimestamp(entity.getShoriTimestamp());
-        dbzEntity.setDtCityCode(entity.getDtCityCode());
-        dbzEntity.setDtTokubetsuChoshuGimushaCode(entity.getDtTokubetsuChoshuGimushaCode());
-        dbzEntity.setDtTsuchiNaiyoCode(entity.getDtTsuchiNaiyoCode());
-        dbzEntity.setDtBaitaiCode(entity.getDtBaitaiCode());
-        dbzEntity.setDtTokubetsuChoshuSeidoCode(entity.getDtTokubetsuChoshuSeidoCode());
-        dbzEntity.setDtSakuseiYMD(entity.getDtSakuseiYMD());
-        dbzEntity.setDtKisoNenkinNo(entity.getDtKisoNenkinNo());
-        dbzEntity.setDtNenkinCode(entity.getDtNenkinCode());
-        dbzEntity.setDtYobi1(entity.getDtYobi1());
-        dbzEntity.setDtBirthDay(entity.getDtBirthDay());
-        dbzEntity.setDtSeibetsu(entity.getDtSeibetsu());
-        dbzEntity.setDtKanaShimei(entity.getDtKanaShimei());
-        dbzEntity.setDtShiftCode1(entity.getDtShiftCode1());
-        dbzEntity.setDtKanjiShimei(entity.getDtKanjiShimei());
-        dbzEntity.setDtShiftCode2(entity.getDtShiftCode2());
-        dbzEntity.setDtYubinNo(entity.getDtYubinNo());
-        dbzEntity.setDtKanaJusho(entity.getDtKanaJusho());
-        dbzEntity.setDtShiftCode3(entity.getDtShiftCode3());
-        dbzEntity.setDtKanjiJusho(entity.getDtKanjiJusho());
-        dbzEntity.setDtShiftCode4(entity.getDtShiftCode4());
-        dbzEntity.setDtKakushuKubun(entity.getDtKakushuKubun());
-        dbzEntity.setDtShoriKekka(entity.getDtShoriKekka());
-        dbzEntity.setDtKokiIkanCode(entity.getDtKokiIkanCode());
-        dbzEntity.setDtKakushuYMD(entity.getDtKakushuYMD());
-        dbzEntity.setDtKakushuKingaku1(entity.getDtKakushuKingaku1());
-        dbzEntity.setDtKakushuKingaku2(entity.getDtKakushuKingaku2());
-        dbzEntity.setDtKakushuKingaku3(entity.getDtKakushuKingaku3());
-        dbzEntity.setDtYobi2(entity.getDtYobi2());
-        dbzEntity.setDtKyosaiNenkinshoshoKigoNo(entity.getDtKyosaiNenkinshoshoKigoNo());
-        dbzEntity.setKaigohokenHihokenshaNo(entity.getKaigohokenHihokenshaNo());
-        dbzEntity.setKojinCodeKubun(entity.getKojinCodeKubun());
-        dbzEntity.setKojinCode(entity.getKojinCode());
-        dbzEntity.setKaigohokenJushochitokureiKubun(entity.getKaigohokenJushochitokureiKubun());
-        dbzEntity.setHosokuYMD(entity.getHosokuYMD());
-        dbzEntity.setTaikiFlag(entity.getTaikiFlag());
-        dbzEntity.setYobi(entity.getYobi());
-        dbzEntity.setHosokuYMD(entity.getHosokuYMD());
-        dbzEntity.setTaikiFlag(entity.getTaikiFlag());
-        dbzEntity.setYobi(entity.getYobi());
-        return dbzEntity;
-    }
-
 }

@@ -42,9 +42,6 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
     private FlexibleDate hitsukehanito;
     private boolean chokindatacyusyutsu;
     private RString soshitsukubun;
-    private boolean isCsvkomokumeifuka;
-    private boolean isCsvrenbanfuka;
-    private boolean isCsvhitsukesurasyuhensyu;
     private AtenaSelectBatchParameter atenacyusyutsujyoken;
     private RString syutsuryokujun;
     private RString syutsuryokukomoku;
@@ -113,9 +110,6 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
             FlexibleDate hitsukehanito,
             boolean chokindatacyusyutsu,
             RString soshitsukubun,
-            boolean csvkomokumeifuka,
-            boolean csvrenbanfuka,
-            boolean csvhitsukesurasyuhensyu,
             AtenaSelectBatchParameter atenacyusyutsujyoken,
             RString syutsuryokujun,
             RString syutsuryokukomoku,
@@ -128,9 +122,6 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
         this.hitsukehanito = hitsukehanito;
         this.chokindatacyusyutsu = chokindatacyusyutsu;
         this.soshitsukubun = soshitsukubun;
-        this.isCsvkomokumeifuka = csvkomokumeifuka;
-        this.isCsvrenbanfuka = csvrenbanfuka;
-        this.isCsvhitsukesurasyuhensyu = csvhitsukesurasyuhensyu;
         this.atenacyusyutsujyoken = atenacyusyutsujyoken;
         this.syutsuryokujun = syutsuryokujun;
         this.syutsuryokukomoku = syutsuryokukomoku;
