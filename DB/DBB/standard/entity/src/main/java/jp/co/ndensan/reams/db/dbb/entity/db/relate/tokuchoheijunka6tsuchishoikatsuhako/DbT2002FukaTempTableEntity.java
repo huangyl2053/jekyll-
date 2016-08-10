@@ -1434,8 +1434,6 @@ public class DbT2002FukaTempTableEntity extends DbTableEntityBase<DbT2002FukaTem
     private RString uaT0301YokinShubetsuPattern_yokinShubetsuRyakusho;
     @TempTableColumnOrder(678)
     private int shunoKensu;
-    @TempTableColumnOrder(679)
-    private int NNNNshunoKensu;
 
     // 「更正後」対象者（追加含む）情報
     @TempTableColumnOrder(680)
