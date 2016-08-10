@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.core.shotokujohoichiranhyosakusei;
+package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokujohoichiranhyosakusei;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.ShichosonJouhouResult;
@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 処理日付管理マスタを登録Parameter
+ * 処理日付管理マスタを登録Parameterです。
  *
  * @reamsid_L DBB-1650-040 lijunjun
  */

@@ -28,7 +28,7 @@
     
     <!--介護保険所得情報一覧データ取得-->
     <select resultOrdered="true" id="select介護保険所得情報一覧データ" 
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.core.shotokujohoichiranhyosakusei.ShotokuJohoIchiranhyoSakuseiParameter" 
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokujohoichiranhyosakusei.ShotokuJohoIchiranhyoSakuseiParameter" 
             resultMap="resultMap_KaigoHokenShotokuTempEntity" fetchSize="500">
       SELECT
         A."shikibetsuCode",
@@ -54,10 +54,10 @@
         "shotokuNendo",
         "shikibetsuCode",
         <if test="ラジオボタン == 2">
-            max("rirekiNo")
+            max("rirekiNo"),
         </if>
         <if test="ラジオボタン == 1">
-            "rirekiNo" 
+            "rirekiNo" ,
         </if>
         "kazeiKubun",
         "kazeiKubunGemmenGo",
@@ -70,7 +70,7 @@
         FROM rgdb."DbV2502KaigoShotoku"
         WHERE
         "shotokuNendo"=#{処理年度}
-        AND "shoriTimeStamp"<![CDATA[>=]]>#{開始日時}
+        AND #{開始日時}<![CDATA[<=]]>"shoriTimeStamp"
         AND "shoriTimeStamp"<![CDATA[<=]]>#{終了日時}
         <if test="チックボックス == 1">
             AND (cast("torokuGyomu" as varchar(1)) = '1' OR cast("torokuGyomu" as varchar(1)) = '2')
@@ -148,7 +148,7 @@
     
     <!--広域市町村の所得情報一覧を取得します。-->
     <select resultOrdered="true" id="select対象データ" 
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.core.shotokujohoichiranhyosakusei.ShotokuJohoIchiranhyoSakuseiParameter" 
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokujohoichiranhyosakusei.ShotokuJohoIchiranhyoSakuseiParameter" 
             resultMap="resultMap_KaigoHokenShotokuTempEntity" fetchSize="500">
       SELECT
         A."shikibetsuCode",
@@ -244,9 +244,10 @@
         ON M."shikibetsuCode"=N."shikibetsuCode"  
         ) AS TEMP
         WHERE
-        TEMP."shoriTimeStamp"<![CDATA[>=]]>#{開始日時}
+        #{開始日時}<![CDATA[<=]]>TEMP."shoriTimeStamp"
         AND TEMP."shoriTimeStamp"<![CDATA[<=]]>#{終了日時}
-        AND TEMP."genLasdecCode"=#{市町村コード}
+        AND TEMP."genLasdecCode" IN
+        <foreach collection="市町村コードリスト" item="市町村コード" open="(" separator="," close=")"> #{市町村コード} </foreach>
         <if test="チックボックス == 1">
             AND (cast(TEMP. "torokuGyomu" as varchar(1)) = '1' OR cast(TEMP. "torokuGyomu" as varchar(1)) = '2')
         </if>
@@ -264,7 +265,6 @@
         ${出力順}
     </select>
     
-    
     <!--select所得情報一覧データ-->
     <select id="select所得情報一覧データ" resultMap="resultMap_KaigoHokenShotokuTempEntity" fetchSize="500">
       SELECT *
@@ -273,7 +273,7 @@
     
     <!--処理日付管理マスタ_単一市町村を取得します。-->
     <select resultOrdered="true" id="select処理日付管理マスタ_単一市町村" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.core.shotokujohoichiranhyosakusei.RegistShoriDateKanriParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokujohoichiranhyosakusei.RegistShoriDateKanriParameter" fetchSize="500">
         SELECT *
         FROM rgdb."DbT7022ShoriDateKanri"
         WHERE "subGyomuCode"='DBB'
@@ -287,7 +287,7 @@
     <!--処理日付管理マスタ_広域市町村を取得します。-->
     <select resultOrdered="true" id="select処理日付管理マスタ_広域市町村" 
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.core.shotokujohoichiranhyosakusei.RegistShoriDateKanriParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokujohoichiranhyosakusei.RegistShoriDateKanriParameter" fetchSize="500">
         SELECT *
         FROM rgdb."DbT7022ShoriDateKanri"
         WHERE "subGyomuCode"='DBB'

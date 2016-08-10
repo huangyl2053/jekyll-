@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * バッチ設計_DBBBT51003_所得情報一覧表作成のParameter
+ * バッチ設計_DBBBT51003_所得情報一覧表作成のParameterです。
  *
  * @reamsid_L DBB-1650-040 lijunjun
  */
@@ -68,7 +68,7 @@ public class ShotokujohoIchiranhyoSakuseiBatchParameter extends BatchParameterBa
     private Long 出力順ID;
 
     /**
-     * toProcessParameter
+     * toProcessParameterメソッドです。
      *
      * @return ShotokujohoIchiranhyoSakuseiProcessParameter
      */
@@ -88,7 +88,7 @@ public class ShotokujohoIchiranhyoSakuseiBatchParameter extends BatchParameterBa
     }
 
     /**
-     * toRegistShoriDateKanriProcessParameter
+     * toRegistShoriDateKanriProcessParameterメソッドです。
      *
      * @return RegistShoriDateKanriProcessParameter
      */
