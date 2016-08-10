@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 全国保険者マスタ更新のHandlerです。
@@ -56,6 +57,7 @@ public class ZenkokuHokenshaMasterKoshinHandler {
             if (hokenja.get住所() != null) {
                 row.setJusho(hokenja.get住所());
             }
+            row.setHokensha(DataPassingConverter.serialize(hokenja));
             div.getDgHokenshas().getDataSource().add(row);
         }
         div.getHokenshaIchiran().setHdnTodofuken(div.getHokenshaIchiran().getDdlTodofuken().getSelectedKey());
@@ -121,17 +123,18 @@ public class ZenkokuHokenshaMasterKoshinHandler {
      * 入力明細エリアの入力内容を保険者一覧Gridに反映させします。
      */
     public void update保険者一覧項目() {
-        dgHokenshas_Row row = new dgHokenshas_Row();
         HokenshaJohoDiv hokenshaJohoDiv = div.getHokenshaJoho();
+        dgHokenshas_Row row = new dgHokenshas_Row();
+        int rowCount = 0;
+        if (!追加状態.equals(hokenshaJohoDiv.getHdnJotai())) {
+            rowCount = div.getHokenshaIchiran().getDgHokenshas().getClickedItem().getId();
+            row = div.getDgHokenshas().getDataSource().get(rowCount);
+        }
         row.setHokenshaNo(hokenshaJohoDiv.getTxtHokenshaNo().getValue());
         row.setHokenshaName(hokenshaJohoDiv.getTxtHokenshaName().getValue());
         row.setYubinNo(hokenshaJohoDiv.getTxtHokenshaYubinNo().getValue().getEditedYubinNo());
         row.setTelNo(hokenshaJohoDiv.getTxtHokenshaTelNo().getDomain().value());
         row.setJusho(hokenshaJohoDiv.getTxtHokenshaJusho().getDomain().value());
-        int rowCount = 0;
-        if (!追加状態.equals(hokenshaJohoDiv.getHdnJotai())) {
-            rowCount = div.getHokenshaIchiran().getDgHokenshas().getClickedItem().getId();
-        }
         if (修正状態.equals(hokenshaJohoDiv.getHdnJotai())) {
             if (!追加状態.equals(div.getDgHokenshas().getSelectedItems().get(0).getJotai())) {
                 row.setJotai(修正状態);
