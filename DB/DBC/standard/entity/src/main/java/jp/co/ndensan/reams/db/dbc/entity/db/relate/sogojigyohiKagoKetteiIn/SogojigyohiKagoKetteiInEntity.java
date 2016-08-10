@@ -6,9 +6,15 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohiKagoKetteiIn;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3060KagoKetteiShukeiTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3061KagoKetteiMeisaiTempEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  *
@@ -19,9 +25,24 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3061KagoKe
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class SogojigyohiKagoKetteiInEntity implements Serializable {
 
-    private DbWT0001HihokenshaTempEntity 被保険者一時TBL;
-
-    private DbWT3060KagoKetteiShukeiTempEntity 過誤決定集計一時TBL;
-
-    private DbWT3061KagoKetteiMeisaiTempEntity 過誤決定明細一時TBL;
+    private ShoKisaiHokenshaNo 保険者番号;
+    private RString 保険者名;
+    private ShoKisaiHokenshaNo 証記載保険者番号;
+    private RString 証記載保険者名;
+    private FlexibleYearMonth 取扱年月;
+    private JigyoshaNo 事業者番号;
+    private RString 事業者名;
+    private HihokenshaNo 被保険者番号;
+    private RString 被保険者名;
+    private FlexibleYearMonth サービ提供年月;
+    private ServiceShuruiCode サービス種類コード;
+    private RString サービス種類名;
+    private Code 過誤申立事由コード;
+    private RString 過誤申立事由;
+    private Decimal 単位数;
+    private Decimal 保険者負担額;
+    private int 介護給付費件数;
+    private Decimal 介護給付費単位数;
+    private Decimal 介護給付費保険者負担額;
+    private ShikibetsuCode 識別コード;
 }

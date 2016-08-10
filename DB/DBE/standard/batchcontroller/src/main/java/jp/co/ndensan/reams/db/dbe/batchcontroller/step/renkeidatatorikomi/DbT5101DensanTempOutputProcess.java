@@ -22,11 +22,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -52,7 +52,7 @@ public class DbT5101DensanTempOutputProcess extends BatchProcessBase<DbT5101Temp
     private FileSpoolManager manager;
     private RString eucFilePath;
     @BatchWriter
-    private EucCsvWriter<DbT5101TempEUCEntity> eucCsvWriter;
+    private CsvWriter<DbT5101TempEUCEntity> eucCsvWriter;
 
     @Override
     protected void initialize() {
@@ -62,7 +62,7 @@ public class DbT5101DensanTempOutputProcess extends BatchProcessBase<DbT5101Temp
 
     @Override
     protected void createWriter() {
-        eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(getEncode()).

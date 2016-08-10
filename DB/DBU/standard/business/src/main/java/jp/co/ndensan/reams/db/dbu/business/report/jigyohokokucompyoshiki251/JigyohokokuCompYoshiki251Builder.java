@@ -21,8 +21,8 @@ public class JigyohokokuCompYoshiki251Builder implements IJigyohokokuCompYoshiki
     /**
      * インスタンスを生成します。
      *
-     * @param headEditor IJigyohokokuCompYoshiki251Editor
-     * @param bodyEditor IJigyohokokuCompYoshiki251Editor
+     * @param headEditor {@link IJigyohokokuCompYoshiki251Editor}
+     * @param bodyEditor {@link IJigyohokokuCompYoshiki251Editor}
      */
     public JigyohokokuCompYoshiki251Builder(IJigyohokokuCompYoshiki251Editor headEditor, IJigyohokokuCompYoshiki251Editor bodyEditor) {
         this.headEditor = headEditor;

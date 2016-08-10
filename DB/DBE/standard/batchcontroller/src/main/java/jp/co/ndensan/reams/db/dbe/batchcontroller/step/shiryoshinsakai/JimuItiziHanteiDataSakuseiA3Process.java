@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IchijihanteikekkahyoItemSetteiA3;
-import jp.co.ndensan.reams.db.dbe.business.report.ichijihanteikekkahyoa3.IchijihanteikekkahyoA3Report;
+import jp.co.ndensan.reams.db.dbe.business.report.jimukyokuyouichijihanteikekkahyoa3.IchijihanteikekkahyoA3Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShins
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ItiziHanteiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoA3ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.jimukyokuyouichijihanteikekkahyo.IchijihanteikekkahyoA3ReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
@@ -95,6 +95,7 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
         myBatisParameter.setIkenshoIraiRirekiNo(主治医意見履歴番号);
         List<DbT5207NinteichosahyoServiceJokyoEntity> 予防給付サービス利用状況 = new ArrayList<>();
         List<DbT5207NinteichosahyoServiceJokyoEntity> 介護給付サービス利用状況 = new ArrayList<>();
+        List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書情報 = new ArrayList<>();
         DbT5208NinteichosahyoServiceJokyoFlagEntity サービス状況フラグ = new DbT5208NinteichosahyoServiceJokyoFlagEntity();
         if (ServiceKubunCode.予防給付サービス.getコード().equals(entity.getServiceKubunCode().getColumnValue())) {
             予防給付サービス利用状況 = mapper.get予防給付(myBatisParameter);
@@ -112,9 +113,9 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
         if (get共通情報(共通情報, 申請書管理番号) != null) {
             特記情報 = get特記情報(get共通情報(共通情報, 申請書管理番号));
         }
-
+        主治医意見書情報.addAll(主治医意見書);
         item = new IchijihanteikekkahyoItemSetteiA3().set項目(entity, 特記事項,
-                調査票調査項目, 前回調査票調査項目, 主治医意見書,
+                調査票調査項目, 前回調査票調査項目, 主治医意見書情報,
                 前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, データ件数,
                 get共通情報(共通情報, 申請書管理番号), 主治医意見書, new RString(myBatisParameter.getGogitaiNo()), 特記情報);
 
@@ -124,7 +125,7 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
 
     @Override
     protected void createWriter() {
-        batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517085.getReportId().value())
+        batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517081.getReportId().value())
                 .addBreak(new BreakerCatalog<IchijihanteikekkahyoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A3))
                 .create();
         reportSourceWriterA3 = new ReportSourceWriter<>(batchWriteA3);

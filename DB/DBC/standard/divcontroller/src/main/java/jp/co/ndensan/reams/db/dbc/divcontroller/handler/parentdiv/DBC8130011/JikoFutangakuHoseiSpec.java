@@ -215,7 +215,6 @@ public enum JikoFutangakuHoseiSpec implements IPredicate<JikoFutangakuHoseiDiv> 
      */
     private static class SpecHelper {
 
-        private static final int INT_2 = 2;
         private static final int INT_7 = 7;
         private static final Decimal DECIMAL_23 = new Decimal(23);
         private static final Decimal DECIMAL_59 = new Decimal(59);
@@ -225,7 +224,7 @@ public enum JikoFutangakuHoseiSpec implements IPredicate<JikoFutangakuHoseiDiv> 
 
         public static boolean is被保険者氏名全角文字チェック(JikoFutangakuHoseiDiv div) {
             return !RString.isNullOrEmpty(div.getTxtHihokenshaName().getValue())
-                    && RStringUtil.is全角カナOnly(div.getTxtHihokenshaName().getValue());
+                    && RStringUtil.is全角Only(div.getTxtHihokenshaName().getValue());
         }
 
         public static boolean is郵便番号チェック(JikoFutangakuHoseiDiv div) {
@@ -235,7 +234,7 @@ public enum JikoFutangakuHoseiSpec implements IPredicate<JikoFutangakuHoseiDiv> 
 
         public static boolean is住所チェック(JikoFutangakuHoseiDiv div) {
             return !RString.isNullOrEmpty(div.getTxtAtesakiJusho().getValue())
-                    && RStringUtil.is全角カナOnly(div.getTxtAtesakiJusho().getValue());
+                    && RStringUtil.is全角Only(div.getTxtAtesakiJusho().getValue());
         }
 
         public static boolean is対象計算期間大小関係(JikoFutangakuHoseiDiv div) {
@@ -285,37 +284,41 @@ public enum JikoFutangakuHoseiSpec implements IPredicate<JikoFutangakuHoseiDiv> 
         }
 
         public static boolean is開始時間_時間チェック(JikoFutangakuHoseiDiv div) {
-            Decimal 時間 = div.getTxtMadoguchiKaishiJikan().getValue();
-            if (時間 == null) {
+            RString 時間Str = div.getTxtMadoguchiKaishiJikan().getValue();
+            if (時間Str == null) {
                 return true;
             } else {
+                Decimal 時間 = new Decimal(時間Str.toString());
                 return 時間.compareTo(Decimal.ZERO) >= 0 && 時間.compareTo(DECIMAL_23) <= 0;
             }
         }
 
         public static boolean is開始時間_分チェック(JikoFutangakuHoseiDiv div) {
-            Decimal 分 = div.getTxtMadoguchiKaishiFun().getValue();
-            if (分 == null) {
+            RString 分Str = div.getTxtMadoguchiKaishiFun().getValue();
+            if (分Str == null) {
                 return true;
             } else {
+                Decimal 分 = new Decimal(分Str.toString());
                 return 分.compareTo(Decimal.ZERO) >= 0 && 分.compareTo(DECIMAL_59) <= 0;
             }
         }
 
         public static boolean is終了時間_時間チェック(JikoFutangakuHoseiDiv div) {
-            Decimal 時間 = div.getTxtMadoguchiShuryoJikan().getValue();
-            if (時間 == null) {
+            RString 時間Str = div.getTxtMadoguchiShuryoJikan().getValue();
+            if (時間Str == null) {
                 return true;
             } else {
+                Decimal 時間 = new Decimal(時間Str.toString());
                 return 時間.compareTo(Decimal.ZERO) >= 0 && 時間.compareTo(DECIMAL_23) <= 0;
             }
         }
 
         public static boolean is終了時間_分チェック(JikoFutangakuHoseiDiv div) {
-            Decimal 分 = div.getTxtMadoguchiShuryoFun().getValue();
-            if (分 == null) {
+            RString 分Str = div.getTxtMadoguchiShuryoFun().getValue();
+            if (分Str == null) {
                 return true;
             } else {
+                Decimal 分 = new Decimal(分Str.toString());
                 return 分.compareTo(Decimal.ZERO) >= 0 && 分.compareTo(DECIMAL_59) <= 0;
             }
         }

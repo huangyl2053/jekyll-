@@ -31,12 +31,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
- * 介護保険所得情報一覧表出力
+ * 介護保険所得情報一覧表出力です。
  *
  * @reamsid_L DBB-1650-040 lijunjun
  */
 public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<KaigoHokenShotokuTempEntity> {
 
+    private static final int INDEX_1 = 1;
     private static final RString INDEX_111 = new RString("111");
     private static final ReportId 帳票ID = new ReportId("DBB200008_KaigoHokenShotokuJohoIchiran");
     private static final RString 出力_出力条件 = new RString("出力条件");
@@ -58,8 +59,7 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
     private static final RString MAPPER_PATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db."
             + "mapper.relate.shotokujohoichiranhyosakusei.IShotokuJohoIchiranhyoSakuseiMapper");
     private static final RString SELECTALL = new RString(MAPPER_PATH + ".selectTempAll");
-    private List<KaigoHokenShotokuTempEntity> 所得情報一覧データ;
-    private List<ShichosonJouhouResult> 市町村情報リスト;
+    private SourceDataCollection sourceDataCollection;
     private LasdecCode 市町村コード;
     private RString 導入形態コード;
     private RString 市町村名称;
@@ -69,6 +69,7 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
     private YMDHMS 開始日時;
     private YMDHMS 終了日時;
     private FlexibleYear 処理年度;
+    private int 連番;
 
     @BatchParameter
     ShotokujohoIchiranhyoSakuseiProcessParameter parameter;
@@ -86,8 +87,7 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
         開始日時 = parameter.get開始日時();
         終了日時 = parameter.get終了日時();
         処理年度 = parameter.get処理年度();
-        市町村情報リスト = parameter.get市町村情報リスト();
-        所得情報一覧データ = new ArrayList<>();
+        連番 = INDEX_1;
     }
 
     @Override
@@ -97,15 +97,15 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
 
     @Override
     protected void process(KaigoHokenShotokuTempEntity item) {
-        所得情報一覧データ.add(item);
+        sourceDataCollection = new KaigoHokenShotokuJohoIchiranPrintService()
+                .print介護保険所得情報(item, 導入形態コード, 市町村コード, 市町村名称, 出力順ID, 連番);
+        連番++;
     }
 
     @Override
     protected void afterExecute() {
-        SourceDataCollection sourceDataCollection = new KaigoHokenShotokuJohoIchiranPrintService()
-                .print介護保険所得情報(所得情報一覧データ, 導入形態コード, 市町村コード, 市町村名称, 出力順ID);
         List<RString> 出力条件リスト = set出力条件リスト(導入形態コード, 処理年度,
-                チェックボックス, ラジオボタン, 開始日時, 終了日時, 市町村情報リスト, 出力順ID);
+                チェックボックス, ラジオボタン, 開始日時, 終了日時, parameter.get市町村情報リスト(), 出力順ID);
         RString 出力ページ数 = new RString(sourceDataCollection.iterator().next().getPageCount());
         RString 帳票名 = ReportIdDBB.DBB200008.getReportName();
         loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 出力ページ数, CSV出力有無_無し, CSVファイル名, 帳票名);

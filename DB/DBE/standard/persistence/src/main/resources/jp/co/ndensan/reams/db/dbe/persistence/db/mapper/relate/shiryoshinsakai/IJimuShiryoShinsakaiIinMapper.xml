@@ -125,6 +125,7 @@
                 dbt5101."shoKisaiHokenshaNo",
                 dbt5101."hihokenshaNo" ,
                 dbt5101."hihokenshaName" ,
+                , dbt5101."koroshoIfShikibetsuCode"
                 dbt5101."ninteiShinseiYMD" ,
                 dbt5202."ninteichosaJisshiYMD",
                 dbt5502."shinsakaiKaisaiYMD",
@@ -182,6 +183,7 @@
         <result property="riyoShisetsuJusho" column="riyoShisetsuJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="riyoShisetsuTelNo" column="riyoShisetsuTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="imageSharedFileId" column="imageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler" />
+        <result property="koroshoIfShikibetsuCode" column="imageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
     </resultMap>
 
     <select id="get事務局情報件数" resultType="java.lang.Integer"
@@ -394,6 +396,7 @@
                                         AND dbt5205."ninteichosaTokkijikoRemban" = B1."ninteichosaTokkijikoRemban"	
                                         AND dbt5205."tokkijikoTextImageKubun" = B1."tokkijikoTextImageKubun"	
                                         AND dbt5205."genponMaskKubun" = B1."genponMaskKubun"	
+                                        AND dbt5205."ninteichosaRirekiNo" <![CDATA[<]]> B1."ninteichosaRirekiNo"	
                                         )	
         AND dbt5205."genponMaskKubun" = #{genponMaskKubun}					
         ORDER BY					

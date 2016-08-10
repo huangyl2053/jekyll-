@@ -103,4 +103,30 @@ public class KoshinShinseishaHaakuListCSVEntity {
         this.前回入所施設名称 = 前回入所施設名称;
     }
 
+    /**
+     * コンストラクタ。
+     *
+     */
+    public KoshinShinseishaHaakuListCSVEntity() {
+        this.連番 = RString.EMPTY;
+        this.被保険者番号 = RString.EMPTY;
+        this.氏名 = RString.EMPTY;
+        this.氏名カナ = RString.EMPTY;
+        this.郵便番号 = RString.EMPTY;
+        this.住所_番地方書まで = RString.EMPTY;
+        this.生年月日 = RString.EMPTY;
+        this.処理日時点の年齢 = RString.EMPTY;
+        this.前回介護度 = RString.EMPTY;
+        this.前回申請日 = RString.EMPTY;
+        this.前回申請区分_申請時 = RString.EMPTY;
+        this.前回認定日 = RString.EMPTY;
+        this.前回認定有効開始日 = RString.EMPTY;
+        this.前回認定有効終了日 = RString.EMPTY;
+        this.前回認定有効月数 = RString.EMPTY;
+        this.前回調査事業所コード = RString.EMPTY;
+        this.前回調査事業所名称 = RString.EMPTY;
+        this.前回入所施設コード = RString.EMPTY;
+        this.前回入所施設名称 = RString.EMPTY;
+    }
+
 }

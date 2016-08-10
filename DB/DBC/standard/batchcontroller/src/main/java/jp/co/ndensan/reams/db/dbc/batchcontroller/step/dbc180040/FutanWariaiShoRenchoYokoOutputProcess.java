@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180040;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.report.futanwariaishokattokami.FutanWariaiShoKattokamiProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.futanwariaishokattokami.FutanWariaiShoOutputJokenhyo;
 import jp.co.ndensan.reams.db.dbc.business.report.futanwariaishorenchoyoko.FutanWariaiShoRenchoYokoReport;
 import jp.co.ndensan.reams.db.dbc.business.report.saishinsa.SaishinsaKetteiTsuchishoIchiranKohifutanshaProperty;
@@ -48,7 +49,7 @@ public class FutanWariaiShoRenchoYokoOutputProcess extends BatchProcessBase<Riyo
 
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.futanwariaishohakko."
-                    + "IFutanwariaishoHakkoMapper.select利用者負担割合証");
+                    + "IFutanwariaishoHakkoMapper.select利用者負担割合証Temp");
     private FutanwariaishoHakkoProcessParameter parameter;
     private FutanWariaishoIkkatsu service;
     private ChohyoSeigyoKyotsu 帳票制御共通;
@@ -66,6 +67,7 @@ public class FutanWariaiShoRenchoYokoOutputProcess extends BatchProcessBase<Riyo
     private static final RString なし = new RString("なし");
     private static final RString あり = new RString("あり");
     private static final RString CONNECTOR = new RString("-");
+    private static final RString ORDERBY = new RString("order by");
     private static final RString 負担割合証発行一覧 = new RString("負担割合証発行一覧");
     private static final RString 負担割合証発行一括 = new RString("負担割合証発行（一括）");
     private static final RString 代行プリント送付票 = new RString("URU000A10_DaikoPrintCheck");
@@ -84,9 +86,16 @@ public class FutanWariaiShoRenchoYokoOutputProcess extends BatchProcessBase<Riyo
             IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
             出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.FCZ医療費共通,
                     ReportIdDBC.DBC100065.getReportId(), Long.valueOf(parameter.get出力順().toString()));
-            出力順BODY = MyBatisOrderByClauseCreator.create(
-                    SaishinsaKetteiTsuchishoIchiranKohifutanshaProperty.KagoKetteiKohifutanshaInBreakerFieldsEnum.class, 出力順)
-                    .split(コンマ.toString());
+            if (出力順 != null) {
+                parameter.set出力順(MyBatisOrderByClauseCreator.create(
+                        FutanWariaiShoKattokamiProperty.DBB100065ShutsuryokujunEnum.class, 出力順));
+                出力順BODY = MyBatisOrderByClauseCreator.create(
+                        SaishinsaKetteiTsuchishoIchiranKohifutanshaProperty.KagoKetteiKohifutanshaInBreakerFieldsEnum.class, 出力順)
+                        .replace(ORDERBY, RString.EMPTY).split(コンマ.toString());
+            } else {
+                parameter.set出力順(null);
+            }
+
         }
     }
 

@@ -288,8 +288,9 @@ public class ShotokuJohoChushutsuRenkeiBatch {
         IAssociationFinder associationFinder = AssociationFinderFactory.createInstance();
         Association association = associationFinder.getAssociation();
         // TODO　QA
+        int 連番 = 1;
         new KaigoHokenShotokuJohoIchiranPrintService().print介護保険所得情報(null, null,
-                new LasdecCode(association.get地方公共団体コード().getColumnValue()), association.get市町村名(), 出力順ID);
+                new LasdecCode(association.get地方公共団体コード().getColumnValue()), association.get市町村名(), 出力順ID, 連番);
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_介護保険所得情報一覧表帳票, UzUDE0831EucAccesslogFileType.Csv);
         RString 文字コード = DbBusinessConfig.get(ConfigNameDBU.EUC共通_文字コード, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("KaigoHokenShotokuJohoIchiranData.csv"));

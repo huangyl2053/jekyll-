@@ -66,7 +66,6 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.Tsukibe
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2010FukaErrorListDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.gennendohonsanteiidou.IGenNendoHonsanteiIdouMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbx.service.core.choshuhoho.ChoshuHohoKoshin;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.choteijiyu.ChoteiJiyuHantei;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.fukakeisan.FukaKeisan;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
@@ -87,6 +86,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2001ChoshuHohoDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV2001ChoshuHohoAliveDac;
+import jp.co.ndensan.reams.db.dbx.service.core.choshuhoho.ChoshuHohoKoshin;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
@@ -450,6 +450,9 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                 被保険者番号 = daicho.get被保険者番号();
                 daichoList.add(daicho);
             }
+        }
+        if (daichoList.isEmpty()) {
+            return;
         }
         process一時表(daichoList, 賦課情報Map.get(daichoList.get(0).get被保険者番号()), param);
     }

@@ -74,12 +74,12 @@ public class KyufujissekiKoshinkekkaIchiranPrintService {
      */
     public void printFukusu(FlexibleYearMonth 処理年月, Long shutsuryokujunID,
             List<ChohyoShutsuryokuTaishoDateEntity> entityList, YMDHMS システム日時, ReportManager reportManager) {
-        KyufujissekiKoshinkekkaIchiranProperty property = new KyufujissekiKoshinkekkaIchiranProperty();
+        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                .get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200054.getReportId(), shutsuryokujunID);
+        KyufujissekiKoshinkekkaIchiranProperty property = new KyufujissekiKoshinkekkaIchiranProperty(並び順);
         try (ReportAssembler<KyufujissekiKoshinkekkaIchiranSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<KyufujissekiKoshinkekkaIchiranSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
-            IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                    .get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200054.getReportId(), shutsuryokujunID);
             int i = 0;
             List<RString> 改頁項目List = new ArrayList<>();
             RString 並び順の１件目 = RString.EMPTY;

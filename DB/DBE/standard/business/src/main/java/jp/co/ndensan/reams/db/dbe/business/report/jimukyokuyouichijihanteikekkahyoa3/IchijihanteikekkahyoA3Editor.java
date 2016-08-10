@@ -81,7 +81,7 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
         source.zenkaiYukokikan = item.get前回認定有効期間();
         source.zenkaiNijiKaishiYMD = パターン17(item.get前回認定有効期間開始年月日());
         source.zenkaiNijiShuryoYMD = パターン17(item.get前回認定有効期間終了年月日());
-        source.zenkaiNijihanteiDate = パターン17(item.get前回認定日());
+        source.zenkaiNijihanteiDate = パターン16(item.get前回認定日());
         source.zenkaiJotaizo = item.get前回状態像();
         source.kanriNo = item.get管理番号();
         source.sakuseiYMD = パターン16(item.get審査会資料作成年月日());

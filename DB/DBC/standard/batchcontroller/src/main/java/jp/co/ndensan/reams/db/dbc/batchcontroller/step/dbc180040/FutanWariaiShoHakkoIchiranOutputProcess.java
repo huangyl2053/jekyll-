@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180040;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.futanwariaishohakkoichiran.FutanWariaiShoHakkoIchiranReport;
+import jp.co.ndensan.reams.db.dbc.business.report.futanwariaishokattokami.FutanWariaiShoKattokamiProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.saishinsa.SaishinsaKetteiTsuchishoIchiranKohifutanshaProperty;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.futanwariaishohakko.FutanwariaishoHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -19,8 +20,6 @@ import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishohakkoichiran.Futan
 import jp.co.ndensan.reams.db.dbc.service.core.futanwariaishoikkatsu.FutanWariaishoIkkatsu;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3113RiyoshaFutanWariaiEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
@@ -33,9 +32,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -49,7 +46,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
-import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
  * 負担割合証発行一覧のProcessクラスです。
@@ -80,29 +76,16 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
     @BatchWriter
     BatchPermanentTableWriter riyoshaFutanWariaiWriter;
 
-    @BatchWriter
-    BatchPermanentTableWriter shoKofuKaishuWriter;
-
     private static final RString コンマ = new RString(",");
     private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
-    private static final RString TWO = new RString("2");
-    private static final RString THREE = new RString("3");
-    private static final RString FOUR = new RString("4");
-    private static final RString 交付証種類_003 = new RString("003");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
+    private static final RString ORDERBY = new RString("order by");
     private static final int NUM_ONE = 1;
     private static final int NUM_TWO = 2;
     private static final int NUM_THREE = 3;
     private static final int NUM_FOUR = 4;
-    private static final int NUM_SEVEN = 7;
-    private static final int NUM_THIRTY_ONE = 31;
-    private static final RString 交付事由_01 = new RString("01");
-    private static final RString 交付事由_02 = new RString("02");
-    private static final RString 交付事由_03 = new RString("03");
-    private static final RString 交付事由_04 = new RString("04");
-    private static final RString 回収事由_00 = new RString("00");
     private static final RString 確認内容 = new RString("資格喪失している、負担割合証を発行しませんでした。");
     FileSpoolManager futanwariaiShoHakkoIchiranManager;
     FileSpoolManager shoriKekkaKakuninListManager;
@@ -128,11 +111,16 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
             IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
             出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.FCZ医療費共通,
                     ReportIdDBC.DBC100065.getReportId(), Long.valueOf(parameter.get出力順().toString()));
+            if (出力順 != null) {
+                parameter.set出力順(MyBatisOrderByClauseCreator.create(
+                        FutanWariaiShoKattokamiProperty.DBB100065ShutsuryokujunEnum.class, 出力順));
+            } else {
+                parameter.set出力順(null);
+            }
             出力順BODY = MyBatisOrderByClauseCreator.create(
                     SaishinsaKetteiTsuchishoIchiranKohifutanshaProperty.KagoKetteiKohifutanshaInBreakerFieldsEnum.class, 出力順)
-                    .split(コンマ.toString());
+                    .replace(ORDERBY, RString.EMPTY).split(コンマ.toString());
         }
-
         setソート順(出力順BODY);
     }
 
@@ -146,7 +134,6 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
         batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200090.getReportId().value()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         riyoshaFutanWariaiWriter = new BatchPermanentTableWriter(DbT3113RiyoshaFutanWariaiEntity.class);
-        shoKofuKaishuWriter = new BatchPermanentTableWriter(DbT7037ShoKofuKaishuEntity.class);
 
         futanwariaiShoHakkoIchiranManager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, FUATANWARIAI_EUC_ENTITY_ID,
                 UzUDE0831EucAccesslogFileType.Csv);
@@ -194,7 +181,7 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
         }
         連番++;
         updateRiyoshaFutanWariai(entity);
-        insertShoKofuKaishu(entity);
+
     }
 
     private void updateRiyoshaFutanWariai(RiyoshaFutanwariaishoTempEntity entity) {
@@ -206,45 +193,6 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
         item.setHakoYMD(new FlexibleDate(parameter.getバッチ起動時処理日時().getDate().toDateString()));
         item.setKofuYMD(new FlexibleDate(parameter.get交付年月日().toDateString()));
         riyoshaFutanWariaiWriter.update(item);
-    }
-
-    private void insertShoKofuKaishu(RiyoshaFutanwariaishoTempEntity entity) {
-        DbT7037ShoKofuKaishuEntity item = new DbT7037ShoKofuKaishuEntity();
-        if (entity.get被保台帳() == null) {
-            return;
-        }
-        item.setHihokenshaNo(entity.get被保台帳().getHihokenshaNo());
-        item.setKofuShoShurui(交付証種類_003);
-        if (entity.get証交付回収() == null) {
-            item.setRirekiNo(NUM_ONE);
-        } else {
-            item.setRirekiNo(entity.get証交付回収().getRirekiNo() + NUM_ONE);
-        }
-        item.setShichosonCode(entity.get被保台帳().getShichosonCode());
-        item.setShikibetsuCode(entity.get被保台帳().getShikibetsuCode());
-        item.setKofuYMD(new FlexibleDate(parameter.get交付年月日().toDateString()));
-        item.setYukoKigenYMD(new FlexibleDate(parameter.get年度().getYearValue(), NUM_SEVEN, NUM_THIRTY_ONE));
-        item.setKofuJiyu(get交付事由(entity));
-        item.setKofuRiyu(CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, DBACodeShubetsu.資格者証回収事由.getCodeShubetsu(), new Code(get交付事由(entity))));
-        item.setKaishuJiyu(回収事由_00);
-        item.setTanpyoHakkoUmuFlag(false);
-        item.setHakkoShoriTimestamp(new YMDHMS(parameter.getバッチ起動時処理日時()));
-        item.setLogicalDeletedFlag(false);
-        shoKofuKaishuWriter.update(item);
-    }
-
-    private RString get交付事由(RiyoshaFutanwariaishoTempEntity entity) {
-        RString 交付事由 = RString.EMPTY;
-        if (ONE.equals(entity.get利用者負担割合().getHanteiKubun())) {
-            交付事由 = 交付事由_01;
-        } else if (TWO.equals(entity.get利用者負担割合().getHanteiKubun())) {
-            交付事由 = 交付事由_02;
-        } else if (THREE.equals(entity.get利用者負担割合().getHanteiKubun())) {
-            交付事由 = 交付事由_03;
-        } else if (FOUR.equals(entity.get利用者負担割合().getHanteiKubun())) {
-            交付事由 = 交付事由_04;
-        }
-        return 交付事由;
     }
 
     private void setソート順(List<RString> list) {
