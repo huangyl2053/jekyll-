@@ -156,7 +156,8 @@ public class SokujiFukaKouseiMainHandler {
         set賦課根拠期割額(更正前賦課リスト, 更正後賦課リスト, 保険料段階List);
         set減免額(更正後賦課リスト);
         set現年度の特別徴収情報(更正前賦課リスト, 更正後賦課リスト);
-        set現年度の普通徴収情報(更正前賦課リスト, 更正後賦課リスト);
+        set現年度の普通徴収情報上段(更正前賦課リスト, 更正後賦課リスト);
+        set現年度の普通徴収情報下段(更正前賦課リスト, 更正後賦課リスト);
         if (!is特殊処理) {
             set現年度の特別徴収情報の入力制御(更正前後徴収方法, is本算定処理済フラグ);
             set現年度の普通徴収情報の入力制御(更正後賦課リスト);
@@ -684,7 +685,7 @@ public class SokujiFukaKouseiMainHandler {
         }
     }
 
-    private void set現年度の普通徴収情報(NendobunFukaList 更正前賦課リスト, NendobunFukaList 更正後賦課リスト) {
+    private void set現年度の普通徴収情報上段(NendobunFukaList 更正前賦課リスト, NendobunFukaList 更正後賦課リスト) {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         FuchoKiUtil 月期対応取得_普徴クラス = new FuchoKiUtil();
         FukaNokiResearcher researcher = FukaNokiResearcher.createInstance();
@@ -774,7 +775,18 @@ public class SokujiFukaKouseiMainHandler {
                 subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額09())));
         tablePanel.getLblFuchoNofugakuValue12().setText(get普通徴収の納付額(更正後現年度賦課, 月の期_12月, Tsuki._12月));
         tablePanel.getTxtFuchoNokigen12().setValue(researcher.get普徴納期(Integer.valueOf(月の期_12月.toString())).get納期限());
+    }
 
+    private void set現年度の普通徴収情報下段(NendobunFukaList 更正前賦課リスト, NendobunFukaList 更正後賦課リスト) {
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        FuchoKiUtil 月期対応取得_普徴クラス = new FuchoKiUtil();
+        FukaNokiResearcher researcher = FukaNokiResearcher.createInstance();
+        KitsukiList 期月リスト = 月期対応取得_普徴クラス.get期月リスト();
+        FukaJoho 更正前現年度賦課 = null;
+        if (更正前賦課リスト != null) {
+            更正前現年度賦課 = 更正前賦課リスト.get現年度();
+        }
+        FukaJoho 更正後現年度賦課 = 更正後賦課リスト.get現年度();
         RString 月の期_1月 = 期月リスト.get月の期(Tsuki._1月).get期();
         tablePanel.getLblFuchoKi01().setText(getFormat期(月の期_1月));
         tablePanel.getLblFuchoKoseiMaeValue01().setText(更正前現年度賦課 == null ? RString.EMPTY : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額10()));
@@ -1520,6 +1532,9 @@ public class SokujiFukaKouseiMainHandler {
         RYearMonth 調定年月From = 調定年月.minusMonth(NUM_1);
         RYearMonth 調定年月To = new RYearMonth(調定年月.getYear().plusYear(NUM_1).toDateString().concat(三月));
         RString コード_月 = 月.getコード();
+        if (Integer.valueOf(コード_月.toString()) < NUM_4 || Integer.valueOf(コード_月.toString()) > NUM_12) {
+            年度 = 年度.plusYear(NUM_1);
+        }
         if (Tsuki.翌年度4月.compareTo(月) == 0
                 || Tsuki.翌年度5月.compareTo(月) == 0) {
             コード_月 = コード_月.replace(ONE, ZERO);
