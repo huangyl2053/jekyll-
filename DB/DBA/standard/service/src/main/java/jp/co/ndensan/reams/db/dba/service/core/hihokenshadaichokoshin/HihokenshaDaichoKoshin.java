@@ -119,8 +119,8 @@ public class HihokenshaDaichoKoshin {
     public void 資格異動対象者の取得と被保険者台帳の更新(HihokenshaDaichoKoshinProcessParameter parameter) {
         INenreitotatsuShikakuIdoRelateMapper mapper = mapperProvider.create(INenreitotatsuShikakuIdoRelateMapper.class);
 
-        FlexibleDate 年齢到達期間開始日 = parameter.get開始日().minusDay(AGE_65).plusDay(1);
-        FlexibleDate 年齢到達期間終了日 = parameter.get終了日().minusDay(AGE_65).plusDay(1);
+        FlexibleDate 年齢到達期間開始日 = parameter.get開始日().minusYear(AGE_65).plusDay(1);
+        FlexibleDate 年齢到達期間終了日 = parameter.get終了日().minusYear(AGE_65).plusDay(1);
 
         ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
