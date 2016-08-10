@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 画面設計_DBE3010001_一次判定処理クラスです。
@@ -44,6 +45,7 @@ public class IchijiHanteiHandler {
     private static final Code 認定ｿﾌﾄ2006 = new Code(new RString("06A"));
     private static final Code 認定ｿﾌﾄ2009_A = new Code(new RString("09A"));
     private static final Code 認定ｿﾌﾄ2009_B = new Code(new RString("09B"));
+    private static final RString データ出力を実行する = new RString("btnSyutsuryoku");
 
     /**
      * コンストラクタです。
@@ -211,6 +213,10 @@ public class IchijiHanteiHandler {
             personalData.addExpandedInfo(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
                     business.get申請書管理番号().value()));
             rowList.add(row);
+        }
+        if (一次判定対象者一覧List.isEmpty()) {
+
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(データ出力を実行する, true);
         }
         div.getIchijiHanteiShoriTaishoshaIchiran().getDgIchijiHanteiTaishoshaIchiran().setDataSource(rowList);
     }
