@@ -539,7 +539,7 @@
         SELECT dbt5207."serviceJokyo"
         , dbt5207."remban"
         FROM rgdb."DbT5207NinteichosahyoServiceJokyo" dbt5207
-        WHERE dbt5207."shinseishoKanriNo" = #{shinseishoKanriNo}
+        WHERE dbt5207."shinseishoKanriNo" = #{shinseishoKanri}
         AND dbt5207."ninteichosaRirekiNo" = #{ninteichosaRirekiNo}
         ORDER BY dbt5207."remban"
     </select>
@@ -551,7 +551,7 @@
             resultOrdered="true">
         SELECT dbt5208."serviceJokyoFlag"
         FROM rgdb."DbT5208NinteichosahyoServiceJokyoFlag" dbt5208
-        WHERE dbt5208."shinseishoKanriNo" = #{shinseishoKanriNo}
+        WHERE dbt5208."shinseishoKanriNo" = #{shinseishoKanri}
         AND dbt5208."ninteichosaRirekiNo" = #{ninteichosaRirekiNo}
         AND dbt5208."remban" = 1
     </select>
@@ -564,7 +564,7 @@
         SELECT dbt5205."ninteichosaTokkijikoNo"
         , dbt5205."ninteichosaTokkijikoRemban"
         FROM rgdb."DbT5205NinteichosahyoTokkijiko" AS dbt5205
-        WHERE dbt5205."shinseishoKanriNo" = #{shinseishoKanriNo}
+        WHERE dbt5205."shinseishoKanriNo" = #{shinseishoKanri}
         AND dbt5205."ninteichosaRirekiNo" = #{ninteichosaRirekiNo}
         ORDER BY dbt5205."ninteichosaTokkijikoNo"
         , dbt5205."ninteichosaTokkijikoRemban"
@@ -578,7 +578,7 @@
         SELECT dbt5304."remban",
         dbt5304."ikenItem"
         FROM rgdb."DbT5304ShujiiIkenshoIkenItem" dbt5304
-        WHERE dbt5304."shinseishoKanriNo" = #{shinseishoKanriNo}
+        WHERE dbt5304."shinseishoKanriNo" = #{shinseishoKanri}
         AND dbt5304."ikenshoIraiRirekiNo" = #{ikenshoIraiRirekiNo}
         ORDER BY dbt5304."remban"
     </select>
@@ -591,7 +591,7 @@
         SELECT dbt5211."remban"
         , dbt5211."researchItem"
         FROM rgdb."DbT5211NinteichosahyoChosaItem" dbt5211
-        WHERE dbt5211."shinseishoKanriNo" = #{shinseishoKanriNo}
+        WHERE dbt5211."shinseishoKanriNo" = #{shinseishoKanri}
         AND dbt5211."ninteichosaRirekiNo" = #{ninteichosaRirekiNo}
         ORDER BY dbt5211."remban"
     </select>
@@ -632,14 +632,14 @@
         , dbt5210."koroshoIfShikibetsuCode"
         , dbt5210."shisetsuRiyoFlag"
         FROM rgdb."DbT5210NinteichosahyoShisetsuRiyo" dbt5210
-        WHERE dbt5210."shinseishoKanriNo" = #{shinseishoKanriNo}
+        WHERE dbt5210."shinseishoKanriNo" = #{shinseishoKanri}
         AND dbt5210."ninteichosaRirekiNo" = #{ninteichosaRirekiNo}
         AND dbt5210."shisetsuRiyoFlag" = True
     </select>
 
-    <!--    <select id="getZenkaiIkenshoIkenItem"
+   <select id="getZenkaiIkenshoIkenItem"
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItem"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter"
             fetchSize="500"
             resultOrdered="true">
         SELECT dbt5304."remban"
@@ -662,7 +662,7 @@
         AND dbt5304."ikenshoIraiRirekiNo" = dbt5301."ikenshoIraiRirekiNo"
         WHERE dbt5101."shinseishoKanriNo" = #{shinseishoKanriNoZ}
         ORDER BY dbt5304."remban"
-    </select>-->
+    </select>
 
     <select id="getHanteiJoho" resultMap="Result_HanteiJoho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter" fetchSize="500"  resultOrdered="true">
