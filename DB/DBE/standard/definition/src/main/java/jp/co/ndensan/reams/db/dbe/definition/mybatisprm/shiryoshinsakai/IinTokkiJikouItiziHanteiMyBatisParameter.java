@@ -25,6 +25,7 @@ public class IinTokkiJikouItiziHanteiMyBatisParameter implements IMyBatisParamet
     private int bangoStart;
     private int bangoEnd;
     private ShinseishoKanriNo shinseishoKanri;
+    private ShinseishoKanriNo shinseishoKanriZ;
     private int ninteichosaRirekiNo;
     private int ikenshoIraiRirekiNo;
     private RString genponMaskKubun;

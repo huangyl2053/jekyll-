@@ -213,12 +213,13 @@ public class KanendoKoseiKeisan {
             YMDHMS 算定日時, FukaJoho 賦課の情報1, FukaJoho 賦課の情報2, FukaJoho 賦課の情報3,
             FukaJoho 賦課の情報4, FukaJoho 賦課の情報5, FukaJoho 賦課の情報6) {
 
+        int size = 調定年度期別クラス.size();
         if (idx == 0) {
             List<Decimal> 普徴期別額List = 調定年度期別クラス.get(idx).get普徴期別額();
             List<Decimal> 特徴期別額List = 調定年度期別クラス.get(idx).get特徴期別額();
             賦課の情報1 = get賦課の情報(賦課の情報1, 算定日時, 普徴期別額List, 特徴期別額List).build();
             賦課の情報リスト.add(賦課の情報1);
-        } else if (idx == INT_1) {
+        } else if (idx == INT_1 && INT_1 < size) {
             if (賦課の情報2 != null) {
                 List<Decimal> 普徴期別額List = 調定年度期別クラス.get(idx).get普徴期別額();
                 List<Decimal> 特徴期別額List = 調定年度期別クラス.get(idx).get特徴期別額();
@@ -231,7 +232,7 @@ public class KanendoKoseiKeisan {
                         .set調定年度(賦課の情報1.get賦課年度().plusYear(INT_1)).build();
                 賦課の情報リスト.add(賦課の情報1);
             }
-        } else if (idx == INT_2) {
+        } else if (idx == INT_2 && INT_2 < size) {
             if (賦課の情報3 != null) {
                 List<Decimal> 普徴期別額List = 調定年度期別クラス.get(idx).get普徴期別額();
                 List<Decimal> 特徴期別額List = 調定年度期別クラス.get(idx).get特徴期別額();
@@ -250,7 +251,7 @@ public class KanendoKoseiKeisan {
                         .set調定年度(賦課の情報1.get賦課年度().plusYear(INT_2)).build();
                 賦課の情報リスト.add(賦課の情報1);
             }
-        } else if (idx == INT_3) {
+        } else if (idx == INT_3 && INT_3 < size) {
             if (賦課の情報4 != null) {
                 List<Decimal> 普徴期別額List = 調定年度期別クラス.get(idx).get普徴期別額();
                 List<Decimal> 特徴期別額List = 調定年度期別クラス.get(idx).get特徴期別額();
@@ -275,7 +276,7 @@ public class KanendoKoseiKeisan {
                         .set調定年度(賦課の情報1.get賦課年度().plusYear(INT_3)).build();
                 賦課の情報リスト.add(賦課の情報1);
             }
-        } else if (idx == INT_4) {
+        } else if (idx == INT_4 && INT_4 < size) {
             if (賦課の情報5 != null) {
                 List<Decimal> 普徴期別額List = 調定年度期別クラス.get(idx).get普徴期別額();
                 List<Decimal> 特徴期別額List = 調定年度期別クラス.get(idx).get特徴期別額();
@@ -306,7 +307,7 @@ public class KanendoKoseiKeisan {
                         .set調定年度(賦課の情報1.get賦課年度().plusYear(INT_4)).build();
                 賦課の情報リスト.add(賦課の情報1);
             }
-        } else if (idx == INT_5) {
+        } else if (idx == INT_5 && INT_5 < size) {
             set賦課の情報6(賦課の情報リスト, 調定年度期別クラス, idx, 算定日時, 賦課の情報1,
                     賦課の情報2, 賦課の情報3, 賦課の情報4, 賦課の情報5, 賦課の情報6);
         }

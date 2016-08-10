@@ -29,15 +29,17 @@ public class HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity extends DbTabl
 
     public static final RString TABLE_NAME = new RString("HikazeNenkinTaishoshaDouteiResultJohoTempTable");
 
+    private RString douteiResultKubun;
+    private RString fuicchiJiyu;
+    private RString gaitouJiyu;
+    private RString fuicchiItem;
+    private RString kisoNennkinnNoHennkou;
     private HihokenshaNo hihokenshaNo;
     private RString atenaKanaShimei;
     private FlexibleDate atenaSeinenngappi;
     private RString atenaSeibetsu;
     private ShikibetsuCode shikibetsuCode;
     private RString shotaiCode;
-    private RString atenaKanjiShimei;
-    private RString atenaYubinNo;
-    private RString atenakanaJusyo;
     private RString nendo;
     private RString shoriKubunn;
     private RString TaishoMonth;
