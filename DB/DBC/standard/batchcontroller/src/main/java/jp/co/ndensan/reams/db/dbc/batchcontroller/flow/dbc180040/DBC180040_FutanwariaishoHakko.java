@@ -52,13 +52,13 @@ public class DBC180040_FutanwariaishoHakko extends BatchFlowBase<FutanwariaishoH
     private static final String 負担割合証連帳横 = "FutanWariaiShoRenchoYokoOutputProcess";
     private static final String 負担割合証発行一覧表 = "FutanWariaiShoHakkoIchiranOutputProcess";
     private static final String 処理日付管理 = "ShoriDateKanriUpdateProcess";
-    private static final String 利用者負担割合証Temp = "RiyoshaFutanWariaiShoInsertProcess";
+    private static final String 利用者負担割合証 = "RiyoshaFutanWariaiShoInsertProcess";
 
     @Override
     protected void defineFlow() {
         RString type = getType();
         executeStep(利用者負担割合期間);
-        executeStep(利用者負担割合証Temp);
+        executeStep(利用者負担割合証);
         if (ONE.equals(type)) {
             executeStep(負担割合証);
         } else if (TWO.equals(type)) {
@@ -147,7 +147,7 @@ public class DBC180040_FutanwariaishoHakko extends BatchFlowBase<FutanwariaishoH
      *
      * @return IBatchFlowCommand
      */
-    @Step(利用者負担割合証Temp)
+    @Step(利用者負担割合証)
     protected IBatchFlowCommand createReport7() {
         return loopBatch(RiyoshaFutanWariaiShoInsertProcess.class)
                 .arguments(getProcessParameter())
