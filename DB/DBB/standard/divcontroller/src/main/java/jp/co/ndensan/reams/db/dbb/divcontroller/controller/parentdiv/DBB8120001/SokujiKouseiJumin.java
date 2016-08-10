@@ -49,11 +49,13 @@ public class SokujiKouseiJumin {
             賦課年度 = 異動者一覧Par.getFukaNendo();
             通知書番号 = 異動者一覧Par.getTsuchishoNo();
             識別コード = 異動者一覧Par.getShikibetsuCode();
+            市町村コード = LasdecCode.EMPTY;
         } else if (メニューID_特徴仮算定賦課エラー一覧.equals(メニューID)) {
             FukaErrorList 賦課エラー情報 = ViewStateHolder.get(ViewStateKeys.賦課エラー情報, FukaErrorList.class);
             賦課年度 = 賦課エラー情報.get賦課年度();
             通知書番号 = 賦課エラー情報.get通知書番号();
             識別コード = 賦課エラー情報.get識別コード();
+            市町村コード = LasdecCode.EMPTY;
         } else if (メニューID_即時賦課更正.equals(メニューID)) {
             FukaTaishoshaKey 賦課対象者 = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
             賦課年度 = 賦課対象者.get賦課年度();

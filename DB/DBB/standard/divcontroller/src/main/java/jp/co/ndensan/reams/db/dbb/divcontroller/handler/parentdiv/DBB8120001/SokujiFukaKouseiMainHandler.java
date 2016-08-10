@@ -696,9 +696,7 @@ public class SokujiFukaKouseiMainHandler {
         FukaJoho 更正後現年度賦課 = 更正後賦課リスト.get現年度();
         RString 月の期_4月 = 期月リスト.get月の期(Tsuki._4月).get期();
         tablePanel.getLblFuchoKi04().setText(getFormat期(月の期_4月));
-        if (更正前現年度賦課 != null) {
-            tablePanel.getLblFuchoKoseiMaeValue04().setText(get金額のカンマ編集(更正前現年度賦課.get普徴期別金額01()));
-        }
+        tablePanel.getLblFuchoKoseiMaeValue04().setText(更正前現年度賦課 == null ? RString.EMPTY : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額01()));
         tablePanel.getTxtFuchoKoseiGo04().setValue(更正後現年度賦課.get普徴期別金額01());
         tablePanel.getLblFuchoZogenValue04().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額01().
                 subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額01())));
@@ -707,9 +705,7 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_5月 = 期月リスト.get月の期(Tsuki._5月).get期();
         tablePanel.getLblFuchoKi05().setText(getFormat期(月の期_5月));
-        if (更正前現年度賦課 != null) {
-            tablePanel.getLblFuchoKoseiMaeValue05().setText(get金額のカンマ編集(更正前現年度賦課.get普徴期別金額02()));
-        }
+        tablePanel.getLblFuchoKoseiMaeValue05().setText(更正前現年度賦課 == null ? RString.EMPTY : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額02()));
         tablePanel.getTxtFuchoKoseiGo05().setValue(更正後現年度賦課.get普徴期別金額02());
         tablePanel.getLblFuchoZogenValue05().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額02().
                 subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額02())));
@@ -718,9 +714,7 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_6月 = 期月リスト.get月の期(Tsuki._6月).get期();
         tablePanel.getLblFuchoKi06().setText(getFormat期(月の期_6月));
-        if (更正前現年度賦課 != null) {
-            tablePanel.getLblFuchoKoseiMaeValue06().setText(get金額のカンマ編集(更正前現年度賦課.get普徴期別金額03()));
-        }
+        tablePanel.getLblFuchoKoseiMaeValue06().setText(更正前現年度賦課 == null ? RString.EMPTY : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額03()));
         tablePanel.getTxtFuchoKoseiGo06().setValue(更正後現年度賦課.get普徴期別金額03());
         tablePanel.getLblFuchoZogenValue06().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額03().
                 subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額03())));
@@ -729,9 +723,7 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_7月 = 期月リスト.get月の期(Tsuki._7月).get期();
         tablePanel.getLblFuchoKi07().setText(getFormat期(月の期_7月));
-        if (更正前現年度賦課 != null) {
-            tablePanel.getLblFuchoKoseiMaeValue07().setText(get金額のカンマ編集(更正前現年度賦課.get普徴期別金額04()));
-        }
+        tablePanel.getLblFuchoKoseiMaeValue07().setText(更正前現年度賦課 == null ? RString.EMPTY : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額04()));
         tablePanel.getTxtFuchoKoseiGo07().setValue(更正後現年度賦課.get普徴期別金額04());
         tablePanel.getLblFuchoZogenValue07().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額04().
                 subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額04())));
@@ -740,9 +732,7 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_8月 = 期月リスト.get月の期(Tsuki._8月).get期();
         tablePanel.getLblFuchoKi08().setText(getFormat期(月の期_8月));
-        if (更正前現年度賦課 != null) {
-            tablePanel.getLblFuchoKoseiMaeValue08().setText(get金額のカンマ編集(更正前現年度賦課.get普徴期別金額05()));
-        }
+        tablePanel.getLblFuchoKoseiMaeValue08().setText(更正前現年度賦課 == null ? RString.EMPTY : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額05()));
         tablePanel.getTxtFuchoKoseiGo08().setValue(更正後現年度賦課.get普徴期別金額05());
         tablePanel.getLblFuchoZogenValue08().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額05().
                 subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額05())));
@@ -751,9 +741,7 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_9月 = 期月リスト.get月の期(Tsuki._9月).get期();
         tablePanel.getLblFuchoKi09().setText(getFormat期(月の期_9月));
-        if (更正前現年度賦課 != null) {
-            tablePanel.getLblFuchoKoseiMaeValue09().setText(get金額のカンマ編集(更正前現年度賦課.get普徴期別金額06()));
-        }
+        tablePanel.getLblFuchoKoseiMaeValue09().setText(更正前現年度賦課 == null ? RString.EMPTY : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額06()));
         tablePanel.getTxtFuchoKoseiGo09().setValue(更正後現年度賦課.get普徴期別金額06());
         tablePanel.getLblFuchoZogenValue09().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額06().
                 subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額06())));
@@ -762,9 +750,7 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_10月 = 期月リスト.get月の期(Tsuki._10月).get期();
         tablePanel.getLblFuchoKi10().setText(getFormat期(月の期_10月));
-        if (更正前現年度賦課 != null) {
-            tablePanel.getLblFuchoKoseiMaeValue10().setText(get金額のカンマ編集(更正前現年度賦課.get普徴期別金額07()));
-        }
+        tablePanel.getLblFuchoKoseiMaeValue10().setText(更正前現年度賦課 == null ? RString.EMPTY : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額07()));
         tablePanel.getTxtFuchoKoseiGo10().setValue(更正後現年度賦課.get普徴期別金額07());
         tablePanel.getLblFuchoZogenValue10().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額07().
                 subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額07())));
@@ -773,9 +759,7 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_11月 = 期月リスト.get月の期(Tsuki._11月).get期();
         tablePanel.getLblFuchoKi11().setText(getFormat期(月の期_11月));
-        if (更正前現年度賦課 != null) {
-            tablePanel.getLblFuchoKoseiMaeValue11().setText(get金額のカンマ編集(更正前現年度賦課.get普徴期別金額08()));
-        }
+        tablePanel.getLblFuchoKoseiMaeValue11().setText(更正前現年度賦課 == null ? RString.EMPTY : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額08()));
         tablePanel.getTxtFuchoKoseiGo11().setValue(更正後現年度賦課.get普徴期別金額08());
         tablePanel.getLblFuchoZogenValue11().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額08().
                 subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額08())));
@@ -784,9 +768,7 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_12月 = 期月リスト.get月の期(Tsuki._12月).get期();
         tablePanel.getLblFuchoKi12().setText(getFormat期(月の期_12月));
-        if (更正前現年度賦課 != null) {
-            tablePanel.getLblFuchoKoseiMaeValue12().setText(get金額のカンマ編集(更正前現年度賦課.get普徴期別金額09()));
-        }
+        tablePanel.getLblFuchoKoseiMaeValue12().setText(更正前現年度賦課 == null ? RString.EMPTY : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額09()));
         tablePanel.getTxtFuchoKoseiGo12().setValue(更正後現年度賦課.get普徴期別金額09());
         tablePanel.getLblFuchoZogenValue12().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額09().
                 subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額09())));
@@ -795,9 +777,7 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_1月 = 期月リスト.get月の期(Tsuki._1月).get期();
         tablePanel.getLblFuchoKi01().setText(getFormat期(月の期_1月));
-        if (更正前現年度賦課 != null) {
-            tablePanel.getLblFuchoKoseiMaeValue01().setText(get金額のカンマ編集(更正前現年度賦課.get普徴期別金額10()));
-        }
+        tablePanel.getLblFuchoKoseiMaeValue01().setText(更正前現年度賦課 == null ? RString.EMPTY : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額10()));
         tablePanel.getTxtFuchoKoseiGo01().setValue(更正後現年度賦課.get普徴期別金額10());
         tablePanel.getLblFuchoZogenValue01().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額10().
                 subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額10())));
@@ -806,9 +786,7 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_2月 = 期月リスト.get月の期(Tsuki._2月).get期();
         tablePanel.getLblFuchoKi02().setText(getFormat期(月の期_2月));
-        if (更正前現年度賦課 != null) {
-            tablePanel.getLblFuchoKoseiMaeValue02().setText(get金額のカンマ編集(更正前現年度賦課.get普徴期別金額11()));
-        }
+        tablePanel.getLblFuchoKoseiMaeValue02().setText(更正前現年度賦課 == null ? RString.EMPTY : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額11()));
         tablePanel.getTxtFuchoKoseiGo02().setValue(更正後現年度賦課.get普徴期別金額11());
         tablePanel.getLblFuchoZogenValue02().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額11().
                 subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額11())));
@@ -817,9 +795,7 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_3月 = 期月リスト.get月の期(Tsuki._3月).get期();
         tablePanel.getLblFuchoKi03().setText(getFormat期(月の期_3月));
-        if (更正前現年度賦課 != null) {
-            tablePanel.getLblFuchoKoseiMaeValue03().setText(get金額のカンマ編集(更正前現年度賦課.get普徴期別金額12()));
-        }
+        tablePanel.getLblFuchoKoseiMaeValue03().setText(更正前現年度賦課 == null ? RString.EMPTY : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額12()));
         tablePanel.getTxtFuchoKoseiGo03().setValue(更正後現年度賦課.get普徴期別金額12());
         tablePanel.getLblFuchoZogenValue03().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額12().
                 subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額12())));
@@ -828,9 +804,7 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_翌年度4月 = 期月リスト.get月の期(Tsuki.翌年度4月).get期();
         tablePanel.getLblFuchoKiYoku04().setText(getFormat期(月の期_翌年度4月));
-        if (更正前現年度賦課 != null) {
-            tablePanel.getLblFuchoKoseiMaeValueYoku04().setText(get金額のカンマ編集(更正前現年度賦課.get普徴期別金額13()));
-        }
+        tablePanel.getLblFuchoKoseiMaeValueYoku04().setText(更正前現年度賦課 == null ? RString.EMPTY : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額13()));
         tablePanel.getTxtFuchoKoseiGoYoku04().setValue(更正後現年度賦課.get普徴期別金額13());
         tablePanel.getLblFuchoZogenValueYoku04().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額13().
                 subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額13())));
@@ -839,18 +813,14 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_翌年度5月 = 期月リスト.get月の期(Tsuki.翌年度5月).get期();
         tablePanel.getLblFuchoKiYoku05().setText(getFormat期(月の期_翌年度5月));
-        if (更正前現年度賦課 != null) {
-            tablePanel.getLblFuchoKoseiMaeValueYoku05().setText(get金額のカンマ編集(更正前現年度賦課.get普徴期別金額14()));
-        }
+        tablePanel.getLblFuchoKoseiMaeValueYoku05().setText(更正前現年度賦課 == null ? RString.EMPTY : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額14()));
         tablePanel.getTxtFuchoKoseiGoYoku05().setValue(更正後現年度賦課.get普徴期別金額14());
         tablePanel.getLblFuchoZogenValueYoku05().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額14().
                 subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額14())));
         tablePanel.getLblFuchoNofugakuValueYoku05().setText(get普通徴収の納付額(更正後現年度賦課, 月の期_翌年度5月, Tsuki.翌年度5月));
         tablePanel.getTxtFuchoNokigenYoku05().setValue(researcher.get普徴納期(Integer.valueOf(月の期_翌年度5月.toString())).get納期限());
 
-        if (更正前現年度賦課 != null) {
-            tablePanel.getLblFuchoKoseiMaeSum().setText(get普通徴収の更正前合計(更正前現年度賦課));
-        }
+        tablePanel.getLblFuchoKoseiMaeSum().setText(更正前現年度賦課 == null ? RString.EMPTY : get普通徴収の更正前合計(更正前現年度賦課));
         tablePanel.getLblFuchoKoseiGoSum().setText(get普通徴収の更正後合計());
         tablePanel.getLblFuchoZogenSum().setText(get普通徴収の増減合計());
         tablePanel.getLblFuchoNofugakuSum().setText(get普通徴収の納付額合計());
