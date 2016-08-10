@@ -1533,10 +1533,10 @@ public class SabisuJyoukyoA3 {
 
     private boolean is日常の意思決定認定調査と主治医意見書比較１(RString 今回結果コード, RString 前回調査結果コード) {
         boolean is認定調査と主治医意見書結果悪 = false;
-        if ((IkenKomoku05.判断できない.getコード().equals(今回結果コード) && (ChosaAnser17.日常的に困難.getコード().equals(前回調査結果コード)
-                || ChosaAnser17.特別な場合を除いてできる.getコード().equals(前回調査結果コード) || ChosaAnser17.できる_特別な場合でもできる.getコード().equals(前回調査結果コード)))
-                || (IkenKomoku05.見守りが必要.getコード().equals(今回結果コード) && (ChosaAnser17.特別な場合を除いてできる.getコード().equals(前回調査結果コード)
-                || ChosaAnser17.できる_特別な場合でもできる.getコード().equals(前回調査結果コード)))) {
+        if ((IkenKomoku05.判断できない.getコード().equals(前回調査結果コード) && (ChosaAnser17.日常的に困難.getコード().equals(今回結果コード)
+                || ChosaAnser17.特別な場合を除いてできる.getコード().equals(今回結果コード) || ChosaAnser17.できる_特別な場合でもできる.getコード().equals(今回結果コード)))
+                || (IkenKomoku05.見守りが必要.getコード().equals(前回調査結果コード) && (ChosaAnser17.特別な場合を除いてできる.getコード().equals(今回結果コード)
+                || ChosaAnser17.できる_特別な場合でもできる.getコード().equals(今回結果コード)))) {
             is認定調査と主治医意見書結果悪 = true;
         }
         return is認定調査と主治医意見書結果悪;
@@ -1544,7 +1544,7 @@ public class SabisuJyoukyoA3 {
 
     private boolean is日常の意思決定認定調査と主治医意見書比較２(RString 今回結果コード, RString 前回調査結果コード) {
         boolean is認定調査と主治医意見書結果悪 = false;
-        if (IkenKomoku05.いくらか困難.getコード().equals(今回結果コード) && ChosaAnser17.できる_特別な場合でもできる.getコード().equals(前回調査結果コード)) {
+        if (IkenKomoku05.いくらか困難.getコード().equals(前回調査結果コード) && ChosaAnser17.できる_特別な場合でもできる.getコード().equals(今回結果コード)) {
             is認定調査と主治医意見書結果悪 = true;
         }
         return is認定調査と主治医意見書結果悪;
