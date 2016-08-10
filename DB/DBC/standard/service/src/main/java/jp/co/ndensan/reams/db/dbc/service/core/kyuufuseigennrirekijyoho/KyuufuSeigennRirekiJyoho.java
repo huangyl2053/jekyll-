@@ -48,7 +48,6 @@ public class KyuufuSeigennRirekiJyoho {
 
         List<KyuufuSeigennRirekiJyohoEntity> list = new ArrayList<>();
         List<DbT4021ShiharaiHohoHenkoEntity> dblist = dbt4021Dac.get給付制限履歴情報(被保険者番号);
-
         if (dblist != null && !dblist.isEmpty()) {
             KyuufuSeigennRirekiJyohoEntity kyuufuSeigennRirekiJyohoEntity;
             for (DbT4021ShiharaiHohoHenkoEntity dbt4021 : dblist) {
