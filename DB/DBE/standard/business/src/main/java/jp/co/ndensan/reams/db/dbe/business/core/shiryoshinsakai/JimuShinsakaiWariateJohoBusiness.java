@@ -125,9 +125,9 @@ public class JimuShinsakaiWariateJohoBusiness {
      */
     public RString get左の主治医意見書イメージ() {
         if (entity.isJimukyoku()) {
-            return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001);
-        } else {
             return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001BAK);
+        } else {
+            return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001);
         }
     }
 
@@ -138,9 +138,9 @@ public class JimuShinsakaiWariateJohoBusiness {
      */
     public RString get右の主治医意見書イメージ() {
         if (entity.isJimukyoku()) {
-            return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0002);
-        } else {
             return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0002BAK);
+        } else {
+            return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0002);
         }
     }
 
@@ -151,9 +151,9 @@ public class JimuShinsakaiWariateJohoBusiness {
      */
     public RString get主治医意見書イメージ１() {
         if (entity.isJimukyoku()) {
-            return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001);
-        } else {
             return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001BAK);
+        } else {
+            return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001);
         }
     }
 
@@ -164,9 +164,9 @@ public class JimuShinsakaiWariateJohoBusiness {
      */
     public RString get主治医意見書イメージ２() {
         if (entity.isJimukyoku()) {
-            return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0002);
-        } else {
             return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0002BAK);
+        } else {
+            return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0002);
         }
     }
 
