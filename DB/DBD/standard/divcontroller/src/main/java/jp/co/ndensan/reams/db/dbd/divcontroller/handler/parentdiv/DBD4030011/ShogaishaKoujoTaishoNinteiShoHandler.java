@@ -58,6 +58,7 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
 
     private List<KeyValueDataSource> setDdlNinteiKbnDataSource() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
+        dataSourceList.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (Ninteikubun num : Ninteikubun.values()) {
             dataSourceList.add(new KeyValueDataSource(num.getコード(), num.get名称()));
         }
@@ -66,6 +67,7 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
 
     private List<KeyValueDataSource> setDdlNinteiNaiyoDataSource() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
+        dataSourceList.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (NinteiNaiyoKubun num : NinteiNaiyoKubun.values()) {
             dataSourceList.add(new KeyValueDataSource(num.getコード(), num.get名称()));
         }
@@ -74,6 +76,7 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
 
     private List<KeyValueDataSource> setDdlDataSource() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
+        dataSourceList.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (NinchishoNichijoSeikatsuJiritsudoCode num : NinchishoNichijoSeikatsuJiritsudoCode.values()) {
             dataSourceList.add(new KeyValueDataSource(num.getコード(), num.get名称()));
         }
@@ -82,6 +85,7 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
 
     private List<KeyValueDataSource> setDdlShogaiDataSource() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
+        dataSourceList.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (ShogaiNichijoSeikatsuJiritsudoCode num : ShogaiNichijoSeikatsuJiritsudoCode.values()) {
             dataSourceList.add(new KeyValueDataSource(num.getコード(), num.get名称()));
         }
@@ -90,6 +94,7 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
 
     private List<KeyValueDataSource> setDdlSoshituJiyuDataSource() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
+        dataSourceList.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (ShikakuSoshitsuJiyu num : ShikakuSoshitsuJiyu.values()) {
             dataSourceList.add(new KeyValueDataSource(num.getコード(), num.get名称()));
         }
@@ -98,6 +103,7 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
 
     private List<KeyValueDataSource> setDdlShogaishaTechoDataSource() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
+        dataSourceList.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (DdlShogaishaTecho num : DdlShogaishaTecho.values()) {
             dataSourceList.add(new KeyValueDataSource(num.getコード(), num.get名称()));
         }
@@ -106,6 +112,7 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
 
     private List<KeyValueDataSource> setDropDownListDataSource() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
+        dataSourceList.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (DropDownList num : DropDownList.values()) {
             dataSourceList.add(new KeyValueDataSource(num.getコード(), num.get名称()));
         }
