@@ -28,8 +28,6 @@ public class JigyohokokuCompYoshiki251Report extends Report<JigyohokokuCompYoshi
 
     private static final RString 集計区分_加算 = new RString("1");
     private static final RString 集計区分_減算 = new RString("2");
-    private static final RString 件数_1 = new RString("1");
-    private static final RString 請求額_2 = new RString("2");
     private static final RString 一行目 = new RString("01");
     private static final RString 二行目 = new RString("04");
     private static final RString 三行目 = new RString("05");
@@ -47,24 +45,6 @@ public class JigyohokokuCompYoshiki251Report extends Report<JigyohokokuCompYoshi
     private static final RString 十五行目 = new RString("14");
     private static final RString 十六行目 = new RString("15");
     private static final RString 十七行目 = new RString("03");
-    private static final RString 十八行目 = new RString("01");
-    private static final RString 十九行目 = new RString("04");
-    private static final RString 二十行目 = new RString("05");
-    private static final RString 二十一行目 = new RString("06");
-    private static final RString 二十二行目 = new RString("16");
-    private static final RString 二十三行目 = new RString("07");
-    private static final RString 二十四行目 = new RString("08");
-    private static final RString 二十五行目 = new RString("09");
-    private static final RString 二十六行目 = new RString("02");
-    private static final RString 二十七行目 = new RString("10");
-    private static final RString 二十八行目 = new RString("11");
-    private static final RString 二十九行目 = new RString("12");
-    private static final RString 三十行目 = new RString("17");
-    private static final RString 三十一行目 = new RString("13");
-    private static final RString 三十二行目 = new RString("14");
-    private static final RString 三十三行目 = new RString("15");
-    private static final RString 三十四行目 = new RString("03");
-
     private static final int INDEX_1 = 0;
     private static final int INDEX_2 = 1;
     private static final int INDEX_3 = 2;
@@ -82,26 +62,10 @@ public class JigyohokokuCompYoshiki251Report extends Report<JigyohokokuCompYoshi
     private static final int INDEX_15 = 14;
     private static final int INDEX_16 = 15;
     private static final int INDEX_17 = 16;
-    private static final int INDEX_18 = 17;
-    private static final int INDEX_19 = 18;
-    private static final int INDEX_20 = 19;
-    private static final int INDEX_21 = 20;
-    private static final int INDEX_22 = 21;
-    private static final int INDEX_23 = 22;
-    private static final int INDEX_24 = 23;
-    private static final int INDEX_25 = 24;
-    private static final int INDEX_26 = 25;
-    private static final int INDEX_27 = 26;
-    private static final int INDEX_28 = 27;
-    private static final int INDEX_29 = 28;
-    private static final int INDEX_30 = 29;
-    private static final int INDEX_31 = 30;
-    private static final int INDEX_32 = 31;
-    private static final int INDEX_33 = 32;
-    private static final int INDEX_34 = 33;
     private final JigyohokokuCompYoshiki201Business business;
     private List<JigyohokokuCompResultEntity> list;
-    private int 合計 = 0;
+    private int 件数合計 = 0;
+    private int 請求額合計 = 0;
     private int 加算件数合計 = 0;
     private int 減算件数合計 = 0;
     private int 加算請求額合計 = 0;
@@ -117,7 +81,7 @@ public class JigyohokokuCompYoshiki251Report extends Report<JigyohokokuCompYoshi
     public JigyohokokuCompYoshiki251Report(JigyohokokuCompYoshiki201Business business) {
         this.business = business;
         list = new ArrayList<>();
-        for (int i = 0; i <= INDEX_34; i++) {
+        for (int i = 0; i <= INDEX_17; i++) {
             JigyohokokuCompResultEntity entity = new JigyohokokuCompResultEntity();
             list.add(entity);
         }
@@ -129,7 +93,6 @@ public class JigyohokokuCompYoshiki251Report extends Report<JigyohokokuCompYoshi
     public void writeBy(ReportSourceWriter<JigyohokokuCompYoshiki251ReportSource> writer) {
         RString 集計番号 = RString.EMPTY;
         RString 給付実績区分コード = RString.EMPTY;
-        RString kensuOrGaku = new RString("1");
         Collections.sort(business.get事業報告資料(), new Comparator<JigyohokokuCompYoshiki201Entity>() {
             @Override
             public int compare(JigyohokokuCompYoshiki201Entity entity1, JigyohokokuCompYoshiki201Entity entity2) {
@@ -145,7 +108,7 @@ public class JigyohokokuCompYoshiki251Report extends Report<JigyohokokuCompYoshi
             if (isValueChanged(entity.get縦番号(), entity.get横番号())) {
                 cleanValue();
             }
-            list = get縦番号1(kensuOrGaku, entity.get縦番号(), entity.get横番号(),
+            list = get縦番号(entity.get縦番号(), entity.get横番号(),
                     entity.get集計区分(), entity.get請求額());
             集計番号 = entity.get集計番号();
             給付実績区分コード = entity.get給付実績区分コード();
@@ -160,110 +123,80 @@ public class JigyohokokuCompYoshiki251Report extends Report<JigyohokokuCompYoshi
 
     }
 
-    private List<JigyohokokuCompResultEntity> get縦番号1(RString kensuOrGaku, RString 縦番号, RString 横番号, RString 集計区分, int 請求額) {
+    private List<JigyohokokuCompResultEntity> get縦番号(RString 縦番号, RString 横番号, RString 集計区分, int 請求額) {
         if (一行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_1, 集計区分, 請求額);
+            list = get横番号(横番号, INDEX_1, 集計区分, 請求額);
         } else if (二行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_2, 集計区分, 請求額);
+            list = get横番号(横番号, INDEX_2, 集計区分, 請求額);
         } else if (三行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_3, 集計区分, 請求額);
+            list = get横番号(横番号, INDEX_3, 集計区分, 請求額);
         } else if (四行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_4, 集計区分, 請求額);
+            list = get横番号(横番号, INDEX_4, 集計区分, 請求額);
         } else if (五行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_5, 集計区分, 請求額);
+            list = get横番号(横番号, INDEX_5, 集計区分, 請求額);
         } else if (六行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_6, 集計区分, 請求額);
+            list = get横番号(横番号, INDEX_6, 集計区分, 請求額);
         } else if (七行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_7, 集計区分, 請求額);
+            list = get横番号(横番号, INDEX_7, 集計区分, 請求額);
         } else if (八行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_8, 集計区分, 請求額);
+            list = get横番号(横番号, INDEX_8, 集計区分, 請求額);
         } else if (九行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_9, 集計区分, 請求額);
+            list = get横番号(横番号, INDEX_9, 集計区分, 請求額);
         } else if (十行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_10, 集計区分, 請求額);
+            list = get横番号(横番号, INDEX_10, 集計区分, 請求額);
         } else if (十一行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_11, 集計区分, 請求額);
+            list = get横番号(横番号, INDEX_11, 集計区分, 請求額);
         } else if (十二行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_12, 集計区分, 請求額);
+            list = get横番号(横番号, INDEX_12, 集計区分, 請求額);
         } else if (十三行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_13, 集計区分, 請求額);
+            list = get横番号(横番号, INDEX_13, 集計区分, 請求額);
         } else if (十四行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_14, 集計区分, 請求額);
+            list = get横番号(横番号, INDEX_14, 集計区分, 請求額);
         } else if (十五行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_15, 集計区分, 請求額);
+            list = get横番号(横番号, INDEX_15, 集計区分, 請求額);
         } else if (十六行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_16, 集計区分, 請求額);
+            list = get横番号(横番号, INDEX_16, 集計区分, 請求額);
         } else if (十七行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_17, 集計区分, 請求額);
+            list = get横番号(横番号, INDEX_17, 集計区分, 請求額);
         }
-        list = get縦番号2(new RString("2"), 縦番号, 横番号, 集計区分, 請求額);
         return list;
     }
 
-    private List<JigyohokokuCompResultEntity> get横番号(RString kensuOrGaku, RString 横番号, int index, RString 集計区分, int 請求額) {
+    private List<JigyohokokuCompResultEntity> get横番号(RString 横番号, int index, RString 集計区分, int 請求額) {
         JigyohokokuCompResultEntity entity = list.get(index);
         if (IchijiHanteiKekkaCode06.要支援1.getコード().equals(横番号)) {
-            entity.set要支援１(get合計(kensuOrGaku, 集計区分, 請求額));
+            entity.set要支援１(get件数合計(集計区分));
+            entity.set要支援１＿１(get請求額合計(集計区分, 請求額));
         } else if (IchijiHanteiKekkaCode06.要支援2.getコード().equals(横番号)) {
-            entity.set要支援２(get合計(kensuOrGaku, 集計区分, 請求額));
-        } else if (IchijiHanteiKekkaCode06.非該当.getコード().equals(横番号)) {
-            entity.set非該当(get合計(kensuOrGaku, 集計区分, 請求額));
+            entity.set要支援２(get件数合計(集計区分));
+            entity.set要支援２＿１(get請求額合計(集計区分, 請求額));
         } else if (IchijiHanteiKekkaCode06.経過的要介護.getコード().equals(横番号)) {
-            entity.set経過的要介護(get合計(kensuOrGaku, 集計区分, 請求額));
+            entity.set経過的要介護(get件数合計(集計区分));
+            entity.set経過的要介護＿１(get請求額合計(集計区分, 請求額));
         } else if (IchijiHanteiKekkaCode06.要介護1.getコード().equals(横番号)) {
-            entity.set要介護１(get合計(kensuOrGaku, 集計区分, 請求額));
+            entity.set要介護１(get件数合計(集計区分));
+            entity.set要介護１＿１(get請求額合計(集計区分, 請求額));
         } else if (IchijiHanteiKekkaCode06.要介護2.getコード().equals(横番号)) {
-            entity.set要介護２(get合計(kensuOrGaku, 集計区分, 請求額));
+            entity.set要介護２(get件数合計(集計区分));
+            entity.set要介護２＿１(get請求額合計(集計区分, 請求額));
         } else if (IchijiHanteiKekkaCode06.要介護3.getコード().equals(横番号)) {
-            entity.set要介護３(get合計(kensuOrGaku, 集計区分, 請求額));
+            entity.set要介護３(get件数合計(集計区分));
+            entity.set要介護３＿１(get請求額合計(集計区分, 請求額));
         } else if (IchijiHanteiKekkaCode06.要介護4.getコード().equals(横番号)) {
-            entity.set要介護４(get合計(kensuOrGaku, 集計区分, 請求額));
+            entity.set要介護４(get件数合計(集計区分));
+            entity.set要介護４＿１(get請求額合計(集計区分, 請求額));
         } else if (IchijiHanteiKekkaCode06.要介護5.getコード().equals(横番号)) {
-            entity.set要介護５(get合計(kensuOrGaku, 集計区分, 請求額));
+            entity.set要介護５(get件数合計(集計区分));
+            entity.set要介護５＿１(get請求額合計(集計区分, 請求額));
         }
         entity.set計１(entity.get要支援１() + entity.get要支援２());
-        entity.set計２(entity.get非該当() + entity.get経過的要介護() + entity.get要介護１() + entity.get要介護２()
+        entity.set計２(entity.get経過的要介護() + entity.get要介護１() + entity.get要介護２()
                 + entity.get要介護３() + entity.get要介護４() + entity.get要介護５());
         entity.set合計(entity.get計１() + entity.get計２());
-        return list;
-    }
-
-    private List<JigyohokokuCompResultEntity> get縦番号2(RString kensuOrGaku, RString 縦番号, RString 横番号, RString 集計区分, int 請求額) {
-        if (十八行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_18, 集計区分, 請求額);
-        } else if (十九行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_19, 集計区分, 請求額);
-        } else if (二十行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_20, 集計区分, 請求額);
-        } else if (二十一行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_21, 集計区分, 請求額);
-        } else if (二十二行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_22, 集計区分, 請求額);
-        } else if (二十三行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_23, 集計区分, 請求額);
-        } else if (二十四行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_24, 集計区分, 請求額);
-        } else if (二十五行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_25, 集計区分, 請求額);
-        } else if (二十六行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_26, 集計区分, 請求額);
-        } else if (二十七行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_27, 集計区分, 請求額);
-        } else if (二十八行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_28, 集計区分, 請求額);
-        } else if (二十九行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_29, 集計区分, 請求額);
-        } else if (三十行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_30, 集計区分, 請求額);
-        } else if (三十一行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_31, 集計区分, 請求額);
-        } else if (三十二行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_32, 集計区分, 請求額);
-        } else if (三十三行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_33, 集計区分, 請求額);
-        } else if (三十四行目.equals(縦番号)) {
-            list = get横番号(kensuOrGaku, 横番号, INDEX_34, 集計区分, 請求額);
-        }
+        entity.set計１＿１(entity.get要支援１＿１() + entity.get要支援２＿１());
+        entity.set計２＿１(entity.get経過的要介護＿１() + entity.get要介護１＿１() + entity.get要介護２＿１()
+                + entity.get要介護３＿１() + entity.get要介護４＿１() + entity.get要介護５＿１());
+        entity.set合計＿１(entity.get計１＿１() + entity.get計２＿１());
         return list;
     }
 
@@ -281,30 +214,32 @@ public class JigyohokokuCompYoshiki251Report extends Report<JigyohokokuCompYoshi
     }
 
     private void cleanValue() {
-        合計 = 0;
+        件数合計 = 0;
+        請求額合計 = 0;
         加算件数合計 = 0;
         減算件数合計 = 0;
         加算請求額合計 = 0;
         減算請求額合計 = 0;
     }
 
-    private int get合計(RString kensuOrGaku, RString 集計区分, int 請求額) {
-        if (件数_1.equals(kensuOrGaku)) {
-            if (集計区分_加算.equals(集計区分)) {
-                加算件数合計 = 加算件数合計 + 1;
-            } else if (集計区分_減算.equals(集計区分)) {
-                減算件数合計 = 減算件数合計 + 1;
-            }
-            合計 = 加算件数合計 - 減算件数合計;
-        } else if (請求額_2.equals(kensuOrGaku)) {
-            if (集計区分_加算.equals(集計区分)) {
-                加算請求額合計 = 加算請求額合計 + 請求額;
-            } else if (集計区分_減算.equals(集計区分)) {
-                減算請求額合計 = 減算請求額合計 + 請求額;
-            }
-            合計 = 加算件数合計 - 減算件数合計;
+    private int get件数合計(RString 集計区分) {
+        if (集計区分_加算.equals(集計区分)) {
+            加算件数合計 = 加算件数合計 + 1;
+        } else if (集計区分_減算.equals(集計区分)) {
+            減算件数合計 = 減算件数合計 + 1;
         }
-        return 合計;
+        件数合計 = 加算件数合計 - 減算件数合計;
+        return 件数合計;
+    }
+
+    private int get請求額合計(RString 集計区分, int 請求額) {
+        if (集計区分_加算.equals(集計区分)) {
+            加算請求額合計 = 加算請求額合計 + 請求額;
+        } else if (集計区分_減算.equals(集計区分)) {
+            減算請求額合計 = 減算請求額合計 + 請求額;
+        }
+        請求額合計 = 加算件数合計 - 減算件数合計;
+        return 請求額合計;
     }
 
 }
