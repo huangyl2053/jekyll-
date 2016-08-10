@@ -194,30 +194,7 @@ public class HanyoRisutoRiyoshaFutanWariaiProcess extends BatchProcessBase<Hanyo
             出力DB項目名.add(item.getDB項目名());
             出力DB項目.add(item.getDB項目名().concat(SPACE).concat(item.get昇降順().getOrder()));
         }
-        if (出力DB項目名.contains(HIHOKENSHANO) && 出力DB項目名.contains(RIREKIBANGO) && !出力DB項目名.contains(EDANO)) {
-            for (int index = 0; index < 出力DB項目.size(); index++) {
-                if (出力DB項目.get(index).startsWith(RIREKIBANGO)) {
-                    出力DB項目.add(index + 1, EDANO);
-                }
-            }
-        } else if (出力DB項目名.contains(HIHOKENSHANO) && !出力DB項目名.contains(RIREKIBANGO) && !出力DB項目名.contains(EDANO)) {
-            for (int index = 0; index < 出力DB項目.size(); index++) {
-                if (出力DB項目.get(index).startsWith(HIHOKENSHANO)) {
-                    出力DB項目.add(index + 1, RIREKIBANGO);
-                    出力DB項目.add(index + 2, EDANO);
-                }
-            }
-        } else if (!出力DB項目名.contains(HIHOKENSHANO) && 出力DB項目名.contains(RIREKIBANGO) && !出力DB項目名.contains(EDANO)) {
-            for (int index = 0; index < 出力DB項目.size(); index++) {
-                if (出力DB項目.get(index).startsWith(RIREKIBANGO)) {
-                    出力DB項目.add(index + 1, EDANO);
-                }
-            }
-        } else if (!出力DB項目名.contains(HIHOKENSHANO) && !出力DB項目名.contains(RIREKIBANGO) && !出力DB項目名.contains(EDANO)) {
-            出力DB項目.add(HIHOKENSHANO);
-            出力DB項目.add(RIREKIBANGO);
-            出力DB項目.add(EDANO);
-        }
+        出力DB項目 = edit出力DB項目(出力DB項目名, 出力DB項目);
         for (int j = 0; j < 出力DB項目.size(); j++) {
             if (j != 0) {
                 orderByClause = orderByClause.append(SPACE).append(COMMA).append(SPACE).append(出力DB項目.get(j));
@@ -659,6 +636,34 @@ public class HanyoRisutoRiyoshaFutanWariaiProcess extends BatchProcessBase<Hanyo
             builder.append(FUTANWARIAI_2);
         }
         return builder.toRString();
+    }
+
+    private List<RString> edit出力DB項目(List<RString> 出力DB項目名, List<RString> 出力DB項目) {
+        if (出力DB項目名.contains(HIHOKENSHANO) && 出力DB項目名.contains(RIREKIBANGO) && !出力DB項目名.contains(EDANO)) {
+            for (int index = 0; index < 出力DB項目.size(); index++) {
+                if (出力DB項目.get(index).startsWith(RIREKIBANGO)) {
+                    出力DB項目.add(index + 1, EDANO);
+                }
+            }
+        } else if (出力DB項目名.contains(HIHOKENSHANO) && !出力DB項目名.contains(RIREKIBANGO) && !出力DB項目名.contains(EDANO)) {
+            for (int index = 0; index < 出力DB項目.size(); index++) {
+                if (出力DB項目.get(index).startsWith(HIHOKENSHANO)) {
+                    出力DB項目.add(index + 1, RIREKIBANGO);
+                    出力DB項目.add(index + 2, EDANO);
+                }
+            }
+        } else if (!出力DB項目名.contains(HIHOKENSHANO) && 出力DB項目名.contains(RIREKIBANGO) && !出力DB項目名.contains(EDANO)) {
+            for (int index = 0; index < 出力DB項目.size(); index++) {
+                if (出力DB項目.get(index).startsWith(RIREKIBANGO)) {
+                    出力DB項目.add(index + 1, EDANO);
+                }
+            }
+        } else if (!出力DB項目名.contains(HIHOKENSHANO) && !出力DB項目名.contains(RIREKIBANGO) && !出力DB項目名.contains(EDANO)) {
+            出力DB項目.add(HIHOKENSHANO);
+            出力DB項目.add(RIREKIBANGO);
+            出力DB項目.add(EDANO);
+        }
+        return 出力DB項目;
     }
 
 }
