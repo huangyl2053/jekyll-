@@ -212,6 +212,9 @@ public class SeikatsuhogoJukyushaMybatisParameter implements IMyBatisParameter {
         }
         boolean has年齢範囲開始 = nullHandan(宛名抽出年齢開始);
         boolean has年齢範囲終了 = nullHandan(宛名抽出年齢終了);
+        if (!nullHandan(年齢基準日)) {
+            年齢基準日 = RDate.getNowDate();
+        }
         if (NenreiSoChushutsuHoho.年齢範囲.getコード().equals(年齢層抽出方法) && 宛名抽出年齢開始 != null) {
             宛名抽出生年月日終了 = 年齢基準日.minusYear(宛名抽出年齢開始.add(1).intValue()).plusDay(2);
         }
