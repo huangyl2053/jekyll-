@@ -37,7 +37,11 @@ public enum RiyoshaFutanWariaiHanteiTempType {
     /**
      * 世帯員把握入力Temp
      */
-    世帯員把握入力("SetainHakuNyuryokuTemp", "SetaiinJohoTempEntity"),
+    世帯員把握入力("SetainHakuNyuryokuTemp", "SetaiHaakuEntity"),
+    /**
+     * 世帯員所得情報Temp
+     */
+    世帯員所得情報("TmpSetaiShotoku", "SetaiShotokuEntity"),
     /**
      * 生活保護該当情報Temp
      */
