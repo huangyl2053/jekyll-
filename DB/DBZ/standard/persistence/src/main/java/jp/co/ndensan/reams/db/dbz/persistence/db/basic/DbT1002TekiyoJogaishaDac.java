@@ -93,7 +93,9 @@ public class DbT1002TekiyoJogaishaDac implements ISaveable<DbT1002TekiyoJogaisha
                                 eq(shikibetsuCode, 識別コード),
                                 (or(
                                         and(leq(tekiyoYMD, 年齢到達日), leq(年齢到達日, kaijoYMD)),
-                                        and(leq(tekiyoYMD, 年齢到達日), leq(kaijoYMD, null)))),
+                                        (or(and(leq(tekiyoYMD, 年齢到達日), eq(kaijoYMD, null)),
+                                                and(leq(tekiyoYMD, 年齢到達日), eq(kaijoYMD, ""))))
+                                )),
                                 eq(logicalDeletedFlag, 論理削除フラグ))).
                 toList(DbT1002TekiyoJogaishaEntity.class);
     }
