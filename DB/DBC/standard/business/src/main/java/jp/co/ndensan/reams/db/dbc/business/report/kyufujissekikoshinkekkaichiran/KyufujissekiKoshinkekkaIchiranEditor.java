@@ -144,8 +144,6 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
     private KyufujissekiKoshinkekkaIchiranSource editor給付実績_レコード件数(KyufujissekiKoshinkekkaIchiranSource source) {
         if (entity.get給付実績_レコード件数H1() >= NUM_1) {
             source.listUpper_11 = 図形_ONE;
-        } else {
-            source.listUpper_11 = RString.EMPTY;
         }
         if (entity.get給付実績_レコード件数D1() >= NUM_1
                 && entity.get給付実績_レコード件数DD() >= NUM_1) {
@@ -156,38 +154,24 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
         } else if (entity.get給付実績_レコード件数D1() == NUM_0
                 && entity.get給付実績_レコード件数DD() >= NUM_1) {
             source.listUpper_12 = 図形_THREE;
-        } else {
-            source.listUpper_12 = RString.EMPTY;
         }
         if (entity.get給付実績_レコード件数D2() >= NUM_1) {
             source.listUpper_13 = 図形_ONE;
-        } else {
-            source.listUpper_13 = RString.EMPTY;
         }
         if (entity.get給付実績_レコード件数D3() >= NUM_1) {
             source.listUpper_14 = 図形_ONE;
-        } else {
-            source.listUpper_14 = RString.EMPTY;
         }
         if (entity.get給付実績_レコード件数D4() >= NUM_1) {
             source.listUpper_15 = 図形_ONE;
-        } else {
-            source.listUpper_15 = RString.EMPTY;
         }
         if (entity.get給付実績_レコード件数D5() >= NUM_1) {
             source.listUpper_16 = 図形_ONE;
-        } else {
-            source.listUpper_16 = RString.EMPTY;
         }
         if (entity.get給付実績_レコード件数D6() >= NUM_1) {
             source.listUpper_17 = 図形_ONE;
-        } else {
-            source.listUpper_17 = RString.EMPTY;
         }
         if (entity.get給付実績_レコード件数D7() >= NUM_1) {
             source.listUpper_18 = 図形_ONE;
-        } else {
-            source.listUpper_18 = RString.EMPTY;
         }
         if (entity.get給付実績_レコード件数D8() >= NUM_1) {
             source.listUpper_19 = 図形_ONE;
@@ -212,9 +196,6 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
                 source.gokeiKensuTitle = 合計件数タイトル;
                 source.gokeiKensu = new RString(連番 - frontValue);
             }
-        } else {
-            source.gokeiKensuTitle = RString.EMPTY;
-            source.gokeiKensu = RString.EMPTY;
         }
         return source;
     }
@@ -222,23 +203,15 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
     private KyufujissekiKoshinkekkaIchiranSource editorAdd(KyufujissekiKoshinkekkaIchiranSource source) {
         if (entity.get給付実績_レコード件数T1() >= NUM_1) {
             source.listUpper_20 = 図形_ONE;
-        } else {
-            source.listUpper_20 = RString.EMPTY;
         }
         if (entity.get給付実績_レコード件数D9() >= NUM_1) {
             source.listUpper_21 = 図形_ONE;
-        } else {
-            source.listUpper_21 = RString.EMPTY;
         }
         if (entity.get給付実績_レコード件数DA() >= NUM_1) {
             source.listUpper_22 = 図形_ONE;
-        } else {
-            source.listUpper_22 = RString.EMPTY;
         }
         if (entity.get給付実績_レコード件数DC() >= NUM_1) {
             source.listUpper_23 = 図形_ONE;
-        } else {
-            source.listUpper_23 = RString.EMPTY;
         }
         if (NUM_ONE.equals(entity.get給付実績_警告区分コード())) {
             source.listUpper_24 = RString.EMPTY;
@@ -250,8 +223,6 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
             source.listLower_1 = entity.get給付実績_入力識別名称().substring(NUM_8, 入力識別名称Length);
         } else if (入力識別名称Length >= NUM_16) {
             source.listLower_1 = entity.get給付実績_入力識別名称().substring(NUM_8, NUM_16);
-        } else {
-            source.listLower_1 = RString.EMPTY;
         }
         int 宛名名称Length = entity.get被保険者_宛名名称().length();
         if (宛名名称Length < NUM_17) {
