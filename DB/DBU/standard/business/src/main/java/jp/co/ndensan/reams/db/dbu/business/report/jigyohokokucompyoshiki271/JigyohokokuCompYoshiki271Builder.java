@@ -11,19 +11,22 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 介護事業状況報告月報・保険給付決定状況（様式2-7-1）のBuilderクラスです。
  *
- * @reamsid_L DBU-5580-040　wanghuafeng
+ * @reamsid_L DBU-5580-040 wanghuafeng
  */
 public class JigyohokokuCompYoshiki271Builder implements IJigyohokokuCompYoshiki271Builder {
 
-    private final IJigyohokokuCompYoshiki271Editor editor;
+    private final IJigyohokokuCompYoshiki271Editor headeditor;
+    private final IJigyohokokuCompYoshiki271Editor bodyeditor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param editor {@link IJigyohokokuCompYoshiki271Editor}
+     * @param headeditor {@link IJigyohokokuCompYoshiki271Editor}
+     * @param bodyeditor {@link IJigyohokokuCompYoshiki271Editor}
      */
-    public JigyohokokuCompYoshiki271Builder(IJigyohokokuCompYoshiki271Editor editor) {
-        this.editor = editor;
+    public JigyohokokuCompYoshiki271Builder(IJigyohokokuCompYoshiki271Editor headeditor, IJigyohokokuCompYoshiki271Editor bodyeditor) {
+        this.headeditor = headeditor;
+        this.bodyeditor = bodyeditor;
     }
 
     /**
@@ -33,7 +36,7 @@ public class JigyohokokuCompYoshiki271Builder implements IJigyohokokuCompYoshiki
      */
     @Override
     public JigyohokokuCompYoshiki271ReportSource build() {
-        return ReportEditorJoiner.from(new JigyohokokuCompYoshiki271ReportSource()).join(editor).buildSource();
+        return ReportEditorJoiner.from(new JigyohokokuCompYoshiki271ReportSource()).join(headeditor).join(bodyeditor).buildSource();
     }
 
 }

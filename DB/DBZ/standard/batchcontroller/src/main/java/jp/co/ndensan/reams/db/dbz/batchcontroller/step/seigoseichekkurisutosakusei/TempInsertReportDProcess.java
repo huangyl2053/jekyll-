@@ -79,6 +79,9 @@ public class TempInsertReportDProcess extends BatchProcessBase<SeigoseiChekkuRis
 
     @Override
     protected void process(SeigoseiChekkuRisutoEntity entity) {
-        整合性チェック情報一時ファイルD.insert(SeigoseiChekkuRisutoBusiness.set整合性チェック情報一時ファイルD(entity));
+        SeigoseiChekkuTempTableBEntity seiEntity = SeigoseiChekkuRisutoBusiness.set整合性チェック情報一時ファイルD(entity);
+        if (seiEntity != null && seiEntity.get識別コード() != null) {
+            整合性チェック情報一時ファイルD.insert(seiEntity);
+        }
     }
 }

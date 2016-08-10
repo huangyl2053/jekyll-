@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
-
+<!--@reamsid_L DBD-1460-020 liuyl-->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninteishinsehhinseirirekininteikekkajoho.INinteishinsehhinseirirekininteikekkajohoMapper">
     <resultMap id="NNinteishinsehhinseirirekininteikekkajohoResult" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5610001.KoshinTaishoshaKanriEntity">
@@ -41,7 +40,8 @@
         AND LEFT(B."nijiHanteiNinteiYukoShuryoYMD",6)=#{対象月}
         </if>
         <if test="有効期間終了日を範囲指定する">
-            AND #{有効期間終了日From}<![CDATA[<=]]> B."nijiHanteiNinteiYukoShuryoYMD" <![CDATA[<=]]>#{有効期間終了日To}                 
+            AND #{有効期間終了日From}<![CDATA[<=]]> B."nijiHanteiNinteiYukoShuryoYMD"
+            AND B."nijiHanteiNinteiYukoShuryoYMD" <![CDATA[<=]]>#{有効期間終了日To}                 
         </if>
      AND A."shinseishoKanriNo" NOT IN (SELECT rgdb."DbT4131Tenshutsu"."shinseishoKanriNo" 
                                        FROM rgdb."DbT4131Tenshutsu"

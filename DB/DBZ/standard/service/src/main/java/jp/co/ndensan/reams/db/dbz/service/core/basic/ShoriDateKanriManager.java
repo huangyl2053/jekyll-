@@ -59,6 +59,38 @@ public class ShoriDateKanriManager {
      * @param 市町村コード ShichosonCode
      * @param 処理名 ShoriName
      * @param 処理枝番 ShoriEdaban
+     * @return ShoriDateKanri
+     */
+    @Transaction
+    public ShoriDateKanri get処理日付管理マスタ(
+            SubGyomuCode サブ業務コード,
+            LasdecCode 市町村コード,
+            RString 処理名,
+            RString 処理枝番) {
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(市町村コードメッセージ.toString()));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage(処理枝番メッセージ.toString()));
+
+        DbT7022ShoriDateKanriEntity entity = dac.select(
+                サブ業務コード,
+                市町村コード,
+                処理名,
+                処理枝番);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new ShoriDateKanri(entity);
+    }
+
+    /**
+     * 主キーに合致する処理日付管理マスタを返します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 市町村コード ShichosonCode
+     * @param 処理名 ShoriName
+     * @param 処理枝番 ShoriEdaban
      * @param 年度 Nendo
      * @param 年度内連番 NendoNaiRenban
      * @return ShoriDateKanri
@@ -115,18 +147,18 @@ public class ShoriDateKanriManager {
         requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(年度メッセージ.toString()));
         requireNonNull(年度内連番, UrSystemErrorMessages.値がnull.getReplacedMessage(年度内連番メッセージ.toString()));
 
-        DbT7022ShoriDateKanriEntity entity = dac.selectBySomeKeysLimits(
+        List<DbT7022ShoriDateKanriEntity> entityList = dac.selectBySomeKeys(
                 サブ業務コード,
                 処理名,
                 処理枝番,
                 年度,
                 年度内連番);
-        if (entity == null) {
+        if (entityList.isEmpty()) {
             return null;
         }
 
-        entity.initializeMd5();
-        return new ShoriDateKanri(entity);
+        entityList.get(0).initializeMd5();
+        return new ShoriDateKanri(entityList.get(0));
     }
 
     /**

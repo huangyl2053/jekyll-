@@ -48,12 +48,17 @@ public class JimuSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
     private IinShinsakaiIinJohoProcessParameter paramter;
     private JimuShinsakaiIinJohoMyBatisParameter myBatisParameter;
     private JimuSonotashiryoBusiness business;
+    private int shinsakaiOrder;
+    private int 存在ファイルindex;
+
     @BatchWriter
     private BatchReportWriter<SonotashiryoA4ReportSource> batchWriteA4;
     private ReportSourceWriter<SonotashiryoA4ReportSource> reportSourceWriterA4;
 
     @Override
     protected void initialize() {
+        shinsakaiOrder = -1;
+        存在ファイルindex = 0;
         myBatisParameter = paramter.toJimuShinsakaiIinJohoMyBatisParameter();
         myBatisParameter.setOrderKakuteiFlg(ShinsakaiOrderKakuteiFlg.確定.is介護認定審査会審査順確定());
         myBatisParameter.setShoriJotaiKubun0(ShoriJotaiKubun.通常.getコード());
@@ -67,9 +72,15 @@ public class JimuSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
 
     @Override
     protected void usualProcess(ShinsakaiSiryoKyotsuEntity entity) {
-        business = new JimuSonotashiryoBusiness(entity);
+        entity.setJimukyoku(true);
+        if (shinsakaiOrder != entity.getShinsakaiOrder()) {
+            存在ファイルindex = 0;
+        }
+        business = new JimuSonotashiryoBusiness(entity, 存在ファイルindex);
         SonotashiryoA4Report reportA4 = new SonotashiryoA4Report(business);
         reportA4.writeBy(reportSourceWriterA4);
+        存在ファイルindex = business.get存在ファイルIndex();
+        shinsakaiOrder = entity.getShinsakaiOrder();
     }
 
     @Override

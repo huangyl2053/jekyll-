@@ -81,7 +81,6 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
     private static final RString 定数_課税区分減免前 = new RString("課税区分（減免前）：");
     private static final RString 定数_課税区分減免後 = new RString("課税区分（減免後）：");
     private static final ReportId EUC_ID = new ReportId("DBB200034");
-    private static final RString ジョブ番号 = new RString("【ジョブ番号】");
     private static final RString CSV出力有無 = new RString("");
     private static final RString CODE = new RString("0003");
     private static final RString 定数_年度 = new RString("年度");
@@ -209,7 +208,8 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
         builder2.append(賦課年度);
         FlexibleYear 賦課年度2 = processParameter.get賦課年度();
         if (賦課年度2 != null && !賦課年度2.isEmpty()) {
-            builder2.append(賦課年度2.wareki().toDateString()).append(定数_年度);
+            builder2.append(賦課年度2.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK)
+                    .toDateString()).append(定数_年度);
         } else {
             builder2.append(RString.EMPTY);
         }
@@ -252,7 +252,7 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
                 EUC_ID.value(),
                 導入団体コード,
                 市町村名,
-                ジョブ番号.concat(String.valueOf(JobContextHolder.getJobId())),
+                new RString(String.valueOf(JobContextHolder.getJobId())),
                 日本語ファイル名,
                 出力件数,
                 CSV出力有無,
@@ -305,10 +305,7 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
         if (年齢PARAMETER.equals(processParameter.get宛名抽出条件().getAgeSelectKijun().get名称())) {
             builder.append(年齢SHOW);
             if (processParameter.get宛名抽出条件().getNenreiRange() != null) {
-                Decimal 年齢From = processParameter.get宛名抽出条件().getNenreiRange().getFrom();
-                Decimal 年齢To = processParameter.get宛名抽出条件().getNenreiRange().getTo();
-                builder.append(new RString(年齢From.toString())).append(定数_歳).append(LINE).
-                        append(new RString(年齢To.toString())).append(定数_歳).append(RString.FULL_SPACE);
+                set年齢(builder);
             } else {
                 builder.append(RString.FULL_SPACE);
             }
@@ -316,7 +313,7 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
             RDate 年齢基準日 = processParameter.get宛名抽出条件().getNenreiKijunbi();
             if (年齢基準日 != null) {
                 RString 変数_年齢基準日 = 年齢基準日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                        .fillType(FillType.ZERO).toDateString();
+                        .fillType(FillType.BLANK).toDateString();
                 builder.append(変数_年齢基準日).append(右記号);
             } else {
                 builder.append(RString.FULL_SPACE).append(右記号);
@@ -325,18 +322,43 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
         } else if (生年月日PARAMETER.equals(processParameter.get宛名抽出条件().getAgeSelectKijun().get名称())) {
             builder.append(生年月日SHOW);
             if (processParameter.get宛名抽出条件().getSeinengappiRange() != null) {
-                RDate 生年月日From = processParameter.get宛名抽出条件().getSeinengappiRange().getFrom();
-                RDate 生年月日To = processParameter.get宛名抽出条件().getSeinengappiRange().getTo();
-                RString 変数_生年月日From = 生年月日From.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                        .fillType(FillType.ZERO).toDateString();
-                RString 変数_生年月日To = 生年月日To.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                        .fillType(FillType.ZERO).toDateString();
-                builder.append(変数_生年月日From).append(LINE).append(変数_生年月日To);
+                set生年月日(builder);
             } else {
                 builder.append(RString.EMPTY);
             }
             出力条件.add(builder.toRString());
         }
+    }
+
+    private void set年齢(RStringBuilder builder) {
+        Decimal 年齢From = processParameter.get宛名抽出条件().getNenreiRange().getFrom();
+        Decimal 年齢To = processParameter.get宛名抽出条件().getNenreiRange().getTo();
+        RString 変数_年齢From = null;
+        RString 変数_年齢To = null;
+        if (年齢From != null) {
+            変数_年齢From = new RString(年齢From.toString());
+        }
+        if (年齢To != null) {
+            変数_年齢To = new RString(年齢To.toString());
+        }
+        builder.append(変数_年齢From).append(定数_歳).append(LINE).
+                append(変数_年齢To).append(定数_歳).append(RString.FULL_SPACE);
+    }
+
+    private void set生年月日(RStringBuilder builder) {
+        RDate 生年月日From = processParameter.get宛名抽出条件().getSeinengappiRange().getFrom();
+        RDate 生年月日To = processParameter.get宛名抽出条件().getSeinengappiRange().getTo();
+        RString 変数_生年月日From = null;
+        RString 変数_生年月日To = null;
+        if (生年月日From != null) {
+            変数_生年月日From = 生年月日From.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                    .fillType(FillType.BLANK).toDateString();
+        }
+        if (生年月日To != null) {
+            変数_生年月日To = 生年月日To.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                    .fillType(FillType.BLANK).toDateString();
+        }
+        builder.append(変数_生年月日From).append(LINE).append(変数_生年月日To);
     }
 
     private void set課税区分前後(RStringBuilder builder, List<RString> list) {

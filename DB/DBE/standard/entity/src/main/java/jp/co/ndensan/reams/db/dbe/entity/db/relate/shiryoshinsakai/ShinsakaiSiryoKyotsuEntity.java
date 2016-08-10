@@ -38,5 +38,12 @@ public class ShinsakaiSiryoKyotsuEntity {
     private RString riyoShisetsuJusho;
     private RString riyoShisetsuTelNo;
     private RDateTime imageSharedFileId;
+    private RString jutakuKaishu;
+    private RString tokubetsuKyufuService;
+    private RString zaitakuService;
+    private RString shuso;
+    private RString kazokuJokyo;
+    private RString kyojuKankyo;
+    private RString kikaiKiki;
     private boolean isJimukyoku;
 }

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -23,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class JimuSonotashiryoBusiness {
 
+    private final RString ファイル名_G0001 = new RString("G0001.png");
     private final ShinsakaiSiryoKyotsuEntity entity;
     private final List<RString> ファイル名List;
     private int index;
@@ -31,15 +33,16 @@ public class JimuSonotashiryoBusiness {
      * コンストラクタです。
      *
      * @param entity ShinsakaiSiryoKyotsuEntity
+     * @param 存在ファイルindex int
      */
-    public JimuSonotashiryoBusiness(ShinsakaiSiryoKyotsuEntity entity) {
+    public JimuSonotashiryoBusiness(ShinsakaiSiryoKyotsuEntity entity, int 存在ファイルindex) {
         this.entity = entity;
         if (!entity.isJimukyoku()) {
             this.ファイル名List = getその他資料マスキング後イメージファイル名();
         } else {
             this.ファイル名List = getその他資料原本イメージファイル名();
         }
-        index = 0;
+        index = 存在ファイルindex;
     }
 
     /**
@@ -124,6 +127,15 @@ public class JimuSonotashiryoBusiness {
     }
 
     /**
+     * 事務局概況特記イメージを取得します。
+     *
+     * @return 事務局概況特記イメージ
+     */
+    public RString get事務局概況特記イメージ() {
+        return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイル名_G0001);
+    }
+
+    /**
      * その他資料を取得します。
      *
      * @return その他資料
@@ -147,6 +159,15 @@ public class JimuSonotashiryoBusiness {
             }
         }
         return RString.EMPTY;
+    }
+
+    /**
+     * その他資料を取得します。
+     *
+     * @return その他資料
+     */
+    public int get存在ファイルIndex() {
+        return index;
     }
 
     private List<RString> getその他資料マスキング後イメージファイル名() {
@@ -229,5 +250,26 @@ public class JimuSonotashiryoBusiness {
         ファイル名.add(new RString("F1401F05_BAK.png"));
         ファイル名.add(new RString("F1401F06_BAK.png"));
         return ファイル名;
+    }
+
+    private RString 共有ファイルを引き出す(RDateTime イメージID, RString sharedFileName) {
+        RString imagePath = RString.EMPTY;
+        if (イメージID != null) {
+            imagePath = getFilePath(イメージID, sharedFileName);
+        }
+        return imagePath;
+    }
+
+    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
+        ReadOnlySharedFileEntryDescriptor descriptor
+                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
+                        sharedFileId);
+        try {
+            SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+        } catch (Exception e) {
+            return RString.EMPTY;
+        }
+        return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
     }
 }

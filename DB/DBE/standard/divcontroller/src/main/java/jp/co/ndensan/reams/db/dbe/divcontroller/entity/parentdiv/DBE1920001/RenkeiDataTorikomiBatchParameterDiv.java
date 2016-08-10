@@ -27,8 +27,6 @@ public class RenkeiDataTorikomiBatchParameterDiv extends PanelBatchParameter {
     private RadioButton radHoKaisei;
     @JsonProperty("dgTorikomiTaisho")
     private DataGrid<dgTorikomiTaisho_Row> dgTorikomiTaisho;
-    @JsonProperty("btnDataTorikomi")
-    private Button btnDataTorikomi;
     @JsonProperty("listHokennsha")
     private HokenshaListDiv listHokennsha;
 
@@ -72,24 +70,6 @@ public class RenkeiDataTorikomiBatchParameterDiv extends PanelBatchParameter {
     @JsonProperty("dgTorikomiTaisho")
     public void setDgTorikomiTaisho(DataGrid<dgTorikomiTaisho_Row> dgTorikomiTaisho) {
         this.dgTorikomiTaisho = dgTorikomiTaisho;
-    }
-
-    /*
-     * getbtnDataTorikomi
-     * @return btnDataTorikomi
-     */
-    @JsonProperty("btnDataTorikomi")
-    public Button getBtnDataTorikomi() {
-        return btnDataTorikomi;
-    }
-
-    /*
-     * setbtnDataTorikomi
-     * @param btnDataTorikomi btnDataTorikomi
-     */
-    @JsonProperty("btnDataTorikomi")
-    public void setBtnDataTorikomi(Button btnDataTorikomi) {
-        this.btnDataTorikomi = btnDataTorikomi;
     }
 
     /*

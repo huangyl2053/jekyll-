@@ -55,4 +55,5 @@ public class FutanGendogakuNinteiShinseishoHakkoIchiran {
     private FlexibleDate 住民となった日;
     private RString 住所地特例フラグ;
     private Decimal 非課税年金勘案額;
+    private Decimal ユニット型準個室;
 }

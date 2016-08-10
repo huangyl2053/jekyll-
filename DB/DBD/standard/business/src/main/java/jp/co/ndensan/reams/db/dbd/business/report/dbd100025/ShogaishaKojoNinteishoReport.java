@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd100025;
 
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd4030011.NinteishoJohoEntity;
+import jp.co.ndensan.reams.db.dbd.business.core.dbt4030011.NinteishoJohoBusiness;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100025.NinteishoJohoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -17,9 +17,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ShogaishaKojoNinteishoReport extends Report<NinteishoJohoReportSource> {
 
-    private final NinteishoJohoEntity target;
+    private final NinteishoJohoBusiness target;
 
-    public ShogaishaKojoNinteishoReport(NinteishoJohoEntity target) {
+    /**
+     * インスタンスを生成します。
+     *
+     * @param target NinteishoJohoBusiness
+     */
+    public ShogaishaKojoNinteishoReport(NinteishoJohoBusiness target) {
         this.target = target;
     }
 

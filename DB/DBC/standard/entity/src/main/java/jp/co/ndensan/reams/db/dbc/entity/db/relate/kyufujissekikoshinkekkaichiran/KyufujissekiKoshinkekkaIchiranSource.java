@@ -7,12 +7,14 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinkekkaichir
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 帳票設計_DBC200054_給付実績更新結果情報一覧表のReportSourceクラスです。
  *
- * @reamsid_L DBC-2470-010 sunhui
+ * @reamsid_L DBC-2470-010 surun
  */
 public class KyufujissekiKoshinkekkaIchiranSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
@@ -53,6 +55,8 @@ public class KyufujissekiKoshinkekkaIchiranSource implements IReportSource {
     public RString listUpper_3;
     @ReportItem(name = "listUpper_4", length = 2, order = 18)
     public RString listUpper_4;
+    @ReportPerson(id = "A")
+    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listUpper_5", length = 10, order = 19)
     public RString listUpper_5;
     @ReportItem(name = "listUpper_6", length = 30, order = 20)
@@ -109,4 +113,54 @@ public class KyufujissekiKoshinkekkaIchiranSource implements IReportSource {
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+
+    /**
+     * TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSourceのenum
+     */
+    public enum ReportSourceFields {
+
+        printTimeStamp,
+        shoriYM,
+        hokenshaNo,
+        hokenshaName,
+        shutsuryokujun1,
+        shutsuryokujun2,
+        shutsuryokujun3,
+        shutsuryokujun4,
+        shutsuryokujun5,
+        kaipage1,
+        kaipage2,
+        kaipage3,
+        kaipage4,
+        kaipage5,
+        listUpper_1,
+        listUpper_2,
+        listUpper_3,
+        listUpper_4,
+        listUpper_5,
+        listUpper_6,
+        listUpper_7,
+        listUpper_8,
+        listUpper_9,
+        listUpper_10,
+        listUpper_11,
+        listUpper_12,
+        listUpper_13,
+        listUpper_14,
+        listUpper_15,
+        listUpper_16,
+        listUpper_17,
+        listUpper_18,
+        listUpper_19,
+        listUpper_20,
+        listUpper_21,
+        listUpper_22,
+        listUpper_23,
+        listUpper_24,
+        listLower_1,
+        listLower_2,
+        listLower_3,
+        gokeiKensuTitle,
+        gokeiKensu
+    }
 }

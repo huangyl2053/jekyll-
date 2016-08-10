@@ -44,6 +44,33 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
     private static final boolean 論理削除フラグ = false;
 
     /**
+     * 主キーで国保連インターフェース管理を取得します(論理削除行ではない)。
+     *
+     * @param 処理状態区分 shoriJotaiKubun
+     * @param 交換情報識別番号 KokanShikibetsuNo
+     * @return DbT3104KokuhorenInterfaceKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT3104KokuhorenInterfaceKanriEntity select(
+            RString 処理状態区分,
+            RString 交換情報識別番号) throws NullPointerException {
+        requireNonNull(処理状態区分, UrSystemErrorMessages.値がnull.getReplacedMessage("処理状態区分"));
+        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3104KokuhorenInterfaceKanri.class).
+                where(and(
+                                eq(shoriJotaiKubun, 処理状態区分),
+                                eq(kokanShikibetsuNo, 交換情報識別番号),
+                                eq(isDeleted, 論理削除フラグ))).
+                order(by(DbT3104KokuhorenInterfaceKanri.shoriYM, Order.DESC)).limit(1).
+                toObject(DbT3104KokuhorenInterfaceKanriEntity.class);
+    }
+
+    /**
      * 主キーで国保連インターフェース管理を取得します。
      *
      * @param 処理年月 ShoriYM

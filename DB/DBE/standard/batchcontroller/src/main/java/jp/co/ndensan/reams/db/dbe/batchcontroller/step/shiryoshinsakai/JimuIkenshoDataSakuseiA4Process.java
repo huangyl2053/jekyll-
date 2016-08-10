@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShin
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoa3.Shujiiikensho1A4ReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -54,6 +55,8 @@ public class JimuIkenshoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsakai
     @Override
     protected void initialize() {
         myBatisParameter = paramter.toJimuShinsakaiIinJohoMyBatisParameter();
+        myBatisParameter.setShoriJotaiKubun0(ShoriJotaiKubun.通常.getコード());
+        myBatisParameter.setShoriJotaiKubun3(ShoriJotaiKubun.延期.getコード());
         myBatisParameter.setOrderKakuteiFlg(ShinsakaiOrderKakuteiFlg.確定.is介護認定審査会審査順確定());
     }
 
@@ -64,6 +67,7 @@ public class JimuIkenshoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsakai
 
     @Override
     protected void usualProcess(ShinsakaiSiryoKyotsuEntity entity) {
+        entity.setJimukyoku(true);
         business = new JimuShinsakaiWariateJohoBusiness(entity);
         Shujiiikensho1A4Report reportA4 = new Shujiiikensho1A4Report(business);
         reportA4.writeBy(reportSourceWriterA4);
@@ -117,12 +121,14 @@ public class JimuIkenshoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsakai
         RStringBuilder builder2 = new RStringBuilder();
         builder2.append("【介護認定審査会開催予定年月日】")
                 .append(" ")
-                .append(paramter.getShinsakaiKaisaiYoteiYMD().wareki());
+                .append(paramter.getShinsakaiKaisaiYoteiYMD().wareki().toDateString());
         RStringBuilder builder3 = new RStringBuilder();
         builder3.append("【介護認定審査会開催番号】")
                 .append(" ")
                 .append(paramter.getShinsakaiKaisaiNo());
         list.add(builder1.toRString());
+        list.add(builder2.toRString());
+        list.add(builder3.toRString());
         return list;
     }
 }

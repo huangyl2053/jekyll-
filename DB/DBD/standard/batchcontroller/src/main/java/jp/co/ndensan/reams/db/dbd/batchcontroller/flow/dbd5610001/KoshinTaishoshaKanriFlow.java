@@ -19,12 +19,13 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  */
 public class KoshinTaishoshaKanriFlow extends BatchFlowBase<KoshinTaishoshaKanriParameter> {
 
+    private static final String SELECT_TABLE = "slect_table";
+
     @Override
     protected void defineFlow() {
         executeStep(SELECT_TABLE);
 
     }
-    private static final String SELECT_TABLE = "slect_table";
 
     /**
      * 'バッチパラメータの取得を行います。
@@ -34,7 +35,7 @@ public class KoshinTaishoshaKanriFlow extends BatchFlowBase<KoshinTaishoshaKanri
     @Step(SELECT_TABLE)
     protected IBatchFlowCommand selectTable() {
         return loopBatch(KoshinTaishoshaKanriSelectTableProcess.class)
-                .arguments(getParameter().toKoshinTaishoshaKanriProcessParameter()).define();
+                .arguments(createProcessParameter()).define();
     }
 
     private KoshinTaishoshaKanriProcessParameter createProcessParameter() {

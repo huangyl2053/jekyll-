@@ -8,7 +8,7 @@
 
  <select id="getShinsakaiSiryoKyotsu"
          resultMap="Result_ShinsakaiSiryoKyotsu"
-         parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.KaisaiYoteiJohoMyBatisParameter"
+         parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter"
          fetchSize="500"
          resultOrdered="true">
         SELECT dbt5502."shinseishoKanriNo"
@@ -48,19 +48,11 @@
             AND #{bangoStart} <![CDATA[<=]]> dbt5502."shinsakaiOrder"
             AND dbt5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
         </if>
-        <if test="isSakuseiJokenHani">
-            AND (dbt5502."shinsakaiShiryoSakuseiYMD" IS NULL
-                OR dbt5502."shinsakaiShiryoSakuseiYMD" = '')
+        <if test="isSakuseiJokenTuika">
+            AND dbt5502."shinsakaiShiryoSakuseiYMD" IS NULL
         </if>
         ORDER BY
-        <choose>
-            <when test="isShuturyokuJunEmpty">
                 dbt5502."shinsakaiOrder"
-            </when>
-            <otherwise>
-                #{shuturyokuJun}
-            </otherwise>
-        </choose>
     </select>
 
     <resultMap id="Result_ShinsakaiSiryoKyotsu" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity" autoMapping="true">
@@ -109,7 +101,7 @@
         dbt5501."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
         LIMIT
         1
-    </select><!--
+    </select>
 
     <select id="getShinsakaiIinCode" resultMap="Result_ShinsakaiIinCode"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTuutishoMyBatisParameter" fetchSize="500"  resultOrdered="true">
@@ -173,7 +165,7 @@
         <result property="sonotaKikanCode" column="dbT5595_sonotaKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
-    <select id="get宛先情報" resultMap="resultMap宛先情報"
+   <select id="get宛先情報" resultMap="resultMap宛先情報"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTuutishoMyBatisParameter" fetchSize="500"  resultOrdered="true">
         SELECT
         dbT5595."shoKisaiHokenshaNo" AS dbT5595_shoKisaiHokenshaNo,
@@ -244,9 +236,8 @@
         rgdb."DbT5914SonotaKikanJoho" AS dbT5914
         WHERE dbT5914."sonotaKikanCode" = #{sonotaKikanCode}
         AND dbT5914."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
-    </select>-->
+    </select>
 
-            <!--resultMap="Result_NinteiShinseiJoho"-->
     <select id="getTokkiIranJoho"
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter"
@@ -478,28 +469,20 @@
       LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" dbt5121ZenZenkai
       ON dbt5121ZenZenkai."shinseishoKanriNo" = dbt5101Zenkai."shinseishoKanriNo"
       LEFT JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101ZenZenkai
-      ON dbt5101ZenZenkai."shinseishoKanriNo" = dbt5101Zenkai."shinseishoKanriNo"
+      ON dbt5121ZenZenkai."zenkaiShinseishoKanriNo" = dbt5101ZenZenkai."shinseishoKanriNo"
       LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" dbt5102ZenZenkai
-      ON dbt5102ZenZenkai."shinseishoKanriNo" = dbt5101Zenkai."shinseishoKanriNo"
-      WHERE dbt5502.shinsakaiKaisaiNo = #{shinsakaiKaisaiNo}
+      ON dbt5102ZenZenkai."shinseishoKanriNo" = dbt5101ZenZenkai."shinseishoKanriNo"
+      WHERE dbt5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
       AND dbt5502."shinsakaiOrderKakuteiFlag" = #{isOrderKakuteiFlg}
         <if test="isSakuseiJokenHani">
             AND #{bangoStart} <![CDATA[<=]]> dbt5502."shinsakaiOrder"
             AND dbt5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
         </if>
-        <if test="isSakuseiJokenHani">
-            AND (dbt5502."shinsakaiShiryoSakuseiYMD" IS NULL
-            OR dbt5502."shinsakaiShiryoSakuseiYMD" = '')
+        <if test="isSakuseiJokenTuika">
+            AND dbt5502."shinsakaiShiryoSakuseiYMD" IS NULL
         </if>
-<!--        ORDER BY
-        <choose>
-            <when test="isShuturyokuJun">
+        ORDER BY
                 dbt5502."shinsakaiOrder"
-            </when>
-            <otherwise>
-                #{shuturyokuJun}
-            </otherwise>
-        </choose>-->
     </select>
 
     <resultMap id="Result_ItiziHantei" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ItiziHanteiEntity" autoMapping="true">
@@ -573,9 +556,9 @@
         <result property="zShinseishoKanriNo" column="zShinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
     </resultMap>
 
-    <select id="get予防給付サービス"
+    <select id="getYoboService"
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter"
             fetchSize="500"
             resultOrdered="true">
         SELECT dbt5207."serviceJokyo"
@@ -583,13 +566,13 @@
         FROM rgdb."DbT5207NinteichosahyoServiceJokyo" dbt5207
         WHERE dbt5207."shinseishoKanriNo" = #{shinseishoKanriNo}
         AND dbt5207."ninteichosaRirekiNo" = #{ninteichosaRirekiNo}
-        AND dbt5207."remban" IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
+        AND dbt5207."remban" IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16)
         ORDER BY dbt5207."remban"
     </select>
 
-    <select id="get介護給付サービス"
+    <select id="getKaigoService"
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter"
             fetchSize="500"
             resultOrdered="true">
         SELECT dbt5207."serviceJokyo"
@@ -600,9 +583,9 @@
         ORDER BY dbt5207."remban"
     </select>
 
-    <select id="getサービス状況フラグ"
+    <select id="getServiceJokyoFlag"
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter"
             fetchSize="500"
             resultOrdered="true">
         SELECT dbt5208."serviceJokyoFlag"
@@ -612,23 +595,23 @@
         AND dbt5208."remban" = 1
     </select>
 
-    <select id="get特記事項"
+    <select id="getTokkijiko"
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter"
             fetchSize="500"
             resultOrdered="true">
-        SELECT dbt5205."ninteichosaRirekiNo"
+        SELECT dbt5205."ninteichosaTokkijikoNo"
         , dbt5205."ninteichosaTokkijikoRemban"
         FROM rgdb."DbT5205NinteichosahyoTokkijiko" AS dbt5205
         WHERE dbt5205."shinseishoKanriNo" = #{shinseishoKanriNo}
         AND dbt5205."ninteichosaRirekiNo" = #{ninteichosaRirekiNo}
-        ORDER BY dbt5205."ninteichosaRirekiNo"
+        ORDER BY dbt5205."ninteichosaTokkijikoNo"
         , dbt5205."ninteichosaTokkijikoRemban"
     </select>
 
-    <select id="get主治医意見書"
+    <select id="getIkenshoIkenItem"
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter"
             fetchSize="500"
             resultOrdered="true">
         SELECT dbt5304."remban",
@@ -639,9 +622,9 @@
         ORDER BY dbt5304."remban"
     </select>
 
-    <select id="get調査票調査項目"
+    <select id="getChosahyoChosaItem"
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter"
             fetchSize="500"
             resultOrdered="true">
         SELECT dbt5211."remban"
@@ -652,9 +635,9 @@
         ORDER BY dbt5211."remban"
     </select>
 
-    <select id="get前回調査票調査項目"
+    <select id="getZenkaiChosahyoChosaItem"
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter"
             fetchSize="500"
             resultOrdered="true">
         SELECT dbt5211."remban",
@@ -679,9 +662,9 @@
         ORDER BY dbt5211."remban"
     </select>
 
-    <select id="get現在状況"
+    <select id="getGenzaiJokyo"
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuRiyoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter"
             fetchSize="500"
             resultOrdered="true">
         SELECT dbt5210."remban"
@@ -693,7 +676,7 @@
         AND dbt5210."shisetsuRiyoFlag" = True
     </select>
 
-    <select id="get前回主治医意見書"
+<!--    <select id="getZenkaiIkenshoIkenItem"
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItem"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter"
             fetchSize="500"
@@ -718,7 +701,7 @@
         AND dbt5304."ikenshoIraiRirekiNo" = dbt5301."ikenshoIraiRirekiNo"
         WHERE dbt5101."shinseishoKanriNo" = #{shinseishoKanriNoZ}
         ORDER BY dbt5304."remban"
-    </select>
+    </select>-->
 
 <!--
 
@@ -916,7 +899,7 @@
             AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
         </if>
         <if test="isSakuseiJokenTuika">
-            AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+            AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
         </if>
         ORDER BY
         dbt5502."shinseishoKanriNo"
@@ -1261,7 +1244,7 @@
         dbT5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
     </select>
 
-    <select id="getHanteiJoho" resultMap="Result_HanteiJoho"
+-->    <select id="getHanteiJoho" resultMap="Result_HanteiJoho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter" fetchSize="500"  resultOrdered="true">
         SELECT
         dbt5502."shinsakaiOrder" AS dbt5502_shinsakaiOrder,
@@ -1283,7 +1266,8 @@
         rgdb."DbT5101NinteiShinseiJoho" AS dbt5101
         ON
         dbt5101."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
-        AND ( dbt5101."shoriJotaiKubun" = #{isShoriJotaiKubun0} OR dbt5101."shoriJotaiKubun" = #{isShoriJotaiKubun3} )
+        AND dbt5101."shoriJotaiKubun" IN
+        <foreach collection="shoriJotaiKubunList" item="code" open="(" separator="," close=")">#{code}</foreach>
         AND dbt5101."logicalDeletedFlag" = False
         INNER JOIN
         rgdb."DbT7051KoseiShichosonMaster" AS dbt7051
@@ -1320,15 +1304,16 @@
         dbt5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
         AND
         dbt5502."shinsakaiOrderKakuteiFlag" = #{isOrderKakuteiFlg}
+               <if test="isSakuseiJokenHani">
+            AND #{bangoStart} <![CDATA[<=]]> dbt5502."shinsakaiOrder"
+            AND dbt5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
+        </if>
+        <if test="isSakuseiJokenTuika">
+            AND dbt5502."shinsakaiShiryoSakuseiYMD" IS NULL
+        </if>
                     ORDER BY
-        <if test="isIsShuturyokuJun">
-           NinteiJoho.dbT5502_shinsakaiOrder
-        </if>
-        TODO 出力順　実装しない
-                        <if test="!isIsShuturyokuJun">
-           #{shuturyokuJun}
-        </if>
-    </select>-->
+           dbt5502."shinsakaiOrder"
+    </select>
 
     <select id="getShinsakaiIinJoho" resultMap="Result_ShinsakaiIinJoho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
@@ -1394,18 +1379,11 @@
             AND dbt5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
         </if>
         <if test="isSakuseiJokenTuika">
-            AND (dbt5502."shinsakaiShiryoSakuseiYMD" IS NULL
-                OR dbt5502."shinsakaiShiryoSakuseiYMD" = '')
+            AND dbt5502."shinsakaiShiryoSakuseiYMD" IS NULL
         </if>
         ORDER BY
-        <choose>
-            <when test="isShuturyokuJunEmpty">
                 dbt5502."shinsakaiOrder"
-            </when>
-            <otherwise>
-                #{shuturyokuJun}
-            </otherwise>
-        </choose>
+        LIMIT 50
     </select>
 
     <!--    <select id="getIinShimei" resultMap="Result_ShinsakaiIinJoho"
@@ -1431,7 +1409,7 @@
         WHERE
         dbt5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
         AND
-        (dbt5502."shinsakaiShiryoSakuseiYMD" = '' OR dbt5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+        dbt5502."shinsakaiShiryoSakuseiYMD" IS NULL
     </select>
 
     <select id="getShinsakaiKaisaiKekkaJoho" resultMap="Result_ShinsakaiKaisaiKekkaJoho"
@@ -1569,16 +1547,9 @@
         ON zenkaiJoho."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
         WHERE dbt5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
         AND dbt5502."shinsakaiOrderKakuteiFlag" = TRUE
-        <!--            ORDER BY
-        <if test="isIsShuturyokuJun">
-           NinteiJoho.dbT5502_shinsakaiOrder
-        </if>-->
-        <!--TODO 出力順　実装しない-->
-        <!--                <if test="!isIsShuturyokuJun">
-           #{shuturyokuJun}
-        </if>-->
     </select>
-<!--    <select id="getSelectByKey" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5501ShinsakaiKaisaiYoteiJohoMapper.ResultMap_DbT5501ShinsakaiKaisaiYoteiJohoEntity"
+
+    <select id="getSelectByKey" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5501ShinsakaiKaisaiYoteiJohoMapper.ResultMap_DbT5501ShinsakaiKaisaiYoteiJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinItiziHanteiMyBatisParameter" fetchSize="500"  resultOrdered="true">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5501ShinsakaiKaisaiYoteiJohoMapper.allColumns_DbT5501ShinsakaiKaisaiYoteiJoho" />
@@ -1587,9 +1558,10 @@
         WHERE
         "DbT5501ShinsakaiKaisaiYoteiJoho"."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
     </select>
+
     <resultMap id="Result_ShinsakaiIinCode" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinCodeEntity" autoMapping="true">
         <result property="shinsakaiIinCode" column="dbt5503_shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-    </resultMap>-->
+    </resultMap>
 
     <resultMap id="Result_ShinsakaiIinJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinJohoEntity" autoMapping="true">
         <result property="shinsakaiIinShimei" column="shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
@@ -1980,7 +1952,7 @@
         WHERE
         dbt5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
         AND
-        (dbt5502."shinsakaiShiryoSakuseiYMD" = '' OR dbt5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+        dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
     </select>
 
     <select id="getJimuShinsakaiKaisaiKekkaJoho" resultMap="Result_ShinsakaiKaisaiKekkaJoho"
@@ -2200,7 +2172,7 @@
             AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
         </if>
         <if test="isSakuseiJokenTuika">
-            AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+            AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
         </if>
                     ORDER BY
         <if test="isIsShuturyokuJun">
@@ -2235,7 +2207,7 @@
             AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
         </if>
         <if test="isSakuseiJokenTuika">
-            AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+            AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
         </if>
         ORDER BY
         dbt5502."shinseishoKanriNo"
@@ -2294,7 +2266,7 @@
             AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
         </if>
         <if test="isSakuseiJokenTuika">
-            AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+            AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
         </if>
         ORDER BY
         dbt5502."shinseishoKanriNo"
@@ -2372,7 +2344,7 @@
             AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
         </if>
         <if test="isSakuseiJokenTuika">
-            AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+            AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
         </if>
         ORDER BY
         dbt5502."shinseishoKanriNo"
@@ -2505,7 +2477,7 @@
             AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
         </if>
         <if test="isSakuseiJokenTuika">
-            AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+            AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
         </if>
         ORDER BY
         dbt5502."shinseishoKanriNo"
@@ -2608,7 +2580,7 @@
             AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
         </if>
         <if test="isSakuseiJokenTuika">
-            AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+            AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
         </if>
         ORDER BY
         dbt5502."shinseishoKanriNo"

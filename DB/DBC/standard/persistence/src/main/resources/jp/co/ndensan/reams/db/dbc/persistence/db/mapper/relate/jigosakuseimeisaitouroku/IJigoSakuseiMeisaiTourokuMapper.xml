@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： ビジネス_画面設計_DBC0120031_サービス利用票情報のマッピング用XMLです。 -->
-<!-- @reamsid_L DBC-1930-060 xupeng -->
+<!-- @reamsid_L DBC-1930-060 cuilin -->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jigosakuseimeisaitouroku.IJigoSakuseiMeisaiTourokuMapper">
     
@@ -44,8 +44,8 @@
             A."serviceShuruiCode" DESC
     </select>
     
-    <resultMap id="resultMap_ServiceRiyohyoEntity" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.ServiceRiyohyoEntity">
+    <resultMap id="resultMap_KyufuJikoSakuseiEntity" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KyufuJikoSakuseiEntity">
         <result property="事業者" column="事業者" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="サービス" column="サービス" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="単位" column="単位" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
@@ -66,7 +66,8 @@
         <result property="定額利用者負担単価金額" column="定額利用者負担単価金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="限度額対象外フラグ" column="限度額対象外フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    <select resultOrdered="true" id="getサービス利用票データ" resultMap="resultMap_ServiceRiyohyoEntity" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="getサービス利用票データ" resultMap="resultMap_KyufuJikoSakuseiEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.KyufuJikoSakuseiParameter" fetchSize="500">
         SELECT
             DbT7060KaigoJigyosha."jigyoshaName" AS 事業者,
             (CASE 
@@ -169,7 +170,7 @@
     </resultMap>
     
     <select resultOrdered="true" id="get区分限度額統計処理" resultMap="resultMap_KubunGendoEntity"
-            parameterType="java.util.Map" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.KubunGendoParameter" fetchSize="500">
         SELECT
             限度額."shikyuGendoTaniSu" as 支給限度単位数,
             二次予防事業対象者."tekiyoKaishiYMD" AS 適用開始年月日,

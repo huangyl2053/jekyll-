@@ -70,11 +70,11 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
     private void setLayer1Step1(FutangakuNinteiHakkoIchiranReportSource source) {
         source.printTimeStamp = get印刷日時();
         source.title = new RString("負担限度額認定証・決定通知書発行一覧表");
-        if (association != null) {
+        if (null != association) {
             source.hokenshaNo = this.association.get地方公共団体コード().value();
             source.hokenshaName = this.association.get市町村名();
         }
-        if (iOutputOrder != null) {
+        if (null != iOutputOrder) {
             List<ISetSortItem> 設定項目リスト = this.iOutputOrder.get設定項目リスト();
             source.shutsuryokujun1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
             source.shutsuryokujun2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
@@ -102,7 +102,7 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
     }
 
     private void setLayer1Step2(FutangakuNinteiHakkoIchiranReportSource source) {
-        if (帳票情報リスト != null && !帳票情報リスト.isEmpty()) {
+        if (null != 帳票情報リスト && !帳票情報リスト.isEmpty()) {
             FutangakuNinteiHakkoIchiranEntity 帳票情報 = this.帳票情報リスト.get(index);
             FlexibleDate 喪失年月日 = 帳票情報.get喪失年月日();
             if (null != 喪失年月日 && !喪失年月日.isEmpty()) {
@@ -111,8 +111,7 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
                 source.list_2 = RString.EMPTY;
             }
             source.list_3 = 帳票情報.get被保険者番号().value();
-            //TODO個人情報に、被保険者氏名がない
-//        source.list_4 = this.個人情報.get被保険者氏名();
+            source.list_4 = this.個人情報.get名称().getName().value();
             source.list_5 = this.個人情報.get住所().get住所();
             source.list_6 = 帳票情報.get申請日().wareki().toDateString();
             source.list_7 = 帳票情報.get決定日().wareki().toDateString();

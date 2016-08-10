@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  *
  * 【共有子Div】1号給付額減額ダイアログのcontrolクラスです。
  *
- * @reamsid_L DBD-0620-043 panxiaobo
+ * @reamsid_L DBD-3620-043 panxiaobo
  */
 public class KyufuGengaku1Go {
 

@@ -50,11 +50,11 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -108,6 +108,7 @@ public class HanyoRisutoRiyoshaFutanWariaiProcess extends BatchProcessBase<Hanyo
     private static final RString JUSYO = new RString("住所");
     private static final RString NENLEI = new RString("年齢");
     private static final RString SEINENGAPPI = new RString("生年月日");
+    private static final RString SAI = new RString("歳");
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hanyorisutoriyoshafutanwariai."
             + "IHanyoRisutoRiyoshaFutanWariaiMapper.get汎用リスト");
@@ -120,7 +121,7 @@ public class HanyoRisutoRiyoshaFutanWariaiProcess extends BatchProcessBase<Hanyo
     private FileSpoolManager manager;
     private RString eucFilePath;
     private HanyoRisutoRiyoshaFutanWariaiProcessParameter processParamter;
-    private EucCsvWriter<HanyoRisutoRiyoshaFutanWariaiEucCsvEntity> eucCsvWriter;
+    private CsvWriter<HanyoRisutoRiyoshaFutanWariaiEucCsvEntity> eucCsvWriter;
     private Association association;
     private HokenshaList hokenshaList;
     private List<PersonalData> personalDataList;
@@ -153,7 +154,7 @@ public class HanyoRisutoRiyoshaFutanWariaiProcess extends BatchProcessBase<Hanyo
     protected void createWriter() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("UzUDE0831EucAccesslogFileType.csv"));
-        eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.UTF_8withBOM).
@@ -193,24 +194,7 @@ public class HanyoRisutoRiyoshaFutanWariaiProcess extends BatchProcessBase<Hanyo
             出力DB項目名.add(item.getDB項目名());
             出力DB項目.add(item.getDB項目名().concat(SPACE).concat(item.get昇降順().getOrder()));
         }
-        if (出力DB項目名.contains(HIHOKENSHANO) && 出力DB項目名.contains(RIREKIBANGO) && !出力DB項目名.contains(EDANO)) {
-            for (int index = 0; index < 出力DB項目.size(); index++) {
-                if (出力DB項目.get(index).startsWith(RIREKIBANGO)) {
-                    出力DB項目.add(index + 1, EDANO);
-                }
-            }
-        } else if (出力DB項目名.contains(HIHOKENSHANO) && !出力DB項目名.contains(RIREKIBANGO) && !出力DB項目名.contains(EDANO)) {
-            for (int index = 0; index < 出力DB項目.size(); index++) {
-                if (出力DB項目.get(index).startsWith(HIHOKENSHANO)) {
-                    出力DB項目.add(index + 1, RIREKIBANGO);
-                    出力DB項目.add(index + 2, EDANO);
-                }
-            }
-        } else if (!出力DB項目名.contains(HIHOKENSHANO) && !出力DB項目名.contains(RIREKIBANGO) && !出力DB項目名.contains(EDANO)) {
-            出力DB項目.add(HIHOKENSHANO);
-            出力DB項目.add(RIREKIBANGO);
-            出力DB項目.add(EDANO);
-        }
+        出力DB項目 = edit出力DB項目(出力DB項目名, 出力DB項目);
         for (int j = 0; j < 出力DB項目.size(); j++) {
             if (j != 0) {
                 orderByClause = orderByClause.append(SPACE).append(COMMA).append(SPACE).append(出力DB項目.get(j));
@@ -568,12 +552,14 @@ public class HanyoRisutoRiyoshaFutanWariaiProcess extends BatchProcessBase<Hanyo
             builder.append(COLON);
             if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom()) {
                 builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom().toString()));
+                builder.append(SAI);
             }
             builder.append(SPACE);
             builder.append(カラ);
             if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo()) {
                 builder.append(SPACE);
                 builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo().toString()));
+                builder.append(SAI);
             }
         } else if (NenreiSoChushutsuHoho.生年月日範囲.equals(processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun())) {
             builder.append(SEINENGAPPI);
@@ -650,6 +636,34 @@ public class HanyoRisutoRiyoshaFutanWariaiProcess extends BatchProcessBase<Hanyo
             builder.append(FUTANWARIAI_2);
         }
         return builder.toRString();
+    }
+
+    private List<RString> edit出力DB項目(List<RString> 出力DB項目名, List<RString> 出力DB項目) {
+        if (出力DB項目名.contains(HIHOKENSHANO) && 出力DB項目名.contains(RIREKIBANGO) && !出力DB項目名.contains(EDANO)) {
+            for (int index = 0; index < 出力DB項目.size(); index++) {
+                if (出力DB項目.get(index).startsWith(RIREKIBANGO)) {
+                    出力DB項目.add(index + 1, EDANO);
+                }
+            }
+        } else if (出力DB項目名.contains(HIHOKENSHANO) && !出力DB項目名.contains(RIREKIBANGO) && !出力DB項目名.contains(EDANO)) {
+            for (int index = 0; index < 出力DB項目.size(); index++) {
+                if (出力DB項目.get(index).startsWith(HIHOKENSHANO)) {
+                    出力DB項目.add(index + 1, RIREKIBANGO);
+                    出力DB項目.add(index + 2, EDANO);
+                }
+            }
+        } else if (!出力DB項目名.contains(HIHOKENSHANO) && 出力DB項目名.contains(RIREKIBANGO) && !出力DB項目名.contains(EDANO)) {
+            for (int index = 0; index < 出力DB項目.size(); index++) {
+                if (出力DB項目.get(index).startsWith(RIREKIBANGO)) {
+                    出力DB項目.add(index + 1, EDANO);
+                }
+            }
+        } else if (!出力DB項目名.contains(HIHOKENSHANO) && !出力DB項目名.contains(RIREKIBANGO) && !出力DB項目名.contains(EDANO)) {
+            出力DB項目.add(HIHOKENSHANO);
+            出力DB項目.add(RIREKIBANGO);
+            出力DB項目.add(EDANO);
+        }
+        return 出力DB項目;
     }
 
 }

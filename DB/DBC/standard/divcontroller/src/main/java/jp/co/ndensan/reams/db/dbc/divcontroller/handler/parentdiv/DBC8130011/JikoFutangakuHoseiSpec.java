@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8130011;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8130011.JikoFutangakuHoseiDiv;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -222,50 +223,53 @@ public enum JikoFutangakuHoseiSpec implements IPredicate<JikoFutangakuHoseiDiv> 
         private static final RString MONTH_EIGHT = new RString("08");
         private static final RString MONTH_SEVEN = new RString("07");
 
-        private static boolean is被保険者氏名全角文字チェック(JikoFutangakuHoseiDiv div) {
+        public static boolean is被保険者氏名全角文字チェック(JikoFutangakuHoseiDiv div) {
             return !RString.isNullOrEmpty(div.getTxtHihokenshaName().getValue())
-                    && div.getTxtHihokenshaName().getValue().toString().length() * INT_2
-                    == div.getTxtHihokenshaName().getValue().toString().getBytes().length;
+                    && RStringUtil.is全角カナOnly(div.getTxtHihokenshaName().getValue());
         }
 
-        private static boolean is郵便番号チェック(JikoFutangakuHoseiDiv div) {
+        public static boolean is郵便番号チェック(JikoFutangakuHoseiDiv div) {
             return div.getTxtAtesakiYubinNO().getValue() != null
                     && div.getTxtAtesakiYubinNO().getValue().getColumnValue().length() == INT_7;
         }
 
-        private static boolean is住所チェック(JikoFutangakuHoseiDiv div) {
+        public static boolean is住所チェック(JikoFutangakuHoseiDiv div) {
             return !RString.isNullOrEmpty(div.getTxtAtesakiJusho().getValue())
-                    && div.getTxtAtesakiJusho().getValue().toString().length() * INT_2
-                    == div.getTxtAtesakiJusho().getValue().toString().getBytes().length;
+                    && RStringUtil.is全角カナOnly(div.getTxtAtesakiJusho().getValue());
         }
 
-        private static boolean is対象計算期間大小関係(JikoFutangakuHoseiDiv div) {
-            return div.getTxtTaishouKeisanKikan().getFromValue().isBeforeOrEquals(div.getTxtTaishouKeisanKikan().getToValue());
+        public static boolean is対象計算期間大小関係(JikoFutangakuHoseiDiv div) {
+            return div.getTxtTaishouKeisanKikan().getFromValue().isBeforeOrEquals(
+                    div.getTxtTaishouKeisanKikan().getToValue());
         }
 
-        private static boolean is被保険者期間大小関係(JikoFutangakuHoseiDiv div) {
-            return div.getTxtHihokenshaKikan().getFromValue().isBeforeOrEquals(div.getTxtHihokenshaKikan().getToValue());
+        public static boolean is被保険者期間大小関係(JikoFutangakuHoseiDiv div) {
+            return div.getTxtHihokenshaKikan().getFromValue().isBeforeOrEquals(
+                    div.getTxtHihokenshaKikan().getToValue());
         }
 
-        private static boolean is対象計算と被保険者期間大小関係開始(JikoFutangakuHoseiDiv div) {
-            return div.getTxtTaishouKeisanKikan().getFromValue().isBeforeOrEquals(div.getTxtHihokenshaKikan().getFromValue());
+        public static boolean is対象計算と被保険者期間大小関係開始(JikoFutangakuHoseiDiv div) {
+            return div.getTxtTaishouKeisanKikan().getFromValue().isBeforeOrEquals(
+                    div.getTxtHihokenshaKikan().getFromValue());
         }
 
-        private static boolean is対象計算と被保険者期間大小関係終了(JikoFutangakuHoseiDiv div) {
-            return div.getTxtTaishouKeisanKikan().getToValue().isBeforeOrEquals(div.getTxtHihokenshaKikan().getToValue());
+        public static boolean is対象計算と被保険者期間大小関係終了(JikoFutangakuHoseiDiv div) {
+            return div.getTxtTaishouKeisanKikan().getToValue().isBeforeOrEquals(
+                    div.getTxtHihokenshaKikan().getToValue());
         }
 
-        private static boolean is窓口払情報年月日大小関係(JikoFutangakuHoseiDiv div) {
-            return div.getTxtMadoguchiKaishiYMD().getValue().isBeforeOrEquals(div.getTxtMadoguchiShuryoYMD().getValue());
+        public static boolean is窓口払情報年月日大小関係(JikoFutangakuHoseiDiv div) {
+            return div.getTxtMadoguchiKaishiYMD().getValue().isBeforeOrEquals(
+                    div.getTxtMadoguchiShuryoYMD().getValue());
         }
 
-        private static boolean is対象計算期間開始の年度チェック(JikoFutangakuHoseiDiv div) {
+        public static boolean is対象計算期間開始の年度チェック(JikoFutangakuHoseiDiv div) {
             RYear 対象計算期間開始 = div.getTxtTaishouKeisanKikan().getFromValue().getNendo();
             RYear 対象年度 = div.getTxtTaishouNendo().getValue().getYear();
             return 対象計算期間開始.equals(対象年度);
         }
 
-        private static boolean is明細月チェック(JikoFutangakuHoseiDiv div) {
+        public static boolean is明細月チェック(JikoFutangakuHoseiDiv div) {
             RYear 対象年度 = div.getTxtTaishouNendo().getValue().getYear();
             RYearMonth 被保険者開始年月 = div.getTxtHihokenshaKikan().getFromValue().getYearMonth();
             RYearMonth 被保険者終了年月 = div.getTxtHihokenshaKikan().getToValue().getYearMonth();
@@ -274,13 +278,13 @@ public enum JikoFutangakuHoseiSpec implements IPredicate<JikoFutangakuHoseiDiv> 
             return 被保険者開始年月.isBeforeOrEquals(開始年月) && 終了年月.isBeforeOrEquals(被保険者終了年月);
         }
 
-        private static boolean is対象計算期間終了の年度チェック(JikoFutangakuHoseiDiv div) {
+        public static boolean is対象計算期間終了の年度チェック(JikoFutangakuHoseiDiv div) {
             RYear 対象計算期間終了 = div.getTxtTaishouKeisanKikan().getToValue().getNendo();
             RYear 対象年度 = div.getTxtTaishouNendo().getValue().getYear().plusYear(1);
             return 対象計算期間終了.equals(対象年度);
         }
 
-        private static boolean is開始時間_時間チェック(JikoFutangakuHoseiDiv div) {
+        public static boolean is開始時間_時間チェック(JikoFutangakuHoseiDiv div) {
             Decimal 時間 = div.getTxtMadoguchiKaishiJikan().getValue();
             if (時間 == null) {
                 return true;
@@ -289,7 +293,7 @@ public enum JikoFutangakuHoseiSpec implements IPredicate<JikoFutangakuHoseiDiv> 
             }
         }
 
-        private static boolean is開始時間_分チェック(JikoFutangakuHoseiDiv div) {
+        public static boolean is開始時間_分チェック(JikoFutangakuHoseiDiv div) {
             Decimal 分 = div.getTxtMadoguchiKaishiFun().getValue();
             if (分 == null) {
                 return true;
@@ -298,7 +302,7 @@ public enum JikoFutangakuHoseiSpec implements IPredicate<JikoFutangakuHoseiDiv> 
             }
         }
 
-        private static boolean is終了時間_時間チェック(JikoFutangakuHoseiDiv div) {
+        public static boolean is終了時間_時間チェック(JikoFutangakuHoseiDiv div) {
             Decimal 時間 = div.getTxtMadoguchiShuryoJikan().getValue();
             if (時間 == null) {
                 return true;
@@ -307,7 +311,7 @@ public enum JikoFutangakuHoseiSpec implements IPredicate<JikoFutangakuHoseiDiv> 
             }
         }
 
-        private static boolean is終了時間_分チェック(JikoFutangakuHoseiDiv div) {
+        public static boolean is終了時間_分チェック(JikoFutangakuHoseiDiv div) {
             Decimal 分 = div.getTxtMadoguchiShuryoFun().getValue();
             if (分 == null) {
                 return true;
@@ -316,28 +320,29 @@ public enum JikoFutangakuHoseiSpec implements IPredicate<JikoFutangakuHoseiDiv> 
             }
         }
 
-        private static boolean is判定コードより支払場所チェック(JikoFutangakuHoseiDiv div) {
+        public static boolean is判定コードより支払場所チェック(JikoFutangakuHoseiDiv div) {
             RString 判定コード = div.getTxtMadoguchiTaishoushaHantei().getValue();
-            return !(該当.equals(判定コード) && RString.isNullOrEmpty(div.getTxtMadoguchiShiharaiBasho().getValue()));
+            return !(該当.equals(判定コード) && RString.isNullOrEmpty(
+                    div.getTxtMadoguchiShiharaiBasho().getValue()));
         }
 
-        private static boolean is判定コードより開始日年月日チェック(JikoFutangakuHoseiDiv div) {
+        public static boolean is判定コードより開始日年月日チェック(JikoFutangakuHoseiDiv div) {
             RString 判定コード = div.getTxtMadoguchiTaishoushaHantei().getValue();
             return !(該当.equals(判定コード) && div.getTxtMadoguchiKaishiYMD().getValue() == null);
         }
 
-        private static boolean is判定コードより開始時間チェック(JikoFutangakuHoseiDiv div) {
+        public static boolean is判定コードより開始時間チェック(JikoFutangakuHoseiDiv div) {
             RString 判定コード = div.getTxtMadoguchiTaishoushaHantei().getValue();
             return !(該当.equals(判定コード) && (div.getTxtMadoguchiKaishiJikan().getValue() == null
                     || div.getTxtMadoguchiKaishiFun().getValue() == null));
         }
 
-        private static boolean is判定コードより終了日年月日チェック(JikoFutangakuHoseiDiv div) {
+        public static boolean is判定コードより終了日年月日チェック(JikoFutangakuHoseiDiv div) {
             RString 判定コード = div.getTxtMadoguchiTaishoushaHantei().getValue();
             return !(該当.equals(判定コード) && div.getTxtMadoguchiShuryoYMD().getValue() == null);
         }
 
-        private static boolean is判定コードより終了時間チェック(JikoFutangakuHoseiDiv div) {
+        public static boolean is判定コードより終了時間チェック(JikoFutangakuHoseiDiv div) {
             RString 判定コード = div.getTxtMadoguchiTaishoushaHantei().getValue();
             return !(該当.equals(判定コード) && (div.getTxtMadoguchiShuryoJikan().getValue() == null
                     || div.getTxtMadoguchiShuryoFun().getValue() == null));

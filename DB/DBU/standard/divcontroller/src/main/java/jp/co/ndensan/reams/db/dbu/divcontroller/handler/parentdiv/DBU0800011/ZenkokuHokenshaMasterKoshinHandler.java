@@ -16,8 +16,9 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 全国保険者マスタ更新のHandlerです。
  *
- * @author ChenXiangyu
+ * @reamsid_L DBU-4230-010 chenxiangyu
  */
 public class ZenkokuHokenshaMasterKoshinHandler {
 
@@ -57,6 +58,7 @@ public class ZenkokuHokenshaMasterKoshinHandler {
             }
             div.getDgHokenshas().getDataSource().add(row);
         }
+        div.getHokenshaIchiran().setHdnTodofuken(div.getHokenshaIchiran().getDdlTodofuken().getSelectedKey());
         div.getHokenshaIchiran().setDisplayNone(false);
         div.getHokenshaJoho().setDisplayNone(true);
     }
@@ -149,16 +151,5 @@ public class ZenkokuHokenshaMasterKoshinHandler {
             row.setJotai(追加状態);
             div.getDgHokenshas().getDataSource().add(row);
         }
-    }
-
-    /**
-     * 「削除状態」を設定します。
-     */
-    public void onClick_iconDelete() {
-        div.getHokenshaJoho().getTxtHokenshaNo().setReadOnly(true);
-        div.getHokenshaJoho().getTxtHokenshaName().setReadOnly(true);
-        div.getHokenshaJoho().getTxtHokenshaTelNo().setReadOnly(true);
-        div.getHokenshaJoho().getTxtHokenshaYubinNo().setReadOnly(true);
-        div.getHokenshaJoho().getTxtHokenshaJusho().setReadOnly(true);
     }
 }

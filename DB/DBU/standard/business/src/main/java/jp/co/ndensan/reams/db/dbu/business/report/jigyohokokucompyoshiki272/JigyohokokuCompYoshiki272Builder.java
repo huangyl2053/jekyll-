@@ -15,15 +15,18 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  */
 public class JigyohokokuCompYoshiki272Builder implements IJigyohokokuCompYoshiki272Builder {
 
-    private final IJigyohokokuCompYoshiki272Editor editor;
+    private final IJigyohokokuCompYoshiki272Editor headeditor;
+    private final IJigyohokokuCompYoshiki272Editor bodyeditor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param editor {@link IJigyohokokuCompYoshiki272Editor}
+     * @param headeditor {@link IJigyohokokuCompYoshiki272Editor}
+     * @param bodyeditor {@link IJigyohokokuCompYoshiki272Editor}
      */
-    public JigyohokokuCompYoshiki272Builder(IJigyohokokuCompYoshiki272Editor editor) {
-        this.editor = editor;
+    public JigyohokokuCompYoshiki272Builder(IJigyohokokuCompYoshiki272Editor headeditor, IJigyohokokuCompYoshiki272Editor bodyeditor) {
+        this.headeditor = headeditor;
+        this.bodyeditor = bodyeditor;
     }
 
     /**
@@ -33,7 +36,7 @@ public class JigyohokokuCompYoshiki272Builder implements IJigyohokokuCompYoshiki
      */
     @Override
     public JigyohokokuCompYoshiki272ReportSource build() {
-        return ReportEditorJoiner.from(new JigyohokokuCompYoshiki272ReportSource()).join(editor).buildSource();
+        return ReportEditorJoiner.from(new JigyohokokuCompYoshiki272ReportSource()).join(headeditor).join(bodyeditor).buildSource();
     }
 
 }

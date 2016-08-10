@@ -28,6 +28,7 @@ public class KoshinTaishoshaKanriHandler {
     private final KoshinTaishoshaKanriDiv div;
 
     /**
+     * コンストラクタです。
      *
      * @param div KoshinTaishoshaKanriDiv
      */
@@ -39,7 +40,8 @@ public class KoshinTaishoshaKanriHandler {
      * 画面初期化処理です。
      */
     public void onLoad() {
-        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().
+                getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (shichosonSecurityJoho != null) {
             LasdecCode 市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();
             ShoriDateKanriService shoriDateKanriService = ShoriDateKanriService.createInstance();
@@ -47,12 +49,9 @@ public class KoshinTaishoshaKanriHandler {
             if (shoriDateKanri != null) {
                 div.getZenkaiJoho().getTxtZenkaiShoriDate().setValue(shoriDateKanri.get基準日時().getDate());
                 div.getZenkaiJoho().getTxtZenkaiShoriYukokikan().setValue(shoriDateKanri.get対象終了日時().getDate());
-
             } else {
-
                 div.getZenkaiJoho().getTxtZenkaiShoriDate().clearValue();
                 div.getZenkaiJoho().getTxtZenkaiShoriYukokikan().clearValue();
-
             }
         } else {
             div.getZenkaiJoho().getTxtZenkaiShoriDate().clearValue();
@@ -68,13 +67,13 @@ public class KoshinTaishoshaKanriHandler {
      */
     public KoshinTaishoshaKanriParameter getParameter() {
         KoshinTaishoshaKanriParameter parameter = new KoshinTaishoshaKanriParameter();
-        if (div.getZenkaiJoho().getTxtTaishoTsuki().getText() != null) {
-            parameter.set対象月(new FlexibleDate(div.getZenkaiJoho().getTxtTaishoTsuki().getText()).getYearMonth());
-
+        if (div.getZenkaiJoho().getTxtTaishoTsuki().getValue() != null) {
+            parameter.set対象月(new FlexibleDate(div.getZenkaiJoho().getTxtTaishoTsuki().getValue().toDateString()).getYearMonth());
         } else {
             parameter.set対象月(FlexibleYearMonth.EMPTY);
         }
-        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().
+                getShichosonSecurityJoho(GyomuBunrui.介護事務);
         LasdecCode 市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();
         ShoriDateKanriService shoriDateKanriService = ShoriDateKanriService.createInstance();
         ShoriDateKanri shoriDateKanri = shoriDateKanriService.getDbT7022ShoriDateKanriEntity(市町村コード);

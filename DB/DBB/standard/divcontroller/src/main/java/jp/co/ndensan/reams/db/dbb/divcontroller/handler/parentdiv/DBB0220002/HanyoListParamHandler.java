@@ -49,6 +49,8 @@ public class HanyoListParamHandler {
     private final RString 定数3 = new RString("3");
     private final RString 定数4 = new RString("4");
     private final RString 定数5 = new RString("5");
+    private final RString 時間_START = new RString("00:00:00");
+    private final RString 時間_END = new RString("23:59:59");
     private static final int INDEX_ZERO = 0;
     private static final int INDEX_FOUR = 4;
 
@@ -108,11 +110,13 @@ public class HanyoListParamHandler {
         }
         if (div.getChushutsuJokenPanel() != null && div.getChushutsuJokenPanel().getTxtChushutsuKikan() != null
                 && div.getChushutsuJokenPanel().getTxtChushutsuKikan().getFromValue() != null) {
-            parameter.set抽出期間From(new YMDHMS(div.getChushutsuJokenPanel().getTxtChushutsuKikan().getFromValue(), RTime.now()));
+            parameter.set抽出期間From(new YMDHMS(div.getChushutsuJokenPanel().getTxtChushutsuKikan().getFromValue(),
+                    new RTime(時間_START)));
         }
         if (div.getChushutsuJokenPanel() != null && div.getChushutsuJokenPanel().getTxtChushutsuKikan() != null
                 && div.getChushutsuJokenPanel().getTxtChushutsuKikan().getToValue() != null) {
-            parameter.set抽出期間To(new YMDHMS(div.getChushutsuJokenPanel().getTxtChushutsuKikan().getToValue(), RTime.now()));
+            parameter.set抽出期間To(new YMDHMS(div.getChushutsuJokenPanel().getTxtChushutsuKikan().getToValue(),
+                    new RTime(時間_END)));
         }
         課税区分減免前後(parameter);
         宛名抽出条件と出力順と出力項目(parameter);
@@ -153,10 +157,10 @@ public class HanyoListParamHandler {
             }
             parameter.set課税区分減免前s(listコード課税区分減免前);
         }
-        if (div.getChushutsuJokenPanel() != null && div.getChushutsuJokenPanel().getChkKazeiKubunGenmenMae() != null
-                && div.getChushutsuJokenPanel().getChkKazeiKubunGenmenMae().getSelectedValues() != null) {
+        if (div.getChushutsuJokenPanel() != null && div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo() != null
+                && div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo().getSelectedValues() != null) {
             List<RString> listコード課税区分減免後 = new ArrayList<>();
-            List<RString> list課税区分減免後 = div.getChushutsuJokenPanel().getChkKazeiKubunGenmenMae().getSelectedValues();
+            List<RString> list課税区分減免後 = div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo().getSelectedValues();
             Iterator<RString> it減免後 = list課税区分減免後.iterator();
             while (it減免後.hasNext()) {
                 RString 減免後 = it減免後.next();
@@ -206,6 +210,7 @@ public class HanyoListParamHandler {
         div.getChushutsuPanel2().getCcdAtenaJoken().initialize();
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBB介護賦課, 出力順帳票ID);
         div.getCcdShutsuryokuKoumoku().load(出力項目帳票ID, SubGyomuCode.DBB介護賦課);
+        div.getCcdShutsuryokuKoumoku().setDisplayNone(false);
         div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setDisabled(false);
         div.getFukaNendo().getDdlFukaNendo().setDisabled(false);
         div.getChushutsuJokenPanel().getTxtChushutsuKikan().setDisabled(false);

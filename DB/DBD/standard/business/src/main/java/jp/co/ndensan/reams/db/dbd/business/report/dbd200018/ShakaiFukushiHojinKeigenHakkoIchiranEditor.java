@@ -75,19 +75,23 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
 
     private void setLayer1Step1(ShakaiFukushiHojinKeigenHakkoIchiranReportSource source) {
         source.printTimeStamp = get印刷日時();
-        source.hokenshaNo = this.association.get地方公共団体コード().value();
-        source.hokenshaName = this.association.get市町村名();
-        List<ISetSortItem> 設定項目リスト = this.iOutputOrder.get設定項目リスト();
-        source.shutsuryokujun1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
-        source.shutsuryokujun2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
-        source.shutsuryokujun3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
-        source.shutsuryokujun4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
-        source.shutsuryokujun5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
+        if (null != association) {
+            source.hokenshaNo = this.association.get地方公共団体コード().value();
+            source.hokenshaName = this.association.get市町村名();
+        }
+        if (null != iOutputOrder) {
+            List<ISetSortItem> 設定項目リスト = this.iOutputOrder.get設定項目リスト();
+            source.shutsuryokujun1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
+            source.shutsuryokujun2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
+            source.shutsuryokujun3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
+            source.shutsuryokujun4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
+            source.shutsuryokujun5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
+        }
         source.list_1 = new RString(String.valueOf(index + 1));
     }
 
     private void setLayer1Step2(ShakaiFukushiHojinKeigenHakkoIchiranReportSource source) {
-        if (帳票情報リスト != null && !帳票情報リスト.isEmpty()) {
+        if (null != 帳票情報リスト && !帳票情報リスト.isEmpty()) {
             ShakaiFukushiHojinKeigenHakkoIchiranEntity 帳票情報 = this.帳票情報リスト.get(index);
             KetteiKubun 決定 = 帳票情報.get決定();
             KetteiKubun 決定区分承認 = KetteiKubun.承認する;
@@ -104,9 +108,10 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
                 source.list_3 = RString.EMPTY;
             }
             source.list_4 = 帳票情報.get被保険者番号().getColumnValue();
-            //TODO個人情報に、被保険者氏名がない
-//        source.list_5 = this.個人情報.get被保険者氏名();
-            source.list_6 = this.個人情報.get住所().get住所();
+            if (null != 個人情報) {
+                source.list_5 = this.個人情報.get名称().getName().value();
+                source.list_6 = this.個人情報.get住所().get住所();
+            }
             source.list_7 = 帳票情報.get申請日().wareki().toDateString();
             source.list_8 = 帳票情報.get決定日().wareki().toDateString();
             source.list_9 = get適用日有効期限();
@@ -127,7 +132,6 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
                     && !帳票情報.get軽減率_分母().equals(new RString("0"))) {
                 Decimal 軽減率_分子 = new Decimal(帳票情報.get軽減率_分子().toString());
                 Decimal 軽減率_分母 = new Decimal(帳票情報.get軽減率_分母().toString());
-                //TODO軽減率_分母は0の場合、どんな情報表示されますか
                 source.list_12 = new RString(軽減率_分子.divide(軽減率_分母).toString());
             }
             if (決定.equals(決定区分承認しない)) {
@@ -137,7 +141,7 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
     }
 
     private void setLayer1Step3(ShakaiFukushiHojinKeigenHakkoIchiranReportSource source) {
-        if (帳票情報リスト != null && !帳票情報リスト.isEmpty()) {
+        if (null != 帳票情報リスト && !帳票情報リスト.isEmpty()) {
             ShakaiFukushiHojinKeigenHakkoIchiranEntity 帳票情報 = this.帳票情報リスト.get(index);
             KetteiKubun 決定 = 帳票情報.get決定();
             KetteiKubun 決定区分承認 = KetteiKubun.承認する;
@@ -167,7 +171,7 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
     }
 
     private void setLayer1Step4(ShakaiFukushiHojinKeigenHakkoIchiranReportSource source) {
-        if (帳票情報リスト != null && !帳票情報リスト.isEmpty()) {
+        if (null != 帳票情報リスト && !帳票情報リスト.isEmpty()) {
             ShakaiFukushiHojinKeigenHakkoIchiranEntity 帳票情報 = this.帳票情報リスト.get(index);
             if (帳票情報.is認定証発行フラグ() && 帳票情報.is認定証発行済み()) {
                 source.list_14 = new RString("○");

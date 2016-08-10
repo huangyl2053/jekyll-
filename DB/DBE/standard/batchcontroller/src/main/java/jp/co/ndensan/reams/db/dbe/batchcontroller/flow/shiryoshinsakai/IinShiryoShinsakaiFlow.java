@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.shiryoshinsakai;
 
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinHanteiDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinHanteiDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinIkenshoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinIkenshoDataSakuseiA4NihirameProcess;
@@ -15,18 +14,11 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinShinsa
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinShinsakaiIinJohoDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinSonotaJohoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinSonotaJohoDataSakuseiA4Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTokkiIranDataSakuseiA3Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTokkiIranDataSakuseiA4Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTokkiJikouDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTokkiJikouDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTokkiJikouItiziHanteiDataSakuseiA3Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTokkiJikouItiziHanteiDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTuikaSiryoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTuikaSiryoDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTuutishoDataSakuseiProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.ShinsakaiKaisaiYoteiJohoUpdateProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.SonotaJohoDataSakuseiA3Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.SonotaJohoDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.shiryoshinsakai.ShiryoShinsakaiBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -43,16 +35,15 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
     private static final String 委員_審査会開催通知書 = "iinTuutisho";
     private static final String 委員_特記事項 = "iinTokkiJikou";
     private static final String 委員_一次判定結果 = "iinItiziHantei";
-    private static final String 委員_特記事項_一次判定結果 = "iinTokkiJikouItiziHantei";
-    private static final String 委員_主治医意見書 = "iinIkensho";
+    private static final String 委員_主治医意見書_1枚目 = "iinIkensho_1";
+    private static final String 委員_主治医意見書_2枚目以降 = "iinIkensho_2";
+    private static final String 委員_主治医意見書_A3 = "iinIkensho";
     private static final String 委員_予備判定一覧 = "iinHantei";
     private static final String 委員_審査対象者一覧 = "iinShinsakaiIinJoho";
     private static final String 委員_追加資料鑑 = "iinTuikaSiryo";
-    private static final String 委員_概況特記 = "iinTokkiIran";
     private static final String 委員_その他資料 = "iinSonotaJoho";
-    private static final String 審査会開催予定情報更新 = "kousin";
+    private static final String 委員_特記事項_一次判定結果 = "iinTokkiJikouItiziHantei";
     private static final RString 選択 = new RString("1");
-//    private static final RString 作成条件_範囲指定 = new RString("範囲指定");
     private static final RString 作成条件_追加分 = new RString("追加分");
 
     @Override
@@ -63,51 +54,32 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
         if (選択.equals(getParameter().getChohyoIin_tokkiJikouFalg())) {
             executeStep(委員_特記事項);
         }
-        if (選択.equals(getParameter().getChohyoIin_ikenshoFalg())) {
-            executeStep(委員_主治医意見書);
+        if (選択.equals(getParameter().getChohyoIin_itiziHanteiFalg())) {
+            executeStep(委員_一次判定結果);
         }
-        if (作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
-            executeStep(委員_追加資料鑑);
+        if (選択.equals(getParameter().getChohyoIin_ikenshoFalg())) {
+            if (選択.equals(getParameter().getShuturyokuSutairu())) {
+                executeStep(委員_主治医意見書_1枚目);
+                executeStep(委員_主治医意見書_2枚目以降);
+            } else {
+                executeStep(委員_主治医意見書_A3);
+            }
         }
         if (選択.equals(getParameter().getChohyoIin_sonotaSiryoFalg())) {
             executeStep(委員_その他資料);
         }
-//        if (選択.equals(getParameter().getChohyoIin_gaikyouTokkiIranFalg())) {
-//            executeStep(委員_概況特記);
-//        }
-//        if (選択.equals(getParameter().getChoyoJimu_itiziHanteiFalg())) {
-//            executeStep(委員_一次判定結果);
-//        }
-//        if (選択.equals(getParameter().getChoyoJimu_hanteiFalg())) {
-//            executeStep(委員_予備判定一覧);
-//        }
-//
-//        if (選択.equals(getParameter().getChohyoIin_tuutishoFalg())
-//                && !作成条件_範囲指定.equals(getParameter().getSakuseiJoken())) {
-//            executeStep(委員_審査会開催通知書);
-//        }
-        if (選択.equals(getParameter().getChohyoIin_itiziHanteiFalg())
-                && 選択.equals(getParameter().getShuturyokuSutairu())) {
-            executeStep(委員_一次判定結果);
+        if (作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
+            executeStep(委員_追加資料鑑);
         }
-//        if (選択.equals(getParameter().getChohyoIin_tokkiJikouHanteiFalg())) {
-//            executeStep(委員_特記事項_一次判定結果);
-//        }
+        if (選択.equals(getParameter().getChohyoIin_tuutishoFalg())) {
+            executeStep(委員_審査会開催通知書);
+        }
         if (選択.equals(getParameter().getChohyoIin_hanteiFalg())) {
             executeStep(委員_予備判定一覧);
         }
-        if ((選択.equals(getParameter().getChohyoIin_tokkiJikouFalg())
-                && 選択.equals(getParameter().getChohyoIin_itiziHanteiFalg())
-                && 選択.equals(getParameter().getChohyoIin_ikenshoFalg()))
-                || (選択.equals(getParameter().getChohyoIin_tokkiJikouHanteiFalg())
-                && 選択.equals(getParameter().getChohyoIin_ikenshoFalg()))
-                && 作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
-            executeStep(委員_追加資料鑑);
+        if (選択.equals(getParameter().getChohyoIin_tokkiJikouHanteiFalg())) {
+            executeStep(委員_特記事項_一次判定結果);
         }
-////        // TODO　凌護行　 QA回答まち、帳票にRSE記載が不正、2016/07/10
-//////        executeStep(委員_概況特記);
-//        }
-        executeStep(審査会開催予定情報更新);
     }
 
     /**
@@ -128,13 +100,19 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
      */
     @Step(委員_特記事項)
     protected IBatchFlowCommand createIinTokkiJikouData() {
-        if (選択.equals(getParameter().getShuturyokuSutairu())) {
-            return loopBatch(IinTokkiJikouDataSakuseiA4Process.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-        } else {
-            return loopBatch(IinTokkiJikouDataSakuseiA3Process.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-        }
+        return loopBatch(IinTokkiJikouDataSakuseiA4Process.class)
+                .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
+    }
+
+    /**
+     * 委員特記事項+一次判定結果情報データの作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(委員_特記事項_一次判定結果)
+    protected IBatchFlowCommand createIinTokkiJikouItiziHanteiData() {
+        return loopBatch(IinTokkiJikouItiziHanteiDataSakuseiA3Process.class)
+                .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
     }
 
     /**
@@ -149,20 +127,14 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
     }
 
     /**
-     * 委員用特記事項と一次判定結果票情報データの作成を行います。
+     * 委員用主治医意見書情報データの作成を行います。
      *
      * @return バッチコマンド
      */
-    @Step(委員_特記事項_一次判定結果)
-    protected IBatchFlowCommand createIinTokkiJikouItiziHanteiData() {
-        if (選択.equals(getParameter().getShuturyokuSutairu())) {
-            return loopBatch(IinTokkiJikouItiziHanteiDataSakuseiA4Process.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-        } else {
-            return loopBatch(IinTokkiJikouItiziHanteiDataSakuseiA3Process.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-
-        }
+    @Step(委員_主治医意見書_1枚目)
+    protected IBatchFlowCommand createIinIkenshoData_A4_1() {
+        return loopBatch(IinIkenshoDataSakuseiA4Process.class)
+                .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
     }
 
     /**
@@ -170,17 +142,21 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
      *
      * @return バッチコマンド
      */
-    @Step(委員_主治医意見書)
-    protected IBatchFlowCommand createIinIkenshoData() {
-        if (選択.equals(getParameter().getShuturyokuSutairu())) {
-            loopBatch(IinIkenshoDataSakuseiA4Process.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-            return loopBatch(IinIkenshoDataSakuseiA4NihirameProcess.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-        } else {
-            return loopBatch(IinIkenshoDataSakuseiA3Process.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-        }
+    @Step(委員_主治医意見書_2枚目以降)
+    protected IBatchFlowCommand createIinIkenshoData_A4_2() {
+        return loopBatch(IinIkenshoDataSakuseiA4NihirameProcess.class)
+                .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
+    }
+
+    /**
+     * 委員用主治医意見書情報データの作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(委員_主治医意見書_A3)
+    protected IBatchFlowCommand createIinIkenshoData_A3() {
+        return loopBatch(IinIkenshoDataSakuseiA3Process.class)
+                .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
     }
 
     /**
@@ -190,13 +166,8 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
      */
     @Step(委員_予備判定一覧)
     protected IBatchFlowCommand createIinHanteiData() {
-        if (選択.equals(getParameter().getShuturyokuSutairu())) {
-            return loopBatch(IinHanteiDataSakuseiA4Process.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-        } else {
-            return loopBatch(IinHanteiDataSakuseiA3Process.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-        }
+        return loopBatch(IinHanteiDataSakuseiA4Process.class)
+                .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
     }
 
     /**
@@ -224,26 +195,10 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
     protected IBatchFlowCommand createIinTuikaSiryoData() {
         if (選択.equals(getParameter().getShuturyokuSutairu())) {
             return loopBatch(IinTuikaSiryoDataSakuseiA4Process.class)
-                    .arguments(getParameter().toIinTuikaSiryoProcessParameter()).define();
+                    .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
         } else {
             return loopBatch(IinTuikaSiryoDataSakuseiA3Process.class)
-                    .arguments(getParameter().toIinTuikaSiryoProcessParameter()).define();
-        }
-    }
-
-    /**
-     * 概況特記情報データの作成を行います。
-     *
-     * @return バッチコマンド
-     */
-    @Step(委員_概況特記)
-    protected IBatchFlowCommand createIinTokkiIranData() {
-        if (選択.equals(getParameter().getShuturyokuSutairu())) {
-            return loopBatch(IinTokkiIranDataSakuseiA4Process.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-        } else {
-            return loopBatch(IinTokkiIranDataSakuseiA3Process.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
+                    .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
         }
     }
 
@@ -255,26 +210,11 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
     @Step(委員_その他資料)
     protected IBatchFlowCommand createSonotaJohoData() {
         if (選択.equals(getParameter().getShuturyokuSutairu())) {
-            loopBatch(IinSonotaJohoDataSakuseiA4Process.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-            return loopBatch(SonotaJohoDataSakuseiA4Process.class)
+            return loopBatch(IinSonotaJohoDataSakuseiA4Process.class)
                     .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
         } else {
-            loopBatch(IinSonotaJohoDataSakuseiA3Process.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-            return loopBatch(SonotaJohoDataSakuseiA3Process.class)
+            return loopBatch(IinSonotaJohoDataSakuseiA3Process.class)
                     .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
         }
-    }
-
-    /**
-     * 審査会開催予定情報更新の作成を行います。
-     *
-     * @return バッチコマンド
-     */
-    @Step(審査会開催予定情報更新)
-    protected IBatchFlowCommand createKosinData() {
-        return loopBatch(ShinsakaiKaisaiYoteiJohoUpdateProcess.class)
-                .arguments(getParameter().toIinItiziHanteiProcessParameter()).define();
     }
 }

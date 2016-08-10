@@ -126,8 +126,8 @@ public class IchijihanteikekkahyoA3Entity {
     private List<TiyosaKekka> 第３群リスト;
     private List<TiyosaKekka> 第４群リスト;
     private List<TiyosaKekka> 第５群リスト;
-    private List<TokubetsunaIryoTiyosaKekka> 特別な医療リスト１;
-    private List<TokubetsunaIryoTiyosaKekka> 特別な医療リスト２;
+    private List<TiyosaKekka> 特別な医療リスト１;
+    private List<TiyosaKekka> 特別な医療リスト２;
     private List<TiyosaKekka> 主治医意見書;
     private RString 施設名テキスト;
     private RString 施設名イメージ;
@@ -136,11 +136,9 @@ public class IchijihanteikekkahyoA3Entity {
     private RString 電話番号テキスト;
     private RString 電話番号イメージ;
     private RString 申請書管理番号;
-
     private RString 概況調査テキスト_イメージ区分;
     private RString 概況特記のテキスト;
     private RString 概況特記のイメージ;
-
     private RString 特記事項テキスト_イメージ区分;
     private RString 特記パターン;
     private List<TokkiJikou> 特記事項_listChosa1;

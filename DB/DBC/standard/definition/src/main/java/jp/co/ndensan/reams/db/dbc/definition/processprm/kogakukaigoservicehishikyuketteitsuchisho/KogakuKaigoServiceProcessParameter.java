@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehishikyuketteitsuchisho;
 
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.KogakukaigoKetteiTsuchishoInfoTempParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -30,7 +31,6 @@ public class KogakuKaigoServiceProcessParameter implements IBatchProcessParamete
     private RString 印書;
     private RString 高額自動償還;
     private RDate 発行日;
-    private RDate 支払い予定日;
     private RString 文書番号;
     private RString テスト出力フラグ;
     private RString 決定日一括更新区分;
@@ -55,7 +55,6 @@ public class KogakuKaigoServiceProcessParameter implements IBatchProcessParamete
      * @param 印書 RString
      * @param 高額自動償還 RString
      * @param 発行日 RDate
-     * @param 支払い予定日 RDate
      * @param 文書番号 RString
      * @param テスト出力フラグ RString
      * @param 決定日一括更新区分 RString
@@ -77,7 +76,6 @@ public class KogakuKaigoServiceProcessParameter implements IBatchProcessParamete
             RString 印書,
             RString 高額自動償還,
             RDate 発行日,
-            RDate 支払い予定日,
             RString 文書番号,
             RString テスト出力フラグ,
             RString 決定日一括更新区分,
@@ -98,7 +96,6 @@ public class KogakuKaigoServiceProcessParameter implements IBatchProcessParamete
         this.印書 = 印書;
         this.高額自動償還 = 高額自動償還;
         this.発行日 = 発行日;
-        this.支払い予定日 = 支払い予定日;
         this.文書番号 = 文書番号;
         this.テスト出力フラグ = テスト出力フラグ;
         this.決定日一括更新区分 = 決定日一括更新区分;
@@ -112,5 +109,17 @@ public class KogakuKaigoServiceProcessParameter implements IBatchProcessParamete
         this.開始時間 = 開始時間;
         this.終了時間 = 終了時間;
         this.出力順ID = 出力順ID;
+    }
+
+    /**
+     * 高額サービス費支給（不支給）決定通知書作成のバッチのパラメータ作成するメソッドです。
+     *
+     * @return KogakukaigoKetteiTsuchishoInfoTempParameter パラメータ
+     */
+    public KogakukaigoKetteiTsuchishoInfoTempParameter toパラメータ() {
+        return new KogakukaigoKetteiTsuchishoInfoTempParameter(抽出モード, 抽出条件日付From, 抽出条件日付To,
+                決定者受付年月, 印書, 高額自動償還, 発行日, 文書番号, テスト出力フラグ, 決定日一括更新区分,
+                決定日, 利用者向け決定通知書フラグ, 受領委任者向け決定通知書フラグ, 振込予定日, 支払場所,
+                支払期間From, 支払期間To, 開始時間, 終了時間, 出力順ID);
     }
 }

@@ -33,11 +33,6 @@ public class ShoriKekkaKakuninListReport extends Report<ShoriKekkaKakuninListRep
         this.bodyItemList = itemList;
     }
 
-    /**
-     * 処理確認リストのwriteBy
-     *
-     * @param writer writer
-     */
     @Override
     public void writeBy(ReportSourceWriter<ShoriKekkaKakuninListReportSource> writer) {
 

@@ -55,8 +55,8 @@ public class ShinsakaiJIzenshinsakekkaIchiranManager {
      * @return 更新結果
      */
     public boolean saveCsvDataInput(ShinsakaiJizenKekkaJoho 審査会事前審査結果) {
-        requireNonNull(審査会事前審査結果, UrSystemErrorMessages.値がnull.getReplacedMessage("審査会事前審査結果"));
-        if (審査会事前審査結果.hasChanged()) {
+        requireNonNull(審査会事前審査結果, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会事前審査結果情報エンティティ"));
+        if (!審査会事前審査結果.hasChanged()) {
             return false;
         }
         return 1 == dac.save(審査会事前審査結果.toEntity());

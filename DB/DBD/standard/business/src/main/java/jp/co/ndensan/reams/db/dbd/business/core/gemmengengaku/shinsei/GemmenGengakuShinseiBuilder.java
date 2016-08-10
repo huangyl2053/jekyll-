@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * {@link GemmenGengakuShinsei}の編集を行うビルダークラスです。
@@ -40,6 +41,18 @@ public class GemmenGengakuShinseiBuilder {
         this.entity = entity.clone();
         this.id = id;
 
+    }
+
+    /**
+     * EntityDataStateを設定します
+     *
+     * @param state EntityDataState
+     * @return {@link GemmenGengakuShinseiBuilder}
+     */
+    public GemmenGengakuShinseiBuilder setState(EntityDataState state) {
+        requireNonNull(state, UrSystemErrorMessages.値がnull.getReplacedMessage("EntityDataState"));
+        entity.setState(state);
+        return this;
     }
 
     /**

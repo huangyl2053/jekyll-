@@ -67,11 +67,11 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -147,6 +147,7 @@ public class HanyoRisutoKokiKoreishaProcess extends BatchProcessBase<HanyoRisuto
     private static final RString GYOSEIKU = new RString("行政区");
     private static final RString JUSYO = new RString("住所");
     private static final RString NENLEI = new RString("年齢");
+    private static final RString SAI = new RString("歳");
     private static final RString SEINENGAPPI = new RString("生年月日");
     private static final RString SPACE = new RString(" ");
     private static final RString COMMA = new RString(",");
@@ -160,7 +161,7 @@ public class HanyoRisutoKokiKoreishaProcess extends BatchProcessBase<HanyoRisuto
     private FileSpoolManager manager;
     private RString eucFilePath;
     private HanyoRisutoKokiKoreishaProcessParameter processParamter;
-    private EucCsvWriter<HanyoRisutoKokiKoreishaEucCsvEntity> eucCsvWriter;
+    private CsvWriter<HanyoRisutoKokiKoreishaEucCsvEntity> eucCsvWriter;
     private Association association;
     private HokenshaList hokenshaList;
     private List<PersonalData> personalDataList;
@@ -192,7 +193,7 @@ public class HanyoRisutoKokiKoreishaProcess extends BatchProcessBase<HanyoRisuto
     protected void createWriter() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("HanyoList_KokiKoreisha.csv"));
-        eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.UTF_8withBOM).
@@ -1075,12 +1076,14 @@ public class HanyoRisutoKokiKoreishaProcess extends BatchProcessBase<HanyoRisuto
             builder.append(COLON);
             if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom()) {
                 builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom().toString()));
+                builder.append(SAI);
             }
             builder.append(SPACE);
             builder.append(カラ);
             if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo()) {
                 builder.append(SPACE);
                 builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo().toString()));
+                builder.append(SAI);
             }
         } else if (NenreiSoChushutsuHoho.生年月日範囲.equals(processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun())) {
             builder.append(SEINENGAPPI);

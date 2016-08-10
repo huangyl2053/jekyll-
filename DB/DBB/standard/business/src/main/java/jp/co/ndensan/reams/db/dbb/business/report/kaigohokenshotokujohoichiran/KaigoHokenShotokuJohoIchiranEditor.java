@@ -112,14 +112,14 @@ public class KaigoHokenShotokuJohoIchiranEditor implements IKaigoHokenShotokuJoh
         set出力順(source);
         set改ページ(source);
         source.listIchiranhyoUpper_1 = new RString(String.valueOf(連番));
-        if (所得情報一覧.get識別コード() != null) {
-            source.listIchiranhyoUpper_2 = new RString(所得情報一覧.get識別コード().toString());
+        if (所得情報一覧.getShikibetsuCode() != null) {
+            source.listIchiranhyoUpper_2 = new RString(所得情報一覧.getShikibetsuCode().toString());
         }
-        if (所得情報一覧.getカナ名称() != null) {
-            source.listIchiranhyoUpper_3 = 所得情報一覧.getカナ名称().getColumnValue();
+        if (所得情報一覧.getKanaMeisho() != null) {
+            source.listIchiranhyoUpper_3 = 所得情報一覧.getKanaMeisho().getColumnValue();
         }
-        if (所得情報一覧.get所得年度() != null) {
-            source.listIchiranhyoUpper_4 = 所得情報一覧.get所得年度().wareki().toDateString();
+        if (所得情報一覧.getShotokuNendo() != null) {
+            source.listIchiranhyoUpper_4 = 所得情報一覧.getShotokuNendo().wareki().toDateString();
         }
         set生年月日(source);
         set性別コード(source);
@@ -133,22 +133,22 @@ public class KaigoHokenShotokuJohoIchiranEditor implements IKaigoHokenShotokuJoh
             source.listIchiranhyoUpper_8 = RString.EMPTY;
         }
         source.listIchiranhyoUpper_9 = DecimalFormatter
-                .toコンマ区切りRString(null判断(所得情報一覧.get合計所得金額()), 0);
+                .toコンマ区切りRString(null判断(所得情報一覧.getGokeiShotokuGaku()), 0);
         source.listIchiranhyoUpper_10 = DecimalFormatter
-                .toコンマ区切りRString(null判断(所得情報一覧.get課税所得額()), 0);
+                .toコンマ区切りRString(null判断(所得情報一覧.getKazeiShotokuGaku()), 0);
         set登録業務(source);
-        if (所得情報一覧.get被保険者番号() != null) {
-            source.listIchiranhyoLower_1 = 所得情報一覧.get被保険者番号().getColumnValue();
+        if (所得情報一覧.getHihokenshaNo() != null) {
+            source.listIchiranhyoLower_1 = 所得情報一覧.getHihokenshaNo().getColumnValue();
         }
-        if (所得情報一覧.get名称() != null) {
-            source.listIchiranhyoLower_2 = 所得情報一覧.get名称().getColumnValue();
+        if (所得情報一覧.getMeisho() != null) {
+            source.listIchiranhyoLower_2 = 所得情報一覧.getMeisho().getColumnValue();
         }
-        source.listIchiranhyoLower_3 = new RString(String.valueOf(所得情報一覧.get年齢()));
+        source.listIchiranhyoLower_3 = new RString(String.valueOf(所得情報一覧.getAge()));
         set住民種別(source);
         source.listIchiranhyoLower_5 = DecimalFormatter
-                .toコンマ区切りRString(null判断(所得情報一覧.get公的年金収入額()), 0);
+                .toコンマ区切りRString(null判断(所得情報一覧.getNenkiniShunyuGaku()), 0);
         source.listIchiranhyoLower_6 = DecimalFormatter
-                .toコンマ区切りRString(null判断(所得情報一覧.get公的年金所得額()), 0);
+                .toコンマ区切りRString(null判断(所得情報一覧.getNenkiniShotokuGaku()), 0);
         RString 作成年月 = new FlexibleDate(YMDHMS.now().toString().substring(NUM_0, NUM_8))
                 .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().substring(NUM_0, NUM_8);
@@ -159,17 +159,17 @@ public class KaigoHokenShotokuJohoIchiranEditor implements IKaigoHokenShotokuJoh
     }
 
     private void set住民種別(KaigoHokenShotokuJohoIchiranSource source) {
-        if (所得情報一覧.get住民種別コード().equals(JuminShubetsu.住登外個人_外国人.getCode())) {
+        if (所得情報一覧.getJuminShubetsuCode().equals(JuminShubetsu.住登外個人_外国人.getCode())) {
             source.listIchiranhyoLower_4 = JuminShubetsu.住登外個人_外国人.toRString();
-        } else if (所得情報一覧.get住民種別コード().equals(JuminShubetsu.住登外個人_日本人.getCode())) {
+        } else if (所得情報一覧.getJuminShubetsuCode().equals(JuminShubetsu.住登外個人_日本人.getCode())) {
             source.listIchiranhyoLower_4 = JuminShubetsu.住登外個人_日本人.toRString();
-        } else if (所得情報一覧.get住民種別コード().equals(JuminShubetsu.共有者.getCode())) {
+        } else if (所得情報一覧.getJuminShubetsuCode().equals(JuminShubetsu.共有者.getCode())) {
             source.listIchiranhyoLower_4 = JuminShubetsu.共有者.toRString();
-        } else if (所得情報一覧.get住民種別コード().equals(JuminShubetsu.外国人.getCode())) {
+        } else if (所得情報一覧.getJuminShubetsuCode().equals(JuminShubetsu.外国人.getCode())) {
             source.listIchiranhyoLower_4 = JuminShubetsu.外国人.toRString();
-        } else if (所得情報一覧.get住民種別コード().equals(JuminShubetsu.日本人.getCode())) {
+        } else if (所得情報一覧.getJuminShubetsuCode().equals(JuminShubetsu.日本人.getCode())) {
             source.listIchiranhyoLower_4 = JuminShubetsu.日本人.toRString();
-        } else if (所得情報一覧.get住民種別コード().equals(JuminShubetsu.法人.getCode())) {
+        } else if (所得情報一覧.getJuminShubetsuCode().equals(JuminShubetsu.法人.getCode())) {
             source.listIchiranhyoLower_4 = JuminShubetsu.法人.toRString();
         } else {
             source.listIchiranhyoLower_4 = RString.EMPTY;
@@ -177,9 +177,9 @@ public class KaigoHokenShotokuJohoIchiranEditor implements IKaigoHokenShotokuJoh
     }
 
     private void set登録業務(KaigoHokenShotokuJohoIchiranSource source) {
-        if (所得情報一覧.get登録業務().equals(TorokuGyomu.介護保険.getコード())) {
+        if (所得情報一覧.getTorokuGyomu().equals(TorokuGyomu.介護保険.getコード())) {
             source.listIchiranhyoUpper_11 = TorokuGyomu.介護保険.get名称();
-        } else if (所得情報一覧.get登録業務().equals(TorokuGyomu.住民税.getコード())) {
+        } else if (所得情報一覧.getTorokuGyomu().equals(TorokuGyomu.住民税.getコード())) {
             source.listIchiranhyoUpper_11 = TorokuGyomu.介護保険.get名称();
         } else {
             source.listIchiranhyoUpper_11 = RString.EMPTY;
@@ -187,15 +187,15 @@ public class KaigoHokenShotokuJohoIchiranEditor implements IKaigoHokenShotokuJoh
     }
 
     private void set課税区分減免後(KaigoHokenShotokuJohoIchiranSource source) {
-        if (所得情報一覧.get課税区分減免後().equals(KazeiKubun.課税.getコード())) {
+        if (所得情報一覧.getKazeiKubunGemmenGo().equals(KazeiKubun.課税.getコード())) {
             source.listIchiranhyoUpper_8 = KazeiKubun.課税.get名称();
-        } else if (所得情報一覧.get課税区分減免後().equals(KazeiKubun.所得調査中.getコード())) {
+        } else if (所得情報一覧.getKazeiKubunGemmenGo().equals(KazeiKubun.所得調査中.getコード())) {
             source.listIchiranhyoUpper_8 = KazeiKubun.所得調査中.get名称();
-        } else if (所得情報一覧.get課税区分減免後().equals(KazeiKubun.未申告.getコード())) {
+        } else if (所得情報一覧.getKazeiKubunGemmenGo().equals(KazeiKubun.未申告.getコード())) {
             source.listIchiranhyoUpper_8 = KazeiKubun.未申告.get名称();
-        } else if (所得情報一覧.get課税区分減免後().equals(KazeiKubun.課税取消.getコード())) {
+        } else if (所得情報一覧.getKazeiKubunGemmenGo().equals(KazeiKubun.課税取消.getコード())) {
             source.listIchiranhyoUpper_8 = KazeiKubun.課税取消.get名称();
-        } else if (所得情報一覧.get課税区分減免後().equals(KazeiKubun.非課税.getコード())) {
+        } else if (所得情報一覧.getKazeiKubunGemmenGo().equals(KazeiKubun.非課税.getコード())) {
             source.listIchiranhyoUpper_8 = KazeiKubun.非課税.get名称();
         } else {
             source.listIchiranhyoUpper_8 = RString.EMPTY;
@@ -203,15 +203,15 @@ public class KaigoHokenShotokuJohoIchiranEditor implements IKaigoHokenShotokuJoh
     }
 
     private void set課税区分減免前(KaigoHokenShotokuJohoIchiranSource source) {
-        if (所得情報一覧.get課税区分減免後().equals(KazeiKubun.課税.getコード())) {
+        if (所得情報一覧.getKazeiKubun().equals(KazeiKubun.課税.getコード())) {
             source.listIchiranhyoUpper_7 = KazeiKubun.課税.get名称();
-        } else if (所得情報一覧.get課税区分減免後().equals(KazeiKubun.所得調査中.getコード())) {
+        } else if (所得情報一覧.getKazeiKubun().equals(KazeiKubun.所得調査中.getコード())) {
             source.listIchiranhyoUpper_7 = KazeiKubun.所得調査中.get名称();
-        } else if (所得情報一覧.get課税区分減免後().equals(KazeiKubun.未申告.getコード())) {
+        } else if (所得情報一覧.getKazeiKubun().equals(KazeiKubun.未申告.getコード())) {
             source.listIchiranhyoUpper_7 = KazeiKubun.未申告.get名称();
-        } else if (所得情報一覧.get課税区分減免後().equals(KazeiKubun.課税取消.getコード())) {
+        } else if (所得情報一覧.getKazeiKubun().equals(KazeiKubun.課税取消.getコード())) {
             source.listIchiranhyoUpper_7 = KazeiKubun.課税取消.get名称();
-        } else if (所得情報一覧.get課税区分減免後().equals(KazeiKubun.非課税.getコード())) {
+        } else if (所得情報一覧.getKazeiKubun().equals(KazeiKubun.非課税.getコード())) {
             source.listIchiranhyoUpper_7 = KazeiKubun.非課税.get名称();
         } else {
             source.listIchiranhyoUpper_7 = RString.EMPTY;
@@ -219,9 +219,9 @@ public class KaigoHokenShotokuJohoIchiranEditor implements IKaigoHokenShotokuJoh
     }
 
     private void set性別コード(KaigoHokenShotokuJohoIchiranSource source) {
-        if (Seibetsu.男.getコード().equals(所得情報一覧.get性別コード())) {
+        if (Seibetsu.男.getコード().equals(所得情報一覧.getSeibetsuCode())) {
             source.listIchiranhyoUpper_6 = Seibetsu.男.get名称();
-        } else if (Seibetsu.女.getコード().equals(所得情報一覧.get性別コード())) {
+        } else if (Seibetsu.女.getコード().equals(所得情報一覧.getSeibetsuCode())) {
             source.listIchiranhyoUpper_6 = Seibetsu.女.get名称();
         } else {
             source.listIchiranhyoUpper_6 = RString.EMPTY;
@@ -229,13 +229,13 @@ public class KaigoHokenShotokuJohoIchiranEditor implements IKaigoHokenShotokuJoh
     }
 
     private void set生年月日(KaigoHokenShotokuJohoIchiranSource source) {
-        if (所得情報一覧.get住民種別コード().equals(外国人)
-                || 所得情報一覧.get住民種別コード().equals(住登外外国人)) {
-            source.listIchiranhyoUpper_5 = 所得情報一覧.get生年月日().seireki().toDateString();
+        if (所得情報一覧.getJuminShubetsuCode().equals(外国人)
+                || 所得情報一覧.getJuminShubetsuCode().equals(住登外外国人)) {
+            source.listIchiranhyoUpper_5 = 所得情報一覧.getSeinengappiYMD().seireki().toDateString();
         }
-        if (所得情報一覧.get住民種別コード().equals(日本人)
-                || 所得情報一覧.get住民種別コード().equals(住登外日本人)) {
-            source.listIchiranhyoUpper_5 = 所得情報一覧.get生年月日().wareki().toDateString();
+        if (所得情報一覧.getJuminShubetsuCode().equals(日本人)
+                || 所得情報一覧.getJuminShubetsuCode().equals(住登外日本人)) {
+            source.listIchiranhyoUpper_5 = 所得情報一覧.getSeinengappiYMD().wareki().toDateString();
         }
     }
 

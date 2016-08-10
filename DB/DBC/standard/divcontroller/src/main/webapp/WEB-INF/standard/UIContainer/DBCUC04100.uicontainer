@@ -893,6 +893,34 @@
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "",
      "toState": "国保連情報取込一覧"
+    },
+    {
+     "id": "65",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410011",
+     "layoutTitle": "国保連情報取込",
+     "eventName": "バッチ起動",
+     "destroy": false,
+     "condition": "41",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410041",
+     "toLayoutTitle": "総合事業費再審査決定通知書情報",
+     "toState": "初期状態"
+    },
+    {
+     "id": "66",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410041",
+     "layoutTitle": "総合事業費再審査決定通知書情報",
+     "eventName": "戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410011",
+     "toLayoutTitle": "国保連情報取込",
+     "toState": "国保連情報取込一覧"
     }
    ]
   }

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.gaikyotokkiimagea4;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.gaikyotokkiimagea4.GaikyotokkiImageA4Entity;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuGaikyouBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.gaikyotokkiimagea4.GaikyotokkiImageA4ReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -17,14 +17,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class GaikyotokkiImageA4Report extends Report<GaikyotokkiImageA4ReportSource> {
 
-    private final GaikyotokkiImageA4Entity data;
+    private final JimuGaikyouBusiness data;
 
     /**
      * インスタンスを生成します。
      *
      * @param data 申請に関する帳票発行のdata
      */
-    public GaikyotokkiImageA4Report(GaikyotokkiImageA4Entity data) {
+    public GaikyotokkiImageA4Report(JimuGaikyouBusiness data) {
         this.data = data;
     }
 

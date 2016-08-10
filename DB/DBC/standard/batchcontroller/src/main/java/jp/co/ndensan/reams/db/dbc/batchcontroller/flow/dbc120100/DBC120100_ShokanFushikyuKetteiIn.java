@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.SharedFileCopyProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120010.SharedFileCopyProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120100.ShokanFushikyuDbUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120100.ShokanFushikyuTableInsertProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120100.ShokanFushikyuTableUpdateProcess;

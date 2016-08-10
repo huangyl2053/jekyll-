@@ -25,6 +25,7 @@ public class IkenshoHoshuSeikyuEntity {
     private RString 住所;
     private RString 医療機関;
     private RString 代表者名;
+    private RString 主治医医療機関コード;
     private RString 帳票タイトル;
     private RString 通知文1;
     private RString 対象期間;

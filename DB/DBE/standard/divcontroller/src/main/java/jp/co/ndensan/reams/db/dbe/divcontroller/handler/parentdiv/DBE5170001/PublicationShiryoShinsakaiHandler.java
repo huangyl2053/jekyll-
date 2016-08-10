@@ -337,7 +337,8 @@ public class PublicationShiryoShinsakaiHandler {
                 div.getTxtShinsakaiKaisaiNo().getValue(),
                 div.getTxtShinsakaiYoteiDate().getValue(),
                 new RString(div.getTxtShinsakaiKaishiYoteiTime().getValue().toString()),
-                div.getTxtGogitaiNo().getValue(),
+                div.getTxtGogitaiNo() == null || RString.isNullOrEmpty(div.getTxtGogitaiNo().getValue())
+                ? 0 : Integer.parseInt(div.getTxtGogitaiNo().getValue().toString()),
                 div.getTxtGogitaiName().getValue(),
                 div.getTxtShutsuryokuJun().getValue(),
                 div.getDdlShutsuryokuStyleZenken().getSelectedKey(),
@@ -398,7 +399,6 @@ public class PublicationShiryoShinsakaiHandler {
             事務局_印刷帳票.add(印刷帳票_すべて選択);
             事務局_印刷帳票.add(印刷帳票_審査会資料);
 
-            事務局_概況特記.add(印刷帳票_概況特記);
             事務局_概況特記.add(印刷帳票_予備判定記入票);
             事務局_概況特記.add(印刷帳票_概況特記一覧);
 

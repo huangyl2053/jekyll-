@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -33,13 +34,15 @@ public class JimuShinsakaiIinJohoMyBatisParameter implements IMyBatisParameter {
     private boolean isHaishiFlag_False;
     private boolean isHaishiFlag_True;
     private FlexibleDate sisutemuYMD;
-    private RString gogitaiNo;
+    private int gogitaiNo;
     private FlexibleDate shinsakaiKaisaiYoteiYMD;
     private ShinseishoKanriNo shinseishoKanriNo;
     private int ninteichosaRirekiNo;
     private int ikenshoIraiRirekiNo;
     private ShinseishoKanriNo shinseishoKanriNoZ;
     private RString genponMaskKubun;
+    private List<ShinseishoKanriNo> shinseishoKanriNoList;
+    private List<Integer> ninteichosaRirekiNoList;
 
     /**
      * コンストラクタです。
@@ -62,7 +65,7 @@ public class JimuShinsakaiIinJohoMyBatisParameter implements IMyBatisParameter {
             boolean isSakuseiJokenHani,
             boolean isSakuseiJokenTuika,
             RString shinsakaiKaisaiNo,
-            RString gogitaiNo,
+            int gogitaiNo,
             FlexibleDate shinsakaiKaisaiYoteiYMD) {
         this.bangoStart = bangoStart;
         this.bangoEnd = bangoEnd;

@@ -16,6 +16,20 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBC {
 
     /**
+     * 高額サービス給付のお知らせ通知書（初回申請分）（提出期限あり）
+     */
+    DBC100011_申請分(new ReportId("DBC100011_KogakuOshiraseTsuchiTeshutsuKigenAriShoShokai"),
+            new RString("高額サービス給付のお知らせ通知書（初回申請分）（提出期限あり）")),
+    /**
+     * 高額サービス給付のお知らせ通知書（初回申請分）（提出期限あり）
+     */
+    DBC100011_償還分(new ReportId("DBC100011_KogakuOshiraseTsuchiShoTeshutsuKigenAriJidoShokan"),
+            new RString("高額サービス給付のお知らせ通知書（自動償還分）（提出期限あり）")),
+    /**
+     * 総合事業分自己負担額計算結果一覧表
+     */
+    DBC200203(new ReportId("DBC200203_GassanJigyobunJikofutangakuKeisanKekkaIchiran"), new RString("総合事業分自己負担額計算結果一覧表")),
+    /**
      * 総合事業費過再審査定通知書情報
      */
     DBC100057(new ReportId("DBC100057_ServiceRiyohyoBeppyo"), new RString("介護保険サービス利用票（兼居宅サービス計画）・別表 ")),
@@ -43,6 +57,15 @@ public enum ReportIdDBC {
      * 負担割合証（連帳　横）
      */
     DBC100067(new ReportId("DBC100067_FutanWariaiShoRenchoYoko"), new RString("負担割合証（連帳　横）")),
+    /**
+     * 基準収入額適用決定通知書
+     */
+    DBC100074(
+            new ReportId("DBC100074_KijunShunyugakuTekiyoKetteiTsuchisho"), new RString("基準収入額適用決定通知書")),
+    /**
+     * 負担割合証発行一覧表
+     */
+    DBC200090(new ReportId("DBC200090_FutanWariaiShoHakkoIchiran"), new RString("負担割合証発行一覧表")),
     /**
      * 高額総合事業サービス費判定エラーリスト
      */
@@ -148,6 +171,14 @@ public enum ReportIdDBC {
      */
     DBC200077(new ReportId("DBC200077_KogakuSogoJigyoServiceHiTaishoshaIchiran"), new RString("高額総合事業サービス費対象者一覧表")),
     /**
+     * 高額総合事業サービス費申請書発行一覧表 の帳票ＩＤです。
+     */
+    DBC200091(new ReportId("DBC200091_KogakuJigyoShinseishoHakkoIchiran"), new RString("高額総合事業サービス費申請書発行一覧表")),
+    /**
+     * 基準収入額適用決定通知一覧表 の帳票ＩＤです。
+     */
+    DBC200092(new ReportId("DBC200092_KijunShunyugakuTekiyoKetteiTsuchiIchiran"), new RString("基準収入額適用決定通知一覧表")),
+    /**
      * 介護保険高額介護（予防）サービス費支給（受領委任払）申請書の帳票ＩＤです。
      */
     DBC800015(new ReportId("DBC800015_KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyo"),
@@ -155,7 +186,24 @@ public enum ReportIdDBC {
     /**
      * 第三者行為による被害届（介護保険用）の帳票ＩＤです。
      */
-    DBC800020(new ReportId("DBC800020_DaisanshaKouiHigaitodokeKaigoHokenyo"), new RString("第三者行為による被害届（介護保険用）"));
+    DBC800020(new ReportId("DBC800020_DaisanshaKouiHigaitodokeKaigoHokenyo"), new RString("第三者行為による被害届（介護保険用）")),
+    /**
+     * 高額総合事業サービス費給付お知らせ通知書（提出期限あり）帳票ＩＤです。
+     */
+    DBC100072(new ReportId("DBC100072_KogakuJigyoOshiraseTsuchishoKigenAri"), new RString("高額総合事業サービス費給付お知らせ通知書")),
+    /**
+     * 介護保険高額総合事業サービス費支給申請書（ゆうちょ銀行）
+     */
+    DBC100071(
+            new ReportId("DBC100071_KogakuJigyoShikyuShinseishoYucho"), new RString("介護保険高額総合事業サービス費支給申請書（ゆうちょ銀行）")),
+    /**
+     * 事業分高額合算支給決定通知書（単）
+     */
+    DBC200201(new ReportId("DBC200201_GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashi"), new RString("事業分高額合算支給決定通知書（単）")),
+    /**
+     * （高額合算支給（不支給）決定通知書）支払予定日あり帳票ＩＤです。
+     */
+    DBC200202(new ReportId("DBC200202_GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiAri"), new RString("事業分高額合算支給決定通知書（単）"));
 
     private final ReportId reportId;
     private final RString reportName;

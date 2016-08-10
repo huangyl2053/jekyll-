@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokki
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.sonotashiryoa4.SonotashiryoA4ReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -48,6 +49,8 @@ public class IinSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
     private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
     private JimuSonotashiryoBusiness その他資料;
+    private int shinsakaiOrder;
+    private int 存在ファイルindex;
 
     @BatchWriter
     private BatchReportWriter<SonotashiryoA4ReportSource> batchWriteA4;
@@ -55,7 +58,13 @@ public class IinSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
 
     @Override
     protected void initialize() {
+        shinsakaiOrder = -1;
+        存在ファイルindex = 0;
         myBatisParameter = paramter.toIinTokkiJikouItiziHanteiMyBatisParameter();
+        List<RString> shoriJotaiKubunList = new ArrayList<>();
+        shoriJotaiKubunList.add(ShoriJotaiKubun.延期.getコード());
+        shoriJotaiKubunList.add(ShoriJotaiKubun.通常.getコード());
+        myBatisParameter.setShoriJotaiKubunList(shoriJotaiKubunList);
         myBatisParameter.setOrderKakuteiFlg(ShinsakaiOrderKakuteiFlg.確定.is介護認定審査会審査順確定());
     }
 
@@ -83,9 +92,15 @@ public class IinSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
         entity.setHihokenshaName(AtenaMeisho.EMPTY);
         entity.setShoKisaiHokenshaNo(RString.EMPTY);
         entity.setJimukyoku(false);
-        その他資料 = new JimuSonotashiryoBusiness(entity);
+        if (shinsakaiOrder != entity.getShinsakaiOrder()) {
+            存在ファイルindex = 0;
+        }
+
+        その他資料 = new JimuSonotashiryoBusiness(entity, 存在ファイルindex);
         SonotashiryoA4Report reportA4 = new SonotashiryoA4Report(その他資料);
         reportA4.writeBy(reportSourceWriterA4);
+        存在ファイルindex = その他資料.get存在ファイルIndex();
+        shinsakaiOrder = entity.getShinsakaiOrder();
     }
 
     @Override
@@ -114,16 +129,21 @@ public class IinSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
 
     private List<RString> 出力条件() {
         List<RString> list = new ArrayList<>();
-        RStringBuilder builder = new RStringBuilder();
-        builder.append("【開始資料番号】")
+        RStringBuilder builder1 = new RStringBuilder();
+        builder1.append("【合議体番号】")
                 .append(" ")
-                .append(paramter.getBangoStart());
-        RStringBuilder stringBuilder = new RStringBuilder();
-        stringBuilder.append("【終了資料番号】")
+                .append(paramter.getGogitaiNo());
+        RStringBuilder builder2 = new RStringBuilder();
+        builder2.append("【介護認定審査会開催予定年月日】")
                 .append(" ")
-                .append(paramter.getBangoEnd());
-        list.add(builder.toRString());
-        list.add(stringBuilder.toRString());
+                .append(paramter.getShinsakaiKaisaiYoteiYMD().wareki().toDateString());
+        RStringBuilder builder3 = new RStringBuilder();
+        builder3.append("【介護認定審査会開催番号】")
+                .append(" ")
+                .append(paramter.getShinsakaiKaisaiNo());
+        list.add(builder1.toRString());
+        list.add(builder2.toRString());
+        list.add(builder3.toRString());
         return list;
     }
 }

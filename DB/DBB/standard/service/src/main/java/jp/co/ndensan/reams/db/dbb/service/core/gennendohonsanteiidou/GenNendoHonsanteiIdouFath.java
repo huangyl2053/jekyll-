@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.report.honsanteiidou.GenNendoHonsanteiIdouProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.honsanteiidou.KeisanjohoAtenaKozaKouseizengoEntity;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
-import jp.co.ndensan.reams.db.dbb.definition.core.choteijiyu.ChoteiJiyuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoNengakuKijunNendo4Gatsu;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.HonsanteiIdoKekkaParameter;
@@ -548,20 +548,17 @@ public class GenNendoHonsanteiIdouFath {
         if (扶助種類リスト.isEmpty()) {
             return RString.EMPTY;
         }
-        // TODO QAのNo.950(Redmine#91760)
-        // 以下がDummy data
-        return new RString("01");
-//        List<RString> 扶助種類 = new ArrayList<>();
-//        for (SeikatsuHogoFujoShurui shurui : 扶助種類リスト) {
-//            if (shurui.get扶助種類コード() != null) {
-//                扶助種類.add(shurui.get扶助種類コード().getColumnValue().getColumnValue());
-//            }
-//        }
-//        if (扶助種類.isEmpty()) {
-//            return RString.EMPTY;
-//        }
-//        Collections.sort(扶助種類);
-//        return 扶助種類.get(0);
+        List<RString> 扶助種類 = new ArrayList<>();
+        for (SeikatsuHogoFujoShurui shurui : 扶助種類リスト) {
+            if (shurui.get扶助種類コード() != null) {
+                扶助種類.add(shurui.get扶助種類コード().getColumnValue().getColumnValue());
+            }
+        }
+        if (扶助種類.isEmpty()) {
+            return RString.EMPTY;
+        }
+        Collections.sort(扶助種類);
+        return 扶助種類.get(0);
     }
 
     private static void set老齢福祉年金(FukaJohoBuilder builder, List<RoreiFukushiNenkinJukyusha> 老福の情報リスト,

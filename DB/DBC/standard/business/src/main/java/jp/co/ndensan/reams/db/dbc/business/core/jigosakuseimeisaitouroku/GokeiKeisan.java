@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * ビジネス設計_DBC0120031_サービス利用票情報
+ * 合計計算処理結果のオブジェクトクラスです。
  *
- * @reamsid_L DBC-1930-060 xupeng
+ * @reamsid_L DBC-1930-060 cuilin
  */
 @lombok.Getter
 @lombok.Setter

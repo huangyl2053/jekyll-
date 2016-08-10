@@ -13,7 +13,10 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5130001.Shin
 import jp.co.ndensan.reams.db.dbd.service.core.ninteikanryoninteishinseijoho.NinteiKanryoNinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunHorei;
 import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunShinsei;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoChild;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinseiRirekiJoho;
@@ -37,9 +40,7 @@ public class ShinseihakkoMeiseiHandler {
 
     private final ShinseihakkoMeiseiDiv div;
     private final NinteishinseihakkoDiv ninteishinseihakkodiv;
-    private static final RString 保険者番号 = new RString("209007");
     private static final RString 識別コード = new RString("000000001011002");
-    private static final RString 被保番号 = new RString("2190000003");
     private static final RString 被保険者番号 = new RString("2190000003");
     private static final RString 画面区分 = new RString("2");
     private static final RString 正 = new RString("○");
@@ -53,6 +54,15 @@ public class ShinseihakkoMeiseiHandler {
     private static final int NO_7 = 7;
     private static final int NO_8 = 8;
     private static final int NO_9 = 9;
+    private static final RString コード = new RString("1");
+    private static final RString コード111 = new RString("111");
+    private static final RString コード112 = new RString("112");
+    private static final RString コード120 = new RString("120");
+    private static final RString コード211 = new RString("211");
+    private static final RString 単一市町村 = new RString("1");
+    private static final RString 広域市町村 = new RString("2");
+    private static final RString 広域保険者 = new RString("3");
+    private static final RString 広域審査会 = new RString("4");
 
     /**
      * コンストラクタです。
@@ -70,9 +80,29 @@ public class ShinseihakkoMeiseiHandler {
      *
      */
     public void initialize() {
+        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        RString 介護導入形態 = shichosonSecurityJoho.get導入形態コード().value();
+        if (介護導入形態.equals(コード111)) {
+            介護導入形態 = 広域保険者;
+        }
+        if (介護導入形態.equals(コード112)) {
+            介護導入形態 = 広域市町村;
+        }
+        if (介護導入形態.equals(コード120)) {
+            介護導入形態 = 単一市町村;
+        }
+        if (介護導入形態.equals(コード211)) {
+            介護導入形態 = 広域審査会;
+        }
         ShikibetsuCode shikibetsuCode = new ShikibetsuCode(識別コード);
+        ninteishinseihakkodiv.getCcdKaigoNinteiAtenaInfo().setKaigoDonyuKeitai(介護導入形態);
+        ninteishinseihakkodiv.getCcdKaigoNinteiAtenaInfo().setShoriType(コード);
+        ninteishinseihakkodiv.getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(ShinseishoKanriNo.EMPTY, shikibetsuCode);
+        ninteishinseihakkodiv.getCcdKaigoNinteiAtenaInfo().initialize();
+        ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().initialize(shichosonSecurityJoho.get市町村情報().get市町村コード().value(), 被保険者番号);
         NinteiKanryoNinteiShinseiJohoManager manager = NinteiKanryoNinteiShinseiJohoManager.createInstance();
-        NinteiShinseiJohoChild entity = manager.get要介護認定申請情報(保険者番号, 被保番号);
+        NinteiShinseiJohoChild entity = manager.get要介護認定申請情報(ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().getHookenshaCode(),
+                ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue());
         NinteiKanryoJoho ninteiKanryoJoho = manager.selectByShinseishoKanriNo(entity.get申請書管理番号());
         if (ninteiKanryoJoho == null) {
             checkninteiKanryoJoho(entity);
@@ -155,11 +185,11 @@ public class ShinseihakkoMeiseiHandler {
         NinteiKanryoNinteiShinseiJohoManager manager = NinteiKanryoNinteiShinseiJohoManager.createInstance();
         ShinseiRirekiJoho shinseiRirekiJoho = manager.selectByKey(entity.get申請書管理番号());
         if (shinseiRirekiJoho == null) {
-            setZenkaiShinseiNaiyoinfo(null, null, null);
+            setZenkaiShinseiNaiyoinfo(RString.EMPTY, RString.EMPTY, new RDate(RString.EMPTY.toString()));
         } else {
             NinteiKanryoJoho ninteiKanryoJohoni = manager.selectByShinseishoKanriNo(shinseiRirekiJoho.get前回申請管理番号());
             if (ninteiKanryoJohoni == null) {
-                setZenkaiShinseiNaiyoinfo(null, null, null);
+                setZenkaiShinseiNaiyoinfo(RString.EMPTY, RString.EMPTY, new RDate(RString.EMPTY.toString()));
             } else {
                 NinteiShinseiJohoChild ninteiShinseiJohoChildni = manager.selectByZenkaiShinseishoKanriNo(shinseiRirekiJoho.get前回申請管理番号());
                 setZenkaiShinseiNaiyoinfo(ninteiShinseiJohoChildni.get認定申請区分_法令_コード().getColumnValue(),

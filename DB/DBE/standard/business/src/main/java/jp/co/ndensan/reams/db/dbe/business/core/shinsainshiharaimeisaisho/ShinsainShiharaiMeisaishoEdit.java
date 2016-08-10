@@ -42,7 +42,7 @@ public class ShinsainShiharaiMeisaishoEdit {
         ShinsainShiharaimeisaisho meisaisho = new ShinsainShiharaimeisaisho();
         meisaisho.setタイトル(DbBusinessConfig.get(ConfigNameDBE.介護認定審査会委員報酬支払明細書, RDate.getNowDate(),
                 SubGyomuCode.DBE認定支援));
-        meisaisho.set保険者名(entity.getHihokenshaName().value());
+        meisaisho.set保険者名(entity.getShichosonMeisho());
         meisaisho.set審査委員名(entity.getShinsakaiIinShimei().value());
         meisaisho.set審査委員コード(entity.getShinsakaiIinCode());
         meisaisho.set帳票印刷日時(dateFormat142());

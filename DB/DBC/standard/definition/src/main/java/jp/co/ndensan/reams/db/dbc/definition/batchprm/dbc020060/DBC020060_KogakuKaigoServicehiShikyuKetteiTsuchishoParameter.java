@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc020060;
 
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -25,7 +24,7 @@ import lombok.Setter;
 public class DBC020060_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = 1L;
-    
+
     private static final String TYUUSHUTU_MODEL = "抽出モード";
     @BatchParameter(key = TYUUSHUTU_MODEL, name = "抽出モード")
     private RString 抽出モード;
@@ -53,10 +52,6 @@ public class DBC020060_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter extend
     private static final String HAKKOBI = "発行日";
     @BatchParameter(key = HAKKOBI, name = "発行日")
     private RDate 発行日;
-
-    private static final String SHIHARAI_YOTEI_YMD = "支払い予定日";
-    @BatchParameter(key = SHIHARAI_YOTEI_YMD, name = "支払い予定日")
-    private RDate 支払い予定日;
 
     private static final String BUNNSHO_NO = "文書番号";
     @BatchParameter(key = BUNNSHO_NO, name = "文書番号")

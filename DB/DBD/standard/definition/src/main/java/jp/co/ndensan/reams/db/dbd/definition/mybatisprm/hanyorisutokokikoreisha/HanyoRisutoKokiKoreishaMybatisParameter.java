@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyorisutokokikoreisha;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuHohoKubun;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuKomokuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.SoshitsuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
@@ -41,9 +42,6 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
     private FlexibleDate hitsukehanito;
     private boolean chokindatacyusyutsu;
     private RString soshitsukubun;
-    private boolean isCsvkomokumeifuka;
-    private boolean isCsvrenbanfuka;
-    private boolean isCsvhitsukesurasyuhensyu;
     private AtenaSelectBatchParameter atenacyusyutsujyoken;
     private RString syutsuryokujun;
     private RString syutsuryokukomoku;
@@ -51,6 +49,8 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
     private boolean is範囲;
     private boolean is取得日;
     private boolean is喪失日;
+    private boolean has日付範囲From;
+    private boolean has日付範囲To;
     private boolean is資格取得者のみ;
     private boolean is資格喪失者のみ;
     private boolean is年齢;
@@ -68,8 +68,8 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
     private RString 地区選択コードFrom;
     private RString 地区選択コードTo;
     private boolean is住所;
-    private boolean has町域From;
-    private boolean has町域To;
+    private boolean has地区選択From;
+    private boolean has地区選択To;
     private boolean is行政区;
     private boolean has行政区From;
     private boolean has行政区To;
@@ -110,9 +110,6 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
             FlexibleDate hitsukehanito,
             boolean chokindatacyusyutsu,
             RString soshitsukubun,
-            boolean csvkomokumeifuka,
-            boolean csvrenbanfuka,
-            boolean csvhitsukesurasyuhensyu,
             AtenaSelectBatchParameter atenacyusyutsujyoken,
             RString syutsuryokujun,
             RString syutsuryokukomoku,
@@ -125,9 +122,6 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
         this.hitsukehanito = hitsukehanito;
         this.chokindatacyusyutsu = chokindatacyusyutsu;
         this.soshitsukubun = soshitsukubun;
-        this.isCsvkomokumeifuka = csvkomokumeifuka;
-        this.isCsvrenbanfuka = csvrenbanfuka;
-        this.isCsvhitsukesurasyuhensyu = csvhitsukesurasyuhensyu;
         this.atenacyusyutsujyoken = atenacyusyutsujyoken;
         this.syutsuryokujun = syutsuryokujun;
         this.syutsuryokukomoku = syutsuryokukomoku;
@@ -149,6 +143,17 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
             is基準日 = true;
         } else if (ChushutsuHohoKubun.範囲.getコード().equals(cyusyutsuhohokubun)) {
             is範囲 = true;
+            if (ChushutsuKomokuKubun.取得日.getコード().equals(cyusyutsukomokukubun)) {
+                is取得日 = true;
+            } else if (ChushutsuKomokuKubun.喪失日.getコード().equals(cyusyutsukomokukubun)) {
+                is喪失日 = true;
+            }
+        }
+        if (nullHandan(hitsukehanifrom)) {
+            has日付範囲From = true;
+        }
+        if (nullHandan(hitsukehanito)) {
+            has日付範囲To = true;
         }
     }
 
@@ -188,11 +193,11 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
             is住所 = true;
             if (nullHandan(atenacyusyutsujyoken.getJusho_From())) {
                 地区選択コードFrom = atenacyusyutsujyoken.getJusho_From();
-                has町域From = true;
+                has地区選択From = true;
             }
             if (nullHandan(atenacyusyutsujyoken.getJusho_To())) {
                 地区選択コードTo = atenacyusyutsujyoken.getJusho_To();
-                has町域To = true;
+                has地区選択To = true;
             }
         } else if (Chiku.行政区.equals(atenacyusyutsujyoken.getChiku_Kubun())) {
             is行政区 = true;
@@ -256,6 +261,10 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
     }
 
     private static boolean nullHandan(RDate 生年月日) {
+        return 生年月日 != null;
+    }
+
+    private static boolean nullHandan(FlexibleDate 生年月日) {
         return 生年月日 != null;
     }
 

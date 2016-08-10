@@ -48,6 +48,10 @@ public class IinShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<Sh
     private IinShinsakaiIinJohoProcessParameter paramter;
     private IShiryoShinsakaiIinMapper mapper;
     private List<ShinsakaiIinJohoEntity> shinsakaiIinJohoList;
+    private IinShinsakaiIinJohoMyBatisParameter myBatisParameter;
+    private ShinsakaishiryoA3Report report;
+    private List<JimuShinsakaishiryoBusiness> businessList;
+    private JimuShinsakaishiryoBusiness business;
     private int no;
     private int count;
     @BatchWriter
@@ -57,19 +61,21 @@ public class IinShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<Sh
     @Override
     protected void initialize() {
         mapper = getMapper(IShiryoShinsakaiIinMapper.class);
-        IinShinsakaiIinJohoMyBatisParameter myBatisParameter = paramter.toIinShinsakaiIinJohoMyBatisParameter();
+        myBatisParameter = paramter.toIinShinsakaiIinJohoMyBatisParameter();
         myBatisParameter.setOrderKakuteiFlg(ShinsakaiOrderKakuteiFlg.確定.is介護認定審査会審査順確定());
         myBatisParameter.setHaishiFlag_False(IsHaishi.有効.is廃止());
         myBatisParameter.setHaishiFlag_True(IsHaishi.廃止.is廃止());
         myBatisParameter.setSisutemuYMD(FlexibleDate.getNowDate());
         shinsakaiIinJohoList = mapper.getShinsakaiIinJoho(myBatisParameter);
         count = mapper.getShinsakaiTaiyosyaJohoCount(myBatisParameter);
+        businessList = new ArrayList<>();
+        report = new ShinsakaishiryoA3Report(businessList);
         no = 0;
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(SELECT_SHINSAKAITAIYOSYAJOHO, paramter.toIinShinsakaiIinJohoMyBatisParameter());
+        return new BatchDbReader(SELECT_SHINSAKAITAIYOSYAJOHO, myBatisParameter);
     }
 
     @Override
@@ -84,14 +90,14 @@ public class IinShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<Sh
         entity.setHihokenshaNo(RString.EMPTY);
         entity.setHihokenshaName(AtenaMeisho.EMPTY);
         entity.setJimukyoku(false);
-        JimuShinsakaishiryoBusiness business = new JimuShinsakaishiryoBusiness(paramter, entity, shinsakaiIinJohoList, no, count);
-        ShinsakaishiryoA3Report report = new ShinsakaishiryoA3Report(business);
-        report.writeBy(reportSourceWriterA3);
+        business = new JimuShinsakaishiryoBusiness(paramter, entity, shinsakaiIinJohoList, no, count);
+        report.addBusiness(business);
         no = no + 1;
     }
 
     @Override
     protected void afterExecute() {
+        report.writeBy(reportSourceWriterA3);
         outputJokenhyoFactory();
     }
 

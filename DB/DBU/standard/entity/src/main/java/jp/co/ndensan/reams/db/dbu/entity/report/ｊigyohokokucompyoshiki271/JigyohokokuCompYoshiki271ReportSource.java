@@ -7,17 +7,17 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 介護事業状況報告月報・保険給付決定状況（様式2-7-1）のレーポトソースです。
  *
- * @reamsid_L DBU-5580-040　wanghuafeng
+ * @reamsid_L DBU-5580-040 wanghuafeng
  */
 public class JigyohokokuCompYoshiki271ReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
-    @ReportItem(name = "printTimeStamp", length = 34, order = 1)
-    public RString printTimeStamp;
+    @ReportItem(name = "shuukeiHani", length = 40, order = 1)
+    public RString shuukeiHani;
     @ReportItem(name = "shukeiKubun", length = 4, order = 2)
     public RString shukeiKubun;
-    @ReportItem(name = "shuukeiHani", length = 40, order = 3)
-    public RString shuukeiHani;
+    @ReportItem(name = "printTimeStamp", length = 26, order = 3)
+    public RString printTimeStamp;
     @ReportItem(name = "hokenshaNo", length = 12, order = 4)
     public RString hokenshaNo;
     @ReportItem(name = "hokenshaName", length = 13, order = 5)

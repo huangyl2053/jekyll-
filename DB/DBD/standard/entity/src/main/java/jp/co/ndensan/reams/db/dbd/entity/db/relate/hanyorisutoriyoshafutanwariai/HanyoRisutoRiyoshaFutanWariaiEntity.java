@@ -34,6 +34,9 @@ public class HanyoRisutoRiyoshaFutanWariaiEntity {
     private RString 被保険者台帳管理_市町村コード;
     private RString 被保険者台帳管理_広域内住所地特例フラグ;
     private RString 被保険者台帳管理_広住特措置元市町村コード;
+    private RString 識別コード;
+    private int 履歴番号;
+    private RString 枝番号;
     private boolean 利用者負担割合_職権変更フラグ;
     private RString 利用者負担割合明細_資格区分;
     private RString 利用者負担割合明細_負担割合区分;

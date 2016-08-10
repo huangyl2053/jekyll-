@@ -29,12 +29,10 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzEntity</artifactId>
         </dependency>
-        <!-- ???J?n -->
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzEntity</artifactId>
         </dependency>
-        <!-- ?e?X?g -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
@@ -43,18 +41,14 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ca.cax</groupId>
             <artifactId>CaxEntity</artifactId>
-            <version>${jp.co.ndensan.reams.cax.version}</version>
-            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ue.uex</groupId>
             <artifactId>UexDefinition</artifactId>
-            <version>${jp.co.ndensan.reams.uex.version}</version>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ue.uex</groupId>
             <artifactId>UexEntity</artifactId>
-            <version>${jp.co.ndensan.reams.uex.version}</version>
         </dependency>
     </dependencies>
 </project>

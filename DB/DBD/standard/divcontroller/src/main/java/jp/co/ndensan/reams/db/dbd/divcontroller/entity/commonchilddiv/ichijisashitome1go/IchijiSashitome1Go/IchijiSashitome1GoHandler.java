@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellDetails;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -46,7 +47,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  *
  * 【共有子Div】1号一時差止ダイアログのハンドラクラスです。
  *
- * @reamsid_L DBD-0620-042 panxiaobo
+ * @reamsid_L DBD-3620-042 panxiaobo
  */
 public class IchijiSashitome1GoHandler {
 
@@ -261,6 +262,7 @@ public class IchijiSashitome1GoHandler {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(一号一時差止ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         ArrayList<ShokanHaraiShikyu> 償還払支給の情報List = ViewStateHolder.get(一号一時差止ダイアロググキー.償還払支給の情報List, ArrayList.class);
         int index = div.getDgSashitomeKojoIchiran().getClickedRowId();
+        div.setKey_Index(new RString(String.valueOf(index)));
         ShiharaiHohoHenkoSashitome 支払方法変更差止 = 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(index);
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         getValidationHandler().validateFor給付一時差止選択データチェック(pairs, div, 支払方法変更差止);
@@ -330,6 +332,7 @@ public class IchijiSashitome1GoHandler {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(一号一時差止ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         ArrayList<ShokanHaraiShikyu> 償還払支給の情報List = ViewStateHolder.get(一号一時差止ダイアロググキー.償還払支給の情報List, ArrayList.class);
         int index = div.getDgSashitomeKojoIchiran().getClickedRowId();
+        div.setKey_Index(new RString(String.valueOf(index)));
         ShiharaiHohoHenkoSashitome 支払方法変更差止 = 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(index);
         List<dgShokanJoho_Row> rowList = new ArrayList();
         dgShokanJoho_Row row = new dgShokanJoho_Row();
@@ -365,6 +368,7 @@ public class IchijiSashitome1GoHandler {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(一号一時差止ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         ArrayList<ShokanHaraiShikyu> 償還払支給の情報List = ViewStateHolder.get(一号一時差止ダイアロググキー.償還払支給の情報List, ArrayList.class);
         int index = div.getDgSashitomeKojoIchiran().getClickedRowId();
+        div.setKey_Index(new RString(String.valueOf(index)));
         ShiharaiHohoHenkoSashitome 支払方法変更差止 = 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(index);
         List<dgShokanJoho_Row> rowList = new ArrayList();
         dgShokanJoho_Row row = new dgShokanJoho_Row();
@@ -406,7 +410,7 @@ public class IchijiSashitome1GoHandler {
      *
      */
     public void onClick_SashitomeKojo() {
-        int index = div.getDgSashitomeKojoIchiran().getClickedRowId();
+        int index = Integer.parseInt(div.getKey_Index().toString());
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(一号一時差止ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         ShiharaiHohoHenkoSashitome 支払方法変更差止 = 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(index);
         DisplayNone_控除登録用(true);
@@ -691,14 +695,16 @@ public class IchijiSashitome1GoHandler {
         div.getBtnSashitomeOrKojoJokyoShokai().setDisabled(false);
         div.getDgSashitomeKojoIchiran().setDisabled(false);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("sashitome").getCellDetails().setReadOnly(true);
+        div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("kojo").setCellDetails(new DataGridCellDetails());
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("kojo").getCellDetails().setReadOnly(true);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("sashitome2").setVisible(false);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("seiriNo").getCellDetails().setReadOnly(true);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("txtTeikyoYM").getCellDetails().setReadOnly(true);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("txtSashitomeTorokuYMD").getCellDetails().setReadOnly(true);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("txtSashitomeKaijoYMD").getCellDetails().setReadOnly(true);
-        div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("txtNofuKigenYMD").getCellDetails().setReadOnly(true);
+        div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("sashitomeTsuchi").setCellDetails(new DataGridCellDetails());
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("sashitomeTsuchi").getCellDetails().setReadOnly(true);
+        div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("txtNofuKigenYMD").getCellDetails().setReadOnly(true);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("kojoNo").setVisible(false);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("txtKojoTorokuYMD").setVisible(false);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("txtShoTeishutsuKigenYMD").setVisible(false);
@@ -755,6 +761,9 @@ public class IchijiSashitome1GoHandler {
     }
 
     private void DisplayNone_照会用(boolean displayNone) {
+        div.getSashitomeToroku().setDisplayNone(displayNone);
+        div.getSasitomeKaijo().setDisplayNone(displayNone);
+        div.getKojoToroku().setDisplayNone(displayNone);
         div.getTxtShokaiSashitomeTorokuYMD().setDisplayNone(displayNone);
         div.getTxtShokaiSashitomeNofuKigenYMD().setDisplayNone(displayNone);
         div.getTxtShokaiSashitomeTorokuTsuchiHakkoYMD().setDisplayNone(displayNone);
@@ -771,6 +780,7 @@ public class IchijiSashitome1GoHandler {
         div.getDgShokanJoho().getGridSetting().getColumn("seiriNo").getCellDetails().setReadOnly(true);
         div.getDgShokanJoho().getGridSetting().getColumn("txtTeikyoYM").getCellDetails().setReadOnly(true);
         div.getDgShokanJoho().getGridSetting().getColumn("jigyoshaNo").getCellDetails().setReadOnly(true);
+        div.getDgShokanJoho().getGridSetting().getColumn("serviceShurui").setCellDetails(new DataGridCellDetails());
         div.getDgShokanJoho().getGridSetting().getColumn("serviceShurui").getCellDetails().setReadOnly(true);
         div.getDgShokanJoho().getGridSetting().getColumn("txtShiharaiKingaku").getCellDetails().setReadOnly(true);
     }

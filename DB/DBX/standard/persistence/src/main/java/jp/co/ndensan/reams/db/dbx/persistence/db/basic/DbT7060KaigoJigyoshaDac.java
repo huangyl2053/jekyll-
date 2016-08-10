@@ -222,4 +222,28 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
                                 or(leq(システム日付, DbT7060KaigoJigyosha.yukoShuryoYMD), isNULL(DbT7060KaigoJigyosha.yukoShuryoYMD)))).
                 toList(DbT7060KaigoJigyoshaEntity.class);
     }
+
+    /**
+     * 事業者名称の取得。
+     *
+     * @param 適用開始日 FlexibleDate
+     * @param 事業者番号 JigyoshaNo
+     * @return DbT7060KaigoJigyoshaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    public DbT7060KaigoJigyoshaEntity select_事業者名称(FlexibleDate 適用開始日, JigyoshaNo 事業者番号
+    ) throws NullPointerException {
+        requireNonNull(適用開始日, UrSystemErrorMessages.値がnull.getReplacedMessage(適用開始日.toString()));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(事業者番号.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7060KaigoJigyosha.class).
+                where(and(
+                                eq(DbT7060KaigoJigyosha.jigyoshaNo, 事業者番号),
+                                or(and(leq(DbT7060KaigoJigyosha.yukoKaishiYMD, 適用開始日), leq(適用開始日, DbT7060KaigoJigyosha.yukoShuryoYMD)),
+                                        and(leq(DbT7060KaigoJigyosha.yukoKaishiYMD, 適用開始日), isNULL(DbT7060KaigoJigyosha.yukoShuryoYMD))
+                                ))
+                ).toObject(DbT7060KaigoJigyoshaEntity.class);
+
+    }
 }

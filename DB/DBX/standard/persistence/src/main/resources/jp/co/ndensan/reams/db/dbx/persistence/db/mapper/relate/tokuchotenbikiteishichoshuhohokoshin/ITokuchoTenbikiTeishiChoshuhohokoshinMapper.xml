@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!--概要： 構成市町村マスタのマッピング用XMLです。--> 
+
+ <!--どのマッパーインターフェースと対応するかを指定する--> 
+<mapper namespace="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.tokuchotenbikiteishichoshuhohokoshin.ITokuchoTenbikiTeishiChoshuhohokoshinMapper">
+    <resultMap id="resultMap_TokuchoTenbikiTeishiChoshuhohokoshinEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.relate.tokuchotenbikiteishichoshuhohokoshin.TokuchoTenbikiTeishiChoshuhohokoshinEntity" autoMapping="true">
+        <id property="基礎年金番号"  column="ueT0511NenkinTokuchoKaifuJoho_kisoNenkinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="年金コード"  column="ueT0511NenkinTokuchoKaifuJoho_nenkinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <collection property="介護徴収方法" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.ResultMap_DbV2001ChoshuHohoEntity"
+                    ofType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHohoEntity"/>
+    </resultMap>
+<!--    DbT7051KoseiShichoson
+    DbT7052KoseiShichosonShisho-->
+    <select resultOrdered="true" id="getResults"
+            resultMap="resultMap_TokuchoTenbikiTeishiChoshuhohokoshinEntity"
+            parameterType="jp.co.ndensan.reams.db.dbx.definition.mybatisprm.dbx001001.TokuchoTenbikiTeishiMyBatisParameter" fetchSize="500" >
+          SELECT
+        "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo" AS "ueT0511NenkinTokuchoKaifuJoho_kisoNenkinNo",
+        "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" AS "ueT0511NenkinTokuchoKaifuJoho_nenkinCode",
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho"/>
+        FROM
+            rgue."UeT0511NenkinTokuchoKaifuJoho" AS "UeT0511NenkinTokuchoKaifuJoho"
+        INNER JOIN
+            rgdb."DbT2001ChoshuHoho" AS "DbT2001ChoshuHoho"
+        ON
+            <choose>
+                <when test="天引月=='04'  ||  天引月=='06'  ||  天引月=='08' ">
+                    "DbT2001ChoshuHoho"."kariNenkinNo"="UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo"
+           AND "DbT2001ChoshuHoho"."kariNenkinCode"="UeT0511NenkinTokuchoKaifuJoho"."nenkinCode"
+                </when>
+                <when test="天引月=='10'  ||  天引月=='12'  ||  天引月=='02' ">
+                    "DbT2001ChoshuHoho"."honNenkinNo"="UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo"
+           AND "DbT2001ChoshuHoho"."honNenkinCode" ="UeT0511NenkinTokuchoKaifuJoho"."nenkinCode"
+                </when>
+                <otherwise>
+                    0=1
+                </otherwise>
+            </choose>
+        INNER JOIN
+            rgdb."DbV2001ChoshuHoho" AS "DbV2001ChoshuHoho"
+        ON
+            "DbV2001ChoshuHoho"."hihokenshaNo"="DbT2001ChoshuHoho"."hihokenshaNo"
+        <where>
+                "UeT0511NenkinTokuchoKaifuJoho"."dtTsuchiNaiyoCode"='22'
+            AND
+                (
+                "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKubun"='01'
+                OR  "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKubun"='02'
+                OR  "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKubun"='03'
+                OR  "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKubun"='05'
+                )
+            AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo"=#{年度}
+            AND "UeT0511NenkinTokuchoKaifuJoho"."tenbikiTsuki"=#{天引月}
+            AND "DbV2001ChoshuHoho"."fukaNendo"=#{日付関連調定年度}
+        </where>
+        ORDER BY
+            "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo",
+            "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode",
+            "DbT2001ChoshuHoho"."fukaNendo" DESC,
+            "DbT2001ChoshuHoho"."rirekiNo" DESC
+    </select>
+</mapper>

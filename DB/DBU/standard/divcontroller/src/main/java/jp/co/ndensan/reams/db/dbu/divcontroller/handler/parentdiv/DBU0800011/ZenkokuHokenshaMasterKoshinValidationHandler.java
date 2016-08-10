@@ -19,8 +19,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
+ * 全国保険者マスタ更新のValidationHandlerです。
  *
- * @author ChenXiangyu
+ * @reamsid_L DBU-4230-010 chenxiangyu
  */
 public class ZenkokuHokenshaMasterKoshinValidationHandler {
 
@@ -83,7 +84,8 @@ public class ZenkokuHokenshaMasterKoshinValidationHandler {
      */
     public ValidationMessageControlPair validate保険者番号() {
         RString 保険者番号値 = div.getHokenshaJoho().getTxtHokenshaNo().getValue();
-        if (保険者番号値.isNullOrEmpty() || !div.getDdlTodofuken().getSelectedKey().equals(保険者番号値.substring(0, 2))) {
+        if ((保険者番号値.isNull()) || (保険者番号値.length() < 2)
+                || (!div.getDdlTodofuken().getSelectedKey().equals(保険者番号値.substring(0, 2)))) {
             return new ValidationMessageControlPair(new IdocheckMessages(DbuErrorMessages.保険者番号都道府県エラー));
         }
         return null;

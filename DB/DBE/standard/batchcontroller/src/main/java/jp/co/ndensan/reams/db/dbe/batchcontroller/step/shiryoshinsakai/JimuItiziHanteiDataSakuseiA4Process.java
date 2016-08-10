@@ -80,9 +80,11 @@ public class JimuItiziHanteiDataSakuseiA4Process extends BatchKeyBreakBase<Itizi
         ShinseishoKanriNo 申請書管理番号 = entity.getShinseishoKanriNo();
         ShinseishoKanriNo 前申請書管理番号 = entity.getZShinseishoKanriNo();
         int 認定調査依頼履歴番号 = entity.getNinteichosaIraiRirekiNo();
+        int 主治医意見履歴番号 = entity.getIkenshoIraiRirekiNo();
         myBatisParameter.setShinseishoKanriNo(申請書管理番号);
         myBatisParameter.setNinteichosaRirekiNo(認定調査依頼履歴番号);
         myBatisParameter.setShinseishoKanriNoZ(前申請書管理番号);
+        myBatisParameter.setIkenshoIraiRirekiNo(主治医意見履歴番号);
         List<DbT5207NinteichosahyoServiceJokyoEntity> 予防給付サービス利用状況 = new ArrayList<>();
         List<DbT5207NinteichosahyoServiceJokyoEntity> 介護給付サービス利用状況 = new ArrayList<>();
         DbT5208NinteichosahyoServiceJokyoFlagEntity サービス状況フラグ = new DbT5208NinteichosahyoServiceJokyoFlagEntity();
@@ -99,10 +101,10 @@ public class JimuItiziHanteiDataSakuseiA4Process extends BatchKeyBreakBase<Itizi
         List<DbT5211NinteichosahyoChosaItemEntity> 前回調査票調査項目 = mapper.get前回調査票項目(myBatisParameter);
         DbT5210NinteichosahyoShisetsuRiyoEntity 現在状況 = mapper.get現在状況(myBatisParameter);
         List<DbT5304ShujiiIkenshoIkenItemEntity> 前回主治医意見書 = mapper.get前回主治医意見書(myBatisParameter);
-        item.set合議体番号(myBatisParameter.getGogitaiNo());
         item = new IchijihanteikekkahyoItemSettei().set項目(entity, 特記事項,
                 調査票調査項目, 前回調査票調査項目, 主治医意見書,
-                前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, 現在状況);
+                前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, 現在状況,
+                new RString(myBatisParameter.getGogitaiNo()));
         IchijihanteikekkahyoA4Report report = new IchijihanteikekkahyoA4Report(item);
         report.writeBy(reportSourceWriterA4);
     }
@@ -155,12 +157,14 @@ public class JimuItiziHanteiDataSakuseiA4Process extends BatchKeyBreakBase<Itizi
         RStringBuilder builder2 = new RStringBuilder();
         builder2.append("【介護認定審査会開催予定年月日】")
                 .append(" ")
-                .append(paramter.getShinsakaiKaisaiYoteiYMD().wareki());
+                .append(paramter.getShinsakaiKaisaiYoteiYMD().wareki().toDateString());
         RStringBuilder builder3 = new RStringBuilder();
         builder3.append("【介護認定審査会開催番号】")
                 .append(" ")
                 .append(paramter.getShinsakaiKaisaiNo());
         list.add(builder1.toRString());
+        list.add(builder2.toRString());
+        list.add(builder3.toRString());
         return list;
     }
 }

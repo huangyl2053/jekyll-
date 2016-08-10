@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.basic.ChoshuHohoManager;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.sokujikosei.SokujiFukaKoseiService;
 import jp.co.ndensan.reams.db.dbb.service.core.fukajoho.fukajoho.FukaJohoManager;
 import jp.co.ndensan.reams.db.dbb.service.core.fukakousei.SokujiFukaKouseiManager;
+import jp.co.ndensan.reams.db.dbb.service.core.kanri.HonsanteiIkoHantei;
 import jp.co.ndensan.reams.db.dbb.service.core.tokucho.TokuchoIraiJohoSakuseiJokyo;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -75,15 +76,13 @@ public class SokujiFukaKouseiMain {
     private static final RString DBB_HIHOKENSHANO = new RString("DBBHihokenshaNo");
     private static final RString 翌年度の情報を表示する = new RString("翌年度の情報を表示する");
     private static final RString 前年度の情報を表示する = new RString("前年度の情報を表示する");
-    private static final RString 個人番号_利用有無名称 = new RString("個人番号 利用有無");
-    private static final RString 法人番号_利用有無名称 = new RString("法人番号 利用有無");
     private static final RString 業務固有の識別情報名称 = new RString("業務固有の識別情報");
-    private static final RString 無し = new RString("無し");
     private static final RString 四月一日 = new RString("0401");
     private static final RString チェック済み = new RString("チェック済み");
     private static final RString メニューID_通知書発行後異動把握 = new RString("DBBMN32001");
     private static final RString メニューID_特徴仮算定賦課エラー一覧 = new RString("DBBMN33004");
     private static final RString メニューID_即時賦課更正 = new RString("DBBMN13001");
+    private static final Code CODE_003 = new Code("0003");
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
     private static final int INT_3 = 3;
@@ -108,11 +107,13 @@ public class SokujiFukaKouseiMain {
         KoseiZengoChoshuHoho 更正前後徴収方法 = null;
         NendobunFukaList 更正前賦課リスト = null;
         NendobunFukaList 更正後賦課リスト = null;
+        boolean is本算定処理済フラグ;
         if (is特殊処理()) {
             NendobunFukaList 年度分賦課リスト = get年度分賦課リスト(賦課年度, 通知書番号);
             更正前賦課リスト = 年度分賦課リスト;
             更正後賦課リスト = 年度分賦課リスト;
             更正前後徴収方法 = get更正前後徴収方法(賦課年度, 被保険者番号);
+            is本算定処理済フラグ = is本算定後(更正前賦課リスト);
         } else {
             SokujiFukaKoseiParameter parameter = new SokujiFukaKoseiParameter();
             parameter.set賦課年度(賦課年度);
@@ -122,19 +123,19 @@ public class SokujiFukaKouseiMain {
             SokujiFukaKoseiResult reasult = service.do更正(parameter);
             更正前後賦課のリスト = reasult.get更正前後賦課のリスト();
             更正前後徴収方法 = reasult.get更正前後徴収方法();
+            is本算定処理済フラグ = reasult.is本算定処理済フラグ();
             ViewStateHolder.put(ViewStateKeys.資格の情報リスト, (Serializable) reasult.get資格の情報());
-            ViewStateHolder.put(ViewStateKeys.本算定処理済フラグ, reasult.is本算定処理済フラグ());
             boolean is更正前と状態変更なし = is更正前と状態変更なし(更正前後賦課のリスト);
             if (is更正前と状態変更なし && !ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(DbbInformationMessages.更正前と状態変更なし.getMessage()).respond();
             }
-            if (!is更正前と状態変更なし) {
-                handler.set更正前後賦課のリスト降順(更正前後賦課のリスト);
+            handler.set更正前後賦課のリスト降順(更正前後賦課のリスト);
+            KoseiZengoFuka 更正前後賦課 = get更正前後賦課By通知書番号(更正前後賦課のリスト, 通知書番号);
+            if (!is更正前と状態変更なし && !更正前後賦課のリスト.isEmpty()) {
                 通知書番号選択 = 更正前後賦課のリスト.get(0).get通知書番号();
                 更正前賦課リスト = 更正前後賦課のリスト.get(0).get更正前();
                 更正後賦課リスト = 更正前後賦課のリスト.get(0).get更正後();
-            } else {
-                KoseiZengoFuka 更正前後賦課 = get更正前後賦課By通知書番号(更正前後賦課のリスト, 通知書番号);
+            } else if (is更正前と状態変更なし && 更正前後賦課 != null) {
                 更正前賦課リスト = 更正前後賦課.get更正前();
                 更正後賦課リスト = 更正前後賦課.get更正後();
                 div.setDisabled(true);
@@ -142,12 +143,13 @@ public class SokujiFukaKouseiMain {
             }
         }
         handler.initializeヘッダエリア(is特殊処理(), 賦課年度, 更正前後賦課のリスト, 通知書番号選択, 更正前後徴収方法);
-        handler.initialize更正前後データ(is特殊処理(), 更正前賦課リスト, 更正後賦課リスト, 更正前後徴収方法);
+        handler.initialize更正前後データ(is特殊処理(), 更正前賦課リスト, 更正後賦課リスト, 更正前後徴収方法, is本算定処理済フラグ);
         ViewStateHolder.put(ViewStateKeys.更正前, 更正前賦課リスト);
         ViewStateHolder.put(ViewStateKeys.更正後, 更正後賦課リスト);
         ViewStateHolder.put(ViewStateKeys.更正前後徴収方法, 更正前後徴収方法);
         ViewStateHolder.put(ViewStateKeys.更正前後賦課のリスト, (Serializable) 更正前後賦課のリスト);
-        AccessLogger.log(AccessLogType.照会, PersonalData.withKojinNo(識別コード));
+        ViewStateHolder.put(ViewStateKeys.本算定処理済フラグ, is本算定処理済フラグ);
+        AccessLogger.log(AccessLogType.照会, PersonalData.of(識別コード));
         LockingKey 前排他キー = new LockingKey(DBB_HIHOKENSHANO.concat(被保険者番号.getColumnValue()));
         if (!RealInitialLocker.tryGetLock(前排他キー)) {
             throw new PessimisticLockingException();
@@ -180,19 +182,19 @@ public class SokujiFukaKouseiMain {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
         valid = validationHandler.validate普徴警告();
-        if (valid.iterator().hasNext()) {
-            if (!ResponseHolder.isWarningIgnoredRequest() || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                return ResponseData.of(div).addValidationMessages(valid).respond();
-            }
+        if (valid.iterator().hasNext()
+                && (!ResponseHolder.isWarningIgnoredRequest()
+                || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
+            return ResponseData.of(div).addValidationMessages(valid).respond();
         }
         valid = validationHandler.validate特徴警告();
-        if (valid.iterator().hasNext() && !チェック済み.equals(div.getIsHasWarningFlag())) {
-            if (!ResponseHolder.isWarningIgnoredRequest()
-                    || (ResponseHolder.getButtonType() == null && ResponseHolder.isWarningIgnoredRequest())
-                    || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                div.setIsHasWarningFlag(チェック済み);
-                return ResponseData.of(div).addValidationMessages(valid).respond();
-            }
+        if (valid.iterator().hasNext()
+                && !チェック済み.equals(div.getIsHasWarningFlag())
+                && (!ResponseHolder.isWarningIgnoredRequest()
+                || (ResponseHolder.getButtonType() == null && ResponseHolder.isWarningIgnoredRequest())
+                || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
+            div.setIsHasWarningFlag(チェック済み);
+            return ResponseData.of(div).addValidationMessages(valid).respond();
         }
         NendobunFukaList 更正前 = ViewStateHolder.get(ViewStateKeys.更正前, NendobunFukaList.class);
         NendobunFukaList 更正後 = ViewStateHolder.get(ViewStateKeys.更正後, NendobunFukaList.class);
@@ -297,6 +299,7 @@ public class SokujiFukaKouseiMain {
         KoseiZengoChoshuHoho 更正前後徴収方法 = ViewStateHolder.get(ViewStateKeys.更正前後徴収方法, KoseiZengoChoshuHoho.class);
         List<KoseiZengoFuka> 更正前後賦課のリスト = ViewStateHolder.get(ViewStateKeys.更正前後賦課のリスト, List.class);
         NendobunFukaList 更正後 = ViewStateHolder.get(ViewStateKeys.更正後, NendobunFukaList.class);
+        boolean is本算定処理済フラグ = ViewStateHolder.get(ViewStateKeys.本算定処理済フラグ, Boolean.class);
         SokujiFukaKouseiMainHandler handler = getHandler(div);
         handler.set画面入力項目を反映(更正後);
         KoseiZengoFuka 更正前後賦課 = new KoseiZengoFuka();
@@ -312,7 +315,8 @@ public class SokujiFukaKouseiMain {
         ViewStateHolder.put(ViewStateKeys.更正前後賦課のリスト, (Serializable) 更正前後賦課のリスト);
         TsuchishoNo 通知書番号 = new TsuchishoNo(div.getDdlKoseigoTsuchishoNo().getSelectedKey());
         KoseiZengoFuka koseiZengoFuka = get更正前後賦課By通知書番号(更正前後賦課のリスト, 通知書番号);
-        handler.initialize更正前後データ(is特殊処理(), koseiZengoFuka.get更正前(), koseiZengoFuka.get更正後(), 更正前後徴収方法);
+        handler.initialize更正前後データ(is特殊処理(), koseiZengoFuka.get更正前(), koseiZengoFuka.get更正後(),
+                更正前後徴収方法, is本算定処理済フラグ);
         ViewStateHolder.put(ViewStateKeys.更正前, koseiZengoFuka.get更正前());
         ViewStateHolder.put(ViewStateKeys.更正後, koseiZengoFuka.get更正後());
         return getResponseData(div);
@@ -355,7 +359,7 @@ public class SokujiFukaKouseiMain {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         KoseiZengoChoshuHoho 更正前後徴収方法 = ViewStateHolder.get(ViewStateKeys.更正前後徴収方法, KoseiZengoChoshuHoho.class);
         NendobunFukaList 更正後 = ViewStateHolder.get(ViewStateKeys.更正後, NendobunFukaList.class);
-
+        boolean is本算定処理済フラグ = ViewStateHolder.get(ViewStateKeys.本算定処理済フラグ, Boolean.class);
         List<HihokenshaDaicho> 資格の情報リスト = ViewStateHolder.get(ViewStateKeys.資格の情報リスト, List.class);
         SokujiFukaKoseiParameter parameter = new SokujiFukaKoseiParameter();
         parameter.set賦課年度(賦課年度);
@@ -382,7 +386,8 @@ public class SokujiFukaKouseiMain {
         SokujiFukaKouseiMainHandler handler = getHandler(div);
         更正前後賦課のリスト = reasult.get更正前後賦課のリスト();
         KoseiZengoFuka 更正前後賦課 = get更正前後賦課By通知書番号(更正前後賦課のリスト, 通知書番号);
-        handler.initialize更正前後データ(is特殊処理(), 更正前後賦課.get更正前(), 更正前後賦課.get更正後(), 更正前後徴収方法);
+        handler.initialize更正前後データ(is特殊処理(), 更正前後賦課.get更正前(), 更正前後賦課.get更正後(),
+                更正前後徴収方法, is本算定処理済フラグ);
         return getResponseData(div);
     }
 
@@ -409,11 +414,13 @@ public class SokujiFukaKouseiMain {
             FlexibleYear 賦課年度 = ViewStateHolder.get(ViewStateKeys.賦課年度, FlexibleYear.class);
             HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
             TsuchishoNo 通知書番号 = ViewStateHolder.get(ViewStateKeys.通知書番号, TsuchishoNo.class);
+            boolean is本算定処理済フラグ = ViewStateHolder.get(ViewStateKeys.本算定処理済フラグ, Boolean.class);
             SokujiFukaKoseiService service = SokujiFukaKoseiService.createInstance();
             YokunenFukaKoseiResult result = service.do翌年度更正(賦課年度.plusYear(INT_1), 被保険者番号);
             List<KoseiZengoFuka> 更正前後賦課のリスト = result.get更正前後賦課のリスト();
             KoseiZengoFuka 更正前後賦課 = get更正前後賦課By通知書番号(更正前後賦課のリスト, 通知書番号);
-            handler.initialize更正前後データ(is特殊処理(), 更正前後賦課.get更正前(), 更正前後賦課.get更正後(), result.get更正前後徴収方法());
+            handler.initialize更正前後データ(is特殊処理(), 更正前後賦課.get更正前(), 更正前後賦課.get更正後(),
+                    result.get更正前後徴収方法(), is本算定処理済フラグ);
             handler.set画面項目入力不可();
             if (!is特徴異動情報作成が処理済み()) {
                 SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
@@ -470,11 +477,11 @@ public class SokujiFukaKouseiMain {
         年度分賦課リスト.set賦課年度(賦課年度);
         年度分賦課リスト.set通知書番号(通知書番号);
         FukaJoho 最新賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度);
-        FukaJoho 過年度1賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.minusYear(INT_1));
-        FukaJoho 過年度2賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.minusYear(INT_2));
-        FukaJoho 過年度3賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.minusYear(INT_3));
-        FukaJoho 過年度4賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.minusYear(INT_4));
-        FukaJoho 過年度5賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.minusYear(INT_5));
+        FukaJoho 過年度1賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.plusYear(INT_1));
+        FukaJoho 過年度2賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.plusYear(INT_2));
+        FukaJoho 過年度3賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.plusYear(INT_3));
+        FukaJoho 過年度4賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.plusYear(INT_4));
+        FukaJoho 過年度5賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.plusYear(INT_5));
         boolean has過年度賦課 = Boolean.FALSE;
         年度分賦課リスト.set現年度(最新賦課の情報);
         年度分賦課リスト.set賦課期日(最新賦課の情報.get賦課期日());
@@ -499,7 +506,7 @@ public class SokujiFukaKouseiMain {
             has過年度賦課 = Boolean.TRUE;
         }
         if (過年度5賦課の情報 != null) {
-            年度分賦課リスト.set過年度1(過年度5賦課の情報);
+            年度分賦課リスト.set過年度5(過年度5賦課の情報);
             最新賦課の情報 = 過年度5賦課の情報;
             has過年度賦課 = Boolean.TRUE;
         }
@@ -591,9 +598,12 @@ public class SokujiFukaKouseiMain {
     }
 
     private PersonalData toPersonalData(ShikibetsuCode 識別コード, RString 被保険者番号) {
-        ExpandedInformation expandedInfo1 = new ExpandedInformation(new Code("0001"), 個人番号_利用有無名称, 無し);
-        ExpandedInformation expandedInfo2 = new ExpandedInformation(new Code("0002"), 法人番号_利用有無名称, 無し);
-        ExpandedInformation expandedInfo3 = new ExpandedInformation(new Code("0003"), 業務固有の識別情報名称, 被保険者番号);
-        return PersonalData.of(識別コード, expandedInfo1, expandedInfo2, expandedInfo3);
+        ExpandedInformation expandedInfo = new ExpandedInformation(CODE_003, 業務固有の識別情報名称, 被保険者番号);
+        return PersonalData.of(識別コード, expandedInfo);
+    }
+
+    private boolean is本算定後(NendobunFukaList 更正前賦課リスト) {
+        HonsanteiIkoHantei honsanteiIkoHantei = HonsanteiIkoHantei.createInstance();
+        return honsanteiIkoHantei.is本算定後(更正前賦課リスト.get最新賦課の情報());
     }
 }

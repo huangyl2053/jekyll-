@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -21,6 +22,7 @@ import lombok.Getter;
  * @reamsid_L DBD-5810-030 mawy
  */
 @Getter
+@Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HanyoRisutoRiyoshaFutanWariaiBatchParameter extends BatchParameterBase {
 

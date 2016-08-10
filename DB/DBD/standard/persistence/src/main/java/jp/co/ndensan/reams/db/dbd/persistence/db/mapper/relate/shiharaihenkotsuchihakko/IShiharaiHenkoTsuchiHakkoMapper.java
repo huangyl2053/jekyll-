@@ -15,7 +15,7 @@ import org.apache.ibatis.annotations.Param;
  *
  * 支払方法変更管理のMapperクラスです。
  *
- * @reamsid_L DBD-3640-010 panxiaobo
+ * @reamsid_L DBD-3640-030 panxiaobo
  */
 public interface IShiharaiHenkoTsuchiHakkoMapper {
 
@@ -23,14 +23,14 @@ public interface IShiharaiHenkoTsuchiHakkoMapper {
      * 償還払請求情報のselect処理です。
      *
      *
-     * @param hihokenshaNo hihokenshaNo
+     * @param hiHokenshaNo hiHokenshaNo
      * @param kanriKubun kanriKubun
      * @param rirekiNo rirekiNo
      * @param johoBunruiKubun johoBunruiKubun
      *
      * @return 償還払請求情報list
      */
-    List<ShokanKihonJihoEntiy> selectShokanKihon(@Param("hihokenshaNo") HihokenshaNo hihokenshaNo,
+    List<ShokanKihonJihoEntiy> selectShokanKihon(@Param("hiHokenshaNo") HihokenshaNo hiHokenshaNo,
             @Param("kanriKubun") RString kanriKubun,
             @Param("rirekiNo") int rirekiNo,
             @Param("johoBunruiKubun") RString johoBunruiKubun);

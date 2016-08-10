@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakute
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuGaikyoTokkiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.GaikyoTokkiEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ImjJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.gaikyotokkiichiran.GaikyoTokkiIchiranReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
@@ -46,8 +45,8 @@ public class JimuGaikyouTokkiIranDataSakuseiA4Process extends BatchProcessBase<G
     private IJimuShiryoShinsakaiIinMapper mapper;
     private JimuGaikyoTokkiMyBatisParameter myBatisParameter;
     private List<GaikyoTokkiEntity> 概況特記一覧表情報;
-    private List<ImjJohoEntity> 概況特記イメージ情報;
     private JimuGaikyouTokkiBusiness business;
+    private int no;
     @BatchWriter
     private BatchReportWriter<GaikyoTokkiIchiranReportSource> batchWriteA4;
     private ReportSourceWriter<GaikyoTokkiIchiranReportSource> reportSourceWriterA4;
@@ -60,7 +59,7 @@ public class JimuGaikyouTokkiIranDataSakuseiA4Process extends BatchProcessBase<G
         myBatisParameter.setImageKubun(TokkijikoTextImageKubun.テキスト.getコード());
         myBatisParameter.setGenponKubun(TokkijikoTextImageKubun.イメージ.getコード());
         概況特記一覧表情報 = mapper.getJimuGaikyoTokki(myBatisParameter);
-        概況特記イメージ情報 = mapper.getJimuImjJoho(myBatisParameter);
+        no = 0;
     }
 
     @Override
@@ -70,9 +69,11 @@ public class JimuGaikyouTokkiIranDataSakuseiA4Process extends BatchProcessBase<G
 
     @Override
     protected void process(GaikyoTokkiEntity entity) {
-        business = new JimuGaikyouTokkiBusiness(entity, 概況特記一覧表情報, 概況特記イメージ情報, paramter);
+        entity.setJimukyoku(true);
+        business = new JimuGaikyouTokkiBusiness(entity, 概況特記一覧表情報, null, paramter, no, null);
         GaikyoTokkiIchiranReport report = new GaikyoTokkiIchiranReport(business);
         report.writeBy(reportSourceWriterA4);
+        no = no + 1;
     }
 
     @Override
@@ -118,6 +119,8 @@ public class JimuGaikyouTokkiIranDataSakuseiA4Process extends BatchProcessBase<G
                 .append(" ")
                 .append(paramter.getShinsakaiKaisaiNo());
         list.add(builder1.toRString());
+        list.add(builder2.toRString());
+        list.add(builder3.toRString());
         return list;
     }
 }

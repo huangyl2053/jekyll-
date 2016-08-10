@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 画面設計_DBE3010001_一次判定処理 用XMLです。 -->
+<!-- @reamsid_L DBE-1470-010 houtianpeng -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijipanteisyori.IIChiJiPanTeiSyoRiMapper">
+    <resultMap id="resultMap_IChiJiPanTeiSyoRiRelateEntity" 
+               type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijipanteisyori.IChiJiPanTeiSyoRiRelateEntity" autoMapping="true">
+        
+        <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="ninteiShinseiYMD" column="ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="ninteiShinseiShinseijiKubunCode" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="ichijiHanteiYMD" column="ichijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="ichijiHanteiKekkaCode" column="ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="ichijiHnateiKeikokuCode" column="ichijiHnateiKeikokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ichijiHanteiKekkaNinchishoKasanCode" column="ichijiHanteiKekkaNinchishoKasanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="kijunJikan" column="kijunJikan"/>
+        <result property="kijunJikanShokuji" column="kijunJikanShokuji"/>
+        <result property="kijunJikanHaisetsu" column="kijunJikanHaisetsu"/>
+        <result property="kijunJikanIdo" column="kijunJikanIdo"/>
+        <result property="kijunJikanSeiketsuHoji" column="kijunJikanSeiketsuHoji"/>
+        <result property="kijunJikanKansetsuCare" column="kijunJikanKansetsuCare"/>
+        <result property="kijunJikanBPSDKanren" column="kijunJikanBPSDKanren"/>
+        <result property="kijunJikanKinoKunren" column="kijunJikanKinoKunren"/>
+        <result property="kijunJikanIryoKanren" column="kijunJikanIryoKanren"/>
+        <result property="kijunJikanNinchishoKasan" column="kijunJikanNinchishoKasan"/>
+        <result property="chukanHyokaKomoku1gun" column="chukanHyokaKomoku1gun"/>
+        <result property="chukanHyokaKomoku2gun" column="chukanHyokaKomoku2gun"/>
+        <result property="chukanHyokaKomoku3gun" column="chukanHyokaKomoku3gun"/>
+        <result property="chukanHyokaKomoku4gun" column="chukanHyokaKomoku4gun"/>
+        <result property="chukanHyokaKomoku5gun" column="chukanHyokaKomoku5gun"/>
+        <result property="jotaiAnteiseiCode" column="jotaiAnteiseiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="ninchishoJiritsudoIIijoNoGaizensei" column="ninchishoJiritsudoIIijoNoGaizensei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="suiteiKyufuKubunCode" column="suiteiKyufuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="ninteichosaJisshiYMD" column="ninteichosaJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="ikenshoJuryoYMD" column="ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
+        <result property="koroshoIfShikibetsuCode" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+
+    </resultMap>
+
+    <select id="get対象者一覧" resultMap="resultMap_IChiJiPanTeiSyoRiRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.processprm.ichijipanteisyori.IChiJiPanTeiSyoRiParameter" 
+            resultOrdered="true" fetchSize="500">
+   SELECT
+     DbT7051."shichosonMeisho"
+    ,DbT5101."hihokenshaNo" 
+    ,DbT5101."hihokenshaName"
+    ,DbT5101."ninteiShinseiYMD"
+    ,DbT5101."ninteiShinseiShinseijiKubunCode"
+    ,"DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiYMD"
+    ,"DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiKekkaCode"
+    ,"DbT5116IchijiHanteiKekkaJoho"."ichijiHnateiKeikokuCode"
+    ,"DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiKekkaNinchishoKasanCode"
+    ,"DbT5116IchijiHanteiKekkaJoho"."kijunJikan"
+    ,"DbT5116IchijiHanteiKekkaJoho"."kijunJikanShokuji"
+    ,"DbT5116IchijiHanteiKekkaJoho"."kijunJikanHaisetsu"
+    ,"DbT5116IchijiHanteiKekkaJoho"."kijunJikanIdo"
+    ,"DbT5116IchijiHanteiKekkaJoho"."kijunJikanSeiketsuHoji"
+    ,"DbT5116IchijiHanteiKekkaJoho"."kijunJikanKansetsuCare"
+    ,"DbT5116IchijiHanteiKekkaJoho"."kijunJikanBPSDKanren"
+    ,"DbT5116IchijiHanteiKekkaJoho"."kijunJikanKinoKunren"
+    ,"DbT5116IchijiHanteiKekkaJoho"."kijunJikanIryoKanren"
+    ,"DbT5116IchijiHanteiKekkaJoho"."kijunJikanNinchishoKasan"
+    ,"DbT5116IchijiHanteiKekkaJoho"."chukanHyokaKomoku1gun"
+    ,"DbT5116IchijiHanteiKekkaJoho"."chukanHyokaKomoku2gun"
+    ,"DbT5116IchijiHanteiKekkaJoho"."chukanHyokaKomoku3gun"
+    ,"DbT5116IchijiHanteiKekkaJoho"."chukanHyokaKomoku4gun"
+    ,"DbT5116IchijiHanteiKekkaJoho"."chukanHyokaKomoku5gun"
+    ,"DbT5116IchijiHanteiKekkaJoho"."jotaiAnteiseiCode"
+    ,"DbT5116IchijiHanteiKekkaJoho"."ninchishoJiritsudoIIijoNoGaizensei"
+    ,"DbT5116IchijiHanteiKekkaJoho"."suiteiKyufuKubunCode"
+    ,DbT5202."ninteichosaJisshiYMD"
+    ,DbT5302."ikenshoJuryoYMD"
+    ,DbT5101."shinseishoKanriNo" 
+    ,DbT5101."koroshoIfShikibetsuCode"
+FROM
+    <include refid="検索条件" />
+</select>
+<select id="get要介護認定一次判定結果情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5116IchijiHanteiKekkaJohoMapper.ResultMap_DbT5116IchijiHanteiKekkaJohoEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.processprm.ichijipanteisyori.IChiJiPanTeiSyoRiParameter" 
+            resultOrdered="true" fetchSize="500">
+  SELECT
+    <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5116IchijiHanteiKekkaJohoMapper.allColumns_DbT5116IchijiHanteiKekkaJoho" />
+  FROM  
+    <include refid="検索条件" />
+</select>
+ <sql id="検索条件">
+     rgdb."DbT5101NinteiShinseiJoho" DbT5101
+    INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
+    ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
+    LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" "DbT5116IchijiHanteiKekkaJoho"
+    ON "DbT5116IchijiHanteiKekkaJoho"."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+    INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" DbT5202
+    ON DbT5202."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+    AND DbT5202."ninteichosaRirekiNo" = (SELECT 
+                                                   MAX(DbT5202N."ninteichosaRirekiNo")
+                                                FROM  rgdb."DbT5202NinteichosahyoGaikyoChosa" as DbT5202N
+                                                WHERE 
+                                                      DbT5202N."ninteichosaRirekiNo" = DbT5202."ninteichosaRirekiNo")
+    AND DbT5202."gaikyoChosaTextImageKubun" = #{イメージ区分}  
+    AND DbT5101."koroshoIfShikibetsuCode" = DbT5202."koroshoIfShikibetsuCode"
+    INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" DbT5302
+    ON DbT5302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+    AND DbT5302."ikenshoIraiRirekiNo" = (SELECT 
+                                                   MAX(DbT5302S."ikenshoIraiRirekiNo")
+                                                FROM  rgdb."DbT5302ShujiiIkenshoJoho" as DbT5302S
+                                                WHERE 
+                                                      DbT5302S."ikenshoIraiRirekiNo" = DbT5302."ikenshoIraiRirekiNo")
+    INNER JOIN rgdb."DbT5105NinteiKanryoJoho" DbT5105 
+    ON DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+WHERE
+        DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+    AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
+    AND DbT5105."ninteichosaKanryoYMD" IS NOT NULL
+    AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
+    AND DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
+    AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
+    AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
+    AND DbT5105."centerSoshinYMD" IS NULL
+    AND DbT5101."shoriJotaiKubun"  IN (#{通常},#{延期}) 
+    AND DbT5101."logicalDeletedFlag" = FALSE
+ <if test = "認定申請年月日開始From">
+    AND                                                                 
+     #{認定申請年月日開始} <![CDATA[<=]]> DbT5101."ninteiShinseiYMD" 
+ </if> 
+  <if test = "認定申請年月日開始To">
+    AND                                                                 
+     DbT5101."ninteiShinseiYMD"  <![CDATA[<=]]>  #{認定申請年月日終了}
+ </if> 
+ <if test = "完了処理一次判定_遷移">
+     AND DbT5101."shinseishoKanriNo" IN 
+     <foreach collection="申請書管理番号List" item="code" open="(" separator="," close=")"> #{code} </foreach>
+ </if>
+ORDER BY  
+    DbT5101."hihokenshaKana",
+    DbT5101."ninteiShinseiYMD",
+    DbT5101."shoKisaiHokenshaNo"
+ <if test = "メニュー_遷移">
+     LIMIT #{最大表示件数}
+ </if>
+</sql>
+</mapper>

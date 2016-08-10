@@ -16,10 +16,11 @@ import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakute
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiTaiyosyaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.tsuikashiryokagamia3.TsuikashiryokagamiA3ReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.IsHaishi;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -45,10 +46,10 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-0150-190 linghuhang
  */
-public class JimuTuikaSiryoDataSakuseiA3Process extends BatchKeyBreakBase<ShinseiJohoEntity> {
+public class JimuTuikaSiryoDataSakuseiA3Process extends BatchKeyBreakBase<ShinsakaiTaiyosyaJohoEntity> {
 
     private static final RString SELECT_JIMUTUIKASIRYO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
-            + ".mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper.get事務局情報");
+            + ".mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper.get審査会追加分");
     private static final int INT_4 = 4;
     private static final List<RString> PAGE_BREAK_KEYS_A3 = Collections.unmodifiableList(Arrays.asList(
             new RString(TsuikashiryokagamiA3ReportSource.ReportSourceFields.shinsakaiNo.name())));
@@ -71,6 +72,8 @@ public class JimuTuikaSiryoDataSakuseiA3Process extends BatchKeyBreakBase<Shinse
         myBatisParameter.setHaishiFlag_False(IsHaishi.有効.is廃止());
         myBatisParameter.setHaishiFlag_True(IsHaishi.廃止.is廃止());
         myBatisParameter.setSisutemuYMD(FlexibleDate.getNowDate());
+        myBatisParameter.setShoriJotaiKubun0(ShoriJotaiKubun.通常.getコード());
+        myBatisParameter.setShoriJotaiKubun3(ShoriJotaiKubun.延期.getコード());
         審査員 = mapper.get事務局委員氏名(myBatisParameter);
         データ件数 = mapper.get事務局情報件数(myBatisParameter);
     }
@@ -89,7 +92,7 @@ public class JimuTuikaSiryoDataSakuseiA3Process extends BatchKeyBreakBase<Shinse
     }
 
     @Override
-    protected void keyBreakProcess(ShinseiJohoEntity entity) {
+    protected void keyBreakProcess(ShinsakaiTaiyosyaJohoEntity entity) {
         if (データ件数 % 満ページ件数 == 0) {
             TsuikashiryokagamiA3Report report = new TsuikashiryokagamiA3Report(business);
             report.writeBy(reportSourceWriterA3);
@@ -97,7 +100,7 @@ public class JimuTuikaSiryoDataSakuseiA3Process extends BatchKeyBreakBase<Shinse
     }
 
     @Override
-    protected void usualProcess(ShinseiJohoEntity entity) {
+    protected void usualProcess(ShinsakaiTaiyosyaJohoEntity entity) {
         business = new JimuTuikaSiryoBusiness(entity,
                 審査員,
                 paramter,

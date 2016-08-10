@@ -10,8 +10,9 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.shogaishakojotaishoshalist.ShogaishaKojoTaishoshaListParameter;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shogaishakoujo.NinteiNaiyoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shogaishakoujo.Ninteikubun;
-import jp.co.ndensan.reams.db.dbd.definition.core.shogaishakojotaishoshalist.ShogaishaKojoTaishoshaListData;
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4030011.ShogaishaKoujoTaishoNinteiShoDiv;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
@@ -161,24 +162,22 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
      */
     public ShogaishaKojoTaishoshaListParameter getParameter() {
         ShogaishaKojoTaishoshaListParameter parameter = new ShogaishaKojoTaishoshaListParameter();
-        ShogaishaKojoTaishoshaListData tempData = new ShogaishaKojoTaishoshaListData();
-        tempData.set対象年度(div.getTyusyutuJyokenPanel().getTxtTaishoNendo().getValue());
-        tempData.set被保険者番号(div.getTyusyutuJyokenPanel().getTxtHihokenshaNo().getValue());
-        tempData.set氏名(div.getTyusyutuJyokenPanel().getTxtShimei().getValue());
-        tempData.set認定区分(div.getTyusyutuJyokenPanel().getDdlNinteiKbn().getSelectedValue());
-        tempData.set認定内容(div.getTyusyutuJyokenPanel().getDdlNinteiNaiyo().getSelectedValue());
-        tempData.set認知症高齢者の日常生活自立度(div.getTyusyutuJyokenPanel().getDdlninchishoNichijoSeikatsuJiritsudo().getSelectedValue());
-        tempData.set障害高齢者の日常生活自立度(div.getTyusyutuJyokenPanel().getDdlShogaiNichijoSeikatsuJiritsudo().getSelectedValue());
-        tempData.set障がい者手帳(div.getTyusyutuJyokenPanel().getDdlShogaishaTecho().getSelectedValue());
-        tempData.set喪失事由(div.getTyusyutuJyokenPanel().getDdlSoshituJiyu().getSelectedValue());
-        tempData.set喪失日FROM(div.getTyusyutuJyokenPanel().getTxtSoshituDay().getFromValue());
-        tempData.set喪失日TO(div.getTyusyutuJyokenPanel().getTxtSoshituDay().getToValue());
-        tempData.set決定日FROM(div.getTyusyutuJyokenPanel().getTxtKeteiDay().getFromValue());
-        tempData.set決定日TO(div.getTyusyutuJyokenPanel().getTxtKeteiDay().getToValue());
-        tempData.set前回非該当者(div.getTyusyutuJyokenPanel().getDropDownList1().getSelectedValue());
-        tempData.set交付日(div.getShogaishaKojoNinteishoOutput().getTxtKofuDay().getValue());
-        tempData.set出力順(get画面出力順());
-        parameter.toDbd100025BatchParameter(null);
+        parameter.set対象年度(div.getTyusyutuJyokenPanel().getTxtTaishoNendo().getValue());
+        parameter.set被保険者番号(new HihokenshaNo(div.getTyusyutuJyokenPanel().getTxtHihokenshaNo().getValue().toString()));
+        parameter.set氏名(div.getTyusyutuJyokenPanel().getTxtShimei().getValue());
+        parameter.set認定区分(div.getTyusyutuJyokenPanel().getDdlNinteiKbn().getSelectedValue());
+        parameter.set認定内容(div.getTyusyutuJyokenPanel().getDdlNinteiNaiyo().getSelectedValue());
+        parameter.set認知症高齢者の日常生活自立度(div.getTyusyutuJyokenPanel().getDdlninchishoNichijoSeikatsuJiritsudo().getSelectedValue());
+        parameter.set障害高齢者の日常生活自立度(div.getTyusyutuJyokenPanel().getDdlShogaiNichijoSeikatsuJiritsudo().getSelectedValue());
+        parameter.set障がい者手帳(div.getTyusyutuJyokenPanel().getDdlShogaishaTecho().getSelectedValue());
+        parameter.set喪失事由(div.getTyusyutuJyokenPanel().getDdlSoshituJiyu().getSelectedValue());
+        parameter.set喪失日FROM(div.getTyusyutuJyokenPanel().getTxtSoshituDay().getFromValue());
+        parameter.set喪失日TO(div.getTyusyutuJyokenPanel().getTxtSoshituDay().getToValue());
+        parameter.set決定日FROM(div.getTyusyutuJyokenPanel().getTxtKeteiDay().getFromValue());
+        parameter.set決定日TO(div.getTyusyutuJyokenPanel().getTxtKeteiDay().getToValue());
+        parameter.set前回非該当者(div.getTyusyutuJyokenPanel().getDropDownList1().getSelectedValue());
+        parameter.set交付日(div.getShogaishaKojoNinteishoOutput().getTxtKofuDay().getValue());
+        parameter.set出力順(get画面出力順());
         return parameter;
 
     }
@@ -191,9 +190,8 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
     public RString get画面出力順() {
         RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
         IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給,
-                div.getShogaishaKojoNinteishoOutput().getCommonChildDiv1().get帳票ID(), reamsLoginID,
-                div.getShogaishaKojoNinteishoOutput().getCommonChildDiv1().get出力順ID());
-        // TODO
+                ReportIdDBD.DBD100025.getReportId(), reamsLoginID,
+                div.getShogaishaKojoNinteishoOutput().getCommonChildDiv1().getSelected出力順().get出力順ID());
         return MyBatisOrderByClauseCreator.create(BreakerFieldsEnum.class, outputOrder);
 
     }
@@ -206,7 +204,7 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
         /**
          * 対象年度
          */
-        対象年度(new RString("0002"), new RString(""), new RString("\"").concat(new RString("")).concat(new RString("\""))),;
+        対象年度(new RString("0002"), new RString(""), new RString("\"").concat(new RString("")).concat(new RString("\"")));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

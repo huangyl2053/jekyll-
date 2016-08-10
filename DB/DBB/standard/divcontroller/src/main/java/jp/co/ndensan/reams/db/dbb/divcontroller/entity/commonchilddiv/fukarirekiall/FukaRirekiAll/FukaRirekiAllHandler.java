@@ -7,15 +7,15 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.fukarirek
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.util.HokenryoDankaiUtil;
 import jp.co.ndensan.reams.db.dbb.business.core.FukaRireki;
 import jp.co.ndensan.reams.db.dbb.business.core.Kiwarigaku;
-import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbb.business.util.HokenryoDankaiUtil;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.FukaMiscManager;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbb.service.core.relate.KiwarigakuManager;
+import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
@@ -131,6 +131,16 @@ public class FukaRirekiAllHandler {
     public int reload(HihokenshaNo 被保険者番号, ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号) {
         load(被保険者番号);
         return setSelectedRow(調定年度, 賦課年度, 通知書番号);
+    }
+
+    /**
+     * gridの件数を返します。
+     *
+     * @return gridの件数
+     */
+    public int get件数() {
+        List<dgFukaRirekiAll_Row> dataSource = div.getDgFukaRirekiAll().getDataSource();
+        return dataSource == null || dataSource.isEmpty() ? 0 : dataSource.size();
     }
 
     /**

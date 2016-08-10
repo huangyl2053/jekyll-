@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.tokuchokarisanteifukamanager.Fuk
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchokarisanteifukamanager.FukaJohokeizoku;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchokarisanteifukamanager.SikakuSaisinnsiki;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukarisanteikekkaIchiran.TokubetsuChoshuKarisanteiKekkaIchiranProperty;
-import jp.co.ndensan.reams.db.dbb.definition.core.choteijiyu.ChoteiJiyuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ErrorCode;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTani;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;

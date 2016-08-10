@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IchijiSashitome1GoDiv extends Panel implements IIchijiSashitome1GoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -60,6 +60,8 @@ public class IchijiSashitome1GoDiv extends Panel implements IIchijiSashitome1GoD
     private RString PTN;
     @JsonProperty("button_Name")
     private RString button_Name;
+    @JsonProperty("key_Index")
+    private RString key_Index;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -389,6 +391,24 @@ public class IchijiSashitome1GoDiv extends Panel implements IIchijiSashitome1GoD
     @JsonProperty("button_Name")
     public void setButton_Name(RString button_Name) {
         this.button_Name = button_Name;
+    }
+
+    /*
+     * getkey_Index
+     * @return key_Index
+     */
+    @JsonProperty("key_Index")
+    public RString getKey_Index() {
+        return key_Index;
+    }
+
+    /*
+     * setkey_Index
+     * @param key_Index key_Index
+     */
+    @JsonProperty("key_Index")
+    public void setKey_Index(RString key_Index) {
+        this.key_Index = key_Index;
     }
 
     /*

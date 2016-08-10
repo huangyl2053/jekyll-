@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.kanri.MonthShichoson;
 import jp.co.ndensan.reams.db.dbb.business.core.sokujikosei.SokujiFukaKoseiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.sokujikosei.SokujiFukaKoseiResult;
 import jp.co.ndensan.reams.db.dbb.business.core.sokujikosei.YokunenFukaKoseiResult;
-import jp.co.ndensan.reams.db.dbb.definition.core.choteijiyu.ChoteiJiyuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ShokkenKubun;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;

@@ -14,7 +14,6 @@ import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenra
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.logicalDeletedFlag;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.rirekiNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.shoKisaiHokenshaNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.sofuYM;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -103,19 +102,19 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
      * 受給者異動送付を全件返します。
      *
      * @param 被保番号 hiHokenshaNo
-     * @param 送付年月 sofuYM
+     * @param 異動日 idoYMD
      * @return List<DbT3001JukyushaIdoRenrakuhyoEntity>
      */
     @Transaction
-    public DbT3001JukyushaIdoRenrakuhyoEntity select登録した受給者異動情報の取得(RString 被保番号, RString 送付年月) {
+    public DbT3001JukyushaIdoRenrakuhyoEntity select登録した受給者異動情報の取得(RString 被保番号, RString 異動日) {
         requireNonNull(被保番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保番号"));
-        requireNonNull(送付年月, UrSystemErrorMessages.値がnull.getReplacedMessage("送付年月"));
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT3001JukyushaIdoRenrakuhyo.class).
                 where(and(
                                 eq(hiHokenshaNo, 被保番号),
-                                eq(sofuYM, 送付年月),
+                                eq(idoYMD, 異動日),
                                 eq(logicalDeletedFlag, 論理削除フラグ),
                                 eq(rirekiNo, ONE))).
                 toObject(DbT3001JukyushaIdoRenrakuhyoEntity.class);

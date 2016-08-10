@@ -18,26 +18,23 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class ShiharaiHohoHenkoHaakuIchiran {
 
-    private final ShiharaiHohoHenkoHakuListMainDiv div;
     private static final RString SELECTED_VALUE = new RString("0");
     private static final RString UN_SELECTED_VALUE = new RString("1");
     private static final RString REPORTID = new RString("DBD200006_ShiharaiHohoHenkoHaakuIchiran");
 
     /**
      * コンストラクタです。
-     *
-     * @param div 支払方法変更滞納者把握リスト画面Div
      */
-    public ShiharaiHohoHenkoHaakuIchiran(ShiharaiHohoHenkoHakuListMainDiv div) {
-        this.div = div;
+    public ShiharaiHohoHenkoHaakuIchiran() {
     }
 
     /**
      * 支払方法変更滞納者把握リスト（画面）バッチパラメターを取得します．
      *
+     * @param div ShiharaiHohoHenkoHakuListMainDiv
      * @return 支払方法変更滞納者把握リスト（画面）バッチパラメター
      */
-    public ShiharaiHohoHenkoHaakuIchiranBatchParameter createShiharaiHohoHenkoHaakuIchiranParameter() {
+    public ShiharaiHohoHenkoHaakuIchiranBatchParameter createShiharaiHohoHenkoHaakuIchiranParameter(ShiharaiHohoHenkoHakuListMainDiv div) {
         ShiharaiHohoHenkoHaakuIchiranBatchParameter parameter = new ShiharaiHohoHenkoHaakuIchiranBatchParameter();
         parameter.setKijunYMD(div.getChushutsuJoken().getTxtKijunYMD().getValue());
         if (!div.getRadHihokenshaAll().getSelectedKey().isNullOrEmpty()) {

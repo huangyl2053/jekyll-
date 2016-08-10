@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 介護事業状況報告月報・保険給付決定状況（様式2-7-1）のReportクラスです。
  *
- * @reamsid_L DBU-5580-040　wanghuafeng
+ * @reamsid_L DBU-5580-040 wanghuafeng
  */
 public class JigyohokokuCompYoshiki271Report extends Report<JigyohokokuCompYoshiki271ReportSource> {
 
@@ -41,8 +41,9 @@ public class JigyohokokuCompYoshiki271Report extends Report<JigyohokokuCompYoshi
     @Override
     public void writeBy(ReportSourceWriter<JigyohokokuCompYoshiki271ReportSource> writer) {
         for (JigyohokokuCompYoshiki271Change change : getData()) {
-            IJigyohokokuCompYoshiki271Editor editor = new JigyohokokuCompYoshiki271Editor(data, change);
-            IJigyohokokuCompYoshiki271Builder builder = new JigyohokokuCompYoshiki271Builder(editor);
+            IJigyohokokuCompYoshiki271Editor headeditor = new JigyohokokuCompYoshiki271HeadEditor(data);
+            IJigyohokokuCompYoshiki271Editor bodyeditor = new JigyohokokuCompYoshiki271BodyEditor(change);
+            IJigyohokokuCompYoshiki271Builder builder = new JigyohokokuCompYoshiki271Builder(headeditor, bodyeditor);
             writer.writeLine(builder);
         }
     }
@@ -50,7 +51,6 @@ public class JigyohokokuCompYoshiki271Report extends Report<JigyohokokuCompYoshi
     private Iterable<JigyohokokuCompYoshiki271Change> getData() {
         List<JigyohokokuCompYoshiki271Change> dataList = new ArrayList<>();
         List<DbT7021JigyoHokokuTokeiDataEntity> jigyohokokutokeis = data.get事業報告統計データ();
-
         for (DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei : jigyohokokutokeis) {
             Decimal 件数世帯合算 = set件数世帯合算(jigyohokokutokei);
             Decimal 件数その他 = set件数その他(jigyohokokutokei);
@@ -63,6 +63,7 @@ public class JigyohokokuCompYoshiki271Report extends Report<JigyohokokuCompYoshi
                     new RString(給付額その他.toString()),
                     new RString(set給付額計(給付額世帯合算, 給付額その他).toString())));
         }
+
         return dataList;
     }
 

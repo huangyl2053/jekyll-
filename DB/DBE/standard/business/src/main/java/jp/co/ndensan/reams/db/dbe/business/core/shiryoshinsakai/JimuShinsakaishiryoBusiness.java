@@ -19,13 +19,13 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibe
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaNinchishoKasanCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 介護認定審査対象者一覧表情報のBusinessの編集クラスです。
@@ -34,7 +34,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  */
 public class JimuShinsakaishiryoBusiness {
 
-    private static final int LENGTH_5 = 5;
+    private static final int SIZE_3 = 3;
+    private static final int SIZE_4 = 4;
+    private static final int SIZE_5 = 5;
+    private static final int SIZE_6 = 6;
+    private static final int SIZE_7 = 7;
     private final IinShinsakaiIinJohoProcessParameter paramter;
     private final ShinsakaiTaiyosyaJohoEntity johoEntity;
     private final List<ShinsakaiIinJohoEntity> shinsakaiIinJohoList;
@@ -109,13 +113,97 @@ public class JimuShinsakaishiryoBusiness {
     }
 
     /**
-     * 審査員一覧を取得します。
+     * shinsakaiIinJohoList1を取得します。
      *
-     * @return 審査員一覧
+     * @return shinsakaiIinJohoList1
      */
-    public RString get審査員一覧() {
-        if (no < shinsakaiIinJohoList.size()) {
-            return shinsakaiIinJohoList.get(no).getShinsakaiIinShimei().getColumnValue();
+    public RString getshinsakaiIinJohoList1() {
+        if (0 < shinsakaiIinJohoList.size()) {
+            return shinsakaiIinJohoList.get(0).getShinsakaiIinShimei().value();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * shinsakaiIinJohoList2を取得します。
+     *
+     * @return shinsakaiIinJohoList2
+     */
+    public RString getshinsakaiIinJohoList2() {
+        if (1 < shinsakaiIinJohoList.size()) {
+            return shinsakaiIinJohoList.get(1).getShinsakaiIinShimei().value();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * shinsakaiIinJohoList3を取得します。
+     *
+     * @return shinsakaiIinJohoList3
+     */
+    public RString getshinsakaiIinJohoList3() {
+        if (2 < shinsakaiIinJohoList.size()) {
+            return shinsakaiIinJohoList.get(2).getShinsakaiIinShimei().value();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * shinsakaiIinJohoList4を取得します。
+     *
+     * @return shinsakaiIinJohoList4
+     */
+    public RString getshinsakaiIinJohoList4() {
+        if (SIZE_3 < shinsakaiIinJohoList.size()) {
+            return shinsakaiIinJohoList.get(SIZE_3).getShinsakaiIinShimei().value();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * shinsakaiIinJohoList5を取得します。
+     *
+     * @return shinsakaiIinJohoList5
+     */
+    public RString getshinsakaiIinJohoList5() {
+        if (SIZE_4 < shinsakaiIinJohoList.size()) {
+            return shinsakaiIinJohoList.get(SIZE_4).getShinsakaiIinShimei().value();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * shinsakaiIinJohoList6を取得します。
+     *
+     * @return shinsakaiIinJohoList6
+     */
+    public RString getshinsakaiIinJohoList6() {
+        if (SIZE_5 < shinsakaiIinJohoList.size()) {
+            return shinsakaiIinJohoList.get(SIZE_5).getShinsakaiIinShimei().value();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * shinsakaiIinJohoList7を取得します。
+     *
+     * @return shinsakaiIinJohoList7
+     */
+    public RString getshinsakaiIinJohoList7() {
+        if (SIZE_6 < shinsakaiIinJohoList.size()) {
+            return shinsakaiIinJohoList.get(SIZE_6).getShinsakaiIinShimei().value();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * shinsakaiIinJohoList8を取得します。
+     *
+     * @return shinsakaiIinJohoList8
+     */
+    public RString getshinsakaiIinJohoList8() {
+        if (SIZE_7 < shinsakaiIinJohoList.size()) {
+            return shinsakaiIinJohoList.get(SIZE_7).getShinsakaiIinShimei().value();
         }
         return RString.EMPTY;
     }
@@ -183,7 +271,7 @@ public class JimuShinsakaishiryoBusiness {
      * @return 前回二次
      */
     public RString get前回二次() {
-        return get要介護状態区分(johoEntity.getNijiHanteiYokaigoJotaiKubunCode());
+        return get要介護状態区分(johoEntity.getKoroshoIfShikibetsuCode(), johoEntity.getNijiHanteiYokaigoJotaiKubunCode());
     }
 
     /**
@@ -240,7 +328,7 @@ public class JimuShinsakaishiryoBusiness {
      * @return 二次判定
      */
     public RString get二次判定() {
-        return get要介護状態区分(johoEntity.getNijiHanteiYokaigoJotaiKubunCode());
+        return get要介護状態区分(johoEntity.getKoroshoIfShikibetsuCode(), johoEntity.getNijiHanteiYokaigoJotaiKubunCode());
     }
 
     /**
@@ -260,14 +348,15 @@ public class JimuShinsakaishiryoBusiness {
     public RString get前回期間_下() {
         RStringBuilder 前回期間_下 = new RStringBuilder();
         if (johoEntity.getNijiHanteiNinteiYukoKaishiYMD() != null && !johoEntity.getNijiHanteiNinteiYukoKaishiYMD().isEmpty()) {
-            前回期間_下.append(パターン33(johoEntity.getNijiHanteiNinteiYukoKaishiYMD()));
-        }
-        if (johoEntity.getNijiHanteiNinteiYukoKaishiYMD() != null && !johoEntity.getNijiHanteiNinteiYukoKaishiYMD().isEmpty()
-                && johoEntity.getNijiHanteiNinteiYukoShuryoYMD() != null && !johoEntity.getNijiHanteiNinteiYukoShuryoYMD().isEmpty()) {
-            前回期間_下.append("～");
+            前回期間_下.append(パターン13(johoEntity.getNijiHanteiNinteiYukoKaishiYMD()));
+            if (johoEntity.getNijiHanteiNinteiYukoShuryoYMD() != null && !johoEntity.getNijiHanteiNinteiYukoShuryoYMD().isEmpty()) {
+                前回期間_下.append("～");
+            } else {
+                return 前回期間_下.toRString();
+            }
         }
         if (johoEntity.getNijiHanteiNinteiYukoShuryoYMD() != null && !johoEntity.getNijiHanteiNinteiYukoShuryoYMD().isEmpty()) {
-            前回期間_下.append(パターン33(johoEntity.getNijiHanteiNinteiYukoShuryoYMD()));
+            前回期間_下.append(パターン13(johoEntity.getNijiHanteiNinteiYukoShuryoYMD()));
         }
         return 前回期間_下.toRString();
     }
@@ -282,21 +371,20 @@ public class JimuShinsakaishiryoBusiness {
         return 前回期間.toRString();
     }
 
-    private RString get要介護状態区分(Code 状態区分コード) {
+    private RString get要介護状態区分(Code 厚労省IF識別コード, Code 状態区分コード) {
         if (状態区分コード != null && !状態区分コード.isEmpty()) {
-            RStringBuilder 要介護状態区分 = new RStringBuilder("要介護状態区分コード");
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(状態区分コード.value())) {
-                return 要介護状態区分.append(YokaigoJotaiKubun99.toValue(状態区分コード.value()).get名称()).toRString();
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード.value())) {
+                return YokaigoJotaiKubun99.toValue(状態区分コード.value()).get略称();
             }
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(状態区分コード.value())) {
-                return 要介護状態区分.append(YokaigoJotaiKubun02.toValue(状態区分コード.value()).get名称()).toRString();
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード.value())) {
+                return YokaigoJotaiKubun02.toValue(状態区分コード.value()).get略称();
             }
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(状態区分コード.value())) {
-                return 要介護状態区分.append(YokaigoJotaiKubun06.toValue(状態区分コード.value()).get名称()).toRString();
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード.value())) {
+                return YokaigoJotaiKubun06.toValue(状態区分コード.value()).get略称();
             }
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(状態区分コード.value())
-                    || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(状態区分コード.value())) {
-                return 要介護状態区分.append(YokaigoJotaiKubun09.toValue(状態区分コード.value()).get名称()).toRString();
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード.value())
+                    || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード.value())) {
+                return YokaigoJotaiKubun09.toValue(状態区分コード.value()).get略称();
             }
         }
         return RString.EMPTY;
@@ -314,16 +402,24 @@ public class JimuShinsakaishiryoBusiness {
 
     private RString get開催年月日() {
         RStringBuilder 審査会開催年月日 = new RStringBuilder();
-        審査会開催年月日.append(パターン33(paramter.getShinsakaiKaisaiYoteiYMD()));
-        List<RString> 時分 = paramter.getShinsakaiKaishiYoteiTime().padZeroToLeft(LENGTH_5).split(":");
-        審査会開催年月日.append(RTime.of(Integer.parseInt(時分.get(0).toString()),
-                Integer.parseInt(時分.get(1).toString())).toFormattedTimeString(DisplayTimeFormat.HH時mm分));
+        List<RString> 時分 = paramter.getShinsakaiKaishiYoteiTime().padZeroToLeft(SIZE_5).split(":");
+        審査会開催年月日.append(paramter.getShinsakaiKaisaiYoteiYMD().getYear())
+                .append(new RString("年 "))
+                .append(new RString(paramter.getShinsakaiKaisaiYoteiYMD().getMonthValue()).padZeroToLeft(2))
+                .append(new RString("月 "))
+                .append(new RString(paramter.getShinsakaiKaisaiYoteiYMD().getDayValue()).padZeroToLeft(2))
+                .append(new RString("日 "))
+                .append(時分.get(0).padZeroToLeft(2))
+                .append(new RString("時 "))
+                .append(時分.get(1).padZeroToLeft(2))
+                .append(new RString("分"));
         return 審査会開催年月日.toRString();
     }
 
-    private RString パターン33(FlexibleDate 年月日) {
+    private RString パターン13(FlexibleDate 年月日) {
         if (年月日 != null && !年月日.isEmpty()) {
-            return 年月日.seireki().separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+            return 年月日.wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
         }
         return RString.EMPTY;
     }
