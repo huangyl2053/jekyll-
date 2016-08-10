@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.business.report.dbd100002;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.taino.ShiharaiHohoHenkoTaino;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100002.ShiharaiHohoHenkoTsuchishoReportSource;
@@ -32,7 +33,7 @@ public final class ShiharaiHohoHenkoTsuchishoReport extends Report<ShiharaiHohoH
     private final ChohyoSeigyoKyotsu 帳票制御共通;
     private final Association 地方公共団体;
     private final RString 文書番号;
-    private final List<RString> 通知書定型文リスト;
+    private final Map<Integer, RString> 通知書定型文リスト;
     private final NinshoshaSource 認証者ソースビルダー;
     private final ShiharaiHohoHenko 帳票情報;
     private final List<ShiharaiHohoHenkoTaino> 年度1リスト = new ArrayList<>();
@@ -47,7 +48,7 @@ public final class ShiharaiHohoHenkoTsuchishoReport extends Report<ShiharaiHohoH
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param 地方公共団体 Association
      * @param 文書番号 RString
-     * @param 通知書定型文リスト List<RString>
+     * @param 通知書定型文リスト Map<Integer, RString>
      * @param 認証者ソースビルダー NinshoshaSource
      * @param 帳票情報 ShiharaiHohoHenko
      *
@@ -55,13 +56,13 @@ public final class ShiharaiHohoHenkoTsuchishoReport extends Report<ShiharaiHohoH
      */
     public static ShiharaiHohoHenkoTsuchishoReport createReport(IKojin 個人情報, IAtesaki 宛先,
             ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体, RString 文書番号,
-            List<RString> 通知書定型文リスト, NinshoshaSource 認証者ソースビルダー, ShiharaiHohoHenko 帳票情報) {
+            Map<Integer, RString> 通知書定型文リスト, NinshoshaSource 認証者ソースビルダー, ShiharaiHohoHenko 帳票情報) {
         return new ShiharaiHohoHenkoTsuchishoReport(個人情報, 宛先, 帳票制御共通, 地方公共団体, 文書番号,
                 通知書定型文リスト, 認証者ソースビルダー, 帳票情報);
     }
 
     private ShiharaiHohoHenkoTsuchishoReport(IKojin 個人情報, IAtesaki 宛先, ChohyoSeigyoKyotsu 帳票制御共通,
-            Association 地方公共団体, RString 文書番号, List<RString> 通知書定型文リスト,
+            Association 地方公共団体, RString 文書番号, Map<Integer, RString> 通知書定型文リスト,
             NinshoshaSource 認証者ソースビルダー, ShiharaiHohoHenko 帳票情報) {
         this.個人情報 = 個人情報;
         this.宛先 = 宛先;
