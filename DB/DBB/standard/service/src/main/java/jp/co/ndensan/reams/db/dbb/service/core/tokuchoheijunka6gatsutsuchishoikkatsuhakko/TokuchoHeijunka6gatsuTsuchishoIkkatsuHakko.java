@@ -1,11 +1,8 @@
 package jp.co.ndensan.reams.db.dbb.service.core.tokuchoheijunka6gatsutsuchishoikkatsuhakko;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
-import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHohoBuilder;
 import jp.co.ndensan.reams.db.dbb.business.core.fukaatena.FukaAtena;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranProperty.DBB100012ShutsuryokujunEnum;
@@ -32,11 +29,11 @@ import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2017TsuchishoHakkogoId
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunka6tsuchishoikatsuhako.ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHohoBuilder;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
@@ -47,11 +44,8 @@ import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaTorokuKubunCodeValue;
-import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt310FindKozaEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0310KozaEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
+import jp.co.ndensan.reams.ua.uax.service.core.maskedkoza.MaskedKozaCreator;
 import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -69,23 +63,13 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.BinaryCharacterConvertParameter;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.BinaryCharacterConvertParameterBuilder;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.CharacterAttribute;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.CharacterConvertTable;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.ReamsUnicodeToBinaryConverter;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.RecordConvertMaterial;
-import jp.co.ndensan.reams.uz.uza.io.ByteWriter;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
-import jp.co.ndensan.reams.uz.uza.io.FileReader;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListWriter;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
@@ -498,59 +482,17 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
 
-        RString euc共通_文字コード = DbBusinessConfig.get(ConfigNameDBU.EUC共通_文字コード, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
         RString tempPathName = Path.combinePath(spoolWorkPath, ファイル名);
-        if (!new RString("1").equals(euc共通_文字コード)) {
-            tempPathName = Path.combinePath(spoolWorkPath, ファイル名TEMP);
-        }
 
         CsvListWriter csvListWriter = new CsvListWriter.InstanceBuilder(tempPathName).canAppend(false)
-                .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8).setNewLine(NewLine.CRLF)
+                .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).setNewLine(NewLine.CRLF)
                 .hasHeader(true).build();
-
-        if (!new RString("1").equals(euc共通_文字コード)) {
-            文字コード変換(tempPathName);
-        }
 
         for (KariSanteigakuHenkoTsuchishoHakkoIchiranData data : csvDataList) {
             csvListWriter.writeLine(data.toRStringList());
         }
         csvListWriter.close();
         manager.spool(EUCファイル名);
-    }
-
-    private void 文字コード変換(RString filePath) {
-
-        try (FileReader reader = new FileReader(filePath, Encode.UTF_8);
-                ByteWriter writer = new ByteWriter(filePath.replace(拡張子_TEMP, RString.EMPTY))) {
-            for (RString record = reader.readLine(); record != null; record = reader.readLine()) {
-                BinaryCharacterConvertParameter convertParameter = new BinaryCharacterConvertParameterBuilder(
-                        new RecordConvertMaterial(getCharacterConvertTable(), CharacterAttribute.混在))
-                        .enabledConvertError(true)
-                        .build();
-                ReamsUnicodeToBinaryConverter converter = new ReamsUnicodeToBinaryConverter(convertParameter);
-                writer.write(converter.convert(record));
-            }
-            writer.close();
-        }
-        deleteFile(filePath);
-    }
-
-    private void deleteFile(RString filePath) {
-        File file = new File(filePath.toString());
-        if (file.exists()) {
-            file.getAbsoluteFile().deleteOnExit();
-        }
-    }
-
-    private CharacterConvertTable getCharacterConvertTable() {
-        RString euc共通_文字コード = DbBusinessConfig.get(ConfigNameDBU.EUC共通_文字コード, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-        if (new RString("2").equals(euc共通_文字コード)) {
-            return CharacterConvertTable.Sjis;
-        } else if (new RString("3").equals(euc共通_文字コード)) {
-            return CharacterConvertTable.SjisRuiji;
-        }
-        return null;
     }
 
     /**
@@ -659,7 +601,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         出力条件List.add(出力対象Builder.toRString());
         出力条件List.add(出力順RStr);
 
-        RString 帳票名 = RString.EMPTY;
+        RString 帳票名;
         if (ReportIdDBB.DBB100012.getReportId().getColumnValue().equals(param.get帳票ID())) {
             帳票名 = ReportIdDBB.DBB100012.getReportName();
         } else {
@@ -783,44 +725,12 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         return fukaAtena;
     }
 
-    private IKoza set口座(UaFt310FindKozaEntity uaFt310Entity) {
-        if (uaFt310Entity == null) {
+    private IKoza set口座(TokuteiKozaRelateEntity koza) {
+        if (koza == null) {
             return null;
         }
-        KozaRelateEntity releteEntity = new KozaRelateEntity();
-        UaT0310KozaEntity kozaEntity = new UaT0310KozaEntity();
-
-        kozaEntity.setGyomuKoyuKey(uaFt310Entity.get業務固有キー());
-        kozaEntity.setGyomubetsuPrimaryKey(uaFt310Entity.get業務固有キー());
-        kozaEntity.setKaishiYMD(new FlexibleDate(uaFt310Entity.get開始年月日().toDateString()));
-        kozaEntity.setKensakuyoMeiginin(uaFt310Entity.get検索用名義人());
-        kozaEntity.setKinyuKikanCode(uaFt310Entity.get金融機関コード());
-        kozaEntity.setKinyuKikanShitenCode(uaFt310Entity.get支店コード());
-        kozaEntity.setKozaFurikaeKaishiTsuchiHakkozumi(uaFt310Entity.is口座振替開始通知書発行済());
-        kozaEntity.setKozaHyojiKubun(uaFt310Entity.get口座表示区分());
-        kozaEntity.setKozaId(uaFt310Entity.get口座ID().longValue());
-        kozaEntity.setKozaKaishiUketsukeYMD(new FlexibleDate(uaFt310Entity.get口座開始受付年月日().toDateString()));
-        kozaEntity.setKozaMeiginin(uaFt310Entity.get口座名義人());
-        kozaEntity.setKozaMeigininKanji(uaFt310Entity.get口座名義人漢字());
-        kozaEntity.setKozaMeigininShikibetsuCode(uaFt310Entity.get口座名義人識別コード());
-        kozaEntity.setKozaNo(uaFt310Entity.get口座番号());
-        kozaEntity.setKozaShuryoUketsukeYMD(new FlexibleDate(uaFt310Entity.get口座終了受付年月日().toDateString()));
-        kozaEntity.setKozaTorokuKubunCode(new KozaTorokuKubunCodeValue(uaFt310Entity.get口座登録区分コード()));
-        kozaEntity.setKozaTorokuNo(uaFt310Entity.get口座登録番号());
-        kozaEntity.setKozaTorokuYMD(new FlexibleDate(uaFt310Entity.get口座登録年月日().toDateString()));
-        kozaEntity.setNayoseKubun(uaFt310Entity.has名寄区分());
-        kozaEntity.setShikibetsuCode(uaFt310Entity.get識別コード());
-        kozaEntity.setShuryoYMD(new FlexibleDate(uaFt310Entity.get終了年月日().toDateString()));
-        kozaEntity.setTemban(uaFt310Entity.get店番());
-        kozaEntity.setTorokuRenban(Integer.valueOf(uaFt310Entity.get口座登録番号().toString()));
-        kozaEntity.setTsuchoKigo(uaFt310Entity.get通帳記号());
-        kozaEntity.setTsuchoNo(uaFt310Entity.get通帳番号());
-        kozaEntity.setYokinShubetsu(uaFt310Entity.get預金種別());
-        kozaEntity.setYotoKubun(new KozaYotoKubunCodeValue(uaFt310Entity.get用途区分()));
-        kozaEntity.setZumitsuHakkoYohi(uaFt310Entity.is領収済通知書発行要否());
-
-        releteEntity.setUaT0310KozaEntity(kozaEntity);
-        return new Koza(releteEntity);
+        MaskedKozaCreator maskedKozaCreator = MaskedKozaCreator.createInstance(SubGyomuCode.DBB介護賦課);
+        return maskedKozaCreator.createマスク編集済口座(new Koza(koza));
     }
 
     private ChoshuHoho set徴収方法情報(DbTKeisangoJohoTempTableEntity entity) {

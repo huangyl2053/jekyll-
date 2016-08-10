@@ -24,7 +24,7 @@
         <id column="CaT0714gyomubetsuPrimaryKey"/>
         <id column="CaT0714gyomuKoyuKey"/>
         <id column="CaT0714kaishiYMD"/>
-        <id column="Koza_kozaId" />
+        <id column="uaT0310Koza_kozaId"/>
         <id column="gyomuCode" />
         <id column="shoriNendo"/>
         <id column="tsuchiNaiyoCode" />
@@ -37,7 +37,7 @@
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="宛先" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
         <association property="納組" resultMap="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt703FindNokumiFunctionMapper.nokumiResult"/>
-        <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt310FindKozaFunctionMapper.kozaResult"/>
+        <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>
         <association property="対象者_追加含む情報_更正後" resultMap="resultMap_UeT0511NenkinTokuchoKaifuJohoEntity" />
     </resultMap>
 
@@ -63,7 +63,7 @@
         <id column="caT0714SeikyuHoho_gyomubetsuPrimaryKey"/>
         <id column="caT0714SeikyuHoho_gyomuKoyuKey"/>
         <id column="caT0714SeikyuHoho_kaishiYMD"/>
-        <id column="caT0752Nokumi_kozaId" />
+        <id column="uaT0310Koza_kozaId"/>
         <id column="nenkinTokuchoKaifuJoho_gyomuCode" />
         <id column="nenkinTokuchoKaifuJoho_shoriNendo" />
         <id column="nenkinTokuchoKaifuJoho_tsuchiNaiyoCode" />
@@ -77,7 +77,7 @@
         <association property="宛名" resultMap="resultMap_宛名情報"/>
         <association property="宛先" resultMap="resultMap_宛先情報"/>
         <association property="納組" resultMap="resultMap_納組情報"/>
-        <association property="口座" resultMap="resultMap_口座情報"/>
+        <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>
         <association property="対象者_追加含む情報_更正後" resultMap="resultMap_更正後対象者追加含む情報" />
     </resultMap>
 
@@ -101,7 +101,7 @@
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />,
         <include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt703FindNokumiFunctionMapper.columns_Nokumi" />,
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt310FindKozaFunctionMapper.columns_Koza" />,
+        "koza".*,
         年金特徴回付情報.*
         FROM
         "DbT2015KeisangoJohoTemp" AS "DbT2015KeisangoJohoTemp"
@@ -120,9 +120,9 @@
         ON
         "Nokumi"."CaT0714shikibetsuCode" = "DbT2015KeisangoJohoTemp"."shikibetsuCode"
         LEFT JOIN
-        rgua."UaFt310FindKoza"(NULL, NULL, NULL, NULL, NULL, NULL) AS "Koza"
+        (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS "koza"
         ON
-        "Koza"."shikibetsuCode" = "DbT2015KeisangoJohoTemp"."shikibetsuCode"
+        "koza"."uaT0310Koza_shikibetsuCode" = "DbT2015KeisangoJohoTemp"."shikibetsuCode"
         INNER JOIN
         rgdb."UeT0511NenkinTokuchoKaifuJoho" AS 年金特徴回付情報
         ON   年金特徴回付情報."gyomuCode" = #{業務コード}
@@ -152,7 +152,7 @@
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />,
         <include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt703FindNokumiFunctionMapper.columns_Nokumi" />,
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt310FindKozaFunctionMapper.columns_Koza" />,
+        "koza".*,
         年金特徴回付情報.*
         FROM
         "DbT2015KeisangoJoho" AS "DbT2015KeisangoJoho"
@@ -171,9 +171,9 @@
         ON
         "Nokumi"."CaT0714shikibetsuCode" = "DbT2015KeisangoJoho"."shikibetsuCode"
         LEFT JOIN
-        rgua."UaFt310FindKoza"(NULL, NULL, NULL, NULL, NULL, NULL) AS "Koza"
+        (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS "koza"
         ON
-        "Koza"."shikibetsuCode" = "DbT2015KeisangoJoho"."shikibetsuCode"
+        "koza"."uaT0310Koza_shikibetsuCode" = "DbT2015KeisangoJoho"."shikibetsuCode"
         INNER JOIN
         rgdb."UeT0511NenkinTokuchoKaifuJoho" AS 年金特徴回付情報
         ON   年金特徴回付情報."gyomuCode" = #{業務コード}
@@ -1512,43 +1512,6 @@
         <result property="kensakuyoKanaMeisho" column="caT0752Nokumi_kensakuyoKanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
         <result property="daihyoshaShikibetsuCode" column="caT0752Nokumi_daihyoshaShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="daihyoshaShimei" column="caT0752Nokumi_daihyoshaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
-    </resultMap>
-
-    <resultMap id="resultMap_口座情報" type="jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt310FindKozaEntity" autoMapping="true">
-        <id property="口座ID" column="caT0752Nokumi_kozaId"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="口座ID" column="caT0752Nokumi_kozaId"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="識別コード" column="caT0752Nokumi_shikibetsuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <result property="業務コード" column="caT0752Nokumi_gyomuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyomuCodeTypeHandler"/>
-        <result property="サブ業務コード" column="caT0752Nokumi_subGyomuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
-        <result property="科目コード" column="caT0752Nokumi_kamokuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KamokuCodeTypeHandler"/>
-        <result property="業務固有キー" column="caT0752Nokumi_gyomuKoyuKey"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="用途区分" column="caT0752Nokumi_yotoKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="用途区分名称" column="caT0752Nokumi_yotoKubunMeisho"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="金融機関コード" column="caT0752Nokumi_kinyuKikanCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanCodeTypeHandler"/>
-        <result property="金融機関名称" column="caT0752Nokumi_kinyuKikanMeisho"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="支店コード" column="caT0752Nokumi_kinyuKikanShitenCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanShitenCodeTypeHandler"/>
-        <result property="支店名称" column="caT0752Nokumi_kinyuKikanShitenMeisho"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="預金種別" column="caT0752Nokumi_yokinShubetsu"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="預金種別名称" column="caT0752Nokumi_yokinShubetsuMeisho"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="口座番号" column="caT0752Nokumi_kozaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="通帳記号" column="caT0752Nokumi_tsuchoKigo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="通帳番号" column="caT0752Nokumi_tsuchoNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="口座名義人識別コード" column="caT0752Nokumi_kozaMeigininShikibetsuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <result property="口座名義人" column="caT0752Nokumi_kozaMeiginin"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
-        <result property="口座名義人漢字" column="caT0752Nokumi_kozaMeigininKanji"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
-        <result property="開始年月日" column="caT0752Nokumi_kaishiYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTypeHandler"/>
-        <result property="終了年月日" column="caT0752Nokumi_shuryoYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTypeHandler"/>
-        <result property="検索用名義人" column="caT0752Nokumi_kensakuyoMeiginin"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
-        <result property="口座表示区分" column="caT0752Nokumi_kozaHyojiKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="名寄区分" column="caT0752Nokumi_nayoseKubun" />
-        <result property="領収済通知書発行要否" column="caT0752Nokumi_zumitsuHakkoYohi" />
-        <result property="口座振替開始通知書発行済" column="caT0752Nokumi_kozaFurikaeKaishiTsuchiHakkozumi" />
-        <result property="口座登録番号" column="caT0752Nokumi_kozaTorokuNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="口座登録区分コード" column="caT0752Nokumi_kozaTorokuKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="口座開始受付年月日" column="caT0752Nokumi_kozaKaishiUketsukeYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTypeHandler"/>
-        <result property="口座終了受付年月日" column="caT0752Nokumi_kozaShuryoUketsukeYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTypeHandler"/>
-        <result property="口座登録年月日" column="caT0752Nokumi_kozaTorokuYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTypeHandler"/>
-        <result property="店番" column="caT0752Nokumi_temban"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
     <resultMap id="resultMap_UeT0511NenkinTokuchoKaifuJohoEntity" type="jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity" autoMapping="true">
