@@ -97,6 +97,7 @@ public class KogakuJigyoShikyuShinseishoYuchoEditor implements IKogakuJigyoShiky
             source.tuchoNo8 = 帳票出力対象データ.getTsuchoNoChohyo().substring(SEVEN, EIGHT);
         }
         source.remban = 連番;
+        source.識別コード = 帳票出力対象データ.getShikibetsuCodeChohyo();
         return source;
     }
 }
