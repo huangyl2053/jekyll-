@@ -152,12 +152,12 @@ public class HihokenshaDaichoKoshin {
                     JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.前日);
             FlexibleDate age = ageCalculator.get年齢到達日(AGE_65);
 
-            他市町村住所地特例List = dbt1003.select他市町村住所地特例(entity.get識別コード(), age, false);
+            他市町村住所地特例List = dbt1003.select他市町村住所地特例(entity.get識別コード(), age);
             if (!他市町村住所地特例List.isEmpty()) {
                 continue;
             }
 
-            適用除外者List = dbt1002Dac.select適用除外者(entity.get識別コード(), age, false);
+            適用除外者List = dbt1002Dac.select適用除外者(entity.get識別コード(), age);
             if (!適用除外者List.isEmpty()) {
                 continue;
             }
