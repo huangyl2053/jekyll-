@@ -393,9 +393,8 @@ public class RiyoshaFutanWariaiHantei {
      * @return List<RiyoshaFutanWariaiMeisaiEntity>
      * @throws NullPointerException
      */
-    public List<RiyoshaFutanWariaiMeisaiTempEntity> 負担割合判定マージ(
+    public List<RiyoshaFutanWariaiMeisaiTempEntity> futanWariaiHanteiMerge(
             List<RiyoshaFutanWariaiMeisaiTempEntity> 利用者負担割合明細情報, FlexibleYear 対象年度) {
-//      １．レコードのマージ
         if (利用者負担割合明細情報 == null || 対象年度 == null) {
             throw new NullPointerException();
         }
@@ -428,7 +427,6 @@ public class RiyoshaFutanWariaiHantei {
         for (int i = 0; i < newSize; i++) {
             result.get(i).setEdaNo(i + 1);
         }
-//     ２．更正事由、有効開始日 ３．有効終了日
         RiyoshaFutanWariaiMeisaiTempEntity before = null;
         RString beforeKubn = null;
         RString nowKubun;
@@ -458,28 +456,22 @@ public class RiyoshaFutanWariaiHantei {
 
     private void 負担割合判定マージ(RString 前判定区分, RString 現判定区分, RiyoshaFutanWariaiMeisaiTempEntity now,
             FlexibleYear 対象年度, RiyoshaFutanWariaiMeisaiTempEntity before) {
-        //1,2,3,4,5-0
         if (HanteiKubunType.対象外.code().equals(前判定区分)
                 && Arrays.asList(HanteiKubunType.values()).contains(HanteiKubunType.toValue(現判定区分))
                 && !HanteiKubunType.対象外.code().equals(現判定区分)) {
-//TODO QA
             now.setKoseiJiyu(KoseiJiyuType.当初_継続_新規認定.getコード());
             now.setYukoKaishiYMD(now.getNinteiYukoKaishiDate());
         }
-        //4-5
         if (HanteiKubunType.非課税.code().equals(現判定区分)
                 && HanteiKubunType.負担割合判定.code().equals(前判定区分)) {
-//TODO QA
             now.setKoseiJiyu(KoseiJiyuType.本人所得更正.getコード());
             now.setYukoKaishiYMD(get有効開始日１(対象年度, now.getNinteiYukoKaishiDate()));
         }
-        //5-1||5-5
         if (HanteiKubunType.負担割合判定.code().equals(現判定区分)
                 && (HanteiKubunType.第２号被保険者.code().equals(前判定区分)
                 || HanteiKubunType.負担割合判定.code().equals(前判定区分))) {
             handle数額変更(now, before, 対象年度);
         }
-        //5-2
         if (HanteiKubunType.負担割合判定.code().equals(現判定区分)
                 && HanteiKubunType.生活保護.code().equals(前判定区分)) {
             now.setKoseiJiyu(KoseiJiyuType.その他.getコード());
@@ -488,13 +480,11 @@ public class RiyoshaFutanWariaiHantei {
                 now.setYukoKaishiYMD(new FlexibleDate(受給廃止日.getYearValue(), 受給廃止日.getMonthValue() + 1, 1));
             }
         }
-        //5-3
         if (HanteiKubunType.負担割合判定.code().equals(現判定区分)
                 && HanteiKubunType.旧措置.code().equals(前判定区分)) {
             now.setKoseiJiyu(KoseiJiyuType.本人所得更正.getコード());
             now.setYukoKaishiYMD(get有効開始日１(対象年度, now.getNinteiYukoKaishiDate()));
         }
-        //5-4
         if (HanteiKubunType.負担割合判定.code().equals(現判定区分)
                 && HanteiKubunType.非課税.code().equals(前判定区分)) {
             now.setKoseiJiyu(KoseiJiyuType.その他.getコード());
@@ -626,7 +616,7 @@ public class RiyoshaFutanWariaiHantei {
      * @return List<DbT3114RiyoshaFutanWariaiMeisaiEntity>
      * @throws NullPointerException
      */
-    public List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 利用者負担割合明細マージ(
+    public List<DbT3114RiyoshaFutanWariaiMeisaiEntity> riyoshaFutanWariaiMeisaiMerge(
             List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 入力明細リスト) {
         if (入力明細リスト == null) {
             throw new NullPointerException();
