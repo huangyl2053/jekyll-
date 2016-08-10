@@ -260,7 +260,9 @@
         WHERE A1."shinseishoKanriNo" = dbt5205."shinseishoKanriNo"
         AND A1."ninteichosaRirekiNo" = dbt5205."ninteichosaRirekiNo"
         AND A1."genponMaskKubun" = #{genponMaskKubun}
-        AND A1."ninteichosaRirekiNo" <![CDATA[<]]> dbt5205."ninteichosaRirekiNo")
+        AND dbt5205."ninteichosaTokkijikoNo" = A1."ninteichosaTokkijikoNo"
+        AND dbt5205."ninteichosaTokkijikoRemban" = A1."ninteichosaTokkijikoRemban"
+        AND dbt5205."ninteichosaRirekiNo" <![CDATA[<]]> A1."ninteichosaRirekiNo")
         AND dbt5205."genponMaskKubun" = #{genponMaskKubun}
         ORDER BY
         dbt5205."ninteichosaTokkijikoNo"
@@ -619,7 +621,7 @@
         INNER JOIN rgdb."DbT5211NinteichosahyoChosaItem" dbt5211
         ON  dbt5211."shinseishoKanriNo" = dbt5201."shinseishoKanriNo"
         AND dbt5211."ninteichosaRirekiNo" = dbt5201."ninteichosaIraiRirekiNo"
-        WHERE dbt5101."shinseishoKanriNo" = #{shinseishoKanriNoZ}
+        WHERE dbt5101."shinseishoKanriNo" = #{shinseishoKanriZ}
         ORDER BY dbt5211."remban"
     </select>
 
@@ -637,8 +639,8 @@
         AND dbt5210."shisetsuRiyoFlag" = True
     </select>
 
-   <select id="getZenkaiIkenshoIkenItem"
-            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItem"
+    <select id="getZenkaiIkenshoIkenItem"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter"
             fetchSize="500"
             resultOrdered="true">
@@ -649,18 +651,18 @@
         ON dbt5101."shinseishoKanriNo" = dbt5301."shinseishoKanriNo"
         AND dbt5301."logicalDeletedFlag"= False
         INNER JOIN
-            (SELECT MAX(dbt5301M."ikenshoIraiRirekiNo") AS rirekiNoMax
-            , dbt5301M."shinseishoKanriNo"
-            FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" dbt5301M
-            WHERE dbt5301M."logicalDeletedFlag" = False
-            GROUP BY dbt5301M."shinseishoKanriNo"
-            ) AS dbt5301M_rirekiNoMax
-        ON dbt5301M_rirekiNoMax.dbt5301M_shinseishoKanriNo = dbt5301."shinseishoKanriNo"
+        (SELECT MAX(dbt5301M."ikenshoIraiRirekiNo") AS rirekiNoMax
+        , dbt5301M."shinseishoKanriNo"
+        FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" dbt5301M
+        WHERE dbt5301M."logicalDeletedFlag" = False
+        GROUP BY dbt5301M."shinseishoKanriNo"
+        ) AS dbt5301M_rirekiNoMax
+        ON dbt5301M_rirekiNoMax."shinseishoKanriNo" = dbt5301."shinseishoKanriNo"
         AND dbt5301M_rirekiNoMax.rirekiNoMax = dbt5301."ikenshoIraiRirekiNo"
         INNER JOIN rgdb."DbT5304ShujiiIkenshoIkenItem" dbt5304
         ON dbt5304."shinseishoKanriNo" = dbt5301."shinseishoKanriNo"
         AND dbt5304."ikenshoIraiRirekiNo" = dbt5301."ikenshoIraiRirekiNo"
-        WHERE dbt5101."shinseishoKanriNo" = #{shinseishoKanriNoZ}
+        WHERE dbt5101."shinseishoKanriNo" = #{shinseishoKanriZ}
         ORDER BY dbt5304."remban"
     </select>
 
@@ -998,10 +1000,12 @@
         <result property="資料作成年月日" column="dbt5501_shiryoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
     </resultMap>
 
-<!--    <select id="getTokkiJikouItiziHantei" resultMap="Result_TokkiJikouItiziHantei"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
-        SELECT
-        dbt5201."ninteichosaIraiRirekiNo"
+    <select id="getTokkiJikouItiziHantei"
+            resultMap="Result_TokkiJikouItiziHantei"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter"
+            fetchSize="500"
+            resultOrdered="true">
+        SELECT dbt5201."ninteichosaIraiRirekiNo"
         , dbt5301."ikenshoIraiRirekiNo"
         , dbt5101."shinseishoKanriNo"
         , dbt5101."koroshoIfShikibetsuCode"
@@ -1207,10 +1211,12 @@
         dbt5502."shinsakaiOrder"
     </select>
 
-    <select id="getTokkiJikouItiziHanteiCount" resultType="java.lang.Integer"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
-        SELECT
-        COUNT(*)
+    <select id="getTokkiJikouItiziHanteiCount"
+            resultType="java.lang.Integer"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter"
+            fetchSize="500"
+            resultOrdered="true">
+        SELECT COUNT(*)
         FROM rgdb."DbT5502ShinsakaiWariateJoho" dbt5502
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101
         ON dbt5101."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
@@ -1284,7 +1290,7 @@
         LEFT JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101ZenZenkai
         ON dbt5121ZenZenkai."zenkaiShinseishoKanriNo" = dbt5101ZenZenkai."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" dbt5102ZenZenkai
-        ON dbt5102ZenZenkai."shinseishoKanriNo" = dbt5102ZenZenkai"shinseishoKanriNo"
+        ON dbt5102ZenZenkai."shinseishoKanriNo" = dbt5102ZenZenkai."shinseishoKanriNo"
         WHERE
         dbt5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
         AND dbt5502."shinsakaiOrderKakuteiFlag" =#{isOrderKakuteiFlg}
@@ -1380,6 +1386,6 @@
         <result property="shujiiIryokikanCode" column="shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="iryoKikanMeisho" column="iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shinsakaiOrder" column="shinsakaiOrder" />
-    </resultMap>-->
+    </resultMap>
 
 </mapper>

@@ -139,7 +139,9 @@ public class IchijihanteiekkahyoTokkijiko {
                 if ((int) (テキスト全面.length() / 最大文字数) == 2) {
                     テキスト全面.insert(最大文字数 * 2, System.lineSeparator());
                 }
-                テキスト全面.insert(最大文字数, System.lineSeparator());
+                if (最大文字数 <= テキスト全面.length()) {
+                    テキスト全面.insert(最大文字数, System.lineSeparator());
+                }
                 テキスト全面.append(System.lineSeparator());
             }
         }
