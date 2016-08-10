@@ -83,9 +83,9 @@ public class JigyohokokuNenpoYoshiki28Editor implements IJigyohokokuNenpoYoshiki
         source.list_1 = entity.get種類();
         source.list_2 = entity.get要支援１();
         source.list_3 = entity.get要支援２();
-        source.list_4 = entity.get要介護計();
-        source.list_5 = entity.get要介護１();
-        source.list_6 = entity.get横番号();
+        source.list_4 = entity.get要支援計();
+        source.list_5 = entity.get経過的要介護();
+        source.list_6 = entity.get要介護１();
         source.list_7 = entity.get要介護2();
         source.list_8 = entity.get要介護3();
         source.list_9 = entity.get要介護4();

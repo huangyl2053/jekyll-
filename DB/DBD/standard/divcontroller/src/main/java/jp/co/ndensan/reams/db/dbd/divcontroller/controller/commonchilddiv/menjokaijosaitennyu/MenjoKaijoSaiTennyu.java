@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  *
  * 【共有子Div】 免除解除・再転入ダイアログのDivControllerです。
  *
- * @reamsid_L DBD-3620-041 panxiaobo
+ * @reamsid_L DBD-3620-044 panxiaobo
  */
 public class MenjoKaijoSaiTennyu {
 

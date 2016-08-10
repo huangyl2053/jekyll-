@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  *
  * 【共有子Div】1号一時差止ダイアログのcontrolクラスです。
  *
- * @reamsid_L DBD-3620-045 panxiaobo
+ * @reamsid_L DBD-3620-042 panxiaobo
  */
 public class IchijiSashitome1Go {
 
@@ -151,7 +151,7 @@ public class IchijiSashitome1Go {
      * @return ResponseData<IchijiSashitome1GoDiv>
      */
     public ResponseData<IchijiSashitome1GoDiv> onClick_SashitomeKojo(IchijiSashitome1GoDiv div) {
-        getHandler(div).onClick_KaijoItem();
+        getHandler(div).onClick_SashitomeKojo();
         return ResponseData.of(div).respond();
     }
 

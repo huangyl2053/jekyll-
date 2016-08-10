@@ -86,10 +86,10 @@ public final class IChiJiPanTeiSyoRiParameter {
                 認定申請年月日開始,
                 認定申請年月日終了,
                 最大表示件数,
-                new RString("DBE3010001").equals(メニュー) && 認定申請年月日開始 != null && !認定申請年月日開始.isEmpty(),
-                new RString("DBE3010001").equals(メニュー) && 認定申請年月日終了 != null && !認定申請年月日終了.isEmpty(),
-                new RString("DBE3010001").equals(メニュー),
-                new RString("DBE3100001").equals(メニュー),
+                new RString("DBEMN41001").equals(メニュー) && 認定申請年月日開始 != null && !認定申請年月日開始.isEmpty(),
+                new RString("DBEMN41001").equals(メニュー) && 認定申請年月日終了 != null && !認定申請年月日終了.isEmpty(),
+                new RString("DBEMN41001").equals(メニュー),
+                new RString("DBEMNA1006").equals(メニュー),
                 申請書管理番号List);
     }
 }

@@ -190,7 +190,7 @@ public enum ReportIdDBC {
     /**
      * 高額総合事業サービス費給付お知らせ通知書（提出期限あり）帳票ＩＤです。
      */
-    DBC100072(new ReportId("DBC100072_KogakuJigyoOshiraseTsuchisho"), new RString("帳票設計_DBC100072_高額総合事業サービス費給付お知らせ通知書（提出期限あり）")),
+    DBC100072(new ReportId("DBC100072_KogakuJigyoOshiraseTsuchishoKigenAri"), new RString("高額総合事業サービス費給付お知らせ通知書")),
     /**
      * 介護保険高額総合事業サービス費支給申請書（ゆうちょ銀行）
      */

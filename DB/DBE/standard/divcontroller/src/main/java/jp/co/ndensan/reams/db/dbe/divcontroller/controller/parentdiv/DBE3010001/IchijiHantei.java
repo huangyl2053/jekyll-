@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE3010001
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijipanteisyori.IChiJiPanTeiSyoRiBusiness;
-import jp.co.ndensan.reams.db.dbe.business.core.ichijipanteisyori.IchijiHanteiKekkaJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshoiraitaishoichiran.ShinseishoKanriNoList;
@@ -60,8 +59,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 public class IchijiHantei {
 
     private final IChiJiPanTeiSyoRiManager manager;
-    private final RString メニュー = new RString("DBE3010001");
-    private final RString 完了処理_一次判定 = new RString("DBE3100001");
+    private final RString メニュー = new RString("DBEMN41001");
+    private final RString 完了処理_一次判定 = new RString("DBEMNA1006");
     private static final RString LOCKINGKEY = new RString("ShinseishoKanriNo");
 
     /**
@@ -165,9 +164,8 @@ public class IchijiHantei {
      */
     public ResponseData<IchijiHanteiDiv> btn_syoKai(IchijiHanteiDiv div) {
 
-        int index = div.getIchijiHanteiShoriTaishoshaIchiran().getDgIchijiHanteiTaishoshaIchiran().getClickedRowId();
         dgIchijiHanteiTaishoshaIchiran_Row row = div.getIchijiHanteiShoriTaishoshaIchiran()
-                .getDgIchijiHanteiTaishoshaIchiran().getDataSource().get(index);
+                .getDgIchijiHanteiTaishoshaIchiran().getClickedItem();
         ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(row.getShinseishoKanriNo()));
         ViewStateHolder.put(ViewStateKeys.モード, ModeType.SHOKAI_MODE);
         return ResponseData.of(div).respond();
@@ -333,11 +331,9 @@ public class IchijiHantei {
                         menuID,
                         shinseishoKanriNoList.getShinseishoKanriNoS());
         List<IChiJiPanTeiSyoRiBusiness> businessList = manager.get対象者一覧(parameter).records();
-        IchijiHanteiKekkaJohoBusiness johoBusiness = new IchijiHanteiKekkaJohoBusiness();
         if (!businessList.isEmpty()) {
             List<IchijiHanteiKekkaJoho> kekkaJohoList = manager.get要介護認定一次判定結果情報(parameter).records();
-            johoBusiness.set要介護認定一次判定結果情報Lsit(kekkaJohoList);
-            ViewStateHolder.put(ViewStateKeys.要介護認定一次判定結果情報, Models.create(johoBusiness.get要介護認定一次判定結果情報Lsit()));
+            ViewStateHolder.put(ViewStateKeys.要介護認定一次判定結果情報, Models.create(kekkaJohoList));
         } else {
             ViewStateHolder.put(ViewStateKeys.要介護認定一次判定結果情報, Models.create(new ArrayList()));
         }

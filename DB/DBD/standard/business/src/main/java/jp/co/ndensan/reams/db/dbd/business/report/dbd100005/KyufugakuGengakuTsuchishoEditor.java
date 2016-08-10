@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd100005;
 
-import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.gengaku.ShiharaiHohoHenkoGengaku;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.gengaku.meisai.ShiharaiHohoHenkoGengakuMeisai;
@@ -46,7 +46,7 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
     private final ChohyoSeigyoKyotsu 帳票制御共通;
     private final Association 地方公共団体;
     private final RString 文書番号;
-    private final List<RString> 通知書定型文リスト;
+    private final Map<Integer, RString> 通知書定型文リスト;
     private final NinshoshaSource 認証者ソースビルダー;
     private final ShiharaiHohoHenko 帳票情報;
     private final int index;
@@ -59,14 +59,14 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param 地方公共団体 Association
      * @param 文書番号 RString
-     * @param 通知書定型文リスト List<RString>
+     * @param 通知書定型文リスト Map<Integer, RString>
      * @param 認証者ソースビルダー NinshoshaSource
      * @param 帳票情報 ShiharaiHohoHenko
      * @param index int
      *
      */
     public KyufugakuGengakuTsuchishoEditor(IKojin 個人情報, IAtesaki 宛先, ChohyoSeigyoKyotsu 帳票制御共通,
-            Association 地方公共団体, RString 文書番号, List<RString> 通知書定型文リスト,
+            Association 地方公共団体, RString 文書番号, Map<Integer, RString> 通知書定型文リスト,
             NinshoshaSource 認証者ソースビルダー, ShiharaiHohoHenko 帳票情報, int index) {
         this.個人情報 = 個人情報;
         this.宛先 = 宛先;
@@ -172,12 +172,12 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
         if (null != 帳票制御共通) {
             RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
             if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
-                source.tsuchibun = 通知書定型文リスト.get(0);
-            }
-            if (null != 通知書定型文リスト && new RString("1").equals(定型文文字サイズ)) {
-                source.renrakusakiHoka = 通知書定型文リスト.get(1);
-            } else {
-                source.renrakusakiHoka = RString.EMPTY;
+                source.tsuchibun = 通知書定型文リスト.get(NOCOUNT_1);
+                if (new RString("1").equals(定型文文字サイズ)) {
+                    source.renrakusakiHoka = 通知書定型文リスト.get(NOCOUNT_2);
+                } else {
+                    source.renrakusakiHoka = RString.EMPTY;
+                }
             }
         }
     }
@@ -207,8 +207,8 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
 
     private void setLayerFontLarge(KyufugakuGengakuTsuchishoReportSource source) {
         RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-        if (null != 通知書定型文リスト && new RString("2").equals(定型文文字サイズ)) {
-            source.renrakusakiHokaLarge = 通知書定型文リスト.get(1);
+        if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty() && new RString("2").equals(定型文文字サイズ)) {
+            source.renrakusakiHokaLarge = 通知書定型文リスト.get(NOCOUNT_2);
         } else {
             source.renrakusakiHokaLarge = RString.EMPTY;
         }
@@ -217,9 +217,9 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
     private void setLayerFontKonzai(KyufugakuGengakuTsuchishoReportSource source) {
         if (null != 帳票制御共通) {
             RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-            if (null != 通知書定型文リスト && new RString("3").equals(定型文文字サイズ)) {
-                source.renrakusakiHokaJodanSmall = 通知書定型文リスト.get(1);
-                source.renrakusakiHokaGedanLarge = 通知書定型文リスト.get(2);
+            if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty() && new RString("3").equals(定型文文字サイズ)) {
+                source.renrakusakiHokaJodanSmall = 通知書定型文リスト.get(NOCOUNT_2);
+                source.renrakusakiHokaGedanLarge = 通知書定型文リスト.get(NOCOUNT_3);
             } else {
                 source.renrakusakiHokaJodanSmall = RString.EMPTY;
                 source.renrakusakiHokaGedanLarge = RString.EMPTY;
@@ -230,9 +230,9 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
     private void setLayerFontKonzai2(KyufugakuGengakuTsuchishoReportSource source) {
         if (null != 帳票制御共通) {
             RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-            if (null != 通知書定型文リスト && new RString("4").equals(定型文文字サイズ)) {
-                source.renrakusakiHokaJodanLarge = 通知書定型文リスト.get(1);
-                source.renrakusakiHokaGedanSmall = 通知書定型文リスト.get(2);
+            if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty() && new RString("4").equals(定型文文字サイズ)) {
+                source.renrakusakiHokaJodanLarge = 通知書定型文リスト.get(NOCOUNT_2);
+                source.renrakusakiHokaGedanSmall = 通知書定型文リスト.get(NOCOUNT_3);
             } else {
                 source.renrakusakiHokaJodanLarge = RString.EMPTY;
                 source.renrakusakiHokaGedanSmall = RString.EMPTY;

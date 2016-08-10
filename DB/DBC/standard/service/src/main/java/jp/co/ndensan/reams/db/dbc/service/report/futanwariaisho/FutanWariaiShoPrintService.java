@@ -130,7 +130,7 @@ public class FutanWariaiShoPrintService {
                     false,
                     false,
                     KenmeiFuyoKubunType.付与なし).buildSource();
-            //TODO
+            //TODO QA#1176
 //            GyomuKoyuKeyRiyoKubun 業務固有キー利用区分 = GyomuKoyuKeyRiyoKubun.利用しない;
 //            SofusakiRiyoKubun 送付先利用区分 = SofusakiRiyoKubun.利用する;
 //            IAtesakiGyomuHanteiKey 宛先業務判定キー
@@ -157,11 +157,11 @@ public class FutanWariaiShoPrintService {
                     ReportIdDBC.DBC100065.getReportId());
             EditedKojin 編集後個人 = null;
             if (kojinList != null && !kojinList.isEmpty()) {
-                //TODO
+                //TODO QA#1173
                 編集後個人 = new EditedKojin(kojinList.get(ZERO_INDEX), 帳票共通情報, null);
             }
             HokenshaNo 保険者コード取得 = getHokenshaCode(被保険者番号);
-            //TODO  RiyoshaFutanWariaiHantei riyoshaFutanWariaiHantei = RiyoshaFutanWariaiHantei.createInstance()
+            //TODO QA#1174 RiyoshaFutanWariaiHantei riyoshaFutanWariaiHantei = RiyoshaFutanWariaiHantei.createInstance()
             List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 利用者負担割合明細List = null;
             FutanWariaiShoReport report = new FutanWariaiShoReport(entity, 認証者ソースデータ, 被保険者番号, 編集後個人,
                     利用者負担割合明細List, 保険者コード取得, flag, kojinList);
@@ -184,6 +184,7 @@ public class FutanWariaiShoPrintService {
         RString 導入形態コード = 市町村セキュリティ情報.get導入形態コード().value();
         KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
         if (定数_事務広域.equals(導入形態コード) || 定数_認定広域.equals(導入形態コード)) {
+            //TODO QA#1175
             DbV1001HihokenshaDaichoEntity entity = dac.get最新の被保険者台帳情報(被保険者番号);
             SearchResult<ShichosonCodeYoriShichoson> shichoson = null;
             if (entity.getKoikinaiTokureiSochimotoShichosonCode() == null) {

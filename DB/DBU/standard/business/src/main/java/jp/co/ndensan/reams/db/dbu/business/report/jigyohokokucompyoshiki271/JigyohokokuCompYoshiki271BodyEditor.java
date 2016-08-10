@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbu.entity.report.ｊigyohokokucompyoshiki271.Jigy
 /**
  * 介護事業状況報告月報・保険給付決定状況（様式2-7-1）のEditorクラスです。
  *
- * @reamsid_L DBU-5580-040　wanghuafeng
+ * @reamsid_L DBU-5580-040 wanghuafeng
  */
 public class JigyohokokuCompYoshiki271BodyEditor implements IJigyohokokuCompYoshiki271Editor {
 

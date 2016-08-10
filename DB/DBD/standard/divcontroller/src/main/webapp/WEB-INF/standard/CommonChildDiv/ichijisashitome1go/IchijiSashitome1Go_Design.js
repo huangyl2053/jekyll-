@@ -4,6 +4,49 @@ var DBD;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_SashitomeToRoku = function () {
+                return "onClick_SashitomeToRoku";
+            };
+
+            Events.onClick_KaijoToRoku = function () {
+                return "onClick_KaijoToRoku";
+            };
+
+            Events.onClick_SashitomeKojo = function () {
+                return "onClick_SashitomeKojo";
+            };
+
+            Events.onClick_SelectedItem = function () {
+                return "onClick_SelectedItem";
+            };
+
+            Events.onClick_DeleteItem = function () {
+                return "onClick_DeleteItem";
+            };
+
+            Events.onOkClose_BtnTainoJokyo = function () {
+                return "onOkClose_BtnTainoJokyo";
+            };
+
+            Events.onBeforeOpenDialog_BtnTainoJokyo = function () {
+                return "onBeforeOpenDialog_BtnTainoJokyo";
+            };
+
+            Events.onClick_SashitomeToRokuKaKuTei = function () {
+                return "onClick_SashitomeToRokuKaKuTei";
+            };
+
+            Events.onClick_SashitomeToRokuToRiKeShi = function () {
+                return "onClick_SashitomeToRokuToRiKeShi";
+            };
+
+            Events.onClick_BtnKakutei = function () {
+                return "onClick_BtnKakutei";
+            };
+
+            Events.onClick_BtnTorikeshi = function () {
+                return "onClick_BtnTorikeshi";
+            };
             return Events;
         })();
         IchijiSashitome1Go.Events = Events;

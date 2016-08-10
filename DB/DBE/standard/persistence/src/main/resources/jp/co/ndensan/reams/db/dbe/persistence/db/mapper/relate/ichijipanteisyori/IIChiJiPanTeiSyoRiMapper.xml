@@ -132,6 +132,7 @@ WHERE
      DbT5101."ninteiShinseiYMD"  <![CDATA[<=]]>  #{認定申請年月日終了}
  </if> 
  <if test = "完了処理一次判定_遷移">
+     AND DbT5101."shinseishoKanriNo" IN 
      <foreach collection="申請書管理番号List" item="code" open="(" separator="," close=")"> #{code} </foreach>
  </if>
 ORDER BY  

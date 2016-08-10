@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.service.report.dbd100007;
 
-import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100007.SashitomeShobunTsuchishoNigoProerty;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100007.SashitomeShobunTsuchishoNigoReport;
@@ -47,13 +47,13 @@ public class SashitomeShobunTsuchishoNigoPrintService {
      * @param 地方公共団体 Association
      * @param 発行日 FlexibleDate
      * @param 文書番号 RString
-     * @param 通知書定型文リスト List<RString>
+     * @param 通知書定型文リスト Map<Integer, RString>
      * @param 帳票分類ID ReportId
      * @param 帳票情報 ShiharaiHohoHenko
      * @param reportManager 帳票発行処理の制御機能
      */
     public void print(IKojin 個人情報, IAtesaki 宛先, ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体,
-            FlexibleDate 発行日, RString 文書番号, List<RString> 通知書定型文リスト, ReportId 帳票分類ID,
+            FlexibleDate 発行日, RString 文書番号, Map<Integer, RString> 通知書定型文リスト, ReportId 帳票分類ID,
             ShiharaiHohoHenko 帳票情報, ReportManager reportManager) {
         SashitomeShobunTsuchishoNigoProerty property = new SashitomeShobunTsuchishoNigoProerty();
         try (ReportAssembler<SashitomeShobunTsuchishoNigoReportSource> assembler = createAssembler(property, reportManager)) {

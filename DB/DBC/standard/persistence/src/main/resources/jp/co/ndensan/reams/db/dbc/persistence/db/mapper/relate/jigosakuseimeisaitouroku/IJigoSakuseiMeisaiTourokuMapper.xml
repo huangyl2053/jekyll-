@@ -44,8 +44,8 @@
             A."serviceShuruiCode" DESC
     </select>
     
-    <resultMap id="resultMap_ServiceRiyohyoEntity" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.ServiceRiyohyoEntity">
+    <resultMap id="resultMap_KyufuJikoSakuseiEntity" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KyufuJikoSakuseiEntity">
         <result property="事業者" column="事業者" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="サービス" column="サービス" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="単位" column="単位" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
@@ -66,7 +66,7 @@
         <result property="定額利用者負担単価金額" column="定額利用者負担単価金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="限度額対象外フラグ" column="限度額対象外フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    <select resultOrdered="true" id="getサービス利用票データ" resultMap="resultMap_ServiceRiyohyoEntity" 
+    <select resultOrdered="true" id="getサービス利用票データ" resultMap="resultMap_KyufuJikoSakuseiEntity" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.KyufuJikoSakuseiParameter" fetchSize="500">
         SELECT
             DbT7060KaigoJigyosha."jigyoshaName" AS 事業者,
