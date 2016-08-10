@@ -5,13 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5220001;
 
+import java.io.File;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5220001.NinteiShinsakaiKekkaDataTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5220001.NinteiShinsakaiKekkaDataTorikomiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5220001.NinteiShinsakaiKekkaDataTorikomiValidationHandler;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -25,6 +24,7 @@ public class NinteiShinsakaiKekkaDataTorikomi {
 
     private static final RString SELECT_KEY0 = new RString("key0");
     private static final RString SELECT_KEY1 = new RString("key1");
+    private static final RString SERVER_PATH = new RString("\\db\\dbe\\DivConNinteiShinsakaiKekkaDataTorikomi\\DivConOnclick_BtnUpload");
 
     /**
      * 画面初期化処理です。
@@ -94,10 +94,7 @@ public class NinteiShinsakaiKekkaDataTorikomi {
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
             }
-            FilesystemName sharedFileName = new FilesystemName(file.getFileName());
-            SharedFile.defineSharedFile(sharedFileName);
-            FilesystemPath 絶対パス = new FilesystemPath(file.getFilePath());
-            SharedFile.copyToSharedFile(絶対パス, sharedFileName);
+            savaCsvファイル(file);
         }
         return ResponseData.of(div).respond();
     }
@@ -106,7 +103,7 @@ public class NinteiShinsakaiKekkaDataTorikomi {
      * 入力チェックです。
      *
      * @param div 画面情報
-     * @return ResponseData<HakkoJokenDiv>
+     * @return ResponseData<NinteiShinsakaiKekkaDataTorikomiDiv>
      */
     public ResponseData<NinteiShinsakaiKekkaDataTorikomiDiv> onClick_Check(NinteiShinsakaiKekkaDataTorikomiDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
@@ -119,6 +116,16 @@ public class NinteiShinsakaiKekkaDataTorikomi {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         return ResponseData.of(div).respond();
+    }
+
+    private boolean savaCsvファイル(FileData file) {
+        RString path = Path.combinePath(Path.getRootPath(RString.EMPTY), SERVER_PATH);
+        File サーバ = new File(path.toString());
+        File local = new File(file.getFilePath().toString());
+        if (サーバ.exists() && local.exists()) {
+            return local.renameTo(new File(サーバ, file.getFileName().toString()));
+        }
+        return true;
     }
 
     private NinteiShinsakaiKekkaDataTorikomiHandler getHandler(NinteiShinsakaiKekkaDataTorikomiDiv div) {

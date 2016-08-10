@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.business.report.kogakujigyoshikyushinseishoucho;
 
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakujigyoshikyushinseishoyuchosource.KogakuJigyoShikyuShinseishoYuchoSource;
@@ -12,8 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  * 帳票設計_DBC100071_介護保険高額総合事業サービス費支給申請書（ゆうちょ銀行）IEditor
  *
- * @reamsid_L DBC-4770-090 lifei
+ * @reamsid_L DBC-4770-090 jianglaisheng
  */
 public interface IKogakuJigyoShikyuShinseishoYuchoEditor extends IReportEditor<KogakuJigyoShikyuShinseishoYuchoSource> {
-    
+
 }

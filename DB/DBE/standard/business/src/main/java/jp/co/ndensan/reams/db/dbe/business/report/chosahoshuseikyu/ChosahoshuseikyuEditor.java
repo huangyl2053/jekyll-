@@ -54,6 +54,7 @@ public class ChosahoshuseikyuEditor implements IChosahoshuseikyuEditor {
         source.shohizei = nullOrZero(item.get消費税額());
         source.gokeiKingaku2 = nullOrZero(item.get請求金額());
         source.tsuchibun2 = item.get通知文2();
+        source.ninteichosaItakusakiCode = item.get認定調査委託先コード();
         return source;
     }
 

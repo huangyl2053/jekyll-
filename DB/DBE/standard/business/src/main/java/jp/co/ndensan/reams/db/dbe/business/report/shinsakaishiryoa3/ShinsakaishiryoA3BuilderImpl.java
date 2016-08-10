@@ -15,15 +15,18 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  */
 class ShinsakaishiryoA3BuilderImpl implements IShinsakaishiryoA3Builder {
 
-    private final IShinsakaishiryoA3Editor editor;
+    private final IShinsakaishiryoA3Editor editor_Left;
+    private final IShinsakaishiryoA3Editor editor_Right;
 
     /**
      * インスタンスを生成します。
      *
-     * @param editor {@link IShinsakaishiryoA3Editor}
+     * @param editor_Left {@link IShinsakaishiryoA3Editor}
+     * @param editor_Right {@link IShinsakaishiryoA3Editor}
      */
-    public ShinsakaishiryoA3BuilderImpl(IShinsakaishiryoA3Editor editor) {
-        this.editor = editor;
+    public ShinsakaishiryoA3BuilderImpl(IShinsakaishiryoA3Editor editor_Left, IShinsakaishiryoA3Editor editor_Right) {
+        this.editor_Left = editor_Left;
+        this.editor_Right = editor_Right;
     }
 
     /**
@@ -33,6 +36,6 @@ class ShinsakaishiryoA3BuilderImpl implements IShinsakaishiryoA3Builder {
      */
     @Override
     public ShinsakaishiryoA3ReportSource build() {
-        return ReportEditorJoiner.from(new ShinsakaishiryoA3ReportSource()).join(editor).buildSource();
+        return ReportEditorJoiner.from(new ShinsakaishiryoA3ReportSource()).join(editor_Left).join(editor_Right).buildSource();
     }
 }

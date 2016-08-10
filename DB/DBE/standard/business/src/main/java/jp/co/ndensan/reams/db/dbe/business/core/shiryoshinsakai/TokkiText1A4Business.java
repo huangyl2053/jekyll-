@@ -40,32 +40,42 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 public class TokkiText1A4Business {
 
     private static final RString ファイルID_C0007 = new RString("C0007.png");
-    private static final RString ファイルID_C4101 = new RString("C4101.png");
-    private static final RString ファイルID_C4101BAK = new RString("C4101_BAK.png");
     private static final RString ファイルID_C0007BAK = new RString("C0007_BAK.png");
     private static final RString テキスト全面イメージ = new RString("1");
     private static final RString テキスト = new RString("1");
     private static final RString イメージ = new RString("2");
     private static final RString ハイフン = new RString("-");
+    private static final int 一ページ表示行数 = 15;
     private static final int 最大連番 = 10;
     private final List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List;
     private final ShinsakaiSiryoKyotsuEntity kyotsuEntity;
     private final RString 特記パターン;
     private final int 最大文字数;
-    private int ページ表示行数;
+    private final int ページ最大表示行数;
+    private final boolean is2枚目以降;
+    private final int 現在ページ;
+    private boolean has改ページ;
+    private int 表示行数;
 
     /**
      * コンストラクタです。
      *
+     * @param is2枚目以降 boolean
+     * @param 現在ページ int
      * @param entity ShinsakaiSiryoKyotsuEntity
      * @param 特記情報List List<DbT5205NinteichosahyoTokkijikoEntity>
      */
-    public TokkiText1A4Business(ShinsakaiSiryoKyotsuEntity entity, List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List) {
-        特記パターン = DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        最大文字数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.特記事項行最大文字数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
+    public TokkiText1A4Business(boolean is2枚目以降, int 現在ページ,
+            ShinsakaiSiryoKyotsuEntity entity, List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List) {
+        this.特記パターン = DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        this.最大文字数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.特記事項行最大文字数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
+        this.ページ最大表示行数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.特記事項最大表示行数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
+        this.現在ページ = 現在ページ;
+        this.is2枚目以降 = is2枚目以降;
         this.特記情報List = 特記情報List;
         this.kyotsuEntity = entity;
-        ページ表示行数 = 0;
+        has改ページ = false;
+        表示行数 = 0;
     }
 
     /**
@@ -196,7 +206,16 @@ public class TokkiText1A4Business {
                             getFilePathByRemban(entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban())));
                 }
                 短冊情報リスト.add(短冊情報);
-                ページ表示行数 = ページ表示行数 + 1;
+                表示行数 = 表示行数 + 1;
+                if (一ページ表示行数 * 現在ページ <= 表示行数) {
+                    has改ページ = true;
+                    表示行数 = 0;
+                    短冊情報リスト = 短冊情報リスト.subList(一ページ表示行数 * (現在ページ - 1), 表示行数 - 1);
+                    return 短冊情報リスト;
+                }
+            }
+            if (一ページ表示行数 * (現在ページ - 1) <= 短冊情報リスト.size()) {
+                短冊情報リスト = 短冊情報リスト.subList(一ページ表示行数 * (現在ページ - 1), 短冊情報リスト.size() - 1);
             }
         }
         return 短冊情報リスト;
@@ -208,10 +227,13 @@ public class TokkiText1A4Business {
      * @return 全面特記事項イメージを取得します
      */
     public RString getTokkiImg() {
+        RStringBuilder ファイル名 = new RStringBuilder();
+        ファイル名.append("C140");
+        ファイル名.append(現在ページ);
         if (kyotsuEntity.isJimukyoku()) {
-            return getFilePath(kyotsuEntity.getImageSharedFileId(), ファイルID_C4101BAK);
+            return getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.append("_BAK.png").toRString());
         } else {
-            return getFilePath(kyotsuEntity.getImageSharedFileId(), ファイルID_C4101);
+            return getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.append("_.png").toRString());
         }
     }
 
@@ -256,7 +278,16 @@ public class TokkiText1A4Business {
      * @return ページ表示行数
      */
     public int getページ表示行数() {
-        return ページ表示行数;
+        return 表示行数;
+    }
+
+    /**
+     * ページ表示行数を取得します。
+     *
+     * @return ページ表示行数
+     */
+    public boolean hasBreak() {
+        return has改ページ;
     }
 
     private RString getTextByテキスト全面イメージ() {
@@ -270,12 +301,27 @@ public class TokkiText1A4Business {
                 テキスト全面.append(entity.getTokkiJiko());
                 if ((int) (テキスト全面.length() / 最大文字数) == 2) {
                     テキスト全面.insert(最大文字数 * 2, System.lineSeparator());
+                    表示行数 = 表示行数 + 1;
                 }
-                テキスト全面.insert(最大文字数, System.lineSeparator());
-                テキスト全面.append(System.lineSeparator());
+                if ((int) (テキスト全面.length() / 最大文字数) == 1) {
+                    テキスト全面.insert(最大文字数, System.lineSeparator());
+                    表示行数 = 表示行数 + 1;
+                }
+                if ((!is2枚目以降 && ページ最大表示行数 <= 表示行数)
+                        || (is2枚目以降 && ページ最大表示行数 * 現在ページ <= 表示行数)) {
+                    has改ページ = true;
+                    return テキスト全面.toRString();
+                }
+                if (is2枚目以降 && 表示行数 % (ページ最大表示行数 * (現在ページ - 1)) == 0) {
+                    テキスト全面 = new RStringBuilder();
+                } else {
+                    テキスト全面.append(System.lineSeparator());
+                    表示行数 = 表示行数 + 1;
+                }
             }
         }
-        if (isテキスト) {
+        if ((isテキスト && !is2枚目以降) || (isテキスト && (is2枚目以降 && ページ最大表示行数 * (現在ページ - 1) <= 表示行数
+                && ページ最大表示行数 * 現在ページ - 1 <= 表示行数))) {
             return テキスト全面.toRString();
         }
         return RString.EMPTY;

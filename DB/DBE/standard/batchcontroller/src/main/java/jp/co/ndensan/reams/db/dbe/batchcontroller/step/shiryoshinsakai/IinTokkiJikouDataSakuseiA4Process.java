@@ -99,7 +99,7 @@ public class IinTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
         kyotsuEntity.setHihokenshaName(AtenaMeisho.EMPTY);
 
         List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List = get特記情報(kyotsuEntity);
-        TokkiText1A4Business business = new TokkiText1A4Business(kyotsuEntity, 特記情報List);
+        TokkiText1A4Business business = new TokkiText1A4Business(false, 1, kyotsuEntity, 特記情報List);
         TokkiText1A4Report report = new TokkiText1A4Report(business);
         report.writeBy(reportSourceWriterA4);
         ページ表示行数 = business.getページ表示行数();

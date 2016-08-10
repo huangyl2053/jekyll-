@@ -31,7 +31,7 @@ public class KogakuJigyoShikyuShinseishoYuchoEditor implements IKogakuJigyoShiky
     /**
      * コンストラクタです
      *
-     * @param 帳票出力対象データ KogakuJigyoShikyuShinseishoYuchoSource
+     * @param 帳票出力対象データ ShinseiJohoChohyoTempEntity
      * @param 認証者役職名 RString
      * @param システム日付 RDateTime
      * @param is金融機関表示 Boolean

@@ -17,11 +17,10 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
  *
  * @reamsid_L DBE-0150-230 lishengli
  */
-public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
+public class ShinsakaishiryoA3EditorLeft implements IShinsakaishiryoA3Editor {
 
     private static final int INT_2 = 2;
     private static final int INT_4 = 4;
-    private static final int INT_25 = 25;
     private final JimuShinsakaishiryoBusiness business;
 
     /**
@@ -29,7 +28,7 @@ public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
      *
      * @param business {@link JimuShinsakaishiryoBusiness}
      */
-    protected ShinsakaishiryoA3Editor(JimuShinsakaishiryoBusiness business) {
+    protected ShinsakaishiryoA3EditorLeft(JimuShinsakaishiryoBusiness business) {
         this.business = business;
     }
 
@@ -57,36 +56,19 @@ public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
         source.shinsainName7 = business.getshinsakaiIinJohoList7();
         source.shinsainName8 = business.getshinsakaiIinJohoList8();
         source.shinsaTaishoshaCount = business.get審査対象者数();
-        int no = business.getNo();
-        if (INT_25 < no) {
-            source.listShinsei2_1 = business.get審査会審査順().padZeroToLeft(INT_2);
-            source.listShinsei2_2 = business.get保険者();
-            source.listShinsei2_3 = business.get被保険者();
-            source.listShinsei2_4 = business.get氏名();
-            source.listShinsei2_5 = business.get性別();
-            source.listShinsei2_6 = business.get年齢();
-            source.listShinsei2_7 = business.get前回二次();
-            source.listShinsei2_8 = business.get前回期間();
-            source.listShinsei2_9 = business.get一次判定();
-            source.listShinsei2_10 = RString.EMPTY;
-            source.listShinsei2_11 = RString.EMPTY;
-            source.listZenkaiｙukokikan2_1 = business.get前回期間_下();
-            source.listYukokikan2_1 = RString.EMPTY;
-        } else {
-            source.listShinsei1_1 = business.get審査会審査順().padZeroToLeft(INT_2);
-            source.listShinsei1_2 = business.get保険者();
-            source.listShinsei1_3 = business.get被保険者();
-            source.listShinsei1_4 = business.get氏名();
-            source.listShinsei1_5 = business.get性別();
-            source.listShinsei1_6 = business.get年齢();
-            source.listShinsei1_7 = business.get前回二次();
-            source.listShinsei1_8 = business.get前回期間();
-            source.listShinsei1_9 = business.get一次判定();
-            source.listShinsei1_10 = RString.EMPTY;
-            source.listShinsei1_11 = RString.EMPTY;
-            source.listZenkaiｙukokikan1_1 = business.get前回期間_下();
-            source.listYukokikan1_1 = RString.EMPTY;
-        }
+        source.listShinsei1_1 = business.get審査会審査順().padZeroToLeft(INT_2);
+        source.listShinsei1_2 = business.get保険者();
+        source.listShinsei1_3 = business.get被保険者();
+        source.listShinsei1_4 = business.get氏名();
+        source.listShinsei1_5 = business.get性別();
+        source.listShinsei1_6 = business.get年齢();
+        source.listShinsei1_7 = business.get前回二次();
+        source.listShinsei1_8 = business.get前回期間();
+        source.listShinsei1_9 = business.get一次判定();
+        source.listShinsei1_10 = RString.EMPTY;
+        source.listShinsei1_11 = RString.EMPTY;
+        source.listZenkaiｙukokikan1_1 = business.get前回期間_下();
+        source.listYukokikan1_1 = RString.EMPTY;
         if (business.is事務局()) {
             source.shikibetuCode = ShikibetsuCode.EMPTY;
             if (business.get申請書管理番号() != null && !business.get申請書管理番号().isEmpty()) {

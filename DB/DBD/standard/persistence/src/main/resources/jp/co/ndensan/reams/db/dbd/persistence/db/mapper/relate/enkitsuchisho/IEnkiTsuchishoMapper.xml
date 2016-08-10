@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- reamsid_L DBD-1410-020 chenxin  -->
+<!-- @reamsid_L DBD-1410-020 chenxin -->
 <!-- 概要： 要介護認定延期通知書発行一覧表出力用XMLです。 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->

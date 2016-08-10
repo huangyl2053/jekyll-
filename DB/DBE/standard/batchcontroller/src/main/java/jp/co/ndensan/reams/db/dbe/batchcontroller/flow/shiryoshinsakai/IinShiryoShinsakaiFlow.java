@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.shiryoshinsakai;
 
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinHanteiDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinHanteiDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinIkenshoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinIkenshoDataSakuseiA4NihirameProcess;
@@ -145,13 +144,8 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
      */
     @Step(委員_予備判定一覧)
     protected IBatchFlowCommand createIinHanteiData() {
-        if (選択.equals(getParameter().getShuturyokuSutairu())) {
-            return loopBatch(IinHanteiDataSakuseiA4Process.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-        } else {
-            return loopBatch(IinHanteiDataSakuseiA3Process.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-        }
+        return loopBatch(IinHanteiDataSakuseiA4Process.class)
+                .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
     }
 
     /**

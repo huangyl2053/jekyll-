@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -43,7 +45,11 @@ public class ShoriDateKanriFinder {
      * @return ShoriDateKanri 検索項目がなしの場合、nullを戻ります。
      */
     public ShoriDateKanri get前回の実行情報(LasdecCode 市町村コード) {
-        DbT7022ShoriDateKanriEntity entity = dac.select前回の実行情報(市町村コード);
+        DbT7022ShoriDateKanriEntity entity = dac.select(
+                SubGyomuCode.DBC介護給付,
+                市町村コード,
+                new RString("自己負担証明書作成_一括"),
+                new RString("0001"));
         if (entity == null) {
             return null;
         }

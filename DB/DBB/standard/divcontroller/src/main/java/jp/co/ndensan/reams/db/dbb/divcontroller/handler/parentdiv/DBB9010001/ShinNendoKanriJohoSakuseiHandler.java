@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.DayOfWeek;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -84,15 +85,7 @@ public class ShinNendoKanriJohoSakuseiHandler {
         List<ChohyoSeigyoHanyo> 新帳票制御汎用List = 帳票制御汎用の追加();
         ShoriDateKanri 処理日付管理 = 処理日付管理の追加();
         //TODO QA.1013
-        HashMap<String, Object> param = createParameter(new RYear(本年度.toString()));
-        ShinNendoKanriJohoSakuseiFinder finder = ShinNendoKanriJohoSakuseiFinder.createInstance();
-        List<Noki> resultList = finder.getShinNendoKanriJohoSakusei(param);
-        List<Noki> 納期管理List = new ArrayList();
-        for (Noki item : resultList) {
-       item = item.createBuilderForEdit()
-                    .set調定年度(new RYear(年度.toString())).build();
-            納期管理List.add(item);
-        }
+        List<Noki> 納期管理List = 納期管理の追加();
         imanager.追加(処理日付管理, 新帳票制御汎用List, 納期管理List);
     }
 
@@ -108,10 +101,123 @@ public class ShinNendoKanriJohoSakuseiHandler {
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         ShoriDateKanri 処理日付管理 = new ShoriDateKanri(SubGyomuCode.DBB介護賦課, 導入団体クラス.get地方公共団体コード(),
                 ShoriName.新年度管理情報作成.get名称(), 処理枝番, 年度, 年度内連番);
-        処理日付管理.createBuilderForEdit()
+        処理日付管理 = 処理日付管理.createBuilderForEdit()
                 .set基準年月日(FlexibleDate.getNowDate())
                 .set基準日時(YMDHMS.now()).build();
         return 処理日付管理;
+    }
+
+    /**
+     * 納期管理の追加のメソッドます。
+     *
+     * @return 納期管理List
+     */
+    private List<Noki> 納期管理の追加() {
+        RString newNendo = new RDate(div.getTxtShiNendo().getValue().toString()).getYear().toDateString();
+        FlexibleYear 年度 = new FlexibleYear(newNendo);
+        RString honNendo = new RDate(div.getShinNendoKanriJohoSakuseiBatchParameter().getTxtTonendo().getValue().toString()).getYear().toDateString();
+        FlexibleYear 本年度 = new FlexibleYear(honNendo);
+        HashMap<String, Object> param = createParameter(new RYear(本年度.toString()));
+        ShinNendoKanriJohoSakuseiFinder finder = ShinNendoKanriJohoSakuseiFinder.createInstance();
+        List<Noki> resultList = finder.getShinNendoKanriJohoSakusei(param);
+        List<Noki> 納期管理List = new ArrayList();
+        for (Noki items : resultList) {
+            Noki item = items;
+            if (item.get納期限().plusYear(1).getDayOfWeek().compareTo(DayOfWeek.SUNDAY) == 0) {
+               item = item.createBuilderForEdit()
+                        .set納期限(item.get納期限().plusYear(1).plusDay(1)).build();
+            } else {
+                if (item.get納期限().plusYear(1).getDayOfWeek().compareTo(DayOfWeek.SATURDAY) == 0) {
+                    item = item.createBuilderForEdit()
+                            .set納期限(item.get納期限().plusYear(1).plusDay(2)).build();
+                } else {
+                    item = item.createBuilderForEdit()
+                            .set納期限(item.get納期限().plusYear(1)).build();
+                }
+            }
+
+            if (item.get納期開始日().plusYear(1).getDayOfWeek().compareTo(DayOfWeek.SUNDAY) == 0) {
+                item = item.createBuilderForEdit()
+                        .set納期開始日(item.get納期開始日().plusYear(1).plusDay(1)).build();
+            } else {
+                if (item.get納期開始日().plusYear(1).getDayOfWeek().compareTo(DayOfWeek.SATURDAY) == 0) {
+                    item = item.createBuilderForEdit()
+                            .set納期開始日(item.get納期開始日().plusYear(1).plusDay(2)).build();
+                } else {
+                    item = item.createBuilderForEdit()
+                            .set納期開始日(item.get納期開始日().plusYear(1)).build();
+                }
+            }
+
+            if (item.get納期終了日().plusYear(1).getDayOfWeek().compareTo(DayOfWeek.SUNDAY) == 0) {
+                item.createBuilderForEdit()
+                        .set納期終了日(item.get納期終了日().plusYear(1).plusDay(1)).build();
+            } else {
+                if (item.get納期終了日().plusYear(1).getDayOfWeek().compareTo(DayOfWeek.SATURDAY) == 0) {
+                    item.createBuilderForEdit()
+                            .set納期終了日(item.get納期終了日().plusYear(1).plusDay(2)).build();
+                } else {
+                    item.createBuilderForEdit()
+                            .set納期終了日(item.get納期終了日().plusYear(1)).build();
+                }
+            }
+
+            if (item.get通知書発行日().plusYear(1).getDayOfWeek().compareTo(DayOfWeek.SUNDAY) == 0) {
+                item = item.createBuilderForEdit()
+                        .set通知書発行日(item.get通知書発行日().plusYear(1).plusDay(1)).build();
+            } else {
+                if (item.get通知書発行日().plusYear(1).getDayOfWeek().compareTo(DayOfWeek.SATURDAY) == 0) {
+                    item = item.createBuilderForEdit()
+                            .set通知書発行日(item.get通知書発行日().plusYear(1).plusDay(2)).build();
+                } else {
+                    item = item.createBuilderForEdit()
+                            .set通知書発行日(item.get通知書発行日().plusYear(1)).build();
+                }
+            }
+
+            if (item.get法定納期限().plusYear(1).getDayOfWeek().compareTo(DayOfWeek.SUNDAY) == 0) {
+                item = item.createBuilderForEdit()
+                        .set法定納期限(item.get法定納期限().plusYear(1).plusDay(1)).build();
+            } else {
+                if (item.get法定納期限().plusYear(1).getDayOfWeek().compareTo(DayOfWeek.SATURDAY) == 0) {
+                    item = item.createBuilderForEdit()
+                            .set法定納期限(item.get法定納期限().plusYear(1).plusDay(2)).build();
+                } else {
+                    item = item.createBuilderForEdit()
+                            .set法定納期限(item.get法定納期限().plusYear(1)).build();
+                }
+            }
+
+            if (item.get法定納期限等().plusYear(1).getDayOfWeek().compareTo(DayOfWeek.SUNDAY) == 0) {
+                item = item.createBuilderForEdit()
+                        .set法定納期限等(item.get法定納期限等().plusYear(1).plusDay(1)).build();
+            } else {
+                if (item.get法定納期限等().plusYear(1).getDayOfWeek().compareTo(DayOfWeek.SATURDAY) == 0) {
+                    item = item.createBuilderForEdit()
+                            .set法定納期限等(item.get法定納期限等().plusYear(1).plusDay(2)).build();
+                } else {
+                    item = item.createBuilderForEdit()
+                            .set法定納期限等(item.get法定納期限等().plusYear(1)).build();
+                }
+            }
+
+            if (item.get振替納期月().plusYear(1).getDayOfWeek().compareTo(DayOfWeek.SUNDAY) == 0) {
+                item = item.createBuilderForEdit()
+                        .set振替納期月(item.get振替納期月().plusYear(1).plusDay(1)).build();
+            } else {
+                if (item.get振替納期月().plusYear(1).getDayOfWeek().compareTo(DayOfWeek.SATURDAY) == 0) {
+                    item = item.createBuilderForEdit()
+                            .set振替納期月(item.get振替納期月().plusYear(1).plusDay(2)).build();
+                } else {
+                    item = item.createBuilderForEdit()
+                            .set振替納期月(item.get振替納期月().plusYear(1)).build();
+                }
+            }
+           item = item.createBuilderForEdit()
+                    .set調定年度(new RYear(年度.toString())).build();
+            納期管理List.add(item);
+        }
+        return 納期管理List;
     }
 
     /**

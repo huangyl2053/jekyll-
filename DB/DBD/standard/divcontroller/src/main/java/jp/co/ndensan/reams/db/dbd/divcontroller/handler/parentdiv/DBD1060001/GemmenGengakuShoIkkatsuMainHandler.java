@@ -69,44 +69,11 @@ public class GemmenGengakuShoIkkatsuMainHandler {
     public void 初期化画面の表示() {
         RString 減免減額種類 = GemmenGengakuShurui.負担限度額認定.get名称();
         div.getSakuseiTaisho().getDdlGemmenGengakuShurui().setSelectedValue(減免減額種類);
-        BatchParameterManager batchParameterManager = new BatchParameterManager(SubGyomuCode.DBD介護受給, 負担のBATCH_ID);
-        BatchParameterMap batchMap = batchParameterManager.getParameterByBatch();
-        FlexibleDate 前回対象日From = batchMap.getParameterValue(FlexibleDate.class, 負担対象FROM);
-        FlexibleDate 前回対象日To = batchMap.getParameterValue(FlexibleDate.class, 負担対象TO);
-        RString 対象区分 = batchMap.getParameterValue(RString.class, 負担対象KUBUN);
-        div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getRadFutanGendogakuTanpyoHakkoKubun()
-                .setSelectedValue(TanpyoHakkoKubun.出力しない.get名称());
-        div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getRadFutanGendogakuKyusochishaKubun()
-                .setSelectedValue(KyusochishaKubun.旧措置者以外.get名称());
-        if (前回対象日From != null) {
-            div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getTxtFutanGendogakuZenkaiTaishoYmdFrom().setValue(前回対象日From);
-        } else {
-            div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getTxtFutanGendogakuZenkaiTaishoYmdFrom().clearValue();
-        }
-        if (前回対象日To != null) {
-            div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getTxtFutanGendogakuZenkaiTaishoYmdTo().setValue(前回対象日To);
-            div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getTxtFutanGendogakuKonkaiTaishoYmdFrom().setValue(前回対象日To.plusDay(1));
-        } else {
-            div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getTxtFutanGendogakuZenkaiTaishoYmdTo().clearValue();
-            div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getTxtFutanGendogakuKonkaiTaishoYmdFrom().clearValue();
-        }
-        if (対象区分 != null) {
-            if (対象区分.equals(TaishoKubun.決定日.getコード())) {
-                div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getRadFutanGendogakuJoken().setSelectedValue(TaishoKubun.決定日.get名称());
-            }
-            if (対象区分.equals(TaishoKubun.申請日.getコード())) {
-                div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getRadFutanGendogakuJoken().setSelectedValue(TaishoKubun.申請日.get名称());
-            }
-        }
-        if (対象区分 == null || 対象区分.isEmpty()) {
-            div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getRadFutanGendogakuJoken().setSelectedValue(TaishoKubun.決定日.get名称());
-        }
+        FlexibleDate 発行日 = FlexibleDate.getNowDate();
+        負担画面の表示(div, 発行日);
+        div.getFutanGendogaku().getFutanGendogakuKetteiTsuchisho().getTxtFutanGendogakuKetteiTsuchishoHakkoYmd().setValue(FlexibleDate.getNowDate());
         div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getTxtFutanGendogakuKonkaiTaishoYmdTo().setValue(FlexibleDate.getNowDate());
         div.getFutanGendogaku().getFutanGendogakuNinteisho().getTxtFutanGendogakuNinteishoKofuYmd().setValue(FlexibleDate.getNowDate());
-        div.getFutanGendogaku().getFutanGendogakuKetteiTsuchisho().getTxtFutanGendogakuKetteiTsuchishoHakkoYmd().setValue(FlexibleDate.getNowDate());
-        FlexibleDate 発行日 = div.getFutanGendogaku().getFutanGendogakuKetteiTsuchisho().getTxtFutanGendogakuKetteiTsuchishoHakkoYmd().getValue();
-        div.getFutanGendogaku().getCcdFutanGendogakuKetteiTsuchishoBunshoNo().initialize(負担帳票のID, 発行日);
-        div.getFutanGendogaku().getCcdFutanGendogakuShutsuryokuJun().load(SubGyomuCode.DBD介護受給, 負担出力帳票ID);
     }
 
     /**
@@ -144,8 +111,9 @@ public class GemmenGengakuShoIkkatsuMainHandler {
      * バッチパラメータの復元と負担画面の表示。
      *
      * @param div GemmenGengakuShoIkkatsuMainDiv
+     * @param hakkohi FlexibleDate
      */
-    public void 負担画面の表示(GemmenGengakuShoIkkatsuMainDiv div) {
+    public void 負担画面の表示(GemmenGengakuShoIkkatsuMainDiv div, FlexibleDate hakkohi) {
         BatchParameterManager batchParameterManager = new BatchParameterManager(SubGyomuCode.DBD介護受給, 負担のBATCH_ID);
         BatchParameterMap batchMap = batchParameterManager.getParameterByBatch();
         FlexibleDate 前回対象日From = batchMap.getParameterValue(FlexibleDate.class, 負担対象FROM);
@@ -181,7 +149,7 @@ public class GemmenGengakuShoIkkatsuMainHandler {
         div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getTxtFutanGendogakuKonkaiTaishoYmdTo().setValue(FlexibleDate.getNowDate());
         div.getFutanGendogaku().getFutanGendogakuNinteisho().getTxtFutanGendogakuNinteishoKofuYmd().clearValue();
         div.getFutanGendogaku().getFutanGendogakuKetteiTsuchisho().getTxtFutanGendogakuKetteiTsuchishoHakkoYmd().clearValue();
-        div.getFutanGendogaku().getFutanGendogakuKetteiTsuchisho().getCcdFutanGendogakuKetteiTsuchishoBunshoNo().initialize(負担帳票のID);
+        div.getFutanGendogaku().getFutanGendogakuKetteiTsuchisho().getCcdFutanGendogakuKetteiTsuchishoBunshoNo().initialize(負担帳票のID, hakkohi);
         div.getFutanGendogaku().getCcdFutanGendogakuShutsuryokuJun().load(SubGyomuCode.DBD介護受給, 負担出力帳票ID);
     }
 
@@ -198,7 +166,7 @@ public class GemmenGengakuShoIkkatsuMainHandler {
         }
         //RString 社会福祉法人等利用者負担軽 = GemmenGengakuShurui.社会福祉法人等利用者負担軽減.get名称();
         if (減免減額種類.equals(負担限度額認定)) {
-            負担画面の表示(div);
+            負担画面の表示(div, FlexibleDate.getNowDate());
             return ResponseData.of(div).setState(DBD1060001StateName.負担限度額認定);
         }
         if (減免減額種類.equals(GemmenGengakuShurui.社会福祉法人等利用者負担軽減.get名称())) {

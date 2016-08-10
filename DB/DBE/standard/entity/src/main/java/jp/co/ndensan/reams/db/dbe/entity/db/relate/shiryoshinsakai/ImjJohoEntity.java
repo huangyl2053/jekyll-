@@ -19,4 +19,5 @@ public class ImjJohoEntity {
 
     private int dbt5502_shinsakaiOrder;
     private RDateTime dbt5115_imageSharedFileId;
+    private boolean isJimukyoku;
 }

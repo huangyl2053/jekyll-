@@ -7,10 +7,12 @@ package jp.co.ndensan.reams.db.dbb.service.core.dankaibetsuhihokenshasuuichirans
 
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.dankaibetuhihokensyasuichiranhyo.DankaibetuHihokensyasuIchiranhyoBatchParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.dankaibetuhihokensyasuichiranhyo.InputeImageDivEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -56,7 +58,7 @@ public class DankaibetsuHihokenshaSuuIchiranSakusei {
      */
     @Transaction
     public YMDHMS getHonsanteiShoribi(FlexibleYear 調定年度) {
-        DbT7022ShoriDateKanriEntity entity = 処理日付管理Dac.select基準日時(調定年度);
+        DbT7022ShoriDateKanriEntity entity = 処理日付管理Dac.selectKaijun_検索(調定年度, ShoriName.本算定賦課.get名称());
         if (entity == null) {
             return null;
         }

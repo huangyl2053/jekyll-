@@ -23,24 +23,25 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class JigyohokokuCompYoshiki272Report extends Report<JigyohokokuCompYoshiki272ReportSource> {
 
-    private final JigyohokokuCompYoshiki272Entity data;
+    private final JigyohokokuCompYoshiki272Entity entity;
     private static final Decimal 縦番号_1 = new Decimal("1");
     private static final Decimal 縦番号_2 = new Decimal("2");
 
     /**
      * インスタンスを生成します。
      *
-     * @param data 帳票発行のdataList
+     * @param entity 帳票発行のdataList
      */
-    public JigyohokokuCompYoshiki272Report(JigyohokokuCompYoshiki272Entity data) {
-        this.data = data;
+    public JigyohokokuCompYoshiki272Report(JigyohokokuCompYoshiki272Entity entity) {
+        this.entity = entity;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<JigyohokokuCompYoshiki272ReportSource> writer) {
+        IJigyohokokuCompYoshiki272Editor headeditor = new JigyohokokuCompYoshiki272HeadEditor(entity);
         for (JigyohokokuCompYoshiki272Change change : getData()) {
-            IJigyohokokuCompYoshiki272Editor editor = new JigyohokokuCompYoshiki272Editor(data, change);
-            IJigyohokokuCompYoshiki272Builder builder = new JigyohokokuCompYoshiki272Builder(editor);
+            IJigyohokokuCompYoshiki272Editor bodyeditor = new JigyohokokuCompYoshiki272BodyEditor(change);
+            IJigyohokokuCompYoshiki272Builder builder = new JigyohokokuCompYoshiki272Builder(headeditor, bodyeditor);
             writer.writeLine(builder);
         }
 
@@ -48,32 +49,26 @@ public class JigyohokokuCompYoshiki272Report extends Report<JigyohokokuCompYoshi
 
     private Iterable<JigyohokokuCompYoshiki272Change> getData() {
         List<JigyohokokuCompYoshiki272Change> dataList = new ArrayList<>();
-        List<DbT7021JigyoHokokuTokeiDataEntity> jigyohokokutokeis = data.get事業報告統計データ();
-        dataList.add(new JigyohokokuCompYoshiki272Change(set件数(jigyohokokutokeis),
-                set給付額(jigyohokokutokeis)));
+        List<DbT7021JigyoHokokuTokeiDataEntity> jigyohokokutokeis = entity.get事業報告統計データ();
+        for (DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei : jigyohokokutokeis) {
+            dataList.add(new JigyohokokuCompYoshiki272Change(set件数(jigyohokokutokei),
+                    set給付額(jigyohokokutokei)));
+        }
         return dataList;
     }
 
-    private RString set件数(List<DbT7021JigyoHokokuTokeiDataEntity> jigyohokokutokeis) {
+    private RString set件数(DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei) {
         RString 件数 = RString.EMPTY;
-        if (jigyohokokutokeis != null) {
-            for (DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei : jigyohokokutokeis) {
-                if (縦番号_1.equals(jigyohokokutokei.getTateNo())) {
-                    件数 = new RString(jigyohokokutokei.getShukeiKekkaAtai().toString());
-                }
-            }
+        if (縦番号_1.equals(jigyohokokutokei.getTateNo())) {
+            件数 = new RString(jigyohokokutokei.getShukeiKekkaAtai().toString());
         }
         return 件数;
     }
 
-    private RString set給付額(List<DbT7021JigyoHokokuTokeiDataEntity> jigyohokokutokeis) {
+    private RString set給付額(DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei) {
         RString 給付額 = RString.EMPTY;
-        if (jigyohokokutokeis != null) {
-            for (DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei : jigyohokokutokeis) {
-                if (縦番号_2.equals(jigyohokokutokei.getTateNo())) {
-                    給付額 = new RString(jigyohokokutokei.getShukeiKekkaAtai().toString());
-                }
-            }
+        if (縦番号_2.equals(jigyohokokutokei.getTateNo())) {
+            給付額 = new RString(jigyohokokutokei.getShukeiKekkaAtai().toString());
         }
         return 給付額;
     }

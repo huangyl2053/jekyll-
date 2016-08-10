@@ -65,6 +65,7 @@ public class ShujiiHoshuShiharaiEditor implements IShujiiHoshuShiharaiEditor {
         source.kinyukikan = item.get金融機関();
         source.meiginin = item.get名議人();
         source.tsuchibun2 = item.get通知文2();
+        source.shujiiIryokikanCode = item.get主治医医療機関コード();
         return source;
     }
 

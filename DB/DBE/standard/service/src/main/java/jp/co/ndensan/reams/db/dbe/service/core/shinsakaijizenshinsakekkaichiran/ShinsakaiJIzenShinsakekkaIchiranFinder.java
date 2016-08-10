@@ -72,6 +72,9 @@ public class ShinsakaiJIzenShinsakekkaIchiranFinder {
         JizenShinsakaiShiryoRelateEntity 事前審査会用結果 = mapper.get事前審査会用結果(
                 ShinsakaiJIzenShinsakekkaIchiranMybitisParamter.createParamter(paramter));
 
+        if (事前審査会用結果 == null) {
+            return SearchResult.of(事前審査会用結果List, 0, false);
+        }
         事前審査会用結果List.add(new JizenShinsakaiShiryo(事前審査会用結果));
         return SearchResult.of(事前審査会用結果List, 0, false);
     }

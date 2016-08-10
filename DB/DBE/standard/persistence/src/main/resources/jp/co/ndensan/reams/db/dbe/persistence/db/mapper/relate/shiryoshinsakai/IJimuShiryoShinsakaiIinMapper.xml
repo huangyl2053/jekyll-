@@ -160,15 +160,10 @@
             AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
         </if>
         <if test="isSakuseiJokenTuika">
-            AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+            AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
         </if>
                     ORDER BY
-        <if test="isIsShuturyokuJun">
-           dbt5502.shinsakaiOrder
-        </if>
-                        <if test="!isIsShuturyokuJun">
-           #{shuturyokuJun}
-        </if>
+           dbt5502."shinsakaiOrder"
     </select>
     
     <resultMap id="Result_共通情報" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity" autoMapping="true">
@@ -237,14 +232,7 @@
             AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
         </if>
         <if test="isSakuseiJokenTuika">
-            AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
-        </if>
-                    ORDER BY
-        <if test="isIsShuturyokuJun">
-           dbt5502.shinsakaiOrder
-        </if>
-                        <if test="!isIsShuturyokuJun">
-           #{shuturyokuJun}
+            AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
         </if>
     </select>
      
@@ -281,7 +269,7 @@
         , dbt5102."nijiHanteiNinteiYukoShuryoYMD"
         FROM rgdb."DbT5121ShinseiRirekiJoho" dbt5121
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101Zenkai
-        ON dbt5101Zenkai."shinseishoKanriNo" = dbt5121."shinseishoKanriNo"
+        ON dbt5101Zenkai."shinseishoKanriNo" = dbt5121."zenkaiShinseishoKanriNo"
         AND (dbt5101Zenkai."shoriJotaiKubun" = #{shoriJotaiKubun0} OR dbt5101Zenkai."shoriJotaiKubun" = #{shoriJotaiKubun3})
         AND dbt5101Zenkai."logicalDeletedFlag" = FALSE
         INNER JOIN rgdb."DbT5102NinteiKekkaJoho" dbt5102
@@ -294,15 +282,10 @@
             AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
         </if>
         <if test="isSakuseiJokenTuika">
-            AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+            AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
         </if>
                     ORDER BY
-        <if test="isIsShuturyokuJun">
-           dbt5502.shinsakaiOrder
-        </if>
-                        <if test="!isIsShuturyokuJun">
-           #{shuturyokuJun}
-        </if>
+           dbt5502."shinsakaiOrder"
         LIMIT
             50
     </select>
@@ -340,7 +323,7 @@
         , dbt5102."nijiHanteiNinteiYukoShuryoYMD"
         FROM rgdb."DbT5121ShinseiRirekiJoho" dbt5121
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101Zenkai
-        ON dbt5101Zenkai."shinseishoKanriNo" = dbt5121."shinseishoKanriNo"
+        ON dbt5101Zenkai."shinseishoKanriNo" = dbt5121."zenkaiShinseishoKanriNo"
         AND (dbt5101Zenkai."shoriJotaiKubun" = #{shoriJotaiKubun0} OR dbt5101Zenkai."shoriJotaiKubun" = #{shoriJotaiKubun3})
         AND dbt5101Zenkai."logicalDeletedFlag" = FALSE
         INNER JOIN rgdb."DbT5102NinteiKekkaJoho" dbt5102
@@ -353,15 +336,10 @@
             AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
         </if>
         <if test="isSakuseiJokenTuika">
-            AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+            AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
         </if>
                     ORDER BY
-        <if test="isIsShuturyokuJun">
-           dbt5502.shinsakaiOrder
-        </if>
-                        <if test="!isIsShuturyokuJun">
-           #{shuturyokuJun}
-        </if>
+           dbt5502."shinsakaiOrder"
     </select>
     
     <select id="get事務局委員氏名" resultMap="Result_ShinsakaiIinJoho"
@@ -797,15 +775,10 @@
                     AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
                 </if>
                 <if test="isSakuseiJokenTuika">
-                    AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+                    AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
                 </if>
                     ORDER BY
-        <if test="isIsShuturyokuJun">
-           dbt5502.shinsakaiOrder
-        </if>
-                        <if test="!isIsShuturyokuJun">
-           #{shuturyokuJun}
-        </if>
+           dbt5502."shinsakaiOrder"
 </select>
 <select id="getJimuHanteiJoho" resultMap="Result_HanteiJoho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuTokkiJikouItiziHanteiMyBatisParameter" fetchSize="500"  resultOrdered="true">
@@ -867,12 +840,7 @@
         AND
         dbt5502."shinsakaiOrderKakuteiFlag" = #{isOrderKakuteiFlg}
                     ORDER BY
-        <if test="isIsShuturyokuJun">
-           dbt5502.shinsakaiOrder
-        </if>
-                        <if test="!isIsShuturyokuJun">
-           #{shuturyokuJun}
-        </if>
+           dbt5502."shinsakaiOrder"
     </select>
     
         <resultMap id="Result_HanteiJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.HanteiJohoEntity" autoMapping="true">
@@ -914,7 +882,7 @@
                     AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
                 </if>
                 <if test="isSakuseiJokenTuika">
-                    AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+                    AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
                 </if>
                 ORDER BY
                     dbt5502."shinseishoKanriNo"
@@ -944,12 +912,7 @@
             WHERE
                 ShinsakaiW.dbt5502_shinseishoKanriNo = GaikyoTokkiJoho.dbt5206_shinseishoKanriNo
                     ORDER BY
-        <if test="isIsShuturyokuJun">
-           dbt5502.shinsakaiOrder
-        </if>
-                        <if test="!isIsShuturyokuJun">
-           #{shuturyokuJun}
-        </if>
+           dbt5502."shinsakaiOrder"
     </select>
     
     <resultMap id="Result_GaikyoTokki" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.GaikyoTokkiEntity" autoMapping="true">
@@ -980,7 +943,7 @@
                     AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
                 </if>
                 <if test="isSakuseiJokenTuika">
-                    AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+                    AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
                 </if>
                 ORDER BY
                     dbt5502."shinseishoKanriNo"
@@ -1219,15 +1182,10 @@
                     AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
                 </if>
                 <if test="isSakuseiJokenTuika">
-                    AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+                    AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
                 </if>
                     ORDER BY
-        <if test="isIsShuturyokuJun">
-           dbt5502.shinsakaiOrder
-        </if>
-                        <if test="!isIsShuturyokuJun">
-           #{shuturyokuJun}
-        </if>
+           dbt5502."shinsakaiOrder"
 </select>
 <select id="get事務局一次判定件数" resultType="java.lang.Integer"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
@@ -1315,15 +1273,8 @@
                     AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
                 </if>
                 <if test="isSakuseiJokenTuika">
-                    AND (dbT5502."shinsakaiShiryoSakuseiYMD" = '' OR dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL)
+                    AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
                 </if>
-                    ORDER BY
-        <if test="isIsShuturyokuJun">
-           dbt5502.shinsakaiOrder
-        </if>
-                        <if test="!isIsShuturyokuJun">
-           #{shuturyokuJun}
-        </if>
 </select>
 <resultMap id="Result_JimuItiziHanteiASan" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ItiziHanteiEntity" autoMapping="true">
         <result property="ninteichosaIraiRirekiNo" column="ninteichosaIraiRirekiNo" />

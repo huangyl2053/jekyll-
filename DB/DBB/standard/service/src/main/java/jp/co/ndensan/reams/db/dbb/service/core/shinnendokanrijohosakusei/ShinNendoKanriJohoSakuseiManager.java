@@ -40,7 +40,8 @@ public class ShinNendoKanriJohoSakuseiManager {
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link ShinNendoKanriJohoSakuseiManager}のインスタンスを返します。
+     * {@link InstanceProvider#create}にて生成した{@link ShinNendoKanriJohoSakuseiManager}のインスタンスを
+     * 返します。
      *
      * @return {@link InstanceProvider#create}にて生成した{@link ShinNendoKanriJohoSakuseiManager}のインスタンス
      */
@@ -59,6 +60,7 @@ public class ShinNendoKanriJohoSakuseiManager {
     public void 追加(ShoriDateKanri 処理日付管理, List<ChohyoSeigyoHanyo> 帳票制御汎用List, List<Noki> 納期管理) {
         requireNonNull(処理日付管理, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日付管理"));
         requireNonNull(帳票制御汎用List, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票制御汎用List"));
+        requireNonNull(納期管理, UrSystemErrorMessages.値がnull.getReplacedMessage("納期管理"));
         処理日付管理manager.save処理日付管理マスタ(処理日付管理);
         for (ChohyoSeigyoHanyo item : 帳票制御汎用List) {
             帳票制御汎用manager.save帳票制御汎用(item);

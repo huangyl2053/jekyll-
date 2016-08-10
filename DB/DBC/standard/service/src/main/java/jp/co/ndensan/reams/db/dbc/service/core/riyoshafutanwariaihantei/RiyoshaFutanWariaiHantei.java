@@ -92,6 +92,7 @@ public class RiyoshaFutanWariaiHantei {
      *
      * @param 負担割合判定情報 FutanWariaiHanteiRelateEntity
      * @return FutanWariaiHanteiResult 負担割合判定結果
+     * @throws NullPointerException
      */
     public FutanWariaiHanteiResult futanWariaiHantei(FutanWariaiHanteiRelateEntity 負担割合判定情報) {
         if (負担割合判定情報 == null) {
@@ -163,6 +164,7 @@ public class RiyoshaFutanWariaiHantei {
         if (判定対象者Temp == null) {
             return null;
         }
+        RDate now = RDate.getNowDate();
         RString 課税区分 = 判定対象者Temp.getKazeiKubun();
         FutanWariaiHanteiResult 負担割合判定結果 = new FutanWariaiHanteiResult();
         if (RString.isNullOrEmpty(課税区分)) {
@@ -170,7 +172,7 @@ public class RiyoshaFutanWariaiHantei {
             負担割合判定結果.set判定区分(HanteiKubunType.非課税.code());
         } else if (課税区分未申告.equals(課税区分)) {
             RString 本人未申告区分 = BusinessConfig.get(ConfigNameDBC.利用者負担割合判定基準_本人未申告区分,
-                    RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+                    now, SubGyomuCode.DBC介護給付);
             if (ONE.equals(本人未申告区分)) {
                 負担割合判定結果.set負担割合区分(FutanwariaiKubun._１割.getコード());
             }
@@ -180,7 +182,7 @@ public class RiyoshaFutanWariaiHantei {
             負担割合判定結果.set判定区分(HanteiKubunType.非課税.code());
         } else if (課税区分所得調査中.equals(課税区分)) {
             RString 本人所得調査中区分 = BusinessConfig.get(ConfigNameDBC.利用者負担割合判定基準_本人所得調査中区分,
-                    RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+                    now, SubGyomuCode.DBC介護給付);
             if (ONE.equals(本人所得調査中区分)) {
                 負担割合判定結果.set負担割合区分(FutanwariaiKubun._１割.getコード());
             }
@@ -217,15 +219,16 @@ public class RiyoshaFutanWariaiHantei {
         if (合計所得金額 == null || 年金収入 == null || その他の合計所得金額 == null) {
             return null;
         }
+        RDate now = RDate.getNowDate();
         Decimal 本人合計所得金額基準 = rstringToDecimal(BusinessConfig.get(
                 ConfigNameDBC.利用者負担割合判定基準_本人合計所得金額基準,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付));
+                now, SubGyomuCode.DBC介護給付));
         Decimal 世帯年金収入等基準単身 = rstringToDecimal(BusinessConfig.get(
                 ConfigNameDBC.利用者負担割合判定基準_世帯年金収入等基準単身,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付));
+                now, SubGyomuCode.DBC介護給付));
         Decimal 世帯年金収入等基準複数 = rstringToDecimal(BusinessConfig.get(
                 ConfigNameDBC.利用者負担割合判定基準_世帯年金収入等基準複数,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付));
+                now, SubGyomuCode.DBC介護給付));
         Decimal 合計所得金額Temp = noMinusDecimal(合計所得金額);
         Decimal その他の合計所得金額Temp = noMinusDecimal(その他の合計所得金額);
         Decimal 合計Temp = 年金収入.add(その他の合計所得金額Temp);
@@ -277,6 +280,7 @@ public class RiyoshaFutanWariaiHantei {
      *
      * @param 基準日 ※YYYYMMDD
      * @return 判定基準日リスト※YYYYMMDD
+     * @throws NullPointerException
      */
     public List<RString> getHanteiKijunbi(RString 基準日) {
         if (基準日 == null) {
@@ -299,10 +303,8 @@ public class RiyoshaFutanWariaiHantei {
         int 基準日の月 = Integer.parseInt(基準日.substring(西暦年の長さ, 西暦年月の長さ).toString());
         if (基準日の月 >= NUM八月 && 基準日の月 <= NUM十二月) {
             return 基準日の年;
-        } else if (基準日の月 >= NUM一月 && 基準日の月 <= NUM七月) {
-            return 基準日の年 - 1;
         }
-        return 0;
+        return 基準日の年 - 1;
     }
 
     private RString 判定基準年月日の取得(int 対象年, int 対象月, RString 基準日の年月) {
@@ -326,6 +328,7 @@ public class RiyoshaFutanWariaiHantei {
      *
      * @param 年度 年度
      * @return 8月から7月の対象開始日のリスト
+     * @throws NullPointerException
      */
     public List<RString> getTaishoKaishibi(RYear 年度) {
         if (年度 == null) {
@@ -354,6 +357,7 @@ public class RiyoshaFutanWariaiHantei {
      *
      * @param 年度 年度
      * @return 8月から7月の対象終了日のリスト
+     * @throws NullPointerException
      */
     public List<RString> getTaishoShuryobi(RYear 年度) {
         if (年度 == null) {
@@ -387,6 +391,7 @@ public class RiyoshaFutanWariaiHantei {
      * @param 利用者負担割合明細情報 List<RiyoshaFutanWariaiMeisaiEntity>
      * @param 対象年度 FlexibleYear
      * @return List<RiyoshaFutanWariaiMeisaiEntity>
+     * @throws NullPointerException
      */
     public List<RiyoshaFutanWariaiMeisaiTempEntity> 負担割合判定マージ(
             List<RiyoshaFutanWariaiMeisaiTempEntity> 利用者負担割合明細情報, FlexibleYear 対象年度) {
@@ -619,6 +624,7 @@ public class RiyoshaFutanWariaiHantei {
      *
      * @param 入力明細リスト List<DbT3114RiyoshaFutanWariaiMeisaiEntity>
      * @return List<DbT3114RiyoshaFutanWariaiMeisaiEntity>
+     * @throws NullPointerException
      */
     public List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 利用者負担割合明細マージ(
             List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 入力明細リスト) {

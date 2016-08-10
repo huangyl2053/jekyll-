@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7055GappeiJohoDac;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho.GappeiCityJyoho;
 import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho.KouikiGappeiJyoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.sortjun.GappeiJohoSortOrder;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gappeijoho.GappeiJyohoSpecificParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.gappeijoho.GappeiCityJyohoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.gappeijoho.KouikiGappeiJyohoRelateEntity;
@@ -47,6 +48,7 @@ public class GappeiCityJohoBFinder {
     private static final RString 合併区分_なし = new RString("0");
     private static final RString 合併区分_あり = new RString("1");
     private static final RString 表示有無区分 = new RString("表示有無区分");
+    private static final RString メッセージ_合併情報ソート順 = new RString("合併情報ソート順");
     private static final RString RS_合併市町村情報検索キー = new RString("合併市町村情報検索キー");
     private static final RString 業務分類 = new RString("業務分類");
     private static final RString 導入形態コード = new RString("導入形態コード");
@@ -420,5 +422,26 @@ public class GappeiCityJohoBFinder {
         } else {
             return finder.getKouikigappeijohokennsaku(表示有無区分);
         }
+    }
+
+    /**
+     * ソート順を指定して全合併旧市町村情報を取得します（広域内合併に対応する）。
+     *
+     * @param 表示有無区分 RString
+     * @param 合併情報ソート順 GappeiJohoSortOrder
+     * @return SearchResult<GappeiCityJyoho> 合併市町村情報
+     */
+    @Transaction
+    public SearchResult<GappeiCityJyoho> getKouikigappeijoho(RString 表示有無区分, GappeiJohoSortOrder 合併情報ソート順) {
+        requireNonNull(合併情報ソート順, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_合併情報ソート順.toString()));
+        IGappeiCityJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiCityJyohoMapper.class);
+        GappeiJyohoSpecificParameter params = GappeiJyohoSpecificParameter
+                .createParamForKouikigappeijohoWithSort(表示有無区分, 合併情報ソート順);
+        List<GappeiCityJyohoRelateEntity> 合併情報検索結果Entityリスト = gappeiJyohoMapper.getKouikigappeijohoWithSort(params);
+        List<GappeiCityJyoho> gappeiCityJyohoList = new ArrayList<>();
+        for (GappeiCityJyohoRelateEntity entity : 合併情報検索結果Entityリスト) {
+            gappeiCityJyohoList.add(new GappeiCityJyoho(entity));
+        }
+        return SearchResult.of(gappeiCityJyohoList, 0, false);
     }
 }

@@ -1222,6 +1222,11 @@ public class SabisuJyoukyoA3 {
                 項目.set特定疾病名(TokuteiShippei.toValue(entity.getNigoTokuteiShippeiCode().getColumnValue()).get名称());
             }
         }
+        setコード(項目, entity);
+    }
+
+    private void setコード(IchijihanteikekkahyoA3Entity 項目, ItiziHanteiEntity entity) {
+
         if (entity.getNinteiShinseiShinseijiKubunCode() == null || entity.getNinteiShinseiShinseijiKubunCode().isEmpty()) {
             項目.set申請区分(RString.EMPTY);
         } else {

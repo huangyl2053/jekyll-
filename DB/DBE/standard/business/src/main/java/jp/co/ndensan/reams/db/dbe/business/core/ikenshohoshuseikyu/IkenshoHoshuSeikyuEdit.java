@@ -30,7 +30,6 @@ import lombok.Setter;
 public class IkenshoHoshuSeikyuEdit {
 
     private int index;
-    private RString shujiiIryokikanCode = RString.EMPTY;
 
     /**
      * 主治医意見書作成報酬請求書の編集処理です。
@@ -38,11 +37,13 @@ public class IkenshoHoshuSeikyuEdit {
      * @param entity 主治医意見書作成報酬請求書
      * @param 消費税率 消費税率
      * @param 通知文 通知文
+     * @param seikyuEntity 主治医意見書作成報酬請求書
+     * @param shujiiIryokikanCode 主治医医療機関コード
+     * @param flag 状態
      * @return IkenshoHoshuSeikyuEntity
      */
     public IkenshoHoshuSeikyuEntity getIkenshoHoshuSeikyuEntity(HoshuShiharaiJunbiRelateEntity entity, RString 消費税率,
-            Map<Integer, RString> 通知文) {
-        IkenshoHoshuSeikyuEntity seikyuEntity = new IkenshoHoshuSeikyuEntity();
+            Map<Integer, RString> 通知文, IkenshoHoshuSeikyuEntity seikyuEntity, RString shujiiIryokikanCode, boolean flag) {
         seikyuEntity.set郵便番号(entity.getYubinNo());
         seikyuEntity.set住所(entity.getJusho());
         seikyuEntity.set医療機関(entity.getIryoKikanMeisho());
@@ -79,8 +80,7 @@ public class IkenshoHoshuSeikyuEdit {
                 seikyuEntity.set更新施設単価(decimalToRString(単価));
             }
         }
-        getIkenshoHoshuSeikyuEntity(entity, seikyuEntity, 単価);
-        shujiiIryokikanCode = entity.getShujiiIryoKikanCode();
+        seikyuEntity = getSeikyuEntity(entity, seikyuEntity, 単価, shujiiIryokikanCode, flag);
         Decimal 新規在宅計 = 単価.multiply(rstringToInt(seikyuEntity.get新規在宅件数()));
         Decimal 新規施設計 = 単価.multiply(rstringToInt(seikyuEntity.get新規施設件数()));
         Decimal 更新在宅計 = 単価.multiply(rstringToInt(seikyuEntity.get更新在宅件数()));
@@ -102,35 +102,39 @@ public class IkenshoHoshuSeikyuEdit {
         return seikyuEntity;
     }
 
+    private IkenshoHoshuSeikyuEntity getSeikyuEntity(HoshuShiharaiJunbiRelateEntity entity,
+            IkenshoHoshuSeikyuEntity seikyuEntity, Decimal 単価, RString shujiiIryokikanCode, boolean flag) {
+        if (flag) {
+            seikyuEntity = getIkenshoHoshuSeikyuEntity(entity, seikyuEntity, 単価, shujiiIryokikanCode);
+        }
+        return seikyuEntity;
+    }
+
     private IkenshoHoshuSeikyuEntity getIkenshoHoshuSeikyuEntity(HoshuShiharaiJunbiRelateEntity entity, IkenshoHoshuSeikyuEntity seikyuEntity,
-            Decimal 単価) {
-        if (shujiiIryokikanCode.equals(entity.getShinsakaiIinCode())) {
+            Decimal 単価, RString shujiiIryokikanCode) {
+        if (shujiiIryokikanCode.equals(entity.getShujiiIryoKikanCode())) {
             if (entity.getIkenshoSakuseiKaisuKubun() != null && entity.getZaitakuShisetsuKubun() != null
                     && IkenshoSakuseiKaisuKubun.初回.getコード().equals(entity.getIkenshoSakuseiKaisuKubun().value())
                     && ZaitakuShisetsuKubun.在宅.getコード().equals(entity.getZaitakuShisetsuKubun().value())) {
-                index++;
-                seikyuEntity.set新規在宅件数(intToRString(index));
+                seikyuEntity.set新規在宅件数(intToRString(rstringToInt(seikyuEntity.get新規在宅件数()) + 1));
                 seikyuEntity.set新規在宅単価(decimalToRString(単価));
             }
             if (entity.getIkenshoSakuseiKaisuKubun() != null && entity.getZaitakuShisetsuKubun() != null
                     && IkenshoSakuseiKaisuKubun.初回.getコード().equals(entity.getIkenshoSakuseiKaisuKubun().value())
                     && ZaitakuShisetsuKubun.施設.getコード().equals(entity.getZaitakuShisetsuKubun().value())) {
-                index++;
-                seikyuEntity.set新規施設件数(intToRString(index));
+                seikyuEntity.set新規施設件数(intToRString(rstringToInt(seikyuEntity.get新規施設件数()) + 1));
                 seikyuEntity.set新規施設単価(decimalToRString(単価));
             }
             if (entity.getIkenshoSakuseiKaisuKubun() != null && entity.getZaitakuShisetsuKubun() != null
                     && IkenshoSakuseiKaisuKubun._2回目以降.getコード().equals(entity.getIkenshoSakuseiKaisuKubun().value())
                     && ZaitakuShisetsuKubun.在宅.getコード().equals(entity.getZaitakuShisetsuKubun().value())) {
-                index++;
-                seikyuEntity.set更新在宅件数(intToRString(index));
+                seikyuEntity.set更新在宅件数(intToRString(rstringToInt(seikyuEntity.get更新在宅件数()) + 1));
                 seikyuEntity.set更新在宅単価(decimalToRString(単価));
             }
             if (entity.getIkenshoSakuseiKaisuKubun() != null && entity.getZaitakuShisetsuKubun() != null
                     && IkenshoSakuseiKaisuKubun._2回目以降.getコード().equals(entity.getIkenshoSakuseiKaisuKubun().value())
                     && ZaitakuShisetsuKubun.施設.getコード().equals(entity.getZaitakuShisetsuKubun().value())) {
-                index++;
-                seikyuEntity.set更新施設件数(intToRString(index));
+                seikyuEntity.set更新施設件数(intToRString(rstringToInt(seikyuEntity.get更新施設件数()) + 1));
                 seikyuEntity.set更新施設単価(decimalToRString(単価));
             }
         }

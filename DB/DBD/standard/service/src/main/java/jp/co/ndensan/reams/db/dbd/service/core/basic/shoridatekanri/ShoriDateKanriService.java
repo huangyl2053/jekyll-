@@ -49,4 +49,15 @@ public class ShoriDateKanriService {
             return new ShoriDateKanri(entity);
         }
     }
+
+    public ShoriDateKanri get一件取得(LasdecCode 市町村コード) {
+        DbT7022ShoriDateKanriEntity entity = dac.select前回抽出期間情報の取得(市町村コード);
+        if (entity == null) {
+            return null;
+        } else {
+
+            return new ShoriDateKanri(entity);
+
+        }
+    }
 }

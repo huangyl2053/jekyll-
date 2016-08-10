@@ -88,6 +88,16 @@ public class FukaRirekiAllDiv extends Panel implements IFukaRirekiAllDiv {
         return getHandler().get賦課履歴();
     }
 
+    /**
+     * gridの件数を返します。
+     *
+     * @return gridの件数
+     */
+    @Override
+    public int get件数() {
+        return getHandler().get件数();
+    }
+
     @JsonIgnore
     public FukaRirekiAllHandler getHandler() {
         return new FukaRirekiAllHandler(this);

@@ -49,6 +49,9 @@ public class IinShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<Sh
     private IShiryoShinsakaiIinMapper mapper;
     private List<ShinsakaiIinJohoEntity> shinsakaiIinJohoList;
     private IinShinsakaiIinJohoMyBatisParameter myBatisParameter;
+    private ShinsakaishiryoA3Report report;
+    private List<JimuShinsakaishiryoBusiness> businessList;
+    private JimuShinsakaishiryoBusiness business;
     private int no;
     private int count;
     @BatchWriter
@@ -65,6 +68,8 @@ public class IinShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<Sh
         myBatisParameter.setSisutemuYMD(FlexibleDate.getNowDate());
         shinsakaiIinJohoList = mapper.getShinsakaiIinJoho(myBatisParameter);
         count = mapper.getShinsakaiTaiyosyaJohoCount(myBatisParameter);
+        businessList = new ArrayList<>();
+        report = new ShinsakaishiryoA3Report(businessList);
         no = 0;
     }
 
@@ -85,14 +90,14 @@ public class IinShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<Sh
         entity.setHihokenshaNo(RString.EMPTY);
         entity.setHihokenshaName(AtenaMeisho.EMPTY);
         entity.setJimukyoku(false);
-        JimuShinsakaishiryoBusiness business = new JimuShinsakaishiryoBusiness(paramter, entity, shinsakaiIinJohoList, no, count);
-        ShinsakaishiryoA3Report report = new ShinsakaishiryoA3Report(business);
-        report.writeBy(reportSourceWriterA3);
+        business = new JimuShinsakaishiryoBusiness(paramter, entity, shinsakaiIinJohoList, no, count);
+        report.addBusiness(business);
         no = no + 1;
     }
 
     @Override
     protected void afterExecute() {
+        report.writeBy(reportSourceWriterA3);
         outputJokenhyoFactory();
     }
 

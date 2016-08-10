@@ -52,6 +52,7 @@ public class IkenshoHoshuSeikyuEditor implements IIkenshoHoshuSeikyuEditor {
         source.shohizei = (item.get消費税額());
         source.gokeiKingaku1 = kinngakuFormat(item.get合計金額());
         source.tsuchibun2 = item.get通知文2();
+        source.shujiiIryokikanCode = item.get主治医医療機関コード();
         return source;
     }
 
