@@ -17,7 +17,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  *
- * @author x_wangtt2
+ * 【共有子Div】 免除解除・再転入ダイアログのValidationHandlerです。
+ *
+ * @reamsid_L DBD-3620-044 panxiaobo
  */
 public class MenjoKaijoSaiTennyuValidationHandler {
 

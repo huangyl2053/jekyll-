@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujoho
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosoufujohosakusei.TokuChoSoufuJohoSakuseiEntity;
-import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity;
 
 /**
  * 通知書打ち分け条件の取得処理

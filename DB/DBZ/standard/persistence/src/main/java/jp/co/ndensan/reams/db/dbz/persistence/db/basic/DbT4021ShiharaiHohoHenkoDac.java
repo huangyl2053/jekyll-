@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import static jp.co.ndensan.reams.uz.uza.util.db.Order.ASC;
 import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
@@ -196,5 +197,23 @@ public class DbT4021ShiharaiHohoHenkoDac implements ISaveable<DbT4021ShiharaiHoh
                                 eq(kanriKubun, 管理区分))).
                 order(by(rirekiNo, DESC)).limit(INT_1).
                 toObject(DbT4021ShiharaiHohoHenkoEntity.class);
+    }
+
+    /**
+     * 給付制限履歴情報の取得。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return List<DbT4021ShiharaiHohoHenkoEntity>
+     */
+    @Transaction
+    public List<DbT4021ShiharaiHohoHenkoEntity> get給付制限履歴情報(HihokenshaNo 被保険者番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT4021ShiharaiHohoHenko.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(logicalDeletedFlag, false))).
+                order(by(kanriKubun, ASC), by(tekiyoKaishiYMD, DESC)).
+                toList(DbT4021ShiharaiHohoHenkoEntity.class);
     }
 }

@@ -109,8 +109,7 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
             }
             source.list_4 = 帳票情報.get被保険者番号().getColumnValue();
             if (null != 個人情報) {
-                //TODO個人情報に、被保険者氏名がない
-//        source.list_5 = this.個人情報.get被保険者氏名();
+                source.list_5 = this.個人情報.get名称().getName().value();
                 source.list_6 = this.個人情報.get住所().get住所();
             }
             source.list_7 = 帳票情報.get申請日().wareki().toDateString();

@@ -28,7 +28,6 @@ public class NinteiShinsakaiKekkaDataTorikomiHandler {
     private static final RString SELECT_KEY1 = new RString("key1");
     private static final RString RSTRING_1 = new RString("1");
     private static final RString RSTRING_2 = new RString("2");
-    private static final RString SERVER_PATH = new RString("\\db\\dbe\\DivConNinteiShinsakaiKekkaDataTorikomi\\DivConOnclick_BtnUpload");
 
     /**
      * コンストラクタです。
@@ -99,7 +98,8 @@ public class NinteiShinsakaiKekkaDataTorikomiHandler {
         } else {
             batchParameter.setShinsakaiiintorikomikubun(RSTRING_2);
         }
-        batchParameter.setMediapath(SERVER_PATH);
+        batchParameter.setMediapath(DbBusinessConfig
+                .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
     }
 
     private dgTorikomiTaiasho_Row creatDgShinseishaIchiranRow(RString meisho, RString fileName) {

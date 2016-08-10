@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2260001;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.ShujiiIkenshoJoho;
@@ -20,6 +21,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2260001.Ima
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2260001.ImageinputValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ikensho.shujiiikenshojoho.ShujiiIkenshoJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.imageinput.ImageinputFindler;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
@@ -32,6 +35,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -40,6 +44,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntry
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -139,21 +144,33 @@ public class Imageinput {
      */
     @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<ImageinputDiv> onclick_BtnUpload(ImageinputDiv div, FileData[] files) {
-        boolean 選択Flag = false;
-        for (dgshinseishaichiran_Row row : div.getDgshinseishaichiran().getDataSource()) {
-            if (row.getSelected()) {
-                選択Flag = true;
+        for (FileData file : files) {
+            if (file.getFileName().endsWith(new RString("CSV"))) {
+                savaCsvファイル(file);
+            } else {
+                boolean 選択Flag = false;
+                for (dgshinseishaichiran_Row row : div.getDgshinseishaichiran().getDataSource()) {
+                    if (row.getSelected()) {
+                        選択Flag = true;
+                    }
+                }
+                if (!選択Flag) {
+                    ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+                    validationMessages.add(getValidationHandler().check一覧対象未選択());
+                    return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+                }
+                save共有フォルダ(div, new FilesystemPath(file.getFilePath()));
             }
         }
-        if (!選択Flag) {
-            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            validationMessages.add(getValidationHandler().check一覧対象未選択());
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-        }
-        for (FileData file : files) {
-            save共有フォルダ(div, new FilesystemPath(file.getFilePath()));
-        }
         return ResponseData.of(div).respond();
+    }
+
+    private boolean savaCsvファイル(FileData file) {
+        RString imagePath = Path.combinePath(Path.getRootPath(RString.EMPTY), DbBusinessConfig
+                .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+        File サーバファイル = new File(imagePath.toString());
+        File localファイル = new File(file.getFilePath().toString());
+        return localファイル.renameTo(new File(サーバファイル, file.getFileName().toString()));
     }
 
     private void save共有フォルダ(ImageinputDiv div, FilesystemPath path) {

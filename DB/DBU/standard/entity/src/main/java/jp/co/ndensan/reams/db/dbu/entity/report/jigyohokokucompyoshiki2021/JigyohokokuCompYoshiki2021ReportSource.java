@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbu.entity.report.ｊigyohokokucompyoshiki202;
+package jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki2021;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
  *
  * @reamsid_L DBU-5560-050 wanghuafeng
  */
-public class JigyohokokuCompYoshiki202ReportSource implements IReportSource {
+public class JigyohokokuCompYoshiki2021ReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     @ReportItem(name = "listList1_1", length = 13, order = 1)

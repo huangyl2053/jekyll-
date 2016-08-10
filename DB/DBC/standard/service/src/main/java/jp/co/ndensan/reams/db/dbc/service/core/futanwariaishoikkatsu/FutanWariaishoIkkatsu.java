@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.futanwariaishoikkatsu;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.futanwariaishohakko.FutanwariaishoHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.FutanwariaiShoHakkoIchiranCSVEntity;
@@ -127,13 +126,13 @@ public class FutanWariaishoIkkatsu {
         source.set負担割合２(entity.get負担割合期間().getFutanWariaiKubun2());
         source.set適用開始年月日２(開始年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoKaishiYMD2())));
         source.set適用終了年月日２(終了年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoShuryoYMD2())));
-        ShoKisaiHokenshaNo HokenshaNo = getHokenshaCode(new HihokenshaDaicho(entity.get被保台帳()));
-        source.set保険者コード１(HokenshaNo.getColumnValue().substring(0, NUM_ONE));
-        source.set保険者コード２(HokenshaNo.getColumnValue().substring(NUM_ONE, NUM_TWO));
-        source.set保険者コード３(HokenshaNo.getColumnValue().substring(NUM_TWO, NUM_THREE));
-        source.set保険者コード４(HokenshaNo.getColumnValue().substring(NUM_THREE, NUM_FOUR));
-        source.set保険者コード５(HokenshaNo.getColumnValue().substring(NUM_FOUR, NUM_FIVE));
-        source.set保険者コード６(HokenshaNo.getColumnValue().substring(NUM_FIVE));
+        ShoKisaiHokenshaNo hokenshaNo = getHokenshaCode(new HihokenshaDaicho(entity.get被保台帳()));
+        source.set保険者コード１(hokenshaNo.getColumnValue().substring(0, NUM_ONE));
+        source.set保険者コード２(hokenshaNo.getColumnValue().substring(NUM_ONE, NUM_TWO));
+        source.set保険者コード３(hokenshaNo.getColumnValue().substring(NUM_TWO, NUM_THREE));
+        source.set保険者コード４(hokenshaNo.getColumnValue().substring(NUM_THREE, NUM_FOUR));
+        source.set保険者コード５(hokenshaNo.getColumnValue().substring(NUM_FOUR, NUM_FIVE));
+        source.set保険者コード６(hokenshaNo.getColumnValue().substring(NUM_FIVE));
         source.set保険者名(compNinshosha.ninshoshaShimeiKakeru);
         source.set保険者電話番号(get電話番号());
         source.set電子公印(compNinshosha.denshiKoin);
@@ -148,7 +147,6 @@ public class FutanWariaishoIkkatsu {
     }
 
     private ShoKisaiHokenshaNo getHokenshaCode(HihokenshaDaicho 被保台帳) {
-        List<ShoKisaiHokenshaNo> 証記載保険者番号 = new ArrayList<>();
         LasdecCode 市町村コード = null;
         if (ONE.equals(被保台帳.get広域内住所地特例フラグ())) {
             市町村コード = 被保台帳.get広住特措置元市町村コード();

@@ -9,7 +9,9 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 
 /**
  *
- * @author x_wangtt2
+ * 【共有子Div】 免除解除・再転入ダイアログのSpecです。
+ *
+ * @reamsid_L DBD-3620-044 panxiaobo
  */
 public enum MenjoKaijoSaiTennyuDivSpec implements IPredicate<MenjoKaijoSaiTennyuDiv> {
 

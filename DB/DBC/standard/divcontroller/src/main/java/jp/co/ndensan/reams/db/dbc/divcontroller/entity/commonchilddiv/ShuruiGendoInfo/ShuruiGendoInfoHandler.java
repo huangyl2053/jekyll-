@@ -40,7 +40,8 @@ public class ShuruiGendoInfoHandler {
      * @param 給付計画自己作成EntityList
      */
     public void init(FlexibleYearMonth 利用年月, List<ServiceTypeDetails> 給付計画自己作成EntityList) {
-        List<ServiceTypeTotal> list = new JigoSakuseiMeisaiTouroku().getServiceTypeGendo(利用年月, 給付計画自己作成EntityList);
+        List<ServiceTypeTotal> list = JigoSakuseiMeisaiTouroku.createInstance()
+                .getServiceTypeGendo(利用年月, 給付計画自己作成EntityList);
         for (ServiceTypeTotal serviceTypeTotal : list) {
             dgGendoInfo_Row row = new dgGendoInfo_Row();
             row.setサービス種類(serviceTypeTotal.getサービス種類());
