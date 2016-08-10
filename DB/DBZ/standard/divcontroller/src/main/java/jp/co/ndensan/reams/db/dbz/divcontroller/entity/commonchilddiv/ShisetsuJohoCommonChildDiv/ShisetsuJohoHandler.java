@@ -51,8 +51,11 @@ public class ShisetsuJohoHandler {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         if (台帳種別表示有り.equals(ViewStateHolder.get(ViewStateKeys.台帳種別表示, RString.class))) {
-
+            
             div.getDdlDaichoShubetsu().setDataSource(ドロップダウンの設定());
+            div.getRadKaigoHokenShisetsu().setVisible(true);
+            div.getRadOtherTokureiShisetsu().setVisible(true);
+            div.getRadTekiyoJyogaiShisetsu().setVisible(true);
             div.getDdlDaichoShubetsu().setSelectedKey(DaichoType.被保険者.getコード());
             div.getRadKaigoHokenShisetsu().setSelectedKey(ShisetsuType.介護保険施設.getコード());
             div.getRadOtherTokureiShisetsu().getDisabledItem().clear();
@@ -107,7 +110,7 @@ public class ShisetsuJohoHandler {
         if (DaichoType.被保険者.getコード().equals(div.getDdlDaichoShubetsu().getSelectedKey())) {
             div.getRadKaigoHokenShisetsu().setVisible(true);
             div.getRadOtherTokureiShisetsu().setVisible(true);
-            div.getRadTekiyoJyogaiShisetsu().setVisible(false);
+            div.getRadTekiyoJyogaiShisetsu().setVisible(true);
             div.getRadKaigoHokenShisetsu().setSelectedKey(ShisetsuType.介護保険施設.getコード());
             div.getRadOtherTokureiShisetsu().getDisabledItem().clear();
             div.getRadTekiyoJyogaiShisetsu().getDisabledItem().clear();
@@ -210,7 +213,22 @@ public class ShisetsuJohoHandler {
 
                 div.getTxtNyuryokuShisetsuMeisho().clearValue();
             }
-        }
+        }               
+            if (DaichoType.被保険者.getコード().equals(div.getDdlDaichoShubetsu().getSelectedKey())) {
+                div.getRadKaigoHokenShisetsu().setVisible(true);
+                div.getRadOtherTokureiShisetsu().setVisible(true);
+                div.getRadTekiyoJyogaiShisetsu().setVisible(true);
+            }
+            if (DaichoType.他市町村住所地特例者.getコード().equals(div.getDdlDaichoShubetsu().getSelectedKey())) {
+                div.getRadKaigoHokenShisetsu().setVisible(true);
+                div.getRadOtherTokureiShisetsu().setVisible(true);
+                div.getRadTekiyoJyogaiShisetsu().setVisible(false);
+            }
+            if (DaichoType.適用除外者.getコード().equals(div.getDdlDaichoShubetsu().getSelectedKey())) {
+                div.getRadKaigoHokenShisetsu().setVisible(false);
+                div.getRadOtherTokureiShisetsu().setVisible(false);
+                div.getRadTekiyoJyogaiShisetsu().setVisible(false);
+            }                       
     }
 
     private List<KeyValueDataSource> ドロップダウンの設定() {
