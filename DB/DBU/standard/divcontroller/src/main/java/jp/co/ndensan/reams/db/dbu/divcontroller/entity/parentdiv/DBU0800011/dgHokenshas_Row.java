@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0800011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Aug 09 17:39:05 CST 2016 
+ * Wed Aug 10 16:37:59 CST 2016 
  */
 
 
@@ -27,6 +27,7 @@ public class dgHokenshas_Row extends DataRow {
     private RString yubinNo;
     private RString jusho;
     private RString telNo;
+    private RString hokensha;
 
     public dgHokenshas_Row() {
         super();
@@ -36,15 +37,17 @@ public class dgHokenshas_Row extends DataRow {
         this.yubinNo = RString.EMPTY;
         this.jusho = RString.EMPTY;
         this.telNo = RString.EMPTY;
+        this.hokensha = RString.EMPTY;
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("hokenshaNo", hokenshaNo);
         this.setOriginalData("hokenshaName", hokenshaName);
         this.setOriginalData("yubinNo", yubinNo);
         this.setOriginalData("jusho", jusho);
         this.setOriginalData("telNo", telNo);
+        this.setOriginalData("hokensha", hokensha);
     }
 
-    public dgHokenshas_Row(RString jotai, RString hokenshaNo, RString hokenshaName, RString yubinNo, RString jusho, RString telNo) {
+    public dgHokenshas_Row(RString jotai, RString hokenshaNo, RString hokenshaName, RString yubinNo, RString jusho, RString telNo, RString hokensha) {
         super();
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("hokenshaNo", hokenshaNo);
@@ -52,12 +55,14 @@ public class dgHokenshas_Row extends DataRow {
         this.setOriginalData("yubinNo", yubinNo);
         this.setOriginalData("jusho", jusho);
         this.setOriginalData("telNo", telNo);
+        this.setOriginalData("hokensha", hokensha);
         this.jotai = jotai;
         this.hokenshaNo = hokenshaNo;
         this.hokenshaName = hokenshaName;
         this.yubinNo = yubinNo;
         this.jusho = jusho;
         this.telNo = telNo;
+        this.hokensha = hokensha;
     }
 
     public RString getJotai() {
@@ -82,6 +87,10 @@ public class dgHokenshas_Row extends DataRow {
 
     public RString getTelNo() {
         return telNo;
+    }
+
+    public RString getHokensha() {
+        return hokensha;
     }
 
     public void setJotai(RString jotai) {
@@ -112,6 +121,11 @@ public class dgHokenshas_Row extends DataRow {
     public void setTelNo(RString telNo) {
         this.setOriginalData("telNo", telNo);
         this.telNo = telNo;
+    }
+
+    public void setHokensha(RString hokensha) {
+        this.setOriginalData("hokensha", hokensha);
+        this.hokensha = hokensha;
     }
 
     // </editor-fold>
