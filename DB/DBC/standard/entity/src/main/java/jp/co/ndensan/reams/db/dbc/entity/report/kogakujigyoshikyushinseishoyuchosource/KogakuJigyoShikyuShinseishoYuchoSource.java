@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
- * 帳票設計_DBC100071_介護保険高額総合事業サービス費支給申請書（ゆうちょ銀行）のReportSourceクラスです。
+ * 帳票設計_DBC100071_介護保険高額総合事業サービス費支給申請書（ゆうちょ銀行）のSourceクラスです。
  *
  * @reamsid_L DBC-4770-090 jianglaisheng
  */
