@@ -180,15 +180,18 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
      *
      * @param 識別コード ShikibetsuCode
      * @param 年齢到達日 年齢到達日
+     * @param 論理削除フラグ
      * @return List<DbT1003TashichosonJushochiTokureiEntity>
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public List<DbT1003TashichosonJushochiTokureiEntity> select他市町村住所地特例(
             ShikibetsuCode 識別コード,
-            FlexibleDate 年齢到達日) throws NullPointerException {
+            FlexibleDate 年齢到達日,
+            boolean 論理削除フラグ) throws NullPointerException {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(年齢到達日, UrSystemErrorMessages.値がnull.getReplacedMessage("年齢到達日"));
+        requireNonNull(論理削除フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("論理削除フラグ"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -199,7 +202,7 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
                                 (or(
                                         and(leq(tekiyoYMD, 年齢到達日), leq(年齢到達日, kaijoYMD)),
                                         and(leq(tekiyoYMD, 年齢到達日), leq(kaijoYMD, null)))),
-                                eq(logicalDeletedFlag, false))).
+                                eq(logicalDeletedFlag, 論理削除フラグ))).
                 toList(DbT1003TashichosonJushochiTokureiEntity.class);
     }
 
