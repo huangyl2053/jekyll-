@@ -22,7 +22,7 @@ public enum JikoFutangakuHoseiValidationMessage implements IValidationMessage {
     /**
      * 被保険者氏名漢字必須項目
      */
-    被保険者氏名漢字必須項目(UrErrorMessages.必須項目),
+    被保険者氏名漢字必須項目(UrErrorMessages.必須項目_追加メッセージあり, "被保険者氏名（漢字）"),
     /**
      * 被保険者名全角文字で入力してください
      */
