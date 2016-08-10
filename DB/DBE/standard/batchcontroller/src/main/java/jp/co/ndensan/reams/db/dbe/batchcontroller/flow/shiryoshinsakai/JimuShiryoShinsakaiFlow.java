@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuGaiky
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuGaikyouTokkiIranDataSakuseiImgA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuHanteiDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuIkenshoDataSakuseiA3Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuIkenshoDataSakuseiA42Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuIkenshoDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuItiziHanteiDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuItiziHanteiDataSakuseiA4Process;
@@ -42,7 +43,9 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
     private static final String 事務局_追加資料鑑 = "jimuTuikaSiryo";
     private static final String 事務局_予備判定一覧 = "jimuHantei";
     private static final String 事務局_その他資料 = "jimuSonotaJoho";
-    private static final String 事務局_主治医意見書 = "jimuIkensho";
+    private static final String 事務局_主治医意見書_1枚目 = "jimuIkensho_1";
+    private static final String 事務局_主治医意見書_2枚目以降 = "jimuIkensho_2";
+    private static final String 事務局_主治医意見書_A3 = "jimuIkensho";
     private static final String 事務局_概況特記一覧表 = "jimuGaikyouTokkiIran";
     private static final String 事務局_一次判定結果 = "jimuItiziHantei";
     private static final String 事務局_特記事項_一次判定結果 = "jimuTokkiJikouItiziHantei";
@@ -65,7 +68,12 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
             executeStep(事務局_その他資料);
         }
         if (選択.equals(getParameter().getChoyoJimu_ikenshoFalg())) {
-            executeStep(事務局_主治医意見書);
+            if (選択.equals(getParameter().getShuturyokuSutairu())) {
+                executeStep(事務局_主治医意見書_1枚目);
+                executeStep(事務局_主治医意見書_2枚目以降);
+            } else {
+                executeStep(事務局_主治医意見書_A3);
+            }
         }
         if (選択.equals(getParameter().getChoyoJimu_gaikyouTokkiIranFalg())) {
             executeStep(事務局_概況特記一覧表);
@@ -152,18 +160,33 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
      *
      * @return バッチコマンド
      */
-    @Step(事務局_主治医意見書)
-    protected IBatchFlowCommand createJimuIkenshoData() {
-        if (選択.equals(getParameter().getShuturyokuSutairu())) {
-            return loopBatch(JimuIkenshoDataSakuseiA4Process.class)
-                    .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
-            // TODO　凌護行 主治医意見書2枚目の出力方法が不正です。　
-//            loopBatch(JimuIkenshoDataSakuseiA42Process.class)
-//                    .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
-        } else {
-            return loopBatch(JimuIkenshoDataSakuseiA3Process.class)
-                    .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
-        }
+    @Step(事務局_主治医意見書_1枚目)
+    protected IBatchFlowCommand createJimuIkenshoData_A4_1() {
+        return loopBatch(JimuIkenshoDataSakuseiA4Process.class)
+                .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
+    }
+
+    /**
+     * 事務局用主治医意見書情報データの作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(事務局_主治医意見書_2枚目以降)
+    protected IBatchFlowCommand createJimuIkenshoData_A4_2() {
+        // TODO　凌護行 主治医意見書2枚目の出力方法が不正です。　
+        return loopBatch(JimuIkenshoDataSakuseiA42Process.class)
+                .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
+    }
+
+    /**
+     * 事務局用主治医意見書情報データの作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(事務局_主治医意見書_A3)
+    protected IBatchFlowCommand createJimuIkenshoData_A3() {
+        return loopBatch(JimuIkenshoDataSakuseiA3Process.class)
+                .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
     }
 
     /**
