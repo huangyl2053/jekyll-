@@ -96,7 +96,7 @@ public class ShikakuKihonJohoHandler {
         row.getTaishoDate().setValue(master.getTaishoYMD() == null ? FlexibleDate.EMPTY : master.getTaishoYMD());
         row.setShisetsuShurui(master.getNyushoShisetsuShurui() == null ? RString.EMPTY
                 : ShisetsuType.toValue(master.getNyushoShisetsuShurui()).get名称());
-        row.setNyushoShisetsu(master.getNyushoShisetsuCode() == null ? RString.EMPTY : master.getNyushoShisetsuCode().value());
+        row.setNyushoShisetsu(master.getNyushoShisetsuCode() == null ? RString.EMPTY : master.getJigyoshaName().value());
         row.getRenrakuhyoHakkoDate().setValue(master.getTatokuRenrakuhyoHakkoYMD() == null
                 ? FlexibleDate.EMPTY : master.getTatokuRenrakuhyoHakkoYMD());
         row.getShisetuTaishoTuchiHakkoDate().setValue(master.getShisetsuTaishoTsuchiHakkoYMD() == null
