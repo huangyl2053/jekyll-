@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * JikoFutangakuHoseiMadoguchi のクラスファイル
@@ -18,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 public class JikoFutangakuHoseiMadoguchiDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -34,17 +33,17 @@ public class JikoFutangakuHoseiMadoguchiDiv extends Panel {
     @JsonProperty("txtMadoguchiKaishiYoubi")
     private TextBox txtMadoguchiKaishiYoubi;
     @JsonProperty("txtMadoguchiKaishiJikan")
-    private TextBoxNum txtMadoguchiKaishiJikan;
+    private TextBox txtMadoguchiKaishiJikan;
     @JsonProperty("txtMadoguchiKaishiFun")
-    private TextBoxNum txtMadoguchiKaishiFun;
+    private TextBox txtMadoguchiKaishiFun;
     @JsonProperty("txtMadoguchiShuryoYMD")
     private TextBoxDate txtMadoguchiShuryoYMD;
     @JsonProperty("txtMadoguchiShuryoYoubi")
     private TextBox txtMadoguchiShuryoYoubi;
     @JsonProperty("txtMadoguchiShuryoJikan")
-    private TextBoxNum txtMadoguchiShuryoJikan;
+    private TextBox txtMadoguchiShuryoJikan;
     @JsonProperty("txtMadoguchiShuryoFun")
-    private TextBoxNum txtMadoguchiShuryoFun;
+    private TextBox txtMadoguchiShuryoFun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -129,7 +128,7 @@ public class JikoFutangakuHoseiMadoguchiDiv extends Panel {
      * @return txtMadoguchiKaishiJikan
      */
     @JsonProperty("txtMadoguchiKaishiJikan")
-    public TextBoxNum getTxtMadoguchiKaishiJikan() {
+    public TextBox getTxtMadoguchiKaishiJikan() {
         return txtMadoguchiKaishiJikan;
     }
 
@@ -138,7 +137,7 @@ public class JikoFutangakuHoseiMadoguchiDiv extends Panel {
      * @param txtMadoguchiKaishiJikan txtMadoguchiKaishiJikan
      */
     @JsonProperty("txtMadoguchiKaishiJikan")
-    public void setTxtMadoguchiKaishiJikan(TextBoxNum txtMadoguchiKaishiJikan) {
+    public void setTxtMadoguchiKaishiJikan(TextBox txtMadoguchiKaishiJikan) {
         this.txtMadoguchiKaishiJikan = txtMadoguchiKaishiJikan;
     }
 
@@ -147,7 +146,7 @@ public class JikoFutangakuHoseiMadoguchiDiv extends Panel {
      * @return txtMadoguchiKaishiFun
      */
     @JsonProperty("txtMadoguchiKaishiFun")
-    public TextBoxNum getTxtMadoguchiKaishiFun() {
+    public TextBox getTxtMadoguchiKaishiFun() {
         return txtMadoguchiKaishiFun;
     }
 
@@ -156,7 +155,7 @@ public class JikoFutangakuHoseiMadoguchiDiv extends Panel {
      * @param txtMadoguchiKaishiFun txtMadoguchiKaishiFun
      */
     @JsonProperty("txtMadoguchiKaishiFun")
-    public void setTxtMadoguchiKaishiFun(TextBoxNum txtMadoguchiKaishiFun) {
+    public void setTxtMadoguchiKaishiFun(TextBox txtMadoguchiKaishiFun) {
         this.txtMadoguchiKaishiFun = txtMadoguchiKaishiFun;
     }
 
@@ -201,7 +200,7 @@ public class JikoFutangakuHoseiMadoguchiDiv extends Panel {
      * @return txtMadoguchiShuryoJikan
      */
     @JsonProperty("txtMadoguchiShuryoJikan")
-    public TextBoxNum getTxtMadoguchiShuryoJikan() {
+    public TextBox getTxtMadoguchiShuryoJikan() {
         return txtMadoguchiShuryoJikan;
     }
 
@@ -210,7 +209,7 @@ public class JikoFutangakuHoseiMadoguchiDiv extends Panel {
      * @param txtMadoguchiShuryoJikan txtMadoguchiShuryoJikan
      */
     @JsonProperty("txtMadoguchiShuryoJikan")
-    public void setTxtMadoguchiShuryoJikan(TextBoxNum txtMadoguchiShuryoJikan) {
+    public void setTxtMadoguchiShuryoJikan(TextBox txtMadoguchiShuryoJikan) {
         this.txtMadoguchiShuryoJikan = txtMadoguchiShuryoJikan;
     }
 
@@ -219,7 +218,7 @@ public class JikoFutangakuHoseiMadoguchiDiv extends Panel {
      * @return txtMadoguchiShuryoFun
      */
     @JsonProperty("txtMadoguchiShuryoFun")
-    public TextBoxNum getTxtMadoguchiShuryoFun() {
+    public TextBox getTxtMadoguchiShuryoFun() {
         return txtMadoguchiShuryoFun;
     }
 
@@ -228,7 +227,7 @@ public class JikoFutangakuHoseiMadoguchiDiv extends Panel {
      * @param txtMadoguchiShuryoFun txtMadoguchiShuryoFun
      */
     @JsonProperty("txtMadoguchiShuryoFun")
-    public void setTxtMadoguchiShuryoFun(TextBoxNum txtMadoguchiShuryoFun) {
+    public void setTxtMadoguchiShuryoFun(TextBox txtMadoguchiShuryoFun) {
         this.txtMadoguchiShuryoFun = txtMadoguchiShuryoFun;
     }
 
