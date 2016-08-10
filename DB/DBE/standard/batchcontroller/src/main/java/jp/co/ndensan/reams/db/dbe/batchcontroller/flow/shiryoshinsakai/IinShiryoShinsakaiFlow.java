@@ -35,7 +35,9 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
     private static final String 委員_審査会開催通知書 = "iinTuutisho";
     private static final String 委員_特記事項 = "iinTokkiJikou";
     private static final String 委員_一次判定結果 = "iinItiziHantei";
-    private static final String 委員_主治医意見書 = "iinIkensho";
+    private static final String 委員_主治医意見書_1枚目 = "iinIkensho_1";
+    private static final String 委員_主治医意見書_2枚目以降 = "iinIkensho_2";
+    private static final String 委員_主治医意見書_A3 = "iinIkensho";
     private static final String 委員_予備判定一覧 = "iinHantei";
     private static final String 委員_審査対象者一覧 = "iinShinsakaiIinJoho";
     private static final String 委員_追加資料鑑 = "iinTuikaSiryo";
@@ -56,7 +58,12 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
             executeStep(委員_一次判定結果);
         }
         if (選択.equals(getParameter().getChohyoIin_ikenshoFalg())) {
-            executeStep(委員_主治医意見書);
+            if (選択.equals(getParameter().getShuturyokuSutairu())) {
+                executeStep(委員_主治医意見書_1枚目);
+                executeStep(委員_主治医意見書_2枚目以降);
+            } else {
+                executeStep(委員_主治医意見書_A3);
+            }
         }
         if (選択.equals(getParameter().getChohyoIin_sonotaSiryoFalg())) {
             executeStep(委員_その他資料);
@@ -124,17 +131,32 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
      *
      * @return バッチコマンド
      */
-    @Step(委員_主治医意見書)
-    protected IBatchFlowCommand createIinIkenshoData() {
-        if (選択.equals(getParameter().getShuturyokuSutairu())) {
-            loopBatch(IinIkenshoDataSakuseiA4Process.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-            return loopBatch(IinIkenshoDataSakuseiA4NihirameProcess.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-        } else {
-            return loopBatch(IinIkenshoDataSakuseiA3Process.class)
-                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-        }
+    @Step(委員_主治医意見書_1枚目)
+    protected IBatchFlowCommand createIinIkenshoData_A4_1() {
+        return loopBatch(IinIkenshoDataSakuseiA4Process.class)
+                .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
+    }
+
+    /**
+     * 委員用主治医意見書情報データの作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(委員_主治医意見書_2枚目以降)
+    protected IBatchFlowCommand createIinIkenshoData_A4_2() {
+        return loopBatch(IinIkenshoDataSakuseiA4NihirameProcess.class)
+                .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
+    }
+
+    /**
+     * 委員用主治医意見書情報データの作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(委員_主治医意見書_A3)
+    protected IBatchFlowCommand createIinIkenshoData_A3() {
+        return loopBatch(IinIkenshoDataSakuseiA3Process.class)
+                .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
     }
 
     /**
