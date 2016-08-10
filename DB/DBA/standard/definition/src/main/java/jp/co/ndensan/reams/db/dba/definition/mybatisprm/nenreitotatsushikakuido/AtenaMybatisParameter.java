@@ -32,6 +32,6 @@ public final class AtenaMybatisParameter extends UaFt200FindShikibetsuTaishoPara
     public AtenaMybatisParameter(IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey, FlexibleDate 開始日, FlexibleDate 終了日) {
         super(shikibetsuTaishoPSMSearchKey);
         this.開始日 = 開始日;
-        this.終了日 = 開始日;
+        this.終了日 = 終了日;
     }
 }
