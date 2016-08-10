@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  *
  * 【共有子Div】1号一時差止ダイアログのValidationHandlerクラスです。
  *
- * @reamsid_L DBD-0620-042 panxiaobo
+ * @reamsid_L DBD-3620-042 panxiaobo
  */
 public class IchijiSashitome1GoValidationHandler {
 

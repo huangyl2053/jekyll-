@@ -9,8 +9,12 @@ import java.io.File;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5220001.NinteiShinsakaiKekkaDataTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5220001.NinteiShinsakaiKekkaDataTorikomiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5220001.NinteiShinsakaiKekkaDataTorikomiValidationHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -24,7 +28,6 @@ public class NinteiShinsakaiKekkaDataTorikomi {
 
     private static final RString SELECT_KEY0 = new RString("key0");
     private static final RString SELECT_KEY1 = new RString("key1");
-    private static final RString SERVER_PATH = new RString("\\db\\dbe\\DivConNinteiShinsakaiKekkaDataTorikomi\\DivConOnclick_BtnUpload");
 
     /**
      * 画面初期化処理です。
@@ -119,7 +122,8 @@ public class NinteiShinsakaiKekkaDataTorikomi {
     }
 
     private boolean savaCsvファイル(FileData file) {
-        RString path = Path.combinePath(Path.getRootPath(RString.EMPTY), SERVER_PATH);
+        RString path = Path.combinePath(Path.getRootPath(RString.EMPTY), DbBusinessConfig
+                .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         File サーバ = new File(path.toString());
         File local = new File(file.getFilePath().toString());
         if (サーバ.exists() && local.exists()) {

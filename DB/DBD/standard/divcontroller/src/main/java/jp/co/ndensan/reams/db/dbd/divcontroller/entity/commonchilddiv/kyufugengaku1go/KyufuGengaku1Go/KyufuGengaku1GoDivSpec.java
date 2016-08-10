@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
  *
  * 【共有子Div】1号給付額減額ダイアログのSpec。
  *
- * @reamsid_L DBD-0620-043 panxiaobo
+ * @reamsid_L DBD-3620-043 panxiaobo
  */
 public enum KyufuGengaku1GoDivSpec implements IPredicate<KyufuGengaku1GoDiv> {
 

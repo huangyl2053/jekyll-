@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  * {@link JigyohokokuCompYoshiki271Property}のプロパティです。
  *
- * @reamsid_L DBU-5580-040　wanghuafeng
+ * @reamsid_L DBU-5580-040 wanghuafeng
  */
 public class JigyohokokuCompYoshiki271Property extends ReportPropertyBase<JigyohokokuCompYoshiki271ReportSource> {
 
