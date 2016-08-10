@@ -164,7 +164,7 @@ public class ShiharaiHohoHenkoKanri {
         ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
 
         div.setKey_HihokenshaNo(被保険者番号.getColumnValue());
-        div.setKey_ShiharaiHohoHenkoKanri(getHandler(div).getボタンの支払方法変更処理区分());
+        div.setKey_Button(getHandler(div).getボタンの支払方法変更処理区分());
         if (div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow() == null) {
             div.setKey_ShiharaiHohoHenkoKanri(RString.EMPTY);
 
@@ -180,7 +180,6 @@ public class ShiharaiHohoHenkoKanri {
             } else {
                 div.setKey_MaxRirekiNo(RString.EMPTY);
             }
-            div.setKey_ShiharaiHohoHenkoKanri(getHandler(div).getボタンの支払方法変更処理区分());
 
         } else {
             div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(getHandler(div).get支払方法変更情報FromViewState(dataList)));
@@ -195,6 +194,8 @@ public class ShiharaiHohoHenkoKanri {
                     || ボタン２号一時差止登録.equals(div.getFocusPositionID())) {
                 div.setKey_MaxRirekiNo(getHandler(div).
                         get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataList, ShiharaiHenkoKanriKubun._２号差止.getコード()));
+            } else {
+                div.setKey_MaxRirekiNo(RString.EMPTY);
             }
         }
         return ResponseData.of(div).respond();
@@ -207,7 +208,6 @@ public class ShiharaiHohoHenkoKanri {
      * @return レスポンスデータ
      */
     public ResponseData<ShiharaiHohoHenkoKanriDiv> onOkClose_dataPassing(ShiharaiHohoHenkoKanriDiv div) {
-        // TODO ダイアログ画面との連携 待ち
         ShiharaiHohoHenko dialog支払方法変更 = DataPassingConverter.deserialize(div.getKey_ShiharaiHohoHenkoKanri(), ShiharaiHohoHenko.class);
 
         ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
