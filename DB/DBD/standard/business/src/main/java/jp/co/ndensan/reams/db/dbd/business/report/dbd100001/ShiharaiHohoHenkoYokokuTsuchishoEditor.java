@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.business.report.dbd100001;
 
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.taino.ShiharaiHohoHenkoTaino;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100001.ShiharaiHohoHenkoYokokuTsuchishoReportSource;
@@ -46,7 +47,7 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
     private final ChohyoSeigyoKyotsu 帳票制御共通;
     private final Association 地方公共団体;
     private final RString 文書番号;
-    private final List<RString> 通知書定型文リスト;
+    private final Map<Integer, RString> 通知書定型文リスト;
     private final NinshoshaSource 認証者ソースビルダー;
     private final ShiharaiHohoHenko 帳票情報;
     private final FlexibleYear 最新賦課年度;
@@ -63,7 +64,7 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param 地方公共団体 Association
      * @param 文書番号 RString
-     * @param 通知書定型文リスト List<RString>
+     * @param 通知書定型文リスト Map<Integer, RString>
      * @param 認証者ソースビルダー NinshoshaSource
      * @param 帳票情報 ShiharaiHohoHenko
      * @param 最新賦課年度 FlexibleYear
@@ -73,7 +74,7 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
      * @param index int
      */
     public ShiharaiHohoHenkoYokokuTsuchishoEditor(IKojin 個人情報, IAtesaki 宛先, ChohyoSeigyoKyotsu 帳票制御共通,
-            Association 地方公共団体, RString 文書番号, List<RString> 通知書定型文リスト,
+            Association 地方公共団体, RString 文書番号, Map<Integer, RString> 通知書定型文リスト,
             NinshoshaSource 認証者ソースビルダー, ShiharaiHohoHenko 帳票情報, FlexibleYear 最新賦課年度,
             List<ShiharaiHohoHenkoTaino> 年度1リスト, List<ShiharaiHohoHenkoTaino> 年度2リスト,
             List<ShiharaiHohoHenkoTaino> 年度3リスト, int index) {
@@ -181,7 +182,8 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
         }
 
         if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
-            source.tsuchibun1 = 通知書定型文リスト.get(0);
+            source.tsuchibun1 = 通知書定型文リスト.get(1);
+            source.tsuchibun2 = 通知書定型文リスト.get(2);
         }
         if (null != 最新賦課年度 && !最新賦課年度.isEmpty()) {
             source.nendoTitle1 = 最新賦課年度.minusYear(2).toDateString();
@@ -218,10 +220,6 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
             }
             source.hanteiYMD = 支払方法変更滞納.get滞納判定年月日().wareki().toDateString();
             source.izenHokenryo = new RString(支払方法変更滞納.get滞納額().toString());
-        }
-
-        if (null != 通知書定型文リスト && 通知書定型文リスト.size() >= 2) {
-            source.tsuchibun2 = 通知書定型文リスト.get(1);
         }
     }
 

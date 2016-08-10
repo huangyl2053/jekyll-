@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kaigofukakihon.KaigoFukaKihon;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
@@ -22,5 +23,12 @@ public interface IKaigoFukaKihonDiv extends ICommonChildDivBaseProperties {
      * @return 被保番号
      */
     HihokenshaNo get被保番号();
+
+    /**
+     * 通知書番号を取得しします。
+     *
+     * @return 通知書番号
+     */
+    TsuchishoNo get通知書番号();
 
 }

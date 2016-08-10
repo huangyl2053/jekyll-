@@ -29,8 +29,8 @@ public class SeigoseiChekkuRisutoFlow extends BatchFlowBase<SeigoseiChekkuBatchP
     @Override
     protected void defineFlow() {
         executeStep(TEMP_INSERTB);
-        executeStep(TEMP_INSERTD);
         executeStep(宛名のエラーチェック);
+        executeStep(TEMP_INSERTD);
         executeStep(被保険者台帳のエラーチェック);
     }
 
