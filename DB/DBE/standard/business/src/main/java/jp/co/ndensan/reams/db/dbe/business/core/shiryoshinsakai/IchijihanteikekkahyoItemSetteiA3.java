@@ -41,7 +41,13 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItem
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -55,6 +61,7 @@ public class IchijihanteikekkahyoItemSetteiA3 {
     private static final RString 段階改善 = new RString("▽");
     private static final RString 認定調査主治結果 = new RString("未");
     private static final RString 印字する = new RString("1");
+    private static final RString ファイルの名 = new RString("C0007_BAK.png");
 
     /**
      * 事務局一次判定結果票Entityの設定。
@@ -72,6 +79,7 @@ public class IchijihanteikekkahyoItemSetteiA3 {
      * @param 共通情報 共通情報
      * @param 主治医意見書項目 主治医意見書項目
      * @param 合議体番号 合議体番号
+     * @param 特記情報 特記情報
      * @return 事務局一次判定結果票のEntity
      */
     public IchijihanteikekkahyoA3Entity set項目(ItiziHanteiEntity entity,
@@ -79,7 +87,8 @@ public class IchijihanteikekkahyoItemSetteiA3 {
             List<DbT5211NinteichosahyoChosaItemEntity> 前回調査票調査項目, List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書項目情報,
             List<DbT5304ShujiiIkenshoIkenItemEntity> 前主治医意見書項目情報, List<DbT5207NinteichosahyoServiceJokyoEntity> 予防給付,
             List<DbT5207NinteichosahyoServiceJokyoEntity> 介護給付, DbT5208NinteichosahyoServiceJokyoFlagEntity サービス状況フラグ,
-            int データ件数, ShinsakaiSiryoKyotsuEntity 共通情報, List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書項目, RString 合議体番号) {
+            int データ件数, ShinsakaiSiryoKyotsuEntity 共通情報, List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書項目, RString 合議体番号,
+            List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報) {
         IchijihanteikekkahyoA3Entity 項目 = new IchijihanteikekkahyoA3Entity();
         SabisuJyoukyoA3 settei = new SabisuJyoukyoA3();
         Code 厚労省IF識別コード = entity.getKoroshoIfShikibetsuCode();
@@ -95,6 +104,17 @@ public class IchijihanteikekkahyoItemSetteiA3 {
             if (印字する.equals(DbBusinessConfig.get(ConfigNameDBE.今回前回比較で変化有で前回正常選択肢表示印刷有無, 日期, SubGyomuCode.DBE認定支援))) {
                 is前回結果 = true;
             }
+        }
+        if (共通情報 != null) {
+            IchijihanteiekkahyoTokkijiko tokkijiko = new IchijihanteiekkahyoTokkijiko(特記情報, 共通情報);
+            項目.set概況調査テキスト_イメージ区分(共通情報.getGaikyoChosaTextImageKubun());
+            項目.set概況特記のテキスト(共通情報.getTokki());
+            項目.set概況特記のイメージ(共有ファイルを引き出す(共通情報.getImageSharedFileId(), ファイルの名));
+            項目.set特記事項テキスト_イメージ区分(tokkijiko.get特記事項テキスト_イメージ区分());
+            項目.set特記パターン(DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+            項目.set特記事項_listChosa1(tokkijiko.get短冊情報リスト());
+            項目.set特記事項_tokkiText(tokkijiko.getTokkiText());
+            項目.set特記事項_tokkiImg(tokkijiko.getTokkiImg());
         }
         List<RString> 認定調査特記事項 = settei.get認定調査特記事項番号(認定調査票_特記情報);
         項目.set第１群リスト(get第１群リスト(厚労省IF識別コード, 調査票調査項目, 前回調査票調査項目, is前回結果, 主治医意見書項目, 認定調査特記事項));
@@ -1908,5 +1928,26 @@ public class IchijihanteikekkahyoItemSetteiA3 {
             return 前回調査結果;
         }
         return RString.EMPTY;
+    }
+
+    private RString 共有ファイルを引き出す(RDateTime イメージID, RString sharedFileName) {
+        RString imagePath = RString.EMPTY;
+        if (イメージID != null) {
+            imagePath = getFilePath(イメージID, sharedFileName);
+        }
+        return imagePath;
+    }
+
+    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
+        ReadOnlySharedFileEntryDescriptor descriptor
+                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
+                        sharedFileId);
+        try {
+            SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+        } catch (Exception e) {
+            return RString.EMPTY;
+        }
+        return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
     }
 }

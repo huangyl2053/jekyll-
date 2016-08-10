@@ -121,12 +121,14 @@ public class JimuIkenshoDataSakuseiA42Process extends BatchKeyBreakBase<Shinsaka
         RStringBuilder builder2 = new RStringBuilder();
         builder2.append("【介護認定審査会開催予定年月日】")
                 .append(" ")
-                .append(paramter.getShinsakaiKaisaiYoteiYMD().wareki());
+                .append(paramter.getShinsakaiKaisaiYoteiYMD().wareki().toDateString());
         RStringBuilder builder3 = new RStringBuilder();
         builder3.append("【介護認定審査会開催番号】")
                 .append(" ")
                 .append(paramter.getShinsakaiKaisaiNo());
         list.add(builder1.toRString());
+        list.add(builder2.toRString());
+        list.add(builder3.toRString());
         return list;
     }
 }

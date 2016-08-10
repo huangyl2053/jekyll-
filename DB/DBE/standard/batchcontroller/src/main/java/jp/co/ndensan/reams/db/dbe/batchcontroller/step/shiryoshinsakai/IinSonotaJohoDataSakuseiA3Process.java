@@ -49,6 +49,8 @@ public class IinSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsak
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
     private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
     private JimuSonotashiryoBusiness その他資料;
+    private int shinsakaiOrder;
+    private int 存在ファイルindex;
 
     @BatchWriter
     private BatchReportWriter<SonotashiryoA3ReportSource> batchWriteA3;
@@ -56,6 +58,8 @@ public class IinSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsak
 
     @Override
     protected void initialize() {
+        shinsakaiOrder = -1;
+        存在ファイルindex = 0;
         myBatisParameter = paramter.toIinTokkiJikouItiziHanteiMyBatisParameter();
         List<RString> shoriJotaiKubunList = new ArrayList<>();
         shoriJotaiKubunList.add(ShoriJotaiKubun.延期.getコード());
@@ -88,9 +92,14 @@ public class IinSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsak
         entity.setHihokenshaName(AtenaMeisho.EMPTY);
         entity.setShoKisaiHokenshaNo(RString.EMPTY);
         entity.setJimukyoku(false);
-        その他資料 = new JimuSonotashiryoBusiness(entity);
+        if (shinsakaiOrder != entity.getShinsakaiOrder()) {
+            存在ファイルindex = 0;
+        }
+        その他資料 = new JimuSonotashiryoBusiness(entity, 存在ファイルindex);
         SonotashiryoA3Report reportA3 = new SonotashiryoA3Report(その他資料);
         reportA3.writeBy(reportSourceWriterA3);
+        存在ファイルindex = その他資料.get存在ファイルIndex();
+        shinsakaiOrder = entity.getShinsakaiOrder();
     }
 
     @Override
@@ -119,16 +128,21 @@ public class IinSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsak
 
     private List<RString> 出力条件() {
         List<RString> list = new ArrayList<>();
-        RStringBuilder builder = new RStringBuilder();
-        builder.append("【開始資料番号】")
+        RStringBuilder builder1 = new RStringBuilder();
+        builder1.append("【合議体番号】")
                 .append(" ")
-                .append(paramter.getBangoStart());
-        RStringBuilder stringBuilder = new RStringBuilder();
-        stringBuilder.append("【終了資料番号】")
+                .append(paramter.getGogitaiNo());
+        RStringBuilder builder2 = new RStringBuilder();
+        builder2.append("【介護認定審査会開催予定年月日】")
                 .append(" ")
-                .append(paramter.getBangoEnd());
-        list.add(builder.toRString());
-        list.add(stringBuilder.toRString());
+                .append(paramter.getShinsakaiKaisaiYoteiYMD().wareki().toDateString());
+        RStringBuilder builder3 = new RStringBuilder();
+        builder3.append("【介護認定審査会開催番号】")
+                .append(" ")
+                .append(paramter.getShinsakaiKaisaiNo());
+        list.add(builder1.toRString());
+        list.add(builder2.toRString());
+        list.add(builder3.toRString());
         return list;
     }
 }

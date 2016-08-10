@@ -55,7 +55,6 @@ public class IinTuikaSiryoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsak
     private static final int 満ページ件数 = 10;
     private static final int LENGTH_4 = 4;
     private IinShinsakaiIinJohoProcessParameter paramter;
-    private IinShinsakaiIinJohoMyBatisParameter myBatisParameter;
     private List<ShinsakaiIinJohoEntity> shinsakaiIinJohoList;
     private IShiryoShinsakaiIinMapper mapper;
     private JimuTuikaSiryoBusiness business;
@@ -81,7 +80,7 @@ public class IinTuikaSiryoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsak
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(SELECT_SHINSAKAITAIYOSYAJOHO, myBatisParameter);
+        return new BatchDbReader(SELECT_SHINSAKAITAIYOSYAJOHO, paramter.toIinShinsakaiIinJohoMyBatisParameter());
     }
 
     @Override

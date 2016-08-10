@@ -89,7 +89,7 @@ public class JimuTokkiJikouDataSakuseiA3Process extends BatchKeyBreakBase<Shinsa
     protected void usualProcess(ShinsakaiSiryoKyotsuEntity kyotsuEntity) {
         kyotsuEntity.setJimukyoku(true);
         List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List = get特記情報(kyotsuEntity);
-        TokkiText1A4Business business = new TokkiText1A4Business(kyotsuEntity, 特記情報List);
+        TokkiText1A4Business business = new TokkiText1A4Business(false, 1, kyotsuEntity, 特記情報List);
         TokkiText2A3Report report = new TokkiText2A3Report(new TokkiText2A3Entity());
         report.writeBy(reportSourceWriterA3);
         ページ表示行数 = business.getページ表示行数();

@@ -24,24 +24,25 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class JimuSonotashiryoBusiness {
 
+    private final RString ファイル名_G0001 = new RString("G0001.png");
     private final ShinsakaiSiryoKyotsuEntity entity;
     private final List<RString> ファイル名List;
     private int index;
-    private final RString ファイル名_G0001 = new RString("G0001.png");
 
     /**
      * コンストラクタです。
      *
      * @param entity ShinsakaiSiryoKyotsuEntity
+     * @param 存在ファイルindex int
      */
-    public JimuSonotashiryoBusiness(ShinsakaiSiryoKyotsuEntity entity) {
+    public JimuSonotashiryoBusiness(ShinsakaiSiryoKyotsuEntity entity, int 存在ファイルindex) {
         this.entity = entity;
         if (!entity.isJimukyoku()) {
             this.ファイル名List = getその他資料マスキング後イメージファイル名();
         } else {
             this.ファイル名List = getその他資料原本イメージファイル名();
         }
-        index = 0;
+        index = 存在ファイルindex;
     }
 
     /**
@@ -158,6 +159,15 @@ public class JimuSonotashiryoBusiness {
             }
         }
         return RString.EMPTY;
+    }
+
+    /**
+     * その他資料を取得します。
+     *
+     * @return その他資料
+     */
+    public int get存在ファイルIndex() {
+        return index;
     }
 
     private List<RString> getその他資料マスキング後イメージファイル名() {

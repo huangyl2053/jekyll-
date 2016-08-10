@@ -58,6 +58,7 @@ public class ZenkokuHokenshaMasterKoshinHandler {
             }
             div.getDgHokenshas().getDataSource().add(row);
         }
+        div.getHokenshaIchiran().setHdnTodofuken(div.getHokenshaIchiran().getDdlTodofuken().getSelectedKey());
         div.getHokenshaIchiran().setDisplayNone(false);
         div.getHokenshaJoho().setDisplayNone(true);
     }

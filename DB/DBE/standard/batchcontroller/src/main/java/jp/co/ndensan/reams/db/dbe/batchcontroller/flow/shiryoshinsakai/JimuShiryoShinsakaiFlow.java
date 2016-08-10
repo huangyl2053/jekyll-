@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.shiryoshinsakai;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuGaikyotokkiDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuGaikyotokkiSonotaJohoDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuGaikyouTokkiIranDataSakuseiA4Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuGaikyouTokkiIranDataSakuseiImgA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuHanteiDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuIkenshoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuIkenshoDataSakuseiA42Process;
@@ -24,9 +25,13 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuTokki
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuTuikaSiryoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuTuikaSiryoDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.shiryoshinsakai.ShiryoShinsakaiBatchParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -47,6 +52,7 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
     private static final String 事務局_特記事項 = "jimuTokkiJikou";
     private static final String 事務局_概況特記 = "jimuTokkiIran";
     private static final RString 選択 = new RString("1");
+    private static final RString テキスト = new RString("1");
     private static final RString 作成条件_追加分 = new RString("追加分");
 
     @Override
@@ -167,8 +173,13 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
      */
     @Step(事務局_概況特記一覧表)
     protected IBatchFlowCommand createJimuGaikyouTokkiIranData() {
-        return loopBatch(JimuGaikyouTokkiIranDataSakuseiA4Process.class)
-                .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
+        if (テキスト.equals(DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+            return loopBatch(JimuGaikyouTokkiIranDataSakuseiA4Process.class)
+                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
+        } else {
+            return loopBatch(JimuGaikyouTokkiIranDataSakuseiImgA4Process.class)
+                    .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
+        }
     }
 
     /**

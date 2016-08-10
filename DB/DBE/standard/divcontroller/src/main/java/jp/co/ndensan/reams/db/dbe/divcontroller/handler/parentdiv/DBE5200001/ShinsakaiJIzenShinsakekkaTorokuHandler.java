@@ -41,7 +41,7 @@ public class ShinsakaiJIzenShinsakekkaTorokuHandler {
      * @param 事前審査会用結果リスト 事前審査会用結果リスト
      */
     public void set事前審査会用結果(List<JizenShinsakaiShiryo> 事前審査会用結果リスト) {
-        if (!事前審査会用結果リスト.isEmpty()) {
+        if (事前審査会用結果リスト.size() != ZERO) {
             JizenShinsakaiShiryo 事前審査会用結果 = 事前審査会用結果リスト.get(ZERO);
             div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtShinsakaiKaisaiNo()
                     .setValue(事前審査会用結果.getShinsakaiKaisaiNo());
