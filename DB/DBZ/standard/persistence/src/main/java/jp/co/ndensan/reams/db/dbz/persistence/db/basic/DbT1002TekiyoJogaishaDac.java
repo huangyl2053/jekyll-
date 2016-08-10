@@ -85,6 +85,7 @@ public class DbT1002TekiyoJogaishaDac implements ISaveable<DbT1002TekiyoJogaisha
         requireNonNull(年齢到達日, UrSystemErrorMessages.値がnull.getReplacedMessage("年齢到達日"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        boolean 論理削除フラグ = false;
 
         return accessor.select().
                 table(DbT1002TekiyoJogaisha.class).
@@ -93,7 +94,7 @@ public class DbT1002TekiyoJogaishaDac implements ISaveable<DbT1002TekiyoJogaisha
                                 (or(
                                         and(leq(tekiyoYMD, 年齢到達日), leq(年齢到達日, kaijoYMD)),
                                         and(leq(tekiyoYMD, 年齢到達日), leq(kaijoYMD, null)))),
-                                eq(logicalDeletedFlag, false))).
+                                eq(logicalDeletedFlag, 論理削除フラグ))).
                 toList(DbT1002TekiyoJogaishaEntity.class);
     }
 

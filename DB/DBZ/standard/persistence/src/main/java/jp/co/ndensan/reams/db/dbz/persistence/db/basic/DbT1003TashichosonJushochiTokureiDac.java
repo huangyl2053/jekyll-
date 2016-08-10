@@ -191,6 +191,7 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
         requireNonNull(年齢到達日, UrSystemErrorMessages.値がnull.getReplacedMessage("年齢到達日"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        boolean 論理削除フラグ = false;
 
         return accessor.select().
                 table(DbT1003TashichosonJushochiTokurei.class).
@@ -199,7 +200,7 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
                                 (or(
                                         and(leq(tekiyoYMD, 年齢到達日), leq(年齢到達日, kaijoYMD)),
                                         and(leq(tekiyoYMD, 年齢到達日), leq(kaijoYMD, null)))),
-                                eq(logicalDeletedFlag, false))).
+                                eq(logicalDeletedFlag, 論理削除フラグ))).
                 toList(DbT1003TashichosonJushochiTokureiEntity.class);
     }
 
