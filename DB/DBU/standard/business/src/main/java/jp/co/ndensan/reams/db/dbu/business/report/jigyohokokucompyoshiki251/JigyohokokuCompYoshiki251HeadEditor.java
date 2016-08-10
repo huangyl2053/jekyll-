@@ -72,8 +72,18 @@ public class JigyohokokuCompYoshiki251HeadEditor implements IJigyohokokuCompYosh
         }
         source.hokenshaName = builder.toRString();
         source.hyoTitle = setHyoTitle(給付実績区分コード);
-        source.hyoSubTitle = setHyoSubTitle(集計番号);
-        source.yoshiki = setYoshiki(集計番号);
+        if (集計番号_0105.equals(集計番号)
+                || 集計番号_0106.equals(集計番号)) {
+            source.hyoSubTitle = 総数;
+            source.yoshiki = 様式２の５;
+        } else if (集計番号_0205.equals(集計番号)
+                || 集計番号_0206.equals(集計番号)) {
+            source.hyoSubTitle = 被保険者分再掲;
+            source.yoshiki = 様式２の６;
+        } else {
+            source.hyoSubTitle = RString.EMPTY;
+            source.yoshiki = RString.EMPTY;
+        }
         return source;
     }
 
@@ -87,34 +97,6 @@ public class JigyohokokuCompYoshiki251HeadEditor implements IJigyohokokuCompYosh
             hyotitle = RString.EMPTY;
         }
         return hyotitle;
-    }
-
-    private RString setHyoSubTitle(RString 集計番号) {
-        RString hyosubtitle;
-        if (集計番号_0105.equals(集計番号)
-                || 集計番号_0106.equals(集計番号)) {
-            hyosubtitle = 総数;
-        } else if (集計番号_0205.equals(集計番号)
-                || 集計番号_0206.equals(集計番号)) {
-            hyosubtitle = 被保険者分再掲;
-        } else {
-            hyosubtitle = RString.EMPTY;
-        }
-        return hyosubtitle;
-    }
-
-    private RString setYoshiki(RString 集計番号) {
-        RString yoshiki;
-        if (集計番号_0105.equals(集計番号)
-                || 集計番号_0106.equals(集計番号)) {
-            yoshiki = 様式２の５;
-        } else if (集計番号_0205.equals(集計番号)
-                || 集計番号_0206.equals(集計番号)) {
-            yoshiki = 様式２の６;
-        } else {
-            yoshiki = RString.EMPTY;
-        }
-        return yoshiki;
     }
 
 }
