@@ -101,9 +101,6 @@ public class KaigoHokenShotokuJohoIchiranProperty extends ReportPropertyBase<Kai
         return breakers.add(catalog.new SimplePageBreaker(
 
 
-
-
-
             pageBreakKeys) {
             @Override
             public ReportLineRecord<KaigoHokenShotokuJohoIchiranSource> occuredBreak(
