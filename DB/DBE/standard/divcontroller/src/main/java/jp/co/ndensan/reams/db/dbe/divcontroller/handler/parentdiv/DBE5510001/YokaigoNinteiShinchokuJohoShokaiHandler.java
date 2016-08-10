@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -259,7 +258,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         } else {
             row.getIchijiHanteiKanryouDay().setValue(flexibleDateToRDate(joho.get要介護認定一次判定完了年月日()));
         }
-        row.setIchijiHanteiKekka(joho.get要介護認定一次判定結果コード() == null ? RString.EMPTY : IchijiHanteiKekkaCode09.toValue(nullToEmpty(joho.get要介護認定一次判定結果コード())).get名称());
+        row.setIchijiHanteiKekka(joho.get一次判定結果名称());
         if (joho.get認定審査会割当完了年月日() == null || joho.get認定審査会割当完了年月日().isEmpty()) {
             row.setKaigoNinteiShinsakaiWaritsukeDay(new TextBoxDate());
         } else {
@@ -287,8 +286,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         }
         row.setKaigoNinteiShinsakaiKaisaiNo(nullToEmpty(joho.get介護認定審査会開催番号()));
         row.setKaigoNinteiShinsakaiGogitai(new RString(String.valueOf(joho.get合議体名())));
-        IYokaigoJotaiKubun yokaigodo = YokaigoJotaiKubunSupport.toValueOrEmpty(joho.get二次判定要介護状態区分コード());
-        row.setKaigoNinteiShinsakaiYokaigodo(yokaigodo.getCode().equals(new RString("99")) ? RString.EMPTY : yokaigodo.getName());
+        row.setKaigoNinteiShinsakaiYokaigodo(joho.get二次判定結果名称());
         row.setHihokenshaYubinNo(new YubinNo(nullToEmpty(joho.get郵便番号())).getEditedYubinNo());
         row.setHihokenshaJusho(nullToEmpty(joho.get住所()));
         row.setHihokenshaSeibetsu(Seibetsu.toValue(joho.get性別()).get名称());
