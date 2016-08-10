@@ -19,13 +19,16 @@ import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.TankiNy
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.KubunGendoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.KyufuJikoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KubunGendoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.ServiceRiyohyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KyufuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.ServiceTypeTotalEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jigosakuseimeisaitouroku.IJigoSakuseiMeisaiTourokuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -46,6 +49,8 @@ public class JigoSakuseiMeisaiTouroku {
     private static final Decimal 定値_100 = new Decimal("100");
     private static final RString 限度対象外フラグ = new RString("0");
     private static final RString 定値_合計 = new RString("合計");
+    private static final RString 定値_ホシ = new RString("*");
+    private static final RString 定値_ハイフン = new RString("ー");
     private static final RString 区分_居宅 = new RString("1");
     private static final RString 区分_総合事業 = new RString("2");
     private static final RString 定値_01 = new RString("01");
@@ -138,17 +143,19 @@ public class JigoSakuseiMeisaiTouroku {
         Decimal 全額利用者負担額 = Decimal.ZERO;
 
         for (KyufuJikoSakuseiResult result : 明細合計リスト) {
-            if (result.is合計フラグ() && 限度対象外フラグ.equals(result.get限度額対象外フラグ())) {
-                サービス単位 = result.getサービス単位().add(サービス単位);
-                種類限度内単位 = nullToZero(result.get種類限度内単位()).add(種類限度内単位);
-                種類限度超過単位 = nullToZero(result.get種類限度超過単位()).add(種類限度超過単位);
-                区分限度内単位 = nullToZero(result.get区分限度内単位()).add(区分限度内単位);
-                区分限度超過単位 = nullToZero(result.get区分限度超過単位()).add(区分限度超過単位);
+            if (result.is合計フラグ()) {
+                if (限度対象外フラグ.equals(result.get限度額対象外フラグ())) {
+                    サービス単位 = result.getサービス単位().add(サービス単位);
+                    種類限度内単位 = nullToZero(result.get種類限度内単位()).add(種類限度内単位);
+                    種類限度超過単位 = nullToZero(result.get種類限度超過単位()).add(種類限度超過単位);
+                    区分限度内単位 = nullToZero(result.get区分限度内単位()).add(区分限度内単位);
+                    区分限度超過単位 = nullToZero(result.get区分限度超過単位()).add(区分限度超過単位);
+                }
+                費用総額 = nullToZero(result.get費用総額()).add(費用総額);
+                保険給付額 = nullToZero(result.get保険給付額()).add(保険給付額);
+                保険対象利用者負担額 = nullToZero(result.get保険対象利用者負担額()).add(保険対象利用者負担額);
+                全額利用者負担額 = nullToZero(result.get全額利用者負担額()).add(全額利用者負担額);
             }
-            費用総額 = nullToZero(result.get費用総額()).add(費用総額);
-            保険給付額 = nullToZero(result.get保険給付額()).add(保険給付額);
-            保険対象利用者負担額 = nullToZero(result.get保険対象利用者負担額()).add(保険対象利用者負担額);
-            全額利用者負担額 = nullToZero(result.get全額利用者負担額()).add(全額利用者負担額);
         }
         KyufuJikoSakuseiResult kyufuJikoSakuseiResult = new KyufuJikoSakuseiResult();
         kyufuJikoSakuseiResult.setサービス単位(サービス単位);
@@ -162,6 +169,12 @@ public class JigoSakuseiMeisaiTouroku {
         kyufuJikoSakuseiResult.set全額利用者負担額(全額利用者負担額);
         // TODO QAのNo.975 (Redmine#92977)
         kyufuJikoSakuseiResult.set事業者(定値_合計);
+        kyufuJikoSakuseiResult.setサービス(定値_ハイフン);
+        kyufuJikoSakuseiResult.set事業者コード(new JigyoshaNo(定値_ホシ));
+        kyufuJikoSakuseiResult.setサービス種類コード(new ServiceShuruiCode(定値_ハイフン));
+        kyufuJikoSakuseiResult.setサービス項目コード(new ServiceKomokuCode(定値_ハイフン));
+        kyufuJikoSakuseiResult.setステータス(定値_ハイフン);
+        kyufuJikoSakuseiResult.set限度額対象外フラグ(定値_ハイフン);
         return kyufuJikoSakuseiResult;
 
     }
@@ -229,12 +242,12 @@ public class JigoSakuseiMeisaiTouroku {
             int 履歴番号, FlexibleYearMonth 利用年月) {
         IJigoSakuseiMeisaiTourokuMapper mapper = mapperProvider.create(IJigoSakuseiMeisaiTourokuMapper.class);
         KyufuJikoSakuseiParameter param = KyufuJikoSakuseiParameter.createParam(被保険者番号, 対象年月, 履歴番号, 利用年月);
-        List<ServiceRiyohyoEntity> entityList = mapper.getサービス利用票データ(param);
+        List<KyufuJikoSakuseiEntity> entityList = mapper.getサービス利用票データ(param);
         if (entityList == null || entityList.isEmpty()) {
             return Collections.emptyList();
         }
         List<KyufuJikoSakuseiResult> 給付計画自己作成ResultList = new ArrayList<>();
-        for (ServiceRiyohyoEntity entity : entityList) {
+        for (KyufuJikoSakuseiEntity entity : entityList) {
             KyufuJikoSakuseiResult result = new KyufuJikoSakuseiResult();
             result.set事業者(entity.get事業者());
             result.setサービス(entity.getサービス());
