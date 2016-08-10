@@ -1205,12 +1205,14 @@ public class SabisuJyoukyoA3 {
         障害高齢者自立度.set認知症高齢者自立度(set障害高齢者自立度(entity.getShogaiNichijoSeikatsuJiritsudoCode()));
         NitijouSeikatsu 認知症高齢者自立度 = new NitijouSeikatsu();
         認知症高齢者自立度.set特記事項フラグ(entity.getNinchishoNichijoSeikatsuJiritsudo());
-        認知症高齢者自立度.set認知症高齢者自立度(set障害高齢者自立度(entity.getNinchishoNichijoSeikatsuJiritsudoCode()));
+        認知症高齢者自立度.set認知症高齢者自立度(set認知症高齢者自立度(entity.getNinchishoNichijoSeikatsuJiritsudoCode()));
         日常生活自立度リスト.add(障害高齢者自立度);
         日常生活自立度リスト.add(認知症高齢者自立度);
         項目.set日常生活自立度リスト(日常生活自立度リスト);
         項目.set認定調査結果認知症高齢者自立度(set認知症高齢者自立度(entity.getNinchishoNichijoSeikatsuJiritsudoCode()));
-        項目.set意見書認知症高齢者自立度(set認知症高齢者自立度(entity.getNinchishoNichijoSeikatsuJiritsudoCode()));
+        if (!RString.isNullOrEmpty(entity.getIkenItem())) {
+            項目.set意見書認知症高齢者自立度(set認知症高齢者自立度(new Code(entity.getIkenItem())));
+        }
         if (RString.isNullOrEmpty(entity.getHihokenshaKubunCode())) {
             項目.set被保険者区分(RString.EMPTY);
         } else {
@@ -1375,7 +1377,7 @@ public class SabisuJyoukyoA3 {
 
     private RString set認知症高齢者自立度(Code 認知症高齢者自立度コード) {
         if (認知症高齢者自立度コード != null && !認知症高齢者自立度コード.isEmpty()) {
-            NinchishoNichijoSeikatsuJiritsudoCode.toValue(認知症高齢者自立度コード.getColumnValue()).get名称();
+            return NinchishoNichijoSeikatsuJiritsudoCode.toValue(認知症高齢者自立度コード.getColumnValue()).get名称();
         }
         return RString.EMPTY;
     }
