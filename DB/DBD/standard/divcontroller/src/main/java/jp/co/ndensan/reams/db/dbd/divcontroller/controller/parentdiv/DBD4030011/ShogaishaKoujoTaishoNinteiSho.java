@@ -49,15 +49,11 @@ public class ShogaishaKoujoTaishoNinteiSho {
 
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         getValidationHandler().validateFor対象年度の必須入力(pairs, div);
-        getValidationHandler().validateFor喪失日_終了日が開始日以前(pairs, div);
-        getValidationHandler().validateFor決定日_終了日が開始日以前(pairs, div);
         getValidationHandler().validateFor出力順序の必須入力(pairs, div);
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
-        } else {
-            if (!ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
-            }
+        } else if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
