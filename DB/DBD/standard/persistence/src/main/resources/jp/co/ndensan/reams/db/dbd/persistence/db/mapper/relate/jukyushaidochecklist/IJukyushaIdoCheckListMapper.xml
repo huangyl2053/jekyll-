@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-1770-020 donghj -->
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.jukyushaidochecklist.IJukyushaIdoCheckListMapper">
+    
+    <resultMap id="resultMap_帳票出力対象データ取得" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5720001.JyukyushaDaichoIdoCheckListEntity" autoMapping="true">
+        <result property="保険者番号" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="保険者名称" column="市町村名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="受給申請日" column="受給申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定日" column="認定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定有効開始日" column="認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定有効終了日" column="認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="喪失年月日" column="喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="異動事由" column="データ区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="有効無効" column="有効無効区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="受給申請事由" column="受給申請事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="旧措置者" column="旧措置者フラグ" />
+        <result property="要介護度" column="要介護認定状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="異動理由" column="異動理由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="厚労省IF識別コード" column="厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="年齢" column="年齢" />
+        <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        
+    </resultMap>
+    
+    <select id="get帳票出力対象データ" resultMap="resultMap_帳票出力対象データ取得" fetchSize="500" 
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd5720001.JyukyushaDaichoIdoCheckListMybatisParameter" resultOrdered="true">
+        SELECT
+            DbT7051."shichosonCode"                     AS 市町村コード,
+            DbT7051."shichosonMeisho"                   AS 市町村名称,
+            DbV4001."hihokenshaNo"                      AS 被保険者番号,
+            DbV4001."shikibetsuCode"                    AS 識別コード,
+            DbV4001."jukyuShinseiYMD"                   AS 受給申請年月日,
+            DbV4001."ninteiYMD"                         AS 認定年月日,
+            DbV4001."ninteiYukoKikanKaishiYMD"          AS 認定有効期間開始年月日,
+            DbV4001."ninteiYukoKikanShuryoYMD"          AS 認定有効期間終了年月日,
+            DbV4001."soshitsuYMD"                       AS 喪失年月日,
+            DbV4001."dataKubun"                         AS データ区分,
+            DbV4001."yukoMukoKubun"                     AS 有効無効区分,
+            DbV4001."jukyuShinseiJiyu"                  AS 受給申請事由,
+            DbV4001."kyuSochishaFlag"                   AS 旧措置者フラグ,
+            DbV4001."yokaigoJotaiKubunCode"             AS 要介護認定状態区分コード,
+            DbV4001."idoRiyu"                           AS 異動理由,
+            DbT5101."koroshoIfShikibetsuCode"           AS 厚労省IF識別コード,
+            DbT5101."age"                               AS 年齢,
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM 
+            rgdb."DbV4001JukyushaDaicho" AS DbV4001
+        INNER JOIN
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
+            AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+            ON DbV4001."shikibetsuCode" = <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
+        INNER JOIN 
+            rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+            ON DbV4001."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+            AND DbT5101."logicalDeletedFlag" = False
+        INNER JOIN
+            rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
+            ON DbT5101."shoKisaiHokenshaNo" = DbT7051."shoKisaiHokenshaNo"
+        WHERE 1 = 1
+            <if test="is今回抽出開始年月日が入力">
+                AND (#{今回抽出開始年月日}+#{今回抽出開始時分秒}) <![CDATA[<=]]> DbV4001."insertTimestamp"
+            </if>
+            <if test="is今回抽出終了年月日が入力">
+                AND DbV4001."insertTimestamp" <![CDATA[<=]]> (#{今回抽出終了年月日}+#{今回抽出終了時分秒})
+            </if>
+            <if test="出力対象 == 0">
+                AND 1=1
+            </if>
+            <if test="出力対象 == 1">
+                AND DbV4001."chokkinIdoJiyuCode" IS NULL
+            </if>
+            <if test="出力対象 == 2">
+                AND DbV4001."chokkinIdoJiyuCode" IS NOT NULL
+            </if>
+            
+            
+        
+    </select>
+    
+</mapper>
