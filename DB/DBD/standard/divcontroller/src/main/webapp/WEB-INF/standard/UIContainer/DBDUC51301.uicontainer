@@ -5,7 +5,7 @@
  "steps": [
   {
    "id": 1,
-   "name": "要介護認定申請書発行",
+   "name": "介護認定申請書発行",
    "transitionList": [
     {
      "id": "1",
