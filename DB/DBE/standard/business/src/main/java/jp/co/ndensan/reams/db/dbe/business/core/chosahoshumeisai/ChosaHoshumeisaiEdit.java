@@ -67,7 +67,9 @@ public class ChosaHoshumeisaiEdit {
             hoshumeisai.set新規申請在宅(MARU);
             hoshumeisai.set新規申請施設(RString.EMPTY);
             合計件数新規在宅 = 合計件数新規在宅 + 1;
-        } else {
+        } else if (entity.getNinteiChosaKubunCode() != null && entity.getChosaJisshiBashoCode() != null
+                && ChosaKubun.新規調査.getコード().equals(entity.getNinteiChosaKubunCode().value())
+                && !ChosaJisshiBashoCode.自宅内.getコード().equals(entity.getChosaJisshiBashoCode().value())) {
             hoshumeisai.set新規申請在宅(RString.EMPTY);
             hoshumeisai.set新規申請施設(MARU);
             合計件数新規施設 = 合計件数新規施設 + 1;
@@ -78,7 +80,9 @@ public class ChosaHoshumeisaiEdit {
             hoshumeisai.set継続申請在宅(MARU);
             hoshumeisai.set継続申請施設(RString.EMPTY);
             合計件数継続在宅 = 合計件数継続在宅 + 1;
-        } else {
+        } else if (entity.getNinteiChosaKubunCode() != null && entity.getChosaJisshiBashoCode() != null
+                && ChosaKubun.再調査.getコード().equals(entity.getNinteiChosaKubunCode().value())
+                && !ChosaJisshiBashoCode.自宅内.getコード().equals(entity.getChosaJisshiBashoCode().value())) {
             hoshumeisai.set継続申請在宅(RString.EMPTY);
             hoshumeisai.set継続申請施設(MARU);
             合計件数継続施設 = 合計件数継続施設 + 1;
