@@ -12,7 +12,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokucompyoshiki201.JigyohokokuCompYoshiki201Business;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki201.JigyohokokuCompResultEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki201.JigyohokokuCompYoshiki201Entity;
-import jp.co.ndensan.reams.db.dbu.entity.report.ｊigyohokokucompyoshiki202.JigyohokokuCompYoshiki202ReportSource;
+import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki2021.JigyohokokuCompYoshiki2021ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBU-5560-050 wanghuafeng
  */
-public class JigyohokokuCompYoshiki2021Report extends Report<JigyohokokuCompYoshiki202ReportSource> {
+public class JigyohokokuCompYoshiki2021Report extends Report<JigyohokokuCompYoshiki2021ReportSource> {
 
     private static final RString 集計区分_加算 = new RString("1");
     private static final RString 集計区分_減算 = new RString("2");
@@ -118,7 +118,7 @@ public class JigyohokokuCompYoshiki2021Report extends Report<JigyohokokuCompYosh
     }
 
     @Override
-    public void writeBy(ReportSourceWriter<JigyohokokuCompYoshiki202ReportSource> writer) {
+    public void writeBy(ReportSourceWriter<JigyohokokuCompYoshiki2021ReportSource> writer) {
         RString 集計番号 = RString.EMPTY;
         RString 給付実績区分コード = RString.EMPTY;
         Collections.sort(business.get事業報告資料(), new Comparator<JigyohokokuCompYoshiki201Entity>() {

@@ -43,8 +43,8 @@ public class SeikatsuhogoJukyushaMybatisParameter implements IMyBatisParameter {
     private final boolean is年齢;
     private final boolean has年齢範囲開始;
     private final boolean has年齢範囲終了;
-    private final RDate 生年月日範囲終了;
-    private final RDate 生年月日範囲開始;
+    private final RString 生年月日範囲終了;
+    private final RString 生年月日範囲開始;
     private final boolean is生年月日;
     private final boolean has生年月日範囲終了;
     private final boolean has生年月日範囲開始;
@@ -122,8 +122,16 @@ public class SeikatsuhogoJukyushaMybatisParameter implements IMyBatisParameter {
         this.is年齢 = is年齢;
         this.has年齢範囲開始 = has年齢範囲開始;
         this.has年齢範囲終了 = has年齢範囲終了;
-        this.生年月日範囲終了 = 生年月日範囲終了;
-        this.生年月日範囲開始 = 生年月日範囲開始;
+        if (nullHandan(生年月日範囲終了)) {
+            this.生年月日範囲終了 = 生年月日範囲終了.toDateString();
+        } else {
+            this.生年月日範囲終了 = RString.EMPTY;
+        }
+        if (nullHandan(生年月日範囲開始)) {
+            this.生年月日範囲開始 = 生年月日範囲開始.toDateString();
+        } else {
+            this.生年月日範囲開始 = RString.EMPTY;
+        }
         this.is生年月日 = is生年月日;
         this.has生年月日範囲終了 = has生年月日範囲終了;
         this.has生年月日範囲開始 = has生年月日範囲開始;

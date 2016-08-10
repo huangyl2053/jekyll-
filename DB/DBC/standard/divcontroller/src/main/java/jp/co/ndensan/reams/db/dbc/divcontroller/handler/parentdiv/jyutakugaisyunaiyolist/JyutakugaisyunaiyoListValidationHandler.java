@@ -24,6 +24,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class JyutakugaisyunaiyoListValidationHandler {
 
     private static final RString JIGYOSYA = new RString("事業者");
+    private static final RString JYUSHO = new RString("対象住宅住所");
+    private static final RString CHAKOBI = new RString("着工日");
+    private static final RString KANSEIBI = new RString("完成日");
+    private static final RString KAISHUKENGAKU = new RString("改修金額");
     private final JyutakugaisyunaiyoListDiv div;
 
     /**
@@ -62,9 +66,23 @@ public class JyutakugaisyunaiyoListValidationHandler {
      */
     public ValidationMessageControlPairs validateFor事業者() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        RString 事業者 = div.getTxtJigyosya().getValue();
-        if (事業者 == null || 事業者.isEmpty()) {
+        if (RString.isNullOrEmpty(div.getTxtJigyosya().getValue())) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須, JIGYOSYA.toString()), div.getTxtJigyosya()));
+        }
+        if (RString.isNullOrEmpty(div.getTxtJyusyo().getDomain().value())) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須, JYUSHO.toString()), div.getTxtJyusyo()));
+        }
+        if (div.getTxtTyakkoyotebi().getValue() == null) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須,
+                    CHAKOBI.toString()), div.getTxtTyakkoyotebi()));
+        }
+        if (div.getTxtKanseyotebi().getValue() == null) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須,
+                    KANSEIBI.toString()), div.getTxtKanseyotebi()));
+        }
+        if (div.getTxtKaisyukingaku().getValue() == null) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須,
+                    KAISHUKENGAKU.toString()), div.getTxtKaisyukingaku()));
         }
         return validPairs;
     }

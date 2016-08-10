@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki2021;
 
-import jp.co.ndensan.reams.db.dbu.entity.report.ｊigyohokokucompyoshiki202.JigyohokokuCompYoshiki202ReportSource;
+import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki2021.JigyohokokuCompYoshiki2021ReportSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
@@ -32,11 +32,11 @@ public class JigyohokokuCompYoshiki2021Builder implements IJigyohokokuCompYoshik
     /**
      * 事業報告月報様式_02のbuild
      *
-     * @return {@link JigyohokokuCompYoshiki202ReportSource}
+     * @return {@link JigyohokokuCompYoshiki2021ReportSource}
      */
     @Override
-    public JigyohokokuCompYoshiki202ReportSource build() {
-        return ReportEditorJoiner.from(new JigyohokokuCompYoshiki202ReportSource()).join(headEditor).join(bodyEditor).buildSource();
+    public JigyohokokuCompYoshiki2021ReportSource build() {
+        return ReportEditorJoiner.from(new JigyohokokuCompYoshiki2021ReportSource()).join(headEditor).join(bodyEditor).buildSource();
     }
 
 }
