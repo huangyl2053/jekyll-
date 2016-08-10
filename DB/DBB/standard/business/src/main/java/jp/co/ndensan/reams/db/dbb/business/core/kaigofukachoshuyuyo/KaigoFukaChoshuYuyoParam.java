@@ -6,8 +6,10 @@
 package jp.co.ndensan.reams.db.dbb.business.core.kaigofukachoshuyuyo;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -22,6 +24,9 @@ public class KaigoFukaChoshuYuyoParam {
 
     private RString 状況;
     private boolean 決定区分;
+    FlexibleYear 調定年度;
+    FlexibleYear 賦課年度;
+    TsuchishoNo 通知書番号;
     private FlexibleDate 申請日;
     private FlexibleDate 決定日;
     private FlexibleDate 取消日;

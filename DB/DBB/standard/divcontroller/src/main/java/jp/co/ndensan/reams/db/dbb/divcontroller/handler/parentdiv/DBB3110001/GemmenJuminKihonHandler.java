@@ -166,8 +166,7 @@ public class GemmenJuminKihonHandler {
      */
     public IItemList<Fuka> load全賦課履歴情報グリッド(HihokenshaNo 被保険者番号, FukaNendo 賦課年度) {
         IFukaRirekiAllDiv 全賦課履歴 = div.getGemmenFukaRirekiAll().getCcdFukaRirekiAll();
-        全賦課履歴.load(被保険者番号, 賦課年度);
-        int 件数 = 全賦課履歴.get件数();
+        int 件数 = 全賦課履歴.load(被保険者番号, 賦課年度);
         if (件数 < 二_定値) {
             return 件数 == ゼロ_定値 ? null : 全賦課履歴.get賦課履歴().get賦課履歴All();
         }
@@ -183,7 +182,7 @@ public class GemmenJuminKihonHandler {
     public RString load状況情報パネル(GemmenJoho 最新減免の情報) {
         RString 減免作成区分;
         RString 状況;
-        if (最新減免の情報 == null) {
+        if (最新減免の情報 == null || 最新減免の情報.getGemmenList().isEmpty()) {
             状況 = 状況_新規;
         } else {
             減免作成区分 = 最新減免の情報.get減免作成区分();
@@ -198,6 +197,7 @@ public class GemmenJuminKihonHandler {
             状況情報パネル.getBtnTesei().setDisplayNone(true);
             状況情報パネル.getBtnTorikeshi().setDisabled(false);
         } else if (状況_決定済.equals(状況)) {
+            状況情報パネル.getBtnTesei().setDisplayNone(false);
             状況情報パネル.getBtnTesei().setDisabled(false);
             状況情報パネル.getBtnTorikeshi().setDisabled(false);
         }
