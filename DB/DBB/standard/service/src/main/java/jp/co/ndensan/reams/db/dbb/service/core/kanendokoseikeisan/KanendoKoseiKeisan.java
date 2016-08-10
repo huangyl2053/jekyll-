@@ -191,7 +191,10 @@ public class KanendoKoseiKeisan {
     }
 
     private void update更正後賦課の情報(FlexibleYear 調定年度, Decimal 特徴歳出還付額, Decimal 普徴歳出還付額, KoseigoFukaResult result) {
-        for (int idx = 1; idx < INT_6; idx++) {
+        if (result.get賦課の情報リスト().size() == INT_1) {
+            return;
+        }
+        for (int idx = 1; idx < result.get賦課の情報リスト().size(); idx++) {
             FukaJoho 賦課の情報tmp = result.get賦課の情報リスト().get(idx);
             if (調定年度.equals(賦課の情報tmp.get調定年度())) {
                 賦課の情報tmp = 賦課の情報tmp.createBuilderForEdit().set普徴歳出還付額(普徴歳出還付額)
