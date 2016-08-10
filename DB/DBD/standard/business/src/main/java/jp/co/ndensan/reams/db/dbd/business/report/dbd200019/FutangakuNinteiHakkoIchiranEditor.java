@@ -111,8 +111,7 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
                 source.list_2 = RString.EMPTY;
             }
             source.list_3 = 帳票情報.get被保険者番号().value();
-            //TODO個人情報に、被保険者氏名がない
-//        source.list_4 = this.個人情報.get被保険者氏名();
+            source.list_4 = this.個人情報.get名称().getName().value();
             source.list_5 = this.個人情報.get住所().get住所();
             source.list_6 = 帳票情報.get申請日().wareki().toDateString();
             source.list_7 = 帳票情報.get決定日().wareki().toDateString();
