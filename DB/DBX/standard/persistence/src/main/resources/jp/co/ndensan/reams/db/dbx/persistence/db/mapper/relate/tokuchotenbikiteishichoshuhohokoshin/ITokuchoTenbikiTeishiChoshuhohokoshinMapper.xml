@@ -25,11 +25,11 @@
             rgdb."DbT2001ChoshuHoho" AS "DbT2001ChoshuHoho"
         ON
             <choose>
-                <when test="天引月=='04' OR 天引月=='06' OR 天引月=='08' ">
+                <when test="天引月=='04'  ||  天引月=='06'  ||  天引月=='08' ">
                     "DbT2001ChoshuHoho"."kariNenkinNo"="UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo"
            AND "DbT2001ChoshuHoho"."kariNenkinCode"="UeT0511NenkinTokuchoKaifuJoho"."nenkinCode"
                 </when>
-                <when test="天引月=='10' OR 天引月=='12' OR 天引月=='02' ">
+                <when test="天引月=='10'  ||  天引月=='12'  ||  天引月=='02' ">
                     "DbT2001ChoshuHoho"."honNenkinNo"="UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo"
            AND "DbT2001ChoshuHoho"."honNenkinCode" ="UeT0511NenkinTokuchoKaifuJoho"."nenkinCode"
                 </when>
