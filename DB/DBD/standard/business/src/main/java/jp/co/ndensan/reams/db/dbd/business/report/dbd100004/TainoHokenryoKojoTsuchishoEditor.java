@@ -173,9 +173,9 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
             if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
                 source.tsuchibun1 = 通知書定型文リスト.get(1);
                 source.tsuchibun2 = 通知書定型文リスト.get(2);
-                source.tsuchibun3 = 通知書定型文リスト.get(3);
+                source.tsuchibun3 = 通知書定型文リスト.get(NOCOUNT_3);
                 if (new RString("1").equals(定型文文字サイズ)) {
-                    source.renrakusakiHoka = 通知書定型文リスト.get(4);
+                    source.renrakusakiHoka = 通知書定型文リスト.get(NOCOUNT_4);
                 } else {
                     source.renrakusakiHoka = RString.EMPTY;
                 }
@@ -219,7 +219,7 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
     private void setLayerFontLarge(TainoHokenryoKojoTsuchishoReportSource source) {
         RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
         if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty() && new RString("2").equals(定型文文字サイズ)) {
-            source.renrakusakiHokaLarge = 通知書定型文リスト.get(4);
+            source.renrakusakiHokaLarge = 通知書定型文リスト.get(NOCOUNT_4);
         } else {
             source.renrakusakiHokaLarge = RString.EMPTY;
         }
