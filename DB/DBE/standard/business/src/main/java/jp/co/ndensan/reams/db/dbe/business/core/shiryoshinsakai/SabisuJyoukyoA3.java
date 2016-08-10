@@ -1254,11 +1254,6 @@ public class SabisuJyoukyoA3 {
         } else {
             項目.set調査員資格(Sikaku.toValue(entity.getChosainShikaku()).get名称());
         }
-        if (entity.getNigoTokuteiShippeiCode() == null || entity.getNigoTokuteiShippeiCode().isEmpty()) {
-            項目.set特定疾病名(RString.EMPTY);
-        } else {
-            項目.set特定疾病名(TokuteiShippei.toValue(entity.getNigoTokuteiShippeiCode().getColumnValue()).get名称());
-        }
         if (entity.getNinchishoJiritsudoIIijoNoGaizensei() == null) {
             項目.set認知症自立度Ⅱ以上の蓋然性(RString.EMPTY);
         } else {

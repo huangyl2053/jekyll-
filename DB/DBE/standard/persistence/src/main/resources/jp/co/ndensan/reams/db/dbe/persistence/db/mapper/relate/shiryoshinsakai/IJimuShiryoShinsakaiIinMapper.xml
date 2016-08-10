@@ -131,6 +131,9 @@
                 dbt5502."shinsakaiKaisaiYMD",
                 dbt5202."gaikyoChosaTextImageKubun" ,
                 dbt5202."tokki",
+                , dbt5202."riyoShisetsuShimei"
+        , dbt5202."riyoShisetsuJusho"
+        , dbt5202."riyoShisetsuTelNo"
                 dbt5115."imageSharedFileId" AS imageSharedFileId
             FROM
                     rgdb."DbT5502ShinsakaiWariateJoho" AS dbt5502
@@ -184,6 +187,9 @@
         <result property="riyoShisetsuTelNo" column="riyoShisetsuTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="imageSharedFileId" column="imageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler" />
         <result property="koroshoIfShikibetsuCode" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+                <result property="riyoShisetsuShimei" column="riyoShisetsuShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="riyoShisetsuJusho" column="riyoShisetsuJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="riyoShisetsuTelNo" column="riyoShisetsuTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
     <select id="get事務局情報件数" resultType="java.lang.Integer"
