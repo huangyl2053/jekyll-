@@ -127,6 +127,18 @@ public final class YokaigoJotaiKubunSupport {
      * @param koroshoIfCode 厚労省インターフェース識別コード
      * @param code コード
      * @return 要介護状態区分
+     */
+    public static IYokaigoJotaiKubun toValueOrEmpty(RString koroshoIfCode, RString code) {
+        KoroshoInterfaceShikibetsuCode kisc = KoroshoInterfaceShikibetsuCode.toValueOrDefault(koroshoIfCode, null);
+        return toValueOrEmpty(kisc, code);
+    }
+
+    /**
+     * 厚労省インターフェース識別コードに対応する要介護状態区分の中からコードに対応する列挙型を返します。
+     *
+     * @param koroshoIfCode 厚労省インターフェース識別コード
+     * @param code コード
+     * @return 要介護状態区分
      * @throws IllegalArgumentException 変換不可の場合
      */
     public static IYokaigoJotaiKubun toValue(KoroshoInterfaceShikibetsuCode koroshoIfCode, RString code) throws IllegalArgumentException {

@@ -3,6 +3,9 @@ package jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteishinchokujohoshoka
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteishinchokujohoshokai.YokaigoNinteiShinchokuJohoShokaiRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaSupport;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -292,7 +295,16 @@ public class YokaigoNinteiShinchokuJoho implements Serializable {
      * @return 要介護認定一次判定結果コード
      */
     public RString get要介護認定一次判定結果コード() {
-        return entity.getIchijiHanteiKekkaCode();
+        return entity.getIchijiHanteiKekkaCode() == null ? RString.EMPTY : entity.getIchijiHanteiKekkaCode();
+    }
+
+    /**
+     * 一次判定結果の名称（要介護度）を返却します。
+     *
+     * @return 一次判定結果の名称
+     */
+    public RString get一次判定結果名称() {
+        return IchijiHanteiKekkaSupport.toValueOrEmpty(get要介護認定一次判定結果コード()).get名称();
     }
 
     /**
@@ -356,6 +368,16 @@ public class YokaigoNinteiShinchokuJoho implements Serializable {
      */
     public RString get二次判定要介護状態区分コード() {
         return entity.getNijiHanYokaigoJotaiKubunCode();
+    }
+
+    /**
+     * 二次判定結果の名称（要介護度）を返却します。
+     *
+     * @return 二次判定結果の名称
+     */
+    public RString get二次判定結果名称() {
+        IYokaigoJotaiKubun yokaigodo = YokaigoJotaiKubunSupport.toValueOrEmpty(get二次判定要介護状態区分コード());
+        return yokaigodo.getCode().equals(new RString("99")) ? RString.EMPTY : yokaigodo.getName();
     }
 
     /**
