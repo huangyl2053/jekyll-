@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kogakuoshirasetsuchiteshutsukigenari;
 
-import jp.co.ndensan.reams.db.dbc.business.report.util.ReportUtil;
+//import jp.co.ndensan.reams.db.dbc.business.report.util.ReportUtil;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakuoshirasetsuchiteshutsukigenari.KogakuOshiraseTsuchiTeshutsuKigenAriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakuoshirasetsuchiteshutsukigenari.KogakuOshiraseTsuchiTeshutsuKigenAriSource;
 
@@ -34,18 +34,18 @@ public class KogakuOshiraseTsuchiTeshutsuKigenAriEditor implements IKogakuOshira
         source.tsuchibun1 = target.get通知文1();
         source.tsuchibun2 = target.get通知文2();
         if (!target.is空白()) {
-            source.hihokenshaNameKana = ReportUtil.get氏名カナ(target.get申請情報帳票発行一時().getShimeikana());
-            source.hihokenshaName = ReportUtil.get氏名(target.get申請情報帳票発行一時().getMeisho());
-            source.man = target.get申請情報帳票発行一時().getSeibetsuCode();
-            source.birthYMD = ReportUtil.パターン12(target.get申請情報帳票発行一時().getSeinengappiYMD());
-            source.hokenshaNo = ReportUtil.get証記載保険者番号(target.get申請情報帳票発行一時().getShoKisaiHokenshaNoChohyo());
-            source.hihokenshaNo = ReportUtil.get被保険者番号(target.get申請情報帳票発行一時().getHihokenshaNoChohyo());
-            source.taishoYM = ReportUtil.パターン62(target.get申請情報帳票発行一時().getServiceTeikyoYMChohyo());
-            // QAあり
-//        source.zikoFutanGaku = ReportUtil.金額1(target.get申請情報帳票発行一時().getRiyoshaFutanGakuGokeiChohyo());
-//        source.ketteiGaku = 
-//        source.shikyuGaku = 
-            source.kigenYMD = ReportUtil.パターン12(target.get申請書提出期限());
+//            source.hihokenshaNameKana = ReportUtil.get氏名カナ(target.get申請情報帳票発行一時().getShimeikana()); TODO
+//            source.hihokenshaName = ReportUtil.get氏名(target.get申請情報帳票発行一時().getMeisho());
+//            source.man = target.get申請情報帳票発行一時().getSeibetsuCode();
+//            source.birthYMD = ReportUtil.パターン12(target.get申請情報帳票発行一時().getSeinengappiYMD());
+//            source.hokenshaNo = ReportUtil.get証記載保険者番号(target.get申請情報帳票発行一時().getShoKisaiHokenshaNoChohyo());
+//            source.hihokenshaNo = ReportUtil.get被保険者番号(target.get申請情報帳票発行一時().getHihokenshaNoChohyo());
+//            source.taishoYM = ReportUtil.パターン62(target.get申請情報帳票発行一時().getServiceTeikyoYMChohyo());
+//            // QAあり
+////        source.zikoFutanGaku = ReportUtil.金額1(target.get申請情報帳票発行一時().getRiyoshaFutanGakuGokeiChohyo());
+////        source.ketteiGaku =
+////        source.shikyuGaku =
+//            source.kigenYMD = ReportUtil.パターン12(target.get申請書提出期限());
             source.remban = target.get連番();
 
             if (target.get認証者() != null) {
