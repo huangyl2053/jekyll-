@@ -599,12 +599,12 @@ public class RenkeiDataTorikomiBusiness {
         DbT5101NinteiShinseiJohoEntity dbt5101Entity;
         if (登録.equals(kubun)) {
             dbt5101Entity = new DbT5101NinteiShinseiJohoEntity();
+            CountedItem countedItem = Saiban.get(SubGyomuCode.DBE認定支援, new RString("申請書管理番号"));
+            dbt5101Entity.setShinseishoKanriNo(new ShinseishoKanriNo(countedItem.nextString()));
         } else {
             dbt5101Entity = entity.getDbT5101Entity();
         }
         DbT5101TempEntity dbt5101tempEntity = entity.getDbt5101TempEntity();
-        CountedItem countedItem = Saiban.get(SubGyomuCode.DBE認定支援, new RString("申請書管理番号"));
-        dbt5101Entity.setShinseishoKanriNo(new ShinseishoKanriNo(countedItem.nextString()));
         dbt5101Entity.setKoroshoIfShikibetsuCode(getCode(dbt5101tempEntity.get識別コード()));
         dbt5101Entity.setShoKisaiHokenshaNo(dbt5101tempEntity.get保険者番号());
         dbt5101Entity.setHihokenshaNo(dbt5101tempEntity.get被保険者番号());
@@ -644,6 +644,8 @@ public class RenkeiDataTorikomiBusiness {
         DbT5101NinteiShinseiJohoEntity dbt5101Entity;
         if (登録.equals(kubun)) {
             dbt5101Entity = new DbT5101NinteiShinseiJohoEntity();
+            CountedItem countedItem = Saiban.get(SubGyomuCode.DBE認定支援, new RString("申請書管理番号"));
+            dbt5101Entity.setShinseishoKanriNo(new ShinseishoKanriNo(countedItem.nextString()));
         } else {
             dbt5101Entity = entity.getDbT5101Entity();
         }

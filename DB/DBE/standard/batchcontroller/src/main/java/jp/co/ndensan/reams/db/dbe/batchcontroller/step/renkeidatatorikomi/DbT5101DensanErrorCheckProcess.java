@@ -53,9 +53,9 @@ public class DbT5101DensanErrorCheckProcess extends BatchProcessBase<DbT5101Temp
 
     @Override
     protected void process(DbT5101TempEntity entity) {
-        NinteiShinseirenkeiDataInsert service = new NinteiShinseirenkeiDataInsert();
-        if (service.getDbT5101ErrorTempEntity(entity, processParamter) != null) {
-            dbT5101ErrorTemp.insert(service.getDbT5101ErrorTempEntity(entity, processParamter));
+        DbT5101ErrorTempEntity errorEntity = new NinteiShinseirenkeiDataInsert().getDbT5101ErrorTempEntity(entity, processParamter);
+        if (errorEntity != null) {
+            dbT5101ErrorTemp.insert(errorEntity);
             dbT5101Temp.delete(entity);
         }
     }
