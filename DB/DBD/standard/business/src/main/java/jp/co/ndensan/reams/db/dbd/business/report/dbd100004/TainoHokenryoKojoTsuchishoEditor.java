@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.business.report.dbd100004;
 
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.taino.ShiharaiHohoHenkoTaino;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shokankihonjiho.ShokanKihonJihoEntiy;
@@ -46,7 +47,7 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
     private final ChohyoSeigyoKyotsu 帳票制御共通;
     private final Association 地方公共団体;
     private final RString 文書番号;
-    private final List<RString> 通知書定型文リスト;
+    private final Map<Integer, RString> 通知書定型文リスト;
     private final NinshoshaSource 認証者ソースビルダー;
     private final ShiharaiHohoHenko 帳票情報;
     private final List<ShokanKihonJihoEntiy> 償還払集計情報リスト;
@@ -60,14 +61,14 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param 地方公共団体 Association
      * @param 文書番号 RString
-     * @param 通知書定型文リスト List<RString>
+     * @param 通知書定型文リスト Map<Integer, RString>
      * @param 認証者ソースビルダー NinshoshaSource
      * @param 帳票情報 ShiharaiHohoHenko
      * @param 償還払集計情報リスト List<ShokanHaraiShukkeJyoho>
      * @param index int
      */
     public TainoHokenryoKojoTsuchishoEditor(IKojin 個人情報, IAtesaki 宛先, ChohyoSeigyoKyotsu 帳票制御共通,
-            Association 地方公共団体, RString 文書番号, List<RString> 通知書定型文リスト, NinshoshaSource 認証者ソースビルダー,
+            Association 地方公共団体, RString 文書番号, Map<Integer, RString> 通知書定型文リスト, NinshoshaSource 認証者ソースビルダー,
             ShiharaiHohoHenko 帳票情報, List<ShokanKihonJihoEntiy> 償還払集計情報リスト, int index) {
         this.個人情報 = 個人情報;
         this.宛先 = 宛先;
@@ -169,19 +170,15 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
         }
         if (null != 帳票制御共通) {
             RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-            if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty() && 通知書定型文リスト.size() >= 1) {
-                source.tsuchibun1 = 通知書定型文リスト.get(0);
-            }
-            if (null != 通知書定型文リスト && 通知書定型文リスト.size() >= 2) {
-                source.tsuchibun2 = 通知書定型文リスト.get(1);
-            }
-            if (null != 通知書定型文リスト && 通知書定型文リスト.size() >= NOCOUNT_3) {
-                source.tsuchibun3 = 通知書定型文リスト.get(2);
-            }
-            if (null != 通知書定型文リスト && new RString("1").equals(定型文文字サイズ) && 通知書定型文リスト.size() >= NOCOUNT_3) {
-                source.renrakusakiHoka = 通知書定型文リスト.get(NOCOUNT_3);
-            } else {
-                source.renrakusakiHoka = RString.EMPTY;
+            if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
+                source.tsuchibun1 = 通知書定型文リスト.get(1);
+                source.tsuchibun2 = 通知書定型文リスト.get(2);
+                source.tsuchibun3 = 通知書定型文リスト.get(NOCOUNT_3);
+                if (new RString("1").equals(定型文文字サイズ)) {
+                    source.renrakusakiHoka = 通知書定型文リスト.get(NOCOUNT_4);
+                } else {
+                    source.renrakusakiHoka = RString.EMPTY;
+                }
             }
         }
         if (null != 償還払集計情報リスト && 償還払集計情報リスト.size() > index) {
@@ -221,8 +218,8 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
 
     private void setLayerFontLarge(TainoHokenryoKojoTsuchishoReportSource source) {
         RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-        if (null != 通知書定型文リスト && new RString("2").equals(定型文文字サイズ)) {
-            source.renrakusakiHokaLarge = 通知書定型文リスト.get(NOCOUNT_3);
+        if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty() && new RString("2").equals(定型文文字サイズ)) {
+            source.renrakusakiHokaLarge = 通知書定型文リスト.get(NOCOUNT_4);
         } else {
             source.renrakusakiHokaLarge = RString.EMPTY;
         }
@@ -230,9 +227,9 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
 
     private void setLayerFontKonzai(TainoHokenryoKojoTsuchishoReportSource source) {
         RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-        if (null != 通知書定型文リスト && new RString("3").equals(定型文文字サイズ)) {
-            source.renrakusakiHokaJodanSmall = 通知書定型文リスト.get(NOCOUNT_3);
-            source.renrakusakiHokaGedanLarge = 通知書定型文リスト.get(NOCOUNT_4);
+        if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty() && new RString("3").equals(定型文文字サイズ)) {
+            source.renrakusakiHokaJodanSmall = 通知書定型文リスト.get(NOCOUNT_4);
+            source.renrakusakiHokaGedanLarge = 通知書定型文リスト.get(NOCOUNT_5);
         } else {
             source.renrakusakiHokaJodanSmall = RString.EMPTY;
             source.renrakusakiHokaGedanLarge = RString.EMPTY;
@@ -241,9 +238,9 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
 
     private void setLayerFontKonzai2(TainoHokenryoKojoTsuchishoReportSource source) {
         RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-        if (null != 通知書定型文リスト && new RString("4").equals(定型文文字サイズ)) {
-            source.renrakusakiHokaJodanLarge = 通知書定型文リスト.get(NOCOUNT_3);
-            source.renrakusakiHokaGedanSmall = 通知書定型文リスト.get(NOCOUNT_4);
+        if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty() && new RString("4").equals(定型文文字サイズ)) {
+            source.renrakusakiHokaJodanLarge = 通知書定型文リスト.get(NOCOUNT_4);
+            source.renrakusakiHokaGedanSmall = 通知書定型文リスト.get(NOCOUNT_5);
         } else {
             source.renrakusakiHokaJodanLarge = RString.EMPTY;
             source.renrakusakiHokaGedanSmall = RString.EMPTY;

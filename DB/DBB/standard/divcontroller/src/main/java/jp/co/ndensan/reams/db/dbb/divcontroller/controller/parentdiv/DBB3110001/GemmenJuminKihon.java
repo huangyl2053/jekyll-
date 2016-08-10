@@ -5,6 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB3110001;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.NendobunFukaGemmenList;
 import jp.co.ndensan.reams.db.dbb.business.core.gemmen.gemmenjoho.GemmenJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.kaigohokenryogemmen.KaigoHokenryoGemmenParam;
@@ -30,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
@@ -52,6 +56,8 @@ public class GemmenJuminKihon {
 //    private static final RString 処理_登録 = new RString("登録");
     private static final RString 処理_取消 = new RString("取消");
     private static final RString 発行ボタンSHOW = new RString("1");
+    private static final RString 定値_ゼロ = new RString("0");
+    private static final RString 定値_イチ = new RString("1");
 //    private static final RString 入力状況_新規申請 = new RString("新規_申請");
 //    private static final RString 入力状況_新規決定 = new RString("新規_決定");
 //    private static final RString 入力状況_申請中申請 = new RString("申請中_申請");
@@ -89,9 +95,9 @@ public class GemmenJuminKihon {
         } else {
             if (!全賦課履歴データ.isEmpty()) {
                 Fuka 賦課基本 = 全賦課履歴データ.toList().get(0);
-                // TODO 介護賦課基本情報．通知書番号の事件はなし、上記1.3.で取得した全賦課履歴情報．通知書番号を設定。
                 NendobunFukaGemmenListResult 減免リスト = KaigoHokenryoGemmen.createInstance()
-                        .getJokyo(賦課基本.get調定年度(), 賦課基本.get賦課年度(), 賦課基本.get通知書番号(), div.getCcdKaigoFukaKihon().get被保番号());
+                        .getJokyo(賦課基本.get調定年度(), 賦課基本.get賦課年度(),
+                                div.getCcdKaigoFukaKihon().get通知書番号(), div.getCcdKaigoFukaKihon().get被保番号());
                 load(減免リスト, div);
             } else {
                 handler.loadパネル状態2();
@@ -165,7 +171,9 @@ public class GemmenJuminKihon {
         HihokenshaNo 被保険者番号 = 賦課対象者.get被保険者番号();
         FlexibleYear 賦課年度 = 賦課対象者.get賦課年度();
         NendobunFukaGemmenList 年度分賦課減免リスト = ViewStateHolder.get(ViewStateKeys.年度分賦課減免リスト, NendobunFukaGemmenList.class);
-        getHandler(div).計算する(年度分賦課減免リスト, 賦課年度, 被保険者番号);
+        Map<RString, List> map = getHandler(div).計算する(年度分賦課減免リスト, 賦課年度, 被保険者番号);
+        ViewStateHolder.put(ViewStateKeys.減免後の普徴金額LIST, (ArrayList) map.get(定値_ゼロ));
+        ViewStateHolder.put(ViewStateKeys.減免後の特徴と過年度金額LIST, (ArrayList) map.get(定値_イチ));
         return createResponse(div);
     }
 
@@ -224,7 +232,9 @@ public class GemmenJuminKihon {
             FukaTaishoshaKey 賦課対象者 = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
             HihokenshaNo 被保険者番号 = 賦課対象者.get被保険者番号();
             FlexibleYear 賦課年度 = 賦課対象者.get賦課年度();
-            年度分賦課減免リスト = handler.保存前の編集(年度分賦課減免リスト, 賦課年度, 被保険者番号);
+            List<Decimal> 減免後の普徴金額LIST = ViewStateHolder.get(ViewStateKeys.減免後の普徴金額LIST, List.class);
+            List<Decimal> 減免後の特徴と過年度金額LIST = ViewStateHolder.get(ViewStateKeys.減免後の特徴と過年度金額LIST, List.class);
+            年度分賦課減免リスト = handler.保存前の編集(年度分賦課減免リスト, 賦課年度, 被保険者番号, 減免後の普徴金額LIST, 減免後の特徴と過年度金額LIST);
             ViewStateHolder.put(ViewStateKeys.年度分賦課減免リスト, 年度分賦課減免リスト);
             Code 減免種類コード = ViewStateHolder.get(ViewStateKeys.減免種類コード, Code.class);
             Code 取消種類コード = ViewStateHolder.get(ViewStateKeys.取消種類コード, Code.class);

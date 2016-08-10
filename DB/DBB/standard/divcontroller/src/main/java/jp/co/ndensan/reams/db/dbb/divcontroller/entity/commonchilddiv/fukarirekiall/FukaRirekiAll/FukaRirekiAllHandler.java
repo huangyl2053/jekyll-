@@ -134,16 +134,6 @@ public class FukaRirekiAllHandler {
     }
 
     /**
-     * gridの件数を返します。
-     *
-     * @return gridの件数
-     */
-    public int get件数() {
-        List<dgFukaRirekiAll_Row> dataSource = div.getDgFukaRirekiAll().getDataSource();
-        return dataSource == null || dataSource.isEmpty() ? 0 : dataSource.size();
-    }
-
-    /**
      * 選択されている行の賦課履歴を返します。行が選択されていない場合は全賦課履歴を返します。
      *
      * @return 賦課履歴

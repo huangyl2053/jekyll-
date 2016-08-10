@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.business.report.dbd100002;
 
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.taino.ShiharaiHohoHenkoTaino;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100002.ShiharaiHohoHenkoTsuchishoReportSource;
@@ -46,7 +47,7 @@ public class ShiharaiHohoHenkoTsuchishoEditor implements IShiharaiHohoHenkoTsuch
     private final ChohyoSeigyoKyotsu 帳票制御共通;
     private final Association 地方公共団体;
     private final RString 文書番号;
-    private final List<RString> 通知書定型文リスト;
+    private final Map<Integer, RString> 通知書定型文リスト;
     private final NinshoshaSource 認証者ソースビルダー;
     private final ShiharaiHohoHenko 帳票情報;
     private final FlexibleYear 最新賦課年度;
@@ -63,7 +64,7 @@ public class ShiharaiHohoHenkoTsuchishoEditor implements IShiharaiHohoHenkoTsuch
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param 地方公共団体 Association
      * @param 文書番号 RString
-     * @param 通知書定型文リスト List<RString>
+     * @param 通知書定型文リスト Map<Integer, RString>
      * @param 認証者ソースビルダー NinshoshaSource
      * @param 帳票情報 ShiharaiHohoHenko
      * @param 最新賦課年度 FlexibleYear
@@ -73,7 +74,7 @@ public class ShiharaiHohoHenkoTsuchishoEditor implements IShiharaiHohoHenkoTsuch
      * @param index int
      */
     public ShiharaiHohoHenkoTsuchishoEditor(IKojin 個人情報, IAtesaki 宛先, ChohyoSeigyoKyotsu 帳票制御共通,
-            Association 地方公共団体, RString 文書番号, List<RString> 通知書定型文リスト,
+            Association 地方公共団体, RString 文書番号, Map<Integer, RString> 通知書定型文リスト,
             NinshoshaSource 認証者ソースビルダー, ShiharaiHohoHenko 帳票情報, FlexibleYear 最新賦課年度,
             List<ShiharaiHohoHenkoTaino> 年度1リスト, List<ShiharaiHohoHenkoTaino> 年度2リスト,
             List<ShiharaiHohoHenkoTaino> 年度3リスト, int index) {
@@ -185,13 +186,9 @@ public class ShiharaiHohoHenkoTsuchishoEditor implements IShiharaiHohoHenkoTsuch
         }
 
         RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-        if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
-            source.tsuchibun = 通知書定型文リスト.get(0);
-        }
         if (null != 通知書定型文リスト && new RString("1").equals(定型文文字サイズ)) {
-            source.renrakusakiHoka = 通知書定型文リスト.get(1);
-        } else {
-            source.renrakusakiHoka = RString.EMPTY;
+            source.tsuchibun = 通知書定型文リスト.get(NOCOUNT_1);
+            source.renrakusakiHoka = 通知書定型文リスト.get(NOCOUNT_2);
         }
     }
 
@@ -236,9 +233,7 @@ public class ShiharaiHohoHenkoTsuchishoEditor implements IShiharaiHohoHenkoTsuch
         if (null != 帳票制御共通) {
             RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
             if (null != 通知書定型文リスト && new RString("2").equals(定型文文字サイズ)) {
-                source.renrakusakiHokaLarge = 通知書定型文リスト.get(1);
-            } else {
-                source.renrakusakiHokaLarge = RString.EMPTY;
+                source.renrakusakiHokaLarge = 通知書定型文リスト.get(NOCOUNT_2);
             }
         }
     }
@@ -247,11 +242,8 @@ public class ShiharaiHohoHenkoTsuchishoEditor implements IShiharaiHohoHenkoTsuch
         if (null != 帳票制御共通) {
             RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
             if (null != 通知書定型文リスト && new RString("3").equals(定型文文字サイズ)) {
-                source.renrakusakiHokaJodanSmall = 通知書定型文リスト.get(1);
-                source.renrakusakiHokaGedanLarge = 通知書定型文リスト.get(2);
-            } else {
-                source.renrakusakiHokaJodanSmall = RString.EMPTY;
-                source.renrakusakiHokaGedanLarge = RString.EMPTY;
+                source.renrakusakiHokaJodanSmall = 通知書定型文リスト.get(NOCOUNT_2);
+                source.renrakusakiHokaGedanLarge = 通知書定型文リスト.get(NOCOUNT_3);
             }
         }
     }
@@ -260,11 +252,8 @@ public class ShiharaiHohoHenkoTsuchishoEditor implements IShiharaiHohoHenkoTsuch
         if (null != 帳票制御共通) {
             RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
             if (null != 通知書定型文リスト && new RString("4").equals(定型文文字サイズ)) {
-                source.renrakusakiHokaJodanLarge = 通知書定型文リスト.get(1);
-                source.renrakusakiHokaGedanSmall = 通知書定型文リスト.get(2);
-            } else {
-                source.renrakusakiHokaJodanLarge = RString.EMPTY;
-                source.renrakusakiHokaGedanSmall = RString.EMPTY;
+                source.renrakusakiHokaJodanLarge = 通知書定型文リスト.get(NOCOUNT_2);
+                source.renrakusakiHokaGedanSmall = 通知書定型文リスト.get(NOCOUNT_3);
             }
         }
     }

@@ -8,16 +8,17 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.Kyufuseig
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KyufuseigenRirekiList のクラスファイル 
- * 
- * @author 自動生成
+ * KyufuseigenRirekiList のクラスファイル
+ *
+ * @reamsid_L DBC-4350-050 liuxiaoyu
  */
 public class KyufuseigenRirekiListDiv extends Panel implements IKyufuseigenRirekiListDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -75,36 +76,15 @@ public class KyufuseigenRirekiListDiv extends Panel implements IKyufuseigenRirek
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public DataGrid<dgKyufuseigenRirekiList_Row> getDgKyufuseigenRirekiList() {
-        return this.getPnlKyufuseigen().getDgKyufuseigenRirekiList();
-    }
-
-    @JsonIgnore
-    public void  setDgKyufuseigenRirekiList(DataGrid<dgKyufuseigenRirekiList_Row> dgKyufuseigenRirekiList) {
-        this.getPnlKyufuseigen().setDgKyufuseigenRirekiList(dgKyufuseigenRirekiList);
-    }
-
-    @JsonIgnore
-    public pnlButtonDiv getPnlButton() {
-        return this.getPnlKyufuseigen().getPnlButton();
-    }
-
-    @JsonIgnore
-    public void  setPnlButton(pnlButtonDiv pnlButton) {
-        this.getPnlKyufuseigen().setPnlButton(pnlButton);
-    }
-
-    @JsonIgnore
     public Button getBtnClose() {
         return this.getPnlKyufuseigen().getPnlButton().getBtnClose();
     }
 
     @JsonIgnore
-    public void  setBtnClose(Button btnClose) {
+    public void setBtnClose(Button btnClose) {
         this.getPnlKyufuseigen().getPnlButton().setBtnClose(btnClose);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-
 }

@@ -47,7 +47,6 @@
           AND A."logicalDeletedFlag" = False
     </select>
 
-    
     <select id="getIchiGojiHanteiKekkaJoho"
                 resultMap="resultMap_IchiGojiHanteiKekkaJohoEntity" 
                 parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJohoMapperParameter" fetchSize="500" resultOrdered="true">
@@ -101,8 +100,6 @@
           A."shinseishoKanriNo" = #{shinseishoKanriNo}
     </select>
     
-    <!-- @reamsid_L DBE-3000-300 chenxiangyu -->
-    <!-- 2 -->
     <select id="get基本調査項目"
                 resultMap="resultMap_IchiGojiHanteiKekkaJohoEntity" 
                 parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJohoMapperParameter" fetchSize="500" resultOrdered="true">
@@ -126,7 +123,6 @@
           A."remban" ASC
     </select>
     
-<!--     3 -->
     <select id="get主治医意見書項目"
                 resultMap="resultMap_IchiGojiHanteiKekkaJohoEntity" 
                 parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJohoMapperParameter" fetchSize="500" resultOrdered="true">
@@ -151,7 +147,6 @@
           A."remban" ASC
     </select>
     
-     <!--4--> 
     <select id="get認定調査高齢者自立度"
                 resultMap="resultMap_IchiGojiHanteiKekkaJohoEntity" 
                 parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJohoMapperParameter" fetchSize="500" resultOrdered="true">
@@ -174,7 +169,6 @@
           AND (A."koroshoIfShikibetsuCode"='09A' OR A."koroshoIfShikibetsuCode" = '09B')
     </select>
     
-     <!--5--> 
     <select id="get主治医意見書高齢者自立度"
                 resultMap="resultMap_IchiGojiHanteiKekkaJohoEntity" 
                 parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJohoMapperParameter" fetchSize="500" resultOrdered="true">

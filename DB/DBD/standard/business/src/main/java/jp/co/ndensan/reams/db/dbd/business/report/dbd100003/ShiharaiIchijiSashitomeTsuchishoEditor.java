@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.business.report.dbd100003;
 
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.taino.ShiharaiHohoHenkoTaino;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shokankihonjiho.ShokanKihonJihoEntiy;
@@ -48,7 +49,7 @@ public class ShiharaiIchijiSashitomeTsuchishoEditor implements IShiharaiIchijiSa
     private final ChohyoSeigyoKyotsu 帳票制御共通;
     private final Association 地方公共団体;
     private final RString 文書番号;
-    private final List<RString> 通知書定型文リスト;
+    private final Map<Integer, RString> 通知書定型文リスト;
     private final NinshoshaSource 認証者ソースビルダー;
     private final ShiharaiHohoHenko 帳票情報;
     private final List<ShokanKihonJihoEntiy> 償還払集計情報リスト;
@@ -66,7 +67,7 @@ public class ShiharaiIchijiSashitomeTsuchishoEditor implements IShiharaiIchijiSa
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param 地方公共団体 Association
      * @param 文書番号 RString
-     * @param 通知書定型文リスト List<RString>
+     * @param 通知書定型文リスト Map<Integer, RString>
      * @param 認証者ソースビルダー NinshoshaSource
      * @param 帳票情報 ShiharaiHohoHenko
      * @param 償還払集計情報リスト List<ShokanKihonJihoEntiy>
@@ -77,7 +78,7 @@ public class ShiharaiIchijiSashitomeTsuchishoEditor implements IShiharaiIchijiSa
      * @param index int
      */
     public ShiharaiIchijiSashitomeTsuchishoEditor(IKojin 個人情報, IAtesaki 宛先, ChohyoSeigyoKyotsu 帳票制御共通,
-            Association 地方公共団体, RString 文書番号, List<RString> 通知書定型文リスト, NinshoshaSource 認証者ソースビルダー,
+            Association 地方公共団体, RString 文書番号, Map<Integer, RString> 通知書定型文リスト, NinshoshaSource 認証者ソースビルダー,
             ShiharaiHohoHenko 帳票情報, List<ShokanKihonJihoEntiy> 償還払集計情報リスト, FlexibleYear 最新賦課年度,
             List<ShiharaiHohoHenkoTaino> 年度1リスト, List<ShiharaiHohoHenkoTaino> 年度2リスト,
             List<ShiharaiHohoHenkoTaino> 年度3リスト, int index) {
@@ -188,15 +189,13 @@ public class ShiharaiIchijiSashitomeTsuchishoEditor implements IShiharaiIchijiSa
         if (null != 帳票制御共通) {
             RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
             if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
-                source.tsuchibun1 = 通知書定型文リスト.get(0);
-            }
-            if (null != 通知書定型文リスト && 通知書定型文リスト.size() >= 2) {
-                source.tsuchibun2 = 通知書定型文リスト.get(1);
-            }
-            if (null != 通知書定型文リスト && new RString("1").equals(定型文文字サイズ)) {
-                source.renrakusakiHoka = 通知書定型文リスト.get(2);
-            } else {
-                source.renrakusakiHoka = RString.EMPTY;
+                source.tsuchibun1 = 通知書定型文リスト.get(1);
+                source.tsuchibun2 = 通知書定型文リスト.get(2);
+                if (new RString("1").equals(定型文文字サイズ)) {
+                    source.renrakusakiHoka = 通知書定型文リスト.get(NOCOUNT_3);
+                } else {
+                    source.renrakusakiHoka = RString.EMPTY;
+                }
             }
         }
         RString サービス種類コード = RString.EMPTY;
@@ -252,8 +251,8 @@ public class ShiharaiIchijiSashitomeTsuchishoEditor implements IShiharaiIchijiSa
             }
             source.hanteiYMD = 支払方法変更滞納.get滞納判定年月日().wareki().toDateString();
             source.izen_hokenryo = new RString(支払方法変更滞納.get滞納額().toString());
-            if (null != 通知書定型文リスト && 通知書定型文リスト.size() >= 2) {
-                source.tsuchibun2 = 通知書定型文リスト.get(1);
+            if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
+                source.tsuchibun2 = 通知書定型文リスト.get(2);
             }
         }
     }
@@ -261,8 +260,8 @@ public class ShiharaiIchijiSashitomeTsuchishoEditor implements IShiharaiIchijiSa
     private void setLayerFontLarge(ShiharaiIchijiSashitomeTsuchishoReportSource source) {
         if (null != 帳票制御共通) {
             RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-            if (null != 通知書定型文リスト && new RString("2").equals(定型文文字サイズ)) {
-                source.renrakusakiHokaLarge = 通知書定型文リスト.get(2);
+            if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty() && new RString("2").equals(定型文文字サイズ)) {
+                source.renrakusakiHokaLarge = 通知書定型文リスト.get(NOCOUNT_3);
             } else {
                 source.renrakusakiHokaLarge = RString.EMPTY;
             }
@@ -272,9 +271,9 @@ public class ShiharaiIchijiSashitomeTsuchishoEditor implements IShiharaiIchijiSa
     private void setLayerFontKonzai(ShiharaiIchijiSashitomeTsuchishoReportSource source) {
         if (null != 帳票制御共通) {
             RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-            if (null != 通知書定型文リスト && new RString("3").equals(定型文文字サイズ)) {
-                source.renrakusakiHokaJodanSmall = 通知書定型文リスト.get(2);
-                source.renrakusakiHokaGedanLarge = 通知書定型文リスト.get(NOCOUNT_3);
+            if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty() && new RString("3").equals(定型文文字サイズ)) {
+                source.renrakusakiHokaJodanSmall = 通知書定型文リスト.get(NOCOUNT_3);
+                source.renrakusakiHokaGedanLarge = 通知書定型文リスト.get(NOCOUNT_4);
             } else {
                 source.renrakusakiHokaJodanSmall = RString.EMPTY;
                 source.renrakusakiHokaGedanLarge = RString.EMPTY;
@@ -285,9 +284,9 @@ public class ShiharaiIchijiSashitomeTsuchishoEditor implements IShiharaiIchijiSa
     private void setLayerFontKonzai2(ShiharaiIchijiSashitomeTsuchishoReportSource source) {
         if (null != 帳票制御共通) {
             RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-            if (null != 通知書定型文リスト && new RString("4").equals(定型文文字サイズ)) {
-                source.renrakusakiHokaJodanLarge = 通知書定型文リスト.get(2);
-                source.renrakusakiHokaGedanSmall = 通知書定型文リスト.get(NOCOUNT_3);
+            if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty() && new RString("4").equals(定型文文字サイズ)) {
+                source.renrakusakiHokaJodanLarge = 通知書定型文リスト.get(NOCOUNT_3);
+                source.renrakusakiHokaGedanSmall = 通知書定型文リスト.get(NOCOUNT_4);
             } else {
                 source.renrakusakiHokaJodanLarge = RString.EMPTY;
                 source.renrakusakiHokaGedanSmall = RString.EMPTY;

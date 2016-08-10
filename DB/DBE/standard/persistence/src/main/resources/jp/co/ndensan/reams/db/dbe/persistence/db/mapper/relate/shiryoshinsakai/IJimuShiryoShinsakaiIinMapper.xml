@@ -125,6 +125,7 @@
                 dbt5101."shoKisaiHokenshaNo",
                 dbt5101."hihokenshaNo" ,
                 dbt5101."hihokenshaName" ,
+                , dbt5101."koroshoIfShikibetsuCode"
                 dbt5101."ninteiShinseiYMD" ,
                 dbt5202."ninteichosaJisshiYMD",
                 dbt5502."shinsakaiKaisaiYMD",
@@ -182,6 +183,7 @@
         <result property="riyoShisetsuJusho" column="riyoShisetsuJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="riyoShisetsuTelNo" column="riyoShisetsuTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="imageSharedFileId" column="imageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler" />
+        <result property="koroshoIfShikibetsuCode" column="imageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
     </resultMap>
 
     <select id="get事務局情報件数" resultType="java.lang.Integer"
@@ -383,8 +385,8 @@
         FROM					
                 rgdb."DbT5205NinteichosahyoTokkijiko" AS dbt5205				
         WHERE					
-            dbt5205."shinseishoKanriNo" IN <foreach collection="shinseishoNo" item="shinseishoKanriNo" open="(" separator="," close=")"> #{shinseishoKanriNoList} </foreach>				
-        AND dbt5205."ninteichosaRirekiNo" IN <foreach collection="ninteichosaNo" item="ninteichosaRirekiNo" open="(" separator="," close=")"> #{ninteichosaRirekiNoList} </foreach>					
+            dbt5205."shinseishoKanriNo" IN <foreach collection="shinseishoKanriNoList" item="shinseishoKanriNoList" open="(" separator="," close=")"> #{shinseishoKanriNoList} </foreach>				
+        AND dbt5205."ninteichosaRirekiNo" IN <foreach collection="shinseishoKanriNoList" item="ninteichosaRirekiNoList" open="(" separator="," close=")"> #{ninteichosaRirekiNoList} </foreach>					
         AND NOT EXISTS (SELECT 'X' 					
                                         FROM	
                                                 rgdb."DbT5205NinteichosahyoTokkijiko" AS B1
@@ -394,10 +396,11 @@
                                         AND dbt5205."ninteichosaTokkijikoRemban" = B1."ninteichosaTokkijikoRemban"	
                                         AND dbt5205."tokkijikoTextImageKubun" = B1."tokkijikoTextImageKubun"	
                                         AND dbt5205."genponMaskKubun" = B1."genponMaskKubun"	
+                                        AND dbt5205."ninteichosaRirekiNo" <![CDATA[<]]> B1."ninteichosaRirekiNo"	
                                         )	
         AND dbt5205."genponMaskKubun" = #{genponMaskKubun}					
         ORDER BY					
-                dbt5205."ninteichosaTokkijikoNo"				
+                dbt5205."ninteichosaTokkijikoNo",			
                 dbt5205."ninteichosaTokkijikoRemban"				
     </select>
     <resultMap id="Result_事務局特記情報" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity" autoMapping="true">
@@ -1264,7 +1267,7 @@
               LEFT JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101ZenZenkai
               ON dbt5121ZenZenkai."zenkaiShinseishoKanriNo" = dbt5101ZenZenkai."shinseishoKanriNo"
               LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" dbt5102ZenZenkai
-              ON dbt5102ZenZenkai."shinseishoKanriNo" = dbt5102ZenZenkai"shinseishoKanriNo"
+              ON dbt5102ZenZenkai."shinseishoKanriNo" = dbt5101ZenZenkai"shinseishoKanriNo"
         WHERE
             dbt5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
             AND dbt5502."shinsakaiOrderKakuteiFlag" =#{isOrderKakuteiFlg}

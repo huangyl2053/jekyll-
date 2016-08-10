@@ -33,4 +33,16 @@ public class JigyohokokuCompResultEntity {
     private int 要介護５;
     private int 計２;
     private int 合計;
+    private int 要支援１＿１;
+    private int 要支援２＿１;
+    private int 計１＿１;
+    private int 非該当＿１;
+    private int 経過的要介護＿１;
+    private int 要介護１＿１;
+    private int 要介護２＿１;
+    private int 要介護３＿１;
+    private int 要介護４＿１;
+    private int 要介護５＿１;
+    private int 計２＿１;
+    private int 合計＿１;
 }

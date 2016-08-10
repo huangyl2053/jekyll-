@@ -19,8 +19,6 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuShins
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuShinsakaiIinJohoDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuSonotaJohoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuSonotaJohoDataSakuseiA4Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuTokkiJikouDataSakuseiA3Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuTokkiJikouDataSakuseiA42Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuTokkiJikouDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuTuikaSiryoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuTuikaSiryoDataSakuseiA4Process;
@@ -45,12 +43,15 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
     private static final String 事務局_追加資料鑑 = "jimuTuikaSiryo";
     private static final String 事務局_予備判定一覧 = "jimuHantei";
     private static final String 事務局_その他資料 = "jimuSonotaJoho";
-    private static final String 事務局_主治医意見書 = "jimuIkensho";
+    private static final String 事務局_主治医意見書_1枚目 = "jimuIkensho_1";
+    private static final String 事務局_主治医意見書_2枚目以降 = "jimuIkensho_2";
+    private static final String 事務局_主治医意見書_A3 = "jimuIkensho";
     private static final String 事務局_概況特記一覧表 = "jimuGaikyouTokkiIran";
     private static final String 事務局_一次判定結果 = "jimuItiziHantei";
     private static final String 事務局_特記事項_一次判定結果 = "jimuTokkiJikouItiziHantei";
     private static final String 事務局_特記事項 = "jimuTokkiJikou";
     private static final String 事務局_概況特記 = "jimuTokkiIran";
+    private static final String 事務局_概況特記その他 = "jimuGaikyotokkiSonota";
     private static final RString 選択 = new RString("1");
     private static final RString テキスト = new RString("1");
     private static final RString 作成条件_追加分 = new RString("追加分");
@@ -67,7 +68,12 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
             executeStep(事務局_その他資料);
         }
         if (選択.equals(getParameter().getChoyoJimu_ikenshoFalg())) {
-            executeStep(事務局_主治医意見書);
+            if (選択.equals(getParameter().getShuturyokuSutairu())) {
+                executeStep(事務局_主治医意見書_1枚目);
+                executeStep(事務局_主治医意見書_2枚目以降);
+            } else {
+                executeStep(事務局_主治医意見書_A3);
+            }
         }
         if (選択.equals(getParameter().getChoyoJimu_gaikyouTokkiIranFalg())) {
             executeStep(事務局_概況特記一覧表);
@@ -77,6 +83,7 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
         }
         if (選択.equals(getParameter().getChoyoJimu_gaikyouTokkiFalg())) {
             executeStep(事務局_概況特記);
+            executeStep(事務局_概況特記その他);
         }
         if (選択.equals(getParameter().getChoyoJimu_taishoushaFalg())) {
             executeStep(事務局_特記事項);
@@ -153,17 +160,33 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
      *
      * @return バッチコマンド
      */
-    @Step(事務局_主治医意見書)
-    protected IBatchFlowCommand createJimuIkenshoData() {
-        if (選択.equals(getParameter().getShuturyokuSutairu())) {
-            loopBatch(JimuIkenshoDataSakuseiA4Process.class)
-                    .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
-            return loopBatch(JimuIkenshoDataSakuseiA42Process.class)
-                    .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
-        } else {
-            return loopBatch(JimuIkenshoDataSakuseiA3Process.class)
-                    .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
-        }
+    @Step(事務局_主治医意見書_1枚目)
+    protected IBatchFlowCommand createJimuIkenshoData_A4_1() {
+        return loopBatch(JimuIkenshoDataSakuseiA4Process.class)
+                .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
+    }
+
+    /**
+     * 事務局用主治医意見書情報データの作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(事務局_主治医意見書_2枚目以降)
+    protected IBatchFlowCommand createJimuIkenshoData_A4_2() {
+        // TODO　凌護行 主治医意見書2枚目の出力方法が不正です。　
+        return loopBatch(JimuIkenshoDataSakuseiA42Process.class)
+                .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
+    }
+
+    /**
+     * 事務局用主治医意見書情報データの作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(事務局_主治医意見書_A3)
+    protected IBatchFlowCommand createJimuIkenshoData_A3() {
+        return loopBatch(JimuIkenshoDataSakuseiA3Process.class)
+                .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
     }
 
     /**
@@ -200,8 +223,17 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
      */
     @Step(事務局_概況特記)
     protected IBatchFlowCommand createJimuTokkiIranData() {
-        loopBatch(JimuGaikyotokkiDataSakuseiA4Process.class)
+        return loopBatch(JimuGaikyotokkiDataSakuseiA4Process.class)
                 .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
+    }
+
+    /**
+     * 事務局概況特記情報データの作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(事務局_概況特記その他)
+    protected IBatchFlowCommand createJimuGaikyotokkiSonotaData() {
         return loopBatch(JimuGaikyotokkiSonotaJohoDataSakuseiA4Process.class)
                 .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
     }
@@ -213,10 +245,11 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
      */
     @Step(事務局_特記事項_一次判定結果)
     protected IBatchFlowCommand createJimuTokkiJikouItiziHanteiData() {
-        loopBatch(JimuItiziHanteiDataSakuseiA3Process.class)
+        return loopBatch(JimuItiziHanteiDataSakuseiA3Process.class)
                 .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
-        return loopBatch(JimuTokkiJikouDataSakuseiA3Process.class)
-                .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
+        // TODO　凌護行 特記事項2枚目の出力方法が不正です。　　
+//         loopBatch(JimuTokkiJikouDataSakuseiA3Process.class)
+//                .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
     }
 
     /**
@@ -226,15 +259,10 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
      */
     @Step(事務局_特記事項)
     protected IBatchFlowCommand createJimuTokkiJikouData() {
-        // TODO 特記事項A3の実装しない。　
-//        if (選択.equals(getParameter().getShuturyokuSutairu())) {
-        loopBatch(JimuTokkiJikouDataSakuseiA4Process.class)
+        return loopBatch(JimuTokkiJikouDataSakuseiA4Process.class)
                 .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
-        return loopBatch(JimuTokkiJikouDataSakuseiA42Process.class)
-                .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
-//        } else {
-//            return loopBatch(JimuTokkiJikouDataSakuseiA32Process.class)
-//                    .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
-//        }
+        // TODO　凌護行 特記事項2枚目の出力方法が不正です。　　
+//        return loopBatch(JimuTokkiJikouDataSakuseiA42Process.class)
+//                .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
     }
 }

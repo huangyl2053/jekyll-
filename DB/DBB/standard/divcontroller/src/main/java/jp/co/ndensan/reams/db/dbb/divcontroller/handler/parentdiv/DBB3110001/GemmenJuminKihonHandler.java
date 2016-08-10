@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB3110001;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.KibetsuGemmenList;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.NendobunFukaGemmenList;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.CalculateChoteiParameter;
@@ -84,8 +86,6 @@ public class GemmenJuminKihonHandler {
     private final KitsukiList 特徴期月リスト = new TokuchoKiUtil().get期月リスト();
     private final KitsukiList 普徴期月リスト = new FuchoKiUtil().get期月リスト();
     private final KitsukiList 過年度期月リスト = new KanendoKiUtil().get期月リスト();
-    private static List<Decimal> 減免後の普徴金額LIST;
-    private static List<Decimal> 減免後の特徴と過年度金額LIST;
     private static final int ゼロ_定値 = 0;
     private static final int イチ_定値 = 1;
     private static final int 二_定値 = 2;
@@ -166,8 +166,7 @@ public class GemmenJuminKihonHandler {
      */
     public IItemList<Fuka> load全賦課履歴情報グリッド(HihokenshaNo 被保険者番号, FukaNendo 賦課年度) {
         IFukaRirekiAllDiv 全賦課履歴 = div.getGemmenFukaRirekiAll().getCcdFukaRirekiAll();
-        全賦課履歴.load(被保険者番号, 賦課年度);
-        int 件数 = 全賦課履歴.get件数();
+        int 件数 = 全賦課履歴.load(被保険者番号, 賦課年度);
         if (件数 < 二_定値) {
             return 件数 == ゼロ_定値 ? null : 全賦課履歴.get賦課履歴().get賦課履歴All();
         }
@@ -183,7 +182,7 @@ public class GemmenJuminKihonHandler {
     public RString load状況情報パネル(GemmenJoho 最新減免の情報) {
         RString 減免作成区分;
         RString 状況;
-        if (最新減免の情報 == null) {
+        if (最新減免の情報 == null || 最新減免の情報.getGemmenList().isEmpty()) {
             状況 = 状況_新規;
         } else {
             減免作成区分 = 最新減免の情報.get減免作成区分();
@@ -198,6 +197,7 @@ public class GemmenJuminKihonHandler {
             状況情報パネル.getBtnTesei().setDisplayNone(true);
             状況情報パネル.getBtnTorikeshi().setDisabled(false);
         } else if (状況_決定済.equals(状況)) {
+            状況情報パネル.getBtnTesei().setDisplayNone(false);
             状況情報パネル.getBtnTesei().setDisabled(false);
             状況情報パネル.getBtnTorikeshi().setDisabled(false);
         }
@@ -914,8 +914,9 @@ public class GemmenJuminKihonHandler {
      * @param 年度分賦課減免リスト NendobunFukaGemmenList
      * @param 被保険者番号 HihokenshaNo
      * @param 賦課年度 FlexibleYear
+     * @return map Map<RString, List>
      */
-    public void 計算する(NendobunFukaGemmenList 年度分賦課減免リスト, FlexibleYear 賦課年度, HihokenshaNo 被保険者番号) {
+    public Map<RString, List> 計算する(NendobunFukaGemmenList 年度分賦課減免リスト, FlexibleYear 賦課年度, HihokenshaNo 被保険者番号) {
         CalculateChoteiParameter para = new CalculateChoteiParameter();
         para.set賦課年度(年度分賦課減免リスト.get賦課年度());
         para.set調定日時(YMDHMS.now());
@@ -931,11 +932,23 @@ public class GemmenJuminKihonHandler {
         // TODO QA1115  パラメータを不正です。
 //        TokuchoIraiJohoSakuseiJokyo.createInstance().find年度内処理状況()
         KoseiShorikoaResult 計算結果 = FukaKeisan.createInstance().do調定計算(para);
+
+        // TODO test用
+//        NendobunFukaList 年度分賦課リスト_更正後 = new NendobunFukaList();
+//        FukaJohoRelateMapperParameter parame = FukaJohoRelateMapperParameter
+//        new FlexibleYear("2011").createSelectByKeyParam(new FlexibleYear("2011"), new FlexibleYear("2011"), new TsuchishoNo("11111111"), 2);
+//        FukaJoho 現年度 = FukaJohoManager.createInstance().get賦課の情報(parame);
+//        年度分賦課リスト_更正後.set現年度(現年度);
+//        KoseiShorikoaResult 計算結果 = new KoseiShorikoaResult(年度分賦課リスト_更正後, null, null);
         // TODO QA1115  設定値は不正です。
-        set減免後普通徴収グリッド(計算結果);
-        set減免後特別徴収グリッド(計算結果);
+        List<Decimal> 減免後の普徴金額LIST = set減免後普通徴収グリッド(計算結果);
+        List<Decimal> 減免後の特徴と過年度金額LIST = set減免後特別徴収グリッド(計算結果);
+        Map<RString, List> map = new HashMap<>();
+        map.put(定値_ゼロ, 減免後の普徴金額LIST);
+        map.put(定値_イチ, 減免後の特徴と過年度金額LIST);
         set減免後過年度情報グリッド1(計算結果);
         set減免後過年度情報グリッド2(計算結果);
+        return map;
     }
 
     private void set減免後過年度情報グリッド1(KoseiShorikoaResult 計算結果) {
@@ -944,7 +957,7 @@ public class GemmenJuminKihonHandler {
         }
         FukaJoho 過年度1 = 計算結果.get年度分賦課リスト_更正後().get過年度1();
         KiwarigakuKanendo1Div 過年度1パネル = div.getGemmenMain().getKiwarigaku().getKiwarigakuKanendo1();
-        // TODO 期は一です。
+        // TODO 期は一もです。
         RString 期_4月 = 過年度期月リスト.get月の期(Tsuki._4月).get期();
         Decimal 普徴期別金額_4月 = get減免前普徴期別金額(期_4月, 過年度1);
         if (普徴期別金額_4月 != null) {
@@ -965,9 +978,9 @@ public class GemmenJuminKihonHandler {
         }
     }
 
-    private void set減免後特別徴収グリッド(KoseiShorikoaResult 計算結果) {
+    private List<Decimal> set減免後特別徴収グリッド(KoseiShorikoaResult 計算結果) {
         if (計算結果 == null || 計算結果.get年度分賦課リスト_更正後() == null || 計算結果.get年度分賦課リスト_更正後().get現年度() == null) {
-            return;
+            return null;
         }
         FukaJoho 現年度 = 計算結果.get年度分賦課リスト_更正後().get現年度();
         KiwarigakuPanel1Div 減免情報パネル = div.getGemmenMain().getKiwarigaku().getKiwarigakuPanel1();
@@ -983,6 +996,7 @@ public class GemmenJuminKihonHandler {
         Decimal 特徴期別金額_10月 = get減免前特徴期別金額(期_10月, 現年度);
         Decimal 特徴期別金額_12月 = get減免前特徴期別金額(期_12月, 現年度);
         Decimal 特徴期別金額_2月 = get減免前特徴期別金額(期_2月, 現年度);
+        List<Decimal> 減免後の特徴と過年度金額LIST = new ArrayList<>();
         減免後の特徴と過年度金額LIST.add(特徴期別金額_4月);
         減免後の特徴と過年度金額LIST.add(特徴期別金額_6月);
         減免後の特徴と過年度金額LIST.add(特徴期別金額_8月);
@@ -1015,11 +1029,12 @@ public class GemmenJuminKihonHandler {
             減免情報パネル.getLblTokuchoGemmemGo6().setText(DecimalFormatter.toコンマ区切りRString(特徴期別金額_2月, ゼロ_定値));
         }
         減免情報パネル.getLblTokuchoGemmemGoTotal().setText(DecimalFormatter.toコンマ区切りRString(特別徴収_合計, ゼロ_定値));
+        return 減免後の特徴と過年度金額LIST;
     }
 
-    private void set減免後普通徴収グリッド(KoseiShorikoaResult 計算結果) {
+    private List<Decimal> set減免後普通徴収グリッド(KoseiShorikoaResult 計算結果) {
         if (計算結果 == null || 計算結果.get年度分賦課リスト_更正後() == null || 計算結果.get年度分賦課リスト_更正後().get現年度() == null) {
-            return;
+            return null;
         }
         FukaJoho 現年度 = 計算結果.get年度分賦課リスト_更正後().get現年度();
         KiwarigakuPanel1Div 減免情報パネル = div.getGemmenMain().getKiwarigaku().getKiwarigakuPanel1();
@@ -1051,6 +1066,7 @@ public class GemmenJuminKihonHandler {
         Decimal 普徴期別金額_3月 = get減免前普徴期別金額(期_3月, 現年度);
         Decimal 普徴期別金額_翌年4月 = get減免前普徴期別金額(期_翌年4月, 現年度);
         Decimal 普徴期別金額_翌年5月 = get減免前普徴期別金額(期_翌年5月, 現年度);
+        List<Decimal> 減免後の普徴金額LIST = new ArrayList<>();
         減免後の普徴金額LIST.add(普徴期別金額_4月);
         減免後の普徴金額LIST.add(普徴期別金額_5月);
         減免後の普徴金額LIST.add(普徴期別金額_6月);
@@ -1069,6 +1085,7 @@ public class GemmenJuminKihonHandler {
                 普徴期別金額_8月, 普徴期別金額_9月, 普徴期別金額_10月, 普徴期別金額_11月, 普徴期別金額_12月, 普徴期別金額_1月,
                 普徴期別金額_2月, 普徴期別金額_3月, 普徴期別金額_翌年4月, 普徴期別金額_翌年5月, 減免情報パネル);
         減免情報パネル.getLblFuchoGemmemGoTotal().setText(DecimalFormatter.toコンマ区切りRString(普通徴収_合計, ゼロ_定値));
+        return 減免後の普徴金額LIST;
     }
 
     /**
@@ -1177,9 +1194,12 @@ public class GemmenJuminKihonHandler {
      * @param 年度分賦課減免リスト NendobunFukaGemmenList
      * @param 賦課年度 FlexibleYear
      * @param 被保険者番号 HihokenshaNo
+     * @param 減免後の普徴金額LIST List<Decimal>
+     * @param 減免後の特徴と過年度金額LIST List<Decimal>
      * @return 年度分賦課減免リストと徴収方法の情報 NendobunFukaGemmenListResult
      */
-    public NendobunFukaGemmenList 保存前の編集(NendobunFukaGemmenList 年度分賦課減免リスト, FlexibleYear 賦課年度, HihokenshaNo 被保険者番号) {
+    public NendobunFukaGemmenList 保存前の編集(NendobunFukaGemmenList 年度分賦課減免リスト, FlexibleYear 賦課年度,
+            HihokenshaNo 被保険者番号, List<Decimal> 減免後の普徴金額LIST, List<Decimal> 減免後の特徴と過年度金額LIST) {
         GemmenJoho 最新減免の情報 = 年度分賦課減免リスト.get最新減免の情報();
         RString 状況 = div.getGemmenMain().getShinseiJokyo().getTxtShinseiJokyo().getValue();
         RString 状況区分 = 空;
@@ -1214,17 +1234,18 @@ public class GemmenJuminKihonHandler {
                 今回作成区分 = 定値_ゼロ;
             }
         }
-        年度分賦課減免リスト = set年度分賦課減免リスト(今回状態区分, 今回作成区分,
-                最新減免の情報, 年度分賦課減免リスト, 賦課年度, 被保険者番号, 状況区分, 今回状態区分);
+        年度分賦課減免リスト = set年度分賦課減免リスト(今回状態区分, 今回作成区分, 最新減免の情報, 年度分賦課減免リスト,
+                賦課年度, 被保険者番号, 状況区分, 今回状態区分, 減免後の普徴金額LIST, 減免後の特徴と過年度金額LIST);
         return 年度分賦課減免リスト;
     }
 
     private NendobunFukaGemmenList set年度分賦課減免リスト(RString 今回状態区分, RString 今回作成区分,
             GemmenJoho 最新減免の情報, NendobunFukaGemmenList 年度分賦課減免リスト, FlexibleYear 賦課年度,
-            HihokenshaNo 被保険者番号, RString 状況区分, RString 前回状態区分) {
+            HihokenshaNo 被保険者番号, RString 状況区分, RString 前回状態区分,
+            List<Decimal> 減免後の普徴金額LIST, List<Decimal> 減免後の特徴と過年度金額LIST) {
         if ((定値_イチ.equals(今回状態区分) && 定値_イチ.equals(今回作成区分))
                 || (定値_イチ.equals(今回状態区分) && 定値_ヨ.equals(今回作成区分))) {
-            最新減免の情報 = set調定額(最新減免の情報);
+            最新減免の情報 = set調定額(最新減免の情報, 減免後の普徴金額LIST, 減免後の特徴と過年度金額LIST);
             年度分賦課減免リスト.set最新減免の情報(最新減免の情報);
         } else if ((定値_イチ.equals(今回状態区分) && 定値_ミ.equals(今回作成区分))
                 || (定値_二.equals(状況区分) && 定値_イチ.equals(前回状態区分)
@@ -1390,7 +1411,7 @@ public class GemmenJuminKihonHandler {
         return KaigoHokenryoGemmen.createInstance().publish(通知書発行パラメータ);
     }
 
-    private GemmenJoho set調定額(GemmenJoho 最新減免の情報) {
+    private GemmenJoho set調定額(GemmenJoho 最新減免の情報, List<Decimal> 減免後の普徴金額LIST, List<Decimal> 減免後の特徴と過年度金額LIST) {
         GemmenJohoBuilder builder = 最新減免の情報.createBuilderForEdit();
         RString 期_4月 = 普徴期月リスト.get月の期(Tsuki._4月).get期();
         RString 期_5月 = 普徴期月リスト.get月の期(Tsuki._5月).get期();

@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 /**
  *
  * 【共有子Div】 免除解除・再転入ダイアログのHandlerです。
+ *
+ * @reamsid_L DBD-3620-044 panxiaobo
  */
 public class MenjoKaijoSaiTennyuHandler {
 

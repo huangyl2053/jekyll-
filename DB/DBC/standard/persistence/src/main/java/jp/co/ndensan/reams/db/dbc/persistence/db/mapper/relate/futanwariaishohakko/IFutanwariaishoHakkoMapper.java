@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaishohakko.Futa
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaishohakko.RiyoshaFutanwariaishoTempEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 
 /**
  * バッチ設計_DBCMNK3001_負担割合証発行（一括）Mapperクラスです。
@@ -41,4 +42,12 @@ public interface IFutanwariaishoHakkoMapper {
      * @return {@link List<RiyoshaFutanwariaishoTempEntity>}
      */
     List<RiyoshaFutanwariaishoTempEntity> select利用者負担割合証(FutanwariaishoHakkoMybatisParameter para);
+
+    /**
+     * 帳票制御汎用キー取得です。
+     *
+     * @param para {@link FutanwariaishoHakkoMybatisParameter}
+     * @return {@link RiyoshaFutanwariaishoTempEntity}
+     */
+    DbT7067ChohyoSeigyoHanyoEntity select帳票制御汎用キー(FutanwariaishoHakkoMybatisParameter para);
 }

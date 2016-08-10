@@ -89,7 +89,7 @@ public class NinteiShoJohoFinder {
         if (bushoNo != null) {
             RString 文書番号記号 = bushoNo.get文書番号記号();
             RString 文書番号固定文字 = bushoNo.get文書番号固定文字();
-            文書番号 = new RStringBuilder(文書番号記号).
+            文書番号 = new RStringBuilder().append(文書番号記号).
                     append(new RString("第")).
                     append(文書番号固定文字).
                     append(new RString("号")).toRString();
@@ -121,20 +121,20 @@ public class NinteiShoJohoFinder {
      */
     @Transaction
     public NinteishoJohoEntity set障がい者控除と認定年月日(HihokenshaNo 被保険者番号) {
-        DbT4001JukyushaDaichoEntity DbT4001entity = 受給者台帳dac.select認定年月日(被保険者番号);
-        DbT4038ShogaishaKoujoEntity DbT4038entity = 障がい者控除dac.selectAll(被保険者番号);
-        if (DbT4001entity == null) {
+        DbT4001JukyushaDaichoEntity dbT4001entity = 受給者台帳dac.select認定年月日(被保険者番号);
+        DbT4038ShogaishaKoujoEntity dbT4038entity = 障がい者控除dac.selectAll(被保険者番号);
+        if (dbT4001entity == null) {
             return null;
         }
-        DbT4001entity.initializeMd5();
-        ninteishoJohoentity.set要介護認定日(DbT4001entity.getNinteiYMD());
-        if (DbT4038entity == null) {
+        dbT4001entity.initializeMd5();
+        ninteishoJohoentity.set要介護認定日(dbT4001entity.getNinteiYMD());
+        if (dbT4038entity == null) {
             return null;
         }
-        DbT4038entity.initializeMd5();
-        ninteishoJohoentity.set障害理由区分(DbT4038entity.getNinteiKubun());
-        ninteishoJohoentity.set障害理由内容(DbT4038entity.getNinteiNaiyo());
-        ninteishoJohoentity.set申告年(new RDate(DbT4038entity.getTaishoNendo().toString()));
+        dbT4038entity.initializeMd5();
+        ninteishoJohoentity.set障害理由区分(dbT4038entity.getNinteiKubun());
+        ninteishoJohoentity.set障害理由内容(dbT4038entity.getNinteiNaiyo());
+        ninteishoJohoentity.set申告年(new RDate(dbT4038entity.getTaishoNendo().toString()));
         return ninteishoJohoentity;
     }
 
@@ -157,7 +157,7 @@ public class NinteiShoJohoFinder {
         target.set電子公印(ninshoshaSource.denshiKoin);
         target.set申請者住所(target.getNinteishoJohoEntity().get申請者住所());
         if (target.getNinteishoJohoEntity().get申請者住所() == null && target.getNinteishoJohoEntity().get申請者住所().isEmpty()) {
-            target.set申請者住所(new RStringBuilder(target.getNinteishoJohoEntity().getPsmEntity().getJusho().getColumnValue()).
+            target.set申請者住所(new RStringBuilder().append(target.getNinteishoJohoEntity().getPsmEntity().getJusho().getColumnValue()).
                     append(target.getNinteishoJohoEntity().getPsmEntity().getBanchi().getColumnValue()).
                     append(target.getNinteishoJohoEntity().getPsmEntity().getKatagaki().getColumnValue()).toRString());
         }

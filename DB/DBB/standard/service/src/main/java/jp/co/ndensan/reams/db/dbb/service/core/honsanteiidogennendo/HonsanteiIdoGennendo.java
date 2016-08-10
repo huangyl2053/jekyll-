@@ -57,20 +57,20 @@ public class HonsanteiIdoGennendo {
     private final RString zFourRS = new RString("0004");
     private final RString zFiveRS = new RString("0005");
     private final RString zSixRS = new RString("0006");
-    private final int INDEX_1 = 1;
-    private final int INDEX_2 = 2;
-    private final int INDEX_3 = 3;
-    private final int INDEX_4 = 4;
-    private final int INDEX_5 = 5;
-    private final int INDEX_6 = 6;
-    private final int INDEX_7 = 7;
-    private final int INDEX_8 = 8;
-    private final int INDEX_9 = 9;
-    private final int INDEX_10 = 10;
-    private final int INDEX_11 = 11;
-    private final int INDEX_12 = 12;
-    private final int INDEX_13 = 13;
-    private final int INDEX_14 = 14;
+    private static final int INDEX_1 = 1;
+    private static final int INDEX_2 = 2;
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
+    private static final int INDEX_6 = 6;
+    private static final int INDEX_7 = 7;
+    private static final int INDEX_8 = 8;
+    private static final int INDEX_9 = 9;
+    private static final int INDEX_10 = 10;
+    private static final int INDEX_11 = 11;
+    private static final int INDEX_12 = 12;
+    private static final int INDEX_13 = 13;
+    private static final int INDEX_14 = 14;
     private final RString 追加候補者用通知書タイプ = new RString("追加候補者用通知書タイプ");
     private final RString 追加候補者用連帳区分 = new RString("追加候補者用連帳区分");
     private final RString tokubetsuB5RenchoRS
@@ -242,13 +242,16 @@ public class HonsanteiIdoGennendo {
      * @return ShoriDateKanri
      */
     public ShoriDateKanri getChushutsuKaishiNichiji(FlexibleYear 調定年度) {
-        List<DbT7022ShoriDateKanriEntity> kanriEntityList = new ArrayList<>();
         DbT7022ShoriDateKanriEntity kanriEntity = 処理日付管理Dac.selectByFourKeys(SubGyomuCode.DBB介護賦課,
                 ShoriName.異動賦課.get名称(), 処理_枝番, 調定年度);
         if (kanriEntity == null) {
-            kanriEntityList = 処理日付管理Dac.selectBySomeKeys(SubGyomuCode.DBB介護賦課, ShoriName.本算定賦課.get名称(), 処理_枝番, 調定年度, 処理_枝番);
+            List<DbT7022ShoriDateKanriEntity> kanriEntityList = 処理日付管理Dac
+                    .selectBySomeKeys(SubGyomuCode.DBB介護賦課, ShoriName.本算定賦課.get名称(), 処理_枝番, 調定年度, 処理_枝番);
+            if (kanriEntityList != null) {
+                return new ShoriDateKanri(kanriEntityList.get(0));
+            }
         }
-        return new ShoriDateKanri(kanriEntityList.get(0));
+        return new ShoriDateKanri(kanriEntity);
     }
 
     /**
