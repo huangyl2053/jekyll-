@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishorenchoyoko.FutanWa
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- * 帳票設計_DBC100065_負担割合証（カット紙）IBuilderのインターフェースクラスです。
+ * 帳票設計_DBC100067_負担割合証（連帳・横）IBuilderのインターフェースクラスです。
  *
- * @reamsid_L DBC-4990-040 pengxingyi
+ * @reamsid_L DBC-4990-060 pengxingyi
  */
 interface IFutanWariaiShoRenchoYokoBuilder extends IReportBuilder<FutanWariaiShoRenchoYokoSource> {
 

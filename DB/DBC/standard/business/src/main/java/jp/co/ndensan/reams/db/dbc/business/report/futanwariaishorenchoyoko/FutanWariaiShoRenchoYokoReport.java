@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 帳票設計_DBC100065_負担割合証（カット紙）の Reportです。
+ * 帳票設計_DBC100067_負担割合証（連帳・横）の Reportです。
  *
- * @reamsid_L DBC-4990-040 pengxingyi
+ * @reamsid_L DBC-4990-060 pengxingyi
  */
 public class FutanWariaiShoRenchoYokoReport extends Report<FutanWariaiShoRenchoYokoSource> {
 

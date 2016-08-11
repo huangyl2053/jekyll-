@@ -57,6 +57,7 @@ public class FutanWariaiInsertProcess extends BatchProcessBase<DbT3114RiyoshaFut
         if (list.isEmpty()) {
             return;
         }
+        //TO DO 「「利用者負担割合明細マージ」を呼び出す。」実装しない
         FutanWariKikanTempEntity entity = new FutanWariKikanTempEntity();
         entity.setNendo(list.get(0).getNendo());
         entity.setHihokenshaNo(list.get(0).getHihokenshaNo());
