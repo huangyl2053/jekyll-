@@ -176,6 +176,9 @@ public class JikoFutangakuHosei {
             return ResponseData.of(div).addMessage(
                     DbcWarningMessages.高額合算補正関連１.getMessage()).respond();
         }
+        if (MessageDialogSelectedResult.No.equals(ResponseHolder.getButtonType())) {
+            return ResponseData.of(div).respond();
+        }
         KogakuGassanJikoFutanGakuHolder 高額合算情報 = ViewStateHolder.get(
                 ViewStateKeys.高額合算自己負担額情報, KogakuGassanJikoFutanGakuHolder.class);
         dgJohoIchiran_Row row = div.getDgJohoIchiran().getClickedItem();
@@ -277,7 +280,7 @@ public class JikoFutangakuHosei {
             自己負担額保持.set呼び出しフラグ(CODE_ONE);
         }
         ViewStateHolder.put(ViewStateKeys.事業高額合算自己負担額補正保持Entity, 自己負担額保持);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC8130011TransitionEventName.自己負担額入力へ).respond();
     }
 
     /**
