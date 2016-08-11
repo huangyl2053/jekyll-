@@ -1798,14 +1798,15 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     /**
      * 処理済の有効期間終了月と前回処理日の取得
      *
-     * @param 市町村コード
-     * @return
-     * @throws NullPointerException
+     * @param 市町村コード 市町村コード
+     * @return 前回処理日
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public DbT7022ShoriDateKanriEntity select前回処理日(LasdecCode 市町村コード) throws
             NullPointerException {
 
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(市町村コードメッセージ.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT7022ShoriDateKanri.class).
                 where(and(
@@ -1986,6 +1987,31 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(subGyomuCode, サブ業務コード),
                                 in(shoriName, 処理名),
                                 in(shoriEdaban, 処理枝番))).
+                toList(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 年度内通番を取得する。
+     *
+     * @param サブ業務コード サブ業務コード
+     * @param 年度 年度
+     * @param 処理名 処理名
+     * @param 処理枝番List 処理枝番List
+     * @return List<DbT7022ShoriDateKanriEntity>
+     */
+    @Transaction
+    public List<DbT7022ShoriDateKanriEntity> select年度内通番(
+            SubGyomuCode サブ業務コード, RString 年度, RString 処理名, List<RString> 処理枝番List) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, サブ業務コード),
+                                eq(nendo, 年度),
+                                eq(shoriName, 処理名),
+                                in(shoriEdaban, 処理枝番List))).
+                order(by(nendoNaiRenban, Order.DESC)).
                 toList(DbT7022ShoriDateKanriEntity.class);
     }
 

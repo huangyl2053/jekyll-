@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.houshold;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +18,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class HousholdEntity {
+public class HousholdEntity implements Serializable {
 
     private RString カナ氏名;
     private RString 漢字氏名;
