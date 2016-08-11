@@ -110,7 +110,7 @@ public class ShisetsutourukuPanelHandler {
             div.getTxtShisetsuDaihyoshaName().setValue(business.get代表者名称() == null
                     ? RString.EMPTY : business.get代表者名称().value());
             div.getTxtShisetsuDaihyoshaNameKana().setValue(business.get代表者名称カナ() == null
-                    ? RString.EMPTY : business.get代表者名称().value());
+                    ? RString.EMPTY : business.get代表者名称カナ().value());
             div.getTxtShisetsuYakushoku().setValue(business.get役職());
             div.getTxtShisetsuBiko().setValue(business.get備考());
             div.getJigyoshaShurui().getRadServiceShurui().setSelectedKey(business.get事業者種別());
@@ -150,7 +150,7 @@ public class ShisetsutourukuPanelHandler {
             div.getTxtShisetsuDaihyoshaName().setValue(business.get代表者名称() == null
                     ? RString.EMPTY : business.get代表者名称().value());
             div.getTxtShisetsuDaihyoshaNameKana().setValue(business.get代表者名称カナ() == null
-                    ? RString.EMPTY : business.get代表者名称().value());
+                    ? RString.EMPTY : business.get代表者名称カナ().value());
             div.getTxtShisetsuYakushoku().setValue(business.get役職());
             div.getTxtShisetsuBiko().setValue(business.get備考());
             div.getJigyoshaShurui().getRadServiceShurui().setSelectedKey(business.get事業者種別());
