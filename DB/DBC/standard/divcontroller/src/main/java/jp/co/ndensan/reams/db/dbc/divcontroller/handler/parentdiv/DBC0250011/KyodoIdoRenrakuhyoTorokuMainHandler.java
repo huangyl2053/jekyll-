@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
@@ -149,6 +150,9 @@ public class KyodoIdoRenrakuhyoTorokuMainHandler {
                     .set住所(entity.get基本情報Entity().get住所())
                     .set電話番号(entity.get基本情報Entity().get電話番号())
                     .set帳票出力順序コード(entity.get基本情報Entity().get帳票出力順序コード())
+                    .set送付年月(FlexibleYearMonth.EMPTY)
+                    .set訂正区分コード(RString.EMPTY)
+                    .set訂正年月日(FlexibleDate.EMPTY)
                     .set論理削除フラグ(false)
                     .build();
             if (!チェック状態.isEmpty()) {
@@ -171,6 +175,9 @@ public class KyodoIdoRenrakuhyoTorokuMainHandler {
                     .set保険給付支払一時差止終了年月日(entity.get償還情報Entity().get保険給付支払一時差止終了年月日())
                     .set保険給付支払一時差止区分コード(entity.get償還情報Entity().get保険給付支払一時差止区分コード())
                     .set保険給付支払一時差止金額(entity.get償還情報Entity().get保険給付支払一時差止金額())
+                    .set送付年月(FlexibleYearMonth.EMPTY)
+                    .set訂正区分コード(RString.EMPTY)
+                    .set訂正年月日(FlexibleDate.EMPTY)
                     .set論理削除フラグ(false)
                     .build();
             if (!チェック状態.isEmpty()) {
@@ -195,6 +202,9 @@ public class KyodoIdoRenrakuhyoTorokuMainHandler {
                     .set老齢福祉年金受給有フラグ(entity.get高額情報Entity().is老齢福祉年金受給有フラグ())
                     .set利用者負担第２段階有フラグ(entity.get高額情報Entity().is利用者負担第２段階有フラグ())
                     .set支給申請書出力有フラグ(entity.get高額情報Entity().is支給申請書出力有フラグ())
+                    .set送付年月(FlexibleYearMonth.EMPTY)
+                    .set訂正区分コード(RString.EMPTY)
+                    .set訂正年月日(FlexibleDate.EMPTY)
                     .set論理削除フラグ(false)
                     .build();
             if (!チェック状態.isEmpty()) {
