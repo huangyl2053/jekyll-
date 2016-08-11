@@ -99,7 +99,9 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
         KyodoshoriyoJukyushaIdoRenrakuhyoParam entity = KyodoshoriyoJukyushaIdoRenrakuhyo.createInstance().getJukyushaIdoJoho(
                 処理モード, 論理削除, 異動日, 被保険者番号, 対象年月);
         div.getTxtHiHokenshaNo().setValue(被保険者番号.value());
-        div.getTxtTaisyoYM().setValue(new RDate(対象年月.toString()));
+        if (対象年月 != null && !対象年月.isEmpty()) {
+            div.getTxtTaisyoYM().setValue(new RDate(対象年月.toString()));
+        }
         if (entity != null) {
             div.setHdnKyodoShoriyoJukyushaIdoEntity(DataPassingConverter.serialize(entity));
             div.getTxtShoKisaiHokenshaNo().setValue(entity.get共通項目Entity().get証記載保険者番号().value());
@@ -108,13 +110,10 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
                     && 新規モード.equals(処理モード))) {
                 set初期値_新規(entity);
             } else if (div.getMode_DisplayMode().equals(KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei)) {
-                div.getTxtTaisyoYM().setValue(new RDate(対象年月.toString()));
                 set初期値_訂正(entity);
             } else if (div.getMode_DisplayMode().equals(KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.sakujyo)) {
-                div.getTxtTaisyoYM().setValue(new RDate(対象年月.toString()));
                 set初期値_削除(entity);
             } else if (div.getMode_DisplayMode().equals(KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.shokai)) {
-                div.getTxtTaisyoYM().setValue(new RDate(対象年月.toString()));
                 set初期値_照会(entity);
             }
         }
