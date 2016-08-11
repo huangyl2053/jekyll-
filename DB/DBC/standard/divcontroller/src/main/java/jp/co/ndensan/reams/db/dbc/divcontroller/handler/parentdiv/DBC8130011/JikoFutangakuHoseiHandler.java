@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8130011;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanJikoFutanGaku;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanJikoFutanGakuMeisai;
@@ -97,9 +98,7 @@ public class JikoFutangakuHoseiHandler {
     public void initializeDisplay(TaishoshaKey 対象者) {
         div.getKogakuGassanShikyuShinseiTorokuKihon().initialize(対象者.get識別コード());
         div.getKogakuGassanShikyuShinseiTorokuKaigoKihon().initialize(対象者.get被保険者番号());
-        List<RString> keyList = new ArrayList();
-        keyList.add(KEY_ZERO);
-        div.getJikoFutangakuHoseiList().getChkRirekiHyouji().setSelectedItemsByKey(keyList);
+        div.getJikoFutangakuHoseiList().getChkRirekiHyouji().setSelectedItemsByKey(Collections.EMPTY_LIST);
         div.getJikoFutangakuHoseiList().getDgJohoIchiran().init();
     }
 
