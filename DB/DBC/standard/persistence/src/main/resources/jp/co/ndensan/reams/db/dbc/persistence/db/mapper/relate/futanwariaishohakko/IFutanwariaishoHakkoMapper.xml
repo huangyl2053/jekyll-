@@ -40,9 +40,13 @@
                 FROM 
                     rgdb."DbT4001JukyushaDaicho"
                 WHERE 
-                    "insertTimestamp" <![CDATA[>=]]>  #{抽出期間開始日時} AND
-                    "insertTimestamp" <![CDATA[<=]]> #{抽出期間終了日時} AND
                     "yukoMukoKubun" = '1' AND
+                     <if test="抽出期間開始日時 != null">
+                    "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時} AND
+                     </if>
+                     <if test="抽出期間終了日時 != null">
+                    "insertTimestamp" <![CDATA[<=]]> #{抽出期間終了日時} AND
+                     </if>
                     "logicalDeletedFlag" = false AND
                     "chokkinIdoJiyuCode" IN ('01', '02', '04', '10')
                 UNION
@@ -51,8 +55,13 @@
                 FROM
                     rgdb."DbT3017KyufujissekiKihon"
                 WHERE
-                    "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時} AND
-                    "insertTimestamp" <![CDATA[<]]> #{抽出期間終了日時} 
+                    1=1
+                    <if test="抽出期間開始日時 != null">
+                     AND "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時} AND
+                    </if>
+                    <if test="抽出期間終了日時 != null">
+                     AND "insertTimestamp" <![CDATA[<=]]> #{抽出期間終了日時} 
+                    </if>
                 )               
              </if>
              ) AS dbT3113RiyoshaFutanWariai
@@ -88,7 +97,7 @@
                 AND  "hakoFuyoFlag"= false
             <if test="出力対象==1 or 出力対象==2">
                 AND "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時}
-                AND "insertTimestamp" <![CDATA[<]]> #{抽出期間終了日時}
+                AND "insertTimestamp" <![CDATA[<=]]> #{抽出期間終了日時}
             </if>
             <if test="発行区分==0">
                 AND ("hakoYMD" is null or "hakoYMD"='')
@@ -104,9 +113,13 @@
                 FROM 
                     rgdb."DbT4001JukyushaDaicho"
                 WHERE 
-                    "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時} AND
-                    "insertTimestamp" <![CDATA[<=]]> #{抽出期間終了日時} AND
                     "yukoMukoKubun" = '1' AND
+                     <if test="抽出期間開始日時 != null">
+                    "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時} AND
+                     </if>
+                     <if test="抽出期間終了日時 != null">
+                    "insertTimestamp" <![CDATA[<=]]> #{抽出期間終了日時} AND
+                     </if>
                     "logicalDeletedFlag" = false AND
                     "chokkinIdoJiyuCode" IN ('01', '02', '04', '10')
                 UNION
@@ -115,8 +128,13 @@
                 FROM
                     rgdb."DbT3017KyufujissekiKihon"
                 WHERE
-                    "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時} AND
-                    "insertTimestamp" <![CDATA[<]]> #{抽出期間終了日時} 
+                    1=1
+                    <if test="抽出期間開始日時 != null">
+                     AND "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時} AND
+                    </if>
+                    <if test="抽出期間終了日時 != null">
+                     AND "insertTimestamp" <![CDATA[<=]]> #{抽出期間終了日時} 
+                    </if>
                 )               
              </if>
              ) AS "DbT3113RiyoshaFutanWariai" 

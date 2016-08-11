@@ -241,7 +241,11 @@ public class FutanWariaishoIkkatsu {
         } else if (定数_TWO.equals(param.get出力対象())) {
             source.set条件(定数_新規認定分);
         }
-        source.set抽出対象期間開始(format日時(param.get抽出期間開始日時()).concat(TILDE));
+        if (format日時(param.get抽出期間開始日時()).isNullOrEmpty()) {
+            source.set抽出対象期間開始(RString.EMPTY);
+        } else {
+            source.set抽出対象期間開始(format日時(param.get抽出期間開始日時()).concat(TILDE));
+        }
         source.set抽出対象期間終了(format日時(param.get抽出期間終了日時()));
         if (定数_ZERO.equals(param.get発行区分())) {
             source.set発行区分(定数_未発行);
@@ -373,6 +377,9 @@ public class FutanWariaishoIkkatsu {
     }
 
     private RString format日時(RDateTime 作成日時) {
+        if (作成日時 == null) {
+            return RString.EMPTY;
+        }
 
         RStringBuilder dateTime = new RStringBuilder();
 
