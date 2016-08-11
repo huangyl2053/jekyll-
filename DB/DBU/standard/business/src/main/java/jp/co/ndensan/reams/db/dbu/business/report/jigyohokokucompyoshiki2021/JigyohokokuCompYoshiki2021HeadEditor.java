@@ -75,26 +75,24 @@ public class JigyohokokuCompYoshiki2021HeadEditor implements IJigyohokokuCompYos
             builder.append(business.get保険者名());
         }
         source.hokenjamei = builder.toRString();
-        source.yoshiki = setYoshiki(集計番号);
         source.title1 = setTitleOne(給付実績区分コード);
-        source.title2 = setTitleTwo(集計番号);
-        return source;
-    }
-
-    private RString setYoshiki(RString 集計番号) {
-        RString yoshiki;
         if (集計番号_0102.equals(集計番号)) {
-            yoshiki = 様式内容２;
+            source.yoshiki = 様式内容２;
+            source.title2 = 総数;
         } else if (集計番号_0202.equals(集計番号)) {
-            yoshiki = 様式内容２の２;
+            source.yoshiki = 様式内容２の２;
+            source.title2 = 第２号被保険者分;
         } else if (集計番号_0302.equals(集計番号)) {
-            yoshiki = 様式内容２の３;
+            source.yoshiki = 様式内容２の３;
+            source.title2 = 総数_再掲;
         } else if (集計番号_0402.equals(集計番号)) {
-            yoshiki = 様式内容２の４;
+            source.yoshiki = 様式内容２の４;
+            source.title2 = 第２号被保険者分再掲;
         } else {
-            yoshiki = RString.EMPTY;
+            source.yoshiki = RString.EMPTY;
+            source.title2 = RString.EMPTY;
         }
-        return yoshiki;
+        return source;
     }
 
     private RString setTitleOne(RString 給付実績区分コード) {
@@ -107,22 +105,6 @@ public class JigyohokokuCompYoshiki2021HeadEditor implements IJigyohokokuCompYos
             title1 = RString.EMPTY;
         }
         return title1;
-    }
-
-    private RString setTitleTwo(RString 集計番号) {
-        RString title2;
-        if (集計番号_0102.equals(集計番号)) {
-            title2 = 総数;
-        } else if (集計番号_0202.equals(集計番号)) {
-            title2 = 第２号被保険者分;
-        } else if (集計番号_0302.equals(集計番号)) {
-            title2 = 総数_再掲;
-        } else if (集計番号_0402.equals(集計番号)) {
-            title2 = 第２号被保険者分再掲;
-        } else {
-            title2 = RString.EMPTY;
-        }
-        return title2;
     }
 
 }

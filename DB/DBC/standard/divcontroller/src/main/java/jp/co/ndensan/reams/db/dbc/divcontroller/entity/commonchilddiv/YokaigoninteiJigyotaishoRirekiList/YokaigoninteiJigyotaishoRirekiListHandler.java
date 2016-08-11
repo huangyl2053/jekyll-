@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -30,6 +31,10 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class YokaigoninteiJigyotaishoRirekiListHandler {
 
     private final YokaigoninteiJigyotaishoRirekiListDiv div;
+    private final FlexibleYearMonth 有効開始0904 = new FlexibleYearMonth("200904");
+    private final FlexibleYearMonth 有効開始0604 = new FlexibleYearMonth("200604");
+    private final FlexibleYearMonth 有効開始0204 = new FlexibleYearMonth("200204");
+    private final FlexibleYearMonth 有効開始0004 = new FlexibleYearMonth("200004");
 
     /**
      * コンストラクタです。
@@ -65,7 +70,9 @@ public class YokaigoninteiJigyotaishoRirekiListHandler {
             dgNinteiRirekiList.getNinteiYukoShuryoYMD().setValue(有効終了日);
             dgNinteiRirekiList.setShiseiShubetsu(JukyuShinseiJiyu.toValue(申請種別).get名称());
             dgNinteiRirekiList.setMinashiKubun(MinashiCode.toValue(みなし区分).get名称());
-            dgNinteiRirekiList.setKyusotuSya(KyusochishaKubun.toValue(旧措置者フラグ).get名称());
+            if (KyusochishaKubun.toValue(旧措置者フラグ).isコード()) {
+                dgNinteiRirekiList.setKyusotuSya(KyusochishaKubun.toValue(旧措置者フラグ).get名称());
+            }
             受給者認定.add(dgNinteiRirekiList);
         }
         div.getDgNinteiRirekiList().setDataSource(受給者認定);
@@ -89,21 +96,18 @@ public class YokaigoninteiJigyotaishoRirekiListHandler {
     /**
      *
      * @param 有効開始日 FlexibleDate
-     * @param 介護認定状態区分 介護認定状態区分
-     * @return YokaigoJotaiKubun RString
+     * @param 介護認定状態区分 RString
+     * @return RString
      */
     public RString get状態区分(FlexibleDate 有効開始日, RString 介護認定状態区分) {
-        FlexibleDate 有効開始090401 = new FlexibleDate("20090401");
-        FlexibleDate 有効開始060401 = new FlexibleDate("20060401");
-        FlexibleDate 有効開始020401 = new FlexibleDate("20020401");
-        FlexibleDate 有効開始000401 = new FlexibleDate("20000401");
-        if (!有効開始日.isBefore(有効開始000401) && 有効開始日.isBefore(有効開始020401)) {
+        FlexibleYearMonth 有効開始年月 = 有効開始日.getYearMonth();
+        if (!有効開始年月.isBefore(有効開始0004) && 有効開始年月.isBefore(有効開始0204)) {
             return YokaigoJotaiKubun99.toValue(介護認定状態区分).get名称();
         }
-        if (有効開始日.isBefore(有効開始060401)) {
+        if (有効開始年月.isBefore(有効開始0604)) {
             return YokaigoJotaiKubun02.toValue(介護認定状態区分).get名称();
         }
-        if (有効開始日.isBefore(有効開始090401)) {
+        if (有効開始年月.isBefore(有効開始0904)) {
             return YokaigoJotaiKubun06.toValue(介護認定状態区分).get名称();
         } else {
             return YokaigoJotaiKubun09.toValue(介護認定状態区分).get名称();

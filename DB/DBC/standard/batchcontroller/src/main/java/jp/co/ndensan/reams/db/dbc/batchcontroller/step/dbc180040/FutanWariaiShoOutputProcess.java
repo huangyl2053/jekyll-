@@ -48,7 +48,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class FutanWariaiShoOutputProcess extends BatchProcessBase<RiyoshaFutanwariaishoTempEntity> {
 
     private static final RString MYBATIS_SELECT_ID
-            = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.futanwariaishohakko.IFutanwariaishoHakkoMapper.select利用者負担割合証Temp");
+            = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.futanwariaishohakko."
+                    + "IFutanwariaishoHakkoMapper.select利用者負担割合証Temp");
     private FutanwariaishoHakkoProcessParameter parameter;
     private FutanWariaishoIkkatsu service;
     private ChohyoSeigyoKyotsu 帳票制御共通;
@@ -62,26 +63,26 @@ public class FutanWariaiShoOutputProcess extends BatchProcessBase<RiyoshaFutanwa
     private ReportSourceWriter<FutanWariaiShoKattokamiSource> reportSourceWriter;
 
     private static final RString コンマ = new RString(",");
-    private static final RString ZERO = new RString("0");
-    private static final RString なし = new RString("なし");
-    private static final RString あり = new RString("あり");
+    private static final RString 定数_0 = new RString("0");
+    private static final RString 定数_なし = new RString("なし");
+    private static final RString 定数_あり = new RString("あり");
     private static final RString CONNECTOR = new RString("-");
     private static final RString ORDERBY = new RString("order by");
     private static final RString 負担割合証発行一覧 = new RString("負担割合証発行一覧");
     private static final RString 負担割合証発行一括 = new RString("負担割合証発行（一括）");
     private static final RString 代行プリント送付票 = new RString("URU000A10_DaikoPrintCheck");
     private static final RString 利用者負担割合証 = new RString("利用者負担割合証");
-    private static final RString 交付年月日 = new RString("交付年月日　　");
+    private static final RString 交付年月日 = new RString("【交付年月日】　　");
 
     @Override
     protected void initialize() {
         連番 = 1;
-        csv出力Flag = なし;
+        csv出力Flag = 定数_なし;
         csvファイル名 = CONNECTOR;
         service = new FutanWariaishoIkkatsu();
         帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100065.getReportId());
         出力順BODY = new ArrayList<>();
-        if (!RString.isNullOrEmpty(parameter.get出力順()) && !ZERO.equals(parameter.get出力順())) {
+        if (!RString.isNullOrEmpty(parameter.get出力順()) && !定数_0.equals(parameter.get出力順())) {
             IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
             出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.FCZ医療費共通,
                     ReportIdDBC.DBC100065.getReportId(), Long.valueOf(parameter.get出力順().toString()));
@@ -110,7 +111,7 @@ public class FutanWariaiShoOutputProcess extends BatchProcessBase<RiyoshaFutanwa
 
     @Override
     protected void process(RiyoshaFutanwariaishoTempEntity entity) {
-        csv出力Flag = あり;
+        csv出力Flag = 定数_あり;
         csvファイル名 = 負担割合証発行一覧;
         FutanWariaiShoKattokamiEntity futanWariaiShoEntity = service.getFutanWariaiSourceData(帳票制御共通, batchReportWriter.getImageFolderPath(),
                 entity, parameter.get交付年月日(), new RString(連番));
@@ -137,7 +138,7 @@ public class FutanWariaiShoOutputProcess extends BatchProcessBase<RiyoshaFutanwa
         );
         OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem)
                 .print();
-        if (帳票制御共通.is代行プリント有無() && ZERO.equals(parameter.get出力対象()) && あり.equals(csv出力Flag)) {
+        if (帳票制御共通.is代行プリント有無() && 定数_0.equals(parameter.get出力対象()) && 定数_あり.equals(csv出力Flag)) {
             List<RString> 帳票名 = new ArrayList<>();
             帳票名.add(利用者負担割合証);
             List<Decimal> ページ数 = new ArrayList<>();

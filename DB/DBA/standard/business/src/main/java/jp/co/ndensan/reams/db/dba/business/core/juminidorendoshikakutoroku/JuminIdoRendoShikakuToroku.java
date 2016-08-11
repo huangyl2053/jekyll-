@@ -26,7 +26,7 @@ public class JuminIdoRendoShikakuToroku {
     private static final RString 被保険者区分コード1号 = new RString("1");
     private static final RString 資格変更事由1号到達 = new RString("31");
     private static final RString 資格変更事由転居 = new RString("21");
-    private static final int AGE = 60;
+    private static final int AGE = 65;
 
     /**
      * １号到達の被保険者台帳の編集です。

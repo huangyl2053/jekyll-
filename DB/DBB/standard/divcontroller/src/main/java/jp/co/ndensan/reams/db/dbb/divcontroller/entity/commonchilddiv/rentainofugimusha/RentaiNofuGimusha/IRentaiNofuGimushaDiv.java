@@ -5,6 +5,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
 /*
  * このコードはツールによって生成されました。
+
+ @reamsid_L DBB-5700-010 chenaoqi
  */
 public interface IRentaiNofuGimushaDiv extends ICommonChildDivBaseProperties {
 

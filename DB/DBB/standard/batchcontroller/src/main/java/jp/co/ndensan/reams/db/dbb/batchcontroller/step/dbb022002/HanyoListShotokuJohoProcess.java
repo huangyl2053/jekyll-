@@ -38,11 +38,11 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -109,9 +109,9 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
     private static final RString 右記号 = new RString(")");
     private static final RString LINE = new RString("　～　");
     private static final RString 定数_歳 = new RString("歳");
-    private static final RString 定数_住所 = new RString("住所");
-    private static final RString 定数_行政区 = new RString("行政区");
-    private static final RString 定数_地区 = new RString("地区");
+    private static final RString 定数_住所 = new RString("1");
+    private static final RString 定数_行政区 = new RString("2");
+    private static final RString 定数_地区 = new RString("3");
     private static final RString 住所SHOW = new RString("住所：");
     private static final RString 行政区SHOW = new RString("行政区：");
     private static final RString 地区1SHOW = new RString("地区1：");
@@ -131,7 +131,7 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
     private Decimal 連番;
 
     @BatchWriter
-    private EucCsvWriter<HanyoListShotokuJohoCsvEntity> eucCsvWriter;
+    private CsvWriter<HanyoListShotokuJohoCsvEntity> eucCsvWriter;
 
     @Override
     protected void beforeExecute() {
@@ -160,7 +160,7 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, CSVNAME);
-        eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.UTF_8withBOM).
@@ -265,7 +265,7 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
     private void set地区区分(RStringBuilder builder, List<RString> 出力条件) {
         if (processParameter != null && processParameter.get宛名抽出条件() != null
                 && processParameter.get宛名抽出条件().getChiku_Kubun() != null) {
-            RString 地区区分名称 = processParameter.get宛名抽出条件().getChiku_Kubun().get名称();
+            RString 地区区分名称 = processParameter.get宛名抽出条件().getChiku_Kubun().getコード();
             if (定数_住所.equals(地区区分名称)) {
                 builder.append(住所SHOW);
                 RString 町域From = processParameter.get宛名抽出条件().getJusho_From();
@@ -295,7 +295,7 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
                 builder3.append(地区3SHOW);
                 RString 地区3From = processParameter.get宛名抽出条件().getChiku3_From();
                 RString 地区3To = processParameter.get宛名抽出条件().getChiku3_To();
-                builder2.append(地区3From).append(LINE).append(地区3To);
+                builder3.append(地区3From).append(LINE).append(地区3To);
                 出力条件.add(builder3.toRString());
             }
         }

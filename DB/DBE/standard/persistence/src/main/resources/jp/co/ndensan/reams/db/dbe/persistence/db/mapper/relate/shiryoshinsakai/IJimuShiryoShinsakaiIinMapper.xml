@@ -131,10 +131,10 @@
                 dbt5502."shinsakaiKaisaiYMD",
                 dbt5202."gaikyoChosaTextImageKubun" ,
                 dbt5202."tokki",
-                , dbt5202."riyoShisetsuShimei"
-        , dbt5202."riyoShisetsuJusho"
-        , dbt5202."riyoShisetsuTelNo"
-                dbt5115."imageSharedFileId" AS imageSharedFileId
+                dbt5202."riyoShisetsuShimei"
+                ,dbt5202."riyoShisetsuJusho"
+                ,dbt5202."riyoShisetsuTelNo"
+                ,dbt5115."imageSharedFileId" AS imageSharedFileId
             FROM
                     rgdb."DbT5502ShinsakaiWariateJoho" AS dbt5502
             INNER JOIN
@@ -1407,6 +1407,13 @@
                 dbt5502."shinseishoKanriNo" = dbt5101."shinseishoKanriNo" 
                 AND dbt5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo} 
                 AND dbt5502."shinsakaiOrderKakuteiFlag" = #{isOrderKakuteiFlg} 
+                                     <if test="isSakuseiJokenHani">
+            AND #{bangoStart} <![CDATA[<=]]> dbT5502."shinsakaiOrder"
+            AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
+        </if>
+        <if test="isSakuseiJokenTuika">
+            AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
+        </if>
               ORDER BY
                 dbt5502."shinseishoKanriNo"
             ) AS ninteiShinseiJoho
@@ -1446,6 +1453,8 @@
             ninteiShinseiJoho."shinseishoKanriNo" = dbt5115."shinseishoKanriNo" 
             AND ninteiShinseiJoho."shinseishoKanriNo" = gaikyoChosa."shinseishoKanriNo"
             AND gaikyoChosa."gaikyoChosaTextImageKubun" = '1'
+                                ORDER BY
+           ninteiShinseiJoho."shinsakaiOrder"
     </select>
     
      <select id="get概況特記イメージ" resultMap="Result_JimuShinsakaiSiryo"
@@ -1485,6 +1494,13 @@
                 dbt5502."shinseishoKanriNo" = dbt5101."shinseishoKanriNo" 
                 AND dbt5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo} 
                 AND dbt5502."shinsakaiOrderKakuteiFlag" = #{isOrderKakuteiFlg} 
+                             <if test="isSakuseiJokenHani">
+            AND #{bangoStart} <![CDATA[<=]]> dbT5502."shinsakaiOrder"
+            AND dbT5502."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
+        </if>
+        <if test="isSakuseiJokenTuika">
+            AND dbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
+        </if>
               ORDER BY
                 dbt5502."shinseishoKanriNo"
             ) AS ninteiShinseiJoho
@@ -1524,6 +1540,8 @@
             ninteiShinseiJoho."shinseishoKanriNo" = dbt5115."shinseishoKanriNo" 
             AND ninteiShinseiJoho."shinseishoKanriNo" = gaikyoChosa."shinseishoKanriNo"
             AND gaikyoChosa."gaikyoChosaTextImageKubun" = '2'
+                    ORDER BY
+           ninteiShinseiJoho."shinsakaiOrder"
     </select>
     
     <resultMap id="Result_JimuShinsakaiSiryo" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity" autoMapping="true">

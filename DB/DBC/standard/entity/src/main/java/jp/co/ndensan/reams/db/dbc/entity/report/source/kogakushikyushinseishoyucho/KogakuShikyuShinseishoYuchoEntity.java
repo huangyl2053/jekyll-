@@ -23,5 +23,6 @@ public class KogakuShikyuShinseishoYuchoEntity {
     private RString 認証者役職名;
     private RDate システム日付;
     private boolean is金融機関表示;
+    private RString 注意文;
     private RString 連番;
 }

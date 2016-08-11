@@ -188,8 +188,8 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
             source.listKyufuhiNaiyo_3 = DecimalFormatter.toコンマ区切りRString(new Decimal(償還払集計情報.get支払金額()), 0);
             source.kyufugakuGokei = DecimalFormatter.toコンマ区切りRString(get給付額合計(), 0);
         }
-        ShiharaiHohoHenkoTaino 支払方法変更滞納 = this.帳票情報.getShiharaiHohoHenkoTainoList().get(index);
         if (null != this.帳票情報.getShiharaiHohoHenkoTainoList() && this.帳票情報.getShiharaiHohoHenkoTainoList().size() > index) {
+            ShiharaiHohoHenkoTaino 支払方法変更滞納 = this.帳票情報.getShiharaiHohoHenkoTainoList().get(index);
             source.listKojoHokenryo_1 = 支払方法変更滞納.get賦課年度().toDateString();
             source.listKojoHokenryo_2 = 支払方法変更滞納.get収納期_月();
             source.listKojoHokenryo_3 = DecimalFormatter.toコンマ区切りRString(支払方法変更滞納.get調定額(), 0);

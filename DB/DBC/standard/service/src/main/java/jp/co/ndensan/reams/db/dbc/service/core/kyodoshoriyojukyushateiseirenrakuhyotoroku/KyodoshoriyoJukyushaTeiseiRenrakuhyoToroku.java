@@ -41,7 +41,7 @@ public class KyodoshoriyoJukyushaTeiseiRenrakuhyoToroku {
     }
 
     /**
-     * 共同処理用受給者訂正連絡票データ作成
+     * 共同処理用受給者訂正連絡票データ作成のメソッドです
      *
      * @param divEntity 共同処理用受給者異動連絡票共有子Div
      * @param 画面モード RString

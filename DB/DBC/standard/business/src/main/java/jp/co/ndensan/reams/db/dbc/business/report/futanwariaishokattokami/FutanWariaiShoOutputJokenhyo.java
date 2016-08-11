@@ -19,19 +19,19 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  */
 public class FutanWariaiShoOutputJokenhyo {
 
-    private static final RString 年度 = new RString("年度　");
-    private static final RString 発行区分 = new RString("発行区分　");
-    private static final RString 出力対象 = new RString("出力対象　　");
-    private static final RString 交付年月日 = new RString("交付年月日　　");
+    private static final RString 年度 = new RString("【年度】　");
+    private static final RString 発行区分 = new RString("【発行区分】　");
+    private static final RString 出力対象 = new RString("【出力対象】　　");
+    private static final RString 交付年月日 = new RString("【交付年月日】　　");
     private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RString 未発行 = new RString("未発行");
     private static final RString 発行済み = new RString("発行済み");
     private static final RString 全て = new RString("全て");
-    private static final RString 全件 = new RString("未発行");
-    private static final RString 異動分 = new RString("発行済み");
-    private static final RString 新規認定分 = new RString("全て");
+    private static final RString 全件 = new RString("全件");
+    private static final RString 異動分 = new RString("異動分");
+    private static final RString 新規認定分 = new RString("新規認定分s");
 
     private final FutanwariaishoHakkoProcessParameter parameter;
     private final IOutputOrder 出力順;

@@ -53,7 +53,7 @@ public class FutanWariaiShoKattokamiEditor implements IFutanWariaiShoKattokamiEd
         source.ninshosha_denshiKoin = entity.get電子公印();
         source.renban = entity.get連番();
         source.ocrRenban = entity.getOcr連番();
-        //       source.compSofubutsuAtesakiSource = entity.get送付物宛先();
+        source.compSofubutsuAtesakiSource = entity.get送付物宛先();
         return source;
     }
 

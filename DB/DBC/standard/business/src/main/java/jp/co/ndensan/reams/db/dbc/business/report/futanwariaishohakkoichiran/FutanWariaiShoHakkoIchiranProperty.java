@@ -21,6 +21,6 @@ public class FutanWariaiShoHakkoIchiranProperty extends ReportPropertyBase<Futan
      * インスタンスを生成します。
      */
     public FutanWariaiShoHakkoIchiranProperty() {
-        super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100065.getReportId());
+        super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200090.getReportId());
     }
 }

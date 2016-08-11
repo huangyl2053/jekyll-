@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * ビジネス設計_DBCMNK3001_負担割合証ソースファイル作成（service）CSVEntity
  *
- * @reamsid_L DBC-4990-031 pengxingyi
+ * @reamsid_L DBC-4990-030 pengxingyi
  */
 @lombok.Getter
 @lombok.Setter

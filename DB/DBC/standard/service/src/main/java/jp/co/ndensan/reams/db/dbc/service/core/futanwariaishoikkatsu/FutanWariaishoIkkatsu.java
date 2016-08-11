@@ -6,29 +6,38 @@
 package jp.co.ndensan.reams.db.dbc.service.core.futanwariaishoikkatsu;
 
 import java.util.List;
+import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.definition.core.futanwariai.FutanWariaiHanteiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.futanwariaishohakko.FutanwariaishoHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.FutanwariaiShoHakkoIchiranCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaishohakko.RiyoshaFutanwariaishoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishohakkoichiran.FutanWariaiShoHakkoIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishokattokami.FutanWariaiShoKattokamiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -48,18 +57,19 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * ビジネス設計_DBCMNK3001_負担割合証ソースファイル作成（service）
  *
- * @reamsid_L DBC-4990-032 pengxingyi
+ * @reamsid_L DBC-4990-031 pengxingyi
  */
 public class FutanWariaishoIkkatsu {
 
     private static final RString 交付年月日TITLE = new RString("交付年月日　");
     private static final RString 開始年月日TITLE = new RString("開始年月日　");
     private static final RString 終了年月日TITLE = new RString("終了年月日　");
+    private static final RString TILDE = new RString("　～");
     private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
@@ -67,15 +77,13 @@ public class FutanWariaishoIkkatsu {
     private static final RString 事業対象者 = new RString("事業対象者");
     private static final RString 受給者 = new RString("受給者");
     private static final RString 号 = new RString("号");
-    private static final RString 時 = new RString("時");
-    private static final RString 分 = new RString("分");
-    private static final RString 秒 = new RString("秒");
     private static final RString 未発行 = new RString("未発行");
     private static final RString 発行済み = new RString("発行済み");
     private static final RString 全て = new RString("全て");
-    private static final RString 全件 = new RString("未発行");
-    private static final RString 異動分 = new RString("発行済み");
-    private static final RString 新規認定分 = new RString("全て");
+    private static final RString 全件 = new RString("全件");
+    private static final RString 異動分 = new RString("異動分");
+    private static final RString 新規認定分 = new RString("新規認定分");
+    private static final RString 作成 = new RString("　作成");
     private static final int NUM_ONE = 1;
     private static final int NUM_TWO = 2;
     private static final int NUM_THREE = 3;
@@ -94,24 +102,27 @@ public class FutanWariaishoIkkatsu {
      */
     public FutanWariaiShoKattokamiEntity getFutanWariaiSourceData(ChohyoSeigyoKyotsu 帳票制御共通, RString imageFolderPath,
             RiyoshaFutanwariaishoTempEntity 利用者負担割合証Temp, RDate 交付年月日, RString 連番) {
-//        IAtesaki 宛先 = AtesakiFactory.createInstance(利用者負担割合証Temp.get宛先());
+        requireNonNull(帳票制御共通, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票制御共通"));
+        requireNonNull(imageFolderPath, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票イメージフォルダパス"));
+        requireNonNull(利用者負担割合証Temp, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担割合証Temp"));
+        requireNonNull(交付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("交付年月日"));
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
+        IAtesaki 宛先 = AtesakiFactory.createInstance(利用者負担割合証Temp.get宛先());
         IShikibetsuTaisho 宛名 = ShikibetsuTaishoFactory.createShikibetsuTaisho(利用者負担割合証Temp.get宛名());
         Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().
-                get帳票認証者(GyomuCode.DB介護保険, new RString("0001"), FlexibleDate.getNowDate());
+                get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), FlexibleDate.getNowDate());
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         NinshoshaSource compNinshosha = NinshoshaSourceBuilderFactory.
                 createInstance(認証者, 地方公共団体, imageFolderPath, RDate.getNowDate(), 0, false, false, KenmeiFuyoKubunType.付与なし).
                 buildSource();
-//        EditedAtesaki 編集後宛先 = new EditedAtesaki(宛先, 地方公共団体, 帳票制御共通);
-//        SofubutsuAtesakiSource 送付物宛先ソースデータ = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
-        SofubutsuAtesakiSource 送付物宛先ソースデータ = null;
+        EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(宛先, 地方公共団体, 帳票制御共通);
+        SofubutsuAtesakiSource 送付物宛先ソースデータ = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
         EditedKojin 編集後個人 = new EditedKojin(宛名.to個人(), 帳票制御共通, 地方公共団体);
         return getFutanWariaishoEntitySource(利用者負担割合証Temp, 編集後個人, 交付年月日, compNinshosha, 連番, 送付物宛先ソースデータ);
     }
 
     private FutanWariaiShoKattokamiEntity getFutanWariaishoEntitySource(RiyoshaFutanwariaishoTempEntity entity, EditedKojin 編集後個人,
             RDate 交付年月日, NinshoshaSource compNinshosha, RString 連番, SofubutsuAtesakiSource 送付物宛先ソースデータ) {
-
         FutanWariaiShoKattokamiEntity source = new FutanWariaiShoKattokamiEntity();
         source.set交付年月日(交付年月日TITLE.concat(dateFormat基本形１(交付年月日)));
         source.set被保険者番号(entity.get被保台帳().getHihokenshaNo().getColumnValue());
@@ -143,7 +154,7 @@ public class FutanWariaishoIkkatsu {
     }
 
     private RString get電話番号() {
-        return BusinessConfig.get(ConfigNameDBU.保険者情報_電話番号, SubGyomuCode.DBU介護統計報告);
+        return DbBusinessConfig.get(ConfigNameDBU.保険者情報_電話番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
     }
 
     private ShoKisaiHokenshaNo getHokenshaCode(HihokenshaDaicho 被保台帳) {
@@ -188,10 +199,23 @@ public class FutanWariaishoIkkatsu {
             RiyoshaFutanwariaishoTempEntity 利用者負担割合証, FutanwariaishoHakkoProcessParameter param, RString 保険者番号,
             RString 保険者名, RString ソート順１, RString ソート順２, RString ソート順３, RString ソート順４, RString ソート順５,
             RString ページ, RDateTime 作成日時, RString 連番) {
-//        IAtesaki 宛先 = AtesakiFactory.createInstance(利用者負担割合証.get宛先());
+        requireNonNull(帳票制御共通, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票制御共通"));
+        requireNonNull(利用者負担割合証, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担割合証Temp"));
+        requireNonNull(param, UrSystemErrorMessages.値がnull.getReplacedMessage("バッチパラメータ"));
+        requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
+        requireNonNull(保険者名, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者名"));
+        requireNonNull(ソート順１, UrSystemErrorMessages.値がnull.getReplacedMessage("ソート順１"));
+        requireNonNull(ソート順２, UrSystemErrorMessages.値がnull.getReplacedMessage("ソート順２"));
+        requireNonNull(ソート順３, UrSystemErrorMessages.値がnull.getReplacedMessage("ソート順３"));
+        requireNonNull(ソート順４, UrSystemErrorMessages.値がnull.getReplacedMessage("ソート順４"));
+        requireNonNull(ソート順５, UrSystemErrorMessages.値がnull.getReplacedMessage("ソート順５"));
+        requireNonNull(ページ, UrSystemErrorMessages.値がnull.getReplacedMessage("ページ"));
+        requireNonNull(作成日時, UrSystemErrorMessages.値がnull.getReplacedMessage("作成日時"));
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
+        IAtesaki 宛先 = AtesakiFactory.createInstance(利用者負担割合証.get宛先());
         IShikibetsuTaisho 宛名 = ShikibetsuTaishoFactory.createShikibetsuTaisho(利用者負担割合証.get宛名());
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-//        EditedAtesaki 編集後宛先 = new EditedAtesaki(宛先, 地方公共団体, 帳票制御共通);
+        EditedAtesaki 編集後宛先 = new EditedAtesaki(宛先, 地方公共団体, 帳票制御共通);
         EditedKojin 編集後個人 = new EditedKojin(宛名.to個人(), 帳票制御共通, 地方公共団体);
         FutanWariaiShoHakkoIchiranEntity source = new FutanWariaiShoHakkoIchiranEntity();
         source.set年度(dateFormatパターン107(param.get年度()));
@@ -203,7 +227,7 @@ public class FutanWariaishoIkkatsu {
         } else if (TWO.equals(param.get出力対象())) {
             source.set条件(新規認定分);
         }
-        source.set抽出対象期間開始(format日時(param.get抽出期間開始日時()));
+        source.set抽出対象期間開始(format日時(param.get抽出期間開始日時()).concat(TILDE));
         source.set抽出対象期間終了(format日時(param.get抽出期間終了日時()));
         if (ZERO.equals(param.get発行区分())) {
             source.set発行区分(未発行);
@@ -221,10 +245,10 @@ public class FutanWariaishoIkkatsu {
         source.setソート順４(ソート順４);
         source.setソート順５(ソート順５);
         source.setページ(ページ);
-        source.set作成日時(format日時(作成日時));
-        source.set連番(連番);
+        source.set作成日時(format日時(作成日時).concat(作成));
+        source.set連番(new RString(new Decimal(連番.toString()).toString("#####0")));
         source.set被保険者番号(利用者負担割合証.get被保台帳().getHihokenshaNo().getColumnValue());
-//        source.set送付先住所(編集後宛先.get編集後住所());
+        source.set送付先住所(編集後宛先.get編集後住所());
         source.set被保険者氏名(編集後個人.get名称().getName().getColumnValue());
         source.set判定日(dateFormat基本形１(利用者負担割合証.get利用者負担割合().getHanteiYMD()));
         if (利用者負担割合証.get負担割合期間().getYukoKaishiYMD2() != null) {
@@ -242,7 +266,7 @@ public class FutanWariaishoIkkatsu {
         } else {
             source.set負担割合(FutanwariaiKubun.toValue(利用者負担割合証.get負担割合期間().getFutanWariaiKubun1()).get名称());
         }
-        source.set判定区分(利用者負担割合証.get利用者負担割合().getHanteiKubun());
+        source.set判定区分(FutanWariaiHanteiKubun.toValue(利用者負担割合証.get利用者負担割合().getHanteiKubun()).get名称());
         if (ZERO.equals(利用者負担割合証.get利用者負担割合().getHakoKubun())) {
             source.set発行済(RString.EMPTY);
         } else {
@@ -262,15 +286,18 @@ public class FutanWariaishoIkkatsu {
      */
     public FutanwariaiShoHakkoIchiranCSVEntity getHakkoIchiranCSVData(ChohyoSeigyoKyotsu 帳票制御共通,
             RiyoshaFutanwariaishoTempEntity 利用者負担割合証Temp, RString 連番) {
-//        IAtesaki 宛先 = AtesakiFactory.createInstance(利用者負担割合証Temp.get宛先());
+        requireNonNull(帳票制御共通, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票制御共通"));
+        requireNonNull(利用者負担割合証Temp, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担割合証Temp"));
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
+        IAtesaki 宛先 = AtesakiFactory.createInstance(利用者負担割合証Temp.get宛先());
         IShikibetsuTaisho 宛名 = ShikibetsuTaishoFactory.createShikibetsuTaisho(利用者負担割合証Temp.get宛名());
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-//        EditedAtesaki 編集後宛先 = new EditedAtesaki(宛先, 地方公共団体, 帳票制御共通);
+        EditedAtesaki 編集後宛先 = new EditedAtesaki(宛先, 地方公共団体, 帳票制御共通);
         EditedKojin 編集後個人 = new EditedKojin(宛名.to個人(), 帳票制御共通, 地方公共団体);
         FutanwariaiShoHakkoIchiranCSVEntity csvEntity = new FutanwariaiShoHakkoIchiranCSVEntity();
         csvEntity.set連番(連番);
         csvEntity.set被保険者番号(利用者負担割合証Temp.get被保台帳().getHihokenshaNo().getColumnValue());
-        //       csvEntity.set送付先住所(編集後宛先.get編集後住所());
+        csvEntity.set送付先住所(編集後宛先.get編集後住所());
         csvEntity.set被保険者氏名(編集後個人.get名称().getName().getColumnValue());
         csvEntity.set判定日(dateFormat基本形１(利用者負担割合証Temp.get利用者負担割合().getHanteiYMD()));
         if (利用者負担割合証Temp.get負担割合期間().getYukoKaishiYMD2() != null) {
@@ -288,7 +315,7 @@ public class FutanWariaishoIkkatsu {
         } else {
             csvEntity.set負担割合(FutanwariaiKubun.toValue(利用者負担割合証Temp.get負担割合期間().getFutanWariaiKubun1()).get名称());
         }
-        csvEntity.set判定区分(利用者負担割合証Temp.get利用者負担割合().getHanteiKubun());
+        csvEntity.set判定区分(FutanWariaiHanteiKubun.toValue(利用者負担割合証Temp.get利用者負担割合().getHanteiKubun()).get名称());
         if (ZERO.equals(利用者負担割合証Temp.get利用者負担割合().getHakoKubun())) {
             csvEntity.set発行済(RString.EMPTY);
         } else {
@@ -339,14 +366,8 @@ public class FutanWariaishoIkkatsu {
                 eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
                 fillType(FillType.BLANK).toDateString());
-        dateTime.append("　");
-        dateTime.append(new RString(new Decimal(作成日時.getHour()).toString("00")));
-        dateTime.append(時);
-        dateTime.append(new RString(new Decimal(作成日時.getMinute()).toString("00")));
-        dateTime.append(分);
-        dateTime.append(new RString(new Decimal(作成日時.getSecond()).toString("00")));
-        dateTime.append(秒);
-
+        dateTime.append(RString.FULL_SPACE);
+        dateTime.append(作成日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         return dateTime.toRString();
     }
 }

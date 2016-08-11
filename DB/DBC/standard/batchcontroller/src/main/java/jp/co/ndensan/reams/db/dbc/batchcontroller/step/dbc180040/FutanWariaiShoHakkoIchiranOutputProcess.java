@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbc.business.report.saishinsa.SaishinsaKetteiTsuch
 import jp.co.ndensan.reams.db.dbc.definition.processprm.futanwariaishohakko.FutanwariaishoHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.FutanwariaiShoHakkoIchiranCSVEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.ShoriKekkaKakuninListCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaishohakko.RiyoshaFutanwariaishoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishohakkoichiran.FutanWariaiShoHakkoIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishohakkoichiran.FutanWariaiShoHakkoIchiranSource;
@@ -77,8 +76,8 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
     BatchPermanentTableWriter riyoshaFutanWariaiWriter;
 
     private static final RString コンマ = new RString(",");
-    private static final RString ZERO = new RString("0");
-    private static final RString ONE = new RString("1");
+    private static final RString 定数_0 = new RString("0");
+    private static final RString 定数_1 = new RString("1");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString ORDERBY = new RString("order by");
@@ -86,28 +85,29 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
     private static final int NUM_TWO = 2;
     private static final int NUM_THREE = 3;
     private static final int NUM_FOUR = 4;
+    private static final int NUM_THRITY = 30;
     private static final RString 確認内容 = new RString("資格喪失している、負担割合証を発行しませんでした。");
     FileSpoolManager futanwariaiShoHakkoIchiranManager;
     FileSpoolManager shoriKekkaKakuninListManager;
     @BatchWriter
     private CsvWriter<FutanwariaiShoHakkoIchiranCSVEntity> futanwariaiShoHakkoIchiranEucCsvWriter;
-    @BatchWriter
-    private CsvWriter<ShoriKekkaKakuninListCSVEntity> shoriKekkaKakuninListEucCsvWriter;
 
     private static final EucEntityId FUATANWARIAI_EUC_ENTITY_ID = new EucEntityId(new RString("DBC200090"));
     private RString futanwariaiShoHakkoIchiranEucFilePath;
     private final RString futanwariaiShoHakkoIchiranFileName = new RString("DBC200090_FutanWariaiShoHakkoIchiran.csv");
-    private static final EucEntityId SHORIKEKKA_EUC_ENTITY_ID = new EucEntityId(new RString("DBU900002"));
-    private RString shoriKekkaKakuninListEucFilePath;
-    private final RString shoriKekkaKakuninListFileName = new RString("DBC900002_ShoriKekkaKakuninList.csv");
 
     @Override
     protected void initialize() {
         連番 = 1;
+        ソート順１ = RString.EMPTY;
+        ソート順２ = RString.EMPTY;
+        ソート順３ = RString.EMPTY;
+        ソート順４ = RString.EMPTY;
+        ソート順５ = RString.EMPTY;
         service = new FutanWariaishoIkkatsu();
         帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200090.getReportId());
         出力順BODY = new ArrayList<>();
-        if (!RString.isNullOrEmpty(parameter.get出力順()) && !ZERO.equals(parameter.get出力順())) {
+        if (!RString.isNullOrEmpty(parameter.get出力順()) && !定数_0.equals(parameter.get出力順())) {
             IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
             出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.FCZ医療費共通,
                     ReportIdDBC.DBC100065.getReportId(), Long.valueOf(parameter.get出力順().toString()));
@@ -147,23 +147,11 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
                 setNewLine(NewLine.CRLF).
                 hasHeader(true).
                 build();
-
-        shoriKekkaKakuninListManager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, SHORIKEKKA_EUC_ENTITY_ID,
-                UzUDE0831EucAccesslogFileType.Csv);
-        shoriKekkaKakuninListEucFilePath = Path.combinePath(shoriKekkaKakuninListManager.getEucOutputDirectry(),
-                shoriKekkaKakuninListFileName);
-        shoriKekkaKakuninListEucCsvWriter = BatchWriters.csvWriter(ShoriKekkaKakuninListCSVEntity.class).
-                filePath(shoriKekkaKakuninListEucFilePath).
-                setDelimiter(EUC_WRITER_DELIMITER).
-                setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(Encode.UTF_8withBOM).
-                setNewLine(NewLine.CRLF).
-                hasHeader(true).
-                build();
     }
 
     @Override
     protected void process(RiyoshaFutanwariaishoTempEntity entity) {
+        ページ = 連番 % NUM_THRITY == 0 ? (連番 / NUM_THRITY) : (連番 / NUM_THRITY) + 1;
         FutanWariaiShoHakkoIchiranEntity futanWariaiShoHakkoIchiranEntity = service.getHakkoIchiranSourceData(帳票制御共通,
                 entity, parameter, ソート順１, コンマ, ソート順１, ソート順２, ソート順３, ソート順４, ソート順５,
                 new RString(ページ), parameter.getバッチ起動時処理日時(), new RString(連番));
@@ -173,10 +161,6 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
                 = service.getHakkoIchiranCSVData(帳票制御共通, entity, new RString(連番));
         futanwariaiShoHakkoIchiranEucCsvWriter.writeLine(futanwariaiShoHakkoIchiranCSVEntity);
         if (entity.get被保台帳() != null) {
-            ShoriKekkaKakuninListCSVEntity shoriKekkaKakuninListCSVEntity = new ShoriKekkaKakuninListCSVEntity();
-            shoriKekkaKakuninListCSVEntity.set被保険者番号(entity.get被保台帳().getHihokenshaNo().getColumnValue());
-            shoriKekkaKakuninListCSVEntity.set確認内容(確認内容);
-            shoriKekkaKakuninListEucCsvWriter.writeLine(shoriKekkaKakuninListCSVEntity);
             personalDataList.add(PersonalData.of(entity.get被保台帳().getShikibetsuCode()));
         }
         連番++;
@@ -189,7 +173,7 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
         if (item == null) {
             return;
         }
-        item.setHakoKubun(ONE);
+        item.setHakoKubun(定数_1);
         item.setHakoYMD(new FlexibleDate(parameter.getバッチ起動時処理日時().getDate().toDateString()));
         item.setKofuYMD(new FlexibleDate(parameter.get交付年月日().toDateString()));
         riyoshaFutanWariaiWriter.update(item);
@@ -202,16 +186,16 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
         if (!list.isEmpty()) {
             ソート順１ = list.get(0);
         }
-        if (list.size() > NUM_ONE) {
+        if (NUM_ONE < list.size()) {
             ソート順２ = list.get(NUM_ONE);
         }
-        if (list.size() > NUM_TWO) {
+        if (NUM_TWO < list.size()) {
             ソート順３ = list.get(NUM_TWO);
         }
-        if (list.size() > NUM_THREE) {
+        if (NUM_THREE < list.size()) {
             ソート順４ = list.get(NUM_THREE);
         }
-        if (list.size() > NUM_FOUR) {
+        if (NUM_FOUR < list.size()) {
             ソート順５ = list.get(NUM_FOUR);
         }
     }
@@ -220,8 +204,6 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
     protected void afterExecute() {
         futanwariaiShoHakkoIchiranEucCsvWriter.close();
         futanwariaiShoHakkoIchiranManager.spool(futanwariaiShoHakkoIchiranEucFilePath);
-        shoriKekkaKakuninListEucCsvWriter.close();
-        shoriKekkaKakuninListManager.spool(shoriKekkaKakuninListEucFilePath);
         AccessLogger.logReport(personalDataList);
     }
 

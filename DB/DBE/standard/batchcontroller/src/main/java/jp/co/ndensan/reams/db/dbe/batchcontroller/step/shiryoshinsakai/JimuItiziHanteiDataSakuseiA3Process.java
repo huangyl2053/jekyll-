@@ -190,6 +190,7 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
             ShinseishoKanriNo 申請書管理番号) {
         for (ShinsakaiSiryoKyotsuEntity 共通情報Entity : 共通情報) {
             if (申請書管理番号.equals(共通情報Entity.getShinseishoKanriNo())) {
+                共通情報Entity.setJimukyoku(true);
                 return 共通情報Entity;
             }
         }
