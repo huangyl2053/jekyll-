@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.IBatchWriter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -146,6 +147,8 @@ public class KoshinShinseishaHaakuListProcess extends BatchProcessBase<UpdateNot
     protected void afterExecute() {
         eucFileOutputJokenhyoFactory();
         AccessLogUUID id = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+        IBatchWriter batchWriter = (IBatchWriter) csvWriterJunitoJugo;
+        batchWriter.close();
         manager.spool(fileName, id);
     }
 
