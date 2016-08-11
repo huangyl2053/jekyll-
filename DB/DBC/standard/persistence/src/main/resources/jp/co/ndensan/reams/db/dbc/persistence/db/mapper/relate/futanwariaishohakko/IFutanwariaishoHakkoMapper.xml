@@ -32,7 +32,7 @@
             <if test="発行区分==1">
                 AND ("hakoYMD" is not null or "hakoYMD" <![CDATA[<>]]> '')
             </if>
-            <if test="出力対象==0">
+            <if test="出力対象==2">
                 AND "hihokenshaNo" IN 
                 (
                 SELECT 
@@ -60,7 +60,7 @@
          AND dbT3114RiyoshaFutanWariaiMeisai."hihokenshaNo" = dbT3113RiyoshaFutanWariai."hihokenshaNo"
          AND dbT3114RiyoshaFutanWariaiMeisai."rirekiNo" = dbT3113RiyoshaFutanWariai."rirekiNo"
          ORDER BY
-         dbT3114RiyoshaFutanWariaiMeisai."nendo" , dbT3114RiyoshaFutanWariaiMeisai."hihokenshaNo" ,  dbT3114RiyoshaFutanWariaiMeisai."edaNo" 
+         dbT3114RiyoshaFutanWariaiMeisai."nendo" , dbT3114RiyoshaFutanWariaiMeisai."hihokenshaNo" , dbT3114RiyoshaFutanWariaiMeisai."rirekiNo", dbT3114RiyoshaFutanWariaiMeisai."edaNo" 
     </sql>
       
       
@@ -96,7 +96,7 @@
             <if test="発行区分==1">
                 AND ("hakoYMD" is not null or "hakoYMD" <![CDATA[<>]]> '')
             </if>
-            <if test="出力対象==0">
+            <if test="出力対象==2">
                 AND "hihokenshaNo" IN 
                 (
                 SELECT 
