@@ -6,14 +6,13 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hanyorisutojigyotaishosha.IHanyoRisutoJigyoTaishoshaMapper">
      <resultMap id="resultMap_HanyoRisutoJigyoTaishoshaEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutojigyotaishosha.HanyoRisutoJigyoTaishoshaEntity" autoMapping="true">
         <result property="被保険者台帳管理_市町村コード" column="被保険者台帳管理_市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="履歴番号" column="履歴番号" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
         <result property="二次予防事業対象者_被保険者番号" column="二次予防事業対象者_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="二次予防事業対象者_履歴番号" column="二次予防事業対象者_履歴番号" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
         <result property="二次予防事業対象者_適用開始年月日" column=" 二次予防事業対象者_適用開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="二次予防事業対象者_適用終了年月日" column=" 二次予防事業対象者_適用終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="二次予防事業対象者_チェックリスト実施日" column="二次予防事業対象者_チェックリスト実施日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="二次予防事業対象者_決定年月日" column="二次予防事業対象者_決定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="二次予防事業対象者_識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="psmEntity" column="psmEntity" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="atesakiEntity" column="atesakiEntity" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
      </resultMap>
@@ -23,14 +22,13 @@
             fetchSize="500">
         SELECT					
             最新被保台帳."shichosonCode" AS 被保険者台帳管理_市町村コード,
-            最新被保台帳."shikibetsuCode" AS 識別コード,
-            最新被保台帳."rirekiNo" AS 履歴番号,
             二次予防事業対象者."hihokenshaNo" AS 二次予防事業対象者_被保険者番号,
             二次予防事業対象者."rirekiNo" AS 二次予防事業対象者_履歴番号,
             二次予防事業対象者."tekiyoKaishiYMD" AS 二次予防事業対象者_適用開始年月日,
             二次予防事業対象者."tekiyoShuryoYMD" AS 二次予防事業対象者_適用終了年月日,
             二次予防事業対象者."chosaJisshiYMD" AS 二次予防事業対象者_チェックリスト実施日,
             二次予防事業対象者."ketteiYMD"" AS 二次予防事業対象者_決定年月日,
+            二次予防事業対象者."shikibetsuCode" AS 二次予防事業対象者_識別コード,
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
             , <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />												
 	FROM																
