@@ -74,13 +74,12 @@ public class TekiyoJogaiRireki {
      * @return ResponseData<TekiyoJogaiRirekiDiv>
      */
     public ResponseData<TekiyoJogaiRirekiDiv> onClick_BtnKakunin(TekiyoJogaiRirekiDiv requestDiv) {
-        RString 画面状態 = new RString(requestDiv.getMode_DisplayMode().toString());
-        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック(画面状態);
+        ValidationMessageControlPairs vallidation
+                = getValidationHandler(requestDiv).入力チェック(requestDiv.getMode_DisplayMode());
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
-        } else {
-            getHandler(requestDiv).onClick_BtnKakunin(requestDiv.getDatagridTekiyoJogai().getActiveRow(), 画面状態);
         }
+        getHandler(requestDiv).onClick_BtnKakunin(requestDiv.getDatagridTekiyoJogai().getActiveRow());
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -98,7 +97,7 @@ public class TekiyoJogaiRireki {
         }
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(requestDiv).onClick_Torikeshi();
         }
         return ResponseData.of(requestDiv).respond();

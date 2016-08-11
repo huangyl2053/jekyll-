@@ -185,8 +185,8 @@ public class TekiyoJogaishaManager {
                 createParam_get適用除外者(shikibetsuCode, ronrisakujyoFlg);
         ITekiyoJogaishaMapper mapper = mapperProvider.create(ITekiyoJogaishaMapper.class);
         List<DbT1002TekiyoJogaishaEntity> 適用除外者管理適用除外者情報List = mapper.get適用除外者更新用(適用除外者Parameter);
-        List<TekiyoJogaisha> 適用除外者List = new ArrayList();
-        List<jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho> 施設入退所Lsit = new ArrayList();
+        List<TekiyoJogaisha> 適用除外者List = new ArrayList<>();
+        List<jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho> 施設入退所Lsit = new ArrayList<>();
         for (DbT1002TekiyoJogaishaEntity 適用除外者 : 適用除外者管理適用除外者情報List) {
             適用除外者.initializeMd5();
             適用除外者List.add(new TekiyoJogaisha(適用除外者));
@@ -360,51 +360,55 @@ public class TekiyoJogaishaManager {
     /**
      * 適用除外者の保存処理をします。
      *
-     * @param 変更前適用除外者情報 変更前適用除外者情報
      * @param 変更後適用除外者情報 変更後適用除外者情報
-     * @param dbT1004Entity 介護保険施設入退所管理情報
-     * @param 画面状態 画面状態
+     * @param dbT1004Entity dbT1004Entity
      * @param 識別コード 識別コード
      */
     @Transaction
-    public void saveTekiyoJogaisha(DbT1002TekiyoJogaishaEntity 変更前適用除外者情報,
+    public void saveTekiyoJogaisha適用登録(
             DbT1002TekiyoJogaishaEntity 変更後適用除外者情報,
             DbT1004ShisetsuNyutaishoEntity dbT1004Entity,
-            RString 画面状態,
             ShikibetsuCode 識別コード) {
-        if (状態_適用登録.equals(画面状態)) {
-            RString 登録可否判定 = tekiyoTorokuKahiHantei(識別コード, 変更後適用除外者情報.getTekiyoYMD());
-            if (登録不可.equals(登録可否判定)) {
-                throw new ApplicationException(DbzErrorMessages.他の期間情報との期間重複.getMessage());
-            }
-            TekiyoJogaishaManager.createInstance().regTekiyoJogaisha(変更後適用除外者情報);
-            TaJushochiTokureisyaKanriManager.createInstance().regShisetsuNyutaisho(dbT1004Entity);
-            if (登録可能で資格喪失必要.equals(登録可否判定)) {
-                HihokenshashikakusoshitsuManager.createInstance().saveHihokenshaShikakuSoshitsu(
-                        識別コード,
-                        HihokenshaNo.EMPTY,
-                        変更後適用除外者情報.getTekiyoYMD(),
-                        ShikakuSoshitsuJiyu.除外者.getコード(),
-                        変更後適用除外者情報.getTekiyoTodokedeYMD());
-            }
-        } else if (状態_解除.equals(画面状態)) {
-            TekiyoJogaishaManager.createInstance().delTekiyoJogaisha(変更前適用除外者情報);
-            TekiyoJogaishaManager.createInstance().regTekiyoJogaisha(変更後適用除外者情報);
-            TekiyoJogaishaManager.createInstance().updateKaigoJogaiTokureiTaishoShisetsu(dbT1004Entity);
-            if (JogaiKaijoJiyu.除外者解除.getコード().equals(変更後適用除外者情報.getTekiyoJogaikaijokaijoJiyuCode())) {
-                TekiyoJogaishaManager.createInstance().saveHihokenshaShutoku(
-                        変更後適用除外者情報.getTekiyoJogaikaijokaijoJiyuCode(),
-                        変更後適用除外者情報.getKaijoYMD(),
-                        識別コード,
-                        変更後適用除外者情報.getKaijoTodokedeYMD());
-            }
-        } else if (状態_追加.equals(画面状態)) {
-            TekiyoJogaishaManager.createInstance().regTekiyoJogaisha(変更後適用除外者情報);
-        } else if (状態_修正.equals(画面状態)) {
-            TekiyoJogaishaManager.createInstance().delTekiyoJogaisha(変更前適用除外者情報);
-            TekiyoJogaishaManager.createInstance().regTekiyoJogaisha(変更後適用除外者情報);
-        } else if (状態_削除.equals(画面状態)) {
-            TekiyoJogaishaManager.createInstance().delTekiyoJogaisha(変更前適用除外者情報);
+        RString 登録可否判定 = tekiyoTorokuKahiHantei(識別コード, 変更後適用除外者情報.getTekiyoYMD());
+        if (登録不可.equals(登録可否判定)) {
+            throw new ApplicationException(DbzErrorMessages.他の期間情報との期間重複.getMessage());
+        }
+        TekiyoJogaishaManager.createInstance().regTekiyoJogaisha(変更後適用除外者情報);
+        TaJushochiTokureisyaKanriManager.createInstance().regShisetsuNyutaisho(dbT1004Entity);
+        if (登録可能で資格喪失必要.equals(登録可否判定)) {
+            HihokenshashikakusoshitsuManager.createInstance().saveHihokenshaShikakuSoshitsu(
+                    識別コード,
+                    HihokenshaNo.EMPTY,
+                    変更後適用除外者情報.getTekiyoYMD(),
+                    ShikakuSoshitsuJiyu.除外者.getコード(),
+                    変更後適用除外者情報.getTekiyoTodokedeYMD());
+        }
+    }
+
+    /**
+     * 適用除外者の保存処理をします。
+     *
+     * @param 変更前適用除外者情報 変更前適用除外者情報
+     * @param 変更後適用除外者情報 変更後適用除外者情報
+     * @param dbT1004Entity dbT1004Entity
+     * @param 識別コード 識別コード
+     */
+    @Transaction
+    public void saveTekiyoJogaisha解除(
+            DbT1002TekiyoJogaishaEntity 変更前適用除外者情報,
+            DbT1002TekiyoJogaishaEntity 変更後適用除外者情報,
+            DbT1004ShisetsuNyutaishoEntity dbT1004Entity,
+            ShikibetsuCode 識別コード) {
+
+        TekiyoJogaishaManager.createInstance().delTekiyoJogaisha(変更前適用除外者情報);
+        TekiyoJogaishaManager.createInstance().regTekiyoJogaisha(変更後適用除外者情報);
+        TekiyoJogaishaManager.createInstance().updateKaigoJogaiTokureiTaishoShisetsu(dbT1004Entity);
+        if (JogaiKaijoJiyu.除外者解除.getコード().equals(変更後適用除外者情報.getTekiyoJogaikaijokaijoJiyuCode())) {
+            TekiyoJogaishaManager.createInstance().saveHihokenshaShutoku(
+                    変更後適用除外者情報.getTekiyoJogaikaijokaijoJiyuCode(),
+                    変更後適用除外者情報.getKaijoYMD(),
+                    識別コード,
+                    変更後適用除外者情報.getKaijoTodokedeYMD());
         }
     }
 
@@ -425,12 +429,12 @@ public class TekiyoJogaishaManager {
             FlexibleDate 解除年月日 = 最新データ.get解除年月日();
             FlexibleDate 異動日 = 最新データ.get異動日();
             if (資格取得年月日 != null && !資格取得年月日.isEmpty() && (資格喪失年月日 == null || 資格喪失年月日.isEmpty())
-                    && !(適用年月日 != null && !適用年月日.isEmpty() && (解除年月日 == null || 解除年月日.isEmpty()))
-                    && 異動日.isBeforeOrEquals(基準日)) {
+                && !(適用年月日 != null && !適用年月日.isEmpty() && (解除年月日 == null || 解除年月日.isEmpty()))
+                && 異動日.isBeforeOrEquals(基準日)) {
                 登録可否判定 = 登録可能で資格喪失必要;
             }
             if (資格取得年月日 != null && !資格取得年月日.isEmpty() && 資格喪失年月日 != null && !資格喪失年月日.isEmpty()
-                    && 異動日.isBeforeOrEquals(基準日)) {
+                && 異動日.isBeforeOrEquals(基準日)) {
                 登録可否判定 = 登録可能で資格喪失不要;
             }
         } else {

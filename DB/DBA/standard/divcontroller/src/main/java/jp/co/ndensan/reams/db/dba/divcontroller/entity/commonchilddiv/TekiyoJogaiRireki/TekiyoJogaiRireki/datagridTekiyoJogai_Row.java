@@ -3,14 +3,14 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TekiyoJog
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Jul 28 13:41:15 JST 2016 
+ * Thu Aug 11 16:19:46 JST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 
 /**
@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class datagridTekiyoJogai_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
+    private RString jotai;
     private TextBoxDate tekiyoDate;
     private TextBoxDate tekiyoTodokeDate;
     private RString tekiyoJiyuCode;
@@ -53,6 +54,7 @@ public class datagridTekiyoJogai_Row extends DataRow {
 
     public datagridTekiyoJogai_Row() {
         super();
+        this.jotai = RString.EMPTY;
         this.tekiyoDate = new TextBoxDate();
         this.tekiyoTodokeDate = new TextBoxDate();
         this.tekiyoJiyuCode = RString.EMPTY;
@@ -81,6 +83,7 @@ public class datagridTekiyoJogai_Row extends DataRow {
         this.henkougoTekiyoDate = RString.EMPTY;
         this.henkougoIdoYMD = RString.EMPTY;
         this.henkougoEdaNo = RString.EMPTY;
+        this.setOriginalData("jotai", jotai);
         this.setOriginalData("tekiyoDate", tekiyoDate);
         this.setOriginalData("tekiyoTodokeDate", tekiyoTodokeDate);
         this.setOriginalData("tekiyoJiyuCode", tekiyoJiyuCode);
@@ -111,8 +114,9 @@ public class datagridTekiyoJogai_Row extends DataRow {
         this.setOriginalData("henkougoEdaNo", henkougoEdaNo);
     }
 
-    public datagridTekiyoJogai_Row(TextBoxDate tekiyoDate, TextBoxDate tekiyoTodokeDate, RString tekiyoJiyuCode, RString tekiyoJiyu, TextBoxDate kayijoDate, TextBoxDate kaijoTodokeDate, RString kaijoJiyuCode, RString kaijoJiyu, TextBoxDate nyuShoDate, TextBoxDate taiShoDate, RString nyushoShisetsuCode, RString nyuShoShisetu, RString daichoShubetsu, RString shisetsuShurui, RString rirekiNo, RString idoYMD, RString idoJiyuCode, RString edaNo, RString shichosonCode, RString nyushoTsuchiHakkoYMD, RString taishoTsuchiHakkoYMD, RString henkoTsuchiHakkoYMD, RString henkoumaeTekiyoDate, RString henkoumaeIdoYMD, RString henkoumaeEdaNo, RString henkougoTekiyoDate, RString henkougoIdoYMD, RString henkougoEdaNo) {
+    public datagridTekiyoJogai_Row(RString jotai, TextBoxDate tekiyoDate, TextBoxDate tekiyoTodokeDate, RString tekiyoJiyuCode, RString tekiyoJiyu, TextBoxDate kayijoDate, TextBoxDate kaijoTodokeDate, RString kaijoJiyuCode, RString kaijoJiyu, TextBoxDate nyuShoDate, TextBoxDate taiShoDate, RString nyushoShisetsuCode, RString nyuShoShisetu, RString daichoShubetsu, RString shisetsuShurui, RString rirekiNo, RString idoYMD, RString idoJiyuCode, RString edaNo, RString shichosonCode, RString nyushoTsuchiHakkoYMD, RString taishoTsuchiHakkoYMD, RString henkoTsuchiHakkoYMD, RString henkoumaeTekiyoDate, RString henkoumaeIdoYMD, RString henkoumaeEdaNo, RString henkougoTekiyoDate, RString henkougoIdoYMD, RString henkougoEdaNo) {
         super();
+        this.setOriginalData("jotai", jotai);
         this.setOriginalData("tekiyoDate", tekiyoDate);
         this.setOriginalData("tekiyoTodokeDate", tekiyoTodokeDate);
         this.setOriginalData("tekiyoJiyuCode", tekiyoJiyuCode);
@@ -141,6 +145,7 @@ public class datagridTekiyoJogai_Row extends DataRow {
         this.setOriginalData("henkougoTekiyoDate", henkougoTekiyoDate);
         this.setOriginalData("henkougoIdoYMD", henkougoIdoYMD);
         this.setOriginalData("henkougoEdaNo", henkougoEdaNo);
+        this.jotai = jotai;
         this.tekiyoDate = tekiyoDate;
         this.tekiyoTodokeDate = tekiyoTodokeDate;
         this.tekiyoJiyuCode = tekiyoJiyuCode;
@@ -169,6 +174,10 @@ public class datagridTekiyoJogai_Row extends DataRow {
         this.henkougoTekiyoDate = henkougoTekiyoDate;
         this.henkougoIdoYMD = henkougoIdoYMD;
         this.henkougoEdaNo = henkougoEdaNo;
+    }
+
+    public RString getJotai() {
+        return jotai;
     }
 
     public TextBoxDate getTekiyoDate() {
@@ -281,6 +290,11 @@ public class datagridTekiyoJogai_Row extends DataRow {
 
     public RString getHenkougoEdaNo() {
         return henkougoEdaNo;
+    }
+
+    public void setJotai(RString jotai) {
+        this.setOriginalData("jotai", jotai);
+        this.jotai = jotai;
     }
 
     public void setTekiyoDate(TextBoxDate tekiyoDate) {

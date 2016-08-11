@@ -369,6 +369,11 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     }
 
     @Override
+    public void setDiplayMode(DisplayMode mode) {
+        setMode_DisplayMode(mode);
+    }
+
+    @Override
     public void initialize(ShikibetsuCode 識別コード) {
         getHandler().initialize(識別コード);
     }
