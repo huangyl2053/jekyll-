@@ -17,8 +17,6 @@
         <result property="被保険者台帳管理_広域内住所地特例フラグ" column="被保険者台帳管理_広域内住所地特例フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
         <result property="被保険者台帳管理_広住特措置元市町村コード" column="被保険者台帳管理_広住特措置元市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="被保険者台帳管理_市町村コード" column="被保険者台帳管理_市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="履歴番号" column="履歴番号" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
         <result property="医療保険加入状況_医療保険種別コード" column="医療保険加入状況_医療保険種別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="医療保険加入状況_医療保険者番号" column="医療保険加入状況_医療保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="医療保険加入状況_医療保険者名称" column="医療保険加入状況_医療保険者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -158,6 +156,8 @@
         <result property="後期高齢者情報_資格取得日" column="後期高齢者情報_資格取得日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="後期高齢者情報_登録区分" column="後期高齢者情報_登録区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="後期高齢者情報_資格喪失日" column="後期高齢者情報_資格喪失日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="後期高齢者情報_識別コード" column="後期高齢者情報_識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="後期高齢者情報_履歴番号" column="後期高齢者情報_履歴番号" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
         <result property="居宅届出_届出区分" column="居宅届出_届出区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="事業者作成_作成区分コード" column="事業者作成_作成区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="事業者作成_計画事業者番号" column="事業者作成_計画事業者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -235,8 +235,6 @@
                 最新被保台帳."koikinaiJushochiTokureiFlag" AS 被保険者台帳管理_広域内住所地特例フラグ,
                 最新被保台帳."koikinaiTokureiSochimotoShichosonCode" AS 被保険者台帳管理_広住特措置元市町村コード,
                 最新被保台帳."shichosonCode" AS 被保険者台帳管理_市町村コード,
-                最新被保台帳."shikibetsuCode" AS 識別コード,
-                最新被保台帳."rirekiNo" AS 履歴番号,
                 医療保険加入状況."iryoHokenShubetsuCode" AS 医療保険加入状況_医療保険種別コード,
                 医療保険加入状況."iryoHokenshaNo" AS 医療保険加入状況_医療保険者番号,
                 医療保険加入状況."iryoHokenshaMeisho" AS 医療保険加入状況_医療保険者名称,
@@ -376,6 +374,8 @@
                 後期高齢者情報."shikakuShutokuYMD" AS 後期高齢者情報_資格取得日, 
                 後期高齢者情報."torokuKubun" AS 後期高齢者情報_登録区分,
                 後期高齢者情報."shikakuSoshitsuYMD" AS 後期高齢者情報_資格喪失日, 
+                後期高齢者情報."shikibetsuCode" AS 後期高齢者情報_識別コード,
+                後期高齢者情報."rirekiNo" AS 後期高齢者情報_履歴番号,
                 居宅届出."todokedeKubun" AS 居宅届出_届出区分,
                 事業者作成."sakuseiKubunCode" AS 事業者作成_作成区分コード,
                 事業者作成."keikakuJigyoshaNo" AS 事業者作成_計画事業者番号,
