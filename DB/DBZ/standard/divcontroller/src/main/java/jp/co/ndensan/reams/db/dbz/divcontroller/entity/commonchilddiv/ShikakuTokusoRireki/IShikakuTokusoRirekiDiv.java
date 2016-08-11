@@ -2,8 +2,10 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTo
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShikakuTokuso;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * このコードはツールによって生成されました。
@@ -13,12 +15,26 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 public interface IShikakuTokusoRirekiDiv extends ICommonChildDivBaseProperties {
 
     /**
-     * 引数から渡されたキーを元に被保険者台帳テーブルから情報を取得し、その情報をグリッドに表示します。
+     * 引数から渡されたキーを元に被保険者台帳テーブルから情報を取得し、その情報をグリッドに表示します。 内部で{@code initializeKoseiShichosonJoho()}、
+     * {@code getShikakuShutokuRireki(SearchResult<ShikakuTokuso>)}を呼び出しています。
      *
      * @param 被保険者番号 被保険者番号
      * @param 識別コード 識別コード
      */
     void initialize(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード);
+
+    /**
+     * 市町村セキュリティ情報を参照し、共有子Divの初期状態を設定します。
+     */
+    void initializeShichosonSecurity();
+
+    /**
+     * 被保険者番号と識別コードを元に、
+     *
+     * @param hihokenshaNo 被保険者番号
+     * @param shikibetsuCode 識別コード
+     */
+    void getShikakuShutokuRireki(HihokenshaNo hihokenshaNo, ShikibetsuCode shikibetsuCode);
 
     /**
      * 資格得喪履歴Gridの設定します。

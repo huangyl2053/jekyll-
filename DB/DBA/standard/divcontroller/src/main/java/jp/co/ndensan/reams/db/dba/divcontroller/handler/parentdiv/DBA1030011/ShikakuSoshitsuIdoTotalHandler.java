@@ -369,4 +369,23 @@ public class ShikakuSoshitsuIdoTotalHandler {
         }
         return resultList;
     }
+
+    /**
+     * 資格得喪履歴のグリッドに設定されているデータを確認し、資格取得中であるかを判定する。
+     * グリッドにデータが0件、もしくは最新データ（グリッド上の1件目）の資格取得・喪失日がEMPTYではない場合、資格取得中と判定する。
+     *
+     * @TODO 城間 グリッドにデータが先に設定されていて、かつ取得日のDESCでソートされている前提になっている。再考が必要。
+     * @return 資格取得中と判定出来たらtrue
+     */
+    public boolean is資格喪失中() {
+        List<dgShikakuShutokuRireki_Row> dataSource
+                = div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().getDataGridDataSource();
+
+        if (dataSource.isEmpty()) {
+            return false;
+        }
+        dgShikakuShutokuRireki_Row newestData = dataSource.get(0);
+        return !newestData.getShutokuDate().getValue().isEmpty() && !newestData.getSoshitsuDate().getValue().isEmpty();
+    }
+
 }
