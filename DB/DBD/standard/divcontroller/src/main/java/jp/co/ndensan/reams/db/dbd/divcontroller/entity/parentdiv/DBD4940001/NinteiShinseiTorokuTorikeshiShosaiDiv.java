@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class NinteiShinseiTorokuTorikeshiShosaiDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -50,14 +50,14 @@ public class NinteiShinseiTorokuTorikeshiShosaiDiv extends Panel {
     private ShujiiAndShujiiIryoKikanDiv ShujiiAndShujiiIryoKikan;
     @JsonProperty("ccdKaigoNinteiAtenaInfo")
     private KaigoNinteiAtenaInfoDiv ccdKaigoNinteiAtenaInfo;
+    @JsonProperty("ccdKaigoNinteiShinseiKihon")
+    private KaigoNinteiShinseiKihonJohoInputDiv ccdKaigoNinteiShinseiKihon;
+    @JsonProperty("ccdZenkaiNinteiKekkaJoho")
+    private ZenkaiNinteiKekkaJohoDiv ccdZenkaiNinteiKekkaJoho;
     @JsonProperty("ccdNinteiInput")
     private NinteiInputDiv ccdNinteiInput;
     @JsonProperty("ccdKaigoNinteiShikakuInfo")
     private KaigoninteiShikakuInfoDiv ccdKaigoNinteiShikakuInfo;
-    @JsonProperty("ccdZenkaiNinteiKekkaJoho")
-    private ZenkaiNinteiKekkaJohoDiv ccdZenkaiNinteiKekkaJoho;
-    @JsonProperty("ccdKaigoNinteiShinseiKihon")
-    private KaigoNinteiShinseiKihonJohoInputDiv ccdKaigoNinteiShinseiKihon;
     @JsonProperty("ccdSonotaJoho")
     private ShinseiSonotaJohoInputDiv ccdSonotaJoho;
     @JsonProperty("hdnKaigoJimuCode")
@@ -175,6 +175,24 @@ public class NinteiShinseiTorokuTorikeshiShosaiDiv extends Panel {
     }
 
     /*
+     * getccdKaigoNinteiShinseiKihon
+     * @return ccdKaigoNinteiShinseiKihon
+     */
+    @JsonProperty("ccdKaigoNinteiShinseiKihon")
+    public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihon() {
+        return ccdKaigoNinteiShinseiKihon;
+    }
+
+    /*
+     * getccdZenkaiNinteiKekkaJoho
+     * @return ccdZenkaiNinteiKekkaJoho
+     */
+    @JsonProperty("ccdZenkaiNinteiKekkaJoho")
+    public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
+        return ccdZenkaiNinteiKekkaJoho;
+    }
+
+    /*
      * getccdNinteiInput
      * @return ccdNinteiInput
      */
@@ -190,24 +208,6 @@ public class NinteiShinseiTorokuTorikeshiShosaiDiv extends Panel {
     @JsonProperty("ccdKaigoNinteiShikakuInfo")
     public IKaigoninteiShikakuInfoDiv getCcdKaigoNinteiShikakuInfo() {
         return ccdKaigoNinteiShikakuInfo;
-    }
-
-    /*
-     * getccdZenkaiNinteiKekkaJoho
-     * @return ccdZenkaiNinteiKekkaJoho
-     */
-    @JsonProperty("ccdZenkaiNinteiKekkaJoho")
-    public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
-        return ccdZenkaiNinteiKekkaJoho;
-    }
-
-    /*
-     * getccdKaigoNinteiShinseiKihon
-     * @return ccdKaigoNinteiShinseiKihon
-     */
-    @JsonProperty("ccdKaigoNinteiShinseiKihon")
-    public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihon() {
-        return ccdKaigoNinteiShinseiKihon;
     }
 
     /*
