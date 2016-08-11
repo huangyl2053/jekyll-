@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbc.business.report.kogakuoshirasetsuchiteshutsuk
 import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakuoshirasetsuchiteshutsukigenari.KogakuOshiraseTsuchiTeshutsuKigenAriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakuoshirasetsuchiteshutsukigenari.KogakuOshiraseTsuchiTeshutsuKigenAriSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 高額サービス給付のお知らせ通知書（提出期限あり）のソースの編集クラスです。
@@ -36,7 +38,7 @@ public class KogakuOshiraseTsuchiTeshutsuKigenAriEditor implements IKogakuOshira
         if (!target.is空白()) {
             source.hihokenshaNameKana = ReportKomokuEditorUtil.get氏名カナ(target.get申請情報帳票発行一時().getShimeikana());
             source.hihokenshaName = ReportKomokuEditorUtil.get氏名(target.get申請情報帳票発行一時().getMeisho());
-            source.man = target.get申請情報帳票発行一時().getSeibetsuCode();
+            source.man = get性別(target.get申請情報帳票発行一時().getSeibetsuCode());
             source.birthYMD = ReportKomokuEditorUtil.パターン12(target.get申請情報帳票発行一時().getSeinengappiYMD());
             source.hokenshaNo = ReportKomokuEditorUtil.get証記載保険者番号(target.get申請情報帳票発行一時().getShoKisaiHokenshaNoChohyo());
             source.hihokenshaNo = ReportKomokuEditorUtil.get被保険者番号(target.get申請情報帳票発行一時().getHihokenshaNoChohyo());
@@ -93,5 +95,12 @@ public class KogakuOshiraseTsuchiTeshutsuKigenAriEditor implements IKogakuOshira
             source.識別コード = target.get申請情報帳票発行一時().getShikibetsuCodeChohyo();
         }
         return source;
+    }
+
+    private RString get性別(RString code) {
+        if (RString.isNullOrEmpty(code)) {
+            return RString.EMPTY;
+        }
+        return Seibetsu.男.getコード().equals(code) ? Seibetsu.男.get名称() : Seibetsu.女.get名称();
     }
 }
