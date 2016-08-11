@@ -2015,4 +2015,31 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 toList(DbT7022ShoriDateKanriEntity.class);
     }
 
+    /**
+     * 対象開始日時AND対象終了日時を更新します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 市町村コード LasdecCode
+     * @param 処理名 RString
+     * @param 処理枝番 RString
+     * @return List<DbT7022ShoriDateKanriEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT7022ShoriDateKanriEntity> select対象開始日時toupdate(SubGyomuCode サブ業務コード, LasdecCode 市町村コード,
+            RString 処理名, RString 処理枝番) throws NullPointerException {
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(市町村コードメッセージ.toString()));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage(処理枝番メッセージ.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, サブ業務コード),
+                                eq(shichosonCode, 市町村コード),
+                                eq(shoriName, 処理名),
+                                eq(shoriEdaban, 処理枝番))).
+                toList(DbT7022ShoriDateKanriEntity.class);
+    }
 }
