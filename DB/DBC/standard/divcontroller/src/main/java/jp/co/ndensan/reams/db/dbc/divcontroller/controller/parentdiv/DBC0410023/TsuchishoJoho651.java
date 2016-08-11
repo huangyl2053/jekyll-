@@ -53,7 +53,7 @@ public class TsuchishoJoho651 {
     public ResponseData<DBC120170_KagoKetteiKohifutanshaInBatchParameter> onClick_btnExcute(TsuchishoJoho651Div div) {
         DBC120170_KagoKetteiKohifutanshaInBatchParameter parameter = new DBC120170_KagoKetteiKohifutanshaInBatchParameter();
         RDate 処理年月 = div.getCcdKokurenJohoTorikomi().get処理年月();
-        long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
+        Long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
         RString 再処理区分 = div.getCcdKokurenJohoTorikomi().get再処理区分();
         parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toString()));
         parameter.setShutsuryokujunId(出力順ID);
