@@ -132,9 +132,9 @@ public class SeikyugakuTsuchishoCsvFileManager {
             flowEntity.setShoriYM(処理対象年月);
         }
         int レコード件数合算 = 0;
-        for (int i = INDEX_0; i < csvlist.size(); i++) {
-            if (csvlist.get(i).getControlCsvEntity() != null && csvlist.get(i).getControlCsvEntity().getCodeNum() != null) {
-                int レコード件数 = Integer.parseInt(csvlist.get(i).getControlCsvEntity().getCodeNum().toString());
+        for (SeikyugakuTsuchishoCsvFileEntity csvEntity : csvlist) {
+            if (csvEntity.getControlCsvEntity() != null && csvEntity.getControlCsvEntity().getCodeNum() != null) {
+                int レコード件数 = Integer.parseInt(csvEntity.getControlCsvEntity().getCodeNum().toString());
                 レコード件数合算 = レコード件数合算 + レコード件数;
             }
         }

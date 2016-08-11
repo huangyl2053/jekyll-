@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBE-1540-010 dongyabin -->
+<!-- 認定調査結果取込みを検索用です -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosakekkatorikomiocr.INinteiOcrMapper">
+    <select resultOrdered="true" id="get関連データ" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosakekkatorikomiocr.NinteiOcrMapperParamter"
+            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosaKekkaTorikomiOcrRelateEntity" fetchSize="500">
+        SELECT
+          T5101."shoKisaiHokenshaNo" AS 証記載保険者番号
+          , T5101."hihokenshaNo" AS 被保険者番号
+          , T7051."shichosonMeisho" AS 保険者
+          , T5101."ninteiShinseiShinseijiKubunCode" AS 申請区分
+          , T5101."koroshoIfShikibetsuCode" AS 厚労省IF識別コード
+          , T5101."shinseishoKanriNo" AS 申請書管理番号
+          , T5201."ninteichosaIraiRirekiNo" AS 認定調査依頼履歴番号
+          , T5115."imageSharedFileId" AS イメージ共有ファイルID
+          , T5201."ninteichosaItakusakiCode" AS 認定調査委託先コード
+          , T5201."ninteiChosainCode" AS 認定調査員コード 
+        FROM
+          rgdb."DbT5101NinteiShinseiJoho" AS T5101 
+          INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS T5201 
+            ON T5101."shinseishoKanriNo" = T5201."shinseishoKanriNo" 
+            AND T5201."logicalDeletedFlag" = FALSE 
+            AND NOT EXISTS ( 
+              SELECT
+                'X' 
+              FROM
+                rgdb."DbT5201NinteichosaIraiJoho" AS B1 
+              WHERE
+                T5201."shinseishoKanriNo" = B1."shinseishoKanriNo" 
+                AND B1."logicalDeletedFlag" = False 
+                AND T5201."ninteichosaIraiRirekiNo" <![CDATA[<]]> B1."ninteichosaIraiRirekiNo"
+            ) 
+          INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051 
+            ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo" 
+          INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS T5105 
+            ON T5101."shinseishoKanriNo" = T5105."shinseishoKanriNo" 
+            AND T5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL 
+            AND T5105."ninteichosaIraiKanryoYMD" IS NOT NULL 
+            AND T5105."ninteiShinsakaiWariateKanryoYMD" IS NULL 
+            AND T5105."ninteiShinsakaiKanryoYMD" IS NULL 
+            AND T5105."centerSoshinYMD" IS NULL 
+          LEFT JOIN rgdb."DbT5115Image" AS T5115 
+            ON T5101."shinseishoKanriNo" = T5115."shinseishoKanriNo"
+          WHERE 
+            T5101."shoKisaiHokenshaNo" = #{証記載保険者番号}
+            AND T5101."hihokenshaNo" = #{被保険者番号} 
+            AND T5101."ninteiShinseiYMD" = #{認定申請日}
+    </select>
+</mapper>

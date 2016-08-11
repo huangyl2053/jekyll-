@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 集計一時テーブルに対するテーブルのエンティティ
  *
- * @reamsid_L DBC-2820-010 sunhui
+ * @reamsid_L DBC-2820-050 sunhui
  */
 @lombok.Getter
 @lombok.Setter

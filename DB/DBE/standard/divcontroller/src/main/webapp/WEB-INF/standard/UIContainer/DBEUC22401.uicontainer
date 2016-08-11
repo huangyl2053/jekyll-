@@ -12,9 +12,9 @@
      "type": "start",
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE2060001",
-     "toLayoutTitle": "完了処理・認定調査結果入手",
-     "toState": "登録"
+     "toLayoutName": "DBE2240001",
+     "toLayoutTitle": "認定調査結果取込（OCR）",
+     "toState": "初期状態_メニューから"
     },
     {
      "id": "2",
@@ -25,34 +25,6 @@
      "eventName": "完了",
      "destroy": false,
      "condition": ""
-    },
-    {
-     "id": "3",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE2060001",
-     "layoutTitle": "完了処理・認定調査結果入手",
-     "eventName": "取込み_OCR_遷移",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE2240001",
-     "toLayoutTitle": "認定調査結果取込（OCR）",
-     "toState": "初期表示"
-    },
-    {
-     "id": "4",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE2240001",
-     "layoutTitle": "認定調査結果取込（OCR）",
-     "eventName": "認定調査結果戻る",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE2060001",
-     "toLayoutTitle": "完了処理・認定調査結果入手",
-     "toState": "登録"
     }
    ]
   }

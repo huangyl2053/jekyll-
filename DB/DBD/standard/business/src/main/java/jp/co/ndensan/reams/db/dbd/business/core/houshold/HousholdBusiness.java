@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.core.houshold;
 
+import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.houshold.HousholdEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBD-4930-040 wangjie2
  */
-public class HousholdBusiness {
+public class HousholdBusiness implements Serializable {
 
     private final HousholdEntity entity;
 
@@ -27,6 +28,14 @@ public class HousholdBusiness {
     public HousholdBusiness(HousholdEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("非課税年金対象者情報のエンティティ"));
         this.entity = entity;
+    }
+
+    /**
+     * コンストラクタです。
+     *
+     */
+    public HousholdBusiness() {
+        this.entity = new HousholdEntity();
     }
 
     /**
@@ -227,6 +236,16 @@ public class HousholdBusiness {
      */
     public RString get金額() {
         return entity.get金額();
+    }
+
+    /**
+     * このクラスの編集を行うBuilderを取得します。<br/>
+     * 編集後のインスタンスを取得する場合は{@link HousholdBusiness.createBuilderForEdit#build()}を使用してください。
+     *
+     * @return Builder
+     */
+    public HousholdBuilder createBuilderForEdit() {
+        return new HousholdBuilder(entity);
     }
 
 }

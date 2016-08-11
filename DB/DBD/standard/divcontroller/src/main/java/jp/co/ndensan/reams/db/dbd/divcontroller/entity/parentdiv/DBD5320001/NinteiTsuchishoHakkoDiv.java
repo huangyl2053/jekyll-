@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobang
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -22,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteiTsuchishoHakkoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -39,6 +41,8 @@ public class NinteiTsuchishoHakkoDiv extends Panel {
     private KobetsuPrintDiv KobetsuPrint;
     @JsonProperty("IkkatsuHakko")
     private IkkatsuHakkoDiv IkkatsuHakko;
+    @JsonProperty("KanryoPanel")
+    private KanryoPanelDiv KanryoPanel;
     @JsonProperty("ccdChohyoShutsuryokujun")
     private ChohyoShutsuryokujunDiv ccdChohyoShutsuryokujun;
 
@@ -136,6 +140,24 @@ public class NinteiTsuchishoHakkoDiv extends Panel {
     @JsonProperty("IkkatsuHakko")
     public void setIkkatsuHakko(IkkatsuHakkoDiv IkkatsuHakko) {
         this.IkkatsuHakko = IkkatsuHakko;
+    }
+
+    /*
+     * getKanryoPanel
+     * @return KanryoPanel
+     */
+    @JsonProperty("KanryoPanel")
+    public KanryoPanelDiv getKanryoPanel() {
+        return KanryoPanel;
+    }
+
+    /*
+     * setKanryoPanel
+     * @param KanryoPanel KanryoPanel
+     */
+    @JsonProperty("KanryoPanel")
+    public void setKanryoPanel(KanryoPanelDiv KanryoPanel) {
+        this.KanryoPanel = KanryoPanel;
     }
 
     /*
@@ -1058,6 +1080,11 @@ public class NinteiTsuchishoHakkoDiv extends Panel {
     @JsonIgnore
     public IBunshoBangoInputDiv getCcdIkkatsuKubunHenkoBunshoBango() {
         return this.getIkkatsuHakko().getChushutsuTasho().getCcdIkkatsuKubunHenkoBunshoBango();
+    }
+
+    @JsonIgnore
+    public IKanryoMessageDiv getCcdKanryoMessege() {
+        return this.getKanryoPanel().getCcdKanryoMessege();
     }
 
     // </editor-fold>

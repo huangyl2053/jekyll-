@@ -248,9 +248,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoFlow extends BatchFlowBase<Honsanteif
 
     private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
         return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度().toDateString(),
-                getParameter().get賦課年度().toDateString(),
-                getResult(RString.class, new RString(システム日時の取得), SystemTimeSakuseiProcess.KIJUN_TIME),
-                ShoriName.本算定賦課.get名称(), 帳票分類ID);
+                getParameter().get賦課年度().toDateString(), null, ShoriName.本算定賦課.get名称(), 帳票分類ID);
     }
 
     private boolean is決定通知書(ReportId 帳票ID) {

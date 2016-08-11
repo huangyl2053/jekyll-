@@ -17,9 +17,6 @@
         <result property="被保険者台帳管理_市町村コード" column="被保険者台帳管理_市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="被保険者台帳管理_広域内住所地特例フラグ" column="被保険者台帳管理_広域内住所地特例フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
         <result property="被保険者台帳管理_広住特措置元市町村コード" column="被保険者台帳管理_広住特措置元市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="履歴番号" column="履歴番号" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
-        <result property="枝番号" column="枝番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="利用者負担割合_職権変更フラグ" column="利用者負担割合_職権変更フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
         <result property="利用者負担割合明細_資格区分" column="利用者負担割合明細_資格区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="利用者負担割合明細_負担割合区分" column="利用者負担割合明細_負担割合区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -43,6 +40,8 @@
         <result property="利用者負担割合_発行不要フラグ" column="利用者負担割合_発行不要フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
         <result property="利用者負担割合_発行区分" column="利用者負担割合_発行区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="利用者負担割合_発行日" column="利用者負担割合_発行日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="利用者負担割合_識別コード" column="利用者負担割合_識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="利用者負担割合_履歴番号" column="利用者負担割合_履歴番号" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
         <result property="psmEntity" column="psmEntity" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="atesakiEntity" column="atesakiEntity" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
@@ -64,9 +63,6 @@
                 最新被保台帳."shichosonCode" AS 被保険者台帳管理_市町村コード,
                 最新被保台帳."koikinaiJushochiTokureiFlag" AS 被保険者台帳管理_広域内住所地特例フラグ,
                 最新被保台帳."koikinaiTokureiSochimotoShichosonCode" AS 被保険者台帳管理_広住特措置元市町村コード,	
-                最新被保台帳."shikibetsuCode" AS 識別コード,
-                最新被保台帳."rirekiNo" AS 履歴番号,
-        	最新被保台帳."edaNo" AS 枝番号,		
                 利用者負担割合."shokenFlag" AS 利用者負担割合_職権変更フラグ,						
                 利用者負担割合明細."shikakuKubun" AS 利用者負担割合明細_資格区分,					
                 利用者負担割合明細."futanWariaiKubun" AS 利用者負担割合明細_負担割合区分,							
@@ -90,6 +86,8 @@
                 利用者負担割合."hakoFuyoFlag" AS 利用者負担割合_発行不要フラグ,							
                 利用者負担割合."hakoKubun" AS 利用者負担割合_発行区分,						
                 利用者負担割合."hakoYMD" AS 利用者負担割合_発行日,
+                利用者負担割合."shikibetsuCode" AS 利用者負担割合_識別コード,
+        	利用者負担割合."edaNo" AS 利用者負担割合_枝番号,		
                 <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
                 , <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
             FROM

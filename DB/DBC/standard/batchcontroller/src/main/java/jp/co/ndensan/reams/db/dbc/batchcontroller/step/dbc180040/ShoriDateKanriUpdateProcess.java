@@ -39,9 +39,9 @@ public class ShoriDateKanriUpdateProcess extends BatchProcessBase<DbT7022ShoriDa
     private static final RString 処理枝番_0001 = new RString("0001");
     private static final RString 処理枝番_0002 = new RString("0002");
     private static final RString 年度内連番_0001 = new RString("0001");
-    private static final RString ZERO = new RString("0");
-    private static final RString ONE = new RString("1");
-    private static final RString TWO = new RString("2");
+    private static final RString 定数_ZERO = new RString("0");
+    private static final RString 定数_ONE = new RString("1");
+    private static final RString 定数_TWO = new RString("2");
 
     @Override
     protected void initialize() {
@@ -76,13 +76,13 @@ public class ShoriDateKanriUpdateProcess extends BatchProcessBase<DbT7022ShoriDa
         item.setSubGyomuCode(SubGyomuCode.DBC介護給付);
         item.setShichosonCode(導入団体クラス.getLasdecCode_());
         item.setShoriName(処理名);
-        if (ZERO.equals(parameter.get出力対象())) {
+        if (定数_ZERO.equals(parameter.get出力対象())) {
             item.setShoriEdaban(処理枝番_0000);
-        } else if (ONE.equals(parameter.get出力対象())) {
+        } else if (定数_ONE.equals(parameter.get出力対象())) {
             item.setShoriEdaban(処理枝番_0001);
             item.setTaishoKaishiTimestamp(new YMDHMS(parameter.get抽出期間開始日時()));
             item.setTaishoShuryoTimestamp(new YMDHMS(parameter.get抽出期間終了日時()));
-        } else if (TWO.equals(parameter.get出力対象())) {
+        } else if (定数_TWO.equals(parameter.get出力対象())) {
             item.setShoriEdaban(処理枝番_0002);
             item.setTaishoKaishiTimestamp(new YMDHMS(parameter.get抽出期間開始日時()));
             item.setTaishoShuryoTimestamp(new YMDHMS(parameter.get抽出期間終了日時()));

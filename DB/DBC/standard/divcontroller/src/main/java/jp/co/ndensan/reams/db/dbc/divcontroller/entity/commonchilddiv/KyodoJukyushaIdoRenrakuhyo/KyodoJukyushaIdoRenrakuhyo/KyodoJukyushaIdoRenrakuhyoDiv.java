@@ -13,7 +13,9 @@ import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuh
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
@@ -678,5 +680,126 @@ public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyus
     @Override
     public List<RString> get高額送付情報を追加する() {
         return this.getChkKogakuSofuAdd().getSelectedKeys();
+    }
+
+    /**
+     * 「基本送付情報を削除する」チェックボックス。
+     *
+     * @return list
+     */
+    @JsonIgnore
+    @Override
+    public List<RString> get基本送付情報を削除する() {
+        return this.getChkKihonSofuDelete().getSelectedKeys();
+    }
+
+    /**
+     * 「償還送付情報を削除する」チェックボックス。
+     *
+     * @return list
+     */
+    @JsonIgnore
+    @Override
+    public List<RString> get償還送付情報を削除する() {
+        return this.getChkShokanSofuDelete().getSelectedKeys();
+    }
+
+    /**
+     * 「高額送付情報を削除する」チェックボックス。
+     *
+     * @return list
+     */
+    @JsonIgnore
+    @Override
+    public List<RString> get高額送付情報を削除する() {
+        return this.getChkKogakuSofuDelete().getSelectedKeys();
+    }
+
+    /**
+     * 基本送付情報の履歴番号。
+     *
+     * @return 履歴番号 int
+     */
+    @JsonIgnore
+    @Override
+    public Decimal get基本送付_履歴番号() {
+        return this.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtRirekiNo().getValue();
+    }
+
+    /**
+     * 償還送付情報の履歴番号。
+     *
+     * @return 履歴番号 int
+     */
+    @JsonIgnore
+    @Override
+    public Decimal get償還送付_履歴番号() {
+        return this.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtRirekiNo().getValue();
+    }
+
+    /**
+     * 高額送付情報の履歴番号。
+     *
+     * @return 履歴番号 int
+     */
+    @JsonIgnore
+    @Override
+    public Decimal get高額送付_履歴番号() {
+        return this.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtRirekiNo().getValue();
+    }
+
+    /**
+     * 訂正区分。
+     *
+     * @return 訂正区分 RString
+     */
+    @JsonIgnore
+    @Override
+    public RString get訂正区分() {
+        return this.getRadTeiseiKubunCode().getSelectedValue();
+    }
+
+    /**
+     * 訂正年月日。
+     *
+     * @return 訂正年月日 RDate
+     */
+    @JsonIgnore
+    @Override
+    public RDate get訂正年月日() {
+        return this.getTxtTeiseiYMD().getValue();
+    }
+
+    /**
+     * 基本送付情報を追加活性する。
+     *
+     * @return boolean
+     */
+    @JsonIgnore
+    @Override
+    public boolean get基本送付情報を追加活性() {
+        return !this.getChkKihonSofuAdd().isDisabled();
+    }
+
+    /**
+     * 償還送付情報を追加活性する。
+     *
+     * @return boolean
+     */
+    @JsonIgnore
+    @Override
+    public boolean get償還送付情報を追加活性() {
+        return !this.getChkShokanSofuAdd().isDisabled();
+    }
+
+    /**
+     * 高額送付情報を追加活性する。
+     *
+     * @return boolean
+     */
+    @JsonIgnore
+    @Override
+    public boolean get高額送付情報を追加活性() {
+        return !this.getChkKogakuSofuAdd().isDisabled();
     }
 }

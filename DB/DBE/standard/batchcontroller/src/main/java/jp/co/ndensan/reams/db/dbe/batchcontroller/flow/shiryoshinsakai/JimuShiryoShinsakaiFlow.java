@@ -227,7 +227,7 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
     @Step(事務局_概況特記)
     protected IBatchFlowCommand createJimuTokkiIranData() {
         return loopBatch(JimuGaikyotokkiDataSakuseiA4Process.class)
-                .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
+                .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
     }
 
     /**

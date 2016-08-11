@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 汎用リスト出力(後期高齢者)のMyBatis用パラメータクラスです。
@@ -29,22 +28,21 @@ import lombok.Setter;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
-@Setter
 public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParameter {
 
     private static final int 年の月数 = 12;
     private static final int 月の日数 = 31;
 
-    private RString cyusyutsuhohokubun;
-    private RString cyusyutsukomokukubun;
-    private FlexibleDate kizyunnichi;
-    private FlexibleDate hitsukehanifrom;
-    private FlexibleDate hitsukehanito;
-    private boolean chokindatacyusyutsu;
-    private RString soshitsukubun;
-    private AtenaSelectBatchParameter atenacyusyutsujyoken;
-    private RString syutsuryokujun;
-    private RString syutsuryokukomoku;
+    private final RString cyusyutsuhohokubun;
+    private final RString cyusyutsukomokukubun;
+    private final FlexibleDate kizyunnichi;
+    private final FlexibleDate hitsukehanifrom;
+    private final FlexibleDate hitsukehanito;
+    private final boolean chokindatacyusyutsu;
+    private final RString soshitsukubun;
+    private final AtenaSelectBatchParameter atenacyusyutsujyoken;
+    private final RString syutsuryokujun;
+    private final RString syutsuryokukomoku;
     private boolean is基準日;
     private boolean is範囲;
     private boolean is取得日;
