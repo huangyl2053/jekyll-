@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8130011;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanJikoFutanGaku;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanJikoFutanGakuMeisai;
@@ -69,6 +68,7 @@ public class JikoFutangakuHoseiHandler {
     private static final int INT_4 = 4;
     private static final RString CODE_003 = new RString("003");
     private static final RString 名称_被保険者番号 = new RString("被保険者番号");
+    private static final RString KEY_ZERO = new RString("key0");
 
     /**
      * コンストラクタです。
@@ -97,7 +97,9 @@ public class JikoFutangakuHoseiHandler {
     public void initializeDisplay(TaishoshaKey 対象者) {
         div.getKogakuGassanShikyuShinseiTorokuKihon().initialize(対象者.get識別コード());
         div.getKogakuGassanShikyuShinseiTorokuKaigoKihon().initialize(対象者.get被保険者番号());
-        div.getJikoFutangakuHoseiList().getChkRirekiHyouji().setSelectedItemsByKey(Collections.EMPTY_LIST);
+        List<RString> keyList = new ArrayList();
+        keyList.add(KEY_ZERO);
+        div.getJikoFutangakuHoseiList().getChkRirekiHyouji().setSelectedItemsByKey(keyList);
         div.getJikoFutangakuHoseiList().getDgJohoIchiran().init();
     }
 
@@ -270,7 +272,6 @@ public class JikoFutangakuHoseiHandler {
             detailDiv.getTxtShoumeishoSakuseiYMD().setValue(
                     new RDate(result.get自己負担額証明書作成年月日().toString()));
         }
-
     }
 
     private void init事業自己負担管理情報１タブ(KogakuGassanJikoFutanGaku result) {
