@@ -101,93 +101,112 @@ public class FukaJohoHenshuProcess extends BatchProcessBase<DbT2002FukaJohoTempT
     }
 
     private void save普徴期別(DbT2002FukaJohoTempTableEntity 賦課情報,
-            ShunoKamokuFinder manager,
-            FukaNokiResearcher 賦課納期取得) {
+            ShunoKamokuFinder manager, FukaNokiResearcher 賦課納期取得) {
         IShunoKamoku 科目 = manager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収);
         KitsukiList 期月リスト = new FuchoKiUtil().get期月リスト();
+        save普徴期別By04期(賦課情報, 科目, 賦課納期取得, 期月リスト);
         save普徴期別By07期(賦課情報, 科目, 賦課納期取得, 期月リスト);
+        save普徴期別By10期(賦課情報, 科目, 賦課納期取得, 期月リスト);
         save普徴期別By14期(賦課情報, 科目, 賦課納期取得, 期月リスト);
     }
 
-    private void save普徴期別By07期(DbT2002FukaJohoTempTableEntity 賦課情報,
-            IShunoKamoku 科目,
-            FukaNokiResearcher 賦課納期取得,
-            KitsukiList 期月リスト) {
+    private void save普徴期別By04期(DbT2002FukaJohoTempTableEntity 賦課情報,
+            IShunoKamoku 科目, FukaNokiResearcher 賦課納期取得, KitsukiList 期月リスト) {
         if (賦課情報.getFuKibetsuGaku01() != null && Decimal.ZERO.compareTo(賦課情報.getFuKibetsuGaku01()) == -1) {
-            saveTemp(賦課情報, 科目, 期月リスト.get月の期(Tsuki._4月).get期AsInt(),
-                    賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki._4月).get期AsInt()).get納期限(),
-                    賦課情報.getFuKibetsuGaku01());
+            int 期別 = 期月リスト.get月の期(Tsuki._4月).get期AsInt();
+            if (0 < 期別) {
+                saveTemp(賦課情報, 科目, 期別, 賦課納期取得.get普徴納期(期別).get納期限(), 賦課情報.getFuKibetsuGaku01());
+            }
         }
         if (賦課情報.getFuKibetsuGaku02() != null && Decimal.ZERO.compareTo(賦課情報.getFuKibetsuGaku02()) == -1) {
-            saveTemp(賦課情報, 科目, 期月リスト.get月の期(Tsuki._5月).get期AsInt(),
-                    賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki._5月).get期AsInt()).get納期限(),
-                    賦課情報.getFuKibetsuGaku02());
+            int 期別 = 期月リスト.get月の期(Tsuki._5月).get期AsInt();
+            if (0 < 期別) {
+                saveTemp(賦課情報, 科目, 期別, 賦課納期取得.get普徴納期(期別).get納期限(), 賦課情報.getFuKibetsuGaku02());
+            }
         }
         if (賦課情報.getFuKibetsuGaku03() != null && Decimal.ZERO.compareTo(賦課情報.getFuKibetsuGaku03()) == -1) {
-            saveTemp(賦課情報, 科目, 期月リスト.get月の期(Tsuki._6月).get期AsInt(),
-                    賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki._5月).get期AsInt()).get納期限(),
-                    賦課情報.getFuKibetsuGaku03());
+            int 期別 = 期月リスト.get月の期(Tsuki._6月).get期AsInt();
+            if (0 < 期別) {
+                saveTemp(賦課情報, 科目, 期別, 賦課納期取得.get普徴納期(期別).get納期限(), 賦課情報.getFuKibetsuGaku03());
+            }
         }
         if (賦課情報.getFuKibetsuGaku04() != null && Decimal.ZERO.compareTo(賦課情報.getFuKibetsuGaku04()) == -1) {
-            saveTemp(賦課情報, 科目, 期月リスト.get月の期(Tsuki._7月).get期AsInt(),
-                    賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki._7月).get期AsInt()).get納期限(),
-                    賦課情報.getFuKibetsuGaku04());
+            int 期別 = 期月リスト.get月の期(Tsuki._7月).get期AsInt();
+            if (0 < 期別) {
+                saveTemp(賦課情報, 科目, 期別, 賦課納期取得.get普徴納期(期別).get納期限(), 賦課情報.getFuKibetsuGaku04());
+            }
         }
+    }
+
+    private void save普徴期別By07期(DbT2002FukaJohoTempTableEntity 賦課情報,
+            IShunoKamoku 科目, FukaNokiResearcher 賦課納期取得, KitsukiList 期月リスト) {
         if (賦課情報.getFuKibetsuGaku05() != null && Decimal.ZERO.compareTo(賦課情報.getFuKibetsuGaku05()) == -1) {
-            saveTemp(賦課情報, 科目, 期月リスト.get月の期(Tsuki._8月).get期AsInt(),
-                    賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki._8月).get期AsInt()).get納期限(),
-                    賦課情報.getFuKibetsuGaku05());
+            int 期別 = 期月リスト.get月の期(Tsuki._8月).get期AsInt();
+            if (0 < 期別) {
+                saveTemp(賦課情報, 科目, 期別, 賦課納期取得.get普徴納期(期別).get納期限(), 賦課情報.getFuKibetsuGaku05());
+            }
         }
         if (賦課情報.getFuKibetsuGaku06() != null && Decimal.ZERO.compareTo(賦課情報.getFuKibetsuGaku06()) == -1) {
-            saveTemp(賦課情報, 科目, 期月リスト.get月の期(Tsuki._9月).get期AsInt(),
-                    賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki._9月).get期AsInt()).get納期限(),
-                    賦課情報.getFuKibetsuGaku06());
+            int 期別 = 期月リスト.get月の期(Tsuki._9月).get期AsInt();
+            if (0 < 期別) {
+                saveTemp(賦課情報, 科目, 期別, 賦課納期取得.get普徴納期(期別).get納期限(), 賦課情報.getFuKibetsuGaku06());
+            }
         }
         if (賦課情報.getFuKibetsuGaku07() != null && Decimal.ZERO.compareTo(賦課情報.getFuKibetsuGaku07()) == -1) {
-            saveTemp(賦課情報, 科目, 期月リスト.get月の期(Tsuki._10月).get期AsInt(),
-                    賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki._10月).get期AsInt()).get納期限(),
-                    賦課情報.getFuKibetsuGaku07());
+            int 期別 = 期月リスト.get月の期(Tsuki._10月).get期AsInt();
+            if (0 < 期別) {
+                saveTemp(賦課情報, 科目, 期別, 賦課納期取得.get普徴納期(期別).get納期限(), 賦課情報.getFuKibetsuGaku07());
+            }
+        }
+    }
+
+    private void save普徴期別By10期(DbT2002FukaJohoTempTableEntity 賦課情報,
+            IShunoKamoku 科目, FukaNokiResearcher 賦課納期取得, KitsukiList 期月リスト) {
+        if (賦課情報.getFuKibetsuGaku08() != null && Decimal.ZERO.compareTo(賦課情報.getFuKibetsuGaku08()) == -1) {
+            int 期別 = 期月リスト.get月の期(Tsuki._11月).get期AsInt();
+            if (0 < 期別) {
+                saveTemp(賦課情報, 科目, 期別, 賦課納期取得.get普徴納期(期別).get納期限(), 賦課情報.getFuKibetsuGaku08());
+            }
+        }
+        if (賦課情報.getFuKibetsuGaku09() != null && Decimal.ZERO.compareTo(賦課情報.getFuKibetsuGaku09()) == -1) {
+            int 期別 = 期月リスト.get月の期(Tsuki._12月).get期AsInt();
+            if (0 < 期別) {
+                saveTemp(賦課情報, 科目, 期別, 賦課納期取得.get普徴納期(期別).get納期限(), 賦課情報.getFuKibetsuGaku09());
+            }
+        }
+        if (賦課情報.getFuKibetsuGaku10() != null && Decimal.ZERO.compareTo(賦課情報.getFuKibetsuGaku10()) == -1) {
+            int 期別 = 期月リスト.get月の期(Tsuki._1月).get期AsInt();
+            if (0 < 期別) {
+                saveTemp(賦課情報, 科目, 期別, 賦課納期取得.get普徴納期(期別).get納期限(), 賦課情報.getFuKibetsuGaku10());
+            }
         }
     }
 
     private void save普徴期別By14期(DbT2002FukaJohoTempTableEntity 賦課情報,
-            IShunoKamoku 科目,
-            FukaNokiResearcher 賦課納期取得,
-            KitsukiList 期月リスト) {
-        if (賦課情報.getFuKibetsuGaku08() != null && Decimal.ZERO.compareTo(賦課情報.getFuKibetsuGaku08()) == -1) {
-            saveTemp(賦課情報, 科目, 期月リスト.get月の期(Tsuki._11月).get期AsInt(),
-                    賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki._11月).get期AsInt()).get納期限(),
-                    賦課情報.getFuKibetsuGaku08());
-        }
-        if (賦課情報.getFuKibetsuGaku09() != null && Decimal.ZERO.compareTo(賦課情報.getFuKibetsuGaku09()) == -1) {
-            saveTemp(賦課情報, 科目, 期月リスト.get月の期(Tsuki._12月).get期AsInt(),
-                    賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki._12月).get期AsInt()).get納期限(),
-                    賦課情報.getFuKibetsuGaku09());
-        }
-        if (賦課情報.getFuKibetsuGaku10() != null && Decimal.ZERO.compareTo(賦課情報.getFuKibetsuGaku10()) == -1) {
-            saveTemp(賦課情報, 科目, 期月リスト.get月の期(Tsuki._1月).get期AsInt(),
-                    賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki._1月).get期AsInt()).get納期限(),
-                    賦課情報.getFuKibetsuGaku10());
-        }
+            IShunoKamoku 科目, FukaNokiResearcher 賦課納期取得, KitsukiList 期月リスト) {
         if (賦課情報.getFuKibetsuGaku11() != null && Decimal.ZERO.compareTo(賦課情報.getFuKibetsuGaku11()) == -1) {
-            saveTemp(賦課情報, 科目, 期月リスト.get月の期(Tsuki._2月).get期AsInt(),
-                    賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki._2月).get期AsInt()).get納期限(),
-                    賦課情報.getFuKibetsuGaku11());
+            int 期別 = 期月リスト.get月の期(Tsuki._2月).get期AsInt();
+            if (0 < 期別) {
+                saveTemp(賦課情報, 科目, 期別, 賦課納期取得.get普徴納期(期別).get納期限(), 賦課情報.getFuKibetsuGaku11());
+            }
         }
         if (賦課情報.getFuKibetsuGaku12() != null && Decimal.ZERO.compareTo(賦課情報.getFuKibetsuGaku12()) == -1) {
-            saveTemp(賦課情報, 科目, 期月リスト.get月の期(Tsuki._3月).get期AsInt(),
-                    賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki._3月).get期AsInt()).get納期限(),
-                    賦課情報.getFuKibetsuGaku12());
+            int 期別 = 期月リスト.get月の期(Tsuki._3月).get期AsInt();
+            if (0 < 期別) {
+                saveTemp(賦課情報, 科目, 期別, 賦課納期取得.get普徴納期(期別).get納期限(), 賦課情報.getFuKibetsuGaku12());
+            }
         }
         if (賦課情報.getFuKibetsuGaku13() != null && Decimal.ZERO.compareTo(賦課情報.getFuKibetsuGaku13()) == -1) {
-            saveTemp(賦課情報, 科目, 期月リスト.get月の期(Tsuki.翌年度4月).get期AsInt(),
-                    賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki.翌年度4月).get期AsInt()).get納期限(),
-                    賦課情報.getFuKibetsuGaku13());
+            int 期別 = 期月リスト.get月の期(Tsuki.翌年度4月).get期AsInt();
+            if (0 < 期別) {
+                saveTemp(賦課情報, 科目, 期別, 賦課納期取得.get普徴納期(期別).get納期限(), 賦課情報.getFuKibetsuGaku13());
+            }
         }
         if (賦課情報.getFuKibetsuGaku14() != null && Decimal.ZERO.compareTo(賦課情報.getFuKibetsuGaku14()) == -1) {
-            saveTemp(賦課情報, 科目, 期月リスト.get月の期(Tsuki.翌年度5月).get期AsInt(),
-                    賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki.翌年度5月).get期AsInt()).get納期限(),
-                    賦課情報.getFuKibetsuGaku14());
+            int 期別 = 期月リスト.get月の期(Tsuki.翌年度5月).get期AsInt();
+            if (0 < 期別) {
+                saveTemp(賦課情報, 科目, 期別, 賦課納期取得.get普徴納期(期別).get納期限(), 賦課情報.getFuKibetsuGaku14());
+            }
         }
     }
 
