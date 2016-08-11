@@ -233,10 +233,10 @@ public class TekiyoJogaiRirekiHandler {
         div.setStauts(状態_修正);
         switch (div.getMode_DisplayMode()) {
             case 適用登録モード:
-                setPanelTekiyoJokaiTekiInputTo(div.getDatagridTekiyoJogai().getClickedItem(), this.div);
+                setTekiyoJokaiTekiInputToSelectedRow(div.getPanelTekiyoJokaiTekiInput(), div.getDatagridTekiyoJogai().getClickedItem());
                 break;
             default:
-                setPanelTekiyoInputTo(div.getDatagridTekiyoJogai().getClickedItem(), this.div);
+                setTekiyoInputToSelectedRow(div.getPanelTekiyoInput(), div.getDatagridTekiyoJogai().getClickedItem());
                 setDisabled(div.getPanelTekiyoInput(), false);
         }
         div.getBtnInputClear().setVisible(true);
@@ -250,7 +250,7 @@ public class TekiyoJogaiRirekiHandler {
      */
     public void onClick_Delete() {
         div.setStauts(状態_削除);
-        setPanelTekiyoInputTo(div.getDatagridTekiyoJogai().getClickedItem(), this.div);
+        setTekiyoInputToSelectedRow(div.getPanelTekiyoInput(), div.getDatagridTekiyoJogai().getClickedItem());
         div.getPanelTekiyoInput().getTxtTekiyoDate().setDisabled(true);
         div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().setDisabled(true);
         div.getPanelTekiyoInput().getDdlTekiyoJiyu().setDisabled(true);
@@ -738,7 +738,7 @@ public class TekiyoJogaiRirekiHandler {
     private void set適用除外者明細エリア(datagridTekiyoJogai_Row 選択されたレコード, DisplayMode 画面状態) {
         switch (画面状態) {
             case 照会モード:
-                setPanelTekiyoInputTo(選択されたレコード, this.div);
+                setTekiyoInputToSelectedRow(div.getPanelTekiyoInput(), 選択されたレコード);
                 return;
             case 訂正履歴モード:
                 set適用除外者明細エリア_履歴変更();
@@ -750,50 +750,52 @@ public class TekiyoJogaiRirekiHandler {
         }
     }
 
-    private static void setPanelTekiyoInputTo(datagridTekiyoJogai_Row selectedRow, TekiyoJogaiRirekiDiv div) {
-        div.getPanelTekiyoInput().getDdlTekiyoJiyu().setDataSource(set適用事由());
-        div.getPanelTekiyoInput().getDdlKaijyoJiyu().setDataSource(set解除事由());
+    private static void setTekiyoInputToSelectedRow(panelTekiyoInputDiv div, datagridTekiyoJogai_Row selectedRow) {
+        div.getDdlTekiyoJiyu().setDataSource(set適用事由());
+        div.getDdlKaijyoJiyu().setDataSource(set解除事由());
 
         if (selectedRow.getTekiyoDate() != null) {
-            div.getPanelTekiyoInput().getTxtTekiyoDate().setValue(selectedRow.getTekiyoDate().getValue());
+            div.getTxtTekiyoDate().setValue(selectedRow.getTekiyoDate().getValue());
         } else {
-            div.getPanelTekiyoInput().getTxtTekiyoDate().clearValue();
+            div.getTxtTekiyoDate().clearValue();
         }
         if (selectedRow.getTekiyoTodokeDate() != null) {
-            div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().setValue(selectedRow.getTekiyoTodokeDate().getValue());
+            div.getTxtTekiyoTodokeDate().setValue(selectedRow.getTekiyoTodokeDate().getValue());
         } else {
-            div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().clearValue();
+            div.getTxtTekiyoTodokeDate().clearValue();
         }
-        div.getPanelTekiyoInput().getDdlTekiyoJiyu().setSelectedValue(selectedRow.getTekiyoJiyu());
+        div.getDdlTekiyoJiyu().setSelectedValue(selectedRow.getTekiyoJiyu());
         if (selectedRow.getKayijoDate() != null) {
-            div.getPanelTekiyoInput().getTxtKayijoDate().setValue(selectedRow.getKayijoDate().getValue());
+            div.getTxtKayijoDate().setValue(selectedRow.getKayijoDate().getValue());
         } else {
-            div.getPanelTekiyoInput().getTxtKayijoDate().clearValue();
+            div.getTxtKayijoDate().clearValue();
         }
         if (selectedRow.getKaijoTodokeDate() != null) {
-            div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().setValue(
+            div.getTxtKaijoTodokedeDate().setValue(
                     selectedRow.getKaijoTodokeDate().getValue());
         } else {
-            div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().clearValue();
+            div.getTxtKaijoTodokedeDate().clearValue();
         }
-        div.getPanelTekiyoInput().getDdlKaijyoJiyu().setSelectedValue(selectedRow.getKaijoJiyu());
+        div.getDdlKaijyoJiyu().setSelectedValue(selectedRow.getKaijoJiyu());
     }
 
-    private static void setPanelTekiyoJokaiTekiInputTo(datagridTekiyoJogai_Row selectedRow, TekiyoJogaiRirekiDiv div) {
-        div.getPanelTekiyoInput().getDdlTekiyoJiyu().setDataSource(set適用事由());
-        div.getPanelTekiyoInput().getDdlKaijyoJiyu().setDataSource(set解除事由());
-
+    private static void setTekiyoJokaiTekiInputToSelectedRow(panelTekiyoJokaiTekiInputDiv div, datagridTekiyoJogai_Row selectedRow) {
         if (selectedRow.getTekiyoDate() != null) {
-            div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput().setValue(selectedRow.getTekiyoDate().getValue());
+            div.getTxtTekiyoDateInput().setValue(selectedRow.getTekiyoDate().getValue());
         } else {
-            div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput();
+            div.getTxtTekiyoDateInput();
         }
         if (selectedRow.getTekiyoTodokeDate() != null) {
-            div.getPanelTekiyoJokaiTekiInput().getTxtTkyoTododkDateIn().setValue(selectedRow.getTekiyoTodokeDate().getValue());
+            div.getTxtTkyoTododkDateIn().setValue(selectedRow.getTekiyoTodokeDate().getValue());
         } else {
-            div.getPanelTekiyoJokaiTekiInput().getTxtTkyoTododkDateIn().clearValue();
+            div.getTxtTkyoTododkDateIn().clearValue();
         }
-        // 途中。。。
+        if (selectedRow.getNyuShoDate() != null) {
+            div.getTxtNyusyoDateInput().setValue(selectedRow.getNyuShoDate().getValue());
+        } else {
+            div.getTxtNyusyoDateInput().clearValue();
+        }
+        div.getCcdShisetsuJoho().setNyuryokuShisetsuKodo(selectedRow.getNyushoShisetsuCode());
     }
 
     private void set適用除外者明細エリア_除外者適用() {
@@ -895,7 +897,7 @@ public class TekiyoJogaiRirekiHandler {
     }
 
     private static void setDisabled(panelTekiyoInputDiv div, boolean disabled) {
-        div.getPanelTekiyoInput().setDisabled(disabled);
+        div.setDisabled(disabled);
         div.getTxtTekiyoDate().setDisabled(disabled);
         div.getTxtTekiyoTodokeDate().setDisabled(disabled);
         div.getDdlTekiyoJiyu().setDisabled(disabled);
