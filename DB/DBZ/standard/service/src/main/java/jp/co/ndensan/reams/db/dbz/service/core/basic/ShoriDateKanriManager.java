@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -36,6 +37,8 @@ public class ShoriDateKanriManager {
     private static final RString 処理枝番メッセージ = new RString("処理枝番");
     private static final RString 年度内連番メッセージ = new RString("年度内連番");
     private static final RString サブ業務コードメッセージ = new RString("サブ業務コード");
+    private static final RString 開始時分秒 = new RString("000000");
+    private static final RString 終了時分秒 = new RString("235959");
 
     /**
      * コンストラクタです。
@@ -381,6 +384,36 @@ public class ShoriDateKanriManager {
             shoriDateKanriList.add(new ShoriDateKanri(entity));
         }
         return SearchResult.of(shoriDateKanriList, 0, false);
+    }
+
+    /**
+     * 処理日付管理マスタを更新します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 市町村コード LasdecCode
+     * @param 処理名 RString
+     * @param 処理枝番 RString
+     * @param 開始日 FlexibleDate
+     * @param 終了日 FlexibleDate
+     */
+    @Transaction
+    public void update対象開始日時AND対象終了日時(SubGyomuCode サブ業務コード, LasdecCode 市町村コード, RString 処理名, RString 処理枝番,
+            FlexibleDate 開始日, FlexibleDate 終了日) {
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(市町村コードメッセージ.toString()));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage(処理枝番メッセージ.toString()));
+        List<DbT7022ShoriDateKanriEntity> entitylist = dac.select対象開始日時toupdate(サブ業務コード, 市町村コード, 処理名, 処理枝番);
+        for (DbT7022ShoriDateKanriEntity entity : entitylist) {
+            if (開始日 != null) {
+                entity.setTaishoKaishiTimestamp(new YMDHMS(開始日.toString().concat(開始時分秒.toString())));
+            }
+            if (終了日 != null) {
+                entity.setTaishoShuryoTimestamp(new YMDHMS(終了日.toString().concat(終了時分秒.toString())));
+            }
+            entity.setState(EntityDataState.Modified);
+            dac.save(entity);
+        }
     }
 
 }

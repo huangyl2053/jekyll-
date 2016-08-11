@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.tokkitexta4;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.TokkiText1A4Business;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitexta4.TokkiA4Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkitexta4.TokkiText1A4ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -29,9 +31,6 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
 
     private static final RString 全面 = new RString("1");
     private static final RString 短冊 = new RString("2");
-    private final TokkiText1A4Business item;
-    private final int index;
-    private final List<RString> 特記事項List;
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
     private static final int INT_5 = 5;
@@ -44,18 +43,21 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
     private static final int INT_12 = 12;
     private static final int INT_13 = 13;
     private static final int INT_14 = 14;
+    private final List<TokkiA4Entity> 短冊情報リスト;
+    private final TokkiText1A4Business item;
+    private final int index;
 
     /**
      * インスタンスを生成します。
      *
      * @param item TokkiText1A4Entity
+     * @param 短冊情報リスト List<TokkiA4Entity>
      * @param index Index
-     * @param 特記事項List List<RString>
      */
-    protected TokkiText1A4Editor(TokkiText1A4Business item, List<RString> 特記事項List, int index) {
+    protected TokkiText1A4Editor(TokkiText1A4Business item, List<TokkiA4Entity> 短冊情報リスト, int index) {
         this.item = item;
         this.index = index;
-        this.特記事項List = 特記事項List;
+        this.短冊情報リスト = 短冊情報リスト;
     }
 
     @Override
@@ -106,19 +108,19 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
                 && 全面.equals(item.get特記パターン())) {
             source.tokkiText = item.getTokkiText();
         }
+        List<RString> 特記事項List = getBodyList();
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())
                 && 短冊.equals(item.get特記パターン())) {
-            editテキスト(source);
+            editテキスト(source, 特記事項List);
             set特記事項テキスト(source);
         }
         if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())
                 && 全面.equals(item.get特記パターン())) {
             source.tokkiImg = item.getTokkiImg();
         }
-
         if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())
                 && 短冊.equals(item.get特記パターン())) {
-            editイメージ(source);
+            editイメージ(source, 特記事項List);
             set特記事項イメージ(source);
         }
 
@@ -131,37 +133,37 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
     }
 
     private TokkiText1A4ReportSource set特記事項テキスト(TokkiText1A4ReportSource source) {
-        for (int i = 0; i < item.get短冊情報リスト().size(); i++) {
+        for (int i = 0; i < 短冊情報リスト.size(); i++) {
             if (i == 0) {
-                source.tokkiText1 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiText1 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == 1) {
-                source.tokkiText2 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiText2 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == 2) {
-                source.tokkiText3 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiText3 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_3) {
-                source.tokkiText4 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiText4 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_4) {
-                source.tokkiText5 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiText5 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_5) {
-                source.tokkiText6 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiText6 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_6) {
-                source.tokkiText7 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiText7 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_7) {
-                source.tokkiText8 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiText8 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_8) {
-                source.tokkiText9 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiText9 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_9) {
-                source.tokkiText10 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiText10 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_10) {
-                source.tokkiText11 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiText11 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_11) {
-                source.tokkiText12 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiText12 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_12) {
-                source.tokkiText13 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiText13 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_13) {
-                source.tokkiText14 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiText14 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_14) {
-                source.tokkiText15 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiText15 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             }
 
         }
@@ -169,51 +171,51 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
     }
 
     private TokkiText1A4ReportSource set特記事項イメージ(TokkiText1A4ReportSource source) {
-        for (int i = 0; i < item.get短冊情報リスト().size(); i++) {
+        for (int i = 0; i < 短冊情報リスト.size(); i++) {
             if (i == 0) {
-                source.tokkiImg1 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg1 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == 1) {
-                source.tokkiImg2 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg2 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == 2) {
-                source.tokkiImg3 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg3 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_3) {
-                source.tokkiImg4 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg4 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_4) {
-                source.tokkiImg5 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg5 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_5) {
-                source.tokkiImg6 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg6 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_6) {
-                source.tokkiImg7 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg7 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_7) {
-                source.tokkiImg8 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg8 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_8) {
-                source.tokkiImg9 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg9 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_9) {
-                source.tokkiImg10 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg10 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_10) {
-                source.tokkiImg11 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg11 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_11) {
-                source.tokkiImg12 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg12 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_12) {
-                source.tokkiImg13 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg13 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_13) {
-                source.tokkiImg14 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg14 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_14) {
-                source.tokkiImg15 = item.get短冊情報リスト().get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg15 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             }
 
         }
         return source;
     }
 
-    private void editテキスト(TokkiText1A4ReportSource source) {
+    private void editテキスト(TokkiText1A4ReportSource source, List<RString> 特記事項List) {
         if (index < 特記事項List.size()) {
             source.listChosa1_1 = 特記事項List.get(index);
         }
 
     }
 
-    private void editイメージ(TokkiText1A4ReportSource source) {
+    private void editイメージ(TokkiText1A4ReportSource source, List<RString> 特記事項List) {
         if (index < 特記事項List.size()) {
             source.listChosa_1 = 特記事項List.get(index);
         }
@@ -234,6 +236,17 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
         return 年月日.wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK);
+    }
+
+    private List<RString> getBodyList() {
+        List<RString> bodyList = new ArrayList<>();
+        if (!短冊情報リスト.isEmpty()) {
+            for (TokkiA4Entity entity : 短冊情報リスト) {
+                bodyList.add(entity.get事項番号());
+                bodyList.add(entity.get項目名称());
+            }
+        }
+        return bodyList;
     }
 
 }

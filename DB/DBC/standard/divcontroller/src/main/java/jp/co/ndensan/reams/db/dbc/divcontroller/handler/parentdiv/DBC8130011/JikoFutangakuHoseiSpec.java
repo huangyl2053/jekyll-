@@ -248,8 +248,8 @@ public enum JikoFutangakuHoseiSpec implements IPredicate<JikoFutangakuHoseiDiv> 
         }
 
         public static boolean is対象計算と被保険者期間大小関係開始(JikoFutangakuHoseiDiv div) {
-            return div.getTxtTaishouKeisanKikan().getFromValue().isBeforeOrEquals(
-                    div.getTxtHihokenshaKikan().getFromValue());
+            return div.getTxtHihokenshaKikan().getFromValue().isBeforeOrEquals(
+                    div.getTxtTaishouKeisanKikan().getFromValue());
         }
 
         public static boolean is対象計算と被保険者期間大小関係終了(JikoFutangakuHoseiDiv div) {
@@ -258,6 +258,10 @@ public enum JikoFutangakuHoseiSpec implements IPredicate<JikoFutangakuHoseiDiv> 
         }
 
         public static boolean is窓口払情報年月日大小関係(JikoFutangakuHoseiDiv div) {
+            if (div.getTxtMadoguchiKaishiYMD().getValue() == null
+                    || div.getTxtMadoguchiShuryoYMD().getValue() == null) {
+                return true;
+            }
             return div.getTxtMadoguchiKaishiYMD().getValue().isBeforeOrEquals(
                     div.getTxtMadoguchiShuryoYMD().getValue());
         }

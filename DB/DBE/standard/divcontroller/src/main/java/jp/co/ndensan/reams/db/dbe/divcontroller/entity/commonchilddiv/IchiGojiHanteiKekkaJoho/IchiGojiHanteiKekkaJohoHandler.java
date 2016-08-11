@@ -131,12 +131,7 @@ public class IchiGojiHanteiKekkaJohoHandler {
         IchiGojiHanteiKekkaJohoBuilder builder = 情報.createBuilderForEdit();
 
         builder.set要介護認定1_5次判定年月日(FlexibleDate.getNowDate());
-        // TODO QA#93089 基盤で行う予定の組み込み関数は未完了です、呼び出しすることができません。
-        //        builder.set要介護認定1_5次判定結果コード(ビジネス情報.get判定結果コード());
-        //        builder.set要介護認定1_5次判定結果コード_認知症加算_(ビジネス情報.認知症加算後の一五次判定結果コード());
-        //        builder.set要介護認定状態の安定性コード(ビジネス情報.get安定性コード());
-        //        builder.set認知機能及び状態安定性から推定される給付区分コード(ビジネス情報.get給付区分コード());
-        //        builder.set認知症自立度Ⅱ以上の蓋然性(div.getTxtGaizensei().getValue());
+        // TODO QA#93089 JavaでDLLを呼び出し方のご提供がありません。
         builder.set要介護認定等基準時間(Integer.parseInt(div.getTxtKijunJikan().getValue().toString()));
         builder.set要介護認定等基準時間_食事_(div.getTxtShokuji().getValue().intValue());
         builder.set要介護認定等基準時間_排泄_(div.getTxtHaisetsu().getValue().intValue());

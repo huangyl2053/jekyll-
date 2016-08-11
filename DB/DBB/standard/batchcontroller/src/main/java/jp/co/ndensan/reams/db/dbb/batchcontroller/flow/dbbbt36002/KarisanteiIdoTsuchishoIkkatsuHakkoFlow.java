@@ -181,8 +181,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakkoFlow extends BatchFlowBase<Karisa
 
     private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
         return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度(), getParameter().get賦課年度(),
-                getResult(RString.class, new RString(システム日時の取得), SystemTimeSyutokuProcess.KIJUN_TIME),
-                ShoriName.仮算定異動賦課.get名称(), 帳票分類ID);
+                null, ShoriName.仮算定異動賦課.get名称(), 帳票分類ID);
     }
 
     /**

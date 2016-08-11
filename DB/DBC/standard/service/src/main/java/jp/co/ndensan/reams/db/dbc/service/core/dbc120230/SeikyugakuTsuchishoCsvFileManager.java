@@ -51,7 +51,6 @@ public class SeikyugakuTsuchishoCsvFileManager {
     private SeikyugakuTsuchishoCsvFileToreraRecode2Entity toreraRecord2Entity;
     private SeikyugakuTsuchishoCsvFileToreraRecode3Entity toreraRecord3Entity;
     private SeikyugakuTsuchishoCsvFileMeisaiEntity meisaiEntity;
-    private FlowEntity flowEntity;
     private List<SeikyugakuTsuchishoCsvFileDataEntity> listCsvFileDataEntity;
     private List<SeikyugakuTsuchishoCsvFileMeisaiEntity> listMeisaiEntity;
     private final RString レコード種別 = new RString("1");
@@ -126,19 +125,17 @@ public class SeikyugakuTsuchishoCsvFileManager {
     }
 
     private FlowEntity バッチフロ(List<SeikyugakuTsuchishoCsvFileEntity> csvlist) {
-        flowEntity = new FlowEntity();
-        if (csvlist.size() > INDEX_0 && csvlist.get(0).getControlCsvEntity() != null
+        FlowEntity flowEntity = new FlowEntity();
+        if (!csvlist.isEmpty() && csvlist.get(0).getControlCsvEntity() != null
                 && csvlist.get(0).getControlCsvEntity().getShoriYM() != null) {
             FlexibleYearMonth 処理対象年月 = new FlexibleYearMonth(csvlist.get(0).getControlCsvEntity().getShoriYM());
             flowEntity.setShoriYM(処理対象年月);
         }
         int レコード件数合算 = 0;
-        if (csvlist.size() > INDEX_0) {
-            for (int i = INDEX_0; i < csvlist.size(); i++) {
-                if (csvlist.get(i).getControlCsvEntity() != null && csvlist.get(i).getControlCsvEntity().getCodeNum() != null) {
-                    int レコード件数 = Integer.parseInt(csvlist.get(i).getControlCsvEntity().getCodeNum().toString());
-                    レコード件数合算 = レコード件数合算 + レコード件数;
-                }
+        for (SeikyugakuTsuchishoCsvFileEntity csvEntity : csvlist) {
+            if (csvEntity.getControlCsvEntity() != null && csvEntity.getControlCsvEntity().getCodeNum() != null) {
+                int レコード件数 = Integer.parseInt(csvEntity.getControlCsvEntity().getCodeNum().toString());
+                レコード件数合算 = レコード件数合算 + レコード件数;
             }
         }
         flowEntity.setCodeNum(レコード件数合算);
@@ -295,13 +292,6 @@ public class SeikyugakuTsuchishoCsvFileManager {
         }
     }
 
-    /**
-     * csvファイル読込
-     *
-     * @param 保存先フォルダ RString
-     * @param エントリ情報List List<RString>
-     * @return List<KagoKetteiHokenshaInCsvEntity>
-     */
     private List<SeikyugakuTsuchishoCsvFileEntity> csvファイル読込(RString 保存先フォルダ, List<RString> エントリ情報List) {
         List<SeikyugakuTsuchishoCsvFileEntity> list = new ArrayList<>();
         List<RString> csvFullPathList = new ArrayList<>();

@@ -54,7 +54,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -154,7 +153,6 @@ public class GemmenJuminKihonHandler {
     public void loadヘッダパネル(ShikibetsuCode 識別コード, KaigoFukaKihonSearchKey searchKey) {
         div.getCcdKaigoAtenaKihon().initialize(識別コード);
         div.getCcdKaigoFukaKihon().load(searchKey);
-        div.getGemmenMain().getKeteiinfo().getRadKetteiKubun().setDataSource(get決定区分());
     }
 
     /**
@@ -162,15 +160,21 @@ public class GemmenJuminKihonHandler {
      *
      * @param 被保険者番号 HihokenshaNo
      * @param 賦課年度 FukaNendo
-     * @return 年度分賦課減免リストと徴収方法 NendobunFukaGemmenListResult 年度分賦課減免リストと徴収方法
+     * @return 件数 int
      */
-    public IItemList<Fuka> load全賦課履歴情報グリッド(HihokenshaNo 被保険者番号, FukaNendo 賦課年度) {
+    public int load全賦課履歴情報グリッド(HihokenshaNo 被保険者番号, FukaNendo 賦課年度) {
         IFukaRirekiAllDiv 全賦課履歴 = div.getGemmenFukaRirekiAll().getCcdFukaRirekiAll();
-        int 件数 = 全賦課履歴.load(被保険者番号, 賦課年度);
-        if (件数 < 二_定値) {
-            return 件数 == ゼロ_定値 ? null : 全賦課履歴.get賦課履歴().get賦課履歴All();
-        }
-        return ItemList.empty();
+        return 全賦課履歴.load(被保険者番号, 賦課年度);
+    }
+
+    /**
+     * 賦課基本を取得する。
+     *
+     * @return 賦課基本 Fuka
+     */
+    public Fuka get賦課基本() {
+        IFukaRirekiAllDiv 全賦課履歴 = div.getGemmenFukaRirekiAll().getCcdFukaRirekiAll();
+        return 全賦課履歴.get賦課履歴().get賦課履歴All().toList().get(0);
     }
 
     /**
@@ -213,8 +217,8 @@ public class GemmenJuminKihonHandler {
     public Code load申請情報パネル(GemmenJoho 最新減免の情報) {
         ShinseiinfoDiv 申請情報パネル = div.getGemmenMain().getShinseiinfo();
         if (最新減免の情報 != null) {
-            申請情報パネル.getTxtChoteiYY().setValue(new RDate(最新減免の情報.toEntity().getChoteiNendo().toString()));
-            申請情報パネル.getTxtFukaYY().setValue(new RDate(最新減免の情報.toEntity().getFukaNendo().toString()));
+            申請情報パネル.getTxtChoteiYY().setValue(new RDate(最新減免の情報.get調定年度().toString()));
+            申請情報パネル.getTxtFukaYY().setValue(new RDate(最新減免の情報.get賦課年度().toString()));
             List<Gemmen> 介護賦課減免List = 最新減免の情報.getGemmenList();
             if (介護賦課減免List != null && !介護賦課減免List.isEmpty()) {
                 return set申請情報パネル(介護賦課減免List.get(0), 申請情報パネル);
@@ -230,6 +234,7 @@ public class GemmenJuminKihonHandler {
      */
     public void load決定情報パネル(GemmenJoho 最新減免の情報) {
         KeteiinfoDiv 決定情報パネル = div.getGemmenMain().getKeteiinfo();
+        決定情報パネル.getRadKetteiKubun().setDataSource(get決定区分());
         if (最新減免の情報 != null) {
             決定情報パネル.getTxtZenkaiGemmengaku().setValue(最新減免の情報.toEntity().getGemmenGaku());
             List<Gemmen> 介護賦課減免List = 最新減免の情報.getGemmenList();
@@ -240,6 +245,8 @@ public class GemmenJuminKihonHandler {
     }
 
     /**
+     * 減免情報パネルの初期化メソッドです。
+     *
      * @param 減免リスト NendobunFukaGemmenListResult
      */
     public void load減免情報パネル(NendobunFukaGemmenListResult 減免リスト) {
@@ -300,10 +307,10 @@ public class GemmenJuminKihonHandler {
         KiwarigakuDiv 減免情報パネル = div.getGemmenMain().getKiwarigaku();
         減免情報パネル.getTxtGemmengaku().setReadOnly(false);
         減免情報パネル.getBtnCalculate().setDisabled(false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(訂正をやめるボタン, true);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(訂正をやめるボタン, false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(訂正をやめるボタン, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(取消をやめるボタン, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(保存ボタン, true);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(取消をやめるボタン, true);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(保存ボタン, false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン, false);
     }
 
@@ -332,8 +339,8 @@ public class GemmenJuminKihonHandler {
             決定情報パネル.setDisplayNone(true);
             減免情報パネル.setDisplayNone(true);
         } else if (状況_決定済.equals(状況)) {
-            決定情報パネル.setDisplayNone(true);
-            減免情報パネル.setDisplayNone(true);
+            決定情報パネル.setDisplayNone(false);
+            減免情報パネル.setDisplayNone(false);
             決定情報パネル.getTxtKetteiYMD().setReadOnly(true);
             決定情報パネル.getTxtZenkaiGemmengaku().setReadOnly(true);
             決定情報パネル.getRadKetteiKubun().setDisabled(true);
@@ -341,10 +348,10 @@ public class GemmenJuminKihonHandler {
             減免情報パネル.getTxtGemmengaku().setReadOnly(true);
             減免情報パネル.getBtnCalculate().setDisabled(true);
         }
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(訂正をやめるボタン, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(取消をやめるボタン, true);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(訂正をやめるボタン, true);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(取消をやめるボタン, false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(取消をやめるボタン, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(保存ボタン, true);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(保存ボタン, false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン, false);
     }
 
@@ -383,7 +390,7 @@ public class GemmenJuminKihonHandler {
                 } else {
                     期別減免情報.set普徴期別減免前(定値_ゼロ);
                 }
-                Noki 賦課納期 = FukaNokiResearcher.createInstance().get過年度納期(Integer.valueOf(期月_普徴.get期().toString()));
+                Noki 賦課納期 = FukaNokiResearcher.createInstance().get普徴納期(Integer.valueOf(期月_普徴.get期().toString()));
                 RDate 納期限 = 賦課納期.get納期限();
                 if (納期限 != null) {
                     期別減免情報.set普徴期別納期限(納期限.wareki().toDateString());
@@ -904,8 +911,8 @@ public class GemmenJuminKihonHandler {
             減免情報パネル.getKiwarigakuKanendo1().setDisplayNone(true);
             減免情報パネル.getKiwarigakuKanendo2().setDisplayNone(true);
         }
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(訂正をやめるボタン, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(取消をやめるボタン, false);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(訂正をやめるボタン, true);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(取消をやめるボタン, true);
     }
 
     /**
@@ -1098,8 +1105,8 @@ public class GemmenJuminKihonHandler {
         div.getGemmenMain().getShinseiinfo().setDisplayNone(true);
         div.getGemmenMain().getKeteiinfo().setDisplayNone(true);
         div.getGemmenMain().getKiwarigaku().setDisplayNone(true);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(訂正をやめるボタン, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(取消をやめるボタン, false);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(訂正をやめるボタン, true);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(取消をやめるボタン, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン, true);
     }
 
@@ -1129,10 +1136,10 @@ public class GemmenJuminKihonHandler {
         }
         決定情報パネル.getTxtZenkaiGemmengaku().setValue(介護賦課減免.get決定減免額());
         RString 減免状態区分 = 介護賦課減免.get減免状態区分();
-        if (定値_ゼロ.equals(減免状態区分)) {
-            決定情報パネル.getRadKetteiKubun().setSelectedValue(承認);
-        } else {
+        if (定値_二.equals(減免状態区分)) {
             決定情報パネル.getRadKetteiKubun().setSelectedValue(不承認);
+        } else {
+            決定情報パネル.getRadKetteiKubun().setSelectedValue(承認);
         }
         決定情報パネル.getTxtKetteiRiyu().setValue(介護賦課減免.get減免事由());
     }

@@ -201,9 +201,7 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFlow extends BatchFlowBase<C
 
     private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
         return new KeisangoJohoSakuseiBatchParamter(getParameter().getChoteiNendo().toDateString(),
-                getParameter().get賦課年度().toDateString(),
-                getResult(RString.class, new RString(システム日時の取得), IdoSystemTimeSakuseiProcess.KIJUN_TIME),
-                ShoriName.異動賦課.get名称(), 帳票分類ID);
+                getParameter().get賦課年度().toDateString(), null, ShoriName.異動賦課.get名称(), 帳票分類ID);
     }
 
     /**

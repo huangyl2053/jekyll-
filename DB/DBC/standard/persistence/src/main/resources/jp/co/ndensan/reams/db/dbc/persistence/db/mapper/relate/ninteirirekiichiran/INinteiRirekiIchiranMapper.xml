@@ -9,7 +9,7 @@ and open the template in the editor.
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.ninteirirekiichiran.INinteiRirekiIchiranMapper">
     
      <select resultOrdered="true" id = "select受給者台帳情報取得" resultMap="resultmap_getJyukyuuSyaDaiTyouJyoho" parameterType="java.util.Map" fetchSize="500">
-        select
+        SELECT
         DbT4001JukyushaDaicho."jukyuShinseiYMD" AS 受給申請年月日,
         DbT4001JukyushaDaicho."yokaigoJotaiKubunCode" AS 要介護認定状態区分コード,
         DbT4001JukyushaDaicho."ninteiYukoKikanKaishiYMD" AS 認定有効期間開始年月日,
@@ -17,12 +17,12 @@ and open the template in the editor.
         DbT4001JukyushaDaicho."jukyuShinseiJiyu" AS 受給申請事由,
         DbT4001JukyushaDaicho."minashiCode" AS みなし要介護区分コード,
         DbT4001JukyushaDaicho."kyuSochishaFlag" AS 旧措置者フラグ
-        from
+        FROM
         rgdb."DbT4001JukyushaDaicho" AS DbT4001JukyushaDaicho
-        where
+        WHERE
         NOT EXISTS(
         select 'X' from rgdb."DbT4001JukyushaDaicho" AS Daicho
-        where
+        WHERE
         DbT4001JukyushaDaicho."shichosonCode" = Daicho."shichosonCode"
         AND DbT4001JukyushaDaicho."hihokenshaNo" = Daicho."hihokenshaNo"
         AND DbT4001JukyushaDaicho."rirekiNo" = Daicho."rirekiNo"
@@ -35,7 +35,8 @@ and open the template in the editor.
         ORDER BY
         DbT4001JukyushaDaicho."ninteiYukoKikanKaishiYMD" DESC				
     </select>
- <resultMap id="resultmap_getJyukyuuSyaDaiTyouJyoho" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.ninteirirekiichiran.JyukyuuSyaDaiTyouEntity" autoMapping="true">
+    
+    <resultMap id="resultmap_getJyukyuuSyaDaiTyouJyoho" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.ninteirirekiichiran.JyukyuuSyaDaiTyouEntity" autoMapping="true">
         <id property="申請日" column="受給申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <id property="要介護認定状態区分" column="要介護認定状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <id property="認定有効開始日" column="認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>

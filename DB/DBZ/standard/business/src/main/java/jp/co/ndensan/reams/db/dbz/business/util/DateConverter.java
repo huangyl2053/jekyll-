@@ -500,7 +500,7 @@ public final class DateConverter {
      * @return RDate
      */
     public static RDate flexibleDateToRDate(FlexibleDate fd) {
-        if (fd == null) {
+        if (fd == null || RString.EMPTY.equals(new RString(fd.toString()))) {
             return null;
         }
         return new RDate(fd.getYearValue(), fd.getMonthValue(), fd.getDayValue());

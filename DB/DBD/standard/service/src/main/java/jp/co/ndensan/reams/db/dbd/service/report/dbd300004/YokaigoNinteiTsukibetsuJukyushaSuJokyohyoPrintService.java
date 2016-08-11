@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteitsukibetsujukyus
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd300004.YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -36,16 +37,17 @@ public class YokaigoNinteiTsukibetsuJukyushaSuJokyohyoPrintService {
      * @param 年齢 RString
      * @param 地区 RString
      * @param 集計単位 Code
+     * @param 年度 FlexibleYear
      * @param 受給状況Entityリスト List<YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity>
      * @param reportManager 帳票発行処理の制御機能
      */
-    public void print(FlexibleDate 基準日, RString 年齢, RString 地区, Code 集計単位,
+    public void print(FlexibleDate 基準日, RString 年齢, RString 地区, Code 集計単位, FlexibleYear 年度,
             List<YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity> 受給状況Entityリスト, ReportManager reportManager) {
         YokaigoNinteiTsukibetsuJukyushaSuJokyohyoProerty property = new YokaigoNinteiTsukibetsuJukyushaSuJokyohyoProerty();
         try (ReportAssembler<YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReport report = YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReport.
-                    createReport(基準日, 年齢, 地区, 集計単位, 受給状況Entityリスト);
+                    createReport(基準日, 年齢, 地区, 集計単位, 年度, 受給状況Entityリスト);
             report.writeBy(reportSourceWriter);
         }
     }

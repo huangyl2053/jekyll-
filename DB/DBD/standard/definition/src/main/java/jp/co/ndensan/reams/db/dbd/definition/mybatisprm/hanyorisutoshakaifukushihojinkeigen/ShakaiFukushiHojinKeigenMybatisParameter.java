@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 汎用リスト出力(社会福祉法人軽減)のMyBatis用パラメータクラスです。
@@ -31,25 +30,22 @@ import lombok.Setter;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
-@Setter
 public class ShakaiFukushiHojinKeigenMybatisParameter implements IMyBatisParameter {
 
     private static final int 年の月数 = 12;
     private static final int 月の日数 = 31;
 
-    private RString cyusyutsuhohokubun;
-    private RString cyusyutsukomokukubun;
-    private FlexibleYear nendo;
-    private FlexibleDate kizyunnichi;
-    private FlexibleDate hitsukehanifrom;
-    private FlexibleDate hitsukehanito;
-    private boolean isChokindatacyusyutsu;
-    private boolean hobetsukubun;
-    private RString soshitsukubun;
-    private RString kyakasha;
-    private AtenaSelectBatchParameter atenacyusyutsujyoken;
-    private RString 決定区分_承認しない;
-    private RString 決定区分_承認する;
+    private final RString cyusyutsuhohokubun;
+    private final RString cyusyutsukomokukubun;
+    private final FlexibleDate kizyunnichi;
+    private final FlexibleDate hitsukehanifrom;
+    private final FlexibleDate hitsukehanito;
+    private final boolean isChokindatacyusyutsu;
+    private final RString soshitsukubun;
+    private final RString kyakasha;
+    private final AtenaSelectBatchParameter atenacyusyutsujyoken;
+    private final RString 決定区分_承認しない;
+    private final RString 決定区分_承認する;
     private boolean is基準日;
     private boolean is範囲;
     private boolean is申請日;
