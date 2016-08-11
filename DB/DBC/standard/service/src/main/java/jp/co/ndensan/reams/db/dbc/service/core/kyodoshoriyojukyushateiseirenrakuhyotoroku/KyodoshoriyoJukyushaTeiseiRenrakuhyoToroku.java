@@ -239,7 +239,7 @@ public class KyodoshoriyoJukyushaTeiseiRenrakuhyoToroku {
         if (初期償還情報Entity != null && divEntity.get償還情報Entity() != null) {
             FlexibleDate 開始年月日 = 初期償還情報Entity.get保険給付支払一時差止開始年月日();
             if (開始年月日 != null
-                    && !開始年月日.equals(初期償還情報Entity.get保険給付支払一時差止開始年月日())) {
+                    && !開始年月日.equals(div償還情報Entity.get保険給付支払一時差止開始年月日())) {
                 出力用共同処理受給者訂正情報Entity.set開始年月日(div償還情報Entity.get保険給付支払一時差止開始年月日());
             } else {
                 出力用共同処理受給者訂正情報Entity.set開始年月日(FlexibleDate.EMPTY);
