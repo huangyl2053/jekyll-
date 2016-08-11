@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- * 共同処理用受給者訂正連絡票登録（画面）
+ * 共同処理用受給者訂正連絡票登録（画面）のクラスです。
  *
  * @reamsid_L DBC-1951-040 chenaoqi
  */

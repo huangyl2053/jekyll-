@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuh
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * ビジネス設計_DBCMN81004_共同処理受給者異動情報変更箇所判定
+ * ビジネス設計_DBCMN81004_共同処理受給者異動情報変更箇所判定のHandlerです。
  *
  * @reamsid_L DBC-1951-030 chenaoqi
  */
@@ -101,7 +101,7 @@ public class KyodoJukyushaIdoRenrakuhyoHandler {
                 RString 画面項目一時差止区分 = 画面項目異動情報Entity.get償還情報Entity().get保険給付支払一時差止区分コード();
                 RString 画面項目一時差止金額 = 画面項目異動情報Entity.get償還情報Entity().get保険給付支払一時差止金額() != null
                         ? new RString(初期化異動情報Entity.get償還情報Entity().get保険給付支払一時差止金額().toString()) : RString.EMPTY;
-                初期化Key = 画面項目開始年月日.concat(SPLIT).concat(画面項目終了年月日)
+                画面項目Key = 画面項目開始年月日.concat(SPLIT).concat(画面項目終了年月日)
                         .concat(SPLIT).concat(画面項目一時差止区分).concat(SPLIT).concat(画面項目一時差止金額);
             }
             if (!初期化Key.equals(画面項目Key)) {
