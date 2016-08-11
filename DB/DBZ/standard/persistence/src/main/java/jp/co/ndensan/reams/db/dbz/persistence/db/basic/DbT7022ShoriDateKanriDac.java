@@ -1964,4 +1964,29 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
 
     }
 
+    /**
+     * 処理日付管理マスタから、過去集計情報を取得です。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 処理名 ShoriName
+     * @param 処理枝番 ShoriEdaban
+     * @return List<DbT7022ShoriDateKanriEntity>
+     */
+    @Transaction
+    public List<DbT7022ShoriDateKanriEntity> get処理日付管理マスタ(
+            SubGyomuCode サブ業務コード,
+            List<RString> 処理名,
+            List<RString> 処理枝番) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, サブ業務コード),
+                                in(shoriName, 処理名),
+                                in(shoriEdaban, 処理枝番))).
+                toList(DbT7022ShoriDateKanriEntity.class);
+    }
+
 }

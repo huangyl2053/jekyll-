@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -353,4 +354,33 @@ public class ShoriDateKanriManager {
         }
         return new ShoriDateKanri(entity);
     }
+
+    /**
+     * 処理日付管理マスタから、過去集計情報を取得します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 処理名 ShoriName
+     * @param 処理枝番 ShoriEdaban
+     * @return ShoriDateKanri
+     */
+    @Transaction
+    public SearchResult<ShoriDateKanri> get処理日付管理マスタ(
+            SubGyomuCode サブ業務コード,
+            List<RString> 処理名,
+            List<RString> 処理枝番) {
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage(処理枝番メッセージ.toString()));
+        List<ShoriDateKanri> shoriDateKanriList = new ArrayList<>();
+        List<DbT7022ShoriDateKanriEntity> entityList = dac.get処理日付管理マスタ(
+                サブ業務コード,
+                処理名,
+                処理枝番);
+        for (DbT7022ShoriDateKanriEntity entity : entityList) {
+            entity.initializeMd5();
+            shoriDateKanriList.add(new ShoriDateKanri(entity));
+        }
+        return SearchResult.of(shoriDateKanriList, 0, false);
+    }
+
 }
