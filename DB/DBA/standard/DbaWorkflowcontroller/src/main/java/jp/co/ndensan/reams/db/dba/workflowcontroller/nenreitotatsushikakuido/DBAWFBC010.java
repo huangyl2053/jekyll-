@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
  *
  * @author n8389
  */
-public class DBAWFBC010 extends FlowParameters {
+public class DBAWFBC010 {
 
     /**
      * 65歳年齢到達資格異動バッチパラメータ生成する処理メソッド
