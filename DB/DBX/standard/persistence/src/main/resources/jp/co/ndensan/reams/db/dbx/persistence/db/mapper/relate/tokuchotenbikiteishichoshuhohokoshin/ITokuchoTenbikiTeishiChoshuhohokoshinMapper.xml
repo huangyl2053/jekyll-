@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <!--概要： 構成市町村マスタのマッピング用XMLです。--> 
- <!--どのマッパーインターフェースと対応するかを指定する--> 
 <!-- @reamsid_L DBB-9210-030 liuyang -->
 <mapper namespace="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.tokuchotenbikiteishichoshuhohokoshin.ITokuchoTenbikiTeishiChoshuhohokoshinMapper">
     <resultMap id="resultMap_TokuchoTenbikiTeishiChoshuhohokoshinEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.relate.tokuchotenbikiteishichoshuhohokoshin.TokuchoTenbikiTeishiChoshuhohokoshinEntity" autoMapping="true">
