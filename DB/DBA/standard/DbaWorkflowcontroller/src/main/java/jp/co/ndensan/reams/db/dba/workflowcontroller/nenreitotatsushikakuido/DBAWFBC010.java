@@ -11,15 +11,17 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
+ * 65歳年齢到達資格異動のワークフロー
  *
  * @author n8389
  */
 public class DBAWFBC010 {
 
     /**
+     * 65歳年齢到達資格異動のワークフロー
      *
      * @param flowparam
-     * @return
+     * @return nenreitotatsuShikakuIdoParameter
      */
     public NenreitotatsuShikakuIdoBatchFlowParameter createBPForNenreitotatsuShikakuId(FlowParameters flowparam) {
         NenreitotatsuShikakuIdoBatchFlowParameter nenreitotatsuShikakuIdoParameter = new NenreitotatsuShikakuIdoBatchFlowParameter();
