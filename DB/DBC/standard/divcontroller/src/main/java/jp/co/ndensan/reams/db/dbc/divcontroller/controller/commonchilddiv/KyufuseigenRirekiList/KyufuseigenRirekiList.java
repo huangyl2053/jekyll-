@@ -25,7 +25,7 @@ public class KyufuseigenRirekiList {
      *
      * @return ResponseData
      */
-    public ResponseData<KyufuseigenRirekiListDiv> onLoad(KyufuseigenRirekiListDiv div) {
+    public ResponseData<KyufuseigenRirekiListDiv> initialize(KyufuseigenRirekiListDiv div) {
         HihokenshaNo 被保険者番号 = DataPassingConverter.deserialize(div.getHihokenshaNo(), HihokenshaNo.class);
         getHandler(div).onLoad(被保険者番号);
         return ResponseData.of(div).respond();
