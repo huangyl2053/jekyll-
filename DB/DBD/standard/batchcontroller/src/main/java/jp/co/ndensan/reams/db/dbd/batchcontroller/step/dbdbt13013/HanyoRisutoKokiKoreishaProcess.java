@@ -139,8 +139,8 @@ public class HanyoRisutoKokiKoreishaProcess extends BatchProcessBase<HanyoRisuto
     private static final RString KIZYUNNICHI = new RString("基準日：");
     private static final RString CHOKINNOMI = new RString("対象データ：直近のみ");
     private static final RString SOSHITSUKUBEN = new RString("喪失区分：");
-    private static final RString SHIKIBETSUCODE = new RString("識別コード");
-    private static final RString RIREKIBANGO = new RString("履歴番号");
+    private static final RString SHIKIBETSUCODE = new RString("後期高齢者情報_識別コード");
+    private static final RString RIREKIBANGO = new RString("後期高齢者情報_履歴番号");
     private static final RString CHIKI_1 = new RString("地区１");
     private static final RString CHIKI_2 = new RString("地区２");
     private static final RString CHIKI_3 = new RString("地区３");

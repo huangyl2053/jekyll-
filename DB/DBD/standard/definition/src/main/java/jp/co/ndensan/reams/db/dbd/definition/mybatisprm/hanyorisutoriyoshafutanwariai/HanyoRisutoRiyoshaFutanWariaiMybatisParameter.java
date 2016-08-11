@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 汎用リスト出力(利用者負担割合)のMyBatis用パラメータクラスです。
@@ -24,22 +23,21 @@ import lombok.Setter;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
-@Setter
 public class HanyoRisutoRiyoshaFutanWariaiMybatisParameter implements IMyBatisParameter {
 
-    private RString cyusyutsuhohokubun;
-    private FlexibleYear nendo;
-    private FlexibleDate kizyunnichi;
-    private boolean isJigyotaishoshafutanichiwari;
-    private boolean isJigyotaishoshafutanniwari;
-    private boolean isNendochokindatacyusyutsu;
-    private boolean isCsvkomokumeifuka;
-    private boolean isCsvrenbanfuka;
-    private boolean isCsvhitsukesurasyuhensyu;
-    private AtenaSelectBatchParameter atenacyusyutsujyoken;
-    private RString syutsuryokujun;
-    private FutanwariaiKubun 負担割合区分_１割;
-    private FutanwariaiKubun 負担割合区分_２割;
+    private final RString cyusyutsuhohokubun;
+    private final FlexibleYear nendo;
+    private final FlexibleDate kizyunnichi;
+    private final boolean isJigyotaishoshafutanichiwari;
+    private final boolean isJigyotaishoshafutanniwari;
+    private final boolean isNendochokindatacyusyutsu;
+    private final boolean isCsvkomokumeifuka;
+    private final boolean isCsvrenbanfuka;
+    private final boolean isCsvhitsukesurasyuhensyu;
+    private final AtenaSelectBatchParameter atenacyusyutsujyoken;
+    private final RString syutsuryokujun;
+    private final FutanwariaiKubun 負担割合区分_１割;
+    private final FutanwariaiKubun 負担割合区分_２割;
     private boolean is基準日;
     private boolean is年度;
     private boolean is事業対象者負担１割;

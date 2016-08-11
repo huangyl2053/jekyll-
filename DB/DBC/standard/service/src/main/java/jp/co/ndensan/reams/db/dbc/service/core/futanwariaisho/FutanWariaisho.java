@@ -104,7 +104,9 @@ public class FutanWariaisho {
      * @param flag RString
      */
     public void getSourceData(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FutanWariaiShoEntity entity, RString flag) {
-
+        if (識別コード == null || 被保険者番号 == null || entity == null || flag == null) {
+            throw new NullPointerException();
+        }
         ReportManager reportManager = new ReportManager();
         FutanWariaiShoProperty property = new FutanWariaiShoProperty();
         try (ReportAssembler<FutanWariaiShoSource> assembler = createAssembler(property, reportManager)) {

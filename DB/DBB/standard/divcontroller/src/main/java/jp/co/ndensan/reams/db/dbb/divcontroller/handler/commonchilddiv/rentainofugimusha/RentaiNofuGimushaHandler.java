@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 連帯納付義務者Divの操作を行うクラスです。
+ *
+ * @reamsid_L DBB-5700-010 chenaoqi
  */
 public class RentaiNofuGimushaHandler {
 

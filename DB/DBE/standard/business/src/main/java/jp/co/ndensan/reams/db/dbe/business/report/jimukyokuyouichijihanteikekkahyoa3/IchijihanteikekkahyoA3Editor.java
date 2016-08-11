@@ -166,15 +166,12 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
         source.sabisuKaisu19 = item.getSabisuKaisu19();
         source.sabisuKaisu20 = item.getSabisuKaisu20();
         source.sabisuKaisu21 = item.getSabisuKaisu21();
-        if (テキスト.equals(item.get概況調査テキスト_イメージ区分())) {
-            source.shisetsuNameTxit = item.get施設名テキスト();
-            source.shisetsuAddressTxit = item.get住所テキスト();
-            source.shisetsuTelTxit = item.get電話番号テキスト();
-        } else if (イメージ.equals(item.get概況調査テキスト_イメージ区分())) {
-            source.imgShisetsuName = item.get施設名イメージ();
-            source.imgShisetsuAddress = item.get住所イメージ();
-            source.imgShisetsuTel = item.get電話番号イメージ();
-        }
+        source.shisetsuNameTxit = item.get施設名テキスト();
+        source.shisetsuAddressTxit = item.get住所テキスト();
+        source.shisetsuTelTxit = item.get電話番号テキスト();
+        source.imgShisetsuName = item.get施設名イメージ();
+        source.imgShisetsuAddress = item.get住所イメージ();
+        source.imgShisetsuTel = item.get電話番号イメージ();
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         if (!RString.isNullOrEmpty(item.get申請書管理番号())) {
             source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());

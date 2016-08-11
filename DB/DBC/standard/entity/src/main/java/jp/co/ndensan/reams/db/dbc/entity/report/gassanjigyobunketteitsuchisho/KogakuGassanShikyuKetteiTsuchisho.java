@@ -13,8 +13,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 事業分高額合算支給決定通知書Entityクラスです。
  *
- * @author admin
+ * @reamsid_L DBC-4850-030 dongqianjing
  */
 @lombok.Getter
 @lombok.Setter
@@ -43,4 +44,5 @@ public class KogakuGassanShikyuKetteiTsuchisho {
     private RString 文書6;
     private RString 文書7;
     private RString 通番;
+    private FlexibleDate 支払予定日;
 }

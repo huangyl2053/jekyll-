@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-4910-030 x_lilh -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hikazeinennkintaishousyajohotorikomi.ISyoriHidukeKanriMasterUpdateMapper">
+    <resultMap id="resultMap_SyoriHidukeKanriMasterUpdateJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100201.SyoriHidukeKanriMasterUpdateJohoEntity" autoMapping="true">
+        <!-- TODO -->
+    </resultMap>
+    
+    <select resultOrdered="true" id="get処理日付管理マスタ更新情報"
+            resultMap="resultMap_SyoriHidukeKanriMasterUpdateJohoEntity"
+            fetchSize="500">
+           <!-- TODO -->
+    </select>
+    <!-- TODO insert処理日付管理マスタ更新情報
+update処理日付管理マスタ更新情報 -->
+</mapper>

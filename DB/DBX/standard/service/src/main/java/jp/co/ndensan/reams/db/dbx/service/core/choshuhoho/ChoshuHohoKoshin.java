@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.config.ConfigKeysHizuke;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -61,7 +62,7 @@ public class ChoshuHohoKoshin {
         Map<ConfigKeysHizuke, RString> map = new HashMap<>();
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysHizuke target : ConfigKeysHizuke.values()) {
-            map.put(target, DbBusinessConfig.get(target, nowDate));
+            map.put(target, DbBusinessConfig.get(target, nowDate, SubGyomuCode.DBB介護賦課));
         }
         return Collections.unmodifiableMap(map);
     }

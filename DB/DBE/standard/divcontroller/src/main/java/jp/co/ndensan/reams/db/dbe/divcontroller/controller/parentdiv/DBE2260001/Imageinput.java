@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -50,6 +51,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
@@ -168,9 +173,25 @@ public class Imageinput {
     private boolean savaCsvファイル(FileData file) {
         RString imagePath = Path.combinePath(Path.getRootPath(RString.EMPTY), DbBusinessConfig
                 .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
-        File サーバファイル = new File(imagePath.toString());
         File localファイル = new File(file.getFilePath().toString());
-        return localファイル.renameTo(new File(サーバファイル, file.getFileName().toString()));
+        File サーバパス = new File(imagePath.toString());
+        boolean fileFlag;
+        boolean サーバFlag;
+        File サーバ = new File(imagePath.toString(), file.getFileName().toString());
+        if (!サーバパス.exists()) {
+            fileFlag = サーバパス.mkdirs();
+        } else {
+            fileFlag = true;
+        }
+        if (サーバ.exists()) {
+            サーバFlag = サーバ.delete();
+        } else {
+            サーバFlag = true;
+        }
+        if (サーバFlag && fileFlag) {
+            return localファイル.renameTo(サーバ);
+        }
+        return true;
     }
 
     private void save共有フォルダ(ImageinputDiv div, FilesystemPath path) {
@@ -234,6 +255,7 @@ public class Imageinput {
                 }
             }
             for (ImageinputResult 関連データ : 関連データList) {
+                AccessLogger.log(AccessLogType.照会, toPersonalData(関連データ.getT5101_被保険者番号()));
                 csvData.setT5101_厚労省IF識別コード(関連データ.getT5101_厚労省IF識別コード());
                 csvData.setT5101_申請書管理番号(関連データ.getT5101_申請書管理番号());
                 csvData.setT5101_被保険者氏名(関連データ.getT5101_被保険者氏名());
@@ -257,6 +279,11 @@ public class Imageinput {
         getHandler(div).set画面一覧(dB更新用);
         TorokuDataCollection collection = new TorokuDataCollection(dB更新用);
         ViewStateHolder.put(ViewStateKeys.イメージ取込み, collection);
+    }
+
+    private PersonalData toPersonalData(RString 被保険者番号) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号);
+        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
     private void db更新(ImageinputDiv div) {

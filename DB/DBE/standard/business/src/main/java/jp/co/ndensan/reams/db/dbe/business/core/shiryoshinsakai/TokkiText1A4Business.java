@@ -197,7 +197,8 @@ public class TokkiText1A4Business {
         if (!テキスト全面イメージ.equals(特記パターン)) {
             for (DbT5205NinteichosahyoTokkijikoEntity entity : 特記情報List) {
                 TokkiA4Entity 短冊情報 = new TokkiA4Entity();
-                短冊情報.set事項番号(entity.getNinteichosaTokkijikoNo());
+                短冊情報.set事項番号(get項目番号(kyotsuEntity.getKoroshoIfShikibetsuCode(),
+                        entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban()));
                 短冊情報.set項目名称(get項目名称(kyotsuEntity.getKoroshoIfShikibetsuCode(), entity.getNinteichosaTokkijikoNo()));
                 if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.getTokkijikoTextImageKubun())) {
                     短冊情報.set特記事項テキスト_イメージ(entity.getTokkiJiko());
@@ -207,14 +208,13 @@ public class TokkiText1A4Business {
                 }
                 短冊情報リスト.add(短冊情報);
                 表示行数 = 表示行数 + 1;
-                if (一ページ表示行数 * 現在ページ <= 表示行数) {
+                if (表示行数 % (一ページ表示行数 * 現在ページ) == 0) {
                     has改ページ = true;
-                    表示行数 = 0;
                     短冊情報リスト = 短冊情報リスト.subList(一ページ表示行数 * (現在ページ - 1), 表示行数 - 1);
                     return 短冊情報リスト;
                 }
             }
-            if (一ページ表示行数 * (現在ページ - 1) <= 短冊情報リスト.size()) {
+            if (!短冊情報リスト.isEmpty() && 一ページ表示行数 * (現在ページ - 1) <= 短冊情報リスト.size()) {
                 短冊情報リスト = 短冊情報リスト.subList(一ページ表示行数 * (現在ページ - 1), 短冊情報リスト.size() - 1);
             }
         }
@@ -296,28 +296,31 @@ public class TokkiText1A4Business {
         for (DbT5205NinteichosahyoTokkijikoEntity entity : 特記情報List) {
             if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.getTokkijikoTextImageKubun())) {
                 isテキスト = true;
-                テキスト全面.append(get特記事項テキスト(
+                RStringBuilder テキストBuilder = new RStringBuilder();
+                テキストBuilder.append(get特記事項テキスト(
                         kyotsuEntity.getKoroshoIfShikibetsuCode(), entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban()));
-                テキスト全面.append(entity.getTokkiJiko());
-                if ((int) (テキスト全面.length() / 最大文字数) == 2) {
-                    テキスト全面.insert(最大文字数 * 2, System.lineSeparator());
+                テキストBuilder.append(entity.getTokkiJiko());
+                if ((int) (テキストBuilder.length() / 最大文字数) == 2) {
+                    テキストBuilder.insert(最大文字数 * 2, System.lineSeparator());
                     表示行数 = 表示行数 + 1;
                 }
-                if ((int) (テキスト全面.length() / 最大文字数) == 1) {
-                    テキスト全面.insert(最大文字数, System.lineSeparator());
+                if ((int) (テキストBuilder.length() / 最大文字数) == 1) {
+                    テキストBuilder.insert(最大文字数, System.lineSeparator());
                     表示行数 = 表示行数 + 1;
                 }
                 if ((!is2枚目以降 && ページ最大表示行数 <= 表示行数)
                         || (is2枚目以降 && ページ最大表示行数 * 現在ページ <= 表示行数)) {
                     has改ページ = true;
+                    テキスト全面.append(テキストBuilder.toRString());
                     return テキスト全面.toRString();
                 }
                 if (is2枚目以降 && 表示行数 % (ページ最大表示行数 * (現在ページ - 1)) == 0) {
                     テキスト全面 = new RStringBuilder();
                 } else {
-                    テキスト全面.append(System.lineSeparator());
+                    テキストBuilder.append(System.lineSeparator());
                     表示行数 = 表示行数 + 1;
                 }
+                テキスト全面.append(テキストBuilder.toRString());
             }
         }
         if ((isテキスト && !is2枚目以降) || (isテキスト && (is2枚目以降 && ページ最大表示行数 * (現在ページ - 1) <= 表示行数
@@ -331,6 +334,7 @@ public class TokkiText1A4Business {
         RStringBuilder イメージファイル = new RStringBuilder();
         RString ファイル名 = getファイル名By特記番号(特記事項番号);
         if (!RString.isNullOrEmpty(ファイル名)) {
+            イメージファイル.append(ファイル名);
             for (int i = 0; i <= 最大連番; i++) {
                 if (i == 特記事項連番) {
                     イメージファイル.append(new RString(特記事項連番).padZeroToLeft(2));
@@ -425,6 +429,26 @@ public class TokkiText1A4Business {
             return NinteichosaKomoku09B.getAllBy調査特記事項番(調査特記事項番号).get名称();
         }
         return RString.EMPTY;
+    }
+
+    private RString get項目番号(Code 厚労省IF識別コード, RString 調査特記事項番号, int 連番) {
+        RStringBuilder 項目番号 = new RStringBuilder();
+        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード.value())) {
+            項目番号.append(NinteichosaKomoku99A.getAllBy調査特記事項番(調査特記事項番号).get特記事項番号());
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード.value())) {
+            項目番号.append(NinteichosaKomoku02A.getAllBy調査特記事項番(調査特記事項番号).get特記事項番号());
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード.value())) {
+            項目番号.append(NinteichosaKomoku06A.getAllBy調査特記事項番(調査特記事項番号).get特記事項番号());
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード.value())) {
+            項目番号.append(NinteichosaKomoku09A.getAllBy調査特記事項番(調査特記事項番号).get特記事項番号());
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード.value())) {
+            項目番号.append(NinteichosaKomoku09B.getAllBy調査特記事項番(調査特記事項番号).get特記事項番号());
+        }
+        if (!RString.isNullOrEmpty(項目番号.toRString())) {
+            項目番号.append(ハイフン);
+            項目番号.append(連番);
+        }
+        return 項目番号.toRString();
     }
 
     private RString getファイル名By特記番号(RString 特記番号) {

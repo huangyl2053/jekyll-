@@ -24,7 +24,7 @@ public class JukyuIdoKeikakuRirekiList {
      * @param div JukyuIdoKeikakuRirekiListDiv
      * @return ResponseData
      */
-    public ResponseData<JukyuIdoKeikakuRirekiListDiv> onLoad(JukyuIdoKeikakuRirekiListDiv div) {
+    public ResponseData<JukyuIdoKeikakuRirekiListDiv> initialize(JukyuIdoKeikakuRirekiListDiv div) {
 
         HihokenshaNo 被保険者番号 = DataPassingConverter.deserialize(div.getHihokenshaNo(), HihokenshaNo.class);
         getHandler(div).onLoad(被保険者番号);

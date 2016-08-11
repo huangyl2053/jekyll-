@@ -66,6 +66,10 @@ public class JukyushaIdoRenrakuhyoHenkoMainPanel {
             div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().
                     getChkIsSearchDeletedData().setSelectedItemsByKey(list);
         }
+        if (修正モード.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))
+                || 選択モード.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+            return ResponseData.of(div).setState(DBC0220011StateName.対象者一覧);
+        }
         return ResponseData.of(div).setState(DBC0220011StateName.対象者検索);
     }
 

@@ -34,8 +34,9 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
+ * 利用者負担割合証InsertのProcessクラスです。
  *
- * @author Saku
+ * @reamsid_L DBC-4990-030 pengxingyi
  */
 public class RiyoshaFutanWariaiShoInsertProcess extends BatchProcessBase<RiyoshaFutanwariaishoTempEntity> {
 
@@ -59,10 +60,10 @@ public class RiyoshaFutanWariaiShoInsertProcess extends BatchProcessBase<Riyosha
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final EucEntityId SHORIKEKKA_EUC_ENTITY_ID = new EucEntityId(new RString("DBU900002"));
     private static final RString 交付証種類_003 = new RString("003");
-    private static final RString ONE = new RString("1");
-    private static final RString TWO = new RString("2");
-    private static final RString THREE = new RString("3");
-    private static final RString FOUR = new RString("4");
+    private static final RString 定数_1 = new RString("1");
+    private static final RString 定数_2 = new RString("2");
+    private static final RString 定数_3 = new RString("3");
+    private static final RString 定数_4 = new RString("4");
     private static final int NUM_ONE = 1;
     private static final int NUM_SEVEN = 7;
     private static final int NUM_THIRTY_ONE = 31;
@@ -535,13 +536,13 @@ public class RiyoshaFutanWariaiShoInsertProcess extends BatchProcessBase<Riyosha
 
     private RString get交付事由(RiyoshaFutanwariaishoTempEntity entity) {
         RString 交付事由 = RString.EMPTY;
-        if (ONE.equals(entity.get利用者負担割合().getHanteiKubun())) {
+        if (定数_1.equals(entity.get利用者負担割合().getHanteiKubun())) {
             交付事由 = 交付事由_01;
-        } else if (TWO.equals(entity.get利用者負担割合().getHanteiKubun())) {
+        } else if (定数_2.equals(entity.get利用者負担割合().getHanteiKubun())) {
             交付事由 = 交付事由_02;
-        } else if (THREE.equals(entity.get利用者負担割合().getHanteiKubun())) {
+        } else if (定数_3.equals(entity.get利用者負担割合().getHanteiKubun())) {
             交付事由 = 交付事由_03;
-        } else if (FOUR.equals(entity.get利用者負担割合().getHanteiKubun())) {
+        } else if (定数_4.equals(entity.get利用者負担割合().getHanteiKubun())) {
             交付事由 = 交付事由_04;
         }
         return 交付事由;

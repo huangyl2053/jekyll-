@@ -75,7 +75,7 @@ public class IinItiziHanteiDataSakuseiA4Process extends BatchKeyBreakBase<ItiziH
 
     @Override
     protected void createWriter() {
-        batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517181.getReportId().value())
+        batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517038.getReportId().value())
                 .addBreak(new BreakerCatalog<IchijihanteikekkahyoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A4))
                 .create();
         reportSourceWriterA4 = new ReportSourceWriter<>(batchWriteA4);
@@ -129,11 +129,11 @@ public class IinItiziHanteiDataSakuseiA4Process extends BatchKeyBreakBase<ItiziH
     private void outputJokenhyoFactory() {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem jokenhyoItem = new ReportOutputJokenhyoItem(
-                ReportIdDBE.DBE517181.getReportId().value(),
+                ReportIdDBE.DBE517038.getReportId().value(),
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                ReportIdDBE.DBE517181.getReportName(),
+                new RString("一次判定結果票"),
                 new RString(batchWriteA4.getPageCount()),
                 RString.EMPTY,
                 RString.EMPTY,

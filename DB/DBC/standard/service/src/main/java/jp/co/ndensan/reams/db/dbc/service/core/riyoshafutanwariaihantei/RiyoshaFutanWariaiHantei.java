@@ -8,17 +8,17 @@ package jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihantei.FutanWariaiHanteiRelateEntity;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.HanteiKubunType;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KoseiJiyuType;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.FutanWariaiHanteiRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.FutanWariaiHanteiResult;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.HanteiTaishoshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.RiyoshaFutanWariaiMeisaiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SeikatsuHogoGaitoJohoTempEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -101,7 +101,7 @@ public class RiyoshaFutanWariaiHantei {
         FutanWariaiHanteiResult 負担割合判定結果 = new FutanWariaiHanteiResult();
         HanteiTaishoshaTempEntity 判定対象者Temp = 負担割合判定情報.get判定対象者Temp();
         SeikatsuHogoGaitoJohoTempEntity 生活保護該当情報Temp = 負担割合判定情報.get生活保護該当情報Temp();
-        List<DbT2008ShotokuKanriEntity> 介護所得情報 = 負担割合判定情報.get介護所得情報();
+        List<SetaiinShotoku> 介護所得情報 = 負担割合判定情報.get介護所得情報();
         FlexibleDate 判定基準日 = 負担割合判定情報.get判定基準日();
         FlexibleYearMonth 判定基準日の年月 = 判定基準日 == null ? null : 判定基準日.getYearMonth();
         FlexibleDate 認定有効期間開始年月日 = 判定対象者Temp == null ? null
@@ -143,19 +143,19 @@ public class RiyoshaFutanWariaiHantei {
         return 負担割合判定結果;
     }
 
-    private Decimal get公的年金収入額世帯員分の合計(List<DbT2008ShotokuKanriEntity> 介護所得情報リスト) {
+    private Decimal get公的年金収入額世帯員分の合計(List<SetaiinShotoku> 介護所得情報リスト) {
         Decimal sum = Decimal.ZERO;
-        for (DbT2008ShotokuKanriEntity 介護所得情報 : 介護所得情報リスト) {
-            sum.add(介護所得情報.getNenkiniShunyuGaku());
+        for (SetaiinShotoku 介護所得情報 : 介護所得情報リスト) {
+            sum.add(介護所得情報.get年金収入額());
         }
         return sum;
     }
 
-    private Decimal getその他の合計所得金額世帯員分の合計(List<DbT2008ShotokuKanriEntity> 介護所得情報リスト) {
+    private Decimal getその他の合計所得金額世帯員分の合計(List<SetaiinShotoku> 介護所得情報リスト) {
         Decimal sum = Decimal.ZERO;
-        for (DbT2008ShotokuKanriEntity 介護所得情報 : 介護所得情報リスト) {
-            sum.add(noMinusDecimal(nonullSubstract(介護所得情報.getGokeiShotokuGaku(),
-                    介護所得情報.getNenkiniShotokuGaku())));
+        for (SetaiinShotoku 介護所得情報 : 介護所得情報リスト) {
+            sum.add(noMinusDecimal(nonullSubstract(介護所得情報.get合計所得金額(),
+                    介護所得情報.get年金所得額())));
         }
         return sum;
     }

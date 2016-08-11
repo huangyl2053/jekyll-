@@ -73,7 +73,8 @@ public class IchijihanteiekkahyoTokkijiko {
         if (!テキスト全面イメージ.equals(特記パターン)) {
             for (DbT5205NinteichosahyoTokkijikoEntity entity : 特記情報List) {
                 TokkiJikou 短冊情報 = new TokkiJikou();
-                短冊情報.set事項番号(entity.getNinteichosaTokkijikoNo());
+                短冊情報.set事項番号(get項目番号(kyotsuEntity.getKoroshoIfShikibetsuCode(),
+                        entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban()));
                 短冊情報.set項目名称(get項目名称(kyotsuEntity.getKoroshoIfShikibetsuCode(), entity.getNinteichosaTokkijikoNo()));
                 if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.getTokkijikoTextImageKubun())) {
                     短冊情報.setテキストとイメージ(entity.getTokkiJiko());
@@ -133,14 +134,18 @@ public class IchijihanteiekkahyoTokkijiko {
         for (DbT5205NinteichosahyoTokkijikoEntity entity : 特記情報List) {
             if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.getTokkijikoTextImageKubun())) {
                 isテキスト = true;
-                テキスト全面.append(get特記事項テキスト(
+                RStringBuilder テキスト = new RStringBuilder();
+                テキスト.append(get特記事項テキスト(
                         kyotsuEntity.getKoroshoIfShikibetsuCode(), entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban()));
-                テキスト全面.append(entity.getTokkiJiko());
-                if ((int) (テキスト全面.length() / 最大文字数) == 2) {
-                    テキスト全面.insert(最大文字数 * 2, System.lineSeparator());
+                テキスト.append(entity.getTokkiJiko());
+                if ((int) (テキスト.length() / 最大文字数) == 2) {
+                    テキスト.insert(最大文字数 * 2, System.lineSeparator());
                 }
-                テキスト全面.insert(最大文字数, System.lineSeparator());
-                テキスト全面.append(System.lineSeparator());
+                if (テキスト.length() % 最大文字数 == 0) {
+                    テキスト.insert(最大文字数, System.lineSeparator());
+                }
+                テキスト.append(System.lineSeparator());
+                テキスト全面.append(テキスト.toRString());
             }
         }
         if (isテキスト) {
@@ -153,6 +158,7 @@ public class IchijihanteiekkahyoTokkijiko {
         RStringBuilder イメージファイル = new RStringBuilder();
         RString ファイル名 = getファイル名By特記番号(特記事項番号);
         if (!RString.isNullOrEmpty(ファイル名)) {
+            イメージファイル.append(ファイル名);
             for (int i = 0; i <= 最大連番; i++) {
                 if (i == 特記事項連番) {
                     イメージファイル.append(new RString(特記事項連番).padZeroToLeft(2));
@@ -247,6 +253,26 @@ public class IchijihanteiekkahyoTokkijiko {
             return NinteichosaKomoku09B.getAllBy調査特記事項番(調査特記事項番号).get名称();
         }
         return RString.EMPTY;
+    }
+
+    private RString get項目番号(Code 厚労省IF識別コード, RString 調査特記事項番号, int 連番) {
+        RStringBuilder 項目番号 = new RStringBuilder();
+        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード.value())) {
+            項目番号.append(NinteichosaKomoku99A.getAllBy調査特記事項番(調査特記事項番号).get特記事項番号());
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード.value())) {
+            項目番号.append(NinteichosaKomoku02A.getAllBy調査特記事項番(調査特記事項番号).get特記事項番号());
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード.value())) {
+            項目番号.append(NinteichosaKomoku06A.getAllBy調査特記事項番(調査特記事項番号).get特記事項番号());
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード.value())) {
+            項目番号.append(NinteichosaKomoku09A.getAllBy調査特記事項番(調査特記事項番号).get特記事項番号());
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード.value())) {
+            項目番号.append(NinteichosaKomoku09B.getAllBy調査特記事項番(調査特記事項番号).get特記事項番号());
+        }
+        if (!RString.isNullOrEmpty(項目番号.toRString())) {
+            項目番号.append(ハイフン);
+            項目番号.append(連番);
+        }
+        return 項目番号.toRString();
     }
 
     private RString getファイル名By特記番号(RString 特記番号) {

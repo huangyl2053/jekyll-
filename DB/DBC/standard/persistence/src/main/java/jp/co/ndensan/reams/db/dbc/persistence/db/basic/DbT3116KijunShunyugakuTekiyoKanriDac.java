@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -32,6 +33,7 @@ public class DbT3116KijunShunyugakuTekiyoKanriDac implements ISaveable<DbT3116Ki
 
     @InjectSession
     private SqlSession session;
+    private static final int 定数_1 = 1;
 
     /**
      * 主キーで基準収入額適用管理を取得します。
@@ -94,4 +96,54 @@ public class DbT3116KijunShunyugakuTekiyoKanriDac implements ISaveable<DbT3116Ki
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * 基準収入額適用管理マスタを取得します。
+     *
+     * @param 世帯コード SetaiCode
+     * @param 年度 Nendo
+     *
+     * @return DbT3116KijunShunyugakuTekiyoKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    public List<DbT3116KijunShunyugakuTekiyoKanriEntity> selectJouhousootoNendo(
+            RString 世帯コード,
+            FlexibleYear 年度
+    ) throws NullPointerException {
+        requireNonNull(世帯コード, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯コード"));
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3116KijunShunyugakuTekiyoKanri.class).
+                where(and(
+                                eq(setaiCode, 世帯コード),
+                                eq(nendo, 年度))).
+                toList(DbT3116KijunShunyugakuTekiyoKanriEntity.class);
+    }
+
+    /**
+     * 基準収入額適用管理マスタねんど年度 によっての抽出。
+     *
+     * @param 年度 Nendo
+     *
+     * @return DbT3116KijunShunyugakuTekiyoKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    public List<DbT3116KijunShunyugakuTekiyoKanriEntity> select基準収入額適用管理マスタ(
+            FlexibleYear 年度
+    ) throws NullPointerException {
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3116KijunShunyugakuTekiyoKanri.class).
+                where(
+                        eq(nendo, 年度)
+                ).
+                toList(DbT3116KijunShunyugakuTekiyoKanriEntity.class);
+    }
+
 }

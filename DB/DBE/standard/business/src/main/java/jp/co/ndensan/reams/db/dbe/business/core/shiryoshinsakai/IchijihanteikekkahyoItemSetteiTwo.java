@@ -1552,15 +1552,15 @@ public class IchijihanteikekkahyoItemSetteiTwo {
      * @param 予防給付 予防給付
      * @param 介護給付 介護給付
      * @param サービス状況フラグ サービス状況フラグ
-     * @param 厚労省IF識別コード 厚労省IF識別コード
      */
     public void setサービスの状況(ItiziHanteiEntity entity, IchijihanteikekkahyoA4Entity 項目,
             List<DbT5207NinteichosahyoServiceJokyoEntity> 予防給付, List<DbT5207NinteichosahyoServiceJokyoEntity> 介護給付,
-            DbT5208NinteichosahyoServiceJokyoFlagEntity サービス状況フラグ, Code 厚労省IF識別コード) {
+            DbT5208NinteichosahyoServiceJokyoFlagEntity サービス状況フラグ) {
         RStringBuilder builder;
         if (予防給付サービス.equals(entity.getServiceKubunCode())) {
             項目.setSabisuKubun(new RString("予防給付・総合事業"));
             for (DbT5207NinteichosahyoServiceJokyoEntity dbt5207Entity : 予防給付) {
+                Code 厚労省IF識別コード = dbt5207Entity.getKoroshoIfShikibetsuCode();
                 switch (dbt5207Entity.getRemban()) {
                     case 連番_1:
                         builder = new RStringBuilder();
@@ -1628,6 +1628,7 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         } else if (介護給付サービス.equals(entity.getServiceKubunCode())) {
             項目.setSabisuKubun(new RString("介護給付"));
             for (DbT5207NinteichosahyoServiceJokyoEntity dbt5207Entity : 介護給付) {
+                Code 厚労省IF識別コード = dbt5207Entity.getKoroshoIfShikibetsuCode();
                 switch (dbt5207Entity.getRemban()) {
                     case 連番_1:
                         builder = new RStringBuilder();

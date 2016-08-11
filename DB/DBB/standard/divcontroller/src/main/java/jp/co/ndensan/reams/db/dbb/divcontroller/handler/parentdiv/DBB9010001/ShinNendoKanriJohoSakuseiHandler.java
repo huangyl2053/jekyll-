@@ -43,6 +43,7 @@ public class ShinNendoKanriJohoSakuseiHandler {
     private final ShinNendoKanriJohoSakuseiDiv div;
     private static final RString 処理枝番 = new RString("00");
     private static final RString 年度内連番 = new RString("00");
+    private static final RString 調定年度_KEY = new RString("choteiNendo");
 
     /**
      * コンストラクタです。
@@ -73,7 +74,7 @@ public class ShinNendoKanriJohoSakuseiHandler {
     }
 
     /**
-     * 実行ボタン押下した時の処理のメソッドます。
+     * 実行ボタン押下した時の処理のメソッドです。
      *
      */
     public void 実行ボタン押下した時の処理() {
@@ -90,7 +91,7 @@ public class ShinNendoKanriJohoSakuseiHandler {
     }
 
     /**
-     * 処理日付管理の追加のメソッドます。
+     * 処理日付管理の追加のメソッドです。
      *
      * @param 処理日付管理 ShoriDateKanri
      * @return 処理日付管理
@@ -108,7 +109,7 @@ public class ShinNendoKanriJohoSakuseiHandler {
     }
 
     /**
-     * 納期管理の追加のメソッドます。
+     * 納期管理の追加のメソッドです。
      *
      * @return 納期管理List
      */
@@ -221,7 +222,7 @@ public class ShinNendoKanriJohoSakuseiHandler {
     }
 
     /**
-     * 帳票制御汎用の追加のメソッドます。
+     * 帳票制御汎用の追加のメソッドです。
      *
      * @param 帳票制御汎用manager ChohyoSeigyoHanyoManager
      * @return 帳票制御汎用List
@@ -250,7 +251,7 @@ public class ShinNendoKanriJohoSakuseiHandler {
 
     private HashMap<String, Object> createParameter(RYear 調定年度) {
         HashMap<String, Object> sqlParameter = new HashMap<>();
-        sqlParameter.put("choteiNendo", 調定年度);
+        sqlParameter.put(調定年度_KEY.toString(), 調定年度);
         return sqlParameter;
     }
 }

@@ -297,14 +297,12 @@ public class ZenkokuHokenshaMasterKoshin {
         for (dgHokenshas_Row row : div.getDgHokenshas().getDataSource()) {
             if (!row.getJotai().isNullOrEmpty()) {
                 Hokenja hknj = new Hokenja();
-                HokenjaShubetsu 保険者種別 = new HokenjaShubetsu(HokenjaShubetsuType.介護保険.code());
-                HokenjaNo 保険者番号 = new HokenjaNo(row.getHokenshaNo());
                 if (!追加状態.equals(row.getJotai())) {
                     hknj = DataPassingConverter.deserialize(row.getHokensha(), Hokenja.class);
                 }
                 Builder builder = hknj.createBuilderForEdit();
-                builder.setHokenjaShubetsu(保険者種別);
-                builder.setHokenjaNo(保険者番号);
+                builder.setHokenjaShubetsu(new HokenjaShubetsu(HokenjaShubetsuType.介護保険.code()));
+                builder.setHokenjaNo(new HokenjaNo(row.getHokenshaNo()));
                 builder.setHokenjaName(row.getHokenshaName());
                 builder.setJusho(row.getJusho());
                 builder.setTelNo(new TelNo(row.getTelNo()));

@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey.Builder;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -42,7 +41,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * 介護保険料減免画面
+ * 介護保険料減免画面のクラスです。
  *
  * @reamsid_L DBB-1660-010 gongliang
  */
@@ -55,6 +54,8 @@ public class GemmenJuminKihon {
 //    private static final RString 状況_訂正 = new RString("訂正した内容で、決定");
 //    private static final RString 処理_登録 = new RString("登録");
     private static final RString 処理_取消 = new RString("取消");
+    private static final int ゼロ_定値 = 0;
+    private static final int イチ_定値 = 1;
     private static final RString 発行ボタンSHOW = new RString("1");
     private static final RString 定値_ゼロ = new RString("0");
     private static final RString 定値_イチ = new RString("1");
@@ -70,7 +71,7 @@ public class GemmenJuminKihon {
      * 画面の初期化メソッドです。
      *
      * @param div KogakuServicehiShokaiMainDiv
-     * @return 世帯合算並列表示画面
+     * @return 介護保険料減免画面
      */
     public ResponseData<GemmenJuminKihonDiv> onLoad(GemmenJuminKihonDiv div) {
         GemmenJuminKihonHandler handler = getHandler(div);
@@ -86,22 +87,20 @@ public class GemmenJuminKihon {
         handler.loadヘッダパネル(識別コード, searchKey);
 
         // TODO QA1131 viewStateの賦課年度（ただし、検索画面で「全年度」を指定した場合は空白）  どのをより判断ですが？
-        IItemList<Fuka> 全賦課履歴データ = handler.load全賦課履歴情報グリッド(被保険者番号, new FukaNendo(賦課年度));
-        if (全賦課履歴データ == null) {
+        int 全賦課履歴データ件数 = handler.load全賦課履歴情報グリッド(被保険者番号, new FukaNendo(賦課年度));
+        if (全賦課履歴データ件数 == ゼロ_定値) {
             ValidationMessageControlPairs pairs = new GemmenJuminKihonValidationHandler(div).賦課情報の存在チェック();
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
+        } else if (全賦課履歴データ件数 == イチ_定値) {
+            Fuka 賦課基本 = handler.get賦課基本();
+            NendobunFukaGemmenListResult 減免リスト = KaigoHokenryoGemmen.createInstance()
+                    .getJokyo(賦課基本.get調定年度(), 賦課基本.get賦課年度(),
+                            div.getCcdKaigoFukaKihon().get通知書番号(), div.getCcdKaigoFukaKihon().get被保番号());
+            load(減免リスト, div);
         } else {
-            if (!全賦課履歴データ.isEmpty()) {
-                Fuka 賦課基本 = 全賦課履歴データ.toList().get(0);
-                NendobunFukaGemmenListResult 減免リスト = KaigoHokenryoGemmen.createInstance()
-                        .getJokyo(賦課基本.get調定年度(), 賦課基本.get賦課年度(),
-                                div.getCcdKaigoFukaKihon().get通知書番号(), div.getCcdKaigoFukaKihon().get被保番号());
-                load(減免リスト, div);
-            } else {
-                handler.loadパネル状態2();
-            }
+            handler.loadパネル状態2();
         }
         return createResponse(div);
     }
@@ -110,7 +109,7 @@ public class GemmenJuminKihon {
      * 全賦課履歴情報グリッドの選択ボタン押下のメソッドです。
      *
      * @param div GemmenJuminKihonDiv
-     * @return 世帯合算並列表示画面
+     * @return 介護保険料減免画面
      */
     public ResponseData<GemmenJuminKihonDiv> onSelectBySelectButton_dgFukaRirekiAll(GemmenJuminKihonDiv div) {
         // TODO QA932 選択された全賦課履歴情報グリッドの明細の取得メソッドがありません。
@@ -140,7 +139,7 @@ public class GemmenJuminKihon {
      * 「訂正する」ボタン押下のメソッドです。
      *
      * @param div GemmenJuminKihonDiv
-     * @return 世帯合算並列表示画面
+     * @return 介護保険料減免画面
      */
     public ResponseData<GemmenJuminKihonDiv> onClick_btnTesei(GemmenJuminKihonDiv div) {
         ViewStateHolder.put(ViewStateKeys.画面モード, 画面モード_訂正);
@@ -152,7 +151,7 @@ public class GemmenJuminKihon {
      * 「取消する」ボタン押下のメソッドです。
      *
      * @param div GemmenJuminKihonDiv
-     * @return 世帯合算並列表示画面
+     * @return 介護保険料減免画面
      */
     public ResponseData<GemmenJuminKihonDiv> onClick_btnTorikeshi(GemmenJuminKihonDiv div) {
         ViewStateHolder.put(ViewStateKeys.画面モード, 画面モード_取消);
@@ -164,7 +163,7 @@ public class GemmenJuminKihon {
      * 「計算する」ボタンを押下の事件です。
      *
      * @param div KogakuServicehiShokaiMainDiv
-     * @return 世帯合算並列表示画面
+     * @return 介護保険料減免画面
      */
     public ResponseData<GemmenJuminKihonDiv> onClick_btnCalculate(GemmenJuminKihonDiv div) {
         FukaTaishoshaKey 賦課対象者 = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
@@ -234,7 +233,8 @@ public class GemmenJuminKihon {
             FlexibleYear 賦課年度 = 賦課対象者.get賦課年度();
             List<Decimal> 減免後の普徴金額LIST = ViewStateHolder.get(ViewStateKeys.減免後の普徴金額LIST, List.class);
             List<Decimal> 減免後の特徴と過年度金額LIST = ViewStateHolder.get(ViewStateKeys.減免後の特徴と過年度金額LIST, List.class);
-            年度分賦課減免リスト = handler.保存前の編集(年度分賦課減免リスト, 賦課年度, 被保険者番号, 減免後の普徴金額LIST, 減免後の特徴と過年度金額LIST);
+            年度分賦課減免リスト = handler.保存前の編集(年度分賦課減免リスト,
+                    賦課年度, 被保険者番号, 減免後の普徴金額LIST, 減免後の特徴と過年度金額LIST);
             ViewStateHolder.put(ViewStateKeys.年度分賦課減免リスト, 年度分賦課減免リスト);
             Code 減免種類コード = ViewStateHolder.get(ViewStateKeys.減免種類コード, Code.class);
             Code 取消種類コード = ViewStateHolder.get(ViewStateKeys.取消種類コード, Code.class);
@@ -291,10 +291,10 @@ public class GemmenJuminKihon {
     }
 
     /**
-     * onOkClose_btnTorikeshiShurui事件です。
+     * 取消種類選択ボタンのonOkClose事件です。
      *
      * @param div HanyorisutoPanelDiv
-     * @return ResponseData
+     * @return 介護保険料減免画面
      */
     public ResponseData<GemmenJuminKihonDiv> onOkClose_btnTorikeshiShurui(GemmenJuminKihonDiv div) {
         Code 取消種類code = getHandler(div).onOkClose取消種類();
@@ -303,10 +303,10 @@ public class GemmenJuminKihon {
     }
 
     /**
-     * onOkClose_btnGemmenShurui事件です。
+     * 減免種類選択ボタンのonOkClose事件です。
      *
      * @param div HanyorisutoPanelDiv
-     * @return ResponseData
+     * @return 介護保険料減免画面
      */
     public ResponseData<GemmenJuminKihonDiv> onOkClose_btnGemmenShurui(GemmenJuminKihonDiv div) {
         Code 減免種類code = getHandler(div).onOkClose減免種類();

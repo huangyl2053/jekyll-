@@ -37,7 +37,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
@@ -70,6 +69,7 @@ public class JikoFutangakuHoseiHandler {
     private static final int INT_4 = 4;
     private static final RString CODE_003 = new RString("003");
     private static final RString 名称_被保険者番号 = new RString("被保険者番号");
+    private static final RString KEY_ZERO = new RString("key0");
 
     /**
      * コンストラクタです。
@@ -149,9 +149,13 @@ public class JikoFutangakuHoseiHandler {
      *
      */
     public void onChange_txtMadoguchiKaishiYMD() {
-        RString 曜日 = new RString(div.getTxtMadoguchiKaishiYMD()
-                .getValue().getDayOfWeek().getShortTerm());
-        div.getTxtMadoguchiKaishiYoubi().setValue(曜日);
+        if (div.getTxtMadoguchiKaishiYMD().getValue() == null) {
+            div.getTxtMadoguchiKaishiYoubi().clearValue();
+        } else {
+            RString 曜日 = new RString(div.getTxtMadoguchiKaishiYMD()
+                    .getValue().getDayOfWeek().getShortTerm());
+            div.getTxtMadoguchiKaishiYoubi().setValue(曜日);
+        }
     }
 
     /**
@@ -159,9 +163,13 @@ public class JikoFutangakuHoseiHandler {
      *
      */
     public void onChange_txtMadoguchiShuryoYMD() {
-        RString 曜日 = new RString(div.getTxtMadoguchiShuryoYMD()
-                .getValue().getDayOfWeek().getShortTerm());
-        div.getTxtMadoguchiShuryoYoubi().setValue(曜日);
+        if (div.getTxtMadoguchiShuryoYMD().getValue() == null) {
+            div.getTxtMadoguchiShuryoYoubi().clearValue();
+        } else {
+            RString 曜日 = new RString(div.getTxtMadoguchiShuryoYMD()
+                    .getValue().getDayOfWeek().getShortTerm());
+            div.getTxtMadoguchiShuryoYoubi().setValue(曜日);
+        }
     }
 
     /**
@@ -171,7 +179,7 @@ public class JikoFutangakuHoseiHandler {
      * @return boolean
      */
     public boolean onClick_btnJikofutangakuJohoNiModoru(KogakuGassanJikoFutanGaku result) {
-        return 編集処理対象から画面(result).hasChanged();
+        return result == null ? false : 編集処理対象から画面(result).hasChanged();
     }
 
     /**
@@ -263,7 +271,6 @@ public class JikoFutangakuHoseiHandler {
             detailDiv.getTxtShoumeishoSakuseiYMD().setValue(
                     new RDate(result.get自己負担額証明書作成年月日().toString()));
         }
-
     }
 
     private void init事業自己負担管理情報１タブ(KogakuGassanJikoFutanGaku result) {
@@ -443,9 +450,8 @@ public class JikoFutangakuHoseiHandler {
             div.getTxtMadoguchiKaishiFun().clearValue();
         } else {
             div.getTxtMadoguchiKaishiJikan().setValue(
-                    new Decimal(result.get支払期間開始時間().substring(INT_0, INT_2).toString()));
-            div.getTxtMadoguchiKaishiFun().setValue(
-                    new Decimal(result.get支払期間開始時間().substring(INT_2, INT_4).toString()));
+                    result.get支払期間開始時間().substring(INT_0, INT_2));
+            div.getTxtMadoguchiKaishiFun().setValue(result.get支払期間開始時間().substring(INT_2, INT_4));
         }
         if (result.get支払期間終了年月日() == null) {
             div.getTxtMadoguchiShuryoYMD().clearValue();
@@ -460,10 +466,8 @@ public class JikoFutangakuHoseiHandler {
             div.getTxtMadoguchiShuryoJikan().clearValue();
             div.getTxtMadoguchiShuryoFun().clearValue();
         } else {
-            div.getTxtMadoguchiShuryoJikan().setValue(
-                    new Decimal(result.get支払期間終了時間().substring(INT_0, INT_2).toString()));
-            div.getTxtMadoguchiShuryoFun().setValue(
-                    new Decimal(result.get支払期間終了時間().substring(INT_2, INT_4).toString()));
+            div.getTxtMadoguchiShuryoJikan().setValue(result.get支払期間終了時間().substring(INT_0, INT_2));
+            div.getTxtMadoguchiShuryoFun().setValue(result.get支払期間終了時間().substring(INT_2, INT_4));
         }
     }
 
@@ -495,10 +499,9 @@ public class JikoFutangakuHoseiHandler {
                 .set宛先住所(div.getTxtAtesakiJusho().getValue())
                 .set支払場所(div.getTxtMadoguchiShiharaiBasho().getValue())
                 .set支払期間開始年月日(getDate(div.getTxtMadoguchiKaishiYMD().getValue()))
-                .set支払期間開始時間(set時間(div.getTxtMadoguchiKaishiJikan().getValue(), div.getTxtMadoguchiShuryoFun().getValue()))
+                .set支払期間開始時間(set時間(div.getTxtMadoguchiKaishiJikan().getValue(), div.getTxtMadoguchiKaishiFun().getValue()))
                 .set支払期間終了年月日(getDate(div.getTxtMadoguchiShuryoYMD().getValue()))
                 .set支払期間終了時間(set時間(div.getTxtMadoguchiShuryoJikan().getValue(), div.getTxtMadoguchiShuryoFun().getValue()))
-                .setリアル補正実施年月日(FlexibleDate.getNowDate())
                 .build();
     }
 
@@ -526,9 +529,9 @@ public class JikoFutangakuHoseiHandler {
         return null;
     }
 
-    private RString set時間(Decimal 時, Decimal 分) {
-        RString jikan = 時 == null ? RString.EMPTY : new RString(時.intValue());
-        RString fun = 分 == null ? RString.EMPTY : new RString(分.intValue());
+    private RString set時間(RString 時, RString 分) {
+        RString jikan = 時 == null ? RString.EMPTY : 時;
+        RString fun = 分 == null ? RString.EMPTY : 分;
         RString 時間 = jikan.concat(fun);
         return RString.isNullOrEmpty(時間) ? null : 時間;
     }

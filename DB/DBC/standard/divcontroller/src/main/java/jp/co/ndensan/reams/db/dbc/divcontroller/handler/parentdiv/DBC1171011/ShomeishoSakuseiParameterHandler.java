@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -31,6 +32,7 @@ public class ShomeishoSakuseiParameterHandler {
     private static final RString TYOUHYOUID_帳票出力順共有子DIV = new RString("DBC200035_GassanJikofutangakushomeishoHakkoIchiran");
     private static final RString KEY_自己負担額計算括からの情報を元に作成RAD = new RString("jikoFutangaku");
     private static final RString KEY_国保連からの情報を元に作成RAD = new RString("kokuhoren");
+    private static final RString KEY_未発行分のみ = new RString("3");
     private final ShomeishoSakuseiParameterDiv div;
 
     /**
@@ -52,11 +54,11 @@ public class ShomeishoSakuseiParameterHandler {
         initialize();
 
         if (前回の実行情報 != null) {
-            if (!RString.isNullOrEmpty(前回の実行情報.get対象開始年月日().wareki().toDateString())) {
+            if (!FlexibleDate.EMPTY.equals(前回の実行情報.get対象開始年月日())) {
                 div.getJikoFutanShomeishoSakusei().getTxtZenkaiTaishoDate().setFromValue(
                         new RDate(前回の実行情報.get対象開始年月日().toString()));
             }
-            if (!RString.isNullOrEmpty(前回の実行情報.get対象終了年月日().wareki().toDateString())) {
+            if (!FlexibleDate.EMPTY.equals(前回の実行情報.get対象終了年月日())) {
                 div.getJikoFutanShomeishoSakusei().getTxtZenkaiTaishoDate().setToValue(
                         new RDate(前回の実行情報.get対象終了年月日().toString()));
                 div.getJikoFutanShomeishoSakusei().getTxtShinseiDate().setFromValue(
@@ -70,7 +72,7 @@ public class ShomeishoSakuseiParameterHandler {
         div.getJikoFutanShomeishoSakusei().getTxtShinseiDate().setToValue(RDate.getNowDate());
 
         if (実行された最新のデータ != null) {
-            if (!RString.isNullOrEmpty(実行された最新のデータ.get処理年月().wareki().toDateString())) {
+            if (!FlexibleYearMonth.EMPTY.equals(実行された最新のデータ.get処理年月())) {
                 div.getJikoFutanShomeishoSakusei().getTxtUketoriDate().setValue(new RDate(実行された最新のデータ.get処理年月().toString()));
             }
         }
@@ -82,6 +84,7 @@ public class ShomeishoSakuseiParameterHandler {
             keyValueList.add(new KeyValueDataSource(insho.getコード(), insho.get名称()));
         }
         div.getDdlInsho().setDataSource(keyValueList);
+        div.getDdlInsho().setSelectedKey(KEY_未発行分のみ);
         onLoad状態を設定する();
     }
 

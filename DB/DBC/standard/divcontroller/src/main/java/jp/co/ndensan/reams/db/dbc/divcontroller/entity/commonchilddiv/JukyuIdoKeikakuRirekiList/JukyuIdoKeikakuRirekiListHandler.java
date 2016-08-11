@@ -59,18 +59,12 @@ public class JukyuIdoKeikakuRirekiListHandler {
                 dgRow.getTekiyoShuryoYMD().setValue(keikakurireki.get適用終了日());
                 if (keikakurireki.get計画事業者名称() != null) {
                     dgRow.setKeikakuJigyoshaName(keikakurireki.get計画事業者名称().value());
-                } else {
-                    dgRow.setItakusakiJigyoshaName(null);
                 }
                 if (keikakurireki.get委託先事業者番号() != null) {
                     dgRow.setItakusakiJigyoshaNo(keikakurireki.get委託先事業者番号().value());
-                } else {
-                    dgRow.setItakusakiJigyoshaNo(null);
                 }
                 if (keikakurireki.get委託先事業者名称() != null) {
                     dgRow.setItakusakiJigyoshaName(keikakurireki.get委託先事業者名称().value());
-                } else {
-                    dgRow.setItakusakiJigyoshaName(null);
                 }
                 rowList.add(dgRow);
             }

@@ -33,12 +33,18 @@ public final class DBC0140011KeikakuTodokeJohoListHandler {
     public ResponseData<DBC160010_KeikakuTodokedeJokyoIchiranParameter> onClick_btnBatchRegister() {
         DBC160010_KeikakuTodokedeJokyoIchiranParameter parameter = new DBC160010_KeikakuTodokedeJokyoIchiranParameter();
 
-        parameter.set受給申請日FROM(new YMDHMS(div.getTbJukyuShinseibi().getFromValue().toDateString()));
-        parameter.set受給申請日TO(new YMDHMS(div.getTbJukyuShinseibi().getToValue().toDateString()));
+        if (div.getTbJukyuShinseibi().getFromValue() != null) {
+            parameter.set受給申請日FROM(new YMDHMS(div.getTbJukyuShinseibi().getFromValue().toDateString()));
+        }
+        if (div.getTbJukyuShinseibi().getToValue() != null) {
+            parameter.set受給申請日TO(new YMDHMS(div.getTbJukyuShinseibi().getToValue().toDateString()));
+        }
         parameter.set対象者抽出(div.getDdlTaishousha().getLabelLText());
         parameter.set届出状況(div.getDdlTodokeJokyo().getLabelLText());
         parameter.set基準日(new FlexibleDate(div.getTbKijunbi().getValue().toDateString()));
-        parameter.set出力順ID(new RString(div.getPrintOrderCv().get出力順ID()));
+        if (div.getPrintOrderCv().get出力順ID() != null) {
+            parameter.set出力順ID(new RString(div.getPrintOrderCv().get出力順ID()));
+        }
         return ResponseData.of(parameter).respond();
 
     }
@@ -47,7 +53,7 @@ public final class DBC0140011KeikakuTodokeJohoListHandler {
      * コンストラクタです
      *
      * @param div DBC0140011KeikakuTodokeJohoListDiv
-     * 
+     *
      * @return ハンドラ
      */
     public static DBC0140011KeikakuTodokeJohoListHandler of(DBC0140011KeikakuTodokeJohoListDiv div) {

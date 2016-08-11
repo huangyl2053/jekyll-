@@ -30,5 +30,7 @@ public class KogakuJigyoOshiraseTsuchishopaParameterEntity {
     private boolean is空白;
     private RString 文書番号文字列;
     private FlexibleDate 申請書提出期限;
+    private RString 通知文1;
+    private RString 通知文2;
 
 }

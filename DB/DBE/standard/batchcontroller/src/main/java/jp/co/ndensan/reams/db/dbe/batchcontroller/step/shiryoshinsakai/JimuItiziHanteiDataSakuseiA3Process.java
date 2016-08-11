@@ -95,6 +95,7 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
         myBatisParameter.setIkenshoIraiRirekiNo(主治医意見履歴番号);
         List<DbT5207NinteichosahyoServiceJokyoEntity> 予防給付サービス利用状況 = new ArrayList<>();
         List<DbT5207NinteichosahyoServiceJokyoEntity> 介護給付サービス利用状況 = new ArrayList<>();
+        List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書情報 = new ArrayList<>();
         DbT5208NinteichosahyoServiceJokyoFlagEntity サービス状況フラグ = new DbT5208NinteichosahyoServiceJokyoFlagEntity();
         if (ServiceKubunCode.予防給付サービス.getコード().equals(entity.getServiceKubunCode().getColumnValue())) {
             予防給付サービス利用状況 = mapper.get予防給付(myBatisParameter);
@@ -112,9 +113,9 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
         if (get共通情報(共通情報, 申請書管理番号) != null) {
             特記情報 = get特記情報(get共通情報(共通情報, 申請書管理番号));
         }
-
+        主治医意見書情報.addAll(主治医意見書);
         item = new IchijihanteikekkahyoItemSetteiA3().set項目(entity, 特記事項,
-                調査票調査項目, 前回調査票調査項目, 主治医意見書,
+                調査票調査項目, 前回調査票調査項目, 主治医意見書情報,
                 前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, データ件数,
                 get共通情報(共通情報, 申請書管理番号), 主治医意見書, new RString(myBatisParameter.getGogitaiNo()), 特記情報);
 
@@ -144,8 +145,8 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
 
     @Override
     protected void afterExecute() {
-        outputJokenhyoFactory(ReportIdDBE.DBE517141.getReportId().value(), new RString("概況調査の特記"));
-        outputJokenhyoFactory(ReportIdDBE.DBE517131.getReportId().value(), new RString("特記事項（1枚目）"));
+        outputJokenhyoFactory(ReportIdDBE.DBE517041.getReportId().value(), new RString("概況調査の特記"));
+        outputJokenhyoFactory(ReportIdDBE.DBE517031.getReportId().value(), new RString("特記事項（1枚目）"));
         outputJokenhyoFactory(ReportIdDBE.DBE517081.getReportId().value(), new RString("一次判定結果票"));
     }
 
@@ -189,6 +190,7 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
             ShinseishoKanriNo 申請書管理番号) {
         for (ShinsakaiSiryoKyotsuEntity 共通情報Entity : 共通情報) {
             if (申請書管理番号.equals(共通情報Entity.getShinseishoKanriNo())) {
+                共通情報Entity.setJimukyoku(true);
                 return 共通情報Entity;
             }
         }

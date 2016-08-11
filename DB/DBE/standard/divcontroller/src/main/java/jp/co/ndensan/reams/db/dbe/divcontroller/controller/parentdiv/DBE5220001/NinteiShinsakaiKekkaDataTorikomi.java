@@ -126,8 +126,24 @@ public class NinteiShinsakaiKekkaDataTorikomi {
                 .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         File サーバ = new File(path.toString());
         File local = new File(file.getFilePath().toString());
-        if (サーバ.exists() && local.exists()) {
-            return local.renameTo(new File(サーバ, file.getFileName().toString()));
+        boolean mkdirsFlag = false;
+        boolean delFileFlag = false;
+        File tmpfile;
+        if (!サーバ.exists()) {
+            mkdirsFlag = サーバ.mkdirs();
+        } else {
+            mkdirsFlag = true;
+        }
+        if (mkdirsFlag) {
+            tmpfile = new File(サーバ, file.getFileName().toString());
+            if (tmpfile.exists()) {
+                delFileFlag = tmpfile.delete();
+            } else {
+                delFileFlag = true;
+            }
+            if (delFileFlag) {
+                return local.renameTo(tmpfile);
+            }
         }
         return true;
     }

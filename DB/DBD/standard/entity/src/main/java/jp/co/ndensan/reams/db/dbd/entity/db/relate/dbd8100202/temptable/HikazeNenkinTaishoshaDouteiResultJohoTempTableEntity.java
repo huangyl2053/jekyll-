@@ -40,7 +40,7 @@ public class HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity extends DbTabl
     private RString atenaSeibetsu;
     private ShikibetsuCode shikibetsuCode;
     private RString shotaiCode;
-    private RString nendo;
+    private FlexibleYear nendo;
     private RString shoriKubunn;
     private RString TaishoMonth;
     private RString kisoNennkinnNo;
@@ -53,7 +53,7 @@ public class HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity extends DbTabl
     private RString dtTsuuchiContentCode;
     private RString dtYobi1;
     private RString dtSeidoCode;
-    private FlexibleYear dtCreateYMD;
+    private FlexibleDate dtCreateYMD;
     private RString dtKisoNennkinnNo;
     private RString dtNennkinnCode;
     private RString dtYobi2;
@@ -79,5 +79,4 @@ public class HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity extends DbTabl
     private Decimal dtKinngakuYobi2;
     private RString dtYobi5;
     private RString dtKyousaiNennkinnShoushoKigouNo;
-
 }

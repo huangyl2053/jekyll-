@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.futanwariaishohakko.FutanwariaishoHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaishohakko.FutanWariKikanTempEntity;
+import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -25,7 +26,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class FutanWariaiInsertProcess extends BatchProcessBase<DbT3114RiyoshaFutanWariaiMeisaiEntity> {
 
     private static final RString MYBATIS_SELECT_ID
-            = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.futanwariaishohakko.IFutanwariaishoHakkoMapper.select利用者負担割合明細");
+            = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.futanwariaishohakko."
+                    + "IFutanwariaishoHakkoMapper.select利用者負担割合明細");
     private FutanwariaishoHakkoProcessParameter parameter;
     private List<DbT3114RiyoshaFutanWariaiMeisaiEntity> list;
     private static final RString TABLE_NAME = new RString("FutanWariKikanTemp");
@@ -57,6 +59,8 @@ public class FutanWariaiInsertProcess extends BatchProcessBase<DbT3114RiyoshaFut
         if (list.isEmpty()) {
             return;
         }
+        RiyoshaFutanWariaiHantei service = RiyoshaFutanWariaiHantei.createInstance();
+        list = service.riyoshaFutanWariaiMeisaiMerge(list);
         FutanWariKikanTempEntity entity = new FutanWariKikanTempEntity();
         entity.setNendo(list.get(0).getNendo());
         entity.setHihokenshaNo(list.get(0).getHihokenshaNo());

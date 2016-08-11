@@ -196,36 +196,40 @@ public class ShiharaiHohoHenkoTsuchishoEditor implements IShiharaiHohoHenkoTsuch
         source.nendoTitle1 = 最新賦課年度.minusYear(2).toDateString();
         source.nendoTitle2 = 最新賦課年度.minusYear(1).toDateString();
         source.nendoTitle3 = 最新賦課年度.toDateString();
-        if (null != 帳票情報.getShiharaiHohoHenkoTainoList()) {
-            ShiharaiHohoHenkoTaino 支払方法変更滞納 = this.帳票情報.getShiharaiHohoHenkoTainoList().get(index);
+        if (null != 帳票情報.getShiharaiHohoHenkoTainoList() && !帳票情報.getShiharaiHohoHenkoTainoList().isEmpty()) {
             if (null != 年度1リスト && 年度1リスト.size() > index) {
+                ShiharaiHohoHenkoTaino 支払方法変更滞納 = 年度1リスト.get(index);
                 source.listTainoJokyo_1 = 支払方法変更滞納.get収納期_月();
                 source.listTainoJokyo_2 = DecimalFormatter.toコンマ区切りRString(
                         支払方法変更滞納.get収入額(支払方法変更滞納.get調定額(), 支払方法変更滞納.get滞納額()), 0);
                 source.listTainoJokyo_3 = DecimalFormatter.toコンマ区切りRString(支払方法変更滞納.get滞納額(), 0);
-                source.hokenGokei1 = DecimalFormatter.toコンマ区切りRString(get保険料合計(), 0);
-                source.entaiGokei1 = DecimalFormatter.toコンマ区切りRString(get滞納額合計(), 0);
+                source.hokenGokei1 = DecimalFormatter.toコンマ区切りRString(get保険料合計(年度1リスト), 0);
+                source.entaiGokei1 = DecimalFormatter.toコンマ区切りRString(get滞納額合計(年度1リスト), 0);
 
             }
             if (null != 年度2リスト && 年度2リスト.size() > index) {
+                ShiharaiHohoHenkoTaino 支払方法変更滞納 = 年度2リスト.get(index);
                 source.listTainoJokyo_4 = 支払方法変更滞納.get収納期_月();
                 source.listTainoJokyo_5 = DecimalFormatter.toコンマ区切りRString(
                         支払方法変更滞納.get収入額(支払方法変更滞納.get調定額(), 支払方法変更滞納.get滞納額()), 0);
                 source.listTainoJokyo_6 = DecimalFormatter.toコンマ区切りRString(支払方法変更滞納.get滞納額(), 0);
-                source.hokenGokei2 = DecimalFormatter.toコンマ区切りRString(get保険料合計(), 0);
-                source.entaiGokei2 = DecimalFormatter.toコンマ区切りRString(get滞納額合計(), 0);
+                source.hokenGokei2 = DecimalFormatter.toコンマ区切りRString(get保険料合計(年度2リスト), 0);
+                source.entaiGokei2 = DecimalFormatter.toコンマ区切りRString(get滞納額合計(年度2リスト), 0);
 
             }
             if (null != 年度3リスト && 年度3リスト.size() > index) {
+                ShiharaiHohoHenkoTaino 支払方法変更滞納 = 年度3リスト.get(index);
                 source.listTainoJokyo_7 = 支払方法変更滞納.get収納期_月();
                 source.listTainoJokyo_8 = DecimalFormatter.toコンマ区切りRString(
                         支払方法変更滞納.get収入額(支払方法変更滞納.get調定額(), 支払方法変更滞納.get滞納額()), 0);
                 source.listTainoJokyo_9 = DecimalFormatter.toコンマ区切りRString(支払方法変更滞納.get滞納額(), 0);
-                source.hokenGokei3 = DecimalFormatter.toコンマ区切りRString(get保険料合計(), 0);
-                source.entaiGokei3 = DecimalFormatter.toコンマ区切りRString(get滞納額合計(), 0);
+                source.hokenGokei3 = DecimalFormatter.toコンマ区切りRString(get保険料合計(年度3リスト), 0);
+                source.entaiGokei3 = DecimalFormatter.toコンマ区切りRString(get滞納額合計(年度3リスト), 0);
             }
-            source.hanteiYMD = 支払方法変更滞納.get滞納判定年月日().wareki().toDateString();
-            source.izen_hokenryo = new RString(支払方法変更滞納.get滞納額().toString());
+            source.hanteiYMD = this.帳票情報.getShiharaiHohoHenkoTainoList().get(index).get滞納判定年月日().wareki().toDateString();
+            if (get3年以前滞納額合計().intValue() != 0) {
+                source.izen_hokenryo = new RString(get3年以前滞納額合計().toString());
+            }
         }
     }
 
@@ -258,20 +262,30 @@ public class ShiharaiHohoHenkoTsuchishoEditor implements IShiharaiHohoHenkoTsuch
         }
     }
 
-    private Decimal get滞納額合計() {
+    private Decimal get滞納額合計(List<ShiharaiHohoHenkoTaino> 年度リスト) {
         Decimal 滞納額合計 = Decimal.ZERO;
-        for (ShiharaiHohoHenkoTaino 支払方法変更滞納 : this.帳票情報.getShiharaiHohoHenkoTainoList()) {
+        for (ShiharaiHohoHenkoTaino 支払方法変更滞納 : 年度リスト) {
             滞納額合計 = 滞納額合計.add(支払方法変更滞納.get滞納額());
         }
         return 滞納額合計;
     }
 
-    private Decimal get保険料合計() {
+    private Decimal get保険料合計(List<ShiharaiHohoHenkoTaino> 年度リスト) {
         Decimal 保険料合計 = Decimal.ZERO;
-        for (ShiharaiHohoHenkoTaino 支払方法変更滞納 : this.帳票情報.getShiharaiHohoHenkoTainoList()) {
+        for (ShiharaiHohoHenkoTaino 支払方法変更滞納 : 年度リスト) {
             保険料合計 = 保険料合計.add(支払方法変更滞納.get収入額(支払方法変更滞納.get調定額(), 支払方法変更滞納.get滞納額()));
         }
         return 保険料合計;
+    }
+
+    private Decimal get3年以前滞納額合計() {
+        Decimal 以前保険料合計 = Decimal.ZERO;
+        for (ShiharaiHohoHenkoTaino 支払方法変更滞納 : this.帳票情報.getShiharaiHohoHenkoTainoList()) {
+            if (支払方法変更滞納.get賦課年度().isBefore(最新賦課年度.minusYear(3))) {
+                以前保険料合計 = 以前保険料合計.add(支払方法変更滞納.get滞納額());
+            }
+        }
+        return 以前保険料合計;
     }
 
     private static EditedKojin getEditedKojin(IKojin 個人情報, ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体) {

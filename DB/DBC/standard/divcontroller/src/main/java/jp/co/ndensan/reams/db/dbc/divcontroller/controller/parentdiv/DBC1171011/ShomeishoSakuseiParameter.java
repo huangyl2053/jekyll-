@@ -50,7 +50,7 @@ public class ShomeishoSakuseiParameter {
                 DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)));
         KokuhorenInterfaceKanriManager manager = new KokuhorenInterfaceKanriManager();
         KokuhorenInterfaceKanri 実行された最新のデータ = manager.get実行された最新のデータ(
-                DbBusinessConfig.get(ConfigNameDBC.国保連取込_介護給付費過誤決定通知書情報_交換情報識別番号,
+                DbBusinessConfig.get(ConfigNameDBC.国保連取込_高額合算自己負担額確認情報_交換情報識別番号,
                         RDate.getNowDate(), SubGyomuCode.DBC介護給付));
         getHandler(div).onLoad(前回の実行情報, 実行された最新のデータ);
         return ResponseData.of(div).respond();
