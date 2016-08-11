@@ -24,7 +24,10 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  *
  * @reamsid_L DBC-4770-040 zhujun
  */
-public class ReportKomokuEditorUtil {
+public final class ReportKomokuEditorUtil {
+
+    private ReportKomokuEditorUtil() {
+    }
 
     /**
      * 氏名カナの変換のメソッドです。
