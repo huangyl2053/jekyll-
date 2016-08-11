@@ -163,7 +163,7 @@ public class ShisetsutourukuPanelHandler {
      * 事業者種類の変更。
      */
     public void set事業者種類() {
-        if (その他特例施設.equals(div.getRadShisetsuKannaiKangaiKubun().getSelectedKey())) {
+        if (その他特例施設.equals(div.getJigyoshaShurui().getRadServiceShurui().getSelectedKey())) {
             div.getRadShisetsuKannaiKangaiKubun().setVisible(true);
         } else {
             div.getRadShisetsuKannaiKangaiKubun().setVisible(false);
