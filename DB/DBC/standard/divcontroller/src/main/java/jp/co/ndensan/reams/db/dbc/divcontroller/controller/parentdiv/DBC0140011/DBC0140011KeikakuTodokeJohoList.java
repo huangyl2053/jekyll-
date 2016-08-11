@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBC0140011KeikakuTodokeJohoList {
 
     private final ReportId 帳票ID = new ReportId("DBC200060_KyotakuSerivceKeikakuSakuseiIraitodokedeJyokyoIchiran");
-    private RString key1 = new RString("key1");
+    private final RString key1 = new RString("key1");
 
     /**
      * 画面初期化のメソッドです。
