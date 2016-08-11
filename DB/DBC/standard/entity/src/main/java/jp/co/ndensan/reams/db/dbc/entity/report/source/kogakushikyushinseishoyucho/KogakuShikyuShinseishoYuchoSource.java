@@ -1,8 +1,11 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.source.kogakushikyushinseishoyucho;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 高額介護（予防）サービス費支給申請書（ゆうちょ）のソースクラスです。
@@ -23,6 +26,7 @@ public class KogakuShikyuShinseishoYuchoSource implements IReportSource {
     @ReportItem(name = "hihokenshaName", order = 5)
     public RString hihokenshaName;
     @ReportItem(name = "hihokenshaNo", length = 10, order = 6)
+    @ReportExpandedInfo(id = "X")
     public RString hihokenshaNo;
     @ReportItem(name = "seibetsu", length = 2, order = 7)
     public RString seibetsu;
@@ -68,6 +72,8 @@ public class KogakuShikyuShinseishoYuchoSource implements IReportSource {
     public RString tuchoNo8;
     @ReportItem(name = "remban", length = 4, order = 28)
     public RString remban;
+    @ReportPerson(id = "X")
+    public ShikibetsuCode 識別コード;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
