@@ -51,9 +51,11 @@ public class IchijihanteikekkahyoA3Report extends Report<IchijihanteikekkahyoA3R
     private List<RString> getlistChosa1() {
         List<RString> listChosa1 = new ArrayList<>();
         List<TokkiJikou> 特記事項List = entity.get特記事項_listChosa1();
-        for (int i = 0; i < 特記事項List.size(); i++) {
-            listChosa1.add(特記事項List.get(i).get事項番号());
-            listChosa1.add(特記事項List.get(i).get項目名称());
+        if (特記事項List != null && !特記事項List.isEmpty()) {
+            for (int i = 0; i < 特記事項List.size(); i++) {
+                listChosa1.add(特記事項List.get(i).get事項番号());
+                listChosa1.add(特記事項List.get(i).get項目名称());
+            }
         }
         return listChosa1;
     }
