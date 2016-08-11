@@ -56,13 +56,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * ビジネス設計_DBCMNK3001_負担割合証ソースファイル作成（service）
  *
- * @reamsid_L DBC-4990-031 pengxingyi
+ * @reamsid_L DBC-4990-032 pengxingyi
  */
 public class FutanWariaishoIkkatsu {
 
@@ -70,20 +69,35 @@ public class FutanWariaishoIkkatsu {
     private static final RString 開始年月日TITLE = new RString("開始年月日　");
     private static final RString 終了年月日TITLE = new RString("終了年月日　");
     private static final RString TILDE = new RString("　～");
-    private static final RString ZERO = new RString("0");
-    private static final RString ONE = new RString("1");
-    private static final RString TWO = new RString("2");
-    private static final RString 済 = new RString("済");
-    private static final RString 事業対象者 = new RString("事業対象者");
-    private static final RString 受給者 = new RString("受給者");
-    private static final RString 号 = new RString("号");
-    private static final RString 未発行 = new RString("未発行");
-    private static final RString 発行済み = new RString("発行済み");
-    private static final RString 全て = new RString("全て");
-    private static final RString 全件 = new RString("全件");
-    private static final RString 異動分 = new RString("異動分");
-    private static final RString 新規認定分 = new RString("新規認定分");
-    private static final RString 作成 = new RString("　作成");
+    private static final RString 定数_ZERO = new RString("0");
+    private static final RString 定数_ONE = new RString("1");
+    private static final RString 定数_TWO = new RString("2");
+    private static final RString 定数_済 = new RString("済");
+    private static final RString 定数_事業対象者 = new RString("事業対象者");
+    private static final RString 定数_受給者 = new RString("受給者");
+    private static final RString 定数_号 = new RString("号");
+    private static final RString 定数_未発行 = new RString("未発行");
+    private static final RString 定数_発行済み = new RString("発行済み");
+    private static final RString 定数_全て = new RString("全て");
+    private static final RString 定数_全件 = new RString("全件");
+    private static final RString 定数_異動分 = new RString("異動分");
+    private static final RString 定数_新規認定分 = new RString("新規認定分");
+    private static final RString 定数_作成 = new RString("　作成");
+    private static final RString 定数_帳票制御共通 = new RString("帳票制御共通");
+    private static final RString 定数_帳票イメージフォルダパス = new RString("帳票イメージフォルダパス");
+    private static final RString 定数_利用者負担割合証 = new RString("利用者負担割合証Temp");
+    private static final RString 定数_交付年月日 = new RString("交付年月日");
+    private static final RString 定数_連番 = new RString("連番");
+    private static final RString 定数_バッチパラメータ = new RString("バッチパラメータ");
+    private static final RString 定数_保険者番号 = new RString("保険者番号");
+    private static final RString 定数_保険者名 = new RString("保険者名");
+    private static final RString 定数_作成日時 = new RString("作成日時");
+    private static final RString 定数_ソート順１ = new RString("ソート順１");
+    private static final RString 定数_ソート順２ = new RString("ソート順２");
+    private static final RString 定数_ソート順３ = new RString("ソート順３");
+    private static final RString 定数_ソート順４ = new RString("ソート順４");
+    private static final RString 定数_ソート順５ = new RString("ソート順５");
+    private static final RString 定数_ページ = new RString("ページ");
     private static final int NUM_ONE = 1;
     private static final int NUM_TWO = 2;
     private static final int NUM_THREE = 3;
@@ -102,11 +116,11 @@ public class FutanWariaishoIkkatsu {
      */
     public FutanWariaiShoKattokamiEntity getFutanWariaiSourceData(ChohyoSeigyoKyotsu 帳票制御共通, RString imageFolderPath,
             RiyoshaFutanwariaishoTempEntity 利用者負担割合証Temp, RDate 交付年月日, RString 連番) {
-        requireNonNull(帳票制御共通, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票制御共通"));
-        requireNonNull(imageFolderPath, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票イメージフォルダパス"));
-        requireNonNull(利用者負担割合証Temp, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担割合証Temp"));
-        requireNonNull(交付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("交付年月日"));
-        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
+        requireNonNull(帳票制御共通, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_帳票制御共通.toString()));
+        requireNonNull(imageFolderPath, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_帳票イメージフォルダパス.toString()));
+        requireNonNull(利用者負担割合証Temp, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_利用者負担割合証.toString()));
+        requireNonNull(交付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_交付年月日.toString()));
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_連番.toString()));
         IAtesaki 宛先 = AtesakiFactory.createInstance(利用者負担割合証Temp.get宛先());
         IShikibetsuTaisho 宛名 = ShikibetsuTaishoFactory.createShikibetsuTaisho(利用者負担割合証Temp.get宛名());
         Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().
@@ -159,9 +173,9 @@ public class FutanWariaishoIkkatsu {
 
     private ShoKisaiHokenshaNo getHokenshaCode(HihokenshaDaicho 被保台帳) {
         LasdecCode 市町村コード = null;
-        if (ONE.equals(被保台帳.get広域内住所地特例フラグ())) {
+        if (定数_ONE.equals(被保台帳.get広域内住所地特例フラグ())) {
             市町村コード = 被保台帳.get広住特措置元市町村コード();
-        } else if (ZERO.equals(被保台帳.get広域内住所地特例フラグ())) {
+        } else if (定数_ZERO.equals(被保台帳.get広域内住所地特例フラグ())) {
             市町村コード = 被保台帳.get市町村コード();
         }
         Code 導入形態コード = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).get導入形態コード();
@@ -199,42 +213,42 @@ public class FutanWariaishoIkkatsu {
             RiyoshaFutanwariaishoTempEntity 利用者負担割合証, FutanwariaishoHakkoProcessParameter param, RString 保険者番号,
             RString 保険者名, RString ソート順１, RString ソート順２, RString ソート順３, RString ソート順４, RString ソート順５,
             RString ページ, RDateTime 作成日時, RString 連番) {
-        requireNonNull(帳票制御共通, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票制御共通"));
-        requireNonNull(利用者負担割合証, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担割合証Temp"));
-        requireNonNull(param, UrSystemErrorMessages.値がnull.getReplacedMessage("バッチパラメータ"));
-        requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
-        requireNonNull(保険者名, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者名"));
-        requireNonNull(ソート順１, UrSystemErrorMessages.値がnull.getReplacedMessage("ソート順１"));
-        requireNonNull(ソート順２, UrSystemErrorMessages.値がnull.getReplacedMessage("ソート順２"));
-        requireNonNull(ソート順３, UrSystemErrorMessages.値がnull.getReplacedMessage("ソート順３"));
-        requireNonNull(ソート順４, UrSystemErrorMessages.値がnull.getReplacedMessage("ソート順４"));
-        requireNonNull(ソート順５, UrSystemErrorMessages.値がnull.getReplacedMessage("ソート順５"));
-        requireNonNull(ページ, UrSystemErrorMessages.値がnull.getReplacedMessage("ページ"));
-        requireNonNull(作成日時, UrSystemErrorMessages.値がnull.getReplacedMessage("作成日時"));
-        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
+        requireNonNull(帳票制御共通, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_帳票制御共通.toString()));
+        requireNonNull(利用者負担割合証, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_利用者負担割合証.toString()));
+        requireNonNull(param, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_バッチパラメータ.toString()));
+        requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_保険者番号.toString()));
+        requireNonNull(保険者名, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_保険者名.toString()));
+        requireNonNull(ソート順１, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_ソート順１.toString()));
+        requireNonNull(ソート順２, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_ソート順２.toString()));
+        requireNonNull(ソート順３, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_ソート順３.toString()));
+        requireNonNull(ソート順４, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_ソート順４.toString()));
+        requireNonNull(ソート順５, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_ソート順５.toString()));
+        requireNonNull(ページ, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_ページ.toString()));
+        requireNonNull(作成日時, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_作成日時.toString()));
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_連番.toString()));
         IAtesaki 宛先 = AtesakiFactory.createInstance(利用者負担割合証.get宛先());
         IShikibetsuTaisho 宛名 = ShikibetsuTaishoFactory.createShikibetsuTaisho(利用者負担割合証.get宛名());
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-        EditedAtesaki 編集後宛先 = new EditedAtesaki(宛先, 地方公共団体, 帳票制御共通);
+        EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(宛先, 地方公共団体, 帳票制御共通);
         EditedKojin 編集後個人 = new EditedKojin(宛名.to個人(), 帳票制御共通, 地方公共団体);
         FutanWariaiShoHakkoIchiranEntity source = new FutanWariaiShoHakkoIchiranEntity();
         source.set年度(dateFormatパターン107(param.get年度()));
         source.set条件(param.get出力対象());
-        if (ZERO.equals(param.get出力対象())) {
-            source.set条件(全件);
-        } else if (ONE.equals(param.get出力対象())) {
-            source.set条件(異動分);
-        } else if (TWO.equals(param.get出力対象())) {
-            source.set条件(新規認定分);
+        if (定数_ZERO.equals(param.get出力対象())) {
+            source.set条件(定数_全件);
+        } else if (定数_ONE.equals(param.get出力対象())) {
+            source.set条件(定数_異動分);
+        } else if (定数_TWO.equals(param.get出力対象())) {
+            source.set条件(定数_新規認定分);
         }
         source.set抽出対象期間開始(format日時(param.get抽出期間開始日時()).concat(TILDE));
         source.set抽出対象期間終了(format日時(param.get抽出期間終了日時()));
-        if (ZERO.equals(param.get発行区分())) {
-            source.set発行区分(未発行);
-        } else if (ONE.equals(param.get発行区分())) {
-            source.set発行区分(発行済み);
-        } else if (TWO.equals(param.get発行区分())) {
-            source.set発行区分(全て);
+        if (定数_ZERO.equals(param.get発行区分())) {
+            source.set発行区分(定数_未発行);
+        } else if (定数_ONE.equals(param.get発行区分())) {
+            source.set発行区分(定数_発行済み);
+        } else if (定数_TWO.equals(param.get発行区分())) {
+            source.set発行区分(定数_全て);
         }
         source.set交付日(dateFormat基本形１(param.get交付年月日()));
         source.set保険者番号(保険者番号);
@@ -245,8 +259,8 @@ public class FutanWariaishoIkkatsu {
         source.setソート順４(ソート順４);
         source.setソート順５(ソート順５);
         source.setページ(ページ);
-        source.set作成日時(format日時(作成日時).concat(作成));
-        source.set連番(new RString(new Decimal(連番.toString()).toString("#####0")));
+        source.set作成日時(format日時(作成日時).concat(定数_作成));
+        source.set連番(連番);
         source.set被保険者番号(利用者負担割合証.get被保台帳().getHihokenshaNo().getColumnValue());
         source.set送付先住所(編集後宛先.get編集後住所());
         source.set被保険者氏名(編集後個人.get名称().getName().getColumnValue());
@@ -267,10 +281,10 @@ public class FutanWariaishoIkkatsu {
             source.set負担割合(FutanwariaiKubun.toValue(利用者負担割合証.get負担割合期間().getFutanWariaiKubun1()).get名称());
         }
         source.set判定区分(FutanWariaiHanteiKubun.toValue(利用者負担割合証.get利用者負担割合().getHanteiKubun()).get名称());
-        if (ZERO.equals(利用者負担割合証.get利用者負担割合().getHakoKubun())) {
+        if (定数_ZERO.equals(利用者負担割合証.get利用者負担割合().getHakoKubun())) {
             source.set発行済(RString.EMPTY);
         } else {
-            source.set発行済(済);
+            source.set発行済(定数_済);
         }
         getHokenshaCode(new HihokenshaDaicho(利用者負担割合証.get被保台帳()));
         return source;
@@ -286,13 +300,13 @@ public class FutanWariaishoIkkatsu {
      */
     public FutanwariaiShoHakkoIchiranCSVEntity getHakkoIchiranCSVData(ChohyoSeigyoKyotsu 帳票制御共通,
             RiyoshaFutanwariaishoTempEntity 利用者負担割合証Temp, RString 連番) {
-        requireNonNull(帳票制御共通, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票制御共通"));
-        requireNonNull(利用者負担割合証Temp, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担割合証Temp"));
-        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
+        requireNonNull(帳票制御共通, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_帳票制御共通.toString()));
+        requireNonNull(利用者負担割合証Temp, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_利用者負担割合証.toString()));
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_連番.toString()));
         IAtesaki 宛先 = AtesakiFactory.createInstance(利用者負担割合証Temp.get宛先());
         IShikibetsuTaisho 宛名 = ShikibetsuTaishoFactory.createShikibetsuTaisho(利用者負担割合証Temp.get宛名());
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-        EditedAtesaki 編集後宛先 = new EditedAtesaki(宛先, 地方公共団体, 帳票制御共通);
+        EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(宛先, 地方公共団体, 帳票制御共通);
         EditedKojin 編集後個人 = new EditedKojin(宛名.to個人(), 帳票制御共通, 地方公共団体);
         FutanwariaiShoHakkoIchiranCSVEntity csvEntity = new FutanwariaiShoHakkoIchiranCSVEntity();
         csvEntity.set連番(連番);
@@ -316,20 +330,20 @@ public class FutanWariaishoIkkatsu {
             csvEntity.set負担割合(FutanwariaiKubun.toValue(利用者負担割合証Temp.get負担割合期間().getFutanWariaiKubun1()).get名称());
         }
         csvEntity.set判定区分(FutanWariaiHanteiKubun.toValue(利用者負担割合証Temp.get利用者負担割合().getHanteiKubun()).get名称());
-        if (ZERO.equals(利用者負担割合証Temp.get利用者負担割合().getHakoKubun())) {
+        if (定数_ZERO.equals(利用者負担割合証Temp.get利用者負担割合().getHakoKubun())) {
             csvEntity.set発行済(RString.EMPTY);
         } else {
-            csvEntity.set発行済(済);
+            csvEntity.set発行済(定数_済);
         }
-        if (ONE.equals(利用者負担割合証Temp.get事業対象者受給者区分())) {
-            csvEntity.set事業対象者受給者区分(事業対象者);
-        } else if (TWO.equals(利用者負担割合証Temp.get事業対象者受給者区分())) {
-            csvEntity.set事業対象者受給者区分(受給者);
+        if (定数_ONE.equals(利用者負担割合証Temp.get事業対象者受給者区分())) {
+            csvEntity.set事業対象者受給者区分(定数_事業対象者);
+        } else if (定数_TWO.equals(利用者負担割合証Temp.get事業対象者受給者区分())) {
+            csvEntity.set事業対象者受給者区分(定数_受給者);
         }
         if (!RString.isNullOrEmpty(利用者負担割合証Temp.get負担割合期間().getShikakuKubun2())) {
-            csvEntity.set事業対象者受給者区分(利用者負担割合証Temp.get負担割合期間().getShikakuKubun2().concat(号));
+            csvEntity.set事業対象者受給者区分(利用者負担割合証Temp.get負担割合期間().getShikakuKubun2().concat(定数_号));
         } else {
-            csvEntity.set事業対象者受給者区分(利用者負担割合証Temp.get負担割合期間().getShikakuKubun1().concat(号));
+            csvEntity.set事業対象者受給者区分(利用者負担割合証Temp.get負担割合期間().getShikakuKubun1().concat(定数_号));
         }
         csvEntity.set証記載保険者番号(getHokenshaCode(new HihokenshaDaicho(利用者負担割合証Temp.get被保台帳())).getColumnValue());
         return csvEntity;

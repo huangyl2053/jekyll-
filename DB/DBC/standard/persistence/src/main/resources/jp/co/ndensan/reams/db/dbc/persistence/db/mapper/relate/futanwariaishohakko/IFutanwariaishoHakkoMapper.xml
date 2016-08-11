@@ -30,7 +30,7 @@
                 AND ("hakoYMD" is null or "hakoYMD"='')
             </if>
             <if test="発行区分==1">
-                AND ("hakoYMD" is not null or "hakoYMD" <![CDATA[<>]]> '')
+                AND ("hakoYMD" is not null and "hakoYMD" <![CDATA[<>]]> '')
             </if>
             <if test="出力対象==2">
                 AND "hihokenshaNo" IN 
@@ -94,7 +94,7 @@
                 AND ("hakoYMD" is null or "hakoYMD"='')
             </if>
             <if test="発行区分==1">
-                AND ("hakoYMD" is not null or "hakoYMD" <![CDATA[<>]]> '')
+                AND ("hakoYMD" is not null and "hakoYMD" <![CDATA[<>]]> '')
             </if>
             <if test="出力対象==2">
                 AND "hihokenshaNo" IN 
@@ -175,6 +175,18 @@
             AND  "DbT7067ChohyoSeigyoHanyo"."chohyoBunruiID"= #{帳票分類ID}   
             AND  "DbT7067ChohyoSeigyoHanyo"."kanriNendo"= #{管理年度}  
             AND  "DbT7067ChohyoSeigyoHanyo"."komokuName"= #{項目名}              
+    </select>
+    
+        <select resultOrdered="true" id="select帳票制御共通"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaishohakko.FutanwariaishoHakkoMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity" fetchSize="500">
+        SELECT
+            <include refid="allColumns_DbT7065ChohyoSeigyoKyotsu" />
+        FROM
+            rgdb."DbT7065ChohyoSeigyoKyotsu" AS  "DbT7065ChohyoSeigyoKyotsu"
+        WHERE 
+            "DbT7065ChohyoSeigyoKyotsu"."subGyomuCode"= #{サブ業務コード}   
+            AND  "DbT7065ChohyoSeigyoKyotsu"."chohyoBunruiID"= #{帳票分類ID}           
     </select>
     
     
@@ -821,4 +833,43 @@
         <result property="codeMasterSubGyomuCode" column="dbT7067ChohyoSeigyoHanyo_codeMasterSubGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
         <result property="codeMasterCodeShubetsu" column="dbT7067ChohyoSeigyoHanyo_codeMasterCodeShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeShubetsuTypeHandler"/>
     </resultMap>
+    
+    
+    <sql id="allColumns_DbT7065ChohyoSeigyoKyotsu">
+         "DbT7065ChohyoSeigyoKyotsu"."subGyomuCode" as "dbT7065ChohyoSeigyoKyotsu_subGyomuCode",
+         "DbT7065ChohyoSeigyoKyotsu"."chohyoBunruiID" as "dbT7065ChohyoSeigyoKyotsu_chohyoBunruiID",
+         "DbT7065ChohyoSeigyoKyotsu"."insertDantaiCd" as "dbT7065ChohyoSeigyoKyotsu_insertDantaiCd",
+         "DbT7065ChohyoSeigyoKyotsu"."insertTimestamp" as "dbT7065ChohyoSeigyoKyotsu_insertTimestamp",
+         "DbT7065ChohyoSeigyoKyotsu"."insertReamsLoginId" as "dbT7065ChohyoSeigyoKyotsu_insertReamsLoginId",
+         "DbT7065ChohyoSeigyoKyotsu"."insertContextId" as "dbT7065ChohyoSeigyoKyotsu_insertContextId",
+         "DbT7065ChohyoSeigyoKyotsu"."isDeleted" as "dbT7065ChohyoSeigyoKyotsu_isDeleted",
+         "DbT7065ChohyoSeigyoKyotsu"."updateCount" as "dbT7065ChohyoSeigyoKyotsu_updateCount",
+         "DbT7065ChohyoSeigyoKyotsu"."lastUpdateTimestamp" as "dbT7065ChohyoSeigyoKyotsu_lastUpdateTimestamp",
+         "DbT7065ChohyoSeigyoKyotsu"."lastUpdateReamsLoginId" as "dbT7065ChohyoSeigyoKyotsu_lastUpdateReamsLoginId",
+         "DbT7065ChohyoSeigyoKyotsu"."chohyoBunruiMeisho" as "dbT7065ChohyoSeigyoKyotsu_chohyoBunruiMeisho",
+         "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuKubun" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuKubun",
+         "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuTodoufukenMeiHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuTodoufukenMeiHyojiUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuGunMeiHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuGunMeiHyojiUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuShichosonMeiHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuShichosonMeiHyojiUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuChoikiHenshuHoho" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuChoikiHenshuHoho",
+         "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuKatagakiHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuKatagakiHyojiUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."setainushiHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_setainushiHyojiUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."dainoninHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_dainoninHyojiUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."customerBarCodeShiyoUmu" as "dbT7065ChohyoSeigyoKyotsu_customerBarCodeShiyoUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."customerBarCodeHenkanErrHenshuHoho" as "dbT7065ChohyoSeigyoKyotsu_customerBarCodeHenkanErrHenshuHoho",
+         "DbT7065ChohyoSeigyoKyotsu"."gaibuChohyoMojigireSeigyo" as "dbT7065ChohyoSeigyoKyotsu_gaibuChohyoMojigireSeigyo",
+         "DbT7065ChohyoSeigyoKyotsu"."naibuChohyoMojigireSeigyo" as "dbT7065ChohyoSeigyoKyotsu_naibuChohyoMojigireSeigyo",
+         "DbT7065ChohyoSeigyoKyotsu"."mojigireBunriSeigyo" as "dbT7065ChohyoSeigyoKyotsu_mojigireBunriSeigyo",
+         "DbT7065ChohyoSeigyoKyotsu"."teikeibunMojiSize" as "dbT7065ChohyoSeigyoKyotsu_teikeibunMojiSize",
+         "DbT7065ChohyoSeigyoKyotsu"."kozaMaskUmu" as "dbT7065ChohyoSeigyoKyotsu_kozaMaskUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."kozaMeigininKanaYusenKubun" as "dbT7065ChohyoSeigyoKyotsu_kozaMeigininKanaYusenKubun",
+         "DbT7065ChohyoSeigyoKyotsu"."daikoPrintUmu" as "dbT7065ChohyoSeigyoKyotsu_daikoPrintUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."denshiKoinInjiUmu" as "dbT7065ChohyoSeigyoKyotsu_denshiKoinInjiUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."shuchoMeiInjiIchi" as "dbT7065ChohyoSeigyoKyotsu_shuchoMeiInjiIchi",
+         "DbT7065ChohyoSeigyoKyotsu"."koinShoryakuInjiUmu" as "dbT7065ChohyoSeigyoKyotsu_koinShoryakuInjiUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."koinMojiretsuInjiUmu" as "dbT7065ChohyoSeigyoKyotsu_koinMojiretsuInjiUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."chikuHyoji1" as "dbT7065ChohyoSeigyoKyotsu_chikuHyoji1",
+         "DbT7065ChohyoSeigyoKyotsu"."chikuHyoji2" as "dbT7065ChohyoSeigyoKyotsu_chikuHyoji2",
+         "DbT7065ChohyoSeigyoKyotsu"."chikuHyoji3" as "dbT7065ChohyoSeigyoKyotsu_chikuHyoji3"
+    </sql>
 </mapper>

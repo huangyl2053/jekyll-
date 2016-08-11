@@ -10,12 +10,14 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.futanwariaishohakkoichiran.FutanWariaiShoHakkoIchiranReport;
 import jp.co.ndensan.reams.db.dbc.business.report.futanwariaishokattokami.FutanWariaiShoKattokamiProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.saishinsa.SaishinsaKetteiTsuchishoIchiranKohifutanshaProperty;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaishohakko.FutanwariaishoHakkoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.futanwariaishohakko.FutanwariaishoHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.FutanwariaiShoHakkoIchiranCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaishohakko.RiyoshaFutanwariaishoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishohakkoichiran.FutanWariaiShoHakkoIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishohakkoichiran.FutanWariaiShoHakkoIchiranSource;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.futanwariaishohakko.IFutanwariaishoHakkoMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.futanwariaishoikkatsu.FutanWariaishoIkkatsu;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3113RiyoshaFutanWariaiEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
@@ -54,10 +56,12 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<RiyoshaFutanwariaishoTempEntity> {
 
     private static final RString MYBATIS_SELECT_ID
-            = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.futanwariaishohakko.IFutanwariaishoHakkoMapper.select利用者負担割合証");
+            = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.futanwariaishohakko."
+                    + "IFutanwariaishoHakkoMapper.select利用者負担割合証");
     private FutanwariaishoHakkoProcessParameter parameter;
     private FutanWariaishoIkkatsu service;
     private ChohyoSeigyoKyotsu 帳票制御共通;
+    private IFutanwariaishoHakkoMapper mapper;
     private int 連番;
     private IOutputOrder 出力順;
     private RString ソート順１;
@@ -86,7 +90,6 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
     private static final int NUM_THREE = 3;
     private static final int NUM_FOUR = 4;
     private static final int NUM_THRITY = 30;
-    private static final RString 確認内容 = new RString("資格喪失している、負担割合証を発行しませんでした。");
     FileSpoolManager futanwariaiShoHakkoIchiranManager;
     FileSpoolManager shoriKekkaKakuninListManager;
     @BatchWriter
@@ -105,7 +108,11 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
         ソート順４ = RString.EMPTY;
         ソート順５ = RString.EMPTY;
         service = new FutanWariaishoIkkatsu();
-        帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200090.getReportId());
+        mapper = getMapper(IFutanwariaishoHakkoMapper.class);
+        FutanwariaishoHakkoMybatisParameter param = parameter.toMybatisParameter();
+        param.setサブ業務コード(SubGyomuCode.DBC介護給付.getColumnValue());
+        param.set帳票分類ID(ReportIdDBC.DBC100065.getReportId().getColumnValue());
+        帳票制御共通 = new ChohyoSeigyoKyotsu(mapper.select帳票制御共通(param));
         出力順BODY = new ArrayList<>();
         if (!RString.isNullOrEmpty(parameter.get出力順()) && !定数_0.equals(parameter.get出力順())) {
             IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
