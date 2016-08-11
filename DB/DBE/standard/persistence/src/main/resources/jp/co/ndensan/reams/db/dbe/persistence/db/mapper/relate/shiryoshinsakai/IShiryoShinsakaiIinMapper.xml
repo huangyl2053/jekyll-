@@ -1156,15 +1156,6 @@
         WHERE dbt5304."shinseishoKanriNo" = dbt5301."shinseishoKanriNo"
         AND dbt5304."remban" = 14)
         AND dbt5304."remban" = 14
-        LEFT JOIN rgdb."DbT5912ShujiiJoho" AS dbt5912
-        ON dbt5912."shichosonCode" = dbt7051."shichosonCode"
-        AND dbt5912."shujiiIryokikanCode" = dbt5301."shujiiIryokikanCode"
-        AND dbt5912."shujiiCode" = dbt5301."shujiiCode"
-        AND dbt5912."jokyoFlag" = TRUE
-        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbt5911
-        ON dbt5911."shichosonCode" = dbt7051."shichosonCode"
-        AND dbt5911."shujiiIryokikanCode" = dbt5301."shujiiIryokikanCode"
-        AND dbt5911."jokyoFlag" = TRUE
         INNER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" dbt5116
         ON dbt5101."shinseishoKanriNo" = dbt5116."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" dbt5121
@@ -1239,15 +1230,6 @@
         WHERE dbt5304."shinseishoKanriNo" = dbt5301."shinseishoKanriNo"
         AND dbt5304."remban" = 14)
         AND dbt5304."remban" = 14
-        LEFT JOIN rgdb."DbT5912ShujiiJoho" AS dbt5912
-        ON dbt5912."shichosonCode" = dbt7051."shichosonCode"
-        AND dbt5912."shujiiIryokikanCode" = dbt5301."shujiiIryokikanCode"
-        AND dbt5912."shujiiCode" = dbt5301."shujiiCode"
-        AND dbt5912."jokyoFlag" = TRUE
-        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbt5911
-        ON dbt5911."shichosonCode" = dbt7051."shichosonCode"
-        AND dbt5911."shujiiIryokikanCode" = dbt5301."shujiiIryokikanCode"
-        AND dbt5911."jokyoFlag" = TRUE
         INNER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" dbt5116
         ON dbt5101."shinseishoKanriNo" = dbt5116."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" dbt5121
