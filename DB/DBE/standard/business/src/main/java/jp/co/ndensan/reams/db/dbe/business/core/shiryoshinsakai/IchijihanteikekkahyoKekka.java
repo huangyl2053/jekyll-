@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.TiyosaKekka;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser01;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser02;
@@ -36,6 +38,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class IchijihanteikekkahyoKekka {
 
+    private static final int INT_5 = 5;
+    private static final int INT_6 = 6;
+    private static final int INT_9 = 9;
+    private static final int INT_12 = 12;
+    private static final int INT_15 = 15;
+    private static final int INT_20 = 20;
     private static final RString 段階悪化 = new RString("▲");
     private static final RString 段階改善 = new RString("▽");
 
@@ -697,5 +705,89 @@ public class IchijihanteikekkahyoKekka {
             第２群.set段階改善フラグ(RString.EMPTY);
             第２群.set段階改善値(RString.EMPTY);
         }
+    }
+
+    /**
+     * 第１群リストを取得します。
+     *
+     * @return 第１群リスト
+     */
+    public List<TiyosaKekka> get第１群リスト() {
+        List<TiyosaKekka> 第１群リスト = new ArrayList<>();
+        for (int i = 0; i < INT_20; i++) {
+            TiyosaKekka 第１群 = new TiyosaKekka();
+            第１群リスト.add(第１群);
+        }
+        return 第１群リスト;
+    }
+
+    /**
+     * 第２群リストを取得します。
+     *
+     * @return 第２群リスト
+     */
+    public List<TiyosaKekka> get第２群リスト() {
+        List<TiyosaKekka> 第２群リスト = new ArrayList<>();
+        for (int i = 0; i < INT_12; i++) {
+            TiyosaKekka 第１群 = new TiyosaKekka();
+            第２群リスト.add(第１群);
+        }
+        return 第２群リスト;
+    }
+
+    /**
+     * 第３群リストを取得します。
+     *
+     * @return 第３群リスト
+     */
+    public List<TiyosaKekka> get第３群リスト() {
+        List<TiyosaKekka> 第２群リスト = new ArrayList<>();
+        for (int i = 0; i < INT_9; i++) {
+            TiyosaKekka 第１群 = new TiyosaKekka();
+            第２群リスト.add(第１群);
+        }
+        return 第２群リスト;
+    }
+
+    /**
+     * 第４群リストを取得します。
+     *
+     * @return 第４群リスト
+     */
+    public List<TiyosaKekka> get第４群リスト() {
+        List<TiyosaKekka> 第２群リスト = new ArrayList<>();
+        for (int i = 0; i < INT_15; i++) {
+            TiyosaKekka 第１群 = new TiyosaKekka();
+            第２群リスト.add(第１群);
+        }
+        return 第２群リスト;
+    }
+
+    /**
+     * 第５群リストを取得します。
+     *
+     * @return 第５群リスト
+     */
+    public List<TiyosaKekka> get第５群リスト() {
+        List<TiyosaKekka> 第２群リスト = new ArrayList<>();
+        for (int i = 0; i < INT_6; i++) {
+            TiyosaKekka 第１群 = new TiyosaKekka();
+            第２群リスト.add(第１群);
+        }
+        return 第２群リスト;
+    }
+
+    /**
+     * 主治医意見書リストを取得します。
+     *
+     * @return 主治医意見書リスト
+     */
+    public List<TiyosaKekka> get主治医意見書リスト() {
+        List<TiyosaKekka> 第２群リスト = new ArrayList<>();
+        for (int i = 0; i < INT_5; i++) {
+            TiyosaKekka 第１群 = new TiyosaKekka();
+            第２群リスト.add(第１群);
+        }
+        return 第２群リスト;
     }
 }

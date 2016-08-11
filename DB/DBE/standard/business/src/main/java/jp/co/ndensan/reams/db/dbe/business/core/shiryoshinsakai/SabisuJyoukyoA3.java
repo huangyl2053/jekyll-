@@ -76,8 +76,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  */
 public class SabisuJyoukyoA3 {
 
-    private static final RString 段階悪化 = new RString("▲");
-    private static final RString 段階改善 = new RString("▽");
     private static final RString 記号 = new RString("+");
     private static final RString 月間 = new RString("月間");
     private static final Code A_99 = new Code("99A");
@@ -122,16 +120,16 @@ public class SabisuJyoukyoA3 {
      * @param 予防給付 予防給付
      * @param 介護給付 介護給付
      * @param サービス状況フラグ サービス状況フラグ
-     * @param 厚労省IF識別コード 厚労省IF識別コード
      * @param 共通情報 ShinsakaiSiryoKyotsuEntity
      */
     public void setサービスの状況(ItiziHanteiEntity entity, IchijihanteikekkahyoA3Entity 項目,
             List<DbT5207NinteichosahyoServiceJokyoEntity> 予防給付, List<DbT5207NinteichosahyoServiceJokyoEntity> 介護給付,
-            DbT5208NinteichosahyoServiceJokyoFlagEntity サービス状況フラグ, Code 厚労省IF識別コード, ShinsakaiSiryoKyotsuEntity 共通情報) {
+            DbT5208NinteichosahyoServiceJokyoFlagEntity サービス状況フラグ, ShinsakaiSiryoKyotsuEntity 共通情報) {
         RStringBuilder builder;
         if (予防給付サービス.equals(entity.getServiceKubunCode())) {
             項目.setSabisuKubun(new RString("予防給付・総合事業"));
             for (DbT5207NinteichosahyoServiceJokyoEntity dbt5207Entity : 予防給付) {
+                Code 厚労省IF識別コード = dbt5207Entity.getKoroshoIfShikibetsuCode();
                 switch (dbt5207Entity.getRemban()) {
                     case 連番_1:
                         builder = new RStringBuilder();
@@ -200,6 +198,7 @@ public class SabisuJyoukyoA3 {
         } else if (介護給付サービス.equals(entity.getServiceKubunCode())) {
             項目.setSabisuKubun(new RString("介護給付"));
             for (DbT5207NinteichosahyoServiceJokyoEntity dbt5207Entity : 介護給付) {
+                Code 厚労省IF識別コード = dbt5207Entity.getKoroshoIfShikibetsuCode();
                 switch (dbt5207Entity.getRemban()) {
                     case 連番_1:
                         builder = new RStringBuilder();
