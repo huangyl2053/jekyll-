@@ -55,9 +55,7 @@ public class HoshuMasutaKoshinHandler {
      * @param 審査員報酬単価マスタ情報 審査員報酬単価マスタ情報
      */
     public void onLoad(List<ShinsakaiIinHoshuTanka> 審査員報酬単価マスタ情報) {
-        if (審査員報酬単価マスタ情報 != null && !審査員報酬単価マスタ情報.isEmpty()) {
-            set審査員報酬単価一覧情報(審査員報酬単価マスタ情報);
-        }
+        set審査員報酬単価一覧情報(審査員報酬単価マスタ情報);
         div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().setSelectedItem(div.getHoshuMasutaTab().getTabChosainhoshuTanka());
     }
 
@@ -67,9 +65,7 @@ public class HoshuMasutaKoshinHandler {
      * @param 意見書報酬単価マスタ情報 意見書報酬単価マスタ情報
      */
     public void set意見書報酬単価マスタタブ(List<ShujiiIkenshoHoshuTanka> 意見書報酬単価マスタ情報) {
-        if (意見書報酬単価マスタ情報 != null && !意見書報酬単価マスタ情報.isEmpty()) {
-            set意見書報酬単価一覧情報(意見書報酬単価マスタ情報);
-        }
+        set意見書報酬単価一覧情報(意見書報酬単価マスタ情報);
         div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().setSelectedItem(div.getHoshuMasutaTab().getTblIkenShohoshuTanka());
     }
 
@@ -79,9 +75,7 @@ public class HoshuMasutaKoshinHandler {
      * @param 訪問調査報酬単価マスタ情報 訪問調査報酬単価マスタ情報
      */
     public void set訪問調査報酬単価マスタタブ(List<NinteiChosaHoshuTanka> 訪問調査報酬単価マスタ情報) {
-        if (訪問調査報酬単価マスタ情報 != null && !訪問調査報酬単価マスタ情報.isEmpty()) {
-            set訪問調査報酬単価一覧情報(訪問調査報酬単価マスタ情報);
-        }
+        set訪問調査報酬単価一覧情報(訪問調査報酬単価マスタ情報);
         div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().setSelectedItem(div.getHoshuMasutaTab().getTabHomonChosahoshuTanka());
     }
 
@@ -91,9 +85,7 @@ public class HoshuMasutaKoshinHandler {
      * @param 審査会委員別単価マスタ情報 審査会委員別単価マスタ情報
      */
     public void set審査会委員別単価マスタタブ(List<ShinsakaiIinBetsuTanka> 審査会委員別単価マスタ情報) {
-        if (審査会委員別単価マスタ情報 != null && !審査会委員別単価マスタ情報.isEmpty()) {
-            set審査会委員別単価一覧情報(審査会委員別単価マスタ情報);
-        }
+        set審査会委員別単価一覧情報(審査会委員別単価マスタ情報);
         div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().setSelectedItem(div.getHoshuMasutaTab().getTbShinsakaiIinBetuTanka());
     }
 

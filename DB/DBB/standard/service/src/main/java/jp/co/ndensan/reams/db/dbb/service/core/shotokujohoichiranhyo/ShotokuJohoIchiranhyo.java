@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- * ビジネス設計_DBBBZ51003_所得情報一覧表作成のクラス
+ * ビジネス設計_DBBBZ51003_所得情報一覧表作成のクラスです。
  *
  * @reamsid_L DBB-1650-030 lijunjun
  */
@@ -45,18 +45,19 @@ public class ShotokuJohoIchiranhyo {
     }
 
     /**
-     * 対象終了日時取得する。
+     * 対象終了日時を取得です。
      *
      * @param 導入形態コード RString
      * @param 市町村コード LasdecCode
      * @param 広域現市町村リスト List<KoikiZenShichosonJoho>
      * @param 処理年度 FlexibleYear
      * @return List<TaishoShuryoYmd>
+     * @throws ApplicationException ApplicationException
      */
     public List<TaishoShuryoYmd> getTaishoShuryoNichiji(RString 導入形態コード,
             LasdecCode 市町村コード,
             List<KoikiZenShichosonJoho> 広域現市町村リスト,
-            FlexibleYear 処理年度) {
+            FlexibleYear 処理年度) throws ApplicationException {
         if (導入形態コード == null || 処理年度 == null) {
             throw new ApplicationException(UrErrorMessages.検索キーの誤り
                     .getMessage().evaluate());

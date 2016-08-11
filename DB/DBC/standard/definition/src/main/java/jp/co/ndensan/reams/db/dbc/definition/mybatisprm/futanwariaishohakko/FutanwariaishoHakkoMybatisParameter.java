@@ -54,6 +54,32 @@ public class FutanwariaishoHakkoMybatisParameter extends UaFt200FindShikibetsuTa
     private RDateTime 抽出期間終了日時;
     private RString 出力順;
 
+    private RString サブ業務コード;
+    private RString 帳票分類ID;
+    private FlexibleYear 管理年度;
+    private RString 項目名;
+
+    /**
+     * インスタンスを生成します。
+     */
+    public FutanwariaishoHakkoMybatisParameter() {
+        super(null);
+        this.atesakiKey = null;
+        this.uaft250_gyomuCode = null;
+        this.uaft250_subGyomuCode = null;
+        this.uaft250_kamokuCode = null;
+        this.uaft250_gyomuKoyuKeyRiyoFlag = false;
+        this.uaft250_gyomuKoyuKey = null;
+        this.uaft250_shikibetsuCode = null;
+        this.uaft250_isUseTableColumn = false;
+        this.uaft250_sofusakiRiyoFlag = false;
+        this.uaft250_dainoRiyoFlag = false;
+        this.uaft250_setaiNushiRiyoFlag = false;
+        this.uaft250_daihyoshaRiyokuFlag = false;
+        this.uaft250_kijunYMD = null;
+        this.tmp_shikibetsuCode = null;
+    }
+
     /**
      * インスタンスを生成します。
      *

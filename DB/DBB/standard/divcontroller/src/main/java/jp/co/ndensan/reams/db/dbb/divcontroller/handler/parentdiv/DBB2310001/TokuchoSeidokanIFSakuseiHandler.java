@@ -72,6 +72,7 @@ public class TokuchoSeidokanIFSakuseiHandler {
     public void initialize() {
         List<TokuchoSedokanIFTanichuResult> results = tokuchosedokaniftanichu.getTokuchoKaishiYMList();
         List<KeyValueDataSource> dataSourceList = new ArrayList();
+        FlexibleYear 年度 = FlexibleYear.MIN;
         if (results.isEmpty()) {
             throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().
                     replace(MESSAGE_特徴対象者同定が終了しない.toString(), MESSAGE_特徴制度間F処理.toString()));
@@ -86,6 +87,9 @@ public class TokuchoSeidokanIFSakuseiHandler {
         int i = NUM0;
         for (TokuchoSedokanIFTanichuResult result : results) {
             if (result.get特徴開始年月() != null) {
+                if (i == 0) {
+                    年度 = result.get年度();
+                }
                 KeyValueDataSource datasource = new KeyValueDataSource();
                 datasource.setKey(KEY.concat(new RString(i)));
                 datasource.setValue(result.get特徴開始年月().getYearMonth().wareki().toDateString());
@@ -95,6 +99,9 @@ public class TokuchoSeidokanIFSakuseiHandler {
         }
         div.getDdlKaishiYM().setDataSource(dataSourceList);
         div.getDdlKaishiYM().setSelectedKey(KEY0);
+        if (!FlexibleYear.MIN.equals(年度)) {
+            div.getTxtChoteiNendo().setValue(new RDate(年度.toString()));
+        }
         onChange_特別徴収開始年月();
     }
 
@@ -104,7 +111,6 @@ public class TokuchoSeidokanIFSakuseiHandler {
     public void onChange_特別徴収開始年月() {
         RString 選択値 = div.getDdlKaishiYM().getSelectedValue();
         RDate 特別徴収開始年月 = new RDate(選択値.toString());
-        div.getTxtChoteiNendo().setValue(特別徴収開始年月);
         int 選択値の月 = 特別徴収開始年月.getMonthValue();
         RString 年度内連番;
         switch (選択値の月) {

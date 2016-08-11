@@ -575,7 +575,7 @@ public class RenkeiDataTorikomiBusiness {
         if (!RString.isNullOrEmpty(value)) {
             return new FlexibleDate(value).plusDay(Integer.parseInt(config.toString()));
         }
-        return FlexibleDate.EMPTY;
+        return null;
     }
 
     /**
@@ -599,12 +599,12 @@ public class RenkeiDataTorikomiBusiness {
         DbT5101NinteiShinseiJohoEntity dbt5101Entity;
         if (登録.equals(kubun)) {
             dbt5101Entity = new DbT5101NinteiShinseiJohoEntity();
+            CountedItem countedItem = Saiban.get(SubGyomuCode.DBE認定支援, new RString("申請書管理番号"));
+            dbt5101Entity.setShinseishoKanriNo(new ShinseishoKanriNo(countedItem.nextString()));
         } else {
             dbt5101Entity = entity.getDbT5101Entity();
         }
         DbT5101TempEntity dbt5101tempEntity = entity.getDbt5101TempEntity();
-        CountedItem countedItem = Saiban.get(SubGyomuCode.DBE認定支援, new RString("申請書管理番号"));
-        dbt5101Entity.setShinseishoKanriNo(new ShinseishoKanriNo(countedItem.nextString()));
         dbt5101Entity.setKoroshoIfShikibetsuCode(getCode(dbt5101tempEntity.get識別コード()));
         dbt5101Entity.setShoKisaiHokenshaNo(dbt5101tempEntity.get保険者番号());
         dbt5101Entity.setHihokenshaNo(dbt5101tempEntity.get被保険者番号());
@@ -618,6 +618,12 @@ public class RenkeiDataTorikomiBusiness {
             dbt5101Entity.setChosaKubun(new Code(CODE0));
             dbt5101Entity.setShoriJotaiKubun(new Code(CODE0));
             dbt5101Entity.setLogicalDeletedFlag(true);
+            dbt5101Entity.setShishoCode(null);
+            dbt5101Entity.setKoikinaiTenkyoKubun(null);
+            dbt5101Entity.setShienShinseiKubun(null);
+            dbt5101Entity.setJidoWariateJogaishaKubun(null);
+            dbt5101Entity.setMinashiNigoEtcTaishoFlag(false);
+            dbt5101Entity.setJohoteikyoDoiFlag(false);
         }
         dbt5101Entity.setNinteiShinseiYMD(getFlexibleDate(dbt5101tempEntity.get認定申請日()));
         dbt5101Entity.setNinteiShinseiShinseijiKubunCode(getCode(dbt5101tempEntity.get申請区分_申請時コード()));
@@ -644,6 +650,8 @@ public class RenkeiDataTorikomiBusiness {
         DbT5101NinteiShinseiJohoEntity dbt5101Entity;
         if (登録.equals(kubun)) {
             dbt5101Entity = new DbT5101NinteiShinseiJohoEntity();
+            CountedItem countedItem = Saiban.get(SubGyomuCode.DBE認定支援, new RString("申請書管理番号"));
+            dbt5101Entity.setShinseishoKanriNo(new ShinseishoKanriNo(countedItem.nextString()));
         } else {
             dbt5101Entity = entity.getDbT5101Entity();
         }
@@ -662,10 +670,10 @@ public class RenkeiDataTorikomiBusiness {
             dbt5101Entity.setNyushoShisetsuCode(getJigyoshaNo(dbt5101tempEntity.get入所事業所コード()));
             dbt5101Entity.setShoriJotaiKubun(new Code(CODE0));
             dbt5101Entity.setLogicalDeletedFlag(true);
-            dbt5101Entity.setShishoCode(new RString(""));
-            dbt5101Entity.setKoikinaiTenkyoKubun(Code.EMPTY);
-            dbt5101Entity.setShienShinseiKubun(new RString(""));
-            dbt5101Entity.setJidoWariateJogaishaKubun(new RString(""));
+            dbt5101Entity.setShishoCode(null);
+            dbt5101Entity.setKoikinaiTenkyoKubun(null);
+            dbt5101Entity.setShienShinseiKubun(null);
+            dbt5101Entity.setJidoWariateJogaishaKubun(null);
             dbt5101Entity.setMinashiNigoEtcTaishoFlag(false);
             dbt5101Entity.setJohoteikyoDoiFlag(false);
         }

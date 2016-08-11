@@ -186,13 +186,9 @@ public class ShiharaiHohoHenkoTsuchishoEditor implements IShiharaiHohoHenkoTsuch
         }
 
         RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-        if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
-            source.tsuchibun = 通知書定型文リスト.get(1);
-        }
         if (null != 通知書定型文リスト && new RString("1").equals(定型文文字サイズ)) {
-            source.renrakusakiHoka = 通知書定型文リスト.get(1);
-        } else {
-            source.renrakusakiHoka = RString.EMPTY;
+            source.tsuchibun = 通知書定型文リスト.get(NOCOUNT_1);
+            source.renrakusakiHoka = 通知書定型文リスト.get(NOCOUNT_2);
         }
     }
 
@@ -237,9 +233,7 @@ public class ShiharaiHohoHenkoTsuchishoEditor implements IShiharaiHohoHenkoTsuch
         if (null != 帳票制御共通) {
             RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
             if (null != 通知書定型文リスト && new RString("2").equals(定型文文字サイズ)) {
-                source.renrakusakiHokaLarge = 通知書定型文リスト.get(1);
-            } else {
-                source.renrakusakiHokaLarge = RString.EMPTY;
+                source.renrakusakiHokaLarge = 通知書定型文リスト.get(NOCOUNT_2);
             }
         }
     }
@@ -248,11 +242,8 @@ public class ShiharaiHohoHenkoTsuchishoEditor implements IShiharaiHohoHenkoTsuch
         if (null != 帳票制御共通) {
             RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
             if (null != 通知書定型文リスト && new RString("3").equals(定型文文字サイズ)) {
-                source.renrakusakiHokaJodanSmall = 通知書定型文リスト.get(1);
-                source.renrakusakiHokaGedanLarge = 通知書定型文リスト.get(2);
-            } else {
-                source.renrakusakiHokaJodanSmall = RString.EMPTY;
-                source.renrakusakiHokaGedanLarge = RString.EMPTY;
+                source.renrakusakiHokaJodanSmall = 通知書定型文リスト.get(NOCOUNT_2);
+                source.renrakusakiHokaGedanLarge = 通知書定型文リスト.get(NOCOUNT_3);
             }
         }
     }
@@ -261,11 +252,8 @@ public class ShiharaiHohoHenkoTsuchishoEditor implements IShiharaiHohoHenkoTsuch
         if (null != 帳票制御共通) {
             RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
             if (null != 通知書定型文リスト && new RString("4").equals(定型文文字サイズ)) {
-                source.renrakusakiHokaJodanLarge = 通知書定型文リスト.get(1);
-                source.renrakusakiHokaGedanSmall = 通知書定型文リスト.get(2);
-            } else {
-                source.renrakusakiHokaJodanLarge = RString.EMPTY;
-                source.renrakusakiHokaGedanSmall = RString.EMPTY;
+                source.renrakusakiHokaJodanLarge = 通知書定型文リスト.get(NOCOUNT_2);
+                source.renrakusakiHokaGedanSmall = 通知書定型文リスト.get(NOCOUNT_3);
             }
         }
     }

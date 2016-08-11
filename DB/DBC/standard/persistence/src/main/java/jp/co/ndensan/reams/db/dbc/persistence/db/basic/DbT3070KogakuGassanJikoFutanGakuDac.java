@@ -126,10 +126,7 @@ public class DbT3070KogakuGassanJikoFutanGakuDac implements ISaveable<DbT3070Kog
                                 eq(taishoNendo, 対象年度),
                                 eq(hokenshaNo, 保険者番号),
                                 eq(shikyuShinseishoSeiriNo, 支給申請書整理番号))).
-                order(by(DbT3070KogakuGassanJikoFutanGaku.hihokenshaNo, Order.DESC),
-                        by(DbT3070KogakuGassanJikoFutanGaku.taishoNendo, Order.DESC),
-                        by(DbT3070KogakuGassanJikoFutanGaku.hokenshaNo, Order.DESC),
-                        by(DbT3070KogakuGassanJikoFutanGaku.shikyuShinseishoSeiriNo, Order.DESC)).limit(1).
+                order(by(DbT3070KogakuGassanJikoFutanGaku.rirekiNo, Order.DESC)).limit(1).
                 toObject(DbT3070KogakuGassanJikoFutanGakuEntity.class);
     }
 

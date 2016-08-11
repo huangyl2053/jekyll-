@@ -75,7 +75,7 @@ public class IinItiziHanteiDataSakuseiA4Process extends BatchKeyBreakBase<ItiziH
 
     @Override
     protected void createWriter() {
-        batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517181.getReportId().value())
+        batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517038.getReportId().value())
                 .addBreak(new BreakerCatalog<IchijihanteikekkahyoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A4))
                 .create();
         reportSourceWriterA4 = new ReportSourceWriter<>(batchWriteA4);
@@ -98,10 +98,10 @@ public class IinItiziHanteiDataSakuseiA4Process extends BatchKeyBreakBase<ItiziH
         List<DbT5211NinteichosahyoChosaItemEntity> 調査票調査項目情報 = mapper.getChosahyoChosaItem(parameter);
         parameter.setIkenshoIraiRirekiNo(entity.getIkenshoIraiRirekiNo());
         List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書項目情報 = mapper.getIkenshoIkenItem(parameter);
-        parameter.setShinseishoKanri(entity.getZShinseishoKanriNo());
+        parameter.setShinseishoKanriZ(entity.getZShinseishoKanriNo());
         List<DbT5211NinteichosahyoChosaItemEntity> 前回調査項目情報 = mapper.getZenkaiChosahyoChosaItem(parameter);
-        item = new IchijihanteikekkahyoItemSettei().set項目(entity, 特記事項情報, 調査票調査項目情報, 前回調査項目情報, 主治医意見書項目情報, null,
-                サービス利用状況, サービス利用状況, サービスの状況フラグ, 現在の状況, new RString(paramter.getGogitaiNo()));
+        item = new IchijihanteikekkahyoItemSettei().set項目(entity, 特記事項情報, 調査票調査項目情報, 前回調査項目情報, 主治医意見書項目情報,
+                new ArrayList(), サービス利用状況, サービス利用状況, サービスの状況フラグ, 現在の状況, new RString(paramter.getGogitaiNo()));
         IchijihanteikekkahyoA4Report report = new IchijihanteikekkahyoA4Report(item);
         report.writeBy(reportSourceWriterA4);
     }
@@ -129,11 +129,11 @@ public class IinItiziHanteiDataSakuseiA4Process extends BatchKeyBreakBase<ItiziH
     private void outputJokenhyoFactory() {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem jokenhyoItem = new ReportOutputJokenhyoItem(
-                ReportIdDBE.DBE517181.getReportId().value(),
+                ReportIdDBE.DBE517038.getReportId().value(),
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                ReportIdDBE.DBE517181.getReportName(),
+                new RString("一次判定結果票"),
                 new RString(batchWriteA4.getPageCount()),
                 RString.EMPTY,
                 RString.EMPTY,

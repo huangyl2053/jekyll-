@@ -464,9 +464,6 @@ public class NinteiShinseirenkeiDataInsert {
                 || (!RString.isNullOrEmpty(value) || new RString("00000000").equals(value))) {
             errorBuilder.append(new RString("生年月日の入力がありません;"));
         }
-        if (check歴上日(value)) {
-            errorBuilder.append(new RString("年齢の算出が出来ませんでした;"));
-        }
         return errorBuilder;
     }
 
@@ -494,7 +491,7 @@ public class NinteiShinseirenkeiDataInsert {
     }
 
     private RStringBuilder check特定疾病コード(RString 被保険者区分コード, RString 特定疾病コード, RStringBuilder errorBuilder) {
-        if (被保険者区分コード.equals(new RString("2"))) {
+        if (new RString("2").equals(被保険者区分コード)) {
             List<RString> codeList = new ArrayList<>();
             for (TokuteiShippei enumValue : TokuteiShippei.values()) {
                 codeList.add(enumValue.getコード());

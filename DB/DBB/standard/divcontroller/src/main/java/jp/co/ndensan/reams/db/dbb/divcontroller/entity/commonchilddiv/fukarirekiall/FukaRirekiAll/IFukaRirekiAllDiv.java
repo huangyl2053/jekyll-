@@ -65,11 +65,4 @@ public interface IFukaRirekiAllDiv extends ICommonChildDivBaseProperties {
      */
     FukaRireki get賦課履歴();
 
-    /**
-     * gridの件数を返します。
-     *
-     * @return gridの件数
-     */
-    int get件数();
-
 }

@@ -26,18 +26,22 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.IBatchWriter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
@@ -73,26 +77,29 @@ public class KoshinShinseishaHaakuListProcess extends BatchProcessBase<UpdateNot
 
     private int 連番;
 
-    private RString eucFilename;
+    private RString fileName;
     private RString spoolWorkPath;
     private List<PersonalData> personalDataList;
+    private FileSpoolManager manager;
 
     @BatchWriter
-    private EucCsvWriter<KoshinShinseishaHaakuListCSVEntity> eucCsvWriterJunitoJugo;
+    private CsvWriter<KoshinShinseishaHaakuListCSVEntity> csvWriterJunitoJugo;
 
     @Override
     protected void initialize() {
         mapper = getMapper(IKoshinShinseishaHaakuListMapper.class);
         personalDataList = new ArrayList<>();
-        spoolWorkPath = Path.getTmpDirectoryPath();
-        eucFilename = Path.combinePath(spoolWorkPath, new RString("KoshinMiShinseishaHaaku.csv"));
-        eucCsvWriterJunitoJugo = new EucCsvWriter.InstanceBuilder(eucFilename, EUC_ENTITY_ID).
-                setEncode(Encode.UTF_8withBOM)
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        spoolWorkPath = manager.getEucOutputDirectry();
+        fileName = Path.combinePath(spoolWorkPath, new RString("KoshinMiShinseishaHaaku.csv"));
+        csvWriterJunitoJugo = new CsvWriter.InstanceBuilder(fileName)
+                .alwaysWriteHeader(KoshinShinseishaHaakuListCSVEntity.class)
+                .setEncode(Encode.UTF_8withBOM)
                 .setDelimiter(EUC_WRITER_DELIMITER)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
                 .setNewLine(NewLine.CRLF)
-                .hasHeader(true).
-                build();
+                .hasHeader(true)
+                .build();
 
     }
 
@@ -122,12 +129,12 @@ public class KoshinShinseishaHaakuListProcess extends BatchProcessBase<UpdateNot
         if (前回の情報List.isEmpty()) {
             KoshinShinseishaHaakuListCSVEntity csvEntity = getCSVEntity(連番, 更新未申請者把握情報, null);
             連番++;
-            eucCsvWriterJunitoJugo.writeLine(csvEntity);
+            csvWriterJunitoJugo.writeLine(csvEntity);
         } else {
             for (PreviousInformationEntity 前回の情報 : 前回の情報List) {
                 KoshinShinseishaHaakuListCSVEntity csvEntity = getCSVEntity(連番, 更新未申請者把握情報, 前回の情報);
                 連番++;
-                eucCsvWriterJunitoJugo.writeLine(csvEntity);
+                csvWriterJunitoJugo.writeLine(csvEntity);
             }
         }
         ExpandedInformation expandedInformations
@@ -138,17 +145,11 @@ public class KoshinShinseishaHaakuListProcess extends BatchProcessBase<UpdateNot
 
     @Override
     protected void afterExecute() {
-        if (personalDataList.isEmpty()) {
-            KoshinShinseishaHaakuListCSVEntity csvEntity = new KoshinShinseishaHaakuListCSVEntity(RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                    RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                    RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
-            eucCsvWriterJunitoJugo.writeLine(csvEntity);
-        }
         eucFileOutputJokenhyoFactory();
-        eucCsvWriterJunitoJugo.close();
-        if (!personalDataList.isEmpty()) {
-            AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
-        }
+        AccessLogUUID id = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+        IBatchWriter batchWriter = (IBatchWriter) csvWriterJunitoJugo;
+        batchWriter.close();
+        manager.spool(fileName, id);
     }
 
     private void eucFileOutputJokenhyoFactory() {
@@ -160,7 +161,7 @@ public class KoshinShinseishaHaakuListProcess extends BatchProcessBase<UpdateNot
                 new RString(JobContextHolder.getJobId()),
                 ファイル名_英数字,
                 EUC_ENTITY_ID.toRString(),
-                new RString(String.valueOf(eucCsvWriterJunitoJugo.getCount())),
+                new RString(String.valueOf(csvWriterJunitoJugo.getCount())),
                 contribute());
         EucFileOutputJokenhyoFactory.createInstance(item).print();
     }

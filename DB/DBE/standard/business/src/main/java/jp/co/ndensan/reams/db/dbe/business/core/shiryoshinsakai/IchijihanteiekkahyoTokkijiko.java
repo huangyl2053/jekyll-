@@ -133,14 +133,18 @@ public class IchijihanteiekkahyoTokkijiko {
         for (DbT5205NinteichosahyoTokkijikoEntity entity : 特記情報List) {
             if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.getTokkijikoTextImageKubun())) {
                 isテキスト = true;
-                テキスト全面.append(get特記事項テキスト(
+                RStringBuilder テキスト = new RStringBuilder();
+                テキスト.append(get特記事項テキスト(
                         kyotsuEntity.getKoroshoIfShikibetsuCode(), entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban()));
-                テキスト全面.append(entity.getTokkiJiko());
-                if ((int) (テキスト全面.length() / 最大文字数) == 2) {
-                    テキスト全面.insert(最大文字数 * 2, System.lineSeparator());
+                テキスト.append(entity.getTokkiJiko());
+                if ((int) (テキスト.length() / 最大文字数) == 2) {
+                    テキスト.insert(最大文字数 * 2, System.lineSeparator());
                 }
-                テキスト全面.insert(最大文字数, System.lineSeparator());
-                テキスト全面.append(System.lineSeparator());
+                if (テキスト.length() % 最大文字数 == 0) {
+                    テキスト.insert(最大文字数, System.lineSeparator());
+                }
+                テキスト.append(System.lineSeparator());
+                テキスト全面.append(テキスト.toRString());
             }
         }
         if (isテキスト) {
@@ -153,6 +157,7 @@ public class IchijihanteiekkahyoTokkijiko {
         RStringBuilder イメージファイル = new RStringBuilder();
         RString ファイル名 = getファイル名By特記番号(特記事項番号);
         if (!RString.isNullOrEmpty(ファイル名)) {
+            イメージファイル.append(ファイル名);
             for (int i = 0; i <= 最大連番; i++) {
                 if (i == 特記事項連番) {
                     イメージファイル.append(new RString(特記事項連番).padZeroToLeft(2));

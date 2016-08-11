@@ -86,6 +86,7 @@ public class HoshuMasutaKoshinManager {
             return SearchResult.of(Collections.<ShinsakaiIinHoshuTanka>emptyList(), 0, false);
         }
         for (DbT5033ShinsakaiIinHoshuTankaEntity entity : entityList) {
+            entity.initializeMd5();
             list.add(new ShinsakaiIinHoshuTanka(entity));
         }
         return SearchResult.of(list, 0, false);
@@ -104,6 +105,7 @@ public class HoshuMasutaKoshinManager {
             return SearchResult.of(Collections.<ShujiiIkenshoHoshuTanka>emptyList(), 0, false);
         }
         for (DbT5032ShujiiIkenshoHoshuTankaEntity entity : entityList) {
+            entity.initializeMd5();
             list.add(new ShujiiIkenshoHoshuTanka(entity));
         }
         return SearchResult.of(list, 0, false);
@@ -122,6 +124,7 @@ public class HoshuMasutaKoshinManager {
             return SearchResult.of(Collections.<NinteiChosaHoshuTanka>emptyList(), 0, false);
         }
         for (DbT5031NinteiChosaHoshuTankaEntity entity : entityList) {
+            entity.initializeMd5();
             list.add(new NinteiChosaHoshuTanka(entity));
         }
         return SearchResult.of(list, 0, false);
@@ -140,6 +143,7 @@ public class HoshuMasutaKoshinManager {
             return SearchResult.of(Collections.<ShinsakaiIinBetsuTanka>emptyList(), 0, false);
         }
         for (DbT5034ShinsakaiIinBetsuTankaEntity entity : entityList) {
+            entity.initializeMd5();
             list.add(new ShinsakaiIinBetsuTanka(entity));
         }
         return SearchResult.of(list, 0, false);

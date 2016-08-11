@@ -174,14 +174,14 @@ public class RenkeiDataTorikomiFlow extends BatchFlowBase<RenkeiDataTorikomiBatc
                 .arguments(getParameter().toRenkeiDataTorikomiProcessParamter()).define();
     }
 
-    private void call厚労省版_4マスタIF種類(List<RString> 取込み対象ファイルリスト, RDate 基準日) {
+    private void call厚労省版_認定申請IF種類(List<RString> 取込み対象ファイルリスト, RDate 基準日) {
         if (取込み対象ファイルリスト.contains(DbBusinessConfig.get(ConfigNameDBE.要介護認定申請連携データ取込みファイル名,
                 基準日, SubGyomuCode.DBE認定支援))) {
             call要介護認定申請情報_厚労省();
         }
     }
 
-    private void call厚労省版_認定申請IF種類(List<RString> 取込み対象ファイルリスト, RDate 基準日) {
+    private void call厚労省版_4マスタIF種類(List<RString> 取込み対象ファイルリスト, RDate 基準日) {
         if (取込み対象ファイルリスト.contains(DbBusinessConfig.get(ConfigNameDBE.認定調査委託先データ取込みファイル名,
                 基準日, SubGyomuCode.DBE認定支援))) {
             call認定調査委託先情報_厚労省();

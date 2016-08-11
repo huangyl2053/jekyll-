@@ -54,6 +54,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchCondition;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.SearchConditionFactory;
 import static jp.co.ndensan.reams.uz.uza.util.db.searchcondition.SearchConditionFactory.where;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.StringOperator;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 全国保険者マスタ更新のDivControllerです。
@@ -295,15 +296,18 @@ public class ZenkokuHokenshaMasterKoshin {
         IHokenjaManager manager = HokenjaManagerFactory.createInstance();
         for (dgHokenshas_Row row : div.getDgHokenshas().getDataSource()) {
             if (!row.getJotai().isNullOrEmpty()) {
-                Builder builder = Hokenja.newBuilder();
+                Hokenja hknj = new Hokenja();
+                if (!追加状態.equals(row.getJotai())) {
+                    hknj = DataPassingConverter.deserialize(row.getHokensha(), Hokenja.class);
+                }
+                Builder builder = hknj.createBuilderForEdit();
                 builder.setHokenjaShubetsu(new HokenjaShubetsu(HokenjaShubetsuType.介護保険.code()));
                 builder.setHokenjaNo(new HokenjaNo(row.getHokenshaNo()));
                 builder.setHokenjaName(row.getHokenshaName());
                 builder.setJusho(row.getJusho());
                 builder.setTelNo(new TelNo(row.getTelNo()));
                 builder.setYubinNo(new YubinNo(row.getYubinNo()));
-                Hokenja hknj = builder.build();
-                HokenshaMasterKoshinBusiness business = new HokenshaMasterKoshinBusiness(hknj.toEntity());
+                HokenshaMasterKoshinBusiness business = new HokenshaMasterKoshinBusiness(builder.build().toEntity());
                 if (追加状態.equals(row.getJotai())) {
                     business.setState(EntityDataState.Added);
                     flag = (1 == manager.save保険者(new Hokenja(business.getEntity())));
