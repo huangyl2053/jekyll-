@@ -85,7 +85,7 @@ public class GaikyotokkiImageA4Editor implements IGaikyotokkiImageA4Editor {
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         if (!RString.isNullOrEmpty(item.get申請書管理番号())) {
             source.hishokenshaNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                    item.get被保険者番号());
+                    item.get申請書管理番号());
         }
         return source;
     }
