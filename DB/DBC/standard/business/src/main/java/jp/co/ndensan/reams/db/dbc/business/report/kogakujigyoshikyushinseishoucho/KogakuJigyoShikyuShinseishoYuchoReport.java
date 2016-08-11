@@ -32,7 +32,7 @@ public class KogakuJigyoShikyuShinseishoYuchoReport extends Report<KogakuJigyoSh
     }
 
     @Override
-    protected void writeBy(ReportSourceWriter<KogakuJigyoShikyuShinseishoYuchoSource> reportSourceWriter) {
+    public void writeBy(ReportSourceWriter<KogakuJigyoShikyuShinseishoYuchoSource> reportSourceWriter) {
         ShinseiJohoChohyoTempEntity 帳票出力対象データ = parameter.get帳票出力対象データ();
         RString 認証者役職名 = parameter.get認証者役職名();
         RDateTime システム日付 = parameter.getシステム日付();
