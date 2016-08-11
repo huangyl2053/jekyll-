@@ -134,6 +134,6 @@ public class KogakuOshiraseTsuchiTeshutsuKigenAriSource implements IReportSource
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
     @ReportPerson(id = "X")
-    public ShikibetsuCode 識別コード1;
+    public ShikibetsuCode 識別コード;
 // </editor-fold>
 }
