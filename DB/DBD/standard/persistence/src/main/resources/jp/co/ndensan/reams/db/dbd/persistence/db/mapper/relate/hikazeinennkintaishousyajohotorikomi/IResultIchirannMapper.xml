@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-4910-030 x_lilh -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hikazeinennkintaishousyajohotorikomi.IResultIchirannMapper">
+    <resultMap id="resultMap_HikazeNenkinTaishoshaDoutei" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100201.HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity" autoMapping="true">
+        <!-- TODO -->
+    </resultMap>
+    
+    <select resultOrdered="true" id="get該当一覧情報"
+            resultMap="resultMap_HikazeNenkinTaishoshaDoutei"
+            fetchSize="500">
+           <!-- TODO -->
+    </select>
+    
+    <!--TODO get不一致情報
+            get生年月日情報
+            get年金番号情報-->  
+</mapper>

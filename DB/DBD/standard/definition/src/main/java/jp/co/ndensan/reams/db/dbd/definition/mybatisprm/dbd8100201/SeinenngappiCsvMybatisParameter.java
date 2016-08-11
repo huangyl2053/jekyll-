@@ -6,17 +6,12 @@
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd8100201;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
- * 処理日付管理マスタ更新SQLのパラメータクラスです．
+ * SQLのパラメータクラスです．
  *
  * @reamsid_L DBD-4910-030 x_lilh
  */
-@Getter
-@Setter
-@SuppressWarnings("PMD.UnusedPrivateField")
-public class SyoriHidukeKanriMasterUpdateMybatisParameter implements IMyBatisParameter {
+public class SeinenngappiCsvMybatisParameter implements IMyBatisParameter {
 
 }

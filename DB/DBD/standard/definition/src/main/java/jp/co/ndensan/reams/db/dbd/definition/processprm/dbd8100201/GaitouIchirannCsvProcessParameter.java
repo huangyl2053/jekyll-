@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd8100201;
+package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100201;
 
-import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 処理日付管理マスタ更新SQLのパラメータクラスです．
+ * 非課税年金対象者情報(該当一覧CSV)_Process用パラメータクラスです。
  *
  * @reamsid_L DBD-4910-030 x_lilh
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class SyoriHidukeKanriMasterUpdateMybatisParameter implements IMyBatisParameter {
-
+public class GaitouIchirannCsvProcessParameter implements IBatchProcessParameter {
+  // TODO
 }
