@@ -4,6 +4,33 @@ var DBC;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnShowShuruiGendogaku = function () {
+                return "onClick_btnShowShuruiGendogaku";
+            };
+
+            Events.onClick_btnZengetsuCopy = function () {
+                return "onClick_btnZengetsuCopy";
+            };
+
+            Events.onBlur_txtZengetsuRiyoNissu = function () {
+                return "onBlur_txtZengetsuRiyoNissu";
+            };
+
+            Events.onBlur_txtTogetsuRiyoNissu = function () {
+                return "onBlur_txtTogetsuRiyoNissu";
+            };
+
+            Events.onClick_btnBeppyoMeisaiNew = function () {
+                return "onClick_btnBeppyoMeisaiNew";
+            };
+
+            Events.onClick_btnBeppyoGokeiNew = function () {
+                return "onClick_btnBeppyoGokeiNew";
+            };
+
+            Events.onClick_btnSelect = function () {
+                return "onClick_btnSelect";
+            };
             return Events;
         })();
         ServiceRiyohyoInfo.Events = Events;
@@ -65,7 +92,7 @@ var DBC;
             };
 
             Controls.prototype.btnShowShuruiGendogaku = function () {
-                return new UZA.Button(this.convFiledName("btnShowShuruiGendogaku"));
+                return new UZA.ButtonDialog(this.convFiledName("btnShowShuruiGendogaku"));
             };
 
             Controls.prototype.btnZengetsuCopy = function () {

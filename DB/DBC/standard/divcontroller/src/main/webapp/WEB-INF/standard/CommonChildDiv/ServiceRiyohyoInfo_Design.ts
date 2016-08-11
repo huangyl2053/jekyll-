@@ -2,13 +2,41 @@
 /// <reference path="../d.ts/UzViewControls.d.ts" />
 /// <reference path="../d.ts/UzaConverter.d.ts" />
 // <reference path="../d.ts/DBZCommonChildDiv.d.ts" />
-// <reference path="./ServiceCodeInputCommonChildDiv.ts" />
+// <reference path="./ServiceCodeInputCommonChildDiv/ServiceCodeInputCommonChildDiv.ts" />
 
 module DBC {
 
      export module ServiceRiyohyoInfo {
 
         export class Events {
+
+            public static onClick_btnShowShuruiGendogaku(): string {
+                return "onClick_btnShowShuruiGendogaku";
+            }
+
+            public static onClick_btnZengetsuCopy(): string {
+                return "onClick_btnZengetsuCopy";
+            }
+
+            public static onBlur_txtZengetsuRiyoNissu(): string {
+                return "onBlur_txtZengetsuRiyoNissu";
+            }
+
+            public static onBlur_txtTogetsuRiyoNissu(): string {
+                return "onBlur_txtTogetsuRiyoNissu";
+            }
+
+            public static onClick_btnBeppyoMeisaiNew(): string {
+                return "onClick_btnBeppyoMeisaiNew";
+            }
+
+            public static onClick_btnBeppyoGokeiNew(): string {
+                return "onClick_btnBeppyoGokeiNew";
+            }
+
+            public static onClick_btnSelect(): string {
+                return "onClick_btnSelect";
+            }
 
         }
 
@@ -71,8 +99,8 @@ module DBC {
                 return new UZA.TextBoxDate(this.convFiledName("txtSofuYM"));
             }
 
-            public btnShowShuruiGendogaku(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnShowShuruiGendogaku"));
+            public btnShowShuruiGendogaku(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnShowShuruiGendogaku"));
             }
 
             public btnZengetsuCopy(): UZA.Button {
