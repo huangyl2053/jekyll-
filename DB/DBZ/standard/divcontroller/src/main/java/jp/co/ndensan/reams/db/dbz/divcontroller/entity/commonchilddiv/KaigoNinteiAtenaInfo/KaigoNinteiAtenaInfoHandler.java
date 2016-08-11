@@ -106,12 +106,14 @@ public class KaigoNinteiAtenaInfoHandler {
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.未定義
                 ), true);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        KaigoNinteiAtenaInfoParameter infoParameter = KaigoNinteiAtenaInfoParameter.createSelectByKeyParam(shikibetsuCode.value(), shinseishoKanriNo.value(),
-                new RString(uaFt200Psm.toString()));
-        List<KaigoNinteiAtenaInfoBusiness> ninteiList = KaigoNinteiAtenaInfoManager.createInstance()
-                .getKaigoNinteiAtenaInfo(infoParameter).records();
-        if (ninteiList != null && !ninteiList.isEmpty()) {
-            set介護認定宛名情報(ninteiList.get(0));
+        if (!RString.isNullOrEmpty(shikibetsuCode.value()) && !RString.isNullOrEmpty(shinseishoKanriNo.value())) {
+            KaigoNinteiAtenaInfoParameter infoParameter = KaigoNinteiAtenaInfoParameter.createSelectByKeyParam(shikibetsuCode.value(), shinseishoKanriNo.value(),
+                    new RString(uaFt200Psm.toString()));
+            List<KaigoNinteiAtenaInfoBusiness> ninteiList = KaigoNinteiAtenaInfoManager.createInstance()
+                    .getKaigoNinteiAtenaInfo(infoParameter).records();
+            if (ninteiList != null && !ninteiList.isEmpty()) {
+                set介護認定宛名情報(ninteiList.get(0));
+            }
         }
     }
 
