@@ -133,16 +133,18 @@ public class IchijihanteiekkahyoTokkijiko {
         for (DbT5205NinteichosahyoTokkijikoEntity entity : 特記情報List) {
             if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.getTokkijikoTextImageKubun())) {
                 isテキスト = true;
-                テキスト全面.append(get特記事項テキスト(
+                RStringBuilder テキスト = new RStringBuilder();
+                テキスト.append(get特記事項テキスト(
                         kyotsuEntity.getKoroshoIfShikibetsuCode(), entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban()));
-                テキスト全面.append(entity.getTokkiJiko());
-                if ((int) (テキスト全面.length() / 最大文字数) == 2) {
-                    テキスト全面.insert(最大文字数 * 2, System.lineSeparator());
+                テキスト.append(entity.getTokkiJiko());
+                if ((int) (テキスト.length() / 最大文字数) == 2) {
+                    テキスト.insert(最大文字数 * 2, System.lineSeparator());
                 }
-                if (最大文字数 <= テキスト全面.length()) {
-                    テキスト全面.insert(最大文字数, System.lineSeparator());
+                if (テキスト.length() % 最大文字数 == 0) {
+                    テキスト.insert(最大文字数, System.lineSeparator());
                 }
-                テキスト全面.append(System.lineSeparator());
+                テキスト.append(System.lineSeparator());
+                テキスト全面.append(テキスト.toRString());
             }
         }
         if (isテキスト) {
