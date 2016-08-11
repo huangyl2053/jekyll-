@@ -215,8 +215,16 @@ public class JigyoshaTouroku {
      * @return ResponseData<JigyoshaTourokuDiv> 事業者登録Div
      */
     public ResponseData<JigyoshaTourokuDiv> onClick_btnSave(JigyoshaTourokuDiv div) {
-        RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+        RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);       
         if (初期_状態 == null || 状態_追加.equals(初期_状態)) {
+            RString 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者番号, RString.class);
+            FlexibleDate yukoKaishiYMD = div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().getValue();
+            FlexibleDate yukoShuryoYMD = div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().getValue();
+            KaigoJogaiTokureiParameter parameter
+                = KaigoJogaiTokureiParameter.createParam(事業者番号, yukoKaishiYMD, yukoShuryoYMD, null);
+            if (!manager.checkKikanGorisei(parameter)) {
+                throw new ApplicationException(UrErrorMessages.期間が不正.getMessage());
+            }        
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             }
@@ -227,6 +235,15 @@ public class JigyoshaTouroku {
                 return ResponseData.of(div).setState(DBA2010013StateName.完了状態);
             }
         } else if (状態_修正.equals(初期_状態)) {
+            
+            KaigoJigyosha 旧事業者情報 = ViewStateHolder.get(ViewStateKeys.事業者登録情報, KaigoJigyosha.class);
+            FlexibleDate yukoKaishiYMD = div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().getValue();
+            FlexibleDate yukoShuryoYMD = div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().getValue();
+            KaigoJogaiTokureiParameter parameter = KaigoJogaiTokureiParameter.createParam(
+                旧事業者情報.get事業者番号().getColumnValue(), yukoKaishiYMD, yukoShuryoYMD, null);
+            if (!manager.checkKikanGorisei(parameter)) {
+                throw new ApplicationException(UrErrorMessages.期間が不正.getMessage());
+            }
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             }
@@ -259,11 +276,6 @@ public class JigyoshaTouroku {
         }
         FlexibleDate yukoKaishiYMD = div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().getValue();
         FlexibleDate yukoShuryoYMD = div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().getValue();
-        KaigoJogaiTokureiParameter parameter
-                = KaigoJogaiTokureiParameter.createParam(事業者番号, yukoKaishiYMD, yukoShuryoYMD, null);
-        if (!manager.checkKikanGorisei(parameter)) {
-            throw new ApplicationException(UrErrorMessages.期間が不正.getMessage());
-        }
         KaigoJigyoshaParameter kaigoJigyoshaParameter = KaigoJigyoshaParameter.createParam(
                 jigyoshaNo.getColumnValue(),
                 ViewStateHolder.get(ViewStateKeys.事業者種類コード, RString.class
@@ -353,11 +365,6 @@ public class JigyoshaTouroku {
         KaigoJigyosha 旧事業者情報 = ViewStateHolder.get(ViewStateKeys.事業者登録情報, KaigoJigyosha.class);
         FlexibleDate yukoKaishiYMD = div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().getValue();
         FlexibleDate yukoShuryoYMD = div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().getValue();
-        KaigoJogaiTokureiParameter parameter = KaigoJogaiTokureiParameter.createParam(
-                旧事業者情報.get事業者番号().getColumnValue(), yukoKaishiYMD, yukoShuryoYMD, null);
-        if (!manager.checkKikanGorisei(parameter)) {
-            throw new ApplicationException(UrErrorMessages.期間が不正.getMessage());
-        }
         KaigoJigyoshaParameter kaigoJigyoshaParameter = KaigoJigyoshaParameter.createParam(
                 旧事業者情報.get事業者番号().getColumnValue(),
                 ViewStateHolder.get(ViewStateKeys.事業者種類コード, RString.class),
