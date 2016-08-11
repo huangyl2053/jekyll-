@@ -66,8 +66,10 @@ public class TokuchoTembikiChoshuhohoKoshinProcess
         }
         DbV2001ChoshuHohoEntity 介護徴収方法ビュー = 介護徴収方法ビューリスト.get(0);
         ChoshuHoho 新介護徴収方法 = service.getChoshuHohoKoshinData(
-                new ChoshuHoho(entityTrasition(介護徴収方法ビュー)), YMDHMS.now(), null, null);
-        tableWriter.insert(新介護徴収方法.toEntity());
+                new ChoshuHoho(toDbT2001ChoshuHohoEntity(介護徴収方法ビュー)), YMDHMS.now(), null, null);
+        if (!新介護徴収方法.toEntity().equalsPrimaryKeys(toDbT2001ChoshuHohoEntity(介護徴収方法ビュー))) {
+            tableWriter.insert(新介護徴収方法.toEntity());
+        }
     }
 
     private TokuchoTenbikiTeishiMyBatisParameter toMyBatisParameter() {
@@ -95,7 +97,7 @@ public class TokuchoTembikiChoshuhohoKoshinProcess
         return new RString(new Decimal(year.toString()).toString(FULLYEAR.toString()));
     }
 
-    private DbT2001ChoshuHohoEntity entityTrasition(DbV2001ChoshuHohoEntity 介護徴収方法ビュー) {
+    private DbT2001ChoshuHohoEntity toDbT2001ChoshuHohoEntity(DbV2001ChoshuHohoEntity 介護徴収方法ビュー) {
         DbT2001ChoshuHohoEntity 介護徴収方法 = new DbT2001ChoshuHohoEntity();
         FlexibleYear flexibleYear = 介護徴収方法ビュー.getFukaNendo();
         介護徴収方法.setFukaNendo(flexibleYear == null ? FlexibleYear.EMPTY : flexibleYear);

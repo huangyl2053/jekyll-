@@ -12,6 +12,7 @@
         "DbT2003Kibetsu"."ki"  AS "DbT2003_ki",
         "UrT0705"."choteigaku"  AS "UrT0705_choteigaku",
         "DbT2003Kibetsu"."choshuHouhou" AS "DbT2003_choshuHouhou",
+        "DbT2003Kibetsu"."rirekiNo" AS "DbT2003_rirekiNo",
         "DbT2003Kibetsu"."choteiId" AS "DbT2003_choteiId"
         FROM
         "NenkinTokuchoKaifuJohoTemp" AS "UeT0511NenkinTokuchoKaifuJoho"
@@ -43,6 +44,7 @@
         "DbT2003Kibetsu"."ki"  AS DbT2003_ki,
         "UrT0705"."choteigaku"  AS UrT0705_choteigaku,
         "DbT2003Kibetsu"."choshuHouhou" AS "DbT2003_choshuHouhou",
+        "DbT2003Kibetsu"."rirekiNo" AS "DbT2003_rirekiNo",
         "DbT2003Kibetsu"."choteiId" AS "DbT2003_choteiId"
         FROM
         "NenkinTokuchoKaifuJohoTemp" as "UeT0511NenkinTokuchoKaifuJoho"
@@ -74,6 +76,7 @@
         "DbT2003Kibetsu"."ki"  AS DbT2003_ki,
         "UrT0705"."choteigaku"  AS UrT0705_choteigaku,
         "DbT2003Kibetsu"."choshuHouhou" AS "DbT2003_choshuHouhou",
+        "DbT2003Kibetsu"."rirekiNo" AS "DbT2003_rirekiNo",
         "DbT2003Kibetsu"."choteiId" AS "DbT2003_choteiId"
         FROM
         "NenkinTokuchoKaifuJohoTemp" AS "UeT0511NenkinTokuchoKaifuJoho"
@@ -113,9 +116,13 @@
         <id column="ueT0511NenkinTokuchoKaifuJoho_nenkinCode" />
         <id column="ueT0511NenkinTokuchoKaifuJoho_koseiCityCode" />
         <id column="ueT0511NenkinTokuchoKaifuJoho_renban"/>
-        <result property="ki" column="DbT2003_ki"/>
+        <id column="dbT2001ChoshuHoho_hihokenshaNo" />
+        <id column="dbT2002Fuka_choteiNendo" />
+        <id column="dbT2002Fuka_tsuchishoNo" />
+        <id column="DbT2003_rirekiNo" />
+        <id property="ki" column="DbT2003_ki"/>
+        <id property="choteiId" column="DbT2003_choteiId" typeHandler="org.apache.ibatis.type.LongTypeHandler" />
         <result property="choteigaku" column="UrT0705_choteigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="choteiId" column="DbT2003_choteiId" typeHandler="org.apache.ibatis.type.LongTypeHandler" />
         <result property="choshuHouhou" column="DbT2003_choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <association property="uet0511entity" resultMap="ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity"/>
         <association property="dbt2001entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.ResultMap_DbT2001ChoshuHohoEntity"/>
