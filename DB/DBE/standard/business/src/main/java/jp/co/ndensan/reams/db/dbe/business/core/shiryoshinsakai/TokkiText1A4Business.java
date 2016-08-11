@@ -296,28 +296,31 @@ public class TokkiText1A4Business {
         for (DbT5205NinteichosahyoTokkijikoEntity entity : 特記情報List) {
             if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.getTokkijikoTextImageKubun())) {
                 isテキスト = true;
-                テキスト全面.append(get特記事項テキスト(
+                RStringBuilder テキストBuilder = new RStringBuilder();
+                テキストBuilder.append(get特記事項テキスト(
                         kyotsuEntity.getKoroshoIfShikibetsuCode(), entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban()));
-                テキスト全面.append(entity.getTokkiJiko());
-                if ((int) (テキスト全面.length() / 最大文字数) == 2) {
-                    テキスト全面.insert(最大文字数 * 2, System.lineSeparator());
+                テキストBuilder.append(entity.getTokkiJiko());
+                if ((int) (テキストBuilder.length() / 最大文字数) == 2) {
+                    テキストBuilder.insert(最大文字数 * 2, System.lineSeparator());
                     表示行数 = 表示行数 + 1;
                 }
-                if ((int) (テキスト全面.length() / 最大文字数) == 1) {
-                    テキスト全面.insert(最大文字数, System.lineSeparator());
+                if ((int) (テキストBuilder.length() / 最大文字数) == 1) {
+                    テキストBuilder.insert(最大文字数, System.lineSeparator());
                     表示行数 = 表示行数 + 1;
                 }
                 if ((!is2枚目以降 && ページ最大表示行数 <= 表示行数)
                         || (is2枚目以降 && ページ最大表示行数 * 現在ページ <= 表示行数)) {
                     has改ページ = true;
+                    テキスト全面.append(テキストBuilder.toRString());
                     return テキスト全面.toRString();
                 }
                 if (is2枚目以降 && 表示行数 % (ページ最大表示行数 * (現在ページ - 1)) == 0) {
                     テキスト全面 = new RStringBuilder();
                 } else {
-                    テキスト全面.append(System.lineSeparator());
+                    テキストBuilder.append(System.lineSeparator());
                     表示行数 = 表示行数 + 1;
                 }
+                テキスト全面.append(テキストBuilder.toRString());
             }
         }
         if ((isテキスト && !is2枚目以降) || (isテキスト && (is2枚目以降 && ページ最大表示行数 * (現在ページ - 1) <= 表示行数
