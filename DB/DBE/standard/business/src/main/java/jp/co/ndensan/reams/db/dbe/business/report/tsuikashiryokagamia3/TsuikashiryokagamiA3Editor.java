@@ -21,6 +21,7 @@ public class TsuikashiryokagamiA3Editor implements ITsuikashiryokagamiA3Editor {
 
     private final JimuTuikaSiryoBusiness business;
     private static final int INT_2 = 2;
+    private static final int INT_4 = 4;
 
     /**
      * インスタンスを生成します。
@@ -33,7 +34,8 @@ public class TsuikashiryokagamiA3Editor implements ITsuikashiryokagamiA3Editor {
 
     @Override
     public TsuikashiryokagamiA3ReportSource edit(TsuikashiryokagamiA3ReportSource source) {
-        source.shinsakaiNo = business.get審査会開催番号();
+        source.shinsakaiNo = business.get審査会開催番号().substring(
+                business.get審査会開催番号().length() - INT_4, business.get審査会開催番号().length());
         source.tsuchibun = business.get通知文1();
         source.shinsainName1 = business.get審査員1();
         source.shinsainName2 = business.get審査員2();

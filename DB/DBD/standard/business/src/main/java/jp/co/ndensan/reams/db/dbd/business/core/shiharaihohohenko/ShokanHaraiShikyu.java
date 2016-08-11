@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko;
 
+import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
@@ -29,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  *
  * @reamsid_L DBD-3620-070 xuyue
  */
-public class ShokanHaraiShikyu {
+public class ShokanHaraiShikyu implements Serializable {
 
     private final DbT3034ShokanShinseiEntity 償還払支給申請Entity;
     private final DbT3036ShokanHanteiKekkaEntity 償還払支給判定結果Entity;

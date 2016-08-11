@@ -125,12 +125,15 @@
                 dbt5101."shoKisaiHokenshaNo",
                 dbt5101."hihokenshaNo" ,
                 dbt5101."hihokenshaName" ,
-                , dbt5101."koroshoIfShikibetsuCode"
+                dbt5101."koroshoIfShikibetsuCode",
                 dbt5101."ninteiShinseiYMD" ,
                 dbt5202."ninteichosaJisshiYMD",
                 dbt5502."shinsakaiKaisaiYMD",
                 dbt5202."gaikyoChosaTextImageKubun" ,
                 dbt5202."tokki",
+                , dbt5202."riyoShisetsuShimei"
+        , dbt5202."riyoShisetsuJusho"
+        , dbt5202."riyoShisetsuTelNo"
                 dbt5115."imageSharedFileId" AS imageSharedFileId
             FROM
                     rgdb."DbT5502ShinsakaiWariateJoho" AS dbt5502
@@ -183,7 +186,10 @@
         <result property="riyoShisetsuJusho" column="riyoShisetsuJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="riyoShisetsuTelNo" column="riyoShisetsuTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="imageSharedFileId" column="imageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler" />
-        <result property="koroshoIfShikibetsuCode" column="imageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="koroshoIfShikibetsuCode" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+                <result property="riyoShisetsuShimei" column="riyoShisetsuShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="riyoShisetsuJusho" column="riyoShisetsuJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="riyoShisetsuTelNo" column="riyoShisetsuTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
     <select id="get事務局情報件数" resultType="java.lang.Integer"
@@ -386,7 +392,7 @@
                 rgdb."DbT5205NinteichosahyoTokkijiko" AS dbt5205				
         WHERE					
             dbt5205."shinseishoKanriNo" IN <foreach collection="shinseishoKanriNoList" item="shinseishoKanriNoList" open="(" separator="," close=")"> #{shinseishoKanriNoList} </foreach>				
-        AND dbt5205."ninteichosaRirekiNo" IN <foreach collection="shinseishoKanriNoList" item="ninteichosaRirekiNoList" open="(" separator="," close=")"> #{ninteichosaRirekiNoList} </foreach>					
+        AND dbt5205."ninteichosaRirekiNo" IN <foreach collection="ninteichosaRirekiNoList" item="ninteichosaRirekiNoList" open="(" separator="," close=")"> #{ninteichosaRirekiNoList} </foreach>					
         AND NOT EXISTS (SELECT 'X' 					
                                         FROM	
                                                 rgdb."DbT5205NinteichosahyoTokkijiko" AS B1
@@ -1267,7 +1273,7 @@
               LEFT JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101ZenZenkai
               ON dbt5121ZenZenkai."zenkaiShinseishoKanriNo" = dbt5101ZenZenkai."shinseishoKanriNo"
               LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" dbt5102ZenZenkai
-              ON dbt5102ZenZenkai."shinseishoKanriNo" = dbt5101ZenZenkai"shinseishoKanriNo"
+              ON dbt5102ZenZenkai."shinseishoKanriNo" = dbt5101ZenZenkai."shinseishoKanriNo"
         WHERE
             dbt5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
             AND dbt5502."shinsakaiOrderKakuteiFlag" =#{isOrderKakuteiFlg}

@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
  */
 public class ShinNendoKanriJohoSakusei {
     /**
-     * 画面初期化のメソッドます。
+     * 画面初期化のメソッドです。
      *@param div ShinNendoKanriJohoSakuseiDiv
      * @return ResponseData
      */
@@ -26,7 +26,7 @@ public class ShinNendoKanriJohoSakusei {
     }
 
     /**
-     * 「実行ボタン押下した時の処理」ボタンのメソッドます。
+     * 「実行ボタン押下した時の処理」ボタンのメソッドです。
      *
      * @param div ShinNendoKanriJohoSakuseiDiv
      * @return ResponseData

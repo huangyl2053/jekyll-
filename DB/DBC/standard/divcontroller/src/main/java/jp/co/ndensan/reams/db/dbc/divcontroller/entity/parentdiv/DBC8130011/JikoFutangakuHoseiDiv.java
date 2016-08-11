@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
 
 /**
@@ -31,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
  */
 public class JikoFutangakuHoseiDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -511,22 +510,22 @@ public class JikoFutangakuHoseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtMadoguchiKaishiJikan() {
+    public TextBox getTxtMadoguchiKaishiJikan() {
         return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().getTxtMadoguchiKaishiJikan();
     }
 
     @JsonIgnore
-    public void setTxtMadoguchiKaishiJikan(TextBoxNum txtMadoguchiKaishiJikan) {
+    public void setTxtMadoguchiKaishiJikan(TextBox txtMadoguchiKaishiJikan) {
         this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().setTxtMadoguchiKaishiJikan(txtMadoguchiKaishiJikan);
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtMadoguchiKaishiFun() {
+    public TextBox getTxtMadoguchiKaishiFun() {
         return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().getTxtMadoguchiKaishiFun();
     }
 
     @JsonIgnore
-    public void setTxtMadoguchiKaishiFun(TextBoxNum txtMadoguchiKaishiFun) {
+    public void setTxtMadoguchiKaishiFun(TextBox txtMadoguchiKaishiFun) {
         this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().setTxtMadoguchiKaishiFun(txtMadoguchiKaishiFun);
     }
 
@@ -551,22 +550,22 @@ public class JikoFutangakuHoseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtMadoguchiShuryoJikan() {
+    public TextBox getTxtMadoguchiShuryoJikan() {
         return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().getTxtMadoguchiShuryoJikan();
     }
 
     @JsonIgnore
-    public void setTxtMadoguchiShuryoJikan(TextBoxNum txtMadoguchiShuryoJikan) {
+    public void setTxtMadoguchiShuryoJikan(TextBox txtMadoguchiShuryoJikan) {
         this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().setTxtMadoguchiShuryoJikan(txtMadoguchiShuryoJikan);
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtMadoguchiShuryoFun() {
+    public TextBox getTxtMadoguchiShuryoFun() {
         return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().getTxtMadoguchiShuryoFun();
     }
 
     @JsonIgnore
-    public void setTxtMadoguchiShuryoFun(TextBoxNum txtMadoguchiShuryoFun) {
+    public void setTxtMadoguchiShuryoFun(TextBox txtMadoguchiShuryoFun) {
         this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().setTxtMadoguchiShuryoFun(txtMadoguchiShuryoFun);
     }
 
