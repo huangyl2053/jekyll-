@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyodoJukyushaIdoRenrakuhyo;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyodoJukyushaIdoRenrakuhyo.KyodoJukyushaIdoRenrakuhyo;
 
 import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.param.KyodoshoriyoJukyushaIdoRenrakuhyoParam;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,7 +20,7 @@ public class KyodoJukyushaIdoRenrakuhyoHandler {
     private static final RString RString_1 = new RString("1");
 
     /**
-     * 基本送付情報判定
+     * 基本送付情報判定のメソッドです
      *
      * @param 初期化異動情報Entity KyodoshoriyoJukyushaIdoRenrakuhyoParam
      * @param 画面項目異動情報Entity KyodoshoriyoJukyushaIdoRenrakuhyoParam
@@ -69,7 +69,7 @@ public class KyodoJukyushaIdoRenrakuhyoHandler {
     }
 
     /**
-     * 償還送付情報判定
+     * 償還送付情報判定のメソッドです
      *
      * @param 初期化異動情報Entity KyodoshoriyoJukyushaIdoRenrakuhyoParam
      * @param 画面項目異動情報Entity KyodoshoriyoJukyushaIdoRenrakuhyoParam
@@ -114,7 +114,7 @@ public class KyodoJukyushaIdoRenrakuhyoHandler {
     }
 
     /**
-     * 高額送付情報判定
+     * 高額送付情報判定のメソッドです
      *
      * @param 初期化異動情報Entity KyodoshoriyoJukyushaIdoRenrakuhyoParam
      * @param 画面項目異動情報Entity KyodoshoriyoJukyushaIdoRenrakuhyoParam
