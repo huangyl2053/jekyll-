@@ -6,10 +6,12 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD4030011;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.shogaishakojotaishoshalist.ShogaishaKojoTaishoshaListParameter;
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4030011.ShogaishaKoujoTaishoNinteiShoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4030011.ShogaishaKoujoTaishoNinteiShoHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4030011.ShogaishaKoujoTaishoNinteiShoValidationHandler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -35,6 +37,7 @@ public class ShogaishaKoujoTaishoNinteiSho {
         handler.onLoad();
         RDate rDate = RDate.getNowDate();
         div.getShogaishaKojoNinteishoOutput().getTxtKofuDay().setValue(rDate);
+        div.getShogaishaKojoNinteishoOutput().getCommonChildDiv1().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD100025.getReportId());
         return ResponseData.of(div).respond();
 
     }
