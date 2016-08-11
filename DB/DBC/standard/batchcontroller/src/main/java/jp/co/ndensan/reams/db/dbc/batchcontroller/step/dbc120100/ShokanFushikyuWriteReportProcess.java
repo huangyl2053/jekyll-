@@ -7,11 +7,8 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120100;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.shokanfushikyuketteiin.ShokanBaraiFushikyuKetteishaIchiranhyo;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanfushikyuketteiin.ShokanFushikyuKetteiInOutPutOrder;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanfushikyuketteiin.ShokanFushikyuKetteiInPageBreak;
-import jp.co.ndensan.reams.db.dbc.business.report.shokanfushikyuketteiin.ShokanFushikyuKetteiInItem;
-import jp.co.ndensan.reams.db.dbc.business.report.shokanfushikyuketteiin.ShokanFushikyuKetteiInReport;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanfushikyuketteiin.ShokanFushikyuKetteiInMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanfushikyuketteiin.ShokanFushikyuKetteiInEntity;
@@ -124,7 +121,7 @@ public class ShokanFushikyuWriteReportProcess extends BatchKeyBreakBase<ShokanFu
 
     @Override
     protected void afterExecute() {
-        ShokanBaraiFushikyuKetteishaIchiranhyo business = new ShokanBaraiFushikyuKetteishaIchiranhyo();
+//        ShokanBaraiFushikyuKetteishaIchiranhyo business = new ShokanBaraiFushikyuKetteishaIchiranhyo();
         IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
                 .get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200022.getReportId(), shutsuryokujunID.getValue());
         int i = 0;
@@ -154,10 +151,10 @@ public class ShokanFushikyuWriteReportProcess extends BatchKeyBreakBase<ShokanFu
             }
         }
 
-        List<ShokanFushikyuKetteiInItem> targetList = business.getShokanBaraiFushikyuKetteishaIchiranhyo(並び順の１件目, 並び順の２件目,
-                並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁, entityList);
-        ShokanFushikyuKetteiInReport report
-                = ShokanFushikyuKetteiInReport.createForm(targetList);
-        report.writeBy(reportSourceWriter);
+//        List<ShokanFushikyuKetteiInItem> targetList = business.getShokanBaraiFushikyuKetteishaIchiranhyo(並び順の１件目, 並び順の２件目,
+//                並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁, entityList);
+//        ShokanFushikyuKetteiInReport report
+//                = ShokanFushikyuKetteiInReport.createForm(targetList);
+//        report.writeBy(reportSourceWriter);
     }
 }
