@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaishohakko.Futa
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaishohakko.RiyoshaFutanwariaishoTempEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 
 /**
@@ -47,7 +48,15 @@ public interface IFutanwariaishoHakkoMapper {
      * 帳票制御汎用キー取得です。
      *
      * @param para {@link FutanwariaishoHakkoMybatisParameter}
-     * @return {@link RiyoshaFutanwariaishoTempEntity}
+     * @return {@link DbT7067ChohyoSeigyoHanyoEntity}
      */
     DbT7067ChohyoSeigyoHanyoEntity select帳票制御汎用キー(FutanwariaishoHakkoMybatisParameter para);
+
+    /**
+     * 帳票制御汎用キー取得です。
+     *
+     * @param para {@link FutanwariaishoHakkoMybatisParameter}
+     * @return {@link DbT7065ChohyoSeigyoKyotsuEntity}
+     */
+    DbT7065ChohyoSeigyoKyotsuEntity select帳票制御共通(FutanwariaishoHakkoMybatisParameter para);
 }
