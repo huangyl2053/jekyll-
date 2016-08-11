@@ -79,9 +79,9 @@ public class HanyoRisutoRiyoshaFutanWariaiProcess extends BatchProcessBase<Hanyo
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBD701014");
-    private static final RString HIHOKENSHANO = new RString("被保険者番号");
-    private static final RString RIREKIBANGO = new RString("履歴番号");
-    private static final RString EDANO = new RString("枝番号");
+    private static final RString HIHOKENSHANO = new RString("利用者負担割合_被保険者番号");
+    private static final RString RIREKIBANGO = new RString("利用者負担割合_履歴番号");
+    private static final RString EDANO = new RString("利用者負担割合_枝番号");
     private static final RString 住所地特例 = new RString("住特");
     private static final RString 削除データ = new RString("削除データ");
     private static final RString 発行不要 = new RString("発行不要");
