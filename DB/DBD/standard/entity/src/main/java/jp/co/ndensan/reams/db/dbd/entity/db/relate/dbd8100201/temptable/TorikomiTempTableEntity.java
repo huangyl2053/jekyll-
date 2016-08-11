@@ -28,6 +28,7 @@ public class TorikomiTempTableEntity extends DbTableEntityBase<TorikomiTempTable
     public static final RString TABLE_NAME = new RString("TorikomiTempTable");
 
     private int dtno;
+    private RString dtrekodoKubun;
     private RString dtshichosonCode;
     private RString dtDTnennkinnHokennshaCode;
     private RString dttsuuchiContentCode;
@@ -55,9 +56,8 @@ public class TorikomiTempTableEntity extends DbTableEntityBase<TorikomiTempTable
     private RString dtyobi3;
     private RString dtyobi4;
     private Decimal dtkinngaku1;
-    private RString dtkinngakuYobi1;
-    private RString dtkinngakuYobi2;
+    private Decimal dtkinngakuYobi1;
+    private Decimal dtkinngakuYobi2;
     private RString dtyobi5;
     private RString dtkyousaiNennkinnShoushoKigouNo;
-
 }
