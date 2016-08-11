@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
+ * ビジネス設計_DBCMN81002_受給者訂正連絡票登録（対象者検索）（画面）
  *
- * @author quxiaodong
+ * @reamsid_L DBC-2101-040 quxiaodong
  */
 @lombok.Setter
 @lombok.Getter
