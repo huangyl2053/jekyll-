@@ -275,11 +275,11 @@ public class KyufuGengaku1GoHandler {
             div.getTxtGengakuTekiyoKikanShuryoYMD().setValue(null);
         } else {
             div.getTxtTorokuJokyo().setValue(shiharaiHohoHenko.get登録区分());
+            div.getTxtChoshukenShometsuKikan().setValue(shiharaiHohoHenkoGengaku.get徴収権消滅期間());
+            div.getTxtNofuzumiKikan().setValue(shiharaiHohoHenkoGengaku.get納付済期間());
             div.getTxtKyufugakuGengakuKikan().setValue(get給付額減額期間(div.getTxtChoshukenShometsuKikan().getValue(), div.getTxtNofuzumiKikan().getValue()));
             div.getTxtGengakuTekiyoKikanKaishiYMD().setValue(shiharaiHohoHenkoGengaku.get確定減額期間開始年月日());
             div.getTxtGengakuTekiyoKikanShuryoYMD().setValue(shiharaiHohoHenkoGengaku.get確定減額期間終了年月日());
-            div.getTxtChoshukenShometsuKikan().setValue(shiharaiHohoHenkoGengaku.get徴収権消滅期間());
-            div.getTxtNofuzumiKikan().setValue(shiharaiHohoHenkoGengaku.get納付済期間());
         }
         if (div.getKey_Button().equals(_給付額減額)) {
             給付額減額_setValue(shiharaiHohoHenko, shiharaiHohoHenkoGengaku);
