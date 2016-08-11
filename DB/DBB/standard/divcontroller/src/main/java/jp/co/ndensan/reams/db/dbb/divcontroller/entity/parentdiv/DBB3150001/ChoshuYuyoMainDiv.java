@@ -7,16 +7,23 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3150001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 
 /**
- * ChoshuYuyoMain のクラスファイル 
- * 
- * @author 自動生成
+ * ChoshuYuyoMain のクラスファイル
+ *
+ * @reamsid_L DBB-1680-010 gongliang
  */
 public class ChoshuYuyoMainDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -124,17 +131,17 @@ public class ChoshuYuyoMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTorikeshiYMD(TextBoxDate txtTorikeshiYMD) {
+    public void setTxtTorikeshiYMD(TextBoxDate txtTorikeshiYMD) {
         this.getTblChoshuYuyo().getTorikeshiJoho().setTxtTorikeshiYMD(txtTorikeshiYMD);
     }
 
     @JsonIgnore
-    public Button getBtnTorikeshiShurui() {
+    public ButtonDialog getBtnTorikeshiShurui() {
         return this.getTblChoshuYuyo().getTorikeshiJoho().getBtnTorikeshiShurui();
     }
 
     @JsonIgnore
-    public void  setBtnTorikeshiShurui(Button btnTorikeshiShurui) {
+    public void setBtnTorikeshiShurui(ButtonDialog btnTorikeshiShurui) {
         this.getTblChoshuYuyo().getTorikeshiJoho().setBtnTorikeshiShurui(btnTorikeshiShurui);
     }
 
@@ -144,7 +151,7 @@ public class ChoshuYuyoMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTorikeshiShurui(TextBox txtTorikeshiShurui) {
+    public void setTxtTorikeshiShurui(TextBox txtTorikeshiShurui) {
         this.getTblChoshuYuyo().getTorikeshiJoho().setTxtTorikeshiShurui(txtTorikeshiShurui);
     }
 
@@ -154,7 +161,7 @@ public class ChoshuYuyoMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTorikeshiRiyu(TextBoxMultiLine txtTorikeshiRiyu) {
+    public void setTxtTorikeshiRiyu(TextBoxMultiLine txtTorikeshiRiyu) {
         this.getTblChoshuYuyo().getTorikeshiJoho().setTxtTorikeshiRiyu(txtTorikeshiRiyu);
     }
 
@@ -164,22 +171,22 @@ public class ChoshuYuyoMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtChoteiNendo() {
+    public TextBoxDate getTxtChoteiNendo() {
         return this.getTblChoshuYuyo().getShinseiJoho().getTxtChoteiNendo();
     }
 
     @JsonIgnore
-    public void  setTxtChoteiNendo(TextBox txtChoteiNendo) {
+    public void setTxtChoteiNendo(TextBoxDate txtChoteiNendo) {
         this.getTblChoshuYuyo().getShinseiJoho().setTxtChoteiNendo(txtChoteiNendo);
     }
 
     @JsonIgnore
-    public TextBox getTxtFukaNendo() {
+    public TextBoxDate getTxtFukaNendo() {
         return this.getTblChoshuYuyo().getShinseiJoho().getTxtFukaNendo();
     }
 
     @JsonIgnore
-    public void  setTxtFukaNendo(TextBox txtFukaNendo) {
+    public void setTxtFukaNendo(TextBoxDate txtFukaNendo) {
         this.getTblChoshuYuyo().getShinseiJoho().setTxtFukaNendo(txtFukaNendo);
     }
 
@@ -189,17 +196,17 @@ public class ChoshuYuyoMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShinseiYMD(TextBoxDate txtShinseiYMD) {
+    public void setTxtShinseiYMD(TextBoxDate txtShinseiYMD) {
         this.getTblChoshuYuyo().getShinseiJoho().setTxtShinseiYMD(txtShinseiYMD);
     }
 
     @JsonIgnore
-    public Button getBtnYuyoShurui() {
+    public ButtonDialog getBtnYuyoShurui() {
         return this.getTblChoshuYuyo().getShinseiJoho().getBtnYuyoShurui();
     }
 
     @JsonIgnore
-    public void  setBtnYuyoShurui(Button btnYuyoShurui) {
+    public void setBtnYuyoShurui(ButtonDialog btnYuyoShurui) {
         this.getTblChoshuYuyo().getShinseiJoho().setBtnYuyoShurui(btnYuyoShurui);
     }
 
@@ -209,7 +216,7 @@ public class ChoshuYuyoMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtYuyoShurui(TextBox txtYuyoShurui) {
+    public void setTxtYuyoShurui(TextBox txtYuyoShurui) {
         this.getTblChoshuYuyo().getShinseiJoho().setTxtYuyoShurui(txtYuyoShurui);
     }
 
@@ -219,7 +226,7 @@ public class ChoshuYuyoMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShinseiRiyu(TextBoxMultiLine txtShinseiRiyu) {
+    public void setTxtShinseiRiyu(TextBoxMultiLine txtShinseiRiyu) {
         this.getTblChoshuYuyo().getShinseiJoho().setTxtShinseiRiyu(txtShinseiRiyu);
     }
 
@@ -234,7 +241,7 @@ public class ChoshuYuyoMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKetteiYMD(TextBoxDate txtKetteiYMD) {
+    public void setTxtKetteiYMD(TextBoxDate txtKetteiYMD) {
         this.getTblChoshuYuyo().getKetteiJoho().setTxtKetteiYMD(txtKetteiYMD);
     }
 
@@ -244,7 +251,7 @@ public class ChoshuYuyoMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadKetteiKubun(RadioButton radKetteiKubun) {
+    public void setRadKetteiKubun(RadioButton radKetteiKubun) {
         this.getTblChoshuYuyo().getKetteiJoho().setRadKetteiKubun(radKetteiKubun);
     }
 
@@ -254,7 +261,7 @@ public class ChoshuYuyoMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKetteiRiyu(TextBoxMultiLine txtKetteiRiyu) {
+    public void setTxtKetteiRiyu(TextBoxMultiLine txtKetteiRiyu) {
         this.getTblChoshuYuyo().getKetteiJoho().setTxtKetteiRiyu(txtKetteiRiyu);
     }
 
@@ -269,7 +276,7 @@ public class ChoshuYuyoMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setFuchoTablePanel(FuchoTablePanelDiv FuchoTablePanel) {
+    public void setFuchoTablePanel(FuchoTablePanelDiv FuchoTablePanel) {
         this.getTblChoshuYuyo().getKiwarigaku().setFuchoTablePanel(FuchoTablePanel);
     }
 
@@ -309,8 +316,48 @@ public class ChoshuYuyoMainDiv extends Panel {
     }
 
     @JsonIgnore
+    public Label getLblFuchoKi13() {
+        return this.getTblChoshuYuyo().getKiwarigaku().getFuchoTablePanel().getLblFuchoKi13();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNofuGaku13() {
+        return this.getTblChoshuYuyo().getKiwarigaku().getFuchoTablePanel().getLblFuchoNofuGaku13();
+    }
+
+    @JsonIgnore
+    public Label getLblYuyoKikanKaishi13() {
+        return this.getTblChoshuYuyo().getKiwarigaku().getFuchoTablePanel().getLblYuyoKikanKaishi13();
+    }
+
+    @JsonIgnore
+    public Label getLblYuyoKikanShuryo13() {
+        return this.getTblChoshuYuyo().getKiwarigaku().getFuchoTablePanel().getLblYuyoKikanShuryo13();
+    }
+
+    @JsonIgnore
     public Label getLblFuchoTsuki5Gatsu() {
         return this.getTblChoshuYuyo().getKiwarigaku().getFuchoTablePanel().getLblFuchoTsuki5Gatsu();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoKi14() {
+        return this.getTblChoshuYuyo().getKiwarigaku().getFuchoTablePanel().getLblFuchoKi14();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNofuGaku14() {
+        return this.getTblChoshuYuyo().getKiwarigaku().getFuchoTablePanel().getLblFuchoNofuGaku14();
+    }
+
+    @JsonIgnore
+    public Label getLblYuyoKikanKaishi14() {
+        return this.getTblChoshuYuyo().getKiwarigaku().getFuchoTablePanel().getLblYuyoKikanKaishi14();
+    }
+
+    @JsonIgnore
+    public Label getLblYuyoKikanShuryo14() {
+        return this.getTblChoshuYuyo().getKiwarigaku().getFuchoTablePanel().getLblYuyoKikanShuryo14();
     }
 
     @JsonIgnore
@@ -569,8 +616,48 @@ public class ChoshuYuyoMainDiv extends Panel {
     }
 
     @JsonIgnore
+    public Label getLblFuchoKi11() {
+        return this.getTblChoshuYuyo().getKiwarigaku().getFuchoTablePanel().getLblFuchoKi11();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNofuGaku11() {
+        return this.getTblChoshuYuyo().getKiwarigaku().getFuchoTablePanel().getLblFuchoNofuGaku11();
+    }
+
+    @JsonIgnore
+    public Label getLblYuyoKikanKaishi11() {
+        return this.getTblChoshuYuyo().getKiwarigaku().getFuchoTablePanel().getLblYuyoKikanKaishi11();
+    }
+
+    @JsonIgnore
+    public Label getLblYuyoKikanShuryo11() {
+        return this.getTblChoshuYuyo().getKiwarigaku().getFuchoTablePanel().getLblYuyoKikanShuryo11();
+    }
+
+    @JsonIgnore
     public Label getLblFuchoTsuki5Gatsu2() {
         return this.getTblChoshuYuyo().getKiwarigaku().getFuchoTablePanel().getLblFuchoTsuki5Gatsu2();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoKi12() {
+        return this.getTblChoshuYuyo().getKiwarigaku().getFuchoTablePanel().getLblFuchoKi12();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNofuGaku12() {
+        return this.getTblChoshuYuyo().getKiwarigaku().getFuchoTablePanel().getLblFuchoNofuGaku12();
+    }
+
+    @JsonIgnore
+    public Label getLblYuyoKikanKaishi12() {
+        return this.getTblChoshuYuyo().getKiwarigaku().getFuchoTablePanel().getLblYuyoKikanKaishi12();
+    }
+
+    @JsonIgnore
+    public Label getLblYuyoKikanShuryo12() {
+        return this.getTblChoshuYuyo().getKiwarigaku().getFuchoTablePanel().getLblYuyoKikanShuryo12();
     }
 
     @JsonIgnore
