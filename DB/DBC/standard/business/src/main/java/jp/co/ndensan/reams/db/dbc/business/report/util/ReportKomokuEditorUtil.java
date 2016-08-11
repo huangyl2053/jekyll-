@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.util;
 
-import java.text.DecimalFormat;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -18,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 帳票用項目の編集クラスです。
@@ -25,8 +25,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  * @reamsid_L DBC-4770-040 zhujun
  */
 public class ReportKomokuEditorUtil {
-
-    private static final DecimalFormat 金額_1 = new DecimalFormat("###,###,###,##9");
 
     /**
      * 氏名カナの変換のメソッドです。
@@ -110,7 +108,6 @@ public class ReportKomokuEditorUtil {
         if (decimal == null) {
             return RString.EMPTY;
         }
-        return new RString(金額_1.format(decimal));
+        return DecimalFormatter.toコンマ区切りRString(decimal, 0);
     }
-
 }
