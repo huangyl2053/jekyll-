@@ -6,30 +6,23 @@
 package jp.co.ndensan.reams.db.dba.workflowcontroller.nenreitotatsushikakuido;
 
 import jp.co.ndensan.reams.db.dba.definition.batchprm.nenreitotatsushikakuido.NenreitotatsuShikakuIdoBatchFlowParameter;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
- * 65歳年齢到達資格異動のワークフロー
+ * 65歳年齢到達資格異動バッチパラメータ生成する処理クラス
  *
  * @author n8389
  */
-public class DBAWFBC010 {
+public class DBAWFBC010 extends FlowParameters {
 
     /**
-     * 65歳年齢到達資格異動のワークフロー
+     * 65歳年齢到達資格異動バッチパラメータ生成する処理メソッド
      *
-     * @param flowparam
-     * @return nenreitotatsuShikakuIdoParameter
+     * @param flowparam フローパラメータ
+     * @return nenreitotatsuShikakuIdoParameter バッチパラメータクラス
      */
     public NenreitotatsuShikakuIdoBatchFlowParameter createBPForNenreitotatsuShikakuId(FlowParameters flowparam) {
         NenreitotatsuShikakuIdoBatchFlowParameter nenreitotatsuShikakuIdoParameter = new NenreitotatsuShikakuIdoBatchFlowParameter();
-
-        // 開始日
-        nenreitotatsuShikakuIdoParameter.setKaishiYMD(flowparam.get(new RString("tableName"), FlexibleDate.class));
-        // 終了日
-        nenreitotatsuShikakuIdoParameter.setShuryoYMD(flowparam.get(new RString("tableName"), FlexibleDate.class));
 
         return nenreitotatsuShikakuIdoParameter;
     }
