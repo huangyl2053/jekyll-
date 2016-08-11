@@ -91,13 +91,13 @@ public class KogakuJigyoShikyuShinseishoYuchoEditor implements IKogakuJigyoShiky
             source.telNo = 帳票出力対象データ.getShinseishaTelNoChohyo().getColumnValue();
         }
         if (帳票出力対象データ.getShoKisaiHokenshaNoChohyo() != null) {
-            source.hokenshaNo = 帳票出力対象データ.getShoKisaiHokenshaNoChohyo().value();
+            source.hokenshaNo = 帳票出力対象データ.getShoKisaiHokenshaNoChohyo().getColumnValue();
         }
         if (帳票出力対象データ.getHihokenshaNoChohyo() != null) {
-            source.hihokenshaNo = 帳票出力対象データ.getHihokenshaNoChohyo().value();
+            source.hihokenshaNo = 帳票出力対象データ.getHihokenshaNoChohyo().getColumnValue();
         }
         if (帳票出力対象データ.getKojinNo() != null) {
-            source.kojinNo = 帳票出力対象データ.getKojinNo().value();
+            source.kojinNo = 帳票出力対象データ.getKojinNo().getColumnValue();
         }
         source.ninshoshaYakushokuMei = 認証者役職名;
         source.chuiTitle = attion;
