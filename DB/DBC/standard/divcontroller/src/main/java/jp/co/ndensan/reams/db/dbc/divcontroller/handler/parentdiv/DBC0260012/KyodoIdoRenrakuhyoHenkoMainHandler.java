@@ -289,7 +289,7 @@ public class KyodoIdoRenrakuhyoHenkoMainHandler {
             boolean is償還送付情報 = handler.is償還送付情報変更あり(初期受給者異動情報, entity, 償還_活性);
             boolean is高額送付情報 = handler.is高額送付情報変更あり(初期受給者異動情報, entity, 高額_活性);
             save訂正区分_修正(entity, 共通項目Entity, 被保険者番号, チェック状態, is基本送付情報, is償還送付情報,
-                    is高額送付情報, 基本_履歴番号, 償還_履歴番号, 高額_履歴番号, 訂正区分, 訂正年月日);
+                    is高額送付情報, 基本_履歴番号, 償還_履歴番号, 高額_履歴番号, 区分, 訂正年月日);
         } else if (削除KEY.equals(訂正区分)) {
             save訂正区分_削除(entity, is基本送付_削除, is償還送付_削除, is高額送付_削除, 訂正年月日, 区分);
         }

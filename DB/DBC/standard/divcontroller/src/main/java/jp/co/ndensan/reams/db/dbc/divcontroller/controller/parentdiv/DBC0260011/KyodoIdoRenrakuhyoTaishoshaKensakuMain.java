@@ -107,6 +107,8 @@ public class KyodoIdoRenrakuhyoTaishoshaKensakuMain {
         if (対象者一覧情報List == null || 対象者一覧情報List.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         } else if (対象者一覧情報List.size() == 1) {
+            div.getKyodoIdoRenrakuhyoHenkoResult().getCcdTaishoshaIchiran().initialize(
+                    メニューID, 被保険者番号, 異動日From, 異動日To, 表示モード, 削除データ, 対象者一覧情報List);
             KyodoJukyushaTaishoshaEntity 対象者一覧 = 対象者一覧情報List.get(NUM_ZERO);
             ViewStateHolder.put(ViewStateKeys.一覧検索キー, 対象者一覧);
             return ResponseData.of(div).forwardWithEventName(DBC0260011TransitionEventName.選択).respond();
