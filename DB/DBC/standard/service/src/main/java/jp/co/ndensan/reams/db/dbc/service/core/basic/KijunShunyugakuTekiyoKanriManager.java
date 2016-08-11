@@ -14,7 +14,9 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3116KijunShunyugakuTek
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -103,5 +105,29 @@ public class KijunShunyugakuTekiyoKanriManager {
             return false;
         }
         return 1 == dac.save(基準収入額適用管理.toEntity());
+    }
+
+    /**
+     * 基準収入額適用管理{@link KijunShunyugakuTekiyoKanri}を保存します。
+     *
+     * @param 世帯コード SetaiCode
+     * @param 年度 FlexibleYear
+     * @param 履歴番号 int
+     * @param 被保険者番号 HihokenshaNo
+     * @param 作成日 FlexibleDate
+     */
+    @Transaction
+    public void update決定通知書発行日(SetaiCode 世帯コード, FlexibleYear 年度, int 履歴番号, HihokenshaNo 被保険者番号, FlexibleDate 作成日) {
+        requireNonNull(世帯コード, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯コード"));
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(作成日, UrSystemErrorMessages.値がnull.getReplacedMessage("作成日"));
+        DbT3116KijunShunyugakuTekiyoKanriEntity entity = dac.selectByKey(世帯コード, 年度, 履歴番号, 被保険者番号);
+        if (entity != null) {
+            entity.setKetteiTsuchishoHakkoYMD(作成日);
+            entity.setState(EntityDataState.Modified);
+            dac.save(entity);
+        }
     }
 }

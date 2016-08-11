@@ -197,7 +197,8 @@ public class TokkiText1A4Business {
         if (!テキスト全面イメージ.equals(特記パターン)) {
             for (DbT5205NinteichosahyoTokkijikoEntity entity : 特記情報List) {
                 TokkiA4Entity 短冊情報 = new TokkiA4Entity();
-                短冊情報.set事項番号(entity.getNinteichosaTokkijikoNo());
+                短冊情報.set事項番号(get項目番号(kyotsuEntity.getKoroshoIfShikibetsuCode(),
+                        entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban()));
                 短冊情報.set項目名称(get項目名称(kyotsuEntity.getKoroshoIfShikibetsuCode(), entity.getNinteichosaTokkijikoNo()));
                 if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.getTokkijikoTextImageKubun())) {
                     短冊情報.set特記事項テキスト_イメージ(entity.getTokkiJiko());
@@ -427,6 +428,26 @@ public class TokkiText1A4Business {
             return NinteichosaKomoku09B.getAllBy調査特記事項番(調査特記事項番号).get名称();
         }
         return RString.EMPTY;
+    }
+
+    private RString get項目番号(Code 厚労省IF識別コード, RString 調査特記事項番号, int 連番) {
+        RStringBuilder 項目番号 = new RStringBuilder();
+        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード.value())) {
+            項目番号.append(NinteichosaKomoku99A.getAllBy調査特記事項番(調査特記事項番号).get特記事項番号());
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード.value())) {
+            項目番号.append(NinteichosaKomoku02A.getAllBy調査特記事項番(調査特記事項番号).get特記事項番号());
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード.value())) {
+            項目番号.append(NinteichosaKomoku06A.getAllBy調査特記事項番(調査特記事項番号).get特記事項番号());
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード.value())) {
+            項目番号.append(NinteichosaKomoku09A.getAllBy調査特記事項番(調査特記事項番号).get特記事項番号());
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード.value())) {
+            項目番号.append(NinteichosaKomoku09B.getAllBy調査特記事項番(調査特記事項番号).get特記事項番号());
+        }
+        if (!RString.isNullOrEmpty(項目番号.toRString())) {
+            項目番号.append(ハイフン);
+            項目番号.append(連番);
+        }
+        return 項目番号.toRString();
     }
 
     private RString getファイル名By特記番号(RString 特記番号) {

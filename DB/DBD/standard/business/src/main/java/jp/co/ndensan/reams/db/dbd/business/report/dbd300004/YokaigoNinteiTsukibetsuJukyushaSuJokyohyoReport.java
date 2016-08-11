@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteitsukibetsujukyus
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd300004.YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -26,6 +27,7 @@ public final class YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReport extends
     private final RString 年齢;
     private final RString 地区;
     private final Code 集計単位;
+    private final FlexibleYear 年度;
     private final List<YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity> 受給状況Entityリスト;
 
     /**
@@ -35,20 +37,22 @@ public final class YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReport extends
      * @param 年齢 RString
      * @param 地区 RString
      * @param 集計単位 Code
+     * @param 年度 FlexibleYear
      * @param 受給状況Entityリスト List<YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity>
      * @return 要介護認定月別受給者数状況表（統計表）
      */
-    public static YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReport createReport(FlexibleDate 基準日, RString 年齢,
-            RString 地区, Code 集計単位, List<YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity> 受給状況Entityリスト) {
-        return new YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReport(基準日, 年齢, 地区, 集計単位, 受給状況Entityリスト);
+    public static YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReport createReport(FlexibleDate 基準日, RString 年齢, RString 地区,
+            Code 集計単位, FlexibleYear 年度, List<YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity> 受給状況Entityリスト) {
+        return new YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReport(基準日, 年齢, 地区, 集計単位, 年度, 受給状況Entityリスト);
     }
 
     private YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReport(FlexibleDate 基準日, RString 年齢, RString 地区,
-            Code 集計単位, List<YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity> 受給状況Entityリスト) {
+            Code 集計単位, FlexibleYear 年度, List<YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity> 受給状況Entityリスト) {
         this.基準日 = 基準日;
         this.年齢 = 年齢;
         this.地区 = 地区;
         this.集計単位 = 集計単位;
+        this.年度 = 年度;
         this.受給状況Entityリスト = 受給状況Entityリスト;
     }
 
@@ -61,7 +65,7 @@ public final class YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReport extends
     public void writeBy(ReportSourceWriter<YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource> writer) {
         for (int index = 0; index < 受給状況Entityリスト.size(); index++) {
             IYokaigoNinteiTsukibetsuJukyushaSuJokyohyoEditor bodyEditor
-                    = new YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEditor(基準日, 年齢, 地区, 集計単位, 受給状況Entityリスト, index);
+                    = new YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEditor(基準日, 年齢, 地区, 集計単位, 年度, 受給状況Entityリスト, index);
             IYokaigoNinteiTsukibetsuJukyushaSuJokyohyoBuilder builder = new YokaigoNinteiTsukibetsuJukyushaSuJokyohyoBuilder(bodyEditor);
             writer.writeLine(builder);
         }

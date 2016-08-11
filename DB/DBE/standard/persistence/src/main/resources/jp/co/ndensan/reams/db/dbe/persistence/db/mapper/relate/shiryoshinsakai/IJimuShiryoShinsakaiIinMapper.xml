@@ -421,7 +421,8 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT
                 dbt5207."serviceJokyo" ,
-                dbt5207."remban" 
+                dbt5207."remban" ,
+        dbt5207."koroshoIfShikibetsuCode" 
             FROM
                     rgdb."DbT5207NinteichosahyoServiceJokyo" AS dbt5207
             WHERE
@@ -435,7 +436,8 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT
                     dbt5207."serviceJokyo" ,
-                    dbt5207."remban" 
+                    dbt5207."remban" ,
+        dbt5207."koroshoIfShikibetsuCode" 
             FROM
                     rgdb."DbT5207NinteichosahyoServiceJokyo" AS dbt5207
             WHERE
@@ -447,7 +449,8 @@
     <select id="get状況フラグ" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
             SELECT
-                    dbt5208."serviceJokyoFlag" 
+                    dbt5208."serviceJokyoFlag" ,
+        dbt5208."koroshoIfShikibetsuCode" 
             FROM
                     rgdb."DbT5208NinteichosahyoServiceJokyoFlag" AS dbt5208
             WHERE

@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
@@ -282,6 +283,7 @@ public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<Kos
         entity.setNinteichosaKanryoYMD(FlexibleDate.EMPTY);
         entity.setNinteichosaIraiKanryoYMD(FlexibleDate.EMPTY);
         entity.setNinteichosaKanryoYMD(FlexibleDate.EMPTY);
+        entity.setIkenshoSakuseiIraiKanryoYMD(FlexibleDate.EMPTY);
         return entity;
     }
 
@@ -297,9 +299,9 @@ public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<Kos
             entity.setKijunYMD(FlexibleDate.EMPTY);
             entity.setKijunTimestamp(YMDHMS.now());
             entity.setTaishoKaishiYMD(FlexibleDate.EMPTY);
-            entity.setTaishoKaishiTimestamp(YMDHMS.now().plusMonth(parameter.get対象月().getMonthValue()));
+            entity.setTaishoKaishiTimestamp(new YMDHMS(parameter.get対象月().toString() + RDateTime.now().format西暦("ddHHmmss")));
             entity.setTaishoShuryoYMD(FlexibleDate.EMPTY);
-            entity.setTaishoShuryoTimestamp(YMDHMS.now().plusMonth(parameter.get対象月().getMonthValue()));
+            entity.setTaishoShuryoTimestamp(new YMDHMS(parameter.get対象月().toString() + RDateTime.now().format西暦("ddHHmmss")));
             return entity;
         } else {
             DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
@@ -312,9 +314,9 @@ public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<Kos
             entity.setKijunYMD(FlexibleDate.EMPTY);
             entity.setKijunTimestamp(YMDHMS.now());
             entity.setTaishoKaishiYMD(FlexibleDate.EMPTY);
-            entity.setTaishoKaishiTimestamp(YMDHMS.now().plusDay(parameter.get有効期間終了日From().getDayValue()));
+            entity.setTaishoKaishiTimestamp(new YMDHMS(parameter.get有効期間終了日From().toString() + RDateTime.now().format西暦("HHmmss")));
             entity.setTaishoShuryoYMD(FlexibleDate.EMPTY);
-            entity.setTaishoKaishiTimestamp(YMDHMS.now().plusDay(parameter.get有効期間終了日To().getDayValue()));
+            entity.setTaishoKaishiTimestamp(new YMDHMS(parameter.get有効期間終了日To().toString() + RDateTime.now().format西暦("HHmmss")));
             return entity;
         }
     }

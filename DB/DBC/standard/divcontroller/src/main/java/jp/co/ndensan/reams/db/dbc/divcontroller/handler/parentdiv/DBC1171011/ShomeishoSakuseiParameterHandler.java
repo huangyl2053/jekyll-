@@ -32,6 +32,7 @@ public class ShomeishoSakuseiParameterHandler {
     private static final RString TYOUHYOUID_帳票出力順共有子DIV = new RString("DBC200035_GassanJikofutangakushomeishoHakkoIchiran");
     private static final RString KEY_自己負担額計算括からの情報を元に作成RAD = new RString("jikoFutangaku");
     private static final RString KEY_国保連からの情報を元に作成RAD = new RString("kokuhoren");
+    private static final RString KEY_未発行分のみ = new RString("3");
     private final ShomeishoSakuseiParameterDiv div;
 
     /**
@@ -83,6 +84,7 @@ public class ShomeishoSakuseiParameterHandler {
             keyValueList.add(new KeyValueDataSource(insho.getコード(), insho.get名称()));
         }
         div.getDdlInsho().setDataSource(keyValueList);
+        div.getDdlInsho().setSelectedKey(KEY_未発行分のみ);
         onLoad状態を設定する();
     }
 

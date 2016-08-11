@@ -77,8 +77,8 @@ public class HanyoRisutoJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisu
     private static final RString HOKENSHA = new RString("保険者：");
     private static final RString KIZYUNNICHI = new RString("基準日：");
     private static final RString CHOKINNOMI = new RString("対象データ：直近のみ");
-    private static final RString SHIKIBETSUCODE = new RString("識別コード");
-    private static final RString RIREKIBANGO = new RString("履歴番号");
+    private static final RString SHIKIBETSUCODE = new RString("二次予防事業対象者_識別コード");
+    private static final RString RIREKIBANGO = new RString("二次予防事業対象者_履歴番号");
     private static final RString CHIKI_1 = new RString("地区１");
     private static final RString CHIKI_2 = new RString("地区２");
     private static final RString CHIKI_3 = new RString("地区３");

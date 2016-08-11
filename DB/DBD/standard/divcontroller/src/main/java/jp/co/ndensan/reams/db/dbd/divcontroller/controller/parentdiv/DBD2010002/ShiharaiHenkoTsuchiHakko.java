@@ -205,7 +205,7 @@ public class ShiharaiHenkoTsuchiHakko {
         if (div.getYokokuTsuchisho().isIsPublish()) {
             文書番号リスト.set予告文書番号(div.getYokokuTsuchisho().getCcdYokokuTsuchishoBunshoNo().get文書番号());
             発行日リスト.set予告通知書発行年月日(div.getYokokuTsuchisho().getTxtYokokuTsuchishoHakkoDate().getValue());
-            if (帳票情報.get管理区分() != KanriKubun.ニ号差止.code()) {
+            if (!帳票情報.get管理区分().equals(KanriKubun.ニ号差止.code())) {
                 帳票タイプリスト.add(ShiharaiHohoHenkoTsuchisho.支払方法変更予告通知書.get名称());
             } else {
                 帳票タイプリスト.add(ShiharaiHohoHenkoTsuchisho.差止予告通知書_２号用.get名称());
@@ -219,7 +219,7 @@ public class ShiharaiHenkoTsuchiHakko {
         if (div.getSashitomeTsuchisho().isIsPublish()) {
             文書番号リスト.set差止文書番号(div.getSashitomeTsuchisho().getCcdSashitomeTsuchishoBunshoNo().get文書番号());
             発行日リスト.set差止通知書発行年月日(div.getSashitomeTsuchisho().getTxtSashitomeTsuchishoHakkoDate().getValue());
-            if (帳票情報.get管理区分() != KanriKubun.ニ号差止.code()) {
+            if (!帳票情報.get管理区分().equals(KanriKubun.ニ号差止.code())) {
                 帳票タイプリスト.add(ShiharaiHohoHenkoTsuchisho.支払一時差止通知書.get名称());
             } else {
                 帳票タイプリスト.add(ShiharaiHohoHenkoTsuchisho.差止処分通知書_２号用.get名称());

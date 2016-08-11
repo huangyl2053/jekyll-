@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120100;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.service.core.shokanfushikyuketteiin.ShokanbaraiFusikyuKetteiJohoTorikomiDataHenshu;
 import jp.co.ndensan.reams.uz.uza.batch.process.InputParameter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -33,18 +32,14 @@ public class ShokanFushikyuDbUpdateProcess extends SimpleBatchProcessBase {
         PARAMETER_FILENAME = new RString("fileName");
     }
 
-    private ShokanbaraiFusikyuKetteiJohoTorikomiDataHenshu henshuService;
-
     InputParameter<FlexibleYearMonth> shoriYM;
     InputParameter<List> fileName;
 
     @Override
     protected void beforeExecute() {
-        henshuService = new ShokanbaraiFusikyuKetteiJohoTorikomiDataHenshu();
     }
 
     @Override
     protected void process() {
-        henshuService.updateShokanbaraiFusikyuKetteiJoho(shoriYM.getValue(), fileName.getValue());
     }
 }

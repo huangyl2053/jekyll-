@@ -9,8 +9,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoA3ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -18,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 委員用一次判定結果票A3のEditorです。
@@ -154,19 +151,12 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
         source.sabisuKaisu20 = item.getSabisuKaisu20();
         source.sabisuKaisu21 = item.getSabisuKaisu21();
         source = editSource1(source);
-        if (テキスト.equals(item.get概況調査テキスト_イメージ区分())) {
-            source.shisetsuNameTxit = item.get施設名テキスト();
-            source.shisetsuAddressTxit = item.get住所テキスト();
-            source.shisetsuTelTxit = item.get電話番号テキスト();
-        } else if (イメージ.equals(item.get概況調査テキスト_イメージ区分())) {
-            source.imgShisetsuName = item.get施設名イメージ();
-            source.imgShisetsuAddress = item.get住所イメージ();
-            source.imgShisetsuTel = item.get電話番号イメージ();
-        }
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
-        if (!RString.isNullOrEmpty(item.get申請書管理番号())) {
-            source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
-        }
+        source.shisetsuNameTxit = item.get施設名テキスト();
+        source.shisetsuAddressTxit = item.get住所テキスト();
+        source.shisetsuTelTxit = item.get電話番号テキスト();
+        source.imgShisetsuName = item.get施設名イメージ();
+        source.imgShisetsuAddress = item.get住所イメージ();
+        source.imgShisetsuTel = item.get電話番号イメージ();
         return source;
     }
 

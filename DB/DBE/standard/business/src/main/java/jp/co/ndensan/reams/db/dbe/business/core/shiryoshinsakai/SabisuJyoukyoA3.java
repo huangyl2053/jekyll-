@@ -42,7 +42,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNi
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.JotaiAnteiseiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.SuiteiKyufuKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku01;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku03;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku04;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku05;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku06;
@@ -77,8 +76,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  */
 public class SabisuJyoukyoA3 {
 
-    private static final RString 段階悪化 = new RString("▲");
-    private static final RString 段階改善 = new RString("▽");
     private static final RString 記号 = new RString("+");
     private static final RString 月間 = new RString("月間");
     private static final Code A_99 = new Code("99A");
@@ -123,16 +120,16 @@ public class SabisuJyoukyoA3 {
      * @param 予防給付 予防給付
      * @param 介護給付 介護給付
      * @param サービス状況フラグ サービス状況フラグ
-     * @param 厚労省IF識別コード 厚労省IF識別コード
      * @param 共通情報 ShinsakaiSiryoKyotsuEntity
      */
     public void setサービスの状況(ItiziHanteiEntity entity, IchijihanteikekkahyoA3Entity 項目,
             List<DbT5207NinteichosahyoServiceJokyoEntity> 予防給付, List<DbT5207NinteichosahyoServiceJokyoEntity> 介護給付,
-            DbT5208NinteichosahyoServiceJokyoFlagEntity サービス状況フラグ, Code 厚労省IF識別コード, ShinsakaiSiryoKyotsuEntity 共通情報) {
+            DbT5208NinteichosahyoServiceJokyoFlagEntity サービス状況フラグ, ShinsakaiSiryoKyotsuEntity 共通情報) {
         RStringBuilder builder;
         if (予防給付サービス.equals(entity.getServiceKubunCode())) {
             項目.setSabisuKubun(new RString("予防給付・総合事業"));
             for (DbT5207NinteichosahyoServiceJokyoEntity dbt5207Entity : 予防給付) {
+                Code 厚労省IF識別コード = dbt5207Entity.getKoroshoIfShikibetsuCode();
                 switch (dbt5207Entity.getRemban()) {
                     case 連番_1:
                         builder = new RStringBuilder();
@@ -201,6 +198,7 @@ public class SabisuJyoukyoA3 {
         } else if (介護給付サービス.equals(entity.getServiceKubunCode())) {
             項目.setSabisuKubun(new RString("介護給付"));
             for (DbT5207NinteichosahyoServiceJokyoEntity dbt5207Entity : 介護給付) {
+                Code 厚労省IF識別コード = dbt5207Entity.getKoroshoIfShikibetsuCode();
                 switch (dbt5207Entity.getRemban()) {
                     case 連番_1:
                         builder = new RStringBuilder();
@@ -1770,125 +1768,5 @@ public class SabisuJyoukyoA3 {
                 return;
             }
         }
-    }
-
-    /**
-     * 日常生活自立度今回結果前回結果設定する。
-     *
-     * @param 今回結果コード 今回結果コード
-     * @param 前回調査結果コード 前回調査結果コード
-     * @param 第２群 第２群
-     */
-    public void set日常生活自立度今回結果前回結果比(RString 今回結果コード, RString 前回調査結果コード, TiyosaKekka 第２群) {
-        if (is日常生活自立度今回前回比１(今回結果コード, 前回調査結果コード) || is日常生活自立度今回前回比２(今回結果コード, 前回調査結果コード)
-                || is日常生活自立度今回前回比３(今回結果コード, 前回調査結果コード) || is日常生活自立度今回前回比４(今回結果コード, 前回調査結果コード)) {
-            第２群.set段階改善フラグ(段階悪化);
-            第２群.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
-        } else if (is日常生活自立度前回今回比１(今回結果コード, 前回調査結果コード) || is日常生活自立度前回今回比２(今回結果コード, 前回調査結果コード)
-                || is日常生活自立度前回今回比３(今回結果コード, 前回調査結果コード) || is日常生活自立度前回今回比４(今回結果コード, 前回調査結果コード)) {
-            第２群.set段階改善フラグ(段階改善);
-            第２群.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
-        } else {
-            第２群.set段階改善フラグ(RString.EMPTY);
-            第２群.set段階改善値(RString.EMPTY);
-        }
-    }
-
-    private boolean is日常生活自立度今回前回比１(RString 今回結果コード, RString 前回調査結果コード) {
-        boolean is今回前回結果 = false;
-        if (IkenKomoku03.M.getコード().equals(今回結果コード) && (IkenKomoku03.Ⅳ.getコード().equals(前回調査結果コード)
-                || IkenKomoku03.Ⅲb.getコード().equals(前回調査結果コード) || IkenKomoku03.Ⅲa.getコード().equals(前回調査結果コード)
-                || IkenKomoku03.Ⅱb.getコード().equals(前回調査結果コード) || IkenKomoku03.Ⅱa.getコード().equals(前回調査結果コード)
-                || IkenKomoku03.Ⅰ.getコード().equals(前回調査結果コード) || IkenKomoku03.自立.getコード().equals(前回調査結果コード))) {
-            is今回前回結果 = true;
-        }
-        return is今回前回結果;
-    }
-
-    private boolean is日常生活自立度今回前回比２(RString 今回結果コード, RString 前回調査結果コード) {
-        boolean is今回前回結果 = false;
-        if (IkenKomoku03.Ⅳ.getコード().equals(今回結果コード) && (IkenKomoku03.Ⅲb.getコード().equals(前回調査結果コード)
-                || IkenKomoku03.Ⅲa.getコード().equals(前回調査結果コード) || IkenKomoku03.Ⅱb.getコード().equals(前回調査結果コード)
-                || IkenKomoku03.Ⅱa.getコード().equals(前回調査結果コード) || IkenKomoku03.Ⅰ.getコード().equals(前回調査結果コード)
-                || IkenKomoku03.自立.getコード().equals(前回調査結果コード))) {
-            is今回前回結果 = true;
-        }
-        return is今回前回結果;
-    }
-
-    private boolean is日常生活自立度今回前回比３(RString 今回結果コード, RString 前回調査結果コード) {
-        boolean is今回前回結果 = false;
-        if ((IkenKomoku03.Ⅲb.getコード().equals(今回結果コード) && (IkenKomoku03.Ⅲa.getコード().equals(前回調査結果コード)
-                || IkenKomoku03.Ⅱb.getコード().equals(前回調査結果コード) || IkenKomoku03.Ⅱa.getコード().equals(前回調査結果コード)
-                || IkenKomoku03.Ⅰ.getコード().equals(前回調査結果コード) || IkenKomoku03.自立.getコード().equals(前回調査結果コード)))
-                || (IkenKomoku03.Ⅲa.getコード().equals(今回結果コード) && (IkenKomoku03.Ⅱb.getコード().equals(前回調査結果コード)
-                || IkenKomoku03.Ⅱa.getコード().equals(前回調査結果コード) || IkenKomoku03.Ⅰ.getコード().equals(前回調査結果コード)
-                || IkenKomoku03.自立.getコード().equals(前回調査結果コード)))) {
-            is今回前回結果 = true;
-        }
-        return is今回前回結果;
-    }
-
-    private boolean is日常生活自立度今回前回比４(RString 今回結果コード, RString 前回調査結果コード) {
-        boolean is今回前回結果 = false;
-        if ((IkenKomoku03.Ⅱb.getコード().equals(今回結果コード) && (IkenKomoku03.Ⅱa.getコード().equals(前回調査結果コード)
-                || IkenKomoku03.Ⅰ.getコード().equals(前回調査結果コード) || IkenKomoku03.自立.getコード().equals(前回調査結果コード)))
-                || (IkenKomoku03.Ⅱa.getコード().equals(今回結果コード) && (IkenKomoku03.Ⅰ.getコード().equals(前回調査結果コード)
-                || IkenKomoku03.自立.getコード().equals(前回調査結果コード))) || (IkenKomoku03.Ⅰ.getコード().equals(今回結果コード)
-                && IkenKomoku03.自立.getコード().equals(前回調査結果コード))) {
-            is今回前回結果 = true;
-        }
-        return is今回前回結果;
-    }
-
-    private boolean is日常生活自立度前回今回比１(RString 今回結果コード, RString 前回調査結果コード) {
-        boolean is前回今回結果 = false;
-        if ((IkenKomoku03.M.getコード().equals(前回調査結果コード) && (IkenKomoku03.Ⅳ.getコード().equals(今回結果コード)
-                || IkenKomoku03.Ⅲb.getコード().equals(今回結果コード) || IkenKomoku03.Ⅲa.getコード().equals(今回結果コード)
-                || IkenKomoku03.Ⅱb.getコード().equals(今回結果コード) || IkenKomoku03.Ⅱa.getコード().equals(今回結果コード)
-                || IkenKomoku03.Ⅰ.getコード().equals(今回結果コード) || IkenKomoku03.自立.getコード().equals(今回結果コード)))) {
-            is前回今回結果 = true;
-        }
-        return is前回今回結果;
-
-    }
-
-    private boolean is日常生活自立度前回今回比２(RString 今回結果コード, RString 前回調査結果コード) {
-        boolean is前回今回結果 = false;
-        if ((IkenKomoku03.Ⅳ.getコード().equals(前回調査結果コード) && (IkenKomoku03.Ⅲb.getコード().equals(今回結果コード)
-                || IkenKomoku03.Ⅲa.getコード().equals(今回結果コード) || IkenKomoku03.Ⅱb.getコード().equals(今回結果コード)
-                || IkenKomoku03.Ⅱa.getコード().equals(今回結果コード) || IkenKomoku03.Ⅰ.getコード().equals(今回結果コード)
-                || IkenKomoku03.自立.getコード().equals(今回結果コード)))) {
-            is前回今回結果 = true;
-        }
-        return is前回今回結果;
-
-    }
-
-    private boolean is日常生活自立度前回今回比３(RString 今回結果コード, RString 前回調査結果コード) {
-        boolean is前回今回結果 = false;
-        if ((IkenKomoku03.Ⅲb.getコード().equals(前回調査結果コード) && (IkenKomoku03.Ⅲa.getコード().equals(今回結果コード)
-                || IkenKomoku03.Ⅱb.getコード().equals(今回結果コード) || IkenKomoku03.Ⅱa.getコード().equals(今回結果コード)
-                || IkenKomoku03.Ⅰ.getコード().equals(今回結果コード) || IkenKomoku03.自立.getコード().equals(今回結果コード)))
-                || (IkenKomoku03.Ⅲa.getコード().equals(前回調査結果コード) && (IkenKomoku03.Ⅱb.getコード().equals(今回結果コード)
-                || IkenKomoku03.Ⅱa.getコード().equals(今回結果コード) || IkenKomoku03.Ⅰ.getコード().equals(今回結果コード)
-                || IkenKomoku03.自立.getコード().equals(今回結果コード)))) {
-            is前回今回結果 = true;
-        }
-        return is前回今回結果;
-
-    }
-
-    private boolean is日常生活自立度前回今回比４(RString 今回結果コード, RString 前回調査結果コード) {
-        boolean is前回今回結果 = false;
-        if ((IkenKomoku03.Ⅱb.getコード().equals(前回調査結果コード) && (IkenKomoku03.Ⅱa.getコード().equals(今回結果コード)
-                || IkenKomoku03.Ⅰ.getコード().equals(今回結果コード) || IkenKomoku03.自立.getコード().equals(今回結果コード)))
-                || (IkenKomoku03.Ⅱa.getコード().equals(前回調査結果コード) && (IkenKomoku03.Ⅰ.getコード().equals(今回結果コード)
-                || IkenKomoku03.自立.getコード().equals(今回結果コード))) || (IkenKomoku03.Ⅰ.getコード().equals(前回調査結果コード)
-                && IkenKomoku03.自立.getコード().equals(今回結果コード))) {
-            is前回今回結果 = true;
-        }
-        return is前回今回結果;
-
     }
 }

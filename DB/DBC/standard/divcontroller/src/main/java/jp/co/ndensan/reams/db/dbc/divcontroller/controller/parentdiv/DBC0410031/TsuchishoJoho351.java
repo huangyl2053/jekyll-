@@ -52,7 +52,7 @@ public class TsuchishoJoho351 {
     public ResponseData<KogakuKyufuKetteiInBatchParameter> onClick_btnExcute(TsuchishoJoho351Div div) {
         KogakuKyufuKetteiInBatchParameter parameter = new KogakuKyufuKetteiInBatchParameter();
         RDate 処理年月 = div.getCcdKokurenJohoTorikomi().get処理年月();
-        long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
+        Long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
         parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toDateString()));
         parameter.setShutsuryokujunId(出力順ID);
         return ResponseData.of(parameter).respond();

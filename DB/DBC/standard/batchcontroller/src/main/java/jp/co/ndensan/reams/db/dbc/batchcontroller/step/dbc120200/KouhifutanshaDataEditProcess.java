@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120200;
 
-import jp.co.ndensan.reams.db.dbc.service.core.saishinsa.SaishinsaKetteiTsuchishoJohoHenshu;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 
 /**
@@ -15,16 +14,15 @@ import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
  */
 public class KouhifutanshaDataEditProcess extends SimpleBatchProcessBase {
 
-    private SaishinsaKetteiTsuchishoJohoHenshu saishinsaFutanshaSvr;
-
+//    private SaishinsaKetteiTsuchishoJohoHenshu saishinsaFutanshaSvr;
     @Override
     protected void beforeExecute() {
-        saishinsaFutanshaSvr = new SaishinsaKetteiTsuchishoJohoHenshu();
+//        saishinsaFutanshaSvr = new SaishinsaKetteiTsuchishoJohoHenshu();
     }
 
     @Override
     protected void process() {
-        saishinsaFutanshaSvr.updateHihokenshaJoho();
+//        saishinsaFutanshaSvr.updateHihokenshaJoho();
     }
 
 }
