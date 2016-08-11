@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishokattokami.FutanWar
 import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishorenchoyoko.FutanWariaiShoRenchoYokoSource;
 
 /**
- * 帳票設計_DBC100065_負担割合証（カット紙）のEditorです。
+ * 帳票設計_DBC100067_負担割合証（連帳・横）のEditorです。
  *
- * @reamsid_L DBC-4990-040 pengxingyi
+ * @reamsid_L DBC-4990-060 pengxingyi
  */
 public class FutanWariaiShoRenchoYokoEditor implements IFutanWariaiShoRenchoYokoEditor {
 
@@ -53,7 +53,7 @@ public class FutanWariaiShoRenchoYokoEditor implements IFutanWariaiShoRenchoYoko
         source.ninshosha_denshiKoin = entity.get電子公印();
         source.renban = entity.get連番();
         source.ocrRenban = entity.getOcr連番();
-        //source.compSofubutsuAtesakiSource = entity.get送付物宛先();
+        source.compSofubutsuAtesakiSource = entity.get送付物宛先();
         return source;
     }
 

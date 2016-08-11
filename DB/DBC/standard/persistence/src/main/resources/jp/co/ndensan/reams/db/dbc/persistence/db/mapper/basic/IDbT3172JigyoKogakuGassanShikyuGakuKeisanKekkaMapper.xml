@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaとDbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntityの単テーブル(追記型)用MapperXMLです。 -->
+<!-- 作者：  -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaMapper">
+    <sql id="allColumns_DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka">
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."hihokenshaNo" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_hihokenshaNo",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."taishoNendo" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_taishoNendo",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."shoKisaiHokenshaNo" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_shoKisaiHokenshaNo",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."shikyuShinseishoSeiriNo" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_shikyuShinseishoSeiriNo",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."rirekiNo" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_rirekiNo",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."hokenSeidoCode" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_hokenSeidoCode",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."jikoFutanSeiriNo" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_jikoFutanSeiriNo",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."taishoKeisanKaishiYMD" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_taishoKeisanKaishiYMD",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."taishoKeisanShuryoYMD" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_taishoKeisanShuryoYMD",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."setaiFutanSogaku" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_setaiFutanSogaku",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."setaiGassanGaku" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_setaiGassanGaku",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."over70_SetaiGassanGaku" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_over70_SetaiGassanGaku",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."shotokuKubun" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_shotokuKubun",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."over70_ShotokuKubun" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_over70_ShotokuKubun",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."santeiKijunGaku" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_santeiKijunGaku",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."over70_SanteiKijyunGaku" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_over70_SanteiKijyunGaku",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."setaiShikyuSogaku" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_setaiShikyuSogaku",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."over70_SetaiShikyuSogaku" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_over70_SetaiShikyuSogaku",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."honninShikyugaku" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_honninShikyugaku",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."over70_honninShikyugaku" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_over70_honninShikyugaku",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."teiShotoku_1_SaiKeisanUmu" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_teiShotoku_1_SaiKeisanUmu",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."biko" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_biko",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."kekkaRenrakusakiYubinNo" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_kekkaRenrakusakiYubinNo",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."kekkaRenrakusakiJusho" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_kekkaRenrakusakiJusho",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."ketteRenrakusakiMeisho1" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_ketteRenrakusakiMeisho1",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."kekkaRenrakusakiMeisho2" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_kekkaRenrakusakiMeisho2",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."tsuchiYMD" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_tsuchiYMD",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."renrakuhyoHakkoshaMei" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_renrakuhyoHakkoshaMei",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."renrakuhyoHakkoshaYubinNo" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_renrakuhyoHakkoshaYubinNo",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."renrakuhyoHakkoshaJusho" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_renrakuhyoHakkoshaJusho",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."toiawasesakiYobinNo" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_toiawasesakiYobinNo",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."toiawasesakiJusho" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_toiawasesakiJusho",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."toiawasesakiMeisho1" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_toiawasesakiMeisho1",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."toiawasesakiMeisho2" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_toiawasesakiMeisho2",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."toiawasesakiTelNo" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_toiawasesakiTelNo",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."over70_FutangakuGokei" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_over70_FutangakuGokei",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."over70_ShikyugakuGokei" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_over70_ShikyugakuGokei",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."under70_FutangakuGokei" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_under70_FutangakuGokei",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."futangakuGokei" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_futangakuGokei",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."under70_ShikyugakuGokei" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_under70_ShikyugakuGokei",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."shikyugakuGokei" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_shikyugakuGokei",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."dataKubun" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_dataKubun",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."uketoriYM" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_uketoriYM",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."sofuYM" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_sofuYM",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."saisoFG" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_saisoFG",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."sikyugakuKeisanKekkaRenrakuhyoSakuseiYMD" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_sikyugakuKeisanKekkaRenrakuhyoSakuseiYMD",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."insertDantaiCd" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_insertDantaiCd",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."insertTimestamp" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_insertTimestamp",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."insertReamsLoginId" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_insertReamsLoginId",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."insertContextId" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_insertContextId",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."isDeleted" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_isDeleted",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."updateCount" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_updateCount",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."lastUpdateTimestamp" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_lastUpdateTimestamp",
+         "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."lastUpdateReamsLoginId" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_lastUpdateReamsLoginId"
+    </sql>
+
+
+    <!--ビューDbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaの項目をDbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntityの項目にマッピングします。-->
+    <resultMap id="resultMap_DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="taishoNendo" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="shoKisaiHokenshaNo" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <id property="shikyuShinseishoSeiriNo" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_shikyuShinseishoSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="rirekiNo" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_rirekiNo" />
+        <result property="hokenSeidoCode" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_hokenSeidoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jikoFutanSeiriNo" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_jikoFutanSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="taishoKeisanKaishiYMD" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_taishoKeisanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="taishoKeisanShuryoYMD" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_taishoKeisanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="setaiFutanSogaku" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_setaiFutanSogaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="setaiGassanGaku" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_setaiGassanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="over70_SetaiGassanGaku" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_over70_SetaiGassanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="shotokuKubun" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_shotokuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="over70_ShotokuKubun" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_over70_ShotokuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="santeiKijunGaku" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_santeiKijunGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="over70_SanteiKijyunGaku" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_over70_SanteiKijyunGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="setaiShikyuSogaku" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_setaiShikyuSogaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="over70_SetaiShikyuSogaku" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_over70_SetaiShikyuSogaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="honninShikyugaku" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_honninShikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="over70_honninShikyugaku" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_over70_honninShikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="teiShotoku_1_SaiKeisanUmu" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_teiShotoku_1_SaiKeisanUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="biko" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kekkaRenrakusakiYubinNo" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_kekkaRenrakusakiYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="kekkaRenrakusakiJusho" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_kekkaRenrakusakiJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ketteRenrakusakiMeisho1" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_ketteRenrakusakiMeisho1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kekkaRenrakusakiMeisho2" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_kekkaRenrakusakiMeisho2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tsuchiYMD" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_tsuchiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="renrakuhyoHakkoshaMei" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_renrakuhyoHakkoshaMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="renrakuhyoHakkoshaYubinNo" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_renrakuhyoHakkoshaYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="renrakuhyoHakkoshaJusho" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_renrakuhyoHakkoshaJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="toiawasesakiYobinNo" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_toiawasesakiYobinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="toiawasesakiJusho" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_toiawasesakiJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="toiawasesakiMeisho1" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_toiawasesakiMeisho1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="toiawasesakiMeisho2" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_toiawasesakiMeisho2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="toiawasesakiTelNo" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_toiawasesakiTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="over70_FutangakuGokei" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_over70_FutangakuGokei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="over70_ShikyugakuGokei" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_over70_ShikyugakuGokei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="under70_FutangakuGokei" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_under70_FutangakuGokei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="futangakuGokei" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_futangakuGokei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="under70_ShikyugakuGokei" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_under70_ShikyugakuGokei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="shikyugakuGokei" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_shikyugakuGokei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="dataKubun" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_dataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="uketoriYM" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_uketoriYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="sofuYM" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_sofuYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="saisoFG" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_saisoFG" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sikyugakuKeisanKekkaRenrakuhyoSakuseiYMD" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_sikyugakuKeisanKekkaRenrakuhyoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_isDeleted" />
+        <result property="updateCount" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+</mapper>

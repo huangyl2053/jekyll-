@@ -1,8 +1,10 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishorenchotate;
 
+import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportItemGroup;
 
 /**
  * 帳票設計_DBC100066_負担割合証（連帳・縦）のReportSourceクラスです。
@@ -77,8 +79,8 @@ public class FutanWariaiShoRenchoTateSource implements IReportSource {
     @ReportItem(name = "hakkoYMD", length = 12, order = 32)
     public RString hakkoYMD;
 
-//    @ReportItemGroup(groupName = "CompSofubutsuAtesaki", order = 35)
-//    public SofubutsuAtesakiSource compSofubutsuAtesakiSource;
+    @ReportItemGroup(groupName = "CompSofubutsuAtesaki", order = 35)
+    public SofubutsuAtesakiSource compSofubutsuAtesakiSource;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

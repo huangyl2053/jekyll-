@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -36,15 +37,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-4990-030 pengxingyi
  */
-public class DBC180040_FutanwariaishoHakko extends BatchFlowBase<FutanwariaishoHakkoBatchParameter> {
+public class DBC180040_FutanwariaishoHakkoFlow extends BatchFlowBase<FutanwariaishoHakkoBatchParameter> {
 
-    private static final RString ZERO = new RString("0");
-    private static final RString ONE = new RString("1");
-    private static final RString TWO = new RString("2");
-    private static final RString THREE = new RString("3");
-    private static final RString 全件用紙タイプ = new RString("全件用紙タイプ");
-    private static final RString 異動認定分用紙タイプ = new RString("異動、認定分用紙タイプ");
+    private static final RString 定数_0 = new RString("0");
+    private static final RString 定数_1 = new RString("1");
+    private static final RString 定数_2 = new RString("2");
+    private static final RString 定数_3 = new RString("3");
+    private static final RString 定数_全件用紙タイプ = new RString("全件用紙タイプ");
+    private static final RString 定数_異動認定分用紙タイプ = new RString("異動、認定分用紙タイプ");
     private IFutanwariaishoHakkoMapper mapper;
+    private RDateTime バッチ起動時処理日時;
 
     private static final String 利用者負担割合期間 = "FutanWariaiInsertProcess";
     private static final String 負担割合証 = "FutanWariaiShoOutputProcess";
@@ -56,14 +58,15 @@ public class DBC180040_FutanwariaishoHakko extends BatchFlowBase<FutanwariaishoH
 
     @Override
     protected void defineFlow() {
+        バッチ起動時処理日時 = RDate.getNowDateTime();
         RString type = getType();
         executeStep(利用者負担割合期間);
         executeStep(利用者負担割合証);
-        if (ONE.equals(type)) {
+        if (定数_1.equals(type)) {
             executeStep(負担割合証);
-        } else if (TWO.equals(type)) {
+        } else if (定数_2.equals(type)) {
             executeStep(負担割合証連帳縦);
-        } else if (THREE.equals(type)) {
+        } else if (定数_3.equals(type)) {
             executeStep(負担割合証連帳横);
         }
         executeStep(負担割合証発行一覧表);
@@ -161,10 +164,10 @@ public class DBC180040_FutanwariaishoHakko extends BatchFlowBase<FutanwariaishoH
         param.setサブ業務コード(SubGyomuCode.DBC介護給付.getColumnValue());
         param.set帳票分類ID(ReportIdDBC.DBC100065.getReportId().getColumnValue());
         param.set管理年度(FlexibleYear.MIN);
-        if (ZERO.equals(getParameter().get出力対象())) {
-            param.set項目名(全件用紙タイプ);
+        if (定数_0.equals(getParameter().get出力対象())) {
+            param.set項目名(定数_全件用紙タイプ);
         } else {
-            param.set項目名(異動認定分用紙タイプ);
+            param.set項目名(定数_異動認定分用紙タイプ);
         }
         DbT7067ChohyoSeigyoHanyoEntity 帳票制御汎用キー = mapper.select帳票制御汎用キー(param);
         return 帳票制御汎用キー.getKomokuValue();
@@ -184,7 +187,7 @@ public class DBC180040_FutanwariaishoHakko extends BatchFlowBase<FutanwariaishoH
                 GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付)).build());
         param.setSearchKey(new ShikibetsuTaishoPSMSearchKeyBuilder(
                 GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先).build());
-        param.setバッチ起動時処理日時(RDateTime.now());
+        param.setバッチ起動時処理日時(バッチ起動時処理日時);
         return param;
     }
 

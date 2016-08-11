@@ -1,8 +1,10 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishokattokami;
 
+import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportItemGroup;
 
 /**
  * 帳票設計_DBC100065_負担割合証（カット紙）のReportSourceクラスです。
@@ -77,8 +79,8 @@ public class FutanWariaiShoKattokamiSource implements IReportSource {
     @ReportItem(name = "ninshoshaYakushokuMei1", order = 32)
     public RString ninshoshaYakushokuMei1;
 
-//    @ReportItemGroup(groupName = "CompSofubutsuAtesaki", order = 35)
-//    public SofubutsuAtesakiSource compSofubutsuAtesakiSource;
+    @ReportItemGroup(groupName = "CompSofubutsuAtesaki", order = 35)
+    public SofubutsuAtesakiSource compSofubutsuAtesakiSource;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

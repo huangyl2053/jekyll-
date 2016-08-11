@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- * 帳票設計_DBC200090_負担割合証発行一覧表 Property
+ * 帳票設計_DBC100066_負担割合証（連帳・縦） Property
  *
- * @reamsid_L DBC-4990-061 pengxingyi
+ * @reamsid_L DBC-4990-050 pengxingyi
  */
 public class FutanWariaiShoRenchoTateProperty extends ReportPropertyBase<FutanWariaiShoRenchoTateSource> {
 

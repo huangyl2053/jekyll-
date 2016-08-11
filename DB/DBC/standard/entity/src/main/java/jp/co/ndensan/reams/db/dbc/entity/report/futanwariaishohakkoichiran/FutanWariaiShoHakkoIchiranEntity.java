@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 負担割合証発行一覧表Entity
  *
- * @reamsid_L DBC-4990-031 pengxingyi
+ * @reamsid_L DBC-4990-061 pengxingyi
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
