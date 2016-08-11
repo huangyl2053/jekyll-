@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
@@ -47,8 +48,7 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
 
     private static final int START_NUMBER = 1;
     private static final int END_NUMBER = 15;
-    private static final RString B5種別コード = new RString("DBB100081");
-    private static final RString A4種別コード = new RString("DBB100082");
+    private static final RString 種別コード = NinshoshaDenshikoinshubetsuCode.保険者印.getコード();
     private static final RString RSTRING_1 = new RString("1");
 
     /**
@@ -68,7 +68,7 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
             KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoProperty property
                     = new KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoProperty();
             try (ReportAssembler<KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource> assembler = createAssembler(property, reportManager)) {
-                Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, B5種別コード,
+                Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, 種別コード,
                         発行日 == null ? FlexibleDate.getNowDate() : new FlexibleDate(発行日.toDateString()));
                 Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
                 ChohyoSeigyoKyotsu 帳票制御共通 = 徴収猶予決定通知書情報.get帳票制御共通();
@@ -120,7 +120,7 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
             KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateProperty property
                     = new KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateProperty();
             try (ReportAssembler<KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateSource> assembler = createAssembler(property, reportManager)) {
-                Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, A4種別コード,
+                Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, 種別コード,
                         発行日 == null ? FlexibleDate.getNowDate() : new FlexibleDate(発行日.toDateString()));
                 Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
                 ChohyoSeigyoKyotsu 帳票制御共通 = 徴収猶予決定通知書情報.get帳票制御共通();
