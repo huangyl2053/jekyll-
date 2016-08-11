@@ -47,8 +47,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class GemmenJuminKihon {
 
-    private static final RString 画面モード_取消 = new RString("取消");
-    private static final RString 画面モード_訂正 = new RString("訂正");
 //    private static final RString 状況_申請 = new RString("申請");
 //    private static final RString 状況_決定 = new RString("決定");
 //    private static final RString 状況_訂正 = new RString("訂正した内容で、決定");
@@ -142,7 +140,6 @@ public class GemmenJuminKihon {
      * @return 介護保険料減免画面
      */
     public ResponseData<GemmenJuminKihonDiv> onClick_btnTesei(GemmenJuminKihonDiv div) {
-        ViewStateHolder.put(ViewStateKeys.画面モード, 画面モード_訂正);
         getHandler(div).onClick_訂正の状態();
         return createResponse(div);
     }
@@ -154,7 +151,6 @@ public class GemmenJuminKihon {
      * @return 介護保険料減免画面
      */
     public ResponseData<GemmenJuminKihonDiv> onClick_btnTorikeshi(GemmenJuminKihonDiv div) {
-        ViewStateHolder.put(ViewStateKeys.画面モード, 画面モード_取消);
         getHandler(div).onClick_取消の状態();
         return createResponse(div);
     }
@@ -197,8 +193,7 @@ public class GemmenJuminKihon {
         }
         GemmenJuminKihonHandler handler = getHandler(div);
         // TODO QA1158 メッセージ 「%1情報を%2します。よろしいですか？」 がありません。
-//        RString 入力状況 = handler.メッセージ判断(最新減免の情報, 画面モード);
-//        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+//        RString 入力状況 = handler.メッセージ判断(最新減免の情報);
 //        QuestionMessage message = null;
 //        if (入力状況_新規申請.equals(入力状況)) {
 //            message = new QuestionMessage(DbzQuestionMessages.判断基準より前の日付.getMessage().getCode(),

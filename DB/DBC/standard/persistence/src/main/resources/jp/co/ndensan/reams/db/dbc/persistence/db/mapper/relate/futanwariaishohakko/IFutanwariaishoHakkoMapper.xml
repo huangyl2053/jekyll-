@@ -57,7 +57,7 @@
                 WHERE
                     1=1
                     <if test="抽出期間開始日時 != null">
-                     AND "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時} AND
+                     AND "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時}
                     </if>
                     <if test="抽出期間終了日時 != null">
                      AND "insertTimestamp" <![CDATA[<=]]> #{抽出期間終了日時} 
@@ -130,7 +130,7 @@
                 WHERE
                     1=1
                     <if test="抽出期間開始日時 != null">
-                     AND "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時} AND
+                     AND "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時} 
                     </if>
                     <if test="抽出期間終了日時 != null">
                      AND "insertTimestamp" <![CDATA[<=]]> #{抽出期間終了日時} 

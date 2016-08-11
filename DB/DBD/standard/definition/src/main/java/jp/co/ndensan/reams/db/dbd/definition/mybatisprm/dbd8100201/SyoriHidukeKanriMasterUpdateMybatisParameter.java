@@ -12,7 +12,7 @@ import lombok.Setter;
 /**
  * 処理日付管理マスタ更新SQLのパラメータクラスです．
  *
- * @reamsid_L DBD-4910-040 x_lilh
+ * @reamsid_L DBD-4910-030 x_lilh
  */
 @Getter
 @Setter

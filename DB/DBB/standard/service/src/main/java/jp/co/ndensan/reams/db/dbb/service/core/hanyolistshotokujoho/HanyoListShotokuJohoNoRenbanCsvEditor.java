@@ -396,7 +396,6 @@ public class HanyoListShotokuJohoNoRenbanCsvEditor {
         } else {
             set保険者番号By市町村コード(csvEntity, entity, 構成市町村マスタlist);
         }
-        csvEntity.set資格証記載保険者番号(null);
         if (保険料段階リスト != null && 保険料段階リスト.getBy段階区分(entity.get保険料段階()) != null) {
             csvEntity.set保険料段階(保険料段階リスト.getBy段階区分(entity.get保険料段階()).get表記());
         }

@@ -245,7 +245,7 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
     private Decimal get3年以前滞納額合計() {
         Decimal 以前保険料合計 = Decimal.ZERO;
         for (ShiharaiHohoHenkoTaino 支払方法変更滞納 : this.帳票情報.getShiharaiHohoHenkoTainoList()) {
-            if (支払方法変更滞納.get賦課年度().isBefore(最新賦課年度.minusYear(3))) {
+            if (支払方法変更滞納.get賦課年度().isBeforeOrEquals(最新賦課年度.minusYear(3))) {
                 以前保険料合計 = 以前保険料合計.add(支払方法変更滞納.get滞納額());
             }
         }

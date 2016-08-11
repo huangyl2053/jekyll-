@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 利用者負担割合判定検索処理のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-5010-040 quxiaodong -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshafutanwariaihanteimanager.IRiyoshaFutanWariaiHanteiManagerMapper">
+    <select resultOrdered="true" id="get生活保護受給者entity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.riyoshafutanwariaihanteimanager.RiyoshaFutanWariaiHanteiManagerParameter"
+            resultType="jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHogoJukyushaEntity"
+            fetchSize="500">
+        SELECT A.*
+        FROM
+        rgur."UrT0508SeikatsuHogoJukyusha" AS A
+        WHERE
+        A"shikibetsuCode" = #{識別コード},
+        AND  A"gyomuCode" ='DB',
+        AND  A"jukyuKaishiYMD" = #{対象開始日},
+        AND  A"jukyuHaishiYMD" = #{対象終了日}
+    </select>
+</mapper>

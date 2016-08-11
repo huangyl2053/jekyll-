@@ -4,18 +4,20 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3150001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * Kiwarigaku のクラスファイル 
- * 
- * @author 自動生成
+ * Kiwarigaku のクラスファイル
+ *
+ * @reamsid_L DBB-1680-010 gongliang
  */
 public class KiwarigakuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -88,8 +90,48 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
+    public Label getLblFuchoKi13() {
+        return this.getFuchoTablePanel().getLblFuchoKi13();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNofuGaku13() {
+        return this.getFuchoTablePanel().getLblFuchoNofuGaku13();
+    }
+
+    @JsonIgnore
+    public Label getLblYuyoKikanKaishi13() {
+        return this.getFuchoTablePanel().getLblYuyoKikanKaishi13();
+    }
+
+    @JsonIgnore
+    public Label getLblYuyoKikanShuryo13() {
+        return this.getFuchoTablePanel().getLblYuyoKikanShuryo13();
+    }
+
+    @JsonIgnore
     public Label getLblFuchoTsuki5Gatsu() {
         return this.getFuchoTablePanel().getLblFuchoTsuki5Gatsu();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoKi14() {
+        return this.getFuchoTablePanel().getLblFuchoKi14();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNofuGaku14() {
+        return this.getFuchoTablePanel().getLblFuchoNofuGaku14();
+    }
+
+    @JsonIgnore
+    public Label getLblYuyoKikanKaishi14() {
+        return this.getFuchoTablePanel().getLblYuyoKikanKaishi14();
+    }
+
+    @JsonIgnore
+    public Label getLblYuyoKikanShuryo14() {
+        return this.getFuchoTablePanel().getLblYuyoKikanShuryo14();
     }
 
     @JsonIgnore
@@ -348,8 +390,48 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
+    public Label getLblFuchoKi11() {
+        return this.getFuchoTablePanel().getLblFuchoKi11();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNofuGaku11() {
+        return this.getFuchoTablePanel().getLblFuchoNofuGaku11();
+    }
+
+    @JsonIgnore
+    public Label getLblYuyoKikanKaishi11() {
+        return this.getFuchoTablePanel().getLblYuyoKikanKaishi11();
+    }
+
+    @JsonIgnore
+    public Label getLblYuyoKikanShuryo11() {
+        return this.getFuchoTablePanel().getLblYuyoKikanShuryo11();
+    }
+
+    @JsonIgnore
     public Label getLblFuchoTsuki5Gatsu2() {
         return this.getFuchoTablePanel().getLblFuchoTsuki5Gatsu2();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoKi12() {
+        return this.getFuchoTablePanel().getLblFuchoKi12();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNofuGaku12() {
+        return this.getFuchoTablePanel().getLblFuchoNofuGaku12();
+    }
+
+    @JsonIgnore
+    public Label getLblYuyoKikanKaishi12() {
+        return this.getFuchoTablePanel().getLblYuyoKikanKaishi12();
+    }
+
+    @JsonIgnore
+    public Label getLblYuyoKikanShuryo12() {
+        return this.getFuchoTablePanel().getLblYuyoKikanShuryo12();
     }
 
     @JsonIgnore
