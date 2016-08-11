@@ -66,9 +66,16 @@ public class JigyohokokuGeppoYoshiki2120161HeadEditor implements IJigyohokokuGep
             builder.append(business.get保険者名());
         }
         source.hokenjamei = builder.toRString();
-        source.yoshiki = getYoshiki(集計番号);
         source.title1 = getTitleOne(給付実績区分コード);
-        source.title2 = getTitleTwo(集計番号);
+        if (集計番号_0107.equals(集計番号)
+                || 集計番号_0109.equals(集計番号)
+                || 集計番号_0110.equals(集計番号)) {
+            source.yoshiki = 様式内容２;
+            source.title2 = 総数_再掲;
+        } else {
+            source.yoshiki = RString.EMPTY;
+            source.title2 = RString.EMPTY;
+        }
         source.title3 = title3;
         return source;
     }
@@ -83,30 +90,6 @@ public class JigyohokokuGeppoYoshiki2120161HeadEditor implements IJigyohokokuGep
             title = RString.EMPTY;
         }
         return title;
-    }
-
-    private RString getTitleTwo(RString 集計番号) {
-        RString title;
-        if (集計番号_0107.equals(集計番号)
-                || 集計番号_0109.equals(集計番号)
-                || 集計番号_0110.equals(集計番号)) {
-            title = 総数_再掲;
-        } else {
-            title = RString.EMPTY;
-        }
-        return title;
-    }
-
-    private RString getYoshiki(RString 集計番号) {
-        RString yoshiki;
-        if (集計番号_0107.equals(集計番号)
-                || 集計番号_0109.equals(集計番号)
-                || 集計番号_0110.equals(集計番号)) {
-            yoshiki = 様式内容２;
-        } else {
-            yoshiki = RString.EMPTY;
-        }
-        return yoshiki;
     }
 
 }
