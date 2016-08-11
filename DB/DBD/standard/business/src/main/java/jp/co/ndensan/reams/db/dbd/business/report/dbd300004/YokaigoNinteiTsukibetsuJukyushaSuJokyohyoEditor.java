@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -29,6 +30,7 @@ public class YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEditor implements IYokaigo
     private final RString 年齢;
     private final RString 地区;
     private final Code 集計単位;
+    private final FlexibleYear 年度;
     private final List<YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity> 受給状況Entityリスト;
     private final int index;
 
@@ -39,15 +41,17 @@ public class YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEditor implements IYokaigo
      * @param 年齢 RString
      * @param 地区 RString
      * @param 集計単位 Code
+     * @param 年度 FlexibleYear
      * @param 受給状況Entityリスト List<YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity>
      * @param index int
      */
-    public YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEditor(FlexibleDate 基準日, RString 年齢, RString 地区,
-            Code 集計単位, List<YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity> 受給状況Entityリスト, int index) {
+    public YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEditor(FlexibleDate 基準日, RString 年齢, RString 地区, Code 集計単位,
+            FlexibleYear 年度, List<YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity> 受給状況Entityリスト, int index) {
         this.基準日 = 基準日;
         this.年齢 = 年齢;
         this.地区 = 地区;
         this.集計単位 = 集計単位;
+        this.年度 = 年度;
         this.受給状況Entityリスト = 受給状況Entityリスト;
         this.index = index;
     }
@@ -68,8 +72,7 @@ public class YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEditor implements IYokaigo
         source.title_a2 = RString.EMPTY;
         source.title_b1 = new RString("介護保険");
         source.title_b2 = new RString("要介護認定月別受給者数状況表");
-        //TODO 設計書で、年度の編集元は何もない
-//        source.nendo =
+        source.nendo = this.年度.toDateString();
         if (null != 受給状況Entityリスト && !受給状況Entityリスト.isEmpty()) {
             source.shichosonName = 受給状況Entityリスト.get(index).get市町村名();
             source.hokenshaNo = 受給状況Entityリスト.get(index).get市町村コード();
