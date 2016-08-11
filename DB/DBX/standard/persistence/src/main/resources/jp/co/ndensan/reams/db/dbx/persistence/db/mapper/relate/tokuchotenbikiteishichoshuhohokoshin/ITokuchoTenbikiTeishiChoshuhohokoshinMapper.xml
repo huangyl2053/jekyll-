@@ -65,8 +65,5 @@
         <where>
                 "DbV2001ChoshuHoho"."fukaNendo"=#{日付関連調定年度}
         </where>
-        ORDER BY
-            "DbT2001ChoshuHoho"."fukaNendo" DESC,
-            "DbT2001ChoshuHoho"."rirekiNo" DESC
     </select>
 </mapper>
