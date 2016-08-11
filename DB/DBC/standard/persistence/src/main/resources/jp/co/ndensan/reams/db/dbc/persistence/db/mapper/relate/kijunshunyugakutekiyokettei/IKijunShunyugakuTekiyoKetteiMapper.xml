@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 調定簿作成のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-4610-030 xuhao -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunshunyugakutekiyokettei.IKijunShunyugakuTekiyoKetteiMapper">
+    <!-- 基準収入額適用管理の取得 -->
+    <select resultOrdered="true" id="select基準収入額適用管理" resultMap="resultMap_KijunShunyugakuTekiyoKetteiEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kijunshunyugakutekiyokettei.KijunShunyugakuTekiyoKetteiMybatisParameter" fetchSize="500">
+        SELECT "DbT3116KijunShunyugakuTekiyoKanri"."setaiCode",
+               "DbT3116KijunShunyugakuTekiyoKanri"."nendo",
+               "DbT3116KijunShunyugakuTekiyoKanri"."rirekiNo",
+               "DbT3116KijunShunyugakuTekiyoKanri"."hihokenshaNo",
+               "DbT3116KijunShunyugakuTekiyoKanri"."santeiKijungaku",
+               "DbT3116KijunShunyugakuTekiyoKanri"."tekiyoKaishiYMD",
+               "DbT3116KijunShunyugakuTekiyoKanri"."shinseiYMD",
+               "DbT3116KijunShunyugakuTekiyoKanri"."ketteiYMD",
+               "DbT3116KijunShunyugakuTekiyoKanri"."atesakiInjiTaishoshaFlag",
+               "DbV1001HihokenshaDaicho"."shikibetsuCode"
+        FROM rgdb."DbT3116KijunShunyugakuTekiyoKanri" AS "DbT3116KijunShunyugakuTekiyoKanri"
+        INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS "DbV1001HihokenshaDaicho"
+        ON "DbT3116KijunShunyugakuTekiyoKanri"."hihokenshaNo" = "DbV1001HihokenshaDaicho"."hihokenshaNo"
+        WHERE "DbT3116KijunShunyugakuTekiyoKanri"."ketteiYMD" != ''
+<!--        case when #{抽出期間} == '0001' THEN
+        AND "DbT3116KijunShunyugakuTekiyoKanri"."shinseiYMD" <![CDATA[>=]]> #{開始日}
+        AND "DbT3116KijunShunyugakuTekiyoKanri"."shinseiYMD" <![CDATA[<=]]> #{終了日}
+        else
+        AND "DbT3116KijunShunyugakuTekiyoKanri"."ketteiYMD" <![CDATA[>=]]> #{開始日}
+        AND "DbT3116KijunShunyugakuTekiyoKanri"."ketteiYMD" <![CDATA[<=]]> #{終了日}
+        end-->
+<!--        <if test="抽出期間 == 0001">
+            AND "DbT3116KijunShunyugakuTekiyoKanri"."shinseiYMD" <![CDATA[>=]]> #{開始日}
+            AND "DbT3116KijunShunyugakuTekiyoKanri"."shinseiYMD" <![CDATA[<=]]> #{終了日}
+        </if>
+        <else>
+            AND "DbT3116KijunShunyugakuTekiyoKanri"."ketteiYMD" <![CDATA[>=]]> #{開始日}
+            AND "DbT3116KijunShunyugakuTekiyoKanri"."ketteiYMD" <![CDATA[<=]]> #{終了日}
+        </else>-->
+        <if test="抽出期間 == 0001">
+            AND "DbT3116KijunShunyugakuTekiyoKanri"."shinseiYMD" <![CDATA[>=]]> #{開始日}
+            AND "DbT3116KijunShunyugakuTekiyoKanri"."shinseiYMD" <![CDATA[<=]]> #{終了日}
+        </if>
+        <if test="抽出期間 != 0001">
+            AND "DbT3116KijunShunyugakuTekiyoKanri"."ketteiYMD" <![CDATA[>=]]> #{開始日}
+            AND "DbT3116KijunShunyugakuTekiyoKanri"."ketteiYMD" <![CDATA[<=]]> #{終了日}
+        </if>
+        <if test="印書 == 2">
+            AND "DbT3116KijunShunyugakuTekiyoKanri"."ketteiTsuchishoHakkoYMD" = ''
+        </if>
+        ORDER BY "DbT3116KijunShunyugakuTekiyoKanri"."setaiCode",
+                 "DbT3116KijunShunyugakuTekiyoKanri"."atesakiInjiTaishoshaFlag" DESC,
+                 "DbT3116KijunShunyugakuTekiyoKanri"."hihokenshaNo",
+                 <if test="Temp_出力順 != null and !Temp_出力順.isEmpty()">
+                    ${temp_出力順}
+                </if>
+    </select>
+    
+     <resultMap id="resultMap_KijunShunyugakuTekiyoKetteiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kijunshunyugakutekiyokettei.KijunShunyugakuTekiyoKetteiEntity" autoMapping="true">
+        <result property="世帯コード" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
+        <result property="年度" column="nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="履歴番号" column="rirekiNo" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="算定基準額" column="santeiKijungaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="適用開始年月" column="tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="申請日" column="shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="決定日" column="ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="宛先印字対象者フラグ" column="atesakiInjiTaishoshaFlag"/>
+        <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+    </resultMap>
+    </mapper>
