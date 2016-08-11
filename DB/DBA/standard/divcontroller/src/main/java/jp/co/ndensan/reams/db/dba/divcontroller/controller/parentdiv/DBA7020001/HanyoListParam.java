@@ -14,11 +14,13 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7020001.DBA7
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7020001.HanyoListParamDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7020001.HanyoListParamHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -94,6 +96,102 @@ public class HanyoListParam {
     public ResponseData<HanyoListParamDiv> onChange_shichosonKubun(HanyoListParamDiv div) {
         getHandler(div).onChange_他市町村住所地特例者事由抽出区分();
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 宛名の地区Checkです。
+     *
+     * @param div HanyoListParamDiv
+     * @return ResponseData<HanyoListParamDiv>
+     */
+    public ResponseData<HanyoListParamDiv> onClick_btnCheck(HanyoListParamDiv div) {
+        if (!div.getCcdHanyoListAtenaSelect().get宛名抽出条件子Div().getCcdHokenshaList().isVisible()) {
+            RString 地区選択 = div.getCcdHanyoListAtenaSelect().get宛名抽出条件子Div().getDdlChikuSelect().getSelectedKey();
+            ValidationMessageControlPairs validationMessage = new ValidationMessageControlPairs();
+            if (Chiku.地区.getコード().equals(地区選択)) {
+                validationMessage = 地区check(div);
+            } else if (Chiku.住所.getコード().equals(地区選択)) {
+                validationMessage = 住所check(div);
+            } else if (Chiku.行政区.getコード().equals(地区選択)) {
+                validationMessage = 行政区check(div);
+            }
+            if (validationMessage.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validationMessage).respond();
+            }
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    private ValidationMessageControlPairs 地区check(HanyoListParamDiv div) {
+        ValidationMessageControlPairs validationMessage = new ValidationMessageControlPairs();
+        if (!RString.isNullOrEmpty(div.getCcdHanyoListAtenaSelect().get地区１開始())) {
+            validationMessage = div.getCcdHanyoListAtenaSelect().get宛名抽出条件子Div().getCcdChiku1From().validate();
+        }
+        if (!RString.isNullOrEmpty(div.getCcdHanyoListAtenaSelect().get地区１終了())) {
+            ValidationMessageControlPairs 地区1終了 = div.getCcdHanyoListAtenaSelect().get宛名抽出条件子Div().getCcdChiku1To().validate();
+            if (地区1終了.iterator().hasNext()) {
+                validationMessage.add(地区1終了);
+            }
+        }
+        if (!RString.isNullOrEmpty(div.getCcdHanyoListAtenaSelect().get地区２開始())) {
+            ValidationMessageControlPairs 地区2開始 = div.getCcdHanyoListAtenaSelect().get宛名抽出条件子Div().getCcdChiku2From().validate();
+            if (地区2開始.iterator().hasNext()) {
+                validationMessage.add(地区2開始);
+            }
+        }
+        if (RString.isNullOrEmpty(div.getCcdHanyoListAtenaSelect().get地区２終了())) {
+            ValidationMessageControlPairs 地区2終了 = div.getCcdHanyoListAtenaSelect().get宛名抽出条件子Div().getCcdChiku2To().validate();
+            if (地区2終了.iterator().hasNext()) {
+                validationMessage.add(地区2終了);
+            }
+        }
+        if (!RString.isNullOrEmpty(div.getCcdHanyoListAtenaSelect().get地区３開始())) {
+            ValidationMessageControlPairs 地区3開始 = div.getCcdHanyoListAtenaSelect().get宛名抽出条件子Div().getCcdChiku3From().validate();
+            if (地区3開始.iterator().hasNext()) {
+                validationMessage.add(地区3開始);
+            }
+        }
+        if (!RString.isNullOrEmpty(div.getCcdHanyoListAtenaSelect().get地区３終了())) {
+            ValidationMessageControlPairs 地区3終了 = div.getCcdHanyoListAtenaSelect().get宛名抽出条件子Div().getCcdChiku3To().validate();
+            if (地区3終了.iterator().hasNext()) {
+                validationMessage.add(地区3終了);
+            }
+        }
+        return validationMessage;
+    }
+
+    private ValidationMessageControlPairs 住所check(HanyoListParamDiv div) {
+        ValidationMessageControlPairs validationMessage = new ValidationMessageControlPairs();
+        if (!RString.isNullOrEmpty(div.getCcdHanyoListAtenaSelect().get住所開始())) {
+            ValidationMessageControlPairs 住所開始 = div.getCcdHanyoListAtenaSelect().get宛名抽出条件子Div().getCcdJushoFrom().validate();
+            if (住所開始.iterator().hasNext()) {
+                validationMessage.add(住所開始);
+            }
+        }
+        if (!RString.isNullOrEmpty(div.getCcdHanyoListAtenaSelect().get住所終了())) {
+            ValidationMessageControlPairs 住所終了 = div.getCcdHanyoListAtenaSelect().get宛名抽出条件子Div().getCcdJushoTo().validate();
+            if (住所終了.iterator().hasNext()) {
+                validationMessage.add(住所終了);
+            }
+        }
+        return validationMessage;
+    }
+
+    private ValidationMessageControlPairs 行政区check(HanyoListParamDiv div) {
+        ValidationMessageControlPairs validationMessage = new ValidationMessageControlPairs();
+        if (!RString.isNullOrEmpty(div.getCcdHanyoListAtenaSelect().get行政区開始())) {
+            ValidationMessageControlPairs 行政区開始 = div.getCcdHanyoListAtenaSelect().get宛名抽出条件子Div().getCcdGyoseikuFrom().validate();
+            if (行政区開始.iterator().hasNext()) {
+                validationMessage.add(行政区開始);
+            }
+        }
+        if (!RString.isNullOrEmpty(div.getCcdHanyoListAtenaSelect().get行政区終了())) {
+            ValidationMessageControlPairs 行政区終了 = div.getCcdHanyoListAtenaSelect().get宛名抽出条件子Div().getCcdGyoseikuTo().validate();
+            if (行政区終了.iterator().hasNext()) {
+                validationMessage.add(行政区終了);
+            }
+        }
+        return validationMessage;
     }
 
     /**
