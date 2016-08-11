@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoServiceJokyo
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5207NinteichosahyoServiceJokyoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -128,5 +129,29 @@ public class NinteichosahyoServiceJokyoManager {
             return false;
         }
         return 1 == dac.save(認定調査票_概況調査_サービスの状況.toEntity());
+    }
+
+    /**
+     * 主キー（連番の除外）で認定調査票_概況調査_サービスの状況を取得します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @return List<NinteichosahyoServiceJokyo>
+     */
+    @Transaction
+    public SearchResult<NinteichosahyoServiceJokyo> selectサービスの状況(
+            ShinseishoKanriNo 申請書管理番号,
+            int 認定調査依頼履歴番号) {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
+
+        List<NinteichosahyoServiceJokyo> list = new ArrayList<>();
+        List<DbT5207NinteichosahyoServiceJokyoEntity> entityList = dac.selectサービスの状況(
+                申請書管理番号,
+                認定調査依頼履歴番号);
+        for (DbT5207NinteichosahyoServiceJokyoEntity entity : entityList) {
+            list.add(new NinteichosahyoServiceJokyo(entity));
+        }
+        return SearchResult.of(list, 0, false);
     }
 }
