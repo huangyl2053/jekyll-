@@ -37,6 +37,11 @@
             <artifactId>DbaBatchController</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbaWorkflowcontroller</artifactId>
+            <scope>runtime</scope>
+        </dependency>
         <!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>

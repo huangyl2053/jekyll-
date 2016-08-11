@@ -24,6 +24,7 @@
         <module>divcontroller</module>
         <module>service</module>
         <module>batchcontroller</module>
+        <module>workflowcontroller</module>
     </modules>
     <dependencyManagement>
         <dependencies>
@@ -165,6 +166,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>DbaBatchController</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>DbaWorkflowcontroller</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
