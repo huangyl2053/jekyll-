@@ -14,5 +14,4 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
  * @reamsid_L DBU-5530-050 dongyabin
  */
 public interface IJigyohokokuCompYoshiki12Editor extends IReportEditor<JigyohokokuCompYoshiki12ReportSource> {
-
 }

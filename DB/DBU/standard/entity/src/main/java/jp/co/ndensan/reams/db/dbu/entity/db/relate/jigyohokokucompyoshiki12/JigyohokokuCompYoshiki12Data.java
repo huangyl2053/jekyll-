@@ -132,5 +132,4 @@ public class JigyohokokuCompYoshiki12Data {
     private RString 免除認定表の利用者負担_4;
     private RString 免除認定表の利用者負担_5;
     private RString 免除認定表の利用者負担_6;
-
 }
