@@ -57,7 +57,7 @@ public class GennendoIdoFukaFlow extends BatchFlowBase<CreateHonsanteiIdoBatchPa
     private static final String 計算後情報作成 = "keisangoJohoSakusei";
     private static final String 本算定異動_現年度_結果一覧表 = "spoolHonsanteiIdoKekkaIchiranData";
     private static final String 処理日付管理テーブル更新 = "updateSystemTimeProcess";
-    private static final ReportId 帳票分類ID = new ReportId("DBB200009_HonsanteiKekkaIcihiran");
+    private static final ReportId 帳票分類ID = new ReportId("DBB200015_HonsanteiIdouKekkaIchiran");
 
     private CreateHonsanteiIdoBatchParameter parameter;
     private GennendoIdoFukaProcessParameter processParameter;
