@@ -1791,7 +1791,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 table(DbT7022ShoriDateKanri.class).
                 where(and(
                                 eq(subGyomuCode, SubGyomuCode.DBC介護給付),
-                                eq(shoriName, ShoriName.特徴結果情報取込.get名称()))).//Error  更正対象給付実績一覧
+                                eq(shoriName, ShoriName.更正対象給付実績一覧.get名称()))).limit(1).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
 
