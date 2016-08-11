@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<!--@reamsid_L DBD-1440-010 liuyl-->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.jukyushadaicho.IJukyushaDaichoMapper">
     <resultMap id="ResultMap_DbT4001JukyushaDaichoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity" autoMapping="true"/>
