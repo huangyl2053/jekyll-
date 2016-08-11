@@ -236,6 +236,19 @@ public class JigyohokokuCompYoshiki202Report extends Report<JigyohokokuCompYoshi
                 data.get短期入所療養介護_介護療養型医療施設等_介護計(),
                 data.get短期入所療養介護_介護療養型医療施設等_合計()));
         dataBodyList.add(new JigyohokokuCompYoshiki202BodyData(
+                data.get福祉用具_住宅改修サービス_要支援１(),
+                data.get福祉用具_住宅改修サービス_要支援２(),
+                data.get福祉用具_住宅改修サービス_予防計(),
+                data.get福祉用具_住宅改修サービス_非該当(),
+                data.get福祉用具_住宅改修サービス_経過的要介護(),
+                data.get福祉用具_住宅改修サービス_要介護１(),
+                data.get福祉用具_住宅改修サービス_要介護２(),
+                data.get福祉用具_住宅改修サービス_要介護３(),
+                data.get福祉用具_住宅改修サービス_要介護４(),
+                data.get福祉用具_住宅改修サービス_要介護５(),
+                data.get福祉用具_住宅改修サービス_介護計(),
+                data.get福祉用具_住宅改修サービス_合計()));
+        dataBodyList.add(new JigyohokokuCompYoshiki202BodyData(
                 data.get福祉用具貸与_要支援１(),
                 data.get福祉用具貸与_要支援２(),
                 data.get福祉用具貸与_予防計(),
@@ -248,19 +261,6 @@ public class JigyohokokuCompYoshiki202Report extends Report<JigyohokokuCompYoshi
                 data.get福祉用具貸与_要介護５(),
                 data.get福祉用具貸与_介護計(),
                 data.get福祉用具貸与_合計()));
-        dataBodyList.add(new JigyohokokuCompYoshiki202BodyData(
-                data.get住宅改修費_要支援１(),
-                data.get住宅改修費_要支援２(),
-                data.get住宅改修費_予防計(),
-                data.get住宅改修費_非該当(),
-                data.get住宅改修費_経過的要介護(),
-                data.get住宅改修費_要介護１(),
-                data.get住宅改修費_要介護２(),
-                data.get住宅改修費_要介護３(),
-                data.get住宅改修費_要介護４(),
-                data.get住宅改修費_要介護５(),
-                data.get住宅改修費_介護計(),
-                data.get住宅改修費_合計()));
         dataBodyList.add(new JigyohokokuCompYoshiki202BodyData(
                 data.get特定施設入居者生活介護_要支援１(),
                 data.get特定施設入居者生活介護_要支援２(),

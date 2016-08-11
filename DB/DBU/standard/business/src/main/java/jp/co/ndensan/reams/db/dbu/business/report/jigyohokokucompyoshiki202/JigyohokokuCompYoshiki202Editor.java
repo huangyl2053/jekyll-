@@ -27,7 +27,6 @@ public class JigyohokokuCompYoshiki202Editor implements IJigyohokokuCompYoshiki2
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
-    private static final RString 作成 = new RString("作成");
     private static final RString 現物分 = new RString("1");
     private static final RString 償還審査分 = new RString("2");
     private static final RString 償還決定分 = new RString("3");
@@ -113,7 +112,6 @@ public class JigyohokokuCompYoshiki202Editor implements IJigyohokokuCompYoshiki2
             printTimeStampSb.append(DATE_分);
             printTimeStampSb.append(String.format("%02d", time.getSecond()));
             printTimeStampSb.append(DATE_秒);
-            printTimeStampSb.append(作成);
         }
         return printTimeStampSb;
     }
