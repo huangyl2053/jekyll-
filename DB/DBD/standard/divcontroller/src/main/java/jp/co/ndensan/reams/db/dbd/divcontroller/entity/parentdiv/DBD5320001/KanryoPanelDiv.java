@@ -5,15 +5,16 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5320001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * TaishoshaIchiran のクラスファイル 
+ * KanryoPanel のクラスファイル 
  * 
  * @author 自動生成
  */
-public class TaishoshaIchiranDiv extends Panel {
+public class KanryoPanelDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -21,8 +22,8 @@ public class TaishoshaIchiranDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("dgTaishoshaIchiran")
-    private DataGrid<dgTaishoshaIchiran_Row> dgTaishoshaIchiran;
+    @JsonProperty("ccdKanryoMessege")
+    private KanryoMessageDiv ccdKanryoMessege;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,21 +32,12 @@ public class TaishoshaIchiranDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getdgTaishoshaIchiran
-     * @return dgTaishoshaIchiran
+     * getccdKanryoMessege
+     * @return ccdKanryoMessege
      */
-    @JsonProperty("dgTaishoshaIchiran")
-    public DataGrid<dgTaishoshaIchiran_Row> getDgTaishoshaIchiran() {
-        return dgTaishoshaIchiran;
-    }
-
-    /*
-     * setdgTaishoshaIchiran
-     * @param dgTaishoshaIchiran dgTaishoshaIchiran
-     */
-    @JsonProperty("dgTaishoshaIchiran")
-    public void setDgTaishoshaIchiran(DataGrid<dgTaishoshaIchiran_Row> dgTaishoshaIchiran) {
-        this.dgTaishoshaIchiran = dgTaishoshaIchiran;
+    @JsonProperty("ccdKanryoMessege")
+    public IKanryoMessageDiv getCcdKanryoMessege() {
+        return ccdKanryoMessege;
     }
 
     // </editor-fold>
