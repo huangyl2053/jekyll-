@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -40,12 +41,15 @@ public class KoikiShichosonShotokuIchiarnProcess extends BatchProcessBase<KaigoH
         RString ラジオボタン = processparameter.getラジオボタン();
         FlexibleYear 処理年度 = processparameter.get処理年度();
         RString 出力順 = processparameter.get出力順();
+        YMDHMS 開始日時 = processparameter.get開始日時();
+        YMDHMS 終了日時 = processparameter.get終了日時();
         List<ShichosonJouhouResult> 市町村情報リスト = processparameter.get市町村情報リスト();
         List<LasdecCode> 市町村コードList = new ArrayList<>();
         for (ShichosonJouhouResult result : 市町村情報リスト) {
             市町村コードList.add(result.get市町村コード());
         }
-        parameter = new ShotokuJohoIchiranhyoSakuseiGParameter(処理年度, チェックボックス, ラジオボタン, 市町村コードList, 出力順);
+        parameter = new ShotokuJohoIchiranhyoSakuseiGParameter(
+                処理年度, チェックボックス, ラジオボタン, 開始日時, 終了日時, 市町村コードList, 出力順);
     }
 
     @BatchWriter
