@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.gengaku.Shihar
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.gengaku.ShiharaiHohoHenkoGengakuBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.sashitome.ShiharaiHohoHenkoSashitome;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.taino.ShiharaiHohoHenkoTaino;
+import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShoriKubun;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2010001.DBD2010001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2010001.DBD2010001TransitionEventName;
@@ -197,6 +198,339 @@ public class ShiharaiHohoHenkoKanri {
             } else {
                 div.setKey_MaxRirekiNo(RString.EMPTY);
             }
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * １号予告者登録、データパッシング用データ生成します。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShiharaiHohoHenkoKanriDiv> onBeforeOpenDialog_btnIchigoYokokushaToroku1(ShiharaiHohoHenkoKanriDiv div) {
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+
+        ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
+
+        div.setKey_HihokenshaNo(被保険者番号.getColumnValue());
+        div.setKey_Button(ShoriKubun._1号予告者登録.getコード());
+        if (div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow() == null) {
+            div.setKey_ShiharaiHohoHenkoKanri(RString.EMPTY);
+            div.setKey_MaxRirekiNo(getHandler(div).
+                    get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataList, ShiharaiHenkoKanriKubun._１号償還払い化.getコード()));
+
+        } else {
+            div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(getHandler(div).get支払方法変更情報FromViewState(dataList)));
+            div.setKey_MaxRirekiNo(getHandler(div).
+                    get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataList, ShiharaiHenkoKanriKubun._１号償還払い化.getコード()));
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * １号弁明書受理、データパッシング用データ生成します。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShiharaiHohoHenkoKanriDiv> onBeforeOpenDialog_btnIchigoBemmeishoJuri(ShiharaiHohoHenkoKanriDiv div) {
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+
+        ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
+
+        div.setKey_HihokenshaNo(被保険者番号.getColumnValue());
+        div.setKey_Button(ShoriKubun._1号弁明書受理.getコード());
+        if (div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow() == null) {
+            div.setKey_ShiharaiHohoHenkoKanri(RString.EMPTY);
+            div.setKey_MaxRirekiNo(RString.EMPTY);
+
+        } else {
+            div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(getHandler(div).get支払方法変更情報FromViewState(dataList)));
+            div.setKey_MaxRirekiNo(RString.EMPTY);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 償還払い化登録、データパッシング用データ生成します。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShiharaiHohoHenkoKanriDiv> onBeforeOpenDialog_btnShokanBaraikaToroku(ShiharaiHohoHenkoKanriDiv div) {
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+
+        ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
+
+        div.setKey_HihokenshaNo(被保険者番号.getColumnValue());
+        div.setKey_Button(ShoriKubun.償還払い化登録.getコード());
+        if (div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow() == null) {
+            div.setKey_ShiharaiHohoHenkoKanri(RString.EMPTY);
+            div.setKey_MaxRirekiNo(RString.EMPTY);
+
+        } else {
+            div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(getHandler(div).get支払方法変更情報FromViewState(dataList)));
+            div.setKey_MaxRirekiNo(getHandler(div).
+                    get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataList, ShiharaiHenkoKanriKubun._１号償還払い化.getコード()));
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 償還払い化終了申請、データパッシング用データ生成します。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShiharaiHohoHenkoKanriDiv> onBeforeOpenDialog_btnShokanBaraikaShuryoShinsei(ShiharaiHohoHenkoKanriDiv div) {
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+
+        ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
+
+        div.setKey_HihokenshaNo(被保険者番号.getColumnValue());
+        div.setKey_Button(ShoriKubun.償還払い化終了申請.getコード());
+        if (div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow() == null) {
+            div.setKey_ShiharaiHohoHenkoKanri(RString.EMPTY);
+            div.setKey_MaxRirekiNo(RString.EMPTY);
+
+        } else {
+            div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(getHandler(div).get支払方法変更情報FromViewState(dataList)));
+            div.setKey_MaxRirekiNo(RString.EMPTY);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 給付一時差止登録、データパッシング用データ生成します。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShiharaiHohoHenkoKanriDiv> onBeforeOpenDialog_btnKyufuIchijiSashitomeToroku(ShiharaiHohoHenkoKanriDiv div) {
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+
+        ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
+
+        div.setKey_HihokenshaNo(被保険者番号.getColumnValue());
+        div.setKey_Button(ShoriKubun.給付一時差止登録.getコード());
+        if (div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow() == null) {
+            div.setKey_ShiharaiHohoHenkoKanri(RString.EMPTY);
+            div.setKey_MaxRirekiNo(RString.EMPTY);
+
+        } else {
+            div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(getHandler(div).get支払方法変更情報FromViewState(dataList)));
+            div.setKey_MaxRirekiNo(RString.EMPTY);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 保険料控除登録、データパッシング用データ生成します。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShiharaiHohoHenkoKanriDiv> onBeforeOpenDialog_btnHokenryoKojoToroku(ShiharaiHohoHenkoKanriDiv div) {
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+
+        ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
+
+        div.setKey_HihokenshaNo(被保険者番号.getColumnValue());
+        div.setKey_Button(ShoriKubun.保険料控除登録.getコード());
+        if (div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow() == null) {
+            div.setKey_ShiharaiHohoHenkoKanri(RString.EMPTY);
+            div.setKey_MaxRirekiNo(RString.EMPTY);
+
+        } else {
+            div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(getHandler(div).get支払方法変更情報FromViewState(dataList)));
+            div.setKey_MaxRirekiNo(RString.EMPTY);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 給付額減額登録、データパッシング用データ生成します。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShiharaiHohoHenkoKanriDiv> onBeforeOpenDialog_btnKyufugakuGengakuToroku(ShiharaiHohoHenkoKanriDiv div) {
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+
+        ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
+
+        div.setKey_HihokenshaNo(被保険者番号.getColumnValue());
+        div.setKey_Button(ShoriKubun.給付額減額登録.getコード());
+        if (div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow() == null) {
+            div.setKey_ShiharaiHohoHenkoKanri(RString.EMPTY);
+            div.setKey_MaxRirekiNo(getHandler(div).
+                    get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataList, ShiharaiHenkoKanriKubun._１号給付額減額.getコード()));
+
+        } else {
+            div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(getHandler(div).get支払方法変更情報FromViewState(dataList)));
+            div.setKey_MaxRirekiNo(getHandler(div).
+                    get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataList, ShiharaiHenkoKanriKubun._１号給付額減額.getコード()));
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 減額免除申請、データパッシング用データ生成します。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShiharaiHohoHenkoKanriDiv> onBeforeOpenDialog_btnGengakuMenjoShinsei(ShiharaiHohoHenkoKanriDiv div) {
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+
+        ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
+
+        div.setKey_HihokenshaNo(被保険者番号.getColumnValue());
+        div.setKey_Button(ShoriKubun.減額免除申請.getコード());
+        if (div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow() == null) {
+            div.setKey_ShiharaiHohoHenkoKanri(RString.EMPTY);
+            div.setKey_MaxRirekiNo(RString.EMPTY);
+
+        } else {
+            div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(getHandler(div).get支払方法変更情報FromViewState(dataList)));
+            div.setKey_MaxRirekiNo(RString.EMPTY);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 免除解除／再転入、データパッシング用データ生成します。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShiharaiHohoHenkoKanriDiv> onBeforeOpenDialog_btnMenjoKaijoAndSaitennyu(ShiharaiHohoHenkoKanriDiv div) {
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+
+        ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
+
+        div.setKey_HihokenshaNo(被保険者番号.getColumnValue());
+        div.setKey_Button(ShoriKubun.免除解除_再転入.getコード());
+        if (div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow() == null) {
+            div.setKey_ShiharaiHohoHenkoKanri(RString.EMPTY);
+            div.setKey_MaxRirekiNo(RString.EMPTY);
+
+        } else {
+            div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(getHandler(div).get支払方法変更情報FromViewState(dataList)));
+            div.setKey_MaxRirekiNo(RString.EMPTY);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * ２号予告者登録、データパッシング用データ生成します。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShiharaiHohoHenkoKanriDiv> onBeforeOpenDialog_btnNigoYokokushaToroku(ShiharaiHohoHenkoKanriDiv div) {
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+
+        ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
+
+        div.setKey_HihokenshaNo(被保険者番号.getColumnValue());
+        div.setKey_Button(ShoriKubun._2号予告者登録.getコード());
+        if (div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow() == null) {
+            div.setKey_ShiharaiHohoHenkoKanri(RString.EMPTY);
+            div.setKey_MaxRirekiNo(getHandler(div).
+                    get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataList, ShiharaiHenkoKanriKubun._２号差止.getコード()));
+
+        } else {
+            div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(getHandler(div).get支払方法変更情報FromViewState(dataList)));
+            div.setKey_MaxRirekiNo(getHandler(div).
+                    get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataList, ShiharaiHenkoKanriKubun._２号差止.getコード()));
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * ２号弁明書受理、データパッシング用データ生成します。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShiharaiHohoHenkoKanriDiv> onBeforeOpenDialog_btnNigoBemmeishoJuri(ShiharaiHohoHenkoKanriDiv div) {
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+
+        ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
+
+        div.setKey_HihokenshaNo(被保険者番号.getColumnValue());
+        div.setKey_Button(ShoriKubun._2号弁明書受理.getコード());
+        if (div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow() == null) {
+            div.setKey_ShiharaiHohoHenkoKanri(RString.EMPTY);
+            div.setKey_MaxRirekiNo(RString.EMPTY);
+
+        } else {
+            div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(getHandler(div).get支払方法変更情報FromViewState(dataList)));
+            div.setKey_MaxRirekiNo(RString.EMPTY);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * ２号一時差止登録、データパッシング用データ生成します。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShiharaiHohoHenkoKanriDiv> onBeforeOpenDialog_btnNigoIchijiSashitomeToroku(ShiharaiHohoHenkoKanriDiv div) {
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+
+        ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
+
+        div.setKey_HihokenshaNo(被保険者番号.getColumnValue());
+        div.setKey_Button(ShoriKubun._2号一時差止登録.getコード());
+        if (div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow() == null) {
+            div.setKey_ShiharaiHohoHenkoKanri(RString.EMPTY);
+            div.setKey_MaxRirekiNo(RString.EMPTY);
+
+        } else {
+            div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(getHandler(div).get支払方法変更情報FromViewState(dataList)));
+            div.setKey_MaxRirekiNo(getHandler(div).
+                    get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataList, ShiharaiHenkoKanriKubun._２号差止.getコード()));
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * ２号一時差止解除、データパッシング用データ生成します。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShiharaiHohoHenkoKanriDiv> onBeforeOpenDialog_btnNigoIchijiSashitomeKaijo(ShiharaiHohoHenkoKanriDiv div) {
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+
+        ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
+
+        div.setKey_HihokenshaNo(被保険者番号.getColumnValue());
+        div.setKey_Button(ShoriKubun._2号一時差止解除.getコード());
+        if (div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow() == null) {
+            div.setKey_ShiharaiHohoHenkoKanri(RString.EMPTY);
+            div.setKey_MaxRirekiNo(RString.EMPTY);
+
+        } else {
+            div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(getHandler(div).get支払方法変更情報FromViewState(dataList)));
+            div.setKey_MaxRirekiNo(RString.EMPTY);
         }
         return ResponseData.of(div).respond();
     }
