@@ -59,7 +59,7 @@ public class HoshushiharaiJumbiChousaCsvProcess extends BatchProcessBase<Hoshush
     private RString eucFilePath;
     private int count = 0;
     private int kinkaku = 0;
-    private final int maxKeepVersions = 1;
+    private static final int maxKeepVersions = 1;
     private static final int INT_ONE = 110;
     private static final int INT_NINE = 119;
     private OutputParameter<RString> outSharedFileName;

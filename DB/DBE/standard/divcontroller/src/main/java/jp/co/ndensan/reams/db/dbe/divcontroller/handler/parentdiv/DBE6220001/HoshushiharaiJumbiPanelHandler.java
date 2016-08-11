@@ -30,17 +30,6 @@ public class HoshushiharaiJumbiPanelHandler {
     }
 
     /**
-     * 画面初期化処理です。
-     *
-     * @param div 画面情報
-     */
-    public void onLoad(HoshushiharaiJumbiDiv div) {
-        div.getTxtJissekiDateRange().setDisabled(true);
-        div.getTxtFurikomiShiteiDay().setDisabled(true);
-        div.getChkSakuseiTaisho().setDisabled(true);
-    }
-
-    /**
      * 発行するボタン処理です
      *
      * @return HoshushiharaiJumbiBatchParameter

@@ -39,10 +39,10 @@ public class HoshushiharaiJumbiPanelEucCsvEntity {
     private RString 仕向支店番号;
     @CsvField(order = 10, name = "仕向支店名")
     private RString 仕向支店名;
-    @CsvField(order = 11, name = "預金種別1")
-    private RString 預金種別1;
-    @CsvField(order = 12, name = "口座番号1")
-    private RString 口座番号1;
+    @CsvField(order = 11, name = "預金種別")
+    private RString 預金種別;
+    @CsvField(order = 12, name = "口座番号")
+    private RString 口座番号;
     @CsvField(order = 13, name = "ダミー1")
     private RString ダミー1;
     @CsvField(order = 14, name = "データ区分2")
