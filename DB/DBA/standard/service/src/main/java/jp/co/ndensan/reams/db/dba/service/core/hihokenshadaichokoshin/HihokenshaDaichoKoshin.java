@@ -334,6 +334,7 @@ public class HihokenshaDaichoKoshin {
             insertEn.setHihokennshaKubunCode(ShikakuKubun._１号.getコード());
             insertEn.setShikakuHenkoJiyuCode(idoJiyuCode);
             insertEn.setShikakuHenkoYMD(age);
+            insertEn.setShikakuHenkoTodokedeYMD(age);
             insertEn.setKoikinaiJushochiTokureiFlag(saishinIdohiDataEntity.get広域内住所地特例フラグ());
             insertEn.setKoikinaiTokureiSochimotoShichosonCode(saishinIdohiDataEntity.get広住特措置元市町村コード());
             insertEn.setKyuShichosonCode(saishinIdohiDataEntity.get旧市町村コード());
