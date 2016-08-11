@@ -80,10 +80,10 @@ public class ShisetsuJohoInputGuideFinder {
      */
     @Transaction
     public SearchResult<KaigoJogaiTokureiTaishoShisetsuInputGuide> getKaigoJogaiTokureiTaishoShisetsuInputGuide(
-            RString 事業者種別) {
+            RString 事業者種別,RString 事業者番号) {
         List<KaigoJogaiTokureiTaishoShisetsuInputGuide> taishoShisetsuList = new ArrayList<>();
         List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> dbT1005List = dbT1005Dac.
-                select介護除外住所地特例対象施設(事業者種別);
+                select介護除外住所地特例対象施設(事業者種別,事業者番号);
         if (dbT1005List == null || dbT1005List.isEmpty()) {
             return SearchResult.of(Collections.<KaigoJogaiTokureiTaishoShisetsuInputGuide>emptyList(), 0, false);
         }
