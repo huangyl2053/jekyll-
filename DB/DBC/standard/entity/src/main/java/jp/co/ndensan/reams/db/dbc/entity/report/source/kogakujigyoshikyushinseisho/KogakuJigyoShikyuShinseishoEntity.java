@@ -23,5 +23,6 @@ public class KogakuJigyoShikyuShinseishoEntity {
     private RString 認証者役職名;
     private RDate システム日付;
     private boolean is空白;
+    private RString 注意文;
     private RString 連番;
 }
