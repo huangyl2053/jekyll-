@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.entity.report.source.kogakujigyooshirasetsuch
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshirasetsuchisho.ShinseiJohoChohyoTempEntity;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -19,14 +18,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-public class KogakuJigyoOshiraseTsuchishoTeshutsuKigenNashiEntity {
+public class KogakuJigyoOshiraseTsuchishoKigenNashiEntity {
 
     private ShinseiJohoChohyoTempEntity 申請情報帳票発行一時;
     private SofubutsuAtesakiSource 送付別宛先;
     private NinshoshaSource 認証者;
     private RString タイトル;
     private RString 文書番号文字列;
-    private FlexibleDate 申請書提出期限;
+
     private boolean is自動償還;
     private boolean is空白;
 

@@ -1,15 +1,18 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.source.kogakujigyooshirasetsuchishoteshutsukigennashi;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 高額総合事業サービス費給付お知らせ通知書（提出期限なし）のソースクラスです。
  *
  * @reamsid_L DBC-4770-110 jianglaisheng
  */
-public class KogakuJigyoOshiraseTsuchishoTeshutsuKigenNashiSource implements IReportSource {
+public class KogakuJigyoOshiraseTsuchishoKigenNashiSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     @ReportItem(name = "bunshoNo", length = 36, order = 1)
@@ -26,6 +29,7 @@ public class KogakuJigyoOshiraseTsuchishoTeshutsuKigenNashiSource implements IRe
     public RString hihokenshaName;
     @ReportItem(name = "seibetsu", length = 1, order = 7)
     public RString seibetsu;
+    @ReportExpandedInfo(id = "hihokenshaNo")
     @ReportItem(name = "hihokenshaNo", length = 10, order = 8)
     public RString hihokenshaNo;
     @ReportItem(name = "birthYMD", length = 11, order = 9)
@@ -128,4 +132,6 @@ public class KogakuJigyoOshiraseTsuchishoTeshutsuKigenNashiSource implements IRe
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+    @ReportPerson(id = "X")
+    public ShikibetsuCode shikibetuCode;
 }
