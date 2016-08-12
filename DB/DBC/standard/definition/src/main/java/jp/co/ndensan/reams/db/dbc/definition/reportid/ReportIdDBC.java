@@ -237,7 +237,12 @@ public enum ReportIdDBC {
     /**
      * 介護給付費等請求額通知書帳票ＩＤです。
      */
-    DBC120230(new ReportId("DBC200066_SeikyugakuTsuchisho"), new RString("介護給付費等請求額通知書"));
+    DBC120230(new ReportId("DBC200066_SeikyugakuTsuchisho"), new RString("介護給付費等請求額通知書")),
+    /**
+     * 介護保険高額総合事業サービス費支給申請書
+     */
+    DBC100070(
+            new ReportId("DBC100070_KogakuJigyoShikyuShinseisho"), new RString("介護保険高額総合事業サービス費支給申請書"));
 
     private final ReportId reportId;
     private final RString reportName;
