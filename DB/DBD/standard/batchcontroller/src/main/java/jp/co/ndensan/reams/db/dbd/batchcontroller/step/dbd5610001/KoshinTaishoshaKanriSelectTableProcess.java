@@ -314,9 +314,9 @@ public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<Kos
             entity.setKijunYMD(FlexibleDate.EMPTY);
             entity.setKijunTimestamp(YMDHMS.now());
             entity.setTaishoKaishiYMD(FlexibleDate.EMPTY);
-            entity.setTaishoKaishiTimestamp(new YMDHMS(parameter.get有効期間終了日From().toString() + RDateTime.now().format西暦("HHmmss")));
-            entity.setTaishoShuryoYMD(FlexibleDate.EMPTY);
             entity.setTaishoKaishiTimestamp(new YMDHMS(parameter.get有効期間終了日To().toString() + RDateTime.now().format西暦("HHmmss")));
+            entity.setTaishoShuryoYMD(FlexibleDate.EMPTY);
+            entity.setTaishoShuryoTimestamp(new YMDHMS(parameter.get有効期間終了日To().toString() + RDateTime.now().format西暦("HHmmss")));
             return entity;
         }
     }
