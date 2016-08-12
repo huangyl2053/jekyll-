@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kogakujigyooshirasetsuchishokigenari;
 
-import jp.co.ndensan.reams.db.dbc.entity.report.kogakujigyooshirasetsuchisho.KogakuJigyoOshiraseTsuchishoKigenAriSource;
-import jp.co.ndensan.reams.db.dbc.entity.report.kogakujigyooshirasetsuchisho.KogakuJigyoOshiraseTsuchishopaParameterEntity;
+import jp.co.ndensan.reams.db.dbc.entity.report.kogakujigyooshirasetsuchishokigenari.KogakuJigyoOshiraseTsuchishoKigenAriSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.kogakujigyooshirasetsuchishokigenari.KogakuJigyoOshiraseTsuchishopaParameterEntity;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;

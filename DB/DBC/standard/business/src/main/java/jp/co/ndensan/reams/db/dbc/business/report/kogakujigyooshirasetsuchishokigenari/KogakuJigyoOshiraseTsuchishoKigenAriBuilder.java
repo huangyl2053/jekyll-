@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kogakujigyooshirasetsuchishokigenari;
 
-import jp.co.ndensan.reams.db.dbc.entity.report.kogakujigyooshirasetsuchisho.KogakuJigyoOshiraseTsuchishoKigenAriSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.kogakujigyooshirasetsuchishokigenari.KogakuJigyoOshiraseTsuchishoKigenAriSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
