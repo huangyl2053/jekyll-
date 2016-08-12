@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.FukaTaishoshaSearchSearchResultV
 import jp.co.ndensan.reams.db.dbz.business.core.validation.FukaTaishoshaSearchValidationMessage;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.SearchConditionDiv;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionary;
+
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
