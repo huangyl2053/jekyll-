@@ -31,6 +31,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.OrderBy;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.lt;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -174,5 +176,76 @@ public class DbT3003KyodoShoriyoJukyushaIdoShokanSofuDac implements ISaveable<Db
                                 eq(logicalDeletedFlag, false)))
                 .order(by(rirekiNo, Order.DESC)).limit(2).
                 toList(DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity.class);
+    }
+
+    /**
+     * count共同処理用受給者異動償還送付テーブルを検索して償還送付情報の異動日を判断します
+     *
+     * @param 被保険者番号
+     * @param 異動日
+     * @return int
+     * @throws NullPointerException
+     */
+    @Transaction
+    public int select償還送付情報の異動日Count(HihokenshaNo 被保険者番号, FlexibleDate 異動日) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3003KyodoShoriyoJukyushaIdoShokanSofu.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(idoYMD, 異動日))).
+                getCount();
+    }
+
+    /**
+     * count共同処理用受給者異動償還送付テーブルを検索して償還送付情報の異動区分を判断します
+     *
+     * @param 被保険者番号
+     * @param 異動区分
+     * @param 異動日
+     * @return int
+     * @throws NullPointerException
+     */
+    @Transaction
+    public int select償還送付情報の異動区分Count(HihokenshaNo 被保険者番号, RString 異動区分, FlexibleDate 異動日) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(異動区分, UrSystemErrorMessages.値がnull.getReplacedMessage("異動区分コード"));
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3003KyodoShoriyoJukyushaIdoShokanSofu.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                lt(idoYMD, 異動日),
+                                eq(idoKubunCode, 異動区分))).
+                getCount();
+    }
+
+    /**
+     * 償還送付情報の履歴番号チェック
+     *
+     * @param 被保険者番号
+     * @param 異動日
+     * @return int
+     */
+    @Transaction
+    public int get償還送付情報の履歴番号Max(HihokenshaNo 被保険者番号, FlexibleDate 異動日) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(max(rirekiNo)).
+                table(DbT3003KyodoShoriyoJukyushaIdoShokanSofu.class).
+                where(and(eq(hiHokenshaNo, 被保険者番号),
+                                eq(idoYMD, 異動日))).
+                groupBy(hiHokenshaNo, idoYMD).
+                toObject(Integer.class).intValue();
     }
 }

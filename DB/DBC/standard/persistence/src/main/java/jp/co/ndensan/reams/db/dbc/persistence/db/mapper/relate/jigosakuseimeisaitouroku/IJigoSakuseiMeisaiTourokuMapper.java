@@ -9,9 +9,11 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.KubunGendoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.KyufuJikoSakuseiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.TankiNyushoParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KubunGendoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KyufuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.ServiceTypeTotalEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.TankiNyushoEntity;
 
 /**
  * サービス利用票情報 Mapperインタファースクラスです。
@@ -43,4 +45,12 @@ public interface IJigoSakuseiMeisaiTourokuMapper {
      * @return KubunGendoEntity
      */
     KubunGendoEntity get区分限度額統計処理(KubunGendoParameter param);
+
+    /**
+     * 短期入所情報を取得します。
+     *
+     * @param param TankiNyushoParameter
+     * @return TankiNyushoEntity
+     */
+    TankiNyushoEntity get短期入所情報(TankiNyushoParameter param);
 }

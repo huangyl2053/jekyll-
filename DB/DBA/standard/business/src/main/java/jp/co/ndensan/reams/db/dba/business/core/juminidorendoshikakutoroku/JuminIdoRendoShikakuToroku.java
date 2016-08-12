@@ -36,6 +36,9 @@ public class JuminIdoRendoShikakuToroku {
      * @return 被保険者台帳Entity
      */
     public DbV1001HihokenshaDaichoEntity totatsu1go(UaFt200FindShikibetsuTaishoEntity 住民異動情報, DbV1001HihokenshaDaichoEntity 被保険者台帳) {
+        if (住民異動情報 == null || 被保険者台帳 == null) {
+            throw new NullPointerException();
+        }
         IDateOfBirth dateofbirth = DateOfBirthFactory.createInstance(住民異動情報.getSeinengappiYMD());
         AgeCalculator agecalculator = new AgeCalculator(dateofbirth, JuminJotai.toValue(住民異動情報.getJuminJotaiCode()),
                 住民異動情報.getShojoIdoYMD());
@@ -60,6 +63,9 @@ public class JuminIdoRendoShikakuToroku {
      * @return 被保険者台帳Entity
      */
     public DbV1001HihokenshaDaichoEntity tenkyo(UaFt200FindShikibetsuTaishoEntity 住民異動情報, DbV1001HihokenshaDaichoEntity 被保険者台帳) {
+        if (住民異動情報 == null || 被保険者台帳 == null) {
+            throw new NullPointerException();
+        }
         IDateOfBirth dateofbirth = DateOfBirthFactory.createInstance(住民異動情報.getSeinengappiYMD());
         AgeCalculator agecalculator = new AgeCalculator(dateofbirth, JuminJotai.toValue(住民異動情報.getJuminJotaiCode()),
                 住民異動情報.getShojoIdoYMD());

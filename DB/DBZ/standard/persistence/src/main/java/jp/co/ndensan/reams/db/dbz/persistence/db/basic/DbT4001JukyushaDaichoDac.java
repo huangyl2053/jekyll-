@@ -544,4 +544,28 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                 order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).limit(1).
                 toObject(DbT4001JukyushaDaichoEntity.class);
     }
+
+    /**
+     * 受給者台帳を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 開始利用年月 開始利用年月
+     * @param 終了利用年月 終了利用年月
+     * @return List<DbT4001JukyushaDaichoEntity>
+     * @throws NullPointerException 引数被保険者番号がnullの場合
+     */
+    @Transaction
+    public List<DbT4001JukyushaDaichoEntity> select受給者台帳By被保険者番号(HihokenshaNo 被保険者番号, FlexibleDate 開始利用年月,
+            FlexibleDate 終了利用年月) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT4001JukyushaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                leq(ninteiYukoKikanKaishiYMD, 終了利用年月),
+                                leq(開始利用年月, ninteiYukoKikanShuryoYMD),
+                                eq(logicalDeletedFlag, false))).
+                toList(DbT4001JukyushaDaichoEntity.class);
+    }
 }

@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
- * 帳票設計_DBCMNN2003_事業分高額合算支給決定通知書（単）のReportSourceクラスです。
+ * （高額合算支給（不支給）決定通知書）支払予定日なしのReportSourceクラスです。
  *
  * @reamsid_L DBC-4850-030 dongqianjing
  */

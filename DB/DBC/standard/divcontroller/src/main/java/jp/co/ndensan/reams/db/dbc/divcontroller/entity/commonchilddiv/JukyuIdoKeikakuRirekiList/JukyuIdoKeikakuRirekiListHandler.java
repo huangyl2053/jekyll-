@@ -66,6 +66,9 @@ public class JukyuIdoKeikakuRirekiListHandler {
                 if (keikakurireki.get委託先事業者名称() != null) {
                     dgRow.setItakusakiJigyoshaName(keikakurireki.get委託先事業者名称().value());
                 }
+                if (keikakurireki.get計画事業者番号() != null) {
+                    dgRow.setKeikakuJigyoshaNo(keikakurireki.get計画事業者番号().value());
+                }
                 rowList.add(dgRow);
             }
         }

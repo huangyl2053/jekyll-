@@ -51,10 +51,10 @@ public class KogakuJigyoOshiraseTsuchishoKigenAriEditor implements IKogakuJigyoO
         }
 
         if (entity.get申請情報帳票発行一時() != null) {
-            source.hihokenshaNameKana = entity.get申請情報帳票発行一時().getShimeikana().value();
-            source.hihokenshaName = entity.get申請情報帳票発行一時().getMeisho().value();
-            source.seibetsu = entity.get申請情報帳票発行一時().getSeibetsuCode();
-            source.birthYMD = entity.get申請情報帳票発行一時().getSeinengappiYMD().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+            source.hihokenshaNameKana = entity.get申請情報帳票発行一時().getShimeikanaChohyo().value();
+            source.hihokenshaName = entity.get申請情報帳票発行一時().getMeishoChohyo().value();
+            source.seibetsu = entity.get申請情報帳票発行一時().getSeibetsuCodeChohyo();
+            source.birthYMD = entity.get申請情報帳票発行一時().getSeinengappiYMDChohyo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             source.hokensha_no = entity.get申請情報帳票発行一時().getShoKisaiHokenshaNoChohyo().value();
             source.hihokenshaNo = entity.get申請情報帳票発行一時().getHihokenshaNoChohyo().value();

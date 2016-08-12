@@ -18,9 +18,11 @@ import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.Service
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.TankiNyushoResult;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.KubunGendoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.KyufuJikoSakuseiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.TankiNyushoParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KubunGendoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KyufuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.ServiceTypeTotalEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.TankiNyushoEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jigosakuseimeisaitouroku.IJigoSakuseiMeisaiTourokuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
@@ -103,7 +105,7 @@ public class JigoSakuseiMeisaiTouroku {
             合計計算情報.set費用総額(小数点以下を切り(費用総額));
         }
 
-        if (利用者負担額 != null) {
+        if (利用者負担額 != null && !Decimal.ZERO.equals(利用者負担額)) {
             合計計算情報.set保険対象利用者負担額(利用者負担額);
             合計計算情報.set保険給付額(合計計算情報.get費用総額().subtract(nullToZero(合計計算情報.get保険対象利用者負担額())));
         } else {
@@ -145,7 +147,7 @@ public class JigoSakuseiMeisaiTouroku {
         for (KyufuJikoSakuseiResult result : 明細合計リスト) {
             if (result.is合計フラグ()) {
                 if (限度対象外フラグ.equals(result.get限度額対象外フラグ())) {
-                    サービス単位 = result.getサービス単位().add(サービス単位);
+                    サービス単位 = nullToZero(result.getサービス単位()).add(サービス単位);
                     種類限度内単位 = nullToZero(result.get種類限度内単位()).add(種類限度内単位);
                     種類限度超過単位 = nullToZero(result.get種類限度超過単位()).add(種類限度超過単位);
                     区分限度内単位 = nullToZero(result.get区分限度内単位()).add(区分限度内単位);
@@ -255,7 +257,7 @@ public class JigoSakuseiMeisaiTouroku {
             result.set割引適用後率(entity.get割引適用後率());
             result.set割引適用後単位(entity.get割引適用後単位());
             result.set回数(entity.get回数());
-            result.setサービス単位(entity.getサービス単位());
+            result.setサービス単位(entity.get給付計画単位数());
             result.set種類限度超過単位(entity.get種類限度超過単位());
             result.set種類限度内単位(entity.get種類限度内単位());
             result.set単位数単価(entity.get単位数単価());
@@ -303,8 +305,10 @@ public class JigoSakuseiMeisaiTouroku {
      */
     public KubunGendo getKubunGendo(HihokenshaNo 被保険者番号, RString 居宅総合事業区分, FlexibleYearMonth 利用年月) {
         KubunGendo gendo = new KubunGendo();
-        FlexibleDate 開始利用年月 = new FlexibleDate(利用年月.toString().concat(new RString(利用年月.getLastDay()).toString()));
-        FlexibleDate 終了利用年月 = new FlexibleDate(利用年月.toString().concat(定値_01.toString()));
+        FlexibleDate 開始利用年月 = (利用年月 == null) ? null
+                : new FlexibleDate(利用年月.toString().concat(new RString(利用年月.getLastDay()).toString()));
+        FlexibleDate 終了利用年月 = (利用年月 == null) ? null
+                : new FlexibleDate(利用年月.toString().concat(定値_01.toString()));
         if (区分_総合事業.equals(居宅総合事業区分)) {
             IJigoSakuseiMeisaiTourokuMapper mapper = mapperProvider.create(IJigoSakuseiMeisaiTourokuMapper.class);
             KubunGendoParameter param = KubunGendoParameter.createParam(被保険者番号, 利用年月, 開始利用年月, 終了利用年月);
@@ -343,7 +347,33 @@ public class JigoSakuseiMeisaiTouroku {
      */
     public TankiNyushoResult getTankiNyuryo(HihokenshaNo 被保険者番号, FlexibleYearMonth 対象年月, int 履歴番号,
             FlexibleYearMonth 利用年月) {
+        IJigoSakuseiMeisaiTourokuMapper mapper = mapperProvider.create(IJigoSakuseiMeisaiTourokuMapper.class);
+        TankiNyushoParameter param = TankiNyushoParameter.creatParam(被保険者番号, 対象年月, 履歴番号, 利用年月);
+        TankiNyushoEntity entity = mapper.get短期入所情報(param);
+        if (entity == null) {
+            return null;
+        }
+        TankiNyushoResult result = new TankiNyushoResult();
+        result.setEntity(entity);
+        return result;
+    }
 
-        return null;
+    /**
+     * 利用年月チェックメソッドです。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年月 FlexibleYearMonth
+     * @return int
+     */
+    public int load利用年月チェック(HihokenshaNo 被保険者番号, FlexibleYearMonth 対象年月) {
+        FlexibleDate 開始利用年月 = (対象年月 == null) ? null
+                : new FlexibleDate(対象年月.toString().concat(new RString(対象年月.getLastDay()).toString()));
+        FlexibleDate 終了利用年月 = (対象年月 == null) ? null
+                : new FlexibleDate(対象年月.toString().concat(定値_01.toString()));
+        List<DbT4001JukyushaDaichoEntity> entityList = dac.select受給者台帳By被保険者番号(被保険者番号, 開始利用年月, 終了利用年月);
+        if (entityList == null || entityList.isEmpty()) {
+            return 0;
+        }
+        return entityList.size();
     }
 }

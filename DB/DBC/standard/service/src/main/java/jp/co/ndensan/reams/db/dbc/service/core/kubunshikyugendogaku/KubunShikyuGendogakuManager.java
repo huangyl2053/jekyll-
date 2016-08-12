@@ -58,4 +58,13 @@ public class KubunShikyuGendogakuManager {
         return lists;
     }
 
+    /**
+     * サービス種類登録を取得します。
+     *
+     * @param entity DbT7130KaigoServiceShuruiEntity
+     */
+    public void save(KaigoServiceShurui entity) {
+        kaigoServiceDac.save(entity.toEntity());
+    }
+
 }

@@ -52,6 +52,80 @@ public interface IKyodoJukyushaIdoRenrakuhyoDiv extends ICommonChildDivBasePrope
     public ValidationMessageControlPairs get一時差止日の関連チェック();
 
     /**
+     * 基本送付情報の異動日チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 基本送付情報の異動日チェック();
+
+    /**
+     * 償還送付情報の異動日チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 償還送付情報の異動日チェック();
+
+    /**
+     * 高額送付情報の異動日チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 高額送付情報の異動日チェック();
+
+    /**
+     * 基本送付情報の異動区分チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 基本送付情報の異動区分チェック();
+
+    /**
+     * 償還送付情報の異動区分チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 償還送付情報の異動区分チェック();
+
+    /**
+     * 高額送付情報の異動区分チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 高額送付情報の異動区分チェック();
+
+    /**
+     * 基本送付情報の履歴番号チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 基本送付情報の履歴番号チェック();
+
+    /**
+     * 償還送付情報の履歴番号チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 償還送付情報の履歴番号チェック();
+
+    /**
+     * 高額送付情報の履歴番号チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 高額送付情報の履歴番号チェック();
+
+    /**
+     * 修正有無チェック
+     *
+     * @param 初期化異動情報Entity
+     * @param 画面項目異動情報Entity
+     * @param checkFlag
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 修正有無チェック(KyodoshoriyoJukyushaIdoRenrakuhyoParam 初期化異動情報Entity,
+            KyodoshoriyoJukyushaIdoRenrakuhyoParam 画面項目異動情報Entity, boolean checkFlag);
+
+    /**
      * 「基本送付情報を追加する」チェックボックス。
      *
      * @return list
