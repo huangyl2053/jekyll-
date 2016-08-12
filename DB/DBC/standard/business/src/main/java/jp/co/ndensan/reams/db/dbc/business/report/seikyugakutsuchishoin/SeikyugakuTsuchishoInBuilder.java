@@ -3,36 +3,36 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.report.kogakukyufutaishoshaichiran;
+package jp.co.ndensan.reams.db.dbc.business.report.seikyugakutsuchishoin;
 
-import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakukyufutaishoshaichiran.KogakuKyufuTaishoshaIchiranSource;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.seikyugakutsuchishoin.SeikyugakuTsuchishoSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- * 高額介護サービス費給付対象者一覧表帳票Builder
+ * 介護給付費等請求額通知書一覧表帳票Builder
  *
- * @reamsid_L DBC-0980-490 surun
+ * @reamsid_L DBC-2480-030 jiangwenkai
  */
-public class KogakuKyufuTaishoshaIchiranBuilder implements IKogakuKyufuTaishoshaIchiranBuilder {
+public class SeikyugakuTsuchishoInBuilder implements ISeikyugakuTsuchishoInBuilder {
 
-    private final IKogakuKyufuTaishoshaIchiranEditor headerEditor;
-    private final IKogakuKyufuTaishoshaIchiranEditor bodyEditor;
+    private final ISeikyugakuTsuchishoInEditor headerEditor;
+    private final ISeikyugakuTsuchishoInEditor bodyEditor;
 
     /**
      * コンストラクタです
      *
-     * @param headerEditor IKogakuKyufuTaishoshaIchiranEditor
-     * @param bodyEditor IKogakuKyufuTaishoshaIchiranEditor
+     * @param headerEditor ISeikyugakuTsuchishoInEditor
+     * @param bodyEditor ISeikyugakuTsuchishoInEditor
      */
-    public KogakuKyufuTaishoshaIchiranBuilder(
-            IKogakuKyufuTaishoshaIchiranEditor headerEditor,
-            IKogakuKyufuTaishoshaIchiranEditor bodyEditor) {
+    public SeikyugakuTsuchishoInBuilder(
+            ISeikyugakuTsuchishoInEditor headerEditor,
+            ISeikyugakuTsuchishoInEditor bodyEditor) {
         this.headerEditor = headerEditor;
         this.bodyEditor = bodyEditor;
     }
 
     @Override
-    public KogakuKyufuTaishoshaIchiranSource build() {
-        return ReportEditorJoiner.from(new KogakuKyufuTaishoshaIchiranSource()).join(headerEditor).join(bodyEditor).buildSource();
+    public SeikyugakuTsuchishoSource build() {
+        return ReportEditorJoiner.from(new SeikyugakuTsuchishoSource()).join(headerEditor).join(bodyEditor).buildSource();
     }
 }

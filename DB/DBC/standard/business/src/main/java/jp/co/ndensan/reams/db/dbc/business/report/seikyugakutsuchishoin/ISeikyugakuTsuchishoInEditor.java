@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.report.kogakukyufutaishoshaichiran;
+package jp.co.ndensan.reams.db.dbc.business.report.seikyugakutsuchishoin;
 
-import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakukyufutaishoshaichiran.KogakuKyufuTaishoshaIchiranSource;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.seikyugakutsuchishoin.SeikyugakuTsuchishoSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- * 高額介護サービス費給付対象者一覧表帳票IEditor
+ * 介護給付費等請求額通知書一覧表帳票IEditor
  *
- * @reamsid_L DBC-0980-490 surun
+ * @reamsid_L DBC-2480-030 jiangwenkai
  */
-public interface IKogakuKyufuTaishoshaIchiranEditor extends IReportEditor<KogakuKyufuTaishoshaIchiranSource> {
+public interface ISeikyugakuTsuchishoInEditor extends IReportEditor<SeikyugakuTsuchishoSource> {
 
 }

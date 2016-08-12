@@ -34,8 +34,8 @@ public class KeikakuRirekiIchiran {
     private final MapperProvider mapperProvider;
     private final DbT7060KaigoJigyoshaDac 介護事業者Dac;
     private final DbT7063KaigoJigyoshaShiteiServiceDac 介護事業者指定サービスDac;
-    private final RString data_A = new RString("A");
-    private final RString data_B = new RString("B");
+    private final RString DATE_A = new RString("A");
+    private final RString DATE_B = new RString("B");
     private final AtenaMeisho 定数_自己作成 = new AtenaMeisho("自己作成");
     private final RString 準拠する = new RString('1');
     private final RString 準拠しない = new RString('0');
@@ -84,10 +84,10 @@ public class KeikakuRirekiIchiran {
         }
         for (KeikakuRirekiIchiranEnitity keienitity : entityList) {
             KeikakuRireki 計画履歴一覧情報 = new KeikakuRireki();
-            if (data_A.equals(keienitity.getKyotakuKeikakuShurui())) {
+            if (DATE_A.equals(keienitity.getKyotakuKeikakuShurui())) {
                 計画履歴一覧情報.set計画事業者名称(get事業者名称(keienitity.getTekiyoKaishiYMD(), keienitity.getKeikakuJigyoshaNo()));
                 計画履歴一覧情報.set委託先事業者名称(get事業者名称(keienitity.getTekiyoKaishiYMD(), keienitity.getItakusakiJigyoshaNo()));
-            } else if (data_B.equals(keienitity.getKyotakuKeikakuShurui())) {
+            } else if (DATE_B.equals(keienitity.getKyotakuKeikakuShurui())) {
                 計画履歴一覧情報.set計画事業者名称(定数_自己作成);
             }
             if (データあり.equals(keienitity.getZanteiKubun())) {
@@ -115,18 +115,19 @@ public class KeikakuRirekiIchiran {
         if (dbt7060entity != null) {
             介護事業者_事業者名称 = dbt7060entity.getJigyoshaName();
         }
-        AtenaMeisho 介護事業者指定サービス_事業者名称;
+        AtenaMeisho 介護事業者指定サービス_事業者名称 = null;
         DbT7063KaigoJigyoshaShiteiServiceEntity dbt7063entity = 介護事業者指定サービスDac.select_事業者名称(tekiyoKaishiYMD, keikakuJigyoshaNo);
         if (dbt7063entity != null) {
             介護事業者指定サービス_事業者名称 = dbt7063entity.getJigyoshaName();
         } else {
-            return 介護事業者_事業者名称;
+            return 介護事業者指定サービス_事業者名称;
         }
         if (準拠する.equals(dbt7063entity.getKihonJohoJunkyoKubun())) {
             return 介護事業者_事業者名称;
         } else if (準拠しない.equals(dbt7063entity.getKihonJohoJunkyoKubun())) {
             return 介護事業者指定サービス_事業者名称;
         }
+
         return atenameisho;
     }
 
