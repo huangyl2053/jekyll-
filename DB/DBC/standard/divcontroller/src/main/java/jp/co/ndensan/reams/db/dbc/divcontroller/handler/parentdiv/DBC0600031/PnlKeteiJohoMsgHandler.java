@@ -30,6 +30,7 @@ public final class PnlKeteiJohoMsgHandler {
 
     private final PnlKeteiJohoMsgDiv div;
     private static final RString 決定日 = new RString("決定日");
+    private static final RString 支払金額合計 = new RString("支払金額合計");
 
     private PnlKeteiJohoMsgHandler(PnlKeteiJohoMsgDiv div) {
         this.div = div;
@@ -160,6 +161,18 @@ public final class PnlKeteiJohoMsgHandler {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         pairs.add(new ValidationMessageControlPair(new PnlKeteiJohoMsgHandler.IdocheckMessages(
                 UrErrorMessages.必須, 決定日.toString())));
+        return pairs;
+    }
+
+    /**
+     * 支払金額合計入力チェックのメソッドます。
+     *
+     * @return ResponseData
+     */
+    public ValidationMessageControlPairs getCheck支払金額合計Message() {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        pairs.add(new ValidationMessageControlPair(new PnlKeteiJohoMsgHandler.IdocheckMessages(
+                UrErrorMessages.必須, 支払金額合計.toString())));
         return pairs;
     }
 
