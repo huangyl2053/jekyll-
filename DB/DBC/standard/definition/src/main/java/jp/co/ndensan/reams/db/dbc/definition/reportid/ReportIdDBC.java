@@ -50,6 +50,10 @@ public enum ReportIdDBC {
     /**
      * 総合事業費過誤決定通知書情報取込一覧表
      */
+    DBC200075(new ReportId("DBC200075_SogojigyohiKagoKetteiTsuchishoTorikomiIchiran"), new RString("総合事業費（経過措置）過誤決定通知書情報取込一覧表")),
+    /**
+     * 総合事業費過誤決定通知書情報取込一覧表
+     */
     DBC200085(new ReportId("DBC200085_SogojigyohiKagoKetteiTsuchishoTorikomiIchiran"), new RString("総合事業費過誤決定通知書情報取込一覧表")),
     /**
      * 給付実績更新結果情報一覧表
