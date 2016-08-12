@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE1920001
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.renkeidatatorikomi.RenkeiDataTorikomiBatchParamter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.DBE1920001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.RenkeiDataTorikomiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.dgTorikomiTaisho_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1920001.RenkeiDataTorikomiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1920001.RenkeiDataTorikomiValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.renkeidatatorikomi.RenkeiDataTorikomiFinder;
@@ -29,6 +30,13 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class RenkeiDataTorikomi {
 
+    private static final RString 要介護認定申請連携データ取込みファイル名 = new RString("Z8NCI201.CSV");
+    private static final RString 認定調査委託先データ取込みファイル名 = new RString("C1NCI101.CSV");
+    private static final RString 認定調査員データ取込みファイル名 = new RString("C1NCI111.CSV");
+    private static final RString 主治医医療機関データ取込みファイル名 = new RString("C1NCI121.CSV");
+    private static final RString 主治医データ取込みファイル名 = new RString("C1NCI131.CSV");
+    private static final RString あり = new RString("1");
+
     /**
      * 初期化の設定します。
      *
@@ -39,11 +47,21 @@ public class RenkeiDataTorikomi {
         RString path = DbBusinessConfig.get(ConfigNameDBE.認定申請連携データ出力先, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         getHandler(div).onLoad(RenkeiDataTorikomiFinder.createInstance().get法改正前Flag(FlexibleDate.getNowDate()), path);
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        validPairs = getValidationHandler(div).check認定申請情報ファイル(validPairs, path, false);
-        validPairs = getValidationHandler(div).check認定調査委託先情報ファイル(validPairs, path, false);
-        validPairs = getValidationHandler(div).check認定調査員情報ファイル(validPairs, path, false);
-        validPairs = getValidationHandler(div).check主治医医療機関情報ファイル(validPairs, path, false);
-        validPairs = getValidationHandler(div).check主治医情報ファイル(validPairs, path, false);
+        for (dgTorikomiTaisho_Row row : div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getDataSource()) {
+            if (row.getTotal().equals(あり)) {
+                if (要介護認定申請連携データ取込みファイル名.equals(row.getFileName())) {
+                    validPairs = getValidationHandler(div).check認定申請情報ファイル(validPairs, path, false);
+                } else if (認定調査委託先データ取込みファイル名.equals(row.getFileName())) {
+                    validPairs = getValidationHandler(div).check認定調査委託先情報ファイル(validPairs, path, false);
+                } else if (認定調査員データ取込みファイル名.equals(row.getFileName())) {
+                    validPairs = getValidationHandler(div).check認定調査員情報ファイル(validPairs, path, false);
+                } else if (主治医医療機関データ取込みファイル名.equals(row.getFileName())) {
+                    validPairs = getValidationHandler(div).check主治医医療機関情報ファイル(validPairs, path, false);
+                } else if (主治医データ取込みファイル名.equals(row.getFileName())) {
+                    validPairs = getValidationHandler(div).check主治医情報ファイル(validPairs, path, false);
+                }
+            }
+        }
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }

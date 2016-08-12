@@ -302,7 +302,7 @@ public class RenkeiDataTorikomiHandler {
     private void getFileCount(RString path, RString ファイル, dgTorikomiTaisho_Row row) {
         RStringBuilder builder = new RStringBuilder();
         builder.append(path).append(File.separator).append(ファイル);
-        File file = new File(path.toString());
+        File file = new File(builder.toString());
         if (file.exists()) {
             row.setTotal(あり);
         } else {
