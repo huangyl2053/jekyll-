@@ -207,7 +207,11 @@ public enum ReportIdDBC {
     /**
      * 帳票設計_DBC200068_総合事業費（経過措置）請求額通知書帳票ＩＤです。
      */
-    DBC200068(new ReportId("DBC200068_SogojigyohiSeikyugakuTsuchishoKeikaSochi"), new RString("総合事業費（経過措置）請求額通知書"));
+    DBC200068(new ReportId("DBC200068_SogojigyohiSeikyugakuTsuchishoKeikaSochi"), new RString("総合事業費（経過措置）請求額通知書")),
+    /**
+     * 介護給付費等請求額通知書帳票ＩＤです。
+     */
+    DBC120230(new ReportId("DBC200066_SeikyugakuTsuchisho"), new RString("介護給付費等請求額通知書"));
 
     private final ReportId reportId;
     private final RString reportName;

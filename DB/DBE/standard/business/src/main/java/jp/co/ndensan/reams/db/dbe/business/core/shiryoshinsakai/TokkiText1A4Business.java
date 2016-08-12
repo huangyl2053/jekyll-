@@ -334,6 +334,7 @@ public class TokkiText1A4Business {
         RStringBuilder イメージファイル = new RStringBuilder();
         RString ファイル名 = getファイル名By特記番号(特記事項番号);
         if (!RString.isNullOrEmpty(ファイル名)) {
+            イメージファイル.append(ファイル名);
             for (int i = 0; i <= 最大連番; i++) {
                 if (i == 特記事項連番) {
                     イメージファイル.append(new RString(特記事項連番).padZeroToLeft(2));

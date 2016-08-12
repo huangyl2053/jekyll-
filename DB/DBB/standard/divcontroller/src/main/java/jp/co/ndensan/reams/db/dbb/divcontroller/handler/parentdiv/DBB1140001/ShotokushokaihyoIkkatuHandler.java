@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
- * 画面設計_DBBGM51001_所得照会票一括発行
+ * 画面設計_DBBGM51001_所得照会票一括発行のクラスです。
  *
  * @reamsid_L DBB-1720-010 lijunjun
  */
@@ -69,7 +69,7 @@ public class ShotokushokaihyoIkkatuHandler {
     }
 
     /**
-     * 初期化のメソッド
+     * 初期化のメソッドです。
      */
     public void initialize() {
         set処理年度();
@@ -81,7 +81,18 @@ public class ShotokushokaihyoIkkatuHandler {
     }
 
     /**
-     * 再発行対象をonLoadイベント。
+     * 「再発行する」チェックボックスのメソッドです。
+     */
+    public void check再発行する() {
+        List<RString> 再発行する = div.getChkSaihakko().getSelectedKeys();
+        if (再発行する.contains(キー_KEY0)) {
+            div.getChkTestPrint().setDisabled(true);
+            div.getChkShuturyokuTaisho().setDisabled(true);
+        }
+    }
+
+    /**
+     * 再発行対象をonLoadイベントのメソッドです。
      */
     public void set再発行対象() {
         List<dgSaihakko_Row> rowList = new ArrayList<>();
@@ -94,7 +105,7 @@ public class ShotokushokaihyoIkkatuHandler {
                 row.setTxtShoriNichiji(new FlexibleDate(saiHakko.getEntity().get処理日時()
                         .getRDateTime().getDate().toDateString()).wareki().toDateString());
                 row.setTxtHakkoKensu(new RString(String.valueOf(saiHakko.getEntity().get発行件数())));
-                RString 氏名 = new RString(AuthUser.getUser(saiHakko.getEntity().getユーザ()).getKanaShimei().toString());
+                RString 氏名 = new RString(AuthUser.getUser(saiHakko.getEntity().getユーザ()).getName().toString());
                 RString ユーザ = saiHakko.getEntity().getユーザ().concat(RString.FULL_SPACE).concat(氏名);
                 row.setTxtUser(ユーザ);
                 rowList.add(row);
@@ -104,7 +115,7 @@ public class ShotokushokaihyoIkkatuHandler {
     }
 
     /**
-     * 処理年度の初期化
+     * 処理年度の初期化のメソッドです。
      */
     public void set処理年度() {
         RYear 処理年度_当初年度 = new RYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_当初年度,
@@ -113,7 +124,7 @@ public class ShotokushokaihyoIkkatuHandler {
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
         List<KeyValueDataSource> 処理年度 = new ArrayList<>();
         int flag = 0;
-        for (int i = 処理年度_当初年度.getYearValue(); i <= 処理年度_所得年度.getYearValue(); i++) {
+        for (int i = 処理年度_所得年度.getYearValue(); 処理年度_当初年度.getYearValue() <= i; i--) {
             KeyValueDataSource dataSource = new KeyValueDataSource();
             dataSource.setKey(new RString(String.valueOf(flag)));
             dataSource.setValue(new RYear(String.valueOf(i)).wareki().toDateString());
@@ -124,7 +135,7 @@ public class ShotokushokaihyoIkkatuHandler {
     }
 
     /**
-     * 再発行一覧の初期化
+     * 再発行一覧の初期化のメソッドです。
      *
      * @param row dgSaihakko_Row
      */
@@ -142,7 +153,7 @@ public class ShotokushokaihyoIkkatuHandler {
     }
 
     /**
-     * パラメタを取得します。
+     * パラメタを取得のメソッドです。
      *
      * @param div ShotokushokaihyoIkkatuDiv
      * @param テストプリント boolean
@@ -240,7 +251,7 @@ public class ShotokushokaihyoIkkatuHandler {
     }
 
     /**
-     * 再発行対象のチェック
+     * 再発行対象のチェックのメソッドです。
      *
      * @param 再発行する boolean
      * @return boolean

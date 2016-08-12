@@ -51,6 +51,9 @@ public class KyodoIdoRenrakuhyoHenkoMain {
         FlexibleDate 異動日 = 対象者一覧.get異動日();
         boolean 論理削除フラグ = 対象者一覧.is論理削除フラグ();
         FlexibleYearMonth 対象年月 = 対象者一覧.get対象年月();
+        if (対象年月 == null) {
+            対象年月 = FlexibleYearMonth.EMPTY;
+        }
         ShikibetsuCode 識別コード = KyodoshoriyoJukyushaIdoRenrakuhyo.createInstance().get識別コード(被保険者番号);
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         KyodoshoriyoJukyushaIdoRenrakuhyoParam entity = getHandler(div).initialize(

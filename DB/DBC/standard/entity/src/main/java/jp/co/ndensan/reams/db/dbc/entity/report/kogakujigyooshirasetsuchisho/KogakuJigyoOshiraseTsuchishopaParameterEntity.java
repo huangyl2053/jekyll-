@@ -25,12 +25,13 @@ public class KogakuJigyoOshiraseTsuchishopaParameterEntity {
     private SofubutsuAtesakiSource 送付別宛先;
     private NinshoshaSource 認証者;
     private RString タイトル;
-    private RString バッチパラメータ;
     private boolean is自動償還;
     private boolean is空白;
     private RString 文書番号文字列;
     private FlexibleDate 申請書提出期限;
+
     private RString 通知文1;
     private RString 通知文2;
+    private RString 連番;
 
 }

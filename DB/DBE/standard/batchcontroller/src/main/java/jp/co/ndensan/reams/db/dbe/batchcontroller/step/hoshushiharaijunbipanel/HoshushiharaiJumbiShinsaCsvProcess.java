@@ -59,7 +59,7 @@ public class HoshushiharaiJumbiShinsaCsvProcess extends BatchProcessBase<Hoshush
     private RString eucFilePath;
     private int count = 0;
     private int kinkaku = 0;
-    private final int maxKeepVersions = 1;
+    private static final int maxKeepVersions = 1;
     private static final int INT_ONE = 110;
     private static final int INT_NINE = 119;
     private OutputParameter<RString> outSharedFileName;
@@ -73,7 +73,7 @@ public class HoshushiharaiJumbiShinsaCsvProcess extends BatchProcessBase<Hoshush
         outSharedFileName = new OutputParameter<>();
         outSharedFileID = new OutputParameter<>();
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("HoshuShiharaiChosa.DAT"));
+        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("HoshuShiharaiShinsakaiiin.DAT"));
 
     }
 
@@ -90,7 +90,7 @@ public class HoshushiharaiJumbiShinsaCsvProcess extends BatchProcessBase<Hoshush
     @Override
     protected void process(HoshushiharaiJumbiPanelBatchRelateEntity entity) {
         count++;
-        kinkaku = kinkaku + entity.getChosaItakuryo();
+        kinkaku = kinkaku + entity.getShinsakaiHoshuGokei();
         HoshushiharaiJumbiBusiness business = new HoshushiharaiJumbiBusiness();
         batchsimplewriter.writeLine(business.setEucCsvEntity(entity, getKoza(entity),
                 processParameter.getFurikomishiteiday()));
@@ -98,7 +98,7 @@ public class HoshushiharaiJumbiShinsaCsvProcess extends BatchProcessBase<Hoshush
 
     @Override
     protected void afterExecute() {
-        FilesystemName ファイル名称 = new FilesystemName(new RString("HoshuShiharaiChosa.DAT"));
+        FilesystemName ファイル名称 = new FilesystemName(new RString("HoshuShiharaiShinsakaiiin.DAT"));
         setSharedFile(ファイル名称);
         RStringBuilder builder = new RStringBuilder();
         builder.append(new RString("8"));
@@ -162,7 +162,7 @@ public class HoshushiharaiJumbiShinsaCsvProcess extends BatchProcessBase<Hoshush
                 association.getLasdecCode_().value(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                new RString("HoshuShiharaiChosa.DAT"),
+                new RString("HoshuShiharaiShinsakaiiin.DAT"),
                 EUC_ENTITY_ID.toRString(),
                 new HoshushiharaiJumbiBusiness().get出力件数(new Decimal(batchsimplewriter.getCount())),
                 new HoshushiharaiJumbiBusiness().get出力条件(processParameter));

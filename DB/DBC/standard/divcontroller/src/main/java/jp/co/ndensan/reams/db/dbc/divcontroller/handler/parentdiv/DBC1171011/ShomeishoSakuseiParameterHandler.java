@@ -54,11 +54,11 @@ public class ShomeishoSakuseiParameterHandler {
         initialize();
 
         if (前回の実行情報 != null) {
-            if (!FlexibleDate.EMPTY.equals(前回の実行情報.get対象開始年月日())) {
+            if (null != 前回の実行情報.get対象開始年月日() || (!FlexibleDate.EMPTY.equals(前回の実行情報.get対象開始年月日()))) {
                 div.getJikoFutanShomeishoSakusei().getTxtZenkaiTaishoDate().setFromValue(
                         new RDate(前回の実行情報.get対象開始年月日().toString()));
             }
-            if (!FlexibleDate.EMPTY.equals(前回の実行情報.get対象終了年月日())) {
+            if (null != 前回の実行情報.get対象終了年月日() || (!FlexibleDate.EMPTY.equals(前回の実行情報.get対象終了年月日()))) {
                 div.getJikoFutanShomeishoSakusei().getTxtZenkaiTaishoDate().setToValue(
                         new RDate(前回の実行情報.get対象終了年月日().toString()));
                 div.getJikoFutanShomeishoSakusei().getTxtShinseiDate().setFromValue(

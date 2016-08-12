@@ -165,7 +165,7 @@ public class ShokanBaraiKa1GoHandler {
                 break;
         }
         div.setKey_ShiharaiHohoHenkoKanri(
-                DataPassingConverter.serialize(ViewStateHolder.get(一号償還払い化ダイアログキー.支払方法変更管理業務概念, TainoHanteiResultKohen.class)));
+                DataPassingConverter.serialize(ViewStateHolder.get(一号償還払い化ダイアログキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class)));
         return pairs;
     }
 

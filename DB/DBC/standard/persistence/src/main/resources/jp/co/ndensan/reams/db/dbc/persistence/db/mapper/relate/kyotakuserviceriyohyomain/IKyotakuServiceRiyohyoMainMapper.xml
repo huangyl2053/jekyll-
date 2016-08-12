@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 居宅サービス取得のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-1930-030 huzongcheng -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyotakuserviceriyohyomain.IKyotakuServiceRiyohyoMainMapper">
+     <resultMap id="resultMap_KyotakuService"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyotakuserviceriyohyomain.KyotakuServiceRirekiEntity"
+               autoMapping="true">
+        <id property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="taishoYM" column="taishoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="rirekiNo" column="rirekiNo"/>
+        <result property="todokedeYMD" column="todokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="sakuseiKubunCode" column="sakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tekiyoKaishiYMD" column="tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tekiyoShuryoYMD" column="tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="keikakuHenkoYMD" column="keikakuHenkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="rirekiSort" column="rirekiSort"/>
+        <result property="sogoJigyoKubun" column="sogoJigyoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="resultMap_TaishoshaIchiran"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyotakuserviceriyohyomain.TaishoshaichiranEntity"
+               autoMapping="true">
+        <id property="riyoYM" column="riyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="koshinKubun" column="koshinKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="koshinYMD" column="koshinYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="sofuYM" column="sofuYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+    </resultMap>
+    
+    <select id="get居宅サービス履歴一覧"
+            resultMap="resultMap_KyotakuService"
+            parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
+        SELECT
+            *
+        FROM
+            (
+            SELECT
+                A."hihokenshaNo" AS "hihokenshaNo",
+                A."taishoYM" AS "taishoYM",
+                B."sakuseiKubunCode" AS "sakuseiKubunCode",
+                B."tekiyoKaishiYMD" AS "tekiyoKaishiYMD",
+                B."tekiyoShuryoYMD" AS "tekiyoShuryoYMD",
+                A."todokedeYMD" AS "todokedeYMD",
+                B."keikakuHenkoYMD" AS "keikakuHenkoYMD",
+                A."rirekiNo" AS "rirekiNo",
+                row_number() OVER (PARTITION BY
+                    A."hihokenshaNo",
+                    A."taishoYM"
+                ORDER BY  A."rirekiNo" DESC) AS "rirekiSort",
+                B."kyotaku_SogoJigyoKubun" AS "sogoJigyoKubun"
+            FROM
+                rgdb."DbT3005KyotakuKeikakuTodokede" A
+            INNER JOIN
+                rgdb."DbT3007KyotakuKeikakuJikoSakusei" B
+                ON  A."hihokenshaNo" = B."hihokenshaNo"
+                AND A."taishoYM" = B."taishoYM"
+                AND A."rirekiNo" = B."rirekiNo"
+            WHERE
+                A."hihokenshaNo" = #{被保険者番号}
+            ) AS C
+        WHERE C."rirekiSort" = '1'
+        ORDER BY C."taishoYM" DESC
+    </select>
+    
+    <select id="get対象情報一覧"
+            resultMap="resultMap_TaishoshaIchiran"
+            parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
+        SELECT
+            *
+        FROM
+            (
+            SELECT
+                A."riyoYM" AS "riyoYM",
+                A."koshinKubun" AS "koshinKubun",
+                A."koshinYMD" AS "koshinYMD",
+                A."sofuYM" AS "sofuYM"
+            FROM
+                rgdb."DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu" A
+            WHERE
+                A."hihokenshaNo" = #{被保険者番号}
+		AND A."taishoYM" = #{対象年月}
+		AND A."rirekiNo" = #{履歴番号}
+            UNION
+            SELECT
+                B."riyoYM" AS "riyoYM",
+                B."koshinKubun" AS "koshinKubun",
+                B."koshinYMD" AS "koshinYMD",
+                B."sofuYM" AS "sofuYM"
+            FROM
+                rgdb."DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu" B
+            WHERE
+                B."hihokenshaNo" = #{被保険者番号}
+		AND B."taishoYM" = #{対象年月}
+		AND B."rirekiNo" = #{履歴番号}
+            ) AS C
+        ORDER BY C."riyoYM" DESC
+    </select>
+</mapper>

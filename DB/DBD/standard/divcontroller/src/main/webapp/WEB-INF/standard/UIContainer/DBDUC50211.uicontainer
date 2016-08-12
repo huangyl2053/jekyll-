@@ -74,11 +74,39 @@
     },
     {
      "id": "6",
-     "type": "end",
+     "type": "ordinal",
      "layoutSubGyomuCode": "DBD",
      "layoutName": "DBD5020001",
      "layoutTitle": "要介護認定　新規認定",
      "eventName": "区分変更通知書を発行",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD5320001",
+     "toLayoutTitle": "要介護認定通知書発行",
+     "toState": "初始状態"
+    },
+    {
+     "id": "7",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD5020001",
+     "layoutTitle": "要介護認定　新規認定",
+     "eventName": "サービス変更通知書を発行",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD5320001",
+     "toLayoutTitle": "要介護認定通知書発行",
+     "toState": "初始状態"
+    },
+    {
+     "id": "8",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD5320001",
+     "layoutTitle": "要介護認定通知書発行",
+     "eventName": "完了",
      "destroy": false,
      "condition": ""
     }

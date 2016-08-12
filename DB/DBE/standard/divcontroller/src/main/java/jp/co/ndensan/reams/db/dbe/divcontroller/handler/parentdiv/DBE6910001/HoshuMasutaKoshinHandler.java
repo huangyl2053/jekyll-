@@ -808,7 +808,7 @@ public class HoshuMasutaKoshinHandler {
         div.getHoshuMasutaTab().getTxtBetuShuryoYM().setDomain(選択行の審査会委員別単価情報.getShuryoYM().getValue().getYearMonth());
         div.getHoshuMasutaTab().getTxtShinsaIinKodo().setValue(選択行の審査会委員別単価情報.getShinsakaiIinCode());
         div.getHoshuMasutaTab().getTxtBetuTanka().setValue(選択行の審査会委員別単価情報.getTanka().getValue());
-        div.getHoshuMasutaTab().getTxtBetuSonotaTanka().setValue(選択行の審査会委員別単価情報.getTanka().getValue());
+        div.getHoshuMasutaTab().getTxtBetuSonotaTanka().setValue(選択行の審査会委員別単価情報.getSonotaTanka().getValue());
     }
 
     private boolean isデータ変更(dgShinsakaiIinBetuTanka_Row 選択データ) {

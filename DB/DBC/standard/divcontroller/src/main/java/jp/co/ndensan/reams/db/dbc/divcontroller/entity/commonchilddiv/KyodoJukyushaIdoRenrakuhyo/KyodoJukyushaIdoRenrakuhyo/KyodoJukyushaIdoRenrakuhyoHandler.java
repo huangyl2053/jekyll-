@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuh
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * ビジネス設計_DBCMN81004_共同処理受給者異動情報変更箇所判定
+ * ビジネス設計_DBCMN81004_共同処理受給者異動情報変更箇所判定のHandlerです。
  *
  * @reamsid_L DBC-1951-030 chenaoqi
  */
@@ -95,13 +95,13 @@ public class KyodoJukyushaIdoRenrakuhyoHandler {
             }
             if (画面項目異動情報Entity.get償還情報Entity() != null) {
                 RString 画面項目開始年月日 = 画面項目異動情報Entity.get償還情報Entity().get保険給付支払一時差止開始年月日() != null
-                        ? new RString(初期化異動情報Entity.get償還情報Entity().get保険給付支払一時差止開始年月日().toString()) : RString.EMPTY;
+                        ? new RString(画面項目異動情報Entity.get償還情報Entity().get保険給付支払一時差止開始年月日().toString()) : RString.EMPTY;
                 RString 画面項目終了年月日 = 画面項目異動情報Entity.get償還情報Entity().get保険給付支払一時差止終了年月日() != null
-                        ? new RString(初期化異動情報Entity.get償還情報Entity().get保険給付支払一時差止終了年月日().toString()) : RString.EMPTY;
+                        ? new RString(画面項目異動情報Entity.get償還情報Entity().get保険給付支払一時差止終了年月日().toString()) : RString.EMPTY;
                 RString 画面項目一時差止区分 = 画面項目異動情報Entity.get償還情報Entity().get保険給付支払一時差止区分コード();
                 RString 画面項目一時差止金額 = 画面項目異動情報Entity.get償還情報Entity().get保険給付支払一時差止金額() != null
-                        ? new RString(初期化異動情報Entity.get償還情報Entity().get保険給付支払一時差止金額().toString()) : RString.EMPTY;
-                初期化Key = 画面項目開始年月日.concat(SPLIT).concat(画面項目終了年月日)
+                        ? new RString(画面項目異動情報Entity.get償還情報Entity().get保険給付支払一時差止金額().toString()) : RString.EMPTY;
+                画面項目Key = 画面項目開始年月日.concat(SPLIT).concat(画面項目終了年月日)
                         .concat(SPLIT).concat(画面項目一時差止区分).concat(SPLIT).concat(画面項目一時差止金額);
             }
             if (!初期化Key.equals(画面項目Key)) {
@@ -159,7 +159,7 @@ public class KyodoJukyushaIdoRenrakuhyoHandler {
             }
             if (画面項目異動情報Entity.get高額情報Entity() != null) {
                 RString 画面項目世帯集約番号 = 画面項目異動情報Entity.get高額情報Entity().get世帯集約番号() != null
-                        ? 初期化異動情報Entity.get高額情報Entity().get世帯集約番号().value() : RString.EMPTY;
+                        ? 画面項目異動情報Entity.get高額情報Entity().get世帯集約番号().value() : RString.EMPTY;
                 RString 画面項目世帯所得区分 = 画面項目異動情報Entity.get高額情報Entity().get世帯所得区分コード();
                 RString 画面項目所得区分 = 画面項目異動情報Entity.get高額情報Entity().get所得区分コード();
                 boolean 画面項目老齢福祉年金 = 画面項目異動情報Entity.get高額情報Entity().is老齢福祉年金受給有フラグ();

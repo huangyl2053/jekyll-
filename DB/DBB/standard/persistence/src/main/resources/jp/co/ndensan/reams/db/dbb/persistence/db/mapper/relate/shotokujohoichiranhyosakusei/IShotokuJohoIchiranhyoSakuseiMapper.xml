@@ -51,40 +51,51 @@
       FROM
         (
         SELECT
-        "shotokuNendo",
-        "shikibetsuCode",
+        F."shotokuNendo",
+        F."shikibetsuCode",
         <if test="ラジオボタン == 2">
-            max("rirekiNo"),
+            F."rirekiNo"
         </if>
         <if test="ラジオボタン == 1">
-            "rirekiNo" ,
+            F."rirekiNo" ,
         </if>
-        "kazeiKubun",
-        "kazeiKubunGemmenGo",
-        "gokeiShotokuGaku",
-        "nenkiniShunyuGaku",
-        "nenkiniShotokuGaku",
-        "kazeiShotokuGaku",
-        "shoriTimeStamp",
-        "torokuGyomu"
-        FROM rgdb."DbV2502KaigoShotoku"
+        F."kazeiKubun",
+        F."kazeiKubunGemmenGo",
+        F."gokeiShotokuGaku",
+        F."nenkiniShunyuGaku",
+        F."nenkiniShotokuGaku",
+        F."kazeiShotokuGaku",
+        F."shoriTimeStamp",
+        F."torokuGyomu"
+        FROM rgdb."DbV2502KaigoShotoku" AS F
+        INNER JOIN 
+        (SELECT
+        "shotokuNendo",
+        "shikibetsuCode",
+        <if test="チックボックス == 2">
+        max("rirekiNo") AS rirekiNo
+        </if>
+        FROM rgdb."DbV2502KaigoShotoku" AS X
+        <if test="チックボックス == 2">
+        GROUP BY X."shotokuNendo", X."shikibetsuCode", X."rirekiNo"
+        </if>
+        ) AS Y
+        ON Y."shotokuNendo"=F."shotokuNendo"
+        AND Y."shikibetsuCode"= F."shikibetsuCode"
         WHERE
-        "shotokuNendo"=#{処理年度}
-        AND #{開始日時}<![CDATA[<=]]>"shoriTimeStamp"
-        AND "shoriTimeStamp"<![CDATA[<=]]>#{終了日時}
+        F."shotokuNendo"=#{処理年度}
+        AND #{開始日時}<![CDATA[<=]]>F."shoriTimeStamp"
+        AND F."shoriTimeStamp"<![CDATA[<=]]>#{終了日時}
         <if test="チックボックス == 1">
-            AND (cast("torokuGyomu" as varchar(1)) = '1' OR cast("torokuGyomu" as varchar(1)) = '2')
+            AND (cast(F."torokuGyomu" as varchar(1)) = '1' OR cast(F."torokuGyomu" as varchar(1)) = '2')
         </if>
         <if test="チックボックス == 2">
-            AND cast("torokuGyomu" as varchar(1)) = '1'
+            AND cast(F."torokuGyomu" as varchar(1)) = '1'
         </if>
         <if test="チックボックス == 3">
-            AND cast("torokuGyomu" as varchar(1)) = '2'
+            AND cast(F."torokuGyomu" as varchar(1)) = '2'
         </if>
-        <if test="ラジオボタン == 2">
-            GROUP BY "shikibetsuCode"
-        </if>
-        ORDER BY "shotokuNendo" ASC, "shikibetsuCode" ASC
+        ORDER BY F."shotokuNendo" ASC, F."shikibetsuCode" ASC
         ) AS A
         LEFT OUTER JOIN
         rgua."UaFt200FindShikibetsuTaisho"('1','','0','DB','0','','','','','','','','','','','0','0','','','','','',
@@ -148,7 +159,7 @@
     
     <!--広域市町村の所得情報一覧を取得します。-->
     <select resultOrdered="true" id="select対象データ" 
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokujohoichiranhyosakusei.ShotokuJohoIchiranhyoSakuseiParameter" 
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokujohoichiranhyosakusei.ShotokuJohoIchiranhyoSakuseiGParameter" 
             resultMap="resultMap_KaigoHokenShotokuTempEntity" fetchSize="500">
       SELECT
         A."shikibetsuCode",
@@ -213,29 +224,40 @@
       FROM
         (
         SELECT
-        "shotokuNendo",
-        "shikibetsuCode",
+        F."shotokuNendo",
+        F."shikibetsuCode",
         <if test="ラジオボタン == 2">
-            max("rirekiNo"),
+            F."rirekiNo",
         </if>
         <if test="ラジオボタン == 1">
-            "rirekiNo" ,
+            F."rirekiNo" ,
         </if>
-        "kazeiKubun",
-        "kazeiKubunGemmenGo",
-        "gokeiShotokuGaku",
-        "nenkiniShunyuGaku",
-        "nenkiniShotokuGaku",
-        "kazeiShotokuGaku",
-        "shoriTimeStamp",
-        "torokuGyomu"
-        FROM rgdb."DbV2502KaigoShotoku"
+        F."kazeiKubun",
+        F."kazeiKubunGemmenGo",
+        F."gokeiShotokuGaku",
+        F."nenkiniShunyuGaku",
+        F."nenkiniShotokuGaku",
+        F."kazeiShotokuGaku",
+        F."shoriTimeStamp",
+        F."torokuGyomu"
+        FROM rgdb."DbV2502KaigoShotoku" F
+        INNER JOIN 
+        (SELECT
+        "shotokuNendo",
+        <if test="チックボックス == 2">
+        max("rirekiNo") AS rirekiNo,
+        </if>
+        "shikibetsuCode"
+        FROM rgdb."DbV2502KaigoShotoku" AS X
+        <if test="チックボックス == 2">
+        GROUP BY X."shotokuNendo", X."shikibetsuCode", X."rirekiNo"
+        </if>
+        ) AS Y
+        ON Y."shotokuNendo"=F."shotokuNendo"
+        AND Y."shikibetsuCode"= F."shikibetsuCode"
         WHERE
-        "shotokuNendo"=#{処理年度}
-        <if test="ラジオボタン == 2">
-            GROUP BY "shotokuNendo", "shikibetsuCode"
-        </if>
-        ORDER BY "shotokuNendo" ASC, "shikibetsuCode" ASC
+        F."shotokuNendo"=#{処理年度}
+        ORDER BY F."shotokuNendo" ASC, F."shikibetsuCode" ASC
         )AS M
         LEFT OUTER JOIN
         rgua."UaFt200FindShikibetsuTaisho"('1','','0','DB','0','','','','','','','','','','','0','0','','','','','',
@@ -348,8 +370,6 @@
             resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokujohoichiranhyosakusei.KaigoHokenShotokuTempEntity" fetchSize="500">
         SELECT TEMP.*
         FROM "KaigoHokenShotokuTemp" TEMP
-        ORDER BY TEMP."shikibetsuCode", 
-                 TEMP."hiHokenshaNo"
     </select>
     
 </mapper>

@@ -24,9 +24,9 @@ public class KaigoFukaChoshuYuyoParam {
 
     private RString 状況;
     private boolean 決定区分;
-    FlexibleYear 調定年度;
-    FlexibleYear 賦課年度;
-    TsuchishoNo 通知書番号;
+    private FlexibleYear 調定年度;
+    private FlexibleYear 賦課年度;
+    private TsuchishoNo 通知書番号;
     private FlexibleDate 申請日;
     private FlexibleDate 決定日;
     private FlexibleDate 取消日;

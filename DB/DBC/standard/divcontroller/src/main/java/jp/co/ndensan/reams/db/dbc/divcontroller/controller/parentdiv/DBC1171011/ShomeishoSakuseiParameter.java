@@ -75,23 +75,23 @@ public class ShomeishoSakuseiParameter {
      */
     public ResponseData<JikofutanShomeishoParameter> onClick_batch(ShomeishoSakuseiParameterDiv div) {
         JikofutanShomeishoParameter param = new JikofutanShomeishoParameter();
-        param.set開始申請年月日(RString.isNullOrEmpty(div.getTxtShinseiDate().getFromValue().wareki().toDateString())
+        boolean is自己負担 = KEY_自己負担額計算括からの情報を元に作成RAD.equals(div.getRadJikoFutangaku().getSelectedKey());
+        boolean is国保連 = KEY_国保連からの情報を元に作成RAD.equals(div.getRadJikoFutangaku().getSelectedKey());
+        param.set開始申請年月日((RString.isNullOrEmpty(div.getTxtShinseiDate().getFromValue().wareki().toDateString()) || is国保連)
                 ? FlexibleDate.EMPTY : new FlexibleDate(div.getTxtShinseiDate().getFromValue().toString()));
-        param.set終了申請年月日(RString.isNullOrEmpty(div.getTxtShinseiDate().getToValue().wareki().toDateString())
+        param.set終了申請年月日((RString.isNullOrEmpty(div.getTxtShinseiDate().getToValue().wareki().toDateString()) || is国保連)
                 ? FlexibleDate.EMPTY : new FlexibleDate(div.getTxtShinseiDate().getToValue().toString()));
-        param.set受取年月(RString.isNullOrEmpty(div.getTxtUketoriDate().getValue().wareki().toDateString())
+        param.set受取年月((RString.isNullOrEmpty(div.getTxtUketoriDate().getValue().wareki().toDateString()) || is自己負担)
                 ? FlexibleDate.EMPTY : new FlexibleDate(div.getTxtUketoriDate().getValue().toString()));
         param.set印書(KaigoGassan_JikoFutanShomeisho_Insho.toValue(div.getDdlInsho().getSelectedKey()));
         param.set発行日(RString.isNullOrEmpty(div.getTxtHakkoDate().getValue().wareki().toDateString())
                 ? FlexibleDate.EMPTY : new FlexibleDate(div.getTxtHakkoDate().getValue().toString()));
         param.set出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID());
         param.set文書情報(div.getCcdBunshoBango().get文書番号());
-        if ((!RString.isNullOrEmpty(div.getRadJikoFutangaku().getSelectedKey()))
-                && KEY_自己負担額計算括からの情報を元に作成RAD.equals(div.getRadJikoFutangaku().getSelectedKey())) {
+        if ((!RString.isNullOrEmpty(div.getRadJikoFutangaku().getSelectedKey())) && is自己負担) {
             param.set抽出対象(KaigoGassan_DataSakuseiKubun.自己負担額確認情報括);
         }
-        if ((!RString.isNullOrEmpty(div.getRadJikoFutangaku().getSelectedKey()))
-                && KEY_国保連からの情報を元に作成RAD.equals(div.getRadJikoFutangaku().getSelectedKey())) {
+        if ((!RString.isNullOrEmpty(div.getRadKokuhoren().getSelectedKey())) && is国保連) {
             param.set抽出対象(KaigoGassan_DataSakuseiKubun.国保連);
         }
         return ResponseData.of(param).respond();

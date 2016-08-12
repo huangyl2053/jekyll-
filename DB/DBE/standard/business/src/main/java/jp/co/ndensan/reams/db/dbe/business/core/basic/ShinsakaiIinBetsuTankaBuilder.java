@@ -5,9 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
-import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5034ShinsakaiIinBetsuTankaEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -43,7 +41,6 @@ public class ShinsakaiIinBetsuTankaBuilder {
      * @return {@link ShinsakaiIinBetsuTankaBuilder}
      */
     public ShinsakaiIinBetsuTankaBuilder set単価(Decimal 単価) {
-        requireNonNull(単価, UrSystemErrorMessages.値がnull.getReplacedMessage("単価"));
         entity.setTanka(単価);
         return this;
     }
@@ -55,8 +52,7 @@ public class ShinsakaiIinBetsuTankaBuilder {
      * @return {@link ShinsakaiIinBetsuTankaBuilder}
      */
     public ShinsakaiIinBetsuTankaBuilder setその他単価(Decimal その他単価) {
-        requireNonNull(その他単価, UrSystemErrorMessages.値がnull.getReplacedMessage("その他単価"));
-        entity.setTanka(その他単価);
+        entity.setSonotatanka(その他単価);
         return this;
     }
 

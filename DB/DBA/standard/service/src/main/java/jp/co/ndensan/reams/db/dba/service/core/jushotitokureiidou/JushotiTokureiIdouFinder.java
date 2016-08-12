@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 介被保険者台帳管理（住所地特例異動）のビジネス処理です。
  *
- * @reamsid_L DBA-1380-010 lijia
+ * @reamsid_L DBA-1380-030 lijia
  *
  */
 public class JushotiTokureiIdouFinder {

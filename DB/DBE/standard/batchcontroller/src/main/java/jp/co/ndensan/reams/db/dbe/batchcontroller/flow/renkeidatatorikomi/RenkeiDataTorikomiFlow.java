@@ -82,7 +82,7 @@ public class RenkeiDataTorikomiFlow extends BatchFlowBase<RenkeiDataTorikomiBatc
         List<RString> 取込み対象ファイルリスト = getParameter().get取込み対象ファイルリスト();
         if (取込み対象ファイルリスト != null && !取込み対象ファイルリスト.isEmpty()) {
             RString 認定申請IF種類 = DbBusinessConfig.get(ConfigNameDBE.認定申請IF種類, 基準日, SubGyomuCode.DBE認定支援);
-            RString マスタIF種類 = DbBusinessConfig.get(ConfigNameDBE.マスタIF種類, 基準日, SubGyomuCode.DBE認定支援);
+            RString マスタIF種類 = DbBusinessConfig.get(ConfigNameDBE.四マスタIF種類, 基準日, SubGyomuCode.DBE認定支援);
             主治医情報ファイル = new RString(getParameter().get格納パス().toString()
                     + DbBusinessConfig.get(ConfigNameDBE.主治医データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援).toString());
             医療機関ファイル = new RString(getParameter().get格納パス().toString()

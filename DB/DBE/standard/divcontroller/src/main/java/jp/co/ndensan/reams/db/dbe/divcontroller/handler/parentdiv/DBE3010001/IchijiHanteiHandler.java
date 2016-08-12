@@ -205,9 +205,6 @@ public class IchijiHanteiHandler {
             if (business.get推定される給付区分コード() != null && !business.get推定される給付区分コード().isEmpty()) {
                 row.setSuiteiKyufuKubunCode(SuiteiKyufuKubunCode.toValue(business.get推定される給付区分コード().value()).get名称());
             }
-            // TODO Redmine:94215
-//            row.setChosahyoCount();
-//            row.setIkenshoCount();
             row.setShinseishoKanriNo(business.get申請書管理番号().value());
             row.setKoroshoIfShikibetsuCode(business.get厚労省IF識別コード());
             personalData.addExpandedInfo(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
@@ -265,7 +262,7 @@ public class IchijiHanteiHandler {
             row.setNinchishoJiritsudoIIijoNoGaizensei(new RString(String.valueOf(business.get認知症自立度Ⅱ以上の蓋然性())));
         }
         if (business.get認知機能及び状態安定性から推定される給付区分コード() != null) {
-            row.setSuiteiKyufuKubunCode(business.get認知機能及び状態安定性から推定される給付区分コード().value());
+            row.setSuiteiKyufuKubunCode(SuiteiKyufuKubunCode.toValue(business.get認知機能及び状態安定性から推定される給付区分コード().value()).get名称());
         }
         div.getIchijiHanteiShoriTaishoshaIchiran().getDgIchijiHanteiTaishoshaIchiran().getDataSource().set(index, row);
     }

@@ -10,13 +10,6 @@
                 <result property="shujiiIryoKikanCode" column="shujiiIryoKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
                 <result property="ninteichosainCode" column="ninteichosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
                 <result property="chosaItakuryo" column="chosaItakuryo"/>
-                <result property="shujiiCode" column="shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-                <result property="ikenshoSakuseiryo" column="ikenshoSakuseiryo"/>
-                <result property="shinsakaiHoshuGokei" column="shinsakaiHoshuGokei"/>
-                <result property="ninteichosaItakusakiCode" column="ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-                <result property="ninteiChosainNo" column="ninteiChosainNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-                <result property="sonotaKikanCode" column="sonotaKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-                <result property="shinsakaiIinCode" column="shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <select id="get認定調査対象" resultMap="resultMap_HoshushiharaiJumbiPanelBatchRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hoshushiharaijunbipanel.HoshushiharaiJumbiPanelBatchMybitisParameter" 
@@ -48,7 +41,13 @@
                 T5601."ninteichosaItakusakiCode"
     </select>
     
-    <select id="get主治医意見書作成報酬" resultMap="resultMap_HoshushiharaiJumbiPanelBatchRelateEntity" 
+        <resultMap id="resultMap_HoshushiharaiJumbiPanelBatchRelateEntity1"
+                type="jp.co.ndensan.reams.db.dbe.entity.db.relate.hoshushiharaijunbipanel.HoshushiharaiJumbiPanelBatchRelateEntity" autoMapping="true">
+                <result property="shujiiIryoKikanCode" column="shujiiIryoKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+                <result property="shujiiCode" column="shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+                <result property="ikenshoSakuseiryo" column="ikenshoSakuseiryo"/>
+    </resultMap>
+    <select id="get主治医意見書作成報酬" resultMap="resultMap_HoshushiharaiJumbiPanelBatchRelateEntity1" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hoshushiharaijunbipanel.HoshushiharaiJumbiPanelBatchMybitisParameter" 
             resultOrdered="true" fetchSize="500">
         SELECT		
@@ -87,7 +86,17 @@
                 T5602."shujiiIryoKikanCode"
     </select>
     
-    <select id="get審査会委員報酬" resultMap="resultMap_HoshushiharaiJumbiPanelBatchRelateEntity" 
+    <resultMap id="resultMap_HoshushiharaiJumbiPanelBatchRelateEntity2"
+                type="jp.co.ndensan.reams.db.dbe.entity.db.relate.hoshushiharaijunbipanel.HoshushiharaiJumbiPanelBatchRelateEntity" autoMapping="true">
+                <result property="shinsakaiHoshuGokei" column="shinsakaiHoshuGokei"/>
+                <result property="shinsakaiIinCode" column="shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+                <result property="shujiiIryoKikanCode" column="shujiiIryoKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+                <result property="shujiiCode" column="shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+                <result property="ninteichosaItakusakiCode" column="ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+                <result property="ninteiChosainNo" column="ninteiChosainNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+                <result property="sonotaKikanCode" column="sonotaKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    <select id="get審査会委員報酬" resultMap="resultMap_HoshushiharaiJumbiPanelBatchRelateEntity2" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hoshushiharaijunbipanel.HoshushiharaiJumbiPanelBatchMybitisParameter" 
             resultOrdered="true" fetchSize="500">
         SELECT

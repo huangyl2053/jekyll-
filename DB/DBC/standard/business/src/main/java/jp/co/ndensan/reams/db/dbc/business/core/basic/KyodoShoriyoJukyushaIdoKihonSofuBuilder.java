@@ -134,7 +134,6 @@ public class KyodoShoriyoJukyushaIdoKihonSofuBuilder {
      * @return {@link KyodoShoriyoJukyushaIdoKihonSofuBuilder}
      */
     public KyodoShoriyoJukyushaIdoKihonSofuBuilder set郵便番号(YubinNo 郵便番号) {
-        requireNonNull(郵便番号, UrSystemErrorMessages.値がnull.getReplacedMessage("郵便番号"));
         entity.setYubinNo(郵便番号);
         return this;
     }
@@ -168,7 +167,6 @@ public class KyodoShoriyoJukyushaIdoKihonSofuBuilder {
      * @return {@link KyodoShoriyoJukyushaIdoKihonSofuBuilder}
      */
     public KyodoShoriyoJukyushaIdoKihonSofuBuilder set電話番号(TelNo 電話番号) {
-        requireNonNull(電話番号, UrSystemErrorMessages.値がnull.getReplacedMessage("電話番号"));
         entity.setTelNo(電話番号);
         return this;
     }
@@ -180,7 +178,6 @@ public class KyodoShoriyoJukyushaIdoKihonSofuBuilder {
      * @return {@link KyodoShoriyoJukyushaIdoKihonSofuBuilder}
      */
     public KyodoShoriyoJukyushaIdoKihonSofuBuilder set帳票出力順序コード(RString 帳票出力順序コード) {
-        requireNonNull(帳票出力順序コード, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票出力順序コード"));
         entity.setChohyoOutputJunjyoCode(帳票出力順序コード);
         return this;
     }
@@ -204,7 +201,6 @@ public class KyodoShoriyoJukyushaIdoKihonSofuBuilder {
      * @return {@link KyodoShoriyoJukyushaIdoKihonSofuBuilder}
      */
     public KyodoShoriyoJukyushaIdoKihonSofuBuilder set送付年月(FlexibleYearMonth 送付年月) {
-        requireNonNull(送付年月, UrSystemErrorMessages.値がnull.getReplacedMessage("送付年月"));
         entity.setSofuYM(送付年月);
         return this;
     }
