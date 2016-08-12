@@ -37,8 +37,8 @@ public class KeikakuRirekiIchiran {
     private final RString DATE_A = new RString("A");
     private final RString DATE_B = new RString("B");
     private final AtenaMeisho 定数_自己作成 = new AtenaMeisho("自己作成");
-    private final RString 準拠する = new RString('1');
-    private final RString 準拠しない = new RString('0');
+    private final RString 準拠する = new RString("1");
+    private final RString 準拠しない = new RString("0");
     private final RString データあり = new RString("1");
     private final RString データなし = new RString("0");
     private final RString 定数_暫定 = new RString("暫定");
@@ -57,8 +57,7 @@ public class KeikakuRirekiIchiran {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KeikakuRirekiIchiran}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link KeikakuRirekiIchiran}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link KeikakuRirekiIchiran}のインスタンス
      */
     public static KeikakuRirekiIchiran createInstance() {
         return InstanceProvider.create(KeikakuRirekiIchiran.class);
