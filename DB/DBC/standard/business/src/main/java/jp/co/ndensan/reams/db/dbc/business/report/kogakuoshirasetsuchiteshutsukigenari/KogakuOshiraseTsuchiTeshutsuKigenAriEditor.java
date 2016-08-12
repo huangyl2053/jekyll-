@@ -36,10 +36,10 @@ public class KogakuOshiraseTsuchiTeshutsuKigenAriEditor implements IKogakuOshira
         source.tsuchibun1 = target.get通知文1();
         source.tsuchibun2 = target.get通知文2();
         if (!target.is空白()) {
-            source.hihokenshaNameKana = ReportKomokuEditorUtil.get氏名カナ(target.get申請情報帳票発行一時().getShimeikana());
-            source.hihokenshaName = ReportKomokuEditorUtil.get氏名(target.get申請情報帳票発行一時().getMeisho());
-            source.man = get性別(target.get申請情報帳票発行一時().getSeibetsuCode());
-            source.birthYMD = ReportKomokuEditorUtil.パターン12(target.get申請情報帳票発行一時().getSeinengappiYMD());
+            source.hihokenshaNameKana = ReportKomokuEditorUtil.get氏名カナ(target.get申請情報帳票発行一時().getShimeikanaChohyo());
+            source.hihokenshaName = ReportKomokuEditorUtil.get氏名(target.get申請情報帳票発行一時().getMeishoChohyo());
+            source.man = get性別(target.get申請情報帳票発行一時().getSeibetsuCodeChohyo());
+            source.birthYMD = ReportKomokuEditorUtil.パターン12(target.get申請情報帳票発行一時().getSeinengappiYMDChohyo());
             source.hokenshaNo = ReportKomokuEditorUtil.get証記載保険者番号(target.get申請情報帳票発行一時().getShoKisaiHokenshaNoChohyo());
             source.hihokenshaNo = ReportKomokuEditorUtil.get被保険者番号(target.get申請情報帳票発行一時().getHihokenshaNoChohyo());
             source.taishoYM = ReportKomokuEditorUtil.パターン62(target.get申請情報帳票発行一時().getServiceTeikyoYMChohyo());

@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
@@ -35,15 +36,11 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-public class ShinseiJohoChohyoTempEntity implements IDbAccessable {
+public class ShinseiJohoChohyoTempEntity extends DbTableEntityBase<ShinseiJohoChohyoTempEntity> implements IDbAccessable {
 
-    @PrimaryKey
     private HihokenshaNo hihokenshaNoChohyo;
-    @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYMChohyo;
-    @PrimaryKey
     private HokenshaNo shoKisaiHokenshaNoChohyo;
-    @PrimaryKey
     private Decimal rirekiNoChohyo;
     private FlexibleDate uketsukeYMDChohyo;
     private FlexibleDate shinseiYMDChohyo;
@@ -102,7 +99,7 @@ public class ShinseiJohoChohyoTempEntity implements IDbAccessable {
     private Decimal ketteiRiyoshaFutanGakuChohyo;
     private RString ketteiShikyuKubunCodeChohyo;
     private FlexibleYearMonth ketteiYMChohyo;
-    private Decimal ketteiJigyoKogakuShikyuGakuChohyo;
+    private Decimal ketteiKogakuShikyuGakuChohyo;
 
     private FlexibleDate idoYMDChohyo;
     private RString idoJiyuCodeChohyo;
@@ -129,21 +126,21 @@ public class ShinseiJohoChohyoTempEntity implements IDbAccessable {
     private RString koikinaiJushochiTokureiFlagChohyo;
     private LasdecCode koikinaiTokureiSochimotoShichosonCodeChohyo;
     private LasdecCode kyuShichosonCodeChohyo;
-    private boolean kyuSochishaFlag;
+    private boolean kyuSochishaFlagChohyo;
     private Code yokaigoJotaiKubunCode;
-    private FlexibleDate ninteiYukoKikanKaishiYMD;
-    private FlexibleDate ninteiYukoKikanShuryoYMD;
+    private FlexibleDate ninteiYukoKikanKaishiYMDChohyo;
+    private FlexibleDate ninteiYukoKikanShuryoYMDChohyo;
 
-    private AtenaMeisho meisho;
-    private AtenaKanaMeisho shimeikana;
-    private AtenaJusho jusho;
-    private YubinNo yubinNo;
-    private GyoseikuCode gyoseikuCode;
-    private RString gyoseikuName;
-    private FlexibleDate seinengappiYMD;
-    private RString seibetsuCode;
-    private TelNo telNo;
-    private KojinNo kojinNo;
+    private AtenaMeisho meishoChohyo;
+    private AtenaKanaMeisho shimeikanaChohyo;
+    private AtenaJusho jushoChohyo;
+    private YubinNo yubinNoChohyo;
+    private GyoseikuCode gyoseikuCodeChohyo;
+    private RString gyoseikuNameChohyo;
+    private FlexibleDate seinengappiYMDChohyo;
+    private RString seibetsuCodeChohyo;
+    private TelNo telNoChohyo;
+    private KojinNo kojinNoChohyo;
 
     private KinyuKikanCode kinyuKikanCodeChohyo;
     private RString tsuchoKigoChohyo;
