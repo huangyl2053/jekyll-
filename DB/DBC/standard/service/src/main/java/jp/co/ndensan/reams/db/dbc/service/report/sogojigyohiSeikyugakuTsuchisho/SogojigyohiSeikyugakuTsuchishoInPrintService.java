@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.service.report.sogojigyohiSeikyugakuTsuchisho;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.report.dbc120890.SogojigyohiSeikyugakuTsuchishoInProperty;
-import jp.co.ndensan.reams.db.dbc.business.report.dbc120890.SogojigyohiSeikyugakuTsuchishoInReport;
+import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohiSeikyugakuTsuchisho.SogojigyohiSeikyugakuTsuchishoInProperty;
+import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohiSeikyugakuTsuchisho.SogojigyohiSeikyugakuTsuchishoInReport;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.DbWT1511SeikyugakuTsuchishoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.dbc120890.SogojigyohiSeikyugakuTsuchishoInSource;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
