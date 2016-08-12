@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * NenjiRiyoshaFutanWariaiHantei のクラスファイル 
  * 
- * @author 自動生成
+ *  @reamsid_L DBC-4980-010 lihang
  */
 public class NenjiRiyoshaFutanWariaiHanteiDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">

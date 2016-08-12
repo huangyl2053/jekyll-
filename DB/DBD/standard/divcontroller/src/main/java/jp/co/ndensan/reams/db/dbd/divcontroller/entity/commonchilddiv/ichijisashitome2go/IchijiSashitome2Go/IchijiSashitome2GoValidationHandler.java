@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.ichijisashitome2go.IchijiSashitome2Go;
 
+import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShoriKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
@@ -24,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class IchijiSashitome2GoValidationHandler {
 
-    private final RString 新規登録 = new RString("新規登録");
     private final RString _２号一時差止登録 = new RString("２号一時差止登録");
     private final RString _２号予告者登録 = new RString("２号予告者登録");
     private final RString _２号一時差止解除 = new RString("２号一時差止解除");
@@ -39,7 +39,7 @@ public class IchijiSashitome2GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor依頼受理日入力チェック(ValidationMessageControlPairs pairs, IchijiSashitome2GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(_２号予告者登録)) {
+        if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(_２号予告者登録)) {
             messages.add(ValidateChain.validateStart(div).ifNot(IchijiSashitome2GoDivSpec.依頼受理日入力チェック)
                     .thenAdd(IchijiSashitome2GoValidationHandler.IchijiSashitome2GoMessages.依頼受理日未入力).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -59,7 +59,7 @@ public class IchijiSashitome2GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor予告登録日入力チェック(ValidationMessageControlPairs pairs, IchijiSashitome2GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(_２号予告者登録)) {
+        if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(_２号予告者登録)) {
             messages.add(ValidateChain.validateStart(div).ifNot(IchijiSashitome2GoDivSpec.依頼受理日入力チェック)
                     .thenAdd(IchijiSashitome2GoValidationHandler.IchijiSashitome2GoMessages.予告登録日未入力).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -78,7 +78,7 @@ public class IchijiSashitome2GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor弁明書提出期限入力チェック(ValidationMessageControlPairs pairs, IchijiSashitome2GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(_２号予告者登録)) {
+        if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(_２号予告者登録)) {
             messages.add(ValidateChain.validateStart(div).ifNot(IchijiSashitome2GoDivSpec.弁明書提出期限入力チェック)
                     .thenAdd(IchijiSashitome2GoValidationHandler.IchijiSashitome2GoMessages.弁明書提出期限未入力).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -97,7 +97,7 @@ public class IchijiSashitome2GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor弁明審査結果選択チェック(ValidationMessageControlPairs pairs, IchijiSashitome2GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(_２号弁明書受理)) {
+        if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(_２号弁明書受理)) {
             messages.add(ValidateChain.validateStart(div).ifNot(IchijiSashitome2GoDivSpec.弁明審査結果選択チェック)
                     .thenAdd(IchijiSashitome2GoValidationHandler.IchijiSashitome2GoMessages.弁明審査結果未選択).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -116,7 +116,7 @@ public class IchijiSashitome2GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor弁明受付日入力チェック(ValidationMessageControlPairs pairs, IchijiSashitome2GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(_２号弁明書受理)) {
+        if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(_２号弁明書受理)) {
             messages.add(ValidateChain.validateStart(div).ifNot(IchijiSashitome2GoDivSpec.弁明受付日未入力)
                     .thenAdd(IchijiSashitome2GoValidationHandler.IchijiSashitome2GoMessages.弁明受付日未入力).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -135,7 +135,7 @@ public class IchijiSashitome2GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor弁明理由選択チェック(ValidationMessageControlPairs pairs, IchijiSashitome2GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(_２号弁明書受理)) {
+        if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(_２号弁明書受理)) {
             messages.add(ValidateChain.validateStart(div).ifNot(IchijiSashitome2GoDivSpec.弁明理由未選択)
                     .thenAdd(IchijiSashitome2GoValidationHandler.IchijiSashitome2GoMessages.弁明理由未選択).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -154,7 +154,7 @@ public class IchijiSashitome2GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor弁明内容決定日未入力チェック(ValidationMessageControlPairs pairs, IchijiSashitome2GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(_２号弁明書受理)) {
+        if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(_２号弁明書受理)) {
             messages.add(ValidateChain.validateStart(div).ifNot(IchijiSashitome2GoDivSpec.弁明内容決定日未入力)
                     .thenAdd(IchijiSashitome2GoValidationHandler.IchijiSashitome2GoMessages.弁明内容決定日未入力).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -173,7 +173,7 @@ public class IchijiSashitome2GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor適用期間開始未入力チェック(ValidationMessageControlPairs pairs, IchijiSashitome2GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(_２号一時差止登録)) {
+        if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(_２号一時差止登録)) {
             messages.add(ValidateChain.validateStart(div).ifNot(IchijiSashitome2GoDivSpec.適用期間開始未入力)
                     .thenAdd(IchijiSashitome2GoValidationHandler.IchijiSashitome2GoMessages.適用期間開始未入力).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -192,7 +192,7 @@ public class IchijiSashitome2GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor差止決定日未入力チェック(ValidationMessageControlPairs pairs, IchijiSashitome2GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(_２号一時差止登録)) {
+        if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(_２号一時差止登録)) {
             messages.add(ValidateChain.validateStart(div).ifNot(IchijiSashitome2GoDivSpec.差止決定日未入力)
                     .thenAdd(IchijiSashitome2GoValidationHandler.IchijiSashitome2GoMessages.差止決定日未入力).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -211,7 +211,7 @@ public class IchijiSashitome2GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor保険証提出期限未入力チェック(ValidationMessageControlPairs pairs, IchijiSashitome2GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(_２号一時差止登録)) {
+        if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(_２号一時差止登録)) {
             messages.add(ValidateChain.validateStart(div).ifNot(IchijiSashitome2GoDivSpec.保険証提出期限未入力)
                     .thenAdd(IchijiSashitome2GoValidationHandler.IchijiSashitome2GoMessages.保険証提出期限未入力).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -230,7 +230,7 @@ public class IchijiSashitome2GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor適用期間チェック(ValidationMessageControlPairs pairs, IchijiSashitome2GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(_２号一時差止登録) || div.getKey_Button().equals(_２号一時差止解除)) {
+        if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(_２号一時差止登録) || div.getKey_Button().equals(_２号一時差止解除)) {
             messages.add(ValidateChain.validateStart(div).ifNot(IchijiSashitome2GoDivSpec.適用期間チェック)
                     .thenAdd(IchijiSashitome2GoValidationHandler.IchijiSashitome2GoMessages.適用期間チェック).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -249,7 +249,7 @@ public class IchijiSashitome2GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor依頼審査結果未選択チェック(ValidationMessageControlPairs pairs, IchijiSashitome2GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(_２号一時差止解除)) {
+        if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(_２号一時差止解除)) {
             messages.add(ValidateChain.validateStart(div).ifNot(IchijiSashitome2GoDivSpec.依頼審査結果未選択)
                     .thenAdd(IchijiSashitome2GoValidationHandler.IchijiSashitome2GoMessages.依頼審査結果未選択).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -268,7 +268,7 @@ public class IchijiSashitome2GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor適用期間終了未入力チェック(ValidationMessageControlPairs pairs, IchijiSashitome2GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(_２号一時差止解除)) {
+        if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(_２号一時差止解除)) {
             messages.add(ValidateChain.validateStart(div).ifNot(IchijiSashitome2GoDivSpec.適用期間終了未入力)
                     .thenAdd(IchijiSashitome2GoValidationHandler.IchijiSashitome2GoMessages.適用期間終了未入力).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -287,7 +287,7 @@ public class IchijiSashitome2GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor終了状況未選択チェック(ValidationMessageControlPairs pairs, IchijiSashitome2GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(_２号一時差止解除)) {
+        if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(_２号一時差止解除)) {
             messages.add(ValidateChain.validateStart(div).ifNot(IchijiSashitome2GoDivSpec.終了状況未選択)
                     .thenAdd(IchijiSashitome2GoValidationHandler.IchijiSashitome2GoMessages.終了状況未選択).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -306,7 +306,7 @@ public class IchijiSashitome2GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor依頼受付日未入力チェック(ValidationMessageControlPairs pairs, IchijiSashitome2GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(_２号一時差止解除)) {
+        if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(_２号一時差止解除)) {
             messages.add(ValidateChain.validateStart(div).ifNot(IchijiSashitome2GoDivSpec.依頼受付日未入力)
                     .thenAdd(IchijiSashitome2GoValidationHandler.IchijiSashitome2GoMessages.依頼受付日未入力).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -325,7 +325,7 @@ public class IchijiSashitome2GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor依頼日未入力チェック(ValidationMessageControlPairs pairs, IchijiSashitome2GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(_２号一時差止解除)) {
+        if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(_２号一時差止解除)) {
             messages.add(ValidateChain.validateStart(div).ifNot(IchijiSashitome2GoDivSpec.依頼日未入力)
                     .thenAdd(IchijiSashitome2GoValidationHandler.IchijiSashitome2GoMessages.依頼日未入力).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -344,7 +344,7 @@ public class IchijiSashitome2GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor依頼理由未選択チェック(ValidationMessageControlPairs pairs, IchijiSashitome2GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(_２号一時差止解除)) {
+        if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(_２号一時差止解除)) {
             messages.add(ValidateChain.validateStart(div).ifNot(IchijiSashitome2GoDivSpec.依頼理由未選択)
                     .thenAdd(IchijiSashitome2GoValidationHandler.IchijiSashitome2GoMessages.依頼理由未選択).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -363,7 +363,7 @@ public class IchijiSashitome2GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor依頼内容決定日未入力チェック(ValidationMessageControlPairs pairs, IchijiSashitome2GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(_２号一時差止解除)) {
+        if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(_２号一時差止解除)) {
             messages.add(ValidateChain.validateStart(div).ifNot(IchijiSashitome2GoDivSpec.依頼内容決定日未入力)
                     .thenAdd(IchijiSashitome2GoValidationHandler.IchijiSashitome2GoMessages.依頼内容決定日未入力).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(

@@ -94,7 +94,7 @@ public class IinIkenshoDataSakuseiA4NihirameProcess extends BatchProcessBase<Shi
                 association.get市町村名(),
                 new RString(JobContextHolder.getJobId()),
                 new RString("主治医意見書（裏）"),
-                new RString(1),
+                new RString(reportSourceWriterA4.pageCount().value()),
                 RString.EMPTY,
                 RString.EMPTY,
                 contribute());

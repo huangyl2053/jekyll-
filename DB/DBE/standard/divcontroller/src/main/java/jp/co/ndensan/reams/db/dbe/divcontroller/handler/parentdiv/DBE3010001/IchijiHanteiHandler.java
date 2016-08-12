@@ -232,10 +232,12 @@ public class IchijiHanteiHandler {
             row.getIchijiHanteibi().setValue(business.get要介護認定一次判定年月日());
         }
         if (business.get要介護認定一次判定結果コード() != null) {
-            row.setIchijiHanteiKekka(business.get要介護認定一次判定結果コード().value());
+            row.setIchijiHanteiKekka(IchijiHanteiKekkaCode09.toValue(business.
+                    get要介護認定一次判定結果コード().value()).get名称());
         }
         if (business.get要介護認定一次判定結果コード_認知症加算() != null) {
-            row.setIchijiHanteiKekkaNinchishoKasanCode(business.get要介護認定一次判定結果コード_認知症加算().value());
+            row.setIchijiHanteiKekkaNinchishoKasanCode(IchijiHanteiKekkaCode09.
+                    toValue(business.get要介護認定一次判定結果コード_認知症加算().value()).get名称());
         }
         if (business.get要介護認定一次判定警告コード() != null) {
             row.setKeikokuCode(business.get要介護認定一次判定警告コード());
@@ -289,16 +291,102 @@ public class IchijiHanteiHandler {
         if (!RString.isNullOrEmpty(一次判定結果名称)) {
 
             if (認定ｿﾌﾄ99.value().equals(厚労省IF識別コード)) {
-                return new Code(IchijiHanteiKekkaCode99.valueOf(一次判定結果名称.toString()).getコード());
+                return new Code(IchijiHanteiKekkaCode99.valueOf(要介護認定一次判定結果コード99の名称(一次判定結果名称)).getコード());
             } else if (認定ｿﾌﾄ2002.value().equals(厚労省IF識別コード)) {
-                return new Code(IchijiHanteiKekkaCode02.valueOf(一次判定結果名称.toString()).getコード());
+                return new Code(IchijiHanteiKekkaCode02.valueOf(要介護認定一次判定結果コード02の名称(一次判定結果名称)).getコード());
             } else if (認定ｿﾌﾄ2006.value().equals(厚労省IF識別コード)) {
-                return new Code(IchijiHanteiKekkaCode06.valueOf(一次判定結果名称.toString()).getコード());
+                return new Code(IchijiHanteiKekkaCode06.valueOf(要介護認定一次判定結果コード06の名称(一次判定結果名称)).getコード());
             } else if (認定ｿﾌﾄ2009_A.value().equals(厚労省IF識別コード)
                     || 認定ｿﾌﾄ2009_B.value().equals(厚労省IF識別コード)) {
-                return new Code(IchijiHanteiKekkaCode09.valueOf(一次判定結果名称.toString()).getコード());
+                return new Code(IchijiHanteiKekkaCode09.valueOf(要介護認定一次判定結果コード09の名称(一次判定結果名称)).getコード());
             }
         }
         return Code.EMPTY;
+    }
+
+    private String 要介護認定一次判定結果コード99の名称(RString 一次判定結果名称) {
+        if (IchijiHanteiKekkaCode99.みなし要支援.get名称().equals(一次判定結果名称)) {
+
+            return IchijiHanteiKekkaCode99.みなし要支援.toString();
+        } else if (IchijiHanteiKekkaCode99.みなし非該当.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode99.みなし非該当.toString();
+        } else if (IchijiHanteiKekkaCode99.経過的要介護.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode99.経過的要介護.toString();
+        } else if (IchijiHanteiKekkaCode99.要介護1.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode99.要介護1.toString();
+        } else if (IchijiHanteiKekkaCode99.要介護2.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode99.要介護2.toString();
+        } else if (IchijiHanteiKekkaCode99.要介護3.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode99.要介護3.toString();
+        } else if (IchijiHanteiKekkaCode99.要介護4.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode99.要介護4.toString();
+        } else if (IchijiHanteiKekkaCode99.要介護5.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode99.要介護5.toString();
+        } else if (IchijiHanteiKekkaCode99.非該当.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode99.非該当.toString();
+        }
+        return RString.EMPTY.toString();
+    }
+
+    private String 要介護認定一次判定結果コード02の名称(RString 一次判定結果名称) {
+        if (IchijiHanteiKekkaCode02.要介護1.get名称().equals(一次判定結果名称)) {
+
+            return IchijiHanteiKekkaCode02.要介護1.toString();
+        } else if (IchijiHanteiKekkaCode02.要介護2.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode02.要介護2.toString();
+        } else if (IchijiHanteiKekkaCode02.要介護3.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode02.要介護3.toString();
+        } else if (IchijiHanteiKekkaCode02.要介護4.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode02.要介護4.toString();
+        } else if (IchijiHanteiKekkaCode02.要介護5.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode02.要介護5.toString();
+        } else if (IchijiHanteiKekkaCode02.要支援.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode02.要支援.toString();
+        } else if (IchijiHanteiKekkaCode02.非該当.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode02.非該当.toString();
+        }
+        return RString.EMPTY.toString();
+    }
+
+    private String 要介護認定一次判定結果コード06の名称(RString 一次判定結果名称) {
+        if (IchijiHanteiKekkaCode06.要介護1.get名称().equals(一次判定結果名称)) {
+
+            return IchijiHanteiKekkaCode06.要介護1.toString();
+        } else if (IchijiHanteiKekkaCode06.要介護2.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode06.要介護2.toString();
+        } else if (IchijiHanteiKekkaCode06.要介護3.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode06.要介護3.toString();
+        } else if (IchijiHanteiKekkaCode06.要介護4.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode06.要介護4.toString();
+        } else if (IchijiHanteiKekkaCode06.要介護5.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode06.要介護5.toString();
+        } else if (IchijiHanteiKekkaCode06.経過的要介護.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode06.経過的要介護.toString();
+        } else if (IchijiHanteiKekkaCode06.非該当.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode06.非該当.toString();
+        }
+        return RString.EMPTY.toString();
+    }
+
+    private String 要介護認定一次判定結果コード09の名称(RString 一次判定結果名称) {
+        if (IchijiHanteiKekkaCode09.要介護1.get名称().equals(一次判定結果名称)) {
+
+            return IchijiHanteiKekkaCode09.要介護1.toString();
+        } else if (IchijiHanteiKekkaCode09.要介護2.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode09.要介護2.toString();
+        } else if (IchijiHanteiKekkaCode09.要介護3.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode09.要介護3.toString();
+        } else if (IchijiHanteiKekkaCode09.要介護4.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode09.要介護4.toString();
+        } else if (IchijiHanteiKekkaCode09.要介護5.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode09.要介護5.toString();
+        } else if (IchijiHanteiKekkaCode09.送付済.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode09.送付済.toString();
+        } else if (IchijiHanteiKekkaCode09.非該当.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode09.非該当.toString();
+        } else if (IchijiHanteiKekkaCode09.要支援2.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode09.要支援2.toString();
+        }
+        return RString.EMPTY.toString();
     }
 }

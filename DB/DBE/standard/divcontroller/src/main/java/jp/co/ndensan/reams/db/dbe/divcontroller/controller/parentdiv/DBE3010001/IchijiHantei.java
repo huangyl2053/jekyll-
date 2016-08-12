@@ -241,6 +241,7 @@ public class IchijiHantei {
         if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            // TODO QA1521
             return ResponseData.of(div).forwardWithEventName(DBE3010001TransitionEventName.戻る).respond();
         }
         return ResponseData.of(div).respond();

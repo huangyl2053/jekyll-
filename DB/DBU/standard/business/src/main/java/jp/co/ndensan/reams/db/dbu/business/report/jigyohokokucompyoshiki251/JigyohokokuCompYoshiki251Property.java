@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- * {@link JigyohokokuCompYoshiki251Property}のプロパティです。
+ * 事業報告複合様式_05のプロパティです。
  *
  * @reamsid_L DBU-5560-060 wanghuafeng
  */

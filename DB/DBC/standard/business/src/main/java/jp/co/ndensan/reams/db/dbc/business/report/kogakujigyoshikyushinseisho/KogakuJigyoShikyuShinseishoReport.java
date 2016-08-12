@@ -22,15 +22,17 @@ public class KogakuJigyoShikyuShinseishoReport extends Report<KogakuJigyoShikyuS
     /**
      * コンストラクタです。
      *
-     * @param target target
+     * @param target KogakuJigyoShikyuShinseishoEntity
      */
     public KogakuJigyoShikyuShinseishoReport(KogakuJigyoShikyuShinseishoEntity target) {
         this.target = target;
     }
 
     @Override
-    protected void writeBy(ReportSourceWriter<KogakuJigyoShikyuShinseishoSource> writer) {
-        System.out.print("");
+    public void writeBy(ReportSourceWriter<KogakuJigyoShikyuShinseishoSource> reportSourceWriter) {
+        KogakuJigyoShikyuShinseishoEditor editor = new KogakuJigyoShikyuShinseishoEditor(target);
+        KogakuJigyoShikyuShinseishoBuilder builder = new KogakuJigyoShikyuShinseishoBuilder(editor);
+        reportSourceWriter.writeLine(builder);
     }
 
 }

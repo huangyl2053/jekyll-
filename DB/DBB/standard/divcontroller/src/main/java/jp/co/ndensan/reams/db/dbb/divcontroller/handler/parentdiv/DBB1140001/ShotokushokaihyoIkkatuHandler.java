@@ -88,6 +88,9 @@ public class ShotokushokaihyoIkkatuHandler {
         if (再発行する.contains(キー_KEY0)) {
             div.getChkTestPrint().setDisabled(true);
             div.getChkShuturyokuTaisho().setDisabled(true);
+        } else {
+            div.getChkTestPrint().setDisabled(false);
+            div.getChkShuturyokuTaisho().setDisabled(false);
         }
     }
 

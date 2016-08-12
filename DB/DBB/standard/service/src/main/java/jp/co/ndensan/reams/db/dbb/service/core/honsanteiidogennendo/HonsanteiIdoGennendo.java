@@ -149,9 +149,9 @@ public class HonsanteiIdoGennendo {
     private final ReportId 特徴開始通知書_仮算定 = new ReportId("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
     private final ReportId 決定通知書_変更通知書 = new ReportId("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoDaihyo");
     private final ReportId 納入通知書 = new ReportId("DBB100045_HokenryoNonyuTsuchishoDaihyo");
-    private final RString 特徴開始者_12月 = new RString("12月特徴開始者");
-    private final RString 特徴開始者_2月 = new RString("2月特徴開始者");
-    private final RString 特徴開始者_4月 = new RString("4月特徴開始者");
+    private final RString 特徴開始者_12月 = new RString("12月特徴開始者のみ");
+    private final RString 特徴開始者_2月 = new RString("2月特徴開始者のみ");
+    private final RString 特徴開始者_4月 = new RString("4月特徴開始者のみ");
     private final RString すべて選択 = new RString("（すべて選択）");
     private final RString 現金納付者 = new RString("現金納付者");
     private final RString 口座振替者 = new RString("口座振替者");

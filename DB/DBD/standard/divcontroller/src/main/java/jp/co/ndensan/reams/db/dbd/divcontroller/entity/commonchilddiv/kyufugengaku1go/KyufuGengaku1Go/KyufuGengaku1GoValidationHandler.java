@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.kyufugengaku1go.KyufuGengaku1Go;
 
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
+import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShoriKubun;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
@@ -39,7 +40,7 @@ public class KyufuGengaku1GoValidationHandler {
      * @return バリデーション結果
      */
     public ValidationMessageControlPairs validateFor滞納状況情報(ValidationMessageControlPairs pairs, KyufuGengaku1GoDiv div, ShiharaiHohoHenko shiharaiHohoHenko) {
-        if ((div.getKey_Button().equals(給付額減額))
+        if ((ShoriKubun.toValue(div.getKey_Button()).get名称().equals(給付額減額))
                 && (shiharaiHohoHenko.getShiharaiHohoHenkoTainoList().isEmpty() || div.getTainoHanteiKekka().isEmpty())) {
             pairs.add(new ValidationMessageControlPair(KyufuGengaku1GoValidationHandler.KyufuGengaku1GoMessages.支払方法変更_要滞納状況確定));
         }
@@ -55,7 +56,7 @@ public class KyufuGengaku1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor減額適用期間チェック(ValidationMessageControlPairs pairs, KyufuGengaku1GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(給付額減額)) {
+        if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(給付額減額)) {
             messages.add(ValidateChain.validateStart(div).ifNot(KyufuGengaku1GoDivSpec.減額適用期間チェック)
                     .thenAdd(KyufuGengaku1GoMessages.期間が不正_追加メッセージあり2).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -74,7 +75,7 @@ public class KyufuGengaku1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor減額適用期間終了入力チェック(ValidationMessageControlPairs pairs, KyufuGengaku1GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(減額免除申請)) {
+        if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(減額免除申請)) {
             messages.add(ValidateChain.validateStart(div).ifNot(KyufuGengaku1GoDivSpec.減額適用期間終了未入力)
                     .thenAdd(KyufuGengaku1GoMessages.減額適用期間終了未入力).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -93,7 +94,7 @@ public class KyufuGengaku1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor申請理由未選択チェック(ValidationMessageControlPairs pairs, KyufuGengaku1GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(減額免除申請)) {
+        if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(減額免除申請)) {
             messages.add(ValidateChain.validateStart(div).ifNot(KyufuGengaku1GoDivSpec.申請理由未選択)
                     .thenAdd(KyufuGengaku1GoMessages.申請理由未選択).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -112,7 +113,7 @@ public class KyufuGengaku1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor減額適用期間2チェック(ValidationMessageControlPairs pairs, KyufuGengaku1GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(減額免除申請)) {
+        if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(減額免除申請)) {
             messages.add(ValidateChain.validateStart(div).ifNot(KyufuGengaku1GoDivSpec.減額適用期間2チェック)
                     .thenAdd(KyufuGengaku1GoMessages.期間が不正_追加メッセージあり2).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(

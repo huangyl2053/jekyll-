@@ -132,7 +132,7 @@ public class JimuSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsa
         RStringBuilder stringBuilder = new RStringBuilder();
         stringBuilder.append("【介護認定審査会開催予定年月日】")
                 .append(" ")
-                .append(paramter.getShinsakaiKaisaiYoteiYMD().wareki());
+                .append(paramter.getShinsakaiKaisaiYoteiYMD().wareki().toDateString());
         RStringBuilder 開催番号 = new RStringBuilder();
         stringBuilder.append("【介護認定審査会開催番号】")
                 .append(" ")

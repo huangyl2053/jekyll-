@@ -93,9 +93,11 @@ public class GennendoIdoFukaFlow extends BatchFlowBase<CreateHonsanteiIdoBatchPa
         }
         executeStep(賦課の情報登録フロー);
         for (ChohyoResult entity : parameter.get出力帳票List()) {
-            processParameter.set出力帳票一覧(entity);
-            executeStep(計算後情報作成);
-            executeStep(本算定異動_現年度_結果一覧表);
+            if (帳票分類ID.equals(entity.get帳票分類ID())) {
+                processParameter.set出力帳票一覧(entity);
+                executeStep(計算後情報作成);
+                executeStep(本算定異動_現年度_結果一覧表);
+            }
         }
         executeStep(処理日付管理テーブル更新);
         if (getParameter().is画面移動フラグ()) {

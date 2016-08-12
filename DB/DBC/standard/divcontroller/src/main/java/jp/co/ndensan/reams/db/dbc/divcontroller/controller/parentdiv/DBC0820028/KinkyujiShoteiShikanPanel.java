@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820028.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820028.KinkyujiShoteiShikanPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820028.dgdKinkyujiShoteiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820028.KinkyujiShoteiShikanPanelHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820028.KinkyujiShoteiShikanPanelValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.SikibetuNokennsakuki;
@@ -37,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -345,6 +347,10 @@ public class KinkyujiShoteiShikanPanel {
      */
     public ResponseData<KinkyujiShoteiShikanPanelDiv> onClick_btnConfirm(KinkyujiShoteiShikanPanelDiv div) {
         RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+        ValidationMessageControlPairs validPairs = getCheckHandler(div).check入力();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
         getHandler(div).click_Confirm(state);
         return ResponseData.of(div).respond();
     }
@@ -457,6 +463,10 @@ public class KinkyujiShoteiShikanPanel {
 
     private KinkyujiShoteiShikanPanelHandler getHandler(KinkyujiShoteiShikanPanelDiv div) {
         return KinkyujiShoteiShikanPanelHandler.of(div);
+    }
+
+    private KinkyujiShoteiShikanPanelValidationHandler getCheckHandler(KinkyujiShoteiShikanPanelDiv div) {
+        return new KinkyujiShoteiShikanPanelValidationHandler(div);
     }
 
     private ResponseData<KinkyujiShoteiShikanPanelDiv> createResponse(KinkyujiShoteiShikanPanelDiv div) {

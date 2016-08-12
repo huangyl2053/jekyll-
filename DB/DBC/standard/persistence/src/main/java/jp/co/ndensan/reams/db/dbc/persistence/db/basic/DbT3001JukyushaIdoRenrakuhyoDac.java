@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
@@ -175,5 +176,52 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 受給者訂正情報の取得します。
+     *
+     * @param 被保険者番号 RString
+     * @param 異動日 RString
+     * @param 論理削除フラグ boolean
+     * @param 履歴番号 int
+     * @return List<DbT3001JukyushaIdoRenrakuhyoEntity>
+     */
+    @Transaction
+    public DbT3001JukyushaIdoRenrakuhyoEntity select受給者訂正情報(RString 被保険者番号, RString 異動日,
+            boolean 論理削除フラグ, int 履歴番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3001JukyushaIdoRenrakuhyo.class).
+                where(getiTrueFalseCriteria(被保険者番号, 異動日, 論理削除フラグ, 履歴番号)).
+                toObject(DbT3001JukyushaIdoRenrakuhyoEntity.class);
+    }
+
+    private ITrueFalseCriteria getiTrueFalseCriteria(RString 被保険者番号, RString 異動日,
+            boolean 論理削除フラグ, int 履歴番号) {
+        ITrueFalseCriteria iTrueFalseCriteria;
+        if (被保険者番号 != null && 異動日 != null) {
+            iTrueFalseCriteria = and(
+                    eq(hiHokenshaNo, 被保険者番号),
+                    eq(idoYMD, 異動日),
+                    eq(logicalDeletedFlag, 論理削除フラグ),
+                    eq(rirekiNo, 履歴番号));
+        } else if (被保険者番号 != null && 異動日 == null) {
+            iTrueFalseCriteria = and(
+                    eq(hiHokenshaNo, 被保険者番号),
+                    eq(logicalDeletedFlag, 論理削除フラグ),
+                    eq(rirekiNo, 履歴番号));
+
+        } else if (被保険者番号 == null && 異動日 != null) {
+            iTrueFalseCriteria = and(
+                    eq(idoYMD, 異動日),
+                    eq(logicalDeletedFlag, 論理削除フラグ),
+                    eq(rirekiNo, 履歴番号));
+        } else {
+            iTrueFalseCriteria = and(
+                    eq(logicalDeletedFlag, 論理削除フラグ),
+                    eq(rirekiNo, 履歴番号));
+        }
+        return iTrueFalseCriteria;
     }
 }
