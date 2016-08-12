@@ -215,7 +215,7 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
                                         and(leq(yukoKaishiYMD, 適用開始日),
                                                 isNULL(yukoShuryoYMD))),
                                 or(eq(serviceShuruiCode, "43"),
-                                        eq(serviceShuruiCode, " 46"))
+                                        eq(serviceShuruiCode, "46"))
                         )
                 ).toObject(DbT7063KaigoJigyoshaShiteiServiceEntity.class);
 
