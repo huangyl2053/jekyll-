@@ -72,6 +72,8 @@ public class FutanWariaishoIkkatsu {
     private static final RString 定数_ZERO = new RString("0");
     private static final RString 定数_ONE = new RString("1");
     private static final RString 定数_TWO = new RString("2");
+    private static final RString 定数_THREE = new RString("3");
+    private static final RString 定数_FOUR = new RString("4");
     private static final RString 定数_済 = new RString("済");
     private static final RString 定数_事業対象者 = new RString("事業対象者");
     private static final RString 定数_受給者 = new RString("受給者");
@@ -92,12 +94,16 @@ public class FutanWariaishoIkkatsu {
     private static final RString 定数_保険者番号 = new RString("保険者番号");
     private static final RString 定数_保険者名 = new RString("保険者名");
     private static final RString 定数_作成日時 = new RString("作成日時");
+    private static final RString 定数_被保台帳 = new RString("被保台帳");
     private static final RString 定数_ソート順１ = new RString("ソート順１");
     private static final RString 定数_ソート順２ = new RString("ソート順２");
     private static final RString 定数_ソート順３ = new RString("ソート順３");
     private static final RString 定数_ソート順４ = new RString("ソート順４");
     private static final RString 定数_ソート順５ = new RString("ソート順５");
     private static final RString 定数_ページ = new RString("ページ");
+    private static final RString 定数_年次 = new RString("年次");
+    private static final RString 定数_過年度 = new RString("過年度");
+    private static final RString 定数_即時 = new RString("即時");
     private static final int NUM_ONE = 1;
     private static final int NUM_TWO = 2;
     private static final int NUM_THREE = 3;
@@ -152,12 +158,15 @@ public class FutanWariaishoIkkatsu {
         source.set適用開始年月日２(開始年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoKaishiYMD2())));
         source.set適用終了年月日２(終了年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoShuryoYMD2())));
         ShoKisaiHokenshaNo hokenshaNo = getHokenshaCode(new HihokenshaDaicho(entity.get被保台帳()));
-        source.set保険者コード１(hokenshaNo.getColumnValue().substring(0, NUM_ONE));
-        source.set保険者コード２(hokenshaNo.getColumnValue().substring(NUM_ONE, NUM_TWO));
-        source.set保険者コード３(hokenshaNo.getColumnValue().substring(NUM_TWO, NUM_THREE));
-        source.set保険者コード４(hokenshaNo.getColumnValue().substring(NUM_THREE, NUM_FOUR));
-        source.set保険者コード５(hokenshaNo.getColumnValue().substring(NUM_FOUR, NUM_FIVE));
-        source.set保険者コード６(hokenshaNo.getColumnValue().substring(NUM_FIVE));
+        if (hokenshaNo != null) {
+            source.set保険者コード１(hokenshaNo.getColumnValue().substringReturnAsPossible(0, NUM_ONE));
+            source.set保険者コード２(hokenshaNo.getColumnValue().substringReturnAsPossible(NUM_ONE, NUM_TWO));
+            source.set保険者コード３(hokenshaNo.getColumnValue().substringReturnAsPossible(NUM_TWO, NUM_THREE));
+            source.set保険者コード４(hokenshaNo.getColumnValue().substringReturnAsPossible(NUM_THREE, NUM_FOUR));
+            source.set保険者コード５(hokenshaNo.getColumnValue().substringReturnAsPossible(NUM_FOUR, NUM_FIVE));
+            source.set保険者コード６(hokenshaNo.getColumnValue().substringReturnAsPossible(NUM_FIVE));
+        }
+        source.set保険者住所(get保険者住所());
         source.set保険者名(compNinshosha.ninshoshaShimeiKakeru);
         source.set保険者電話番号(get電話番号());
         source.set電子公印(compNinshosha.denshiKoin);
@@ -171,7 +180,12 @@ public class FutanWariaishoIkkatsu {
         return DbBusinessConfig.get(ConfigNameDBU.保険者情報_電話番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
     }
 
+    private RString get保険者住所() {
+        return DbBusinessConfig.get(ConfigNameDBU.保険者情報_住所, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+    }
+
     private ShoKisaiHokenshaNo getHokenshaCode(HihokenshaDaicho 被保台帳) {
+        requireNonNull(被保台帳, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保台帳.toString()));
         LasdecCode 市町村コード = null;
         if (定数_ONE.equals(被保台帳.get広域内住所地特例フラグ())) {
             市町村コード = 被保台帳.get広住特措置元市町村コード();
@@ -284,7 +298,15 @@ public class FutanWariaishoIkkatsu {
         } else {
             source.set負担割合(FutanwariaiKubun.toValue(利用者負担割合証.get負担割合期間().getFutanWariaiKubun1()).get名称());
         }
-        source.set判定区分(FutanWariaiHanteiKubun.toValue(利用者負担割合証.get利用者負担割合().getHanteiKubun()).get名称());
+        if (定数_ONE.equals(利用者負担割合証.get利用者負担割合().getHanteiKubun())) {
+            source.set判定区分(定数_年次);
+        } else if (定数_TWO.equals(利用者負担割合証.get利用者負担割合().getHanteiKubun())) {
+            source.set判定区分(定数_異動分);
+        } else if (定数_THREE.equals(利用者負担割合証.get利用者負担割合().getHanteiKubun())) {
+            source.set判定区分(定数_過年度);
+        } else if (定数_FOUR.equals(利用者負担割合証.get利用者負担割合().getHanteiKubun())) {
+            source.set判定区分(定数_即時);
+        }
         if (定数_ZERO.equals(利用者負担割合証.get利用者負担割合().getHakoKubun())) {
             source.set発行済(RString.EMPTY);
         } else {

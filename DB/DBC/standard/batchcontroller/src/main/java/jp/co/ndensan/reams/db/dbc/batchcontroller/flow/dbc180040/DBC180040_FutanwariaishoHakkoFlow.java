@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180040.FutanWariaiShoR
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180040.FutanWariaiShoRenchoYokoOutputProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180040.RiyoshaFutanWariaiShoInsertProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180040.ShoriDateKanriUpdateProcess;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.futanwariaishohakko.FutanwariaishoHakkoBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.futanwariaishohakko.DBC180040_FutanwariaishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaishohakko.FutanwariaishoHakkoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.futanwariaishohakko.FutanwariaishoHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -37,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-4990-030 pengxingyi
  */
-public class DBC180040_FutanwariaishoHakkoFlow extends BatchFlowBase<FutanwariaishoHakkoBatchParameter> {
+public class DBC180040_FutanwariaishoHakkoFlow extends BatchFlowBase<DBC180040_FutanwariaishoHakkoParameter> {
 
     private static final RString 定数_0 = new RString("0");
     private static final RString 定数_1 = new RString("1");
@@ -79,7 +79,7 @@ public class DBC180040_FutanwariaishoHakkoFlow extends BatchFlowBase<Futanwariai
      * @return IBatchFlowCommand
      */
     @Step(利用者負担割合期間)
-    protected IBatchFlowCommand createReport1() {
+    protected IBatchFlowCommand futanWariaiInsertProcess() {
         return loopBatch(FutanWariaiInsertProcess.class)
                 .arguments(getProcessParameter())
                 .define();
@@ -91,7 +91,7 @@ public class DBC180040_FutanwariaishoHakkoFlow extends BatchFlowBase<Futanwariai
      * @return IBatchFlowCommand
      */
     @Step(負担割合証)
-    protected IBatchFlowCommand createReport2() {
+    protected IBatchFlowCommand futanWariaiShoOutputProcess() {
         return loopBatch(FutanWariaiShoOutputProcess.class)
                 .arguments(getProcessParameter())
                 .define();
@@ -103,7 +103,7 @@ public class DBC180040_FutanwariaishoHakkoFlow extends BatchFlowBase<Futanwariai
      * @return IBatchFlowCommand
      */
     @Step(負担割合証連帳縦)
-    protected IBatchFlowCommand createReport3() {
+    protected IBatchFlowCommand futanWariaiShoRenchoTateOutputProcess() {
         return loopBatch(FutanWariaiShoRenchoTateOutputProcess.class)
                 .arguments(getProcessParameter())
                 .define();
@@ -115,7 +115,7 @@ public class DBC180040_FutanwariaishoHakkoFlow extends BatchFlowBase<Futanwariai
      * @return IBatchFlowCommand
      */
     @Step(負担割合証連帳横)
-    protected IBatchFlowCommand createReport4() {
+    protected IBatchFlowCommand futanWariaiShoRenchoYokoOutputProcess() {
         return loopBatch(FutanWariaiShoRenchoYokoOutputProcess.class)
                 .arguments(getProcessParameter())
                 .define();
@@ -127,7 +127,7 @@ public class DBC180040_FutanwariaishoHakkoFlow extends BatchFlowBase<Futanwariai
      * @return IBatchFlowCommand
      */
     @Step(負担割合証発行一覧表)
-    protected IBatchFlowCommand createReport5() {
+    protected IBatchFlowCommand futanWariaiShoHakkoIchiranOutputProcess() {
         return loopBatch(FutanWariaiShoHakkoIchiranOutputProcess.class)
                 .arguments(getProcessParameter())
                 .define();
@@ -139,7 +139,7 @@ public class DBC180040_FutanwariaishoHakkoFlow extends BatchFlowBase<Futanwariai
      * @return IBatchFlowCommand
      */
     @Step(処理日付管理)
-    protected IBatchFlowCommand createReport6() {
+    protected IBatchFlowCommand shoriDateKanriUpdateProcess() {
         return loopBatch(ShoriDateKanriUpdateProcess.class)
                 .arguments(getProcessParameter())
                 .define();
@@ -151,7 +151,7 @@ public class DBC180040_FutanwariaishoHakkoFlow extends BatchFlowBase<Futanwariai
      * @return IBatchFlowCommand
      */
     @Step(利用者負担割合証)
-    protected IBatchFlowCommand createReport7() {
+    protected IBatchFlowCommand riyoshaFutanWariaiShoInsertProcess() {
         return loopBatch(RiyoshaFutanWariaiShoInsertProcess.class)
                 .arguments(getProcessParameter())
                 .define();
