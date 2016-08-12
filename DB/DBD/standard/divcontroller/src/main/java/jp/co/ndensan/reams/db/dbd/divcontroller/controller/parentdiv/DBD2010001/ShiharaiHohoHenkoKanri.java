@@ -543,6 +543,9 @@ public class ShiharaiHohoHenkoKanri {
      */
     public ResponseData<ShiharaiHohoHenkoKanriDiv> onOkClose_dataPassing(ShiharaiHohoHenkoKanriDiv div) {
         ShiharaiHohoHenko dialog支払方法変更 = DataPassingConverter.deserialize(div.getKey_ShiharaiHohoHenkoKanri(), ShiharaiHohoHenko.class);
+        if (dialog支払方法変更 == null) {
+            return ResponseData.of(div).respond();
+        }
 
         ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
         if (EntityDataState.Added.equals(dialog支払方法変更.getState())) {
