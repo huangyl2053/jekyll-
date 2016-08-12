@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.kibetsuchochuyuyo.Kib
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.kaigofukachoshuyuyo.KaigoFukaChoshuYuyoParam;
 import jp.co.ndensan.reams.db.dbb.business.core.kaigofukachoshuyuyo.KaigoKibetsuChoshuYuyoParam;
+import jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei.KakushuTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.choshuyuyo.ChoshuYuyoJohoRelateMapperParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fukajoho.FukaJohoRelateMapperParameter;
@@ -23,12 +24,14 @@ import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2007KibetsuChoshuYuyoD
 import jp.co.ndensan.reams.db.dbb.service.core.choshuyuyo.choshuyuyojoho.ChoshuYuyoJohoManager;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.FukaManager;
 import jp.co.ndensan.reams.db.dbb.service.core.fukajoho.fukajoho.FukaJohoManager;
+import jp.co.ndensan.reams.db.dbb.service.report.kakushutsuchishosakusei.KakushuTsuchishoSakusei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -277,5 +280,16 @@ public class KaigoFukaChoshuYuyo {
     public FukaJoho getFukaJoho(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号) {
         FukaJohoRelateMapperParameter param = FukaJohoRelateMapperParameter.createSelectListParam(調定年度, 賦課年度, 通知書番号);
         return 介護賦課Manager.select賦課の情報_最新(param);
+    }
+    
+    /**
+     * 通知書発行のメソッドです。
+     *
+     * @param param parameter
+     * @return SourceDataCollection
+     */
+    public SourceDataCollection publish(KakushuTsuchishoParameter param) {
+        SourceDataCollection sourceDataCollection = KakushuTsuchishoSakusei.createInstance().publish(param);
+        return sourceDataCollection;
     }
 }
