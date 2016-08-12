@@ -676,14 +676,8 @@ public class IchijihanteikekkahyoItemSettei {
                 前回調査結果コード = ChosaAnser10.toValue(前回調査票調査.getResearchItem()).getコード();
                 第２群.set前回結果(get前回結果(is前回結果, 前回調査結果));
                 kekka.set移乗今回結果前回結果比(第２群.get調査結果コード(), 前回調査結果コード, 第２群);
-            } else if (前回調査票調査連番.equals(settei.get座位保持(厚労省IF識別コード))) {
-                第２群 = 第２群リスト.get(INT_11);
-                前回調査結果 = ChosaAnser10.toValue(前回調査票調査.getResearchItem()).get名称();
-                前回調査結果コード = ChosaAnser10.toValue(前回調査票調査.getResearchItem()).getコード();
-                第２群.set前回結果(get前回結果(is前回結果, 前回調査結果));
-                kekka.set移乗今回結果前回結果比(第２群.get調査結果コード(), 前回調査結果コード, 第２群);
             } else if (前回調査票調査連番.equals(settei.get外出頻度(厚労省IF識別コード))) {
-                第２群 = 第２群リスト.get(INT_12);
+                第２群 = 第２群リスト.get(INT_11);
                 前回調査結果 = ChosaAnser13.toValue(前回調査票調査.getResearchItem()).get名称();
                 前回調査結果コード = ChosaAnser13.toValue(前回調査票調査.getResearchItem()).getコード();
                 第２群.set前回結果(get前回結果(is前回結果, 前回調査結果));
