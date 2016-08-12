@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.Ninte
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.NinteiShinseiBusinessCollection;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.RenrakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiRenrakusakiJoho.NinteiShinseiRenrakusakiJoho.NinteiShinseiRenrakusakiJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiRenrakusakiJoho.NinteiShinseiRenrakusakiJoho.dgRenrakusakiIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.parentdiv.NinteiShinseiRenrakusakiJoho.NinteiShinseiRenrakusakiJohoHandler;
@@ -20,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -40,6 +43,9 @@ public class NinteiShinseiRenrakusakiJoho {
         getHandler(div).onLoad();
         NinteiShinseiBusinessCollection deta = DataPassingConverter.deserialize(div.
                 getNinteiShinseiBusinessCollection(), NinteiShinseiBusinessCollection.class);
+        if (!deta.getDbdBusiness().isEmpty()) {
+            ViewStateHolder.put(ViewStateKeys.連絡先情報, deta);
+        }
         getHandler(div).setRenrakusaki(deta.getDbdBusiness());
         return ResponseData.of(div).respond();
     }
@@ -140,7 +146,19 @@ public class NinteiShinseiRenrakusakiJoho {
         }
         if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
+            NinteiShinseiBusinessCollection data = ViewStateHolder.get(ViewStateKeys.連絡先情報, NinteiShinseiBusinessCollection.class);
+            List<RenrakusakiJoho> johoList = data.getDbdBusiness();
             List<dgRenrakusakiIchiran_Row> dateSoruce = div.getDgRenrakusakiIchiran().getDataSource();
+            for (int i = 0; i < johoList.size(); i++) {
+                RenrakusakiJoho joho = johoList.get(i);
+                dgRenrakusakiIchiran_Row row = div.getDgRenrakusakiIchiran().getActiveRow();
+                if (row.getShinseishoKanriNo().equals(joho.get申請書管理番号().value())
+                        && row.getRenban().equals(new RString(joho.get連番()))) {
+                    johoList.set(i, joho.deleted());
+                }
+            }
+            data.setDbdBusiness(johoList);
+            ViewStateHolder.put(ViewStateKeys.連絡先情報, data);
             dateSoruce.remove(div.getDgRenrakusakiIchiran().getActiveRow());
             div.getDgRenrakusakiIchiran().setDataSource(dateSoruce);
         }
@@ -175,7 +193,8 @@ public class NinteiShinseiRenrakusakiJoho {
      */
     public ResponseData<NinteiShinseiRenrakusakiJohoDiv> onClick_btnKakutei(NinteiShinseiRenrakusakiJohoDiv div) {
         NinteiShinseiBusinessCollection collection = new NinteiShinseiBusinessCollection();
-        collection.setDbdBusiness(getHandler(div).setBusiness());
+        collection.setDbdBusiness(getHandler(div).setBusiness(ViewStateHolder
+                .get(ViewStateKeys.連絡先情報, NinteiShinseiBusinessCollection.class).getDbdBusiness()));
         div.setNinteiShinseiBusinessCollection(DataPassingConverter.serialize(collection));
         return ResponseData.of(div).dialogOKClose();
     }
