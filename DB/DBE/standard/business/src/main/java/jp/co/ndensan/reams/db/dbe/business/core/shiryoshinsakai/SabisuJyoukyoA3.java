@@ -1676,22 +1676,15 @@ public class SabisuJyoukyoA3 {
                 第１群 = 第１群リスト.get(連番_0);
                 主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
                 settei.set徘徊認定調査と主治医意見書結果比(第１群.get調査結果コード(), 主治医意見書コード, 第１群);
-                主治医意見書項目.remove(主治医意見書);
-                return;
             } else if (主治医意見書連番.equals(settei.get主治医意見昼夜逆転(厚労省IF識別コード))) {
                 第１群 = 第１群リスト.get(連番_3);
                 主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
                 settei.set徘徊認定調査と主治医意見書結果比(第１群.get調査結果コード(), 主治医意見書コード, 第１群);
-                主治医意見書項目.remove(主治医意見書);
-                return;
             } else if (主治医意見書連番.equals(settei.get主治医意見介護に抵抗(厚労省IF識別コード))) {
                 第１群 = 第１群リスト.get(連番_6);
                 主治医意見書コード = IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
                 settei.set徘徊認定調査と主治医意見書結果比(第１群.get調査結果コード(), 主治医意見書コード, 第１群);
-                主治医意見書項目.remove(主治医意見書);
-                return;
             }
-
         }
     }
 
