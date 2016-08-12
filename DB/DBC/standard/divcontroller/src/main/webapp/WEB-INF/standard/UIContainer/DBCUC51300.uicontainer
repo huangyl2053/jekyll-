@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC51300",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "平均利用額統計表",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC5130011",
+     "toLayoutTitle": "平均利用額統計表",
+     "toState": "標準"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC5130011",
+     "layoutTitle": "平均利用額統計表",
+     "eventName": "実行",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

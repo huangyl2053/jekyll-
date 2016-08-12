@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBAUC80101",
+ "displayWizard": false,
+ "subGyomuCode": "DBA",
+ "steps": [
+  {
+   "id": 1,
+   "name": "資格取得者不整合リスト",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA8010001",
+     "toLayoutTitle": "資格取得者不整合リスト",
+     "toState": "Initialization"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA8010001",
+     "layoutTitle": "資格取得者不整合リスト",
+     "eventName": "メニューへ戻る",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

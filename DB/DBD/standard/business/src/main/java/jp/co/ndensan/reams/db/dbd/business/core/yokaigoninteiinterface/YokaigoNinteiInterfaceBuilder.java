@@ -178,7 +178,7 @@ public class YokaigoNinteiInterfaceBuilder {
      * @param 取込日時 取込日時
      * @return {@link YokaigoNinteiInterfaceBuilder}
      */
-    public YokaigoNinteiInterfaceBuilder set取込日時(RString 取込日時) {
+    public YokaigoNinteiInterfaceBuilder set取込日時(YMDHMS 取込日時) {
         requireNonNull(取込日時, UrSystemErrorMessages.値がnull.getReplacedMessage("取込日時"));
 //        entity.setTorikomiTimestamp(取込日時); TODO
         return this;
@@ -190,7 +190,7 @@ public class YokaigoNinteiInterfaceBuilder {
      * @param 取込区分 取込区分
      * @return {@link YokaigoNinteiInterfaceBuilder}
      */
-    public YokaigoNinteiInterfaceBuilder set取込区分(YMDHMS 取込区分) {
+    public YokaigoNinteiInterfaceBuilder set取込区分(RString 取込区分) {
         requireNonNull(取込区分, UrSystemErrorMessages.値がnull.getReplacedMessage("取込区分"));
 //        entity.setTorikomiKubun(取込区分); TODO
         return this;

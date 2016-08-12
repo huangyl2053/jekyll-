@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC51400",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "サービスコード単位明細リスト",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC5140011",
+     "toLayoutTitle": "サービスコード単位明細リスト",
+     "toState": "標準"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC5140011",
+     "layoutTitle": "サービスコード単位明細リスト",
+     "eventName": "実行",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

@@ -51,21 +51,21 @@ public class ShikyuKetteiTsuchishoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getｔｘｔHakkobi
-     * @return ｔｘｔHakkobi
+     * gettxtHakkobi
+     * @return txtHakkobi
      */
-    @JsonProperty("ｔｘｔHakkobi")
-    public TextBoxDate getＴｘｔHakkobi() {
-        return ｔｘｔHakkobi;
+    @JsonProperty("txtHakkobi")
+    public TextBoxDate getTxtHakkobi() {
+        return txtHakkobi;
     }
 
     /*
-     * setｔｘｔHakkobi
-     * @param ｔｘｔHakkobi ｔｘｔHakkobi
+     * settxtHakkobi
+     * @param txtHakkobi txtHakkobi
      */
-    @JsonProperty("ｔｘｔHakkobi")
-    public void setＴｘｔHakkobi(TextBoxDate ｔｘｔHakkobi) {
-        this.ｔｘｔHakkobi = ｔｘｔHakkobi;
+    @JsonProperty("txtHakkobi")
+    public void setTxtHakkobi(TextBoxDate txtHakkobi) {
+        this.txtHakkobi = txtHakkobi;
     }
 
     /*
