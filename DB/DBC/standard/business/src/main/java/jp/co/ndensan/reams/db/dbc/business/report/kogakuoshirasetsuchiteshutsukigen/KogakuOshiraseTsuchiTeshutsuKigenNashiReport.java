@@ -30,7 +30,7 @@ public class KogakuOshiraseTsuchiTeshutsuKigenNashiReport extends
     }
 
     @Override
-    protected void writeBy(ReportSourceWriter<KogakuOshiraseTsuchiTeshutsuKigenNashiSource> writer) {
+    public void writeBy(ReportSourceWriter<KogakuOshiraseTsuchiTeshutsuKigenNashiSource> writer) {
         IKogakuOshiraseTsuchiTeshutsuKigenNashiEditor editor = new KogakuOshiraseTsuchiTeshutsuKigenNashiEditor(target);
         IKogakuOshiraseTsuchiTeshutsuKigenNashiBuilder builder = new KogakuOshiraseTsuchiTeshutsuKigenNashiBuilder(editor);
         writer.writeLine(builder);
