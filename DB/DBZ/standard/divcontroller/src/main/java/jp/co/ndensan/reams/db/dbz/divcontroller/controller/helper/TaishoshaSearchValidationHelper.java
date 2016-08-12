@@ -30,7 +30,7 @@ public final class TaishoshaSearchValidationHelper {
     }
 
     /**
-     * 最大表示件数バリデーションを行います。
+     * 画面上で設定された表示件数が、最大表示件数を超えていないかのバリデーションを行います。
      *
      * @param 最大表示件数 int
      * @param 最大表示件数入力値 TextBoxNum
