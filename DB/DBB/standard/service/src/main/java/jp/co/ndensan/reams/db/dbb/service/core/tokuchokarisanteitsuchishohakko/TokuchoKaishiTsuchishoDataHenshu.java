@@ -562,6 +562,9 @@ public class TokuchoKaishiTsuchishoDataHenshu {
             期別金額リスト.add(tempEntity.get前年度特徴期別金額05());
             期別金額リスト.add(tempEntity.get前年度特徴期別金額06());
             FukaJoho 賦課情報 = get賦課情報(tempEntity.get前年度賦課情報(), 期別金額リスト);
+            if (賦課情報.get調定年度() == null || 賦課情報.get賦課年度() == null || 賦課情報.get通知書番号() == null) {
+                賦課情報 = null;
+            }
             result.set前年度賦課情報(賦課情報);
             tmpResultList.add(result);
         }
