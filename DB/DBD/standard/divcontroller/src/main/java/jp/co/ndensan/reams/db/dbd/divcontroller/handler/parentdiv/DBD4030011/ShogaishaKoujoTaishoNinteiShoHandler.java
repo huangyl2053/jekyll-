@@ -186,7 +186,7 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
         parameter.set決定日TO(div.getTyusyutuJyokenPanel().getTxtKeteiDay().getToValue());
         parameter.set前回非該当者(div.getTyusyutuJyokenPanel().getDropDownList1().getSelectedValue());
         parameter.set交付日(div.getShogaishaKojoNinteishoOutput().getTxtKofuDay().getValue());
-        parameter.set出力順(get画面出力順());
+//        parameter.set出力順(get画面出力順());  QA 95838
         return parameter;
 
     }
