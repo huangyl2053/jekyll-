@@ -159,11 +159,11 @@ public class HoshushiharaiJumbiBusiness {
         RStringBuilder jokenBuilder = new RStringBuilder();
         List<RString> 出力条件List = new ArrayList<>();
         jokenBuilder.append(new RString("【実績期間From】"));
-        jokenBuilder.append(processParamter.getJissekidaterangefrom());
+        jokenBuilder.append(processParamter.getJissekidaterangefrom().wareki().toDateString());
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("【実績期間To】"));
-        jokenBuilder.append(processParamter.getJissekidaterangeto());
+        jokenBuilder.append(processParamter.getJissekidaterangeto().wareki().toDateString());
         出力条件List.add(jokenBuilder.toRString());
         return 出力条件List;
     }
