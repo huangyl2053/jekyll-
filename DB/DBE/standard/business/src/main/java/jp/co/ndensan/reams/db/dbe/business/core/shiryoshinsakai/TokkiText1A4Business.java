@@ -233,7 +233,7 @@ public class TokkiText1A4Business {
         if (kyotsuEntity.isJimukyoku()) {
             return getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.append("_BAK.png").toRString());
         } else {
-            return getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.append("_.png").toRString());
+            return getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.append(".png").toRString());
         }
     }
 

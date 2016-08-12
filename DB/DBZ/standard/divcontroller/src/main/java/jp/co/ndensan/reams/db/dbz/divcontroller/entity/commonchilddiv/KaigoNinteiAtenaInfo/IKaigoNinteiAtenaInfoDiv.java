@@ -3,6 +3,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNint
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigoninteiatenainfo.KaigoNinteiAtenaInfoBusiness;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
@@ -46,4 +48,26 @@ public interface IKaigoNinteiAtenaInfoDiv extends ICommonChildDivBaseProperties 
      * @param business KaigoNinteiAtenaInfoBusiness
      */
     void set介護認定宛名情報(KaigoNinteiAtenaInfoBusiness business);
+
+    /**
+     * 介護認定宛名情報画面Div。
+     *
+     * @return 介護認定宛名情報
+     */
+    RDate get生年月日();
+
+    RString get年齢();
+
+    RString get性別();
+
+    RString get被保険者氏名();
+
+    YubinNo get郵便番号();
+
+    RString get住所();
+
+    RString get電話番号();
+
+    RString get識別コード();
+
 }
