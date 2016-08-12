@@ -88,10 +88,6 @@ public enum ReportIdDBC {
      */
     DBC100070(new ReportId("DBC100070_KogakuJigyoShikyuShinseisho"), new RString("介護保険高額総合事業サービス費支給申請書")),
     /**
-     * 高額総合事業サービス費給付お知らせ通知書
-     */
-    DBC100073(new ReportId("DBC100073_KogakuJigyoOshiraseTsuchishoKigenNashi"), new RString("高額総合事業サービス費給付お知らせ通知書")),
-    /**
      * 基準収入額適用決定通知書
      */
     DBC100074(
