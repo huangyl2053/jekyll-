@@ -5,7 +5,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIry
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
@@ -78,7 +77,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
- /*
+    /*
      * gettxtIryoKikanCode
      * @return txtIryoKikanCode
      */
@@ -460,6 +459,11 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
     @Override
     public RString getRenrakuJiko() {
         return this.hdnShujiiRenrakuJiko;
+    }
+
+    @Override
+    public void setRenrakuJiko(RString renrakuJiko) {
+        this.hdnShujiiRenrakuJiko = renrakuJiko;
     }
 
     @Override
