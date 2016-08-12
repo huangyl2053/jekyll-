@@ -528,6 +528,7 @@
             resultOrdered="true">
         SELECT dbt5207."serviceJokyo"
         , dbt5207."remban"
+        , dbt5207."koroshoIfShikibetsuCode"
         FROM rgdb."DbT5207NinteichosahyoServiceJokyo" dbt5207
         WHERE dbt5207."shinseishoKanriNo" = #{shinseishoKanri}
         AND dbt5207."ninteichosaRirekiNo" = #{ninteichosaRirekiNo}
@@ -542,6 +543,7 @@
             resultOrdered="true">
         SELECT dbt5207."serviceJokyo"
         , dbt5207."remban"
+        , dbt5207."koroshoIfShikibetsuCode"
         FROM rgdb."DbT5207NinteichosahyoServiceJokyo" dbt5207
         WHERE dbt5207."shinseishoKanriNo" = #{shinseishoKanri}
         AND dbt5207."ninteichosaRirekiNo" = #{ninteichosaRirekiNo}
@@ -554,6 +556,7 @@
             fetchSize="500"
             resultOrdered="true">
         SELECT dbt5208."serviceJokyoFlag"
+        , dbt5208."koroshoIfShikibetsuCode"
         FROM rgdb."DbT5208NinteichosahyoServiceJokyoFlag" dbt5208
         WHERE dbt5208."shinseishoKanriNo" = #{shinseishoKanri}
         AND dbt5208."ninteichosaRirekiNo" = #{ninteichosaRirekiNo}
