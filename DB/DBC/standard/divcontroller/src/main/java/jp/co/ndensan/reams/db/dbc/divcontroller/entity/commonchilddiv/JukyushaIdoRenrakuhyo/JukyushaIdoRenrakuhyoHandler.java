@@ -210,7 +210,7 @@ public class JukyushaIdoRenrakuhyoHandler {
             div.getYokaigoNinteiPanel().getDdlYokaigoJotaiKubun().setSelectedKey(空KEY);
         }
 
-        if (JukyushaIF_HenkoShinseichuKubunCode.申請なし.getコード().equals(受給者異動情報.get変更申請中区分コード())) {
+        if (JukyushaIF_HenkoShinseichuKubunCode.申請無し.getコード().equals(受給者異動情報.get変更申請中区分コード())) {
             div.getYokaigoNinteiPanel().getRadHenkoShinseichuKubun().setSelectedKey(申請無KEY);
         } else if (JukyushaIF_HenkoShinseichuKubunCode.申請中.getコード().equals(受給者異動情報.get変更申請中区分コード())) {
             div.getYokaigoNinteiPanel().getRadHenkoShinseichuKubun().setSelectedKey(申請中KEY);
