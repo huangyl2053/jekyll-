@@ -77,10 +77,6 @@ public class DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter extend
     @BatchParameter(key = JURYOU_FLG, name = "受領委任者向け決定通知書フラグ")
     private RString 受領委任者向け決定通知書フラグ;
 
-    private static final String SHIHARAIHOHO = "支払方法";
-    @BatchParameter(key = SHIHARAIHOHO, name = "支払方法")
-    private RString 支払方法;
-
     private static final String FURIKOMI_KA = "振込予定日";
     @BatchParameter(key = FURIKOMI_KA, name = "振込予定日")
     private RDate 振込予定日;

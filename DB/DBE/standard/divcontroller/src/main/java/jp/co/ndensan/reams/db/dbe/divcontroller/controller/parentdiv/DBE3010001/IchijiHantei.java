@@ -85,7 +85,6 @@ public class IchijiHantei {
             getHandler(div).initializtion();
             return ResponseData.of(div).setState(DBE3010001StateName.初期表示);
         } else if (完了処理_一次判定.equals(menuID)) {
-
             ShinseishoKanriNoList shinseishoKanriNoList = ViewStateHolder.get(ViewStateKeys.申請書管理番号リスト, ShinseishoKanriNoList.class);
             List<IChiJiPanTeiSyoRiBusiness> 一次判定対象者一覧List = kenSaKu(div, menuID, shinseishoKanriNoList);
             PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
@@ -242,6 +241,7 @@ public class IchijiHantei {
         if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            // TODO QA1521
             return ResponseData.of(div).forwardWithEventName(DBE3010001TransitionEventName.戻る).respond();
         }
         return ResponseData.of(div).respond();

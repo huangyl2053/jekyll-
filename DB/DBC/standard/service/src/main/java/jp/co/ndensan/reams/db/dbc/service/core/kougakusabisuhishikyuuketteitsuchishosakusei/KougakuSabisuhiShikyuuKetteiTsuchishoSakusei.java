@@ -85,7 +85,6 @@ public class KougakuSabisuhiShikyuuKetteiTsuchishoSakusei {
         batchParameter.set決定日(parameter.get決定日());
         batchParameter.set利用者向け決定通知書フラグ(parameter.get利用者向け決定通知書フラグ());
         batchParameter.set受領委任者向け決定通知書フラグ(parameter.get受領委任者向け決定通知書フラグ());
-        batchParameter.set支払方法(parameter.get支払方法());
         batchParameter.set振込予定日(parameter.get振込予定日());
         batchParameter.set支払場所(parameter.get支払場所());
         batchParameter.set支払期間From(parameter.get支払期間From());
@@ -120,7 +119,6 @@ public class KougakuSabisuhiShikyuuKetteiTsuchishoSakusei {
         batchParameter.set決定日(parameter.get決定日());
         batchParameter.set利用者向け決定通知書フラグ(parameter.get利用者向け決定通知書フラグ());
         batchParameter.set受領委任者向け決定通知書フラグ(parameter.get受領委任者向け決定通知書フラグ());
-        batchParameter.set支払方法(parameter.get支払方法());
         batchParameter.set振込予定日(parameter.get振込予定日());
         batchParameter.set支払場所(parameter.get支払場所());
         batchParameter.set支払期間From(parameter.get支払期間From());

@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -43,6 +44,7 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
@@ -57,7 +59,7 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
 
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.futanwariaishohakko."
-                    + "IFutanwariaishoHakkoMapper.select利用者負担割合証");
+                    + "IFutanwariaishoHakkoMapper.select利用者負担割合証Temp");
     private FutanwariaishoHakkoProcessParameter parameter;
     private FutanWariaishoIkkatsu service;
     private ChohyoSeigyoKyotsu 帳票制御共通;
@@ -85,6 +87,8 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString ORDERBY = new RString("order by");
+    private static final Code CODE = new Code("0003");
+    private static final RString DATANAME = new RString("被保険者番号");
     private static final int NUM_ONE = 1;
     private static final int NUM_TWO = 2;
     private static final int NUM_THREE = 3;
@@ -168,7 +172,9 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
                 = service.getHakkoIchiranCSVData(帳票制御共通, entity, new RString(連番));
         futanwariaiShoHakkoIchiranEucCsvWriter.writeLine(futanwariaiShoHakkoIchiranCSVEntity);
         if (entity.get被保台帳() != null) {
-            personalDataList.add(PersonalData.of(entity.get被保台帳().getShikibetsuCode()));
+            ExpandedInformation expandedInformation
+                    = new ExpandedInformation(CODE, DATANAME, entity.get被保台帳().getHihokenshaNo().getColumnValue());
+            personalDataList.add(PersonalData.of(entity.get被保台帳().getShikibetsuCode(), expandedInformation));
         }
         連番++;
         updateRiyoshaFutanWariai(entity);

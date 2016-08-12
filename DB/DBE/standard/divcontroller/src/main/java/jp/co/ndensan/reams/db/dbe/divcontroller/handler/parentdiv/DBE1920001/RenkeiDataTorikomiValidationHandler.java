@@ -139,7 +139,7 @@ public class RenkeiDataTorikomiValidationHandler {
             filePath = Path.combinePath(path, 認定調査委託先データ取込みファイル名);
         }
         try (CsvListReader read = new CsvListReader.InstanceBuilder(filePath).build()) {
-            RString マスタIF種類 = DbBusinessConfig.get(ConfigNameDBE.認定申請IF種類, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            RString マスタIF種類 = DbBusinessConfig.get(ConfigNameDBE.四マスタIF種類, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             if (電算標準版.equals(マスタIF種類) && 電算標準版_11 < getSize(read)) {
                 validPairs.add(new ValidationMessageControlPair(
                         FilecheckMessages.Validate認定調査委託先情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
@@ -168,7 +168,7 @@ public class RenkeiDataTorikomiValidationHandler {
             filePath = Path.combinePath(path, 認定調査員データ取込みファイル名);
         }
         try (CsvListReader read = new CsvListReader.InstanceBuilder(filePath).build()) {
-            RString マスタIF種類 = DbBusinessConfig.get(ConfigNameDBE.認定申請IF種類, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            RString マスタIF種類 = DbBusinessConfig.get(ConfigNameDBE.四マスタIF種類, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             if (電算標準版.equals(マスタIF種類) && 電算標準版_9 < getSize(read)) {
                 validPairs.add(new ValidationMessageControlPair(
                         FilecheckMessages.Validate認定調査員情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
@@ -197,7 +197,7 @@ public class RenkeiDataTorikomiValidationHandler {
             filePath = Path.combinePath(path, 主治医医療機関データ取込みファイル名);
         }
         try (CsvListReader read = new CsvListReader.InstanceBuilder(filePath).build()) {
-            RString マスタIF種類 = DbBusinessConfig.get(ConfigNameDBE.認定申請IF種類, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            RString マスタIF種類 = DbBusinessConfig.get(ConfigNameDBE.四マスタIF種類, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             if (電算標準版.equals(マスタIF種類) && 電算標準版_10 < getSize(read)) {
                 validPairs.add(new ValidationMessageControlPair(
                         FilecheckMessages.Validate主治医医療機関情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
@@ -226,7 +226,7 @@ public class RenkeiDataTorikomiValidationHandler {
             filePath = Path.combinePath(path, 主治医データ取込みファイル名);
         }
         try (CsvListReader read = new CsvListReader.InstanceBuilder(filePath).build()) {
-            RString マスタIF種類 = DbBusinessConfig.get(ConfigNameDBE.認定申請IF種類, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            RString マスタIF種類 = DbBusinessConfig.get(ConfigNameDBE.四マスタIF種類, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             if (電算標準版.equals(マスタIF種類) && 電算標準版_8 < getSize(read)) {
                 validPairs.add(new ValidationMessageControlPair(
                         FilecheckMessages.Validate主治医情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));

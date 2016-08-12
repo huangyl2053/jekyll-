@@ -3,96 +3,85 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.report.kogakukyufutaishoshaichiran;
+package jp.co.ndensan.reams.db.dbc.business.report.seikyugakutsuchishoin;
 
-import java.util.List;
-import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.DbWT3054KogakuKyufuTaishoshaTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishosha.KyuufuTaishoshaHihokenshaEntity;
-import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakukyufutaishoshaichiran.KogakuKyufuTaishoshaIchiranSource;
+import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.DbWT1511SeikyugakuTsuchishoTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.seikyugakutsuchishoin.SeikyugakuTsuchishoSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 高額介護サービス費給付対象者一覧表帳票HeaderEditor
+ * 介護給付費等請求額通知書一覧表帳票HeaderEditor
  *
- * @reamsid_L DBC-0980-490 surun
+ * @reamsid_L DBC-2480-030 jiangwenkai
  */
-public class KogakuKyufuTaishoshaIchiranHeaderEditor implements IKogakuKyufuTaishoshaIchiranEditor {
+public class SeikyugakuTsuchishoInHeaderEditor implements ISeikyugakuTsuchishoInEditor {
 
-    private final KyuufuTaishoshaHihokenshaEntity 帳票出力対象データ;
-    private final Map<RString, RString> 出力順Map;
-    private final List<RString> 改頁リスト;
+    private final DbWT1511SeikyugakuTsuchishoTempEntity 帳票出力対象データ;
     private final RDateTime 作成日時;
-
-    private static final RString KEY_並び順の２件目 = new RString("KEY_並び順の２件目");
-    private static final RString KEY_並び順の３件目 = new RString("KEY_並び順の３件目");
-    private static final RString KEY_並び順の４件目 = new RString("KEY_並び順の４件目");
-    private static final RString KEY_並び順の５件目 = new RString("KEY_並び順の５件目");
-    private static final RString KEY_並び順の６件目 = new RString("KEY_並び順の６件目");
-
-    private static final int INDEX_1 = 1;
-    private static final int INDEX_2 = 2;
-    private static final int INDEX_3 = 3;
-    private static final int INDEX_4 = 4;
-    private static final int INDEX_5 = 5;
-
     private static final RString SAKUSEI = new RString("作成");
+    private final RString 総合計 = new RString("＊＊　総合計　＊＊");
+    private final RString 款コード_99 = new RString("99");
+    private final RString 項コード_99 = new RString("99");
 
     /**
      * コンストラクタです
      *
-     * @param 帳票出力対象データ KyuufuTaishoshaHihokenshaEntity
-     * @param 出力順Map Map<RString, RString>
-     * @param 改頁リスト List<RString>
+     * @param 帳票出力対象データ SeikyugakuTsuchishoEntity
      * @param 作成日時 RDateTime
      */
-    public KogakuKyufuTaishoshaIchiranHeaderEditor(
-            KyuufuTaishoshaHihokenshaEntity 帳票出力対象データ,
-            Map<RString, RString> 出力順Map, List<RString> 改頁リスト, RDateTime 作成日時) {
+    public SeikyugakuTsuchishoInHeaderEditor(
+            DbWT1511SeikyugakuTsuchishoTempEntity 帳票出力対象データ,
+            RDateTime 作成日時) {
         this.帳票出力対象データ = 帳票出力対象データ;
-        this.出力順Map = 出力順Map;
-        this.改頁リスト = 改頁リスト;
         this.作成日時 = 作成日時;
     }
 
     @Override
-    public KogakuKyufuTaishoshaIchiranSource edit(
-            KogakuKyufuTaishoshaIchiranSource source) {
-        DbWT3054KogakuKyufuTaishoshaTempEntity 対象者 = 帳票出力対象データ.get対象者();
+    public SeikyugakuTsuchishoSource edit(
+            SeikyugakuTsuchishoSource source) {
         RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 作成時 = 作成日時.getTime()
                 .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
         source.printTimeStamp = 作成日.concat(RString.HALF_SPACE).concat(作成時);
-        source.kokuhorenName = 帳票出力対象データ.get対象者().get国保連合会名();
-        if (null != 対象者.get証記載保険者番号()) {
-            source.hokenshaNo = 対象者.get証記載保険者番号().getColumnValue();
+        source.shinsaYM = doパターン54(帳票出力対象データ.get審査年月());
+        source.hokenshaNo = getColumnValue(帳票出力対象データ.get保険者番号());
+        source.hokenshaName = 帳票出力対象データ.get保険者名();
+        if (!款コード_99.equals(帳票出力対象データ.get款コード())) {
+            source.kanName = 帳票出力対象データ.get款名();
+        } else {
+            source.kanName = 総合計;
         }
-        source.hokenshaName = 対象者.get証記載保険者名();
-        source.shutsuryokujun1 = get並び順(KEY_並び順の２件目);
-        source.shutsuryokujun2 = get並び順(KEY_並び順の３件目);
-        source.shutsuryokujun3 = get並び順(KEY_並び順の４件目);
-        source.shutsuryokujun4 = get並び順(KEY_並び順の５件目);
-        source.shutsuryokujun5 = get並び順(KEY_並び順の６件目);
-        source.kaipage1 = get改頁(INDEX_1);
-        source.kaipage2 = get改頁(INDEX_2);
-        source.kaipage3 = get改頁(INDEX_3);
-        source.kaipage4 = get改頁(INDEX_4);
-        source.kaipage5 = get改頁(INDEX_5);
+        if (!項コード_99.endsWith(帳票出力対象データ.get項コード())) {
+            source.kouName = 帳票出力対象データ.get項名();
+        } else {
+            source.kouName = RString.EMPTY;
+        }
+        source.kokuhorenName = 帳票出力対象データ.get国保連合会名();
+        source.shoKisaiHokenshaNo = getColumnValue(帳票出力対象データ.get証記載保険者番号());
         return source;
     }
 
-    private RString get並び順(RString 並び順Key) {
-        return 出力順Map.containsKey(並び順Key) ? 出力順Map.get(並び順Key) : RString.EMPTY;
+    private RString doパターン54(FlexibleYearMonth 年月) {
+        if (null == 年月) {
+            return RString.EMPTY;
+        }
+        return 年月.wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
     }
 
-    private RString get改頁(int index) {
-        return 改頁リスト.size() > index ? 改頁リスト.get(index) : RString.EMPTY;
+    private RString getColumnValue(IDbColumnMappable entity) {
+        if (null != entity) {
+            return entity.getColumnValue();
+        }
+        return RString.EMPTY;
     }
+
 }

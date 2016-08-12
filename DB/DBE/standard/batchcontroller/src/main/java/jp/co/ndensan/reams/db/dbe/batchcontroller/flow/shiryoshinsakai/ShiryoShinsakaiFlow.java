@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 審査会資料一括作成のバッチ処理クラスです。
  *
- * @reamsid_L DBE-0150-200 linghuhang
+ * @reamsid_L DBE-0150-220 linghuhang
  */
 public class ShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchParameter> {
 

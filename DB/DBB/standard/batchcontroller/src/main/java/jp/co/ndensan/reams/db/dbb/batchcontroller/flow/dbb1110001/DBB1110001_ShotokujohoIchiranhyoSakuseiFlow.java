@@ -35,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBB1110001_ShotokujohoIchiranhyoSakuseiFlow extends BatchFlowBase<ShotokujohoIchiranhyoSakuseiBatchParameter> {
 
     private static final ReportId 帳票ID = new ReportId("DBB200008_KaigoHokenShotokuJohoIchiran");
-    private static final RString INDEX_1 = new RString("1");
+    private static final RString INDEX_0 = new RString("0");
     private static final RString INDEX_111 = new RString("111");
     private static final RString INDEX_112 = new RString("112");
     private static final RString INDEX_120 = new RString("120");
@@ -70,7 +70,10 @@ public class DBB1110001_ShotokujohoIchiranhyoSakuseiFlow extends BatchFlowBase<S
             executeStep(所得情報一覧表のデータ取得_広域);
         }
         executeStep(介護保険所得情報一覧表出力);
-        executeStep(処理日付管理マスタを登録);
+        RString flag = getResult(RString.class, new RString(介護保険所得情報一覧表出力), PrtKaigoHokenShotokuJohoIchiranProcess.REPORT_FLAG);
+        if (!INDEX_0.equals(flag)) {
+            executeStep(処理日付管理マスタを登録);
+        }
     }
 
     /**
@@ -128,26 +131,23 @@ public class DBB1110001_ShotokujohoIchiranhyoSakuseiFlow extends BatchFlowBase<S
      */
     @Step(処理日付管理マスタを登録)
     protected IBatchFlowCommand registShoriDateKanriProcess() {
-        RString flag = getResult(RString.class, new RString(介護保険所得情報一覧表出力), PrtKaigoHokenShotokuJohoIchiranProcess.REPORT_FLAG);
-        if (INDEX_1.equals(flag)) {
-            RegistShoriDateKanriProcessParameter parameter = getParameter().toRegistShoriDateKanriProcessParameter();
-            RString 導入形態コード = parameter.get導入形態コード();
-            if (INDEX_112.equals(導入形態コード) || INDEX_120.equals(導入形態コード)) {
-                requireNonNull(parameter.get抽出期間開始日時(), UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_開始日時.toString()));
-                requireNonNull(parameter.get抽出期間終了日時(), UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_終了日時.toString()));
+        RegistShoriDateKanriProcessParameter parameter = getParameter().toRegistShoriDateKanriProcessParameter();
+        RString 導入形態コード = parameter.get導入形態コード();
+        if (INDEX_112.equals(導入形態コード) || INDEX_120.equals(導入形態コード)) {
+            requireNonNull(parameter.get抽出期間開始日時(), UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_開始日時.toString()));
+            requireNonNull(parameter.get抽出期間終了日時(), UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_終了日時.toString()));
+            return loopBatch(RegistShoriDateKanriProcess.class).arguments(parameter).define();
+        } else {
+            requireNonNull(parameter.get市町村情報リスト(), UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_市町村情報リスト.toString()));
+            List<ShichosonJouhouResult> 市町村情報リスト = parameter.get市町村情報リスト();
+            for (ShichosonJouhouResult result : 市町村情報リスト) {
+                parameter.set市町村コード(result.get市町村コード());
+                parameter.set市町村識別ID(result.get市町村識別ID());
+                parameter.set開始年月日(result.get開始年月日());
+                parameter.set終了年月日(result.get終了年月日());
+                parameter.set開始時刻(result.get開始時刻());
+                parameter.set終了時刻(result.get終了時刻());
                 return loopBatch(RegistShoriDateKanriProcess.class).arguments(parameter).define();
-            } else {
-                requireNonNull(parameter.get市町村情報リスト(), UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_市町村情報リスト.toString()));
-                List<ShichosonJouhouResult> 市町村情報リスト = parameter.get市町村情報リスト();
-                for (ShichosonJouhouResult result : 市町村情報リスト) {
-                    parameter.set市町村コード(result.get市町村コード());
-                    parameter.set市町村識別ID(result.get市町村識別ID());
-                    parameter.set開始年月日(result.get開始年月日());
-                    parameter.set終了年月日(result.get終了年月日());
-                    parameter.set開始時刻(result.get開始時刻());
-                    parameter.set終了時刻(result.get終了時刻());
-                    return loopBatch(RegistShoriDateKanriProcess.class).arguments(parameter).define();
-                }
             }
         }
         return null;

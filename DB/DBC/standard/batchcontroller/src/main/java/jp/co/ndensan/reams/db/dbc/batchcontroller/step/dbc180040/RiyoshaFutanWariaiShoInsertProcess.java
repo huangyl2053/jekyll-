@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180040;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.futanwariaishohakko.FutanwariaishoHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.ShoriKekkaKakuninListCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaishohakko.RiyoshaFutanwariaishoEntity;
@@ -29,6 +31,9 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -42,7 +47,7 @@ public class RiyoshaFutanWariaiShoInsertProcess extends BatchProcessBase<Riyosha
 
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.futanwariaishohakko."
-                    + "IFutanwariaishoHakkoMapper.select利用者負担割合証");
+                    + "IFutanwariaishoHakkoMapper.select利用者負担割合証Temp");
     private FutanwariaishoHakkoProcessParameter parameter;
 
     @BatchWriter
@@ -64,6 +69,8 @@ public class RiyoshaFutanWariaiShoInsertProcess extends BatchProcessBase<Riyosha
     private static final RString 定数_2 = new RString("2");
     private static final RString 定数_3 = new RString("3");
     private static final RString 定数_4 = new RString("4");
+    private static final Code CODE = new Code("0003");
+    private static final RString DATANAME = new RString("被保険者番号");
     private static final int NUM_ONE = 1;
     private static final int NUM_SEVEN = 7;
     private static final int NUM_THIRTY_ONE = 31;
@@ -73,6 +80,7 @@ public class RiyoshaFutanWariaiShoInsertProcess extends BatchProcessBase<Riyosha
     private static final RString 交付事由_04 = new RString("04");
     private static final RString 回収事由_00 = new RString("00");
     private RString shoriKekkaKakuninListEucFilePath;
+    private final List<PersonalData> personalDataList = new ArrayList<>();
     private final RString shoriKekkaKakuninListFileName = new RString("DBC900002_ShoriKekkaKakuninList.csv");
 
     @Override
@@ -164,12 +172,18 @@ public class RiyoshaFutanWariaiShoInsertProcess extends BatchProcessBase<Riyosha
             setTempType_宛名2(item, entity);
             setTempType_宛先(item, entity);
             tableWriter.insert(item);
+        } else {
+            if (entity.get被保台帳() != null) {
+                ExpandedInformation expandedInformation
+                        = new ExpandedInformation(CODE, DATANAME, entity.get被保台帳().getHihokenshaNo().getColumnValue());
+                personalDataList.add(PersonalData.of(entity.get被保台帳().getShikibetsuCode(), expandedInformation));
+                ShoriKekkaKakuninListCSVEntity shoriKekkaKakuninListCSVEntity = new ShoriKekkaKakuninListCSVEntity();
+                shoriKekkaKakuninListCSVEntity.set被保険者番号(entity.get被保台帳().getHihokenshaNo().getColumnValue());
+                shoriKekkaKakuninListCSVEntity.set確認内容(確認内容);
+                shoriKekkaKakuninListEucCsvWriter.writeLine(shoriKekkaKakuninListCSVEntity);
+                insertShoKofuKaishu(entity);
+            }
         }
-        ShoriKekkaKakuninListCSVEntity shoriKekkaKakuninListCSVEntity = new ShoriKekkaKakuninListCSVEntity();
-        shoriKekkaKakuninListCSVEntity.set被保険者番号(entity.get被保台帳().getHihokenshaNo().getColumnValue());
-        shoriKekkaKakuninListCSVEntity.set確認内容(確認内容);
-        shoriKekkaKakuninListEucCsvWriter.writeLine(shoriKekkaKakuninListCSVEntity);
-        insertShoKofuKaishu(entity);
     }
 
     private void setTempType_宛名1(RiyoshaFutanwariaishoEntity item, RiyoshaFutanwariaishoTempEntity entity) {
@@ -526,7 +540,8 @@ public class RiyoshaFutanWariaiShoInsertProcess extends BatchProcessBase<Riyosha
         item.setKofuYMD(new FlexibleDate(parameter.get交付年月日().toDateString()));
         item.setYukoKigenYMD(new FlexibleDate(parameter.get年度().getYearValue(), NUM_SEVEN, NUM_THIRTY_ONE));
         item.setKofuJiyu(get交付事由(entity));
-        item.setKofuRiyu(CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, DBACodeShubetsu.資格者証回収事由.getCodeShubetsu(), new Code(get交付事由(entity))));
+        item.setKofuRiyu(CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付,
+                DBACodeShubetsu.資格者証回収事由.getCodeShubetsu(), new Code(get交付事由(entity))));
         item.setKaishuJiyu(回収事由_00);
         item.setTanpyoHakkoUmuFlag(false);
         item.setHakkoShoriTimestamp(new YMDHMS(parameter.getバッチ起動時処理日時()));
@@ -552,5 +567,6 @@ public class RiyoshaFutanWariaiShoInsertProcess extends BatchProcessBase<Riyosha
     protected void afterExecute() {
         shoriKekkaKakuninListEucCsvWriter.close();
         shoriKekkaKakuninListManager.spool(shoriKekkaKakuninListEucFilePath);
+        AccessLogger.logReport(personalDataList);
     }
 }

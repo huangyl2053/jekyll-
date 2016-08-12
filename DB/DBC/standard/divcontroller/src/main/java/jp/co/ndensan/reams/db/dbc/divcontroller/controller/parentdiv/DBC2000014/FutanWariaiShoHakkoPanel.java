@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC2000014;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.futanwariaishohakko.FutanwariaishoHakkoBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.futanwariaishohakko.DBC180040_FutanwariaishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000014.FutanWariaiShoHakkoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000014.FutanWariaiShoHakkoHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000014.FutanWariaiShoHakkoValidationHandler;
@@ -85,13 +85,13 @@ public class FutanWariaiShoHakkoPanel {
      * @param div FCZ2020010ReceiptTorikomiDiv
      * @return ResponseData {@link FCZ111010_ReceptTorikomiBatchParameter}
      */
-    public ResponseData<FutanwariaishoHakkoBatchParameter> onClick_btnBatchRegister(FutanWariaiShoHakkoPanelDiv div) {
+    public ResponseData<DBC180040_FutanwariaishoHakkoParameter> onClick_btnBatchRegister(FutanWariaiShoHakkoPanelDiv div) {
 
-        FutanwariaishoHakkoBatchParameter parameter = setBatchParameter(div);
+        DBC180040_FutanwariaishoHakkoParameter parameter = setBatchParameter(div);
         return ResponseData.of(parameter).respond();
     }
 
-    private FutanwariaishoHakkoBatchParameter setBatchParameter(FutanWariaiShoHakkoPanelDiv div) {
+    private DBC180040_FutanwariaishoHakkoParameter setBatchParameter(FutanWariaiShoHakkoPanelDiv div) {
         FutanwariaishoHakkoIkkatsu futanwariaishoHakkoIkkatsu = new FutanwariaishoHakkoIkkatsu();
         RDateTime 抽出期間開始日時;
         if (div.getPanelKikan().getTxtKonkaiKaishiDate().getValue() != null && div.getPanelKikan().getTxtKonkaiKaishiTime().getValue() != null) {

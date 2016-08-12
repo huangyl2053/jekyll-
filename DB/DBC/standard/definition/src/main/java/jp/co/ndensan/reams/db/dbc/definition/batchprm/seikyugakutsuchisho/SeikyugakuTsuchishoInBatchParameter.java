@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.batchprm.kogakukyufutaishoshain;
+package jp.co.ndensan.reams.db.dbc.definition.batchprm.seikyugakutsuchisho;
 
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -13,14 +13,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 高額介護サービス費給付対象者取込みのバッチ用パラメータクラスです。
+ * 介護給付費等請求額通知書情報取込のバッチ用パラメータクラスです。
  *
- * @reamsid_L DBC-0980-360 chenaoqi
+ * @reamsid_L DBC-2480-010 jiangwenkai
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KogakuKyufuTaishoshaInBatchParameter extends BatchParameterBase {
+public class SeikyugakuTsuchishoInBatchParameter extends BatchParameterBase {
 
     @BatchParameter(key = "処理年月", name = "処理年月")
     private FlexibleYearMonth 処理年月;

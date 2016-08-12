@@ -55,6 +55,6 @@ public class RenkeiDataTorikomiFinder {
     @Transaction
     public boolean get法改正前Flag(FlexibleDate システム日付) {
         List<DbT7202KaigoNinteiHokaiseiKanriEntity> entityList = dbT7202dac.selectListByKey(システム日付);
-        return entityList != null;
+        return entityList != null && !entityList.isEmpty();
     }
 }

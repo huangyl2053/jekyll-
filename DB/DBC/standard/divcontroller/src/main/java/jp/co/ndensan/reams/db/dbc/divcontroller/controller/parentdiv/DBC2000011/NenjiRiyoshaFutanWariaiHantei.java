@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC2000011
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.nenjiriyoshafutanwariaihantei.NenjiRiyoshaFutanwariaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000011.NenjiRiyoshaFutanWariaiHanteiDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
@@ -15,6 +16,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -40,6 +42,7 @@ public class NenjiRiyoshaFutanWariaiHantei {
     private static final RString 実行するボタン = new RString("btnBatchRegister");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
+    private static final RYear TZOF = new RYear("2014");
 
     /**
      * 画面の初期化です。
@@ -52,7 +55,10 @@ public class NenjiRiyoshaFutanWariaiHantei {
         RYear 年度 = new RYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, 現在時刻,
                 SubGyomuCode.DBB介護賦課).toString());
         div.getPanelAll().getTxtNendo().setValue(new RDate(年度.toString()));
-        // TODO QA 1096 「イベント定義」と「初期取得」の表示の処理 回復待ち  2016/8/01まで
+        if (年度.isBeforeOrEquals(TZOF) && !ResponseHolder.isReRequest()) {
+            throw new ApplicationException(DbcErrorMessages.年次判定処理不可.toString());
+
+        }
         RYear 年次負担割合処理済年度 = new RYear(DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理済年度, 現在時刻,
                 SubGyomuCode.DBC介護給付));
         RString 処理状態 = DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理状態, 現在時刻,

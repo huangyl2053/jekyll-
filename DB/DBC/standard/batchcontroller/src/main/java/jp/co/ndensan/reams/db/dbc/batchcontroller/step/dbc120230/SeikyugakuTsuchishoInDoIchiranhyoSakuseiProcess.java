@@ -3,50 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120070;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120230;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import jp.co.ndensan.reams.db.dbc.business.report.kogakukyufutaishoshaichiran.KogakuKyufuTaishoshaIchiranProperty;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaDoIchiranhyoSakuseiProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.DbWT3054KogakuKyufuTaishoshaTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.KogakuKyufuTaishoshaIchiranCsvEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishosha.KyuufuTaishoshaHihokenshaEntity;
-import jp.co.ndensan.reams.db.dbc.service.core.kogakukyufutaishosha.KogakuKyufuTaishoshaInManager;
-import jp.co.ndensan.reams.db.dbc.service.report.kogakukyufutaishoshaichiran.KogakuKyufuTaishoshaIchiranPrintService;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
-import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
+import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.DbWT1511SeikyugakuTsuchishoTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.seikyugakutsuchishoin.SeikyugakuTsuchishoInCsvEntity;
+import jp.co.ndensan.reams.db.dbc.service.core.seikyugakutsuchishoin.SeikyugakuTsuchishoInIchiranPrintService;
+import jp.co.ndensan.reams.db.dbc.service.core.seikyugakutsuchishoin.SeikyugakuTsuchishoInManager;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -55,94 +34,59 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
- * 高額介護サービス費給付対象者取込のCSVファイル読取
+ * 介護給付費等請求額通知書情報取込のCSVファイル読取
  *
- * @reamsid_L DBC-0980-360 chenaoqi
+ * @reamsid_L DBC-2480-010 jiangwenkai
  */
-public class KogakuKyufuTaishoshaInDoIchiranhyoSakuseiProcess extends SimpleBatchProcessBase {
+public class SeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess extends SimpleBatchProcessBase {
 
     private KohifutanshaDoIchiranhyoSakuseiProcessParameter parameter;
 
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200014");
-    private final List<PersonalData> personalDataList = new ArrayList<>();
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200066");
     private FileSpoolManager manager;
     private RString eucFilePath;
     @BatchWriter
-    private EucCsvWriter eucCsvWriter;
+    private CsvWriter csvWriter;
 
     private static final RString 出力ファイル名
-            = new RString("DBC200014_KogakuKyufuTaishoshaIchiran.csv");
-    private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
-    private static final RString キー_出力順 = new RString("出力順");
-    private static final RString デフォルト出力順 = new RString(" ORDER BY 対象者TBL.\"renban\",対象者TBL.\"shokisaiHokenshaNo\","
-            + "DbWT0001.\"hihokenshaNo\" ASC, 対象者TBL.\"serviceTeikyoYm\" ASC,  対象者TBL.\"recordShubetsu\" ASC");
+            = new RString("DBC200066_SeikyugakuTsuchisho.csv");
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
-    private static final RString 漢字_分 = new RString("分");
-    private final RString 帳票レコード種別_T1 = new RString("T1");
+    private final RString 款コード_99 = new RString("99");
+    private final RString 項コード_99 = new RString("99");
+    private final RString 総合計 = new RString("＊＊　総合計　＊＊");
 
     @Override
     protected void process() {
-        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder order = finder.get出力順(parameter.getサブ業務コード(), parameter.get帳票ID(),
-                parameter.get出力順ID());
-        if (null == order) {
-            throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
-                    .replace(実行不可MESSAGE.toString()).toString());
-        }
-        Map<String, Object> mybatisParameter = new HashMap<>();
-        RString 出力順 = MyBatisOrderByClauseCreator.create(KogakuKyufuTaishoshaIchiranProperty//
-                .DBC200014ShutsuryokujunEnum.class, order);
-        if (RString.isNullOrEmpty(出力順)) {
-            出力順 = デフォルト出力順;
-        } else {
-            List<RString> 出力順BODY = 出力順.split(コンマ.toString());
-            出力順 = デフォルト出力順;
-            if (出力順BODY.size() > 1) {
-                for (int i = 1; i < 出力順BODY.size(); i++) {
-                    出力順 = 出力順.concat(コンマ).concat(出力順BODY.get(i));
-                }
-            }
-        }
-        mybatisParameter.put(キー_出力順.toString(), 出力順);
-        KogakuKyufuTaishoshaInManager chohyoManager = KogakuKyufuTaishoshaInManager.createInstance();
-        List<KyuufuTaishoshaHihokenshaEntity> list = chohyoManager.get帳票出力対象データ(mybatisParameter);
+        SeikyugakuTsuchishoInManager seikyugakuManager = SeikyugakuTsuchishoInManager.createInstance();
+        List<DbWT1511SeikyugakuTsuchishoTempEntity> list = seikyugakuManager.get帳票出力対象データ();
         if (null == list || list.isEmpty()) {
             return;
         }
-        KogakuKyufuTaishoshaIchiranPrintService printService
-                = new KogakuKyufuTaishoshaIchiranPrintService();
-        printService.printTaitsu(list, order, parameter.get処理年月(), parameter.getシステム日付());
-        do帳票のCSVファイル作成(list, parameter.get処理年月(), parameter.getシステム日付());
+        SeikyugakuTsuchishoInIchiranPrintService printService
+                = new SeikyugakuTsuchishoInIchiranPrintService();
+        printService.printTaitsu(list, parameter.getシステム日付());
+        do帳票のCSVファイル作成(list, parameter.getシステム日付());
 
     }
 
-    private void do帳票のCSVファイル作成(List<KyuufuTaishoshaHihokenshaEntity> list,
-            FlexibleYearMonth 処理年月, RDateTime 作成日時) {
+    private void do帳票のCSVファイル作成(List<DbWT1511SeikyugakuTsuchishoTempEntity> list,
+            RDateTime 作成日時) {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
-        eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID)
+        csvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
                 .setDelimiter(コンマ)
                 .setEnclosure(ダブル引用符)
                 .setEncode(Encode.SJIS)
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(true)
                 .build();
-
-        Set<ShikibetsuCode> 識別コードset = new HashSet<>();
         for (int index = 0; index < list.size(); index++) {
-            boolean 集計Flag = false;
-            if (帳票レコード種別_T1.equals(list.get(index).get対象者().get帳票レコード種別())) {
-                集計Flag = true;
-            }
-            KogakuKyufuTaishoshaIchiranCsvEntity output = new KogakuKyufuTaishoshaIchiranCsvEntity();
-            KyuufuTaishoshaHihokenshaEntity 出力対象 = list.get(index);
-            DbWT3054KogakuKyufuTaishoshaTempEntity 対象者 = 出力対象.get対象者();
-            DbWT0001HihokenshaTempEntity 被保険者 = 出力対象.get被保険者一時();
+            SeikyugakuTsuchishoInCsvEntity output = new SeikyugakuTsuchishoInCsvEntity();
+            DbWT1511SeikyugakuTsuchishoTempEntity 請求額通知書 = list.get(index);
             if (index == 0) {
-                output.set処理年月(処理年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(漢字_分));
+                output.set審査年月(doパターン54(請求額通知書.get審査年月()));
                 RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
                         .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                         .fillType(FillType.BLANK).toDateString();
@@ -150,71 +94,66 @@ public class KogakuKyufuTaishoshaInDoIchiranhyoSakuseiProcess extends SimpleBatc
                         .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE);
                 output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時));
             } else {
-                output.set処理年月(RString.EMPTY);
+                output.set審査年月(RString.EMPTY);
                 output.set作成日時(RString.EMPTY);
             }
-            output.set証記載保険者番号(getColumnValue(対象者.get証記載保険者番号()));
-            output.set証記載保険者名(対象者.get証記載保険者名());
-            output.set通知書番号(対象者.getNo());
-            output.set被保険者番号(getColumnValue(被保険者.get登録被保険者番号()));
-            output.set被保険者氏名(被保険者.get宛名名称());
-            output.setサービス提供年月(doパターン54(対象者.getサービス提供年月()));
-
-            if (集計Flag) {
-                output.setサービス費用合計額合計(doカンマ編集(対象者.getサービス費用合計額合計()));
-                output.set利用者負担額合計(doカンマ編集(対象者.get利用者負担額合計()));
-                output.set算定基準額(doカンマ編集(対象者.get算定基準額()));
-                output.set支払済金額合計(doカンマ編集(対象者.get支払済金額合計()));
-                output.set高額支給額(doカンマ編集(対象者.get高額支給額()));
+            output.set国保連合会名(請求額通知書.get国保連合会名());
+            output.set保険者番号(getColumnValue(請求額通知書.get保険者番号()));
+            output.set保険者名(請求額通知書.get保険者名());
+            output.set証記載保険者番号(getColumnValue(請求額通知書.get証記載保険者番号()));
+            output.set款コード(請求額通知書.get款コード());
+            if (款コード_99.equals(請求額通知書.get款コード())) {
+                output.set款名(総合計);
             } else {
-                output.set事業者番号(getColumnValue(対象者.get事業所番号()));
-                output.set事業者名(対象者.get事業所名());
-                output.setサービス種類コード(getColumnValue(対象者.getサービス種類コード()));
-                output.setサービス種類名(対象者.getサービス種類名());
-                output.setサービス費用合計額(doカンマ編集(対象者.getサービス費用合計額()));
-                output.set利用者負担額(doカンマ編集(対象者.get利用者負担額()));
-                output.set資格喪失日(doパターン4(被保険者.get資格喪失日()));
-                output.set備考(対象者.get備考());
+                output.set款名(請求額通知書.get款名());
             }
-            eucCsvWriter.writeLine(output);
-            if (null == 被保険者.get識別コード() || 被保険者.get識別コード().isEmpty()) {
-                continue;
+            output.set項コード(請求額通知書.get項コード());
+            if (項コード_99.equals(請求額通知書.get項コード())) {
+                output.set項名(RString.EMPTY);
+            } else {
+                output.set項名(請求額通知書.get項名());
             }
-            ShikibetsuCode 識別コード = new ShikibetsuCode(被保険者.get識別コード());
-            if (識別コードset.contains(識別コード)) {
-                continue;
+            output.setサービス種類コード(請求額通知書.getサービス種類コード());
+            output.setサービス種類名(請求額通知書.getサービス種類名());
+            output.set通常_分件数(doカンマ編集(請求額通知書.get通常分_件数()));
+            output.set通常分_実日数(doカンマ編集(請求額通知書.get通常分_実日数()));
+            output.set通常分_単位数(doカンマ編集(請求額通知書.get通常分_単位数()));
+            output.set通常分_金額(doカンマ編集(請求額通知書.get通常分_金額()));
+            output.set再審査_過誤_件数(doカンマ編集(請求額通知書.get再審査_過誤_件数()));
+            output.set再審査_過誤_単位数(doカンマ編集(請求額通知書.get再審査_過誤_単位数()));
+            output.set再審査_過誤_調整額(doカンマ編集(請求額通知書.get再審査_過誤_調整額()));
+            output.set介護給付費(doカンマ編集(請求額通知書.get介護給付_総合事業費()));
+            output.set利用者負担額(doカンマ編集(請求額通知書.get利用者負担額()));
+            output.set公費負担額(doカンマ編集(請求額通知書.get公費負担額()));
+            if (!請求額通知書.get合計_帳票レコード種別().isEmpty()) {
+                output.set合計_通常分_件数(doカンマ編集(請求額通知書.get合計_通常分_件数()));
+                output.set合計_通常分_単位数(doカンマ編集(請求額通知書.get合計_通常分_単位数()));
+                output.set合計_通常分_金額(doカンマ編集(請求額通知書.get合計_通常分_金額()));
+                output.set合計_再審査_過誤_件数(doカンマ編集(請求額通知書.get合計_再審査_過誤_件数()));
+                output.set合計_再審査_過誤_単位数(doカンマ編集(請求額通知書.get合計_再審査_過誤_単位数()));
+                output.set合計_再審査_過誤_調整額(doカンマ編集(請求額通知書.get合計_再審査_過誤_調整額()));
+                output.set合計_介護給付費(doカンマ編集(請求額通知書.get合計_介護給付_総合事業費()));
+                output.set合計_利用者負担額(doカンマ編集(請求額通知書.get合計_利用者負担額()));
+                output.set合計_公費負担額(doカンマ編集(請求額通知書.get合計_公費負担額()));
             }
-            識別コードset.add(識別コード);
-            PersonalData personalData = getPersonalData(被保険者);
-            personalDataList.add(personalData);
+            if (!請求額通知書.get累計_帳票レコード種別().isEmpty()) {
+                output.set累計_通常分_件数(doカンマ編集(請求額通知書.get累計_通常分_件数()));
+                output.set累計_通常分_単位数(doカンマ編集(請求額通知書.get累計_通常分_単位数()));
+                output.set累計_通常分_金額(doカンマ編集(請求額通知書.get累計_通常分_金額()));
+                output.set累計_再審査_過誤_件数(doカンマ編集(請求額通知書.get累計_再審査_過誤_件数()));
+                output.set累計_再審査_過誤_単位数(doカンマ編集(請求額通知書.get累計_再審査_過誤_単位数()));
+                output.set累計_再審査_過誤_調整額(doカンマ編集(請求額通知書.get累計_再審査_過誤_調整額()));
+                output.set累計_介護給付費(doカンマ編集(請求額通知書.get累計_介護給付_総合事業費()));
+                output.set累計_利用者負担額(doカンマ編集(請求額通知書.get累計_利用者負担額()));
+                output.set累計_公費負担額(doカンマ編集(請求額通知書.get累計_公費負担額()));
+            }
+            if (!請求額通知書.get手数料_帳票レコード種別().isEmpty()) {
+                output.set手数料_請求額(doカンマ編集(請求額通知書.get手数料_請求額()));
+                output.set手数料_累計請求額(doカンマ編集(請求額通知書.get手数料_累計請求額()));
+            }
+            csvWriter.writeLine(output);
         }
-        eucCsvWriter.close();
-
-        if (!personalDataList.isEmpty()) {
-            AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-            manager.spool(eucFilePath, accessLogUUID);
-        }
-    }
-
-    private PersonalData getPersonalData(DbWT0001HihokenshaTempEntity entity) {
-        ExpandedInformation expandedInformations = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
-                getColumnValue(entity.get登録被保険者番号()));
-        return PersonalData.of(new ShikibetsuCode(entity.get識別コード()), expandedInformations);
-    }
-
-    private RString doパターン54(FlexibleYearMonth 年月) {
-        if (null == 年月) {
-            return RString.EMPTY;
-        }
-        return 年月.wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-    }
-
-    private RString doパターン4(FlexibleDate 年月日) {
-        if (null == 年月日) {
-            return RString.EMPTY;
-        }
-        return 年月日.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD)
-                .fillType(FillType.BLANK).toDateString();
+        csvWriter.close();
     }
 
     private RString doカンマ編集(Decimal number) {
@@ -224,11 +163,17 @@ public class KogakuKyufuTaishoshaInDoIchiranhyoSakuseiProcess extends SimpleBatc
         return DecimalFormatter.toコンマ区切りRString(number, 0);
     }
 
+    private RString doパターン54(FlexibleYearMonth 年月) {
+        if (null == 年月) {
+            return RString.EMPTY;
+        }
+        return 年月.wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+    }
+
     private RString getColumnValue(IDbColumnMappable entity) {
         if (null != entity) {
             return entity.getColumnValue();
         }
         return RString.EMPTY;
     }
-
 }

@@ -75,6 +75,13 @@ public interface IShujiiIryokikanAndShujiiInputDiv extends ICommonChildDivBasePr
     RString getRenrakuJiko();
 
     /**
+     * 主治医への連絡事項を設定します
+     *
+     * @param renrakuJiko 主治医への連絡事項
+     */
+    void setRenrakuJiko(RString renrakuJiko);
+
+    /**
      * 指定医を取得します
      *
      * @return TRUE:指定医有り FALSE:指定医なし

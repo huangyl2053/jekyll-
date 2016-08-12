@@ -40,8 +40,6 @@ public class ShinseihakkoMeiseiHandler {
 
     private final ShinseihakkoMeiseiDiv div;
     private final NinteishinseihakkoDiv ninteishinseihakkodiv;
-    private static final RString 識別コード = new RString("000000001011002");
-    private static final RString 被保険者番号 = new RString("2190000003");
     private static final RString 画面区分 = new RString("2");
     private static final RString 正 = new RString("○");
     private static final long NO_10 = 10;
@@ -78,8 +76,10 @@ public class ShinseihakkoMeiseiHandler {
     /**
      * 画面初期化
      *
+     * @param shikibetsuCode ShikibetsuCode
+     * @param 被保険者番号 HihokenshaNo
      */
-    public void initialize() {
+    public void initialize(ShikibetsuCode shikibetsuCode, HihokenshaNo 被保険者番号) {
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         RString 介護導入形態 = shichosonSecurityJoho.get導入形態コード().value();
         if (介護導入形態.equals(コード111)) {
@@ -94,12 +94,11 @@ public class ShinseihakkoMeiseiHandler {
         if (介護導入形態.equals(コード211)) {
             介護導入形態 = 広域審査会;
         }
-        ShikibetsuCode shikibetsuCode = new ShikibetsuCode(識別コード);
         ninteishinseihakkodiv.getCcdKaigoNinteiAtenaInfo().setKaigoDonyuKeitai(介護導入形態);
         ninteishinseihakkodiv.getCcdKaigoNinteiAtenaInfo().setShoriType(コード);
         ninteishinseihakkodiv.getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(ShinseishoKanriNo.EMPTY, shikibetsuCode);
         ninteishinseihakkodiv.getCcdKaigoNinteiAtenaInfo().initialize();
-        ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().initialize(shichosonSecurityJoho.get市町村情報().get市町村コード().value(), 被保険者番号);
+        ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().initialize(shichosonSecurityJoho.get市町村情報().get市町村コード().value(), 被保険者番号.value());
         NinteiKanryoNinteiShinseiJohoManager manager = NinteiKanryoNinteiShinseiJohoManager.createInstance();
         NinteiShinseiJohoChild entity = manager.get要介護認定申請情報(ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().getHookenshaCode(),
                 ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue());
@@ -112,7 +111,7 @@ public class ShinseihakkoMeiseiHandler {
                     new RDate(entity.get認定申請年月日().toString()));
         }
         div.getCcdZenkaiNinteiKekkaJoho().onLoad(SubGyomuCode.DBD介護受給, entity.get申請書管理番号(), 画面区分);
-        div.getCcdKyotakuServiceKeikakuInfo().initialize(new HihokenshaNo(被保険者番号));
+        div.getCcdKyotakuServiceKeikakuInfo().initialize(被保険者番号);
         div.getCcdShusetSunyushoInfo().onLoad(shikibetsuCode);
     }
 
@@ -184,13 +183,9 @@ public class ShinseihakkoMeiseiHandler {
     private void checkninteiKanryoJoho(NinteiShinseiJohoChild entity) {
         NinteiKanryoNinteiShinseiJohoManager manager = NinteiKanryoNinteiShinseiJohoManager.createInstance();
         ShinseiRirekiJoho shinseiRirekiJoho = manager.selectByKey(entity.get申請書管理番号());
-        if (shinseiRirekiJoho == null) {
-            setZenkaiShinseiNaiyoinfo(RString.EMPTY, RString.EMPTY, new RDate(RString.EMPTY.toString()));
-        } else {
+        if (shinseiRirekiJoho != null) {
             NinteiKanryoJoho ninteiKanryoJohoni = manager.selectByShinseishoKanriNo(shinseiRirekiJoho.get前回申請管理番号());
-            if (ninteiKanryoJohoni == null) {
-                setZenkaiShinseiNaiyoinfo(RString.EMPTY, RString.EMPTY, new RDate(RString.EMPTY.toString()));
-            } else {
+            if (ninteiKanryoJohoni != null) {
                 NinteiShinseiJohoChild ninteiShinseiJohoChildni = manager.selectByZenkaiShinseishoKanriNo(shinseiRirekiJoho.get前回申請管理番号());
                 setZenkaiShinseiNaiyoinfo(ninteiShinseiJohoChildni.get認定申請区分_法令_コード().getColumnValue(),
                         ninteiShinseiJohoChildni.get認定申請区分_申請時_コード().getColumnValue(),
