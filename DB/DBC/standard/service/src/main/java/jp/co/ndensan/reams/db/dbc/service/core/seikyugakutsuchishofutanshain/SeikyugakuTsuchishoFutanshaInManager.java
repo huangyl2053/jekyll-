@@ -242,7 +242,7 @@ public class SeikyugakuTsuchishoFutanshaInManager {
                     Hokensha hokensha = hokenshaNyuryokuHojoFinder.getHokensha(new HokenjaNo(保険者番号));
                     if (hokensha != null) {
                         suchishoTempentity.set保険者名(hokensha.get保険者名());
-                    };
+                    }
                     suchishoTempentity.set証記載保険者番号(null);
                     suchishoTempentity.set証記載保険者名(RString.EMPTY);
                     suchishoTempentity.set公費負担者番号(listDataEntity.get(j).getCsvHeadEntity().get公費負担者番号());
