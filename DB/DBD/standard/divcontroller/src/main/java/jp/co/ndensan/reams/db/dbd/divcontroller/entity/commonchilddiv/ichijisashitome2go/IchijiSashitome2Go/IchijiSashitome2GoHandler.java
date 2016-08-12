@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShiharaiHenk
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShiharaiHenkoSashitomeKojoJotaiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShiharaiHenkoShuryoShinseiRiyuCode;
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShiharaiHenkoShuryoShinseiShinsaKekkaKubun;
+import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShoriKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashitomeEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenko.ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -80,7 +81,7 @@ public class IchijiSashitome2GoHandler {
      * 画面初期化処理です。
      */
     public void onLoad() {
-        RString 押下ボタン = div.getKey_Button();
+        RString 押下ボタン = ShoriKubun.toValue(div.getKey_Button()).get名称();
         ShiharaiHohoHenko 支払方法変更管理業務概念 = DataPassingConverter.deserialize(div.getKey_ShiharaiHohoHenkoKanri(), ShiharaiHohoHenko.class);
         List<ShiharaiHohoHenko> 支払方法データ = new ArrayList();
         List<ShiharaiHohoHenko> 支払方法変更レコード = new ArrayList();
@@ -88,7 +89,7 @@ public class IchijiSashitome2GoHandler {
         if (支払方法変更管理業務概念 != null
                 && 支払方法変更管理業務概念.get被保険者番号().value().equals(div.getKey_HihokenshaNo())
                 && 支払方法変更管理業務概念.get管理区分().equals(ShiharaiHenkoKanriKubun._２号差止.getコード())
-                && 支払方法変更管理業務概念.get登録区分().equals(get登録区分())) {
+                && 支払方法変更管理業務概念.get登録区分().equals(get登録区分(押下ボタン))) {
             if (押下ボタン.equals(_２号一時差止登録) || 押下ボタン.equals(_２号一時差止解除)) {
                 for (ShiharaiHohoHenkoSashitome shiharaiHohoHenkoSashitome : 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList()) {
                     if (shiharaiHohoHenkoSashitome.get証記載保険者番号().equals(支払方法変更管理業務概念.get証記載保険者番号())
@@ -122,7 +123,7 @@ public class IchijiSashitome2GoHandler {
                 div.setShinkiKubun(新規登録);
             }
         }
-        initializeDisplayData(ViewStateHolder.get(IchijiSashitome2GoHandler.二号一時差止ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class));
+        initializeDisplayData(押下ボタン, ViewStateHolder.get(IchijiSashitome2GoHandler.二号一時差止ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class));
     }
 
     /**
@@ -140,12 +141,13 @@ public class IchijiSashitome2GoHandler {
      * @return {@link ValidationMessageControlPairs}
      */
     public ValidationMessageControlPairs onClick_BtnKakutei() {
+        RString 押下ボタン = ShoriKubun.toValue(div.getKey_Button()).get名称();
         ValidationMessageControlPairs pairs = getValidationMessages();
         if (pairs.iterator().hasNext()) {
             return pairs;
         }
         ShiharaiHohoHenkoEntity 支払方法変更Entity = new ShiharaiHohoHenkoEntity();
-        switch (div.getKey_Button().toString()) {
+        switch (押下ボタン.toString()) {
             case "２号予告者登録":
                 if (div.getShinkiKubun().equals(新規登録)) {
                     支払方法変更Entity.set支払方法変更Entity(get２号予告者登録の登録Entity());
@@ -178,8 +180,8 @@ public class IchijiSashitome2GoHandler {
         return pairs;
     }
 
-    private void initializeDisplayData(ShiharaiHohoHenko shiharaiHohoHenko) {
-        div.setTitle(div.getKey_Button());
+    private void initializeDisplayData(RString 押下ボタン, ShiharaiHohoHenko shiharaiHohoHenko) {
+        div.setTitle(押下ボタン);
         List<KeyValueDataSource> shiryoJokyoSource = new ArrayList();
         List<ShiharaiHenkoShuryoKubun> shuyoKubunList = ShiharaiHenkoShuryoKubun.valuesAt２号弁明書受理();
         for (ShiharaiHenkoShuryoKubun shuyoKubun : shuyoKubunList) {
@@ -187,13 +189,13 @@ public class IchijiSashitome2GoHandler {
         }
         div.getDdlShuryoJokyo().setDataSource(shiryoJokyoSource);
         div.getDdlShuryoJokyo().setSelectedKey(shiryoJokyoSource.get(0).getKey());
-        setStatus(shiryoJokyoSource);
-        setValue(shiharaiHohoHenko);
+        setStatus(押下ボタン, shiryoJokyoSource);
+        setValue(押下ボタン, shiharaiHohoHenko);
     }
 
-    private RString get登録区分() {
+    private RString get登録区分(RString 押下ボタン) {
         RString torokuKubun = new RString("");
-        switch (div.getKey_Button().toString()) {
+        switch (押下ボタン.toString()) {
             case "２号予告者登録":
             case "２号弁明書受理":
                 torokuKubun = ShiharaiHenkoTorokuKubun._２号予告登録者.getコード();
@@ -208,8 +210,8 @@ public class IchijiSashitome2GoHandler {
         return torokuKubun;
     }
 
-    private void setStatus(List<KeyValueDataSource> shiryoJokyoSource) {
-        switch (div.getKey_Button().toString()) {
+    private void setStatus(RString 押下ボタン, List<KeyValueDataSource> shiryoJokyoSource) {
+        switch (押下ボタン.toString()) {
             case "２号予告者登録":
                 div.getTxtTorokuJokyo().setReadOnly(true);
                 div.getTxtTekiyoKaishi().setReadOnly(true);
@@ -287,9 +289,9 @@ public class IchijiSashitome2GoHandler {
         }
     }
 
-    private void setValue(ShiharaiHohoHenko shiharaiHohoHenko) {
+    private void setValue(RString 押下ボタン, ShiharaiHohoHenko shiharaiHohoHenko) {
         if (div.getShinkiKubun().equals(新規登録)) {
-            switch (div.getKey_Button().toString()) {
+            switch (押下ボタン.toString()) {
                 case "２号予告者登録":
                     div.getTxtTorokuJokyo().setValue(ShiharaiHenkoTorokuKubun._２号予告登録者.get名称());
                     div.getTxtTekiyoKaishi().setValue(null);
@@ -315,7 +317,7 @@ public class IchijiSashitome2GoHandler {
             div.getTxtTekiyoKaishi().setValue(shiharaiHohoHenko.get適用開始年月日());
             div.getTxtTekiyoShuryo().setValue(shiharaiHohoHenko.get適用終了年月日());
             div.getDdlShuryoJokyo().setSelectedKey(shiharaiHohoHenko.get終了区分());
-            switch (div.getKey_Button().toString()) {
+            switch (押下ボタン.toString()) {
                 case "２号予告者登録":
                     div.getTxtNigoYokokushaTorokuIraiJuribi().setValue(shiharaiHohoHenko.get差止依頼書受理年月日());
                     div.getTxtNigoYokokushaTorokuYokokuTorokubi().setValue(shiharaiHohoHenko.get予告登録年月日());

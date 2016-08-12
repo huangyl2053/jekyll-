@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShiharaiHenk
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShiharaiHenkoBenmeiShinsaKekkaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShiharaiHenkoShuryoShinseiRiyuCode;
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShiharaiHenkoShuryoShinseiShinsaKekkaKubun;
+import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShoriKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.TainoHanteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.TaishoHanteiKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4022ShiharaiHohoHenkoTainoEntity;
@@ -96,7 +97,7 @@ public class KyufuGengaku1GoHandler {
      * 画面初期化処理です。
      */
     public void onLoad() {
-        RString 押下ボタン = div.getKey_Button();
+        RString 押下ボタン = ShoriKubun.toValue(div.getKey_Button()).get名称();
         ShiharaiHohoHenko 支払方法変更管理業務概念 = DataPassingConverter.deserialize(div.getKey_ShiharaiHohoHenkoKanri(), ShiharaiHohoHenko.class);
         List<ShiharaiHohoHenko> 支払方法データ = new ArrayList();
         List<ShiharaiHohoHenko> 支払方法変更レコード = new ArrayList();
@@ -128,7 +129,7 @@ public class KyufuGengaku1GoHandler {
                 div.setShinkiKubun(新規登録);
             }
         }
-        initializeDisplayData(ViewStateHolder.get(KyufuGengaku1GoHandler.一号給付額減額ダイアログキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class));
+        initializeDisplayData(押下ボタン, ViewStateHolder.get(KyufuGengaku1GoHandler.一号給付額減額ダイアログキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class));
     }
 
     /**
@@ -152,7 +153,7 @@ public class KyufuGengaku1GoHandler {
         }
         TainoHanteiResultKohen 滞納判定結果 = DataPassingConverter.deserialize(div.getTainoHanteiKekka(), TainoHanteiResultKohen.class);
         ShiharaiHohoHenkoEntity 支払方法変更Entity = new ShiharaiHohoHenkoEntity();
-        switch (div.getKey_Button().toString()) {
+        switch (ShoriKubun.toValue(div.getKey_Button()).get名称().toString()) {
             case "給付額減額":
                 if (div.getShinkiKubun().equals(新規登録)) {
                     支払方法変更Entity.set支払方法変更Entity(get給付額減額の登録Entity());
@@ -195,23 +196,23 @@ public class KyufuGengaku1GoHandler {
         TainoHanteiResultKohen 滞納判定結果 = ViewStateHolder.get(ViewStateKeys.滞納判定結果, TainoHanteiResultKohen.class);
         if (滞納判定結果 != null && 滞納判定結果.get滞納情報() != null) {
             div.setTainoHanteiKekka(DataPassingConverter.serialize(滞納判定結果));
-            if (div.getKey_Button().equals(_給付額減額)) {
+            if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(_給付額減額)) {
                 div.getBtnTainoJokyo().setIconNameEnum(IconName.Check);
             }
         }
     }
 
-    private void initializeDisplayData(ShiharaiHohoHenko shiharaiHohoHenko) {
-        div.setTitle(div.getKey_Button());
-        setStatus();
-        setValue(shiharaiHohoHenko);
+    private void initializeDisplayData(RString 押下ボタン, ShiharaiHohoHenko shiharaiHohoHenko) {
+        div.setTitle(押下ボタン);
+        setStatus(押下ボタン);
+        setValue(押下ボタン, shiharaiHohoHenko);
     }
 
-    private void setStatus() {
-        if (div.getKey_Button().equals(_給付額減額)) {
+    private void setStatus(RString 押下ボタン) {
+        if (押下ボタン.equals(_給付額減額)) {
             給付額減額_Status();
             DisplayNone_減額免除申請(true);
-        } else if (div.getKey_Button().equals(_減額免除申請)) {
+        } else if (押下ボタン.equals(_減額免除申請)) {
             減額免除申請_Status();
             DisplayNone_給付額減額(true);
         }
@@ -267,7 +268,7 @@ public class KyufuGengaku1GoHandler {
         div.getTxtKonkaiKikanShuryoYMD().setDisplayNone(displayNone);
     }
 
-    private void setValue(ShiharaiHohoHenko shiharaiHohoHenko) {
+    private void setValue(RString 押下ボタン, ShiharaiHohoHenko shiharaiHohoHenko) {
         ShiharaiHohoHenkoGengaku shiharaiHohoHenkoGengaku = ViewStateHolder.get(KyufuGengaku1GoHandler.一号給付額減額ダイアログキー.支払方法変更減額, ShiharaiHohoHenkoGengaku.class);
         if (div.getShinkiKubun().equals(新規登録)) {
             div.getTxtTorokuJokyo().setValue(ShiharaiHenkoTorokuKubun._１号予告登録者.get名称());
@@ -281,9 +282,9 @@ public class KyufuGengaku1GoHandler {
             div.getTxtGengakuTekiyoKikanKaishiYMD().setValue(shiharaiHohoHenkoGengaku.get確定減額期間開始年月日());
             div.getTxtGengakuTekiyoKikanShuryoYMD().setValue(shiharaiHohoHenkoGengaku.get確定減額期間終了年月日());
         }
-        if (div.getKey_Button().equals(_給付額減額)) {
+        if (押下ボタン.equals(_給付額減額)) {
             給付額減額_setValue(shiharaiHohoHenko, shiharaiHohoHenkoGengaku);
-        } else if (div.getKey_Button().equals(_減額免除申請)) {
+        } else if (押下ボタン.equals(_減額免除申請)) {
             減額免除申請__setValue(shiharaiHohoHenko);
         }
     }
