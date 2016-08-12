@@ -108,8 +108,8 @@ public class JigyohokokuCompYoshiki251Report extends Report<JigyohokokuCompYoshi
             if (isValueChanged(entity.get縦番号(), entity.get横番号())) {
                 cleanValue();
             }
-            list = get縦番号(entity.get縦番号(), entity.get横番号(),
-                    entity.get集計区分(), entity.get請求額());
+            list = get縦番号(entity.get縦番号(), entity.get横番号(), entity.get集計区分(),
+                    Integer.parseInt(entity.get後_保険請求分請求額().toString()));
             集計番号 = entity.get集計番号();
             給付実績区分コード = entity.get給付実績区分コード();
         }
@@ -238,7 +238,7 @@ public class JigyohokokuCompYoshiki251Report extends Report<JigyohokokuCompYoshi
         } else if (集計区分_減算.equals(集計区分)) {
             減算請求額合計 = 減算請求額合計 + 請求額;
         }
-        請求額合計 = 加算件数合計 - 減算件数合計;
+        請求額合計 = 加算請求額合計 - 減算請求額合計;
         return 請求額合計;
     }
 

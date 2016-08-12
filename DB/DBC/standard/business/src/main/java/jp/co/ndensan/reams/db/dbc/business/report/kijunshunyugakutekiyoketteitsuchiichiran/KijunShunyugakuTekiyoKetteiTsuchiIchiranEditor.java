@@ -73,7 +73,9 @@ public class KijunShunyugakuTekiyoKetteiTsuchiIchiranEditor implements IKijunShu
             source.listHakkoTaishosha_8 = 基準収入額決定通知一覧表パラメータ.get適用開始年月().wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
         }
-        source.listHakkoTaishosha_9 = DecimalFormatter.toコンマ区切りRString(基準収入額決定通知一覧表パラメータ.get算定基準額(), INT_0);
+        if (基準収入額決定通知一覧表パラメータ.get算定基準額() != null) {
+            source.listHakkoTaishosha_9 = DecimalFormatter.toコンマ区切りRString(基準収入額決定通知一覧表パラメータ.get算定基準額(), INT_0);
+        }
         source.listHakkoTaishosha_10 = 基準収入額決定通知一覧表パラメータ.get備考();
         if (基準収入額決定通知一覧表パラメータ.get識別コード() != null) {
             source.listHakkoTaishosha_11 = 基準収入額決定通知一覧表パラメータ.get識別コード().value();

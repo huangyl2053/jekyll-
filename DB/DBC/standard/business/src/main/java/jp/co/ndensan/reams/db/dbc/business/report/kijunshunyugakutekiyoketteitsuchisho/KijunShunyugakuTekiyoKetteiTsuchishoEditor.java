@@ -6,7 +6,11 @@
 package jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoketteitsuchisho;
 
 import jp.co.ndensan.reams.db.dbc.entity.report.kijunshunyugakutekiyoketteitsuchisho.KijunShunyugakuTekiyoKetteiTsuchishoSource;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 帳票Editorクラスです。
@@ -17,6 +21,7 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
         IKijunShunyugakuTekiyoKetteiTsuchishoEditor {
 
     private final KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書パラメータ;
+    private static final int INT_0 = 0;
 
     /**
      * コンストラクタです
@@ -75,6 +80,7 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
             source.denshiKoin = 基準収入額適用決定通知書パラメータ.getCompNinshoshaソース().denshiKoin;
             source.ninshoshaYakushokuMei = 基準収入額適用決定通知書パラメータ.getCompNinshoshaソース().ninshoshaYakushokuMei;
             source.ninshoshaYakushokuMei1 = 基準収入額適用決定通知書パラメータ.getCompNinshoshaソース().ninshoshaYakushokuMei1;
+            source.koinMojiretsu = 基準収入額適用決定通知書パラメータ.getCompNinshoshaソース().koinMojiretsu;
             source.ninshoshaYakushokuMei2 = 基準収入額適用決定通知書パラメータ.getCompNinshoshaソース().ninshoshaYakushokuMei2;
             source.ninshoshaShimeiKakenai = 基準収入額適用決定通知書パラメータ.getCompNinshoshaソース().ninshoshaShimeiKakenai;
             source.ninshoshaShimeiKakeru = 基準収入額適用決定通知書パラメータ.getCompNinshoshaソース().ninshoshaShimeiKakeru;
@@ -108,6 +114,7 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
             source.kakkoRight2 = 基準収入額適用決定通知書パラメータ.getCompSofubutsuAtesakiソース().kakkoRight2;
             source.kakkoLeft1 = 基準収入額適用決定通知書パラメータ.getCompSofubutsuAtesakiソース().kakkoLeft1;
             source.samabunShimei1 = 基準収入額適用決定通知書パラメータ.getCompSofubutsuAtesakiソース().samabunShimei1;
+            source.samaBun1 = 基準収入額適用決定通知書パラメータ.getCompSofubutsuAtesakiソース().samaBun1;
             source.kakkoRight1 = 基準収入額適用決定通知書パラメータ.getCompSofubutsuAtesakiソース().kakkoRight1;
             source.samabunShimeiSmall1 = 基準収入額適用決定通知書パラメータ.getCompSofubutsuAtesakiソース().samabunShimeiSmall1;
             source.customerBarCode = 基準収入額適用決定通知書パラメータ.getCompSofubutsuAtesakiソース().customerBarCode;
@@ -126,25 +133,28 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
 
     private void set算定基準額(KijunShunyugakuTekiyoKetteiTsuchishoSource source) {
         if (基準収入額適用決定通知書パラメータ.get算定基準額() != null) {
-            source.santeiKijunGaku = new RString(基準収入額適用決定通知書パラメータ.get算定基準額().toString());
+            source.santeiKijunGaku = DecimalFormatter.toコンマ区切りRString(基準収入額適用決定通知書パラメータ.get算定基準額(), INT_0);
         }
     }
 
     private void set適用開始年月(KijunShunyugakuTekiyoKetteiTsuchishoSource source) {
         if (基準収入額適用決定通知書パラメータ.get適用開始年月() != null) {
-            source.tekiyouStartYM = new RString(基準収入額適用決定通知書パラメータ.get適用開始年月().toString());
+            source.tekiyouStartYM = 基準収入額適用決定通知書パラメータ.get適用開始年月().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
         }
     }
 
     private void set決定年月日(KijunShunyugakuTekiyoKetteiTsuchishoSource source) {
         if (基準収入額適用決定通知書パラメータ.get決定年月日() != null) {
-            source.ketteiYMD = new RString(基準収入額適用決定通知書パラメータ.get決定年月日().toString());
+            source.ketteiYMD = 基準収入額適用決定通知書パラメータ.get決定年月日().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
         }
     }
 
     private void set申請年月日(KijunShunyugakuTekiyoKetteiTsuchishoSource source) {
         if (基準収入額適用決定通知書パラメータ.get申請年月日() != null) {
-            source.shinseiYMD = new RString(基準収入額適用決定通知書パラメータ.get申請年月日().toString());
+            source.shinseiYMD = 基準収入額適用決定通知書パラメータ.get申請年月日().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
         }
     }
 }
