@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.Futa
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.HanteiTaishoshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.RiyoshaFutanWariaiMeisaiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SeikatsuHogoGaitoJohoTempEntity;
+import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
@@ -610,7 +611,7 @@ public class RiyoshaFutanWariaiHantei {
     }
 
     /**
-     * 利用者負担割合明細マージ
+     * 利用者負担割合明細マージ(バッチ用)
      *
      * @param 入力明細リスト List<DbT3114RiyoshaFutanWariaiMeisaiEntity>
      * @return List<DbT3114RiyoshaFutanWariaiMeisaiEntity>
@@ -652,6 +653,55 @@ public class RiyoshaFutanWariaiHantei {
         } else if (!singleFlag && beforeEntity != null) {
             result = beforeEntity.clone();
             result.setYukoKaishiYMD(有効開始日);
+            resultList.add(result);
+        }
+        return resultList;
+    }
+
+    /**
+     * 利用者負担割合明細マージ(画面用)
+     *
+     * @param 入力明細リスト List<RiyoshaFutanWariaiMeisai>
+     * @return List<RiyoshaFutanWariaiMeisai>
+     * @throws NullPointerException
+     */
+    public List<RiyoshaFutanWariaiMeisai> riyoshaFutanWariaiMeisaiMergeGamen(
+            List<RiyoshaFutanWariaiMeisai> 入力明細リスト) {
+        if (入力明細リスト == null) {
+            throw new NullPointerException();
+        }
+        RString nowKubun;
+        DbT3114RiyoshaFutanWariaiMeisaiEntity beforeEntity = null;
+        RString beforeKubun = null;
+        FlexibleDate 有効開始日 = null;
+        RiyoshaFutanWariaiMeisai result;
+        List<RiyoshaFutanWariaiMeisai> resultList = new ArrayList<>();
+        boolean singleFlag = true;
+        for (RiyoshaFutanWariaiMeisai 入力明細 : 入力明細リスト) {
+            DbT3114RiyoshaFutanWariaiMeisaiEntity nowEntity = 入力明細.toEntity();
+            nowKubun = nowEntity.getFutanWariaiKubun();
+            if (beforeEntity == null) {
+                beforeEntity = 入力明細.toEntity().clone();
+                beforeKubun = nowKubun;
+                有効開始日 = nowEntity.getYukoKaishiYMD();
+                continue;
+            }
+            singleFlag = false;
+            if (beforeKubun != null && beforeKubun.equals(nowKubun)) {
+                beforeEntity = 入力明細.toEntity().clone();
+            } else if (beforeKubun != null && !beforeKubun.equals(nowKubun)) {
+                result = new RiyoshaFutanWariaiMeisai(beforeEntity.clone());
+                result.createBuilderForEdit().set有効開始日(有効開始日);
+                resultList.add(result);
+                beforeEntity = 入力明細.toEntity().clone();
+                有効開始日 = beforeEntity.getYukoKaishiYMD();
+            }
+        }
+        if (singleFlag && beforeEntity != null) {
+            resultList.add(new RiyoshaFutanWariaiMeisai(beforeEntity.clone()));
+        } else if (!singleFlag && beforeEntity != null) {
+            result = new RiyoshaFutanWariaiMeisai(beforeEntity.clone());
+            result.createBuilderForEdit().set有効開始日(有効開始日);
             resultList.add(result);
         }
         return resultList;
