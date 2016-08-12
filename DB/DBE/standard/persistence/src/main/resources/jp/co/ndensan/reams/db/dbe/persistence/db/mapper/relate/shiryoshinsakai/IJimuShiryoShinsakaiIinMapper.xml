@@ -924,7 +924,7 @@
             WHERE
                 ShinsakaiW.dbt5502_shinseishoKanriNo = GaikyoTokkiJoho.dbt5206_shinseishoKanriNo
                     ORDER BY
-           dbt5502."shinsakaiOrder"
+           ShinsakaiW.dbt5502_shinsakaiOrder
     </select>
     
     <resultMap id="Result_GaikyoTokki" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.GaikyoTokkiEntity" autoMapping="true">

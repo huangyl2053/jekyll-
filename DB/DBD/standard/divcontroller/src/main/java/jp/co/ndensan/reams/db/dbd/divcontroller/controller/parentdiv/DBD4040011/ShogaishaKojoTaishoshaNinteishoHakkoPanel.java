@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.dbt4030011.NinteishoJohoBusiness;
-import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4040011.DBD4040011TransitionEventName.検索に戻る;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4040011.ShogaishaKojoTaishoshaNinteishoHakkoPanelDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4040011.ShogaishaKojoTaishoshaNinteishoHakkoHandler;
 import jp.co.ndensan.reams.db.dbd.service.report.dbd100025.ShogaishaKojoNinteishoPrintService;
@@ -17,6 +16,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.report.hakkorireki.GyomuKoyuJoho;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportprinthistory.ChohyoHakkoRirekiJotai;
 import jp.co.ndensan.reams.ur.urz.service.core.reportprinthistory.HakkoRirekiManagerFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportprinthistory.IHakkoRirekiManager;
@@ -69,10 +69,13 @@ public class ShogaishaKojoTaishoshaNinteishoHakkoPanel {
         business.set申請者住所(div.getShogaishaKojoNinteishoHakko().getShogaishaKojoNinteisho().getShogaishaKojoShinseisha().getTxtShinseishaJusho().getValue());
         business.set申請者氏名(div.getShogaishaKojoNinteishoHakko().getShogaishaKojoNinteisho().getShogaishaKojoShinseisha().getTxtShinseishaName().getValue());
         business.set発行日(div.getShogaishaKojoNinteishoHakko().getShogaishaKojoNinteisho().getNinteishoPrintSetting().getIssueDate());
-        business.getPsmEntity().setDaihyoshaJusho(div.getTaishoshaAtena().get住所());
-        business.getPsmEntity().setDaihyoshaShimei(new AtenaMeisho(div.getTaishoshaAtena().get氏名漢字()));
-        business.getPsmEntity().setSeinengappiYMD(new FlexibleDate(div.getTaishoshaAtena().getShokaiData().getTxtSeinengappiYMD().toString()));
-        business.getPsmEntity().setSeibetsuCode(new RString(div.getTaishoshaAtena().getShokaiData().getTxtSeibetsu().toString()));
+
+        UaFt200FindShikibetsuTaishoEntity psmEntity = new UaFt200FindShikibetsuTaishoEntity();
+        psmEntity.setDaihyoshaJusho(div.getTaishoshaAtena().get住所());
+        psmEntity.setDaihyoshaShimei(new AtenaMeisho(div.getTaishoshaAtena().get氏名漢字()));
+        psmEntity.setSeinengappiYMD(new FlexibleDate(div.getTaishoshaAtena().getShokaiData().getTxtSeinengappiYMD().toString()));
+        psmEntity.setSeibetsuCode(new RString(div.getTaishoshaAtena().getShokaiData().getTxtSeibetsu().toString()));
+        business.setPsmEntity(psmEntity);
         ShogaishaKojoNinteishoPrintService service = new ShogaishaKojoNinteishoPrintService();
         try (ReportManager reportManager = new ReportManager()) {
             service.print(business, reportManager);
@@ -84,10 +87,6 @@ public class ShogaishaKojoTaishoshaNinteishoHakkoPanel {
             response.data = collection;
         }
         return response;
-    }
-
-    public ResponseData<ShogaishaKojoTaishoshaNinteishoHakkoPanelDiv> onClick_btnReturnToSearch(ShogaishaKojoTaishoshaNinteishoHakkoPanelDiv div) {
-        return ResponseData.of(div).forwardWithEventName(検索に戻る).respond();
     }
 
     private HihokenshaNo get被保険者番号FromViewState() {
