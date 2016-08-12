@@ -54,7 +54,7 @@
         F."shotokuNendo",
         F."shikibetsuCode",
         <if test="ラジオボタン == 2">
-            F."rirekiNo"
+            F."rirekiNo",
         </if>
         <if test="ラジオボタン == 1">
             F."rirekiNo" ,
@@ -71,13 +71,13 @@
         INNER JOIN 
         (SELECT
         "shotokuNendo",
-        "shikibetsuCode",
+        "shikibetsuCode"
         <if test="チックボックス == 2">
-        max("rirekiNo") AS rirekiNo
+        ,max("rirekiNo") AS rirekiNo
         </if>
         FROM rgdb."DbV2502KaigoShotoku" AS X
         <if test="チックボックス == 2">
-        GROUP BY X."shotokuNendo", X."shikibetsuCode", X."rirekiNo"
+        GROUP BY X."shotokuNendo", X."shikibetsuCode"
         </if>
         ) AS Y
         ON Y."shotokuNendo"=F."shotokuNendo"
@@ -107,55 +107,6 @@
         AND (C."hihokennshaKubunCode"='1' OR C."hihokennshaKubunCode"='2')
         ${出力順}
     </select>
-    
-    
-    <!--creat介護保険所得-->
-    <insert id="creat介護保険所得">
-        CREAT TEMP TABLE "KaigoHokenShotokuTemp"
-        (
-        "shikibetsuCode" rshare."UDD001ShikibetsuCode",
-        "hiHokenshaNo" rgdb."DbUDD002HihokenshaNo",
-        "kanaMeisho" rshare."UDD043AtenaKanaMeisho",
-        "meisho" rshare."UDD042AtenaMeisho",
-        "shotokuNendo" rshare."UDD012YSeireki",
-        "seinengappiYMD" rshare."UDD015YMD",
-        "age" smallint,
-        "seibetsuCode" character varying(1),
-        "juminShubetsuCode" character varying(1),
-        "kazeiKubun" character varying(1),
-        "kazeiKubunGemmenGo" character varying(1),
-        "gokeiShotokuGaku" numeric(12,0),
-        "nenkiniShunyuGaku" numeric(12,0),
-        "nenkiniShotokuGaku" numeric(12,0),
-        "kazeiShotokuGaku" numeric(12,0),
-        "torokuGyomu" character varying(1)
-        )
-    </insert>
-    
-    <!--creat介護所得一時-->
-    <insert id="creat介護所得一時">
-        CREAT TEMP TABLE "KaigoHokenShotokuItijiTemp"
-        (
-        "shikibetsuCode" rshare."UDD001ShikibetsuCode",
-        "rirekiNo" smallint,
-        "kanaMeisho" rshare."UDD043AtenaKanaMeisho",
-        "meisho" rshare."UDD042AtenaMeisho",
-        "shotokuNendo" rshare."UDD012YSeireki",
-        "seinengappiYMD" rshare."UDD015YMD",
-        "age" smallint,
-        "seibetsuCode" character varying(1),
-        "juminShubetsuCode" character varying(1),
-        "kazeiKubun" character varying(1),
-        "kazeiKubunGemmenGo" character varying(1),
-        "gokeiShotokuGaku" numeric(12,0),
-        "nenkiniShunyuGaku" numeric(12,0),
-        "nenkiniShotokuGaku" numeric(12,0),
-        "kazeiShotokuGaku" numeric(12,0),
-        "torokuGyomu" character varying(1),
-        "shoriTimeStamp" rshare."UDD018YMDHMS",
-        "lasdecCode" rshare."UDD023LasdecCode"
-        )
-    </insert>
     
     <!--広域市町村の所得情報一覧を取得します。-->
     <select resultOrdered="true" id="select対象データ" 
@@ -230,7 +181,7 @@
             F."rirekiNo",
         </if>
         <if test="ラジオボタン == 1">
-            F."rirekiNo" ,
+            F."rirekiNo",
         </if>
         F."kazeiKubun",
         F."kazeiKubunGemmenGo",
@@ -243,14 +194,14 @@
         FROM rgdb."DbV2502KaigoShotoku" F
         INNER JOIN 
         (SELECT
-        "shotokuNendo",
+        "shotokuNendo"
         <if test="チックボックス == 2">
-        max("rirekiNo") AS rirekiNo,
+        ,max("rirekiNo") AS rirekiNo
         </if>
-        "shikibetsuCode"
+        ,"shikibetsuCode"
         FROM rgdb."DbV2502KaigoShotoku" AS X
         <if test="チックボックス == 2">
-        GROUP BY X."shotokuNendo", X."shikibetsuCode", X."rirekiNo"
+        GROUP BY X."shotokuNendo", X."shikibetsuCode"
         </if>
         ) AS Y
         ON Y."shotokuNendo"=F."shotokuNendo"
@@ -319,52 +270,6 @@
         AND "nendo"=#{処理年度}
         AND "nendoNaiRenban"='0001'
     </select>
-    
-    <!--処理日付管理マスタを追加します。-->
-    <insert id="add処理日付管理マスタ" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity">
-        INSERT INTO rgdb."DbT7022ShoriDateKanri"
-        SET(
-        "subGyomuCode"
-        "shichosonCode"
-        "shoriName"
-        "shoriEdaban"
-        "nendo"
-        "nendoNaiRenban"
-        "kijunYMD"
-        "kijunTimestamp"
-        "taishoKaishiYMD"
-        "taishoShuryoYMD"
-        "taishoKaishiTimestamp"
-        "taishoShuryoTimestamp"
-        )
-        VALUES(
-        #{subGyomuCode}
-        #{shichosonCode}
-        #{shoriName}
-        #{shoriEdaban}
-        #{nendo}
-        #{nendoNaiRenban}
-        #{kijunYMD}
-        #{kijunTimestamp}
-        #{taishoKaishiYMD}
-        #{taishoShuryoYMD}
-        #{taishoKaishiTimestamp}
-        #{taishoShuryoTimestamp}
-        )
-    </insert>
-    
-    <!--処理日付管理マスタを更新します。-->
-    <update id="update処理日付管理マスタ" 
-            parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity">
-        UPDATE rgdb."DbT7022ShoriDateKanri"
-        SET
-        "kijunYMD"=#{kijunYMD},
-        "kijunTimestamp"=#{kijunTimestamp},
-        "taishoKaishiYMD"=#{taishoKaishiYMD},
-        "taishoShuryoYMD"=#{taishoShuryoYMD},
-        "taishoKaishiTimestamp"=#{taishoKaishiTimestamp},
-        "taishoShuryoTimestamp"=#{taishoShuryoTimestamp}
-    </update>
     
     <select resultOrdered="true" id="selectTempAll" 
             resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokujohoichiranhyosakusei.KaigoHokenShotokuTempEntity" fetchSize="500">
