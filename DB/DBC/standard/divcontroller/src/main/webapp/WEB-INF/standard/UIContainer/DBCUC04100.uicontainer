@@ -24,7 +24,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "12",
+     "condition": "151",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410012",
      "toLayoutTitle": "介護給付費等請求額通知書情報",
@@ -42,7 +42,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "4",
@@ -52,7 +52,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "13",
+     "condition": "152",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410013",
      "toLayoutTitle": "総合事業費請求額通知書情報",
@@ -70,7 +70,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "6",
@@ -80,7 +80,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "14",
+     "condition": "631",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410014",
      "toLayoutTitle": "介護給付費等請求額通知書（公費）情報",
@@ -98,7 +98,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "8",
@@ -108,7 +108,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "15",
+     "condition": "741",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410015",
      "toLayoutTitle": "請求明細・給付管理票返戻（保留）一覧表情報",
@@ -126,7 +126,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "10",
@@ -136,7 +136,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "16",
+     "condition": "121",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410016",
      "toLayoutTitle": "資格照合表情報",
@@ -154,7 +154,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "12",
@@ -164,7 +164,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "17",
+     "condition": "122",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410017",
      "toLayoutTitle": "総合事業費資格総合表情報",
@@ -182,7 +182,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "14",
@@ -192,7 +192,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "18",
+     "condition": "5C3",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410018",
      "toLayoutTitle": "共同処理用受給者情報更新結果",
@@ -210,7 +210,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "16",
@@ -220,7 +220,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "19",
+     "condition": "112",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410019",
      "toLayoutTitle": "給付管理票情報",
@@ -238,7 +238,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "18",
@@ -248,7 +248,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "20",
+     "condition": "161",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410020",
      "toLayoutTitle": "介護給付費等審査決定請求明細表情報",
@@ -266,7 +266,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "20",
@@ -276,7 +276,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "21",
+     "condition": "171",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410021",
      "toLayoutTitle": "介護給付費過誤決定通知書情報",
@@ -294,7 +294,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "22",
@@ -304,7 +304,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "22",
+     "condition": "172",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410022",
      "toLayoutTitle": "介護給付費再審査決定通知書情報",
@@ -322,7 +322,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "24",
@@ -332,7 +332,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "23",
+     "condition": "651",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410023",
      "toLayoutTitle": "介護給付費過誤決定通知書（公費）情報",
@@ -350,7 +350,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "26",
@@ -360,7 +360,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "24",
+     "condition": "652",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410024",
      "toLayoutTitle": "介護給付費再審査決定通知書（公費）情報",
@@ -378,7 +378,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "28",
@@ -388,7 +388,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "25",
+     "condition": "641",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410025",
      "toLayoutTitle": "介護給付費公費受給者別一覧表情報",
@@ -406,7 +406,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "30",
@@ -416,7 +416,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "26",
+     "condition": "533",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410026",
      "toLayoutTitle": "受給者情報更新結果情報",
@@ -434,7 +434,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "32",
@@ -444,7 +444,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "27",
+     "condition": "114",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410027",
      "toLayoutTitle": "給付実績更新結果情報",
@@ -462,7 +462,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "34",
@@ -472,7 +472,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "28",
+     "condition": "221",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410028",
      "toLayoutTitle": "償還払支給決定者一覧情報",
@@ -490,7 +490,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "36",
@@ -500,7 +500,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "29",
+     "condition": "222",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410029",
      "toLayoutTitle": "償還払不支給決定者一覧情報",
@@ -518,7 +518,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "38",
@@ -528,7 +528,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "30",
+     "condition": "331",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410030",
      "toLayoutTitle": "高額介護サービス費給付対象者一覧表情報",
@@ -546,7 +546,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "40",
@@ -556,7 +556,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "31",
+     "condition": "351",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410031",
      "toLayoutTitle": "高額介護サービス費支給（不支給）決定者一覧表情報",
@@ -574,7 +574,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "42",
@@ -584,7 +584,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "32",
+     "condition": "37J",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410032",
      "toLayoutTitle": "高額合算自己負担額確認情報",
@@ -602,7 +602,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "44",
@@ -612,7 +612,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "33",
+     "condition": "37H",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410033",
      "toLayoutTitle": "高額合算自己負担額証明書情報",
@@ -630,7 +630,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "46",
@@ -640,7 +640,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "34",
+     "condition": "386",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410034",
      "toLayoutTitle": "高額合算支給額計算結果連絡票情報",
@@ -658,7 +658,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "48",
@@ -668,7 +668,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "35",
+     "condition": "38B",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410035",
      "toLayoutTitle": "高額合算支給（不支給）決定通知書情報",
@@ -686,7 +686,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "50",
@@ -696,7 +696,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "36",
+     "condition": "38P",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410036",
      "toLayoutTitle": "高額合算給付実績情報",
@@ -714,7 +714,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "52",
@@ -724,7 +724,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "37",
+     "condition": "175",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410037",
      "toLayoutTitle": "総合事業費過誤決定通知書情報",
@@ -742,7 +742,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "54",
@@ -752,7 +752,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "38",
+     "condition": "162",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410038",
      "toLayoutTitle": "総合事業費審査決定請求明細表情報",
@@ -770,7 +770,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "56",
@@ -780,7 +780,7 @@
      "layoutTitle": "国保連情報取込",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "39",
+     "condition": "111",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410039",
      "toLayoutTitle": "給付実績情報",
@@ -798,10 +798,318 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
      "id": "58",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410011",
+     "layoutTitle": "国保連情報取込",
+     "eventName": "バッチ起動",
+     "destroy": false,
+     "condition": "177",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410040",
+     "toLayoutTitle": "総合事業費過誤決定通知書情報",
+     "toState": "初期状態"
+    },
+    {
+     "id": "59",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410011",
+     "layoutTitle": "国保連情報取込",
+     "eventName": "バッチ起動",
+     "destroy": false,
+     "condition": "178",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410041",
+     "toLayoutTitle": "総合事業費再審査決定通知書情報",
+     "toState": "初期状態"
+    },
+    {
+     "id": "60",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410040",
+     "layoutTitle": "総合事業費過誤決定通知書情報",
+     "eventName": "戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410011",
+     "toLayoutTitle": "国保連情報取込",
+     "toState": ""
+    },
+    {
+     "id": "61",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410041",
+     "layoutTitle": "総合事業費再審査決定通知書情報",
+     "eventName": "戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410011",
+     "toLayoutTitle": "国保連情報取込",
+     "toState": ""
+    },
+    {
+     "id": "62",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410011",
+     "layoutTitle": "国保連情報取込",
+     "eventName": "バッチ起動",
+     "destroy": false,
+     "condition": "661",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410042",
+     "toLayoutTitle": "総合事業費過誤決定通知書（公費）情報",
+     "toState": "初期状態"
+    },
+    {
+     "id": "63",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410042",
+     "layoutTitle": "総合事業費過誤決定通知書（公費）情報",
+     "eventName": "戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410011",
+     "toLayoutTitle": "国保連情報取込",
+     "toState": ""
+    },
+    {
+     "id": "64",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410011",
+     "layoutTitle": "国保連情報取込",
+     "eventName": "バッチ起動",
+     "destroy": false,
+     "condition": "662",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410043",
+     "toLayoutTitle": "総合事業費再審査決定通知書（公費）情報",
+     "toState": "初期状態"
+    },
+    {
+     "id": "65",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410043",
+     "layoutTitle": "総合事業費再審査決定通知書（公費）情報",
+     "eventName": "戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410011",
+     "toLayoutTitle": "国保連情報取込",
+     "toState": ""
+    },
+    {
+     "id": "66",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410011",
+     "layoutTitle": "国保連情報取込",
+     "eventName": "バッチ起動",
+     "destroy": false,
+     "condition": "123",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410044",
+     "toLayoutTitle": "総合事業費資格照合表情報",
+     "toState": "初期状態"
+    },
+    {
+     "id": "67",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410044",
+     "layoutTitle": "総合事業費資格照合表情報",
+     "eventName": "戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410011",
+     "toLayoutTitle": "国保連情報取込",
+     "toState": ""
+    },
+    {
+     "id": "68",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410011",
+     "layoutTitle": "国保連情報取込",
+     "eventName": "バッチ起動",
+     "destroy": false,
+     "condition": "534",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410045",
+     "toLayoutTitle": "国保連保有受給者情報",
+     "toState": "初期状態"
+    },
+    {
+     "id": "69",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410045",
+     "layoutTitle": "国保連保有受給者情報",
+     "eventName": "戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410011",
+     "toLayoutTitle": "国保連情報取込",
+     "toState": ""
+    },
+    {
+     "id": "70",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410011",
+     "layoutTitle": "国保連情報取込",
+     "eventName": "バッチ起動",
+     "destroy": false,
+     "condition": "537",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410046",
+     "toLayoutTitle": "受給者情報突合結果情報",
+     "toState": "初期状態"
+    },
+    {
+     "id": "71",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410046",
+     "layoutTitle": "受給者情報突合結果情報",
+     "eventName": "戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410011",
+     "toLayoutTitle": "国保連情報取込",
+     "toState": ""
+    },
+    {
+     "id": "72",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410011",
+     "layoutTitle": "国保連情報取込",
+     "eventName": "バッチ起動",
+     "destroy": false,
+     "condition": "153",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410047",
+     "toLayoutTitle": "総合事業費等請求額通知書情報",
+     "toState": "初期状態"
+    },
+    {
+     "id": "73",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410047",
+     "layoutTitle": "総合事業費等請求額通知書情報",
+     "eventName": "戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410011",
+     "toLayoutTitle": "国保連情報取込",
+     "toState": ""
+    },
+    {
+     "id": "74",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410011",
+     "layoutTitle": "国保連情報取込",
+     "eventName": "バッチ起動",
+     "destroy": false,
+     "condition": "632",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410048",
+     "toLayoutTitle": "総合事業費等請求額通知書（公費）情報",
+     "toState": "初期状態"
+    },
+    {
+     "id": "75",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410048",
+     "layoutTitle": "総合事業費等請求額通知書（公費）情報",
+     "eventName": "戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410011",
+     "toLayoutTitle": "国保連情報取込",
+     "toState": ""
+    },
+    {
+     "id": "76",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410011",
+     "layoutTitle": "国保連情報取込",
+     "eventName": "バッチ起動",
+     "destroy": false,
+     "condition": "642",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410049",
+     "toLayoutTitle": "総合事業費公費受給者別一覧表情報",
+     "toState": "初期状態"
+    },
+    {
+     "id": "77",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410049",
+     "layoutTitle": "総合事業費公費受給者別一覧表情報",
+     "eventName": "戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410011",
+     "toLayoutTitle": "国保連情報取込",
+     "toState": ""
+    },
+    {
+     "id": "78",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410011",
+     "layoutTitle": "国保連情報取込",
+     "eventName": "バッチ起動",
+     "destroy": false,
+     "condition": "163",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410050",
+     "toLayoutTitle": "介護予防・日常生活支援総合事業費審査決定請求明細表情報",
+     "toState": "初期状態"
+    },
+    {
+     "id": "79",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410050",
+     "layoutTitle": "介護予防・日常生活支援総合事業費審査決定請求明細表情報",
+     "eventName": "戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410011",
+     "toLayoutTitle": "国保連情報取込",
+     "toState": ""
+    },
+    {
+     "id": "80",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC0410011",
@@ -812,24 +1120,24 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC6000011",
      "toLayoutTitle": "スケジュール設定",
-     "toState": "default"
+     "toState": "送付・取込画面からの遷移"
     },
     {
-     "id": "59",
+     "id": "81",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC6000011",
      "layoutTitle": "スケジュール設定",
-     "eventName": "国保連情報データ取込へ",
-     "destroy": false,
+     "eventName": "情報送付・取込へ戻る",
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
-     "toState": "国保連情報取込一覧"
+     "toState": ""
     },
     {
-     "id": "60",
+     "id": "82",
      "type": "end",
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC0410011",
