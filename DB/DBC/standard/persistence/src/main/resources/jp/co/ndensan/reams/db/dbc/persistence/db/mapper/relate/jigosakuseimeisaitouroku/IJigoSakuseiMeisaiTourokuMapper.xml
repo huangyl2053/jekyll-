@@ -38,7 +38,7 @@
         WHERE
                 A."tekiyoKaishiYM" <![CDATA[<=]]> #{利用年月}
             AND (A."tekiyoShuryoYM" IS NULL OR A."tekiyoShuryoYM" = '' OR A."tekiyoShuryoYM" <![CDATA[>=]]> #{利用年月})
-            AND C."tekiyoKaishiYM" <![CDATA[>=]]> #{利用年月}
+            AND C."tekiyoKaishiYM" <![CDATA[<=]]> #{利用年月}
             AND (C."tekiyoShuryoYM" IS NULL OR C."tekiyoShuryoYM" = '' OR C."tekiyoShuryoYM" <![CDATA[>=]]> #{利用年月})
         ORDER BY
             A."serviceShuruiCode" DESC
@@ -198,4 +198,44 @@
             限度額."shikyuGendoTaniSu" DESC 
         LIMIT 1
     </select>
+    
+    <resultMap id="resultMap_TankiNyushoEntity" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.TankiNyushoEntity">
+        <result property="前回迄利用日数" column="前回迄利用日数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="今回計画利用日数" column="今回計画利用日数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="暫定区分" column="暫定区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="更新区分" column="更新区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="送付年月" column="送付年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+    </resultMap>
+     <!--短期入所情報を取得します。-->
+     <select resultOrdered="true" id="get短期入所情報" resultMap="resultMap_TankiNyushoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.TankiNyushoParameter" fetchSize="500">
+         SELECT
+            DbT3010."zenkaiRiyoNissu" AS 前回迄利用日数,
+            DbT3010."konkaiKeikakuRiyoNissu" AS 今回計画利用日数,
+            DbT3010."zanteiKubun" AS 暫定区分,
+            DbT3010."koshinKubun" AS 更新区分,
+            DbT3010."sofuYM" AS 送付年月
+         FROM
+            rgdb."DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu" AS DbT3010
+         WHERE
+            DbT3010."hihokenshaNo" = #{被保険者番号}
+         AND DbT3010."taishoYM" = #{対象年月}
+         AND DbT3010."rirekiNo" = #{履歴番号}
+         AND DbT3010."riyoYM" = #{利用年月}
+         UNION
+         SELECT
+            DbT3013."zenkaiRiyoNissu" AS 前回迄利用日数,
+            DbT3013."konkaiKeikakuRiyoNissu" AS 今回計画利用日数,
+            DbT3013."zanteiKubun" AS 暫定区分,
+            DbT3013."koshinKubun" AS 更新区分,
+            DbT3013."sofuYM" AS 送付年月
+         FROM
+            rgdb."DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu" AS DbT3013
+         WHERE
+            DbT3013."hihokenshaNo" = #{被保険者番号}
+         AND DbT3013."taishoYM" = #{対象年月}
+         AND DbT3013."rirekiNo" = #{履歴番号}
+         AND DbT3013."riyoYM" = #{利用年月}
+     </select>
 </mapper>
