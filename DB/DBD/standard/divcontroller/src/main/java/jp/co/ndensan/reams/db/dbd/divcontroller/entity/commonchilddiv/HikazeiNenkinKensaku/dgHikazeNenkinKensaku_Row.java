@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.HikazeiNe
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Jul 14 14:00:58 JST 2016 
+ * Fri Aug 12 10:51:01 CST 2016 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 
 public class dgHikazeNenkinKensaku_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
 
     private RString txtdtKanjiShimei;
     private TextBoxFlexibleDate txtdtBirthday;
@@ -29,7 +29,7 @@ public class dgHikazeNenkinKensaku_Row extends DataRow {
     private RString txtKisoNenkinNo;
     private RString txtGenKisoNenkinNo;
     private RString txtNenkinCode;
-    private TextBoxFlexibleDate txtdtTaishoy;
+    private RString txtdtTaishoy;
     private TextBoxFlexibleDate txtdtSakuseiYMD;
     private RString txtdtTsuchiNaiyo;
     private RString txtTorokuKubun;
@@ -43,7 +43,7 @@ public class dgHikazeNenkinKensaku_Row extends DataRow {
         this.txtKisoNenkinNo = RString.EMPTY;
         this.txtGenKisoNenkinNo = RString.EMPTY;
         this.txtNenkinCode = RString.EMPTY;
-        this.txtdtTaishoy = new TextBoxFlexibleDate();
+        this.txtdtTaishoy = RString.EMPTY;
         this.txtdtSakuseiYMD = new TextBoxFlexibleDate();
         this.txtdtTsuchiNaiyo = RString.EMPTY;
         this.txtTorokuKubun = RString.EMPTY;
@@ -60,7 +60,7 @@ public class dgHikazeNenkinKensaku_Row extends DataRow {
         this.setOriginalData("txtTorokuKubun", txtTorokuKubun);
     }
 
-    public dgHikazeNenkinKensaku_Row(RString txtdtKanjiShimei, TextBoxFlexibleDate txtdtBirthday, RString txtdtSeibetsu, RString txtdtNenkinHokensha, RString txtKisoNenkinNo, RString txtGenKisoNenkinNo, RString txtNenkinCode, TextBoxFlexibleDate txtdtTaishoy, TextBoxFlexibleDate txtdtSakuseiYMD, RString txtdtTsuchiNaiyo, RString txtTorokuKubun) {
+    public dgHikazeNenkinKensaku_Row(RString txtdtKanjiShimei, TextBoxFlexibleDate txtdtBirthday, RString txtdtSeibetsu, RString txtdtNenkinHokensha, RString txtKisoNenkinNo, RString txtGenKisoNenkinNo, RString txtNenkinCode, RString txtdtTaishoy, TextBoxFlexibleDate txtdtSakuseiYMD, RString txtdtTsuchiNaiyo, RString txtTorokuKubun) {
         super();
         this.setOriginalData("txtdtKanjiShimei", txtdtKanjiShimei);
         this.setOriginalData("txtdtBirthday", txtdtBirthday);
@@ -114,7 +114,7 @@ public class dgHikazeNenkinKensaku_Row extends DataRow {
         return txtNenkinCode;
     }
 
-    public TextBoxFlexibleDate getTxtdtTaishoy() {
+    public RString getTxtdtTaishoy() {
         return txtdtTaishoy;
     }
 
@@ -165,7 +165,7 @@ public class dgHikazeNenkinKensaku_Row extends DataRow {
         this.txtNenkinCode = txtNenkinCode;
     }
 
-    public void setTxtdtTaishoy(TextBoxFlexibleDate txtdtTaishoy) {
+    public void setTxtdtTaishoy(RString txtdtTaishoy) {
         this.setOriginalData("txtdtTaishoy", txtdtTaishoy);
         this.txtdtTaishoy = txtdtTaishoy;
     }

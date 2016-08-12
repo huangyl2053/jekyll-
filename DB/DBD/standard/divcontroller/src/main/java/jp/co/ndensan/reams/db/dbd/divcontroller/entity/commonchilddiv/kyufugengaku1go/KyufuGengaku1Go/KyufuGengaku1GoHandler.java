@@ -506,7 +506,9 @@ public class KyufuGengaku1GoHandler {
         for (ShiharaiHohoHenkoGengaku shiharaiHohoHenkoGengaku : 支払方法変更管理業務概念.getShiharaiHohoHenkoGengakuList()) {
             builder.setShiharaiHohoHenkoGengaku(shiharaiHohoHenkoGengaku.createBuilderForEdit()
                     .set確定減額期間終了年月日(div.getTxtKonkaiKikanShuryoYMD().getValue())
-                    .set確定減額期間開始年月日(div.getTxtKonkaiKikanKaishiYMD().getValue()).build());
+                    .set確定減額期間開始年月日(div.getTxtKonkaiKikanKaishiYMD().getValue())
+                    .setState(EntityDataState.Modified).build())
+                    .setState(EntityDataState.Modified);
         }
         ViewStateHolder.put(KyufuGengaku1GoHandler.一号給付額減額ダイアログキー.支払方法変更管理業務概念, builder.build());
     }
@@ -516,7 +518,9 @@ public class KyufuGengaku1GoHandler {
         ShiharaiHohoHenkoBuilder builder = 支払方法変更管理業務概念.createBuilderForEdit();
         for (ShiharaiHohoHenkoGengaku shiharaiHohoHenkoGengaku : 支払方法変更管理業務概念.getShiharaiHohoHenkoGengakuList()) {
             builder.setShiharaiHohoHenkoGengaku(shiharaiHohoHenkoGengaku.createBuilderForEdit()
-                    .set確定減額期間終了年月日(div.getTxtGengakuTekiyoKikanShuryoYMD().getValue()).build());
+                    .set確定減額期間終了年月日(div.getTxtGengakuTekiyoKikanShuryoYMD().getValue())
+                    .setState(EntityDataState.Modified).build())
+                    .setState(EntityDataState.Modified);
         }
         ViewStateHolder.put(KyufuGengaku1GoHandler.一号給付額減額ダイアログキー.支払方法変更管理業務概念, builder.build());
     }
@@ -533,10 +537,14 @@ public class KyufuGengaku1GoHandler {
                 builder.setShiharaiHohoHenkoGengaku(shiharaiHohoHenkoGengaku.createBuilderForEdit().setShiharaiHohoHenkoGengakuMeisai(shiharaiHohoHenkoGengakuMeisai.createBuilderForEdit()
                         .set年賦課額(給付額減額明細マップ.get(滞納判定結果.get滞納判定基準日().getYear()).get調定額())
                         .set納付額(給付額減額明細マップ.get(滞納判定結果.get滞納判定基準日().getYear()).get収入額())
-                        .set未納_時効消滅減額(給付額減額明細マップ.get(滞納判定結果.get滞納判定基準日().getYear()).get時効到来未納額()).build()).build());
+                        .set未納_時効消滅減額(給付額減額明細マップ.get(滞納判定結果.get滞納判定基準日().getYear()).get時効到来未納額())
+                        .setState(EntityDataState.Modified).build())
+                        .setState(EntityDataState.Modified).build());
             }
             builder.setShiharaiHohoHenkoGengaku(shiharaiHohoHenkoGengaku.createBuilderForEdit()
-                    .set確定減額期間終了年月日(div.getTxtGengakuTekiyoKikanShuryoYMD().getValue()).build());
+                    .set確定減額期間終了年月日(div.getTxtGengakuTekiyoKikanShuryoYMD().getValue())
+                    .setState(EntityDataState.Modified).build())
+                    .setState(EntityDataState.Modified);
         }
         ViewStateHolder.put(KyufuGengaku1GoHandler.一号給付額減額ダイアログキー.支払方法変更管理業務概念, builder.build());
     }
