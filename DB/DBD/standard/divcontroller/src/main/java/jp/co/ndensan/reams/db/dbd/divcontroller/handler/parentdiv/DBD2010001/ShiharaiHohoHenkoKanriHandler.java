@@ -166,7 +166,7 @@ public class ShiharaiHohoHenkoKanriHandler {
         }
         for (ShiharaiHohoHenko joho : dataList) {
             if (被保険者番号.getColumnValue().equals(joho.get被保険者番号().getColumnValue())
-                    && 支払方法変更登録区分.equals(joho.get管理区分())) {
+                    && 支払方法変更登録区分.equals(joho.get管理区分()) && 履歴番号Max < joho.get履歴番号()) {
                 履歴番号Max = joho.get履歴番号();
             }
         }
