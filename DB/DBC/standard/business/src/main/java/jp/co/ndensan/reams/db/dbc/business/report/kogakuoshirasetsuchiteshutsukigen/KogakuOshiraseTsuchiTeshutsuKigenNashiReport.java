@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kogakuoshirasetsuchiteshutsukigen;
 
+import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakuoshirasetsuchiteshutsukigennashi.KogakuOshiraseTsuchiTeshutsuKigenNashiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakuoshirasetsuchiteshutsukigennashi.KogakuOshiraseTsuchiTeshutsuKigenNashiSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -17,9 +18,22 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class KogakuOshiraseTsuchiTeshutsuKigenNashiReport extends
         Report<KogakuOshiraseTsuchiTeshutsuKigenNashiSource> {
 
+    private final KogakuOshiraseTsuchiTeshutsuKigenNashiEntity target;
+
+    /**
+     * コンストラクタです。
+     *
+     * @param target target
+     */
+    public KogakuOshiraseTsuchiTeshutsuKigenNashiReport(KogakuOshiraseTsuchiTeshutsuKigenNashiEntity target) {
+        this.target = target;
+    }
+
     @Override
     protected void writeBy(ReportSourceWriter<KogakuOshiraseTsuchiTeshutsuKigenNashiSource> writer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        IKogakuOshiraseTsuchiTeshutsuKigenNashiEditor editor = new KogakuOshiraseTsuchiTeshutsuKigenNashiEditor(target);
+        IKogakuOshiraseTsuchiTeshutsuKigenNashiBuilder builder = new KogakuOshiraseTsuchiTeshutsuKigenNashiBuilder(editor);
+        writer.writeLine(builder);
     }
 
 }
