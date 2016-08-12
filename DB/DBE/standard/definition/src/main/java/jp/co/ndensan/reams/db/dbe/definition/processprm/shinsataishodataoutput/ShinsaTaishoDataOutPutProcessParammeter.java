@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.processprm.shinsataishodataoutput;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsataishodataoutput.ShinsaTaishoDataOutPutMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

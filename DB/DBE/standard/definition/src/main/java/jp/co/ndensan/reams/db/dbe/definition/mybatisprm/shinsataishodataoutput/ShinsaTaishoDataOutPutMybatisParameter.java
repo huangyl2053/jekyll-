@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsataishodataoutput;
 
-import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -37,10 +36,10 @@ public class ShinsaTaishoDataOutPutMybatisParameter implements IMyBatisParameter
      * コンストラクタです。
      *
      * @param kaisaiBangou 開催番号
-     * @param kaisaiBangouList 開催番号
+     *
      * @return ShinsaTaishoDataOutPutMybatisParameter
      */
-    public ShinsaTaishoDataOutPutMybatisParameter createParamter(RString kaisaiBangou, List<RString> kaisaiBangouList) {
+    public ShinsaTaishoDataOutPutMybatisParameter createParamter(RString kaisaiBangou) {
         return new ShinsaTaishoDataOutPutMybatisParameter(kaisaiBangou);
     }
 }
