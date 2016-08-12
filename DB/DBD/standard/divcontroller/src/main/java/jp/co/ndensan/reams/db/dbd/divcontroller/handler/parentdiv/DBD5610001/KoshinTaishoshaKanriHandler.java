@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 更新申請対象者管理リスト作成画面のHandlerクラスです。
  *
- * @reamsid_L DBD-1460-020 liuyl
+ * @reamsid_L DBD-1460-010 liuyl
  */
 public class KoshinTaishoshaKanriHandler {
 

@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * DbT7022ShoriDateKanriEntityを取得します
  *
- * @reamsid_L DBD-1460-020 liuyl
+ * @reamsid_L DBD-1460-010 liuyl
  */
 public class ShoriDateKanriService {
 
@@ -50,6 +50,13 @@ public class ShoriDateKanriService {
         }
     }
 
+    /**
+     * DbT7022ShoriDateKanriEntityを取得します
+     *
+     * @param 市町村コード LasdecCode
+     * @return ShoriDateKanri
+     */
+    @Transaction
     public ShoriDateKanri get一件取得(LasdecCode 市町村コード) {
         DbT7022ShoriDateKanriEntity entity = dac.select前回抽出期間情報の取得(市町村コード);
         if (entity == null) {
