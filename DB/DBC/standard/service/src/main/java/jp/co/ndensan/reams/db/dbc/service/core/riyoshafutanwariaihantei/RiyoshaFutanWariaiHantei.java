@@ -627,6 +627,7 @@ public class RiyoshaFutanWariaiHantei {
         FlexibleDate 有効開始日 = null;
         DbT3114RiyoshaFutanWariaiMeisaiEntity result;
         List<DbT3114RiyoshaFutanWariaiMeisaiEntity> resultList = new ArrayList<>();
+        boolean singleFlag = true;
         for (DbT3114RiyoshaFutanWariaiMeisaiEntity 入力明細 : 入力明細リスト) {
             nowKubun = 入力明細.getFutanWariaiKubun();
             if (beforeEntity == null) {
@@ -635,6 +636,7 @@ public class RiyoshaFutanWariaiHantei {
                 有効開始日 = 入力明細.getYukoKaishiYMD();
                 continue;
             }
+            singleFlag = false;
             if (beforeKubun != null && beforeKubun.equals(nowKubun)) {
                 beforeEntity = 入力明細;
             } else if (beforeKubun != null && !beforeKubun.equals(nowKubun)) {
@@ -644,6 +646,13 @@ public class RiyoshaFutanWariaiHantei {
                 有効開始日 = 入力明細.getYukoKaishiYMD();
                 beforeEntity = 入力明細;
             }
+        }
+        if (singleFlag) {
+            resultList.add(beforeEntity);
+        } else if (!singleFlag && beforeEntity != null) {
+            result = beforeEntity.clone();
+            result.setYukoKaishiYMD(有効開始日);
+            resultList.add(result);
         }
         return resultList;
     }
