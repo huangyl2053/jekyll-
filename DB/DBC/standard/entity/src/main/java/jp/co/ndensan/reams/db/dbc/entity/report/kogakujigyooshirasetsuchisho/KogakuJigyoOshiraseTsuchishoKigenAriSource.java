@@ -1,13 +1,10 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.kogakujigyooshirasetsuchisho;
 
-import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
-import jp.co.ndensan.reams.uz.uza.report.source.ReportItemGroup;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
@@ -138,13 +135,6 @@ public class KogakuJigyoOshiraseTsuchishoKigenAriSource implements IReportSource
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
-    /**
-     * KogakuJigyoOshiraseTsuchishoSourceのenum
-     */
-    @ReportItemGroup(groupName = "CompSofubutsuAtesaki", order = 57)
-    public SofubutsuAtesakiSource compSofubutsuAtesakiSource;
-    @ReportItemGroup(groupName = "CompNinshosha", order = 58)
-    public NinshoshaSource compNinshoshaSource;
     @ReportPerson(id = "X")
     public ShikibetsuCode shikibetuCode;
 
