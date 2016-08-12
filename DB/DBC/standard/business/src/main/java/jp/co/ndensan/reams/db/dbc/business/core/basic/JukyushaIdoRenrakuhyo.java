@@ -832,6 +832,24 @@ public class JukyushaIdoRenrakuhyo
     }
 
     /**
+     * 訂正年月日を返します。
+     *
+     * @return 訂正年月日
+     */
+    public FlexibleDate get訂正年月日() {
+        return entity.getTeiseiYMD();
+    }
+
+    /**
+     * 訂正区分コードを返します。
+     *
+     * @return 訂正区分コード
+     */
+    public RString get訂正区分コード() {
+        return entity.getTeiseiKubunCode();
+    }
+
+    /**
      * {@link DbT3001JukyushaIdoRenrakuhyoEntity}のクローンを返します。
      *
      * @return {@link DbT3001JukyushaIdoRenrakuhyoEntity}のクローン
