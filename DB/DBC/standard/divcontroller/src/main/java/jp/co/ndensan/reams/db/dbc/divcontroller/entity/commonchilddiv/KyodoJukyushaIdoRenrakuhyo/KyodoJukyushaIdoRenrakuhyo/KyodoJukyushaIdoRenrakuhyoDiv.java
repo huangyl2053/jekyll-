@@ -802,4 +802,116 @@ public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyus
     public boolean get高額送付情報を追加活性() {
         return !this.getChkKogakuSofuAdd().isDisabled();
     }
+
+    /**
+     * 基本送付情報の異動日チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    @JsonIgnore
+    @Override
+    public ValidationMessageControlPairs 基本送付情報の異動日チェック() {
+        return KyodoJukyushaIdoRenrakuhyoDivValidationHandler.of(this).基本送付情報の異動日チェック();
+    }
+
+    /**
+     * 償還送付情報の異動日チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    @JsonIgnore
+    @Override
+    public ValidationMessageControlPairs 償還送付情報の異動日チェック() {
+        return KyodoJukyushaIdoRenrakuhyoDivValidationHandler.of(this).償還送付情報の異動日チェック();
+    }
+
+    /**
+     * 高額送付情報の異動日チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    @JsonIgnore
+    @Override
+    public ValidationMessageControlPairs 高額送付情報の異動日チェック() {
+        return KyodoJukyushaIdoRenrakuhyoDivValidationHandler.of(this).高額送付情報の異動日チェック();
+    }
+
+    /**
+     * 基本送付情報の異動区分チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    @JsonIgnore
+    @Override
+    public ValidationMessageControlPairs 基本送付情報の異動区分チェック() {
+        return KyodoJukyushaIdoRenrakuhyoDivValidationHandler.of(this).基本送付情報の異動区分チェック();
+    }
+
+    /**
+     * 償還送付情報の異動区分チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    @JsonIgnore
+    @Override
+    public ValidationMessageControlPairs 償還送付情報の異動区分チェック() {
+        return KyodoJukyushaIdoRenrakuhyoDivValidationHandler.of(this).償還送付情報の異動区分チェック();
+    }
+
+    /**
+     * 高額送付情報の異動区分チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    @JsonIgnore
+    @Override
+    public ValidationMessageControlPairs 高額送付情報の異動区分チェック() {
+        return KyodoJukyushaIdoRenrakuhyoDivValidationHandler.of(this).高額送付情報の異動区分チェック();
+    }
+
+    /**
+     * 基本送付情報の履歴番号チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    @JsonIgnore
+    @Override
+    public ValidationMessageControlPairs 基本送付情報の履歴番号チェック() {
+        return KyodoJukyushaIdoRenrakuhyoDivValidationHandler.of(this).基本送付情報の履歴番号チェック();
+    }
+
+    /**
+     * 償還送付情報の履歴番号チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    @JsonIgnore
+    @Override
+    public ValidationMessageControlPairs 償還送付情報の履歴番号チェック() {
+        return KyodoJukyushaIdoRenrakuhyoDivValidationHandler.of(this).償還送付情報の履歴番号チェック();
+    }
+
+    /**
+     * 高額送付情報の履歴番号チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    @JsonIgnore
+    @Override
+    public ValidationMessageControlPairs 高額送付情報の履歴番号チェック() {
+        return KyodoJukyushaIdoRenrakuhyoDivValidationHandler.of(this).高額送付情報の履歴番号チェック();
+    }
+
+    /**
+     * 修正有無チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    @JsonIgnore
+    @Override
+    public ValidationMessageControlPairs 修正有無チェック(KyodoshoriyoJukyushaIdoRenrakuhyoParam 初期化異動情報Entity,
+            KyodoshoriyoJukyushaIdoRenrakuhyoParam 画面項目異動情報Entity, boolean checkFlag) {
+        return KyodoJukyushaIdoRenrakuhyoDivValidationHandler.of(this).修正有無チェック(初期化異動情報Entity,
+                画面項目異動情報Entity, checkFlag);
+    }
 }
