@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -33,6 +34,7 @@ public class ShomeishoSakuseiParameter {
 
     private static final RString KEY_自己負担額計算括からの情報を元に作成RAD = new RString("jikoFutangaku");
     private static final RString KEY_国保連からの情報を元に作成RAD = new RString("kokuhoren");
+    private static final int LENGTH_年月 = 6;
 
     private ShomeishoSakuseiParameterHandler getHandler(ShomeishoSakuseiParameterDiv div) {
         return new ShomeishoSakuseiParameterHandler(div);
@@ -76,13 +78,14 @@ public class ShomeishoSakuseiParameter {
     public ResponseData<JikofutanShomeishoParameter> onClick_batch(ShomeishoSakuseiParameterDiv div) {
         JikofutanShomeishoParameter param = new JikofutanShomeishoParameter();
         boolean is自己負担 = KEY_自己負担額計算括からの情報を元に作成RAD.equals(div.getRadJikoFutangaku().getSelectedKey());
-        boolean is国保連 = KEY_国保連からの情報を元に作成RAD.equals(div.getRadJikoFutangaku().getSelectedKey());
+        boolean is国保連 = KEY_国保連からの情報を元に作成RAD.equals(div.getRadKokuhoren().getSelectedKey());
         param.set開始申請年月日((is国保連 || RString.isNullOrEmpty(div.getTxtShinseiDate().getFromValue().wareki().toDateString()))
                 ? FlexibleDate.EMPTY : new FlexibleDate(div.getTxtShinseiDate().getFromValue().toString()));
-        param.set終了申請年月日((is国保連 || RString.isNullOrEmpty(div.getTxtShinseiDate().getToValue().wareki().toDateString()))
+        param.set終了申請年月日((is国保連 | RString.isNullOrEmpty(div.getTxtShinseiDate().getToValue().wareki().toDateString()))
                 ? FlexibleDate.EMPTY : new FlexibleDate(div.getTxtShinseiDate().getToValue().toString()));
         param.set受取年月((is自己負担 || RString.isNullOrEmpty(div.getTxtUketoriDate().getValue().wareki().toDateString()))
-                ? FlexibleDate.EMPTY : new FlexibleDate(div.getTxtUketoriDate().getValue().toString()));
+                ? FlexibleYearMonth.EMPTY
+                : new FlexibleYearMonth(new RString(div.getTxtUketoriDate().getValue().toString()).substring(0, LENGTH_年月)));
         param.set印書(KaigoGassan_JikoFutanShomeisho_Insho.toValue(div.getDdlInsho().getSelectedKey()));
         param.set発行日(RString.isNullOrEmpty(div.getTxtHakkoDate().getValue().wareki().toDateString())
                 ? FlexibleDate.EMPTY : new FlexibleDate(div.getTxtHakkoDate().getValue().toString()));

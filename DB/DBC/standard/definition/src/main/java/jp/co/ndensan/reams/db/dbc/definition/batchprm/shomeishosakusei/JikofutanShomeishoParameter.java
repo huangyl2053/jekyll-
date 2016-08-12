@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_JikoFu
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,7 +30,7 @@ public class JikofutanShomeishoParameter extends BatchParameterBase {
     @BatchParameter(key = "終了申請年月日", name = "申請年月日（終了）")
     private FlexibleDate 終了申請年月日;
     @BatchParameter(key = "受取年月", name = "受取年月")
-    private FlexibleDate 受取年月;
+    private FlexibleYearMonth 受取年月;
     @BatchParameter(key = "印書", name = "印書")
     private KaigoGassan_JikoFutanShomeisho_Insho 印書;
     @BatchParameter(key = "発行日", name = "発行日")
