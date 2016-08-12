@@ -77,11 +77,11 @@ public class ShomeishoSakuseiParameter {
         JikofutanShomeishoParameter param = new JikofutanShomeishoParameter();
         boolean is自己負担 = KEY_自己負担額計算括からの情報を元に作成RAD.equals(div.getRadJikoFutangaku().getSelectedKey());
         boolean is国保連 = KEY_国保連からの情報を元に作成RAD.equals(div.getRadJikoFutangaku().getSelectedKey());
-        param.set開始申請年月日((RString.isNullOrEmpty(div.getTxtShinseiDate().getFromValue().wareki().toDateString()) || is国保連)
+        param.set開始申請年月日((is国保連 || RString.isNullOrEmpty(div.getTxtShinseiDate().getFromValue().wareki().toDateString()))
                 ? FlexibleDate.EMPTY : new FlexibleDate(div.getTxtShinseiDate().getFromValue().toString()));
-        param.set終了申請年月日((RString.isNullOrEmpty(div.getTxtShinseiDate().getToValue().wareki().toDateString()) || is国保連)
+        param.set終了申請年月日((is国保連 || RString.isNullOrEmpty(div.getTxtShinseiDate().getToValue().wareki().toDateString()))
                 ? FlexibleDate.EMPTY : new FlexibleDate(div.getTxtShinseiDate().getToValue().toString()));
-        param.set受取年月((RString.isNullOrEmpty(div.getTxtUketoriDate().getValue().wareki().toDateString()) || is自己負担)
+        param.set受取年月((is自己負担 || RString.isNullOrEmpty(div.getTxtUketoriDate().getValue().wareki().toDateString()))
                 ? FlexibleDate.EMPTY : new FlexibleDate(div.getTxtUketoriDate().getValue().toString()));
         param.set印書(KaigoGassan_JikoFutanShomeisho_Insho.toValue(div.getDdlInsho().getSelectedKey()));
         param.set発行日(RString.isNullOrEmpty(div.getTxtHakkoDate().getValue().wareki().toDateString())
