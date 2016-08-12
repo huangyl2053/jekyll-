@@ -56,7 +56,7 @@ public class NenjiRiyoshaFutanWariaiHantei {
                 SubGyomuCode.DBB介護賦課).toString());
         div.getPanelAll().getTxtNendo().setValue(new RDate(年度.toString()));
         if (年度.isBeforeOrEquals(TZOF) && !ResponseHolder.isReRequest()) {
-            throw new ApplicationException(DbcErrorMessages.年次判定処理不可.toString());
+            throw new ApplicationException(DbcErrorMessages.年次判定処理不可.getMessage());
 
         }
         RYear 年次負担割合処理済年度 = new RYear(DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理済年度, 現在時刻,
