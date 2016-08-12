@@ -35,7 +35,7 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
 
     private final ShikyuketteituchishoSakuseiJyokenDiv div;
     private static final RString 高額サービス費支給決定通知書作成メニューID = new RString("DBCMN43002");
-    private static final RString 高額総合事業サービス費支給決定通知書メニューID = new RString("DBCMN43005");
+    private static final RString 高額総合事業サービス費支給決定通知書メニューID = new RString("DBCMNL3002");
     private static final RString 高額サービス費支給決定通知書作成帳票ID = new RString("DBC100007_KogakuKetteiTsuchiSho");
     private static final RString 高額総合事業サービス費支給決定通知書帳票ID = new RString("DBC100061_JigyoKogakuKetteiTsuchisho");
     private static final RString 処理枝番_01 = new RString("01");

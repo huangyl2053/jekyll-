@@ -81,7 +81,7 @@ public class JikoFutangakuHoseiHandler {
                 .setValue(事業高額合算自己負担額補正保持Entity.get変更後_補正後_実際の自己負担額_4月分());
         div.getJikoFutangakuHosei2a().getTxtJissaiJikofutangakuYoku5GatsuGo()
                 .setValue(事業高額合算自己負担額補正保持Entity.get変更後_補正後_実際の自己負担額_5月分());
-        div.getJikoFutangakuHosei2a().getTxtJissaiJikofutangakuYoku6GatsuGo()
+        div.getJikoFutangakuHosei2a().getTxtJissaiJikofutangakuYoku6GatsuMae()
                 .setValue(事業高額合算自己負担額補正保持Entity.get変更後_補正後_実際の自己負担額_6月分());
         div.getJikoFutangakuHosei2a().getTxtJissaiJikofutangakuYoku7GatsuGo()
                 .setValue(事業高額合算自己負担額補正保持Entity.get変更後_補正後_実際の自己負担額_7月分());
@@ -189,7 +189,7 @@ public class JikoFutangakuHoseiHandler {
                 .setValue(事業高額合算自己負担額補正保持Entity.get補正前_実際の自己負担額_4月分());
         div.getJikoFutangakuHosei2a().getTxtJissaiJikofutangakuYoku5GatsuMae()
                 .setValue(事業高額合算自己負担額補正保持Entity.get補正前_実際の自己負担額_5月分());
-        div.getJikoFutangakuHosei2a().getTxtJissaiJikofutangakuYoku6GatsuMae()
+        div.getJikoFutangakuHosei2a().getTxtJissaiJikofutangakuYoku6GatsuGo()
                 .setValue(事業高額合算自己負担額補正保持Entity.get補正前_実際の自己負担額_6月分());
         div.getJikoFutangakuHosei2a().getTxtJissaiJikofutangakuYoku7GatsuMae()
                 .setValue(事業高額合算自己負担額補正保持Entity.get補正前_実際の自己負担額_7月分());

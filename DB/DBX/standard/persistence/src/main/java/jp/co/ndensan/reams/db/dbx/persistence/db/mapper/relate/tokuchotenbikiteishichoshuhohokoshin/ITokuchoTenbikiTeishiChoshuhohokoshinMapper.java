@@ -7,7 +7,8 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.tokuchotenbikite
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.dbx001001.TokuchoTenbikiTeishiMyBatisParameter;
-import jp.co.ndensan.reams.db.dbx.entity.db.relate.tokuchotenbikiteishichoshuhohokoshin.TokuchoTenbikiTeishiChoshuhohokoshinEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.relate.tokuchotenbikiteishichoshuhohokoshin.ChoshuhohokoshinEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.relate.tokuchotenbikiteishichoshuhohokoshin.TokuchoTenbikiTeishiEntity;
 
 /**
  * ITokuchoTenbikiTeishiChoshuhohokoshinMapperのインターフェースクラスです。
@@ -17,10 +18,20 @@ import jp.co.ndensan.reams.db.dbx.entity.db.relate.tokuchotenbikiteishichoshuhoh
 public interface ITokuchoTenbikiTeishiChoshuhohokoshinMapper {
 
     /**
-     * getResultsのメソドです。
+     * getHihokenshaNosのメソドです。
      *
      * @param param TokuchoTenbikiTeishiMyBatisParameter
-     * @return List<TokuchoTenbikiTeishiChoshuhohokoshinEntity>
+     * @return List<TokuchoTenbikiTeishiEntity>
+     *
      */
-    List<TokuchoTenbikiTeishiChoshuhohokoshinEntity> getResults(TokuchoTenbikiTeishiMyBatisParameter param);
+    List<TokuchoTenbikiTeishiEntity> getHihokenshaNos(TokuchoTenbikiTeishiMyBatisParameter param);
+
+    /**
+     * getChoshoHohosのメソドです。
+     *
+     * @param param TokuchoTenbikiTeishiMyBatisParameter
+     * @return List<ChoshuhohokoshinEntity>
+     *
+     */
+    List<ChoshuhohokoshinEntity> getChoshoHohos(TokuchoTenbikiTeishiMyBatisParameter param);
 }

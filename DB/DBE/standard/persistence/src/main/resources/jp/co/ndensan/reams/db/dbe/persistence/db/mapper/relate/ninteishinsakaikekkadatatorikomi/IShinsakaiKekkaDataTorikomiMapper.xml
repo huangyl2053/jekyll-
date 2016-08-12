@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 介護認定審査会審査結果データ取込み（モバイル）用XMLです。 -->
+<!-- @reamsid_L DBE-1841-020 xuyongchao -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteishinsakaikekkadatatorikomi.IShinsakaiKekkaDataTorikomiMapper">
+
+    <select resultOrdered="true" id="getShinsakaiWariateIinJoho" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomi.TmpNinteiShinsakaiWariateIinJohoItijiEntity" fetchSize="500">
+        SELECT 
+            *
+        FROM 
+            "DbT5503Temp"
+    </select>
+    
+    <select resultOrdered="true" id="getNijiHanteikekkaTourokuJoho" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomi.TmpNijiHanteikekkaTourokuyoDataItijiEntity" fetchSize="500">
+        SELECT 
+            *
+        FROM 
+            "DbT5510Temp"
+    </select>
+    
+    <select resultOrdered="true" id="getIchiGojiHanteiKekka" 
+            resultType="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5510IchiGojiHanteiKekkaJohoEntity" fetchSize="500">
+        SELECT 
+            *
+        FROM 
+            rgdb."DbT5510IchiGojiHanteiKekkaJoho" AS DbT5510
+        WHERE 
+            DbT5510."shinseishoKanriNo" = #{申請書管理番号}
+    </select>
+    
+    <select resultOrdered="true" id="getShinsakaiWariateIin" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5503ShinsakaiWariateIinJohoEntity" fetchSize="500">
+        SELECT 
+            *
+        FROM 
+            rgdb."DbT5503ShinsakaiWariateIinJoho" AS DbT5503
+        WHERE 
+            DbT5503."shinsakaiKaisaiNo" = #{介護認定審査会開催番号}
+        AND DbT5503."shinsakaiIinCode" = #{介護認定審査会委員コード}
+    </select>
+    
+    <select resultOrdered="true" id="getNinteiKekkan"  
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity" fetchSize="500">
+        SELECT 
+            *
+        FROM 
+            rgdb."DbT5102NinteiKekkaJoho" AS DbT5102
+        WHERE 
+             DbT5102."shinseishoKanriNo" = #{申請書管理番号}
+    </select>
+    
+    <select resultOrdered="true" id="getNinteiKanryo" 
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity" fetchSize="500">
+        SELECT 
+            *
+        FROM 
+            rgdb."DbT5105NinteiKanryoJoho" AS DbT5105
+        WHERE 
+             DbT5105."shinseishoKanriNo" = #{申請書管理番号}
+    </select>
+    
+    <select resultOrdered="true" id="getShinsakaiWariateJoho"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiMybatisParameter"   
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity" fetchSize="500">
+        SELECT 
+            DbT5502."shinsakaiKaisaiNo",
+            DbT5502."shinseishoKanriNo",
+            DbT5502."shinsakaiShiryoSakuseiYMD"
+        FROM 
+            rgdb."DbT5502ShinsakaiWariateJoho" AS DbT5502
+        WHERE 
+             DbT5502."shinseishoKanriNo" = #{申請書管理番号}
+        AND  DbT5502."shinsakaiKaisaiNo" = #{介護認定審査会開催番号}
+    </select>
+</mapper>

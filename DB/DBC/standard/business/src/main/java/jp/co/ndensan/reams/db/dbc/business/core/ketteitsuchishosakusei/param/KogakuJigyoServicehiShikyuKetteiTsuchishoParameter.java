@@ -32,7 +32,6 @@ public class KogakuJigyoServicehiShikyuKetteiTsuchishoParameter {
     private RDate 決定日;
     private RString 利用者向け決定通知書フラグ;
     private RString 受領委任者向け決定通知書フラグ;
-    private RString 支払方法;
     private RDate 振込予定日;
     private RString 支払場所;
     private RDate 支払期間From;

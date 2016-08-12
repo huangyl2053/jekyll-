@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBB1110001_ShotokujohoIchiranhyoSakuseiFlow extends BatchFlowBase<ShotokujohoIchiranhyoSakuseiBatchParameter> {
 
     private static final ReportId 帳票ID = new ReportId("DBB200008_KaigoHokenShotokuJohoIchiran");
+    private static final RString INDEX_0 = new RString("0");
     private static final RString INDEX_111 = new RString("111");
     private static final RString INDEX_112 = new RString("112");
     private static final RString INDEX_120 = new RString("120");
@@ -69,7 +70,10 @@ public class DBB1110001_ShotokujohoIchiranhyoSakuseiFlow extends BatchFlowBase<S
             executeStep(所得情報一覧表のデータ取得_広域);
         }
         executeStep(介護保険所得情報一覧表出力);
-        executeStep(処理日付管理マスタを登録);
+        RString flag = getResult(RString.class, new RString(介護保険所得情報一覧表出力), PrtKaigoHokenShotokuJohoIchiranProcess.REPORT_FLAG);
+        if (!INDEX_0.equals(flag)) {
+            executeStep(処理日付管理マスタを登録);
+        }
     }
 
     /**
@@ -80,6 +84,7 @@ public class DBB1110001_ShotokujohoIchiranhyoSakuseiFlow extends BatchFlowBase<S
     @Step(所得情報一覧表のデータ取得_単一)
     protected IBatchFlowCommand tanitsuShichosonShotokuIchiarnProcess() {
         ShotokujohoIchiranhyoSakuseiProcessParameter parameter = getParameter().toProcessParameter();
+        parameter.set出力順(出力順);
         requireNonNull(parameter.get処理年度(), UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_処理年度.toString()));
         requireNonNull(parameter.getチェックボックス(), UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_抽出対象チックボックス.toString()));
         requireNonNull(parameter.getラジオボタン(), UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_抽出対象ラジオボタン.toString()));
@@ -97,6 +102,7 @@ public class DBB1110001_ShotokujohoIchiranhyoSakuseiFlow extends BatchFlowBase<S
     @Step(所得情報一覧表のデータ取得_広域)
     protected IBatchFlowCommand koikiShichosonShotokuIchiarnProcess() {
         ShotokujohoIchiranhyoSakuseiProcessParameter parameter = getParameter().toProcessParameter();
+        parameter.set出力順(出力順);
         requireNonNull(parameter.get処理年度(), UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_処理年度.toString()));
         requireNonNull(parameter.getチェックボックス(), UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_抽出対象チックボックス.toString()));
         requireNonNull(parameter.getラジオボタン(), UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_抽出対象ラジオボタン.toString()));

@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -196,6 +197,7 @@ public class MenjoKaijoSaiTennyuHandler {
         builder.setShiharaiHohoHenkoGengaku(shiharaiHohoHenkoGengaku.createBuilderForEdit()
                 .set確定減額期間終了年月日(div.getTxtKonkaiKikanShuryoYMD().getValue())
                 .set確定減額期間開始年月日(div.getTxtKonkaiKikanKaishiYMD().getValue())
+                .setState(EntityDataState.Modified)
                 .build());
         ViewStateHolder.put(免除解除再転入ダイアロググキー.支払方法変更管理業務概念, 支払方法変更管理業務概念);
     }

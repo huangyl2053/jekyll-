@@ -86,6 +86,12 @@ public class ShogaishaKojoTaishoshaNinteishoHakkoPanel {
         return response;
     }
 
+    /**
+     * 「連絡先」発行するボタンボタンを押した後のバリデーションする。
+     *
+     * @param div ShogaishaKojoTaishoshaNinteishoHakkoPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<ShogaishaKojoTaishoshaNinteishoHakkoPanelDiv> onClick_btnReturnToSearch(ShogaishaKojoTaishoshaNinteishoHakkoPanelDiv div) {
         return ResponseData.of(div).forwardWithEventName(検索に戻る).respond();
     }

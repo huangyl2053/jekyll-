@@ -26,6 +26,16 @@ public enum ReportIdDBC {
     DBC100011_償還分(new ReportId("DBC100011_KogakuOshiraseTsuchiShoTeshutsuKigenAriJidoShokan"),
             new RString("高額サービス給付のお知らせ通知書（自動償還分）（提出期限あり）")),
     /**
+     * 高額サービス給付のお知らせ通知書（初回申請分）（提出期限なし）
+     */
+    DBC100012_申請分(new ReportId("DBC100012_KogakuOshiraseTsuchiTeshutsuKigenNashiShoShokai"),
+            new RString("高額サービス給付のお知らせ通知書（初回申請分）（提出期限なし）")),
+    /**
+     * 高額サービス給付のお知らせ通知書（自動償還分）（提出期限なし）
+     */
+    DBC100012_償還分(new ReportId("DBC100012_KogakuOshiraseTsuchiShoTeshutsuKigenNashiJidoShokan"),
+            new RString("高額サービス給付のお知らせ通知書（自動償還分）（提出期限なし）")),
+    /**
      * 総合事業分自己負担額計算結果一覧表
      */
     DBC200203(new ReportId("DBC200203_GassanJigyobunJikofutangakuKeisanKekkaIchiran"), new RString("総合事業分自己負担額計算結果一覧表")),
@@ -57,6 +67,22 @@ public enum ReportIdDBC {
      * 負担割合証（連帳　横）
      */
     DBC100067(new ReportId("DBC100067_FutanWariaiShoRenchoYoko"), new RString("負担割合証（連帳　横）")),
+    /**
+     * 高額介護（予防）サービス費支給申請書
+     */
+    DBC100068(new ReportId("DBC100068_KogakuShikyuShinseisho"), new RString("高額介護（予防）サービス費支給申請書")),
+    /**
+     * 高額介護（予防）サービス費支給申請書（ゆうちょ銀行）
+     */
+    DBC100069(new ReportId("DBC100069_KogakuShikyuShinseishoYucho"), new RString("高額介護（予防）サービス費支給申請書（ゆうちょ銀行）")),
+    /**
+     * 介護保険高額総合事業サービス費支給申請書
+     */
+    DBC100070(new ReportId("DBC100070_KogakuJigyoShikyuShinseisho"), new RString("介護保険高額総合事業サービス費支給申請書")),
+    /**
+     * 高額総合事業サービス費給付お知らせ通知書
+     */
+    DBC100073(new ReportId("DBC100073_KogakuJigyoOshiraseTsuchishoKigenNashi"), new RString("高額総合事業サービス費給付お知らせ通知書")),
     /**
      * 基準収入額適用決定通知書
      */
@@ -207,7 +233,11 @@ public enum ReportIdDBC {
     /**
      * 帳票設計_DBC200068_総合事業費（経過措置）請求額通知書帳票ＩＤです。
      */
-    DBC200068(new ReportId("DBC200068_SogojigyohiSeikyugakuTsuchishoKeikaSochi"), new RString("総合事業費（経過措置）請求額通知書"));
+    DBC200068(new ReportId("DBC200068_SogojigyohiSeikyugakuTsuchishoKeikaSochi"), new RString("総合事業費（経過措置）請求額通知書")),
+    /**
+     * 介護給付費等請求額通知書帳票ＩＤです。
+     */
+    DBC120230(new ReportId("DBC200066_SeikyugakuTsuchisho"), new RString("介護給付費等請求額通知書"));
 
     private final ReportId reportId;
     private final RString reportName;

@@ -61,7 +61,7 @@ public class HoshushiharaiJumbiIkenCsvProcess extends BatchProcessBase<Hoshushih
     private int kinkaku = 0;
     private static final int INT_ONE = 110;
     private static final int INT_NINE = 119;
-    private final int maxKeepVersions = 1;
+    private static final int maxKeepVersions = 1;
     private OutputParameter<RString> outSharedFileName;
     private OutputParameter<RDateTime> outSharedFileID;
 
@@ -73,7 +73,7 @@ public class HoshushiharaiJumbiIkenCsvProcess extends BatchProcessBase<Hoshushih
         outSharedFileName = new OutputParameter<>();
         outSharedFileID = new OutputParameter<>();
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("HoshuShiharaiChosa.DAT"));
+        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("HoshuShiharaiShujii.DAT"));
 
     }
 
@@ -90,7 +90,7 @@ public class HoshushiharaiJumbiIkenCsvProcess extends BatchProcessBase<Hoshushih
     @Override
     protected void process(HoshushiharaiJumbiPanelBatchRelateEntity entity) {
         count++;
-        kinkaku = kinkaku + entity.getChosaItakuryo();
+        kinkaku = kinkaku + entity.getIkenshoSakuseiryo();
         HoshushiharaiJumbiPanelBusiness business = new HoshushiharaiJumbiPanelBusiness();
         List<RString> 業務固有キー = new ArrayList<>();
         業務固有キー.add(entity.getShujiiIryoKikanCode());
@@ -100,7 +100,7 @@ public class HoshushiharaiJumbiIkenCsvProcess extends BatchProcessBase<Hoshushih
 
     @Override
     protected void afterExecute() {
-        FilesystemName ファイル名称 = new FilesystemName(new RString("HoshuShiharaiChosa.DAT"));
+        FilesystemName ファイル名称 = new FilesystemName(new RString("HoshuShiharaiShujii.DAT"));
         setSharedFile(ファイル名称);
         RStringBuilder builder = new RStringBuilder();
         builder.append(new RString("8"));
@@ -154,7 +154,7 @@ public class HoshushiharaiJumbiIkenCsvProcess extends BatchProcessBase<Hoshushih
                 association.getLasdecCode_().value(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                new RString("HoshuShiharaiChosa.DAT"),
+                new RString("HoshuShiharaiShujii.DAT"),
                 EUC_ENTITY_ID.toRString(),
                 new HoshushiharaiJumbiPanelBusiness().get出力件数(new Decimal(batchsimplewriter.getCount())),
                 new HoshushiharaiJumbiPanelBusiness().get出力条件(processParameter));

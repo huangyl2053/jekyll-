@@ -5,7 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbx.batchcontroller.flow.dbx001001;
 
-import jp.co.ndensan.reams.db.dbx.batchcontroller.step.dbx001001.TokuchoTembikiChoshuhohoKoshinProcess;
+import jp.co.ndensan.reams.db.dbx.batchcontroller.step.dbx001001.ChoshuhohoKoshinProcess;
+import jp.co.ndensan.reams.db.dbx.batchcontroller.step.dbx001001.TokuchoTembikiProcess;
 import jp.co.ndensan.reams.db.dbx.definition.batchprm.dbx001001.DBX001001_TokuchoTembikiChoshuhohoKoshinParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -24,18 +25,28 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 public class DBX001001_TokuchoTembikiChoshuhohoKoshinFlow
         extends BatchFlowBase<DBX001001_TokuchoTembikiChoshuhohoKoshinParameter> {
 
-    private static final String HIHOKENJA_SHUTOKU = "tokuchoTembikiChoshuhohoKoshinProcess";
+    private static final String HIHOKENJA_SHUTOKU = "tokuchoTembikiProcess";
+    private static final String CHOSHUHOHOKOSHIN = "choshuhohoKoshinProcess";
 
     @Override
     protected void defineFlow() {
         executeStep(HIHOKENJA_SHUTOKU);
+        executeStep(CHOSHUHOHOKOSHIN);
     }
 
     @Step(HIHOKENJA_SHUTOKU)
-    IBatchFlowCommand tokuchoTembikiChoshuhohoKoshinProcess() {
+    IBatchFlowCommand tokuchoTembikiProcess() {
         RString 日付関連調定年度 = BusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-        return loopBatch(TokuchoTembikiChoshuhohoKoshinProcess.class).arguments(
+        return loopBatch(TokuchoTembikiProcess.class).arguments(
+                getParameter().toProcessParameter(日付関連調定年度)).define();
+    }
+
+    @Step(CHOSHUHOHOKOSHIN)
+    IBatchFlowCommand choshuhohoKoshinProcess() {
+        RString 日付関連調定年度 = BusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
+                RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        return loopBatch(ChoshuhohoKoshinProcess.class).arguments(
                 getParameter().toProcessParameter(日付関連調定年度)).define();
     }
 }

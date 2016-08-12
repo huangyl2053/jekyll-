@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaNinchishoKasanCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -394,10 +393,10 @@ public class JimuTuikaSiryoBusiness {
     private RString get要介護認定一次判定結果(Code 判定結果コード, Code 認知症加算コード) {
         RStringBuilder 判定結果 = new RStringBuilder();
         判定結果.append(IchijiHanteiKekkaCode09.toValue(判定結果コード.getColumnValue()).get名称()).toRString();
-        if (!判定結果コード.equals(認知症加算コード)) {
-            判定結果.append("→");
-            判定結果.append(IchijiHanteiKekkaNinchishoKasanCode.toValue(認知症加算コード.value()).get名称());
-        }
+//        if (!判定結果コード.equals(認知症加算コード)) {
+//            判定結果.append("→");
+//            判定結果.append(IchijiHanteiKekkaNinchishoKasanCode.toValue(認知症加算コード.value()).get名称());
+//        }
         return 判定結果.toRString();
     }
 

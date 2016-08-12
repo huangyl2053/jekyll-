@@ -179,7 +179,7 @@ public class FutanWariaisho {
         KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
         if (定数_事務広域.equals(導入形態コード) || 定数_認定広域.equals(導入形態コード)) {
             //TODO QA#1175
-            DbV1001HihokenshaDaichoEntity entity = dac.get最新の被保険者台帳情報(被保険者番号);
+            DbV1001HihokenshaDaichoEntity entity = dac.get被保険者台帳(被保険者番号);
             SearchResult<ShichosonCodeYoriShichoson> shichoson = null;
             if (entity.getKoikinaiTokureiSochimotoShichosonCode() == null) {
                 shichoson = finder.shichosonCodeYoriShichosonJoho(entity.getShichosonCode());

@@ -818,7 +818,8 @@ public class IchijiSashitome1GoHandler {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(一号一時差止ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         ShiharaiHohoHenkoBuilder builder = 支払方法変更管理業務概念.createBuilderForEdit();
         builder.set差止対象フラグ(false)
-                .set差止対象解除年月日(div.getTxtSashitomeKaijoYMD().getValue());
+                .set差止対象解除年月日(div.getTxtSashitomeKaijoYMD().getValue())
+                .setState(EntityDataState.Modified);
         ViewStateHolder.put(一号一時差止ダイアロググキー.支払方法変更管理業務概念, builder.build());
     }
 
@@ -828,7 +829,9 @@ public class IchijiSashitome1GoHandler {
         for (ShiharaiHohoHenkoSashitome shiharaiHohoHenkoSashitome : 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList()) {
             builder.setShiharaiHohoHenkoSashitome(shiharaiHohoHenkoSashitome.createBuilderForEdit()
                     .set差止決定年月日(div.getTxtSashitomeTorokuYMD().getValue())
-                    .set差止納付期限(div.getTxtSashitomeNofuKigenYMD().getValue()).build());
+                    .set差止納付期限(div.getTxtSashitomeNofuKigenYMD().getValue())
+                    .setState(EntityDataState.Modified).build())
+                    .setState(EntityDataState.Modified);
         }
         ViewStateHolder.put(一号一時差止ダイアロググキー.支払方法変更管理業務概念, builder.build());
     }
@@ -842,7 +845,9 @@ public class IchijiSashitome1GoHandler {
                     .set差止通知書発行年月日(FlexibleDate.EMPTY)
                     .set差止通知書再発行フラグ(false)
                     .set差止控除番号(RString.EMPTY)
-                    .set差止解除年月日(div.getTxtSashitomeKaijoYMD().getValue()).build());
+                    .set差止解除年月日(div.getTxtSashitomeKaijoYMD().getValue())
+                    .setState(EntityDataState.Modified).build())
+                    .setState(EntityDataState.Modified);
         }
         ViewStateHolder.put(一号一時差止ダイアロググキー.支払方法変更管理業務概念, builder.build());
     }
@@ -853,7 +858,9 @@ public class IchijiSashitome1GoHandler {
         for (ShiharaiHohoHenkoSashitome shiharaiHohoHenkoSashitome : 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList()) {
             if (shiharaiHohoHenkoSashitome.get情報分類区分().equals(ShiharaiHenkoJohoBunruiKubun.差止情報.getコード())) {
                 builder.setShiharaiHohoHenkoSashitome(shiharaiHohoHenkoSashitome.createBuilderForEdit()
-                        .set論理削除フラグ(true).build());
+                        .set論理削除フラグ(true)
+                        .setState(EntityDataState.Modified).build())
+                        .setState(EntityDataState.Modified);
             }
         }
         ViewStateHolder.put(一号一時差止ダイアロググキー.支払方法変更管理業務概念, builder.build());
@@ -908,7 +915,9 @@ public class IchijiSashitome1GoHandler {
             builder.setShiharaiHohoHenkoSashitome(shiharaiHohoHenkoSashitome.createBuilderForEdit()
                     .set差止控除番号(div.getDdlTorokuKojoNo().getSelectedKey())
                     .set控除決定年月日(FlexibleDate.MAX)
-                    .set控除被保険者証提出期限(FlexibleDate.MAX).build());
+                    .set控除被保険者証提出期限(FlexibleDate.MAX)
+                    .setState(EntityDataState.Modified).build())
+                    .setState(EntityDataState.Modified);
         }
         ViewStateHolder.put(一号一時差止ダイアロググキー.支払方法変更管理業務概念, builder.build());
     }

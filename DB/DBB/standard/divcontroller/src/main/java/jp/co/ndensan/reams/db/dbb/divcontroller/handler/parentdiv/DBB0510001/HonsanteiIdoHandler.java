@@ -118,6 +118,7 @@ public class HonsanteiIdoHandler {
     private static final RString 本算定異動現年度通知書一括発行_2月 = new RString("DBB05100033");
     private static final RString 本算定異動現年度通知書一括発行_通常月 = new RString("DBB0510003");
     private static final RString 口座対象者プリント条件KEY = new RString("口座対象者プリント条件");
+    private static final RString すべて選択 = new RString("（すべて選択）");
 
     /**
      * コンストラクタです。
@@ -136,9 +137,9 @@ public class HonsanteiIdoHandler {
      */
     public boolean initialize(FlexibleYear 調定年度) {
 
-        // TODO
+        // TODO TEST
 //        RDate date = RDate.getNowDate();
-        RDate date = new RDate("20160929");
+        RDate date = new RDate("20161129");
         int 境界日付 = date.getLastDay() - Integer.valueOf(DbBusinessConfig.get(
                 ConfigNameDBB.日付関連_更正月判定日数, date, SubGyomuCode.DBB介護賦課).toString());
         int 日 = date.getDayValue();
@@ -556,7 +557,11 @@ public class HonsanteiIdoHandler {
         List<RString> 変更_チェックボックス = div.getChkHenkoTsuchi().getSelectedKeys();
         if (変更_チェックボックス != null && !変更_チェックボックス.isEmpty()) {
             paramter.set変更_チェックボックス(変更_チェックボックス.get(NUM_0));
-            paramter.set変更_対象者(div.getChkHenkoTsuchiTaishosha().getSelectedValues().get(NUM_0));
+            if (div.getChkHenkoTsuchiTaishosha().getSelectedValues().size() == NUM_2) {
+                paramter.set変更_対象者(すべて選択);
+            } else {
+                paramter.set変更_対象者(div.getChkHenkoTsuchiTaishosha().getSelectedValues().get(NUM_0));
+            }
             paramter.set変更_文書番号(div.getCcdBunshoBangoHenkoTsuchi().get文書番号());
             RDate 変更_発行日 = div.getTxtHenkoTsuchiHakkoYMD().getValue();
             if (変更_発行日 != null) {
@@ -565,7 +570,11 @@ public class HonsanteiIdoHandler {
         }
         List<RString> 納入_対象者 = div.getChkNotsuTaishoSha().getSelectedValues();
         if (納入_対象者 != null && !納入_対象者.isEmpty()) {
-            paramter.set納入_対象者(納入_対象者.get(NUM_0));
+            if (納入_対象者.size() == NUM_2) {
+                paramter.set納入_対象者(すべて選択);
+            } else {
+                paramter.set納入_対象者(納入_対象者.get(NUM_0));
+            }
         }
         paramter.set納入_口座振替者(div.getRadNotsuKozaShutsuryokuYoshiki().getSelectedValue());
         RDate 納入_発行日 = div.getTxtNotsuHakkoYMD().getValue();

@@ -491,7 +491,7 @@ public class HoshuMasutaKoshin {
                         row.getShuryoYM().getValue().getYearMonth());
                 審査会委員別単価マスタ更新情報.add(新規情報.createBuilderForEdit().
                         set単価(row.getTanka().getValue()).
-                        set単価(row.getSonotaTanka().getValue()).
+                        setその他単価(row.getSonotaTanka().getValue()).
                         build());
             } else if (更新モード.equals(row.getColumnState())) {
                 ShinsakaiIinBetsuTankaIdentifier 識別子 = new ShinsakaiIinBetsuTankaIdentifier(
@@ -500,7 +500,7 @@ public class HoshuMasutaKoshin {
                         row.getShuryoYM().getValue().getYearMonth());
                 審査会委員別単価マスタ更新情報.add(審査会委員別単価情報Model.get(識別子).createBuilderForEdit().
                         set単価(row.getTanka().getValue()).
-                        set単価(row.getSonotaTanka().getValue()).
+                        setその他単価(row.getSonotaTanka().getValue()).
                         build().modifiedModel());
             } else if (削除モード.equals(row.getColumnState())) {
                 ShinsakaiIinBetsuTankaIdentifier 識別子 = new ShinsakaiIinBetsuTankaIdentifier(
