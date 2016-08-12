@@ -3,43 +3,33 @@
 <!--@reamsid_L DBC-4350-080 liuxiaoyu-->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.keikakurirekiichiran.IKeikakuRirekiIchiranMapper">
     
- <select resultOrdered="true" id="select居宅給付計画届出情報"
+    <select resultOrdered="true" id="select居宅給付計画届出情報"
          resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.keikakurirekiichiran.KeikakuRirekiIchiranEnitity"
          parameterType="java.util.Map">
-    SELECT *
-     FROM     
-         (SELECT
-            'A' as "kyotakuKeikakuShurui",
-             A."hihokenshaNo"  as  "hihokenshaNo",
-             B."tekiyoKaishiYMD"  as  "tekiyoKaishiYMD",
-             B."tekiyoShuryoYMD"  as  "tekiyoShuryoYMD",
-             B."keikakuJigyoshaNo"  as  "keikakuJigyoshaNo",
-             B."itakusakiJigyoshaNo"  as  "itakusakiJigyoshaNo",
-             A."zanteiKubun"  as  "zanteiKubun"
-          FROM    rgdb."DbT3005KyotakuKeikakuTodokede"  as  A
-          INNER JOIN rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"  as  B
-          ON      A."hihokenshaNo"  = B."hihokenshaNo" 
-             and  A."rirekiNo" = B."rirekiNo"
+        SELECT *
+      FROM
+        (SELECT 'A' AS "kyotakuKeikakuShurui",
+              A."hihokenshaNo" AS "hihokenshaNo",
+              B."tekiyoKaishiYMD" AS "tekiyoKaishiYMD",
+              B."tekiyoShuryoYMD" AS "tekiyoShuryoYMD",
+              B."keikakuJigyoshaNo" AS "keikakuJigyoshaNo",
+              B."itakusakiJigyoshaNo" AS "itakusakiJigyoshaNo",
+              A."zanteiKubun" AS "zanteiKubun"
+         FROM rgdb."DbT3005KyotakuKeikakuTodokede" AS A
+         INNER JOIN rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS B ON A."hihokenshaNo" = B."hihokenshaNo"
+         AND A."rirekiNo" = B."rirekiNo"
+         UNION SELECT 'B' AS "kyotakuKeikakuShurui",
+                      A2."hihokenshaNo" AS "hihokenshaNo",
+                      C."tekiyoKaishiYMD" AS "tekiyoKaishiYMD",
+                      C."tekiyoShuryoYMD" AS "tekiyoShuryoYMD",
+                      '' AS "keikakuJigyoshaNo",
+                      '' AS "itakusakiJigyoshaNo",
+                      A2."zanteiKubun" AS "zanteiKubun"
+         FROM rgdb."DbT3005KyotakuKeikakuTodokede" AS A2
+         INNER JOIN rgdb."DbT3007KyotakuKeikakuJikoSakusei" AS C ON A2."hihokenshaNo" = C."hihokenshaNo"
+         AND A2."rirekiNo" = C."rirekiNo" ) AS D
+      WHERE D."hihokenshaNo" = #{被保険者番号}
+    ORDER BY D."tekiyoKaishiYMD" DESC
      
-          UNION
-     
-          SELECT 
-             'B'  as  "kyotakuKeikakuShurui",
-              A2."hihokenshaNo"  as  "hihokenshaNo",
-              C."tekiyoKaishiYMD"  as  "tekiyoKaishiYMD",
-              C."tekiyoShuryoYMD"  as  "tekiyoShuryoYMD",
-              ''   as  "keikakuJigyoshaNo",
-              ''   as  "itakusakiJigyoshaNo",
-              A2."zanteiKubun"  as  "zanteiKubun"
-          FROM  rgdb."DbT3005KyotakuKeikakuTodokede"  as  A2
-          INNER JOIN rgdb."DbT3007KyotakuKeikakuJikoSakusei"  as  C
-          ON  A2."hihokenshaNo" = C."hihokenshaNo" 
-          and  A2."rirekiNo" = C."rirekiNo"
-          ) AS D
-     WHERE
-          D."hihokenshaNo" =  #{被保険者番号}
-     ORDER BY
-          D."tekiyoKaishiYMD"  DESC  
-     
-</select>
+    </select>
 </mapper>
