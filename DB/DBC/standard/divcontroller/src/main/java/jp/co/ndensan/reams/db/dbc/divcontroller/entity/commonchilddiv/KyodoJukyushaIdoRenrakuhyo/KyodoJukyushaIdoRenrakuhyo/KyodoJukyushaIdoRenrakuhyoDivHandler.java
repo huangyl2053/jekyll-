@@ -122,6 +122,7 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
                 set初期値_照会(entity);
             }
         }
+        setRequired();
         return entity;
     }
 
@@ -513,6 +514,7 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
                 div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().setDisabled(false);
             }
         }
+        setRequired();
     }
 
     /**
@@ -829,5 +831,27 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
 
     private KyodoJukyushaIdoRenrakuhyoDivValidationHandler getValidationHandler(KyodoJukyushaIdoRenrakuhyoDiv div) {
         return new KyodoJukyushaIdoRenrakuhyoDivValidationHandler(div);
+    }
+
+    private void setRequired() {
+        if (div.getKyodoJukyushaIdoRenrakuhyoKihonPanel().isDisabled()) {
+            div.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtKihonIdoYMD().setRequired(false);
+        } else {
+            div.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtKihonIdoYMD().setRequired(true);
+        }
+        if (div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().isDisabled()) {
+            div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().getTxtShokanIdoYMD().setRequired(false);
+        } else {
+            div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().getTxtShokanIdoYMD().setRequired(true);
+        }
+        if (div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().isDisabled()) {
+            div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getTxtKogakuIdoYMD().setRequired(false);
+            div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getDdlSetaiShotokuKubun().setRequired(false);
+            div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getDdlShotokuKubun().setRequired(false);
+        } else {
+            div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getTxtKogakuIdoYMD().setRequired(true);
+            div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getDdlSetaiShotokuKubun().setRequired(true);
+            div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getDdlShotokuKubun().setRequired(true);
+        }
     }
 }
