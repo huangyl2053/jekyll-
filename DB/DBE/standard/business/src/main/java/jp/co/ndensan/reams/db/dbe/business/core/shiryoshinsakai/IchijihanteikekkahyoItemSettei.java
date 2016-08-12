@@ -62,8 +62,8 @@ public class IchijihanteikekkahyoItemSettei {
     private static final Code B_09 = new Code("09B");
     private static final RString 印字する = new RString("1");
     private static final int INT_0 = 0;
-    private static final int INT_1 = 2;
-    private static final int INT_2 = 1;
+    private static final int INT_1 = 1;
+    private static final int INT_2 = 2;
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
     private static final int INT_5 = 5;
