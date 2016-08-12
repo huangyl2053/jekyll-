@@ -45,6 +45,7 @@ public class ShoriDateKanriUpdateProcess extends BatchProcessBase<DbT7022ShoriDa
 
     @Override
     protected void initialize() {
+        parameter.set市町村コード(導入団体クラス.getLasdecCode_());
         updateFlag = true;
     }
 

@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.EucFileOutputJok
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchWriter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -82,7 +81,6 @@ public class KoshinShinseishaHaakuListProcess extends BatchProcessBase<UpdateNot
     private List<PersonalData> personalDataList;
     private FileSpoolManager manager;
 
-    @BatchWriter
     private CsvWriter<KoshinShinseishaHaakuListCSVEntity> csvWriterJunitoJugo;
 
     @Override

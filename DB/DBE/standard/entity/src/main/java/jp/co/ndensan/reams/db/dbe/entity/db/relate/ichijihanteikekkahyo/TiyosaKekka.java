@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class TiyosaKekka {
 
     private RString 調査結果;
+    private RString 調査結果コード;
     private RString 段階改善フラグ;
     private RString 段階改善値;
     private RString 前回結果;

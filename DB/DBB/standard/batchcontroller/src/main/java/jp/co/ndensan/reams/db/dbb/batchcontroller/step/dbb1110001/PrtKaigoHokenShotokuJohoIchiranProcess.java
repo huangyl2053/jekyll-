@@ -61,11 +61,13 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
      */
     public static final RString REPORT_FLAG;
     private static final int INDEX_1 = 1;
-    private static final RString EUCファイル名 = new RString("KaigoHokenShotokuJohoIchiran.csv");
+    private static final RString INDEX_111 = new RString("111");
+    private static final RString INDEX_112 = new RString("112");
+    private static final RString INDEX_120 = new RString("120");
+    private static final RString EUCファイル名 = new RString("介護保険所得情報一覧表");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBB200009");
     private static final RString カンマ = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private static final RString INDEX_111 = new RString("111");
     private static final ReportId 帳票ID = new ReportId("DBB200008_KaigoHokenShotokuJohoIchiran");
     private static final RString 出力_出力条件 = new RString("出力条件");
     private static final RString 出力_導入形態コード = new RString("導入形態コード");
@@ -83,23 +85,6 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
     private static final RString 出力_コンマ = new RString(",");
     private static final RString CSV出力有無_有り = new RString("あり");
     private static final RString CSVファイル名 = new RString("KaigoHokenShotokuJohoIchiran.csv");
-    private static final RString HEADER_識別コード = new RString("識別コード");
-    private static final RString HEADER_氏名カナ = new RString("氏名カナ");
-    private static final RString HEADER_所得年度 = new RString("所得年度");
-    private static final RString HEADER_生年月日 = new RString("生年月日");
-    private static final RString HEADER_性別 = new RString("性別");
-    private static final RString HEADER_住民税課税区分減免前 = new RString("住民税課税区分減免前");
-    private static final RString HEADER_住民税課税区分減免後 = new RString("住民税課税区分減免後");
-    private static final RString HEADER_住民税 = new RString("住民税");
-    private static final RString HEADER_合計所得金額 = new RString("合計所得金額");
-    private static final RString HEADER_課税標準額 = new RString("課税標準額");
-    private static final RString HEADER_登録業務 = new RString("登録業務");
-    private static final RString HEADER_被保険者番号 = new RString("被保険者番号");
-    private static final RString HEADER_氏名 = new RString("氏名");
-    private static final RString HEADER_年齢 = new RString("年齢");
-    private static final RString HEADER_種別 = new RString("種別");
-    private static final RString HEADER_年金収入額 = new RString("年金収入額");
-    private static final RString HEADER_年金所得額 = new RString("年金所得額");
     private static final RString MAPPER_PATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db."
             + "mapper.relate.shotokujohoichiranhyosakusei.IShotokuJohoIchiranhyoSakuseiMapper");
     private static final RString SELECTALL = new RString(MAPPER_PATH + ".selectTempAll");
@@ -197,10 +182,10 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
         eucCsvWriter.close();
         List<RString> 出力条件リスト = set出力条件リスト(導入形態コード, 処理年度,
                 チェックボックス, ラジオボタン, 開始日時, 終了日時, parameter.get市町村情報リスト(), 出力順ID);
-        int 出力ページ数 = hokenShotokuJohoIchiranSourceWriter.pageCount().value();
+        int 出力ページ数 = hokenShotokuJohoIchiranSourceWriter.getPageGroupCount();
         RString 帳票名 = ReportIdDBB.DBB200008.getReportName();
         loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 出力ページ数, CSV出力有無_有り, CSVファイル名, 帳票名);
-        reportFlag.setValue(new RString(INDEX_1));
+        reportFlag.setValue(new RString(出力ページ数));
     }
 
     private List<RString> set出力条件リスト(RString 導入形態コード,
@@ -230,19 +215,22 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
         builder = new RStringBuilder();
         builder.append((FORMAT_LEFT).concat(出力_抽出対象ラジオボタン).concat(FORMAT_RIGHT).concat(ラジオボタン));
         出力条件リスト.add(builder.toRString());
-        builder = new RStringBuilder();
-        builder.append((FORMAT_LEFT).concat(出力_抽出期間開始日時).concat(FORMAT_RIGHT).concat(開始日時.toDateString()));
-        出力条件リスト.add(builder.toRString());
-        builder = new RStringBuilder();
-        builder.append((FORMAT_LEFT).concat(出力_抽出期間終了日時).concat(FORMAT_RIGHT).concat(終了日時.toDateString()));
-        出力条件リスト.add(builder.toRString());
-        builder = new RStringBuilder();
-        for (ShichosonJouhouResult result : 市町村情報リスト) {
-            builder.append((FORMAT_LEFT).concat(出力_市町村情報リスト).concat(FORMAT_RIGHT).concat(result.get市町村コード().value())
-                    .concat(出力_コンマ).concat(result.get市町村識別ID()).concat(出力_コンマ).concat(new RString(result.get開始年月日().toString()))
-                    .concat(出力_コンマ).concat(result.get開始時刻()).concat(出力_コンマ).concat(new RString(result.get終了年月日().toString()))
-                    .concat(出力_コンマ).concat(result.get終了時刻()));
+        if (INDEX_112.equals(導入形態コード) || INDEX_120.equals(導入形態コード)) {
+            builder = new RStringBuilder();
+            builder.append((FORMAT_LEFT).concat(出力_抽出期間開始日時).concat(FORMAT_RIGHT).concat(開始日時.toDateString()));
             出力条件リスト.add(builder.toRString());
+            builder = new RStringBuilder();
+            builder.append((FORMAT_LEFT).concat(出力_抽出期間終了日時).concat(FORMAT_RIGHT).concat(終了日時.toDateString()));
+            出力条件リスト.add(builder.toRString());
+        } else if (INDEX_111.equals(導入形態コード)) {
+            builder = new RStringBuilder();
+            for (ShichosonJouhouResult result : 市町村情報リスト) {
+                builder.append((FORMAT_LEFT).concat(出力_市町村情報リスト).concat(FORMAT_RIGHT).concat(result.get市町村コード().value())
+                        .concat(出力_コンマ).concat(result.get市町村識別ID()).concat(出力_コンマ).concat(new RString(result.get開始年月日().toString()))
+                        .concat(出力_コンマ).concat(result.get開始時刻()).concat(出力_コンマ).concat(new RString(result.get終了年月日().toString()))
+                        .concat(出力_コンマ).concat(result.get終了時刻()));
+                出力条件リスト.add(builder.toRString());
+            }
         }
         builder = new RStringBuilder();
         builder.append((FORMAT_LEFT).concat(出力_出力順ＩＤ).concat(FORMAT_RIGHT).concat(String.valueOf(出力順ID)));
@@ -315,25 +303,4 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
         ));
     }
 
-    private List<RString> publish本算定結果一覧表_headList() {
-        List<RString> headList = new ArrayList<>();
-        headList.add(HEADER_識別コード);
-        headList.add(HEADER_氏名カナ);
-        headList.add(HEADER_所得年度);
-        headList.add(HEADER_生年月日);
-        headList.add(HEADER_性別);
-        headList.add(HEADER_住民税課税区分減免前);
-        headList.add(HEADER_住民税課税区分減免後);
-        headList.add(HEADER_住民税);
-        headList.add(HEADER_合計所得金額);
-        headList.add(HEADER_課税標準額);
-        headList.add(HEADER_登録業務);
-        headList.add(HEADER_被保険者番号);
-        headList.add(HEADER_氏名);
-        headList.add(HEADER_年齢);
-        headList.add(HEADER_種別);
-        headList.add(HEADER_年金収入額);
-        headList.add(HEADER_年金所得額);
-        return headList;
-    }
 }

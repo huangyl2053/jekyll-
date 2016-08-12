@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3010001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sat Aug 06 14:21:15 CST 2016 
+ * Wed Aug 10 16:04:12 CST 2016 
  */
 
 
@@ -56,8 +56,6 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
     private RString jotaiAnteiseiCode;
     private RString ninchishoJiritsudoIIijoNoGaizensei;
     private RString suiteiKyufuKubunCode;
-    private RString chosahyoCount;
-    private RString ikenshoCount;
     private RString koroshoIfShikibetsuCode;
 
     public dgIchijiHanteiTaishoshaIchiran_Row() {
@@ -95,8 +93,6 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
         this.jotaiAnteiseiCode = RString.EMPTY;
         this.ninchishoJiritsudoIIijoNoGaizensei = RString.EMPTY;
         this.suiteiKyufuKubunCode = RString.EMPTY;
-        this.chosahyoCount = RString.EMPTY;
-        this.ikenshoCount = RString.EMPTY;
         this.koroshoIfShikibetsuCode = RString.EMPTY;
         this.setOriginalData("btnSyokai", btnSyokai);
         this.setOriginalData("btnSentaku", btnSentaku);
@@ -131,12 +127,10 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("jotaiAnteiseiCode", jotaiAnteiseiCode);
         this.setOriginalData("ninchishoJiritsudoIIijoNoGaizensei", ninchishoJiritsudoIIijoNoGaizensei);
         this.setOriginalData("suiteiKyufuKubunCode", suiteiKyufuKubunCode);
-        this.setOriginalData("chosahyoCount", chosahyoCount);
-        this.setOriginalData("ikenshoCount", ikenshoCount);
         this.setOriginalData("koroshoIfShikibetsuCode", koroshoIfShikibetsuCode);
     }
 
-    public dgIchijiHanteiTaishoshaIchiran_Row(ButtonDialog btnSyokai, ButtonDialog btnSentaku, RString columnState, RString hokensha, RString hihokenNo, RString hihokenshaName, TextBoxFlexibleDate shinseibi, RString shinseiKbnShin, TextBoxFlexibleDate ichijiHanteibi, RString ichijiHanteiKekka, RString ichijiHanteiKekkaNinchishoKasanCode, RString keikokuCode, TextBoxFlexibleDate chosaJissibi, TextBoxFlexibleDate ikenshoJuryobi, RString shinseishoKanriNo, RString kijunJikan, RString kijunJikanShokuji, RString kijunJikanHaisetsu, RString kijunJikanIdo, RString kijunJikanSeiketsuHoji, RString kijunJikanKansetsuCare, RString kijunJikanBPSDKanren, RString kijunJikanKinoKunren, RString kijunJikanIryoKanren, RString kijunJikanNinchishoKasan, RString chukanHyokaKomoku1gun, RString chukanHyokaKomoku2gun, RString chukanHyokaKomoku3gun, RString chukanHyokaKomoku4gun, RString chukanHyokaKomoku5gun, RString jotaiAnteiseiCode, RString ninchishoJiritsudoIIijoNoGaizensei, RString suiteiKyufuKubunCode, RString chosahyoCount, RString ikenshoCount, RString koroshoIfShikibetsuCode) {
+    public dgIchijiHanteiTaishoshaIchiran_Row(ButtonDialog btnSyokai, ButtonDialog btnSentaku, RString columnState, RString hokensha, RString hihokenNo, RString hihokenshaName, TextBoxFlexibleDate shinseibi, RString shinseiKbnShin, TextBoxFlexibleDate ichijiHanteibi, RString ichijiHanteiKekka, RString ichijiHanteiKekkaNinchishoKasanCode, RString keikokuCode, TextBoxFlexibleDate chosaJissibi, TextBoxFlexibleDate ikenshoJuryobi, RString shinseishoKanriNo, RString kijunJikan, RString kijunJikanShokuji, RString kijunJikanHaisetsu, RString kijunJikanIdo, RString kijunJikanSeiketsuHoji, RString kijunJikanKansetsuCare, RString kijunJikanBPSDKanren, RString kijunJikanKinoKunren, RString kijunJikanIryoKanren, RString kijunJikanNinchishoKasan, RString chukanHyokaKomoku1gun, RString chukanHyokaKomoku2gun, RString chukanHyokaKomoku3gun, RString chukanHyokaKomoku4gun, RString chukanHyokaKomoku5gun, RString jotaiAnteiseiCode, RString ninchishoJiritsudoIIijoNoGaizensei, RString suiteiKyufuKubunCode, RString koroshoIfShikibetsuCode) {
         super();
         this.setOriginalData("btnSyokai", btnSyokai);
         this.setOriginalData("btnSentaku", btnSentaku);
@@ -171,8 +165,6 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("jotaiAnteiseiCode", jotaiAnteiseiCode);
         this.setOriginalData("ninchishoJiritsudoIIijoNoGaizensei", ninchishoJiritsudoIIijoNoGaizensei);
         this.setOriginalData("suiteiKyufuKubunCode", suiteiKyufuKubunCode);
-        this.setOriginalData("chosahyoCount", chosahyoCount);
-        this.setOriginalData("ikenshoCount", ikenshoCount);
         this.setOriginalData("koroshoIfShikibetsuCode", koroshoIfShikibetsuCode);
         this.btnSyokai = btnSyokai;
         this.btnSentaku = btnSentaku;
@@ -207,8 +199,6 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
         this.jotaiAnteiseiCode = jotaiAnteiseiCode;
         this.ninchishoJiritsudoIIijoNoGaizensei = ninchishoJiritsudoIIijoNoGaizensei;
         this.suiteiKyufuKubunCode = suiteiKyufuKubunCode;
-        this.chosahyoCount = chosahyoCount;
-        this.ikenshoCount = ikenshoCount;
         this.koroshoIfShikibetsuCode = koroshoIfShikibetsuCode;
     }
 
@@ -342,14 +332,6 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
 
     public RString getSuiteiKyufuKubunCode() {
         return suiteiKyufuKubunCode;
-    }
-
-    public RString getChosahyoCount() {
-        return chosahyoCount;
-    }
-
-    public RString getIkenshoCount() {
-        return ikenshoCount;
     }
 
     public RString getKoroshoIfShikibetsuCode() {
@@ -519,16 +501,6 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
     public void setSuiteiKyufuKubunCode(RString suiteiKyufuKubunCode) {
         this.setOriginalData("suiteiKyufuKubunCode", suiteiKyufuKubunCode);
         this.suiteiKyufuKubunCode = suiteiKyufuKubunCode;
-    }
-
-    public void setChosahyoCount(RString chosahyoCount) {
-        this.setOriginalData("chosahyoCount", chosahyoCount);
-        this.chosahyoCount = chosahyoCount;
-    }
-
-    public void setIkenshoCount(RString ikenshoCount) {
-        this.setOriginalData("ikenshoCount", ikenshoCount);
-        this.ikenshoCount = ikenshoCount;
     }
 
     public void setKoroshoIfShikibetsuCode(RString koroshoIfShikibetsuCode) {

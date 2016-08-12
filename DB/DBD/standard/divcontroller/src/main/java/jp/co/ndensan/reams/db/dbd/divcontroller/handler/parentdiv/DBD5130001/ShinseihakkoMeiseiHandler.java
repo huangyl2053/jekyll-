@@ -184,13 +184,9 @@ public class ShinseihakkoMeiseiHandler {
     private void checkninteiKanryoJoho(NinteiShinseiJohoChild entity) {
         NinteiKanryoNinteiShinseiJohoManager manager = NinteiKanryoNinteiShinseiJohoManager.createInstance();
         ShinseiRirekiJoho shinseiRirekiJoho = manager.selectByKey(entity.get申請書管理番号());
-        if (shinseiRirekiJoho == null) {
-            setZenkaiShinseiNaiyoinfo(RString.EMPTY, RString.EMPTY, new RDate(RString.EMPTY.toString()));
-        } else {
+        if (shinseiRirekiJoho != null) {
             NinteiKanryoJoho ninteiKanryoJohoni = manager.selectByShinseishoKanriNo(shinseiRirekiJoho.get前回申請管理番号());
-            if (ninteiKanryoJohoni == null) {
-                setZenkaiShinseiNaiyoinfo(RString.EMPTY, RString.EMPTY, new RDate(RString.EMPTY.toString()));
-            } else {
+            if (ninteiKanryoJohoni != null) {
                 NinteiShinseiJohoChild ninteiShinseiJohoChildni = manager.selectByZenkaiShinseishoKanriNo(shinseiRirekiJoho.get前回申請管理番号());
                 setZenkaiShinseiNaiyoinfo(ninteiShinseiJohoChildni.get認定申請区分_法令_コード().getColumnValue(),
                         ninteiShinseiJohoChildni.get認定申請区分_申請時_コード().getColumnValue(),

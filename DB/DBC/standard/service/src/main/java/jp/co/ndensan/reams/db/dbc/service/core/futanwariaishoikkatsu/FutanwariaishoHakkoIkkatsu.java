@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.futanwariaishoikkatsu;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.futanwariaishohakko.FutanwariaishoHakkoBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.futanwariaishohakko.DBC180040_FutanwariaishoHakkoParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -28,11 +28,11 @@ public class FutanwariaishoHakkoIkkatsu {
      * @param 抽出期間開始日時 RDate
      * @param 抽出期間終了日時 RDate
      * @param 出力順 RString
-     * @return FutanwariaishoHakkoBatchParameter
+     * @return DBC180040_FutanwariaishoHakkoParameter
      */
-    public FutanwariaishoHakkoBatchParameter getBatchiParameter(FlexibleYear 年度, RDate 交付年月日, RString 発行区分,
+    public DBC180040_FutanwariaishoHakkoParameter getBatchiParameter(FlexibleYear 年度, RDate 交付年月日, RString 発行区分,
             RString 出力対象, RDateTime 抽出期間開始日時, RDateTime 抽出期間終了日時, RString 出力順) {
-        FutanwariaishoHakkoBatchParameter para = new FutanwariaishoHakkoBatchParameter();
+        DBC180040_FutanwariaishoHakkoParameter para = new DBC180040_FutanwariaishoHakkoParameter();
         para.set年度(年度);
         para.set交付年月日(交付年月日);
         para.set発行区分(発行区分);

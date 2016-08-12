@@ -22,7 +22,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class FutanwariaishoHakkoBatchParameter extends BatchParameterBase {
+public class DBC180040_FutanwariaishoHakkoParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = 1L;
 

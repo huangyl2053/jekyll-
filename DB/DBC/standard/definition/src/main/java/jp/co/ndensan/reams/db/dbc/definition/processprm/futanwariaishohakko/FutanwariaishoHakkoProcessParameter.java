@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaishohakko.Futa
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -35,6 +36,7 @@ public class FutanwariaishoHakkoProcessParameter implements IBatchProcessParamet
     private RDateTime 抽出期間終了日時;
     private RString 出力順;
     private RDateTime バッチ起動時処理日時;
+    private LasdecCode 市町村コード;
 
     private IShikibetsuTaishoPSMSearchKey searchKey;
     private IAtesakiPSMSearchKey atesakiKey;
@@ -46,6 +48,6 @@ public class FutanwariaishoHakkoProcessParameter implements IBatchProcessParamet
      */
     public FutanwariaishoHakkoMybatisParameter toMybatisParameter() {
         return new FutanwariaishoHakkoMybatisParameter(atesakiKey, 年度, 交付年月日, 発行区分, 出力対象, 抽出期間開始日時,
-                抽出期間終了日時, 出力順, searchKey);
+                抽出期間終了日時, 出力順, searchKey, 市町村コード);
     }
 }
