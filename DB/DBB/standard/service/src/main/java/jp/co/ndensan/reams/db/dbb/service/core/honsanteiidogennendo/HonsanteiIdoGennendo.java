@@ -149,6 +149,7 @@ public class HonsanteiIdoGennendo {
     private final ReportId 特徴開始通知書_仮算定 = new ReportId("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
     private final ReportId 決定通知書_変更通知書 = new ReportId("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoDaihyo");
     private final ReportId 納入通知書 = new ReportId("DBB100045_HokenryoNonyuTsuchishoDaihyo");
+    private final ReportId 本算定異動_現年度_結果一覧表 = new ReportId("DBB200015_HonsanteiIdouKekkaIchiran");
     private final RString 特徴開始者_12月 = new RString("12月特徴開始者のみ");
     private final RString 特徴開始者_2月 = new RString("2月特徴開始者のみ");
     private final RString 特徴開始者_4月 = new RString("4月特徴開始者のみ");
@@ -833,6 +834,12 @@ public class HonsanteiIdoGennendo {
                 } else {
                     resultList.add(result);
                 }
+            }
+            if (本算定異動_現年度_結果一覧表.equals(choParameter.get帳票分類ID())) {
+                result = new ChohyoResult();
+                result.set帳票分類ID(choParameter.get帳票分類ID());
+                result.set出力順ID(choParameter.get出力順ID());
+                resultList.add(result);
             }
         }
         return resultList;
