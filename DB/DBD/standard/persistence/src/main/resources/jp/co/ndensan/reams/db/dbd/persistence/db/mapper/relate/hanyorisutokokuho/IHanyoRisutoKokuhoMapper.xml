@@ -182,7 +182,7 @@
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyorisutokokuho.HanyoRisutoKokuhoMybatisParameter"
             fetchSize="500">
         WITH																								
-	最新介護事業者  AS　																					
+	最新介護事業者  AS 																					
 	(																							
 	SELECT																							
 		dbT7060."jigyoshaNo",																					
@@ -208,12 +208,10 @@
                             AND dbT7060."yukoKaishiYMD" <![CDATA[<]]> dbT7060_2."yukoKaishiYMD"																			
 		)																						
 	), 																												
-	受給者台帳枝番MAX　AS　　 																		
+	受給者台帳枝番MAX AS   																		
 	(																												
             SELECT	*  FROM  (																												
-                    SELECT																											
-                            *																										
-                            ROM_NUMBER() OVER (PARTITION BY 受給者台帳."hihokenshaNo", 受給者台帳."rirekiNo"																										
+                    SELECT * , ROW_NUMBER() OVER (PARTITION BY 受給者台帳."hihokenshaNo", 受給者台帳."rirekiNo"																										
                                      ORDER BY 枝番 DESC) AS 受給者台帳_番号																									
                     FROM																											
                             rgdb."DbT4001JukyushaDaicho" AS 受給者台帳																										
@@ -399,18 +397,19 @@
             rgdb."DbT7123KokuhoShikakuInfo" AS	国保資格情報
         INNER  JOIN																											
 			rgdb."DbV1001HihokenshaDaicho" AS  最新被保台帳																										
-			ON　 最新被保台帳."shikibetsuCode" = 国保資格情報."shikibetsuCode"																										
+			ON  最新被保台帳."shikibetsuCode" = 国保資格情報."shikibetsuCode"																										
 																													
-		INNER  JOIN																											
-			rgua."UaFt200FindShikibetsuTaisho"  AS  宛名 																					
-			ON　 宛名."shikibetsuCode" = 最新被保台帳."shikibetsuCode"																										
-																													
-		INNER  JOIN																											
-			rgua."UaFt250FindAtesaki"  AS  宛先																										
-			ON　 宛先."shikibetsuCode" = 最新被保台帳."shikibetsuCode"																				
+		INNER JOIN																											
+                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+                AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
+                ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = 最新被保台帳."shikibetsuCode"
+
+                INNER JOIN
+                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" /> AS "Atesaki"
+                ON "Atesaki"."shikibetsuCode" = 最新被保台帳."shikibetsuCode"																					
 																													
 		LEFT JOIN rgdb."DbV4001JukyushaDaicho" As 受給者台帳																											
-			ON　 最新被保台帳."hihokenshaNo" = 受給者台帳."hihokenshaNo"																										
+			ON  最新被保台帳."hihokenshaNo" = 受給者台帳."hihokenshaNo"																										
 																													
 		LEFT  JOIN (																											
 			SELECT																										
@@ -427,49 +426,49 @@
 					FROM																								
 						rgdb."DbT1008IryohokenKanyuJokyo" I2																							
 					WHERE																								
-						I."shikibetsuCode" = I2."shikibetsuCode"　AND　																							
+						I."shikibetsuCode" = I2."shikibetsuCode" AND 																							
 						I."rirekiNo" <![CDATA[<]]> I2."rirekiNo"																							
 					)																								
 			) AS 医療保険加入状況																										
-			ON　 医療保険加入状況."shikibetsuCode" = 最新被保台帳."shikibetsuCode"																										
+			ON  医療保険加入状況."shikibetsuCode" = 最新被保台帳."shikibetsuCode"																										
 																													
 		INNER  JOIN																											
 			rgdb."DbT4101NinteiShinseiJoho"  AS  今回申請																										
-			ON　 今回申請."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																										
+			ON  今回申請."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																										
 																													
 		LEFT  JOIN																											
 			rgdb."DbT4120ShinseitodokedeJoho"  AS  今回申請届出																										
-			ON　 今回申請届出."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																										
+			ON  今回申請届出."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																										
 																													
 		LEFT  JOIN																											
 			最新介護事業者  AS   申請届出事業者																										
-			ON　 申請届出事業者."jigyoshaNo" = 今回申請届出."shinseiTodokedeDaikoJigyoshaNo"																										
+			ON  申請届出事業者."jigyoshaNo" = 今回申請届出."shinseiTodokedeDaikoJigyoshaNo"																										
 																													
 		LEFT  JOIN																											
 			rgdb."DbT5910NinteichosaItakusakiJoho"  AS  今回調査委託先																										
-			ON　 今回調査委託先."shichosonCode" = 受給者台帳."shichosonCode"																										
-			　　　　今回調査委託先."ninteichosaItakusakiCode" = 今回申請情報."ninteichosaItakusakiCode"																										
+			ON  今回調査委託先."shichosonCode" = 受給者台帳."shichosonCode"																										
+			    今回調査委託先."ninteichosaItakusakiCode" = 今回申請情報."ninteichosaItakusakiCode"																										
 																													
 		LEFT  JOIN																											
 			rgdb."DbT5913ChosainJoho"  AS  今回調査員																										
-			ON 　今回調査員."shichosonCode" = 受給者台帳."shichosonCode"																										
-			　　　　今回調査員."ninteichosaItakusakiCode" = 今回申請."ninteichosaItakusakiCode"																										
-			　　　　今回調査員."ninteiChosainCode" = 今回申請."ninteiChosainCode"																										
+			ON  今回調査員."shichosonCode" = 受給者台帳."shichosonCode"																										
+			    今回調査員."ninteichosaItakusakiCode" = 今回申請."ninteichosaItakusakiCode"																										
+			    今回調査員."ninteiChosainCode" = 今回申請."ninteiChosainCode"																										
 																													
 		LEFT  JOIN																											
 			rgdb."DbT5911ShujiiIryoKikanJoho"  AS  今回主治医医療機関																										
-			ON　 今回主治医医療機関."shichosonCode" = 受給者台帳."shichosonCode"																										
-			　　　　今回主治医医療機関."shujiiIryokikanCode" = 今回申請."shujiiIryokikanCode"																										
+			ON  今回主治医医療機関."shichosonCode" = 受給者台帳."shichosonCode"																										
+			    今回主治医医療機関."shujiiIryokikanCode" = 今回申請."shujiiIryokikanCode"																										
 																													
 		LEFT  JOIN																											
 			rgdb."DbT5912ShujiiJoho"  AS  今回主治医																										
-			ON　 今回主治医."shichosonCode" = 受給者台帳."shichosonCode"																										
-			　　　　今回主治医."shujiiIryokikanCode" = 今回申請."shujiiIryokikanCode"																										
-			　　　　今回主治医."shujiiCode" =  今回申請."shujiiCode"																										
+			ON  今回主治医."shichosonCode" = 受給者台帳."shichosonCode"																										
+			    今回主治医."shujiiIryokikanCode" = 今回申請."shujiiIryokikanCode"																										
+			    今回主治医."shujiiCode" =  今回申請."shujiiCode"																										
 																													
 		LEFT  JOIN																											
 			rgdb."DbT4116IchijiHanteiKekkaJoho"   AS  今回一次判定結果																										
-			ON　 今回一次判定結果."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																										
+			ON  今回一次判定結果."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																										
 																													
 		LEFT  JOIN  (																											
 			SELECT																										
@@ -484,16 +483,16 @@
 					FROM 																								
 						rgdb."DbT4301ShujiiIkenshoIraiJoho  AS  dbT4301_2																							
 					WHERE																								
-						dbT4301."shinseishoKanriNo" = dbT4301_2."shinseishoKanriNo"　AND　																							
+						dbT4301."shinseishoKanriNo" = dbT4301_2."shinseishoKanriNo" AND 																							
 						dbT4301."ikenshoIraiRirekiNo" <![CDATA[<]]> dbT4301_2."ikenshoIraiRirekiNo"																							
 					)																								
 				)  AS  今回意見書作成依頼																									
-			ON 　今回意見書作成依頼."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																										
+			ON  今回意見書作成依頼."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																										
 																													
 		LEFT  JOIN																											
 			rgdb."DbT4302ShujiiIkenshoJoho"  AS  今回意見書情報																										
-			ON 　今回意見書情報."shinseishoKanriNo" = 今回意見書作成依頼."shinseishoKanriNo"																										
-			　　　　今回意見書情報."ikenshoIraiRirekiNo" = 今回意見書作成依頼."ikenshoIraiRirekiNo"																										
+			ON  今回意見書情報."shinseishoKanriNo" = 今回意見書作成依頼."shinseishoKanriNo"																										
+			    今回意見書情報."ikenshoIraiRirekiNo" = 今回意見書作成依頼."ikenshoIraiRirekiNo"																										
 																													
 		LEFT  JOIN  (																											
 			SELECT																										
@@ -508,36 +507,34 @@
 					FROM 																								
 						rgdb."DbT4201NinteichosaIraiJoho"  AS  dbT4201_2																							
 					WHERE																								
-						dbT4201."shinseishoKanriNo" = dbT4201_2."shinseishoKanriNo"　AND　																							
+						dbT4201."shinseishoKanriNo" = dbT4201_2."shinseishoKanriNo" AND 																							
 						dbT4201."ninteichosaIraiRirekiNo" <![CDATA[<]]> dbT4201_2."ninteichosaIraiRirekiNo"																							
 					)																								
 				)  AS  今回調査依頼																									
-			ON　 今回調査依頼."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																										
+			ON  今回調査依頼."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																										
 																													
 		LEFT  JOIN																											
 			rgdb."DbT4203NinteichosahyoKihonChosa"  AS  今回調査結果_基本																										
-			ON 　今回調査結果_基本."shinseishoKanriNo" = 今回調査依頼."shinseishoKanriNo"																										
-			　　　　今回調査結果_基本."ninteichosaIraiRirekiNo" = 今回調査依頼."ninteichosaIraiRirekiNo"																										
+			ON  今回調査結果_基本."shinseishoKanriNo" = 今回調査依頼."shinseishoKanriNo"																										
+			    今回調査結果_基本."ninteichosaIraiRirekiNo" = 今回調査依頼."ninteichosaIraiRirekiNo"																										
 																													
 		LEFT  JOIN																											
 			rgdb."DbT4123NinteiKeikakuJoho"  AS  今回計画情報																										
-			ON　 今回計画情報."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																										
+			ON  今回計画情報."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																										
 																													
 		LEFT  JOIN																											
 			rgdb."DbT4102NinteiKekkaJoho"  AS  今回結果情報																										
-			ON 　今回結果情報."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																										
+			ON  今回結果情報."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																										
 																													
 		LEFT  JOIN																											
 			rgdb."DbT5105NinteiKanryoJoho"  AS  今回完了情報																										
-			ON　 今回完了情報."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																										
+			ON  今回完了情報."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																										
 																													
 		LEFT JOIN  (																											
 			SELECT																										
 				*																									
 			FROM (																										
-				SELECT																									
-					dbT3005.*																								
-					ROM_NUMBER() OVER (PARTITION BY" hihokenshaNo" ORDER BY" taishoYM" DESC," rirekiNo" DESC) AS 計画届出_番号																								
+				SELECT dbT3005.* , ROW_NUMBER() OVER (PARTITION BY" hihokenshaNo" ORDER BY" taishoYM" DESC," rirekiNo" DESC) AS 計画届出_番号																								
 				FROM																									
 					rgdb."DbT3005KyotakuKeikakuTodokede" dbT3005																								
 				) AS 居宅給付計画届出2																									
@@ -548,28 +545,28 @@
 																													
 		LEFT JOIN																											
 			rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"  AS  事業者作成																										
-			ON 　事業者作成."hihokenshaNo" = 居宅届出."hihokenshaNo"																										
-			　　　　事業者作成."taishoYM" = 居宅届出."taishoYM"																										
-			　　　　事業者作成."rirekiNo" = 居宅届出."rirekiNo"																										
+			ON  事業者作成."hihokenshaNo" = 居宅届出."hihokenshaNo"																										
+			    事業者作成."taishoYM" = 居宅届出."taishoYM"																										
+			    事業者作成."rirekiNo" = 居宅届出."rirekiNo"																										
 																													
 		LEFT  JOIN																											
 			最新介護事業者  AS  計画事業者																										
-			ON 　計画事業者."jigyoshaNo" = 事業者作成."keikakuJigyoshaNo"																										
+			ON  計画事業者."jigyoshaNo" = 事業者作成."keikakuJigyoshaNo"																										
 																													
 		LEFT JOIN																											
 			rgdb."DbT7062KaigoJigyoshaDaihyosha" AS 計画事業者代表者																										
-			ON 　計画事業者代表者."jigyoshaNo" = 計画事業者."jigyoshaNo"																										
-			　　　　計画事業者代表者."yukoKaishiYMD" = 計画事業者."yukoKaishiYMD"																										
+			ON  計画事業者代表者."jigyoshaNo" = 計画事業者."jigyoshaNo"																										
+			    計画事業者代表者."yukoKaishiYMD" = 計画事業者."yukoKaishiYMD"																										
 																													
 		LEFT JOIN																											
 			rgdb."DbT3007KyotakuKeikakuJikoSakusei"  AS  自己作成																										
-			ON 　自己作成."hihokenshaNo" = 居宅届出."hihokenshaNo"																										
-			　　　　自己作成."taishoYM" = 居宅届出."taishoYM"																										
-			　　　　自己作成."rirekiNo" = 居宅届出."rirekiNo"																										
+			ON  自己作成."hihokenshaNo" = 居宅届出."hihokenshaNo"																										
+			    自己作成."taishoYM" = 居宅届出."taishoYM"																										
+			    自己作成."rirekiNo" = 居宅届出."rirekiNo"																										
 																													
 		LEFT JOIN																											
 			rgdb."DbT5121ShinseiRirekiJoho"  AS  履歴情報																										
-			ON 　履歴情報."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																										
+			ON  履歴情報."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																										
 																													
 		LEFT  JOIN																											
 			受給者台帳枝番MAX AS 前回受給情報																										
@@ -595,11 +592,11 @@
 			WHERE																										
 				受給者台帳枝番MAX."rirekiNo" = '0001'																									
 			)  AS 初回受給情報																										
-			ON　 初回受給情報."hihokenshaNo" = 受給者台帳."hihokenshaNo"																										
+			ON  初回受給情報."hihokenshaNo" = 受給者台帳."hihokenshaNo"																										
 																													
 		INNER JOIN																											
 			rgdb."DbT4101NinteiShinseiJoho"  AS 初回申請																										
-			ON 　初回申請."shinseishoKanriNo" = 初回受給情報."shinseishoKanriNo"																										
+			ON  初回申請."shinseishoKanriNo" = 初回受給情報."shinseishoKanriNo"																										
 																													
 	WHERE		国保資格情報."isDeleted" = false
         <if test="is基準日">
@@ -632,58 +629,58 @@
             </if>
             <if test="is年齢">
                 <if test="has年齢From">
-                    AND 宛名."kikaYMD" <![CDATA[<=]]> #{年齢From年月日}
+                    AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."kikaYMD" <![CDATA[<=]]> #{年齢From年月日}
                 </if>
                 <if test="has年齢To">
-                    AND #{年齢To年月日} <![CDATA[<=]]> 宛名."kikaYMD"
+                    AND #{年齢To年月日} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."kikaYMD"
                 </if>
             </if>
             <if test="is生年月日">
                 <if test="has生年月日From">
-                    AND #{生年月日From}　<![CDATA[<=]]> 宛名."kikaYMD"
+                    AND #{生年月日From} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."kikaYMD"
                 </if>
                 <if test="has生年月日To">
-                    AND 宛名."kikaYMD" <![CDATA[<=]]> #{生年月日To}
+                    AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."kikaYMD" <![CDATA[<=]]> #{生年月日To}
                 </if>
             </if>																						
             <if test="has市町村コード">
-                AND (最新被保台帳."shichosonCode"　=　#{shichosoncode}
+                AND (最新被保台帳."shichosonCode" = #{shichosoncode}
                 OR   最新被保台帳."koikinaiTokureiSochimotoShichosonCode" = #{shichosoncode})
             </if>
             <if test="is住所">
                 <if test="has地区選択From">
-                    AND #{地区選択コードFrom} <![CDATA[<=]]> 宛名."choikiCode"
+                    AND #{地区選択コードFrom} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."choikiCode"
                 </if>
                 <if test="has地区選択To">
-                    AND 宛名."choikiCode" <![CDATA[<=]]> #{地区選択コードTo}
+                    AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."choikiCode" <![CDATA[<=]]> #{地区選択コードTo}
                 </if>
             </if>
             <if test="is行政区">
                 <if test="has行政区From">
-                    AND #{地区選択コードFrom} <![CDATA[<=]]> 宛名."gyoseikuCode"
+                    AND #{地区選択コードFrom} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."gyoseikuCode"
                 </if>
                 <if test="has行政区To">
-                     AND 宛名."gyoseikuCode" <![CDATA[<=]]> #{地区選択コードTo}
+                     AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."gyoseikuCode" <![CDATA[<=]]> #{地区選択コードTo}
                 </if>
             </if>
             <if test="is地区">
                 <if test="has地区１From">
-                    AND #{地区選択コードFrom} <![CDATA[<=]]> 宛名."chikuCode1"
+                    AND #{地区選択コードFrom} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode1"
                 </if>
                 <if test="has地区１To">
-                    AND 宛名."chikuCode1" <![CDATA[<=]]> #{地区選択コードTo}
+                    AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode1" <![CDATA[<=]]> #{地区選択コードTo}
                 </if>
                 <if test="has地区２From">
-                    AND #{地区選択コードFrom} <![CDATA[<=]]> 宛名."chikuCode2"
+                    AND #{地区選択コードFrom} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode2"
                 </if>
                 <if test="has地区２To">
-                    AND 宛名."chikuCode2" <![CDATA[<=]]> #{地区選択コードTo}
+                    AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode2" <![CDATA[<=]]> #{地区選択コードTo}
                 </if>
                 <if test="has地区３From">
-                    AND #{地区選択コードFrom} <![CDATA[<=]]> 宛名."chikuCode3"
+                    AND #{地区選択コードFrom} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode3"
                 </if>
                 <if test="has地区３To">
-                    AND 宛名."chikuCode3" <![CDATA[<=]]> #{地区選択コードTo}
+                    AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode3" <![CDATA[<=]]> #{地区選択コードTo}
                 </if>
             </if>
             ORDER BY #{syutsuryokujun}
