@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShujiiIryoKikanJohoDensanCsvEntity {
 
-    // TODO QA1417
     @CsvField(order = 1, name = "シーケンシャル番号")
     private RString シーケンシャル番号;
     @CsvField(order = 2, name = "機能コード")

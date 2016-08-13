@@ -5,8 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1920001;
 
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.ChosainJohoDensanCsvEntity;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.ChosainJohoKouroushouCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.NinteiShinseiJohoDensanCsvEntity;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.NinteiShinseiJohoKouroushouCsvEntity;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.NinteichosaItakusakiJohoDensanCsvEntity;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.NinteichosaItakusakiJohoKouroushouCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.RenkeiDataTorikomiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.ShujiiIryoKikanJohoDensanCsvEntity;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.ShujiiIryoKikanJohoKouroushouCsvEntity;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.ShujiiJohoDensanCsvEntity;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.ShujiiJohoKouroushouCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.dgTorikomiTaisho_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -90,7 +99,6 @@ public class RenkeiDataTorikomiValidationHandler {
      */
     public ValidationMessageControlPairs check認定申請情報ファイル(ValidationMessageControlPairs validPairs, RString path, boolean pathFlag) {
         // TODO 文字コードは連携文字コード以外の場合、エラーとする
-        // タイトルがない場合、エラーとする
         RString filePath;
         if (pathFlag) {
             filePath = path;
@@ -98,24 +106,63 @@ public class RenkeiDataTorikomiValidationHandler {
             filePath = Path.combinePath(path, 要介護認定申請連携データ取込みファイル名);
         }
         try (CsvListReader read = new CsvListReader.InstanceBuilder(filePath).build()) {
-            CsvReader<NinteiShinseiJohoDensanCsvEntity> csvReader = new CsvReader.InstanceBuilder(
-                    filePath, NinteiShinseiJohoDensanCsvEntity.class)
-                    .setDelimiter(EUC_WRITER_DELIMITER)
-                    .setNewLine(NewLine.CRLF)
-                    .hasHeader(false).build();
             RString 認定申請IF種類 = DbBusinessConfig.get(ConfigNameDBE.認定申請IF種類, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            if (電算標準版.equals(認定申請IF種類)
-                    && (電算標準版_197 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号()))) {
-                validPairs.add(new ValidationMessageControlPair(
-                        FilecheckMessages.Validate認定申請情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
-            }
-            if (厚労省.equals(認定申請IF種類)
-                    && (厚労省_174 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号()))) {
-                validPairs.add(new ValidationMessageControlPair(
-                        FilecheckMessages.Validate認定申請情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
-            }
-            if (東芝版.equals(認定申請IF種類)
-                    && (東芝版_87 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号()))) {
+            if (電算標準版.equals(認定申請IF種類)) {
+                if (new CsvReader.InstanceBuilder(
+                        filePath, NinteiShinseiJohoDensanCsvEntity.class)
+                        .setDelimiter(EUC_WRITER_DELIMITER)
+                        .setNewLine(NewLine.CRLF).build().readLine() == null) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate認定申請情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                    return validPairs;
+                }
+                CsvReader<NinteiShinseiJohoDensanCsvEntity> csvReader = new CsvReader.InstanceBuilder(
+                        filePath, NinteiShinseiJohoDensanCsvEntity.class)
+                        .setDelimiter(EUC_WRITER_DELIMITER)
+                        .setNewLine(NewLine.CRLF)
+                        .hasHeader(true).build();
+                if (電算標準版_197 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate認定申請情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                }
+
+            } else if (厚労省.equals(認定申請IF種類)) {
+                if (new CsvReader.InstanceBuilder(
+                        filePath, NinteiShinseiJohoKouroushouCsvEntity.class)
+                        .setDelimiter(EUC_WRITER_DELIMITER)
+                        .setNewLine(NewLine.CRLF).build().readLine() == null) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate認定申請情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                    return validPairs;
+                }
+                CsvReader<NinteiShinseiJohoKouroushouCsvEntity> csvReader = new CsvReader.InstanceBuilder(
+                        filePath, NinteiShinseiJohoKouroushouCsvEntity.class)
+                        .setDelimiter(EUC_WRITER_DELIMITER)
+                        .setNewLine(NewLine.CRLF)
+                        .hasHeader(true).build();
+                if (厚労省_174 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate認定申請情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                }
+            } else if (東芝版.equals(認定申請IF種類)) {
+                if (new CsvReader.InstanceBuilder(
+                        filePath, NinteiShinseiJohoKouroushouCsvEntity.class)
+                        .setDelimiter(EUC_WRITER_DELIMITER)
+                        .setNewLine(NewLine.CRLF).build().readLine() == null) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate認定申請情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                    return validPairs;
+                }
+                CsvReader<NinteiShinseiJohoKouroushouCsvEntity> csvReader = new CsvReader.InstanceBuilder(
+                        filePath, NinteiShinseiJohoKouroushouCsvEntity.class)
+                        .setDelimiter(EUC_WRITER_DELIMITER)
+                        .setNewLine(NewLine.CRLF)
+                        .hasHeader(true).build();
+                if (東芝版_87 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate認定申請情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                }
+            } else {
                 validPairs.add(new ValidationMessageControlPair(
                         FilecheckMessages.Validate認定申請情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
             }
@@ -140,11 +187,44 @@ public class RenkeiDataTorikomiValidationHandler {
         }
         try (CsvListReader read = new CsvListReader.InstanceBuilder(filePath).build()) {
             RString マスタIF種類 = DbBusinessConfig.get(ConfigNameDBE.四マスタIF種類, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            if (電算標準版.equals(マスタIF種類) && 電算標準版_11 < getSize(read)) {
-                validPairs.add(new ValidationMessageControlPair(
-                        FilecheckMessages.Validate認定調査委託先情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
-            }
-            if (厚労省.equals(マスタIF種類) && 厚労省_10 < getSize(read)) {
+            if (電算標準版.equals(マスタIF種類)) {
+                if (new CsvReader.InstanceBuilder(
+                        filePath, NinteichosaItakusakiJohoDensanCsvEntity.class)
+                        .setDelimiter(EUC_WRITER_DELIMITER)
+                        .setNewLine(NewLine.CRLF).build().readLine() == null) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate認定調査委託先情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                    return validPairs;
+                }
+                CsvReader<NinteichosaItakusakiJohoDensanCsvEntity> csvReader = new CsvReader.InstanceBuilder(
+                        filePath, NinteichosaItakusakiJohoDensanCsvEntity.class)
+                        .setDelimiter(EUC_WRITER_DELIMITER)
+                        .setNewLine(NewLine.CRLF)
+                        .hasHeader(true).build();
+                if (電算標準版_11 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate認定調査委託先情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                }
+
+            } else if (厚労省.equals(マスタIF種類)) {
+                if (new CsvReader.InstanceBuilder(
+                        filePath, NinteichosaItakusakiJohoKouroushouCsvEntity.class)
+                        .setDelimiter(EUC_WRITER_DELIMITER)
+                        .setNewLine(NewLine.CRLF).build().readLine() == null) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate認定調査委託先情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                    return validPairs;
+                }
+                CsvReader<NinteichosaItakusakiJohoKouroushouCsvEntity> csvReader = new CsvReader.InstanceBuilder(
+                        filePath, NinteichosaItakusakiJohoKouroushouCsvEntity.class)
+                        .setDelimiter(EUC_WRITER_DELIMITER)
+                        .setNewLine(NewLine.CRLF)
+                        .hasHeader(true).build();
+                if (厚労省_10 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate認定調査委託先情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                }
+            } else {
                 validPairs.add(new ValidationMessageControlPair(
                         FilecheckMessages.Validate認定調査委託先情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
             }
@@ -169,11 +249,43 @@ public class RenkeiDataTorikomiValidationHandler {
         }
         try (CsvListReader read = new CsvListReader.InstanceBuilder(filePath).build()) {
             RString マスタIF種類 = DbBusinessConfig.get(ConfigNameDBE.四マスタIF種類, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            if (電算標準版.equals(マスタIF種類) && 電算標準版_9 < getSize(read)) {
-                validPairs.add(new ValidationMessageControlPair(
-                        FilecheckMessages.Validate認定調査員情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
-            }
-            if (厚労省.equals(マスタIF種類) && 厚労省_8 < getSize(read)) {
+            if (電算標準版.equals(マスタIF種類)) {
+                if (new CsvReader.InstanceBuilder(
+                        filePath, ChosainJohoDensanCsvEntity.class)
+                        .setDelimiter(EUC_WRITER_DELIMITER)
+                        .setNewLine(NewLine.CRLF).build().readLine() == null) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate認定調査員情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                    return validPairs;
+                }
+                CsvReader<ChosainJohoDensanCsvEntity> csvReader = new CsvReader.InstanceBuilder(
+                        filePath, ChosainJohoDensanCsvEntity.class)
+                        .setDelimiter(EUC_WRITER_DELIMITER)
+                        .setNewLine(NewLine.CRLF)
+                        .hasHeader(true).build();
+                if (電算標準版_9 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate認定調査員情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                }
+            } else if (厚労省.equals(マスタIF種類)) {
+                if (new CsvReader.InstanceBuilder(
+                        filePath, ChosainJohoKouroushouCsvEntity.class)
+                        .setDelimiter(EUC_WRITER_DELIMITER)
+                        .setNewLine(NewLine.CRLF).build().readLine() == null) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate認定調査員情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                    return validPairs;
+                }
+                CsvReader<ChosainJohoKouroushouCsvEntity> csvReader = new CsvReader.InstanceBuilder(
+                        filePath, ChosainJohoKouroushouCsvEntity.class)
+                        .setDelimiter(EUC_WRITER_DELIMITER)
+                        .setNewLine(NewLine.CRLF)
+                        .hasHeader(true).build();
+                if (厚労省_8 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate認定調査員情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                }
+            } else {
                 validPairs.add(new ValidationMessageControlPair(
                         FilecheckMessages.Validate認定調査員情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
             }
@@ -198,11 +310,43 @@ public class RenkeiDataTorikomiValidationHandler {
         }
         try (CsvListReader read = new CsvListReader.InstanceBuilder(filePath).build()) {
             RString マスタIF種類 = DbBusinessConfig.get(ConfigNameDBE.四マスタIF種類, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            if (電算標準版.equals(マスタIF種類) && 電算標準版_10 < getSize(read)) {
-                validPairs.add(new ValidationMessageControlPair(
-                        FilecheckMessages.Validate主治医医療機関情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
-            }
-            if (厚労省.equals(マスタIF種類) && 厚労省_9 < getSize(read)) {
+            if (電算標準版.equals(マスタIF種類)) {
+                if (new CsvReader.InstanceBuilder(
+                        filePath, ShujiiIryoKikanJohoDensanCsvEntity.class)
+                        .setDelimiter(EUC_WRITER_DELIMITER)
+                        .setNewLine(NewLine.CRLF).build().readLine() == null) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate主治医医療機関情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                    return validPairs;
+                }
+                CsvReader<ShujiiIryoKikanJohoDensanCsvEntity> csvReader = new CsvReader.InstanceBuilder(
+                        filePath, ShujiiIryoKikanJohoDensanCsvEntity.class)
+                        .setDelimiter(EUC_WRITER_DELIMITER)
+                        .setNewLine(NewLine.CRLF)
+                        .hasHeader(true).build();
+                if (電算標準版_10 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate主治医医療機関情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                }
+            } else if (厚労省.equals(マスタIF種類)) {
+                if (new CsvReader.InstanceBuilder(
+                        filePath, ShujiiIryoKikanJohoKouroushouCsvEntity.class)
+                        .setDelimiter(EUC_WRITER_DELIMITER)
+                        .setNewLine(NewLine.CRLF).build().readLine() == null) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate主治医医療機関情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                    return validPairs;
+                }
+                CsvReader<ShujiiIryoKikanJohoKouroushouCsvEntity> csvReader = new CsvReader.InstanceBuilder(
+                        filePath, ShujiiIryoKikanJohoKouroushouCsvEntity.class)
+                        .setDelimiter(EUC_WRITER_DELIMITER)
+                        .setNewLine(NewLine.CRLF)
+                        .hasHeader(true).build();
+                if (厚労省_9 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate主治医医療機関情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                }
+            } else {
                 validPairs.add(new ValidationMessageControlPair(
                         FilecheckMessages.Validate主治医医療機関情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
             }
@@ -227,11 +371,43 @@ public class RenkeiDataTorikomiValidationHandler {
         }
         try (CsvListReader read = new CsvListReader.InstanceBuilder(filePath).build()) {
             RString マスタIF種類 = DbBusinessConfig.get(ConfigNameDBE.四マスタIF種類, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            if (電算標準版.equals(マスタIF種類) && 電算標準版_8 < getSize(read)) {
-                validPairs.add(new ValidationMessageControlPair(
-                        FilecheckMessages.Validate主治医情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
-            }
-            if (厚労省.equals(マスタIF種類) && 厚労省_7 < getSize(read)) {
+            if (電算標準版.equals(マスタIF種類)) {
+                if (new CsvReader.InstanceBuilder(
+                        filePath, ShujiiJohoDensanCsvEntity.class)
+                        .setDelimiter(EUC_WRITER_DELIMITER)
+                        .setNewLine(NewLine.CRLF).build().readLine() == null) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate主治医情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                    return validPairs;
+                }
+                CsvReader<ShujiiJohoDensanCsvEntity> csvReader = new CsvReader.InstanceBuilder(
+                        filePath, ShujiiJohoDensanCsvEntity.class)
+                        .setDelimiter(EUC_WRITER_DELIMITER)
+                        .setNewLine(NewLine.CRLF)
+                        .hasHeader(true).build();
+                if (電算標準版_8 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate主治医情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                }
+            } else if (厚労省.equals(マスタIF種類)) {
+                if (new CsvReader.InstanceBuilder(
+                        filePath, ShujiiJohoKouroushouCsvEntity.class)
+                        .setDelimiter(EUC_WRITER_DELIMITER)
+                        .setNewLine(NewLine.CRLF).build().readLine() == null) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate主治医情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                    return validPairs;
+                }
+                CsvReader<ShujiiJohoKouroushouCsvEntity> csvReader = new CsvReader.InstanceBuilder(
+                        filePath, ShujiiJohoKouroushouCsvEntity.class)
+                        .setDelimiter(EUC_WRITER_DELIMITER)
+                        .setNewLine(NewLine.CRLF)
+                        .hasHeader(true).build();
+                if (厚労省_7 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate主治医情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                }
+            } else {
                 validPairs.add(new ValidationMessageControlPair(
                         FilecheckMessages.Validate主治医情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
             }
