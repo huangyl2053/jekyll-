@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -35,9 +36,10 @@ public class NinteiShinseiTorokuUketsuke {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
+        RString 市町村コード = ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class);
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
 
-        this.getHandler(div).onLoad(被保険者番号, 識別コード, 申請書管理番号);
+        this.getHandler(div).onLoad(被保険者番号, 識別コード, 申請書管理番号, 市町村コード);
         return ResponseData.of(div).respond();
     }
 
