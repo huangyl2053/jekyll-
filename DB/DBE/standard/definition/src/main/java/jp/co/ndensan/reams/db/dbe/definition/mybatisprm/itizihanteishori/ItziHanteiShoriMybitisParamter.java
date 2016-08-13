@@ -23,6 +23,8 @@ public final class ItziHanteiShoriMybitisParamter implements IMyBatisParameter {
     private final List<ShinseishoKanriNo> shinseishoKanriNoList;
     private final RString battishuturyokukubun;
     private final RString イメージ区分;
+    private final RString 取下;
+    private final RString 延期;
 
     /**
      * コンストラクタです。
@@ -34,10 +36,14 @@ public final class ItziHanteiShoriMybitisParamter implements IMyBatisParameter {
     private ItziHanteiShoriMybitisParamter(
             List<ShinseishoKanriNo> shinseishoKanriNoList,
             RString battishuturyokukubun,
-            RString イメージ区分) {
+            RString イメージ区分,
+            RString 取下,
+            RString 延期) {
         this.shinseishoKanriNoList = shinseishoKanriNoList;
         this.battishuturyokukubun = battishuturyokukubun;
         this.イメージ区分 = イメージ区分;
+        this.取下 = 取下;
+        this.延期 = 延期;
     }
 
     /**
@@ -46,12 +52,18 @@ public final class ItziHanteiShoriMybitisParamter implements IMyBatisParameter {
      * @param shinseishoKanriNoList List<RString>
      * @param battishuturyokukubun RString
      * @param イメージ区分 RString
+     * @param 取下 RString
+     * @param 延期 RString
      * @return ItziHanteiShoriMybitisParamter
      */
     public static ItziHanteiShoriMybitisParamter createParam(
             List<ShinseishoKanriNo> shinseishoKanriNoList,
             RString battishuturyokukubun,
-            RString イメージ区分) {
-        return new ItziHanteiShoriMybitisParamter(shinseishoKanriNoList, battishuturyokukubun, イメージ区分);
+            RString イメージ区分,
+            RString 取下,
+            RString 延期
+    ) {
+        return new ItziHanteiShoriMybitisParamter(shinseishoKanriNoList, battishuturyokukubun,
+                イメージ区分, 取下, 延期);
     }
 }

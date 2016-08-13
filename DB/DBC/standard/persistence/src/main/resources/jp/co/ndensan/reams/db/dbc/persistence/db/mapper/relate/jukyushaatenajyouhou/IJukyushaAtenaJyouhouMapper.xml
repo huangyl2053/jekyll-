@@ -5,7 +5,7 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushaatenajyouhou.IJukyushaAtenaJyouhouMapper">
                     
-    <select id="get宛名"
+    <select id="get宛名情報"
             resultMap="resultMap_DealKyufujissekiEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushaatenaayouhou.JukyushaAtenaJyouhouParameter" fetchSize="500" resultOrdered="true">
             SELECT 

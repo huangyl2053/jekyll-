@@ -94,7 +94,7 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
         div.getChushutsuJoken().getTxtUketukebi().setToValue(システム日付);
         div.getChushutsuJoken().getTxtKetteibi().setToValue(システム日付);
         div.getChushutsuJoken().getTxtKetteishaUketukeNengetsu().setValue(システム日付);
-        div.getShikyuKetteiTsuchisho().getＴｘｔHakkobi().setValue(システム日付);
+        div.getShikyuKetteiTsuchisho().getTxtHakkobi().setValue(システム日付);
         onClick_radKetteibiIkkatsuKoshinKubun();
         ChohyoBunruiKanri code = null;
         if (高額サービス費支給決定通知書作成メニューID.equals(ResponseHolder.getMenuID())) {
@@ -236,7 +236,7 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
         } else if (KEY2.equals(div.getChushutsuJoken().getRadKogakuJidoShokanSentaku().getSelectedKey())) {
             parameter.set高額自動償還(STR_3);
         }
-        parameter.set発行日(div.getShikyuKetteiTsuchisho().getＴｘｔHakkobi().getValue());
+        parameter.set発行日(div.getShikyuKetteiTsuchisho().getTxtHakkobi().getValue());
         RString 文書番号 = div.getShikyuKetteiTsuchisho().getCcdBunshoBangoInput().get文書番号();
         if (文書番号 != null && !文書番号.isEmpty()) {
             parameter.set文書番号(div.getShikyuKetteiTsuchisho().getCcdBunshoBangoInput().get文書番号());

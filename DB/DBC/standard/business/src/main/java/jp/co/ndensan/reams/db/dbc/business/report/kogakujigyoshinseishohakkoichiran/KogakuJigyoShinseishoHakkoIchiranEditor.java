@@ -86,25 +86,25 @@ public class KogakuJigyoShinseishoHakkoIchiranEditor implements IKogakuJigyoShin
         if (帳票出力対象データ.getShinseishaShimeiChohyo() != null) {
             source.listHakkoTaishosha_4 = 帳票出力対象データ.getShinseishaShimeiChohyo().getColumnValue();
         }
-        if (帳票出力対象データ.getYubinNo() != null) {
-            source.listHakkoTaishosha_5 = 帳票出力対象データ.getYubinNo().getColumnValue();
+        if (帳票出力対象データ.getYubinNoChohyo() != null) {
+            source.listHakkoTaishosha_5 = 帳票出力対象データ.getYubinNoChohyo().getColumnValue();
         }
-        if (帳票出力対象データ.getJusho() != null) {
-            source.listHakkoTaishosha_6 = 帳票出力対象データ.getJusho().getColumnValue();
+        if (帳票出力対象データ.getJushoChohyo() != null) {
+            source.listHakkoTaishosha_6 = 帳票出力対象データ.getGyoseikuCodeChohyo().getColumnValue();
         }
-        if (帳票出力対象データ.getGyoseikuCode() != null) {
-            source.listHakkoTaishosha_7 = 帳票出力対象データ.getGyoseikuCode().getColumnValue();
+        if (帳票出力対象データ.getGyoseikuCodeChohyo() != null) {
+            source.listHakkoTaishosha_7 = 帳票出力対象データ.getGyoseikuNameChohyo();
         }
-        source.listHakkoTaishosha_8 = 帳票出力対象データ.getGyoseikuName();
-        source.listHakkoTaishosha_9 = new RString(String.valueOf(帳票出力対象データ.isKyuSochishaFlag()));
+        source.listHakkoTaishosha_8 = 帳票出力対象データ.getGyoseikuNameChohyo();
+        source.listHakkoTaishosha_9 = new RString(String.valueOf(帳票出力対象データ.isKyuSochishaFlagChohyo()));
         if (帳票出力対象データ.getYokaigoJotaiKubunCode() != null) {
             source.listHakkoTaishosha_10 = 帳票出力対象データ.getYokaigoJotaiKubunCode().getColumnValue();
         }
-        if (帳票出力対象データ.getNinteiYukoKikanKaishiYMD() != null) {
-            source.listHakkoTaishosha_11 = 帳票出力対象データ.getNinteiYukoKikanKaishiYMD().wareki().toDateString();
+        if (帳票出力対象データ.getNinteiYukoKikanKaishiYMDChohyo() != null) {
+            source.listHakkoTaishosha_11 = 帳票出力対象データ.getNinteiYukoKikanKaishiYMDChohyo().wareki().toDateString();
         }
-        if (帳票出力対象データ.getNinteiYukoKikanShuryoYMD() != null) {
-            source.listHakkoTaishosha_12 = 帳票出力対象データ.getNinteiYukoKikanShuryoYMD().wareki().toDateString();
+        if (帳票出力対象データ.getNinteiYukoKikanShuryoYMDChohyo() != null) {
+            source.listHakkoTaishosha_12 = 帳票出力対象データ.getNinteiYukoKikanShuryoYMDChohyo().wareki().toDateString();
         }
         NumberFormat currency = NumberFormat.getNumberInstance();
         if (帳票出力対象データ.getHonninShiharaiGakuChohyo() != null) {

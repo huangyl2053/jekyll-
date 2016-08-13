@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC03200",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "受領委任契約承認（不承認）確認書",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0320011",
+     "toLayoutTitle": "受領委任契約承認（不承認）確認書作成",
+     "toState": "承認確認書作成"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0320011",
+     "layoutTitle": "受領委任契約承認（不承認）確認書作成",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

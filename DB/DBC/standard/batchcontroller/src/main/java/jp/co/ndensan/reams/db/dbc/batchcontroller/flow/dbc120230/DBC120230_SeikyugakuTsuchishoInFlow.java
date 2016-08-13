@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuGetFileProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.FlowEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -67,7 +67,7 @@ public class DBC120230_SeikyugakuTsuchishoInFlow extends BatchFlowBase<Seikyugak
             executeStep(CSVファイル取込);
             flowEntity = getResult(FlowEntity.class, new RString(CSVファイル取込),
                     SeikyugakuTsuchishoReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
-            if (0 == flowEntity.get登録件数()) {
+            if (0 == flowEntity.get明細データ登録件数()) {
                 executeStep(国保連インタフェース管理更新);
                 executeStep(処理結果リスト作成);
             } else {

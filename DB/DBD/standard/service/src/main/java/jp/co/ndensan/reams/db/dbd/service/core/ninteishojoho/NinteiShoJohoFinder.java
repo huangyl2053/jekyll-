@@ -148,13 +148,9 @@ public class NinteiShoJohoFinder {
      */
     public NinteishoJohoBusiness setTarget(NinteishoJohoBusiness target, ShogaishakojoTaishoshaListProcessParameter parameter,
             ReportSourceWriter reportSourceWriter) {
-        NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, 帳票分類ID, FlexibleDate.getNowDate(),
-                NinshoshaDenshikoinshubetsuCode.toValue(NinshoshaDenshikoinshubetsuCode.保険者印.getコード()), reportSourceWriter);
         target.set文書番号(文書番号取得());
         target.set発行日(parameter.get交付日());
         target.set申請者(target.getNinteishoJohoEntity().get申請者氏名());
-        target.set認職者氏名(ninshoshaSource.ninshoshaShimeiKakeru);
-        target.set電子公印(ninshoshaSource.denshiKoin);
         target.set申請者住所(target.getNinteishoJohoEntity().get申請者住所());
         if (target.getNinteishoJohoEntity().get申請者住所() == null && target.getNinteishoJohoEntity().get申請者住所().isEmpty()) {
             target.set申請者住所(new RStringBuilder().append(target.getNinteishoJohoEntity().getPsmEntity().getJusho().getColumnValue()).

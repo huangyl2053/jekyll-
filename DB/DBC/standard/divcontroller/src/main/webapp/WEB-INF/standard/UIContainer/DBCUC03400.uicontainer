@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC03400",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "高額サービス費受領委任契約承認（不承認）確認書作成",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0340011",
+     "toLayoutTitle": "高額サービス費受領委任契約承認（不承認）確認書作成",
+     "toState": "初期状態"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0340011",
+     "layoutTitle": "高額サービス費受領委任契約承認（不承認）確認書作成",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

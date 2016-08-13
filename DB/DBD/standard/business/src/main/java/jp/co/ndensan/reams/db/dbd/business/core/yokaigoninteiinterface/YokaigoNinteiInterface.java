@@ -51,7 +51,7 @@ public class YokaigoNinteiInterface extends
      */
     public YokaigoNinteiInterface(ShinseishoKanriNo 申請書管理番号,
             HihokenshaNo 被保険者番号,
-            RString 取込日時,
+            YMDHMS 取込日時,
             RString 申請種別コード,
             RString 取下区分コード,
             FlexibleDate 認定申請日,
@@ -79,7 +79,7 @@ public class YokaigoNinteiInterface extends
         this.entity = new DbT4003YokaigoNinteiInterfaceEntity();
         this.entity.setShinseishoKanriNo(申請書管理番号);
         this.entity.setHihokenshaNo(被保険者番号);
-//        this.entity.setTorikomiTimestamp(取込日時); TODO
+        this.entity.setTorikomiTimestamp(取込日時);
         this.entity.setShinseiShubetsuCode(申請種別コード);
         this.entity.setTorisageKubunCode(取下区分コード);
         this.entity.setShinseiYMD(認定申請日);
@@ -118,8 +118,7 @@ public class YokaigoNinteiInterface extends
         this.id = new YokaigoNinteiInterfaceIdentifier(
                 entity.getShinseishoKanriNo(),
                 entity.getHihokenshaNo(),
-                //                entity.getTorikomiTimestamp(),TODO
-                null,
+                entity.getTorikomiTimestamp(),
                 entity.getShinseiShubetsuCode(),
                 entity.getTorisageKubunCode(),
                 entity.getShinseiYMD(),
@@ -249,9 +248,8 @@ public class YokaigoNinteiInterface extends
      *
      * @return 取込日時
      */
-    public RString get取込日時() {
-//        return entity.getTorikomiTimestamp(); TODO
-        return RString.EMPTY;
+    public YMDHMS get取込日時() {
+        return entity.getTorikomiTimestamp();
     }
 
     /**
@@ -259,9 +257,8 @@ public class YokaigoNinteiInterface extends
      *
      * @return 取込区分
      */
-    public YMDHMS get取込区分() {
-//        return entity.getTorikomiKubun(); TODO
-        return null;
+    public RString get取込区分() {
+        return entity.getTorikomiKubun();
     }
 
     /**

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservic
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
@@ -27,6 +28,7 @@ public class UpdateKogakuShikyuHanteiKekkaProcess extends BatchProcessBase<DbT30
 
     @BatchWriter
     BatchEntityCreatedTempTableWriter 高額サービス決定通知書情報一時tableWriter;
+    BatchPermanentTableWriter permanentTableWriter;
 
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kogakukaigoservice.IKogakuKaigoServicehiShikyuKetteiTsuchishoMapper.select支給判定結果");
@@ -40,6 +42,11 @@ public class UpdateKogakuShikyuHanteiKekkaProcess extends BatchProcessBase<DbT30
     }
 
     @Override
+    protected void createWriter() {
+        permanentTableWriter = new BatchPermanentTableWriter(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(MAPPERPATH, parameter.toパラメータ());
     }
@@ -48,6 +55,7 @@ public class UpdateKogakuShikyuHanteiKekkaProcess extends BatchProcessBase<DbT30
     protected void beforeExecute() {
         DbT7022ShoriDateKanriEntity entity = mapper.select処理日付管理マスタMAX();
         entity.getNendoNaiRenban();
+        permanentTableWriter.insert(entity);
 
     }
 

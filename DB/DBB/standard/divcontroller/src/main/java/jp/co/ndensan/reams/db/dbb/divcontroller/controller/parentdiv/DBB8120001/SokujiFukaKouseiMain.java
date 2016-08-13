@@ -102,6 +102,10 @@ public class SokujiFukaKouseiMain {
         TsuchishoNo 通知書番号 = ViewStateHolder.get(ViewStateKeys.通知書番号, TsuchishoNo.class);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        LockingKey 前排他キー = new LockingKey(DBB_HIHOKENSHANO.concat(被保険者番号.getColumnValue()));
+        if (!RealInitialLocker.tryGetLock(前排他キー)) {
+            throw new PessimisticLockingException();
+        }
         TsuchishoNo 通知書番号選択 = 通知書番号;
         List<KoseiZengoFuka> 更正前後賦課のリスト = new ArrayList<>();
         KoseiZengoChoshuHoho 更正前後徴収方法 = null;
@@ -150,10 +154,6 @@ public class SokujiFukaKouseiMain {
         ViewStateHolder.put(ViewStateKeys.更正前後賦課のリスト, (Serializable) 更正前後賦課のリスト);
         ViewStateHolder.put(ViewStateKeys.本算定処理済フラグ, is本算定処理済フラグ);
         AccessLogger.log(AccessLogType.照会, PersonalData.of(識別コード));
-        LockingKey 前排他キー = new LockingKey(DBB_HIHOKENSHANO.concat(被保険者番号.getColumnValue()));
-        if (!RealInitialLocker.tryGetLock(前排他キー)) {
-            throw new PessimisticLockingException();
-        }
         return getResponseData(div);
     }
 

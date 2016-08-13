@@ -58,6 +58,12 @@ public class KyodoIdoRenrakuhyoTorokuMain {
     public ResponseData<KyodoIdoRenrakuhyoTorokuMainDiv> onClick_btnSave(KyodoIdoRenrakuhyoTorokuMainDiv div) {
         ValidationMessageControlPairs pairs = div.getKyodoIdoRenrakuhyoTorokuInfo().get一時差止日の関連チェック();
         pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().get一時差止日の入力チェック());
+        pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().基本送付情報の異動区分チェック());
+        pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().基本送付情報の異動日チェック());
+        pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().償還送付情報の異動区分チェック());
+        pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().償還送付情報の異動日チェック());
+        pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().高額送付情報の異動区分チェック());
+        pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().高額送付情報の異動日チェック());
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }

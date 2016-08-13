@@ -9,9 +9,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.DbWT1511SeikyugakuTsuchishoTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.FlowEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.SeikyugakuTsuchishoCsvFileToreraRecode3Entity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.KagoKetteiHokenshaInControlCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.seikyugakutsuchishofutanshain.SeikyugakuTsuchishoFutanshaInCsvGokeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.seikyugakutsuchishofutanshain.SeikyugakuTsuchishoFutanshaInCsvHeadEntity;
@@ -122,7 +122,7 @@ public class SeikyugakuTsuchishoFutanshaInManager {
         if ((レコード件数合算 == INDEX_0) || 登録件数 == INDEX_0) {
             mapper.処理結果リスト一時TBLに登録(errorTempentity);
         }
-        getEntity.set登録件数(登録件数);
+        getEntity.set明細データ登録件数(登録件数);
         return getEntity;
     }
 

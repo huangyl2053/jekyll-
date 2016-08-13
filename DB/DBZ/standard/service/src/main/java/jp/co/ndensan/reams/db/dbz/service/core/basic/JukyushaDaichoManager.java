@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -108,6 +109,25 @@ public class JukyushaDaichoManager {
         List<JukyushaDaicho> businessList = new ArrayList<>();
 
         for (DbT4001JukyushaDaichoEntity entity : dac.select受給者台帳情報(被保険者番号)) {
+            entity.initializeMd5();
+            businessList.add(new JukyushaDaicho(entity));
+        }
+
+        return businessList;
+    }
+
+    /**
+     * 受給者台帳情報を取得する。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 識別コード 識別コード
+     * @return List<JukyushaDaicho>
+     */
+    @Transaction
+    public List<JukyushaDaicho> get受給者台帳(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
+        List<JukyushaDaicho> businessList = new ArrayList<>();
+
+        for (DbT4001JukyushaDaichoEntity entity : dac.select受給者台帳情報(被保険者番号, 識別コード)) {
             entity.initializeMd5();
             businessList.add(new JukyushaDaicho(entity));
         }

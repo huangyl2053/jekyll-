@@ -273,11 +273,15 @@ var DBZ;
                         if (columns[i].dataName === 'shisetsuShurui') {
                             columns[i].visible = true;
                         }
+                        if (columns[i].dataName === 'txtTenshutsusakiHokenshaBango') {
+                            columns[i].visible = true;
+                        }
                     }
                     gridSetting.columns = columns;
 
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                    this.controls.TenshutsusakiJohoPanel().displayNone = false;
                 };
 
                 Riyou.prototype.全施設対象機能 = function () {
@@ -303,11 +307,15 @@ var DBZ;
                         if (columns[i].dataName === 'shisetsuShurui') {
                             columns[i].visible = true;
                         }
+                        if (columns[i].dataName === 'txtTenshutsusakiHokenshaBango') {
+                            columns[i].visible = true;
+                        }
                     }
                     gridSetting.columns = columns;
 
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                    this.controls.TenshutsusakiJohoPanel().displayNone = false;
                 };
 
                 Riyou.prototype.被保険者対象機能 = function () {
@@ -333,10 +341,14 @@ var DBZ;
                         if (columns[i].dataName === 'shisetsuShurui') {
                             columns[i].visible = true;
                         }
+                        if (columns[i].dataName === 'txtTenshutsusakiHokenshaBango') {
+                            columns[i].visible = true;
+                        }
                     }
                     gridSetting.columns = columns;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                    this.controls.TenshutsusakiJohoPanel().displayNone = false;
                 };
 
                 Riyou.prototype.他市町村住所地特例者対象機能 = function () {
@@ -362,11 +374,15 @@ var DBZ;
                         if (columns[i].dataName === 'shisetsuShurui') {
                             columns[i].visible = true;
                         }
+                        if (columns[i].dataName === 'txtTenshutsusakiHokenshaBango') {
+                            columns[i].visible = false;
+                        }
                     }
                     gridSetting.columns = columns;
 
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                    this.controls.TenshutsusakiJohoPanel().displayNone = true;
                 };
 
                 Riyou.prototype.適用除外者対象機能 = function () {
@@ -392,11 +408,15 @@ var DBZ;
                         if (columns[i].dataName === 'shisetsuShurui') {
                             columns[i].visible = false;
                         }
+                        if (columns[i].dataName === 'txtTenshutsusakiHokenshaBango') {
+                            columns[i].visible = false;
+                        }
                     }
                     gridSetting.columns = columns;
 
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                    this.controls.TenshutsusakiJohoPanel().displayNone = true;
                 };
                 return Riyou;
             })();

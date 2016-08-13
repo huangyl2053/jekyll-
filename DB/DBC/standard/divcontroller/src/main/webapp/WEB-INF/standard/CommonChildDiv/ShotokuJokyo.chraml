@@ -1,0 +1,148 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBC&quot;,&quot;controlName&quot;:&quot;ShotokuJokyo&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[{&quot;key&quot;:&quot;keyMode&quot;,&quot;controlName&quot;:&quot;ShotokuJokyo.hdnMode&quot;},{&quot;key&quot;:&quot;keyJuminCode&quot;,&quot;controlName&quot;:&quot;ShotokuJokyo.hdnJuminCode&quot;},{&quot;key&quot;:&quot;keyShoriNendo&quot;,&quot;controlName&quot;:&quot;ShotokuJokyo.hdnShoriNendo&quot;},{&quot;key&quot;:&quot;keyKijunYMD&quot;,&quot;controlName&quot;:&quot;ShotokuJokyo.hdnKijunYMD&quot;},{&quot;key&quot;:&quot;keyDaialogSelectSetaiinJoho&quot;,&quot;controlName&quot;:&quot;ShotokuJokyo.hdnDaialogSelectSetaiinJoho&quot;}],&quot;dialogOkEventNameForDialog&quot;:&quot;onClick_btnKakutei&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;onClick_btnClose&quot;,&quot;dialogCloseEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;L&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;100px&quot;,&quot;minHeight&quot;:&quot;200px&quot;,&quot;widthPercent&quot;:&quot;80&quot;,&quot;heightPercent&quot;:&quot;80&quot;,&quot;enterKeyAssignedControl&quot;:&quot;&quot;,&quot;anchorPosition&quot;:&quot;&quot;,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBC.ShotokuJokyo"><div class="StateChangable UzPanel JSControl FloatLeft UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M marginLeft-Default marginRight-Default Panel-Shadow UzCommonChildDivPanel Width-G1 UzCompositeChild" id="ShotokuJokyo" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ShotokuJokyo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G1&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;ShotokuJokyo&quot;,&quot;title&quot;:&quot;所得状況&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;ShotokuJokyo&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[{&quot;propertyName&quot;:&quot;hdnMode&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;hdnShikibetuCode&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;hdnShoriNendo&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;hdnKijunYMD&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;hdnDaialogSelectSetaiinJoho&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;hdnGyomuCode&quot;,&quot;value&quot;:&quot;&quot;}],&quot;session&quot;:{},&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="ShotokuJokyo_panel_header_area" style="display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: hidden;"></span><span class="textSpan">所得状況</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="ShotokuJokyo_panel_body_area"><div class="UzTextBoxDate TextBoxOuterDiv WithLabel UzTextBoxFlexibleDate JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtKijunYMD" style="width: 259px; height: 20px;" data-control-type="TextBoxFlexibleDate" data-obj="{&quot;fieldName&quot;:&quot;txtKijunYMD&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxFlexibleDate&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;txtKijunYMD_core&quot;,&quot;labelLText&quot;:&quot;世帯員把握基準日&quot;,&quot;labelLWidth&quot;:&quot;140px&quot;,&quot;labelLAlign&quot;:0}"><span class="word-wrap-break-word Label-L text-align-left" id="txtKijunYMD_labelL" style="width: 140px;"><span>世帯員把握基準日</span></span><input class="UzTextBox CoreElement Width-S" id="txtKijunYMD_core" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2" data-wareki-hirekijyou=""></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel UzTextBoxFlexibleDate JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtShoriNendo" style="width: 187px; height: 20px;" data-control-type="TextBoxFlexibleDate" data-obj="{&quot;fieldName&quot;:&quot;txtShoriNendo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxFlexibleDate&quot;,&quot;selectControlID&quot;:&quot;txtShoriNendo_core&quot;,&quot;labelLText&quot;:&quot;処理年度&quot;,&quot;labelRText&quot;:&quot;年度&quot;,&quot;labelLWidth&quot;:&quot;80px&quot;,&quot;labelRWidth&quot;:&quot;XS&quot;,&quot;labelLAlign&quot;:0,&quot;ymdKubun&quot;:0,&quot;displayFormat&quot;:3}"><span class="word-wrap-break-word Label-L text-align-left" id="txtShoriNendo_labelL" style="width: 80px;"><span>処理年度</span></span><input class="UzTextBox CoreElement Width-XS" id="txtShoriNendo_core" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2" data-wareki-hirekijyou=""><span class="word-wrap-break-word Label-R text-align-left Width-XS" id="txtShoriNendo_labelR"><span>年度</span></span></div><div class="UzHorizontalLine JSControl controlMargin-M Width-Default ClearFloat UzCompositeChild" id="lin1" data-control-type="HorizontalLine" data-obj="{&quot;fieldName&quot;:&quot;lin1&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;HorizontalLine&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;lin1&quot;}"></div><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M Width-S text-align-left UzCompositeChild" id="lblSetaiinShotoku" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblSetaiinShotoku&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;lblSetaiinShotoku&quot;,&quot;text&quot;:&quot;世帯員所得情報&quot;,&quot;align&quot;:0}"><span>世帯員所得情報</span></span><div class="UzDataGrid JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M ClearFloat Width-XL Height-M UzCompositeChild" id="dgSteaiinShotoku" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgSteaiinShotoku&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;XL&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;dgSteaiinShotoku&quot;,&quot;height&quot;:&quot;M&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:50,&quot;isMultiSelectable&quot;:true,&quot;isShowHeader&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowClearSortButton&quot;:false,&quot;isShowSelectedRowCount&quot;:false,&quot;isShowFooter&quot;:true,&quot;isShowRowState&quot;:false,&quot;columns&quot;:[{&quot;columnName&quot;:&quot;識別コード&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:110,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;shikibetsuCode&quot;},{&quot;columnName&quot;:&quot;被保険者番号&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:110,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;hihokenshaNo&quot;},{&quot;columnName&quot;:&quot;氏名&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;name&quot;},{&quot;columnName&quot;:&quot;生年月日&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;birthYMD&quot;},{&quot;columnName&quot;:&quot;性別&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:50,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;gender&quot;},{&quot;columnName&quot;:&quot;年齢&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:50,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;age&quot;},{&quot;columnName&quot;:&quot;続柄&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;zokugara&quot;},{&quot;columnName&quot;:&quot;種別&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;shubetsu&quot;},{&quot;columnName&quot;:&quot;異動年月日&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;idoYMD&quot;},{&quot;columnName&quot;:&quot;メモ&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:30,&quot;visible&quot;:true,&quot;cellType&quot;:17,&quot;cellDetails&quot;:{&quot;cellType&quot;:17,&quot;disabled&quot;:false,&quot;src&quot;:&quot;/ur/urz/image/UR_Memo_Nashi.png&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;,&quot;displayChildDivName&quot;:&quot;URZ.MemoNyuryoku&quot;,&quot;visibleCloseButton&quot;:false,&quot;onBeforeOpenDialog&quot;:&quot;&quot;,&quot;onOkClose&quot;:&quot;&quot;,&quot;onCancelClose&quot;:&quot;&quot;,&quot;dataPassing&quot;:[{&quot;key&quot;:&quot;GyomuCode&quot;,&quot;controlName&quot;:&quot;ShotokuJokyo.hdnGyomuCode&quot;},{&quot;key&quot;:&quot;memoShikibetsuKbn&quot;,&quot;controlName&quot;:&quot;column[shikibetsuTaishoKubun]&quot;},{&quot;key&quot;:&quot;memoShikibetsuTaishoCode&quot;,&quot;controlName&quot;:&quot;column[shikibetsuCode]&quot;}]},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;memo&quot;},{&quot;columnName&quot;:&quot;住民税&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;juminZei&quot;},{&quot;columnName&quot;:&quot;合計所得金額&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;gokeiShotoku&quot;},{&quot;columnName&quot;:&quot;年金等収入&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;nenkinShunyu&quot;},{&quot;columnName&quot;:&quot;年金等所得&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;nenkinShotoku&quot;},{&quot;columnName&quot;:&quot;課税所得&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;kazeiShotoku&quot;},{&quot;columnName&quot;:&quot;更正日&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;koseiYMD&quot;},{&quot;columnName&quot;:&quot;識別対象区分&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:30,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;shikibetsuTaishoKubun&quot;}],&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;memo&quot;,&quot;headerHeight&quot;:1,&quot;groupHeaderHeight&quot;:0},&quot;isShowSelectButtonColumn&quot;:false,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;isShowCancelButtonColumn&quot;:false,&quot;isErrorAndWarningColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;selectLimitRowCount&quot;:0},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;cancelButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgSteaiinShotoku_grid_table" role="" style="width: 1169px; height: 365px; position: relative;"></div><div id="dgSteaiinShotoku_footer" style="width: 1169px; height: 25px;"></div></div><button class="UzButton JSControl controlMargin-M Width-S FloatRight marginLeft-XS marginRight-XS ClearFloat UzCompositeChild" id="btnClose" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnClose&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnClose&quot;,&quot;onClick&quot;:&quot;onClick_btnKakutei&quot;,&quot;text&quot;:&quot;閉じる&quot;}"><span>閉じる</span></button><button class="UzButton JSControl controlMargin-M Width-S FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="btnKakutei" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnKakutei&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnKakutei&quot;,&quot;onClick&quot;:&quot;onClick_btnKakutei&quot;,&quot;text&quot;:&quot;確定&quot;}"><span>確定</span></button></div></div>            
+               
+           
+   
+           
+           <script class="RamlConvert" type="text/javascript">
+var DBC= DBC? DBC: {};
+DBC['SHOTOKUJOKYO'] = {};
+DBC['SHOTOKUJOKYO'].ShotokuJokyoRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_ShotokuJokyo').getProperty();parameter0.txtKijunYMD = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKijunYMD').getProperty();parameter0.txtShoriNendo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShoriNendo').getProperty();parameter0.lin1 = Uz.JSControlUtil.getJSControl(parentFieldName + '_lin1').getProperty();parameter0.lblSetaiinShotoku = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblSetaiinShotoku').getProperty();parameter0.dgSteaiinShotoku = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgSteaiinShotoku').getProperty();parameter0.btnClose = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnClose').getProperty();parameter0.btnKakutei = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnKakutei').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBC;
+(function (DBC) {
+    (function (ShotokuJokyo) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onClick_btnKakutei = function () {
+                return "onClick_btnKakutei";
+            };
+            return Events;
+        })();
+        ShotokuJokyo.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "ShotokuJokyo";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBC.ShotokuJokyo.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBC.ShotokuJokyo.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.ShotokuJokyo = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtKijunYMD = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKijunYMD"));
+            };
+
+            Controls.prototype.txtShoriNendo = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShoriNendo"));
+            };
+
+            Controls.prototype.lin1 = function () {
+                return new UZA.HorizontalLine(this.convFiledName("lin1"));
+            };
+
+            Controls.prototype.lblSetaiinShotoku = function () {
+                return new UZA.Label(this.convFiledName("lblSetaiinShotoku"));
+            };
+
+            Controls.prototype.dgSteaiinShotoku = function () {
+                return new UZA.DataGrid(this.convFiledName("dgSteaiinShotoku"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+
+            Controls.prototype.btnKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
+            };
+            return Controls;
+        })();
+        ShotokuJokyo.Controls = Controls;
+    })(DBC.ShotokuJokyo || (DBC.ShotokuJokyo = {}));
+    var ShotokuJokyo = DBC.ShotokuJokyo;
+})(DBC || (DBC = {}));
+var DBC;
+(function (DBC) {
+    (function (ShotokuJokyo) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ShotokuJokyo.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [
+                    "DisplayMode"
+                ];
+            };
+
+            ModeController.prototype.DisplayMode = function () {
+                return new Modes.DisplayMode(this.controls);
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new ShotokuJokyo.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        ShotokuJokyo.ModeController = ModeController;
+
+        (function (Modes) {
+            var DisplayMode = (function () {
+                function DisplayMode(controls) {
+                    this.controls = controls;
+                }
+                DisplayMode.prototype.SHOKAI = function () {
+                    this.controls.btnKakutei().disabled = true;
+                };
+
+                DisplayMode.prototype.ADD = function () {
+                    this.controls.btnKakutei().disabled = false;
+                };
+                return DisplayMode;
+            })();
+            Modes.DisplayMode = DisplayMode;
+        })(ShotokuJokyo.Modes || (ShotokuJokyo.Modes = {}));
+        var Modes = ShotokuJokyo.Modes;
+    })(DBC.ShotokuJokyo || (DBC.ShotokuJokyo = {}));
+    var ShotokuJokyo = DBC.ShotokuJokyo;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (ShotokuJokyo) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ShotokuJokyo.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        ShotokuJokyo.PublicProperties = PublicProperties;
+    })(DBC.ShotokuJokyo || (DBC.ShotokuJokyo = {}));
+    var ShotokuJokyo = DBC.ShotokuJokyo;
+})(DBC || (DBC = {}));
+</script></div>

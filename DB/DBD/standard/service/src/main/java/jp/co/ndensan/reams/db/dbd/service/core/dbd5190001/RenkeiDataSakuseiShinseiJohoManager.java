@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbd.service.core.dbd5190001;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.core.ninteishinseijoho.YokaigoNinteiGaibuDataOutputHistory;
 import jp.co.ndensan.reams.db.dbd.business.core.ninteishinseijoho.NinteiShinseiJohoBusiness;
+import jp.co.ndensan.reams.db.dbd.business.core.ninteishinseijoho.YokaigoNinteiGaibuDataOutputHistory;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd5190001.NinteiShinseiJohoParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5190001.DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5190001.NinteiShinseiJohoEntity;
@@ -92,7 +92,7 @@ public class RenkeiDataSakuseiShinseiJohoManager {
                 .createSelectByKeyParam(shoKisaiHokenshaNo, konkaikaishiTimestamp,
                         konkaisyuryoTimestamp, hihokenshaNo, saidaikensu);
         INinteiShinseiJohoMapper mapper = mapperProvider.create(INinteiShinseiJohoMapper.class);
-        if (!parameter.getShoKisaiHokenshaNo().isNullOrEmpty()) {
+        if (parameter.getShoKisaiHokenshaNo() != null) {
             List<NinteiShinseiJohoEntity> entitys = mapper.get要介護認定申請情報(parameter);
             if (entitys == null || entitys.isEmpty()) {
                 return SearchResult.of(Collections.<NinteiShinseiJohoBusiness>emptyList(), 0, false);

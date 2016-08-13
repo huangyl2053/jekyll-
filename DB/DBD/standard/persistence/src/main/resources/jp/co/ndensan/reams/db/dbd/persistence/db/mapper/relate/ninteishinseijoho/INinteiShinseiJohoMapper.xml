@@ -32,8 +32,10 @@
         INNER JOIN  rgdb."DbT7211GaibuRenkeiDataoutputJoho" AS "DbT7211"
         ON "DbT4101"."shinseishoKanriNo" = "DbT7211"."shinseishoKanriNo"
         WHERE
-        "DbT4101"."shoKisaiHokenshaNo" =#{shoKisaiHokenshaNo}
-        AND "DbT4101"."logicalDeletedFlag" =#{logicalDeletedFlag}
+        "DbT4101"."logicalDeletedFlag" =#{logicalDeletedFlag}
+            <if test="証記載保険者番号">
+                AND  "DbT4101"."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+            </if>
         AND "DbT7211"."ninteiShinseiJohoChushutsuYMD" is NULL
             <if test="今回開始">
                 AND  "DbT4101"."insertTimestamp" <![CDATA[>=]]> #{konkaikaishiTimestamp}

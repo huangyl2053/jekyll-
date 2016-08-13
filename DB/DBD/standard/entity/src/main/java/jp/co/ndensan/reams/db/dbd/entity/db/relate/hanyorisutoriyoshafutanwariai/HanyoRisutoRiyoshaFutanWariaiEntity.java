@@ -57,8 +57,6 @@ public class HanyoRisutoRiyoshaFutanWariaiEntity {
     private boolean 利用者負担割合_発行不要フラグ;
     private RString 利用者負担割合_発行区分;
     private FlexibleDate 利用者負担割合_発行日;
-    private RString 利用者負担割合_識別コード;
-    private RString 利用者負担割合_枝番号;
     private UaFt200FindShikibetsuTaishoEntity psmEntity;
     private UaFt250FindAtesakiEntity atesakiEntity;
 }

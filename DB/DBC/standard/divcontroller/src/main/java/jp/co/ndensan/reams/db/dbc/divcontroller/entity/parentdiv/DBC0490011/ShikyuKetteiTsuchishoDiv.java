@@ -1,4 +1,5 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0490011;
+
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -31,8 +32,8 @@ public class ShikyuKetteiTsuchishoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ｔｘｔHakkobi")
-    private TextBoxDate ｔｘｔHakkobi;
+    @JsonProperty("txtHakkobi")
+    private TextBoxDate txtHakkobi;
     @JsonProperty("lblKomento")
     private Label lblKomento;
     @JsonProperty("ShutsuryokukoshinSentaku")
@@ -50,22 +51,22 @@ public class ShikyuKetteiTsuchishoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getｔｘｔHakkobi
-     * @return ｔｘｔHakkobi
+ /*
+     * gettxtHakkobi
+     * @return txtHakkobi
      */
-    @JsonProperty("ｔｘｔHakkobi")
-    public TextBoxDate getＴｘｔHakkobi() {
-        return ｔｘｔHakkobi;
+    @JsonProperty("txtHakkobi")
+    public TextBoxDate getTxtHakkobi() {
+        return txtHakkobi;
     }
 
     /*
-     * setｔｘｔHakkobi
-     * @param ｔｘｔHakkobi ｔｘｔHakkobi
+     * settxtHakkobi
+     * @param txtHakkobi txtHakkobi
      */
-    @JsonProperty("ｔｘｔHakkobi")
-    public void setＴｘｔHakkobi(TextBoxDate ｔｘｔHakkobi) {
-        this.ｔｘｔHakkobi = ｔｘｔHakkobi;
+    @JsonProperty("txtHakkobi")
+    public void setTxtHakkobi(TextBoxDate txtHakkobi) {
+        this.txtHakkobi = txtHakkobi;
     }
 
     /*

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.business.core.yokaigoninteiinterface;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -22,7 +23,7 @@ public class YokaigoNinteiInterfaceIdentifier implements Serializable {
 
     private final ShinseishoKanriNo 申請書管理番号;
     private final HihokenshaNo 被保険者番号;
-    private final RString 取込日時;
+    private final YMDHMS 取込日時;
     private final RString 申請種別コード;
     private final RString 取下区分コード;
     private final FlexibleDate 認定申請日;
@@ -53,7 +54,7 @@ public class YokaigoNinteiInterfaceIdentifier implements Serializable {
      */
     public YokaigoNinteiInterfaceIdentifier(ShinseishoKanriNo 申請書管理番号,
             HihokenshaNo 被保険者番号,
-            RString 取込日時,
+            YMDHMS 取込日時,
             RString 申請種別コード,
             RString 取下区分コード,
             FlexibleDate 認定申請日,

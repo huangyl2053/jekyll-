@@ -20,6 +20,14 @@ var DBZ;
                 return "onSelectByDeleteButton_dgShisetsuNyutaishoRireki";
             };
 
+            Events.onBlur_nyuryokuHokensyaCode = function () {
+                return "onBlur_nyuryokuHokensyaCode";
+            };
+
+            Events.onClick_BtnHokenshaInputGuide = function () {
+                return "onClick_BtnHokenshaInputGuide";
+            };
+
             Events.onClick_btnShisetsuNyutaishoKakutei = function () {
                 return "onClick_btnShisetsuNyutaishoKakutei";
             };
@@ -73,6 +81,22 @@ var DBZ;
 
             Controls.prototype.ccdShisetsuJoho = function () {
                 return new DBZ.ShisetsuJohoCommonChildDiv.ModeController(this.convFiledName("ccdShisetsuJoho"));
+            };
+
+            Controls.prototype.TenshutsusakiJohoPanel = function () {
+                return new UZA.Panel(this.convFiledName("TenshutsusakiJohoPanel"));
+            };
+
+            Controls.prototype.txtHokensha = function () {
+                return new UZA.TextBox(this.convFiledName("txtHokensha"));
+            };
+
+            Controls.prototype.btnHokenshaKensaku = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnHokenshaKensaku"));
+            };
+
+            Controls.prototype.txtHokensyaMeisho = function () {
+                return new UZA.TextBox(this.convFiledName("txtHokensyaMeisho"));
             };
 
             Controls.prototype.btnShisetsuNyutaishoKakutei = function () {

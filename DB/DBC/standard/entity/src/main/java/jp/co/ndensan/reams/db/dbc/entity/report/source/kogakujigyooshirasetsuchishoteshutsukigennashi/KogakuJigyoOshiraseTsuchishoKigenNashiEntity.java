@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 高額総合事業サービス費給付お知らせ通知書（提出期限なし）のEntityクラスです。
  *
- * @reamsid_L DBC-4770-110 jianglaisheng
+ * @reamsid_L DBC-4770-110 wangxingpeng
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

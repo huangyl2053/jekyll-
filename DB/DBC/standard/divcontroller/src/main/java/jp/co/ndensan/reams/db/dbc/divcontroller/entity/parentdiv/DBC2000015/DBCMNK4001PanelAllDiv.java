@@ -4,17 +4,22 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000015;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 
 /**
- * DBCMNK4001PanelAll のクラスファイル 
- * 
- * @author 自動生成
+ * DBCMNK4001PanelAll のクラスファイル
+ *
+ * @reamsid_L DBC-4960-010 dongqianjing
  */
 public class DBCMNK4001PanelAllDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -78,7 +83,7 @@ public class DBCMNK4001PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKaishiDate(Label lblKaishiDate) {
+    public void setLblKaishiDate(Label lblKaishiDate) {
         this.getPanelChushutsuKikan().setLblKaishiDate(lblKaishiDate);
     }
 
@@ -88,7 +93,7 @@ public class DBCMNK4001PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKaishiTime(Label lblKaishiTime) {
+    public void setLblKaishiTime(Label lblKaishiTime) {
         this.getPanelChushutsuKikan().setLblKaishiTime(lblKaishiTime);
     }
 
@@ -98,7 +103,7 @@ public class DBCMNK4001PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblShuryoDate(Label lblShuryoDate) {
+    public void setLblShuryoDate(Label lblShuryoDate) {
         this.getPanelChushutsuKikan().setLblShuryoDate(lblShuryoDate);
     }
 
@@ -108,7 +113,7 @@ public class DBCMNK4001PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblShuryoTime(Label lblShuryoTime) {
+    public void setLblShuryoTime(Label lblShuryoTime) {
         this.getPanelChushutsuKikan().setLblShuryoTime(lblShuryoTime);
     }
 
@@ -118,7 +123,7 @@ public class DBCMNK4001PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtZenkaiKaishiDate(TextBoxDate txtZenkaiKaishiDate) {
+    public void setTxtZenkaiKaishiDate(TextBoxDate txtZenkaiKaishiDate) {
         this.getPanelChushutsuKikan().setTxtZenkaiKaishiDate(txtZenkaiKaishiDate);
     }
 
@@ -128,7 +133,7 @@ public class DBCMNK4001PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtZenkaiKaishiTime(TextBoxTime txtZenkaiKaishiTime) {
+    public void setTxtZenkaiKaishiTime(TextBoxTime txtZenkaiKaishiTime) {
         this.getPanelChushutsuKikan().setTxtZenkaiKaishiTime(txtZenkaiKaishiTime);
     }
 
@@ -138,7 +143,7 @@ public class DBCMNK4001PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblNamisen1(Label lblNamisen1) {
+    public void setLblNamisen1(Label lblNamisen1) {
         this.getPanelChushutsuKikan().setLblNamisen1(lblNamisen1);
     }
 
@@ -148,7 +153,7 @@ public class DBCMNK4001PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtZenkaiShuryoDate(TextBoxDate txtZenkaiShuryoDate) {
+    public void setTxtZenkaiShuryoDate(TextBoxDate txtZenkaiShuryoDate) {
         this.getPanelChushutsuKikan().setTxtZenkaiShuryoDate(txtZenkaiShuryoDate);
     }
 
@@ -158,7 +163,7 @@ public class DBCMNK4001PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtZenkaiShuryoTime(TextBoxTime txtZenkaiShuryoTime) {
+    public void setTxtZenkaiShuryoTime(TextBoxTime txtZenkaiShuryoTime) {
         this.getPanelChushutsuKikan().setTxtZenkaiShuryoTime(txtZenkaiShuryoTime);
     }
 
@@ -168,7 +173,7 @@ public class DBCMNK4001PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKonkaiKaishiDate(TextBoxDate txtKonkaiKaishiDate) {
+    public void setTxtKonkaiKaishiDate(TextBoxDate txtKonkaiKaishiDate) {
         this.getPanelChushutsuKikan().setTxtKonkaiKaishiDate(txtKonkaiKaishiDate);
     }
 
@@ -178,7 +183,7 @@ public class DBCMNK4001PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKonkaiKaishiTime(TextBoxTime txtKonkaiKaishiTime) {
+    public void setTxtKonkaiKaishiTime(TextBoxTime txtKonkaiKaishiTime) {
         this.getPanelChushutsuKikan().setTxtKonkaiKaishiTime(txtKonkaiKaishiTime);
     }
 
@@ -188,7 +193,7 @@ public class DBCMNK4001PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblNamisen2(Label lblNamisen2) {
+    public void setLblNamisen2(Label lblNamisen2) {
         this.getPanelChushutsuKikan().setLblNamisen2(lblNamisen2);
     }
 
@@ -198,7 +203,7 @@ public class DBCMNK4001PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKonkaiShuryoDate(TextBoxDate txtKonkaiShuryoDate) {
+    public void setTxtKonkaiShuryoDate(TextBoxDate txtKonkaiShuryoDate) {
         this.getPanelChushutsuKikan().setTxtKonkaiShuryoDate(txtKonkaiShuryoDate);
     }
 
@@ -208,7 +213,7 @@ public class DBCMNK4001PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKonkaiShuryoTime(TextBoxTime txtKonkaiShuryoTime) {
+    public void setTxtKonkaiShuryoTime(TextBoxTime txtKonkaiShuryoTime) {
         this.getPanelChushutsuKikan().setTxtKonkaiShuryoTime(txtKonkaiShuryoTime);
     }
 
@@ -218,7 +223,7 @@ public class DBCMNK4001PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadSort(RadioButton radSort) {
+    public void setRadSort(RadioButton radSort) {
         this.getPanelSort().setRadSort(radSort);
     }
 
