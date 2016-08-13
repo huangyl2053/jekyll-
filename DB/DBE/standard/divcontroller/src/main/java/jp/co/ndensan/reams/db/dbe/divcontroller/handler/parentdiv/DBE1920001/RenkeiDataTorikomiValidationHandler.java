@@ -120,7 +120,7 @@ public class RenkeiDataTorikomiValidationHandler {
                         filePath, NinteiShinseiJohoDensanCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF)
-                        .hasHeader(true).build();
+                        .hasHeader(false).build();
                 if (電算標準版_197 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
                     validPairs.add(new ValidationMessageControlPair(
                             FilecheckMessages.Validate認定申請情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
@@ -139,7 +139,7 @@ public class RenkeiDataTorikomiValidationHandler {
                         filePath, NinteiShinseiJohoKouroushouCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF)
-                        .hasHeader(true).build();
+                        .hasHeader(false).build();
                 if (厚労省_174 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
                     validPairs.add(new ValidationMessageControlPair(
                             FilecheckMessages.Validate認定申請情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
@@ -157,7 +157,7 @@ public class RenkeiDataTorikomiValidationHandler {
                         filePath, NinteiShinseiJohoKouroushouCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF)
-                        .hasHeader(true).build();
+                        .hasHeader(false).build();
                 if (東芝版_87 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
                     validPairs.add(new ValidationMessageControlPair(
                             FilecheckMessages.Validate認定申請情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
@@ -200,7 +200,7 @@ public class RenkeiDataTorikomiValidationHandler {
                         filePath, NinteichosaItakusakiJohoDensanCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF)
-                        .hasHeader(true).build();
+                        .hasHeader(false).build();
                 if (電算標準版_11 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
                     validPairs.add(new ValidationMessageControlPair(
                             FilecheckMessages.Validate認定調査委託先情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
@@ -219,7 +219,7 @@ public class RenkeiDataTorikomiValidationHandler {
                         filePath, NinteichosaItakusakiJohoKouroushouCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF)
-                        .hasHeader(true).build();
+                        .hasHeader(false).build();
                 if (厚労省_10 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
                     validPairs.add(new ValidationMessageControlPair(
                             FilecheckMessages.Validate認定調査委託先情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
@@ -262,7 +262,7 @@ public class RenkeiDataTorikomiValidationHandler {
                         filePath, ChosainJohoDensanCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF)
-                        .hasHeader(true).build();
+                        .hasHeader(false).build();
                 if (電算標準版_9 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
                     validPairs.add(new ValidationMessageControlPair(
                             FilecheckMessages.Validate認定調査員情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
@@ -280,7 +280,7 @@ public class RenkeiDataTorikomiValidationHandler {
                         filePath, ChosainJohoKouroushouCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF)
-                        .hasHeader(true).build();
+                        .hasHeader(false).build();
                 if (厚労省_8 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
                     validPairs.add(new ValidationMessageControlPair(
                             FilecheckMessages.Validate認定調査員情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
@@ -323,7 +323,7 @@ public class RenkeiDataTorikomiValidationHandler {
                         filePath, ShujiiIryoKikanJohoDensanCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF)
-                        .hasHeader(true).build();
+                        .hasHeader(false).build();
                 if (電算標準版_10 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
                     validPairs.add(new ValidationMessageControlPair(
                             FilecheckMessages.Validate主治医医療機関情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
@@ -341,7 +341,7 @@ public class RenkeiDataTorikomiValidationHandler {
                         filePath, ShujiiIryoKikanJohoKouroushouCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF)
-                        .hasHeader(true).build();
+                        .hasHeader(false).build();
                 if (厚労省_9 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
                     validPairs.add(new ValidationMessageControlPair(
                             FilecheckMessages.Validate主治医医療機関情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
@@ -384,7 +384,7 @@ public class RenkeiDataTorikomiValidationHandler {
                         filePath, ShujiiJohoDensanCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF)
-                        .hasHeader(true).build();
+                        .hasHeader(false).build();
                 if (電算標準版_8 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
                     validPairs.add(new ValidationMessageControlPair(
                             FilecheckMessages.Validate主治医情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
@@ -402,7 +402,7 @@ public class RenkeiDataTorikomiValidationHandler {
                         filePath, ShujiiJohoKouroushouCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF)
-                        .hasHeader(true).build();
+                        .hasHeader(false).build();
                 if (厚労省_7 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
                     validPairs.add(new ValidationMessageControlPair(
                             FilecheckMessages.Validate主治医情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));

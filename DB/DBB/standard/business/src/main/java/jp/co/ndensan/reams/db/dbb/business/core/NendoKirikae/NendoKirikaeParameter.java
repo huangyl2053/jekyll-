@@ -3,28 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.NendoKirikae;
+package jp.co.ndensan.reams.db.dbb.business.core.NendoKirikae;
 
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import lombok.Setter;
 
 /**
  * 年度切替バッチのパラメッタ
  *
  * @reamsid_L DBB_9010_002 zhengshenlei
  */
-@Setter
+@lombok.Getter
+@lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class NendoKirikaeMybatisParameter {
+public class NendoKirikaeParameter {
 
-    private final RDate choteiNendo;
-
-    /**
-     * コンストラクタ
-     *
-     * @param moveyear
-     */
-    public NendoKirikaeMybatisParameter(RDate choteiNendo) {
-        this.choteiNendo = choteiNendo;
-    }
+    private RDate 調定年度;
 }

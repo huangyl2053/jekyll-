@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB9010002;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.NendoKirikae.NendoKirikaeBatchParameter;
+import jp.co.ndensan.reams.db.dbb.business.core.NendoKirikae.NendoKirikaeParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9010002.NendoKirikaeDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class NendoKirikaeHandler {
 
     private final NendoKirikaeDiv div;
+    private final int NUM_1;
 
     /**
      * コンストラクタです。
@@ -28,6 +29,7 @@ public class NendoKirikaeHandler {
      * @param div NendoKirikaeDiv
      */
     public NendoKirikaeHandler(NendoKirikaeDiv div) {
+        this.NUM_1 = 1;
         this.div = div;
     }
 
@@ -41,12 +43,12 @@ public class NendoKirikaeHandler {
         RString 新年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課);
         div.getDcLblTonendo().setValue(new RDate(当年度.toString()));
-        div.getDcLblShinnendo().setValue(new RDate(新年度.toString()).plusYear(1));
+        div.getDcLblShinnendo().setValue(new RDate(新年度.toString()).plusYear(NUM_1));
     }
 
     public void バッチ実行() {
-        NendoKirikaeBatchParameter parameter = new NendoKirikaeBatchParameter();
-        parameter.setChoteiNendo(div.getDcLblTonendo().getValue());
+        NendoKirikaeParameter parameter = new NendoKirikaeParameter();
+        parameter.set調定年度(div.getDcLblTonendo().getValue());
     }
 
 }

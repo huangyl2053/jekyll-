@@ -41,7 +41,7 @@ public class FutanGendogakuNinteiShinseishoHakkoIchiran {
     private SetaiKazeiKubun 世帯課税;
     private FlexibleDate 申請年月日;
     private FlexibleDate 適用日;
-    private RiyoshaFutanDankai 担段階;
+    private RiyoshaFutanDankai 負担段階;
     private Decimal ユニット型順個室;
     private Decimal 多床室;
     private FlexibleDate 決定年月日;
@@ -55,5 +55,4 @@ public class FutanGendogakuNinteiShinseishoHakkoIchiran {
     private FlexibleDate 住民となった日;
     private RString 住所地特例フラグ;
     private Decimal 非課税年金勘案額;
-    private Decimal ユニット型準個室;
 }

@@ -387,7 +387,7 @@ public class JikoFutangakuHosei {
         KogakuGassanJikoFutanGaku 負担額 = ViewStateHolder.get(
                 ViewStateKeys.高額合算自己負担額, KogakuGassanJikoFutanGaku.class);
         負担額 = handler.編集処理対象から画面(負担額);
-        負担額.createBuilderForEdit()
+        負担額 = 負担額.createBuilderForEdit()
                 .setリアル補正実施年月日(FlexibleDate.getNowDate())
                 .build();
         List<KogakuGassanJikoFutanGakuMeisai> 負担額明細一覧 = null;

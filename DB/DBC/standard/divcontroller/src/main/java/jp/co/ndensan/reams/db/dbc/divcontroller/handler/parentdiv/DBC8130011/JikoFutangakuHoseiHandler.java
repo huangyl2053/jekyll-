@@ -518,7 +518,7 @@ public class JikoFutangakuHoseiHandler {
                 .set補正済_合計_自己負担額(自己負担額保持.get変更後_合計_補正後_自己負担額())
                 .set補正済_合計_70_74自己負担額_内訳(
                         自己負担額保持.get変更後_合計_補正後_うち70_74歳に係る負担額())
-                .set合計_70未満高額支給額(自己負担額保持.get変更後_合計_補正後_高額総合事業サービス費())
+                .set補正済_合計_70未満高額支給額(自己負担額保持.get変更後_合計_補正後_高額総合事業サービス費())
                 .build();
     }
 
@@ -543,121 +543,121 @@ public class JikoFutangakuHoseiHandler {
         for (KogakuGassanJikoFutanGakuMeisai item : resultList) {
             switch (item.get対象月().toString()) {
                 case "008":
-                    item.createBuilderForEdit()
+                    item = item.createBuilderForEdit()
                             .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_8月分())
                             .set補正済_70_74自己負担額_内数(
                                     自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_8月分())
-                            .set70未満高額支給額(
+                            .set補正済_70未満高額支給額(
                                     自己負担額保持.get変更後_補正後_高額総合事業サービス費_8月分())
                             .build();
                     businessList.add(item);
                     break;
                 case "009":
-                    item.createBuilderForEdit()
+                    item = item.createBuilderForEdit()
                             .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_9月分())
                             .set補正済_70_74自己負担額_内数(
                                     自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_9月分())
-                            .set70未満高額支給額(
+                            .set補正済_70未満高額支給額(
                                     自己負担額保持.get変更後_補正後_高額総合事業サービス費_9月分())
                             .build();
                     businessList.add(item);
                     break;
                 case "010":
-                    item.createBuilderForEdit()
+                    item = item.createBuilderForEdit()
                             .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_10月分())
                             .set補正済_70_74自己負担額_内数(
                                     自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_10月分())
-                            .set70未満高額支給額(
+                            .set補正済_70未満高額支給額(
                                     自己負担額保持.get変更後_補正後_高額総合事業サービス費_10月分())
                             .build();
                     businessList.add(item);
                     break;
                 case "011":
-                    item.createBuilderForEdit()
+                    item = item.createBuilderForEdit()
                             .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_11月分())
                             .set補正済_70_74自己負担額_内数(
                                     自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_11月分())
-                            .set70未満高額支給額(
+                            .set補正済_70未満高額支給額(
                                     自己負担額保持.get変更後_補正後_高額総合事業サービス費_11月分())
                             .build();
                     businessList.add(item);
                     break;
                 case "012":
-                    item.createBuilderForEdit()
+                    item = item.createBuilderForEdit()
                             .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_12月分())
                             .set補正済_70_74自己負担額_内数(
                                     自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_12月分())
-                            .set70未満高額支給額(
+                            .set補正済_70未満高額支給額(
                                     自己負担額保持.get変更後_補正後_高額総合事業サービス費_12月分())
                             .build();
                     businessList.add(item);
                     break;
                 case "101":
-                    item.createBuilderForEdit()
+                    item = item.createBuilderForEdit()
                             .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_1月分())
                             .set補正済_70_74自己負担額_内数(
                                     自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_1月分())
-                            .set70未満高額支給額(
+                            .set補正済_70未満高額支給額(
                                     自己負担額保持.get変更後_補正後_高額総合事業サービス費_1月分())
                             .build();
                     businessList.add(item);
                     break;
                 case "102":
-                    item.createBuilderForEdit()
+                    item = item.createBuilderForEdit()
                             .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_2月分())
                             .set補正済_70_74自己負担額_内数(
                                     自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_2月分())
-                            .set70未満高額支給額(
+                            .set補正済_70未満高額支給額(
                                     自己負担額保持.get変更後_補正後_高額総合事業サービス費_2月分())
                             .build();
                     businessList.add(item);
                     break;
                 case "103":
-                    item.createBuilderForEdit()
+                    item = item.createBuilderForEdit()
                             .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_3月分())
                             .set補正済_70_74自己負担額_内数(
                                     自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_3月分())
-                            .set70未満高額支給額(
+                            .set補正済_70未満高額支給額(
                                     自己負担額保持.get変更後_補正後_高額総合事業サービス費_3月分())
                             .build();
                     businessList.add(item);
                     break;
                 case "104":
-                    item.createBuilderForEdit()
+                    item = item.createBuilderForEdit()
                             .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_4月分())
                             .set補正済_70_74自己負担額_内数(
                                     自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_4月分())
-                            .set70未満高額支給額(
+                            .set補正済_70未満高額支給額(
                                     自己負担額保持.get変更後_補正後_高額総合事業サービス費_4月分())
                             .build();
                     businessList.add(item);
                     break;
                 case "105":
-                    item.createBuilderForEdit()
+                    item = item.createBuilderForEdit()
                             .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_5月分())
                             .set補正済_70_74自己負担額_内数(
                                     自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_5月分())
-                            .set70未満高額支給額(
+                            .set補正済_70未満高額支給額(
                                     自己負担額保持.get変更後_補正後_高額総合事業サービス費_5月分())
                             .build();
                     businessList.add(item);
                     break;
                 case "106":
-                    item.createBuilderForEdit()
+                    item = item.createBuilderForEdit()
                             .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_6月分())
                             .set補正済_70_74自己負担額_内数(
                                     自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_6月分())
-                            .set70未満高額支給額(
+                            .set補正済_70未満高額支給額(
                                     自己負担額保持.get変更後_補正後_高額総合事業サービス費_6月分())
                             .build();
                     businessList.add(item);
                     break;
                 case "107":
-                    item.createBuilderForEdit()
+                    item = item.createBuilderForEdit()
                             .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_7月分())
                             .set補正済_70_74自己負担額_内数(
                                     自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_7月分())
-                            .set70未満高額支給額(
+                            .set補正済_70未満高額支給額(
                                     自己負担額保持.get変更後_補正後_高額総合事業サービス費_7月分())
                             .build();
                     businessList.add(item);
