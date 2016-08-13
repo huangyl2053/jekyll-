@@ -109,7 +109,7 @@ public class JigyohokokuCompYoshiki251Report extends Report<JigyohokokuCompYoshi
                 cleanValue();
             }
             list = get縦番号(entity.get縦番号(), entity.get横番号(), entity.get集計区分(),
-                    Integer.parseInt(entity.get後_保険請求分請求額().toString()));
+                    entity.get後_保険請求分請求額());
             集計番号 = entity.get集計番号();
             給付実績区分コード = entity.get給付実績区分コード();
         }

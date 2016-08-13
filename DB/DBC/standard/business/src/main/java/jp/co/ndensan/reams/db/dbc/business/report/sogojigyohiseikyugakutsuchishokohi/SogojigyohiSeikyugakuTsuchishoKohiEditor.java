@@ -27,6 +27,9 @@ public class SogojigyohiSeikyugakuTsuchishoKohiEditor implements ISogojigyohiSei
     private final DbWT1511SeikyugakuTsuchishoTempEntity 請求額通知書情報;
     private final YMDHMS 帳票作成日時;
     private static final RString SAKUSEI = new RString("作成");
+    private static final RString NUM = new RString("99");
+    private static final RString ST = new RString("ST");
+    private static final RString 総合計 = new RString("「＊＊　総合計　＊＊」");
 
     /**
      * インスタンスを生成します。
@@ -54,19 +57,19 @@ public class SogojigyohiSeikyugakuTsuchishoKohiEditor implements ISogojigyohiSei
         }
         source.kohiFutanshaNo = 請求額通知書情報.get公費負担者番号();
         source.kohiFutanshaName = 請求額通知書情報.get公費負担者名();
-        if (!new RString("99").equals(請求額通知書情報.get款コード())) {
+        if (!NUM.equals(請求額通知書情報.get款コード())) {
             source.kanName = 請求額通知書情報.get款名();
         } else {
-            source.kanName = new RString("「＊＊　総合計　＊＊」");
+            source.kanName = 総合計;
         }
 
-        if (!new RString("99").equals(請求額通知書情報.get項コード())) {
+        if (!NUM.equals(請求額通知書情報.get項コード())) {
             source.kouName = 請求額通知書情報.get項名();
         } else {
             source.kouName = RString.EMPTY;
         }
         source.kokuhorenName = 請求額通知書情報.get国保連合会名();
-        if (!new RString("ST").equals(請求額通知書情報.getサービス種類コード())) {
+        if (!ST.equals(請求額通知書情報.getサービス種類コード())) {
             source.listMeisai_1 = 請求額通知書情報.getサービス種類名();
             source.listMeisai_3 = this.decimal_to_string(請求額通知書情報.get通常分_実日数());
         } else {
