@@ -378,4 +378,13 @@ public class KyufuKanrihyoShokaiBusiness implements Serializable {
     public FlexibleYearMonth get取込年月() {
         return entity.get取込年月();
     }
+
+    /**
+     * 氏名を返します。
+     *
+     * @return 氏名
+     */
+    public RString get氏名() {
+        return entity.get氏名();
+    }
 }
