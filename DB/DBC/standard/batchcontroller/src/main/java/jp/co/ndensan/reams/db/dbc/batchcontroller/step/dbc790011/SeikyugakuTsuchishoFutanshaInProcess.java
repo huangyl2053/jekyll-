@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc790011;
 
 import jp.co.ndensan.reams.db.dbc.definition.processprm.seikyugakutsuchishofutanshain.SeikyugakuTsuchishoFutanshaInProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.FlowEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.seikyugakutsuchishofutanshain.SeikyugakuTsuchishoFutanshaInManager;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
