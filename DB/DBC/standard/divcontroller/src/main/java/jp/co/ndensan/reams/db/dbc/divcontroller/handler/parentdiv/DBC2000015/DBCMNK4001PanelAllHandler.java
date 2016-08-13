@@ -64,7 +64,7 @@ public class DBCMNK4001PanelAllHandler {
             div.getTxtKonkaiKaishiTime().setValue(今回開始時刻);
         }
         div.getTxtKonkaiShuryoDate().setValue(RDate.getNowDate());
-        div.getTxtKonkaiShuryoTime().setValue(RDate.getNowTime());
+        div.getTxtKonkaiShuryoTime().setValue(RTime.now());
     }
 
 }
