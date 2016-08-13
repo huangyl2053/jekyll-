@@ -51,7 +51,6 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class ChoshuYuyoJuminKihonHandler {
 
     private final ChoshuYuyoJuminKihonDiv div;
-    private Decimal 普通徴収_合計 = Decimal.ZERO;
     private static final RString 期R = new RString("期");
     private static final int ゼロ_定値 = 0;
     private static final int イチ_定値 = 1;
@@ -125,6 +124,17 @@ public class ChoshuYuyoJuminKihonHandler {
     }
 
     /**
+     * エラーの制御です。
+     */
+    public void setDisabled制御() {
+        div.getChoshuYuyoMain().getBtnTeisei().setDisabled(true);
+        div.getChoshuYuyoMain().getBtnTorikeshi().setDisabled(true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(訂正をやめるボタン, true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(取消をやめるボタン, true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン, true);
+    }
+
+    /**
      * 状況情報パネルの値を設定する。
      *
      * @param 徴収猶予の情報 ChoshuYuyoJoho
@@ -133,7 +143,9 @@ public class ChoshuYuyoJuminKihonHandler {
     public RString load状況情報パネル(ChoshuYuyoJoho 徴収猶予の情報) {
         RString 徴収猶予状態区分;
         RString 状況;
-        if (徴収猶予の情報 == null || 徴収猶予の情報.getChoshuYuyoList().isEmpty()) {
+        if (徴収猶予の情報 == null || 徴収猶予の情報.getChoshuYuyoList().isEmpty()
+                || 徴収猶予の情報.getChoshuYuyoList().get(0).getKibetsuChoshuYuyoList() == null
+                || 徴収猶予の情報.getChoshuYuyoList().get(0).getKibetsuChoshuYuyoList().isEmpty()) {
             状況 = 状況_新規;
         } else {
             徴収猶予状態区分 = 徴収猶予の情報.get徴収猶予状態区分();
@@ -142,14 +154,16 @@ public class ChoshuYuyoJuminKihonHandler {
         ChoshuYuyoMainDiv 状況情報パネル = div.getChoshuYuyoMain();
         状況情報パネル.getTxtShinseiJokyo().setValue(状況);
         if (状況_新規.equals(状況)) {
-            状況情報パネル.getBtnTeisei().setDisplayNone(true);
-            状況情報パネル.getBtnTorikeshi().setDisplayNone(true);
+            状況情報パネル.getBtnTeisei().setVisible(false);
+            状況情報パネル.getBtnTorikeshi().setVisible(false);
         } else if (状況_申請中.equals(状況)) {
-            状況情報パネル.getBtnTeisei().setDisplayNone(true);
+            状況情報パネル.getBtnTeisei().setVisible(false);
+            状況情報パネル.getBtnTorikeshi().setVisible(true);
             状況情報パネル.getBtnTorikeshi().setDisabled(false);
         } else if (状況_決定済.equals(状況)) {
-            状況情報パネル.getBtnTeisei().setDisplayNone(false);
+            状況情報パネル.getBtnTeisei().setVisible(true);
             状況情報パネル.getBtnTeisei().setDisabled(false);
+            状況情報パネル.getBtnTorikeshi().setVisible(true);
             状況情報パネル.getBtnTorikeshi().setDisabled(false);
         }
         return 状況;
@@ -241,6 +255,7 @@ public class ChoshuYuyoJuminKihonHandler {
      */
     private List<KibetsuChoshyuYuyoKikann> get期別徴収猶予期間リスト(ChoshuYuyoJoho 徴収猶予の情報) {
         List<KibetsuChoshyuYuyoKikann> 期別徴収猶予期間リスト = new ArrayList<>();
+        Decimal 普通徴収_合計 = Decimal.ZERO;
         for (int i = イチ_定値; i < ジュウゴ_定値; i++) {
             KibetsuChoshyuYuyoKikann 期別徴収猶予期間 = new KibetsuChoshyuYuyoKikann();
             Kitsuki 期月_普徴 = 普徴期月リスト.get期の最初月(i);
@@ -249,7 +264,7 @@ public class ChoshuYuyoJuminKihonHandler {
             期別徴収猶予期間.set普徴月(期月_普徴.get月().getコード());
             Decimal 普徴期別金額 = get普徴期別納付額(期_普徴, 徴収猶予の情報);
             if (普徴期別金額 != null) {
-                普通徴収_合計.add(普徴期別金額);
+                普通徴収_合計 = 普通徴収_合計.add(普徴期別金額);
                 期別徴収猶予期間.set普徴期別納付額(DecimalFormatter.toコンマ区切りRString(普徴期別金額, ゼロ_定値));
             }
             FlexibleDate 徴収猶予期間開始 = get徴収猶予期間開始(期_普徴, 徴収猶予の情報);
@@ -266,6 +281,9 @@ public class ChoshuYuyoJuminKihonHandler {
             }
             期別徴収猶予期間リスト.add(期別徴収猶予期間);
         }
+        KibetsuChoshyuYuyoKikann 期別徴収猶予期間15 = new KibetsuChoshyuYuyoKikann();
+        期別徴収猶予期間15.set普徴期別納付額(new RString(普通徴収_合計.toString()));
+        期別徴収猶予期間リスト.add(期別徴収猶予期間15);
         return 期別徴収猶予期間リスト;
     }
 
@@ -434,6 +452,7 @@ public class ChoshuYuyoJuminKihonHandler {
         KibetsuChoshyuYuyoKikann 期別徴収猶予期間12 = 期別徴収猶予期間リスト.get(ジュウイチ_定値);
         KibetsuChoshyuYuyoKikann 期別徴収猶予期間13 = 期別徴収猶予期間リスト.get(ジュウ二_定値);
         KibetsuChoshyuYuyoKikann 期別徴収猶予期間14 = 期別徴収猶予期間リスト.get(ジュウミ_定値);
+        KibetsuChoshyuYuyoKikann 期別徴収猶予期間15 = 期別徴収猶予期間リスト.get(ジュウヨ_定値);
         普通徴収猶予情報パネル.getLblFuchoNofuGaku13().setText(期別徴収猶予期間1.get普徴期別納付額());
         普通徴収猶予情報パネル.getLblFuchoNofuGaku14().setText(期別徴収猶予期間2.get普徴期別納付額());
         普通徴収猶予情報パネル.getLblFuchoNofuGaku1().setText(期別徴収猶予期間3.get普徴期別納付額());
@@ -477,6 +496,8 @@ public class ChoshuYuyoJuminKihonHandler {
         普通徴収猶予情報パネル.getLblYuyoKikanShuryo10().setText(期別徴収猶予期間12.get徴収猶予期間終了());
         普通徴収猶予情報パネル.getLblYuyoKikanShuryo11().setText(期別徴収猶予期間13.get徴収猶予期間終了());
         普通徴収猶予情報パネル.getLblYuyoKikanShuryo12().setText(期別徴収猶予期間14.get徴収猶予期間終了());
+        RString 普通徴収_合計R = 期別徴収猶予期間15.get普徴期別納付額();
+        Decimal 普通徴収_合計 = new Decimal(普通徴収_合計R.toString());
         普通徴収猶予情報パネル.getLblFuchoNofuGakuTotal().setText(DecimalFormatter.toコンマ区切りRString(普通徴収_合計, ゼロ_定値));
         return 普通徴収_合計;
     }
@@ -495,6 +516,7 @@ public class ChoshuYuyoJuminKihonHandler {
      * @param 徴収猶予の情報 ChoshuYuyoJoho
      */
     public void loadパネル状態1(RString 状況, ChoshuYuyoJoho 徴収猶予の情報) {
+        div.getChoshuYuyoMain().setDisplayNone(false);
         div.getChoshuYuyoFukaRirekiAll().getDghukainfo().setDisplayNone(true);
         div.getChoshuYuyoMain().getTorikeshiJoho().setDisplayNone(true);
         ShinseiJohoDiv 申請情報パネル = div.getChoshuYuyoMain().getShinseiJoho();
@@ -555,16 +577,19 @@ public class ChoshuYuyoJuminKihonHandler {
      */
     public void onClick_訂正の状態() {
         ChoshuYuyoMainDiv 状況情報パネル = div.getChoshuYuyoMain();
-        状況情報パネル.getBtnTeisei().setDisplayNone(true);
-        状況情報パネル.getBtnTorikeshi().setDisplayNone(true);
+        状況情報パネル.getBtnTeisei().setVisible(false);
+        状況情報パネル.getBtnTorikeshi().setVisible(false);
         div.getChoshuYuyoMain().getTorikeshiJoho().setDisplayNone(true);
         ShinseiJohoDiv 申請情報パネル = div.getChoshuYuyoMain().getShinseiJoho();
+        申請情報パネル.setDisplayNone(false);
         申請情報パネル.getTxtChoteiNendo().setReadOnly(true);
         申請情報パネル.getTxtFukaNendo().setReadOnly(true);
         申請情報パネル.getTxtShinseiYMD().setReadOnly(false);
+        申請情報パネル.getTxtShinseiYMD().setRequired(true);
         申請情報パネル.getBtnYuyoShurui().setDisabled(false);
         申請情報パネル.getTxtShinseiRiyu().setReadOnly(false);
         KetteiJohoDiv 決定情報パネル = div.getChoshuYuyoMain().getKetteiJoho();
+        決定情報パネル.setDisplayNone(false);
         決定情報パネル.getTxtKetteiYMD().setReadOnly(false);
         決定情報パネル.getRadKetteiKubun().setDisabled(false);
         決定情報パネル.getTxtKetteiRiyu().setReadOnly(false);
@@ -583,20 +608,24 @@ public class ChoshuYuyoJuminKihonHandler {
     public void onClick_取消の状態() {
         ChoshuYuyoMainDiv 状況情報パネル = div.getChoshuYuyoMain();
         RString 状況 = 状況情報パネル.getTxtShinseiJokyo().getValue();
-        状況情報パネル.getBtnTeisei().setDisplayNone(true);
-        状況情報パネル.getBtnTorikeshi().setDisplayNone(true);
+        状況情報パネル.getBtnTeisei().setVisible(false);
+        状況情報パネル.getBtnTorikeshi().setVisible(false);
         TorikeshiJohoDiv 取消情報パネル = div.getChoshuYuyoMain().getTorikeshiJoho();
         取消情報パネル.setDisplayNone(false);
         取消情報パネル.getTxtTorikeshiYMD().setValue(null);
+        取消情報パネル.getTxtTorikeshiYMD().setRequired(true);
         取消情報パネル.getTxtTorikeshiShurui().setValue(null);
         取消情報パネル.getTxtTorikeshiRiyu().setValue(null);
         ShinseiJohoDiv 申請情報パネル = div.getChoshuYuyoMain().getShinseiJoho();
+        申請情報パネル.setDisplayNone(false);
         申請情報パネル.getTxtChoteiNendo().setReadOnly(true);
         申請情報パネル.getTxtFukaNendo().setReadOnly(true);
         申請情報パネル.getTxtShinseiYMD().setReadOnly(true);
+        申請情報パネル.getTxtShinseiYMD().setRequired(false);
         申請情報パネル.getBtnYuyoShurui().setDisabled(true);
         申請情報パネル.getTxtShinseiRiyu().setReadOnly(true);
         KetteiJohoDiv 決定情報パネル = div.getChoshuYuyoMain().getKetteiJoho();
+        決定情報パネル.setDisplayNone(false);
         決定情報パネル.getTxtKetteiYMD().setReadOnly(false);
         決定情報パネル.getRadKetteiKubun().setDisabled(false);
         決定情報パネル.getTxtKetteiRiyu().setReadOnly(false);
@@ -611,7 +640,7 @@ public class ChoshuYuyoJuminKihonHandler {
         // TODO QA1195 labelはTextBoxDateに変換は必要ですが？ 状態定義sheetの281－294行の状態は入力可の設定。
 //        FuchoTablePanelDiv 普通徴収猶予情報パネル = div.getChoshuYuyoMain().getFuchoTablePanel();
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(訂正をやめるボタン, true);
-        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(取消をやめるボタン, true);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(取消をやめるボタン, false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(取消をやめるボタン, false);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(保存ボタン, false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン, false);
@@ -635,9 +664,8 @@ public class ChoshuYuyoJuminKihonHandler {
      * @return 猶予種類code Code
      */
     public Code onOkClose猶予種類() {
-        // TODO QA1187 猶予種類を取得なし。
-        RString 猶予種類code = DataPassingConverter.deserialize(div.getGemmenShuruiCode(), RString.class);
-        RString 猶予事由 = DataPassingConverter.deserialize(div.getGemmenShuruiHyojiMongon(), RString.class);
+        RString 猶予種類code = DataPassingConverter.deserialize(div.getChoshuYuyoShuruiCode(), RString.class);
+        RString 猶予事由 = DataPassingConverter.deserialize(div.getChoshuYuyoShuruiHyojiMongon(), RString.class);
         div.getChoshuYuyoMain().getShinseiJoho().getTxtYuyoShurui().setValue(猶予事由);
         return new Code(猶予種類code);
     }
@@ -923,6 +951,17 @@ public class ChoshuYuyoJuminKihonHandler {
      */
     public ChoshuYuyoJuminKihonHandler(ChoshuYuyoJuminKihonDiv div) {
         this.div = div;
+    }
+
+    /**
+     * 画面の入力チェック
+     */
+    public void setRequired() {
+        div.getChoshuYuyoMain().getTorikeshiJoho().getTxtTorikeshiYMD().setRequired(false);
+        RString 状況 = div.getChoshuYuyoMain().getTxtShinseiJokyo().getValue();
+        if (!状況_決定済.equals(状況)) {
+            div.getChoshuYuyoMain().getShinseiJoho().getTxtShinseiYMD().setRequired(true);
+        }
     }
 
     private boolean checkDate(FlexibleDate fDate, RDate rDate) {

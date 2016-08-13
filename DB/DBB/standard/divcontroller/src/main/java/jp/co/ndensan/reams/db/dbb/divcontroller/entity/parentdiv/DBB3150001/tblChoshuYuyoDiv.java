@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  */
 public class tblChoshuYuyoDiv extends TablePanel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -105,7 +105,7 @@ public class tblChoshuYuyoDiv extends TablePanel {
  */
 class celJohoAttblChoshuYuyo extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("TorikeshiJoho")
     private TorikeshiJohoDiv TorikeshiJoho;
     @JsonProperty("ShinseiJoho")
@@ -177,7 +177,7 @@ class celJohoAttblChoshuYuyo extends TableCell {
  */
 class celKiwarigakuAttblChoshuYuyo extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("Kiwarigaku")
     private KiwarigakuDiv Kiwarigaku;
 

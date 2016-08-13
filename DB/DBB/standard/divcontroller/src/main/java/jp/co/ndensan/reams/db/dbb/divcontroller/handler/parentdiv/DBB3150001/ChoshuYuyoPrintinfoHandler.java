@@ -53,6 +53,8 @@ public class ChoshuYuyoPrintinfoHandler {
      */
     public void initialize(FlexibleYear 賦課年度, FlexibleYear 調定年度, TsuchishoNo 通知書番号) {
 
+        div.getPritPublish2().getComdiv1().initialize(true, null, false, true, null, false);
+        div.getPritPublish2().getComdiv1().setSendDateDisable(true);
         ChoshuYuyoJoho 徴収猶予情報 = KaigoFukaChoshuYuyo.createInstance().getChoshuYuyoJoho(調定年度, 賦課年度, 通知書番号);
         RString 徴収猶予状態区分 = 徴収猶予情報.get徴収猶予状態区分();
         RString 徴収猶予作成区分 = 徴収猶予情報.get徴収猶予作成区分();
