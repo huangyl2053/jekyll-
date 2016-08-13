@@ -45,8 +45,8 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
     public KyodoJukyushaIdoRenrakuhyoDivValidationHandler(KyodoJukyushaIdoRenrakuhyoDiv div) {
         this.div = div;
     }
-    
-        /**
+
+    /**
      * コンストラクタです。
      *
      * @param div 画面DIV
@@ -275,20 +275,24 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
 
     /**
      * 修正有無チェック
+     *
      * @param 初期化異動情報Entity
      * @param 画面項目異動情報Entity
-     * @param checkFlag
+     * @param 基本送付情報Flag
+     * @param 償還送付情報変Flag
+     * @param 高額送付情報Flag
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 修正有無チェック(KyodoshoriyoJukyushaIdoRenrakuhyoParam 初期化異動情報Entity,
-            KyodoshoriyoJukyushaIdoRenrakuhyoParam 画面項目異動情報Entity, boolean checkFlag) {
+            KyodoshoriyoJukyushaIdoRenrakuhyoParam 画面項目異動情報Entity, boolean 基本送付情報Flag,
+            boolean 償還送付情報変Flag, boolean 高額送付情報Flag) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei.equals(div.getMode_DisplayMode())
                 && 修正.equals(div.getKyodoJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().getSelectedValue())) {
             KyodoJukyushaIdoRenrakuhyoHandler hander = new KyodoJukyushaIdoRenrakuhyoHandler();
-            if (!(hander.is償還送付情報変更あり(初期化異動情報Entity, 画面項目異動情報Entity, checkFlag))
-                    || !(hander.is基本送付情報変更あり(初期化異動情報Entity, 画面項目異動情報Entity, checkFlag))
-                    || !(hander.is高額送付情報変更あり(初期化異動情報Entity, 画面項目異動情報Entity, checkFlag))) {
+            if (!(hander.is基本送付情報変更あり(初期化異動情報Entity, 画面項目異動情報Entity, 基本送付情報Flag))
+                    || !(hander.is償還送付情報変更あり(初期化異動情報Entity, 画面項目異動情報Entity, 償還送付情報変Flag))
+                    || !(hander.is高額送付情報変更あり(初期化異動情報Entity, 画面項目異動情報Entity, 高額送付情報Flag))) {
                 validPairs.add(new ValidationMessageControlPair(ValidationMessages.修正有無チェック));
             }
         }

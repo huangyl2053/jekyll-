@@ -910,8 +910,9 @@ public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyus
     @JsonIgnore
     @Override
     public ValidationMessageControlPairs 修正有無チェック(KyodoshoriyoJukyushaIdoRenrakuhyoParam 初期化異動情報Entity,
-            KyodoshoriyoJukyushaIdoRenrakuhyoParam 画面項目異動情報Entity, boolean checkFlag) {
+            KyodoshoriyoJukyushaIdoRenrakuhyoParam 画面項目異動情報Entity, boolean 基本送付情報Flag,
+            boolean 償還送付情報変Flag, boolean 高額送付情報Flag) {
         return KyodoJukyushaIdoRenrakuhyoDivValidationHandler.of(this).修正有無チェック(初期化異動情報Entity,
-                画面項目異動情報Entity, checkFlag);
+                画面項目異動情報Entity, 基本送付情報Flag, 償還送付情報変Flag, 高額送付情報Flag);
     }
 }
