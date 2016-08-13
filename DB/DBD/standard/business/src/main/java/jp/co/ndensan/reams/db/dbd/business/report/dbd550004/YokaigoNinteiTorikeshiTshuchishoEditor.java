@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbd.business.report.dbd550004;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd550004.YokaigoNinteiTorikeshiTshuchishoSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
@@ -15,6 +17,8 @@ import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -72,6 +76,7 @@ public class YokaigoNinteiTorikeshiTshuchishoEditor implements IYokaigoNinteiTor
      */
     @Override
     public YokaigoNinteiTorikeshiTshuchishoSource edit(YokaigoNinteiTorikeshiTshuchishoSource source) {
+        setTitle(source);
         setYokaigoNinteiTorikeshiTshuchishoSource(source);
         set宛先情報(source);
         set認証者情報(source);
@@ -165,5 +170,9 @@ public class YokaigoNinteiTorikeshiTshuchishoEditor implements IYokaigoNinteiTor
         source.hihokenshaNo9 = hihokenshaNo.substring(NO_8);
         source.hihokenshaNo10 = hihokenshaNo.substring(NO_9);
         source.riyu = riyu;
+    }
+
+    private void setTitle(YokaigoNinteiTorikeshiTshuchishoSource source) {
+        source.title = DbBusinessConfig.get(ConfigNameDBE.要介護認定取消通知書, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
     }
 }

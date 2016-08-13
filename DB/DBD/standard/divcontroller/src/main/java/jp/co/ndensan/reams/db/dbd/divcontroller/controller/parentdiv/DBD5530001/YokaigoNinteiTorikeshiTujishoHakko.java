@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5530001;
 
+import java.util.HashMap;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.jukyushajaicho.JukyushaDaichoParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5530001.DBD5530001StateName;
@@ -17,6 +18,7 @@ import jp.co.ndensan.reams.db.dbd.service.report.dbd550004.YokaigoNinteiTorikesh
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
+import jp.co.ndensan.reams.db.dbz.business.report.hakkorireki.GyomuKoyuJoho;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -122,9 +124,12 @@ public class YokaigoNinteiTorikeshiTujishoHakko {
             YokaigoNinteiTorikeshiTshuchishoPrintService printService = new YokaigoNinteiTorikeshiTshuchishoPrintService();
             printService.print(reportManager, div.getTujishoHakkoMeisai().getTxtSakuseibi().getValue(), div.getTujishoHakkoMeisai().
                     getCcdBunshoBango().get文書番号(), hihokenshaNo, div.getTujishoHakkoMeisai().getTxtTorikeshiRiyu().getValue());
+            HashMap<Code, RString> hashMap = new HashMap();
+            hashMap.put(new Code(GyomuKoyuJoho.被保番号.getコード()), div.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue());
             SourceDataCollection collection = reportManager.publish();
             response.data = collection;
         }
+
         return ResponseData.of(div).respond();
     }
 
@@ -153,6 +158,16 @@ public class YokaigoNinteiTorikeshiTujishoHakko {
                 RString.EMPTY, true);
         return ResponseData.of(div).setState(DBD5530001StateName.完了);
 
+    }
+
+    /**
+     * 完了ボタンの処理です。
+     *
+     * @param div YokaigoNinteiTorikeshiTujishoHakkoDiv
+     * @return ResponseData<YokaigoNinteiTorikeshiTujishoHakkoDiv>
+     */
+    public ResponseData<YokaigoNinteiTorikeshiTujishoHakkoDiv> onClick_back(YokaigoNinteiTorikeshiTujishoHakkoDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBD5530001TransitionEventName.完了).respond();
     }
 
     private YokaigoNinteiTorikeshiTujishoHakkoHandler creatYokaigoNinteiTorikeshiTujishoHakkoHandler(
