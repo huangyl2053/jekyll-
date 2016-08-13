@@ -24,7 +24,7 @@ public class SogojigyohiKagoKetteiInBodyEditor implements ISogojigyohiKagoKettei
 
     private final SogojigyohiKagoKetteiInEntity 帳票出力対象データ;
     private final boolean 集計Flag;
-    private int no;
+    private final int no;
     private static final RString 件数タイトル = new RString("件数");
     private static final RString 単位数タイトル = new RString("単位数");
     private static final RString 負担額タイトル = new RString("保険者負担額");
@@ -37,10 +37,10 @@ public class SogojigyohiKagoKetteiInBodyEditor implements ISogojigyohiKagoKettei
      * @param 集計Flag boolean
      */
     public SogojigyohiKagoKetteiInBodyEditor(SogojigyohiKagoKetteiInEntity 帳票出力対象データ,
-            boolean 集計Flag) {
+            boolean 集計Flag, int no) {
         this.集計Flag = 集計Flag;
         this.帳票出力対象データ = 帳票出力対象データ;
-        this.no = 1;
+        this.no = no;
     }
 
     @Override
@@ -53,7 +53,6 @@ public class SogojigyohiKagoKetteiInBodyEditor implements ISogojigyohiKagoKettei
     }
 
     private void edit明細(SogojigyohiKagoKetteiInSource source) {
-        no++;
         source.listUpper_1 = new RString(no);
         source.listUpper_2 = doパターン54(帳票出力対象データ.get取扱年月());
         source.listUpper_3 = getColumnValue(帳票出力対象データ.get事業者番号());
