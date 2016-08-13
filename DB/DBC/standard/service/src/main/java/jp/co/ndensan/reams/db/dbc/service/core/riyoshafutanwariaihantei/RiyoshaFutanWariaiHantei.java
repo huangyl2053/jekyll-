@@ -287,14 +287,21 @@ public class RiyoshaFutanWariaiHantei {
         if (基準日 == null) {
             throw new NullPointerException(基準日がNULL.toString());
         }
+        int 基準日の月 = Integer.parseInt(基準日.substring(西暦年の長さ, 西暦年月の長さ).toString());
         List<RString> 判定基準日リスト = new ArrayList<>();
         Integer 年度 = 年度の設定(基準日);
         RString 基準日の年月 = 基準日.substring(0, 西暦年月の長さ);
-        for (int month = NUM八月; month <= NUM十二月; month++) {
-            判定基準日リスト.add(判定基準年月日の取得(年度, month, 基準日の年月));
-        }
-        for (int month = NUM一月; month <= NUM七月; month++) {
-            判定基準日リスト.add(判定基準年月日の取得(年度 + 1, month, 基準日の年月));
+        if (基準日の月 <= NUM十二月 && 基準日の月 >= NUM八月) {
+            for (int month = NUM八月; month <= 基準日の月; month++) {
+                判定基準日リスト.add(判定基準年月日の取得(年度, month, 基準日の年月));
+            }
+        } else {
+            for (int month = NUM八月; month <= NUM十二月; month++) {
+                判定基準日リスト.add(判定基準年月日の取得(年度, month, 基準日の年月));
+            }
+            for (int month = NUM一月; month <= 基準日の月; month++) {
+                判定基準日リスト.add(判定基準年月日の取得(年度 + 1, month, 基準日の年月));
+            }
         }
         return 判定基準日リスト;
     }
