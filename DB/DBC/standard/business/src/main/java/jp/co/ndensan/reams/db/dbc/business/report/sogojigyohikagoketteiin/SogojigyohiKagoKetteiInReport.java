@@ -49,16 +49,16 @@ public class SogojigyohiKagoKetteiInReport extends
             if (index == 帳票出力対象データリスト.size() - 1) {
                 集計Flag = true;
             }
-            writeLine(writer, 帳票出力対象データリスト.get(index), 集計Flag);
+            writeLine(writer, 帳票出力対象データリスト.get(index), 集計Flag, index+1);
         }
     }
 
     private void writeLine(ReportSourceWriter<SogojigyohiKagoKetteiInSource> writer,
-            SogojigyohiKagoKetteiInEntity 帳票出力対象データ, boolean 集計Flag) {
+            SogojigyohiKagoKetteiInEntity 帳票出力対象データ, boolean 集計Flag,int no) {
         SogojigyohiKagoKetteiInHeaderEditor headerEditor
                 = new SogojigyohiKagoKetteiInHeaderEditor(帳票出力対象データ, 出力順Map, 処理年月, 作成日時);
         SogojigyohiKagoKetteiInBodyEditor bodyEditor
-                = new SogojigyohiKagoKetteiInBodyEditor(帳票出力対象データ, 集計Flag);
+                = new SogojigyohiKagoKetteiInBodyEditor(帳票出力対象データ, 集計Flag, no);
         ISogojigyohiKagoKetteiInBuilder builder
                 = new SogojigyohiKagoKetteiInBuilder(headerEditor, bodyEditor);
         writer.writeLine(builder);
