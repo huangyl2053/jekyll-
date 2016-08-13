@@ -195,8 +195,11 @@ public class KyodoIdoRenrakuhyoTorokuMainHandler {
                 被保険者番号,
                 履歴番号);
         if (is高額送付情報) {
+            HihokenshaNo 世帯集約番号 = entity.get高額情報Entity().get世帯集約番号();
+            if (世帯集約番号 != null && !世帯集約番号.isEmpty()) {
+                異動高額送付 = 異動高額送付.createBuilderForEdit().set世帯集約番号(世帯集約番号).build();
+            }
             異動高額送付 = 異動高額送付.createBuilderForEdit()
-                    .set世帯集約番号(entity.get高額情報Entity().get世帯集約番号())
                     .set世帯所得区分コード(entity.get高額情報Entity().get世帯所得区分コード())
                     .set所得区分コード(entity.get高額情報Entity().get所得区分コード())
                     .set老齢福祉年金受給有フラグ(entity.get高額情報Entity().is老齢福祉年金受給有フラグ())
