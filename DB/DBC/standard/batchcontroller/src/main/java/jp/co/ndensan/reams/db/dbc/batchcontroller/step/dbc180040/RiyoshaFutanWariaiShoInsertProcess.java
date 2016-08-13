@@ -47,7 +47,7 @@ public class RiyoshaFutanWariaiShoInsertProcess extends BatchProcessBase<Riyosha
 
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.futanwariaishohakko."
-                    + "IFutanwariaishoHakkoMapper.select利用者負担割合証Temp");
+                    + "IFutanwariaishoHakkoMapper.select利用者負担割合証");
     private FutanwariaishoHakkoProcessParameter parameter;
 
     @BatchWriter
