@@ -26,8 +26,6 @@ public class NinteishoJohoBusiness {
     private HihokenshaNo 被保険者番号;
     private RDate 発行日;
     private RString 申請者;
-    private RString 認職者氏名;
-    private RString 電子公印;
     private RString 申請者住所;
     private RString 申請者氏名;
     private RString 対象者住所;

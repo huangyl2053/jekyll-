@@ -67,9 +67,15 @@ public class ShogaishaKojoTaishoshaNinteishoHakkoPanel {
             発行日 = new RDate(div.getShogaishaKojoNinteishoHakko().getShogaishaKojoNinteisho().getNinteishoPrintSetting().getIssueDate().toString());
         }
         NinteishoJohoBusiness business = new NinteishoJohoBusiness();
-        business.set申請者住所(div.getShogaishaKojoNinteishoHakko().getShogaishaKojoNinteisho().getShogaishaKojoShinseisha().getTxtShinseishaJusho().getValue());
+        business.set対象者氏名(div.getTaishoshaAtena().get氏名漢字());
+        business.set対象者住所(div.getTaishoshaAtena().get住所().getColumnValue());
+        business.set対象者生年月日(div.getTaishoshaAtena().getShokaiData().getTxtSeinengappiYMD().getValue());
+        business.set対象者性別(div.getTaishoshaAtena().getShokaiData().getTxtSeibetsu().getValue());
         business.set申請者氏名(div.getShogaishaKojoNinteishoHakko().getShogaishaKojoNinteisho().getShogaishaKojoShinseisha().getTxtShinseishaName().getValue());
+        business.set申請者住所(div.getShogaishaKojoNinteishoHakko().getShogaishaKojoNinteisho().getShogaishaKojoShinseisha().getTxtShinseishaJusho().getValue());
         business.set発行日(div.getShogaishaKojoNinteishoHakko().getShogaishaKojoNinteisho().getNinteishoPrintSetting().getIssueDate());
+        business.set障害理由区分(div.getShogaishaKojoNinteishoHakko().getShogaishaKojoTaishoshaDetail().getTxtNinteiKubun().getValue());
+        business.set障害理由内容(div.getShogaishaKojoNinteishoHakko().getShogaishaKojoTaishoshaDetail().getTxtNinteiNaiyo().getValue());
         UaFt200FindShikibetsuTaishoEntity psmEntity = new UaFt200FindShikibetsuTaishoEntity();
         psmEntity.setDaihyoshaJusho(div.getTaishoshaAtena().get住所());
         psmEntity.setDaihyoshaShimei(new AtenaMeisho(div.getTaishoshaAtena().get氏名漢字()));
