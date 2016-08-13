@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 総合事業費等請求額通知書（公費負担者分）帳票Source
  *
- * @author yrzhang-win7
+ * @reamsid_L DBC-4700-040 zhangyaru
  */
 public class SogojigyohiSeikyugakuTsuchishoKohiSource implements IReportSource {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
