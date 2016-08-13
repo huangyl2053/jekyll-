@@ -100,7 +100,7 @@ public class GennendoIdoFukaFlow extends BatchFlowBase<CreateHonsanteiIdoBatchPa
             }
         }
         executeStep(処理日付管理テーブル更新);
-        if (getParameter().is画面移動フラグ()) {
+        if (!getParameter().is画面移動フラグ()) {
             executeStep(本算定異動_現年度_通知書一括発行);
         }
 
