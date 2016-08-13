@@ -8,13 +8,11 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0210031;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210031.ShotokuDankaibetsuHihokenshaSuIchiranDiv;
+import jp.co.ndensan.reams.db.dbb.service.core.dankaibetsuhihokenshasuuichiransakusei.DankaibetsuHihokenshaSuuIchiranSakusei;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -61,7 +59,6 @@ public class ShotokuDankaibetsuHihokenshaSuIchiranHandler {
         List<KeyValueDataSource> datasource = insertIntoDatasource(調定年度, difference);
         div.getDdlChoteiNendo().setDataSource(datasource);
         div.getDdlChoteiNendo().setSelectedKey(調定年度);
-        //TODO QA1196
         本算定賦課処理日の設定();
         ShichosonSecurityJoho 市町村情報;
         市町村情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
@@ -104,21 +101,14 @@ public class ShotokuDankaibetsuHihokenshaSuIchiranHandler {
     }
 
     private void 本算定賦課処理日の設定() {
-        ShoriDateKanri 処理日付管理マスタ;
-        div.getDdlChoteiNendo().getSelectedKey();
-        ShoriDateKanriManager manager = new ShoriDateKanriManager();
-        処理日付管理マスタ = manager.get処理日付管理(SubGyomuCode.DBB介護賦課, ShoriName.本算定賦課.get名称(),
-                new FlexibleYear(div.getDdlChoteiNendo().getSelectedKey()), 年度内連番);
-        if (処理日付管理マスタ != null) {
-            YMDHMS 基準日時 = 処理日付管理マスタ.get基準日時();
-            if (基準日時 == null || 基準日時.isEmpty()) {
-                div.getTxtHonsanteiShoriYMD().clearValue();
-                div.getTxtHonsanteiShoriYMD().setValue(null);
-            } else {
-                div.getTxtHonsanteiShoriYMD().setValue(基準日時.getDate());
-            }
-        } else {
+        DankaibetsuHihokenshaSuuIchiranSakusei 処理日付管理マスタ = DankaibetsuHihokenshaSuuIchiranSakusei.createInstance();
+        YMDHMS 基準日時;
+        基準日時 = 処理日付管理マスタ.getHonsanteiShoribi(new FlexibleYear(div.getDdlChoteiNendo().getSelectedKey()));
+        if (基準日時 == null || 基準日時.isEmpty()) {
             div.getTxtHonsanteiShoriYMD().clearValue();
+            div.getTxtHonsanteiShoriYMD().setValue(null);
+        } else {
+            div.getTxtHonsanteiShoriYMD().setValue(基準日時.getDate());
         }
     }
 
@@ -190,6 +180,8 @@ public class ShotokuDankaibetsuHihokenshaSuIchiranHandler {
                         toString()));
             }
             div.getTxtChoteiKijunYMD().setValue(RDate.getNowDate());
+            div.getTxtChoteiKijunYMD().setReadOnly(false);
+            div.getTxtShikakuKijunYMD().setReadOnly(false);
         }
     }
 
