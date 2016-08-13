@@ -644,7 +644,7 @@ public class SokujiFukaKouseiMainHandler {
         FukakonkyoAtoDiv fukakonkyoAtoDiv = div.getTabSokujiKousei().getSokujiKoseiTab1().getSokujikouseiFukakonkyo().getFukakonkyoAto();
         if (更正後賦課リストの情報.get資格取得日() != null) {
             fukakonkyoAtoDiv.getTxtShikakushutokuYMD2().setValue(更正後賦課リストの情報.get資格取得日());
-            fukakonkyoAtoDiv.getTxtShikakushutokuYMD2().setValue(更正後賦課リストの情報.get資格取得日().plusYear(2));
+            fukakonkyoAtoDiv.getTxtShikakushutokuYMD2().setValue(更正後賦課リストの情報.get資格取得日());
         }
         if (更正後賦課リストの情報.get資格喪失日() != null) {
             fukakonkyoAtoDiv.getTxtShikakusoshitsuYMD2().setValue(更正後賦課リストの情報.get資格喪失日().wareki().toDateString());
@@ -1112,16 +1112,16 @@ public class SokujiFukaKouseiMainHandler {
             return;
         }
         if (更正後現年度.get調定事由1() != null) {
-            div.getSokujikouseiJiyu().getTxtChoteiJiyu1().setValue(更正後現年度.get調定事由1());
+            div.getSokujikouseiJiyu().getTxtChoteiJiyu1().setValue(ChoteiJiyuCode.toValue(更正後現年度.get調定事由1()).get名称());
         }
         if (更正後現年度.get調定事由2() != null) {
-            div.getSokujikouseiJiyu().getTxtChoteiJiyu2().setValue(更正後現年度.get調定事由2());
+            div.getSokujikouseiJiyu().getTxtChoteiJiyu2().setValue(ChoteiJiyuCode.toValue(更正後現年度.get調定事由2()).get名称());
         }
         if (更正後現年度.get調定事由3() != null) {
-            div.getSokujikouseiJiyu().getTxtChoteiJiyu3().setValue(更正後現年度.get調定事由3());
+            div.getSokujikouseiJiyu().getTxtChoteiJiyu3().setValue(ChoteiJiyuCode.toValue(更正後現年度.get調定事由3()).get名称());
         }
         if (更正後現年度.get調定事由4() != null) {
-            div.getSokujikouseiJiyu().getTxtChoteiJiyu4().setValue(更正後現年度.get調定事由4());
+            div.getSokujikouseiJiyu().getTxtChoteiJiyu4().setValue(ChoteiJiyuCode.toValue(更正後現年度.get調定事由4()).get名称());
         }
     }
 
