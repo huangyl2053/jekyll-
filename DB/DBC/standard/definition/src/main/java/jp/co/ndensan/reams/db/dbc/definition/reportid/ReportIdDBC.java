@@ -255,6 +255,19 @@ public enum ReportIdDBC {
      */
     DBC100061(new ReportId("DBC100061_JigyoKogakuKetteiTsuchishoYoteiBiYijiNashi"), new RString("事業高額決定通知書")),
     /**
+     * 高額サービス給付のお知らせ通知書 の帳票ＩＤです
+     *
+     */
+    DBC100011(new ReportId("DBC100011_KogakuOshiraseTsuchi"), new RString("高額サービス給付のお知らせ通知書")),
+    /**
+     * 高額総合事業サービス費給付お知らせ通知書 の帳票ＩＤです
+     */
+    DBC100072(new ReportId("DBC100072_KogakuJigyoOshiraseTsuchisho"), new RString("高額総合事業サービス費給付お知らせ通知書")),
+    /**
+     * 高額総合事業サービス費申請書発行一覧表 の帳票ＩＤです
+     */
+    DBC200091(new ReportId("DBC200091_KogakuJigyoShinseishoHakkoIchiran"), new RString("高額総合事業サービス費申請書発行一覧表")),
+    /**
      * 総合事業費等請求額通知書（公費負担者分）帳票ＩＤです。
      */
     DBC200082(new ReportId("DBC200082_SogojigyohiSeikyugakuTsuchishoKohi"), new RString("総合事業費等請求額通知書（公費負担者分）"));

@@ -154,4 +154,21 @@ public class KokuhorenInterfaceKanriManager {
         return 1 == dac.save(国保連インターフェース管理.toEntity());
     }
 
+    /**
+     * 主キーに合致する国保連インターフェース管理を返します。
+     *
+     * @param 交換情報識別番号 KokanShikibetsuNo
+     * @return KokuhorenInterfaceKanri
+     */
+    @Transaction
+    public KokuhorenInterfaceKanri get国保連インターフェース管理(RString 交換情報識別番号) {
+        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
+
+        DbT3104KokuhorenInterfaceKanriEntity entity = dac.getAllBykokanShikibetsuNo(交換情報識別番号);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new KokuhorenInterfaceKanri(entity);
+    }
 }
