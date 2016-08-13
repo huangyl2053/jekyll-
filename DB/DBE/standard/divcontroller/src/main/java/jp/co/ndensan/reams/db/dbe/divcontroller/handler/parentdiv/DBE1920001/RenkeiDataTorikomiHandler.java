@@ -189,7 +189,7 @@ public class RenkeiDataTorikomiHandler {
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setEncode(コード)
                         .setNewLine(NewLine.CRLF)
-                        .hasHeader(false).build()) {
+                        .hasHeader(true).build()) {
                     List<NinteiShinseiJohoDensanCsvEntity> csvEntityList = new ArrayList<>();
                     while (true) {
                         NinteiShinseiJohoDensanCsvEntity entity = csvReader.readLine();
@@ -227,7 +227,7 @@ public class RenkeiDataTorikomiHandler {
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setEncode(コード)
                         .setNewLine(NewLine.CRLF)
-                        .hasHeader(false).build()) {
+                        .hasHeader(true).build()) {
                     List<NinteiShinseiJohoKouroushouCsvEntity> csvEntityList = new ArrayList<>();
                     while (true) {
                         NinteiShinseiJohoKouroushouCsvEntity entity = csvReader.readLine();
@@ -263,7 +263,7 @@ public class RenkeiDataTorikomiHandler {
             } else if (東芝版_87 == size) {
                 try (CsvReader<NinteiShinseiJohoKouroushouCsvEntity> csvReader = new CsvReader.InstanceBuilder(
                         filePath, NinteiShinseiJohoKouroushouCsvEntity.class).setDelimiter(EUC_WRITER_DELIMITER)
-                        .setEncode(コード).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
+                        .setEncode(コード).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
                     List<NinteiShinseiJohoKouroushouCsvEntity> csvEntityList = new ArrayList<>();
                     while (true) {
                         NinteiShinseiJohoKouroushouCsvEntity csventity = csvReader.readLine();

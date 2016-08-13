@@ -39,28 +39,28 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
     private static final int LISTINDEX_3 = 3;
     private static final int LISTINDEX_4 = 4;
 
-    private final List<ShakaiFukushiHojinKeigenHakkoIchiranEntity> 帳票情報リスト;
+    private final ShakaiFukushiHojinKeigenHakkoIchiranEntity 帳票情報;
     private final Association association;
     private final IOutputOrder iOutputOrder;
-    private final int index;
     private final IKojin 個人情報;
+    private final int index;
 
     /**
      * インスタンスを生成します。
      *
-     * @param 帳票情報リスト List<FutangGendoGakuNinteiEntity>
+     * @param 帳票情報 FutangGendoGakuNinteiEntity
      * @param association Association
      * @param iOutputOrder IOutputOrder
-     * @param index int
      * @param 個人情報 IKojin
+     * @param index int
      */
-    public ShakaiFukushiHojinKeigenHakkoIchiranEditor(List<ShakaiFukushiHojinKeigenHakkoIchiranEntity> 帳票情報リスト,
-            Association association, IOutputOrder iOutputOrder, int index, IKojin 個人情報) {
-        this.帳票情報リスト = 帳票情報リスト;
+    public ShakaiFukushiHojinKeigenHakkoIchiranEditor(ShakaiFukushiHojinKeigenHakkoIchiranEntity 帳票情報,
+            Association association, IOutputOrder iOutputOrder, IKojin 個人情報, int index) {
+        this.帳票情報 = 帳票情報;
         this.association = association;
         this.iOutputOrder = iOutputOrder;
-        this.index = index;
         this.個人情報 = 個人情報;
+        this.index = index;
     }
 
     @Override
@@ -91,29 +91,26 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
     }
 
     private void setLayer1Step2(ShakaiFukushiHojinKeigenHakkoIchiranReportSource source) {
-        if (null != 帳票情報リスト && !帳票情報リスト.isEmpty()) {
-            ShakaiFukushiHojinKeigenHakkoIchiranEntity 帳票情報 = this.帳票情報リスト.get(index);
-            KetteiKubun 決定 = 帳票情報.get決定();
+        if (null != 帳票情報) {
+            KetteiKubun 決定 = this.帳票情報.get決定();
             KetteiKubun 決定区分承認 = KetteiKubun.承認する;
             KetteiKubun 決定区分承認しない = KetteiKubun.承認しない;
             if (決定.equals(決定区分承認)) {
-                source.list_2 = 帳票情報.get確認番号();
+                source.list_2 = this.帳票情報.get確認番号();
             } else if (決定.equals(決定区分承認しない)) {
                 source.list_2 = RString.EMPTY;
             }
-            FlexibleDate 喪失年月日 = 帳票情報.get喪失年月日();
+            FlexibleDate 喪失年月日 = this.帳票情報.get喪失年月日();
             if (null != 喪失年月日 && !喪失年月日.isEmpty()) {
                 source.list_3 = new RString("*");
-            } else {
-                source.list_3 = RString.EMPTY;
             }
-            source.list_4 = 帳票情報.get被保険者番号().getColumnValue();
+            source.list_4 = this.帳票情報.get被保険者番号().getColumnValue();
             if (null != 個人情報) {
                 source.list_5 = this.個人情報.get名称().getName().value();
                 source.list_6 = this.個人情報.get住所().get住所();
             }
-            source.list_7 = 帳票情報.get申請日().wareki().toDateString();
-            source.list_8 = 帳票情報.get決定日().wareki().toDateString();
+            source.list_7 = this.帳票情報.get申請日().wareki().toDateString();
+            source.list_8 = this.帳票情報.get決定日().wareki().toDateString();
             source.list_9 = get適用日有効期限();
             if (決定.equals(決定区分承認)) {
                 source.list_10 = new RString("承認");
@@ -121,17 +118,17 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
                 source.list_10 = new RString("却下");
             }
             if (決定.equals(決定区分承認)) {
-                source.list_11 = 帳票情報.get軽減().get略称();
+                source.list_11 = this.帳票情報.get軽減().get略称();
             } else if (決定.equals(決定区分承認しない)) {
                 source.list_11 = RString.EMPTY;
             }
-            if (帳票情報.get軽減率_分子() != null
-                    && !帳票情報.get軽減率_分子().isEmpty()
-                    && 帳票情報.get軽減率_分母() != null
-                    && !帳票情報.get軽減率_分母().isEmpty()
-                    && !帳票情報.get軽減率_分母().equals(new RString("0"))) {
-                Decimal 軽減率_分子 = new Decimal(帳票情報.get軽減率_分子().toString());
-                Decimal 軽減率_分母 = new Decimal(帳票情報.get軽減率_分母().toString());
+            if (this.帳票情報.get軽減率_分子() != null
+                    && !this.帳票情報.get軽減率_分子().isEmpty()
+                    && this.帳票情報.get軽減率_分母() != null
+                    && !this.帳票情報.get軽減率_分母().isEmpty()
+                    && !this.帳票情報.get軽減率_分母().equals(new RString("0"))) {
+                Decimal 軽減率_分子 = new Decimal(this.帳票情報.get軽減率_分子().toString());
+                Decimal 軽減率_分母 = new Decimal(this.帳票情報.get軽減率_分母().toString());
                 source.list_12 = new RString(軽減率_分子.divide(軽減率_分母).toString());
             }
             if (決定.equals(決定区分承認しない)) {
@@ -141,24 +138,23 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
     }
 
     private void setLayer1Step3(ShakaiFukushiHojinKeigenHakkoIchiranReportSource source) {
-        if (null != 帳票情報リスト && !帳票情報リスト.isEmpty()) {
-            ShakaiFukushiHojinKeigenHakkoIchiranEntity 帳票情報 = this.帳票情報リスト.get(index);
-            KetteiKubun 決定 = 帳票情報.get決定();
+        if (null != 帳票情報) {
+            KetteiKubun 決定 = this.帳票情報.get決定();
             KetteiKubun 決定区分承認 = KetteiKubun.承認する;
             KetteiKubun 決定区分承認しない = KetteiKubun.承認しない;
-            boolean 居宅サービス限定 = 帳票情報.is居宅サービス限定();
+            boolean 居宅サービス限定 = this.帳票情報.is居宅サービス限定();
             if (決定.equals(決定区分承認) && 居宅サービス限定) {
                 source.list_13 = new RString("宅").substring(0, NOCOUNT_1);
             } else if (決定.equals(決定区分承認) && !居宅サービス限定) {
                 source.list_13 = RString.EMPTY.substring(0, NOCOUNT_1);
             }
-            boolean 居住費食費のみ = 帳票情報.is居住費食費のみ();
+            boolean 居住費食費のみ = this.帳票情報.is居住費食費のみ();
             if (決定.equals(決定区分承認) && 居住費食費のみ) {
                 source.list_13 = new RString("住").substring(NOCOUNT_1, NOCOUNT_2);
             } else if (決定.equals(決定区分承認) && !居住費食費のみ) {
                 source.list_13 = RString.EMPTY.substring(NOCOUNT_1, NOCOUNT_2);
             }
-            boolean 旧措置者ユニット型個室のみ = 帳票情報.is旧措置者ユニット型個室のみ();
+            boolean 旧措置者ユニット型個室のみ = this.帳票情報.is旧措置者ユニット型個室のみ();
             if (決定.equals(決定区分承認) && 旧措置者ユニット型個室のみ) {
                 source.list_13 = new RString("ユ").substring(NOCOUNT_2, NOCOUNT_3);
             } else if (決定.equals(決定区分承認) && !旧措置者ユニット型個室のみ) {
@@ -171,21 +167,18 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
     }
 
     private void setLayer1Step4(ShakaiFukushiHojinKeigenHakkoIchiranReportSource source) {
-        if (null != 帳票情報リスト && !帳票情報リスト.isEmpty()) {
-            ShakaiFukushiHojinKeigenHakkoIchiranEntity 帳票情報 = this.帳票情報リスト.get(index);
-            if (帳票情報.is認定証発行フラグ() && 帳票情報.is認定証発行済み()) {
+        if (null != 帳票情報) {
+            if (this.帳票情報.is認定証発行フラグ() && this.帳票情報.is認定証発行済み()) {
                 source.list_14 = new RString("○");
             }
-            if (帳票情報.is認定証発行フラグ() && !帳票情報.is認定証発行済み()) {
+            if (this.帳票情報.is認定証発行フラグ() && !this.帳票情報.is認定証発行済み()) {
                 source.list_14 = new RString("却下");
             }
-            if (!帳票情報.is認定証発行フラグ() && !帳票情報.is認定証発行済み()) {
+            if (!this.帳票情報.is認定証発行フラグ() && !this.帳票情報.is認定証発行済み()) {
                 source.list_14 = RString.EMPTY;
             }
-            if (帳票情報.is通知書発行フラグ()) {
+            if (this.帳票情報.is通知書発行フラグ()) {
                 source.list_15 = new RString("○");
-            } else {
-                source.list_15 = RString.EMPTY;
             }
         }
     }
@@ -205,9 +198,8 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
     }
 
     private RString get適用日有効期限() {
-        ShakaiFukushiHojinKeigenHakkoIchiranEntity 帳票情報 = this.帳票情報リスト.get(index);
-        RString 適用日 = 帳票情報.get適用日().wareki().toDateString();
-        RString 有効期限 = 帳票情報.get有効期限().wareki().toDateString();
+        RString 適用日 = this.帳票情報.get適用日().wareki().toDateString();
+        RString 有効期限 = this.帳票情報.get有効期限().wareki().toDateString();
         RString 適用日有効期限 = 適用日.concat(new RString("~")).concat(有効期限);
         return 適用日有効期限;
     }

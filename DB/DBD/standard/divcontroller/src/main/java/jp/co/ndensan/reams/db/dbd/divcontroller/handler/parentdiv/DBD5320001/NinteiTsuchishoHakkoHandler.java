@@ -80,7 +80,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceData;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  *
@@ -196,6 +196,7 @@ public class NinteiTsuchishoHakkoHandler {
         div.getDdlMachJoken().setSelectedKey(RadioValue.前方一致.getKey());
 
         div.getTxtSaidaiHyojiKensu().setValue(get最大表示件数());
+
     }
 
     /**
@@ -260,8 +261,10 @@ public class NinteiTsuchishoHakkoHandler {
     public void openChohyoPanel(PanelType パネル) {
         clearChohyoArea();
         setChohyoPanelOpenClose(パネル);
+        setChohyoPanelRequiredCheck(パネル);
         set出力順エリア(パネル);
         set帳票発行パネル(パネル);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnTsuchishoPublish"), false);
     }
 
     /**
@@ -290,52 +293,52 @@ public class NinteiTsuchishoHakkoHandler {
         if (div.getChkOutPutSelect().getSelectedKeys().contains(RadioValue.認定結果通知書.getKey())) {
             出力対象.add(ShutsuryokuTaishoKubun.認定結果通知書);
             parameter.set認定結果通知書文書番号(div.getCcdIkkatsuNinteiKekkaBunshoBango().get文書番号());
-            parameter.set認定結果通知書今回開始日付(
-                    get日付日時(div.getTxtNinteiKekkaKonkaiYMDFrom().getValue(), div.getTxtNinteiKekkaKonkaiTimeFrom().getValue()));
+            parameter.set認定結果通知書今回開始日付(div.getTxtNinteiKekkaKonkaiYMDFrom().getValue());
+            parameter.set認定結果通知書今回開始日時(div.getTxtNinteiKekkaKonkaiTimeFrom().getValue());
             FlexibleDate 終了日付 = div.getTxtNinteiKekkaKonkaiYMDTo().getValue();
             if (null != 終了日付 && !終了日付.isEmpty()) {
-                parameter.set認定結果通知書今回終了日付(
-                        get日付日時(終了日付, div.getTxtNinteiKekkaKonkaiTimeTo().getValue()));
+                parameter.set認定結果通知書今回終了日付(終了日付);
+                parameter.set認定結果通知書今回終了日時(div.getTxtNinteiKekkaKonkaiTimeTo().getValue());
             } else {
-                parameter.set認定結果通知書今回終了日付(
-                        get日付日時(FlexibleDate.getNowDate(), RTime.now()));
+                parameter.set認定結果通知書今回終了日付(FlexibleDate.getNowDate());
+                parameter.set認定結果通知書今回終了日時(RTime.now());
             }
         }
 
         if (div.getChkOutPutSelect().getSelectedKeys().contains(RadioValue.サービス変更通知書.getKey())) {
             出力対象.add(ShutsuryokuTaishoKubun.サービス変更通知書);
             parameter.setサービス変更通知書文書番号(div.getCcdIkkatsuServiceHenkoBunshoBango().get文書番号());
-            parameter.setサービス変更通知書今回開始日付(
-                    get日付日時(div.getTxtServiceHenkoKonkaiYMDFrom().getValue(), div.getTxtServiceHenkoKonkaiTimeFrom().getValue()));
+            parameter.setサービス変更通知書今回開始日付(div.getTxtServiceHenkoKonkaiYMDFrom().getValue());
+            parameter.setサービス変更通知書今回開始日時(div.getTxtServiceHenkoKonkaiTimeFrom().getValue());
             FlexibleDate 終了日付 = div.getTxtServiceHenkoKonkaiYMDTo().getValue();
             if (null != 終了日付 && !終了日付.isEmpty()) {
-                parameter.setサービス変更通知書今回終了日付(
-                        get日付日時(終了日付, div.getTxtServiceHenkoKonkaiTimeTo().getValue()));
+                parameter.setサービス変更通知書今回終了日付(終了日付);
+                parameter.setサービス変更通知書今回終了日時(div.getTxtServiceHenkoKonkaiTimeTo().getValue());
             } else {
-                parameter.setサービス変更通知書今回終了日付(
-                        get日付日時(FlexibleDate.getNowDate(), RTime.now()));
+                parameter.setサービス変更通知書今回終了日付(FlexibleDate.getNowDate());
+                parameter.setサービス変更通知書今回終了日時(RTime.now());
             }
         }
 
         if (div.getChkOutPutSelect().getSelectedKeys().contains(RadioValue.要介護度変更通知書.getKey())) {
             出力対象.add(ShutsuryokuTaishoKubun.要介護度変更通知書);
             parameter.set要介護区分変更通知書文書番号(div.getCcdIkkatsuKubunHenkoBunshoBango().get文書番号());
-            parameter.set要介護区分変更通知書今回開始日付(
-                    get日付日時(div.getTxtKubunHenkoKonkaiYMDFrom().getValue(), div.getTxtKubunHenkoKonkaiTimeFrom().getValue()));
+            parameter.set要介護区分変更通知書今回開始日付(div.getTxtKubunHenkoKonkaiYMDFrom().getValue());
+            parameter.set要介護区分変更通知書今回開始日時(div.getTxtKubunHenkoKonkaiTimeFrom().getValue());
             FlexibleDate 終了日付 = div.getTxtKubunHenkoKonkaiYMDTo().getValue();
             if (null != 終了日付 && !終了日付.isEmpty()) {
-                parameter.set要介護区分変更通知書今回終了日付(
-                        get日付日時(終了日付, div.getTxtKubunHenkoKonkaiTimeTo().getValue()));
+                parameter.set要介護区分変更通知書今回終了日付(終了日付);
+                parameter.set要介護区分変更通知書今回終了日時(div.getTxtKubunHenkoKonkaiTimeTo().getValue());
             } else {
-                parameter.set要介護区分変更通知書今回終了日付(
-                        get日付日時(FlexibleDate.getNowDate(), RTime.now()));
+                parameter.set要介護区分変更通知書今回終了日付(FlexibleDate.getNowDate());
+                parameter.set要介護区分変更通知書今回終了日時(RTime.now());
             }
         }
 
         parameter.set出力対象(出力対象);
         parameter.set発行日(div.getTxtSakuseiDaytxtSakuseiDaytxtSakuseiDay().getValue());
         // TODO. 出力順の取得
-        parameter.set出力順(連絡符号);
+        parameter.set出力順(get出力順(PanelType.一括発行パネル));
         parameter.set単票発行済み(div.getRadTanpyoHakkoZumi().getSelectedKey().equals(RadioValue.発行済みを出力する.getKey()));
 
         return parameter;
@@ -392,15 +395,15 @@ public class NinteiTsuchishoHakkoHandler {
     }
 
     private void set帳票発行パネル(PanelType パネル) {
-        if (パネル.equals(パネル)) {
+        if (PanelType.個別発行認定結果通知書パネル.equals(パネル)) {
             set個別発行認定結果通知書(パネル);
-        } else if (パネル.equals(パネル)) {
+        } else if (PanelType.個別発行サービス変更通知書パネル.equals(パネル)) {
             set個別発行サービス変更通知書(パネル);
-        } else if (パネル.equals(パネル)) {
+        } else if (PanelType.個別発行要介護度変更通知書パネル.equals(パネル)) {
             set個別発行要介護度変更通知書(パネル);
-        } else if (パネル.equals(パネル)) {
+        } else if (PanelType.個別発行認定却下通知書パネル.equals(パネル)) {
             set個別発行認定却下通知書(パネル);
-        } else if (パネル.equals(PanelType.一括発行パネル)) {
+        } else if (PanelType.一括発行パネル.equals(PanelType.一括発行パネル)) {
             set一括発行();
         }
     }
@@ -566,6 +569,13 @@ public class NinteiTsuchishoHakkoHandler {
             div.getTxtKubunHenkoKonkaiTimeFrom().setValue(RTime.now());
         }
         div.getCcdIkkatsuKubunHenkoBunshoBango().initialize(パネル.getChohyoId());
+    }
+
+    private void setChohyoPanelRequiredCheck(PanelType パネル) {
+        div.getTxtNinteiKekkaSakuseiDay().setRequired(パネル.equals(PanelType.個別発行認定結果通知書パネル));
+        div.getTxtServiceHenkoBunshoSakuseiDay().setRequired(パネル.equals(PanelType.個別発行サービス変更通知書パネル));
+        div.getTxtYokaigodoHenkoTsuchiSakuseiDay().setRequired(パネル.equals(PanelType.個別発行要介護度変更通知書パネル));
+        div.getTxtNinteiKyakkaTsuchi().setRequired(パネル.equals(PanelType.個別発行認定却下通知書パネル));
     }
 
     private void setChohyoPanelOpenClose(PanelType パネル) {
@@ -870,7 +880,7 @@ public class NinteiTsuchishoHakkoHandler {
             hashMap.put(new Code(ChohyoHakkoRirekiSearchDefault.帳票ID.getCode()), パネル.getChohyoId().getColumnValue());
             SourceDataCollection collection = reportManager.publish();
 
-            if (div.getRadTanpyoHakkoZumi().getSelectedKey().equals(RadioValue.発行済みを出力する.getKey())) {
+            if (div.getRadNinteiKekkaRireki().getSelectedKey().equals(RadioValue.発行済みを出力する.getKey())) {
                 List<ShikibetsuCode> shikibetsuCodeList = new ArrayList<>();
                 shikibetsuCodeList.add(画面選択データ.get識別コード());
                 for (SourceData data : collection) {
@@ -889,7 +899,7 @@ public class NinteiTsuchishoHakkoHandler {
             HashMap<Code, RString> hashMap = new HashMap();
             hashMap.put(new Code(ChohyoHakkoRirekiSearchDefault.帳票ID.getCode()), パネル.getChohyoId().getColumnValue());
             SourceDataCollection collection = reportManager.publish();
-            if (div.getRadTanpyoHakkoZumi().getSelectedKey().equals(RadioValue.発行済みを出力する.getKey())) {
+            if (div.getRadServiceHenkoBunshoRireki().getSelectedKey().equals(RadioValue.発行済みを出力する.getKey())) {
                 List<ShikibetsuCode> shikibetsuCodeList = new ArrayList<>();
                 shikibetsuCodeList.add(画面選択データ.get識別コード());
                 for (SourceData data : collection) {
@@ -908,7 +918,7 @@ public class NinteiTsuchishoHakkoHandler {
             HashMap<Code, RString> hashMap = new HashMap();
             hashMap.put(new Code(ChohyoHakkoRirekiSearchDefault.帳票ID.getCode()), パネル.getChohyoId().getColumnValue());
             SourceDataCollection collection = reportManager.publish();
-            if (div.getRadTanpyoHakkoZumi().getSelectedKey().equals(RadioValue.発行済みを出力する.getKey())) {
+            if (div.getRadYokaigodoHenkoRireki().getSelectedKey().equals(RadioValue.発行済みを出力する.getKey())) {
                 List<ShikibetsuCode> shikibetsuCodeList = new ArrayList<>();
                 shikibetsuCodeList.add(画面選択データ.get識別コード());
                 for (SourceData data : collection) {
@@ -927,7 +937,7 @@ public class NinteiTsuchishoHakkoHandler {
             HashMap<Code, RString> hashMap = new HashMap();
             hashMap.put(new Code(ChohyoHakkoRirekiSearchDefault.帳票ID.getCode()), パネル.getChohyoId().getColumnValue());
             SourceDataCollection collection = reportManager.publish();
-            if (div.getRadTanpyoHakkoZumi().getSelectedKey().equals(RadioValue.発行済みを出力する.getKey())) {
+            if (div.getRadNinteiKyakkaRireki().getSelectedKey().equals(RadioValue.発行済みを出力する.getKey())) {
                 List<ShikibetsuCode> shikibetsuCodeList = new ArrayList<>();
                 shikibetsuCodeList.add(画面選択データ.get識別コード());
                 for (SourceData data : collection) {
@@ -1343,18 +1353,6 @@ public class NinteiTsuchishoHakkoHandler {
     private RString getタイトル(ConfigNameDBA configName) {
         RString タイトル = DbBusinessConfig.get(configName, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
         return null != タイトル ? タイトル : RString.EMPTY;
-    }
-
-    private RString get日付日時(FlexibleDate 日付, RTime 日時) {
-        if (null == 日付 || 日付.isEmpty()) {
-            return RString.EMPTY;
-        }
-
-        if (null == 日時) {
-            return 日付.wareki().toDateString();
-        }
-
-        return 日付.wareki().toDateString().concat(RString.HALF_SPACE).concat(日時.toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
     }
 
     private FlexibleDate convertRDateToFlexibleDate(RDate target) {

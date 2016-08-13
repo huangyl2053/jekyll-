@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinseiRirekiJohoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinseitodokedeJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinseitodokedeJohoBuilder;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
@@ -69,6 +70,7 @@ import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -80,6 +82,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.util.CountedItem;
+import jp.co.ndensan.reams.uz.uza.util.Saiban;
 
 /**
  * 要介護認定申請受付画面のHandlerクラスです。
@@ -89,6 +93,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 public class NinteiShinseiTorokuUketsukeHandler {
 
     private final NinteiShinseiTorokuUketsukeDiv div;
+    private ShinseishoKanriNo shinseishoKanriNo;
 
     private static final RString DBDMN51001 = new RString("DBDMN51001");
     private static final RString DBDMN51003 = new RString("DBDMN51003");
@@ -195,6 +200,11 @@ public class NinteiShinseiTorokuUketsukeHandler {
             this.set延期タブ表示用の情報(result);
         }
 
+        div.setHdnRenrakusakiReadOnly(new RString("0"));
+        div.setHdnShichosonCode(市町村コード);
+        div.setHdnShikibetsuCode(識別コード != null ? 識別コード.getColumnValue() : null);
+        div.setHdnHihokenshaNo(被保険者番号 != null ? 被保険者番号.getColumnValue() : null);
+
     }
 
     /**
@@ -225,6 +235,10 @@ public class NinteiShinseiTorokuUketsukeHandler {
      *
      */
     public void onClick_btnUpdate() {
+
+        CountedItem countedItem = Saiban.get(SubGyomuCode.DBD介護受給, SaibanHanyokeyName.市町村コード_西暦_月.get名称(), FlexibleDate.getNowDate().getNendo());
+
+        shinseishoKanriNo = new ShinseishoKanriNo(countedItem.nextString());
 
         if (DBD5120001StateName.申請追加.getName().equals(ResponseHolder.getState())
                 || DBD5120001StateName.区分変更追加.getName().equals(ResponseHolder.getState())
@@ -750,7 +764,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
         JukyushaDaichoBuilder builder = jukyushaDaicho.createBuilderForEdit();
         //TODO
-        builder.set申請書管理番号(ShinseishoKanriNo.EMPTY);
+        builder.set申請書管理番号(shinseishoKanriNo);
         builder.set申請状況区分(new RString("0"));
         builder.set支所コード(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().getSelectedKey());
@@ -934,7 +948,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
         JukyushaDaichoBuilder builder = jukyushaDaicho.createBuilderForEdit();
         //TODO
-        builder.set申請書管理番号(ShinseishoKanriNo.EMPTY);
+        builder.set申請書管理番号(shinseishoKanriNo);
         builder.set申請状況区分(new RString("0"));
         builder.set支所コード(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().getSelectedKey());
@@ -1049,7 +1063,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
         JukyushaDaichoBuilder builder = jukyushaDaicho.createBuilderForEdit();
         //TODO
-        builder.set申請書管理番号(ShinseishoKanriNo.EMPTY);
+        builder.set申請書管理番号(shinseishoKanriNo);
         builder.set申請状況区分(new RString("1"));
         builder.set支所コード(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().getSelectedKey());
@@ -1167,7 +1181,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
         JukyushaDaichoBuilder builder = jukyushaDaicho.createBuilderForEdit();
         //TODO
-        builder.set申請書管理番号(ShinseishoKanriNo.EMPTY);
+        builder.set申請書管理番号(shinseishoKanriNo);
         builder.set申請状況区分(new RString("1"));
         builder.set支所コード(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().getSelectedKey());

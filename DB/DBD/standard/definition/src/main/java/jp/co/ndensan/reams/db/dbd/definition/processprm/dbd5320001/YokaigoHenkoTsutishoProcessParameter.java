@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikib
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,8 +28,10 @@ public class YokaigoHenkoTsutishoProcessParameter implements IBatchProcessParame
     private Boolean 単票発行済み;
     private RString 出力順;
     private RString 文書番号;
-    private RString 開始日時;
-    private RString 終了日時;
+    private FlexibleDate 開始日;
+    private FlexibleDate 終了日;
+    private RTime 開始日時;
+    private RTime 終了日時;
     private IShikibetsuTaishoPSMSearchKey searchKey;
 
     /**
@@ -38,17 +41,23 @@ public class YokaigoHenkoTsutishoProcessParameter implements IBatchProcessParame
      * @param 単票発行済み 単票発行済み
      * @param 出力順 出力順
      * @param 文書番号 文書番号
-     * @param 開始日時 RString
-     * @param 終了日時 RString
+     * @param 開始日 FlexibleDate
+     * @param 終了日 FlexibleDate
+     * @param 開始日時 RTime
+     * @param 終了日時 RTime
      * @param searchKey IShikibetsuTaishoPSMSearchKey
      */
     public YokaigoHenkoTsutishoProcessParameter(FlexibleDate 発行日, Boolean 単票発行済み,
-            RString 出力順, RString 文書番号, RString 開始日時, RString 終了日時,
+            RString 出力順, RString 文書番号,
+            FlexibleDate 開始日, FlexibleDate 終了日,
+            RTime 開始日時, RTime 終了日時,
             IShikibetsuTaishoPSMSearchKey searchKey) {
         this.発行日 = 発行日;
         this.単票発行済み = 単票発行済み;
         this.出力順 = 出力順;
         this.文書番号 = 文書番号;
+        this.開始日 = 開始日;
+        this.終了日 = 終了日;
         this.開始日時 = 開始日時;
         this.終了日時 = 終了日時;
         this.searchKey = searchKey;
