@@ -194,14 +194,16 @@ public class GemmenJuminKihonHandler {
         ShinseiJokyoDiv 状況情報パネル = div.getGemmenMain().getShinseiJokyo();
         状況情報パネル.getTxtShinseiJokyo().setValue(状況);
         if (状況_新規.equals(状況)) {
-            状況情報パネル.getBtnTesei().setDisplayNone(true);
-            状況情報パネル.getBtnTorikeshi().setDisplayNone(true);
+            状況情報パネル.getBtnTesei().setVisible(false);
+            状況情報パネル.getBtnTorikeshi().setVisible(false);
         } else if (状況_申請中.equals(状況)) {
-            状況情報パネル.getBtnTesei().setDisplayNone(true);
+            状況情報パネル.getBtnTesei().setVisible(false);
+            状況情報パネル.getBtnTorikeshi().setVisible(true);
             状況情報パネル.getBtnTorikeshi().setDisabled(false);
         } else if (状況_決定済.equals(状況)) {
             状況情報パネル.getBtnTesei().setDisplayNone(false);
             状況情報パネル.getBtnTesei().setDisabled(false);
+            状況情報パネル.getBtnTorikeshi().setVisible(true);
             状況情報パネル.getBtnTorikeshi().setDisabled(false);
         }
         return 状況;
@@ -289,21 +291,25 @@ public class GemmenJuminKihonHandler {
      */
     public void onClick_訂正の状態() {
         ShinseiJokyoDiv 状況情報パネル = div.getGemmenMain().getShinseiJokyo();
-        状況情報パネル.getBtnTesei().setDisplayNone(true);
-        状況情報パネル.getBtnTorikeshi().setDisplayNone(true);
+        状況情報パネル.setDisplayNone(false);
+        状況情報パネル.getBtnTesei().setVisible(false);
+        状況情報パネル.getBtnTorikeshi().setVisible(false);
         div.getGemmenMain().getTorikeshiInfo().setDisplayNone(true);
         ShinseiinfoDiv 申請情報パネル = div.getGemmenMain().getShinseiinfo();
+        申請情報パネル.setDisplayNone(false);
         申請情報パネル.getTxtShinseiYMD().setReadOnly(false);
         申請情報パネル.getTxtShinseiGemmengaku().setReadOnly(false);
         申請情報パネル.getBtnGemmenShurui().setDisabled(false);
         申請情報パネル.getTxtShinseiRiyu().setReadOnly(false);
         申請情報パネル.getTxtGemmenShurui().setReadOnly(true);
         KeteiinfoDiv 決定情報パネル = div.getGemmenMain().getKeteiinfo();
+        決定情報パネル.setDisplayNone(false);
         決定情報パネル.getTxtKetteiYMD().setReadOnly(false);
         決定情報パネル.getTxtZenkaiGemmengaku().setReadOnly(true);
         決定情報パネル.getRadKetteiKubun().setDisabled(false);
         決定情報パネル.getTxtKetteiRiyu().setReadOnly(false);
         KiwarigakuDiv 減免情報パネル = div.getGemmenMain().getKiwarigaku();
+        減免情報パネル.setDisplayNone(false);
         減免情報パネル.getTxtGemmengaku().setReadOnly(false);
         減免情報パネル.getBtnCalculate().setDisabled(false);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(訂正をやめるボタン, false);
@@ -318,15 +324,19 @@ public class GemmenJuminKihonHandler {
      */
     public void onClick_取消の状態() {
         ShinseiJokyoDiv 状況情報パネル = div.getGemmenMain().getShinseiJokyo();
-        状況情報パネル.getBtnTesei().setDisplayNone(true);
-        状況情報パネル.getBtnTorikeshi().setDisplayNone(true);
+        状況情報パネル.setDisplayNone(false);
+        状況情報パネル.getBtnTesei().setVisible(false);
+        状況情報パネル.getBtnTorikeshi().setVisible(false);
         RString 状況 = 状況情報パネル.getTxtShinseiJokyo().getValue();
         div.getGemmenMain().getTorikeshiInfo().setDisplayNone(false);
         TorikeshiInfoDiv 取消情報パネル = div.getGemmenMain().getTorikeshiInfo();
+        取消情報パネル.setDisplayNone(false);
         取消情報パネル.getTxtTorikeshiYMD().setValue(null);
+        取消情報パネル.getTxtTorikeshiYMD().setRequired(true);
         取消情報パネル.getTxtTorikeshiShurui().setValue(null);
         取消情報パネル.getTxtTorikeshiRiyu().setValue(null);
         ShinseiinfoDiv 申請情報パネル = div.getGemmenMain().getShinseiinfo();
+        申請情報パネル.setDisplayNone(false);
         申請情報パネル.getTxtShinseiYMD().setReadOnly(true);
         申請情報パネル.getTxtShinseiGemmengaku().setReadOnly(true);
         申請情報パネル.getBtnGemmenShurui().setDisabled(true);
@@ -869,10 +879,13 @@ public class GemmenJuminKihonHandler {
         div.getGemmenFukaRirekiAll().setDisplayNone(true);
         div.getGemmenMain().getTorikeshiInfo().setDisplayNone(true);
         ShinseiinfoDiv 申請情報パネル = div.getGemmenMain().getShinseiinfo();
+        申請情報パネル.setDisplayNone(false);
         申請情報パネル.getTxtGemmenShurui().setReadOnly(true);
         KeteiinfoDiv 決定情報パネル = div.getGemmenMain().getKeteiinfo();
         決定情報パネル.getTxtZenkaiGemmengaku().setReadOnly(true);
+        決定情報パネル.setDisplayNone(false);
         KiwarigakuDiv 減免情報パネル = div.getGemmenMain().getKiwarigaku();
+        減免情報パネル.setDisplayNone(false);
         div.getGemmenMain().getShinseiJokyo().setDisplayNone(false);
         div.getGemmenMain().getShinseiinfo().setDisplayNone(false);
         div.getGemmenMain().getKeteiinfo().setDisplayNone(false);
@@ -1613,7 +1626,7 @@ public class GemmenJuminKihonHandler {
     public Code onOkClose減免種類() {
         RString 減免種類code = DataPassingConverter.deserialize(div.getGemmenShuruiCode(), RString.class);
         RString 減免事由 = DataPassingConverter.deserialize(div.getGemmenShuruiHyojiMongon(), RString.class);
-        div.getGemmenMain().getTorikeshiInfo().getTxtTorikeshiShurui().setValue(減免事由);
+        div.getGemmenMain().getShinseiinfo().getTxtGemmenShurui().setValue(減免事由);
         return new Code(減免種類code);
     }
 
@@ -1698,6 +1711,17 @@ public class GemmenJuminKihonHandler {
      */
     public GemmenJuminKihonHandler(GemmenJuminKihonDiv div) {
         this.div = div;
+    }
+
+    /**
+     * 画面の入力チェック
+     */
+    public void setRequired() {
+        div.getGemmenMain().getTorikeshiInfo().getTxtTorikeshiYMD().setRequired(false);
+        RString 状況 = div.getGemmenMain().getShinseiJokyo().getTxtShinseiJokyo().getValue();
+        if (!状況_決定済.equals(状況)) {
+            div.getGemmenMain().getShinseiinfo().getTxtShinseiYMD().setRequired(true);
+        }
     }
 
     private boolean checkDate(FlexibleDate fDate, RDate rDate) {
