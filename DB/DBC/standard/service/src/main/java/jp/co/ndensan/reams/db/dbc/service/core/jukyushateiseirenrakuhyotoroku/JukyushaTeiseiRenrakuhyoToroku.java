@@ -117,9 +117,11 @@ public class JukyushaTeiseiRenrakuhyoToroku {
             受給者訂正Entity.setShoKisaiHokenshaNo(証記載保険者番号と広域保険者番号.get(0));
             受給者訂正Entity.setHiHokenshaNo(被保険者番号);
             受給者訂正Entity.setIdoYMD(システム日付);
-            受給者訂正Entity.setSeibetsuCode(psm_entity.get性別コード());
-            受給者訂正Entity.setUmareYMD(psm_entity.get生年月日());
-            受給者訂正Entity.setHiHokenshaNameKana(psm_entity.getカナ名称());
+            if (psm_entity != null) {
+                受給者訂正Entity.setSeibetsuCode(psm_entity.get性別コード());
+                受給者訂正Entity.setUmareYMD(psm_entity.get生年月日());
+                受給者訂正Entity.setHiHokenshaNameKana(psm_entity.getカナ名称());
+            }
             受給者訂正Entity.setSofuYM(システム日付.getYearMonth());
             受給者訂正 = new JukyushaIdoRenrakuhyo(受給者訂正Entity);
         } else {
