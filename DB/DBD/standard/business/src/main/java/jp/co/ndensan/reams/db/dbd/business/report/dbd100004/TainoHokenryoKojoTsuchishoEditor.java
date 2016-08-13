@@ -188,6 +188,7 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
             source.listKyufuhiNaiyo_3 = DecimalFormatter.toコンマ区切りRString(new Decimal(償還払集計情報.get支払金額()), 0);
             source.kyufugakuGokei = DecimalFormatter.toコンマ区切りRString(get給付額合計(), 0);
             source.shikyuGaku = DecimalFormatter.toコンマ区切りRString(get給付額合計().subtract(get保険料額合計()), 0);
+            source.hokenryoGokei = DecimalFormatter.toコンマ区切りRString(get保険料額合計(), 0);
         }
         if (null != this.帳票情報.getShiharaiHohoHenkoTainoList() && this.帳票情報.getShiharaiHohoHenkoTainoList().size() > index) {
             ShiharaiHohoHenkoTaino 支払方法変更滞納 = this.帳票情報.getShiharaiHohoHenkoTainoList().get(index);
