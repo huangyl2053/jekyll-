@@ -55,7 +55,7 @@ public class JigyohokokuCompYoshiki201Entity {
     private int 請求額;
     private RString 利用者負担額;
     private RString 後_点数合計;
-    private RString 後_保険請求分請求額;
+    private int 後_保険請求分請求額;
     private RString 後_出来高点数合計;
     private RString 後_出来高請求額;
     private RString 集計支給区分コード;
