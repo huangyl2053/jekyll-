@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBE-1470-022 wanghui -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.itizihanteiiftorikomi.ItizihanteiIFtoriKomiMapper"> 
+    <resultMap id="haishameigihenkouirai" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.itizihanteiiftorikomi.ItizihanteiIFtoriKomiRelateEntity">
+        <result property="shinseishoKanriNo" column="T5101_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="koroshoIfShikibetsuCode" column="T5101_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinseishoKanriNo2" column="TMP_shinseishoKanriNo2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaNo" column="TMP_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteiShinseiYMD" column="TMP_ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteiShinseiShinseijiKubunCode" column="TMP_ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ichijiHanteiKekkaCode" column="TMP_ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ichijiHanteiKekkaNinchishoKasanCode" column="TMP_ichijiHanteiKekkaNinchishoKasanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kijunJikan" column="TMP_kijunJikan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kijunJikanShokuji" column="TMP_kijunJikanShokuji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kijunJikanHaisetsu" column="TMP_kijunJikanHaisetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kijunJikanIdo" column="TMP_kijunJikanIdo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kijunJikanSeiketsuHoji" column="TMP_kijunJikanSeiketsuHoji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kijunJikanKansetsuCare" column="TMP_kijunJikanKansetsuCare" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kijunJikanBPSDKanren" column="TMP_kijunJikanBPSDKanren" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kijunJikanKinoKunren" column="TMP_kijunJikanKinoKunren" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kijunJikanIryoKanren" column="TMP_kijunJikanIryoKanren" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kijunJikanNinchishoKasan" column="TMP_kijunJikanNinchishoKasan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="chukanHyokaKomoku1gun" column="TMP_chukanHyokaKomoku1gun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="chukanHyokaKomoku2gun" column="TMP_chukanHyokaKomoku2gun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="chukanHyokaKomoku3gun" column="TMP_chukanHyokaKomoku3gun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="chukanHyokaKomoku4gun" column="TMP_chukanHyokaKomoku4gun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="chukanHyokaKomoku5gun" column="TMP_chukanHyokaKomoku5gun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ichijiHnateiKeikokuCode" column="TMP_ichijiHnateiKeikokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jotaiAnteiseiCode" column="TMP_jotaiAnteiseiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninchishoJiritsudoIIijoNoGaizensei" column="TMP_ninchishoJiritsudoIIijoNoGaizensei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="suiteiKyufuKubunCode" column="TMP_suiteiKyufuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinseishoKanriNo3" column="DbT5116_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+     <select resultOrdered="true" id="gethihokenshaNo" resultMap="haishameigihenkouirai" 
+           parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.itizihanteishori.ItziHanteiShoriMybitisParamter"  fetchSize="500">
+        SELECT
+            T5101."shinseishoKanriNo" AS "T5101_shinseishoKanriNo",
+            T5101."koroshoIfShikibetsuCode" AS "T5101_koroshoIfShikibetsuCode",
+            TMP."shinseishoKanriNo" AS "TMP_shinseishoKanriNo2",
+            TMP."hihokenshaNo" AS "TMP_hihokenshaNo",
+            TMP."ninteiShinseiYMD" AS "TMP_ninteiShinseiYMD",
+            TMP."ninteiShinseiShinseijiKubunCode" AS "TMP_ninteiShinseiShinseijiKubunCode",
+            TMP."ichijiHanteiKekkaCode" AS "TMP_ichijiHanteiKekkaCode",
+            TMP."ichijiHanteiKekkaNinchishoKasanCode" AS "TMP_ichijiHanteiKekkaNinchishoKasanCode",
+            TMP."kijunJikan" AS "TMP_kijunJikan",
+            TMP."kijunJikanShokuji" AS "TMP_kijunJikanShokuji",
+            TMP."kijunJikanHaisetsu" AS "TMP_kijunJikanHaisetsu",
+            TMP."kijunJikanIdo" AS "TMP_kijunJikanIdo",
+            TMP."kijunJikanSeiketsuHoji" AS "TMP_kijunJikanSeiketsuHoji",
+            TMP."kijunJikanKansetsuCare" AS "TMP_kijunJikanKansetsuCare",
+            TMP."kijunJikanBPSDKanren" AS "TMP_kijunJikanBPSDKanren",
+            TMP."kijunJikanKinoKunren" AS "TMP_kijunJikanKinoKunren",
+            TMP."kijunJikanIryoKanren" AS "TMP_kijunJikanIryoKanren",
+            TMP."kijunJikanNinchishoKasan" AS "TMP_kijunJikanNinchishoKasan",
+            TMP."chukanHyokaKomoku1gun" AS "TMP_chukanHyokaKomoku1gun",
+            TMP."chukanHyokaKomoku2gun" AS "TMP_chukanHyokaKomoku2gun",
+            TMP."chukanHyokaKomoku3gun" AS "TMP_chukanHyokaKomoku3gun",
+            TMP."chukanHyokaKomoku4gun" AS "TMP_chukanHyokaKomoku4gun",
+            TMP."chukanHyokaKomoku5gun" AS "TMP_chukanHyokaKomoku5gun",
+            TMP."ichijiHnateiKeikokuCode" AS "TMP_ichijiHnateiKeikokuCode",
+            TMP."jotaiAnteiseiCode" AS "TMP_jotaiAnteiseiCode",
+            TMP."ninchishoJiritsudoIIijoNoGaizensei" AS "TMP_ninchishoJiritsudoIIijoNoGaizensei",
+            TMP."suiteiKyufuKubunCode" AS "TMP_suiteiKyufuKubunCode",
+            DbT5116."shinseishoKanriNo" AS "DbT5116_shinseishoKanriNo"  
+        FROM
+           "IchijiHanteiKekkaJohoTemp" as TMP
+        INNER JOIN
+          rgdb."DbT5101NinteiShinseiJoho" as T5101
+        ON
+          TMP."shinseishoKanriNo" = T5101."shoKisaiHokenshaNo"
+        AND
+          TMP."hihokenshaNo" = T5101."hihokenshaNo"
+        AND
+          TMP."ninteiShinseiYMD" = T5101."ninteiShinseiYMD"
+        AND
+          TMP."ninteiShinseiShinseijiKubunCode"  = T5101."ninteiShinseiShinseijiKubunCode"
+        AND
+          T5101."shoriJotaiKubun" IN (#{取下},#{延期})
+        AND
+          T5101."logicalDeletedFlag" = FALSE
+        INNER JOIN
+          rgdb."DbT4001JukyushaDaicho" as DbT4001
+        ON
+          DbT4001."shinseishoKanriNo" = T5101."shinseishoKanriNo"
+        AND
+          DbT4001."logicalDeletedFlag" = FALSE
+        AND
+          DbT4001."shinseiJokyoKubun" = '0'
+        LEFT JOIN
+          rgdb."DbT5116IchijiHanteiKekkaJoho" as DbT5116
+        ON
+         DbT5116."shinseishoKanriNo" = T5101."shinseishoKanriNo" 
+       ORDER BY
+         T5101."shinseishoKanriNo"  
+    </select>         
+</mapper>
