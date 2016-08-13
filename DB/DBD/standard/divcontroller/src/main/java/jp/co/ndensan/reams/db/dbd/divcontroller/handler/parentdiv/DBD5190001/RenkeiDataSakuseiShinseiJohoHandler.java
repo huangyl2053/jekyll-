@@ -134,8 +134,13 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
         RString 対象期間 = new RString("対象期間");
         RString 被保険者番号 = new RString("被保険者番号");
         if (radChushutsu.equals(対象期間)) {
+            div.getTxtHihokenshaNo().clearValue();
             div.getTxtHihokenshaNo().setDisabled(true);
             div.getBtnhihokensha().setDisabled(true);
+            div.getTxtKonkaiKaishiDay().clearValue();
+            div.getTxtKonkaiKaishiTime().clearValue();
+            div.getTxtKonkaiShuryoDay().clearValue();
+            div.getTxtKonkaiShuryoTime().clearValue();
             div.getTxtKonkaiKaishiDay().setDisabled(false);
             div.getTxtKonkaiKaishiTime().setDisabled(false);
             div.getTxtKonkaiShuryoDay().setDisabled(false);
@@ -144,6 +149,10 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
         }
         if (radChushutsu.equals(被保険者番号)) {
             div.getTxtHihokenshaNo().clearValue();
+            div.getTxtKonkaiKaishiDay().clearValue();
+            div.getTxtKonkaiKaishiTime().clearValue();
+            div.getTxtKonkaiShuryoDay().clearValue();
+            div.getTxtKonkaiShuryoTime().clearValue();
             div.getTxtKonkaiKaishiDay().setDisabled(true);
             div.getTxtKonkaiKaishiTime().setDisabled(true);
             div.getTxtKonkaiShuryoDay().setDisabled(true);

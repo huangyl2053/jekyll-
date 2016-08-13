@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd5190001;
 
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 
 /**
  * 対象者一覧情報の検索のパラメータクラス
@@ -84,14 +86,18 @@ public final class NinteiShinseiJohoParameter {
         boolean 今回終了 = false;
         boolean 被保険者番号入力 = false;
         boolean 最大表示件数 = false;
+        RDate konkaikaishiday = RDate.MIN;
+        RTime konkaikaishitime = RTime.of(0, 0, 0);
+        RDateTime timeCheck = RDateTime.of(konkaikaishiday.getYearValue(), konkaikaishiday.getMonthValue(), konkaikaishiday.getDayValue(),
+                konkaikaishitime.getHour(), konkaikaishitime.getMinute(), konkaikaishitime.getSecond());
         int saidakensuNo = 0;
         if (!shoKisaiHokenshaNo.isEmpty()) {
             証記載保険者番号 = true;
         }
-        if (!(konkaikaishiTimestamp.toString().isEmpty())) {
+        if (!(timeCheck.isEqual(konkaikaishiTimestamp))) {
             今回開始 = true;
         }
-        if (!(konkaikaishiTimestamp.toString().isEmpty())) {
+        if (!(timeCheck.isEqual(konkaisyuryoTimestamp))) {
             今回終了 = true;
         }
         if (!RString.isNullOrEmpty(hihokenshaNo)) {
