@@ -18,5 +18,5 @@ import lombok.Setter;
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class SyoriHidukeKanriMasterUpdateMybatisParameter implements IMyBatisParameter {
-
+// TODO
 }

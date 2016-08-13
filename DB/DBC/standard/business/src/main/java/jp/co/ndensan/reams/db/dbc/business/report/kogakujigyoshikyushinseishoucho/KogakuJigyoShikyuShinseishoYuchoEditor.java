@@ -81,11 +81,11 @@ public class KogakuJigyoShikyuShinseishoYuchoEditor implements IKogakuJigyoShiky
         if (帳票出力対象データ.getShinseishaShimeiChohyo() != null) {
             source.hihokenshaName = 帳票出力対象データ.getShinseishaShimeiChohyo().getColumnValue();
         }
-        if (帳票出力対象データ.getSeinengappiYMD() != null) {
-            source.birthYMD = 帳票出力対象データ.getSeinengappiYMD().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+        if (帳票出力対象データ.getSeinengappiYMDChohyo() != null) {
+            source.birthYMD = 帳票出力対象データ.getSeinengappiYMDChohyo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
-        source.seibetsu = Seibetsu.toValue(帳票出力対象データ.getSeibetsuCode()).get名称();
+        source.seibetsu = Seibetsu.toValue(帳票出力対象データ.getSeibetsuCodeChohyo()).get名称();
         source.hihokenJusho = 帳票出力対象データ.getShinseishaJushoChohyo();
         if (帳票出力対象データ.getShinseishaTelNoChohyo() != null) {
             source.telNo = 帳票出力対象データ.getShinseishaTelNoChohyo().getColumnValue();
@@ -96,8 +96,8 @@ public class KogakuJigyoShikyuShinseishoYuchoEditor implements IKogakuJigyoShiky
         if (帳票出力対象データ.getHihokenshaNoChohyo() != null) {
             source.hihokenshaNo = 帳票出力対象データ.getHihokenshaNoChohyo().getColumnValue();
         }
-        if (帳票出力対象データ.getKojinNo() != null) {
-            source.kojinNo = 帳票出力対象データ.getKojinNo().getColumnValue();
+        if (帳票出力対象データ.getKojinNoChohyo() != null) {
+            source.kojinNo = 帳票出力対象データ.getKojinNoChohyo().getColumnValue();
         }
         source.ninshoshaYakushokuMei = 認証者役職名;
         source.chuiTitle = attion;

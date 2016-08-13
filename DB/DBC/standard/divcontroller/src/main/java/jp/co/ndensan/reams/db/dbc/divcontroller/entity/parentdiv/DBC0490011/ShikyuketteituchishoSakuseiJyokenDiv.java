@@ -1,4 +1,5 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0490011;
+
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -45,7 +46,7 @@ public class ShikyuketteituchishoSakuseiJyokenDiv extends PanelBatchParameter {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
+ /*
      * getChushutsuJoken
      * @return ChushutsuJoken
      */
@@ -124,13 +125,13 @@ public class ShikyuketteituchishoSakuseiJyokenDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public TextBoxDate getＴｘｔHakkobi() {
-        return this.getShikyuKetteiTsuchisho().getＴｘｔHakkobi();
+    public TextBoxDate getTxtHakkobi() {
+        return this.getShikyuKetteiTsuchisho().getTxtHakkobi();
     }
 
     @JsonIgnore
-    public void setＴｘｔHakkobi(TextBoxDate ｔｘｔHakkobi) {
-        this.getShikyuKetteiTsuchisho().setＴｘｔHakkobi(ｔｘｔHakkobi);
+    public void setTxtHakkobi(TextBoxDate txtHakkobi) {
+        this.getShikyuKetteiTsuchisho().setTxtHakkobi(txtHakkobi);
     }
 
     @JsonIgnore

@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBDUC10521",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "社会福祉法人軽減対象者一覧表",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD1050021",
+     "toLayoutTitle": "社会福祉法人軽減対象者一覧表",
+     "toState": "軽減対象者一覧表"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD1050021",
+     "layoutTitle": "社会福祉法人軽減対象者一覧表",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

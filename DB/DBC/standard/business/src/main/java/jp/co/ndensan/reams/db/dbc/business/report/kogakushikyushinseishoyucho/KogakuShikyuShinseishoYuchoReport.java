@@ -29,7 +29,7 @@ public class KogakuShikyuShinseishoYuchoReport extends Report<KogakuShikyuShinse
     }
 
     @Override
-    protected void writeBy(ReportSourceWriter<KogakuShikyuShinseishoYuchoSource> writer) {
+    public void writeBy(ReportSourceWriter<KogakuShikyuShinseishoYuchoSource> writer) {
         System.out.print("");
     }
 

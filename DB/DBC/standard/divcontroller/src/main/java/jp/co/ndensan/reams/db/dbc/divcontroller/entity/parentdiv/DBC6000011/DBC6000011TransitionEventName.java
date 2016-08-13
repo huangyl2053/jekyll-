@@ -14,10 +14,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 public enum DBC6000011TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    国保連情報データ取込へ("国保連情報データ取込へ"),
-    保険者情報送付へ戻る("保険者情報送付へ戻る"),
-    国保連情報取込へ戻る("国保連情報取込へ戻る"),
-    完了("完了");
+    情報送付取込へ戻る("情報送付取込へ戻る"),
+    メニューへ戻る("メニューへ戻る");
 
     private final RString name;
 

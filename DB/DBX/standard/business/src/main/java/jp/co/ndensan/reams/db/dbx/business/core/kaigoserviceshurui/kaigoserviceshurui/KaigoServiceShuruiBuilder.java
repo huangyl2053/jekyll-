@@ -97,6 +97,54 @@ public class KaigoServiceShuruiBuilder {
     }
 
     /**
+     * 基準該当サービス区分を設定します。
+     *
+     * @param 基準該当サービス区分 基準該当サービス区分
+     * @return {@link KaigoServiceShuruiBuilder}
+     */
+    public KaigoServiceShuruiBuilder set基準該当サービス区分(RString 基準該当サービス区分) {
+        requireNonNull(基準該当サービス区分, UrSystemErrorMessages.値がnull.getReplacedMessage("基準該当サービス区分"));
+        entity.setKijunGaitoServiceKubun(基準該当サービス区分);
+        return this;
+    }
+
+    /**
+     * 指定サービス区分を設定します。
+     *
+     * @param 指定サービス区分 指定サービス区分
+     * @return {@link KaigoServiceShuruiBuilder}
+     */
+    public KaigoServiceShuruiBuilder set指定サービス区分(RString 指定サービス区分) {
+        requireNonNull(指定サービス区分, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス区分"));
+        entity.setShiteiServiceKubun(指定サービス区分);
+        return this;
+    }
+
+    /**
+     * 居宅サービス区分を設定します。
+     *
+     * @param 居宅サービス区分 居宅サービス区分
+     * @return {@link KaigoServiceShuruiBuilder}
+     */
+    public KaigoServiceShuruiBuilder set居宅サービス区分(RString 居宅サービス区分) {
+        requireNonNull(居宅サービス区分, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅サービス区分"));
+        entity.setKyotakuServiceKubun(居宅サービス区分);
+        return this;
+    }
+
+    /**
+     * 限度額区分を設定します。
+     *
+     * @param 限度額区分 限度額区分
+     * @return {@link KaigoServiceShuruiBuilder}
+     */
+    public KaigoServiceShuruiBuilder set限度額区分(RString 限度額区分) {
+        requireNonNull(限度額区分, UrSystemErrorMessages.値がnull.getReplacedMessage("限度額区分"));
+        entity.setGendogakuKubun(限度額区分);
+        return this;
+    }
+
+    /**
      * 介護サービス内容のキー情報について判定します。<br>
      * 介護サービスに関連できる介護サービス内容である場合、下記の処理に遷移します。<br>
      * キーが一致する場合は介護サービス内容リストに介護サービス内容{@link KaigoServiceNaiyou}をセットします。<br>

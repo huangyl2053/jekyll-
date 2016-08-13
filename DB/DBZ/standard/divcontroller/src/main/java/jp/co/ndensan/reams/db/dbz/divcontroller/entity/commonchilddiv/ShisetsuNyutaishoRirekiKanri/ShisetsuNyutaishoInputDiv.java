@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuN
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  *
  */
 public class ShisetsuNyutaishoInputDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,6 +29,8 @@ public class ShisetsuNyutaishoInputDiv extends Panel {
     private TextBoxFlexibleDate txtTaishoDate;
     @JsonProperty("ccdShisetsuJoho")
     private ShisetsuJohoCommonChildDivDiv ccdShisetsuJoho;
+    @JsonProperty("TenshutsusakiJohoPanel")
+    private TenshutsusakiJohoPanelDiv TenshutsusakiJohoPanel;
     @JsonProperty("btnShisetsuNyutaishoKakutei")
     private Button btnShisetsuNyutaishoKakutei;
     @JsonProperty("btnShisetsuNyutaishoTorikeshi")
@@ -85,6 +88,24 @@ public class ShisetsuNyutaishoInputDiv extends Panel {
     }
 
     /*
+     * getTenshutsusakiJohoPanel
+     * @return TenshutsusakiJohoPanel
+     */
+    @JsonProperty("TenshutsusakiJohoPanel")
+    public TenshutsusakiJohoPanelDiv getTenshutsusakiJohoPanel() {
+        return TenshutsusakiJohoPanel;
+    }
+
+    /*
+     * setTenshutsusakiJohoPanel
+     * @param TenshutsusakiJohoPanel TenshutsusakiJohoPanel
+     */
+    @JsonProperty("TenshutsusakiJohoPanel")
+    public void setTenshutsusakiJohoPanel(TenshutsusakiJohoPanelDiv TenshutsusakiJohoPanel) {
+        this.TenshutsusakiJohoPanel = TenshutsusakiJohoPanel;
+    }
+
+    /*
      * getbtnShisetsuNyutaishoKakutei
      * @return btnShisetsuNyutaishoKakutei
      */
@@ -118,6 +139,39 @@ public class ShisetsuNyutaishoInputDiv extends Panel {
     @JsonProperty("btnShisetsuNyutaishoTorikeshi")
     public void setBtnShisetsuNyutaishoTorikeshi(Button btnShisetsuNyutaishoTorikeshi) {
         this.btnShisetsuNyutaishoTorikeshi = btnShisetsuNyutaishoTorikeshi;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public TextBox getTxtHokensha() {
+        return this.getTenshutsusakiJohoPanel().getTxtHokensha();
+    }
+
+    @JsonIgnore
+    public void  setTxtHokensha(TextBox txtHokensha) {
+        this.getTenshutsusakiJohoPanel().setTxtHokensha(txtHokensha);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnHokenshaKensaku() {
+        return this.getTenshutsusakiJohoPanel().getBtnHokenshaKensaku();
+    }
+
+    @JsonIgnore
+    public void  setBtnHokenshaKensaku(ButtonDialog btnHokenshaKensaku) {
+        this.getTenshutsusakiJohoPanel().setBtnHokenshaKensaku(btnHokenshaKensaku);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtHokensyaMeisho() {
+        return this.getTenshutsusakiJohoPanel().getTxtHokensyaMeisho();
+    }
+
+    @JsonIgnore
+    public void  setTxtHokensyaMeisho(TextBox txtHokensyaMeisho) {
+        this.getTenshutsusakiJohoPanel().setTxtHokensyaMeisho(txtHokensyaMeisho);
     }
 
     // </editor-fold>

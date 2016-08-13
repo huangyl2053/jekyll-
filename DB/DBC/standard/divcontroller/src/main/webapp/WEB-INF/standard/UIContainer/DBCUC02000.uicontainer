@@ -62,7 +62,7 @@
      "layoutTitle": "保険者情報送付",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "12",
+     "condition": "371",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200012",
      "toLayoutTitle": "高額合算支給申請書情報",
@@ -80,7 +80,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200011",
      "toLayoutTitle": "保険者情報送付",
-     "toState": "保険者情報送付"
+     "toState": ""
     },
     {
      "id": "7",
@@ -90,7 +90,7 @@
      "layoutTitle": "保険者情報送付",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "13",
+     "condition": "37K",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200013",
      "toLayoutTitle": "高額合算補正済自己負担額情報",
@@ -108,7 +108,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200011",
      "toLayoutTitle": "保険者情報送付",
-     "toState": "保険者情報送付"
+     "toState": ""
     },
     {
      "id": "9",
@@ -118,7 +118,7 @@
      "layoutTitle": "保険者情報送付",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "14",
+     "condition": "38Q",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200014",
      "toLayoutTitle": "高額合算給付実績情報",
@@ -136,7 +136,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200011",
      "toLayoutTitle": "保険者情報送付",
-     "toState": "保険者情報送付"
+     "toState": ""
     },
     {
      "id": "11",
@@ -146,7 +146,7 @@
      "layoutTitle": "保険者情報送付",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "15",
+     "condition": "113",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200015",
      "toLayoutTitle": "給付実績情報",
@@ -164,7 +164,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200011",
      "toLayoutTitle": "保険者情報送付",
-     "toState": "保険者情報送付"
+     "toState": ""
     },
     {
      "id": "13",
@@ -174,7 +174,7 @@
      "layoutTitle": "保険者情報送付",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "16",
+     "condition": "174",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200016",
      "toLayoutTitle": "再審査申立書情報",
@@ -192,7 +192,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200011",
      "toLayoutTitle": "保険者情報送付",
-     "toState": "保険者情報送付"
+     "toState": ""
     },
     {
      "id": "15",
@@ -202,7 +202,7 @@
      "layoutTitle": "保険者情報送付",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "17",
+     "condition": "211",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200017",
      "toLayoutTitle": "償還連絡票情報",
@@ -220,7 +220,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200011",
      "toLayoutTitle": "保険者情報送付",
-     "toState": "保険者情報送付"
+     "toState": ""
     },
     {
      "id": "17",
@@ -230,7 +230,7 @@
      "layoutTitle": "保険者情報送付",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "18",
+     "condition": "341",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200018",
      "toLayoutTitle": "高額介護サービス費給付判定結果情報",
@@ -248,7 +248,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200011",
      "toLayoutTitle": "保険者情報送付",
-     "toState": "保険者情報送付"
+     "toState": ""
     },
     {
      "id": "19",
@@ -258,7 +258,7 @@
      "layoutTitle": "保険者情報送付",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "19",
+     "condition": "381",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200019",
      "toLayoutTitle": "高額合算計算結果連絡票情報",
@@ -276,7 +276,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200011",
      "toLayoutTitle": "保険者情報送付",
-     "toState": "保険者情報送付"
+     "toState": ""
     },
     {
      "id": "21",
@@ -286,7 +286,7 @@
      "layoutTitle": "保険者情報送付",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "20",
+     "condition": "173",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200020",
      "toLayoutTitle": "過誤申立書情報",
@@ -304,7 +304,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200011",
      "toLayoutTitle": "保険者情報送付",
-     "toState": "保険者情報送付"
+     "toState": ""
     },
     {
      "id": "23",
@@ -314,7 +314,7 @@
      "layoutTitle": "保険者情報送付",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "21",
+     "condition": "176",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200021",
      "toLayoutTitle": "総合事業費過誤申立書情報",
@@ -332,7 +332,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200011",
      "toLayoutTitle": "保険者情報送付",
-     "toState": "保険者情報送付"
+     "toState": ""
     },
     {
      "id": "25",
@@ -342,7 +342,7 @@
      "layoutTitle": "保険者情報送付",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "22",
+     "condition": "5C1",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200022",
      "toLayoutTitle": "共同処理用受給者異動情報",
@@ -360,7 +360,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200011",
      "toLayoutTitle": "保険者情報送付",
-     "toState": "保険者情報送付"
+     "toState": ""
     },
     {
      "id": "27",
@@ -370,7 +370,7 @@
      "layoutTitle": "保険者情報送付",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "23",
+     "condition": "531",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200023",
      "toLayoutTitle": "受給者異動連絡票情報",
@@ -388,7 +388,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200011",
      "toLayoutTitle": "保険者情報送付",
-     "toState": "保険者情報送付"
+     "toState": ""
     },
     {
      "id": "29",
@@ -398,7 +398,7 @@
      "layoutTitle": "保険者情報送付",
      "eventName": "バッチ起動",
      "destroy": false,
-     "condition": "24",
+     "condition": "821",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200024",
      "toLayoutTitle": "給付管理票",
@@ -416,7 +416,35 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200011",
      "toLayoutTitle": "保険者情報送付",
-     "toState": "保険者情報送付"
+     "toState": ""
+    },
+    {
+     "id": "31",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0200011",
+     "layoutTitle": "保険者情報送付",
+     "eventName": "バッチ起動",
+     "destroy": false,
+     "condition": "179",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0200025",
+     "toLayoutTitle": "総合事業費過誤申立書情報",
+     "toState": "総合事業費過誤申立書情報"
+    },
+    {
+     "id": "32",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0200025",
+     "layoutTitle": "総合事業費過誤申立書情報",
+     "eventName": "一覧へ戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0200011",
+     "toLayoutTitle": "保険者情報送付",
+     "toState": ""
     }
    ]
   }

@@ -192,4 +192,10 @@
         <result property="logicalDeletedFlag" column="dbT5101NinteiShinseiJoho_logicalDeletedFlag" />
     </resultMap>
 
+    <select id="getEntity" resultMap="ResultMap_DbT5101NinteiShinseiJohoEntity">
+        <!--SELECT
+        <include refid="allColumns_DbT5101NinteiShinseiJoho"/>
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho"-->
+    </select>
 </mapper>

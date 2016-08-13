@@ -42,24 +42,22 @@ public class JigyohokokuGeppoYoshiki2220161Report extends Report<JigyohokokuGepp
     private static final RString 十四行目 = new RString("25");
     private static final RString 十五行目 = new RString("03");
     private static final RString 十六行目 = new RString("22");
-    private static final RString 十七行目 = new RString("17");
-    private static final RString 十八行目 = new RString("18");
-    private static final RString 十九行目 = new RString("28");
-    private static final RString 二十一行目 = new RString("31");
-    private static final RString 二十二行目 = new RString("37");
-    private static final RString 二十三行目 = new RString("32");
-    private static final RString 二十四行目 = new RString("39");
-    private static final RString 二十五行目 = new RString("33");
-    private static final RString 二十六行目 = new RString("34");
-    private static final RString 二十七行目 = new RString("27");
-    private static final RString 二十八行目 = new RString("35");
-    private static final RString 二十九行目 = new RString("36");
-    private static final RString 三十行目 = new RString("38");
-    private static final RString 三十一行目 = new RString("06");
-    private static final RString 三十二行目 = new RString("07");
-    private static final RString 三十三行目 = new RString("08");
-    private static final RString 三十四行目 = new RString("09");
-    private static final RString 三十五行目 = new RString("14");
+    private static final RString 十七行目 = new RString("28");
+    private static final RString 十九行目 = new RString("31");
+    private static final RString 二十行目 = new RString("37");
+    private static final RString 二十一行目 = new RString("32");
+    private static final RString 二十二行目 = new RString("39");
+    private static final RString 二十三行目 = new RString("33");
+    private static final RString 二十四行目 = new RString("34");
+    private static final RString 二十五行目 = new RString("27");
+    private static final RString 二十六行目 = new RString("35");
+    private static final RString 二十七行目 = new RString("36");
+    private static final RString 二十八行目 = new RString("38");
+    private static final RString 二十九行目 = new RString("06");
+    private static final RString 三十行目 = new RString("07");
+    private static final RString 三十一行目 = new RString("08");
+    private static final RString 三十二行目 = new RString("09");
+    private static final RString 三十三行目 = new RString("14");
     private static final RString 集計区分_加算 = new RString("1");
     private static final RString 集計区分_減算 = new RString("2");
     private static final int INDEX_1 = 0;
@@ -79,8 +77,8 @@ public class JigyohokokuGeppoYoshiki2220161Report extends Report<JigyohokokuGepp
     private static final int INDEX_15 = 14;
     private static final int INDEX_16 = 15;
     private static final int INDEX_17 = 16;
-    private static final int INDEX_18 = 17;
     private static final int INDEX_19 = 18;
+    private static final int INDEX_20 = 19;
     private static final int INDEX_21 = 20;
     private static final int INDEX_22 = 21;
     private static final int INDEX_23 = 22;
@@ -94,8 +92,6 @@ public class JigyohokokuGeppoYoshiki2220161Report extends Report<JigyohokokuGepp
     private static final int INDEX_31 = 30;
     private static final int INDEX_32 = 31;
     private static final int INDEX_33 = 32;
-    private static final int INDEX_34 = 33;
-    private static final int INDEX_35 = 34;
     private final JigyohokokuCompYoshiki201Business business;
     private List<JigyohokokuCompResultEntity> list;
     private int 合計 = 0;
@@ -112,7 +108,7 @@ public class JigyohokokuGeppoYoshiki2220161Report extends Report<JigyohokokuGepp
     public JigyohokokuGeppoYoshiki2220161Report(JigyohokokuCompYoshiki201Business business) {
         this.business = business;
         list = new ArrayList<>();
-        for (int i = 0; i <= INDEX_35; i++) {
+        for (int i = 0; i <= INDEX_33; i++) {
             JigyohokokuCompResultEntity entity = new JigyohokokuCompResultEntity();
             list.add(entity);
         }
@@ -225,8 +221,6 @@ public class JigyohokokuGeppoYoshiki2220161Report extends Report<JigyohokokuGepp
             list = get横番号(横番号, INDEX_16, 集計区分);
         } else if (十七行目.equals(縦番号)) {
             list = get横番号(横番号, INDEX_17, 集計区分);
-        } else if (十八行目.equals(縦番号)) {
-            list = get横番号(横番号, INDEX_18, 集計区分);
         }
         list = get縦番号2(縦番号, 横番号, 集計区分);
         return list;
@@ -235,6 +229,8 @@ public class JigyohokokuGeppoYoshiki2220161Report extends Report<JigyohokokuGepp
     private List<JigyohokokuCompResultEntity> get縦番号2(RString 縦番号, RString 横番号, RString 集計区分) {
         if (十九行目.equals(縦番号)) {
             list = get横番号(横番号, INDEX_19, 集計区分);
+        } else if (二十行目.equals(縦番号)) {
+            list = get横番号(横番号, INDEX_20, 集計区分);
         } else if (二十一行目.equals(縦番号)) {
             list = get横番号(横番号, INDEX_21, 集計区分);
         } else if (二十二行目.equals(縦番号)) {
@@ -261,10 +257,6 @@ public class JigyohokokuGeppoYoshiki2220161Report extends Report<JigyohokokuGepp
             list = get横番号(横番号, INDEX_32, 集計区分);
         } else if (三十三行目.equals(縦番号)) {
             list = get横番号(横番号, INDEX_33, 集計区分);
-        } else if (三十四行目.equals(縦番号)) {
-            list = get横番号(横番号, INDEX_34, 集計区分);
-        } else if (三十五行目.equals(縦番号)) {
-            list = get横番号(横番号, INDEX_35, 集計区分);
         }
         return list;
     }

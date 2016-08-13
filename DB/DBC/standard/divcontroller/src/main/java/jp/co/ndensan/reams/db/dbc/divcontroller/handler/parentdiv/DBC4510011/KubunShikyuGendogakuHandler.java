@@ -24,7 +24,12 @@ public class KubunShikyuGendogakuHandler {
 
     private final KubunShikyuGendogakuDiv div;
 
-    private KubunShikyuGendogakuHandler(KubunShikyuGendogakuDiv div) {
+    /**
+     * コンストラクタです。
+     *
+     * @param div KubunShikyuGendogakuDiv
+     */
+    public KubunShikyuGendogakuHandler(KubunShikyuGendogakuDiv div) {
         this.div = div;
     }
 

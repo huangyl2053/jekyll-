@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd8100201;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 
 /**
- * SQLのパラメータクラスです．
+ * 非課税年金対象者情報_不一致SQLのパラメータクラスです．
  *
  * @reamsid_L DBD-4910-030 x_lilh
  */
