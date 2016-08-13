@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC4510011
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4510011.DBC4510011StateName;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4510011.DBC4510011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4510011.KubunShikyuGendogakuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4510011.dgServiceShurui_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4510011.KubunShikyuGendogakuHandler;
@@ -165,7 +166,19 @@ public class KubunShikyuGendogaku {
      */
     public ResponseData<KubunShikyuGendogakuDiv> onSelect_Return(
             KubunShikyuGendogakuDiv div) {
+        onLoad(div);
         return ResponseData.of(div).setState(DBC4510011StateName.初期状態);
+    }
+
+    /**
+     * 「完了する」ボタンの処理です。
+     *
+     * @param div div
+     * @return ResponseData
+     */
+    public ResponseData<KubunShikyuGendogakuDiv> onSelect_Compelete(
+            KubunShikyuGendogakuDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBC4510011TransitionEventName.処理完了).respond();
     }
 
     private KubunShikyuGendogakuHandler getHandler(KubunShikyuGendogakuDiv div) {
