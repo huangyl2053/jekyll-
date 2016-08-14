@@ -111,25 +111,77 @@ public class NinteiTsuchishoHakkoHandler {
     private static final int 通知文_項目番号_4 = 4;
     private static final int 通知文_項目番号_5 = 5;
     private static final int 通知文_項目番号_6 = 6;
+    private static final RString KEY0 = new RString("key0");
+    private static final RString KEY1 = new RString("key1");
+    private static final RString KEY2 = new RString("key2");
+    private static final RString KEY3 = new RString("key3");
     private int index = 0;
 
+    /**
+     * ラジオ用文字列
+     */
     public enum RadioValue {
 
-        個別発行を行う(new RString("key0"), new RString("個別発行を行う")),
-        一括発行を行う(new RString("key1"), new RString("一括発行を行う")),
-        男(new RString("key0"), new RString("男")),
-        女(new RString("key1"), new RString("女")),
-        前方一致(new RString("key0"), new RString("前方一致")),
-        後方一致(new RString("key1"), new RString("後方一致")),
-        部分一致(new RString("key2"), new RString("部分一致")),
-        完全一致(new RString("key3"), new RString("完全一致")),
-        残す(new RString("key0"), new RString("残す")),
-        残さない(new RString("key1"), new RString("残さない")),
-        認定結果通知書(new RString("key0"), new RString("認定結果通知書")),
-        サービス変更通知書(new RString("key1"), new RString("サービス変更通知書")),
-        要介護度変更通知書(new RString("key2"), new RString("要介護度変更通知書")),
-        発行済みを出力する(new RString("key0"), new RString("発行済みを出力する")),
-        発行済みを出力しない(new RString("key1"), new RString("発行済みを出力しない"));
+        /**
+         * 個別発行を行う
+         */
+        個別発行を行う(KEY0, new RString("個別発行を行う")),
+        /**
+         * 一括発行を行う
+         */
+        一括発行を行う(KEY1, new RString("一括発行を行う")),
+        /**
+         * 男
+         */
+        男(KEY0, new RString("男")),
+        /**
+         * 女
+         */
+        女(KEY1, new RString("女")),
+        /**
+         * 前方一致
+         */
+        前方一致(KEY0, new RString("前方一致")),
+        /**
+         * 後方一致
+         */
+        後方一致(KEY1, new RString("後方一致")),
+        /**
+         * 部分一致
+         */
+        部分一致(KEY2, new RString("部分一致")),
+        /**
+         * 完全一致
+         */
+        完全一致(KEY3, new RString("完全一致")),
+        /**
+         * 残す
+         */
+        残す(KEY0, new RString("残す")),
+        /**
+         * 残さない
+         */
+        残さない(KEY1, new RString("残さない")),
+        /**
+         * 認定結果通知書
+         */
+        認定結果通知書(KEY0, new RString("認定結果通知書")),
+        /**
+         * サービス変更通知書
+         */
+        サービス変更通知書(KEY1, new RString("サービス変更通知書")),
+        /**
+         * 要介護度変更通知書
+         */
+        要介護度変更通知書(KEY2, new RString("要介護度変更通知書")),
+        /**
+         * 発行済みを出力する
+         */
+        発行済みを出力する(KEY0, new RString("発行済みを出力する")),
+        /**
+         * 発行済みを出力しない
+         */
+        発行済みを出力しない(KEY1, new RString("発行済みを出力しない"));
 
         private final RString key;
         private final RString value;
@@ -139,25 +191,62 @@ public class NinteiTsuchishoHakkoHandler {
             this.value = value;
         }
 
+        /**
+         * Keyを取得する。
+         *
+         * @return key RString
+         */
         public RString getKey() {
             return this.key;
         }
 
+        /**
+         * Valueを取得する。
+         *
+         * @return Value RString
+         */
         public RString getValue() {
             return this.value;
         }
 
     }
 
+    /**
+     * パネル用文字列
+     */
     public enum PanelType {
 
+        /**
+         * 個別発行認定結果通知書パネル
+         */
         個別発行認定結果通知書パネル(new RString("個別発行認定結果通知書パネル"), ReportIdDBD.DBD532001.getReportId()),
+        /**
+         * 個別発行サービス変更通知書パネル
+         */
         個別発行サービス変更通知書パネル(new RString("個別発行サービス変更通知書パネル"), ReportIdDBD.DBD550002.getReportId()),
+        /**
+         * 個別発行要介護度変更通知書パネル
+         */
         個別発行要介護度変更通知書パネル(new RString("個別発行要介護度変更通知書パネル"), ReportIdDBD.DBD550003.getReportId()),
+        /**
+         * 個別発行認定却下通知書パネル
+         */
         個別発行認定却下通知書パネル(new RString("認定却下通知書パネル"), ReportIdDBD.DBD550001.getReportId()),
+        /**
+         * 一括発行パネル
+         */
         一括発行パネル(new RString("一括発行パネル"), ReportIdDBD.DBD532999.getReportId()),
+        /**
+         * 一括発行認定結果通知書パネル
+         */
         一括発行認定結果通知書パネル(new RString("一括発行認定結果通知書パネル"), ReportIdDBD.DBD532001.getReportId()),
+        /**
+         * 一括発行サービス変更通知書パネル
+         */
         一括発行サービス変更通知書パネル(new RString("一括発行サービス変更通知書パネル"), ReportIdDBD.DBD550002.getReportId()),
+        /**
+         * 一括発行要介護度変更通知書パネル
+         */
         一括発行要介護度変更通知書パネル(new RString("一括発行要介護度変更通知書パネル"), ReportIdDBD.DBD550003.getReportId());
 
         private final RString name;
@@ -168,10 +257,20 @@ public class NinteiTsuchishoHakkoHandler {
             this.chohyoId = chohyoId;
         }
 
+        /**
+         * Nameを取得する。
+         *
+         * @return Name RString
+         */
         public RString getName() {
             return this.name;
         }
 
+        /**
+         * 帳票IDを取得する。
+         *
+         * @return 帳票ID ReportId
+         */
         public ReportId getChohyoId() {
             return this.chohyoId;
         }
@@ -706,20 +805,11 @@ public class NinteiTsuchishoHakkoHandler {
         dgTaishoshaIchiran_Row row = new dgTaishoshaIchiran_Row();
         row.setHihoNo(対象者.get被保険者番号());
         row.setShimei(null != 対象者.get被保険者氏名() ? 対象者.get被保険者氏名().getColumnValue() : RString.EMPTY);
-        try {
-            row.setSeibetsu(Seibetsu.toValue(対象者.get性別().value()).get名称());
-        } catch (IllegalArgumentException e) {
-        }
+        row.setSeibetsu(Seibetsu.toValue(対象者.get性別().value()).get名称());
         row.getBirthYMD().setValue(convertFlexibleDateToRDate(対象者.get生年月日()));
         row.getNinteiShinseiDay().setValue(convertFlexibleDateToRDate(対象者.get認定申請年月日()));
-        try {
-            row.setShinseiji(NinteiShinseiShinseijiKubunCode.toValue(対象者.get認定申請区分申請時コード().value()).get名称());
-        } catch (IllegalArgumentException e) {
-        }
-        try {
-            row.setHorei(NinteiShinseiHoreiCode.toValue(対象者.get認定申請区分法令コード().value()).get名称());
-        } catch (IllegalArgumentException e) {
-        }
+        row.setShinseiji(NinteiShinseiShinseijiKubunCode.toValue(対象者.get認定申請区分申請時コード().value()).get名称());
+        row.setHorei(NinteiShinseiHoreiCode.toValue(対象者.get認定申請区分法令コード().value()).get名称());
         row.getNinteiDay().setValue(convertFlexibleDateToRDate(対象者.get認定年月日()));
         row.setYokaigodo(get要介護度名(convertCodeToRString(対象者.get厚労省IF識別コード()),
                 convertCodeToRString(対象者.get要介護認定状態区分コード())));
