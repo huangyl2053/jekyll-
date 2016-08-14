@@ -99,6 +99,14 @@ public class TsutishoHakkoCommonProcess {
      * 通知文_項目番号_6
      */
     public static final int 通知文_項目番号_6 = 6;
+    /**
+     * DEFAULT_処理支番
+     */
+    public static final RString DEFAULT_処理支番 = new RString("0001");
+    /**
+     * DEFAULT_年度内連番
+     */
+    public static final RString DEFAULT_年度内連番 = new RString("0001");
 
     private static final RString 連絡符号 = new RString(",");
 

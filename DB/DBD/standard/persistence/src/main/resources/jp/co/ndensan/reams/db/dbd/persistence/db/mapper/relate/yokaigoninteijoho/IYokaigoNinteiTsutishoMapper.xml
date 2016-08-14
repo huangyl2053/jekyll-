@@ -160,12 +160,31 @@
 
             FROM
                 rgdb."DbT7022ShoriDateKanri" AS "DbT7022ShoriDateKanri"
-
-            WHERE
-                "DbT7022ShoriDateKanri"."subGyomuCode" = 'DBD'
-                AND "DbT7022ShoriDateKanri"."shichosonCode" = #{市町村コード}
-                AND "DbT7022ShoriDateKanri"."shoriName" = #{処理名}
-                AND "DbT7022ShoriDateKanri"."shoriEdaban" = '0001'
+                INNER JOIN (
+                    SELECT
+                        "DbT7022ShoriDateKanri"."subGyomuCode" AS "subGyomuCode"
+                        ,"DbT7022ShoriDateKanri"."shichosonCode" AS "shichosonCode"
+                        ,"DbT7022ShoriDateKanri"."shoriName" AS "shoriName"
+                        ,"DbT7022ShoriDateKanri"."shoriEdaban" AS "shoriEdaban"
+                        ,MAX("DbT7022ShoriDateKanri"."nendo") AS "nendo"
+                    FROM
+                            rgdb."DbT7022ShoriDateKanri" AS "DbT7022ShoriDateKanri"
+                    WHERE
+                        "DbT7022ShoriDateKanri"."subGyomuCode" = 'DBD'
+                        AND "DbT7022ShoriDateKanri"."shichosonCode" = #{市町村コード}
+                        AND "DbT7022ShoriDateKanri"."shoriName" = #{処理名}
+                        AND "DbT7022ShoriDateKanri"."shoriEdaban" = '0001'
+                    GROUP BY
+                        "DbT7022ShoriDateKanri"."subGyomuCode"
+                        ,"DbT7022ShoriDateKanri"."shichosonCode"
+                        ,"DbT7022ShoriDateKanri"."shoriName"
+                        ,"DbT7022ShoriDateKanri"."shoriEdaban"
+                ) B
+                ON "DbT7022ShoriDateKanri"."subGyomuCode" = B."subGyomuCode"
+                    AND "DbT7022ShoriDateKanri"."shichosonCode" = B."shichosonCode"
+                    AND "DbT7022ShoriDateKanri"."shoriName" = B."shoriName"
+                    AND "DbT7022ShoriDateKanri"."shoriEdaban" = B."shoriEdaban"
+                    AND "DbT7022ShoriDateKanri"."nendo" = B."nendo"
 
             GROUP BY 
             "DbT7022ShoriDateKanri"."subGyomuCode",

@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.ninteikekkatshuchishohakko.Ni
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiIkatusHakkoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd532001.YokaigoNinteiKekkaTshuchishoReportSource;
 import jp.co.ndensan.reams.db.dbd.service.core.yokaigoninteijoho.YokaigoNinteiTsutishoManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBDCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBA;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
@@ -39,11 +40,13 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -101,14 +104,25 @@ public class NinteiKekkaTsutishoProcess extends BatchProcessBase<YokaigoNinteiIk
     }
 
     private DbT7022ShoriDateKanriEntity createShoriDateKanriEntity() {
-        YokaigoNinteiTsutishoIkkatsuHakkoJoho 認定結果通知書 = YokaigoNinteiTsutishoManager.createInstance().get一括発行データ(
+        YokaigoNinteiTsutishoIkkatsuHakkoJoho 通知書 = YokaigoNinteiTsutishoManager.createInstance().get一括発行データ(
                 TsutishoHakkoCommonProcess.get市町村コード(), ShoriName.認定結果通知書.get名称());
 
-        DbT7022ShoriDateKanriEntity result = 認定結果通知書.getEntity();
-        result.initializeMd5();
+        DbT7022ShoriDateKanriEntity result;
+        if (null != 通知書) {
+            result = 通知書.getEntity();
+            result.initializeMd5();
+            result.setNendoNaiRenban(new RString(String.format("%04d", Integer.parseInt(result.getNendoNaiRenban().toString()) + 1)));
+        } else {
+            result = new DbT7022ShoriDateKanriEntity();
+            result.setSubGyomuCode(SubGyomuCode.DBD介護受給);
+            result.setShichosonCode(new LasdecCode(TsutishoHakkoCommonProcess.get市町村コード()));
+            result.setShoriEdaban(TsutishoHakkoCommonProcess.DEFAULT_処理支番);
+            result.setNendo(FlexibleDate.getNowDate().getNendo());
+            result.setNendoNaiRenban(TsutishoHakkoCommonProcess.DEFAULT_年度内連番);
+        }
+
         result.setState(EntityDataState.Added);
         result.setShoriName(ShoriName.認定結果通知書.get名称());
-        result.setNendoNaiRenban(new RString(Integer.parseInt(result.getNendoNaiRenban().toString()) + 1));
         result.setKijunTimestamp(TsutishoHakkoCommonProcess.convertDateToYMDHMS(parameter.get終了日(), parameter.get終了日時()));
         result.setTaishoKaishiTimestamp(TsutishoHakkoCommonProcess.convertDateToYMDHMS(parameter.get開始日(), parameter.get開始日時()));
         result.setTaishoShuryoTimestamp(TsutishoHakkoCommonProcess.convertDateToYMDHMS(parameter.get終了日(), parameter.get終了日時()));
@@ -170,7 +184,9 @@ public class NinteiKekkaTsutishoProcess extends BatchProcessBase<YokaigoNinteiIk
                         convertCodeToRString(entity.get要介護認定状態区分コード())));
         printEntity.setKekkaYMDKosho(new RString("判定年月日"));
         printEntity.setKekkaYMD(entity.get認定年月日());
-        printEntity.setRiyu(entity.get異動理由());
+        printEntity.setRiyu(CodeMaster.getCodeMeisho(SubGyomuCode.DBD介護受給,
+                DBDCodeShubetsu.結果通知理由.getコード(),
+                entity.get要介護認定状態区分コード()));
         printEntity.setServiceShurui1(entity.get介護認定審査会意見());
         printEntity.setYukoKaishiYMD(entity.get認定有効期間開始年月日());
         printEntity.setYukoShuryoYMD(entity.get認定有効期間終了年月日());

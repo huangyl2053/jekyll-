@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbd.business.core.outputorderkey.ShiharaiHohoHenkoHaakuIchiranOrderKey;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiTsutisho;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiTsutishoBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiTsutishoIkkatsuHakkoJoho;
@@ -27,6 +28,7 @@ import jp.co.ndensan.reams.db.dbd.service.report.dbd532001.YokaigoNinteiKekkaTsh
 import jp.co.ndensan.reams.db.dbd.service.report.dbd550001.YokaigoNinteiKyakkaTshuchishoPrintService;
 import jp.co.ndensan.reams.db.dbd.service.report.dbd550002.ServiceHenkoTshuchishoPrintService;
 import jp.co.ndensan.reams.db.dbd.service.report.dbd550003.YokaigodoHenkoTshuchishoPrintService;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBDCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBA;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -58,10 +60,14 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SofusakiRiyoKub
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportprinthistory.ChohyoHakkoRirekiJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportprinthistory.ChohyoHakkoRirekiSearchDefault;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportprinthistory.HakkoRirekiManagerFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportprinthistory.IHakkoRirekiManager;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -81,6 +87,7 @@ import jp.co.ndensan.reams.uz.uza.report.SourceData;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
  *
@@ -229,21 +236,6 @@ public class NinteiTsuchishoHakkoHandler {
         return 対象者リスト;
     }
 
-//    /**
-//     * 帳票エリアの表示処理。
-//     *
-//     * @param selected boolean
-//     * @return 帳票エリアのモード true:個別発行 | false:一括発行
-//     */
-//    public boolean displayChohyoArea(boolean selected) {
-//
-//        RString 帳票発行Rad = div.getRadPrintSelect().getSelectedKey();
-//
-//        clearChohyoArea();
-//        setChohyoAreaMode(帳票発行Rad, selected);
-//
-//        return 帳票発行Rad.equals(NinteiTsuchishoHakkoHandler.RadioValue.個別発行を行う.getKey());
-//    }
     /**
      * 帳票エリアをクリアです。
      */
@@ -264,7 +256,9 @@ public class NinteiTsuchishoHakkoHandler {
         setChohyoPanelRequiredCheck(パネル);
         set出力順エリア(パネル);
         set帳票発行パネル(パネル);
-        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnTsuchishoPublish"), false);
+        if (!パネル.equals(PanelType.一括発行パネル)) {
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnTsuchishoPublish"), false);
+        }
     }
 
     /**
@@ -337,7 +331,6 @@ public class NinteiTsuchishoHakkoHandler {
 
         parameter.set出力対象(出力対象);
         parameter.set発行日(div.getTxtSakuseiDaytxtSakuseiDaytxtSakuseiDay().getValue());
-        // TODO. 出力順の取得
         parameter.set出力順(get出力順(PanelType.一括発行パネル));
         parameter.set単票発行済み(div.getRadTanpyoHakkoZumi().getSelectedKey().equals(RadioValue.発行済みを出力する.getKey()));
 
@@ -426,8 +419,10 @@ public class NinteiTsuchishoHakkoHandler {
         div.getTxtNinteiKekka().setFromValue(convertFlexibleDateToRDate(認定結果通知書情報.get二次判定認定有効開始年月日()));
         div.getTxtNinteiKekka().setToValue(convertFlexibleDateToRDate(認定結果通知書情報.get二次判定認定有効終了年月日()));
         div.getTxtNinteiKekkaShinsakaiIken().setValue(認定結果通知書情報.get介護認定審査会意見());
-        // TODO. 受給者台帳.要介護認定状態区分コード  コード種別が’0003’のコード値
-        div.getTxtNinteiKekkaRiyu().setValue(認定結果通知書情報.get異動理由());
+        div.getTxtNinteiKekkaRiyu().setValue(
+                CodeMaster.getCodeMeisho(SubGyomuCode.DBD介護受給,
+                        DBDCodeShubetsu.結果通知理由.getコード(),
+                        認定結果通知書情報.get要介護認定状態区分コード()));
     }
 
     private void set個別発行サービス変更通知書(PanelType パネル) {
@@ -699,24 +694,6 @@ public class NinteiTsuchishoHakkoHandler {
         div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBD介護受給, ReportId.EMPTY);
     }
 
-//    private void setChohyoAreaMode(RString 帳票発行Rad, boolean selected) {
-//        div.getCcdChohyoShutsuryokujun().setDisplayNone(!selected);
-//
-//        if (帳票発行Rad.equals(NinteiTsuchishoHakkoHandler.RadioValue.個別発行を行う.getKey())) {
-//            div.getKobetsuPrint().setDisplayNone(!selected);
-//            div.getKobetsuPrint().setIsOpen(false);
-//            div.getNinteiKekkaTsuchi().setIsOpen(false);
-//            div.getNinteiKekkaTsuchi().setIsOpen(false);
-//            div.getYokaigodoHenkoTsuchi().setIsOpen(false);
-//            div.getNinteiKyakkaTshuchi().setIsOpen(false);
-//            div.getCcdChohyoShutsuryokujun().setIsOpen(false);
-//        } else {
-//            div.getIkkatsuHakko().setDisplayNone(!selected);
-//            div.getIkkatsuHakko().setIsOpen(false);
-//            div.getChushutsuTasho().setIsOpen(false);
-//            div.getCcdChohyoShutsuryokujun().setIsOpen(false);
-//        }
-//    }
     private void set対象者一覧(List<YokaigoNinteiTsutisho> 対象者リスト) {
         List<dgTaishoshaIchiran_Row> rowList = new ArrayList<>();
         for (YokaigoNinteiTsutisho 対象者 : 対象者リスト) {
@@ -834,8 +811,13 @@ public class NinteiTsuchishoHakkoHandler {
     }
 
     private RString get出力順(PanelType パネル) {
-        // TODO.
-        return RString.EMPTY;
+        IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
+        List<IOutputOrder> 帳票出力順 = chohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBD介護受給, パネル.getChohyoId());
+        if (null != 帳票出力順 && !帳票出力順.isEmpty()) {
+            return MyBatisOrderByClauseCreator.create(ShiharaiHohoHenkoHaakuIchiranOrderKey.class, 帳票出力順.get(0));
+        } else {
+            return RString.EMPTY;
+        }
     }
 
     private ChohyoSeigyoKyotsu get帳票共通情報(PanelType パネル) {

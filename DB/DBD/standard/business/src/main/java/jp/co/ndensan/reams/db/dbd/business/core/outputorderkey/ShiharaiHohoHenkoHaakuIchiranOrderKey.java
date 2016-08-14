@@ -46,7 +46,19 @@ public enum ShiharaiHohoHenkoHaakuIchiranOrderKey implements IReportItems {
     /**
      * 項目ID:0104 フォームフィールド名:被保険者番号 MyBatis項目名:定義なし
      */
-    被保険者番号("0104", "被保険者番号", "");
+    被保険者番号("0104", "被保険者番号", ""),
+    /**
+     * 項目ID:0411 フォームフィールド名:認定開始日 MyBatis項目名:定義なし
+     */
+    認定開始日("0411", "認定開始日", ""),
+    /**
+     * 項目ID:0405 フォームフィールド名:受給申請日 MyBatis項目名:定義なし
+     */
+    受給申請日("0405", "受給申請日", ""),
+    /**
+     * 項目ID:0311 フォームフィールド名:計画事業者番号 MyBatis項目名:定義なし
+     */
+    計画事業者番号("0311", "計画事業者番号", "");
 
     private final RString 項目ID;
     private final RString フォームフィールド名;
