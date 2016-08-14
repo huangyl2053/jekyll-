@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokureiIdenti
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -98,8 +97,8 @@ public class ShikakuKihonJoho {
         BunshoNo bushoNo = TashichosonJushochitokureishaRenrakuhyoFinder.
                 createInstance().get文書番号取得(ReportIdDBA.DBA100007.getReportId());
         if (bushoNo != null) {
-            div.getTajutokuTekiyoJohoIchiran().getReportPublish().
-                    getHenshuNaiyo().getTxtBunshoBango().setValue(bushoNo.edit文書番号(countedItem.nextString()));
+            div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().
+                    getCcdBunshoBangoInput().setDecorationClass(bushoNo.edit文書番号(countedItem.nextString()));
         }
         return ResponseData.of(div).respond();
     }
@@ -167,7 +166,7 @@ public class ShikakuKihonJoho {
         return TashichosonJushochitokureishaRenrakuhyoFinder.createInstance().
                 setChohyoData(TatokuKanrenParameter.
                         createParam_TatokuKanren(div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtYubinNo().getValue(),
-                                div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtBunshoBango().getValue(),
+                                div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getCcdBunshoBangoInput().get文書番号(),
                                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtJusho().getValue(),
                                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getCcdPrintContentsSetting().getIssueDate() == null
                                 ? FlexibleDate.EMPTY : new FlexibleDate(div.getTajutokuTekiyoJohoIchiran().getReportPublish().
