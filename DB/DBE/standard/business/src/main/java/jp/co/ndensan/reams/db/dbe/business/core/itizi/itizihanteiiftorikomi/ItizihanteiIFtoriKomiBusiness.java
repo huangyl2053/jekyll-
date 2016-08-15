@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteizumifoutput.Ichij
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.itizihanteiiftorikomi.IchijiHanteiKekkaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.itizihanteiiftorikomi.ItizihanteiIFtoriKomiRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.GaizenseiHyokaCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.JotaiAnteiseiCode;
@@ -132,8 +131,7 @@ public class ItizihanteiIFtoriKomiBusiness {
             dbt5010Entity.setIchijiHanteiKekkaCode(new Code(entity.getIchijiHanteiKekkaCode()));
         }
         if (認定ｿﾌﾄ99.value().equals(entity.getKoroshoIfShikibetsuCode())) {
-            dbt5010Entity.setIchijiHanteiKekkaNinchishoKasanCode(new Code(IchijiHanteiKekkaCode99
-                    .valueOf(entity.getIchijiHanteiKekkaCode().toString()).toString()));
+            dbt5010Entity.setIchijiHanteiKekkaNinchishoKasanCode(new Code(entity.getIchijiHanteiKekkaCode()));
         } else if (認定ｿﾌﾄ2009_A.value().equals(entity.getKoroshoIfShikibetsuCode())
                 && 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaNinchishoKasanCode(new Code(entity.getIchijiHanteiKekkaCode()));
@@ -154,11 +152,9 @@ public class ItizihanteiIFtoriKomiBusiness {
         dbt5010Entity.setChukanHyokaKomoku4gun(Integer.parseInt(entity.getChukanHyokaKomoku4gun().toString()));
         dbt5010Entity.setChukanHyokaKomoku5gun(Integer.parseInt(entity.getChukanHyokaKomoku5gun().toString()));
         dbt5010Entity.setIchijiHnateiKeikokuCode(entity.getIchijiHnateiKeikokuCode());
-        dbt5010Entity.setJotaiAnteiseiCode(new Code(JotaiAnteiseiCode.toValue(entity.getJotaiAnteiseiCode()).getコード().toString()));
-        dbt5010Entity.setNinchishoJiritsudoIIijoNoGaizensei(new Decimal(GaizenseiHyokaCode.toValue(entity.getNinchishoJiritsudoIIijoNoGaizensei())
-                .getコード().toString()));
-        dbt5010Entity.setSuiteiKyufuKubunCode(new Code(SuiteiKyufuKubunCode.toValue(entity.getSuiteiKyufuKubunCode())
-                .getコード()));
+        dbt5010Entity.setJotaiAnteiseiCode(new Code(JotaiAnteiseiCode.valueOf(entity.getJotaiAnteiseiCode().toString()).getコード()));
+        dbt5010Entity.setNinchishoJiritsudoIIijoNoGaizensei(new Decimal(entity.getNinchishoJiritsudoIIijoNoGaizensei().toString()));
+        dbt5010Entity.setSuiteiKyufuKubunCode(new Code(SuiteiKyufuKubunCode.valueOf(entity.getSuiteiKyufuKubunCode().toString()).getコード()));
         return dbt5010Entity;
     }
 
@@ -392,7 +388,7 @@ public class ItizihanteiIFtoriKomiBusiness {
             return 一次判定;
         }
         RString コード09 = 要介護認定一次判定結果コード09の名称(一次判定結果名称);
-        if (コード09.isEmpty()) {
+        if (!コード09.isEmpty()) {
             return コード09;
         }
         return RString.EMPTY;
@@ -400,7 +396,6 @@ public class ItizihanteiIFtoriKomiBusiness {
 
     private RString 要介護認定一次判定結果コード99の名称(RString 一次判定結果名称) {
         if (IchijiHanteiKekkaCode99.みなし要支援.get名称().equals(一次判定結果名称)) {
-
             return IchijiHanteiKekkaCode99.みなし要支援.getコード();
         } else if (IchijiHanteiKekkaCode99.みなし非該当.get名称().equals(一次判定結果名称)) {
             return IchijiHanteiKekkaCode99.みなし非該当.getコード();
@@ -424,7 +419,6 @@ public class ItizihanteiIFtoriKomiBusiness {
 
     private RString 要介護認定一次判定結果コード09の名称(RString 一次判定結果名称) {
         if (IchijiHanteiKekkaCode09.要介護1.get名称().equals(一次判定結果名称)) {
-
             return IchijiHanteiKekkaCode09.要介護1.getコード();
         } else if (IchijiHanteiKekkaCode09.要介護2.get名称().equals(一次判定結果名称)) {
             return IchijiHanteiKekkaCode09.要介護2.getコード();

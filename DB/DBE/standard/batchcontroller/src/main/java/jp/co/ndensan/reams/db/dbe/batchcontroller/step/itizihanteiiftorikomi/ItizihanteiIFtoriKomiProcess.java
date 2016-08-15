@@ -8,15 +8,19 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.itizihanteiiftorikomi;
 import jp.co.ndensan.reams.db.dbe.business.core.itizi.itizihanteiiftorikomi.ItizihanteiIFtoriKomiBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteizumifoutput.IchijiHanteizumIfOutputEucCsvEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.itizihanteiiftorikomi.IchijiHanteiKekkaJohoTempTableEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchCsvReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -29,10 +33,16 @@ public class ItizihanteiIFtoriKomiProcess extends BatchProcessBase<IchijiHanteiz
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private ItizihanteiIFtoriKomiBusiness business;
     private RString filePath;
+    private RString 込ファイル名;
     private final int 項目数 = 328;
     private static final RString TABLE要介護認定一次判定結果情報 = new RString("IchijiHanteiKekkaJohoTemp");
     @BatchWriter
     BatchEntityCreatedTempTableWriter 調査票概況調査サービスの状況TempTable;
+
+    @Override
+    protected void initialize() {
+        込ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定ソフト一次判定用データ取込ファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+    }
 
     @Override
     protected void beforeExecute() {
@@ -43,7 +53,7 @@ public class ItizihanteiIFtoriKomiProcess extends BatchProcessBase<IchijiHanteiz
     protected IBatchReader createReader() {
         //TODO csvのパースかありません。
         //RString spoolWorkPath = manager.getEucOutputDirectry();
-        filePath = new RString("C:\\Users\\soft863\\wanghui\\NCI221.csv");
+        filePath = new RString("C:\\Users\\soft863\\wanghui\\").concat(込ファイル名);
         CsvReader csvReader = new CsvReader.InstanceBuilder(filePath, IchijiHanteizumIfOutputEucCsvEntity.class)
                 .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS)
                 .hasHeader(false).setNewLine(NewLine.CRLF).build();
