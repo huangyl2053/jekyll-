@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki152300
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +23,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JigyohokokuCompYoshiki15206Entity {
 
-    private RString 作成日時;
+    private RDateTime 作成日時;
     private FlexibleYear 集計年度;
     private FlexibleYearMonth 集計期間FROM;
     private FlexibleYearMonth 集計期間TO;

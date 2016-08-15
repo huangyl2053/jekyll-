@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki201300
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +24,7 @@ import lombok.Setter;
 public class JigyohokokuCompYoshiki20109Entity {
 
     private RString 様式;
-    private RString 作成日時;
+    private RDateTime 作成日時;
     private RString 年報月報区分;
     private RString 給付集計区分;
     private FlexibleYear 集計年度;

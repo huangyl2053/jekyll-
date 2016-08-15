@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -27,6 +28,10 @@ public class JigyohokokuCompYoshiki20109Editor implements IJigyohokokuCompYoshik
     private static final RString 給付集計区分が1 = new RString("1");
     private static final RString 給付集計区分が2 = new RString("2");
     private static final RString 給付集計区分が3 = new RString("3");
+    private static final RString DATE_時 = new RString("時");
+    private static final RString DATE_分 = new RString("分");
+    private static final RString DATE_秒 = new RString("秒");
+    private static final RString 作成 = new RString("作成");
 
     /**
      * インスタンスを生成します。
@@ -40,7 +45,7 @@ public class JigyohokokuCompYoshiki20109Editor implements IJigyohokokuCompYoshik
     @Override
     public JigyohokokuCompYoshiki20109ReportSource edit(JigyohokokuCompYoshiki20109ReportSource source) {
         source.yoshiki = item.get様式();
-        source.sakuseinichiji = item.get作成日時();
+        source.sakuseinichiji = get作成日時();
         RStringBuilder builder = new RStringBuilder();
         builder.append(new RString("("));
         builder.append(getパターン107(item.get集計年度()));
@@ -64,6 +69,23 @@ public class JigyohokokuCompYoshiki20109Editor implements IJigyohokokuCompYoshik
         source.title3 = item.getタイトル3();
         source.shorikbn = new RString("年報");
         return source;
+    }
+
+    private RString get作成日時() {
+        RStringBuilder printTimeStampSb = new RStringBuilder();
+        RDateTime printdate = item.get作成日時();
+        printTimeStampSb.append(printdate.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        printTimeStampSb.append(RString.HALF_SPACE);
+        printTimeStampSb.append(String.format("%02d", printdate.getHour()));
+        printTimeStampSb.append(DATE_時);
+        printTimeStampSb.append(String.format("%02d", printdate.getMinute()));
+        printTimeStampSb.append(DATE_分);
+        printTimeStampSb.append(String.format("%02d", printdate.getSecond()));
+        printTimeStampSb.append(DATE_秒);
+        printTimeStampSb.append(作成);
+        return printTimeStampSb.toRString();
     }
 
     private RString getパターン62(FlexibleYearMonth 年月) {

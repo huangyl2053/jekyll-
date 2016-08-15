@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki202300
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +24,7 @@ import lombok.Setter;
 public class JigyohokokuCompYoshiki20210Entity {
 
     private RString 様式;
-    private RString 作成日時;
+    private RDateTime 作成日時;
     private RString 年報月報区分;
     private RString 給付集計区分;
     private FlexibleYear 集計年度;
@@ -225,30 +226,6 @@ public class JigyohokokuCompYoshiki20210Entity {
     private RString 福祉用具貸与_要介護５;
     private RString 福祉用具貸与_介護計;
     private RString 福祉用具貸与_合計;
-    private RString 福祉用具購入費_要支援１;
-    private RString 福祉用具購入費_要支援２;
-    private RString 福祉用具購入費_予防計;
-    private RString 福祉用具購入費_非該当;
-    private RString 福祉用具購入費_経過的要介護;
-    private RString 福祉用具購入費_要介護１;
-    private RString 福祉用具購入費_要介護２;
-    private RString 福祉用具購入費_要介護３;
-    private RString 福祉用具購入費_要介護４;
-    private RString 福祉用具購入費_要介護５;
-    private RString 福祉用具購入費_介護計;
-    private RString 福祉用具購入費_合計;
-    private RString 住宅改修費_要支援１;
-    private RString 住宅改修費_要支援２;
-    private RString 住宅改修費_予防計;
-    private RString 住宅改修費_非該当;
-    private RString 住宅改修費_経過的要介護;
-    private RString 住宅改修費_要介護１;
-    private RString 住宅改修費_要介護２;
-    private RString 住宅改修費_要介護３;
-    private RString 住宅改修費_要介護４;
-    private RString 住宅改修費_要介護５;
-    private RString 住宅改修費_介護計;
-    private RString 住宅改修費_合計;
     private RString 特定施設入居者生活介護_要支援１;
     private RString 特定施設入居者生活介護_要支援２;
     private RString 特定施設入居者生活介護_予防計;
