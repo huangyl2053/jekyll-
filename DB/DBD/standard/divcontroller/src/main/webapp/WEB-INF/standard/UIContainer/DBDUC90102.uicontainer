@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBDUC90102",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "おむつ使用証明書発行",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD9010002",
+     "toLayoutTitle": "おむつ使用証明書発行",
+     "toState": "初期状態"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD9010002",
+     "layoutTitle": "おむつ使用証明書発行",
+     "eventName": "完了",
+     "destroy": true,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
