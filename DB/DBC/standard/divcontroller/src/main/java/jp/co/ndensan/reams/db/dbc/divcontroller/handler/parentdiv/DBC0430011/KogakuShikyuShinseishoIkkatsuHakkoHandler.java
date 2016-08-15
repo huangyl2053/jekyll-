@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -149,16 +148,14 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
                     = KogakuShikyuShinseishoIkkatsu.createInstance().getServiceTeikyoByDbT3056(被保険者番号, 証記載保険者番号);
             for (KogakuShikyuShinsei kogakuShikyuShinsei : serviceTeikyoYMList) {
                 FlexibleYearMonth サービス提供年月 = kogakuShikyuShinsei.getサービス提供年月();
-                RString teikyoYM = DateConverter.toWarekiHalf(new RDate(サービス提供年月.toString()));
-                datasource.add(new KeyValueDataSource(サービス提供年月.toDateString(), teikyoYM));
+                datasource.add(new KeyValueDataSource(サービス提供年月.toDateString(), サービス提供年月.wareki().toDateString()));
             }
         } else if (メニューID_DBCMNL3001.equals(menuID)) {
             List<JigyoKogakuShikyuShinsei> serviceTeikyoYMList
                     = KogakuShikyuShinseishoIkkatsu.createInstance().getServiceTeikyoByDbT3110(被保険者番号, 証記載保険者番号);
             for (JigyoKogakuShikyuShinsei jigyoKogakuShikyuShinsei : serviceTeikyoYMList) {
                 FlexibleYearMonth サービス提供年月 = jigyoKogakuShikyuShinsei.getサービス提供年月();
-                RString teikyoYM = DateConverter.toWarekiHalf(new RDate(サービス提供年月.toString()));
-                datasource.add(new KeyValueDataSource(サービス提供年月.toDateString(), teikyoYM));
+                datasource.add(new KeyValueDataSource(サービス提供年月.toDateString(), サービス提供年月.wareki().toDateString()));
             }
         }
         div.getShinseishoHakkoParameters().getDdlServiceYM().setDataSource(datasource);
@@ -244,6 +241,10 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
         return parameter;
     }
 
+    /**
+     * 審査年月/受取年月のセットのメソッドです。
+     * @param 区分　Rstring
+     */
     public void set審査年月(RString 区分) {
         List<KeyValueDataSource> radShinsaYM = new ArrayList<>();
         if (NUM_1.equals(区分)) {
