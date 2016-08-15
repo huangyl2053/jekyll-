@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futanngenndogakuninntei;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd1200902.ShakaiFukushiHoujinnKeigenListMybatisParameter;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.FutanGenndoGakuNinnteiListEntity;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd1200902.FutanGenndoGakuNinnteiShouMybatisParameter;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.FutanGenndoGakuNinnteiShouEntity;
 
 /**
  * 負担限度額認定の認定証発行のMapperクラスです。
@@ -17,10 +17,10 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.FutanGenndoGakuNin
 public interface IFutanGenndoGakuNinnteiShouMapper {
 
     /**
-     * 負担額認定証決定通知書発行一覧表発行情報を取得します．
+     * 負担限度額認定の認定証発行情報を取得します．
      *
      * @param parameter パラメター
-     * @return 負担額認定証決定通知書発行一覧表発行情報
+     * @return 負担限度額認定の認定証発行情報
      */
-    List<FutanGenndoGakuNinnteiListEntity> get負担額認定証決定通知書発行一覧表発行情報(ShakaiFukushiHoujinnKeigenListMybatisParameter parameter);
+    List<FutanGenndoGakuNinnteiShouEntity> get負担限度額認定の認定証発行情報(FutanGenndoGakuNinnteiShouMybatisParameter parameter);
 }
