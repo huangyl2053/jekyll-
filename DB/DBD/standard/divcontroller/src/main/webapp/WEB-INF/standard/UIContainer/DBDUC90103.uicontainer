@@ -1,11 +1,11 @@
 ﻿{
- "uiContainerName": "DBDUC90102",
+ "uiContainerName": "DBDUC90103",
  "displayWizard": false,
  "subGyomuCode": "DBD",
  "steps": [
   {
    "id": 1,
-   "name": "おむつ使用証明書発行",
+   "name": "主治医意見書確認書発行",
    "transitionList": [
     {
      "id": "1",
@@ -26,16 +26,16 @@
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBD",
-     "toLayoutName": "DBD9010002",
-     "toLayoutTitle": "おむつ使用証明書発行",
+     "toLayoutName": "DBD9010003",
+     "toLayoutTitle": "主治医意見書確認書発行",
      "toState": "初期状態"
     },
     {
      "id": "3",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBD",
-     "layoutName": "DBD9010002",
-     "layoutTitle": "おむつ使用証明書発行",
+     "layoutName": "DBD9010003",
+     "layoutTitle": "主治医意見書確認書発行",
      "eventName": "再検索",
      "destroy": false,
      "condition": "",
@@ -47,10 +47,10 @@
     {
      "id": "4",
      "type": "end",
-     "layoutSubGyomuCode": "DBD",
-     "layoutName": "DBD9010002",
-     "layoutTitle": "おむつ使用証明書発行",
-     "eventName": "完了",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZ0200001",
+     "layoutTitle": "対象者検索",
+     "eventName": "終了",
      "destroy": false,
      "condition": ""
     }
