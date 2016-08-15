@@ -74,8 +74,7 @@ public class TekiyoJogaiRireki {
      * @return ResponseData<TekiyoJogaiRirekiDiv>
      */
     public ResponseData<TekiyoJogaiRirekiDiv> onClick_BtnKakunin(TekiyoJogaiRirekiDiv requestDiv) {
-        ValidationMessageControlPairs vallidation
-                = getValidationHandler(requestDiv).入力チェック(requestDiv.getMode_DisplayMode());
+        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).validate();
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         }

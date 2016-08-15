@@ -128,7 +128,6 @@ public class TekiyoJogaishaManager {
     @Transaction
     public SearchResult<TekiyoJogaishaRelate> getTekiyoJogaishaLst(ShikibetsuCode shikibetsuCode, boolean ronrisakujyoFlg) {
         requireNonNull(shikibetsuCode, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード.toString()));
-        List<TekiyoJogaishaRelate> tekiyoJogaishaRelateList = new ArrayList<>();
         TekiyoJogaishaMapperParameter 適用除外者Parameter = TekiyoJogaishaMapperParameter.
                 createParam_get適用除外者(shikibetsuCode, ronrisakujyoFlg);
         ITekiyoJogaishaMapper mapper = mapperProvider.create(ITekiyoJogaishaMapper.class);
@@ -136,6 +135,8 @@ public class TekiyoJogaishaManager {
         if (適用除外者List == null || 適用除外者List.isEmpty()) {
             return SearchResult.of(Collections.<TekiyoJogaishaRelate>emptyList(), 0, false);
         }
+
+        List<TekiyoJogaishaRelate> tekiyoJogaishaRelateList = new ArrayList<>();
         for (TekiyoJogaishaRelateEntity entity : 適用除外者List) {
             退所日ありフラグ = true;
             TekiyoJogaishaMapperParameter 施設情報Parameter = TekiyoJogaishaMapperParameter.createParam_get施設情報(
@@ -146,25 +147,25 @@ public class TekiyoJogaishaManager {
             if (施設情報List == null || 施設情報List.isEmpty()) {
                 tekiyoJogaishaRelateList.add(new TekiyoJogaishaRelate(entity));
             } else {
-                for (TekiyoJogaishaRelateEntity entity1 : 施設情報List) {
-                    if (entity1.getTaishoYMD() == null || entity1.getTaishoYMD().isEmpty()) {
-                        entity.setRirekiNo(entity1.getRirekiNo());
-                        entity.setNyushoShisetsuCode(entity1.getNyushoShisetsuCode());
-                        entity.setNyushoYMD(entity1.getNyushoYMD());
-                        entity.setTaishoYMD(entity1.getTaishoYMD());
-                        entity.setJigyoshaMeisho(entity1.getJigyoshaMeisho());
-                        tekiyoJogaishaRelateList.add(new TekiyoJogaishaRelate(entity));
-                        退所日ありフラグ = false;
-                    }
-                }
-                if (退所日ありフラグ) {
-                    entity.setRirekiNo(施設情報List.get(0).getRirekiNo());
-                    entity.setNyushoShisetsuCode(施設情報List.get(0).getNyushoShisetsuCode());
-                    entity.setNyushoYMD(施設情報List.get(0).getNyushoYMD());
-                    entity.setTaishoYMD(施設情報List.get(0).getTaishoYMD());
-                    entity.setJigyoshaMeisho(施設情報List.get(0).getJigyoshaMeisho());
-                    tekiyoJogaishaRelateList.add(new TekiyoJogaishaRelate(entity));
-                }
+//                for (TekiyoJogaishaRelateEntity entity1 : 施設情報List) {
+//                    if (entity1.getTaishoYMD() == null || entity1.getTaishoYMD().isEmpty()) {
+//                        entity.setRirekiNo(entity1.getRirekiNo());
+//                        entity.setNyushoShisetsuCode(entity1.getNyushoShisetsuCode());
+//                        entity.setNyushoYMD(entity1.getNyushoYMD());
+//                        entity.setTaishoYMD(entity1.getTaishoYMD());
+//                        entity.setJigyoshaMeisho(entity1.getJigyoshaMeisho());
+//                        tekiyoJogaishaRelateList.add(new TekiyoJogaishaRelate(entity));
+//                        退所日ありフラグ = false;
+//                    }
+//                }
+//                if (退所日ありフラグ) {
+                entity.setRirekiNo(施設情報List.get(0).getRirekiNo());
+                entity.setNyushoShisetsuCode(施設情報List.get(0).getNyushoShisetsuCode());
+                entity.setNyushoYMD(施設情報List.get(0).getNyushoYMD());
+                entity.setTaishoYMD(施設情報List.get(0).getTaishoYMD());
+                entity.setJigyoshaMeisho(施設情報List.get(0).getJigyoshaMeisho());
+                tekiyoJogaishaRelateList.add(new TekiyoJogaishaRelate(entity));
+//                }
             }
         }
         return SearchResult.of(tekiyoJogaishaRelateList, 0, false);
@@ -186,15 +187,15 @@ public class TekiyoJogaishaManager {
         ITekiyoJogaishaMapper mapper = mapperProvider.create(ITekiyoJogaishaMapper.class);
         List<DbT1002TekiyoJogaishaEntity> 適用除外者管理適用除外者情報List = mapper.get適用除外者更新用(適用除外者Parameter);
         List<TekiyoJogaisha> 適用除外者List = new ArrayList<>();
-        List<jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho> 施設入退所Lsit = new ArrayList<>();
         for (DbT1002TekiyoJogaishaEntity 適用除外者 : 適用除外者管理適用除外者情報List) {
             適用除外者.initializeMd5();
             適用除外者List.add(new TekiyoJogaisha(適用除外者));
-            List<DbT1004ShisetsuNyutaishoEntity> 適用除外者管理施設情報List = mapper.get施設情報更新用(適用除外者Parameter);
-            for (DbT1004ShisetsuNyutaishoEntity 施設情報 : 適用除外者管理施設情報List) {
-                施設情報.initializeMd5();
-                施設入退所Lsit.add(new jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho(施設情報));
-            }
+        }
+        List<jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho> 施設入退所Lsit = new ArrayList<>();
+        List<DbT1004ShisetsuNyutaishoEntity> 適用除外者管理施設情報List = mapper.get施設情報更新用(適用除外者Parameter);
+        for (DbT1004ShisetsuNyutaishoEntity 施設情報 : 適用除外者管理施設情報List) {
+            施設情報.initializeMd5();
+            施設入退所Lsit.add(new jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho(施設情報));
         }
         tekiyoJogaishaBusiness.set適用除外者List(適用除外者List);
         tekiyoJogaishaBusiness.set施設入退所Lsit(施設入退所Lsit);
