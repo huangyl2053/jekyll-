@@ -4,43 +4,32 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5130001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KyotakuServiceKeikakuInfo.IKyotakuServiceKeikakuInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KyotakuServiceKeikakuInfo.KyotakuServiceKeikakuInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetSunyushoInfo.IShisetSunyushoInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetSunyushoInfo.ShisetSunyushoInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJohoDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * ShinseihakkoMeisei のクラスファイル
- *
+ * ShinseihakkoMeisei のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class ShinseihakkoMeiseiDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("printSelect")
-    private printSelectDiv printSelect;
-    @JsonProperty("ZenkaiShinseiNaiyo")
-    private ZenkaiShinseiNaiyoDiv ZenkaiShinseiNaiyo;
-    @JsonProperty("ccdKyotakuServiceKeikakuInfo")
-    private KyotakuServiceKeikakuInfoDiv ccdKyotakuServiceKeikakuInfo;
-    @JsonProperty("ccdZenkaiNinteiKekkaJoho")
-    private ZenkaiNinteiKekkaJohoDiv ccdZenkaiNinteiKekkaJoho;
-    @JsonProperty("ccdShusetSunyushoInfo")
-    private ShisetSunyushoInfoDiv ccdShusetSunyushoInfo;
+    @JsonProperty("ccdKanryoMessage")
+    private KanryoMessageDiv ccdKanryoMessage;
+    @JsonProperty("Ninteishinseihakko")
+    private NinteishinseihakkoDiv Ninteishinseihakko;
+    @JsonProperty("ShinseihakkoMeisei2")
+    private ShinseihakkoMeisei2Div ShinseihakkoMeisei2;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -49,66 +38,48 @@ public class ShinseihakkoMeiseiDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getprintSelect
-     * @return printSelect
+     * getccdKanryoMessage
+     * @return ccdKanryoMessage
      */
-    @JsonProperty("printSelect")
-    public printSelectDiv getPrintSelect() {
-        return printSelect;
+    @JsonProperty("ccdKanryoMessage")
+    public IKanryoMessageDiv getCcdKanryoMessage() {
+        return ccdKanryoMessage;
     }
 
     /*
-     * setprintSelect
-     * @param printSelect printSelect
+     * getNinteishinseihakko
+     * @return Ninteishinseihakko
      */
-    @JsonProperty("printSelect")
-    public void setPrintSelect(printSelectDiv printSelect) {
-        this.printSelect = printSelect;
+    @JsonProperty("Ninteishinseihakko")
+    public NinteishinseihakkoDiv getNinteishinseihakko() {
+        return Ninteishinseihakko;
     }
 
     /*
-     * getZenkaiShinseiNaiyo
-     * @return ZenkaiShinseiNaiyo
+     * setNinteishinseihakko
+     * @param Ninteishinseihakko Ninteishinseihakko
      */
-    @JsonProperty("ZenkaiShinseiNaiyo")
-    public ZenkaiShinseiNaiyoDiv getZenkaiShinseiNaiyo() {
-        return ZenkaiShinseiNaiyo;
+    @JsonProperty("Ninteishinseihakko")
+    public void setNinteishinseihakko(NinteishinseihakkoDiv Ninteishinseihakko) {
+        this.Ninteishinseihakko = Ninteishinseihakko;
     }
 
     /*
-     * setZenkaiShinseiNaiyo
-     * @param ZenkaiShinseiNaiyo ZenkaiShinseiNaiyo
+     * getShinseihakkoMeisei2
+     * @return ShinseihakkoMeisei2
      */
-    @JsonProperty("ZenkaiShinseiNaiyo")
-    public void setZenkaiShinseiNaiyo(ZenkaiShinseiNaiyoDiv ZenkaiShinseiNaiyo) {
-        this.ZenkaiShinseiNaiyo = ZenkaiShinseiNaiyo;
+    @JsonProperty("ShinseihakkoMeisei2")
+    public ShinseihakkoMeisei2Div getShinseihakkoMeisei2() {
+        return ShinseihakkoMeisei2;
     }
 
     /*
-     * getccdKyotakuServiceKeikakuInfo
-     * @return ccdKyotakuServiceKeikakuInfo
+     * setShinseihakkoMeisei2
+     * @param ShinseihakkoMeisei2 ShinseihakkoMeisei2
      */
-    @JsonProperty("ccdKyotakuServiceKeikakuInfo")
-    public IKyotakuServiceKeikakuInfoDiv getCcdKyotakuServiceKeikakuInfo() {
-        return ccdKyotakuServiceKeikakuInfo;
-    }
-
-    /*
-     * getccdZenkaiNinteiKekkaJoho
-     * @return ccdZenkaiNinteiKekkaJoho
-     */
-    @JsonProperty("ccdZenkaiNinteiKekkaJoho")
-    public ZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
-        return ccdZenkaiNinteiKekkaJoho;
-    }
-
-    /*
-     * getccdShusetSunyushoInfo
-     * @return ccdShusetSunyushoInfo
-     */
-    @JsonProperty("ccdShusetSunyushoInfo")
-    public IShisetSunyushoInfoDiv getCcdShusetSunyushoInfo() {
-        return ccdShusetSunyushoInfo;
+    @JsonProperty("ShinseihakkoMeisei2")
+    public void setShinseihakkoMeisei2(ShinseihakkoMeisei2Div ShinseihakkoMeisei2) {
+        this.ShinseihakkoMeisei2 = ShinseihakkoMeisei2;
     }
 
     /*
@@ -116,62 +87,62 @@ public class ShinseihakkoMeiseiDiv extends Panel {
      */
     @JsonIgnore
     public RadioButton getRadShinseishaKubun() {
-        return this.getPrintSelect().getRadShinseishaKubun();
+        return this.getShinseihakkoMeisei2().getPrintSelect().getRadShinseishaKubun();
     }
 
     @JsonIgnore
-    public void setRadShinseishaKubun(RadioButton radShinseishaKubun) {
-        this.getPrintSelect().setRadShinseishaKubun(radShinseishaKubun);
+    public void  setRadShinseishaKubun(RadioButton radShinseishaKubun) {
+        this.getShinseihakkoMeisei2().getPrintSelect().setRadShinseishaKubun(radShinseishaKubun);
     }
 
     @JsonIgnore
     public RadioButton getRadShinseiKubun() {
-        return this.getPrintSelect().getRadShinseiKubun();
+        return this.getShinseihakkoMeisei2().getPrintSelect().getRadShinseiKubun();
     }
 
     @JsonIgnore
-    public void setRadShinseiKubun(RadioButton radShinseiKubun) {
-        this.getPrintSelect().setRadShinseiKubun(radShinseiKubun);
+    public void  setRadShinseiKubun(RadioButton radShinseiKubun) {
+        this.getShinseihakkoMeisei2().getPrintSelect().setRadShinseiKubun(radShinseiKubun);
     }
 
     @JsonIgnore
     public RadioButton getRadPrintMeeisaiInfo() {
-        return this.getPrintSelect().getRadPrintMeeisaiInfo();
+        return this.getShinseihakkoMeisei2().getPrintSelect().getRadPrintMeeisaiInfo();
     }
 
     @JsonIgnore
-    public void setRadPrintMeeisaiInfo(RadioButton radPrintMeeisaiInfo) {
-        this.getPrintSelect().setRadPrintMeeisaiInfo(radPrintMeeisaiInfo);
+    public void  setRadPrintMeeisaiInfo(RadioButton radPrintMeeisaiInfo) {
+        this.getShinseihakkoMeisei2().getPrintSelect().setRadPrintMeeisaiInfo(radPrintMeeisaiInfo);
     }
 
     @JsonIgnore
     public TextBoxDate getTxtZenkaiShinseiDate() {
-        return this.getZenkaiShinseiNaiyo().getTxtZenkaiShinseiDate();
+        return this.getShinseihakkoMeisei2().getZenkaiShinseiNaiyo().getTxtZenkaiShinseiDate();
     }
 
     @JsonIgnore
-    public void setTxtZenkaiShinseiDate(TextBoxDate txtZenkaiShinseiDate) {
-        this.getZenkaiShinseiNaiyo().setTxtZenkaiShinseiDate(txtZenkaiShinseiDate);
+    public void  setTxtZenkaiShinseiDate(TextBoxDate txtZenkaiShinseiDate) {
+        this.getShinseihakkoMeisei2().getZenkaiShinseiNaiyo().setTxtZenkaiShinseiDate(txtZenkaiShinseiDate);
     }
 
     @JsonIgnore
     public TextBox getTxtShinseiKubunShinseiji() {
-        return this.getZenkaiShinseiNaiyo().getTxtShinseiKubunShinseiji();
+        return this.getShinseihakkoMeisei2().getZenkaiShinseiNaiyo().getTxtShinseiKubunShinseiji();
     }
 
     @JsonIgnore
-    public void setTxtShinseiKubunShinseiji(TextBox txtShinseiKubunShinseiji) {
-        this.getZenkaiShinseiNaiyo().setTxtShinseiKubunShinseiji(txtShinseiKubunShinseiji);
+    public void  setTxtShinseiKubunShinseiji(TextBox txtShinseiKubunShinseiji) {
+        this.getShinseihakkoMeisei2().getZenkaiShinseiNaiyo().setTxtShinseiKubunShinseiji(txtShinseiKubunShinseiji);
     }
 
     @JsonIgnore
     public TextBox getTxtShinseiKubunHorei() {
-        return this.getZenkaiShinseiNaiyo().getTxtShinseiKubunHorei();
+        return this.getShinseihakkoMeisei2().getZenkaiShinseiNaiyo().getTxtShinseiKubunHorei();
     }
 
     @JsonIgnore
-    public void setTxtShinseiKubunHorei(TextBox txtShinseiKubunHorei) {
-        this.getZenkaiShinseiNaiyo().setTxtShinseiKubunHorei(txtShinseiKubunHorei);
+    public void  setTxtShinseiKubunHorei(TextBox txtShinseiKubunHorei) {
+        this.getShinseihakkoMeisei2().getZenkaiShinseiNaiyo().setTxtShinseiKubunHorei(txtShinseiKubunHorei);
     }
 
     // </editor-fold>

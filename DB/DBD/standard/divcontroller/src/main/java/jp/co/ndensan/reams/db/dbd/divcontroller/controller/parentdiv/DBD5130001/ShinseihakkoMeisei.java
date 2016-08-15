@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd501002.ShinseiShoEntity;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5130001.NinteishinseihakkoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5130001.ShinseihakkoMeiseiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5130001.ShinseihakkoMeiseiHandler;
 import jp.co.ndensan.reams.db.dbd.service.report.dbd501001.YokaigoNinteiShinseishoPrintService;
@@ -45,14 +44,13 @@ public class ShinseihakkoMeisei {
      * 画面初期化
      *
      * @param shinseihakkoMeiseiDiv ShinseihakkoMeiseiDiv
-     * @param ninteishinseihakkoDiv NinteishinseihakkoDiv
      * @return ResponseData<ShinseihakkoMeiseiDiv>
      */
-    public ResponseData<ShinseihakkoMeiseiDiv> onLoad(ShinseihakkoMeiseiDiv shinseihakkoMeiseiDiv, NinteishinseihakkoDiv ninteishinseihakkoDiv) {
+    public ResponseData<ShinseihakkoMeiseiDiv> onLoad(ShinseihakkoMeiseiDiv shinseihakkoMeiseiDiv) {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
-        getHandler(shinseihakkoMeiseiDiv, ninteishinseihakkoDiv).initialize(識別コード, 被保険者番号);
+        getHandler(shinseihakkoMeiseiDiv).initialize(識別コード, 被保険者番号);
         return ResponseData.of(shinseihakkoMeiseiDiv).respond();
     }
 
@@ -60,12 +58,11 @@ public class ShinseihakkoMeisei {
      * 「連絡先」申請書を発行するボタンを押した後のバリデーションする。
      *
      * @param div ShinseihakkoMeiseiDiv
-     * @param ninteishinseihakkoDiv NinteishinseihakkoDiv
      * @return ResponseData
      */
-    public ResponseData<ShinseihakkoMeiseiDiv> check_RadShinseiKubun(ShinseihakkoMeiseiDiv div, NinteishinseihakkoDiv ninteishinseihakkoDiv) {
-        int selectIndex = div.getPrintSelect().getRadShinseiKubun().getSelectedIndex();
-        RString yokaigodo = div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue();
+    public ResponseData<ShinseihakkoMeiseiDiv> check_RadShinseiKubun(ShinseihakkoMeiseiDiv div) {
+        int selectIndex = div.getShinseihakkoMeisei2().getPrintSelect().getRadShinseiKubun().getSelectedIndex();
+        RString yokaigodo = div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue();
         if (selectIndex != 0 && (yokaigodo == null || yokaigodo.isEmpty())) {
             throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().replace("要介護度が空白のため", "更新申請の選択ができません"));
         }
@@ -76,14 +73,12 @@ public class ShinseihakkoMeisei {
      * 帳票を出力する
      *
      * @param shinseihakkoMeiseiDiv ShinseihakkoMeiseiDiv
-     * @param ninteishinseihakkoDiv NinteishinseihakkoDiv
      * @return ResponseData
      */
-    public ResponseData<ShinseihakkoMeiseiDiv> onClick_btnPublish(ShinseihakkoMeiseiDiv shinseihakkoMeiseiDiv,
-            NinteishinseihakkoDiv ninteishinseihakkoDiv) {
-        ShinseiShoEntity shinseiShoEntity = getHandler(shinseihakkoMeiseiDiv, ninteishinseihakkoDiv).getShinseiShoEntity();
+    public ResponseData<ShinseihakkoMeiseiDiv> onClick_btnPublish(ShinseihakkoMeiseiDiv shinseihakkoMeiseiDiv) {
+        ShinseiShoEntity shinseiShoEntity = getHandler(shinseihakkoMeiseiDiv).getShinseiShoEntity();
         ResponseData<SourceDataCollection> response = new ResponseData<>();
-        int radShinseiKubunSelectIndex = shinseihakkoMeiseiDiv.getPrintSelect().getRadShinseiKubun().getSelectedIndex();
+        int radShinseiKubunSelectIndex = shinseihakkoMeiseiDiv.getShinseihakkoMeisei2().getPrintSelect().getRadShinseiKubun().getSelectedIndex();
         try (ReportManager reportManager = new ReportManager()) {
             if (radShinseiKubunSelectIndex == 2) {
                 YokaigoNinteiShinseishoPrintService shinseishoPrintService = new YokaigoNinteiShinseishoPrintService();
@@ -120,8 +115,8 @@ public class ShinseihakkoMeisei {
         );
     }
 
-    private ShinseihakkoMeiseiHandler getHandler(ShinseihakkoMeiseiDiv div, NinteishinseihakkoDiv ninteishinseihakkodiv) {
-        return new ShinseihakkoMeiseiHandler(div, ninteishinseihakkodiv);
+    private ShinseihakkoMeiseiHandler getHandler(ShinseihakkoMeiseiDiv div) {
+        return new ShinseihakkoMeiseiHandler(div);
     }
 
 }
