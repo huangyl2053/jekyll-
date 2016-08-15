@@ -72,14 +72,14 @@ public class HoshushiharaiJumbiBusiness {
         eucCsvEntity.set口座番号(DbBusinessConfig.get(ConfigNameDBE.口座番号, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         eucCsvEntity.setダミー1(RString.EMPTY.padRight(RString.HALF_SPACE, SEVENTEEN));
         eucCsvEntity.setデータ区分2(TWO);
-        if (口座情報 != null) {
+        if (口座情報 != null && !口座情報.isEmpty()) {
             eucCsvEntity.set被仕向銀行番号(口座情報.get(0).get金融機関コード().value());
             eucCsvEntity.set被仕向銀行名(口座情報.get(0).get金融機関().get金融機関名称());
             eucCsvEntity.set被仕向支店番号(口座情報.get(0).get支店コード().value());
             eucCsvEntity.set被仕向支店名(口座情報.get(0).get支店().get支店名称());
         }
         eucCsvEntity.set手形交換所番号(ZERO);
-        if (口座情報 != null) {
+        if (口座情報 != null && !口座情報.isEmpty()) {
             eucCsvEntity.set預金種別2(口座情報.get(0).get預金種別().get預金種別コード());
             eucCsvEntity.set口座番号2(口座情報.get(0).get口座番号());
             eucCsvEntity.set受取人名(口座情報.get(0).get口座名義人漢字().value());
@@ -115,13 +115,13 @@ public class HoshushiharaiJumbiBusiness {
         builder.append(DbBusinessConfig.get(ConfigNameDBE.口座番号, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         builder.append(RString.EMPTY.padRight(RString.HALF_SPACE, SEVENTEEN));
         builder.append(TWO);
-        if (口座情報 != null) {
+        if (口座情報 != null && !口座情報.isEmpty()) {
             builder.append(口座情報.get(0).get金融機関コード().value());
             builder.append(口座情報.get(0).get支店コード().value());
             builder.append(口座情報.get(0).get支店().get支店名称());
         }
         builder.append(ZERO);
-        if (口座情報 != null) {
+        if (口座情報 != null && !口座情報.isEmpty()) {
             builder.append(口座情報.get(0).get預金種別().get預金種別コード());
             builder.append(口座情報.get(0).get口座番号());
             builder.append(口座情報.get(0).get口座名義人漢字().value());
