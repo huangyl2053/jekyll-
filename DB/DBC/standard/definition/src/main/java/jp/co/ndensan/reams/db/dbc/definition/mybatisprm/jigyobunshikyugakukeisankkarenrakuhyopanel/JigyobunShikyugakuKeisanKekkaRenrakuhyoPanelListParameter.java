@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigyobunshikyugakukeisanKekkarenrakuhyopanel;
+package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigyobunshikyugakukeisankkarenrakuhyopanel;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
@@ -34,7 +34,8 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter implement
      * @param 連絡票整理番号 RString
      * @param 証記載保険者番号 HokenshaNo
      */
-    public JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter(HihokenshaNo 被保険者番号, FlexibleYear 対象年度, RString 連絡票整理番号, HokenshaNo 証記載保険者番号) {
+    public JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter(HihokenshaNo 被保険者番号, 
+            FlexibleYear 対象年度, RString 連絡票整理番号, HokenshaNo 証記載保険者番号) {
 
         this.被保険者番号 = 被保険者番号;
         this.対象年度 = 対象年度;

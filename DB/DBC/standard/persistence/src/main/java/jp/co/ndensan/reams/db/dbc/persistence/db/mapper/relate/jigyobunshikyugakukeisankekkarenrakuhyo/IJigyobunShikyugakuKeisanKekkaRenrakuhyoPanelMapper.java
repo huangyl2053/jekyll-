@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jigyobunshikyugakukeisankekkarenrakuhyo;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigyobunshikyugakukeisanKekkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisanKekkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity;
 
 /**
