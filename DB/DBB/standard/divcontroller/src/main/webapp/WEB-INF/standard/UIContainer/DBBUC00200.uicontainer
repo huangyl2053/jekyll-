@@ -117,7 +117,7 @@
      "layoutName": "DBB8120001",
      "layoutTitle": "介護保険料即時賦課更正",
      "eventName": "前画面に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBB",
      "toLayoutName": "DBB0020001",
