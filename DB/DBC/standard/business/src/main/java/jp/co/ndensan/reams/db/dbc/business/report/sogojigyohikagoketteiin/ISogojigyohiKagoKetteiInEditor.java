@@ -10,11 +10,11 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohikagoketteiin.S
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- * 総合事業費（経過措置）過誤決定通知書情報取込一覧表帳票IEditor
+ * 総合事業費（経過措置）過誤決定通知書情報取込一覧表帳票IEditor。
  *
- * @reamsid_L DBC-2550-010 fzou
+ * @reamsid_L DBC-2550-030　jianglaishen
  */
 public interface ISogojigyohiKagoKetteiInEditor extends
-        IReportEditor<SogojigyohiKagoKetteiInSource>{
-    
+        IReportEditor<SogojigyohiKagoKetteiInSource> {
+
 }

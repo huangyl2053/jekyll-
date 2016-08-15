@@ -37,9 +37,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 総合事業費（経過措置）過誤決定通知書情報取込のバッチ処理フロー
+ * 総合事業費（経過措置）過誤決定通知書情報取込のバッチ処理フロー。
  *
- * @reamsid_L DBC-2550-010 fzou
+ * @reamsid_L DBC-2550-010 jianglaishen
  */
 public class DBC120180_SogojigyohiKagoKetteiInFlow extends BatchFlowBase<DBC120180_SogojigyohiKagoKetteiInParameter> {
 
@@ -171,7 +171,7 @@ public class DBC120180_SogojigyohiKagoKetteiInFlow extends BatchFlowBase<DBC1201
         parameter.set出力順ID(getParameter().get出力順ID());
         parameter.set処理年月(getParameter().get処理年月());
         parameter.setシステム日付(RDateTime.now());
-        return simpleBatch(SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess.class).arguments(parameter).
+        return loopBatch(SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess.class).arguments(parameter).
                 define();
     }
 
