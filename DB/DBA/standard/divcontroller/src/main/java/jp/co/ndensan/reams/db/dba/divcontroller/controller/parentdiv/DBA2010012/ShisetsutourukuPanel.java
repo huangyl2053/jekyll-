@@ -161,6 +161,15 @@ public class ShisetsutourukuPanel {
      * @return ResponseData
      */
     public ResponseData<ShisetsutourukuPanelDiv> onClick_Search(ShisetsutourukuPanelDiv div) {
+        
+        if (ResponseHolder.isReRequest()) {
+            if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                RealInitialLocker.release(LOCKINGKEY);
+                return ResponseData.of(div).forwardWithEventName(DBA2010012TransitionEventName.再検索).respond();
+            }
+            return ResponseData.of(div).respond();
+        }
         // 編集有無フラグ
         boolean changeflag = false;
         KaigoJogaiTokureiTaishoShisetsu business = ViewStateHolder.get(
@@ -301,16 +310,10 @@ public class ShisetsutourukuPanel {
                         UrQuestionMessages.検索画面遷移の確認.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                RealInitialLocker.release(LOCKINGKEY);
-                return ResponseData.of(div).forwardWithEventName(DBA2010012TransitionEventName.再検索).respond();
-            }
         } else {
             RealInitialLocker.release(LOCKINGKEY);
             return ResponseData.of(div).forwardWithEventName(DBA2010012TransitionEventName.再検索).respond();
         }
-
         return ResponseData.of(div).respond();
     }
 
