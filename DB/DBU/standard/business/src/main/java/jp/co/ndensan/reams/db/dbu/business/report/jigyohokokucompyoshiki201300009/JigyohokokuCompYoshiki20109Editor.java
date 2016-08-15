@@ -31,7 +31,6 @@ public class JigyohokokuCompYoshiki20109Editor implements IJigyohokokuCompYoshik
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
-    private static final RString 作成 = new RString("作成");
 
     /**
      * インスタンスを生成します。
@@ -84,7 +83,6 @@ public class JigyohokokuCompYoshiki20109Editor implements IJigyohokokuCompYoshik
         printTimeStampSb.append(DATE_分);
         printTimeStampSb.append(String.format("%02d", printdate.getSecond()));
         printTimeStampSb.append(DATE_秒);
-        printTimeStampSb.append(作成);
         return printTimeStampSb.toRString();
     }
 

@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservices
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShuruiIdentifier;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -41,11 +40,16 @@ public class KubunShikyuGendogaku {
         div.getDgServiceShurui().init();
         KubunShikyuGendogakuHandler handler = getHandler(div);
         handler.setServiceShuruiShousaiEnable(true);
+        handler.clearValue();
+        handler.setCommonButtonVisible(false);
         KubunShikyuGendogakuManager manager = InstanceProvider.create(KubunShikyuGendogakuManager.class);
         List<KaigoServiceShurui> businessList = manager.getサービス種類登録();
         ViewStateHolder.put(ViewStateKeys.介護サービス種類データ, new KaigoServiceShuruiHolder(businessList));
         if (!businessList.isEmpty()) {
             handler.initializeDgList(businessList);
+        }
+        if (div.getBtnTsuika().isDisabled()) {
+            onSelect_Back(div);
         }
         return ResponseData.of(div).respond();
     }
@@ -61,8 +65,11 @@ public class KubunShikyuGendogaku {
         KubunShikyuGendogakuHandler handler = getHandler(div);
         dgServiceShurui_Row row = div.getDgServiceShurui().getClickedItem();
         handler.setServiceShuruiShousaiEnable(false);
+        div.getServiceShuruiShousai().getTxtServiceCode().setDisabled(true);
+        div.getServiceShuruiShousai().getTxtTeikyoKaishiYM().setDisabled(true);
         handler.setDisable();
         handler.modify(row);
+        handler.setCommonButtonVisible(true);
         return ResponseData.of(div).respond();
     }
 
@@ -77,6 +84,7 @@ public class KubunShikyuGendogaku {
         KubunShikyuGendogakuHandler handler = getHandler(div);
         handler.setServiceShuruiShousaiEnable(false);
         handler.setDisable();
+        handler.setCommonButtonVisible(true);
         return ResponseData.of(div).respond();
     }
 
@@ -91,9 +99,9 @@ public class KubunShikyuGendogaku {
         KubunShikyuGendogakuHandler handler = getHandler(div);
         dgServiceShurui_Row row = div.getDgServiceShurui().getClickedItem();
         handler.modify(row);
-        div.getDgServiceShurui().getDataSource().remove(row);
         handler.setServiceShuruiShousaiEnable(true);
         handler.setDisable();
+        handler.setCommonButtonVisible(true);
         return ResponseData.of(div).respond();
     }
 
@@ -120,6 +128,7 @@ public class KubunShikyuGendogaku {
      */
     public ResponseData<KubunShikyuGendogakuDiv> onSelect_Save(
             KubunShikyuGendogakuDiv div) {
+        KubunShikyuGendogakuHandler handler = getHandler(div);
         KaigoServiceShuruiHolder holder = ViewStateHolder.get(ViewStateKeys.介護サービス種類データ, KaigoServiceShuruiHolder.class);
         KubunShikyuGendogakuManager manager = InstanceProvider.create(KubunShikyuGendogakuManager.class);
         RString サービス種類コード = div.getServiceShuruiShousai().getTxtServiceCode().getValue();
@@ -130,28 +139,12 @@ public class KubunShikyuGendogaku {
         if (result == null) {
             result = new KaigoServiceShurui(
                     new ServiceShuruiCode(サービス種類コード), new FlexibleYearMonth(提供開始年月));
-            result = result.createBuilderForEdit()
-                    .setサービス種類名称(div.getServiceShuruiShousai().getTxtServiceMeisho().getValue())
-                    .setサービス分類コード(Code.EMPTY)
-                    .setサービス種類略称(div.getServiceShuruiShousai().getTxtServiceRyakusho().getValue())
-                    .set提供終了年月(new FlexibleYearMonth(div.getServiceShuruiShousai()
-                                    .getTxtTeikyoShuryoYM().getValue().getYearMonth().toDateString()))
-                    .set居宅サービス区分(RString.EMPTY)
-                    .set基準該当サービス区分(RString.EMPTY)
-                    .set限度額区分(RString.EMPTY)
-                    .set指定サービス区分(RString.EMPTY)
-                    .build();
+            result = handler.setResult追加(result);
         } else {
-            if (div.getServiceShuruiShousai().getTxtServiceCode().isDisabled()) {
+            if (div.getServiceShuruiShousai().getTxtTeikyoShuryoYM().isDisabled()) {
                 result = result.deleted();
             } else {
-                result = result.createBuilderForEdit()
-                        .setサービス種類名称(div.getServiceShuruiShousai().getTxtServiceMeisho().getValue())
-                        .setサービス分類コード(Code.EMPTY)
-                        .setサービス種類略称(div.getServiceShuruiShousai().getTxtServiceRyakusho().getValue())
-                        .set提供終了年月(new FlexibleYearMonth(div.getServiceShuruiShousai()
-                                        .getTxtTeikyoShuryoYM().getValue().getYearMonth().toDateString()))
-                        .build();
+                result = handler.setResult修正(result);
             }
         }
         manager.save(result);

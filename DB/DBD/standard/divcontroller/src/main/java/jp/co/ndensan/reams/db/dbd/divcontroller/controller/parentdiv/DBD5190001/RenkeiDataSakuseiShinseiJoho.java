@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5190001;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.ninteishinseijoho.NinteiShinseiJohoBusiness;
 import jp.co.ndensan.reams.db.dbd.definition.core.jukyunintei.yokaigointerface.Datakubun;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5190001.RenkeiDataSakuseiShinseiJohoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5190001.RenkeiDataSakuseiShinseiJohoHandler;
@@ -117,8 +119,17 @@ public class RenkeiDataSakuseiShinseiJoho {
         RDateTime konkaisyuryoTime = RDateTime.of(nenngappisyuryo.getYearValue(), nenngappisyuryo.getMonthValue(),
                 nenngappisyuryo.getDayValue(), jifunyousyuryo.getHour(),
                 jifunyousyuryo.getMinute(), jifunyousyuryo.getSecond());
-        getHandler(div).対象者一覧情報初期化(shoKisaiHokenshaNo, konkaikaishiTime, konkaisyuryoTime, hihokenshaNo, saidaikensu, div);
-        return ResponseData.of(div).respond();
+        List<NinteiShinseiJohoBusiness> ninteiShinseiJohos = getHandler(div).getNinteishinseijohos(shoKisaiHokenshaNo, konkaikaishiTime,
+                konkaisyuryoTime, hihokenshaNo, saidaikensu);
+        if (ninteiShinseiJohos == null || ninteiShinseiJohos.isEmpty()) {
+            div.getDgTaishoshaIchiran().getDataSource().clear();
+            div.getTaishoshaIchiran().setIsOpen(false);
+            getValidationHandler().validateForデータない(pairs, div);
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
+        }
+        return getHandler(div).対象者一覧情報初期化(shoKisaiHokenshaNo, konkaikaishiTime, konkaisyuryoTime, hihokenshaNo, saidaikensu, div);
     }
 
     /**
@@ -227,6 +238,7 @@ public class RenkeiDataSakuseiShinseiJoho {
 //        parameters.setInsatsukikan(insatsukikanDate);
 //        return ResponseData.of(parameters).respond();
 //    }
+    //TODO  バッチ完了を待って　います
     private RenkeiDataSakuseiShinseiJohoHandler getHandler(RenkeiDataSakuseiShinseiJohoDiv div) {
         return new RenkeiDataSakuseiShinseiJohoHandler(div);
     }

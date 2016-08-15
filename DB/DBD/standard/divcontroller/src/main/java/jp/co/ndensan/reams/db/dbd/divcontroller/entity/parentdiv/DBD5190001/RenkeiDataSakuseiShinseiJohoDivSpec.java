@@ -145,4 +145,17 @@ public enum RenkeiDataSakuseiShinseiJohoDivSpec implements IPredicate<RenkeiData
                     return kensuFlag;
                 }
             },
+    データない {
+                /**
+                 * データない。
+                 *
+                 * @param div 要介護認定申請連携データ作成画面Div
+                 * @return false:データない。
+                 */
+                @Override
+                public boolean apply(RenkeiDataSakuseiShinseiJohoDiv div
+                ) {
+                    return false;
+                }
+            },
 }

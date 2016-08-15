@@ -75,4 +75,150 @@
             A."dtsakuseiymd" DESC
     </select>
     
+    <!-- 「DB出力(非課税年金対象者)」の「編集仕様(UPDATE)」の「解除キー」と「解除」を参照し、DBに更新します。 -->
+    <update id="取込_保存処理" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.houshold.HousholdUpdateParameter">
+        UPDATE
+        rgdb."DbT4037HikazeNenkinTaishosha"
+        SET
+        "genkisonenkinno" = #{現基礎年金番号},
+        "hihokenshano" = #{被保険者番号}
+        WHERE
+        "kisonenkinno" = #{基礎年金番号_キー}
+        AND "nenkincode" = #{年金コード_キー}
+        AND "hihokenshano" = #{被保番号_キー}
+        AND "dtnenkinhokenshacode" = #{年金保険者コード_キー}
+        AND "dtsakuseiymd" = #{作成年月日_キー}
+        AND "dttaishoy" = #{対象年_キー}
+    </update>
+    
+    <!-- 「DB出力(非課税年金対象者)」の「編集仕様(UPDATE)」の「更新条件検索キー」と「更新_画面登録」を参照し、DBに更新します。 -->
+    <update id="修正_登録区分_画面登録_保存処理" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.houshold.HousholdUpdateParameter">
+        UPDATE
+        rgdb."DbT4037HikazeNenkinTaishosha"
+        SET
+        "shorikubun" = #{処理区分},
+        "taishom" = #{対象月},
+        "genkisonenkinno" = #{現基礎年金番号},
+        "hihokenshano" = #{被保険者番号},
+        "dtsakuseiymd" = #{dt作成年月日},
+        "kisonenkinno" = #{dt基礎年金番号},
+        "dtbirthday" = #{dt生年月日},
+        "dtkanashimei" = #{dtカナ氏名},
+        "dtkanjishimei" = #{dt漢字氏名},
+        "dtkanajusho" = #{dtカナ住所},
+        "dtkanjijusho" = #{dt漢字住所},
+        "dttaishoy" = #{dt対象年},
+        "dtkingaku1" = #{dt金額１}
+        WHERE
+        "kisonenkinno" = #{基礎年金番号_キー}
+        AND "nenkincode" = #{年金コード_キー}
+        AND "hihokenshano" = #{被保番号_キー}
+        AND "dtnenkinhokenshacode" = #{年金保険者コード_キー}
+        AND "dtsakuseiymd" = #{作成年月日_キー}
+        AND "dttaishoy" = #{対象年_キー}
+    </update>
+    
+    <!-- 「DB出力(非課税年金対象者)」の「編集仕様(UPDATE)」の「解除キー」と「解除」を参照し、DBに更新します。 -->
+    <delete id="削除解除_登録区分_画面登録_保存処理" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.houshold.HousholdUpdateParameter">
+        DELETE FROM
+        rgdb."DbT4037HikazeNenkinTaishosha"
+        WHERE
+        "kisonenkinno" = #{基礎年金番号_キー}
+        AND "nenkincode" = #{年金コード_キー}
+        AND "hihokenshano" = #{被保番号_キー}
+        AND "dtnenkinhokenshacode" = #{年金保険者コード_キー}
+        AND "dtsakuseiymd" = #{作成年月日_キー}
+        AND "dttaishoy" = #{対象年_キー}
+    </delete>
+    
+    <!-- 「DB出力(非課税年金対象者)」の「編集仕様(UPDATE)」の「解除キー」と「解除」を参照し、DBに更新します。 -->
+    <insert id="新規_保存処理" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.houshold.HousholdUpdateParameter">
+        INSERT INTO
+        rgdb."DbT4037HikazeNenkinTaishosha"(
+                                            "nendo",
+                                            "shorikubun",
+                                            "taishom",
+                                            "kisonenkinno",
+                                            "genkisonenkinno",
+                                            "nenkincode",
+                                            "hihokenshano",
+                                            "torokukubun",
+                                            "dtrecordkubun",
+                                            "dtcitycode",
+                                            "dtnenkinhokenshacode",
+                                            "dttsuchinaiyocode",
+                                            "dtyobi1",
+                                            "dtseidocode",
+                                            "dtsakuseiymd",
+                                            "dtkisonenkinno",
+                                            "dtnenkincode",
+                                            "dtyobi2",
+                                            "dtbirthday",
+                                            "dtseibetsu",
+                                            "dtkanashimei",
+                                            "dtshiftcode1",
+                                            "dtkanjishimei",
+                                            "dtshiftcode2",
+                                            "dtyubinno",
+                                            "dtkanajusho",
+                                            "dtshiftcode3",
+                                            "dtkanjijusho",
+                                            "dtshiftcode4",
+                                            "dttaishoy",
+                                            "dtteiseihyoji",
+                                            "dtkakushukubun",
+                                            "dtshorikekka",
+                                            "dtyobi3",
+                                            "dtyobi4",
+                                            "dtkingaku1",
+                                            "dtkingakuyobi1",
+                                            "dtkingakuyobi2",
+                                            "dtyobi5",
+                                            "dtkyosainenkinshoshokigono"
+                                            )
+        VALUES(#{年度},
+               #{処理区分},
+               #{対象月},
+               #{基礎年金番号},
+               #{現基礎年金番号},
+               #{年金コード},
+               #{被保険者番号},
+               #{登録区分},
+               #{dtレコード区分},
+               #{dt市町村コード},
+               #{dtレコード区分},
+               #{dt市町村コード},
+               #{dt年金保険者コード},
+               #{dt通知内容コード},
+               #{dt予備１},
+               #{dt制度コード},
+               #{dt作成年月日},
+               #{dt基礎年金番号},
+               #{dt年金コード},
+               #{dt予備２},
+               #{dt生年月日},
+               #{dt性別},
+               #{dtカナ氏名},
+               #{dtシフトコード１},
+               #{dt漢字氏名},
+               #{dtシフトコード２},
+               #{dt郵便番号},
+               #{dtカナ住所},
+               #{dtシフトコード３},
+               #{dt漢字住所},
+               #{dtシフトコード４},
+               #{dt対象年},
+               #{dt訂正表示},
+               #{dt各種区分},
+               #{dt処理結果},
+               #{dt予備３},
+               #{dt予備４},
+               #{dt金額１},
+               #{dt金額予備１},
+               #{dt金額予備２},
+               #{dt予備５},
+               #{dt共済年金証書記号番号}
+               )
+    </insert>
+    
 </mapper>

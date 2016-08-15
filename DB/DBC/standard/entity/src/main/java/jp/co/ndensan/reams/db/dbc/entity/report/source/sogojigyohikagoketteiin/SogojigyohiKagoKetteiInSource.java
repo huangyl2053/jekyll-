@@ -5,9 +5,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
- * 総合事業費（経過措置）過誤決定通知書情報取込一覧表帳票Source
+ * 総合事業費（経過措置）過誤決定通知書情報取込一覧表帳票Source。
  *
- * @reamsid_L DBC-2550-010 fzou
+ * @reamsid_L DBC-2550-030 jianglaishen
  */
 public class SogojigyohiKagoKetteiInSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
