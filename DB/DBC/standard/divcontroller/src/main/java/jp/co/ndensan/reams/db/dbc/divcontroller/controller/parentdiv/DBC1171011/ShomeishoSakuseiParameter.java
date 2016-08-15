@@ -81,7 +81,7 @@ public class ShomeishoSakuseiParameter {
         boolean is国保連 = KEY_国保連からの情報を元に作成RAD.equals(div.getRadKokuhoren().getSelectedKey());
         param.set開始申請年月日((is国保連 || RString.isNullOrEmpty(div.getTxtShinseiDate().getFromValue().wareki().toDateString()))
                 ? FlexibleDate.EMPTY : new FlexibleDate(div.getTxtShinseiDate().getFromValue().toString()));
-        param.set終了申請年月日((is国保連 | RString.isNullOrEmpty(div.getTxtShinseiDate().getToValue().wareki().toDateString()))
+        param.set終了申請年月日((is国保連 || RString.isNullOrEmpty(div.getTxtShinseiDate().getToValue().wareki().toDateString()))
                 ? FlexibleDate.EMPTY : new FlexibleDate(div.getTxtShinseiDate().getToValue().toString()));
         param.set受取年月((is自己負担 || RString.isNullOrEmpty(div.getTxtUketoriDate().getValue().wareki().toDateString()))
                 ? FlexibleYearMonth.EMPTY
