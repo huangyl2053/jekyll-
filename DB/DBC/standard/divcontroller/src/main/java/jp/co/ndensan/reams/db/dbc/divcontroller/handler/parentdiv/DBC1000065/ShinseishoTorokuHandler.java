@@ -40,7 +40,7 @@ public class ShinseishoTorokuHandler {
     private static final int 八 = 8;
     private static final int 十二 = 12;
     private static final int INDEX_4 = 4;
-    private static final int 年度 = 2015;
+    private static final int 平成年度 = 2015;
     private static final RString 八月一日 = new RString("0801");
     private static final RString 七月三十一日 = new RString("0731");
     private static final ReportId 帳票ID = new ReportId("DBC100064_KijunShunyugakuTekiyoShinseisho");
@@ -249,14 +249,9 @@ public class ShinseishoTorokuHandler {
      * @return boolaean
      */
     public boolean 処理年度判定() {
-        return (Integer.valueOf(div.getTxtShoriNendo().getValue().toString().substring(0, INDEX_4)) <= 年度);
+        return (Integer.valueOf(div.getTxtShoriNendo().getValue().toString().substring(0, INDEX_4)) <= 平成年度);
     }
 
-    /**
-     * 申請書発行_抽出条件
-     *
-     *
-     */
     private List<KeyValueDataSource> get申請書発行_抽出条件() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (ShinseishoHakkoChushutsuJoken 申請書発行_抽出条件 : ShinseishoHakkoChushutsuJoken.values()) {
@@ -266,11 +261,6 @@ public class ShinseishoTorokuHandler {
         return dataSourceList;
     }
 
-    /**
-     * 申請書登録_抽出対象
-     *
-     *
-     */
     private List<KeyValueDataSource> get申請書登録_抽出対象() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (ShinseishoTorokuChushutsuTaisho 申請書登録_抽出対象 : ShinseishoTorokuChushutsuTaisho.values()) {
