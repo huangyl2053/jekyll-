@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.service.core.futanwariaisho;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho.FutanWariaiShoEntity;
+import jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho.FutanWariaiShoDivParameter;
 import jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho.FutanWariaiShoProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho.FutanWariaiShoReport;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -100,10 +100,10 @@ public class FutanWariaisho {
      *
      * @param 識別コード ShikibetsuCode
      * @param 被保険者番号 HihokenshaNo
-     * @param entity FutanWariaiShoEntity
+     * @param entity FutanWariaiShoDivParameter
      * @param flag RString
      */
-    public void getSourceData(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FutanWariaiShoEntity entity, RString flag) {
+    public void getSourceData(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FutanWariaiShoDivParameter entity, RString flag) {
         if (識別コード == null || 被保険者番号 == null || entity == null || flag == null) {
             throw new NullPointerException();
         }

@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class FutanWariaiShoEntity {
+public class FutanWariaiShoDivParameter {
 
     private FlexibleDate 交付年月日;
     private RString 被保険者番号;

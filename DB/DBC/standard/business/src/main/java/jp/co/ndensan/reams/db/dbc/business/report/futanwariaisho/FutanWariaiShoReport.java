@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class FutanWariaiShoReport extends
         Report<FutanWariaiShoSource> {
 
-    private final FutanWariaiShoEntity entity;
+    private final FutanWariaiShoDivParameter entity;
     private final NinshoshaSource 認証者ソースデータ;
     private final HihokenshaNo 被保険者番号;
     private final EditedKojin 編集後個人;
@@ -38,7 +38,7 @@ public class FutanWariaiShoReport extends
     /**
      * コンストラクタです。
      *
-     * @param entity FutanWariaiShoEntity
+     * @param entity FutanWariaiShoDivParameter
      * @param 認証者ソースデータ NinshoshaSource
      * @param 被保険者番号 HihokenshaNo
      * @param 編集後個人 EditedKojin
@@ -47,7 +47,7 @@ public class FutanWariaiShoReport extends
      * @param flag RString
      * @param 個人 List<IKojin>
      */
-    public FutanWariaiShoReport(FutanWariaiShoEntity entity, NinshoshaSource 認証者ソースデータ, HihokenshaNo 被保険者番号,
+    public FutanWariaiShoReport(FutanWariaiShoDivParameter entity, NinshoshaSource 認証者ソースデータ, HihokenshaNo 被保険者番号,
             EditedKojin 編集後個人, List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 利用者負担割合明細List, HokenshaNo 保険者コード取得,
             RString flag, List<IKojin> 個人) {
         this.entity = entity;
