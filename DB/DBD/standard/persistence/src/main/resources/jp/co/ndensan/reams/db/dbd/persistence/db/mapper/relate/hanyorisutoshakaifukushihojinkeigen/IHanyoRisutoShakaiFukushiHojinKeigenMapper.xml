@@ -1,0 +1,876 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-3900-030 mawy -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hanyorisutoshakaifukushihojinkeigen.IHanyoRisutoShakaiFukushiHojinKeigenMapper">
+    <resultMap id="resultMap_HanyoRisutoShakaiFukushiHoujinKeigenEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutoshakaifukushihojinkeigen.ShakaiFukushiHojinKeigenEntity" autoMapping="true">
+        <result property="被保険者台帳管理_市町村コード" column="被保険者台帳管理_市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者台帳管理_広域内住所地特例フラグ" column="被保険者台帳管理_広域内住所地特例フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者台帳管理_広住特措置元市町村コード" column="被保険者台帳管理_広住特措置元市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者台帳管理_被保険者番号" column="被保険者台帳管理_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者台帳管理_資格取得事由コード" column="被保険者台帳管理_資格取得事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者台帳管理_資格取得年月日" column="被保険者台帳管理_資格取得年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="被保険者台帳管理_資格取得届出年月日" column="被保険者台帳管理_資格取得届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="被保険者台帳管理_資格喪失事由コード" column="被保険者台帳管理_資格喪失事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者台帳管理_資格喪失年月日" column="被保険者台帳管理_資格喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="被保険者台帳管理_資格喪失届出年月日" column="被保険者台帳管理_資格喪失届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="被保険者台帳管理_被保険者区分コード" column="被保険者台帳管理_被保険者区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者台帳管理_住所地特例フラグ" column="被保険者台帳管理_住所地特例フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="医療保険加入状況_医療保険種別コード" column="医療保険加入状況_医療保険種別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="医療保険加入状況_医療保険者番号" column="医療保険加入状況_医療保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="医療保険加入状況_医療保険者名称" column="医療保険加入状況_医療保険者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="医療保険加入状況_医療保険記号番号" column="医療保険加入状況_医療保険記号番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回申請_認定調査委託先コード" column="今回申請_認定調査委託先コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="今回申請_認定調査員コード" column="今回申請_認定調査員コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="今回申請届出_申請届出者氏名" column="今回申請届出_申請届出者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回申請届出_申請届出者氏名カナ" column="今回申請届出_申請届出者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回申請届出_申請届出者郵便番号" column="今回申請届出_申請届出者郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回申請届出_申請届出者住所" column="今回申請届出_申請届出者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回申請届出_申請届出者電話番号" column="今回申請届出_申請届出者電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回申請届出_申請届出代行事業者番号" column="今回申請届出_申請届出代行事業者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="申請届出事業者_事業者名称" column="申請届出事業者_事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="申請届出事業者_事業者名称カナ" column="申請届出事業者_事業者名称カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回調査委託先_事業者名称" column="今回調査委託先_事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回調査委託先_事業者名称カナ" column="今回調査委託先_事業者名称カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回調査委託先_代表者名" column="今回調査委託先_代表者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回調査委託先_代表者名カナ" column="今回調査委託先_代表者名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回調査委託先_郵便番号" column="今回調査委託先_郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回調査委託先_住所" column="今回調査委託先_住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回調査委託先_電話番号" column="今回調査委託先_電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回調査委託先_状況フラグ" column="今回調査委託先_状況フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
+        <result property="今回調査員_調査員氏名" column="今回調査員_調査員氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回調査員_調査員氏名カナ" column="今回調査員_調査員氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回調査員_性別" column="今回調査員_性別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回調査員_郵便番号" column="今回調査員_郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回調査員_住所" column="今回調査員_住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回調査員_電話番号" column="今回調査員_電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回調査員_調査員資格" column="今回調査員_調査員資格" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回調査員_所属機関名称" column="今回調査員_所属機関名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回調査員_状況フラグ" column="今回調査員_状況フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
+        <result property="今回申請_主治医医療機関コード" column="今回申請_主治医医療機関コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回申請_主治医コード" column="今回申請_主治医コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回申請_厚労省IF識別コード" column="今回申請_厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回主治医医療機関_医療機関名称" column="今回主治医医療機関_医療機関名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回主治医医療機関_医療機関名称カナ" column="今回主治医医療機関_医療機関名称カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回主治医医療機関_代表者名" column="今回主治医医療機関_代表者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回主治医医療機関_代表者名カナ" column="今回主治医医療機関_代表者名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回主治医医療機関_郵便番号" column="今回主治医医療機関_郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回主治医医療機関_住所" column="今回主治医医療機関_住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回主治医医療機関_電話番号" column="今回主治医医療機関_電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回主治医医療機関_状況フラグ" column="今回主治医医療機関_状況フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
+        <result property="今回主治医_主治医氏名" column="今回主治医_主治医氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回主治医_主治医カナ" column="今回主治医_主治医カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回主治医_性別" column="今回主治医_性別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回主治医_診療科名称" column="今回主治医_診療科名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回主治医_状況フラグ" column="今回主治医_状況フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
+        <result property="今回一次判定結果_要介護認定一次判定結果コード" column="今回一次判定結果_要介護認定一次判定結果コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回一次判定結果_要介護認定一次判定年月日" column="今回一次判定結果_要介護認定一次判定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="今回調査依頼_認定調査依頼年月日" column="今回調査依頼_認定調査依頼年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="今回計画情報_認定調査予定年月日" column="今回計画情報_認定調査予定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="今回計画情報_認定審査会予定年月日" column="今回計画情報_認定審査会予定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="今回計画情報_主治医意見書登録予定年月日" column="今回計画情報_主治医意見書登録予定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="今回完了情報_認定調査完了年月日" column="今回完了情報_認定調査完了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="今回意見書作成依頼_主治医意見書作成依頼年月日" column="今回意見書作成依頼_主治医意見書作成依頼年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="今回意見書情報_主治医意見書受領年月日" column="今回意見書情報_主治医意見書受領年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="今回結果情報_介護認定審査会資料作成年月日" column="今回結果情報_介護認定審査会資料作成年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="今回結果情報_介護認定審査会意見" column="今回結果情報_介護認定審査会意見" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="受給者台帳_２号特定疾病コード" column="受給者台帳_２号特定疾病コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="受給者台帳_受給申請事由" column="受給者台帳_受給申請事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="受給者台帳_要支援者認定申請区分" column="受給者台帳_要支援者認定申請区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="受給者台帳_申請理由" column="受給者台帳_申請理由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="受給者台帳_届出者申請者関係コード" column="受給者台帳_届出者申請者関係コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="受給者台帳_届出者本人との関係" column="受給者台帳_届出者本人との関係" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="受給者台帳_受給申請年月日" column="受給者台帳_受給申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="受給者台帳_届出者申請者関係コード" column="受給者台帳_届出者申請者関係コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="受給者台帳_届出者本人との関係" column="受給者台帳_届出者本人との関係" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="受給者台帳_認定年月日" column="受給者台帳_認定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="受給者台帳_要介護認定状態区分コード" column="受給者台帳_要介護認定状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="受給者台帳_認定有効期間開始年月日" column="受給者台帳_認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="受給者台帳_認定有効期間終了年月日" column="受給者台帳_認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="受給者台帳_旧措置者フラグ" column="受給者台帳_旧措置者フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
+        <result property="受給者台帳_みなし要介護区分コード" column="受給者台帳_みなし要介護区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="受給者台帳_指定サービス種類01" column="受給者台帳_指定サービス種類01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="受給者台帳_指定サービス種類02" column="受給者台帳_指定サービス種類02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="受給者台帳_指定サービス種類03" column="受給者台帳_指定サービス種類03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="受給者台帳_指定サービス種類04" column="受給者台帳_指定サービス種類04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="受給者台帳_指定サービス種類05" column="受給者台帳_指定サービス種類05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="受給者台帳_指定サービス種類06" column="受給者台帳_指定サービス種類06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="受給者台帳_喪失年月日" column="受給者台帳_喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="受給者台帳_直近異動事由コード" column="受給者台帳_直近異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="受給者台帳_有効無効区分" column="受給者台帳_有効無効区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="受給者台帳_データ区分" column="受給者台帳_データ区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="受給者台帳_異動理由" column="受給者台帳_異動理由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="受給者台帳_削除事由コード" column="受給者台帳_削除事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="初回受給情報_受給申請年月日" column="初回受給情報_受給申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="初回受給情報_認定年月日" column="初回受給情報_認定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="初回受給情報_要介護認定状態区分コード" column="初回受給情報_要介護認定状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="初回受給情報_認定有効期間開始年月日" column="初回受給情報_認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="初回受給情報_認定有効期間終了年月日" column="初回受給情報_認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="初回受給情報_受給申請事由" column="初回受給情報_受給申請事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="初回受給情報_みなし要介護区分コード" column="初回受給情報_みなし要介護区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="初回受給情報_当初認定有効開始年月日" column="初回受給情報_当初認定有効開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="初回受給情報_当初認定有効終了年月日" column="初回受給情報_当初認定有効終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="初回申請_厚労省IF識別コード" column="初回申請_厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="初回申請_要支援者認定申請区分" column="初回申請_要支援者認定申請区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回受給情報_受給申請年月日" column="前回受給情報_受給申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="前回受給情報_認定年月日" column="前回受給情報_認定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="前回受給情報_要介護認定状態区分コード" column="前回受給情報_要介護認定状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回受給情報_認定有効期間開始年月日" column="前回受給情報_認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="前回受給情報_認定有効期間終了年月日" column="前回受給情報_認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="前回受給情報_受給申請事由" column="前回受給情報_受給申請事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回受給情報_みなし要介護区分コード" column="前回受給情報_みなし要介護区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回受給情報_当初認定有効開始年月日" column="前回受給情報_当初認定有効開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="前回受給情報_当初認定有効終了年月日" column="前回受給情報_当初認定有効終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="前回申請_厚労省IF識別コード" column="前回申請_厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回申請_要支援者認定申請区分" column="前回申請_要支援者認定申請区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前々回申請_厚労省IF識別コード" column="前々回申請_厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前々回申請_要支援者認定申請区分" column="前々回申請_要支援者認定申請区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前々回受給情報_受給申請年月日" column="前々回受給情報_受給申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="前々回受給情報_認定年月日" column="前々回受給情報_認定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="前々回受給情報_要支援者認定申請区分" column="前々回受給情報_要支援者認定申請区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前々回受給情報_要介護認定状態区分コード" column="前々回受給情報_要介護認定状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前々回受給情報_認定有効期間開始年月日" column="前々回受給情報_認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="前々回受給情報_認定有効期間終了年月日" column="前々回受給情報_認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="前々回受給情報_受給申請事由" column="前々回受給情報_受給申請事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前々回受給情報_みなし要介護区分コード" column="前々回受給情報_みなし要介護区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前々回受給情報_当初認定有効開始年月日" column="前々回受給情報_当初認定有効開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="前々回受給情報_当初認定有効終了年月日" column="前々回受給情報_当初認定有効終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="今回調査結果_基本_認定調査_障害高齢者の日常生活自立度コード" column="今回調査結果_基本_認定調査_障害高齢者の日常生活自立度コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="今回調査結果_基本_認定調査_認知症高齢者の日常生活自立度コード" column="今回調査結果_基本_認定調査_認知症高齢者の日常生活自立度コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="受給者台帳_支給限度単位数" column="受給者台帳_支給限度単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="受給者台帳_支給限度有効開始年月日" column="受給者台帳_支給限度有効開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="受給者台帳_支給限度有効終了年月日" column="受給者台帳_支給限度有効終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="受給者台帳_短期入所支給限度日数" column="受給者台帳_短期入所支給限度日数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="受給者台帳_短期入所支給限度開始年月日" column="受給者台帳_短期入所支給限度開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="受給者台帳_短期入所支給限度終了年月日" column="受給者台帳_短期入所支給限度終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="受給者台帳_当初認定有効開始年月日" column="受給者台帳_当初認定有効開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="受給者台帳_当初認定有効終了年月日" column="受給者台帳_当初認定有効終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="今回申請_延期通知発行年月日" column="今回申請_延期通知発行年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="今回申請_延期通知発行回数" column="今回申請_延期通知発行回数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="今回申請_延期見込期間開始年月日" column="今回申請_延期見込期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="今回申請_延期見込期間終了年月日" column="今回申請_延期見込期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="受給者台帳_受給資格証明書発行年月日１" column="受給者台帳_受給資格証明書発行年月日１" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="受給者台帳_受給資格証明書発行年月日２" column="受給者台帳_受給資格証明書発行年月日２" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="受給者台帳_資格取得前申請フラグ" column="受給者台帳_資格取得前申請フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="今回申請_指定医フラグ" column="今回申請_指定医フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設入所_入所施設コード" column="施設入所_入所施設コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="施設入所_入所年月日" column="施設入所_入所年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="施設入所_退所年月日" column="施設入所_退所年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="施設入所_入所施設種類" column="施設入所_入所施設種類" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="指定事業者_事業者名称" column="指定事業者_事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="除外他特適用施設_事業者名称" column="除外他特適用施設_事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="指定事業者_事業者名称カナ" column="指定事業者_事業者名称カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="除外他特適用施設_事業者名称カナ" column="除外他特適用施設_事業者名称カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="指定事業者_郵便番号" column="指定事業者_郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="除外他特適用施設_郵便番号" column="除外他特適用施設_郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="指定事業者_事業者住所" column="指定事業者_事業者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="除外他特適用施設_事業者住所" column="除外他特適用施設_事業者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="指定事業者代表者_代表者名" column="指定事業者代表者_代表者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="除外他特適用施設_代表者名称" column="除外他特適用施設_代表者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="指定事業者代表者_代表者名カナ" column="指定事業者代表者_代表者名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="除外他特適用施設_代表者名称カナ" column="除外他特適用施設_代表者名称カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="指定事業者代表者_代表者役職名" column="指定事業者代表者_代表者役職名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="除外他特適用施設_役職" column="除外他特適用施設_役職" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="指定事業者_電話番号" column="指定事業者_電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="除外他特適用施設_電話番号" column="除外他特適用施設_電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="指定事業者_ＦＡＸ番号" column="指定事業者_ＦＡＸ番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="除外他特適用施設_ＦＡＸ番号" column="除外他特適用施設_ＦＡＸ番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="指定事業者_所属人数" column="指定事業者_所属人数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="指定事業者_利用者数" column="指定事業者_利用者数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="指定事業者_有効開始日" column="指定事業者_有効開始日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="除外他特適用施設_有効開始年月日" column="除外他特適用施設_有効開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="指定事業者_有効終了日" column="指定事業者_有効終了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="除外他特適用施設_有効終了年月日" column="除外他特適用施設_有効終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="指定事業者_サービス実施地域" column="指定事業者_サービス実施地域" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="社会福祉法人等利用者負担軽減_確認番号" column="社会福祉法人等利用者負担軽減_確認番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="社会福祉法人等利用者負担軽減_申請年月日" column="社会福祉法人等利用者負担軽減_申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="社会福祉法人等利用者負担軽減_決定年月日" column="社会福祉法人等利用者負担軽減_決定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="社会福祉法人等利用者負担軽減_決定区分" column="社会福祉法人等利用者負担軽減_決定区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="社会福祉法人等利用者負担軽減_適用開始年月日" column="社会福祉法人等利用者負担軽減_適用開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="社会福祉法人等利用者負担軽減_適用終了年月日" column="社会福祉法人等利用者負担軽減_適用終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="社会福祉法人等利用者負担軽減_軽減率_分子" column="社会福祉法人等利用者負担軽減_軽減率_分子" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="社会福祉法人等利用者負担軽減_軽減率_分母" column="社会福祉法人等利用者負担軽減_軽減率_分母" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="社会福祉法人等利用者負担軽減_減免区分" column="社会福祉法人等利用者負担軽減_減免区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="社会福祉法人等利用者負担軽減_居宅サービス限定" column="社会福祉法人等利用者負担軽減_居宅サービス限定" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="社会福祉法人等利用者負担軽減_居住費_食費のみ" column="社会福祉法人等利用者負担軽減_居住費_食費のみ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="社会福祉法人等利用者負担軽減_旧措置者ユニット型個室のみ" column="社会福祉法人等利用者負担軽減_旧措置者ユニット型個室のみ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="総合事業対象者_被保険者番号" column="総合事業対象者_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="総合事業対象者_履歴番号" column="総合事業対象者_履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="総合事業対象者_適用開始年月日" column="総合事業対象者_適用開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="総合事業対象者_適用終了年月日" column="総合事業対象者_適用終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="総合事業対象者_チェックリスト実施日" column="総合事業対象者_チェックリスト実施日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="総合事業対象者_決定年月日" column="総合事業対象者_決定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="居宅届出_届出区分" column="居宅届出_届出区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="事業者作成_作成区分コード" column="事業者作成_作成区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="事業者作成_計画事業者番号" column="事業者作成_計画事業者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="計画事業者_事業者名称" column="計画事業者_事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="計画事業者_事業者名称カナ" column="計画事業者_事業者名称カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="計画事業者代表者_代表者名" column="計画事業者代表者_代表者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="計画事業者代表者_代表者名カナ" column="計画事業者代表者_代表者名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="事業者作成_適用開始年月日" column="事業者作成_適用開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="事業者作成_適用終了年月日" column="事業者作成_適用終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="居宅届出_届出年月日" column="居宅届出_届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="自己作成_計画作成年月日" column="自己作成_計画作成年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="自己作成_計画変更年月日" column="自己作成_計画変更年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="自己作成_計画変更事由" column="自己作成_計画変更事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <association property="atesakiEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
+    </resultMap>
+     <select resultOrdered="true" id="get汎用リスト"
+            resultMap="resultMap_HanyoRisutoShakaiFukushiHoujinKeigenEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyorisutoshakaifukushihojinkeigen.ShakaiFukushiHojinKeigenMybatisParameter"
+             fetchSize="500">
+     WITH																								
+	最新介護事業者  AS 																					
+	(																							
+	SELECT																							
+		dbT7060."jigyoshaNo",																					
+		dbT7060."jigyoshaName",   
+                dbT7060."jigyoshaNameKana",   
+                dbT7060."jigyoshaAddress",    
+                dbT7060."telNo",              
+                dbT7060."faxNo",              
+                dbT7060."shozokuNinzu",       
+                dbT7060."riyoshaSu",          
+                dbT7060."yukoKaishiYMD",      
+                dbT7060."yukoShuryoYMD",      
+                dbT7060."serviceJisshiChiiki"																					
+	FROM																							
+		rgdb."DbT7060KaigoJigyosha"  AS  dbT7060																						
+	WHERE																							
+		NOT EXISTS (																						
+			SELECT  1																					
+			FROM																					
+				rgdb."DbT7060KaigoJigyosha"  AS  dbT7060_2																				
+			WHERE	
+                            dbT7060."jigyoshaNo" = dbT7060_2."jigyoshaNo"
+                            AND dbT7060."yukoKaishiYMD" <![CDATA[<]]> dbT7060_2."yukoKaishiYMD"																			
+		)																						
+	), 																							
+	受給者台帳枝番MAX AS                             
+        ( 
+          SELECT
+            * 
+          FROM
+            ( 
+              SELECT
+                * ,
+                row_number() OVER (PARTITION BY "hihokenshaNo", "rirekiNo" ORDER BY "edaban" DESC) AS 受給者台帳_番号 
+              FROM
+                rgdb."DbT4001JukyushaDaicho"
+            ) AS 受給者台帳2 
+          WHERE
+            受給者台帳2.受給者台帳_番号 = 1
+        ),
+        履歴番号MAX AS
+        (
+          SELECT
+           *
+          FROM
+          ( 
+              SELECT
+                * ,
+                row_number() OVER (PARTITION BY "shoKisaiHokenshaNo", "hihokenshaNo" ORDER BY "rirekiNo" DESC) AS dbT4017_履歴番号 
+              FROM
+                rgdb."DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"
+           ) AS dbT4017
+           WHERE
+              dbT4017.dbT4017_履歴番号 = 1
+         )																						
+																								
+	SELECT																							
+            最新被保台帳."shichosonCode" AS 被保険者台帳管理_市町村コード, 
+            最新被保台帳."koikinaiJushochiTokureiFlag" AS 被保険者台帳管理_広域内住所地特例フラグ, 
+            最新被保台帳."koikinaiTokureiSochimotoShichosonCode" AS 被保険者台帳管理_広住特措置元市町村コード, 
+            最新被保台帳."hihokenshaNo" AS 被保険者台帳管理_被保険者番号, 
+            最新被保台帳."shikakuShutokuJiyuCode" AS 被保険者台帳管理_資格取得事由コード, 
+            最新被保台帳."shikakuShutokuYMD" AS 被保険者台帳管理_資格取得年月日, 
+            最新被保台帳."shikakuShutokuTodokedeYMD" AS 被保険者台帳管理_資格取得届出年月日, 
+            最新被保台帳."shikakuSoshitsuJiyuCode" AS 被保険者台帳管理_資格喪失事由コード, 
+            最新被保台帳."shikakuSoshitsuYMD" AS 被保険者台帳管理_資格喪失年月日, 
+            最新被保台帳."shikakuSoshitsuTodokedeYMD" AS 被保険者台帳管理_資格喪失届出年月日, 
+            最新被保台帳."hihokennshaKubunCode" AS 被保険者台帳管理_被保険者区分コード, 
+            最新被保台帳."jushochiTokureiFlag" AS 被保険者台帳管理_住所地特例フラグ, 
+            国保資格情報."shikakuShutokuYMD" AS 国保資格情報_資格取得日, 
+            国保資格情報."shikakuSoshitsuYMD" AS 国保資格情報_資格喪失日, 
+            医療保険加入状況."iryoHokenShubetsuCode" AS 医療保険加入状況_医療保険種別コード, 
+            医療保険加入状況."iryoHokenshaNo" AS 医療保険加入状況_医療保険者番号, 
+            医療保険加入状況."iryoHokenshaMeisho" AS 医療保険加入状況_医療保険者名称, 
+            医療保険加入状況."iryoHokenKigoNo" AS 医療保険加入状況_医療保険記号番号, 
+            受給者台帳."nigoTokuteiShippeiCode" AS 受給者台帳_２号特定疾病コード, 
+            受給者台帳."jukyuShinseiJiyu" AS 受給者台帳_受給申請事由,
+            CASE WHEN 受給者台帳."yoshienshaNinteiShinseiFlag" = True THEN '1' ELSE '0' END AS 受給者台帳_要支援者認定申請区分,
+            受給者台帳."shinseiRiyu" AS 受給者台帳_申請理由, 
+            受給者台帳."shinseishaKankeiCode" AS  受給者台帳_届出者申請者関係コード, 
+            受給者台帳."homninKankei" AS 受給者台帳_届出者本人との関係, 
+            受給者台帳."jukyuShinseiYMD" AS 受給者台帳_受給申請年月日, 
+            受給者台帳."ninteiYMD" AS 受給者台帳_認定年月日, 
+            CASE WHEN 前々回受給情報."yoshienshaNinteiShinseiFlag" = True THEN '1' ELSE '0' END AS 前々回受給情報_要支援者認定申請区分,
+            今回申請届出."shinseiTodokedeshaShimei" AS 今回申請届出_申請届出者氏名 ,
+            今回申請届出."shinseiTodokedeshaKanaShimei" AS 今回申請届出_申請届出者氏名カナ ,
+            申請届出事業者."jigyoshaName" AS 申請届出事業者_事業者名称 ,
+            申請届出事業者."jigyoshaNameKana" AS 申請届出事業者_事業者名称カナ ,
+            今回申請届出."shinseiTodokedeshaYubinNo" AS 今回申請届出_申請届出者郵便番号 ,
+            今回申請届出."shinseiTodokedeshaJusho" AS 今回申請届出_申請届出者住所 ,
+            今回申請届出."shinseiTodokedeshaTelNo" AS 今回申請届出_申請届出者電話番号 ,
+            今回申請届出."shinseiTodokedeDaikoJigyoshaNo" AS 今回申請届出_申請届出代行事業者番号 ,
+            今回調査委託先."jigyoshaMeisho" AS 今回調査委託先_事業者名称 ,
+            今回調査委託先."jigyoshaMeishoKana" AS 今回調査委託先_事業者名称カナ ,
+            今回調査委託先."daihyoshaName" AS 今回調査委託先_代表者名 ,
+            今回調査委託先."daihyoshaNameKana" AS 今回調査委託先_代表者名カナ ,
+            今回調査委託先."yubinNo" AS 今回調査委託先_郵便番号 ,
+            今回調査委託先."jusho" AS 今回調査委託先_住所 ,
+            今回調査委託先."telNo" AS 今回調査委託先_電話番号 ,
+            今回調査委託先."jokyoFlag" AS 今回調査委託先_状況フラグ,
+            今回調査員."chosainShimei" AS 今回調査員_調査員氏名,
+            今回調査員."chosainKanaShimei" AS 今回調査員_調査員氏名カナ,
+            今回調査員."seibetsu" AS 今回調査員_性別,
+            今回調査員."yubinNo" AS 今回調査員_郵便番号,
+            今回調査員."jusho" AS 今回調査員_住所,
+            今回調査員."telNo" AS 今回調査員_電話番号,
+            今回調査員."chosainShikaku" AS 今回調査員_調査員資格,
+            今回調査員."shozokuKikanName" AS 今回調査員_所属機関名称,
+            今回調査員."jokyoFlag" AS 今回調査員_状況フラグ,
+            今回申請."shujiiIryokikanCode" AS 今回申請_主治医医療機関コード,
+            今回申請."shujiiCode" AS 今回申請_主治医コード,
+            今回主治医医療機関."iryoKikanMeisho" AS 今回主治医医療機関_医療機関名称,
+            今回主治医医療機関."iryoKikanMeishoKana" AS 今回主治医医療機関_医療機関名称カナ,
+            今回主治医医療機関."daihyoshaName" AS 今回主治医医療機関_代表者名,
+            今回主治医医療機関."daihyoshaNameKana" AS 今回主治医医療機関_代表者名カナ,
+            今回主治医医療機関."yubinNo" AS 今回主治医医療機関_郵便番号,
+            今回主治医医療機関."jusho" AS 今回主治医医療機関_住所,
+            今回主治医医療機関."telNo" AS 今回主治医医療機関_電話番号,
+            今回主治医医療機関."jokyoFlag" AS 今回主治医医療機関_状況フラグ,
+            今回主治医."shujiiName" AS 今回主治医_主治医氏名,
+            今回主治医."shujiiKana" AS 今回主治医_主治医カナ,
+            今回主治医."seibetsu" AS 今回主治医_性別,
+            今回主治医."shinryokaName" AS 今回主治医_診療科名称,
+            今回主治医."jokyoFlag" AS 今回主治医_状況フラグ,
+            今回申請."koroshoIfShikibetsuCode" AS 今回申請_厚労省IF識別コード,
+            今回申請."ninteiChosaItakusakiCode" AS 今回申請_認定調査委託先コード,
+            今回申請."ninteiChosainCode" AS 今回申請_認定調査員コード,
+            今回一次判定結果."ichijiHanteiKekkaCode" AS 今回一次判定結果_要介護認定一次判定結果コード,
+            今回調査依頼."ninteichosaIraiYMD" AS 今回調査依頼_認定調査依頼年月日,
+            今回計画情報."ninteichosaYoteiYMD" AS 今回計画情報_認定調査予定年月日,
+            今回完了情報."ninteichosaKanryoYMD" AS 今回完了情報_認定調査完了年月日,
+            今回意見書作成依頼."ikenshoSakuseiIraiYMD" AS 今回意見書作成依頼_主治医意見書作成依頼年月日,
+            今回計画情報."ikenshoTorokuYoteiYMD" AS 今回計画情報_主治医意見書登録予定年月日,
+            今回意見書情報."ikenshoJuryoYMD" AS 今回意見書情報_主治医意見書受領年月日,
+            今回結果情報."shinsakaiShiryoSakuseiYMD" AS 今回結果情報_介護認定審査会資料作成年月日,
+            今回計画情報."ninteiShinsakaiYoteiYMD" AS 今回計画情報_認定審査会予定年月日,
+            今回一次判定結果."ichijiHanteiYMD" AS 今回一次判定結果_要介護認定一次判定年月日,
+            受給者台帳."yokaigoJotaiKubunCode" AS 受給者台帳_要介護認定状態区分コード,
+            受給者台帳."ninteiYukoKikanKaishiYMD" AS 受給者台帳_認定有効期間開始年月日,
+            受給者台帳."ninteiYukoKikanShuryoYMD" AS 受給者台帳_認定有効期間終了年月日,
+            受給者台帳."kyuSochishaFlag" AS 受給者台帳_旧措置者フラグ,
+            受給者台帳."minashiCode" AS 受給者台帳_みなし要介護区分コード,
+            今回結果情報."shinsakaiIken" AS 今回結果情報_介護認定審査会意見,
+            受給者台帳."shiteiServiceShurui01" AS 受給者台帳_指定サービス種類01,
+            受給者台帳."shiteiServiceShurui02" AS 受給者台帳_指定サービス種類02,
+            受給者台帳."shiteiServiceShurui03" AS 受給者台帳_指定サービス種類03,
+            受給者台帳."shiteiServiceShurui04" AS 受給者台帳_指定サービス種類04,
+            受給者台帳."shiteiServiceShurui05" AS 受給者台帳_指定サービス種類05,
+            受給者台帳."shiteiServiceShurui06" AS 受給者台帳_指定サービス種類06,
+            受給者台帳."soshitsuYMD" AS 受給者台帳_喪失年月日,
+            受給者台帳."chokkinIdoJiyuCode" AS 受給者台帳_直近異動事由コード,
+            受給者台帳."yukoMukoKubun" AS 受給者台帳_有効無効区分,
+            受給者台帳."dataKubun" AS 受給者台帳_データ区分,
+            受給者台帳."idoRiyu" AS 受給者台帳_異動理由,
+            受給者台帳."sakujoJiyuCode" AS 受給者台帳_削除事由コード,
+            初回受給情報."jukyuShinseiYMD" AS 初回受給情報_受給申請年月日,
+            初回受給情報."ninteiYMD" AS 初回受給情報_認定年月日,
+            初回申請."koroshoIfShikibetsuCode" AS 初回申請_厚労省IF識別コード,
+            初回受給情報."yokaigoJotaiKubunCode" AS 初回受給情報_要介護認定状態区分コード,
+            初回受給情報."ninteiYukoKikanKaishiYMD" AS 初回受給情報_認定有効期間開始年月日,
+            初回受給情報."ninteiYukoKikanShuryoYMD" AS 初回受給情報_認定有効期間終了年月日,
+            初回受給情報."jukyuShinseiJiyu" AS 初回受給情報_受給申請事由,
+            初回受給情報."minashiCode" AS 初回受給情報_みなし要介護区分コード,
+            初回受給情報."toshoNinteiYukoKaishiYMD" AS 初回受給情報_当初認定有効開始年月日,
+            初回受給情報."toshoNinteiYukoShuryoYMD" AS 初回受給情報_当初認定有効終了年月日,
+            初回申請."shienShinseiKubun" AS 初回申請_要支援者認定申請区分,
+            前回受給情報."jukyuShinseiYMD" AS 前回受給情報_受給申請年月日,
+            前回受給情報."ninteiYMD" AS 前回受給情報_認定年月日,
+            前回申請."koroshoIfShikibetsuCode" AS 前回申請_厚労省IF識別コード,
+            前回受給情報."yokaigoJotaiKubunCode" AS 前回受給情報_要介護認定状態区分コード,
+            前回受給情報."ninteiYukoKikanKaishiYMD" AS 前回受給情報_認定有効期間開始年月日,
+            前回受給情報."ninteiYukoKikanShuryoYMD" AS 前回受給情報_認定有効期間終了年月日,
+            前回受給情報."jukyuShinseiJiyu" AS 前回受給情報_受給申請事由,
+            前回受給情報."minashiCode" AS 前回受給情報_みなし要介護区分コード,
+            前回受給情報."toshoNinteiYukoKaishiYMD" AS 前回受給情報_当初認定有効開始年月日,
+            前回受給情報."toshoNinteiYukoShuryoYMD" AS 前回受給情報_当初認定有効終了年月日,
+            前回申請."shienShinseiKubun" AS 前回申請_要支援者認定申請区分,
+            前々回受給情報."jukyuShinseiYMD" AS 前々回受給情報_受給申請年月日,
+            前々回受給情報."ninteiYMD" AS 前々回受給情報_認定年月日,
+            前々回申請."koroshoIfShikibetsuCode" AS 前々回申請_厚労省IF識別コード,
+            前々回受給情報."yokaigoJotaiKubunCode" AS 前々回受給情報_要介護認定状態区分コード,
+            前々回受給情報."ninteiYukoKikanKaishiYMD" AS 前々回受給情報_認定有効期間開始年月日,
+            前々回受給情報."ninteiYukoKikanShuryoYMD" AS 前々回受給情報_認定有効期間終了年月日,
+            前々回受給情報."jukyuShinseiJiyu" AS 前々回受給情報_受給申請事由,
+            前々回申請."shienShinseiKubun" AS 前々回申請_要支援者認定申請区分,
+            前々回受給情報."minashiCode" AS 前々回受給情報_みなし要介護区分コード,
+            前々回受給情報."toshoNinteiYukoKaishiYMD" AS 前々回受給情報_当初認定有効開始年月日,
+            前々回受給情報."toshoNinteiYukoShuryoYMD" AS 前々回受給情報_当初認定有効終了年月日,
+            今回調査結果_基本."shogaiNichijoSeikatsuJiritsudoCode" AS 今回調査結果_基本_認定調査_障害高齢者の日常生活自立度コード,
+            今回調査結果_基本."ninchishoNichijoSeikatsuJiritsudoCode" AS 今回調査結果_基本_認定調査_認知症高齢者の日常生活自立度コード,
+            受給者台帳."shikyuGendoTanisu" AS 受給者台帳_支給限度単位数,
+            受給者台帳."shikyuGendoKaishiYMD" AS 受給者台帳_支給限度有効開始年月日,
+            受給者台帳."shikyuGendoShuryoYMD" AS 受給者台帳_支給限度有効終了年月日,
+            受給者台帳."tankiSikyuGendoNissu" AS 受給者台帳_短期入所支給限度日数,
+            受給者台帳."tankiShikyuGendoKaishiYMD" AS 受給者台帳_短期入所支給限度開始年月日,
+            受給者台帳."tankiShikyuGendoShuryoYMD" AS 受給者台帳_短期入所支給限度終了年月日,
+            受給者台帳."toshoNinteiYukoKaishiYMD" AS 受給者台帳_当初認定有効開始年月日,
+            受給者台帳."toshoNinteiYukoShuryoYMD" AS 受給者台帳_当初認定有効終了年月日,
+            今回申請."enkiTsuchiHakkoYMD" AS 今回申請_延期通知発行年月日,
+            今回申請."enkiTsuchiHakkoKaisu" AS 今回申請_延期通知発行回数,
+            今回申請."enkiMikomiKaishiYMD" AS 今回申請_延期見込期間開始年月日,
+            今回申請."enkiMikomiShuryoYMD" AS 今回申請_延期見込期間終了年月日,
+            受給者台帳."jukyuShikakuShomeishoHakkoYMD1" AS 受給者台帳_受給資格証明書発行年月日１,
+            受給者台帳."jukyuShikakuShomeishoHakkoYMD2" AS 受給者台帳_受給資格証明書発行年月日２,
+            受給者台帳."shikakuShutokuMaeShinseiFlag" AS 受給者台帳_資格取得前申請フラグ,
+            今回申請."shiteiiFlag" AS 今回申請_指定医フラグ,
+            施設入所."nyushoShisetsuCode" AS 施設入所_入所施設コード,
+            施設入所."nyushoYMD" AS 施設入所_入所年月日,
+            施設入所."taishoYMD" AS 施設入所_退所年月日,
+            施設入所."nyushoShisetsuShurui" AS 施設入所_入所施設種類,
+            指定事業者."jigyoshaName" AS 指定事業者_事業者名称,
+            除外他特適用施設."jigyoshaMeisho" AS 除外他特適用施設_事業者名称,
+            指定事業者."jigyoshaNameKana" AS 指定事業者_事業者名称カナ,
+            除外他特適用施設."jigyoshaKanaMeisho" AS 除外他特適用施設_事業者名称カナ,
+            指定事業者."yubinNo" AS 指定事業者_郵便番号,
+            除外他特適用施設."yubinNo" AS 除外他特適用施設_郵便番号,
+            指定事業者."jigyoshaAddress" AS 指定事業者_事業者住所,
+            除外他特適用施設."jigyoshaJusho" AS 除外他特適用施設_事業者住所,
+            指定事業者代表者."daihyoshaShimei" AS 指定事業者代表者_代表者名,
+            除外他特適用施設."daihyoshaMeisho" AS 除外他特適用施設_代表者名称,
+            指定事業者代表者."daihyoshaKanaShimei" AS 指定事業者代表者_代表者名カナ,
+            除外他特適用施設."daihyoshaKanaMeisho" AS 除外他特適用施設_代表者名称カナ,
+            指定事業者代表者."daihyoshaYakushokuMei" AS 指定事業者代表者_代表者役職名,
+            除外他特適用施設."yakushoku" AS 除外他特適用施設_役職,
+            指定事業者."telNo" AS 指定事業者_電話番号,
+            除外他特適用施設."telNo" AS 除外他特適用施設_電話番号,
+            指定事業者."faxNo" AS 指定事業者_ＦＡＸ番号,
+            除外他特適用施設."faxNo" AS 除外他特適用施設_ＦＡＸ番号,
+            指定事業者."shozokuNinzu" AS 指定事業者_所属人数,
+            指定事業者."riyoshaSu" AS 指定事業者_利用者数,
+            指定事業者."yukoKaishiYMD" AS 指定事業者_有効開始日,
+            除外他特適用施設."yukoKaishiYMD" AS 除外他特適用施設_有効開始年月日,
+            指定事業者."yukoShuryoYMD" AS 指定事業者_有効終了日,
+            除外他特適用施設."yukoShuryoYMD" AS 除外他特適用施設_有効終了年月日,
+            指定事業者."serviceJisshiChiiki" AS 指定事業者_サービス実施地域,
+            社会福祉法人等利用者負担軽減."kakuninNo" AS 社会福祉法人等利用者負担軽減_確認番号,
+            社会福祉法人等利用者負担軽減."shinseiYMD" AS 社会福祉法人等利用者負担軽減_申請年月日,
+            社会福祉法人等利用者負担軽減."ketteiYMD" AS 社会福祉法人等利用者負担軽減_決定年月日,
+            社会福祉法人等利用者負担軽減."ketteiKubun" AS 社会福祉法人等利用者負担軽減_決定区分,
+            社会福祉法人等利用者負担軽減."tekiyoKaishiYMD" AS 社会福祉法人等利用者負担軽減_適用開始年月日,
+            社会福祉法人等利用者負担軽減."tekiyoShuryoYMD" AS 社会福祉法人等利用者負担軽減_適用終了年月日,
+            社会福祉法人等利用者負担軽減."keigenritsu_Bunshi" AS 社会福祉法人等利用者負担軽減_軽減率_分子,
+            社会福祉法人等利用者負担軽減."keigenritsu_Bumbo" AS 社会福祉法人等利用者負担軽減_軽減率_分母,
+            社会福祉法人等利用者負担軽減."gemmenKubun" AS 社会福祉法人等利用者負担軽減_減免区分,
+            社会福祉法人等利用者負担軽減."kyotakuServiceGentei" AS 社会福祉法人等利用者負担軽減_居宅サービス限定,
+            社会福祉法人等利用者負担軽減."kyojuhiShokuhiNomi" AS 社会福祉法人等利用者負担軽減_居住費_食費のみ,
+            社会福祉法人等利用者負担軽減."kyusochishaUnitTypeKoshitsuNomi" AS 社会福祉法人等利用者負担軽減_旧措置者ユニット型個室のみ,
+            総合事業対象者."hihokenshaNo" AS 総合事業対象者_被保険者番号,
+            総合事業対象者."rirekiNo" AS 総合事業対象者_履歴番号,
+            総合事業対象者."tekiyoKaishiYMD" AS 総合事業対象者_適用開始年月日,
+            総合事業対象者."tekiyoShuryoYMD" AS 総合事業対象者_適用終了年月日,
+            総合事業対象者."checklistJisshiYMD" AS 総合事業対象者_チェックリスト実施日,
+            総合事業対象者."ketteiYMD" AS 総合事業対象者_決定年月日,
+            居宅届出."todokedeKubun" AS 居宅届出_届出区分,
+            事業者作成."sakuseiKubunCode" AS 事業者作成_作成区分コード,
+            事業者作成."keikakuJigyoshaNo" AS 事業者作成_計画事業者番号,
+            計画事業者."jigyoshaName" AS 計画事業者_事業者名称,
+            計画事業者."jigyoshaNameKana" AS 計画事業者_事業者名称カナ,
+            計画事業者代表者."daihyoshaShimei" AS 計画事業者代表者_代表者名,
+            計画事業者代表者."daihyoshaKanaShimei" AS 計画事業者代表者_代表者名カナ,
+            事業者作成."tekiyoKaishiYMD" AS 事業者作成_適用開始年月日,
+            事業者作成."tekiyoShuryoYMD" AS 事業者作成_適用終了年月日,
+            居宅届出."todokedeYMD" AS 居宅届出_届出年月日,
+            自己作成."keikakuSakuseiYMD" AS 自己作成_計画作成年月日,
+            自己作成."keikakuHenkoYMD" AS 自己作成_計画変更年月日,
+            自己作成."keikakuHenkoJiyu" AS 自己作成_計画変更事由,
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+            , <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />																						
+	FROM																							
+		rgdb."DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen" AS 社会福祉法人等利用者負担軽減																				
+																								
+		INNER  JOIN																						
+			rgdb."DbV1001HihokenshaDaicho"  AS  最新被保台帳																					
+			ON  最新被保台帳."hihokenshaNo" = 社会福祉法人等利用者負担軽減."hihokenshaNo"																					
+																								
+		INNER JOIN																											
+                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+                AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
+                ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = 最新被保台帳."shikibetsuCode"
+
+                INNER JOIN
+                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" /> AS "Atesaki"
+                ON "Atesaki"."shikibetsuCode" = 最新被保台帳."shikibetsuCode"																					
+																								
+		LEFT JOIN rgdb."DbV4001JukyushaDaicho" As 受給者台帳																						
+			ON  最新被保台帳."hihokenshaNo" = 受給者台帳."hihokenshaNo"																					
+																								
+		LEFT  JOIN (																						
+			SELECT																					
+				I."shikibetsuCode",																				
+				I."iryoHokenShubetsuCode",
+                                I."iryoHokenshaNo",
+                                I."iryoHokenshaMeisho", 
+                                I."iryoHokenKigoNo" 																				
+			FROM																					
+				rgdb."DbT1008IryohokenKanyuJokyo" I																				
+			WHERE																					
+				NOT EXISTS (																				
+					SELECT  1																			
+					FROM																			
+						rgdb."DbT1008IryohokenKanyuJokyo" I2																		
+					WHERE																			
+						I."shikibetsuCode" = I2."shikibetsuCode" AND 																		
+						I."rirekiNo" <![CDATA[<]]> I2."rirekiNo"																		
+					)																			
+			) AS 医療保険加入状況																					
+			ON  医療保険加入状況."shikibetsuCode" = 最新被保台帳."shikibetsuCode"																					
+																								
+		INNER  JOIN																						
+			rgdb."DbT4101NinteiShinseiJoho"  AS  今回申請																					
+			ON  今回申請."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																					
+																								
+		LEFT  JOIN																						
+			rgdb."DbT4120ShinseitodokedeJoho"  AS  今回申請届出																					
+			ON  今回申請届出."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																					
+																								
+		LEFT  JOIN																						
+			最新介護事業者  AS  申請届出事業者																					
+			ON  申請届出事業者."jigyoshaNo" = 今回申請届出."shinseiTodokedeDaikoJigyoshaNo"																					
+																								
+		LEFT  JOIN																						
+			rgdb."DbT4910NinteichosaItakusakiJoho"  AS  今回調査委託先																					
+			ON  今回調査委託先."shichosonCode" = 受給者台帳."shichosonCode"																					
+			    今回調査委託先."ninteichosaItakusakiCode" = 今回申請情報."ninteichosaItakusakiCode"																					
+																								
+		LEFT  JOIN																						
+			rgdb."DbT4913ChosainJoho"  AS  今回調査員																					
+			ON  今回調査員."shichosonCode" = 受給者台帳."shichosonCode"																					
+			    今回調査員."ninteichosaItakusakiCode" = 今回申請."ninteichosaItakusakiCode"																					
+			    今回調査員."ninteiChosainCode" = 今回申請."ninteiChosainCode"																					
+																								
+		LEFT  JOIN																						
+			rgdb."DbT4911ShujiiIryoKikanJoho"  AS  今回主治医医療機関																					
+			ON  今回主治医医療機関."shichosonCode" = 受給者台帳."shichosonCode"																					
+			    今回主治医医療機関."shujiiIryokikanCode" = 今回申請."shujiiIryokikanCode"																					
+																								
+		LEFT  JOIN																						
+			rgdb."DbT4912ShujiiJoho"  AS  今回主治医																					
+			ON  今回主治医."shichosonCode" = 受給者台帳."shichosonCode"																					
+			    今回主治医."shujiiIryokikanCode" = 今回申請."shujiiIryokikanCode"																					
+			    今回主治医."shujiiCode" =  今回申請."shujiiCode"																					
+																								
+		LEFT  JOIN																						
+			rgdb."DbT4116IchijiHanteiKekkaJoho"   AS  今回一次判定結果																					
+			ON  今回一次判定結果."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																					
+																								
+		LEFT  JOIN  (																						
+			SELECT																					
+				dbT4301."shinseishoKanriNo"																				
+				dbT4301."ikenshoIraiRirekiNo"																				
+				dbT4301."ikenshoSakuseiIraiYMD"																				
+			FROM																					
+				rgdb."DbT4301ShujiiIkenshoIraiJoho"  AS  dbT4301																				
+			WHERE																					
+				NOT  EXISTS  (																				
+					SELECT  1																			
+					FROM 																			
+						rgdb."DbT4301ShujiiIkenshoIraiJoho"  AS  dbT4301_2																		
+					WHERE																			
+						dbT4301."shinseishoKanriNo" = dbT4301_2."shinseishoKanriNo" AND 																		
+						dbT4301."ikenshoIraiRirekiNo" <![CDATA[<]]> dbT4301_2."ikenshoIraiRirekiNo"																		
+					)																			
+				)  AS  今回意見書作成依頼																				
+			ON  今回意見書作成依頼."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																					
+																								
+		LEFT  JOIN																						
+			rgdb."DbT4302ShujiiIkenshoJoho"  AS  今回意見書情報																					
+			ON  今回意見書情報."shinseishoKanriNo" = 今回意見書作成依頼."shinseishoKanriNo"																					
+			    今回意見書情報."ikenshoIraiRirekiNo" = 今回意見書作成依頼."ikenshoIraiRirekiNo"																					
+																								
+		LEFT  JOIN  (																						
+			SELECT																					
+				dbT4201."shinseishoKanriNo"																				
+				dbT4201."ninteichosaIraiRirekiNo"																				
+				dbT4201."ninteichosaIraiYMD"																				
+			FROM																					
+				rgdb."DbT4201NinteichosaIraiJoho"  AS  dbT4201																				
+			WHERE																					
+				NOT  EXISTS  (																				
+					SELECT  1																			
+					FROM 																			
+						rgdb."DbT4201NinteichosaIraiJoho"  AS  dbT4201_2																		
+					WHERE																			
+						dbT4201."shinseishoKanriNo" = dbT4201_2."shinseishoKanriNo" AND 																		
+						dbT4201."ninteichosaIraiRirekiNo" <![CDATA[<]]> dbT4201_2."ninteichosaIraiRirekiNo"																		
+					)																			
+				)  AS  今回調査依頼																				
+			ON  今回調査依頼."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																					
+																								
+		LEFT  JOIN																						
+			rgdb."DbT4203NinteichosahyoKihonChosa"  AS  今回調査結果_基本																					
+			ON  今回調査結果_基本."shinseishoKanriNo" = 今回調査依頼."shinseishoKanriNo"																					
+			    今回調査結果_基本."ninteichosaIraiRirekiNo" = 今回調査依頼."ninteichosaIraiRirekiNo"																					
+																								
+		LEFT  JOIN  (																						
+			SELECT																					
+				*																				
+			FROM (																					
+				SELECT																				
+					dbT4202."shinseishoKanriNo",																			
+					dbT4202."ninteichosaIraiRirekiNo",																			
+					dbT4202."ninteichosaJuryoYMD",																			
+					ROW_NUMBER() OVER (PARTITION  BY "shinseishoKanriNo", "ninteichosaIraiRirekiNo") AS 概況調査_番号																			
+				FROM																				
+					rgdb."DbT4202NinteichosahyoGaikyoChosa"																			
+				)																				
+			WHERE																					
+				概況調査_番号 = 1																				
+			) AS 今回調査結果_概況																					
+		ON  今回調査結果_概況."shinseishoKanriNo" = 今回調査依頼."shinseishoKanriNo"																						
+		    今回調査結果_概況."ninteichosaIraiRirekiNo" = 今回調査依頼."ninteichosaIraiRirekiNo"																						
+																								
+		LEFT  JOIN																						
+			rgdb."DbT4123NinteiKeikakuJoho"  AS  今回計画情報																					
+			ON  今回計画情報."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																					
+																								
+		LEFT  JOIN																						
+			rgdb."DbT4102NinteiKekkaJoho"  AS  今回結果情報																					
+			ON  今回結果情報."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																					
+																								
+		LEFT  JOIN																						
+			rgdb."DbT5105NinteiKanryoJoho"  AS  今回完了情報																					
+			ON  今回完了情報."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																					
+																								
+		LEFT  JOIN  (																						
+			SELECT																					
+				dbT1004."shikibetsuCode"																				
+				dbT1004."nyushoShisetsuCode"																				
+				dbT1004."nyushoYMD"																				
+				dbT1004."taishoYMD"																				
+			FROM																					
+				rgdb."DbT1004ShisetsuNyutaisho"  AS  dbT1004																				
+			WHERE																					
+				NOT EXISTS (																				
+					SELECT  1																			
+					FROM																			
+						rgdb."DbT1004ShisetsuNyutaisho"  AS  dbT1004_2																		
+					WHERE																			
+						dbT1004."shikibetsuCode" = dbT1004_2."shikibetsuCode" AND																		
+						dbT1004."nyushoYMD" = dbT1004_2."nyushoYMD"																		
+					)																			
+				)  AS  施設入所																				
+			ON  施設入所."shikibetsuCode" = 最新被保台帳."shikibetsuCode"																					
+																								
+		LEFT  JOIN 																						
+			rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"  AS  除外他特適用施設																					
+			ON  除外他特適用施設."jigyoshaNo"  = 施設入所."nyushoShisetsuCode"																					
+																								
+		LEFT  JOIN																						
+			最新介護事業者  AS  指定事業者																					
+			ON  指定事業者."jigyoshaNo" = 入所施設."nyushoShisetsuCode"																					
+																								
+		LEFT JOIN																						
+			rgdb."DbT7062KaigoJigyoshaDaihyosha"  AS  指定事業者代表者																					
+			ON  指定事業者代表者."jigyoshaNo" = 指定事業者."jigyoshaNo"																					
+			    指定事業者代表者."yukoKaishiYMD" = 指定事業者."yukoKaishiYMD"																					
+																								
+		LEFT JOIN  (																						
+			SELECT																					
+				*																				
+			FROM (																					
+				SELECT dbT3005.* , ROW_NUMBER() OVER (PARTITION BY "hihokenshaNo" ORDER BY "taishoYM" DESC, "rirekiNo" DESC) AS 計画届出_番号																			
+				FROM																				
+					rgdb."DbT3005KyotakuKeikakuTodokede" dbT3005																			
+				) AS 居宅給付計画届出2																				
+			WHERE																					
+				居宅給付計画届出2.計画届出_番号 = 1																				
+				) AS 居宅届出																				
+			ON 居宅届出."hihokenshaNo" = 社会福祉法人等利用者負担軽減."hihokenshaNo"																					
+																								
+		LEFT JOIN																						
+			rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"  AS  事業者作成																					
+			ON  事業者作成."hihokenshaNo" = 居宅届出."hihokenshaNo"																					
+			    事業者作成."taishoYM" = 居宅届出."taishoYM"																					
+			    事業者作成."rirekiNo" = 居宅届出."rirekiNo"																					
+																								
+		LEFT  JOIN																						
+			最新介護事業者  AS  計画事業者																					
+			ON  計画事業者."jigyoshaNo" = 事業者作成."keikakuJigyoshaNo"																					
+																								
+		LEFT JOIN																						
+			rgdb."DbT7062KaigoJigyoshaDaihyosha" AS 計画事業者代表者																					
+			ON  計画事業者代表者."jigyoshaNo" = 計画事業者."jigyoshaNo"																					
+			    計画事業者代表者."yukoKaishiYMD" = 計画事業者."yukoKaishiYMD"																					
+																								
+		LEFT  JOIN																						
+			最新介護事業者  AS  委託先事業者																					
+			ON  委託先事業者."jigyoshaNo" = 事業者作成."itakusakiJigyoshaNo"																					
+																								
+		LEFT JOIN																						
+			rgdb."DbT7062KaigoJigyoshaDaihyosha"  AS  委託先事業者代表者																					
+			ON  委託先事業者代表者."jigyoshaNo" = 委託先事業者."jigyoshaNo"																					
+			    委託先事業者代表者."yukoKaishiYMD" = 委託先事業者."yukoKaishiYMD"																					
+																								
+		LEFT JOIN																						
+			rgdb."DbT3007KyotakuKeikakuJikoSakusei"  AS  自己作成																					
+			ON  自己作成."hihokenshaNo" = 居宅届出."hihokenshaNo"																					
+			    自己作成."taishoYM" = 居宅届出."taishoYM"																					
+			    自己作成."rirekiNo" = 居宅届出."rirekiNo"																					
+																								
+		LEFT JOIN																						
+			rgdb."DbT5121ShinseiRirekiJoho"  AS  履歴情報																					
+			ON  履歴情報."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																					
+																								
+		LEFT  JOIN																						
+			受給者台帳枝番MAX AS 前回受給情報																					
+			ON	前回受給情報."shinseishoKanriNo" = 履歴情報."zenkaiShinseishoKanriNo"																				
+																								
+		LEFT  JOIN																						
+			rgdb."DbT4101NinteiShinseiJoho"  AS 前回申請																					
+			ON	前回申請."shinseishoKanriNo" = 履歴情報."zenkaiShinseishoKanriNo"																				
+																								
+		LEFT JOIN																						
+			受給者台帳枝番MAX AS 前々回受給情報																					
+			ON	前々回受給情報."shinseishoKanriNo" = 前回履歴情報."zenkaiShinseishoKanriNo"																				
+																								
+		LEFT  JOIN																						
+			rgdb."DbT4101NinteiShinseiJoho"  AS 前々回申請																					
+			ON	前々回申請."shinseishoKanriNo" = 前回履歴情報."zenkaiShinseishoKanriNo"																				
+																								
+		LEFT  JOIN  (																						
+			SELECT																					
+				*																				
+			FROM (		
+                                SELECT dbT3105."hihokenshaNo", dbT3105."rirekiNo", ROW_NUMBER() OVER (PARTITION  BY "hihokenshaNo", "rirekiNo") AS 総合事業対象者２																			
+				FROM																				
+					rgdb."DbT3105SogoJigyoTaishosha"																			
+				)																				
+			WHERE																					
+				総合事業対象者２."hihokenshaNo" = 利用者負担額減額."hihokenshaNo"																				
+				総合事業対象者２..論理削除フラグ = false																				
+			)  AS 総合事業対象者																					
+		ON  総合事業対象者."hihokenshaNo" = 総合事業対象者２."hihokenshaNo"																						
+		    総合事業対象者."rirekiNo" = 総合事業対象者２."rirekiNo"																						
+																								
+		LEFT JOIN  (																						
+			SELECT																					
+				*																				
+			FROM																					
+				受給者台帳枝番MAX																				
+			WHERE																					
+				受給者台帳枝番MAX."rirekiNo" = '0001'																				
+			)  AS 初回受給情報																					
+			ON  初回受給情報."hihokenshaNo" = 受給者台帳."hihokenshaNo"																					
+																								
+		INNER JOIN																						
+			rgdb."DbT4101NinteiShinseiJoho"  AS 初回申請																					
+			ON  初回申請."shinseishoKanriNo" = 初回受給情報."shinseishoKanriNo"
+                WHERE 
+                    1=1
+                <if test="is基準日">
+                    AND 社会福祉法人等利用者負担軽減."tekiyoKaishiYMD" IS NOT NULL
+                    AND 社会福祉法人等利用者負担軽減."tekiyoKaishiYMD" <![CDATA[<=]]> #{kizyunnichi} 
+                    AND #{kizyunnichi} <![CDATA[<=]]> 社会福祉法人等利用者負担軽減."tekiyoShuryoYMD"
+                </if>
+                <if test="is申請日 and has日付範囲From">
+                    AND #{hitsukehanifrom} <![CDATA[<=]]> 社会福祉法人等利用者負担軽減."shinseiYMD"
+                </if>
+                <if test="is申請日 and has日付範囲To">
+                    AND 社会福祉法人等利用者負担軽減."shinseiYMD" <![CDATA[<=]]> #{hitsukehanito}
+                </if>
+                <if test="is適用日 and has日付範囲From">
+                    AND #{hitsukehanifrom} <![CDATA[<=]]> 社会福祉法人等利用者負担軽減."tekiyoKaishiYMD"
+                </if>
+                <if test="is適用日 and has日付範囲To">
+                    AND 社会福祉法人等利用者負担軽減."tekiyoKaishiYMD" <![CDATA[<=]]> #{hitsukehanito}
+                </if>
+                <if test="is有効期限 and has日付範囲From">
+                    AND #{hitsukehanifrom} <![CDATA[<=]]> 社会福祉法人等利用者負担軽減."tekiyoShuryoYMD"
+                </if>
+                <if test="is有効期限 and has日付範囲To">
+                    AND 社会福祉法人等利用者負担軽減."tekiyoShuryoYMD" <![CDATA[<=]]> #{hitsukehanito}
+                </if>
+                <if test="is決定日 and has日付範囲From">
+                    AND #{hitsukehanifrom} <![CDATA[<=]]> 社会福祉法人等利用者負担軽減."ketteiYMD"
+                </if>
+                <if test="is決定日 and has日付範囲To">
+                    AND 社会福祉法人等利用者負担軽減."ketteiYMD" <![CDATA[<=]]> #{hitsukehanito}
+                </if>
+                <if test="isChokindatacyusyutsu">
+                    AND 社会福祉法人等利用者負担軽減."rirekiNo" = 履歴番号MAX."rirekiNo"
+                </if>
+                <if test="is却下者">
+                    AND 社会福祉法人等利用者負担軽減."ketteiKubun" = #{決定区分_承認しない}
+                </if>
+                <if test="is却下他">
+                    AND 社会福祉法人等利用者負担軽減."ketteiKubun" = #{決定区分_承認する}
+                </if>
+                <if test="is資格取得者のみ">
+                    AND 最新被保台帳."shikakuSoshitsuYMD" IS NULL
+                </if>
+                <if test="is資格喪失者のみ">
+                    AND 最新被保台帳."shikakuSoshitsuYMD" IS NOT NULL
+                </if>
+                <if test="is年齢">
+                    <if test="has年齢From">
+                        AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."kikaYMD" <![CDATA[<=]]> #{年齢From年月日}
+                    </if>
+                    <if test="has年齢To">
+                        AND #{年齢To年月日} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."kikaYMD"
+                    </if>
+                </if>
+                <if test="is生年月日">
+                    <if test="has生年月日From">
+                        AND #{生年月日From} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."kikaYMD"
+                    </if>
+                    <if test="has生年月日To">
+                        AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."kikaYMD" <![CDATA[<=]]> #{生年月日To}
+                    </if>
+                </if>																						
+                <if test="has市町村コード">
+                    AND 最新被保台帳."shichosonCode" = #{shichosoncode}
+                </if>
+                <if test="is住所">
+                    <if test="has地区選択From">
+                        AND #{地区選択コードFrom} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."choikiCode"
+                    </if>
+                    <if test="has地区選択To">
+                        AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."choikiCode" <![CDATA[<=]]> #{地区選択コードTo}
+                    </if>
+                </if>
+                <if test="is行政区">
+                    <if test="has行政区From">
+                        AND #{地区選択コードFrom} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."gyoseikuCode"
+                    </if>
+                    <if test="has行政区To">
+                         AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."gyoseikuCode" <![CDATA[<=]]> #{地区選択コードTo}
+                    </if>
+                </if>
+                <if test="is地区">
+                    <if test="has地区１From">
+                        AND #{地区選択コードFrom} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode1"
+                    </if>
+                    <if test="has地区１To">
+                        AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode1" <![CDATA[<=]]> #{地区選択コードTo}
+                    </if>
+                    <if test="has地区２From">
+                        AND #{地区選択コードFrom} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode2"
+                    </if>
+                    <if test="has地区２To">
+                        AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode2" <![CDATA[<=]]> #{地区選択コードTo}
+                    </if>
+                    <if test="has地区３From">
+                        AND #{地区選択コードFrom} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode3"
+                    </if>
+                    <if test="has地区３To">
+                        AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode3" <![CDATA[<=]]> #{地区選択コードTo}
+                    </if>
+                </if>
+     </select>
+</mapper>

@@ -42,11 +42,9 @@ public class KaigoNinteiShikakuInfoHandler {
      * 介護認定資格情報初期処理です。
      *
      * @param hdnShinchsonCode RString
-     * @param hdnShikibetsuCode RString
-     * @param hdnSetaikodo RString
      * @param hdnHihokenShaNo RString
      */
-    public void initialize(RString hdnShinchsonCode, RString hdnShikibetsuCode, RString hdnSetaikodo, RString hdnHihokenShaNo) {
+    public void initialize(RString hdnShinchsonCode, RString hdnHihokenShaNo) {
         div.getTxtHihokenshaNo().clearValue();
         div.getTxtShutokuYmd().clearValue();
         div.getTxtShutokuJiyu().clearValue();
@@ -59,13 +57,11 @@ public class KaigoNinteiShikakuInfoHandler {
         div.getTxtHookenshaCode().clearValue();
         div.getTxtHokensha().clearValue();
         div.getHdnHihokenShaNo();
-        div.getHdnSetaikodo();
-        div.getHdnShikibetsuCode();
         div.getHdnShinchsonCode();
-        set介護認定宛名情報(hdnShinchsonCode, hdnShikibetsuCode, hdnSetaikodo, hdnHihokenShaNo);
+        set介護認定宛名情報(hdnShinchsonCode, hdnHihokenShaNo);
     }
 
-    private void set介護認定宛名情報(RString hdnShinchsonCode, RString hdnShikibetsuCode, RString hdnSetaikodo, RString hdnHihokenShaNo) {
+    private void set介護認定宛名情報(RString hdnShinchsonCode, RString hdnHihokenShaNo) {
         KaigoNinteiShikakuInfoBusiness ninteiShikakuInfoBusiness = KaigoNinteiShikakuInfoFinder.createInstance()
                 .getKaigoNinteiShikakuInfo(new HihokenshaNo(hdnHihokenShaNo), new LasdecCode(hdnShinchsonCode));
         List<ShichosonCodeYoriShichoson> codeYoriShichoson = KoikiShichosonJohoFinder.createInstance()
@@ -96,8 +92,6 @@ public class KaigoNinteiShikakuInfoHandler {
         div.getTxtHookenshaCode().setValue(codeYoriShichoson.get(0).get証記載保険者番号().getColumnValue());
         div.getTxtHokensha().setValue(new RString(codeYoriShichoson.get(0).get市町村名称().toString()));
         div.setHdnShinchsonCode(hdnShinchsonCode);
-        div.setHdnShikibetsuCode(hdnShikibetsuCode);
-        div.setHdnSetaikodo(hdnSetaikodo);
         div.setHdnHihokenShaNo(hdnHihokenShaNo);
     }
 }

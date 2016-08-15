@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  */
 public class KiwarigakuPanel3Div extends TablePanel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -401,7 +401,7 @@ public class KiwarigakuPanel3Div extends TablePanel {
  */
 class celKiwarigaku30201AtKiwarigakuPanel3 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     @JsonProperty("lblKiwarigaku3Tsuki")
     private Label lblKiwarigaku3Tsuki;
 
@@ -433,7 +433,7 @@ class celKiwarigaku30201AtKiwarigakuPanel3 extends TableCell {
  */
 class celKiwarigaku30202AtKiwarigakuPanel3 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     @JsonProperty("lblKi3")
     private Label lblKi3;
 
@@ -465,7 +465,7 @@ class celKiwarigaku30202AtKiwarigakuPanel3 extends TableCell {
  */
 class celKiwarigaku30203AtKiwarigakuPanel3 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     @JsonProperty("lblGemmemMae3")
     private Label lblGemmemMae3;
 
@@ -497,7 +497,7 @@ class celKiwarigaku30203AtKiwarigakuPanel3 extends TableCell {
  */
 class celKiwarigaku30204AtKiwarigakuPanel3 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     @JsonProperty("lblGemmemGo3")
     private Label lblGemmemGo3;
 
@@ -529,7 +529,7 @@ class celKiwarigaku30204AtKiwarigakuPanel3 extends TableCell {
  */
 class celKiwarigaku30205AtKiwarigakuPanel3 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     @JsonProperty("lblNokigen3")
     private Label lblNokigen3;
 
@@ -561,7 +561,7 @@ class celKiwarigaku30205AtKiwarigakuPanel3 extends TableCell {
  */
 class celKiwarigaku30301AtKiwarigakuPanel3 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     @JsonProperty("lblKiwarigaku34Gatsu")
     private Label lblKiwarigaku34Gatsu;
 
@@ -593,7 +593,7 @@ class celKiwarigaku30301AtKiwarigakuPanel3 extends TableCell {
  */
 class celKiwarigaku30302AtKiwarigakuPanel3 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     @JsonProperty("ki2")
     private Label ki2;
 
@@ -625,7 +625,7 @@ class celKiwarigaku30302AtKiwarigakuPanel3 extends TableCell {
  */
 class celKiwarigaku30303AtKiwarigakuPanel3 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     @JsonProperty("Mae2")
     private Label Mae2;
 
@@ -657,7 +657,7 @@ class celKiwarigaku30303AtKiwarigakuPanel3 extends TableCell {
  */
 class celKiwarigaku30304AtKiwarigakuPanel3 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     @JsonProperty("Go2")
     private Label Go2;
 
@@ -689,7 +689,7 @@ class celKiwarigaku30304AtKiwarigakuPanel3 extends TableCell {
  */
 class celKiwarigaku30305AtKiwarigakuPanel3 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     @JsonProperty("Nokigen")
     private Label Nokigen;
 
@@ -721,7 +721,7 @@ class celKiwarigaku30305AtKiwarigakuPanel3 extends TableCell {
  */
 class celKiwarigaku30401AtKiwarigakuPanel3 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     @JsonProperty("lblKiwarigaku3Total")
     private Label lblKiwarigaku3Total;
 
@@ -752,7 +752,7 @@ class celKiwarigaku30401AtKiwarigakuPanel3 extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku30402AtKiwarigakuPanel3 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
 
     // </editor-fold>
 }
@@ -763,7 +763,7 @@ class celKiwarigaku30402AtKiwarigakuPanel3 extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku30403AtKiwarigakuPanel3 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
 
     // </editor-fold>
 }
@@ -774,7 +774,7 @@ class celKiwarigaku30403AtKiwarigakuPanel3 extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku30404AtKiwarigakuPanel3 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
 
     // </editor-fold>
 }
@@ -785,7 +785,7 @@ class celKiwarigaku30404AtKiwarigakuPanel3 extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku30405AtKiwarigakuPanel3 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
 
     // </editor-fold>
 }

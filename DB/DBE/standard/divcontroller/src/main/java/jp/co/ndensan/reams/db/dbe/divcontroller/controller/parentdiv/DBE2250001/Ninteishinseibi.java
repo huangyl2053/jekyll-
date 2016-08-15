@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2250001
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.niteicyosaichiran.NiTeiCyoSaiChiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.niteicyosaichiran.NiTeiCyoSaiChiRanBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.niteicyosaichiran.NinteichosahyoGaikyoChosaRelateBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.niteicyosaichiran.NiTeiCyoSaiChiRanParameter;
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2250001.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2250001.dgNinteiChosaData_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2250001.NinteishinseibiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2250001.NinteishinseibiValidatisonHandler;
-import jp.co.ndensan.reams.db.dbe.service.report.shinsakainenkansukejuruhyo.NiTeiCyoSaiChiRanManager;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakainenkansukejuruhyo.NiTeiCyoSaiChiRanManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -166,6 +167,9 @@ public class Ninteishinseibi {
         }
         PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
         getHandler(div).検索処理(business.records(), personalData);
+        NiTeiCyoSaiChiBusiness niTeiCyoSaiChiBusiness = new NiTeiCyoSaiChiBusiness();
+        niTeiCyoSaiChiBusiness.set認定調査一覧Lsit(business.records());
+        ViewStateHolder.put(ViewStateKeys.認定調査一覧, niTeiCyoSaiChiBusiness);
         ValidationMessageControlPairs validationMessage = getValidatisonHandler(div).データ空のチェック();
         if (validationMessage.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessage).respond();
@@ -196,6 +200,8 @@ public class Ninteishinseibi {
             if (vallidation.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(vallidation).respond();
             }
+            NiTeiCyoSaiChiBusiness business = ViewStateHolder.get(ViewStateKeys.認定調査一覧, NiTeiCyoSaiChiBusiness.class);
+            getHandler(div).一覧の再編集(business.get認定調査一覧Lsit());
             List<dgNinteiChosaData_Row> rowList = div.getDgNinteiChosaData().getDataSource();
             List<RString> shinseishoKanriNoList = new ArrayList<>();
             for (int i = 0; i < rowList.size(); i++) {
@@ -415,14 +421,14 @@ public class Ninteishinseibi {
         NinteichosahyoServiceJokyoIdentifier key = new NinteichosahyoServiceJokyoIdentifier(
                 new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                 Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
-                Integer.valueOf(row.getRemban().toString()));
+                Integer.valueOf(row.getServiceJokyoRemban().toString()));
         NinteichosahyoServiceJokyo ninteichosahyoServiceJokyo = サービスの状況Models.get(key);
         if (ninteichosahyoServiceJokyo == null) {
 
             ninteichosahyoServiceJokyo = new NinteichosahyoServiceJokyo(
                     new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                     Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
-                    Integer.valueOf(row.getRemban().toString()));
+                    Integer.valueOf(row.getServiceJokyoRemban().toString()));
         }
         NinteichosahyoServiceJokyoBuilder serviceJokyoBuilder = getHandler(div).認定調査票概況調査サービスの状況の編集(row, ninteichosahyoServiceJokyo);
         return serviceJokyoBuilder.build();
@@ -434,14 +440,14 @@ public class Ninteishinseibi {
         NinteichosahyoServiceJokyoFlagIdentifier key = new NinteichosahyoServiceJokyoFlagIdentifier(
                 new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                 Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
-                Integer.valueOf(row.getRemban().toString()));
+                Integer.valueOf(row.getServiceJokyoFlagRemban().toString()));
         NinteichosahyoServiceJokyoFlag ninteichosahyoServiceJokyoFlag = サービスの状況フラグModels.get(key);
         if (ninteichosahyoServiceJokyoFlag == null) {
 
             ninteichosahyoServiceJokyoFlag = new NinteichosahyoServiceJokyoFlag(
                     new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                     Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
-                    Integer.valueOf(row.getRemban().toString()));
+                    Integer.valueOf(row.getServiceJokyoFlagRemban().toString()));
         }
         NinteichosahyoServiceJokyoFlagBuilder serviceJokyoFlagBuilder = getHandler(div).
                 認定調査票概況調査サービスの状況フラグの編集(row, ninteichosahyoServiceJokyoFlag);
@@ -454,13 +460,13 @@ public class Ninteishinseibi {
         NinteichosahyoKinyuItemIdentifier key = new NinteichosahyoKinyuItemIdentifier(
                 new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                 Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
-                Integer.valueOf(row.getRemban().toString()));
+                Integer.valueOf(row.getServiceJokyoKinyuRemban().toString()));
         NinteichosahyoKinyuItem ninteichosahyoKinyuItem = 記入項目Models.get(key);
         if (ninteichosahyoKinyuItem == null) {
             ninteichosahyoKinyuItem = new NinteichosahyoKinyuItem(
                     new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                     Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
-                    Integer.valueOf(row.getRemban().toString()));
+                    Integer.valueOf(row.getServiceJokyoKinyuRemban().toString()));
         }
         NinteichosahyoKinyuItemBuilder ninteichosahyoKinyuItemBuilder = getHandler(div).
                 認定調査票概況調査記入項目の編集(row, ninteichosahyoKinyuItem);
@@ -473,14 +479,14 @@ public class Ninteishinseibi {
         NinteichosahyoShisetsuRiyoIdentifier key = new NinteichosahyoShisetsuRiyoIdentifier(
                 new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                 Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
-                Integer.valueOf(row.getRemban().toString()));
+                Integer.valueOf(row.getShisetsuRiyoFlagRemban().toString()));
         NinteichosahyoShisetsuRiyo ninteichosahyoShisetsuRiyo = 施設利用Models.get(key);
         if (ninteichosahyoShisetsuRiyo == null) {
 
             ninteichosahyoShisetsuRiyo = new NinteichosahyoShisetsuRiyo(
                     new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                     Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
-                    Integer.valueOf(row.getRemban().toString()));
+                    Integer.valueOf(row.getShisetsuRiyoFlagRemban().toString()));
         }
         NinteichosahyoShisetsuRiyoBuilder shisetsuRiyoBuilder = getHandler(div).
                 認定調査票概況調査施設利用の編集(row, ninteichosahyoShisetsuRiyo);

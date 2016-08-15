@@ -40,7 +40,7 @@ public class NinteiShinseiJoho2Builder {
      * {@link DbT5101NinteiShinseiJohoEntity}より{@link NinteiShinseiJoho}の編集用Builderクラスを生成します。
      *
      * @param entity {@link DbT5101NinteiShinseiJohoEntity}
-     * @param id {@link NinteiShinseiJohoIdentifier}
+     * @param id {@link NinteiShinseiJoho2Identifier}
      *
      */
     NinteiShinseiJoho2Builder(

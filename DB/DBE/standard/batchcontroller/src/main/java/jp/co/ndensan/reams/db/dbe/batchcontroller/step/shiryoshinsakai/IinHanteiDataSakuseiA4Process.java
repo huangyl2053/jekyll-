@@ -45,11 +45,12 @@ public class IinHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJohoE
             + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getHanteiJoho");
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
             new RString(IinYobihanteiKinyuhyoReportSource.ReportSourceFields.shinsakaiKaisaiNo.name())));
+    private static final int 満ページ件数 = 10;
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
     private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
     private IinYobihanteiKinyuhyoBusiness business;
     private int データ件数;
-    private static final int 満ページ件数 = 10;
+
     @BatchWriter
     private BatchReportWriter<IinYobihanteiKinyuhyoReportSource> batchWrite;
     private ReportSourceWriter<IinYobihanteiKinyuhyoReportSource> reportSourceWriter;
@@ -59,8 +60,10 @@ public class IinHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJohoE
         データ件数 = 0;
         myBatisParameter = paramter.toIinTokkiJikouItiziHanteiMyBatisParameter();
         myBatisParameter.setOrderKakuteiFlg(ShinsakaiOrderKakuteiFlg.確定.is介護認定審査会審査順確定());
-        myBatisParameter.setIsShoriJotaiKubun0(ShoriJotaiKubun.通常.getコード());
-        myBatisParameter.setIsShoriJotaiKubun3(ShoriJotaiKubun.延期.getコード());
+        List<RString> shoriJotaiKubunList = new ArrayList<>();
+        shoriJotaiKubunList.add(ShoriJotaiKubun.通常.getコード());
+        shoriJotaiKubunList.add(ShoriJotaiKubun.延期.getコード());
+        myBatisParameter.setShoriJotaiKubunList(shoriJotaiKubunList);
     }
 
     @Override
@@ -116,11 +119,21 @@ public class IinHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJohoE
 
     private List<RString> 出力条件() {
         List<RString> list = new ArrayList<>();
-        RStringBuilder builder = new RStringBuilder();
-        builder.append("【介護認定審査会開催番号】")
+        RStringBuilder builder1 = new RStringBuilder();
+        builder1.append("【合議体番号】")
+                .append(" ")
+                .append(paramter.getGogitaiNo());
+        RStringBuilder builder2 = new RStringBuilder();
+        builder2.append("【介護認定審査会開催予定年月日】")
+                .append(" ")
+                .append(paramter.getShinsakaiKaisaiYoteiYMD().wareki().toDateString());
+        RStringBuilder builder3 = new RStringBuilder();
+        builder3.append("【介護認定審査会開催番号】")
                 .append(" ")
                 .append(paramter.getShinsakaiKaisaiNo());
-        list.add(builder.toRString());
+        list.add(builder1.toRString());
+        list.add(builder2.toRString());
+        list.add(builder3.toRString());
         return list;
     }
 }

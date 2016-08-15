@@ -38,11 +38,11 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -81,7 +81,6 @@ public class HanyoListShotokuJohoNoRenbanProcess extends BatchProcessBase<HanyoL
     private static final RString 定数_課税区分減免前 = new RString("課税区分（減免前）：");
     private static final RString 定数_課税区分減免後 = new RString("課税区分（減免後）：");
     private static final ReportId EUC_ID = new ReportId("DBB200034");
-    private static final RString ジョブ番号 = new RString("【ジョブ番号】");
     private static final RString CSV出力有無 = new RString("");
     private static final RString CODE = new RString("0003");
     private static final RString 定数_年度 = new RString("年度");
@@ -110,9 +109,9 @@ public class HanyoListShotokuJohoNoRenbanProcess extends BatchProcessBase<HanyoL
     private static final RString 右記号 = new RString(")");
     private static final RString LINE = new RString("　～　");
     private static final RString 定数_歳 = new RString("歳");
-    private static final RString 定数_住所 = new RString("住所");
-    private static final RString 定数_行政区 = new RString("行政区");
-    private static final RString 定数_地区 = new RString("地区");
+    private static final RString 定数_住所 = new RString("1");
+    private static final RString 定数_行政区 = new RString("2");
+    private static final RString 定数_地区 = new RString("3");
     private static final RString 住所SHOW = new RString("住所：");
     private static final RString 行政区SHOW = new RString("行政区：");
     private static final RString 地区1SHOW = new RString("地区1：");
@@ -131,7 +130,7 @@ public class HanyoListShotokuJohoNoRenbanProcess extends BatchProcessBase<HanyoL
     private RString eucFilePath;
 
     @BatchWriter
-    private EucCsvWriter<HanyoListShotokuJohoNoRenbanCsvEntity> eucCsvWriter;
+    private CsvWriter<HanyoListShotokuJohoNoRenbanCsvEntity> eucCsvWriter;
 
     @Override
     protected void beforeExecute() {
@@ -139,7 +138,7 @@ public class HanyoListShotokuJohoNoRenbanProcess extends BatchProcessBase<HanyoL
         csvEditor = new HanyoListShotokuJohoNoRenbanCsvEditor();
         personalDataList = new ArrayList<>();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-        HokenryoDankaiSettings hokenryoDankaiSettings = new HokenryoDankaiSettings();
+        HokenryoDankaiSettings hokenryoDankaiSettings = HokenryoDankaiSettings.createInstance();
         保険料段階リスト = hokenryoDankaiSettings.get保険料段階ListIn(processParameter.get賦課年度());
         構成市町村マスタlist = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
     }
@@ -159,7 +158,7 @@ public class HanyoListShotokuJohoNoRenbanProcess extends BatchProcessBase<HanyoL
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, CSVNAME);
-        eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.UTF_8withBOM).
@@ -206,7 +205,8 @@ public class HanyoListShotokuJohoNoRenbanProcess extends BatchProcessBase<HanyoL
         builder2.append(賦課年度);
         FlexibleYear 賦課年度2 = processParameter.get賦課年度();
         if (賦課年度2 != null && !賦課年度2.isEmpty()) {
-            builder2.append(賦課年度2.wareki().toDateString()).append(定数_年度);
+            builder2.append(賦課年度2.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK)
+                    .toDateString()).append(定数_年度);
         } else {
             builder2.append(RString.EMPTY);
         }
@@ -249,7 +249,7 @@ public class HanyoListShotokuJohoNoRenbanProcess extends BatchProcessBase<HanyoL
                 EUC_ID.value(),
                 導入団体コード,
                 市町村名,
-                ジョブ番号.concat(String.valueOf(JobContextHolder.getJobId())),
+                new RString(String.valueOf(JobContextHolder.getJobId())),
                 日本語ファイル名,
                 出力件数,
                 CSV出力有無,
@@ -262,7 +262,7 @@ public class HanyoListShotokuJohoNoRenbanProcess extends BatchProcessBase<HanyoL
     private void set地区区分(RStringBuilder builder, List<RString> 出力条件) {
         if (processParameter != null && processParameter.get宛名抽出条件() != null
                 && processParameter.get宛名抽出条件().getChiku_Kubun() != null) {
-            RString 地区区分名称 = processParameter.get宛名抽出条件().getChiku_Kubun().get名称();
+            RString 地区区分名称 = processParameter.get宛名抽出条件().getChiku_Kubun().getコード();
             if (定数_住所.equals(地区区分名称)) {
                 builder.append(住所SHOW);
                 RString 町域From = processParameter.get宛名抽出条件().getJusho_From();
@@ -292,7 +292,7 @@ public class HanyoListShotokuJohoNoRenbanProcess extends BatchProcessBase<HanyoL
                 builder3.append(地区3SHOW);
                 RString 地区3From = processParameter.get宛名抽出条件().getChiku3_From();
                 RString 地区3To = processParameter.get宛名抽出条件().getChiku3_To();
-                builder2.append(地区3From).append(LINE).append(地区3To);
+                builder3.append(地区3From).append(LINE).append(地区3To);
                 出力条件.add(builder3.toRString());
             }
         }
@@ -302,10 +302,7 @@ public class HanyoListShotokuJohoNoRenbanProcess extends BatchProcessBase<HanyoL
         if (年齢PARAMETER.equals(processParameter.get宛名抽出条件().getAgeSelectKijun().get名称())) {
             builder.append(年齢SHOW);
             if (processParameter.get宛名抽出条件().getNenreiRange() != null) {
-                Decimal 年齢From = processParameter.get宛名抽出条件().getNenreiRange().getFrom();
-                Decimal 年齢To = processParameter.get宛名抽出条件().getNenreiRange().getTo();
-                builder.append(new RString(年齢From.toString())).append(定数_歳).append(LINE).
-                        append(new RString(年齢To.toString())).append(定数_歳).append(RString.FULL_SPACE);
+                set年齢(builder);
             } else {
                 builder.append(RString.FULL_SPACE);
             }
@@ -313,7 +310,7 @@ public class HanyoListShotokuJohoNoRenbanProcess extends BatchProcessBase<HanyoL
             RDate 年齢基準日 = processParameter.get宛名抽出条件().getNenreiKijunbi();
             if (年齢基準日 != null) {
                 RString 変数_年齢基準日 = 年齢基準日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                        .fillType(FillType.ZERO).toDateString();
+                        .fillType(FillType.BLANK).toDateString();
                 builder.append(変数_年齢基準日).append(右記号);
             } else {
                 builder.append(RString.FULL_SPACE).append(右記号);
@@ -322,18 +319,43 @@ public class HanyoListShotokuJohoNoRenbanProcess extends BatchProcessBase<HanyoL
         } else if (生年月日PARAMETER.equals(processParameter.get宛名抽出条件().getAgeSelectKijun().get名称())) {
             builder.append(生年月日SHOW);
             if (processParameter.get宛名抽出条件().getSeinengappiRange() != null) {
-                RDate 生年月日From = processParameter.get宛名抽出条件().getSeinengappiRange().getFrom();
-                RDate 生年月日To = processParameter.get宛名抽出条件().getSeinengappiRange().getTo();
-                RString 変数_生年月日From = 生年月日From.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                        .fillType(FillType.ZERO).toDateString();
-                RString 変数_生年月日To = 生年月日To.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                        .fillType(FillType.ZERO).toDateString();
-                builder.append(変数_生年月日From).append(LINE).append(変数_生年月日To);
+                set生年月日(builder);
             } else {
                 builder.append(RString.EMPTY);
             }
             出力条件.add(builder.toRString());
         }
+    }
+
+    private void set年齢(RStringBuilder builder) {
+        Decimal 年齢From = processParameter.get宛名抽出条件().getNenreiRange().getFrom();
+        Decimal 年齢To = processParameter.get宛名抽出条件().getNenreiRange().getTo();
+        RString 変数_年齢From = null;
+        RString 変数_年齢To = null;
+        if (年齢From != null) {
+            変数_年齢From = new RString(年齢From.toString());
+        }
+        if (年齢To != null) {
+            変数_年齢To = new RString(年齢To.toString());
+        }
+        builder.append(変数_年齢From).append(定数_歳).append(LINE).
+                append(変数_年齢To).append(定数_歳).append(RString.FULL_SPACE);
+    }
+
+    private void set生年月日(RStringBuilder builder) {
+        RDate 生年月日From = processParameter.get宛名抽出条件().getSeinengappiRange().getFrom();
+        RDate 生年月日To = processParameter.get宛名抽出条件().getSeinengappiRange().getTo();
+        RString 変数_生年月日From = null;
+        RString 変数_生年月日To = null;
+        if (生年月日From != null) {
+            変数_生年月日From = 生年月日From.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                    .fillType(FillType.BLANK).toDateString();
+        }
+        if (生年月日To != null) {
+            変数_生年月日To = 生年月日To.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                    .fillType(FillType.BLANK).toDateString();
+        }
+        builder.append(変数_生年月日From).append(LINE).append(変数_生年月日To);
     }
 
     private void set課税区分前後(RStringBuilder builder, List<RString> list) {

@@ -131,4 +131,33 @@ public class DbT5032ShujiiIkenshoHoshuTankaDac implements ISaveable<DbT5032Shuji
                         by(kaishiYM, Order.ASC)).limit(1).
                 toObject(DbT5032ShujiiIkenshoHoshuTankaEntity.class);
     }
+
+    /**
+     * 意見書作成報酬単価を全件返します（識別子降順）。
+     *
+     * @return DbT5032ShujiiIkenshoHoshuTankaEntityの{@code list}
+     */
+    @Transaction
+    public List<DbT5032ShujiiIkenshoHoshuTankaEntity> selectAllOrderBy() {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5032ShujiiIkenshoHoshuTanka.class).
+                order(by(zaitakuShisetsuKubun, Order.DESC),
+                        by(ikenshoSakuseiKaisuKubun, Order.DESC),
+                        by(kaishiYM, Order.DESC)).
+                toList(DbT5032ShujiiIkenshoHoshuTankaEntity.class);
+    }
+
+    /**
+     * DbT5032ShujiiIkenshoHoshuTankaEntityを物理削除します。
+     *
+     * @param entity entity
+     * @return 削除件数
+     */
+    @Transaction
+    public int saveOrDeletePhysicalBy(DbT5032ShujiiIkenshoHoshuTankaEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書作成報酬単価エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
 }

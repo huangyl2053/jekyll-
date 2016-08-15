@@ -73,4 +73,7 @@ public class NiTeiCyoSaiChiRanRelateEntity implements Serializable {
     private Code koroshoIfShikibetsuCode;
     private RString gaikyoTokkiTextImageKubun;
     private boolean serviceJokyoFlag;
+    private int sabisuremflagremban;
+    private int kinyuitemremban;
+    private int shisetsuriyoremban;
 }

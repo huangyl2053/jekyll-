@@ -10,9 +10,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * ビジネス設計_DBC0120031_サービス利用票情報 給付計画自己作成Resultオブジェクト
+ * サービス種類まとめオブジェクトのクラスです。
  *
- * @reamsid_L DBC-1930-060 xupeng
+ * @reamsid_L DBC-1930-060 cuilin
  */
 @lombok.Getter
 @lombok.Setter

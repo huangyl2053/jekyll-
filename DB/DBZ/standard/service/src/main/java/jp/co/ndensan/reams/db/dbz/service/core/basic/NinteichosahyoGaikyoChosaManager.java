@@ -8,12 +8,13 @@ package jp.co.ndensan.reams.db.dbz.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoGaikyoChosa;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoGaikyoChosa;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5202NinteichosahyoGaikyoChosaEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5202NinteichosahyoGaikyoChosaDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -99,5 +100,29 @@ public class NinteichosahyoGaikyoChosaManager {
             return false;
         }
         return 1 == dac.save(認定調査票_概況調査_子.toEntity());
+    }
+
+    /**
+     * 主キーに合致する認定調査票_概況調査_子を返します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @return SearchResult<NinteichosahyoGaikyoChosa>
+     */
+    @Transaction
+    public SearchResult<NinteichosahyoGaikyoChosa> get認定調査票_概況調査_情報(
+            ShinseishoKanriNo 申請書管理番号,
+            int 認定調査依頼履歴番号) {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        List<NinteichosahyoGaikyoChosa> ninteichosahyoGaikyoChosaList = new ArrayList<>();
+        List<DbT5202NinteichosahyoGaikyoChosaEntity> entityList = dac.select認定調査票(
+                申請書管理番号,
+                認定調査依頼履歴番号);
+        for (DbT5202NinteichosahyoGaikyoChosaEntity entity : entityList) {
+            entity.initializeMd5();
+            ninteichosahyoGaikyoChosaList.add(new NinteichosahyoGaikyoChosa(entity));
+        }
+
+        return SearchResult.of(ninteichosahyoGaikyoChosaList, 0, false);
     }
 }

@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3110001;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 public class ShinseiinfoDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -36,7 +36,7 @@ public class ShinseiinfoDiv extends Panel {
     @JsonProperty("txtShinseiGemmengaku")
     private TextBoxNum txtShinseiGemmengaku;
     @JsonProperty("btnGemmenShurui")
-    private Button btnGemmenShurui;
+    private ButtonDialog btnGemmenShurui;
     @JsonProperty("txtGemmenShurui")
     private TextBox txtGemmenShurui;
     @JsonProperty("txtShinseiRiyu")
@@ -125,7 +125,7 @@ public class ShinseiinfoDiv extends Panel {
      * @return btnGemmenShurui
      */
     @JsonProperty("btnGemmenShurui")
-    public Button getBtnGemmenShurui() {
+    public ButtonDialog getBtnGemmenShurui() {
         return btnGemmenShurui;
     }
 
@@ -134,7 +134,7 @@ public class ShinseiinfoDiv extends Panel {
      * @param btnGemmenShurui btnGemmenShurui
      */
     @JsonProperty("btnGemmenShurui")
-    public void setBtnGemmenShurui(Button btnGemmenShurui) {
+    public void setBtnGemmenShurui(ButtonDialog btnGemmenShurui) {
         this.btnGemmenShurui = btnGemmenShurui;
     }
 

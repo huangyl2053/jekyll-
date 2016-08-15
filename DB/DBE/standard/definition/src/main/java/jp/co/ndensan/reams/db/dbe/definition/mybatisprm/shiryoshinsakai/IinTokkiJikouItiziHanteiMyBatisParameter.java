@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 委員用特記事項と一次判定結果票情報のMyBatisParameterです。
@@ -22,17 +22,20 @@ public class IinTokkiJikouItiziHanteiMyBatisParameter implements IMyBatisParamet
 
     private RString shinsakaiKaisaiNo;
     private RString shuturyokuJun;
-    private Decimal bangoStart;
-    private Decimal bangoEnd;
+    private int bangoStart;
+    private int bangoEnd;
     private ShinseishoKanriNo shinseishoKanri;
+    private ShinseishoKanriNo shinseishoKanriZ;
     private int ninteichosaRirekiNo;
-    private RString genponKubun;
+    private int ikenshoIraiRirekiNo;
+    private RString genponMaskKubun;
+    private boolean isShuturyokuJunEmpty;
     private boolean isSakuseiJokenHani;
-    private boolean isIsShuturyokuJun;
     private boolean isSakuseiJokenTuika;
     private boolean isOrderKakuteiFlg;
-    private RString isShoriJotaiKubun0;
-    private RString isShoriJotaiKubun3;
+    private List<RString> shoriJotaiKubunList;
+    private List<ShinseishoKanriNo> shinseishoKanriNoList;
+    private List<Integer> ninteichosaRirekiNoList;
 
     /**
      * コンストラクタです。
@@ -43,22 +46,22 @@ public class IinTokkiJikouItiziHanteiMyBatisParameter implements IMyBatisParamet
      * @param bangoEnd 終了資料番号
      * @param isSakuseiJokenHani 作成条件_範囲指定ファグ
      * @param isSakuseiJokenTuika 作成条件_追加分ファグ
-     * @param isIsShuturyokuJun 出力順ファグ
+     * @param isShuturyokuJunEmpty 出力順ファグ
      */
     public IinTokkiJikouItiziHanteiMyBatisParameter(
             RString shinsakaiKaisaiNo,
             RString shuturyokuJun,
-            Decimal bangoStart,
-            Decimal bangoEnd,
+            int bangoStart,
+            int bangoEnd,
             boolean isSakuseiJokenHani,
             boolean isSakuseiJokenTuika,
-            boolean isIsShuturyokuJun) {
+            boolean isShuturyokuJunEmpty) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shuturyokuJun = shuturyokuJun;
         this.bangoStart = bangoStart;
         this.bangoEnd = bangoEnd;
         this.isSakuseiJokenHani = isSakuseiJokenHani;
         this.isSakuseiJokenTuika = isSakuseiJokenTuika;
-        this.isIsShuturyokuJun = isIsShuturyokuJun;
+        this.isShuturyokuJunEmpty = isShuturyokuJunEmpty;
     }
 }

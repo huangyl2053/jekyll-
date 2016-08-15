@@ -28,7 +28,7 @@ public class IinTuutishoProcessParameter implements IBatchProcessParameter {
     private FlexibleDate shinsakaiKaisaiYoteiYMD;
     private RString shinsakaiKaishiYoteiTime;
     private RString shinsakaiKaisaiBashoName;
-    private RString gogitaiNo;
+    private int gogitaiNo;
 
     /**
      * コンストラクタです。
@@ -36,7 +36,6 @@ public class IinTuutishoProcessParameter implements IBatchProcessParameter {
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
      * @param shuturyokuSutairu 出力スタイル
      * @param printHou 印刷方法
-     * @param chohyoIinHusu 審査会委員用部数
      * @param shinsakaiKaisaiYoteiYMD 開催予定年月日
      * @param shinsakaiKaishiYoteiTime 予定時刻
      * @param shinsakaiKaisaiBashoName 開催会場
@@ -46,11 +45,10 @@ public class IinTuutishoProcessParameter implements IBatchProcessParameter {
             RString shinsakaiKaisaiNo,
             RString shuturyokuSutairu,
             RString printHou,
-            Decimal chohyoIinHusu,
             FlexibleDate shinsakaiKaisaiYoteiYMD,
             RString shinsakaiKaishiYoteiTime,
             RString shinsakaiKaisaiBashoName,
-            RString gogitaiNo) {
+            int gogitaiNo) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shuturyokuSutairu = shuturyokuSutairu;
         this.printHou = printHou;

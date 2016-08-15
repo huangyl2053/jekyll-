@@ -29,7 +29,6 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxPersistence</artifactId>
-            <version>${jp.co.ndensan.reams.uax.version}</version>
         </dependency>
         <!-- DBZ -->
         <dependency>
@@ -39,7 +38,6 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxEntity</artifactId>
-            <version>${jp.co.ndensan.reams.dbx.version}</version>
         </dependency>
         <!-- �ｽ?�ｽ�ｽ�ｽ?-->
         <dependency>

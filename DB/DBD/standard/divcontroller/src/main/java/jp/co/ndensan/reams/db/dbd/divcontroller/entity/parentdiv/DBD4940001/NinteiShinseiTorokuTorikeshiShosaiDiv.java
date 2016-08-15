@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class NinteiShinseiTorokuTorikeshiShosaiDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -52,18 +52,22 @@ public class NinteiShinseiTorokuTorikeshiShosaiDiv extends Panel {
     private KaigoNinteiAtenaInfoDiv ccdKaigoNinteiAtenaInfo;
     @JsonProperty("ccdKaigoNinteiShinseiKihon")
     private KaigoNinteiShinseiKihonJohoInputDiv ccdKaigoNinteiShinseiKihon;
-    @JsonProperty("ccdKaigoNinteiShikakuInfo")
-    private KaigoninteiShikakuInfoDiv ccdKaigoNinteiShikakuInfo;
-    @JsonProperty("ccdNinteiInput")
-    private NinteiInputDiv ccdNinteiInput;
     @JsonProperty("ccdZenkaiNinteiKekkaJoho")
     private ZenkaiNinteiKekkaJohoDiv ccdZenkaiNinteiKekkaJoho;
+    @JsonProperty("ccdNinteiInput")
+    private NinteiInputDiv ccdNinteiInput;
+    @JsonProperty("ccdKaigoNinteiShikakuInfo")
+    private KaigoninteiShikakuInfoDiv ccdKaigoNinteiShikakuInfo;
     @JsonProperty("ccdSonotaJoho")
     private ShinseiSonotaJohoInputDiv ccdSonotaJoho;
     @JsonProperty("hdnKaigoJimuCode")
     private RString hdnKaigoJimuCode;
     @JsonProperty("hdnKaigoNinteiCode")
     private RString hdnKaigoNinteiCode;
+    @JsonProperty("hdnSyokikaMode")
+    private RString hdnSyokikaMode;
+    @JsonProperty("hdnShikibetsuKey")
+    private RString hdnShikibetsuKey;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -180,12 +184,12 @@ public class NinteiShinseiTorokuTorikeshiShosaiDiv extends Panel {
     }
 
     /*
-     * getccdKaigoNinteiShikakuInfo
-     * @return ccdKaigoNinteiShikakuInfo
+     * getccdZenkaiNinteiKekkaJoho
+     * @return ccdZenkaiNinteiKekkaJoho
      */
-    @JsonProperty("ccdKaigoNinteiShikakuInfo")
-    public IKaigoninteiShikakuInfoDiv getCcdKaigoNinteiShikakuInfo() {
-        return ccdKaigoNinteiShikakuInfo;
+    @JsonProperty("ccdZenkaiNinteiKekkaJoho")
+    public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
+        return ccdZenkaiNinteiKekkaJoho;
     }
 
     /*
@@ -198,12 +202,12 @@ public class NinteiShinseiTorokuTorikeshiShosaiDiv extends Panel {
     }
 
     /*
-     * getccdZenkaiNinteiKekkaJoho
-     * @return ccdZenkaiNinteiKekkaJoho
+     * getccdKaigoNinteiShikakuInfo
+     * @return ccdKaigoNinteiShikakuInfo
      */
-    @JsonProperty("ccdZenkaiNinteiKekkaJoho")
-    public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
-        return ccdZenkaiNinteiKekkaJoho;
+    @JsonProperty("ccdKaigoNinteiShikakuInfo")
+    public IKaigoninteiShikakuInfoDiv getCcdKaigoNinteiShikakuInfo() {
+        return ccdKaigoNinteiShikakuInfo;
     }
 
     /*
@@ -249,6 +253,42 @@ public class NinteiShinseiTorokuTorikeshiShosaiDiv extends Panel {
     @JsonProperty("hdnKaigoNinteiCode")
     public void setHdnKaigoNinteiCode(RString hdnKaigoNinteiCode) {
         this.hdnKaigoNinteiCode = hdnKaigoNinteiCode;
+    }
+
+    /*
+     * gethdnSyokikaMode
+     * @return hdnSyokikaMode
+     */
+    @JsonProperty("hdnSyokikaMode")
+    public RString getHdnSyokikaMode() {
+        return hdnSyokikaMode;
+    }
+
+    /*
+     * sethdnSyokikaMode
+     * @param hdnSyokikaMode hdnSyokikaMode
+     */
+    @JsonProperty("hdnSyokikaMode")
+    public void setHdnSyokikaMode(RString hdnSyokikaMode) {
+        this.hdnSyokikaMode = hdnSyokikaMode;
+    }
+
+    /*
+     * gethdnShikibetsuKey
+     * @return hdnShikibetsuKey
+     */
+    @JsonProperty("hdnShikibetsuKey")
+    public RString getHdnShikibetsuKey() {
+        return hdnShikibetsuKey;
+    }
+
+    /*
+     * sethdnShikibetsuKey
+     * @param hdnShikibetsuKey hdnShikibetsuKey
+     */
+    @JsonProperty("hdnShikibetsuKey")
+    public void setHdnShikibetsuKey(RString hdnShikibetsuKey) {
+        this.hdnShikibetsuKey = hdnShikibetsuKey;
     }
 
     /*

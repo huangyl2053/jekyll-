@@ -29,7 +29,6 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteitsuchishohak
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2017TsuchishoHakkogoIdoshaDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchokarisanteitsuchishohakko.ITokuchoKarisanteiTsuchishoHakkoMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbb.service.report.tokuchokarisanteitsuchishohakko.TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranPrintService;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
@@ -200,8 +199,9 @@ public class TokuchoKaishiTsuchishoDataHenshu {
                 CSV出力有無_あり, CSVファイル名_一覧表, result.get帳票名());
         load代行プリント送付票(result.get発行日(), result.get出力対象区分(), result.get帳票制御共通(),
                 result.get地方公共団体(), result.get出力順ID(), new Decimal(総ページ数));
-        new TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranPrintService().printSingle(編集後仮算定通知書共通情報List,
-                result.get出力順ID(), result.get調定年度(), result.get帳票作成日時());
+        // TODO QA1150
+//        new TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranPrintService().printSingle(編集後仮算定通知書共通情報List,
+//                result.get出力順ID(), result.get調定年度(), result.get帳票作成日時());
         publish特別徴収開始通知書仮算定発行一覧表(result.get調定年度(), result.get帳票作成日時(), 編集後仮算定通知書共通情報List);
     }
 
@@ -562,6 +562,9 @@ public class TokuchoKaishiTsuchishoDataHenshu {
             期別金額リスト.add(tempEntity.get前年度特徴期別金額05());
             期別金額リスト.add(tempEntity.get前年度特徴期別金額06());
             FukaJoho 賦課情報 = get賦課情報(tempEntity.get前年度賦課情報(), 期別金額リスト);
+            if (賦課情報.get調定年度() == null || 賦課情報.get賦課年度() == null || 賦課情報.get通知書番号() == null) {
+                賦課情報 = null;
+            }
             result.set前年度賦課情報(賦課情報);
             tmpResultList.add(result);
         }

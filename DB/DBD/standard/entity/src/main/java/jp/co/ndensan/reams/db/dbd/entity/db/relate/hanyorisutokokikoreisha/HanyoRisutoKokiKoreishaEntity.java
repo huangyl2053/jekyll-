@@ -171,6 +171,8 @@ public class HanyoRisutoKokiKoreishaEntity {
     private FlexibleDate 後期高齢者情報_資格取得日;
     private RString 後期高齢者情報_登録区分;
     private FlexibleDate 後期高齢者情報_資格喪失日;
+    private RString 後期高齢者情報_識別コード;
+    private int 後期高齢者情報_履歴番号;
     private RString 居宅届出_届出区分;
     private RString 事業者作成_作成区分コード;
     private RString 事業者作成_計画事業者番号;

@@ -113,7 +113,7 @@ public class KaigoAtenaJohoHandler {
         div.getNenkinJohoKensaku().getBtnNenkinInfoKensaku().setDisabled(資格喪失フラグ);
         ChoshuHoho 最新介護徴収方法情報データ
                 = 最新介護徴収方法情報データLst.isEmpty()
-                ? new ChoshuHoho(FlexibleYear.EMPTY, HihokenshaNo.EMPTY, 0) : 最新介護徴収方法情報データLst.get(0);
+                        ? new ChoshuHoho(FlexibleYear.EMPTY, HihokenshaNo.EMPTY, 0) : 最新介護徴収方法情報データLst.get(0);
         RString 基礎年金番号Old = null;
         RString 年金コードOld = null;
         if (連番_0001.equals(年度内処理済み連番)) {
@@ -396,7 +396,8 @@ public class KaigoAtenaJohoHandler {
         if (div.getTokubetsuChoshuGimushaCode() != null) {
             特徴義務者コード = div.getTokubetsuChoshuGimushaCode();
         }
-        特別徴収対象者登録Manager.insChoshuHoho(賦課年度, 被保険者番号, 基礎年金番号, 年金コード, 特徴義務者コード);
+        RString 捕捉月 = div.getTxtHosokuTsuki().getValue();
+        特別徴収対象者登録Manager.insChoshuHoho(賦課年度, 被保険者番号, 基礎年金番号, 年金コード, 特徴義務者コード, 捕捉月);
         RString 氏名 = div.getCcdKaigoAtenaInfo().get氏名漢字();
         div.getCcdKaigoKanryoMessge().setMessage(UrInformationMessages.保存終了, 識別コード.getColumnValue(), 氏名, true);
     }

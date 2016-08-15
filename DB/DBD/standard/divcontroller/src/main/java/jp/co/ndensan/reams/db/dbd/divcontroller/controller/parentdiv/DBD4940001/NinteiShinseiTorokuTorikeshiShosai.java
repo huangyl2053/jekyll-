@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4940001.Nint
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4940001.NinteiShinseiTorokuTorikeshiShosaiHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4940001.NinteiShinseiTorokuTorikeshiShosaiValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriDiv;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -51,10 +53,12 @@ public class NinteiShinseiTorokuTorikeshiShosai {
      */
     public ResponseData<NinteiShinseiTorokuTorikeshiShosaiDiv> onLoad(NinteiShinseiTorokuTorikeshiShosaiDiv div) {
 
-        // TODO. for test
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, new RString("2190000001"));
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        RString 被保険者番号 = RString.EMPTY;
+        if (null != key && null != key.get被保険者番号()) {
+            被保険者番号 = key.get被保険者番号().value();
+        }
 
-        RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
         YokaigoNinteiJoho 画面更新用情報 = getHandler(div).onLoad(被保険者番号);
         ViewStateHolder.put(要介護認定取消画面キー.画面更新用情報, 画面更新用情報);
         return ResponseData.of(div).respond();
@@ -90,9 +94,9 @@ public class NinteiShinseiTorokuTorikeshiShosai {
      * @return ResponseData<NinteiShinseiTorokuTorikeshiShosaiDiv>
      */
     public ResponseData<NinteiShinseiTorokuTorikeshiShosaiDiv> onBeforeOpenDialog_btnNyuinAndShisetsuNyusho(NinteiShinseiTorokuTorikeshiShosaiDiv div) {
-        // TODO. 実装しない。
-//        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-//        getHandler(div).onBeforeOpenDialog_btnDispGemmenJoho(taishoshaKey);
+
+        div.setHdnSyokikaMode(new RString(ShisetsuNyutaishoRirekiKanriDiv.DisplayMode.照会.toString()));
+
         return ResponseData.of(div).respond();
     }
 
@@ -114,6 +118,10 @@ public class NinteiShinseiTorokuTorikeshiShosai {
      */
     public ResponseData<NinteiShinseiTorokuTorikeshiShosaiDiv> onBeforeOpenDialog_btnChosaJokyo(NinteiShinseiTorokuTorikeshiShosaiDiv div) {
         // TODO. 実装しない。
+
+        RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
+        //List<YokaigoRirekiJoho> 今回前回履歴情報 = getHandler(div).get今回前回履歴情報(被保険者番号);
+
 //        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
 //        getHandler(div).onBeforeOpenDialog_btnDispGemmenJoho(taishoshaKey);
         return ResponseData.of(div).respond();
@@ -176,7 +184,7 @@ public class NinteiShinseiTorokuTorikeshiShosai {
             }
 
             ViewStateHolder.put(要介護認定取消画面キー.画面ダイアローグ番号, 1);
-            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
 
         int 画面ダイアローグ番号 = ViewStateHolder.get(要介護認定取消画面キー.画面ダイアローグ番号, Integer.class);

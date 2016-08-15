@@ -6,11 +6,10 @@
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.shotokujohoichiranhyosakusei;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.core.shotokujohoichiranhyosakusei.KaigoHokenShotokuItijiParameter;
-import jp.co.ndensan.reams.db.dbb.definition.core.shotokujohoichiranhyosakusei.ShotokuJohoIchiranhyoSakuseiParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokujohoichiranhyosakusei.KaigoHokenShotokuItijiTempEntity;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokujohoichiranhyosakusei.RegistShoriDateKanriParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokujohoichiranhyosakusei.ShotokuJohoIchiranhyoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokujohoichiranhyosakusei.KaigoHokenShotokuTempEntity;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 
 /**
  * ビジネス設計_DBBBZ51003_1_所得情報一覧表作成（バッチ）のMapper
@@ -33,39 +32,17 @@ public interface IShotokuJohoIchiranhyoSakuseiMapper {
     void creat介護保険所得();
 
     /**
-     * 介護保険所得のinsert
-     *
-     * @param entity KaigoHokenShotokuTempEntity
-     */
-    void insert介護保険所得(KaigoHokenShotokuTempEntity entity);
-
-    /**
-     * select介護所得一時データ
-     *
-     * @param ラジオボタン RString
-     * @return List<KaigoHokenShotokuItijiTempEntity>
-     */
-    List<KaigoHokenShotokuItijiTempEntity> select介護所得一時データ(RString ラジオボタン);
-
-    /**
      * creat介護所得一時
      */
     void creat介護所得一時();
 
     /**
-     * insert介護所得一時
-     *
-     * @param entity KaigoHokenShotokuItijiTempEntity
-     */
-    void insert介護所得一時(KaigoHokenShotokuItijiTempEntity entity);
-
-    /**
      * select対象データ
      *
-     * @param par KaigoHokenShotokuItijiParameter
+     * @param par ShotokuJohoIchiranhyoSakuseiParameter
      * @return List<KaigoHokenShotokuTempEntity>
      */
-    List<KaigoHokenShotokuTempEntity> select対象データ(KaigoHokenShotokuItijiParameter par);
+    List<KaigoHokenShotokuTempEntity> select対象データ(ShotokuJohoIchiranhyoSakuseiParameter par);
 
     /**
      * select所得情報一覧データ
@@ -74,4 +51,40 @@ public interface IShotokuJohoIchiranhyoSakuseiMapper {
      */
     List<KaigoHokenShotokuTempEntity> select所得情報一覧データ();
 
+    /**
+     * 処理日付管理マスタ(単一市町村)を取得します。
+     *
+     * @param param RegistShoriDateKanriParameter
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    DbT7022ShoriDateKanriEntity select処理日付管理マスタ_単一市町村(RegistShoriDateKanriParameter param);
+
+    /**
+     * 処理日付管理マスタ(広域市町村)を取得します。
+     *
+     * @param param RegistShoriDateKanriParameter
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    DbT7022ShoriDateKanriEntity select処理日付管理マスタ_広域市町村(RegistShoriDateKanriParameter param);
+
+    /**
+     * 処理日付管理マスタを保存します。
+     *
+     * @param entity DbT7022ShoriDateKanriEntity
+     */
+    void add処理日付管理マスタ(DbT7022ShoriDateKanriEntity entity);
+
+    /**
+     * 処理日付管理マスタを更新します。
+     *
+     * @param entity DbT7022ShoriDateKanriEntity
+     */
+    void update処理日付管理マスタ(DbT7022ShoriDateKanriEntity entity);
+
+    /**
+     * Tempを取得します。
+     *
+     * @return List<KaigoHokenShotokuTempEntity>
+     */
+    List<KaigoHokenShotokuTempEntity> selectTempAll();
 }

@@ -20,8 +20,10 @@ import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishicho
 import jp.co.ndensan.reams.db.dbz.business.core.shichoson.Shichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
-import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.dgJutoku_Row;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.hihousyosai.HihousyosaiFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.ShikibetsuTaishoSearchEntityHolder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
@@ -209,6 +211,31 @@ public class HihosyosaiHandler {
      */
     public void 施設入退所保存処理() {
         div.getCcdShisetuNyutaisyo().saveShisetsuNyutaisho();
+    }
+
+    /**
+     * 住所地特例履歴情報を取得します。
+     *
+     * @return 住所地特例履歴情報 住所地特例履歴情報
+     */
+    public SearchResult<jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho> 住所地特例履歴情報取得() {
+        List<dgJutoku_Row> dgJutokuList = div.getCcdJyusyotiTokure().getDgJutoku().getDataSource();
+        List<jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho> returnList = new ArrayList<>();
+        for (dgJutoku_Row row : dgJutokuList) {
+            DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
+            if (!RString.isNullOrEmpty(row.getState())) {
+                entity.setJushochitokureiKaijoJiyuCode(row.getKaijoJiyuKey() == null ? RString.EMPTY : row.getKaijoJiyuKey());
+                entity.setJushochitokureiKaijoTodokedeYMD(row.getKaijoTodokedeDate().getValue());
+                entity.setJushochitokureiKaijoYMD(row.getKaijoDate().getValue());
+                entity.setJushochitokureiTekiyoJiyuCode(row.getTekiyoJiyuKey() == null ? RString.EMPTY : row.getTekiyoJiyuKey());
+                entity.setJushochitokureiTekiyoTodokedeYMD(row.getTekiyoTodokedeDate().getValue());
+                entity.setJushochitokureiTekiyoYMD(row.getTekiyoDate().getValue());
+                jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho hihokenshaDaicho
+                        = new jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho(entity);
+                returnList.add(hihokenshaDaicho);
+            }
+        }
+        return SearchResult.of(returnList, 0, false);
     }
 
     /**

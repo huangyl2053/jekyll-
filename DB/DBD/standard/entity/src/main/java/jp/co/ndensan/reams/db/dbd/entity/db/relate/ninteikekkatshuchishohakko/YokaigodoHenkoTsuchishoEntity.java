@@ -51,15 +51,6 @@ public class YokaigodoHenkoTsuchishoEntity {
     private RString tsuchibun7;
     private RString tsuchibun8;
     private RString tsuchibun9;
-    private RString denshiKoin;
-    private RString hakkoYMD;
-    private RString ninshoshaYakushokuMei;
-    private RString ninshoshaYakushokuMei1;
-    private RString ninshoshaYakushokuMei2;
-    private RString ninshoshaShimeiKakenai;
-    private RString ninshoshaShimeiKakeru;
-    private RString koinShoryaku;
-    private RString koinMojiretsu;
     private RString yubinNo;
     private RString gyoseiku;
     private RString jushoText;
@@ -91,5 +82,6 @@ public class YokaigodoHenkoTsuchishoEntity {
     private RString kakkoRight1;
     private RString kakkoRight2;
     private RString customerBarCode;
+    private FlexibleDate hakkoYMD;
 
 }

@@ -3,24 +3,20 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.Kyufuseig
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri May 20 13:26:47 JST 2016 
+ * Thu Aug 11 15:13:38 CST 2016 
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
-
 /**
- * dgKyufuseigenRirekiList_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgKyufuseigenRirekiList_Row のクラスファイル
+ *
+ * @reamsid_L DBC-4350-050 liuxiaoyu
  */
-
 public class dgKyufuseigenRirekiList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
 
     private RString kanriKubun;
     private RString torokuKubun;

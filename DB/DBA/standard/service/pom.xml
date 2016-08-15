@@ -85,11 +85,14 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxPersistence</artifactId>
-            <version>${jp.co.ndensan.reams.uax.version}</version>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
             <artifactId>UxxService</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.aa.aax</groupId>
+            <artifactId>AaxService</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 
 /*
  * このコードはツールによって生成されました。
@@ -73,6 +75,13 @@ public interface IShujiiIryokikanAndShujiiInputDiv extends ICommonChildDivBasePr
     RString getRenrakuJiko();
 
     /**
+     * 主治医への連絡事項を設定します
+     *
+     * @param renrakuJiko 主治医への連絡事項
+     */
+    void setRenrakuJiko(RString renrakuJiko);
+
+    /**
      * 指定医を取得します
      *
      * @return TRUE:指定医有り FALSE:指定医なし
@@ -97,4 +106,32 @@ public interface IShujiiIryokikanAndShujiiInputDiv extends ICommonChildDivBasePr
      * @param value ShoriType
      */
     void setMode_ShoriType(ShoriType value);
+
+    /**
+     * txtIryoKikanCodeの設定
+     *
+     * @param txtIryoKikanCode TextBoxCode
+     */
+    public void setTxtIryoKikanCode(TextBoxCode txtIryoKikanCode);
+
+    /**
+     * txtIryoKikanNameの設定
+     *
+     * @param txtIryoKikanName TextBox
+     */
+    public void setTxtIryoKikanName(TextBox txtIryoKikanName);
+
+    /**
+     * txtShujiiCodeの設定
+     *
+     * @param txtShujiiCode TextBoxCode
+     */
+    public void setTxtShujiiCode(TextBoxCode txtShujiiCode);
+
+    /**
+     * txtShujiiNameの設定
+     *
+     * @param txtShujiiName TextBox
+     */
+    public void setTxtShujiiName(TextBox txtShujiiName);
 }

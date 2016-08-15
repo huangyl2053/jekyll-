@@ -144,5 +144,37 @@
         <foreach collection="市町村コード" item="code" open="(" separator="," close=")"> #{code} </foreach>
        AND 
         DbT1001."hihokenshaNo" = #{被保険者番号}
+ </select>
+ <select resultOrdered="true" id="ge直近被保データ" resultMap="ResultMap_DbT1001HihokenshaDaichoEntity"
+   parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.juminidorendotennyu.JuminIdoRendoTennyuParameter" fetchSize="500">
+	SELECT
+	DbT1001.*
+	FROM
+	rgdb."DbT1001HihokenshaDaicho" AS DbT1001
+        WHERE
+          DbT1001."hihokenshaNo" =#{hihokenshaNo}
+        AND
+         DbT1001."idoYMD" =#{idoYMD}
+       ORDER BY
+           DbT1001."hihokenshaNo" desc, DbT1001."edaNo" desc
+       LIMIT(1) 
+	</select>
+         <select resultOrdered="true" id="get処理対象者" resultMap="ResultMap_DbT1001HihokenshaDaichoEntity"
+         parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.juminidorendotennyu.JuminIdoRendoTennyuMybatisprm" fetchSize="500">
+	SELECT
+	DbT1001.*,
+        PSM.*
+	FROM
+	   rgdb."DbT1001HihokenshaDaicho" AS DbT1001
+        JOIN
+           rgua.${psmShikibetsuTaisho} AS PSM
+        ON
+          DbT1001."shikibetsuCode" = PSM."shikibetsuCode"
+       WHERE
+         PSM."kanaMeisho"= #{カナ名称} 
+       AND
+        PSM."seinengappiYMD" = #{生年月日}
+       AND
+        PSM."seibetsuCode" = #{性別コード}  
 	</select>
 </mapper>

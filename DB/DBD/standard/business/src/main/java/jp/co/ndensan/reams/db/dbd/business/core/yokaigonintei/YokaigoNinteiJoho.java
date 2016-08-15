@@ -284,7 +284,7 @@ public class YokaigoNinteiJoho implements Serializable {
      * @return 主治医医療機関コード認定
      */
     public RString get主治医医療機関コード認定() {
-        return null == 要介護認定申請情報認定Entity ? RString.EMPTY : 要介護認定申請情報認定Entity.getShujiiIryokikanCode().value();
+        return null == 要介護認定申請情報認定Entity ? RString.EMPTY : 要介護認定申請情報認定Entity.getShujiiIryokikanCode().getColumnValue();
     }
 
     /**
@@ -311,7 +311,7 @@ public class YokaigoNinteiJoho implements Serializable {
      * @return 主治医コード認定
      */
     public RString get主治医コード認定() {
-        return null == 要介護認定申請情報認定Entity ? RString.EMPTY : 要介護認定申請情報認定Entity.getShujiiCode().value();
+        return null == 要介護認定申請情報認定Entity ? RString.EMPTY : 要介護認定申請情報認定Entity.getShujiiCode().getColumnValue();
     }
 
     /**
@@ -1013,7 +1013,7 @@ public class YokaigoNinteiJoho implements Serializable {
      * @return 介護認定審査会意見
      */
     public RString get介護認定審査会意見() {
-        return null == 要介護認定結果情報Entity ? RString.EMPTY : 要介護認定結果情報Entity.getNinteishinsakaiIkenShurui();
+        return null == 要介護認定結果情報Entity ? RString.EMPTY : 要介護認定結果情報Entity.getShinsakaiIken();
     }
 
     /**

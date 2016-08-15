@@ -1,5 +1,5 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4040011;
-/**
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4040011;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * ShogaishaKojoTaishoshaDetail のクラスファイル 
@@ -15,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ShogaishaKojoTaishoshaDetailDiv extends Panel {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,10 +25,10 @@ public class ShogaishaKojoTaishoshaDetailDiv extends Panel {
     private TextBox txtNinteiKubun;
     @JsonProperty("txtNinteiNaiyo")
     private TextBox txtNinteiNaiyo;
-    @JsonProperty("txtJiritsudo")
-    private TextBox txtJiritsudo;
-    @JsonProperty("chkTechoAri")
-    private CheckBoxList chkTechoAri;
+    @JsonProperty("txtNinnchishouJiritsudo")
+    private TextBox txtNinnchishouJiritsudo;
+    @JsonProperty("txtShougaishaJiritsudo")
+    private TextBox txtShougaishaJiritsudo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -36,44 +36,77 @@ public class ShogaishaKojoTaishoshaDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettxtNinteiKubun
+     * @return txtNinteiKubun
+     */
     @JsonProperty("txtNinteiKubun")
     public TextBox getTxtNinteiKubun() {
         return txtNinteiKubun;
     }
 
+    /*
+     * settxtNinteiKubun
+     * @param txtNinteiKubun txtNinteiKubun
+     */
     @JsonProperty("txtNinteiKubun")
     public void setTxtNinteiKubun(TextBox txtNinteiKubun) {
-        this.txtNinteiKubun=txtNinteiKubun;
+        this.txtNinteiKubun = txtNinteiKubun;
     }
 
+    /*
+     * gettxtNinteiNaiyo
+     * @return txtNinteiNaiyo
+     */
     @JsonProperty("txtNinteiNaiyo")
     public TextBox getTxtNinteiNaiyo() {
         return txtNinteiNaiyo;
     }
 
+    /*
+     * settxtNinteiNaiyo
+     * @param txtNinteiNaiyo txtNinteiNaiyo
+     */
     @JsonProperty("txtNinteiNaiyo")
     public void setTxtNinteiNaiyo(TextBox txtNinteiNaiyo) {
-        this.txtNinteiNaiyo=txtNinteiNaiyo;
+        this.txtNinteiNaiyo = txtNinteiNaiyo;
     }
 
-    @JsonProperty("txtJiritsudo")
-    public TextBox getTxtJiritsudo() {
-        return txtJiritsudo;
+    /*
+     * gettxtNinnchishouJiritsudo
+     * @return txtNinnchishouJiritsudo
+     */
+    @JsonProperty("txtNinnchishouJiritsudo")
+    public TextBox getTxtNinnchishouJiritsudo() {
+        return txtNinnchishouJiritsudo;
     }
 
-    @JsonProperty("txtJiritsudo")
-    public void setTxtJiritsudo(TextBox txtJiritsudo) {
-        this.txtJiritsudo=txtJiritsudo;
+    /*
+     * settxtNinnchishouJiritsudo
+     * @param txtNinnchishouJiritsudo txtNinnchishouJiritsudo
+     */
+    @JsonProperty("txtNinnchishouJiritsudo")
+    public void setTxtNinnchishouJiritsudo(TextBox txtNinnchishouJiritsudo) {
+        this.txtNinnchishouJiritsudo = txtNinnchishouJiritsudo;
     }
 
-    @JsonProperty("chkTechoAri")
-    public CheckBoxList getChkTechoAri() {
-        return chkTechoAri;
+    /*
+     * gettxtShougaishaJiritsudo
+     * @return txtShougaishaJiritsudo
+     */
+    @JsonProperty("txtShougaishaJiritsudo")
+    public TextBox getTxtShougaishaJiritsudo() {
+        return txtShougaishaJiritsudo;
     }
 
-    @JsonProperty("chkTechoAri")
-    public void setChkTechoAri(CheckBoxList chkTechoAri) {
-        this.chkTechoAri=chkTechoAri;
+    /*
+     * settxtShougaishaJiritsudo
+     * @param txtShougaishaJiritsudo txtShougaishaJiritsudo
+     */
+    @JsonProperty("txtShougaishaJiritsudo")
+    public void setTxtShougaishaJiritsudo(TextBox txtShougaishaJiritsudo) {
+        this.txtShougaishaJiritsudo = txtShougaishaJiritsudo;
     }
 
+    // </editor-fold>
 }

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-4350-070 wangxingpeng -->
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.ninteirirekiichiran.INinteiRirekiIchiranMapper">
+    
+     <select resultOrdered="true" id = "select受給者台帳情報取得" resultMap="resultmap_getJyukyuuSyaDaiTyouJyoho" parameterType="java.util.Map" fetchSize="500">
+        SELECT
+        DbT4001JukyushaDaicho."jukyuShinseiYMD" AS 受給申請年月日,
+        DbT4001JukyushaDaicho."yokaigoJotaiKubunCode" AS 要介護認定状態区分コード,
+        DbT4001JukyushaDaicho."ninteiYukoKikanKaishiYMD" AS 認定有効期間開始年月日,
+        DbT4001JukyushaDaicho."ninteiYukoKikanShuryoYMD" AS 認定有効期間終了年月日,
+        DbT4001JukyushaDaicho."jukyuShinseiJiyu" AS 受給申請事由,
+        DbT4001JukyushaDaicho."minashiCode" AS みなし要介護区分コード,
+        DbT4001JukyushaDaicho."kyuSochishaFlag" AS 旧措置者フラグ
+        FROM
+        rgdb."DbT4001JukyushaDaicho" AS DbT4001JukyushaDaicho
+        WHERE
+        NOT EXISTS(
+        select 'X' from rgdb."DbT4001JukyushaDaicho" AS Daicho
+        WHERE
+        DbT4001JukyushaDaicho."shichosonCode" = Daicho."shichosonCode"
+        AND DbT4001JukyushaDaicho."hihokenshaNo" = Daicho."hihokenshaNo"
+        AND DbT4001JukyushaDaicho."rirekiNo" = Daicho."rirekiNo"
+        AND DbT4001JukyushaDaicho."jukyuShinseiJiyu" = Daicho."jukyuShinseiJiyu"
+        AND DbT4001JukyushaDaicho."edaban" <![CDATA[<]]> Daicho."edaban"
+        )
+        AND DbT4001JukyushaDaicho."hihokenshaNo" = #{被保険者番号}
+        AND(DbT4001JukyushaDaicho."yukoMukoKubun" = '0' OR DbT4001JukyushaDaicho."yukoMukoKubun" = '1')
+        AND DbT4001JukyushaDaicho."logicalDeletedFlag" = FALSE
+        ORDER BY
+        DbT4001JukyushaDaicho."ninteiYukoKikanKaishiYMD" DESC				
+    </select>
+    
+    <resultMap id="resultmap_getJyukyuuSyaDaiTyouJyoho" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.ninteirirekiichiran.JyukyuuSyaDaiTyouEntity" autoMapping="true">
+        <id property="申請日" column="受給申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="要介護認定状態区分" column="要介護認定状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <id property="認定有効開始日" column="認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="認定有効終了日" column="認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="申請種別" column="受給申請事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="みなし区分" column="みなし要介護区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="旧措置者フラグ" column="旧措置者フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+    </resultMap>
+</mapper>

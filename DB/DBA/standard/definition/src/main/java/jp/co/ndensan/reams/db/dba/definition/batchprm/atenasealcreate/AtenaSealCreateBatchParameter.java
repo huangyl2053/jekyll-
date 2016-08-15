@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dba.definition.batchprm.atenasealcreate;
 
+import jp.co.ndensan.reams.db.dba.definition.processprm.atenasealcreate.AtenaSealCreateProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,7 +32,10 @@ public class AtenaSealCreateBatchParameter extends BatchParameterBase {
     private static final String SAIYUUSENJYUSHO = "saiyuusenjyusho";
     private static final String KEISHOU = "keishou";
     private static final String HITEMOTSUBANGOUHYOUJI = "hitemotsubangouhyouji";
-    private static final String ATESAKIJYUYSHOSETTEI = "atesakijyuyshosettei";
+    private static final String ISKATAGAKI = "iskatagaki";
+    private static final String ISSHICHOSONMEISHO = "isshichosonmeisho";
+    private static final String ISTODOFUKENMEISHO = "istodofukenmeisho";
+    private static final String ISGUNMEISHO = "isgunmeisho";
     private static final String SHUTSUTUOKUJYUNID = "shutsutuokujyunid";
     private static final String GYOUMUCODE = "gyoumucode";
 
@@ -41,9 +44,9 @@ public class AtenaSealCreateBatchParameter extends BatchParameterBase {
     @BatchParameter(key = CHUYSHUTSUKUKANTXT, name = "抽出期間TXT")
     private RString chuyshutsukukantxt;
     @BatchParameter(key = CHUUSHUTSUKIKANKAISHIBI, name = "抽出期間開始日")
-    private FlexibleDate chuushutsukikankaishibi;
+    private RString chuushutsukikankaishibi;
     @BatchParameter(key = CHUUSHUTSUKIKANSHUURYOUBI, name = "抽出期間終了日")
-    private FlexibleDate chuushutsukikanshuuryoubi;
+    private RString chuushutsukikanshuuryoubi;
     @BatchParameter(key = SHIKAKUKUBUN, name = "資格区分")
     private RString shikakukubun;
     @BatchParameter(key = SHICHOUSONSHITEI, name = "市町村指定")
@@ -54,8 +57,14 @@ public class AtenaSealCreateBatchParameter extends BatchParameterBase {
     private RString keishou;
     @BatchParameter(key = HITEMOTSUBANGOUHYOUJI, name = "被保番号表示")
     private RString hitemotsubangouhyouji;
-    @BatchParameter(key = ATESAKIJYUYSHOSETTEI, name = "宛先住所設定")
-    private RString atesakijyuyshosettei;
+    @BatchParameter(key = ISKATAGAKI, name = "方書")
+    private boolean iskatagaki;
+    @BatchParameter(key = ISSHICHOSONMEISHO, name = "市町村名称")
+    private boolean isshichosonmeisho;
+    @BatchParameter(key = ISTODOFUKENMEISHO, name = "都道府県名称")
+    private boolean istodofukenmeisho;
+    @BatchParameter(key = ISGUNMEISHO, name = "郡名称")
+    private boolean isgunmeisho;
     @BatchParameter(key = SHUTSUTUOKUJYUNID, name = "出力順ID")
     private Long shutsutuokujyunid;
     @BatchParameter(key = GYOUMUCODE, name = "業務コード")
@@ -79,21 +88,27 @@ public class AtenaSealCreateBatchParameter extends BatchParameterBase {
      * @param saiyuusenjyusho 最優先住所
      * @param keishou 敬称
      * @param hitemotsubangouhyouji 被保番号表示
-     * @param atesakijyuyshosettei 宛先住所設定
+     * @param iskatagaki 方書
+     * @param isshichosonmeisho 市町村名称
+     * @param istodofukenmeisho 都道府県名称
+     * @param isgunmeisho 郡名称
      * @param shutsutuokujyunid 出力順ID
      * @param gyoumucode 業務コード
      */
     public AtenaSealCreateBatchParameter(
             RString chuushutsutaishousha,
             RString chuyshutsukukantxt,
-            FlexibleDate chuushutsukikankaishibi,
-            FlexibleDate chuushutsukikanshuuryoubi,
+            RString chuushutsukikankaishibi,
+            RString chuushutsukikanshuuryoubi,
             RString shikakukubun,
             RString shichousonshitei,
             RString saiyuusenjyusho,
             RString keishou,
             RString hitemotsubangouhyouji,
-            RString atesakijyuyshosettei,
+            boolean iskatagaki,
+            boolean isshichosonmeisho,
+            boolean istodofukenmeisho,
+            boolean isgunmeisho,
             Long shutsutuokujyunid,
             RString gyoumucode) {
         this.chuushutsutaishousha = chuushutsutaishousha;
@@ -105,8 +120,36 @@ public class AtenaSealCreateBatchParameter extends BatchParameterBase {
         this.saiyuusenjyusho = saiyuusenjyusho;
         this.keishou = keishou;
         this.hitemotsubangouhyouji = hitemotsubangouhyouji;
-        this.atesakijyuyshosettei = atesakijyuyshosettei;
+        this.iskatagaki = iskatagaki;
+        this.isshichosonmeisho = isshichosonmeisho;
         this.shutsutuokujyunid = shutsutuokujyunid;
+        this.istodofukenmeisho = istodofukenmeisho;
+        this.isgunmeisho = isgunmeisho;
         this.gyoumucode = gyoumucode;
     }
+
+    /**
+     * 宛名シール作成、年齢到達予定者　選択したの場合、パラメータを作成します。
+     *
+     * @return AtenaSealCreateProcessParameter
+     */
+    public AtenaSealCreateProcessParameter toAtenaSealCreateProcessParameter() {
+        return new AtenaSealCreateProcessParameter(
+                chuushutsutaishousha,
+                chuyshutsukukantxt,
+                chuushutsukikankaishibi,
+                chuushutsukikanshuuryoubi,
+                shikakukubun,
+                shichousonshitei,
+                saiyuusenjyusho,
+                keishou,
+                hitemotsubangouhyouji,
+                iskatagaki,
+                isshichosonmeisho,
+                istodofukenmeisho,
+                isgunmeisho,
+                shutsutuokujyunid,
+                gyoumucode);
+    }
+
 }

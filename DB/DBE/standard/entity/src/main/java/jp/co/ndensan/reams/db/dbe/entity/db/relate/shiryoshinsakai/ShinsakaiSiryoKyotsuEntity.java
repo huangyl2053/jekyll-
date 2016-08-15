@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -24,6 +25,7 @@ public class ShinsakaiSiryoKyotsuEntity {
     private ShinseishoKanriNo shinseishoKanriNo;
     private int shinsakaiOrder;
     private int ninteichosaRirekiNo;
+    private Code koroshoIfShikibetsuCode;
     private RString shoKisaiHokenshaNo;
     private RString hihokenshaNo;
     private AtenaMeisho hihokenshaName;
@@ -36,4 +38,12 @@ public class ShinsakaiSiryoKyotsuEntity {
     private RString riyoShisetsuJusho;
     private RString riyoShisetsuTelNo;
     private RDateTime imageSharedFileId;
+    private RString jutakuKaishu;
+    private RString tokubetsuKyufuService;
+    private RString zaitakuService;
+    private RString shuso;
+    private RString kazokuJokyo;
+    private RString kyojuKankyo;
+    private RString kikaiKiki;
+    private boolean isJimukyoku;
 }

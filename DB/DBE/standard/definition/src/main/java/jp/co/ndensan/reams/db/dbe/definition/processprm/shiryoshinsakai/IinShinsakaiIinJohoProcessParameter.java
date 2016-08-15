@@ -22,7 +22,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParameter {
 
-    private RString gogitaiNo;
+    private int gogitaiNo;
+    private int bangoStart;
+    private int bangoEnd;
     private FlexibleDate shinsakaiKaisaiYoteiYMD;
     private RString shinsakaiKaisaiNo;
     private RString shuturyokuJun;
@@ -30,6 +32,9 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
     private RString printHou;
     private Decimal chohyoIinHusu;
     private RString shinsakaiKaishiYoteiTime;
+    private RString sakuseiJoken;
+    private final RString 作成条件_範囲指定 = new RString("範囲指定");
+    private final RString 作成条件_追加分 = new RString("追加分");
 
     /**
      * コンストラクタです。
@@ -40,26 +45,32 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
      * @param shuturyokuJun 出力順
      * @param shuturyokuSutairu 出力スタイル
      * @param printHou 印刷方法
-     * @param chohyoIinHusu 審査会委員用部数
      * @param shinsakaiKaishiYoteiTime 介護認定審査会開始予定時刻
+     * @param sakuseiJoken 作成条件
+     * @param bangoStart 開始資料番号
+     * @param bangoEnd 終了資料番号
      */
     public IinShinsakaiIinJohoProcessParameter(
-            RString gogitaiNo,
+            int gogitaiNo,
             FlexibleDate shinsakaiKaisaiYoteiYMD,
             RString shinsakaiKaisaiNo,
             RString shuturyokuJun,
             RString shuturyokuSutairu,
             RString printHou,
-            Decimal chohyoIinHusu,
-            RString shinsakaiKaishiYoteiTime) {
+            RString shinsakaiKaishiYoteiTime,
+            RString sakuseiJoken,
+            int bangoStart,
+            int bangoEnd) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shuturyokuJun = shuturyokuJun;
         this.gogitaiNo = gogitaiNo;
         this.shinsakaiKaisaiYoteiYMD = shinsakaiKaisaiYoteiYMD;
         this.shuturyokuSutairu = shuturyokuSutairu;
         this.printHou = printHou;
-        this.chohyoIinHusu = chohyoIinHusu;
         this.shinsakaiKaishiYoteiTime = shinsakaiKaishiYoteiTime;
+        this.sakuseiJoken = sakuseiJoken;
+        this.bangoStart = bangoStart;
+        this.bangoEnd = bangoEnd;
     }
 
     /**
@@ -68,11 +79,20 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
      * @return IinTokkiJikouItiziHanteiMyBatisParameter
      */
     public IinShinsakaiIinJohoMyBatisParameter toIinShinsakaiIinJohoMyBatisParameter() {
-        boolean isShuturyokuJun = false;
-        if (RString.isNullOrEmpty(shuturyokuJun)) {
-            isShuturyokuJun = true;
+        boolean isShuturyokuJunEmpty = false;
+        boolean isSakuseiJokenHani = false;
+        boolean isSakuseiJokenTuika = false;
+        if (作成条件_範囲指定.equals(sakuseiJoken)) {
+            isSakuseiJokenHani = true;
         }
-        return new IinShinsakaiIinJohoMyBatisParameter(gogitaiNo, shinsakaiKaisaiYoteiYMD, shinsakaiKaisaiNo, shuturyokuJun, isShuturyokuJun);
+        if (作成条件_追加分.equals(sakuseiJoken)) {
+            isSakuseiJokenTuika = true;
+        }
+        if (RString.isNullOrEmpty(shuturyokuJun)) {
+            isShuturyokuJunEmpty = true;
+        }
+        return new IinShinsakaiIinJohoMyBatisParameter(gogitaiNo, bangoStart, bangoEnd,
+                shinsakaiKaisaiYoteiYMD, shinsakaiKaisaiNo, shuturyokuJun, isSakuseiJokenHani, isSakuseiJokenTuika, isShuturyokuJunEmpty);
     }
 
     /**
@@ -82,9 +102,18 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
      */
     public JimuShinsakaiIinJohoMyBatisParameter toJimuShinsakaiIinJohoMyBatisParameter() {
         boolean isShuturyokuJun = false;
+        boolean isSakuseiJokenHani = false;
+        boolean isSakuseiJokenTuika = false;
+        if (作成条件_範囲指定.equals(sakuseiJoken)) {
+            isSakuseiJokenHani = true;
+        }
+        if (作成条件_追加分.equals(sakuseiJoken)) {
+            isSakuseiJokenTuika = true;
+        }
         if (RString.isNullOrEmpty(shuturyokuJun)) {
             isShuturyokuJun = true;
         }
-        return new JimuShinsakaiIinJohoMyBatisParameter(gogitaiNo, shinsakaiKaisaiYoteiYMD, shinsakaiKaisaiNo, shuturyokuJun, isShuturyokuJun);
+        return new JimuShinsakaiIinJohoMyBatisParameter(bangoStart, bangoEnd, shuturyokuJun,
+                isShuturyokuJun, isSakuseiJokenHani, isSakuseiJokenTuika, shinsakaiKaisaiNo, gogitaiNo, shinsakaiKaisaiYoteiYMD);
     }
 }

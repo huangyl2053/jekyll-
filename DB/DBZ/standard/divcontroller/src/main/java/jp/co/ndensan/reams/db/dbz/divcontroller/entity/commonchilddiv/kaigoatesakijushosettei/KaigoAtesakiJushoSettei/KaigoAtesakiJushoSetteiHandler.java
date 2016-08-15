@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 /**
  * 介護宛先住所設定Handlerクラスです。
  *
- * @reamsid_L　DBU-3990-030　wanghui
+ * @reamsid_L DBU-3990-030 wanghui
  */
 public class KaigoAtesakiJushoSetteiHandler {
 

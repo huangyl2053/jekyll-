@@ -5,12 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0150011;
 
-import java.util.Map;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KyufuJikoSakuseiEntityResult;
+import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.TeikyohyoBeppyoEntityResult;
 import jp.co.ndensan.reams.db.dbc.business.core.serviceriyohyobeppyo.ServiceRiyohyoBeppyoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0150011.ServiceTeikyohyoBeppyoPrintMainDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.teikyohyobeppyo.TeikyohyoBeppyoManager;
+import jp.co.ndensan.reams.db.dbc.service.report.serviceRiyohyoBeppyo.ServiceRiyohyoBeppyoPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -20,17 +23,13 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 /**
  * 画面設計_DBC0150011_サービス提供票別表のHandlerクラス
  *
- * @reamsid_L DBC-5110-010 xupeng
+ * @reamsid_L DBC-5100-010 xuxin
  */
 public class ServiceTeikyohyoBeppyoPrintMainHandler {
 
+    private static final RString 引数_自己作成0件 = new RString("自己作成0件");
+
     private final ServiceTeikyohyoBeppyoPrintMainDiv div;
-    private static final RString 引数_被保険者番号 = new RString("被保険者番号なし");
-    private static final RString KEY_被保険者番号 = new RString("被保険者番号");
-    private static final RString KEY_対象年月 = new RString("対象年月");
-    private static final RString KEY_履歴番号 = new RString("履歴番号");
-    private static final RString KEY_作成年月日 = new RString("作成年月日");
-    private static final RString KEY_自己作成計画年月 = new RString("自己作成計画年月");
 
     /**
      * コンストラクタです。
@@ -52,42 +51,43 @@ public class ServiceTeikyohyoBeppyoPrintMainHandler {
     }
 
     /**
-     * 画面初期化のメソッドます。
+     * 帳票発行処理時の処理です。
      *
      * @param 被保険者番号 HihokenshaNo
+     * @param manager TeikyohyoBeppyoManager
+     * @return SourceDataCollection
      */
-    public void initialize(HihokenshaNo 被保険者番号) {
-        if (被保険者番号 == null || 被保険者番号.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(
-                    引数_被保険者番号.toString()));
-        } else {
-            div.getCccKaigoShiKakuKihon().initialize(被保険者番号);
-        }
-    }
+    public SourceDataCollection to帳票発行処理(HihokenshaNo 被保険者番号, TeikyohyoBeppyoManager manager) {
 
-    /**
-     * 共同処理用受給者異動連絡票データ作成する。
-     *
-     * @param map Map<RString, Object>
-     * @return 異動連絡票データ
-     */
-    public SourceDataCollection to帳票発行処理(Map<RString, Object> map) {
+        div.getTxtJikoSakuseiKeikakuYm().setVisible(true);
         ServiceRiyohyoBeppyoParameter param = new ServiceRiyohyoBeppyoParameter();
-        HihokenshaNo 被保険者番号 = new HihokenshaNo(map.get(KEY_被保険者番号).toString());
-        FlexibleYearMonth 対象年月 = new FlexibleYearMonth(map.get(KEY_対象年月).toString());
-        int 履歴番号 = Integer.parseInt(map.get(KEY_履歴番号).toString());
-        FlexibleYearMonth 自己作成計画年月 = new FlexibleYearMonth(map.get(KEY_自己作成計画年月).toString());
-
-        param.set作成日時(new FlexibleDate(map.get(KEY_作成年月日).toString()));
+        FlexibleYearMonth 自己作成計画年月 = new FlexibleYearMonth(div.getTxtJikoSakuseiKeikakuYm().getValue().
+                getYearMonth().toDateString());
+        TeikyohyoBeppyoEntityResult 被保険者情報Result = manager.get被保険者情報(被保険者番号, 自己作成計画年月);
+        被保険者情報Result.set被保険者番号(被保険者番号);
+        FlexibleYearMonth 対象年月 = 被保険者情報Result.get対象年月();
+        int 履歴番号 = 被保険者情報Result.get履歴番号();
+        RString 居宅総合事業区分 = 被保険者情報Result.get総合事業区分();
+        List<KyufuJikoSakuseiEntityResult> 帳票データ = manager.帳票データ抽出(被保険者番号, 対象年月, 履歴番号,
+                自己作成計画年月);
+        if (帳票データ.isEmpty()) {
+            throw new ApplicationException(DbcErrorMessages.帳票印刷不可.getMessage().replace(引数_自己作成0件.toString()));
+        } else {
+            KyufuJikoSakuseiEntityResult 合計Entity = 帳票データ.get(帳票データ.size() - 1);
+            帳票データ.remove(帳票データ.size() - 1);
+            List<KyufuJikoSakuseiEntityResult> 計画EntityList = 帳票データ;
+            合計Entity = manager.合計Entity単位設定(被保険者番号, 居宅総合事業区分, 自己作成計画年月, 合計Entity);
+            param.set合計情報(合計Entity);
+            param.set帳票情報マップ(manager.creat事業者別マップ(被保険者番号, 対象年月, 履歴番号, 自己作成計画年月,
+                    計画EntityList, 合計Entity));
+        }
+        param.set帳票ヘッダー(被保険者情報Result);
+        param.set作成日時(new FlexibleDate(div.getTxtSakuseiYmd().getValue().toDateString()));
         param.set利用年月(自己作成計画年月);
-//        TeikyohyoBeppyoManager manager = TeikyohyoBeppyoManager.createInstance();
-//        KubunGendo 合計情報 = manager.get合計Entity(被保険者番号, 対象年月, 履歴番号, 自己作成計画年月);
-//        param.set合計情報(合計情報);
-        param.set帳票ヘッダー(TeikyohyoBeppyoManager.createInstance().get被保険者情報(被保険者番号, 対象年月, 履歴番号, 自己作成計画年月));
-        param.set帳票情報マップ(TeikyohyoBeppyoManager.createInstance().get事業者別マップ(被保険者番号, 対象年月, 履歴番号, 自己作成計画年月));
-        param.set短期入所情報(TeikyohyoBeppyoManager.createInstance().get短期入所利用日数(被保険者番号, 対象年月, 履歴番号, 自己作成計画年月));
-        param.set種類別支給限度情報(TeikyohyoBeppyoManager.createInstance().get種類別支給限度情報(被保険者番号, 対象年月, 履歴番号, 自己作成計画年月));
-        return null;
-        //return KakushuTsuchishoSakusei.createInstance().publish(parameter); TODO
+        param.set種類別支給限度情報(manager.get種類別支給限度情報(自己作成計画年月, 帳票データ));
+        param.set短期入所情報(manager.get短期入所利用日数(被保険者番号, 対象年月, 履歴番号, 自己作成計画年月));
+        ServiceRiyohyoBeppyoPrintService printService = new ServiceRiyohyoBeppyoPrintService();
+        return printService.printSingle(param);
     }
+
 }

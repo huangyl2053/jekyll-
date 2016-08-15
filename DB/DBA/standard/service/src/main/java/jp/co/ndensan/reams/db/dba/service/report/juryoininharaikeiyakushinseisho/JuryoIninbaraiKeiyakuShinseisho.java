@@ -12,9 +12,12 @@ import jp.co.ndensan.reams.db.dba.business.report.juryoininharaikeiyakushinseish
 import jp.co.ndensan.reams.db.dba.business.report.juryoininharaikeiyakushinseisho.JuryoIninharaiKeiyakuShinseishoReport;
 import jp.co.ndensan.reams.db.dba.entity.report.juryoininharaikeiyakushinseisho.JuryoIninharaiKeiyakuShinseishoReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
-import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
-import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
 import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -63,10 +66,11 @@ public class JuryoIninbaraiKeiyakuShinseisho {
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<JuryoIninharaiKeiyakuShinseishoReportSource> assembler = createAssembler(proerty, reportManager)) {
                 ReportSourceWriter<JuryoIninharaiKeiyakuShinseishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-                INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
-                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
-                        null, reportSourceWriter.getImageFolderPath());
+                Ninshosha nishosha = NinshoshaFinderFactory.createInstance().get帳票認証者(
+                        GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
+                Association association = AssociationFinderFactory.createInstance().getAssociation();
+                INinshoshaSourceBuilder ninshoshaSourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                        nishosha, association, reportSourceWriter.getImageFolderPath(), RDate.getNowDate());
                 for (JuryoIninharaiKeiyakuShinseishoReport report : toReports(住宅福祉出力区分,
                         ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {
                     report.writeBy(reportSourceWriter);

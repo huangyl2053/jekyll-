@@ -11,10 +11,10 @@
      "id": "1",
      "type": "start",
      "condition": "",
-     "toLayoutSubGyomuCode": "DBB",
-     "toLayoutName": "DBB8120001",
-     "toLayoutTitle": "介護保険料即時賦課更正",
-     "toState": "即時賦課更正"
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0300001",
+     "toLayoutTitle": "賦課対象者検索",
+     "toState": "検索条件"
     },
     {
      "id": "2",
@@ -62,7 +62,49 @@
      "toLayoutSubGyomuCode": "DBB",
      "toLayoutName": "DBB8120001",
      "toLayoutTitle": "介護保険料即時賦課更正",
-     "toState": "完了"
+     "toState": "即時賦課更正"
+    },
+    {
+     "id": "6",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZ0300001",
+     "layoutTitle": "賦課対象者検索",
+     "eventName": "対象者特定",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB8120001",
+     "toLayoutTitle": "介護保険料即時賦課更正",
+     "toState": "即時賦課更正"
+    },
+    {
+     "id": "7",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB8120001",
+     "layoutTitle": "介護保険料即時賦課更正",
+     "eventName": "再検索する",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0300001",
+     "toLayoutTitle": "賦課対象者検索",
+     "toState": "検索条件"
+    },
+    {
+     "id": "8",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB8120001",
+     "layoutTitle": "介護保険料即時賦課更正",
+     "eventName": "検索結果一覧に戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0300001",
+     "toLayoutTitle": "賦課対象者検索",
+     "toState": "該当者一覧"
     }
    ]
   }

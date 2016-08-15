@@ -38,7 +38,11 @@ public class Idochekkurisuto {
      * @return ResponseData<IdochekkurisutoDiv>
      */
     public ResponseData<IdochekkurisutoDiv> onLoad(IdochekkurisutoDiv div) {
-        getHandler(div).setLoad(service.getKaisiShuryobi());
+         if (service.getKaisiShuryobi().records().isEmpty()) {
+            getHandler(div).setLoad(null);
+        } else {
+            getHandler(div).setLoad(service.getKaisiShuryobi().records().get(0));
+        }
         return ResponseData.of(div).respond();
     }
 

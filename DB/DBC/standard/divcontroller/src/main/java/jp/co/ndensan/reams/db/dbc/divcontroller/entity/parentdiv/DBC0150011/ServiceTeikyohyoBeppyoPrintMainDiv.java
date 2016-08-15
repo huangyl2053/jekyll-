@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 /**
  * ServiceTeikyohyoBeppyoPrintMain のクラスファイル
  *
- * @reamsid_L DBC-5110-010 xupeng
+ * @reamsid_L DBC-5100-010 xuxin
  */
 public class ServiceTeikyohyoBeppyoPrintMainDiv extends Panel {
 

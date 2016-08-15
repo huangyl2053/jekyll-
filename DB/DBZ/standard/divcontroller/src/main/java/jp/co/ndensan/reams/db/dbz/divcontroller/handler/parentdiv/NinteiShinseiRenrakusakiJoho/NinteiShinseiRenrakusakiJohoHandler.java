@@ -145,7 +145,8 @@ public class NinteiShinseiRenrakusakiJohoHandler {
                     renrakusakiJoho.get連絡先区分番号(),
                     renrakusakiJoho.get支所コード() == null ? RString.EMPTY : renrakusakiJoho.get支所コード().getColumnValue(),
                     renrakusakiJoho.get連絡先氏名カナ() == null ? RString.EMPTY : renrakusakiJoho.get連絡先氏名カナ().getColumnValue(),
-                    renrakusakiJoho.get連絡先携帯番号() == null ? RString.EMPTY : renrakusakiJoho.get連絡先郵便番号().getColumnValue());
+                    renrakusakiJoho.get連絡先携帯番号() == null ? RString.EMPTY : renrakusakiJoho.get連絡先郵便番号().getColumnValue(),
+                    renrakusakiJoho.get申請書管理番号().value());
             dateSource.add(row);
         }
         div.getDgRenrakusakiIchiran().setDataSource(dateSource);
@@ -225,7 +226,8 @@ public class NinteiShinseiRenrakusakiJohoHandler {
                 div.getDdlRenrakusakiKubun().getSelectedKey(),
                 div.getDdlShisho().getSelectedKey(),
                 nullTOEmpty(div.getTxtKanaShimei().getValue()),
-                div.getTxtYubinNo().getValue() == null ? RString.EMPTY : div.getTxtYubinNo().getValue().getColumnValue());
+                div.getTxtYubinNo().getValue() == null ? RString.EMPTY : div.getTxtYubinNo().getValue().getColumnValue(),
+                RString.EMPTY);
         dateSoruce.add(row);
         div.getDgRenrakusakiIchiran().setDataSource(dateSoruce);
     }
@@ -242,7 +244,8 @@ public class NinteiShinseiRenrakusakiJohoHandler {
                 div.getDdlRenrakusakiKubun().getSelectedKey(),
                 div.getDdlShisho().getSelectedKey(),
                 nullTOEmpty(div.getTxtKanaShimei().getValue()),
-                div.getTxtYubinNo().getValue() == null ? RString.EMPTY : div.getTxtYubinNo().getValue().getColumnValue());
+                div.getTxtYubinNo().getValue() == null ? RString.EMPTY : div.getTxtYubinNo().getValue().getColumnValue(),
+                div.getDgRenrakusakiIchiran().getActiveRow().getShinseishoKanriNo());
         dateSoruce.set(div.getDgRenrakusakiIchiran().getClickedRowId(), row);
         div.getDgRenrakusakiIchiran().setDataSource(dateSoruce);
     }
@@ -250,27 +253,47 @@ public class NinteiShinseiRenrakusakiJohoHandler {
     /**
      * 連絡先一覧のデータソースをビジネスへ変換します。
      *
+     * @param dbdBusiness List<RenrakusakiJoho>
      * @return List<RenrakusakiJoho>
      */
-    public List<RenrakusakiJoho> setBusiness() {
-        List<RenrakusakiJoho> businessList = new ArrayList<>();
+    public List<RenrakusakiJoho> setBusiness(List<RenrakusakiJoho> dbdBusiness) {
         for (dgRenrakusakiIchiran_Row row : div.getDgRenrakusakiIchiran().getDataSource()) {
-            RenrakusakiJoho business = new RenrakusakiJoho(RString.isNullOrEmpty(div
-                    .getHdnShinseishoKanriNo()) ? ShinseishoKanriNo.EMPTY : new ShinseishoKanriNo(div
-                            .getHdnShinseishoKanriNo()), Integer.parseInt(div.getTxtRenban().getValue().toString()));
-            business = business.createBuilderForEdit().set連絡先氏名(new AtenaMeisho(row.getShimei())).build();
-            business = business.createBuilderForEdit().set連絡先続柄(row.getTsuzukigara()).build();
-            business = business.createBuilderForEdit().set連絡先住所(new AtenaJusho(row.getJusho())).build();
-            business = business.createBuilderForEdit().set連絡先電話番号(new TelNo(row.getTelNo())).build();
-            business = business.createBuilderForEdit().set連絡先携帯番号(new TelNo(row.getMobileNo())).build();
-            business = business.createBuilderForEdit().set優先順位(RString.isNullOrEmpty(row.getYusenJuni()) ? 0 : Integer.parseInt(row.getYusenJuni().toString())).build();
-            business = business.createBuilderForEdit().set連絡先区分番号(row.getRenrakusakiKuBun()).build();
-            business = business.createBuilderForEdit().set支所コード(new ShishoCode(row.getSisyo())).build();
-            business = business.createBuilderForEdit().set連絡先氏名カナ(new AtenaKanaMeisho(row.getKanaShimei())).build();
-            business = business.createBuilderForEdit().set連絡先郵便番号(new YubinNo(row.getYuubinBango())).build();
-            businessList.add(business);
+            if (RString.isNullOrEmpty(row.getShinseishoKanriNo())) {
+                RenrakusakiJoho business = new RenrakusakiJoho(ShinseishoKanriNo.EMPTY, Integer.parseInt(div.getTxtRenban().getValue().toString()));
+                business = business.createBuilderForEdit().set連絡先氏名(new AtenaMeisho(row.getShimei())).build();
+                business = business.createBuilderForEdit().set連絡先続柄(row.getTsuzukigara()).build();
+                business = business.createBuilderForEdit().set連絡先住所(new AtenaJusho(row.getJusho())).build();
+                business = business.createBuilderForEdit().set連絡先電話番号(new TelNo(row.getTelNo())).build();
+                business = business.createBuilderForEdit().set連絡先携帯番号(new TelNo(row.getMobileNo())).build();
+                business = business.createBuilderForEdit().set優先順位(RString.isNullOrEmpty(row.getYusenJuni()) ? 0
+                        : Integer.parseInt(row.getYusenJuni().toString())).build();
+                business = business.createBuilderForEdit().set連絡先区分番号(row.getRenrakusakiKuBun()).build();
+                business = business.createBuilderForEdit().set支所コード(new ShishoCode(row.getSisyo())).build();
+                business = business.createBuilderForEdit().set連絡先氏名カナ(new AtenaKanaMeisho(row.getKanaShimei())).build();
+                business = business.createBuilderForEdit().set連絡先郵便番号(new YubinNo(row.getYuubinBango())).build();
+                dbdBusiness.add(business);
+            } else {
+                for (int i = 0; i < dbdBusiness.size(); i++) {
+                    RenrakusakiJoho joho = dbdBusiness.get(i);
+                    if (row.getShinseishoKanriNo().equals(joho.get申請書管理番号().value())
+                            && row.getRenban().equals(new RString(joho.get連番()))) {
+                        joho = joho.createBuilderForEdit().set連絡先氏名(new AtenaMeisho(row.getShimei())).build();
+                        joho = joho.createBuilderForEdit().set連絡先続柄(row.getTsuzukigara()).build();
+                        joho = joho.createBuilderForEdit().set連絡先住所(new AtenaJusho(row.getJusho())).build();
+                        joho = joho.createBuilderForEdit().set連絡先電話番号(new TelNo(row.getTelNo())).build();
+                        joho = joho.createBuilderForEdit().set連絡先携帯番号(new TelNo(row.getMobileNo())).build();
+                        joho = joho.createBuilderForEdit().set優先順位(RString.isNullOrEmpty(row.getYusenJuni()) ? 0
+                                : Integer.parseInt(row.getYusenJuni().toString())).build();
+                        joho = joho.createBuilderForEdit().set連絡先区分番号(row.getRenrakusakiKuBun()).build();
+                        joho = joho.createBuilderForEdit().set支所コード(new ShishoCode(row.getSisyo())).build();
+                        joho = joho.createBuilderForEdit().set連絡先氏名カナ(new AtenaKanaMeisho(row.getKanaShimei())).build();
+                        joho = joho.createBuilderForEdit().set連絡先郵便番号(new YubinNo(row.getYuubinBango())).build();
+                        dbdBusiness.set(i, joho.modifiedModel());
+                    }
+                }
+            }
         }
-        return businessList;
+        return dbdBusiness;
 
     }
 

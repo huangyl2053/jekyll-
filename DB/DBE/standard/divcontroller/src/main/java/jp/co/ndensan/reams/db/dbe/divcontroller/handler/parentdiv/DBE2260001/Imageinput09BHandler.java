@@ -50,7 +50,6 @@ public class Imageinput09BHandler {
                 item = set09B記入項目1(data, item);
                 item = set09B記入項目2(data, item);
                 item = set09B記入項目3(data, item);
-                item = set09B記入項目4(data, item);
                 builder.setShujiiIkenshoKinyuItem(item.modifiedModel());
             }
             for (ShujiiIkenshoIkenItem 意見項目 : 意見項目List) {
@@ -274,7 +273,7 @@ public class Imageinput09BHandler {
             }
             builder.setShujiiIkenshoKinyuItem(なしデータ).build();
         }
-        if (!記入項目連番レスト.contains(IkenshoKinyuMapping09B.関節の痛み.getコード())) {
+        if (!記入項目連番レスト.contains(IkenshoKinyuMapping09B.介護サービスの留意事項_運動.getコード())) {
             ShujiiIkenshoKinyuItem なしデータ = new ShujiiIkenshoKinyuItem(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                     data.getT5301_主治医意見書作成依頼履歴番号(), rStringToInt(IkenshoKinyuMapping09B.介護サービスの留意事項_運動.getコード()));
             なしデータ = なしデータ.createBuilderForEdit().set記入項目(data.get運動()).build();
@@ -283,7 +282,7 @@ public class Imageinput09BHandler {
             }
             builder.setShujiiIkenshoKinyuItem(なしデータ).build();
         }
-        if (!記入項目連番レスト.contains(IkenshoKinyuMapping09B.関節の痛み.getコード())) {
+        if (!記入項目連番レスト.contains(IkenshoKinyuMapping09B.介護サービスの留意事項_その他.getコード())) {
             ShujiiIkenshoKinyuItem なしデータ = new ShujiiIkenshoKinyuItem(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                     data.getT5301_主治医意見書作成依頼履歴番号(), rStringToInt(IkenshoKinyuMapping09B.介護サービスの留意事項_その他.getコード()));
             なしデータ = なしデータ.createBuilderForEdit().set記入項目(空白).build();
@@ -292,7 +291,7 @@ public class Imageinput09BHandler {
             }
             builder.setShujiiIkenshoKinyuItem(なしデータ).build();
         }
-        if (!記入項目連番レスト.contains(IkenshoKinyuMapping09B.関節の痛み.getコード())) {
+        if (!記入項目連番レスト.contains(IkenshoKinyuMapping09B.感染症の有無.getコード())) {
             ShujiiIkenshoKinyuItem なしデータ = new ShujiiIkenshoKinyuItem(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                     data.getT5301_主治医意見書作成依頼履歴番号(), rStringToInt(IkenshoKinyuMapping09B.感染症の有無.getコード()));
             なしデータ = なしデータ.createBuilderForEdit().set記入項目(data.get感染症()).build();
@@ -1330,6 +1329,33 @@ public class Imageinput09BHandler {
             }
             builder.setShujiiIkenshoIkenItem(なしデータ).build();
         }
+        if (!意見項目連番レスト.contains(IkenshoKomokuMapping09B.麻痺_右下肢.getコード())) {
+            ShujiiIkenshoIkenItem なしデータ = new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
+                    data.getT5301_主治医意見書作成依頼履歴番号(), rStringToInt(IkenshoKomokuMapping09B.麻痺_右下肢.getコード()));
+            なしデータ = なしデータ.createBuilderForEdit().set意見項目(data.get麻痺_右下肢()).build();
+            if (isNotEmpty(data.getT5101_厚労省IF識別コード())) {
+                なしデータ = なしデータ.createBuilderForEdit().set厚労省IF識別コード(new Code(data.getT5101_厚労省IF識別コード())).build();
+            }
+            builder.setShujiiIkenshoIkenItem(なしデータ).build();
+        }
+        if (!意見項目連番レスト.contains(IkenshoKomokuMapping09B.失調_不随意運動_上肢_右.getコード())) {
+            ShujiiIkenshoIkenItem なしデータ = new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
+                    data.getT5301_主治医意見書作成依頼履歴番号(), rStringToInt(IkenshoKomokuMapping09B.失調_不随意運動_上肢_右.getコード()));
+            なしデータ = なしデータ.createBuilderForEdit().set意見項目(data.get上肢_右()).build();
+            if (isNotEmpty(data.getT5101_厚労省IF識別コード())) {
+                なしデータ = なしデータ.createBuilderForEdit().set厚労省IF識別コード(new Code(data.getT5101_厚労省IF識別コード())).build();
+            }
+            builder.setShujiiIkenshoIkenItem(なしデータ).build();
+        }
+        if (!意見項目連番レスト.contains(IkenshoKomokuMapping09B.介護サービスの留意事項_運動.getコード())) {
+            ShujiiIkenshoIkenItem なしデータ = new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
+                    data.getT5301_主治医意見書作成依頼履歴番号(), rStringToInt(IkenshoKomokuMapping09B.介護サービスの留意事項_運動.getコード()));
+            なしデータ = なしデータ.createBuilderForEdit().set意見項目(data.get運動()).build();
+            if (isNotEmpty(data.getT5101_厚労省IF識別コード())) {
+                なしデータ = なしデータ.createBuilderForEdit().set厚労省IF識別コード(new Code(data.getT5101_厚労省IF識別コード())).build();
+            }
+            builder.setShujiiIkenshoIkenItem(なしデータ).build();
+        }
     }
 
     private ShujiiIkenshoKinyuItem set09B記入項目1(
@@ -1380,8 +1406,7 @@ public class Imageinput09BHandler {
         return item;
     }
 
-    private ShujiiIkenshoKinyuItem set09B記入項目3(
-            TorokuData data,
+    private ShujiiIkenshoKinyuItem set09B記入項目3(TorokuData data,
             ShujiiIkenshoKinyuItem item) {
         if (IkenshoKinyuMapping09B.関節の痛み.getコード().equals(new RString(item.get連番()))) {
             item = item.createBuilderForEdit().set記入項目(data.get間接の痛み()).build();
@@ -1415,12 +1440,6 @@ public class Imageinput09BHandler {
             item = item.createBuilderForEdit().set記入項目(data.get血圧()).build();
             記入項目連番レスト.add(IkenshoKinyuMapping09B.介護サービスの留意事項_血圧.getコード());
         }
-        return item;
-    }
-
-    private ShujiiIkenshoKinyuItem set09B記入項目4(
-            TorokuData data,
-            ShujiiIkenshoKinyuItem item) {
         if (IkenshoKinyuMapping09B.介護サービスの留意事項_嚥下.getコード().equals(new RString(item.get連番()))) {
             item = item.createBuilderForEdit().set記入項目(data.get嚥下()).build();
             記入項目連番レスト.add(IkenshoKinyuMapping09B.介護サービスの留意事項_嚥下.getコード());
@@ -1448,8 +1467,7 @@ public class Imageinput09BHandler {
         return item;
     }
 
-    private ShujiiIkenshoIkenItem set09B意見項目1(
-            TorokuData data,
+    private ShujiiIkenshoIkenItem set09B意見項目1(TorokuData data,
             ShujiiIkenshoIkenItem item) {
         if (IkenshoKomokuMapping09B.点滴の管理.getコード().equals(new RString(item.get連番()))) {
             item = item.createBuilderForEdit().set意見項目(data.get点滴の管理()).build();
@@ -1961,6 +1979,10 @@ public class Imageinput09BHandler {
         if (IkenshoKomokuMapping09B.生活機能の維持_改善の見通し.getコード().equals(new RString(item.get連番()))) {
             item = item.createBuilderForEdit().set意見項目(空白).build();
             意見項目連番レスト.add(IkenshoKomokuMapping09B.生活機能の維持_改善の見通し.getコード());
+        }
+        if (IkenshoKomokuMapping09B.介護サービスの留意事項_運動.getコード().equals(new RString(item.get連番()))) {
+            item = item.createBuilderForEdit().set意見項目(data.get運動()).build();
+            意見項目連番レスト.add(IkenshoKomokuMapping09B.介護サービスの留意事項_運動.getコード());
         }
         return item;
     }

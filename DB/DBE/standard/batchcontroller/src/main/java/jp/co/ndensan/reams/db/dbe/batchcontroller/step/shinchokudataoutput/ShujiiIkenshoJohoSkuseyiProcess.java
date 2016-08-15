@@ -36,7 +36,7 @@ public class ShujiiIkenshoJohoSkuseyiProcess extends BatchProcessBase<Ninteichos
     private static final RString 厚労省IF識別コード = new RString("厚労省IF識別コード");
     private ShujiiIkenshoJohoTempTableEntity temoTableEntity;
     private ShinchokuDataOutputBusiness business;
-    private Map<String, RString> map;
+    private Map<RString, RString> map;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 要介護認定主治医意見書意見項目TempTable;
 
@@ -45,8 +45,8 @@ public class ShujiiIkenshoJohoSkuseyiProcess extends BatchProcessBase<Ninteichos
         要介護認定主治医リスト = new ArrayList<>();
         business = new ShinchokuDataOutputBusiness();
         map = new HashMap<>();
-        map.put(申請書管理番号.toString(), RString.EMPTY);
-        map.put(厚労省IF識別コード.toString(), RString.EMPTY);
+        map.put(申請書管理番号, RString.EMPTY);
+        map.put(厚労省IF識別コード, RString.EMPTY);
     }
 
     @Override

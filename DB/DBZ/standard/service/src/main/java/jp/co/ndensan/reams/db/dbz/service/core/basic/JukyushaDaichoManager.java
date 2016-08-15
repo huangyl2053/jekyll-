@@ -8,19 +8,22 @@ package jp.co.ndensan.reams.db.dbz.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 受給者台帳を管理するクラスです。
+ *
+ * @reamsid_L DBC-4800-010 huzongcheng
  */
 public class JukyushaDaichoManager {
 
@@ -88,6 +91,43 @@ public class JukyushaDaichoManager {
         List<JukyushaDaicho> businessList = new ArrayList<>();
 
         for (DbT4001JukyushaDaichoEntity entity : dac.selectAll()) {
+            entity.initializeMd5();
+            businessList.add(new JukyushaDaicho(entity));
+        }
+
+        return businessList;
+    }
+
+    /**
+     * 受給者台帳情報を取得する。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return List<JukyushaDaicho>
+     */
+    @Transaction
+    public List<JukyushaDaicho> get受給者台帳被保険者番号(HihokenshaNo 被保険者番号) {
+        List<JukyushaDaicho> businessList = new ArrayList<>();
+
+        for (DbT4001JukyushaDaichoEntity entity : dac.select受給者台帳情報(被保険者番号)) {
+            entity.initializeMd5();
+            businessList.add(new JukyushaDaicho(entity));
+        }
+
+        return businessList;
+    }
+
+    /**
+     * 受給者台帳情報を取得する。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 識別コード 識別コード
+     * @return List<JukyushaDaicho>
+     */
+    @Transaction
+    public List<JukyushaDaicho> get受給者台帳(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
+        List<JukyushaDaicho> businessList = new ArrayList<>();
+
+        for (DbT4001JukyushaDaichoEntity entity : dac.select受給者台帳情報(被保険者番号, 識別コード)) {
             entity.initializeMd5();
             businessList.add(new JukyushaDaicho(entity));
         }

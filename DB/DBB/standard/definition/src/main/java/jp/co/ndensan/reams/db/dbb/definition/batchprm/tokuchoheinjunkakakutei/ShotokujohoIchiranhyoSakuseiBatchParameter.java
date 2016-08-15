@@ -6,16 +6,18 @@
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheinjunkakakutei.RegistShoriDateKanriProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheinjunkakakutei.ShotokujohoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * バッチ設計_DBBBT51003_所得情報一覧表作成のParameter
+ * バッチ設計_DBBBT51003_所得情報一覧表作成のParameterです。
  *
  * @reamsid_L DBB-1650-040 lijunjun
  */
@@ -67,7 +69,7 @@ public class ShotokujohoIchiranhyoSakuseiBatchParameter extends BatchParameterBa
     private Long 出力順ID;
 
     /**
-     * toProcessParameter
+     * toProcessParameterメソッドです。
      *
      * @return ShotokujohoIchiranhyoSakuseiProcessParameter
      */
@@ -86,4 +88,13 @@ public class ShotokujohoIchiranhyoSakuseiBatchParameter extends BatchParameterBa
                 null);
     }
 
+    /**
+     * toRegistShoriDateKanriProcessParameterメソッドです。
+     *
+     * @return RegistShoriDateKanriProcessParameter
+     */
+    public RegistShoriDateKanriProcessParameter toRegistShoriDateKanriProcessParameter() {
+        return new RegistShoriDateKanriProcessParameter(導入形態コード, 処理年度, 開始日時, 終了日時, 市町村コード,
+                市町村名称, FlexibleDate.MAX, FlexibleDate.MAX, RString.EMPTY, RString.EMPTY, 市町村情報リスト);
+    }
 }

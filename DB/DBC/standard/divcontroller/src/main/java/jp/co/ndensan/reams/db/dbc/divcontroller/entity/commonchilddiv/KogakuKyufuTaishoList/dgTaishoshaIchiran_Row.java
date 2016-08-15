@@ -3,24 +3,21 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyu
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Aug 04 16:22:17 JST 2016 
+ * Sun Jul 31 17:22:14 CST 2016
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
-
 /**
- * dgTaishoshaIchiran_Row のクラスファイル 
- * 
- * @author 自動生成
+ * 画面設計_DBCKD00006_高額給付対象一覧共有子Div
+ *
+ * @reamsid_L DBC-2020-030 quxiaodong
  */
-
 public class dgTaishoshaIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     private RString data0;
     private RString data1;
@@ -34,6 +31,9 @@ public class dgTaishoshaIchiran_Row extends DataRow {
     private RString data9;
     private RString data10;
     private RString data11;
+    private TextBox data12;
+    private TextBox data13;
+    private TextBoxNum data14;
 
     public dgTaishoshaIchiran_Row() {
         super();
@@ -49,6 +49,9 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.data9 = RString.EMPTY;
         this.data10 = RString.EMPTY;
         this.data11 = RString.EMPTY;
+        this.data12 = new TextBox();
+        this.data13 = new TextBox();
+        this.data14 = new TextBoxNum();
         this.setOriginalData("data0", data0);
         this.setOriginalData("data1", data1);
         this.setOriginalData("data2", data2);
@@ -61,9 +64,12 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("data9", data9);
         this.setOriginalData("data10", data10);
         this.setOriginalData("data11", data11);
+        this.setOriginalData("data12", data12);
+        this.setOriginalData("data13", data13);
+        this.setOriginalData("data14", data14);
     }
 
-    public dgTaishoshaIchiran_Row(RString data0, RString data1, RString data2, RString data3, TextBoxNum data4, TextBoxNum data5, TextBoxNum data6, TextBoxNum data7, TextBoxNum data8, RString data9, RString data10, RString data11) {
+    public dgTaishoshaIchiran_Row(RString data0, RString data1, RString data2, RString data3, TextBoxNum data4, TextBoxNum data5, TextBoxNum data6, TextBoxNum data7, TextBoxNum data8, RString data9, RString data10, RString data11, TextBox data12, TextBox data13, TextBoxNum data14) {
         super();
         this.setOriginalData("data0", data0);
         this.setOriginalData("data1", data1);
@@ -77,6 +83,9 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("data9", data9);
         this.setOriginalData("data10", data10);
         this.setOriginalData("data11", data11);
+        this.setOriginalData("data12", data12);
+        this.setOriginalData("data13", data13);
+        this.setOriginalData("data14", data14);
         this.data0 = data0;
         this.data1 = data1;
         this.data2 = data2;
@@ -89,6 +98,9 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.data9 = data9;
         this.data10 = data10;
         this.data11 = data11;
+        this.data12 = data12;
+        this.data13 = data13;
+        this.data14 = data14;
     }
 
     public RString getData0() {
@@ -137,6 +149,18 @@ public class dgTaishoshaIchiran_Row extends DataRow {
 
     public RString getData11() {
         return data11;
+    }
+
+    public TextBox getData12() {
+        return data12;
+    }
+
+    public TextBox getData13() {
+        return data13;
+    }
+
+    public TextBoxNum getData14() {
+        return data14;
     }
 
     public void setData0(RString data0) {
@@ -197,6 +221,21 @@ public class dgTaishoshaIchiran_Row extends DataRow {
     public void setData11(RString data11) {
         this.setOriginalData("data11", data11);
         this.data11 = data11;
+    }
+
+    public void setData12(TextBox data12) {
+        this.setOriginalData("data12", data12);
+        this.data12 = data12;
+    }
+
+    public void setData13(TextBox data13) {
+        this.setOriginalData("data13", data13);
+        this.data13 = data13;
+    }
+
+    public void setData14(TextBoxNum data14) {
+        this.setOriginalData("data14", data14);
+        this.data14 = data14;
     }
 
     // </editor-fold>

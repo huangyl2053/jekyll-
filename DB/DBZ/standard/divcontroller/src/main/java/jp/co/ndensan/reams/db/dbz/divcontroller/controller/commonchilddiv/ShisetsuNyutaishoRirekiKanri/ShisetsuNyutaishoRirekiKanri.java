@@ -9,7 +9,9 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNy
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriValidationHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.dgShisetsuNyutaishoRireki_Row;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -18,6 +20,20 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @reamsid_L DBA-0360-030 linghuhang
  */
 public class ShisetsuNyutaishoRirekiKanri {
+
+    /**
+     * 画面初期化を表示する。
+     *
+     * @param requestDiv 施設入退所履歴Div
+     * @return ResponseData<ShisetsuNyutaishoRirekiKanriDiv>
+     */
+    public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onLoad(ShisetsuNyutaishoRirekiKanriDiv requestDiv) {
+        if (!RString.isNullOrEmpty(requestDiv.getSyokikaMode())) {
+            requestDiv.set表示モード(requestDiv.getSyokikaMode());
+            getHandler(requestDiv).initialize(new ShikibetsuCode(requestDiv.getShikibetsuCode()));
+        }
+        return ResponseData.of(requestDiv).respond();
+    }
 
     /**
      * 「追加する」ボタンを押下する場合、施設入退所情報パネルを活性します。

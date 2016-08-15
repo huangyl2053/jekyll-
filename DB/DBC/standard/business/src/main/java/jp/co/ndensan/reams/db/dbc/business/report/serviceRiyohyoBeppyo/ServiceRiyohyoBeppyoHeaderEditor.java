@@ -30,7 +30,7 @@ public class ServiceRiyohyoBeppyoHeaderEditor implements IServiceRiyohyoBeppyoHe
     private static final RString 利用 = new RString("利用");
     private static final RString 保険_事業対象分 = new RString("保険/事業対象分");
     private static final RString 保険_事業費 = new RString("保険/事業費");
-    private static final RString 総合事業対象分 = new RString("総合事業対象分");
+    private static final RString 総合事業対象分 = new RString("(総合事業対象分)");
     private static final RString 事業費 = new RString("事業費");
 
     /**

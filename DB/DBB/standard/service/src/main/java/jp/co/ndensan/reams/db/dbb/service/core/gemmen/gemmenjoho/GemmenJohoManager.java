@@ -106,10 +106,11 @@ public class GemmenJohoManager {
         requireNonNull(減免の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage(減免の情報検索条件MESSAGE.toString()));
         IGemmenJohoRelateMapper mapper = mapperProvider.create(IGemmenJohoRelateMapper.class);
 
-        GemmenJohoRelateEntity relateEntity = mapper.select最新の減免情報ByKey(減免の情報検索条件);
-        if (relateEntity == null) {
+        List<GemmenJohoRelateEntity> relateEntityList = mapper.select最新の減免情報ByKey(減免の情報検索条件);
+        if (relateEntityList == null || relateEntityList.isEmpty()) {
             return null;
         }
+        GemmenJohoRelateEntity relateEntity = relateEntityList.get(0);
         relateEntity.initializeMd5ToEntities();
         return new GemmenJoho(relateEntity);
     }

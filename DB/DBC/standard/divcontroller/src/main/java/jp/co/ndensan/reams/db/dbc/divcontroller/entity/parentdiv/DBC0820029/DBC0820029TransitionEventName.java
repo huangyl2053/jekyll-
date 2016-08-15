@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBC-1030-090 lijunjun
  */
 public enum DBC0820029TransitionEventName implements IContainerEvents {
-// <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
+// <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
     一覧に戻る("一覧に戻る"),
     基本情報("基本情報"),
     給付費明細("給付費明細"),

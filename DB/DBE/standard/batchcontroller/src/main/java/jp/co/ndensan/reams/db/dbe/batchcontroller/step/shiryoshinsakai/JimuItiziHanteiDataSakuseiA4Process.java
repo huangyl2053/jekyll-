@@ -13,25 +13,20 @@ import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.Ichijihanteikekk
 import jp.co.ndensan.reams.db.dbe.business.report.jimukyokuyouichijihanteikekkahyoa4.IchijihanteikekkahyoA4Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuTokkiJikouItiziHanteiMyBatisParameter;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA4Entity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ItiziHanteiEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.NinteichosahyoTokkijikoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ZenzenkayiJyohouEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa4.IchijihanteikekkahyoA4Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimukyokuyouichijihanteikekkahyo.IchijihanteikekkahyoA4ReportSource;
-import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuRiyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -56,25 +51,22 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class JimuItiziHanteiDataSakuseiA4Process extends BatchKeyBreakBase<ItiziHanteiEntity> {
 
     private static final RString SELECT_JIMUNINTEITIZIHANTEI = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
-            + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getJimuItiziHantei");
+            + ".mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper.get事務局一次判定結果");
     private static final List<RString> PAGE_BREAK_KEYS_A4 = Collections.unmodifiableList(Arrays.asList(
             new RString(IchijihanteikekkahyoA4ReportSource.ReportSourceFields.shinseiCount.name())));
-    private IinTokkiJikouItiziHanteiProcessParameter paramter;
-    private IchijihanteikekkahyoEntity item;
-    private IShiryoShinsakaiIinMapper mapper;
-    List<ItiziHanteiEntity> itiziHanteiEntityList;
-    private JimuTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
+    private IinShinsakaiIinJohoProcessParameter paramter;
+    private IchijihanteikekkahyoA4Entity item;
+    private IJimuShiryoShinsakaiIinMapper mapper;
+    private JimuShinsakaiIinJohoMyBatisParameter myBatisParameter;
     @BatchWriter
     private BatchReportWriter<IchijihanteikekkahyoA4ReportSource> batchWriteA4;
     private ReportSourceWriter<IchijihanteikekkahyoA4ReportSource> reportSourceWriterA4;
 
     @Override
     protected void initialize() {
-        itiziHanteiEntityList = new ArrayList<>();
-        mapper = getMapper(IShiryoShinsakaiIinMapper.class);
-        myBatisParameter = paramter.toJimuTokkiJikouItiziHanteiMyBatisParameter();
+        mapper = getMapper(IJimuShiryoShinsakaiIinMapper.class);
+        myBatisParameter = paramter.toJimuShinsakaiIinJohoMyBatisParameter();
         myBatisParameter.setOrderKakuteiFlg(ShinsakaiOrderKakuteiFlg.確定.is介護認定審査会審査順確定());
-        itiziHanteiEntityList = mapper.getJimuItiziHantei(myBatisParameter);
     }
 
     @Override
@@ -84,40 +76,36 @@ public class JimuItiziHanteiDataSakuseiA4Process extends BatchKeyBreakBase<Itizi
 
     @Override
     protected void usualProcess(ItiziHanteiEntity entity) {
-        int 申請書管理番号の個数 = mapper.getJimu申請書管理番号の個数(myBatisParameter);
-        myBatisParameter.setShinseishoKanri(entity.getDbt5502_shinseishoKanriNo());
-        ShinseishoKanriNo 前回申請管理番号 = mapper.getJimuZenShinseishoKanriNo(myBatisParameter);
-        myBatisParameter.setShinseishoKanri(前回申請管理番号);
-        ShinseishoKanriNo 前々回の申請書管理番号 = mapper.getJimuZenShinseishoKanriNo(myBatisParameter);
-        myBatisParameter.setNinteichosaRirekiNo(entity.getDbT5203_ninteichosaRirekiNo());
-        myBatisParameter.setGenponKubun(GenponMaskKubun.原本.getコード());
-        List<NinteichosahyoTokkijikoEntity> 特記事項情報 = mapper.getJimuNinteichosahyoTokkijiko(myBatisParameter);
-        myBatisParameter.setShinseishoKanri(前回申請管理番号);
-        List<DbT5211NinteichosahyoChosaItemEntity> entityList = mapper.getJimu前回結果(myBatisParameter);
-        DbT5116IchijiHanteiKekkaJohoEntity dbT5116Entity = mapper.getJimu前回の要介護認定一次判定結果情報(myBatisParameter);
-        myBatisParameter.setShinseishoKanri(前々回の申請書管理番号);
-        ZenzenkayiJyohouEntity dbT5102Entity = mapper.getJimu前々回情報(myBatisParameter);
-        myBatisParameter.setShoKisaiHokenshaNo(entity.getDbt5101_shoKisaiHokenshaNo());
-        DbT7051KoseiShichosonMasterEntity dbT705Entity = mapper.getJimu市町村名(myBatisParameter);
-        myBatisParameter.setShichosonCode(dbT705Entity.getShichosonCode());
-        myBatisParameter.setNinteichosaItakusakiCode(entity.getDbt5202_chosaItakusakiCode());
-        DbT5910NinteichosaItakusakiJohoEntity dbT5910Entity = mapper.getJimu事業者名(myBatisParameter);
-        myBatisParameter.setNinteiChosainCode(entity.getDbt5202_ninteiChosaKubunCode());
-        DbT5913ChosainJohoEntity dbT5913Entity = mapper.getJimu調査員情報(myBatisParameter);
-        myBatisParameter.setShujiiIryokikanCode(entity.getDbt5302_shujiiIryoKikanCode());
-        DbT5911ShujiiIryoKikanJohoEntity dbT5911Entity = mapper.getJimu医療機関名称(myBatisParameter);
-        myBatisParameter.setShujiiCode(entity.getDbt5302_shujiiCode());
-        DbT5912ShujiiJohoEntity dbT5912Entity = mapper.getJimu主治医氏名(myBatisParameter);
-        myBatisParameter.setShinseishoKanri(前回申請管理番号);
-        List<DbT5304ShujiiIkenshoIkenItemEntity> dbT5304EntityList = mapper.getJimu前回要介護認定主治医意見書意見項目情報(myBatisParameter);
-        IchijihanteikekkahyoItemSettei itemSettei = new IchijihanteikekkahyoItemSettei();
-        item = itemSettei.set項目(entity, 特記事項情報, paramter, itiziHanteiEntityList,
-                entityList, dbT5116Entity, dbT5102Entity, 申請書管理番号の個数);
-        item = itemSettei.set事務局用項目(item, entity, dbT705Entity, dbT5910Entity, dbT5913Entity, dbT5911Entity,
-                itiziHanteiEntityList, dbT5912Entity, dbT5116Entity, dbT5304EntityList);
-        // TODO IchijihanteikekkahyoA4Report
-        IchijihanteikekkahyoA4Entity a4Entity = new IchijihanteikekkahyoA4Entity();
-        IchijihanteikekkahyoA4Report report = new IchijihanteikekkahyoA4Report(a4Entity);
+        item = new IchijihanteikekkahyoA4Entity();
+        ShinseishoKanriNo 申請書管理番号 = entity.getShinseishoKanriNo();
+        ShinseishoKanriNo 前申請書管理番号 = entity.getZShinseishoKanriNo();
+        int 認定調査依頼履歴番号 = entity.getNinteichosaIraiRirekiNo();
+        int 主治医意見履歴番号 = entity.getIkenshoIraiRirekiNo();
+        myBatisParameter.setShinseishoKanriNo(申請書管理番号);
+        myBatisParameter.setNinteichosaRirekiNo(認定調査依頼履歴番号);
+        myBatisParameter.setShinseishoKanriNoZ(前申請書管理番号);
+        myBatisParameter.setIkenshoIraiRirekiNo(主治医意見履歴番号);
+        List<DbT5207NinteichosahyoServiceJokyoEntity> 予防給付サービス利用状況 = new ArrayList<>();
+        List<DbT5207NinteichosahyoServiceJokyoEntity> 介護給付サービス利用状況 = new ArrayList<>();
+        DbT5208NinteichosahyoServiceJokyoFlagEntity サービス状況フラグ = new DbT5208NinteichosahyoServiceJokyoFlagEntity();
+        if (ServiceKubunCode.予防給付サービス.getコード().equals(entity.getServiceKubunCode().getColumnValue())) {
+            予防給付サービス利用状況 = mapper.get予防給付(myBatisParameter);
+        } else if (ServiceKubunCode.介護給付サービス.getコード().equals(entity.getServiceKubunCode().getColumnValue())) {
+            介護給付サービス利用状況 = mapper.get介護給付(myBatisParameter);
+        } else {
+            サービス状況フラグ = mapper.get状況フラグ(myBatisParameter);
+        }
+        List<DbT5205NinteichosahyoTokkijikoEntity> 特記事項 = mapper.get特記事項(myBatisParameter);
+        List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書 = mapper.get主治医意見書(myBatisParameter);
+        List<DbT5211NinteichosahyoChosaItemEntity> 調査票調査項目 = mapper.get調査票項目(myBatisParameter);
+        List<DbT5211NinteichosahyoChosaItemEntity> 前回調査票調査項目 = mapper.get前回調査票項目(myBatisParameter);
+        DbT5210NinteichosahyoShisetsuRiyoEntity 現在状況 = mapper.get現在状況(myBatisParameter);
+        List<DbT5304ShujiiIkenshoIkenItemEntity> 前回主治医意見書 = mapper.get前回主治医意見書(myBatisParameter);
+        item = new IchijihanteikekkahyoItemSettei().set項目(entity, 特記事項,
+                調査票調査項目, 前回調査票調査項目, 主治医意見書,
+                前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, 現在状況,
+                new RString(myBatisParameter.getGogitaiNo()));
+        IchijihanteikekkahyoA4Report report = new IchijihanteikekkahyoA4Report(item);
         report.writeBy(reportSourceWriterA4);
     }
 
@@ -135,7 +123,7 @@ public class JimuItiziHanteiDataSakuseiA4Process extends BatchKeyBreakBase<Itizi
     }
 
     private boolean hasBrek(ItiziHanteiEntity before, ItiziHanteiEntity current) {
-        return before.getDbt5502_shinsakaiOrder() != current.getDbt5502_shinsakaiOrder();
+        return before.getShinsakaiOrder() != current.getShinsakaiOrder();
     }
 
     @Override
@@ -152,7 +140,7 @@ public class JimuItiziHanteiDataSakuseiA4Process extends BatchKeyBreakBase<Itizi
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                new RString("認定情報　(事務局用）"),
+                new RString("一次判定結果票"),
                 総ページ数,
                 RString.EMPTY,
                 RString.EMPTY,
@@ -163,18 +151,20 @@ public class JimuItiziHanteiDataSakuseiA4Process extends BatchKeyBreakBase<Itizi
     private List<RString> 出力条件() {
         List<RString> list = new ArrayList<>();
         RStringBuilder builder1 = new RStringBuilder();
-        builder1.append("【介護認定審査会開催番号】")
+        builder1.append("【合議体番号】")
+                .append(" ")
+                .append(paramter.getGogitaiNo());
+        RStringBuilder builder2 = new RStringBuilder();
+        builder2.append("【介護認定審査会開催予定年月日】")
+                .append(" ")
+                .append(paramter.getShinsakaiKaisaiYoteiYMD().wareki().toDateString());
+        RStringBuilder builder3 = new RStringBuilder();
+        builder3.append("【介護認定審査会開催番号】")
                 .append(" ")
                 .append(paramter.getShinsakaiKaisaiNo());
-        RStringBuilder builder2 = new RStringBuilder();
-        builder2.append("【開始資料番号】")
-                .append(" ")
-                .append(paramter.getBangoStart());
-        RStringBuilder builder3 = new RStringBuilder();
-        builder3.append("【終了資料番号】")
-                .append(" ")
-                .append(paramter.getBangoEnd());
         list.add(builder1.toRString());
+        list.add(builder2.toRString());
+        list.add(builder3.toRString());
         return list;
     }
 }

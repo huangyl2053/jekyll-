@@ -102,8 +102,8 @@ public class SeikatsuValidationHandler {
         List<dgSeikatsuhogoRireki_Row> rowList = div.getDgSeikatsuhogoRireki().getDataSource();
         RDate kaishi = RDate.MAX;
         for (dgSeikatsuhogoRireki_Row list : rowList) {
-            if (list.getTxtKaishiYM().getValue().isBefore(kaishi)) {
-                kaishi = list.getTxtKaishiYM().getValue();
+            if (list.getTxtKaishiYMD().getValue().isBefore(kaishi)) {
+                kaishi = list.getTxtKaishiYMD().getValue();
             }
         }
         return kaishi;
@@ -111,23 +111,23 @@ public class SeikatsuValidationHandler {
 
     private RDate 履歴一覧開始年月日() {
         dgSeikatsuhogoRireki_Row dgRow = div.getDgSeikatsuhogoRireki().getSelectedItems().get(0);
-        return dgRow.getTxtKaishiYM().getValue();
+        return dgRow.getTxtKaishiYMD().getValue();
     }
 
     private RDate 履歴一覧廃止年月日() {
         dgSeikatsuhogoRireki_Row dgRow = div.getDgSeikatsuhogoRireki().getSelectedItems().get(0);
-        return dgRow.getTxtHaishiYM().getValue();
+        return dgRow.getTxtHaishiYMD().getValue();
     }
 
     private RDate 履歴廃止年月日() {
         List<dgSeikatsuhogoRireki_Row> rowList = div.getDgSeikatsuhogoRireki().getDataSource();
         RDate haishi = RDate.MIN;
         for (dgSeikatsuhogoRireki_Row list : rowList) {
-            if (list.getTxtHaishiYM().getValue() == null) {
+            if (list.getTxtHaishiYMD().getValue() == null) {
                 return haishi;
             }
-            if (haishi.isBefore(list.getTxtHaishiYM().getValue())) {
-                haishi = list.getTxtHaishiYM().getValue();
+            if (haishi.isBefore(list.getTxtHaishiYMD().getValue())) {
+                haishi = list.getTxtHaishiYMD().getValue();
             }
         }
         return haishi;

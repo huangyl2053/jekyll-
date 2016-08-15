@@ -4,6 +4,13 @@ var DBD;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_SelectedItem = function () {
+                return "onClick_SelectedItem";
+            };
+
+            Events.onClick_btnClose = function () {
+                return "onClick_btnClose";
+            };
             return Events;
         })();
         HikazeiNenkinKensaku.Events = Events;

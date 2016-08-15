@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoD
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -58,9 +59,15 @@ public class HihokenshaShoBatchPrmFinder {
      */
     public SearchResult<HihokenshashoIkkatsuHakkoModel> getChushutsuKikan(RString 処理枝番) {
         List<HihokenshashoIkkatsuHakkoModel> hihokenList = new ArrayList<>();
+        List<RString> 処理枝番リスト = new ArrayList<>();
+        処理枝番リスト.add(処理枝番);
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         LasdecCode 市町村コード = association.get地方公共団体コード();
-        DbT7022ShoriDateKanriEntity entityList = datekanridac.selectBy抽出期間の取得(処理枝番, 市町村コード);
+        DbT7022ShoriDateKanriEntity entityList = datekanridac.selectBy抽出期間の取得(
+                SubGyomuCode.DBU介護統計報告,
+                new RString("被保険者証一括発行"),
+                処理枝番リスト,
+                市町村コード);
         if (entityList == null) {
             return SearchResult.of(Collections.<HihokenshashoIkkatsuHakkoModel>emptyList(), 0, false);
         }
@@ -85,7 +92,11 @@ public class HihokenshaShoBatchPrmFinder {
         List<HihokenshashoIkkatsuHakkoModel> hihokenList = new ArrayList<>();
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         LasdecCode 市町村コード = association.get地方公共団体コード();
-        DbT7022ShoriDateKanriEntity entityList = datekanridac.selectBy再発行(処理枝番, 市町村コード);
+        DbT7022ShoriDateKanriEntity entityList = datekanridac.selectBy抽出期間の取得(
+                SubGyomuCode.DBU介護統計報告,
+                new RString("被保険者証一括発行"),
+                処理枝番,
+                市町村コード);
         if (entityList == null) {
             return SearchResult.of(Collections.<HihokenshashoIkkatsuHakkoModel>emptyList(), 0, false);
         }

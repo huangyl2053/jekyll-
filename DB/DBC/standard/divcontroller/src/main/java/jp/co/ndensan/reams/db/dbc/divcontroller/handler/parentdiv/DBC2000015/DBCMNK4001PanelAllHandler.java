@@ -35,9 +35,6 @@ public class DBCMNK4001PanelAllHandler {
      *
      */
     public void initialize() {
-        // div.getTxtKonkaiShuryoDate().setReadOnly(true);
-        /*RString 処理済年度 = DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理済年度,
-         RDate.getNowDate(), SubGyomuCode.DBC介護給付);*/
         YMDHMS 前回抽出期間開始 = null;
         YMDHMS 前回抽出期間終了 = null;
         YMDHMS 今回抽出期間開始 = null;
@@ -67,7 +64,7 @@ public class DBCMNK4001PanelAllHandler {
             div.getTxtKonkaiKaishiTime().setValue(今回開始時刻);
         }
         div.getTxtKonkaiShuryoDate().setValue(RDate.getNowDate());
-        div.getTxtKonkaiShuryoTime().setValue(RDate.getNowTime());
+        div.getTxtKonkaiShuryoTime().setValue(RTime.now());
     }
 
 }

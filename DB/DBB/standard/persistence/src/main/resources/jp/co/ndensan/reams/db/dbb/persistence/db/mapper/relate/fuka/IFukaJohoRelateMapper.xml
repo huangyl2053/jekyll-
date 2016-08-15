@@ -337,4 +337,76 @@
         AND "DbV2002Fuka"."fukaNendo" = #{賦課年度}
         AND "DbV2002Fuka"."choteiNichiji" = #{調定日時}
     </select>
+
+    <select id="select履歴番号最大の賦課の情報" resultMap="resultMap_FukaInfo"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fukajoho.FukaJohoRelateMapperParameter" fetchSize="500" resultOrdered="true">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>,
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>
+        FROM
+        rgdb."DbV2002Fuka" AS "DbT2002Fuka"
+        LEFT JOIN
+        rgdb."DbT2003Kibetsu" AS "DbT2003Kibetsu"
+        ON
+        "DbT2002Fuka"."choteiNendo" = "DbT2003Kibetsu"."choteiNendo"
+        AND "DbT2002Fuka"."fukaNendo" = "DbT2003Kibetsu"."fukaNendo"
+        AND "DbT2002Fuka"."tsuchishoNo" = "DbT2003Kibetsu"."tsuchishoNo"
+        AND "DbT2002Fuka"."rirekiNo" = "DbT2003Kibetsu"."rirekiNo"
+        LEFT JOIN rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
+        ON
+        "DbT2003Kibetsu"."choteiId" = "UrT0705ChoteiKyotsu"."choteiId"
+        WHERE "DbT2002Fuka"."tsuchishoNo" = #{通知書番号}
+        AND "DbT2002Fuka"."fukaNendo" = #{賦課年度}
+    </select>
+
+    <select id="select賦課の情報_最新" resultMap="resultMap_FukaInfo" 
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fukajoho.FukaJohoRelateMapperParameter"
+            fetchSize="500" resultOrdered="true">
+        <include refid="selectFukaJohoRelateEntitySaisin" />
+    </select>
+    <sql id="selectFukaJohoRelateEntitySaisin">
+        SELECT
+        DbT2002Fuka.*,
+        DbT2003Kibetsu.*,
+        UrT0705ChoteiKyotsu.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaJohoRelateMapper.noDeleted_DbV2002Fuka" />) AS DbT2002Fuka
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.noDeleted_DbT2003Kibetsu" />) AS DbT2003Kibetsu
+        ON
+        DbT2002Fuka."dbT2002Fuka_choteiNendo" = DbT2003Kibetsu."dbT2003Kibetsu_choteiNendo" and
+        DbT2002Fuka."dbT2002Fuka_fukaNendo" = DbT2003Kibetsu."dbT2003Kibetsu_fukaNendo" and
+        DbT2002Fuka."dbT2002Fuka_tsuchishoNo" = DbT2003Kibetsu."dbT2003Kibetsu_tsuchishoNo" and
+        DbT2002Fuka."dbT2002Fuka_rirekiNo" = DbT2003Kibetsu."dbT2003Kibetsu_rirekiNo"
+        LEFT JOIN
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu" />
+        FROM
+        rgdb."UrT0705ChoteiKyotsu"
+        ) AS UrT0705ChoteiKyotsu
+        ON
+        DbT2003Kibetsu."dbT2003Kibetsu_choteiId" = UrT0705ChoteiKyotsu."urT0705ChoteiKyotsu_choteiId"
+        <where>
+            <if test="uses調定年度">
+                AND DbT2002Fuka."dbT2002Fuka_choteiNendo" = #{調定年度}
+            </if>
+            <if test="uses賦課年度">
+                and DbT2002Fuka."dbT2002Fuka_fukaNendo" = #{賦課年度}
+            </if>
+            <if test="uses通知書番号">
+                and DbT2002Fuka."dbT2002Fuka_tsuchishoNo" = #{通知書番号}
+            </if>
+        </where>
+    </sql>
+    <sql id="noDeleted_DbV2002Fuka">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka" />
+     FROM
+         rgdb."DbV2002Fuka" AS "DbT2002Fuka"
+     WHERE
+         "DbT2002Fuka"."isDeleted" = FALSE
+    </sql>
+
 </mapper>

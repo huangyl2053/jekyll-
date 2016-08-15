@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuN
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -25,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
  * @reamsid_L DBA-0360-030 linghuhang
  */
 public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuNyutaishoRirekiKanriDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -46,6 +45,8 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     private RString shichosonCode;
     @JsonProperty("shikibetsuCode")
     private RString shikibetsuCode;
+    @JsonProperty("syokikaMode")
+    private RString syokikaMode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -177,6 +178,24 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     @JsonProperty("shikibetsuCode")
     public void setShikibetsuCode(RString shikibetsuCode) {
         this.shikibetsuCode = shikibetsuCode;
+    }
+
+    /*
+     * getsyokikaMode
+     * @return syokikaMode
+     */
+    @JsonProperty("syokikaMode")
+    public RString getSyokikaMode() {
+        return syokikaMode;
+    }
+
+    /*
+     * setsyokikaMode
+     * @param syokikaMode syokikaMode
+     */
+    @JsonProperty("syokikaMode")
+    public void setSyokikaMode(RString syokikaMode) {
+        this.syokikaMode = syokikaMode;
     }
 
     /*
@@ -383,39 +402,6 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
 
     public void setMode_Riyou( Riyou value ) {
         _CommonChildDivModeUtil.setMode( this.modes, Riyou.class , value );
-    }
-
-    /*
-     * [ ショートカットの作成 ]
-     */
-    @JsonIgnore
-    public TextBox getTxtHokensha() {
-        return this.getShisetsuNyutaishoInput().getTenshutsusakiJohoPanel().getTxtHokensha();
-    }
-
-    @JsonIgnore
-    public void  setTxtHokensha(TextBox txtHokensha) {
-        this.getShisetsuNyutaishoInput().getTenshutsusakiJohoPanel().setTxtHokensha(txtHokensha);
-    }
-
-    @JsonIgnore
-    public ButtonDialog getBtnHokenshaKensaku() {
-        return this.getShisetsuNyutaishoInput().getTenshutsusakiJohoPanel().getBtnHokenshaKensaku();
-    }
-
-    @JsonIgnore
-    public void  setBtnHokenshaKensaku(ButtonDialog btnHokenshaKensaku) {
-        this.getShisetsuNyutaishoInput().getTenshutsusakiJohoPanel().setBtnHokenshaKensaku(btnHokenshaKensaku);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtHokensyaMeisho() {
-        return this.getShisetsuNyutaishoInput().getTenshutsusakiJohoPanel().getTxtHokensyaMeisho();
-    }
-
-    @JsonIgnore
-    public void  setTxtHokensyaMeisho(TextBox txtHokensyaMeisho) {
-        this.getShisetsuNyutaishoInput().getTenshutsusakiJohoPanel().setTxtHokensyaMeisho(txtHokensyaMeisho);
     }
 
     // </editor-fold>

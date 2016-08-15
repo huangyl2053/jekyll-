@@ -72,7 +72,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * 支払方法変更管理各種通知書発行（画面）というビジネスクラスです。
  *
- * @reamsid_L DBD-3640-010 panxiaobo
+ * @reamsid_L DBD-3640-030 panxiaobo
  */
 public class ShiharaiHohoHenkoTsuchishoHakkoService {
 
@@ -215,7 +215,7 @@ public class ShiharaiHohoHenkoTsuchishoHakkoService {
     private void publish支払方法変更予告通知書(Association 地方公共団体, UaFt200FindShikibetsuTaishoEntity 宛名情報, UaFt250FindAtesakiEntity 宛先情報,
             RString 帳票タイプ, ReportId 帳票分類ID, ShiharaiHohoHenko 帳票情報, FlexibleDate 予告通知書発行年月日, RString 予告文書番号, ReportManager reportManager) {
         DbT7065ChohyoSeigyoKyotsuEntity dbT7065Entity = load帳票制御共通(帳票分類ID);
-        List<RString> 通知書定型文List = get通知書定型文List(帳票分類ID, dbT7065Entity, 帳票タイプ);
+        Map<Integer, RString> 通知書定型文List = get通知書定型文List(帳票分類ID, dbT7065Entity, 帳票タイプ);
         ShiharaiHohoHenkoYokokuTsuchishoPrintService service = new ShiharaiHohoHenkoYokokuTsuchishoPrintService();
         service.print(ShikibetsuTaishoFactory.createKojin(宛名情報), AtesakiFactory.createInstance(宛先情報), new ChohyoSeigyoKyotsu(dbT7065Entity), 地方公共団体,
                 予告通知書発行年月日, 予告文書番号, 通知書定型文List, 帳票分類ID, 帳票情報, reportManager);
@@ -226,7 +226,7 @@ public class ShiharaiHohoHenkoTsuchishoHakkoService {
     private void publish支払方法変更通知書(Association 地方公共団体, UaFt200FindShikibetsuTaishoEntity 宛名情報, UaFt250FindAtesakiEntity 宛先情報,
             RString 帳票タイプ, ReportId 帳票分類ID, ShiharaiHohoHenko 帳票情報, FlexibleDate 償還払化通知書発行年月日, RString 償還払化文書番号, ReportManager reportManager) {
         DbT7065ChohyoSeigyoKyotsuEntity dbT7065Entity = load帳票制御共通(帳票分類ID);
-        List<RString> 通知書定型文List = get通知書定型文List(帳票分類ID, dbT7065Entity, 帳票タイプ);
+        Map<Integer, RString> 通知書定型文List = get通知書定型文List(帳票分類ID, dbT7065Entity, 帳票タイプ);
         ShiharaiHohoHenkoTsuchishoPrintService service = new ShiharaiHohoHenkoTsuchishoPrintService();
         service.print(ShikibetsuTaishoFactory.createKojin(宛名情報), AtesakiFactory.createInstance(宛先情報), new ChohyoSeigyoKyotsu(dbT7065Entity), 地方公共団体,
                 償還払化通知書発行年月日, 償還払化文書番号, 通知書定型文List, 帳票分類ID, 帳票情報, reportManager);
@@ -237,10 +237,12 @@ public class ShiharaiHohoHenkoTsuchishoHakkoService {
     private void publish支払一時差止通知書(Association 地方公共団体, UaFt200FindShikibetsuTaishoEntity 宛名情報, UaFt250FindAtesakiEntity 宛先情報,
             RString 帳票タイプ, ReportId 帳票分類ID, ShiharaiHohoHenko 帳票情報, FlexibleDate 差止通知書発行年月日, RString 差止文書番号, ReportManager reportManager) {
         DbT7065ChohyoSeigyoKyotsuEntity dbT7065Entity = load帳票制御共通(帳票分類ID);
-        List<RString> 通知書定型文List = get通知書定型文List(帳票分類ID, dbT7065Entity, 帳票タイプ);
+        Map<Integer, RString> 通知書定型文List = get通知書定型文List(帳票分類ID, dbT7065Entity, 帳票タイプ);
+        List<ShokanKihonJihoEntiy> shokanKihonJihoEntiyList = selectShokanKihon(帳票情報.get被保険者番号(),
+                KanriKubun.一号償還払い化.code(), 帳票情報.get履歴番号(), ShiharaiHenkoJohoBunruiKubun.差止情報.getコード());
         ShiharaiIchijiSashitomeTsuchishoPrintService service = new ShiharaiIchijiSashitomeTsuchishoPrintService();
         service.print(ShikibetsuTaishoFactory.createKojin(宛名情報), AtesakiFactory.createInstance(宛先情報), new ChohyoSeigyoKyotsu(dbT7065Entity), 地方公共団体,
-                差止通知書発行年月日, 差止文書番号, 通知書定型文List, 帳票分類ID, 帳票情報, null, reportManager);
+                差止通知書発行年月日, 差止文書番号, 通知書定型文List, 帳票分類ID, 帳票情報, shokanKihonJihoEntiyList, reportManager);
         for (ShiharaiHohoHenkoSashitome entity : 帳票情報.getShiharaiHohoHenkoSashitomeList()) {
             dac4024.updateSashitomeTsuchiHakkoYMD(entity.get証記載保険者番号(), entity.get被保険者番号(),
                     entity.get管理区分(), entity.get履歴番号(), entity.get情報分類区分(), entity.get連番(), 差止通知書発行年月日);
@@ -250,7 +252,7 @@ public class ShiharaiHohoHenkoTsuchishoHakkoService {
     private void publish滞納保険料控除通知書(Association 地方公共団体, UaFt200FindShikibetsuTaishoEntity 宛名情報, UaFt250FindAtesakiEntity 宛先情報,
             RString 帳票タイプ, ReportId 帳票分類ID, ShiharaiHohoHenko 帳票情報, FlexibleDate 控除通知書発行年月日, RString 控除文書番号, ReportManager reportManager) {
         DbT7065ChohyoSeigyoKyotsuEntity dbT7065Entity = load帳票制御共通(帳票分類ID);
-        List<RString> 通知書定型文List = get通知書定型文List(帳票分類ID, dbT7065Entity, 帳票タイプ);
+        Map<Integer, RString> 通知書定型文List = get通知書定型文List(帳票分類ID, dbT7065Entity, 帳票タイプ);
         List<ShokanKihonJihoEntiy> shokanKihonJihoEntiyList = selectShokanKihon(帳票情報.get被保険者番号(),
                 KanriKubun.一号償還払い化.code(), 帳票情報.get履歴番号(), ShiharaiHenkoJohoBunruiKubun.保険料控除情報.getコード());
         TainoHokenryoKojoTsuchishoPrintService service = new TainoHokenryoKojoTsuchishoPrintService();
@@ -265,7 +267,7 @@ public class ShiharaiHohoHenkoTsuchishoHakkoService {
     private void publish給付額減額通知書(Association 地方公共団体, UaFt200FindShikibetsuTaishoEntity 宛名情報, UaFt250FindAtesakiEntity 宛先情報,
             RString 帳票タイプ, ReportId 帳票分類ID, ShiharaiHohoHenko 帳票情報, FlexibleDate 減額通知書発行年月日, RString 減額文書番号, ReportManager reportManager) {
         DbT7065ChohyoSeigyoKyotsuEntity dbT7065Entity = load帳票制御共通(帳票分類ID);
-        List<RString> 通知書定型文List = get通知書定型文List(帳票分類ID, dbT7065Entity, 帳票タイプ);
+        Map<Integer, RString> 通知書定型文List = get通知書定型文List(帳票分類ID, dbT7065Entity, 帳票タイプ);
         KyufugakuGengakuTsuchishoPrintService service = new KyufugakuGengakuTsuchishoPrintService();
         service.print(ShikibetsuTaishoFactory.createKojin(宛名情報), AtesakiFactory.createInstance(宛先情報), new ChohyoSeigyoKyotsu(dbT7065Entity),
                 地方公共団体, 減額通知書発行年月日, 減額文書番号, 通知書定型文List, 帳票分類ID, 帳票情報, reportManager);
@@ -276,10 +278,11 @@ public class ShiharaiHohoHenkoTsuchishoHakkoService {
     private void publish差止予告通知書_２号用(Association 地方公共団体, UaFt200FindShikibetsuTaishoEntity 宛名情報, UaFt250FindAtesakiEntity 宛先情報,
             RString 帳票タイプ, ReportId 帳票分類ID, ShiharaiHohoHenko 帳票情報, FlexibleDate 予告通知書発行年月日, RString 予告文書番号, ReportManager reportManager) {
         DbT7065ChohyoSeigyoKyotsuEntity dbT7065Entity = load帳票制御共通(帳票分類ID);
-        List<RString> 通知書定型文List = get通知書定型文List(帳票分類ID, dbT7065Entity, 帳票タイプ);
+        Map<Integer, RString> 通知書定型文List = get通知書定型文List(帳票分類ID, dbT7065Entity, 帳票タイプ);
+        List<ShokanKihonJihoEntiy> shokanKihonJihoEntiyList = new ArrayList();
         SashitomeYokokuTsuchishoNigoPrintService service = new SashitomeYokokuTsuchishoNigoPrintService();
         service.print(ShikibetsuTaishoFactory.createKojin(宛名情報), AtesakiFactory.createInstance(宛先情報), new ChohyoSeigyoKyotsu(dbT7065Entity), 地方公共団体,
-                予告通知書発行年月日, 予告文書番号, 通知書定型文List, 帳票分類ID, 帳票情報, null, reportManager);
+                予告通知書発行年月日, 予告文書番号, 通知書定型文List, 帳票分類ID, 帳票情報, shokanKihonJihoEntiyList, reportManager);
         dac4021.updateYokokuTsuchiHakkoYMD(帳票情報.get証記載保険者番号(), 帳票情報.get被保険者番号(),
                 帳票情報.get管理区分(), 帳票情報.get履歴番号(), 予告通知書発行年月日);
     }
@@ -287,7 +290,7 @@ public class ShiharaiHohoHenkoTsuchishoHakkoService {
     private void publish差止処分通知書_２号用(Association 地方公共団体, UaFt200FindShikibetsuTaishoEntity 宛名情報, UaFt250FindAtesakiEntity 宛先情報,
             RString 帳票タイプ, ReportId 帳票分類ID, ShiharaiHohoHenko 帳票情報, FlexibleDate 差止通知書発行年月日, RString 差止文書番号, ReportManager reportManager) {
         DbT7065ChohyoSeigyoKyotsuEntity dbT7065Entity = load帳票制御共通(帳票分類ID);
-        List<RString> 通知書定型文List = get通知書定型文List(帳票分類ID, dbT7065Entity, 帳票タイプ);
+        Map<Integer, RString> 通知書定型文List = get通知書定型文List(帳票分類ID, dbT7065Entity, 帳票タイプ);
         SashitomeShobunTsuchishoNigoPrintService service = new SashitomeShobunTsuchishoNigoPrintService();
         service.print(ShikibetsuTaishoFactory.createKojin(宛名情報), AtesakiFactory.createInstance(宛先情報), new ChohyoSeigyoKyotsu(dbT7065Entity), 地方公共団体,
                 差止通知書発行年月日, 差止文書番号, 通知書定型文List, 帳票分類ID, 帳票情報, reportManager);
@@ -344,8 +347,7 @@ public class ShiharaiHohoHenkoTsuchishoHakkoService {
         return null;
     }
 
-    private List get通知書定型文List(ReportId 帳票分類ID, DbT7065ChohyoSeigyoKyotsuEntity dbT7065Entity, RString 帳票タイプ) {
-        List<RString> 通知書定型文List = new ArrayList<>();
+    private Map<Integer, RString> get通知書定型文List(ReportId 帳票分類ID, DbT7065ChohyoSeigyoKyotsuEntity dbT7065Entity, RString 帳票タイプ) {
         int パターン番号 = 0;
         if (ShiharaiHohoHenkoTsuchisho.支払方法変更通知書.get名称().equals(帳票タイプ)
                 || ShiharaiHohoHenkoTsuchisho.支払一時差止通知書.get名称().equals(帳票タイプ)
@@ -365,9 +367,6 @@ public class ShiharaiHohoHenkoTsuchishoHakkoService {
             パターン番号 = パターン番号_１;
         }
         Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBD介護受給, 帳票分類ID, KamokuCode.EMPTY, パターン番号);
-        for (Map.Entry<Integer, RString> entry : 通知文Map.entrySet()) {
-            通知書定型文List.add(entry.getValue());
-        }
-        return 通知書定型文List;
+        return 通知文Map;
     }
 }

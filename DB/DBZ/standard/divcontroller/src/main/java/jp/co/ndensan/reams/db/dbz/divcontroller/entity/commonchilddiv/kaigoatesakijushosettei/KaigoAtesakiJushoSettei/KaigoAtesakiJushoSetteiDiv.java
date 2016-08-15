@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 /**
  * KaigoAtesakiJushoSettei のクラスファイル
  *
- * @reamsid_L　DBU-3990-030　wanghui
+ * @reamsid_L DBU-3990-030 wanghui
  */
 public class KaigoAtesakiJushoSetteiDiv extends Panel implements IKaigoAtesakiJushoSetteiDiv {
 

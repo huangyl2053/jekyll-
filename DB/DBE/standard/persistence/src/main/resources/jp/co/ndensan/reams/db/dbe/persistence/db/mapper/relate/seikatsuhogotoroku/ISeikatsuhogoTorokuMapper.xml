@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBE-1310-020 chengsanyuan -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.seikatsuhogotoroku.ISeikatsuhogoTorokuMapper">
+     <select id="getShinseiJoho" resultMap="resultMap_getShinseiJoho"
+             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" 
+             fetchSize="500" resultOrdered="true">
+            SELECT
+              T5101."hihokenshaName"
+              , T5101."hihokenshaKana"
+              , T5101."seinengappiYMD"
+              , T5101."seibetsu"
+              , T5101."yubinNo"
+              , T5101."jusho"
+              , T5101."telNo"
+              , T4001."shikibetsuCode"
+              , T5101."hihokenshaNo" 
+            FROM
+              rgdb."DbT5101NinteiShinseiJoho" AS T5101 
+              INNER JOIN rgdb."DbT4001JukyushaDaicho" AS T4001 
+                ON T4001."shinseishoKanriNo" = T5101."shinseishoKanriNo" 
+            WHERE
+              T5101."shinseishoKanriNo" = #{申請書管理番号}
+    </select>
+    
+    <resultMap id="resultMap_getShinseiJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.seikatsuhogotoroku.SeikatsuhogoTorokuRelateEntity" autoMapping="true">
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seinengappiYMD" column="seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="seibetsu" column="seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="hihokenshaKana" column="hihokenshaKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="yubinNo" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="jusho" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="telNo" column="telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+    </resultMap>
+</mapper>

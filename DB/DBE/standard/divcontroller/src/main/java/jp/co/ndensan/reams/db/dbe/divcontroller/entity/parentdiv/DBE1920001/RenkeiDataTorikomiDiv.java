@@ -8,10 +8,12 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.UploadPanel;
 
 /**
  * RenkeiDataTorikomi のクラスファイル
@@ -31,6 +33,10 @@ public class RenkeiDataTorikomiDiv extends Panel {
     private RenkeiDataTorikomiBatchParameterDiv RenkeiDataTorikomiBatchParameter;
     @JsonProperty("torikomiichiran")
     private torikomiichiranDiv torikomiichiran;
+    @JsonProperty("uploadArea")
+    private uploadAreaDiv uploadArea;
+    @JsonProperty("path")
+    private RString path;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -75,6 +81,42 @@ public class RenkeiDataTorikomiDiv extends Panel {
     }
 
     /*
+     * getuploadArea
+     * @return uploadArea
+     */
+    @JsonProperty("uploadArea")
+    public uploadAreaDiv getUploadArea() {
+        return uploadArea;
+    }
+
+    /*
+     * setuploadArea
+     * @param uploadArea uploadArea
+     */
+    @JsonProperty("uploadArea")
+    public void setUploadArea(uploadAreaDiv uploadArea) {
+        this.uploadArea = uploadArea;
+    }
+
+    /*
+     * getpath
+     * @return path
+     */
+    @JsonProperty("path")
+    public RString getPath() {
+        return path;
+    }
+
+    /*
+     * setpath
+     * @param path path
+     */
+    @JsonProperty("path")
+    public void setPath(RString path) {
+        this.path = path;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -98,16 +140,6 @@ public class RenkeiDataTorikomiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnDataTorikomi() {
-        return this.getRenkeiDataTorikomiBatchParameter().getBtnDataTorikomi();
-    }
-
-    @JsonIgnore
-    public void setBtnDataTorikomi(Button btnDataTorikomi) {
-        this.getRenkeiDataTorikomiBatchParameter().setBtnDataTorikomi(btnDataTorikomi);
-    }
-
-    @JsonIgnore
     public IHokenshaListDiv getListHokennsha() {
         return this.getRenkeiDataTorikomiBatchParameter().getListHokennsha();
     }
@@ -120,6 +152,26 @@ public class RenkeiDataTorikomiDiv extends Panel {
     @JsonIgnore
     public void setDgtorikomidataichiran(DataGrid<dgtorikomidataichiran_Row> dgtorikomidataichiran) {
         this.getTorikomiichiran().setDgtorikomidataichiran(dgtorikomidataichiran);
+    }
+
+    @JsonIgnore
+    public UploadPanel getUploadTool() {
+        return this.getUploadArea().getUploadTool();
+    }
+
+    @JsonIgnore
+    public void setUploadTool(UploadPanel uploadTool) {
+        this.getUploadArea().setUploadTool(uploadTool);
+    }
+
+    @JsonIgnore
+    public Button getBtnDataTorikomi() {
+        return this.getUploadArea().getBtnDataTorikomi();
+    }
+
+    @JsonIgnore
+    public void setBtnDataTorikomi(Button btnDataTorikomi) {
+        this.getUploadArea().setBtnDataTorikomi(btnDataTorikomi);
     }
 
     // </editor-fold>

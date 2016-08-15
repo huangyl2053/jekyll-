@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.Torisage
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
@@ -33,6 +34,8 @@ public class YokaigoNinteiTaisyosyaIchiran implements Serializable {
     private static final RString コード_4 = new RString("4");
     private static final RString コード_5 = new RString("5");
     private static final RString コード_6 = new RString("6");
+    private static final RString コード_A = new RString("A");
+    private static final RString コード_B = new RString("B");
     private static final RString コード_01 = new RString("01");
     private static final RString コード_06 = new RString("06");
     private static final RString コード_09 = new RString("09");
@@ -73,6 +76,8 @@ public class YokaigoNinteiTaisyosyaIchiran implements Serializable {
     private static final RString 職権 = new RString("職権");
     private static final RString 転入申請 = new RString("転入申請");
     private static final RString 資格喪失_死亡 = new RString("資格喪失（死亡）");
+    private static final RString 新規申請事前 = new RString("新規申請（事前）");
+    private static final RString 更新申請事前 = new RString("更新申請（事前）");
 
     private final DbT4003YokaigoNinteiInterfaceEntity 要介護認定インターフェース情報Entity;
     private final AtenaMeisho 被保険者氏名;
@@ -91,6 +96,7 @@ public class YokaigoNinteiTaisyosyaIchiran implements Serializable {
 
     private final FlexibleDate 要介護認定一次判定年月日;
     private final Code 要介護認定一次判定結果コード認知症加算;
+    private final YMDHMS 取込日時2;
 
     /**
      * コンストラクタです。<br/>
@@ -109,6 +115,7 @@ public class YokaigoNinteiTaisyosyaIchiran implements Serializable {
      * @param 二次判定認定有効終了年月日 二次判定認定有効終了年月日
      * @param 要介護認定一次判定年月日 要介護認定一次判定年月日
      * @param 要介護認定一次判定結果コード認知症加算 要介護認定一次判定結果コード認知症加算
+     * @param 取込日時2
      */
     public YokaigoNinteiTaisyosyaIchiran(
             DbT4003YokaigoNinteiInterfaceEntity 要介護認定インターフェース情報Entity,
@@ -124,7 +131,8 @@ public class YokaigoNinteiTaisyosyaIchiran implements Serializable {
             FlexibleDate 二次判定認定有効開始年月日,
             FlexibleDate 二次判定認定有効終了年月日,
             FlexibleDate 要介護認定一次判定年月日,
-            Code 要介護認定一次判定結果コード認知症加算
+            Code 要介護認定一次判定結果コード認知症加算,
+            YMDHMS 取込日時2
     ) {
         this.要介護認定インターフェース情報Entity = 要介護認定インターフェース情報Entity;
         this.被保険者氏名 = 被保険者氏名;
@@ -140,6 +148,7 @@ public class YokaigoNinteiTaisyosyaIchiran implements Serializable {
         this.二次判定認定有効終了年月日 = 二次判定認定有効終了年月日;
         this.要介護認定一次判定年月日 = 要介護認定一次判定年月日;
         this.要介護認定一次判定結果コード認知症加算 = 要介護認定一次判定結果コード認知症加算;
+        this.取込日時2 = 取込日時2;
     }
 
     /**
@@ -163,7 +172,7 @@ public class YokaigoNinteiTaisyosyaIchiran implements Serializable {
         this.二次判定認定有効終了年月日 = 要介護認定処理対象者一覧.get二次判定認定有効終了年月日();
         this.要介護認定一次判定年月日 = 要介護認定処理対象者一覧.get要介護認定一次判定年月日();
         this.要介護認定一次判定結果コード認知症加算 = 要介護認定処理対象者一覧.get要介護認定一次判定結果コード認知症加算();
-
+        this.取込日時2 = 要介護認定処理対象者一覧.get取込日時2();
     }
 
     /**
@@ -266,7 +275,25 @@ public class YokaigoNinteiTaisyosyaIchiran implements Serializable {
      * @return 取込日時
      */
     public RString get取込日時() {
-        return 要介護認定インターフェース情報Entity.getTorikomiTimestamp().toDateString();
+        if (要介護認定インターフェース情報Entity.getTorikomiTimestamp() != null) {
+            return 要介護認定インターフェース情報Entity.getTorikomiTimestamp().toDateString();
+        } else {
+            return RString.EMPTY;
+        }
+
+    }
+
+    /**
+     * 取込日時2を取得
+     *
+     * @return 取込日時2
+     */
+    public RString get取込日時2() {
+        if (取込日時2 != null) {
+            return 取込日時2.toDateString();
+        } else {
+            return RString.EMPTY;
+        }
     }
 
     /**
@@ -417,6 +444,10 @@ public class YokaigoNinteiTaisyosyaIchiran implements Serializable {
             return 転入申請;
         } else if (コード_6.equals(認定申請区分申請時コード.value())) {
             return 資格喪失_死亡;
+        } else if (コード_A.equals(認定申請区分申請時コード.value())) {
+            return 新規申請事前;
+        } else if (コード_B.equals(認定申請区分申請時コード.value())) {
+            return 更新申請事前;
         } else {
             return null;
         }

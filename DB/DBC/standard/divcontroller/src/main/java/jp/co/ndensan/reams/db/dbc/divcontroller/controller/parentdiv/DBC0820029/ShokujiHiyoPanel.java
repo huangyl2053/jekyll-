@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820029.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820029.ShokujiHiyoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820029.dgdShokuji_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820029.ShokujiHiyoPanelHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820029.ShokujiHiyoPanelValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.SikibetuNokennsakuki;
@@ -38,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -274,7 +276,7 @@ public class ShokujiHiyoPanel {
         try {
             Boolean flag = getHandler(div).get内容変更状態(サービス提供年月, shokanShokujiHiyoList);
             if (flag) {
-                return save(div, paramter, shokanShokujiHiyoList, shokanMeisaiList, 処理モード);
+                return save(div, paramter, shokanShokujiHiyoList, shokanMeisaiList, 処理モード, サービス提供年月);
             } else {
                 return noChange(div);
             }
@@ -288,8 +290,13 @@ public class ShokujiHiyoPanel {
             ShoukanharaihishinseimeisaikensakuParameter paramter,
             List<ShokanShokujiHiyo> shokanShokujiHiyoList,
             List<ShokanMeisai> shokanMeisaiList,
-            RString 処理モード) {
+            RString 処理モード,
+            FlexibleYearMonth サービス提供年月) {
         if (!ResponseHolder.isReRequest()) {
+            if (サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
+                ValidationMessageControlPairs validPairs = getValidationHandler(div).check食事費用登録エリア１必須入力();
+                validationCheck(validPairs, div);
+            }
             getHandler(div).保存処理(paramter, shokanShokujiHiyoList, shokanMeisaiList, 処理モード);
             return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().
                     replace(登録.toString())).respond();
@@ -307,6 +314,14 @@ public class ShokujiHiyoPanel {
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return createResponse(div);
+        }
+        return createResponse(div);
+    }
+
+    private ResponseData<ShokujiHiyoPanelDiv> validationCheck(ValidationMessageControlPairs validPairs,
+            ShokujiHiyoPanelDiv div) {
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         return createResponse(div);
     }
@@ -442,6 +457,10 @@ public class ShokujiHiyoPanel {
         } else {
             dgdShokuji_Row row = getHandler(div).selectRow();
             getHandler(div).confirm(row, 状態);
+        }
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).check食事費用登録エリア２必須入力();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         getHandler(div).clear食事費用登録エリア2();
         div.getPanelShokuji().getPanelDetail2().setVisible(false);
@@ -583,6 +602,10 @@ public class ShokujiHiyoPanel {
 
     private ShokujiHiyoPanelHandler getHandler(ShokujiHiyoPanelDiv div) {
         return new ShokujiHiyoPanelHandler(div);
+    }
+
+    private ShokujiHiyoPanelValidationHandler getValidationHandler(ShokujiHiyoPanelDiv div) {
+        return new ShokujiHiyoPanelValidationHandler(div);
     }
 
     private ResponseData<ShokujiHiyoPanelDiv> createResponse(ShokujiHiyoPanelDiv div) {

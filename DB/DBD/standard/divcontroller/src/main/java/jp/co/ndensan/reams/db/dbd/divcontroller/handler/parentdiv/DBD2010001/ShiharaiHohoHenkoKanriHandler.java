@@ -114,6 +114,9 @@ public class ShiharaiHohoHenkoKanriHandler {
      */
     public ShiharaiHohoHenko get支払方法変更情報FromViewState(ArrayList<ShiharaiHohoHenko> dataList) {
         dgShiharaiHohoHenkoRireki_Row row = div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow();
+        if (dataList == null) {
+            dataList = new ArrayList<>();
+        }
         for (ShiharaiHohoHenko joho : dataList) {
             if (joho.get証記載保険者番号().getColumnValue().equals(row.getHdnShoKisaiHokenshaNo())
                     && joho.get被保険者番号().getColumnValue().equals(row.getHdnHihokenshaNo())
@@ -133,6 +136,9 @@ public class ShiharaiHohoHenkoKanriHandler {
      * @return 該当の支払方法変更情報
      */
     public ShiharaiHohoHenko get支払方法変更情報FromViewState(ArrayList<ShiharaiHohoHenko> dataList, ShiharaiHohoHenko joho) {
+        if (dataList == null) {
+            dataList = new ArrayList<>();
+        }
         for (ShiharaiHohoHenko data : dataList) {
             if (joho.get証記載保険者番号().getColumnValue().equals(data.get証記載保険者番号().getColumnValue())
                     && joho.get被保険者番号().getColumnValue().equals(data.get被保険者番号().getColumnValue())
@@ -155,9 +161,12 @@ public class ShiharaiHohoHenkoKanriHandler {
     public RString get最大履歴番号plus1By支払方法変更登録区分(HihokenshaNo 被保険者番号,
             ArrayList<ShiharaiHohoHenko> dataList, RString 支払方法変更登録区分) {
         int 履歴番号Max = 0;
+        if (dataList == null) {
+            dataList = new ArrayList<>();
+        }
         for (ShiharaiHohoHenko joho : dataList) {
             if (被保険者番号.getColumnValue().equals(joho.get被保険者番号().getColumnValue())
-                    && 支払方法変更登録区分.equals(joho.get管理区分())) {
+                    && 支払方法変更登録区分.equals(joho.get管理区分()) && 履歴番号Max < joho.get履歴番号()) {
                 履歴番号Max = joho.get履歴番号();
             }
         }

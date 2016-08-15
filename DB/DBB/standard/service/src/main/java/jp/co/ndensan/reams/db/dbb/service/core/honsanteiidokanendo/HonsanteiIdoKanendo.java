@@ -89,7 +89,7 @@ public class HonsanteiIdoKanendo {
         SubGyomuCode サブ業務コード = SubGyomuCode.DBB介護賦課;
         requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(定数処理名.toString()));
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(定数調定年度.toString()));
-        DbT7022ShoriDateKanriEntity entity = 処理日付管理Dac.select基準日時_MAX(サブ業務コード, 処理名, zOneOneRS, 調定年度);
+        DbT7022ShoriDateKanriEntity entity = 処理日付管理Dac.select最大基準日時(サブ業務コード, 処理名, zOneOneRS, 調定年度);
         return new ShoriDateKanri(entity);
     }
 
@@ -203,9 +203,11 @@ public class HonsanteiIdoKanendo {
         RString 決定_変更通知書区分 = RString.EMPTY;
         if (parameter.get決定_チェックボックス().equals(oneRS)) {
             決定_変更通知書区分 = oneRS;
-        } else if (parameter.get変更_チェックボックス().equals(oneRS)) {
+        }
+        if (parameter.get変更_チェックボックス().equals(oneRS)) {
             決定_変更通知書区分 = twoRS;
-        } else if (parameter.get決定_チェックボックス().equals(oneRS)
+        }
+        if (parameter.get決定_チェックボックス().equals(oneRS)
                 && parameter.get変更_チェックボックス().equals(oneRS)) {
             決定_変更通知書区分 = threeRS;
         }
@@ -244,9 +246,11 @@ public class HonsanteiIdoKanendo {
         RString 決定_変更通知書区分 = RString.EMPTY;
         if (parameter.get決定_チェックボックス().equals(oneRS)) {
             決定_変更通知書区分 = oneRS;
-        } else if (parameter.get変更_チェックボックス().equals(oneRS)) {
+        }
+        if (parameter.get変更_チェックボックス().equals(oneRS)) {
             決定_変更通知書区分 = twoRS;
-        } else if (parameter.get決定_チェックボックス().equals(oneRS)
+        }
+        if (parameter.get決定_チェックボックス().equals(oneRS)
                 && parameter.get変更_チェックボックス().equals(oneRS)) {
             決定_変更通知書区分 = threeRS;
         }

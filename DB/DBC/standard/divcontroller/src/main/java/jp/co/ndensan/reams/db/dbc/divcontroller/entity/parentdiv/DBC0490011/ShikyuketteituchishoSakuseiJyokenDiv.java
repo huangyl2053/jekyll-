@@ -1,4 +1,5 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0490011;
+
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -8,20 +9,23 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0490011;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.PaymentDate.IPaymentDateDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.PaymentDate.PaymentDateDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 
 /**
- * ShikyuketteituchishoSakuseiJyoken のクラスファイル 
- * 
- * @author 自動生成
+ * ShikyuketteituchishoSakuseiJyoken のクラスファイル
+ *
+ * @reamsid_L DBC-2000-010 chenhui
  */
 public class ShikyuketteituchishoSakuseiJyokenDiv extends PanelBatchParameter {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
@@ -42,7 +46,7 @@ public class ShikyuketteituchishoSakuseiJyokenDiv extends PanelBatchParameter {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
+ /*
      * getChushutsuJoken
      * @return ChushutsuJoken
      */
@@ -96,7 +100,7 @@ public class ShikyuketteituchishoSakuseiJyokenDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtUketukebi(TextBoxDateRange txtUketukebi) {
+    public void setTxtUketukebi(TextBoxDateRange txtUketukebi) {
         this.getChushutsuJoken().getChushutsubiNyuryokuEria().setTxtUketukebi(txtUketukebi);
     }
 
@@ -106,7 +110,7 @@ public class ShikyuketteituchishoSakuseiJyokenDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtKetteibi(TextBoxDateRange txtKetteibi) {
+    public void setTxtKetteibi(TextBoxDateRange txtKetteibi) {
         this.getChushutsuJoken().getChushutsubiNyuryokuEria().setTxtKetteibi(txtKetteibi);
     }
 
@@ -116,7 +120,7 @@ public class ShikyuketteituchishoSakuseiJyokenDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtKetteishaUketukeNengetsu(TextBoxDate txtKetteishaUketukeNengetsu) {
+    public void setTxtKetteishaUketukeNengetsu(TextBoxDate txtKetteishaUketukeNengetsu) {
         this.getChushutsuJoken().getChushutsubiNyuryokuEria().setTxtKetteishaUketukeNengetsu(txtKetteishaUketukeNengetsu);
     }
 
@@ -126,7 +130,7 @@ public class ShikyuketteituchishoSakuseiJyokenDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtHakkobi(TextBoxDate txtHakkobi) {
+    public void setTxtHakkobi(TextBoxDate txtHakkobi) {
         this.getShikyuKetteiTsuchisho().setTxtHakkobi(txtHakkobi);
     }
 
@@ -136,7 +140,7 @@ public class ShikyuketteituchishoSakuseiJyokenDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setLblKomento(Label lblKomento) {
+    public void setLblKomento(Label lblKomento) {
         this.getShikyuKetteiTsuchisho().setLblKomento(lblKomento);
     }
 
@@ -146,7 +150,7 @@ public class ShikyuketteituchishoSakuseiJyokenDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setShutsuryokukoshinSentaku(ShutsuryokukoshinSentakuDiv ShutsuryokukoshinSentaku) {
+    public void setShutsuryokukoshinSentaku(ShutsuryokukoshinSentakuDiv ShutsuryokukoshinSentaku) {
         this.getShikyuKetteiTsuchisho().setShutsuryokukoshinSentaku(ShutsuryokukoshinSentaku);
     }
 
@@ -156,7 +160,7 @@ public class ShikyuketteituchishoSakuseiJyokenDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setChkTesutoShuturyoku(CheckBoxList chkTesutoShuturyoku) {
+    public void setChkTesutoShuturyoku(CheckBoxList chkTesutoShuturyoku) {
         this.getShikyuKetteiTsuchisho().getShutsuryokukoshinSentaku().setChkTesutoShuturyoku(chkTesutoShuturyoku);
     }
 
@@ -166,7 +170,7 @@ public class ShikyuketteituchishoSakuseiJyokenDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setRadKetteibiIkkatsuKoshinKubun(RadioButton radKetteibiIkkatsuKoshinKubun) {
+    public void setRadKetteibiIkkatsuKoshinKubun(RadioButton radKetteibiIkkatsuKoshinKubun) {
         this.getShikyuKetteiTsuchisho().getShutsuryokukoshinSentaku().setRadKetteibiIkkatsuKoshinKubun(radKetteibiIkkatsuKoshinKubun);
     }
 
@@ -176,7 +180,7 @@ public class ShikyuketteituchishoSakuseiJyokenDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtketteibi2(TextBoxDate txtketteibi2) {
+    public void setTxtketteibi2(TextBoxDate txtketteibi2) {
         this.getShikyuKetteiTsuchisho().getShutsuryokukoshinSentaku().setTxtketteibi2(txtketteibi2);
     }
 
@@ -186,7 +190,7 @@ public class ShikyuketteituchishoSakuseiJyokenDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setShutsuryokuTaishoKubun(ShutsuryokuTaishoKubunDiv ShutsuryokuTaishoKubun) {
+    public void setShutsuryokuTaishoKubun(ShutsuryokuTaishoKubunDiv ShutsuryokuTaishoKubun) {
         this.getShikyuKetteiTsuchisho().setShutsuryokuTaishoKubun(ShutsuryokuTaishoKubun);
     }
 
@@ -196,18 +200,18 @@ public class ShikyuketteituchishoSakuseiJyokenDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setChkShutsuryokuTaishoKubun(CheckBoxList chkShutsuryokuTaishoKubun) {
+    public void setChkShutsuryokuTaishoKubun(CheckBoxList chkShutsuryokuTaishoKubun) {
         this.getShikyuKetteiTsuchisho().getShutsuryokuTaishoKubun().setChkShutsuryokuTaishoKubun(chkShutsuryokuTaishoKubun);
-    }
-
-    @JsonIgnore
-    public IBunshoBangoInputDiv getCcdBunshoBangoInput() {
-        return this.getShikyuKetteiTsuchisho().getCcdBunshoBangoInput();
     }
 
     @JsonIgnore
     public IPaymentDateDiv getCcdShiharaiHoho() {
         return this.getShikyuKetteiTsuchisho().getCcdShiharaiHoho();
+    }
+
+    @JsonIgnore
+    public IBunshoBangoInputDiv getCcdBunshoBangoInput() {
+        return this.getShikyuKetteiTsuchisho().getCcdBunshoBangoInput();
     }
 
     // </editor-fold>

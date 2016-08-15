@@ -279,18 +279,6 @@ public class TokuchoTaishoshaIchiran {
     }
 
     /**
-     * test使用，作为画面临时跳转使用，用完删除。<br/>
-     * 特別徴収対象者一覧作成
-     *
-     * @param div {@link TokuchoTaishoshaIchiranDiv }
-     * @return を持つResponseData
-     */
-    public ResponseData<TokuchoTaishoshaIchiranDiv> onClick_TempStateChange(TokuchoTaishoshaIchiranDiv div) {
-        //test用，用完删除
-        return 同定非同定表示initialize(div);
-    }
-
-    /**
      * 出力対象変化後の処理<br/>
      * 同定非同定表示
      *

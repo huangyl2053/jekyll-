@@ -7,10 +7,14 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyodoJuky
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyodoShoriyoJukyushaIdoKihonSofu;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyodoShoriyoJukyushaIdoKihonSofuBuilder;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyodoShoriyoJukyushaIdoKogakuSofu;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyodoShoriyoJukyushaIdoKogakuSofuBuilder;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyodoShoriyoJukyushaIdoShokanSofu;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyodoShoriyoJukyushaIdoShokanSofuBuilder;
 import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.param.KyodoshoriyoJukyushaIdoRenrakuhyoParam;
+import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.param.KyoutuuEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_IdoKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_JukyushaIdoJiyu;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KyodoKogakuSetaiShotokuKubunCode;
@@ -51,6 +55,7 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
     private static final RString KEY_1 = new RString("key1");
     private static final RString SPACE = new RString("空");
     private static final List<KeyValueDataSource> 空 = new ArrayList<>();
+    private static final int NUM_ONE = 1;
 
     private KyodoJukyushaIdoRenrakuhyoDivHandler(KyodoJukyushaIdoRenrakuhyoDiv div) {
         this.div = div;
@@ -99,7 +104,9 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
         KyodoshoriyoJukyushaIdoRenrakuhyoParam entity = KyodoshoriyoJukyushaIdoRenrakuhyo.createInstance().getJukyushaIdoJoho(
                 処理モード, 論理削除, 異動日, 被保険者番号, 対象年月);
         div.getTxtHiHokenshaNo().setValue(被保険者番号.value());
-        div.getTxtTaisyoYM().setValue(new RDate(対象年月.toString()));
+        if (対象年月 != null && !対象年月.isEmpty()) {
+            div.getTxtTaisyoYM().setValue(new RDate(対象年月.toString()));
+        }
         if (entity != null) {
             div.setHdnKyodoShoriyoJukyushaIdoEntity(DataPassingConverter.serialize(entity));
             div.getTxtShoKisaiHokenshaNo().setValue(entity.get共通項目Entity().get証記載保険者番号().value());
@@ -108,16 +115,14 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
                     && 新規モード.equals(処理モード))) {
                 set初期値_新規(entity);
             } else if (div.getMode_DisplayMode().equals(KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei)) {
-                div.getTxtTaisyoYM().setValue(new RDate(対象年月.toString()));
                 set初期値_訂正(entity);
             } else if (div.getMode_DisplayMode().equals(KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.sakujyo)) {
-                div.getTxtTaisyoYM().setValue(new RDate(対象年月.toString()));
                 set初期値_削除(entity);
             } else if (div.getMode_DisplayMode().equals(KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.shokai)) {
-                div.getTxtTaisyoYM().setValue(new RDate(対象年月.toString()));
                 set初期値_照会(entity);
             }
         }
+        setRequired();
         return entity;
     }
 
@@ -509,6 +514,7 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
                 div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().setDisabled(false);
             }
         }
+        setRequired();
     }
 
     /**
@@ -545,14 +551,53 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
         } else if (div.getDdlJukyushaIdoJiyu().getSelectedValue().equals(JukyushaIF_JukyushaIdoJiyu.その他異動.get名称())) {
             entity.get共通項目Entity().set異動事由(JukyushaIF_JukyushaIdoJiyu.その他異動.getコード());
         }
+        if (div.getTxtTeiseiYMD().getValue() != null) {
+            entity.get共通項目Entity().set訂正年月日(new FlexibleDate(div.getTxtTeiseiYMD().getValue().toDateString()));
+        }
+        if (JukyushaIF_TeiseiKubunCode.修正.get名称().equals(div.getRadTeiseiKubunCode().getSelectedValue())) {
+            entity.get共通項目Entity().set訂正区分(JukyushaIF_TeiseiKubunCode.修正.getコード());
+        } else if (JukyushaIF_TeiseiKubunCode.削除.get名称().equals(div.getRadTeiseiKubunCode().getSelectedValue())) {
+            entity.get共通項目Entity().set訂正区分(JukyushaIF_TeiseiKubunCode.削除.getコード());
+        }
 
+        KyoutuuEntity 共通項目Entity = entity.get共通項目Entity();
         if (entity.get基本情報Entity() != null) {
+            entity = getデータ_基本送付情報(entity);
+        } else {
+            KyodoShoriyoJukyushaIdoKihonSofu 基本 = new KyodoShoriyoJukyushaIdoKihonSofu(
+                    共通項目Entity.get異動年月日(),
+                    共通項目Entity.get異動区分(),
+                    共通項目Entity.get異動事由(),
+                    共通項目Entity.get証記載保険者番号(),
+                    共通項目Entity.get被保険者番号(),
+                    NUM_ONE);
+            entity.set基本情報Entity(基本);
             entity = getデータ_基本送付情報(entity);
         }
         if (entity.get償還情報Entity() != null) {
             entity = getデータ_償還送付情報(entity);
+        } else {
+            KyodoShoriyoJukyushaIdoShokanSofu 償還 = new KyodoShoriyoJukyushaIdoShokanSofu(
+                    共通項目Entity.get異動年月日(),
+                    共通項目Entity.get異動区分(),
+                    共通項目Entity.get異動事由(),
+                    共通項目Entity.get証記載保険者番号(),
+                    共通項目Entity.get被保険者番号(),
+                    NUM_ONE);
+            entity.set償還情報Entity(償還);
+            entity = getデータ_償還送付情報(entity);
         }
         if (entity.get高額情報Entity() != null) {
+            entity = getデータ_高額送付情報(entity);
+        } else {
+            KyodoShoriyoJukyushaIdoKogakuSofu 高額 = new KyodoShoriyoJukyushaIdoKogakuSofu(
+                    共通項目Entity.get異動年月日(),
+                    共通項目Entity.get異動区分(),
+                    共通項目Entity.get異動事由(),
+                    共通項目Entity.get証記載保険者番号(),
+                    共通項目Entity.get被保険者番号(),
+                    NUM_ONE);
+            entity.set高額情報Entity(高額);
             entity = getデータ_高額送付情報(entity);
         }
         return entity;
@@ -786,5 +831,27 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
 
     private KyodoJukyushaIdoRenrakuhyoDivValidationHandler getValidationHandler(KyodoJukyushaIdoRenrakuhyoDiv div) {
         return new KyodoJukyushaIdoRenrakuhyoDivValidationHandler(div);
+    }
+
+    private void setRequired() {
+        if (div.getKyodoJukyushaIdoRenrakuhyoKihonPanel().isDisabled()) {
+            div.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtKihonIdoYMD().setRequired(false);
+        } else {
+            div.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtKihonIdoYMD().setRequired(true);
+        }
+        if (div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().isDisabled()) {
+            div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().getTxtShokanIdoYMD().setRequired(false);
+        } else {
+            div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().getTxtShokanIdoYMD().setRequired(true);
+        }
+        if (div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().isDisabled()) {
+            div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getTxtKogakuIdoYMD().setRequired(false);
+            div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getDdlSetaiShotokuKubun().setRequired(false);
+            div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getDdlShotokuKubun().setRequired(false);
+        } else {
+            div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getTxtKogakuIdoYMD().setRequired(true);
+            div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getDdlSetaiShotokuKubun().setRequired(true);
+            div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getDdlShotokuKubun().setRequired(true);
+        }
     }
 }

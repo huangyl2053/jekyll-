@@ -510,22 +510,36 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
         }
         RString 更正前後区分 = entity.get更正前後区分();
         FlexibleYearMonth 月割開始年月1 = entity.get月割開始年月1();
+        if (月割開始年月1 == null || 月割開始年月1.isEmpty()) {
+            return;
+        }
         int 開始月1 = 月割開始年月1.getMonthValue();
         FlexibleYearMonth 月割終了年月1 = entity.get月割終了年月1();
-        int 終了月1 = 月割終了年月1.getMonthValue();
+        int 終了月1;
+        if (月割終了年月1 == null || 月割終了年月1.isEmpty()) {
+            終了月1 = NUM_3;
+        } else {
+            終了月1 = 月割終了年月1.getMonthValue();
+        }
         if (entity.get保険料算定段階1().length() >= NUM_2) {
             RString 保険料算定段階1 = entity.get保険料算定段階1().substring(NUM_0, NUM_2).trimStart(CHAR_0);
             set月別取得段階(item, 開始月1, 終了月1, 保険料算定段階1, 更正前後区分);
         }
         FlexibleYearMonth 月割開始年月2 = entity.get月割開始年月2();
+        if (月割開始年月2 == null || 月割開始年月2.isEmpty()) {
+            return;
+        }
         int 開始月2 = 月割開始年月2.getMonthValue();
         FlexibleYearMonth 月割終了年月2 = entity.get月割終了年月2();
-        int 終了月2 = 月割終了年月2.getMonthValue();
+        int 終了月2;
+        if (月割終了年月2 == null || 月割終了年月2.isEmpty()) {
+            終了月2 = NUM_3;
+        } else {
+            終了月2 = 月割終了年月2.getMonthValue();
+        }
         if (entity.get保険料算定段階2().length() >= NUM_2) {
             RString 保険料算定段階2 = entity.get保険料算定段階2().substring(NUM_0, NUM_2).trimStart(CHAR_0);
-            if (!月割開始年月2.isEmpty() && !月割終了年月2.isEmpty() && !保険料算定段階2.isEmpty()) {
-                set月別取得段階(item, 開始月2, 終了月2, 保険料算定段階2, 更正前後区分);
-            }
+            set月別取得段階(item, 開始月2, 終了月2, 保険料算定段階2, 更正前後区分);
         }
     }
 

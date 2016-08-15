@@ -54,11 +54,7 @@ public class HanyoListShotokuJohoCsvEditor {
     private static final RString 特例状態住特 = new RString("住特");
     private static final RString FLAG = new RString("1");
     private static final RString 定数対象外 = new RString("対象外");
-    private static final RString LINE = new RString("-");
     private static final int 定数_ZERO = 0;
-    private static final int 定数_THREE = 3;
-    private static final int 定数_FIVE = 5;
-    private static final int 定数_SEVEN = 7;
 
     /**
      * editor
@@ -112,7 +108,7 @@ public class HanyoListShotokuJohoCsvEditor {
                 宛名.get消除異動年月日());
         csvEntity.set年齢(ageCalculator.get年齢());
         if (宛名.get性別() != null) {
-            csvEntity.set性別(宛名.get性別().getName().getShortJapanese());
+            csvEntity.set性別(宛名.get性別().getCode());
         }
         TsuzukigaraCode tsuzukigaraCode = entity.get宛名Entity().getTsuzukigaraCode();
         if (tsuzukigaraCode != null) {
@@ -140,14 +136,7 @@ public class HanyoListShotokuJohoCsvEditor {
         }
         YubinNo yubinNo = entity.get宛名Entity().getYubinNo();
         if (yubinNo != null && !yubinNo.isEmpty()) {
-            RString 郵便番号 = yubinNo.getColumnValue();
-            if (郵便番号.length() == 定数_THREE) {
-                csvEntity.set郵便番号(yubinNo.getColumnValue());
-            } else if (郵便番号.length() == 定数_FIVE) {
-                csvEntity.set郵便番号(郵便番号.substring(定数_ZERO, 定数_THREE).concat(LINE).concat(郵便番号.substring(定数_THREE, 定数_FIVE)));
-            } else if (郵便番号.length() == 定数_SEVEN) {
-                csvEntity.set郵便番号(郵便番号.substring(定数_ZERO, 定数_THREE).concat(LINE).concat(郵便番号.substring(定数_THREE, 定数_SEVEN)));
-            }
+            csvEntity.set郵便番号(yubinNo.getEditedYubinNo());
         } else {
             csvEntity.set郵便番号(RString.EMPTY);
         }
@@ -239,25 +228,18 @@ public class HanyoListShotokuJohoCsvEditor {
         IIdoJiyu 住定事由 = 宛名.get住定事由();
         IIdoJiyu 消除事由 = 宛名.get消除事由();
         csvEntity.set登録異動日(dataToRString(entity.get宛名Entity().getTorokuIdoYMD(), parameter));
-        csvEntity.set登録事由(登録事由 != null ? 登録事由.get異動事由略称() : RString.EMPTY);
+        csvEntity.set登録事由(登録事由 != null ? 登録事由.get異動事由コード() : RString.EMPTY);
         csvEntity.set登録届出日(dataToRString(entity.get宛名Entity().getTorokuTodokedeYMD(), parameter));
         csvEntity.set住定異動日(dataToRString(entity.get宛名Entity().getJuteiIdoYMD(), parameter));
-        csvEntity.set住定事由(住定事由 != null ? 住定事由.get異動事由略称() : RString.EMPTY);
+        csvEntity.set住定事由(住定事由 != null ? 住定事由.get異動事由コード() : RString.EMPTY);
         csvEntity.set住定届出日(dataToRString(entity.get宛名Entity().getJuteiTodokedeYMD(), parameter));
         csvEntity.set消除異動日(dataToRString(entity.get宛名Entity().getShojoIdoYMD(), parameter));
-        csvEntity.set消除事由(登録事由 != null ? 消除事由.get異動事由略称() : RString.EMPTY);
+        csvEntity.set消除事由(登録事由 != null ? 消除事由.get異動事由コード() : RString.EMPTY);
         csvEntity.set消除届出日(dataToRString(entity.get宛名Entity().getShojoTodokedeYMD(), parameter));
         csvEntity.set転出入理由(RString.EMPTY);
         YubinNo yubinNo = entity.get宛名Entity().getTennyumaeYubinNo();
         if (yubinNo != null && !yubinNo.isEmpty()) {
-            RString 郵便番号 = yubinNo.getColumnValue();
-            if (郵便番号.length() == 定数_THREE) {
-                csvEntity.set前住所郵便番号(yubinNo.getColumnValue());
-            } else if (郵便番号.length() == 定数_FIVE) {
-                csvEntity.set前住所郵便番号(郵便番号.substring(定数_ZERO, 定数_THREE).concat(LINE).concat(郵便番号.substring(定数_THREE, 定数_FIVE)));
-            } else if (郵便番号.length() == 定数_SEVEN) {
-                csvEntity.set前住所郵便番号(郵便番号.substring(定数_ZERO, 定数_THREE).concat(LINE).concat(郵便番号.substring(定数_THREE, 定数_SEVEN)));
-            }
+            csvEntity.set前住所郵便番号(yubinNo.getEditedYubinNo());
         } else {
             csvEntity.set前住所郵便番号(RString.EMPTY);
         }
@@ -326,14 +308,7 @@ public class HanyoListShotokuJohoCsvEditor {
         }
         YubinNo yubinNo = entity.get宛先Entity().getYubinNo();
         if (yubinNo != null && !yubinNo.isEmpty()) {
-            RString 郵便番号 = yubinNo.getColumnValue();
-            if (郵便番号.length() == 定数_THREE) {
-                csvEntity.set送付先郵便番号(yubinNo.getColumnValue());
-            } else if (郵便番号.length() == 定数_FIVE) {
-                csvEntity.set送付先郵便番号(郵便番号.substring(定数_ZERO, 定数_THREE).concat(LINE).concat(郵便番号.substring(定数_THREE, 定数_FIVE)));
-            } else if (郵便番号.length() == 定数_SEVEN) {
-                csvEntity.set送付先郵便番号(郵便番号.substring(定数_ZERO, 定数_THREE).concat(LINE).concat(郵便番号.substring(定数_THREE, 定数_SEVEN)));
-            }
+            csvEntity.set送付先郵便番号(yubinNo.getEditedYubinNo());
         } else {
             csvEntity.set送付先郵便番号(RString.EMPTY);
         }
@@ -406,8 +381,7 @@ public class HanyoListShotokuJohoCsvEditor {
         csvEntity.set資格喪失日(dataToRString(entity.get資格喪失年月日(), parameter));
         csvEntity.set資格喪失届日(dataToRString(entity.get資格喪失届出年月日(), parameter));
         HihokenshaKubunCode hihokenshaKubunCode = HihokenshaKubunCode.toValue(entity.get被保険者区分コード());
-        csvEntity.set資格区分(isNull(hihokenshaKubunCode)
-                ? RString.EMPTY : hihokenshaKubunCode.get名称());
+        csvEntity.set資格区分(hihokenshaKubunCode.get名称());
         if (FLAG.equals(entity.get住所地特例フラグ())) {
             csvEntity.set住所地特例状態(特例状態住特);
         } else {
@@ -424,7 +398,6 @@ public class HanyoListShotokuJohoCsvEditor {
         } else {
             set保険者番号By市町村コード(csvEntity, entity, 構成市町村マスタlist);
         }
-        csvEntity.set資格証記載保険者番号(null);
         if (保険料段階リスト != null && 保険料段階リスト.getBy段階区分(entity.get保険料段階()) != null) {
             csvEntity.set保険料段階(保険料段階リスト.getBy段階区分(entity.get保険料段階()).get表記());
         }
@@ -435,17 +408,15 @@ public class HanyoListShotokuJohoCsvEditor {
             csvEntity.set賦課年度(entity.get所得年度().toDateString());
         }
         KazeiKubun kazeiKubun = KazeiKubun.toValue(entity.get課税区分減免前());
-        csvEntity.set課税区分減免前(isNull(kazeiKubun)
-                ? RString.EMPTY : kazeiKubun.get名称());
+        csvEntity.set課税区分減免前(kazeiKubun.get名称());
         KazeiKubun kazeiKubun1 = KazeiKubun.toValue(entity.get課税区分減免後());
-        csvEntity.set課税区分減免後(isNull(kazeiKubun1)
-                ? RString.EMPTY : kazeiKubun1.get名称());
+        csvEntity.set課税区分減免後(kazeiKubun1.get名称());
         csvEntity.set合計所得金額(numToRString(entity.get合計所得金額()));
         csvEntity.set公的年金等収入(numToRString(entity.get公的年金収入額()));
         csvEntity.set公的年金等所得(numToRString(entity.get公的年金所得額()));
         if (entity.get処理日時() != null) {
-            FlexibleDate 処理日付 = new FlexibleDate(entity.get処理日時().toDateString());
-            csvEntity.set住民税更正年月日(dataToRString(処理日付, parameter));
+            FlexibleDate 処理日付 = new FlexibleDate(entity.get処理日時().getDate().toDateString());
+            csvEntity.set住民税更正日(dataToRString(処理日付, parameter));
         }
         if (GekihenkanwaSochi.対象外.getコード().equals(entity.get激変緩和措置区分())) {
             csvEntity.set激変緩和区分(定数対象外);
@@ -493,7 +464,7 @@ public class HanyoListShotokuJohoCsvEditor {
             return RString.EMPTY;
         }
         if (!parameter.is日付編集()) {
-            return 日付.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
+            return new RString(日付.toString());
         } else {
             return 日付.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         }

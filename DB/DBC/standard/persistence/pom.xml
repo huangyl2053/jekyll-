@@ -24,6 +24,10 @@
             <artifactId>DbcEntity</artifactId>
         </dependency>
         <!-- DBD -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbd</groupId>
+            <artifactId>DbdPersistence</artifactId>
+        </dependency>
         <!-- DBX -->
         <!-- DBZ -->
         <dependency>

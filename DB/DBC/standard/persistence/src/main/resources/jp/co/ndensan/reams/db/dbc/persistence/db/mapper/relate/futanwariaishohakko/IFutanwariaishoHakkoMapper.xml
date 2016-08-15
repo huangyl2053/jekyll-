@@ -1,0 +1,932 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBC-4990-030 pengxingyi -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.futanwariaishohakko.IFutanwariaishoHakkoMapper">
+                    
+    <select resultOrdered="true" id="select利用者負担割合明細"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaishohakko.FutanwariaishoHakkoMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity" fetchSize="500">
+        <include refid="selectRiyoshaFutanWariaiMeisai" />
+    </select>
+    <sql id="selectRiyoshaFutanWariaiMeisai">
+        SELECT
+            dbT3114RiyoshaFutanWariaiMeisai.*
+        FROM
+            (
+            SELECT * FROM rgdb."DbT3114RiyoshaFutanWariaiMeisai"
+            WHERE "nendo" = #{年度}  AND  "logicalDeletedFlag"= false
+            ) AS dbT3114RiyoshaFutanWariaiMeisai
+        INNER JOIN
+            (
+            SELECT * FROM rgdb."DbV3113RiyoshaFutanWariai"
+            WHERE "nendo"=#{年度}  
+            AND  "hakoFuyoFlag"= false
+            <if test="出力対象==1 or 出力対象==2">
+                AND "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時}
+                AND "insertTimestamp" <![CDATA[<]]> #{抽出期間終了日時}
+            </if>
+            <if test="発行区分==0">
+                AND ("hakoYMD" is null or "hakoYMD"='')
+            </if>
+            <if test="発行区分==1">
+                AND ("hakoYMD" is not null and "hakoYMD" <![CDATA[<>]]> '')
+            </if>
+            <if test="出力対象==2">
+                AND "hihokenshaNo" IN 
+                (
+                SELECT 
+                    DISTINCT "hihokenshaNo" 
+                FROM 
+                    rgdb."DbT4001JukyushaDaicho"
+                WHERE 
+                    "yukoMukoKubun" = '1' AND
+                     <if test="抽出期間開始日時 != null">
+                    "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時} AND
+                     </if>
+                     <if test="抽出期間終了日時 != null">
+                    "insertTimestamp" <![CDATA[<=]]> #{抽出期間終了日時} AND
+                     </if>
+                    "logicalDeletedFlag" = false AND
+                    "chokkinIdoJiyuCode" IN ('01', '02', '04', '10')
+                UNION
+                SELECT
+                    DISTINCT "hihokenshaNo" 
+                FROM
+                    rgdb."DbT3017KyufujissekiKihon"
+                WHERE
+                    1=1
+                    <if test="抽出期間開始日時 != null">
+                     AND "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時}
+                    </if>
+                    <if test="抽出期間終了日時 != null">
+                     AND "insertTimestamp" <![CDATA[<=]]> #{抽出期間終了日時} 
+                    </if>
+                )               
+             </if>
+             ) AS dbT3113RiyoshaFutanWariai
+         ON dbT3114RiyoshaFutanWariaiMeisai."nendo" = dbT3113RiyoshaFutanWariai."nendo"
+         AND dbT3114RiyoshaFutanWariaiMeisai."hihokenshaNo" = dbT3113RiyoshaFutanWariai."hihokenshaNo"
+         AND dbT3114RiyoshaFutanWariaiMeisai."rirekiNo" = dbT3113RiyoshaFutanWariai."rirekiNo"
+         ORDER BY
+         dbT3114RiyoshaFutanWariaiMeisai."nendo" , dbT3114RiyoshaFutanWariaiMeisai."hihokenshaNo" , dbT3114RiyoshaFutanWariaiMeisai."rirekiNo", dbT3114RiyoshaFutanWariaiMeisai."edaNo" 
+    </sql>
+      
+      
+    
+    <select resultOrdered="true" id="select利用者負担割合証"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaishohakko.FutanwariaishoHakkoMybatisParameter"
+            resultMap="resultMap_RiyoshaFutanWariaiSho" fetchSize="500">
+        <include refid="selectRiyoshaFutanWariaiSho" />
+    </select>
+    <sql id="selectRiyoshaFutanWariaiSho">
+        SELECT
+            <include refid="allColumns_DbT3113RiyoshaFutanWariai" />,
+            <include refid="allColumns_DbT1001HihokenshaDaicho" />,
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>,
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
+            CASE WHEN jigyoutaishousha_jyukyusha."kubun" IS NULL THEN '3' ELSE jigyoutaishousha_jyukyusha."kubun" END AS "kubun" ,
+            <include refid="allColumns_FutanWariKikanTemp" />,
+            CASE WHEN "DbT1001HihokenshaDaicho"."koikinaiJushochiTokureiFlag" = '1' THEN "DbT1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode" ELSE
+            "DbT1001HihokenshaDaicho"."shichosonCode" END AS "shokisaiHihokenshaNo",
+            <include refid="allColumns_DbT7037ShoKofuKaishu" />
+        FROM
+           (
+            SELECT * FROM rgdb."DbV3113RiyoshaFutanWariai"
+            WHERE "nendo"=#{年度}  
+                AND  "hakoFuyoFlag"= false
+            <if test="出力対象==1 or 出力対象==2">
+                AND "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時}
+                AND "insertTimestamp" <![CDATA[<=]]> #{抽出期間終了日時}
+            </if>
+            <if test="発行区分==0">
+                AND ("hakoYMD" is null or "hakoYMD"='')
+            </if>
+            <if test="発行区分==1">
+                AND ("hakoYMD" is not null and "hakoYMD" <![CDATA[<>]]> '')
+            </if>
+            <if test="出力対象==2">
+                AND "hihokenshaNo" IN 
+                (
+                SELECT 
+                    DISTINCT "hihokenshaNo" 
+                FROM 
+                    rgdb."DbT4001JukyushaDaicho"
+                WHERE 
+                    "yukoMukoKubun" = '1' AND
+                     <if test="抽出期間開始日時 != null">
+                    "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時} AND
+                     </if>
+                     <if test="抽出期間終了日時 != null">
+                    "insertTimestamp" <![CDATA[<=]]> #{抽出期間終了日時} AND
+                     </if>
+                    "logicalDeletedFlag" = false AND
+                    "chokkinIdoJiyuCode" IN ('01', '02', '04', '10')
+                UNION
+                SELECT
+                    DISTINCT "hihokenshaNo" 
+                FROM
+                    rgdb."DbT3017KyufujissekiKihon"
+                WHERE
+                    1=1
+                    <if test="抽出期間開始日時 != null">
+                     AND "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時} 
+                    </if>
+                    <if test="抽出期間終了日時 != null">
+                     AND "insertTimestamp" <![CDATA[<=]]> #{抽出期間終了日時} 
+                    </if>
+                )               
+             </if>
+             ) AS "DbT3113RiyoshaFutanWariai" 
+        LEFT OUTER JOIN
+            rgdb."DbV1001HihokenshaDaicho"  as "DbT1001HihokenshaDaicho"
+        ON  "DbT3113RiyoshaFutanWariai"."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
+        LEFT OUTER JOIN
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
+        ON  "DbT1001HihokenshaDaicho"."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
+        LEFT OUTER JOIN
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmParamClassAtesaki" /> AS "Atesaki"   
+        ON  "DbT1001HihokenshaDaicho"."shikibetsuCode" =  "Atesaki"."shikibetsuCode"
+        LEFT OUTER JOIN
+            (SELECT DISTINCT "hihokenshaNo" , '2' AS "kubun"
+            FROM rgdb."DbT4001JukyushaDaicho"
+            WHERE "ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{交付年月日} AND 
+               "ninteiYukoKikanShuryoYMD" <![CDATA[>=]]> #{交付年月日} AND
+               "yukoMukoKubun" = '1' AND
+               "logicalDeletedFlag" = false 
+            UNION
+            SELECT DISTINCT "hiHokenshaNo" , '1' AS "kubun"
+            FROM rgdb."DbT3017KyufujissekiKihon" 
+            WHERE "ninteiYukoKaishiYMD" <![CDATA[<=]]> #{交付年月日} AND 
+               "ninteiYukoShuryoYMD" <![CDATA[>=]]> #{交付年月日} 
+        ) AS jigyoutaishousha_jyukyusha
+        ON  "DbT3113RiyoshaFutanWariai"."hihokenshaNo" = jigyoutaishousha_jyukyusha."hihokenshaNo"
+        LEFT OUTER JOIN 
+            "FutanWariKikanTemp" AS FutanWariKikanTemp
+        ON  "DbT3113RiyoshaFutanWariai"."hihokenshaNo" = FutanWariKikanTemp."hihokenshaNo"     
+        LEFT OUTER JOIN
+             rgdb."DbT7037ShoKofuKaishu" AS "DbT7037ShoKofuKaishu"
+        ON   "DbT1001HihokenshaDaicho"."hihokenshaNo"  = "DbT7037ShoKofuKaishu"."hihokenshaNo"
+    </sql>
+    
+    <select resultOrdered="true" id="select利用者負担割合証Temp"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaishohakko.FutanwariaishoHakkoMybatisParameter"
+            resultMap="resultMap_RiyoshaFutanWariaiShoTemp" fetchSize="500">
+        SELECT
+            *
+        FROM
+            "RiyoshaFutanwariaishoTemp"  
+       <if test="出力順!= null">
+             ${出力順}
+       </if>    
+    </select>
+    
+    <select resultOrdered="true" id="select帳票制御汎用キー"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaishohakko.FutanwariaishoHakkoMybatisParameter"
+            resultMap="NewResultMap_DbT7067ChohyoSeigyoHanyoEntity" fetchSize="500">
+        SELECT
+            <include refid="allColumns_DbT7067ChohyoSeigyoHanyo" />
+        FROM
+            rgdb."DbT7067ChohyoSeigyoHanyo" AS  "DbT7067ChohyoSeigyoHanyo"
+        WHERE 
+            "DbT7067ChohyoSeigyoHanyo"."subGyomuCode"= #{サブ業務コード}   
+            AND  "DbT7067ChohyoSeigyoHanyo"."chohyoBunruiID"= #{帳票分類ID}   
+            AND  "DbT7067ChohyoSeigyoHanyo"."kanriNendo"= #{管理年度}  
+            AND  "DbT7067ChohyoSeigyoHanyo"."komokuName"= #{項目名}              
+    </select>
+    
+        <select resultOrdered="true" id="select帳票制御共通"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaishohakko.FutanwariaishoHakkoMybatisParameter"
+            resultMap="NewResultMap_DbT7065ChohyoSeigyoKyotsuEntity" fetchSize="500">
+        SELECT
+            <include refid="allColumns_DbT7065ChohyoSeigyoKyotsu" />
+        FROM
+            rgdb."DbT7065ChohyoSeigyoKyotsu" AS  "DbT7065ChohyoSeigyoKyotsu"
+        WHERE 
+            "DbT7065ChohyoSeigyoKyotsu"."subGyomuCode"= #{サブ業務コード}   
+            AND  "DbT7065ChohyoSeigyoKyotsu"."chohyoBunruiID"= #{帳票分類ID}           
+    </select>
+    
+    
+    
+    
+        <resultMap id="resultMap_RiyoshaFutanWariaiShoTemp" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaishohakko.RiyoshaFutanwariaishoTempEntity">
+        <id column="dbT1001HihokenshaDaicho_hihokenshaNo"/>     
+        <result property="事業対象者受給者区分" column="kubun"
+            typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>     
+        <result property="証記載保険者番号" column="shokisaiHihokenshaNo"
+            typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>    
+        <association property="利用者負担割合" resultMap="NewResultMap_DbT3113RiyoshaFutanWariaiEntity"/>
+        <association property="被保台帳" resultMap="NewResultMap_DbT1001HihokenshaDaichoEntity"/>
+        <association property="証交付回収" resultMap="NewResultMap_DbT7037ShoKofuKaishuEntity"/>
+        <association property = "宛名" resultMap = "New_UaFt200FindShikibetsuTaishoEntity"/>
+        <association property = "宛先" resultMap = "New_ResultAtesakiEntity"/>             
+        <association property= "負担割合期間" resultMap="resultMap_FutanWariKikanTemp"/> 
+    </resultMap> 
+    
+    
+     <resultMap id="New_ResultAtesakiEntity" type="jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity">
+        <id     property="shikibetsuCode"                      column="atesaki_shikibetsuCode"                      typeHandler="ShikibetsuCodeTypeHandler" />
+        <id     property="atesakiShubetsu"                     column="atesaki_atesakiShubetsu"                     typeHandler="RStringTypeHandler" />
+        <id     property="gyomubetsuPrimaryKey"                column="atesaki_gyomubetsuPrimaryKey"                typeHandler="RStringTypeHandler" />
+        <id     property="gyomuKoyuKey"                        column="atesaki_gyomuKoyuKey"                        typeHandler="RStringTypeHandler" />
+        <id     property="gyomuCode"                           column="atesaki_gyomuCode"                           typeHandler="GyomuCodeTypeHandler" />
+        <id     property="subGyomuCode"                        column="atesaki_subGyomuCode"                        typeHandler="SubGyomuCodeTypeHandler" />
+        <id     property="gyomuGroupCode"                      column="atesaki_gyomuGroupCode"                      typeHandler="RStringTypeHandler" />
+        <id     property="subGyomuGroupCode"                   column="atesaki_subGyomuGroupCode"                   typeHandler="RStringTypeHandler" />
+        <id     property="kamokuCode"                          column="atesaki_kamokuCode"                          typeHandler="KamokuCodeTypeHandler" />
+        <result property="gyomuGroupName"                      column="atesaki_gyomuGroupName"                      typeHandler="RStringTypeHandler" />
+        <result property="subGyomuGroupName"                   column="atesaki_subGyomuGroupName"                   typeHandler="RStringTypeHandler" />
+        <result property="kannaiKangaiKubun"                   column="atesaki_kannaiKangaiKubun"                   typeHandler="RStringTypeHandler" />
+        <result property="zenkokuJushoCode"                    column="atesaki_zenkokuJushoCode"                    typeHandler="ZenkokuJushoCodeTypeHandler" />
+        <result property="choikiCode"                          column="atesaki_choikiCode"                          typeHandler="ChoikiCodeTypeHandler" />
+        <result property="jusho"                               column="atesaki_jusho"                               typeHandler="AtenaJushoTypeHandler" />
+        <result property="yubinNo"                             column="atesaki_yubinNo"                             typeHandler="YubinNoTypeHandler" />
+        <result property="banchiCode1"                         column="atesaki_banchiCode1"                         typeHandler="BanchiCodeTypeHandler" />
+        <result property="banchiCode2"                         column="atesaki_banchiCode2"                         typeHandler="BanchiCodeTypeHandler" />
+        <result property="banchiCode3"                         column="atesaki_banchiCode3"                         typeHandler="BanchiCodeTypeHandler" />
+        <result property="banchiCode4"                         column="atesaki_banchiCode4"                         typeHandler="BanchiCodeTypeHandler" />
+        <result property="banchi"                              column="atesaki_banchi"                              typeHandler="AtenaBanchiTypeHandler" />
+        <result property="katagakiInjiFlag"                    column="atesaki_katagakiInjiFlag"                    />
+        <result property="katagaki"                            column="atesaki_katagaki"                            typeHandler="KatagakiTypeHandler" />
+        <result property="gyoseikuCode"                        column="atesaki_gyoseikuCode"                        typeHandler="GyoseikuCodeTypeHandler" />
+        <result property="chikuCode1"                          column="atesaki_chikuCode1"                          typeHandler="ChikuCodeTypeHandler" />
+        <result property="chiku1"                              column="atesaki_chiku1"                              typeHandler="RStringTypeHandler" />
+        <result property="chikuCode2"                          column="atesaki_chikuCode2"                          typeHandler="ChikuCodeTypeHandler" />
+        <result property="chiku2"                              column="atesaki_chiku2"                              typeHandler="RStringTypeHandler" />
+        <result property="chikuCode3"                          column="atesaki_chikuCode3"                          typeHandler="ChikuCodeTypeHandler" />
+        <result property="chiku3"                              column="atesaki_chiku3"                              typeHandler="RStringTypeHandler" />
+        <result property="gyoseiku"                            column="atesaki_gyoseiku"                            typeHandler="RStringTypeHandler" />
+        <result property="juminShubetsuCode"                   column="atesaki_juminShubetsuCode"                   typeHandler="RStringTypeHandler" />
+        <result property="juminJotaiCode"                      column="atesaki_juminJotaiCode"                      typeHandler="RStringTypeHandler" />
+        <result property="kanjiShimei"                         column="atesaki_kanjiShimei"                         typeHandler="AtenaMeishoTypeHandler" />
+        <result property="kanaShimei"                          column="atesaki_kanaShimei"                          typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="gaikokujinShimei"                    column="atesaki_gaikokujinShimei"                    typeHandler="AtenaMeishoTypeHandler" />
+        <result property="gaikokujinHeikimei"                  column="atesaki_gaikokujinHeikimei"                  typeHandler="AtenaMeishoTypeHandler" />
+        <result property="gaikokujinKanaShimei"                column="atesaki_gaikokujinKanaShimei"                typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="tsushomei"                           column="atesaki_tsushomei"                           typeHandler="AtenaMeishoTypeHandler" />
+        <result property="kanaTsushomei"                       column="atesaki_kanaTsushomei"                       typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="shimeiRiyoKubun"                     column="atesaki_shimeiRiyoKubun"                     typeHandler="RStringTypeHandler" />
+        <result property="kyoyushaMeisho"                      column="atesaki_kyoyushaMeisho"                      typeHandler="AtenaMeishoTypeHandler" />
+        <result property="kyoyushaKanaMeisho"                  column="atesaki_kyoyushaKanaMeisho"                  typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="hojinKeitaiCode"                     column="atesaki_hojinKeitaiCode"                     typeHandler="CodeTypeHandler" />
+        <result property="hojinMeiHenshuKubun"                 column="atesaki_hojinMeiHenshuKubun"                 typeHandler="RStringTypeHandler" />
+        <result property="hojinKeitaiRyakushoKubun"            column="atesaki_hojinKeitaiRyakushoKubun"            typeHandler="RStringTypeHandler" />
+        <result property="hojinMeisho"                         column="atesaki_hojinMeisho"                         typeHandler="AtenaMeishoTypeHandler" />
+        <result property="hojinKanaMeisho"                     column="atesaki_hojinKanaMeisho"                     typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="hojinShitenMeisho"                   column="atesaki_hojinShitenMeisho"                   typeHandler="AtenaMeishoTypeHandler" />
+        <result property="hojinShitenKanaMeisho"               column="atesaki_hojinShitenKanaMeisho"               typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="sofusakiMeisho"                      column="atesaki_sofusakiMeisho"                      typeHandler="AtenaMeishoTypeHandler" />
+        <result property="sofusakiKanaMeisho"                  column="atesaki_sofusakiKanaMeisho"                  typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="renrakusaki1"                        column="atesaki_renrakusaki1"                        typeHandler="TelNoTypeHandler" />
+        <result property="renrakusaki2"                        column="atesaki_renrakusaki2"                        typeHandler="TelNoTypeHandler" />
+        <result property="renrakusaki3"                        column="atesaki_renrakusaki3"                        typeHandler="TelNoTypeHandler" />
+        <result property="renrakusakiKubun1"                   column="atesaki_renrakusakiKubun1"                   typeHandler="CodeTypeHandler" />
+        <result property="renrakusakiKubun2"                   column="atesaki_renrakusakiKubun2"                   typeHandler="CodeTypeHandler" />
+        <result property="renrakusakiKubun3"                   column="atesaki_renrakusakiKubun3"                   typeHandler="CodeTypeHandler" />
+        <result property="mailAddress"                         column="atesaki_mailAddress"                         typeHandler="MailAddressTypeHandler" />
+        <result property="biko"                                column="atesaki_biko"                                typeHandler="RStringTypeHandler" />
+        <result property="dainoKankeiCode"                     column="atesaki_dainoKankeiCode"                     typeHandler="CodeTypeHandler" />
+        <result property="honninJuminShubetsuCode"             column="atesaki_honninJuminShubetsuCode"             typeHandler="RStringTypeHandler" />
+        <result property="honninJuminJotaiCode"                column="atesaki_honninJuminJotaiCode"                typeHandler="RStringTypeHandler" />
+        <result property="honninKanjiShimei"                   column="atesaki_honninKanjiShimei"                   typeHandler="AtenaMeishoTypeHandler" />
+        <result property="honninKanaShimei"                    column="atesaki_honninKanaShimei"                    typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="honninGaikokujinShimei"              column="atesaki_honninGaikokujinShimei"              typeHandler="AtenaMeishoTypeHandler" />
+        <result property="honninGaikokujinHeikimei"            column="atesaki_honninGaikokujinHeikimei"            typeHandler="AtenaMeishoTypeHandler" />
+        <result property="honninGaikokujinKanaShimei"          column="atesaki_honninGaikokujinKanaShimei"          typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="honninTsushomei"                     column="atesaki_honninTsushomei"                     typeHandler="AtenaMeishoTypeHandler" />
+        <result property="honninKanaTsushomei"                 column="atesaki_honninKanaTsushomei"                 typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="honninShimeiRiyoKubun"               column="atesaki_honninShimeiRiyoKubun"               typeHandler="RStringTypeHandler" />
+        <result property="honninKyoyushaMeisho"                column="atesaki_honninKyoyushaMeisho"                typeHandler="AtenaMeishoTypeHandler" />
+        <result property="honninKyoyushaKanaMeisho"            column="atesaki_honninKyoyushaKanaMeisho"            typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="honninHojinKeitaiCode"               column="atesaki_honninHojinKeitaiCode"               typeHandler="CodeTypeHandler" />
+        <result property="honninHojinMeiHenshuKubun"           column="atesaki_honninHojinMeiHenshuKubun"           typeHandler="RStringTypeHandler" />
+        <result property="honninHojinKeitaiRyakushoKubun"      column="atesaki_honninHojinKeitaiRyakushoKubun"      typeHandler="RStringTypeHandler" />
+        <result property="honninHojinMeisho"                   column="atesaki_honninHojinMeisho"                   typeHandler="AtenaMeishoTypeHandler" />
+        <result property="honninHojinKanaMeisho"               column="atesaki_honninHojinKanaMeisho"               typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="honninHojinShitenMeisho"             column="atesaki_honninHojinShitenMeisho"             typeHandler="AtenaMeishoTypeHandler" />
+        <result property="honninHojinShitenKanaMeisho"         column="atesaki_honninHojinShitenKanaMeisho"         typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="honninDaihyoshaShikibetsuCode"       column="atesaki_honninDaihyoshaShikibetsuCode"       typeHandler="ShikibetsuCodeTypeHandler" />
+        <result property="honninDaihyoshaJuminShubetsuCode"    column="atesaki_honninDaihyoshaJuminShubetsuCode"    typeHandler="RStringTypeHandler" />
+        <result property="honninDaihyoshaShimei"               column="atesaki_honninDaihyoshaShimei"               typeHandler="AtenaMeishoTypeHandler" />
+        <result property="honninDaihyoshaKanaShimei"           column="atesaki_honninDaihyoshaKanaShimei"           typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="honninDaihyoshaNihonjinShimei"       column="atesaki_honninDaihyoshaNihonjinShimei"       typeHandler="AtenaMeishoTypeHandler" />
+        <result property="honninDaihyoshaNihonjinKanaShimei"   column="atesaki_honninDaihyoshaNihonjinKanaShimei"   typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="honninDaihyoshaGaikokujinShimei"     column="atesaki_honninDaihyoshaGaikokujinShimei"     typeHandler="AtenaMeishoTypeHandler" />
+        <result property="honninDaihyoshaGaikokujinHeikimei"   column="atesaki_honninDaihyoshaGaikokujinHeikimei"   typeHandler="AtenaMeishoTypeHandler" />
+        <result property="honninDaihyoshaGaikokujinKanaShimei" column="atesaki_honninDaihyoshaGaikokujinKanaShimei" typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="honninDaihyoshaTsushomei"            column="atesaki_honninDaihyoshaTsushomei"            typeHandler="AtenaMeishoTypeHandler" />
+        <result property="honninDaihyoshaShimeiRiyoKubun"      column="atesaki_honninDaihyoshaShimeiRiyoKubun"      typeHandler="RStringTypeHandler" />
+        <result property="honninDaihyoshaKanaTsushomei"        column="atesaki_honninDaihyoshaKanaTsushomei"        typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="setainushiShikibetsuCode"            column="atesaki_setainushiShikibetsuCode"            typeHandler="ShikibetsuCodeTypeHandler" />
+        <result property="setainushiKannaiKangaiKubun"         column="atesaki_setainushiKannaiKangaiKubun"         typeHandler="RStringTypeHandler" />
+        <result property="setainushiZenkokuJushoCode"          column="atesaki_setainushiZenkokuJushoCode"          typeHandler="ZenkokuJushoCodeTypeHandler" />
+        <result property="setainushiChoikiCode"                column="atesaki_setainushiChoikiCode"                typeHandler="ChoikiCodeTypeHandler" />
+        <result property="setainushiJusho"                     column="atesaki_setainushiJusho"                     typeHandler="AtenaJushoTypeHandler" />
+        <result property="setainushiYubinNo"                   column="atesaki_setainushiYubinNo"                   typeHandler="YubinNoTypeHandler" />
+        <result property="setainushiBanchiCode1"               column="atesaki_setainushiBanchiCode1"               typeHandler="BanchiCodeTypeHandler" />
+        <result property="setainushiBanchiCode2"               column="atesaki_setainushiBanchiCode2"               typeHandler="BanchiCodeTypeHandler" />
+        <result property="setainushiBanchiCode3"               column="atesaki_setainushiBanchiCode3"               typeHandler="BanchiCodeTypeHandler" />
+        <result property="setainushiBanchiCode4"               column="atesaki_setainushiBanchiCode4"               typeHandler="BanchiCodeTypeHandler" />
+        <result property="setainushiBanchi"                    column="atesaki_setainushiBanchi"                    typeHandler="AtenaBanchiTypeHandler" />
+        <result property="setainushiKatagakiInjiFlag"          column="atesaki_setainushiKatagakiInjiFlag"          />
+        <result property="setainushiKatagaki"                  column="atesaki_setainushiKatagaki"                  typeHandler="KatagakiTypeHandler" />
+        <result property="setainushiGyoseikuCode"              column="atesaki_setainushiGyoseikuCode"              typeHandler="GyoseikuCodeTypeHandler" />
+        <result property="setainushiGyoseikuName"              column="atesaki_setainushiGyoseikuName"              typeHandler="RStringTypeHandler" />
+        <result property="setainushiJuminShubetsuCode"         column="atesaki_setainushiJuminShubetsuCode"         typeHandler="RStringTypeHandler" />
+        <result property="setainushiJuminJotaiCode"            column="atesaki_setainushiJuminJotaiCode"            typeHandler="RStringTypeHandler" />
+        <result property="setainushiKanjiShimei"               column="atesaki_setainushiKanjiShimei"               typeHandler="AtenaMeishoTypeHandler" />
+        <result property="setainushiKanaShimei"                column="atesaki_setainushiKanaShimei"                typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="setainushiGaikokujinShimei"          column="atesaki_setainushiGaikokujinShimei"          typeHandler="AtenaMeishoTypeHandler" />
+        <result property="setainushiGaikokujinHeikimei"        column="atesaki_setainushiGaikokujinHeikimei"        typeHandler="AtenaMeishoTypeHandler" />
+        <result property="setainushiGaikokujinKanaShimei"      column="atesaki_setainushiGaikokujinKanaShimei"      typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="setainushiTsushomei"                 column="atesaki_setainushiTsushomei"                 typeHandler="AtenaMeishoTypeHandler" />
+        <result property="setainushiKanaTsushomei"             column="atesaki_setainushiKanaTsushomei"             typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="setainushiShimeiRiyoKubun"           column="atesaki_setainushiShimeiRiyoKubun"           typeHandler="RStringTypeHandler" />
+        <result property="setainushiRenrakusaki1"              column="atesaki_setainushiRenrakusaki1"              typeHandler="TelNoTypeHandler" />
+        <result property="setainushiRenrakusaki2"              column="atesaki_setainushiRenrakusaki2"              typeHandler="TelNoTypeHandler" />
+        <result property="setainushiRenrakusaki3"              column="atesaki_setainushiRenrakusaki3"              typeHandler="TelNoTypeHandler" />
+        <result property="setainushiRenrakusakiKubun1"         column="atesaki_setainushiRenrakusakiKubun1"         typeHandler="CodeTypeHandler" />
+        <result property="setainushiRenrakusakiKubun2"         column="atesaki_setainushiRenrakusakiKubun2"         typeHandler="CodeTypeHandler" />
+        <result property="setainushiRenrakusakiKubun3"         column="atesaki_setainushiRenrakusakiKubun3"         typeHandler="CodeTypeHandler" />
+        <result property="setainushiMailAddress"               column="atesaki_mailAddress"                         typeHandler="MailAddressTypeHandler" />
+        <result property="dainoninShikibetsuCode"              column="atesaki_dainoninShikibetsuCode"              typeHandler="ShikibetsuCodeTypeHandler" />
+        <result property="honninSetaiCode"                     column="atesaki_honninSetaiCode"                     typeHandler="SetaiCodeTypeHandler" />
+        <result property="dainoninSetaiCode"                   column="atesaki_dainoninSetaiCode"                   typeHandler="SetaiCodeTypeHandler" />
+    </resultMap>
+    
+    <resultMap id="New_UaFt200FindShikibetsuTaishoEntity" type="jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity" >
+        <id property="shikibetsuCode"                         column="shikibetsuTaisho_shikibetsuCode"                     typeHandler="ShikibetsuCodeTypeHandler" />
+        <id property="rirekiNo"                               column="shikibetsuTaisho_rirekiNo"                           />
+        <result property="genLasdecCode"                      column="shikibetsuTaisho_genLasdecCode"                      typeHandler="LasdecCodeTypeHandler" />
+        <result property="kyuLasdecCode"                      column="shikibetsuTaisho_kyuLasdecCode"                      typeHandler="LasdecCodeTypeHandler" />
+        <result property="kyuLasdecCodeRenban"                column="shikibetsuTaisho_kyuLasdecCodeRenban"                />
+        <result property="gyomuCode"                          column="shikibetsuTaisho_gyomuCode"                          typeHandler="GyomuCodeTypeHandler" />
+        <result property="currentFlag"                        column="shikibetsuTaisho_currentFlag"                        />
+        <result property="juminShubetsuCode"                  column="shikibetsuTaisho_juminShubetsuCode"                  typeHandler="RStringTypeHandler" />
+        <result property="kojinNo"                            column="shikibetsuTaisho_kojinNo"                            typeHandler="KojinNoTypeHandler" />
+        <result property="hojinNo"                            column="shikibetsuTaisho_hojinNo"                            typeHandler="HojinNoTypeHandler" />
+        <result property="shoriYMD"                           column="shikibetsuTaisho_shoriYMD"                           typeHandler="FlexibleDateTypeHandler" />
+        <result property="idoJiyuCode"                        column="shikibetsuTaisho_idoJiyuCode"                        typeHandler="RStringTypeHandler" />
+        <result property="idoYMD"                             column="shikibetsuTaisho_idoYMD"                             typeHandler="FlexibleDateTypeHandler" />
+        <result property="todokedeJiyuCode"                   column="shikibetsuTaisho_todokedeJiyuCode"                   typeHandler="RStringTypeHandler" />
+        <result property="todokedeYMD"                        column="shikibetsuTaisho_todokedeYMD"                        typeHandler="FlexibleDateTypeHandler" />
+        <result property="idoRiyuCode"                        column="shikibetsuTaisho_idoRiyuCode"                        typeHandler="CodeTypeHandler" />
+        <result property="meisho"                             column="shikibetsuTaisho_meisho"                             typeHandler="AtenaMeishoTypeHandler" />
+        <result property="kanaMeisho"                         column="shikibetsuTaisho_kanaMeisho"                         typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="shimeiRiyoKubun"                    column="shikibetsuTaisho_shimeiRiyoKubun"                    typeHandler="RStringTypeHandler" />
+        <result property="kannaiKangaiKubun"                  column="shikibetsuTaisho_kannaiKangaiKubun"                  typeHandler="RStringTypeHandler" />
+        <result property="yubinNo"                            column="shikibetsuTaisho_yubinNo"                            typeHandler="YubinNoTypeHandler" />
+        <result property="choikiCode"                         column="shikibetsuTaisho_choikiCode"                         typeHandler="ChoikiCodeTypeHandler" />
+        <result property="zenkokuJushoCode"                   column="shikibetsuTaisho_zenkokuJushoCode"                   typeHandler="ZenkokuJushoCodeTypeHandler" />
+        <result property="jusho"                              column="shikibetsuTaisho_jusho"                              typeHandler="AtenaJushoTypeHandler" />
+        <result property="banchiCode1"                        column="shikibetsuTaisho_banchiCode1"                        typeHandler="BanchiCodeTypeHandler" />
+        <result property="banchiCode2"                        column="shikibetsuTaisho_banchiCode2"                        typeHandler="BanchiCodeTypeHandler" />
+        <result property="banchiCode3"                        column="shikibetsuTaisho_banchiCode3"                        typeHandler="BanchiCodeTypeHandler" />
+        <result property="banchiCode4"                        column="shikibetsuTaisho_banchiCode4"                        typeHandler="BanchiCodeTypeHandler" />
+        <result property="banchi"                             column="shikibetsuTaisho_banchi"                             typeHandler="AtenaBanchiTypeHandler" />
+        <result property="katagaki"                           column="shikibetsuTaisho_katagaki"                           typeHandler="KatagakiTypeHandler" />
+        <result property="katagakiInjiFlag"                   column="shikibetsuTaisho_katagakiInjiFlag"                   />
+        <result property="gyoseikuCode"                       column="shikibetsuTaisho_gyoseikuCode"                       typeHandler="GyoseikuCodeTypeHandler" />
+        <result property="gyoseikuName"                       column="shikibetsuTaisho_gyoseikuName"                       typeHandler="RStringTypeHandler" />
+        <result property="chikuCode1"                         column="shikibetsuTaisho_chikuCode1"                         typeHandler="ChikuCodeTypeHandler" />
+        <result property="chikuName1"                         column="shikibetsuTaisho_chikuName1"                         typeHandler="RStringTypeHandler" />
+        <result property="chikuCode2"                         column="shikibetsuTaisho_chikuCode2"                         typeHandler="ChikuCodeTypeHandler" />
+        <result property="chikuName2"                         column="shikibetsuTaisho_chikuName2"                         typeHandler="RStringTypeHandler" />
+        <result property="chikuCode3"                         column="shikibetsuTaisho_chikuCode3"                         typeHandler="ChikuCodeTypeHandler" />
+        <result property="chikuName3"                         column="shikibetsuTaisho_chikuName3"                         typeHandler="RStringTypeHandler" />
+        <result property="shogakkokuCode"                     column="shikibetsuTaisho_shogakkokuCode"                     typeHandler="ShogakkokuCodeTypeHandler" />
+        <result property="shogakkokuName"                     column="shikibetsuTaisho_shogakkokuName"                     typeHandler="RStringTypeHandler" />
+        <result property="chugakkokuCode"                     column="shikibetsuTaisho_chugakkokuCode"                     typeHandler="ChugakkokuCodeTypeHandler" />
+        <result property="chugakkokuName"                     column="shikibetsuTaisho_chugakkokuName"                     typeHandler="RStringTypeHandler" />
+        <result property="tohyokuCode"                        column="shikibetsuTaisho_tohyokuCode"                        typeHandler="TohyokuCodeTypeHandler" />
+        <result property="tohyokuName"                        column="shikibetsuTaisho_tohyokuName"                        typeHandler="RStringTypeHandler" />
+        <result property="juminJotaiCode"                     column="shikibetsuTaisho_juminJotaiCode"                     typeHandler="RStringTypeHandler" />
+        <result property="setaiCode"                          column="shikibetsuTaisho_setaiCode"                          typeHandler="SetaiCodeTypeHandler" />
+        <result property="seinengappiYMD"                     column="shikibetsuTaisho_seinengappiYMD"                     typeHandler="FlexibleDateTypeHandler" />
+        <result property="seinengappiFushoKubun"              column="shikibetsuTaisho_seinengappiFushoKubun"              typeHandler="RStringTypeHandler" />
+        <result property="seibetsuCode"                       column="shikibetsuTaisho_seibetsuCode"                       typeHandler="RStringTypeHandler" />
+        <result property="tsuzukigaraCode"                    column="shikibetsuTaisho_tsuzukigaraCode"                    typeHandler="TsuzukigaraCodeTypeHandler" />
+        <result property="tsuzukigara"                        column="shikibetsuTaisho_tsuzukigara"                        typeHandler="RStringTypeHandler" />
+        <result property="kazokuNo"                           column="shikibetsuTaisho_kazokuNo"                           />
+        <result property="juminhyoHyojijun"                   column="shikibetsuTaisho_juminhyoHyojijun"                   />
+        <result property="kikaYMD"                            column="shikibetsuTaisho_kikaYMD"                            typeHandler="FlexibleDateTypeHandler" />
+        <result property="kanjiShimei"                        column="shikibetsuTaisho_kanjiShimei"                        typeHandler="AtenaMeishoTypeHandler" />
+        <result property="kanaShimei"                         column="shikibetsuTaisho_kanaShimei"                         typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="juminhyoCode"                       column="shikibetsuTaisho_juminhyoCode"                       typeHandler="RStringTypeHandler" />
+        <result property="honsekiZenkokuJushoCode"            column="shikibetsuTaisho_honsekiZenkokuJushoCode"            typeHandler="ZenkokuJushoCodeTypeHandler" />
+        <result property="honsekiChoikiCode"                  column="shikibetsuTaisho_honsekiChoikiCode"                  typeHandler="ChoikiCodeTypeHandler" />
+        <result property="honsekiJusho"                       column="shikibetsuTaisho_honsekiJusho"                       typeHandler="AtenaJushoTypeHandler" />
+        <result property="honsekiBanchi"                      column="shikibetsuTaisho_honsekiBanchi"                      typeHandler="AtenaBanchiTypeHandler" />
+        <result property="hittosha"                           column="shikibetsuTaisho_hittosha"                           typeHandler="AtenaMeishoTypeHandler" />
+        <result property="gaikokujinShimei"                   column="shikibetsuTaisho_gaikokujinShimei"                   typeHandler="AtenaMeishoTypeHandler" />
+        <result property="gaikokujinHeikimei"                 column="shikibetsuTaisho_gaikokujinHeikimei"                 typeHandler="AtenaMeishoTypeHandler" />
+        <result property="gaikokujinKanaShimei"               column="shikibetsuTaisho_gaikokujinKanaShimei"               typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="katakanaHyoki"                      column="shikibetsuTaisho_katakanaHyoki"                      typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="tsushomei"                          column="shikibetsuTaisho_tsushomei"                          typeHandler="AtenaMeishoTypeHandler" />
+        <result property="kanaTsushomei"                      column="shikibetsuTaisho_kanaTsushomei"                      typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="kokusekiChiikiCode"                 column="shikibetsuTaisho_kokusekiChiikiCode"                 typeHandler="CodeTypeHandler" />
+        <result property="zairyuShikakuCode"                  column="shikibetsuTaisho_zairyuShikakuCode"                  typeHandler="CodeTypeHandler" />
+        <result property="zairyuKikanCode"                    column="shikibetsuTaisho_zairyuKikanCode"                    typeHandler="RStringTypeHandler" />
+        <result property="zairyuKikantoManryoYMD"             column="shikibetsuTaisho_zairyuKikantoManryoYMD"             typeHandler="FlexibleDateTypeHandler" />
+        <result property="zairyuCardtoNo"                     column="shikibetsuTaisho_zairyuCardtoNo"                     typeHandler="RStringTypeHandler" />
+        <result property="zairyuCardtoYukoYMD"                column="shikibetsuTaisho_zairyuCardtoYukoYMD"                typeHandler="FlexibleDateTypeHandler" />
+        <result property="dai30Jono45niKiteisuruKubun"        column="shikibetsuTaisho_dai30Jono45niKiteisuruKubun"        typeHandler="RStringTypeHandler" />
+        <result property="setainushiShikibetsuCode"           column="shikibetsuTaisho_setainushiShikibetsuCode"           typeHandler="ShikibetsuCodeTypeHandler" />
+        <result property="setainushiMei"                      column="shikibetsuTaisho_setainushiMei"                      typeHandler="AtenaMeishoTypeHandler" />
+        <result property="hojinKeitaiCode"                    column="shikibetsuTaisho_hojinKeitaiCode"                    typeHandler="CodeTypeHandler" />
+        <result property="hojinKeitaiMeisho"                  column="shikibetsuTaisho_hojinKeitaiMeisho"                  typeHandler="RStringTypeHandler" />
+        <result property="hojinKeitaiRyakusho"                column="shikibetsuTaisho_hojinKeitaiRyakusho"                typeHandler="RStringTypeHandler" />
+        <result property="hojinMeishoHenshuKubun"             column="shikibetsuTaisho_hojinMeishoHenshuKubun"             typeHandler="RStringTypeHandler" />
+        <result property="hojinKeitaiRyakushoKubun"           column="shikibetsuTaisho_hojinKeitaiRyakushoKubun"           typeHandler="RStringTypeHandler" />
+        <result property="hojinMeisho"                        column="shikibetsuTaisho_hojinMeisho"                        typeHandler="AtenaMeishoTypeHandler" />
+        <result property="hojinKanaMeisho"                    column="shikibetsuTaisho_hojinKanaMeisho"                    typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="hojinShitenMeisho"                  column="shikibetsuTaisho_hojinShitenMeisho"                  typeHandler="AtenaMeishoTypeHandler" />
+        <result property="hojinShitenKanaMeisho"              column="shikibetsuTaisho_hojinShitenKanaMeisho"              typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="daihyoshaShikibetsuCode"            column="shikibetsuTaisho_daihyoshaShikibetsuCode"            typeHandler="ShikibetsuCodeTypeHandler" />
+        <result property="daihyoshaShimei"                    column="shikibetsuTaisho_daihyoshaShimei"                    typeHandler="AtenaMeishoTypeHandler" />
+        <result property="daihyoshaKanaShimei"                column="shikibetsuTaisho_daihyoshaKanaShimei"                typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="daihyoshaJuminShubetsu"             column="shikibetsuTaisho_daihyoshaJuminShubetsu"             typeHandler="RStringTypeHandler" />
+        <result property="daihyoshaNihonjinShimei"            column="shikibetsuTaisho_daihyoshaNihonjinShimei"            typeHandler="AtenaMeishoTypeHandler" />
+        <result property="daihyoshaNihonjinKanaShimei"        column="shikibetsuTaisho_daihyoshaNihonjinKanaShimei"        typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="daihyoshaGaikokujinShimei"          column="shikibetsuTaisho_daihyoshaGaikokujinShimei"          typeHandler="AtenaMeishoTypeHandler" />
+        <result property="daihyoshaGaikokujinHeikimei"        column="shikibetsuTaisho_daihyoshaGaikokujinHeikimei"        typeHandler="AtenaMeishoTypeHandler" />
+        <result property="daihyoshaGaikokujinKanaShimei"      column="shikibetsuTaisho_daihyoshaGaikokujinKanaShimei"      typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="daihyoshaTsushomei"                 column="shikibetsuTaisho_daihyoshaTsushomei"                 typeHandler="AtenaMeishoTypeHandler" />
+        <result property="daihyoshaShimeiRiyoKubun"           column="shikibetsuTaisho_daihyoshaShimeiRiyoKubun"           typeHandler="RStringTypeHandler" />
+        <result property="daihyoshaKanaTsushomei"             column="shikibetsuTaisho_daihyoshaKanaTsushomei"             typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="daihyoshaKannaiKangaiKubun"         column="shikibetsuTaisho_daihyoshaKannaiKangaiKubun"         typeHandler="RStringTypeHandler" />
+        <result property="daihyoshaYubinNo"                   column="shikibetsuTaisho_daihyoshaYubinNo"                   typeHandler="YubinNoTypeHandler" />
+        <result property="daihyoshaChoikiCode"                column="shikibetsuTaisho_daihyoshaChoikiCode"                typeHandler="ChoikiCodeTypeHandler" />
+        <result property="daihyoshaZenkokuJushoCode"          column="shikibetsuTaisho_daihyoshaZenkokuJushoCode"          typeHandler="ZenkokuJushoCodeTypeHandler" />
+        <result property="daihyoshaJusho"                     column="shikibetsuTaisho_daihyoshaJusho"                     typeHandler="AtenaJushoTypeHandler" />
+        <result property="daihyoshaBanchiCode1"               column="shikibetsuTaisho_daihyoshaBanchiCode1"               typeHandler="BanchiCodeTypeHandler" />
+        <result property="daihyoshaBanchiCode2"               column="shikibetsuTaisho_daihyoshaBanchiCode2"               typeHandler="BanchiCodeTypeHandler" />
+        <result property="daihyoshaBanchiCode3"               column="shikibetsuTaisho_daihyoshaBanchiCode3"               typeHandler="BanchiCodeTypeHandler" />
+        <result property="daihyoshaBanchiCode4"               column="shikibetsuTaisho_daihyoshaBanchiCode4"               typeHandler="BanchiCodeTypeHandler" />
+        <result property="daihyoshaBanchi"                    column="shikibetsuTaisho_daihyoshaBanchi"                    typeHandler="AtenaBanchiTypeHandler" />
+        <result property="daihyoshaKatagaki"                  column="shikibetsuTaisho_daihyoshaKatagaki"                  typeHandler="KatagakiTypeHandler" />
+        <result property="ninkachiendantaiTorokuShikakuKubun" column="shikibetsuTaisho_ninkachiendantaiTorokuShikakuKubun" typeHandler="CodeTypeHandler" />
+        <result property="ninkachiendantaiNinkaYMD"           column="shikibetsuTaisho_ninkachiendantaiNinkaYMD"           typeHandler="FlexibleDateTypeHandler" />
+        <result property="kojinHojinKBN"                      column="shikibetsuTaisho_kojinHojinKBN"                      typeHandler="RStringTypeHandler" />
+        <result property="kyoyushaMeisho"                     column="shikibetsuTaisho_kyoyushaMeisho"                     typeHandler="AtenaMeishoTypeHandler" />
+        <result property="kyoyushaKanaMeisho"                 column="shikibetsuTaisho_kyoyushaKanaMeisho"                 typeHandler="AtenaKanaMeishoTypeHandler" />
+        <result property="torokuJiyuCode"                     column="shikibetsuTaisho_torokuJiyuCode"                     typeHandler="RStringTypeHandler" />
+        <result property="torokuIdoYMD"                       column="shikibetsuTaisho_torokuIdoYMD"                       typeHandler="FlexibleDateTypeHandler" />
+        <result property="torokuTodokedeYMD"                  column="shikibetsuTaisho_torokuTodokedeYMD"                  typeHandler="FlexibleDateTypeHandler" />
+        <result property="juteiJiyuCode"                      column="shikibetsuTaisho_juteiJiyuCode"                      typeHandler="RStringTypeHandler" />
+        <result property="juteiIdoYMD"                        column="shikibetsuTaisho_juteiIdoYMD"                        typeHandler="FlexibleDateTypeHandler" />
+        <result property="juteiTodokedeYMD"                   column="shikibetsuTaisho_juteiTodokedeYMD"                   typeHandler="FlexibleDateTypeHandler" />
+        <result property="shojoJiyuCode"                      column="shikibetsuTaisho_shojoJiyuCode"                      typeHandler="RStringTypeHandler" />
+        <result property="shojoIdoYMD"                        column="shikibetsuTaisho_shojoIdoYMD"                        typeHandler="FlexibleDateTypeHandler" />
+        <result property="shojoTodokedeYMD"                   column="shikibetsuTaisho_shojoTodokedeYMD"                   typeHandler="FlexibleDateTypeHandler" />
+        <result property="jutonaiYubinNo"                     column="shikibetsuTaisho_jutonaiYubinNo"                     typeHandler="YubinNoTypeHandler" />
+        <result property="jutonaiChoikiCode"                  column="shikibetsuTaisho_jutonaiChoikiCode"                  typeHandler="ChoikiCodeTypeHandler" />
+        <result property="jutonaiJusho"                       column="shikibetsuTaisho_jutonaiJusho"                       typeHandler="RStringTypeHandler" />
+        <result property="jutonaiBanchiCode1"                 column="shikibetsuTaisho_jutonaiBanchiCode1"                 typeHandler="BanchiCodeTypeHandler" />
+        <result property="jutonaiBanchiCode2"                 column="shikibetsuTaisho_jutonaiBanchiCode2"                 typeHandler="BanchiCodeTypeHandler" />
+        <result property="jutonaiBanchiCode3"                 column="shikibetsuTaisho_jutonaiBanchiCode3"                 typeHandler="BanchiCodeTypeHandler" />
+        <result property="jutonaiBanchiCode4"                 column="shikibetsuTaisho_jutonaiBanchiCode4"                 typeHandler="BanchiCodeTypeHandler" />
+        <result property="jutonaiBanchi"                      column="shikibetsuTaisho_jutonaiBanchi"                      typeHandler="AtenaBanchiTypeHandler" />
+        <result property="jutonaiKatagaki"                    column="shikibetsuTaisho_jutonaiKatagaki"                    typeHandler="KatagakiTypeHandler" />
+        <result property="jutonaiKatagakiInjiFlag"            column="shikibetsuTaisho_jutonaiKatagakiInjiFlag"            />
+        <result property="tennyumaeYubinNo"                   column="shikibetsuTaisho_tennyumaeYubinNo"                   typeHandler="YubinNoTypeHandler" />
+        <result property="tennyumaeZenkokuJushoCode"          column="shikibetsuTaisho_tennyumaeZenkokuJushoCode"          typeHandler="ZenkokuJushoCodeTypeHandler" />
+        <result property="tennyumaeJusho"                     column="shikibetsuTaisho_tennyumaeJusho"                     typeHandler="AtenaJushoTypeHandler" />
+        <result property="tennyumaeBanchi"                    column="shikibetsuTaisho_tennyumaeBanchi"                    typeHandler="AtenaBanchiTypeHandler" />
+        <result property="tennyumaeKatagaki"                  column="shikibetsuTaisho_tennyumaeKatagaki"                  typeHandler="KatagakiTypeHandler" />
+        <result property="tennyumaeSetainushimei"             column="shikibetsuTaisho_tennyumaeSetainushimei"             typeHandler="RStringTypeHandler" />
+        <result property="tennyumaeKyusei"                    column="shikibetsuTaisho_tennyumaeKyusei"                    typeHandler="AtenaMeishoTypeHandler" />
+        <result property="saishuJutochiYubinNo"               column="shikibetsuTaisho_saishuJutochiYubinNo"               typeHandler="YubinNoTypeHandler" />
+        <result property="saishuJutochiZenkokuJushoCode"      column="shikibetsuTaisho_saishuJutochiZenkokuJushoCode"      typeHandler="ZenkokuJushoCodeTypeHandler" />
+        <result property="saishuJutochiJusho"                 column="shikibetsuTaisho_saishuJutochiJusho"                 typeHandler="AtenaJushoTypeHandler" />
+        <result property="saishuJutochiBanchi"                column="shikibetsuTaisho_saishuJutochiBanchi"                typeHandler="AtenaBanchiTypeHandler" />
+        <result property="saishuJutochiKatagaki"              column="shikibetsuTaisho_saishuJutochiKatagaki"              typeHandler="KatagakiTypeHandler" />
+        <result property="saishuJutochiSetainushimei"         column="shikibetsuTaisho_saishuJutochiSetainushimei"         typeHandler="RStringTypeHandler" />
+        <result property="tenshutsuYoteiIdoYMD"               column="shikibetsuTaisho_tenshutsuYoteiIdoYMD"               typeHandler="FlexibleDateTypeHandler" />
+        <result property="tenshutsuYoteiYubinNo"              column="shikibetsuTaisho_tenshutsuYoteiYubinNo"              typeHandler="YubinNoTypeHandler" />
+        <result property="tenshutsuYoteiZenkokuJushoCode"     column="shikibetsuTaisho_tenshutsuYoteiZenkokuJushoCode"     typeHandler="ZenkokuJushoCodeTypeHandler" />
+        <result property="tenshutsuYoteiJusho"                column="shikibetsuTaisho_tenshutsuYoteiJusho"                typeHandler="AtenaJushoTypeHandler" />
+        <result property="tenshutsuYoteiBanchi"               column="shikibetsuTaisho_tenshutsuYoteiBanchi"               typeHandler="AtenaBanchiTypeHandler" />
+        <result property="tenshutsuYoteiKatagaki"             column="shikibetsuTaisho_tenshutsuYoteiKatagaki"             typeHandler="KatagakiTypeHandler" />
+        <result property="tenshutsuYoteiSetainushimei"        column="shikibetsuTaisho_tenshutsuYoteiSetainushimei"        typeHandler="RStringTypeHandler" />
+        <result property="tenshutsuKakuteiIdoYMD"             column="shikibetsuTaisho_tenshutsuKakuteiIdoYMD"             typeHandler="FlexibleDateTypeHandler" />
+        <result property="tenshutsuKakuteiTsuchiYMD"          column="shikibetsuTaisho_tenshutsuKakuteiTsuchiYMD"          typeHandler="FlexibleDateTypeHandler" />
+        <result property="tenshutsuKakuteiYubinNo"            column="shikibetsuTaisho_tenshutsuKakuteiYubinNo"            typeHandler="YubinNoTypeHandler" />
+        <result property="tenshutsuKakuteiZenkokuJushoCode"   column="shikibetsuTaisho_tenshutsuKakuteiZenkokuJushoCode"   typeHandler="ZenkokuJushoCodeTypeHandler" />
+        <result property="tenshutsuKakuteiJusho"              column="shikibetsuTaisho_tenshutsuKakuteiJusho"              typeHandler="AtenaJushoTypeHandler" />
+        <result property="tenshutsuKakuteiBanchi"             column="shikibetsuTaisho_tenshutsuKakuteiBanchi"             typeHandler="AtenaBanchiTypeHandler" />
+        <result property="tenshutsuKakuteiKatagaki"           column="shikibetsuTaisho_tenshutsuKakuteiKatagaki"           typeHandler="KatagakiTypeHandler" />
+        <result property="tenshutsuKakuteiSetainushimei"      column="shikibetsuTaisho_tenshutsuKakuteiSetainushimei"      typeHandler="RStringTypeHandler" />
+        <result property="juminhyoUtsushiHakkoSeigyoKubun"    column="shikibetsuTaisho_juminhyoUtsushiHakkoSeigyoKubun"    typeHandler="RStringTypeHandler" />
+        <result property="renrakusaki1"                       column="shikibetsuTaisho_renrakusaki1"                       typeHandler="TelNoTypeHandler" />
+        <result property="kensakuRenrakusaki1"                column="shikibetsuTaisho_kensakuRenrakusaki1"                typeHandler="TelNoTypeHandler" />
+        <result property="renrakusakiKubun1"                  column="shikibetsuTaisho_renrakusakiKubun1"                  typeHandler="CodeTypeHandler" />
+        <result property="renrakusaki2"                       column="shikibetsuTaisho_renrakusaki2"                       typeHandler="TelNoTypeHandler" />
+        <result property="kensakuRenrakusaki2"                column="shikibetsuTaisho_kensakuRenrakusaki2"                typeHandler="TelNoTypeHandler" />
+        <result property="renrakusakiKubun2"                  column="shikibetsuTaisho_renrakusakiKubun2"                  typeHandler="CodeTypeHandler" />
+        <result property="renrakusaki3"                       column="shikibetsuTaisho_renrakusaki3"                       typeHandler="TelNoTypeHandler" />
+        <result property="kensakuRenrakusaki3"                column="shikibetsuTaisho_kensakuRenrakusaki3"                typeHandler="TelNoTypeHandler" />
+        <result property="renrakusakiKubun3"                  column="shikibetsuTaisho_renrakusakiKubun3"                  typeHandler="CodeTypeHandler" />
+        <result property="mailAddress"                        column="shikibetsuTaisho_mailAddress"                        typeHandler="MailAddressTypeHandler" />
+        <result property="biko"                               column="shikibetsuTaisho_biko"                               typeHandler="RStringTypeHandler" />
+        <result property="kanaName"                           column="shikibetsuTaisho_kanaName"                           typeHandler="RStringTypeHandler" />
+        <result property="gaikokujinKanaName"                 column="shikibetsuTaisho_gaikokujinKanaName"                 typeHandler="RStringTypeHandler" />
+        <result property="kanaTsushoName"                     column="shikibetsuTaisho_kanaTsushoName"                     typeHandler="RStringTypeHandler" />
+        <result property="lastUpdateTimestamp"                column="shikibetsuTaisho_lastUpdateTimestamp"                typeHandler="RDateTimeTypeHandler" />
+        <result property="lastUpdateReamsLoginId"             column="shikibetsuTaisho_lastUpdateReamsLoginId"             typeHandler="RStringTypeHandler" />
+        <result property="jutogaiKanriUpdateCount"            column="shikibetsuTaisho_jutogaiKanriUpdateCount"            />
+        <result property="jutogaiKanriTorokuNo"               column="shikibetsuTaisho_jutogaiKanriTorokuNo"               typeHandler="jp.co.ndensan.reams.ur.urz.entity.typehandlers.TorokuNoTypeHandler" />
+        <result property="jutogaiKojinKihonUpdateCount"       column="shikibetsuTaisho_jutogaiKojinKihonUpdateCount"       />
+        <result property="jutogaiKojinKihonTorokuNo"          column="shikibetsuTaisho_jutogaiKojinKihonTorokuNo"          typeHandler="jp.co.ndensan.reams.ur.urz.entity.typehandlers.TorokuNoTypeHandler" />
+        <result property="hojinUpdateCount"                   column="shikibetsuTaisho_hojinUpdateCount"                   />
+        <result property="hojinTorokuNo"                      column="shikibetsuTaisho_hojinTorokuNo"                      typeHandler="jp.co.ndensan.reams.ur.urz.entity.typehandlers.TorokuNoTypeHandler" />
+        <result property="kyoyushaUpdateCount"                column="shikibetsuTaisho_kyoyushaUpdateCount"                />
+        <result property="kyoyushaTorokuNo"                   column="shikibetsuTaisho_kyoyushaTorokuNo"                   typeHandler="jp.co.ndensan.reams.ur.urz.entity.typehandlers.TorokuNoTypeHandler" />
+        <result property="jutogaiNihonjinUpdateCount"         column="shikibetsuTaisho_jutogaiNihonjinUpdateCount"         />
+        <result property="jutogaiNihonjinTorokuNo"            column="shikibetsuTaisho_jutogaiNihonjinTorokuNo"            typeHandler="jp.co.ndensan.reams.ur.urz.entity.typehandlers.TorokuNoTypeHandler" />
+        <result property="jutogaiGaikokujinUpdateCount"       column="shikibetsuTaisho_jutogaiGaikokujinUpdateCount"       />
+        <result property="jutogaiGaikokujinTorokuNo"          column="shikibetsuTaisho_jutogaiGaikokujinTorokuNo"          typeHandler="jp.co.ndensan.reams.ur.urz.entity.typehandlers.TorokuNoTypeHandler" />
+        <result property="shimeiSearchTorokuNo"               column="shikibetsuTaisho_shimeiSearchTorokuNo"               typeHandler="jp.co.ndensan.reams.ur.urz.entity.typehandlers.TorokuNoTypeHandler" />
+        <result property="yusenShimeiUpdateCount"             column="shikibetsuTaisho_yusenShimeiUpdateCount"             />
+        <result property="yusenShimeiTimestamp"               column="shikibetsuTaisho_yusenShimeiTimestamp"               typeHandler="RDateTimeTypeHandler" />
+        <result property="jukiTorokuNo"                       column="shikibetsuTaisho_jukiTorokuNo"                       typeHandler="jp.co.ndensan.reams.ur.urz.entity.typehandlers.TorokuNoTypeHandler" />
+    </resultMap>
+    
+    
+    
+    
+    <select resultOrdered="true" id="select処理日付管理"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaishohakko.FutanwariaishoHakkoMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity" fetchSize="500">
+        SELECT 
+            <include refid="allColumns_DbT7022ShoriDateKanri" />
+        FROM
+            rgdb."DbT7022ShoriDateKanri"  AS "DbT7022ShoriDateKanri"
+        WHERE 
+            "DbT7022ShoriDateKanri"."subGyomuCode" = 'DBC'
+            AND  "DbT7022ShoriDateKanri"."shichosonCode" = #{市町村コード}
+            AND  "DbT7022ShoriDateKanri"."shoriName" = '負担割合証発行（一括）'
+            <if test="出力対象==0">AND "DbT7022ShoriDateKanri"."shoriEdaban" = '0000' </if>
+            <if test="出力対象==1">AND "DbT7022ShoriDateKanri"."shoriEdaban" = '0001' </if>
+            <if test="出力対象==2">AND "DbT7022ShoriDateKanri"."shoriEdaban" = '0002' </if>
+    </select>
+        
+   
+    
+    <resultMap id="resultMap_RiyoshaFutanWariaiSho" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaishohakko.RiyoshaFutanwariaishoTempEntity">
+        <id column="dbT1001HihokenshaDaicho_hihokenshaNo"/>     
+        <result property="事業対象者受給者区分" column="kubun"
+            typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>     
+        <result property="証記載保険者番号" column="shokisaiHihokenshaNo"
+            typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>    
+        <association property="利用者負担割合" resultMap="NewResultMap_DbT3113RiyoshaFutanWariaiEntity"/>
+        <association property="被保台帳" resultMap="NewResultMap_DbT1001HihokenshaDaichoEntity"/>
+        <association property="証交付回収" resultMap="NewResultMap_DbT7037ShoKofuKaishuEntity"/>
+        <association property = "宛名" resultMap = "jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <association property = "宛先" resultMap = "jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>             
+        <association property= "負担割合期間" resultMap="resultMap_FutanWariKikanTemp"/> 
+    </resultMap> 
+    
+    
+    <resultMap id="resultMap_FutanWariKikanTemp" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaishohakko.FutanWariKikanTempEntity">
+        <result property="nendo" column="futanWariKikanTemp_nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="hihokenshaNo" column="futanWariKikanTemp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="futanWariaiKubun1" column="futanWariKikanTemp_futanWariaiKubun1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yukoKaishiYMD1" column="futanWariKikanTemp_yukoKaishiYMD1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="yukoShuryoYMD1" column="futanWariKikanTemp_yukoShuryoYMD1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuKubun1" column="futanWariKikanTemp_shikakuKubun1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanWariaiKubun2" column="futanWariKikanTemp_futanWariaiKubun2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yukoKaishiYMD2" column="futanWariKikanTemp_yukoKaishiYMD2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="yukoShuryoYMD2" column="futanWariKikanTemp_yukoShuryoYMD2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuKubun2" column="futanWariKikanTemp_shikakuKubun2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>     
+    </resultMap>
+    
+    <sql id="allColumns_FutanWariKikanTemp">
+         FutanWariKikanTemp."nendo" as "futanWariKikanTemp_nendo",
+         FutanWariKikanTemp."hihokenshaNo" as "futanWariKikanTemp_hihokenshaNo",
+         FutanWariKikanTemp."futanWariaiKubun1" as "futanWariKikanTemp_futanWariaiKubun1",
+         FutanWariKikanTemp."yukoKaishiYMD1" as "futanWariKikanTemp_yukoKaishiYMD1",
+         FutanWariKikanTemp."yukoShuryoYMD1" as "futanWariKikanTemp_yukoShuryoYMD1",
+         FutanWariKikanTemp."shikakuKubun1" as "futanWariKikanTemp_shikakuKubun1",
+         FutanWariKikanTemp."futanWariaiKubun2" as "futanWariKikanTemp_futanWariaiKubun2",
+         FutanWariKikanTemp."yukoKaishiYMD2" as "futanWariKikanTemp_yukoKaishiYMD2",
+         FutanWariKikanTemp."yukoShuryoYMD2" as "futanWariKikanTemp_yukoShuryoYMD2",
+         FutanWariKikanTemp."shikakuKubun2" as "futanWariKikanTemp_shikakuKubun2"
+    </sql>
+    
+    
+    <sql id="allColumns_DbT3113RiyoshaFutanWariai">
+         "DbT3113RiyoshaFutanWariai"."nendo" as "dbT3113RiyoshaFutanWariai_nendo",
+         "DbT3113RiyoshaFutanWariai"."hihokenshaNo" as "dbT3113RiyoshaFutanWariai_hihokenshaNo",
+         "DbT3113RiyoshaFutanWariai"."rirekiNo" as "dbT3113RiyoshaFutanWariai_rirekiNo",
+         "DbT3113RiyoshaFutanWariai"."insertDantaiCd" as "dbT3113RiyoshaFutanWariai_insertDantaiCd",
+         "DbT3113RiyoshaFutanWariai"."insertTimestamp" as "dbT3113RiyoshaFutanWariai_insertTimestamp",
+         "DbT3113RiyoshaFutanWariai"."insertReamsLoginId" as "dbT3113RiyoshaFutanWariai_insertReamsLoginId",
+         "DbT3113RiyoshaFutanWariai"."insertContextId" as "dbT3113RiyoshaFutanWariai_insertContextId",
+         "DbT3113RiyoshaFutanWariai"."isDeleted" as "dbT3113RiyoshaFutanWariai_isDeleted",
+         "DbT3113RiyoshaFutanWariai"."updateCount" as "dbT3113RiyoshaFutanWariai_updateCount",
+         "DbT3113RiyoshaFutanWariai"."lastUpdateTimestamp" as "dbT3113RiyoshaFutanWariai_lastUpdateTimestamp",
+         "DbT3113RiyoshaFutanWariai"."lastUpdateReamsLoginId" as "dbT3113RiyoshaFutanWariai_lastUpdateReamsLoginId",
+         "DbT3113RiyoshaFutanWariai"."hakoFuyoFlag" as "dbT3113RiyoshaFutanWariai_hakoFuyoFlag",
+         "DbT3113RiyoshaFutanWariai"."shokenFlag" as "dbT3113RiyoshaFutanWariai_shokenFlag",
+         "DbT3113RiyoshaFutanWariai"."hanteiYMD" as "dbT3113RiyoshaFutanWariai_hanteiYMD",
+         "DbT3113RiyoshaFutanWariai"."hanteiKubun" as "dbT3113RiyoshaFutanWariai_hanteiKubun",
+         "DbT3113RiyoshaFutanWariai"."koseiJiyu" as "dbT3113RiyoshaFutanWariai_koseiJiyu",
+         "DbT3113RiyoshaFutanWariai"."hakoKubun" as "dbT3113RiyoshaFutanWariai_hakoKubun",
+         "DbT3113RiyoshaFutanWariai"."hakoYMD" as "dbT3113RiyoshaFutanWariai_hakoYMD",
+         "DbT3113RiyoshaFutanWariai"."kofuYMD" as "dbT3113RiyoshaFutanWariai_kofuYMD",
+         "DbT3113RiyoshaFutanWariai"."logicalDeletedFlag" as "dbT3113RiyoshaFutanWariai_logicalDeletedFlag"
+    </sql>
+     <resultMap id="NewResultMap_DbT3113RiyoshaFutanWariaiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3113RiyoshaFutanWariaiEntity" autoMapping="true">
+        <id property="nendo" column="dbT3113RiyoshaFutanWariai_nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="hihokenshaNo" column="dbT3113RiyoshaFutanWariai_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="rirekiNo" column="dbT3113RiyoshaFutanWariai_rirekiNo" />
+        <result property="insertDantaiCd" column="dbT3113RiyoshaFutanWariai_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3113RiyoshaFutanWariai_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3113RiyoshaFutanWariai_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3113RiyoshaFutanWariai_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3113RiyoshaFutanWariai_isDeleted" />
+        <result property="updateCount" column="dbT3113RiyoshaFutanWariai_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3113RiyoshaFutanWariai_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3113RiyoshaFutanWariai_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hakoFuyoFlag" column="dbT3113RiyoshaFutanWariai_hakoFuyoFlag" />
+        <result property="shokenFlag" column="dbT3113RiyoshaFutanWariai_shokenFlag" />
+        <result property="hanteiYMD" column="dbT3113RiyoshaFutanWariai_hanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hanteiKubun" column="dbT3113RiyoshaFutanWariai_hanteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koseiJiyu" column="dbT3113RiyoshaFutanWariai_koseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="hakoKubun" column="dbT3113RiyoshaFutanWariai_hakoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hakoYMD" column="dbT3113RiyoshaFutanWariai_hakoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kofuYMD" column="dbT3113RiyoshaFutanWariai_kofuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="logicalDeletedFlag" column="dbT3113RiyoshaFutanWariai_logicalDeletedFlag" />
+    </resultMap>
+    
+    <sql id="allColumns_DbT1001HihokenshaDaicho">
+         "DbT1001HihokenshaDaicho"."hihokenshaNo" as "dbT1001HihokenshaDaicho_hihokenshaNo",
+         "DbT1001HihokenshaDaicho"."idoYMD" as "dbT1001HihokenshaDaicho_idoYMD",
+         "DbT1001HihokenshaDaicho"."edaNo" as "dbT1001HihokenshaDaicho_edaNo",
+         
+         "DbT1001HihokenshaDaicho"."shichosonCode" as "dbT1001HihokenshaDaicho_shichosonCode",
+         "DbT1001HihokenshaDaicho"."shikibetsuCode" as "dbT1001HihokenshaDaicho_shikibetsuCode",
+         "DbT1001HihokenshaDaicho"."shikakuShutokuJiyuCode" as "dbT1001HihokenshaDaicho_shikakuShutokuJiyuCode",
+         "DbT1001HihokenshaDaicho"."shikakuShutokuYMD" as "dbT1001HihokenshaDaicho_shikakuShutokuYMD",
+         "DbT1001HihokenshaDaicho"."shikakuShutokuTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuShutokuTodokedeYMD",
+         "DbT1001HihokenshaDaicho"."ichigoShikakuShutokuYMD" as "dbT1001HihokenshaDaicho_ichigoShikakuShutokuYMD",
+         "DbT1001HihokenshaDaicho"."hihokennshaKubunCode" as "dbT1001HihokenshaDaicho_hihokennshaKubunCode",
+         "DbT1001HihokenshaDaicho"."shikakuSoshitsuJiyuCode" as "dbT1001HihokenshaDaicho_shikakuSoshitsuJiyuCode",
+         "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD" as "dbT1001HihokenshaDaicho_shikakuSoshitsuYMD",
+         "DbT1001HihokenshaDaicho"."shikakuSoshitsuTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuSoshitsuTodokedeYMD",
+         "DbT1001HihokenshaDaicho"."shikakuHenkoJiyuCode" as "dbT1001HihokenshaDaicho_shikakuHenkoJiyuCode",
+         "DbT1001HihokenshaDaicho"."shikakuHenkoYMD" as "dbT1001HihokenshaDaicho_shikakuHenkoYMD",
+         "DbT1001HihokenshaDaicho"."shikakuHenkoTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuHenkoTodokedeYMD",
+         "DbT1001HihokenshaDaicho"."jushochitokureiTekiyoJiyuCode" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoJiyuCode",
+         "DbT1001HihokenshaDaicho"."jushochitokureiTekiyoYMD" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoYMD",
+         "DbT1001HihokenshaDaicho"."jushochitokureiTekiyoTodokedeYMD" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoTodokedeYMD",
+         "DbT1001HihokenshaDaicho"."jushochitokureiKaijoJiyuCode" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoJiyuCode",
+         "DbT1001HihokenshaDaicho"."jushochitokureiKaijoYMD" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoYMD",
+         "DbT1001HihokenshaDaicho"."jushochitokureiKaijoTodokedeYMD" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoTodokedeYMD",
+         "DbT1001HihokenshaDaicho"."jushochiTokureiFlag" as "dbT1001HihokenshaDaicho_jushochiTokureiFlag",
+         "DbT1001HihokenshaDaicho"."koikinaiJushochiTokureiFlag" as "dbT1001HihokenshaDaicho_koikinaiJushochiTokureiFlag",
+         "DbT1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode" as "dbT1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode",
+         "DbT1001HihokenshaDaicho"."kyuShichosonCode" as "dbT1001HihokenshaDaicho_kyuShichosonCode",
+         "DbT1001HihokenshaDaicho"."logicalDeletedFlag" as "dbT1001HihokenshaDaicho_logicalDeletedFlag"
+    </sql>
+
+
+    <resultMap id="NewResultMap_DbT1001HihokenshaDaichoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="dbT1001HihokenshaDaicho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="idoYMD" column="dbT1001HihokenshaDaicho_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="edaNo" column="dbT1001HihokenshaDaicho_edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonCode" column="dbT1001HihokenshaDaicho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="shikibetsuCode" column="dbT1001HihokenshaDaicho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="shikakuShutokuJiyuCode" column="dbT1001HihokenshaDaicho_shikakuShutokuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuShutokuYMD" column="dbT1001HihokenshaDaicho_shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuShutokuTodokedeYMD" column="dbT1001HihokenshaDaicho_shikakuShutokuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ichigoShikakuShutokuYMD" column="dbT1001HihokenshaDaicho_ichigoShikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hihokennshaKubunCode" column="dbT1001HihokenshaDaicho_hihokennshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuSoshitsuJiyuCode" column="dbT1001HihokenshaDaicho_shikakuSoshitsuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuSoshitsuYMD" column="dbT1001HihokenshaDaicho_shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuSoshitsuTodokedeYMD" column="dbT1001HihokenshaDaicho_shikakuSoshitsuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuHenkoJiyuCode" column="dbT1001HihokenshaDaicho_shikakuHenkoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuHenkoYMD" column="dbT1001HihokenshaDaicho_shikakuHenkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuHenkoTodokedeYMD" column="dbT1001HihokenshaDaicho_shikakuHenkoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochitokureiTekiyoJiyuCode" column="dbT1001HihokenshaDaicho_jushochitokureiTekiyoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jushochitokureiTekiyoYMD" column="dbT1001HihokenshaDaicho_jushochitokureiTekiyoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochitokureiTekiyoTodokedeYMD" column="dbT1001HihokenshaDaicho_jushochitokureiTekiyoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochitokureiKaijoJiyuCode" column="dbT1001HihokenshaDaicho_jushochitokureiKaijoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jushochitokureiKaijoYMD" column="dbT1001HihokenshaDaicho_jushochitokureiKaijoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochitokureiKaijoTodokedeYMD" column="dbT1001HihokenshaDaicho_jushochitokureiKaijoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochiTokureiFlag" column="dbT1001HihokenshaDaicho_jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koikinaiJushochiTokureiFlag" column="dbT1001HihokenshaDaicho_koikinaiJushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koikinaiTokureiSochimotoShichosonCode" column="dbT1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="kyuShichosonCode" column="dbT1001HihokenshaDaicho_kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="logicalDeletedFlag" column="dbT1001HihokenshaDaicho_logicalDeletedFlag" />
+    </resultMap>
+    
+    
+     <sql id="allColumns_DbT7037ShoKofuKaishu">
+        "DbT7037ShoKofuKaishu"."hihokenshaNo" as "dbT7037ShoKofuKaishu_hihokenshaNo",
+        "DbT7037ShoKofuKaishu"."kofuShoShurui" as "dbT7037ShoKofuKaishu_kofuShoShurui",
+        "DbT7037ShoKofuKaishu"."rirekiNo" as "dbT7037ShoKofuKaishu_rirekiNo",
+        "DbT7037ShoKofuKaishu"."insertDantaiCd" as "dbT7037ShoKofuKaishu_insertDantaiCd",
+        "DbT7037ShoKofuKaishu"."insertTimestamp" as "dbT7037ShoKofuKaishu_insertTimestamp",
+        "DbT7037ShoKofuKaishu"."insertReamsLoginId" as "dbT7037ShoKofuKaishu_insertReamsLoginId",
+        "DbT7037ShoKofuKaishu"."insertContextId" as "dbT7037ShoKofuKaishu_insertContextId",
+        "DbT7037ShoKofuKaishu"."isDeleted" as "dbT7037ShoKofuKaishu_isDeleted",
+        "DbT7037ShoKofuKaishu"."updateCount" as "dbT7037ShoKofuKaishu_updateCount",
+        "DbT7037ShoKofuKaishu"."lastUpdateTimestamp" as "dbT7037ShoKofuKaishu_lastUpdateTimestamp",
+        "DbT7037ShoKofuKaishu"."lastUpdateReamsLoginId" as "dbT7037ShoKofuKaishu_lastUpdateReamsLoginId",
+        "DbT7037ShoKofuKaishu"."shichosonCode" as "dbT7037ShoKofuKaishu_shichosonCode",
+        "DbT7037ShoKofuKaishu"."shikibetsuCode" as "dbT7037ShoKofuKaishu_shikibetsuCode",
+        "DbT7037ShoKofuKaishu"."kofuYMD" as "dbT7037ShoKofuKaishu_kofuYMD",
+        "DbT7037ShoKofuKaishu"."yukoKigenYMD" as "dbT7037ShoKofuKaishu_yukoKigenYMD",
+        "DbT7037ShoKofuKaishu"."kofuJiyu" as "dbT7037ShoKofuKaishu_kofuJiyu",
+        "DbT7037ShoKofuKaishu"."kofuRiyu" as "dbT7037ShoKofuKaishu_kofuRiyu",
+        "DbT7037ShoKofuKaishu"."kaishuYMD" as "dbT7037ShoKofuKaishu_kaishuYMD",
+        "DbT7037ShoKofuKaishu"."kaishuJiyu" as "dbT7037ShoKofuKaishu_kaishuJiyu",
+        "DbT7037ShoKofuKaishu"."kaishuRiyu" as "dbT7037ShoKofuKaishu_kaishuRiyu",
+        "DbT7037ShoKofuKaishu"."tanpyoHakkoUmuFlag" as "dbT7037ShoKofuKaishu_tanpyoHakkoUmuFlag",
+        "DbT7037ShoKofuKaishu"."hakkoShoriTimestamp" as "dbT7037ShoKofuKaishu_hakkoShoriTimestamp",
+        "DbT7037ShoKofuKaishu"."shinYoshikiSumiKubunCode" as "dbT7037ShoKofuKaishu_shinYoshikiSumiKubunCode",
+        "DbT7037ShoKofuKaishu"."shoYoshikiKubunCode" as "dbT7037ShoKofuKaishu_shoYoshikiKubunCode",
+        "DbT7037ShoKofuKaishu"."logicalDeletedFlag" as "dbT7037ShoKofuKaishu_logicalDeletedFlag"
+    </sql>
+    
+    <resultMap id="NewResultMap_DbT7037ShoKofuKaishuEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="dbT7037ShoKofuKaishu_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="kofuShoShurui" column="dbT7037ShoKofuKaishu_kofuShoShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="rirekiNo" column="dbT7037ShoKofuKaishu_rirekiNo" />
+        <result property="insertDantaiCd" column="dbT7037ShoKofuKaishu_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7037ShoKofuKaishu_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7037ShoKofuKaishu_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7037ShoKofuKaishu_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7037ShoKofuKaishu_isDeleted" />
+        <result property="updateCount" column="dbT7037ShoKofuKaishu_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7037ShoKofuKaishu_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7037ShoKofuKaishu_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonCode" column="dbT7037ShoKofuKaishu_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="shikibetsuCode" column="dbT7037ShoKofuKaishu_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="kofuYMD" column="dbT7037ShoKofuKaishu_kofuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="yukoKigenYMD" column="dbT7037ShoKofuKaishu_yukoKigenYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kofuJiyu" column="dbT7037ShoKofuKaishu_kofuJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kofuRiyu" column="dbT7037ShoKofuKaishu_kofuRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kaishuYMD" column="dbT7037ShoKofuKaishu_kaishuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kaishuJiyu" column="dbT7037ShoKofuKaishu_kaishuJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kaishuRiyu" column="dbT7037ShoKofuKaishu_kaishuRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tanpyoHakkoUmuFlag" column="dbT7037ShoKofuKaishu_tanpyoHakkoUmuFlag" />
+        <result property="hakkoShoriTimestamp" column="dbT7037ShoKofuKaishu_hakkoShoriTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="shinYoshikiSumiKubunCode" column="dbT7037ShoKofuKaishu_shinYoshikiSumiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoYoshikiKubunCode" column="dbT7037ShoKofuKaishu_shoYoshikiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="logicalDeletedFlag" column="dbT7037ShoKofuKaishu_logicalDeletedFlag" />
+    </resultMap>
+    
+    
+    <sql id="allColumns_DbT7022ShoriDateKanri">
+        "DbT7022ShoriDateKanri"."subGyomuCode" as "dbT7022ShoriDateKanri_subGyomuCode",
+        "DbT7022ShoriDateKanri"."shichosonCode" as "dbT7022ShoriDateKanri_shichosonCode",
+        "DbT7022ShoriDateKanri"."shoriName" as "dbT7022ShoriDateKanri_shoriName",
+        "DbT7022ShoriDateKanri"."shoriEdaban" as "dbT7022ShoriDateKanri_shoriEdaban",
+        "DbT7022ShoriDateKanri"."nendo" as "dbT7022ShoriDateKanri_nendo",
+        "DbT7022ShoriDateKanri"."nendoNaiRenban" as "dbT7022ShoriDateKanri_nendoNaiRenban",
+        "DbT7022ShoriDateKanri"."insertDantaiCd" as "dbT7022ShoriDateKanri_insertDantaiCd",
+        "DbT7022ShoriDateKanri"."insertTimestamp" as "dbT7022ShoriDateKanri_insertTimestamp",
+        "DbT7022ShoriDateKanri"."insertReamsLoginId" as "dbT7022ShoriDateKanri_insertReamsLoginId",
+        "DbT7022ShoriDateKanri"."insertContextId" as "dbT7022ShoriDateKanri_insertContextId",
+        "DbT7022ShoriDateKanri"."isDeleted" as "dbT7022ShoriDateKanri_isDeleted",
+        "DbT7022ShoriDateKanri"."updateCount" as "dbT7022ShoriDateKanri_updateCount",
+        "DbT7022ShoriDateKanri"."lastUpdateTimestamp" as "dbT7022ShoriDateKanri_lastUpdateTimestamp",
+        "DbT7022ShoriDateKanri"."lastUpdateReamsLoginId" as "dbT7022ShoriDateKanri_lastUpdateReamsLoginId",
+        "DbT7022ShoriDateKanri"."kijunYMD" as "dbT7022ShoriDateKanri_kijunYMD",
+        "DbT7022ShoriDateKanri"."kijunTimestamp" as "dbT7022ShoriDateKanri_kijunTimestamp",
+        "DbT7022ShoriDateKanri"."taishoKaishiYMD" as "dbT7022ShoriDateKanri_taishoKaishiYMD",
+        "DbT7022ShoriDateKanri"."taishoShuryoYMD" as "dbT7022ShoriDateKanri_taishoShuryoYMD",
+        "DbT7022ShoriDateKanri"."taishoKaishiTimestamp" as "dbT7022ShoriDateKanri_taishoKaishiTimestamp",
+        "DbT7022ShoriDateKanri"."taishoShuryoTimestamp" as "dbT7022ShoriDateKanri_taishoShuryoTimestamp"
+    </sql>
+    
+    
+    
+    
+    <sql id="allColumns_DbT7067ChohyoSeigyoHanyo">
+         "DbT7067ChohyoSeigyoHanyo"."subGyomuCode" as "dbT7067ChohyoSeigyoHanyo_subGyomuCode",
+         "DbT7067ChohyoSeigyoHanyo"."chohyoBunruiID" as "dbT7067ChohyoSeigyoHanyo_chohyoBunruiID",
+         "DbT7067ChohyoSeigyoHanyo"."kanriNendo" as "dbT7067ChohyoSeigyoHanyo_kanriNendo",
+         "DbT7067ChohyoSeigyoHanyo"."komokuName" as "dbT7067ChohyoSeigyoHanyo_komokuName",
+         "DbT7067ChohyoSeigyoHanyo"."insertDantaiCd" as "dbT7067ChohyoSeigyoHanyo_insertDantaiCd",
+         "DbT7067ChohyoSeigyoHanyo"."insertTimestamp" as "dbT7067ChohyoSeigyoHanyo_insertTimestamp",
+         "DbT7067ChohyoSeigyoHanyo"."insertReamsLoginId" as "dbT7067ChohyoSeigyoHanyo_insertReamsLoginId",
+         "DbT7067ChohyoSeigyoHanyo"."insertContextId" as "dbT7067ChohyoSeigyoHanyo_insertContextId",
+         "DbT7067ChohyoSeigyoHanyo"."isDeleted" as "dbT7067ChohyoSeigyoHanyo_isDeleted",
+         "DbT7067ChohyoSeigyoHanyo"."updateCount" as "dbT7067ChohyoSeigyoHanyo_updateCount",
+         "DbT7067ChohyoSeigyoHanyo"."lastUpdateTimestamp" as "dbT7067ChohyoSeigyoHanyo_lastUpdateTimestamp",
+         "DbT7067ChohyoSeigyoHanyo"."lastUpdateReamsLoginId" as "dbT7067ChohyoSeigyoHanyo_lastUpdateReamsLoginId",
+         "DbT7067ChohyoSeigyoHanyo"."komokuValue" as "dbT7067ChohyoSeigyoHanyo_komokuValue",
+         "DbT7067ChohyoSeigyoHanyo"."komokuSetsumei" as "dbT7067ChohyoSeigyoHanyo_komokuSetsumei",
+         "DbT7067ChohyoSeigyoHanyo"."henkoKahi" as "dbT7067ChohyoSeigyoHanyo_henkoKahi",
+         "DbT7067ChohyoSeigyoHanyo"."codeMasterSubGyomuCode" as "dbT7067ChohyoSeigyoHanyo_codeMasterSubGyomuCode",
+         "DbT7067ChohyoSeigyoHanyo"."codeMasterCodeShubetsu" as "dbT7067ChohyoSeigyoHanyo_codeMasterCodeShubetsu"
+    </sql>
+
+
+    
+    <resultMap id="NewResultMap_DbT7067ChohyoSeigyoHanyoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity" autoMapping="true">
+        <id property="subGyomuCode" column="dbT7067ChohyoSeigyoHanyo_subGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
+        <id property="chohyoBunruiID" column="dbT7067ChohyoSeigyoHanyo_chohyoBunruiID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ReportIdTypeHandler"/>
+        <id property="kanriNendo" column="dbT7067ChohyoSeigyoHanyo_kanriNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="komokuName" column="dbT7067ChohyoSeigyoHanyo_komokuName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT7067ChohyoSeigyoHanyo_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7067ChohyoSeigyoHanyo_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7067ChohyoSeigyoHanyo_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7067ChohyoSeigyoHanyo_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7067ChohyoSeigyoHanyo_isDeleted" />
+        <result property="updateCount" column="dbT7067ChohyoSeigyoHanyo_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7067ChohyoSeigyoHanyo_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7067ChohyoSeigyoHanyo_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="komokuValue" column="dbT7067ChohyoSeigyoHanyo_komokuValue" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="komokuSetsumei" column="dbT7067ChohyoSeigyoHanyo_komokuSetsumei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="henkoKahi" column="dbT7067ChohyoSeigyoHanyo_henkoKahi" />
+        <result property="codeMasterSubGyomuCode" column="dbT7067ChohyoSeigyoHanyo_codeMasterSubGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
+        <result property="codeMasterCodeShubetsu" column="dbT7067ChohyoSeigyoHanyo_codeMasterCodeShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeShubetsuTypeHandler"/>
+    </resultMap>
+    
+    
+    <sql id="allColumns_DbT7065ChohyoSeigyoKyotsu">
+         "DbT7065ChohyoSeigyoKyotsu"."subGyomuCode" as "dbT7065ChohyoSeigyoKyotsu_subGyomuCode",
+         "DbT7065ChohyoSeigyoKyotsu"."chohyoBunruiID" as "dbT7065ChohyoSeigyoKyotsu_chohyoBunruiID",
+         "DbT7065ChohyoSeigyoKyotsu"."insertDantaiCd" as "dbT7065ChohyoSeigyoKyotsu_insertDantaiCd",
+         "DbT7065ChohyoSeigyoKyotsu"."insertTimestamp" as "dbT7065ChohyoSeigyoKyotsu_insertTimestamp",
+         "DbT7065ChohyoSeigyoKyotsu"."insertReamsLoginId" as "dbT7065ChohyoSeigyoKyotsu_insertReamsLoginId",
+         "DbT7065ChohyoSeigyoKyotsu"."insertContextId" as "dbT7065ChohyoSeigyoKyotsu_insertContextId",
+         "DbT7065ChohyoSeigyoKyotsu"."isDeleted" as "dbT7065ChohyoSeigyoKyotsu_isDeleted",
+         "DbT7065ChohyoSeigyoKyotsu"."updateCount" as "dbT7065ChohyoSeigyoKyotsu_updateCount",
+         "DbT7065ChohyoSeigyoKyotsu"."lastUpdateTimestamp" as "dbT7065ChohyoSeigyoKyotsu_lastUpdateTimestamp",
+         "DbT7065ChohyoSeigyoKyotsu"."lastUpdateReamsLoginId" as "dbT7065ChohyoSeigyoKyotsu_lastUpdateReamsLoginId",
+         "DbT7065ChohyoSeigyoKyotsu"."chohyoBunruiMeisho" as "dbT7065ChohyoSeigyoKyotsu_chohyoBunruiMeisho",
+         "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuKubun" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuKubun",
+         "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuTodoufukenMeiHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuTodoufukenMeiHyojiUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuGunMeiHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuGunMeiHyojiUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuShichosonMeiHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuShichosonMeiHyojiUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuChoikiHenshuHoho" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuChoikiHenshuHoho",
+         "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuKatagakiHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuKatagakiHyojiUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."setainushiHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_setainushiHyojiUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."dainoninHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_dainoninHyojiUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."customerBarCodeShiyoUmu" as "dbT7065ChohyoSeigyoKyotsu_customerBarCodeShiyoUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."customerBarCodeHenkanErrHenshuHoho" as "dbT7065ChohyoSeigyoKyotsu_customerBarCodeHenkanErrHenshuHoho",
+         "DbT7065ChohyoSeigyoKyotsu"."gaibuChohyoMojigireSeigyo" as "dbT7065ChohyoSeigyoKyotsu_gaibuChohyoMojigireSeigyo",
+         "DbT7065ChohyoSeigyoKyotsu"."naibuChohyoMojigireSeigyo" as "dbT7065ChohyoSeigyoKyotsu_naibuChohyoMojigireSeigyo",
+         "DbT7065ChohyoSeigyoKyotsu"."mojigireBunriSeigyo" as "dbT7065ChohyoSeigyoKyotsu_mojigireBunriSeigyo",
+         "DbT7065ChohyoSeigyoKyotsu"."teikeibunMojiSize" as "dbT7065ChohyoSeigyoKyotsu_teikeibunMojiSize",
+         "DbT7065ChohyoSeigyoKyotsu"."kozaMaskUmu" as "dbT7065ChohyoSeigyoKyotsu_kozaMaskUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."kozaMeigininKanaYusenKubun" as "dbT7065ChohyoSeigyoKyotsu_kozaMeigininKanaYusenKubun",
+         "DbT7065ChohyoSeigyoKyotsu"."daikoPrintUmu" as "dbT7065ChohyoSeigyoKyotsu_daikoPrintUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."denshiKoinInjiUmu" as "dbT7065ChohyoSeigyoKyotsu_denshiKoinInjiUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."shuchoMeiInjiIchi" as "dbT7065ChohyoSeigyoKyotsu_shuchoMeiInjiIchi",
+         "DbT7065ChohyoSeigyoKyotsu"."koinShoryakuInjiUmu" as "dbT7065ChohyoSeigyoKyotsu_koinShoryakuInjiUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."koinMojiretsuInjiUmu" as "dbT7065ChohyoSeigyoKyotsu_koinMojiretsuInjiUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."chikuHyoji1" as "dbT7065ChohyoSeigyoKyotsu_chikuHyoji1",
+         "DbT7065ChohyoSeigyoKyotsu"."chikuHyoji2" as "dbT7065ChohyoSeigyoKyotsu_chikuHyoji2",
+         "DbT7065ChohyoSeigyoKyotsu"."chikuHyoji3" as "dbT7065ChohyoSeigyoKyotsu_chikuHyoji3"
+    </sql>
+    
+    
+     <resultMap id="NewResultMap_DbT7065ChohyoSeigyoKyotsuEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity" autoMapping="true">
+        <id property="subGyomuCode" column="dbT7065ChohyoSeigyoKyotsu_subGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
+        <id property="chohyoBunruiID" column="dbT7065ChohyoSeigyoKyotsu_chohyoBunruiID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ReportIdTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT7065ChohyoSeigyoKyotsu_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7065ChohyoSeigyoKyotsu_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7065ChohyoSeigyoKyotsu_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7065ChohyoSeigyoKyotsu_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7065ChohyoSeigyoKyotsu_isDeleted" />
+        <result property="updateCount" column="dbT7065ChohyoSeigyoKyotsu_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7065ChohyoSeigyoKyotsu_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7065ChohyoSeigyoKyotsu_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chohyoBunruiMeisho" column="dbT7065ChohyoSeigyoKyotsu_chohyoBunruiMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jushoHenshuKubun" column="dbT7065ChohyoSeigyoKyotsu_jushoHenshuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jushoHenshuTodoufukenMeiHyojiUmu" column="dbT7065ChohyoSeigyoKyotsu_jushoHenshuTodoufukenMeiHyojiUmu" />
+        <result property="jushoHenshuGunMeiHyojiUmu" column="dbT7065ChohyoSeigyoKyotsu_jushoHenshuGunMeiHyojiUmu" />
+        <result property="jushoHenshuShichosonMeiHyojiUmu" column="dbT7065ChohyoSeigyoKyotsu_jushoHenshuShichosonMeiHyojiUmu" />
+        <result property="jushoHenshuChoikiHenshuHoho" column="dbT7065ChohyoSeigyoKyotsu_jushoHenshuChoikiHenshuHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jushoHenshuKatagakiHyojiUmu" column="dbT7065ChohyoSeigyoKyotsu_jushoHenshuKatagakiHyojiUmu" />
+        <result property="setainushiHyojiUmu" column="dbT7065ChohyoSeigyoKyotsu_setainushiHyojiUmu" />
+        <result property="dainoninHyojiUmu" column="dbT7065ChohyoSeigyoKyotsu_dainoninHyojiUmu" />
+        <result property="customerBarCodeShiyoUmu" column="dbT7065ChohyoSeigyoKyotsu_customerBarCodeShiyoUmu" />
+        <result property="customerBarCodeHenkanErrHenshuHoho" column="dbT7065ChohyoSeigyoKyotsu_customerBarCodeHenkanErrHenshuHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gaibuChohyoMojigireSeigyo" column="dbT7065ChohyoSeigyoKyotsu_gaibuChohyoMojigireSeigyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="naibuChohyoMojigireSeigyo" column="dbT7065ChohyoSeigyoKyotsu_naibuChohyoMojigireSeigyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="mojigireBunriSeigyo" column="dbT7065ChohyoSeigyoKyotsu_mojigireBunriSeigyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="teikeibunMojiSize" column="dbT7065ChohyoSeigyoKyotsu_teikeibunMojiSize" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kozaMaskUmu" column="dbT7065ChohyoSeigyoKyotsu_kozaMaskUmu" />
+        <result property="kozaMeigininKanaYusenKubun" column="dbT7065ChohyoSeigyoKyotsu_kozaMeigininKanaYusenKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="daikoPrintUmu" column="dbT7065ChohyoSeigyoKyotsu_daikoPrintUmu" />
+        <result property="denshiKoinInjiUmu" column="dbT7065ChohyoSeigyoKyotsu_denshiKoinInjiUmu" />
+        <result property="shuchoMeiInjiIchi" column="dbT7065ChohyoSeigyoKyotsu_shuchoMeiInjiIchi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koinShoryakuInjiUmu" column="dbT7065ChohyoSeigyoKyotsu_koinShoryakuInjiUmu" />
+        <result property="koinMojiretsuInjiUmu" column="dbT7065ChohyoSeigyoKyotsu_koinMojiretsuInjiUmu" />
+        <result property="chikuHyoji1" column="dbT7065ChohyoSeigyoKyotsu_chikuHyoji1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chikuHyoji2" column="dbT7065ChohyoSeigyoKyotsu_chikuHyoji2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chikuHyoji3" column="dbT7065ChohyoSeigyoKyotsu_chikuHyoji3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+</mapper>

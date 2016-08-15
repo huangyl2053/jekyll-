@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- @reamsid_L DBD-3560-120 wangjie2 -->
+<!-- @reamsid_L DBD-3640-030 panxiaobo -->
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 
 
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shiharaihenkotsuchihakko.IShiharaiHenkoTsuchiHakkoMapper">
      <select id="selectShokanKihon" resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.shokankihonjiho.ShokanKihonJihoEntiy">
         SELECT
-         ShokanKihonJiho."hiHokenshaNo",
-         ShokanKihonJiho."serviceTeikyoYM",
-         ShokanKihonJiho."seiriNo",
-         ShokanKihonJiho."jigyoshaNo",
-         ShokanKihonJiho."yoshikiNo",
-         ShokanKihonJiho."meisaiNo",
-         ShokanKihonJiho."serviceCode",
-         sum(ShokanKihonJiho."shikyuKingaku")
+         ShokanKihonJiho."hiHokenshaNo" AS 被保険者番号,
+         ShokanKihonJiho."serviceTeikyoYM" AS サービス提供年月,
+         ShokanKihonJiho."seiriNo" AS 整理番号,
+         ShokanKihonJiho."jigyoshaNo" AS 事業者番号,
+         ShokanKihonJiho."yoshikiNo" AS 様式番号,
+         ShokanKihonJiho."meisaiNo" AS 明細番号,
+         ShokanKihonJiho."serviceShuruiCode" AS サービス種類コード,
+         sum(ShokanKihonJiho."shikyuKingaku") AS 支払金額
          FROM
          (
          SELECT
@@ -74,7 +74,7 @@
          rgdb."DbT3038ShokanKihon"."serviceTeikyoYM"=rgdb."DbT3045ShokanServicePlan200004"."serviceTeikyoYM" AND
          rgdb."DbT3038ShokanKihon"."seiriNo"=rgdb."DbT3045ShokanServicePlan200004"."seiriNo" AND
          rgdb."DbT3038ShokanKihon"."jigyoshaNo"=rgdb."DbT3045ShokanServicePlan200004"."jigyoshaNo" AND
-         gdb."DbT3038ShokanKihon"."yoshikiNo"=rgdb."DbT3045ShokanServicePlan200004"."yoshikiNo" AND
+         rgdb."DbT3038ShokanKihon"."yoshikiNo"=rgdb."DbT3045ShokanServicePlan200004"."yoshikiNo" AND
          rgdb."DbT3038ShokanKihon"."meisaiNo"=rgdb."DbT3045ShokanServicePlan200004"."meisaiNo"
          WHERE
          rgdb."DbT3038ShokanKihon"."hiHokenshaNo"=#{hiHokenshaNo} AND
@@ -145,7 +145,7 @@
          WHERE
          rgdb."DbT3038ShokanKihon"."hiHokenshaNo"=#{hiHokenshaNo} AND
          rgdb."DbT4024ShiharaiHohoHenkoSashitome"."kanriKubun"=#{kanriKubun} AND
-         rgdb."DbT4024ShiharaiHohoHenkoSashitome"."rirekiNo"=#{rirekiNo}　AND
+         rgdb."DbT4024ShiharaiHohoHenkoSashitome"."rirekiNo"=#{rirekiNo} AND
          rgdb."DbT4024ShiharaiHohoHenkoSashitome"."johoBunruiKubun"=#{johoBunruiKubun} AND
          rgdb."DbT4024ShiharaiHohoHenkoSashitome"."logicalDeletedFlag"=FALSE
          ) AS ShokanKihonJiho
@@ -156,7 +156,7 @@
          ShokanKihonJiho."jigyoshaNo",
          ShokanKihonJiho."yoshikiNo",
          ShokanKihonJiho."meisaiNo",
-         ShokanKihonJiho."serviceCode"
+         ShokanKihonJiho."serviceShuruiCode"
          ORDER BY
          ShokanKihonJiho."hiHokenshaNo",
          ShokanKihonJiho."serviceTeikyoYM",
@@ -164,6 +164,6 @@
          ShokanKihonJiho."jigyoshaNo",
          ShokanKihonJiho."yoshikiNo",
          ShokanKihonJiho."meisaiNo",
-         ShokanKihonJiho."serviceCode"
+         ShokanKihonJiho."serviceShuruiCode"
     </select>
 </mapper>

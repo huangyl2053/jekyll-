@@ -5,18 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KubunGendoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 画面設計_DBC0150011_サービス提供票別表 Entity
+ * 画面設計_DBC0150011_サービス提供票別表のEntityクラスです。
  *
- * @reamsid_L DBC-5110-010 xupeng
+ * @reamsid_L DBC-5100-010 xuxin
  */
 @lombok.Getter
 @lombok.Setter
@@ -48,5 +48,8 @@ public class KyufuJikoSakuseiEntityResult {
     private boolean 合計フラグ;
     private RString 限度額対象外フラグ;
     private Decimal 定額利用者負担単価金額;
-    private KubunGendoEntity entity;
+//    private KubunGendoEntity entity;
+    private Decimal 支給限度単位数;
+    private FlexibleDate 適用開始年月日;
+    private FlexibleDate 適用終了年月日;
 }

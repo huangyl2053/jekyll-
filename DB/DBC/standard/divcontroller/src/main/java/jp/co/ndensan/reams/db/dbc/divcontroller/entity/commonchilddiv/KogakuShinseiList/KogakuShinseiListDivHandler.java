@@ -252,6 +252,20 @@ public class KogakuShinseiListDivHandler {
     }
 
     /**
+     * 決定情報フラグ
+     *
+     * @return boolean
+     */
+    public boolean is決定情報フラグ() {
+        boolean flag = false;
+        dgShinseiJoho_Row row = div.getDgShinseiJoho().getClickedItem();
+        if (row != null && (row.getData11() != null && !row.getData11().isEmpty())) {
+            flag = true;
+        }
+        return flag;
+    }
+
+    /**
      * 支給区分フラグ
      *
      * @return boolean

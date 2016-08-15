@@ -152,6 +152,7 @@ public class KogakuServicehiDetailDivHandler {
      * clear画面内容
      */
     public void clear画面内容() {
+        div.getTxtKanriBango().clearValue();
         div.getTxtShimeiKanji().clearValue();
         div.getTxtShimeiKana().clearValue();
         div.getTxtTelNo().clearDomain();
@@ -163,6 +164,13 @@ public class KogakuServicehiDetailDivHandler {
         div.getTxtSetaiSyuyakuBango().clearValue();
         div.getTxtShikyuKingaku().clearValue();
         div.getTxtShikyusinaiRiyu().clearValue();
+    }
+
+    /**
+     * 画面tap
+     */
+    public void set画面tap() {
+        div.getTabKogakuServicehiDetail().setSelectedItem(div.getTplShinseisha());
     }
 
     /**
@@ -369,6 +377,30 @@ public class KogakuServicehiDetailDivHandler {
             div.getChkKokuhorenSaiso().setDisabled(true);
             set判定結果情報エリア非活性();
         }
+    }
+
+    /**
+     * release削除制御
+     */
+    public void release削除制御() {
+        div.getTxtShinseiYMD().setDisabled(false);
+        div.getRdbShinseisyaKubun().setDisabled(false);
+        div.getTxtHokenJyaBango().setDisabled(false);
+        div.getTxtShimeiKanji().setDisabled(false);
+        div.getTplShinseisha().getTxtShimeiKana().setDisabled(false);
+        div.getTxtTelNo().setDisabled(false);
+        div.getTxtShinseiRiyu().setDisabled(false);
+        div.getTxtShiharaiTotalAmount().setDisabled(false);
+        div.getChkKokuhorenSaiso().setDisabled(false);
+        div.getTxtUketsukeYMD().setDisabled(false);
+        div.getTxtHonninShiharaiGaku().setDisabled(false);
+        div.getTxtKetteiYMD().setDisabled(false);
+        div.getRdbShikyuKubun().setDisabled(false);
+        div.getRdbShinsaHohoKubun().setDisabled(false);
+        div.getTxtSetaiSyuyakuBango().setDisabled(false);
+        div.getTxtShikyuKingaku().setDisabled(false);
+        div.getRdbKogakuJidoSyokanTaisyo().setDisabled(false);
+        div.getTxtShikyusinaiRiyu().setDisabled(false);
     }
 
     private void set高額申請情報エリア(KougakuSabisuhiShousaiNaiyouResult result) {

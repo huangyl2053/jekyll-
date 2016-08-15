@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-5810-030 mawy -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hanyorisutoriyoshafutanwariai.IHanyoRisutoRiyoshaFutanWariaiMapper">
+    <resultMap id="resultMap_HanyoRisutoRiyoshaFutanWariaiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutoriyoshafutanwariai.HanyoRisutoRiyoshaFutanWariaiEntity" autoMapping="true">
+        <result property="被保険者台帳管理_被保険者番号" column="被保険者台帳管理_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者台帳管理_資格取得事由コード" column="被保険者台帳管理_資格取得事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者台帳管理_資格取得年月日" column="被保険者台帳管理_資格取得年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="被保険者台帳管理_資格取得届出年月日" column="被保険者台帳管理_資格取得届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="被保険者台帳管理_資格喪失事由コード" column="被保険者台帳管理_資格喪失事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者台帳管理_資格喪失年月日" column="被保険者台帳管理_資格喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="被保険者台帳管理_資格喪失届出年月日" column="被保険者台帳管理_資格喪失届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="被保険者台帳管理_被保険者区分コード" column="被保険者台帳管理_被保険者区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者台帳管理_住所地特例フラグ" column="被保険者台帳管理_住所地特例フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="被保険者台帳管理_市町村コード" column="被保険者台帳管理_市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者台帳管理_広域内住所地特例フラグ" column="被保険者台帳管理_広域内住所地特例フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="被保険者台帳管理_広住特措置元市町村コード" column="被保険者台帳管理_広住特措置元市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="利用者負担割合_職権変更フラグ" column="利用者負担割合_職権変更フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="利用者負担割合明細_資格区分" column="利用者負担割合明細_資格区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="利用者負担割合明細_負担割合区分" column="利用者負担割合明細_負担割合区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="利用者負担割合_判定日" column="利用者負担割合_判定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="利用者負担割合_判定区分" column="利用者負担割合_判定区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="利用者負担割合明細_有効開始日" column="利用者負担割合明細_有効開始日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="利用者負担割合明細_有効終了日" column="利用者負担割合明細_有効終了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="利用者負担割合明細_本人合計所得金額" column="利用者負担割合明細_本人合計所得金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="利用者負担割合明細_世帯１号被保険者数" column="利用者負担割合明細_世帯１号被保険者数" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="利用者負担割合明細_年金収入合計" column="利用者負担割合明細_年金収入合計" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="利用者負担割合明細_その他の合計所得金額合計" column="利用者負担割合明細_その他の合計所得金額合計" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="利用者負担割合_更正事由" column="利用者負担割合_更正事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="利用者負担割合_交付日" column="利用者負担割合_交付日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="利用者負担割合明細_論理削除フラグ" column="利用者負担割合明細_論理削除フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="利用者負担割合_年度" column="利用者負担割合_年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="利用者負担割合_履歴番号" column="利用者負担割合_履歴番号" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="利用者負担割合明細_枝番号" column="利用者負担割合明細_枝番号" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="利用者負担割合明細_履歴番号" column="利用者負担割合明細_履歴番号" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="利用者負担割合明細2_枝番号" column="利用者負担割合明細2_枝番号" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="利用者負担割合明細2_履歴番号" column="利用者負担割合明細2_履歴番号" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="利用者負担割合_発行不要フラグ" column="利用者負担割合_発行不要フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="利用者負担割合_発行区分" column="利用者負担割合_発行区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="利用者負担割合_発行日" column="利用者負担割合_発行日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="利用者負担割合_識別コード" column="利用者負担割合_識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <association property="atesakiEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="get汎用リスト"
+            resultMap="resultMap_HanyoRisutoRiyoshaFutanWariaiEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyorisutoriyoshafutanwariai.HanyoRisutoRiyoshaFutanWariaiMybatisParameter"
+            fetchSize="500">
+            SELECT
+                最新被保台帳."hihokenshaNo" AS 被保険者台帳管理_被保険者番号,					
+                最新被保台帳."shikakuShutokuJiyuCode" AS 被保険者台帳管理_資格取得事由コード,							
+                最新被保台帳."shikakuShutokuYMD" AS 被保険者台帳管理_資格取得年月日,					
+                最新被保台帳."shikakuShutokuTodokedeYMD" AS 被保険者台帳管理_資格取得届出年月日,							
+                最新被保台帳."shikakuSoshitsuJiyuCode" AS 被保険者台帳管理_資格喪失事由コード,							
+                最新被保台帳."shikakuSoshitsuYMD" AS 被保険者台帳管理_資格喪失年月日,					
+                最新被保台帳."shikakuSoshitsuTodokedeYMD" AS 被保険者台帳管理_資格喪失届出年月日,							
+                最新被保台帳."hihokennshaKubunCode" AS 被保険者台帳管理_被保険者区分コード,							
+                最新被保台帳."jushochiTokureiFlag" AS 被保険者台帳管理_住所地特例フラグ,							
+                最新被保台帳."shichosonCode" AS 被保険者台帳管理_市町村コード,
+                最新被保台帳."koikinaiJushochiTokureiFlag" AS 被保険者台帳管理_広域内住所地特例フラグ,
+                最新被保台帳."koikinaiTokureiSochimotoShichosonCode" AS 被保険者台帳管理_広住特措置元市町村コード,	
+                利用者負担割合."shokenFlag" AS 利用者負担割合_職権変更フラグ,						
+                利用者負担割合明細."shikakuKubun" AS 利用者負担割合明細_資格区分,					
+                利用者負担割合明細."futanWariaiKubun" AS 利用者負担割合明細_負担割合区分,							
+                利用者負担割合."hanteiYMD" AS 利用者負担割合_判定日,						
+                利用者負担割合."hanteiKubun" AS 利用者負担割合_判定区分,					
+                利用者負担割合明細."yukoKaishiYMD" AS 利用者負担割合明細_有効開始日,						
+                利用者負担割合明細."yukoShuryoYMD" AS 利用者負担割合明細_有効終了日,						
+                利用者負担割合明細."honninGoukeiShotokuGaku" AS 利用者負担割合明細_本人合計所得金額,						
+                利用者負担割合明細."setaiIchigouHihokenshaSu" AS 利用者負担割合明細_世帯１号被保険者数,							
+                利用者負担割合明細."nenkinShunyuGoukei" AS 利用者負担割合明細_年金収入合計,							
+                利用者負担割合明細."sonotanoGoukeiShotokuKingakuGoukei" AS 利用者負担割合明細_その他の合計所得金額合計,							
+                利用者負担割合."koseiJiyu" AS 利用者負担割合_更正事由,							
+                利用者負担割合."kofuYMD" AS 利用者負担割合_交付日,							
+                利用者負担割合明細 AS 利用者負担割合明細_論理削除フラグ,							
+                利用者負担割合."nendo" AS 利用者負担割合_年度,							
+                利用者負担割合."rirekiNo" AS 利用者負担割合_履歴番号,							
+                利用者負担割合明細."edaNo" AS 利用者負担割合明細_枝番号,							
+                利用者負担割合明細."rirekiNo" AS 利用者負担割合明細_履歴番号,							
+                利用者負担割合明細2."edaNo" AS 利用者負担割合明細2_枝番号,						
+                利用者負担割合明細2."rirekiNo" AS 利用者負担割合明細2_履歴番号,		
+                利用者負担割合."hakoFuyoFlag" AS 利用者負担割合_発行不要フラグ,							
+                利用者負担割合."hakoKubun" AS 利用者負担割合_発行区分,						
+                利用者負担割合."hakoYMD" AS 利用者負担割合_発行日,
+                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+                , <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
+            FROM
+                rgdb."DbT3113RiyoshaFutanWariai" AS 利用者負担割合
+                <if test="!is年度直近データ抽出">
+                    RIGHT JOIN																									
+			rgdb."DbT3114RiyoshaFutanWariaiMeisai"	AS 利用者負担割合明細																					
+                    ON 　利用者負担割合明細."nendo" = 利用者負担割合."nendo"												
+                    AND  利用者負担割合明細."hihokenshaNo" = 利用者負担割合."hihokenshaNo"											
+                    AND	 利用者負担割合明細."rirekiNo" = 利用者負担割合."rirekiNo"	
+                    WHERE 1=1
+                </if>
+                <if test="is年度直近データ抽出">
+                    INNER JOIN(																									
+			SELECT	*																						
+                            FROM  (																								
+                                    SELECT * , ROW_NUMBER() OVER (PARTITION BY "hihokenshaNo", "rirekiNo"																						
+                                                             ORDER BY "edaNo" DESC) AS 利用者負担割合明細_番号																				
+                                    FROM																							
+                                            rgdb."DbT3114RiyoshaFutanWariaiMeisai" AS DbT3114																	
+                                    WHERE																							
+                                            DbT3114."logicalDeletedFlag" = false																						
+                                    ) AS a																							
+                                    WHERE																								
+                                            利用者負担割合明細_番号 = 1																							
+                                    ) AS 利用者負担割合明細																						
+                            ON 利用者負担割合明細."nendo" = 利用者負担割合."nendo"												
+                            AND 利用者負担割合明細."hihokenshaNo" = 利用者負担割合."hihokenshaNo"											
+                            AND 利用者負担割合明細."rirekiNo" = 利用者負担割合."rirekiNo"																						
+			
+                    INNER  JOIN																										
+                            rgdb."DbV1001HihokenshaDaicho" AS 最新被保台帳																									
+                    ON　 最新被保台帳."hihokenshaNo" = 利用者負担割合."hihokenshaNo"																								
+		
+                    INNER JOIN																											
+                    <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+                    AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
+                    ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = 最新被保台帳."shikibetsuCode"
+
+                    INNER JOIN
+                    <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" /> AS "Atesaki"
+                    ON "Atesaki"."shikibetsuCode" = 最新被保台帳."shikibetsuCode"																							
+																													
+                    INNER  JOIN　(																										
+				SELECT																									
+					"nendo", "hihokenshaNo", "rirekiNo", "edaNo"																								
+				FROM  (																									
+					SELECT																								
+						*,																						
+                                                ROW_NUMBER OVER (PARTITION BY "hihokenshaNo", "rirekiNo"																							
+								 ORDER BY "edaNo" DESC) AS DbT3114_枝番																					
+					FROM																								
+						rgdb."DbT3114RiyoshaFutanWariaiMeisai" AS DbT3114_1																		
+					WHERE																								
+						DbT3114_1."logicalDeletedFlag" = false																							
+					) AS b																								
+				WHERE																									
+					DbT3114_枝番 = 1																								
+				) AS 利用者負担割合明細2																										
+			ON	利用者負担割合明細2."nendo" = 利用者負担割合."nendo"												
+			AND	利用者負担割合明細2."hihokenshaNo" = 利用者負担割合."hihokenshaNo"												
+			AND	利用者負担割合明細2."rirekiNo" = 利用者負担割合."rirekiNo"									
+		WHERE		利用者負担割合."logicalDeletedFlag" = false
+                    <if test="is年度">
+                          AND 利用者負担割合明細."nendo" = #{nendo}
+                    </if>						
+                </if>	
+                <if test="is基準日">
+                    AND 利用者負担割合明細."yukoKaishiYMD" <![CDATA[<=]]> #{kizyunnichi} 
+                    AND #{kizyunnichi} <![CDATA[<=]]> 利用者負担割合明細."yukoShuryoYMD"
+                </if>
+                <if test="is事業対象者負担１割 and is事業対象者負担２割">
+                    AND 利用者負担割合明細."futanWariaiKubun" = #{負担割合区分_１割}
+                    OR　 利用者負担割合明細."futanWariaiKubun" = #{負担割合区分_２割}
+                </if>
+                <if test="is事業対象者負担１割 and !is事業対象者負担２割">
+                    AND 利用者負担割合明細."futanWariaiKubun" = #{負担割合区分_１割}
+                </if>
+                <if test="!is事業対象者負担１割 and is事業対象者負担２割">
+                    AND 利用者負担割合明細."futanWariaiKubun" = #{負担割合区分_２割}
+                </if>
+                <if test="has市町村コード">
+                    AND (最新被保台帳."shichosonCode"　=　#{shichosoncode}
+                    OR   最新被保台帳."koikinaiTokureiSochimotoShichosonCode" = #{shichosoncode})
+                </if>
+                <if test="is住所">
+                    <if test="has地区選択From">
+                        AND #{地区選択コードFrom} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."choikiCode"
+                    </if>
+                    <if test="has地区選択To">
+                        AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."choikiCode" <![CDATA[<=]]> #{地区選択コードTo}
+                    </if>
+                </if>
+                <if test="is行政区">
+                    <if test="has行政区From">
+                        AND #{地区選択コードFrom} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."gyoseikuCode"
+                    </if>
+                    <if test="has行政区To">
+                         AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."gyoseikuCode" <![CDATA[<=]]> #{地区選択コードTo}
+                    </if>
+                </if>
+                <if test="is地区">
+                    <if test="has地区１From">
+                        AND #{地区選択コードFrom} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode1"
+                    </if>
+                    <if test="has地区１To">
+                        AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode1" <![CDATA[<=]]> #{地区選択コードTo}
+                    </if>
+                    <if test="has地区２From">
+                        AND #{地区選択コードFrom} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode2"
+                    </if>
+                    <if test="has地区２To">
+                        AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode2" <![CDATA[<=]]> #{地区選択コードTo}
+                    </if>
+                    <if test="has地区３From">
+                        AND #{地区選択コードFrom} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode3"
+                    </if>
+                    <if test="has地区３To">
+                        AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode3" <![CDATA[<=]]> #{地区選択コードTo}
+                    </if>
+                </if>
+            ORDER BY #{syutsuryokujun}       
+    </select>
+</mapper>

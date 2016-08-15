@@ -167,10 +167,90 @@ public class HanyoListTekiyoJogaishaRenbanProcess extends BatchProcessBase<Hanyo
 
     @Override
     protected void afterExecute() {
+        if (eucCsvWriter.getCount() == 0) {
+            eucCsvWriter.writeLine(setBlank());
+        }
         eucCsvWriter.close();
         AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
         manager.spool(eucFilePath, log);
         バッチ出力条件リストの出力();
+    }
+
+    private HanyoListTekiyoJogaishaRenbanCsvEntity setBlank() {
+        HanyoListTekiyoJogaishaRenbanCsvEntity entity = new HanyoListTekiyoJogaishaRenbanCsvEntity();
+        entity.set識別コード(RString.EMPTY);
+        entity.set住民種別(RString.EMPTY);
+        entity.set氏名(RString.EMPTY);
+        entity.set氏名カナ(RString.EMPTY);
+        entity.set生年月日(RString.EMPTY);
+        entity.set年齢(RString.EMPTY);
+        entity.set性別(RString.EMPTY);
+        entity.set続柄コード(RString.EMPTY);
+        entity.set世帯コード(RString.EMPTY);
+        entity.set世帯主名(RString.EMPTY);
+        entity.set住所コード(RString.EMPTY);
+        entity.set郵便番号(RString.EMPTY);
+        entity.set住所番地方書(RString.EMPTY);
+        entity.set住所(RString.EMPTY);
+        entity.set番地(RString.EMPTY);
+        entity.set方書(RString.EMPTY);
+        entity.set行政区コード(RString.EMPTY);
+        entity.set行政区名(RString.EMPTY);
+        entity.set地区１(RString.EMPTY);
+        entity.set地区２(RString.EMPTY);
+        entity.set地区３(RString.EMPTY);
+        entity.set連絡先１(RString.EMPTY);
+        entity.set連絡先２(RString.EMPTY);
+        entity.set登録異動日(RString.EMPTY);
+        entity.set登録事由(RString.EMPTY);
+        entity.set登録届出日(RString.EMPTY);
+        entity.set住定異動日(RString.EMPTY);
+        entity.set住定事由(RString.EMPTY);
+        entity.set住定届出日(RString.EMPTY);
+        entity.set消除異動日(RString.EMPTY);
+        entity.set消除事由(RString.EMPTY);
+        entity.set消除届出日(RString.EMPTY);
+        entity.set転出入理由(RString.EMPTY);
+        entity.set前住所郵便番号(RString.EMPTY);
+        entity.set前住所番地方書(RString.EMPTY);
+        entity.set前住所(RString.EMPTY);
+        entity.set前住所番地(RString.EMPTY);
+        entity.set前住所方書(RString.EMPTY);
+        entity.set市町村コード(RString.EMPTY);
+        entity.set市町村名(RString.EMPTY);
+        entity.set保険者コード(RString.EMPTY);
+        entity.set保険者名(RString.EMPTY);
+        entity.set空白(RString.EMPTY);
+        entity.set被保険者番号(RString.EMPTY);
+        entity.set資格取得事由(RString.EMPTY);
+        entity.set資格取得日(RString.EMPTY);
+        entity.set資格取得届出日(RString.EMPTY);
+        entity.set喪失事由(RString.EMPTY);
+        entity.set資格喪失日(RString.EMPTY);
+        entity.set資格喪失届日(RString.EMPTY);
+        entity.set資格区分(RString.EMPTY);
+        entity.set住所地特例状態(RString.EMPTY);
+        entity.set資格証記載保険者番号(RString.EMPTY);
+        entity.set適用除外適用事由(RString.EMPTY);
+        entity.set適用除外適用日(RString.EMPTY);
+        entity.set適用除外適用届出日(RString.EMPTY);
+        entity.set適用除外解除事由(RString.EMPTY);
+        entity.set適用除外解除日(RString.EMPTY);
+        entity.set適用除外解除届出日(RString.EMPTY);
+        entity.set適用除外施設コード(RString.EMPTY);
+        entity.set適用除外施設名称(RString.EMPTY);
+        entity.set適用除外入所日(RString.EMPTY);
+        entity.set適用除外退所日(RString.EMPTY);
+        entity.set適用除外施設郵便番号(RString.EMPTY);
+        entity.set適用除外施設住所(RString.EMPTY);
+        entity.set適用除外施設電話番号(RString.EMPTY);
+        entity.set施設退所通知発行日(RString.EMPTY);
+        entity.set施設変更通知発行日(RString.EMPTY);
+        entity.set医療保険種別(RString.EMPTY);
+        entity.set医療保険番号(RString.EMPTY);
+        entity.set医療保険者名(RString.EMPTY);
+        entity.set医療保険記号番号(RString.EMPTY);
+        return entity;
     }
 
     private void バッチ出力条件リストの出力() {
@@ -179,7 +259,7 @@ public class HanyoListTekiyoJogaishaRenbanProcess extends BatchProcessBase<Hanyo
                 association.getLasdecCode_().value(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                new RString("汎用リスト 適用除外者CSVV"),
+                new RString("汎用リスト 適用除外者CSV"),
                 new RString("HanyoList_TekiyoJogaisha.csv"),
                 new RString(String.valueOf(eucCsvWriter.getCount())),
                 new HanyoListTekiyoJogaishaResult().get出力条件(processParamter, kaigoDonyuKeitai));

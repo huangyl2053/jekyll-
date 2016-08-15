@@ -12,11 +12,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Space;
 /**
  * pritPublish4 のクラスファイル
  *
- * @reamsid_L DBB-1660-050 gongliang
+ * @reamsid_L DBB-1660-010 gongliang
  */
 public class pritPublish4Div extends PanelPublish {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

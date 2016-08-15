@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2260001;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -312,7 +313,7 @@ public class TorokuData implements Serializable {
     private RString t5101_認定申請年月日;
     private RString t7051_市町村名称;
     private RString t5101_申請書管理番号;
-    private RString t5115_イメージ共有ファイルID;
+    private RDateTime t5115_イメージ共有ファイルID;
     private RString t5912_主治医コード;
     private RString t5912_主治医氏名;
     private RString t5911_主治医医療機関コード;

@@ -10,8 +10,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * 要介護認定申請書のEntityです。
  *
- * @author tianyh
+ * @reamsid_L DBD-1400-030 b_zhengs
  */
 @Getter
 @Setter

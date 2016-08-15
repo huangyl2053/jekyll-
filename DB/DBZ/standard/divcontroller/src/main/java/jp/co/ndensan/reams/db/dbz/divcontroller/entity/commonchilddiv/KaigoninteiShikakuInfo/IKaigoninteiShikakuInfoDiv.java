@@ -2,6 +2,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.Kaigonint
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * このコードはツールによって生成されました。
@@ -14,10 +16,17 @@ public interface IKaigoninteiShikakuInfoDiv extends ICommonChildDivBasePropertie
      * 初期化。
      *
      * @param hdnShinchsonCode
-     * @param hdnShikibetsuCode
-     * @param hdnSetaikodo
      * @param hdnHihokenShaNo
      */
-    void initialize(RString hdnShinchsonCode, RString hdnShikibetsuCode, RString hdnSetaikodo, RString hdnHihokenShaNo);
+    void initialize(RString hdnShinchsonCode, RString hdnHihokenShaNo);
 
+    TextBox getTxtYokaigodo();
+
+    TextBoxDate getTxtNinteiKaishiYmd();
+
+    TextBoxDate getTxtNinteiShuryoYmd();
+
+    TextBox getTxtHihokenshaNo();
+
+    RString getHookenshaCode();
 }

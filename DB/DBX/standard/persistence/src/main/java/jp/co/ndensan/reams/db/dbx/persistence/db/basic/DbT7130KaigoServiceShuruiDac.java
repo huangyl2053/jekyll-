@@ -88,6 +88,22 @@ public class DbT7130KaigoServiceShuruiDac {
     }
 
     /**
+     * 介護サービス種類を全件返します。
+     *
+     * @return List<DbT7130KaigoServiceShuruiEntity>
+     */
+    @Transaction
+    public List<DbT7130KaigoServiceShuruiEntity> selectサービス種類登録() {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7130KaigoServiceShurui.class).
+                order(by(DbT7130KaigoServiceShurui.serviceShuruiCd, Order.ASC),
+                        by(DbT7130KaigoServiceShurui.teikyoKaishiYM, Order.DESC)).
+                toList(DbT7130KaigoServiceShuruiEntity.class);
+    }
+
+    /**
      * DbT7130KaigoServiceShuruiEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
      * @param entity entity

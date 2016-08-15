@@ -80,6 +80,9 @@ public class ServiceKeikakuHiPanelHandler {
      * @param entity200904List List<ShokanServicePlan200904Result>
      */
     public void onLoad200904(List<ShokanServicePlan200904Result> entity200904List, RString 画面モード) {
+        setサービス計画費共通エリアRequired(true);
+        setサービス計画費グリッドエリアRequired(false);
+        setサービス計画費Required(false);
         setサービス計画費共通エリアLoad(entity200904List, 画面モード);
         setサービス計画費グリッドエリア(entity200904List, 画面モード);
 
@@ -92,6 +95,8 @@ public class ServiceKeikakuHiPanelHandler {
      * @param entity200604 ShokanServicePlan200604Result
      */
     public void onLoad200604(ShokanServicePlan200604Result entity200604, RString 画面モード) {
+        setサービス計画費共通エリアRequired(false);
+        setサービス計画費グリッドエリアRequired(false);
         setサービス計画費エリア200604(entity200604, 画面モード);
     }
 
@@ -102,6 +107,8 @@ public class ServiceKeikakuHiPanelHandler {
      * @param 画面モード RString
      */
     public void onLoad200004(ShokanServicePlan200004Result entity200004, RString 画面モード) {
+        setサービス計画費共通エリアRequired(false);
+        setサービス計画費グリッドエリアRequired(false);
         setサービス計画費エリア200004(entity200004, 画面モード);
     }
 
@@ -158,6 +165,7 @@ public class ServiceKeikakuHiPanelHandler {
      */
     public void click追加() {
         div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setDisplayNone(false);
+        setサービス計画費グリッドエリアRequired(true);
         setサービス計画費共通エリア(null);
         clickクリア();
     }
@@ -169,6 +177,7 @@ public class ServiceKeikakuHiPanelHandler {
      */
     public void click修正(dgdYichiran_Row row) {
         div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setDisplayNone(false);
+        setサービス計画費グリッドエリアRequired(true);
         setサービス計画費共通エリア(null);
         clickクリア();
         setサービス計画費共通エリアdown(row);
@@ -182,6 +191,7 @@ public class ServiceKeikakuHiPanelHandler {
      */
     public void click削除(dgdYichiran_Row row) {
         div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setDisplayNone(false);
+        setサービス計画費グリッドエリアRequired(false);
         setサービス計画費共通エリア(null);
         clickクリア();
         setサービス計画費共通エリアdown(row);
@@ -271,6 +281,7 @@ public class ServiceKeikakuHiPanelHandler {
      * 「確定する」ボタンを押下 登録の場合
      */
     public void 確定_登録() {
+        setサービス計画費グリッドエリアRequired(false);
         dgdYichiran_Row row = new dgdYichiran_Row();
         登録パネル_グリッド(row);
         List<dgdYichiran_Row> rowList = div.getPanelServiceKeikakuhiUp().getDgdYichiran().getDataSource();
@@ -283,6 +294,7 @@ public class ServiceKeikakuHiPanelHandler {
      * 「確定する」ボタンを押下 修正の場合
      */
     public void 確定_修正() {
+        setサービス計画費グリッドエリアRequired(false);
         dgdYichiran_Row row = div.getPanelServiceKeikakuhiUp().getDgdYichiran().getClickedItem();
         RowState state = row.getRowState();
         if (!RowState.Added.equals(state)) {
@@ -300,6 +312,7 @@ public class ServiceKeikakuHiPanelHandler {
      * 「確定する」ボタンを押下 削除の場合
      */
     public void 確定_削除() {
+        setサービス計画費グリッドエリアRequired(false);
         dgdYichiran_Row row = div.getPanelServiceKeikakuhiUp().getDgdYichiran().getClickedItem();
         RowState state = row.getRowState();
         if (RowState.Added.equals(state)) {
@@ -1023,6 +1036,26 @@ public class ServiceKeikakuHiPanelHandler {
             div.getPanelServiceKeikakuhiDown().getTxtTanyisuTanka().setDisabled(true);
             div.getPanelServiceKeikakuhiDown().getTxtSeikyugakuDown().setDisabled(true);
         }
+    }
+
+    private void setサービス計画費共通エリアRequired(boolean flag) {
+        div.getPanelServiceKeikakuhiUp().getDdlJigyoshaKubun().setRequired(flag);
+        div.getPanelServiceKeikakuhiUp().getRdoShinsahouhou().setRequired(flag);
+        div.getPanelServiceKeikakuhiUp().getTxtTodokedeYMD().setRequired(flag);
+        div.getPanelServiceKeikakuhiUp().getTxtTanyiTanka().setRequired(flag);
+    }
+
+    private void setサービス計画費グリッドエリアRequired(boolean flag) {
+        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtTanyiUp().setRequired(flag);
+        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtKaisu().setRequired(flag);
+    }
+
+    private void setサービス計画費Required(boolean flag) {
+        div.getPanelServiceKeikakuhiDown().getDdlShiteiJigyoshaKubunCode().setRequired(flag);
+        div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().setRequired(flag);
+        div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().setRequired(flag);
+        div.getPanelServiceKeikakuhiDown().getTxtTanyiDown().setRequired(flag);
+        div.getPanelServiceKeikakuhiDown().getTxtTanyisuTanka().setRequired(flag);
     }
 
     private Boolean 変更チェック(dgdYichiran_Row row) {

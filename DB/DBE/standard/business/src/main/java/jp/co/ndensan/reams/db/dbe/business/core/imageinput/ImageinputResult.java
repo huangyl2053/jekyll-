@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.imageinput;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput.ImageinputRelateEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -95,7 +96,7 @@ public class ImageinputResult {
      *
      * @return T5115_イメージ共有ファイルID
      */
-    public RString getT5115_イメージ共有ファイルID() {
+    public RDateTime getT5115_イメージ共有ファイルID() {
         return entity.getT5115_イメージ共有ファイルID();
     }
 

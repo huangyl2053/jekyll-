@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.jukyu.shiharaihohohenko.KanriK
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -54,7 +53,6 @@ public class ShiharaiHenkoTsuchiHakko {
      * @return レスポンスデータ
      */
     public ResponseData<ShiharaiHenkoTsuchiHakkoDiv> onLoad(ShiharaiHenkoTsuchiHakkoDiv div) {
-        ViewStateHolder.put(ViewStateKeys.資格対象者, new TaishoshaKey(new HihokenshaNo("1000000001"), new ShikibetsuCode("900000000000001"), new SetaiCode("22")));
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
@@ -92,8 +90,8 @@ public class ShiharaiHenkoTsuchiHakko {
      * @return レスポンスデータ
      */
     public ResponseData<ShiharaiHenkoTsuchiHakkoDiv> selectedItem(ShiharaiHenkoTsuchiHakkoDiv div) {
-        int index = Integer.parseInt(div.getDgShiharaiHohoHenkoRireki().getClickedItem().getTxtKubunIndex().toString());
-        div.setKey_Index(div.getDgShiharaiHohoHenkoRireki().getClickedItem().getTxtKubunIndex());
+        int index = div.getDgShiharaiHohoHenkoRireki().getClickedRowId();
+        div.setKey_Index(new RString(String.valueOf(index)));
         ShiharaiHohoHenko 取得された支払方法変更管理情報 = get帳票情報(index);
         if (!(取得された支払方法変更管理情報.get予告登録年月日() == null || 取得された支払方法変更管理情報.get予告登録年月日().isEmpty())) {
             div.getYokokuTsuchisho().setDisplayNone(false);
@@ -205,7 +203,7 @@ public class ShiharaiHenkoTsuchiHakko {
         if (div.getYokokuTsuchisho().isIsPublish()) {
             文書番号リスト.set予告文書番号(div.getYokokuTsuchisho().getCcdYokokuTsuchishoBunshoNo().get文書番号());
             発行日リスト.set予告通知書発行年月日(div.getYokokuTsuchisho().getTxtYokokuTsuchishoHakkoDate().getValue());
-            if (帳票情報.get管理区分() != KanriKubun.ニ号差止.code()) {
+            if (!帳票情報.get管理区分().equals(KanriKubun.ニ号差止.code())) {
                 帳票タイプリスト.add(ShiharaiHohoHenkoTsuchisho.支払方法変更予告通知書.get名称());
             } else {
                 帳票タイプリスト.add(ShiharaiHohoHenkoTsuchisho.差止予告通知書_２号用.get名称());
@@ -219,7 +217,7 @@ public class ShiharaiHenkoTsuchiHakko {
         if (div.getSashitomeTsuchisho().isIsPublish()) {
             文書番号リスト.set差止文書番号(div.getSashitomeTsuchisho().getCcdSashitomeTsuchishoBunshoNo().get文書番号());
             発行日リスト.set差止通知書発行年月日(div.getSashitomeTsuchisho().getTxtSashitomeTsuchishoHakkoDate().getValue());
-            if (帳票情報.get管理区分() != KanriKubun.ニ号差止.code()) {
+            if (!帳票情報.get管理区分().equals(KanriKubun.ニ号差止.code())) {
                 帳票タイプリスト.add(ShiharaiHohoHenkoTsuchisho.支払一時差止通知書.get名称());
             } else {
                 帳票タイプリスト.add(ShiharaiHohoHenkoTsuchisho.差止処分通知書_２号用.get名称());
@@ -271,17 +269,17 @@ public class ShiharaiHenkoTsuchiHakko {
     private List<dgShiharaiHohoHenkoRireki_Row> creatDateSource(ArrayList<ShiharaiHohoHenkoIndex> shiharaiHohoHenkonoJouhouList) {
         List<dgShiharaiHohoHenkoRireki_Row> rowList = new ArrayList();
         dgShiharaiHohoHenkoRireki_Row row = new dgShiharaiHohoHenkoRireki_Row();
-        for (ShiharaiHohoHenkoIndex shiharaiHohoHenkoIndex : shiharaiHohoHenkonoJouhouList) {
-            row.setTxtTorokuJokyo(shiharaiHohoHenkoIndex.getShiharaiHohoHenko().get登録区分());
-            row.setTxtShuryoJokyo(shiharaiHohoHenkoIndex.getShiharaiHohoHenko().get終了区分());
-            row.getTxtTekiyoKaishi().setValue(new RDate(shiharaiHohoHenkoIndex.getShiharaiHohoHenko().get適用開始年月日().toString()));
-            row.getTxtTekiyoShuryo().setValue(new RDate(shiharaiHohoHenkoIndex.getShiharaiHohoHenko().get適用終了年月日().toString()));
-            row.getTxtYokokuTsuchi().setValue(new RDate(shiharaiHohoHenkoIndex.getShiharaiHohoHenko().get予告通知書発行年月日().toString()));
-            row.getTxtHenkoTshuchi().setValue(new RDate(shiharaiHohoHenkoIndex.getShiharaiHohoHenko().get償還払化通知書発行年月日().toString()));
-            row.getTxtSashitomeTsuchi().setValue(new RDate(shiharaiHohoHenkoIndex.getShiharaiHohoHenko().getShiharaiHohoHenkoSashitomeList().get(0).get差止通知書発行年月日().toString()));
-            row.getTxtKojoTsuchi().setValue(new RDate(shiharaiHohoHenkoIndex.getShiharaiHohoHenko().getShiharaiHohoHenkoSashitomeList().get(0).get控除通知書発行年月日().toString()));
-            row.getTxtGengakuTsuchi().setValue(new RDate(shiharaiHohoHenkoIndex.getShiharaiHohoHenko().get減額通知書発行年月日().toString()));
-            row.setTxtKubunIndex(new RString(String.valueOf(shiharaiHohoHenkoIndex.getIndex())));
+        for (int i = 0; i < shiharaiHohoHenkonoJouhouList.size(); i++) {
+            row.setTxtTorokuJokyo(shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get登録区分());
+            row.setTxtShuryoJokyo(shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get終了区分());
+            row.getTxtTekiyoKaishi().setValue(new RDate(shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get適用開始年月日().toString()));
+            row.getTxtTekiyoShuryo().setValue(new RDate(shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get適用終了年月日().toString()));
+            row.getTxtYokokuTsuchi().setValue(new RDate(shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get予告通知書発行年月日().toString()));
+            row.getTxtHenkoTshuchi().setValue(new RDate(shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get償還払化通知書発行年月日().toString()));
+            row.getTxtSashitomeTsuchi().setValue(new RDate(shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().getShiharaiHohoHenkoSashitomeList().get(0).get差止通知書発行年月日().toString()));
+            row.getTxtKojoTsuchi().setValue(new RDate(shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().getShiharaiHohoHenkoSashitomeList().get(0).get控除通知書発行年月日().toString()));
+            row.getTxtGengakuTsuchi().setValue(new RDate(shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get減額通知書発行年月日().toString()));
+            row.setId(i);
             rowList.add(row);
         }
         return rowList;

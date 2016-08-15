@@ -1,10 +1,10 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput;
+
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
@@ -91,6 +91,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
      * @param txtIryoKikanCode txtIryoKikanCode
      */
     @JsonProperty("txtIryoKikanCode")
+    @Override
     public void setTxtIryoKikanCode(TextBoxCode txtIryoKikanCode) {
         this.txtIryoKikanCode = txtIryoKikanCode;
     }
@@ -127,6 +128,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
      * @param txtIryoKikanName txtIryoKikanName
      */
     @JsonProperty("txtIryoKikanName")
+    @Override
     public void setTxtIryoKikanName(TextBox txtIryoKikanName) {
         this.txtIryoKikanName = txtIryoKikanName;
     }
@@ -181,6 +183,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
      * @param txtShujiiCode txtShujiiCode
      */
     @JsonProperty("txtShujiiCode")
+    @Override
     public void setTxtShujiiCode(TextBoxCode txtShujiiCode) {
         this.txtShujiiCode = txtShujiiCode;
     }
@@ -217,6 +220,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
      * @param txtShujiiName txtShujiiName
      */
     @JsonProperty("txtShujiiName")
+    @Override
     public void setTxtShujiiName(TextBox txtShujiiName) {
         this.txtShujiiName = txtShujiiName;
     }
@@ -407,6 +411,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
         return (ShoriType) _CommonChildDivModeUtil.getMode(this.modes, ShoriType.class);
     }
 
+    @Override
     public void setMode_ShoriType(ShoriType value) {
         _CommonChildDivModeUtil.setMode(this.modes, ShoriType.class, value);
     }
@@ -454,6 +459,11 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
     @Override
     public RString getRenrakuJiko() {
         return this.hdnShujiiRenrakuJiko;
+    }
+
+    @Override
+    public void setRenrakuJiko(RString renrakuJiko) {
+        this.hdnShujiiRenrakuJiko = renrakuJiko;
     }
 
     @Override

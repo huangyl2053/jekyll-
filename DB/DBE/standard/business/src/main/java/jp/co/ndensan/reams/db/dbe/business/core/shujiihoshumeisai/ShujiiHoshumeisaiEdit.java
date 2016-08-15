@@ -59,21 +59,16 @@ public class ShujiiHoshumeisaiEdit {
         if (entity.getHihokenshaName() != null) {
             shumeisaiEntity.set被保険者氏名(entity.getHihokenshaName().value());
         }
-        RString 報酬基準日 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書報酬基準日, RDate.getNowDate(),
-                SubGyomuCode.DBE認定支援);
-        if (new RString("1").equals(報酬基準日)) {
-            shumeisaiEntity.set意見書提出日(dateFormat9(entity.getIkenshoJuryoYMD()));
-        }
-        if (new RString("2").equals(報酬基準日)) {
-            shumeisaiEntity.set意見書提出日(dateFormat9(entity.getIkenshoReadYMD()));
-        }
+        shumeisaiEntity = getHoshumeisaiEntity(entity, shumeisaiEntity);
         if (entity.getIkenshoSakuseiKaisuKubun() != null && entity.getZaitakuShisetsuKubun() != null
                 && IkenshoSakuseiKaisuKubun.初回.getコード().equals(entity.getIkenshoSakuseiKaisuKubun().value())
                 && ZaitakuShisetsuKubun.在宅.getコード().equals(entity.getZaitakuShisetsuKubun().value())) {
             shumeisaiEntity.set新規在宅(MARU);
             shumeisaiEntity.set新規施設(RString.EMPTY);
             合計件数新規在宅 = 合計件数新規在宅 + 1;
-        } else {
+        } else if (entity.getIkenshoSakuseiKaisuKubun() != null && entity.getZaitakuShisetsuKubun() != null
+                && IkenshoSakuseiKaisuKubun.初回.getコード().equals(entity.getIkenshoSakuseiKaisuKubun().value())
+                && ZaitakuShisetsuKubun.施設.getコード().equals(entity.getZaitakuShisetsuKubun().value())) {
             shumeisaiEntity.set新規在宅(RString.EMPTY);
             shumeisaiEntity.set新規在宅(MARU);
             合計件数新規施設 = 合計件数新規施設 + 1;
@@ -84,7 +79,9 @@ public class ShujiiHoshumeisaiEdit {
             shumeisaiEntity.set継続在宅(MARU);
             shumeisaiEntity.set継続施設(RString.EMPTY);
             合計件数継続在宅 = 合計件数継続在宅 + 1;
-        } else {
+        } else if (entity.getIkenshoSakuseiKaisuKubun() != null && entity.getZaitakuShisetsuKubun() != null
+                && IkenshoSakuseiKaisuKubun._2回目以降.getコード().equals(entity.getIkenshoSakuseiKaisuKubun().value())
+                && ZaitakuShisetsuKubun.施設.getコード().equals(entity.getZaitakuShisetsuKubun().value())) {
             shumeisaiEntity.set継続在宅(RString.EMPTY);
             shumeisaiEntity.set継続在宅(MARU);
             合計件数継続施設 = 合計件数継続施設 + 1;
@@ -95,6 +92,18 @@ public class ShujiiHoshumeisaiEdit {
         shumeisaiEntity.set継続在宅件数(intToRString(合計件数継続在宅));
         shumeisaiEntity.set継続施設件数(intToRString(合計件数継続施設));
         shumeisaiEntity.set合計金額(shumeisaiEntity.get意見書作成料());
+        return shumeisaiEntity;
+    }
+
+    private ShujiiHoshumeisaiEntity getHoshumeisaiEntity(HoshuShiharaiJunbiRelateEntity entity, ShujiiHoshumeisaiEntity shumeisaiEntity) {
+        RString 報酬基準日 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書報酬基準日, RDate.getNowDate(),
+                SubGyomuCode.DBE認定支援);
+        if (new RString("1").equals(報酬基準日)) {
+            shumeisaiEntity.set意見書提出日(dateFormat9(entity.getIkenshoJuryoYMD()));
+        }
+        if (new RString("2").equals(報酬基準日)) {
+            shumeisaiEntity.set意見書提出日(dateFormat9(entity.getIkenshoReadYMD()));
+        }
         return shumeisaiEntity;
     }
 

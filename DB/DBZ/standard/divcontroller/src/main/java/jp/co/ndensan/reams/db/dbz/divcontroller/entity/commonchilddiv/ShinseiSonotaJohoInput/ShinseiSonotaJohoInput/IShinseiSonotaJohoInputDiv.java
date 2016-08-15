@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSo
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /*
  * このコードはツールによって生成されました。
@@ -153,4 +154,11 @@ public interface IShinseiSonotaJohoInputDiv extends ICommonChildDivBasePropertie
      * @param day FlexibleDate
      */
     public void set発行日2(FlexibleDate day);
+
+    /**
+     * 喪失日の取得。
+     *
+     * @return TextBoxFlexibleDate
+     */
+    public TextBoxFlexibleDate getTxtSoshitsuDay();
 }

@@ -82,13 +82,15 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
         source.printTimeStamp = get印刷日時();
         source.label48 = new RString("介護保険");
         source.label18 = new RString("要介護認定実施状況表");
-        source.shichosonName = 実施状況Entityリスト.get(index).get市町村名();
-        source.hokenshaNo = 実施状況Entityリスト.get(index).get市町村番号();
-        source.hokenshaName = 実施状況Entityリスト.get(index).get市町村名();
-        source.nendo = 実施状況Entityリスト.get(index).get対象年度().toDateString();
+        if (null != 実施状況Entityリスト && !実施状況Entityリスト.isEmpty()) {
+            source.shichosonName = 実施状況Entityリスト.get(index).get市町村名();
+            source.hokenshaNo = 実施状況Entityリスト.get(index).get市町村番号();
+            source.hokenshaName = 実施状況Entityリスト.get(index).get市町村名();
+            source.nendo = 実施状況Entityリスト.get(index).get対象年度().toDateString();
+        }
 
         YokaigoNinteiJisshiJokyohyoEntity list1 = 実施状況Entityリストlist1.get(index);
-        if (null != list1) {
+        if (null != 実施状況Entityリストlist1 && !実施状況Entityリストlist1.isEmpty()) {
             source.list1_1 = list1.get集計項目();
             source.list1_2 = list1.get四月の合計();
             source.list1_3 = list1.get五月の合計();
@@ -105,7 +107,7 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
             source.list1_14 = list1.get年度合計();
         }
         YokaigoNinteiJisshiJokyohyoEntity list2 = 実施状況Entityリストlist2.get(index);
-        if (null != list2) {
+        if (null != 実施状況Entityリストlist2 && !実施状況Entityリストlist2.isEmpty()) {
             source.list2_1 = list2.get集計項目();
             source.list2_2 = list2.get四月の合計();
             source.list2_3 = list2.get五月の合計();
@@ -122,7 +124,7 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
             source.list2_14 = list2.get年度合計();
         }
         YokaigoNinteiJisshiJokyohyoEntity list3 = 実施状況Entityリストlist3.get(index);
-        if (null != list3) {
+        if (null != 実施状況Entityリストlist3 && !実施状況Entityリストlist3.isEmpty()) {
             source.list3_1 = list3.get集計項目();
             source.list3_2 = list3.get四月の合計();
             source.list3_3 = list3.get五月の合計();
@@ -139,7 +141,7 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
             source.list3_14 = list3.get年度合計();
         }
         YokaigoNinteiJisshiJokyohyoEntity list4 = 実施状況Entityリストlist4.get(index);
-        if (null != list4) {
+        if (null != 実施状況Entityリストlist4 && !実施状況Entityリストlist4.isEmpty()) {
             source.list4_1 = list4.get集計項目();
             source.list4_2 = list4.get四月の合計();
             source.list4_3 = list4.get五月の合計();

@@ -13,23 +13,23 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.teikyohyobeppyo.TeikyohyoBepp
 /**
  * 画面設計_DBC0150011_サービス提供票別表 Mapper
  *
- * @reamsid_L DBC-5110-010 xupeng
+ * @reamsid_L DBC-5100-010 xuxin
  */
 public interface ITeikyohyoBeppyoMapper {
 
     /**
      * 被保険者情報を取得する。
      *
-     * @param param Map<String, Object>
+     * @param map Map<String, Object>
      * @return TeikyohyoBeppyoEntity
      */
-    TeikyohyoBeppyoEntity get被保険者情報(Map<String, Object> param);
+    TeikyohyoBeppyoEntity get被保険者情報(Map<String, Object> map);
 
     /**
      * 短期入所利用日数。
      *
-     * @param param Map<String, Object>
-     * @return TeikyohyoBeppyoEntity
+     * @param map Map<String, Object>
+     * @return List<TankiRiyoNissuEntity>
      */
-    List<TankiRiyoNissuEntity> get短期入所利用日数(Map<String, Object> param);
+    List<TankiRiyoNissuEntity> get短期入所利用日数(Map<String, Object> map);
 }

@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class TokuChoSoufuJohoSakuseiEntity {
 
     private UeT0511NenkinTokuchoKaifuJohoEntity uet0511entity;

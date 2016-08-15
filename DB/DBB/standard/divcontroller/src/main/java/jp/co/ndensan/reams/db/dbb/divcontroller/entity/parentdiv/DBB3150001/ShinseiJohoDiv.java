@@ -4,17 +4,22 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3150001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 
 /**
- * ShinseiJoho のクラスファイル 
- * 
- * @author 自動生成
+ * ShinseiJoho のクラスファイル
+ *
+ * @reamsid_L DBB-1680-010 gongliang
  */
 public class ShinseiJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,13 +27,13 @@ public class ShinseiJohoDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtChoteiNendo")
-    private TextBox txtChoteiNendo;
+    private TextBoxDate txtChoteiNendo;
     @JsonProperty("txtFukaNendo")
-    private TextBox txtFukaNendo;
+    private TextBoxDate txtFukaNendo;
     @JsonProperty("txtShinseiYMD")
     private TextBoxDate txtShinseiYMD;
     @JsonProperty("btnYuyoShurui")
-    private Button btnYuyoShurui;
+    private ButtonDialog btnYuyoShurui;
     @JsonProperty("txtYuyoShurui")
     private TextBox txtYuyoShurui;
     @JsonProperty("txtShinseiRiyu")
@@ -45,7 +50,7 @@ public class ShinseiJohoDiv extends Panel {
      * @return txtChoteiNendo
      */
     @JsonProperty("txtChoteiNendo")
-    public TextBox getTxtChoteiNendo() {
+    public TextBoxDate getTxtChoteiNendo() {
         return txtChoteiNendo;
     }
 
@@ -54,7 +59,7 @@ public class ShinseiJohoDiv extends Panel {
      * @param txtChoteiNendo txtChoteiNendo
      */
     @JsonProperty("txtChoteiNendo")
-    public void setTxtChoteiNendo(TextBox txtChoteiNendo) {
+    public void setTxtChoteiNendo(TextBoxDate txtChoteiNendo) {
         this.txtChoteiNendo = txtChoteiNendo;
     }
 
@@ -63,7 +68,7 @@ public class ShinseiJohoDiv extends Panel {
      * @return txtFukaNendo
      */
     @JsonProperty("txtFukaNendo")
-    public TextBox getTxtFukaNendo() {
+    public TextBoxDate getTxtFukaNendo() {
         return txtFukaNendo;
     }
 
@@ -72,7 +77,7 @@ public class ShinseiJohoDiv extends Panel {
      * @param txtFukaNendo txtFukaNendo
      */
     @JsonProperty("txtFukaNendo")
-    public void setTxtFukaNendo(TextBox txtFukaNendo) {
+    public void setTxtFukaNendo(TextBoxDate txtFukaNendo) {
         this.txtFukaNendo = txtFukaNendo;
     }
 
@@ -99,7 +104,7 @@ public class ShinseiJohoDiv extends Panel {
      * @return btnYuyoShurui
      */
     @JsonProperty("btnYuyoShurui")
-    public Button getBtnYuyoShurui() {
+    public ButtonDialog getBtnYuyoShurui() {
         return btnYuyoShurui;
     }
 
@@ -108,7 +113,7 @@ public class ShinseiJohoDiv extends Panel {
      * @param btnYuyoShurui btnYuyoShurui
      */
     @JsonProperty("btnYuyoShurui")
-    public void setBtnYuyoShurui(Button btnYuyoShurui) {
+    public void setBtnYuyoShurui(ButtonDialog btnYuyoShurui) {
         this.btnYuyoShurui = btnYuyoShurui;
     }
 

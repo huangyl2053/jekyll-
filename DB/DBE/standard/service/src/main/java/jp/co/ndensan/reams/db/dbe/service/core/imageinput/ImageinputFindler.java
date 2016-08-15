@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMap
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput.ImageinputRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.imageinput.IImageinputMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -50,22 +49,6 @@ public class ImageinputFindler {
      */
     public static ImageinputFindler createInstance() {
         return InstanceProvider.create(ImageinputFindler.class);
-    }
-
-    /**
-     * 当該被保険者の申請データが存在するかどうかチェックを実行します。
-     *
-     * @param paramter 検索用のパラメータ
-     * @return 当該被保険者の申請データが存在するかどうかチェック結果
-     */
-    public boolean get当該被保険者の申請データが存在するかどうかチェック(ImageinputMapperParamter paramter) {
-        boolean flag = true;
-        IImageinputMapper mapper = mapperProvider.create(IImageinputMapper.class);
-        List<RString> dataList = mapper.get申請データ(paramter);
-        if (dataList.isEmpty()) {
-            flag = false;
-        }
-        return flag;
     }
 
     /**

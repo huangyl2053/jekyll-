@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServ
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiService.jigyoshaNo;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiService.serviceShuruiCode;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiService.yukoKaishiYMD;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiService.yukoShuryoYMD;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -43,6 +44,8 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
     private static final RString 有効の開始日 = new RString("有効開始日");
     private static final RString 有効の日 = new RString("有効日");
     private static final RString 介護事業者指定サービス = new RString("介護事業者指定サービス");
+    private static final RString DATE_43 = new RString("43");
+    private static final RString DATE_46 = new RString("46");
 
     /**
      * 主キーで介護事業者指定サービスを取得します。
@@ -190,5 +193,34 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
     public int delete(DbT7063KaigoJigyoshaShiteiServiceEntity entity) throws NullPointerException {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(介護事業者指定サービス.toString()));
         return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 事業者名称の取得。
+     *
+     * @param 適用開始日 FlexibleDate
+     * @param 事業者番号 JigyoshaNo
+     * @return DbT7063KaigoJigyoshaShiteiServiceEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    public DbT7063KaigoJigyoshaShiteiServiceEntity select_事業者名称(FlexibleDate 適用開始日, JigyoshaNo 事業者番号
+    ) throws NullPointerException {
+        requireNonNull(適用開始日, UrSystemErrorMessages.値がnull.getReplacedMessage(適用開始日.toString()));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(事業者番号.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        // TODO QA#No.1202確認中
+        return accessor.select().
+                table(DbT7063KaigoJigyoshaShiteiService.class).
+                where(and(
+                                eq(jigyoshaNo, 事業者番号),
+                                or(and(leq(yukoKaishiYMD, 適用開始日),
+                                                leq(適用開始日, yukoShuryoYMD)),
+                                        and(leq(yukoKaishiYMD, 適用開始日),
+                                                isNULL(yukoShuryoYMD))),
+                                or(eq(serviceShuruiCode, DATE_43),
+                                        eq(serviceShuruiCode, DATE_46))
+                        )
+                ).toObject(DbT7063KaigoJigyoshaShiteiServiceEntity.class);
+
     }
 }

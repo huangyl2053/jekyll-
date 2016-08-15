@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.hoshushiharaijunbi;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshohoshuseikyu.IkenshoHoshuSeikyuEdit;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshohoshuseikyu.IkenshoHoshuSeikyuReport;
@@ -22,7 +24,7 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJok
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -41,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -48,12 +51,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-1980-020 suguangjun
  */
-public class IkenshoHoshuSeikyuProcess extends BatchProcessBase<HoshuShiharaiJunbiRelateEntity> {
+public class IkenshoHoshuSeikyuProcess extends BatchKeyBreakBase<HoshuShiharaiJunbiRelateEntity> {
 
     private static final ReportId REPORT_ID = ReportIdDBE.DBE621004.getReportId();
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hoshushiharaijunbi."
             + "IHoshuShiharaiJunbiMapper.get主治医意見書作成報酬請求書");
+    private static final List<RString> PAGE_BREAK_KEYS = Collections
+            .unmodifiableList(Arrays.asList(new RString(IkenshoHoshuSeikyuReportSource.ReportSourceFields.shujiiIryokikanCode.name())));
     private HoshuShiharaiJunbiProcessParameter processParameter;
     private static final RString MIDDLELINE = new RString("なし");
     private static final RString なし = new RString("なし");
@@ -64,6 +69,8 @@ public class IkenshoHoshuSeikyuProcess extends BatchProcessBase<HoshuShiharaiJun
     private RString 導入団体コード;
     private RString 市町村名;
     private RString 消費税率;
+    private RString shujiiIryokikanCode = RString.EMPTY;
+    private IkenshoHoshuSeikyuEntity seikyuEntity = new IkenshoHoshuSeikyuEntity();
 
     @Override
     protected void beforeExecute() {
@@ -81,24 +88,38 @@ public class IkenshoHoshuSeikyuProcess extends BatchProcessBase<HoshuShiharaiJun
 
     @Override
     protected void createWriter() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
+        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
+                .addBreak(new BreakerCatalog<IkenshoHoshuSeikyuReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                .create();
         reportSourceWriter = new ReportSourceWriter<>(batchWrite);
     }
 
     @Override
     protected void afterExecute() {
+        IkenshoHoshuSeikyuReport report = new IkenshoHoshuSeikyuReport(seikyuEntity);
+        report.writeBy(reportSourceWriter);
         バッチ出力条件リストの出力();
     }
 
     @Override
-    protected void process(HoshuShiharaiJunbiRelateEntity entity) {
+    protected void keyBreakProcess(HoshuShiharaiJunbiRelateEntity current) {
+    }
+
+    @Override
+    protected void usualProcess(HoshuShiharaiJunbiRelateEntity entity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
         IkenshoHoshuSeikyuEdit edit = new IkenshoHoshuSeikyuEdit();
-        IkenshoHoshuSeikyuEntity seikyuEntity = edit.getIkenshoHoshuSeikyuEntity(entity, 消費税率, ChosaHoshuShiharaiProcess.get通知文());
+        if (!RString.isNullOrEmpty(shujiiIryokikanCode) && !shujiiIryokikanCode.equals(entity.getShujiiIryoKikanCode())) {
+            IkenshoHoshuSeikyuEntity seikyuEntity_bak = seikyuEntity;
+            seikyuEntity_bak = edit.getIkenshoHoshuSeikyuEntity(getBefore(), 消費税率, ChosaHoshuShiharaiProcess.get通知文(),
+                    seikyuEntity_bak, shujiiIryokikanCode, false);
+            IkenshoHoshuSeikyuReport report = new IkenshoHoshuSeikyuReport(seikyuEntity_bak);
+            report.writeBy(reportSourceWriter);
+        }
+        seikyuEntity = edit.getIkenshoHoshuSeikyuEntity(entity, 消費税率, ChosaHoshuShiharaiProcess.get通知文(), seikyuEntity, shujiiIryokikanCode, true);
         seikyuEntity.set対象期間(get対象期間());
         seikyuEntity.set発行年月日(dateFormat9(FlexibleDate.getNowDate()));
-        IkenshoHoshuSeikyuReport report = new IkenshoHoshuSeikyuReport(seikyuEntity);
-        report.writeBy(reportSourceWriter);
+        shujiiIryokikanCode = entity.getShujiiIryoKikanCode();
     }
 
     private PersonalData toPersonalData(HoshuShiharaiJunbiRelateEntity entity) {

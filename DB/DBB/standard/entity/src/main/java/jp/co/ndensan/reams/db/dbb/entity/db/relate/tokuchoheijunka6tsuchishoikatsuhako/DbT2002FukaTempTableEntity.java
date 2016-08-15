@@ -7,13 +7,16 @@ package jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoika
 
 import java.util.UUID;
 import jp.co.ndensan.reams.ca.cax.definition.valueobject.code.ShiharaiHohoCodeValue;
+import jp.co.ndensan.reams.ca.cax.definition.valueobject.code.ZennoKubunCodeValue;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaTorokuKubunCodeValue;
+import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
+import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.YokinShubetsuPatternCodeValue;
 import jp.co.ndensan.reams.ue.uex.definition.core.RenkeiShubetsu;
 import jp.co.ndensan.reams.ue.uex.definition.core.SeibetsuCodeNenkinTokucho;
 import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuSeidoCode;
 import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCode;
-import jp.co.ndensan.reams.ur.urz.definition.core.code.ZennoKubunCodeValue;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.TorokuNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -47,7 +50,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -1321,202 +1323,248 @@ public class DbT2002FukaTempTableEntity extends DbTableEntityBase<DbT2002FukaTem
 
     // 口座の全項目
     @TempTableColumnOrder(625)
-    private Decimal koza_kozaId;
+    private RString uaT0310Koza_insertDantaiCd;
     @TempTableColumnOrder(626)
-    private ShikibetsuCode koza_shikibetsuCode;
+    private boolean uaT0310Koza_isDeleted;
     @TempTableColumnOrder(627)
-    private GyomuCode koza_gyomuCode;
+    private long uaT0310Koza_kozaId;
     @TempTableColumnOrder(628)
-    private SubGyomuCode koza_subGyomuCode;
+    private ShikibetsuCode uaT0310Koza_shikibetsuCode;
     @TempTableColumnOrder(629)
-    private KamokuCode koza_kamokuCode;
+    private RString uaT0310Koza_gyomubetsuPrimaryKey;
     @TempTableColumnOrder(630)
-    private RString koza_gyomuKoyuKey;
+    private RString uaT0310Koza_gyomuKoyuKey;
     @TempTableColumnOrder(631)
-    private Code koza_yotoKubun;
+    private KozaYotoKubunCodeValue uaT0310Koza_yotoKubun;
     @TempTableColumnOrder(632)
-    private RString koza_yotoKubunMeisho;
+    private int uaT0310Koza_torokuRenban;
     @TempTableColumnOrder(633)
-    private KinyuKikanCode koza_kinyuKikanCode;
+    private FlexibleDate uaT0310Koza_kaishiYMD;
     @TempTableColumnOrder(634)
-    private RString koza_kinyuKikanMeisho;
+    private FlexibleDate uaT0310Koza_shuryoYMD;
     @TempTableColumnOrder(635)
-    private KinyuKikanShitenCode koza_kinyuKikanShitenCode;
+    private KinyuKikanCode uaT0310Koza_kinyuKikanCode;
     @TempTableColumnOrder(636)
-    private RString koza_kinyuKikanShitenMeisho;
+    private KinyuKikanShitenCode uaT0310Koza_kinyuKikanShitenCode;
     @TempTableColumnOrder(637)
-    private RString koza_yokinShubetsu;
+    private RString uaT0310Koza_yokinShubetsu;
     @TempTableColumnOrder(638)
-    private RString koza_yokinShubetsuMeisho;
+    private RString uaT0310Koza_kozaNo;
     @TempTableColumnOrder(639)
-    private RString koza_kozaNo;
+    private RString uaT0310Koza_tsuchoKigo;
     @TempTableColumnOrder(640)
-    private RString koza_tsuchoKigo;
+    private RString uaT0310Koza_tsuchoNo;
     @TempTableColumnOrder(641)
-    private RString koza_tsuchoNo;
+    private ShikibetsuCode uaT0310Koza_kozaMeigininShikibetsuCode;
     @TempTableColumnOrder(642)
-    private ShikibetsuCode koza_kozaMeigininShikibetsuCode;
+    private AtenaKanaMeisho uaT0310Koza_kozaMeiginin;
     @TempTableColumnOrder(643)
-    private AtenaKanaMeisho koza_kozaMeiginin;
+    private AtenaMeisho uaT0310Koza_kozaMeigininKanji;
     @TempTableColumnOrder(644)
-    private AtenaMeisho koza_kozaMeigininKanji;
+    private AtenaKanaMeisho uaT0310Koza_kensakuyoMeiginin;
     @TempTableColumnOrder(645)
-    private RDate koza_kaishiYMD;
+    private RString uaT0310Koza_kozaHyojiKubun;
     @TempTableColumnOrder(646)
-    private RDate koza_shuryoYMD;
+    private boolean uaT0310Koza_nayoseKubun;
     @TempTableColumnOrder(647)
-    private AtenaKanaMeisho koza_kensakuyoMeiginin;
+    private boolean uaT0310Koza_zumitsuHakkoYohi;
     @TempTableColumnOrder(648)
-    private RString koza_kozaHyojiKubun;
+    private boolean uaT0310Koza_kozaFurikaeKaishiTsuchiHakkozumi;
     @TempTableColumnOrder(649)
-    private boolean koza_nayoseKubun;
+    private RString uaT0310Koza_kozaTorokuNo;
     @TempTableColumnOrder(650)
-    private boolean koza_zumitsuHakkoYohi;
+    private KozaTorokuKubunCodeValue uaT0310Koza_kozaTorokuKubunCode;
     @TempTableColumnOrder(651)
-    private boolean koza_kozaFurikaeKaishiTsuchiHakkozumi;
+    private FlexibleDate uaT0310Koza_kozaKaishiUketsukeYMD;
     @TempTableColumnOrder(652)
-    private RString koza_kozaTorokuNo;
+    private FlexibleDate uaT0310Koza_kozaShuryoUketsukeYMD;
     @TempTableColumnOrder(653)
-    private Code koza_kozaTorokuKubunCode;
+    private FlexibleDate uaT0310Koza_kozaTorokuYMD;
     @TempTableColumnOrder(654)
-    private RDate koza_kozaKaishiUketsukeYMD;
+    private RString uaT0310Koza_temban;
+
     @TempTableColumnOrder(655)
-    private RDate koza_kozaShuryoUketsukeYMD;
+    private RString uaT0302KinyuKikan_insertDantaiCd;
     @TempTableColumnOrder(656)
-    private RDate koza_kozaTorokuYMD;
+    private boolean uaT0302KinyuKikan_isDeleted;
     @TempTableColumnOrder(657)
-    private RString koza_temban;
+    private KinyuKikanCode uaT0302KinyuKikan_kinyuKikanCode;
+    @TempTableColumnOrder(658)
+    private FlexibleDate uaT0302KinyuKikan_kaishiYMD;
+    @TempTableColumnOrder(659)
+    private FlexibleDate uaT0302KinyuKikan_shuryoYMD;
+    @TempTableColumnOrder(660)
+    private RString uaT0302KinyuKikan_name;
+    @TempTableColumnOrder(661)
+    private RString uaT0302KinyuKikan_kanaName;
+    @TempTableColumnOrder(662)
+    private YokinShubetsuPatternCodeValue uaT0302KinyuKikan_yokinShubetsuPatternCode;
+    private int uaT0302KinyuKikan_hyojijun;
+
+    @TempTableColumnOrder(663)
+    private RString uaT0303KinyuKikanShiten_insertDantaiCd;
+    @TempTableColumnOrder(664)
+    private boolean uaT0303KinyuKikanShiten_isDeleted;
+    @TempTableColumnOrder(665)
+    private KinyuKikanCode uaT0303KinyuKikanShiten_kinyuKikanCode;
+    @TempTableColumnOrder(666)
+    private KinyuKikanShitenCode uaT0303KinyuKikanShiten_kinyuKikanShitenCode;
+    @TempTableColumnOrder(667)
+    private FlexibleDate uaT0303KinyuKikanShiten_kaishiYMD;
+    @TempTableColumnOrder(668)
+    private FlexibleDate uaT0303KinyuKikanShiten_shuryoYMD;
+    @TempTableColumnOrder(669)
+    private RString uaT0303KinyuKikanShiten_name;
+    @TempTableColumnOrder(670)
+    private RString uaT0303KinyuKikanShiten_kanaName;
+    @TempTableColumnOrder(671)
+    private int uaT0303KinyuKikanShiten_hyojijun;
+
+    @TempTableColumnOrder(672)
+    private RString uaT0301YokinShubetsuPattern_insertDantaiCd;
+    @TempTableColumnOrder(673)
+    private boolean uaT0301YokinShubetsuPattern_isDeleted;
+    @TempTableColumnOrder(674)
+    private YokinShubetsuPatternCodeValue uaT0301YokinShubetsuPattern_yokinShubetsuPatternCode;
+    @TempTableColumnOrder(675)
+    private RString uaT0301YokinShubetsuPattern_yokinShubetsuCode;
+    @TempTableColumnOrder(676)
+    private RString uaT0301YokinShubetsuPattern_yokinShubetsuMeisho;
+    @TempTableColumnOrder(677)
+    private RString uaT0301YokinShubetsuPattern_yokinShubetsuRyakusho;
+    @TempTableColumnOrder(678)
+    private int shunoKensu;
 
     // 「更正後」対象者（追加含む）情報
-    @TempTableColumnOrder(658)
-    private RString nenkinTokuchoKaifuJoho_insertDantaiCd;
-    @TempTableColumnOrder(659)
-    private RDateTime nenkinTokuchoKaifuJoho_insertTimestamp;
-    @TempTableColumnOrder(660)
-    private RString nenkinTokuchoKaifuJoho_insertReamsLoginId;
-    @TempTableColumnOrder(661)
-    private UUID nenkinTokuchoKaifuJoho_insertContextId;
-    @TempTableColumnOrder(662)
-    private boolean nenkinTokuchoKaifuJoho_isDeleted;
-    @TempTableColumnOrder(663)
-    private int nenkinTokuchoKaifuJoho_updateCount;
-    @TempTableColumnOrder(664)
-    private RDateTime nenkinTokuchoKaifuJoho_lastUpdateTimestamp;
-    @TempTableColumnOrder(665)
-    private RString nenkinTokuchoKaifuJoho_lastUpdateReamsLoginId;
-    @TempTableColumnOrder(666)
-    private GyomuCode nenkinTokuchoKaifuJoho_gyomuCode;
-    @TempTableColumnOrder(667)
-    private FlexibleYear nenkinTokuchoKaifuJoho_shoriNendo;
-    @TempTableColumnOrder(668)
-    private TsuchiNaiyoCode nenkinTokuchoKaifuJoho_tsuchiNaiyoCode;
-    @TempTableColumnOrder(669)
-    private FlexibleYearMonth nenkinTokuchoKaifuJoho_shoriTaishoYM;
-    @TempTableColumnOrder(670)
-    private RString nenkinTokuchoKaifuJoho_kisoNenkinNo;
-    @TempTableColumnOrder(671)
-    private RString nenkinTokuchoKaifuJoho_nenkinCode;
-    @TempTableColumnOrder(672)
-    private RString nenkinTokuchoKaifuJoho_koseiCityCode;
-    @TempTableColumnOrder(673)
-    private int nenkinTokuchoKaifuJoho_renban;
-    @TempTableColumnOrder(674)
-    private RDateTime nenkinTokuchoKaifuJoho_shoriTimestamp;
-    @TempTableColumnOrder(675)
-    private RenkeiShubetsu nenkinTokuchoKaifuJoho_renkeiShubetsu;
-    @TempTableColumnOrder(676)
-    private RString nenkinTokuchoKaifuJoho_hosokuTsuki;
-    @TempTableColumnOrder(677)
-    private RString nenkinTokuchoKaifuJoho_tenbikiTsuki;
-    @TempTableColumnOrder(678)
-    private ShikibetsuCode nenkinTokuchoKaifuJoho_shikibetsuCode;
-    @TempTableColumnOrder(679)
-    private RString nenkinTokuchoKaifuJoho_hihokenshaNo;
     @TempTableColumnOrder(680)
-    private SetaiCode nenkinTokuchoKaifuJoho_kokuhoSetaiCode;
+    private RString nenkinTokuchoKaifuJoho_insertDantaiCd;
     @TempTableColumnOrder(681)
-    private RString nenkinTokuchoKaifuJoho_dtCityCode;
+    private RDateTime nenkinTokuchoKaifuJoho_insertTimestamp;
     @TempTableColumnOrder(682)
-    private Code nenkinTokuchoKaifuJoho_dtTokubetsuChoshuGimushaCode;
+    private RString nenkinTokuchoKaifuJoho_insertReamsLoginId;
     @TempTableColumnOrder(683)
-    private TsuchiNaiyoCode nenkinTokuchoKaifuJoho_dtTsuchiNaiyoCode;
+    private UUID nenkinTokuchoKaifuJoho_insertContextId;
     @TempTableColumnOrder(684)
-    private RString nenkinTokuchoKaifuJoho_dtBaitaiCode;
+    private boolean nenkinTokuchoKaifuJoho_isDeleted;
     @TempTableColumnOrder(685)
-    private TokubetsuChoshuSeidoCode nenkinTokuchoKaifuJoho_dtTokubetsuChoshuSeidoCode;
+    private int nenkinTokuchoKaifuJoho_updateCount;
     @TempTableColumnOrder(686)
-    private RString nenkinTokuchoKaifuJoho_dtSakuseiYMD;
+    private RDateTime nenkinTokuchoKaifuJoho_lastUpdateTimestamp;
     @TempTableColumnOrder(687)
-    private RString nenkinTokuchoKaifuJoho_dtKisoNenkinNo;
+    private RString nenkinTokuchoKaifuJoho_lastUpdateReamsLoginId;
     @TempTableColumnOrder(688)
-    private RString nenkinTokuchoKaifuJoho_dtNenkinCode;
+    private GyomuCode nenkinTokuchoKaifuJoho_gyomuCode;
     @TempTableColumnOrder(689)
-    private RString nenkinTokuchoKaifuJoho_dtYobi1;
+    private FlexibleYear nenkinTokuchoKaifuJoho_shoriNendo;
     @TempTableColumnOrder(690)
-    private RString nenkinTokuchoKaifuJoho_dtBirthDay;
+    private TsuchiNaiyoCode nenkinTokuchoKaifuJoho_tsuchiNaiyoCode;
     @TempTableColumnOrder(691)
-    private SeibetsuCodeNenkinTokucho nenkinTokuchoKaifuJoho_dtSeibetsu;
+    private FlexibleYearMonth nenkinTokuchoKaifuJoho_shoriTaishoYM;
     @TempTableColumnOrder(692)
-    private RString nenkinTokuchoKaifuJoho_dtKanaShimei;
+    private RString nenkinTokuchoKaifuJoho_kisoNenkinNo;
     @TempTableColumnOrder(693)
-    private RString nenkinTokuchoKaifuJoho_dtShiftCode1;
+    private RString nenkinTokuchoKaifuJoho_nenkinCode;
     @TempTableColumnOrder(694)
-    private RString nenkinTokuchoKaifuJoho_dtKanjiShimei;
+    private RString nenkinTokuchoKaifuJoho_koseiCityCode;
     @TempTableColumnOrder(695)
-    private RString nenkinTokuchoKaifuJoho_dtShiftCode2;
+    private int nenkinTokuchoKaifuJoho_renban;
     @TempTableColumnOrder(696)
-    private RString nenkinTokuchoKaifuJoho_dtYubinNo;
+    private RDateTime nenkinTokuchoKaifuJoho_shoriTimestamp;
     @TempTableColumnOrder(697)
-    private RString nenkinTokuchoKaifuJoho_dtKanaJusho;
+    private RenkeiShubetsu nenkinTokuchoKaifuJoho_renkeiShubetsu;
     @TempTableColumnOrder(698)
-    private RString nenkinTokuchoKaifuJoho_dtShiftCode3;
+    private RString nenkinTokuchoKaifuJoho_hosokuTsuki;
     @TempTableColumnOrder(699)
-    private RString nenkinTokuchoKaifuJoho_dtKanjiJusho;
+    private RString nenkinTokuchoKaifuJoho_tenbikiTsuki;
     @TempTableColumnOrder(700)
-    private RString nenkinTokuchoKaifuJoho_dtShiftCode4;
+    private ShikibetsuCode nenkinTokuchoKaifuJoho_shikibetsuCode;
     @TempTableColumnOrder(701)
-    private RString nenkinTokuchoKaifuJoho_dtKakushuKubun;
+    private RString nenkinTokuchoKaifuJoho_hihokenshaNo;
     @TempTableColumnOrder(702)
-    private RString nenkinTokuchoKaifuJoho_dtShoriKekka;
+    private SetaiCode nenkinTokuchoKaifuJoho_kokuhoSetaiCode;
     @TempTableColumnOrder(703)
-    private RString nenkinTokuchoKaifuJoho_dtKokiIkanCode;
+    private RString nenkinTokuchoKaifuJoho_dtCityCode;
     @TempTableColumnOrder(704)
-    private RString nenkinTokuchoKaifuJoho_dtKakushuYMD;
+    private Code nenkinTokuchoKaifuJoho_dtTokubetsuChoshuGimushaCode;
     @TempTableColumnOrder(705)
-    private RString nenkinTokuchoKaifuJoho_dtKakushuKingaku1;
+    private TsuchiNaiyoCode nenkinTokuchoKaifuJoho_dtTsuchiNaiyoCode;
     @TempTableColumnOrder(706)
-    private RString nenkinTokuchoKaifuJoho_dtKakushuKingaku2;
+    private RString nenkinTokuchoKaifuJoho_dtBaitaiCode;
     @TempTableColumnOrder(707)
-    private RString nenkinTokuchoKaifuJoho_dtKakushuKingaku3;
+    private TokubetsuChoshuSeidoCode nenkinTokuchoKaifuJoho_dtTokubetsuChoshuSeidoCode;
     @TempTableColumnOrder(708)
-    private RString nenkinTokuchoKaifuJoho_dtYobi2;
+    private RString nenkinTokuchoKaifuJoho_dtSakuseiYMD;
     @TempTableColumnOrder(709)
-    private RString nenkinTokuchoKaifuJoho_dtKyosaiNenkinshoshoKigoNo;
+    private RString nenkinTokuchoKaifuJoho_dtKisoNenkinNo;
     @TempTableColumnOrder(710)
-    private RString nenkinTokuchoKaifuJoho_dtKakushuKingaku4;
+    private RString nenkinTokuchoKaifuJoho_dtNenkinCode;
     @TempTableColumnOrder(711)
-    private RString nenkinTokuchoKaifuJoho_dtKakushuKingaku5;
+    private RString nenkinTokuchoKaifuJoho_dtYobi1;
     @TempTableColumnOrder(712)
-    private RString nenkinTokuchoKaifuJoho_dtKakushuKingaku6;
+    private RString nenkinTokuchoKaifuJoho_dtBirthDay;
     @TempTableColumnOrder(713)
-    private RString nenkinTokuchoKaifuJoho_dtKakushuKingaku7;
+    private SeibetsuCodeNenkinTokucho nenkinTokuchoKaifuJoho_dtSeibetsu;
     @TempTableColumnOrder(714)
-    private RString nenkinTokuchoKaifuJoho_dtKakushuKingaku8;
+    private RString nenkinTokuchoKaifuJoho_dtKanaShimei;
     @TempTableColumnOrder(715)
-    private RString nenkinTokuchoKaifuJoho_dtTeishiYM;
+    private RString nenkinTokuchoKaifuJoho_dtShiftCode1;
     @TempTableColumnOrder(716)
-    private RString nenkinTokuchoKaifuJoho_dtYobi4Juminzei;
+    private RString nenkinTokuchoKaifuJoho_dtKanjiShimei;
     @TempTableColumnOrder(717)
+    private RString nenkinTokuchoKaifuJoho_dtShiftCode2;
+    @TempTableColumnOrder(718)
+    private RString nenkinTokuchoKaifuJoho_dtYubinNo;
+    @TempTableColumnOrder(719)
+    private RString nenkinTokuchoKaifuJoho_dtKanaJusho;
+    @TempTableColumnOrder(720)
+    private RString nenkinTokuchoKaifuJoho_dtShiftCode3;
+    @TempTableColumnOrder(721)
+    private RString nenkinTokuchoKaifuJoho_dtKanjiJusho;
+    @TempTableColumnOrder(722)
+    private RString nenkinTokuchoKaifuJoho_dtShiftCode4;
+    @TempTableColumnOrder(723)
+    private RString nenkinTokuchoKaifuJoho_dtKakushuKubun;
+    @TempTableColumnOrder(724)
+    private RString nenkinTokuchoKaifuJoho_dtShoriKekka;
+    @TempTableColumnOrder(725)
+    private RString nenkinTokuchoKaifuJoho_dtKokiIkanCode;
+    @TempTableColumnOrder(726)
+    private RString nenkinTokuchoKaifuJoho_dtKakushuYMD;
+    @TempTableColumnOrder(727)
+    private RString nenkinTokuchoKaifuJoho_dtKakushuKingaku1;
+    @TempTableColumnOrder(728)
+    private RString nenkinTokuchoKaifuJoho_dtKakushuKingaku2;
+    @TempTableColumnOrder(729)
+    private RString nenkinTokuchoKaifuJoho_dtKakushuKingaku3;
+    @TempTableColumnOrder(730)
+    private RString nenkinTokuchoKaifuJoho_dtYobi2;
+    @TempTableColumnOrder(731)
+    private RString nenkinTokuchoKaifuJoho_dtKyosaiNenkinshoshoKigoNo;
+    @TempTableColumnOrder(732)
+    private RString nenkinTokuchoKaifuJoho_dtKakushuKingaku4;
+    @TempTableColumnOrder(733)
+    private RString nenkinTokuchoKaifuJoho_dtKakushuKingaku5;
+    @TempTableColumnOrder(734)
+    private RString nenkinTokuchoKaifuJoho_dtKakushuKingaku6;
+    @TempTableColumnOrder(735)
+    private RString nenkinTokuchoKaifuJoho_dtKakushuKingaku7;
+    @TempTableColumnOrder(736)
+    private RString nenkinTokuchoKaifuJoho_dtKakushuKingaku8;
+    @TempTableColumnOrder(737)
+    private RString nenkinTokuchoKaifuJoho_dtTeishiYM;
+    @TempTableColumnOrder(738)
+    private RString nenkinTokuchoKaifuJoho_dtYobi4Juminzei;
+    @TempTableColumnOrder(739)
     private RString nenkinTokuchoKaifuJoho_dtKojinNo;
 
     // 更正前情報有無区分
-    @TempTableColumnOrder(718)
+    @TempTableColumnOrder(740)
     private RString koseimaeJohoUmuKubun;
     // 前年度・特徴期別金額06
-    @TempTableColumnOrder(719)
+    @TempTableColumnOrder(741)
     private RString zennendoTokuchoKibetsuKingaku06;
     // 被保険者区分
-    @TempTableColumnOrder(720)
+    @TempTableColumnOrder(742)
     private RString hihokenshaKubun;
 
 }

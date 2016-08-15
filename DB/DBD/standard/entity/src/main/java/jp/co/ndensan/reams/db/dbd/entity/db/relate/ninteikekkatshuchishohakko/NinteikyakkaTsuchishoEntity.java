@@ -42,15 +42,6 @@ public class NinteikyakkaTsuchishoEntity {
     private RString tsuchibun5;
     private RString tsuchibun6;
     private RString tsuchibun7;
-    private RString denshiKoin;
-    private RString hakkoYMD;
-    private RString ninshoshaYakushokuMei;
-    private RString ninshoshaYakushokuMei1;
-    private RString ninshoshaYakushokuMei2;
-    private RString ninshoshaShimeiKakenai;
-    private RString ninshoshaShimeiKakeru;
-    private RString koinShoryaku;
-    private RString koinMojiretsu;
     private RString yubinNo;
     private RString gyoseiku;
     private RString jushoText;
@@ -82,5 +73,6 @@ public class NinteikyakkaTsuchishoEntity {
     private RString kakkoRight1;
     private RString kakkoRight2;
     private RString customerBarCode;
+    private FlexibleDate hakkoYMD;
 
 }

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.jimukyokuyouichijihanteikekkahyoa4;
 
-import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa4.IchijihanteikekkahyoA4Entity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA4Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimukyokuyouichijihanteikekkahyo.IchijihanteikekkahyoA4ReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -171,18 +171,16 @@ public class IchijihanteikekkahyoA4Editor implements IIchijihanteikekkahyoA4Edit
             source.listChukanhyoka_5 = item.get中間評価リスト().get(index).get第5群();
         }
         source.shikibetuCode = ShikibetsuCode.EMPTY;
-        if (item.get申請書管理番号() != null) {
+        if (!RString.isNullOrEmpty(item.get申請書管理番号())) {
             source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
         }
         return editSource1(source);
     }
 
     private IchijihanteikekkahyoA4ReportSource editSource1(IchijihanteikekkahyoA4ReportSource source) {
-        if (index < item.get生活自立度_特記事項有無_リスト().size()) {
-            source.listTokki8_1 = item.get生活自立度_特記事項有無_リスト().get(index);
-        }
         if (index < item.get日常生活自立度リスト().size()) {
-            source.ｌistNichijoseikatsujiritsudo_1 = item.get日常生活自立度リスト().get(index);
+            source.listTokki8_1 = item.get日常生活自立度リスト().get(index).get特記事項フラグ();
+            source.ｌistNichijoseikatsujiritsudo_1 = item.get日常生活自立度リスト().get(index).get認知症高齢者自立度();
         }
         if (index < item.get特記リスト１().size()) {
             source.listTokki1_1 = item.get特記リスト１().get(index);
@@ -244,10 +242,10 @@ public class IchijihanteikekkahyoA4Editor implements IIchijihanteikekkahyoA4Edit
             source.listTokubetsunaIryo2_2 = item.get特別な医療リスト２().get(index).get段階改善フラグ();
         }
         if (index < item.get主治医意見書().size()) {
-            source.listshujiiikensho_1 = item.get特別な医療リスト２().get(index).get調査結果();
-            source.listshujiiikensho_2 = item.get特別な医療リスト２().get(index).get段階改善フラグ();
-            source.listshujiiikensho_3 = item.get特別な医療リスト２().get(index).get段階改善値();
-            source.listshujiiikensho_4 = item.get特別な医療リスト２().get(index).get前回結果();
+            source.listshujiiikensho_1 = item.get主治医意見書().get(index).get調査結果();
+            source.listshujiiikensho_2 = item.get主治医意見書().get(index).get段階改善フラグ();
+            source.listshujiiikensho_3 = item.get主治医意見書().get(index).get段階改善値();
+            source.listshujiiikensho_4 = item.get主治医意見書().get(index).get前回結果();
         }
         return source;
     }

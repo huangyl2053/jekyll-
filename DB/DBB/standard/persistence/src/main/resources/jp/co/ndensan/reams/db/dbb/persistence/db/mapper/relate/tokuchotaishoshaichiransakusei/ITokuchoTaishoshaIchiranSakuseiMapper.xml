@@ -44,7 +44,7 @@
     </select>
 
     <resultMap id="resultMap_getTokuchoTaishoListJoho" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbb.entity.db.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity">
+               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity">
         <id column="ueT0511NenkinTokuchoKaifuJoho_gyomuCode"/>
         <id column="ueT0511NenkinTokuchoKaifuJoho_shoriNendo"/>
         <id column="ueT0511NenkinTokuchoKaifuJoho_tsuchiNaiyoCode"/>
@@ -87,7 +87,7 @@
     </select>
 
     <resultMap id="resultMap_getTokuchoMiTaishoListJoho" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbb.entity.db.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity">
+               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity">
         <id column="dbT2019TokuchoMidoteiJoho_shoriNendo"/>
         <id column="dbT2019TokuchoMidoteiJoho_kisoNenkinNo"/>
         <id column="dbT2019TokuchoMidoteiJoho_nenkinCode"/>
@@ -129,7 +129,7 @@
     </select>
 
     <resultMap id="resultMap_getTokuchoTaishoKouhosyaListJoho" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbb.entity.db.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity">
+               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity">
         <id column="dbT2019TokuchoMidoteiJoho_shoriNendo"/>
         <id column="dbT2019TokuchoMidoteiJoho_kisoNenkinNo"/>
         <id column="dbT2019TokuchoMidoteiJoho_nenkinCode"/>
@@ -180,7 +180,7 @@
     </select>
 
     <resultMap id="resultMap_getTokuchoTaishoKouhosyaDetailJoho" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbb.entity.db.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity">
+               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity">
         <id column="dbT2019TokuchoMidoteiJoho_shoriNendo"/>
         <id column="dbT2019TokuchoMidoteiJoho_kisoNenkinNo"/>
         <id column="dbT2019TokuchoMidoteiJoho_nenkinCode"/>
@@ -215,7 +215,7 @@
     </select>
 
     <resultMap id="resultMap_getHihokenshaJoho" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbb.entity.db.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity">
+               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity">
         <association property="uet0511entity" resultMap="resultMap_UeT0511NenkinTokuchoKaifuJohoEntity"/>
         <association property="dbt2019entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2019TokuchoMidoteiJohoMapper.ResultMap_DbT2019TokuchoMidoteiJohoEntity"/>
         <association property="dbt1001entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
@@ -230,25 +230,25 @@
         <include refid="allColumns_DbT2001ChoshuHohoTemp" />
         FROM
         rgdb."DbV2001ChoshuHoho" as "DbT2001ChoshuHoho"
-        INNER JOIN rgdb."DbT1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
+        INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
         ON "DbT2001ChoshuHoho"."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
         AND "DbT1001HihokenshaDaicho"."shikibetsuCode" = #{識別コード}
         WHERE
-        "DbT2001ChoshuHoho". "fukaNendo" = #{処理年度}
+        "DbT2001ChoshuHoho". "fukaNendo" = #{処理年度} 
         <if test="開始月.toString() == '08'">
-            "DbT2001ChoshuHoho". "kariNenkinNo" = #{基礎年金番号}
-            "DbT2001ChoshuHoho". "kariNenkinCode" = #{年金コード}
-            "DbT2001ChoshuHoho". "kariHosokuM" = #{捕捉月}
+         AND   "DbT2001ChoshuHoho". "kariNenkinNo" = #{基礎年金番号}
+         AND   "DbT2001ChoshuHoho". "kariNenkinCode" = #{年金コード}
+         AND   "DbT2001ChoshuHoho". "kariHosokuM" = #{捕捉月}
         </if>
         <if test="開始月.toString() == '10' || 開始月.toString() == '12' || 開始月.toString() == '02'">
-            "DbT2001ChoshuHoho". "honNenkinNo" = #{基礎年金番号}
-            "DbT2001ChoshuHoho". "honNenkinCode" = #{年金コード}
-            "DbT2001ChoshuHoho". "honHosokuM"  = #{捕捉月}
+         AND   "DbT2001ChoshuHoho". "honNenkinNo" = #{基礎年金番号}
+         AND   "DbT2001ChoshuHoho". "honNenkinCode" = #{年金コード}
+         AND   "DbT2001ChoshuHoho". "honHosokuM"  = #{捕捉月}
         </if>
         <if test="開始月.toString() == '04' || 開始月.toString() == '06'">
-            "DbT2001ChoshuHoho". "yokunendoKariNenkinNo" = #{基礎年金番号}
-            "DbT2001ChoshuHoho". "yokunendoKariNenkinCode" = #{年金コード}
-            "DbT2001ChoshuHoho". "yokunendoKariHosokuM"  = #{捕捉月}
+         AND   "DbT2001ChoshuHoho". "yokunendoKariNenkinNo" = #{基礎年金番号}
+         AND   "DbT2001ChoshuHoho". "yokunendoKariNenkinCode" = #{年金コード}
+         AND   "DbT2001ChoshuHoho". "yokunendoKariHosokuM"  = #{捕捉月}
         </if>
     </select>
 

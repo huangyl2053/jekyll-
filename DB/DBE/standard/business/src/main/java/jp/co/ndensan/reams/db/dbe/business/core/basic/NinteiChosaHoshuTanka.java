@@ -6,23 +6,27 @@
 package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
 import java.io.Serializable;
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5031NinteiChosaHoshuTankaEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 認定調査報酬単価を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-021 dingyi
  */
 public class NinteiChosaHoshuTanka
-        extends ParentModelBase<NinteiChosaHoshuTankaIdentifier, DbT5031NinteiChosaHoshuTankaEntity, NinteiChosaHoshuTanka>
+        extends ModelBase<NinteiChosaHoshuTankaIdentifier, DbT5031NinteiChosaHoshuTankaEntity, NinteiChosaHoshuTanka>
         implements Serializable {
 
+    private static final long serialVersionUID = 7056535191774959535L;
     private final DbT5031NinteiChosaHoshuTankaEntity entity;
     private final NinteiChosaHoshuTankaIdentifier id;
 
@@ -157,7 +161,6 @@ public class NinteiChosaHoshuTanka
      *
      * @return 変更対象処理実施後の{@link NinteiChosaHoshuTanka}
      */
-    @Override
     public NinteiChosaHoshuTanka modifiedModel() {
         DbT5031NinteiChosaHoshuTankaEntity modifiedEntity = this.toEntity();
         if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
@@ -197,12 +200,12 @@ public class NinteiChosaHoshuTanka
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L; // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = -3662129417481937802L;
         private final DbT5031NinteiChosaHoshuTankaEntity entity;
         private final NinteiChosaHoshuTankaIdentifier id;
 
@@ -226,5 +229,29 @@ public class NinteiChosaHoshuTanka
         return new NinteiChosaHoshuTankaBuilder(entity, id);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.entity);
+        hash = 23 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final NinteiChosaHoshuTanka other = (NinteiChosaHoshuTanka) obj;
+        if (!Objects.equals(this.entity, other.entity)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
 }

@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -64,7 +63,7 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
     @BatchParameter(key = SHINSAKAIKAISHIYOTEITIME, name = "介護認定審査会開始予定時刻")
     private RString shinsakaiKaishiYoteiTime;
     @BatchParameter(key = GOGITAINO, name = "合議体番号")
-    private RString gogitaiNo;
+    private int gogitaiNo;
     @BatchParameter(key = GOGITAINAME, name = "合議体名称")
     private RString gogitaiName;
     @BatchParameter(key = SHUTURYOKUJUN, name = "出力順")
@@ -76,9 +75,9 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
     @BatchParameter(key = SAKUSEIJOKEN, name = "作成条件")
     private RString sakuseiJoken;
     @BatchParameter(key = BANGOSTART, name = "開始資料番号")
-    private Decimal bangoStart;
+    private int bangoStart;
     @BatchParameter(key = BANGOEND, name = "終了資料番号")
-    private Decimal bangoEnd;
+    private int bangoEnd;
     @BatchParameter(key = CHOYOJIMU_TAISHOUSHAFALG, name = "事務局審査会対象者一覧フラグ")
     private RString choyoJimu_taishoushaFalg;
     @BatchParameter(key = CHOYOJIMU_TOKKIJIKOUFALG, name = "事務局特記事項フラグ")
@@ -108,7 +107,7 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
     @BatchParameter(key = CHOHYOIIN_IKENSHOFALG, name = "委員用主治医意見書フラグ")
     private RString chohyoIin_ikenshoFalg;
     @BatchParameter(key = CHOYOIIN_SONOTASIRYOFALG, name = "委員用その他資料フラグ")
-    private RString choyoIin_sonotaSiryoFalg;
+    private RString chohyoIin_sonotaSiryoFalg;
     @BatchParameter(key = CHOHYOIIN_TUUTISHOFALG, name = "委員用審査会開催通知書フラグ")
     private RString chohyoIin_tuutishoFalg;
     @BatchParameter(key = CHOHYOIIN_HANTEIFALG, name = "委員用予備判定記入表フラグ")
@@ -148,7 +147,7 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
      * @param chohyoIin_tokkiJikouFalg 委員_特記事項フラグ
      * @param chohyoIin_itiziHanteiFalg 委員_一次判定結果票フラグ
      * @param chohyoIin_tokkiJikouHanteiFalg 委員_特記事項_一次判定フラグ
-     * @param choyoIin_sonotaSiryoFalg 委員用その他資料フラグ
+     * @param chohyoIin_sonotaSiryoFalg 委員用その他資料フラグ
      * @param chohyoIin_ikenshoFalg 委員_主治医意見書フラグ
      * @param chohyoIin_hanteiFalg 委員_予備判定記入表フラグ
      */
@@ -156,14 +155,14 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
             RString shinsakaiKaisaiNo,
             FlexibleDate shinsakaiKaisaiYoteiYMD,
             RString shinsakaiKaishiYoteiTime,
-            RString gogitaiNo,
+            int gogitaiNo,
             RString gogitaiName,
             RString shuturyokuJun,
             RString shuturyokuSutairu,
             RString printHou,
             RString sakuseiJoken,
-            Decimal bangoStart,
-            Decimal bangoEnd,
+            int bangoStart,
+            int bangoEnd,
             RString choyoJimu_taishoushaFalg,
             RString choyoJimu_tokkiJikouFalg,
             RString choyoJimu_itiziHanteiFalg,
@@ -178,7 +177,7 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
             RString chohyoIin_itiziHanteiFalg,
             RString chohyoIin_tokkiJikouHanteiFalg,
             RString chohyoIin_ikenshoFalg,
-            RString choyoIin_sonotaSiryoFalg,
+            RString chohyoIin_sonotaSiryoFalg,
             RString chohyoIin_tuutishoFalg,
             RString chohyoIin_hanteiFalg) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
@@ -206,7 +205,7 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
         this.chohyoIin_itiziHanteiFalg = chohyoIin_itiziHanteiFalg;
         this.chohyoIin_tokkiJikouHanteiFalg = chohyoIin_tokkiJikouHanteiFalg;
         this.chohyoIin_ikenshoFalg = chohyoIin_ikenshoFalg;
-        this.choyoIin_sonotaSiryoFalg = choyoIin_sonotaSiryoFalg;
+        this.chohyoIin_sonotaSiryoFalg = chohyoIin_sonotaSiryoFalg;
         this.chohyoIin_tuutishoFalg = chohyoIin_tuutishoFalg;
         this.chohyoIin_hanteiFalg = chohyoIin_hanteiFalg;
     }
@@ -221,7 +220,6 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
                 shinsakaiKaisaiNo,
                 shuturyokuSutairu,
                 printHou,
-                Decimal.ZERO,
                 shinsakaiKaisaiYoteiYMD,
                 shinsakaiKaishiYoteiTime,
                 RString.EMPTY,
@@ -241,7 +239,6 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
                 bangoEnd,
                 shuturyokuSutairu,
                 printHou,
-                Decimal.ZERO,
                 shinsakaiKaisaiYoteiYMD,
                 shinsakaiKaishiYoteiTime,
                 gogitaiName, gogitaiNo);
@@ -259,8 +256,7 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
                 shuturyokuJun,
                 shuturyokuSutairu,
                 printHou,
-                Decimal.ZERO,
-                shinsakaiKaishiYoteiTime);
+                shinsakaiKaishiYoteiTime, sakuseiJoken, bangoStart, bangoEnd);
     }
 
     /**
@@ -271,8 +267,7 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
     public IinTuikaSiryoProcessParameter toIinTuikaSiryoProcessParameter() {
         return new IinTuikaSiryoProcessParameter(shinsakaiKaisaiNo,
                 shuturyokuSutairu,
-                printHou,
-                Decimal.ZERO);
+                printHou);
     }
 
     /**
@@ -281,6 +276,6 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
      * @return IinItiziHanteiProcessParameter
      */
     public IinItiziHanteiProcessParameter toIinItiziHanteiProcessParameter() {
-        return new IinItiziHanteiProcessParameter(shinsakaiKaisaiNo, shuturyokuJun, sakuseiJoken, gogitaiNo, printHou);
+        return new IinItiziHanteiProcessParameter(shinsakaiKaisaiNo, shuturyokuJun, sakuseiJoken, bangoStart, bangoEnd, gogitaiNo);
     }
 }

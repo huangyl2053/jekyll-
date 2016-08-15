@@ -1,19 +1,24 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1050001;
 /*
  * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
+ * コードが再生成されるときに損失したりします。
+ * Wed Aug 03 17:33:23 CST 2016 
  */
+
+
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
+
 /**
- * dgShinseiIchiran_Row のクラスファイル
- *
+ * dgShinseiIchiran_Row のクラスファイル 
+ * 
  * @author 自動生成
  */
+
 public class dgShinseiIchiran_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
@@ -22,7 +27,7 @@ public class dgShinseiIchiran_Row extends DataRow {
     private RString txtKetteiKubun;
     private TextBoxFlexibleDate txtKetteiYMD;
     private TextBoxFlexibleDate txtTekiyoYMD;
-    private RString txtYukoKigen;
+    private TextBoxFlexibleDate txtYukoKigen;
     private RString txtGengakuKubun;
     private RString txtHyojunFutangaku;
     private RString txtShoninShinaiRiyu;
@@ -34,7 +39,7 @@ public class dgShinseiIchiran_Row extends DataRow {
         this.txtKetteiKubun = RString.EMPTY;
         this.txtKetteiYMD = new TextBoxFlexibleDate();
         this.txtTekiyoYMD = new TextBoxFlexibleDate();
-        this.txtYukoKigen = RString.EMPTY;
+        this.txtYukoKigen = new TextBoxFlexibleDate();
         this.txtGengakuKubun = RString.EMPTY;
         this.txtHyojunFutangaku = RString.EMPTY;
         this.txtShoninShinaiRiyu = RString.EMPTY;
@@ -49,7 +54,7 @@ public class dgShinseiIchiran_Row extends DataRow {
         this.setOriginalData("txtShoninShinaiRiyu", txtShoninShinaiRiyu);
     }
 
-    public dgShinseiIchiran_Row(RString txtShinseiYMD, RString txtShinseiRiyu, RString txtKetteiKubun, TextBoxFlexibleDate txtKetteiYMD, TextBoxFlexibleDate txtTekiyoYMD, RString txtYukoKigen, RString txtGengakuKubun, RString txtHyojunFutangaku, RString txtShoninShinaiRiyu) {
+    public dgShinseiIchiran_Row(RString txtShinseiYMD, RString txtShinseiRiyu, RString txtKetteiKubun, TextBoxFlexibleDate txtKetteiYMD, TextBoxFlexibleDate txtTekiyoYMD, TextBoxFlexibleDate txtYukoKigen, RString txtGengakuKubun, RString txtHyojunFutangaku, RString txtShoninShinaiRiyu) {
         super();
         this.setOriginalData("txtShinseiYMD", txtShinseiYMD);
         this.setOriginalData("txtShinseiRiyu", txtShinseiRiyu);
@@ -91,7 +96,7 @@ public class dgShinseiIchiran_Row extends DataRow {
         return txtTekiyoYMD;
     }
 
-    public RString getTxtYukoKigen() {
+    public TextBoxFlexibleDate getTxtYukoKigen() {
         return txtYukoKigen;
     }
 
@@ -132,7 +137,7 @@ public class dgShinseiIchiran_Row extends DataRow {
         this.txtTekiyoYMD = txtTekiyoYMD;
     }
 
-    public void setTxtYukoKigen(RString txtYukoKigen) {
+    public void setTxtYukoKigen(TextBoxFlexibleDate txtYukoKigen) {
         this.setOriginalData("txtYukoKigen", txtYukoKigen);
         this.txtYukoKigen = txtYukoKigen;
     }

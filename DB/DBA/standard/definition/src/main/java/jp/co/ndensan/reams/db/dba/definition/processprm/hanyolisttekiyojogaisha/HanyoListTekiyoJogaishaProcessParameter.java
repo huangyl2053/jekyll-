@@ -239,7 +239,7 @@ public class HanyoListTekiyoJogaishaProcessParameter implements IBatchProcessPar
                 psmSeinengappiYMD_End,
                 psmAgeKijunni,
                 psmChushutsu_Kubun,
-                chushutsunichiKubun,
+                hitsukeChushutsuKubun,
                 kijunYMDkubun,
                 kijunYMD,
                 chushutsunichiKubun,

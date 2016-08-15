@@ -11,10 +11,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * PanelAll のクラスファイル 
  * 
- * @author 自動生成
+ *  @reamsid_L DBC-4980-010 lihang
  */
 public class PanelAllDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -89,8 +89,4 @@ public class PanelAllDiv extends Panel {
     }
 
     // </editor-fold>
-
-    public Object setTxtShoriJotai() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

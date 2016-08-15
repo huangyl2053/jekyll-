@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
@@ -73,9 +74,12 @@ public class RenrakuhyoDataCreator {
                 算定基準額 = 高額介護サービス費.get算定基準額();
             }
         }
-
+        FlexibleYearMonth サービス提供年月 = FlexibleYearMonth.EMPTY;
+        if (finder.get給付実績基本(被保険者番号, 基準日) != null) {
+            サービス提供年月 = finder.get給付実績基本(被保険者番号, 基準日).getサービス提供年月();
+        }
         getHandler(div).onLoad(資格対象者キー, finder.get支払方法変更(被保険者番号, 基準日),
-                finder.get利用者負担額(被保険者番号, finder.get給付実績基本(被保険者番号, 基準日).getサービス提供年月()),
+                finder.get利用者負担額(被保険者番号, サービス提供年月),
                 finder.get負担限度額(被保険者番号, 基準日), finder.get保険料段階(基準日).records(),
                 算定基準額, is非該当, finder.get介護賦課(被保険者番号, 基準日), 基準日);
         if (is非該当) {

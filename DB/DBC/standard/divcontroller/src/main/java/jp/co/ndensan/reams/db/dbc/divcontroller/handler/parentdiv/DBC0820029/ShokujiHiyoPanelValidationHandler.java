@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820029;
 
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820029.ShokujiHiyoPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -24,64 +24,78 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class ShokujiHiyoPanelValidationHandler {
 
     private final ShokujiHiyoPanelDiv div;
-    private static final RString 基本日数 = new RString("基本日数");
-    private static final RString 基本単価 = new RString("基本単価");
-    private static final RString 特別食日数 = new RString("特別食日数");
-    private static final RString 特別食単価 = new RString("特別食単価");
-    private static final RString 単位 = new RString("単位");
-    private static final RString 回数日数 = new RString("回数／日数");
+    private static final RString MSG_基本日数 = new RString("基本日数");
+    private static final RString MSG_基本単価 = new RString("基本単価");
+    private static final RString MSG_特別食日数 = new RString("特別食日数");
+    private static final RString MSG_特別食単価 = new RString("特別食単価");
+    private static final RString MSG_単位 = new RString("単位");
+    private static final RString MSG_回数日数 = new RString("回数／日数");
+    private static final RString MSG_サービスコード = new RString("サービスコード");
 
     /**
      * コンストラクタです。
      *
      * @param div ShokujiHiyoPanelDiv
      */
-    ShokujiHiyoPanelValidationHandler(ShokujiHiyoPanelDiv div) {
+    public ShokujiHiyoPanelValidationHandler(ShokujiHiyoPanelDiv div) {
         this.div = div;
     }
 
     /**
-     * 入力チェックのメソッド
+     * 食事費用登録エリア２必須入力チェックのメソッドです。
      *
-     * @param meisaiPar ShoukanharaihishinseimeisaikensakuParameter
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 入力チェック(ShoukanharaihishinseimeisaikensakuParameter meisaiPar) {
+    public ValidationMessageControlPairs check食事費用登録エリア２必須入力() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        必須入力チェック(validPairs);
+        Decimal 入力単位 = div.getPanelShokuji().getPanelDetail2().getTxtTanyi().getValue();
+        Decimal 入力回数日数 = div.getPanelShokuji().getPanelDetail2().getTxtKaisuuNisuu().getValue();
+        ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div
+                .getPanelShokuji().getPanelDetail2().getCcdServiceCodeInput();
+        RString サービス種類コード = serviceCodeInputDiv.getTxtServiceCode1().getValue();
+        RString サービス項目コード = serviceCodeInputDiv.getTxtServiceCode2().getValue();
+        if (入力単位 == null) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.未入力, MSG_単位.toString())));
+        }
+        if (入力回数日数 == null) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.未入力, MSG_回数日数.toString())));
+        }
+        if (サービス種類コード == null || サービス項目コード == null) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.未入力, MSG_サービスコード.toString())));
+        }
         return validPairs;
     }
 
-    private ValidationMessageControlPairs 必須入力チェック(ValidationMessageControlPairs validPairs) {
+    /**
+     * 食事費用登録エリア１必須入力チェックのメソッドです。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs check食事費用登録エリア１必須入力() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         Decimal 入力基本日数 = div.getPanelShokuji().getPanelDetail1().getTxtKihonNissu().getValue();
         Decimal 入力基本単価 = div.getPanelShokuji().getPanelDetail1().getTxtKihonTanka().getValue();
         Decimal 入力特別食日数 = div.getPanelShokuji().getPanelDetail1().getTxtTokubetuSyokuNissu().getValue();
         Decimal 入力特別食単価 = div.getPanelShokuji().getPanelDetail1().getTxtTokubetuSyokuTanka().getValue();
-        Decimal 入力単位 = div.getPanelShokuji().getPanelDetail2().getTxtTanyi().getValue();
-        Decimal 入力回数日数 = div.getPanelShokuji().getPanelDetail2().getTxtKaisuuNisuu().getValue();
+
         if (入力基本日数 == null) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.未入力, 基本日数.toString())));
+                    UrErrorMessages.未入力, MSG_基本日数.toString())));
         }
         if (入力基本単価 == null) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.未入力, 基本単価.toString())));
+                    UrErrorMessages.未入力, MSG_基本単価.toString())));
         }
         if (入力特別食日数 == null) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.未入力, 特別食日数.toString())));
+                    UrErrorMessages.未入力, MSG_特別食日数.toString())));
         }
         if (入力特別食単価 == null) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.未入力, 特別食単価.toString())));
-        }
-        if (入力単位 == null) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.未入力, 単位.toString())));
-        }
-        if (入力回数日数 == null) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.未入力, 回数日数.toString())));
+                    UrErrorMessages.未入力, MSG_特別食単価.toString())));
         }
         return validPairs;
     }

@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 市町村情報
  *
- * @reamsid_L DBB-1650-050 lijunjun
+ * @reamsid_L DBB-1650-040 lijunjun
  */
 @lombok.Getter
 @lombok.Setter

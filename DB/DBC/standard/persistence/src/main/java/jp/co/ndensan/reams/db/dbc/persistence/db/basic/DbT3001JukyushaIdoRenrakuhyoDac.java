@@ -11,6 +11,7 @@ import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenra
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.idoKubunCode;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.idoYMD;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.jukyushaIdoJiyu;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.logicalDeletedFlag;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.rirekiNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.shoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity;
@@ -22,8 +23,12 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.lt;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -35,6 +40,9 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
 
     @InjectSession
     private SqlSession session;
+
+    private static final boolean 論理削除フラグ = false;
+    private static final int ONE = 1;
 
     /**
      * 主キーで受給者異動送付を取得します。
@@ -92,6 +100,70 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
     }
 
     /**
+     * 受給者異動送付を全件返します。
+     *
+     * @param 被保番号 hiHokenshaNo
+     * @param 異動日 idoYMD
+     * @return List<DbT3001JukyushaIdoRenrakuhyoEntity>
+     */
+    @Transaction
+    public DbT3001JukyushaIdoRenrakuhyoEntity select登録した受給者異動情報の取得(RString 被保番号, RString 異動日) {
+        requireNonNull(被保番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保番号"));
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3001JukyushaIdoRenrakuhyo.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保番号),
+                                eq(idoYMD, 異動日),
+                                eq(logicalDeletedFlag, 論理削除フラグ),
+                                eq(rirekiNo, ONE))).
+                toObject(DbT3001JukyushaIdoRenrakuhyoEntity.class);
+    }
+
+    /**
+     * 受給者異動送付を全件返します。
+     *
+     * @param 被保険者番号 hiHokenshaNo
+     * @param 異動日 idoYMD
+     * @return List<DbT3001JukyushaIdoRenrakuhyoEntity>
+     */
+    @Transaction
+    public DbT3001JukyushaIdoRenrakuhyoEntity select異動区分(RString 被保険者番号, RString 異動日) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.selectSpecific(idoKubunCode).
+                table(DbT3001JukyushaIdoRenrakuhyo.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                lt(idoYMD, 異動日))).
+                order(by(DbT3001JukyushaIdoRenrakuhyo.idoYMD, Order.DESC)).
+                limit(1).
+                toObject(DbT3001JukyushaIdoRenrakuhyoEntity.class);
+    }
+
+    /**
+     * count受給者異動送付テーブルを検索して既存の異動日を判断します。
+     *
+     * @param 被保険者番号 hiHokenshaNo
+     * @param 異動日 idoYMD
+     * @return List<DbT3001JukyushaIdoRenrakuhyoEntity>
+     */
+    @Transaction
+    public int selectCount(RString 被保険者番号, RString 異動日) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3001JukyushaIdoRenrakuhyo.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(idoYMD, 異動日))).
+                getCount();
+    }
+
+    /**
      * DbT3001JukyushaIdoRenrakuhyoEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
      * @param entity entity
@@ -104,5 +176,52 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 受給者訂正情報の取得します。
+     *
+     * @param 被保険者番号 RString
+     * @param 異動日 RString
+     * @param 論理削除フラグ boolean
+     * @param 履歴番号 int
+     * @return List<DbT3001JukyushaIdoRenrakuhyoEntity>
+     */
+    @Transaction
+    public DbT3001JukyushaIdoRenrakuhyoEntity select受給者訂正情報(RString 被保険者番号, RString 異動日,
+            boolean 論理削除フラグ, int 履歴番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3001JukyushaIdoRenrakuhyo.class).
+                where(getiTrueFalseCriteria(被保険者番号, 異動日, 論理削除フラグ, 履歴番号)).
+                toObject(DbT3001JukyushaIdoRenrakuhyoEntity.class);
+    }
+
+    private ITrueFalseCriteria getiTrueFalseCriteria(RString 被保険者番号, RString 異動日,
+            boolean 論理削除フラグ, int 履歴番号) {
+        ITrueFalseCriteria iTrueFalseCriteria;
+        if (被保険者番号 != null && 異動日 != null) {
+            iTrueFalseCriteria = and(
+                    eq(hiHokenshaNo, 被保険者番号),
+                    eq(idoYMD, 異動日),
+                    eq(logicalDeletedFlag, 論理削除フラグ),
+                    eq(rirekiNo, 履歴番号));
+        } else if (被保険者番号 != null && 異動日 == null) {
+            iTrueFalseCriteria = and(
+                    eq(hiHokenshaNo, 被保険者番号),
+                    eq(logicalDeletedFlag, 論理削除フラグ),
+                    eq(rirekiNo, 履歴番号));
+
+        } else if (被保険者番号 == null && 異動日 != null) {
+            iTrueFalseCriteria = and(
+                    eq(idoYMD, 異動日),
+                    eq(logicalDeletedFlag, 論理削除フラグ),
+                    eq(rirekiNo, 履歴番号));
+        } else {
+            iTrueFalseCriteria = and(
+                    eq(logicalDeletedFlag, 論理削除フラグ),
+                    eq(rirekiNo, 履歴番号));
+        }
+        return iTrueFalseCriteria;
     }
 }

@@ -5,20 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.SonotaJohoEntity;
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Path;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 事務局用その他資料情報のBusinessの編集クラスです。
@@ -27,24 +24,25 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class JimuSonotashiryoBusiness {
 
-    private final SonotaJohoEntity entity;
-    private static final int INT_4 = 4;
-    private static final int INT_5 = 5;
-    private static final int INT_7 = 7;
-    private static final int INT_8 = 8;
-    private static final int INT_10 = 10;
-    private static final RString ファイルID_F1401A01 = new RString("F1401A01.png");
-    private static final RString ファイルID_F1401A01_BAK = new RString("F1401A01_BAK.png");
-    private static final RString ファイルID_F1401A02 = new RString("F1401A02.png");
-    private static final RString ファイルID_F1401A02_BAK = new RString("F1401A02_BAK.png");
+    private final RString ファイル名_G0001 = new RString("G0001.png");
+    private final ShinsakaiSiryoKyotsuEntity entity;
+    private final List<RString> ファイル名List;
+    private int index;
 
     /**
      * コンストラクタです。
      *
-     * @param entity SonotaJohoEntity
+     * @param entity ShinsakaiSiryoKyotsuEntity
+     * @param 存在ファイルindex int
      */
-    public JimuSonotashiryoBusiness(SonotaJohoEntity entity) {
+    public JimuSonotashiryoBusiness(ShinsakaiSiryoKyotsuEntity entity, int 存在ファイルindex) {
         this.entity = entity;
+        if (!entity.isJimukyoku()) {
+            this.ファイル名List = getその他資料マスキング後イメージファイル名();
+        } else {
+            this.ファイル名List = getその他資料原本イメージファイル名();
+        }
+        index = 存在ファイルindex;
     }
 
     /**
@@ -53,7 +51,7 @@ public class JimuSonotashiryoBusiness {
      * @return 申請書管理番号
      */
     public RString get申請書管理番号() {
-        return RString.EMPTY;
+        return entity.getShinseishoKanriNo().value();
     }
 
     /**
@@ -80,118 +78,7 @@ public class JimuSonotashiryoBusiness {
      * @return 名前
      */
     public RString get名前() {
-        if (entity.getHihokenshaName() == null || RString.isNullOrEmpty(entity.getHihokenshaName().getColumnValue())) {
-            return RString.EMPTY;
-        }
         return entity.getHihokenshaName().getColumnValue();
-    }
-
-    /**
-     * 審査会資料作成年を取得します。
-     *
-     * @return 審査会資料作成年
-     */
-    public RString get審査会資料作成年() {
-        return get年(new FlexibleDate(RDate.getNowDate().toDateString()));
-    }
-
-    /**
-     * 審査会資料作成月を取得します。
-     *
-     * @return 審査会資料作成月
-     */
-    public RString get審査会資料作成月() {
-        return get月(new FlexibleDate(RDate.getNowDate().toDateString()));
-    }
-
-    /**
-     * 審査会資料作成日を取得します。
-     *
-     * @return 審査会資料作成日
-     */
-    public RString get審査会資料作成日() {
-        return get日(new FlexibleDate(RDate.getNowDate().toDateString()));
-    }
-
-    /**
-     * 今回認定申請年を取得します。
-     *
-     * @return 今回認定申請年
-     */
-    public RString get今回認定申請年() {
-        return get年(entity.getNinteiShinseiYMD());
-    }
-
-    /**
-     * 今回認定申請月を取得します。
-     *
-     * @return 今回認定申請月
-     */
-    public RString get今回認定申請月() {
-        return get月(entity.getNinteiShinseiYMD());
-    }
-
-    /**
-     * 今回認定申請日を取得します。
-     *
-     * @return 今回認定申請日
-     */
-    public RString get今回認定申請日() {
-        return get日(entity.getNinteiShinseiYMD());
-    }
-
-    /**
-     * 今回認定調査実施年を取得します。
-     *
-     * @return 今回認定調査実施年
-     */
-    public RString get今回認定調査実施年() {
-        return get年(entity.getNinteichosaJisshiYMD());
-    }
-
-    /**
-     * 今回認定調査実施月を取得します。
-     *
-     * @return 今回認定調査実施月
-     */
-    public RString get今回認定調査実施月() {
-        return get月(entity.getNinteichosaJisshiYMD());
-    }
-
-    /**
-     * 今回認定調査実施日を取得します。
-     *
-     * @return 今回認定調査実施日
-     */
-    public RString get今回認定調査実施日() {
-        return get日(entity.getNinteichosaJisshiYMD());
-    }
-
-    /**
-     * 今回認定審査年を取得します。
-     *
-     * @return 今回認定審査年
-     */
-    public RString get今回認定審査年() {
-        return get年(entity.getShinsakaiKaisaiYMD());
-    }
-
-    /**
-     * 今回認定審査月を取得します。
-     *
-     * @return 今回認定審査月
-     */
-    public RString get今回認定審査月() {
-        return get月(entity.getShinsakaiKaisaiYMD());
-    }
-
-    /**
-     * 今回認定審査日を取得します。
-     *
-     * @return 今回認定審査日
-     */
-    public RString get今回認定審査日() {
-        return get日(entity.getShinsakaiKaisaiYMD());
     }
 
     /**
@@ -227,7 +114,7 @@ public class JimuSonotashiryoBusiness {
      * @return 左のその他資料イメージ
      */
     public RString get左のその他資料イメージ() {
-        return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_F1401A01);
+        return getその他資料();
     }
 
     /**
@@ -236,7 +123,16 @@ public class JimuSonotashiryoBusiness {
      * @return 右のその他資料イメージ
      */
     public RString get右のその他資料イメージ() {
-        return 共有ファイル2を引き出す(entity.getImageSharedFileId(), ファイルID_F1401A02);
+        return getその他資料();
+    }
+
+    /**
+     * 事務局概況特記イメージを取得します。
+     *
+     * @return 事務局概況特記イメージ
+     */
+    public RString get事務局概況特記イメージ() {
+        return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイル名_G0001);
     }
 
     /**
@@ -245,54 +141,121 @@ public class JimuSonotashiryoBusiness {
      * @return その他資料
      */
     public RString getその他資料() {
-        return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_F1401A01);
-    }
-
-    private RString get年(FlexibleDate 年月日) {
-        if (年月日 != null && !年月日.isEmpty()) {
-            return パターン12(年月日).substring(0, INT_4);
-        }
-        return RString.EMPTY;
-    }
-
-    private RString get月(FlexibleDate 年月日) {
-        if (年月日 != null && !年月日.isEmpty()) {
-            return パターン12(年月日).substring(INT_5, INT_7);
-        }
-        return RString.EMPTY;
-    }
-
-    private RString get日(FlexibleDate 年月日) {
-        if (年月日 != null && !年月日.isEmpty()) {
-            return パターン12(年月日).substring(INT_8, INT_10);
-        }
-        return RString.EMPTY;
-    }
-
-    private RString パターン12(FlexibleDate 年月日) {
-        return 年月日.wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                .fillType(FillType.BLANK).toDateString();
-    }
-
-    private RString 共有ファイルを引き出す(RDateTime イメージID, RString イメージID01) {
-        RString imagePath = RString.EMPTY;
-        if (イメージID != null) {
-            imagePath = getFilePath(イメージID, イメージID01);
-            if (RString.isNullOrEmpty(imagePath)) {
-                imagePath = getFilePath(イメージID, ファイルID_F1401A01_BAK);
+        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
+        boolean is存在;
+        for (int i = index; i < ファイル名List.size(); i++) {
+            RString ファイル名 = ファイル名List.get(i);
+            ReadOnlySharedFileEntryDescriptor descriptor
+                    = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(ファイル名), entity.getImageSharedFileId());
+            try {
+                SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+                is存在 = true;
+            } catch (Exception e) {
+                is存在 = false;
+            }
+            if (is存在) {
+                index = i + 1;
+                return ファイル名;
             }
         }
-        return imagePath;
+        return RString.EMPTY;
     }
 
-    private RString 共有ファイル2を引き出す(RDateTime イメージID, RString イメージID01) {
+    /**
+     * その他資料を取得します。
+     *
+     * @return その他資料
+     */
+    public int get存在ファイルIndex() {
+        return index;
+    }
+
+    private List<RString> getその他資料マスキング後イメージファイル名() {
+        List<RString> ファイル名 = new ArrayList<>();
+        ファイル名.add(new RString("F1401A01.png"));
+        ファイル名.add(new RString("F1401A02.png"));
+        ファイル名.add(new RString("F1401A03.png"));
+        ファイル名.add(new RString("F1401A04.png"));
+        ファイル名.add(new RString("F1401A05.png"));
+        ファイル名.add(new RString("F1401A06.png"));
+        ファイル名.add(new RString("F1401B01.png"));
+        ファイル名.add(new RString("F1401B02.png"));
+        ファイル名.add(new RString("F1401B03.png"));
+        ファイル名.add(new RString("F1401B04.png"));
+        ファイル名.add(new RString("F1401B05.png"));
+        ファイル名.add(new RString("F1401B06.png"));
+        ファイル名.add(new RString("F1401C01.png"));
+        ファイル名.add(new RString("F1401C02.png"));
+        ファイル名.add(new RString("F1401C03.png"));
+        ファイル名.add(new RString("F1401C04.png"));
+        ファイル名.add(new RString("F1401C05.png"));
+        ファイル名.add(new RString("F1401C06.png"));
+        ファイル名.add(new RString("F1401D01.png"));
+        ファイル名.add(new RString("F1401D02.png"));
+        ファイル名.add(new RString("F1401D03.png"));
+        ファイル名.add(new RString("F1401D04.png"));
+        ファイル名.add(new RString("F1401D05.png"));
+        ファイル名.add(new RString("F1401D06.png"));
+        ファイル名.add(new RString("F1401E01.png"));
+        ファイル名.add(new RString("F1401E02.png"));
+        ファイル名.add(new RString("F1401E03.png"));
+        ファイル名.add(new RString("F1401E04.png"));
+        ファイル名.add(new RString("F1401E05.png"));
+        ファイル名.add(new RString("F1401E06.png"));
+        ファイル名.add(new RString("F1401F01.png"));
+        ファイル名.add(new RString("F1401F02.png"));
+        ファイル名.add(new RString("F1401F03.png"));
+        ファイル名.add(new RString("F1401F04.png"));
+        ファイル名.add(new RString("F1401F05.png"));
+        ファイル名.add(new RString("F1401F06.png"));
+        return ファイル名;
+    }
+
+    private List<RString> getその他資料原本イメージファイル名() {
+        List<RString> ファイル名 = new ArrayList<>();
+        ファイル名.add(new RString("F1401A01_BAK.png"));
+        ファイル名.add(new RString("F1401A02_BAK.png"));
+        ファイル名.add(new RString("F1401A03_BAK.png"));
+        ファイル名.add(new RString("F1401A04_BAK.png"));
+        ファイル名.add(new RString("F1401A05_BAK.png"));
+        ファイル名.add(new RString("F1401A06_BAK.png"));
+        ファイル名.add(new RString("F1401B01_BAK.png"));
+        ファイル名.add(new RString("F1401B02_BAK.png"));
+        ファイル名.add(new RString("F1401B03_BAK.png"));
+        ファイル名.add(new RString("F1401B04_BAK.png"));
+        ファイル名.add(new RString("F1401B05_BAK.png"));
+        ファイル名.add(new RString("F1401B06_BAK.png"));
+        ファイル名.add(new RString("F1401C01_BAK.png"));
+        ファイル名.add(new RString("F1401C02_BAK.png"));
+        ファイル名.add(new RString("F1401C03_BAK.png"));
+        ファイル名.add(new RString("F1401C04_BAK.png"));
+        ファイル名.add(new RString("F1401C05_BAK.png"));
+        ファイル名.add(new RString("F1401C06_BAK.png"));
+        ファイル名.add(new RString("F1401D01_BAK.png"));
+        ファイル名.add(new RString("F1401D02_BAK.png"));
+        ファイル名.add(new RString("F1401D03_BAK.png"));
+        ファイル名.add(new RString("F1401D04_BAK.png"));
+        ファイル名.add(new RString("F1401D05_BAK.png"));
+        ファイル名.add(new RString("F1401D06_BAK.png"));
+        ファイル名.add(new RString("F1401E01_BAK.png"));
+        ファイル名.add(new RString("F1401E02_BAK.png"));
+        ファイル名.add(new RString("F1401E03_BAK.png"));
+        ファイル名.add(new RString("F1401E04_BAK.png"));
+        ファイル名.add(new RString("F1401E05_BAK.png"));
+        ファイル名.add(new RString("F1401E06_BAK.png"));
+        ファイル名.add(new RString("F1401F01_BAK.png"));
+        ファイル名.add(new RString("F1401F02_BAK.png"));
+        ファイル名.add(new RString("F1401F03_BAK.png"));
+        ファイル名.add(new RString("F1401F04_BAK.png"));
+        ファイル名.add(new RString("F1401F05_BAK.png"));
+        ファイル名.add(new RString("F1401F06_BAK.png"));
+        return ファイル名;
+    }
+
+    private RString 共有ファイルを引き出す(RDateTime イメージID, RString sharedFileName) {
         RString imagePath = RString.EMPTY;
         if (イメージID != null) {
-            imagePath = getFilePath(イメージID, イメージID01);
-            if (RString.isNullOrEmpty(imagePath)) {
-                imagePath = getFilePath(イメージID, ファイルID_F1401A02_BAK);
-            }
+            imagePath = getFilePath(イメージID, sharedFileName);
         }
         return imagePath;
     }
@@ -309,5 +272,4 @@ public class JimuSonotashiryoBusiness {
         }
         return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
     }
-
 }

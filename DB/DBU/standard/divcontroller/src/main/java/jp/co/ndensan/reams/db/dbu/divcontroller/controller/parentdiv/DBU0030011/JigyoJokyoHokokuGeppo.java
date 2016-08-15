@@ -6,18 +6,20 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0030011;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorModel;
 import jp.co.ndensan.reams.db.dbu.business.core.yoshikibetsurenkeijoho.JigyoHokokuTokei;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.jigyohokokurenkei.JigyoHokokuRenkeiBatchParameter;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0030011.JigyoJokyoHokokuGeppoDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0030011.JigyoJokyoHokokuGeppoHandler;
+import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0030011.JigyoJokyoHokokuGeppoValidationHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.yoshikibetsurenkeijoho.ShukeiYearMouthGetterFinder;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 様式別連携情報作成の処理です。
@@ -25,6 +27,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @reamsid_L DBU-4050-010 suguangjun
  */
 public class JigyoJokyoHokokuGeppo {
+
+    private static final RString KOUSEI_MODO_KOUSEI = new RString("1");
+    private static final RString KOUSEI_MODO_KYU = new RString("0");
+    private static final RString 旧市町村 = new RString("kyuShichoson");
 
     /**
      * 様式別連携情報作成の初期化処理です。
@@ -128,15 +134,63 @@ public class JigyoJokyoHokokuGeppo {
      * @param div 様式別連携情報Div
      * @return ResponseData<JigyoJokyoHokokuGeppoDiv>
      */
-    public ResponseData<JigyoJokyoHokokuGeppoDiv> onClick_btnShichosonSentaku(JigyoJokyoHokokuGeppoDiv div) {
-        KoseiShiChosonSelectorModel model = ViewStateHolder.get(ViewStateKeys.引き継ぎデータ, KoseiShiChosonSelectorModel.class);
-        if (model != null) {
-            div.setShichosonCode(model.get市町村コード());
+    public ResponseData<JigyoJokyoHokokuGeppoDiv> onClick_BeforeOpen(JigyoJokyoHokokuGeppoDiv div) {
+        ShichosonSelectorModel model = new ShichosonSelectorModel();
+        if (div.getJikkoTanni().getRadHokenshaKyuShichoson().getSelectedKey().contains(旧市町村)) {
+            model.setShichosonModel(KOUSEI_MODO_KYU);
+        } else {
+            model.setShichosonModel(KOUSEI_MODO_KOUSEI);
         }
+        div.setKyuShichoson(DataPassingConverter.serialize(model));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「市町村を選択する」ダイアログボタンの処理です。
+     *
+     * @param div 様式別連携情報Div
+     * @return ResponseData<JigyoJokyoHokokuGeppoDiv>
+     */
+    public ResponseData<JigyoJokyoHokokuGeppoDiv> onClick_btnShichosonSentaku(JigyoJokyoHokokuGeppoDiv div) {
+        ShichosonSelectorModel model = DataPassingConverter.deserialize(div.getKyuShichoson(), ShichosonSelectorModel.class);
+        div.setKyuShichoson(DataPassingConverter.serialize(model));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * バッチの実行の処理です。
+     *
+     * @param div 様式別連携情報Div
+     * @return ResponseData<JigyoHokokuRenkeiBatchParameter>
+     */
+    public ResponseData<JigyoHokokuRenkeiBatchParameter> onClick_btnJikko(JigyoJokyoHokokuGeppoDiv div) {
+        return ResponseData.of(getHandler(div).onClick_btnJikko()).respond();
+    }
+
+    /**
+     * チェックです。
+     *
+     * @param div 画面情報
+     * @return ResponseData<HoshushiharaiJumbiDiv>
+     */
+    public ResponseData<JigyoJokyoHokokuGeppoDiv> onClick_Check(JigyoJokyoHokokuGeppoDiv div) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).過去報告年月未指定チェック(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+//        validPairs = getValidationHandler(div).市町村チェック(validationMessages);
+//        if (validPairs.iterator().hasNext()) {
+//            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+//        }
         return ResponseData.of(div).respond();
     }
 
     private JigyoJokyoHokokuGeppoHandler getHandler(JigyoJokyoHokokuGeppoDiv div) {
         return new JigyoJokyoHokokuGeppoHandler(div);
+    }
+
+    private JigyoJokyoHokokuGeppoValidationHandler getValidationHandler(JigyoJokyoHokokuGeppoDiv div) {
+        return new JigyoJokyoHokokuGeppoValidationHandler(div);
     }
 }

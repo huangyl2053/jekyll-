@@ -15,9 +15,11 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -35,6 +37,8 @@ public class ShoriDateKanriManager {
     private static final RString 処理枝番メッセージ = new RString("処理枝番");
     private static final RString 年度内連番メッセージ = new RString("年度内連番");
     private static final RString サブ業務コードメッセージ = new RString("サブ業務コード");
+    private static final RString 開始時分秒 = new RString("000000");
+    private static final RString 終了時分秒 = new RString("235959");
 
     /**
      * コンストラクタです。
@@ -50,6 +54,71 @@ public class ShoriDateKanriManager {
      */
     ShoriDateKanriManager(DbT7022ShoriDateKanriDac dac) {
         this.dac = dac;
+    }
+
+    /**
+     * 主キーに合致する処理日付管理マスタを返します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 処理名 ShoriName
+     * @param 年度 Nendo
+     * @param 年度内連番 NendoNaiRenban
+     * @return ShoriDateKanri
+     */
+    @Transaction
+    public ShoriDateKanri get処理日付管理(
+            SubGyomuCode サブ業務コード,
+            RString 処理名,
+            FlexibleYear 年度,
+            RString 年度内連番) {
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(年度メッセージ.toString()));
+        requireNonNull(年度内連番, UrSystemErrorMessages.値がnull.getReplacedMessage(年度内連番メッセージ.toString()));
+
+        DbT7022ShoriDateKanriEntity entity = dac.selectBySomeKeys(
+                サブ業務コード,
+                処理名,
+                年度,
+                年度内連番);
+        if (entity == null) {
+            return null;
+        }
+
+        entity.initializeMd5();
+        return new ShoriDateKanri(entity);
+    }
+
+    /**
+     * 主キーに合致する処理日付管理マスタを返します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 市町村コード ShichosonCode
+     * @param 処理名 ShoriName
+     * @param 処理枝番 ShoriEdaban
+     * @return ShoriDateKanri
+     */
+    @Transaction
+    public ShoriDateKanri get処理日付管理マスタ(
+            SubGyomuCode サブ業務コード,
+            LasdecCode 市町村コード,
+            RString 処理名,
+            RString 処理枝番) {
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(市町村コードメッセージ.toString()));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage(処理枝番メッセージ.toString()));
+
+        DbT7022ShoriDateKanriEntity entity = dac.select(
+                サブ業務コード,
+                市町村コード,
+                処理名,
+                処理枝番);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new ShoriDateKanri(entity);
     }
 
     /**
@@ -115,18 +184,18 @@ public class ShoriDateKanriManager {
         requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(年度メッセージ.toString()));
         requireNonNull(年度内連番, UrSystemErrorMessages.値がnull.getReplacedMessage(年度内連番メッセージ.toString()));
 
-        DbT7022ShoriDateKanriEntity entity = dac.selectBySomeKeysLimits(
+        List<DbT7022ShoriDateKanriEntity> entityList = dac.selectBySomeKeys(
                 サブ業務コード,
                 処理名,
                 処理枝番,
                 年度,
                 年度内連番);
-        if (entity == null) {
+        if (entityList.isEmpty()) {
             return null;
         }
 
-        entity.initializeMd5();
-        return new ShoriDateKanri(entity);
+        entityList.get(0).initializeMd5();
+        return new ShoriDateKanri(entityList.get(0));
     }
 
     /**
@@ -286,6 +355,110 @@ public class ShoriDateKanriManager {
     public ShoriDateKanri get抽出期間() {
 
         DbT7022ShoriDateKanriEntity entity = dac.select抽出期間();
+        if (entity == null) {
+            return null;
+        }
+        return new ShoriDateKanri(entity);
+    }
+
+    /**
+     * 処理日付管理マスタから直近の年次負担割合判定処理のデータを取得する。
+     *
+     * @return ShoriDateKanri
+     */
+    @Transaction
+    public ShoriDateKanri select直近の年次負担割合判定() {
+        DbT7022ShoriDateKanriEntity entity = dac.select直近の年次負担割合判定();
+        if (entity == null) {
+            return null;
+        }
+        return new ShoriDateKanri(entity);
+    }
+
+    /**
+     * 当初発行チェックの判定処理のデータを取得する。
+     *
+     * @param 年度 FlexibleYear
+     * @param 処理枝番 RString
+     * @return ShoriDateKanris
+     */
+    @Transaction
+    public ShoriDateKanri select当初発行チェック(FlexibleYear 年度, RString 処理枝番) {
+        DbT7022ShoriDateKanriEntity entity = dac.select当初発行チェック(年度, 処理枝番);
+        if (entity == null) {
+            return null;
+        }
+        return new ShoriDateKanri(entity);
+    }
+
+    /**
+     * 処理日付管理マスタから、過去集計情報を取得します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 処理名 ShoriName
+     * @param 処理枝番 ShoriEdaban
+     * @return ShoriDateKanri
+     */
+    @Transaction
+    public SearchResult<ShoriDateKanri> get処理日付管理マスタ(
+            SubGyomuCode サブ業務コード,
+            List<RString> 処理名,
+            List<RString> 処理枝番) {
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage(処理枝番メッセージ.toString()));
+        List<ShoriDateKanri> shoriDateKanriList = new ArrayList<>();
+        List<DbT7022ShoriDateKanriEntity> entityList = dac.get処理日付管理マスタ(
+                サブ業務コード,
+                処理名,
+                処理枝番);
+        for (DbT7022ShoriDateKanriEntity entity : entityList) {
+            entity.initializeMd5();
+            shoriDateKanriList.add(new ShoriDateKanri(entity));
+        }
+        return SearchResult.of(shoriDateKanriList, 0, false);
+    }
+
+    /**
+     * 処理日付管理マスタを更新します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 市町村コード LasdecCode
+     * @param 処理名 RString
+     * @param 処理枝番 RString
+     * @param 開始日 FlexibleDate
+     * @param 終了日 FlexibleDate
+     */
+    @Transaction
+    public void update対象開始日時AND対象終了日時(SubGyomuCode サブ業務コード, LasdecCode 市町村コード, RString 処理名, RString 処理枝番,
+            FlexibleDate 開始日, FlexibleDate 終了日) {
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(市町村コードメッセージ.toString()));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage(処理枝番メッセージ.toString()));
+        List<DbT7022ShoriDateKanriEntity> entitylist = dac.select対象開始日時toupdate(サブ業務コード, 市町村コード, 処理名, 処理枝番);
+        for (DbT7022ShoriDateKanriEntity entity : entitylist) {
+            if (開始日 != null) {
+                entity.setTaishoKaishiTimestamp(new YMDHMS(開始日.toString().concat(開始時分秒.toString())));
+            }
+            if (終了日 != null) {
+                entity.setTaishoShuryoTimestamp(new YMDHMS(終了日.toString().concat(終了時分秒.toString())));
+            }
+            entity.setState(EntityDataState.Modified);
+            dac.save(entity);
+        }
+    }
+
+    /**
+     * 処理日付管理マスタから、処理名より、前回対象年月日期間のデータを取得する。
+     *
+     * @param 処理名 RString
+     * @return ShoriDateKanri
+     */
+    @Transaction
+    public ShoriDateKanri get前回対象年月日期間(RString 処理名) {
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        DbT7022ShoriDateKanriEntity entity = dac.select前回対象年月日期間(処理名);
         if (entity == null) {
             return null;
         }

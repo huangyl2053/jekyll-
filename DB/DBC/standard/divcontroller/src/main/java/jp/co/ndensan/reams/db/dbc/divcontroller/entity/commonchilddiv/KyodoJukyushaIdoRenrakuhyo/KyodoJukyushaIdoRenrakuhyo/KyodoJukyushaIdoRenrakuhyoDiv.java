@@ -8,11 +8,14 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyodoJuky
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.param.KyodoshoriyoJukyushaIdoRenrakuhyoParam;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
@@ -644,5 +647,272 @@ public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyus
     @Override
     public ValidationMessageControlPairs get一時差止日の関連チェック() {
         return KyodoJukyushaIdoRenrakuhyoDivHandler.of(this).一時差止日の関連チェック();
+    }
+
+    /**
+     * 「基本送付情報を追加する」チェックボックス。
+     *
+     * @return list
+     */
+    @JsonIgnore
+    @Override
+    public List<RString> get基本送付情報を追加する() {
+        return this.getChkKihonSofuAdd().getSelectedKeys();
+    }
+
+    /**
+     * 「償還送付情報を追加する」チェックボックス。
+     *
+     * @return list
+     */
+    @JsonIgnore
+    @Override
+    public List<RString> get償還送付情報を追加する() {
+        return this.getChkShokanSofuAdd().getSelectedKeys();
+    }
+
+    /**
+     * 「高額送付情報を追加する」チェックボックス。
+     *
+     * @return list
+     */
+    @JsonIgnore
+    @Override
+    public List<RString> get高額送付情報を追加する() {
+        return this.getChkKogakuSofuAdd().getSelectedKeys();
+    }
+
+    /**
+     * 「基本送付情報を削除する」チェックボックス。
+     *
+     * @return list
+     */
+    @JsonIgnore
+    @Override
+    public List<RString> get基本送付情報を削除する() {
+        return this.getChkKihonSofuDelete().getSelectedKeys();
+    }
+
+    /**
+     * 「償還送付情報を削除する」チェックボックス。
+     *
+     * @return list
+     */
+    @JsonIgnore
+    @Override
+    public List<RString> get償還送付情報を削除する() {
+        return this.getChkShokanSofuDelete().getSelectedKeys();
+    }
+
+    /**
+     * 「高額送付情報を削除する」チェックボックス。
+     *
+     * @return list
+     */
+    @JsonIgnore
+    @Override
+    public List<RString> get高額送付情報を削除する() {
+        return this.getChkKogakuSofuDelete().getSelectedKeys();
+    }
+
+    /**
+     * 基本送付情報の履歴番号。
+     *
+     * @return 履歴番号 int
+     */
+    @JsonIgnore
+    @Override
+    public Decimal get基本送付_履歴番号() {
+        return this.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtRirekiNo().getValue();
+    }
+
+    /**
+     * 償還送付情報の履歴番号。
+     *
+     * @return 履歴番号 int
+     */
+    @JsonIgnore
+    @Override
+    public Decimal get償還送付_履歴番号() {
+        return this.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtRirekiNo().getValue();
+    }
+
+    /**
+     * 高額送付情報の履歴番号。
+     *
+     * @return 履歴番号 int
+     */
+    @JsonIgnore
+    @Override
+    public Decimal get高額送付_履歴番号() {
+        return this.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtRirekiNo().getValue();
+    }
+
+    /**
+     * 訂正区分。
+     *
+     * @return 訂正区分 RString
+     */
+    @JsonIgnore
+    @Override
+    public RString get訂正区分() {
+        return this.getRadTeiseiKubunCode().getSelectedValue();
+    }
+
+    /**
+     * 訂正年月日。
+     *
+     * @return 訂正年月日 RDate
+     */
+    @JsonIgnore
+    @Override
+    public RDate get訂正年月日() {
+        return this.getTxtTeiseiYMD().getValue();
+    }
+
+    /**
+     * 基本送付情報を追加活性する。
+     *
+     * @return boolean
+     */
+    @JsonIgnore
+    @Override
+    public boolean get基本送付情報を追加活性() {
+        return !this.getChkKihonSofuAdd().isDisabled();
+    }
+
+    /**
+     * 償還送付情報を追加活性する。
+     *
+     * @return boolean
+     */
+    @JsonIgnore
+    @Override
+    public boolean get償還送付情報を追加活性() {
+        return !this.getChkShokanSofuAdd().isDisabled();
+    }
+
+    /**
+     * 高額送付情報を追加活性する。
+     *
+     * @return boolean
+     */
+    @JsonIgnore
+    @Override
+    public boolean get高額送付情報を追加活性() {
+        return !this.getChkKogakuSofuAdd().isDisabled();
+    }
+
+    /**
+     * 基本送付情報の異動日チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    @JsonIgnore
+    @Override
+    public ValidationMessageControlPairs 基本送付情報の異動日チェック() {
+        return KyodoJukyushaIdoRenrakuhyoDivValidationHandler.of(this).基本送付情報の異動日チェック();
+    }
+
+    /**
+     * 償還送付情報の異動日チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    @JsonIgnore
+    @Override
+    public ValidationMessageControlPairs 償還送付情報の異動日チェック() {
+        return KyodoJukyushaIdoRenrakuhyoDivValidationHandler.of(this).償還送付情報の異動日チェック();
+    }
+
+    /**
+     * 高額送付情報の異動日チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    @JsonIgnore
+    @Override
+    public ValidationMessageControlPairs 高額送付情報の異動日チェック() {
+        return KyodoJukyushaIdoRenrakuhyoDivValidationHandler.of(this).高額送付情報の異動日チェック();
+    }
+
+    /**
+     * 基本送付情報の異動区分チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    @JsonIgnore
+    @Override
+    public ValidationMessageControlPairs 基本送付情報の異動区分チェック() {
+        return KyodoJukyushaIdoRenrakuhyoDivValidationHandler.of(this).基本送付情報の異動区分チェック();
+    }
+
+    /**
+     * 償還送付情報の異動区分チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    @JsonIgnore
+    @Override
+    public ValidationMessageControlPairs 償還送付情報の異動区分チェック() {
+        return KyodoJukyushaIdoRenrakuhyoDivValidationHandler.of(this).償還送付情報の異動区分チェック();
+    }
+
+    /**
+     * 高額送付情報の異動区分チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    @JsonIgnore
+    @Override
+    public ValidationMessageControlPairs 高額送付情報の異動区分チェック() {
+        return KyodoJukyushaIdoRenrakuhyoDivValidationHandler.of(this).高額送付情報の異動区分チェック();
+    }
+
+    /**
+     * 基本送付情報の履歴番号チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    @JsonIgnore
+    @Override
+    public ValidationMessageControlPairs 基本送付情報の履歴番号チェック() {
+        return KyodoJukyushaIdoRenrakuhyoDivValidationHandler.of(this).基本送付情報の履歴番号チェック();
+    }
+
+    /**
+     * 償還送付情報の履歴番号チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    @JsonIgnore
+    @Override
+    public ValidationMessageControlPairs 償還送付情報の履歴番号チェック() {
+        return KyodoJukyushaIdoRenrakuhyoDivValidationHandler.of(this).償還送付情報の履歴番号チェック();
+    }
+
+    /**
+     * 高額送付情報の履歴番号チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    @JsonIgnore
+    @Override
+    public ValidationMessageControlPairs 高額送付情報の履歴番号チェック() {
+        return KyodoJukyushaIdoRenrakuhyoDivValidationHandler.of(this).高額送付情報の履歴番号チェック();
+    }
+
+    /**
+     * 修正有無チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    @JsonIgnore
+    @Override
+    public ValidationMessageControlPairs 修正有無チェック(KyodoshoriyoJukyushaIdoRenrakuhyoParam 初期化異動情報Entity,
+            KyodoshoriyoJukyushaIdoRenrakuhyoParam 画面項目異動情報Entity, boolean 基本送付情報Flag,
+            boolean 償還送付情報変Flag, boolean 高額送付情報Flag) {
+        return KyodoJukyushaIdoRenrakuhyoDivValidationHandler.of(this).修正有無チェック(初期化異動情報Entity,
+                画面項目異動情報Entity, 基本送付情報Flag, 償還送付情報変Flag, 高額送付情報Flag);
     }
 }

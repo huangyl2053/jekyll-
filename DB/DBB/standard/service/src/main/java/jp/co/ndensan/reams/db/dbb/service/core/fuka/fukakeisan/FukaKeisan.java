@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.FukaKonkyo;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyojohoFactory;
+import jp.co.ndensan.reams.db.dbb.business.core.kanendokoseikeisan.KoseigoFukaResult;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.MonthShichoson;
@@ -56,8 +57,8 @@ import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ShokkenKubun;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiShotokuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
-import jp.co.ndensan.reams.db.dbb.service.core.choshuhoho.ChoshuHohoKoshin;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.choteijiyu.ChoteiJiyuHantei;
+import jp.co.ndensan.reams.db.dbb.service.core.kanendokoseikeisan.KanendoKoseiKeisan;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoRank;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHohoBuilder;
@@ -69,6 +70,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
+import jp.co.ndensan.reams.db.dbx.service.core.choshuhoho.ChoshuHohoKoshin;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
@@ -1095,15 +1097,12 @@ public class FukaKeisan {
         if (扶助種類リスト == null || 扶助種類リスト.isEmpty()) {
             return RString.EMPTY;
         }
-        // TODO QAのNo.950(Redmine#91760)
-        // 以下がDummy data
-        return new RString("01");
-//        List<RString> 扶助種類 = new ArrayList<>();
-//        for (SeikatsuHogoFujoShurui shurui : 扶助種類リスト) {
-//            扶助種類.add(shurui.get扶助種類コード().getColumnValue().getColumnValue());
-//        }
-//        Collections.sort(扶助種類);
-//        return 扶助種類.get(0);
+        List<RString> 扶助種類 = new ArrayList<>();
+        for (SeikatsuHogoFujoShurui shurui : 扶助種類リスト) {
+            扶助種類.add(shurui.get扶助種類コード().getColumnValue().getColumnValue());
+        }
+        Collections.sort(扶助種類);
+        return 扶助種類.get(0);
     }
 
     private void set老齢福祉年金(FukaJohoBuilder builder, List<RoreiFukushiNenkinJukyusha> 老福の情報リスト,
@@ -1381,15 +1380,19 @@ public class FukaKeisan {
     }
 
     private KoseiShorikoaResult get調定計算_過年度(CalculateChoteiParameter param, FlexibleYear 調定年度) {
-        // TODO ビジネス設計_DBBBZ00002_過年度更正計算.xlsxの「更正後賦課情報取得」を使用する。   実装しない。
-        List<FukaJoho> 賦課の情報リスト = new ArrayList<>();
-        賦課の情報リスト.add(param.get年度分賦課リスト_更正前().get現年度());
-        賦課の情報リスト.add(param.get年度分賦課リスト_更正前().get過年度1());
-        賦課の情報リスト.add(param.get年度分賦課リスト_更正前().get過年度2());
-        賦課の情報リスト.add(param.get年度分賦課リスト_更正前().get過年度3());
-        賦課の情報リスト.add(param.get年度分賦課リスト_更正前().get過年度4());
-        賦課の情報リスト.add(param.get年度分賦課リスト_更正前().get過年度5());
-        ChoshuHoho 徴収方法の情報 = param.get徴収方法の情報_更正前();
+        List<FukaJoho> 賦課の情報List = new ArrayList<>();
+        賦課の情報List.add(param.get年度分賦課リスト_更正前().get現年度());
+        賦課の情報List.add(param.get年度分賦課リスト_更正前().get過年度1());
+        賦課の情報List.add(param.get年度分賦課リスト_更正前().get過年度2());
+        賦課の情報List.add(param.get年度分賦課リスト_更正前().get過年度3());
+        賦課の情報List.add(param.get年度分賦課リスト_更正前().get過年度4());
+        賦課の情報List.add(param.get年度分賦課リスト_更正前().get過年度5());
+        KanendoKoseiKeisan kanendoKoseiKeisan = KanendoKoseiKeisan.createInstance();
+        KoseigoFukaResult koseigoFukaResult = kanendoKoseiKeisan.getKoseigoFuka(賦課の情報List,
+                param.get徴収方法の情報_更正前(), 調定年度, param.get調定日時());
+
+        List<FukaJoho> 賦課の情報リスト = koseigoFukaResult.get賦課の情報リスト();
+        ChoshuHoho 徴収方法の情報 = koseigoFukaResult.getChoshuHoho();
 
         FukaJoho 現年度 = null;
         FukaJoho 過年度 = null;

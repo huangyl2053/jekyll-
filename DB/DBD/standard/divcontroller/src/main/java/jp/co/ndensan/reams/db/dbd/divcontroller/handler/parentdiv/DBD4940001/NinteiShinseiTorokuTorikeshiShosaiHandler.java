@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4940001.Nint
 import jp.co.ndensan.reams.db.dbd.service.core.yokaigoninteijoho.YokaigoNinteiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseiJokyoKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
@@ -74,23 +75,18 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
      * @return 認定情報 YokaigoNinteiJoho
      */
     public YokaigoNinteiJoho onLoad(RString 被保険者番号) {
-        // TODO. 受給メニューから起動された場合
-//        boolean is受給 = ResponseHolder.getMenuID().equals(new RString("1"));
-        // for test
-        boolean is受給 = true;
 
-        YokaigoNinteiJoho 認定情報 = get認定情報(被保険者番号, is受給);
+        YokaigoNinteiJoho 認定情報 = get認定情報(被保険者番号, true);
         if (null == 認定情報) {
             return null;
         }
+        setHdnArea(認定情報);
 
         initialize(
                 //                被保険者番号,
-                認定情報, is受給);
+                認定情報, is受給());
 
         edit状態(認定情報.get申請状況区分().equals(ShinseiJokyoKubun.申請中.getコード()));
-
-        setHdnArea();
 
         return 認定情報;
     }
@@ -101,22 +97,27 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
      * @param 認定情報 YokaigoNinteiJoho
      */
     public void save(YokaigoNinteiJoho 認定情報) {
-        // TODO. is受給の判断わからない。
-//        boolean is受給 = ResponseHolder.getMenuID().equals(new RString("1"));
-        // for test
-        boolean is受給 = true;
-
-        if (is受給) {
+        if (is受給()) {
             認定情報 = edit受給者台帳(認定情報);
             認定情報 = edit要介護認定申請情報受給(認定情報);
         } else {
             認定情報 = edit要介護認定申請情報認定(認定情報);
         }
 
-        YokaigoNinteiJohoManager.createInstance().save介護認定申請情報(認定情報, is受給);
+        YokaigoNinteiJohoManager.createInstance().save介護認定申請情報(認定情報, is受給());
 
     }
 
+//    /**
+//     * 今回前回履歴情報情報を返す。
+//     *
+//     * @param 被保険者番号 被保険者番号
+//     *
+//     * @return 今回前回履歴情報 List<YokaigoRirekiJohoEntity>
+//     */
+//    public List<YokaigoRirekiJoho> get今回前回履歴情報(RString 被保険者番号) {
+//        return YokaigoNinteiJohoManager.createInstance().get今回前回履歴情報(被保険者番号);
+//    }
     private YokaigoNinteiJoho get認定情報(RString 被保険者番号, boolean is受給) {
         YokaigoNinteiJoho 認定情報;
         if (is受給) {
@@ -194,7 +195,7 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
         } else {
             主治医Div.initialize(
                     association.get地方公共団体コード(),
-                    new ShinseishoKanriNo(認定情報.get申請書管理番号受給()),
+                    new ShinseishoKanriNo(認定情報.get申請書管理番号認定()),
                     SubGyomuCode.DBD介護受給,
                     認定情報.get主治医医療機関コード認定(),
                     認定情報.get医療機関名称認定(),
@@ -206,6 +207,7 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
         INinteiInputDiv 認定Div = div.getCcdNinteiInput();
         NinteiInputDataPassModel model = new NinteiInputDataPassModel();
         model.set要介護度コード(convertCodeToRString(認定情報.get要介護認定状態区分コード()));
+        model.set要介護度名称(get要介護度名(認定情報.get厚労省IF識別コード(), convertCodeToRString(認定情報.get要介護認定状態区分コード())));
         model.set有効開始年月日(認定情報.get認定有効期間開始年月日());
         model.set有効終了年月日(認定情報.get認定有効期間終了年月日());
         model.set認定年月日(認定情報.get認定年月日());
@@ -259,10 +261,11 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnkousin"), !is申請中);
     }
 
-    private void setHdnArea() {
+    private void setHdnArea(YokaigoNinteiJoho 認定情報) {
         YokaigoNinteiJohoManager manger = YokaigoNinteiJohoManager.createInstance();
         div.setHdnKaigoJimuCode(convertCodeToRString(manger.get介護導入形態コード(GyomuBunrui.介護事務.code())));
         div.setHdnKaigoNinteiCode(convertCodeToRString(manger.get介護導入形態コード(GyomuBunrui.介護認定.code())));
+        div.setHdnShikibetsuKey(null != 認定情報.get識別コード受給() ? 認定情報.get識別コード受給().value() : RString.EMPTY);
     }
 
     private YokaigoNinteiJoho edit受給者台帳(YokaigoNinteiJoho 認定情報) {
@@ -316,5 +319,14 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
             return RString.EMPTY;
         }
         return RString.EMPTY;
+    }
+
+    private boolean is受給() {
+        return (DonyuKeitaiCode.事務単一.getCode().equals(div.getHdnKaigoJimuCode())
+                && DonyuKeitaiCode.認定単一.getCode().equals(div.getHdnKaigoNinteiCode()))
+                || (DonyuKeitaiCode.事務単一.getCode().equals(div.getHdnKaigoJimuCode())
+                && div.getHdnKaigoNinteiCode().isNullOrEmpty())
+                || (DonyuKeitaiCode.事務広域.getCode().equals(div.getHdnKaigoJimuCode())
+                && DonyuKeitaiCode.認定広域.getCode().equals(div.getHdnKaigoNinteiCode()));
     }
 }

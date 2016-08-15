@@ -471,4 +471,31 @@ public class NiTeiCyoSaiChiRanBusiness implements Serializable {
         return entity.isServiceJokyoFlag();
     }
 
+    /**
+     * サービスの状況フラグ連番を返します。
+     *
+     * @return サービスの状況フラグ連番
+     */
+    public int getサービスの状況フラグ連番() {
+        return entity.getSabisuremflagremban();
+    }
+
+    /**
+     * 記入項目連番を返します。
+     *
+     * @return 記入項目連番
+     */
+    public int get記入項目連番() {
+        return entity.getKinyuitemremban();
+    }
+
+    /**
+     * 施設利用連番を返します。
+     *
+     * @return 施設利用連番
+     */
+    public int get施設利用連番() {
+        return entity.getShisetsuriyoremban();
+    }
+
 }

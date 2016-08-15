@@ -45,6 +45,15 @@ public class HanyoListShotokuJohoProcessParameter implements IBatchProcessParame
     /**
      * コンストラクタ
      *
+     * @param 宛名検索条件 IShikibetsuTaishoPSMSearchKey
+     */
+    public HanyoListShotokuJohoProcessParameter(IShikibetsuTaishoPSMSearchKey 宛名検索条件) {
+        this.宛名検索条件 = 宛名検索条件;
+    }
+
+    /**
+     * コンストラクタ
+     *
      * @param 帳票ID ReportId
      * @param 宛名抽出条件 AtenaSelectBatchParameter
      * @param 出力順ID long
@@ -58,12 +67,10 @@ public class HanyoListShotokuJohoProcessParameter implements IBatchProcessParame
      * @param 住民税減免前後表示区分 RString
      * @param 課税区分減免前s List<RString>
      * @param 課税区分減免後s List<RString>
-     * @param 宛名検索条件 IShikibetsuTaishoPSMSearchKey
      */
     public HanyoListShotokuJohoProcessParameter(ReportId 帳票ID, AtenaSelectBatchParameter 宛名抽出条件, long 出力順ID,
             RString 出力項目ID, boolean 項目名付加, boolean 連番付加, boolean 日付編集, FlexibleYear 賦課年度, YMDHMS 抽出期間From,
-            YMDHMS 抽出期間To, RString 住民税減免前後表示区分, List<RString> 課税区分減免前s, List<RString> 課税区分減免後s,
-            IShikibetsuTaishoPSMSearchKey 宛名検索条件) {
+            YMDHMS 抽出期間To, RString 住民税減免前後表示区分, List<RString> 課税区分減免前s, List<RString> 課税区分減免後s) {
         this.帳票ID = 帳票ID;
         this.宛名抽出条件 = 宛名抽出条件;
         this.出力順ID = 出力順ID;
@@ -77,7 +84,6 @@ public class HanyoListShotokuJohoProcessParameter implements IBatchProcessParame
         this.住民税減免前後表示区分 = 住民税減免前後表示区分;
         this.課税区分減免前s = 課税区分減免前s;
         this.課税区分減免後s = 課税区分減免後s;
-        this.宛名検索条件 = 宛名検索条件;
     }
 
     /**

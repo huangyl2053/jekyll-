@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.gemmen;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gemmen.GemmenJohoRelateMapperParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gemmen.GemmenJohoRelateSonotaMapperParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gemmen.GemmenJohoRelateEntity;
@@ -29,7 +30,7 @@ public interface IGemmenJohoRelateMapper {
      * @param 減免の情報検索条件 減免の情報検索条件
      * @return GemmenJohoRelateEntity
      */
-    GemmenJohoRelateEntity select最新の減免情報ByKey(GemmenJohoRelateMapperParameter 減免の情報検索条件);
+    List<GemmenJohoRelateEntity> select最新の減免情報ByKey(GemmenJohoRelateMapperParameter 減免の情報検索条件);
 
     /**
      * 減免の情報情報をキー検索で１件取得します。

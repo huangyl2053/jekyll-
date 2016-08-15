@@ -7,20 +7,23 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3150001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.fukarirekiall.FukaRirekiAll.IFukaRirekiAllDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kaigofukakihon.KaigoFukaKihon.IKaigoFukaKihonDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kaigofukakihon.KaigoFukaKihon.KaigoFukaKihonDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ChoshuYuyoJuminKihon のクラスファイル 
- * 
- * @author 自動生成
+ * ChoshuYuyoJuminKihon のクラスファイル
+ *
+ * @reamsid_L DBB-1680-010 gongliang
  */
 public class ChoshuYuyoJuminKihonDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -37,6 +40,14 @@ public class ChoshuYuyoJuminKihonDiv extends Panel {
     private KaigoFukaKihonDiv ccdKaigoFukaKihon;
     @JsonProperty("AtenaKihon")
     private KaigoAtenaInfoDiv AtenaKihon;
+    @JsonProperty("ChoshuYuyoShuruiCode")
+    private RString ChoshuYuyoShuruiCode;
+    @JsonProperty("ChoshuYuyoShuruiHyojiMongon")
+    private RString ChoshuYuyoShuruiHyojiMongon;
+    @JsonProperty("GemmenTorikeshiShuruiCode")
+    private RString GemmenTorikeshiShuruiCode;
+    @JsonProperty("GemmenTorikeshiShuruiHyojiMongon")
+    private RString GemmenTorikeshiShuruiHyojiMongon;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -117,16 +128,83 @@ public class ChoshuYuyoJuminKihonDiv extends Panel {
     }
 
     /*
+     * getChoshuYuyoShuruiCode
+     * @return ChoshuYuyoShuruiCode
+     */
+    @JsonProperty("ChoshuYuyoShuruiCode")
+    public RString getChoshuYuyoShuruiCode() {
+        return ChoshuYuyoShuruiCode;
+    }
+
+    /*
+     * setChoshuYuyoShuruiCode
+     * @param ChoshuYuyoShuruiCode ChoshuYuyoShuruiCode
+     */
+    @JsonProperty("ChoshuYuyoShuruiCode")
+    public void setChoshuYuyoShuruiCode(RString ChoshuYuyoShuruiCode) {
+        this.ChoshuYuyoShuruiCode = ChoshuYuyoShuruiCode;
+    }
+
+    /*
+     * getChoshuYuyoShuruiHyojiMongon
+     * @return ChoshuYuyoShuruiHyojiMongon
+     */
+    @JsonProperty("ChoshuYuyoShuruiHyojiMongon")
+    public RString getChoshuYuyoShuruiHyojiMongon() {
+        return ChoshuYuyoShuruiHyojiMongon;
+    }
+
+    /*
+     * setChoshuYuyoShuruiHyojiMongon
+     * @param ChoshuYuyoShuruiHyojiMongon ChoshuYuyoShuruiHyojiMongon
+     */
+    @JsonProperty("ChoshuYuyoShuruiHyojiMongon")
+    public void setChoshuYuyoShuruiHyojiMongon(RString ChoshuYuyoShuruiHyojiMongon) {
+        this.ChoshuYuyoShuruiHyojiMongon = ChoshuYuyoShuruiHyojiMongon;
+    }
+
+    /*
+     * getGemmenTorikeshiShuruiCode
+     * @return GemmenTorikeshiShuruiCode
+     */
+    @JsonProperty("GemmenTorikeshiShuruiCode")
+    public RString getGemmenTorikeshiShuruiCode() {
+        return GemmenTorikeshiShuruiCode;
+    }
+
+    /*
+     * setGemmenTorikeshiShuruiCode
+     * @param GemmenTorikeshiShuruiCode GemmenTorikeshiShuruiCode
+     */
+    @JsonProperty("GemmenTorikeshiShuruiCode")
+    public void setGemmenTorikeshiShuruiCode(RString GemmenTorikeshiShuruiCode) {
+        this.GemmenTorikeshiShuruiCode = GemmenTorikeshiShuruiCode;
+    }
+
+    /*
+     * getGemmenTorikeshiShuruiHyojiMongon
+     * @return GemmenTorikeshiShuruiHyojiMongon
+     */
+    @JsonProperty("GemmenTorikeshiShuruiHyojiMongon")
+    public RString getGemmenTorikeshiShuruiHyojiMongon() {
+        return GemmenTorikeshiShuruiHyojiMongon;
+    }
+
+    /*
+     * setGemmenTorikeshiShuruiHyojiMongon
+     * @param GemmenTorikeshiShuruiHyojiMongon GemmenTorikeshiShuruiHyojiMongon
+     */
+    @JsonProperty("GemmenTorikeshiShuruiHyojiMongon")
+    public void setGemmenTorikeshiShuruiHyojiMongon(RString GemmenTorikeshiShuruiHyojiMongon) {
+        this.GemmenTorikeshiShuruiHyojiMongon = GemmenTorikeshiShuruiHyojiMongon;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public DataGrid<dghukainfo_Row> getDghukainfo() {
+    public IFukaRirekiAllDiv getDghukainfo() {
         return this.getChoshuYuyoFukaRirekiAll().getDghukainfo();
-    }
-
-    @JsonIgnore
-    public void  setDghukainfo(DataGrid<dghukainfo_Row> dghukainfo) {
-        this.getChoshuYuyoFukaRirekiAll().setDghukainfo(dghukainfo);
     }
 
     @JsonIgnore
@@ -135,7 +213,7 @@ public class ChoshuYuyoJuminKihonDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblPrintMessage(Label lblPrintMessage) {
+    public void setLblPrintMessage(Label lblPrintMessage) {
         this.getChoshuYuyoPrintinfo().getPritPublish1().setLblPrintMessage(lblPrintMessage);
     }
 
@@ -145,7 +223,7 @@ public class ChoshuYuyoJuminKihonDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setPritPublish2(pritPublish2Div pritPublish2) {
+    public void setPritPublish2(pritPublish2Div pritPublish2) {
         this.getChoshuYuyoPrintinfo().getPritPublish1().setPritPublish2(pritPublish2);
     }
 

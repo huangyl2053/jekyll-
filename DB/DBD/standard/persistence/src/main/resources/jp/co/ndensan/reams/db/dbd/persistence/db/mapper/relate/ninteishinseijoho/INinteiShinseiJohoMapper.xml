@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBD-1480-010 zhuxiaojun-->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninteishinseijoho.INinteiShinseiJohoMapper">
+
+<!--   <resultMap id="result_NinteiShinseiJohoEntity" resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD5190001.NinteiShinseiJohoEntity" autoMapping="true">
+        <result property="hihokenshaNo"  column="hihokenshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="hihokenshaKana" column="hihokenshaKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
+        <result property="seibetsu"  column="seibetsu"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="seinengappiYMD" column="seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="ninteiShinseiYMD" column="ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="ninteiShinseiShinseijiKubunCode" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+    </resultMap>-->
+
+    <select id="get要介護認定申請情報"  resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5190001.NinteiShinseiJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd5190001.NinteiShinseiJohoParameter"
+            fetchSize="500" resultOrdered="true">
+        SELECT
+        "DbT4101"."hihokenshaNo" AS "hihokenshaNo",
+        "DbT4101"."hihokenshaName" AS "hihokenshaName",
+        "DbT4101"."hihokenshaKana" AS "hihokenshaKana",
+        "DbT4101"."seibetsu" AS "seibetsu",
+        "DbT4101"."seinengappiYMD" AS "seinengappiYMD" ,
+        "DbT4101"."ninteiShinseiYMD" AS "ninteiShinseiYMD" ,
+        "DbT4101"."ninteiShinseiShinseijiKubunCode" AS "ninteiShinseiShinseijiKubunCode" 
+        FROM
+        rgdb."DbT4101NinteiShinseiJoho" AS "DbT4101"
+        INNER JOIN  rgdb."DbT5105NinteiKanryoJoho" AS "DbT5105" 
+        ON "DbT4101"."shinseishoKanriNo" = "DbT5105"."shinseishoKanriNo"
+        AND "DbT5105"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+        INNER JOIN  rgdb."DbT7211GaibuRenkeiDataoutputJoho" AS "DbT7211"
+        ON "DbT4101"."shinseishoKanriNo" = "DbT7211"."shinseishoKanriNo"
+        WHERE
+        "DbT4101"."logicalDeletedFlag" =#{logicalDeletedFlag}
+            <if test="証記載保険者番号">
+                AND  "DbT4101"."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+            </if>
+        AND "DbT7211"."ninteiShinseiJohoChushutsuYMD" is NULL
+            <if test="今回開始">
+                AND  "DbT4101"."insertTimestamp" <![CDATA[>=]]> #{konkaikaishiTimestamp}
+            </if>
+            <if test="今回終了">
+                AND  "DbT4101"."insertTimestamp" <![CDATA[<]]> #{konkaisyuryoTimestamp}
+            </if>
+            <if test="被保険者番号入力">
+                AND "DbT4101"."hihokenshaNo" = #{hihokenshaNo}
+            </if>
+            
+        ORDER BY
+            "DbT4101"."hihokenshaNo"
+            <if test="最大表示件数">
+                 LIMIT(#{saidaikensu})
+            </if>
+    </select>
+</mapper>

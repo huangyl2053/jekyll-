@@ -4,6 +4,21 @@ var DBD;
         var Events = (function () {
             function Events() {
             }
+            Events.onOkClose_BtnTainoJokyo = function () {
+                return "onOkClose_BtnTainoJokyo";
+            };
+
+            Events.onBeforeOpenDialog_BtnTainoJokyo = function () {
+                return "onBeforeOpenDialog_BtnTainoJokyo";
+            };
+
+            Events.onClick_BtnKakutei = function () {
+                return "onClick_BtnKakutei";
+            };
+
+            Events.onClick_BtnTorikeshi = function () {
+                return "onClick_BtnTorikeshi";
+            };
             return Events;
         })();
         KyufuGengaku1Go.Events = Events;

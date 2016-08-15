@@ -7,17 +7,17 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3150001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
 
 /**
- * tblChoshuYuyo のクラスファイル 
- * 
- * @author 自動生成
+ * tblChoshuYuyo のクラスファイル
+ *
+ * @reamsid_L DBB-1680-010 gongliang
  */
 public class tblChoshuYuyoDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -97,13 +97,15 @@ public class tblChoshuYuyoDiv extends TablePanel {
 
     // </editor-fold>
 }
+
 /**
- * celJoho のクラスファイル 
- * 
+ * celJoho のクラスファイル
+ *
  * @author 自動生成
  */
 class celJohoAttblChoshuYuyo extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("TorikeshiJoho")
     private TorikeshiJohoDiv TorikeshiJoho;
     @JsonProperty("ShinseiJoho")
@@ -167,13 +169,15 @@ class celJohoAttblChoshuYuyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku のクラスファイル 
- * 
+ * celKiwarigaku のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigakuAttblChoshuYuyo extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("Kiwarigaku")
     private KiwarigakuDiv Kiwarigaku;
 

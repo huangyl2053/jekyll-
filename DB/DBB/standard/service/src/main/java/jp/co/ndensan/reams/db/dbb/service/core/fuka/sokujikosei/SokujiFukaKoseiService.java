@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.kanri.MonthShichoson;
 import jp.co.ndensan.reams.db.dbb.business.core.sokujikosei.SokujiFukaKoseiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.sokujikosei.SokujiFukaKoseiResult;
 import jp.co.ndensan.reams.db.dbb.business.core.sokujikosei.YokunenFukaKoseiResult;
-import jp.co.ndensan.reams.db.dbb.definition.core.choteijiyu.ChoteiJiyuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ShokkenKubun;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
@@ -317,7 +317,8 @@ public class SokujiFukaKoseiService {
             FukaKeisan fukaKeisan = FukaKeisan.createInstance();
             return fukaKeisan.do全履歴更正計算(koseiParam);
         } else {
-            Decimal 年額保険料 = param.get更正後年度分賦課リスト().get最新賦課の情報().get減免前介護保険料_年額()
+            Decimal 減免前介護保険料_年額 = param.get更正後年度分賦課リスト().get最新賦課の情報().get減免前介護保険料_年額();
+            Decimal 年額保険料 = (減免前介護保険料_年額 == null ? Decimal.ZERO : 減免前介護保険料_年額)
                     .subtract(param.get更正後減免額());
             CalculateChoteiParameter calParam = new CalculateChoteiParameter();
             calParam.set賦課年度(param.get賦課年度());

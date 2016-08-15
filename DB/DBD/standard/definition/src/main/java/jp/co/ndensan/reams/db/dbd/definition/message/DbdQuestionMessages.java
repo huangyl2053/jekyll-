@@ -5,10 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.message;
 
+import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
+import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 
 /**
  * DBDの質問メッセージ定義列挙型です。
@@ -27,8 +28,10 @@ public enum DbdQuestionMessages implements IMessageGettable {
             + "\\n他市町村からの照会結果など、同一年金について新規登録の必要がある場合登録してください。新規登録しますか？"),
     被保険者関連解除確認(8, "非課税年金対象者情報の、表示中の被保険者との関連づけを解除します。よろしいですか？"),
     非課税年金再処理確認(9, "\"再処理前\"に変更される処理月があります。再処理前に設定後、再処理を実行すると、"
-            + "取込済みの年月の非課税年金対象者情報は全て初期化されます。再処理前に設定してよろしいですか？");
-    private final Message message;
+            + "取込済みの年月の非課税年金対象者情報は全て初期化されます。再処理前に設定してよろしいですか？"),
+    処理実行の確認(50, "処理を実行してもよろしいですか？");
+    private final String message;
+    private final int no;
 
     /**
      * コンストラクタです。
@@ -37,11 +40,22 @@ public enum DbdQuestionMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbdQuestionMessages(int no, String message) {
-        this.message = new QuestionMessage(toCode("DBDQ", no), message);
+        this.no = no;
+        this.message = message;
     }
 
     @Override
     public Message getMessage() {
-        return message;
+        return new QuestionMessage(toCode("DBDQ", no), message);
+    }
+
+    /**
+     * 選択可能ボタンを指定してメッセージを返します。
+     *
+     * @param pattern ボタンセレクトパターン
+     * @return メッセージ
+     */
+    public Message getMessage(ButtonSelectPattern pattern) {
+        return new QuestionMessage(toCode("Q", no).toString(), message, pattern);
     }
 }

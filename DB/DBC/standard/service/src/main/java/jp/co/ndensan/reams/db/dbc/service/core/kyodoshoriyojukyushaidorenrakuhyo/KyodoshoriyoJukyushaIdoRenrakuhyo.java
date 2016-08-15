@@ -41,12 +41,17 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.SystemException;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 共同処理用受給者異動連絡票のビジネス
@@ -303,5 +308,182 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
         }
 
         return entity;
+    }
+
+    /**
+     * 識別コードを取得です。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return 識別コード
+     */
+    public ShikibetsuCode get識別コード(HihokenshaNo 被保険者番号) {
+        ShikibetsuCode 識別コード = ShikibetsuCode.EMPTY;
+        DbV1001HihokenshaDaichoEntity entity = 被保険者台帳管理Dac.get最新の被保険者台帳情報(被保険者番号);
+        if (entity != null) {
+            識別コード = entity.getShikibetsuCode();
+        }
+        return 識別コード;
+    }
+
+    /**
+     * 基本送付情報を追加するチェックボックスがチェックONの場合
+     *
+     * @param 被保険者番号
+     * @param 異動日
+     * @return int
+     */
+    public int 基本送付情報の異動日チェック(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
+        return dbT3002dac.select基本送付情報の異動日Count(被保険者番号, 異動日);
+    }
+
+    /**
+     * 償還送付情報を追加するチェックボックスがチェックONの場合
+     *
+     * @param 被保険者番号
+     * @param 異動日
+     * @return int
+     */
+    public int 償還送付情報の異動日チェック(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
+        return dbT3003dac.select償還送付情報の異動日Count(被保険者番号, 異動日);
+    }
+
+    /**
+     * 高額送付情報を追加するチェックボックスがチェックONの場合
+     *
+     * @param 被保険者番号
+     * @param 異動日
+     * @return int
+     */
+    public int 高額送付情報の異動日チェック(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
+        return dbT3004dac.select高額送付情報の異動日Count(被保険者番号, 異動日);
+    }
+
+    /**
+     * 基本送付情報を追加するチェックボックスがチェックONの場合
+     *
+     * @param 異動日
+     * @param 被保険者番号
+     * @param 異動区分コード
+     * @return int
+     */
+    public int 基本送付情報の異動区分チェック(HihokenshaNo 被保険者番号, RString 異動区分コード, FlexibleDate 異動日) {
+        return dbT3002dac.select基本送付情報の異動区分Count(被保険者番号, 異動区分コード, 異動日);
+    }
+
+    /**
+     * 償還送付情報を追加するチェックボックスがチェックONの場合
+     *
+     * @param 異動日
+     * @param 被保険者番号
+     * @param 異動区分コード
+     * @return int
+     */
+    public int 償還送付情報の異動区分チェック(HihokenshaNo 被保険者番号, RString 異動区分コード, FlexibleDate 異動日) {
+        return dbT3003dac.select償還送付情報の異動区分Count(被保険者番号, 異動区分コード, 異動日);
+    }
+
+    /**
+     * 高額送付情報を追加するチェックボックスがチェックONの場合
+     *
+     * @param 異動日
+     * @param 被保険者番号
+     * @param 異動区分コード
+     * @return int
+     */
+    public int 高額送付情報の異動区分チェック(HihokenshaNo 被保険者番号, RString 異動区分コード, FlexibleDate 異動日) {
+        return dbT3004dac.select高額送付情報の異動区分Count(被保険者番号, 異動区分コード, 異動日);
+    }
+
+    /**
+     * 基本送付情報を追加するチェックボックスがチェックONの場合で、画面．基本送付情報エリア．異動日と同一日のデータが共同処理用受給者異動基本送付テーブルにないこと
+     *
+     * @param 被保険者番号
+     * @param 異動日
+     * @return int
+     */
+    public int 基本送付情報の履歴番号チェック(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
+        return dbT3002dac.get基本送付情報の履歴番号Max(被保険者番号, 異動日);
+    }
+
+    /**
+     * 償還送付情報を追加するチェックボックスがチェックONの場合で、画面．基本送付情報エリア．異動日と同一日のデータが共同処理用受給者異動基本送付テーブルにないこと
+     *
+     * @param 被保険者番号
+     * @param 異動日
+     * @return int
+     */
+    public int 償還送付情報の履歴番号チェック(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
+        return dbT3003dac.get償還送付情報の履歴番号Max(被保険者番号, 異動日);
+    }
+
+    /**
+     * 高額送付情報を追加するチェックボックスがチェックONの場合で、画面．基本送付情報エリア．異動日と同一日のデータが共同処理用受給者異動基本送付テーブルにないこと
+     *
+     * @param 被保険者番号
+     * @param 異動日
+     * @return int
+     */
+    public int 高額送付情報の履歴番号チェック(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
+        return dbT3004dac.get高額送付情報の履歴番号Max(被保険者番号, 異動日);
+    }
+
+    /**
+     * 異動情報の登録のンメソッドます。
+     *
+     * @param 異動基本送付Entity KyodoShoriyoJukyushaIdoKihonSofu
+     * @param 異動償還送付Entity KyodoShoriyoJukyushaIdoShokanSofu
+     * @param 異動高額送付Entity KyodoShoriyoJukyushaIdoKogakuSofu
+     * @throws SystemException 保存処理に失敗した場合
+     * @throws ApplicationException 保存処理に失敗した場合
+     */
+    @Transaction
+    public void save異動情報(KyodoShoriyoJukyushaIdoKihonSofu 異動基本送付Entity,
+            KyodoShoriyoJukyushaIdoShokanSofu 異動償還送付Entity,
+            KyodoShoriyoJukyushaIdoKogakuSofu 異動高額送付Entity) throws SystemException, ApplicationException {
+        if (異動基本送付Entity != null) {
+            DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity dbT3002Entity = 異動基本送付Entity.toEntity();
+            dbT3002Entity.setState(EntityDataState.Added);
+            dbT3002dac.save(dbT3002Entity);
+        }
+        if (異動償還送付Entity != null) {
+            DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity dbT3003Entity = 異動償還送付Entity.toEntity();
+            dbT3003Entity.setState(EntityDataState.Added);
+            dbT3003dac.save(dbT3003Entity);
+        }
+        if (異動高額送付Entity != null) {
+            DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity dbT3004Entity = 異動高額送付Entity.toEntity();
+            dbT3004Entity.setState(EntityDataState.Added);
+            dbT3004dac.save(dbT3004Entity);
+        }
+    }
+
+    /**
+     * 異動情報の更新のンメソッドます。
+     *
+     * @param 異動基本送付Entity KyodoShoriyoJukyushaIdoKihonSofu
+     * @param 異動償還送付Entity KyodoShoriyoJukyushaIdoShokanSofu
+     * @param 異動高額送付Entity KyodoShoriyoJukyushaIdoKogakuSofu
+     * @throws SystemException 保存処理に失敗した場合
+     * @throws ApplicationException 保存処理に失敗した場合
+     */
+    @Transaction
+    public void update異動情報(KyodoShoriyoJukyushaIdoKihonSofu 異動基本送付Entity,
+            KyodoShoriyoJukyushaIdoShokanSofu 異動償還送付Entity,
+            KyodoShoriyoJukyushaIdoKogakuSofu 異動高額送付Entity) throws SystemException, ApplicationException {
+        if (異動基本送付Entity != null) {
+            DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity dbT3002Entity = 異動基本送付Entity.toEntity();
+            dbT3002Entity.setState(EntityDataState.Modified);
+            dbT3002dac.save(dbT3002Entity);
+        }
+        if (異動償還送付Entity != null) {
+            DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity dbT3003Entity = 異動償還送付Entity.toEntity();
+            dbT3003Entity.setState(EntityDataState.Modified);
+            dbT3003dac.save(dbT3003Entity);
+        }
+        if (異動高額送付Entity != null) {
+            DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity dbT3004Entity = 異動高額送付Entity.toEntity();
+            dbT3004Entity.setState(EntityDataState.Modified);
+            dbT3004dac.save(dbT3004Entity);
+        }
     }
 }

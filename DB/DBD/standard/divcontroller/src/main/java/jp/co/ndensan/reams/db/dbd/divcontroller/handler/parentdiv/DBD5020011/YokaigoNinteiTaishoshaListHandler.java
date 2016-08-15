@@ -32,7 +32,10 @@ public class YokaigoNinteiTaishoshaListHandler {
      */
     public List<dgNinteiTaishosha_Row> onLoad() {
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
-        RString 導入形態コード = 市町村セキュリティ情報.get導入形態コード().getColumnValue();
+        RString 導入形態コード = null;
+        if (市町村セキュリティ情報.get導入形態コード() != null) {
+            導入形態コード = 市町村セキュリティ情報.get導入形態コード().getColumnValue();
+        }
 
         List<dgNinteiTaishosha_Row> 画面情報一覧 = new ArrayList<>();
         if (DonyuKeitaiCode.認定広域.getCode().equals(導入形態コード)) {
@@ -50,6 +53,9 @@ public class YokaigoNinteiTaishoshaListHandler {
      * @return 要介護認定インターフェース更新用情報
      */
     public ArrayList<YokaigoNinteiInterface> get要介護認定インターフェース情報(List<dgNinteiTaishosha_Row> ninteiTaishoshalist) {
+        if (ninteiTaishoshalist.isEmpty()) {
+            return new ArrayList<>();
+        }
         YokaigoNinteiTaisyosyaIchiranManager manager = YokaigoNinteiTaisyosyaIchiranManager.createInstance();
         List<RString> 申請書管理番号リスト = new ArrayList<>();
         for (dgNinteiTaishosha_Row ninteiTaishoshaRow : ninteiTaishoshalist) {
@@ -94,8 +100,7 @@ public class YokaigoNinteiTaishoshaListHandler {
             画面情報.set申請申(yokaigoNinteiTaisyosyaIchiran.get申請情報認定申請区分申請時コード());
             画面情報.set申請法(yokaigoNinteiTaisyosyaIchiran.get申請情報認定申請区分法令コード());
             画面情報.set申請日(yokaigoNinteiTaisyosyaIchiran.get申請情報認定申請年月日());
-            // TODO
-            画面情報.set取込日時(new RString("平27.02.21　9時41分"));
+            画面情報.set取込日時(yokaigoNinteiTaisyosyaIchiran.get取込日時2());
             画面情報.set一次判定日(yokaigoNinteiTaisyosyaIchiran.get要介護認定一次判定年月日());
             画面情報.set一次判定(yokaigoNinteiTaisyosyaIchiran.get要介護認定一次判定結果コード認知症加算());
             画面情報.set二次判定日(yokaigoNinteiTaisyosyaIchiran.get結果情報二次判定年月日());

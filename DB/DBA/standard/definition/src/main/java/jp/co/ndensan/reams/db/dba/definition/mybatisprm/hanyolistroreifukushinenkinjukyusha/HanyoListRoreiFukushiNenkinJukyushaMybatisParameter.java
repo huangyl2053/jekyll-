@@ -38,8 +38,8 @@ public class HanyoListRoreiFukushiNenkinJukyushaMybatisParameter implements IMyB
     private final boolean is年齢;
     private final boolean has年齢範囲開始;
     private final boolean has年齢範囲終了;
-    private final RDate 生年月日範囲終了;
-    private final RDate 生年月日範囲開始;
+    private final RString 生年月日範囲終了;
+    private final RString 生年月日範囲開始;
     private final boolean is生年月日;
     private final boolean has生年月日範囲終了;
     private final boolean has生年月日範囲開始;
@@ -104,8 +104,16 @@ public class HanyoListRoreiFukushiNenkinJukyushaMybatisParameter implements IMyB
         this.is年齢 = is年齢;
         this.has年齢範囲開始 = has年齢範囲開始;
         this.has年齢範囲終了 = has年齢範囲終了;
-        this.生年月日範囲終了 = 生年月日範囲終了;
-        this.生年月日範囲開始 = 生年月日範囲開始;
+        if (nullHandan(生年月日範囲終了)) {
+            this.生年月日範囲終了 = 生年月日範囲終了.toDateString();
+        } else {
+            this.生年月日範囲終了 = RString.EMPTY;
+        }
+        if (nullHandan(生年月日範囲開始)) {
+            this.生年月日範囲開始 = 生年月日範囲開始.toDateString();
+        } else {
+            this.生年月日範囲開始 = RString.EMPTY;
+        }
         this.is生年月日 = is生年月日;
         this.has生年月日範囲終了 = has生年月日範囲終了;
         this.has生年月日範囲開始 = has生年月日範囲開始;
@@ -161,6 +169,9 @@ public class HanyoListRoreiFukushiNenkinJukyushaMybatisParameter implements IMyB
         }
         boolean has年齢範囲開始 = nullHandan(宛名抽出年齢開始);
         boolean has年齢範囲終了 = nullHandan(宛名抽出年齢終了);
+        if (!nullHandan(年齢基準日)) {
+            年齢基準日 = RDate.getNowDate();
+        }
         if (NenreiSoChushutsuHoho.年齢範囲.getコード().equals(年齢層抽出方法) && 宛名抽出年齢開始 != null) {
             宛名抽出生年月日終了 = 年齢基準日.minusYear(宛名抽出年齢開始.add(1).intValue()).plusDay(2);
         }

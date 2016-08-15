@@ -15,9 +15,8 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1170001.dgTa
 import jp.co.ndensan.reams.db.dbb.service.core.shotokushokai.ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.config.ShotokuHikidashiConfig;
-import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysHizuke;
+import jp.co.ndensan.reams.db.dbx.definition.core.config.ConfigKeysHizuke;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.business.core.chihokokyodantai.ShichosonAtesaki;
@@ -26,8 +25,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.chihokokyodantai.CityAtesakiService;
 import jp.co.ndensan.reams.ur.urz.service.core.chihokokyodantai.ICityAtesakiFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -187,8 +184,8 @@ public class ShotokuShokaiTaishoshaIchiranHandler {
         RString 識別コード = selected.getTxtShikibetsuCode().getValue();
         RYear 所得年度 = div.getTxtChushutsuKijunNendo().getDomain();
         return new FukaTaishoshaKey(new HihokenshaNo(被保険者番号), new ShikibetsuCode(識別コード),
-                SetaiCode.EMPTY, LasdecCode.EMPTY, new FlexibleYear(所得年度.toString()),
-                TsuchishoNo.EMPTY,
+                null, null, new FlexibleYear(所得年度.toString()),
+                null,
                 new FlexibleYear(所得年度.toString()));
     }
 

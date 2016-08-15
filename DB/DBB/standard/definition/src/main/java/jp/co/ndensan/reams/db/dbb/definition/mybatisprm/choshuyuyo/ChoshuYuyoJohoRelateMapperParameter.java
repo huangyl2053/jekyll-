@@ -64,4 +64,19 @@ public final class ChoshuYuyoJohoRelateMapperParameter {
             int 履歴番号) {
         return new ChoshuYuyoJohoRelateMapperParameter(調定年度, 賦課年度, 通知書番号, 履歴番号, true, true, true, true);
     }
+
+    /**
+     * キー検索用のパラメータを生成します。
+     *
+     * @param 調定年度 FlexibleYear
+     * @param 賦課年度 FlexibleYear
+     * @param 通知書番号 TsuchishoNo
+     * @return 身体手帳検索パラメータ
+     */
+    public static ChoshuYuyoJohoRelateMapperParameter createSelectByKeyParam(
+            FlexibleYear 調定年度,
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号) {
+        return new ChoshuYuyoJohoRelateMapperParameter(調定年度, 賦課年度, 通知書番号, 0, true, true, true, false);
+    }
 }

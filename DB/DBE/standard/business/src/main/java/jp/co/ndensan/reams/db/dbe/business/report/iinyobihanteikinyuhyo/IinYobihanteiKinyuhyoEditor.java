@@ -46,7 +46,7 @@ public class IinYobihanteiKinyuhyoEditor implements IIinYobihanteiKinyuhyoEditor
         source.listTaishoshaIchiran_3 = business.get性別();
         source.listTaishoshaIchiran_4 = business.get年齢();
         source.listTaishoshaIchiran_6 = business.get前回二次判定();
-        source.listTaishoshaIchiran_7 = business.get前回認定有効期間().concat(new RString("ヵ月"));
+        source.listTaishoshaIchiran_7 = business.get前回認定有効期間();
         source.listTaishoshaIchiran_8 = business.get一次判定();
         source.listTaishoshaIchiran_10 = RString.EMPTY;
         source.listTaishoshaIchiran_11 = RString.EMPTY;

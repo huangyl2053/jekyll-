@@ -7,19 +7,23 @@ package jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 画面設計_DBC0150011_サービス提供票別表 Result
+ * 画面設計_DBC0150011_サービス提供票別表のResultです。
  *
- * @reamsid_L DBC-5110-010 xupeng
+ * @reamsid_L DBC-5100-010 xuxin
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TeikyohyoBeppyoEntityResult {
 
-    private HihokenshaNo 被保険者番号;
+    private FlexibleYearMonth 対象年月;
+    private int 履歴番号;
     private RString 総合事業区分;
     private UaFt200FindShikibetsuTaishoEntity 宛名;
+
+    private HihokenshaNo 被保険者番号;
 }

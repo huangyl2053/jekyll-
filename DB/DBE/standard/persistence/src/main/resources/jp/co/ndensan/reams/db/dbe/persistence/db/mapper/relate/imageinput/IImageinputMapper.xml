@@ -22,13 +22,7 @@
                 AND B2."logicalDeletedFlag" = False 
                 AND T5301."ikenshoIraiRirekiNo" <![CDATA[<]]> B2."ikenshoIraiRirekiNo"
             ) 
-          INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS T5105 
-            ON A."shinseishoKanriNo" = T5105."shinseishoKanriNo" 
-            AND T5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL 
-            AND T5105."ninteichosaIraiKanryoYMD" IS NOT NULL 
-            AND T5105."ninteiShinsakaiWariateKanryoYMD" IS NULL 
-            AND T5105."ninteiShinsakaiKanryoYMD" IS NULL 
-            AND T5105."centerSoshinYMD" IS NULL 
+          
         WHERE
           A."shoKisaiHokenshaNo" = #{証記載保険者番号}
           AND A."hihokenshaNo" = #{被保険者番号} 
@@ -73,6 +67,13 @@
             ) 
           INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051 
             ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo" 
+          INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS T5105 
+            ON T5101."shinseishoKanriNo" = T5105."shinseishoKanriNo" 
+            AND T5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL 
+            AND T5105."ninteichosaIraiKanryoYMD" IS NOT NULL 
+            AND T5105."ninteiShinsakaiWariateKanryoYMD" IS NULL 
+            AND T5105."ninteiShinsakaiKanryoYMD" IS NULL 
+            AND T5105."centerSoshinYMD" IS NULL 
           LEFT JOIN rgdb."DbT5912ShujiiJoho" AS T5912 
             ON T5912."shichosonCode" = T7051."shichosonCode" 
             AND T5912."shujiiIryokikanCode" = T5301."shujiiIryokikanCode" 

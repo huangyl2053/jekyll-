@@ -8,9 +8,8 @@ package jp.co.ndensan.reams.db.dbe.business.report.tokkitext2a3;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitext2a3.TokkiText2A3Entity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.TokkiJikou;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.TokkiJikou;
 import jp.co.ndensan.reams.db.dbe.entity.report.tokkitext2a3.TokkiText2A3ReportSource;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -41,30 +40,13 @@ public class TokkiText2A3Report extends Report<TokkiText2A3ReportSource> {
      */
     @Override
     public void writeBy(ReportSourceWriter<TokkiText2A3ReportSource> reportSourceWriter) {
-        List<RString> 特記事項List1 = new ArrayList<>();
-        List<RString> 特記事項List2 = new ArrayList<>();
-        if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.get特記事項テキスト_イメージ区分())) {
-            特記事項List1 = getlistChosa2();
-            特記事項List2 = getlistChosa3();
-        } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(entity.get特記事項テキスト_イメージ区分())) {
-            特記事項List1 = getlistChosa();
-            特記事項List2 = getlistChosa1();
-        }
+        List<RString> 特記事項List1 = getlistChosa1();
+        List<RString> 特記事項List2 = getlistChosa2();
         for (int i = 0; i < LENGTH_34; i++) {
             ITokkiText2A3Editor editor = new TokkiText2A3Editor(entity, 特記事項List1, 特記事項List2, i);
             ITokkiText2A3Builder buildera = new TokkiText2A3Builder(editor);
             reportSourceWriter.writeLine(buildera);
         }
-    }
-
-    private List<RString> getlistChosa() {
-        List<RString> listChosa1 = new ArrayList<>();
-        List<TokkiJikou> 特記事項List = entity.getListChosa();
-        for (int i = 0; i < 特記事項List.size(); i++) {
-            listChosa1.add(特記事項List.get(i).get事項番号());
-            listChosa1.add(特記事項List.get(i).get項目名称());
-        }
-        return listChosa1;
     }
 
     private List<RString> getlistChosa1() {
@@ -86,15 +68,4 @@ public class TokkiText2A3Report extends Report<TokkiText2A3ReportSource> {
         }
         return listChosa1;
     }
-
-    private List<RString> getlistChosa3() {
-        List<RString> listChosa1 = new ArrayList<>();
-        List<TokkiJikou> 特記事項List = entity.getListChosa3();
-        for (int i = 0; i < 特記事項List.size(); i++) {
-            listChosa1.add(特記事項List.get(i).get事項番号());
-            listChosa1.add(特記事項List.get(i).get項目名称());
-        }
-        return listChosa1;
-    }
-
 }

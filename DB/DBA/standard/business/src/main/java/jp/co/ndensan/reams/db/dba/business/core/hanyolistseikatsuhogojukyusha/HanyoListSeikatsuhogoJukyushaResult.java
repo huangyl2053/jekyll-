@@ -385,10 +385,18 @@ public class HanyoListSeikatsuhogoJukyushaResult {
         if (NenreiSoChushutsuHoho.年齢範囲.getコード().equals(processParamter.getPsmChushutsu_Kubun())) {
             jokenBuilder = new RStringBuilder();
             jokenBuilder.append(年齢);
-            jokenBuilder.append(processParamter.getPsmChushutsuAge_Start());
+            if (processParamter.getPsmChushutsuAge_Start() == null) {
+                jokenBuilder.append(RString.EMPTY);
+            } else {
+                jokenBuilder.append(processParamter.getPsmChushutsuAge_Start());
+            }
             jokenBuilder.append(歳);
             jokenBuilder.append(カラ);
-            jokenBuilder.append(processParamter.getPsmChushutsuAge_End());
+            if (processParamter.getPsmChushutsuAge_End() == null) {
+                jokenBuilder.append(RString.EMPTY);
+            } else {
+                jokenBuilder.append(processParamter.getPsmChushutsuAge_End());
+            }
             jokenBuilder.append(歳);
             jokenBuilder.append(年齢基準日);
             jokenBuilder.append(set出力条件表の日付(processParamter.getPsmAgeKijunni()));

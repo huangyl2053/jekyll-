@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  * 帳票設計_DBC200054_給付実績更新結果情報一覧表 Editor
  *
- * @reamsid_L DBC-2470-030 sunhui
+ * @reamsid_L DBC-2470-030 surun
  */
 interface IKyufujissekiKoshinkekkaIchiranEditor extends IReportEditor<KyufujissekiKoshinkekkaIchiranSource> {
 

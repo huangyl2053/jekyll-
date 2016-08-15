@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3110001;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
@@ -25,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 public class GemmenMainDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -173,6 +174,46 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxDate getTxtTorikeshiYMD() {
+        return this.getTorikeshiInfo().getTxtTorikeshiYMD();
+    }
+
+    @JsonIgnore
+    public void setTxtTorikeshiYMD(TextBoxDate txtTorikeshiYMD) {
+        this.getTorikeshiInfo().setTxtTorikeshiYMD(txtTorikeshiYMD);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnTorikeshiShurui() {
+        return this.getTorikeshiInfo().getBtnTorikeshiShurui();
+    }
+
+    @JsonIgnore
+    public void setBtnTorikeshiShurui(ButtonDialog btnTorikeshiShurui) {
+        this.getTorikeshiInfo().setBtnTorikeshiShurui(btnTorikeshiShurui);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtTorikeshiShurui() {
+        return this.getTorikeshiInfo().getTxtTorikeshiShurui();
+    }
+
+    @JsonIgnore
+    public void setTxtTorikeshiShurui(TextBox txtTorikeshiShurui) {
+        this.getTorikeshiInfo().setTxtTorikeshiShurui(txtTorikeshiShurui);
+    }
+
+    @JsonIgnore
+    public TextBoxMultiLine getTxtTorikeshiRiyu() {
+        return this.getTorikeshiInfo().getTxtTorikeshiRiyu();
+    }
+
+    @JsonIgnore
+    public void setTxtTorikeshiRiyu(TextBoxMultiLine txtTorikeshiRiyu) {
+        this.getTorikeshiInfo().setTxtTorikeshiRiyu(txtTorikeshiRiyu);
+    }
+
+    @JsonIgnore
     public TextBoxDate getTxtChoteiYY() {
         return this.getShinseiinfo().getTxtChoteiYY();
     }
@@ -213,12 +254,12 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnGemmenShurui() {
+    public ButtonDialog getBtnGemmenShurui() {
         return this.getShinseiinfo().getBtnGemmenShurui();
     }
 
     @JsonIgnore
-    public void setBtnGemmenShurui(Button btnGemmenShurui) {
+    public void setBtnGemmenShurui(ButtonDialog btnGemmenShurui) {
         this.getShinseiinfo().setBtnGemmenShurui(btnGemmenShurui);
     }
 

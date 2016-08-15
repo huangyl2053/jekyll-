@@ -177,6 +177,9 @@ public class PnlTotalSearchHandler {
             if (契約事業者名称 != null) {
                 row.setTxtKeiyakuJigyoshamei(契約事業者名称.getColumnValue());
             }
+            if (list.getEntity().get識別コード() != null) {
+                row.setTxtShikibetsuCode(list.getEntity().get識別コード().getColumnValue());
+            }
             rowList.add(row);
             count = count + 1;
             if (count >= maxCount.intValue()) {

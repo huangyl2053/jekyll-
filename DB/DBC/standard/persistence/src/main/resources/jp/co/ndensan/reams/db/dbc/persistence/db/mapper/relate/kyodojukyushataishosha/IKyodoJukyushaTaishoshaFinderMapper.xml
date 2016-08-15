@@ -22,7 +22,7 @@
             <if test="異動日To != null and !異動日To.isEmpty()">
             AND DbT3002."idoYMD"<![CDATA[<=]]> #{異動日To}
             </if>
-            <if test="被保険者番号 != null">
+            <if test="被保険者番号 != null and !被保険者番号.isEmpty()">
             AND DbT3002."hiHokenshaNo"= #{被保険者番号}
             </if>
             <if test="削除データ検索 == false">
@@ -69,7 +69,7 @@
             <if test="異動日To != null and !異動日To.isEmpty()">
             AND DbT3003."idoYMD"<![CDATA[<=]]> #{異動日To}
             </if>
-            <if test="被保険者番号 != null">
+            <if test="被保険者番号 != null and !被保険者番号.isEmpty()">
             AND DbT3003."hiHokenshaNo"= #{被保険者番号}
             </if>
             <if test="削除データ検索 == false">
@@ -97,7 +97,7 @@
             <if test="異動日To != null and !異動日To.isEmpty()">
             AND DbT3004."idoYMD"<![CDATA[<=]]> #{異動日To}
             </if>
-            <if test="被保険者番号 != null">
+            <if test="被保険者番号 != null and !被保険者番号.isEmpty()">
             AND DbT3004."hiHokenshaNo"= #{被保険者番号}
             </if>
             <if test="削除データ検索 == false">
@@ -106,4 +106,16 @@
             order by DbT3004."idoYMD" DESC
     </sql>
     
+    <select id="get被保険者情報" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyodojukyushataishosha.KyodoIdoRenrakuhyoTaishoshaKensakuParameter"
+            resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
+            fetchSize="500" resultOrdered="true">
+        SELECT 
+             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+            FROM rgdb."DbV1001HihokenshaDaicho" AS DbV1001
+            INNER JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
+            AS "ShikibetsuTaisho"
+            ON DbV1001."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
+            WHERE DbV1001."hihokenshaNo" = #{被保険者番号}
+    </select>
 </mapper>

@@ -9,6 +9,13 @@ import jp.co.ndensan.reams.db.dbd.business.report.dbd550001.YokaigoNinteiKyakkaT
 import jp.co.ndensan.reams.db.dbd.business.report.dbd550001.YokaigoNinteiKyakkaTshuchishoReport;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.ninteikekkatshuchishohakko.NinteikyakkaTsuchishoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd550001.YokaigoNinteiKyakkaTshuchishoReportSource;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -29,13 +36,21 @@ public class YokaigoNinteiKyakkaTshuchishoPrintService {
      * 帳票を出力
      *
      * @param entity NinteikyakkaTsuchishoEntity
+     * @param 帳票制御共通 ChohyoSeigyoKyotsu
+     * @param 帳票分類ID 帳票分類ID
      * @param reportManager 帳票発行処理の制御機能
      */
-    public void print(NinteikyakkaTsuchishoEntity entity, ReportManager reportManager) {
+    public void print(NinteikyakkaTsuchishoEntity entity, ChohyoSeigyoKyotsu 帳票制御共通,
+            ReportId 帳票分類ID, ReportManager reportManager) {
         YokaigoNinteiKyakkaTshuchishoProperty property = new YokaigoNinteiKyakkaTshuchishoProperty();
         try (ReportAssembler<YokaigoNinteiKyakkaTshuchishoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<YokaigoNinteiKyakkaTshuchishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-            YokaigoNinteiKyakkaTshuchishoReport report = YokaigoNinteiKyakkaTshuchishoReport.createReport(entity);
+            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, 帳票分類ID,
+                    entity.getHakkoYMD(), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
+                    KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+            YokaigoNinteiKyakkaTshuchishoReport report = new YokaigoNinteiKyakkaTshuchishoReport(entity,
+                    帳票制御共通,
+                    ninshoshaSource);
             report.writeBy(reportSourceWriter);
         }
     }
