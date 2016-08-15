@@ -56,7 +56,6 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
     private static final RString 交換情報識別番号_331 = new RString("331");
     private static final RString 交換情報識別番号_335 = new RString("335");
     private static final int DAY_9 = 9;
-    private static final RString EM = new RString("指定した被保険者の、高額介護サービス支給申請情報がありません。");
 
     /**
      * コンストラクタです。
