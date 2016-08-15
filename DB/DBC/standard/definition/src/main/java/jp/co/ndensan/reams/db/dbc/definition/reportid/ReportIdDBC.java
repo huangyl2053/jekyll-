@@ -260,6 +260,18 @@ public enum ReportIdDBC {
      */
     DBC100011(new ReportId("DBC100011_KogakuOshiraseTsuchi"), new RString("高額サービス給付のお知らせ通知書")),
     /**
+     * 帳票設計_DBCMN43002_高額介護（予防）サービス費支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ）の帳票ＩＤです。
+     */
+    DBC100009(new ReportId("DBC100009_KogakuKetteiTsuchiShoSealer"), new RString("高額介護（予防）サービス費支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ）")),
+    /**
+     * 帳票設計_DBCMN43002_高額介護（予防）サービス費支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）の帳票ＩＤです。
+     */
+    DBC100010(new ReportId("DBC100010_KogakuKetteiTsuchiShoSealer2"), new RString("高額介護（予防）サービス費支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）")),
+    /**
+     * 帳票設計_DBC200067_介護給付費等請求額通知書（公費負担者分）の帳票ＩＤです。
+     */
+    DBC200067(new ReportId("DBC200067_SeikyugakuTsuchishoKohifutanshabun"), new RString("介護給付費等請求額通知書（公費負担者分）")),
+    /**
      * 総合事業費等請求額通知書（公費負担者分）帳票ＩＤです。
      */
     DBC200082(new ReportId("DBC200082_SogojigyohiSeikyugakuTsuchishoKohi"), new RString("総合事業費等請求額通知書（公費負担者分）"));
