@@ -12,9 +12,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 高額サービス給付のお知らせ通知書（提出期限なし）帳票Editor
+ * 高額サービス給付のお知らせ通知書（提出期限なし）帳票Editor。
  *
- * @reamsid_L DBC-4770-050 fzou
+ * @reamsid_L DBC-4770-050 jianglaishen
  */
 public class KogakuOshiraseTsuchiTeshutsuKigenNashiEditor implements IKogakuOshiraseTsuchiTeshutsuKigenNashiEditor {
 

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100202;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100202.ChofukuTorikomiDataDeleteShoriProcessParmeter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100202.HikazeNenkinTaishoFirProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100202.JissekiDataIchijiSakuseiProcessParamter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100202.NenkinNoCheckListProcessParmeter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100202.ShimeiKanaTotsugoGaitousyaNasiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100202.ShimeiKanaTotsugoSedProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100202.ShimeiKanaTotsugoTouItuninProcessParameter;
@@ -83,5 +84,14 @@ public class HikazeNenkinTaishoshaDouteiBatchParameter extends BatchParameterBas
      */
     public ShimeiKanaTotsugoTouItuninProcessParameter toShimeiKanaTotsugoTouItuninProcessParameter() {
         return new ShimeiKanaTotsugoTouItuninProcessParameter(年度, 処理区分, 対象月);
+    }
+
+    /**
+     * 年金番号チェックリストのパラメターを返却します．
+     *
+     * @return 年金番号チェックリストのパラメター
+     */
+    public NenkinNoCheckListProcessParmeter toNenkinNoCheckListProcessParmeter() {
+        return new NenkinNoCheckListProcessParmeter(年度);
     }
 }

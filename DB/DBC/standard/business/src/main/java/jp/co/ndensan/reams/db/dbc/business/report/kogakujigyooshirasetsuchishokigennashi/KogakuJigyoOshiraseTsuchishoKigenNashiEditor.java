@@ -30,7 +30,7 @@ public class KogakuJigyoOshiraseTsuchishoKigenNashiEditor implements IKogakuJigy
     /**
      * コンストラクタです
      *
-     * @param entity KogakuJigyoOshiraseTsuchishopaParameterEntity
+     * @param entity KogakuJigyoOshiraseTsuchishoKigenNashiEntity
      *
      */
     public KogakuJigyoOshiraseTsuchishoKigenNashiEditor(KogakuJigyoOshiraseTsuchishoKigenNashiEntity entity) {

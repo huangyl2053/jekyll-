@@ -54,7 +54,7 @@ public class ShinsakaiJIzenShinsakekkaTorokuHandler {
             div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtShiryoSakusei()
                     .setValue(new RString(Boolean.valueOf(事前審査会用結果.isShiryoSakuseiZumiFlag()).toString()));
             div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtGogitaiNo()
-                    .setValue(事前審査会用結果.getShinsakaiKaisaiNo());
+                    .setValue(new RString(事前審査会用結果.getGogitaiNo()));
             div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtGogitaiName()
                     .setValue(事前審査会用結果.getGogitaiMei());
             div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtYoteiTeiin()

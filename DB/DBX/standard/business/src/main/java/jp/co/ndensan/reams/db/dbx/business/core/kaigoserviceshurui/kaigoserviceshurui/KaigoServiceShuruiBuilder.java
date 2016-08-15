@@ -133,6 +133,18 @@ public class KaigoServiceShuruiBuilder {
     }
 
     /**
+     * 居宅サービス区分を設定します。
+     *
+     *
+     * @param flag boolean
+     * @return {@link KaigoServiceShuruiBuilder}
+     */
+    public KaigoServiceShuruiBuilder setIsDeleted(boolean flag) {
+        entity.setIsDeleted(flag);
+        return this;
+    }
+
+    /**
      * 限度額区分を設定します。
      *
      * @param 限度額区分 限度額区分

@@ -138,10 +138,10 @@ public class JigyohokokuGeppoYoshiki2220161Report extends Report<JigyohokokuGepp
             集計番号 = entity.get集計番号();
             給付実績区分コード = entity.get給付実績区分コード();
         }
-        for (JigyohokokuCompResultEntity entity : list) {
+        for (int i = 0; i < list.size(); i++) {
             IJigyohokokuGeppoYoshiki2220161Editor headEditor = new JigyohokokuGeppoYoshiki2220161HeadEditor(
                     business, 集計番号, 給付実績区分コード);
-            IJigyohokokuGeppoYoshiki2220161Editor bodyEditor = new JigyohokokuGeppoYoshiki2220161BodyEditor(entity);
+            IJigyohokokuGeppoYoshiki2220161Editor bodyEditor = new JigyohokokuGeppoYoshiki2220161BodyEditor(list.get(i), i);
             IJigyohokokuGeppoYoshiki2220161Builder builder = new JigyohokokuGeppoYoshiki2220161Builder(headEditor, bodyEditor);
             reportSourceWriter.writeLine(builder);
         }

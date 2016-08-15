@@ -4,17 +4,23 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4510011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * KubunShikyuGendogaku のクラスファイル 
- * 
- * @author 自動生成
+ * KubunShikyuGendogaku のクラスファイル
+ *
+ * @reamsid_L DBC-3350-010 jiangzongyue
  */
 public class KubunShikyuGendogakuDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
@@ -98,7 +104,7 @@ public class KubunShikyuGendogakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtServiceCode(TextBox txtServiceCode) {
+    public void setTxtServiceCode(TextBox txtServiceCode) {
         this.getServiceShuruiShousai().setTxtServiceCode(txtServiceCode);
     }
 
@@ -108,7 +114,7 @@ public class KubunShikyuGendogakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTeikyoKaishiYM(TextBoxDate txtTeikyoKaishiYM) {
+    public void setTxtTeikyoKaishiYM(TextBoxDate txtTeikyoKaishiYM) {
         this.getServiceShuruiShousai().setTxtTeikyoKaishiYM(txtTeikyoKaishiYM);
     }
 
@@ -118,7 +124,7 @@ public class KubunShikyuGendogakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTeikyoShuryoYM(TextBoxDate txtTeikyoShuryoYM) {
+    public void setTxtTeikyoShuryoYM(TextBoxDate txtTeikyoShuryoYM) {
         this.getServiceShuruiShousai().setTxtTeikyoShuryoYM(txtTeikyoShuryoYM);
     }
 
@@ -128,7 +134,7 @@ public class KubunShikyuGendogakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtServiceMeisho(TextBox txtServiceMeisho) {
+    public void setTxtServiceMeisho(TextBox txtServiceMeisho) {
         this.getServiceShuruiShousai().setTxtServiceMeisho(txtServiceMeisho);
     }
 
@@ -138,7 +144,7 @@ public class KubunShikyuGendogakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtServiceRyakusho(TextBox txtServiceRyakusho) {
+    public void setTxtServiceRyakusho(TextBox txtServiceRyakusho) {
         this.getServiceShuruiShousai().setTxtServiceRyakusho(txtServiceRyakusho);
     }
 
@@ -148,7 +154,7 @@ public class KubunShikyuGendogakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlServiceBunruiCode(DropDownList ddlServiceBunruiCode) {
+    public void setDdlServiceBunruiCode(DropDownList ddlServiceBunruiCode) {
         this.getServiceShuruiShousai().setDdlServiceBunruiCode(ddlServiceBunruiCode);
     }
 

@@ -178,6 +178,10 @@ public class IdoCheckListReportProcess extends BatchProcessBase<RString> {
                     世帯コード = 識別対象.get世帯コード();
                     被保険者カナ氏名 = 識別対象.get名称().getKana();
                     被保険者氏名 = 識別対象.get名称().getName();
+                } else {
+                    entity.set世帯コード(SetaiCode.EMPTY);
+                    entity.set被保険者カナ氏名(AtenaKanaMeisho.EMPTY);
+                    entity.set被保険者氏名(AtenaMeisho.EMPTY);
                 }
 
                 識別コード = entity.get識別コード();

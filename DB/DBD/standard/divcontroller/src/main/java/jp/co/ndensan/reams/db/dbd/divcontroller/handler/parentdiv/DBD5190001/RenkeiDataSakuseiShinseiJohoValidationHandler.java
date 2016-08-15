@@ -144,7 +144,7 @@ public class RenkeiDataSakuseiShinseiJohoValidationHandler {
     }
 
     /**
-     * 最大件数のチェック。
+     * 検索データ結果のチェック。
      *
      * @param pairs バリデーションコントロール
      * @param div RenkeiDataSakuseiShinseiJohoDiv

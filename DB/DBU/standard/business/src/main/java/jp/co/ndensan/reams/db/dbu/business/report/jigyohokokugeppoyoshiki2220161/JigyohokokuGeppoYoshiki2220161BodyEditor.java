@@ -17,14 +17,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class JigyohokokuGeppoYoshiki2220161BodyEditor implements IJigyohokokuGeppoYoshiki2220161Editor {
 
     private final JigyohokokuCompResultEntity entity;
+    private final int index;
+    private static final int INDEX_17 = 17;
 
     /**
      * インスタンスを生成します。
      *
      * @param entity JigyohokokuCompResultEntity
+     * @param index index
      */
-    protected JigyohokokuGeppoYoshiki2220161BodyEditor(JigyohokokuCompResultEntity entity) {
+    protected JigyohokokuGeppoYoshiki2220161BodyEditor(JigyohokokuCompResultEntity entity, int index) {
         this.entity = entity;
+        this.index = index;
     }
 
     @Override
@@ -49,6 +53,9 @@ public class JigyohokokuGeppoYoshiki2220161BodyEditor implements IJigyohokokuGep
     }
 
     private RString intToRString(int data) {
+        if (index == INDEX_17) {
+            return RString.EMPTY;
+        }
         return new RString(String.valueOf(data));
     }
 

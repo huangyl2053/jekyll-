@@ -22,6 +22,10 @@ public class JissekiDataIchijiSakuseiMybatisprmParamter implements IMyBatisParam
 
     private RString psmShikibetsuTaisho;
 
+    /**
+     *
+     * @param psmShikibetsuTaisho
+     */
     public JissekiDataIchijiSakuseiMybatisprmParamter(RString psmShikibetsuTaisho) {
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
     }
