@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoSeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoSeigyoJoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.TsuchiSho;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.ShutsuryokuHoshiki;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.ShutsuryokuKeishiki;
@@ -34,9 +33,10 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
-import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.ur.urz.business.core.date.DateEditor;
@@ -232,8 +232,10 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getDdlInjiKouseiAto()
                     .setSelectedKey(new RString(調定日時List.get(0).toString()));
 
-            調定日時List.remove(調定日時List.get(0));
-            for (YMDHMS 更正前日時 : 調定日時List) {
+            List<YMDHMS> 更正前調定日時List = new ArrayList<>();
+            更正前調定日時List.addAll(調定日時List);
+            更正前調定日時List.remove(調定日時List.get(0));
+            for (YMDHMS 更正前日時 : 更正前調定日時List) {
                 年月日 = 更正前日時.getRDateTime().getDate().wareki().toDateString();
                 時刻 = 更正前日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm);
                 更正前Data.add(new KeyValueDataSource(new RString(更正前日時.toString()), 年月日.concat(スペース).concat(時刻)));
@@ -241,7 +243,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getDdlInjiKouseiMae()
                     .setDataSource(更正前Data);
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getDdlInjiKouseiMae()
-                    .setSelectedKey(new RString(調定日時List.get(0).toString()));
+                    .setSelectedKey(new RString(更正前調定日時List.get(0).toString()));
 
             FukaJoho 更正後賦課の情報 = 賦課の情報List.get(0);
             FukaJoho 更正前賦課の情報 = 賦課の情報List.get(1);
@@ -1119,8 +1121,10 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         List<dgChohyoSentaku_Row> dgRowList = new ArrayList<>();
         dgRowList.addAll(rowList);
         if (!調定日時.equals(new RString(調定日時List.get(0).toString()))) {
+            if (賦課台帳Flag) {
+                publishNumber = publishNumber - NUM_1;
+            }
             賦課台帳Flag = false;
-            publishNumber = publishNumber - NUM_1;
             for (dgChohyoSentaku_Row dgRow : rowList) {
                 if (dgRow.getTxtChohyoSentaku().equals(賦課台帳)) {
                     dgRowList.remove(dgRow);
