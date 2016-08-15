@@ -56,18 +56,22 @@ public class KyodoIdoRenrakuhyoTorokuMain {
      * @return ResponseData
      */
     public ResponseData<KyodoIdoRenrakuhyoTorokuMainDiv> onClick_btnSave(KyodoIdoRenrakuhyoTorokuMainDiv div) {
-        ValidationMessageControlPairs pairs = div.getKyodoIdoRenrakuhyoTorokuInfo().get一時差止日の関連チェック();
-        pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().get一時差止日の入力チェック());
-        pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().基本送付情報の異動区分チェック());
+        boolean 保存の確認flag = new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode());
+        ValidationMessageControlPairs pairs = div.getKyodoIdoRenrakuhyoTorokuInfo().get一時差止日の入力チェック();
+        pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().get一時差止日の関連チェック());
         pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().基本送付情報の異動日チェック());
-        pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().償還送付情報の異動区分チェック());
         pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().償還送付情報の異動日チェック());
-        pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().高額送付情報の異動区分チェック());
         pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().高額送付情報の異動日チェック());
+        if (!ResponseHolder.isReRequest() && !保存の確認flag) {
+            pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().基本送付情報の異動区分チェック());
+            pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().償還送付情報の異動区分チェック());
+            pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().高額送付情報の異動区分チェック());
+        }
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        if (!ResponseHolder.isReRequest()) {
+        if (!保存の確認flag) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                     UrQuestionMessages.保存の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
