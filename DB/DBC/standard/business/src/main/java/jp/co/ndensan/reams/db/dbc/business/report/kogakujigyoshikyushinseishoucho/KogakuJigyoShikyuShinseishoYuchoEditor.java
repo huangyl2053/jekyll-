@@ -28,7 +28,7 @@ public class KogakuJigyoShikyuShinseishoYuchoEditor implements IKogakuJigyoShiky
     private final Boolean is金融機関表示;
     private final RString 注意文;
     private final RString count;
-    private static final RString attion = new RString("注意");
+    private static final RString 定数_注意 = new RString("注意");
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
@@ -100,7 +100,7 @@ public class KogakuJigyoShikyuShinseishoYuchoEditor implements IKogakuJigyoShiky
             source.kojinNo = 帳票出力対象データ.getKojinNoChohyo().getColumnValue();
         }
         source.ninshoshaYakushokuMei = 認証者役職名;
-        source.chuiTitle = attion;
+        source.chuiTitle = 定数_注意;
         source.chuibun = 注意文;
         if (is金融機関表示 && 帳票出力対象データ.getTsuchoKigoChohyo() != null && 帳票出力対象データ.getTsuchoNoChohyo() != null) {
             source.tuchoKigo1 = 帳票出力対象データ.getTsuchoKigoChohyo().substringReturnAsPossible(INDEX_0, INDEX_1);
