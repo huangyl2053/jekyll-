@@ -172,6 +172,7 @@ public class RiyoshaFutanWariaiShoInsertProcess extends BatchProcessBase<Riyosha
             setTempType_宛名2(item, entity);
             setTempType_宛先(item, entity);
             tableWriter.insert(item);
+            insertShoKofuKaishu(entity);
         } else {
             if (entity.get被保台帳() != null) {
                 ExpandedInformation expandedInformation
@@ -181,7 +182,6 @@ public class RiyoshaFutanWariaiShoInsertProcess extends BatchProcessBase<Riyosha
                 shoriKekkaKakuninListCSVEntity.set被保険者番号(entity.get被保台帳().getHihokenshaNo().getColumnValue());
                 shoriKekkaKakuninListCSVEntity.set確認内容(確認内容);
                 shoriKekkaKakuninListEucCsvWriter.writeLine(shoriKekkaKakuninListCSVEntity);
-                insertShoKofuKaishu(entity);
             }
         }
     }
