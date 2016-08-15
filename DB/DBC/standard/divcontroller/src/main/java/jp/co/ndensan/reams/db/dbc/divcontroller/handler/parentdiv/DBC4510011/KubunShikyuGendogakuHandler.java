@@ -51,8 +51,9 @@ public class KubunShikyuGendogakuHandler {
                 row.setDefaultDataName2(result.toEntity().getTeikyoKaishiYM().wareki()
                         .firstYear(FirstYear.ICHI_NEN).toDateString());
             }
-            if (result.toEntity().getTeikyoshuryoYM() != null) {
-                row.setDefaultDataName3(result.toEntity().getTeikyoshuryoYM().wareki()
+            FlexibleYearMonth teikyoshuryoYM = result.toEntity().getTeikyoshuryoYM();
+            if (teikyoshuryoYM != null) {
+                row.setDefaultDataName3(teikyoshuryoYM.wareki()
                         .firstYear(FirstYear.ICHI_NEN).toDateString());
             }
             if (result.toEntity().getServiceShuruiMeisho() != null) {

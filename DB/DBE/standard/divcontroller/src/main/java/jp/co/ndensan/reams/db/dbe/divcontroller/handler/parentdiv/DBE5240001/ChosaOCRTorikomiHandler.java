@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajo
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2260001.TorokuData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001.ChosaOCRTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001.TorikomiData;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001.TorikomiEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001.dgChosahyoTorikomiKekka_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -116,13 +117,13 @@ public class ChosaOCRTorikomiHandler {
      *
      * @param dataList DBとCSV情報
      */
-    public void set画面一覧(List<TorikomiData> dataList) {
+    public void set画面一覧(List<TorikomiEntity> dataList) {
         set一覧(dataList);
     }
 
-    private void set一覧(List<TorikomiData> dataList) {
+    private void set一覧(List<TorikomiEntity> dataList) {
         List<dgChosahyoTorikomiKekka_Row> rowList = new ArrayList<>();
-        for (TorikomiData data : dataList) {
+        for (TorikomiEntity data : dataList) {
             TextBoxFlexibleDate flexibleDate = new TextBoxFlexibleDate();
             flexibleDate.setValue(new FlexibleDate(dateFormat1(data.get申請日())));
             dgChosahyoTorikomiKekka_Row row = new dgChosahyoTorikomiKekka_Row(new RString(data.getNo()),
@@ -130,17 +131,58 @@ public class ChosaOCRTorikomiHandler {
                     data.get保険者(),
                     data.get被保険者番号(),
                     flexibleDate,
-                    get申請区分(data.get認定申請区分申請時コード()),
+                    get申請区分(data.get申請区分()),
                     data.get被保険者氏名().value(),
                     get1次判定結果(data),
-                    data.get二次判定要介護状態区分コード().value(),
-                    RString.EMPTY,
+                    get要介護状態像例(data),
+                    get二次判定結果(data),
                     data.get認定有効期間(),
-                    RString.EMPTY,
+                    get認定有効期間開始日(data),
                     RString.EMPTY);
             rowList.add(row);
         }
         div.getDgChosahyoTorikomiKekka().setDataSource(rowList);
+    }
+
+    private RString get認定有効期間開始日(TorikomiEntity data) {
+        RString 認定有効期間開始日 = RString.EMPTY;
+        if (data.get申請区分() != null && NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(data.get申請区分().value())
+                && (new RString("1").equals(data.get要支援1()) || new RString("1").equals(data.get要支援2()))) {
+            認定有効期間開始日 = dateFormat1(data.get申請日());
+        }
+        return 認定有効期間開始日;
+    }
+
+    private RString get二次判定結果(TorikomiEntity data) {
+        RString 二次判定結果 = RString.EMPTY;
+        if (new RString("1").equals(data.get非該当())) {
+            二次判定結果 = new RString("非該当");
+        } else if (new RString("1").equals(data.get要支援1())) {
+            二次判定結果 = new RString("要支援1");
+        } else if (new RString("1").equals(data.get要支援2())) {
+            二次判定結果 = new RString("要支援2");
+        } else if (new RString("1").equals(data.get要介護1())) {
+            二次判定結果 = new RString("要介護1");
+        } else if (new RString("1").equals(data.get要介護2())) {
+            二次判定結果 = new RString("要介護2");
+        } else if (new RString("1").equals(data.get要介護3())) {
+            二次判定結果 = new RString("要介護3");
+        } else if (new RString("1").equals(data.get要介護4())) {
+            二次判定結果 = new RString("要介護4");
+        } else if (new RString("1").equals(data.get要介護5())) {
+            二次判定結果 = new RString("要介護5");
+        }
+        return 二次判定結果;
+    }
+
+    private RString get要介護状態像例(TorikomiEntity data) {
+        RString 要介護状態像例 = RString.EMPTY;
+        if (new RString("1").equals(data.get状態像1())) {
+            要介護状態像例 = new RString("認知機能の低下");
+        } else if (new RString("1").equals(data.get状態像2())) {
+            要介護状態像例 = new RString("不安定な状態");
+        }
+        return 要介護状態像例;
     }
 
     private RString get申請区分(Code code) {
@@ -150,13 +192,13 @@ public class ChosaOCRTorikomiHandler {
         return RString.EMPTY;
     }
 
-    private RString get1次判定結果(TorikomiData data) {
+    private RString get1次判定結果(TorikomiEntity data) {
         RString 判定結果 = RString.EMPTY;
-        if (data != null && data.get要介護認定一次判定結果コード() != null) {
+        if (data != null && data.get一次判定結果() != null) {
             if (識別コード_99A.equals(data.get厚労省IF識別コード())) {
-                判定結果 = IchijiHanteiKekkaCode99.toValue(data.get要介護認定一次判定結果コード().value()).get名称();
+                判定結果 = IchijiHanteiKekkaCode99.toValue(data.get一次判定結果().value()).get名称();
             } else if (識別コード_09A.equals(data.get厚労省IF識別コード())) {
-                判定結果 = IchijiHanteiKekkaCode09.toValue(data.get要介護認定一次判定結果コード().value()).get名称();
+                判定結果 = IchijiHanteiKekkaCode09.toValue(data.get一次判定結果().value()).get名称();
             }
         }
         return 判定結果;
@@ -198,7 +240,7 @@ public class ChosaOCRTorikomiHandler {
      * @param 審査会開催番号 審査会開催番号
      * @return NinteiKekkaJoho 要介護認定結果情報)
      */
-    public NinteiKekkaJoho editNinteiKekkaJoho(NinteiKekkaJoho ninteiKekkaJoho, dgChosahyoTorikomiKekka_Row row, TorikomiData data, RString 審査会開催番号) {
+    public NinteiKekkaJoho editNinteiKekkaJoho(NinteiKekkaJoho ninteiKekkaJoho, dgChosahyoTorikomiKekka_Row row, TorikomiEntity data, RString 審査会開催番号) {
         int 認定有効期間 = 0;
         if (row.getNinteiYukoKikan() != null) {
             認定有効期間 = Integer.valueOf(row.getNinteiYukoKikan().toString());
@@ -228,7 +270,7 @@ public class ChosaOCRTorikomiHandler {
      * @param data 登録用オブジェクト
      * @return ShinsakaiKaisaiKekkaJoho2 介護認定審査会開催結果情報
      */
-    public ShinsakaiKaisaiKekkaJoho2 editShinsakaiKaisaiKekkaJoho(ShinsakaiKaisaiKekkaJoho2 kekkaJoho, dgChosahyoTorikomiKekka_Row row, TorikomiData data) {
+    public ShinsakaiKaisaiKekkaJoho2 editShinsakaiKaisaiKekkaJoho(ShinsakaiKaisaiKekkaJoho2 kekkaJoho, dgChosahyoTorikomiKekka_Row row, TorikomiEntity data) {
         return kekkaJoho.createBuilderForEdit().set合議体番号(data.get合議体番号())
                 .set介護認定審査会開催年月日(new FlexibleDate(data.get審査会開催日()))
                 .set介護認定審査会開始時刻(data.get開催開始時間())
@@ -240,7 +282,7 @@ public class ChosaOCRTorikomiHandler {
                 .build();
     }
 
-    private int get所要時間合計(TorikomiData data) {
+    private int get所要時間合計(TorikomiEntity data) {
         if (data != null && !RString.isNullOrEmpty(data.get開催開始時間()) && !RString.isNullOrEmpty(data.get開催終了時間())) {
             return Integer.valueOf(data.get開催終了時間().toString()) - Integer.valueOf(data.get開催開始時間().toString());
         }
