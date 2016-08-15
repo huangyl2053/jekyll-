@@ -51,7 +51,7 @@ public class RiyoshaFutanWariaiShoInsertProcess extends BatchProcessBase<Riyosha
     private FutanwariaishoHakkoProcessParameter parameter;
 
     @BatchWriter
-    private CsvWriter<ShoriKekkaKakuninListCSVEntity> shoriKekkaKakuninListEucCsvWriter;
+    private CsvWriter<ShoriKekkaKakuninListCSVEntity> shoriKekkaKakuninEucCsvWriter;
 
     @BatchWriter
     BatchEntityCreatedTempTableWriter tableWriter;
@@ -79,7 +79,7 @@ public class RiyoshaFutanWariaiShoInsertProcess extends BatchProcessBase<Riyosha
     private static final RString 交付事由_03 = new RString("03");
     private static final RString 交付事由_04 = new RString("04");
     private static final RString 回収事由_00 = new RString("00");
-    private RString shoriKekkaKakuninListEucFilePath;
+    private RString shoriKekkaKakuninEucFilePath;
     private final List<PersonalData> personalDataList = new ArrayList<>();
     private final RString shoriKekkaKakuninListFileName = new RString("DBC900002_ShoriKekkaKakuninList.csv");
 
@@ -94,10 +94,10 @@ public class RiyoshaFutanWariaiShoInsertProcess extends BatchProcessBase<Riyosha
         tableWriter = new BatchEntityCreatedTempTableWriter(TABLE_NAME, RiyoshaFutanwariaishoEntity.class);
         shoriKekkaKakuninListManager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, SHORIKEKKA_EUC_ENTITY_ID,
                 UzUDE0831EucAccesslogFileType.Csv);
-        shoriKekkaKakuninListEucFilePath = Path.combinePath(shoriKekkaKakuninListManager.getEucOutputDirectry(),
+        shoriKekkaKakuninEucFilePath = Path.combinePath(shoriKekkaKakuninListManager.getEucOutputDirectry(),
                 shoriKekkaKakuninListFileName);
-        shoriKekkaKakuninListEucCsvWriter = BatchWriters.csvWriter(ShoriKekkaKakuninListCSVEntity.class).
-                filePath(shoriKekkaKakuninListEucFilePath).
+        shoriKekkaKakuninEucCsvWriter = BatchWriters.csvWriter(ShoriKekkaKakuninListCSVEntity.class).
+                filePath(shoriKekkaKakuninEucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.UTF_8withBOM).
@@ -181,7 +181,7 @@ public class RiyoshaFutanWariaiShoInsertProcess extends BatchProcessBase<Riyosha
                 ShoriKekkaKakuninListCSVEntity shoriKekkaKakuninListCSVEntity = new ShoriKekkaKakuninListCSVEntity();
                 shoriKekkaKakuninListCSVEntity.set被保険者番号(entity.get被保台帳().getHihokenshaNo().getColumnValue());
                 shoriKekkaKakuninListCSVEntity.set確認内容(確認内容);
-                shoriKekkaKakuninListEucCsvWriter.writeLine(shoriKekkaKakuninListCSVEntity);
+                shoriKekkaKakuninEucCsvWriter.writeLine(shoriKekkaKakuninListCSVEntity);
             }
         }
     }
@@ -565,8 +565,8 @@ public class RiyoshaFutanWariaiShoInsertProcess extends BatchProcessBase<Riyosha
 
     @Override
     protected void afterExecute() {
-        shoriKekkaKakuninListEucCsvWriter.close();
-        shoriKekkaKakuninListManager.spool(shoriKekkaKakuninListEucFilePath);
+        shoriKekkaKakuninEucCsvWriter.close();
+        shoriKekkaKakuninListManager.spool(shoriKekkaKakuninEucFilePath);
         AccessLogger.logReport(personalDataList);
     }
 }
