@@ -111,7 +111,8 @@ public class NinteiShinseiTorokuUketsukeHandler {
     private static final RString SELECT_KEY0 = new RString("key0");
     private static final RString SELECT_KEY1 = new RString("key1");
     private static final RString ZERO_17 = new RString("00000000000000000");
-    private static final RString ZERO_4 = new RString("0000");
+
+    private static final int INT_4 = 4;
 
     /**
      * コンストラクタです。
@@ -137,39 +138,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
         RString 表示パターン = get表示パターン();
 
-        if (DBD5120001StateName.申請追加.getName().equals(ResponseHolder.getState())) {
-            this.edit状態_申請追加();
-        } else if (DBD5120001StateName.申請修正.getName().equals(ResponseHolder.getState())) {
-            this.edit状態_申請修正();
-        } else if (DBD5120001StateName.申請取下.getName().equals(ResponseHolder.getState())) {
-            this.edit状態_申請取下();
-        } else if (DBD5120001StateName.区分変更追加.getName().equals(ResponseHolder.getState())) {
-            this.edit状態_区分変更追加();
-        } else if (DBD5120001StateName.区分変更修正.getName().equals(ResponseHolder.getState())) {
-            this.edit状態_区分変更修正();
-        } else if (DBD5120001StateName.区分変更取下.getName().equals(ResponseHolder.getState())) {
-            this.edit状態_区分変更取消();
-        } else if (DBD5120001StateName.サービス変更追加.getName().equals(ResponseHolder.getState())) {
-            this.edit状態_サービス変更追加();
-        } else if (DBD5120001StateName.サービス変更修正.getName().equals(ResponseHolder.getState())) {
-            this.edit状態_サービス変更修正();
-        } else if (DBD5120001StateName.サービス変更取下.getName().equals(ResponseHolder.getState())) {
-            this.edit状態_サービス変更取消();
-        } else if (DBD5120001StateName.受給者転入追加.getName().equals(ResponseHolder.getState())) {
-            this.edit状態_受給者転入追加();
-        } else if (DBD5120001StateName.特殊追加.getName().equals(ResponseHolder.getState())) {
-            this.edit状態_特殊追加();
-        } else if (DBD5120001StateName.特殊修正.getName().equals(ResponseHolder.getState())) {
-            this.edit状態_特殊修正();
-        } else if (DBD5120001StateName.特殊削除.getName().equals(ResponseHolder.getState())) {
-            this.edit状態_特殊削除();
-        } else if (DBD5120001StateName.削除回復.getName().equals(ResponseHolder.getState())) {
-            this.edit状態_削除回復();
-        } else if (DBD5120001StateName.職権記載.getName().equals(ResponseHolder.getState())) {
-            this.edit状態_職権記載();
-        } else if (DBD5120001StateName.職権全喪失.getName().equals(ResponseHolder.getState())) {
-            this.edit状態_職権取消全喪失();
-        }
+        this.edit状態();
 
         NinteiShinseiTorokuUketsukeManager manager = NinteiShinseiTorokuUketsukeManager.createInstance();
 
@@ -208,7 +177,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
     }
 
     /**
-     * 保存する処理です。
+     * 表示パターン取得処理です。
      *
      * @return RString
      */
@@ -227,6 +196,47 @@ public class NinteiShinseiTorokuUketsukeHandler {
             return 表示パターン_新規;
         } else {
             return 表示パターン_申請中;
+        }
+    }
+
+    /**
+     * 状態編集処理です。
+     *
+     */
+    private void edit状態() {
+
+        if (DBD5120001StateName.申請追加.getName().equals(ResponseHolder.getState())) {
+            this.edit状態_申請追加();
+        } else if (DBD5120001StateName.申請修正.getName().equals(ResponseHolder.getState())) {
+            this.edit状態_申請修正();
+        } else if (DBD5120001StateName.申請取下.getName().equals(ResponseHolder.getState())) {
+            this.edit状態_申請取下();
+        } else if (DBD5120001StateName.区分変更追加.getName().equals(ResponseHolder.getState())) {
+            this.edit状態_区分変更追加();
+        } else if (DBD5120001StateName.区分変更修正.getName().equals(ResponseHolder.getState())) {
+            this.edit状態_区分変更修正();
+        } else if (DBD5120001StateName.区分変更取下.getName().equals(ResponseHolder.getState())) {
+            this.edit状態_区分変更取消();
+        } else if (DBD5120001StateName.サービス変更追加.getName().equals(ResponseHolder.getState())) {
+            this.edit状態_サービス変更追加();
+        } else if (DBD5120001StateName.サービス変更修正.getName().equals(ResponseHolder.getState())) {
+            this.edit状態_サービス変更修正();
+        } else if (DBD5120001StateName.サービス変更取下.getName().equals(ResponseHolder.getState())) {
+            this.edit状態_サービス変更取消();
+        } else if (DBD5120001StateName.受給者転入追加.getName().equals(ResponseHolder.getState())) {
+            this.edit状態_受給者転入追加();
+        } else if (DBD5120001StateName.特殊追加.getName().equals(ResponseHolder.getState())) {
+            this.edit状態_特殊追加();
+        } else if (DBD5120001StateName.特殊修正.getName().equals(ResponseHolder.getState())) {
+            this.edit状態_特殊修正();
+        } else if (DBD5120001StateName.特殊削除.getName().equals(ResponseHolder.getState())) {
+            this.edit状態_特殊削除();
+        } else if (DBD5120001StateName.削除回復.getName().equals(ResponseHolder.getState())) {
+            this.edit状態_削除回復();
+        } else if (DBD5120001StateName.職権記載.getName().equals(ResponseHolder.getState())) {
+            this.edit状態_職権記載();
+        } else if (DBD5120001StateName.職権全喪失.getName().equals(ResponseHolder.getState())) {
+            this.edit状態_職権取消全喪失();
         }
     }
 
@@ -758,7 +768,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         JukyushaDaicho jukyushaDaicho = new JukyushaDaicho(
                 new LasdecCode(div.getHdnShichosonCode()),
                 new HihokenshaNo(div.getHdnHihokenshaNo()),
-                ZERO_4,
+                new RString("0").padZeroToLeft(INT_4),
                 new RString("00"),
                 new Code(""));
 
@@ -910,7 +920,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
     private void insert介護保険施設入退所() {
         //TODO
-        ShisetsuNyutaisho shisetsuNyutaisho = new ShisetsuNyutaisho(new ShikibetsuCode(div.getHdnShikibetsuCode()), Integer.parseInt("0000"));
+        ShisetsuNyutaisho shisetsuNyutaisho = new ShisetsuNyutaisho(new ShikibetsuCode(div.getHdnShikibetsuCode()), 0);
         ShisetsuNyutaishoBuilder builder = shisetsuNyutaisho.createBuilderForEdit();
         //TODO
         builder.set市町村コード(new LasdecCode(div.getHdnShichosonCode()));
@@ -924,7 +934,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
     private void insert介護保険医療機関加入状況() {
         //TODO
-        IryohokenKanyuJokyo iryohokenKanyuJokyo = new IryohokenKanyuJokyo(new ShikibetsuCode(div.getHdnShikibetsuCode()), Integer.parseInt("0000"));
+        IryohokenKanyuJokyo iryohokenKanyuJokyo = new IryohokenKanyuJokyo(new ShikibetsuCode(div.getHdnShikibetsuCode()), 0);
         IryohokenKanyuJokyoBuilder builder = iryohokenKanyuJokyo.createBuilderForEdit();
         //TODO
         builder.set市町村コード(new LasdecCode(div.getHdnShichosonCode()));
@@ -942,7 +952,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         JukyushaDaicho jukyushaDaicho = new JukyushaDaicho(
                 new LasdecCode(div.getHdnShichosonCode()),
                 new HihokenshaNo(div.getHdnHihokenshaNo()),
-                ZERO_4,
+                new RString("0").padZeroToLeft(INT_4),
                 new RString("00"),
                 new Code("7"));
 
@@ -1057,7 +1067,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         JukyushaDaicho jukyushaDaicho = new JukyushaDaicho(
                 new LasdecCode(div.getHdnShichosonCode()),
                 new HihokenshaNo(div.getHdnHihokenshaNo()),
-                ZERO_4,
+                new RString("0").padZeroToLeft(INT_4),
                 new RString("00"),
                 new Code("7"));
 
@@ -1175,7 +1185,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         JukyushaDaicho jukyushaDaicho = new JukyushaDaicho(
                 new LasdecCode(div.getHdnShichosonCode()),
                 new HihokenshaNo(div.getHdnHihokenshaNo()),
-                new RString("0000"),
+                new RString("0").padZeroToLeft(INT_4),
                 new RString("00"),
                 new Code("7"));
 
@@ -1289,7 +1299,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         JukyushaDaicho jukyushaDaicho = new JukyushaDaicho(
                 new LasdecCode(div.getHdnShichosonCode()),
                 new HihokenshaNo(div.getHdnHihokenshaNo()),
-                new RString("0000"),
+                new RString("0").padZeroToLeft(INT_4),
                 new RString("00"),
                 new Code(""));
 
@@ -1402,7 +1412,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         JukyushaDaicho jukyushaDaicho = new JukyushaDaicho(
                 new LasdecCode(div.getHdnShichosonCode()),
                 new HihokenshaNo(div.getHdnHihokenshaNo()),
-                new RString("0000"),
+                new RString("0").padZeroToLeft(INT_4),
                 new RString("00"),
                 new Code(""));
 
@@ -1460,7 +1470,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
     private void update介護保険施設入退所() {
         //TODO
-        ShisetsuNyutaisho shisetsuNyutaisho = new ShisetsuNyutaisho(new ShikibetsuCode(div.getHdnShikibetsuCode()), Integer.parseInt("0000"));
+        ShisetsuNyutaisho shisetsuNyutaisho = new ShisetsuNyutaisho(new ShikibetsuCode(div.getHdnShikibetsuCode()), 0);
         ShisetsuNyutaishoBuilder builder = shisetsuNyutaisho.createBuilderForEdit();
         //TODO
         builder.set市町村コード(new LasdecCode(div.getHdnShichosonCode()));
@@ -1474,7 +1484,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
     private void update介護保険医療機関加入状況() {
         //TODO
-        IryohokenKanyuJokyo iryohokenKanyuJokyo = new IryohokenKanyuJokyo(new ShikibetsuCode(div.getHdnShikibetsuCode()), Integer.parseInt("0000"));
+        IryohokenKanyuJokyo iryohokenKanyuJokyo = new IryohokenKanyuJokyo(new ShikibetsuCode(div.getHdnShikibetsuCode()), 0);
         IryohokenKanyuJokyoBuilder builder = iryohokenKanyuJokyo.createBuilderForEdit();
         //TODO
         builder.set市町村コード(new LasdecCode(div.getHdnShichosonCode()));
