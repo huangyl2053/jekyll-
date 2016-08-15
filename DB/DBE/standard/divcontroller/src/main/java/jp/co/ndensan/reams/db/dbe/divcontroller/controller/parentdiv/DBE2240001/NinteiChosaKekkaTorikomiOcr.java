@@ -211,7 +211,7 @@ public class NinteiChosaKekkaTorikomiOcr {
     }
 
     private void save共有フォルダ(NinteiChosaKekkaTorikomiOcrDiv div, FilesystemPath path) {
-        List<TorokuData> dataList = ViewStateHolder.get(ViewStateKeys.イメージ取込み, TorokuDataCollection.class).getDataList();
+        List<TorokuData> dataList = ViewStateHolder.get(ViewStateKeys.認定調査結果取込み_OCR, TorokuDataCollection.class).getDataList();
         for (TorokuData data : dataList) {
             for (dgTorikomiKekka_Row row : div.getDgTorikomiKekka().getDataSource()) {
                 if (row.getHihoBango().equals(data.get被保険者番号())
