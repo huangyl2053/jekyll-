@@ -5,6 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hikazenenkintaishoshadoutei;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.HikazeNenkinTaishoFirJohoEntity;
+
 /**
  * 年金番号突合のマッパーインタフェースです。
  *
@@ -12,5 +15,5 @@ package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hikazenenkintais
  */
 public interface INenkinNoTotsugoMapper {
 
-    // TODO 年金番号突合について
+    List<HikazeNenkinTaishoFirJohoEntity> get年金番号突合();
 }

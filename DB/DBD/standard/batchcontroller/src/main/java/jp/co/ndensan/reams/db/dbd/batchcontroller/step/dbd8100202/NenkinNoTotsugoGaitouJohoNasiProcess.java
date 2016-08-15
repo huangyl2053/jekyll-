@@ -32,5 +32,4 @@ public class NenkinNoTotsugoGaitouJohoNasiProcess extends BatchProcessBase<Nenki
         // TODO　該当年金情報なし一時テーブルを登録する
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 }

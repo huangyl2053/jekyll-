@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.temptable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,37 +23,69 @@ import lombok.Setter;
 public class NenkinNoTotsugoGaitouJohoNasiTempTableEntity extends DbTableEntityBase<NenkinNoTotsugoGaitouJohoNasiTempTableEntity> implements IDbAccessable {
 
     public static final RString TABLE_NAME = new RString("NenkinNoTotsugoGaitouJohoNasiTempTable");
-    //TODO
-//            DTレコード区分
-//        DT市町村コード
-//        DT年金保険者コード
-//        DT通知内容コード
-//        DT予備1
-//        DT制度コード
-//        DT作成年月日
-//        DT基礎年金番号
-//        DT年金コード
-//        DT予備2
-//        DT生年月日
-//        DT性別
-//        DTカナ氏名
-//        DTシフトコード1
-//        DT漢字氏名
-//        DTシフトコード2
-//        DT郵便番号
-//        DTカナ住所
-//        DTシフトコード3
-//        DT漢字住所
-//        DTシフトコード4
-//        DT対象年
-//        DT訂正表示
-//        DT各種区分
-//        DT処理結果
-//        DT予備3
-//        DT予備4
-//        DT金額1
-//        DT金額予備1
-//        DT金額予備2
-//        DT予備5
-//        DT共済年金証書記号番号
+
+    @TempTableColumnOrder(1)
+    private RString dtRekoDoKubunn;
+    @TempTableColumnOrder(2)
+    private RString dtShichosonCode;
+    @TempTableColumnOrder(3)
+    private RString dtNennkinnHokenshaCode;
+    @TempTableColumnOrder(4)
+    private RString dtTsuuchiContentCode;
+    @TempTableColumnOrder(5)
+    private RString dtYobi1;
+    @TempTableColumnOrder(6)
+    private RString dtSeidoCode;
+    @TempTableColumnOrder(7)
+    private RString dtCreateYMD;
+    @TempTableColumnOrder(8)
+    private RString dtKisoNennkinnNo;
+    @TempTableColumnOrder(9)
+    private RString dtNennkinnCode;
+    @TempTableColumnOrder(10)
+    private RString dtYobi2;
+    @TempTableColumnOrder(11)
+    private RString dtSeinenngappi;
+    @TempTableColumnOrder(12)
+    private RString dtSeibetsu;
+    @TempTableColumnOrder(13)
+    private RString dtKanaShimei;
+    @TempTableColumnOrder(14)
+    private RString dtShifutoCode1;
+    @TempTableColumnOrder(15)
+    private RString dtKanjiShimei;
+    @TempTableColumnOrder(16)
+    private RString dtShifutoCode2;
+    @TempTableColumnOrder(17)
+    private RString dtYubinNo;
+    @TempTableColumnOrder(18)
+    private RString dtKanajusyo;
+    @TempTableColumnOrder(19)
+    private RString dtShifutoCode3;
+    @TempTableColumnOrder(20)
+    private RString dtKanjijusyo;
+    @TempTableColumnOrder(21)
+    private RString dtShifutoCode4;
+    @TempTableColumnOrder(22)
+    private RString dtTaisyoYear;
+    @TempTableColumnOrder(23)
+    private RString dtTeiseiHyouji;
+    @TempTableColumnOrder(24)
+    private RString dtKakushuKubun;
+    @TempTableColumnOrder(25)
+    private RString dtShoriResult;
+    @TempTableColumnOrder(26)
+    private RString dtYobi3;
+    @TempTableColumnOrder(27)
+    private RString dtYobi4;
+    @TempTableColumnOrder(28)
+    private RString dtkinngaku1;
+    @TempTableColumnOrder(29)
+    private RString dtKinngakuYobi1;
+    @TempTableColumnOrder(30)
+    private RString dtKinngakuYobi2;
+    @TempTableColumnOrder(31)
+    private RString dtYobi5;
+    @TempTableColumnOrder(32)
+    private RString dtKyousaiNennkinnShoushoKigouNo;
 }
