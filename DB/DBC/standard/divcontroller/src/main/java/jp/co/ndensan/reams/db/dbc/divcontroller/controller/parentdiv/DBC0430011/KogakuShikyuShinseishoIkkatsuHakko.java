@@ -12,14 +12,16 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0430011.Kog
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 高額サービス費給付お知らせ通知書作成です。
  *
- * @reamsid_L DBC-0430-011 zhengshenlei
+ * @reamsid_L DBC-4770-010 zhengshenlei
  */
 public class KogakuShikyuShinseishoIkkatsuHakko {
 
@@ -29,7 +31,7 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
     private static final RString 事業高額サービス費給付お知らせ通知書作成 = new RString("事業高額サービス費給付お知らせ通知書作成");
 
     /**
-     * 画面初期化のメソッドます。
+     * 画面初期化のメソッドです。
      *
      * @param div KogakuShikyuShinseishoIkkatsuHakkoDivselectControlID
      * @return ResponseData
@@ -48,7 +50,7 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
     }
 
     /**
-     * 2.　ラジオボタン「radChushutsuJoken（審査年月RAD、被保険者番号RAD、白紙印刷RAD）」の切り替えによる、コントロールの操作
+     * ラジオボタン「審査年月RAD」のメソッドです
      *
      * @param div KogakuShikyuShinseishoIkkatsuHakkoDiv
      * @return ResponseData
@@ -64,7 +66,7 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
     }
 
     /**
-     * ラジオボタンのメソッドます 被保険者番号RAD
+     * ラジオボタン「被保険者番号RAD」のメソッドです
      *
      * @param div KogakuShikyuShinseishoIkkatsuHakkoDiv
      * @return ResponseData
@@ -81,7 +83,7 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
     }
 
     /**
-     * ラジオボタンのメソッドです。
+     * ラジオボタン「白紙印刷RAD」のメソッドです。
      *
      * @param div KogakuShikyuShinseishoIkkatsuHakkoDiv
      * @return ResponseData
@@ -96,7 +98,7 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
     }
 
     /**
-     * 「確定処理を実行する（バッチ用）」ボタンのメソッドます。
+     * 「確定処理を実行する（バッチ用）」ボタンのメソッドです。
      *
      * @param div HeijunkaKakuteiDiv
      * @return ResponseData
@@ -104,12 +106,13 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
     public ResponseData<KogakuKaigoServicehiOshiraseHakkoParameter> onclick_btBatch(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
-        boolean gotLock = getHandler(div).前排他キーのセット();
+        LockingKey 排他キー = new LockingKey(controlData.getMenuID());
+        boolean gotLock = RealInitialLocker.tryGetLock(排他キー);
         if (!gotLock) {
             throw new PessimisticLockingException();
         }
         KogakuKaigoServicehiOshiraseHakkoParameter parameter = getHandler(div).createBatchParameter(menuID);
-        getHandler(div).前排他を解除する();
+        RealInitialLocker.release(排他キー);
         return ResponseData.of(parameter).respond();
     }
 

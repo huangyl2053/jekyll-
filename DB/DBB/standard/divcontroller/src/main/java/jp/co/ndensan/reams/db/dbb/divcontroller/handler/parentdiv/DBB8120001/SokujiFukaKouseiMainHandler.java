@@ -766,15 +766,6 @@ public class SokujiFukaKouseiMainHandler {
                 subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額08())));
         tablePanel.getLblFuchoNofugakuValue11().setText(get普通徴収の納付額(更正後現年度賦課, 月の期_11月, Tsuki._11月));
         tablePanel.getTxtFuchoNokigen11().setValue(researcher.get普徴納期(Integer.valueOf(月の期_11月.toString())).get納期限());
-
-        RString 月の期_12月 = 期月リスト.get月の期(Tsuki._12月).get期();
-        tablePanel.getLblFuchoKi12().setText(getFormat期(月の期_12月));
-        tablePanel.getLblFuchoKoseiMaeValue12().setText(更正前現年度賦課 == null ? RString.EMPTY : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額09()));
-        tablePanel.getTxtFuchoKoseiGo12().setValue(更正後現年度賦課.get普徴期別金額09());
-        tablePanel.getLblFuchoZogenValue12().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額09().
-                subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額09())));
-        tablePanel.getLblFuchoNofugakuValue12().setText(get普通徴収の納付額(更正後現年度賦課, 月の期_12月, Tsuki._12月));
-        tablePanel.getTxtFuchoNokigen12().setValue(researcher.get普徴納期(Integer.valueOf(月の期_12月.toString())).get納期限());
     }
 
     private void set現年度の普通徴収情報下段(NendobunFukaList 更正前賦課リスト, NendobunFukaList 更正後賦課リスト) {
@@ -787,6 +778,15 @@ public class SokujiFukaKouseiMainHandler {
             更正前現年度賦課 = 更正前賦課リスト.get現年度();
         }
         FukaJoho 更正後現年度賦課 = 更正後賦課リスト.get現年度();
+        RString 月の期_12月 = 期月リスト.get月の期(Tsuki._12月).get期();
+        tablePanel.getLblFuchoKi12().setText(getFormat期(月の期_12月));
+        tablePanel.getLblFuchoKoseiMaeValue12().setText(更正前現年度賦課 == null ? RString.EMPTY : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額09()));
+        tablePanel.getTxtFuchoKoseiGo12().setValue(更正後現年度賦課.get普徴期別金額09());
+        tablePanel.getLblFuchoZogenValue12().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額09().
+                subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額09())));
+        tablePanel.getLblFuchoNofugakuValue12().setText(get普通徴収の納付額(更正後現年度賦課, 月の期_12月, Tsuki._12月));
+        tablePanel.getTxtFuchoNokigen12().setValue(researcher.get普徴納期(Integer.valueOf(月の期_12月.toString())).get納期限());
+
         RString 月の期_1月 = 期月リスト.get月の期(Tsuki._1月).get期();
         tablePanel.getLblFuchoKi01().setText(getFormat期(月の期_1月));
         tablePanel.getLblFuchoKoseiMaeValue01().setText(更正前現年度賦課 == null ? RString.EMPTY : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額10()));

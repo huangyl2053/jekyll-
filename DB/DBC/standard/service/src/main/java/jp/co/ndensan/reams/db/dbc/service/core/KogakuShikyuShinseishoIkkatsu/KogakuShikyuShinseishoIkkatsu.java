@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 高額サービス費給付お知らせ通知書作成のハンドラクラスです。
  *
- * @reamsid DBC-0430-011 zhengshenlei
+ * @reamsid DBC-4770-010 zhengshenlei
  */
 public class KogakuShikyuShinseishoIkkatsu {
 
@@ -56,9 +56,6 @@ public class KogakuShikyuShinseishoIkkatsu {
                 .createSelectByKeyParam(被保険者番号, 証記載保険者番号);
         IKogakuShikyuShinseishoIkkatsuHakkoMapper mapper = mapperProvider.create(IKogakuShikyuShinseishoIkkatsuHakkoMapper.class);
         List<DbT3056KogakuShikyuShinseiEntity> entityList = mapper.getServiceTeikyoByDbT3056(parameter);
-        if (entityList == null || entityList.isEmpty()) {
-            return Collections.emptyList();
-        }
         List<KogakuShikyuShinsei> list = new ArrayList<>();
         for (DbT3056KogakuShikyuShinseiEntity entity : entityList) {
             list.add(new KogakuShikyuShinsei(entity));
@@ -79,12 +76,12 @@ public class KogakuShikyuShinseishoIkkatsu {
         KogakuShikyuShinseishoIkkatsuHakkoMapperParameter parameter = KogakuShikyuShinseishoIkkatsuHakkoMapperParameter
                 .createSelectByKeyParam(被保険者番号, 証記載保険者番号);
         IKogakuShikyuShinseishoIkkatsuHakkoMapper mapper = mapperProvider.create(IKogakuShikyuShinseishoIkkatsuHakkoMapper.class);
-        List<DbT3110JigyoKogakuShikyuShinseiEntity> aa = mapper.getServiceTeikyoByDbT3110(parameter);
-        if (aa == null || aa.isEmpty()) {
+        List<DbT3110JigyoKogakuShikyuShinseiEntity> entityList = mapper.getServiceTeikyoByDbT3110(parameter);
+        if (entityList == null || entityList.isEmpty()) {
             return Collections.emptyList();
         }
         List<JigyoKogakuShikyuShinsei> list = new ArrayList<>();
-        for (DbT3110JigyoKogakuShikyuShinseiEntity entity : aa) {
+        for (DbT3110JigyoKogakuShikyuShinseiEntity entity : entityList) {
             list.add(new JigyoKogakuShikyuShinsei(entity));
         }
         return list;
