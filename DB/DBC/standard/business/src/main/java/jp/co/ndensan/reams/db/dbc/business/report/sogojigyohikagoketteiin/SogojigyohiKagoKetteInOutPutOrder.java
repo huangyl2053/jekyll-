@@ -16,6 +16,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum SogojigyohiKagoKetteInOutPutOrder implements IReportItems {
 
     /**
+     * 証記載保険者番号
+     */
+    証記載保険者番号(new RString("0103"), new RString("shoKisaiHokenshaNo"), new RString("DbWT3060.\"hdrShoHokenshaNo\"")),
+    /**
      * 被保険者番号
      */
     被保険者番号(new RString("0360"), new RString("listUpper_4"), new RString("DbWT0001.\"hihokenshaNo\"")),
