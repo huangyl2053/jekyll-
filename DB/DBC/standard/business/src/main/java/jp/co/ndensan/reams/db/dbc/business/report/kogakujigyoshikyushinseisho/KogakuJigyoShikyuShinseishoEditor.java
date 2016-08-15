@@ -29,15 +29,15 @@ public class KogakuJigyoShikyuShinseishoEditor implements IKogakuJigyoShikyuShin
     private final boolean is空白;
     private final RString 注意文;
     private final RString count;
-    private final RString attion = new RString("注意");
-    private final RString messageGK = new RString("銀行");
-    private final RString messageSK = new RString("信用金庫");
-    private final RString messageSKU = new RString("信用組合");
-    private final RString messageNK = new RString("農協");
-    private final RString messageHT = new RString("本店");
-    private final RString messageST = new RString("支店");
-    private final RString messageSC = new RString("主張書");
-    private final RString messageSS = new RString("支所");
+    private static final RString attion = new RString("注意");
+    private static final RString messageGK = new RString("銀行");
+    private static final RString messageSK = new RString("信用金庫");
+    private static final RString messageSKU = new RString("信用組合");
+    private static final RString messageNK = new RString("農協");
+    private static final RString messageHT = new RString("本店");
+    private static final RString messageST = new RString("支店");
+    private static final RString messageSC = new RString("主張書");
+    private static final RString messageSS = new RString("支所");
 
     /**
      * コンストラクタです

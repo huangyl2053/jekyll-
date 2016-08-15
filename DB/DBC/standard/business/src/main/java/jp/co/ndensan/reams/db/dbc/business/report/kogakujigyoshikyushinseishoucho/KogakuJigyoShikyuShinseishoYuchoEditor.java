@@ -28,7 +28,7 @@ public class KogakuJigyoShikyuShinseishoYuchoEditor implements IKogakuJigyoShiky
     private final Boolean is金融機関表示;
     private final RString 注意文;
     private final RString count;
-    private final RString attion = new RString("注意");
+    private static final RString attion = new RString("注意");
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
