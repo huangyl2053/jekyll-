@@ -101,4 +101,5 @@ public class HikazeNenkinTaishoFirJohoEntity {
     private RString 実績_DT金額予備2;
     private RString 実績_DT予備5;
     private RString 実績_DT共済年金証書記号番号;
+    private RString 不一致項目;
 }
