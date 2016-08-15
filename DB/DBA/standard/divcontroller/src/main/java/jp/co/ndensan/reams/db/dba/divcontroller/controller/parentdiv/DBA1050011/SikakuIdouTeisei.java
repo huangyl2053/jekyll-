@@ -127,12 +127,23 @@ public class SikakuIdouTeisei {
     }
 
     /**
-     * 「対象者検索に戻る」ボタンを押します。
+     * 「対象者検索へ」ボタンを押します。
      *
      * @param div 画面情報
      * @return ResponseData<SikakuIdouTeiseiDiv>
      */
     public ResponseData<SikakuIdouTeiseiDiv> onClick_Modoru(SikakuIdouTeiseiDiv div) {
+        RealInitialLocker.release(前排他ロックキー);
+        return ResponseData.of(div).forwardWithEventName(DBA1050011TransitionEventName.検索結果一覧へ).respond();
+    }
+
+    /**
+     * 「再検索する」ボタンを押します。
+     *
+     * @param div 画面情報
+     * @return ResponseData<SikakuIdouTeiseiDiv>
+     */
+    public ResponseData<SikakuIdouTeiseiDiv> onClick_btnResearch(SikakuIdouTeiseiDiv div) {
         RealInitialLocker.release(前排他ロックキー);
         return ResponseData.of(div).forwardWithEventName(DBA1050011TransitionEventName.再検索).respond();
     }
