@@ -38,6 +38,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class KyodoIdoRenrakuhyoHenkoMain {
 
+    private static final RString 訂正モード = new RString("訂正");
+    private static final RString 削除モード = new RString("削除");
+
     /**
      * 画面初期化のメソッドです。
      *
@@ -56,8 +59,15 @@ public class KyodoIdoRenrakuhyoHenkoMain {
         }
         ShikibetsuCode 識別コード = KyodoshoriyoJukyushaIdoRenrakuhyo.createInstance().get識別コード(被保険者番号);
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
+        RString 処理モード;
+        if (論理削除フラグ) {
+            処理モード = 削除モード;
+        } else {
+            処理モード = 訂正モード;
+        }
+        ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード);
         KyodoshoriyoJukyushaIdoRenrakuhyoParam entity = getHandler(div).initialize(
-                被保険者番号, 異動日, 論理削除フラグ, 対象年月, 識別コード);
+                被保険者番号, 異動日, 論理削除フラグ, 対象年月, 識別コード, 処理モード);
         ViewStateHolder.put(ViewStateKeys.共同処理用受給者異動情報, entity);
         return ResponseData.of(div).respond();
     }
@@ -69,8 +79,22 @@ public class KyodoIdoRenrakuhyoHenkoMain {
      * @return ResponseData
      */
     public ResponseData<KyodoIdoRenrakuhyoHenkoMainDiv> onClick_btnSave(KyodoIdoRenrakuhyoHenkoMainDiv div) {
-        ValidationMessageControlPairs pairs = div.getKyodoIdoRenrakuhyoHenkoDetailInfo().get一時差止日の関連チェック();
-        pairs.add(div.getKyodoIdoRenrakuhyoHenkoDetailInfo().get一時差止日の入力チェック());
+        KyodoshoriyoJukyushaIdoRenrakuhyoParam 初期受給者異動情報 = ViewStateHolder.get(
+                ViewStateKeys.共同処理用受給者異動情報, KyodoshoriyoJukyushaIdoRenrakuhyoParam.class);
+        KyodoshoriyoJukyushaIdoRenrakuhyoParam entity = div.getKyodoIdoRenrakuhyoHenkoDetailInfo().getNewデータ();
+        List<RString> 基本送付_追加チェックボックス = div.getKyodoIdoRenrakuhyoHenkoDetailInfo().get基本送付情報を追加する();
+        List<RString> 償還送付_追加チェックボックス = div.getKyodoIdoRenrakuhyoHenkoDetailInfo().get償還送付情報を追加する();
+        List<RString> 高額送付_追加チェックボックス = div.getKyodoIdoRenrakuhyoHenkoDetailInfo().get高額送付情報を追加する();
+        boolean is基本送付活性 = div.getKyodoIdoRenrakuhyoHenkoDetailInfo().get基本送付情報を追加活性();
+        boolean is償還送付活性 = div.getKyodoIdoRenrakuhyoHenkoDetailInfo().get償還送付情報を追加活性();
+        boolean is高額送付活性 = div.getKyodoIdoRenrakuhyoHenkoDetailInfo().get高額送付情報を追加活性();
+        ValidationMessageControlPairs pairs = getHandler(div).get入力チェック(初期受給者異動情報, entity,
+                基本送付_追加チェックボックス,
+                償還送付_追加チェックボックス,
+                高額送付_追加チェックボックス,
+                is基本送付活性,
+                is償還送付活性,
+                is高額送付活性);
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
@@ -83,12 +107,16 @@ public class KyodoIdoRenrakuhyoHenkoMain {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             try {
-                KyodoshoriyoJukyushaIdoRenrakuhyoParam 初期受給者異動情報 = ViewStateHolder.get(
-                        ViewStateKeys.共同処理用受給者異動情報, KyodoshoriyoJukyushaIdoRenrakuhyoParam.class);
                 KyodoJukyushaTaishoshaEntity 対象者一覧
                         = ViewStateHolder.get(ViewStateKeys.一覧検索キー, KyodoJukyushaTaishoshaEntity.class);
                 ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-                getHandler(div).データの登録(初期受給者異動情報, 識別コード, 対象者一覧.is論理削除フラグ());
+                getHandler(div).データの登録(初期受給者異動情報, entity, 識別コード, 対象者一覧.is論理削除フラグ(),
+                        基本送付_追加チェックボックス,
+                        償還送付_追加チェックボックス,
+                        高額送付_追加チェックボックス,
+                        is基本送付活性,
+                        is償還送付活性,
+                        is高額送付活性);
                 List<RString> チェック状態 = getHandler(div).getチェックボックス状態();
                 if (!チェック状態.isEmpty()) {
                     return ResponseData.of(div).respond();
@@ -111,7 +139,11 @@ public class KyodoIdoRenrakuhyoHenkoMain {
      */
     public ResponseData<SourceDataCollection> onClick_btnReportPublish(KyodoIdoRenrakuhyoHenkoMainDiv div) {
         getHandler(div).set更新完了メッセージ();
-        return ResponseData.of(getHandler(div).to帳票発行処理()).setState(DBC0260012StateName.更新完了);
+        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        KyodoshoriyoJukyushaIdoRenrakuhyoParam 初期受給者異動情報 = ViewStateHolder.get(
+                ViewStateKeys.共同処理用受給者異動情報, KyodoshoriyoJukyushaIdoRenrakuhyoParam.class);
+        return ResponseData.of(getHandler(div).to帳票発行処理(初期受給者異動情報, 処理モード))
+                .setState(DBC0260012StateName.更新完了);
     }
 
     /**
