@@ -88,6 +88,7 @@ public class ShoriDateKanriManager {
         entity.initializeMd5();
         return new ShoriDateKanri(entity);
     }
+
     /**
      * 主キーに合致する処理日付管理マスタを返します。
      *
@@ -448,4 +449,19 @@ public class ShoriDateKanriManager {
         }
     }
 
+    /**
+     * 処理日付管理マスタから、処理名より、前回対象年月日期間のデータを取得する。
+     *
+     * @param 処理名 RString
+     * @return ShoriDateKanri
+     */
+    @Transaction
+    public ShoriDateKanri get前回対象年月日期間(RString 処理名) {
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        DbT7022ShoriDateKanriEntity entity = dac.select前回対象年月日期間(処理名);
+        if (entity == null) {
+            return null;
+        }
+        return new ShoriDateKanri(entity);
+    }
 }
