@@ -9,7 +9,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.DbWT1511SeikyugakuTsuchishoTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.FlowEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.SeikyugakuTsuchishoCsvFileDataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.SeikyugakuTsuchishoCsvFileEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.SeikyugakuTsuchishoCsvFileHeadRecordEntity;
@@ -18,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.SeikyugakuTsuchishoCsvFil
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.SeikyugakuTsuchishoCsvFileToreraRecode2Entity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.SeikyugakuTsuchishoCsvFileToreraRecode3Entity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.KagoKetteiHokenshaInControlCsvEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc120230.ISeikyugakuTsuchishoCsvFileMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
@@ -119,7 +119,7 @@ public class SeikyugakuTsuchishoCsvFileManager {
         if ((レコード件数合算 == INDEX_0) || 登録件数 == INDEX_0) {
             mapper.処理結果リスト一時TBLに登録(errorTempentity);
         }
-        getEntity.set登録件数(登録件数);
+        getEntity.set明細データ登録件数(登録件数);
         return getEntity;
 
     }

@@ -119,11 +119,14 @@ public interface IKyodoJukyushaIdoRenrakuhyoDiv extends ICommonChildDivBasePrope
      *
      * @param 初期化異動情報Entity
      * @param 画面項目異動情報Entity
-     * @param checkFlag
+     * @param 基本送付情報Flag
+     * @param 償還送付情報変Flag
+     * @param 高額送付情報Flag
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 修正有無チェック(KyodoshoriyoJukyushaIdoRenrakuhyoParam 初期化異動情報Entity,
-            KyodoshoriyoJukyushaIdoRenrakuhyoParam 画面項目異動情報Entity, boolean checkFlag);
+            KyodoshoriyoJukyushaIdoRenrakuhyoParam 画面項目異動情報Entity, boolean 基本送付情報Flag,
+            boolean 償還送付情報変Flag, boolean 高額送付情報Flag);
 
     /**
      * 「基本送付情報を追加する」チェックボックス。

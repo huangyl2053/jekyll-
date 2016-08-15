@@ -254,8 +254,11 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoEditor
         if (特徴期月.isPresent()) {
             期別徴収猶予期間.set特徴期(edit2桁文字列(特徴期月.get期()));
             期別徴収猶予期間.set特徴月(editInt2桁文字列(特徴期月.get月AsInt()));
-            期別徴収猶予期間.set特徴期別金額(DecimalFormatter
-                    .toコンマ区切りRString(get期と特徴期別金額の対応(徴収猶予決定通知書情報, 特徴期月.get期()), 0));
+            Decimal 期と特徴期別金額 = get期と特徴期別金額の対応(徴収猶予決定通知書情報, 特徴期月.get期());
+            if (期と特徴期別金額 != null) {
+                期別徴収猶予期間.set特徴期別金額(DecimalFormatter
+                        .toコンマ区切りRString(期と特徴期別金額, 0));
+            }
         } else {
             期別徴収猶予期間.set特徴期(RString.EMPTY);
             期別徴収猶予期間.set特徴月(RString.EMPTY);
@@ -265,8 +268,11 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoEditor
         if (普徴期月.isPresent()) {
             期別徴収猶予期間.set普徴期(edit2桁文字列(普徴期月.get期()));
             期別徴収猶予期間.set普徴月(editInt2桁文字列(普徴期月.get月AsInt()));
-            期別徴収猶予期間.set普徴期別金額(DecimalFormatter
-                    .toコンマ区切りRString(get月と普徴期別金額の対応(徴収猶予決定通知書情報, 普徴期月.get月()), 0));
+            Decimal 月と普徴期別金額 = get月と普徴期別金額の対応(徴収猶予決定通知書情報, 普徴期月.get月());
+            if (月と普徴期別金額 != null) {
+                期別徴収猶予期間.set普徴期別金額(DecimalFormatter
+                        .toコンマ区切りRString(月と普徴期別金額, 0));
+            }
             期別徴収猶予期間.set徴収猶予期間(get徴収猶予期間(徴収猶予決定通知書情報, 普徴期月));
         } else {
             期別徴収猶予期間.set普徴期(RString.EMPTY);

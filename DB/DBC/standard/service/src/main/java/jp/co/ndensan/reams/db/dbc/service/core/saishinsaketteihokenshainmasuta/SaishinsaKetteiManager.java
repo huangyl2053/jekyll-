@@ -167,7 +167,7 @@ public class SaishinsaKetteiManager {
         DbT3064SaishinsaKetteiMeisaiEntity 再審査決定明細Entity = new DbT3064SaishinsaKetteiMeisaiEntity();
         再審査決定明細Entity.setToriatsukaiYM(entity.get取扱年月());
         再審査決定明細Entity.setHokenshaKubun(保険者区分);
-        再審査決定明細Entity.setRirekiNo(entity.get履歴番号().intValue());
+        再審査決定明細Entity.setRirekiNo(entity.get履歴番号());
         再審査決定明細Entity.setJigyoshoNo(entity.get事業所番号());
         再審査決定明細Entity.setJigyoshoName(entity.get事業所名());
         再審査決定明細Entity.setHiHokenshaNo(entity.get登録被保険者番号());

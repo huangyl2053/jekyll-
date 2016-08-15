@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.dbt4030011.NinteishoJohoBusiness
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100025.NinteishoJohoReportSource;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -23,14 +24,16 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteishoEditor {
 
     private final NinteishoJohoBusiness target;
+    private final NinshoshaSource ninshoshaSource;
 
     /**
      * インスタンスを生成します。
      *
      * @param target {@link NinteishoJohoBusiness}
      */
-    protected ShogaishaKojoNinteishoEditorImpl(NinteishoJohoBusiness target) {
+    protected ShogaishaKojoNinteishoEditorImpl(NinteishoJohoBusiness target, NinshoshaSource ninshoshaSource) {
         this.target = target;
+        this.ninshoshaSource = ninshoshaSource;
     }
 
     /**
@@ -53,7 +56,7 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
         edit申請者氏名(source);
         edit対象者住所(source);
         edit対象者氏名(source);
-        edit生年月日(source);
+//        edit生年月日(source);  QA 95163
         edit性別(source);
         edit障害理由(source);
         edit要介護認定日(source);
@@ -77,8 +80,13 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
     }
 
     private void edit認証者(NinteishoJohoReportSource source) {
-        source.ninshoshaShimeiKakenai = target.get認職者氏名();
-        source.ninshoshaShimeiKakeru = target.get電子公印();
+        source.denshiKoin = ninshoshaSource.denshiKoin;
+        source.hakkoYMD = ninshoshaSource.hakkoYMD;
+        source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
+        source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
+        source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
+        source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
+        source.koinShoryaku = ninshoshaSource.koinShoryaku;
     }
 
     private void edit申請者住所(NinteishoJohoReportSource source) {

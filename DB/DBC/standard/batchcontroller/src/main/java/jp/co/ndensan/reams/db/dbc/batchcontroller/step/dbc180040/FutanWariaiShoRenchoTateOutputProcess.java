@@ -10,7 +10,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.futanwariaishokattokami.FutanWariaiShoKattokamiProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.futanwariaishokattokami.FutanWariaiShoOutputJokenhyo;
 import jp.co.ndensan.reams.db.dbc.business.report.futanwariaishorenchotate.FutanWariaiShoRenchoTateReport;
-import jp.co.ndensan.reams.db.dbc.business.report.saishinsa.SaishinsaKetteiTsuchishoIchiranKohifutanshaProperty;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaishohakko.FutanwariaishoHakkoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.futanwariaishohakko.FutanwariaishoHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -22,6 +21,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.futanwariaishoikkatsu.FutanWariai
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.daikoprint.DaikoPrintItem;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -65,12 +65,10 @@ public class FutanWariaiShoRenchoTateOutputProcess extends BatchProcessBase<Riyo
     private BatchReportWriter<FutanWariaiShoRenchoTateSource> batchReportWriter;
     private ReportSourceWriter<FutanWariaiShoRenchoTateSource> reportSourceWriter;
 
-    private static final RString コンマ = new RString(",");
     private static final RString 定数_0 = new RString("0");
     private static final RString 定数_なし = new RString("なし");
     private static final RString 定数_あり = new RString("あり");
     private static final RString CONNECTOR = new RString("-");
-    private static final RString ORDERBY = new RString("order by");
     private static final RString 定数_負担割合証発行一覧 = new RString("負担割合証発行一覧");
     private static final RString 定数_負担割合証発行一括 = new RString("負担割合証発行（一括）");
     private static final RString 代行プリント送付票 = new RString("URU000A10_DaikoPrintCheck");
@@ -91,14 +89,15 @@ public class FutanWariaiShoRenchoTateOutputProcess extends BatchProcessBase<Riyo
         出力順BODY = new ArrayList<>();
         if (!RString.isNullOrEmpty(parameter.get出力順()) && !定数_0.equals(parameter.get出力順())) {
             IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
-            出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.FCZ医療費共通,
+            出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBC介護給付,
                     ReportIdDBC.DBC100065.getReportId(), Long.valueOf(parameter.get出力順().toString()));
             if (出力順 != null) {
                 parameter.set出力順(MyBatisOrderByClauseCreator.create(
                         FutanWariaiShoKattokamiProperty.DBB100065ShutsuryokujunEnum.class, 出力順));
-                出力順BODY = MyBatisOrderByClauseCreator.create(
-                        SaishinsaKetteiTsuchishoIchiranKohifutanshaProperty.KagoKetteiKohifutanshaInBreakerFieldsEnum.class, 出力順)
-                        .replace(ORDERBY, RString.EMPTY).split(コンマ.toString());
+                List<ISetSortItem> items = 出力順.get設定項目リスト();
+                for (int i = 0; i < items.size(); i++) {
+                    出力順BODY.add(items.get(i).get項目名());
+                }
             } else {
                 parameter.set出力順(null);
             }

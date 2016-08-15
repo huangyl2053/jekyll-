@@ -41,9 +41,8 @@
         <result property="利用者負担割合_発行区分" column="利用者負担割合_発行区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="利用者負担割合_発行日" column="利用者負担割合_発行日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="利用者負担割合_識別コード" column="利用者負担割合_識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="利用者負担割合_履歴番号" column="利用者負担割合_履歴番号" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
-        <result property="psmEntity" column="psmEntity" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="atesakiEntity" column="atesakiEntity" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <association property="atesakiEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
     </resultMap>
     
     <select resultOrdered="true" id="get汎用リスト"
@@ -86,8 +85,6 @@
                 利用者負担割合."hakoFuyoFlag" AS 利用者負担割合_発行不要フラグ,							
                 利用者負担割合."hakoKubun" AS 利用者負担割合_発行区分,						
                 利用者負担割合."hakoYMD" AS 利用者負担割合_発行日,
-                利用者負担割合."shikibetsuCode" AS 利用者負担割合_識別コード,
-        	利用者負担割合."edaNo" AS 利用者負担割合_枝番号,		
                 <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
                 , <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
             FROM
@@ -104,18 +101,16 @@
                     INNER JOIN(																									
 			SELECT	*																						
                             FROM  (																								
-                                    SELECT																							
-                                            *																						
-                                            ROM_NUMBER() OVER (PARTITION BY "hihokenshaNo", "rirekiNo"																						
+                                    SELECT * , ROW_NUMBER() OVER (PARTITION BY "hihokenshaNo", "rirekiNo"																						
                                                              ORDER BY "edaNo" DESC) AS 利用者負担割合明細_番号																				
                                     FROM																							
                                             rgdb."DbT3114RiyoshaFutanWariaiMeisai" AS DbT3114																	
                                     WHERE																							
                                             DbT3114."logicalDeletedFlag" = false																						
-                                    ) AS 利用者負担割合明細																							
+                                    ) AS a																							
                                     WHERE																								
                                             利用者負担割合明細_番号 = 1																							
-                                    )																								
+                                    ) AS 利用者負担割合明細																						
                             ON 利用者負担割合明細."nendo" = 利用者負担割合."nendo"												
                             AND 利用者負担割合明細."hihokenshaNo" = 利用者負担割合."hihokenshaNo"											
                             AND 利用者負担割合明細."rirekiNo" = 利用者負担割合."rirekiNo"																						
@@ -123,31 +118,32 @@
                     INNER  JOIN																										
                             rgdb."DbV1001HihokenshaDaicho" AS 最新被保台帳																									
                     ON　 最新被保台帳."hihokenshaNo" = 利用者負担割合."hihokenshaNo"																								
-																													
-                    INNER  JOIN																										
-                            rgua."UaFt200FindShikibetsuTaisho"  AS  宛名 																							
-                    ON　 宛名."shikibetsuCode" = 最新被保台帳."shikibetsuCode"																							
-																													
-                    INNER  JOIN																										
-                            rgua."UaFt250FindAtesaki"  AS  宛先																										
-                    ON　 宛先."shikibetsuCode" = 最新被保台帳."shikibetsuCode"																								
+		
+                    INNER JOIN																											
+                    <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+                    AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
+                    ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = 最新被保台帳."shikibetsuCode"
+
+                    INNER JOIN
+                    <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" /> AS "Atesaki"
+                    ON "Atesaki"."shikibetsuCode" = 最新被保台帳."shikibetsuCode"																							
 																													
                     INNER  JOIN　(																										
 				SELECT																									
 					"nendo", "hihokenshaNo", "rirekiNo", "edaNo"																								
 				FROM  (																									
 					SELECT																								
-						*																							
-						ROM_NUMBER() OVER (PARTITION BY "hihokenshaNo", "rirekiNo"																							
+						*,																						
+                                                ROW_NUMBER OVER (PARTITION BY "hihokenshaNo", "rirekiNo"																							
 								 ORDER BY "edaNo" DESC) AS DbT3114_枝番																					
 					FROM																								
 						rgdb."DbT3114RiyoshaFutanWariaiMeisai" AS DbT3114_1																		
 					WHERE																								
 						DbT3114_1."logicalDeletedFlag" = false																							
-					) AS 利用者負担割合明細2																								
+					) AS b																								
 				WHERE																									
 					DbT3114_枝番 = 1																								
-				)																									
+				) AS 利用者負担割合明細2																										
 			ON	利用者負担割合明細2."nendo" = 利用者負担割合."nendo"												
 			AND	利用者負担割合明細2."hihokenshaNo" = 利用者負担割合."hihokenshaNo"												
 			AND	利用者負担割合明細2."rirekiNo" = 利用者負担割合."rirekiNo"									
@@ -176,42 +172,40 @@
                 </if>
                 <if test="is住所">
                     <if test="has地区選択From">
-                        AND #{地区選択コードFrom} <![CDATA[<=]]> 宛名."choikiCode"
+                        AND #{地区選択コードFrom} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."choikiCode"
                     </if>
                     <if test="has地区選択To">
-                        AND 宛名."choikiCode" <![CDATA[<=]]> #{地区選択コードTo}
+                        AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."choikiCode" <![CDATA[<=]]> #{地区選択コードTo}
                     </if>
                 </if>
                 <if test="is行政区">
                     <if test="has行政区From">
-                        AND #{地区選択コードFrom} <![CDATA[<=]]> 宛名."gyoseikuCode"
+                        AND #{地区選択コードFrom} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."gyoseikuCode"
                     </if>
                     <if test="has行政区To">
-                         AND 宛名."gyoseikuCode" <![CDATA[<=]]> #{地区選択コードTo}
+                         AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."gyoseikuCode" <![CDATA[<=]]> #{地区選択コードTo}
                     </if>
                 </if>
                 <if test="is地区">
                     <if test="has地区１From">
-                        AND #{地区選択コードFrom} <![CDATA[<=]]> 宛名."chikuCode1"
+                        AND #{地区選択コードFrom} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode1"
                     </if>
                     <if test="has地区１To">
-                        AND 宛名."chikuCode1" <![CDATA[<=]]> #{地区選択コードTo}
+                        AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode1" <![CDATA[<=]]> #{地区選択コードTo}
                     </if>
                     <if test="has地区２From">
-                        AND #{地区選択コードFrom} <![CDATA[<=]]> 宛名."chikuCode2"
+                        AND #{地区選択コードFrom} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode2"
                     </if>
                     <if test="has地区２To">
-                        AND 宛名."chikuCode2" <![CDATA[<=]]> #{地区選択コードTo}
+                        AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode2" <![CDATA[<=]]> #{地区選択コードTo}
                     </if>
                     <if test="has地区３From">
-                        AND #{地区選択コードFrom} <![CDATA[<=]]> 宛名."chikuCode3"
+                        AND #{地区選択コードFrom} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode3"
                     </if>
                     <if test="has地区３To">
-                        AND 宛名."chikuCode3" <![CDATA[<=]]> #{地区選択コードTo}
+                        AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode3" <![CDATA[<=]]> #{地区選択コードTo}
                     </if>
                 </if>
-            ORDER BY #{syutsuryokujun}
-
-                
+            ORDER BY #{syutsuryokujun}       
     </select>
 </mapper>

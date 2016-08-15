@@ -47,7 +47,7 @@ public class RiyoshaFutanWariaiShoInsertProcess extends BatchProcessBase<Riyosha
 
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.futanwariaishohakko."
-                    + "IFutanwariaishoHakkoMapper.select利用者負担割合証Temp");
+                    + "IFutanwariaishoHakkoMapper.select利用者負担割合証");
     private FutanwariaishoHakkoProcessParameter parameter;
 
     @BatchWriter
@@ -108,7 +108,7 @@ public class RiyoshaFutanWariaiShoInsertProcess extends BatchProcessBase<Riyosha
 
     @Override
     protected void process(RiyoshaFutanwariaishoTempEntity entity) {
-        if (entity.get被保台帳() != null && entity.get被保台帳().getShikakuSoshitsuYMD() != null) {
+        if (entity.get被保台帳() != null && entity.get被保台帳().getShikakuSoshitsuYMD() == null) {
             RiyoshaFutanwariaishoEntity item = new RiyoshaFutanwariaishoEntity();
             item.setDbT3113RiyoshaFutanWariai_insertDantaiCd(entity.get利用者負担割合().getInsertDantaiCd());
             item.setDbT3113RiyoshaFutanWariai_isDeleted(entity.get利用者負担割合().getIsDeleted());

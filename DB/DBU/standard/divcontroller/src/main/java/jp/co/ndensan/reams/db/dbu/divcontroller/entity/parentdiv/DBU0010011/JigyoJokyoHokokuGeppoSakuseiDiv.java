@@ -37,6 +37,8 @@ public class JigyoJokyoHokokuGeppoSakuseiDiv extends Panel {
     private RString txtShukeiYM5Bak;
     @JsonProperty("kyuShichoson")
     private RString kyuShichoson;
+    @JsonProperty("hdnJkkoutani")
+    private RString hdnJkkoutani;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -168,6 +170,24 @@ public class JigyoJokyoHokokuGeppoSakuseiDiv extends Panel {
     @JsonProperty("kyuShichoson")
     public void setKyuShichoson(RString kyuShichoson) {
         this.kyuShichoson = kyuShichoson;
+    }
+
+    /*
+     * gethdnJkkoutani
+     * @return hdnJkkoutani
+     */
+    @JsonProperty("hdnJkkoutani")
+    public RString getHdnJkkoutani() {
+        return hdnJkkoutani;
+    }
+
+    /*
+     * sethdnJkkoutani
+     * @param hdnJkkoutani hdnJkkoutani
+     */
+    @JsonProperty("hdnJkkoutani")
+    public void setHdnJkkoutani(RString hdnJkkoutani) {
+        this.hdnJkkoutani = hdnJkkoutani;
     }
 
     /*

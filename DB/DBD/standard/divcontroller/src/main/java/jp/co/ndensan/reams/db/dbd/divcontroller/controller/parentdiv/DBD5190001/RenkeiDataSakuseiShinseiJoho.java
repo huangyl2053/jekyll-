@@ -68,35 +68,50 @@ public class RenkeiDataSakuseiShinseiJoho {
      * @return ResponseData<RenkeiDataSakuseiShinseiJohoDiv>
      */
     public ResponseData<RenkeiDataSakuseiShinseiJohoDiv> checkInput(RenkeiDataSakuseiShinseiJohoDiv div) {
+        RString chushutsujokenselected = div.getChushutsuJoken().getRadChushutsuJoken().getSelectedValue();
+        RString 対象期間 = new RString("対象期間");
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         getValidationHandler().validateFor保険者の非空チェック(pairs, div);
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        getValidationHandler().validateFor今回開始時間の非空チェック(pairs, div);
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
-        }
-        getValidationHandler().validateFor今回終了時間の非空チェック(pairs, div);
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
-        }
-        getValidationHandler().validateFor対象期間時間チェック(pairs, div);
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        if (chushutsujokenselected.equals(対象期間)) {
+            getValidationHandler().validateFor今回開始時間の非空チェック(pairs, div);
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
+            getValidationHandler().validateFor今回終了時間の非空チェック(pairs, div);
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
+            getValidationHandler().validateFor対象期間時間チェック(pairs, div);
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
         }
         RString shoKisaiHokenshaNo = div.getCommonChildDiv1().getSelectedItem().get証記載保険者番号().value();
-        RString chushutsujokenselected = div.getChushutsuJoken().getRadChushutsuJoken().getSelectedValue();
-        RString 対象期間 = new RString("対象期間");
+
         RString hihokenshaNo = new RString("");
         if (!chushutsujokenselected.equals(対象期間)) {
             hihokenshaNo = div.getTxtHihokenshaNo().getValue();
         }
         RString saidaikensu = div.getTxtMaxKensu().getText();
-        RDate nenngappi = div.getTxtKonkaiKaishiDay().getValue();
-        RTime jifunyou = div.getTxtKonkaiKaishiTime().getValue();
-        RDate nenngappisyuryo = div.getTxtKonkaiShuryoDay().getValue();
-        RTime jifunyousyuryo = div.getTxtKonkaiShuryoTime().getValue();
+        RDate nenngappi = RDate.MIN;
+        RDate nenngappisyuryo = RDate.MIN;
+        RTime jifunyou = RTime.of(0, 0, 0);
+        RTime jifunyousyuryo = RTime.of(0, 0, 0);
+        if (div.getTxtKonkaiKaishiDay().getValue() != null) {
+            nenngappi = div.getTxtKonkaiKaishiDay().getValue();
+        }
+        if (div.getTxtKonkaiKaishiTime().getValue() != null) {
+            jifunyou = div.getTxtKonkaiKaishiTime().getValue();
+        }
+        if (div.getTxtKonkaiShuryoDay().getValue() != null) {
+            nenngappisyuryo = div.getTxtKonkaiShuryoDay().getValue();
+        }
+        if (div.getTxtKonkaiShuryoTime().getValue() != null) {
+            jifunyousyuryo = div.getTxtKonkaiShuryoTime().getValue();
+        }
         RDateTime konkaikaishiTime = RDateTime.of(nenngappi.getYearValue(), nenngappi.getMonthValue(), nenngappi.getDayValue(),
                 jifunyou.getHour(), jifunyou.getMinute(), jifunyou.getSecond());
         RDateTime konkaisyuryoTime = RDateTime.of(nenngappisyuryo.getYearValue(), nenngappisyuryo.getMonthValue(),
@@ -179,10 +194,22 @@ public class RenkeiDataSakuseiShinseiJoho {
      */
 //    public ResponseData<DBD519001_NinteishinseiInfoIfParameter> batch_paramter(RenkeiDataSakuseiShinseiJohoDiv div) {
 //        DBD519001_NinteishinseiInfoIfParameter parameters = new DBD519001_NinteishinseiInfoIfParameter();
-//        RDate fromdate = div.getTxtKonkaiKaishiDay().getValue();
-//        RDate todate = div.getTxtKonkaiShuryoDay().getValue();
-//        RTime fromtime = div.getTxtKonkaiKaishiTime().getValue();
-//        RTime totime = div.getTxtKonkaiShuryoTime().getValue();
+//        RDate fromdate = RDate.getNowDate();
+//        RDate todate = RDate.getNowDate().plusDay(1);
+//        RTime fromtime = RTime.of(0, 0, 0);
+//        RTime totime = RTime.of(0, 0, 0);
+//        if (div.getTxtKonkaiKaishiDay().getValue() != null) {
+//            fromdate = div.getTxtKonkaiKaishiDay().getValue();
+//        }
+//        if (div.getTxtKonkaiShuryoDay().getValue() != null) {
+//            todate = div.getTxtKonkaiShuryoDay().getValue();
+//        }
+//        if (div.getTxtKonkaiKaishiTime().getValue() != null) {
+//            fromtime = div.getTxtKonkaiKaishiTime().getValue();
+//        }
+//        if (div.getTxtKonkaiShuryoTime().getValue() != null) {
+//            totime = div.getTxtKonkaiShuryoTime().getValue();
+//        }
 //        RString insatsukikan = div.getTxtInsatsuDay().getValue();
 //        RDateTime konkaikaishiFrom = RDateTime.of(fromdate.getYearValue(), fromdate.getMonthValue(), fromdate.getDayValue(),
 //                fromtime.getHour(), fromtime.getMinute(), fromtime.getSecond());

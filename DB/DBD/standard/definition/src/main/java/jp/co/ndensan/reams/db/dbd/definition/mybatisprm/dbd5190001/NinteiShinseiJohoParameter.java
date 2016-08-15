@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd5190001;
 
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 
 /**
  * 対象者一覧情報の検索のパラメータクラス
@@ -19,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class NinteiShinseiJohoParameter {
 
     private final RString shoKisaiHokenshaNo;
+    private final boolean 証記載保険者番号;
     private final boolean logicalDeletedFlag;
     private final RDateTime konkaikaishiTimestamp;
     private final boolean 今回開始;
@@ -33,6 +36,7 @@ public final class NinteiShinseiJohoParameter {
      * コンストラクタです。
      *
      * @param shoKisaiHokenshaNo RString
+     * @param 証記載保険者番号 boolean
      * @param logicalDeletedFlag boolean
      * @param konkaikaishiTimestamp RDateTime
      * @param konkaikaishi boolean
@@ -43,11 +47,12 @@ public final class NinteiShinseiJohoParameter {
      * @param saidaikensu RString
      * @param 最大表示件数 boolean
      */
-    private NinteiShinseiJohoParameter(RString shoKisaiHokenshaNo, boolean logicalDeletedFlag,
+    private NinteiShinseiJohoParameter(RString shoKisaiHokenshaNo, boolean 証記載保険者番号, boolean logicalDeletedFlag,
             RDateTime konkaikaishiTimestamp, boolean konkaikaishi,
             RDateTime konkaisyuryoTimestamp, boolean syuryotime, RString hihokenshaNo,
             boolean 被保険者番号入力, int saidaikensu, boolean 最大表示件数) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
+        this.証記載保険者番号 = 証記載保険者番号;
         this.logicalDeletedFlag = logicalDeletedFlag;
         this.konkaikaishiTimestamp = konkaikaishiTimestamp;
         this.今回開始 = konkaikaishi;
@@ -75,16 +80,24 @@ public final class NinteiShinseiJohoParameter {
             RDateTime konkaisyuryoTimestamp,
             RString hihokenshaNo,
             RString saidaikensu) {
+        boolean 証記載保険者番号 = false;
         boolean logicalDeletedFlag = false;
         boolean 今回開始 = false;
         boolean 今回終了 = false;
         boolean 被保険者番号入力 = false;
         boolean 最大表示件数 = false;
+        RDate konkaikaishiday = RDate.MIN;
+        RTime konkaikaishitime = RTime.of(0, 0, 0);
+        RDateTime timeCheck = RDateTime.of(konkaikaishiday.getYearValue(), konkaikaishiday.getMonthValue(), konkaikaishiday.getDayValue(),
+                konkaikaishitime.getHour(), konkaikaishitime.getMinute(), konkaikaishitime.getSecond());
         int saidakensuNo = 0;
-        if (!(konkaikaishiTimestamp.toString().isEmpty())) {
+        if (!shoKisaiHokenshaNo.isEmpty()) {
+            証記載保険者番号 = true;
+        }
+        if (!(timeCheck.isEqual(konkaikaishiTimestamp))) {
             今回開始 = true;
         }
-        if (!(konkaikaishiTimestamp.toString().isEmpty())) {
+        if (!(timeCheck.isEqual(konkaisyuryoTimestamp))) {
             今回終了 = true;
         }
         if (!RString.isNullOrEmpty(hihokenshaNo)) {
@@ -94,7 +107,7 @@ public final class NinteiShinseiJohoParameter {
             最大表示件数 = true;
             saidakensuNo = Integer.parseInt(saidaikensu.toString());
         }
-        return new NinteiShinseiJohoParameter(shoKisaiHokenshaNo, logicalDeletedFlag,
+        return new NinteiShinseiJohoParameter(shoKisaiHokenshaNo, 証記載保険者番号, logicalDeletedFlag,
                 konkaikaishiTimestamp, 今回開始,
                 konkaisyuryoTimestamp, 今回終了, hihokenshaNo,
                 被保険者番号入力, saidakensuNo, 最大表示件数);

@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0120011;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoInfo.ServiceRiyohyoInfoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoInfo.IServiceRiyohyoInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -24,7 +24,7 @@ public class KyotakuServiceRiyohyoDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("ccdServiceRiyohyoInfo")
-    private ServiceRiyohyoInfoDiv ccdServiceRiyohyoInfo;
+    private IServiceRiyohyoInfoDiv ccdServiceRiyohyoInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,7 +37,7 @@ public class KyotakuServiceRiyohyoDiv extends Panel {
      * @return ccdServiceRiyohyoInfo
      */
     @JsonProperty("ccdServiceRiyohyoInfo")
-    public ServiceRiyohyoInfoDiv getCcdServiceRiyohyoInfo() {
+    public IServiceRiyohyoInfoDiv getCcdServiceRiyohyoInfo() {
         return ccdServiceRiyohyoInfo;
     }
 

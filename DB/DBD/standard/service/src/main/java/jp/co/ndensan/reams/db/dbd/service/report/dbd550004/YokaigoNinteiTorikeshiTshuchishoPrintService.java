@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaisho
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibun;
+import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunFinder;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -120,19 +122,25 @@ public class YokaigoNinteiTorikeshiTshuchishoPrintService {
     }
 
     private List<RString> get通知文情報() {
-        Map<Integer, RString> 通知文情報Map = ReportUtil.get通知文(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD550004.getReportId(), KamokuCode.EMPTY, 1);
+        TsuchishoTeikeibunFinder finder = new TsuchishoTeikeibunFinder();
+        List<TsuchishoTeikeibun> tsuchishoTeikeibun = finder.get通知書定型文パターン(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD550004.getReportId());
+        Map<Integer, RString> 通知文情報Map = ReportUtil.get通知文(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD550004.getReportId(), KamokuCode.EMPTY,
+                tsuchishoTeikeibun.get(0).getパターン番号());
         List<RString> 通知文情報 = new ArrayList<>();
         RString 通知文1 = new RString(通知文情報Map.get(1).toString() + 通知文情報Map.get(2).toString());
         通知文情報.add(通知文1);
         for (int i = NO_3; i < NO_6; i++) {
             通知文情報.add(通知文情報Map.get(i));
         }
-        Map<Integer, RString> フフォント大Map = ReportUtil.get通知文(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD550004.getReportId(), KamokuCode.EMPTY, 2);
+        Map<Integer, RString> フフォント大Map = ReportUtil.get通知文(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD550004.getReportId(), KamokuCode.EMPTY,
+                tsuchishoTeikeibun.get(1).getパターン番号());
         通知文情報.add(フフォント大Map.get(NO_5));
-        Map<Integer, RString> フォント混在Map1 = ReportUtil.get通知文(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD550004.getReportId(), KamokuCode.EMPTY, NO_3);
+        Map<Integer, RString> フォント混在Map1 = ReportUtil.get通知文(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD550004.getReportId(), KamokuCode.EMPTY,
+                tsuchishoTeikeibun.get(2).getパターン番号());
         通知文情報.add(フォント混在Map1.get(NO_5));
         通知文情報.add(フォント混在Map1.get(NO_6));
-        Map<Integer, RString> フォント混在Map2 = ReportUtil.get通知文(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD550004.getReportId(), KamokuCode.EMPTY, NO_4);
+        Map<Integer, RString> フォント混在Map2 = ReportUtil.get通知文(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD550004.getReportId(), KamokuCode.EMPTY,
+                tsuchishoTeikeibun.get(NO_3).getパターン番号());
         通知文情報.add(フォント混在Map2.get(NO_5));
         通知文情報.add(フォント混在Map2.get(NO_6));
         return 通知文情報;

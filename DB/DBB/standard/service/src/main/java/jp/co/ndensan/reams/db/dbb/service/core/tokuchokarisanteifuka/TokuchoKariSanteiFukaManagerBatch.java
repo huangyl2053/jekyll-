@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.db.dbb.business.core.tokuchokarisanteifukamanager.Fuk
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchokarisanteifukamanager.FukaJohokeizoku;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchokarisanteifukamanager.SikakuSaisinnsiki;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukarisanteikekkaIchiran.TokubetsuChoshuKarisanteiKekkaIchiranProperty;
-import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ErrorCode;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTani;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
@@ -47,6 +46,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.fuka.fukakeisan.FukaKeisan;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbb.service.report.tokubetsuchoshukarisanteikekkaichiran.TokubetsuChoshuKarisanteiKekkaIchiranPrintService;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
@@ -767,7 +767,10 @@ public class TokuchoKariSanteiFukaManagerBatch {
         FlexibleDate 最新老齢受給開始年月日 = null;
         RoreiFukushiNenkinJukyusha 最新老齢の情報 = null;
         for (RoreiFukushiNenkinJukyusha 老齢の情報 : 老齢の情報List) {
-            if (!調定年度廃止日.isBeforeOrEquals(老齢の情報.get受給開始年月日()) && !老齢の情報.get受給終了年月日().isBeforeOrEquals(調定年度開始日)) {
+            if (老齢の情報.get受給開始年月日() == null || 老齢の情報.get受給終了年月日() == null) {
+                continue;
+            }
+            if (!調定年度廃止日.isBeforeOrEquals(老齢の情報.get受給開始年月日()) && 調定年度開始日.isBefore(老齢の情報.get受給終了年月日())) {
                 if (最新老齢受給開始年月日 == null) {
                     最新老齢受給開始年月日 = 老齢の情報.get受給開始年月日();
                     最新老齢の情報 = 老齢の情報;
@@ -806,7 +809,10 @@ public class TokuchoKariSanteiFukaManagerBatch {
         FlexibleDate 最新受給開始日 = null;
         SeikatsuHogoJukyusha 最新生保の情報 = null;
         for (SeikatsuHogoJukyusha 生保の情報 : 生保の情報List) {
-            if (!調定年度廃止日.isBeforeOrEquals(生保の情報.get受給開始日()) && !生保の情報.get受給廃止日().isBeforeOrEquals(調定年度開始日)) {
+            if (生保の情報.get受給開始日() == null || 生保の情報.get受給廃止日() == null) {
+                continue;
+            }
+            if (!調定年度廃止日.isBeforeOrEquals(生保の情報.get受給開始日()) && 調定年度開始日.isBefore(生保の情報.get受給廃止日())) {
                 if (最新受給開始日 == null) {
                     最新受給開始日 = 生保の情報.get受給廃止日();
                     最新生保の情報 = 生保の情報;

@@ -244,4 +244,23 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
                                 eq(sofuTorikomiKubun, SofuTorikomiKubun.それ以外.getコード()))).
                 toList(DbT3104KokuhorenInterfaceKanriEntity.class);
     }
+
+    /**
+     * 国保連インターフェース管理取得返します。
+     *
+     * @param 交換情報識別番号 RString
+     * @return List<DbT3104KokuhorenInterfaceKanriEntity>
+     */
+    @Transaction
+    public DbT3104KokuhorenInterfaceKanriEntity getAllBykokanShikibetsuNo(
+            RString 交換情報識別番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3104KokuhorenInterfaceKanri.class).
+                where(
+                        eq(kokanShikibetsuNo, 交換情報識別番号)).
+                order(by(DbT3104KokuhorenInterfaceKanri.shoriYM, Order.DESC)).limit(1).
+                toObject(DbT3104KokuhorenInterfaceKanriEntity.class);
+    }
 }

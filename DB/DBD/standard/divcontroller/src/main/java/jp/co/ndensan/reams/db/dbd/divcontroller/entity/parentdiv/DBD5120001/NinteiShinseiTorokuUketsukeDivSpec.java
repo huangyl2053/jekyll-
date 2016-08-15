@@ -5,9 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5120001;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.JukyushaDaichoManager;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 
 /**
  * 要介護認定申請受付バリデーションクラスです。
@@ -96,8 +104,12 @@ public enum NinteiShinseiTorokuUketsukeDivSpec implements IPredicate<NinteiShins
         @Override
         public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
 
-            //TODO
-            return true;
+            JukyushaDaichoManager manager = new JukyushaDaichoManager();
+            List<JukyushaDaicho> resultList = manager.get受給者台帳(
+                    new HihokenshaNo(div.getHdnHihokenshaNo()),
+                    new ShikibetsuCode(div.getHdnShikibetsuCode()));
+
+            return resultList == null || resultList.isEmpty();
         }
     },
     開始日と終了日の前後順チェック {
@@ -136,6 +148,50 @@ public enum NinteiShinseiTorokuUketsukeDivSpec implements IPredicate<NinteiShins
             return true;
         }
     },
+    有効認定期間の重複チェック {
+        /**
+         * 有効認定期間の重複チェックです。
+         *
+         * @param div 要介護認定申請受付Div
+         * @return true:前回有効終了日＜今回有効開始日です、false:前回有効終了日≧今回有効開始日です。
+         */
+        @Override
+        public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
+
+            //TODO
+            return true;
+        }
+    },
+    医療保険情報なしチェック {
+        /**
+         * 医療保険情報なしチェックです。
+         *
+         * @param div 要介護認定申請受付Div
+         * @return true:前回有効終了日＜今回有効開始日です、false:前回有効終了日≧今回有効開始日です。
+         */
+        @Override
+        public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
+
+            return HihokenshaKubunCode.第２号被保険者.getコード().
+                    equals(div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlHihokenshaKubun().getSelectedKey())
+                    && !IconName.Complete.equals(div.getBtnIryohokenGuide().getIconNameEnum());
+        }
+    },
+    特定疾病なしチェック {
+        /**
+         * 有効認定期間の重複チェックです。
+         *
+         * @param div 要介護認定申請受付Div
+         * @return true:前回有効終了日＜今回有効開始日です、false:前回有効終了日≧今回有効開始日です。
+         */
+        @Override
+        public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
+
+            return HihokenshaKubunCode.第２号被保険者.getコード().
+                    equals(div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlHihokenshaKubun().getSelectedKey())
+                    && div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlTokuteiShippei().getIsBlankLine();
+        }
+    },
     _６０日以前の申請チェック {
         /**
          * _６０日以前の申請チェックです。
@@ -164,8 +220,9 @@ public enum NinteiShinseiTorokuUketsukeDivSpec implements IPredicate<NinteiShins
         @Override
         public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
 
-            //TODO
-            return true;
+            return YokaigoJotaiKubun.要支援1.get名称().equals(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue())
+                    || YokaigoJotaiKubun.要支援2.get名称().equals(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue())
+                    || YokaigoJotaiKubun.要支援_経過的要介護.get名称().equals(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue());
         }
     },
     変更元が_自立チェック {
@@ -178,8 +235,110 @@ public enum NinteiShinseiTorokuUketsukeDivSpec implements IPredicate<NinteiShins
         @Override
         public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
 
-            //TODO
+            return YokaigoJotaiKubun.非該当.get名称().equals(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue());
+        }
+    },
+    職権取消_記載_修正_変更申請中のデータありチェック {
+        /**
+         * 職権取消_記載_修正_変更申請中のデータありチェックです。
+         *
+         * @param div 要介護認定申請受付Div
+         * @return true:今回申請日が前回有効期限終了日の61日以前でない、false:今回申請日が前回有効期限終了日の61日以前です。
+         */
+        @Override
+        public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
+
+            JukyushaDaichoManager manager = new JukyushaDaichoManager();
+            List<JukyushaDaicho> resultList = manager.get受給者台帳(
+                    new HihokenshaNo(div.getHdnHihokenshaNo()),
+                    new ShikibetsuCode(div.getHdnShikibetsuCode()));
+
+            if (resultList != null && !resultList.isEmpty()) {
+
+            }
             return true;
+
+        }
+    },
+    削除回復の対象ではないチェック {
+        /**
+         * 削除回復の対象ではないチェックです。
+         *
+         * @param div 要介護認定申請受付Div
+         * @return true:今回申請日が前回有効期限終了日の61日以前でない、false:今回申請日が前回有効期限終了日の61日以前です。
+         */
+        @Override
+        public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
+
+            JukyushaDaichoManager manager = new JukyushaDaichoManager();
+            List<JukyushaDaicho> resultList = manager.get受給者台帳(
+                    new HihokenshaNo(div.getHdnHihokenshaNo()),
+                    new ShikibetsuCode(div.getHdnShikibetsuCode()));
+
+            if (resultList != null && !resultList.isEmpty()) {
+                return resultList.get(0).is論理削除フラグ();
+            }
+            return false;
+        }
+    },
+    旧措置者ではなく_自立チェック {
+        /**
+         * 旧措置者ではなく_自立チェックです。
+         *
+         * @param div 要介護認定申請受付Div
+         * @return true:今回申請日が前回有効期限終了日の61日以前でない、false:今回申請日が前回有効期限終了日の61日以前です。
+         */
+        @Override
+        public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
+
+            return !div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getChkKyuSochisha().isAllSelected()
+                    && YokaigoJotaiKubun.非該当.get名称().equals(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue());
+
+        }
+    },
+    旧措置者ではなく_自立で有効期間記入ありチェック {
+        /**
+         * 旧措置者ではなく_自立で有効期間記入ありチェックです。
+         *
+         * @param div 要介護認定申請受付Div
+         * @return true:今回申請日が前回有効期限終了日の61日以前でない、false:今回申請日が前回有効期限終了日の61日以前です。
+         */
+        @Override
+        public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
+
+            return !div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getChkKyuSochisha().isAllSelected()
+                    && YokaigoJotaiKubun.非該当.get名称().equals(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue())
+                    && !div.getCcdNinteiInput().getNaiyo().get有効開始年月日().isEmpty()
+                    && !div.getCcdNinteiInput().getNaiyo().get有効終了年月日().isEmpty();
+        }
+    },
+    自立_かつサービス指定ありチェック {
+        /**
+         * 自立_かつサービス指定ありチェックです。
+         *
+         * @param div 要介護認定申請受付Div
+         * @return true:今回申請日が前回有効期限終了日の61日以前でない、false:今回申請日が前回有効期限終了日の61日以前です。
+         */
+        @Override
+        public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
+
+            return YokaigoJotaiKubun.非該当.get名称().equals(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue())
+                    && !div.getCcdNinteiInput().getServiceRow().isEmpty();
+        }
+    },
+    却下かつ_自立で異動理由ありチェック {
+        /**
+         * 却下かつ_自立で異動理由ありチェックです。
+         *
+         * @param div 要介護認定申請受付Div
+         * @return true:今回申請日が前回有効期限終了日の61日以前でない、false:今回申請日が前回有効期限終了日の61日以前です。
+         */
+        @Override
+        public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
+
+            return new RString("1").equals(div.getCcdNinteiInput().getNaiyo().get認定区分())
+                    && !YokaigoJotaiKubun.非該当.get名称().equals(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue())
+                    && !div.getCcdShinseiSonotaJohoInput().get異動事由().isEmpty();
         }
     },
 }

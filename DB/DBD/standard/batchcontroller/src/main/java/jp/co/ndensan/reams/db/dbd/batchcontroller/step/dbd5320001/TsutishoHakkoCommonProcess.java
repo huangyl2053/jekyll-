@@ -9,7 +9,9 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiIkatusHakkoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBA;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.editedatesaki.EditedAtesakiBuilder;
@@ -42,9 +44,12 @@ import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -94,6 +99,14 @@ public class TsutishoHakkoCommonProcess {
      * 通知文_項目番号_6
      */
     public static final int 通知文_項目番号_6 = 6;
+    /**
+     * DEFAULT_処理支番
+     */
+    public static final RString DEFAULT_処理支番 = new RString("0001");
+    /**
+     * DEFAULT_年度内連番
+     */
+    public static final RString DEFAULT_年度内連番 = new RString("0001");
 
     private static final RString 連絡符号 = new RString(",");
 
@@ -283,5 +296,54 @@ public class TsutishoHakkoCommonProcess {
         }
 
         return 連絡前文字列.concat(連絡符号).concat(サービス種類.value());
+    }
+
+    /**
+     * 市町村コードを返します。
+     *
+     * @return 市町村コード RString
+     */
+    public static RString get市町村コード() {
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        if (null == 市町村セキュリティ情報) {
+            return RString.EMPTY;
+        }
+        return 市町村セキュリティ情報.get市町村情報().get市町村コード().value();
+    }
+
+    /**
+     * 日付日時を返します。
+     *
+     * @param 日付 FlexibleDate
+     * @param 日時 RTime
+     * @return 日付日時 RString
+     */
+    public static RString get日付日時(FlexibleDate 日付, RTime 日時) {
+        if (null == 日付 || 日付.isEmpty()) {
+            return RString.EMPTY;
+        }
+
+        if (null == 日時) {
+            return 日付.wareki().toDateString();
+        }
+
+        return 日付.wareki().toDateString().concat(RString.HALF_SPACE).concat(日時.toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
+    }
+
+    /**
+     * dateとtimeからRDateを変更します。
+     *
+     * @param date FlexibleDate
+     * @param time RTime
+     * @return RDate RDate
+     */
+    public static YMDHMS convertDateToYMDHMS(FlexibleDate date, RTime time) {
+        if (null == date || date.isEmpty()) {
+            return null;
+        }
+        if (null == time) {
+            time = RTime.now();
+        }
+        return new YMDHMS(new RDate(date.toString()), time);
     }
 }

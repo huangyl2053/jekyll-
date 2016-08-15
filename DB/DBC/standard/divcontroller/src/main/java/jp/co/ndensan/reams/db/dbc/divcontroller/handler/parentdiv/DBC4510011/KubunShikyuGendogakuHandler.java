@@ -117,8 +117,8 @@ public class KubunShikyuGendogakuHandler {
      * @param boo Boolean
      */
     public void setServiceShuruiShousaiEnable(boolean boo) {
-        div.getServiceShuruiShousai().getTxtServiceCode().setDisabled(boo);
-        div.getServiceShuruiShousai().getTxtTeikyoKaishiYM().setDisabled(boo);
+        div.getServiceShuruiShousai().getTxtServiceCode().setDisabled(true);
+        div.getServiceShuruiShousai().getTxtTeikyoKaishiYM().setDisabled(true);
         div.getServiceShuruiShousai().getTxtTeikyoShuryoYM().setDisabled(boo);
         div.getServiceShuruiShousai().getTxtServiceMeisho().setDisabled(boo);
         div.getServiceShuruiShousai().getTxtServiceRyakusho().setDisabled(boo);

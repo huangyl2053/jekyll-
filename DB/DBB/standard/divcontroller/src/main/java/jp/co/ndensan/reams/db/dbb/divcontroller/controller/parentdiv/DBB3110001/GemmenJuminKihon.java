@@ -309,6 +309,21 @@ public class GemmenJuminKihon {
         return createResponse(div);
     }
 
+    /**
+     * 「取消をやめる」と「訂正をやめる」ボタン押下のメソッドです。
+     *
+     * @param div GemmenJuminKihonDiv
+     * @return 介護保険料減免画面
+     */
+    public ResponseData<GemmenJuminKihonDiv> onClick_btnTorikeshiCansel(GemmenJuminKihonDiv div) {
+        GemmenJuminKihonHandler handler = getHandler(div);
+        NendobunFukaGemmenList 年度分賦課減免リスト = ViewStateHolder.get(ViewStateKeys.年度分賦課減免リスト, NendobunFukaGemmenList.class);
+        RString 状況 = handler.load状況情報パネル(年度分賦課減免リスト.get最新減免の情報());
+        handler.loadパネル状態1(状況, 年度分賦課減免リスト);
+        handler.setRequired();
+        return createResponse(div);
+    }
+
     private GemmenJuminKihonHandler getHandler(GemmenJuminKihonDiv div) {
         return new GemmenJuminKihonHandler(div);
     }

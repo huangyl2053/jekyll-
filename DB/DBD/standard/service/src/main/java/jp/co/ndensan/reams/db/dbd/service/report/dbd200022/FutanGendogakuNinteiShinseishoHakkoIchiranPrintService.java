@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.service.report.dbd200022;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200022.FutanGendogakuNinteiShinseishoHakkoIchiranProerty;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200022.FutanGendogakuNinteiShinseishoHakkoIchiranReport;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.futangendogakuninteishinseishohakkoichiran.FutanGendogakuNinteiShinseishoHakkoIchiran;
@@ -32,21 +31,22 @@ public class FutanGendogakuNinteiShinseishoHakkoIchiranPrintService {
     /**
      * 帳票を出力
      *
-     * @param 帳票情報リスト List<FutanGendogakuNinteiShinseishoHakkoIchiran>
+     * @param 帳票情報 FutanGendogakuNinteiShinseishoHakkoIchiran
      * @param association Association
      * @param iOutputOrder IOutputOrder
      * @param 個人 IKojin
+     * @param index int
      * @param reportManager 帳票発行処理の制御機能
      */
-    public void print(List<FutanGendogakuNinteiShinseishoHakkoIchiran> 帳票情報リスト, Association association,
-            IOutputOrder iOutputOrder, IKojin 個人, ReportManager reportManager) {
+    public void print(FutanGendogakuNinteiShinseishoHakkoIchiran 帳票情報, Association association,
+            IOutputOrder iOutputOrder, IKojin 個人, int index, ReportManager reportManager) {
         FutanGendogakuNinteiShinseishoHakkoIchiranProerty property = new FutanGendogakuNinteiShinseishoHakkoIchiranProerty();
         try (ReportAssembler<FutanGendogakuNinteiShinseishoHakkoIchiranReportSource> assembler
                 = createAssembler(property, reportManager)) {
             ReportSourceWriter<FutanGendogakuNinteiShinseishoHakkoIchiranReportSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
             FutanGendogakuNinteiShinseishoHakkoIchiranReport report = FutanGendogakuNinteiShinseishoHakkoIchiranReport.
-                    createReport(帳票情報リスト, association, iOutputOrder, 個人);
+                    createReport(帳票情報, association, iOutputOrder, 個人, index);
             report.writeBy(reportSourceWriter);
 
         }

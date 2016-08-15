@@ -120,16 +120,6 @@ public class RenkeiDataTorikomi {
         for (FileData file : files) {
             getHandler(div).upLoadFile(new FilesystemPath(file.getFilePath()));
         }
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 一覧を表示します。
-     *
-     * @param div 画面情報
-     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
-     */
-    public ResponseData<RenkeiDataTorikomiDiv> onClick_SetItiran(RenkeiDataTorikomiDiv div) {
         getHandler(div).getFileData();
         return ResponseData.of(div).setState(DBE1920001StateName.一覧表示);
     }
