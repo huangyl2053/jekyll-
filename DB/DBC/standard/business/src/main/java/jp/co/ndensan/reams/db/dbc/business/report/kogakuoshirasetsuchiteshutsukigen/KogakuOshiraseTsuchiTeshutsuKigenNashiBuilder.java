@@ -9,18 +9,30 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakuoshirasetsuchiteshu
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- * 高額サービス給付のお知らせ通知書（提出期限なし）帳票Builder
+ * 高額サービス給付のお知らせ通知書（提出期限なし）帳票Builder。
  *
- * @reamsid_L DBC-4770-050 fzou
+ * @reamsid_L DBC-4770-050 jianglaishen
  */
-public class KogakuOshiraseTsuchiTeshutsuKigenNashiBuilder implements IKogakuOshiraseTsuchiTeshutsuKigenNashiBuilder {
+public class KogakuOshiraseTsuchiTeshutsuKigenNashiBuilder implements
+        IKogakuOshiraseTsuchiTeshutsuKigenNashiBuilder {
 
     private final IKogakuOshiraseTsuchiTeshutsuKigenNashiEditor editor;
 
-    public KogakuOshiraseTsuchiTeshutsuKigenNashiBuilder(IKogakuOshiraseTsuchiTeshutsuKigenNashiEditor editor) {
+    /**
+     * コンストラクタです。
+     *
+     * @param editor IFutanWariaiShoEditor
+     */
+    public KogakuOshiraseTsuchiTeshutsuKigenNashiBuilder(
+            IKogakuOshiraseTsuchiTeshutsuKigenNashiEditor editor) {
         this.editor = editor;
     }
 
+    /**
+     * 帳票ソースをビルドします。
+     *
+     * @return {@link JukyushaIdoRenrakuhyoSource}
+     */    
     @Override
     public KogakuOshiraseTsuchiTeshutsuKigenNashiSource build() {
         return ReportEditorJoiner.from(new KogakuOshiraseTsuchiTeshutsuKigenNashiSource()).join(editor).buildSource();

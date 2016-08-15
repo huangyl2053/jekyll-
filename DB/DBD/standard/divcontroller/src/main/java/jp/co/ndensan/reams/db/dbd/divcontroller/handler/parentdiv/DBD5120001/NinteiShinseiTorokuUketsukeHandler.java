@@ -144,7 +144,6 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
-        key.set識別コード(識別コード);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         NinteiShinseiTorokuUketsukeParameter param = NinteiShinseiTorokuUketsukeParameter.createParam(
                 被保険者番号, 識別コード, 申請書管理番号, 表示パターン, FlexibleDate.getNowDate(),
@@ -1306,7 +1305,6 @@ public class NinteiShinseiTorokuUketsukeHandler {
         JukyushaDaichoBuilder builder = jukyushaDaicho.createBuilderForEdit();
         //TODO
         builder.set直近フラグ(true);
-        builder.set識別コード(new ShikibetsuCode(div.getHdnShikibetsuCode()));
         builder.set申請理由(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getNinteiShinseiRiyu().getTxtNinteiShinseRiyu().getText());
         builder.set届出者_申請者関係コード(new Code(div.getCcdShinseiTodokedesha().getDdlShinseiKankeisha().getSelectedKey()));
@@ -1329,7 +1327,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
     private void update要介護認定申請情報_申請修正() {
         //TODO
-        NinteiShinseiJoho ninteiShinseiJoho = new NinteiShinseiJoho(new ShinseishoKanriNo(""));
+        NinteiShinseiJoho ninteiShinseiJoho = new NinteiShinseiJoho(shinseishoKanriNo);
         NinteiShinseiJohoBuilder builder = ninteiShinseiJoho.createBuilderForEdit();
 
         //TODO
@@ -1351,7 +1349,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         builder.set電話番号(new TelNo(div.getCcdShinseiTodokedesha().get一覧内容().get電話番号()));
         builder.set支所コード(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().getSelectedKey());
-        builder.set識別コード(new ShikibetsuCode(div.getHdnShikibetsuCode()));
+        builder.set識別コード(new ShikibetsuCode(div.getCcdKaigoNinteiAtenaInfo().get識別コード()));
         //TODO地区コード
         builder.setみなし２号等対象フラグ(false);
         builder.set広域内転居区分(new Code("0"));
@@ -1430,7 +1428,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
     private void update要介護認定申請情報_申請取下() {
         //TODO
-        NinteiShinseiJoho ninteiShinseiJoho = new NinteiShinseiJoho(new ShinseishoKanriNo(""));
+        NinteiShinseiJoho ninteiShinseiJoho = new NinteiShinseiJoho(shinseishoKanriNo);
         NinteiShinseiJohoBuilder builder = ninteiShinseiJoho.createBuilderForEdit();
 
         //TODO
@@ -1447,7 +1445,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
     private void update申請届出者() {
 
         //TODO
-        ShinseitodokedeJoho shinseitodokedeJoho = new ShinseitodokedeJoho(new ShinseishoKanriNo(""));
+        ShinseitodokedeJoho shinseitodokedeJoho = new ShinseitodokedeJoho(shinseishoKanriNo);
         ShinseitodokedeJohoBuilder builder = shinseitodokedeJoho.createBuilderForEdit();
 
         builder.set申請届出代行区分コード(new Code(div.getCcdShinseiTodokedesha().getDdlTodokledeDaikoKubun().getSelectedKey()));
@@ -1470,7 +1468,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
     private void update介護保険施設入退所() {
         //TODO
-        ShisetsuNyutaisho shisetsuNyutaisho = new ShisetsuNyutaisho(new ShikibetsuCode(div.getHdnShikibetsuCode()), 0);
+        ShisetsuNyutaisho shisetsuNyutaisho = new ShisetsuNyutaisho(new ShikibetsuCode(div.getCcdKaigoNinteiAtenaInfo().get識別コード()), 0);
         ShisetsuNyutaishoBuilder builder = shisetsuNyutaisho.createBuilderForEdit();
         //TODO
         builder.set市町村コード(new LasdecCode(div.getHdnShichosonCode()));
@@ -1484,7 +1482,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
     private void update介護保険医療機関加入状況() {
         //TODO
-        IryohokenKanyuJokyo iryohokenKanyuJokyo = new IryohokenKanyuJokyo(new ShikibetsuCode(div.getHdnShikibetsuCode()), 0);
+        IryohokenKanyuJokyo iryohokenKanyuJokyo = new IryohokenKanyuJokyo(new ShikibetsuCode(div.getCcdKaigoNinteiAtenaInfo().get識別コード()), 0);
         IryohokenKanyuJokyoBuilder builder = iryohokenKanyuJokyo.createBuilderForEdit();
         //TODO
         builder.set市町村コード(new LasdecCode(div.getHdnShichosonCode()));

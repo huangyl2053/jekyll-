@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 帳票のCSVファイル作成のCsvEntity
  *
- * @reamsid_L DBC-2550-010 fzou
+ * @reamsid_L　DBC-2550-010 jianglaishen
  */
 @lombok.Setter
 @lombok.Getter

@@ -17,8 +17,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2240001.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2240001.NinteiOcrTorokuDataCollection;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2240001.NinteiTorokuData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2240001.dgTorikomiKekka_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2260001.TorokuData;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2260001.TorokuDataCollection;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2240001.NinteiChosaKekkaTorikomiOcrHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2240001.NinteiOcrDbT5210Handler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2240001.NinteiOcrDbT5211Handler;
@@ -211,23 +209,23 @@ public class NinteiChosaKekkaTorikomiOcr {
     }
 
     private void save共有フォルダ(NinteiChosaKekkaTorikomiOcrDiv div, FilesystemPath path) {
-        List<TorokuData> dataList = ViewStateHolder.get(ViewStateKeys.認定調査結果取込み_OCR, TorokuDataCollection.class).getDataList();
-        for (TorokuData data : dataList) {
+        List<NinteiTorokuData> csvData = ViewStateHolder.get(ViewStateKeys.認定調査結果取込み_OCR, NinteiOcrTorokuDataCollection.class).getDataList();
+        for (NinteiTorokuData data : csvData) {
             for (dgTorikomiKekka_Row row : div.getDgTorikomiKekka().getDataSource()) {
                 if (row.getHihoBango().equals(data.get被保険者番号())
                         && row.getShinseibi().equals(dateFormat(data.get申請日()))
                         && row.getShoKisaiHokenshaNo().equals(data.get保険者番号())
                         && row.getSelected()) {
-                    if (data.getT5115_イメージ共有ファイルID() == null) {
+                    if (data.getイメージ共有ファイルID() == null) {
                         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName
-                                .fromString(data.getT5101_証記載保険者番号().concat(data.getT5101_被保険者番号())));
+                                .fromString(data.get証記載保険者番号().concat(data.get被保険者番号())));
                         sfd = SharedFile.defineSharedFile(sfd);
                         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
                         SharedFileEntryDescriptor entity = SharedFile.copyToSharedFile(sfd, path, opts);
-                        updateDbT5115(new ShinseishoKanriNo(data.getT5101_申請書管理番号()), entity.getSharedFileId());
+                        updateDbT5115(new ShinseishoKanriNo(data.get申請書管理番号()), entity.getSharedFileId());
                     } else {
                         ReadOnlySharedFileEntryDescriptor or_sfd = new ReadOnlySharedFileEntryDescriptor(FilesystemName
-                                .fromString(data.getT5101_証記載保険者番号().concat(data.getT5101_被保険者番号())), data.getT5115_イメージ共有ファイルID());
+                                .fromString(data.get証記載保険者番号().concat(data.get被保険者番号())), data.getイメージ共有ファイルID());
                         SharedFile.appendNewFile(or_sfd, path, "");
                     }
                 }

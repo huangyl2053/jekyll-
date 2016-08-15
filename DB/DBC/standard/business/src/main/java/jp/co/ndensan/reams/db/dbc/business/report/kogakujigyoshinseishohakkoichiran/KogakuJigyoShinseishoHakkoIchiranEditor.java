@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kogakujigyoshinseishohakkoichiran;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshirasetsuchisho.ShinseiJohoChohyoTempEntity;
@@ -19,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 帳票設計_DBC200091_高額総合事業サービス費申請書発行一覧表Editor
@@ -106,12 +106,11 @@ public class KogakuJigyoShinseishoHakkoIchiranEditor implements IKogakuJigyoShin
         if (帳票出力対象データ.getNinteiYukoKikanShuryoYMDChohyo() != null) {
             source.listHakkoTaishosha_12 = 帳票出力対象データ.getNinteiYukoKikanShuryoYMDChohyo().wareki().toDateString();
         }
-        NumberFormat currency = NumberFormat.getNumberInstance();
         if (帳票出力対象データ.getHonninShiharaiGakuChohyo() != null) {
-            source.listHakkoTaishosha_13 = new RString(currency.format(帳票出力対象データ.getHonninShiharaiGakuChohyo()));
+            source.listHakkoTaishosha_13 = DecimalFormatter.toコンマ区切りRString(帳票出力対象データ.getHonninShiharaiGakuChohyo(), INDEX_0);
         }
         if (帳票出力対象データ.getShikyuKingakuChohyo() != null) {
-            source.listHakkoTaishosha_14 = new RString(currency.format(帳票出力対象データ.getShikyuKingakuChohyo()));
+            source.listHakkoTaishosha_14 = DecimalFormatter.toコンマ区切りRString(帳票出力対象データ.getShikyuKingakuChohyo(), INDEX_0);
         }
         if (帳票出力対象データ.isHojinKeigenTaishoFlagChohyo()) {
             source.listHakkoTaishosha_15 = 丸;
