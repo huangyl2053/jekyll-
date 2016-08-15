@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3056KogakuShikyuShinseiEnti
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3110JigyoKogakuShikyuShinseiEntity;
 
 /**
- * 高額サービス費給付お知らせ通知書作成
+ * 高額サービス費給付お知らせ通知書作成のハンドラクラスです。
  *
- * @reamsid DBC-0430-011 zhengshenlei
+ * @reamsid DBC-4770-010 zhengshenlei
  */
 public interface IKogakuShikyuShinseishoIkkatsuHakkoMapper {
 
