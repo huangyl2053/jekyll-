@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
@@ -20,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KyufuJikoSakuseiResult {
+public class KyufuJikoSakuseiResult implements Serializable {
 
     private RString 事業者;
     private RString サービス;
