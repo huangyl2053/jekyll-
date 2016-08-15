@@ -48,7 +48,6 @@ public class NinteiShinseiTorokuUketsuke {
 
         HihokenshaNo 被保険者番号 = null;
         ShikibetsuCode 識別コード = null;
-        RString 市町村コード = null;
         ShinseishoKanriNo 申請書管理番号 = null;
 
         RString 表示パターン = getHandler(div).get表示パターン();
@@ -59,11 +58,10 @@ public class NinteiShinseiTorokuUketsuke {
         } else {
             申請書管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
             識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+            被保険者番号 = new HihokenshaNo(ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class));
         }
 
-        市町村コード = ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class);
-
-        this.getHandler(div).onLoad(被保険者番号, 識別コード, 申請書管理番号, 市町村コード);
+        this.getHandler(div).onLoad(被保険者番号, 識別コード, 申請書管理番号);
         return ResponseData.of(div).respond();
     }
 

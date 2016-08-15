@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -48,6 +49,7 @@ public class NinteiShinseiTorokuUketsukeEntity {
     private RString 申請届出者氏名カナ;
     private RString 届出者_本人との関係;
     private RString 管内管外区分;
+    private LasdecCode 市町村コード;
     private TelNo 申請届出者電話番号;
     private YubinNo 申請届出者郵便番号;
     private RString 申請届出者住所;

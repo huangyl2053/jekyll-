@@ -27,6 +27,7 @@
         <result property="申請届出者氏名カナ" column="申請届出者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="届出者_本人との関係" column="届出者_本人との関係" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="管内管外区分" column="管内管外区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
         <result property="申請届出者電話番号" column="申請届出者電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
         <result property="申請届出者郵便番号" column="申請届出者郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
         <result property="申請届出者住所" column="申請届出者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -97,6 +98,7 @@
         T4120."shinseiTodokedeshaKanaShimei" AS 申請届出者氏名カナ,
         V4001."homninKankei" AS 届出者_本人との関係,
         PSM."kannaiKangaiKubun" AS 管内管外区分,
+        T7051."shichosonCode" AS 市町村コード,
         T4120."shinseiTodokedeshaTelNo" AS 申請届出者電話番号,
         T4120."shinseiTodokedeshaYubinNo" AS 申請届出者郵便番号,
         T4120."shinseiTodokedeshaJusho" AS 申請届出者住所,
