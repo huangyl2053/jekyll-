@@ -36,7 +36,6 @@ public class JikoFutangakuKeisanIkkatsuPanelHandler {
     private final JikoFutangakuKeisanIkkatsuPanelDiv div;
     private static final RString 処理枝番 = new RString("00");
     private static final RString 被保険者番号指定RAD = new RString("hihokenshaNo");
-    private static final RString 対象者計算RAD = new RString("shinsaYM");
     private static final RString 開始年度 = new RString("2014");
     private static final RString 開始MONTHDAY = new RString("0101");
     private static final RString 終了MONTHDAY = new RString("0731");
