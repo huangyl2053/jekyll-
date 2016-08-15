@@ -10,10 +10,10 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakuoshirasetsuchiteshu
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- * 高額サービス給付のお知らせ通知書（提出期限なし）帳票IEditor
+ * 高額サービス給付のお知らせ通知書（提出期限なし）帳票IEditor。
  *
- * @reamsid_L DBC-4770-050 fzou
+ * @reamsid_L DBC-4770-050 jianglaisheng
  */
-public interface IKogakuOshiraseTsuchiTeshutsuKigenNashiEditor  extends IReportEditor<KogakuOshiraseTsuchiTeshutsuKigenNashiSource>{
-    
+public interface IKogakuOshiraseTsuchiTeshutsuKigenNashiEditor extends
+        IReportEditor<KogakuOshiraseTsuchiTeshutsuKigenNashiSource> {
 }
