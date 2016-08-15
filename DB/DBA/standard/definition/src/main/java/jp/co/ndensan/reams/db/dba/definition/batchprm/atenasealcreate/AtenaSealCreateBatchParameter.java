@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.definition.batchprm.atenasealcreate;
 
+import jp.co.ndensan.reams.db.dba.definition.processprm.atenasealcreate.AtenaSealCreateProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -126,4 +127,29 @@ public class AtenaSealCreateBatchParameter extends BatchParameterBase {
         this.isgunmeisho = isgunmeisho;
         this.gyoumucode = gyoumucode;
     }
+
+    /**
+     * 宛名シール作成、年齢到達予定者　選択したの場合、パラメータを作成します。
+     *
+     * @return AtenaSealCreateProcessParameter
+     */
+    public AtenaSealCreateProcessParameter toAtenaSealCreateProcessParameter() {
+        return new AtenaSealCreateProcessParameter(
+                chuushutsutaishousha,
+                chuyshutsukukantxt,
+                chuushutsukikankaishibi,
+                chuushutsukikanshuuryoubi,
+                shikakukubun,
+                shichousonshitei,
+                saiyuusenjyusho,
+                keishou,
+                hitemotsubangouhyouji,
+                iskatagaki,
+                isshichosonmeisho,
+                istodofukenmeisho,
+                isgunmeisho,
+                shutsutuokujyunid,
+                gyoumucode);
+    }
+
 }

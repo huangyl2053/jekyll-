@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain
 import jp.co.ndensan.reams.db.dbc.entity.csv.saishinsaketteihokenshain.SaishinsaKohifutanshaIchiranCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsa.SaishinsaKetteiTsuchishoChohyoEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.saishinsa.SaishinsaKetteiTsuchishoChohyoManager;
-import jp.co.ndensan.reams.db.dbc.service.report.saishinsa.SaishinsaTsuchishoIchiranKohifutanshaPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
@@ -104,13 +103,12 @@ public class SaishinsaKohifutanshaDoIchiranhyoSakuseiProcess extends SimpleBatch
         }
         mybatisParameter.put(キー_出力順.toString(), 出力順);
         SaishinsaKetteiTsuchishoChohyoManager chohyoManager = SaishinsaKetteiTsuchishoChohyoManager.createInstance();
-        List<SaishinsaKetteiTsuchishoChohyoEntity> list = chohyoManager.get帳票出力対象データ(mybatisParameter);
+//        List<SaishinsaKetteiTsuchishoChohyoEntity> list = chohyoManager.get帳票出力対象データ(mybatisParameter);
 
-        SaishinsaTsuchishoIchiranKohifutanshaPrintService printService
-                = new SaishinsaTsuchishoIchiranKohifutanshaPrintService();
-        printService.printTaitsu(list, order, parameter.get処理年月(), parameter.getシステム日付());
-        do帳票のCSVファイル作成(list, parameter.get処理年月(), parameter.getシステム日付());
-
+//        SaishinsaTsuchishoIchiranKohifutanshaPrintService printService
+//                = new SaishinsaTsuchishoIchiranKohifutanshaPrintService();
+//        printService.printTaitsu(list, order, parameter.get処理年月(), parameter.getシステム日付());
+//        do帳票のCSVファイル作成(list, parameter.get処理年月(), parameter.getシステム日付());
     }
 
     private void do帳票のCSVファイル作成(List<SaishinsaKetteiTsuchishoChohyoEntity> list,
