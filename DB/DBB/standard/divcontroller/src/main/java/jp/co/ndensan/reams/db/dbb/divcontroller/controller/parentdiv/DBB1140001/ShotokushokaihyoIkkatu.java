@@ -9,13 +9,11 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.shotokushokaihyohakko.Shot
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140001.ShotokushokaihyoIkkatuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1140001.ShotokushokaihyoIkkatuHandler;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzWarningMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 画面設計_DBBGM51001_所得照会票一括発行のクラスです。
@@ -26,12 +24,11 @@ public class ShotokushokaihyoIkkatu {
 
     private static final RString MSG_一括処理を実行します = new RString("一括処理を実行します");
     private static final RString MSG_再発行処理を実行します = new RString("再発行処理を実行します");
-    private static final RString MSG_再発行対象 = new RString("再発行対象");
     private static final RString MSG_所得調査中 = new RString(
             "テストプリントで発行するため、発行対象者が「所得調査中」として管理されません。<br>一括処理を実行します");
 
     /**
-     * 初期化のメソッド
+     * 初期化のメソッドです。
      *
      * @param div ShotokushokaihyoIkkatuDiv
      * @return ResponseData<ShotokushokaihyoIkkatuDiv>
@@ -48,14 +45,9 @@ public class ShotokushokaihyoIkkatu {
      * @return ResponseData<SourceDataCollection>
      */
     public ResponseData<ShotokuShokaihyoHakkoBatchParameter> onClick_Register(ShotokushokaihyoIkkatuDiv div) {
-        ShotokuShokaihyoHakkoBatchParameter parameter = new ShotokuShokaihyoHakkoBatchParameter();
         boolean テストプリント = getHandler(div).isテストプリント();
         boolean 再発行する = getHandler(div).is再発行する();
-        if (new RString(DbzWarningMessages.確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            parameter = getHandler(div).getParameter(div, テストプリント, 再発行する);
-            return ResponseData.of(parameter).respond();
-        }
+        ShotokuShokaihyoHakkoBatchParameter parameter = getHandler(div).getParameter(div, テストプリント, 再発行する);
         return ResponseData.of(parameter).respond();
     }
 
@@ -69,21 +61,23 @@ public class ShotokushokaihyoIkkatu {
         boolean テストプリント = getHandler(div).isテストプリント();
         boolean 再発行する = getHandler(div).is再発行する();
         if (getHandler(div).is再発行対象のチェック(再発行する)) {
-            throw new ApplicationException(UrErrorMessages.選択されていない.getMessage()
-                    .replace(MSG_再発行対象.toString()));
+            ValidationMessageControlPairs validPairs = getHandler(div).check再発行対象入力チェック(再発行する);
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
         }
         if (!ResponseHolder.isReRequest()) {
-            if (テストプリント) {
+            if (!テストプリント && !再発行する) {
+                WarningMessage message = new WarningMessage(DbzWarningMessages.確認.getMessage().getCode(),
+                        DbzWarningMessages.確認.getMessage().replace(MSG_一括処理を実行します.toString()).evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            } else if (テストプリント) {
                 WarningMessage message = new WarningMessage(DbzWarningMessages.確認.getMessage().getCode(),
                         DbzWarningMessages.確認.getMessage().replace(MSG_所得調査中.toString()).evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             } else if (再発行する) {
                 WarningMessage message = new WarningMessage(DbzWarningMessages.確認.getMessage().getCode(),
                         DbzWarningMessages.確認.getMessage().replace(MSG_再発行処理を実行します.toString()).evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            } else {
-                WarningMessage message = new WarningMessage(DbzWarningMessages.確認.getMessage().getCode(),
-                        DbzWarningMessages.確認.getMessage().replace(MSG_一括処理を実行します.toString()).evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
         }
