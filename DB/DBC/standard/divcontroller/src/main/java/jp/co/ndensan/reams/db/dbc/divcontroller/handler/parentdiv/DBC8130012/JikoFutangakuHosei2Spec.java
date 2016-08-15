@@ -392,11 +392,11 @@ public enum JikoFutangakuHosei2Spec implements IPredicate<JikoFutangakuHosei2Div
             Decimal うち70_74歳に係る負担額_11月分 = div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku11GatsuGo().getValue();
             Decimal 自己負担額_12月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangaku12GatsuGo().getValue();
             Decimal うち70_74歳に係る負担額_12月分 = div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku12GatsuGo().getValue();
-            if ((自己負担額_8月分 == Decimal.ZERO && うち70_74歳に係る負担額_8月分 != Decimal.ZERO)
-                    || (自己負担額_9月分 == Decimal.ZERO && うち70_74歳に係る負担額_9月分 != Decimal.ZERO)
-                    || (自己負担額_10月分 == Decimal.ZERO && うち70_74歳に係る負担額_10月分 != Decimal.ZERO)
-                    || (自己負担額_11月分 == Decimal.ZERO && うち70_74歳に係る負担額_11月分 != Decimal.ZERO)
-                    || (自己負担額_12月分 == Decimal.ZERO && うち70_74歳に係る負担額_12月分 != Decimal.ZERO)) {
+            if ((Decimal.ZERO.equals(自己負担額_8月分) && !Decimal.ZERO.equals(うち70_74歳に係る負担額_8月分))
+                    || (Decimal.ZERO.equals(自己負担額_9月分) && !Decimal.ZERO.equals(うち70_74歳に係る負担額_9月分))
+                    || (Decimal.ZERO.equals(自己負担額_10月分) && !Decimal.ZERO.equals(うち70_74歳に係る負担額_10月分))
+                    || (Decimal.ZERO.equals(自己負担額_11月分) && !Decimal.ZERO.equals(うち70_74歳に係る負担額_11月分))
+                    || (Decimal.ZERO.equals(自己負担額_12月分) && !Decimal.ZERO.equals(うち70_74歳に係る負担額_12月分))) {
                 return false;
             }
             return is補正後チェック２_翌年(div);
@@ -417,13 +417,13 @@ public enum JikoFutangakuHosei2Spec implements IPredicate<JikoFutangakuHosei2Div
             Decimal うち70_74歳に係る負担額_6月分 = div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku6GatsuGo().getValue();
             Decimal 自己負担額_7月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku7GatsuGo().getValue();
             Decimal うち70_74歳に係る負担額_7月分 = div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku7GatsuGo().getValue();
-            return (自己負担額_1月分 != Decimal.ZERO || うち70_74歳に係る負担額_1月分 == Decimal.ZERO)
-                    && (自己負担額_2月分 != Decimal.ZERO || うち70_74歳に係る負担額_2月分 == Decimal.ZERO)
-                    && (自己負担額_3月分 != Decimal.ZERO || うち70_74歳に係る負担額_3月分 == Decimal.ZERO)
-                    && (自己負担額_4月分 != Decimal.ZERO || うち70_74歳に係る負担額_4月分 == Decimal.ZERO)
-                    && (自己負担額_5月分 != Decimal.ZERO || うち70_74歳に係る負担額_5月分 == Decimal.ZERO)
-                    && (自己負担額_6月分 != Decimal.ZERO || うち70_74歳に係る負担額_6月分 == Decimal.ZERO)
-                    && (自己負担額_7月分 != Decimal.ZERO || うち70_74歳に係る負担額_7月分 == Decimal.ZERO);
+            return (!Decimal.ZERO.equals(自己負担額_1月分) || Decimal.ZERO.equals(うち70_74歳に係る負担額_1月分))
+                    && (!Decimal.ZERO.equals(自己負担額_2月分) || Decimal.ZERO.equals(うち70_74歳に係る負担額_2月分))
+                    && (!Decimal.ZERO.equals(自己負担額_3月分) || Decimal.ZERO.equals(うち70_74歳に係る負担額_3月分))
+                    && (!Decimal.ZERO.equals(自己負担額_4月分) || Decimal.ZERO.equals(うち70_74歳に係る負担額_4月分))
+                    && (!Decimal.ZERO.equals(自己負担額_5月分) || Decimal.ZERO.equals(うち70_74歳に係る負担額_5月分))
+                    && (!Decimal.ZERO.equals(自己負担額_6月分) || Decimal.ZERO.equals(うち70_74歳に係る負担額_6月分))
+                    && (!Decimal.ZERO.equals(自己負担額_7月分) || Decimal.ZERO.equals(うち70_74歳に係る負担額_7月分));
         }
 
         public static boolean is補正後チェック３(JikoFutangakuHosei2Div div) {
@@ -437,11 +437,11 @@ public enum JikoFutangakuHosei2Spec implements IPredicate<JikoFutangakuHosei2Div
             Decimal 高額総合事業サービス費_11月分 = div.getJikoFutangakuHosei2a().getTxtKougakuSogoJigyoServicehi11GatsuGo().getValue();
             Decimal 自己負担額_12月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangaku12GatsuGo().getValue();
             Decimal 高額総合事業サービス費_12月分 = div.getJikoFutangakuHosei2a().getTxtKougakuSogoJigyoServicehi12GatsuGo().getValue();
-            if ((自己負担額_8月分 == Decimal.ZERO && 高額総合事業サービス費_8月分 != Decimal.ZERO)
-                    || (自己負担額_9月分 == Decimal.ZERO && 高額総合事業サービス費_9月分 != Decimal.ZERO)
-                    || (自己負担額_10月分 == Decimal.ZERO && 高額総合事業サービス費_10月分 != Decimal.ZERO)
-                    || (自己負担額_11月分 == Decimal.ZERO && 高額総合事業サービス費_11月分 != Decimal.ZERO)
-                    || (自己負担額_12月分 == Decimal.ZERO && 高額総合事業サービス費_12月分 != Decimal.ZERO)) {
+            if ((Decimal.ZERO.equals(自己負担額_8月分) && !Decimal.ZERO.equals(高額総合事業サービス費_8月分))
+                    || (Decimal.ZERO.equals(自己負担額_9月分)  && !Decimal.ZERO.equals(高額総合事業サービス費_9月分))
+                    || (Decimal.ZERO.equals(自己負担額_10月分) && !Decimal.ZERO.equals(高額総合事業サービス費_10月分))
+                    || (Decimal.ZERO.equals(自己負担額_11月分) && !Decimal.ZERO.equals(高額総合事業サービス費_11月分))
+                    || (Decimal.ZERO.equals(自己負担額_12月分) && !Decimal.ZERO.equals(高額総合事業サービス費_12月分))) {
                 return false;
             }
             return is補正後チェック３_翌年(div);
@@ -462,46 +462,46 @@ public enum JikoFutangakuHosei2Spec implements IPredicate<JikoFutangakuHosei2Div
             Decimal 高額総合事業サービス費_6月分 = div.getJikoFutangakuHosei2a().getTxtKougakuSogoJigyoServicehiYoku6GatsuGo().getValue();
             Decimal 自己負担額_7月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku7GatsuGo().getValue();
             Decimal 高額総合事業サービス費_7月分 = div.getJikoFutangakuHosei2a().getTxtKougakuSogoJigyoServicehiYoku7GatsuGo().getValue();
-            return (自己負担額_1月分 != Decimal.ZERO || 高額総合事業サービス費_1月分 == Decimal.ZERO)
-                    && (自己負担額_2月分 != Decimal.ZERO || 高額総合事業サービス費_2月分 == Decimal.ZERO)
-                    && (自己負担額_3月分 != Decimal.ZERO || 高額総合事業サービス費_3月分 == Decimal.ZERO)
-                    && (自己負担額_4月分 != Decimal.ZERO || 高額総合事業サービス費_4月分 == Decimal.ZERO)
-                    && (自己負担額_5月分 != Decimal.ZERO || 高額総合事業サービス費_5月分 == Decimal.ZERO)
-                    && (自己負担額_6月分 != Decimal.ZERO || 高額総合事業サービス費_6月分 == Decimal.ZERO)
-                    && (自己負担額_7月分 != Decimal.ZERO || 高額総合事業サービス費_7月分 == Decimal.ZERO);
+            return (!Decimal.ZERO.equals(自己負担額_1月分) || Decimal.ZERO.equals(高額総合事業サービス費_1月分))
+                    && (!Decimal.ZERO.equals(自己負担額_2月分) || Decimal.ZERO.equals(高額総合事業サービス費_2月分))
+                    && (!Decimal.ZERO.equals(自己負担額_3月分) || Decimal.ZERO.equals(高額総合事業サービス費_3月分))
+                    && (!Decimal.ZERO.equals(自己負担額_4月分) || Decimal.ZERO.equals(高額総合事業サービス費_4月分))
+                    && (!Decimal.ZERO.equals(自己負担額_5月分) || Decimal.ZERO.equals(高額総合事業サービス費_5月分))
+                    && (!Decimal.ZERO.equals(自己負担額_6月分) || Decimal.ZERO.equals(高額総合事業サービス費_6月分))
+                    && (!Decimal.ZERO.equals(自己負担額_7月分) || Decimal.ZERO.equals(高額総合事業サービス費_7月分));
         }
 
         public static boolean is補正後チェック４(JikoFutangakuHosei2Div div) {
-            if (div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku8GatsuMae().getValue() != Decimal.ZERO
-                    || div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku9GatsuMae().getValue() != Decimal.ZERO
-                    || div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku10GatsuMae().getValue() != Decimal.ZERO
-                    || div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku11GatsuMae().getValue() != Decimal.ZERO
-                    || div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku12GatsuMae().getValue() != Decimal.ZERO
-                    || div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku1GatsuMae().getValue() != Decimal.ZERO
-                    || div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku2GatsuMae().getValue() != Decimal.ZERO
-                    || div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku3GatsuMae().getValue() != Decimal.ZERO
-                    || div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku4GatsuMae().getValue() != Decimal.ZERO
-                    || div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku5GatsuMae().getValue() != Decimal.ZERO
-                    || div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku6GatsuMae().getValue() != Decimal.ZERO
-                    || div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku7GatsuMae().getValue() != Decimal.ZERO) {
+            if (!Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku8GatsuMae().getValue())
+                    || !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku9GatsuMae().getValue())
+                    || !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku10GatsuMae().getValue())
+                    || !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku11GatsuMae().getValue())
+                    || !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku12GatsuMae().getValue())
+                    || !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku1GatsuMae().getValue())
+                    || !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku2GatsuMae().getValue())
+                    || !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku3GatsuMae().getValue())
+                    || !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku4GatsuMae().getValue())
+                    || !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku5GatsuMae().getValue())
+                    || !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku6GatsuMae().getValue())
+                    || !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku7GatsuMae().getValue())) {
                 return false;
             }
             return is補正後チェック４_補正後(div);
         }
 
         private static boolean is補正後チェック４_補正後(JikoFutangakuHosei2Div div) {
-            return div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku8GatsuGo().getValue() == Decimal.ZERO
-                    && div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku9GatsuGo().getValue() == Decimal.ZERO
-                    && div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku10GatsuGo().getValue() == Decimal.ZERO
-                    && div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku11GatsuGo().getValue() == Decimal.ZERO
-                    && div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku12GatsuGo().getValue() == Decimal.ZERO
-                    && div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku1GatsuGo().getValue() == Decimal.ZERO
-                    && div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku2GatsuGo().getValue() == Decimal.ZERO
-                    && div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku3GatsuGo().getValue() == Decimal.ZERO
-                    && div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku4GatsuGo().getValue() == Decimal.ZERO
-                    && div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku5GatsuGo().getValue() == Decimal.ZERO
-                    && div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku6GatsuGo().getValue() == Decimal.ZERO
-                    && div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku7GatsuGo().getValue() == Decimal.ZERO;
+            return Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku8GatsuGo().getValue())
+                    && Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku9GatsuGo().getValue())
+                    && Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku10GatsuGo().getValue())
+                    && Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku11GatsuGo().getValue())
+                    && Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku12GatsuGo().getValue())
+                    && Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku1GatsuGo().getValue())
+                    && Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku2GatsuGo().getValue())
+                    && Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku3GatsuGo().getValue())
+                    && Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku4GatsuGo().getValue())
+                    && Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku5GatsuGo().getValue())
+                    && Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku6GatsuGo().getValue())
+                    && Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku7GatsuGo().getValue());
         }
 
         public static boolean is高額総合事業サービス費チェック(JikoFutangakuHosei2Div div) {
@@ -544,171 +544,99 @@ public enum JikoFutangakuHosei2Spec implements IPredicate<JikoFutangakuHosei2Div
         }
 
         public static boolean is補正後チェック５_008(JikoFutangakuHosei2Div div) {
-            if (div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku8GatsuMae().getValue() != Decimal.ZERO) {
-                return false;
-            }
-            return div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku8GatsuGo().getValue() == Decimal.ZERO;
+            return Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku8GatsuGo().getValue());
         }
 
         public static boolean is補正後チェック５_009(JikoFutangakuHosei2Div div) {
-            if (div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku9GatsuMae().getValue() != Decimal.ZERO) {
-                return false;
-            }
-            return div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku9GatsuGo().getValue() == Decimal.ZERO;
+            return Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku9GatsuGo().getValue());
         }
 
         public static boolean is補正後チェック５_010(JikoFutangakuHosei2Div div) {
-            if (div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku10GatsuMae().getValue() != Decimal.ZERO) {
-                return false;
-            }
-            return div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku10GatsuGo().getValue() == Decimal.ZERO;
+            return Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku10GatsuGo().getValue());
         }
 
         public static boolean is補正後チェック５_011(JikoFutangakuHosei2Div div) {
-            if (div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku11GatsuMae().getValue() != Decimal.ZERO) {
-                return false;
-            }
-            return div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku11GatsuGo().getValue() == Decimal.ZERO;
+            return Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku11GatsuGo().getValue());
         }
 
         public static boolean is補正後チェック５_012(JikoFutangakuHosei2Div div) {
-            if (div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku12GatsuMae().getValue() != Decimal.ZERO) {
-                return false;
-            }
-            return div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku12GatsuGo().getValue() == Decimal.ZERO;
+            return Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku12GatsuGo().getValue());
         }
 
         public static boolean is補正後チェック５_101(JikoFutangakuHosei2Div div) {
-            if (div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku1GatsuMae().getValue() != Decimal.ZERO) {
-                return false;
-            }
-            return div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku1GatsuGo().getValue() == Decimal.ZERO;
+            return Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku1GatsuGo().getValue());
         }
 
         public static boolean is補正後チェック５_102(JikoFutangakuHosei2Div div) {
-            if (div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku2GatsuMae().getValue() != Decimal.ZERO) {
-                return false;
-            }
-            return div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku2GatsuGo().getValue() == Decimal.ZERO;
+            return Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku2GatsuGo().getValue());
         }
 
         public static boolean is補正後チェック５_103(JikoFutangakuHosei2Div div) {
-            if (div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku3GatsuMae().getValue() != Decimal.ZERO) {
-                return false;
-            }
-            return div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku3GatsuGo().getValue() == Decimal.ZERO;
+            return Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku3GatsuGo().getValue());
         }
 
         public static boolean is補正後チェック５_104(JikoFutangakuHosei2Div div) {
-            if (div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku4GatsuMae().getValue() != Decimal.ZERO) {
-                return false;
-            }
-            return div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku4GatsuGo().getValue() == Decimal.ZERO;
+            return Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku4GatsuGo().getValue());
         }
 
         public static boolean is補正後チェック５_105(JikoFutangakuHosei2Div div) {
-            if (div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku5GatsuMae().getValue() != Decimal.ZERO) {
-                return false;
-            }
-            return div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku5GatsuGo().getValue() == Decimal.ZERO;
+            return Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku5GatsuGo().getValue());
         }
 
         public static boolean is補正後チェック５_106(JikoFutangakuHosei2Div div) {
-            if (div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku6GatsuMae().getValue() != Decimal.ZERO) {
-                return false;
-            }
-            return div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku6GatsuGo().getValue() == Decimal.ZERO;
+            return Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku6GatsuGo().getValue());
         }
 
         public static boolean is補正後チェック５_107(JikoFutangakuHosei2Div div) {
-            if (div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku7GatsuMae().getValue() != Decimal.ZERO) {
-                return false;
-            }
-            return div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku7GatsuGo().getValue() == Decimal.ZERO;
+            return Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku7GatsuGo().getValue());
         }
 
         public static boolean is補正後チェック６_008(JikoFutangakuHosei2Div div) {
-            if (div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku8GatsuMae().getValue() == Decimal.ZERO) {
-                return false;
-            }
-            return div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku8GatsuGo().getValue() != Decimal.ZERO;
+            return !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku8GatsuGo().getValue());
         }
 
         public static boolean is補正後チェック６_009(JikoFutangakuHosei2Div div) {
-            if (div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku9GatsuMae().getValue() == Decimal.ZERO) {
-                return false;
-            }
-            return div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku9GatsuGo().getValue() != Decimal.ZERO;
+            return !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku9GatsuGo().getValue());
         }
 
         public static boolean is補正後チェック６_010(JikoFutangakuHosei2Div div) {
-            if (div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku10GatsuMae().getValue() == Decimal.ZERO) {
-                return false;
-            }
-            return div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku10GatsuGo().getValue() != Decimal.ZERO;
+            return !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku10GatsuGo().getValue());
         }
 
         public static boolean is補正後チェック６_011(JikoFutangakuHosei2Div div) {
-            if (div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku11GatsuMae().getValue() == Decimal.ZERO) {
-                return false;
-            }
-            return div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku11GatsuGo().getValue() != Decimal.ZERO;
+            return !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku11GatsuGo().getValue());
         }
 
         public static boolean is補正後チェック６_012(JikoFutangakuHosei2Div div) {
-            if (div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku12GatsuMae().getValue() == Decimal.ZERO) {
-                return false;
-            }
-            return div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku12GatsuGo().getValue() != Decimal.ZERO;
+            return !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku12GatsuGo().getValue());
         }
 
         public static boolean is補正後チェック６_101(JikoFutangakuHosei2Div div) {
-            if (div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku1GatsuMae().getValue() == Decimal.ZERO) {
-                return false;
-            }
-            return div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku1GatsuGo().getValue() != Decimal.ZERO;
+            return !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku1GatsuGo().getValue());
         }
 
         public static boolean is補正後チェック６_102(JikoFutangakuHosei2Div div) {
-            if (div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku2GatsuMae().getValue() == Decimal.ZERO) {
-                return false;
-            }
-            return div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku2GatsuGo().getValue() != Decimal.ZERO;
+            return !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku2GatsuGo().getValue());
         }
 
         public static boolean is補正後チェック６_103(JikoFutangakuHosei2Div div) {
-            if (div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku3GatsuMae().getValue() == Decimal.ZERO) {
-                return false;
-            }
-            return div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku3GatsuGo().getValue() != Decimal.ZERO;
+            return !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku3GatsuGo().getValue());
         }
 
         public static boolean is補正後チェック６_104(JikoFutangakuHosei2Div div) {
-            if (div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku4GatsuMae().getValue() == Decimal.ZERO) {
-                return false;
-            }
-            return div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku4GatsuGo().getValue() != Decimal.ZERO;
+            return !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku4GatsuGo().getValue());
         }
 
         public static boolean is補正後チェック６_105(JikoFutangakuHosei2Div div) {
-            if (div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku5GatsuMae().getValue() == Decimal.ZERO) {
-                return false;
-            }
-            return div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku5GatsuGo().getValue() != Decimal.ZERO;
+            return !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku5GatsuGo().getValue());
         }
 
         public static boolean is補正後チェック６_106(JikoFutangakuHosei2Div div) {
-            if (div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku6GatsuMae().getValue() == Decimal.ZERO) {
-                return false;
-            }
-            return div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku6GatsuGo().getValue() != Decimal.ZERO;
+            return !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku6GatsuGo().getValue());
         }
 
         public static boolean is補正後チェック６_107(JikoFutangakuHosei2Div div) {
-            if (div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku7GatsuMae().getValue() == Decimal.ZERO) {
-                return false;
-            }
-            return div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku7GatsuGo().getValue() != Decimal.ZERO;
+            return !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku7GatsuGo().getValue());
         }
     }
 
