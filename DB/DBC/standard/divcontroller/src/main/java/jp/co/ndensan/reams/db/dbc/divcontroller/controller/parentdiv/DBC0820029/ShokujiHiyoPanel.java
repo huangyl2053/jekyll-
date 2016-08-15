@@ -295,9 +295,7 @@ public class ShokujiHiyoPanel {
         if (!ResponseHolder.isReRequest()) {
             if (サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
                 ValidationMessageControlPairs validPairs = getValidationHandler(div).check食事費用登録エリア１必須入力();
-                if (validPairs.iterator().hasNext()) {
-                    return ResponseData.of(div).addValidationMessages(validPairs).respond();
-                }
+                validationCheck(validPairs, div);
             }
             getHandler(div).保存処理(paramter, shokanShokujiHiyoList, shokanMeisaiList, 処理モード);
             return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().
@@ -316,6 +314,14 @@ public class ShokujiHiyoPanel {
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return createResponse(div);
+        }
+        return createResponse(div);
+    }
+
+    private ResponseData<ShokujiHiyoPanelDiv> validationCheck(ValidationMessageControlPairs validPairs,
+            ShokujiHiyoPanelDiv div) {
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         return createResponse(div);
     }
