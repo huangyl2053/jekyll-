@@ -189,6 +189,17 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * get対象者一覧情報
+     *
+     * @param shoKisaiHokenshaNo RString
+     * @param konkaikaishiTimestamp RString
+     * @param konkaisyuryoTimestamp RString
+     * @param hihokenshaNo RString
+     * @param saidaikensu RString
+     *
+     * @return ninteishinseijohos List<NinteiShinseiJohoBusiness>
+     */
     public List<NinteiShinseiJohoBusiness> getNinteishinseijohos(RString shoKisaiHokenshaNo,
             RDateTime konkaikaishiTimestamp,
             RDateTime konkaisyuryoTimestamp,
