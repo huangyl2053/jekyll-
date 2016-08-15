@@ -184,6 +184,22 @@ public class ShikakuSoshitsuIdoTotal {
         ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_老福年金タブ, null);
         ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_医療保険タブ, null);
         ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_被保履歴タブ, null);
+        return ResponseData.of(div).forwardWithEventName(DBA1030011TransitionEventName.検索結果一覧).respond();
+    }
+
+    /**
+     * 「戻る」ボタン処理します。
+     *
+     * @param div ShikakuSoshitsuIdoTotalDiv
+     * @return レスポンス
+     */
+    public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_btnResearch(ShikakuSoshitsuIdoTotalDiv div) {
+        RealInitialLocker.release(前排他ロックキー);
+        ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_証類状況タブ, null);
+        ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_施設入退所タブ, null);
+        ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_老福年金タブ, null);
+        ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_医療保険タブ, null);
+        ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_被保履歴タブ, null);
         return ResponseData.of(div).forwardWithEventName(DBA1030011TransitionEventName.再検索).respond();
     }
 
