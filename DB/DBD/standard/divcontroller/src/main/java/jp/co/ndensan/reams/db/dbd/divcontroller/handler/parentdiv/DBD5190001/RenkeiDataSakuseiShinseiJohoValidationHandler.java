@@ -143,6 +143,23 @@ public class RenkeiDataSakuseiShinseiJohoValidationHandler {
         return pairs;
     }
 
+    /**
+     * 最大件数のチェック。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div RenkeiDataSakuseiShinseiJohoDiv
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateForデータない(ValidationMessageControlPairs pairs, RenkeiDataSakuseiShinseiJohoDiv div) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(RenkeiDataSakuseiShinseiJohoDivSpec.データない)
+                .thenAdd(NoInputMessages.データ検索).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                NoInputMessages.データ検索, div).build().check(messages));
+        return pairs;
+    }
+
     private static enum NoInputMessages implements IValidationMessage {
 
         保険者の必須入力(UrErrorMessages.必須, "保険者"),
@@ -151,7 +168,8 @@ public class RenkeiDataSakuseiShinseiJohoValidationHandler {
         時間の入力は間違いです(UrErrorMessages.終了日が開始日以前),
         被保険者番号の必須入力(UrErrorMessages.必須, "被保険者番号"),
         対象者を選択(UrErrorMessages.対象者を選択),
-        最大件数の規則(UrErrorMessages.不正, "最大件数");
+        最大件数の規則(UrErrorMessages.不正, "最大件数"),
+        データ検索(UrErrorMessages.該当データなし);
 
         private final Message message;
 
