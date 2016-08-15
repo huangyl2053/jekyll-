@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagoketteiin.Sogoj
 /**
  * 総合事業費（経過措置）過誤決定通知書情報取込一覧表のDB操作です。
  *
- * @reamsid_L DBC-2550-010 fzou
+ * @reamsid_L DBC-2550-010 jianglaishen
  */
 public interface ISogojigyohiKagoKetteiInMapper {
     /**

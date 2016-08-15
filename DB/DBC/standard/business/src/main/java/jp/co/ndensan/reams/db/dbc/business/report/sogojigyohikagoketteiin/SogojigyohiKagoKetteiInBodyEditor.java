@@ -16,9 +16,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
- * 総合事業費（経過措置）過誤決定通知書情報取込一覧表帳票BodyEditor
+ * 総合事業費（経過措置）過誤決定通知書情報取込一覧表帳票BodyEditor。
  *
- * @reamsid_L DBC-2550-010 fzou
+ * @reamsid_L DBC-2550-030　jianglaishen
  */
 public class SogojigyohiKagoKetteiInBodyEditor implements ISogojigyohiKagoKetteiInEditor {
 
@@ -35,6 +35,7 @@ public class SogojigyohiKagoKetteiInBodyEditor implements ISogojigyohiKagoKettei
      *
      * @param 帳票出力対象データ SogojigyohiKagoKetteiInEntity
      * @param 集計Flag boolean
+     * @param no
      */
     public SogojigyohiKagoKetteiInBodyEditor(SogojigyohiKagoKetteiInEntity 帳票出力対象データ,
             boolean 集計Flag, int no) {
@@ -73,26 +74,26 @@ public class SogojigyohiKagoKetteiInBodyEditor implements ISogojigyohiKagoKettei
         source.tanisuTitle = 単位数タイトル;
         source.futangakuTitle = 負担額タイトル;
         source.sogojigyohiTitle = 総合事業費タイトル;
-        source.sogojigyohiKensu = new RString(帳票出力対象データ.get介護給付費件数());
+        source.sogojigyohiKensu = decimalFormatter(new Decimal(帳票出力対象データ.get介護給付費件数()), 0);
         source.sogojigyohiTanisu = decimalFormatter(帳票出力対象データ.get介護給付費単位数(), 0);
         source.sogojigyohiFutangaku = decimalFormatter(帳票出力対象データ.get介護給付費保険者負担額(), 0);
     }
 
-   private RString doパターン54(FlexibleYearMonth 年月) {
+    private RString doパターン54(FlexibleYearMonth 年月) {
         if (null == 年月) {
             return RString.EMPTY;
         }
         return 年月.wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
     }
-   
-   private RString decimalFormatter(Decimal 額, int count) {
+
+    private RString decimalFormatter(Decimal 額, int count) {
         if (null == 額) {
             return RString.EMPTY;
         }
         return DecimalFormatter.toコンマ区切りRString(額, count);
     }
-   
-     private RString getColumnValue(IDbColumnMappable entity) {
+
+    private RString getColumnValue(IDbColumnMappable entity) {
         if (null != entity) {
             return entity.getColumnValue();
         }
