@@ -165,8 +165,8 @@ public class ChosaOCRTorikomiBusiness {
      *
      * @return 申請日
      */
-    public FlexibleDate get申請日() {
-        return entity.get申請日();
+    public FlexibleDate get認定申請年月日() {
+        return entity.get認定申請年月日();
     }
 
     /**
@@ -185,6 +185,24 @@ public class ChosaOCRTorikomiBusiness {
      */
     public AtenaMeisho get被保険者氏名() {
         return entity.get被保険者氏名();
+    }
+
+    /**
+     * 被保険者番号を返します。
+     *
+     * @return 被保険者番号
+     */
+    public RString get被保険者番号() {
+        return entity.get被保険者番号();
+    }
+
+    /**
+     * 証記載保険者番号を返します。
+     *
+     * @return 証記載保険者番号
+     */
+    public RString get証記載保険者番号() {
+        return entity.get証記載保険者番号();
     }
 
     /**
