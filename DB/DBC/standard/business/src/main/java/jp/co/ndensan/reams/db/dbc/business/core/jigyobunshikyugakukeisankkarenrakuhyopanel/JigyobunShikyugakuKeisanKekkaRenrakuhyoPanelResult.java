@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisanKekkarenrakuhyopanel;
+package jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisankkarenrakuhyopanel;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisanKekkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity;
@@ -17,16 +16,16 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisanKekka
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResult implements Serializable{
-    
+public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResult implements Serializable {
+
     private JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity entity;
-    
+
     /**
      * コンストラクタです。
      *
      * @param entity JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity
      */
-    public JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResult(JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity entity){
-        this.entity=entity;
+    public JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResult(JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity entity) {
+        this.entity = entity;
     }
 }

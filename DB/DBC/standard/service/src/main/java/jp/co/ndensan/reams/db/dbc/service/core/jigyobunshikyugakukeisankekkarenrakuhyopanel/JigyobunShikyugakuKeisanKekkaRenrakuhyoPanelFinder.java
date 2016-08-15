@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.jigyobunshikyugakukeisankekkaren
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisanKekkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResult;
+import jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResult;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigyobunshikyugakukeisanKekkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisanKekkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity;
