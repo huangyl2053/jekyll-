@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisankkarenrakuhyopanel;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisanKekkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity;
 
 /**
  * 事業高額合算支給額計算結果情報のクラスです。
