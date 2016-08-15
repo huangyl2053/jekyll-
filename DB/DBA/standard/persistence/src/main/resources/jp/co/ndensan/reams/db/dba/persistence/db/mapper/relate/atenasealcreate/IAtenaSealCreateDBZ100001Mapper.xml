@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBA-1210-030 zhengsongling -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.atenasealcreate.IAtenaSealCreateDBZ100001Mapper">
+ <resultMap id="resultMap_getEntityList" type="jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.AtenaSealCreateDBZ100001Entity" autoMapping="true">
+<result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="市町村名称" column="市町村名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="行政区" column="行政区" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="方書" column="方書" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="氏名" column="氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="バーコード住所" column="バーコード住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+ </resultMap>
+<select resultOrdered="true" id="getEntityList" resultMap="resultMap_getEntityList"
+            fetchSize="500">
+        SELECT
+            "2009"."shichouzonCode" AS "市町村コード",
+            "7051"."shichosonMeisho" AS "市町村名称",
+            "2009"."yubinNo" AS "郵便番号",
+            "2009"."gyoseikuName" AS "行政区",
+            "2009"."jusho" AS "住所",
+            "2009"."katagaki" AS "方書",
+            "2009"."meisho" AS "氏名",
+            "2009"."saiyuusenjyuushu" AS "バーコード住所"
+        FROM
+            "DbWT2009AtenaShikibetuTaisyou1" AS "2009"
+        LEFT JOIN
+            rgdb."DbT7051KoseiShichosonMaster" AS "7051"
+        ON
+            "2009"."shichouzonCode" = "7051"."shichosonCode"
+        ORDER BY
+            "2009"."shichouzonCode"
+    </select>
+    
+    <resultMap id="resultMap_getEntityListTwo" type="jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.AtenaSealCreateDBZ100001Entity" autoMapping="true">
+<result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="市町村名称" column="市町村名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="行政区" column="行政区" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="方書" column="方書" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="氏名" column="氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="バーコード住所" column="バーコード住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+ </resultMap>
+<select resultOrdered="true" id="getEntityListTwo" resultMap="resultMap_getEntityListTwo"
+            fetchSize="500">
+        SELECT
+            "2009"."shichouzonCode" AS "市町村コード",
+            "7051"."shichosonMeisho" AS "市町村名称",
+            "2009"."yubinNo" AS "郵便番号",
+            "2009"."gyoseikuName" AS "行政区",
+            "2009"."jusho" AS "住所",
+            "2009"."katagaki" AS "方書",
+            "2009"."meisho" AS "氏名",
+            "2009"."saiyuusenjyuushu" AS "バーコード住所"
+        FROM
+            "DbWT2009AtenaShikibetuTaisyou2" AS "2009"
+        LEFT JOIN
+            rgdb."DbT7051KoseiShichosonMaster" AS "7051"
+        ON
+            "2009"."shichouzonCode" = "7051"."shichosonCode"
+        ORDER BY
+            "2009"."shichouzonCode"
+    </select>
+    
+       <resultMap id="resultMap_getEntityListFour" type="jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.AtenaSealCreateDBZ100001Entity" autoMapping="true">
+<result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="市町村名称" column="市町村名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="行政区" column="行政区" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="方書" column="方書" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="氏名" column="氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="バーコード住所" column="バーコード住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+ </resultMap>
+<select resultOrdered="true" id="getEntityListFour" resultMap="resultMap_getEntityListFour"
+            fetchSize="500">
+        SELECT
+            "2009"."shichouzonCode" AS "市町村コード",
+            "7051"."shichosonMeisho" AS "市町村名称",
+            "2009"."yubinNo" AS "郵便番号",
+            "2009"."gyoseikuName" AS "行政区",
+            "2009"."jusho" AS "住所",
+            "2009"."katagaki" AS "方書",
+            "2009"."meisho" AS "氏名",
+            "2009"."saiyuusenjyuushu" AS "バーコード住所"
+        FROM
+            "DbWT2009AtenaShikibetuTaisyou4" AS "2009"
+        LEFT JOIN
+            rgdb."DbT7051KoseiShichosonMaster" AS "7051"
+        ON
+            "2009"."shichouzonCode" = "7051"."shichosonCode"
+        ORDER BY
+            "2009"."shichouzonCode"
+    </select>
+</mapper>

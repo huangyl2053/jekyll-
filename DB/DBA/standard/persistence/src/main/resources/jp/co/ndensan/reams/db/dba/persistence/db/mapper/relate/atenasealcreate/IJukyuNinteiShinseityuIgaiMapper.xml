@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBA-1210-030 zhengsongling -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.atenasealcreate.IJukyuNinteiShinseityuIgaiMapper">
+    <select  resultOrdered="true" id="getIttokiTaisyou1" fetchSize="500">
+        SELECT
+            COUNT(*)
+        FROM
+            "DbWT2009AtenaShikibetuTaisyou1"
+    </select>
+    
+     
+     <resultMap id="resultMap_getList" type="jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.JukyuNinteiShinseityuIgaiEntity" autoMapping="true">
+ <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+ <result property="氏名カナ" column="氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+ <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+ <result property="氏名" column="氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+ <result property="wk管内管外区分" column="wk管内管外区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+ <result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+ <result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+ <result property="バーコード住所" column="バーコード住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+ <result property="番地" column="番地" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaBanchiTypeHandler"/>
+ <result property="方書" column="方書" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KatagakiTypeHandler"/>
+ <result property="行政区" column="行政区" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+ <result property="管内管外区分" column="管内管外区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+ <result property="世帯主名称" column="世帯主名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>       
+ <result property="代納区分名称" column="代納区分名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+ <result property="番地ｺｰド" column="番地ｺｰド" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.BanchiCodeTypeHandler"/>
+ <result property="行政区ｺｰド" column="行政区ｺｰド" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler"/>
+ <result property="地区コード1" column="地区コード1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler"/>
+ <result property="地区コード2" column="地区コード2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler"/>
+ <result property="地区コード3" column="地区コード3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler"/>
+ <result property="世帯ｺｰﾄﾞ" column="世帯ｺｰﾄﾞ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
+ <result property="住所ｺｰド" column="住所ｺｰド" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
+ <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+ <result property="性別" column="性別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+ </resultMap>
+ <select resultOrdered="true" id="getList" resultMap="resultMap_getList"
+         fetchSize="500">
+     SELECT
+        "Taisyou1"."shikibetsuCode" AS "識別コード",
+        "Taisyou1"."kanaMeisho" AS "氏名カナ",
+        "Taisyou1"."shichouzonCode" AS "市町村コード",
+        "Taisyou1"."meisho"  AS "氏名",
+        "Taisyou1"."wkKannaiKangaiKubun" AS "wk管内管外区分",
+        "Taisyou1"."yubinNo" AS "郵便番号",
+        "Taisyou1"."jusho" AS "住所",
+        "Taisyou1"."saiyuusenjyuushu" AS "バーコード住所",
+        "Taisyou1"."banchi" AS "番地",
+        "Taisyou1"."katagaki" AS "方書",
+        "Taisyou1"."gyoseikuName"  AS "行政区",
+        "Taisyou1"."kannaiKangaiKubun" AS "管内管外区分",
+        "Taisyou1"."setainushiMei" AS "世帯主名称",
+        "Taisyou1"."dainoukubunmeishou" AS "代納区分名称",
+        "Taisyou1"."banchiCode" AS "番地ｺｰド",
+        "Taisyou1"."gyoseikuCode" AS "行政区ｺｰド",
+        "Taisyou1"."chikuCode1" AS "地区コード1",
+        "Taisyou1"."chikuCode2" AS "地区コード2",
+        "Taisyou1"."chikuCode3" AS "地区コード3",
+        "Taisyou1"."setaiCode" AS "世帯ｺｰﾄﾞ",
+        "Taisyou1"."zenkokuJushoCode" AS "住所ｺｰド",
+        "Taisyou1"."hihokenshaNo" AS "被保険者番号",
+        "Taisyou1"."seibetsuCode" AS "性別"
+    FROM
+        "DbWT2009AtenaShikibetuTaisyou1" AS "Taisyou1"
+    UNION
+    SELECT
+        "Taisyou3"."shikibetsuCode" AS "識別コード",
+        "Taisyou3"."kanaMeisho" AS "氏名カナ",
+        "Taisyou3"."shichouzonCode" AS "市町村コード",
+        "Taisyou3"."meisho"  AS "氏名",
+        "Taisyou3"."wkKannaiKangaiKubun" AS "wk管内管外区分",
+        "Taisyou3"."yubinNo" AS "郵便番号",
+        "Taisyou3"."jusho" AS "住所",
+        "Taisyou3"."saiyuusenjyuushu" AS "バーコード住所",
+        "Taisyou3"."banchi" AS "番地",
+        "Taisyou3"."katagaki" AS "方書",
+        "Taisyou3"."gyoseikuName"  AS "行政区",
+        "Taisyou3"."kannaiKangaiKubun" AS "管内管外区分",
+        "Taisyou3"."setainushiMei" AS "世帯主名称",
+        "Taisyou3"."dainoukubunmeishou" AS "代納区分名称",
+        "Taisyou3"."banchiCode" AS "番地ｺｰド",
+        "Taisyou3"."gyoseikuCode" AS "行政区ｺｰド",
+        "Taisyou3"."chikuCode1" AS "地区コード1",
+        "Taisyou3"."chikuCode2" AS "地区コード2",
+        "Taisyou3"."chikuCode3" AS "地区コード3",
+        "Taisyou3"."setaiCode" AS "世帯ｺｰﾄﾞ",
+        "Taisyou3"."zenkokuJushoCode" AS "住所ｺｰド",
+        "Taisyou3"."hihokenshaNo" AS "被保険者番号",
+        "Taisyou3"."seibetsuCode" AS "性別"
+    FROM
+        "DbWT2009AtenaShikibetuTaisyou3" AS "Taisyou3"
+ </select>
+ 
+</mapper>
