@@ -149,8 +149,13 @@ public class JigyoshaTouroku {
         if (chkFlagList.isEmpty()) {
             chkFlag = true;
         }
-        List<KaigoJogaiTokureiBusiness> サービス一覧情報List = jigyoshaTourokuFinder.getServiceItiranJoho(chkFlag).records();
-        getHandler(div).getサービス一覧情報再表示(サービス一覧情報List);
+        RString 事業者番号 = div.getServiceJigyoshaJoho().getTxtJigyoshaNo().getValue();
+        FlexibleDate 有効開始日 = div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().getValue();
+        FlexibleDate 有効終了日 = div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().getValue();
+        サービス一覧パラメータ = KaigoJogaiTokureiParameter.createParam(
+                事業者番号, 有効開始日, 有効終了日, RDate.getNowDate().getYearMonth());
+        List<KaigoJigyoshaShiteiService> サービス一覧情報List = manager.getServiceItiranJoho(サービス一覧パラメータ).records();
+        getHandler(div).getサービス一覧情報再表示(サービス一覧情報List,chkFlag);
         return ResponseData.of(div).respond();
     }
 
