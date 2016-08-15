@@ -31,7 +31,14 @@ public class ItziHanteiShoriBatchParamter extends BatchParameterBase {
     private RString battishuturyokukubun;
 
     /**
-     * 調査委託先・調査員一覧表のMybatisパラメータークラス作成
+     * バッチ設計_DBE309001_一次判定IF作成のMybatisパラメータークラス作成
+     *
+     */
+    public ItziHanteiShoriBatchParamter() {
+    }
+
+    /**
+     * バッチ設計_DBE309001_一次判定IF作成のMybatisパラメータークラス作成
      *
      * @return ItziHanteiShoriProcessParamter
      */
