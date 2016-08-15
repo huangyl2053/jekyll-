@@ -18,17 +18,17 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TorikomiDataCollection implements Serializable {
+public class TorikomiEntityCollection implements Serializable {
 
     private static final long serialVersionUID = 4404764509769398475L;
-    private List<TorikomiData> dataList;
+    private List<TorikomiEntity> dataList;
 
     /**
      * コンストラクタです。
      *
      * @param dataList 介護認定審査会審査結果登録（OCR)CSVファイル
      */
-    public TorikomiDataCollection(List<TorikomiData> dataList) {
+    public TorikomiEntityCollection(List<TorikomiEntity> dataList) {
         this.dataList = dataList;
     }
 }

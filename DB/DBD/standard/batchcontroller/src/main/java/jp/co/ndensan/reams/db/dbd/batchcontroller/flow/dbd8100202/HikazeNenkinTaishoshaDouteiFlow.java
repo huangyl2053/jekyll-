@@ -100,7 +100,7 @@ public class HikazeNenkinTaishoshaDouteiFlow extends BatchFlowBase<HikazeNenkinT
      */
     @Step(年金番号チェックリスト)
     protected IBatchFlowCommand nenkinNoCheckListProcess() {
-        return loopBatch(NenkinNoCheckListProcess.class).define();
+        return loopBatch(NenkinNoCheckListProcess.class).arguments(getParameter().toNenkinNoCheckListProcessParmeter()).define();
     }
 
     /**

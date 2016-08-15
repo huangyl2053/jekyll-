@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0030011;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorModel;
+import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorResult;
 import jp.co.ndensan.reams.db.dbu.business.core.yoshikibetsurenkeijoho.JigyoHokokuTokei;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.jigyohokokurenkei.JigyoHokokuRenkeiBatchParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0030011.JigyoJokyoHokokuGeppoDiv;
@@ -22,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 様式別連携情報作成処理です。
@@ -344,8 +347,8 @@ public class JigyoJokyoHokokuGeppoHandler {
             if (div.getTxtShukeiYM3().getValue() == null || div.getTxtShukeiYM3().getValue().isEmpty()) {
                 div.getCblIppanShokan().setDisabled(true);
             }
-            if (div.getTxtShukeiYM2().getValue() == null || div.getTxtShukeiYM2().getValue().isEmpty()
-                    && div.getTxtShukeiYM3().getValue() == null || div.getTxtShukeiYM3().getValue().isEmpty()) {
+            if ((div.getTxtShukeiYM2().getValue() == null || div.getTxtShukeiYM2().getValue().isEmpty())
+                    && (div.getTxtShukeiYM3().getValue() == null || div.getTxtShukeiYM3().getValue().isEmpty())) {
                 div.getCblGassan1().setDisabled(true);
             }
             getShutsuryoku();
@@ -366,8 +369,8 @@ public class JigyoJokyoHokokuGeppoHandler {
         if (div.getTxtShukeiYM5().getValue() == null || div.getTxtShukeiYM5().getValue().isEmpty()) {
             div.getCblHokenKyufuShokan().setDisabled(true);
         }
-        if (div.getTxtShukeiYM4().getValue() == null || div.getTxtShukeiYM4().getValue().isEmpty()
-                && div.getTxtShukeiYM5().getValue() == null || div.getTxtShukeiYM5().getValue().isEmpty()) {
+        if ((div.getTxtShukeiYM4().getValue() == null || div.getTxtShukeiYM4().getValue().isEmpty())
+                && (div.getTxtShukeiYM5().getValue() == null || div.getTxtShukeiYM5().getValue().isEmpty())) {
             div.getCblGassan2().setDisabled(true);
         }
     }
@@ -521,8 +524,17 @@ public class JigyoJokyoHokokuGeppoHandler {
      * @return HoshuShiharaiJunbiBatchParameter
      */
     public JigyoHokokuRenkeiBatchParameter onClick_btnJikko() {
+        ShichosonSelectorModel model = DataPassingConverter.deserialize(div.getKyuShichoson(), ShichosonSelectorModel.class);
+        List<ShichosonSelectorResult> list = new ArrayList<>();
+        if (model != null) {
+            list = model.getList();
+        }
         List<RString> 市町村コードリスト = new ArrayList<>();
-        市町村コードリスト.add(div.getShichosonCode());
+        if (!list.isEmpty()) {
+            for (ShichosonSelectorResult result : list) {
+                市町村コードリスト.add(result.get市町村コード().value());
+            }
+        }
         JigyoHokokuRenkeiBatchParameter batchParameter = new JigyoHokokuRenkeiBatchParameter(
                 div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedKey(),
                 dateToRString(div.getTblShutsuryokuTaisho().getTxtShukeiYM1().getValue()),

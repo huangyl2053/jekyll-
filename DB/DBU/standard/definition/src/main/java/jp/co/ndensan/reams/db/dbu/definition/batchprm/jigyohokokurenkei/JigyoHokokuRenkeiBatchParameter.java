@@ -86,6 +86,9 @@ public class JigyoHokokuRenkeiBatchParameter extends BatchParameterBase {
     @BatchParameter(key = IS構成市町村分キー, name = "is構成市町村分")
     private boolean is構成市町村分;
 
+    private JigyoHokokuRenkeiBatchParameter() {
+    }
+
     /**
      * コンストラクタです。
      *

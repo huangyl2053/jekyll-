@@ -48,10 +48,10 @@ public class HikazeNenkinTaishoFirProcess extends BatchProcessBase<HikazeNenkinT
 
     @Override
     protected void process(HikazeNenkinTaishoFirJohoEntity t) {
-        tmpTableWriter.insert(create重複処理(t));
+        tmpTableWriter.insert(create年金番号突合_非課税年金対象者情報(t));
     }
 
-    private HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity create重複処理(HikazeNenkinTaishoFirJohoEntity t) {
+    private HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity create年金番号突合_非課税年金対象者情報(HikazeNenkinTaishoFirJohoEntity t) {
         HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity data = new HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity();
         data.setDouteiResultKubun(同定結果区分_1);
         data.setFuicchiJiyu(RString.EMPTY);
