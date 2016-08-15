@@ -184,8 +184,8 @@
         ORDER BY
         DbT5101."shinseishoKanriNo"asc,  DbT5207.remban asc
       </select>
-      <select resultOrdered="true" id="get前回認定調査票基本調査調査項目" resultMap="resultMap_NinteiChosaHoshuJissekiJohoRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.itizihanteishori.ItziHanteiShoriMybitisParamter" fetchSize="500">
+      <select resultOrdered="true" id="get前回認定調査票基本調査調査項目" resultMap="resultMap_NinteiChosaHoshuJissekiJohoRelateEntity" 
+              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.itizihanteishori.ItziHanteiShoriMybitisParamter" fetchSize="500">
         SELECT
         DbT5101."shinseishoKanriNo" as "DbT5207_shinseishoKanriNo",
         DbT5121."zenkaiShinseishoKanriNo" as "DbT5121_zenkaiShinseishoKanriNo",
