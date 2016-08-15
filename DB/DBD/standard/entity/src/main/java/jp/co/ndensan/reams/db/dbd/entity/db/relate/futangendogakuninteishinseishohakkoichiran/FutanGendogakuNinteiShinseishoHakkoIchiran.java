@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDank
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -24,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class FutanGendogakuNinteiShinseishoHakkoIchiran {
 
     private HihokenshaNo 被保番号;
+    private UaFt200FindShikibetsuTaishoEntity 宛名;
     private RString 計画事業者コード;
     private RString 計画事業者名;
     private boolean is自己作成;
