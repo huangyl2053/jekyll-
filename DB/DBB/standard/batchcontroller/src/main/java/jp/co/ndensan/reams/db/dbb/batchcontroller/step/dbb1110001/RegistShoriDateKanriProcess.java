@@ -89,7 +89,7 @@ public class RegistShoriDateKanriProcess extends BatchProcessBase<DbT7022ShoriDa
         entity.setShoriEdaban(parameter.get市町村識別ID());
         entity.setNendo(parameter.get処理年度());
         entity.setNendoNaiRenban(年度内枝番);
-        entity.setKijunYMD(new FlexibleDate(YMDHMS.now().getRDateTime().toString()));
+        entity.setKijunYMD(new FlexibleDate(YMDHMS.now().getRDateTime().toString().substring(INDEX_0, INDEX_8)));
         entity.setTaishoKaishiYMD(new FlexibleDate(processparameter.get開始年月日().toString()));
         entity.setTaishoShuryoYMD(new FlexibleDate(processparameter.get終了年月日().toString()));
         RString 対象開始日時 = new RString(processparameter.get開始年月日().toString()).concat(processparameter.get開始時刻());

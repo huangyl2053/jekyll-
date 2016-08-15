@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-2740-010 fuyanling -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenjukyushain.IKokuhorenJukyushaMapper">
+    <!--受給者情報明細一時テーブルを作成します-->
+    <insert id="create受給者情報明細一時TBL">
+        CREATE TEMP TABLE "DbWT5331JukyushaJoho"
+        (
+        "renban" smallint,
+        "kokanJohoShikibetsuNo" character varying(40),
+        "idoYmd" rshare."UDD015YMD",
+        "idoKubunCode" character varying(40),
+        "teiseiYmd" rshare."UDD015YMD",
+        "teiseiKubunCode" character varying(40),
+        "idoJiyuKubun" character varying(40),
+        "seinengappiYmd" rshare."UDD015YMD",
+        "seibetsuCode" character varying(40),
+        "shikakuShutokuYmd" rshare."UDD015YMD",
+        "shikakuSoshitsuYmd" rshare."UDD015YMD",
+        "rojinHokenShichosonNo" character varying(40),
+        "rojinHokenJukyushaNo" character varying(40),
+        "koikiRengoHokenshaNo" character varying(40),
+        "shinseiShubetsuCode" character varying(40),
+        "henkoShinseichuKubunCode" character varying(40),
+        "shinseiYmd" rshare."UDD015YMD",
+        "minashiYokaigoKubunCode" character varying(40),
+        "yokaigoJotaiKubunCode" character varying(40),
+        "ninteiYukokikanFromYmd" rshare."UDD015YMD",
+        "ninteiYukokikanToYmd" rshare."UDD015YMD",
+        "kyotakuServiceKubunCode" character varying(40),
+        "kyotakuKaigoShienJigyoshoNo" character varying(40),
+        "kyotakuServiceTekiyoFromYmd" rshare."UDD015YMD",
+        "kyotakuServiceTekiyoToYmd" rshare."UDD015YMD",
+        "homonShikyugendoKijungaku" numeric(13,0),
+        "homonJogenKanriTekiyoKikanFromYmd" rshare."UDD015YMD",
+        "homonJogenKanriTekiyoKikanToYmd" rshare."UDD015YMD",
+        "tankiShikyugendoKijungaku" numeric(13,0),
+        "tankiJogenKanriTekiyoKikanFromYmd" rshare."UDD015YMD",
+        "tankiJogenKanriTekiyoKikanToYmd" rshare."UDD015YMD",
+        "kohiFutanJogengakuGengakuUmu" character varying(40),
+        "shokanHaraikaFromYmd" rshare."UDD015YMD",
+        "shokanHaraikaToYmd" rshare."UDD015YMD",
+        "kyufuritsuHikisageFromYmd" rshare."UDD015YMD",
+        "kyufuritsuHikisageToYmd" rshare."UDD015YMD",
+        "genmenShinseichuKubunCode" character varying(40),
+        "riyoshaFutanKubunCode" character varying(40),
+        "kyufuRitsu" numeric(13,2),
+        "riyoshaFutanTekiyoFromYmd" rshare."UDD015YMD",
+        "riyoshaFutanTekiyoToYmd" rshare."UDD015YMD",
+        "hyojunFutanKubunCode" character varying(40),
+        "futanGaku" numeric(13,0),
+        "futanGakuTekiyoFromYmd" rshare."UDD015YMD",
+        "futanGakuTekiyoToYmd" rshare."UDD015YMD",
+        "tokuteiNyushoshaNinteiShinseichuKubunCode" character varying(40),
+        "tokuteiNyushoshaKaigoServiceKubunCode" character varying(40),
+        "kazeisoNoTokureiGengakuSochiTaishoKubun" character varying(40),
+        "tokuteiNyushoshaShokuhiFutanGendoGaku" numeric(13,0),
+        "kyojuhiUnitKoshitsuFutanGendoGaku" numeric(13,0),
+        "kyojuhiUnitJunkoshitsuFutanGendoGaku" numeric(13,0),
+        "kyojuhiTokuyotoFutanGenndoGaku" numeric(13,0),
+        "kyojuhiRokenRyoyotoFutanGendoGaku" numeric(13,0),
+        "kyojuhiTashoShitsuFutanGendoGaku" numeric(13,0),
+        "futanGendoGakuTekiyoFromYmd" rshare."UDD015YMD",
+        "futanGendoGakuTekiyoToYmd" rshare."UDD015YMD",
+        "keigenRitsu" numeric(13,2),
+        "keigenRitsuTekiyoFromYmd" rshare."UDD015YMD",
+        "keigenRitsuTekiyoToYmd" rshare."UDD015YMD",
+        "shokiboKyotakuServiceRiyoUmu" character varying(40),
+        "kokiHokenshaNo" character varying(40),
+        "kokiHihokenshaNo" character varying(40),
+        "kokuhoHokenshaNo" character varying(40),
+        "kokuhoHihokenshashoNo" character varying(40),
+        "atenaNo" character varying(40),
+        "nijiyoboJigyoKubunCode" character varying(40),
+        "nijiyoboJigyoYukokikanFromYmd" rshare."UDD015YMD",
+        "nijiyoboJigyoYukokikanToYmd" rshare."UDD015YMD",
+        "jushochiTokureiTaishoshaKubunCode" character varying(40),
+        "shisetsuShozaiHokenshaNo" character varying(40),
+        "jushochiTokureiTekiyoFromYmd" rshare."UDD015YMD",
+        "jushochiTokureiTekiyoToYmd" rshare."UDD015YMD",
+        "kyojuhi1FutanGendogaku" numeric(13,0),
+        "kyojuhi2FutanGendogaku" numeric(13,0),
+        "kyojuhi3FutanGendogaku" numeric(13,0),
+        "niwariFutanTekiyoFromYmd" rshare."UDD015YMD",
+        "niwariFutanTekiyoToYmd" rshare."UDD015YMD",
+        "yuryoRojinHomeDoishoUmu" character varying(40),
+        "tsugoKekkaKubun" character varying(40),
+        "tsugoJohoKubun" character varying(40),
+        "hokenshaNo"rgdb."DbUDD003HokenshaNo",
+        "hokenshaName" character varying(40),
+        "torikomiYM" rshare."UDD014YM", 
+        CONSTRAINT "DbWT5331_pkey" PRIMARY KEY ("renban")
+        )
+    </insert>
+    
+    <!--受給者情報明細一時テーブルに登録します-->
+    <insert id="insert受給者情報明細一時TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.kokuhorenjukyushain.DbWT5331JukyushaJohoEntity">
+        INSERT INTO "DbWT5331JukyushaJoho"
+        VALUES 
+        (
+        #{連番},
+        #{交換情報識別番号},
+        #{異動年月日},
+        #{異動区分コード},
+        #{訂正年月日},
+        #{訂正区分コード},
+        #{異動事由区分},
+        #{生年月日},
+        #{性別コード},
+        #{資格取得年月日},
+        #{資格喪失年月日},
+        #{老人保健市町村番号},
+        #{老人保健受給者番号},
+        #{広域連合政令市保険者番号},
+        #{申請種別コード},
+        #{変更申請中区分コード},
+        #{申請年月日},
+        #{みなし要介護区分コード},
+        #{要介護状態区分コード},
+        #{認定有効期間開始年月日},
+        #{認定有効期間終了年月日},
+        #{居宅サービス計画作成区分コード},
+        #{居宅介護支援事業所番号},
+        #{居宅サービス計画適用開始年月日},
+        #{居宅サービス計画適用終了年月日},
+        #{訪問通所支給限度基準額},
+        #{訪問通所上限管理適用期間開始年月日},
+        #{訪問通所上限管理適用期間終了年月日},
+        #{短期入所支給限度基準額},
+        #{短期入所上限管理適用期間開始年月日},
+        #{短期入所上限管理適用期間終了年月日},
+        #{公費負担上限額減額の有無},
+        #{償還払化開始年月日},
+        #{償還払化終了年月日},
+        #{給付率引下げ開始年月日},
+        #{給付率引下げ終了年月日},
+        #{減免申請中区分コード},
+        #{利用者負担区分コード},
+        #{給付率},
+        #{利用者負担適用開始年月日},
+        #{利用者負担適用終了年月日},
+        #{標準負担区分コード},
+        #{負担額},
+        #{負担額適用開始年月日},
+        #{負担額適用終了年月日},
+        #{特定入所者認定申請中区分コード},
+        #{特定入所者介護サービス区分コード},
+        #{課税層の特例減額措置対象区分},
+        #{特定入所者食費負担限度額},
+        #{居住費ユニット型個室負担限度額},
+        #{居住費ユニット型準個室負担限度額},
+        #{居住費従来型個室特養等負担限度額},
+        #{居住費従来型個室老健療養等負担限度額},
+        #{居住費多床室負担限度額},
+        #{負担限度額適用開始年月日},
+        #{負担限度額適用終了年月日},
+        #{軽減率},
+        #{軽減率適用開始年月日},
+        #{軽減率適用終了年月日},
+        #{小規模居宅サービス利用有無},
+        #{保険者番号後期},
+        #{被保険者番号後期},
+        #{保険者番号国保},
+        #{被保険者証番号国保},
+        #{宛名番号},
+        #{二次予防事業区分コード},
+        #{二次予防事業有効期間開始年月日},
+        #{二次予防事業有効期間終了年月日},
+        #{住所地特例対象者区分コード},
+        #{施設所在保険者番号},
+        #{住所地特例適用開始年月日},
+        #{住所地特例適用終了年月日},
+        #{居住費新１負担限度額},
+        #{居住費新２負担限度額},
+        #{居住費新３負担限度額},
+        #{二割負担適用開始年月日},
+        #{二割負担終了開始年月日},
+        #{有料老人ホーム等同意書の有無},
+        #{突合結果区分},
+        #{突合情報区分},
+        #{保険者番号},
+        #{保険者名},
+        #{取込年月}
+        )
+    </insert> 
+
+    <select resultOrdered="true" id="get帳票出力対象データ" resultMap="resultMap_DbWT0001DbWT5331Entity" fetchSize="500">
+        SELECT <include refid="allColumns_DbWT0001DbWT5331"/>
+        FROM "DbWT5331JukyushaJoho" AS DbWT5331 INNER JOIN "DbWT0001Hihokensha" AS DbWT0001 ON DbWT5331."renban" = DbWT0001."meisaiRenban"
+        ${出力順}
+    </select>
+    
+    <resultMap id="resultMap_DbWT0001DbWT5331Entity" type="jp.co.ndensan.reams.db.dbc.entity.csv.kokuhorenjukyushain.DbWT0001DbWT5331Entity" autoMapping="true">
+        <id property="連番" column="DbWT5332_renban"/>	
+        <result property="交換情報識別番号" column="DbWT5332_kokanJohoShikibetsuNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="異動年月日" column="DbWT5332_idoYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="異動区分コード" column="DbWT5332_idoKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="訂正年月日" column="DbWT5332_teiseiYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="訂正区分コード" column="DbWT5332_teiseiKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="異動事由区分" column="DbWT5332_idoJiyuKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="生年月日" column="DbWT5332_seinengappiYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="性別コード" column="DbWT5332_seibetsuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格取得年月日" column="DbWT5332_shikakuShutokuYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格喪失年月日" column="DbWT5332_shikakuSoshitsuYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="老人保健市町村番号" column="DbWT5332_rojinHokenShichosonNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="老人保健受給者番号" column="DbWT5332_rojinHokenJukyushaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="広域連合政令市保険者番号" column="DbWT5332_koikiRengoHokenshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請種別コード" column="DbWT5332_shinseiShubetsuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="変更申請中区分コード" column="DbWT5332_henkoShinseichuKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請年月日" column="DbWT5332_shinseiYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="みなし要介護区分コード" column="DbWT5332_minashiYokaigoKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="要介護状態区分コード" column="DbWT5332_yokaigoJotaiKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定有効期間開始年月日" column="DbWT5332_ninteiYukokikanFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定有効期間終了年月日" column="DbWT5332_ninteiYukokikanToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="居宅サービス計画作成区分コード" column="DbWT5332_kyotakuServiceKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="居宅介護支援事業所番号" column="DbWT5332_kyotakuKaigoShienJigyoshoNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="居宅サービス計画適用開始年月日" column="DbWT5332_kyotakuServiceTekiyoFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="居宅サービス計画適用終了年月日" column="DbWT5332_kyotakuServiceTekiyoToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="訪問通所支給限度基準額" column="DbWT5332_homonShikyugendoKijungaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="訪問通所上限管理適用期間開始年月日" column="DbWT5332_homonJogenKanriTekiyoKikanFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="訪問通所上限管理適用期間終了年月日" column="DbWT5332_homonJogenKanriTekiyoKikanToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="短期入所支給限度基準額" column="DbWT5332_tankiShikyugendoKijungaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="短期入所上限管理適用期間開始年月日" column="DbWT5332_tankiJogenKanriTekiyoKikanFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="短期入所上限管理適用期間終了年月日" column="DbWT5332_tankiJogenKanriTekiyoKikanToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="公費負担上限額減額の有無" column="DbWT5332_kohiFutanJogengakuGengakuUmu"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="償還払化開始年月日" column="DbWT5332_shokanHaraikaFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="償還払化終了年月日" column="DbWT5332_shokanHaraikaToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="給付率引下げ開始年月日" column="DbWT5332_kyufuritsuHikisageFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="給付率引下げ終了年月日" column="DbWT5332_kyufuritsuHikisageToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="減免申請中区分コード" column="DbWT5332_genmenShinseichuKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="利用者負担区分コード" column="DbWT5332_riyoshaFutanKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付率" column="DbWT5332_kyufuRitsu"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="利用者負担適用開始年月日" column="DbWT5332_riyoshaFutanTekiyoFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="利用者負担適用終了年月日" column="DbWT5332_riyoshaFutanTekiyoToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="標準負担区分コード" column="DbWT5332_hyojunFutanKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="負担額" column="DbWT5332_futanGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="負担額適用開始年月日" column="DbWT5332_futanGakuTekiyoFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="負担額適用終了年月日" column="DbWT5332_futanGakuTekiyoToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="特定入所者認定申請中区分コード" column="DbWT5332_tokuteiNyushoshaNinteiShinseichuKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="特定入所者介護サービス区分コード" column="DbWT5332_tokuteiNyushoshaKaigoServiceKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="課税層の特例減額措置対象区分" column="DbWT5332_kazeisoNoTokureiGengakuSochiTaishoKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="特定入所者食費負担限度額" column="DbWT5332_tokuteiNyushoshaShokuhiFutanGendoGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="居住費ユニット型個室負担限度額" column="DbWT5332_kyojuhiUnitKoshitsuFutanGendoGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="居住費ユニット型準個室負担限度額" column="DbWT5332_kyojuhiUnitJunkoshitsuFutanGendoGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="居住費従来型個室特養等負担限度額" column="DbWT5332_kyojuhiTokuyotoFutanGenndoGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="居住費従来型個室老健療養等負担限度額" column="DbWT5332_kyojuhiRokenRyoyotoFutanGendoGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="居住費多床室負担限度額" column="DbWT5332_kyojuhiTashoShitsuFutanGendoGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="負担限度額適用開始年月日" column="DbWT5332_futanGendoGakuTekiyoFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="負担限度額適用終了年月日" column="DbWT5332_futanGendoGakuTekiyoToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="軽減率" column="DbWT5332_keigenRitsu"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="軽減率適用開始年月日" column="DbWT5332_keigenRitsuTekiyoFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="軽減率適用終了年月日" column="DbWT5332_keigenRitsuTekiyoToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="小規模居宅サービス利用有無" column="DbWT5332_shokiboKyotakuServiceRiyoUmu"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="保険者番号後期" column="DbWT5332_kokiHokenshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号後期" column="DbWT5332_kokiHihokenshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="保険者番号国保" column="DbWT5332_kokuhoHokenshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者証番号国保" column="DbWT5332_kokuhoHihokenshashoNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="宛名番号" column="DbWT5332_atenaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="二次予防事業区分コード" column="DbWT5332_nijiyoboJigyoKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="二次予防事業有効期間開始年月日" column="DbWT5332_nijiyoboJigyoYukokikanFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="二次予防事業有効期間終了年月日" column="DbWT5332_nijiyoboJigyoYukokikanToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住所地特例対象者区分コード" column="DbWT5332_jushochiTokureiTaishoshaKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設所在保険者番号" column="DbWT5332_shisetsuShozaiHokenshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所地特例適用開始年月日" column="DbWT5332_jushochiTokureiTekiyoFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住所地特例適用終了年月日" column="DbWT5332_jushochiTokureiTekiyoToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="居住費新１負担限度額" column="DbWT5332_kyojuhi1FutanGendogaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="居住費新２負担限度額" column="DbWT5332_kyojuhi2FutanGendogaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="居住費新３負担限度額" column="DbWT5332_kyojuhi3FutanGendogaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="二割負担適用開始年月日" column="DbWT5332_niwariFutanTekiyoFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="二割負担終了開始年月日" column="DbWT5332_niwariFutanTekiyoToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="有料老人ホーム等同意書の有無" column="DbWT5332_yuryoRojinHomeDoishoUmu"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="突合結果区分" column="DbWT5332_tsugoKekkaKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="突合情報区分" column="DbWT5332_tsugoJohoKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="保険者番号" column="DbWT5332_hokenshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="保険者名" column="DbWT5332_hokenshaName"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="取込年月" column="DbWT5332_torikomiYM"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="証記載保険者番号" column="DbWT0001_shoHokenshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="被保険者番号" column="DbWT0001_orgHihokenshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="サービス提供年月末日" column="DbWT0001_serviceTeikyoYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="被保険者カナ氏名" column="DbWT0001_orgHihokenshaKanaShimei"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者氏名" column="DbWT0001_orgHihokenshaShimei"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="旧市町村コード" column="DbWT0001_oldShichosonCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="変換被保険者番号" column="DbWT0001_henkanHihokenshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="登録被保険者番号" column="DbWT0001_hihokenshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="市町村コード" column="DbWT0001_shichosonCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="管内管外区分" column="DbWT0001_KannaiKangaiKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="郵便番号" column="DbWT0001_yubinNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="町域コード" column="DbWT0001_choikiCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="行政区コード" column="DbWT0001_gyoseikuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="行政区名" column="DbWT0001_gyoseikuMei"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所" column="DbWT0001_jusho"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="番地" column="DbWT0001_banchi"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="方書" column="DbWT0001_katagaki"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="宛名カナ名称" column="DbWT0001_kanaMeisho"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="宛名名称" column="DbWT0001_meisho"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="氏名50音カナ" column="DbWT0001_shimei50onKana"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="識別コード" column="DbWT0001_shikibetsuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格取得日" column="DbWT0001_shikakuShutokuYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格取得事由コード" column="DbWT0001_shikakuShutokuJiyuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格喪失日" column="DbWT0001_shikakuSoshitsuYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格喪失事由コード" column="DbWT0001_shikakuSoshitsuJiyuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="世帯集約番号" column="DbWT0001_setaiShuyakuNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+    <sql id="allColumns_DbWT0001DbWT5331">
+        DbWT5331."renban" as DbWT5332_renban,
+        DbWT5331."kokanJohoShikibetsuNo" as DbWT5332_kokanJohoShikibetsuNo,
+        DbWT5331."idoYmd" as DbWT5332_idoYmd,
+        DbWT5331."idoKubunCode" as DbWT5332_idoKubunCode,
+        DbWT5331."teiseiYmd" as DbWT5332_teiseiYmd,
+        DbWT5331."teiseiKubunCode" as DbWT5332_teiseiKubunCode,
+        DbWT5331."idoJiyuKubun" as DbWT5332_idoJiyuKubun,
+        DbWT5331."seinengappiYmd" as DbWT5332_seinengappiYmd,
+        DbWT5331."seibetsuCode" as DbWT5332_seibetsuCode,
+        DbWT5331."shikakuShutokuYmd" as DbWT5332_shikakuShutokuYmd,
+        DbWT5331."shikakuSoshitsuYmd" as DbWT5332_shikakuSoshitsuYmd,
+        DbWT5331."rojinHokenShichosonNo" as DbWT5332_rojinHokenShichosonNo,
+        DbWT5331."rojinHokenJukyushaNo" as DbWT5332_rojinHokenJukyushaNo,
+        DbWT5331."koikiRengoHokenshaNo" as DbWT5332_koikiRengoHokenshaNo,
+        DbWT5331."shinseiShubetsuCode" as DbWT5332_shinseiShubetsuCode,
+        DbWT5331."henkoShinseichuKubunCode" as DbWT5332_henkoShinseichuKubunCode,
+        DbWT5331."shinseiYmd" as DbWT5332_shinseiYmd,
+        DbWT5331."minashiYokaigoKubunCode" as DbWT5332_minashiYokaigoKubunCode,
+        DbWT5331."yokaigoJotaiKubunCode" as DbWT5332_yokaigoJotaiKubunCode,
+        DbWT5331."ninteiYukokikanFromYmd" as DbWT5332_ninteiYukokikanFromYmd,
+        DbWT5331."ninteiYukokikanToYmd" as DbWT5332_ninteiYukokikanToYmd,
+        DbWT5331."kyotakuServiceKubunCode" as DbWT5332_kyotakuServiceKubunCode,
+        DbWT5331."kyotakuKaigoShienJigyoshoNo" as DbWT5332_kyotakuKaigoShienJigyoshoNo,
+        DbWT5331."kyotakuServiceTekiyoFromYmd" as DbWT5332_kyotakuServiceTekiyoFromYmd,
+        DbWT5331."kyotakuServiceTekiyoToYmd" as DbWT5332_kyotakuServiceTekiyoToYmd,
+        DbWT5331."homonShikyugendoKijungaku" as DbWT5332_homonShikyugendoKijungaku,
+        DbWT5331."homonJogenKanriTekiyoKikanFromYmd" as DbWT5332_homonJogenKanriTekiyoKikanFromYmd,
+        DbWT5331."homonJogenKanriTekiyoKikanToYmd" as DbWT5332_homonJogenKanriTekiyoKikanToYmd,
+        DbWT5331."tankiShikyugendoKijungaku" as DbWT5332_tankiShikyugendoKijungaku,
+        DbWT5331."tankiJogenKanriTekiyoKikanFromYmd" as DbWT5332_tankiJogenKanriTekiyoKikanFromYmd,
+        DbWT5331."tankiJogenKanriTekiyoKikanToYmd" as DbWT5332_tankiJogenKanriTekiyoKikanToYmd,
+        DbWT5331."kohiFutanJogengakuGengakuUmu" as DbWT5332_kohiFutanJogengakuGengakuUmu,
+        DbWT5331."shokanHaraikaFromYmd" as DbWT5332_shokanHaraikaFromYmd,
+        DbWT5331."shokanHaraikaToYmd" as DbWT5332_shokanHaraikaToYmd,
+        DbWT5331."kyufuritsuHikisageFromYmd" as DbWT5332_kyufuritsuHikisageFromYmd,
+        DbWT5331."kyufuritsuHikisageToYmd" as DbWT5332_kyufuritsuHikisageToYmd,
+        DbWT5331."genmenShinseichuKubunCode" as DbWT5332_genmenShinseichuKubunCode,
+        DbWT5331."riyoshaFutanKubunCode" as DbWT5332_riyoshaFutanKubunCode,
+        DbWT5331."kyufuRitsu" as DbWT5332_kyufuRitsu,
+        DbWT5331."riyoshaFutanTekiyoFromYmd" as DbWT5332_riyoshaFutanTekiyoFromYmd,
+        DbWT5331."riyoshaFutanTekiyoToYmd" as DbWT5332_riyoshaFutanTekiyoToYmd,
+        DbWT5331."hyojunFutanKubunCode" as DbWT5332_hyojunFutanKubunCode,
+        DbWT5331."futanGaku" as DbWT5332_futanGaku,
+        DbWT5331."futanGakuTekiyoFromYmd" as DbWT5332_futanGakuTekiyoFromYmd,
+        DbWT5331."futanGakuTekiyoToYmd" as DbWT5332_futanGakuTekiyoToYmd,
+        DbWT5331."tokuteiNyushoshaNinteiShinseichuKubunCode" as DbWT5332_tokuteiNyushoshaNinteiShinseichuKubunCode,
+        DbWT5331."tokuteiNyushoshaKaigoServiceKubunCode" as DbWT5332_tokuteiNyushoshaKaigoServiceKubunCode,
+        DbWT5331."kazeisoNoTokureiGengakuSochiTaishoKubun" as DbWT5332_kazeisoNoTokureiGengakuSochiTaishoKubun,
+        DbWT5331."tokuteiNyushoshaShokuhiFutanGendoGaku" as DbWT5332_tokuteiNyushoshaShokuhiFutanGendoGaku,
+        DbWT5331."kyojuhiUnitKoshitsuFutanGendoGaku" as DbWT5332_kyojuhiUnitKoshitsuFutanGendoGaku,
+        DbWT5331."kyojuhiUnitJunkoshitsuFutanGendoGaku" as DbWT5332_kyojuhiUnitJunkoshitsuFutanGendoGaku,
+        DbWT5331."kyojuhiTokuyotoFutanGenndoGaku" as DbWT5332_kyojuhiTokuyotoFutanGenndoGaku,
+        DbWT5331."kyojuhiRokenRyoyotoFutanGendoGaku" as DbWT5332_kyojuhiRokenRyoyotoFutanGendoGaku,
+        DbWT5331."kyojuhiTashoShitsuFutanGendoGaku" as DbWT5332_kyojuhiTashoShitsuFutanGendoGaku,
+        DbWT5331."futanGendoGakuTekiyoFromYmd" as DbWT5332_futanGendoGakuTekiyoFromYmd,
+        DbWT5331."futanGendoGakuTekiyoToYmd" as DbWT5332_futanGendoGakuTekiyoToYmd,
+        DbWT5331."keigenRitsu" as DbWT5332_keigenRitsu,
+        DbWT5331."keigenRitsuTekiyoFromYmd" as DbWT5332_keigenRitsuTekiyoFromYmd,
+        DbWT5331."keigenRitsuTekiyoToYmd" as DbWT5332_keigenRitsuTekiyoToYmd,
+        DbWT5331."shokiboKyotakuServiceRiyoUmu" as DbWT5332_shokiboKyotakuServiceRiyoUmu,
+        DbWT5331."kokiHokenshaNo" as DbWT5332_kokiHokenshaNo,
+        DbWT5331."kokiHihokenshaNo" as DbWT5332_kokiHihokenshaNo,
+        DbWT5331."kokuhoHokenshaNo" as DbWT5332_kokuhoHokenshaNo,
+        DbWT5331."kokuhoHihokenshashoNo" as DbWT5332_kokuhoHihokenshashoNo,
+        DbWT5331."atenaNo" as DbWT5332_atenaNo,
+        DbWT5331."nijiyoboJigyoKubunCode" as DbWT5332_nijiyoboJigyoKubunCode,
+        DbWT5331."nijiyoboJigyoYukokikanFromYmd" as DbWT5332_nijiyoboJigyoYukokikanFromYmd,
+        DbWT5331."nijiyoboJigyoYukokikanToYmd" as DbWT5332_nijiyoboJigyoYukokikanToYmd,
+        DbWT5331."jushochiTokureiTaishoshaKubunCode" as DbWT5332_jushochiTokureiTaishoshaKubunCode,
+        DbWT5331."shisetsuShozaiHokenshaNo" as DbWT5332_shisetsuShozaiHokenshaNo,
+        DbWT5331."jushochiTokureiTekiyoFromYmd" as DbWT5332_jushochiTokureiTekiyoFromYmd,
+        DbWT5331."jushochiTokureiTekiyoToYmd" as DbWT5332_jushochiTokureiTekiyoToYmd,
+        DbWT5331."kyojuhi1FutanGendogaku" as DbWT5332_kyojuhi1FutanGendogaku,
+        DbWT5331."kyojuhi2FutanGendogaku" as DbWT5332_kyojuhi2FutanGendogaku,
+        DbWT5331."kyojuhi3FutanGendogaku" as DbWT5332_kyojuhi3FutanGendogaku,
+        DbWT5331."niwariFutanTekiyoFromYmd" as DbWT5332_niwariFutanTekiyoFromYmd,
+        DbWT5331."niwariFutanTekiyoToYmd" as DbWT5332_niwariFutanTekiyoToYmd,
+        DbWT5331."yuryoRojinHomeDoishoUmu" as DbWT5332_yuryoRojinHomeDoishoUmu,
+        DbWT5331."tsugoKekkaKubun" as DbWT5332_tsugoKekkaKubun,
+        DbWT5331."tsugoJohoKubun" as DbWT5332_tsugoJohoKubun,
+        DbWT5331."hokenshaNo" as DbWT5332_hokenshaNo,
+        DbWT5331."hokenshaName" as DbWT5332_hokenshaName,
+        DbWT5331."torikomiYM" as DbWT5332_torikomiYM,
+        DbWT0001."shoHokenshaNo" as DbWT0001_shoHokenshaNo,
+        DbWT0001."orgHihokenshaNo" as DbWT0001_orgHihokenshaNo,
+        DbWT0001."serviceTeikyoYmd" as DbWT0001_serviceTeikyoYmd,
+        DbWT0001."orgHihokenshaKanaShimei" as DbWT0001_orgHihokenshaKanaShimei,
+        DbWT0001."orgHihokenshaShimei" as DbWT0001_orgHihokenshaShimei,
+        DbWT0001."oldShichosonCode" as DbWT0001_oldShichosonCode,
+        DbWT0001."henkanHihokenshaNo" as DbWT0001_henkanHihokenshaNo,
+        DbWT0001."hihokenshaNo" as DbWT0001_hihokenshaNo,
+        DbWT0001."shichosonCode" as DbWT0001_shichosonCode,
+        DbWT0001."KannaiKangaiKubun" as DbWT0001_KannaiKangaiKubun,
+        DbWT0001."yubinNo" as DbWT0001_yubinNo,
+        DbWT0001."choikiCode" as DbWT0001_choikiCode,
+        DbWT0001."gyoseikuCode" as DbWT0001_gyoseikuCode,
+        DbWT0001."gyoseikuMei" as DbWT0001_gyoseikuMei,
+        DbWT0001."jusho" as DbWT0001_jusho,
+        DbWT0001."banchi" as DbWT0001_banchi,
+        DbWT0001."katagaki" as DbWT0001_katagaki,
+        DbWT0001."kanaMeisho" as DbWT0001_kanaMeisho,
+        DbWT0001."meisho" as DbWT0001_meisho,
+        DbWT0001."shimei50onKana" as DbWT0001_shimei50onKana,
+        DbWT0001."shikibetsuCode" as DbWT0001_shikibetsuCode,
+        DbWT0001."shikakuShutokuYmd" as DbWT0001_shikakuShutokuYmd,
+        DbWT0001."shikakuShutokuJiyuCode" as DbWT0001_shikakuShutokuJiyuCode,
+        DbWT0001."shikakuSoshitsuYmd" as DbWT0001_shikakuSoshitsuYmd,
+        DbWT0001."shikakuSoshitsuJiyuCode" as DbWT0001_shikakuSoshitsuJiyuCode,
+        DbWT0001."setaiShuyakuNo" as DbWT0001_setaiShuyakuNo
+    </sql>    
+</mapper>

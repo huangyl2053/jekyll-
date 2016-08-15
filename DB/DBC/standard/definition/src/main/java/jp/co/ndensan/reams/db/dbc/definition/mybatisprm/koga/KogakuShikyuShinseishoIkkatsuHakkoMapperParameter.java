@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 
 /**
- * 高額サービス費給付お知らせ通知書作成
+ * 高額サービス費給付お知らせ通知書作成のハンドラクラスです。
  *
- * @reamsid DBC-0430-011 zhengshenlei
+ * @reamsid DBC-4770-010 zhengshenlei
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

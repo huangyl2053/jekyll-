@@ -154,7 +154,8 @@ public class ServiceRiyohyoBeppyoBodyEditor implements IServiceRiyohyoBeppyoBody
                 method = CLS.getMethod(TEN1.concat(new RString(i)).toString(), RString.class);
                 method.invoke(source, get金額のカンマ編集(サービス提供票別表.get単位()));
                 method = CLS.getMethod(WARIRITSU1.concat(new RString(i)).toString(), RString.class);
-                method.invoke(source, get金額のカンマ編集(サービス提供票別表.get割引適用後率().getColumnValue()));
+                method.invoke(source, get金額のカンマ編集(サービス提供票別表.get割引適用後率() == null
+                        ? Decimal.ZERO : サービス提供票別表.get割引適用後率().getColumnValue()));
                 method = CLS.getMethod(WARITEN1.concat(new RString(i)).toString(), RString.class);
                 method.invoke(source, get金額のカンマ編集(サービス提供票別表.get割引適用後単位()));
                 method = CLS.getMethod(KAI1.concat(new RString(i)).toString(), RString.class);
@@ -174,7 +175,8 @@ public class ServiceRiyohyoBeppyoBodyEditor implements IServiceRiyohyoBeppyoBody
                 method = CLS.getMethod(HIYOU1.concat(new RString(i)).toString(), RString.class);
                 method.invoke(source, get金額のカンマ編集(サービス提供票別表.get費用総額()));
                 method = CLS.getMethod(RITU1.concat(new RString(i)).toString(), RString.class);
-                method.invoke(source, get金額のカンマ編集(サービス提供票別表.get給付率().getColumnValue()));
+                method.invoke(source, get金額のカンマ編集(サービス提供票別表.get給付率() == null
+                        ? Decimal.ZERO : サービス提供票別表.get給付率().getColumnValue()));
                 method = CLS.getMethod(KYUFU1.concat(new RString(i)).toString(), RString.class);
                 method.invoke(source, get金額のカンマ編集(サービス提供票別表.get保険給付額()));
                 method = CLS.getMethod(HOKEN1.concat(new RString(i)).toString(), RString.class);
@@ -274,10 +276,12 @@ public class ServiceRiyohyoBeppyoBodyEditor implements IServiceRiyohyoBeppyoBody
     }
 
     private RString get金額のカンマ編集(Decimal 金額) {
+        金額 = 金額 == null ? Decimal.ZERO : 金額;
         return DecimalFormatter.toRString(金額, INT_0);
     }
 
     private RString get金額のカンマ編集小数点後２桁(Decimal 金額) {
+        金額 = 金額 == null ? Decimal.ZERO : 金額;
         return DecimalFormatter.toRString(金額, INT_2);
     }
 }

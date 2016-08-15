@@ -48,7 +48,6 @@ public class KubunShikyuGendogakuManager {
      * @return List<NinkaModel>
      */
     public List<KaigoServiceShurui> getサービス種類登録() {
-
         List<KaigoServiceShurui> lists = new ArrayList();
         for (DbT7130KaigoServiceShuruiEntity entity : kaigoServiceDac.selectサービス種類登録()) {
             KaigoServiceShuruiEntity kaigoServiceShuruiEntity = new KaigoServiceShuruiEntity();

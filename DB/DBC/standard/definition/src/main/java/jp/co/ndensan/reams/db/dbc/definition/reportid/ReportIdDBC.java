@@ -276,6 +276,10 @@ public enum ReportIdDBC {
      */
     DBC200067(new ReportId("DBC200067_SeikyugakuTsuchishoKohi"), new RString("介護給付費等請求額通知書（公費負担者分）")),
     /**
+     * （受給者台帳（一覧表）帳票ＩＤです。
+     */
+    DBC200006(new ReportId("DBC200006_KokuhorenJukyushaDaichoIchiran"), new RString("受給者台帳（一覧表）")),
+    /**
      * 総合事業費等請求額通知書（公費負担者分）帳票ＩＤです。
      */
     DBC200082(new ReportId("DBC200082_SogojigyohiSeikyugakuTsuchishoKohi"), new RString("総合事業費等請求額通知書（公費負担者分）"));

@@ -77,7 +77,7 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         RDate 一時差止開始日 = div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().getTxtHokenKyufuIchijiSashitomeYMD().getFromValue();
         RDate 一時差止終了日 = div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().getTxtHokenKyufuIchijiSashitomeYMD().getToValue();
-        if (一時差止終了日 != null && 一時差止終了日.isBefore(一時差止開始日)) {
+        if (一時差止開始日 != null && 一時差止終了日 != null && 一時差止終了日.isBefore(一時差止開始日)) {
             validPairs.add(new ValidationMessageControlPair(ValidationMessages.一時差止日の関連チェック));
         }
         return validPairs;

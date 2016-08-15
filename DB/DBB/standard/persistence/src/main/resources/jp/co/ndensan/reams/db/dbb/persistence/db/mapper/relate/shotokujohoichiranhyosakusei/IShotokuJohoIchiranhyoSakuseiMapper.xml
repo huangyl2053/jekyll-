@@ -76,7 +76,7 @@
         ,max("rirekiNo") AS rirekiNo
         </if>
         FROM rgdb."DbV2502KaigoShotoku" AS X
-        <if test="チックボックス == 2">
+        <if test="ラジオボタン == 2">
         GROUP BY X."shotokuNendo", X."shikibetsuCode"
         </if>
         ) AS Y
@@ -148,7 +148,6 @@
         TEMP."nenkiniShunyuGaku",
         TEMP."nenkiniShotokuGaku",
         TEMP."kazeiShotokuGaku",
-        TEMP."shoriTimeStamp",
         TEMP."torokuGyomu",
         TEMP."shoriTimeStamp"
         FROM  (
@@ -200,7 +199,7 @@
         </if>
         ,"shikibetsuCode"
         FROM rgdb."DbV2502KaigoShotoku" AS X
-        <if test="チックボックス == 2">
+        <if test="ラジオボタン == 2">
         GROUP BY X."shotokuNendo", X."shikibetsuCode"
         </if>
         ) AS Y

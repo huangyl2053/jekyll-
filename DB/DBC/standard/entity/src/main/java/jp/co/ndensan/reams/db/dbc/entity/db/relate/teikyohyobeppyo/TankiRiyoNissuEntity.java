@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.teikyohyobeppyo;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 画面設計_DBC0150011_サービス提供票別表 Entity
+ * 画面設計_DBC0150011_サービス提供票別表のEntityクラスです。
  *
  * @reamsid_L DBC-5100-010 xuxin
  */
