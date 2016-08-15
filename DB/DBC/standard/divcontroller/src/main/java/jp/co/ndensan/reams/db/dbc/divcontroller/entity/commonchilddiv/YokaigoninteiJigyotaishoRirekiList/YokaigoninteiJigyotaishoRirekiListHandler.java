@@ -35,6 +35,7 @@ public class YokaigoninteiJigyotaishoRirekiListHandler {
     private final FlexibleYearMonth 有効開始0604 = new FlexibleYearMonth("200604");
     private final FlexibleYearMonth 有効開始0204 = new FlexibleYearMonth("200204");
     private final FlexibleYearMonth 有効開始0004 = new FlexibleYearMonth("200004");
+    private final RString NULL = null;
 
     /**
      * コンストラクタです。
@@ -101,7 +102,10 @@ public class YokaigoninteiJigyotaishoRirekiListHandler {
      */
     public RString get状態区分(FlexibleDate 有効開始日, RString 介護認定状態区分) {
         FlexibleYearMonth 有効開始年月 = 有効開始日.getYearMonth();
-        if (!有効開始年月.isBefore(有効開始0004) && 有効開始年月.isBefore(有効開始0204)) {
+        if (有効開始年月.isBefore(有効開始0004)) {
+            return NULL;
+        }
+        if (有効開始年月.isBefore(有効開始0204)) {
             return YokaigoJotaiKubun99.toValue(介護認定状態区分).get名称();
         }
         if (有効開始年月.isBefore(有効開始0604)) {
