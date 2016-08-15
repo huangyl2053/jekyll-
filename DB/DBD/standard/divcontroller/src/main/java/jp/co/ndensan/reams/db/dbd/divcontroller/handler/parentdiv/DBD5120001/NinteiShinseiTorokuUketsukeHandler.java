@@ -129,12 +129,10 @@ public class NinteiShinseiTorokuUketsukeHandler {
      * @param 被保険者番号 HihokenshaNo
      * @param 識別コード ShikibetsuCode
      * @param 申請書管理番号 ShinseishoKanriNo
-     * @param 市町村コード RString
      */
     public void onLoad(HihokenshaNo 被保険者番号,
             ShikibetsuCode 識別コード,
-            ShinseishoKanriNo 申請書管理番号,
-            RString 市町村コード) {
+            ShinseishoKanriNo 申請書管理番号) {
 
         RString 表示パターン = get表示パターン();
 
@@ -153,8 +151,16 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
         div.getCcdKaigoNinteiAtenaInfo().initialize();
         div.getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(申請書管理番号, 識別コード);
-        //TODO
-        //div.getCcdKaigoNinteiShikakuInfo().initialize(市町村コード, 被保険者番号.getColumnValue());
+
+        RString 市町村コード = null;
+        if (result != null
+                && result.getEntity().get市町村コード() != null) {
+            市町村コード = result.getEntity().get市町村コード().getColumnValue();
+        }
+
+        div.getCcdKaigoNinteiShikakuInfo().initialize(
+                市町村コード,
+                被保険者番号 != null ? 被保険者番号.getColumnValue() : null);
 
         if (result != null) {
 
@@ -170,6 +176,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
         div.setHdnRenrakusakiReadOnly(new RString("0"));
         div.setHdnShichosonCode(市町村コード);
+        div.setHdnShinseishoKanriNo(申請書管理番号 != null ? 申請書管理番号.getColumnValue() : null);
         div.setHdnShikibetsuCode(識別コード != null ? 識別コード.getColumnValue() : null);
         div.setHdnHihokenshaNo(被保険者番号 != null ? 被保険者番号.getColumnValue() : null);
 
@@ -245,7 +252,8 @@ public class NinteiShinseiTorokuUketsukeHandler {
      */
     public void onClick_btnUpdate() {
 
-        CountedItem countedItem = Saiban.get(SubGyomuCode.DBD介護受給, SaibanHanyokeyName.市町村コード_西暦_月.get名称(), FlexibleDate.getNowDate().getNendo());
+        CountedItem countedItem = Saiban.get(
+                SubGyomuCode.DBD介護受給, SaibanHanyokeyName.市町村コード_西暦_月.get名称(), FlexibleDate.getNowDate().getNendo());
 
         shinseishoKanriNo = new ShinseishoKanriNo(countedItem.nextString());
 

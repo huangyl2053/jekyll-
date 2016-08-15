@@ -248,11 +248,13 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
         List<KeyValueDataSource> radShinsaYM = new ArrayList<>();
         if (NUM_1.equals(区分)) {
             radShinsaYM.add(new KeyValueDataSource(審査年月, 審査年月));
+            div.getShinseishoHakkoParameters().getRadShinsaYM().setDataSource(radShinsaYM);
             div.getShinseishoHakkoParameters().getRadShinsaYM().setSelectedKey(審査年月);
         } else if (NUM_2.equals(区分)) {
             radShinsaYM.add(new KeyValueDataSource(受取年月, 受取年月));
+            div.getShinseishoHakkoParameters().getRadShinsaYM().setDataSource(radShinsaYM);
             div.getShinseishoHakkoParameters().getRadShinsaYM().setSelectedKey(受取年月);
         }
-        div.getShinseishoHakkoParameters().getRadShinsaYM().setDataSource(radShinsaYM);
+
     }
 }

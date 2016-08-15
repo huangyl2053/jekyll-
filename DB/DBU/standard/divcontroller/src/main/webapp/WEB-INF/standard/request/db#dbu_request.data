@@ -3,6 +3,7 @@ dbu/db/dbu/BatchParamterInfo/onClick_btnBatchRegister
 dbu/db/dbu/BatchParamterInfo/onClick_btnCheck
 dbu/db/dbu/BatchParamterInfo/onLoad
 dbu/db/dbu/BenmeiTorokuPanel/onClick_btnCancel
+dbu/db/dbu/BenmeiTorokuPanel/onClick_btnComplete
 dbu/db/dbu/BenmeiTorokuPanel/onClick_btnSave
 dbu/db/dbu/BenmeiTorokuPanel/onLoad
 dbu/db/dbu/DBU0130011Main/onClick_btnBack
@@ -31,8 +32,6 @@ dbu/db/dbu/JigyoJokyoHokokuGeppo/onChange_radHokenshaKyuShichoson
 dbu/db/dbu/JigyoJokyoHokokuGeppo/onChange_radKoikiKoseiShichoson
 dbu/db/dbu/JigyoJokyoHokokuGeppo/onChange_radShukeiType3
 dbu/db/dbu/JigyoJokyoHokokuGeppo/onChange_radShukeiType5
-dbu/db/dbu/JigyoJokyoHokokuGeppo/onClick_Check
-dbu/db/dbu/JigyoJokyoHokokuGeppo/onClick_btnJikko
 dbu/db/dbu/JigyoJokyoHokokuGeppo/onClick_btnShichosonSentaku
 dbu/db/dbu/JigyoJokyoHokokuGeppo/onLoad
 dbu/db/dbu/JigyoJokyoHokokuHoseiKensaku/onClick_btnClear
@@ -52,7 +51,6 @@ dbu/db/dbu/KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1/onClick_btnDelUpdate
 dbu/db/dbu/KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1/onClick_btnModUpdate
 dbu/db/dbu/KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1/onClick_btnSave
 dbu/db/dbu/KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1/onClick_btnYoshikiyonnoni
-dbu/db/dbu/KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1/onStateTransition
 dbu/db/dbu/KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1/onload
 dbu/db/dbu/KakushuShinseishoHakko/click_btnReportPublish
 dbu/db/dbu/KakushuShinseishoHakko/click_validate
@@ -116,8 +114,6 @@ dbu/db/dbu/PanelBase/onClick_btnSearch
 dbu/db/dbu/PanelBase/onLoad
 dbu/db/dbu/PanelBase/onSelectByDeleteButton_dgHoseitaishoYoshiki
 dbu/db/dbu/PanelBase/onSelectByModifyButton_dgHoseitaishoYoshiki
-dbu/db/dbu/RenrakuhyoDataCreator/onClick_btnReportPublish
-dbu/db/dbu/RenrakuhyoDataCreator/onLoad
 dbu/db/dbu/RoUReiFuKuShiNenKin/onClick_Save
 dbu/db/dbu/RoUReiFuKuShiNenKin/onClick_btnComplete
 dbu/db/dbu/RoUReiFuKuShiNenKin/onClick_btnSearch
@@ -150,6 +146,7 @@ dbu/db/dbu/SinsaSeikyusyoPanel/onClick_BtnSenTaKu
 dbu/db/dbu/SinsaSeikyusyoPanel/onClick_btnSakuzyo
 dbu/db/dbu/SinsaSeikyusyoPanel/onClick_btnShuuSei
 dbu/db/dbu/SinsaSeikyusyoPanel/onClick_btnTuika
+dbu/db/dbu/SinsaSeikyusyoPanel/onClick_btnbennsho
 dbu/db/dbu/SinsaSeikyusyoPanel/onLoad
 dbu/db/dbu/SogoShokaiInfo/onClick_btnFukaInfo
 dbu/db/dbu/SogoShokaiInfo/onClick_btnJukyuInfo
@@ -214,7 +211,6 @@ dbu/db/dbu/YoshikiYonnoni/onClick_btnSave
 dbu/db/dbu/YoshikiYonnoni/onClick_btnUpdate
 dbu/db/dbu/YoshikiYonnoni/onClick_btnYoshikiyon
 dbu/db/dbu/YoshikiYonnoni/onClick_btnYoskiyonosan
-dbu/db/dbu/YoshikiYonnoni/onStateTransition
 dbu/db/dbu/YoshikiYonnoni/onload
 dbu/db/dbu/YoshikiYonnosan/lostFocus
 dbu/db/dbu/YoshikiYonnosan/onClick_btnAddUpdate
@@ -225,14 +221,4 @@ dbu/db/dbu/YoshikiYonnosan/onClick_btnModUpdate
 dbu/db/dbu/YoshikiYonnosan/onClick_btnSave
 dbu/db/dbu/YoshikiYonnosan/onClick_btnYoshikiyonno
 dbu/db/dbu/YoshikiYonnosan/onClick_btnYoshikiyonnoni
-dbu/db/dbu/YoshikiYonnosan/onStateTransition
 dbu/db/dbu/YoshikiYonnosan/onload
-dbu/db/dbu/ZenkokuHokenshaMasterKoshin/onBlur_ddlTodofuken
-dbu/db/dbu/ZenkokuHokenshaMasterKoshin/onClick_btnAddHokensha
-dbu/db/dbu/ZenkokuHokenshaMasterKoshin/onClick_btnComplete
-dbu/db/dbu/ZenkokuHokenshaMasterKoshin/onClick_btnKakutei
-dbu/db/dbu/ZenkokuHokenshaMasterKoshin/onClick_btnTorikeshi
-dbu/db/dbu/ZenkokuHokenshaMasterKoshin/onClick_btnUpdate
-dbu/db/dbu/ZenkokuHokenshaMasterKoshin/onClick_iconDelete
-dbu/db/dbu/ZenkokuHokenshaMasterKoshin/onClick_iconModify
-dbu/db/dbu/ZenkokuHokenshaMasterKoshin/onload

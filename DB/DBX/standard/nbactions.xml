@@ -22,17 +22,4 @@
                 <newVersion>1.12.0</newVersion>
             </properties>
         </action>
-        <action>
-            <actionName>build</actionName>
-            <packagings>
-                <packaging>*</packaging>
-            </packagings>
-            <goals>
-                <goal>install</goal>
-                <goal>-Dmaven.test.skip</goal>
-            </goals>
-            <properties>
-                <skipTests>true</skipTests>
-            </properties>
-        </action>
     </actions>
