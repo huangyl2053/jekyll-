@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5200001.DgBe
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5200001.ShinsakaiJIzenShinsakekkaTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5200001.ShinsakaikekkaIchiranInputCsvEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaijizenshinsakekkaichiran.ShinsakaiJIzenshinsakekkaIchiranManager;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsShiryoSakuseiZumi;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -52,7 +53,7 @@ public class ShinsakaiJIzenShinsakekkaTorokuHandler {
             div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtShinsakaiKaishiYoteiTime()
                     .setValue(new RTime(事前審査会用結果.getShinsakaiKaishiYoteiTime()));
             div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtShiryoSakusei()
-                    .setValue(new RString(Boolean.valueOf(事前審査会用結果.isShiryoSakuseiZumiFlag()).toString()));
+                    .setValue(IsShiryoSakuseiZumi.toValue(事前審査会用結果.isShiryoSakuseiZumiFlag()).get名称());
             div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtGogitaiNo()
                     .setValue(new RString(事前審査会用結果.getGogitaiNo()));
             div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtGogitaiName()
