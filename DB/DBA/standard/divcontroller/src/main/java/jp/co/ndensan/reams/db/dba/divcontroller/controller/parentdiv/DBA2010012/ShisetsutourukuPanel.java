@@ -295,8 +295,6 @@ public class ShisetsutourukuPanel {
             changeflag = true;
         }
         
-        RealInitialLocker.release(LOCKINGKEY);
-        
         if (changeflag) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode(),
@@ -305,9 +303,11 @@ public class ShisetsutourukuPanel {
             }
             if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                RealInitialLocker.release(LOCKINGKEY);
                 return ResponseData.of(div).forwardWithEventName(DBA2010012TransitionEventName.再検索).respond();
             }
         } else {
+            RealInitialLocker.release(LOCKINGKEY);
             return ResponseData.of(div).forwardWithEventName(DBA2010012TransitionEventName.再検索).respond();
         }
 
