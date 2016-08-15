@@ -35,6 +35,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class NinteiShinseiTorokuUketsuke {
 
+    private final RString 表示パターン_新規 = new RString("0");
+    private final RString 表示パターン_申請中 = new RString("1");
+
     /**
      * 画面初期化
      *
@@ -43,11 +46,22 @@ public class NinteiShinseiTorokuUketsuke {
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onLoad(NinteiShinseiTorokuUketsukeDiv div) {
 
-        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
-        ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
-        RString 市町村コード = ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class);
-        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        HihokenshaNo 被保険者番号 = null;
+        ShikibetsuCode 識別コード = null;
+        RString 市町村コード = null;
+        ShinseishoKanriNo 申請書管理番号 = null;
+
+        RString 表示パターン = getHandler(div).get表示パターン();
+        if (表示パターン_新規.equals(表示パターン)) {
+            TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+            被保険者番号 = taishoshaKey.get被保険者番号();
+            識別コード = taishoshaKey.get識別コード();
+        } else {
+            申請書管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
+            識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        }
+
+        市町村コード = ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class);
 
         this.getHandler(div).onLoad(被保険者番号, 識別コード, 申請書管理番号, 市町村コード);
         return ResponseData.of(div).respond();

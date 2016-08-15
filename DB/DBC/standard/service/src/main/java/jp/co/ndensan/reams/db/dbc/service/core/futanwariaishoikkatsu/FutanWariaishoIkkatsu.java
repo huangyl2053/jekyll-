@@ -155,8 +155,16 @@ public class FutanWariaishoIkkatsu {
         source.set適用開始年月日１(開始年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoKaishiYMD1())));
         source.set適用終了年月日１(終了年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoShuryoYMD1())));
         source.set負担割合２(entity.get負担割合期間().getFutanWariaiKubun2());
-        source.set適用開始年月日２(開始年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoKaishiYMD2())));
-        source.set適用終了年月日２(終了年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoShuryoYMD2())));
+        if (entity.get負担割合期間().getYukoKaishiYMD2() != null) {
+            source.set適用開始年月日２(開始年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoKaishiYMD2())));
+        } else {
+            source.set適用開始年月日２(RString.EMPTY);
+        }
+        if (entity.get負担割合期間().getYukoShuryoYMD2() != null) {
+            source.set適用終了年月日２(終了年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoShuryoYMD2())));
+        } else {
+            source.set適用終了年月日２(RString.EMPTY);
+        }
         ShoKisaiHokenshaNo hokenshaNo = getHokenshaCode(new HihokenshaDaicho(entity.get被保台帳()));
         if (hokenshaNo != null) {
             source.set保険者コード１(hokenshaNo.getColumnValue().substringReturnAsPossible(0, NUM_ONE));
