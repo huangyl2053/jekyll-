@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5320001.Nint
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5320001.NinteiTsuchishoHakkoHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5320001.NinteiTsuchishoHakkoValidationHandler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -107,24 +106,6 @@ public class NinteiTsuchishoHakko {
         return ResponseData.of(div).setState(DBD5320001StateName.個別発行);
     }
 
-//    /**
-//     * データGridにチェックボックスのクリック処理
-//     *
-//     * @param div NinteiTsuchishoHakkoDivDiv
-//     * @return ResponseData
-//     */
-//    public ResponseData<NinteiTsuchishoHakkoDiv> onClick_btnGridSelect(NinteiTsuchishoHakkoDiv div) {
-//        boolean isSelected = !div.getDgTaishoshaIchiran().getSelectedItems().isEmpty();
-//        if (!isSelected) {
-//            return ResponseData.of(div).setState(DBD5320001StateName.検索結果);
-//        }
-//
-//        if (getHandler(div).displayChohyoArea(isSelected)) {
-//            return ResponseData.of(div).setState(DBD5320001StateName.個別発行);
-//        } else {
-//            return ResponseData.of(div).setState(DBD5320001StateName.一括発行);
-//        }
-//    }
     /**
      * radPrintSelectのクリック処理
      *
@@ -293,24 +274,9 @@ public class NinteiTsuchishoHakko {
      * @return ResponseData<NinteiTsuchishoHakkoDiv>
      */
     public ResponseData<TsutishoHakkoParameter> onClick_btnIkkatsuHakkoUpdate(NinteiTsuchishoHakkoDiv div) {
-        TsutishoHakkoParameter param = new TsutishoHakkoParameter();
-        if (!ResponseHolder.isReRequest()) {
-            ViewStateHolder.put(要介護認定通知書発行画面キー.画面ダイアローグ番号, 1);
-            return ResponseData.of(param).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
-        }
-
-        int 画面ダイアローグ番号 = ViewStateHolder.get(要介護認定通知書発行画面キー.画面ダイアローグ番号, Integer.class);
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (画面ダイアローグ番号 == 1) {
-                param = getHandler(div).createTsutishoHakkoParameter();
-                ViewStateHolder.put(要介護認定通知書発行画面キー.画面ダイアローグ番号, 2);
-                return ResponseData.of(param).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
-            } else if (画面ダイアローグ番号 == 2) {
-                div.getCcdKanryoMessege().setMessage(new RString("更新処理が正常に終了しました。"), RString.EMPTY, RString.EMPTY, true);
-                return ResponseData.of(param).forwardWithEventName(DBD5320001TransitionEventName.完了).respond();
-            }
-        }
-        return ResponseData.of(param).respond();
+        TsutishoHakkoParameter param = getHandler(div).createTsutishoHakkoParameter();
+        div.getCcdKanryoMessege().setMessage(new RString("更新処理が正常に終了しました。"), RString.EMPTY, RString.EMPTY, true);
+        return ResponseData.of(param).forwardWithEventName(DBD5320001TransitionEventName.完了).respond();
     }
 
     private NinteiTsuchishoHakkoHandler getHandler(NinteiTsuchishoHakkoDiv div) {

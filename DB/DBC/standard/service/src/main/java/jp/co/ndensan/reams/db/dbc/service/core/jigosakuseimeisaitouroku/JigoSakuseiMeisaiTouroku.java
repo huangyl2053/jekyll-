@@ -25,6 +25,9 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.ServiceTypeT
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.TankiNyushoEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jigosakuseimeisaitouroku.IJigoSakuseiMeisaiTourokuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3114RiyoshaFutanWariaiMeisaiDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
@@ -47,7 +50,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class JigoSakuseiMeisaiTouroku {
 
     private final MapperProvider mapperProvider;
-    private final DbT4001JukyushaDaichoDac dac;
+    private final DbT4001JukyushaDaichoDac 受給者台帳dac;
+    private final DbT3114RiyoshaFutanWariaiMeisaiDac 利用者負担割合明細Dac;
     private static final Decimal 定値_100 = new Decimal("100");
     private static final RString 限度対象外フラグ = new RString("0");
     private static final RString 定値_合計 = new RString("合計");
@@ -63,7 +67,8 @@ public class JigoSakuseiMeisaiTouroku {
      */
     public JigoSakuseiMeisaiTouroku() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
+        this.受給者台帳dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
+        this.利用者負担割合明細Dac = InstanceProvider.create(DbT3114RiyoshaFutanWariaiMeisaiDac.class);
     }
 
     /**
@@ -248,7 +253,7 @@ public class JigoSakuseiMeisaiTouroku {
         if (entityList == null || entityList.isEmpty()) {
             return Collections.emptyList();
         }
-        List<KyufuJikoSakuseiResult> 給付計画自己作成ResultList = new ArrayList<>();
+        List<KyufuJikoSakuseiResult> 給付計画自己作成情報 = new ArrayList<>();
         for (KyufuJikoSakuseiEntity entity : entityList) {
             KyufuJikoSakuseiResult result = new KyufuJikoSakuseiResult();
             result.set事業者(entity.get事業者());
@@ -285,14 +290,11 @@ public class JigoSakuseiMeisaiTouroku {
                 result.set保険対象利用者負担額(gokeiKeisanResult.get保険対象利用者負担額());
                 result.set全額利用者負担額(gokeiKeisanResult.get全額利用者負担額());
             }
-            給付計画自己作成ResultList.add(result);
+            給付計画自己作成情報.add(result);
         }
-
-        KyufuJikoSakuseiResult kyufuJikoSakuseiResult = getMeisaiGoukeiListGridAdjust(給付計画自己作成ResultList);
-
-        List<KyufuJikoSakuseiResult> resultList = new ArrayList<>();
-        resultList.add(kyufuJikoSakuseiResult);
-        return resultList;
+        KyufuJikoSakuseiResult kyufuJikoSakuseiResult = getMeisaiGoukeiListGridAdjust(給付計画自己作成情報);
+        給付計画自己作成情報.add(kyufuJikoSakuseiResult);
+        return 給付計画自己作成情報;
     }
 
     /**
@@ -319,7 +321,7 @@ public class JigoSakuseiMeisaiTouroku {
                 gendo.set管理期間終了日(entity.get適用終了年月日());
             }
         } else if (区分_居宅.equals(居宅総合事業区分)) {
-            DbT4001JukyushaDaichoEntity entity = dac.select居宅総合事業区分(被保険者番号, 開始利用年月, 終了利用年月);
+            DbT4001JukyushaDaichoEntity entity = 受給者台帳dac.select居宅総合事業区分(被保険者番号, 開始利用年月, 終了利用年月);
             if (entity != null) {
                 gendo.set区分支給限度額(entity.getShikyuGendoTanisu());
                 gendo.set管理期間開始日(entity.getNinteiYukoKikanKaishiYMD());
@@ -370,10 +372,31 @@ public class JigoSakuseiMeisaiTouroku {
                 : new FlexibleDate(対象年月.toString().concat(new RString(対象年月.getLastDay()).toString()));
         FlexibleDate 終了利用年月 = (対象年月 == null) ? null
                 : new FlexibleDate(対象年月.toString().concat(定値_01.toString()));
-        List<DbT4001JukyushaDaichoEntity> entityList = dac.select受給者台帳By被保険者番号(被保険者番号, 開始利用年月, 終了利用年月);
+        List<DbT4001JukyushaDaichoEntity> entityList
+                = 受給者台帳dac.select受給者台帳By被保険者番号(被保険者番号, 開始利用年月, 終了利用年月);
         if (entityList == null || entityList.isEmpty()) {
             return 0;
         }
         return entityList.size();
+    }
+
+    /**
+     * 給付率取得のメソッドです。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 利用年月 FlexibleYearMonth
+     * @return List<RiyoshaFutanWariaiMeisai>
+     */
+    public List<RiyoshaFutanWariaiMeisai> get給付率(HihokenshaNo 被保険者番号, FlexibleYearMonth 利用年月) {
+        List<DbT3114RiyoshaFutanWariaiMeisaiEntity> entityList = 利用者負担割合明細Dac.select負担割合区分(被保険者番号, 利用年月);
+        if (entityList == null || entityList.isEmpty()) {
+            return Collections.emptyList();
+        }
+        List<RiyoshaFutanWariaiMeisai> businessList = new ArrayList<>();
+        for (DbT3114RiyoshaFutanWariaiMeisaiEntity entity : entityList) {
+            entity.initializeMd5();
+            businessList.add(new RiyoshaFutanWariaiMeisai(entity));
+        }
+        return businessList;
     }
 }

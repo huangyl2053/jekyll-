@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class ChoshuYuyoJuminKihonDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -40,10 +40,10 @@ public class ChoshuYuyoJuminKihonDiv extends Panel {
     private KaigoFukaKihonDiv ccdKaigoFukaKihon;
     @JsonProperty("AtenaKihon")
     private KaigoAtenaInfoDiv AtenaKihon;
-    @JsonProperty("GemmenShuruiCode")
-    private RString GemmenShuruiCode;
-    @JsonProperty("GemmenShuruiHyojiMongon")
-    private RString GemmenShuruiHyojiMongon;
+    @JsonProperty("ChoshuYuyoShuruiCode")
+    private RString ChoshuYuyoShuruiCode;
+    @JsonProperty("ChoshuYuyoShuruiHyojiMongon")
+    private RString ChoshuYuyoShuruiHyojiMongon;
     @JsonProperty("GemmenTorikeshiShuruiCode")
     private RString GemmenTorikeshiShuruiCode;
     @JsonProperty("GemmenTorikeshiShuruiHyojiMongon")
@@ -128,39 +128,39 @@ public class ChoshuYuyoJuminKihonDiv extends Panel {
     }
 
     /*
-     * getGemmenShuruiCode
-     * @return GemmenShuruiCode
+     * getChoshuYuyoShuruiCode
+     * @return ChoshuYuyoShuruiCode
      */
-    @JsonProperty("GemmenShuruiCode")
-    public RString getGemmenShuruiCode() {
-        return GemmenShuruiCode;
+    @JsonProperty("ChoshuYuyoShuruiCode")
+    public RString getChoshuYuyoShuruiCode() {
+        return ChoshuYuyoShuruiCode;
     }
 
     /*
-     * setGemmenShuruiCode
-     * @param GemmenShuruiCode GemmenShuruiCode
+     * setChoshuYuyoShuruiCode
+     * @param ChoshuYuyoShuruiCode ChoshuYuyoShuruiCode
      */
-    @JsonProperty("GemmenShuruiCode")
-    public void setGemmenShuruiCode(RString GemmenShuruiCode) {
-        this.GemmenShuruiCode = GemmenShuruiCode;
+    @JsonProperty("ChoshuYuyoShuruiCode")
+    public void setChoshuYuyoShuruiCode(RString ChoshuYuyoShuruiCode) {
+        this.ChoshuYuyoShuruiCode = ChoshuYuyoShuruiCode;
     }
 
     /*
-     * getGemmenShuruiHyojiMongon
-     * @return GemmenShuruiHyojiMongon
+     * getChoshuYuyoShuruiHyojiMongon
+     * @return ChoshuYuyoShuruiHyojiMongon
      */
-    @JsonProperty("GemmenShuruiHyojiMongon")
-    public RString getGemmenShuruiHyojiMongon() {
-        return GemmenShuruiHyojiMongon;
+    @JsonProperty("ChoshuYuyoShuruiHyojiMongon")
+    public RString getChoshuYuyoShuruiHyojiMongon() {
+        return ChoshuYuyoShuruiHyojiMongon;
     }
 
     /*
-     * setGemmenShuruiHyojiMongon
-     * @param GemmenShuruiHyojiMongon GemmenShuruiHyojiMongon
+     * setChoshuYuyoShuruiHyojiMongon
+     * @param ChoshuYuyoShuruiHyojiMongon ChoshuYuyoShuruiHyojiMongon
      */
-    @JsonProperty("GemmenShuruiHyojiMongon")
-    public void setGemmenShuruiHyojiMongon(RString GemmenShuruiHyojiMongon) {
-        this.GemmenShuruiHyojiMongon = GemmenShuruiHyojiMongon;
+    @JsonProperty("ChoshuYuyoShuruiHyojiMongon")
+    public void setChoshuYuyoShuruiHyojiMongon(RString ChoshuYuyoShuruiHyojiMongon) {
+        this.ChoshuYuyoShuruiHyojiMongon = ChoshuYuyoShuruiHyojiMongon;
     }
 
     /*

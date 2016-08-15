@@ -27,7 +27,7 @@ public class ChoshuYuyoPrintinfoValidationHandler {
 
     private final ChoshuYuyoJuminKihonDiv div;
     private static final RString 出力対象チェックMESSAGE = new RString("作成帳票を");
-    
+
     /**
      * コンストラクタです。
      *
@@ -50,7 +50,7 @@ public class ChoshuYuyoPrintinfoValidationHandler {
     private ValidationDictionary createDictionary未指定() {
         return new ValidationDictionaryBuilder()
                 .add(ChoshuYuyoPrintinfoValidationHandler.ChoshuYuyoJuminKihonValidationMessages.未指定チェック,
-                        div.getChoshuYuyoPrintinfo())
+                        div.getChoshuYuyoPrintinfo().getPritPublish1())
                 .build();
     }
 
@@ -76,7 +76,7 @@ public class ChoshuYuyoPrintinfoValidationHandler {
             return messages;
         }
     }
-    
+
     private static enum ChoshuYuyoJuminKihonValidationMessages implements IValidationMessage {
 
         未指定チェック(UrErrorMessages.未指定, 出力対象チェックMESSAGE.toString());

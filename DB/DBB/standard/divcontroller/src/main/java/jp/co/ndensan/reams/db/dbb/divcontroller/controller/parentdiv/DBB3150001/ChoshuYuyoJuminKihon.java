@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3150001.Chos
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3150001.DBB3150001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB3150001.ChoshuYuyoJuminKihonHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB3150001.ChoshuYuyoJuminKihonValidationHandler;
+import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB3150001.ChoshuYuyoPrintinfoHandler;
+import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB3150001.ChoshuYuyoPrintinfoValidationHandler;
 import jp.co.ndensan.reams.db.dbb.service.core.kaigofukachoshuyuyo.KaigoFukaChoshuYuyo;
 import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -77,6 +79,7 @@ public class ChoshuYuyoJuminKihon {
         handler.loadヘッダパネル(識別コード, searchKey);
         int 全賦課履歴データ件数 = handler.load全賦課履歴情報グリッド(被保険者番号, new FukaNendo(賦課年度));
         if (全賦課履歴データ件数 == ゼロ_定値) {
+            handler.setDisabled制御();
             ValidationMessageControlPairs pairs = new ChoshuYuyoJuminKihonValidationHandler(div).賦課情報の存在チェック();
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         } else if (全賦課履歴データ件数 == イチ_定値) {
@@ -84,7 +87,8 @@ public class ChoshuYuyoJuminKihon {
             ChoshuYuyoJoho 徴収猶予の情報 = KaigoFukaChoshuYuyo.createInstance()
                     .getJokyo(賦課基本.get調定年度(), 賦課基本.get賦課年度(), 賦課基本.get通知書番号());
             Decimal 普通徴収_合計 = load(徴収猶予の情報, div);
-            if (Decimal.ZERO.compareTo(普通徴収_合計) <= ゼロ_定値) {
+            if (普通徴収_合計.compareTo(Decimal.ZERO) <= ゼロ_定値) {
+                handler.setDisabled制御();
                 ValidationMessageControlPairs pairs = new ChoshuYuyoJuminKihonValidationHandler(div).処理可能チェック();
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
@@ -105,7 +109,8 @@ public class ChoshuYuyoJuminKihon {
         ChoshuYuyoJuminKihonHandler handler = getHandler(div);
         ChoshuYuyoJoho 徴収猶予の情報 = handler.onClick_選択ボタン();
         Decimal 普通徴収_合計 = load(徴収猶予の情報, div);
-        if (Decimal.ZERO.compareTo(普通徴収_合計) <= ゼロ_定値) {
+        if (普通徴収_合計.compareTo(Decimal.ZERO) <= ゼロ_定値) {
+            handler.setDisabled制御();
             ValidationMessageControlPairs pairs = new ChoshuYuyoJuminKihonValidationHandler(div).処理可能チェック();
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
@@ -219,9 +224,58 @@ public class ChoshuYuyoJuminKihon {
             Code 取消種類コード = ViewStateHolder.get(ViewStateKeys.取消種類コード, Code.class);
             KaigoFukaChoshuYuyoParam 画面情報param = handler.get画面情報param(徴収猶予の情報, 猶予種類コード, 取消種類コード);
             KaigoFukaChoshuYuyo.createInstance().saveDBDate(徴収猶予の情報, 画面情報param);
+            createHandler(div).initialize(徴収猶予の情報.get賦課年度(), 徴収猶予の情報.get調定年度(), 徴収猶予の情報.get通知書番号());
             return ResponseData.of(div).setState(DBB3150001StateName.更新結果確認);
         }
         return createResponse(div);
+    }
+
+    /**
+     * 「取消をやめる」と「訂正をやめる」ボタン押下のメソッドです。
+     *
+     * @param div ChoshuYuyoJuminKihonDiv
+     * @return 介護保険料徴収猶予画面
+     */
+    public ResponseData<ChoshuYuyoJuminKihonDiv> onClick_btnTorikeshiCansel(ChoshuYuyoJuminKihonDiv div) {
+        ChoshuYuyoJuminKihonHandler handler = getHandler(div);
+        ChoshuYuyoJoho 徴収猶予の情報 = ViewStateHolder.get(ViewStateKeys.徴収猶予の情報, ChoshuYuyoJoho.class);
+        RString 状況 = handler.load状況情報パネル(徴収猶予の情報);
+        handler.loadパネル状態1(状況, 徴収猶予の情報);
+        handler.setRequired();
+        return createResponse(div);
+    }
+
+    /**
+     * 「発行する」ボタン押下のチックです。
+     *
+     * @param div ChoshuYuyoJuminKihonDiv
+     * @return ResponseData
+     */
+    public ResponseData<ChoshuYuyoJuminKihonDiv> onClick_btnPrtCheck(ChoshuYuyoJuminKihonDiv div) {
+        ValidationMessageControlPairs pairs = new ChoshuYuyoPrintinfoValidationHandler(div).未指定のValidate();
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「発行する」ボタン事件のメソッドです。
+     *
+     * @param div ChoshuYuyoJuminKihonDiv
+     * @return ResponseData
+     */
+    public ResponseData<ChoshuYuyoJuminKihonDiv> onClick_btnExcute(ChoshuYuyoJuminKihonDiv div) {
+
+        FlexibleYear 賦課年度 = ViewStateHolder.get(ViewStateKeys.賦課年度, FlexibleYear.class);
+        FlexibleYear 調定年度 = ViewStateHolder.get(ViewStateKeys.調定年度, FlexibleYear.class);
+        TsuchishoNo 通知書番号 = ViewStateHolder.get(ViewStateKeys.通知書番号, TsuchishoNo.class);
+        createHandler(div).onClick発行する(賦課年度, 調定年度, 通知書番号);
+        return ResponseData.of(div).respond();
+    }
+
+    private ChoshuYuyoPrintinfoHandler createHandler(ChoshuYuyoJuminKihonDiv div) {
+        return new ChoshuYuyoPrintinfoHandler(div);
     }
 
     private ChoshuYuyoJuminKihonHandler getHandler(ChoshuYuyoJuminKihonDiv div) {

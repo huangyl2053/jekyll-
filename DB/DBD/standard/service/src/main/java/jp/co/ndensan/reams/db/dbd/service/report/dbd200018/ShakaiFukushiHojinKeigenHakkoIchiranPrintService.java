@@ -32,14 +32,14 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranPrintService {
     /**
      * 帳票を出力
      *
-     * @param 帳票情報リスト List<ShakaiFukushiHojinKeigenHakkoIchiranEntity>
+     * @param 帳票情報 ShakaiFukushiHojinKeigenHakkoIchiranEntity
      * @param association Association
      * @param iOutputOrder IOutputOrder
      * @param 個人情報 IKojin
      * @param index int
      * @param reportManager 帳票発行処理の制御機能
      */
-    public void print(List<ShakaiFukushiHojinKeigenHakkoIchiranEntity> 帳票情報リスト, Association association,
+    public void print(ShakaiFukushiHojinKeigenHakkoIchiranEntity 帳票情報, Association association,
             IOutputOrder iOutputOrder, IKojin 個人情報, int index, ReportManager reportManager) {
         ShakaiFukushiHojinKeigenHakkoIchiranProerty property = new ShakaiFukushiHojinKeigenHakkoIchiranProerty();
         try (ReportAssembler<ShakaiFukushiHojinKeigenHakkoIchiranReportSource> assembler
@@ -47,7 +47,7 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranPrintService {
             ReportSourceWriter<ShakaiFukushiHojinKeigenHakkoIchiranReportSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
             ShakaiFukushiHojinKeigenHakkoIchiranReport report = ShakaiFukushiHojinKeigenHakkoIchiranReport.createReport(
-                    帳票情報リスト, association, iOutputOrder, 個人情報, index);
+                    帳票情報, association, iOutputOrder, 個人情報, index);
             report.writeBy(reportSourceWriter);
 
         }
