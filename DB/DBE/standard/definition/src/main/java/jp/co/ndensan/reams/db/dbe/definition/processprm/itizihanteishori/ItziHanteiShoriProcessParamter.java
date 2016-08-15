@@ -26,8 +26,6 @@ public class ItziHanteiShoriProcessParamter implements IBatchProcessParameter {
     private final List<ShinseishoKanriNo> shinseishoKanriNoList;
     private final RString battishuturyokukubun;
     private RString イメージ区分;
-    private RString 取下;
-    private RString 延期;
 
     /**
      * コンストラクタです。
@@ -50,8 +48,6 @@ public class ItziHanteiShoriProcessParamter implements IBatchProcessParameter {
     public ItziHanteiShoriMybitisParamter toItziHanteiShoriMybitisParamter() {
         return ItziHanteiShoriMybitisParamter.createParam(shinseishoKanriNoList,
                 battishuturyokukubun,
-                イメージ区分,
-                取下,
-                延期);
+                イメージ区分);
     }
 }
