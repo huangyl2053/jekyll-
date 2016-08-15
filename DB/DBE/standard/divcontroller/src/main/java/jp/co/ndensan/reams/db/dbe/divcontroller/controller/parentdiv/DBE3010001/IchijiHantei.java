@@ -80,22 +80,21 @@ public class IchijiHantei {
     public ResponseData<IchijiHanteiDiv> onLoad(IchijiHanteiDiv div) {
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
+        ShinseishoKanriNoList shinseishoKanriNoList = ViewStateHolder.get(ViewStateKeys.申請書管理番号リスト, ShinseishoKanriNoList.class);
         if (メニュー.equals(menuID)) {
 
-            getHandler(div).initializtion();
-            return ResponseData.of(div).setState(DBE3010001StateName.初期表示);
-        } else if (完了処理_一次判定.equals(menuID)) {
-            ShinseishoKanriNoList shinseishoKanriNoList = ViewStateHolder.get(ViewStateKeys.申請書管理番号リスト, ShinseishoKanriNoList.class);
-            List<IChiJiPanTeiSyoRiBusiness> 一次判定対象者一覧List = kenSaKu(div, menuID, shinseishoKanriNoList);
-            PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
-            getHandler(div).対象者一覧の編集(一次判定対象者一覧List, personalData);
-            for (IChiJiPanTeiSyoRiBusiness business : 一次判定対象者一覧List) {
-                if (!RealInitialLocker.tryGetLock(new LockingKey(LOCKINGKEY.concat(business.get申請書管理番号().value())))) {
-                    throw new PessimisticLockingException();
-                }
+            if (shinseishoKanriNoList == null) {
+                getHandler(div).initializtion();
+                return ResponseData.of(div).setState(DBE3010001StateName.初期表示);
             }
-            AccessLogger.log(AccessLogType.照会, personalData);
-            ValidationMessageControlPairs validation = getValidatisonHandler(div).データ空のチェック();
+            ValidationMessageControlPairs validation = 一次判定対象者一覧(div, 完了処理_一次判定, shinseishoKanriNoList);
+            if (validation.iterator().hasNext()) {
+
+                return ResponseData.of(div).addValidationMessages(validation).respond();
+            }
+            return ResponseData.of(div).setState(DBE3010001StateName.一次判定対象者一覧);
+        } else if (完了処理_一次判定.equals(menuID)) {
+            ValidationMessageControlPairs validation = 一次判定対象者一覧(div, menuID, shinseishoKanriNoList);
             if (validation.iterator().hasNext()) {
 
                 return ResponseData.of(div).addValidationMessages(validation).respond();
@@ -241,7 +240,6 @@ public class IchijiHantei {
         if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            // TODO QA1521
             return ResponseData.of(div).forwardWithEventName(DBE3010001TransitionEventName.戻る).respond();
         }
         return ResponseData.of(div).respond();
@@ -311,6 +309,20 @@ public class IchijiHantei {
             }
             manager.要介護認定一次判定結果情報(kaJoho);
         }
+    }
+
+    private ValidationMessageControlPairs 一次判定対象者一覧(IchijiHanteiDiv div, RString menuID, ShinseishoKanriNoList shinseishoKanriNoList) {
+        List<IChiJiPanTeiSyoRiBusiness> 一次判定対象者一覧List = kenSaKu(div, menuID, shinseishoKanriNoList);
+        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
+        getHandler(div).対象者一覧の編集(一次判定対象者一覧List, personalData);
+        for (IChiJiPanTeiSyoRiBusiness business : 一次判定対象者一覧List) {
+            if (!RealInitialLocker.tryGetLock(new LockingKey(LOCKINGKEY.concat(business.get申請書管理番号().value())))) {
+                throw new PessimisticLockingException();
+            }
+        }
+        AccessLogger.log(AccessLogType.照会, personalData);
+        ValidationMessageControlPairs validation = getValidatisonHandler(div).データ空のチェック();
+        return validation;
     }
 
     private List<IChiJiPanTeiSyoRiBusiness> kenSaKu(IchijiHanteiDiv div, RString menuID, ShinseishoKanriNoList shinseishoKanriNoList) {
