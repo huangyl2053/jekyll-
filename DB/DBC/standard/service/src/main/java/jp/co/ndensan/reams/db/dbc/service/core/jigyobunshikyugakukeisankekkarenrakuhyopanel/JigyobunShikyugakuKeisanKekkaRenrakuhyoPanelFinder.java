@@ -8,11 +8,13 @@ package jp.co.ndensan.reams.db.dbc.service.core.jigyobunshikyugakukeisankekkaren
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResult;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigyobunshikyugakukeisanKekkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigyobunshikyugakukeisanKekkarenrakuhyopanel
+        .JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisanKekkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaDac;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jigyobunshikyugakukeisankekkarenrakuhyo.IJigyobunShikyugakuKeisanKekkaRenrakuhyoPanelMapper;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jigyobunshikyugakukeisankekkarenrakuhyo
+        .IJigyobunShikyugakuKeisanKekkaRenrakuhyoPanelMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -34,7 +36,7 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelFinder {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.事業高額合算支給額計算Dac = InstanceProvider.create(DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaDac.class);
     }
-    
+
     /**
      * {@link InstanceProvider#create}にて生成した{@link JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelFinder}のインスタンスを返します。
      *
