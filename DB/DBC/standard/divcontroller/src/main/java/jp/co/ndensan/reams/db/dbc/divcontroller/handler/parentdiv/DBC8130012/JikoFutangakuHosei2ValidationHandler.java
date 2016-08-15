@@ -144,31 +144,31 @@ public class JikoFutangakuHosei2ValidationHandler {
                     .thenAdd(JikoFutangakuHosei2ValidationMessages.高額総合事業サービス費チェック)
                     .messages());
             FlexibleDate 対象年月日 = new FlexibleDate(対象年度.toString().concat(月_107.toString()).concat(日.toString()));
-            if (対象年月日.isBeforeOrEquals(生年月日.plusYear(歳_75))) {
+            if (生年月日.plusYear(歳_75).isBeforeOrEquals(対象年月日)) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(JikoFutangakuHosei2Spec.補正後チェック４)
-                        .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック１)
+                        .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック４)
                         .messages());
-                if (JikoFutangakuHosei2Spec.補正後チェック４.apply(div)) {
-                    FlexibleYearMonth 生年月 = new FlexibleYearMonth(生年月日.toString().substring(INT_0, INT_6));
-                    FlexibleYearMonth 対象年月_008 = new FlexibleYearMonth(対象年度.toString().concat(月_008.toString()));
-                    FlexibleYearMonth 対象年月_009 = new FlexibleYearMonth(対象年度.toString().concat(月_009.toString()));
-                    FlexibleYearMonth 対象年月_010 = new FlexibleYearMonth(対象年度.toString().concat(月_010.toString()));
-                    FlexibleYearMonth 対象年月_011 = new FlexibleYearMonth(対象年度.toString().concat(月_011.toString()));
-                    FlexibleYearMonth 対象年月_012 = new FlexibleYearMonth(対象年度.toString().concat(月_012.toString()));
-                    FlexibleYearMonth 対象年月_101 = new FlexibleYearMonth(対象年度.plusYear(INT_1).toString().concat(月_101.toString()));
-                    FlexibleYearMonth 対象年月_102 = new FlexibleYearMonth(対象年度.plusYear(INT_1).toString().concat(月_102.toString()));
-                    FlexibleYearMonth 対象年月_103 = new FlexibleYearMonth(対象年度.plusYear(INT_1).toString().concat(月_103.toString()));
-                    FlexibleYearMonth 対象年月_104 = new FlexibleYearMonth(対象年度.plusYear(INT_1).toString().concat(月_104.toString()));
-                    FlexibleYearMonth 対象年月_105 = new FlexibleYearMonth(対象年度.plusYear(INT_1).toString().concat(月_105.toString()));
-                    FlexibleYearMonth 対象年月_106 = new FlexibleYearMonth(対象年度.plusYear(INT_1).toString().concat(月_106.toString()));
-                    FlexibleYearMonth 対象年月_107 = new FlexibleYearMonth(対象年度.plusYear(INT_1).toString().concat(月_107.toString()));
-                    validate補正後チェック５(生年月, 対象年月_008, messages, 対象年月_009, 対象年月_010, 対象年月_011, 対象年月_012, 対象年月_101,
-                            対象年月_102, 対象年月_103, 対象年月_104, 対象年月_105, 対象年月_106, 対象年月_107);
-                    validate補正後チェック６(対象年月_008, 生年月, messages, 対象年月_009, 対象年月_010, 対象年月_011, 対象年月_012);
-                    validate補正後チェック６_翌年(対象年月_101, 生年月, messages, 対象年月_102, 対象年月_103, 対象年月_104, 対象年月_105,
-                            対象年月_106, 対象年月_107);
-                }
+            }
+            if (!messages.contains(JikoFutangakuHosei2ValidationMessages.補正後チェック４)) {
+                FlexibleYearMonth 生年月 = new FlexibleYearMonth(生年月日.toString().substring(INT_0, INT_6));
+                FlexibleYearMonth 対象年月_008 = new FlexibleYearMonth(対象年度.toString().concat(月_008.toString()));
+                FlexibleYearMonth 対象年月_009 = new FlexibleYearMonth(対象年度.toString().concat(月_009.toString()));
+                FlexibleYearMonth 対象年月_010 = new FlexibleYearMonth(対象年度.toString().concat(月_010.toString()));
+                FlexibleYearMonth 対象年月_011 = new FlexibleYearMonth(対象年度.toString().concat(月_011.toString()));
+                FlexibleYearMonth 対象年月_012 = new FlexibleYearMonth(対象年度.toString().concat(月_012.toString()));
+                FlexibleYearMonth 対象年月_101 = new FlexibleYearMonth(対象年度.plusYear(INT_1).toString().concat(月_101.toString()));
+                FlexibleYearMonth 対象年月_102 = new FlexibleYearMonth(対象年度.plusYear(INT_1).toString().concat(月_102.toString()));
+                FlexibleYearMonth 対象年月_103 = new FlexibleYearMonth(対象年度.plusYear(INT_1).toString().concat(月_103.toString()));
+                FlexibleYearMonth 対象年月_104 = new FlexibleYearMonth(対象年度.plusYear(INT_1).toString().concat(月_104.toString()));
+                FlexibleYearMonth 対象年月_105 = new FlexibleYearMonth(対象年度.plusYear(INT_1).toString().concat(月_105.toString()));
+                FlexibleYearMonth 対象年月_106 = new FlexibleYearMonth(対象年度.plusYear(INT_1).toString().concat(月_106.toString()));
+                FlexibleYearMonth 対象年月_107 = new FlexibleYearMonth(対象年度.plusYear(INT_1).toString().concat(月_107.toString()));
+                validate補正後チェック５(生年月, 対象年月_008, messages, 対象年月_009, 対象年月_010, 対象年月_011, 対象年月_012, 対象年月_101,
+                        対象年月_102, 対象年月_103, 対象年月_104, 対象年月_105, 対象年月_106, 対象年月_107);
+                validate補正後チェック６(対象年月_008, 生年月, messages, 対象年月_009, 対象年月_010, 対象年月_011, 対象年月_012);
+                validate補正後チェック６_翌年(対象年月_101, 生年月, messages, 対象年月_102, 対象年月_103, 対象年月_104, 対象年月_105,
+                        対象年月_106, 対象年月_107);
             }
             return messages;
         }
@@ -177,73 +177,74 @@ public class JikoFutangakuHosei2ValidationHandler {
                 FlexibleYearMonth 対象年月_009, FlexibleYearMonth 対象年月_010, FlexibleYearMonth 対象年月_011, FlexibleYearMonth 対象年月_012,
                 FlexibleYearMonth 対象年月_101, FlexibleYearMonth 対象年月_102, FlexibleYearMonth 対象年月_103, FlexibleYearMonth 対象年月_104,
                 FlexibleYearMonth 対象年月_105, FlexibleYearMonth 対象年月_106, FlexibleYearMonth 対象年月_107) {
-            if (生年月.plusYear(歳_70).isBefore(対象年月_008)) {
+            if (対象年月_008.isBefore(生年月.plusYear(歳_70))) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(JikoFutangakuHosei2Spec.補正後チェック５_008)
                         .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック５)
                         .messages());
             }
-            if (生年月.plusYear(歳_70).isBefore(対象年月_009)) {
+            boolean is補正後チェック５ = messages.contains(JikoFutangakuHosei2ValidationMessages.補正後チェック５);
+            if (対象年月_009.isBefore(生年月.plusYear(歳_70)) && !is補正後チェック５) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(JikoFutangakuHosei2Spec.補正後チェック５_009)
                         .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック５)
                         .messages());
             }
-            if (生年月.plusYear(歳_70).isBefore(対象年月_010)) {
+            if (対象年月_010.isBefore(生年月.plusYear(歳_70)) && !is補正後チェック５) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(JikoFutangakuHosei2Spec.補正後チェック５_010)
                         .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック５)
                         .messages());
             }
-            if (生年月.plusYear(歳_70).isBefore(対象年月_011)) {
+            if (対象年月_011.isBefore(生年月.plusYear(歳_70)) && !is補正後チェック５) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(JikoFutangakuHosei2Spec.補正後チェック５_011)
                         .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック５)
                         .messages());
             }
-            if (生年月.plusYear(歳_70).isBefore(対象年月_012)) {
+            if (対象年月_012.isBefore(生年月.plusYear(歳_70)) && !is補正後チェック５) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(JikoFutangakuHosei2Spec.補正後チェック５_012)
                         .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック５)
                         .messages());
             }
-            if (生年月.plusYear(歳_70).isBefore(対象年月_101)) {
+            if (対象年月_101.isBefore(生年月.plusYear(歳_70)) && !is補正後チェック５) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(JikoFutangakuHosei2Spec.補正後チェック５_101)
                         .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック５)
                         .messages());
             }
-            if (生年月.plusYear(歳_70).isBefore(対象年月_102)) {
+            if (対象年月_102.isBefore(生年月.plusYear(歳_70)) && !is補正後チェック５) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(JikoFutangakuHosei2Spec.補正後チェック５_102)
                         .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック５)
                         .messages());
             }
-            if (生年月.plusYear(歳_70).isBefore(対象年月_103)) {
+            if (対象年月_103.isBefore(生年月.plusYear(歳_70)) && !is補正後チェック５) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(JikoFutangakuHosei2Spec.補正後チェック５_103)
                         .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック５)
                         .messages());
             }
-            if (生年月.plusYear(歳_70).isBefore(対象年月_104)) {
+            if (対象年月_104.isBefore(生年月.plusYear(歳_70)) && !is補正後チェック５) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(JikoFutangakuHosei2Spec.補正後チェック５_104)
                         .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック５)
                         .messages());
             }
-            if (生年月.plusYear(歳_70).isBefore(対象年月_105)) {
+            if (対象年月_105.isBefore(生年月.plusYear(歳_70)) && !is補正後チェック５) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(JikoFutangakuHosei2Spec.補正後チェック５_105)
                         .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック５)
                         .messages());
             }
-            if (生年月.plusYear(歳_70).isBefore(対象年月_106)) {
+            if (対象年月_106.isBefore(生年月.plusYear(歳_70)) && !is補正後チェック５) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(JikoFutangakuHosei2Spec.補正後チェック５_106)
                         .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック５)
                         .messages());
             }
-            if (生年月.plusYear(歳_70).isBefore(対象年月_107)) {
+            if (対象年月_107.isBefore(生年月.plusYear(歳_70)) && !is補正後チェック５) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(JikoFutangakuHosei2Spec.補正後チェック５_107)
                         .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック５)
@@ -259,25 +260,26 @@ public class JikoFutangakuHosei2ValidationHandler {
                         .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック６)
                         .messages());
             }
-            if (対象年月_009.isBeforeOrEquals(生年月.plusYear(歳_74)) && 生年月.plusYear(歳_70).isBeforeOrEquals(対象年月_009)) {
+            boolean is補正後チェック６ = messages.contains(JikoFutangakuHosei2ValidationMessages.補正後チェック６);
+            if (対象年月_009.isBeforeOrEquals(生年月.plusYear(歳_74)) && 生年月.plusYear(歳_70).isBeforeOrEquals(対象年月_009) && !is補正後チェック６) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(JikoFutangakuHosei2Spec.補正後チェック６_009)
                         .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック６)
                         .messages());
             }
-            if (対象年月_010.isBeforeOrEquals(生年月.plusYear(歳_74)) && 生年月.plusYear(歳_70).isBeforeOrEquals(対象年月_010)) {
+            if (対象年月_010.isBeforeOrEquals(生年月.plusYear(歳_74)) && 生年月.plusYear(歳_70).isBeforeOrEquals(対象年月_010) && !is補正後チェック６) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(JikoFutangakuHosei2Spec.補正後チェック６_010)
                         .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック６)
                         .messages());
             }
-            if (対象年月_011.isBeforeOrEquals(生年月.plusYear(歳_74)) && 生年月.plusYear(歳_70).isBeforeOrEquals(対象年月_011)) {
+            if (対象年月_011.isBeforeOrEquals(生年月.plusYear(歳_74)) && 生年月.plusYear(歳_70).isBeforeOrEquals(対象年月_011) && !is補正後チェック６) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(JikoFutangakuHosei2Spec.補正後チェック６_011)
                         .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック６)
                         .messages());
             }
-            if (対象年月_012.isBeforeOrEquals(生年月.plusYear(歳_74)) && 生年月.plusYear(歳_70).isBeforeOrEquals(対象年月_012)) {
+            if (対象年月_012.isBeforeOrEquals(生年月.plusYear(歳_74)) && 生年月.plusYear(歳_70).isBeforeOrEquals(対象年月_012) && !is補正後チェック６) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(JikoFutangakuHosei2Spec.補正後チェック６_012)
                         .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック６)
@@ -288,43 +290,44 @@ public class JikoFutangakuHosei2ValidationHandler {
         private void validate補正後チェック６_翌年(FlexibleYearMonth 対象年月_101, FlexibleYearMonth 生年月, IValidationMessages messages,
                 FlexibleYearMonth 対象年月_102, FlexibleYearMonth 対象年月_103, FlexibleYearMonth 対象年月_104, FlexibleYearMonth 対象年月_105,
                 FlexibleYearMonth 対象年月_106, FlexibleYearMonth 対象年月_107) {
-            if (対象年月_101.isBeforeOrEquals(生年月.plusYear(歳_74)) && 生年月.plusYear(歳_70).isBeforeOrEquals(対象年月_101)) {
+            boolean is補正後チェック６ = messages.contains(JikoFutangakuHosei2ValidationMessages.補正後チェック６);
+            if (対象年月_101.isBeforeOrEquals(生年月.plusYear(歳_74)) && 生年月.plusYear(歳_70).isBeforeOrEquals(対象年月_101) && !is補正後チェック６) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(JikoFutangakuHosei2Spec.補正後チェック６_101)
                         .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック６)
                         .messages());
             }
-            if (対象年月_102.isBeforeOrEquals(生年月.plusYear(歳_74)) && 生年月.plusYear(歳_70).isBeforeOrEquals(対象年月_102)) {
+            if (対象年月_102.isBeforeOrEquals(生年月.plusYear(歳_74)) && 生年月.plusYear(歳_70).isBeforeOrEquals(対象年月_102) && !is補正後チェック６) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(JikoFutangakuHosei2Spec.補正後チェック６_102)
                         .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック６)
                         .messages());
             }
-            if (対象年月_103.isBeforeOrEquals(生年月.plusYear(歳_74)) && 生年月.plusYear(歳_70).isBeforeOrEquals(対象年月_103)) {
+            if (対象年月_103.isBeforeOrEquals(生年月.plusYear(歳_74)) && 生年月.plusYear(歳_70).isBeforeOrEquals(対象年月_103) && !is補正後チェック６) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(JikoFutangakuHosei2Spec.補正後チェック６_103)
                         .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック６)
                         .messages());
             }
-            if (対象年月_104.isBeforeOrEquals(生年月.plusYear(歳_74)) && 生年月.plusYear(歳_70).isBeforeOrEquals(対象年月_104)) {
+            if (対象年月_104.isBeforeOrEquals(生年月.plusYear(歳_74)) && 生年月.plusYear(歳_70).isBeforeOrEquals(対象年月_104) && !is補正後チェック６) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(JikoFutangakuHosei2Spec.補正後チェック６_104)
                         .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック６)
                         .messages());
             }
-            if (対象年月_105.isBeforeOrEquals(生年月.plusYear(歳_74)) && 生年月.plusYear(歳_70).isBeforeOrEquals(対象年月_105)) {
+            if (対象年月_105.isBeforeOrEquals(生年月.plusYear(歳_74)) && 生年月.plusYear(歳_70).isBeforeOrEquals(対象年月_105) && !is補正後チェック６) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(JikoFutangakuHosei2Spec.補正後チェック６_105)
                         .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック６)
                         .messages());
             }
-            if (対象年月_106.isBeforeOrEquals(生年月.plusYear(歳_74)) && 生年月.plusYear(歳_70).isBeforeOrEquals(対象年月_106)) {
+            if (対象年月_106.isBeforeOrEquals(生年月.plusYear(歳_74)) && 生年月.plusYear(歳_70).isBeforeOrEquals(対象年月_106) && !is補正後チェック６) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(JikoFutangakuHosei2Spec.補正後チェック６_106)
                         .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック６)
                         .messages());
             }
-            if (対象年月_107.isBeforeOrEquals(生年月.plusYear(歳_74)) && 生年月.plusYear(歳_70).isBeforeOrEquals(対象年月_107)) {
+            if (対象年月_107.isBeforeOrEquals(生年月.plusYear(歳_74)) && 生年月.plusYear(歳_70).isBeforeOrEquals(対象年月_107) && !is補正後チェック６) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(JikoFutangakuHosei2Spec.補正後チェック６_107)
                         .thenAdd(JikoFutangakuHosei2ValidationMessages.補正後チェック６)
