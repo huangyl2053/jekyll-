@@ -158,7 +158,7 @@ public class HoshushiharaiJumbiShinsaCsvProcess extends BatchProcessBase<Hoshush
     private void outputJokenhyoFactory() {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                new RString("報酬支払いデータ（審査会委員報酬）.csv"),
+                new RString("報酬支払いデータ（審査会委員報酬）"),
                 association.getLasdecCode_().value(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
