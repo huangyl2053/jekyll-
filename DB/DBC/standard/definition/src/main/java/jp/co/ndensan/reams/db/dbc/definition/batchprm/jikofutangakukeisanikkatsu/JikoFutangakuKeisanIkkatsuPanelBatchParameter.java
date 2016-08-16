@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -48,5 +48,5 @@ public class JikoFutangakuKeisanIkkatsuPanelBatchParameter extends BatchParamete
     @BatchParameter(key = KEY_SHUTSURYOKUJUNID, name = "帳票出力順ID")
     private Long shutsuryokujunId;
     @BatchParameter(key = KEY_DANTAICD, name = "市町村コード")
-    private Association dantaiCd;
+    private LasdecCode dantaiCd;
 }

@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 介護給付費等請求額通知書情報取込のバッチ処理フロー
+ * 介護給付費等請求額通知書情報取込のバッチ処理フロークラスです
  *
  * @reamsid_L DBC-2480-010 jiangwenkai
  */
@@ -45,7 +45,6 @@ public class DBC120230_SeikyugakuTsuchishoInFlow extends BatchFlowBase<Kokuhoren
     private static final String 処理結果リスト作成 = "doShoriKekkaListSakusei";
     private static final String 取込済ファイル削除 = "deleteReveicedFile";
     private static final RString ファイル格納フォルダ名 = new RString("DBC120230");
-    private static final RString 帳票ID = new RString("DBC200066_SeikyugakuTsuchisho");
 
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
     private FlowEntity flowEntity;
@@ -148,7 +147,7 @@ public class DBC120230_SeikyugakuTsuchishoInFlow extends BatchFlowBase<Kokuhoren
     protected IBatchFlowCommand callDoShoriKekkaListSakuseiProcess() {
         KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter parameter
                 = new KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter();
-        parameter.setエラーリストタイプ(KokuhorenJoho_TorikomiErrorListType.リストタイプ1);
+        parameter.setエラーリストタイプ(KokuhorenJoho_TorikomiErrorListType.リストタイプ0);
         return simpleBatch(KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess.class).arguments(parameter).define();
     }
 

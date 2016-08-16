@@ -62,7 +62,7 @@ public class KyufuGengaku1GoHandler {
     private final KyufuGengaku1GoDiv div;
     private final RString 新規登録 = new RString("新規登録");
     private final RString _減額免除申請 = new RString("減額免除申請");
-    private final RString _給付額減額 = new RString("給付額減額");
+    private final RString _給付額減額 = new RString("給付額減額登録");
     private final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo("209007");
 
     /**
@@ -285,7 +285,7 @@ public class KyufuGengaku1GoHandler {
         if (押下ボタン.equals(_給付額減額)) {
             給付額減額_setValue(shiharaiHohoHenko, shiharaiHohoHenkoGengaku);
         } else if (押下ボタン.equals(_減額免除申請)) {
-            減額免除申請__setValue(shiharaiHohoHenko);
+            減額免除申請_setValue(shiharaiHohoHenko);
         }
     }
 
@@ -308,14 +308,14 @@ public class KyufuGengaku1GoHandler {
         }
     }
 
-    private void 減額免除申請__setValue(ShiharaiHohoHenko shiharaiHohoHenko) {
+    private void 減額免除申請_setValue(ShiharaiHohoHenko shiharaiHohoHenko) {
         div.getBtnTainoJokyo().setIconNameEnum(IconName.Info);
         List<KeyValueDataSource> jokyoCodeSource = new ArrayList();
         for (JokyoCode jokyoCode : JokyoCode.values()) {
             jokyoCodeSource.add(new KeyValueDataSource(jokyoCode.getコード(), jokyoCode.get名称()));
         }
         div.getDdlMenjoShinseiJokyo().setDataSource(jokyoCodeSource);
-        div.getDdlMenjoShinseiJokyo().setSelectedKey(jokyoCodeSource.get(0).getKey());
+        div.getDdlMenjoShinseiJokyo().setSelectedKey(JokyoCode._空.getコード());
         div.getTxtMenjoShinseiUketsukeYMD().setValue(shiharaiHohoHenko.get終了申請書受付年月日());
         div.getTxtMenjoShinseiYMD().setValue(shiharaiHohoHenko.get終了申請年月日());
         List<KeyValueDataSource> shinseiRiyuSource = new ArrayList();
@@ -323,14 +323,14 @@ public class KyufuGengaku1GoHandler {
             shinseiRiyuSource.add(new KeyValueDataSource(shinseRriyuCode.getコード(), shinseRriyuCode.get名称()));
         }
         div.getDdlIMenjoShinseiRiyu().setDataSource(shinseiRiyuSource);
-        div.getDdlIMenjoShinseiRiyu().setSelectedKey(shinseiRiyuSource.get(0).getKey());
+        div.getDdlIMenjoShinseiRiyu().setSelectedKey(ShiharaiHenkoShuryoShinseiRiyuCode._空.getコード());
         div.getTxtMenjoNaiyoKetteiYMD().setValue(shiharaiHohoHenko.get終了申請審査決定年月日());
         List<KeyValueDataSource> shinsaKekkaSource = new ArrayList();
         for (ShiharaiHenkoBenmeiShinsaKekkaKubun shinsaKekka : ShiharaiHenkoBenmeiShinsaKekkaKubun.values()) {
             shinsaKekkaSource.add(new KeyValueDataSource(shinsaKekka.getコード(), shinsaKekka.get名称()));
         }
         div.getDdlMenjoShinseiShinsaKekka().setDataSource(shinsaKekkaSource);
-        div.getDdlMenjoShinseiShinsaKekka().setSelectedKey(shinsaKekkaSource.get(0).getKey());
+        div.getDdlMenjoShinseiShinsaKekka().setSelectedKey(ShiharaiHenkoBenmeiShinsaKekkaKubun._空.getコード());
     }
 
     private DbT4021ShiharaiHohoHenkoEntity get給付額減額の登録Entity() {

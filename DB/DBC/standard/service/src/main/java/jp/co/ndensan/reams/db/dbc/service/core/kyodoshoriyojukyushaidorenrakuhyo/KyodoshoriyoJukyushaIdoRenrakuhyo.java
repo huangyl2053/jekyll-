@@ -259,6 +259,7 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
 
         if (dbT3002Entity != null) {
             DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity 基本情報Entity = new DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity();
+            基本情報Entity.setHiHokenshaNo(dbT3002Entity.getHiHokenshaNo());
             基本情報Entity.setIdoYMD(dbT3002Entity.getIdoYMD());
             基本情報Entity.setRirekiNo(dbT3002Entity.getRirekiNo());
             基本情報Entity.setHiHokenshaName(dbT3002Entity.getHiHokenshaName());
@@ -277,6 +278,7 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
 
         if (dbT3003Entity != null) {
             DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity 償還情報Entity = new DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity();
+            償還情報Entity.setHiHokenshaNo(dbT3003Entity.getHiHokenshaNo());
             償還情報Entity.setIdoYMD(dbT3003Entity.getIdoYMD());
             償還情報Entity.setRirekiNo(dbT3003Entity.getRirekiNo());
             償還情報Entity.setHokenKyufuIchijiSashitomeKaishiYMD(dbT3003Entity.getHokenKyufuIchijiSashitomeKaishiYMD());
@@ -292,6 +294,7 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
 
         if (dbT3004Entity != null) {
             DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity 高額情報Entity = new DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity();
+            高額情報Entity.setHiHokenshaNo(dbT3004Entity.getHiHokenshaNo());
             高額情報Entity.setIdoYMD(dbT3004Entity.getIdoYMD());
             高額情報Entity.setRirekiNo(dbT3004Entity.getRirekiNo());
             高額情報Entity.setSetaiShuyakuNo(dbT3004Entity.getSetaiShuyakuNo());
@@ -361,9 +364,9 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
     /**
      * 基本送付情報を追加するチェックボックスがチェックONの場合
      *
-     * @param 異動日
-     * @param 被保険者番号
-     * @param 異動区分コード
+     * @param 異動日 FlexibleDate
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動区分コード RString
      * @return int
      */
     public int 基本送付情報の異動区分チェック(HihokenshaNo 被保険者番号, RString 異動区分コード, FlexibleDate 異動日) {

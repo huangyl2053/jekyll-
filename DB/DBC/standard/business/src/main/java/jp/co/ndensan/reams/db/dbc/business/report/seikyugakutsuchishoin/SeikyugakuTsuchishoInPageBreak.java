@@ -13,16 +13,16 @@ import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 
 /**
+ * 介護給付費等請求額通知書一覧表帳票のPageBreakクラスです。
  *
- * 事業高額合算・事業分自己負担額計算結果一覧表のPageBreakクラスです。
- *
- * @reamsid_L DBC-4790-040 jiangwenkai
+ * @reamsid_L DBC-2480-030 jiangwenkai
  */
 public class SeikyugakuTsuchishoInPageBreak extends PageBreaker<SeikyugakuTsuchishoSource> {
 
     private final List<RString> breakKeysList;
 
     /**
+     * breakKeysの構造方法です
      *
      * @param breakKeys ページングキー
      */
@@ -41,6 +41,7 @@ public class SeikyugakuTsuchishoInPageBreak extends PageBreaker<SeikyugakuTsuchi
         boolean flag = false;
         if (!currentSource.getSource().shoKisaiHokenshaNo.equals(nextSource.getSource().shoKisaiHokenshaNo)) {
             flag = true;
+            // TODO QA 内部番号 1241
         } else if (!currentSource.getSource().kanName.equals(nextSource.getSource().kanName)) {
             flag = true;
         } else if (!currentSource.getSource().kouName.equals(nextSource.getSource().kouName)) {

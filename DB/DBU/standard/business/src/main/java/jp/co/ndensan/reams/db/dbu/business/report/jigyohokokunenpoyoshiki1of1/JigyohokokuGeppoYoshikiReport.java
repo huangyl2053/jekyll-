@@ -83,7 +83,11 @@ public class JigyohokokuGeppoYoshikiReport extends Report<JigyohokokuNenpoYoshik
                 } else if (new RString("0200").equals(data.get表番号())) {
                     if (横番号_1 == data.get横番号()) {
                         yoshikiData.setList2_1(data.get集計結果値());
-                    } else if (横番号_4 == data.get横番号()) {
+                    } else if (横番号_2 == data.get横番号()) {
+                        yoshikiData.setList2_2(data.get集計結果値());
+                    } else if (縦番号 == data.get縦番号() && 横番号_3 == data.get横番号()) {
+                        yoshikiData.setList2_3(data.get集計結果値());
+                    } else if (縦番号 == data.get縦番号() && 横番号_4 == data.get横番号()) {
                         yoshikiData.setList2_4(data.get集計結果値());
                     }
                 } else if (i <= data.get縦番号() && new RString("0301").equals(data.get表番号())) {
@@ -144,14 +148,14 @@ public class JigyohokokuGeppoYoshikiReport extends Report<JigyohokokuNenpoYoshik
             } else if (0 < o1.get表番号().compareTo(o2.get表番号())) {
                 return 1;
             }
-            if (o1.get横番号() < o2.get縦番号()) {
-                return -1;
-            } else if (o2.get縦番号() < o1.get横番号()) {
-                return 1;
-            }
             if (o1.get縦番号() < o2.get縦番号()) {
                 return -1;
             } else if (o2.get縦番号() < o1.get縦番号()) {
+                return 1;
+            }
+            if (o1.get横番号() < o2.get横番号()) {
+                return -1;
+            } else if (o2.get横番号() < o1.get横番号()) {
                 return 1;
             }
             return 0;

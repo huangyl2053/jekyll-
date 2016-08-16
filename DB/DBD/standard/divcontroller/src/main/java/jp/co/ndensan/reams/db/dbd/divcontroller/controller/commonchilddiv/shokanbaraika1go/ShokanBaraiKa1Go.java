@@ -57,12 +57,11 @@ public class ShokanBaraiKa1Go {
      * @return ResponseData<ShokanBaraiKa1GoDiv>
      */
     public ResponseData<ShokanBaraiKa1GoDiv> onClick_BtnKakutei(ShokanBaraiKa1GoDiv div) {
-        IDialogResponse dialogResponse = ResponseData.of(div);
         ValidationMessageControlPairs pairs = getHandler(div).onClick_BtnKakutei();
         if (pairs.iterator().hasNext()) {
-            return dialogResponse.addValidationMessages(pairs).respond();
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        return dialogResponse.dialogOKClose();
+        return ResponseData.of(div).dialogOKClose();
     }
 
     /**

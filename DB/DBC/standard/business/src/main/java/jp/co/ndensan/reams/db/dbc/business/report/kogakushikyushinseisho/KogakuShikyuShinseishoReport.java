@@ -3,12 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.report.kogakuShikyuShinseisho;
+package jp.co.ndensan.reams.db.dbc.business.report.kogakushikyushinseisho;
 
-import jp.co.ndensan.reams.db.dbc.business.report.kogakushikyushinseisho.IKogakuShikyuShinseishoBuilder;
-import jp.co.ndensan.reams.db.dbc.business.report.kogakushikyushinseisho.IKogakuShikyuShinseishoEditor;
-import jp.co.ndensan.reams.db.dbc.business.report.kogakushikyushinseisho.KogakuShikyuShinseishoBuilder;
-import jp.co.ndensan.reams.db.dbc.business.report.kogakushikyushinseisho.KogakuShikyuShinseishoEditor;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakushikyushinseisho.KogakuShikyuShinseishoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakushikyushinseisho.KogakuShikyuShinseishoSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;

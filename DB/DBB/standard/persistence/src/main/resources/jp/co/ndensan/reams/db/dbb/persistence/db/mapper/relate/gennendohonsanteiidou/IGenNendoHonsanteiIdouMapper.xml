@@ -1966,6 +1966,11 @@
         AND "DbT2015KeisangoJoho"."fukaNendo" = #{賦課年度}
         AND "DbT2015KeisangoJoho"."sakuseiShoriName" = '異動賦課'
         <!--AND "DbT2015KeisangoJoho"."choteiNichiji" = #{調定日時}-->
-        ${出力順}
+        ${出力順},
+        "dbT2015KeisangoJoho_choteiNendo",
+        "dbT2015KeisangoJoho_fukaNendo",
+        "dbT2015KeisangoJoho_tsuchishoNo",
+        "dbT2015KeisangoJoho_koseiZengoKubun",
+        "dbT2015KeisangoJoho_sakuseiShoriName"
     </select>
 </mapper>

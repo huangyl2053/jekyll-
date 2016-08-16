@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 高額介護サービス費照会のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-3040-010 zhangzhiming -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.saisinsaketeijyohou.ITaishoshaKensakuMapper">
+
+    <resultMap id="resultMap_TaishoshaKensakuRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.saisinsaketeijyohou.TaishoshaKensakuRelateEntity" autoMapping="true">
+        <result property="作成年月日" column="作成年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="審査委員会名" column="審査委員会名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="履歴番号" column="履歴番号"/>
+        <result property="介護請求件数" column="介護請求件数" />
+        <result property="介護決定件数" column="介護決定件数" />
+        <result property="介護調整件数" column="介護調整件数" />
+        <result property="介護請求単位" column="介護請求単位" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="介護決定単位" column="介護決定単位" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="介護調整単位" column="介護調整単位" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="介護請求保険者負担額" column="介護請求保険者負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="介護決定保険者負担額" column="介護決定保険者負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="介護調整保険者負担額" column="介護調整保険者負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額請求件数" column="高額請求件数" />
+        <result property="高額決定件数" column="高額決定件数" />
+        <result property="高額調整件数" column="高額調整件数" />
+        <result property="高額請求単位" column="高額請求単位" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額決定単位" column="高額決定単位" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額調整単位" column="高額調整単位" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額請求保険者負担額" column="高額請求保険者負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額決定保険者負担額" column="高額決定保険者負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額調整保険者負担額" column="高額調整保険者負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="事業所番号" column="事業所番号"	typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>					
+        <result property="事業所名" column="事業所名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>					
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>					
+        <result property="宛名名称" column="宛名名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>			
+        <result property="申立事由コード" column="申立事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>				
+        <result property="コード名称" column="コード名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>				
+        <result property="再審査申立事由" column="再審査申立事由"	typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>				
+        <result property="サービス提供年月" column="サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>				
+        <result property="サービス種類コード" column="サービス種類コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>					
+        <result property="サービス種類名" column="サービス種類名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>			
+        <result property="再審査結果コード" column="再審査結果コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>					
+        <result property="当初請求単位数" column="当初請求単位数"	typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>					
+        <result property="原審単位数" column="原審単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>					
+        <result property="申立単位数" column="申立単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>					
+        <result property="決定単位数" column="決定単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>					
+        <result property="調整単位数" column="調整単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>					
+        <result property="保険者負担額" column="保険者負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>						
+        <result property="公費受給者番号" column="公費受給者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>					
+        <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+    <select id="select再審査決定情報" resultMap="resultMap_TaishoshaKensakuRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.saisinsaketeijyohou.TaishoshaKensakuParameter" fetchSize="500" resultOrdered="true">
+        SELECT 再審査決定集計."sakuseiYMD" AS 作成年月日
+               ,再審査決定集計."sinsaiinkaiName" AS 審査委員会名
+               ,再審査決定集計."rirekiNo" AS 履歴番号
+               ,再審査決定集計."kaigoKyufuhiSeikyuKensu" AS 介護請求件数
+               ,再審査決定集計."kaigoKyufuhiKetteiKensu" AS 介護決定件数
+               ,再審査決定集計."kaigoKyufuhiChoseiKensu" AS 介護調整件数
+               ,再審査決定集計."kaigoKyufuhiSeikyuTanisu" AS 介護請求単位
+               ,再審査決定集計."kaigoKyufuhiKetteiTanisu" AS 介護決定単位
+               ,再審査決定集計."kaigoKyufuhiChoseiTanisu" AS 介護調整単位
+               ,再審査決定集計."kaigoKyufuhiSeikyuFutangaku" AS 介護請求保険者負担額
+               ,再審査決定集計."kaigoKyufuhiKetteiFutangaku" AS 介護決定保険者負担額
+               ,再審査決定集計."kaigoKyufuhiChoseiFutangaku" AS 介護調整保険者負担額
+               ,再審査決定集計."kogakuKaigoServicehiSeikyuKensu" AS 高額請求件数
+               ,再審査決定集計."kogakuKaigoServicehiSeikyuTanisu" AS 高額請求単位
+               ,再審査決定集計."kogakuKaigoServicehiSeikyuFutangaku" AS 高額請求保険者負担額
+               ,再審査決定集計."kogakuKaigoServicehiKetteiKensu" AS 高額決定件数
+               ,再審査決定集計."kogakuKaigoServicehiKetteiTanisu" AS 高額決定単位
+               ,再審査決定集計."kogakuKaigoServicehiKetteiFutangaku" AS 高額決定保険者負担額
+               ,再審査決定集計."kogakuKaigoServicehiChoseiKensu" AS 高額調整件数
+               ,再審査決定集計."kogakuKaigoServicehiChoseiTanisu" AS 高額調整単位
+               ,再審査決定集計."kogakuKaigoServicehiChoseiFutangaku" AS 高額調整保険者負担額
+               ,再審査決定明細."jigyoshoNo"   AS 事業所番号
+               ,再審査決定明細."jigyoshoName" AS 事業所名
+               ,再審査決定明細."hiHokenshaNo" AS 被保険者番号
+               ,宛名."meisho" AS 宛名名称
+               ,再審査決定明細."moushitateJiyuCode" AS 申立事由コード
+               ,コード種別管理表."codeMeisho" AS コード名称
+               ,再審査決定明細."moushitateJiyu" AS 再審査申立事由
+               ,再審査決定明細."serviceTeikyoYM" AS サービス提供年月
+               ,再審査決定明細."serviceShuruiCode" AS サービス種類コード
+               ,再審査決定明細."serviceShuruiName" AS サービス種類名
+               ,再審査決定明細."saishinsaResultCode" AS 再審査結果コード
+               ,再審査決定明細."toshoSeikyuTanisu" AS 当初請求単位数
+               ,再審査決定明細."genshinSeikyuTanisu" AS 原審単位数
+               ,再審査決定明細."moushitateTanisu" AS 申立単位数
+               ,再審査決定明細."ketteiTanisu" AS 決定単位数
+               ,再審査決定明細."choseiTanisu" AS 調整単位数
+               ,再審査決定明細."hokenshaFutangaku" AS 保険者負担額
+               ,再審査決定明細."kohiJukyushaNo" AS 公費受給者番号
+               ,再審査決定明細."shokisaiHokenshaNo" AS 証記載保険者番号
+        FROM rgdb."DbT3063SaishinsaKetteiShukei" AS 再審査決定集計
+        LEFT JOIN rgdb."DbT3064SaishinsaKetteiMeisai" AS 再審査決定明細
+            ON 再審査決定集計."toriatsukaiYM" = 再審査決定明細."toriatsukaiYM"
+            AND 再審査決定集計."hokenshaKubun" = 再審査決定明細."hokenshaKubun"
+            AND 再審査決定集計."rirekiNo" = 再審査決定明細."rirekiNo"
+        LEFT JOIN rgdb."DbV1001HihokenshaDaicho" AS dbv1001
+            ON dbv1001."hihokenshaNo" = 再審査決定明細."hiHokenshaNo"
+        LEFT JOIN rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',TRUE,
+            '','','','','','','',FALSE,'','','','','','','','','','','',FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,
+            FALSE,'','','','','','','','',FALSE,'','',FALSE,FALSE,FALSE,'','','','','','','','','','','','','','','','','','','{}')
+            AS 宛名 ON 宛名."shikibetsuCode" = dbv1001."shikibetsuCode"
+        LEFT JOIN rgdb."UzT0007Code" AS コード種別管理表
+            ON コード種別管理表."schemaName" = 'rgdb'
+            AND コード種別管理表."subGyomuCode" = 'DBC'
+            AND コード種別管理表."codeShubetsu" = '0023'
+            AND コード種別管理表."code" = substr(再審査決定明細."moushitateJiyuCode",0,2)
+        WHERE 再審査決定集計."toriatsukaiYM" = #{取扱年月}
+            AND 再審査決定集計."hokenshaKubun" = #{保険者区分}
+            <if test="履歴番号フラグ">
+                AND 再審査決定集計."rirekiNo" = #{履歴番号}
+            </if>
+            <if test="!履歴番号フラグ">
+                AND 再審査決定集計."rirekiNo" = (SELECT MAX("rirekiNo") FROM rgdb."DbT3063SaishinsaKetteiShukei"
+                WHERE "toriatsukaiYM" = #{取扱年月} AND "hokenshaKubun" = #{保険者区分})
+            </if>
+            <if test="市町村フラグ">
+                AND substr(再審査決定集計."kohiFutanshaNo",0,5) = #{市町村コード}
+            </if>
+            ORDER BY 再審査決定集計."rirekiNo" DESC,再審査決定明細."jigyoshoNo"
+    </select>
+    
+    <resultMap id="resultMap_RirekiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.saisinsaketeijyohou.TaishoshaKensakuRelateEntity" autoMapping="true">
+        <result property="保険者区分" column="保険者区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="履歴番号" column="履歴番号"/>
+    </resultMap>
+
+    <select id="select履歴番号情報" resultMap="resultMap_RirekiEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.saisinsaketeijyohou.TaishoshaKensakuParameter" fetchSize="500" resultOrdered="true">
+        SELECT 再審査決定集計."hokenshaKubun" AS 保険者区分
+               ,再審査決定集計."rirekiNo" AS 履歴番号
+        FROM rgdb."DbT3063SaishinsaKetteiShukei" AS 再審査決定集計
+        WHERE 再審査決定集計."toriatsukaiYM" = #{取扱年月}
+            <if test="市町村フラグ">
+                AND substr(再審査決定集計."kohiFutanshaNo",0,5) = #{市町村コード}
+            </if>
+            ORDER BY 再審査決定集計."rirekiNo" DESC
+    </select>
+</mapper>

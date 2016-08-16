@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 介護給付費等請求額通知書一覧表帳票HeaderEditor
+ * 介護給付費等請求額通知書一覧表帳票HeaderEditorクラスです
  *
  * @reamsid_L DBC-2480-030 jiangwenkai
  */

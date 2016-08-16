@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 介護給付費等請求額通知書一覧表帳票Report
+ * 介護給付費等請求額通知書一覧表帳票Reportクラスです
  *
  * @reamsid_L DBC-2480-030 jiangwenkai
  */
