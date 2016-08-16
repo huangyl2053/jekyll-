@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--@reamsid_L DBD-3860-030 donghj-->
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-
 
 <mapper namespace = "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shogaishakoujotaishoninteisho.IShogaishaKoujoTaishoNinteiShoMapper">
     
@@ -19,140 +13,123 @@ and open the template in the editor.
         <result property="申請者氏名" column="申請届出者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
         <result property="申請者住所" column="申請届出者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler" />
         <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
-        
     </resultMap>
     
-    <select id="控除対象者データの取得" resultMap="resultMap_NinteishoJohoEntity"
+    <select resultOrdered="true" id="控除対象者データの取得" resultMap="resultMap_NinteishoJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd4030011.ShogaishaKojoTaishoshaListMyBatisParameter" fetchSize="500">
-        
         SELECT
-            T4037."hihokenshaNo"             AS 被保険者番号
-            T4037."taishoNendo"              AS 対象年度
-            T4037．"ninteiKubun"             AS 認定区分
-            T4037．"ninteiNaiyo"             AS 認定内容
-            T4037．"ketteiYMD"               AS 決定年月日
-            T4010."shinseiTodokedeshaShimei" AS 申請届出者氏名
-            T4010."shinseiTodokedeshaJusho"  AS 申請届出者住所
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        T4037."dbT4038ShogaishaKoujo_hihokenshaNo" AS 被保険者番号,
+        T4037."dbT4038ShogaishaKoujo_taishoNendo" AS 対象年度,
+        T4037."dbT4038ShogaishaKoujo_ninteiKubun" AS 認定区分,
+        T4037."dbT4038ShogaishaKoujo_ninteiNaiyo" AS 認定内容,
+        T4037."dbT4038ShogaishaKoujo_ketteiYMD" AS 決定年月日,
+        T4010."shinseiTodokedeshaShimei" AS 申請届出者氏名,
+        T4010."shinseiTodokedeshaJusho"  AS 申請届出者住所,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM(
-            SELECT  tmp障がい者控除.*
-            FROM(
-		SELECT
-                    <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4038ShogaishaKoujoMapper.allColumns_DbT4038ShogaishaKoujo" />,
-                    row_number() OVER (PARTITION BY DbT4038."hihokenshaNo" ORDER BY DbT4038."rirekiNo" DESC) AS 行番
-                FROM  rgdb."DbT4038ShogaishaKoujo" AS DbT4038
-                <!--TODO 論理削除フラグありません。WHERE DbT4038."logicalDeletedFlag" = false-->
-                AND DbT4038."taishoNendo" = #{対象年度}
-                AND DbT4038."ketteiKubun" = 1
-            ) AS tmp障がい者控除
-            WHERE tmp障がい者控除."行番" = 1
+        SELECT
+        tmp障がい者控除.*
+        FROM(
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4038ShogaishaKoujoMapper.allColumns_DbT4038ShogaishaKoujo" />,
+        row_number() OVER (PARTITION BY "DbT4038ShogaishaKoujo"."hihokenshaNo" ORDER BY "DbT4038ShogaishaKoujo"."rirekiNo" DESC) AS 行番
+        FROM  rgdb."DbT4038ShogaishaKoujo" AS "DbT4038ShogaishaKoujo"
+        WHERE 1=1
+        <!--TODO 論理削除フラグありません。WHERE "DbT4038ShogaishaKoujo"."logicalDeletedFlag" = false  QA 95162 -->
+        AND "DbT4038ShogaishaKoujo"."taishoNendo" = #{対象年度}
+        AND "DbT4038ShogaishaKoujo"."ketteiKubun" = '1'
+        ) AS tmp障がい者控除
+        WHERE tmp障がい者控除."行番" = 1
         ) AS T4037
         INNER JOIN rgdb."DbT4010GemmenGengakuShinsei" AS T4010
-        ON T4037."shoKisaiHokenshaNo" = T4010."shoKisaiHokenshaNo"
-        AND T4037."hihokenshaNo" = T4010."hihokenshaNo"
-        AND T4037."shinseiRirekiNo" = T4010."shinseiRirekiNo"
+        ON T4037."dbT4038ShogaishaKoujo_shoKisaiHokenshaNo" = T4010."shoKisaiHokenshaNo"
+        AND T4037."dbT4038ShogaishaKoujo_hihokenshaNo" = T4010."hihokenshaNo"
+        AND T4037."dbT4038ShogaishaKoujo_rirekiNo" = T4010."shinseiRirekiNo"
         AND T4010."gemmenGengakuShurui" = '10'
-	INNER JOIN(
-            SELECT 
-                tmp被保険者台帳管理."shikibetsuCode",
-                tmp被保険者台帳管理."hihokenshaNo",
-                tmp被保険者台帳管理."idoYMD"
-            FROM(
-                SELECT
-                    DbT1001."shikibetsuCode",
-                    DbT1001."hihokenshaNo",
-                    DbT1001."idoYMD",
-                    row_number() OVER (PARTITION BY DbT1001."hihokenshaNo", DbT1001."idoYMD" ORDER BY DbT1001."edaNo" DESC) AS 行番
-                FROM rgdb."DbT1001HihokenshaDaicho" AS DbT1001
-                WHERE DbT1001."logicalDeletedFlag" = false
-            )AS tmp被保険者台帳管理
-            WHERE tmp被保険者台帳管理."行番" = 1
+        INNER JOIN(
+        SELECT 
+        tmp被保険者台帳管理."shikibetsuCode",
+        tmp被保険者台帳管理."hihokenshaNo",
+        tmp被保険者台帳管理."idoYMD"
+        FROM(
+        SELECT
+        DbT1001."shikibetsuCode",
+        DbT1001."hihokenshaNo",
+        DbT1001."idoYMD",
+        row_number() OVER (PARTITION BY DbT1001."hihokenshaNo", DbT1001."idoYMD" ORDER BY DbT1001."edaNo" DESC) AS 行番
+        FROM rgdb."DbT1001HihokenshaDaicho" AS DbT1001
+        WHERE DbT1001."logicalDeletedFlag" = false
+        )AS tmp被保険者台帳管理
+        WHERE tmp被保険者台帳管理."行番" = 1
         ) AS T1001
-        ON T4037."hihokenshaNo" = T1001."hihokenshaNo"
-        <!--TODO　異動日ありません。　ON T4037."idoYMD" = T1001."idoYMD"-->
+        ON T4037."dbT4038ShogaishaKoujo_hihokenshaNo" = T1001."hihokenshaNo"
+        <!--TODO　異動日ありません。　ON T4037."idoYMD" = T1001."idoYMD"  QA 95162-->
         INNER JOIN
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
-            AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
+        AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
         ON 
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = T1001."shikibetsuCode"
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = T1001."shikibetsuCode"
         
-        if(test = "#{前回非該当者} == '含まない'"){
-            INNER JOIN(
-                SELECT hihokenshaNo
-                FROM(
-                    SELECT
-                        DbT4038."hihokenshaNo",
-                        row_number() OVER (PARTITION BY DbT4038."hihokenshaNo" ORDER BY DbT4038."rirekiNo" DESC) AS 行番
-                    FROM rgdb.”DbT4038ShogaishaKoujo" AS DbT4038
-                    WHERE DbT4038."logicalDeletedFlag" = false
-                    AND DbT4038."taishoNendo" = #{対象年度}-1
-                    AND DbT4038."ketteiKubun" = 1
-                    ) AS  tmp障がい者控除
-                WHERE tmp障がい者控除."行番" = 1
-                ) AS T4037_TMP2
-            ON T4037."hihokenshaNo" = T4037_TMP2."hihokenshaNo"
-        }
+       <if test="前回非該当者含まない">
+        INNER JOIN(
+        SELECT "hihokenshaNo"
+        FROM(
+            SELECT
+            "DbT4038ShogaishaKoujo"."hihokenshaNo" AS "hihokenshaNo",
+            row_number() OVER (PARTITION BY "DbT4038ShogaishaKoujo"."hihokenshaNo" ORDER BY "DbT4038ShogaishaKoujo"."rirekiNo" DESC) AS "行番"
+            FROM rgdb."DbT4038ShogaishaKoujo" AS "DbT4038ShogaishaKoujo"
+            WHERE 
+           1=1
+<!--           "DbT4038ShogaishaKoujo"."logicalDeletedFlag" = false  TODO 「論理削除フラグ」が存在しない  QA 95162-->
+            AND "DbT4038ShogaishaKoujo"."taishoNendo" = #{対象年度plus1}
+            AND "DbT4038ShogaishaKoujo"."ketteiKubun" = '1'
+        ) AS  tmp障がい者控除
+        WHERE tmp障がい者控除."行番" = 1
+        ) AS T4037_TMP2
+        ON T4037."dbT4038ShogaishaKoujo_hihokenshaNo" = T4037_TMP2."hihokenshaNo"
+        </if>
             
-        WHERE T4037."ninteishoHakkoTaishogai" = false
-        
-            <if test = "is被保険者番号}">
-                AND T4037."hihokenshaNo" = #{被保険者番号}
+        WHERE T4037."dbT4038ShogaishaKoujo_ninteishoHakkoTaishogai" = false
+        <if test="被保険者番号 != null">
+            AND T4037."dbT4038ShogaishaKoujo_hihokenshaNo" = #{被保険者番号}
+        </if>
+        <if test="氏名!=null and !氏名.isEmpty()">
+            AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."kanjiShimei" LIKE #{氏名}||'%'
+        </if>
+        <if test="認定区分!=null and !認定区分.isEmpty()">
+            AND T4037."dbT4038ShogaishaKoujo_ninteiKubun" = #{認定区分}
+        </if>
+        <if test="認定内容!=null and !認定内容.isEmpty()">
+            AND T4037."dbT4038ShogaishaKoujo_ninteiNaiyo" = #{認定内容}
+        </if>
+        <if test="認知症高齢者の日常生活自立度!=null and !認知症高齢者の日常生活自立度.isEmpty()">
+            AND T4037."dbT4038ShogaishaKoujo_ninchishoNichijoSeikatsuJiritsudoCode"= #{認知症高齢者の日常生活自立度}
+        </if>
+        <if test="障害高齢者の日常生活自立度!=null and !障害高齢者の日常生活自立度.isEmpty()">
+            AND T4037."dbT4038ShogaishaKoujo_shogaiNichijoSeikatsuJiritsudoCode" = #{障害高齢者の日常生活自立度}
+        </if>
+        <if test="障がい者手帳!=null and !障がい者手帳.isEmpty()">
+            <if test="障がい者手帳ある">
+                AND T4037."dbT4038ShogaishaKoujo_shogaishaTechoUmu" = true
             </if>
-
-            <if test = "is氏名">
-                AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."kanjishimei" LIKE #{氏名}||'%'
+            <if test="障がい者手帳なし">
+                AND T4037."dbT4038ShogaishaKoujo_shogaishaTechoUmu"= false
             </if>
-
-            <if test = "#{認定区分} != null">
-                AND T4037."ninteiKubun" = #{認定区分}
-
-            </if>
-
-            <if test = "#{認定内容} != null">
-                AND T4037."ninteiNaiyo" = #{認定内容}
-            </if>
-
-            <if test = "#{認知症高齢者の日常生活自立度} != null">
-                AND T4037."ninchishoNichijoSeikatsuJiritsudoCode"= #{認知症高齢者の日常生活自立度}
-            </if>
-
-            <if test = "#{障害高齢者の日常生活自立度} != null">
-                AND T4037."shogaiNichijoSeikatsuJiritsudoCode" = #{障害高齢者の日常生活自立度}
-            </if>
-
-            <if test = "#{障がい者手帳} != null">
-                <if test = "#{障がい者手帳} == 'ある'">
-                    AND T4037."shogaishaTechoUmu" = true
-                </if>
-                <if test = "#{障がい者手帳} == 'なし'">
-                    AND T4037."shogaishaTechoUmu"= false
-                </if>
-            </if>
-
-            <if test = "#{喪失事由} != null">
-                AND T4037."shikakuSoshitsuJiyuCode" = #{喪失事由}
-            </if>
-
-            <if test = "is喪失日">
-                <if test = "has喪失日FROM">
-                    AND #{喪失日FROM} <![CDATA[<=]]> T4037."shikakuSoshitsuYMD"
-                </if>
-                <if test = "has喪失日TO">
-                AND T4037."shikakuSoshitsuYMD" <![CDATA[<=]]> #{喪失日TO}
-                </if>
-            </if>
-
-            <if test = "is決定日">
-                <if test = "has決定日FROM">
-                    AND #{決定日FROM} <![CDATA[<=]]> T4037."ketteiYMD"
-                </if>
-                <if test = "has決定日TO">
-                    AND T4037."ketteiYMD" <![CDATA[<=]]> #{決定日TO}
-                </if>
-            </if>
-        
-        
-	
+        </if>
+        <if test="喪失事由!= null and !喪失事由.isEmpty()">
+            AND T4037."dbT4038ShogaishaKoujo_shikakuSoshitsuJiyuCode" = #{喪失事由}
+        </if>
+        <if test="喪失日FROM != null">
+            AND #{喪失日FROM} <![CDATA[<=]]> T4037."dbT4038ShogaishaKoujo_shikakuSoshitsuYMD"
+        </if>
+        <if test="喪失日TO != null">
+            AND T4037."dbT4038ShogaishaKoujo_shikakuSoshitsuYMD" <![CDATA[<=]]> #{喪失日TO}
+        </if>
+        <if test="決定日FROM != null">
+            AND #{決定日FROM} <![CDATA[<=]]> T4037."dbT4038ShogaishaKoujo_ketteiYMD"
+        </if>
+        <if test="決定日TO != null">
+            AND T4037."dbT4038ShogaishaKoujo_ketteiYMD" <![CDATA[<=]]> #{決定日TO}
+        </if>
     </select>
-    
 </mapper>

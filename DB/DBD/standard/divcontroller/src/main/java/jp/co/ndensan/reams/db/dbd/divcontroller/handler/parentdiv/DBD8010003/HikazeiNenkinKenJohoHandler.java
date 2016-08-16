@@ -87,6 +87,8 @@ public class HikazeiNenkinKenJohoHandler {
         月DDL設定();
         div.getBtnDisplay().setDisabled(true);
         div.getBtnDelete().setDisabled(true);
+        div.getTbBirthday().setDisabled(true);
+        div.getDdlSex().setDisabled(true);
         return false;
     }
 

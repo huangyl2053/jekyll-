@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.itizihanteiiftorikomi;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.NinteichosaJohoTempTableEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
@@ -21,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 @lombok.Getter
 @lombok.Setter
 @OnNextSchema("rgdb")
-public class IchijiHanteiKekkaJohoTempTableEntity extends DbTableEntityBase<NinteichosaJohoTempTableEntity> implements IDbAccessable {
+public class IchijiHanteiKekkaJohoTempTableEntity extends DbTableEntityBase<IchijiHanteiKekkaJohoTempTableEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TempTableColumnOrder(1)

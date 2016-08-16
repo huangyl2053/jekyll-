@@ -49,7 +49,7 @@ public class DbT4038ShogaishaKoujoDac implements ISaveable<DbT4038ShogaishaKoujo
      * @return DbT4038ShogaishaKoujoEntity
      */
     @Transaction
-    public DbT4038ShogaishaKoujoEntity selectAll(HihokenshaNo 被保険者番号) {
+    public DbT4038ShogaishaKoujoEntity selectBy被保険者番号(HihokenshaNo 被保険者番号) {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
