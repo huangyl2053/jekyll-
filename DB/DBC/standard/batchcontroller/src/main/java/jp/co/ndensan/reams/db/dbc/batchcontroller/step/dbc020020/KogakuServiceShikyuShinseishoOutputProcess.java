@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -114,7 +115,7 @@ public class KogakuServiceShikyuShinseishoOutputProcess extends BatchProcessBase
             report.writeBy(shinseishoYuchoReportSourceWriter);
         } else {
             KogakuShikyuShinseishoEntity param = new KogakuShikyuShinseishoEntity();
-            param.setシステム日付(RDate.getNowDate());
+            param.setシステム日付(FlexibleDate.getNowDate());
             param.set申請情報帳票発行一時(entity);
             param.set認証者役職名(認証者名);
             param.set連番(new RString(count));

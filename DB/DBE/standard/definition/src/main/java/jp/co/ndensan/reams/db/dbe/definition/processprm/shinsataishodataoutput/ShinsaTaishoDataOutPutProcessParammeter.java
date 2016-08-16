@@ -25,12 +25,12 @@ public class ShinsaTaishoDataOutPutProcessParammeter implements IBatchProcessPar
      * コンストラクタです。
      *
      * @param kaisaiBangou 開催番号
-     * 
+     *
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     public ShinsaTaishoDataOutPutProcessParammeter(RString kaisaiBangou) {
         this.kaisaiBangou = kaisaiBangou;
-      
+
     }
 
     /**
@@ -40,5 +40,9 @@ public class ShinsaTaishoDataOutPutProcessParammeter implements IBatchProcessPar
      */
     public ShinsaTaishoDataOutPutMybatisParameter toShinsaTaishoDataOutMybatisParameter() {
         return new ShinsaTaishoDataOutPutMybatisParameter(kaisaiBangou);
+    }
+
+    public char getNinteichosaItakusakiCode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
