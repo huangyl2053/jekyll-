@@ -29,7 +29,7 @@ public class KogakuOshiraseTsuchiTeshutsuKigenAriReport extends Report<KogakuOsh
     }
 
     @Override
-    protected void writeBy(ReportSourceWriter<KogakuOshiraseTsuchiTeshutsuKigenAriSource> writer) {
+    public void writeBy(ReportSourceWriter<KogakuOshiraseTsuchiTeshutsuKigenAriSource> writer) {
         IKogakuOshiraseTsuchiTeshutsuKigenAriEditor editor = new KogakuOshiraseTsuchiTeshutsuKigenAriEditor(target);
         IKogakuOshiraseTsuchiTeshutsuKigenAriBuilder builder = new KogakuOshiraseTsuchiTeshutsuKigenAriBuilder(editor);
         writer.writeLine(builder);
