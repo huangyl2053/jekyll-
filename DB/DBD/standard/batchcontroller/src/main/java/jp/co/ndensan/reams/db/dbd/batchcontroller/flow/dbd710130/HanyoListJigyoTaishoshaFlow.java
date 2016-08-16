@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd710090;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd710130;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd710090.HanyoListRiyoshaFutanwariaiProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710140.DBD710140_HanyoListRiyoshaFutanwariaiParameter;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd710130.HanyoListJigyoTaishoshaProcess;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710130.DBD710130_HanyoListJigyoTaishoshaParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
- * 汎用リスト出力(利用者負担割合)のバッチフロークラスです。
+ * 汎用リスト出力(事業対象者)のバッチフロークラスです。
  *
- * @reamsid_L DBD-5810-030 mawy
+ * @reamsid_L DBD-5080-030 mawy
  */
-public class HanyoListRiyoshaFutanWariaiFlow extends BatchFlowBase<DBD710140_HanyoListRiyoshaFutanwariaiParameter> {
+public class HanyoListJigyoTaishoshaFlow extends BatchFlowBase<DBD710130_HanyoListJigyoTaishoshaParameter> {
 
     @Override
     protected void defineFlow() {
@@ -32,8 +32,8 @@ public class HanyoListRiyoshaFutanWariaiFlow extends BatchFlowBase<DBD710140_Han
      */
     @Step(CSV_PROCESS)
     protected IBatchFlowCommand reportProcess() {
-        return loopBatch(HanyoListRiyoshaFutanwariaiProcess.class)
-                .arguments(getParameter().toHanyoRisutoRiyoshaFutanWariaiProcessParameter())
+        return loopBatch(HanyoListJigyoTaishoshaProcess.class)
+                .arguments(getParameter().toHanyoRisutoJigyoTaishoshaProcessParameter())
                 .define();
     }
 }

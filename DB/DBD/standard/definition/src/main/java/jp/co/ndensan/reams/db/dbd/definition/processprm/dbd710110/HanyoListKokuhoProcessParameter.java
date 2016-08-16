@@ -3,33 +3,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.processprm.DBD710140;
+package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd710110;
 
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyorisutoriyoshafutanwariai.HanyoRisutoRiyoshaFutanWariaiMybatisParameter;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyorisutokokuho.HanyoRisutoKokuhoMybatisParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 汎用リスト出力(利用者負担割合)のProcess用パラメータクラスです。
+ * 汎用リスト出力(国保)のProcess用パラメータクラスです。
  *
- * @reamsid_L DBD-5810-030 mawy
+ * @reamsid_L DBD-5510-030 mawy
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class HanyoListRiyoshaFutanwariaiProcessParameter implements IBatchProcessParameter {
+public class HanyoListKokuhoProcessParameter implements IBatchProcessParameter {
 
     private RString cyusyutsuhohokubun;
-    private FlexibleYear nendo;
+    private RString cyusyutsukomokukubun;
     private FlexibleDate kizyunnichi;
-    private boolean isJigyotaishoshafutanichiwari;
-    private boolean isJigyotaishoshafutanniwari;
-    private boolean isNendochokindatacyusyutsu;
+    private FlexibleDate hitsukehanifrom;
+    private FlexibleDate hitsukehanito;
+    private boolean chokindatacyusyutsu;
+    private RString soshitsukubun;
     private boolean isCsvkomokumeifuka;
     private boolean isCsvrenbanfuka;
     private boolean isCsvhitsukesurasyuhensyu;
@@ -42,11 +42,12 @@ public class HanyoListRiyoshaFutanwariaiProcessParameter implements IBatchProces
      * コンストラクタです。
      *
      * @param cyusyutsuhohokubun 抽出方法区分
-     * @param nendo 年度
+     * @param cyusyutsukomokukubun 抽出項目区分
      * @param kizyunnichi 基準日
-     * @param isJigyotaishoshafutanichiwari 事業対象者負担１割
-     * @param isJigyotaishoshafutanniwari 事業対象者負担２割
-     * @param isNendochokindatacyusyutsu 年度直近データ抽出
+     * @param hitsukehanifrom 日付範囲From
+     * @param hitsukehanito 日付範囲To
+     * @param chokindatacyusyutsu 直近データ抽出
+     * @param soshitsukubun 喪失区分
      * @param isCsvkomokumeifuka CSV項目名付加
      * @param isCsvrenbanfuka CSV連番付加
      * @param isCsvhitsukesurasyuhensyu CSV日付スラッシュ編集
@@ -55,16 +56,17 @@ public class HanyoListRiyoshaFutanwariaiProcessParameter implements IBatchProces
      * @param syutsuryokujun 出力順
      * @param syutsuryokukomoku 出力項目
      */
-    public HanyoListRiyoshaFutanwariaiProcessParameter(RString cyusyutsuhohokubun, FlexibleYear nendo,
-            FlexibleDate kizyunnichi, boolean isJigyotaishoshafutanichiwari, boolean isJigyotaishoshafutanniwari,
-            boolean isNendochokindatacyusyutsu, boolean isCsvkomokumeifuka, boolean isCsvrenbanfuka, boolean isCsvhitsukesurasyuhensyu,
+    public HanyoListKokuhoProcessParameter(RString cyusyutsuhohokubun, RString cyusyutsukomokukubun,
+            FlexibleDate kizyunnichi, FlexibleDate hitsukehanifrom, FlexibleDate hitsukehanito, boolean chokindatacyusyutsu,
+            RString soshitsukubun, boolean isCsvkomokumeifuka, boolean isCsvrenbanfuka, boolean isCsvhitsukesurasyuhensyu,
             AtenaSelectBatchParameter atenacyusyutsujyoken, RString cyohyoid, Long syutsuryokujun, RString syutsuryokukomoku) {
         this.cyusyutsuhohokubun = cyusyutsuhohokubun;
-        this.nendo = nendo;
+        this.cyusyutsukomokukubun = cyusyutsukomokukubun;
         this.kizyunnichi = kizyunnichi;
-        this.isJigyotaishoshafutanichiwari = isJigyotaishoshafutanichiwari;
-        this.isJigyotaishoshafutanniwari = isJigyotaishoshafutanniwari;
-        this.isNendochokindatacyusyutsu = isNendochokindatacyusyutsu;
+        this.hitsukehanifrom = hitsukehanifrom;
+        this.hitsukehanito = hitsukehanito;
+        this.chokindatacyusyutsu = chokindatacyusyutsu;
+        this.soshitsukubun = soshitsukubun;
         this.isCsvkomokumeifuka = isCsvkomokumeifuka;
         this.isCsvrenbanfuka = isCsvrenbanfuka;
         this.isCsvhitsukesurasyuhensyu = isCsvhitsukesurasyuhensyu;
@@ -80,22 +82,20 @@ public class HanyoListRiyoshaFutanwariaiProcessParameter implements IBatchProces
      * @param psmShikibetsuTaisho 宛名識別対象PSM
      * @param psmAtesaki 宛先PSM
      * @param syutsuryokujun 出力順
-     * @return HanyoRisutoRiyoshaFutanWariaiMybatisParameter
+     * @return HanyoRisutoKokuhoMybatisParameter
      */
-    public HanyoRisutoRiyoshaFutanWariaiMybatisParameter toHanyoRisutoRiyoshaFutanWariaiMybatisParameter(RString psmShikibetsuTaisho,
+    public HanyoRisutoKokuhoMybatisParameter toHanyoRisutoKokuhoMybatisParameter(RString psmShikibetsuTaisho,
             RString psmAtesaki, RString syutsuryokujun) {
-        return new HanyoRisutoRiyoshaFutanWariaiMybatisParameter(
-                cyusyutsuhohokubun,
-                nendo,
+        return new HanyoRisutoKokuhoMybatisParameter(cyusyutsuhohokubun,
+                cyusyutsukomokukubun,
                 kizyunnichi,
-                isJigyotaishoshafutanichiwari,
-                isJigyotaishoshafutanniwari,
-                isNendochokindatacyusyutsu,
-                isCsvkomokumeifuka,
-                isCsvrenbanfuka,
-                isCsvhitsukesurasyuhensyu,
+                hitsukehanifrom,
+                hitsukehanito,
+                chokindatacyusyutsu,
+                soshitsukubun,
                 atenacyusyutsujyoken,
                 syutsuryokujun,
+                syutsuryokukomoku,
                 psmShikibetsuTaisho,
                 psmAtesaki);
     }

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710120;
 
-import jp.co.ndensan.reams.db.dbd.definition.processprm.DBD710120.HanyoListKokiKoreishaProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd710120.HanyoListKokiKoreishaProcessParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;

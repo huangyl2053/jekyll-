@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd710090;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd710120;
 
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuHohoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.SoshitsuKubun;
-import jp.co.ndensan.reams.db.dbd.definition.processprm.DBD710110.HanyoListKokuhoProcessParameter;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutokokuho.HanyoRisutoKokuhoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutokokuho.HanyoRisutoKokuhoEucCsvEntity;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd710120.HanyoListKokiKoreishaProcessParameter;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutokokikoreisha.HanyoRisutoKokiKoreishaEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutokokikoreisha.HanyoRisutoKokiKoreishaEucCsvEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.Datakubun;
@@ -87,15 +87,15 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
- * 汎用リスト出力(国保)_process処理クラスです。
+ * 汎用リスト出力(後期高齢者)_process処理クラスです。
  *
- * @reamsid_L DBD-5510-030 mawy
+ * @reamsid_L DBD-5520-030 mawy
  */
-public class HanyoListKokuhoProcess extends BatchProcessBase<HanyoRisutoKokuhoEntity> {
+public class HanyoListKokiKoreishaProcess extends BatchProcessBase<HanyoRisutoKokiKoreishaEntity> {
 
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBD701011");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBD701012");
     private static final RString 住所地特例 = new RString("住特");
     private static final RString 初回申請 = new RString("初回申請　　");
     private static final RString 再申請内 = new RString("再申請内　　");
@@ -139,8 +139,8 @@ public class HanyoListKokuhoProcess extends BatchProcessBase<HanyoRisutoKokuhoEn
     private static final RString KIZYUNNICHI = new RString("基準日：");
     private static final RString CHOKINNOMI = new RString("対象データ：直近のみ");
     private static final RString SOSHITSUKUBEN = new RString("喪失区分：");
-    private static final RString SHIKIBETSUCODE = new RString("国保資格情報_識別コード");
-    private static final RString RIREKIBANGO = new RString("国保資格情報_履歴番号");
+    private static final RString SHIKIBETSUCODE = new RString("後期高齢者情報_識別コード");
+    private static final RString RIREKIBANGO = new RString("後期高齢者情報_履歴番号");
     private static final RString CHIKI_1 = new RString("地区１");
     private static final RString CHIKI_2 = new RString("地区２");
     private static final RString CHIKI_3 = new RString("地区３");
@@ -156,12 +156,12 @@ public class HanyoListKokuhoProcess extends BatchProcessBase<HanyoRisutoKokuhoEn
     private static final RString 左記号 = new RString("(");
     private static final RString 右記号 = new RString(")");
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hanyorisutokokuho."
-            + "IHanyoRisutoKokuhoMapper.get汎用リスト");
+            "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hanyorisutokokikoreisha."
+            + "IHanyoRisutoKokiKoreishaMapper.get汎用リスト");
     private FileSpoolManager manager;
     private RString eucFilePath;
-    private HanyoListKokuhoProcessParameter processParamter;
-    private CsvWriter<HanyoRisutoKokuhoEucCsvEntity> eucCsvWriter;
+    private HanyoListKokiKoreishaProcessParameter processParamter;
+    private CsvWriter<HanyoRisutoKokiKoreishaEucCsvEntity> eucCsvWriter;
     private Association association;
     private HokenshaList hokenshaList;
     private List<PersonalData> personalDataList;
@@ -183,16 +183,16 @@ public class HanyoListKokuhoProcess extends BatchProcessBase<HanyoRisutoKokuhoEn
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
         AtenaSearchKeyBuilder atenaSearchKeyBuilder = new AtenaSearchKeyBuilder(
-                KensakuYusenKubun.未定義, AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給));
+                KensakuYusenKubun.未定義, AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBA介護資格));
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(atenaSearchKeyBuilder.build().get宛先検索キー());
         RString psmAtesaki = new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString());
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toHanyoRisutoKokuhoMybatisParameter(psmShikibetsuTaisho, psmAtesaki, 出力順));
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toHanyoRisutoKokiKoreishaMybatisParameter(psmShikibetsuTaisho, psmAtesaki, 出力順));
     }
 
     @Override
     protected void createWriter() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("HanyoList_Kokuho.csv"));
+        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("HanyoList_KokiKoreisha.csv"));
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -203,8 +203,8 @@ public class HanyoListKokuhoProcess extends BatchProcessBase<HanyoRisutoKokuhoEn
     }
 
     @Override
-    protected void process(HanyoRisutoKokuhoEntity entity) {
-        HanyoRisutoKokuhoEucCsvEntity eucCsvEntity = new HanyoRisutoKokuhoEucCsvEntity();
+    protected void process(HanyoRisutoKokiKoreishaEntity entity) {
+        HanyoRisutoKokiKoreishaEucCsvEntity eucCsvEntity = new HanyoRisutoKokiKoreishaEucCsvEntity();
         setEucCsvEntity(eucCsvEntity, entity);
         eucCsvWriter.writeLine(eucCsvEntity);
         personalDataList.add(toPersonalData(entity));
@@ -253,8 +253,8 @@ public class HanyoListKokuhoProcess extends BatchProcessBase<HanyoRisutoKokuhoEn
         return orderByClause.toRString();
     }
 
-    private HanyoRisutoKokuhoEucCsvEntity setBlank() {
-        HanyoRisutoKokuhoEucCsvEntity eucCsvEntity = new HanyoRisutoKokuhoEucCsvEntity();
+    private HanyoRisutoKokiKoreishaEucCsvEntity setBlank() {
+        HanyoRisutoKokiKoreishaEucCsvEntity eucCsvEntity = new HanyoRisutoKokiKoreishaEucCsvEntity();
         eucCsvEntity.set連番(RString.EMPTY);
         eucCsvEntity.set識別コード(RString.EMPTY);
         eucCsvEntity.set住民種別(RString.EMPTY);
@@ -386,7 +386,7 @@ public class HanyoListKokuhoProcess extends BatchProcessBase<HanyoRisutoKokuhoEn
         return eucCsvEntity;
     }
 
-    private void setBlank2(HanyoRisutoKokuhoEucCsvEntity eucCsvEntity) {
+    private void setBlank2(HanyoRisutoKokiKoreishaEucCsvEntity eucCsvEntity) {
         eucCsvEntity.set受給状況(RString.EMPTY);
         eucCsvEntity.set異動事由コード(RString.EMPTY);
         eucCsvEntity.set異動事由追加文(RString.EMPTY);
@@ -447,13 +447,11 @@ public class HanyoListKokuhoProcess extends BatchProcessBase<HanyoRisutoKokuhoEn
         eucCsvEntity.set訪問調査先住所(RString.EMPTY);
         eucCsvEntity.set訪問調査先名称(RString.EMPTY);
         eucCsvEntity.set訪問調査先電話番号(RString.EMPTY);
-        eucCsvEntity.set国保番号(RString.EMPTY);
-        eucCsvEntity.set国保保険者番号(RString.EMPTY);
-        eucCsvEntity.set国保保険証番号(RString.EMPTY);
-        eucCsvEntity.set国保個人番号(RString.EMPTY);
-        eucCsvEntity.set国保取得日(RString.EMPTY);
-        eucCsvEntity.set国保喪失日(RString.EMPTY);
-        eucCsvEntity.set国保登録区分(RString.EMPTY);
+        eucCsvEntity.set後期保険者番号(RString.EMPTY);
+        eucCsvEntity.set後期被保険者番号(RString.EMPTY);
+        eucCsvEntity.set後期取得日(RString.EMPTY);
+        eucCsvEntity.set後期喪失日(RString.EMPTY);
+        eucCsvEntity.set後期登録区分(RString.EMPTY);
         eucCsvEntity.set届出区分(RString.EMPTY);
         eucCsvEntity.set居宅計画作成区分(RString.EMPTY);
         eucCsvEntity.set計画事業者番号(RString.EMPTY);
@@ -469,7 +467,13 @@ public class HanyoListKokuhoProcess extends BatchProcessBase<HanyoRisutoKokuhoEn
         eucCsvEntity.set変更理由(RString.EMPTY);
     }
 
-    private void setEucCsvEntity(HanyoRisutoKokuhoEucCsvEntity eucCsvEntity, HanyoRisutoKokuhoEntity entity) {
+    private PersonalData toPersonalData(HanyoRisutoKokiKoreishaEntity entity) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
+                entity.get被保険者台帳管理_被保険者番号());
+        return PersonalData.of(entity.getPsmEntity() == null ? ShikibetsuCode.EMPTY : entity.getPsmEntity().getShikibetsuCode(), expandedInfo);
+    }
+
+    private void setEucCsvEntity(HanyoRisutoKokiKoreishaEucCsvEntity eucCsvEntity, HanyoRisutoKokiKoreishaEntity entity) {
         if (processParamter.isCsvrenbanfuka()) {
             eucCsvEntity.set連番(new RString(String.valueOf(++i)));
         }
@@ -520,25 +524,25 @@ public class HanyoListKokuhoProcess extends BatchProcessBase<HanyoRisutoKokuhoEn
             eucCsvEntity.set前住所番地(kojin.get転入前().get番地().getBanchi().value());
             eucCsvEntity.set前住所方書(kojin.get転入前().get方書().value());
         }
-        eucCsvEntity.set市町村コード(entity.get最新被保台帳_市町村コード());
+        eucCsvEntity.set市町村コード(entity.get被保険者台帳管理_市町村コード());
         eucCsvEntity.set市町村名(association.get市町村名());
         eucCsvEntity.set保険者コード(association.get地方公共団体コード().value());
         eucCsvEntity.set保険者名(association.getShichosonName_());
         eucCsvEntity.set空白(RString.EMPTY);
-        eucCsvEntity.set被保険者番号(entity.get最新被保台帳_被保険者番号());
-        eucCsvEntity.set資格取得事由(set資格取得事由(entity.get最新被保台帳_資格取得事由コード()));
-        eucCsvEntity.set資格取得日(set年月日(entity.get最新被保台帳_資格取得年月日()));
-        eucCsvEntity.set資格取得届出日(set年月日(entity.get最新被保台帳_資格取得届出年月日()));
-        eucCsvEntity.set喪失事由(set喪失事由(entity.get最新被保台帳_資格喪失事由コード()));
-        eucCsvEntity.set資格喪失日(set年月日(entity.get最新被保台帳_資格喪失年月日()));
-        eucCsvEntity.set資格喪失届日(set年月日(entity.get最新被保台帳_資格喪失届出年月日()));
-        eucCsvEntity.set資格区分(set資格区分(entity.get最新被保台帳_被保険者区分コード()));
-        eucCsvEntity.set住所地特例状態(new RString("1").equals(entity.get最新被保台帳_住所地特例フラグ()) ? 住所地特例 : RString.EMPTY);
+        eucCsvEntity.set被保険者番号(entity.get被保険者台帳管理_被保険者番号());
+        eucCsvEntity.set資格取得事由(set資格取得事由(entity.get被保険者台帳管理_資格取得事由コード()));
+        eucCsvEntity.set資格取得日(set年月日(entity.get被保険者台帳管理_資格取得年月日()));
+        eucCsvEntity.set資格取得届出日(set年月日(entity.get被保険者台帳管理_資格取得届出年月日()));
+        eucCsvEntity.set喪失事由(set喪失事由(entity.get被保険者台帳管理_資格喪失事由コード()));
+        eucCsvEntity.set資格喪失日(set年月日(entity.get被保険者台帳管理_資格喪失年月日()));
+        eucCsvEntity.set資格喪失届日(set年月日(entity.get被保険者台帳管理_資格喪失届出年月日()));
+        eucCsvEntity.set資格区分(set資格区分(entity.get被保険者台帳管理_被保険者区分コード()));
+        eucCsvEntity.set住所地特例状態(new RString("1").equals(entity.get被保険者台帳管理_住所地特例フラグ()) ? 住所地特例 : RString.EMPTY);
         LasdecCode lasdecCode;
-        if (new RString("1").equals(entity.get最新被保台帳_広域内住所地特例フラグ())) {
-            lasdecCode = new LasdecCode(entity.get最新被保台帳_広住特措置元市町村コード());
+        if (new RString("1").equals(entity.get被保険者台帳管理_広域内住所地特例フラグ())) {
+            lasdecCode = new LasdecCode(entity.get被保険者台帳管理_広住特措置元市町村コード());
         } else {
-            lasdecCode = new LasdecCode(entity.get最新被保台帳_市町村コード());
+            lasdecCode = new LasdecCode(entity.get被保険者台帳管理_市町村コード());
         }
         eucCsvEntity.set資格証記載保険者番号(hokenshaList.get(lasdecCode).get証記載保険者番号().value());
         eucCsvEntity.set医療保険種別(set医療保険種別(entity.get医療保険加入状況_医療保険種別コード()));
@@ -604,7 +608,7 @@ public class HanyoListKokuhoProcess extends BatchProcessBase<HanyoRisutoKokuhoEn
         setEucCsvEntity2(eucCsvEntity, entity);
     }
 
-    private void setEucCsvEntity2(HanyoRisutoKokuhoEucCsvEntity eucCsvEntity, HanyoRisutoKokuhoEntity entity) {
+    private void setEucCsvEntity2(HanyoRisutoKokiKoreishaEucCsvEntity eucCsvEntity, HanyoRisutoKokiKoreishaEntity entity) {
         eucCsvEntity.set意見依頼日(set年月日(entity.get今回意見書作成依頼_主治医意見書作成依頼年月日()));
         eucCsvEntity.set意見予定日(set年月日(entity.get今回計画情報_主治医意見書登録予定年月日()));
         eucCsvEntity.set意見取寄日(set年月日(entity.get今回意見書情報_主治医意見書受領年月日()));
@@ -695,13 +699,11 @@ public class HanyoListKokuhoProcess extends BatchProcessBase<HanyoRisutoKokuhoEn
         eucCsvEntity.set訪問調査先住所(entity.get今回調査委託先_住所());
         eucCsvEntity.set訪問調査先名称(entity.get今回調査委託先_事業者名称());
         eucCsvEntity.set訪問調査先電話番号(entity.get今回調査委託先_電話番号());
-        eucCsvEntity.set国保番号(entity.get国保資格情報_国保番号());
-        eucCsvEntity.set国保保険者番号(entity.get国保資格情報_国保保険者番号());
-        eucCsvEntity.set国保保険証番号(entity.get国保資格情報_国保保険証番号());
-        eucCsvEntity.set国保個人番号(entity.get国保資格情報_国保個人番号());
-        eucCsvEntity.set国保取得日(set年月日(entity.get国保資格情報_資格取得日()));
-        eucCsvEntity.set国保喪失日(set年月日(entity.get国保資格情報_喪失日()));
-        eucCsvEntity.set国保登録区分(set登録区分(entity.get国保資格情報_登録区分()));
+        eucCsvEntity.set後期保険者番号(entity.get後期高齢者情報_後期高齢保険者番号市町村());
+        eucCsvEntity.set後期被保険者番号(entity.get後期高齢者情報_被保険者番号());
+        eucCsvEntity.set後期取得日(set年月日(entity.get後期高齢者情報_資格取得日()));
+        eucCsvEntity.set後期喪失日(set年月日(entity.get後期高齢者情報_資格喪失日()));
+        eucCsvEntity.set後期登録区分(set登録区分(entity.get後期高齢者情報_登録区分()));
         eucCsvEntity.set届出区分(set届出区分(entity.get居宅届出_届出区分()));
         eucCsvEntity.set居宅計画作成区分(set居宅計画作成区分(entity.get事業者作成_作成区分コード()));
         eucCsvEntity.set計画事業者番号(entity.get事業者作成_計画事業者番号());
@@ -717,12 +719,6 @@ public class HanyoListKokuhoProcess extends BatchProcessBase<HanyoRisutoKokuhoEn
         eucCsvEntity.set変更理由(entity.get自己作成_計画変更事由());
         eucCsvEntity.set一次判定日(set年月日(entity.get今回一次判定結果_要介護認定一次判定年月日()));
         eucCsvEntity.set要介護度(set要介護度(entity.get今回申請_厚労省IF識別コード(), entity.get受給者台帳_要介護認定状態区分コード()));
-    }
-
-    private PersonalData toPersonalData(HanyoRisutoKokuhoEntity entity) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
-                entity.get最新被保台帳_被保険者番号());
-        return PersonalData.of(entity.getPsmEntity() == null ? ShikibetsuCode.EMPTY : entity.getPsmEntity().getShikibetsuCode(), expandedInfo);
     }
 
     private RString setみなし更新認定(RString みなし要介護区分コード) {
@@ -985,8 +981,8 @@ public class HanyoListKokuhoProcess extends BatchProcessBase<HanyoRisutoKokuhoEn
         RString 市町村名 = association.get市町村名();
         RString 出力ページ数 = new RString(String.valueOf(eucCsvWriter.getCount()));
         RString csv出力有無 = new RString("無し");
-        RString 日本語ファイル名 = new RString("汎用リスト　国保CSV");
-        RString 英数字ファイル名 = new RString("HanyoList_Kokuho.csv");
+        RString 日本語ファイル名 = new RString("汎用リスト　後期高齢者CSV");
+        RString 英数字ファイル名 = new RString("HanyoList_Kokikoreisya.csv");
         RString ジョブ番号 = new RString(String.valueOf(JobContextHolder.getJobId()));
         List<RString> 出力条件 = new ArrayList<>();
         出力条件.add(CYUSYUTSUTAISYOSHA);
@@ -1038,7 +1034,7 @@ public class HanyoListKokuhoProcess extends BatchProcessBase<HanyoRisutoKokuhoEn
             出力条件.add(get地区選択区分情報());
         }
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
-                new RString("DBD701011"),
+                new RString("DBD701012"),
                 導入団体コード,
                 市町村名,
                 ジョブ番号,
@@ -1150,5 +1146,4 @@ public class HanyoListKokuhoProcess extends BatchProcessBase<HanyoRisutoKokuhoEn
         }
         return builder.toRString();
     }
-
 }

@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd710090;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd710110;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd710090.HanyoListKokiKoreishaProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710120.DBD710120_HanyoListKokiKoreishaParameter;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd710110.HanyoListKokuhoProcess;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710110.DBD710110_HanyoListKokuhoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
- * 汎用リスト出力(後期高齢者)のバッチフロークラスです。
+ * 汎用リスト出力(国保)のバッチフロークラスです。
  *
- * @reamsid_L DBD-5520-030 mawy
+ * @reamsid_L DBD-5510-030 mawy
  */
-public class HanyoListKokiKoreishaFlow extends BatchFlowBase<DBD710120_HanyoListKokiKoreishaParameter> {
+public class HanyoListKokuhoFlow extends BatchFlowBase<DBD710110_HanyoListKokuhoParameter> {
 
     @Override
     protected void defineFlow() {
@@ -32,8 +32,8 @@ public class HanyoListKokiKoreishaFlow extends BatchFlowBase<DBD710120_HanyoList
      */
     @Step(CSV_PROCESS)
     protected IBatchFlowCommand reportProcess() {
-        return loopBatch(HanyoListKokiKoreishaProcess.class)
-                .arguments(getParameter().toHanyoRisutoKokiKoreishaProcessParameter())
+        return loopBatch(HanyoListKokuhoProcess.class)
+                .arguments(getParameter().toHanyoRisutoKokuhoProcessParameter())
                 .define();
     }
 }
