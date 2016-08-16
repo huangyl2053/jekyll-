@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7131KaigoServiceNaiyou
 import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -52,7 +54,8 @@ public class KaigoServiceNaiyouManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KaigoJigyoshaManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link KaigoJigyoshaManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link KaigoJigyoshaManager}のインスタンス
      */
     public static KaigoServiceNaiyouManager createInstance() {
         return InstanceProvider.create(KaigoServiceNaiyouManager.class);
@@ -100,6 +103,45 @@ public class KaigoServiceNaiyouManager {
     public List<KaigoServiceNaiyou> getServiceCodeList(SabisuKodoParameter parameter) {
         IDbT7131KaigoServiceNaiyouMapper mapper = mapperProvider.create(IDbT7131KaigoServiceNaiyouMapper.class);
         List<DbT7131KaigoServiceNaiyouEntity> サービスコード情報リスト = mapper.getKaigoServiceNaiyou(parameter);
+        List<KaigoServiceNaiyou> サービスコード情報検索リスト = new ArrayList<>();
+        for (DbT7131KaigoServiceNaiyouEntity kaigoServiceNaiyouEntity : サービスコード情報リスト) {
+            サービスコード情報検索リスト.add(new KaigoServiceNaiyou(kaigoServiceNaiyouEntity));
+        }
+        return サービスコード情報検索リスト;
+    }
+
+    /**
+     * サービスコード取得を取得します。
+     *
+     * @param サービス種類コード サービス種類コード
+     * @param サービス項目コード サービス項目コード
+     * @return List<KaigoServiceNaiyou>
+     */
+    public List<KaigoServiceNaiyou> getServiceCodeList(RString サービス種類コード,
+            RString サービス項目コード) {
+        List<DbT7131KaigoServiceNaiyouEntity> サービスコード情報リスト
+                = dac.getサービス情報(new ServiceShuruiCode(サービス種類コード),
+                        サービス項目コード);
+        List<KaigoServiceNaiyou> サービスコード情報検索リスト = new ArrayList<>();
+        for (DbT7131KaigoServiceNaiyouEntity kaigoServiceNaiyouEntity : サービスコード情報リスト) {
+            サービスコード情報検索リスト.add(new KaigoServiceNaiyou(kaigoServiceNaiyouEntity));
+        }
+        return サービスコード情報検索リスト;
+    }
+
+    /**
+     * サービスコードのフォーカスアウトを取得します。
+     *
+     * @param サービス種類コード サービス種類コード
+     * @param サービス項目コード サービス項目コード
+     * @param 利用年月 利用年月
+     * @return List<KaigoServiceNaiyou>
+     */
+    public List<KaigoServiceNaiyou> getServiceList(RString サービス種類コード,
+            RString サービス項目コード, FlexibleYearMonth 利用年月) {
+        List<DbT7131KaigoServiceNaiyouEntity> サービスコード情報リスト = dac.getサービス内容(new ServiceShuruiCode(サービス種類コード),
+                サービス項目コード,
+                利用年月);
         List<KaigoServiceNaiyou> サービスコード情報検索リスト = new ArrayList<>();
         for (DbT7131KaigoServiceNaiyouEntity kaigoServiceNaiyouEntity : サービスコード情報リスト) {
             サービスコード情報検索リスト.add(new KaigoServiceNaiyou(kaigoServiceNaiyouEntity));
