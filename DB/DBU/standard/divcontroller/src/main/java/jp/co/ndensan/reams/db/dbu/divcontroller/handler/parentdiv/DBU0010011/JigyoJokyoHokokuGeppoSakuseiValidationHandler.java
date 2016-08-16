@@ -15,8 +15,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
+ * 事業状況報告（月報）作成の入力チェックを処理です。
  *
- * @author wangkun
+ * @reamsid_L DBU-5550-010 dangjingjing
  */
 public class JigyoJokyoHokokuGeppoSakuseiValidationHandler {
 
@@ -29,14 +30,12 @@ public class JigyoJokyoHokokuGeppoSakuseiValidationHandler {
     /**
      * DBZE00002「必須項目を入力してください。:%1」
      *
-     * @param 引数 引数
-     * @return validPairs
+     * @return check必須入力項目
      */
-    public ValidationMessageControlPairs check必須入力項目(RString 引数) {
+    public ValidationMessageControlPairs check必須入力項目() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         validPairs.add(new ValidationMessageControlPair(new JigyoJokyoHokokuGeppoSakuseiValidationHandler.CheckMessages(
-                UrErrorMessages.必須項目_追加メッセージあり,
-                引数.toString())));
+                UrErrorMessages.必須項目_追加メッセージあり, "報告年月")));
         return validPairs;
     }
 

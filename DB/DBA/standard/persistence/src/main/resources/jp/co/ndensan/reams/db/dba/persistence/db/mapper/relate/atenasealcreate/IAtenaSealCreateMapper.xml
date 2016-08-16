@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBA-1210-030 zhengsongling -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.atenasealcreate.IAtenaSealCreateMapper">
+     <resultMap id="resultMap_getTekiyoKaisha" type="jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.AtenaSealCreateRelateEntity" autoMapping="true">
+<result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+<association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+<association property="atesakiEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
+     </resultMap>
+    <select resultOrdered="true" id="getTekiyoKaisha" resultMap="resultMap_getTekiyoKaisha"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.atenasealcreate.AtenaSealCreateMybatisParameter"
+            fetchSize="500">
+      SELECT
+            T1001."hihokenshaNo" AS "被保険者番号",
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+              <if test="is送付先または代納人">
+            ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
+              </if>
+      FROM
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho"/>
+            AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+      INNER JOIN
+            rgdb."DbT1001HihokenshaDaicho" AS T1001
+      ON
+            T1001."shikibetsuCode" = <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
+      AND
+            T1001."hihokennshaKubunCode" IN 
+             <foreach collection="kubun_1" item="kubun1" open="(" separator="," close=")"> #{kubun1} </foreach>
+      AND
+            T1001."logicalDeletedFlag" =FALSE
+      AND
+            (T1001."shikakuSoshitsuYMD" IS NULL
+            OR T1001."shikakuSoshitsuYMD" = '')
+      LEFT JOIN
+          <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" /> AS "Atesaki"
+      ON
+          <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = "Atesaki"."shikibetsuCode"
+      AND
+          "Atesaki"."gyomuCode" = 'DBA'
+      AND
+          "Atesaki"."juminShubetsuCode" = <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."juminShubetsuCode"
+      AND
+           "Atesaki"."juminJotaiCode" = <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."juminJotaiCode"    
+      WHERE
+          <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."juminShubetsuCode" IN
+          <foreach collection="shubetsu_1" item="shubetsu1" open="(" separator="," close=")"> #{shubetsu1} </foreach>
+      AND
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."juminJotaiCode" IN 
+            <foreach collection="shubetsu_2" item="shubetsu2" open="(" separator="," close=")"> #{shubetsu2} </foreach>
+      AND
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."juminShubetsuCode" IN 
+            <foreach collection="kubun_2" item="kubun2" open="(" separator="," close=")"> #{kubun2} </foreach>
+      <if test="is年齢到達日">
+          <if test="is第1号開始年月日">
+      AND
+              #{kankaishibi_第１号} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD"  
+      AND
+           <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD" <![CDATA[<=]]> #{shuuryoubi_第１号}         
+          </if>
+       <if test="is第2号開始年月日">
+      AND
+              #{kankaishibi_第２号} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD"  
+      AND
+           <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD" <![CDATA[<=]]> #{shuuryoubi_第２号}         
+          </if>
+          <if test="is資格区分_全て">
+      AND
+              (#{kankaishibi_第１号} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD"
+      OR
+              #{kankaishibi_第２号} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD" )  
+      AND
+              (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD" <![CDATA[<=]]>#{shuuryoubi_第１号}
+      OR
+              <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD" <![CDATA[<=]]>#{shuuryoubi_第２号})
+          </if>
+      </if>
+      <if test="has市町村指定">
+      AND
+          <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."genLasdecCode" = #{shichousonshitei}
+      </if>
+    </select>
+    
+    
+    
+    <select  resultOrdered="true" id="getIttoki"  resultType="int" fetchSize="500">
+        SELECT
+            COUNT(1)
+        FROM
+            "DbWT2009AtenaShikibetuTaisyou1"
+    </select>
+    
+    
+    
+     <resultMap id="resultMap_getHihokenshadai" type="jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.AtenaSealCreateRelateEntity" autoMapping="true">
+<result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+<result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+<result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+<association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+<association property="atesakiEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
+     </resultMap>
+     <select  resultOrdered="true" id="getHihokenshadai" resultMap="resultMap_getHihokenshadai"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.atenasealcreate.AtenaSealCreateMybatisParameter"
+            fetchSize="500">
+        SELECT
+            T1001."hihokenshaNo" AS "被保険者番号",
+            T1001."shichosonCode" AS "市町村コード",
+            T1001."shikibetsuCode" AS "識別コード",
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+            <if test="is送付先または代納人">
+           , <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
+            </if>
+      FROM
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho"/>
+            AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho"/>
+      INNER JOIN
+            rgdb."DbT1001HihokenshaDaicho" AS T1001
+     ON
+            T1001."shikibetsuCode" = <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho"/>."shikibetsuCode"
+      AND
+            T1001."hihokennshaKubunCode" IN  
+            <foreach collection="kubun_1" item="kubun1" open="(" separator="," close=")"> #{kubun1} </foreach>
+      AND
+            T1001."shikakuSoshitsuYMD" = '99999999'
+      AND
+            T1001."logicalDeletedFlag" = FALSE
+     <if test="isDBA業務コード">
+         <if test="is第1号開始年月日">
+      AND
+              #{kankaishibi_第１号} <![CDATA[<=]]> T1001."shikakuShutokuYMD"
+      AND
+           T1001."shikakuShutokuYMD" <![CDATA[<=]]> #{shuuryoubi_第１号}         
+          </if>
+            <if test="is第2号開始年月日">
+      AND
+              #{kankaishibi_第２号} <![CDATA[<=]]> T1001."shikakuShutokuYMD" 
+      AND
+           T1001."shikakuShutokuYMD" <![CDATA[<=]]> #{shuuryoubi_第２号}         
+          </if>
+          <if test="is資格区分_全て">
+      AND
+              (#{kankaishibi_第１号} <![CDATA[<=]]> T1001."shikakuShutokuYMD"
+      OR
+              #{kankaishibi_第２号} <![CDATA[<=]]> T1001."shikakuShutokuYMD" )  
+      AND
+              (T1001."shikakuShutokuYMD" <![CDATA[<=]]>#{shuuryoubi_第１号}
+      OR
+              T1001."shikakuShutokuYMD" <![CDATA[<=]]>#{shuuryoubi_第２号})
+          </if>
+      </if>
+                <if test="is抽出対象者1">
+      AND
+              T1001."jushochiTokureiFlag" = '1'
+                </if>
+                <if test="is市町村指定">
+      AND
+              T1001."shichosonCode" = #{shichousonshitei}  
+                </if>
+      LEFT JOIN
+          <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki"/> AS "Atesaki"
+      ON
+          <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho"/>."shikibetsuCode" = "Atesaki"."shikibetsuCode"
+      AND
+          "Atesaki"."gyomuCode" = 'DBA'
+      AND
+          "Atesaki"."juminShubetsuCode" = <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."juminShubetsuCode"
+      AND
+           "Atesaki"."juminJotaiCode" = <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."juminJotaiCode"
+      WHERE
+      <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho"/>."juminShubetsuCode" IN
+      <foreach collection="shubetsu_1" item="shubetsu1" open="(" separator="," close=")"> #{shubetsu1} </foreach>
+      AND
+      <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho"/>."juminJotaiCode" IN
+      <foreach collection="shubetsu_2" item="shubetsu2" open="(" separator="," close=")"> #{shubetsu2} </foreach>
+      AND
+      <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho"/>."juminShubetsuCode" IN 
+      <foreach collection="kubun_2" item="kubun2" open="(" separator="," close=")"> #{kubun2} </foreach>
+      <if test="has市町村指定">
+           <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho"/>."genLasdecCode" = #{shichousonshitei}
+      </if>
+    </select>
+
+</mapper>

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futanngenndogakuninntei;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd1200902.ShakaiFukushiHoujinnKeigenNinnteiMybatisParameter;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd1200902.ShakaiFukushiHoujinnKeigenTsuuchishoMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.ShakaiFukushiHoujinnKeigenTsuuchishoEntity;
 
 /**
@@ -22,5 +22,5 @@ public interface IShakaiFukushiHoujinnKeigenTsuuchishoMapper {
      * @param parameter パラメター
      * @return 社会福祉法人等軽減の通知書発行情報
      */
-    List<ShakaiFukushiHoujinnKeigenTsuuchishoEntity> get社会福祉法人等軽減の通知書発行情報(ShakaiFukushiHoujinnKeigenNinnteiMybatisParameter parameter);
+    List<ShakaiFukushiHoujinnKeigenTsuuchishoEntity> get社会福祉法人等軽減の通知書発行情報(ShakaiFukushiHoujinnKeigenTsuuchishoMybatisParameter parameter);
 }

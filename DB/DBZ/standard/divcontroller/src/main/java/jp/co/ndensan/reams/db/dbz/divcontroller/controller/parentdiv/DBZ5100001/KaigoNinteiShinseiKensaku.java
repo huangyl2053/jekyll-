@@ -125,6 +125,8 @@ public class KaigoNinteiShinseiKensaku {
 
         ViewStateHolder.put(ViewStateKeys.申請書管理番号, div.getKensakuKekka().
                 getDgKensakuKekkaIchiran().getActiveRow().getShinseishoKnriNo());
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, div.getKensakuKekka().
+                getDgKensakuKekkaIchiran().getActiveRow().getHihokenshaNo());
         GyomuBunrui bunrui = get受給と認定の判定();
         if (GyomuBunrui.介護事務.equals(bunrui)
                 || GyomuBunrui.介護認定.equals(bunrui)) {

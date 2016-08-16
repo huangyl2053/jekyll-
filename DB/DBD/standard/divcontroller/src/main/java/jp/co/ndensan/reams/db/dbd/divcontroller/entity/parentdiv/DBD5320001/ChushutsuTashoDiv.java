@@ -99,10 +99,10 @@ public class ChushutsuTashoDiv extends Panel {
     private TextBoxTime txtKubunHenkoKonkaiTimeTo;
     @JsonProperty("ccdIkkatsuNinteiKekkaBunshoBango")
     private BunshoBangoInputDiv ccdIkkatsuNinteiKekkaBunshoBango;
-    @JsonProperty("ccdIkkatsuServiceHenkoBunshoBango")
-    private BunshoBangoInputDiv ccdIkkatsuServiceHenkoBunshoBango;
     @JsonProperty("ccdIkkatsuKubunHenkoBunshoBango")
     private BunshoBangoInputDiv ccdIkkatsuKubunHenkoBunshoBango;
+    @JsonProperty("ccdIkkatsuServiceHenkoBunshoBango")
+    private BunshoBangoInputDiv ccdIkkatsuServiceHenkoBunshoBango;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -786,21 +786,21 @@ public class ChushutsuTashoDiv extends Panel {
     }
 
     /*
-     * getccdIkkatsuServiceHenkoBunshoBango
-     * @return ccdIkkatsuServiceHenkoBunshoBango
-     */
-    @JsonProperty("ccdIkkatsuServiceHenkoBunshoBango")
-    public IBunshoBangoInputDiv getCcdIkkatsuServiceHenkoBunshoBango() {
-        return ccdIkkatsuServiceHenkoBunshoBango;
-    }
-
-    /*
      * getccdIkkatsuKubunHenkoBunshoBango
      * @return ccdIkkatsuKubunHenkoBunshoBango
      */
     @JsonProperty("ccdIkkatsuKubunHenkoBunshoBango")
     public IBunshoBangoInputDiv getCcdIkkatsuKubunHenkoBunshoBango() {
         return ccdIkkatsuKubunHenkoBunshoBango;
+    }
+
+    /*
+     * getccdIkkatsuServiceHenkoBunshoBango
+     * @return ccdIkkatsuServiceHenkoBunshoBango
+     */
+    @JsonProperty("ccdIkkatsuServiceHenkoBunshoBango")
+    public IBunshoBangoInputDiv getCcdIkkatsuServiceHenkoBunshoBango() {
+        return ccdIkkatsuServiceHenkoBunshoBango;
     }
 
     // </editor-fold>

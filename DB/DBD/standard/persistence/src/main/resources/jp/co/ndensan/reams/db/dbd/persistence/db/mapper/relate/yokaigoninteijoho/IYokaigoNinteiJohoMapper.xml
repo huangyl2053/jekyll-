@@ -6,6 +6,11 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.yokaigoninteijoho.IYokaigoNinteiJohoMapper">
     <resultMap id="ResultMap_NowYokaigoNinteiJohoEntityWithoutKekka" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiJohoEntity" autoMapping="true">
+        <id column="dbT4001JukyushaDaicho_shichosonCode" />
+        <id column="dbT4001JukyushaDaicho_hihokenshaNo" />
+        <id column="dbT4001JukyushaDaicho_rirekiNo" />
+        <id column="dbT4001JukyushaDaicho_edaban"/>
+        <id column="dbT4001JukyushaDaicho_jukyuShinseiJiyu" />
         <id property="要介護認定申請情報受給Entity.shinseishoKanriNo" column="dbT4101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <association property="要介護認定申請情報受給Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"/>
         <association property="受給者台帳Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
@@ -17,6 +22,11 @@
     </resultMap>
     
     <resultMap id="ResultMap_NowYokaigoNinteiJohoEntityWithKekka" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiJohoEntity" autoMapping="true">
+        <id column="dbT4001JukyushaDaicho_shichosonCode" />
+        <id column="dbT4001JukyushaDaicho_hihokenshaNo" />
+        <id column="dbT4001JukyushaDaicho_rirekiNo" />
+        <id column="dbT4001JukyushaDaicho_edaban"/>
+        <id column="dbT4001JukyushaDaicho_jukyuShinseiJiyu" />
         <id property="要介護認定申請情報受給Entity.shinseishoKanriNo" column="dbT4101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <association property="要介護認定申請情報受給Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"/>
         <association property="受給者台帳Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
@@ -29,6 +39,11 @@
     </resultMap>
     
     <resultMap id="ResultMap_OldYokaigoNinteiJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiJohoEntity" autoMapping="true">
+        <id column="dbT4001JukyushaDaicho_shichosonCode" />
+        <id column="dbT4001JukyushaDaicho_hihokenshaNo" />
+        <id column="dbT4001JukyushaDaicho_rirekiNo" />
+        <id column="dbT4001JukyushaDaicho_edaban"/>
+        <id column="dbT4001JukyushaDaicho_jukyuShinseiJiyu" />
         <id property="要介護認定申請情報受給Entity.shinseishoKanriNo" column="dbT4101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <association property="要介護認定申請情報受給Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"/>
         <association property="受給者台帳Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
@@ -203,6 +218,11 @@
      
 
      <resultMap id="ResultMap_JyukyuYokaigoNinteiJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiJohoEntity" autoMapping="true">
+        <id column="dbT4001JukyushaDaicho_shichosonCode" />
+        <id column="dbT4001JukyushaDaicho_hihokenshaNo" />
+        <id column="dbT4001JukyushaDaicho_rirekiNo" />
+        <id column="dbT4001JukyushaDaicho_edaban"/>
+        <id column="dbT4001JukyushaDaicho_jukyuShinseiJiyu" />
         <id property="要介護認定申請情報受給Entity.shinseishoKanriNo" column="dbT4101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <association property="要介護認定申請情報受給Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"/>
         <association property="受給者台帳Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
@@ -256,6 +276,11 @@
      </select>
      
      <resultMap id="ResultMap_NinteiYokaigoNinteiJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiJohoEntity" autoMapping="true">
+        <id column="dbT4001JukyushaDaicho_shichosonCode" />
+        <id column="dbT4001JukyushaDaicho_hihokenshaNo" />
+        <id column="dbT4001JukyushaDaicho_rirekiNo" />
+        <id column="dbT4001JukyushaDaicho_edaban"/>
+        <id column="dbT4001JukyushaDaicho_jukyuShinseiJiyu" />
         <id property="要介護認定申請情報認定Entity.shinseishoKanriNo" column="dbT5101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <association property="要介護認定申請情報認定Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"/>
         <association property="受給者台帳Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
@@ -318,6 +343,12 @@
      </update>
      
      <resultMap id="ResultMap_YokaigoRirekiJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoRirekiJohoEntity" autoMapping="true">
+        <id column="dbT4001JukyushaDaicho_shichosonCode" />
+        <id column="dbT4001JukyushaDaicho_hihokenshaNo" />
+        <id column="dbT4001JukyushaDaicho_rirekiNo" />
+        <id column="dbT4001JukyushaDaicho_edaban"/>
+        <id column="dbT4001JukyushaDaicho_jukyuShinseiJiyu" />
+        <id property="要介護認定申請情報受給Entity.shinseishoKanriNo" column="dbT5101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <association property="要介護認定申請情報受給Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"/>
         <association property="受給者台帳Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
         <association property="認定調査委託先情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4910NinteichosaItakusakiJohoMapper.ResultMap_DbT4910NinteichosaItakusakiJohoEntity"/>

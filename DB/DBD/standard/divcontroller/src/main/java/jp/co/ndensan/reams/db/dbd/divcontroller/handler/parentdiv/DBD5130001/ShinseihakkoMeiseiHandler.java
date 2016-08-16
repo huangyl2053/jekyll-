@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5130001;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd501002.ShinseiShoEntity;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5130001.NinteishinseihakkoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5130001.ShinseihakkoMeiseiDiv;
 import jp.co.ndensan.reams.db.dbd.service.core.ninteikanryoninteishinseijoho.NinteiKanryoNinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunHorei;
@@ -39,7 +38,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShinseihakkoMeiseiHandler {
 
     private final ShinseihakkoMeiseiDiv div;
-    private final NinteishinseihakkoDiv ninteishinseihakkodiv;
+//    private final NinteishinseihakkoDiv ninteishinseihakkodiv;
     private static final RString 画面区分 = new RString("2");
     private static final RString 正 = new RString("○");
     private static final long NO_10 = 10;
@@ -66,11 +65,9 @@ public class ShinseihakkoMeiseiHandler {
      * コンストラクタです。
      *
      * @param div ShinseihakkoMeiseiDiv
-     * @param ninteishinseihakkodiv ninteishinseihakkodiv
      */
-    public ShinseihakkoMeiseiHandler(ShinseihakkoMeiseiDiv div, NinteishinseihakkoDiv ninteishinseihakkodiv) {
+    public ShinseihakkoMeiseiHandler(ShinseihakkoMeiseiDiv div) {
         this.div = div;
-        this.ninteishinseihakkodiv = ninteishinseihakkodiv;
     }
 
     /**
@@ -94,25 +91,27 @@ public class ShinseihakkoMeiseiHandler {
         if (介護導入形態.equals(コード211)) {
             介護導入形態 = 広域審査会;
         }
-        ninteishinseihakkodiv.getCcdKaigoNinteiAtenaInfo().setKaigoDonyuKeitai(介護導入形態);
-        ninteishinseihakkodiv.getCcdKaigoNinteiAtenaInfo().setShoriType(コード);
-        ninteishinseihakkodiv.getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(ShinseishoKanriNo.EMPTY, shikibetsuCode);
-        ninteishinseihakkodiv.getCcdKaigoNinteiAtenaInfo().initialize();
-        ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().initialize(shichosonSecurityJoho.get市町村情報().get市町村コード().value(), 被保険者番号.value());
+        div.getNinteishinseihakko().getCcdKaigoNinteiAtenaInfo().setKaigoDonyuKeitai(介護導入形態);
+        div.getNinteishinseihakko().getCcdKaigoNinteiAtenaInfo().setShoriType(コード);
+        div.getNinteishinseihakko().getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(ShinseishoKanriNo.EMPTY, shikibetsuCode);
+        div.getNinteishinseihakko().getCcdKaigoNinteiAtenaInfo().initialize();
+        div.getNinteishinseihakko().getCcdKaigoninteiShikakuInfo().initialize(shichosonSecurityJoho.get市町村情報().get市町村コード().value(), 被保険者番号.value());
         NinteiKanryoNinteiShinseiJohoManager manager = NinteiKanryoNinteiShinseiJohoManager.createInstance();
-        NinteiShinseiJohoChild entity = manager.get要介護認定申請情報(ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().getHookenshaCode(),
-                ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue());
-        NinteiKanryoJoho ninteiKanryoJoho = manager.selectByShinseishoKanriNo(entity.get申請書管理番号());
-        if (ninteiKanryoJoho == null) {
-            checkninteiKanryoJoho(entity);
-        } else {
-            setZenkaiShinseiNaiyoinfo(entity.get認定申請区分_法令_コード().getColumnValue(),
-                    entity.get認定申請区分_申請時_コード().getColumnValue(),
-                    new RDate(entity.get認定申請年月日().toString()));
+        NinteiShinseiJohoChild entity = manager.get要介護認定申請情報(div.getNinteishinseihakko().getCcdKaigoninteiShikakuInfo().getHookenshaCode(),
+                div.getNinteishinseihakko().getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue());
+        if (entity != null) {
+            NinteiKanryoJoho ninteiKanryoJoho = manager.selectByShinseishoKanriNo(entity.get申請書管理番号());
+            if (ninteiKanryoJoho == null) {
+                checkninteiKanryoJoho(entity);
+            } else {
+                setZenkaiShinseiNaiyoinfo(entity.get認定申請区分_法令_コード().getColumnValue(),
+                        entity.get認定申請区分_申請時_コード().getColumnValue(),
+                        new RDate(entity.get認定申請年月日().toString()));
+            }
+            div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().onLoad(SubGyomuCode.DBD介護受給, entity.get申請書管理番号(), 画面区分);
         }
-        div.getCcdZenkaiNinteiKekkaJoho().onLoad(SubGyomuCode.DBD介護受給, entity.get申請書管理番号(), 画面区分);
-        div.getCcdKyotakuServiceKeikakuInfo().initialize(被保険者番号);
-        div.getCcdShusetSunyushoInfo().onLoad(shikibetsuCode);
+        div.getShinseihakkoMeisei2().getCcdKyotakuServiceKeikakuInfo().initialize(被保険者番号);
+        div.getShinseihakkoMeisei2().getCcdShusetSunyushoInfo().onLoad(shikibetsuCode);
     }
 
     /**
@@ -123,11 +122,11 @@ public class ShinseihakkoMeiseiHandler {
     public ShinseiShoEntity getShinseiShoEntity() {
         NinteiKanryoNinteiShinseiJohoManager manager = NinteiKanryoNinteiShinseiJohoManager.createInstance();
         ShinseiShoEntity shinseiShoEntity = new ShinseiShoEntity();
-        int radPrintMeeisaiSelectIndex = div.getPrintSelect().getRadPrintMeeisaiInfo().getSelectedIndex();
-        int radShinseiKubunSelectIndex = div.getPrintSelect().getRadShinseiKubun().getSelectedIndex();
-        int radShinseishaKubunSelectIndex = div.getPrintSelect().getRadShinseishaKubun().getSelectedIndex();
-        KaigoninteiShikakuInfoDiv kaigoninteiShikakuInfoDiv = (KaigoninteiShikakuInfoDiv) ninteishinseihakkodiv.getCcdKaigoninteiShikakuInfo();
-        KaigoNinteiAtenaInfoDiv kaigoNinteiAtenaInfoDiv = (KaigoNinteiAtenaInfoDiv) ninteishinseihakkodiv.getCcdKaigoNinteiAtenaInfo();
+        int radPrintMeeisaiSelectIndex = div.getShinseihakkoMeisei2().getPrintSelect().getRadPrintMeeisaiInfo().getSelectedIndex();
+        int radShinseiKubunSelectIndex = div.getShinseihakkoMeisei2().getPrintSelect().getRadShinseiKubun().getSelectedIndex();
+        int radShinseishaKubunSelectIndex = div.getShinseihakkoMeisei2().getPrintSelect().getRadShinseishaKubun().getSelectedIndex();
+        KaigoninteiShikakuInfoDiv kaigoninteiShikakuInfoDiv = (KaigoninteiShikakuInfoDiv) div.getNinteishinseihakko().getCcdKaigoninteiShikakuInfo();
+        KaigoNinteiAtenaInfoDiv kaigoNinteiAtenaInfoDiv = (KaigoNinteiAtenaInfoDiv) div.getNinteishinseihakko().getCcdKaigoNinteiAtenaInfo();
         if (radShinseishaKubunSelectIndex == 0) {
             shinseiShoEntity.set被保険者番号(kaigoninteiShikakuInfoDiv.getTxtHihokenshaNo().getText());
             long hihokenshaNo = Long.parseLong(kaigoninteiShikakuInfoDiv.getTxtHihokenshaNo().getValue().toString());
@@ -173,11 +172,11 @@ public class ShinseihakkoMeiseiHandler {
     }
 
     private void setZenkaiShinseiNaiyoinfo(RString 認定申請区分法令, RString 認定申請区分申請時, RDate ninteiShinseiYMD) {
-        div.getZenkaiShinseiNaiyo().getTxtShinseiKubunShinseiji().setValue(new RString(NinteiShinseiKubunHorei.toValue(
+        div.getShinseihakkoMeisei2().getZenkaiShinseiNaiyo().getTxtShinseiKubunShinseiji().setValue(new RString(NinteiShinseiKubunHorei.toValue(
                 Integer.parseInt(認定申請区分法令.toString())).name()));
-        div.getZenkaiShinseiNaiyo().getTxtShinseiKubunHorei().setValue(new RString(NinteiShinseiKubunShinsei.toValue(
+        div.getShinseihakkoMeisei2().getZenkaiShinseiNaiyo().getTxtShinseiKubunHorei().setValue(new RString(NinteiShinseiKubunShinsei.toValue(
                 Integer.parseInt(認定申請区分申請時.toString())).name()));
-        div.getZenkaiShinseiNaiyo().getTxtZenkaiShinseiDate().setValue(ninteiShinseiYMD);
+        div.getShinseihakkoMeisei2().getZenkaiShinseiNaiyo().getTxtZenkaiShinseiDate().setValue(ninteiShinseiYMD);
     }
 
     private void checkninteiKanryoJoho(NinteiShinseiJohoChild entity) {
@@ -234,42 +233,42 @@ public class ShinseihakkoMeiseiHandler {
     }
 
     private ShinseiShoEntity set状態区分(int radPrintMeeisaiSelectIndex, ShinseiShoEntity shinseiShoEntity) {
-        shinseiShoEntity.set有効期間開始年月日(div.getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getText());
-        shinseiShoEntity.set有効開始年YYYY(div.getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getValue().getYear().toDateString());
+        shinseiShoEntity.set有効期間開始年月日(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getText());
+        shinseiShoEntity.set有効開始年YYYY(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getValue().getYear().toDateString());
         shinseiShoEntity.set有効開始月MM(new RString(String.valueOf(
-                div.getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getValue().getMonthValue())));
+                div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getValue().getMonthValue())));
         shinseiShoEntity.set有効開始日DD(new RString(String.valueOf(
-                div.getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getValue().getDayValue())));
-        shinseiShoEntity.set有効期間終了年月日(div.getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().getText());
-        shinseiShoEntity.set有効終了年YYYY(div.getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().getValue().getYear().toDateString());
+                div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getValue().getDayValue())));
+        shinseiShoEntity.set有効期間終了年月日(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().getText());
+        shinseiShoEntity.set有効終了年YYYY(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().getValue().getYear().toDateString());
         shinseiShoEntity.set有効終了月MM(new RString(String.valueOf(
-                div.getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().getValue().getMonthValue())));
+                div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().getValue().getMonthValue())));
         shinseiShoEntity.set有効終了日DD(new RString(String.valueOf(
-                div.getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().getValue().getDayValue())));
+                div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().getValue().getDayValue())));
         if (radPrintMeeisaiSelectIndex == 0) {
-            shinseiShoEntity.set要介護状態区分(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue());
-            if ("要介護1".equals(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue().toString())) {
+            shinseiShoEntity.set要介護状態区分(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue());
+            if ("要介護1".equals(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue().toString())) {
                 shinseiShoEntity.set要介護状態区分1(正);
             }
-            if ("要介護2".equals(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue().toString())) {
+            if ("要介護2".equals(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue().toString())) {
                 shinseiShoEntity.set要介護状態区分2(正);
             }
-            if ("要介護3".equals(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue().toString())) {
+            if ("要介護3".equals(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue().toString())) {
                 shinseiShoEntity.set要介護状態区分3(正);
             }
-            if ("要介護4".equals(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue().toString())) {
+            if ("要介護4".equals(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue().toString())) {
                 shinseiShoEntity.set要介護状態区分4(正);
             }
-            if ("要介護5".equals(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue().toString())) {
+            if ("要介護5".equals(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue().toString())) {
                 shinseiShoEntity.set要介護状態区分5(正);
             }
         }
         if (radPrintMeeisaiSelectIndex == 1) {
-            shinseiShoEntity.set要介護状態区分(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue());
-            if ("要支援1".equals(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue().toString())) {
+            shinseiShoEntity.set要介護状態区分(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue());
+            if ("要支援1".equals(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue().toString())) {
                 shinseiShoEntity.set要支援状態区分1(正);
             }
-            if ("要支援2".equals(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue().toString())) {
+            if ("要支援2".equals(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue().toString())) {
                 shinseiShoEntity.set要支援状態区分2(正);
             }
         }

@@ -94,22 +94,6 @@ public class JikoFutangakuHosei {
         if (!RealInitialLocker.tryGetLock(key)) {
             throw new PessimisticLockingException();
         }
-        if (DBC8130011StateName.自己負担額管理情報入力.getName().equals(ResponseHolder.getState())) {
-            KogakuGassanJikoFutanGaku result = ViewStateHolder.get(
-                    ViewStateKeys.高額合算自己負担額, KogakuGassanJikoFutanGaku.class);
-            JigyoKogakuGassanJikofutangakuHosei 自己負担額保持 = ViewStateHolder.get(
-                    ViewStateKeys.事業高額合算自己負担額補正保持Entity,
-                    JigyoKogakuGassanJikofutangakuHosei.class);
-            result = handler.編集処理対象から保持Entity(result, 自己負担額保持);
-            if (CODE_ZERO.equals(自己負担額保持.get変更フラグ())) {
-                div.getBtnJikofutangakuJohoNyuryoku().setIconNameEnum(IconName.NONE);
-            }
-            if (CODE_ONE.equals(自己負担額保持.get変更フラグ())) {
-                div.getBtnJikofutangakuJohoNyuryoku().setIconNameEnum(IconName.Check);
-            }
-            handler.onSelect_dgRireki(result);
-            return ResponseData.of(div).respond();
-        }
         JukyushaDaichoManager 受給者台帳manager = new JukyushaDaichoManager();
         List<JukyushaDaicho> 受給者台帳List = 受給者台帳manager.get受給者台帳被保険者番号(被保険者番号);
         SogoJigyoTaishoshaManager 総合事業対象者manager = new SogoJigyoTaishoshaManager();
@@ -387,7 +371,7 @@ public class JikoFutangakuHosei {
         KogakuGassanJikoFutanGaku 負担額 = ViewStateHolder.get(
                 ViewStateKeys.高額合算自己負担額, KogakuGassanJikoFutanGaku.class);
         負担額 = handler.編集処理対象から画面(負担額);
-        負担額.createBuilderForEdit()
+        負担額 = 負担額.createBuilderForEdit()
                 .setリアル補正実施年月日(FlexibleDate.getNowDate())
                 .build();
         List<KogakuGassanJikoFutanGakuMeisai> 負担額明細一覧 = null;
@@ -442,9 +426,29 @@ public class JikoFutangakuHosei {
         自己負担額保持.set保険者番号(result.get保険者番号());
         自己負担額保持.set支給申請書整理番号(result.get支給申請書整理番号());
         自己負担額保持.set履歴番号(new RString(result.get履歴番号()));
+        自己負担額保持.set生年月日(result.get生年月日());
         自己負担額保持.set呼び出しフラグ(CODE_ZERO);
         自己負担額保持.set変更フラグ(CODE_ZERO);
         return 自己負担額保持;
+    }
+
+    /**
+     * 画面初期化のonActiveメソッドです。
+     *
+     * @param div JikoFutangakuHoseiDiv
+     * @return ResponseData
+     */
+    public ResponseData<JikoFutangakuHoseiDiv> onActive(JikoFutangakuHoseiDiv div) {
+        JigyoKogakuGassanJikofutangakuHosei 自己負担額保持 = ViewStateHolder.get(
+                ViewStateKeys.事業高額合算自己負担額補正保持Entity,
+                JigyoKogakuGassanJikofutangakuHosei.class);
+        if (CODE_ZERO.equals(自己負担額保持.get変更フラグ())) {
+            div.getBtnJikofutangakuJohoNyuryoku().setIconNameEnum(IconName.NONE);
+        }
+        if (CODE_ONE.equals(自己負担額保持.get変更フラグ())) {
+            div.getBtnJikofutangakuJohoNyuryoku().setIconNameEnum(IconName.Check);
+        }
+        return ResponseData.of(div).respond();
     }
 
     private JikoFutangakuHoseiHandler getHandler(JikoFutangakuHoseiDiv div) {

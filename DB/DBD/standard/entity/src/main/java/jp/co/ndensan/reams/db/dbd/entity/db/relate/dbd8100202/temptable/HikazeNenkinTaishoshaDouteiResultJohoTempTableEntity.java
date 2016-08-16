@@ -7,11 +7,8 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.temptable;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
@@ -45,7 +42,7 @@ public class HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity extends DbTabl
     @TempTableColumnOrder(7)
     private RString atenaKanaShimei;
     @TempTableColumnOrder(8)
-    private FlexibleDate atenaSeinenngappi;
+    private RString atenaSeinenngappi;
     @TempTableColumnOrder(9)
     private RString atenaSeibetsu;
     @TempTableColumnOrder(10)
@@ -79,7 +76,7 @@ public class HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity extends DbTabl
     @TempTableColumnOrder(24)
     private RString dtSeidoCode;
     @TempTableColumnOrder(25)
-    private FlexibleDate dtCreateYMD;
+    private RString dtCreateYMD;
     @TempTableColumnOrder(26)
     private RString dtKisoNennkinnNo;
     @TempTableColumnOrder(27)
@@ -87,7 +84,7 @@ public class HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity extends DbTabl
     @TempTableColumnOrder(28)
     private RString dtYobi2;
     @TempTableColumnOrder(29)
-    private FlexibleDate dtSeinenngappi;
+    private RString dtSeinenngappi;
     @TempTableColumnOrder(30)
     private RString dtSeibetsu;
     @TempTableColumnOrder(31)
@@ -99,7 +96,7 @@ public class HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity extends DbTabl
     @TempTableColumnOrder(34)
     private RString dtShifutoCode2;
     @TempTableColumnOrder(35)
-    private YubinNo dtYubinNo;
+    private RString dtYubinNo;
     @TempTableColumnOrder(36)
     private RString dtKanajusyo;
     @TempTableColumnOrder(37)
@@ -121,11 +118,11 @@ public class HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity extends DbTabl
     @TempTableColumnOrder(45)
     private RString dtYobi4;
     @TempTableColumnOrder(46)
-    private Decimal dtkinngaku1;
+    private RString dtkinngaku1;
     @TempTableColumnOrder(47)
-    private Decimal dtKinngakuYobi1;
+    private RString dtKinngakuYobi1;
     @TempTableColumnOrder(48)
-    private Decimal dtKinngakuYobi2;
+    private RString dtKinngakuYobi2;
     @TempTableColumnOrder(49)
     private RString dtYobi5;
     @TempTableColumnOrder(50)

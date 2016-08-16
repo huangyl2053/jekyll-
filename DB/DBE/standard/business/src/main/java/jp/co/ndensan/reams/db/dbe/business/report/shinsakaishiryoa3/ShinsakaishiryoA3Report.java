@@ -53,7 +53,7 @@ public class ShinsakaishiryoA3Report extends Report<ShinsakaishiryoA3ReportSourc
                 editor_Right = new ShinsakaishiryoA3EditorRight(businessList.get(i), i);
                 IShinsakaishiryoA3Builder builder = new ShinsakaishiryoA3BuilderImpl(editor_Left, editor_Right);
                 reportSourceWriter.writeLine(builder);
-            } else {
+            } else if (i < businessList.size()) {
                 editor_Left = new ShinsakaishiryoA3EditorLeft(businessList.get(i));
                 if (i + INT_25 < businessList.size()) {
                     editor_Right = new ShinsakaishiryoA3EditorRight(businessList.get(i + INT_25), i + INT_25);

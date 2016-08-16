@@ -5,6 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0030011;
 
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorModel;
+import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorResult;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0030011.JigyoJokyoHokokuGeppoDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -13,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 様式別連携情報作成処理です。
@@ -39,7 +44,7 @@ public class JigyoJokyoHokokuGeppoValidationHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 過去報告年月未指定チェック(ValidationMessageControlPairs validPairs) {
-        if (div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedKey().isEmpty()) {
+        if (RString.isNullOrEmpty(div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedKey())) {
             validPairs.add(new ValidationMessageControlPair(JigyoJokyoHokokuGeppoValidationHandler.JigyoJokyoHokokuMessages.過去報告年月チェック));
         }
         return validPairs;
@@ -52,9 +57,14 @@ public class JigyoJokyoHokokuGeppoValidationHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 市町村チェック(ValidationMessageControlPairs validPairs) {
+        ShichosonSelectorModel model = DataPassingConverter.deserialize(div.getKyuShichoson(), ShichosonSelectorModel.class);
+        List<ShichosonSelectorResult> list = new ArrayList<>();
+        if (model != null) {
+            list = model.getList();
+        }
         if (new RString("gappei").equals(div.getJikkoTanni().getRadHokenshaKyuShichoson().getSelectedKey())
                 || new RString("koseiShichoson").equals(div.getJikkoTanni().getRadKoikiKoseiShichoson().getSelectedKey())
-                && RString.isNullOrEmpty(div.getShichosonCode())) {
+                && list.isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(JigyoJokyoHokokuGeppoValidationHandler.JigyoJokyoHokokuMessages.市町村チェック));
         }
         return validPairs;

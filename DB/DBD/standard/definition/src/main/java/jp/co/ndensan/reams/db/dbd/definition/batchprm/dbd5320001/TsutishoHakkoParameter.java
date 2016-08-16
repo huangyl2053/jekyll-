@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,21 +35,33 @@ public class TsutishoHakkoParameter extends BatchParameterBase {
     @BatchParameter(key = "単票発行済み", name = "単票発行済み")
     private Boolean 単票発行済み;
     @BatchParameter(key = "認定結果通知書今回開始日付", name = "認定結果通知書今回開始日付")
-    private RString 認定結果通知書今回開始日付;
+    private FlexibleDate 認定結果通知書今回開始日付;
+    @BatchParameter(key = "認定結果通知書今回開始日時", name = "認定結果通知書今回開始日時")
+    private RTime 認定結果通知書今回開始日時;
     @BatchParameter(key = "認定結果通知書今回終了日付", name = "認定結果通知書今回終了日付")
-    private RString 認定結果通知書今回終了日付;
+    private FlexibleDate 認定結果通知書今回終了日付;
+    @BatchParameter(key = "認定結果通知書今回終了日時", name = "認定結果通知書今回終了日時")
+    private RTime 認定結果通知書今回終了日時;
     @BatchParameter(key = "認定結果通知書文書番号", name = "認定結果通知書文書番号")
     private RString 認定結果通知書文書番号;
     @BatchParameter(key = "サービス変更通知書今回開始日付", name = "サービス変更通知書今回開始日付")
-    private RString サービス変更通知書今回開始日付;
+    private FlexibleDate サービス変更通知書今回開始日付;
+    @BatchParameter(key = "サービス変更通知書今回開始日時", name = "サービス変更通知書今回開始日時")
+    private RTime サービス変更通知書今回開始日時;
     @BatchParameter(key = "サービス変更通知書今回終了日付", name = "サービス変更通知書今回終了日付")
-    private RString サービス変更通知書今回終了日付;
+    private FlexibleDate サービス変更通知書今回終了日付;
+    @BatchParameter(key = "サービス変更通知書今回終了日時", name = "サービス変更通知書今回終了日時")
+    private RTime サービス変更通知書今回終了日時;
     @BatchParameter(key = "サービス変更通知書文書番号", name = "サービス変更通知書文書番号")
     private RString サービス変更通知書文書番号;
     @BatchParameter(key = "要介護区分変更通知書今回開始日付", name = "要介護区分変更通知書今回開始日付")
-    private RString 要介護区分変更通知書今回開始日付;
+    private FlexibleDate 要介護区分変更通知書今回開始日付;
+    @BatchParameter(key = "要介護区分変更通知書今回開始日時", name = "要介護区分変更通知書今回開始日時")
+    private RTime 要介護区分変更通知書今回開始日時;
     @BatchParameter(key = "要介護区分変更通知書今回終了日付", name = "要介護区分変更通知書今回終了日付")
-    private RString 要介護区分変更通知書今回終了日付;
+    private FlexibleDate 要介護区分変更通知書今回終了日付;
+    @BatchParameter(key = "要介護区分変更通知書今回終了日時", name = "要介護区分変更通知書今回終了日時")
+    private RTime 要介護区分変更通知書今回終了日時;
     @BatchParameter(key = "要介護区分変更通知書文書番号", name = "要介護区分変更通知書文書番号")
     private RString 要介護区分変更通知書文書番号;
     @BatchParameter(key = "出力順", name = "出力順")
@@ -62,7 +75,8 @@ public class TsutishoHakkoParameter extends BatchParameterBase {
      */
     public NinteiKekkaTsutishoProcessParameter toNinteiKekkaTsutishoProcessParameter(IShikibetsuTaishoPSMSearchKey searchKey) {
         return new NinteiKekkaTsutishoProcessParameter(発行日, 単票発行済み, 出力順, 認定結果通知書文書番号,
-                認定結果通知書今回開始日付, 認定結果通知書今回終了日付, searchKey);
+                認定結果通知書今回開始日付, 認定結果通知書今回終了日付,
+                認定結果通知書今回開始日時, 認定結果通知書今回終了日時, searchKey);
     }
 
     /**
@@ -73,7 +87,8 @@ public class TsutishoHakkoParameter extends BatchParameterBase {
      */
     public ServiceHenkoTsutishoProcessParameter toServiceHenkoTsutishoProcessParameter(IShikibetsuTaishoPSMSearchKey searchKey) {
         return new ServiceHenkoTsutishoProcessParameter(発行日, 単票発行済み, 出力順, サービス変更通知書文書番号,
-                サービス変更通知書今回開始日付, サービス変更通知書今回終了日付, searchKey);
+                サービス変更通知書今回開始日付, サービス変更通知書今回終了日付,
+                サービス変更通知書今回開始日時, サービス変更通知書今回終了日時, searchKey);
     }
 
     /**
@@ -84,6 +99,7 @@ public class TsutishoHakkoParameter extends BatchParameterBase {
      */
     public YokaigoHenkoTsutishoProcessParameter toYokaigoHenkoTsutishoProcessParameter(IShikibetsuTaishoPSMSearchKey searchKey) {
         return new YokaigoHenkoTsutishoProcessParameter(発行日, 単票発行済み, 出力順, 要介護区分変更通知書文書番号,
-                要介護区分変更通知書今回開始日付, 要介護区分変更通知書今回終了日付, searchKey);
+                要介護区分変更通知書今回開始日付, 要介護区分変更通知書今回終了日付,
+                要介護区分変更通知書今回開始日時, 要介護区分変更通知書今回終了日時, searchKey);
     }
 }

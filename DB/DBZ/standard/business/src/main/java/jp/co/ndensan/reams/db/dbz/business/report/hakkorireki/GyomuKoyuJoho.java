@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum GyomuKoyuJoho {
 
     /**
-     * コード:DBD001 名称:被保番号 略称:定義なし
+     * コード:DBZ001 名称:被保番号 略称:定義なし
      */
-    被保番号("DBD001", "被保番号"),
+    被保番号("DBZ001", "被保番号"),
     /**
      * コード:DBD002 名称:減免適用開始日 略称:定義なし
      */

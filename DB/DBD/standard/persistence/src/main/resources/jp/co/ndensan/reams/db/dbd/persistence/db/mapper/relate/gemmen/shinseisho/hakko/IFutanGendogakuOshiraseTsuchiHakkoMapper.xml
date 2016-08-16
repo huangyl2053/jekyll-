@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmen.shinseisho.hakko.IFutanGendogakuOshiraseTsuchiHakkoMapper">
+ <resultMap id="resultMap_get出力対象者情報Entity"  type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmen.shinseisho.hakko.FutanGendogakuOshiraseTsuchiHakkoEntity" autoMapping="true">
+     <result property="被保険者番号" column="被保険者番号"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+     <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+     <result property="旧措置者フラグ" column="旧措置者フラグ"/>
+     <result property="新規更新区分" column="新規更新区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+     <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+     <association property="宛先" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
+ </resultMap>
+  <select resultOrdered="true" id="get出力対象者情報"  
+              resultMap="resultMap_get出力対象者情報Entity" 
+              parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmen.shinseisho.hakko.FutanGendogakuMybatisParameter"
+              fetchSize="500">
+      SELECT 
+             E."hihokenshaNo" AS 被保険者番号,
+             E."shikibetsuCode" AS 識別コード,
+             H."kyuSochishaFlag" AS 旧措置者フラグ ,
+<!--             E."",-->
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
+             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
+       FROM  
+             rgdb."DbT4032ShinseishoIkkatsuHakkoBatch"	 AS A
+             INNER JOIN rgdb."DbT4033ShinseishoHakkoTaishoshas"  AS D
+             ON  D."hakkoShoriID" = A."hakkoShoriID"
+             INNER JOIN rgdb."DbT4031ShinseishoHakkoKohoshas"  AS E
+             ON  E."haakuShoriID" =A."haakuShoriId"
+             AND E."hihokenshaNo" = D."hihokenshaNo"
+             AND E."willBeRenewed" IS TRUE 
+             INNER JOIN  rgua."UaFt200FindShikibetsuTaisho"('',#{基準日},FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+             ON "ShikibetsuTaisho"."shikibetsuCode" = E."shikibetsuCode"
+             INNER JOIN rgua."UaFt250FindAtesaki"('DB','DBB','','true','','','true','true','true','true',#{基準日}) AS "Atesaki"
+             ON "Atesaki"."shikibetsuCode" =E."shikibetsuCode"
+             LEFT JOIN rgdb."DbV4001JukyushaDaicho" AS H
+             ON H."hihokenshaNo" =E."hihokenshaNo"
+             AND H."ninteiYMD" <![CDATA[<=]]>#{基準日}
+             AND H."logicalDeletedFlag" IS FALSE 
+       WHERE 
+             A."hakkoShoriID" =#{発行処理ID}
+<!--       ORDER　BY
+             #{出力順}-->
+</select>
+</mapper>

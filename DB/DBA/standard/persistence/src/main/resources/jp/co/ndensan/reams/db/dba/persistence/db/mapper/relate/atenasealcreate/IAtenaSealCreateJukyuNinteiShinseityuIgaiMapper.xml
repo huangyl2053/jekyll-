@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBA-1210-030 zhengsongling -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.atenasealcreate.IAtenaSealCreateJukyuNinteiShinseityuIgaiMapper">
+    <resultMap id="resultMap_getJukyuNinteiShinseityuIgai" type="jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.AtenaSealCreateRelate4001Entity" autoMapping="true">
+<result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+<result property="氏名カナ" column="氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+<result property="氏名" column="氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+<result property="管内管外区分WK" column="管内管外区分WK" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+<result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+<result property="バーコード住所" column="バーコード住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="番地" column="番地" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaBanchiTypeHandler"/>
+<result property="方書" column="方書" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KatagakiTypeHandler"/>
+<result property="行政区" column="行政区" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="管内管外区分" column="管内管外区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="世帯主名称" column="世帯主名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+<result property="市町村コード_受給者台帳" column="市町村コード_受給者台帳" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+<result property="識別コード_受給者台帳" column="識別コード_受給者台帳" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+<association property="atesakiEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
+    </resultMap>
+    <select resultOrdered="true" id="getJukyuNinteiShinseityuIgai" resultMap="resultMap_getJukyuNinteiShinseityuIgai"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.atenasealcreate.AtenaSealCreateMybatisParameter"
+            fetchSize="500">
+        SELECT
+            PSM."shikibetsuCode" AS 識別コード,
+            PSM."kanaMeisho" AS 氏名カナ,
+            PSM."meisho" AS 氏名,
+            PSM."wkKannaiKangaiKubun" AS 管内管外区分WK,
+            PSM."yubinNo" AS 郵便番号,
+            PSM."jusho" AS 住所,
+            PSM."saiyuusenjyuushu" AS バーコード住所,
+            PSM."banchi" AS 番地,
+            PSM."katagaki" AS 方書,
+            PSM."gyoseikuName" AS 行政区,
+            PSM."kannaiKangaiKubun" AS 管内管外区分,
+            PSM."setainushiMei" AS 世帯主名称,
+            T4001."shichosonCode" AS 市町村コード_受給者台帳,
+            T4001."shikibetsuCode" AS 識別コード_受給者台帳
+                <if test="is送付先または代納人">
+            ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
+                </if>
+        FROM
+            "DbWT2009AtenaShikibetuTaisyou2" AS PSM
+        INNER JOIN
+            rgdb."DbT4001JukyushaDaicho" AS T4001
+        ON
+            T4001."shikibetsuCode" = PSM."shikibetsuCode"
+        <if test="isDBA業務コード">
+        <if test="is受給認定申請中を除く">
+        AND
+            (T4001."rirekiNo" = '0000'
+        OR
+            T4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> to_char(now(), 'yyyyMMdd')
+        OR
+            to_char(now(), 'yyyyMMdd') <![CDATA[<=]]> T4001."ninteiYukoKikanShuryoYMD"
+        OR
+            T4001."yukoMukoKubun" != '1')
+        </if>
+        </if>
+        LEFT JOIN
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" /> AS "Atesaki"
+        ON
+            "Atesaki"."shikibetsuCode" = PSM."shikibetsuCode"
+        AND
+            "Atesaki"."gyomuCode" = 'DBA'
+        AND
+            "Atesaki"."juminShubetsuCode" IN
+      <foreach collection="shubetsu_1" item="shubetsu1" open="(" separator="," close=")"> #{shubetsu1} </foreach>
+        AND
+            "Atesaki"."juminJotaiCode" IN
+      <foreach collection="shubetsu_2" item="shubetsu2" open="(" separator="," close=")"> #{shubetsu2} </foreach>
+    </select>
+</mapper>

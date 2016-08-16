@@ -259,6 +259,7 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
 
         if (dbT3002Entity != null) {
             DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity 基本情報Entity = new DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity();
+            基本情報Entity.setHiHokenshaNo(dbT3002Entity.getHiHokenshaNo());
             基本情報Entity.setIdoYMD(dbT3002Entity.getIdoYMD());
             基本情報Entity.setRirekiNo(dbT3002Entity.getRirekiNo());
             基本情報Entity.setHiHokenshaName(dbT3002Entity.getHiHokenshaName());
@@ -277,6 +278,7 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
 
         if (dbT3003Entity != null) {
             DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity 償還情報Entity = new DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity();
+            償還情報Entity.setHiHokenshaNo(dbT3003Entity.getHiHokenshaNo());
             償還情報Entity.setIdoYMD(dbT3003Entity.getIdoYMD());
             償還情報Entity.setRirekiNo(dbT3003Entity.getRirekiNo());
             償還情報Entity.setHokenKyufuIchijiSashitomeKaishiYMD(dbT3003Entity.getHokenKyufuIchijiSashitomeKaishiYMD());
@@ -292,6 +294,7 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
 
         if (dbT3004Entity != null) {
             DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity 高額情報Entity = new DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity();
+            高額情報Entity.setHiHokenshaNo(dbT3004Entity.getHiHokenshaNo());
             高額情報Entity.setIdoYMD(dbT3004Entity.getIdoYMD());
             高額情報Entity.setRirekiNo(dbT3004Entity.getRirekiNo());
             高額情報Entity.setSetaiShuyakuNo(dbT3004Entity.getSetaiShuyakuNo());
@@ -323,6 +326,108 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
             識別コード = entity.getShikibetsuCode();
         }
         return 識別コード;
+    }
+
+    /**
+     * 基本送付情報を追加するチェックボックスがチェックONの場合
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動日 FlexibleDate
+     * @return int
+     */
+    public int 基本送付情報の異動日チェック(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
+        return dbT3002dac.select基本送付情報の異動日Count(被保険者番号, 異動日);
+    }
+
+    /**
+     * 償還送付情報を追加するチェックボックスがチェックONの場合
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動日 FlexibleDate
+     * @return int
+     */
+    public int 償還送付情報の異動日チェック(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
+        return dbT3003dac.select償還送付情報の異動日Count(被保険者番号, 異動日);
+    }
+
+    /**
+     * 高額送付情報を追加するチェックボックスがチェックONの場合
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動日 FlexibleDate
+     * @return int
+     */
+    public int 高額送付情報の異動日チェック(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
+        return dbT3004dac.select高額送付情報の異動日Count(被保険者番号, 異動日);
+    }
+
+    /**
+     * 基本送付情報を追加するチェックボックスがチェックONの場合
+     *
+     * @param 異動日 FlexibleDate
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動区分コード RString
+     * @return int
+     */
+    public int 基本送付情報の異動区分チェック(HihokenshaNo 被保険者番号, RString 異動区分コード, FlexibleDate 異動日) {
+        return dbT3002dac.select基本送付情報の異動区分Count(被保険者番号, 異動区分コード, 異動日);
+    }
+
+    /**
+     * 償還送付情報を追加するチェックボックスがチェックONの場合
+     *
+     * @param 異動日 FlexibleDate
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動区分コード RString
+     * @return int
+     */
+    public int 償還送付情報の異動区分チェック(HihokenshaNo 被保険者番号, RString 異動区分コード, FlexibleDate 異動日) {
+        return dbT3003dac.select償還送付情報の異動区分Count(被保険者番号, 異動区分コード, 異動日);
+    }
+
+    /**
+     * 高額送付情報を追加するチェックボックスがチェックONの場合
+     *
+     * @param 異動日 FlexibleDate
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動区分コード RString
+     * @return int
+     */
+    public int 高額送付情報の異動区分チェック(HihokenshaNo 被保険者番号, RString 異動区分コード, FlexibleDate 異動日) {
+        return dbT3004dac.select高額送付情報の異動区分Count(被保険者番号, 異動区分コード, 異動日);
+    }
+
+    /**
+     * 基本送付情報を追加するチェックボックスがチェックONの場合で、画面．基本送付情報エリア．異動日と同一日のデータが共同処理用受給者異動基本送付テーブルにないこと
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動日 FlexibleDate
+     * @return int
+     */
+    public int 基本送付情報の履歴番号チェック(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
+        return dbT3002dac.get基本送付情報の履歴番号Max(被保険者番号, 異動日);
+    }
+
+    /**
+     * 償還送付情報を追加するチェックボックスがチェックONの場合で、画面．基本送付情報エリア．異動日と同一日のデータが共同処理用受給者異動基本送付テーブルにないこと
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動日 FlexibleDate
+     * @return int
+     */
+    public int 償還送付情報の履歴番号チェック(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
+        return dbT3003dac.get償還送付情報の履歴番号Max(被保険者番号, 異動日);
+    }
+
+    /**
+     * 高額送付情報を追加するチェックボックスがチェックONの場合で、画面．基本送付情報エリア．異動日と同一日のデータが共同処理用受給者異動基本送付テーブルにないこと
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動日 FlexibleDate
+     * @return int
+     */
+    public int 高額送付情報の履歴番号チェック(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
+        return dbT3004dac.get高額送付情報の履歴番号Max(被保険者番号, 異動日);
     }
 
     /**

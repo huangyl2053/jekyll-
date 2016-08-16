@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- @reamsid_L DBC-2550-010 fzou -->
+<!-- @reamsid_L DBC-2550-010 jianglaishen -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.sogojigyohikagoketteiin.ISogojigyohiKagoKetteiInMapper">
     <select id="get帳票出力対象データ"
             resultMap="resultMap_SogojigyohiKagoKetteiInEntity" parameterType="java.util.Map"  fetchSize="500" resultOrdered="true">

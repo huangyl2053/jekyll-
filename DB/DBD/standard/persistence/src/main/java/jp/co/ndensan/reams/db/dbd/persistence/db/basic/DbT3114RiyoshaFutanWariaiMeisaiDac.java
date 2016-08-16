@@ -11,15 +11,21 @@ import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWari
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisai.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisai.nendo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisai.rirekiNo;
+import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisai.yukoKaishiYMD;
+import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisai.yukoShuryoYMD;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenko.logicalDeletedFlag;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.substr;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -29,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class DbT3114RiyoshaFutanWariaiMeisaiDac implements ISaveable<DbT3114RiyoshaFutanWariaiMeisaiEntity> {
 
+    private static final int NUM_6 = 6;
     @InjectSession
     private SqlSession session;
 
@@ -92,5 +99,26 @@ public class DbT3114RiyoshaFutanWariaiMeisaiDac implements ISaveable<DbT3114Riyo
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 利用者負担割合明細を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 利用年月 FlexibleYearMonth
+     * @return List<DbT3114RiyoshaFutanWariaiMeisaiEntity>
+     */
+    @Transaction
+    public List<DbT3114RiyoshaFutanWariaiMeisaiEntity> select負担割合区分(HihokenshaNo 被保険者番号, FlexibleYearMonth 利用年月) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3114RiyoshaFutanWariaiMeisai.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                leq(substr(yukoKaishiYMD, 0, NUM_6), 利用年月),
+                                leq(利用年月, substr(yukoShuryoYMD, 0, NUM_6)),
+                                eq(logicalDeletedFlag, false))).
+                toList(DbT3114RiyoshaFutanWariaiMeisaiEntity.class);
     }
 }

@@ -38,9 +38,11 @@ public class ChosaOCRTorikomiRelateEntity {
     private RString 保険者;
     private ShinseishoKanriNo 申請書管理番号;
     private Code 厚労省IF識別コード;
-    private FlexibleDate 申請日;
+    private FlexibleDate 認定申請年月日;
     private Code 認定申請区分申請時コード;
     private AtenaMeisho 被保険者氏名;
+    private RString 被保険者番号;
+    private RString 証記載保険者番号;
     private Code 要介護認定一次判定結果コード;
     private Code 二次判定要介護状態区分コード;
     private FlexibleDate 二次判定年月日;

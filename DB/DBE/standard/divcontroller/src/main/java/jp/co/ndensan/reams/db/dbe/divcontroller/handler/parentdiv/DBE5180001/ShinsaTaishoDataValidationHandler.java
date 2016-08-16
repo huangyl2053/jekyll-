@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * 介護認定審査会審査対象データ出力（モバイル）のチェッククラスです。
  *
- * @reamsid_L DDBE-1840-010 yaoyahui
+ * @reamsid_L DBE-1840-010 yaoyahui
  */
 public class ShinsaTaishoDataValidationHandler {
 

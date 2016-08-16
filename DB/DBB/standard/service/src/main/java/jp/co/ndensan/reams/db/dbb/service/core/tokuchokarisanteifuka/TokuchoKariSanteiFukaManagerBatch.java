@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJohoBuilder;
-import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.HokenryoDankaiHantei;
-import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.TsukibetsuHokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.FukaKonkyo;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyoJoho;
@@ -582,7 +580,8 @@ public class TokuchoKariSanteiFukaManagerBatch {
             ChoshuHoho 徴収方法の情報_４月開始, FukaJoho 賦課の情報_更正前) {
         if (徴収方法の情報_徴収方法4月 != 特別徴収_厚生労働省 && 徴収方法の情報_徴収方法4月 != 特別徴収_地共済) {
             賦課の情報一時Entity.setChoteiJiyu1(徴収方法の情報_４月開始.get特別徴収停止事由コード());
-            if (!徴収方法の情報_４月開始.get特別徴収停止事由コード().equals(賦課の情報_更正前.get調定事由1())) {
+            if (徴収方法の情報_４月開始.get特別徴収停止事由コード() != null
+                    && !徴収方法の情報_４月開始.get特別徴収停止事由コード().equals(賦課の情報_更正前.get調定事由1())) {
                 賦課の情報一時Entity.setFalg(true);
             }
             賦課の情報一時Entity.setChoteiJiyu2(RString.EMPTY);
@@ -627,21 +626,13 @@ public class TokuchoKariSanteiFukaManagerBatch {
             FukaJohoTempEntity 賦課の情報一時Entity,
             FukaJoho 賦課の情報_更正前) {
         賦課の情報一時Entity.setShikakuShutokuYMD(資格の情報.get第1号資格取得年月日());
-        if (!賦課の情報_更正前.get資格取得日().equals(資格の情報.get第1号資格取得年月日())) {
-            賦課の情報一時Entity.setFalg(true);
-        }
+        get資格取得日Flag(賦課の情報_更正前, 資格の情報, 賦課の情報一時Entity);
         賦課の情報一時Entity.setShikakuShutokuJiyu(資格の情報.get資格取得事由コード());
-        if (!賦課の情報_更正前.get資格取得事由().equals(資格の情報.get資格取得事由コード())) {
-            賦課の情報一時Entity.setFalg(true);
-        }
+        get資格取得事由Flag(賦課の情報_更正前, 資格の情報, 賦課の情報一時Entity);
         賦課の情報一時Entity.setShikakuSoshitsuYMD(資格の情報.get資格喪失年月日());
-        if (!賦課の情報_更正前.get資格喪失日().equals(資格の情報.get資格取得年月日())) {
-            賦課の情報一時Entity.setFalg(true);
-        }
+        get資格喪失日Flag(賦課の情報_更正前, 資格の情報, 賦課の情報一時Entity);
         賦課の情報一時Entity.setShikakuSoshitsuJiyu(資格の情報.get資格喪失事由コード());
-        if (!賦課の情報_更正前.get資格喪失事由().equals(資格の情報.get資格喪失事由コード())) {
-            賦課の情報一時Entity.setFalg(true);
-        }
+        get資格喪失事由Flag(賦課の情報_更正前, 資格の情報, 賦課の情報一時Entity);
         FlexibleDate 調定年度開始日 = new FlexibleDate(調定年度.toDateString().concat(文字列_04).concat(文字列_01));
         FlexibleDate 調定年度廃止日 = new FlexibleDate(調定年度.plusYear(整数_1).toDateString().concat(文字列_03).concat(文字列_31));
         set生保の情報_modifyFukaJohoCommon_４月開始(生保の情報List, 調定年度開始日, 調定年度廃止日, 賦課の情報一時Entity, 賦課の情報_更正前);
@@ -668,8 +659,12 @@ public class TokuchoKariSanteiFukaManagerBatch {
         }
         fukaKonkyo.setRoreiNenkinEndYMD(FlexibleDate.EMPTY);
         List<KazeiKubun> setaiinKazeiKubunList = new ArrayList<>();
-        setaiinKazeiKubunList.add(KazeiKubun.toValue(前年度世帯課税区分));
-        setaiinKazeiKubunList.add(KazeiKubun.toValue(前年度課税区分));
+        if (前年度世帯課税区分 != null && !前年度世帯課税区分.isEmpty()) {
+            setaiinKazeiKubunList.add(KazeiKubun.toValue(前年度世帯課税区分));
+        }
+        if (前年度課税区分 != null && !前年度課税区分.isEmpty()) {
+            setaiinKazeiKubunList.add(KazeiKubun.toValue(前年度課税区分));
+        }
         fukaKonkyo.setSetaiinKazeiKubunList(setaiinKazeiKubunList);
         fukaKonkyo.setGokeiShotoku(前年度合計所得金額);
         fukaKonkyo.setKotekiNenkinShunyu(前年度公的年金収入額);
@@ -745,8 +740,10 @@ public class TokuchoKariSanteiFukaManagerBatch {
         seigyoJoho.setKazeiTorikeshiKazeiKubun(KazeiKubun.toValue(DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税取消課税区分,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課)));
         hokenryoDankaiHanteiParameter.setSeigyoJoho(seigyoJoho);
-        TsukibetsuHokenryoDankai 月別保険料段階 = new HokenryoDankaiHantei().determine月別保険料段階(hokenryoDankaiHanteiParameter);
-        RString 保険料段階 = 月別保険料段階.get保険料段階04月().edit表示用保険料段階();
+        // TODO 呼び出す方法は問題がある
+//        TsukibetsuHokenryoDankai 月別保険料段階 = new HokenryoDankaiHantei().determine月別保険料段階(hokenryoDankaiHanteiParameter);
+//        RString 保険料段階 = 月別保険料段階.get保険料段階04月().edit表示用保険料段階();
+        RString 保険料段階 = RString.EMPTY;
         賦課の情報一時Entity.setHokenryoDankaiKarisanntei(保険料段階);
         if (!保険料段階.equals(賦課の情報_更正前.get保険料段階_仮算定時())) {
             賦課の情報一時Entity.setFalg(true);
@@ -760,6 +757,30 @@ public class TokuchoKariSanteiFukaManagerBatch {
         }
         equals賦課市町村コード(賦課の情報_更正前, 賦課の情報一時Entity);
         return 賦課の情報一時Entity;
+    }
+
+    private void get資格喪失事由Flag(FukaJoho 賦課の情報_更正前, HihokenshaDaicho 資格の情報, FukaJohoTempEntity 賦課の情報一時Entity) {
+        if (賦課の情報_更正前.get資格喪失事由() != null && !賦課の情報_更正前.get資格喪失事由().equals(資格の情報.get資格喪失事由コード())) {
+            賦課の情報一時Entity.setFalg(true);
+        }
+    }
+
+    private void get資格喪失日Flag(FukaJoho 賦課の情報_更正前, HihokenshaDaicho 資格の情報, FukaJohoTempEntity 賦課の情報一時Entity) {
+        if (賦課の情報_更正前.get資格喪失日() != null && !賦課の情報_更正前.get資格喪失日().equals(資格の情報.get資格取得年月日())) {
+            賦課の情報一時Entity.setFalg(true);
+        }
+    }
+
+    private void get資格取得事由Flag(FukaJoho 賦課の情報_更正前, HihokenshaDaicho 資格の情報, FukaJohoTempEntity 賦課の情報一時Entity) {
+        if (賦課の情報_更正前.get資格取得事由() != null && !賦課の情報_更正前.get資格取得事由().equals(資格の情報.get資格取得事由コード())) {
+            賦課の情報一時Entity.setFalg(true);
+        }
+    }
+
+    private void get資格取得日Flag(FukaJoho 賦課の情報_更正前, HihokenshaDaicho 資格の情報, FukaJohoTempEntity 賦課の情報一時Entity) {
+        if (賦課の情報_更正前.get資格取得日() != null && !賦課の情報_更正前.get資格取得日().equals(資格の情報.get第1号資格取得年月日())) {
+            賦課の情報一時Entity.setFalg(true);
+        }
     }
 
     private void set老齢の情報_modifyFukaJohoCommon_４月開始(List<RoreiFukushiNenkinJukyusha> 老齢の情報List, FlexibleDate 調定年度開始日,
@@ -1233,8 +1254,12 @@ public class TokuchoKariSanteiFukaManagerBatch {
         }
         fukaKonkyo.setRoreiNenkinEndYMD(FlexibleDate.EMPTY);
         List<KazeiKubun> setaiinKazeiKubunList = new ArrayList<>();
-        setaiinKazeiKubunList.add(KazeiKubun.toValue(前年度世帯課税区分));
-        setaiinKazeiKubunList.add(KazeiKubun.toValue(前年度課税区分));
+        if (前年度世帯課税区分 != null && !前年度世帯課税区分.isEmpty()) {
+            setaiinKazeiKubunList.add(KazeiKubun.toValue(前年度世帯課税区分));
+        }
+        if (前年度課税区分 != null && !前年度課税区分.isEmpty()) {
+            setaiinKazeiKubunList.add(KazeiKubun.toValue(前年度課税区分));
+        }
         fukaKonkyo.setSetaiinKazeiKubunList(setaiinKazeiKubunList);
         fukaKonkyo.setGokeiShotoku(前年度合計所得金額);
         fukaKonkyo.setKotekiNenkinShunyu(前年度公的年金収入額);
@@ -1310,8 +1335,10 @@ public class TokuchoKariSanteiFukaManagerBatch {
         seigyoJoho.setKazeiTorikeshiKazeiKubun(KazeiKubun.toValue(DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税取消課税区分,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課)));
         hokenryoDankaiHanteiParameter.setSeigyoJoho(seigyoJoho);
-        TsukibetsuHokenryoDankai 月別保険料段階 = new HokenryoDankaiHantei().determine月別保険料段階(hokenryoDankaiHanteiParameter);
-        賦課情報Builder.set保険料段階_仮算定時(月別保険料段階.get保険料段階04月().edit表示用保険料段階());
+        // TODO 呼び出す方法は問題がある
+//        TsukibetsuHokenryoDankai 月別保険料段階 = new HokenryoDankaiHantei().determine月別保険料段階(hokenryoDankaiHanteiParameter);
+//        賦課情報Builder.set保険料段階_仮算定時(月別保険料段階.get保険料段階04月().edit表示用保険料段階());
+        賦課情報Builder.set保険料段階_仮算定時(RString.EMPTY);
         if (資格の情報.get旧市町村コード() != null && !資格の情報.get旧市町村コード().isEmpty()) {
             賦課情報Builder.set賦課市町村コード(資格の情報.get旧市町村コード());
         } else if (資格の情報.get広住特措置元市町村コード() != null && !資格の情報.get広住特措置元市町村コード().isEmpty()) {
@@ -1336,6 +1363,9 @@ public class TokuchoKariSanteiFukaManagerBatch {
         FlexibleDate 最新老齢受給開始年月日 = null;
         RoreiFukushiNenkinJukyusha 最新老齢の情報 = null;
         for (RoreiFukushiNenkinJukyusha 老齢の情報 : 老齢の情報List) {
+            if (老齢の情報.get受給開始年月日() == null || 老齢の情報.get受給終了年月日() == null) {
+                continue;
+            }
             if (調定年度開始日.isBeforeOrEquals(老齢の情報.get受給終了年月日()) || 老齢の情報.get受給開始年月日().isBeforeOrEquals(調定年度廃止日)) {
                 if (最新老齢受給開始年月日 == null) {
                     最新老齢受給開始年月日 = 老齢の情報.get受給開始年月日();
@@ -1362,6 +1392,9 @@ public class TokuchoKariSanteiFukaManagerBatch {
         FlexibleDate 最新受給開始日 = null;
         SeikatsuHogoJukyusha 最新生保の情報 = null;
         for (SeikatsuHogoJukyusha 生保の情報 : 生保の情報List) {
+            if (生保の情報.get受給廃止日() == null || 生保の情報.get受給開始日() == null) {
+                continue;
+            }
             if (調定年度開始日.isBeforeOrEquals(生保の情報.get受給廃止日()) || 生保の情報.get受給開始日().isBeforeOrEquals(調定年度廃止日)) {
                 if (最新受給開始日 == null) {
                     最新受給開始日 = 生保の情報.get受給廃止日();

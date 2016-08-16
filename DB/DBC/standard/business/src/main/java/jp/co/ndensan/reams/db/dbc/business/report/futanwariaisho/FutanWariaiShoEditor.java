@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
 
-    private final FutanWariaiShoEntity entity;
+    private final FutanWariaiShoDivParameter entity;
     private final NinshoshaSource 認証者ソースデータ;
     private final HihokenshaNo 被保険者番号;
     private final EditedKojin 編集後個人;
@@ -57,7 +57,7 @@ public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
     /**
      * コンストラクタです。
      *
-     * @param entity FutanWariaiShoEntity
+     * @param entity FutanWariaiShoDivParameter
      * @param 認証者ソースデータ NinshoshaSource
      * @param 被保険者番号 HihokenshaNo
      * @param 編集後個人 EditedKojin
@@ -66,7 +66,7 @@ public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
      * @param flag RString
      * @param 個人List List<IKojin>
      */
-    public FutanWariaiShoEditor(FutanWariaiShoEntity entity, NinshoshaSource 認証者ソースデータ, HihokenshaNo 被保険者番号,
+    public FutanWariaiShoEditor(FutanWariaiShoDivParameter entity, NinshoshaSource 認証者ソースデータ, HihokenshaNo 被保険者番号,
             EditedKojin 編集後個人, List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 利用者負担割合明細List, HokenshaNo 保険者コード取得,
             RString flag, List<IKojin> 個人List) {
         this.entity = entity;

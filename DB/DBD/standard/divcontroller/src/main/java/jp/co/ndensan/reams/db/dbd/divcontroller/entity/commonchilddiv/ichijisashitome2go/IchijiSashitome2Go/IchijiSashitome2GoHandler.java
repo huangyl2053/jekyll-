@@ -188,7 +188,7 @@ public class IchijiSashitome2GoHandler {
             shiryoJokyoSource.add(new KeyValueDataSource(shuyoKubun.getコード(), shuyoKubun.get名称()));
         }
         div.getDdlShuryoJokyo().setDataSource(shiryoJokyoSource);
-        div.getDdlShuryoJokyo().setSelectedKey(shiryoJokyoSource.get(0).getKey());
+        div.getDdlShuryoJokyo().setSelectedKey(ShiharaiHenkoShuryoKubun._空.getコード());
         setStatus(押下ボタン, shiryoJokyoSource);
         setValue(押下ボタン, shiharaiHohoHenko);
     }
@@ -235,13 +235,13 @@ public class IchijiSashitome2GoHandler {
                 div.getTxtBemmeiNaiyoKetteiYMD().setDisabled(false);
                 div.getDdlNigoBenmeishoJuriBenmeiShinsakekka().setDisabled(false);
                 div.getDdlNigoBenmeishoJuriBenmeiRiyu().setDataSource(shiryoJokyoSource);
-                div.getDdlNigoBenmeishoJuriBenmeiRiyu().setSelectedKey(shiryoJokyoSource.get(0).getKey());
+                div.getDdlNigoBenmeishoJuriBenmeiRiyu().setSelectedKey(ShiharaiHenkoShuryoKubun._空.getコード());
                 List<KeyValueDataSource> bemmeiShinsaKekkaSource = new ArrayList();
                 for (ShiharaiHenkoBenmeiShinsaKekkaKubun bemmeiShinsaKekka : ShiharaiHenkoBenmeiShinsaKekkaKubun.values()) {
                     bemmeiShinsaKekkaSource.add(new KeyValueDataSource(bemmeiShinsaKekka.getコード(), bemmeiShinsaKekka.get名称()));
                 }
                 div.getDdlNigoBenmeishoJuriBenmeiShinsakekka().setDataSource(bemmeiShinsaKekkaSource);
-                div.getDdlNigoBenmeishoJuriBenmeiShinsakekka().setSelectedKey(bemmeiShinsaKekkaSource.get(0).getKey());
+                div.getDdlNigoBenmeishoJuriBenmeiShinsakekka().setSelectedKey(ShiharaiHenkoBenmeiShinsaKekkaKubun._空.getコード());
                 DisplayNone_２号予告者登録項目(true);
                 DisplayNone_２号一時差止登録(true);
                 DisplayNone_２号一時差止解除(true);
@@ -273,13 +273,13 @@ public class IchijiSashitome2GoHandler {
                     shinseiRiyuSource.add(new KeyValueDataSource(shinseRriyuCode.getコード(), shinseRriyuCode.get名称()));
                 }
                 div.getDdlIraiRiyu().setDataSource(shinseiRiyuSource);
-                div.getDdlIraiRiyu().setSelectedKey(shinseiRiyuSource.get(0).getKey());
+                div.getDdlIraiRiyu().setSelectedKey(ShiharaiHenkoShuryoShinseiRiyuCode._空.getコード());
                 List<KeyValueDataSource> shinsaKekkaSource = new ArrayList();
                 for (ShiharaiHenkoBenmeiShinsaKekkaKubun shinsaKekka : ShiharaiHenkoBenmeiShinsaKekkaKubun.values()) {
                     shinsaKekkaSource.add(new KeyValueDataSource(shinsaKekka.getコード(), shinsaKekka.get名称()));
                 }
                 div.getDdlIraiShinsaKekka().setDataSource(shinsaKekkaSource);
-                div.getDdlIraiShinsaKekka().setSelectedKey(shinsaKekkaSource.get(0).getKey());
+                div.getDdlIraiShinsaKekka().setSelectedKey(ShiharaiHenkoBenmeiShinsaKekkaKubun._空.getコード());
                 DisplayNone_２号予告者登録項目(true);
                 DisplayNone_２号弁明書受理項目(true);
                 DisplayNone_２号一時差止登録(true);
@@ -316,7 +316,11 @@ public class IchijiSashitome2GoHandler {
             div.getTxtTorokuJokyo().setValue(shiharaiHohoHenko.get登録区分());
             div.getTxtTekiyoKaishi().setValue(shiharaiHohoHenko.get適用開始年月日());
             div.getTxtTekiyoShuryo().setValue(shiharaiHohoHenko.get適用終了年月日());
-            div.getDdlShuryoJokyo().setSelectedKey(shiharaiHohoHenko.get終了区分());
+            if (shiharaiHohoHenko.get終了区分() == null) {
+                div.getDdlShuryoJokyo().setSelectedKey(ShiharaiHenkoShuryoKubun._空.getコード());
+            } else {
+                div.getDdlShuryoJokyo().setSelectedKey(shiharaiHohoHenko.get終了区分());
+            }
             switch (押下ボタン.toString()) {
                 case "２号予告者登録":
                     div.getTxtNigoYokokushaTorokuIraiJuribi().setValue(shiharaiHohoHenko.get差止依頼書受理年月日());
@@ -326,9 +330,17 @@ public class IchijiSashitome2GoHandler {
                     break;
                 case "２号弁明書受理":
                     div.getTxtNigoBenmeishoJuriBenmeishoUketsukebi().setValue(shiharaiHohoHenko.get弁明書受付年月日());
-                    div.getDdlNigoBenmeishoJuriBenmeiRiyu().setSelectedKey(shiharaiHohoHenko.get弁明理由コード());
+                    if (shiharaiHohoHenko.get弁明理由コード() == null) {
+                        div.getDdlNigoBenmeishoJuriBenmeiRiyu().setSelectedKey(ShiharaiHenkoShuryoKubun._空.getコード());
+                    } else {
+                        div.getDdlNigoBenmeishoJuriBenmeiRiyu().setSelectedKey(shiharaiHohoHenko.get弁明理由コード());
+                    }
                     div.getTxtBemmeiNaiyoKetteiYMD().setValue(shiharaiHohoHenko.get弁明審査決定年月日());
-                    div.getDdlNigoBenmeishoJuriBenmeiShinsakekka().setSelectedKey(shiharaiHohoHenko.get弁明審査結果区分());
+                    if (shiharaiHohoHenko.get弁明審査結果区分() == null) {
+                        div.getDdlNigoBenmeishoJuriBenmeiShinsakekka().setSelectedKey(ShiharaiHenkoBenmeiShinsaKekkaKubun._空.getコード());
+                    } else {
+                        div.getDdlNigoBenmeishoJuriBenmeiShinsakekka().setSelectedKey(shiharaiHohoHenko.get弁明審査結果区分());
+                    }
                     break;
                 case "２号一時差止登録":
                     div.getTxtSashitomeKetteiYMD().setValue(ViewStateHolder.get(IchijiSashitome2GoHandler.二号一時差止ダイアロググキー.支払方法変更差止,

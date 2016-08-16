@@ -5,9 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.temptable;
 
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,11 +24,17 @@ import lombok.Setter;
 public class ShimeiKanaTotsugoKensuTempTableEntity extends DbTableEntityBase<ShimeiKanaTotsugoKensuTempTableEntity> implements IDbAccessable {
 
     public static final RString TABLE_NAME = new RString("ShimeiKanaTotsugoKensuTempTable");
-    // TODO
-//            DT年金保険者コード
-//        DT年金コード
-//        DT基礎年金番号
-//        DT対象年
-//        DT作成年月日
-//        件数
+
+    @TempTableColumnOrder(1)
+    private RString dtNennkinnHokenshaCode;
+    @TempTableColumnOrder(2)
+    private RString dtNennkinnCode;
+    @TempTableColumnOrder(3)
+    private RString dtKisoNennkinnNo;
+    @TempTableColumnOrder(4)
+    private RString dtTaisyoYear;
+    @TempTableColumnOrder(5)
+    private FlexibleDate dtCreateYMD;
+    @TempTableColumnOrder(6)
+    private int count;
 }

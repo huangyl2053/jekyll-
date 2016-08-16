@@ -1549,9 +1549,9 @@
         <id column="dbT1001HihokenshaDaicho_hihokenshaNo" />
         <id column="dbT1001HihokenshaDaicho_idoYMD" />
         <id column="dbT1001HihokenshaDaicho_edaNo" />
-        <result property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <result property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <result property="tsuchishoNo" column="tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="tsuchishoNo" column="tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
         <result property="kijunYMD" column="kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <association property="資格の情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="賦課の情報" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaJohoRelateMapper.resultMap_FukaInfo"/>
@@ -1660,6 +1660,12 @@
         (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
         ON "TmpHonsantei"."shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
         ORDER BY
+            "dbT1001HihokenshaDaicho_hihokenshaNo",
+            "dbT1001HihokenshaDaicho_idoYMD",
+            "dbT1001HihokenshaDaicho_edaNo",
+            "choteiNendo",
+            "fukaNendo",
+            "tsuchishoNo",
             "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode",
             "UrT0508SeikatsuHogoJukyusha"."gyomuCode",
             "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD",
@@ -1960,6 +1966,11 @@
         AND "DbT2015KeisangoJoho"."fukaNendo" = #{賦課年度}
         AND "DbT2015KeisangoJoho"."sakuseiShoriName" = '異動賦課'
         <!--AND "DbT2015KeisangoJoho"."choteiNichiji" = #{調定日時}-->
-        ${出力順}
+        ${出力順},
+        "dbT2015KeisangoJoho_choteiNendo",
+        "dbT2015KeisangoJoho_fukaNendo",
+        "dbT2015KeisangoJoho_tsuchishoNo",
+        "dbT2015KeisangoJoho_koseiZengoKubun",
+        "dbT2015KeisangoJoho_sakuseiShoriName"
     </select>
 </mapper>

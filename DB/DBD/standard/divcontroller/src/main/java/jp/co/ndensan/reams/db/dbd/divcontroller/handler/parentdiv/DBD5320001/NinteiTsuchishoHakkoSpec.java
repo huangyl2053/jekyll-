@@ -40,7 +40,7 @@ public enum NinteiTsuchishoHakkoSpec implements IPredicate<NinteiTsuchishoHakkoD
     個別印刷選択複数件チェック {
                 @Override
                 public boolean apply(NinteiTsuchishoHakkoDiv div) {
-                    return div.getDgTaishoshaIchiran().getSelectedItems().size() == 1;
+                    return div.getDgTaishoshaIchiran().getSelectedItems().size() <= 1;
                 }
             };
 }

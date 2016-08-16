@@ -36,7 +36,6 @@ public class JikoFutangakuKeisanIkkatsuPanelHandler {
     private final JikoFutangakuKeisanIkkatsuPanelDiv div;
     private static final RString 処理枝番 = new RString("00");
     private static final RString 被保険者番号指定RAD = new RString("hihokenshaNo");
-    private static final RString 対象者計算RAD = new RString("shinsaYM");
     private static final RString 開始年度 = new RString("2014");
     private static final RString 開始MONTHDAY = new RString("0101");
     private static final RString 終了MONTHDAY = new RString("0731");
@@ -56,9 +55,9 @@ public class JikoFutangakuKeisanIkkatsuPanelHandler {
     }
 
     /**
-     * 画面初期化のメソッドます。
+     * 画面初期化対象者について計算のメソッドます。
      */
-    public void initialize() {
+    public void 画面初期化対象者について計算() {
         Association 市町村コードTemp = AssociationFinderFactory.createInstance().getAssociation();
         ShoriDateKanri 処理日付管理マスタ;
         ShoriDateKanriManager manager = new ShoriDateKanriManager();
@@ -80,7 +79,12 @@ public class JikoFutangakuKeisanIkkatsuPanelHandler {
         } else {
             div.getTxtUketoriYM().setValue(null);
         }
-        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200203.getReportId());
+    }
+
+     /**
+     * 画面初期化被保険者番号のメソッドます。
+     */
+    public void 画面初期化被保険者番号() {
         RString システム日付Year = RDate.getNowDate().getYear().toDateString();
         RString システム日付 = RDate.getNowDate().toDateString();
         int difference = Integer.parseInt(システム日付Year.toString()) - Integer.parseInt(開始年度.toString());
@@ -92,7 +96,16 @@ public class JikoFutangakuKeisanIkkatsuPanelHandler {
             datasource = insertIntoDatasource(difference);
         }
         div.getDdlNendo().setDataSource(datasource);
-        div.getDdlNendo().setSelectedKey(開始年度);
+        div.getDdlNendo().setSelectedKey(RDate.getNowDate().getNendo().plusYear(-1).toDateString());
+    }
+
+    /**
+     * 画面初期化のメソッドます。
+     */
+    public void initialize() {
+        画面初期化対象者について計算();
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200203.getReportId());
+        画面初期化被保険者番号();
     }
 
     /**
@@ -125,6 +138,9 @@ public class JikoFutangakuKeisanIkkatsuPanelHandler {
             div.getBtnHihokenshaSearch().setDisabled(false);
             div.getDdlNendo().setDisabled(false);
             div.getTxtHihokenshaNo().setRequired(true);
+            div.getTxtZenkaiUketoriYM().clearValue();
+            div.getTxtZenkaiShoriYMD().clearValue();
+            div.getTxtUketoriYM().clearValue();
             //TODO QA1076
             div.getTxtHihokenshaNo().setValue(被保険者番号入力);
         } else {
@@ -134,6 +150,9 @@ public class JikoFutangakuKeisanIkkatsuPanelHandler {
             div.getBtnHihokenshaSearch().setDisabled(true);
             div.getDdlNendo().setDisabled(true);
             div.getTxtUketoriYM().setRequired(true);
+            div.getTxtHihokenshaNo().clearValue();
+            画面初期化対象者について計算();
+            画面初期化被保険者番号();
         }
     }
 

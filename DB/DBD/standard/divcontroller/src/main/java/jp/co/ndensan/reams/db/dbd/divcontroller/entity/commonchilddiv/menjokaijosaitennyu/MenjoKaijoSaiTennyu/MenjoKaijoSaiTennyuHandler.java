@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenkoBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.gengaku.ShiharaiHohoHenkoGengaku;
+import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShoriKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.TainoHanteiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoKanriKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoTorokuKubun;
@@ -138,7 +139,7 @@ public class MenjoKaijoSaiTennyuHandler {
     }
 
     private void initializeDisplayData(ShiharaiHohoHenko shiharaiHohoHenko) {
-        div.setTitle(div.getKey_Button());
+        div.setTitle(ShoriKubun.toValue(div.getKey_Button()).get名称());
         div.getDgMenjoKaijoOrSaitennyu().setDisabled(false);
         div.getDgMenjoKaijoOrSaitennyu().setDataSource(createDateSource(shiharaiHohoHenko));
         div.getTxtTorokuJokyo().setValue(RString.EMPTY);

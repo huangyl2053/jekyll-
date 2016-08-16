@@ -10,13 +10,15 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.SogojigyohiSeiDoIchiranhy
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 総合事業費（経過措置）請求額通知書一覧表帳票HeaderIEditor
+ * 総合事業費（経過措置）請求額通知書一覧表帳票HeaderIEditorクラスです。
  *
  * @reamsid_L DBC-2480-031 jiangxiaolong
  */
@@ -27,7 +29,6 @@ public class SogojigyohiSeikyugakuTsuchishoKeikaSochiHeaderEditor implements ISo
     private static final RString SAKUSEI = new RString("作成");
     private final RString 総合計 = new RString("＊＊　総合計　＊＊");
     private final RString コード_99 = new RString("99");
-    private static final RString 漢字_分 = new RString("分");
 
     /**
      * コンストラクタです
@@ -49,9 +50,8 @@ public class SogojigyohiSeikyugakuTsuchishoKeikaSochiHeaderEditor implements ISo
         RString 作成時 = 作成日時.getTime()
                 .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
         source.printTimeStamp = 作成日.concat(RString.HALF_SPACE).concat(作成時);
-        source.shinsaYM = 帳票出力対象データ.get審査年月().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(漢字_分);
-        source.hokenshaNo = 帳票出力対象データ.get保険者番号().getColumnValue();
+        source.shinsaYM = パターン56(帳票出力対象データ.get審査年月());
+        source.hokenshaNo = getColumnValue(帳票出力対象データ.get保険者番号());
         source.hokenshaName = 帳票出力対象データ.get保険者名();
         if (コード_99.equals(帳票出力対象データ.get款コード())) {
             source.kanName = 帳票出力対象データ.get款名();
@@ -64,8 +64,23 @@ public class SogojigyohiSeikyugakuTsuchishoKeikaSochiHeaderEditor implements ISo
             source.kouName = RString.EMPTY;
         }
         source.kokuhorenName = 帳票出力対象データ.get国保連合会名();
-        source.shoKisaiHokenshaNo = 帳票出力対象データ.get証記載保険者番号().getColumnValue();
+        source.shoKisaiHokenshaNo = getColumnValue(帳票出力対象データ.get証記載保険者番号());
 
         return source;
+    }
+
+    private RString getColumnValue(IDbColumnMappable entity) {
+        if (null != entity) {
+            return entity.getColumnValue();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString パターン56(FlexibleYearMonth 年月) {
+        if (null == 年月) {
+            return RString.EMPTY;
+        }
+        return 年月.wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 }

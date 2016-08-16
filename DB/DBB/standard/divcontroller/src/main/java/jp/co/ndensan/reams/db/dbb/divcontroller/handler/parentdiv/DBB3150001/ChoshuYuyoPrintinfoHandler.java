@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.kaigofukachoshuyuyo.KaigoFukaChos
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -36,9 +37,9 @@ public class ChoshuYuyoPrintinfoHandler {
     private static final RString 徴収猶予取消通知書 = new RString("徴収猶予取消通知書");
 
     /**
+     * コンストラクタです。
      *
      * @param div JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelDiv
-     *
      */
     public ChoshuYuyoPrintinfoHandler(ChoshuYuyoJuminKihonDiv div) {
         this.div = div;
@@ -53,6 +54,8 @@ public class ChoshuYuyoPrintinfoHandler {
      */
     public void initialize(FlexibleYear 賦課年度, FlexibleYear 調定年度, TsuchishoNo 通知書番号) {
 
+        div.getPritPublish2().getComdiv1().initialize(true, null, false, true, null, false);
+        div.getPritPublish2().getComdiv1().setSendDateDisable(true);
         ChoshuYuyoJoho 徴収猶予情報 = KaigoFukaChoshuYuyo.createInstance().getChoshuYuyoJoho(調定年度, 賦課年度, 通知書番号);
         RString 徴収猶予状態区分 = 徴収猶予情報.get徴収猶予状態区分();
         RString 徴収猶予作成区分 = 徴収猶予情報.get徴収猶予作成区分();
@@ -93,10 +96,15 @@ public class ChoshuYuyoPrintinfoHandler {
             list.add(TsuchiSho.介護保険料徴収猶予取消通知書.get名称());
             pama.set発行する帳票List(list);
         }
-        pama.set賦課の情報_更正前(new FukaJoho(null));
+        pama.set賦課の情報_更正前(null);
         pama.set賦課の情報_更正後(賦課情報);
-        pama.set徴収猶予通知書_発行日(new FlexibleDate(div.getChoshuYuyoPrintinfo().getPritPublish2().getComdiv1().getIssueDate().toDateString()));
-//        pama.set徴収猶予通知書_文書番号();
+        RDate 発行日 = div.getChoshuYuyoPrintinfo().getPritPublish2().getComdiv1().getIssueDate();
+        if (発行日 != null) {
+            pama.set徴収猶予通知書_発行日(new FlexibleDate(div.getChoshuYuyoPrintinfo().getPritPublish2().getComdiv1().getIssueDate().toString()));
+        } else {
+            pama.set徴収猶予通知書_発行日(FlexibleDate.EMPTY);
+        }
+        pama.set徴収猶予通知書_文書番号(div.getPritPublish2().getBunshoBango1().get文書番号());
         pama.set変更通知書_文書番号(RString.EMPTY);
         pama.set変更通知書_発行日(FlexibleDate.EMPTY);
         pama.set決定通知書_文書番号(RString.EMPTY);

@@ -64,6 +64,10 @@ public enum ReportIdDBC {
      */
     DBC200054(new ReportId("DBC200054_KyufujissekiKoshinkekkaIchiran"), new RString("給付実績更新結果情報一覧表")),
     /**
+     * 受給者情報更新結果一覧表
+     */
+    DBC200055(new ReportId("DBC200055_JukyushaKoshinkekkaIchiran"), new RString("受給者情報更新結果一覧表")),
+    /**
      * 負担割合証（カット紙）
      */
     DBC100065(new ReportId("DBC100065_FutanWariaiSho"), new RString("負担割合証（カット紙）")),
@@ -259,6 +263,26 @@ public enum ReportIdDBC {
      *
      */
     DBC100011(new ReportId("DBC100011_KogakuOshiraseTsuchi"), new RString("高額サービス給付のお知らせ通知書")),
+    /**
+     * 帳票設計_DBCMN43002_高額介護（予防）サービス費支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ）の帳票ＩＤです。
+     */
+    DBC100009(new ReportId("DBC100009_KogakuKetteiTsuchiShoSealer"), new RString("高額介護（予防）サービス費支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ）")),
+    /**
+     * 帳票設計_DBCMN43002_高額介護（予防）サービス費支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）の帳票ＩＤです。
+     */
+    DBC100010(new ReportId("DBC100010_KogakuKetteiTsuchiShoSealer2"), new RString("高額介護（予防）サービス費支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）")),
+    /**
+     * 帳票設計_DBC200067_介護給付費等請求額通知書（公費負担者分）の帳票ＩＤです。
+     */
+    DBC200067(new ReportId("DBC200067_SeikyugakuTsuchishoKohi"), new RString("介護給付費等請求額通知書（公費負担者分）")),
+    /**
+     * （受給者台帳（一覧表）帳票ＩＤです。
+     */
+    DBC200006(new ReportId("DBC200006_KokuhorenJukyushaDaichoIchiran"), new RString("受給者台帳（一覧表）")),
+    /**
+     * 給付管理票取込結果一覧表帳票ＩＤです。
+     */
+    DBC200073(new ReportId("DBC200073_KyufuKanrihyoTorikomiKekkaIchiran"), new RString("給付管理票取込結果一覧表")),
     /**
      * 総合事業費等請求額通知書（公費負担者分）帳票ＩＤです。
      */

@@ -17,10 +17,10 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.FutanGenndoGakuNin
 public interface IFutanGenndoGakuNinnteiListMapper {
 
     /**
-     * 負担限度額認定の認定証発行情報を取得します．
+     * 負担額認定証・決定通知書発行一覧表発行情報を取得します．
      *
      * @param parameter パラメター
-     * @return 負担限度額認定の認定証発行情報
+     * @return 負担額認定証・決定通知書発行一覧表発行情報
      */
-    List<FutanGenndoGakuNinnteiListEntity> get負担限度額認定の認定証発行情報(FutanGenndoGakuNinnteiListMybatisParameter parameter);
+    List<FutanGenndoGakuNinnteiListEntity> get負担額認定証_決定通知書発行一覧表発行情報(FutanGenndoGakuNinnteiListMybatisParameter parameter);
 }

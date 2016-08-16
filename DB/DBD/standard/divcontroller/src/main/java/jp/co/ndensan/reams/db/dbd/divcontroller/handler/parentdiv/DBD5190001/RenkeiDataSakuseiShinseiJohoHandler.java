@@ -18,11 +18,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -172,16 +171,44 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
      * @param hihokenshaNo RString
      * @param saidaikensu RString
      * @param div RenkeiDataSakuseiShinseiJohoDiv
+     *
+     * @return div ResponseData<RenkeiDataSakuseiShinseiJohoDiv>
      */
-    public void 対象者一覧情報初期化(RString shoKisaiHokenshaNo,
+    public ResponseData<RenkeiDataSakuseiShinseiJohoDiv> 対象者一覧情報初期化(RString shoKisaiHokenshaNo,
             RDateTime konkaikaishiTimestamp,
             RDateTime konkaisyuryoTimestamp,
             RString hihokenshaNo,
             RString saidaikensu,
             RenkeiDataSakuseiShinseiJohoDiv div) {
+        RString saidaikensuall = new RString("");
         List<NinteiShinseiJohoBusiness> ninteishinseijohos = get検索対象者一覧情報(shoKisaiHokenshaNo,
                 konkaikaishiTimestamp, konkaisyuryoTimestamp, hihokenshaNo, saidaikensu);
-        取得の処理(ninteishinseijohos, div);
+        List<NinteiShinseiJohoBusiness> johosCount = get全部対象者一覧情報(shoKisaiHokenshaNo,
+                konkaikaishiTimestamp, konkaisyuryoTimestamp, hihokenshaNo, saidaikensuall);
+        取得の処理(ninteishinseijohos, johosCount, div);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * get対象者一覧情報
+     *
+     * @param shoKisaiHokenshaNo RString
+     * @param konkaikaishiTimestamp RString
+     * @param konkaisyuryoTimestamp RString
+     * @param hihokenshaNo RString
+     * @param saidaikensu RString
+     *
+     * @return ninteishinseijohos List<NinteiShinseiJohoBusiness>
+     */
+    public List<NinteiShinseiJohoBusiness> getNinteishinseijohos(RString shoKisaiHokenshaNo,
+            RDateTime konkaikaishiTimestamp,
+            RDateTime konkaisyuryoTimestamp,
+            RString hihokenshaNo,
+            RString saidaikensu) {
+        List<NinteiShinseiJohoBusiness> ninteishinseijohos = get検索対象者一覧情報(shoKisaiHokenshaNo,
+                konkaikaishiTimestamp, konkaisyuryoTimestamp, hihokenshaNo, saidaikensu);
+        return ninteishinseijohos;
+
     }
 
     /**
@@ -233,7 +260,19 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
         return ninteishiinseijohos;
     }
 
-    private void set検索対象者一覧情報(List<NinteiShinseiJohoBusiness> johos, RenkeiDataSakuseiShinseiJohoDiv div) {
+    private List<NinteiShinseiJohoBusiness> get全部対象者一覧情報(RString shoKisaiHokenshaNo,
+            RDateTime konkaikaishiTimestamp,
+            RDateTime konkaisyuryoTimestamp,
+            RString hihokenshaNo,
+            RString saidaikensuall) {
+        RenkeiDataSakuseiShinseiJohoManager nManager = RenkeiDataSakuseiShinseiJohoManager.createInstance();
+        List<NinteiShinseiJohoBusiness> johosCount = nManager.get対象者一覧情報の検索(shoKisaiHokenshaNo,
+                konkaikaishiTimestamp, konkaisyuryoTimestamp, hihokenshaNo, saidaikensuall).records();
+        return johosCount;
+    }
+
+    private void set検索対象者一覧情報(List<NinteiShinseiJohoBusiness> johos,
+            List<NinteiShinseiJohoBusiness> johosCount, RenkeiDataSakuseiShinseiJohoDiv div) {
         div.getTaishoshaIchiran().setIsOpen(true);
         List<dgTaishoshaIchiran_Row> rowList = new ArrayList<>();
         dgTaishoshaIchiran_Row row;
@@ -253,17 +292,15 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
             }
         }
         div.getDgTaishoshaIchiran().setDataSource(rowList);
+        div.getDgTaishoshaIchiran().getGridSetting().setLimitRowCount(johos.size());
+        div.getDgTaishoshaIchiran().getGridSetting().setSelectedRowCount(johosCount.size());
         div.getHanteiIraiIchiranhyo().setIsOpen(true);
         div.getHanteiIraiIchiranhyo().getTxtInsatsuDay().setValue(new RString(FlexibleDate.getNowDate().toString()));
     }
 
-    private void 取得の処理(List<NinteiShinseiJohoBusiness> johos, RenkeiDataSakuseiShinseiJohoDiv div) {
-        if (johos == null || johos.isEmpty()) {
-            div.getTaishoshaIchiran().setIsOpen(false);
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage().evaluate());
-        } else {
-            set検索対象者一覧情報(johos, div);
-        }
+    private void 取得の処理(List<NinteiShinseiJohoBusiness> johos,
+            List<NinteiShinseiJohoBusiness> johosCount, RenkeiDataSakuseiShinseiJohoDiv div) {
+        set検索対象者一覧情報(johos, johosCount, div);
     }
 
     private PersonalData toPersonalData(NinteiShinseiJohoBusiness ninteishinseijoho) {

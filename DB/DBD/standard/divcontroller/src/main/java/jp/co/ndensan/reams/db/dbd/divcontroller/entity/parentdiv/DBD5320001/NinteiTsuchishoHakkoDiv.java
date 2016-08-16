@@ -1073,13 +1073,13 @@ public class NinteiTsuchishoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public IBunshoBangoInputDiv getCcdIkkatsuServiceHenkoBunshoBango() {
-        return this.getIkkatsuHakko().getChushutsuTasho().getCcdIkkatsuServiceHenkoBunshoBango();
+    public IBunshoBangoInputDiv getCcdIkkatsuKubunHenkoBunshoBango() {
+        return this.getIkkatsuHakko().getChushutsuTasho().getCcdIkkatsuKubunHenkoBunshoBango();
     }
 
     @JsonIgnore
-    public IBunshoBangoInputDiv getCcdIkkatsuKubunHenkoBunshoBango() {
-        return this.getIkkatsuHakko().getChushutsuTasho().getCcdIkkatsuKubunHenkoBunshoBango();
+    public IBunshoBangoInputDiv getCcdIkkatsuServiceHenkoBunshoBango() {
+        return this.getIkkatsuHakko().getChushutsuTasho().getCcdIkkatsuServiceHenkoBunshoBango();
     }
 
     @JsonIgnore

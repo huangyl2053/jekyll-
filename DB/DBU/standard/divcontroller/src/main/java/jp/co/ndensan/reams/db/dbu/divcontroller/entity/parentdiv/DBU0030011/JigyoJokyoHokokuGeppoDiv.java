@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class JigyoJokyoHokokuGeppoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -38,6 +38,8 @@ public class JigyoJokyoHokokuGeppoDiv extends Panel {
     private RString koikiKoseiKubun;
     @JsonProperty("gappeiKubun")
     private RString gappeiKubun;
+    @JsonProperty("kyuShichoson")
+    private RString kyuShichoson;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -172,8 +174,76 @@ public class JigyoJokyoHokokuGeppoDiv extends Panel {
     }
 
     /*
+     * getkyuShichoson
+     * @return kyuShichoson
+     */
+    @JsonProperty("kyuShichoson")
+    public RString getKyuShichoson() {
+        return kyuShichoson;
+    }
+
+    /*
+     * setkyuShichoson
+     * @param kyuShichoson kyuShichoson
+     */
+    @JsonProperty("kyuShichoson")
+    public void setKyuShichoson(RString kyuShichoson) {
+        this.kyuShichoson = kyuShichoson;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
+    @JsonIgnore
+    public Label getLblKakoShukeiKekkaShutsuryoku() {
+        return this.getJikkoTanni().getLblKakoShukeiKekkaShutsuryoku();
+    }
+
+    @JsonIgnore
+    public void  setLblKakoShukeiKekkaShutsuryoku(Label lblKakoShukeiKekkaShutsuryoku) {
+        this.getJikkoTanni().setLblKakoShukeiKekkaShutsuryoku(lblKakoShukeiKekkaShutsuryoku);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlKakoHokokuYM() {
+        return this.getJikkoTanni().getDdlKakoHokokuYM();
+    }
+
+    @JsonIgnore
+    public void  setDdlKakoHokokuYM(DropDownList ddlKakoHokokuYM) {
+        this.getJikkoTanni().setDdlKakoHokokuYM(ddlKakoHokokuYM);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadHokenshaKyuShichoson() {
+        return this.getJikkoTanni().getRadHokenshaKyuShichoson();
+    }
+
+    @JsonIgnore
+    public void  setRadHokenshaKyuShichoson(RadioButton radHokenshaKyuShichoson) {
+        this.getJikkoTanni().setRadHokenshaKyuShichoson(radHokenshaKyuShichoson);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadKoikiKoseiShichoson() {
+        return this.getJikkoTanni().getRadKoikiKoseiShichoson();
+    }
+
+    @JsonIgnore
+    public void  setRadKoikiKoseiShichoson(RadioButton radKoikiKoseiShichoson) {
+        this.getJikkoTanni().setRadKoikiKoseiShichoson(radKoikiKoseiShichoson);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnShichosonSentaku() {
+        return this.getJikkoTanni().getBtnShichosonSentaku();
+    }
+
+    @JsonIgnore
+    public void  setBtnShichosonSentaku(ButtonDialog btnShichosonSentaku) {
+        this.getJikkoTanni().setBtnShichosonSentaku(btnShichosonSentaku);
+    }
+
     @JsonIgnore
     public Label getLblShutsuryokuTaisho() {
         return this.getTblShutsuryokuTaisho().getLblShutsuryokuTaisho();

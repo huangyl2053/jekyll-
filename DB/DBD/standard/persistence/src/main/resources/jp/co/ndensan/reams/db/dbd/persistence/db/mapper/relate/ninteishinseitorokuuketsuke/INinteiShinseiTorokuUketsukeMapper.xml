@@ -27,6 +27,7 @@
         <result property="申請届出者氏名カナ" column="申請届出者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="届出者_本人との関係" column="届出者_本人との関係" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="管内管外区分" column="管内管外区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
         <result property="申請届出者電話番号" column="申請届出者電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
         <result property="申請届出者郵便番号" column="申請届出者郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
         <result property="申請届出者住所" column="申請届出者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -85,7 +86,7 @@
         T4101."ninteiShinseiShinseijiKubunCode" AS 認定申請区分コード_申請時,
         V4001."shishoCode" AS 支所コード,
         V4001."kyuSochishaFlag" AS 旧措置者フラグ,
-        T4101."enkiTsuchiHakkoKaisu" AS 被保険者区分コード,
+        T4101."hihokenshaKubunCode" AS 被保険者区分コード,
         V4001."shikakuShutokuMaeShinseiFlag" AS 資格取得前申請フラグ,
         T4101."nigoTokuteiShippeiCode" AS 二号特定疾病コード,
         T4101."ninteiShinseiRiyu" AS 認定申請理由,
@@ -97,6 +98,7 @@
         T4120."shinseiTodokedeshaKanaShimei" AS 申請届出者氏名カナ,
         V4001."homninKankei" AS 届出者_本人との関係,
         PSM."kannaiKangaiKubun" AS 管内管外区分,
+        T7051."shichosonCode" AS 市町村コード,
         T4120."shinseiTodokedeshaTelNo" AS 申請届出者電話番号,
         T4120."shinseiTodokedeshaYubinNo" AS 申請届出者郵便番号,
         T4120."shinseiTodokedeshaJusho" AS 申請届出者住所,

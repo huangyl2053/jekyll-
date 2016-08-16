@@ -17,8 +17,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2240001.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2240001.NinteiOcrTorokuDataCollection;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2240001.NinteiTorokuData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2240001.dgTorikomiKekka_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2260001.TorokuData;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2260001.TorokuDataCollection;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2240001.NinteiChosaKekkaTorikomiOcrHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2240001.NinteiOcrDbT5210Handler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2240001.NinteiOcrDbT5211Handler;
@@ -211,23 +209,23 @@ public class NinteiChosaKekkaTorikomiOcr {
     }
 
     private void save共有フォルダ(NinteiChosaKekkaTorikomiOcrDiv div, FilesystemPath path) {
-        List<TorokuData> dataList = ViewStateHolder.get(ViewStateKeys.イメージ取込み, TorokuDataCollection.class).getDataList();
-        for (TorokuData data : dataList) {
+        List<NinteiTorokuData> csvData = ViewStateHolder.get(ViewStateKeys.認定調査結果取込み_OCR, NinteiOcrTorokuDataCollection.class).getDataList();
+        for (NinteiTorokuData data : csvData) {
             for (dgTorikomiKekka_Row row : div.getDgTorikomiKekka().getDataSource()) {
                 if (row.getHihoBango().equals(data.get被保険者番号())
                         && row.getShinseibi().equals(dateFormat(data.get申請日()))
                         && row.getShoKisaiHokenshaNo().equals(data.get保険者番号())
                         && row.getSelected()) {
-                    if (data.getT5115_イメージ共有ファイルID() == null) {
+                    if (data.getイメージ共有ファイルID() == null) {
                         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName
-                                .fromString(data.getT5101_証記載保険者番号().concat(data.getT5101_被保険者番号())));
+                                .fromString(data.get証記載保険者番号().concat(data.get被保険者番号())));
                         sfd = SharedFile.defineSharedFile(sfd);
                         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
                         SharedFileEntryDescriptor entity = SharedFile.copyToSharedFile(sfd, path, opts);
-                        updateDbT5115(new ShinseishoKanriNo(data.getT5101_申請書管理番号()), entity.getSharedFileId());
+                        updateDbT5115(new ShinseishoKanriNo(data.get申請書管理番号()), entity.getSharedFileId());
                     } else {
                         ReadOnlySharedFileEntryDescriptor or_sfd = new ReadOnlySharedFileEntryDescriptor(FilesystemName
-                                .fromString(data.getT5101_証記載保険者番号().concat(data.getT5101_被保険者番号())), data.getT5115_イメージ共有ファイルID());
+                                .fromString(data.get証記載保険者番号().concat(data.get被保険者番号())), data.getイメージ共有ファイルID());
                         SharedFile.appendNewFile(or_sfd, path, "");
                     }
                 }
@@ -274,6 +272,10 @@ public class NinteiChosaKekkaTorikomiOcr {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(), new RString("2"));
             ninteichosahyoGaikyoChosa = ninteichosahyoGaikyoChosa.createBuilderForEdit().set厚労省IF識別コード(
                     new Code(data.get厚労省IF識別コード())).build();
+            ninteichosahyoGaikyoChosa = ninteichosahyoGaikyoChosa.createBuilderForEdit().set認定調査依頼区分コード(data
+                    .get認定調査依頼区分コード()).build();
+            ninteichosahyoGaikyoChosa = ninteichosahyoGaikyoChosa.createBuilderForEdit().set認定調査回数(data
+                    .get認定調査回数()).build();
             if (!RString.isNullOrEmpty(data.get実施日時())) {
                 ninteichosahyoGaikyoChosa = ninteichosahyoGaikyoChosa.createBuilderForEdit().set認定調査実施年月日(
                         new FlexibleDate(data.get実施日時())).build();
@@ -343,6 +345,8 @@ public class NinteiChosaKekkaTorikomiOcr {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(), 1);
             ninteichosahyoServiceJokyoFlag = ninteichosahyoServiceJokyoFlag.createBuilderForEdit().setサービスの状況フラグ(実施場所_在宅
                     .equals(data.get住宅改修のあり_なし())).build();
+            ninteichosahyoServiceJokyoFlag = ninteichosahyoServiceJokyoFlag.createBuilderForEdit().set厚労省IF識別コード(new Code(data
+                    .get厚労省IF識別コード())).build();
         } else {
             ninteichosahyoServiceJokyoFlag = ninteichosahyoServiceJokyoFlag.createBuilderForEdit().setサービスの状況フラグ(実施場所_在宅
                     .equals(data.get住宅改修のあり_なし())).build().modifiedModel();
@@ -426,6 +430,8 @@ public class NinteiChosaKekkaTorikomiOcr {
                 csvData.setイメージ共有ファイルID(関連データ.getイメージ共有ファイルID());
                 csvData.set認定調査委託先コード(関連データ.get認定調査委託先コード());
                 csvData.set認定調査員コード(関連データ.get認定調査員コード());
+                csvData.set認定調査依頼区分コード(関連データ.get認定調査依頼区分コード());
+                csvData.set認定調査回数(関連データ.get認定調査回数());
                 dB更新用.add(csvData);
             }
         }

@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 帳票のCSVファイル作成のCsvEntity
+ * 帳票のCSVファイル作成のCsvEntityクラスです
  *
  * @@reamsid_L DBC-2480-010 jiangwenkai
  */

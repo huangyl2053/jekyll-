@@ -70,8 +70,8 @@ public class HikazeiNenkinKensakuHandler {
 
     private List<dgHikazeNenkinKensaku_Row> createDateSource(List<HousholdBusiness> 非課税年金検索) {
         List<dgHikazeNenkinKensaku_Row> rowList = new ArrayList();
-        dgHikazeNenkinKensaku_Row row = new dgHikazeNenkinKensaku_Row();
         for (int i = 0; i < 非課税年金検索.size(); i++) {
+            dgHikazeNenkinKensaku_Row row = new dgHikazeNenkinKensaku_Row();
             RStringBuilder 氏名 = new RStringBuilder("");
             氏名.append(非課税年金検索.get(i).getカナ氏名()).append(改行).append(非課税年金検索.get(i).get漢字氏名());
             row.setTxtdtKanjiShimei(氏名.toRString());

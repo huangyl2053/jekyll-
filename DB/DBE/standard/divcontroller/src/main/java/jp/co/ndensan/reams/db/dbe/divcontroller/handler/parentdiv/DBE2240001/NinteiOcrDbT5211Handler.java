@@ -361,6 +361,10 @@ public class NinteiOcrDbT5211Handler {
             item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_カテーテル()).build();
             調査項目.add(NinteichosaKomokuMapping09A.カテーテル.getコード());
         }
+        if (NinteichosaKomokuMapping09A.中心静脈栄養.getコード().equals(new RString(item.get連番()))) {
+            item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_中心静脈栄養()).build();
+            調査項目.add(NinteichosaKomokuMapping09A.中心静脈栄養.getコード());
+        }
         return item;
     }
 
@@ -370,7 +374,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.麻痺等_左上肢.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get麻痺_左上肢()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get麻痺_左上肢()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.麻痺等_右上肢.getコード())) {
@@ -378,7 +382,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.麻痺等_右上肢.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get麻痺_右上肢()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get麻痺_右上肢()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.麻痺等_左下肢.getコード())) {
@@ -386,7 +390,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.麻痺等_左下肢.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get麻痺_左下肢()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get麻痺_左下肢()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.麻痺等_右下肢.getコード())) {
@@ -394,7 +398,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.麻痺等_右下肢.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get麻痺_右下肢()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get麻痺_右下肢()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.麻痺等_その他.getコード())) {
@@ -402,7 +406,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.麻痺等_その他.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get麻痺_その他()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get麻痺_その他()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.拘縮_肩関節.getコード())) {
@@ -410,7 +414,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.拘縮_肩関節.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get拘縮_肩関節()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get拘縮_肩関節()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.拘縮_股関節.getコード())) {
@@ -418,7 +422,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.拘縮_股関節.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get拘縮_股関節()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get拘縮_股関節()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.拘縮_膝関節.getコード())) {
@@ -426,7 +430,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.拘縮_膝関節.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get拘縮_膝関節()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get拘縮_膝関節()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.拘縮_その他.getコード())) {
@@ -434,7 +438,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.拘縮_その他.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get拘縮_その他()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get拘縮_その他()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.寝返り.getコード())) {
@@ -442,7 +446,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.寝返り.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get寝返り()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get寝返り()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.起き上がり.getコード())) {
@@ -450,7 +454,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.起き上がり.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get起き上がり()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get起き上がり()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.座位保持.getコード())) {
@@ -458,7 +462,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.座位保持.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get座位保持()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get座位保持()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.両足での立位.getコード())) {
@@ -466,7 +470,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.両足での立位.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get両足での立位()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get両足での立位()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.歩行.getコード())) {
@@ -474,7 +478,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.歩行.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get歩行()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get歩行()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.立ち上がり.getコード())) {
@@ -482,7 +486,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.立ち上がり.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get立ち上がり()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get立ち上がり()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.片足での立位.getコード())) {
@@ -490,7 +494,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.片足での立位.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get片足での立位()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get片足での立位()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.洗身.getコード())) {
@@ -498,7 +502,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.洗身.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get洗身()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get洗身()).build();
             builder.setTodokedesha(item);
         }
     }
@@ -509,7 +513,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.聴力.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get聴力()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get聴力()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.移乗.getコード())) {
@@ -517,7 +521,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.移乗.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get移乗()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get移乗()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.移動.getコード())) {
@@ -525,7 +529,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.移動.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get移動()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get移動()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.えん下.getコード())) {
@@ -533,7 +537,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.えん下.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.getえん下()).build();
+            item = item.createBuilderForEdit().set調査項目(data.getえん下()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.食事摂取.getコード())) {
@@ -541,7 +545,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.食事摂取.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get食事摂取()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get食事摂取()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.排尿.getコード())) {
@@ -549,7 +553,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.排尿.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get排尿()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get排尿()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.排便.getコード())) {
@@ -557,7 +561,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.排便.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get排便()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get排便()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.口腔清潔.getコード())) {
@@ -565,7 +569,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.口腔清潔.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get口腔清潔()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get口腔清潔()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.洗顔.getコード())) {
@@ -573,7 +577,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.洗顔.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get洗顔()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get洗顔()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.整髪.getコード())) {
@@ -581,7 +585,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.整髪.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get整髪()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get整髪()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.上衣の着脱.getコード())) {
@@ -589,7 +593,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.上衣の着脱.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get上衣の着脱()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get上衣の着脱()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.ズボン等の着脱.getコード())) {
@@ -597,7 +601,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.ズボン等の着脱.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.getズボン等の着脱()).build();
+            item = item.createBuilderForEdit().set調査項目(data.getズボン等の着脱()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.外出頻度.getコード())) {
@@ -605,7 +609,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.外出頻度.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get外出頻度()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get外出頻度()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.意思の伝達.getコード())) {
@@ -613,7 +617,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.意思の伝達.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get意思の疎通()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get意思の疎通()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.毎日の日課を理解.getコード())) {
@@ -621,7 +625,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.毎日の日課を理解.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get毎日の日課を理解()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get毎日の日課を理解()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.生年月日をいう.getコード())) {
@@ -629,7 +633,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.生年月日をいう.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get生年月日をいう()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get生年月日をいう()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.短期記憶.getコード())) {
@@ -637,7 +641,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.短期記憶.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get短期記憶()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get短期記憶()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.自分の名前をいう.getコード())) {
@@ -645,7 +649,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.自分の名前をいう.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get自分の名前をいう()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get自分の名前をいう()).build();
             builder.setTodokedesha(item);
         }
     }
@@ -656,7 +660,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.常時の徘徊.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get徘徊()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get徘徊()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.外出して戻れない.getコード())) {
@@ -664,7 +668,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.外出して戻れない.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get外出して戻れない()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get外出して戻れない()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.被害的.getコード())) {
@@ -672,7 +676,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.被害的.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get被害的()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get被害的()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.作話.getコード())) {
@@ -680,7 +684,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.作話.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get作話()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get作話()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.感情が不安定.getコード())) {
@@ -688,7 +692,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.感情が不安定.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get感情が不安定()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get感情が不安定()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.昼夜逆転.getコード())) {
@@ -696,7 +700,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.昼夜逆転.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get昼夜逆転()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get昼夜逆転()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.同じ話をする.getコード())) {
@@ -704,7 +708,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.同じ話をする.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get同じ話をする()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get同じ話をする()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.大声を出す.getコード())) {
@@ -712,7 +716,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.大声を出す.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get大声を出す()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get大声を出す()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.介護に抵抗.getコード())) {
@@ -720,7 +724,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.介護に抵抗.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get介護に抵抗()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get介護に抵抗()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.落ち着きなし.getコード())) {
@@ -728,7 +732,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.落ち着きなし.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get落ち着きなし()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get落ち着きなし()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.一人で出たがる.getコード())) {
@@ -736,7 +740,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.一人で出たがる.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get一人で出たがる()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get一人で出たがる()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.収集癖.getコード())) {
@@ -744,7 +748,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.収集癖.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get収集癖()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get収集癖()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.物や衣類を壊す.getコード())) {
@@ -752,7 +756,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.物や衣類を壊す.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get物や衣類を壊す()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get物や衣類を壊す()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.ひどい物忘れ.getコード())) {
@@ -760,7 +764,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.ひどい物忘れ.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.getひどい物忘れ()).build();
+            item = item.createBuilderForEdit().set調査項目(data.getひどい物忘れ()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.独り言_独り笑い.getコード())) {
@@ -768,7 +772,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.独り言_独り笑い.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get独り言_独り笑い()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get独り言_独り笑い()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.自分勝手に行動する.getコード())) {
@@ -776,7 +780,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.自分勝手に行動する.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get自分勝手に行動する()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get自分勝手に行動する()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.話がまとまらない.getコード())) {
@@ -784,7 +788,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.話がまとまらない.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get話がまとまらない()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get話がまとまらない()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.薬の内服.getコード())) {
@@ -792,7 +796,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.薬の内服.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get薬の内服()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get薬の内服()).build();
             builder.setTodokedesha(item);
         }
     }
@@ -803,7 +807,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.今の季節を理解.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get今の季節を理解()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get今の季節を理解()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.場所の理解.getコード())) {
@@ -811,7 +815,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.場所の理解.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get場所の理解()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get場所の理解()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.金銭の管理.getコード())) {
@@ -819,7 +823,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.金銭の管理.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get金銭の管理()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get金銭の管理()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.日常の意思決定.getコード())) {
@@ -827,7 +831,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.日常の意思決定.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get日常の意思決定()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get日常の意思決定()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.つめ切り.getコード())) {
@@ -835,7 +839,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.つめ切り.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.getつめ切り()).build();
+            item = item.createBuilderForEdit().set調査項目(data.getつめ切り()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.視力.getコード())) {
@@ -843,7 +847,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.視力.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get視力()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get視力()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.集団への不適応.getコード())) {
@@ -851,7 +855,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.集団への不適応.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get集団への不適応()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get集団への不適応()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.買い物.getコード())) {
@@ -859,7 +863,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.買い物.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get買い物()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get買い物()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.簡単な調理.getコード())) {
@@ -867,7 +871,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.簡単な調理.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get簡単な調理()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get簡単な調理()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.点滴の管理.getコード())) {
@@ -875,7 +879,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.点滴の管理.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_点滴の管理()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_点滴の管理()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.透析.getコード())) {
@@ -883,7 +887,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.透析.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_透折()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_透折()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.ストーマの処置.getコード())) {
@@ -891,7 +895,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.ストーマの処置.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_ストーマの処理()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_ストーマの処理()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.酸素療法.getコード())) {
@@ -899,7 +903,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.酸素療法.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_酸素療法()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_酸素療法()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.レスピレーター.getコード())) {
@@ -907,7 +911,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.レスピレーター.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_レスピレーター()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_レスピレーター()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.気管切開の処置.getコード())) {
@@ -915,7 +919,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.気管切開の処置.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_気管切開の処理()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_気管切開の処理()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.疼痛の看護.getコード())) {
@@ -923,7 +927,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.疼痛の看護.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_疼痛()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_疼痛()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.経管栄養.getコード())) {
@@ -931,7 +935,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.経管栄養.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_経管栄養()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_経管栄養()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.モニター測定.getコード())) {
@@ -939,7 +943,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.モニター測定.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_モニター測定()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_モニター測定()).build();
             builder.setTodokedesha(item);
         }
     }
@@ -950,7 +954,7 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.じょくそうの処置.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_じょくそうの処置()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_じょくそうの処置()).build();
             builder.setTodokedesha(item);
         }
         if (!調査項目.contains(NinteichosaKomokuMapping09A.カテーテル.getコード())) {
@@ -958,7 +962,15 @@ public class NinteiOcrDbT5211Handler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     rStringToInt(NinteichosaKomokuMapping09A.カテーテル.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
-            item = item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_カテーテル()).build();
+            item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_カテーテル()).build();
+            builder.setTodokedesha(item);
+        }
+        if (!調査項目.contains(NinteichosaKomokuMapping09A.中心静脈栄養.getコード())) {
+            NinteichosahyoChosaItem item = new NinteichosahyoChosaItem(new ShinseishoKanriNo(
+                    data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
+                    rStringToInt(NinteichosaKomokuMapping09A.中心静脈栄養.getコード()));
+            item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
+            item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_中心静脈栄養()).build();
             builder.setTodokedesha(item);
         }
     }

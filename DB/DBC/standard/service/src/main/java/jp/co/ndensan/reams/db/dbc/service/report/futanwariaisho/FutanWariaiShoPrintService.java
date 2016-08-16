@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.service.report.futanwariaisho;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho.FutanWariaiShoEntity;
+import jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho.FutanWariaiShoDivParameter;
 import jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho.FutanWariaiShoProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho.FutanWariaiShoReport;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -92,11 +92,11 @@ public class FutanWariaiShoPrintService {
      *
      * @param 識別コード ShikibetsuCode
      * @param 被保険者番号 HihokenshaNo
-     * @param entity FutanWariaiShoEntity
+     * @param entity FutanWariaiShoDivParameter
      * @param flag RString
      * @return SourceDataCollection
      */
-    public SourceDataCollection printSingle(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FutanWariaiShoEntity entity, RString flag) {
+    public SourceDataCollection printSingle(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FutanWariaiShoDivParameter entity, RString flag) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
             print(識別コード, 被保険者番号, entity, flag, reportManager);
@@ -111,11 +111,11 @@ public class FutanWariaiShoPrintService {
      *
      * @param 識別コード ShikibetsuCode
      * @param 被保険者番号 HihokenshaNo
-     * @param entity FutanWariaiShoEntity
+     * @param entity FutanWariaiShoDivParameter
      * @param flag RString
      * @param reportManager ReportManager
      */
-    public void print(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FutanWariaiShoEntity entity, RString flag, ReportManager reportManager) {
+    public void print(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FutanWariaiShoDivParameter entity, RString flag, ReportManager reportManager) {
         FutanWariaiShoProperty property = new FutanWariaiShoProperty();
         try (ReportAssembler<FutanWariaiShoSource> assembler = createAssembler(property, reportManager)) {
             Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, 種別コード,

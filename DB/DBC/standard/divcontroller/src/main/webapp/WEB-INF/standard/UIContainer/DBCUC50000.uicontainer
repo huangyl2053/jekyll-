@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC50000",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "受給者給付実績台帳DBC5000011",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC5000011",
+     "toLayoutTitle": "受給者給付実績台帳",
+     "toState": "default"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC5000011",
+     "layoutTitle": "受給者給付実績台帳",
+     "eventName": "完了",
+     "destroy": true,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

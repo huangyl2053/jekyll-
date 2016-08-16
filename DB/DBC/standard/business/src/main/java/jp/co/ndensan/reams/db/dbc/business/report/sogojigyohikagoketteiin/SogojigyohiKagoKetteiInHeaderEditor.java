@@ -18,8 +18,9 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
+ * 総合事業費（経過措置）過誤決定通知書情報取込一覧表帳票Editor。
  *
- * @author fzou
+ * @reamsid_L DBC-2550-030　jianglaishen
  */
 public class SogojigyohiKagoKetteiInHeaderEditor implements ISogojigyohiKagoKetteiInEditor {
 
@@ -35,7 +36,7 @@ public class SogojigyohiKagoKetteiInHeaderEditor implements ISogojigyohiKagoKett
     private static final RString KEY_並び順の４件目 = new RString("KEY_並び順の４件目");
     private static final RString KEY_並び順の５件目 = new RString("KEY_並び順の５件目");
     private static final RString KEY_並び順の６件目 = new RString("KEY_並び順の６件目");
-    
+
     /**
      * コンストラクタです
      *
@@ -66,9 +67,9 @@ public class SogojigyohiKagoKetteiInHeaderEditor implements ISogojigyohiKagoKett
         }
         source.hokenshaName = 帳票出力対象データ.get保険者名();
         if (null != 帳票出力対象データ.get証記載保険者番号()) {
-            source.hokenshaNo = 帳票出力対象データ.get証記載保険者番号().getColumnValue();
+            source.shoKisaiHokenshaNo = 帳票出力対象データ.get証記載保険者番号().getColumnValue();
         }
-        source.hokenshaName = 帳票出力対象データ.get証記載保険者名();
+        source.shoKisaiHokenshaName = 帳票出力対象データ.get証記載保険者名();
         source.shutsuryokujun1 = get並び順(KEY_並び順の２件目);
         source.shutsuryokujun2 = get並び順(KEY_並び順の３件目);
         source.shutsuryokujun3 = get並び順(KEY_並び順の４件目);
@@ -79,10 +80,10 @@ public class SogojigyohiKagoKetteiInHeaderEditor implements ISogojigyohiKagoKett
         source.kaipage3 = RString.EMPTY;
         source.kaipage4 = RString.EMPTY;
         source.kaipage5 = RString.EMPTY;
-        
+
         return source;
     }
-    
+
     private RString get並び順(RString 並び順Key) {
         return 出力順Map.containsKey(並び順Key) ? 出力順Map.get(並び順Key) : RString.EMPTY;
     }

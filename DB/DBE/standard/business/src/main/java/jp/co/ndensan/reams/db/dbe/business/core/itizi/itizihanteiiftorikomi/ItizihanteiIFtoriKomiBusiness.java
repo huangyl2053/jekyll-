@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteizumifoutput.Ichij
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.itizihanteiiftorikomi.IchijiHanteiKekkaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.itizihanteiiftorikomi.ItizihanteiIFtoriKomiRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.GaizenseiHyokaCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.JotaiAnteiseiCode;
@@ -132,8 +131,7 @@ public class ItizihanteiIFtoriKomiBusiness {
             dbt5010Entity.setIchijiHanteiKekkaCode(new Code(entity.getIchijiHanteiKekkaCode()));
         }
         if (認定ｿﾌﾄ99.value().equals(entity.getKoroshoIfShikibetsuCode())) {
-            dbt5010Entity.setIchijiHanteiKekkaNinchishoKasanCode(new Code(IchijiHanteiKekkaCode99
-                    .valueOf(entity.getIchijiHanteiKekkaCode().toString()).toString()));
+            dbt5010Entity.setIchijiHanteiKekkaNinchishoKasanCode(new Code(entity.getIchijiHanteiKekkaCode()));
         } else if (認定ｿﾌﾄ2009_A.value().equals(entity.getKoroshoIfShikibetsuCode())
                 && 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaNinchishoKasanCode(new Code(entity.getIchijiHanteiKekkaCode()));
@@ -154,11 +152,9 @@ public class ItizihanteiIFtoriKomiBusiness {
         dbt5010Entity.setChukanHyokaKomoku4gun(Integer.parseInt(entity.getChukanHyokaKomoku4gun().toString()));
         dbt5010Entity.setChukanHyokaKomoku5gun(Integer.parseInt(entity.getChukanHyokaKomoku5gun().toString()));
         dbt5010Entity.setIchijiHnateiKeikokuCode(entity.getIchijiHnateiKeikokuCode());
-        dbt5010Entity.setJotaiAnteiseiCode(new Code(JotaiAnteiseiCode.toValue(entity.getJotaiAnteiseiCode()).getコード().toString()));
-        dbt5010Entity.setNinchishoJiritsudoIIijoNoGaizensei(new Decimal(GaizenseiHyokaCode.toValue(entity.getNinchishoJiritsudoIIijoNoGaizensei())
-                .getコード().toString()));
-        dbt5010Entity.setSuiteiKyufuKubunCode(new Code(SuiteiKyufuKubunCode.toValue(entity.getSuiteiKyufuKubunCode())
-                .getコード()));
+        dbt5010Entity.setJotaiAnteiseiCode(new Code(JotaiAnteiseiCode.valueOf(entity.getJotaiAnteiseiCode().toString()).getコード()));
+        dbt5010Entity.setNinchishoJiritsudoIIijoNoGaizensei(new Decimal(entity.getNinchishoJiritsudoIIijoNoGaizensei().toString()));
+        dbt5010Entity.setSuiteiKyufuKubunCode(new Code(SuiteiKyufuKubunCode.valueOf(entity.getSuiteiKyufuKubunCode().toString()).getコード()));
         return dbt5010Entity;
     }
 
@@ -168,24 +164,24 @@ public class ItizihanteiIFtoriKomiBusiness {
      * @param entity IchijiHanteizumIfOutputEucCsvEntity
      * @return 連携対象項目一覧判定
      */
-    public boolean 連携対象項目一覧判定(IchijiHanteizumIfOutputEucCsvEntity entity) {
+    public boolean get連携対象項目一覧判定(IchijiHanteizumIfOutputEucCsvEntity entity) {
         boolean 連携対象項目一覧判定 = false;
-        if ((連携対象項目一覧Null(entity))
-                || (項目の空判定(entity))
-                || (項目の空判定_2(entity))
-                || (項目の空判定_3(entity))
-                || (項目の空判定_4(entity))
-                || (項目の空判定_5(entity))
-                || (項目の空判定_6(entity))
-                || (項目の空判定_7(entity))
-                || (項目の空判定_8(entity))
-                || (項目の空判定_9(entity))) {
+        if ((get連携対象項目一覧Null(entity))
+                || (get項目の空判定(entity))
+                || (get項目の空判定_2(entity))
+                || (get項目の空判定_3(entity))
+                || (get項目の空判定_4(entity))
+                || (get項目の空判定_5(entity))
+                || (get項目の空判定_6(entity))
+                || (get項目の空判定_7(entity))
+                || (get項目の空判定_8(entity))
+                || (get項目の空判定_9(entity))) {
             連携対象項目一覧判定 = true;
         }
         return 連携対象項目一覧判定;
     }
 
-    private boolean 連携対象項目一覧Null(IchijiHanteizumIfOutputEucCsvEntity entity) {
+    private boolean get連携対象項目一覧Null(IchijiHanteizumIfOutputEucCsvEntity entity) {
         return RString.isNullOrEmpty(entity.get中心静脈栄養())
                 || RString.isNullOrEmpty(entity.get透析())
                 || RString.isNullOrEmpty(entity.getストーマの処置())
@@ -202,7 +198,7 @@ public class ItizihanteiIFtoriKomiBusiness {
 
     }
 
-    private boolean 項目の空判定_6(IchijiHanteizumIfOutputEucCsvEntity entity) {
+    private boolean get項目の空判定_6(IchijiHanteizumIfOutputEucCsvEntity entity) {
         return RString.isNullOrEmpty(entity.get昼夜逆転())
                 || RString.isNullOrEmpty(entity.get同じ話をする())
                 || RString.isNullOrEmpty(entity.get大声を出す())
@@ -224,7 +220,7 @@ public class ItizihanteiIFtoriKomiBusiness {
                 || RString.isNullOrEmpty(entity.get点滴の管理());
     }
 
-    private boolean 項目の空判定_7(IchijiHanteizumIfOutputEucCsvEntity entity) {
+    private boolean get項目の空判定_7(IchijiHanteizumIfOutputEucCsvEntity entity) {
         return RString.isNullOrEmpty(entity.getシーケンシャル番号())
                 || RString.isNullOrEmpty(entity.get識別コード())
                 || RString.isNullOrEmpty(entity.get保険者番号())
@@ -243,7 +239,7 @@ public class ItizihanteiIFtoriKomiBusiness {
                 || RString.isNullOrEmpty(entity.get主治医医療機関番号());
     }
 
-    private boolean 項目の空判定_5(IchijiHanteizumIfOutputEucCsvEntity entity) {
+    private boolean get項目の空判定_5(IchijiHanteizumIfOutputEucCsvEntity entity) {
         return RString.isNullOrEmpty(entity.get排便())
                 || RString.isNullOrEmpty(entity.get口腔清潔())
                 || RString.isNullOrEmpty(entity.get洗顔())
@@ -265,7 +261,7 @@ public class ItizihanteiIFtoriKomiBusiness {
                 || RString.isNullOrEmpty(entity.get感情が不安定());
     }
 
-    private boolean 項目の空判定_4(IchijiHanteizumIfOutputEucCsvEntity entity) {
+    private boolean get項目の空判定_4(IchijiHanteizumIfOutputEucCsvEntity entity) {
         return RString.isNullOrEmpty(entity.get拘縮股関節())
                 || RString.isNullOrEmpty(entity.get拘縮膝関節())
                 || RString.isNullOrEmpty(entity.get拘縮その他())
@@ -287,7 +283,7 @@ public class ItizihanteiIFtoriKomiBusiness {
                 || RString.isNullOrEmpty(entity.get排尿());
     }
 
-    private boolean 項目の空判定_3(IchijiHanteizumIfOutputEucCsvEntity entity) {
+    private boolean get項目の空判定_3(IchijiHanteizumIfOutputEucCsvEntity entity) {
         return RString.isNullOrEmpty(entity.get介護予防居宅療養管理指導())
                 || RString.isNullOrEmpty(entity.get介護予防通所介護デイサービス())
                 || RString.isNullOrEmpty(entity.get介護予防通所リハビリテーション())
@@ -308,7 +304,7 @@ public class ItizihanteiIFtoriKomiBusiness {
                 || RString.isNullOrEmpty(entity.get拘縮肩関節());
     }
 
-    private boolean 項目の空判定_2(IchijiHanteizumIfOutputEucCsvEntity entity) {
+    private boolean get項目の空判定_2(IchijiHanteizumIfOutputEucCsvEntity entity) {
         return RString.isNullOrEmpty(entity.get短期入所生活介護ショートステイ())
                 || RString.isNullOrEmpty(entity.get短期入所療養介護())
                 || RString.isNullOrEmpty(entity.get特定施設入居者生活介護())
@@ -329,7 +325,7 @@ public class ItizihanteiIFtoriKomiBusiness {
                 || RString.isNullOrEmpty(entity.get介護予防訪問リハビリテーション());
     }
 
-    private boolean 項目の空判定(IchijiHanteizumIfOutputEucCsvEntity entity) {
+    private boolean get項目の空判定(IchijiHanteizumIfOutputEucCsvEntity entity) {
         return RString.isNullOrEmpty(entity.get中間評価項目得点第１群())
                 || RString.isNullOrEmpty(entity.get中間評価項目得点第２群())
                 || RString.isNullOrEmpty(entity.get中間評価項目得点第３群())
@@ -350,9 +346,8 @@ public class ItizihanteiIFtoriKomiBusiness {
                 || RString.isNullOrEmpty(entity.get通所リハビリテーション());
     }
 
-    private boolean 項目の空判定_8(IchijiHanteizumIfOutputEucCsvEntity entity) {
-        return RString.isNullOrEmpty(entity.get要介護認定等基準時間())
-                || RString.isNullOrEmpty(entity.get要介護認定等基準時間食事())
+    private boolean get項目の空判定_8(IchijiHanteizumIfOutputEucCsvEntity entity) {
+        return RString.isNullOrEmpty(entity.get要介護認定等基準時間食事())
                 || RString.isNullOrEmpty(entity.get要介護認定等基準時間排泄())
                 || RString.isNullOrEmpty(entity.get要介護認定等基準時間移動())
                 || RString.isNullOrEmpty(entity.get要介護認定等基準時間清潔保持())
@@ -363,7 +358,7 @@ public class ItizihanteiIFtoriKomiBusiness {
                 || RString.isNullOrEmpty(entity.get要介護認定等基準時間認知症加算());
     }
 
-    private boolean 項目の空判定_9(IchijiHanteizumIfOutputEucCsvEntity entity) {
+    private boolean get項目の空判定_9(IchijiHanteizumIfOutputEucCsvEntity entity) {
         return RString.isNullOrEmpty(entity.get意見書依頼日())
                 || RString.isNullOrEmpty(entity.get意見書入手日())
                 || RString.isNullOrEmpty(entity.get意見書短期記憶())
@@ -386,21 +381,20 @@ public class ItizihanteiIFtoriKomiBusiness {
      * @param 一次判定結果名称 一次判定結果名称
      * @return RString
      */
-    public RString 要介護認定一次判定結果コードの名称(RString 一次判定結果名称) {
-        RString 一次判定 = 要介護認定一次判定結果コード99の名称(一次判定結果名称);
+    public RString get要介護認定一次判定結果コードの名称(RString 一次判定結果名称) {
+        RString 一次判定 = get要介護認定一次判定結果コード99の名称(一次判定結果名称);
         if (!一次判定.isEmpty()) {
             return 一次判定;
         }
-        RString コード09 = 要介護認定一次判定結果コード09の名称(一次判定結果名称);
-        if (コード09.isEmpty()) {
+        RString コード09 = get要介護認定一次判定結果コード09の名称(一次判定結果名称);
+        if (!コード09.isEmpty()) {
             return コード09;
         }
         return RString.EMPTY;
     }
 
-    private RString 要介護認定一次判定結果コード99の名称(RString 一次判定結果名称) {
+    private RString get要介護認定一次判定結果コード99の名称(RString 一次判定結果名称) {
         if (IchijiHanteiKekkaCode99.みなし要支援.get名称().equals(一次判定結果名称)) {
-
             return IchijiHanteiKekkaCode99.みなし要支援.getコード();
         } else if (IchijiHanteiKekkaCode99.みなし非該当.get名称().equals(一次判定結果名称)) {
             return IchijiHanteiKekkaCode99.みなし非該当.getコード();
@@ -422,9 +416,8 @@ public class ItizihanteiIFtoriKomiBusiness {
         return RString.EMPTY;
     }
 
-    private RString 要介護認定一次判定結果コード09の名称(RString 一次判定結果名称) {
+    private RString get要介護認定一次判定結果コード09の名称(RString 一次判定結果名称) {
         if (IchijiHanteiKekkaCode09.要介護1.get名称().equals(一次判定結果名称)) {
-
             return IchijiHanteiKekkaCode09.要介護1.getコード();
         } else if (IchijiHanteiKekkaCode09.要介護2.get名称().equals(一次判定結果名称)) {
             return IchijiHanteiKekkaCode09.要介護2.getコード();

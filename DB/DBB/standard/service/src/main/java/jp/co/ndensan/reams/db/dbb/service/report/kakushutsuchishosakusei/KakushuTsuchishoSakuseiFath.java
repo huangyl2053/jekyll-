@@ -499,12 +499,13 @@ public class KakushuTsuchishoSakuseiFath {
         requireNonNull(仮算定_本算定_過年度区分, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_仮算定_本算定_過年度区分.toString()));
 
         RString 納入通知書タイプ = get納入通知書タイプ(出力期);
+        RString 過年度納入通知書タイプ = get過年度納入通知書タイプ(出力期);
         if (仮算定_区分.equals(仮算定_本算定_過年度区分)) {
             return get仮算定帳票ID(納入通知書制御情報, 納入通知書タイプ);
         } else if (本算定_区分.equals(仮算定_本算定_過年度区分)) {
             return get本算定帳票ID(納入通知書制御情報, 納入通知書タイプ);
         } else if (過年度_区分.equals(仮算定_本算定_過年度区分)) {
-            return get過年度帳票ID(納入通知書制御情報, 納入通知書タイプ);
+            return get過年度帳票ID(納入通知書制御情報, 過年度納入通知書タイプ);
         }
         return null;
     }
@@ -598,6 +599,53 @@ public class KakushuTsuchishoSakuseiFath {
             }
         }
         return null;
+    }
+
+    private RString get過年度納入通知書タイプ(RString 出力期) {
+
+        RString 設定値 = 定値_0;
+        RDate 運用日 = RDate.getNowDate();
+        switch (Integer.parseInt(出力期.toString())) {
+            case 定値_1期:
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の型1, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_2期:
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の型2, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_3期:
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の型3, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_4期:
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の型4, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_5期:
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の型5, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_6期:
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の型6, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_7期:
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の型7, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_8期:
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の型8, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_9期:
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の型9, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_10期:
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の型10, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_11期:
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の型11, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_12期:
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の型12, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            default:
+                break;
+        }
+        return set納入通知書タイプ(設定値);
     }
 
     private RString get納入通知書タイプ(RString 出力期) {

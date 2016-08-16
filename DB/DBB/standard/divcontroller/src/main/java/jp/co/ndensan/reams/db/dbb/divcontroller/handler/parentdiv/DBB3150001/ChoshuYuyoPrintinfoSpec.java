@@ -42,7 +42,7 @@ public enum ChoshuYuyoPrintinfoSpec implements IPredicate<ChoshuYuyoJuminKihonDi
                 is徴収猶予取消通知書checked = 発行パネル.getPritPublish2().isIsPublish() && 発行パネル.getPritPublish2().isVisible();
                 is徴収猶予決定通知書checked = false;
             }
-            return is徴収猶予決定通知書checked || is徴収猶予決定通知書checked;
+            return is徴収猶予決定通知書checked || is徴収猶予取消通知書checked;
         }
 
     }

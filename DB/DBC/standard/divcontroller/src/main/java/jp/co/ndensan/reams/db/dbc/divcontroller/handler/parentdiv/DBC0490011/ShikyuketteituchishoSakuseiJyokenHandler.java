@@ -222,13 +222,6 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
         parameter.set抽出条件日付From(抽出条件日付From);
         parameter.set抽出条件日付To(抽出条件日付To);
         parameter.set決定者受付年月(div.getChushutsuJoken().getTxtKetteishaUketukeNengetsu().getValue());
-        if (KEY0.equals(div.getChushutsuJoken().getRadInshoSentaku().getSelectedKey())) {
-            parameter.set印書(STR_1);
-        } else if (KEY1.equals(div.getChushutsuJoken().getRadInshoSentaku().getSelectedKey())) {
-            parameter.set印書(STR_2);
-        } else if (KEY2.equals(div.getChushutsuJoken().getRadInshoSentaku().getSelectedKey())) {
-            parameter.set印書(STR_3);
-        }
         if (KEY0.equals(div.getChushutsuJoken().getRadKogakuJidoShokanSentaku().getSelectedKey())) {
             parameter.set高額自動償還(STR_1);
         } else if (KEY1.equals(div.getChushutsuJoken().getRadKogakuJidoShokanSentaku().getSelectedKey())) {
@@ -236,6 +229,7 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
         } else if (KEY2.equals(div.getChushutsuJoken().getRadKogakuJidoShokanSentaku().getSelectedKey())) {
             parameter.set高額自動償還(STR_3);
         }
+        set印書(parameter);
         parameter.set発行日(div.getShikyuKetteiTsuchisho().getTxtHakkobi().getValue());
         RString 文書番号 = div.getShikyuKetteiTsuchisho().getCcdBunshoBangoInput().get文書番号();
         if (文書番号 != null && !文書番号.isEmpty()) {
@@ -275,5 +269,15 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
             parameter.set出力順ID(出力順ID);
         }
         return parameter;
+    }
+
+    private void set印書(KogakuJigyoServicehiShikyuKetteiTsuchishoParameter parameter) {
+        if (KEY0.equals(div.getChushutsuJoken().getRadInshoSentaku().getSelectedKey())) {
+            parameter.set印書(STR_1);
+        } else if (KEY1.equals(div.getChushutsuJoken().getRadInshoSentaku().getSelectedKey())) {
+            parameter.set印書(STR_2);
+        } else if (KEY2.equals(div.getChushutsuJoken().getRadInshoSentaku().getSelectedKey())) {
+            parameter.set印書(STR_3);
+        }
     }
 }

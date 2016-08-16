@@ -34,8 +34,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @reamsid_L DBC-4790-010 chenyadong
  */
 public class JikoFutangakuKeisanIkkatsuPanel {
-     private static final RString 出力対象_2 = new RString("2");
-     private static final RString 出力対象_1 = new RString("1");
+
+    private static final RString 出力対象_2 = new RString("2");
+    private static final RString 出力対象_1 = new RString("1");
+
     /**
      * 画面初期化のメソッドます。
      *
@@ -82,12 +84,12 @@ public class JikoFutangakuKeisanIkkatsuPanel {
      * @return ResponseData
      */
     public ResponseData<JikoFutangakuKeisanIkkatsuPanelDiv> onBeforeOpenCheck(JikoFutangakuKeisanIkkatsuPanelDiv div) {
-       if(div.getJikoFutangakuKeisanKekkaIchiranhyoPanelPublish().isIsPublish()){
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateFor出力順未設定チェック();
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        if (div.getJikoFutangakuKeisanKekkaIchiranhyoPanelPublish().isIsPublish()) {
+            ValidationMessageControlPairs validPairs = getValidationHandler(div).validateFor出力順未設定チェック();
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
         }
-       }
         return ResponseData.of(div).respond();
     }
 
@@ -107,28 +109,19 @@ public class JikoFutangakuKeisanIkkatsuPanel {
     private JikoFutangakuKeisanIkkatsuPanelBatchParameter setBatchParameter(JikoFutangakuKeisanIkkatsuPanelDiv div) {
         RString 被保険者番号指定RAD = new RString("hihokenshaNo");
         JikoFutangakuKeisanIkkatsuPanelBatchParameter parameter = new JikoFutangakuKeisanIkkatsuPanelBatchParameter();
-        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder iOutputOrder = finder.get出力順(
-                SubGyomuCode.DBC介護給付,
-                ReportIdDBC.DBC200203.getReportId(),
-                Long.valueOf(div.getCcdChohyoShutsuryokujun().get出力順ID().toString()));
-        if (iOutputOrder != null) {
-            IChohyoShutsuryokujunManager manager = new _ChohyoShutsuryokujunManager();
-            manager.save前回出力順(iOutputOrder);
-        }
         RString 出力対象区分;
         if (被保険者番号指定RAD.equals(div.getRadHihokenshaNo().getSelectedKey())) {
-              出力対象区分 = 出力対象_2;
-              parameter.setHihokenshano(div.getTxtHihokenshaNo().getValue());
-              parameter.setNendo(div.getDdlNendo().getSelectedKey());
-              parameter.setUketoriym(null);
+            出力対象区分 = 出力対象_2;
+            parameter.setHihokenshano(div.getTxtHihokenshaNo().getValue());
+            parameter.setNendo(div.getDdlNendo().getSelectedKey());
+            parameter.setUketoriym(null);
         } else {
             出力対象区分 = 出力対象_1;
             parameter.setUketoriym(new FlexibleYearMonth(div.getTxtUketoriYM().getValue().toDateString()));
             parameter.setHihokenshano(null);
             parameter.setNendo(null);
         }
-         boolean 出力フラグ;
+        boolean 出力フラグ;
         if (div.getJikoFutangakuKeisanKekkaIchiranhyoPanelPublish().isIsPublish()) {
             long 出力順ID = div.getCcdChohyoShutsuryokujun().get出力順ID();
             parameter.setShutsuryokujunId(出力順ID);
@@ -141,7 +134,7 @@ public class JikoFutangakuKeisanIkkatsuPanel {
         parameter.setRadSakuseiJoken(出力対象区分);
         parameter.setShuturyokuFlg(出力フラグ);
         Association 市町村コード_Temp = AssociationFinderFactory.createInstance().getAssociation();
-        parameter.setDantaiCd(市町村コード_Temp);
+        parameter.setDantaiCd(市町村コード_Temp.get地方公共団体コード());
         return parameter;
     }
     //TODO QA1080 

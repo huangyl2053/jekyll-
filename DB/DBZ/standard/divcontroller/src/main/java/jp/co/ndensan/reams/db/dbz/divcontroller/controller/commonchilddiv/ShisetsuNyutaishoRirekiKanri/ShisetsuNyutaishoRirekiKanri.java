@@ -30,8 +30,8 @@ public class ShisetsuNyutaishoRirekiKanri {
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onLoad(ShisetsuNyutaishoRirekiKanriDiv requestDiv) {
         if (!RString.isNullOrEmpty(requestDiv.getSyokikaMode())) {
             requestDiv.set表示モード(requestDiv.getSyokikaMode());
+            getHandler(requestDiv).initialize(new ShikibetsuCode(requestDiv.getShikibetsuCode()));
         }
-        getHandler(requestDiv).initialize(new ShikibetsuCode(requestDiv.getShikibetsuCode()));
         return ResponseData.of(requestDiv).respond();
     }
 

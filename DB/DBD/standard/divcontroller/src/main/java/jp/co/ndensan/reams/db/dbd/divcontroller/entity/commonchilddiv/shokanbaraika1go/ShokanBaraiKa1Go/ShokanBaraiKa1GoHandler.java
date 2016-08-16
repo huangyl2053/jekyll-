@@ -29,9 +29,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenk
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoTorokuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.taino.JikoKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -74,8 +74,11 @@ public class ShokanBaraiKa1GoHandler {
 
     /**
      * 画面初期化処理です。
+     *
+     * @return Message エラーMSG
      */
-    public void onLoad() {
+    public Message onLoad() {
+        Message message = null;
         ShoriKubun 押下ボタン区分 = ShoriKubun.toValue(div.getKey_Button());
         ShiharaiHohoHenko shiharaiHohoHenko = DataPassingConverter.deserialize(div.getKey_ShiharaiHohoHenkoKanri(), ShiharaiHohoHenko.class);
         List<ShiharaiHohoHenko> 支払方法データ = new ArrayList();
@@ -96,12 +99,13 @@ public class ShokanBaraiKa1GoHandler {
             if (ShoriKubun._1号予告者登録.equals(押下ボタン区分)) {
                 div.setShinkiKubun(新規登録);
             } else {
-                throw new ApplicationException(UrErrorMessages.対象ファイルが存在しない.getMessage().replace("支払方法変更"));
+                return UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("支払方法変更");
             }
         } else {
             ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, 支払方法データ.get(0));
         }
         initializeDisplayData(ViewStateHolder.get(一号償還払い化ダイアログキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class));
+        return message;
     }
 
     /**

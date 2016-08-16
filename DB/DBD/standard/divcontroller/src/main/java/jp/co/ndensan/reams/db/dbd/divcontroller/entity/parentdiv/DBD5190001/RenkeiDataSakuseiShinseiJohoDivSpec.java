@@ -99,18 +99,17 @@ public enum RenkeiDataSakuseiShinseiJohoDivSpec implements IPredicate<RenkeiData
                 @Override
                 public boolean apply(RenkeiDataSakuseiShinseiJohoDiv div
                 ) {
+                    boolean 被保険者番号flag = false;
                     RString radChushutsu = div.getChushutsuJoken().getRadChushutsuJoken().getSelectedValue();
                     RString 被保険者番号 = new RString("被保険者番号");
-                    if (radChushutsu.equals(被保険者番号)) {
-                        String hihokenshaNo = div.getTxtHihokenshaNo().toString();
-                        if (hihokenshaNo == null || hihokenshaNo.isEmpty()) {
-                            return false;
-                        } else {
-                            return true;
-                        }
-                    } else {
-                        return true;
+                    if (!radChushutsu.equals(被保険者番号)) {
+                        return 被保険者番号flag = true;
                     }
+                    if (radChushutsu.equals(被保険者番号)
+                    && div.getTxtHihokenshaNo().getValue() != null && !div.getTxtHihokenshaNo().getValue().isEmpty()) {
+                        return 被保険者番号flag = true;
+                    }
+                    return 被保険者番号flag;
 
                 }
             },
@@ -144,6 +143,19 @@ public enum RenkeiDataSakuseiShinseiJohoDivSpec implements IPredicate<RenkeiData
                         kensuFlag = true;
                     }
                     return kensuFlag;
+                }
+            },
+    データない {
+                /**
+                 * データない。
+                 *
+                 * @param div 要介護認定申請連携データ作成画面Div
+                 * @return false:データない。
+                 */
+                @Override
+                public boolean apply(RenkeiDataSakuseiShinseiJohoDiv div
+                ) {
+                    return false;
                 }
             },
 }

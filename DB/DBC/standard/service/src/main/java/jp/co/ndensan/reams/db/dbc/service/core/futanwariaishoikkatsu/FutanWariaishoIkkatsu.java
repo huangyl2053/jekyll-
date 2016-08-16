@@ -155,8 +155,16 @@ public class FutanWariaishoIkkatsu {
         source.set適用開始年月日１(開始年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoKaishiYMD1())));
         source.set適用終了年月日１(終了年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoShuryoYMD1())));
         source.set負担割合２(entity.get負担割合期間().getFutanWariaiKubun2());
-        source.set適用開始年月日２(開始年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoKaishiYMD2())));
-        source.set適用終了年月日２(終了年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoShuryoYMD2())));
+        if (entity.get負担割合期間().getYukoKaishiYMD2() != null) {
+            source.set適用開始年月日２(開始年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoKaishiYMD2())));
+        } else {
+            source.set適用開始年月日２(RString.EMPTY);
+        }
+        if (entity.get負担割合期間().getYukoShuryoYMD2() != null) {
+            source.set適用終了年月日２(終了年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoShuryoYMD2())));
+        } else {
+            source.set適用終了年月日２(RString.EMPTY);
+        }
         ShoKisaiHokenshaNo hokenshaNo = getHokenshaCode(new HihokenshaDaicho(entity.get被保台帳()));
         if (hokenshaNo != null) {
             source.set保険者コード１(hokenshaNo.getColumnValue().substringReturnAsPossible(0, NUM_ONE));
@@ -167,7 +175,7 @@ public class FutanWariaishoIkkatsu {
             source.set保険者コード６(hokenshaNo.getColumnValue().substringReturnAsPossible(NUM_FIVE));
         }
         source.set保険者住所(get保険者住所());
-        source.set保険者名(compNinshosha.ninshoshaShimeiKakeru);
+        source.set保険者名(compNinshosha.ninshoshaShimeiKakenai);
         source.set保険者電話番号(get電話番号());
         source.set電子公印(compNinshosha.denshiKoin);
         source.set連番(連番);
@@ -346,9 +354,9 @@ public class FutanWariaishoIkkatsu {
             csvEntity.set開始年月日(dateFormat基本形１(利用者負担割合証Temp.get負担割合期間().getYukoKaishiYMD1()));
         }
         if (利用者負担割合証Temp.get負担割合期間().getYukoShuryoYMD2() != null) {
-            csvEntity.set開始年月日(dateFormat基本形１(利用者負担割合証Temp.get負担割合期間().getYukoShuryoYMD2()));
+            csvEntity.set終了年月日(dateFormat基本形１(利用者負担割合証Temp.get負担割合期間().getYukoShuryoYMD2()));
         } else {
-            csvEntity.set開始年月日(dateFormat基本形１(利用者負担割合証Temp.get負担割合期間().getYukoShuryoYMD1()));
+            csvEntity.set終了年月日(dateFormat基本形１(利用者負担割合証Temp.get負担割合期間().getYukoShuryoYMD1()));
         }
         if (!RString.isNullOrEmpty(利用者負担割合証Temp.get負担割合期間().getFutanWariaiKubun2())) {
             csvEntity.set負担割合(FutanwariaiKubun.toValue(利用者負担割合証Temp.get負担割合期間().getFutanWariaiKubun2()).get名称());

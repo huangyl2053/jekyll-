@@ -9,16 +9,17 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohikagoketteiin.S
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- * 総合事業費（経過措置）過誤決定通知書情報取込一覧表帳票Builder
+ * 総合事業費（経過措置）過誤決定通知書情報取込一覧表帳票Builder。
  *
- * @reamsid_L DBC-2550-010 fzou
+ * @reamsid_L DBC-2550-030　jianglaishen
  */
-public class SogojigyohiKagoKetteiInBuilder implements ISogojigyohiKagoKetteiInBuilder {
+public class SogojigyohiKagoKetteiInBuilder implements
+        ISogojigyohiKagoKetteiInBuilder {
 
     private final ISogojigyohiKagoKetteiInEditor headerEditor;
 
     private final ISogojigyohiKagoKetteiInEditor bodyEditor;
-    
+
     /**
      * コンストラクタです
      *

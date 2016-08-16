@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 画面設計_DBCMNN2002_事業高額合算・事業分支給額計算結果連絡票（単）のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-4840-010 lihang -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jigyobunshikyugakukeisankekkarenrakuhyo.IJigyobunShikyugakuKeisanKekkaRenrakuhyoPanelMapper">
+      
+    <resultMap id="resultMap_JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity">
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="taishoNendo" column="taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="shikyuShinseishoSeiriNo" column="shikyuShinseishoSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sikyugakuKeisanKekkaRenrakuhyoSakuseiYMD" column="sikyugakuKeisanKekkaRenrakuhyoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="isDeleted" column="isDeleted" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="get対象データ" 
+            resultMap="resultMap_JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter" 
+            fetchSize="500">
+        SELECT 
+        B."hihokenshaNo",
+        B."taishoNendo",
+        B."shoKisaiHokenshaNo",
+        B."shikyuShinseishoSeiriNo",
+        B."sikyugakuKeisanKekkaRenrakuhyoSakuseiYMD"
+        FROM(
+        SELECT
+        B."hihokenshaNo",
+        B."taishoNendo",
+        B."shoKisaiHokenshaNo",
+        B."shikyuShinseishoSeiriNo",
+        MAX(B."rirekiNo") as "履歴番号"
+        FROM rgdb."DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka" B
+        WHERE B."isDeleted"=FALSE
+        GROUP BY
+        B."hihokenshaNo",
+        B."taishoNendo",
+        B."shoKisaiHokenshaNo",
+        B."shikyuShinseishoSeiriNo"
+        )AS K
+        INNER JOIN rgdb."DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka" AS B
+        ON  K."hihokenshaNo"=B."hihokenshaNo"
+        AND K."taishoNendo" =B."taishoNendo"
+        AND K."shoKisaiHokenshaNo"=B."shoKisaiHokenshaNo"
+        AND K."shikyuShinseishoSeiriNo"=B."shikyuShinseishoSeiriNo"
+        AND K."履歴番号"=B."rirekiNo"
+        WHERE 
+        B."isDeleted"=FALSE
+        AND B."hihokenshaNo"=#{被保険者番号}
+        <if test="対象年度 != null">
+            AND   B."taishoNendo"=#{対象年度}
+        </if>
+        <if test="連絡票整理番号 != null">
+            AND   B."shikyuShinseishoSeiriNo"=#{連絡票整理番号}
+        </if>
+        <if test="証記載保険者番号 != null">
+            AND   B."shoKisaiHokenshaNo"=#{証記載保険者番号}
+        </if>
+        ORDER BY
+        K."taishoNendo" DESC,
+        K."shoKisaiHokenshaNo" DESC,
+        K."shikyuShinseishoSeiriNo" ASC
+    </select>
+    </mapper>

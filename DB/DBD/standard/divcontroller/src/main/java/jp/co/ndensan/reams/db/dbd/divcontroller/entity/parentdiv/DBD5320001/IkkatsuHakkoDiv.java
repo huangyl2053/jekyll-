@@ -470,13 +470,13 @@ public class IkkatsuHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public IBunshoBangoInputDiv getCcdIkkatsuServiceHenkoBunshoBango() {
-        return this.getChushutsuTasho().getCcdIkkatsuServiceHenkoBunshoBango();
+    public IBunshoBangoInputDiv getCcdIkkatsuKubunHenkoBunshoBango() {
+        return this.getChushutsuTasho().getCcdIkkatsuKubunHenkoBunshoBango();
     }
 
     @JsonIgnore
-    public IBunshoBangoInputDiv getCcdIkkatsuKubunHenkoBunshoBango() {
-        return this.getChushutsuTasho().getCcdIkkatsuKubunHenkoBunshoBango();
+    public IBunshoBangoInputDiv getCcdIkkatsuServiceHenkoBunshoBango() {
+        return this.getChushutsuTasho().getCcdIkkatsuServiceHenkoBunshoBango();
     }
 
     // </editor-fold>

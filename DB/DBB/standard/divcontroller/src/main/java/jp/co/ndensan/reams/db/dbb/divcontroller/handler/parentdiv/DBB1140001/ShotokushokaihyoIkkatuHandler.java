@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.auth.AuthUser;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -29,7 +30,12 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -46,6 +52,7 @@ public class ShotokushokaihyoIkkatuHandler {
     private static final RString INDEX_2 = new RString("2");
     private static final RString INDEX_3 = new RString("3");
     private static final RString INDEX_111 = new RString("111");
+    private static final RString MSG_再発行対象 = new RString("再発行対象");
     private static final ReportId 帳票ID = new ReportId("DBB200024_ShotokushokaihyoHakkoIchiran");
     private final ShotokushokaihyoIkkatuDiv div;
 
@@ -126,13 +133,11 @@ public class ShotokushokaihyoIkkatuHandler {
         RYear 処理年度_所得年度 = new RYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
         List<KeyValueDataSource> 処理年度 = new ArrayList<>();
-        int flag = 0;
         for (int i = 処理年度_所得年度.getYearValue(); 処理年度_当初年度.getYearValue() <= i; i--) {
             KeyValueDataSource dataSource = new KeyValueDataSource();
-            dataSource.setKey(new RString(String.valueOf(flag)));
+            dataSource.setKey(new RString(String.valueOf(i)));
             dataSource.setValue(new RYear(String.valueOf(i)).wareki().toDateString());
             処理年度.add(dataSource);
-            flag++;
         }
         div.getDdlShoriNendo().setDataSource(処理年度);
     }
@@ -166,7 +171,7 @@ public class ShotokushokaihyoIkkatuHandler {
     public ShotokuShokaihyoHakkoBatchParameter getParameter(ShotokushokaihyoIkkatuDiv div, boolean テストプリント,
             boolean 再発行する) {
         ShotokuShokaihyoHakkoBatchParameter parameter = new ShotokuShokaihyoHakkoBatchParameter();
-        RYear 処理年度 = new RYear(div.getDdlShoriNendo().getSelectedValue().toString());
+        RYear 処理年度 = new RYear(div.getDdlShoriNendo().getSelectedKey());
         parameter.set処理年度(new FlexibleYear(new RString(処理年度.toString())));
         RDate 照会日 = div.getTxtShokaiYMD().getValue();
         parameter.set照会年月日(new FlexibleDate(new RString(照会日.toString())));
@@ -280,6 +285,35 @@ public class ShotokushokaihyoIkkatuHandler {
      */
     public boolean is再発行する() {
         return div.getChkSaihakko().isAllSelected();
+    }
+
+    private static class IdocheckMessages implements IValidationMessage {
+
+        private final Message message;
+
+        public IdocheckMessages(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
+    }
+
+    /**
+     * 再発行対象入力チェックのメソッドです。
+     *
+     * @param 再発行する boolean
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs check再発行対象入力チェック(boolean 再発行する) {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        if (is再発行対象のチェック(再発行する)) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.選択されていない, MSG_再発行対象.toString())));
+        }
+        return validPairs;
     }
 
 }

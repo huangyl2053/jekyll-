@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： ビジネス設計_DBCMN71001_給付費通知減免情報補正登録用XMLです。 -->
+<!-- @reamsid_L DBC-2260-030 xuyongchao -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufuhigenmenjyouhouregister.Ikyufuhigenmenjyouhouregister">
+    
+    <select resultOrdered="true" id="getGenmenJyouhou" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufuhigenmenjyouhouregister.KyufuhigenmenjyouhouregisterParameter" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhigenmenjyouhouregister.KyufuhigenmenjyouhouRegisterEntity" fetchSize="500">
+       SELECT
+            T3067."shokisaiHokenshaNo" AS "shokisaiHokenshaNo",
+            T3067."serviceTeikyoYM" AS "serviceTeikyoYM",
+            T3067."jigyoshoNo" AS "jigyoshoNo",
+            T7060."jigyoshaName" AS "jigyoshaName",
+            T3067."serviceShuruiCode" AS "serviceShuruiCode",
+            T7130."serviceShuruiRyakusho" AS "serviceShuruiRyakusho",
+            T3067."riyoshaFutangaku" AS "riyoshaFutangaku",
+            T3067."serviceHiyoTotal" AS "serviceHiyoTotal"
+        FROM
+                rgdb."DbT3067KyufuhiTuchiHosei" AS T3067
+        INNER JOIN rgdb."DbT7060KaigoJigyosha" AS T7060 
+        ON	T3067."jigyoshoNo" = T7060."jigyoshaNo"
+        INNER JOIN rgdb."DbT7130KaigoServiceShurui" AS T7130
+        ON 	T3067."serviceShuruiCode" = T7130."serviceShuruiCd"
+        WHERE
+                T3067."hiHokenshaNo"=#{hiHokenshaNo}
+                <if test="kaisiFlag">
+                  AND #{serviceTeikyoKaisiYM} <![CDATA[<=]]> T3067."serviceTeikyoYM"
+                </if>
+                <if test="syuroFlag">
+                  AND T3067."serviceTeikyoYM" <![CDATA[<=]]> #{serviceTeikyoSyuryoYM}
+                </if>
+        LIMIT #{maxCount}      
+    </select>
+    
+    <insert id="insertGenmenJyouhou" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufuhigenmenjyouhouregister.GenmenJyouhouParameter">
+        INSERT INTO rgdb."DbT3067KyufuhiTuchiHosei"
+        ("hiHokenshaNo",
+        "shokisaiHokenshaNo",
+        "serviceTeikyoYM",
+        "jigyoshoNo",
+        "serviceShuruiCode",
+        "riyoshaFutangaku",
+        "serviceHiyoTotal",
+        "rirekiNo")
+        VALUES
+        (#{hiHokenshaNo},
+        #{shokisaiHokenshaNo},
+        #{serviceTeikyoYM},
+        #{jigyoshoNo},
+        #{serviceShuruiCode},
+        #{riyoshaFutangaku},
+        #{serviceHiyoTotal},
+        #{rirekiNo}) 
+    </insert>
+    
+    <update id="updateGenmenJyouhou" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufuhigenmenjyouhouregister.GenmenJyouhouParameter">
+        UPDATE rgdb."DbT3067KyufuhiTuchiHosei"
+        SET
+          "shokisaiHokenshaNo" = #{shokisaiHokenshaNo},
+          "serviceTeikyoYM" = #{serviceTeikyoYM},
+          "jigyoshoNo" = #{jigyoshoNo},
+          "serviceShuruiCode" = #{serviceShuruiCode},
+          "riyoshaFutangaku" = #{riyoshaFutangaku},
+          "serviceHiyoTotal" = #{serviceHiyoTotal}
+        WHERE
+            "hiHokenshaNo" = #{hiHokenshaNo}
+        AND "shokisaiHokenshaNo" = #{shokisaiHokenshaNo}
+        AND "serviceTeikyoYM" = #{serviceTeikyoYM}
+        AND "jigyoshoNo" = #{jigyoshoNo}
+        AND "serviceShuruiCode" = #{serviceShuruiCode}   
+    </update>
+    
+    <delete id="deleteGenmenJyouhou" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufuhigenmenjyouhouregister.GenmenJyouhouParameter">
+        DELETE FROM rgdb."DbT3067KyufuhiTuchiHosei" AS DbT3067
+        WHERE
+             DbT3067."hiHokenshaNo" = #{hiHokenshaNo}
+        AND  DbT3067."shokisaiHokenshaNo" = #{shokisaiHokenshaNo}
+        AND  DbT3067."serviceTeikyoYM" = #{serviceTeikyoYM}
+        AND  DbT3067."jigyoshoNo" = #{jigyoshoNo}
+        AND  DbT3067."serviceShuruiCode" = #{serviceShuruiCode}    
+    </delete>
+    
+    <select resultOrdered="true" id="checkKyufuJissekiJyouhou"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufuhigenmenjyouhouregister.GenmenJyouhouParameter"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhigenmenjyouhouregister.KyufuJissekiJyouhouEntity" fetchSize="500">
+        SELECT
+        EXISTS(
+            SELECT 1 FROM
+            (
+                    SELECT
+                            T3017."shokisaiHokenshaNo",
+                            T3017."hiHokenshaNo",
+                            T3017."serviceTeikyoYM",
+                            T3017."jigyoshoNo",
+                            T3017."kyufuSakuseiKubunCode",
+                            T3033."serviceSyuruiCode",
+                            T3017."shinsaYM"
+                    FROM rgdb."DbT3033KyufujissekiShukei" AS T3033
+                    JOIN rgdb."DbT3017KyufujissekiKihon" AS T3017
+                    ON T3033."inputShikibetsuNo" = T3017."inputShikibetsuNo"
+                    AND T3033."shokisaiHokenshaNo" = T3017."shokisaiHokenshaNo"
+                    AND T3033."hiHokenshaNo" = T3017."hiHokenshaNo"
+                    AND T3033."serviceTeikyoYM" = T3017."serviceTeikyoYM"
+                    AND T3033."jigyoshoNo" = T3017."jigyoshoNo"
+                    AND T3033."toshiNo" = T3017."toshiNo"
+                    LEFT JOIN (SELECT Dbt3017."hiHokenshaNo", MAX(Dbt3017."shinsaYM") AS latest FROM rgdb."DbT3017KyufujissekiKihon" AS Dbt3017 GROUP BY 
+                            Dbt3017."hiHokenshaNo") AS tmp3017
+                    ON T3017."hiHokenshaNo" = tmp3017."hiHokenshaNo"
+                    AND T3017."shinsaYM" = tmp3017."latest"
+            ) AS SK
+            WHERE
+                    #{hiHokenshaNo} = SK."hiHokenshaNo"
+            AND #{shokisaiHokenshaNo} = SK."shokisaiHokenshaNo"
+            AND #{jigyoshoNo} = SK."jigyoshoNo"
+            AND #{serviceShuruiCode} = SK."serviceSyuruiCode"
+            AND #{serviceTeikyoYM} = SK."serviceTeikyoYM"
+            AND (SK."kyufuSakuseiKubunCode" = '1' OR SK."kyufuSakuseiKubunCode" = '2')
+        ) AS is存在
+    </select>
+    
+</mapper>

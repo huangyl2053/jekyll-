@@ -30,7 +30,7 @@ public class KogakuJigyoOshiraseTsuchishoKigenNashiEditor implements IKogakuJigy
     /**
      * コンストラクタです
      *
-     * @param entity KogakuJigyoOshiraseTsuchishopaParameterEntity
+     * @param entity KogakuJigyoOshiraseTsuchishoKigenNashiEntity
      *
      */
     public KogakuJigyoOshiraseTsuchishoKigenNashiEditor(KogakuJigyoOshiraseTsuchishoKigenNashiEntity entity) {
@@ -56,16 +56,17 @@ public class KogakuJigyoOshiraseTsuchishoKigenNashiEditor implements IKogakuJigy
             source.hihokenshaNo = entity.get申請情報帳票発行一時().getHihokenshaNoChohyo().value();
             source.taishoYM = entity.get申請情報帳票発行一時().getServiceTeikyoYMChohyo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-            source.zikoFutanGaku = DecimalFormatter.toコンマ区切りRString(entity.get申請情報帳票発行一時().getRiyoshaFutanGakuGokeiChohyo(), 0);
-
+            if (entity.get申請情報帳票発行一時().getRiyoshaFutanGakuGokeiChohyo() != null) {
+                source.zikoFutanGaku = DecimalFormatter.toコンマ区切りRString(entity.get申請情報帳票発行一時().getRiyoshaFutanGakuGokeiChohyo(), 0);
+            }
             if (entity.get申請情報帳票発行一時().getGokeiKogakuShikyuGakuChohyo().compareTo(Decimal.ZERO) < ゼロ) {
                 source.ketteiGaku = 調整金額;
             } else {
                 source.ketteiGaku = 支給金額;
             }
-
-            source.shikyuGaku = DecimalFormatter.toコンマ区切りRString(entity.get申請情報帳票発行一時().getGokeiKogakuShikyuGakuChohyo(), 0);
-
+            if (entity.get申請情報帳票発行一時().getGokeiKogakuShikyuGakuChohyo() != null) {
+                source.shikyuGaku = DecimalFormatter.toコンマ区切りRString(entity.get申請情報帳票発行一時().getGokeiKogakuShikyuGakuChohyo(), 0);
+            }
         }
         if (entity.get認証者() != null) {
             source.denshiKoin = entity.get認証者().denshiKoin;
