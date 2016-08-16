@@ -11,13 +11,13 @@
         <id column="dbT4001JukyushaDaicho_edaban"/>
         <id column="dbT4001JukyushaDaicho_jukyuShinseiJiyu" />
         <association property="受給者台帳Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
-        <association property="要介護認定インターフェース情報Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.ResultMap_DbT4003YokaigoNinteiInterfaceEntity"/>
+        <association property="要介護認定インターフェース情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.ResultMap_DbT4003YokaigoNinteiInterfaceEntity"/>
     </resultMap>
 
     <select resultOrdered="true" id="find申請情報" resultMap="resultMap_申請情報の取得" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho" />,
-        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.allColumns_DbT4003YokaigoNinteiInterface" />
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.allColumns_DbT4003YokaigoNinteiInterface" />
         FROM
         rgdb."DbT4001JukyushaDaicho" as "DbT4001JukyushaDaicho"
         LEFT JOIN
@@ -60,7 +60,7 @@
         "前回認定情報"."前回認定年月日" AS 前回認定年月日,
         "前回認定情報"."前回有効期間開始" AS 前回有効期間開始,
         "前回認定情報"."前回有効期間終了" AS 前回有効期間終了,
-        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.allColumns_DbT4003YokaigoNinteiInterface" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.allColumns_DbT4003YokaigoNinteiInterface" />,
         "資格者証交付情報".*
         FROM
         処理対象 as "DbT4001JukyushaDaicho"

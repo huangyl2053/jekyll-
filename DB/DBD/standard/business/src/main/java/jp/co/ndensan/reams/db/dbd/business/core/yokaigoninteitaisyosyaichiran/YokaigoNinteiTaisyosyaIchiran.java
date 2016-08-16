@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.business.core.yokaigoninteitaisyosyaichiran;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteitaisyosyaichiran.YokaigoNinteiTaisyosyaIchiranEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;

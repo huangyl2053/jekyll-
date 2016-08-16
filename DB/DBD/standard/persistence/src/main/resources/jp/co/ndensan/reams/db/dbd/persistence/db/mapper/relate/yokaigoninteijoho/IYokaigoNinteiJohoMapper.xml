@@ -18,7 +18,7 @@
         <association property="主治医医療機関情報受給Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4911ShujiiIryoKikanJohoMapper.ResultMap_DbT4911ShujiiIryoKikanJohoEntity"/>
         <association property="主治医情報受給Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4912ShujiiJohoMapper.ResultMap_DbT4912ShujiiJohoEntity"/>
         <association property="調査員情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4913ChosainJohoMapper.ResultMap_DbT4913ChosainJohoEntity"/>
-        <association property="要介護認定インターフェース情報Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.ResultMap_DbT4003YokaigoNinteiInterfaceEntity"/>
+        <association property="要介護認定インターフェース情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.ResultMap_DbT4003YokaigoNinteiInterfaceEntity"/>
     </resultMap>
     
     <resultMap id="ResultMap_NowYokaigoNinteiJohoEntityWithKekka" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiJohoEntity" autoMapping="true">
@@ -35,7 +35,7 @@
         <association property="主治医情報受給Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4912ShujiiJohoMapper.ResultMap_DbT4912ShujiiJohoEntity"/>
         <association property="調査員情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4913ChosainJohoMapper.ResultMap_DbT4913ChosainJohoEntity"/>
         <association property="要介護認定結果情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4102NinteiKekkaJohoMapper.ResultMap_DbT4102NinteiKekkaJohoEntity"/>
-        <association property="要介護認定インターフェース情報Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.ResultMap_DbT4003YokaigoNinteiInterfaceEntity"/>
+        <association property="要介護認定インターフェース情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.ResultMap_DbT4003YokaigoNinteiInterfaceEntity"/>
     </resultMap>
     
     <resultMap id="ResultMap_OldYokaigoNinteiJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiJohoEntity" autoMapping="true">
@@ -54,7 +54,7 @@
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.allColumns_DbT4101NinteiShinseiJoho"/>
         ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho"/>
-        ,<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.allColumns_DbT4003YokaigoNinteiInterface"/>
+        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.allColumns_DbT4003YokaigoNinteiInterface"/>
         ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4910NinteichosaItakusakiJohoMapper.allColumns_DbT4910NinteichosaItakusakiJoho"/>
         ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4911ShujiiIryoKikanJohoMapper.allColumns_DbT4911ShujiiIryoKikanJoho"/>
         ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4912ShujiiJohoMapper.allColumns_DbT4912ShujiiJoho"/>

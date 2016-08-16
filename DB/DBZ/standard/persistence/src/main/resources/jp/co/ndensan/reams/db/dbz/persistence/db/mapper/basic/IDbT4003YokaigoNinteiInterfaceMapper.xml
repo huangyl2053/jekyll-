@@ -4,12 +4,12 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT4003YokaigoNinteiInterface">
      SELECT
-         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.allColumns_DbT4003YokaigoNinteiInterface" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.allColumns_DbT4003YokaigoNinteiInterface" />
      FROM
          rgdb."DbT4003YokaigoNinteiInterface"
      WHERE
@@ -77,7 +77,7 @@
 
 
     <!--テーブルDbT4003YokaigoNinteiInterfaceの項目をDbT4003YokaigoNinteiInterfaceEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT4003YokaigoNinteiInterfaceEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT4003YokaigoNinteiInterfaceEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity" autoMapping="true">
         <result property="insertDantaiCd" column="dbT4003YokaigoNinteiInterface_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT4003YokaigoNinteiInterface_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT4003YokaigoNinteiInterface_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
