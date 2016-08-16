@@ -86,8 +86,8 @@ public class InsetDbT2001ChoshuHohoProcess extends BatchProcessBase<DbV2001Chosh
             newEntity.setChoshuHohoYoku8gatsu(ChoshuHoho.資格なし.getコード());
             newEntity.setChoshuHohoYoku9gatsu(ChoshuHoho.資格なし.getコード());
             newEntity.setKariNenkinNo(entity.getKariNenkinNo());
-            newEntity.setKariNenkinCode(entity.getKariNenkinNo());
-            newEntity.setKariHosokuM(entity.getKariNenkinNo());
+            newEntity.setKariNenkinCode(entity.getKariNenkinCode());
+            newEntity.setKariHosokuM(entity.getKariHosokuM());
         }
         if ((ChoshuHoho.特別徴収_厚生労働省.getコード().equals(entity.getChoshuHoho3gatsu())
                 || ChoshuHoho.特別徴収_地共済.getコード().equals(entity.getChoshuHoho3gatsu()))
