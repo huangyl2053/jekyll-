@@ -55,6 +55,7 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
     private static final RString 振込指定日_MSG = new RString("振込指定日");
     private static final RString 発行済のみ = new RString("発行済のみ");
     private static final RString KEY_1 = new RString("1");
+    private static final RString KEY_3 = new RString("3");
     private static final RString 時 = new RString("時");
     private static final RString 分 = new RString("分");
     private static final RString 秒 = new RString("秒");
@@ -146,6 +147,7 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
         }
         RString 取引先金融機関 = 金融機関名.concat(支店名);
         div.getTyuusyutuHanni().getDdlHakkouTaisyou().setSelectedKey(KEY_1);
+        div.getShuturyokuTyouhyou().getDdlSyuturyokuTyouhyou().setSelectedKey(KEY_1);
         div.setTorihikiKinyukikanShitennmei(取引先金融機関支店名称);
         div.getTyuusyutuJyoukenn().getTxtItakusya().setValue(委託者名);
         div.getTyuusyutuJyoukenn().getTxtItakusyaCode().setValue(委託者コード);
@@ -172,6 +174,7 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
         if (口座.equals(支払方法)) {
             div.getShuturyokuTyouhyou().getDdlSyuturyokuTyouhyou().setDisabled(false);
         } else {
+            div.getShuturyokuTyouhyou().getDdlSyuturyokuTyouhyou().setSelectedKey(KEY_3);
             div.getShuturyokuTyouhyou().getDdlSyuturyokuTyouhyou().setDisabled(true);
         }
         if (口座.equals(div.getRadSiharaihouhou().getSelectedValue()) && ＦＤ作成_1.equals(ＦＤ作成)) {
@@ -187,6 +190,12 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
      * @param div JigyobunKogakuGassanFurikomiMeisaishoBatchParamDiv
      */
     public void onChangeDdlHakkouTaisyou(JigyobunKogakuGassanFurikomiMeisaishoBatchParamDiv div) {
+        if (口座.equals(div.getRadSiharaihouhou().getSelectedValue())) {
+            div.getTyuusyutuHanni().getDdlHakkouTaisyou().setDisabled(false);
+        } else {
+            div.getTyuusyutuHanni().getDdlHakkouTaisyou().setSelectedKey(KEY_1);
+            div.getTyuusyutuHanni().getDdlHakkouTaisyou().setDisabled(true);
+        }
         if (口座.equals(div.getRadSiharaihouhou().getSelectedValue()) && 発行済のみ.equals(div.getTyuusyutuHanni().getDdlHakkouTaisyou().getSelectedValue())) {
             div.getTyuusyutuHanni().getTxt().setDisabled(false);
         } else {
