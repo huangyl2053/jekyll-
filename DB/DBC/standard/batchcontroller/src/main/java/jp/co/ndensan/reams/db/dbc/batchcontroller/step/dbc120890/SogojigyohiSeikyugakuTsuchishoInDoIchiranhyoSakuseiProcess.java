@@ -100,8 +100,8 @@ public class SogojigyohiSeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess extends 
     @Override
     protected void beforeExecute() {
         改頁項目リスト.add(new RString(SogojigyohiSeikyugakuTsuchishoInSource.ReportSourceFields.shoKisaiHokenshaNo.name()));
-        改頁項目リスト.add(new RString(SogojigyohiSeikyugakuTsuchishoInSource.ReportSourceFields.kanName.name()));
-        改頁項目リスト.add(new RString(SogojigyohiSeikyugakuTsuchishoInSource.ReportSourceFields.kouName.name()));
+        改頁項目リスト.add(new RString(SogojigyohiSeikyugakuTsuchishoInSource.ReportSourceFields.kanCode.name()));
+        改頁項目リスト.add(new RString(SogojigyohiSeikyugakuTsuchishoInSource.ReportSourceFields.kouCode.name()));
     }
 
     @Override
