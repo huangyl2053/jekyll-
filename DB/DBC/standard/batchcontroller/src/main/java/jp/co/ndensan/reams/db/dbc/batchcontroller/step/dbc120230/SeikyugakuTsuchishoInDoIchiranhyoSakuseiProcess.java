@@ -63,6 +63,7 @@ public class SeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess extends BatchKeyBre
     private final RString 款コード_99 = new RString("99");
     private final RString 項コード_99 = new RString("99");
     private final RString 総合計 = new RString("＊＊　総合計　＊＊");
+    private static final RString SAKUSEI = new RString("作成");
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.seikyugakutsuchishoin."
             + "ISeikyugakuTsuchishoInMapper.select介護給付費サービス請求額通知書一時TBLの全件");
     @BatchWriter
@@ -137,7 +138,7 @@ public class SeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess extends BatchKeyBre
                     .fillType(FillType.BLANK).toDateString();
             RString 作成時 = 作成日時.getTime()
                     .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-            output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時));
+            output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時).concat(SAKUSEI));
             output.set国保連合会名(請求額通知書.get国保連合会名());
             index++;
         } else {
@@ -220,7 +221,8 @@ public class SeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess extends BatchKeyBre
         if (null == 年月) {
             return RString.EMPTY;
         }
-        return 年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        return 年月.wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
 }
