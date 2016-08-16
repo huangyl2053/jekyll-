@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020;
 
+import jp.co.ndensan.reams.db.dbc.business.report.kogakushikyushinseisho.KogakuShikyuShinseishoReport;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakuservicetsuchisho.KogakuJigyoShinseishoHakkoIchiranOrder;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakushikyushinseishoyucho.KogakuShikyuShinseishoYuchoReport;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyufuoshirasetsuchisho.KogakuKaigoServicehiOshiraseHakkoProcessParameter;
@@ -118,6 +119,9 @@ public class KogakuServiceShikyuShinseishoOutputProcess extends BatchProcessBase
             param.set認証者役職名(認証者名);
             param.set連番(new RString(count));
             param.set注意文(注意文);
+
+            KogakuShikyuShinseishoReport report = new KogakuShikyuShinseishoReport(param);
+            report.writeBy(shinseishoReportSourceWriter);
         }
         count = count + 1;
     }
