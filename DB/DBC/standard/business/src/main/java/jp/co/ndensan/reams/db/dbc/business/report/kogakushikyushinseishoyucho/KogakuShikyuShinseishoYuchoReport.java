@@ -30,7 +30,9 @@ public class KogakuShikyuShinseishoYuchoReport extends Report<KogakuShikyuShinse
 
     @Override
     public void writeBy(ReportSourceWriter<KogakuShikyuShinseishoYuchoSource> writer) {
-        System.out.print("");
+        IKogakuShikyuShinseishoYuchoEditor editor = new KogakuShikyuShinseishoYuchoEditor(target);
+        IKogakuShikyuShinseishoYuchoBuilder builder = new KogakuShikyuShinseishoYuchoBuilder(editor);
+        writer.writeLine(builder);
     }
 
 }
