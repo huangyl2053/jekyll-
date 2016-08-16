@@ -9,13 +9,11 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.seikyugakutsuchishofutanshain.SeikyugakuTsuchishoFutanshaInProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.seikyugakutsuchishofutanshain.DbWT1511SeikyugakuTsuchishoTempEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.seikyugakutsuchishofutanshain.SeikyugakuTsuchishoFutanshaInManager;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchCsvListReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.io.Encode;
-import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -23,12 +21,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2790-011 hemin
  */
-public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<List<RString>> {
+public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RString> {
 
-    private CsvListReader csvReader;
+    private RString csvReaderPath;
     private static final RString KEY_分離文字 = new RString("file.separator");
-    private static final RString 分離文字 = new RString(System.getProperty(KEY_分離文字.toString()));
-    private static final RString EUC_WRITER_DELIMITER = new RString(",");
+    private final RString 区切り文字 = new RString(",");
     private SeikyugakuTsuchishoFutanshaInProcessParameter parameter;
 
     @BatchWriter
@@ -38,12 +35,7 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<List<
 
     @Override
     protected void initialize() {
-        csvReader = new CsvListReader.InstanceBuilder(parameter
-                .getPath().concat(分離文字).concat(parameter.getFileName()))
-                .hasHeader(true)
-                .setEncode(Encode.UTF_16withBOM)
-                .setDelimiter(EUC_WRITER_DELIMITER)
-                .build();
+        csvReaderPath = parameter.getPath().concat(KEY_分離文字).concat(parameter.getFileName());
     }
 
     @Override
@@ -52,7 +44,7 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<List<
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchCsvListReader(csvReader);
+        return new BatchSimpleReader(csvReaderPath);
     }
 
     @Override
@@ -62,7 +54,8 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<List<
     }
 
     @Override
-    protected void process(List<RString> data) {
+    protected void process(RString line) {
+        List<RString> data = line.split(区切り文字.toString());
         if (data != null && !data.isEmpty()) {
             SeikyugakuTsuchishoFutanshaInManager ファイル登録Manager = SeikyugakuTsuchishoFutanshaInManager.createInstance();
             DbWT1511SeikyugakuTsuchishoTempEntity dbWT1511SeikyugakuTsuchishoTempEntity = ファイル登録Manager.csvファイル読込データ処理(data);
