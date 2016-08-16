@@ -128,7 +128,6 @@ public class TekiyoJogaishaManager {
     @Transaction
     public SearchResult<TekiyoJogaishaRelate> getTekiyoJogaishaLst(ShikibetsuCode shikibetsuCode, boolean ronrisakujyoFlg) {
         requireNonNull(shikibetsuCode, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード.toString()));
-        List<TekiyoJogaishaRelate> tekiyoJogaishaRelateList = new ArrayList<>();
         TekiyoJogaishaMapperParameter 適用除外者Parameter = TekiyoJogaishaMapperParameter.
                 createParam_get適用除外者(shikibetsuCode, ronrisakujyoFlg);
         ITekiyoJogaishaMapper mapper = mapperProvider.create(ITekiyoJogaishaMapper.class);
@@ -136,6 +135,8 @@ public class TekiyoJogaishaManager {
         if (適用除外者List == null || 適用除外者List.isEmpty()) {
             return SearchResult.of(Collections.<TekiyoJogaishaRelate>emptyList(), 0, false);
         }
+
+        List<TekiyoJogaishaRelate> tekiyoJogaishaRelateList = new ArrayList<>();
         for (TekiyoJogaishaRelateEntity entity : 適用除外者List) {
             退所日ありフラグ = true;
             TekiyoJogaishaMapperParameter 施設情報Parameter = TekiyoJogaishaMapperParameter.createParam_get施設情報(
@@ -146,25 +147,25 @@ public class TekiyoJogaishaManager {
             if (施設情報List == null || 施設情報List.isEmpty()) {
                 tekiyoJogaishaRelateList.add(new TekiyoJogaishaRelate(entity));
             } else {
-                for (TekiyoJogaishaRelateEntity entity1 : 施設情報List) {
-                    if (entity1.getTaishoYMD() == null || entity1.getTaishoYMD().isEmpty()) {
-                        entity.setRirekiNo(entity1.getRirekiNo());
-                        entity.setNyushoShisetsuCode(entity1.getNyushoShisetsuCode());
-                        entity.setNyushoYMD(entity1.getNyushoYMD());
-                        entity.setTaishoYMD(entity1.getTaishoYMD());
-                        entity.setJigyoshaMeisho(entity1.getJigyoshaMeisho());
-                        tekiyoJogaishaRelateList.add(new TekiyoJogaishaRelate(entity));
-                        退所日ありフラグ = false;
-                    }
-                }
-                if (退所日ありフラグ) {
-                    entity.setRirekiNo(施設情報List.get(0).getRirekiNo());
-                    entity.setNyushoShisetsuCode(施設情報List.get(0).getNyushoShisetsuCode());
-                    entity.setNyushoYMD(施設情報List.get(0).getNyushoYMD());
-                    entity.setTaishoYMD(施設情報List.get(0).getTaishoYMD());
-                    entity.setJigyoshaMeisho(施設情報List.get(0).getJigyoshaMeisho());
-                    tekiyoJogaishaRelateList.add(new TekiyoJogaishaRelate(entity));
-                }
+//                for (TekiyoJogaishaRelateEntity entity1 : 施設情報List) {
+//                    if (entity1.getTaishoYMD() == null || entity1.getTaishoYMD().isEmpty()) {
+//                        entity.setRirekiNo(entity1.getRirekiNo());
+//                        entity.setNyushoShisetsuCode(entity1.getNyushoShisetsuCode());
+//                        entity.setNyushoYMD(entity1.getNyushoYMD());
+//                        entity.setTaishoYMD(entity1.getTaishoYMD());
+//                        entity.setJigyoshaMeisho(entity1.getJigyoshaMeisho());
+//                        tekiyoJogaishaRelateList.add(new TekiyoJogaishaRelate(entity));
+//                        退所日ありフラグ = false;
+//                    }
+//                }
+//                if (退所日ありフラグ) {
+                entity.setRirekiNo(施設情報List.get(0).getRirekiNo());
+                entity.setNyushoShisetsuCode(施設情報List.get(0).getNyushoShisetsuCode());
+                entity.setNyushoYMD(施設情報List.get(0).getNyushoYMD());
+                entity.setTaishoYMD(施設情報List.get(0).getTaishoYMD());
+                entity.setJigyoshaMeisho(施設情報List.get(0).getJigyoshaMeisho());
+                tekiyoJogaishaRelateList.add(new TekiyoJogaishaRelate(entity));
+//                }
             }
         }
         return SearchResult.of(tekiyoJogaishaRelateList, 0, false);
@@ -185,16 +186,16 @@ public class TekiyoJogaishaManager {
                 createParam_get適用除外者(shikibetsuCode, ronrisakujyoFlg);
         ITekiyoJogaishaMapper mapper = mapperProvider.create(ITekiyoJogaishaMapper.class);
         List<DbT1002TekiyoJogaishaEntity> 適用除外者管理適用除外者情報List = mapper.get適用除外者更新用(適用除外者Parameter);
-        List<TekiyoJogaisha> 適用除外者List = new ArrayList();
-        List<jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho> 施設入退所Lsit = new ArrayList();
+        List<TekiyoJogaisha> 適用除外者List = new ArrayList<>();
         for (DbT1002TekiyoJogaishaEntity 適用除外者 : 適用除外者管理適用除外者情報List) {
             適用除外者.initializeMd5();
             適用除外者List.add(new TekiyoJogaisha(適用除外者));
-            List<DbT1004ShisetsuNyutaishoEntity> 適用除外者管理施設情報List = mapper.get施設情報更新用(適用除外者Parameter);
-            for (DbT1004ShisetsuNyutaishoEntity 施設情報 : 適用除外者管理施設情報List) {
-                施設情報.initializeMd5();
-                施設入退所Lsit.add(new jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho(施設情報));
-            }
+        }
+        List<jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho> 施設入退所Lsit = new ArrayList<>();
+        List<DbT1004ShisetsuNyutaishoEntity> 適用除外者管理施設情報List = mapper.get施設情報更新用(適用除外者Parameter);
+        for (DbT1004ShisetsuNyutaishoEntity 施設情報 : 適用除外者管理施設情報List) {
+            施設情報.initializeMd5();
+            施設入退所Lsit.add(new jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho(施設情報));
         }
         tekiyoJogaishaBusiness.set適用除外者List(適用除外者List);
         tekiyoJogaishaBusiness.set施設入退所Lsit(施設入退所Lsit);
@@ -360,51 +361,55 @@ public class TekiyoJogaishaManager {
     /**
      * 適用除外者の保存処理をします。
      *
-     * @param 変更前適用除外者情報 変更前適用除外者情報
      * @param 変更後適用除外者情報 変更後適用除外者情報
-     * @param dbT1004Entity 介護保険施設入退所管理情報
-     * @param 画面状態 画面状態
+     * @param dbT1004Entity dbT1004Entity
      * @param 識別コード 識別コード
      */
     @Transaction
-    public void saveTekiyoJogaisha(DbT1002TekiyoJogaishaEntity 変更前適用除外者情報,
+    public void saveTekiyoJogaisha適用登録(
             DbT1002TekiyoJogaishaEntity 変更後適用除外者情報,
             DbT1004ShisetsuNyutaishoEntity dbT1004Entity,
-            RString 画面状態,
             ShikibetsuCode 識別コード) {
-        if (状態_適用登録.equals(画面状態)) {
-            RString 登録可否判定 = tekiyoTorokuKahiHantei(識別コード, 変更後適用除外者情報.getTekiyoYMD());
-            if (登録不可.equals(登録可否判定)) {
-                throw new ApplicationException(DbzErrorMessages.他の期間情報との期間重複.getMessage());
-            }
-            TekiyoJogaishaManager.createInstance().regTekiyoJogaisha(変更後適用除外者情報);
-            TaJushochiTokureisyaKanriManager.createInstance().regShisetsuNyutaisho(dbT1004Entity);
-            if (登録可能で資格喪失必要.equals(登録可否判定)) {
-                HihokenshashikakusoshitsuManager.createInstance().saveHihokenshaShikakuSoshitsu(
-                        識別コード,
-                        HihokenshaNo.EMPTY,
-                        変更後適用除外者情報.getTekiyoYMD(),
-                        ShikakuSoshitsuJiyu.除外者.getコード(),
-                        変更後適用除外者情報.getTekiyoTodokedeYMD());
-            }
-        } else if (状態_解除.equals(画面状態)) {
-            TekiyoJogaishaManager.createInstance().delTekiyoJogaisha(変更前適用除外者情報);
-            TekiyoJogaishaManager.createInstance().regTekiyoJogaisha(変更後適用除外者情報);
-            TekiyoJogaishaManager.createInstance().updateKaigoJogaiTokureiTaishoShisetsu(dbT1004Entity);
-            if (JogaiKaijoJiyu.除外者解除.getコード().equals(変更後適用除外者情報.getTekiyoJogaikaijokaijoJiyuCode())) {
-                TekiyoJogaishaManager.createInstance().saveHihokenshaShutoku(
-                        変更後適用除外者情報.getTekiyoJogaikaijokaijoJiyuCode(),
-                        変更後適用除外者情報.getKaijoYMD(),
-                        識別コード,
-                        変更後適用除外者情報.getKaijoTodokedeYMD());
-            }
-        } else if (状態_追加.equals(画面状態)) {
-            TekiyoJogaishaManager.createInstance().regTekiyoJogaisha(変更後適用除外者情報);
-        } else if (状態_修正.equals(画面状態)) {
-            TekiyoJogaishaManager.createInstance().delTekiyoJogaisha(変更前適用除外者情報);
-            TekiyoJogaishaManager.createInstance().regTekiyoJogaisha(変更後適用除外者情報);
-        } else if (状態_削除.equals(画面状態)) {
-            TekiyoJogaishaManager.createInstance().delTekiyoJogaisha(変更前適用除外者情報);
+        RString 登録可否判定 = tekiyoTorokuKahiHantei(識別コード, 変更後適用除外者情報.getTekiyoYMD());
+        if (登録不可.equals(登録可否判定)) {
+            throw new ApplicationException(DbzErrorMessages.他の期間情報との期間重複.getMessage());
+        }
+        TekiyoJogaishaManager.createInstance().regTekiyoJogaisha(変更後適用除外者情報);
+        TaJushochiTokureisyaKanriManager.createInstance().regShisetsuNyutaisho(dbT1004Entity);
+        if (登録可能で資格喪失必要.equals(登録可否判定)) {
+            HihokenshashikakusoshitsuManager.createInstance().saveHihokenshaShikakuSoshitsu(
+                    識別コード,
+                    HihokenshaNo.EMPTY,
+                    変更後適用除外者情報.getTekiyoYMD(),
+                    ShikakuSoshitsuJiyu.除外者.getコード(),
+                    変更後適用除外者情報.getTekiyoTodokedeYMD());
+        }
+    }
+
+    /**
+     * 適用除外者の保存処理をします。
+     *
+     * @param 変更前適用除外者情報 変更前適用除外者情報
+     * @param 変更後適用除外者情報 変更後適用除外者情報
+     * @param dbT1004Entity dbT1004Entity
+     * @param 識別コード 識別コード
+     */
+    @Transaction
+    public void saveTekiyoJogaisha解除(
+            DbT1002TekiyoJogaishaEntity 変更前適用除外者情報,
+            DbT1002TekiyoJogaishaEntity 変更後適用除外者情報,
+            DbT1004ShisetsuNyutaishoEntity dbT1004Entity,
+            ShikibetsuCode 識別コード) {
+
+        TekiyoJogaishaManager.createInstance().delTekiyoJogaisha(変更前適用除外者情報);
+        TekiyoJogaishaManager.createInstance().regTekiyoJogaisha(変更後適用除外者情報);
+        TekiyoJogaishaManager.createInstance().updateKaigoJogaiTokureiTaishoShisetsu(dbT1004Entity);
+        if (JogaiKaijoJiyu.除外者解除.getコード().equals(変更後適用除外者情報.getTekiyoJogaikaijokaijoJiyuCode())) {
+            TekiyoJogaishaManager.createInstance().saveHihokenshaShutoku(
+                    変更後適用除外者情報.getTekiyoJogaikaijokaijoJiyuCode(),
+                    変更後適用除外者情報.getKaijoYMD(),
+                    識別コード,
+                    変更後適用除外者情報.getKaijoTodokedeYMD());
         }
     }
 
@@ -425,12 +430,12 @@ public class TekiyoJogaishaManager {
             FlexibleDate 解除年月日 = 最新データ.get解除年月日();
             FlexibleDate 異動日 = 最新データ.get異動日();
             if (資格取得年月日 != null && !資格取得年月日.isEmpty() && (資格喪失年月日 == null || 資格喪失年月日.isEmpty())
-                    && !(適用年月日 != null && !適用年月日.isEmpty() && (解除年月日 == null || 解除年月日.isEmpty()))
-                    && 異動日.isBeforeOrEquals(基準日)) {
+                && !(適用年月日 != null && !適用年月日.isEmpty() && (解除年月日 == null || 解除年月日.isEmpty()))
+                && 異動日.isBeforeOrEquals(基準日)) {
                 登録可否判定 = 登録可能で資格喪失必要;
             }
             if (資格取得年月日 != null && !資格取得年月日.isEmpty() && 資格喪失年月日 != null && !資格喪失年月日.isEmpty()
-                    && 異動日.isBeforeOrEquals(基準日)) {
+                && 異動日.isBeforeOrEquals(基準日)) {
                 登録可否判定 = 登録可能で資格喪失不要;
             }
         } else {
