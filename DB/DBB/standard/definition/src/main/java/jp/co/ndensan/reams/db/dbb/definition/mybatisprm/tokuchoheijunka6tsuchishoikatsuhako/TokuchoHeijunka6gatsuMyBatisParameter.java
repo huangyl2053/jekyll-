@@ -5,9 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako;
 
+import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.KozaSearchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -21,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokuchoHeijunka6gatsuMyBatisParameter implements IMyBatisParameter {
+public class TokuchoHeijunka6gatsuMyBatisParameter extends KozaSearchParameter implements IMyBatisParameter {
 
     private boolean 一括発行起動;
     private SubGyomuCode サブ業務コード;
@@ -49,12 +53,14 @@ public class TokuchoHeijunka6gatsuMyBatisParameter implements IMyBatisParameter 
      * @param 被保険者区分 被保険者区分
      * @param 特別徴収_厚生労働省 特別徴収_厚生労働省
      * @param 特別徴収_地共済 特別徴収_地共済
+     * @param key 口座検索用の検索キークラス
      */
     public TokuchoHeijunka6gatsuMyBatisParameter(boolean 一括発行起動,
             FlexibleYear 調定年度, List<RString> 通知内容コード,
             RString 更正前後区分, RString 作成処理名, RString 徴収方法, RString 被保険者区分, RString 特別徴収_厚生労働省,
-            RString 特別徴収_地共済) {
+            RString 特別徴収_地共済, IKozaSearchKey key) {
 
+        super(key, new ArrayList<KamokuCode>());
         this.サブ業務コード = SubGyomuCode.DBB介護賦課;
         this.業務コード = GyomuCode.DB介護保険;
         this.調定年度 = 調定年度;
