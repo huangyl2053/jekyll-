@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbd.service.report.yokaigoninteitaisyosyaichiran;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.core.yokaigoninteiinterface.YokaigoNinteiInterface;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.YokaigoNinteiInterface;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigoninteitaisyosyaichiran.YokaigoNinteiTaisyosyaIchiran;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteitaisyosyaichiran.YokaigoNinteiTaisyosyaIchiranEntity;
-import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4003YokaigoNinteiInterfaceDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4003YokaigoNinteiInterfaceDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.yokaigoninteitaisyosyaichiran.IYokaigoNinteiTaisyosyaIchiranMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

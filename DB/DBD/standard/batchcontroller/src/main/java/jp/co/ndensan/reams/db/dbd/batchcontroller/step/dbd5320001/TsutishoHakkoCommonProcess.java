@@ -60,6 +60,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 public class TsutishoHakkoCommonProcess {
 
     /**
+     * コンストラクス。
+     */
+    private TsutishoHakkoCommonProcess() {
+    }
+
+    /**
      * 通知文_パターン番号_1
      */
     public static final int 通知文_パターン番号_1 = 1;

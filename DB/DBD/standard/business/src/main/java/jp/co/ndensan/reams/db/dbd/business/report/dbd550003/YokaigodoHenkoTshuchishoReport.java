@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd550003;
 
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.ninteikekkatshuchishohakko.YokaigodoHenkoTsuchishoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd550003.YokaigodoHenkoTshuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -19,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public final class YokaigodoHenkoTshuchishoReport extends Report<YokaigodoHenkoTshuchishoReportSource> {
 
-    private final YokaigodoHenkoTsuchishoEntity entity;
+    private final YokaigodoHenkoTsuchishoJoho entity;
     private final ChohyoSeigyoKyotsu 帳票制御共通;
     private final NinshoshaSource ninshoshaSource;
 
@@ -30,7 +29,7 @@ public final class YokaigodoHenkoTshuchishoReport extends Report<YokaigodoHenkoT
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param ninshoshaSource NinshoshaSource
      */
-    public YokaigodoHenkoTshuchishoReport(YokaigodoHenkoTsuchishoEntity entity,
+    public YokaigodoHenkoTshuchishoReport(YokaigodoHenkoTsuchishoJoho entity,
             ChohyoSeigyoKyotsu 帳票制御共通,
             NinshoshaSource ninshoshaSource) {
         this.entity = entity;

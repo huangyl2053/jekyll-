@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNint
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4102NinteiKekkaJohoEntity;
@@ -283,8 +285,8 @@ public class YokaigoNinteiJoho implements Serializable {
      *
      * @return 主治医医療機関コード認定
      */
-    public RString get主治医医療機関コード認定() {
-        return null == 要介護認定申請情報認定Entity ? RString.EMPTY : 要介護認定申請情報認定Entity.getShujiiIryokikanCode().getColumnValue();
+    public ShujiiIryokikanCode get主治医医療機関コード認定() {
+        return null == 要介護認定申請情報認定Entity ? ShujiiIryokikanCode.EMPTY : 要介護認定申請情報認定Entity.getShujiiIryokikanCode();
     }
 
     /**
@@ -310,8 +312,8 @@ public class YokaigoNinteiJoho implements Serializable {
      *
      * @return 主治医コード認定
      */
-    public RString get主治医コード認定() {
-        return null == 要介護認定申請情報認定Entity ? RString.EMPTY : 要介護認定申請情報認定Entity.getShujiiCode().getColumnValue();
+    public ShujiiCode get主治医コード認定() {
+        return null == 要介護認定申請情報認定Entity ? ShujiiCode.EMPTY : 要介護認定申請情報認定Entity.getShujiiCode();
     }
 
     /**

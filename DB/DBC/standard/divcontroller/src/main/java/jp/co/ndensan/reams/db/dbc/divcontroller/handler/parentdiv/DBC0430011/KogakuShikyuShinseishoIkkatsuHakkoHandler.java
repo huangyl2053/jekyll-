@@ -130,9 +130,9 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
             }
         }
 
-        RString 初回申請把握基準日 = DbBusinessConfig.get(ConfigNameDBC.高額自動償還_初回申請把握基準日,
+        RString 初回申請日 = DbBusinessConfig.get(ConfigNameDBC.高額自動償還_初回申請把握基準日,
                 NOWDATE, SubGyomuCode.DBC介護給付);
-        div.getShinseishoHakkoParameters().getTxtShokaiShinseiHakuKijunDate().setValue(new FlexibleDate(初回申請把握基準日));
+        div.getShinseishoHakkoParameters().getTxtShokaiShinseiHakuKijunDate().setValue(new FlexibleDate(初回申請日));
         FlexibleDate nowDate = FlexibleDate.getNowDate();
         div.getShutsuryokuTaisho().getTxtSakuseiDate().setValue(nowDate);
         div.getShutsuryokuTaisho().getTxtShinseishoTeishutsuKigen().setValue(nowDate.plusDay(DAY_9));

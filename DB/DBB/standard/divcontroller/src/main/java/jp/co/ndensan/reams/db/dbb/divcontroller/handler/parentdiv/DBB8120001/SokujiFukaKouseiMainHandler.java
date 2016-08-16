@@ -1495,7 +1495,7 @@ public class SokujiFukaKouseiMainHandler {
             return RString.EMPTY;
         }
         ShunoManager manager = ShunoManager.createInstance();
-        Long 収納ID = 更正後現年度賦課.get収納ID(Integer.valueOf(月の期.toString()));
+        Long 収納ID = 更正後現年度賦課.get特別徴収収納ID(Integer.valueOf(月の期.toString()));
         if (収納ID == null || manager.get収納(収納ID) == null) {
             return RString.EMPTY;
         }
@@ -1524,7 +1524,7 @@ public class SokujiFukaKouseiMainHandler {
             return RString.EMPTY;
         }
         ShunoManager manager = ShunoManager.createInstance();
-        Long 収納ID = 更正後現年度賦課.get収納ID(Integer.valueOf(月の期.toString()));
+        Long 収納ID = 更正後現年度賦課.get普通徴収収納ID(Integer.valueOf(月の期.toString()));
         return get金額のカンマ編集(manager.get収納(収納ID).get収入合計情報().get本税());
     }
 

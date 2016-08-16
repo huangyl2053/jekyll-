@@ -53,14 +53,14 @@ public class SogojigyohiSeikyugakuTsuchishoKeikaSochiHeaderEditor implements ISo
         source.shinsaYM = パターン56(帳票出力対象データ.get審査年月());
         source.hokenshaNo = getColumnValue(帳票出力対象データ.get保険者番号());
         source.hokenshaName = 帳票出力対象データ.get保険者名();
-        if (コード_99.equals(帳票出力対象データ.get款コード())) {
+        if (!コード_99.equals(帳票出力対象データ.get款コード())) {
             source.kanName = 帳票出力対象データ.get款名();
             source.kanCode = 帳票出力対象データ.get款コード();
         } else {
             source.kanName = 総合計;
             source.kanCode = RString.EMPTY;
         }
-        if (コード_99.equals(帳票出力対象データ.get項コード())) {
+        if (!コード_99.equals(帳票出力対象データ.get項コード())) {
             source.kouName = 帳票出力対象データ.get項名();
             source.kouCode = 帳票出力対象データ.get項コード();
         } else {
