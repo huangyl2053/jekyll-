@@ -120,8 +120,12 @@ public class KyufujissekiKoshinkekkaIchiranPrintService {
                 }
             }
             indexList.add(new RString(entityList.size()));
-            new KyufujissekiKoshinkekkaIchiranReport(処理年月, entityList, 並び順の１件目, 並び順の２件目,
-                    並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目List, システム日時, indexList).writeBy(reportSourceWriter);
+            int k = INDEX_1;
+            for (ChohyoShutsuryokuTaishoDateEntity entity : entityList) {
+                new KyufujissekiKoshinkekkaIchiranReport(処理年月, entity, 並び順の１件目, 並び順の２件目,
+                        並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目List, システム日時, k, indexList).writeBy(reportSourceWriter);
+                k = k + INDEX_1;
+            }
         }
     }
 
