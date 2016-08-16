@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -33,9 +33,6 @@ public class KyodoJukyusyaIdoRenrakuhyoDetail {
 
     private static final RString 引数 = new RString("被保険者番号なし");
     private static final RString 照会モード = new RString("照会");
-    private static final QuestionMessage SYORIMESSAGE = new QuestionMessage(
-            UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-            UrQuestionMessages.処理実行の確認.getMessage().evaluate());
 
     /**
      * 画面初期化のメソッドです。
@@ -48,16 +45,13 @@ public class KyodoJukyusyaIdoRenrakuhyoDetail {
 
         KyodoJukyushaTaishoshaEntity 引き継ぎ情報
                 = ViewStateHolder.get(ViewStateKeys.一覧検索キー, KyodoJukyushaTaishoshaEntity.class);
-        if (引き継ぎ情報 != null) {
-            HihokenshaNo 被保険者番号 = 引き継ぎ情報.get被保番号();
-            if (null == 被保険者番号 || 被保険者番号.isEmpty()) {
-                throw new ApplicationException(
-                        DbzErrorMessages.理由付き登録不可.getMessage().replace(引数.toString()));
-            }
-            KyodoshoriyoJukyushaIdoRenrakuhyoParam param = getHandler(div).onLoad(照会モード, 引き継ぎ情報);
-
-            ViewStateHolder.put(ViewStateKeys.共同処理用受給者異動情報, param);
+        HihokenshaNo 被保険者番号 = 引き継ぎ情報.get被保番号();
+        if (null == 被保険者番号 || 被保険者番号.isEmpty()) {
+            throw new ApplicationException(
+                    DbzErrorMessages.理由付き登録不可.getMessage().replace(引数.toString()));
         }
+        KyodoshoriyoJukyushaIdoRenrakuhyoParam param = getHandler(div).onLoad(照会モード, 引き継ぎ情報);
+        ViewStateHolder.put(ViewStateKeys.共同処理用受給者異動情報, param);
         return ResponseData.of(div).respond();
     }
 
@@ -68,7 +62,8 @@ public class KyodoJukyusyaIdoRenrakuhyoDetail {
      *
      * @return ResponseData
      */
-    public ResponseData<KyodoJukyusyaIdoRenrakuhyoDetailDiv> onClick_btnReturnSearch(KyodoJukyusyaIdoRenrakuhyoDetailDiv div) {
+    public ResponseData<KyodoJukyusyaIdoRenrakuhyoDetailDiv> onClick_btnReturnSearch(
+            KyodoJukyusyaIdoRenrakuhyoDetailDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBC0260013TransitionEventName.検索に戻る).respond();
     }
 
@@ -79,14 +74,12 @@ public class KyodoJukyusyaIdoRenrakuhyoDetail {
      *
      * @return ResponseData
      */
-    public ResponseData<KyodoJukyusyaIdoRenrakuhyoDetailDiv> onClick_btnReportPublish_CheckMessage(KyodoJukyusyaIdoRenrakuhyoDetailDiv div) {
+    public ResponseData<KyodoJukyusyaIdoRenrakuhyoDetailDiv> onClick_btnReportPublish_CheckMessage(
+            KyodoJukyusyaIdoRenrakuhyoDetailDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(SYORIMESSAGE).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).setState(DBC0260013StateName.初期化状態);
+            QuestionMessage 処理実行の確認MESSAGE = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+                    UrQuestionMessages.処理実行の確認.getMessage().evaluate(), ButtonSelectPattern.OKCancel);
+            return ResponseData.of(div).addMessage(処理実行の確認MESSAGE).respond();
         }
         return ResponseData.of(div).respond();
 
