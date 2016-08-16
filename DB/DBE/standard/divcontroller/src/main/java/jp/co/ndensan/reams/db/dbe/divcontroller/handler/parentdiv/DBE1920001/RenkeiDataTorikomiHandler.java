@@ -214,7 +214,6 @@ public class RenkeiDataTorikomiHandler {
                         rowData.getNenrei().setValue(new Decimal(entity.get年齢().toString()));
                         rowData.setSeibetsu(Seibetsu.toValue(entity.get性別()).get名称());
                         list.add(rowData);
-                        div.getTorikomiichiran().getDgtorikomidataichiran().setDataSource(list);
                         PersonalData personalData = PersonalData.of(new ShikibetsuCode(rowData.getKoroshoifshikibetsucode()),
                                 new ExpandedInformation(new Code("0001"),
                                         new RString("被保険者番号"), rowData.getHihono()));
@@ -252,7 +251,6 @@ public class RenkeiDataTorikomiHandler {
                         rowData.getNenrei().setValue(new Decimal(csvEntity.get年齢().toString()));
                         rowData.setSeibetsu(Seibetsu.toValue(csvEntity.get性別()).get名称());
                         list.add(rowData);
-                        div.getTorikomiichiran().getDgtorikomidataichiran().setDataSource(list);
                         PersonalData personalData = PersonalData.of(new ShikibetsuCode(rowData.getKoroshoifshikibetsucode()),
                                 new ExpandedInformation(new Code("0001"),
                                         new RString("被保険者番号"), rowData.getHihono()));
@@ -288,7 +286,6 @@ public class RenkeiDataTorikomiHandler {
                         row.getNenrei().setValue(new Decimal(csvEntity.get年齢().toString()));
                         row.setSeibetsu(Seibetsu.toValue(csvEntity.get性別()).get名称());
                         list.add(row);
-                        div.getTorikomiichiran().getDgtorikomidataichiran().setDataSource(list);
                         PersonalData personalData = PersonalData.of(new ShikibetsuCode(row.getKoroshoifshikibetsucode()),
                                 new ExpandedInformation(new Code("0001"),
                                         new RString("被保険者番号"), row.getHihono()));
@@ -296,6 +293,7 @@ public class RenkeiDataTorikomiHandler {
                     }
                 }
             }
+            div.getTorikomiichiran().getDgtorikomidataichiran().setDataSource(list);
         }
     }
 
