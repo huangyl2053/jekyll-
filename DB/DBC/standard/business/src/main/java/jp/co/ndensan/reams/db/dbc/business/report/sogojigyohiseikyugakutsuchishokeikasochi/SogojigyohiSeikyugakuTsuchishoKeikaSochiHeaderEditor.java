@@ -55,13 +55,17 @@ public class SogojigyohiSeikyugakuTsuchishoKeikaSochiHeaderEditor implements ISo
         source.hokenshaName = 帳票出力対象データ.get保険者名();
         if (コード_99.equals(帳票出力対象データ.get款コード())) {
             source.kanName = 帳票出力対象データ.get款名();
+            source.kanCode = 帳票出力対象データ.get款コード();
         } else {
             source.kanName = 総合計;
+            source.kanCode = RString.EMPTY;
         }
         if (コード_99.equals(帳票出力対象データ.get項コード())) {
             source.kouName = 帳票出力対象データ.get項名();
+            source.kouCode = 帳票出力対象データ.get項コード();
         } else {
             source.kouName = RString.EMPTY;
+            source.kouCode = RString.EMPTY;
         }
         source.kokuhorenName = 帳票出力対象データ.get国保連合会名();
         source.shoKisaiHokenshaNo = getColumnValue(帳票出力対象データ.get証記載保険者番号());
