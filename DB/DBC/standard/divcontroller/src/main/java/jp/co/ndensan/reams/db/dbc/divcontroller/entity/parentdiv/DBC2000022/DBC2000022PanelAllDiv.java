@@ -46,6 +46,10 @@ public class DBC2000022PanelAllDiv extends Panel {
     private KaigoAtenaInfoDiv ccdKaigoAtenaInfo;
     @JsonProperty("EditMode")
     private RString EditMode;
+    @JsonProperty("hdnShikibetsuCode")
+    private RString hdnShikibetsuCode;
+    @JsonProperty("hdnGyomuCode")
+    private RString hdnGyomuCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -198,6 +202,42 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     /*
+     * gethdnShikibetsuCode
+     * @return hdnShikibetsuCode
+     */
+    @JsonProperty("hdnShikibetsuCode")
+    public RString getHdnShikibetsuCode() {
+        return hdnShikibetsuCode;
+    }
+
+    /*
+     * sethdnShikibetsuCode
+     * @param hdnShikibetsuCode hdnShikibetsuCode
+     */
+    @JsonProperty("hdnShikibetsuCode")
+    public void setHdnShikibetsuCode(RString hdnShikibetsuCode) {
+        this.hdnShikibetsuCode = hdnShikibetsuCode;
+    }
+
+    /*
+     * gethdnGyomuCode
+     * @return hdnGyomuCode
+     */
+    @JsonProperty("hdnGyomuCode")
+    public RString getHdnGyomuCode() {
+        return hdnGyomuCode;
+    }
+
+    /*
+     * sethdnGyomuCode
+     * @param hdnGyomuCode hdnGyomuCode
+     */
+    @JsonProperty("hdnGyomuCode")
+    public void setHdnGyomuCode(RString hdnGyomuCode) {
+        this.hdnGyomuCode = hdnGyomuCode;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -261,12 +301,12 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnSeikatsuHogo() {
+    public ButtonDialog getBtnSeikatsuHogo() {
         return this.getPanelHyoji().getBtnSeikatsuHogo();
     }
 
     @JsonIgnore
-    public void  setBtnSeikatsuHogo(Button btnSeikatsuHogo) {
+    public void  setBtnSeikatsuHogo(ButtonDialog btnSeikatsuHogo) {
         this.getPanelHyoji().setBtnSeikatsuHogo(btnSeikatsuHogo);
     }
 
