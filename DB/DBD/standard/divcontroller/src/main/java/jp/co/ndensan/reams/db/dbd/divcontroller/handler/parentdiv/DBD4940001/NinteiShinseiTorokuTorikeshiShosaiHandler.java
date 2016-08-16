@@ -146,7 +146,7 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
         IKaigoNinteiShinseiKihonJohoInputDiv 介護認定申請基本情報入力Div = div.getCcdKaigoNinteiShinseiKihon();
         介護認定申請基本情報入力Div.initialize();
         介護認定申請基本情報入力Div.setShinseiShubetsu(JukyuShinseiJiyu.toValue(convertCodeToRString(認定情報.get受給申請事由())));
-        介護認定申請基本情報入力Div.setTxtShinseiJokyo(認定情報.get申請状況区分());
+        介護認定申請基本情報入力Div.setTxtShinseiJokyo(JukyuShinseiJiyu.toValue(認定情報.get申請状況区分()).get名称());
         介護認定申請基本情報入力Div.setKyuSochisha(認定情報.is旧措置者フラグ()
                 ? Arrays.asList(new RString("key0")) : new ArrayList<RString>());
         介護認定申請基本情報入力Div.setChkShikakuShutokuMae(認定情報.is資格取得前申請フラグ()
