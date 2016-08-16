@@ -41,7 +41,7 @@ public class TsuchishoJoho123 {
      * 「実行する」ボタンを押下。
      *
      * @param div TsuchishoJoho123Div
-     * @return TsuchishoJoho123Div
+     * @return KokuhorenDataTorikomiBatchParameter
      */
     public ResponseData<KokuhorenDataTorikomiBatchParameter> onClick_btnExcute(TsuchishoJoho123Div div) {
 
