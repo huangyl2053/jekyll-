@@ -538,10 +538,10 @@ public class RiyoshaFutanWariaiShoInsertProcess extends BatchProcessBase<Riyosha
         item.setShichosonCode(entity.get被保台帳().getShichosonCode());
         item.setShikibetsuCode(entity.get被保台帳().getShikibetsuCode());
         item.setKofuYMD(new FlexibleDate(parameter.get交付年月日().toDateString()));
-        item.setYukoKigenYMD(new FlexibleDate(parameter.get年度().getYearValue(), NUM_SEVEN, NUM_THIRTY_ONE));
+        item.setYukoKigenYMD(new FlexibleDate(parameter.get年度().getYearValue() + NUM_ONE, NUM_SEVEN, NUM_THIRTY_ONE));
         item.setKofuJiyu(get交付事由(entity));
-        item.setKofuRiyu(CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付,
-                DBACodeShubetsu.資格者証回収事由.getCodeShubetsu(), new Code(get交付事由(entity))));
+        item.setKofuRiyu(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格,
+                DBACodeShubetsu.負担割合証交付事由.getCodeShubetsu(), new Code(get交付事由(entity))));
         item.setKaishuJiyu(回収事由_00);
         item.setTanpyoHakkoUmuFlag(false);
         item.setHakkoShoriTimestamp(new YMDHMS(parameter.getバッチ起動時処理日時()));
