@@ -49,7 +49,7 @@ public enum JigyobunKogakuGassanFurikomiMeisaishoBatchParamSpec implements IPred
             if (null == 今回対象年月日_FROM || null == 今回対象年月日_TO) {
                 return true;
             }
-            return 今回対象年月日_FROM.isBefore(今回対象年月日_TO) || 今回対象年月日_FROM.equals(今回対象年月日_TO);
+            return 今回対象年月日_FROM.isBeforeOrEquals(今回対象年月日_TO);
         }
 
         /**
@@ -62,7 +62,7 @@ public enum JigyobunKogakuGassanFurikomiMeisaishoBatchParamSpec implements IPred
             RDate 作成日 = div.getShuturyokuTyouhyou().getTxtSakuseibi().getValue();
             RDate 依頼日 = div.getShuturyokuTyouhyou().getTxtIraibi().getValue();
             RDate 振込指定日 = div.getShuturyokuTyouhyou().getTxtFurikomiSiteibi().getValue();
-            return (作成日.isBefore(依頼日) || 作成日.equals(依頼日)) && (依頼日.isBefore(振込指定日) || 依頼日.equals(振込指定日));
+            return 作成日.isBeforeOrEquals(依頼日) && 依頼日.isBeforeOrEquals(振込指定日);
         }
     }
 }
