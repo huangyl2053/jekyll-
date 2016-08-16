@@ -54,6 +54,7 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
     private static final RString 全て = new RString("全て");
     private static final RString 振込指定日_MSG = new RString("振込指定日");
     private static final RString 発行済のみ = new RString("発行済のみ");
+    private static final RString KEY_1 = new RString("1");
     private static final int INDEX_0 = 0;
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
@@ -143,15 +144,28 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
             取引先金融機関支店名称 = 支店.get支店名称();
         }
         RString 取引先金融機関 = 金融機関名.concat(支店名);
+        div.getTyuusyutuHanni().getDdlHakkouTaisyou().setSelectedKey(KEY_1);
         div.setTorihikiKinyukikanShitennmei(取引先金融機関支店名称);
         div.getTyuusyutuJyoukenn().getTxtItakusya().setValue(委託者名);
         div.getTyuusyutuJyoukenn().getTxtItakusyaCode().setValue(委託者コード);
         div.getTxtTorihikiKinyukikan().setValue(取引先金融機関);
-        div.getTyuusyutuHanni().getTxt().setValue(システム日付);
         div.getTyuusyutuHanni().getTxtKonnkaiTaisyouNenngappi().setToValue(システム日付);
         div.getShuturyokuTyouhyou().getTxtSakuseibi().setValue(システム日付);
         div.getShuturyokuTyouhyou().getTxtIraibi().setValue(システム日付);
         div.getShuturyokuTyouhyou().getTxtFurikomiSiteibi().setValue(システム日付);
+    }
+
+    /**
+     * 発行対象のオンチェンジ事件です。
+     *
+     * @param div JigyobunKogakuGassanFurikomiMeisaishoBatchParamDiv
+     */
+    public void onChangeDdlHakkouTaisyou(JigyobunKogakuGassanFurikomiMeisaishoBatchParamDiv div) {
+        if (口座.equals(div.getRadSiharaihouhou().getSelectedValue()) && 発行済のみ.equals(div.getTyuusyutuHanni().getDdlHakkouTaisyou().getSelectedValue())) {
+            div.getTyuusyutuHanni().getTxt().setDisabled(false);
+        } else {
+            div.getTyuusyutuHanni().getTxt().setDisabled(true);
+        }
     }
 
     /**
