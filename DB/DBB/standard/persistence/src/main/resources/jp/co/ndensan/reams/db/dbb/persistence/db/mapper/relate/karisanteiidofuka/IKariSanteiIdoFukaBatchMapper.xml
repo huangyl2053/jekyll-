@@ -428,7 +428,7 @@
         <result property="公的年金収入額" column="nenkinShunyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
     
-    <select id="select特別徴収開始Temp" resultMap="ResultMap_TokubetuTyoushuuKaisiTempEntity">
+    <select resultOrdered="true" id="select特別徴収開始Temp" resultMap="ResultMap_TokubetuTyoushuuKaisiTempEntity">
         SELECT
         特別徴収開始Temp."fukaNendo",
         特別徴収開始Temp."hihokenshaNo",
@@ -844,7 +844,7 @@
       )AS C
     </insert>
     
-    <select  id="select賦課情報" 
+    <select  resultOrdered="true" id="select賦課情報" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.KariSanteiIdoFukaMybatisParameter"
             resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaJohoRelateMapper.resultMap_FukaInfo">
             SELECT 
@@ -867,7 +867,7 @@
                 "UrT0705ChoteiKyotsu"."choteiId" = "DbT2003Kibetsu"."choteiId"
     </select>
     
-     <select  id="select資格情報" 
+     <select  resultOrdered="true" id="select資格情報" 
             resultMap="ResultMap_資格取得情報">
             SELECT 資格.*
             FROM "ShikakuShutokuTemp" AS 資格
@@ -883,7 +883,7 @@
           AND 資格."shikakuShutoku_edaNo" = #{枝番}
      </update>
      
-     <select  id="select資格取得情報" 
+     <select resultOrdered="true"  id="select資格取得情報" 
             resultMap="ResultMap_資格取得情報">
             SELECT  "shikakuShutoku_hihokenshaNo",
                     "shikakuShutoku_shikibetsuCode",
@@ -914,7 +914,7 @@
         )
     </insert>
     
-    <select  id="select資格喪失情報" 
+    <select  resultOrdered="true" id="select資格喪失情報" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.KariSanteiIdoFukaMybatisParameter"
             resultMap="ResultMap_資格喪失">
             SELECT 
@@ -1001,7 +1001,7 @@
             ON  資格喪失."shikakuSousitu_shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
     </select>
     
-    <select  id="select特別徴収停止" 
+    <select  resultOrdered="true" id="select特別徴収停止" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.KariSanteiIdoFukaMybatisParameter"
             resultMap="ResultMap_特別徴収停止">
             SELECT 
@@ -1085,7 +1085,7 @@
             ON  特別徴収停止."tokubetuTyoushuuTeisi_shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
     </select>
     
-    <select  id="select資格取得" 
+    <select  resultOrdered="true" id="select資格取得" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.KariSanteiIdoFukaMybatisParameter"
             resultMap="ResultMap_資格取得">
             SELECT 
@@ -1175,7 +1175,7 @@
             ON  資格取得."shikakuShutoku_shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
     </select>
     
-    <select  id="select口座異動" 
+    <select  resultOrdered="true" id="select口座異動" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.KariSanteiIdoFukaMybatisParameter"
             resultMap="ResultMap_口座異動">
             SELECT 
@@ -1201,7 +1201,7 @@
             ON 介護期別."dbT2003Kibetsu_choteiId" = 調定共通."urT0705ChoteiKyotsu_choteiId"
     </select>
     
-    <select  id="select8月特徴開始" 
+    <select  resultOrdered="true" id="select8月特徴開始" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.KariSanteiIdoFukaMybatisParameter"
             resultMap="ResultMap_8月特徴開始">
             SELECT 
