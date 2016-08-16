@@ -41,7 +41,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2550-010 jianglaishen
  */
-public class DBC120180_SogojigyohiKagoKetteiInFlow extends BatchFlowBase<DBC120180_SogojigyohiKagoKetteiInParameter> {
+public class DBC120180_SogojigyohiKagoKetteiIn extends BatchFlowBase<DBC120180_SogojigyohiKagoKetteiInParameter> {
 
     private static final String ファイル取得 = "getFile";
     private static final String CSVファイル取込 = "readCsvFile";
