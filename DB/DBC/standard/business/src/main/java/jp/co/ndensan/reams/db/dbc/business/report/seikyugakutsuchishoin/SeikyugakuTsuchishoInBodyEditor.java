@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
- * 介護給付費等請求額通知書一覧表帳票BodyEditor
+ * 介護給付費等請求額通知書一覧表帳票BodyEditorクラスです
  *
  * @reamsid_L DBC-2480-030 jiangwenkai
  */

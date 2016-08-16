@@ -26,7 +26,7 @@
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
         true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
         ON "ShikibetsuTaisho"."shikibetsuCode" = "DbV1001HihokenshaDaicho"."shikibetsuCode"
-        INNER JOIN
+        LEFT JOIN
         rgua."UaFt250FindAtesaki"('DB','DBC','','false','','','true','true','false','false','') AS "Atesaki"
         ON "Atesaki"."shikibetsuCode" = "DbV1001HihokenshaDaicho"."shikibetsuCode"
         WHERE "DbT3116KijunShunyugakuTekiyoKanri"."ketteiYMD" <![CDATA[<>]]> ''
