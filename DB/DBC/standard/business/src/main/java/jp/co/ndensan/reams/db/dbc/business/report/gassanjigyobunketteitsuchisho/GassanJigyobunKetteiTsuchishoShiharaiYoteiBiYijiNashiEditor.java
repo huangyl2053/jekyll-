@@ -287,9 +287,6 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
     private void set窓口払である(GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
         this.set持ち物(source);
         this.set支払場所(source);
-        if (事業高額合算支給不支給決定.getShiharaiKaishiYMD() == null || 事業高額合算支給不支給決定.getShiharaiShuryoYMD() == null) {
-            return;
-        }
         FlexibleDate shiharaiKaishiYMD = 事業高額合算支給不支給決定.getShiharaiKaishiYMD();
         FlexibleDate shiharaiShuryoYMD = 事業高額合算支給不支給決定.getShiharaiShuryoYMD();
         if (shiharaiKaishiYMD == null || shiharaiShuryoYMD == null) {
