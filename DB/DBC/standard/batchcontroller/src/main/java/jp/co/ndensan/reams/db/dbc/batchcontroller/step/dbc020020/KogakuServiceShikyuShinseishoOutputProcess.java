@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020;
 
-import jp.co.ndensan.reams.db.dbc.business.report.kogakuShikyuShinseisho.KogakuShikyuShinseishoReport;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakuservicetsuchisho.KogakuJigyoShinseishoHakkoIchiranOrder;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakushikyushinseishoyucho.KogakuShikyuShinseishoYuchoReport;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyufuoshirasetsuchisho.KogakuKaigoServicehiOshiraseHakkoProcessParameter;
@@ -34,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -104,7 +102,7 @@ public class KogakuServiceShikyuShinseishoOutputProcess extends BatchProcessBase
     protected void process(ShinseiJohoChohyoTempEntity entity) {
         if (金融機関コード_9900.equals(entity.getKinyuKikanCodeChohyo())) {
             KogakuShikyuShinseishoYuchoEntity param = new KogakuShikyuShinseishoYuchoEntity();
-            param.setシステム日付(RDate.getNowDate());
+            param.setシステム日付(FlexibleDate.getNowDate());
             param.set注意文(注意文);
             param.set申請情報帳票発行一時(entity);
             param.set認証者役職名(認証者名);
@@ -120,9 +118,6 @@ public class KogakuServiceShikyuShinseishoOutputProcess extends BatchProcessBase
             param.set認証者役職名(認証者名);
             param.set連番(new RString(count));
             param.set注意文(注意文);
-
-            KogakuShikyuShinseishoReport report = new KogakuShikyuShinseishoReport(param);
-            report.writeBy(shinseishoReportSourceWriter);
         }
         count = count + 1;
     }
