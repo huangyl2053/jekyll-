@@ -54,7 +54,6 @@ public class TokuchoKariSanteiFuka {
     private static final RString 帳票0011 = new RString("DBB100004_TokubetsuChoshuKaishiTsuchishoKariB5Rencho");
     private final DbT7022ShoriDateKanriDac 処理日付管理Dac;
     private final DbT7067ChohyoSeigyoHanyoDac 帳票制御汎用Dac;
-    private boolean 一括発行起動フラグ;
 
     /**
      * コンストラクタです。
@@ -79,8 +78,7 @@ public class TokuchoKariSanteiFuka {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TokuchoKariSanteiFuka}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link TokuchoKariSanteiFuka}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link TokuchoKariSanteiFuka}のインスタンス
      */
     public static TokuchoKariSanteiFuka createInstance() {
         return InstanceProvider.create(TokuchoKariSanteiFuka.class);
@@ -124,7 +122,7 @@ public class TokuchoKariSanteiFuka {
         resultParameter.set発行日(parameter.get発行日());
         resultParameter.set出力対象(parameter.get出力対象());
         resultParameter.set出力帳票一覧(出力帳票一覧List);
-        resultParameter.set一括発行起動フラグ(一括発行起動フラグ);
+        resultParameter.set一括発行起動フラグ(true);
         return resultParameter;
     }
 
@@ -147,7 +145,6 @@ public class TokuchoKariSanteiFuka {
                 バッチ出力帳票entity.set出力順ID(出力帳票entity.get出力順ID());
             } else if (new ReportId(特別徴収開始通知書仮代表)
                     .equals(出力帳票entity.get帳票分類ID())) {
-                一括発行起動フラグ = true;
                 ChohyoSeigyoHanyo 帳票タイプ = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課,
                         出力帳票entity.get帳票分類ID(),
                         new FlexibleYear(MINYEAR), 通知書タイプ);

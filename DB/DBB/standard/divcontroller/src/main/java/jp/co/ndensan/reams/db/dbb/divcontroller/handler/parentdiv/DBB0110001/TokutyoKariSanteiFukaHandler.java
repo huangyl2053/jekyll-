@@ -240,13 +240,17 @@ public final class TokutyoKariSanteiFukaHandler {
         List<dgOutputChohyoIchiran_Row> 出力帳票一覧List = div.getTokutyoKariSanteiFukaChohyoHakko()
                 .getCcdChohyoIchiran().get出力帳票一覧();
         fukaParameter.set出力帳票一覧List(listChange(出力帳票一覧List));
-        TokuchoKaishiTsuchishoBatchParameter param = tokuchokarisanteifuka
-                .createTokuchoKariSanteiParameter(fukaParameter);
+        fukaParameter.set調定年度(div.getShoriJokyo().getTokutyoKariSanteiShoriNaiyo().getTxtChoteiNendo().getDomain());
+        fukaParameter.set賦課年度(div.getShoriJokyo().getTokutyoKariSanteiShoriNaiyo().getTxtFukaNendo().getDomain());
+        fukaParameter.set出力対象(div.getTokutyoKariSanteiFukaChohyoHakko().
+                getTokutyoKariTsuchiKobetsuJoho().getRadTokuKaishiTsuchiTaisho2().getSelectedValue());
         if (div.getTokutyoKariSanteiFukaChohyoHakko().
                 getTokutyoKariTsuchiKobetsuJoho().getTxtTokuKaishiTsuchiHakkoYMD2().getValue() != null) {
-            param.set発行日(new FlexibleDate(div.getTokutyoKariSanteiFukaChohyoHakko().
+            fukaParameter.set発行日(new FlexibleDate(div.getTokutyoKariSanteiFukaChohyoHakko().
                     getTokutyoKariTsuchiKobetsuJoho().getTxtTokuKaishiTsuchiHakkoYMD2().getValue().toDateString()));
         }
+        TokuchoKaishiTsuchishoBatchParameter param = tokuchokarisanteifuka
+                .createTokuchoKariSanteiParameter(fukaParameter);
         List<ShuturyokuTyoutuke> 出力帳票一覧 = new ArrayList();
         for (KarisanteiBatchEntity result : param.get出力帳票一覧()) {
             if (result.get出力順ID() == null) {
