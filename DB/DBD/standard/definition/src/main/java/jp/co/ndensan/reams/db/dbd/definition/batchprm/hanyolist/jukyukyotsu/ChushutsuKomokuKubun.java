@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 抽出項目区分を表す列挙型です。
  *
- * @reamsid_L DBD-5520-030 mawy
+ * @reamsid_L DBD-9999-023 mawy
  */
 public enum ChushutsuKomokuKubun {
 
