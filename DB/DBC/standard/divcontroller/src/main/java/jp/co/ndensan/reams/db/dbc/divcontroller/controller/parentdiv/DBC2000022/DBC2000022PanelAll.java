@@ -40,6 +40,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoKofuKaishuManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -90,6 +91,8 @@ public class DBC2000022PanelAll {
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         FlexibleYear 年度 = ViewStateHolder.get(ViewStateKeys.年度, FlexibleYear.class);
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        div.setHdnGyomuCode(GyomuCode.DB介護保険.getColumnValue());
+        div.setHdnShikibetsuCode(資格対象者.get被保険者番号().getColumnValue());
         if (DBC2000022StateName.新規.getName().equals(処理モード)) {
             RiyoshaFutanWariaiHanteiManagerResult 判定結果
                     = ViewStateHolder.get(ViewStateKeys.判定結果, RiyoshaFutanWariaiHanteiManagerResult.class);
