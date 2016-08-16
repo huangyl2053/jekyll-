@@ -104,9 +104,8 @@ public class SeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess extends BatchKeyBre
     @Override
     protected void beforeExecute() {
         改頁項目リスト.add(new RString(SeikyugakuTsuchishoSource.DBC200066SourceFields.shoKisaiHokenshaNo.name()));
-        // TODO QA 内部番号 1241
-        改頁項目リスト.add(new RString(SeikyugakuTsuchishoSource.DBC200066SourceFields.kanName.name()));
-        改頁項目リスト.add(new RString(SeikyugakuTsuchishoSource.DBC200066SourceFields.kouName.name()));
+        改頁項目リスト.add(new RString(SeikyugakuTsuchishoSource.DBC200066SourceFields.kanCode.name()));
+        改頁項目リスト.add(new RString(SeikyugakuTsuchishoSource.DBC200066SourceFields.kouCode.name()));
     }
 
     @Override
