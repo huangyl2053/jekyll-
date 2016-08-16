@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.DbT2002FukaTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -35,8 +37,10 @@ public class HihokenshaKubunTo4gatsuKaishiProcess extends BatchProcessBase<DbT20
     protected IBatchReader createReader() {
         RString 特別徴収_厚生労働省 = ChoshuHoho.特別徴収_厚生労働省.getコード();
         RString 特別徴収_地共済 = ChoshuHoho.特別徴収_地共済.getコード();
+        KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
+        IKozaSearchKey key = builder.build();
         return new BatchDbReader(MYBATIS_SELECT_ID, new TokuchoHeijunka6gatsuMyBatisParameter(
-                false, null, null, null, null, null, null, 特別徴収_厚生労働省, 特別徴収_地共済));
+                false, null, null, null, null, null, null, 特別徴収_厚生労働省, 特別徴収_地共済, key));
     }
 
     @Override
