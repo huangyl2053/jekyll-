@@ -122,4 +122,13 @@ public interface IKanendoTsuchishoIkkatsuHakkoMapper {
      */
     List<HonsanteiTsuchishoTempEntity> select納入通知書発行後異動者(Map<String, Object> parameter);
 
+    /**
+     * 計算後情報一時を削除する。
+     */
+    void drop計算後情報一時();
+
+    /**
+     * 計算中間一時を削除する。
+     */
+    void drop計算中間一時();
 }
