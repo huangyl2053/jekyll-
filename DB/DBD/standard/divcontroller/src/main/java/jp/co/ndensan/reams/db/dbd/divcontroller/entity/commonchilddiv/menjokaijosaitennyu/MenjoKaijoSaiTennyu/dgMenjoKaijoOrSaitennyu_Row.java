@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.menjokaij
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Aug 12 09:34:52 CST 2016 
+ * Tue Aug 16 12:01:03 CST 2016 
  */
 
 
