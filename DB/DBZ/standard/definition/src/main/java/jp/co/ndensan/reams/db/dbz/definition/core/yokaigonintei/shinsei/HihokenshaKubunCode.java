@@ -24,9 +24,13 @@ public enum HihokenshaKubunCode {
      */
     第２号被保険者("2", "第２号被保険者", "1号"),
     /**
+     * コード:8 名称:生活保護 略称:生保
+     */
+    生活保護("8", "生活保護", "生保"),
+    /**
      * コード:3 名称:その他 略称:他
      */
-    その他("3", "その他", "他");
+    その他("9", "その他", "他");
 
     private final RString code;
     private final RString fullName;
