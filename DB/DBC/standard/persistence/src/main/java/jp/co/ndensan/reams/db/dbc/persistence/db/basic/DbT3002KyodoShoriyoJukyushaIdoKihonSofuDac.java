@@ -181,10 +181,10 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuDac implements ISaveable<DbT
     /**
      * count共同処理用受給者異動基本送付テーブルを検索して基本送付情報の異動日を判断します
      *
-     * @param 被保険者番号
-     * @param 異動日
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動日 FlexibleDate
      * @return int
-     * @throws NullPointerException
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public int select基本送付情報の異動日Count(HihokenshaNo 被保険者番号, FlexibleDate 異動日) throws NullPointerException {
@@ -204,11 +204,11 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuDac implements ISaveable<DbT
     /**
      * count共同処理用受給者異動基本送付テーブルを検索して基本送付情報の異動区分を判断します
      *
-     * @param 被保険者番号
-     * @param 異動区分
-     * @param 異動日
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動区分 RString
+     * @param 異動日 FlexibleDate
      * @return int
-     * @throws NullPointerException
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public int select基本送付情報の異動区分Count(HihokenshaNo 被保険者番号, RString 異動区分, FlexibleDate 異動日) throws NullPointerException {
@@ -230,9 +230,10 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuDac implements ISaveable<DbT
     /**
      * 基本送付情報の履歴番号チェック
      *
-     * @param 被保険者番号
-     * @param 異動日
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動日 FlexibleDate
      * @return int
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public int get基本送付情報の履歴番号Max(HihokenshaNo 被保険者番号, FlexibleDate 異動日) throws NullPointerException {

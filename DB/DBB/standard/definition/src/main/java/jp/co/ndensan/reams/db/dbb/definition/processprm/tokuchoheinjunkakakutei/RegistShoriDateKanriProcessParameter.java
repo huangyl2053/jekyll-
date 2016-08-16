@@ -35,6 +35,7 @@ public class RegistShoriDateKanriProcessParameter implements IBatchProcessParame
     private RString 開始時刻;
     private RString 終了時刻;
     private List<ShichosonJouhouResult> 市町村情報リスト;
+    private ShichosonJouhouResult 市町村情報;
 
     /**
      * コンストラクタです。
@@ -50,6 +51,7 @@ public class RegistShoriDateKanriProcessParameter implements IBatchProcessParame
      * @param 開始時刻 RString
      * @param 終了時刻 RString
      * @param 市町村情報リスト List<ShichosonJouhouResult>
+     * @param 市町村情報 ShichosonJouhouResult
      */
     public RegistShoriDateKanriProcessParameter(RString 導入形態コード,
             FlexibleYear 処理年度,
@@ -61,16 +63,14 @@ public class RegistShoriDateKanriProcessParameter implements IBatchProcessParame
             FlexibleDate 終了年月日,
             RString 開始時刻,
             RString 終了時刻,
-            List<ShichosonJouhouResult> 市町村情報リスト) {
+            List<ShichosonJouhouResult> 市町村情報リスト,
+            ShichosonJouhouResult 市町村情報) {
         this.導入形態コード = 導入形態コード;
         this.処理年度 = 処理年度;
         this.抽出期間開始日時 = 抽出期間開始日時;
         this.抽出期間終了日時 = 抽出期間終了日時;
         this.市町村コード = 市町村コード;
         this.市町村情報リスト = 市町村情報リスト;
-        this.開始年月日 = 開始年月日;
-        this.終了年月日 = 終了年月日;
-        this.開始時刻 = 開始時刻;
-        this.終了時刻 = 終了時刻;
+        this.市町村情報 = 市町村情報;
     }
 }

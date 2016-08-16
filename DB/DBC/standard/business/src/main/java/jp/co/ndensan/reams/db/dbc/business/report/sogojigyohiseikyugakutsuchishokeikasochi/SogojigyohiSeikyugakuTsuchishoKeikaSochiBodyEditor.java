@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
- * 総合事業費（経過措置）請求額通知書一覧表帳票BodyIEditor
+ * 総合事業費（経過措置）請求額通知書一覧表帳票BodyIEditorクラスです。
  *
  * @reamsid_L DBC-2480-031 jiangxiaolong
  */
@@ -34,11 +34,11 @@ public class SogojigyohiSeikyugakuTsuchishoKeikaSochiBodyEditor implements ISogo
     @Override
     public SogojigyohiSeikyugakuTsuchishoKeikaSochiSource edit(SogojigyohiSeikyugakuTsuchishoKeikaSochiSource source) {
         if (サービス種類コード_ST.equals(帳票出力対象データ.getサービス種類コード())) {
-            source.listMeisai_1 = 帳票出力対象データ.getサービス種類コード();
+            source.listMeisai_1 = 帳票出力対象データ.getサービス種類名();
             source.listMeisai_3 = doカンマ編集(帳票出力対象データ.get通常分_実日数());
         } else {
             source.listMeisai_1 = RString.FULL_SPACE.concat(帳票出力対象データ
-                    .getサービス種類コード());
+                    .getサービス種類名());
             source.listMeisai_3 = RString.EMPTY;
         }
         source.listMeisai_2 = doカンマ編集(帳票出力対象データ.get通常分_件数());
