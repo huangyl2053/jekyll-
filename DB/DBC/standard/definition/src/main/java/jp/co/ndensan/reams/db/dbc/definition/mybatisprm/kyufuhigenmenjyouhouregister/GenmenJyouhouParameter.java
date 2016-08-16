@@ -89,6 +89,9 @@ public class GenmenJyouhouParameter implements IMyBatisParameter {
             Decimal serviceHiyoTotal,
             Decimal rirekiNo,
             RString state) {
+        if (null != serviceShuruiCode || !serviceShuruiCode.isEmpty()) {
+            serviceShuruiCode = new ServiceShuruiCode(serviceShuruiCode.toString().substring(0, 2));
+        }
         return new GenmenJyouhouParameter(hiHokenshaNo,
                 shokisaiHokenshaNo,
                 serviceTeikyoYM,
