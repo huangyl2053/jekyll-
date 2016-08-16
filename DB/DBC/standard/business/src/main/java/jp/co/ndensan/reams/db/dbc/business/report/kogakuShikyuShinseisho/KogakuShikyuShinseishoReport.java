@@ -34,7 +34,7 @@ public class KogakuShikyuShinseishoReport extends
     }
 
     @Override
-    protected void writeBy(ReportSourceWriter<KogakuShikyuShinseishoSource> writer) {
+    public void writeBy(ReportSourceWriter<KogakuShikyuShinseishoSource> writer) {
         IKogakuShikyuShinseishoEditor editor = new KogakuShikyuShinseishoEditor(target);
         IKogakuShikyuShinseishoBuilder builder = new KogakuShikyuShinseishoBuilder(editor);
         writer.writeLine(builder);
