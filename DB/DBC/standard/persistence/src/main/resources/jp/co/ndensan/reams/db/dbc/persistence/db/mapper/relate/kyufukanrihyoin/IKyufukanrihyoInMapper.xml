@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-2450-030 zhangrui -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufukanrihyoin.IKyufukanrihyoInMapper">
+    <!--create給付管理票一時テーブルを作成します-->
+    <insert id="create給付管理票一時TBL">
+        CREATE TEMP TABLE "DbWT1121KyufuKanrihyo"
+        (
+        "renban" smallint,
+        "kokanJohoShikibetsuNo" character varying(4),
+        "shinsaYM" rshare."UDD014YM",
+        "serviceTeikyoYM" rshare."UDD014YM",
+        "kyufuShubetsuKubunCode" character varying(1),
+        "kyufuMeisaiLineNo" character varying(2),
+        "kyotakushienJigyoshoNo" character varying(10),
+        "kyufuSakuseiKubunCode" character varying(1),
+        "kyufuSakuseiYMD" rshare."UDD015YMD",
+        "meisaiHokenshaNo" character varying(8),
+        "hiHokenshaUmareYMD" rshare."UDD015YMD",
+        "seibetsuCode" character varying(1),
+        "yoKaigoJotaiKubunCode" character varying(2),
+        "gendogakuTekiyoKaishiYM" rshare."UDD014YM",
+        "gendogakuTekiyoShuryoYM" rshare."UDD014YM",
+        "kyotakuKaigoYoboShikyuGendogaku" numeric(12,0),
+        "kyotakuServicePlanSakuseiKubunCode" character varying(1),
+        "serviceJigyoshoNo" character varying(10),
+        "shiteiKijungaitoChiikimitchakuServiceShikibetsuCode" character varying(1),
+        "serviceShuruiCode" character varying(2),
+        "kyufuKeikakuTanisuNissu" numeric(12,0),
+        "kyufuKeikakuNissu" numeric(12,0),
+        "shiteiServiceSubTotal" numeric(12,0),
+        "kijyunGaitoServiceSubTotal" numeric(12,0),
+        "kyufuKeikakuTotalTanisuNissu" numeric(12,0),
+        "tantoKaigoShienSemmoninNo" character varying(8),
+        "kaigoShienJigyoshaNo" character varying(40),
+        "itakusakiTantoKaigoShienSemmoninNo" character varying(8),
+        "toshoTorokuYMD" rshare."UDD015YMD",
+        "torikomiYM" rshare."UDD014YM",
+        "hokenshaNo" character varying(8),
+        "hokenshaName" character varying(40),
+        "jigyoshaName" character varying(40)
+        )
+    </insert>
+    
+    <!--給付管理票一時テーブルに登録します-->
+    <insert id="給付管理票一時TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT1121KyufuKanrihyoTempEntity">
+        INSERT INTO "DbWT1121KyufuKanrihyo"
+        VALUES 
+        (
+        #{連番},
+        #{交換情報識別番号},
+        #{審査年月},
+        #{サービス提供年月},
+        #{給付管理票種別区分コード},
+        #{給付管理票明細行番号},
+        #{居宅支援事業所番号},
+        #{給付管理票情報作成区分コード},
+        #{給付管理票作成年月日},
+        #{保険者番号},
+        #{被保険者生年月日},
+        #{性別コード},
+        #{要介護状態区分コード},
+        #{限度額適用開始年月},
+        #{限度額適用終了年月},
+        #{居宅_介護予防支給限度額},
+        #{居宅サービス計画作成区分コード},
+        #{サービス事業所番号},
+        #{指定_基準該当_地域密着型サービス識別コード},
+        #{サービス種類コード},
+        #{給付計画単位数_日数},
+        #{限度額管理期間における前月までの給付計画日数},
+        #{指定サービス分小計},
+        #{基準該当サービス分小計},
+        #{給付計画合計単位数_日数},
+        #{担当介護支援専門員番号},
+        #{委託先の居宅介護支援事業所番号},
+        #{委託先の担当介護支援専門員番号},
+        #{当初登録年月日},
+        #{取込年月},
+        #{コントロールレコード保険者番号},
+        #{コントロールレコード保険者名},
+        #{事業者名称}
+        )
+    </insert>
+    
+    <select id="get直近の被保険者台帳管理データ"
+                resultMap="ResultMap_HihokenshaKanriDataEntity"  fetchSize="500" resultOrdered="true">
+        SELECT * FROM (
+        SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper.allColumns_DbWT0001Hihokensha" />
+         FROM "DbWT0001Hihokensha" AS TEMP
+         WHERE TEMP."shoHokenshaNo" is null OR TEMP."shoHokenshaNo" = '') AS TEMP left join
+        (SELECT <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" /> 
+        FROM rgdb."DbFt7802FindHihokenshaDaicho"('99999999', null) AS "DbT1001HihokenshaDaicho") AS DAICHO
+        ON TEMP.dbWT0001HihokenshaTemp_hihokenshaNo = DAICHO."dbT1001HihokenshaDaicho_hihokenshaNo"
+        WHERE DAICHO."dbT1001HihokenshaDaicho_idoYMD" <![CDATA[<=]]> TEMP.dbWT0001HihokenshaTemp_serviceTeikyoYmd
+    </select>
+    
+    <!-- 被保険者一時データに証記載保険者番号を登録する -->
+    <update id="被保険者一時データに証記載保険者番号を登録する" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity">
+       UPDATE "DbWT0001Hihokensha"
+       SET "shoHokenshaNo" = #{証記載保険者番号}
+       WHERE "meisaiRenban" = #{連番}
+    </update>
+    
+    <!-- 給付管理票一時データごとに、1件目の介護事業者指定サービスデータ．事業者名称を一時TBLに登録する -->
+    <update id="do事業者名称登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT1121KyufuKanrihyoTempEntity">
+       UPDATE "DbWT1121KyufuKanrihyo"
+       SET "jigyoshaName" = #{事業者名称}
+       WHERE "renban" = #{連番}
+    </update>
+    
+    <!-- 給付管理票一時データごとに、1件目の介護事業者指定サービスデータ．事業者名称を一時TBLに登録する -->
+    <update id="do事業者名称登録_居宅介護支援事業所作成の場合" >
+       UPDATE "DbWT1121KyufuKanrihyo"
+        SET "jigyoshaName" =
+        (SELECT "DbT7063_jigyoshaName"
+        FROM
+          (SELECT temp.*
+           FROM
+             (SELECT <include refid="allColumns_DbWT1121DbT7063" />,
+                     row_number() OVER (PARTITION BY "DbWT1121KyufuKanrihyo"."kyotakushienJigyoshoNo"
+                                        ORDER BY "DbT7063KaigoJigyoshaShiteiService"."yukoKaishiYMD" DESC, "DbT7063KaigoJigyoshaShiteiService"."serviceShuruiCode" ASC) AS rrkno
+              FROM "DbWT1121KyufuKanrihyo"
+              INNER JOIN "DbT7063KaigoJigyoshaShiteiService" ON "DbWT1121KyufuKanrihyo"."kyotakushienJigyoshoNo" = "DbT7063KaigoJigyoshaShiteiService" ."jigyoshaNo"
+              WHERE "DbWT1121KyufuKanrihyo"."kyotakuServicePlanSakuseiKubunCode" = '1'
+                AND "DbWT1121KyufuKanrihyo"."kyufuMeisaiLineNo" = '99'
+                AND "DbT7063KaigoJigyoshaShiteiService"."serviceShuruiCode" IN ('43', '73')
+                AND "DbT7063KaigoJigyoshaShiteiService"."yukoKaishiYMD" <![CDATA[<=]]> ("DbWT1121KyufuKanrihyo"."serviceTeikyoYM"||'31')) AS temp
+           WHERE rrkno = 1) AS A
+        WHERE A."DbWT1121_kyotakushienJigyoshoNo" = "DbWT1121KyufuKanrihyo"."kyotakushienJigyoshoNo")
+    </update>
+    
+    <!-- 給付管理票一時データごとに、1件目の介護事業者指定サービスデータ．事業者名称を一時TBLに登録する -->
+    <update id="do事業者名称登録_介護予防支援事業所地域包括支援センター作成の場合" >
+       UPDATE "DbWT1121KyufuKanrihyo"
+        SET "jigyoshaName" =
+        (SELECT "DbT7063_jigyoshaName"
+        FROM
+          (SELECT temp.*
+           FROM
+             (SELECT <include refid="allColumns_DbWT1121DbT7063" />,
+                     row_number() OVER (PARTITION BY "DbWT1121KyufuKanrihyo"."kyotakushienJigyoshoNo"
+                                        ORDER BY "DbT7063KaigoJigyoshaShiteiService"."yukoKaishiYMD" DESC, "DbT7063KaigoJigyoshaShiteiService"."serviceShuruiCode" ASC) AS rrkno
+              FROM "DbWT1121KyufuKanrihyo"
+              INNER JOIN "DbT7063KaigoJigyoshaShiteiService" ON "DbWT1121KyufuKanrihyo"."kyotakushienJigyoshoNo" = "DbT7063KaigoJigyoshaShiteiService" ."jigyoshaNo"
+              WHERE "DbWT1121KyufuKanrihyo"."kyotakuServicePlanSakuseiKubunCode" = '3'
+                AND "DbWT1121KyufuKanrihyo"."kyufuMeisaiLineNo" = '99'
+                AND "DbT7063KaigoJigyoshaShiteiService"."serviceShuruiCode" IN ('46', '75', 'AF')
+                AND "DbT7063KaigoJigyoshaShiteiService"."yukoKaishiYMD" <![CDATA[<=]]> ("DbWT1121KyufuKanrihyo"."serviceTeikyoYM"||'31')) AS temp
+           WHERE rrkno = 1) AS A
+        WHERE A."DbWT1121_kyotakushienJigyoshoNo" = "DbWT1121KyufuKanrihyo"."kyotakushienJigyoshoNo")
+    </update>
+    
+    <select id="get給付管理票一時と被保険者一時のデータ"
+                resultMap="ResultMap_HihokenshaKyufukanrihyoEntity"  fetchSize="500" resultOrdered="true">
+                SELECT <include refid="allColumns_DbWT1121KyufuKanrihyo" />,
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper.allColumns_DbWT0001Hihokensha" />
+                FROM 
+        "DbWT1121KyufuKanrihyo"
+        inner join 
+        "DbWT0001Hihokensha" AS TEMP
+        on "DbWT1121KyufuKanrihyo"."renban" = TEMP."meisaiRenban"
+    </select>
+    
+    <!-- 前回処理時に取り込んだデータを物理削除する -->
+    <update id="do給付管理票200004TBL処理済のデータの削除" parameterType="java.util.Map" >
+        DELETE FROM rgdb."DbT3014KyufuKanrihyo200004" 
+        WHERE "torikomiYM" = #{処理年月}
+    </update>
+    
+    <!-- 前回処理時に取り込んだデータを物理削除する -->
+    <update id="do給付管理票200604TBL処理済のデータの削除" parameterType="java.util.Map" >
+        DELETE FROM rgdb."DbT3015KyufuKanrihyo200604" 
+        WHERE "torikomiYM" = #{処理年月}
+    </update>
+    
+    <!--給付管理票200004TBLに登録します-->
+    <insert id="給付管理票200004TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3014KyufuKanrihyo200004Entity">
+        INSERT INTO rgdb."DbT3014KyufuKanrihyo200004"
+        (
+            "shinsaYM",
+            "serviceTeikyoYM",
+            "hiHokenshaNo",
+            "kyufuKanrihyoShubetsuKubunCode",
+            "kyufuKanrihyoMeisaiLineNo",
+            "shokisaiHokenshaNo",
+            "kyotakushienJigyoshoNo",
+            "kyufuKanrihyoSakuseiKubunCode",
+            "kyufuKanrihyoSakuseiYMD",
+            "hokenshaNo",
+            "hiHokenshaUmareYMD",
+            "seibetsuCode",
+            "yoKaigoJotaiKubunCode",
+            "gendogakuTekiyoKaishiYM",
+            "gendogakuTekiyoShuryoYM",
+            "kyotakuKaigoYoboShikyuGendogaku",
+            "kyotakuServicePlanSakuseiKubunCode",
+            "serviceJigyoshoNo",
+            "shiteiKijungaitoChiikimitchakuServiceShikibetsuCode",
+            "serviceShuruiCode",
+            "kyufuKeikakuTanisuNissu",
+            "kyufuKeikakuNissu",
+            "shiteiServiceSubTotal",
+            "kijyunGaitoServiceSubTotal",
+            "kyufuKeikakuTotalTanisuNissu",
+            "toshoTorokuYMD",
+            "torikomiYM"
+        )
+        VALUES 
+        (
+            #{shinsaYM},
+            #{serviceTeikyoYM},
+            #{hiHokenshaNo},
+            #{kyufuKanrihyoShubetsuKubunCode},
+            #{kyufuKanrihyoMeisaiLineNo},
+            #{shokisaiHokenshaNo},
+            #{kyotakushienJigyoshoNo},
+            #{kyufuKanrihyoSakuseiKubunCode},
+            #{kyufuKanrihyoSakuseiYMD},
+            #{hokenshaNo},
+            #{hiHokenshaUmareYMD},
+            #{seibetsuCode},
+            #{yoKaigoJotaiKubunCode},
+            #{gendogakuTekiyoKaishiYM},
+            #{gendogakuTekiyoShuryoYM},
+            #{kyotakuKaigoYoboShikyuGendogaku},
+            #{kyotakuServicePlanSakuseiKubunCode},
+            #{serviceJigyoshoNo},
+            #{shiteiKijungaitoChiikimitchakuServiceShikibetsuCode},
+            #{serviceShuruiCode},
+            #{kyufuKeikakuTanisuNissu},
+            #{kyufuKeikakuNissu},
+            #{shiteiServiceSubTotal},
+            #{kijyunGaitoServiceSubTotal},
+            #{kyufuKeikakuTotalTanisuNissu},
+            #{toshoTorokuYMD},
+            #{torikomiYM}
+        )
+    </insert>
+    
+    <!--給付管理票200604TBLに登録します-->
+    <insert id="給付管理票200604TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3015KyufuKanrihyo200604Entity">
+        INSERT INTO rgdb."DbT3015KyufuKanrihyo200604"
+        (
+            "shinsaYM",
+            "serviceTeikyoYM",
+            "hiHokenshaNo",
+            "kyufuShubetsuKubunCode",
+            "kyufuMeisaiLineNo",
+            "shokisaiHokenshaNo",
+            "kyotakushienJigyoshoNo",
+            "kyufuSakuseiKubunCode",
+            "kyufuSakuseiYMD",
+            "hokenshaNo",
+            "hiHokenshaUmareYMD",
+            "seibetsuCode",
+            "yoKaigoJotaiKubunCode",
+            "gendogakuTekiyoKaishiYM",
+            "gendogakuTekiyoShuryoYM",
+            "kyotakuKaigoYoboShikyuGendogaku",
+            "kyotakuServicePlanSakuseiKubunCode",
+            "serviceJigyoshoNo",
+            "shiteiKijungaitoChiikimitchakuServiceShikibetsuCode",
+            "serviceShuruiCode",
+            "kyufuKeikakuTanisuNissu",
+            "kyufuKeikakuNissu",
+            "shiteiServiceSubTotal",
+            "kijyunGaitoServiceSubTotal",
+            "kyufuKeikakuTotalTanisuNissu",
+            "tantoKaigoShienSemmoninNo",
+            "kaigoShienJigyoshaNo",
+            "itakusakiTantoKaigoShienSemmoninNo",
+            "toshoTorokuYMD",
+            "torikomiYM"
+        )
+        VALUES 
+        (
+            #{shinsaYM},
+            #{serviceTeikyoYM},
+            #{hiHokenshaNo},
+            #{kyufuShubetsuKubunCode},
+            #{kyufuMeisaiLineNo},
+            #{shokisaiHokenshaNo},
+            #{kyotakushienJigyoshoNo},
+            #{kyufuSakuseiKubunCode},
+            #{kyufuSakuseiYMD},
+            #{hokenshaNo},
+            #{hiHokenshaUmareYMD},
+            #{seibetsuCode},
+            #{yoKaigoJotaiKubunCode},
+            #{gendogakuTekiyoKaishiYM},
+            #{gendogakuTekiyoShuryoYM},
+            #{kyotakuKaigoYoboShikyuGendogaku},
+            #{kyotakuServicePlanSakuseiKubunCode},
+            #{serviceJigyoshoNo},
+            #{shiteiKijungaitoChiikimitchakuServiceShikibetsuCode},
+            #{serviceShuruiCode},
+            #{kyufuKeikakuTanisuNissu},
+            #{kyufuKeikakuNissu},
+            #{shiteiServiceSubTotal},
+            #{kijyunGaitoServiceSubTotal},
+            #{kyufuKeikakuTotalTanisuNissu},
+            #{tantoKaigoShienSemmoninNo},
+            #{kaigoShienJigyoshaNo},
+            #{itakusakiTantoKaigoShienSemmoninNo},
+            #{toshoTorokuYMD},
+            #{torikomiYM}
+        )
+    </insert>
+    
+    <select id="get帳票出力対象データ"
+                resultMap="ResultMap_HihokenshaKyufukanrihyoEntity" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter" fetchSize="500" resultOrdered="true">
+        SELECT <include refid="allColumns_DbWT1121KyufuKanrihyo" />,
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper.allColumns_DbWT0001Hihokensha" />
+        FROM 
+        "DbWT1121KyufuKanrihyo"
+        inner join 
+        "DbWT0001Hihokensha" AS TEMP
+        on "DbWT1121KyufuKanrihyo"."renban" = TEMP."meisaiRenban"
+        WHERE "DbWT1121KyufuKanrihyo"."kyufuMeisaiLineNo" = '99'
+        ${出力順}
+    </select>
+    
+    <resultMap id="ResultMap_HihokenshaKanriDataEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoin.HihokenshaKanriDataEntity" autoMapping="true">
+        <association property="temp" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper.resultMap_DbWT0001HihokenshaTempEntity"/>
+        <association property="daicho" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
+    </resultMap>
+    
+    <resultMap id="ResultMap_HihokenshaKyufukanrihyoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoin.HihokenshaKyufukanrihyoEntity" autoMapping="true">
+        <association property="被保険者" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper.resultMap_DbWT0001HihokenshaTempEntity"/>
+        <association property="給付管理票" resultMap="ResultMap_DbWT1121KyufuKanrihyoTempEntity"/>
+    </resultMap>
+    
+    <!--テーブルHihokenshaItijiEntityの項目をDbWT0001HihokenshaTempEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbWT1121KyufuKanrihyoTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT1121KyufuKanrihyoTempEntity" autoMapping="true">
+        <id property="連番" column="DbWT1121_renban" />
+        <result property="交換情報識別番号" column="DbWT1121_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="審査年月" column="DbWT1121_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="サービス提供年月" column="DbWT1121_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="給付管理票種別区分コード" column="DbWT1121_kyufuShubetsuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付管理票明細行番号" column="DbWT1121_kyufuMeisaiLineNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="居宅支援事業所番号" column="DbWT1121_kyotakushienJigyoshoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付管理票情報作成区分コード" column="DbWT1121_kyufuSakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付管理票作成年月日" column="DbWT1121_kyufuSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="保険者番号" column="DbWT1121_meisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者生年月日" column="DbWT1121_hiHokenshaUmareYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="性別コード" column="DbWT1121_seibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="要介護状態区分コード" column="DbWT1121_yoKaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="限度額適用開始年月" column="DbWT1121_gendogakuTekiyoKaishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="限度額適用終了年月" column="DbWT1121_gendogakuTekiyoShuryoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="居宅_介護予防支給限度額" column="DbWT1121_kyotakuKaigoYoboShikyuGendogaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="居宅サービス計画作成区分コード" column="DbWT1121_kyotakuServicePlanSakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービス事業所番号" column="DbWT1121_serviceJigyoshoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="指定_基準該当_地域密着型サービス識別コード" column="DbWT1121_shiteiKijungaitoChiikimitchakuServiceShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービス種類コード" column="DbWT1121_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付計画単位数_日数" column="DbWT1121_kyufuKeikakuTanisuNissu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="限度額管理期間における前月までの給付計画日数" column="DbWT1121_kyufuKeikakuNissu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="指定サービス分小計" column="DbWT1121_shiteiServiceSubTotal" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="基準該当サービス分小計" column="DbWT1121_kijyunGaitoServiceSubTotal" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="給付計画合計単位数_日数" column="DbWT1121_kyufuKeikakuTotalTanisuNissu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="担当介護支援専門員番号" column="DbWT1121_tantoKaigoShienSemmoninNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="委託先の居宅介護支援事業所番号" column="DbWT1121_kaigoShienJigyoshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="委託先の担当介護支援専門員番号" column="DbWT1121_itakusakiTantoKaigoShienSemmoninNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="当初登録年月日" column="DbWT1121_toshoTorokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="取込年月" column="DbWT1121_torikomiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="コントロールレコード保険者番号" column="DbWT1121_hokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="コントロールレコード保険者名" column="DbWT1121_hokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="事業者名称" column="DbWT1121_jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <sql id="allColumns_DbWT1121KyufuKanrihyo">
+        "DbWT1121KyufuKanrihyo"."renban" AS "DbWT1121_renban",
+        "DbWT1121KyufuKanrihyo"."kokanJohoShikibetsuNo" AS "DbWT1121_kokanJohoShikibetsuNo",
+        "DbWT1121KyufuKanrihyo"."shinsaYM" AS "DbWT1121_shinsaYM",
+        "DbWT1121KyufuKanrihyo"."serviceTeikyoYM" AS "DbWT1121_serviceTeikyoYM",
+        "DbWT1121KyufuKanrihyo"."kyufuShubetsuKubunCode" AS "DbWT1121_kyufuShubetsuKubunCode",
+        "DbWT1121KyufuKanrihyo"."kyufuMeisaiLineNo" AS "DbWT1121_kyufuMeisaiLineNo",
+        "DbWT1121KyufuKanrihyo"."kyotakushienJigyoshoNo" AS "DbWT1121_kyotakushienJigyoshoNo",
+        "DbWT1121KyufuKanrihyo"."kyufuSakuseiKubunCode" AS "DbWT1121_kyufuSakuseiKubunCode",
+        "DbWT1121KyufuKanrihyo"."kyufuSakuseiYMD" AS "DbWT1121_kyufuSakuseiYMD" ,
+        "DbWT1121KyufuKanrihyo"."meisaiHokenshaNo" AS "DbWT1121_meisaiHokenshaNo",
+        "DbWT1121KyufuKanrihyo"."hiHokenshaUmareYMD" AS "DbWT1121_hiHokenshaUmareYMD",
+        "DbWT1121KyufuKanrihyo"."seibetsuCode" AS "DbWT1121_seibetsuCode",
+        "DbWT1121KyufuKanrihyo"."yoKaigoJotaiKubunCode" AS "DbWT1121_yoKaigoJotaiKubunCode",
+        "DbWT1121KyufuKanrihyo"."gendogakuTekiyoKaishiYM" AS "DbWT1121_gendogakuTekiyoKaishiYM",
+        "DbWT1121KyufuKanrihyo"."gendogakuTekiyoShuryoYM" AS "DbWT1121_gendogakuTekiyoShuryoYM",
+        "DbWT1121KyufuKanrihyo"."kyotakuKaigoYoboShikyuGendogaku" AS "DbWT1121_kyotakuKaigoYoboShikyuGendogaku",
+        "DbWT1121KyufuKanrihyo"."kyotakuServicePlanSakuseiKubunCode" AS "DbWT1121_kyotakuServicePlanSakuseiKubunCode",
+        "DbWT1121KyufuKanrihyo"."serviceJigyoshoNo" AS "DbWT1121_serviceJigyoshoNo",
+        "DbWT1121KyufuKanrihyo"."shiteiKijungaitoChiikimitchakuServiceShikibetsuCode" AS "DbWT1121_shiteiKijungaitoChiikimitchakuServiceShikibetsuCode",
+        "DbWT1121KyufuKanrihyo"."serviceShuruiCode" AS "DbWT1121_serviceShuruiCode",
+        "DbWT1121KyufuKanrihyo"."kyufuKeikakuTanisuNissu" AS "DbWT1121_kyufuKeikakuTanisuNissu",
+        "DbWT1121KyufuKanrihyo"."kyufuKeikakuNissu" AS "DbWT1121_kyufuKeikakuNissu",
+        "DbWT1121KyufuKanrihyo"."shiteiServiceSubTotal" AS "DbWT1121_shiteiServiceSubTotal",
+        "DbWT1121KyufuKanrihyo"."kijyunGaitoServiceSubTotal" AS "DbWT1121_kijyunGaitoServiceSubTotal",
+        "DbWT1121KyufuKanrihyo"."kyufuKeikakuTotalTanisuNissu" AS "DbWT1121_kyufuKeikakuTotalTanisuNissu",
+        "DbWT1121KyufuKanrihyo"."tantoKaigoShienSemmoninNo" AS "DbWT1121_tantoKaigoShienSemmoninNo",
+        "DbWT1121KyufuKanrihyo"."kaigoShienJigyoshaNo" AS "DbWT1121_kaigoShienJigyoshaNo",
+        "DbWT1121KyufuKanrihyo"."itakusakiTantoKaigoShienSemmoninNo" AS "DbWT1121_itakusakiTantoKaigoShienSemmoninNo",
+        "DbWT1121KyufuKanrihyo"."toshoTorokuYMD" AS "DbWT1121_toshoTorokuYMD",
+        "DbWT1121KyufuKanrihyo"."torikomiYM" AS "DbWT1121_torikomiYM",
+        "DbWT1121KyufuKanrihyo"."hokenshaNo" AS "DbWT1121_hokenshaNo",
+        "DbWT1121KyufuKanrihyo"."hokenshaName" AS "DbWT1121_hokenshaName",
+        "DbWT1121KyufuKanrihyo"."jigyoshaName" AS "DbWT1121_jigyoshaName"
+    </sql>
+    
+    <sql id="allColumns_DbWT1121DbT7063">
+        "DbWT1121KyufuKanrihyo"."renban" AS "DbWT1121_renban",
+        "DbWT1121KyufuKanrihyo"."kokanJohoShikibetsuNo" AS "DbWT1121_kokanJohoShikibetsuNo",
+        "DbWT1121KyufuKanrihyo"."shinsaYM" AS "DbWT1121_shinsaYM",
+        "DbWT1121KyufuKanrihyo"."serviceTeikyoYM" AS "DbWT1121_serviceTeikyoYM",
+        "DbWT1121KyufuKanrihyo"."kyufuShubetsuKubunCode" AS "DbWT1121_kyufuShubetsuKubunCode",
+        "DbWT1121KyufuKanrihyo"."kyufuMeisaiLineNo" AS "DbWT1121_kyufuMeisaiLineNo",
+        "DbWT1121KyufuKanrihyo"."kyotakushienJigyoshoNo" AS "DbWT1121_kyotakushienJigyoshoNo",
+        "DbWT1121KyufuKanrihyo"."kyufuSakuseiKubunCode" AS "DbWT1121_kyufuSakuseiKubunCode",
+        "DbWT1121KyufuKanrihyo"."kyufuSakuseiYMD" AS "DbWT1121_kyufuSakuseiYMD" ,
+        "DbWT1121KyufuKanrihyo"."meisaiHokenshaNo" AS "DbWT1121_meisaiHokenshaNo",
+        "DbWT1121KyufuKanrihyo"."hiHokenshaUmareYMD" AS "DbWT1121_hiHokenshaUmareYMD",
+        "DbWT1121KyufuKanrihyo"."seibetsuCode" AS "DbWT1121_seibetsuCode",
+        "DbWT1121KyufuKanrihyo"."yoKaigoJotaiKubunCode" AS "DbWT1121_yoKaigoJotaiKubunCode",
+        "DbWT1121KyufuKanrihyo"."gendogakuTekiyoKaishiYM" AS "DbWT1121_gendogakuTekiyoKaishiYM",
+        "DbWT1121KyufuKanrihyo"."gendogakuTekiyoShuryoYM" AS "DbWT1121_gendogakuTekiyoShuryoYM",
+        "DbWT1121KyufuKanrihyo"."kyotakuKaigoYoboShikyuGendogaku" AS "DbWT1121_kyotakuKaigoYoboShikyuGendogaku",
+        "DbWT1121KyufuKanrihyo"."kyotakuServicePlanSakuseiKubunCode" AS "DbWT1121_kyotakuServicePlanSakuseiKubunCode",
+        "DbWT1121KyufuKanrihyo"."serviceJigyoshoNo" AS "DbWT1121_serviceJigyoshoNo",
+        "DbWT1121KyufuKanrihyo"."shiteiKijungaitoChiikimitchakuServiceShikibetsuCode" AS "DbWT1121_shiteiKijungaitoChiikimitchakuServiceShikibetsuCode",
+        "DbWT1121KyufuKanrihyo"."serviceShuruiCode" AS "DbWT1121_serviceShuruiCode",
+        "DbWT1121KyufuKanrihyo"."kyufuKeikakuTanisuNissu" AS "DbWT1121_kyufuKeikakuTanisuNissu",
+        "DbWT1121KyufuKanrihyo"."kyufuKeikakuNissu" AS "DbWT1121_kyufuKeikakuNissu",
+        "DbWT1121KyufuKanrihyo"."shiteiServiceSubTotal" AS "DbWT1121_shiteiServiceSubTotal",
+        "DbWT1121KyufuKanrihyo"."kijyunGaitoServiceSubTotal" AS "DbWT1121_kijyunGaitoServiceSubTotal",
+        "DbWT1121KyufuKanrihyo"."kyufuKeikakuTotalTanisuNissu" AS "DbWT1121_kyufuKeikakuTotalTanisuNissu",
+        "DbWT1121KyufuKanrihyo"."tantoKaigoShienSemmoninNo" AS "DbWT1121_tantoKaigoShienSemmoninNo",
+        "DbWT1121KyufuKanrihyo"."kaigoShienJigyoshaNo" AS "DbWT1121_kaigoShienJigyoshaNo",
+        "DbWT1121KyufuKanrihyo"."itakusakiTantoKaigoShienSemmoninNo" AS "DbWT1121_itakusakiTantoKaigoShienSemmoninNo",
+        "DbWT1121KyufuKanrihyo"."toshoTorokuYMD" AS "DbWT1121_toshoTorokuYMD",
+        "DbWT1121KyufuKanrihyo"."torikomiYM" AS "DbWT1121_torikomiYM",
+        "DbWT1121KyufuKanrihyo"."hokenshaNo" AS "DbWT1121_hokenshaNo",
+        "DbWT1121KyufuKanrihyo"."hokenshaName" AS "DbWT1121_hokenshaName",
+        "DbWT1121KyufuKanrihyo"."jigyoshaName" AS "DbWT1121_jigyoshaName",
+        "DbT7063KaigoJigyoshaShiteiService"."jigyoshaName" AS "DbT7063_jigyoshaName"
+    </sql>
+
+</mapper>
