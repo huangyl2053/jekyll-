@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0120011;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoInfo.IServiceRiyohyoInfoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoInfo.ServiceRiyohyoInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
@@ -19,11 +18,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KyotakuServiceRiyohyoMain のクラスファイル 
- * 
- * @author 自動生成
+ * KyotakuServiceRiyohyoMain のクラスファイル
+ *
+ * @reamsid_L DBC-1930-030 huzongcheng
  */
 public class KyotakuServiceRiyohyoMainDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -180,7 +180,7 @@ public class KyotakuServiceRiyohyoMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgKyotakuServiceRirekiIchiran(DataGrid<dgKyotakuServiceRirekiIchiran_Row> dgKyotakuServiceRirekiIchiran) {
+    public void setDgKyotakuServiceRirekiIchiran(DataGrid<dgKyotakuServiceRirekiIchiran_Row> dgKyotakuServiceRirekiIchiran) {
         this.getKyotakuServiceRirekiIchiran().setDgKyotakuServiceRirekiIchiran(dgKyotakuServiceRirekiIchiran);
     }
 
@@ -190,7 +190,7 @@ public class KyotakuServiceRiyohyoMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTodokedeYmd(TextBoxDate txtTodokedeYmd) {
+    public void setTxtTodokedeYmd(TextBoxDate txtTodokedeYmd) {
         this.getJikoSakuseiTodokedeInfo().setTxtTodokedeYmd(txtTodokedeYmd);
     }
 
@@ -200,7 +200,7 @@ public class KyotakuServiceRiyohyoMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTodokedeKubun(TextBox txtTodokedeKubun) {
+    public void setTxtTodokedeKubun(TextBox txtTodokedeKubun) {
         this.getJikoSakuseiTodokedeInfo().setTxtTodokedeKubun(txtTodokedeKubun);
     }
 
@@ -210,7 +210,7 @@ public class KyotakuServiceRiyohyoMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTekiyoKikan(TextBoxDateRange txtTekiyoKikan) {
+    public void setTxtTekiyoKikan(TextBoxDateRange txtTekiyoKikan) {
         this.getJikoSakuseiTodokedeInfo().setTxtTekiyoKikan(txtTekiyoKikan);
     }
 
@@ -220,7 +220,7 @@ public class KyotakuServiceRiyohyoMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTodokedesha(TodokedeshaDiv Todokedesha) {
+    public void setTodokedesha(TodokedeshaDiv Todokedesha) {
         this.getJikoSakuseiTodokedeInfo().setTodokedesha(Todokedesha);
     }
 
@@ -230,7 +230,7 @@ public class KyotakuServiceRiyohyoMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnAddRiyoNengetsu(Button btnAddRiyoNengetsu) {
+    public void setBtnAddRiyoNengetsu(Button btnAddRiyoNengetsu) {
         this.getRiyotsukiIchiran().setBtnAddRiyoNengetsu(btnAddRiyoNengetsu);
     }
 
@@ -240,7 +240,7 @@ public class KyotakuServiceRiyohyoMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgRiyoNentstsuIchiran(DataGrid<dgRiyoNentstsuIchiran_Row> dgRiyoNentstsuIchiran) {
+    public void setDgRiyoNentstsuIchiran(DataGrid<dgRiyoNentstsuIchiran_Row> dgRiyoNentstsuIchiran) {
         this.getRiyotsukiIchiran().setDgRiyoNentstsuIchiran(dgRiyoNentstsuIchiran);
     }
 
@@ -250,7 +250,7 @@ public class KyotakuServiceRiyohyoMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnBackRirekiIchiran(Button btnBackRirekiIchiran) {
+    public void setBtnBackRirekiIchiran(Button btnBackRirekiIchiran) {
         this.getRiyotsukiIchiranFooter().setBtnBackRirekiIchiran(btnBackRirekiIchiran);
     }
 
