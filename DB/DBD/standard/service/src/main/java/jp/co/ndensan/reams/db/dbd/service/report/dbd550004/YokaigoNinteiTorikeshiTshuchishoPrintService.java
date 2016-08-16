@@ -29,7 +29,9 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibun;
+import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
 import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunFinder;
+import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -67,9 +69,10 @@ public class YokaigoNinteiTorikeshiTshuchishoPrintService {
      * @param date RDate
      * @param bunshoNo RString
      * @param hihokenshaNo RString
+     * @param hihokenshaName RString
      * @param riyu RString
      */
-    public void print(ReportManager reportManager, RDate date, RString bunshoNo, RString hihokenshaNo, RString riyu) {
+    public void print(ReportManager reportManager, RDate date, RString bunshoNo, RString hihokenshaNo, RString hihokenshaName, RString riyu) {
         YokaigoNinteiTorikeshiTshuchishoProperty property = new YokaigoNinteiTorikeshiTshuchishoProperty();
         try (ReportAssembler<YokaigoNinteiTorikeshiTshuchishoSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<YokaigoNinteiTorikeshiTshuchishoSource> reportSourceWriter = new ReportSourceWriter(assembler);
@@ -79,7 +82,7 @@ public class YokaigoNinteiTorikeshiTshuchishoPrintService {
             List<RString> 通知書定型文リスト = get通知文情報();
             ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(get帳票制御(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD550004.getReportId()));
             YokaigoNinteiTorikeshiTshuchishoReport report = new YokaigoNinteiTorikeshiTshuchishoReport(宛先情報, association,
-                    帳票制御共通, 通知書定型文リスト, ninshoshaSource, bunshoNo, hihokenshaNo, riyu);
+                    帳票制御共通, 通知書定型文リスト, ninshoshaSource, bunshoNo, hihokenshaNo, hihokenshaName, riyu);
             report.writeBy(reportSourceWriter);
         }
     }
@@ -124,6 +127,9 @@ public class YokaigoNinteiTorikeshiTshuchishoPrintService {
     private List<RString> get通知文情報() {
         TsuchishoTeikeibunFinder finder = new TsuchishoTeikeibunFinder();
         List<TsuchishoTeikeibun> tsuchishoTeikeibun = finder.get通知書定型文パターン(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD550004.getReportId());
+        TsuchishoTeikeibunManager mag = new TsuchishoTeikeibunManager();
+        TsuchishoTeikeibunInfo 帳票タイトルInfo = mag.get通知書定型文パターン(ReportIdDBD.DBD501002.getReportId(), SubGyomuCode.DBD介護受給);
+
         Map<Integer, RString> 通知文情報Map = ReportUtil.get通知文(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD550004.getReportId(), KamokuCode.EMPTY,
                 tsuchishoTeikeibun.get(0).getパターン番号());
         List<RString> 通知文情報 = new ArrayList<>();

@@ -20,10 +20,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ItziHanteiShoriFlow extends BatchFlowBase<ItziHanteiShoriBatchParamter> {
 
-    private static final RString ITAKUSAKICHOSAINICHIRAN_FLOWID = new RString("ItakusakiChosainIchiranFlow");
+    private static final RString ITAKUSAKICHOSAINICHIRAN_FLOWID = new RString("DBE309001_IchijihanteiIfSakusei");
     private static final String ITAKUSAKICHOSAINICHIRAN_FLOW = "IchijiHanteizumIfOutputFlow";
-    private static final RString SHINCHOKUDATAOUTPUT_FLOWID = new RString("ShinchokuDataOutputFlow");
-    private static final String SHINCHOKUDATAOUTPUT_FLOW = "ShinchokuDataOutputFlow";
+    private static final RString SHINCHOKUDATAOUTPUT_FLOWID = new RString("DBE309002_IchijihanteiIfTorikomi");
+    private static final String SHINCHOKUDATAOUTPUT_FLOW = "ItizihanteiIFtoriKomiFlow";
     private static final RString バッチ出力区分 = new RString("1");
     private static final RString 一次判定IF取込 = new RString("2");
 

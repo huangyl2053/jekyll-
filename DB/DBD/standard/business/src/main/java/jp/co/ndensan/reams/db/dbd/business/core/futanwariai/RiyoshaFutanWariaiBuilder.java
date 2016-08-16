@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link RiyoshaFutanWariai}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-5010-011 zhaowei
  */
 public class RiyoshaFutanWariaiBuilder {
 
@@ -169,6 +171,17 @@ public class RiyoshaFutanWariaiBuilder {
     public RiyoshaFutanWariaiBuilder set交付日(FlexibleDate 交付日) {
         requireNonNull(交付日, UrSystemErrorMessages.値がnull.getReplacedMessage("交付日"));
         entity.setKofuYMD(交付日);
+        return this;
+    }
+
+    /**
+     * 論理削除フラグを設定します。
+     *
+     * @param 論理削除フラグ 論理削除フラグ
+     * @return {@link RiyoshaFutanWariaiBuilder}
+     */
+    public RiyoshaFutanWariaiBuilder set論理削除フラグ(boolean 論理削除フラグ) {
+        entity.setLogicalDeletedFlag(論理削除フラグ);
         return this;
     }
 

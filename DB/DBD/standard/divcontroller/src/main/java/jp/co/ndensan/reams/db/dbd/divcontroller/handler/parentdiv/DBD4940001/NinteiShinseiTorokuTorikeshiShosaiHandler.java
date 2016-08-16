@@ -197,9 +197,9 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
                     association.get地方公共団体コード(),
                     new ShinseishoKanriNo(認定情報.get申請書管理番号認定()),
                     SubGyomuCode.DBD介護受給,
-                    認定情報.get主治医医療機関コード認定(),
+                    認定情報.get主治医医療機関コード認定().getColumnValue(),
                     認定情報.get医療機関名称認定(),
-                    認定情報.get主治医コード認定(),
+                    認定情報.get主治医コード認定().getColumnValue(),
                     認定情報.get主治医氏名認定());
             主治医Div.setShiteii(認定情報.is指定医フラグ認定());
         }

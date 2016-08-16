@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB9010002;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.nendokirikae.NendoKirikaeBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.nendokirikae.DBB901002_NendoKirikaeParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9010002.NendoKirikaeDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -54,7 +54,7 @@ public class NendoKirikaeHandler {
      * バッチ実行のメソッドです
      */
     public void バッチ実行() {
-        NendoKirikaeBatchParameter parameter = new NendoKirikaeBatchParameter();
+        DBB901002_NendoKirikaeParameter parameter = new DBB901002_NendoKirikaeParameter();
         parameter.set調定年度(new FlexibleYear(div.getDcLblTonendo().getValue().toString()));
     }
 

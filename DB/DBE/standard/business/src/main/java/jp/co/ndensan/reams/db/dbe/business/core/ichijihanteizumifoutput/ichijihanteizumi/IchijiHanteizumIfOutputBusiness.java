@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.Ninteichosah
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ShujiiIkenshoJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ZenKaiChosaItemJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ZenKaiNinteichosaJohoTempTableEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
@@ -374,8 +373,8 @@ public class IchijiHanteizumIfOutputBusiness {
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("("));
-        List<ShinseishoKanriNo> shinseishoKanriNoList = paramter.getShinseishoKanriNoList();
-        for (ShinseishoKanriNo shinseishoKanriNo : shinseishoKanriNoList) {
+        List<RString> shinseishoKanriNoList = paramter.getShinseishoKanriNoList();
+        for (RString shinseishoKanriNo : shinseishoKanriNoList) {
             jokenBuilder.append(shinseishoKanriNo);
             jokenBuilder.append(new RString(","));
         }

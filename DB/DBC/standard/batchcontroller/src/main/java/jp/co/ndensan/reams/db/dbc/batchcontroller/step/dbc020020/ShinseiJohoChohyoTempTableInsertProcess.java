@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -26,6 +27,8 @@ public class ShinseiJohoChohyoTempTableInsertProcess extends BatchProcessBase<Sh
     private static final RString MYBATIS_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kogakukaigoservicehikyufuoshirasetsuchisho.IKogakuKaigoServicehiOshiraseHakkoMapper.get帳票出力用データ");
     private static final RString TABLE_NAME = new RString("ShinseiJohoChohyoTemp");
+
+    private static final RString 申請書電話番号表示 = new RString("0");
 
     private KogakuKaigoServicehiOshiraseHakkoProcessParameter parameter;
 
@@ -57,9 +60,17 @@ public class ShinseiJohoChohyoTempTableInsertProcess extends BatchProcessBase<Sh
         } else if (entity.getHihokenshaNoChohyo().equals(tmpEntity.getHihokenshaNoChohyo())
                 && entity.getServiceTeikyoYMChohyo().equals(tmpEntity.getServiceTeikyoYMChohyo())
                 && entity.getShoKisaiHokenshaNoChohyo().equals(tmpEntity.getShoKisaiHokenshaNoChohyo())
-                && entity.getRirekiNoChohyo().equals(tmpEntity.getRirekiNoChohyo())) {
+                && entity.getRirekiNoChohyo().equals(tmpEntity.getRirekiNoChohyo())
+                && entity.getNinteiYukoKikanKaishiYMDChohyo().equals(tmpEntity.getNinteiYukoKikanKaishiYMDChohyo())
+                && entity.getNinteiYukoKikanShuryoYMDChohyo().equals(tmpEntity.getNinteiYukoKikanShuryoYMDChohyo())
+                && entity.getYokaigoJotaiKubunCode().equals(tmpEntity.getYokaigoJotaiKubunCode())
+                && entity.isKyuSochishaFlagChohyo() == tmpEntity.isKyuSochishaFlagChohyo()) {
             return;
         }
+        if (申請書電話番号表示.equals(parameter.getShinseishoTelNoHyoji())) {
+            entity.setTelNoChohyo(TelNo.EMPTY);
+        }
+        entity.setIninjoTeishutsusakiChohyo(parameter.getIninjoTeishutsusaki());
         entity.setState(EntityDataState.Added);
         tempDbWriter.insert(entity);
         tmpEntity = entity;

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1000074;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kijunshunyugakutekiyokettei.DBC100074_KijunShunyugakuTekiyoKetteiTsuchiIchiranParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.kijunshunyugakutekiyokettei.DBC190010_kijunsyunyuKetteiTsuchisyosakuseiParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000074.TsuuchishoHakkoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1000074.TsuuchishoHakkoHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1000074.TsuuchishoHakkoValidationHandler;
@@ -66,6 +66,7 @@ public class TsuuchishoHakko {
      * @return ResponseData
      */
     public ResponseData<TsuuchishoHakkoDiv> onClick_btnExcuteCheck(TsuuchishoHakkoDiv div) {
+        getHandler(div).set出力順の入力チェック();
         RString 入力チェック_flag = getHandler(div).set入力チェック();
         if (入力チェック_申請.equals(入力チェック_flag)) {
             ValidationMessageControlPairs pairs = getValidationHandler(div).申請年月日チェックValidate();
@@ -87,9 +88,9 @@ public class TsuuchishoHakko {
      * @param div TsuuchishoHakkoDiv
      * @return ResponseData
      */
-    public ResponseData<DBC100074_KijunShunyugakuTekiyoKetteiTsuchiIchiranParameter> onClick_btnExcute(TsuuchishoHakkoDiv div) {
+    public ResponseData<DBC190010_kijunsyunyuKetteiTsuchisyosakuseiParameter> onClick_btnExcute(TsuuchishoHakkoDiv div) {
         TsuuchishoHakkoHandler handler = getHandler(div);
-        handler.set出力順の入力チェック();
+
         handler.release前排他();
         return ResponseData.of(handler.setBatchParameter(div)).respond();
     }

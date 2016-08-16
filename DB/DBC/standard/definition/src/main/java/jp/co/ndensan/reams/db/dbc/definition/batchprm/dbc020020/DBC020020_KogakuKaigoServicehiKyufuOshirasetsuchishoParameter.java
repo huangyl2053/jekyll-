@@ -58,6 +58,10 @@ public class DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter exten
     private RString bunshoMojiretsu;
     @BatchParameter(key = "isJutakuAri", name = "is受託あり")
     private boolean isJutakuAri;
+    @BatchParameter(key = "ininjoTeishutsusaki", name = "申請書委任状提出先")
+    private RString ininjoTeishutsusaki;
+    @BatchParameter(key = "shinseishoTelNoHyoji", name = "申請書電話番号表示")
+    private RString shinseishoTelNoHyoji;
 
     /**
      * プロセスパラメータを作成します。
@@ -67,6 +71,6 @@ public class DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter exten
     public KogakuKaigoServicehiOshiraseHakkoProcessParameter toProcessParameter() {
         return new KogakuKaigoServicehiOshiraseHakkoProcessParameter(shoriYm, sakuseibi, hihokenshaNo, isShinseishoHakko,
                 isOshiraseTsuchishoHakko, isHakkoIchiranhyoHakko, isKinyuKikanHyoji, shiseibi, uketsukebi, keteibi, shinseishoTeishutsuKigen,
-                chushutsuJoken, menuId, isJutakuAri, shutsuryokujunId, bunshoMojiretsu);
+                chushutsuJoken, menuId, isJutakuAri, shutsuryokujunId, bunshoMojiretsu, ininjoTeishutsusaki, shinseishoTelNoHyoji);
     }
 }

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.service.report.dbd550001;
 
 import jp.co.ndensan.reams.db.dbd.business.report.dbd550001.YokaigoNinteiKyakkaTshuchishoProperty;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd550001.YokaigoNinteiKyakkaTshuchishoReport;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.ninteikekkatshuchishohakko.NinteikyakkaTsuchishoEntity;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd550001.NinteikyakkaTsuchishoJoho;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd550001.YokaigoNinteiKyakkaTshuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
@@ -40,7 +40,7 @@ public class YokaigoNinteiKyakkaTshuchishoPrintService {
      * @param 帳票分類ID 帳票分類ID
      * @param reportManager 帳票発行処理の制御機能
      */
-    public void print(NinteikyakkaTsuchishoEntity entity, ChohyoSeigyoKyotsu 帳票制御共通,
+    public void print(NinteikyakkaTsuchishoJoho entity, ChohyoSeigyoKyotsu 帳票制御共通,
             ReportId 帳票分類ID, ReportManager reportManager) {
         YokaigoNinteiKyakkaTshuchishoProperty property = new YokaigoNinteiKyakkaTshuchishoProperty();
         try (ReportAssembler<YokaigoNinteiKyakkaTshuchishoReportSource> assembler = createAssembler(property, reportManager)) {

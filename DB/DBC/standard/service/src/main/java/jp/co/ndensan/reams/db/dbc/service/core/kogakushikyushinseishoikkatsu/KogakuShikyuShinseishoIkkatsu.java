@@ -28,6 +28,9 @@ public class KogakuShikyuShinseishoIkkatsu {
 
     private final MapperProvider mapperProvider;
 
+    /**
+     * コンストラクタです
+     */
     public KogakuShikyuShinseishoIkkatsu() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }

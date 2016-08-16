@@ -61,7 +61,6 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
     private static final int DAY_9 = 9;
     private static final RString HYOJI = new RString("hyoji");
     private static final RString HIHYOJI = new RString("hihyoji");
-    RDate NOWDATE = RDate.getNowDate();
 
     /**
      * コンストラクタです。
@@ -78,10 +77,11 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
      * @param menuID RString
      */
     public void initialize(RString menuID) {
+        RDate nowdate = RDate.getNowDate();
         KokuhorenInterfaceKanriManager manager = new KokuhorenInterfaceKanriManager();
         RString 交換情報識別番号 = RString.EMPTY;
         if (メニューID_DBCMN43001.equals(menuID)) {
-            RString 区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額, NOWDATE,
+            RString 区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額, nowdate,
                     SubGyomuCode.DBC介護給付);
             List<KeyValueDataSource> radShinsaYM = new ArrayList<>();
             if (NUM_1.equals(区分)) {
@@ -101,7 +101,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
             div.getShutsuryokuTaisho().getChkShutsuryokuTaisho().setSelectedItems(datasource);
             div.getShutsuryokuTaisho().getCcdBunshoNo().initialize(ReportIdDBC.DBC100011.getReportId());
         } else if (メニューID_DBCMNL3001.equals(menuID)) {
-            RString 区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_事業高額, NOWDATE,
+            RString 区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_事業高額, nowdate,
                     SubGyomuCode.DBC介護給付);
             List<KeyValueDataSource> radShinsaYM = new ArrayList<>();
             if (NUM_1.equals(区分)) {
@@ -130,9 +130,9 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
             }
         }
 
-        RString 初回申請日 = DbBusinessConfig.get(ConfigNameDBC.高額自動償還_初回申請把握基準日,
-                NOWDATE, SubGyomuCode.DBC介護給付);
-        div.getShinseishoHakkoParameters().getTxtShokaiShinseiHakuKijunDate().setValue(new FlexibleDate(初回申請日));
+        RString 初回申請基準日 = DbBusinessConfig.get(ConfigNameDBC.高額自動償還_初回申請把握基準日,
+                nowdate, SubGyomuCode.DBC介護給付);
+        div.getShinseishoHakkoParameters().getTxtShokaiShinseiHakuKijunDate().setValue(new FlexibleDate(初回申請基準日));
         FlexibleDate nowDate = FlexibleDate.getNowDate();
         div.getShutsuryokuTaisho().getTxtSakuseiDate().setValue(nowDate);
         div.getShutsuryokuTaisho().getTxtShinseishoTeishutsuKigen().setValue(nowDate.plusDay(DAY_9));
@@ -145,14 +145,15 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
     }
 
     /**
-     * 3．被保険者番号を選択した際の、サービス年月DDLの値設定のメソッドです。
+     * 被保険者番号を選択した際の、サービス年月DDLの値設定のメソッドです。
      *
      * @param menuID RString
      */
     public void setサービス年月DDL(RString menuID) {
+        RDate nowdate = RDate.getNowDate();
         HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getShinseishoHakkoParameters().getTxtHihokenshaNo().getValue());
         HokenshaNo 証記載保険者番号 = new HokenshaNo(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
-                NOWDATE, SubGyomuCode.DBU介護統計報告));
+                nowdate, SubGyomuCode.DBU介護統計報告));
         List<KeyValueDataSource> datasource = new ArrayList<>();
         if (メニューID_DBCMN43001.equals(menuID)) {
             List<KogakuShikyuShinsei> serviceTeikyoYMList
@@ -179,7 +180,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
     }
 
     /**
-     * 4.　バッチパラメータ作成
+     * バッチパラメータ作成
      *
      * @param menuID RString
      * @return DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter parameter
@@ -235,7 +236,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
             parameter.setKinyuKikanHyoji(false);
         }
 
-        if (!(div.getCcdShuturyokujun().get出力順ID() == null)) {
+        if (div.getCcdShuturyokujun().get出力順ID() != null) {
             parameter.setShutsuryokujunId(div.getCcdShuturyokujun().get出力順ID());
         }
         parameter.setShiseibi(div.getJidoShokanTaishoJohoSettei().getTxtShinseiDate().getValue());
@@ -258,10 +259,11 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
 
     private void set受託あり(DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter parameter,
             RString menuID) {
+        RDate nowdate = RDate.getNowDate();
         RString 高額 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額,
-                NOWDATE, SubGyomuCode.DBC介護給付);
+                nowdate, SubGyomuCode.DBC介護給付);
         RString 事業高額 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_事業高額,
-                NOWDATE, SubGyomuCode.DBC介護給付);
+                nowdate, SubGyomuCode.DBC介護給付);
         if (メニューID_DBCMN43001.equals(menuID)) {
             if (NUM_1.equals(高額)) {
                 parameter.setJutakuAri(false);

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.KouhoushaJoho;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShinseishoHakkoTaishoshaHaakuBatch;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd102020.DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.kouhoushajoho.KouhoushaJohoParameter;
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1080002.DBD1080002StateName.世帯所得;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1080002.DBD1080002TransitionEventName;
@@ -32,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 減免減額申請書一括発行のDivControllerです。
@@ -61,6 +63,11 @@ public class ShinseishoIkkatsuHakko {
         List<KeyValueDataSource> dataSource = getHandler(div).getDataSource(div.getGenmenShinseiHaakuList().getDdlGemmenGengakuShurui().
                 getSelectedKey());
         div.getGenmenShinseiHaakuList().getDdlShoriTimestamp().setDataSource(dataSource);
+        div.getGenmenShinseiHaakuList().getDdlShoriTimestamp().setSelectedKey(new RString("empty"));
+        div.getGenmenShinseiHaakuList().getTxtKijunYMD().clearValue();
+        div.getGenmenShinseiHaakuList().getTxtShotokuNendo().clearDomain();
+        List<ddlKohoshaList_Row> data = new ArrayList<>();
+        div.getGenmenShinseiHaakuList().getDdlKohoshaList().setDataSource(data);
         getHandler(div).set帳票文言();
         return ResponseData.of(div).respond();
 
@@ -108,10 +115,23 @@ public class ShinseishoIkkatsuHakko {
         List<ddlKohoshaList_Row> selectedItem = div.getGenmenShinseiHaakuList().getDdlKohoshaList().getSelectedItems();
         for (ddlKohoshaList_Row row : selectedItem) {
             UUID 発行処理ID = UUID.randomUUID();
+            ViewStateHolder.put(Keys.発行処理ID, 発行処理ID);
             shinseisho.insertDbT4032(UUID.fromString(row.getHaakuShoriID().toString()), 発行処理ID);
             shinseisho.insertDbT4033(new HihokenshaNo(row.getHihoNo()), 発行処理ID);
         }
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「把握リストを発行する」の処理です。
+     *
+     * @param div ShinseishoIkkatsuHakkoDiv
+     * @return ResponseData<DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter>
+     */
+    public ResponseData<DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter> onClick_btnprint(ShinseishoIkkatsuHakkoDiv div) {
+        UUID 発行処理ID = ViewStateHolder.get(Keys.発行処理ID, UUID.class);
+        DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter parameter = getHandler(div).getParameter(発行処理ID);
+        return ResponseData.of(parameter).respond();
     }
 
     /**
@@ -158,6 +178,19 @@ public class ShinseishoIkkatsuHakko {
 
     private ShinseishoIkkatsuHakkoHandler getHandler(ShinseishoIkkatsuHakkoDiv div) {
         return new ShinseishoIkkatsuHakkoHandler(div);
+    }
+
+    private enum Keys {
+
+        /**
+         * 発行処理ID
+         */
+        発行処理ID;
+
+        @Override
+        public String toString() {
+            return this.getDeclaringClass().getName().concat(name()).toString();
+        }
     }
 
 }

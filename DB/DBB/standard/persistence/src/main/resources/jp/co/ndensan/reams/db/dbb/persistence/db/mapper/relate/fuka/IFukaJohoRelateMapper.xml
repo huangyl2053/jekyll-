@@ -358,6 +358,11 @@
         "DbT2003Kibetsu"."choteiId" = "UrT0705ChoteiKyotsu"."choteiId"
         WHERE "DbT2002Fuka"."tsuchishoNo" = #{通知書番号}
         AND "DbT2002Fuka"."fukaNendo" = #{賦課年度}
+        ORDER BY
+        "DbT2002Fuka"."choteiNendo",
+        "DbT2002Fuka"."fukaNendo",
+        "DbT2002Fuka"."tsuchishoNo",
+        "DbT2002Fuka"."rirekiNo"
     </select>
 
     <select id="select賦課の情報_最新" resultMap="resultMap_FukaInfo" 

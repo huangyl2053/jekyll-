@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc120850;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120170.KohifutanshaReadCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120200.SaishinsaKohifutanshaDoDBTorokuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120200.SaishinsaKohifutanshaReadCsvFileProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120850.SaishinsaKetteiHokenshaReadCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120850.SogojigyohiSaishinsaDoIchiranhyoSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoHihokenshaKanrenProcess;
@@ -18,11 +18,11 @@ import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyout
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.sogojigyohisaishinsaketteihokenshain.DBC120850_SogojigyohiSaishinsaKetteiHokenshaInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaDoMasterTorokuProcessParameter;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaReadCsvFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDeleteReveicedFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuGetFileProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.sogojigyohisaishinsaketteihokenshain.SaishinsaKetteiHokenshaReadCsvFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
@@ -109,11 +109,11 @@ public class DBC120850_SogojigyohiSaishinsaKetteiHokenshaInFlow extends BatchFlo
      */
     @Step(CSVファイル取込)
     protected IBatchFlowCommand readerCsvFile() {
-        KohifutanshaReadCsvFileProcessParameter parameter = new KohifutanshaReadCsvFileProcessParameter();
+        SaishinsaKetteiHokenshaReadCsvFileProcessParameter parameter = new SaishinsaKetteiHokenshaReadCsvFileProcessParameter();
         parameter.set処理年月(getParameter().getShoriYM());
         parameter.set保存先フォルダ(returnEntity.get保存先フォルダのパス().toRString());
         parameter.setエントリ情報List(returnEntity.getFileNameList());
-        return simpleBatch(SaishinsaKohifutanshaReadCsvFileProcess.class).arguments(parameter).define();
+        return simpleBatch(SaishinsaKetteiHokenshaReadCsvFileProcess.class).arguments(parameter).define();
     }
 
     /**

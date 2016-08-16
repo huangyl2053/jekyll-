@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb901002.InsetDbT2001Cho
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb901002.InsetDbT7022ShoriDateKanriProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb901002.UpdateDbT7022ShoriDateKanriProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb901002.UpdateUzT0001StandardConfigProcess;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.nendokirikae.NendoKirikaeBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.nendokirikae.DBB901002_NendoKirikaeParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.nendokirikae.NendoKirikaeProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBB-5722-030 xuhao
  */
-public class DBB901002_NendoKirikae extends BatchFlowBase<NendoKirikaeBatchParameter> {
+public class DBB901002_NendoKirikae extends BatchFlowBase<DBB901002_NendoKirikaeParameter> {
 
     private static final String 処理日付管理マスタ年度切替 = "inset処理日付管理マスタ";
     private static final String 徴収方法マスタ年度切替 = "inset徴収方法マスタ";

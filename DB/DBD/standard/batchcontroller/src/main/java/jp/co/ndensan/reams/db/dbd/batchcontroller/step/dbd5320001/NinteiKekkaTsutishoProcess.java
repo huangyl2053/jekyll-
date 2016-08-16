@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd5320001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiTsutishoIkkatsuHakkoJoho;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd532001.NinteiKekkaTsuchishoJoho;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd532001.YokaigoNinteiKekkaTshuchishoReport;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd5320001.NinteiKekkaTsutishoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.ninteikekkatshuchishohakko.NinteiKekkaTsuchishoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiIkatusHakkoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd532001.YokaigoNinteiKekkaTshuchishoReportSource;
 import jp.co.ndensan.reams.db.dbd.service.core.yokaigoninteijoho.YokaigoNinteiTsutishoManager;
@@ -138,20 +138,20 @@ public class NinteiKekkaTsutishoProcess extends BatchProcessBase<YokaigoNinteiIk
     }
 
     private YokaigoNinteiKekkaTshuchishoReport createYokaigoNinteiKekkaTshuchishoReport(YokaigoNinteiIkatusHakkoEntity entity) {
-        NinteiKekkaTsuchishoEntity reportEntity = createNinteiKekkaTsuchishoEntity(entity);
+        NinteiKekkaTsuchishoJoho reportEntity = createNinteiKekkaTsuchishoEntity(entity);
         NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, REPORT_ID.getReportId(),
                 parameter.get発行日(), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                 KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-        YokaigoNinteiKekkaTshuchishoReport report
-                = new YokaigoNinteiKekkaTshuchishoReport(reportEntity, TsutishoHakkoCommonProcess.get帳票共通情報(REPORT_ID.getReportId()), ninshoshaSource);
+        YokaigoNinteiKekkaTshuchishoReport report = new YokaigoNinteiKekkaTshuchishoReport(reportEntity,
+                TsutishoHakkoCommonProcess.get帳票共通情報(REPORT_ID.getReportId()), ninshoshaSource);
         return report;
     }
 
-    private NinteiKekkaTsuchishoEntity createNinteiKekkaTsuchishoEntity(YokaigoNinteiIkatusHakkoEntity entity) {
+    private NinteiKekkaTsuchishoJoho createNinteiKekkaTsuchishoEntity(YokaigoNinteiIkatusHakkoEntity entity) {
         ChohyoSeigyoKyotsu 帳票共通情報 = TsutishoHakkoCommonProcess.get帳票共通情報(REPORT_ID.getReportId());
         FlexibleDate 発行日 = parameter.get発行日();
         SofubutsuAtesakiSource 送付物宛先情報 = TsutishoHakkoCommonProcess.get送付物宛先情報(帳票共通情報);
-        NinteiKekkaTsuchishoEntity printEntity = new NinteiKekkaTsuchishoEntity();
+        NinteiKekkaTsuchishoJoho printEntity = new NinteiKekkaTsuchishoJoho();
 
         printEntity.setBunshoNo(TsutishoHakkoCommonProcess.get文書番号(parameter.get文書番号(), REPORT_ID.getReportId(), 発行日));
         printEntity.setTitle(TsutishoHakkoCommonProcess.getタイトル(ConfigNameDBA.要介護認定結果通知書));
@@ -254,8 +254,8 @@ public class NinteiKekkaTsutishoProcess extends BatchProcessBase<YokaigoNinteiIk
         RString 導入団体コード = association.getLasdecCode_().value();
         RString 市町村名 = association.get市町村名();
         RString 出力ページ数 = new RString(String.valueOf(batchReportWrite.getPageCount()));
-        RString CSV出力有無 = new RString("無し");
-        RString CSVファイル名 = new RString("無し");
+        RString csv出力有無 = new RString("無し");
+        RString csvファイル名 = new RString("無し");
         RString ジョブ番号 = new RString(String.valueOf(JobContextHolder.getJobId()));
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
@@ -283,8 +283,8 @@ public class NinteiKekkaTsutishoProcess extends BatchProcessBase<YokaigoNinteiIk
                 ジョブ番号,
                 REPORT_ID.getReportName(),
                 出力ページ数,
-                CSV出力有無,
-                CSVファイル名,
+                csv出力有無,
+                csvファイル名,
                 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
         printer.print();

@@ -53,6 +53,9 @@ public class KogakuKaigoServicehiOshiraseHakkoProcessParameter implements IBatch
     private RString 事業高額;
     private RString 初回申請把握基準日;
 
+    private RString ininjoTeishutsusaki;
+    private RString shinseishoTelNoHyoji;
+
     /**
      * コンストラクタです。
      *
@@ -72,11 +75,14 @@ public class KogakuKaigoServicehiOshiraseHakkoProcessParameter implements IBatch
      * @param isJutakuAri is受託あり
      * @param shutsuryokujunId shutsuryokujunId
      * @param bunshoMojiretsu 文書番号文字列
+     * @param ininjoTeishutsusaki 申請書委任状提出先
+     * @param isShinseishoTelNoHyoji 申請書電話番号表示
      */
     public KogakuKaigoServicehiOshiraseHakkoProcessParameter(FlexibleYearMonth shoriYm, FlexibleDate sakuseibi, HihokenshaNo hihokenshaNo,
             boolean isShinseishoHakko, boolean isOshiraseTsuchishoHakko, boolean isHakkoIchiranhyoHakko, boolean isKinyuKikanHyoji,
             FlexibleDate shiseibi, FlexibleDate uketsukebi, FlexibleDate keteibi, FlexibleDate shinseishoTeishutsuKigen,
-            ShutsuryokuJoken chushutsuJoken, RString menuId, boolean isJutakuAri, Long shutsuryokujunId, RString bunshoMojiretsu) {
+            ShutsuryokuJoken chushutsuJoken, RString menuId, boolean isJutakuAri, Long shutsuryokujunId, RString bunshoMojiretsu,
+            RString ininjoTeishutsusaki, RString shinseishoTelNoHyoji) {
         this.shoriYm = shoriYm;
         this.sakuseibi = sakuseibi;
         this.hihokenshaNo = hihokenshaNo;
@@ -93,6 +99,8 @@ public class KogakuKaigoServicehiOshiraseHakkoProcessParameter implements IBatch
         this.isJutakuAri = isJutakuAri;
         this.shutsuryokujunId = shutsuryokujunId;
         this.bunshoMojiretsu = bunshoMojiretsu;
+        this.ininjoTeishutsusaki = ininjoTeishutsusaki;
+        this.shinseishoTelNoHyoji = shinseishoTelNoHyoji;
     }
 
     /**

@@ -95,9 +95,12 @@ public class ShotokushokaihyoIkkatuHandler {
         if (再発行する.contains(キー_KEY0)) {
             div.getChkTestPrint().setDisabled(true);
             div.getChkShuturyokuTaisho().setDisabled(true);
+            div.getDgSaihakko().setSelectedItems(div.getDgSaihakko().getDataSource());
         } else {
             div.getChkTestPrint().setDisabled(false);
             div.getChkShuturyokuTaisho().setDisabled(false);
+            List<dgSaihakko_Row> dataList = new ArrayList<>();
+            div.getDgSaihakko().setSelectedItems(dataList);
         }
     }
 
@@ -111,7 +114,9 @@ public class ShotokushokaihyoIkkatuHandler {
         if (再発行対象 != null && !再発行対象.isEmpty()) {
             for (SaiHakko saiHakko : 再発行対象) {
                 dgSaihakko_Row row = new dgSaihakko_Row();
+                row.setTxtShoriNendoKey(new RString(saiHakko.getEntity().get処理年度().toString()));
                 row.setTxtShoriNendo(saiHakko.getEntity().get処理年度().wareki().toDateString());
+                row.setTxtShoriNichijiKey(new RString(saiHakko.getEntity().get処理日時().toString()));
                 row.setTxtShoriNichiji(new FlexibleDate(saiHakko.getEntity().get処理日時()
                         .getRDateTime().getDate().toDateString()).wareki().toDateString());
                 row.setTxtHakkoKensu(new RString(String.valueOf(saiHakko.getEntity().get発行件数())));
@@ -203,8 +208,8 @@ public class ShotokushokaihyoIkkatuHandler {
             for (dgSaihakko_Row row : selectedItems) {
                 SaiHakkoParameter 再発行param = new SaiHakkoParameter();
                 再発行param.setユーザ(row.getTxtUser());
-                再発行param.set処理年度(new RYear(new RString(row.getTxtShoriNendo().toString())));
-                再発行param.set処理日時(new YMDHMS(new RString(row.getTxtShoriNichiji().toString())));
+                再発行param.set処理年度(new RYear(row.getTxtShoriNendoKey()));
+                再発行param.set処理日時(new YMDHMS(row.getTxtShoriNichijiKey()));
                 再発行param.set発行件数(Integer.valueOf(row.getTxtHakkoKensu().toString()));
                 再発行対象リスト.add(再発行param);
             }

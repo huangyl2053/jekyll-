@@ -63,8 +63,11 @@ public class ShinseihakkoMeisei {
     public ResponseData<ShinseihakkoMeiseiDiv> check_RadShinseiKubun(ShinseihakkoMeiseiDiv div) {
         int selectIndex = div.getShinseihakkoMeisei2().getPrintSelect().getRadShinseiKubun().getSelectedIndex();
         RString yokaigodo = div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue();
-        if (selectIndex != 0 && (yokaigodo == null || yokaigodo.isEmpty())) {
-            throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().replace("要介護度が空白のため", "更新申請の選択ができません"));
+        if (selectIndex == 1 && (yokaigodo == null || yokaigodo.isEmpty())) {
+            throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().replace("要介護度が空白の", "更新申請の選択が"));
+        }
+        if (selectIndex == 1 && (yokaigodo == null || yokaigodo.isEmpty())) {
+            throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().replace("要介護度が空白の", "区分変更申請の選択が"));
         }
         return ResponseData.of(div).respond();
     }
