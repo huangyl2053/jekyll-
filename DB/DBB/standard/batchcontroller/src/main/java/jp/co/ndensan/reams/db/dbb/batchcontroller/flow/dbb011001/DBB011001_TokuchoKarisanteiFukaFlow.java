@@ -43,7 +43,7 @@ public class DBB011001_TokuchoKarisanteiFukaFlow extends BatchFlowBase<TokuchoKa
     private static final RString KEISANGOJOHOSAKUEEIFLOW_FLOWID = new RString("KeisangoJohoSakuseiFlow");
     private static final RString FUKAJOHOTOROKUFLOW_FLOWID = new RString("FukaJohoTorokuFlow");
     private static final RString TOKUCHOKARISANTEITSUSHISHOHAKKO_FLOWID = new RString("TokuchoKarisanteiTsuchishoHakkoFlow");
-    private static final ReportId 特別徴収仮算定結果一覧表_帳票分類ID = new ReportId("DBB200002_TokubetsuChoshuKarisanteiKekkaIchiran");
+    private static final ReportId 特別徴収仮算定結果一覧表_帳票分類ID = new ReportId("DBB011003_TokuchoKarisanteiTsuchishoHakko");
 
     private YMDHMS システム日時;
 
