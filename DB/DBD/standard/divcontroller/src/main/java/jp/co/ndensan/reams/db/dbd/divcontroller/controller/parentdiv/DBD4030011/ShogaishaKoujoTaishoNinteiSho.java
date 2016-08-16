@@ -60,7 +60,7 @@ public class ShogaishaKoujoTaishoNinteiSho {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-            onClick_btnJiko(div);
+            ResponseData.of(div).respond();
         }
         return ResponseData.of(div).respond();
     }
