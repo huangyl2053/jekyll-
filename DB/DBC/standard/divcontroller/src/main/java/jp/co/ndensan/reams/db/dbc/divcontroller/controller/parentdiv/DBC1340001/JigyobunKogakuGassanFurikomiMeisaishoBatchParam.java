@@ -29,6 +29,7 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParam {
     public ResponseData<JigyobunKogakuGassanFurikomiMeisaishoBatchParamDiv> onLoad(JigyobunKogakuGassanFurikomiMeisaishoBatchParamDiv div) {
         getHandler(div).initialize();
         getHandler(div).get取引先金融機関();
+        getHandler(div).onChangeDdlHakkouTaisyou(div);
         boolean gotLocked = getHandler(div).前排他キーのセット();
         if (!gotLocked) {
             throw new PessimisticLockingException();
@@ -45,6 +46,7 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParam {
     public ResponseData<JigyobunKogakuGassanFurikomiMeisaishoBatchParamDiv> onChange_radSiharaihouhou(JigyobunKogakuGassanFurikomiMeisaishoBatchParamDiv div) {
         getHandler(div).initialize();
         getHandler(div).onChangeDdlHakkouTaisyou(div);
+        getHandler(div).onChangeRadSiharaihouhou(div);
         return ResponseData.of(div).respond();
     }
 
