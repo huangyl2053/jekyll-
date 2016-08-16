@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.DBD710060_HanyoListShakaiFukushiHojinKeigen;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd710060;
 
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD710060_HanyoListShakaiFukushiHojinKeigen.HanyoListShakaiFukushiHojinKeigenProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710060.DBD710060_HanyoListShakaiFukushiHojinKeigenParameter;
