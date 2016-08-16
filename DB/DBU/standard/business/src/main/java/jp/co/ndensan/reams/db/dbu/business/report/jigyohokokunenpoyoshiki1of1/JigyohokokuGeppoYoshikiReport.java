@@ -148,14 +148,14 @@ public class JigyohokokuGeppoYoshikiReport extends Report<JigyohokokuNenpoYoshik
             } else if (0 < o1.get表番号().compareTo(o2.get表番号())) {
                 return 1;
             }
-            if (o1.get横番号() < o2.get縦番号()) {
-                return -1;
-            } else if (o2.get縦番号() < o1.get横番号()) {
-                return 1;
-            }
             if (o1.get縦番号() < o2.get縦番号()) {
                 return -1;
             } else if (o2.get縦番号() < o1.get縦番号()) {
+                return 1;
+            }
+            if (o1.get横番号() < o2.get横番号()) {
+                return -1;
+            } else if (o2.get横番号() < o1.get横番号()) {
                 return 1;
             }
             return 0;
