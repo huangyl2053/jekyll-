@@ -354,9 +354,9 @@ public class FutanWariaishoIkkatsu {
             csvEntity.set開始年月日(dateFormat基本形１(利用者負担割合証Temp.get負担割合期間().getYukoKaishiYMD1()));
         }
         if (利用者負担割合証Temp.get負担割合期間().getYukoShuryoYMD2() != null) {
-            csvEntity.set開始年月日(dateFormat基本形１(利用者負担割合証Temp.get負担割合期間().getYukoShuryoYMD2()));
+            csvEntity.set終了年月日(dateFormat基本形１(利用者負担割合証Temp.get負担割合期間().getYukoShuryoYMD2()));
         } else {
-            csvEntity.set開始年月日(dateFormat基本形１(利用者負担割合証Temp.get負担割合期間().getYukoShuryoYMD1()));
+            csvEntity.set終了年月日(dateFormat基本形１(利用者負担割合証Temp.get負担割合期間().getYukoShuryoYMD1()));
         }
         if (!RString.isNullOrEmpty(利用者負担割合証Temp.get負担割合期間().getFutanWariaiKubun2())) {
             csvEntity.set負担割合(FutanwariaiKubun.toValue(利用者負担割合証Temp.get負担割合期間().getFutanWariaiKubun2()).get名称());
