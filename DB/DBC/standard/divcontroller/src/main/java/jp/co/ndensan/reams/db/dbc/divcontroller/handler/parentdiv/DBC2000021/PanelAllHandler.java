@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -33,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
- * 画面設計_DBCMNK2001_利用者負担割合即時更正_新規。
+ * 画面設計_DBCMNK2001_利用者負担割合即時更正_新規のクラスです。
  *
  * @reamsid_L DBC-5010-010 lihang
  */
@@ -48,6 +50,12 @@ public class PanelAllHandler {
     private static final RString 業務固有の識別情報名称 = new RString("業務固有の識別情報");
     private static final RString 無し = new RString("無し");
     private static final RString 有し = new RString("有し");
+    private static final RString 年次利用者負担割合判定を実行してください = new RString("年次利用者負担割合判定を実行してください");
+    private static FlexibleYear 負担割合年度;
+    private static RString 年度y;
+    private static final RString 新年度 = new RString("新年度");
+    private static final RString 現年度 = new RString("現年度");
+    private static final RString 過年度 = new RString("過年度");
 
     /**
      * コンストラクタです。
@@ -59,21 +67,24 @@ public class PanelAllHandler {
     }
 
     /**
-     * 画面初期化処理します。
+     * 画面を初期化します。
      *
      * @param 被保険者番号 被保険者番号
      * @param 識別コード 識別コード
      */
     public void initialize(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
         RString 処理名 = ShoriName.年次利用者負担割合判定.get名称();
-        RString 市町村コード = Association.getLasdecCode().code市町村RString();
+        RString 市町村コード = Association.getLasdecCode().getColumnValue();
         List<KeyValueDataSource> keyValues = new ArrayList<>();
-        List<FlexibleYear> 処理日付管理情報 = HonsanteiIdoKanendo.createInstance().getNendo(
+        List<DbT7022ShoriDateKanriEntity> 処理日付管理情報 = HonsanteiIdoKanendo.createInstance().getNendo(
                 SubGyomuCode.DBC介護給付, 市町村コード, 処理名);
         div.getDdlNendo().getDataSource().clear();
-        if (処理日付管理情報 != null && !処理日付管理情報.isEmpty()) {
-            for (FlexibleYear 年度 : 処理日付管理情報) {
-                keyValues.add(new KeyValueDataSource(new RString(Integer.toString(年度.getYearValue())), 年度.toDateString()));
+        if (処理日付管理情報 == null || 処理日付管理情報.isEmpty()) {
+            throw new ApplicationException(DbzErrorMessages.未実行.getMessage().replace(年次利用者負担割合判定を実行してください.toString()));
+        } else {
+            for (DbT7022ShoriDateKanriEntity entity : 処理日付管理情報) {
+                keyValues.add(new KeyValueDataSource(new RString(
+                        Integer.toString(entity.getNendo().getYearValue())), entity.getNendo().wareki().getYear()));
             }
             div.getDdlNendo().setDataSource(keyValues);
             div.getDdlNendo().setSelectedIndex(0);
@@ -87,15 +98,12 @@ public class PanelAllHandler {
      * 基準日をセットします
      */
     public void set基準日() {
-        FlexibleYear 負担割合年度;
+
         FlexibleYear 年度 = new FlexibleYear(div.getDdlNendo().getSelectedKey());
-        RString 年度y;
-        RString 新年度 = new RString("新年度");
-        RString 現年度 = new RString("現年度");
-        RString 過年度 = new RString("過年度");
         RDate システム日付 = RDate.getNowDate();
-        RDate 年月日 = new RDate(DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年度終了月日, システム日付,
-                SubGyomuCode.DBC介護給付).toString());
+        RString 月日 = DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年度終了月日, システム日付,
+                SubGyomuCode.DBC介護給付);
+        RDate 年月日 = new RDate(((年度.toDateString()).concat(月日)).toString());
         if (システム日付.isBeforeOrEquals(年月日)) {
             負担割合年度 = new FlexibleYear(システム日付.getYear().minusYear(1).toDateString());
         } else {
@@ -116,6 +124,22 @@ public class PanelAllHandler {
         } else {
             div.getTxtKijunbi().setValue(年月日);
         }
+    }
+
+    /**
+     * is基準日は指定年度内を判定します
+     *
+     * @return　Boolean
+     */
+    public boolean is基準日は指定年度内() {
+
+        RDate 年度 = new RDate((div.getDdlNendo().getSelectedValue().concat(DbBusinessConfig
+                .get(ConfigNameDBC.利用者負担割合判定管理_年度終了月日, RDate.getNowDate(), SubGyomuCode.DBC介護給付)).toString()));
+        if (年度.plusDay(1).isBefore(div.getTxtKijunbi().getValue())
+                && div.getTxtKijunbi().getValue().isBefore(年度.plusYear(1))) {
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
     }
 
     /**
