@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.KouhoushaJoho;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShinseishoHakkoTaishoshaHaakuBatch;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd102020.DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.kouhoushajoho.KouhoushaJohoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1080002.ShinseishoIkkatsuHakkoDiv;
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -106,6 +108,8 @@ public class ShinseishoIkkatsuHakkoHandler {
             KeyValueDataSource keyValues = new KeyValueDataSource(new RString("key" + i), new RString(バッチ処理日時リスト.get(i).toString()));
             result.add(keyValues);
         }
+        KeyValueDataSource keValuesEmpty = new KeyValueDataSource(new RString("empty"), new RString(""));
+        result.add(keValuesEmpty);
         return result;
     }
 
@@ -228,5 +232,36 @@ public class ShinseishoIkkatsuHakkoHandler {
             div.getGenmenShinseiHaakuList().getGenmenShinseiHaakuShinseisho().
                     setTitle(社会福祉法人等利用者負担額減額対象確認申請書);
         }
+    }
+
+    /**
+     *
+     * @param 発行処理ID UUID
+     * @return DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter
+     */
+    public DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter getParameter(UUID 発行処理ID) {
+        if (div.getGenmenShinseiHaakuList().getDdlGemmenGengakuShurui().getSelectedValue().
+                equals(GemmenGengakuShurui.負担限度額認定.get名称())) {
+            return toParameter(発行処理ID, ReportIdDBD.DBD800001.getReportId());
+
+        }
+        if (div.getGenmenShinseiHaakuList().getDdlGemmenGengakuShurui().getSelectedValue().
+                equals(GemmenGengakuShurui.利用者負担額減額.get名称())) {
+            return toParameter(発行処理ID, ReportIdDBD.DBD800002.getReportId());
+        }
+        if (div.getGenmenShinseiHaakuList().getDdlGemmenGengakuShurui().getSelectedValue().
+                equals(GemmenGengakuShurui.訪問介護利用者負担額減額.get名称())) {
+            return toParameter(発行処理ID, ReportIdDBD.DBD800005.getReportId());
+        } else {
+            return toParameter(発行処理ID, ReportIdDBD.DBD800006.getReportId());
+        }
+    }
+
+    private DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter toParameter(UUID 発行処理ID, ReportId reportId) {
+        return new DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter(発行処理ID, div.getGenmenShinseiHaakuList().
+                getGenmenShinseiHaakuShinseisho().getChkShinkiKoshin().isAllSelected(), div.getGenmenShinseiHaakuList().
+                getGenmenShinseiHaakuShinseisho().getCcdChohyoShutsuryokujun().get出力順ID(), div.getGenmenShinseiHaakuList().
+                getTxtKijunYMD().getValue(), reportId, div.getGenmenShinseiHaakuList().
+                getGenmenShinseiHaakuShinseisho().getTxtHakkoYMD().getValue());
     }
 }
