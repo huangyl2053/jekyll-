@@ -375,9 +375,9 @@ public class FutanWariaishoIkkatsu {
             csvEntity.set事業対象者受給者区分(定数_受給者);
         }
         if (!RString.isNullOrEmpty(利用者負担割合証Temp.get負担割合期間().getShikakuKubun2())) {
-            csvEntity.set事業対象者受給者区分(利用者負担割合証Temp.get負担割合期間().getShikakuKubun2().concat(定数_号));
+            csvEntity.set資格区分(利用者負担割合証Temp.get負担割合期間().getShikakuKubun2().concat(定数_号));
         } else {
-            csvEntity.set事業対象者受給者区分(利用者負担割合証Temp.get負担割合期間().getShikakuKubun1().concat(定数_号));
+            csvEntity.set資格区分(利用者負担割合証Temp.get負担割合期間().getShikakuKubun1().concat(定数_号));
         }
         csvEntity.set証記載保険者番号(getHokenshaCode(new HihokenshaDaicho(利用者負担割合証Temp.get被保台帳())).getColumnValue());
         return csvEntity;

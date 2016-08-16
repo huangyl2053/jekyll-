@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IDialogResponse;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -29,7 +30,10 @@ public class MenjoKaijoSaiTennyu {
      * @return ResponseData<MenjoKaijoSaiTennyuDiv>
      */
     public ResponseData<MenjoKaijoSaiTennyuDiv> onLoad(MenjoKaijoSaiTennyuDiv div) {
-        getHandler(div).onLoad();
+        Message message = getHandler(div).onLoad();
+        if (message != null) {
+            return ResponseData.of(div).addMessage(message).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -81,11 +85,13 @@ public class MenjoKaijoSaiTennyu {
      * @return ResponseData<ShokanBaraiKa1GoDiv>
      */
     public ResponseData<MenjoKaijoSaiTennyuDiv> onClick_BtnKakutei(MenjoKaijoSaiTennyuDiv div) {
+        ResponseData<MenjoKaijoSaiTennyuDiv> response = new ResponseData();
         ValidationMessageControlPairs pairs = getHandler(div).onClick_BtnKakutei();
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        return ResponseData.of(div).respond();
+        response.data = div;
+        return ResponseData.of(div).dialogOKClose();
     }
 
     /**

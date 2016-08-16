@@ -552,7 +552,9 @@ public class ShokanBaraiKa1GoHandler {
                     break;
             }
         } else if (shiharaiHohoHenko != null) {
-            div.getDdlShuryoJokyo().setSelectedKey(shiharaiHohoHenko.get終了区分());
+            if (null != shiharaiHohoHenko.get終了区分()) {
+                div.getDdlShuryoJokyo().setSelectedKey(shiharaiHohoHenko.get終了区分());
+            }
             div.getTxtTorokuJokyo().setValue(shiharaiHohoHenko.get登録区分());
             div.getTxtTekiyoKikanKaishi().setValue(shiharaiHohoHenko.get適用開始年月日());
             div.getTxtTekiyoKikanShuryo().setValue(shiharaiHohoHenko.get適用終了年月日());
