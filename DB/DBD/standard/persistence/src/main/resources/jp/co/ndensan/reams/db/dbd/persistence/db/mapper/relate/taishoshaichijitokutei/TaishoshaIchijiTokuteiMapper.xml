@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_LDBD-3830-040 tianyh -->
+<!-- 概要： 対象者一次特定作成情報を抽出する用XMLです。 -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.taishoshaichijitokutei.TaishoshaIchijiTokuteiMapper">
+    <select resultOrdered="true" id="select対象者一次特定" 
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.hanteiyouconkyosakuseishoushaiqiji.HanteiyouConkyosakuseishoushaiqijiRelateEntity"
+    parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.taishoshaichijitokutei.TaishoshaIchijiTokuteiParameter" fetchSize="500">
+    <include refid="selectHanteiyouConkyosakuseishoushaiqijiRelateEntityList" />
+  </select>
+    <sql id="selectHanteiyouConkyosakuseishoushaiqijiRelateEntityList">
+        SELECT
+        被保険者台帳."hihokenshaNo" AS 被保険者番号
+        FROM
+        rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳
+        LEFT JOIN rgdb."DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen" AS 社会福祉法人等利用者負担軽減
+        ON 
+        被保険者台帳."hihokenshaNo" = 社会福祉法人等利用者負担軽減."hihokenshaNo"
+        LEFT JOIN rgdb."DbT4001JukyushaDaicho" AS 受給者台帳
+        ON 
+        被保険者台帳."hihokenshaNo" = 受給者台帳."hihokenshaNo"
+        LEFT JOIN rgdb."DbT3105SogoJigyoTaishosha" AS 総合事業対象者
+        ON 
+        被保険者台帳."hihokenshaNo" = 総合事業対象者."hihokenshaNo"
+        <where>
+            1=1
+            <if test="旧措置者区分 ==3">
+                AND (受給者台帳."logicalDeletedFlag" = false AND 受給者台帳."kyuSochishaFlag" = false)
+            </if>
+            <if test="旧措置者区分 ==2">
+                AND NOT EXISTS (								
+		SELECT  1 							
+		FROM rgdb."DbT4001JukyushaDaicho" AS J						
+		WHERE J."hihokenshaNo" = 被保険者台帳."hihokenshaNo"						
+		AND J."logicalDeletedFlag" = false					
+		AND J."kyuSochishaFlag" = true
+                )
+            </if>
+            <if test="対象リスト==1">
+                <if test="対象期間指定==1">
+                    AND(
+                        (社会福祉法人等利用者負担軽減."ketteiKubun"='1' 
+                        AND #{対象年度の開始年月日}<![CDATA[<=]]>社会福祉法人等利用者負担軽減."tekiyoKaishiYMD"
+                        AND 社会福祉法人等利用者負担軽減."tekiyoShuryoYMD"<![CDATA[<=]]>#{対象年度の終了年月日})
+                         <if test="抽出対象 ==0">
+                             OR(
+                             社会福祉法人等利用者負担軽減."ketteiKubun" = null
+                             AND #{対象年度の開始年月日}<![CDATA[<=]]>社会福祉法人等利用者負担軽減."shinseiYMD"
+                             AND 社会福祉法人等利用者負担軽減."shinseiYMD"<![CDATA[<=]]>#{対象年度の終了年月日}
+                             )
+                         </if>                
+                     )                      
+                </if>
+                <if test="対象期間指定==2">
+                    AND(
+                        (社会福祉法人等利用者負担軽減."ketteiKubun"='1' 
+                        AND 社会福祉法人等利用者負担軽減."tekiyoKaishiYMD"<![CDATA[<=]]>#{基準日}
+                        AND #{基準日}<![CDATA[<=]]>社会福祉法人等利用者負担軽減."tekiyoShuryoYMD")
+                         <if test="抽出対象 ==0">
+                             OR(
+                             社会福祉法人等利用者負担軽減."ketteiKubun" = null
+                             AND 社会福祉法人等利用者負担軽減."shinseiYMD"<![CDATA[<=]]>#{基準日}
+                             )
+                         </if>                
+                     )                      
+                </if>
+            </if>
+            <if test="対象リスト==2">
+                <if test="受給者区分==2">
+                    AND(
+                        受給者台帳."ninteiYukoKikanKaishiYMD"<![CDATA[<=]]>#{課税判定等基準日}
+                        AND #{課税判定等基準日}<![CDATA[<=]]> 受給者台帳."ninteiYukoKikanShuryoYMD"
+                        AND 受給者台帳."logicalDeletedFlag" = false					
+                        AND 受給者台帳."yukoMukoKubun" = '1'
+                     )                      
+                </if>
+                <if test="対象期間指定==3">
+                    AND(
+                        総合事業対象者."tekiyoKaishiYMD"<![CDATA[<=]]>#{課税判定等基準日}
+                        AND #{課税判定等基準日}<![CDATA[<=]]> 総合事業対象者."tekiyoShuryoYMD"
+                     )                      
+                </if>
+            </if>
+        </where>
+    </sql>
+  </mapper>
