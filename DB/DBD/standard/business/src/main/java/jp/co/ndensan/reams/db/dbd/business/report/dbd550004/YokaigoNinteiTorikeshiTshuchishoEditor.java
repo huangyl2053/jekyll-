@@ -35,6 +35,7 @@ public class YokaigoNinteiTorikeshiTshuchishoEditor implements IYokaigoNinteiTor
     private final NinshoshaSource 認証者ソースビルダー;
     private final RString bunshoNo;
     private final RString hihokenshaNo;
+    private final RString hihokenshaName;
     private final RString riyu;
     private static final int NO_3 = 3;
     private static final int NO_4 = 4;
@@ -54,10 +55,12 @@ public class YokaigoNinteiTorikeshiTshuchishoEditor implements IYokaigoNinteiTor
      * @param 認証者ソースビルダー NinshoshaSource
      * @param bunshoNo RString
      * @param hihokenshaNo RString
+     * @param hihokenshaName RString
      * @param riyu RString
      */
     public YokaigoNinteiTorikeshiTshuchishoEditor(IAtesaki 宛先, Association 地方公共団体, ChohyoSeigyoKyotsu 帳票制御共通,
-            List<RString> 通知書定型文リスト, NinshoshaSource 認証者ソースビルダー, RString bunshoNo, RString hihokenshaNo, RString riyu) {
+            List<RString> 通知書定型文リスト, NinshoshaSource 認証者ソースビルダー, RString bunshoNo, RString hihokenshaNo, RString hihokenshaName,
+            RString riyu) {
         this.宛先 = 宛先;
         this.地方公共団体 = 地方公共団体;
         this.帳票制御共通 = 帳票制御共通;
@@ -65,6 +68,7 @@ public class YokaigoNinteiTorikeshiTshuchishoEditor implements IYokaigoNinteiTor
         this.認証者ソースビルダー = 認証者ソースビルダー;
         this.bunshoNo = bunshoNo;
         this.hihokenshaNo = hihokenshaNo;
+        this.hihokenshaName = hihokenshaName;
         this.riyu = riyu;
     }
 
@@ -142,7 +146,6 @@ public class YokaigoNinteiTorikeshiTshuchishoEditor implements IYokaigoNinteiTor
         source.tsuchibun1 = 通知書定型文リスト.get(0);
         source.tsuchibun2 = 通知書定型文リスト.get(1);
         source.tsuchibun3 = 通知書定型文リスト.get(2);
-        source.tsuchibun4 = 通知書定型文リスト.get(NO_3);
         if (TeikeibunMojiSize.フォント大.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
             source.tsuchibun5 = 通知書定型文リスト.get(NO_4);
         }
@@ -153,12 +156,15 @@ public class YokaigoNinteiTorikeshiTshuchishoEditor implements IYokaigoNinteiTor
         if (TeikeibunMojiSize.フォント上大下小.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
             source.tsuchibun9 = 通知書定型文リスト.get(NO_7);
             source.tsuchibun8 = 通知書定型文リスト.get(NO_8);
+        } else {
+            source.tsuchibun4 = 通知書定型文リスト.get(NO_3);
         }
 
     }
 
     private void setYokaigoNinteiTorikeshiTshuchishoSource(YokaigoNinteiTorikeshiTshuchishoSource source) {
         source.bunshoNo = bunshoNo;
+        source.hihokenshaName = hihokenshaName;
         source.hihokenshaNo1 = hihokenshaNo.substring(0);
         source.hihokenshaNo2 = hihokenshaNo.substring(1);
         source.hihokenshaNo3 = hihokenshaNo.substring(2);

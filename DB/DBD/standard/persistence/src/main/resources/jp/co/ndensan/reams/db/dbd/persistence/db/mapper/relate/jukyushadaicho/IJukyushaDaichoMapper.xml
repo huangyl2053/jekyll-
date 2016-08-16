@@ -20,7 +20,7 @@
                       ON A."shinseishoKanriNo"=B."shinseishoKanriNo"
         AND A."shichosonCode" =#{市町村コード}
         AND    A."hihokenshaNo"=#{被保険者番号} 
-        ORDER BY A."ninteiYMD" 
+        ORDER BY A."ninteiYMD",A."insertTimestamp"
         limit 1
     </select>
 </mapper>
