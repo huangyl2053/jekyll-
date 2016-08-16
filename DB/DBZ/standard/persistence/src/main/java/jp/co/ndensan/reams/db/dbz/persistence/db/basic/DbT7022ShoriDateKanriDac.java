@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.isDeleted;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.kijunTimestamp;
@@ -94,8 +93,6 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     private static final RString INDEX_120 = new RString("120");
     private static final RString INDEX_111 = new RString("111");
 
-    private static final RString 年次利用者負担割合判定を実行してください = new RString("年次利用者負担割合判定を実行してください。");
-    
     /**
      * 主キーで処理日付管理マスタを取得します。
      *
@@ -578,7 +575,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                         by(DbT7022ShoriDateKanri.nendoNaiRenban, Order.DESC)).limit(1).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
-    
+
     /**
      * 主キーで処理日付管理マスタを取得します。
      *
@@ -2124,8 +2121,8 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 where(eq(shoriName, 処理名)).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
-    
-        /**
+
+    /**
      * 主キーで処理日付管理マスタを取得します。
      *
      * @param サブ業務コード SubGyomuCode
@@ -2135,11 +2132,13 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public List<FlexibleYear> selectNendo(
+    public List<DbT7022ShoriDateKanriEntity> selectNendo(
             SubGyomuCode サブ業務コード,
             RString 市町村コード,
             RString 処理名) throws NullPointerException {
-        requireNonNull(nendo, DbzErrorMessages.未実行.getMessage().replace(年次利用者負担割合判定を実行してください.toString()).toString());
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(市町村コードメッセージ.toString()));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.selectSpecific(nendo).
                 table(DbT7022ShoriDateKanri.class).
@@ -2149,6 +2148,6 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(shichosonCode, 市町村コード)))
                 .groupBy(nendo)
                 .order(by(nendo, Order.DESC)).
-                toList(FlexibleYear.class);
+                toList(DbT7022ShoriDateKanriEntity.class);
     }
 }
