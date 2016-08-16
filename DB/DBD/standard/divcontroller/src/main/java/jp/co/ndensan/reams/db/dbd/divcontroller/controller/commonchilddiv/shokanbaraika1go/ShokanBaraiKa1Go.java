@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.shokanbara
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IDialogResponse;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -29,7 +30,10 @@ public class ShokanBaraiKa1Go {
      * @return ResponseData<ShokanBaraiKa1GoDiv>
      */
     public ResponseData<ShokanBaraiKa1GoDiv> onLoad(ShokanBaraiKa1GoDiv div) {
-        getHandler(div).onLoad();
+        Message message = getHandler(div).onLoad();
+        if (message != null) {
+            return ResponseData.of(div).addMessage(message).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -57,11 +61,12 @@ public class ShokanBaraiKa1Go {
      * @return ResponseData<ShokanBaraiKa1GoDiv>
      */
     public ResponseData<ShokanBaraiKa1GoDiv> onClick_BtnKakutei(ShokanBaraiKa1GoDiv div) {
+        IDialogResponse dialogResponse = ResponseData.of(div);
         ValidationMessageControlPairs pairs = getHandler(div).onClick_BtnKakutei();
         if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
+            return dialogResponse.addValidationMessages(pairs).respond();
         }
-        return ResponseData.of(div).dialogOKClose();
+        return dialogResponse.dialogOKClose();
     }
 
     /**

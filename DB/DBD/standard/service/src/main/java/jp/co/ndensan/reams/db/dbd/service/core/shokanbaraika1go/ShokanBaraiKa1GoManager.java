@@ -19,8 +19,10 @@ import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.TainoHanteiK
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.TaishoHanteiKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4022ShiharaiHohoHenkoTainoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenko.ShiharaiHohoHenkoEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoKanriKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoMukoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoShuryoKubun;
@@ -54,15 +56,22 @@ public class ShokanBaraiKa1GoManager {
             FlexibleDate 弁明書提出期限,
             RString 最大履歴番号) {
         ShiharaiHohoHenkoEntity 支払方法変更Entity = new ShiharaiHohoHenkoEntity();
+        ShoKisaiHokenshaNo 証記載保険者番号 = ShichosonSecurityJohoFinder.createInstance()
+                .getShichosonSecurityJoho(GyomuBunrui.介護事務)
+                .get市町村情報()
+                .get証記載保険者番号();
         支払方法変更Entity.set支払方法変更Entity(get1号予告者登録の登録Entity(
                 被保険者番号,
                 予告登録日,
                 弁明書提出期限,
-                最大履歴番号));
+                最大履歴番号,
+                証記載保険者番号));
         支払方法変更Entity.set支払方法変更滞納Entity(get支払方法変更滞納Entity(
                 滞納判定結果,
                 TainoHanteiKubun.予告登録.getコード(),
-                被保険者番号, 最大履歴番号));
+                被保険者番号,
+                最大履歴番号,
+                証記載保険者番号));
         return new ShiharaiHohoHenko(支払方法変更Entity);
     }
 
@@ -85,17 +94,23 @@ public class ShokanBaraiKa1GoManager {
             FlexibleDate 保険者証提出期限,
             RString 最大履歴番号) {
         ShiharaiHohoHenkoEntity 支払方法変更Entity = new ShiharaiHohoHenkoEntity();
+        ShoKisaiHokenshaNo 証記載保険者番号 = ShichosonSecurityJohoFinder.createInstance()
+                .getShichosonSecurityJoho(GyomuBunrui.介護事務)
+                .get市町村情報()
+                .get証記載保険者番号();
         支払方法変更Entity.set支払方法変更Entity(get償還払い化登録の登録Entity(
                 被保険者番号,
                 提出期限_開始,
                 変更決定日,
                 保険者証提出期限,
-                最大履歴番号));
+                最大履歴番号,
+                証記載保険者番号));
         支払方法変更Entity.set支払方法変更滞納Entity(get支払方法変更滞納Entity(
                 滞納判定結果,
                 TainoHanteiKubun.償還払化登録.getコード(),
                 被保険者番号,
-                最大履歴番号));
+                最大履歴番号,
+                証記載保険者番号));
         return new ShiharaiHohoHenko(支払方法変更Entity);
     }
 
@@ -103,9 +118,10 @@ public class ShokanBaraiKa1GoManager {
             HihokenshaNo 被保険者番号,
             FlexibleDate 予告登録日,
             FlexibleDate 弁明書提出期限,
-            RString 最大履歴番号) {
+            RString 最大履歴番号,
+            ShoKisaiHokenshaNo 証記載保険者番号) {
         DbT4021ShiharaiHohoHenkoEntity entity = new DbT4021ShiharaiHohoHenkoEntity();
-        entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo("209007"));
+        entity.setShoKisaiHokenshaNo(証記載保険者番号);
         entity.setHihokenshaNo(被保険者番号);
         entity.setKanriKubun(ShiharaiHenkoKanriKubun._１号償還払い化.getコード());
         entity.setRirekiNo(get最大履歴番号(最大履歴番号));
@@ -130,9 +146,10 @@ public class ShokanBaraiKa1GoManager {
             FlexibleDate 提出期限_開始,
             FlexibleDate 変更決定日,
             FlexibleDate 保険者証提出期限,
-            RString 最大履歴番号) {
+            RString 最大履歴番号,
+            ShoKisaiHokenshaNo 証記載保険者番号) {
         DbT4021ShiharaiHohoHenkoEntity entity = new DbT4021ShiharaiHohoHenkoEntity();
-        entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo("209007"));
+        entity.setShoKisaiHokenshaNo(証記載保険者番号);
         entity.setHihokenshaNo(被保険者番号);
         entity.setKanriKubun(ShiharaiHenkoKanriKubun._１号償還払い化.getコード());
         entity.setRirekiNo(get最大履歴番号(最大履歴番号));
@@ -157,7 +174,8 @@ public class ShokanBaraiKa1GoManager {
             TainoHanteiResultKohen 滞納判定結果,
             RString 滞納判定区分,
             HihokenshaNo 被保険者番号,
-            RString 最大履歴番号) {
+            RString 最大履歴番号,
+            ShoKisaiHokenshaNo 証記載保険者番号) {
         List<DbT4022ShiharaiHohoHenkoTainoEntity> 支払方法変更滞納Entity = new ArrayList();
         List<ShiharaiHohoHenkoTaino> 支払方法変更滞納情報 = new ArrayList();
         List<TainoKiSummary> tainoKiSummary = 滞納判定結果.get滞納情報();
@@ -165,7 +183,7 @@ public class ShokanBaraiKa1GoManager {
         for (TainoKiSummary summary : tainoKiSummary) {
             TaishoHanteiKubun 対象管理区分 = get対象管理区分(連番++, summary.get時効区分().getコード(), 支払方法変更滞納情報);
             DbT4022ShiharaiHohoHenkoTainoEntity entity = new DbT4022ShiharaiHohoHenkoTainoEntity();
-            entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo("209007"));
+            entity.setShoKisaiHokenshaNo(証記載保険者番号);
             entity.setHihokenshaNo(被保険者番号);
             entity.setKanriKubun(ShiharaiHenkoKanriKubun._１号償還払い化.getコード());
             entity.setRirekiNo(get最大履歴番号(最大履歴番号));
