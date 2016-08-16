@@ -14,17 +14,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KyufuSeigenPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("btnKyufuSeigenRireki")
+    private ButtonDialog btnKyufuSeigenRireki;
     @JsonProperty("radKohiFutanJogenGengakuAriFlag")
     private RadioButton radKohiFutanJogenGengakuAriFlag;
-    @JsonProperty("btnKyufuSeigenRireki")
-    private Button btnKyufuSeigenRireki;
     @JsonProperty("txtShokanbaraikaYMD")
     private TextBoxDateRange txtShokanbaraikaYMD;
     @JsonProperty("txtKyufuritsuHikisage")
@@ -36,6 +36,24 @@ public class KyufuSeigenPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getbtnKyufuSeigenRireki
+     * @return btnKyufuSeigenRireki
+     */
+    @JsonProperty("btnKyufuSeigenRireki")
+    public ButtonDialog getBtnKyufuSeigenRireki() {
+        return btnKyufuSeigenRireki;
+    }
+
+    /*
+     * setbtnKyufuSeigenRireki
+     * @param btnKyufuSeigenRireki btnKyufuSeigenRireki
+     */
+    @JsonProperty("btnKyufuSeigenRireki")
+    public void setBtnKyufuSeigenRireki(ButtonDialog btnKyufuSeigenRireki) {
+        this.btnKyufuSeigenRireki = btnKyufuSeigenRireki;
+    }
+
     /*
      * getradKohiFutanJogenGengakuAriFlag
      * @return radKohiFutanJogenGengakuAriFlag
@@ -52,24 +70,6 @@ public class KyufuSeigenPanelDiv extends Panel {
     @JsonProperty("radKohiFutanJogenGengakuAriFlag")
     public void setRadKohiFutanJogenGengakuAriFlag(RadioButton radKohiFutanJogenGengakuAriFlag) {
         this.radKohiFutanJogenGengakuAriFlag = radKohiFutanJogenGengakuAriFlag;
-    }
-
-    /*
-     * getbtnKyufuSeigenRireki
-     * @return btnKyufuSeigenRireki
-     */
-    @JsonProperty("btnKyufuSeigenRireki")
-    public Button getBtnKyufuSeigenRireki() {
-        return btnKyufuSeigenRireki;
-    }
-
-    /*
-     * setbtnKyufuSeigenRireki
-     * @param btnKyufuSeigenRireki btnKyufuSeigenRireki
-     */
-    @JsonProperty("btnKyufuSeigenRireki")
-    public void setBtnKyufuSeigenRireki(Button btnKyufuSeigenRireki) {
-        this.btnKyufuSeigenRireki = btnKyufuSeigenRireki;
     }
 
     /*

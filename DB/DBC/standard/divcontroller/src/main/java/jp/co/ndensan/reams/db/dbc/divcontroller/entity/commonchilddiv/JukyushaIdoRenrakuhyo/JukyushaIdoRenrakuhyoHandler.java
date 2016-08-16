@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.JukyushaIdoRenrakuhyo;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyo;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_GemmenShinseichuKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_HenkoShinseichuKubunCode;
@@ -21,16 +22,23 @@ import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_Shinsei
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_TeiseiKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_TokureiGengakuSochiTaisho;
 import jp.co.ndensan.reams.db.dbc.service.core.jukyushateiseirenrakuhyotoroku.JukyushaTeiseiRenrakuhyoToroku;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 受給者異動連絡票関連共有子Divのハンドラクラスです。
@@ -90,12 +98,15 @@ public class JukyushaIdoRenrakuhyoHandler {
     private static final RString 訂正モード = new RString("訂正モード");
     private static final RString 再発行モード = new RString("再発行モード");
     private static final RString 照会モード = new RString("照会モード");
+    private static final RString 居宅サービス_旧訪問通所 = new RString("居宅サービス（旧訪問通所）");
+    private static final RString 旧短期入所サービス = new RString("（旧短期入所サービス）");
+    private static final RString WIDTH = new RString("220");
 
     /**
      * コンストラクタです。
      *
      *
-     * @param div KaigoKyufuKokuhorenJohoTorikomiDiv
+     * @param div JukyushaIdoRenrakuhyoDiv
      */
     public JukyushaIdoRenrakuhyoHandler(JukyushaIdoRenrakuhyoDiv div) {
         this.div = div;
@@ -105,7 +116,7 @@ public class JukyushaIdoRenrakuhyoHandler {
      * コンストラクタです。
      *
      * @param div 画面DIV
-     * @return KaigoKyufuKokuhorenJohoTorikomiHandler
+     * @return JukyushaIdoRenrakuhyoHandler
      */
     public static JukyushaIdoRenrakuhyoHandler of(JukyushaIdoRenrakuhyoDiv div) {
         return new JukyushaIdoRenrakuhyoHandler(div);
@@ -119,11 +130,13 @@ public class JukyushaIdoRenrakuhyoHandler {
      * @param 被保険者番号 HihokenshaNo
      * @param 履歴番号 int
      * @param 論理削除フラグ RString
-     * @param 異動日 RDate
+     * @param 異動日 FlexibleDate
      */
     public void initialize(RString 処理モード, ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号,
             int 履歴番号, boolean 論理削除フラグ, FlexibleDate 異動日) {
         setDivModel(処理モード);
+        set支給限度基準額エリア項目名称(異動日);
+        div.setHihokenshaNo(DataPassingConverter.serialize(被保険者番号));
         JukyushaIdoRenrakuhyo 受給者異動情報 = JukyushaTeiseiRenrakuhyoToroku.createInstance().
                 getJukyushaIdoJoho(処理モード, 識別コード, 被保険者番号, 履歴番号, 論理削除フラグ, 異動日);
         if (受給者異動情報 == null) {
@@ -210,6 +223,17 @@ public class JukyushaIdoRenrakuhyoHandler {
             div.setMode_DisplayMode(JukyushaIdoRenrakuhyoDiv.DisplayMode.saihakko);
         } else if (照会モード.equals(処理モード)) {
             div.setMode_DisplayMode(JukyushaIdoRenrakuhyoDiv.DisplayMode.shokai);
+        }
+    }
+
+    private void set支給限度基準額エリア項目名称(FlexibleDate 異動日) {
+        FlexibleDate 制度改正施行日 = new FlexibleDate(DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_支給限度額一本化,
+                RDate.getNowDate(), SubGyomuCode.DBC介護給付).toString());
+        if (異動日 != null && 異動日.isBefore(制度改正施行日)) {
+            div.getShikyuGendoKijungakuPanel().getLblKyuHomonTsusho().setWidth(WIDTH);
+            div.getShikyuGendoKijungakuPanel().getLblKyuTankiNyusho().setWidth(WIDTH);
+            div.getShikyuGendoKijungakuPanel().getLblKyuHomonTsusho().setText(居宅サービス_旧訪問通所);
+            div.getShikyuGendoKijungakuPanel().getLblKyuTankiNyusho().setText(旧短期入所サービス);
         }
     }
 
@@ -318,9 +342,18 @@ public class JukyushaIdoRenrakuhyoHandler {
             div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().setValue(
                     受給者異動情報.get居宅介護支援事業所番号());
         }
-        //TODO
-//        JukyushaTeiseiRenrakuhyoToroku.createInstance().getSienJikyoshaName(受給者異動情報.get居宅介護支援事業所番号(), 自己作成KEY, FlexibleDate.MAX);
-        div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoName().setValue(null);
+        FlexibleDate 異動日Para;
+        if (受給者異動情報.get異動年月日() != null) {
+            異動日Para = 受給者異動情報.get異動年月日();
+        } else {
+            異動日Para = new FlexibleDate(RDate.getNowDate().toString());
+        }
+        AtenaMeisho 支援事業者名称 = JukyushaTeiseiRenrakuhyoToroku.createInstance().getSienJikyoshaName(
+                new JigyoshaNo(受給者異動情報.get居宅介護支援事業所番号()), 受給者異動情報.get居宅サービス計画作成区分コード(), 異動日Para);
+
+        if (支援事業者名称 != null) {
+            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoName().setValue(支援事業者名称.value());
+        }
         if (!星.equals(受給者異動情報.get居宅サービス計画適用開始年月日()) && 受給者異動情報.get居宅サービス計画適用開始年月日() != null) {
             div.getKyotakuServicePlanPanel().getTxtKyotakuServiceTekiyoYMD().setFromValue(
                     new RDate(受給者異動情報.get居宅サービス計画適用開始年月日().toString()));
@@ -577,6 +610,7 @@ public class JukyushaIdoRenrakuhyoHandler {
             div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().setToValue(
                     new RDate(受給者異動情報.get二次予防事業有効期間終了年月日().toString()));
         }
+        onClick_事業区分();
 
     }
 
@@ -584,5 +618,83 @@ public class JukyushaIdoRenrakuhyoHandler {
         div.getRojinHokenPanel().getTxtRojinHokenShichosonNo().setValue(受給者異動情報.get老人保健市町村番号());
         div.getRojinHokenPanel().getTxtRojinHokenJukyushaNo().setValue(受給者異動情報.get老人保健受給者番号());
         div.getRojinHokenPanel().getTxtKohiFutanshaNo().setValue(受給者異動情報.get公費負担者番号());
+    }
+
+    /**
+     * 「事業区分」操作制御のメソッドです。
+     *
+     */
+    public void onClick_事業区分() {
+        RString 事業区分Key = div.getNijiyoboJigyoPanel().getRadNijiyoboJigyoKubun().getSelectedKey();
+        if (該当KEY.equals(事業区分Key)) {
+            div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().setReadOnly(false);
+        } else {
+            div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().setReadOnly(true);
+        }
+
+    }
+
+    /**
+     * 異動日focus outのメソッドです。
+     *
+     */
+    public void onBlur_異動日() {
+        RString 保険者番号 = div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtHiHokenshaNo().getValue();
+        FlexibleDate 異動日 = div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtIdoYMD().getValue();
+        if (異動日 != null && !異動日.toString().isEmpty()) {
+            List<ShoKisaiHokenshaNo> 証記載保険者番号と広域保険者番号
+                    = JukyushaTeiseiRenrakuhyoToroku.createInstance().getShokisaiNotoKouikiNo(new HihokenshaNo(保険者番号), 異動日);
+            div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtShoKisaiHokenshaNo().setValue(証記載保険者番号と広域保険者番号.get(0).value());
+        }
+
+    }
+
+    /**
+     * 支援事業者番号focus outのメソッドです。
+     *
+     */
+    public void onBlur_支援事業者番号() {
+        RString 計画作成区分Key = div.getKyotakuServicePlanPanel().getRadKyotakuServiceSakuseiKubun().getSelectedKey();
+        if (計画作成区分未選択KEY.equals(計画作成区分Key)) {
+            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().setReadOnly(true);
+            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoName().setReadOnly(true);
+            div.getKyotakuServicePlanPanel().getTxtKyotakuServiceTekiyoYMD().setReadOnly(true);
+            div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().setReadOnly(true);
+        } else if (自己作成KEY.equals(計画作成区分Key)) {
+            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().setReadOnly(true);
+            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoName().setReadOnly(true);
+            div.getKyotakuServicePlanPanel().getTxtKyotakuServiceTekiyoYMD().setReadOnly(false);
+            div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().setReadOnly(false);
+        } else if (居宅介護支援事業所作成KEY.equals(計画作成区分Key)
+                || 介護予防支援事業所作成KEY.equals(計画作成区分Key)) {
+            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().setReadOnly(false);
+            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoName().setReadOnly(false);
+            div.getKyotakuServicePlanPanel().getTxtKyotakuServiceTekiyoYMD().setReadOnly(false);
+            div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().setReadOnly(false);
+            RString 支援事業者番号 = div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().getValue();
+            RString 計画作成区分;
+            if (居宅介護支援事業所作成KEY.equals(計画作成区分Key)) {
+                計画作成区分 = JukyushaIF_KeikakuSakuseiKubunCode.居宅介護支援事業所作成.getコード();
+            } else {
+                計画作成区分 = JukyushaIF_KeikakuSakuseiKubunCode.介護予防支援事業所_地域包括支援センター作成.getコード();
+            }
+            FlexibleDate 異動日 = div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtIdoYMD().getValue();
+            if (異動日 == null) {
+                異動日 = new FlexibleDate(RDate.getNowDate().toString());
+            }
+            AtenaMeisho 支援事業者名称
+                    = JukyushaTeiseiRenrakuhyoToroku.createInstance().getSienJikyoshaName(new JigyoshaNo(支援事業者番号), 計画作成区分, 異動日);
+            if (支援事業者名称 != null) {
+                div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoName().setValue(支援事業者名称.value());
+            }
+        }
+
+    }
+
+    /**
+     * 住所地特例の保険者番号focus outのメソッドです。
+     *
+     */
+    public void onBlur_保険者番号() {
     }
 }

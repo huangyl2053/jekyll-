@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class YokaigoNinteiPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -26,7 +26,7 @@ public class YokaigoNinteiPanelDiv extends Panel {
     @JsonProperty("radShinseiShubetsu")
     private RadioButton radShinseiShubetsu;
     @JsonProperty("btnYokaigoninteiRireki")
-    private Button btnYokaigoninteiRireki;
+    private ButtonDialog btnYokaigoninteiRireki;
     @JsonProperty("ddlYokaigoJotaiKubun")
     private DropDownList ddlYokaigoJotaiKubun;
     @JsonProperty("radHenkoShinseichuKubun")
@@ -83,7 +83,7 @@ public class YokaigoNinteiPanelDiv extends Panel {
      * @return btnYokaigoninteiRireki
      */
     @JsonProperty("btnYokaigoninteiRireki")
-    public Button getBtnYokaigoninteiRireki() {
+    public ButtonDialog getBtnYokaigoninteiRireki() {
         return btnYokaigoninteiRireki;
     }
 
@@ -92,7 +92,7 @@ public class YokaigoNinteiPanelDiv extends Panel {
      * @param btnYokaigoninteiRireki btnYokaigoninteiRireki
      */
     @JsonProperty("btnYokaigoninteiRireki")
-    public void setBtnYokaigoninteiRireki(Button btnYokaigoninteiRireki) {
+    public void setBtnYokaigoninteiRireki(ButtonDialog btnYokaigoninteiRireki) {
         this.btnYokaigoninteiRireki = btnYokaigoninteiRireki;
     }
 

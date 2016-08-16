@@ -14,17 +14,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class GemmenGengakuPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("btnGemmenGengakuRireki")
+    private ButtonDialog btnGemmenGengakuRireki;
     @JsonProperty("radGemmenShinseichuKubun")
     private RadioButton radGemmenShinseichuKubun;
-    @JsonProperty("btnGemmenGengakuRireki")
-    private Button btnGemmenGengakuRireki;
     @JsonProperty("JukyushaIdoRenrakuhyoGemmenGengakuSub")
     private JukyushaIdoRenrakuhyoGemmenGengakuSubDiv JukyushaIdoRenrakuhyoGemmenGengakuSub;
     @JsonProperty("JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi")
@@ -36,6 +36,24 @@ public class GemmenGengakuPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getbtnGemmenGengakuRireki
+     * @return btnGemmenGengakuRireki
+     */
+    @JsonProperty("btnGemmenGengakuRireki")
+    public ButtonDialog getBtnGemmenGengakuRireki() {
+        return btnGemmenGengakuRireki;
+    }
+
+    /*
+     * setbtnGemmenGengakuRireki
+     * @param btnGemmenGengakuRireki btnGemmenGengakuRireki
+     */
+    @JsonProperty("btnGemmenGengakuRireki")
+    public void setBtnGemmenGengakuRireki(ButtonDialog btnGemmenGengakuRireki) {
+        this.btnGemmenGengakuRireki = btnGemmenGengakuRireki;
+    }
+
     /*
      * getradGemmenShinseichuKubun
      * @return radGemmenShinseichuKubun
@@ -52,24 +70,6 @@ public class GemmenGengakuPanelDiv extends Panel {
     @JsonProperty("radGemmenShinseichuKubun")
     public void setRadGemmenShinseichuKubun(RadioButton radGemmenShinseichuKubun) {
         this.radGemmenShinseichuKubun = radGemmenShinseichuKubun;
-    }
-
-    /*
-     * getbtnGemmenGengakuRireki
-     * @return btnGemmenGengakuRireki
-     */
-    @JsonProperty("btnGemmenGengakuRireki")
-    public Button getBtnGemmenGengakuRireki() {
-        return btnGemmenGengakuRireki;
-    }
-
-    /*
-     * setbtnGemmenGengakuRireki
-     * @param btnGemmenGengakuRireki btnGemmenGengakuRireki
-     */
-    @JsonProperty("btnGemmenGengakuRireki")
-    public void setBtnGemmenGengakuRireki(Button btnGemmenGengakuRireki) {
-        this.btnGemmenGengakuRireki = btnGemmenGengakuRireki;
     }
 
     /*
