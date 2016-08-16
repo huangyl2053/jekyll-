@@ -29,11 +29,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class KyufuhigenmenjyouhouRegisterManager {
 
-    private final MapperProvider mapperProvider;
     private static final RString REPLACED_MESSAGE = new RString("parameter");
     private static final RString STATE_INSERT = new RString("insert");
     private static final RString STATE_UPDATE = new RString("update");
     private static final RString STATE_DELETE = new RString("delete");
+    private final MapperProvider mapperProvider;
 
     /**
      * コンストラクタです。
@@ -68,7 +68,7 @@ public class KyufuhigenmenjyouhouRegisterManager {
      * @return SearchResult<KyufuhigenmenjyouhouRegisterResult> 減免補正情報
      */
     @Transaction
-    public SearchResult<KyufuhigenmenjyouhouRegisterResult> getHihokenshaDaichoSakusei(KyufuhigenmenjyouhouregisterParameter parameter) {
+    public SearchResult<KyufuhigenmenjyouhouRegisterResult> getGenmenJyouhou(KyufuhigenmenjyouhouregisterParameter parameter) {
         requireNonNull(parameter, UrSystemErrorMessages.値がnull.getReplacedMessage(REPLACED_MESSAGE.toString()));
         Ikyufuhigenmenjyouhouregister mapper = mapperProvider.create(Ikyufuhigenmenjyouhouregister.class);
         List<KyufuhigenmenjyouhouRegisterEntity> entityList = mapper.getGenmenJyouhou(parameter);
