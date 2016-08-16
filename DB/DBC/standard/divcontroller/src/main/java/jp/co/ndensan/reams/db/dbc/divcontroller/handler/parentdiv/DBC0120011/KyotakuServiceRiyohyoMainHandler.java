@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.kyotakuserviceriyohyomain.KyotakuServiceRiyohyoMainResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kyotakuserviceriyohyomain.TaishoshaIchiranResult;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.KyufukanrihyoSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0120011.KyotakuServiceRiyohyoMainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0120011.dgKyotakuServiceRirekiIchiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0120011.dgRiyoNentstsuIchiran_Row;
@@ -152,9 +153,9 @@ public class KyotakuServiceRiyohyoMainHandler {
             div.getTodokedesha().getTxtTodokedeshaTelNo().setDomain(居宅給付計画届出.get届出者電話番号());
         }
         if (居宅給付計画届出.get届出者郵便番号() == null) {
-            div.getTodokedesha().getTxtYubinNo().clearValue();
+            div.getTodokedesha().getTxtTodokedeshaYubinNo().clearValue();
         } else {
-            div.getTodokedesha().getTxtYubinNo().setValue(居宅給付計画届出.get届出者郵便番号());
+            div.getTodokedesha().getTxtTodokedeshaYubinNo().setValue(居宅給付計画届出.get届出者郵便番号());
         }
         if (居宅給付計画届出.get届出者住所() == null) {
             div.getTodokedesha().getTxtTodokedeshaJusho().clearValue();
@@ -169,7 +170,7 @@ public class KyotakuServiceRiyohyoMainHandler {
         for (TaishoshaIchiranResult result : 対象情報一覧) {
             dgRiyoNentstsuIchiran_Row row = new dgRiyoNentstsuIchiran_Row();
             row.getRiyoYM().setValue(new RDate(result.get利用年月().toString()));
-            row.setKoshinKubun(result.get更新区分());
+            row.setKoshinKubun(KyufukanrihyoSakuseiKubun.toValue(result.get更新区分()).get名称());
             row.getKoshinYMD().setValue(DateConverter.flexibleDateToRDate(result.get更新年月日()));
             row.getSofuYM().setValue(result.get送付年月() == null ? null
                     : new RDate(result.get送付年月().toString()));

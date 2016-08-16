@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0120011;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0260013;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -6,16 +6,16 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0120011;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoInfo.IServiceRiyohyoInfoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoInfo.ServiceRiyohyoInfoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyodoJukyushaIdoRenrakuhyo.KyodoJukyushaIdoRenrakuhyo.IKyodoJukyushaIdoRenrakuhyoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyodoJukyushaIdoRenrakuhyo.KyodoJukyushaIdoRenrakuhyo.KyodoJukyushaIdoRenrakuhyoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KyotakuServiceRiyohyo のクラスファイル
+ * KyodoJukyusyaIdoRenrakuhyoDetail のクラスファイル
  *
- * @reamsid_L DBC-1930-030 huzongcheng
+ * @reamsid_L DBC-1952-010 liuxiaoyu
  */
-public class KyotakuServiceRiyohyoDiv extends Panel {
+public class KyodoJukyusyaIdoRenrakuhyoDetailDiv extends Panel {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
@@ -24,8 +24,8 @@ public class KyotakuServiceRiyohyoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdServiceRiyohyoInfo")
-    private ServiceRiyohyoInfoDiv ccdServiceRiyohyoInfo;
+    @JsonProperty("ccdKyodoJukyusyaIdoRenrakuhyo")
+    private KyodoJukyushaIdoRenrakuhyoDiv ccdKyodoJukyusyaIdoRenrakuhyo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -34,12 +34,12 @@ public class KyotakuServiceRiyohyoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdServiceRiyohyoInfo
-     * @return ccdServiceRiyohyoInfo
+     * getccdKyodoJukyusyaIdoRenrakuhyo
+     * @return ccdKyodoJukyusyaIdoRenrakuhyo
      */
-    @JsonProperty("ccdServiceRiyohyoInfo")
-    public IServiceRiyohyoInfoDiv getCcdServiceRiyohyoInfo() {
-        return ccdServiceRiyohyoInfo;
+    @JsonProperty("ccdKyodoJukyusyaIdoRenrakuhyo")
+    public IKyodoJukyushaIdoRenrakuhyoDiv getCcdKyodoJukyusyaIdoRenrakuhyo() {
+        return ccdKyodoJukyusyaIdoRenrakuhyo;
     }
 
     // </editor-fold>

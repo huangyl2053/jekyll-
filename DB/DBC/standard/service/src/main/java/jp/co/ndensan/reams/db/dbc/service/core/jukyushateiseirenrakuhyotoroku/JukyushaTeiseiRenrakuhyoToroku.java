@@ -141,8 +141,10 @@ public class JukyushaTeiseiRenrakuhyoToroku {
      *
      * @param 被保険者番号 HihokenshaNo
      * @param 異動日 FlexibleDate return List<ShoKisaiHokenshaNo>
+     *
+     * @return List<ShoKisaiHokenshaNo>
      */
-    private List<ShoKisaiHokenshaNo> getShokisaiNotoKouikiNo(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
+    public List<ShoKisaiHokenshaNo> getShokisaiNotoKouikiNo(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         Code 導入形態コード = 市町村セキュリティ情報.get導入形態コード();
         ShoKisaiHokenshaNo 証記載保険者番号 = null;
@@ -178,6 +180,8 @@ public class JukyushaTeiseiRenrakuhyoToroku {
      *
      * @param 被保険者番号 HihokenshaNo
      * @param 異動日 FlexibleDate
+     *
+     * @return DbT1001HihokenshaDaichoEntity
      */
     private DbT1001HihokenshaDaichoEntity get市町村コードと広住例措置元市町村コード(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
         DbT1001HihokenshaDaichoEntity dbt1001Entity = dbt1001Dac.selectByHihokenshaNo(被保険者番号);
@@ -206,7 +210,7 @@ public class JukyushaTeiseiRenrakuhyoToroku {
      * @param 計画作成区分 RString
      * @param 基準日 FlexibleDate
      *
-     * @return RString
+     * @return AtenaMeisho
      */
     public AtenaMeisho getSienJikyoshaName(JigyoshaNo 支援事業者番号, RString 計画作成区分, FlexibleDate 基準日) {
         if (支援事業者番号 == null || 支援事業者番号.isEmpty()) {
