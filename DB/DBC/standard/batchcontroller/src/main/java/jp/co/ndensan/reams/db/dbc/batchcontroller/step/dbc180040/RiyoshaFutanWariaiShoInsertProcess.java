@@ -546,7 +546,7 @@ public class RiyoshaFutanWariaiShoInsertProcess extends BatchProcessBase<Riyosha
         item.setTanpyoHakkoUmuFlag(false);
         item.setHakkoShoriTimestamp(new YMDHMS(parameter.getバッチ起動時処理日時()));
         item.setLogicalDeletedFlag(false);
-        shoKofuKaishuWriter.update(item);
+        shoKofuKaishuWriter.insert(item);
     }
 
     private RString get交付事由(RiyoshaFutanwariaishoTempEntity entity) {
