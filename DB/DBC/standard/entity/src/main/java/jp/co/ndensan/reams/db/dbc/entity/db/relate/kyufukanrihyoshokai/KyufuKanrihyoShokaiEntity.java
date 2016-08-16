@@ -66,4 +66,5 @@ public class KyufuKanrihyoShokaiEntity {
     private FlexibleDate 当初登録年月日;
     private FlexibleYearMonth 取込年月;
     private RString 氏名;
+    private RString サービス事業者名;
 }

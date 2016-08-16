@@ -49,7 +49,7 @@ public class SogojigyohiSeikyugakuTsuchishoKeikaSochiBodyEditor implements ISogo
         source.listMeisai_8 = doカンマ編集(帳票出力対象データ.get再審査_過誤_調整額());
         source.listMeisai_9 = doカンマ編集(帳票出力対象データ.get介護給付_総合事業費());
         source.listMeisai_10 = doカンマ編集(帳票出力対象データ.get利用者負担額());
-        if (!帳票出力対象データ.get合計_帳票レコード種別().isEmpty()) {
+        if (!RString.isNullOrEmpty(帳票出力対象データ.get合計_帳票レコード種別())) {
             source.gokeiTsujoKensu = doカンマ編集(帳票出力対象データ.get合計_通常分_件数());
             source.gokeiTsujoTanisu = doカンマ編集(帳票出力対象データ.get合計_通常分_単位数());
             source.gokeiTsujoKingaku = doカンマ編集(帳票出力対象データ.get合計_通常分_金額());
@@ -59,7 +59,7 @@ public class SogojigyohiSeikyugakuTsuchishoKeikaSochiBodyEditor implements ISogo
             source.gokeiSogojigyohi = doカンマ編集(帳票出力対象データ.get合計_介護給付_総合事業費());
             source.gokeiRiyoshaFutangaku = doカンマ編集(帳票出力対象データ.get合計_利用者負担額());
         }
-        if (!帳票出力対象データ.get累計_帳票レコード種別().isEmpty()) {
+        if (!RString.isNullOrEmpty(帳票出力対象データ.get累計_帳票レコード種別())) {
             source.ruikeiTsujoKensu = doカンマ編集(帳票出力対象データ.get累計_通常分_件数());
             source.ruikeiTsujoTanisu = doカンマ編集(帳票出力対象データ.get累計_通常分_単位数());
             source.ruikeiTsujoKingaku = doカンマ編集(帳票出力対象データ.get累計_通常分_金額());
@@ -69,7 +69,7 @@ public class SogojigyohiSeikyugakuTsuchishoKeikaSochiBodyEditor implements ISogo
             source.ruikeiSogojigyohi = doカンマ編集(帳票出力対象データ.get累計_介護給付_総合事業費());
             source.ruikeiRiyoshaFutangaku = doカンマ編集(帳票出力対象データ.get累計_利用者負担額());
         }
-        if (!帳票出力対象データ.get手数料_帳票レコード種別().isEmpty()) {
+        if (!RString.isNullOrEmpty(帳票出力対象データ.get手数料_帳票レコード種別())) {
             source.tesuryoSeikyugaku = doカンマ編集(帳票出力対象データ.get手数料_請求額());
             source.tesuryoRuikeigaku = doカンマ編集(帳票出力対象データ.get手数料_累計請求額());
         }

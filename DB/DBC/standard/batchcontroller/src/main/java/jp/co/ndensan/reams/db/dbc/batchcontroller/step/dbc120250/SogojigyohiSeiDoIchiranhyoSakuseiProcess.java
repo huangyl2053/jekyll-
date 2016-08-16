@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -69,6 +70,7 @@ public class SogojigyohiSeiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<
     private CsvWriter<SogojigyohiSeiCsvEntity> sogojigyohiSeiCsvEntityWriter;
     List<RString> 改頁項目リスト;
     private int index = 0;
+    private static final RString SAKUSEI = new RString("作成");
 
     @Override
     protected void initialize() {
@@ -101,8 +103,8 @@ public class SogojigyohiSeiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<
     @Override
     protected void beforeExecute() {
         改頁項目リスト.add(new RString(SogojigyohiSeikyugakuTsuchishoKeikaSochiSource.DBC200068SogojigyohiSeikyugakuFields.shoKisaiHokenshaNo.name()));
-        改頁項目リスト.add(new RString(SogojigyohiSeikyugakuTsuchishoKeikaSochiSource.DBC200068SogojigyohiSeikyugakuFields.kanName.name()));
-        改頁項目リスト.add(new RString(SogojigyohiSeikyugakuTsuchishoKeikaSochiSource.DBC200068SogojigyohiSeikyugakuFields.kouName.name()));
+        改頁項目リスト.add(new RString(SogojigyohiSeikyugakuTsuchishoKeikaSochiSource.DBC200068SogojigyohiSeikyugakuFields.kanCode.name()));
+        改頁項目リスト.add(new RString(SogojigyohiSeikyugakuTsuchishoKeikaSochiSource.DBC200068SogojigyohiSeikyugakuFields.kouCode.name()));
     }
 
     @Override
@@ -129,21 +131,20 @@ public class SogojigyohiSeiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<
             RDateTime 作成日時) {
         SogojigyohiSeiCsvEntity output = new SogojigyohiSeiCsvEntity();
         if (index == 0) {
-            output.set審査年月(entity.get審査年月().wareki()
-                    .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            output.set審査年月(パターン56(entity.get審査年月()));
             RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                     .fillType(FillType.BLANK).toDateString();
             RString 作成時 = 作成日時.getTime()
-                    .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE);
+                    .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
             output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時));
+            output.set国保連合会名(entity.get国保連合会名());
             index++;
         } else {
             output.set審査年月(RString.EMPTY);
             output.set作成日時(RString.EMPTY);
+            output.set国保連合会名(RString.EMPTY);
         }
-        output.set国保連合会名(entity.get国保連合会名());
         output.set保険者番号(getColumnValue(entity.get保険者番号()));
         output.set保険者名(entity.get保険者名());
         output.set証記載保険者番号(getColumnValue(entity.get証記載保険者番号()));
@@ -170,7 +171,7 @@ public class SogojigyohiSeiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<
         output.set過誤_調整額(doカンマ編集(entity.get再審査_過誤_調整額()));
         output.set総合事業費(doカンマ編集(entity.get介護給付_総合事業費()));
         output.set利用者負担額(doカンマ編集(entity.get利用者負担額()));
-        if (!entity.get合計_帳票レコード種別().isEmpty()) {
+        if (!RString.isNullOrEmpty(entity.get合計_帳票レコード種別())) {
             output.set合計_通常分_件数(doカンマ編集(entity.get合計_通常分_件数()));
             output.set合計_通常分_単位数(doカンマ編集(entity.get合計_通常分_単位数()));
             output.set合計_通常分_金額(doカンマ編集(entity.get合計_通常分_金額()));
@@ -180,7 +181,7 @@ public class SogojigyohiSeiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<
             output.set合計_総合事業費(doカンマ編集(entity.get合計_介護給付_総合事業費()));
             output.set合計_利用者負担額(doカンマ編集(entity.get合計_利用者負担額()));
         }
-        if (!entity.get累計_帳票レコード種別().isEmpty()) {
+        if (!RString.isNullOrEmpty(entity.get累計_帳票レコード種別())) {
             output.set累計_通常分_件数(doカンマ編集(entity.get累計_通常分_件数()));
             output.set累計_通常分_単位数(doカンマ編集(entity.get累計_通常分_単位数()));
             output.set累計_通常分_金額(doカンマ編集(entity.get累計_通常分_金額()));
@@ -190,7 +191,7 @@ public class SogojigyohiSeiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<
             output.set累計_総合事業費(doカンマ編集(entity.get累計_介護給付_総合事業費()));
             output.set累計_利用者負担額(doカンマ編集(entity.get累計_利用者負担額()));
         }
-        if (!entity.get手数料_帳票レコード種別().isEmpty()) {
+        if (!RString.isNullOrEmpty(entity.get手数料_帳票レコード種別())) {
             output.set手数料_請求額(doカンマ編集(entity.get手数料_請求額()));
             output.set手数料_累計請求額(doカンマ編集(entity.get手数料_累計請求額()));
         }
@@ -209,5 +210,13 @@ public class SogojigyohiSeiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<
             return entity.getColumnValue();
         }
         return RString.EMPTY;
+    }
+
+    private RString パターン56(FlexibleYearMonth 年月) {
+        if (null == 年月) {
+            return RString.EMPTY;
+        }
+        return 年月.wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 }

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmen.shinseish
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmen.shinseisho.hakko.FutanGendogakuMybatisParameter;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.futangendogakuninteishinseishohakkoichiran.FutanGendogakuNinteiShinseishoHakkoIchiran;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmen.shinseisho.hakko.FutanGendogakuNinteiShinseishoHakkoIchiranEntity;
 
 /**
  * 負担限度額認定申請書発行一覧表発行_出力対象者情報を取得のMapperクラスです。
@@ -22,5 +22,5 @@ public interface IFutanGengaokuNinteiShinseishoHakkoIchiranSakuseiMapper {
      * @param parameter パラメータク
      * @return List<FutanGendogakuNinteiShinseishoHakkoIchiran>
      */
-    List<FutanGendogakuNinteiShinseishoHakkoIchiran> get出力対象者情報(FutanGendogakuMybatisParameter parameter);
+    List<FutanGendogakuNinteiShinseishoHakkoIchiranEntity> get出力対象者情報(FutanGendogakuMybatisParameter parameter);
 }

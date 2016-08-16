@@ -24,7 +24,7 @@ public class SogojigyohiSeikyugakuTsuchishoInReport extends Report<SogojigyohiSe
     /**
      * コンストラクタです
      *
-     * @param 帳票出力対象データリスト DbWT1511SeikyugakuTsuchishoTempEntity
+     * @param 帳票出力対象データ DbWT1511SeikyugakuTsuchishoTempEntity
      * @param 作成日時 RDateTime
      */
     public SogojigyohiSeikyugakuTsuchishoInReport(
