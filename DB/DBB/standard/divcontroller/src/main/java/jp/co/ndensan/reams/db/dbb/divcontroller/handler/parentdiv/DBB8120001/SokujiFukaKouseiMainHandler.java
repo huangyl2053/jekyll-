@@ -1532,6 +1532,9 @@ public class SokujiFukaKouseiMainHandler {
         RYearMonth 調定年月From = 調定年月.minusMonth(NUM_1);
         RYearMonth 調定年月To = new RYearMonth(調定年月.getYear().plusYear(NUM_1).toDateString().concat(三月));
         RString コード_月 = 月.getコード();
+        if (Integer.valueOf(コード_月.toString()) < NUM_4 || Integer.valueOf(コード_月.toString()) > NUM_12) {
+            年度 = 年度.plusYear(NUM_1);
+        }
         if (Tsuki.翌年度4月.compareTo(月) == 0
                 || Tsuki.翌年度5月.compareTo(月) == 0) {
             コード_月 = コード_月.replace(ONE, ZERO);
