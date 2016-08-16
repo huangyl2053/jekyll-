@@ -84,6 +84,10 @@ public class SogojigyohiSeikyugakuTsuchishoKeikaSochiSource implements IReportSo
     public RString tesuryoSeikyugaku;
     @ReportItem(name = "tesuryoRuikeigaku", length = 15, order = 36)
     public RString tesuryoRuikeigaku;
+    @ReportItem(name = "kanCode", length = 15, order = 37)
+    public RString kanCode;
+    @ReportItem(name = "kouCode", length = 15, order = 38)
+    public RString kouCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -131,6 +135,8 @@ public class SogojigyohiSeikyugakuTsuchishoKeikaSochiSource implements IReportSo
         ruikeiSogojigyohi,
         ruikeiRiyoshaFutangaku,
         tesuryoSeikyugaku,
-        tesuryoRuikeigaku
+        tesuryoRuikeigaku,
+        kanCode,
+        kouCode
     }
 }
