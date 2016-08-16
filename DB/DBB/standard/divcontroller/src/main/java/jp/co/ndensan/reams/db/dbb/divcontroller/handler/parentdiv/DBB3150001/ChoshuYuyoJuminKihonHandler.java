@@ -120,7 +120,7 @@ public class ChoshuYuyoJuminKihonHandler {
      */
     public Fuka get賦課基本() {
         IFukaRirekiAllDiv 全賦課履歴 = div.getChoshuYuyoFukaRirekiAll().getDghukainfo();
-        return 全賦課履歴.get賦課履歴().get賦課履歴All().toList().get(0);
+        return 全賦課履歴.get賦課履歴().get賦課履歴All().toList().get(ゼロ_定値);
     }
 
     /**
@@ -144,8 +144,8 @@ public class ChoshuYuyoJuminKihonHandler {
         RString 徴収猶予状態区分;
         RString 状況;
         if (徴収猶予の情報 == null || 徴収猶予の情報.getChoshuYuyoList().isEmpty()
-                || 徴収猶予の情報.getChoshuYuyoList().get(0).getKibetsuChoshuYuyoList() == null
-                || 徴収猶予の情報.getChoshuYuyoList().get(0).getKibetsuChoshuYuyoList().isEmpty()) {
+                || 徴収猶予の情報.getChoshuYuyoList().get(ゼロ_定値).getKibetsuChoshuYuyoList() == null
+                || 徴収猶予の情報.getChoshuYuyoList().get(ゼロ_定値).getKibetsuChoshuYuyoList().isEmpty()) {
             状況 = 状況_新規;
         } else {
             徴収猶予状態区分 = 徴収猶予の情報.get徴収猶予状態区分();
@@ -202,7 +202,7 @@ public class ChoshuYuyoJuminKihonHandler {
             申請情報パネル.getTxtFukaNendo().setValue(new RDate(徴収猶予の情報.get賦課年度().toString()));
             List<ChoshuYuyo> 介護賦課徴収猶予List = 徴収猶予の情報.getChoshuYuyoList();
             if (介護賦課徴収猶予List != null && !介護賦課徴収猶予List.isEmpty()) {
-                return set申請情報パネル(介護賦課徴収猶予List.get(0), 申請情報パネル);
+                return set申請情報パネル(介護賦課徴収猶予List.get(ゼロ_定値), 申請情報パネル);
             }
         }
         return null;
@@ -232,7 +232,7 @@ public class ChoshuYuyoJuminKihonHandler {
             決定情報パネル.getTxtKetteiYMD().setValue(new RDate(徴収猶予の情報.get徴収猶予決定年月日().toString()));
             List<ChoshuYuyo> 介護賦課徴収猶予List = 徴収猶予の情報.getChoshuYuyoList();
             if (介護賦課徴収猶予List != null && !介護賦課徴収猶予List.isEmpty()) {
-                set決定情報パネル(介護賦課徴収猶予List.get(0), 決定情報パネル);
+                set決定情報パネル(介護賦課徴収猶予List.get(ゼロ_定値), 決定情報パネル);
             }
         }
     }
@@ -566,7 +566,7 @@ public class ChoshuYuyoJuminKihonHandler {
     public ChoshuYuyoJoho onClick_選択ボタン() {
         IFukaRirekiAllDiv 全賦課履歴 = div.getChoshuYuyoFukaRirekiAll().getDghukainfo();
         IItemList<Fuka> 全賦課履歴データ = 全賦課履歴.get賦課履歴().get賦課履歴All();
-        Fuka 賦課基本 = 全賦課履歴データ.toList().get(0);
+        Fuka 賦課基本 = 全賦課履歴データ.toList().get(ゼロ_定値);
         ChoshuYuyoJoho 徴収猶予の情報 = KaigoFukaChoshuYuyo.createInstance()
                 .getJokyo(賦課基本.get調定年度(), 賦課基本.get賦課年度(), 賦課基本.get通知書番号());
         return 徴収猶予の情報;
@@ -711,7 +711,7 @@ public class ChoshuYuyoJuminKihonHandler {
         List<ChoshuYuyo> 介護賦課徴収猶予List = 徴収猶予の情報.getChoshuYuyoList();
         ShinseiJohoDiv 申請情報パネル = div.getChoshuYuyoMain().getShinseiJoho();
         if (介護賦課徴収猶予List != null && !介護賦課徴収猶予List.isEmpty()) {
-            ChoshuYuyo 介護賦課徴収猶予 = 介護賦課徴収猶予List.get(0);
+            ChoshuYuyo 介護賦課徴収猶予 = 介護賦課徴収猶予List.get(ゼロ_定値);
             boolean flag1 = checkDate(介護賦課徴収猶予.get徴収猶予申請年月日(), 申請情報パネル.getTxtShinseiYMD().getValue());
             boolean flag2 = checkRString(CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, 保険料徴収猶予種類_コード種別,
                     介護賦課徴収猶予.get徴収猶予種類コード(), FlexibleDate.getNowDate()), 申請情報パネル.getTxtYuyoShurui().getValue());
@@ -735,7 +735,7 @@ public class ChoshuYuyoJuminKihonHandler {
         boolean flag2;
         boolean flag3;
         if (介護賦課徴収猶予List != null && !介護賦課徴収猶予List.isEmpty()) {
-            ChoshuYuyo 介護賦課徴収猶予 = 介護賦課徴収猶予List.get(0);
+            ChoshuYuyo 介護賦課徴収猶予 = 介護賦課徴収猶予List.get(ゼロ_定値);
             flag1 = checkDate(介護賦課徴収猶予.get徴収猶予決定年月日(), 決定情報パネル.getTxtKetteiYMD().getValue());
             RString 決定区分 = 決定情報パネル.getRadKetteiKubun().getSelectedValue();
             if (承認.equals(決定区分)) {
@@ -954,7 +954,7 @@ public class ChoshuYuyoJuminKihonHandler {
     }
 
     /**
-     * 画面の入力チェック
+     * 画面の入力チェック必要性判断です。
      */
     public void setRequired() {
         div.getChoshuYuyoMain().getTorikeshiJoho().getTxtTorikeshiYMD().setRequired(false);
