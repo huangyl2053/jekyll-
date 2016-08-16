@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagoketteiin.SogojigyohiKagoKetteiInReport;
-import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagoketteiin.SogojigyohiKagoKetteInOutPutOrder;
 import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagoketteiin.SogojigyohiKagoKetteInPageBreak;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -22,7 +21,6 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohikagoketteiin.S
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
@@ -74,11 +72,8 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
     private int 連番;
     private IOutputOrder 出力順;
     private KohifutanshaDoIchiranhyoSakuseiProcessParameter parameter;
-    private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3060.\"hdrShoHokenshaNo\" ASC ");
-    private static final RString キー_出力順 = new RString("出力順");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
     private static final RString コンマ = new RString(",");
-    private static final Map<String, Object> mybatisParameter = new HashMap<>();
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
@@ -122,21 +117,24 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
                     .replace(実行不可MESSAGE.toString()).toString());
         }
-        RString 出力順str = MyBatisOrderByClauseCreator.create(SogojigyohiKagoKetteInOutPutOrder.class, 出力順);
-
-        if (RString.isNullOrEmpty(出力順str)) {
-            出力順str = デフォルト出力順;
-        } else {
-            List<RString> 出力順BODY = 出力順str.split(コンマ.toString());
-            出力順str = デフォルト出力順;
-            if (出力順BODY.size() > 1) {
-                for (int i = 1; i < 出力順BODY.size(); i++) {
-                    出力順str = 出力順str.concat(コンマ).concat(出力順BODY.get(i));
+        int index = 0;
+        if (出力順 != null) {
+            for (ISetSortItem item : 出力順.get設定項目リスト()) {
+                if (index == INDEX_1) {
+                    出力順Map.put(KEY_並び順の２件目, item.get項目名());
+                } else if (index == INDEX_2) {
+                    出力順Map.put(KEY_並び順の３件目, item.get項目名());
+                } else if (index == INDEX_3) {
+                    出力順Map.put(KEY_並び順の４件目, item.get項目名());
+                } else if (index == INDEX_4) {
+                    出力順Map.put(KEY_並び順の５件目, item.get項目名());
+                } else if (index == INDEX_5) {
+                    出力順Map.put(KEY_並び順の６件目, item.get項目名());
                 }
+                index = index + 1;
             }
         }
 
-        mybatisParameter.put(キー_出力順.toString(), 出力順str);
     }
 
     @Override
@@ -173,30 +171,17 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
 
     @Override
     protected void usualProcess(SogojigyohiKagoKetteiInEntity entity) {
-        int i = 0;
-        if (出力順 != null) {
-            for (ISetSortItem item : 出力順.get設定項目リスト()) {
-                if (i == INDEX_1) {
-                    出力順Map.put(KEY_並び順の２件目, item.get項目名());
-                } else if (i == INDEX_2) {
-                    出力順Map.put(KEY_並び順の３件目, item.get項目名());
-                } else if (i == INDEX_3) {
-                    出力順Map.put(KEY_並び順の４件目, item.get項目名());
-                } else if (i == INDEX_4) {
-                    出力順Map.put(KEY_並び順の５件目, item.get項目名());
-                } else if (i == INDEX_5) {
-                    出力順Map.put(KEY_並び順の６件目, item.get項目名());
-                }
-                i = i + 1;
-            }
-        }
         boolean 集計Flag = false;
         ShoKisaiHokenshaNo this証記載保険者番号 = entity.get証記載保険者番号();
         if (証記載保険者番号 != null && !証記載保険者番号.equals(this証記載保険者番号)) {
             集計Flag = true;
         }
         証記載保険者番号 = this証記載保険者番号;
-        SogojigyohiKagoKetteiInReport report = new SogojigyohiKagoKetteiInReport(entity, 出力順Map, parameter.get処理年月(), parameter.getシステム日付(), 連番, 集計Flag);
+        if (集計Flag == true) {
+            SogojigyohiKagoKetteiInReport report = new SogojigyohiKagoKetteiInReport(lastEntity, 出力順Map, parameter.get処理年月(), parameter.getシステム日付(), 連番, true);
+            report.writeBy(reportSourceWriter);
+        }
+        SogojigyohiKagoKetteiInReport report = new SogojigyohiKagoKetteiInReport(entity, 出力順Map, parameter.get処理年月(), parameter.getシステム日付(), 連番, false);
         report.writeBy(reportSourceWriter);
         SogojigyohiKagoKetteiInCsvEntity output = do帳票のCSVファイル作成(entity, parameter.get処理年月(), parameter.getシステム日付(), 集計Flag);
         sogojigyohiKagoKetteiInCsvWriter.writeLine(output);
