@@ -3,10 +3,10 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.rentainof
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
-/*
+/**
  * このコードはツールによって生成されました。
-
- @reamsid_L DBB-5700-010 chenaoqi
+ *
+ * @reamsid_L DBB-5700-010 chenaoqi
  */
 public interface IRentaiNofuGimushaDiv extends ICommonChildDivBaseProperties {
 
