@@ -21,8 +21,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class JukyushaKoshinKekkaIchiranReport extends Report<JukyushaKoshinKekkaIchiranSource> {
 
-    private final List<JukyushaHihokenshaEntity> 帳票出力対象データリスト;
-    private final List<RString> 住所List;
+    private final JukyushaHihokenshaEntity 帳票出力対象データ;
+    private final RString 住所;
     private final Map<RString, RString> 出力順Map;
     private final List<RString> 改頁リスト;
     private final RDateTime 作成日時;
@@ -30,17 +30,17 @@ public class JukyushaKoshinKekkaIchiranReport extends Report<JukyushaKoshinKekka
     /**
      * コンストラクタです
      *
-     * @param 帳票出力対象データリスト List<JukyushaKoshinKekkaIchiranSource>
-     * @param 住所List List<RString>
+     * @param 帳票出力対象データ JukyushaKoshinKekkaIchiranSource
+     * @param 住所 RString
      * @param 出力順Map Map<RString, RString>
      * @param 改頁リスト List<RString>
      * @param 作成日時 RDateTime
      */
     public JukyushaKoshinKekkaIchiranReport(
-            List<JukyushaHihokenshaEntity> 帳票出力対象データリスト, List<RString> 住所List,
+            JukyushaHihokenshaEntity 帳票出力対象データ, RString 住所,
             Map<RString, RString> 出力順Map, List<RString> 改頁リスト, RDateTime 作成日時) {
-        this.帳票出力対象データリスト = 帳票出力対象データリスト;
-        this.住所List = 住所List; 
+        this.帳票出力対象データ = 帳票出力対象データ;
+        this.住所 = 住所; 
         this.出力順Map = 出力順Map;
         this.改頁リスト = 改頁リスト;
         this.作成日時 = 作成日時;
@@ -48,12 +48,10 @@ public class JukyushaKoshinKekkaIchiranReport extends Report<JukyushaKoshinKekka
 
     @Override
     public void writeBy(ReportSourceWriter<JukyushaKoshinKekkaIchiranSource> writer) {
-        if (null == 帳票出力対象データリスト || 帳票出力対象データリスト.isEmpty()) {
+        if (null == this.帳票出力対象データ) {
             return;
         }
-        for (int index = 0; index < 帳票出力対象データリスト.size(); index++) {
-            writeLine(writer, 帳票出力対象データリスト.get(index), this.住所List.get(index));
-        }
+        writeLine(writer, this.帳票出力対象データ, this.住所);
 
     }
 

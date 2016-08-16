@@ -101,13 +101,13 @@ public class JukyushaKoshinKekkaIchiranProperty extends ReportPropertyBase<Jukyu
         if (DBC120030ShutsuryokujunEnum.保険者番号.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(JukyushaKoshinKekkaIchiranSource.ReportSourceFields.hokenshaNo.name());
         } else if (DBC120030ShutsuryokujunEnum.被保険者番号.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString(JukyushaKoshinKekkaIchiranSource.ReportSourceFields.hokenshaNo.name());
+            帳票物理名 = new RString(JukyushaKoshinKekkaIchiranSource.ReportSourceFields.listList1_4.name());
         } else if (DBC120030ShutsuryokujunEnum.郵便番号.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(JukyushaKoshinKekkaIchiranSource.ReportSourceFields.hokenshaNo.name());
         } else if (DBC120030ShutsuryokujunEnum.町域コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(JukyushaKoshinKekkaIchiranSource.ReportSourceFields.hokenshaNo.name());
         } else if (DBC120030ShutsuryokujunEnum.行政区コード.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString(JukyushaKoshinKekkaIchiranSource.ReportSourceFields.hokenshaNo.name());
+            帳票物理名 = new RString(JukyushaKoshinKekkaIchiranSource.ReportSourceFields.listList1_6.name());
         } else if (DBC120030ShutsuryokujunEnum.氏名５０音カナ.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(JukyushaKoshinKekkaIchiranSource.ReportSourceFields.hokenshaNo.name());
         } else if (DBC120030ShutsuryokujunEnum.市町村コード.get項目ID().equals(項目ID)) {
