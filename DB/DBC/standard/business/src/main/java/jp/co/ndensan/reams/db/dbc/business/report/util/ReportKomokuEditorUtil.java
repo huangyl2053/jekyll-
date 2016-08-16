@@ -36,7 +36,10 @@ public final class ReportKomokuEditorUtil {
      * @return 氏名
      */
     public static RString get氏名カナ(AtenaKanaMeisho 氏名) {
-        return null;
+        if (氏名 == null) {
+            return RString.EMPTY;
+        }
+        return 氏名.getColumnValue();
     }
 
     /**
@@ -46,7 +49,10 @@ public final class ReportKomokuEditorUtil {
      * @return 氏名
      */
     public static RString get氏名(AtenaMeisho 氏名) {
-        return null;
+        if (氏名 == null) {
+            return RString.EMPTY;
+        }
+        return 氏名.getColumnValue();
     }
 
     /**
