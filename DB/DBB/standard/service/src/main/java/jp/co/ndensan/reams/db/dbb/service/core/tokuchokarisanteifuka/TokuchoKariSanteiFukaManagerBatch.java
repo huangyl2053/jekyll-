@@ -580,7 +580,8 @@ public class TokuchoKariSanteiFukaManagerBatch {
             ChoshuHoho 徴収方法の情報_４月開始, FukaJoho 賦課の情報_更正前) {
         if (徴収方法の情報_徴収方法4月 != 特別徴収_厚生労働省 && 徴収方法の情報_徴収方法4月 != 特別徴収_地共済) {
             賦課の情報一時Entity.setChoteiJiyu1(徴収方法の情報_４月開始.get特別徴収停止事由コード());
-            if (!徴収方法の情報_４月開始.get特別徴収停止事由コード().equals(賦課の情報_更正前.get調定事由1())) {
+            if (徴収方法の情報_４月開始.get特別徴収停止事由コード() != null
+                    && !徴収方法の情報_４月開始.get特別徴収停止事由コード().equals(賦課の情報_更正前.get調定事由1())) {
                 賦課の情報一時Entity.setFalg(true);
             }
             賦課の情報一時Entity.setChoteiJiyu2(RString.EMPTY);
