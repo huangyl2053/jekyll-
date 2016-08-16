@@ -89,7 +89,7 @@ public class KaigoFukaChoshuYuyo {
      */
     public ChoshuYuyoJoho getJokyo(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号) {
         ChoshuYuyoJohoRelateMapperParameter parameter = ChoshuYuyoJohoRelateMapperParameter.createSelectByKeyParam(調定年度, 賦課年度, 通知書番号);
-        return 徴収猶予情報Manager.select徴収猶予の情報_最新(parameter);
+        return 徴収猶予情報Manager.select最新の徴収猶予の情報(parameter);
     }
 
     /**
@@ -281,7 +281,7 @@ public class KaigoFukaChoshuYuyo {
         FukaJohoRelateMapperParameter param = FukaJohoRelateMapperParameter.createSelectListParam(調定年度, 賦課年度, 通知書番号);
         return 介護賦課Manager.select賦課の情報_最新(param);
     }
-    
+
     /**
      * 通知書発行のメソッドです。
      *
