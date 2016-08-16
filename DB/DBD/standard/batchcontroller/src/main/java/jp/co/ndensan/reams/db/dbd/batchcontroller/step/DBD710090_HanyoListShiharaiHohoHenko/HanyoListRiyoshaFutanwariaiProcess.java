@@ -557,13 +557,15 @@ public class HanyoListRiyoshaFutanwariaiProcess extends BatchProcessBase<HanyoRi
         if (NenreiSoChushutsuHoho.年齢範囲.equals(processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun())) {
             builder.append(NENLEI);
             builder.append(COLON);
-            if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange() && null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom()) {
+            if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange()
+                    && null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom()) {
                 builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom().toString()));
                 builder.append(SAI);
             }
             builder.append(SPACE);
             builder.append(カラ);
-            if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange() && null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo()) {
+            if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange()
+                    && null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo()) {
                 builder.append(SPACE);
                 builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo().toString()));
                 builder.append(SAI);
@@ -571,12 +573,14 @@ public class HanyoListRiyoshaFutanwariaiProcess extends BatchProcessBase<HanyoRi
         } else if (NenreiSoChushutsuHoho.生年月日範囲.equals(processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun())) {
             builder.append(SEINENGAPPI);
             builder.append(COLON);
-            if (null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange() && null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom()) {
+            if (null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange()
+                    && null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom()) {
                 builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom().toString()));
             }
             builder.append(SPACE);
             builder.append(カラ);
-            if (null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange() && null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo()) {
+            if (null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange()
+                    && null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo()) {
                 builder.append(SPACE);
                 builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo().toString()));
             }
