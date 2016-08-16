@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.service.core.koikishokisaihokenshano;
 
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho.GappeiCityJyoho;
@@ -64,14 +64,14 @@ public class KoikiShokisaiHokenshaNoFinder {
      */
     @Transaction
     public ShoKisaiHokenshaNo getShokisaiHokenshaNo(LasdecCode 市町村コード, FlexibleYearMonth 基準年月) {
+        List<GappeiCityJyoho> removeList = new ArrayList<>();
         if (null != 合併市町村情報List && !合併市町村情報List.isEmpty()) {
-            Iterator<GappeiCityJyoho> iterator = 合併市町村情報List.iterator();
-            while (iterator.hasNext()) {
-                GappeiCityJyoho 合併市町村情報 = iterator.next();
+            for (GappeiCityJyoho 合併市町村情報 : 合併市町村情報List) {
                 if (!市町村コード.equals(合併市町村情報.get市町村コード())) {
-                    iterator.remove();
+                    removeList.add(合併市町村情報);
                 }
             }
+            合併市町村情報List.removeAll(removeList);
             if (!合併市町村情報List.isEmpty() && 合併市町村情報List.get(INDEX_0).get国保連データ連携開始年月日()
                     .getYearMonth().isBeforeOrEquals(基準年月)) {
                 RString 証記載保険者番号 = 合併市町村情報List.get(INDEX_0).get保険者番号().getColumnValue();
