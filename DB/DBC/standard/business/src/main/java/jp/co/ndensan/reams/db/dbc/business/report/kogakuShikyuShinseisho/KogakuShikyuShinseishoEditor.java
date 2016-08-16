@@ -94,6 +94,8 @@ public class KogakuShikyuShinseishoEditor implements IKogakuShikyuShinseishoEdit
         source.shuccho = 漢字_主張書;
         source.shisho = 漢字_支所;
         source.remban = 連番;
+        source.識別コード = 帳票出力対象データ.getShikibetsuCodeChohyo();
+
         return source;
     }
 

@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakushikyushinseisho.Ko
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- * 高額介護（予防）サービス費支給申請書帳票IBuilder
+ * 高額介護（予防）サービス費支給申請書帳票IBuilderインターフェースです。
  *
  * @@reamsid_L DBC-4770-060 jiangxiaolong
  */
