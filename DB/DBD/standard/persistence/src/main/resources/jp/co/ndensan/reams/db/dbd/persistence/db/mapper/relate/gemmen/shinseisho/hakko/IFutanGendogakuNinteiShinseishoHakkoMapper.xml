@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBD-3530-080 mawy-->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmen.shinseisho.hakko.IFutanGendogakuNinteiShinseishoHakkoMapper">
+    <resultMap id="resultMap_get出力対象者情報Entity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmen.shinseisho.hakko.FutanGendogakuNinteiShinseishoHakkoEntity" autoMapping="true">
+                <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+                <result property="識別コード" column="識別コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+                <result property="旧措置者フラグ"  column="旧措置者フラグ"/>
+                <result property="市町村コード"  column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+                <result property="広住特措置元市町村コード"  column="広住特措置元市町村コード"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+                <result property="事業者名称" column="事業者名称" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+                <result property="郵便場号" column="郵便場号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+                <result property="事業者住所" column="事業者住所"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+                <result property="電話番号"  column="電話番号"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+                <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+    </resultMap>
+    <select resultOrdered="true" id="get出力対象者情報"  
+              resultMap="resultMap_get出力対象者情報Entity" 
+              parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmen.shinseisho.hakko.FutanGendogakuMybatisParameter"
+              fetchSize="500">
+        SELECT C."hihokenshaNo" AS  被保険者番号,
+               C."shikibetsuCode" AS 識別コード,
+               E."shichosonCode" AS 市町村コード,
+               E."koikinaiTokureiSochimotoShichosonCode" AS 広住特措置元市町村コード,
+               G."jigyoshaName" AS 事業者名称,
+               G."yubinNo" AS 郵便場号,
+               G."jigyoshaAddress" AS 事業者住所,
+               G."telNo" AS 電話番号,
+               <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+               FROM 
+                    rgdb."DbT4032ShinseishoIkkatsuHakkoBatch" AS A 
+               INNER JOIN rgdb."DbT4033ShinseishoHakkoTaishoshas"  AS B
+               ON B."hakkoShoriID" = A."hakkoShoriID"
+               INNER JOIN rgdb."DbT4031ShinseishoHakkoKohoshas" AS C 
+               ON C."haakuShoriID" =A."haakuShoriId" 
+               AND C."hihokenshaNo" =B."hihokenshaNo" 
+               INNER JOIN  rgua."UaFt200FindShikibetsuTaisho"('',#{基準日},FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+               ON "ShikibetsuTaisho"."shikibetsuCode" =C."shikibetsuCode"
+               INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS E
+               ON E."hihokenshaNo" = C."hihokenshaNo"
+               LEFT JOIN rgdb."DbV4001JukyushaDaicho" AS F
+               ON F."hihokenshaNo" = C."hihokenshaNo"
+               AND F."ninteiYMD"  <![CDATA[<=]]> #{基準日}
+               AND F."logicalDeletedFlag" IS FALSE 
+               LEFT JOIN (
+                            SELECT G1."shikibetsuCode",
+                                   G1."nyushoShisetsuCode" ,
+                                   G1."nyushoYMD" ,
+                                   G1."taishoYMD" ,
+                                   G1."daichoShubetsu" ,
+                                   H.*
+                              FROM rgdb."DbT1004ShisetsuNyutaisho" AS G1 
+                            INNER JOIN (
+                                SELECT  H1."jigyoshaNo",
+                                        H1."jigyoshaName", 
+                                        H1."yubinNo", 
+                                        H1."jigyoshaAddress", 
+                                        H1."telNo"
+                                 FROM  rgdb."DbT7060KaigoJigyosha" AS H1
+                                WHERE  NOT EXISTS (
+                                        SELECT 1
+                                        FROM   rgdb."DbT7060KaigoJigyosha" AS H2 
+                                        WHERE  H1."jigyoshaNo" =H2."jigyoshaNo"
+                                        AND H1."yukoKaishiYMD" <![CDATA[<]]> H2."yukoKaishiYMD"
+                                     )
+                                 ) AS H 
+                ON  G1."nyushoShisetsuCode" =H."jigyoshaNo" 
+                WHERE 
+                    G1."taishoYMD" IS NULL 
+                 AND  G1."daichoShubetsu" = '1'
+                 AND 
+                    G1."nyushoYMD" = (SELECT 
+                                                MAX(G2."nyushoYMD")
+                                      FROM      rgdb."DbT1004ShisetsuNyutaisho"  AS G2
+                                      WHERE     
+                                                G1."shikibetsuCode" =G2."shikibetsuCode"
+                                      AND       G2."taishoYMD" IS NULL 
+                                      AND       G2."daichoShubetsu" ='1'
+                    )
+        )AS G 
+        ON G."shikibetsuCode" =C."shikibetsuCode" 
+        WHERE 
+            A."hakkoShoriID" = #{発行処理ID}
+<!--        ORDER BY 
+        <if test="出力フラグ" >
+            A.""
+        </if>
+            #{出力順}-->
+    </select>
+</mapper>

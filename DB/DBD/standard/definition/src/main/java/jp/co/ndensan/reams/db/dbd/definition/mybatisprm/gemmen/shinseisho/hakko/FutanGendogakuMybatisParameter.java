@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmen.shinseisho.hakko;
 
+import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -18,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class FutanGendogakuMybatisParameter implements IMyBatisParameter {
 
-    private final RString 発行処理ID;
+    private final UUID 発行処理ID;
     private final boolean 出力フラグ;
     private final RString 出力順;
     private final FlexibleDate 基準日;
@@ -34,7 +35,7 @@ public class FutanGendogakuMybatisParameter implements IMyBatisParameter {
      * @param 発行日 発行日
      */
     public FutanGendogakuMybatisParameter(
-            RString 発行処理ID,
+            UUID 発行処理ID,
             boolean 出力フラグ,
             RString 出力順,
             FlexibleDate 基準日,
