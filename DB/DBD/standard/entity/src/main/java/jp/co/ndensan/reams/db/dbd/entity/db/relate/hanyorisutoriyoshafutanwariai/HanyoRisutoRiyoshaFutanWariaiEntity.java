@@ -44,7 +44,7 @@ public class HanyoRisutoRiyoshaFutanWariaiEntity {
     private Decimal 利用者負担割合明細_本人合計所得金額;
     private int 利用者負担割合明細_世帯１号被保険者数;
     private Decimal 利用者負担割合明細_年金収入合計;
-    private Decimal 利用者負担割合明細_その他の合計所得金額合計;
+    private Decimal 利用者負担割合明細_その他の金額合計;
     private RString 利用者負担割合_更正事由;
     private FlexibleDate 利用者負担割合_交付日;
     private boolean 利用者負担割合明細_論理削除フラグ;

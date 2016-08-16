@@ -36,12 +36,10 @@ public class HanyoRisutoRiyoshaFutanWariaiMybatisParameter implements IMyBatisPa
     private final boolean isCsvhitsukesurasyuhensyu;
     private final AtenaSelectBatchParameter atenacyusyutsujyoken;
     private final RString syutsuryokujun;
-    private final FutanwariaiKubun 負担割合区分_１割;
-    private final FutanwariaiKubun 負担割合区分_２割;
+    private final RString 負担割合区分_１割;
+    private final RString 負担割合区分_２割;
     private boolean is基準日;
     private boolean is年度;
-    private boolean is事業対象者負担１割;
-    private boolean is事業対象者負担２割;
     private boolean has市町村コード;
     private RString 市町村コード;
     private RString 地区選択コードFrom;
@@ -53,12 +51,12 @@ public class HanyoRisutoRiyoshaFutanWariaiMybatisParameter implements IMyBatisPa
     private boolean has行政区From;
     private boolean has行政区To;
     private boolean is地区;
-    private boolean has地区１From;
-    private boolean has地区１To;
-    private boolean has地区２From;
-    private boolean has地区２To;
-    private boolean has地区３From;
-    private boolean has地区３To;
+    private boolean has地区1From;
+    private boolean has地区1To;
+    private boolean has地区2From;
+    private boolean has地区2To;
+    private boolean has地区3From;
+    private boolean has地区3To;
     private final RString psmShikibetsuTaisho;
     private final RString psmAtesaki;
 
@@ -96,8 +94,8 @@ public class HanyoRisutoRiyoshaFutanWariaiMybatisParameter implements IMyBatisPa
         this.syutsuryokujun = syutsuryokujun;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
         this.psmAtesaki = psmAtesaki;
-        this.負担割合区分_１割 = FutanwariaiKubun._１割;
-        this.負担割合区分_２割 = FutanwariaiKubun._２割;
+        this.負担割合区分_１割 = FutanwariaiKubun._１割.getコード();
+        this.負担割合区分_２割 = FutanwariaiKubun._２割.getコード();
         set抽出方法区分();
         set市町村コード();
         set地区区分();
@@ -117,7 +115,7 @@ public class HanyoRisutoRiyoshaFutanWariaiMybatisParameter implements IMyBatisPa
     private void set市町村コード() {
         if (nullHandan(atenacyusyutsujyoken.getShichoson_Code())) {
             has市町村コード = true;
-            市町村コード = atenacyusyutsujyoken.getShichoson_Code().code市町村RString();
+            市町村コード = atenacyusyutsujyoken.getShichoson_Code().value();
         }
     }
 
@@ -146,27 +144,27 @@ public class HanyoRisutoRiyoshaFutanWariaiMybatisParameter implements IMyBatisPa
             is地区 = true;
             if (nullHandan(atenacyusyutsujyoken.getChiku1_From())) {
                 地区選択コードFrom = atenacyusyutsujyoken.getChiku1_From();
-                has地区１From = true;
+                has地区1From = true;
             }
             if (nullHandan(atenacyusyutsujyoken.getChiku1_To())) {
                 地区選択コードTo = atenacyusyutsujyoken.getChiku1_To();
-                has地区１To = true;
+                has地区1To = true;
             }
             if (nullHandan(atenacyusyutsujyoken.getChiku2_From())) {
                 地区選択コードFrom = atenacyusyutsujyoken.getChiku2_From();
-                has地区２From = true;
+                has地区2From = true;
             }
             if (nullHandan(atenacyusyutsujyoken.getChiku2_To())) {
                 地区選択コードTo = atenacyusyutsujyoken.getChiku2_To();
-                has地区２To = true;
+                has地区2To = true;
             }
             if (nullHandan(atenacyusyutsujyoken.getChiku3_From())) {
                 地区選択コードFrom = atenacyusyutsujyoken.getChiku3_From();
-                has地区３From = true;
+                has地区3From = true;
             }
             if (nullHandan(atenacyusyutsujyoken.getChiku3_To())) {
                 地区選択コードTo = atenacyusyutsujyoken.getChiku3_To();
-                has地区３To = true;
+                has地区3To = true;
             }
         }
     }
