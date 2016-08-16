@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.DBD102020_GemmenGengakuShinseishoIkkatsuHakko;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd102020;
 
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.gemmen.shinseisho.hakko.FutanGendogakuNinteiShinseishoHakko;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.gemmen.shinseisho.hakko.FutanGendogakuOshiraseTsuchiHakko;

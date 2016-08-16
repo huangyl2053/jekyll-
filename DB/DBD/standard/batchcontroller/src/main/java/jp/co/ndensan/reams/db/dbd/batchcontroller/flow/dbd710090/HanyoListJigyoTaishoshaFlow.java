@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.DBD710090_HanyoListShiharaiHohoHenko;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd710090;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD710090_HanyoListShiharaiHohoHenko.HanyoListKokuhoProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710110.DBD710110_HanyoListKokuhoParameter;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD710090_HanyoListShiharaiHohoHenko.HanyoListJigyoTaishoshaProcess;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710130.DBD710130_HanyoListJigyoTaishoshaParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
- * 汎用リスト出力(国保)のバッチフロークラスです。
+ * 汎用リスト出力(事業対象者)のバッチフロークラスです。
  *
- * @reamsid_L DBD-5510-030 mawy
+ * @reamsid_L DBD-5080-030 mawy
  */
-public class HanyoListKokuhoFlow extends BatchFlowBase<DBD710110_HanyoListKokuhoParameter> {
+public class HanyoListJigyoTaishoshaFlow extends BatchFlowBase<DBD710130_HanyoListJigyoTaishoshaParameter> {
 
     @Override
     protected void defineFlow() {
@@ -32,8 +32,8 @@ public class HanyoListKokuhoFlow extends BatchFlowBase<DBD710110_HanyoListKokuho
      */
     @Step(CSV_PROCESS)
     protected IBatchFlowCommand reportProcess() {
-        return loopBatch(HanyoListKokuhoProcess.class)
-                .arguments(getParameter().toHanyoRisutoKokuhoProcessParameter())
+        return loopBatch(HanyoListJigyoTaishoshaProcess.class)
+                .arguments(getParameter().toHanyoRisutoJigyoTaishoshaProcessParameter())
                 .define();
     }
 }
