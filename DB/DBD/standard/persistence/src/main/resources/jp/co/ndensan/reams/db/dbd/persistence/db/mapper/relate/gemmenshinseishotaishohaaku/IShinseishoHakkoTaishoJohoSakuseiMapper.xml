@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-3530-040 liuwei2 -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenshinseishotaishohaaku.IShinseishoHakkoTaishoJohoSakuseiMapper">
+    <select id="get申請書発行対象者情報_負担限度額認定"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter"
+            resultMap="RseultMap_ShinseishoHakkoTaishoJohoSakuseiEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        A."被保険者番号" as "hihokenshaNo",
+        CASE WHEN C."hihokenshaNo" IS NULL THEN FALSE ELSE TRUE END AS "kousinninteifuragu",
+        A."本人識別コード" as "shikibetsuCode",
+        A."世帯課税区分" as "setaiKazeiKubun",
+        A."本人課税区分" as "honninKazeiKubun",
+        A."is老齢福祉年金受給者" as "isRoreiFukushiNenkinJukyusha",
+        A."is生活保護受給者" as "isSeikatsuHogoJukyusha",
+        A."利用者負担段階" as "riyoshaFutanDankai",
+        A."合計所得金額" as "GoukeiShotokuGaku",
+        A."年金収入額" as "nenkinShunyuGaku",
+        F."nyushoShisetsuCode" as "Jigy oshaNo",
+        A."非課税年金勘案額" as "hikazeinenkinkannangaku"
+        FROM
+        "taishoShaHanteiYoukonkyoItokiTemp" A
+        INNER JOIN  rgdb."DbV4001JukyushaDaicho" B
+        ON B."hihokenshaNo" = A."被保険者番号"
+        AND B."logicalDeletedFlag" = FALSE
+        AND B."ninteiYMD" <![CDATA[<=]]> #{基準日}
+
+        LEFT JOIN
+        (  SELECT
+        D."hihokenshaNo",
+        MAX(D."rirekiNo")
+        FROM  rgdb."DbT4018KaigoHokenFutanGendogakuNintei"  D
+        WHERE
+        #{前年度の開始日} <![CDATA[<=]]> D."tekiyoKaishiYMD"
+        AND  D."tekiyoKaishiYMD" <![CDATA[<=]]>  #{前年度の終了日}
+        AND  D."ketteiKubun" = '1'
+        GROUP BY D."hihokenshaNo"
+        ) AS C
+        ON C."hihokenshaNo" = A."被保険者番号"
+        LEFT JOIN
+        rgdb."DbV1004ShisetsuNyutaisho" F
+        ON  F."shikibetsuCode" = A."本人識別コード"
+        AND F."daichoShubetsu" = '1'
+        WHERE
+        '1' = '1'
+        <if test="is利用者負担段階_利用者負担1至3段階">
+            AND A."riyoshaFutanDankai" IN (#{Code_利用者負担1階},#{Code_利用者負担2段階},#{Code_利用者負担3段階})
+        </if>
+        <if test="is利用者負担段階_利用者負担1段階">
+            AND A."riyoshaFutanDankai" = #{Code_利用者負担1階}
+        </if>
+        <if test="is利用者負担段階_利用者負担2段階">
+            AND  A."riyoshaFutanDankai" = #{Code_利用者負担2段階}
+        </if>
+        <if test="is利用者負担段階_利用者負担3段階">
+            AND  A."riyoshaFutanDankai" = #{Code_利用者負担3段階}
+        </if>
+        <if test="is利用者負担段階_利用者負担4段階">
+            AND  A."riyoshaFutanDankai" = #{Code_利用者負担4段階}
+        </if>
+    </select>
+
+
+    <select id="get申請書発行対象者情報_利用者負担額減額"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter"
+            resultMap="RseultMap_ShinseishoHakkoTaishoJohoSakuseiEntity" fetchSize="500">
+        SELECT
+        A."被保険者番号" as "hihokenshaNo",
+        CASE WHEN C."hihokenshaNo" IS NULL THEN FALSE ELSE TRUE END AS "kousinninteifuragu",
+        A."本人識別コード" as "shikibetsuCode",
+        A."世帯課税区分" as "setaiKazeiKubun",
+        A."本人課税区分" as "honninKazeiKubun",
+        A."is老齢福祉年金受給者" as "isRoreiFukushiNenkinJukyusha",
+        A."is生活保護受給者" as "isSeikatsuHogoJukyusha",
+        A."利用者負担段階" as "riyoshaFutanDankai",
+        A."合計所得金額" as "GoukeiShotokuGaku",
+        A."年金収入額" as "nenkinShunyuGaku",
+        F."nyushoShisetsuCode" as "Jigy oshaNo",
+        A."非課税年金勘案額" as "hikazeinenkinkannangaku"
+        FROM
+        "taishoShaHanteiYoukonkyoItokiTemp" A
+        INNER JOIN  rgdb."DbV4001JukyushaDaicho" B
+        ON B."hihokenshaNo" = A."被保険者番号"
+        AND B."logicalDeletedFlag" = FALSE
+        AND B."ninteiYMD" <![CDATA[<=]]> #{基準日}
+
+        LEFT JOIN
+        (  SELECT
+        D."hihokenshaNo",
+        MAX(D."rirekiNo")
+        FROM  rgdb."DbT4014RiyoshaFutangakuGengaku"  D
+        WHERE
+        #{前年度の開始日} <![CDATA[<=]]> D."tekiyoKaishiYMD"
+        AND  D."tekiyoKaishiYMD" <![CDATA[<=]]>  #{前年度の終了日}
+        AND  D."ketteiKubun" = '1'
+        GROUP BY D."hihokenshaNo"
+        ) AS C
+        ON C."hihokenshaNo" = A."被保険者番号"
+        LEFT JOIN
+        rgdb."DbV1004ShisetsuNyutaisho" F
+        ON  F."shikibetsuCode" = A."本人識別コード"
+        AND F."daichoShubetsu" = '1'
+        WHERE
+        '1' = '1'
+        <if test="市町村民税非課税世帯">
+            AND  A."世帯課税区分" = #{Code_世帯課税区分_非課税}
+        </if>
+        <if test="市町村民税本人非課税者">
+            AND  A."本人課税区分" = #{Code_世帯課税区分_課税}
+        </if>
+        <if test="老齢福祉年金受給者">
+            AND   A."is老齢福祉年金受給者" = TRUE
+        </if>
+        <if test="生活保護受給者">
+            AND  A."is生活保護受給者" = TRUE
+        </if>
+    </select>
+    <select id="get申請書発行対象者情報_訪問介護利用者負担額減額"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter"
+            resultMap="RseultMap_ShinseishoHakkoTaishoJohoSakuseiEntity" fetchSize="500">
+        SELECT
+        A."被保険者番号" as "hihokenshaNo",
+        CASE WHEN C."hihokenshaNo" IS NULL THEN FALSE ELSE TRUE END AS "kousinninteifuragu",
+        A."本人識別コード" as "shikibetsuCode",
+        A."世帯課税区分" as "setaiKazeiKubun",
+        A."本人課税区分" as "honninKazeiKubun",
+        A."is老齢福祉年金受給者" as "isRoreiFukushiNenkinJukyusha",
+        A."is生活保護受給者" as "isSeikatsuHogoJukyusha",
+        A."利用者負担段階" as "riyoshaFutanDankai",
+        A."合計所得金額" as "GoukeiShotokuGaku",
+        A."年金収入額" as "nenkinShunyuGaku",
+        F."nyushoShisetsuCode" as "JigyoshaNo",
+        A."非課税年金勘案額" as "hikazeinenkinkannangaku"
+        FROM
+        "taishoShaHanteiYoukonkyoItokiTemp" A
+        INNER JOIN  rgdb."DbV4001JukyushaDaicho" B
+        ON B."hihokenshaNo" = A."被保険者番号"
+        AND B."logicalDeletedFlag" = FALSE
+        AND B."ninteiYMD" <![CDATA[<=]]> #{基準日}
+
+        LEFT JOIN
+        (  SELECT
+        D."hihokenshaNo",
+        MAX(D."rirekiNo")
+        FROM  rgdb."DbT4016HomonKaigoRiyoshaFutangakuGengaku"  D
+        WHERE
+        #{前年度の開始日} <![CDATA[<=]]> D."tekiyoKaishiYMD"
+        AND  D."tekiyoKaishiYMD" <![CDATA[<=]]>  #{前年度の終了日}
+        AND  D."ketteiKubun" = '1'
+        GROUP BY D."hihokenshaNo"
+        ) AS C
+        ON C."hihokenshaNo" = A."被保険者番号"
+        LEFT JOIN
+        rgdb."DbV1004ShisetsuNyutaisho" F
+        ON  F."shikibetsuCode" = A."本人識別コード"
+        AND F."daichoShubetsu" = '1'
+        WHERE
+        '1' = '1'
+        <if test="市町村民税非課税世帯">
+            AND  A."世帯課税区分"  = #{Code_世帯課税区分_非課税}
+        </if>
+        <if test="市町村民税本人非課税者">
+            AND  A."本人課税区分" = #{Code_世帯課税区分_課税}
+        </if>
+        <if test="老齢福祉年金受給者">
+            AND A."is老齢福祉年金受給者" = TRUE
+        </if>
+        <if test="生活保護受給者">
+            AND  A."is生活保護受給者" = TRUE
+        </if>
+    </select>
+
+
+    <select id="get申請書発行対象者情報_社会福祉法人等利用者負担軽減"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter"
+            resultMap="RseultMap_ShinseishoHakkoTaishoJohoSakuseiEntity" fetchSize="500">
+        SELECT
+        A."被保険者番号" as "hihokenshaNo",
+        CASE WHEN C."hihokenshaNo" IS NULL THEN FALSE ELSE TRUE END AS "kousinninteifuragu",
+        A."本人識別コード" as "shikibetsuCode",
+        A."世帯課税区分" as "setaiKazeiKubun",
+        A."本人課税区分" as "honninKazeiKubun",
+        A."is老齢福祉年金受給者" as "isRoreiFukushiNenkinJukyusha",
+        A."is生活保護受給者" as "isSeikatsuHogoJukyusha",
+        A."利用者負担段階" as "riyoshaFutanDankai",
+        A."合計所得金額" as "GoukeiShotokuGaku",
+        A."年金収入額" as "nenkinShunyuGaku",
+        F."nyushoShisetsuCode" as "Jigy oshaNo",
+        A."非課税年金勘案額" as "hikazeinenkinkannangaku"
+        FROM
+        "taishoShaHanteiYoukonkyoItokiTemp" A
+        INNER JOIN  rgdb."DbV4001JukyushaDaicho" B
+        ON B."hihokenshaNo" = A."被保険者番号"
+        AND B."logicalDeletedFlag" = FALSE
+        AND B."ninteiYMD" <![CDATA[<=]]> #{基準日}
+
+        LEFT JOIN
+        (  SELECT
+        D."hihokenshaNo",
+        MAX(D."rirekiNo")
+        FROM  rgdb."DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"  D
+        WHERE
+        #{前年度の開始日} <![CDATA[<=]]> D."tekiyoKaishiYMD"
+        AND  D."tekiyoKaishiYMD" <![CDATA[<=]]>  #{前年度の終了日}
+        AND  D."ketteiKubun" = '1'
+        GROUP BY D."hihokenshaNo"
+        ) AS C
+        ON C."hihokenshaNo" = A."被保険者番号"
+        LEFT JOIN
+        rgdb."DbV1004ShisetsuNyutaisho" F
+        ON  F."shikibetsuCode" = A."本人識別コード"
+        AND F."nyushoShisetsuShurui" = '1'
+        WHERE
+        '1' = '1'
+        <if test="市町村民税非課税世帯">
+            AND  A."世帯課税区分"  = #{Code_世帯課税区分_非課税}
+        </if>
+        <if test="市町村民税本人非課税者">
+            AND   A."本人課税区分" = #{Code_世帯課税区分_課税}
+        </if>
+        <if test="老齢福祉年金受給者">
+            AND  A."is老齢福祉年金受給者" = TRUE
+        </if>
+        <if test="生活保護受給者">
+            AND  A."is生活保護受給者" = TRUE
+        </if>
+        <if test="課税世帯の被保険者を含む">
+            AND  A."世帯課税区分" = #{Code_世帯課税区分_課税}
+        </if>
+        <if test="!課税世帯の被保険者を含む">
+            AND  A."世帯課税区分" = #{Code_世帯課税区分_非課税}
+        </if>
+    </select>
+    <resultMap id="RseultMap_ShinseishoHakkoTaishoJohoSakuseiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmenshinseishotaishohaaku.ShinseishoHakkoTaishoJohoSakuseiEntity" autoMapping="true">
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="更新認定フラグ" column="kousinninteifuragu" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
+        <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
+        <result property="世帯課税区分" column="setaiKazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="本人課税区分" column="honninKazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="老齢受給者フラグ" column="isRoreiFukushiNenkinJukyusha" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
+        <result property="生保受給者フラグ" column="isSeikatsuHogoJukyusha" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
+        <result property="利用者負担段階" column="riyoshaFutanDankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="合計所得金額" column="GoukeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="年金収入額" column="nenkinShunyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="事業者番号" column="JigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler" />
+        <result property="非課税年金勘案額" column="hikazeinenkinkannangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+    </resultMap>
+</mapper>

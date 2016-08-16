@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-3530-040 liuwei2 -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenshinseishotaishohaaku.IHanteiTaishoshaTokuteiMapper">
+
+    <select id="get減免減額対象者判定用根拠作成対象者_負担限度額認定"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter"
+            resultMap="ResultMap_HanteiTaishoshaTokuteiEntity" fetchSize="500">
+        SELECT
+        "DbV4001JukyushaDaicho"."hihokenshaNo" as "hihokenshaNo"
+        FROM
+        rgdb."DbV4001JukyushaDaicho"
+        WHERE
+        "DbV4001JukyushaDaicho"."logicalDeletedFlag" = FALSE
+        AND
+        "DbV4001JukyushaDaicho"."ninteiYMD" <![CDATA[<=]]> #{基準日}
+        <if test="is旧措置区分_旧措置者">
+            AND "DbV4001JukyushaDaicho"."kyuSochishaFlag" = TRUE
+        </if>
+        <if test="is旧措置区分_旧措置者以外">
+            AND  "DbV4001JukyushaDaicho"."kyuSochishaFlag" = FALSE
+        </if>
+
+        <if test="is新規更新区分_新規">
+            AND NOT EXISTS
+            (SELECT
+            <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.allColumns_DbT4018KaigoHokenFutanGendogakuNintei" />
+            FROM
+            rgdb."DbT4018KaigoHokenFutanGendogakuNintei"
+            WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo" = "hihokenshaNo"
+            AND #{前年度の開始日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"
+            AND  "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{前年度の終了日}
+            AND  "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiKubun" = '1'
+            )
+        </if>
+        <if test="is新規更新区分_更新">
+            AND EXISTS
+            (SELECT
+            <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.allColumns_DbT4018KaigoHokenFutanGendogakuNintei" />
+            FROM
+            rgdb."DbT4018KaigoHokenFutanGendogakuNintei"
+            WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo" = "hihokenshaNo"
+            AND #{前年度の開始日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"
+            AND  "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> #{前年度の終了日}
+            AND  "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiKubun" = '1'
+            )
+        </if>
+        <if test="is施設入所区分_入所者のみ">
+            AND EXISTS
+            (SELECT
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1004ShisetsuNyutaishoMapper.allColumns_DbT1004ShisetsuNyutaisho" />
+            FROM rgdb."DbT1004ShisetsuNyutaisho"
+            WHERE "DbT1004ShisetsuNyutaisho"."shikibetsuCode" =  "DbV4001JukyushaDaicho"."shikibetsuCode"
+            AND "DbT1004ShisetsuNyutaisho"."nyushoYMD"  <![CDATA[<=]]> #{基準日}
+            AND ((#{基準日}  <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoShoriYMD") OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" IS NULL) OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" = ''))
+            )
+        </if>
+        <if test="is施設入所区分_入所者以外">
+            AND NOT EXISTS
+            (SELECT
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1004ShisetsuNyutaishoMapper.allColumns_DbT1004ShisetsuNyutaisho" />
+            FROM rgdb."DbT1004ShisetsuNyutaisho"
+            WHERE "DbT1004ShisetsuNyutaisho"."shikibetsuCode" =  "DbV4001JukyushaDaicho"."shikibetsuCode"
+            AND "DbT1004ShisetsuNyutaisho"."nyushoYMD"  <![CDATA[<=]]> #{基準日}
+            AND ((#{基準日}  <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoShoriYMD") OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" IS NULL) OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" = ''))
+            )
+        </if>
+    </select>
+
+
+
+    <select id="get減免減額対象者判定用根拠作成対象者_利用者負担額減額"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.HanteiTaishoshaTokuteiMyBatisParameter"
+            resultMap="ResultMap_HanteiTaishoshaTokuteiEntity" fetchSize="500">
+        SELECT
+        "DbV4001JukyushaDaicho"."hihokenshaNo" as "hihokenshaNo"
+        FROM
+        rgdb."DbV4001JukyushaDaicho"
+        WHERE
+        "DbV4001JukyushaDaicho"."logicalDeletedFlag" = FALSE
+        AND
+        "DbV4001JukyushaDaicho"."ninteiYMD" <![CDATA[<=]]> #{基準日}
+        <if test="is旧措置区分_旧措置者">
+            AND "DbV4001JukyushaDaicho"."kyuSochishaFlag" = TRUE
+        </if>
+        <if test="is旧措置区分_旧措置者以外">
+            AND  "DbV4001JukyushaDaicho"."kyuSochishaFlag" = FALSE
+        </if>
+
+        <if test="is新規更新区分_新規">
+            AND NOT EXISTS
+            (SELECT
+            <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4014RiyoshaFutangakuGengakuMapper.allColumns_DbT4014RiyoshaFutangakuGengaku" />
+            FROM
+            rgdb."DbT4014RiyoshaFutangakuGengaku"
+            WHERE "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo" = "hihokenshaNo"
+            AND #{前年度の開始日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"
+            AND  "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> #{前年度の終了日}
+            AND  "DbT4014RiyoshaFutangakuGengaku"."ketteiKubun" = '1'
+            )
+        </if>
+        <if test="is新規更新区分_更新">
+            AND EXISTS
+            (SELECT
+            <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4014RiyoshaFutangakuGengakuMapper.allColumns_DbT4014RiyoshaFutangakuGengaku" />
+            FROM
+            rgdb."DbT4014RiyoshaFutangakuGengaku"
+            WHERE "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo" = "hihokenshaNo"
+            AND #{前年度の開始日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"
+            AND  "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> #{前年度の終了日}
+            AND  "DbT4014RiyoshaFutangakuGengaku"."ketteiKubun" = '1'
+            )
+        </if>
+        <if test="is施設入所区分_入所者のみ">
+            AND EXISTS
+            (SELECT
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1004ShisetsuNyutaishoMapper.allColumns_DbT1004ShisetsuNyutaisho" />
+            FROM rgdb."DbT1004ShisetsuNyutaisho"
+            WHERE "DbT1004ShisetsuNyutaisho"."shikibetsuCode" =  "DbV4001JukyushaDaicho"."shikibetsuCode"
+            AND "DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<=]]> #{基準日}
+            AND ((#{基準日}  <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoShoriYMD") OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" IS NULL) OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" = ''))
+            )
+        </if>
+        <if test="is施設入所区分_入所者以外">
+            AND NOT EXISTS
+            (SELECT
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1004ShisetsuNyutaishoMapper.allColumns_DbT1004ShisetsuNyutaisho" />
+            FROM rgdb."DbT1004ShisetsuNyutaisho"
+            WHERE "DbT1004ShisetsuNyutaisho"."shikibetsuCode" =  "DbV4001JukyushaDaicho"."shikibetsuCode"
+            AND "DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<=]]> #{基準日}
+            AND ((#{基準日}  <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoShoriYMD") OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" IS NULL) OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" = ''))
+            )
+        </if>
+    </select>
+    <select id="get減免減額対象者判定用根拠作成対象者_訪問介護利用者負担額減額"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.HanteiTaishoshaTokuteiMyBatisParameter"
+            resultMap="ResultMap_HanteiTaishoshaTokuteiEntity" fetchSize="500">
+        SELECT
+        "DbV4001JukyushaDaicho"."hihokenshaNo" as "hihokenshaNo"
+        FROM
+        rgdb."DbV4001JukyushaDaicho"
+        WHERE
+        "DbV4001JukyushaDaicho"."logicalDeletedFlag" = FALSE
+        AND
+        "DbV4001JukyushaDaicho"."ninteiYMD" <![CDATA[<=]]> #{基準日}
+        <if test="is旧措置区分_旧措置者">
+            AND "DbV4001JukyushaDaicho"."kyuSochishaFlag" = TRUE
+        </if>
+        <if test="is旧措置区分_旧措置者以外">
+            AND  "DbV4001JukyushaDaicho"."kyuSochishaFlag" = FALSE
+        </if>
+
+        <if test="is新規更新区分_新規">
+            NOT EXISTS
+            (SELECT
+            <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4016HomonKaigoRiyoshaFutangakuGengakuMapper.allColumns_DbT4016HomonKaigoRiyoshaFutangakuGengaku" />
+            FROM
+            rgdb."DbT4016HomonKaigoRiyoshaFutangakuGengaku"
+            WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."hihokenshaNo" = "hihokenshaNo"
+            AND #{前年度の開始日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"
+            AND  "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> #{前年度の終了日}
+            AND  "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiKubun" = '1'
+            )
+        </if>
+        <if test="is新規更新区分_更新">
+            AND EXISTS
+            (SELECT
+            <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4016HomonKaigoRiyoshaFutangakuGengakuMapper.allColumns_DbT4016HomonKaigoRiyoshaFutangakuGengaku" />
+            FROM
+            rgdb."DbT4016HomonKaigoRiyoshaFutangakuGengaku"
+            WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."hihokenshaNo" = "hihokenshaNo"
+            AND #{前年度の開始日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"
+            AND  "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> #{前年度の終了日}
+            AND  "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiKubun" = '1'
+            )
+        </if>
+        <if test="is施設入所区分_入所者のみ">
+            AND EXISTS
+            (SELECT
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1004ShisetsuNyutaishoMapper.allColumns_DbT1004ShisetsuNyutaisho" />
+            FROM rgdb."DbT1004ShisetsuNyutaisho"
+            WHERE "DbT1004ShisetsuNyutaisho"."shikibetsuCode" =  "DbV4001JukyushaDaicho"."shikibetsuCode"
+            AND "DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<=]]> #{基準日}
+            AND ((#{基準日}  <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoShoriYMD") OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" IS NULL) OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" = ''))
+            )
+        </if>
+        <if test="is施設入所区分_入所者以外">
+            AND NOT EXISTS
+            (SELECT
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1004ShisetsuNyutaishoMapper.allColumns_DbT1004ShisetsuNyutaisho" />
+            FROM rgdb."DbT1004ShisetsuNyutaisho"
+            WHERE "DbT1004ShisetsuNyutaisho"."shikibetsuCode" =  "DbV4001JukyushaDaicho"."shikibetsuCode"
+            AND "DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<=]]> #{基準日}
+            AND ((#{基準日}  <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoShoriYMD") OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" IS NULL) OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" = ''))
+            )
+        </if>
+    </select>
+    <select id="get減免減額対象者判定用根拠作成対象者_社会福祉法人等利用者負担軽減"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.HanteiTaishoshaTokuteiMyBatisParameter"
+            resultMap="ResultMap_HanteiTaishoshaTokuteiEntity" fetchSize="500">
+        SELECT
+        "DbV4001JukyushaDaicho"."hihokenshaNo" as "hihokenshaNo"
+        FROM
+        rgdb."DbV4001JukyushaDaicho"
+        WHERE
+        "DbV4001JukyushaDaicho"."logicalDeletedFlag" = FALSE
+        AND
+        "DbV4001JukyushaDaicho"."ninteiYMD" <![CDATA[<=]]> #{基準日}
+        <if test="is旧措置区分_旧措置者">
+            AND "DbV4001JukyushaDaicho"."kyuSochishaFlag" = TRUE
+        </if>
+        <if test="is旧措置区分_旧措置者以外">
+            AND  "DbV4001JukyushaDaicho"."kyuSochishaFlag" = FALSE
+        </if>
+
+        <if test="is新規更新区分_新規">
+            AND NOT EXISTS
+            (SELECT
+            <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4017ShakaiFukushiHojinRiyoshaFutanKeigenMapper.allColumns_DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen" />
+            FROM
+            rgdb."DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"
+            WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo" = "hihokenshaNo"
+            AND #{前年度の開始日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"
+            AND  "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> #{前年度の終了日}
+            AND  "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiKubun" = '1'
+            )
+        </if>
+        <if test="is新規更新区分_更新">
+            AND EXISTS
+            (SELECT
+            <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4017ShakaiFukushiHojinRiyoshaFutanKeigenMapper.allColumns_DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen" />
+            FROM
+            rgdb."DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"
+            WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo" = "hihokenshaNo"
+            AND #{前年度の開始日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"
+            AND  "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> #{前年度の終了日}
+            AND  "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiKubun" = '1'
+            )
+        </if>
+        <if test="is施設入所区分_入所者のみ">
+            AND  EXISTS
+            (SELECT
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1004ShisetsuNyutaishoMapper.allColumns_DbT1004ShisetsuNyutaisho" />
+            FROM rgdb."DbT1004ShisetsuNyutaisho"
+            WHERE "DbT1004ShisetsuNyutaisho"."shikibetsuCode" =  "DbV4001JukyushaDaicho"."shikibetsuCode"
+            AND "DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<=]]> #{基準日}
+            AND ((#{基準日}  <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoShoriYMD") OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" IS NULL) OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" = ''))
+            )
+        </if>
+        <if test="is施設入所区分_入所者以外">
+            AND  NOT EXISTS
+            (SELECT
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1004ShisetsuNyutaishoMapper.allColumns_DbT1004ShisetsuNyutaisho" />
+            FROM rgdb."DbT1004ShisetsuNyutaisho"
+            WHERE "DbT1004ShisetsuNyutaisho"."shikibetsuCode" =  "DbV4001JukyushaDaicho"."shikibetsuCode"
+            AND "DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<=]]> #{基準日}
+            AND ((#{基準日}  <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoShoriYMD") OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" IS NULL) OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" = ''))
+            )
+        </if>
+    </select>
+    <resultMap id="ResultMap_HanteiTaishoshaTokuteiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmenshinseishotaishohaaku.HanteiTaishoshaTokuteiEntity" autoMapping="true">
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+    </resultMap>
+</mapper>
