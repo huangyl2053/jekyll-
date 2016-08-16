@@ -42,6 +42,7 @@ public class DBC180020MyBatisParameter implements IMyBatisParameter {
      *
      * @param 判定基準日 RString
      * @param 対象年度 RString
+     * @param 対象月 RString
      */
     public DBC180020MyBatisParameter(RString 判定基準日, RString 対象年度, RString 対象月) {
         this.判定基準日 = 判定基準日;
