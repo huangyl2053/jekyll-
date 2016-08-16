@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  * 高額介護（予防）サービス費支給申請書帳票IEditorインターフェースです。
  *
- * @@reamsid_L DBC-4770-060 jiangxiaolong
+ * @reamsid_L DBC-4770-060 jiangxiaolong
  */
 public interface IKogakuShikyuShinseishoEditor extends IReportEditor<KogakuShikyuShinseishoSource> {
 
