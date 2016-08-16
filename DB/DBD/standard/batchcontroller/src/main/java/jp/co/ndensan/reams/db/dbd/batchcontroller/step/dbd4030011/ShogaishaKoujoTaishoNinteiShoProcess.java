@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd4030011;
 
-import jp.co.ndensan.reams.db.dbd.business.core.dbt4030011.NinteishoJohoBusiness;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100025.ShogaishaKojoNinteishoReport;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd4030011.ShogaishakojoTaishoshaListProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd4030011.NinteishoJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100025.NinteishoJohoReportSource;
 import jp.co.ndensan.reams.db.dbd.service.core.ninteishojoho.NinteiShoJohoFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBD-3860-030 donghj
  */
-public class ShogaishaKoujoTaishoNinteiShoProcess extends BatchProcessBase<NinteishoJohoBusiness> {
+public class ShogaishaKoujoTaishoNinteiShoProcess extends BatchProcessBase<NinteishoJohoEntity> {
 
     private static final ReportId REPORT_DBD100025 = ReportIdDBD.DBD100025.getReportId();
     private static final RString MYBATIS_SELECT_ID
@@ -64,7 +64,7 @@ public class ShogaishaKoujoTaishoNinteiShoProcess extends BatchProcessBase<Ninte
     }
 
     @Override
-    protected void process(NinteishoJohoBusiness target) {
+    protected void process(NinteishoJohoEntity target) {
 
         NinteiShoJohoFinder finder = NinteiShoJohoFinder.createInstance();
         target = finder.setTarget(target, parameter, reportSourceWriter);

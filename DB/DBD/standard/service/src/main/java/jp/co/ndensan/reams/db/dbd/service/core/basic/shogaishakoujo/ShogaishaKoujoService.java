@@ -41,11 +41,10 @@ public class ShogaishaKoujoService {
      */
     @Transaction
     public ShogaishaKoujo getDbT4038ShogaishaKoujoEntity(HihokenshaNo 被保険者番号) {
-        DbT4038ShogaishaKoujoEntity entity = dac.selectAll(被保険者番号);//select障がい者控除情報(被保険者番号);
+        DbT4038ShogaishaKoujoEntity entity = dac.selectBy被保険者番号(被保険者番号);
         if (entity == null) {
             return null;
         } else {
-
             return new ShogaishaKoujo(entity);
         }
     }

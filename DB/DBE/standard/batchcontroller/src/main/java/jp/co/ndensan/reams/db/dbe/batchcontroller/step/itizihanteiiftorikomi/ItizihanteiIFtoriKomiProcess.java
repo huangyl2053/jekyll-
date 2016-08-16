@@ -36,12 +36,15 @@ public class ItizihanteiIFtoriKomiProcess extends BatchProcessBase<IchijiHanteiz
     private RString 込ファイル名;
     private final int 項目数 = 328;
     private static final RString TABLE要介護認定一次判定結果情報 = new RString("IchijiHanteiKekkaJohoTemp");
+    private CsvListReader read;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 調査票概況調査サービスの状況TempTable;
 
     @Override
     protected void initialize() {
         込ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定ソフト一次判定用データ取込ファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        filePath = new RString("C:\\Users\\soft863\\wanghui\\").concat(込ファイル名);
+        read = new CsvListReader.InstanceBuilder(filePath).build();
     }
 
     @Override
@@ -70,24 +73,24 @@ public class ItizihanteiIFtoriKomiProcess extends BatchProcessBase<IchijiHanteiz
     @Override
     protected void process(IchijiHanteizumIfOutputEucCsvEntity entity) {
         IchijiHanteiKekkaJohoTempTableEntity tabEntity = new IchijiHanteiKekkaJohoTempTableEntity();
-        CsvListReader read = new CsvListReader.InstanceBuilder(filePath).build();
+//        CsvListReader read = new CsvListReader.InstanceBuilder(filePath).build();
         if (read.readLine().size() != 項目数) {
             return;
         }
-        if (business.連携対象項目一覧判定(entity)) {
+        if (business.get連携対象項目一覧判定(entity)) {
             return;
         }
-        if (!(new RString("01").equals(business.要介護認定一次判定結果コードの名称(entity.get一次判定結果()))
-                || (new RString("12").equals(business.要介護認定一次判定結果コードの名称(entity.get一次判定結果())))
-                || (new RString("13").equals(business.要介護認定一次判定結果コードの名称(entity.get一次判定結果())))
-                || (new RString("21").equals(business.要介護認定一次判定結果コードの名称(entity.get一次判定結果())))
-                || (new RString("22").equals(business.要介護認定一次判定結果コードの名称(entity.get一次判定結果())))
-                || (new RString("23").equals(business.要介護認定一次判定結果コードの名称(entity.get一次判定結果())))
-                || (new RString("24").equals(business.要介護認定一次判定結果コードの名称(entity.get一次判定結果())))
-                || (new RString("25").equals(business.要介護認定一次判定結果コードの名称(entity.get一次判定結果()))))) {
+        if (!(new RString("01").equals(business.get要介護認定一次判定結果コードの名称(entity.get一次判定結果()))
+                || (new RString("12").equals(business.get要介護認定一次判定結果コードの名称(entity.get一次判定結果())))
+                || (new RString("13").equals(business.get要介護認定一次判定結果コードの名称(entity.get一次判定結果())))
+                || (new RString("21").equals(business.get要介護認定一次判定結果コードの名称(entity.get一次判定結果())))
+                || (new RString("22").equals(business.get要介護認定一次判定結果コードの名称(entity.get一次判定結果())))
+                || (new RString("23").equals(business.get要介護認定一次判定結果コードの名称(entity.get一次判定結果())))
+                || (new RString("24").equals(business.get要介護認定一次判定結果コードの名称(entity.get一次判定結果())))
+                || (new RString("25").equals(business.get要介護認定一次判定結果コードの名称(entity.get一次判定結果()))))) {
             return;
         }
-        RString 結果コード = business.要介護認定一次判定結果コードの名称(entity.get一次判定結果());
+        RString 結果コード = business.get要介護認定一次判定結果コードの名称(entity.get一次判定結果());
         tabEntity = business.set一時テーブル(tabEntity, entity, 結果コード);
         調査票概況調査サービスの状況TempTable.insert(tabEntity);
     }

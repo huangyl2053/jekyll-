@@ -15,27 +15,38 @@
                "DbT3116KijunShunyugakuTekiyoKanri"."shinseiYMD",
                "DbT3116KijunShunyugakuTekiyoKanri"."ketteiYMD",
                "DbT3116KijunShunyugakuTekiyoKanri"."atesakiInjiTaishoshaFlag",
-               "DbV1001HihokenshaDaicho"."shikibetsuCode"
+               "DbV1001HihokenshaDaicho"."shikibetsuCode",
+               <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
+               <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
         FROM rgdb."DbT3116KijunShunyugakuTekiyoKanri" AS "DbT3116KijunShunyugakuTekiyoKanri"
         INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS "DbV1001HihokenshaDaicho"
         ON "DbT3116KijunShunyugakuTekiyoKanri"."hihokenshaNo" = "DbV1001HihokenshaDaicho"."hihokenshaNo"
-        WHERE "DbT3116KijunShunyugakuTekiyoKanri"."ketteiYMD" != ''
+        LEFT JOIN 
+        rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+        ON "ShikibetsuTaisho"."shikibetsuCode" = "DbV1001HihokenshaDaicho"."shikibetsuCode"
+        INNER JOIN
+        rgua."UaFt250FindAtesaki"('DB','DBC','','false','','','true','true','false','false','') AS "Atesaki"
+        ON "Atesaki"."shikibetsuCode" = "DbV1001HihokenshaDaicho"."shikibetsuCode"
+        WHERE "DbT3116KijunShunyugakuTekiyoKanri"."ketteiYMD" <![CDATA[<>]]> ''
+        AND "DbT3116KijunShunyugakuTekiyoKanri"."ketteiYMD" IS NOT NULL
         <if test="抽出期間 == 0001">
             AND "DbT3116KijunShunyugakuTekiyoKanri"."shinseiYMD" <![CDATA[>=]]> #{開始日}
             AND "DbT3116KijunShunyugakuTekiyoKanri"."shinseiYMD" <![CDATA[<=]]> #{終了日}
         </if>
-        <if test="抽出期間 != 0001">
+        <if test="抽出期間 = 0002">
             AND "DbT3116KijunShunyugakuTekiyoKanri"."ketteiYMD" <![CDATA[>=]]> #{開始日}
             AND "DbT3116KijunShunyugakuTekiyoKanri"."ketteiYMD" <![CDATA[<=]]> #{終了日}
         </if>
         <if test="印書 == 2">
-            AND "DbT3116KijunShunyugakuTekiyoKanri"."ketteiTsuchishoHakkoYMD" = ''
+            AND （"DbT3116KijunShunyugakuTekiyoKanri"."ketteiTsuchishoHakkoYMD" = '' OR "DbT3116KijunShunyugakuTekiyoKanri"."ketteiTsuchishoHakkoYMD" IS NULL）
         </if>
         ORDER BY "DbT3116KijunShunyugakuTekiyoKanri"."setaiCode",
                  "DbT3116KijunShunyugakuTekiyoKanri"."atesakiInjiTaishoshaFlag" DESC,
-                 "DbT3116KijunShunyugakuTekiyoKanri"."hihokenshaNo",
+                 "DbT3116KijunShunyugakuTekiyoKanri"."hihokenshaNo"
                  <if test="temp_出力順 != null and !temp_出力順.isEmpty()">
-                    ${temp_出力順}
+                    ,${temp_出力順}
                 </if>
     </select>
     
@@ -50,5 +61,9 @@
         <result property="決定日" column="ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="宛先印字対象者フラグ" column="atesakiInjiTaishoshaFlag"/>
         <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <association property="宛名Entity"
+                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <association property="宛先Entity"
+                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
     </resultMap>
     </mapper>

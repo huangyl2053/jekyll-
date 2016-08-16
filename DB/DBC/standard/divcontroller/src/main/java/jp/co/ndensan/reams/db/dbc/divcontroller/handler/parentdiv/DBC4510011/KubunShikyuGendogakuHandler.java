@@ -79,7 +79,6 @@ public class KubunShikyuGendogakuHandler {
         }
         div.getServiceShuruiShousai().getTxtServiceMeisho().setValue(row.getDefaultDataName4());
         div.getServiceShuruiShousai().getTxtServiceRyakusho().setValue(row.getDefaultDataName5());
-        //div.getServiceShuruiShousai().getDdlServiceBunruiCode().setSelectedKey(row.getDefaultDataName6().substring(0, 2));
     }
 
     /**

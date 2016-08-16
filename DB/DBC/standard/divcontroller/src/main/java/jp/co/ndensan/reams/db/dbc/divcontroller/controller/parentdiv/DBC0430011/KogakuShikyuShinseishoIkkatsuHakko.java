@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0430011;
 
-import jp.co.ndensan.reams.db.dbc.business.core.KogakuKaigoServicehiOshiraseHakko.KogakuKaigoServicehiOshiraseHakkoParameter;
+import jp.co.ndensan.reams.db.dbc.business.core.kogakukaigoservicehioshirasehakko.KogakuKaigoServicehiOshiraseHakkoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0430011.DBC0430011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0430011.KogakuShikyuShinseishoIkkatsuHakkoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0430011.KogakuShikyuShinseishoIkkatsuHakkoHandler;
@@ -57,7 +57,7 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> btnOnClick_shinsaYM(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
         div.getShinseishoHakkoParameters().getTxtShinsaYM().setReadOnly(false);
-        div.getShinseishoHakkoParameters().getTxtHihokenshaNo().setReadOnly(true);
+        div.getShinseishoHakkoParameters().getBtnHihokenshaSearch().setDisabled(true);
         div.getShinseishoHakkoParameters().getDdlServiceYM().setReadOnly(true);
         div.getShinseishoHakkoParameters().getRadHihokenshaNo().clearSelectedItem();
         div.getShinseishoHakkoParameters().getRadHakushiInsatsu().clearSelectedItem();
@@ -74,7 +74,7 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> btnOnClick_radHihokenshaNo(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
         RString menuID = ResponseHolder.getMenuID();
         div.getShinseishoHakkoParameters().getTxtShinsaYM().setReadOnly(true);
-        div.getShinseishoHakkoParameters().getTxtHihokenshaNo().setReadOnly(false);
+        div.getShinseishoHakkoParameters().getBtnHihokenshaSearch().setDisabled(false);
         div.getShinseishoHakkoParameters().getDdlServiceYM().setReadOnly(false);
         div.getShinseishoHakkoParameters().getRadShinsaYM().clearSelectedItem();
         div.getShinseishoHakkoParameters().getRadHakushiInsatsu().clearSelectedItem();
@@ -90,7 +90,7 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> btnOnClick_radHakushiInsatsu(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
         div.getShinseishoHakkoParameters().getTxtShinsaYM().setReadOnly(true);
-        div.getShinseishoHakkoParameters().getTxtHihokenshaNo().setReadOnly(true);
+        div.getShinseishoHakkoParameters().getBtnHihokenshaSearch().setDisabled(false);
         div.getShinseishoHakkoParameters().getDdlServiceYM().setReadOnly(true);
         div.getShinseishoHakkoParameters().getRadShinsaYM().clearSelectedItem();
         div.getShinseishoHakkoParameters().getRadHihokenshaNo().clearSelectedItem();

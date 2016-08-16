@@ -175,7 +175,7 @@ public class FutanWariaishoIkkatsu {
             source.set保険者コード６(hokenshaNo.getColumnValue().substringReturnAsPossible(NUM_FIVE));
         }
         source.set保険者住所(get保険者住所());
-        source.set保険者名(compNinshosha.ninshoshaShimeiKakeru);
+        source.set保険者名(compNinshosha.ninshoshaShimeiKakenai);
         source.set保険者電話番号(get電話番号());
         source.set電子公印(compNinshosha.denshiKoin);
         source.set連番(連番);

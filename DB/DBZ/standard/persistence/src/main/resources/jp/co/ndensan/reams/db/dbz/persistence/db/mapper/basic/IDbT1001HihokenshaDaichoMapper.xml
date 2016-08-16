@@ -162,10 +162,10 @@
          <select resultOrdered="true" id="get処理対象者" resultMap="ResultMap_DbT1001HihokenshaDaichoEntity"
          parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.juminidorendotennyu.JuminIdoRendoTennyuMybatisprm" fetchSize="500">
 	SELECT
-	DbT1001.*,
+	<include refid="allColumns_DbT1001HihokenshaDaicho"/>
         PSM.*
 	FROM
-	   rgdb."DbT1001HihokenshaDaicho" AS DbT1001
+	   rgdb."DbT1001HihokenshaDaicho"
         JOIN
            rgua.${psmShikibetsuTaisho} AS PSM
         ON

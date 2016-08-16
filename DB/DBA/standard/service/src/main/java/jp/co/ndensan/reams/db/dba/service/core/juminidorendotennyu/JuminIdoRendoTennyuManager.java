@@ -66,6 +66,7 @@ public class JuminIdoRendoTennyuManager {
     private final RString 枝番 = new RString("0001");
     private final RString 枝番_1 = new RString("0002");
     private final RString 特例フラグ = new RString("0");
+    private final RString 住所地特例フラグ = new RString("1");
 
     /**
      * コンストラクタです。
@@ -140,7 +141,8 @@ public class JuminIdoRendoTennyuManager {
         FlexibleDate 基準日 = FlexibleDate.EMPTY;
         RString 介護保険施行日 = DbBusinessConfig.get(ConfigNameDBU.介護保険法情報_介護保険施行日,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        if (転入前Entity.get年齢到達日().isBeforeOrEquals(転入前Entity.get登録異動日())) {
+        if (転入前Entity.get年齢到達日() != null && 転入前Entity.get登録異動日() != null
+                && 転入前Entity.get年齢到達日().isBeforeOrEquals(転入前Entity.get登録異動日())) {
             基準日 = 処理対象者.getTorokuIdoYMD();
         } else {
             基準日 = set基準日(転入前Entity, 介護保険施行日);
@@ -151,7 +153,7 @@ public class JuminIdoRendoTennyuManager {
         }
         RString 年齢到達基準 = DbBusinessConfig.get(ConfigNameDBU.年齢到達基準_第１号被保険者到達基準年齢,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        if (転入前Entity.get年齢() >= Integer.parseInt(年齢到達基準.toString())) {
+        if (年齢到達基準 != null && 転入前Entity.get年齢() >= Integer.parseInt(年齢到達基準.toString())) {
             転入前Entity.set処理対象区分(ShikakuKubun._１号.getコード());
         } else {
             転入前Entity.set処理対象区分(ShikakuKubun._２号.getコード());
@@ -171,8 +173,10 @@ public class JuminIdoRendoTennyuManager {
     private FlexibleDate set基準日(TennyuuMaeparametaEntity 転入前Entity,
             RString 介護保険施行日) {
         FlexibleDate 基準日 = FlexibleDate.EMPTY;
-        if (FlexibleDate.getNowDate().isBefore(転入前Entity.get年齢到達日())) {
-            if (転入前Entity.get年齢到達日().isBefore(new FlexibleDate(介護保険施行日.toString()))) {
+        if (転入前Entity.get年齢到達日() != null && FlexibleDate.getNowDate()
+                .isBefore(転入前Entity.get年齢到達日())) {
+            if (介護保険施行日 != null && 転入前Entity.get年齢到達日() != null
+                    && 転入前Entity.get年齢到達日().isBefore(new FlexibleDate(介護保険施行日.toString()))) {
                 基準日 = new FlexibleDate(介護保険施行日.toString());
             } else {
                 基準日 = new FlexibleDate(RDate.getNowDate().toDateString());
@@ -214,7 +218,7 @@ public class JuminIdoRendoTennyuManager {
         }
         RString 年齢到達基準 = DbBusinessConfig.get(ConfigNameDBU.年齢到達基準_第１号被保険者到達基準年齢,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        if (転入前Entity.get年齢() < Integer.parseInt(年齢到達基準.toString())) {
+        if (年齢到達基準 != null && 転入前Entity.get年齢() < Integer.parseInt(年齢到達基準.toString())) {
             HihokenshanotsukibanFinder finder = HihokenshanotsukibanFinder.createInstance();
             被保険者番号 = finder.getHihokenshanotsukiban(処理対象者.getShikibetsuCode());
             if (被保険者番号 != null && 被保険者番号.isEmpty()) {
@@ -227,7 +231,8 @@ public class JuminIdoRendoTennyuManager {
         FlexibleDate 登録異動日 = FlexibleDate.EMPTY;
         FlexibleDate 登録届出日 = FlexibleDate.EMPTY;
         FlexibleDate 年齢到達日 = FlexibleDate.EMPTY;
-        if (転入前Entity.get年齢到達日().isBeforeOrEquals(転入前Entity.get登録異動日())) {
+        if (転入前Entity.get年齢到達日() != null && 転入前Entity.get登録異動日() != null
+                && 転入前Entity.get年齢到達日().isBeforeOrEquals(転入前Entity.get登録異動日())) {
             取得事由 = ShikakuShutokuJiyu.転入.getCode();
             登録異動日 = 転入前Entity.get登録異動日();
             登録届出日 = 転入前Entity.get登録届出日();
@@ -260,7 +265,7 @@ public class JuminIdoRendoTennyuManager {
         HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
         RString 転入前年齢 = DbBusinessConfig.get(ConfigNameDBU.年齢到達基準_第１号被保険者到達基準年齢,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        if (転入前Entity.get年齢() < Integer.parseInt(転入前年齢.toString())) {
+        if (転入前年齢 != null && 転入前Entity.get年齢() < Integer.parseInt(転入前年齢.toString())) {
             HihokenshanotsukibanFinder finder = HihokenshanotsukibanFinder.createInstance();
             被保険者番号 = finder.getHihokenshanotsukiban(処理対象者.getShikibetsuCode());
             if (被保険者番号 != null && 被保険者番号.isEmpty()) {
@@ -272,7 +277,8 @@ public class JuminIdoRendoTennyuManager {
             FlexibleDate 登録異動日 = FlexibleDate.EMPTY;
             FlexibleDate 登録届出日 = FlexibleDate.EMPTY;
             FlexibleDate 年齢到達日 = FlexibleDate.EMPTY;
-            if (転入前Entity.get年齢到達日().isBeforeOrEquals(転入前Entity.get登録異動日())) {
+            if (転入前Entity.get年齢到達日() != null && 転入前Entity.get登録異動日() != null
+                    && 転入前Entity.get年齢到達日().isBeforeOrEquals(転入前Entity.get登録異動日())) {
                 取得事由 = ShikakuShutokuJiyu.転入.getCode();
                 登録異動日 = 転入前Entity.get登録異動日();
                 登録届出日 = 転入前Entity.get登録届出日();
@@ -289,7 +295,7 @@ public class JuminIdoRendoTennyuManager {
                 転入処理後Entity.set作成事由(TennyuSakuseiJiyu.死亡喪失.getコード());
                 return 転入処理後Entity;
             }
-            if (転入前Entity.get登録異動日().isBefore(直近被保データ.getShikakuSoshitsuYMD())) {
+            if (直近被保データ.getShikakuSoshitsuYMD() != null && 転入前Entity.get登録異動日().isBefore(直近被保データ.getShikakuSoshitsuYMD())) {
                 転入処理後Entity.setデータ不整合理由(new RString("0004"));
                 転入処理後Entity.set作成事由(TennyuSakuseiJiyu.日付不整合.getコード());
                 return 転入処理後Entity;
@@ -325,17 +331,17 @@ public class JuminIdoRendoTennyuManager {
         }
         boolean is措置元再転入 = false;
         //TODO 市町村コードは存在しない。QA1497
-        if (new RString("1").equals(直近被保データ.getJushochiTokureiFlag())
-                && new RString("1").equals(直近被保データ.getKoikinaiJushochiTokureiFlag())) {
+        if (住所地特例フラグ.equals(直近被保データ.getJushochiTokureiFlag())
+                && 住所地特例フラグ.equals(直近被保データ.getKoikinaiJushochiTokureiFlag())) {
             is措置元再転入 = true;
         }
         is措置元再転入 = true;
         if (is措置元再転入) {
-            転入処理住特_措置元(処理対象者, 直近被保データ, 転入前Entity, is措置元再転入);
+            execute転入処理_住特_措置元(処理対象者, 直近被保データ, 転入前Entity, is措置元再転入);
         } else {
-            転入処理_住特(処理対象者, 直近被保データ, 転入前Entity);
+            execute転入処理_住特(処理対象者, 直近被保データ, 転入前Entity);
         }
-        if (new RString("0").equals(直近被保データ.getJushochiTokureiFlag())
+        if (特例フラグ.equals(直近被保データ.getJushochiTokureiFlag())
                 && (ShikakuShutokuJiyu.転入.getCode().equals(直近被保データ.getShikakuShutokuJiyuCode())
                 && (直近被保データ.getShikakuShutokuYMD().equals(転入前Entity.get登録異動日()))
                 && (直近被保データ.getShikakuShutokuTodokedeYMD().equals(転入前Entity.get登録届出日())))) {
@@ -357,11 +363,12 @@ public class JuminIdoRendoTennyuManager {
      * @param is措置元再転入 boolean
      * @return 転入処理後クラス
      */
-    public JuminIdoRendoTennyuEntity 転入処理住特_措置元(UaFt200FindShikibetsuTaishoEntity 処理対象者,
+    public JuminIdoRendoTennyuEntity execute転入処理_住特_措置元(UaFt200FindShikibetsuTaishoEntity 処理対象者,
             DbV1001HihokenshaDaichoEntity 直近被保データ, TennyuuMaeparametaEntity 転入前Entity, boolean is措置元再転入) {
         JuminIdoRendoTennyuEntity 転入処理後Entity = new JuminIdoRendoTennyuEntity();
         List<DbT1001HihokenshaDaichoEntity> 喪失被保険者list = new ArrayList<>();
-        if (転入前Entity.get登録異動日().isBefore(直近被保データ.getShikakuShutokuYMD())) {
+        if (転入前Entity.get登録異動日() != null && 直近被保データ.getShikakuShutokuYMD() != null
+                && 転入前Entity.get登録異動日().isBefore(直近被保データ.getShikakuShutokuYMD())) {
             //TODO  DBAのEnum. JuminRendoFuseigoは存在しない。QA1497
             転入処理後Entity.setデータ不整合理由(new RString("0005"));
             if (転入前Entity.is広域()) {
@@ -369,7 +376,8 @@ public class JuminIdoRendoTennyuManager {
                 return 転入処理後Entity;
             }
         }
-        if (転入前Entity.get年齢到達日().isBeforeOrEquals(転入前Entity.get登録異動日())) {
+        if (転入前Entity.get年齢到達日() != null && 転入前Entity.get登録異動日() != null
+                && 転入前Entity.get年齢到達日().isBeforeOrEquals(転入前Entity.get登録異動日())) {
             if (new RString("2").equals(直近被保データ.getHihokennshaKubunCode())) {
                 set年齢到達(直近被保データ, 転入前Entity, 喪失被保険者list);
                 set住特解除(直近被保データ, 転入前Entity, 喪失被保険者list);
@@ -395,12 +403,13 @@ public class JuminIdoRendoTennyuManager {
      * @param 転入前Entity TennyuuMaeparametaEntity
      * @return 転入処理後クラス
      */
-    public JuminIdoRendoTennyuEntity 転入処理_住特(UaFt200FindShikibetsuTaishoEntity 処理対象者,
+    public JuminIdoRendoTennyuEntity execute転入処理_住特(UaFt200FindShikibetsuTaishoEntity 処理対象者,
             DbV1001HihokenshaDaichoEntity 直近被保データ, TennyuuMaeparametaEntity 転入前Entity) {
         JuminIdoRendoTennyuEntity 転入処理後Entity = new JuminIdoRendoTennyuEntity();
         List<DbT1001HihokenshaDaichoEntity> 喪失被保険者list = new ArrayList<>();
         boolean 資格取得フラグ = false;
-        if (転入前Entity.get年齢到達日().isBeforeOrEquals(転入前Entity.get登録異動日())) {
+        if (転入前Entity.get年齢到達日() != null && 転入前Entity.get登録異動日() != null
+                && 転入前Entity.get年齢到達日().isBeforeOrEquals(転入前Entity.get登録異動日())) {
             if (ShikakuKubun._２号.getコード().equals(直近被保データ.getHihokennshaKubunCode())) {
                 転入処理後Entity = set年齢到達している場合(直近被保データ, 転入処理後Entity, 転入前Entity, 資格取得フラグ, 喪失被保険者list);
             }
@@ -413,7 +422,7 @@ public class JuminIdoRendoTennyuManager {
 
     }
 
-    private JuminIdoRendoTennyuEntity 年齢到達チェック(boolean 資格取得フラグ,
+    private JuminIdoRendoTennyuEntity set年齢到達チェック(boolean 資格取得フラグ,
             DbV1001HihokenshaDaichoEntity 直近被保データ,
             TennyuuMaeparametaEntity 転入前Entity,
             JuminIdoRendoTennyuEntity 転入処理後Entity) {
@@ -424,11 +433,11 @@ public class JuminIdoRendoTennyuManager {
         return 転入処理後Entity;
     }
 
-    private JuminIdoRendoTennyuEntity 転入処理年齢到達チェック(boolean 資格取得フラグ,
+    private JuminIdoRendoTennyuEntity set転入処理年齢到達チェック(boolean 資格取得フラグ,
             DbV1001HihokenshaDaichoEntity 直近被保データ,
             TennyuuMaeparametaEntity 転入前Entity,
             JuminIdoRendoTennyuEntity 転入処理後Entity) {
-        資格取得フラグ = 転入処理_年齢到達(直近被保データ, 転入前Entity, 転入処理後Entity, 資格取得フラグ);
+        資格取得フラグ = set転入処理_年齢到達(直近被保データ, 転入前Entity, 転入処理後Entity, 資格取得フラグ);
         if (資格取得フラグ) {
             return 転入処理後Entity;
         }
@@ -439,10 +448,11 @@ public class JuminIdoRendoTennyuManager {
             JuminIdoRendoTennyuEntity 転入処理後Entity,
             TennyuuMaeparametaEntity 転入前Entity, boolean 資格取得フラグ,
             List<DbT1001HihokenshaDaichoEntity> 喪失被保険者list) {
-        if (ShikakuKubun._２号.getコード().equals(直近被保データ.getHihokennshaKubunCode())) {
-            転入処理後Entity = 年齢到達チェック(資格取得フラグ,
+        if (直近被保データ.getHihokennshaKubunCode() != null
+                && ShikakuKubun._２号.getコード().equals(直近被保データ.getHihokennshaKubunCode())) {
+            転入処理後Entity = set年齢到達チェック(資格取得フラグ,
                     直近被保データ, 転入前Entity, 転入処理後Entity);
-            転入処理後Entity = 転入処理年齢到達チェック(資格取得フラグ, 直近被保データ, 転入前Entity, 転入処理後Entity);
+            転入処理後Entity = set転入処理年齢到達チェック(資格取得フラグ, 直近被保データ, 転入前Entity, 転入処理後Entity);
             if (資格取得フラグ) {
                 return 転入処理後Entity;
             } else {
@@ -457,16 +467,17 @@ public class JuminIdoRendoTennyuManager {
             JuminIdoRendoTennyuEntity 転入処理後Entity,
             TennyuuMaeparametaEntity 転入前Entity, boolean 資格取得フラグ,
             List<DbT1001HihokenshaDaichoEntity> 喪失被保険者list) {
-        if (転入前Entity.get年齢到達日().isBeforeOrEquals(new FlexibleDate(RDate.getNowDate().toDateString()))) {
-            転入処理後Entity = 転入処理年齢到達チェック(資格取得フラグ, 直近被保データ, 転入前Entity, 転入処理後Entity);
-            転入処理後Entity = 年齢到達チェック(資格取得フラグ,
+        if (転入前Entity.get年齢到達日() != null && 転入前Entity.get年齢到達日()
+                .isBeforeOrEquals(new FlexibleDate(RDate.getNowDate().toDateString()))) {
+            転入処理後Entity = set転入処理年齢到達チェック(資格取得フラグ, 直近被保データ, 転入前Entity, 転入処理後Entity);
+            転入処理後Entity = set年齢到達チェック(資格取得フラグ,
                     直近被保データ, 転入前Entity, 転入処理後Entity);
             if (!資格取得フラグ) {
                 set転入_住特解除(直近被保データ, 転入前Entity, 喪失被保険者list);
                 set年齢到達_1_2_1(直近被保データ, 転入前Entity, 喪失被保険者list);
             }
         } else {
-            転入処理後Entity = 転入処理年齢到達チェック(資格取得フラグ, 直近被保データ, 転入前Entity, 転入処理後Entity);
+            転入処理後Entity = set転入処理年齢到達チェック(資格取得フラグ, 直近被保データ, 転入前Entity, 転入処理後Entity);
             if (!資格取得フラグ) {
                 set転入_住特解除(直近被保データ, 転入前Entity, 喪失被保険者list);
             }
@@ -478,8 +489,8 @@ public class JuminIdoRendoTennyuManager {
             JuminIdoRendoTennyuEntity 転入処理後Entity,
             TennyuuMaeparametaEntity 転入前Entity, boolean 資格取得フラグ,
             List<DbT1001HihokenshaDaichoEntity> 喪失被保険者list) {
-        if (ShikakuKubun._１号.getコード().equals(直近被保データ.getHihokennshaKubunCode())) {
-            転入処理後Entity = 転入処理年齢到達チェック(資格取得フラグ, 直近被保データ, 転入前Entity, 転入処理後Entity);
+        if (直近被保データ.getHihokennshaKubunCode() != null && ShikakuKubun._１号.getコード().equals(直近被保データ.getHihokennshaKubunCode())) {
+            転入処理後Entity = set転入処理年齢到達チェック(資格取得フラグ, 直近被保データ, 転入前Entity, 転入処理後Entity);
             set転入_住特解除(直近被保データ, 転入前Entity, 喪失被保険者list);
         }
         if (!資格取得フラグ) {
@@ -490,7 +501,7 @@ public class JuminIdoRendoTennyuManager {
 
     }
 
-    private boolean 転入処理_年齢到達(DbV1001HihokenshaDaichoEntity 直近被保データ, TennyuuMaeparametaEntity 転入前Entity,
+    private boolean set転入処理_年齢到達(DbV1001HihokenshaDaichoEntity 直近被保データ, TennyuuMaeparametaEntity 転入前Entity,
             JuminIdoRendoTennyuEntity 転入処理後Entity, boolean 資格取得フラグ) {
         if (転入前Entity.get登録異動日().isBefore(直近被保データ.getShikakuShutokuYMD())) {
             //TODO  DBAのEnum. JuminRendoFuseigoは存在しない。QA1497
@@ -541,6 +552,8 @@ public class JuminIdoRendoTennyuManager {
         builder.set広域内住所地特例フラグ(特例フラグ);
         builder.set論理削除フラグ(false);
         喪失被保険者list.add(builder.build().toEntity());
+        DbV1001HihokenshaDaichoEntity dbventity = new DbV1001HihokenshaDaichoEntity();
+        dbventity.setHihokenshaNo(被保険者番号);
         insertJigyoshaServiceJoho(builder.build());
     }
 

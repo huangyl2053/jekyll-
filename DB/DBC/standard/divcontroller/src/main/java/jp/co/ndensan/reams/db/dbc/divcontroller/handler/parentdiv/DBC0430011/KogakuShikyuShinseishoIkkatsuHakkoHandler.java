@@ -7,10 +7,12 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0430011;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.KogakuKaigoServicehiOshiraseHakko.KogakuKaigoServicehiOshiraseHakkoParameter;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuShikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuShikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
+import jp.co.ndensan.reams.db.dbc.business.core.kogakukaigoservicehioshirasehakko.KogakuKaigoServicehiOshiraseHakkoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0430011.KogakuShikyuShinseishoIkkatsuHakkoDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.KokuhorenInterfaceKanriManager;
@@ -21,6 +23,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -28,9 +31,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
- * 高額サービス費給付お知らせ通知書作成のハンドラクラスです。
+ * 高額サービス費給付お知らせ通知書作成です。
  *
- * @reamsid DBC-0430-011 zhengshenlei
+ * @reamsid_L DBC-4770-010 zhengshenlei
  */
 public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
 
@@ -56,6 +59,8 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
     private static final RString 交換情報識別番号_331 = new RString("331");
     private static final RString 交換情報識別番号_335 = new RString("335");
     private static final int DAY_9 = 9;
+    private static final RString HYOJI = new RString("hyoji");
+    private static final RString HIHYOJI = new RString("hihyoji");
 
     /**
      * コンストラクタです。
@@ -130,6 +135,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
         div.getJidoShokanTaishoJohoSettei().getTxtKetteiDate().setValue(nowDate);
 
         div.getCcdShuturyokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200091.getReportId());
+        div.getShinseishoHakkoParameters().getTxtHihokenshaNo().setReadOnly(true);
     }
 
     /**
@@ -145,6 +151,9 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
         if (メニューID_DBCMN43001.equals(menuID)) {
             List<KogakuShikyuShinsei> serviceTeikyoYMList
                     = KogakuShikyuShinseishoIkkatsu.createInstance().getServiceTeikyoByDbT3056(被保険者番号, 証記載保険者番号);
+            if (serviceTeikyoYMList.isEmpty()) {
+                throw new ApplicationException(DbcErrorMessages.被保険者の高額介護サービス支給申請情報が無い.getMessage());
+            }
             for (KogakuShikyuShinsei kogakuShikyuShinsei : serviceTeikyoYMList) {
                 FlexibleYearMonth サービス提供年月 = kogakuShikyuShinsei.getサービス提供年月();
                 datasource.add(new KeyValueDataSource(サービス提供年月.toDateString(), サービス提供年月.wareki().toDateString()));
@@ -152,6 +161,9 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
         } else if (メニューID_DBCMNL3001.equals(menuID)) {
             List<JigyoKogakuShikyuShinsei> serviceTeikyoYMList
                     = KogakuShikyuShinseishoIkkatsu.createInstance().getServiceTeikyoByDbT3110(被保険者番号, 証記載保険者番号);
+            if (serviceTeikyoYMList.isEmpty()) {
+                throw new ApplicationException(DbcErrorMessages.被保険者の高額介護サービス支給申請情報が無い.getMessage());
+            }
             for (JigyoKogakuShikyuShinsei jigyoKogakuShikyuShinsei : serviceTeikyoYMList) {
                 FlexibleYearMonth サービス提供年月 = jigyoKogakuShikyuShinsei.getサービス提供年月();
                 datasource.add(new KeyValueDataSource(サービス提供年月.toDateString(), サービス提供年月.wareki().toDateString()));
@@ -167,6 +179,11 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
      * @return KogakuKaigoServicehiOshiraseHakkoParameter parameter
      */
     public KogakuKaigoServicehiOshiraseHakkoParameter createBatchParameter(RString menuID) {
+        if (div.getShutsuryokuTaisho().getTxtShinseishoTeishutsuKigen().getValue().isEmpty()) {
+            throw new ApplicationException(DbcWarningMessages.申請書提出期限未入力.getMessage());
+        } else {
+            throw new ApplicationException(DbcWarningMessages.自動償還確認.getMessage());
+        }
         KogakuKaigoServicehiOshiraseHakkoParameter parameter = new KogakuKaigoServicehiOshiraseHakkoParameter();
         FlexibleYearMonth 処理年月 = FlexibleYearMonth.EMPTY;
         if (!div.getShinseishoHakkoParameters().getRadShinsaYM().getSelectedKey().isEmpty()) {
@@ -205,8 +222,14 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
         }
 
         if (div.getShutsuryokuTaisho().getChkHakkoIchiranhyoHakko().isAllSelected()) {
-            parameter.set金融機関表示(true);
+            parameter.set発行一覧表発行(true);
         } else {
+            parameter.set発行一覧表発行(false);
+        }
+
+        if (HYOJI.equals(div.getShutsuryokuTaisho().getRadKinyoKikanmeiHyoji().getSelectedKey())) {
+            parameter.set金融機関表示(true);
+        } else if (HIHYOJI.equals(div.getShutsuryokuTaisho().getRadKinyoKikanmeiHyoji().getSelectedKey())) {
             parameter.set金融機関表示(false);
         }
 
@@ -232,16 +255,25 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         RString 事業高額 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_事業高額,
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        if (NUM_1.equals(高額) || NUM_1.equals(事業高額)) {
-            parameter.set受託あり(false);
-        } else if (NUM_2.equals(高額) || NUM_2.equals(事業高額)) {
-            parameter.set受託あり(true);
+        if (メニューID_DBCMN43001.equals(menuID)) {
+            if (NUM_1.equals(高額)) {
+                parameter.set受託あり(false);
+            } else if (NUM_2.equals(高額)) {
+                parameter.set受託あり(true);
+            }
+        } else if (メニューID_DBCMNL3001.equals(menuID)) {
+            if (NUM_1.equals(事業高額)) {
+                parameter.set受託あり(false);
+            } else if (NUM_2.equals(事業高額)) {
+                parameter.set受託あり(true);
+            }
         }
         return parameter;
     }
 
     /**
      * 審査年月/受取年月のセットのメソッドです。
+     *
      * @param 区分　Rstring
      */
     public void set審査年月(RString 区分) {

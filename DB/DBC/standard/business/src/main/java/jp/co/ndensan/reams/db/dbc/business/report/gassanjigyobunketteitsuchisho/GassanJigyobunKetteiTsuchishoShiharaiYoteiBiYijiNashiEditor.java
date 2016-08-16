@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunketteitsuchisho
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.gassanjigyobunketteitsuchisho.GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource;
-import jp.co.ndensan.reams.db.dbc.entity.report.gassanjigyobunketteitsuchisho.KogakuGassanShikyuKetteiTsuchisho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
@@ -24,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 /**
  * （高額合算支給（不支給）決定通知書）支払予定日なしのEditorです。
  *
- * @reamsid_L DBC-4850-030 dongqianjing
+ * @reamsid_L DBC-4850-030 chenyadong
  */
 public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor implements
         IGassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor {
@@ -175,9 +174,7 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
 
     private GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource edit文書(
             GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
-        if (entity.get文書番号() != null) {
-            source.bunshoNo = entity.get文書番号();
-        }
+        source.bunshoNo = entity.get文書番号();
         return source;
     }
 
@@ -201,48 +198,32 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
 
     private GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource edit通知書(
             GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
-        if (entity.getTitle() != null) {
-            source.title = entity.getTitle();
-        }
-        if (entity.getTitle21() != null) {
-            source.title21 = entity.getTitle21();
-        }
-        if (entity.getTitle221() != null) {
-            source.title221 = entity.getTitle221();
-        }
-        if (entity.getTitle222() != null) {
-            source.title222 = entity.getTitle222();
-        }
-        if (entity.getTitle231() != null) {
-            source.title231 = entity.getTitle231();
-        }
-        if (entity.getTitle232() != null) {
-            source.title232 = entity.getTitle232();
-        }
-        if (entity.getTitle24() != null) {
-            source.title24 = entity.getTitle24();
-        }
-        if (entity.get文書1() != null) {
-            source.tsuchibun1 = entity.get文書1();
-        }
-        if (entity.get被保険者氏名() != null) {
-            source.hihokenshaName = entity.get被保険者氏名();
-        }
-        RString 被保険者番号 = entity.get被保険者番号().getColumnValue();
-        if (被保険者番号 != null && INT_10 <= 被保険者番号.length()) {
-            source.hihoNo = 被保険者番号.substring(0, INT_1);
-            source.hihoNo2 = 被保険者番号.substring(INT_1, INT_2);
-            source.hihoNo3 = 被保険者番号.substring(INT_2, INT_3);
-            source.hihoNo4 = 被保険者番号.substring(INT_3, INT_4);
-            source.hihoNo5 = 被保険者番号.substring(INT_4, INT_5);
-            source.hihoNo6 = 被保険者番号.substring(INT_5, INT_6);
-            source.hihoNo7 = 被保険者番号.substring(INT_6, INT_7);
-            source.hihoNo8 = 被保険者番号.substring(INT_7, INT_8);
-            source.hihoNo9 = 被保険者番号.substring(INT_8, INT_9);
-            source.hihoNo10 = 被保険者番号.substring(INT_9, INT_10);
+        source.title = entity.getTitle();
+        source.title21 = entity.getTitle21();
+        source.title221 = entity.getTitle221();
+        source.title222 = entity.getTitle222();
+        source.title231 = entity.getTitle231();
+        source.title232 = entity.getTitle232();
+        source.title24 = entity.getTitle24();
+        source.tsuchibun1 = entity.get文書1();
+        source.hihokenshaName = entity.get被保険者氏名();
+        if (entity.get被保険者番号() != null) {
+            RString 被保険者番号 = entity.get被保険者番号().getColumnValue();
+            if (被保険者番号 != null && INT_10 <= 被保険者番号.length()) {
+                source.hihoNo = 被保険者番号.substring(0, INT_1);
+                source.hihoNo2 = 被保険者番号.substring(INT_1, INT_2);
+                source.hihoNo3 = 被保険者番号.substring(INT_2, INT_3);
+                source.hihoNo4 = 被保険者番号.substring(INT_3, INT_4);
+                source.hihoNo5 = 被保険者番号.substring(INT_4, INT_5);
+                source.hihoNo6 = 被保険者番号.substring(INT_5, INT_6);
+                source.hihoNo7 = 被保険者番号.substring(INT_6, INT_7);
+                source.hihoNo8 = 被保険者番号.substring(INT_7, INT_8);
+                source.hihoNo9 = 被保険者番号.substring(INT_8, INT_9);
+                source.hihoNo10 = 被保険者番号.substring(INT_9, INT_10);
+            }
         }
         source.bangoTitle = 口座番号;
-        //TODO  source.sihaYoYmd
+        //TODO QA1180 source.sihaYoYmd
         source.tsuchibun2 = entity.get文書2();
         source.tsuchibun3 = entity.get文書3();
         source.tsuchibun4 = entity.get文書4();
@@ -301,9 +282,7 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
         return source;
     }
 
-    private GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource set給付の種類(
-            GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source, RString kyufuShurui) {
-
+    private void set給付の種類(GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source, RString kyufuShurui) {
         if (kyufuShurui.length() <= INT_38) {
             source.kyuhuShu = kyufuShurui.substring(0, kyufuShurui.length());
         } else if (kyufuShurui.length() > INT_38 && kyufuShurui.length() <= INT_76) {
@@ -319,7 +298,6 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
             source.kyuhuShu2 = kyufuShurui.substring(INT_38, INT_76);
             source.kyuhuShu3 = kyufuShurui.substring(INT_76, INT_114);
         }
-        return source;
     }
 
     private GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource set窓口払である(
@@ -356,14 +334,7 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
         if ((!shiharaiKaishiYMD.isEmpty() || !shiharaiShuryoYMD.isEmpty())
                 && kaishiTime != null) {
             this.set支払期間時間(source, kaishiTime);
-
         }
-
-        if ((!shiharaiKaishiYMD.isEmpty() || !shiharaiShuryoYMD.isEmpty()) && kaishiTime != null) {
-            this.set支払期間時間(source, kaishiTime);
-
-        }
-
         if ((!shiharaiKaishiYMD.isEmpty() || !shiharaiShuryoYMD.isEmpty())
                 && ((kaishiTime != null && !kaishiTime.isEmpty())
                 || (shuryoTime != null && !shuryoTime.isEmpty()))) {
@@ -460,15 +431,23 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
         if (entity.get口座情報() == null) {
             return source;
         }
-        source.bankName = entity.get口座情報().get金融機関().get金融機関名称();
-        if (!郵貯銀行.equals(entity.get口座情報().get金融機関コード().value())) {
-            source.bankShiten = entity.get口座情報().get支店().get支店名称();
+        if (entity.get口座情報().get金融機関() != null) {
+            source.bankName = entity.get口座情報().get金融機関().get金融機関名称();
+        }
+        if (entity.get口座情報().get金融機関コード() != null && !郵貯銀行.equals(entity.get口座情報().get金融機関コード().value())) {
+            if (entity.get口座情報().get支店() != null) {
+                source.bankShiten = entity.get口座情報().get支店().get支店名称();
+            }
             source.shumokuTitle = 口座種別;
-            source.kouzaShu = new RString(entity.get口座情報().get預金種別().toString());
+            if (entity.get口座情報().get預金種別() != null) {
+                source.kouzaShu = new RString(entity.get口座情報().get預金種別().toString());
+            }
         } else {
 
             source.shumokuTitle = 店番;
-            source.kouzaShu = entity.get口座情報().get支店コード().value();
+            if (entity.get口座情報().get支店コード() != null) {
+                source.kouzaShu = entity.get口座情報().get支店コード().value();
+            }
             for (ChohyoSeigyoHanyo キー : 帳票制御汎用キー) {
                 if (ゆうちょ銀行店名表示.equals(キー.get項目名())) {
                     this.set金融機関支店名(キー, source);
@@ -478,13 +457,15 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
 
         }
         source.kouzaNo1 = entity.get口座情報().get口座番号();
-        source.kouzaMeigi = entity.get口座情報().get口座名義人().value();
+        if (entity.get口座情報().get口座名義人() != null) {
+            source.kouzaMeigi = entity.get口座情報().get口座名義人().value();
+        }
         return source;
     }
 
     private GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource set金融機関支店名(ChohyoSeigyoHanyo キー,
             GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
-        if (RSTRING_1.equals(キー.get設定値())) {
+        if (RSTRING_1.equals(キー.get設定値()) && entity.get口座情報().get支店() != null) {
             source.bankShiten = entity.get口座情報().get支店().get支店名称();
         }
         return source;
