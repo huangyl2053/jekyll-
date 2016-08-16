@@ -37,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-4990-030 pengxingyi
  */
-public class DBC180040_FutanwariaishoHakkoFlow extends BatchFlowBase<DBC180040_FutanwariaishoHakkoParameter> {
+public class DBC180040_FutanwariaishoHakko extends BatchFlowBase<DBC180040_FutanwariaishoHakkoParameter> {
 
     private static final RString 定数_0 = new RString("0");
     private static final RString 定数_1 = new RString("1");
