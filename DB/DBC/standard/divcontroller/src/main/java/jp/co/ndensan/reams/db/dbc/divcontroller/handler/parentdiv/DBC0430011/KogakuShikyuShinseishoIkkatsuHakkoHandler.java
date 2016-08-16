@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuShikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakukaigoservicehioshirasehakko.KogakuKaigoServicehiOshiraseHakkoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
-import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0430011.KogakuShikyuShinseishoIkkatsuHakkoDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.KokuhorenInterfaceKanriManager;
@@ -179,11 +178,6 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
      * @return KogakuKaigoServicehiOshiraseHakkoParameter parameter
      */
     public KogakuKaigoServicehiOshiraseHakkoParameter createBatchParameter(RString menuID) {
-        if (div.getShutsuryokuTaisho().getTxtShinseishoTeishutsuKigen().getValue().isEmpty()) {
-            throw new ApplicationException(DbcWarningMessages.申請書提出期限未入力.getMessage());
-        } else {
-            throw new ApplicationException(DbcWarningMessages.自動償還確認.getMessage());
-        }
         KogakuKaigoServicehiOshiraseHakkoParameter parameter = new KogakuKaigoServicehiOshiraseHakkoParameter();
         FlexibleYearMonth 処理年月 = FlexibleYearMonth.EMPTY;
         if (!div.getShinseishoHakkoParameters().getRadShinsaYM().getSelectedKey().isEmpty()) {
@@ -250,7 +244,12 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
         } else {
             parameter.set文書番号文字列(文書番号);
         }
+        set受託あり(parameter, menuID);
+        return parameter;
+    }
 
+    private void set受託あり(KogakuKaigoServicehiOshiraseHakkoParameter parameter,
+            RString menuID) {
         RString 高額 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額,
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         RString 事業高額 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_事業高額,
@@ -268,13 +267,12 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
                 parameter.set受託あり(true);
             }
         }
-        return parameter;
     }
 
     /**
      * 審査年月/受取年月のセットのメソッドです。
      *
-     * @param 区分　Rstring
+     * @param 区分 Rstring
      */
     public void set審査年月(RString 区分) {
         List<KeyValueDataSource> radShinsaYM = new ArrayList<>();
