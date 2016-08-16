@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.service.report.dbd200012;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200012.TokubetsuChiikiKasanKeigenJissekiKanriIchiranProerty;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200012.TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenjissekikanri.KyuhuJissekiHihokensha;
@@ -34,7 +33,7 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranPrintService {
     /**
      * 帳票を出力
      *
-     * @param 帳票情報リスト List<TokubetsuChiikiKasanKeigenJissekiKanri>
+     * @param 帳票情報 TokubetsuChiikiKasanKeigenJissekiKanri
      * @param 作成日時 YMDHMS
      * @param 個人情報 IKojin
      * @param association Association
@@ -42,13 +41,13 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranPrintService {
      * @param 宛名 KyuhuJissekiHihokensha
      * @param reportManager 帳票発行処理の制御機能
      */
-    public void print(List<TokubetsuChiikiKasanKeigenJissekiKanri> 帳票情報リスト, YMDHMS 作成日時, Association association,
+    public void print(TokubetsuChiikiKasanKeigenJissekiKanri 帳票情報, YMDHMS 作成日時, Association association,
             IOutputOrder iOutputOrder, IKojin 個人情報, KyuhuJissekiHihokensha 宛名, ReportManager reportManager) {
         TokubetsuChiikiKasanKeigenJissekiKanriIchiranProerty property = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranProerty();
         try (ReportAssembler<TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport report = TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport.
-                    createReport(帳票情報リスト, association, iOutputOrder, 宛名);
+                    createReport(帳票情報, association, iOutputOrder, 宛名);
             report.writeBy(reportSourceWriter);
 
         }
