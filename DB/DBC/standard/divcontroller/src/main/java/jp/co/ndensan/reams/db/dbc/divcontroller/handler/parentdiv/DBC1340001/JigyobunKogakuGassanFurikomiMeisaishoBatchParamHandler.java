@@ -18,6 +18,10 @@ import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
 import jp.co.ndensan.reams.ua.uax.service.core.kinyukikan.KinyuKikanManager;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -174,6 +178,7 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
         if (口座.equals(支払方法)) {
             div.getShuturyokuTyouhyou().getDdlSyuturyokuTyouhyou().setDisabled(false);
         } else {
+            div.getTyuusyutuJyoukenn().getTxtItakusya().setDisabled(true);
             div.getShuturyokuTyouhyou().getDdlSyuturyokuTyouhyou().setSelectedKey(KEY_3);
             div.getShuturyokuTyouhyou().getDdlSyuturyokuTyouhyou().setDisabled(true);
         }
@@ -267,15 +272,15 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
      */
     public DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter creatParameter() {
         // QA#94411
-//        RString 出力順 = RString.EMPTY;
-//        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-//        IOutputOrder iOutputOrder = finder.get出力順(
-//                SubGyomuCode.DBC介護給付,
-//                帳票ID,
-//                Long.valueOf(div.getCcdChohyoShusuryokujun().get出力順ID().toString()));
-//        if (iOutputOrder != null) {
-//            出力順 = MyBatisOrderByClauseCreator.create(null, iOutputOrder);
-//        }
+        RString 出力順 = RString.EMPTY;
+        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+        IOutputOrder iOutputOrder = finder.get出力順(
+                SubGyomuCode.DBC介護給付,
+                帳票ID,
+                Long.valueOf(div.getCcdChohyoShusuryokujun().get出力順ID().toString()));
+        if (iOutputOrder != null) {
+            出力順 = MyBatisOrderByClauseCreator.create(null, iOutputOrder);
+        }
 //        RString 支払方法 = div.getRadSiharaihouhou().getSelectedValue();
         DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter parameter = new DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter();
 //        RDate 今回対象年月日From = div.getTyuusyutuHanni().getTxtKonnkaiTaisyouNenngappi().getFromValue();
@@ -305,7 +310,9 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
 //        parameter.set振込指定日(振込指定日);
 //        parameter.set発行対象(発行対象);
 //        parameter.set取引先金融機関支店名称(取引先金融機関支店名称);
-//        parameter.set出力順設定リスト(出力順);
+//        List<RString> 出力順リスト = new ArrayList<>();
+//        出力順リスト.add(出力順);
+//        parameter.set出力順設定リスト(出力順リスト);
 //        parameter.set対象作成年月日(対象作成年月日);
         return parameter;
     }

@@ -98,8 +98,7 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
         return source;
     }
 
-    private GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource editSource(
-            GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
+    private void editSource(GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
         ワーク窓口払区分 = RSTRING_0;
         ワーク口座払区分 = RSTRING_0;
         ワーク不支給区分 = RSTRING_0;
@@ -129,12 +128,9 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
 
         }
 
-        return source;
-
     }
 
-    private GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource edit送付物宛先(
-            GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
+    private void edit送付物宛先(GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
         SofubutsuAtesakiSource 送付物宛先 = entity.get送付物宛先();
         if (送付物宛先 != null) {
             source.yubinNo = 送付物宛先.yubinNo;
@@ -169,18 +165,13 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
             source.kakkoRight1 = 送付物宛先.kakkoRight1;
             source.kakkoRight2 = 送付物宛先.kakkoRight2;
         }
-        return source;
     }
 
-    private GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource edit文書(
-            GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
+    private void edit文書(GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
         source.bunshoNo = entity.get文書番号();
-        return source;
     }
 
-    private GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource edit認証者(
-            GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
-
+    private void edit認証者(GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
         if (ninshoshaSource != null) {
             source.denshiKoin = ninshoshaSource.denshiKoin;
             source.hakkoYMD = ninshoshaSource.hakkoYMD;
@@ -191,13 +182,10 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
             source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
             source.koinShoryaku = ninshoshaSource.koinShoryaku;
             source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
-
         }
-        return source;
     }
 
-    private GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource edit通知書(
-            GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
+    private void edit通知書(GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
         source.title = entity.getTitle();
         source.title21 = entity.getTitle21();
         source.title221 = entity.getTitle221();
@@ -230,12 +218,9 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
         source.tsuchibun5 = entity.get文書5();
         source.tsuchibun6 = entity.get文書6();
         source.tsuchibun7 = entity.get文書7();
-
-        return source;
     }
 
-    private GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource set事業高額合算支給不支給決定(
-            GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
+    private void set事業高額合算支給不支給決定(GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
         RString 計算対象期間開始年月 = getパターン62(事業高額合算支給不支給決定.getKeisanKaishiYMD());
         RString 計算対象期間終了年月 = getパターン62(事業高額合算支給不支給決定.getKeisanShuryoYMD());
         source.taisyoStYm = 計算対象期間開始年月;
@@ -279,7 +264,6 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
         if (事業高額合算支給不支給決定.getShikyuSeiriNo() != null) {
             source.tsuchiNo = 事業高額合算支給不支給決定.getShikyuSeiriNo();
         }
-        return source;
     }
 
     private void set給付の種類(GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source, RString kyufuShurui) {
@@ -300,17 +284,13 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
         }
     }
 
-    private GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource set窓口払である(
-            GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
+    private void set窓口払である(GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
         this.set持ち物(source);
         this.set支払場所(source);
-        if (事業高額合算支給不支給決定.getShiharaiKaishiYMD() == null || 事業高額合算支給不支給決定.getShiharaiShuryoYMD() == null) {
-            return source;
-        }
         FlexibleDate shiharaiKaishiYMD = 事業高額合算支給不支給決定.getShiharaiKaishiYMD();
         FlexibleDate shiharaiShuryoYMD = 事業高額合算支給不支給決定.getShiharaiShuryoYMD();
         if (shiharaiKaishiYMD == null || shiharaiShuryoYMD == null) {
-            return source;
+            return;
         }
         if (!shiharaiKaishiYMD.isEmpty()) {
             RString 開始曜日 = new RString(shiharaiKaishiYMD.getDayOfWeek().getMiddleTerm());
@@ -324,11 +304,10 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
             source.maEdYmd = getパターン12(shiharaiShuryoYMD).concat(終了曜日);
         }
         set支払期間(shiharaiKaishiYMD, shiharaiShuryoYMD, source);
-        return source;
     }
 
-    private GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource set支払期間(FlexibleDate shiharaiKaishiYMD,
-            FlexibleDate shiharaiShuryoYMD, GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
+    private void set支払期間(FlexibleDate shiharaiKaishiYMD, FlexibleDate shiharaiShuryoYMD,
+            GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
         RString kaishiTime = 事業高額合算支給不支給決定.getShiharaiKaishiTime();
         RString shuryoTime = 事業高額合算支給不支給決定.getShiharaiShuryoTime();
         if ((!shiharaiKaishiYMD.isEmpty() || !shiharaiShuryoYMD.isEmpty())
@@ -343,16 +322,14 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
         if ((!shiharaiKaishiYMD.isEmpty() || !shiharaiShuryoYMD.isEmpty()) && shuryoTime != null) {
             this.set支払期間時間(source, shuryoTime);
         }
-        return source;
     }
 
-    private GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource set支払場所(
-            GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
+    private void set支払場所(GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
         if (事業高額合算支給不支給決定.getShiharaiBasho() != null) {
 
             RString shiharaiBasho = 事業高額合算支給不支給決定.getShiharaiBasho();
             if (shiharaiBasho == null || shiharaiBasho.isEmpty()) {
-                return source;
+                return;
             }
             if (shiharaiBasho.length() <= INT_16) {
                 source.maBasho1 = shiharaiBasho.substring(0, shiharaiBasho.length());
@@ -375,11 +352,9 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
                 source.maBasho4 = shiharaiBasho.substring(INT_48, INT_64);
             }
         }
-        return source;
     }
 
-    private GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource set持ち物(
-            GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
+    private void set持ち物(GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
         for (ChohyoSeigyoHanyo キー : 帳票制御汎用キー) {
             if (持ち物内容文言１.equals(キー.get項目名())) {
                 source.mochimono1 = キー.get設定値();
@@ -392,13 +367,11 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
                 break;
             }
         }
-        return source;
     }
 
-    private GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource set支払期間時間(
-            GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source, RString time) {
+    private void set支払期間時間(GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source, RString time) {
         if (time.isEmpty()) {
-            return null;
+            return;
         }
         RString hh = time.substring(0, INT_2);
         RString mm = time.substring(INT_2, INT_4);
@@ -422,14 +395,11 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
                 source.maEdJikan = source.maEdJikan.concat(mm).concat(分);
             }
         }
-
-        return source;
     }
 
-    private GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource set口座払である(
-            GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
+    private void set口座払である(GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
         if (entity.get口座情報() == null) {
-            return source;
+            return;
         }
         if (entity.get口座情報().get金融機関() != null) {
             source.bankName = entity.get口座情報().get金融機関().get金融機関名称();
@@ -460,15 +430,13 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
         if (entity.get口座情報().get口座名義人() != null) {
             source.kouzaMeigi = entity.get口座情報().get口座名義人().value();
         }
-        return source;
     }
 
-    private GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource set金融機関支店名(ChohyoSeigyoHanyo キー,
+    private void set金融機関支店名(ChohyoSeigyoHanyo キー,
             GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
         if (RSTRING_1.equals(キー.get設定値()) && entity.get口座情報().get支店() != null) {
             source.bankShiten = entity.get口座情報().get支店().get支店名称();
         }
-        return source;
     }
 
     private static RString getパターン12(FlexibleDate date) {

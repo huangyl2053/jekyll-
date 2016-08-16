@@ -212,6 +212,10 @@ public enum ReportIdDBD {
      */
     DBD200037(new ReportId("DBD200037_JukyushaIdoCheckList"), new RString("受給者異動チェックリスト")),
     /**
+     * 受給者台帳の帳票ＩＤです。
+     */
+    DBD100026(new ReportId("DBD100026_JukyushaDaicho"), new RString("受給者台帳")),
+    /**
      * 要介護認定延期通知書発行一覧表の帳票ＩＤです。
      */
     DBD522002(new ReportId("DBD522002_NinteiEnkiTsuchishoHakkoIchiranhyo"), new RString("要介護認定延期通知書発行一覧表"));

@@ -5,7 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0430011;
 
-import jp.co.ndensan.reams.db.dbc.business.core.kogakukaigoservicehioshirasehakko.KogakuKaigoServicehiOshiraseHakkoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc020020.DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0430011.DBC0430011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0430011.KogakuShikyuShinseishoIkkatsuHakkoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0430011.KogakuShikyuShinseishoIkkatsuHakkoHandler;
@@ -98,12 +99,26 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
     }
 
     /**
+     * onBeforeOpenDialogのメソッドです。
+     *
+     * @param div KogakuShikyuShinseishoIkkatsuHakkoDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> onBeforeOpenDialog(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
+        if (div.getShutsuryokuTaisho().getTxtShinseishoTeishutsuKigen().getValue().isEmpty()) {
+            return ResponseData.of(div).addMessage(DbcWarningMessages.申請書提出期限未入力.getMessage()).respond();
+        } else {
+            return ResponseData.of(div).addMessage(DbcWarningMessages.自動償還確認.getMessage()).respond();
+        }
+    }
+
+    /**
      * 「確定処理を実行する（バッチ用）」ボタンのメソッドです。
      *
      * @param div HeijunkaKakuteiDiv
      * @return ResponseData
      */
-    public ResponseData<KogakuKaigoServicehiOshiraseHakkoParameter> onclick_btBatch(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
+    public ResponseData<DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter> onclick_btBatch(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
         LockingKey 排他キー = new LockingKey(controlData.getMenuID());
@@ -111,7 +126,7 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
         if (!gotLock) {
             throw new PessimisticLockingException();
         }
-        KogakuKaigoServicehiOshiraseHakkoParameter parameter = getHandler(div).createBatchParameter(menuID);
+        DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter parameter = getHandler(div).createBatchParameter(menuID);
         RealInitialLocker.release(排他キー);
         return ResponseData.of(parameter).respond();
     }
