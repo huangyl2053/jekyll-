@@ -38,6 +38,7 @@
         </repository>
     </repositories>
     <properties>
+        <!-- MyBatisプラグイン用 -->
         <!-- 自業務公開系 DBXのバージョンと一致させること-->
         <jp.co.ndensan.reams.dbxVersion>1.12.0</jp.co.ndensan.reams.dbxVersion>
         <!-- UZ -->
@@ -50,13 +51,6 @@
         <jp.co.ndensan.reams.caxVersion>1.12.0</jp.co.ndensan.reams.caxVersion>
         <!-- other -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- MyBatisプラグイン用 -->
-        <!--<jp.co.ndensan.reams.dbxVersion>${jp.co.ndensan.reams.dbxVersion}</jp.co.ndensan.reams.dbxVersion>-->
-        <!--<jp.co.ndensan.reams.uaxVersion>${jp.co.ndensan.reams.uaxVersion}</jp.co.ndensan.reams.uaxVersion>-->
-        <!--<jp.co.ndensan.reams.caxVersion>${jp.co.ndensan.reams.caxVersion}</jp.co.ndensan.reams.caxVersion>-->
-        <!--<jp.co.ndensan.reams.uxxVersion>${jp.co.ndensan.reams.uxxVersion}</jp.co.ndensan.reams.uxxVersion>-->
-        <!--<jp.co.ndensan.reams.uexVersion>${jp.co.ndensan.reams.uexVersion}</jp.co.ndensan.reams.uexVersion>-->
-        <!--<jp.co.ndensan.reams.urVersion>${jp.co.ndensan.reams.urVersion}</jp.co.ndensan.reams.urVersion>-->
     </properties>
     <dependencies>
         <dependency>
@@ -534,7 +528,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-<!--
+
     <build>
         <pluginManagement>
             <plugins>
@@ -583,10 +577,10 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <checkmode>full</checkmode>  <!- - full:DB接続を伴う完全なチェック, skip:チェックしない, default:1.9.1と同じ、DB接続なしのチェック - ->
+                    <checkmode>full</checkmode>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-    -->
+
 </project>
