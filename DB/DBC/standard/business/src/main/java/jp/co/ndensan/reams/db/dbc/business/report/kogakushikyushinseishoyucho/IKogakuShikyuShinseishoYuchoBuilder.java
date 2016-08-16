@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  * 高額介護（予防）サービス費支給申請書（ゆうちょ）帳票IBuilderインターフェースです。
  *
- * @@reamsid_L DBC-4770-070 jiangxiaolong
+ * @reamsid_L DBC-4770-070 jiangxiaolong
  */
 public interface IKogakuShikyuShinseishoYuchoBuilder extends IReportBuilder<KogakuShikyuShinseishoYuchoSource> {
 
