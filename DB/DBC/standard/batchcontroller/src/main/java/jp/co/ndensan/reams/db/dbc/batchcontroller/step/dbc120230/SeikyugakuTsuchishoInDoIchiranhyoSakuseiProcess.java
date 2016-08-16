@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -51,12 +52,11 @@ public class SeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess extends BatchKeyBre
 
     private KohifutanshaDoIchiranhyoSakuseiProcessParameter parameter;
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200066");
-    private FileSpoolManager manager;
     List<RString> 改頁項目リスト;
     private int index = 0;
     FileSpoolManager seikyugakuTsuchishoInManager;
     private RString seikyugakuTsuchishoInEucFilePath;
-     private static final RString 出力ファイル名
+    private static final RString 出力ファイル名
             = new RString("DBC200066_SeikyugakuTsuchisho.csv");
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
@@ -77,11 +77,15 @@ public class SeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess extends BatchKeyBre
     }
 
     @Override
+    protected IBatchReader createReader() {
+        return new BatchDbReader(READ_DATA_ID);
+    }
+
+    @Override
     protected void createWriter() {
         PageBreaker<SeikyugakuTsuchishoSource> breaker = new SeikyugakuTsuchishoInPageBreak(改頁項目リスト);
         batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC120230.getReportId().value()).addBreak(breaker).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         seikyugakuTsuchishoInManager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID,
                 UzUDE0831EucAccesslogFileType.Csv);
         seikyugakuTsuchishoInEucFilePath = Path.combinePath(seikyugakuTsuchishoInManager.getEucOutputDirectry(),
@@ -99,6 +103,7 @@ public class SeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess extends BatchKeyBre
     @Override
     protected void beforeExecute() {
         改頁項目リスト.add(new RString(SeikyugakuTsuchishoSource.DBC200066SourceFields.shoKisaiHokenshaNo.name()));
+        // TODO QA 内部番号 1241
         改頁項目リスト.add(new RString(SeikyugakuTsuchishoSource.DBC200066SourceFields.kanName.name()));
         改頁項目リスト.add(new RString(SeikyugakuTsuchishoSource.DBC200066SourceFields.kouName.name()));
     }
@@ -122,28 +127,24 @@ public class SeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess extends BatchKeyBre
         seikyugakuTsuchishoInCsvWriter.close();
     }
 
-    @Override
-    protected IBatchReader createReader() {
-        return new BatchDbReader(READ_DATA_ID);
-    }
-
     private SeikyugakuTsuchishoInCsvEntity get帳票のCSVファイル作成(DbWT1511SeikyugakuTsuchishoTempEntity 請求額通知書,
             RDateTime 作成日時) {
         SeikyugakuTsuchishoInCsvEntity output = new SeikyugakuTsuchishoInCsvEntity();
         if (index == 0) {
-            output.set審査年月(請求額通知書.get審査年月().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            output.set審査年月(パターン56(請求額通知書.get審査年月()));
             RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                     .fillType(FillType.BLANK).toDateString();
             RString 作成時 = 作成日時.getTime()
-                    .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE);
+                    .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
             output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時));
+            output.set国保連合会名(請求額通知書.get国保連合会名());
             index++;
         } else {
             output.set審査年月(RString.EMPTY);
             output.set作成日時(RString.EMPTY);
+            output.set国保連合会名(RString.EMPTY);
         }
-        output.set国保連合会名(請求額通知書.get国保連合会名());
         output.set保険者番号(getColumnValue(請求額通知書.get保険者番号()));
         output.set保険者名(請求額通知書.get保険者名());
         output.set証記載保険者番号(getColumnValue(請求額通知書.get証記載保険者番号()));
@@ -213,6 +214,13 @@ public class SeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess extends BatchKeyBre
             return entity.getColumnValue();
         }
         return RString.EMPTY;
+    }
+
+    private RString パターン56(FlexibleYearMonth 年月) {
+        if (null == 年月) {
+            return RString.EMPTY;
+        }
+        return 年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
 }
