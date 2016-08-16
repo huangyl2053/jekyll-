@@ -37,7 +37,7 @@ public class ShogaishaKoujoTaishoNinteiSho {
         handler.onLoad();
         RDate rDate = RDate.getNowDate();
         div.getShogaishaKojoNinteishoOutput().getTxtKofuDay().setValue(rDate);
-        div.getShogaishaKojoNinteishoOutput().getCommonChildDiv1().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD100025.getReportId());
+        div.getShogaishaKojoNinteishoOutput().getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD100025.getReportId());
         return ResponseData.of(div).respond();
 
     }
