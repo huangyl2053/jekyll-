@@ -86,7 +86,7 @@
         T4101."ninteiShinseiShinseijiKubunCode" AS 認定申請区分コード_申請時,
         V4001."shishoCode" AS 支所コード,
         V4001."kyuSochishaFlag" AS 旧措置者フラグ,
-        T4101."enkiTsuchiHakkoKaisu" AS 被保険者区分コード,
+        T4101."hihokenshaKubunCode" AS 被保険者区分コード,
         V4001."shikakuShutokuMaeShinseiFlag" AS 資格取得前申請フラグ,
         T4101."nigoTokuteiShippeiCode" AS 二号特定疾病コード,
         T4101."ninteiShinseiRiyu" AS 認定申請理由,

@@ -387,4 +387,13 @@ public class KyufuKanrihyoShokaiBusiness implements Serializable {
     public RString get氏名() {
         return entity.get氏名();
     }
+
+    /**
+     * サービス事業者名を返します。
+     *
+     * @return サービス事業者名
+     */
+    public RString getサービス事業者名() {
+        return entity.getサービス事業者名();
+    }
 }
