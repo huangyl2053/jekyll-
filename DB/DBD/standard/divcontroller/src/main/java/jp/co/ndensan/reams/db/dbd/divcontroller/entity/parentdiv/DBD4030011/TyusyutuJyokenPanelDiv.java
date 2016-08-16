@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class TyusyutuJyokenPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -43,8 +43,8 @@ public class TyusyutuJyokenPanelDiv extends Panel {
     private DropDownList ddlShogaishaTecho;
     @JsonProperty("txtKeteiDay")
     private TextBoxDateRange txtKeteiDay;
-    @JsonProperty("DropDownList1")
-    private DropDownList DropDownList1;
+    @JsonProperty("ddlZenkaiHigaito")
+    private DropDownList ddlZenkaiHigaito;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -251,21 +251,21 @@ public class TyusyutuJyokenPanelDiv extends Panel {
     }
 
     /*
-     * getDropDownList1
-     * @return DropDownList1
+     * getddlZenkaiHigaito
+     * @return ddlZenkaiHigaito
      */
-    @JsonProperty("DropDownList1")
-    public DropDownList getDropDownList1() {
-        return DropDownList1;
+    @JsonProperty("ddlZenkaiHigaito")
+    public DropDownList getDdlZenkaiHigaito() {
+        return ddlZenkaiHigaito;
     }
 
     /*
-     * setDropDownList1
-     * @param DropDownList1 DropDownList1
+     * setddlZenkaiHigaito
+     * @param ddlZenkaiHigaito ddlZenkaiHigaito
      */
-    @JsonProperty("DropDownList1")
-    public void setDropDownList1(DropDownList DropDownList1) {
-        this.DropDownList1 = DropDownList1;
+    @JsonProperty("ddlZenkaiHigaito")
+    public void setDdlZenkaiHigaito(DropDownList ddlZenkaiHigaito) {
+        this.ddlZenkaiHigaito = ddlZenkaiHigaito;
     }
 
     // </editor-fold>
