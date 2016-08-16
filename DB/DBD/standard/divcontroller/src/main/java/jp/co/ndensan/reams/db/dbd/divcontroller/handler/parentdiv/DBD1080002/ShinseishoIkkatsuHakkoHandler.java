@@ -235,6 +235,7 @@ public class ShinseishoIkkatsuHakkoHandler {
     }
 
     /**
+     * 画面側からバッチパラメータを取得します。
      *
      * @param 発行処理ID UUID
      * @return DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter
