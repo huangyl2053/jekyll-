@@ -230,8 +230,6 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             div.getTxtKijunbi().setDisabled(true);
             div.getTxtHakkobi().setDisplayNone(true);
             div.getTxtKofubi().setDisplayNone(true);
-
-//            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
         }
         if (RSTONE.equals(処理区分)) {
             div.getDdlNendo().setDisabled(true);

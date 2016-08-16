@@ -87,11 +87,6 @@ public class DBC2000022PanelAll {
      * @return ResponseData<DBC2000022PanelAllDiv>
      */
     public ResponseData<DBC2000022PanelAllDiv> onLoad(DBC2000022PanelAllDiv div) {
-        TaishoshaKey 資格対象者1 = new TaishoshaKey(new HihokenshaNo("1034567001"), new ShikibetsuCode("210000000000077"), new SetaiCode("1"));
-        ViewStateHolder.put(ViewStateKeys.資格対象者, 資格対象者1);
-        ViewStateHolder.put(ViewStateKeys.年度, new FlexibleYear("2018"));
-        ViewStateHolder.put(ViewStateKeys.処理モード, new RString("照会"));
-
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         FlexibleYear 年度 = ViewStateHolder.get(ViewStateKeys.年度, FlexibleYear.class);
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
