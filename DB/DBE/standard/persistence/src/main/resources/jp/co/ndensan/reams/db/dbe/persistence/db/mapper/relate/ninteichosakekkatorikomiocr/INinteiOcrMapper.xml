@@ -16,6 +16,8 @@
           , T5115."imageSharedFileId" AS イメージ共有ファイルID
           , T5201."ninteichosaItakusakiCode" AS 認定調査委託先コード
           , T5201."ninteiChosainCode" AS 認定調査員コード 
+          , T5201."ninteichosaIraiKubunCode" AS 認定調査依頼区分コード
+          , T5201."ninteichosaIraiKaisu" AS 認定調査回数
         FROM
           rgdb."DbT5101NinteiShinseiJoho" AS T5101 
           INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS T5201 
