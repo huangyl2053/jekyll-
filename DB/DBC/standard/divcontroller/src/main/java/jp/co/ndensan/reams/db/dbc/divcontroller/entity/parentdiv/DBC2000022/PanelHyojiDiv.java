@@ -34,7 +34,7 @@ public class PanelHyojiDiv extends Panel {
     @JsonProperty("txtHanteiKubun")
     private TextBox txtHanteiKubun;
     @JsonProperty("btnSeikatsuHogo")
-    private Button btnSeikatsuHogo;
+    private ButtonDialog btnSeikatsuHogo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -155,7 +155,7 @@ public class PanelHyojiDiv extends Panel {
      * @return btnSeikatsuHogo
      */
     @JsonProperty("btnSeikatsuHogo")
-    public Button getBtnSeikatsuHogo() {
+    public ButtonDialog getBtnSeikatsuHogo() {
         return btnSeikatsuHogo;
     }
 
@@ -164,7 +164,7 @@ public class PanelHyojiDiv extends Panel {
      * @param btnSeikatsuHogo btnSeikatsuHogo
      */
     @JsonProperty("btnSeikatsuHogo")
-    public void setBtnSeikatsuHogo(Button btnSeikatsuHogo) {
+    public void setBtnSeikatsuHogo(ButtonDialog btnSeikatsuHogo) {
         this.btnSeikatsuHogo = btnSeikatsuHogo;
     }
 
