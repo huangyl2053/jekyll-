@@ -46,7 +46,6 @@ public class DBC120890_SogojigyohiSeikyugakuTsuchishoInFlow extends BatchFlowBas
     private static final String 取込済ファイル削除 = "deleteReveicedFile";
 
     private static final RString ファイル格納フォルダ名 = new RString("DBC120890");
-    private static final RString 帳票ID = new RString("DBC200087_SogojigyohiSeikyugakuTsuchisho");
 
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
     private FlowEntity flowEntity;
@@ -134,14 +133,10 @@ public class DBC120890_SogojigyohiSeikyugakuTsuchishoInFlow extends BatchFlowBas
      */
     @Step(一覧表作成)
     protected IBatchFlowCommand callDoIchiranhyoSakuseiProcess() {
-        return loopBatch(SogojigyohiSeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess.class).arguments(createParameter()).define();
-    }
-
-    private KohifutanshaDoIchiranhyoSakuseiProcessParameter createParameter() {
         KohifutanshaDoIchiranhyoSakuseiProcessParameter parameter
                 = new KohifutanshaDoIchiranhyoSakuseiProcessParameter();
         parameter.setシステム日付(RDateTime.now());
-        return parameter;
+        return loopBatch(SogojigyohiSeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess.class).arguments(parameter).define();
     }
 
     /**
@@ -153,7 +148,7 @@ public class DBC120890_SogojigyohiSeikyugakuTsuchishoInFlow extends BatchFlowBas
     protected IBatchFlowCommand callDoShoriKekkaListSakuseiProcess() {
         KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter parameter
                 = new KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter();
-        parameter.setエラーリストタイプ(KokuhorenJoho_TorikomiErrorListType.リストタイプ1);
+        parameter.setエラーリストタイプ(KokuhorenJoho_TorikomiErrorListType.リストタイプ0);
         return simpleBatch(KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess.class).arguments(parameter).define();
     }
 

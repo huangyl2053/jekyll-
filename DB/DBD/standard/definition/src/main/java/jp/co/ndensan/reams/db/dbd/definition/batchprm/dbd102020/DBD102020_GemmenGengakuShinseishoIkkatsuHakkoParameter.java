@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd102020;
 
+import java.util.UUID;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.gemmen.shinseisho.hakko.ShinseishoHakkoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +23,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter extends BatchParameterBase {
 
-    private RString 発行処理ID;
+    private UUID 発行処理ID;
     private boolean 出力フラグ;
     private long 改頁出力順ID;
     private FlexibleDate 基準日;
@@ -41,7 +41,7 @@ public class DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter extends Batc
      * @param 発行日 発行日
      */
     public DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter(
-            RString 発行処理ID,
+            UUID 発行処理ID,
             boolean 出力フラグ,
             long 改頁出力順ID,
             FlexibleDate 基準日,

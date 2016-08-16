@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 /**
  * 高額介護（予防）サービス費支給申請書（ゆうちょ）帳票Editorラクタです。
  *
- * @@reamsid_L DBC-4770-070 jiangxiaolong
+ * @reamsid_L DBC-4770-070 jiangxiaolong
  */
 public class KogakuShikyuShinseishoYuchoEditor implements IKogakuShikyuShinseishoYuchoEditor {
 

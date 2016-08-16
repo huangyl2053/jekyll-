@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 高額介護（予防）サービス費支給申請書帳票Reportラクタです。
  *
- * @author @reamsid_L DBC-4770-060 jiangxiaolong
+ * @reamsid_L DBC-4770-060 jiangxiaolong
  */
 public class KogakuShikyuShinseishoReport extends
         Report<KogakuShikyuShinseishoSource> {

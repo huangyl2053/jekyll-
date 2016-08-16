@@ -21,9 +21,11 @@ import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShoriKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.TainoHanteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.TaishoHanteiKubun;
 import jp.co.ndensan.reams.db.dbd.service.core.shokanbaraika1go.ShokanBaraiKa1GoManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoKanriKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoShuryoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoTorokuKubun;
@@ -129,6 +131,10 @@ public class ShokanBaraiKa1GoHandler {
         }
         ShokanBaraiKa1GoManager manager = new ShokanBaraiKa1GoManager();
         TainoHanteiResultKohen 滞納判定結果 = DataPassingConverter.deserialize(div.getTainoHanteiKekka(), TainoHanteiResultKohen.class);
+        ShoKisaiHokenshaNo 証記載保険者番号 = ShichosonSecurityJohoFinder.createInstance()
+                .getShichosonSecurityJoho(GyomuBunrui.介護事務)
+                .get市町村情報()
+                .get証記載保険者番号();
         switch (ShoriKubun.toValue(div.getKey_Button())) {
             case _1号予告者登録:
                 if (div.getShinkiKubun().equals(新規登録)) {
@@ -140,12 +146,12 @@ public class ShokanBaraiKa1GoHandler {
                                     div.getTxtBemmeishoTeishutsuKigenYMD().getValue(),
                                     div.getKey_MaxRirekiNo()));
                 } else {
-                    update支払方法変更_1号予告者();
+                    update支払方法変更_1号予告者(証記載保険者番号);
                     update支払方法変更滞納(滞納判定結果, TainoHanteiKubun.予告登録.getコード());
                 }
                 break;
             case _1号弁明書受理:
-                update支払方法変更_1号弁明書受理();
+                update支払方法変更_1号弁明書受理(証記載保険者番号);
                 break;
             case 償還払い化登録:
                 if (div.getShinkiKubun().equals(新規登録)) {
@@ -158,12 +164,12 @@ public class ShokanBaraiKa1GoHandler {
                                     div.getTxtHokenshoTeishutsuKigenYMD().getValue(),
                                     div.getKey_MaxRirekiNo()));
                 } else {
-                    update支払方法変更_償還払い化登録();
+                    update支払方法変更_償還払い化登録(証記載保険者番号);
                     update支払方法変更滞納(滞納判定結果, TainoHanteiKubun.償還払化登録.getコード());
                 }
                 break;
             case 償還払い化終了申請:
-                update支払方法変更_償還払い化終了申請();
+                update支払方法変更_償還払い化終了申請(証記載保険者番号);
                 break;
             default:
                 break;
@@ -335,10 +341,10 @@ public class ShokanBaraiKa1GoHandler {
         return new ShokanBaraiKa1GoValidationHandler();
     }
 
-    private void update支払方法変更_1号弁明書受理() {
+    private void update支払方法変更_1号弁明書受理(ShoKisaiHokenshaNo 証記載保険者番号) {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(一号償還払い化ダイアログキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         ShiharaiHohoHenkoBuilder builder = 支払方法変更管理業務概念.createBuilderForEdit();
-        if (支払方法変更管理業務概念.get証記載保険者番号().isEmpty()
+        if (支払方法変更管理業務概念.get証記載保険者番号().equals(証記載保険者番号)
                 && 支払方法変更管理業務概念.get被保険者番号().equals(new HihokenshaNo(div.getKey_HihokenshaNo()))
                 && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(支払方法変更管理業務概念.get管理区分())
                 && 支払方法変更管理業務概念.get履歴番号() == get最大履歴番号()) {
@@ -352,10 +358,10 @@ public class ShokanBaraiKa1GoHandler {
         }
     }
 
-    private void update支払方法変更_1号予告者() {
+    private void update支払方法変更_1号予告者(ShoKisaiHokenshaNo 証記載保険者番号) {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(一号償還払い化ダイアログキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         ShiharaiHohoHenkoBuilder builder = 支払方法変更管理業務概念.createBuilderForEdit();
-        if (支払方法変更管理業務概念.get証記載保険者番号().isEmpty()
+        if (支払方法変更管理業務概念.get証記載保険者番号().equals(証記載保険者番号)
                 && 支払方法変更管理業務概念.get被保険者番号().equals(new HihokenshaNo(div.getKey_HihokenshaNo()))
                 && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(支払方法変更管理業務概念.get管理区分())
                 && 支払方法変更管理業務概念.get履歴番号() == get最大履歴番号()) {
@@ -407,10 +413,10 @@ public class ShokanBaraiKa1GoHandler {
         ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, builder.build());
     }
 
-    private void update支払方法変更_償還払い化登録() {
+    private void update支払方法変更_償還払い化登録(ShoKisaiHokenshaNo 証記載保険者番号) {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(一号償還払い化ダイアログキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         ShiharaiHohoHenkoBuilder builder = 支払方法変更管理業務概念.createBuilderForEdit();
-        if (支払方法変更管理業務概念.get証記載保険者番号().isEmpty()
+        if (支払方法変更管理業務概念.get証記載保険者番号().equals(証記載保険者番号)
                 && 支払方法変更管理業務概念.get被保険者番号().equals(new HihokenshaNo(div.getKey_HihokenshaNo()))
                 && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(支払方法変更管理業務概念.get管理区分())
                 && 支払方法変更管理業務概念.get履歴番号() == get最大履歴番号()) {
@@ -422,10 +428,10 @@ public class ShokanBaraiKa1GoHandler {
         }
     }
 
-    private void update支払方法変更_償還払い化終了申請() {
+    private void update支払方法変更_償還払い化終了申請(ShoKisaiHokenshaNo 証記載保険者番号) {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(一号償還払い化ダイアログキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         ShiharaiHohoHenkoBuilder builder = 支払方法変更管理業務概念.createBuilderForEdit();
-        if (支払方法変更管理業務概念.get証記載保険者番号().isEmpty()
+        if (支払方法変更管理業務概念.get証記載保険者番号().equals(証記載保険者番号)
                 && 支払方法変更管理業務概念.get被保険者番号().equals(new HihokenshaNo(div.getKey_HihokenshaNo()))
                 && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(支払方法変更管理業務概念.get管理区分())
                 && 支払方法変更管理業務概念.get履歴番号() == get最大履歴番号()) {
@@ -552,7 +558,9 @@ public class ShokanBaraiKa1GoHandler {
                     break;
             }
         } else if (shiharaiHohoHenko != null) {
-            div.getDdlShuryoJokyo().setSelectedKey(shiharaiHohoHenko.get終了区分());
+            if (null != shiharaiHohoHenko.get終了区分()) {
+                div.getDdlShuryoJokyo().setSelectedKey(shiharaiHohoHenko.get終了区分());
+            }
             div.getTxtTorokuJokyo().setValue(shiharaiHohoHenko.get登録区分());
             div.getTxtTekiyoKikanKaishi().setValue(shiharaiHohoHenko.get適用開始年月日());
             div.getTxtTekiyoKikanShuryo().setValue(shiharaiHohoHenko.get適用終了年月日());

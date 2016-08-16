@@ -184,6 +184,7 @@ public class NinteiShienCenterSoshin {
             if (validationMessages.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
+            //TODO バッチ設計_DBE561001_センター送信データ作成時装待ち。
 //            List<dgTaishoshaIchiran_Row> rowList = div.getDgTaishoshaIchiran().getSelectedItems();
 //            List<RString> 申請書管理番号リスト = new ArrayList<>();
 //            for (dgTaishoshaIchiran_Row row : rowList) {

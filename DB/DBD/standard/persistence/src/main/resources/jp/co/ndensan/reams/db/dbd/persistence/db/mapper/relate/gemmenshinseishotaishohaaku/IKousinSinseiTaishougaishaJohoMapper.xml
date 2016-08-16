@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.-->
+
+
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-3530-040 liuwei2 -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenshinseishotaishohaaku.IKousinSinseiTaishougaishaJohoMapper">
+    <select id="get更新申請対象外者情報_負担限度額認定"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.KousinSinseiTaishougaishaJohoMyBatisParameter"
+            resultMap="ResultMap_KousinSinseiTaishougaishaJohoEntity" fetchSize="500">
+        SELECT
+        A."dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo"
+        FROM (
+        SELECT
+        <include refid="allColumns_DbT4018KaigoHokenFutanGendogakuNintei" />
+        FROM
+        rgdb."DbT4018KaigoHokenFutanGendogakuNintei" AS  "DbT4018KaigoHokenFutanGendogakuNintei"
+        INNER JOIN
+        (
+        SELECT
+        "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo",
+        MAX("DbT4018KaigoHokenFutanGendogakuNintei"."rirekiNo") AS M
+        FROM rgdb."DbT4018KaigoHokenFutanGendogakuNintei"
+        WHERE
+        "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiKubun" = '1'
+        AND #{前年度の開始日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"
+        AND "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"  <![CDATA[<=]]> #{前年度の終了日}
+        GROUP BY
+        "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo"
+        ) A1
+        ON  A1."hihokenshaNo" =  "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo"
+        AND M =  "DbT4018KaigoHokenFutanGendogakuNintei"."rirekiNo"
+        ) AS A
+        WHERE NOT EXISTS
+        (
+        SELECT
+        <include refid="allColumns_DbT4031ShinseishoHakkoKohoshas" />
+        FROM  rgdb."DbT4031ShinseishoHakkoKohoshas" AS "DbT4031ShinseishoHakkoKohoshas"
+        WHERE "DbT4031ShinseishoHakkoKohoshas"."hihokenshaNo" = A."dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo"
+        AND "DbT4031ShinseishoHakkoKohoshas"."haakuShoriID" = #{把握処理ID}
+        )
+    </select>
+    <select id="get更新申請対象外者情報_利用者負担額減額"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.KousinSinseiTaishougaishaJohoMyBatisParameter"
+            resultMap="ResultMap_KousinSinseiTaishougaishaJohoEntity" fetchSize="500">
+        SELECT
+        A."dbT4014RiyoshaFutangakuGengaku_hihokenshaNo"
+        FROM (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4014RiyoshaFutangakuGengakuMapper.allColumns_DbT4014RiyoshaFutangakuGengaku" />
+        FROM rgdb."DbT4014RiyoshaFutangakuGengaku" AS  "DbT4014RiyoshaFutangakuGengaku"
+        INNER JOIN
+        (
+        SELECT
+        "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo",
+        MAX( "DbT4014RiyoshaFutangakuGengaku"."rirekiNo") AS M
+        FROM rgdb."DbT4014RiyoshaFutangakuGengaku" AS  "DbT4014RiyoshaFutangakuGengaku"
+        WHERE
+        "DbT4014RiyoshaFutangakuGengaku"."ketteiKubun" = '1'
+        AND #{前年度の開始日} <![CDATA[<=]]>  "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"
+        AND  "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"  <![CDATA[<=]]> #{前年度の終了日}
+        GROUP BY
+        "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo"
+        ) A1
+        ON  A1."hihokenshaNo" =  "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo"
+        AND M =  "DbT4014RiyoshaFutangakuGengaku"."rirekiNo"
+        ) AS  A
+        WHERE NOT EXISTS
+        (
+        SELECT
+        <include refid="allColumns_DbT4031ShinseishoHakkoKohoshas" />
+        FROM  rgdb."DbT4031ShinseishoHakkoKohoshas" AS "DbT4031ShinseishoHakkoKohoshas"
+        WHERE "DbT4031ShinseishoHakkoKohoshas"."hihokenshaNo" = A."dbT4014RiyoshaFutangakuGengaku_hihokenshaNo"
+        AND "DbT4031ShinseishoHakkoKohoshas"."haakuShoriID" = #{把握処理ID}
+        )
+    </select>
+    <select id="get更新申請対象外者情報_訪問介護利用者負担額減額"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.KousinSinseiTaishougaishaJohoMyBatisParameter"
+            resultMap="ResultMap_KousinSinseiTaishougaishaJohoEntity" fetchSize="500">
+        SELECT
+        A."dbT4016HomonKaigoRiyoshaFutangakuGengaku_hihokenshaNo"
+        FROM (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4016HomonKaigoRiyoshaFutangakuGengakuMapper.allColumns_DbT4016HomonKaigoRiyoshaFutangakuGengaku" />
+        FROM rgdb."DbT4016HomonKaigoRiyoshaFutangakuGengaku" AS "DbT4016HomonKaigoRiyoshaFutangakuGengaku"
+        INNER JOIN
+        (
+        SELECT
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."hihokenshaNo",
+        MAX("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."rirekiNo")  AS M
+        FROM rgdb."DbT4016HomonKaigoRiyoshaFutangakuGengaku" AS "DbT4016HomonKaigoRiyoshaFutangakuGengaku"
+        WHERE
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiKubun" = '1'
+        AND #{前年度の開始日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"
+        AND "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"  <![CDATA[<=]]> #{前年度の終了日}
+        GROUP BY
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."hihokenshaNo"
+        ) A1
+        ON  A1."hihokenshaNo" = "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."hihokenshaNo"
+        AND M = "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."rirekiNo"
+        )AS  A
+        WHERE NOT EXISTS
+        (
+        SELECT
+        <include refid="allColumns_DbT4031ShinseishoHakkoKohoshas" />
+        FROM  rgdb."DbT4031ShinseishoHakkoKohoshas" AS "DbT4031ShinseishoHakkoKohoshas"
+        WHERE "DbT4031ShinseishoHakkoKohoshas"."hihokenshaNo" = A."dbT4016HomonKaigoRiyoshaFutangakuGengaku_hihokenshaNo"
+        AND "DbT4031ShinseishoHakkoKohoshas"."haakuShoriID" = #{把握処理ID}
+        )
+    </select>
+    <select id="get更新申請対象外者情報_社会福祉法人等利用者負担軽減"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.KousinSinseiTaishougaishaJohoMyBatisParameter"
+            resultMap="ResultMap_KousinSinseiTaishougaishaJohoEntity" fetchSize="500">
+        SELECT
+        A."dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_hihokenshaNo"
+        FROM (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4017ShakaiFukushiHojinRiyoshaFutanKeigenMapper.allColumns_DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen" />
+        FROM rgdb."DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen" AS  "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"
+        INNER JOIN
+        (
+        SELECT
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo",
+        MAX( "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."rirekiNo") AS M
+        FROM rgdb."DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen" AS  "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"
+        WHERE
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiKubun" = '1'
+        AND #{前年度の開始日} <![CDATA[<=]]>  "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"
+        AND  "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"  <![CDATA[<=]]> #{前年度の終了日}
+        GROUP BY
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo"
+        ) A1
+        ON  A1."hihokenshaNo" = "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo"
+        AND M = "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."rirekiNo"
+        ) AS A
+        WHERE NOT EXISTS
+        (
+        SELECT
+        <include refid="allColumns_DbT4031ShinseishoHakkoKohoshas" />
+        FROM  rgdb."DbT4031ShinseishoHakkoKohoshas" AS "DbT4031ShinseishoHakkoKohoshas"
+        WHERE "DbT4031ShinseishoHakkoKohoshas"."hihokenshaNo" = A."dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_hihokenshaNo"
+        AND "DbT4031ShinseishoHakkoKohoshas"."haakuShoriID" = #{把握処理ID}
+        )
+    </select>
+    <delete id="clear世帯員把握入力一時テーブル">
+        DELETE FROM "TmpSetaiHaaku"
+    </delete>
+    <delete id="clear世帯員所得情報一時テーブル">
+        DELETE FROM "TmpSetaiShotoku"
+    </delete>
+    <delete id="clear減免減額対象者判定用根拠作成対象者一時テーブル">
+        DELETE FROM "gemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTemp"
+    </delete>
+    <delete id="clear減免減額対象者判定用根拠一時テーブル">
+        DELETE FROM "taishoShaHanteiYoukonkyoItokiTemp"
+    </delete>
+    <delete id="delete世帯員所得情報一時テーブル">
+        DROP TABLE "TmpSetaiShotoku"
+    </delete>
+
+    <resultMap id="ResultMap_KousinSinseiTaishougaishaJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmenshinseishotaishohaaku.KousinSinseiTaishougaishaJohoEntity" autoMapping="true">
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+    </resultMap>
+
+
+    <sql id="allColumns_DbT4031ShinseishoHakkoKohoshas">
+        "DbT4031ShinseishoHakkoKohoshas"."haakuShoriID" as "dbT4031ShinseishoHakkoKohoshas_haakuShoriID",
+        "DbT4031ShinseishoHakkoKohoshas"."hihokenshaNo" as "dbT4031ShinseishoHakkoKohoshas_hihokenshaNo",
+        "DbT4031ShinseishoHakkoKohoshas"."insertDantaiCd" as "dbT4031ShinseishoHakkoKohoshas_insertDantaiCd",
+        "DbT4031ShinseishoHakkoKohoshas"."insertTimestamp" as "dbT4031ShinseishoHakkoKohoshas_insertTimestamp",
+        "DbT4031ShinseishoHakkoKohoshas"."insertReamsLoginId" as "dbT4031ShinseishoHakkoKohoshas_insertReamsLoginId",
+        "DbT4031ShinseishoHakkoKohoshas"."insertContextId" as "dbT4031ShinseishoHakkoKohoshas_insertContextId",
+        "DbT4031ShinseishoHakkoKohoshas"."isDeleted" as "dbT4031ShinseishoHakkoKohoshas_isDeleted",
+        "DbT4031ShinseishoHakkoKohoshas"."updateCount" as "dbT4031ShinseishoHakkoKohoshas_updateCount",
+        "DbT4031ShinseishoHakkoKohoshas"."lastUpdateTimestamp" as "dbT4031ShinseishoHakkoKohoshas_lastUpdateTimestamp",
+        "DbT4031ShinseishoHakkoKohoshas"."lastUpdateReamsLoginId" as "dbT4031ShinseishoHakkoKohoshas_lastUpdateReamsLoginId",
+        "DbT4031ShinseishoHakkoKohoshas"."willBeRenewed" as "dbT4031ShinseishoHakkoKohoshas_willBeRenewed",
+        "DbT4031ShinseishoHakkoKohoshas"."shikibetsuCode" as "dbT4031ShinseishoHakkoKohoshas_shikibetsuCode",
+        "DbT4031ShinseishoHakkoKohoshas"."setaiKazeiKubun" as "dbT4031ShinseishoHakkoKohoshas_setaiKazeiKubun",
+        "DbT4031ShinseishoHakkoKohoshas"."honninKazeiKubun" as "dbT4031ShinseishoHakkoKohoshas_honninKazeiKubun",
+        "DbT4031ShinseishoHakkoKohoshas"."isRoreiFukushiNenkinJukyusha" as "dbT4031ShinseishoHakkoKohoshas_isRoreiFukushiNenkinJukyusha",
+        "DbT4031ShinseishoHakkoKohoshas"."isSeikatsuHogoJukyusha" as "dbT4031ShinseishoHakkoKohoshas_isSeikatsuHogoJukyusha",
+        "DbT4031ShinseishoHakkoKohoshas"."riyoshaFutanDankai" as "dbT4031ShinseishoHakkoKohoshas_riyoshaFutanDankai",
+        "DbT4031ShinseishoHakkoKohoshas"."gokeiShotokuKingaku" as "dbT4031ShinseishoHakkoKohoshas_gokeiShotokuKingaku",
+        "DbT4031ShinseishoHakkoKohoshas"."nenkinShunyuGaku" as "dbT4031ShinseishoHakkoKohoshas_nenkinShunyuGaku",
+        "DbT4031ShinseishoHakkoKohoshas"."hikazeinenkinKananGaku" as "dbT4031ShinseishoHakkoKohoshas_hikazeinenkinKananGaku",
+        "DbT4031ShinseishoHakkoKohoshas"."jigyoshaNo" as "dbT4031ShinseishoHakkoKohoshas_jigyoshaNo"
+    </sql>
+    <sql id="allColumns_DbT4018KaigoHokenFutanGendogakuNintei">
+        "DbT4018KaigoHokenFutanGendogakuNintei"."shoKisaiHokenshaNo" as "dbT4018KaigoHokenFutanGendogakuNintei_shoKisaiHokenshaNo",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo" as "dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."rirekiNo" as "dbT4018KaigoHokenFutanGendogakuNintei_rirekiNo",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."insertDantaiCd" as "dbT4018KaigoHokenFutanGendogakuNintei_insertDantaiCd",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."insertTimestamp" as "dbT4018KaigoHokenFutanGendogakuNintei_insertTimestamp",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."insertReamsLoginId" as "dbT4018KaigoHokenFutanGendogakuNintei_insertReamsLoginId",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."insertContextId" as "dbT4018KaigoHokenFutanGendogakuNintei_insertContextId",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."isDeleted" as "dbT4018KaigoHokenFutanGendogakuNintei_isDeleted",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."updateCount" as "dbT4018KaigoHokenFutanGendogakuNintei_updateCount",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."lastUpdateTimestamp" as "dbT4018KaigoHokenFutanGendogakuNintei_lastUpdateTimestamp",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."lastUpdateReamsLoginId" as "dbT4018KaigoHokenFutanGendogakuNintei_lastUpdateReamsLoginId",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."shinseiYMD" as "dbT4018KaigoHokenFutanGendogakuNintei_shinseiYMD",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD" as "dbT4018KaigoHokenFutanGendogakuNintei_ketteiYMD",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" as "dbT4018KaigoHokenFutanGendogakuNintei_tekiyoKaishiYMD",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD" as "dbT4018KaigoHokenFutanGendogakuNintei_tekiyoShuryoYMD",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiKubun" as "dbT4018KaigoHokenFutanGendogakuNintei_ketteiKubun",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."hiShoninRiyu" as "dbT4018KaigoHokenFutanGendogakuNintei_hiShoninRiyu",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."kyusochishaKubun" as "dbT4018KaigoHokenFutanGendogakuNintei_kyusochishaKubun",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."shinseiRiyuKubun" as "dbT4018KaigoHokenFutanGendogakuNintei_shinseiRiyuKubun",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."riyoshaFutanDankai" as "dbT4018KaigoHokenFutanGendogakuNintei_riyoshaFutanDankai",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."kyokaisoGaitoshaKubun" as "dbT4018KaigoHokenFutanGendogakuNintei_kyokaisoGaitoshaKubun",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."gekihenKanwaSochiTaishoshaKubun" as "dbT4018KaigoHokenFutanGendogakuNintei_gekihenKanwaSochiTaishoshaKubun",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."kyoshitsuShubetsu" as "dbT4018KaigoHokenFutanGendogakuNintei_kyoshitsuShubetsu",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."shokuhiFutanGendogaku" as "dbT4018KaigoHokenFutanGendogakuNintei_shokuhiFutanGendogaku",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."unitTypeKoshitsu" as "dbT4018KaigoHokenFutanGendogakuNintei_unitTypeKoshitsu",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."unitTypeJunKoshitsu" as "dbT4018KaigoHokenFutanGendogakuNintei_unitTypeJunKoshitsu",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."juraiTypeKoshitsu_Tokuyo" as "dbT4018KaigoHokenFutanGendogakuNintei_juraiTypeKoshitsu_Tokuyo",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."juraiTypeKoshitsu_Roken_Ryoyo" as "dbT4018KaigoHokenFutanGendogakuNintei_juraiTypeKoshitsu_Roken_Ryoyo",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."tashoshitsu" as "dbT4018KaigoHokenFutanGendogakuNintei_tashoshitsu",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaUmuFlag" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaUmuFlag",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaShimei" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaShimei",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaShimeiKana" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaShimeiKana",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaSeinenGappiYMD" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaSeinenGappiYMD",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaJusho" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaJusho",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaRenrakusaki" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaRenrakusaki",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaJusho2" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaJusho2",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaKazeiKubun" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaKazeiKubun",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaShikibetsuCd" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaShikibetsuCd",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."yochokinShinkokuKubun" as "dbT4018KaigoHokenFutanGendogakuNintei_yochokinShinkokuKubun",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."yochokinGaku" as "dbT4018KaigoHokenFutanGendogakuNintei_yochokinGaku",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."yukashoukenGaisangaku" as "dbT4018KaigoHokenFutanGendogakuNintei_yukashoukenGaisangaku",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."sonotaKingaku" as "dbT4018KaigoHokenFutanGendogakuNintei_sonotaKingaku",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."ninteiBatchExecutedTimestamp" as "dbT4018KaigoHokenFutanGendogakuNintei_ninteiBatchExecutedTimestamp",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."izokuNenkinJukyuFlag" as "dbT4018KaigoHokenFutanGendogakuNintei_izokuNenkinJukyuFlag",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."shogaiNenkinJukyuFlag" as "dbT4018KaigoHokenFutanGendogakuNintei_shogaiNenkinJukyuFlag"
+    </sql>
+</mapper>

@@ -25,18 +25,21 @@ import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4022ShiharaiHohoHenkoTainoE
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashitomeEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenko.ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbd.service.core.shiharaihohohenko.ShiharaiHohoHenkoService;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoKanriKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoTorokuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.taino.JikoKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellDetails;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
@@ -62,7 +65,6 @@ public class IchijiSashitome1GoHandler {
     private final RString 控除登録 = new RString("控除登録");
     private final RString 削除アイコン押下 = new RString("削除アイコン押下");
     private final RString 解除アイコン押下 = new RString("解除アイコン押下");
-    private final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo("209007");
 
     /**
      * コンストラクタです。
@@ -94,8 +96,11 @@ public class IchijiSashitome1GoHandler {
 
     /**
      * 画面初期化処理です。
+     *
+     * @return Message エラーMSG
      */
-    public void onLoad() {
+    public Message onLoad() {
+        Message message = null;
         RString 押下ボタン = ShoriKubun.toValue(div.getKey_Button()).get名称();
         ShiharaiHohoHenko 支払方法変更管理業務概念 = DataPassingConverter.deserialize(div.getKey_ShiharaiHohoHenkoKanri(), ShiharaiHohoHenko.class);
         ArrayList<ShiharaiHohoHenko> 支払方法変更レコード = new ArrayList();
@@ -119,13 +124,14 @@ public class IchijiSashitome1GoHandler {
             支払方法変更レコード.add(支払方法変更管理業務概念);
         }
         if (支払方法変更管理業務概念 == null || 支払方法変更レコード.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.対象ファイルが存在しない.getMessage().replace("支払方法変更"));
+            return UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("支払方法変更");
         }
         ViewStateHolder.put(一号一時差止ダイアロググキー.支払方法変更管理業務概念, 支払方法変更管理業務概念);
         ShiharaiHohoHenkoService service = ShiharaiHohoHenkoService.createIntance();
         ArrayList<ShokanHaraiShikyu> shokanHaraiShikyuList = service.find償還払い支給(new HihokenshaNo(div.getKey_HihokenshaNo()));
         ViewStateHolder.put(一号一時差止ダイアロググキー.償還払支給の情報List, shokanHaraiShikyuList);
         initializeDisplayData(押下ボタン);
+        return message;
     }
 
     /**
@@ -1015,7 +1021,7 @@ public class IchijiSashitome1GoHandler {
     private DbT4024ShiharaiHohoHenkoSashitomeEntity INS001() {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(一号一時差止ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         DbT4024ShiharaiHohoHenkoSashitomeEntity entity = new DbT4024ShiharaiHohoHenkoSashitomeEntity();
-        entity.setShoKisaiHokenshaNo(証記載保険者番号);
+        entity.setShoKisaiHokenshaNo(証記載保険者番号());
         entity.setHihokenshaNo(new HihokenshaNo(div.getKey_HihokenshaNo()));
         entity.setKanriKubun(ShiharaiHenkoKanriKubun._２号差止.getコード());
         entity.setRirekiNo(支払方法変更管理業務概念.get履歴番号());
@@ -1035,7 +1041,7 @@ public class IchijiSashitome1GoHandler {
     private DbT4024ShiharaiHohoHenkoSashitomeEntity INS002() {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(一号一時差止ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         DbT4024ShiharaiHohoHenkoSashitomeEntity entity = new DbT4024ShiharaiHohoHenkoSashitomeEntity();
-        entity.setShoKisaiHokenshaNo(証記載保険者番号);
+        entity.setShoKisaiHokenshaNo(証記載保険者番号());
         entity.setHihokenshaNo(new HihokenshaNo(div.getKey_HihokenshaNo()));
         entity.setKanriKubun(ShiharaiHenkoKanriKubun._２号差止.getコード());
         entity.setRirekiNo(支払方法変更管理業務概念.get履歴番号());
@@ -1056,13 +1062,13 @@ public class IchijiSashitome1GoHandler {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(一号一時差止ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         List<ShiharaiHohoHenkoTaino> 支払方法変更滞納情報 = new ArrayList();
         List<TainoKiSummary> tainoKiSummary = 滞納判定結果.get滞納情報();
-        int 連番 = 支払方法変更滞納連番(証記載保険者番号, new HihokenshaNo(div.getKey_HihokenshaNo()),
+        int 連番 = 支払方法変更滞納連番(証記載保険者番号(), new HihokenshaNo(div.getKey_HihokenshaNo()),
                 ShiharaiHenkoKanriKubun._１号償還払い化.getコード(), 支払方法変更管理業務概念.get履歴番号(),
                 TainoHanteiKubun.差止登録.getコード(), 支払方法変更管理業務概念);
         for (TainoKiSummary summary : tainoKiSummary) {
             TaishoHanteiKubun 対象管理区分 = get対象管理区分(連番++, summary.get時効区分().getコード(), 支払方法変更滞納情報);
             DbT4022ShiharaiHohoHenkoTainoEntity entity = new DbT4022ShiharaiHohoHenkoTainoEntity();
-            entity.setShoKisaiHokenshaNo(証記載保険者番号);
+            entity.setShoKisaiHokenshaNo(証記載保険者番号());
             entity.setHihokenshaNo(new HihokenshaNo(div.getKey_HihokenshaNo()));
             entity.setKanriKubun(ShiharaiHenkoKanriKubun._１号償還払い化.getコード());
             entity.setRirekiNo(支払方法変更管理業務概念.get履歴番号());
@@ -1095,13 +1101,13 @@ public class IchijiSashitome1GoHandler {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(一号一時差止ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         List<ShiharaiHohoHenkoTaino> 支払方法変更滞納情報 = new ArrayList();
         List<TainoKiSummary> tainoKiSummary = 滞納判定結果.get滞納情報();
-        int 連番 = 支払方法変更滞納連番(証記載保険者番号, new HihokenshaNo(div.getKey_HihokenshaNo()),
+        int 連番 = 支払方法変更滞納連番(証記載保険者番号(), new HihokenshaNo(div.getKey_HihokenshaNo()),
                 ShiharaiHenkoKanriKubun._１号償還払い化.getコード(), 支払方法変更管理業務概念.get履歴番号(),
                 TainoHanteiKubun.控除登録.getコード(), 支払方法変更管理業務概念);
         for (TainoKiSummary summary : tainoKiSummary) {
             TaishoHanteiKubun 対象管理区分 = get対象管理区分(連番++, summary.get時効区分().getコード(), 支払方法変更滞納情報);
             DbT4022ShiharaiHohoHenkoTainoEntity entity = new DbT4022ShiharaiHohoHenkoTainoEntity();
-            entity.setShoKisaiHokenshaNo(証記載保険者番号);
+            entity.setShoKisaiHokenshaNo(証記載保険者番号());
             entity.setHihokenshaNo(new HihokenshaNo(div.getKey_HihokenshaNo()));
             entity.setKanriKubun(ShiharaiHenkoKanriKubun._１号償還払い化.getコード());
             entity.setRirekiNo(支払方法変更管理業務概念.get履歴番号());
@@ -1158,5 +1164,16 @@ public class IchijiSashitome1GoHandler {
             }
         }
         return 連番 + 1;
+    }
+
+    private ShoKisaiHokenshaNo 証記載保険者番号() {
+        ShoKisaiHokenshaNo 証記載保険者番号 = ShoKisaiHokenshaNo.EMPTY;
+        ShichosonSecurityJoho 市町村情報 = ShichosonSecurityJohoFinder.createInstance()
+                .getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        if (市町村情報 != null) {
+            証記載保険者番号 = 市町村情報.get市町村情報().get証記載保険者番号();
+        }
+
+        return 証記載保険者番号;
     }
 }

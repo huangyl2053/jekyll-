@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJohoBuilde
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.report.honsanteiidou.KeisanjohoAtenaKozaKouseizengoEntity;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
-import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.definition.core.fucho.ZanteiKeisanIdoHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
@@ -30,6 +29,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
@@ -329,7 +329,7 @@ public class KariSanteiIdoFukaBatchFath {
             }
 
         }
-        if (!設定前賦課情報.get減免額().equals(当初賦課情報.get減免額())) {
+        if (設定前賦課情報.get減免額() != null && !設定前賦課情報.get減免額().equals(当初賦課情報.get減免額())) {
             if (!flag1) {
                 list.set(NUM_0, ChoteiJiyuCode.減免決定による更正.getコード());
                 flag1 = true;
@@ -442,7 +442,7 @@ public class KariSanteiIdoFukaBatchFath {
 
         Decimal 普徴期別金額合計 = get普徴期別金額合計(賦課の情報, NUM_1, NUM_14);
 
-        if (0 < 普徴期別金額合計.doubleValue() && 特徴仮算定Entity.get口座Entity() != null) {
+        if (Decimal.ZERO.compareTo(普徴期別金額合計) == -1 && 特徴仮算定Entity.get口座Entity() != null) {
             return KozaKubun.口座振替.getコード();
         } else if (0 < 普徴期別金額合計.doubleValue() && 特徴仮算定Entity.get口座Entity() == null) {
             return KozaKubun.現金納付.getコード();

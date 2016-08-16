@@ -39,27 +39,24 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor implements ITok
     private static final int LISTINDEX_3 = 3;
     private static final int LISTINDEX_4 = 4;
 
-    private final List<TokubetsuChiikiKasanKeigenJissekiKanri> 帳票情報リスト;
+    private final TokubetsuChiikiKasanKeigenJissekiKanri 帳票情報;
     private final Association association;
     private final IOutputOrder iOutputOrder;
-    private final int index;
     private final KyuhuJissekiHihokensha 宛名;
 
     /**
      * インスタンスを生成します。
      *
-     * @param 帳票情報リスト List<TokubetsuChiikiKasanKeigenJissekiKanri>
+     * @param 帳票情報 TokubetsuChiikiKasanKeigenJissekiKanri
      * @param association Association
      * @param iOutputOrder IOutputOrder
-     * @param index int
      * @param 宛名 KyuhuJissekiHihokensha
      */
-    public TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor(List<TokubetsuChiikiKasanKeigenJissekiKanri> 帳票情報リスト,
-            Association association, IOutputOrder iOutputOrder, int index, KyuhuJissekiHihokensha 宛名) {
-        this.帳票情報リスト = 帳票情報リスト;
+    public TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor(TokubetsuChiikiKasanKeigenJissekiKanri 帳票情報,
+            Association association, IOutputOrder iOutputOrder, KyuhuJissekiHihokensha 宛名) {
+        this.帳票情報 = 帳票情報;
         this.association = association;
         this.iOutputOrder = iOutputOrder;
-        this.index = index;
         this.宛名 = 宛名;
     }
 
@@ -115,8 +112,8 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor implements ITok
             source.list_2 = 宛名1.get住所().get全国住所コード().value();
             source.list_3 = 宛名1.get住所().get住所();
         }
-        List<KyuhuJissekiHihokensha> 給付実績被保険者リスト = this.帳票情報リスト.get(index).get給付実績被保険者リスト();
-        if (null != 帳票情報リスト && !帳票情報リスト.isEmpty()) {
+        List<KyuhuJissekiHihokensha> 給付実績被保険者リスト = this.帳票情報.get給付実績被保険者リスト();
+        if (null != 帳票情報) {
             for (int hihokenshaIndex = 0; hihokenshaIndex < 給付実績被保険者リスト.size(); hihokenshaIndex++) {
                 KyuhuJissekiHihokensha 給付実績被保険者Entity = 給付実績被保険者リスト.get(hihokenshaIndex);
                 source.list_1 = 給付実績被保険者Entity.get被保険者番号().value();
@@ -171,8 +168,8 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor implements ITok
             source.list_2 = 宛名1.get行政区画().getGyoseiku().getコード().value();
             source.list_3 = 宛名1.get行政区画().getGyoseiku().get名称();
         }
-        List<KyuhuJissekiHihokensha> 給付実績被保険者リスト = this.帳票情報リスト.get(index).get給付実績被保険者リスト();
-        if (null != 帳票情報リスト && !帳票情報リスト.isEmpty()) {
+        List<KyuhuJissekiHihokensha> 給付実績被保険者リスト = this.帳票情報.get給付実績被保険者リスト();
+        if (null != 帳票情報) {
             for (int hihokenshaIndex = 0; hihokenshaIndex < 給付実績被保険者リスト.size(); hihokenshaIndex++) {
                 KyuhuJissekiHihokensha 給付実績被保険者Entity = 給付実績被保険者リスト.get(hihokenshaIndex);
                 source.list_4 = 給付実績被保険者Entity.get審査年月().toDateString();
@@ -192,7 +189,7 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor implements ITok
 
     private Decimal get助成額合計() {
         Decimal 助成額合計 = Decimal.ZERO;
-        List<KyuhuJissekiHihokensha> 給付実績被保険者リスト = this.帳票情報リスト.get(index).get給付実績被保険者リスト();
+        List<KyuhuJissekiHihokensha> 給付実績被保険者リスト = this.帳票情報.get給付実績被保険者リスト();
         for (KyuhuJissekiHihokensha 給付実績被保険者 : 給付実績被保険者リスト) {
             助成額合計 = 助成額合計.add(給付実績被保険者.get給付実績集計().get助成額());
         }
@@ -201,7 +198,7 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor implements ITok
 
     private Decimal get保険者助成額合計() {
         Decimal 保険者助成額合計 = Decimal.ZERO;
-        List<KyuhuJissekiHihokensha> 給付実績被保険者リスト = this.帳票情報リスト.get(index).get給付実績被保険者リスト();
+        List<KyuhuJissekiHihokensha> 給付実績被保険者リスト = this.帳票情報.get給付実績被保険者リスト();
         for (KyuhuJissekiHihokensha 給付実績被保険者 : 給付実績被保険者リスト) {
             保険者助成額合計 = 保険者助成額合計.add(給付実績被保険者.get給付実績集計().get保険者助成額());
         }

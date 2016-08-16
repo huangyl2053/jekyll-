@@ -195,7 +195,7 @@
         AND  "DbT2015KeisangoJoho"."tkKibetsuGaku03" != 0
     </select>
 
-    <update id="update計算後情報更正前For一括発行起動"
+    <update id="update計算後情報更正前"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter">
 
         UPDATE

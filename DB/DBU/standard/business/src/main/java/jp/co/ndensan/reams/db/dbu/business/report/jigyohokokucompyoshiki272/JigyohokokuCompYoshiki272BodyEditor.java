@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbu.entity.report.ｊigyohokokucompyoshiki272.Jigy
  */
 public class JigyohokokuCompYoshiki272BodyEditor implements IJigyohokokuCompYoshiki272Editor {
 
-//    private final JigyohokokuCompYoshiki272Entity data;
     private final JigyohokokuCompYoshiki272Change change;
 
     /**
@@ -24,7 +23,6 @@ public class JigyohokokuCompYoshiki272BodyEditor implements IJigyohokokuCompYosh
      * @param change JigyohokokuCompYoshiki272Change
      */
     protected JigyohokokuCompYoshiki272BodyEditor(JigyohokokuCompYoshiki272Change change) {
-//        this.data = data;
         this.change = change;
     }
 

@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchish
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.FukaJohoShutokuProcessParameter;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunka6tsuchishoikatsuhako.ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -53,8 +55,10 @@ public class SystemTimeShutokuProcess extends SimpleBatchProcessBase {
     @Override
     protected void process() {
         バッチ起動時処理日時_年月日時分秒 = RDate.getNowDateTime();
+        KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
+        IKozaSearchKey key = builder.build();
         基準日時 = mapper.get基準日時(new TokuchoHeijunka6gatsuMyBatisParameter(
-                false, parameter.get調定年度(), null, null, ShoriName.特徴平準化計算_6月分.get名称(), null, null, null, null));
+                false, parameter.get調定年度(), null, null, ShoriName.特徴平準化計算_6月分.get名称(), null, null, null, null, key));
     }
 
     @Override

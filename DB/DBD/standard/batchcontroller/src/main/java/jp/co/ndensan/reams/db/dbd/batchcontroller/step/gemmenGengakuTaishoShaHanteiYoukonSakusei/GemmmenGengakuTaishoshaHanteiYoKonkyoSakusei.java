@@ -134,6 +134,7 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
         } else {
             tempTable.setIs所得税課税世帯(Boolean.FALSE);
         }
+        tempTable.set課税所得額(list.get課税所得額());
         taishoShaHanteiYoukonkyoItokiTemp.insert(tempTable);
     }
 

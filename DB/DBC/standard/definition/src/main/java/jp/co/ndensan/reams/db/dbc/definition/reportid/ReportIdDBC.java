@@ -14,7 +14,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBC-9999-021 zhangzhiming
  */
 public enum ReportIdDBC {
-
+    /**
+     * 高額合算自己負担額計算結果一覧表
+     */
+    DBC200029(new ReportId("DBC200029_GassanJikofutangakuKeisanKekkaIchiran"), new RString("高額合算自己負担額計算結果一覧表")),
+   
     /**
      * 高額サービス給付のお知らせ通知書（初回申請分）（提出期限あり）
      */
