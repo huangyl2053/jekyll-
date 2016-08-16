@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
+ * 利用者負担額免除申請書Entityクラスです。
  *
- * @author liuyl
+ * @reamsid_L DBD-3530-080 mawy
  */
 @lombok.Getter
 @lombok.Setter
