@@ -10,7 +10,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuShikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuShikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
-import jp.co.ndensan.reams.db.dbc.business.core.kogakukaigoservicehioshirasehakko.KogakuKaigoServicehiOshiraseHakkoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc020020.DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.core.shunyugaku.ShutsuryokuJoken;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0430011.KogakuShikyuShinseishoIkkatsuHakkoDiv;
@@ -60,6 +61,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
     private static final int DAY_9 = 9;
     private static final RString HYOJI = new RString("hyoji");
     private static final RString HIHYOJI = new RString("hihyoji");
+    RDate NOWDATE = RDate.getNowDate();
 
     /**
      * コンストラクタです。
@@ -76,45 +78,50 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
      * @param menuID RString
      */
     public void initialize(RString menuID) {
+        KokuhorenInterfaceKanriManager manager = new KokuhorenInterfaceKanriManager();
+        RString 交換情報識別番号 = RString.EMPTY;
         if (メニューID_DBCMN43001.equals(menuID)) {
-            RString 区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額, RDate.getNowDate(),
+            RString 区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額, NOWDATE,
                     SubGyomuCode.DBC介護給付);
-            set審査年月(区分);
+            List<KeyValueDataSource> radShinsaYM = new ArrayList<>();
+            if (NUM_1.equals(区分)) {
+                radShinsaYM.add(new KeyValueDataSource(審査年月, 審査年月));
+                div.getShinseishoHakkoParameters().getRadShinsaYM().setDataSource(radShinsaYM);
+                div.getShinseishoHakkoParameters().getRadShinsaYM().setSelectedKey(審査年月);
+                交換情報識別番号 = 交換情報識別番号_201;
+            } else if (NUM_2.equals(区分)) {
+                radShinsaYM.add(new KeyValueDataSource(受取年月, 受取年月));
+                div.getShinseishoHakkoParameters().getRadShinsaYM().setDataSource(radShinsaYM);
+                div.getShinseishoHakkoParameters().getRadShinsaYM().setSelectedKey(受取年月);
+                交換情報識別番号 = 交換情報識別番号_331;
+            }
             List<KeyValueDataSource> datasource = new ArrayList<>();
             datasource.add(new KeyValueDataSource(SHINSEIKEY, 高額介護サービス費支給申請書を発行する));
             datasource.add(new KeyValueDataSource(OSHIRASEKEY, 高額介護サービス費給付お知らせ通知を発行する));
             div.getShutsuryokuTaisho().getChkShutsuryokuTaisho().setSelectedItems(datasource);
+            div.getShutsuryokuTaisho().getCcdBunshoNo().initialize(ReportIdDBC.DBC100011.getReportId());
         } else if (メニューID_DBCMNL3001.equals(menuID)) {
-            RString 区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_事業高額, RDate.getNowDate(),
+            RString 区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_事業高額, NOWDATE,
                     SubGyomuCode.DBC介護給付);
-            set審査年月(区分);
+            List<KeyValueDataSource> radShinsaYM = new ArrayList<>();
+            if (NUM_1.equals(区分)) {
+                radShinsaYM.add(new KeyValueDataSource(審査年月, 審査年月));
+                div.getShinseishoHakkoParameters().getRadShinsaYM().setDataSource(radShinsaYM);
+                div.getShinseishoHakkoParameters().getRadShinsaYM().setSelectedKey(審査年月);
+                交換情報識別番号 = 交換情報識別番号_202;
+            } else if (NUM_2.equals(区分)) {
+                radShinsaYM.add(new KeyValueDataSource(受取年月, 受取年月));
+                div.getShinseishoHakkoParameters().getRadShinsaYM().setDataSource(radShinsaYM);
+                div.getShinseishoHakkoParameters().getRadShinsaYM().setSelectedKey(受取年月);
+                交換情報識別番号 = 交換情報識別番号_335;
+            }
             List<KeyValueDataSource> datasource = new ArrayList<>();
             datasource.add(new KeyValueDataSource(SHINSEIKEY, 事業高額介護サービス費支給申請書を発行する));
             datasource.add(new KeyValueDataSource(OSHIRASEKEY, 事業高額介護サービス費給付お知らせ通知を発行する));
             div.getShutsuryokuTaisho().getChkShutsuryokuTaisho().setSelectedItems(datasource);
-        }
-
-        KokuhorenInterfaceKanriManager manager = new KokuhorenInterfaceKanriManager();
-        RString 交換情報識別番号 = RString.EMPTY;
-        if (メニューID_DBCMN43001.equals(menuID)) {
-            if (NUM_1.equals(DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額,
-                    RDate.getNowDate(), SubGyomuCode.DBC介護給付))) {
-                交換情報識別番号 = 交換情報識別番号_201;
-            } else if (NUM_2.equals(DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額,
-                    RDate.getNowDate(), SubGyomuCode.DBC介護給付))) {
-                交換情報識別番号 = 交換情報識別番号_331;
-            }
-            div.getShutsuryokuTaisho().getCcdBunshoNo().initialize(ReportIdDBC.DBC100011.getReportId());
-        } else if (メニューID_DBCMNL3001.equals(menuID)) {
-            if (NUM_1.equals(DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_事業高額,
-                    RDate.getNowDate(), SubGyomuCode.DBC介護給付))) {
-                交換情報識別番号 = 交換情報識別番号_202;
-            } else if (NUM_2.equals(DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_事業高額,
-                    RDate.getNowDate(), SubGyomuCode.DBC介護給付))) {
-                交換情報識別番号 = 交換情報識別番号_335;
-            }
             div.getShutsuryokuTaisho().getCcdBunshoNo().initialize(ReportIdDBC.DBC100072.getReportId());
         }
+
         KokuhorenInterfaceKanri result = manager.get国保連インターフェース管理(交換情報識別番号);
         if (result != null) {
             FlexibleYearMonth 処理年月 = result.get処理年月();
@@ -124,7 +131,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
         }
 
         RString 初回申請把握基準日 = DbBusinessConfig.get(ConfigNameDBC.高額自動償還_初回申請把握基準日,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+                NOWDATE, SubGyomuCode.DBC介護給付);
         div.getShinseishoHakkoParameters().getTxtShokaiShinseiHakuKijunDate().setValue(new FlexibleDate(初回申請把握基準日));
         FlexibleDate nowDate = FlexibleDate.getNowDate();
         div.getShutsuryokuTaisho().getTxtSakuseiDate().setValue(nowDate);
@@ -145,7 +152,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
     public void setサービス年月DDL(RString menuID) {
         HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getShinseishoHakkoParameters().getTxtHihokenshaNo().getValue());
         HokenshaNo 証記載保険者番号 = new HokenshaNo(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
-                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+                NOWDATE, SubGyomuCode.DBU介護統計報告));
         List<KeyValueDataSource> datasource = new ArrayList<>();
         if (メニューID_DBCMN43001.equals(menuID)) {
             List<KogakuShikyuShinsei> serviceTeikyoYMList
@@ -175,29 +182,30 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
      * 4.　バッチパラメータ作成
      *
      * @param menuID RString
-     * @return KogakuKaigoServicehiOshiraseHakkoParameter parameter
+     * @return DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter parameter
      */
-    public KogakuKaigoServicehiOshiraseHakkoParameter createBatchParameter(RString menuID) {
-        KogakuKaigoServicehiOshiraseHakkoParameter parameter = new KogakuKaigoServicehiOshiraseHakkoParameter();
+    public DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter createBatchParameter(RString menuID) {
+        DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter parameter
+                = new DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter();
         FlexibleYearMonth 処理年月 = FlexibleYearMonth.EMPTY;
         if (!div.getShinseishoHakkoParameters().getRadShinsaYM().getSelectedKey().isEmpty()) {
             処理年月 = new FlexibleYearMonth(div.getShinseishoHakkoParameters().getTxtShinsaYM().getValue().toString());
-            parameter.set抽出条件(KogakuKaigoServicehiOshiraseHakkoParameter.ShutsuryokuJoken.審査年月.get名称());
+            parameter.setChushutsuJoken(ShutsuryokuJoken.審査年月);
         } else if (!div.getShinseishoHakkoParameters().getRadHihokenshaNo().getSelectedKey().isEmpty()) {
             処理年月 = new FlexibleYearMonth(div.getShinseishoHakkoParameters().getDdlServiceYM().getLabelRText());
-            parameter.set抽出条件(KogakuKaigoServicehiOshiraseHakkoParameter.ShutsuryokuJoken.被保険者番号.get名称());
+            parameter.setChushutsuJoken(ShutsuryokuJoken.被保険者番号);
         } else if (!div.getShinseishoHakkoParameters().getRadHakushiInsatsu().getSelectedKey().isEmpty()) {
             処理年月 = FlexibleYearMonth.EMPTY;
-            parameter.set抽出条件(KogakuKaigoServicehiOshiraseHakkoParameter.ShutsuryokuJoken.白紙.get名称());
+            parameter.setChushutsuJoken(ShutsuryokuJoken.白紙);
         }
-        parameter.set処理年月(処理年月);
+        parameter.setShoriYm(処理年月);
 
-        parameter.set作成日(div.getShutsuryokuTaisho().getTxtSakuseiDate().getValue());
+        parameter.setSakuseibi(div.getShutsuryokuTaisho().getTxtSakuseiDate().getValue());
         HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
         if (!div.getShinseishoHakkoParameters().getRadHihokenshaNo().getSelectedKey().isEmpty()) {
             被保険者番号 = new HihokenshaNo(div.getShinseishoHakkoParameters().getTxtHihokenshaNo().getValue().toString());
         }
-        parameter.set被保険者番号(被保険者番号);
+        parameter.setHihokenshaNo(被保険者番号);
 
         List<KeyValueDataSource> alist = div.getShutsuryokuTaisho().getChkShutsuryokuTaisho().getSelectedItems();
         List<RString> rsList = new ArrayList<>();
@@ -205,86 +213,67 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
             rsList.add(datesorcelist.getKey());
         }
         if (rsList.contains(SHINSEIKEY)) {
-            parameter.set申請書発行(true);
+            parameter.setShinseishoHakko(true);
         } else {
-            parameter.set申請書発行(false);
+            parameter.setShinseishoHakko(false);
         }
         if (rsList.contains(OSHIRASEKEY)) {
-            parameter.setお知らせ通知書発行(true);
+            parameter.setOshiraseTsuchishoHakko(true);
         } else {
-            parameter.setお知らせ通知書発行(false);
+            parameter.setOshiraseTsuchishoHakko(false);
         }
 
         if (div.getShutsuryokuTaisho().getChkHakkoIchiranhyoHakko().isAllSelected()) {
-            parameter.set発行一覧表発行(true);
+            parameter.setHakkoIchiranhyoHakko(true);
         } else {
-            parameter.set発行一覧表発行(false);
+            parameter.setHakkoIchiranhyoHakko(false);
         }
 
         if (HYOJI.equals(div.getShutsuryokuTaisho().getRadKinyoKikanmeiHyoji().getSelectedKey())) {
-            parameter.set金融機関表示(true);
+            parameter.setKinyuKikanHyoji(true);
         } else if (HIHYOJI.equals(div.getShutsuryokuTaisho().getRadKinyoKikanmeiHyoji().getSelectedKey())) {
-            parameter.set金融機関表示(false);
+            parameter.setKinyuKikanHyoji(false);
         }
 
         if (!(div.getCcdShuturyokujun().get出力順ID() == null)) {
-            parameter.set出力順ID(div.getCcdShuturyokujun().get出力順ID());
+            parameter.setShutsuryokujunId(div.getCcdShuturyokujun().get出力順ID());
         }
-        parameter.set申請日(div.getJidoShokanTaishoJohoSettei().getTxtShinseiDate().getValue());
-        parameter.set受付日(div.getJidoShokanTaishoJohoSettei().getTxtUketsukeDate().getValue());
-        parameter.set決定日(div.getJidoShokanTaishoJohoSettei().getTxtKetteiDate().getValue());
+        parameter.setShiseibi(div.getJidoShokanTaishoJohoSettei().getTxtShinseiDate().getValue());
+        parameter.setUketsukebi(div.getJidoShokanTaishoJohoSettei().getTxtUketsukeDate().getValue());
+        parameter.setKeteibi(div.getJidoShokanTaishoJohoSettei().getTxtKetteiDate().getValue());
         if (!div.getShutsuryokuTaisho().getTxtShinseishoTeishutsuKigen().getValue().isEmpty()) {
-            parameter.set申請書提出期限(div.getShutsuryokuTaisho().getTxtShinseishoTeishutsuKigen().getValue());
+            parameter.setShinseishoTeishutsuKigen(div.getShutsuryokuTaisho().getTxtShinseishoTeishutsuKigen().getValue());
         }
-        parameter.setメニューID(menuID);
+        parameter.setMenuId(menuID);
 
         RString 文書番号 = div.getShutsuryokuTaisho().getCcdBunshoNo().get文書番号();
         if (文書番号.equals(RString.EMPTY)) {
-            parameter.set文書番号文字列(RString.EMPTY);
+            parameter.setBunshoMojiretsu(RString.EMPTY);
         } else {
-            parameter.set文書番号文字列(文書番号);
+            parameter.setBunshoMojiretsu(文書番号);
         }
         set受託あり(parameter, menuID);
         return parameter;
     }
 
-    private void set受託あり(KogakuKaigoServicehiOshiraseHakkoParameter parameter,
+    private void set受託あり(DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter parameter,
             RString menuID) {
         RString 高額 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+                NOWDATE, SubGyomuCode.DBC介護給付);
         RString 事業高額 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_事業高額,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+                NOWDATE, SubGyomuCode.DBC介護給付);
         if (メニューID_DBCMN43001.equals(menuID)) {
             if (NUM_1.equals(高額)) {
-                parameter.set受託あり(false);
+                parameter.setJutakuAri(false);
             } else if (NUM_2.equals(高額)) {
-                parameter.set受託あり(true);
+                parameter.setJutakuAri(true);
             }
         } else if (メニューID_DBCMNL3001.equals(menuID)) {
             if (NUM_1.equals(事業高額)) {
-                parameter.set受託あり(false);
+                parameter.setJutakuAri(false);
             } else if (NUM_2.equals(事業高額)) {
-                parameter.set受託あり(true);
+                parameter.setJutakuAri(true);
             }
         }
-    }
-
-    /**
-     * 審査年月/受取年月のセットのメソッドです。
-     *
-     * @param 区分 Rstring
-     */
-    public void set審査年月(RString 区分) {
-        List<KeyValueDataSource> radShinsaYM = new ArrayList<>();
-        if (NUM_1.equals(区分)) {
-            radShinsaYM.add(new KeyValueDataSource(審査年月, 審査年月));
-            div.getShinseishoHakkoParameters().getRadShinsaYM().setDataSource(radShinsaYM);
-            div.getShinseishoHakkoParameters().getRadShinsaYM().setSelectedKey(審査年月);
-        } else if (NUM_2.equals(区分)) {
-            radShinsaYM.add(new KeyValueDataSource(受取年月, 受取年月));
-            div.getShinseishoHakkoParameters().getRadShinsaYM().setDataSource(radShinsaYM);
-            div.getShinseishoHakkoParameters().getRadShinsaYM().setSelectedKey(受取年月);
-        }
-
     }
 }
