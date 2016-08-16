@@ -53,12 +53,12 @@ public class SogojigyohiSeikyugakuTsuchishoInHeaderEditor implements ISogojigyoh
         source.shinsaYM = doパターン56(帳票出力対象データ.get審査年月());
         source.hokenshaNo = getColumnValue(帳票出力対象データ.get保険者番号());
         source.hokenshaName = 帳票出力対象データ.get保険者名();
-        if (NUM.equals(帳票出力対象データ.get款コード())) {
+        if (!NUM.equals(帳票出力対象データ.get款コード())) {
             source.kanName = 帳票出力対象データ.get款名();
         } else {
             source.kanName = 総合計;
         }
-        if (NUM.equals(帳票出力対象データ.get項コード())) {
+        if (!NUM.equals(帳票出力対象データ.get項コード())) {
             source.kouName = 帳票出力対象データ.get項名();
         } else {
             source.kouName = RString.EMPTY;
