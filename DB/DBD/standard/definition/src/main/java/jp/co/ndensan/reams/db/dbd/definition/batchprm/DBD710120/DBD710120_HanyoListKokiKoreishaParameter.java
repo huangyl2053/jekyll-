@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710120;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710120;
 
 import jp.co.ndensan.reams.db.dbd.definition.processprm.DBD710120.HanyoListKokiKoreishaProcessParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
