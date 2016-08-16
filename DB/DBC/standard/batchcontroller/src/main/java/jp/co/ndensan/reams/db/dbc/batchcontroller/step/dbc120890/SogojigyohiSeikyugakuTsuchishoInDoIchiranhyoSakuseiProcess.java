@@ -67,6 +67,7 @@ public class SogojigyohiSeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess extends 
             = new RString("DBC200087_SogojigyohiSeikyugakuTsuchisho.csv");
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
+    private static final RString SAKUSEI = new RString("作成");
     private static final RString NUM = new RString("99");
     private static final RString 総合計 = new RString("＊＊　総合計　＊＊");
 
@@ -81,9 +82,7 @@ public class SogojigyohiSeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess extends 
         PageBreaker<SogojigyohiSeikyugakuTsuchishoInSource> breaker = new SogojigyohiSeikyugakuTsuchishoInPageBreak(改頁項目リスト);
         batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200087.getReportId().value()).addBreak(breaker).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID,
-                UzUDE0831EucAccesslogFileType.Csv);
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         sogojigyohiSeikyugakuTsuchishoInEucFilePath = Path.combinePath(manager.getEucOutputDirectry(),
                 出力ファイル名);
         sogojigyohiSeikyugakuTsuchishoCsvWriter = BatchWriters.csvWriter(SogojigyohiSeikyugakuTsuchishoCsvEntity.class).
@@ -137,7 +136,7 @@ public class SogojigyohiSeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess extends 
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                     .fillType(FillType.BLANK).toDateString();
             RString 作成時 = 作成日時.getTime()
-                    .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE);
+                    .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
             output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時));
             output.set国保連合会名(請求額通知書一時.get国保連合会名());
             index++;
