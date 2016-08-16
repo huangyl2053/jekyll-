@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 所得情報抽出・連携（バッチ）のMybatisパラメータです。
  *
- * @reamsid_L DBC-1690-060 sunhui
+ * @reamsid_L DBB-1690-060 sunhui
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogButtonType;
@@ -142,7 +143,7 @@ public class NenjiRiyoshaFutanWariaiHantei {
                 SubGyomuCode.DBC介護給付);
         parameter.set対象年度(new FlexibleYear(div.getPanelAll().getTxtNendo().getValue().getYear().toDateString()));
         parameter.set処理区分(SaiShoriKubun.toValue(ONE));
-        parameter.set処理日時(FlexibleDate.getNowDate());
+        parameter.set処理日時(RDateTime.now());
         parameter.set基準日(new FlexibleDate(div.getPanelAll().getTxtKijunbi().getValue().plusDay(1).toDateString()));
         parameter.set年度終了年月日(new FlexibleDate((年.toDateString()).concat(月日)));
         parameter.set処理状態(new RString(div.getPanelAll().getTxtShoriJotai().getValue().toString()));

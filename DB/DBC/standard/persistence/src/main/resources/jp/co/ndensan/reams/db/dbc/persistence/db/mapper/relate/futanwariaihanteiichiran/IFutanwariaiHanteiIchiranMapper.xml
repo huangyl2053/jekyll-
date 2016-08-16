@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBC-4980-031 yuanzhenxia -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.futanwariaihanteiichiran.IFutanwariaiHanteiIchiranMapper">
+    <!-- TODO 今回データの抽出 -->
+    <select id="get前回利用者負担割合判定" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaihanteiichiran.FutanwariaiHanteiIchiranMybaticParameter"
+            resultMap="前回利用者負担割合判定ResultMap" resultOrdered="true" fetchSize="500">
+         SELECT
+            前回利用者負担割合判定."hihokenshaNo",
+            前回利用者負担割合判定."koseiJiyu",
+            前回利用者負担割合判定."nendo",
+            前回利用者負担割合判定."futanWariaiKubun",
+            前回利用者負担割合判定."honninGoukeiShotokuGaku",
+            前回利用者負担割合判定."setaiIchigouHihokenshaSu",
+            前回利用者負担割合判定."yukoKaishiYMD",
+            前回利用者負担割合判定."yukoShuryoYMD",
+            前回利用者負担割合判定."nenkinShunyuGoukei",
+            前回利用者負担割合判定."sonotanoGoukeiShotokuKingakuGoukei"
+         FROM
+         (
+             SELECT 
+              *
+             FROM
+             (
+                 SELECT
+                 利用者負担割合."hihokenshaNo",
+                 利用者負担割合."koseiJiyu",
+                 利用者負担割合."nendo",
+                 利用者負担割合明細."futanWariaiKubun",
+                 利用者負担割合明細."honninGoukeiShotokuGaku",
+                 利用者負担割合明細."setaiIchigouHihokenshaSu",
+                 利用者負担割合明細."yukoKaishiYMD",
+                 利用者負担割合明細."yukoShuryoYMD",
+                 利用者負担割合明細."nenkinShunyuGoukei",
+                 利用者負担割合明細."sonotanoGoukeiShotokuKingakuGoukei",
+                 row_number() over(partition by 利用者負担割合."hihokenshaNo" order by 利用者負担割合."rirekiNo" DESC ) AS rank_number
+                 FROM  rgdb."DbT3113RiyoshaFutanWariai"  AS 利用者負担割合
+                 INNER JOIN rgdb."DbT3114RiyoshaFutanWariaiMeisai" AS 利用者負担割合明細
+                 ON 利用者負担割合明細."nendo" = 利用者負担割合."nendo"
+                 AND 利用者負担割合明細."hihokenshaNo" = 利用者負担割合."hihokenshaNo" 
+                 AND 利用者負担割合明細."rirekiNo" = 利用者負担割合."rirekiNo"
+                 WHERE
+                 利用者負担割合."hanteiKubun" = #{処理区分}
+                 <if test="処理区分 == 1">
+                 AND 利用者負担割合."nendo" = #{先年度}
+                 </if>
+                 <if test="処理区分 == 2">
+                 AND 利用者負担割合."nendo" = #{対象年度}
+                 </if>
+                 <if test="処理区分 == 3">
+                 AND 利用者負担割合."nendo" <![CDATA[<]]> #{対象年度}
+                 </if>
+                 AND 利用者負担割合."logicalDeletedFlag"  = FALSE
+                 AND 利用者負担割合明細."logicalDeletedFlag" = FALSE
+                 ORDER BY
+                 利用者負担割合."hihokenshaNo",
+                 利用者負担割合明細."futanWariaiKubun" DESC,
+                 利用者負担割合明細."edaNo" DESC
+             ) AS 利用者負担割合判定2
+             <if test="(処理区分 == 3  and テストモード) or (処理区分 == 2 and テストモード ) or (処理区分 == 1 and テストモード ) ">
+                 WHERE 利用者負担割合判定2.rank_number = 1
+             </if>
+             <if test="処理区分 == 2  and !テストモード ">
+                 WHERE 利用者負担割合判定2.rank_number = 2
+             </if>
+         ) AS 前回利用者負担割合判定
+     </select>
+     <select id="get負担割合判定一覧データ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaihanteiichiran.FutanwariaiHanteiIchiranMybaticParameter"
+            resultMap="負担割合判定一覧データResultMap" resultOrdered="true" fetchSize="500">
+         SELECT
+            今回利用者負担割合判定Temp."hihokenshaNo" ,
+            今回利用者負担割合判定Temp."koseiJiyu",
+            今回利用者負担割合判定Temp."nendo",
+            今回利用者負担割合判定Temp."futanWariaiKubun",
+            今回利用者負担割合判定Temp."honninGoukeiShotokuGaku",
+            今回利用者負担割合判定Temp."setaiIchigouHihokenshaSu",
+            今回利用者負担割合判定Temp."yukoKaishiYMD",
+            今回利用者負担割合判定Temp."yukoShuryoYMD",
+            今回利用者負担割合判定Temp."nenkinShunyuGoukei",
+            今回利用者負担割合判定Temp."sonotanoGoukeiShotokuKingakuGoukei",
+            前回利用者負担割合判定Temp."koseiJiyu" as maeKoSeiJiyu,
+            前回利用者負担割合判定Temp."futanWariaiKubun" as maeFutanWariaiKubun,
+            前回利用者負担割合判定Temp."honninGoukeiShotokuGaku" as maeHonninGoukeiShotokuGaku,
+            前回利用者負担割合判定Temp."setaiIchigouHihokenshaSu" as maeSetaiIchiGouHihokenshaSu,
+            前回利用者負担割合判定Temp."yukoKaishiYMD" as maeYukoKaishiYMD,
+            前回利用者負担割合判定Temp."yukoShuryoYMD" as maeYukoShuryuYMD,
+            前回利用者負担割合判定Temp."nenkinShunyuGoukei" as maeNenkinShunyuGoukei,
+            前回利用者負担割合判定Temp."sonotanoGoukeiShotokuKingakuGoukei" as maeSonotanoGoukeiShotokuKingakuGoukei,
+            判定対象者Temp."HanteiTaishoshaTemp_hihokenshaKubunCode",
+            判定対象者Temp."HanteiTaishoshaTemp_shikakuShiyutokiYMD",
+            判定対象者Temp."HanteiTaishoshaTemp_shikakuShutokuTodokedeYMD",
+            判定対象者Temp."HanteiTaishoshaTemp_ninteiYukoKaishiDate",
+            判定対象者Temp."HanteiTaishoshaTemp_ninteiYukoShuryoDate",
+            判定対象者Temp."HanteiTaishoshaTemp_shikibetsuCode",
+            判定対象者Temp."HanteiTaishoshaTemp_kazeiKubun",
+            判定対象者Temp."HanteiTaishoshaTemp_dataKubun",
+            判定対象者Temp."HanteiTaishoshaTemp_yoKaigoninteiJoutaiKubunCode",
+            判定対象者Temp."HanteiTaishoshaTemp_kyuSochishaFlag",
+            生活保護受給者."shikibetsuCode",
+            利用者負担額減額."kyuhuritsu",
+            宛名PSM."meisho"
+         FROM
+             (SELECT 
+              *
+             FROM
+             "RiyoshaFutanWariaiHanteiTemp" as temp
+             WHERE
+             temp."taisyouKubun" = 1
+             <if test="処理区分 == 3 ">
+                 AND temp."nendo" = #{対象年度}
+             </if>
+          ) AS 今回利用者負担割合判定Temp
+          LEFT OUTER JOIN
+          (
+             SELECT
+              *
+             FROM
+             "RiyoshaFutanWariaiHanteiTemp" as temp
+             WHERE
+             temp."taisyouKubun" = 2
+          ) AS 前回利用者負担割合判定Temp
+          ON
+          今回利用者負担割合判定Temp."hihokenshaNo" = 前回利用者負担割合判定Temp."hihokenshaNo"
+          AND 今回利用者負担割合判定Temp."nendo" = 前回利用者負担割合判定Temp."nendo"
+          LEFT OUTER JOIN 
+            "HanteiTaishoshaTemp" as 判定対象者Temp
+          ON
+              判定対象者Temp."HanteiTaishoshaTemp_taishoNendo" = 今回利用者負担割合判定Temp."nendo"
+          AND 判定対象者Temp."HanteiTaishoshaTemp_hihokenshaNo" = 今回利用者負担割合判定Temp."hihokenshaNo"
+          LEFT OUTER JOIN
+          rgur."UrT0508SeikatsuHogoJukyusha" AS 生活保護受給者
+          ON 生活保護受給者."gyomuCode" = 'DBC'
+          AND 生活保護受給者."shikibetsuCode" = 判定対象者Temp."shikibetsuCode"
+           <if test="処理区分 != 3 ">
+                 AND (( 生活保護受給者."jukyuKaishiYMD" <![CDATA[<=]]> #{基準日}
+                      AND 生活保護受給者."jukyuHaishiYMD" <![CDATA[>=]]> #{基準日} )
+                 OR (生活保護受給者."jukyuKaishiYMD" <![CDATA[<=]]> #{基準日}
+                      AND 生活保護受給者."jukyuHaishiYMD" ='' ))
+           </if>
+           <if test="処理区分 == 3 ">
+                 AND (( 生活保護受給者."jukyuKaishiYMD" <![CDATA[>=]]>  #{現年度開始日} 
+                      AND 生活保護受給者."jukyuKaishiYMD" <![CDATA[<=]]> #{現年度終了日} )
+                 OR ((生活保護受給者."jukyuHaishiYMD" <![CDATA[>=]]> #{現年度開始日}
+                      AND 生活保護受給者."jukyuHaishiYMD" <![CDATA[<=]]> #{現年度終了日} )
+                      OR( 生活保護受給者."jukyuKaishiYMD" <![CDATA[<=]]> #{現年度開始日}
+                         AND 生活保護受給者."jukyuHaishiYMD" <![CDATA[>=]]> #{現年度終了日})
+                      OR(生活保護受給者."jukyuKaishiYMD" <![CDATA[<=]]> #{現年度開始日}
+                         AND 生活保護受給者."jukyuHaishiYMD" = ''))
+           </if>
+           LEFT OUTER JOIN
+           rgdb."DbT4014RiyoshaFutangakuGengaku" AS 利用者負担額減額
+           ON 利用者負担額減額."hihokenshaNo" = 今回利用者負担割合判定Temp."hihokenshaNo"
+           AND 利用者負担額減額."ketteiKubun" = '1'
+           <if test="処理区分 != 3 ">
+                 AND  利用者負担額減額."tekiyoKaishiYMD" <![CDATA[<=]]> #{基準日}
+                 AND 利用者負担額減額."tekiyoShuryoYMD" <![CDATA[>=]]> #{基準日} 
+           </if>
+           <if test="処理区分 == 3 ">
+                 AND (( 利用者負担額減額."tekiyoKaishiYMD" <![CDATA[>=]]>  #{現年度開始日} 
+                      AND 利用者負担額減額."tekiyoKaishiYMD" <![CDATA[<=]]> #{現年度終了日} )
+                 OR (利用者負担額減額."tekiyoShuryoYMD" <![CDATA[>=]]> #{現年度開始日}
+                      AND 利用者負担額減額."tekiyoShuryoYMD" <![CDATA[<=]]> #{現年度終了日} )
+                      OR( 利用者負担額減額."tekiyoKaishiYMD" <![CDATA[<=]]> #{現年度開始日}
+                         AND 利用者負担額減額."tekiyoShuryoYMD" <![CDATA[>=]]> #{現年度終了日})
+                      OR ( 利用者負担額減額."tekiyoKaishiYMD" <![CDATA[<=]]> #{現年度開始日}
+                         AND 利用者負担額減額."tekiyoShuryoYMD" = ''))
+           </if>
+           LEFT OUTER JOIN
+            rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
+            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+             true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS 宛名PSM
+           ON  宛名PSM."shikibetsuCode" = 判定対象者Temp."shikibetsuCode"
+     </select>
+     
+     <resultMap id="負担割合判定一覧データResultMap" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaihanteiichiran.FutanwariaiHanteiIchiranEntity">
+        <result property="今回被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="今回更正事由" column="koseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="今回年度" column="nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="今回負担割合区分" column="futanWariaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="今回本人合計所得金額" column="honninGoukeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="今回世帯１号被保険者数" column="setaiIchigouHihokenshaSu" />
+        <result property="今回有効開始日" column="yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="今回有効終了日" column="yukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="今回年金収入合計" column="nenkinShunyuGoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="今回その他の合計所得金額合計" column="sonotanoGoukeiShotokuKingakuGoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="前回更正事由" column="maeKoseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回負担割合区分" column="maeFutanWariaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回本人合計所得金額" column="maeHonninGoukeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="前回世帯１号被保険者数" column="maeSetaiIchigouHihokenshaSu" />
+        <result property="前回有効開始日" column="maeYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="前回有効終了日" column="maeYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="前回年金収入合計" column="maeNenkinShunyuGoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="前回その他の合計所得金額合計" column="maeSonotanoGoukeiShotokuKingakuGoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="被保険者区分コード" column="HanteiTaishoshaTemp_hihokenshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格取得年月日" column="HanteiTaishoshaTemp_shikakuShiyutokiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格喪失年月日" column="HanteiTaishoshaTemp_shikakuShutokuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定有効期間開始年月日" column="HanteiTaishoshaTemp_ninteiYukoKaishiDate" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定有効期間終了年月日" column="HanteiTaishoshaTemp_ninteiYukoShuryoDate" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="判定対象者識別コード" column="HanteiTaishoshaTemp_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="課税区分_減免前" column="HanteiTaishoshaTemp_kazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="データ区分" column="HanteiTaishoshaTemp_dataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="要介護認定状態区分コード" column="HanteiTaishoshaTemp_yoKaigoninteiJoutaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="旧措置者フラグ" column="HanteiTaishoshaTemp_kyuSochishaFlag" />
+        <result property="生活保護受給者識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付率" column="kyuhuritsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="名称" column="meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+    </resultMap>
+    <resultMap id="前回利用者負担割合判定ResultMap" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaihanteiichiran.MaeRiyoshaFutanWariaiHanteiEntity">
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="koseiJiyu" column="koseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nendo" column="nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="futanWariaiKubun" column="futanWariaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="honninGoukeiShotokuGaku" column="honninGoukeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="setaiIchigouHihokenshaSu" column="setaiIchigouHihokenshaSu" />
+        <result property="yukoKaishiYMD" column="yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="yukoShuryoYMD" column="yukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="nenkinShunyuGoukei" column="nenkinShunyuGoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sonotanoGoukeiShotokuKingakuGoukei" column="sonotanoGoukeiShotokuKingakuGoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+ </mapper>   
+    
