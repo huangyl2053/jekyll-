@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.entity.report.gassanjigyobunketteitsuchisho;
+package jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunketteitsuchisho;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 事業分高額合算支給決定通知書Entityクラスです。
  *
- * @reamsid_L DBC-4850-030 dongqianjing
+ * @reamsid_L DBC-4850-030 chenyadong
  */
 @lombok.Getter
 @lombok.Setter
