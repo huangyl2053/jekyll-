@@ -899,5 +899,6 @@
         <result property="kinyuKikanCodeChohyo" column="kinyuKikanCodeChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanCodeTypeHandler"/>
         <result property="tsuchoKigoChohyo" column="tsuchoKigoChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="tsuchoNoChohyo" column="tsuchoNoChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ininjoTeishutsusakiChohyo" column="ininjoTeishutsusakiChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 </mapper>

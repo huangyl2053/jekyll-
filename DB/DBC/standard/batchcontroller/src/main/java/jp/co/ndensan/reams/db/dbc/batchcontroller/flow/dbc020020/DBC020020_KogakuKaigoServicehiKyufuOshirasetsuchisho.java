@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020.JigyoKogakuServ
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020.JigyoKogakuShinseiKanriForShinseiJyohoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020.JigyoKogakuShinseiKanriForShinseiShokanProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020.JigyoKogakuShinseikanriMasterUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020.JigyoShinseishoHakoIchiranhyoOutputProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020.KogakuServiceHiOshiraseTsuchishoKikanAriOutputProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020.KogakuServiceHiOshiraseTsuchishoKigenNashiOutputProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020.KogakuServiceShikyuShinseishoOutputProcess;
@@ -71,6 +72,7 @@ public class DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchisho
     private static final String SHOKAN_SHINSEI = "shokan_shinsei";
     private static final String CHOHYO = "chohyo";
     private static final String ICHIRANHYO = "ichiranhyo";
+    private static final String JIGYO_ICHIRANHYO = "jigyo_ichiranhyo";
     private static final String KOGAKU_SHINSEISHO = "kogaku_shinseisho";
     private static final String KOGAKU_TSUCHISHO_KIGENNAI = "kogaku_tsuchisho_kigennai";
     private static final String KOGAKU_TSUCHISHO_KIGENARI = "kogaku_tsuchisho_kigenari";
@@ -105,9 +107,9 @@ public class DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchisho
         executeStep(SHIBOUSHA);
         executeStep(SHOKAN_SHINSEI);
         executeStep(CHOHYO);
-        executeStep(ICHIRANHYO);
 
         if (高額介護サービス費.equals(processParameter.getMenuId())) {
+            executeStep(ICHIRANHYO);
             executeStep(KOGAKU_SHINSEISHO);
             if (getParameter().getShinseishoTeishutsuKigen() == null || getParameter().getShinseishoTeishutsuKigen().isEmpty()) {
                 executeStep(KOGAKU_TSUCHISHO_KIGENNAI);
@@ -116,6 +118,7 @@ public class DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchisho
             }
             executeStep(KOGAKU_UPDATE);
         } else {
+            executeStep(JIGYO_ICHIRANHYO);
             executeStep(JIGYO_SHINSEISHO);
             if (getParameter().getShinseishoTeishutsuKigen() == null || getParameter().getShinseishoTeishutsuKigen().isEmpty()) {
                 executeStep(JIGYO_TSUCHISHO_KIGENNAI);
@@ -191,6 +194,11 @@ public class DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchisho
     @Step(ICHIRANHYO)
     IBatchFlowCommand executeIchiranhyo() {
         return loopBatch(ShinseishoHakoIchiranhyoOutputProcess.class).arguments(processParameter).define();
+    }
+
+    @Step(JIGYO_ICHIRANHYO)
+    IBatchFlowCommand executeJigyoIchiranhyo() {
+        return loopBatch(JigyoShinseishoHakoIchiranhyoOutputProcess.class).arguments(processParameter).define();
     }
 
     @Step(KOGAKU_SHINSEISHO)

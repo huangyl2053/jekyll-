@@ -145,4 +145,6 @@ public class ShinseiJohoChohyoTempEntity extends DbTableEntityBase<ShinseiJohoCh
     private KinyuKikanCode kinyuKikanCodeChohyo;
     private RString tsuchoKigoChohyo;
     private RString tsuchoNoChohyo;
+
+    private RString ininjoTeishutsusakiChohyo;
 }
