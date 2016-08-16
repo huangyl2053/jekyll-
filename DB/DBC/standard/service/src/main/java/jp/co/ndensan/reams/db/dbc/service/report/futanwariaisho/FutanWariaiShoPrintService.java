@@ -11,7 +11,8 @@ import jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho.FutanWariaiShoP
 import jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho.FutanWariaiShoReport;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.futanwariaisho.FutanWariaiShoSource;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
+import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
@@ -161,8 +162,9 @@ public class FutanWariaiShoPrintService {
                 編集後個人 = new EditedKojin(kojinList.get(ZERO_INDEX), 帳票共通情報, null);
             }
             HokenshaNo 保険者コード取得 = getHokenshaCode(被保険者番号);
-            //TODO QA#1174 RiyoshaFutanWariaiHantei riyoshaFutanWariaiHantei = RiyoshaFutanWariaiHantei.createInstance()
-            List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 利用者負担割合明細List = null;
+            RiyoshaFutanWariaiHantei riyoshaFutanWariaiHantei = RiyoshaFutanWariaiHantei.createInstance();
+            List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細List
+                    = riyoshaFutanWariaiHantei.riyoshaFutanWariaiMeisaiMergeGamen(entity.get利用者負担割合明細());
             FutanWariaiShoReport report = new FutanWariaiShoReport(entity, 認証者ソースデータ, 被保険者番号, 編集後個人,
                     利用者負担割合明細List, 保険者コード取得, flag, kojinList);
             report.writeBy(reportSourceWriter);
