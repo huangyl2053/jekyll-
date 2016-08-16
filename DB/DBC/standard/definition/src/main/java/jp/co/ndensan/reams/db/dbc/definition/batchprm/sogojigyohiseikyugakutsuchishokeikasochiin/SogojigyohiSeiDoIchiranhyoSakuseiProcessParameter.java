@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.sogojigyohiseikyugakutsuchishokeikasochiin;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 
 /**
@@ -20,8 +18,5 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class SogojigyohiSeiDoIchiranhyoSakuseiProcessParameter implements IBatchProcessParameter {
 
-    private SubGyomuCode サブ業務コード;
-    private ReportId 帳票ID;
-    private long 出力順ID;
     private RDateTime システム日付;
 }
