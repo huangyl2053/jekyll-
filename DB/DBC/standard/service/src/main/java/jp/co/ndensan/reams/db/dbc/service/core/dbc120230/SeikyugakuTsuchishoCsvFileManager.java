@@ -99,8 +99,8 @@ public class SeikyugakuTsuchishoCsvFileManager {
     @Transaction
     public FlowEntity 一時TBL作成と読込と登録(RString 保存先フォルダ, List<RString> エントリ情報List) {
         ISeikyugakuTsuchishoCsvFileMapper mapper = this.mapperProvider.create(ISeikyugakuTsuchishoCsvFileMapper.class);
-        mapper.create請求額通知書一時TBL();
-        mapper.create処理結果リスト一時TBL();
+//        mapper.create請求額通知書一時TBL();
+//        mapper.create処理結果リスト一時TBL();
         return 取込件数確認(保存先フォルダ, エントリ情報List);
     }
 
@@ -117,7 +117,7 @@ public class SeikyugakuTsuchishoCsvFileManager {
             登録件数 = 請求額通知書一時TBLに登録(csvlist);
         }
         if ((レコード件数合算 == INDEX_0) || 登録件数 == INDEX_0) {
-            mapper.処理結果リスト一時TBLに登録(errorTempentity);
+//            mapper.処理結果リスト一時TBLに登録(errorTempentity);
         }
         getEntity.set明細データ登録件数(登録件数);
         return getEntity;
@@ -211,7 +211,7 @@ public class SeikyugakuTsuchishoCsvFileManager {
                     setトレーラレコード2_累計(shoTempentity, csvlist.get(i).getToreraRecord2Entity(), 累計);
                     setトレーラレコード3_審査支払手数料(shoTempentity, csvlist.get(i).getToreraRecord3Entity(), 累計);
 
-                    mapper.請求額通知書一時TBLに登録(shoTempentity);
+//                    mapper.請求額通知書一時TBLに登録(shoTempentity);
                 }
             }
         }
