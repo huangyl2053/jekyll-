@@ -32,7 +32,7 @@ public class SogojigyohiSeikyugakuTsuchishoInBodyEditor implements ISogojigyohiS
 
     @Override
     public SogojigyohiSeikyugakuTsuchishoInSource edit(SogojigyohiSeikyugakuTsuchishoInSource source) {
-        if (CODE_ST.equals(帳票出力対象データ.getサービス種類コード())) {
+        if (!CODE_ST.equals(帳票出力対象データ.getサービス種類コード())) {
             source.listMeisai_1 = 帳票出力対象データ.getサービス種類名();
             source.listMeisai_3 = doカンマ編集(帳票出力対象データ.get通常分_実日数());
         } else {

@@ -60,7 +60,7 @@ public class KarisanteiGakuHenkoEntity implements Serializable {
         entity.setUaT0310Koza_shikibetsuCode(口座Entity.getShikibetsuCode());
         entity.setUaT0310Koza_gyomubetsuPrimaryKey(口座Entity.getGyomubetsuPrimaryKey());
         entity.setUaT0310Koza_gyomuKoyuKey(口座Entity.getGyomuKoyuKey());
-        entity.setUaT0310Koza_yotoKubun(口座Entity.getYotoKubun());
+        entity.setUaT0310Koza_yotoKubun(口座Entity.getYotoKubun().getColumnValue().getColumnValue());
         entity.setUaT0310Koza_torokuRenban(口座Entity.getTorokuRenban());
         entity.setUaT0310Koza_kaishiYMD(口座Entity.getKaishiYMD());
         entity.setUaT0310Koza_shuryoYMD(口座Entity.getShuryoYMD());
@@ -79,7 +79,7 @@ public class KarisanteiGakuHenkoEntity implements Serializable {
         entity.setUaT0310Koza_zumitsuHakkoYohi(口座Entity.getZumitsuHakkoYohi());
         entity.setUaT0310Koza_kozaFurikaeKaishiTsuchiHakkozumi(口座Entity.getKozaFurikaeKaishiTsuchiHakkozumi());
         entity.setUaT0310Koza_kozaTorokuNo(口座Entity.getKozaTorokuNo());
-        entity.setUaT0310Koza_kozaTorokuKubunCode(口座Entity.getKozaTorokuKubunCode());
+        entity.setUaT0310Koza_kozaTorokuKubunCode(口座Entity.getKozaTorokuKubunCode().getColumnValue().getColumnValue());
         entity.setUaT0310Koza_kozaKaishiUketsukeYMD(口座Entity.getKozaKaishiUketsukeYMD());
         entity.setUaT0310Koza_kozaShuryoUketsukeYMD(口座Entity.getKozaShuryoUketsukeYMD());
         entity.setUaT0310Koza_kozaTorokuYMD(口座Entity.getKozaTorokuYMD());
@@ -93,7 +93,7 @@ public class KarisanteiGakuHenkoEntity implements Serializable {
         entity.setUaT0302KinyuKikan_shuryoYMD(記入機関Entity.getShuryoYMD());
         entity.setUaT0302KinyuKikan_name(記入機関Entity.getName());
         entity.setUaT0302KinyuKikan_kanaName(記入機関Entity.getKanaName());
-        entity.setUaT0302KinyuKikan_yokinShubetsuPatternCode(記入機関Entity.getYokinShubetsuPatternCode());
+        entity.setUaT0302KinyuKikan_yokinShubetsuPatternCode(記入機関Entity.getYokinShubetsuPatternCode().getColumnValue().getColumnValue());
         entity.setUaT0302KinyuKikan_hyojijun(記入機関Entity.getHyojijun());
 
         UaT0303KinyuKikanShitenEntity 記入機関支店Entity = 口座.getKinyuKikanShitenEntity();
@@ -110,7 +110,7 @@ public class KarisanteiGakuHenkoEntity implements Serializable {
         UaT0301YokinShubetsuPatternEntity 預金種別 = 口座.getYokinShubetsuPatternEntity();
         entity.setUaT0301YokinShubetsuPattern_insertDantaiCd(預金種別.getInsertDantaiCd());
         entity.setUaT0301YokinShubetsuPattern_isDeleted(預金種別.getIsDeleted());
-        entity.setUaT0301YokinShubetsuPattern_yokinShubetsuPatternCode(預金種別.getYokinShubetsuPatternCode());
+        entity.setUaT0301YokinShubetsuPattern_yokinShubetsuPatternCode(預金種別.getYokinShubetsuPatternCode().getColumnValue().getColumnValue());
         entity.setUaT0301YokinShubetsuPattern_yokinShubetsuCode(預金種別.getYokinShubetsuCode());
         entity.setUaT0301YokinShubetsuPattern_yokinShubetsuMeisho(預金種別.getYokinShubetsuMeisho());
         entity.setUaT0301YokinShubetsuPattern_yokinShubetsuRyakusho(預金種別.getYokinShubetsuRyakusho());
