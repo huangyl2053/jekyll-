@@ -59,6 +59,12 @@ public class TaishoShaHanteiYoukonkyoItokiTempTableEntity extends DbTableEntityB
     private Boolean is所得税課税世帯;
     @TempTableColumnOrder(10)
     private Boolean is所得税課税者;
+    @TempTableColumnOrder(11)
+    private Decimal 課税所得額;
+
+    public Decimal get課税所得額() {
+        return 課税所得額;
+    }
 
     public HihokenshaNo get被保険者番号() {
         return 被保険者番号;
@@ -180,6 +186,10 @@ public class TaishoShaHanteiYoukonkyoItokiTempTableEntity extends DbTableEntityB
         this.is所得税課税者 = is所得税課税者;
     }
 
+    public void set課税所得額(Decimal 課税所得額) {
+        this.課税所得額 = 課税所得額;
+    }
+
     /**
      * コンストラクタです。
      *
@@ -198,6 +208,8 @@ public class TaishoShaHanteiYoukonkyoItokiTempTableEntity extends DbTableEntityB
      * @param is高齢者複数世帯
      * @param is所得税課税世帯
      * @param is所得税課税者
+     * @param 課税所得額
+     *
      */
     /**
      * {@inheritDoc}
@@ -221,6 +233,7 @@ public class TaishoShaHanteiYoukonkyoItokiTempTableEntity extends DbTableEntityB
         this.setIs高齢者複数世帯(entity.isIs高齢者複数世帯());
         this.setIs所得税課税世帯(entity.isIs所得税課税世帯());
         this.setIs所得税課税者(entity.isIs所得税課税者());
+        this.set課税所得額(entity.get課税所得額());
     }
 
     /**
@@ -231,6 +244,6 @@ public class TaishoShaHanteiYoukonkyoItokiTempTableEntity extends DbTableEntityB
     @Override
     public RString getMd5() {
         return super.toMd5(被保険者番号, 本人識別コード, 本人課税区分, 利用者負担段階, 配偶者識別コード, 配偶者課税区分, 世帯課税区分, is生活保護受給者, is老齢福祉年金受給者,
-                合計所得金額, 年金収入額, 非課税年金勘案額, is高齢者複数世帯, is所得税課税世帯, is所得税課税者);
+                合計所得金額, 年金収入額, 非課税年金勘案額, is高齢者複数世帯, is所得税課税世帯, is所得税課税者, 課税所得額);
     }
 }

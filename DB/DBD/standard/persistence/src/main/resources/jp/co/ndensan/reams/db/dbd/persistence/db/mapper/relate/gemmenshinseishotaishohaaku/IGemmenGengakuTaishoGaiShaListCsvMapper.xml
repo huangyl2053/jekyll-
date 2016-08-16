@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.-->
+<!-- @reamsid_L DBD-3530-040 liuwei2 -->
+
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenshinseishotaishohaaku.IGemmenGengakuTaishoGaiShaListCsvMapper">
+    <select id="get減免減額更新申請対象外者一覧CSV情報_負担限度額認定"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.GemmenGengakuTaishoGaiShaListMyBatisParameter"
+            resultMap="ResultMap_GemmenGengakuTaishoGaiShaEntity" fetchSize="500">
+        SELECT
+        B."honninKubun" AS "honninKubun",
+        B."hihokenshaNo" AS "hihokenshaNo",
+        B."shikibetsuCode" AS "shikibetsuCode",
+        C."shichosonCode" AS "shichosonCode",
+        B."kijunYMD" AS "kijunYMD",
+        B."shotokuNendo" AS "kijunYMD",
+
+        A."dbT4018KaigoHokenFutanGendogakuNintei_shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo",
+        A."dbT4018KaigoHokenFutanGendogakuNintei_ketteiKubun" AS "ketteiKubun",
+        A."dbT4018KaigoHokenFutanGendogakuNintei_shinseiYMD" AS "shinseiYMD",
+        A."dbT4018KaigoHokenFutanGendogakuNintei_ketteiYMD" AS "ketteiYMD",
+        A."dbT4018KaigoHokenFutanGendogakuNintei_tekiyoKaishiYMD" AS "tekiyoKaishiYMD",
+        A."dbT4018KaigoHokenFutanGendogakuNintei_tekiyoShuryoYMD" AS "tekiyoShuryoYMD",
+
+        E."世帯課税区分" AS 世帯課税区分,
+        E."利用者負担段階" AS 利用者負担段階,
+        E."is老齢福祉年金受給者" AS 老齢福祉年金受給区分,
+        E."is生活保護受給者" AS 生活保護受給区分,
+        E."課税所得額" AS 課税所得額,
+        E."本人課税区分" AS  本人課税区分,
+        F."nyushoShisetsuCode" AS "nyushoShisetsuCode",
+        G."jigyoshaNo" AS "jigyoshaNo",
+        H."yokaigoJotaiKubunCode" AS "yokaigoJotaiKubunCode",
+        J."koroshoIfShikibetsuCode" AS "koroshoIfShikibetsuCode",
+        H."kyuSochishaFlag" AS "kyuSochishaFlag",
+        H."ninteiYMD" AS "ninteiYMD",
+        H."ninteiYukoKikanKaishiYMD" AS "ninteiYukoKikanKaishiYMD",
+        H."ninteiYukoKikanShuryoYMD" AS "ninteiYukoKikanShuryoYMD",
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM "TmpSetaiShotoku" B
+        INNER JOIN
+        ( SELECT
+        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.allColumns_DbT4018KaigoHokenFutanGendogakuNintei" />
+        FROM rgdb."DbT4018KaigoHokenFutanGendogakuNintei" AS "DbT4018KaigoHokenFutanGendogakuNintei"
+        INNER JOIN
+        (
+        SELECT
+        "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo",
+        MAX("DbT4018KaigoHokenFutanGendogakuNintei"."rirekiNo") AS M
+        FROM rgdb."DbT4018KaigoHokenFutanGendogakuNintei"
+        WHERE
+        "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiKubun" = '1'
+        AND #{前年度の開始日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"
+        AND "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"  <![CDATA[<=]]> #{前年度の終了日}
+        GROUP BY
+        "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo"
+        ) A1
+        ON  A1."hihokenshaNo" = "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo"
+        AND M ="DbT4018KaigoHokenFutanGendogakuNintei"."rirekiNo"
+        ) A
+        ON A."dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo" = B."hihokenshaNo"
+        INNER JOIN
+        rgdb."DbV1001HihokenshaDaicho" C
+        ON C."hihokenshaNo" = B."hihokenshaNo"
+        AND C."logicalDeletedFlag" = FALSE
+        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('',#{基準日},FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')
+        AS  "ShikibetsuTaisho"
+        ON "ShikibetsuTaisho"."shikibetsuCode" = B."shikibetsuCode"
+        INNER JOIN "taishoShaHanteiYoukonkyoItokiTemp" E
+        ON E."被保険者番号" = B."hihokenshaNo"
+        LEFT JOIN
+        rgdb."DbV1004HihokenshaShisetsuNyutaisho" F
+        ON F."shikibetsuCode" = B."shikibetsuCode"
+        AND F."daichoShubetsu" = '1'
+        LEFT JOIN
+        rgdb."DbT7060KaigoJigyosha" G
+        ON G."jigyoshaNo" = F."nyushoShisetsuCode"
+        AND G."yukoKaishiYMD" <![CDATA[<=]]> #{システム日付}
+        AND #{システム日付} <![CDATA[<=]]> G."yukoShuryoYMD"
+
+        LEFT JOIN
+        rgdb."DbV4001JukyushaDaicho" H
+        ON H."hihokenshaNo" = B."hihokenshaNo"
+        AND H."ninteiYMD" <![CDATA[<=]]> #{基準日}
+        AND H."logicalDeletedFlag" = FALSE
+
+        LEFT JOIN
+        rgdb."DbT5101NinteiShinseiJoho" J
+        ON J."shinseishoKanriNo" = H."shinseishoKanriNo"
+
+        ORDER BY
+        B."hihokenshaNo",
+        B."honninKubun"
+    </select>
+    <select id="get減免減額更新申請対象外者一覧CSV情報_利用者負担額減額"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.GemmenGengakuTaishoGaiShaListMyBatisParameter"
+            resultMap="ResultMap_GemmenGengakuTaishoGaiShaEntity" fetchSize="500">
+        SELECT
+        B."honninKubun" AS "honninKubun",
+        B."hihokenshaNo" AS "hihokenshaNo",
+        B."shikibetsuCode" AS "shikibetsuCode",
+        C."shichosonCode" AS "shichosonCode",
+        B."kijunYMD" AS "kijunYMD",
+        B."shotokuNendo" AS "kijunYMD",
+
+        A."dbT4014RiyoshaFutangakuGengaku_shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo",
+        A."dbT4014RiyoshaFutangakuGengaku_ketteiKubun" AS "ketteiKubun",
+        A."dbT4014RiyoshaFutangakuGengaku_shinseiYMD" AS "shinseiYMD",
+        A."dbT4014RiyoshaFutangakuGengaku_ketteiYMD" AS "ketteiYMD",
+        A."dbT4014RiyoshaFutangakuGengaku_tekiyoKaishiYMD" AS "tekiyoKaishiYMD",
+        A."dbT4014RiyoshaFutangakuGengaku_tekiyoShuryoYMD" AS "tekiyoShuryoYMD",
+
+        E."世帯課税区分" AS 世帯課税区分,
+        E."利用者負担段階" AS 利用者負担段階,
+        E."is老齢福祉年金受給者" AS 老齢福祉年金受給区分,
+        E."is生活保護受給者" AS 生活保護受給区分,
+        E."課税所得額" AS 課税所得額,
+        E."本人課税区分" AS  本人課税区分,
+        F."nyushoShisetsuCode" AS "nyushoShisetsuCode",
+        G."jigyoshaNo" AS "jigyoshaNo",
+        H."yokaigoJotaiKubunCode" AS "yokaigoJotaiKubunCode",
+        J."koroshoIfShikibetsuCode" AS "koroshoIfShikibetsuCode",
+        H."kyuSochishaFlag" AS "kyuSochishaFlag",
+        H."ninteiYMD" AS "ninteiYMD",
+        H."ninteiYukoKikanKaishiYMD" AS "ninteiYukoKikanKaishiYMD",
+        H."ninteiYukoKikanShuryoYMD" AS "ninteiYukoKikanShuryoYMD",
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM "TmpSetaiShotoku" B
+        INNER JOIN
+        ( SELECT
+        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4014RiyoshaFutangakuGengakuMapper.allColumns_DbT4014RiyoshaFutangakuGengaku" />
+        FROM rgdb."DbT4014RiyoshaFutangakuGengaku" AS "DbT4014RiyoshaFutangakuGengaku"
+        INNER JOIN
+        (
+        SELECT
+        "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo",
+        MAX("DbT4014RiyoshaFutangakuGengaku"."rirekiNo") AS M
+        FROM rgdb."DbT4014RiyoshaFutangakuGengaku"
+        WHERE
+        "DbT4014RiyoshaFutangakuGengaku"."ketteiKubun" = '1'
+        AND #{前年度の開始日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"
+        AND "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"  <![CDATA[<=]]> #{前年度の終了日}
+        GROUP BY
+        "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo"
+        ) A1
+        ON  A1."hihokenshaNo" = "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo"
+        AND M ="DbT4014RiyoshaFutangakuGengaku"."rirekiNo"
+        ) A
+        ON A."dbT4014RiyoshaFutangakuGengaku_hihokenshaNo" = B."hihokenshaNo"
+        INNER JOIN
+        rgdb."DbV1001HihokenshaDaicho" C
+        ON C."hihokenshaNo" = B."hihokenshaNo"
+        AND C."logicalDeletedFlag" = FALSE
+        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('',#{基準日},FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')
+        AS  "ShikibetsuTaisho"
+        ON "ShikibetsuTaisho"."shikibetsuCode" = B."shikibetsuCode"
+        INNER JOIN "taishoShaHanteiYoukonkyoItokiTemp" E
+        ON E."被保険者番号" = B."hihokenshaNo"
+        LEFT JOIN
+        rgdb."DbV1004HihokenshaShisetsuNyutaisho" F
+        ON F."shikibetsuCode" = B."shikibetsuCode"
+        AND F."daichoShubetsu" = '1'
+        LEFT JOIN
+        rgdb."DbT7060KaigoJigyosha" G
+        ON G."jigyoshaNo" = F."nyushoShisetsuCode"
+        AND G."yukoKaishiYMD" <![CDATA[<=]]> #{システム日付}
+        AND #{システム日付} <![CDATA[<=]]>  G."yukoShuryoYMD"
+
+        LEFT JOIN
+        rgdb."DbV4001JukyushaDaicho" H
+        ON H."hihokenshaNo" = B."hihokenshaNo"
+        AND H."ninteiYMD" <![CDATA[<=]]> #{基準日}
+        AND H."logicalDeletedFlag" = FALSE
+
+        LEFT JOIN
+        rgdb."DbT5101NinteiShinseiJoho" J
+        ON J."shinseishoKanriNo" = H."shinseishoKanriNo"
+
+        ORDER BY
+        B."hihokenshaNo",
+        B."honninKubun"
+    </select>
+    <select id="get減免減額更新申請対象外者一覧CSV情報_訪問介護利用者負担額減額"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.GemmenGengakuTaishoGaiShaListMyBatisParameter"
+            resultMap="ResultMap_GemmenGengakuTaishoGaiShaEntity" fetchSize="500">
+        SELECT
+        B."honninKubun" AS "honninKubun",
+        B."hihokenshaNo" AS "hihokenshaNo",
+        B."shikibetsuCode" AS "shikibetsuCode",
+        C."shichosonCode" AS "shichosonCode",
+        B."kijunYMD" AS "kijunYMD",
+        B."shotokuNendo" AS "kijunYMD",
+
+        A."dbT4014RiyoshaFutangakuGengaku_shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo",
+        A."dbT4014RiyoshaFutangakuGengaku_ketteiKubun" AS "ketteiKubun",
+        A."dbT4014RiyoshaFutangakuGengaku_shinseiYMD" AS "shinseiYMD",
+        A."dbT4014RiyoshaFutangakuGengaku_ketteiYMD" AS "ketteiYMD",
+        A."dbT4014RiyoshaFutangakuGengaku_tekiyoKaishiYMD" AS "tekiyoKaishiYMD",
+        A."dbT4014RiyoshaFutangakuGengaku_tekiyoShuryoYMD" AS "tekiyoShuryoYMD",
+
+        E."世帯課税区分" AS 世帯課税区分,
+        E."利用者負担段階" AS 利用者負担段階,
+        E."is老齢福祉年金受給者" AS 老齢福祉年金受給区分,
+        E."is生活保護受給者" AS 生活保護受給区分,
+        E."課税所得額" AS 課税所得額,
+        E."本人課税区分" AS  本人課税区分,
+        F."nyushoShisetsuCode" AS "nyushoShisetsuCode",
+        G."jigyoshaNo" AS "jigyoshaNo",
+        H."yokaigoJotaiKubunCode" AS "yokaigoJotaiKubunCode",
+        J."koroshoIfShikibetsuCode" AS "koroshoIfShikibetsuCode",
+        H."kyuSochishaFlag" AS "kyuSochishaFlag",
+        H."ninteiYMD" AS "ninteiYMD",
+        H."ninteiYukoKikanKaishiYMD" AS "ninteiYukoKikanKaishiYMD",
+        H."ninteiYukoKikanShuryoYMD" AS "ninteiYukoKikanShuryoYMD",
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM "TmpSetaiShotoku" B
+        INNER JOIN
+        ( SELECT
+        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4014RiyoshaFutangakuGengakuMapper.allColumns_DbT4014RiyoshaFutangakuGengaku" />
+        FROM rgdb."DbT4014RiyoshaFutangakuGengaku" AS "DbT4014RiyoshaFutangakuGengaku"
+        INNER JOIN
+        (
+        SELECT
+        "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo",
+        MAX("DbT4014RiyoshaFutangakuGengaku"."rirekiNo") AS M
+        FROM rgdb."DbT4014RiyoshaFutangakuGengaku"
+        WHERE
+        "DbT4014RiyoshaFutangakuGengaku"."ketteiKubun" = '1'
+        AND #{前年度の開始日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"
+        AND "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"  <![CDATA[<=]]> #{前年度の終了日}
+        GROUP BY
+        "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo"
+        ) A1
+        ON  A1."hihokenshaNo" = "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo"
+        AND M ="DbT4014RiyoshaFutangakuGengaku"."rirekiNo"
+        ) A
+        ON A."dbT4014RiyoshaFutangakuGengaku_hihokenshaNo" = B."hihokenshaNo"
+        INNER JOIN
+        rgdb."DbV1001HihokenshaDaicho" C
+        ON C."hihokenshaNo" = B."hihokenshaNo"
+        AND C."logicalDeletedFlag" = FALSE
+        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('',#{基準日},FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')
+        AS  "ShikibetsuTaisho"
+        ON "ShikibetsuTaisho"."shikibetsuCode" = B."shikibetsuCode"
+        INNER JOIN "taishoShaHanteiYoukonkyoItokiTemp" E
+        ON E."被保険者番号" = B."hihokenshaNo"
+        LEFT JOIN
+        rgdb."DbV1004HihokenshaShisetsuNyutaisho" F
+        ON F."shikibetsuCode" = B."shikibetsuCode"
+        AND F."daichoShubetsu" = '1'
+        LEFT JOIN
+        rgdb."DbT7060KaigoJigyosha" G
+        ON G."jigyoshaNo" = F."nyushoShisetsuCode"
+        AND G."yukoKaishiYMD" <![CDATA[<=]]> #{システム日付}
+        AND #{システム日付} <![CDATA[<=]]>  G."yukoShuryoYMD"
+
+        LEFT JOIN
+        rgdb."DbV4001JukyushaDaicho" H
+        ON H."hihokenshaNo" = B."hihokenshaNo"
+        AND H."ninteiYMD" <![CDATA[<=]]> #{基準日}
+        AND H."logicalDeletedFlag" = FALSE
+
+        LEFT JOIN
+        rgdb."DbT5101NinteiShinseiJoho" J
+        ON J."shinseishoKanriNo" = H."shinseishoKanriNo"
+
+        ORDER BY
+        B."hihokenshaNo",
+        B."honninKubun"
+    </select>
+    <select id="get減免減額更新申請対象外者一覧CSV情報_社会福祉法人等利用者負担軽減"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.GemmenGengakuTaishoGaiShaListMyBatisParameter"
+            resultMap="ResultMap_GemmenGengakuTaishoGaiShaEntity" fetchSize="500">
+        SELECT
+        B."honninKubun" AS "honninKubun",
+        B."hihokenshaNo" AS "hihokenshaNo",
+        B."shikibetsuCode" AS "shikibetsuCode",
+        C."shichosonCode" AS "shichosonCode",
+        B."kijunYMD" AS "kijunYMD",
+        B."shotokuNendo" AS "kijunYMD",
+
+        A."dbT4018KaigoHokenFutanGendogakuNintei_shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo",
+        A."dbT4018KaigoHokenFutanGendogakuNintei_ketteiKubun" AS "ketteiKubun",
+        A."dbT4018KaigoHokenFutanGendogakuNintei_shinseiYMD" AS "shinseiYMD",
+        A."dbT4018KaigoHokenFutanGendogakuNintei_ketteiYMD" AS "ketteiYMD",
+        A."dbT4018KaigoHokenFutanGendogakuNintei_tekiyoKaishiYMD" AS "tekiyoKaishiYMD",
+        A."dbT4018KaigoHokenFutanGendogakuNintei_tekiyoShuryoYMD" AS "tekiyoShuryoYMD",
+
+        E."世帯課税区分" AS 世帯課税区分,
+        E."利用者負担段階" AS 利用者負担段階,
+        E."is老齢福祉年金受給者" AS 老齢福祉年金受給区分,
+        E."is生活保護受給者" AS 生活保護受給区分,
+        E."課税所得額" AS 課税所得額,
+        E."本人課税区分" AS  本人課税区分,
+        F."nyushoShisetsuCode" AS "nyushoShisetsuCode",
+        G."jigyoshaNo" AS "jigyoshaNo",
+        H."yokaigoJotaiKubunCode" AS "yokaigoJotaiKubunCode",
+        J."koroshoIfShikibetsuCode" AS "koroshoIfShikibetsuCode",
+        H."kyuSochishaFlag" AS "kyuSochishaFlag",
+        H."ninteiYMD" AS "ninteiYMD",
+        H."ninteiYukoKikanKaishiYMD" AS "ninteiYukoKikanKaishiYMD",
+        H."ninteiYukoKikanShuryoYMD" AS "ninteiYukoKikanShuryoYMD",
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM "TmpSetaiShotoku" B
+        INNER JOIN
+        ( SELECT
+        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.allColumns_DbT4018KaigoHokenFutanGendogakuNintei" />
+        FROM rgdb."DbT4018KaigoHokenFutanGendogakuNintei" AS "DbT4018KaigoHokenFutanGendogakuNintei"
+        INNER JOIN
+        (
+        SELECT
+        "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo",
+        MAX("DbT4018KaigoHokenFutanGendogakuNintei"."rirekiNo") AS M
+        FROM rgdb."DbT4018KaigoHokenFutanGendogakuNintei"
+        WHERE
+        "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiKubun" = '1'
+        AND #{前年度の開始日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"
+        AND "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"  <![CDATA[<=]]> #{前年度の終了日}
+        GROUP BY
+        "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo"
+        ) A1
+        ON  A1."hihokenshaNo" = "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo"
+        AND M ="DbT4018KaigoHokenFutanGendogakuNintei"."rirekiNo"
+        ) A
+        ON A."dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo" = B."hihokenshaNo"
+        INNER JOIN
+        rgdb."DbV1001HihokenshaDaicho" C
+        ON C."hihokenshaNo" = B."hihokenshaNo"
+        AND C."logicalDeletedFlag" = FALSE
+        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('',#{基準日},FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')
+        AS  "ShikibetsuTaisho"
+        ON "ShikibetsuTaisho"."shikibetsuCode" = B."shikibetsuCode"
+        INNER JOIN "taishoShaHanteiYoukonkyoItokiTemp" E
+        ON E."被保険者番号" = B."hihokenshaNo"
+        LEFT JOIN
+        rgdb."DbV1004HihokenshaShisetsuNyutaisho" F
+        ON F."shikibetsuCode" = B."shikibetsuCode"
+        AND F."daichoShubetsu" = '1'
+        LEFT JOIN
+        rgdb."DbT7060KaigoJigyosha" G
+        ON G."jigyoshaNo" = F."nyushoShisetsuCode"
+        AND G."yukoKaishiYMD" <![CDATA[<=]]> #{システム日付}
+        AND #{システム日付} <![CDATA[<=]]>  G."yukoShuryoYMD"
+
+        LEFT JOIN
+        rgdb."DbV4001JukyushaDaicho" H
+        ON H."hihokenshaNo" = B."hihokenshaNo"
+        AND H."ninteiYMD" <![CDATA[<=]]> #{基準日}
+        AND H."logicalDeletedFlag" = FALSE
+
+        LEFT JOIN
+        rgdb."DbT5101NinteiShinseiJoho" J
+        ON J."shinseishoKanriNo" = H."shinseishoKanriNo"
+
+        ORDER BY
+        B."hihokenshaNo",
+        B."honninKubun"
+    </select>
+    <resultMap id="ResultMap_GemmenGengakuTaishoGaiShaEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmenshinseishotaishohaaku.GemmenGengakuTaishoGaiShaEntity" autoMapping="true">
+        <result property="本人区分" column="honninKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="基準年月日" column="kijunYMD" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="所得年度" column="shotokuNendo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="証記載保険者番号" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="決定区分" column="ketteiKubun" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="減免申請日" column="shinseiYMD" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="減免決定日" column="ketteiYMD" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="減免適用日" column="tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="減免有効期限" column="tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="世帯課税区分" column="世帯課税区分" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="利用者負担段階" column="利用者負担段階" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="老齢福祉年金受給区分" column="老齢福祉年金受給区分" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="生活保護受給区分" column="生活保護受給区分" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="課税所得額" column="課税所得額" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="課税区分" column="本人課税区分" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="入所施設コード" column="nyushoShisetsuCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="入所施設名称" column="jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="要介護認定状態区分コード" column="yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="厚労省IF識別コード" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="旧措置" column="kyuSochishaFlag" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="要介護認定日" column="ninteiYMD" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="認定開始日" column="ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="認定終了日" column="ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <association property="GemmenGengakuTaishoGaiShaListCsvEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+    </resultMap>
+</mapper>
