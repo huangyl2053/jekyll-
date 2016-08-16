@@ -65,6 +65,8 @@ public class SeikyugakuTsuchishoInHeaderEditor implements ISeikyugakuTsuchishoIn
         } else {
             source.kouName = RString.EMPTY;
         }
+        source.kouCode = 帳票出力対象データ.get項コード();
+        source.kanCode = 帳票出力対象データ.get款コード();
         source.kokuhorenName = 帳票出力対象データ.get国保連合会名();
         source.shoKisaiHokenshaNo = getColumnValue(帳票出力対象データ.get証記載保険者番号());
         return source;
