@@ -22,11 +22,14 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuGetFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -56,9 +59,9 @@ public class DBC120810_KokuhorenJukyushaInFlow extends BatchFlowBase<KokuhorenKy
     @Override
     protected void defineFlow() {
         try {
-// TODO QA1191            交換情報識別番号 = DbBusinessConfig.get(
-// TODO QA1191                    ConfigNameDBC.国保連取込_国保連保有受給者情報_交換情報識別番号, now, SubGyomuCode.DBC介護給付);
-            交換情報識別番号 = new RString("534");
+            RDate now = RDate.getNowDate();
+            交換情報識別番号 = DbBusinessConfig.get(ConfigNameDBC.国保連取込_受給者台帳情報一覧_交換情報識別番号, now, SubGyomuCode.DBC介護給付);
+
             executeStep(ファイル取得);
             returnEntity
                     = getResult(KokuhorenKyoutsuuFileGetReturnEntity.class, new RString(ファイル取得),
