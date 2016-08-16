@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.SogojigyohiSeiDoIchiranhy
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- * 総合事業費（経過措置）請求額通知書一覧表帳票IEditor
+ * 総合事業費（経過措置）請求額通知書一覧表帳票IEditorインターフェースです。
  *
  * @reamsid_L DBC-2480-031 jiangxiaolong
  */

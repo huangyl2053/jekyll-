@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr;
 
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -28,4 +29,6 @@ public class NinteiChosaKekkaTorikomiOcrRelateEntity {
     private RDateTime イメージ共有ファイルID;
     private RString 認定調査委託先コード;
     private RString 認定調査員コード;
+    private Code 認定調査依頼区分コード;
+    private int 認定調査回数;
 }
