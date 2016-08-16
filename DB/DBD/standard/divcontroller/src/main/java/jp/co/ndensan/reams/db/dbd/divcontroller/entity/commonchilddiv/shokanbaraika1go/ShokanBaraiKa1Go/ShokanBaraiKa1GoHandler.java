@@ -75,7 +75,7 @@ public class ShokanBaraiKa1GoHandler {
     /**
      * 画面初期化処理です。
      *
-     * @return Message
+     * @return Message エラーMSG
      */
     public Message onLoad() {
         Message message = null;
