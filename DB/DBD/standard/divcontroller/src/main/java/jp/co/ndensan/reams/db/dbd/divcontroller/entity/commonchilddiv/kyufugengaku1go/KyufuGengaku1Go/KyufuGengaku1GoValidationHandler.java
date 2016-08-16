@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class KyufuGengaku1GoValidationHandler {
 
     private final RString 減額免除申請 = new RString("減額免除申請");
-    private final RString 給付額減額 = new RString("給付額減額");
+    private final RString 給付額減額 = new RString("給付額減額登録");
 
     /**
      * 1号給付額減額ダイアログの滞納状況情報チェック。
