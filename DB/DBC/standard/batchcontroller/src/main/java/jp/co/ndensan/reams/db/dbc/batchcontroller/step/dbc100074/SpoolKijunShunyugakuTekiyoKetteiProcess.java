@@ -24,21 +24,14 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshub
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.db.dbz.service.core.teikeibunhenkan.KaigoTextHenkanRuleCreator;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiEditorBuilder;
 import jp.co.ndensan.reams.ua.uax.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiSourceBuilder;
 import jp.co.ndensan.reams.ua.uax.business.report.parts.util.atesaki.ReportAtesakiEditor;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.GyomuKoyuKeyRiyoKubun;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoGyomuHanteiKey;
-import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.IBatchReportWriterWithCheckList;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -64,10 +57,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -83,24 +73,27 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
     private SpoolKijunShunyugakuTekiyoKetteiProcessParameter parameter;
     private IOutputOrder 並び順;
     private List<RString> 改頁項目リスト;
-    List<RString> 改頁List;
-    private KijunShunyugakuTekiyoKetteiMybatisParameter 基準収入額適用管理の取得Parameter;
+    private List<RString> 出力順リスト;
+    private List<RString> 改頁List;
+    private TsuchishoTeikeibunFinder finder;
+    private ITextHenkanRule rule;
     private List<KijunShunyugakuTekiyoKetteiEntity> 基準収入額適用管理List;
-    private List<KijunShunyugakuTekiyoKetteiEntity> entityList;
-    private SetaiCode 世帯コード;
+    private KijunShunyugakuTekiyoKanriManager 基準収入額適用管理manager;
     private int 通番;
-    private int 件数MAX;
     private static final ReportId 帳票ID_通知書 = new ReportId("DBC100074_KijunShunyugakuTekiyoKetteiTsuchisho");
     private static final RString ORDER_BY = new RString("order by");
     private static final RString タイトル = new RString("基準収入額適用決定通知書");
-    private static final RString その他 = new RString("その他　（同一世帯コードのデータ件数-3）人");
+    private static final RString その他 = new RString("その他 ");
+    private static final RString 人 = new RString("人");
+    private static final RString 被保険者名1 = new RString("被保険者名カナ１");
+    private static final RString 被保険者名2 = new RString("被保険者名カナ２");
+    private static final RString 被保険者名3 = new RString("被保険者名カナ３");
     private static final RString 定数_被保険者番号 = new RString("被保険者番号");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
-    private static final int INT_30 = 30;
     private static final int 文字切れ対象文字列長 = 40;
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunshunyugakutekiyokettei."
@@ -118,22 +111,13 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
     protected void initialize() {
         super.initialize();
         通番 = INT_1;
-        件数MAX = INT_1;
         改頁項目リスト = new ArrayList<>();
+        出力順リスト = new ArrayList<>();
+        finder = new TsuchishoTeikeibunFinder();
+        rule = KaigoTextHenkanRuleCreator.createRule(SubGyomuCode.DBC介護給付, 帳票ID_通知書);
         基準収入額適用管理List = new ArrayList<>();
-        entityList = new ArrayList<>();
-        基準収入額適用管理の取得Parameter = new KijunShunyugakuTekiyoKetteiMybatisParameter();
-        基準収入額適用管理の取得Parameter.set抽出期間(parameter.get抽出期間());
-        基準収入額適用管理の取得Parameter.set開始日(parameter.get開始日());
-        基準収入額適用管理の取得Parameter.set終了日(parameter.get終了日());
-        基準収入額適用管理の取得Parameter.set印書(parameter.get印書());
+        基準収入額適用管理manager = new KijunShunyugakuTekiyoKanriManager();
         並び順 = get並び順(帳票ID_通知書, parameter.get帳票出力順ID());
-        if (並び順 != null) {
-            基準収入額適用管理の取得Parameter.setTemp_出力順(MyBatisOrderByClauseCreator.create(
-                    KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.class, 並び順).replace(ORDER_BY, RString.EMPTY));
-        } else {
-            基準収入額適用管理の取得Parameter.setTemp_出力順(null);
-        }
     }
 
     @Override
@@ -148,10 +132,22 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
             }
         }
         改頁List = get改頁List();
+        出力順リスト = get出力順List();
     }
 
     @Override
     protected IBatchReader createReader() {
+        KijunShunyugakuTekiyoKetteiMybatisParameter 基準収入額適用管理の取得Parameter = new KijunShunyugakuTekiyoKetteiMybatisParameter();
+        基準収入額適用管理の取得Parameter.set抽出期間(parameter.get抽出期間());
+        基準収入額適用管理の取得Parameter.set開始日(parameter.get開始日());
+        基準収入額適用管理の取得Parameter.set終了日(parameter.get終了日());
+        基準収入額適用管理の取得Parameter.set印書(parameter.get印書());
+        if (並び順 != null) {
+            基準収入額適用管理の取得Parameter.setTemp_出力順(MyBatisOrderByClauseCreator.create(
+                    KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.class, 並び順).replace(ORDER_BY, RString.EMPTY));
+        } else {
+            基準収入額適用管理の取得Parameter.setTemp_出力順(null);
+        }
         return new BatchDbReader(READ_DATA_ID, 基準収入額適用管理の取得Parameter);
     }
 
@@ -182,24 +178,19 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
 
     @Override
     protected void usualProcess(KijunShunyugakuTekiyoKetteiEntity entity) {
-        entityList.add(entity);
         KijunShunyugakuTekiyoKetteiEntity beforeEntity = getBefore();
         if (beforeEntity == null) {
             beforeEntity = entity;
         }
         boolean 改頁Flag = new KijunShunyugakuTekiyoKetteiTsuchiIchiranPageBreak(改頁項目リスト).is改頁(entity, beforeEntity);
-        if (改頁Flag || 件数MAX > INT_30) {
+        if (改頁Flag) {
             通番 = INT_1;
-            件数MAX = INT_1;
         }
         KijunShunyugakuTekiyoKetteiTsuchiIchiran 基準収入額決定通知一覧表パラメータ = get基準収入額決定通知一覧表パラメータ(entity);
         KijunShunyugakuTekiyoKetteiTsuchiIchiranReport 一覧表report
                 = new KijunShunyugakuTekiyoKetteiTsuchiIchiranReport(基準収入額決定通知一覧表パラメータ);
         一覧表report.writeBy(reportSourceWriter_一覧表);
-        if (世帯コード == null || 世帯コード.isEmpty()) {
-            世帯コード = entity.get世帯コード();
-        }
-        if (世帯コード.equals(entity.get世帯コード())) {
+        if (getBefore() == null || getBefore().get世帯コード().equals(entity.get世帯コード())) {
             基準収入額適用管理List.add(entity);
         } else {
             KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書Parameter = get基準収入額適用決定通知書パラメータ();
@@ -209,12 +200,12 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
             } else {
                 通知書report.writeBy(reportSourceWriter_通知書);
             }
-            世帯コード = entity.get世帯コード();
             基準収入額適用管理List = new ArrayList<>();
             基準収入額適用管理List.add(entity);
         }
+        基準収入額適用管理manager.update決定通知書発行日(entity.get世帯コード(), entity.get年度(),
+                entity.get履歴番号(), entity.get被保険者番号(), parameter.get作成日());
         通番 = 通番 + INT_1;
-        件数MAX = 件数MAX + INT_1;
     }
 
     @Override
@@ -226,12 +217,7 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
         } else {
             通知書report.writeBy(reportSourceWriter_通知書);
         }
-        KijunShunyugakuTekiyoKanriManager 基準収入額適用管理manager = new KijunShunyugakuTekiyoKanriManager();
         ShoriDateKanriManager 処理日付管理マスタmanager = new ShoriDateKanriManager();
-        for (KijunShunyugakuTekiyoKetteiEntity entity : entityList) {
-            基準収入額適用管理manager.update決定通知書発行日(entity.get世帯コード(), entity.get年度(),
-                    entity.get履歴番号(), entity.get被保険者番号(), parameter.get作成日());
-        }
         処理日付管理マスタmanager.update対象開始日時AND対象終了日時(SubGyomuCode.DBC介護給付, parameter.get市町村コード(), タイトル,
                 parameter.get抽出期間(), parameter.get開始日(), parameter.get終了日());
         batchReportWriter_一覧表.close();
@@ -250,24 +236,18 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
 
     private KijunShunyugakuTekiyoKetteiTsuchisho get基準収入額適用決定通知書パラメータ() {
         KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書Parameter = new KijunShunyugakuTekiyoKetteiTsuchisho();
-        ShikibetsuCode 識別コード = null;
         for (KijunShunyugakuTekiyoKetteiEntity entity : 基準収入額適用管理List) {
-            if (entity.is宛先印字対象者フラグ()) {
-                識別コード = entity.get識別コード();
-                break;
-            }
-        }
-        if (識別コード != null) {
-            IAtesaki 宛先 = get宛先(識別コード);
-            if (宛先 != null) {
-                ReportAtesakiEditor editor = new SofubutsuAtesakiEditorBuilder(宛先).build();
+            if (entity.is宛先印字対象者フラグ() && entity.get宛先Entity() != null) {
+                IAtesaki atesaki = AtesakiFactory.createInstance(entity.get宛先Entity());
+                ReportAtesakiEditor editor = new SofubutsuAtesakiEditorBuilder(atesaki).build();
                 SofubutsuAtesakiSource compSofubutsuAtesakiソース = new SofubutsuAtesakiSourceBuilder(editor).buildSource();
                 基準収入額適用決定通知書Parameter.setCompSofubutsuAtesakiソース(compSofubutsuAtesakiソース);
+                break;
             }
         }
         基準収入額適用決定通知書Parameter.set文書番号(parameter.get文書番号());
         基準収入額適用決定通知書Parameter.setタイトル(タイトル);
-        if (基準収入額適用管理List.size() > INT_0) {
+        if (INT_0 < 基準収入額適用管理List.size()) {
             基準収入額適用決定通知書Parameter.set申請年月日(基準収入額適用管理List.get(INT_0).get申請日());
             基準収入額適用決定通知書Parameter.set決定年月日(基準収入額適用管理List.get(INT_0).get決定日());
             基準収入額適用決定通知書Parameter.set適用開始年月(基準収入額適用管理List.get(INT_0).get適用開始年月());
@@ -276,18 +256,19 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
             set宛名識別対象情報_1件目(基準収入額適用決定通知書Parameter);
             基準収入額適用決定通知書Parameter.set識別コード１(基準収入額適用管理List.get(INT_0).get識別コード());
         }
-        if (基準収入額適用管理List.size() > INT_1) {
+        if (INT_1 < 基準収入額適用管理List.size()) {
             基準収入額適用決定通知書Parameter.set被保険者番号２(基準収入額適用管理List.get(INT_1).get被保険者番号());
             set宛名識別対象情報_2件目(基準収入額適用決定通知書Parameter);
             基準収入額適用決定通知書Parameter.set識別コード２(基準収入額適用管理List.get(INT_1).get識別コード());
         }
-        if (基準収入額適用管理List.size() > INT_2) {
+        if (INT_2 < 基準収入額適用管理List.size()) {
             基準収入額適用決定通知書Parameter.set被保険者番号３(基準収入額適用管理List.get(INT_2).get被保険者番号());
             set宛名識別対象情報_3件目(基準収入額適用決定通知書Parameter);
             基準収入額適用決定通知書Parameter.set識別コード３(基準収入額適用管理List.get(INT_2).get識別コード());
         }
-        if (基準収入額適用管理List.size() > INT_3) {
-            基準収入額適用決定通知書Parameter.setその他被保険者(その他);
+        if (INT_3 < 基準収入額適用管理List.size()) {
+            int その他の人 = 基準収入額適用管理List.size() - INT_3;
+            基準収入額適用決定通知書Parameter.setその他被保険者(その他.concat(String.valueOf(その他の人)).concat(人));
         }
         基準収入額適用決定通知書Parameter.setFlag(false);
         is文字切れ(基準収入額適用決定通知書Parameter);
@@ -305,9 +286,7 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
     }
 
     private void set通知文(KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書Parameter) {
-        TsuchishoTeikeibunFinder finder = new TsuchishoTeikeibunFinder();
         List<TsuchishoTeikeibun> teikeibunList = finder.get通知書定型文パターン(SubGyomuCode.DBC介護給付, 帳票ID_通知書);
-        ITextHenkanRule rule = KaigoTextHenkanRuleCreator.createRule(SubGyomuCode.DBC介護給付, 帳票ID_通知書);
         for (TsuchishoTeikeibun teikeibun : teikeibunList) {
             set通知文１(teikeibun, 基準収入額適用決定通知書Parameter, rule);
             set通知文２(teikeibun, 基準収入額適用決定通知書Parameter, rule);
@@ -349,7 +328,10 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
     }
 
     private void set宛名識別対象情報_3件目(KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書Parameter) throws ClassCastException {
-        IShikibetsuTaisho 宛名識別対象情報_3件目 = get宛名(基準収入額適用管理List.get(INT_2).get識別コード());
+        IShikibetsuTaisho 宛名識別対象情報_3件目 = null;
+        if (基準収入額適用管理List.get(INT_2).get宛名Entity() != null) {
+            宛名識別対象情報_3件目 = ShikibetsuTaishoFactory.createShikibetsuTaisho(基準収入額適用管理List.get(INT_2).get宛名Entity());
+        }
         if (宛名識別対象情報_3件目 != null && 宛名識別対象情報_3件目.to個人() != null) {
             if (宛名識別対象情報_3件目.to個人().is日本人()) {
                 基準収入額適用決定通知書Parameter.set被保険者名カナ３(宛名識別対象情報_3件目.to個人().get日本人氏名().getKana());
@@ -363,7 +345,10 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
     }
 
     private void set宛名識別対象情報_2件目(KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書Parameter) throws ClassCastException {
-        IShikibetsuTaisho 宛名識別対象情報_2件目 = get宛名(基準収入額適用管理List.get(INT_1).get識別コード());
+        IShikibetsuTaisho 宛名識別対象情報_2件目 = null;
+        if (基準収入額適用管理List.get(INT_1).get宛名Entity() != null) {
+            宛名識別対象情報_2件目 = ShikibetsuTaishoFactory.createShikibetsuTaisho(基準収入額適用管理List.get(INT_1).get宛名Entity());
+        }
         if (宛名識別対象情報_2件目 != null && 宛名識別対象情報_2件目.to個人() != null) {
             if (宛名識別対象情報_2件目.to個人().is日本人()) {
                 基準収入額適用決定通知書Parameter.set被保険者名カナ２(宛名識別対象情報_2件目.to個人().get日本人氏名().getKana());
@@ -377,7 +362,10 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
     }
 
     private void set宛名識別対象情報_1件目(KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書Parameter) throws ClassCastException {
-        IShikibetsuTaisho 宛名識別対象情報_1件目 = get宛名(基準収入額適用管理List.get(INT_0).get識別コード());
+        IShikibetsuTaisho 宛名識別対象情報_1件目 = null;
+        if (基準収入額適用管理List.get(INT_0).get宛名Entity() != null) {
+            宛名識別対象情報_1件目 = ShikibetsuTaishoFactory.createShikibetsuTaisho(基準収入額適用管理List.get(INT_0).get宛名Entity());
+        }
         if (宛名識別対象情報_1件目 != null && 宛名識別対象情報_1件目.to個人() != null) {
             if (宛名識別対象情報_1件目.to個人().is日本人()) {
                 基準収入額適用決定通知書Parameter.set被保険者名カナ１(宛名識別対象情報_1件目.to個人().get日本人氏名().getKana());
@@ -390,42 +378,17 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
         }
     }
 
-    private IAtesaki get宛先(ShikibetsuCode 識別コード) {
-        IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険);
-        AtesakiPSMSearchKeyBuilder 宛先builder = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー);
-        宛先builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
-        宛先builder.set識別コード(識別コード);
-        List<IAtesaki> 宛先List = ShikibetsuTaishoService.getAtesakiFinder().get宛先s(宛先builder.build());
-        if (宛先List != null && !宛先List.isEmpty()) {
-            return 宛先List.get(INT_0);
-        }
-        return null;
-    }
-
-    private IShikibetsuTaisho get宛名(ShikibetsuCode 識別コード) {
-        IShikibetsuTaishoGyomuHanteiKey 宛名業務判定キー = ShikibetsuTaishoGyomuHanteiKeyFactory
-                .createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先);
-        ShikibetsuTaishoSearchKeyBuilder 宛名builder = new ShikibetsuTaishoSearchKeyBuilder(宛名業務判定キー);
-        宛名builder.set識別コード(識別コード);
-        IShikibetsuTaishoSearchKey 識別対象検索キー = 宛名builder.build();
-        List<IShikibetsuTaisho> 宛名List = ShikibetsuTaishoService.getShikibetsuTaishoFinder().get識別対象s(識別対象検索キー);
-        if (宛名List != null && !宛名List.isEmpty()) {
-            return 宛名List.get(INT_0);
-        }
-        return null;
-    }
-
     private void is文字切れ(KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書Parameter) {
         AtenaKanaMeisho 被保険者名カナ１ = 基準収入額適用決定通知書Parameter.get被保険者名カナ１();
-        if (被保険者名カナ１ != null && !被保険者名カナ１.isEmpty() && 被保険者名カナ１.value().length() > 文字切れ対象文字列長) {
+        if (被保険者名カナ１ != null && !被保険者名カナ１.isEmpty() && 文字切れ対象文字列長 < 被保険者名カナ１.value().length()) {
             基準収入額適用決定通知書Parameter.setFlag(true);
         }
         AtenaKanaMeisho 被保険者名カナ２ = 基準収入額適用決定通知書Parameter.get被保険者名カナ２();
-        if (被保険者名カナ２ != null && !被保険者名カナ２.isEmpty() && 被保険者名カナ２.value().length() > 文字切れ対象文字列長) {
+        if (被保険者名カナ２ != null && !被保険者名カナ２.isEmpty() && 文字切れ対象文字列長 < 被保険者名カナ２.value().length()) {
             基準収入額適用決定通知書Parameter.setFlag(true);
         }
         AtenaKanaMeisho 被保険者名カナ３ = 基準収入額適用決定通知書Parameter.get被保険者名カナ３();
-        if (被保険者名カナ３ != null && !被保険者名カナ３.isEmpty() && 被保険者名カナ３.value().length() > 文字切れ対象文字列長) {
+        if (被保険者名カナ３ != null && !被保険者名カナ３.isEmpty() && 文字切れ対象文字列長 < 被保険者名カナ３.value().length()) {
             基準収入額適用決定通知書Parameter.setFlag(true);
         }
     }
@@ -456,9 +419,9 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
 
     private enum チェック項目 implements ICheckTarget {
 
-        target1("hihokenshaNameKana1", "被保険者名カナ１", CheckShubetsu.文字切れ),
-        target2("hihokenshaNameKana2", "被保険者名カナ２", CheckShubetsu.文字切れ),
-        target3("hihokenshaNameKana3", "被保険者名カナ３", CheckShubetsu.文字切れ);
+        target1("hihokenshaNameKana1", 被保険者名1.toString(), CheckShubetsu.文字切れ),
+        target2("hihokenshaNameKana2", 被保険者名2.toString(), CheckShubetsu.文字切れ),
+        target3("hihokenshaNameKana3", 被保険者名3.toString(), CheckShubetsu.文字切れ);
 
         private final RString itemName;
         private final RString printName;
@@ -490,33 +453,11 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
         KijunShunyugakuTekiyoKetteiTsuchiIchiran 基準収入額決定通知一覧表パラメータ = new KijunShunyugakuTekiyoKetteiTsuchiIchiran();
         基準収入額決定通知一覧表パラメータ.set市町村番号(parameter.get市町村コード());
         基準収入額決定通知一覧表パラメータ.set市町村名(parameter.get市町村名());
-        int i = 0;
-        RString 並び順の１件目 = RString.EMPTY;
-        RString 並び順の２件目 = RString.EMPTY;
-        RString 並び順の３件目 = RString.EMPTY;
-        RString 並び順の４件目 = RString.EMPTY;
-        RString 並び順の５件目 = RString.EMPTY;
-        if (並び順 != null) {
-            for (ISetSortItem item : 並び順.get設定項目リスト()) {
-                if (i == INT_0) {
-                    並び順の１件目 = item.get項目名();
-                } else if (i == INT_1) {
-                    並び順の２件目 = item.get項目名();
-                } else if (i == INT_2) {
-                    並び順の３件目 = item.get項目名();
-                } else if (i == INT_3) {
-                    並び順の４件目 = item.get項目名();
-                } else if (i == INT_4) {
-                    並び順の５件目 = item.get項目名();
-                }
-                i = i + 1;
-            }
-        }
-        基準収入額決定通知一覧表パラメータ.set出力順１(並び順の１件目);
-        基準収入額決定通知一覧表パラメータ.set出力順２(並び順の２件目);
-        基準収入額決定通知一覧表パラメータ.set出力順３(並び順の３件目);
-        基準収入額決定通知一覧表パラメータ.set出力順４(並び順の４件目);
-        基準収入額決定通知一覧表パラメータ.set出力順５(並び順の５件目);
+        基準収入額決定通知一覧表パラメータ.set出力順１(出力順リスト.get(INT_0));
+        基準収入額決定通知一覧表パラメータ.set出力順２(出力順リスト.get(INT_1));
+        基準収入額決定通知一覧表パラメータ.set出力順３(出力順リスト.get(INT_2));
+        基準収入額決定通知一覧表パラメータ.set出力順４(出力順リスト.get(INT_3));
+        基準収入額決定通知一覧表パラメータ.set出力順５(出力順リスト.get(INT_4));
         基準収入額決定通知一覧表パラメータ.set改頁１(改頁List.get(INT_0));
         基準収入額決定通知一覧表パラメータ.set改頁２(改頁List.get(INT_1));
         基準収入額決定通知一覧表パラメータ.set改頁３(改頁List.get(INT_2));
@@ -526,9 +467,9 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
         基準収入額決定通知一覧表パラメータ.set世帯コード(entity.get世帯コード());
         基準収入額決定通知一覧表パラメータ.set年度(entity.get年度());
         基準収入額決定通知一覧表パラメータ.set被保険者番号(entity.get被保険者番号());
-        IShikibetsuTaisho 宛名 = get宛名(entity.get識別コード());
+        UaFt200FindShikibetsuTaishoEntity 宛名 = entity.get宛名Entity();
         if (宛名 != null) {
-            基準収入額決定通知一覧表パラメータ.set氏名(宛名.get名称().getName());
+            基準収入額決定通知一覧表パラメータ.set氏名(宛名.getKanjiShimei());
         }
         基準収入額決定通知一覧表パラメータ.set識別コード(entity.get識別コード());
         基準収入額決定通知一覧表パラメータ.set申請年月日(entity.get申請日());
@@ -568,5 +509,37 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
         改頁ArrayList.add(改頁4);
         改頁ArrayList.add(改頁5);
         return 改頁ArrayList;
+    }
+
+    private List<RString> get出力順List() {
+        List<RString> 出力順ArrayList = new ArrayList<>();
+        int i = 0;
+        RString 出力順1 = RString.EMPTY;
+        RString 出力順2 = RString.EMPTY;
+        RString 出力順3 = RString.EMPTY;
+        RString 出力順4 = RString.EMPTY;
+        RString 出力順5 = RString.EMPTY;
+        if (並び順 != null) {
+            for (ISetSortItem item : 並び順.get設定項目リスト()) {
+                if (i == INT_0) {
+                    出力順1 = item.get項目名();
+                } else if (i == INT_1) {
+                    出力順2 = item.get項目名();
+                } else if (i == INT_2) {
+                    出力順3 = item.get項目名();
+                } else if (i == INT_3) {
+                    出力順4 = item.get項目名();
+                } else if (i == INT_4) {
+                    出力順5 = item.get項目名();
+                }
+                i = i + 1;
+            }
+        }
+        出力順ArrayList.add(出力順1);
+        出力順ArrayList.add(出力順2);
+        出力順ArrayList.add(出力順3);
+        出力順ArrayList.add(出力順4);
+        出力順ArrayList.add(出力順5);
+        return 出力順ArrayList;
     }
 }
