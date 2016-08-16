@@ -447,8 +447,12 @@ public class ShiharaiHohoHenkoKanriHandler {
         @Override
         public int compare(dgShiharaiHohoHenkoRireki_Row row1, dgShiharaiHohoHenkoRireki_Row row2) {
 
-            return row1.getHdnKanriKubun().compareTo(row2.getHdnKanriKubun()) > 0
-                    ? 1 : (row1.getHdnRirekiNo().compareTo(row2.getHdnRirekiNo()) > 0 ? -1 : 1);
+            int result = row1.getHdnKanriKubun().compareTo(row2.getHdnKanriKubun()) >= 0
+                    ? row1.getHdnKanriKubun().compareTo(row2.getHdnKanriKubun()) : -1;
+            if (result == 0) {
+                result = Integer.valueOf(row1.getHdnRirekiNo().toString()) > Integer.valueOf(row2.getHdnRirekiNo().toString()) ? -1 : 1;
+            }
+            return result;
 
         }
     }

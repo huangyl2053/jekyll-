@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 利用者負担割合を管理するクラスです。
+ *
+ * @reamsid_L DBC-5010-011 zhaowei
  */
 public class RiyoshaFutanWariai
         extends ModelBase<RiyoshaFutanWariaiIdentifier, DbT3113RiyoshaFutanWariaiEntity, RiyoshaFutanWariai> implements Serializable {
@@ -182,6 +184,15 @@ public class RiyoshaFutanWariai
     }
 
     /**
+     * 論理削除フラグを返します。
+     *
+     * @return 論理削除フラグ
+     */
+    public boolean get論理削除フラグ() {
+        return entity.getLogicalDeletedFlag();
+    }
+
+    /**
      * {@link DbT3113RiyoshaFutanWariaiEntity}のクローンを返します。
      *
      * @return {@link DbT3113RiyoshaFutanWariaiEntity}のクローン
@@ -231,7 +242,7 @@ public class RiyoshaFutanWariai
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     /**

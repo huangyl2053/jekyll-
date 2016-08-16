@@ -50,8 +50,8 @@ public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<
     @Override
     protected void defineFlow() {
 
+        executeStep(システム日時の取得);
         if (getParameter().is一括発行フラグ()) {
-            executeStep(システム日時の取得);
             executeStep(計算後情報作成);
         }
         if (getParameter().is一括発行フラグ()) {

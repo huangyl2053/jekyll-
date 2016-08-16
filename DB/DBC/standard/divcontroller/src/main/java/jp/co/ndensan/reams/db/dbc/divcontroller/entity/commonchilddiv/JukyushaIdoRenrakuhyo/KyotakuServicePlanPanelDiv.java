@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KyotakuServicePlanPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,7 +24,7 @@ public class KyotakuServicePlanPanelDiv extends Panel {
     @JsonProperty("radKyotakuServiceSakuseiKubun")
     private RadioButton radKyotakuServiceSakuseiKubun;
     @JsonProperty("btnKyotakuServiceRireki")
-    private Button btnKyotakuServiceRireki;
+    private ButtonDialog btnKyotakuServiceRireki;
     @JsonProperty("txtKyotakuKaigoShienJigyoshoNo")
     private TextBoxCode txtKyotakuKaigoShienJigyoshoNo;
     @JsonProperty("txtKyotakuKaigoShienJigyoshoName")
@@ -63,7 +63,7 @@ public class KyotakuServicePlanPanelDiv extends Panel {
      * @return btnKyotakuServiceRireki
      */
     @JsonProperty("btnKyotakuServiceRireki")
-    public Button getBtnKyotakuServiceRireki() {
+    public ButtonDialog getBtnKyotakuServiceRireki() {
         return btnKyotakuServiceRireki;
     }
 
@@ -72,7 +72,7 @@ public class KyotakuServicePlanPanelDiv extends Panel {
      * @param btnKyotakuServiceRireki btnKyotakuServiceRireki
      */
     @JsonProperty("btnKyotakuServiceRireki")
-    public void setBtnKyotakuServiceRireki(Button btnKyotakuServiceRireki) {
+    public void setBtnKyotakuServiceRireki(ButtonDialog btnKyotakuServiceRireki) {
         this.btnKyotakuServiceRireki = btnKyotakuServiceRireki;
     }
 

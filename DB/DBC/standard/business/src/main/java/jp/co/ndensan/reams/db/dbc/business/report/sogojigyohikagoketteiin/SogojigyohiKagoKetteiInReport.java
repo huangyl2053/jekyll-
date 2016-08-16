@@ -29,6 +29,16 @@ public class SogojigyohiKagoKetteiInReport extends
     private final int no;
     private final boolean 集計Flag;
 
+     /**
+     * コンストラクタです
+     *
+     * @param 帳票出力対象データ SogojigyohiKagoKetteiInEntity
+     * @param 出力順Map Map<RString, RString>
+     * @param 処理年月 FlexibleYearMonth
+     * @param 作成日時 RDateTime
+     * @param no int
+     * @param 集計Flag boolean
+     */
     public SogojigyohiKagoKetteiInReport(SogojigyohiKagoKetteiInEntity 帳票出力対象データ,
             Map<RString, RString> 出力順Map, FlexibleYearMonth 処理年月, RDateTime 作成日時, int no, boolean 集計Flag) {
         this.帳票出力対象データ = 帳票出力対象データ;

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ninteichosakekkatorikomiocr;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosaKekkaTorikomiOcrRelateEntity;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -116,5 +117,23 @@ public class NinteiOcrResult {
      */
     public RString get認定調査員コード() {
         return entity.get認定調査員コード();
+    }
+
+    /**
+     * 認定調査依頼区分コードを取得します。
+     *
+     * @return 認定調査依頼区分コード
+     */
+    public Code get認定調査依頼区分コード() {
+        return entity.get認定調査依頼区分コード();
+    }
+
+    /**
+     * 認定調査回数を取得します。
+     *
+     * @return 認定調査回数
+     */
+    public int get認定調査回数() {
+        return entity.get認定調査回数();
     }
 }

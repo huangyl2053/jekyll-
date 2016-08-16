@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohiseikyugakutsuchishokeikasochi;
 
-import jp.co.ndensan.reams.db.dbc.entity.report.source.SogojigyohiSeiDoIchiranhyoSakusei.SogojigyohiSeikyugakuTsuchishoKeikaSochiSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohiseidoichiranhyosakusei.SogojigyohiSeikyugakuTsuchishoKeikaSochiSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- * 総合事業費（経過措置）請求額通知書一覧表帳票IBuilder
+ * 総合事業費（経過措置）請求額通知書一覧表帳票IBuilderインターフェースです。
  *
  * @reamsid_L DBC-2480-031 jiangxiaolong
  */

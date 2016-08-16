@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsaketteihokenshainmasutatoroku;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -45,7 +44,8 @@ public class SaiShinsaKetteiMeisaiTempEntity extends
     @TempTableColumnOrder(7)
     private RString 公費受給者番号;
     @TempTableColumnOrder(8)
-    private HokenshaNo 公費証記載保険者番号;
+//    private HokenshaNo 公費証記載保険者番号;
+    private RString 公費証記載保険者番号;
     @TempTableColumnOrder(9)
     private FlexibleYearMonth サービス提供年月;
     @TempTableColumnOrder(10)

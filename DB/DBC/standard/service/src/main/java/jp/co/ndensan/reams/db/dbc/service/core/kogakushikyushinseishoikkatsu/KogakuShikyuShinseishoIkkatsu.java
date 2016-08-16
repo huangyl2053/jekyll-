@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.service.core.kogakushikyushinseishoikkatsu;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuShikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuShikyuShinsei;
@@ -29,6 +28,9 @@ public class KogakuShikyuShinseishoIkkatsu {
 
     private final MapperProvider mapperProvider;
 
+    /**
+     * コンストラクタです
+     */
     public KogakuShikyuShinseishoIkkatsu() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
@@ -77,9 +79,6 @@ public class KogakuShikyuShinseishoIkkatsu {
                 .createSelectByKeyParam(被保険者番号, 証記載保険者番号);
         IKogakuShikyuShinseishoIkkatsuHakkoMapper mapper = mapperProvider.create(IKogakuShikyuShinseishoIkkatsuHakkoMapper.class);
         List<DbT3110JigyoKogakuShikyuShinseiEntity> entityList = mapper.getServiceTeikyoByDbT3110(parameter);
-        if (entityList == null || entityList.isEmpty()) {
-            return Collections.emptyList();
-        }
         List<JigyoKogakuShikyuShinsei> list = new ArrayList<>();
         for (DbT3110JigyoKogakuShikyuShinseiEntity entity : entityList) {
             list.add(new JigyoKogakuShikyuShinsei(entity));

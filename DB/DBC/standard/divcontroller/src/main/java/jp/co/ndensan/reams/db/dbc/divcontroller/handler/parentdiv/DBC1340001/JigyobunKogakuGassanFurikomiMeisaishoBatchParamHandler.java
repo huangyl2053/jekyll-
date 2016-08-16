@@ -18,6 +18,10 @@ import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
 import jp.co.ndensan.reams.ua.uax.service.core.kinyukikan.KinyuKikanManager;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -54,6 +58,11 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
     private static final RString 全て = new RString("全て");
     private static final RString 振込指定日_MSG = new RString("振込指定日");
     private static final RString 発行済のみ = new RString("発行済のみ");
+    private static final RString KEY_1 = new RString("1");
+    private static final RString KEY_3 = new RString("3");
+    private static final RString 時 = new RString("時");
+    private static final RString 分 = new RString("分");
+    private static final RString 秒 = new RString("秒");
     private static final int INDEX_0 = 0;
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
@@ -121,18 +130,16 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
                 SubGyomuCode.DBC介護給付);
         RString ＦＤ作成 = DbBusinessConfig.get(ConfigNameDBC.ＦＤ作成, システム日付,
                 SubGyomuCode.DBC介護給付);
-        if (ＦＤ作成_0.equals(ＦＤ作成)) {
-            div.getShuturyokuTyouhyou().getChkFDDataSakusei().setVisible(false);
-        } else if (ＦＤ作成_1.equals(ＦＤ作成)) {
+        if (口座.equals(div.getRadSiharaihouhou().getSelectedValue()) && ＦＤ作成_1.equals(ＦＤ作成)) {
             div.getShuturyokuTyouhyou().getChkFDDataSakusei().setDisabled(false);
+        } else {
+            div.getShuturyokuTyouhyou().getChkFDDataSakusei().setVisible(false);
         }
         div.setFdSakusei(ＦＤ作成);
         RString 委託者名 = 委託者名_1.concat(委託者名_2);
         RString 金融機関コード = DbBusinessConfig.get(ConfigNameDBC.金融機関コード, システム日付,
                 SubGyomuCode.DBC介護給付);
-        if (kinyuKikanManager != null) {
-            金融機関 = kinyuKikanManager.getValidKinyuKikanOn(new FlexibleDate(システム日付.toString()), 金融機関コード.substring(INDEX_0, INDEX_4));
-        }
+        金融機関 = kinyuKikanManager.getValidKinyuKikanOn(new FlexibleDate(システム日付.toString()), 金融機関コード.substring(INDEX_0, INDEX_4));
         if (金融機関 != null) {
             KinyuKikanShitenCode 支店コード = new KinyuKikanShitenCode(金融機関コード.substring(INDEX_5, INDEX_9));
             支店 = 金融機関.get支店(支店コード, new FlexibleDate(システム日付.toString()));
@@ -143,15 +150,62 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
             取引先金融機関支店名称 = 支店.get支店名称();
         }
         RString 取引先金融機関 = 金融機関名.concat(支店名);
+        div.getTyuusyutuHanni().getDdlHakkouTaisyou().setSelectedKey(KEY_1);
+        div.getShuturyokuTyouhyou().getDdlSyuturyokuTyouhyou().setSelectedKey(KEY_1);
         div.setTorihikiKinyukikanShitennmei(取引先金融機関支店名称);
         div.getTyuusyutuJyoukenn().getTxtItakusya().setValue(委託者名);
         div.getTyuusyutuJyoukenn().getTxtItakusyaCode().setValue(委託者コード);
         div.getTxtTorihikiKinyukikan().setValue(取引先金融機関);
-        div.getTyuusyutuHanni().getTxt().setValue(システム日付);
         div.getTyuusyutuHanni().getTxtKonnkaiTaisyouNenngappi().setToValue(システム日付);
         div.getShuturyokuTyouhyou().getTxtSakuseibi().setValue(システム日付);
         div.getShuturyokuTyouhyou().getTxtIraibi().setValue(システム日付);
         div.getShuturyokuTyouhyou().getTxtFurikomiSiteibi().setValue(システム日付);
+    }
+
+    /**
+     * 支払方法のオンチェンジ事件です。
+     *
+     * @param div JigyobunKogakuGassanFurikomiMeisaishoBatchParamDiv
+     */
+    public void onChangeRadSiharaihouhou(JigyobunKogakuGassanFurikomiMeisaishoBatchParamDiv div) {
+        RString ＦＤ作成 = div.getFdSakusei();
+        RString 支払方法 = div.getRadSiharaihouhou().getSelectedValue();
+        if (ＦＤ作成_1.equals(ＦＤ作成) && 口座.equals(支払方法)) {
+            div.getTyuusyutuJyoukenn().getTxtItakusyaCode().setVisible(true);
+        } else {
+            div.getTyuusyutuJyoukenn().getTxtItakusyaCode().setVisible(false);
+        }
+        if (口座.equals(支払方法)) {
+            div.getShuturyokuTyouhyou().getDdlSyuturyokuTyouhyou().setDisabled(false);
+        } else {
+            div.getTyuusyutuJyoukenn().getTxtItakusya().setDisabled(true);
+            div.getShuturyokuTyouhyou().getDdlSyuturyokuTyouhyou().setSelectedKey(KEY_3);
+            div.getShuturyokuTyouhyou().getDdlSyuturyokuTyouhyou().setDisabled(true);
+        }
+        if (口座.equals(div.getRadSiharaihouhou().getSelectedValue()) && ＦＤ作成_1.equals(ＦＤ作成)) {
+            div.getShuturyokuTyouhyou().getChkFDDataSakusei().setDisabled(false);
+        } else {
+            div.getShuturyokuTyouhyou().getChkFDDataSakusei().setVisible(false);
+        }
+    }
+
+    /**
+     * 発行対象のオンチェンジ事件です。
+     *
+     * @param div JigyobunKogakuGassanFurikomiMeisaishoBatchParamDiv
+     */
+    public void onChangeDdlHakkouTaisyou(JigyobunKogakuGassanFurikomiMeisaishoBatchParamDiv div) {
+        if (口座.equals(div.getRadSiharaihouhou().getSelectedValue())) {
+            div.getTyuusyutuHanni().getDdlHakkouTaisyou().setDisabled(false);
+        } else {
+            div.getTyuusyutuHanni().getDdlHakkouTaisyou().setSelectedKey(KEY_1);
+            div.getTyuusyutuHanni().getDdlHakkouTaisyou().setDisabled(true);
+        }
+        if (口座.equals(div.getRadSiharaihouhou().getSelectedValue()) && 発行済のみ.equals(div.getTyuusyutuHanni().getDdlHakkouTaisyou().getSelectedValue())) {
+            div.getTyuusyutuHanni().getTxt().setDisabled(false);
+        } else {
+            div.getTyuusyutuHanni().getTxt().setDisabled(true);
+        }
     }
 
     /**
@@ -218,15 +272,15 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
      */
     public DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter creatParameter() {
         // QA#94411
-//        RString 出力順 = RString.EMPTY;
-//        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-//        IOutputOrder iOutputOrder = finder.get出力順(
-//                SubGyomuCode.DBC介護給付,
-//                帳票ID,
-//                Long.valueOf(div.getCcdChohyoShusuryokujun().get出力順ID().toString()));
-//        if (iOutputOrder != null) {
-//            出力順 = MyBatisOrderByClauseCreator.create(null, iOutputOrder);
-//        }
+        RString 出力順 = RString.EMPTY;
+        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+        IOutputOrder iOutputOrder = finder.get出力順(
+                SubGyomuCode.DBC介護給付,
+                帳票ID,
+                Long.valueOf(div.getCcdChohyoShusuryokujun().get出力順ID().toString()));
+        if (iOutputOrder != null) {
+            出力順 = MyBatisOrderByClauseCreator.create(null, iOutputOrder);
+        }
 //        RString 支払方法 = div.getRadSiharaihouhou().getSelectedValue();
         DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter parameter = new DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter();
 //        RDate 今回対象年月日From = div.getTyuusyutuHanni().getTxtKonnkaiTaisyouNenngappi().getFromValue();
@@ -256,7 +310,9 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
 //        parameter.set振込指定日(振込指定日);
 //        parameter.set発行対象(発行対象);
 //        parameter.set取引先金融機関支店名称(取引先金融機関支店名称);
-//        parameter.set出力順設定リスト(出力順);
+//        List<RString> 出力順リスト = new ArrayList<>();
+//        出力順リスト.add(出力順);
+//        parameter.set出力順設定リスト(出力順リスト);
 //        parameter.set対象作成年月日(対象作成年月日);
         return parameter;
     }
@@ -333,7 +389,7 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
         RString hour = new RString(time.toString()).substring(INDEX_0, INDEX_2);
         RString min = new RString(time.toString()).substring(INDEX_3, INDEX_5);
         RString sec = new RString(time.toString()).substring(INDEX_6, INDEX_8);
-        RString timeFormat = hour.concat("時").concat(min).concat("分").concat(sec).concat("秒");
+        RString timeFormat = hour.concat(時).concat(min).concat(分).concat(sec).concat(秒);
         RString 作成日 = date.wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
                 fillType(FillType.BLANK).toDateString().concat(RString.FULL_SPACE).concat(timeFormat);

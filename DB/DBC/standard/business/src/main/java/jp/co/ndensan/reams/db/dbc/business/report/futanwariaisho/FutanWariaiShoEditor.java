@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.futanwariaisho.FutanWariaiShoSource;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -36,7 +36,7 @@ public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
     private final NinshoshaSource 認証者ソースデータ;
     private final HihokenshaNo 被保険者番号;
     private final EditedKojin 編集後個人;
-    private final List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 利用者負担割合明細List;
+    private final List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細List;
     private final HokenshaNo 保険者コード取得;
     private final RString flag;
     private final List<IKojin> 個人List;
@@ -61,13 +61,13 @@ public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
      * @param 認証者ソースデータ NinshoshaSource
      * @param 被保険者番号 HihokenshaNo
      * @param 編集後個人 EditedKojin
-     * @param 利用者負担割合明細List List<DbT3114RiyoshaFutanWariaiMeisaiEntity>
+     * @param 利用者負担割合明細List List<RiyoshaFutanWariaiMeisai>
      * @param 保険者コード取得 HokenshaNo
      * @param flag RString
      * @param 個人List List<IKojin>
      */
     public FutanWariaiShoEditor(FutanWariaiShoDivParameter entity, NinshoshaSource 認証者ソースデータ, HihokenshaNo 被保険者番号,
-            EditedKojin 編集後個人, List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 利用者負担割合明細List, HokenshaNo 保険者コード取得,
+            EditedKojin 編集後個人, List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細List, HokenshaNo 保険者コード取得,
             RString flag, List<IKojin> 個人List) {
         this.entity = entity;
         this.認証者ソースデータ = 認証者ソースデータ;
@@ -151,14 +151,14 @@ public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
     private void set利用者負担割合(FutanWariaiShoSource source) {
         int size = 利用者負担割合明細List.size();
         if (size == INDEX_ONE) {
-            RString 負担割合区分1 = 利用者負担割合明細List.get(INDEX_ZERO).getFutanWariaiKubun();
+            RString 負担割合区分1 = 利用者負担割合明細List.get(INDEX_ZERO).get負担割合区分();
             source.futanWariai1 = FutanwariaiKubun.toValue(負担割合区分1).get名称();
-            FlexibleDate 有効開始日1 = 利用者負担割合明細List.get(INDEX_ZERO).getYukoKaishiYMD();
+            FlexibleDate 有効開始日1 = 利用者負担割合明細List.get(INDEX_ZERO).get有効開始日();
             if (有効開始日1 != null) {
                 source.tekiyoKaishiYmd1 = 定数_開始年月日.concat(有効開始日1.wareki().eraType(EraType.KANJI).
                         firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             }
-            FlexibleDate 有効終了日1 = 利用者負担割合明細List.get(INDEX_ZERO).getYukoShuryoYMD();
+            FlexibleDate 有効終了日1 = 利用者負担割合明細List.get(INDEX_ZERO).get有効終了日();
             if (有効終了日1 != null) {
                 source.tekiyoShuryoYmd1 = 定数_終了年月日.concat(有効終了日1.wareki().eraType(EraType.KANJI).
                         firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
@@ -168,30 +168,30 @@ public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
             source.tekiyoShuryoYmd2 = RString.EMPTY;
 
         } else if (size > INDEX_TWO) {
-            RString 負担割合区分1 = 利用者負担割合明細List.get(size - INDEX_TWO).getFutanWariaiKubun();
+            RString 負担割合区分1 = 利用者負担割合明細List.get(size - INDEX_TWO).get負担割合区分();
             if (負担割合区分1 != null) {
                 source.futanWariai1 = FutanwariaiKubun.toValue(負担割合区分1).get名称();
             }
-            FlexibleDate 有効開始日1 = 利用者負担割合明細List.get(size - INDEX_TWO).getYukoKaishiYMD();
+            FlexibleDate 有効開始日1 = 利用者負担割合明細List.get(size - INDEX_TWO).get有効開始日();
             if (有効開始日1 != null) {
                 source.tekiyoKaishiYmd1 = 定数_開始年月日.concat(有効開始日1.wareki().eraType(EraType.KANJI).
                         firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             }
-            FlexibleDate 有効終了日1 = 利用者負担割合明細List.get(size - INDEX_TWO).getYukoShuryoYMD();
+            FlexibleDate 有効終了日1 = 利用者負担割合明細List.get(size - INDEX_TWO).get有効終了日();
             if (有効終了日1 != null) {
                 source.tekiyoShuryoYmd1 = 定数_終了年月日.concat(有効終了日1.wareki().eraType(EraType.KANJI).
                         firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             }
-            RString 負担割合区分2 = 利用者負担割合明細List.get(size - INDEX_ONE).getFutanWariaiKubun();
+            RString 負担割合区分2 = 利用者負担割合明細List.get(size - INDEX_ONE).get負担割合区分();
             if (負担割合区分2 != null) {
                 source.futanWariai2 = FutanwariaiKubun.toValue(負担割合区分2).get名称();
             }
-            FlexibleDate 有効開始日2 = 利用者負担割合明細List.get(size - INDEX_ONE).getYukoKaishiYMD();
+            FlexibleDate 有効開始日2 = 利用者負担割合明細List.get(size - INDEX_ONE).get有効開始日();
             if (有効開始日2 != null) {
                 source.tekiyoKaishiYmd2 = 定数_開始年月日.concat(有効開始日2.wareki().eraType(EraType.KANJI).
                         firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             }
-            FlexibleDate 有効終了日2 = 利用者負担割合明細List.get(size - INDEX_ONE).getYukoShuryoYMD();
+            FlexibleDate 有効終了日2 = 利用者負担割合明細List.get(size - INDEX_ONE).get有効終了日();
             if (有効終了日2 != null) {
                 source.tekiyoShuryoYmd2 = 定数_終了年月日.concat(有効終了日2.wareki().eraType(EraType.KANJI).
                         firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());

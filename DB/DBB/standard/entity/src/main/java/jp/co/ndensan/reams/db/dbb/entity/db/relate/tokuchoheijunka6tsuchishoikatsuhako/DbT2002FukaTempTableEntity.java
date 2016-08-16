@@ -10,9 +10,6 @@ import jp.co.ndensan.reams.ca.cax.definition.valueobject.code.ShiharaiHohoCodeVa
 import jp.co.ndensan.reams.ca.cax.definition.valueobject.code.ZennoKubunCodeValue;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaTorokuKubunCodeValue;
-import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
-import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.YokinShubetsuPatternCodeValue;
 import jp.co.ndensan.reams.ue.uex.definition.core.RenkeiShubetsu;
 import jp.co.ndensan.reams.ue.uex.definition.core.SeibetsuCodeNenkinTokucho;
 import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuSeidoCode;
@@ -1335,7 +1332,7 @@ public class DbT2002FukaTempTableEntity extends DbTableEntityBase<DbT2002FukaTem
     @TempTableColumnOrder(630)
     private RString uaT0310Koza_gyomuKoyuKey;
     @TempTableColumnOrder(631)
-    private KozaYotoKubunCodeValue uaT0310Koza_yotoKubun;
+    private RString uaT0310Koza_yotoKubun;
     @TempTableColumnOrder(632)
     private int uaT0310Koza_torokuRenban;
     @TempTableColumnOrder(633)
@@ -1373,7 +1370,7 @@ public class DbT2002FukaTempTableEntity extends DbTableEntityBase<DbT2002FukaTem
     @TempTableColumnOrder(649)
     private RString uaT0310Koza_kozaTorokuNo;
     @TempTableColumnOrder(650)
-    private KozaTorokuKubunCodeValue uaT0310Koza_kozaTorokuKubunCode;
+    private RString uaT0310Koza_kozaTorokuKubunCode;
     @TempTableColumnOrder(651)
     private FlexibleDate uaT0310Koza_kozaKaishiUketsukeYMD;
     @TempTableColumnOrder(652)
@@ -1398,7 +1395,7 @@ public class DbT2002FukaTempTableEntity extends DbTableEntityBase<DbT2002FukaTem
     @TempTableColumnOrder(661)
     private RString uaT0302KinyuKikan_kanaName;
     @TempTableColumnOrder(662)
-    private YokinShubetsuPatternCodeValue uaT0302KinyuKikan_yokinShubetsuPatternCode;
+    private RString uaT0302KinyuKikan_yokinShubetsuPatternCode;
     private int uaT0302KinyuKikan_hyojijun;
 
     @TempTableColumnOrder(663)
@@ -1425,7 +1422,7 @@ public class DbT2002FukaTempTableEntity extends DbTableEntityBase<DbT2002FukaTem
     @TempTableColumnOrder(673)
     private boolean uaT0301YokinShubetsuPattern_isDeleted;
     @TempTableColumnOrder(674)
-    private YokinShubetsuPatternCodeValue uaT0301YokinShubetsuPattern_yokinShubetsuPatternCode;
+    private RString uaT0301YokinShubetsuPattern_yokinShubetsuPatternCode;
     @TempTableColumnOrder(675)
     private RString uaT0301YokinShubetsuPattern_yokinShubetsuCode;
     @TempTableColumnOrder(676)

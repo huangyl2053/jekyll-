@@ -70,26 +70,24 @@ public class JigyohokokuGeppoYoshikiReport extends Report<JigyohokokuNenpoYoshik
         for (int i = 1; i <= 縦番号; i++) {
             JigyohokokuGeppoYoshikiData yoshikiData = new JigyohokokuGeppoYoshikiData();
             for (JigyohokokuToukeiData data : dataList) {
-                if (new RString("0100").equals(data.get表番号())) {
-                    if (横番号_1 == data.get横番号()) {
-                        yoshikiData.setList1_1(data.get集計結果値());
-                    } else if (横番号_2 == data.get横番号()) {
-                        yoshikiData.setList1_2(data.get集計結果値());
-                    } else if (横番号_3 == data.get横番号()) {
-                        yoshikiData.setList1_3(data.get集計結果値());
-                    } else if (横番号_4 == data.get横番号()) {
-                        yoshikiData.setList1_4(data.get集計結果値());
-                    }
-                } else if (new RString("0200").equals(data.get表番号())) {
+                if (i == data.get縦番号() && new RString("0100").equals(data.get表番号())) {
+                    setList1(data, yoshikiData);
+                } else if (i == data.get縦番号() && new RString("0200").equals(data.get表番号())) {
                     if (横番号_1 == data.get横番号()) {
                         yoshikiData.setList2_1(data.get集計結果値());
+                    } else if (data.get縦番号() == 縦番号 && 横番号_2 == data.get横番号()) {
+                        yoshikiData.setList2_2(data.get集計結果値());
+                    } else if (data.get縦番号() == 縦番号 && 横番号_3 == data.get横番号()) {
+                        yoshikiData.setList2_3(data.get集計結果値());
                     } else if (横番号_4 == data.get横番号()) {
                         yoshikiData.setList2_4(data.get集計結果値());
                     }
-                } else if (i <= data.get縦番号() && new RString("0301").equals(data.get表番号())) {
-                    setList3Upper(data, yoshikiData);
-                } else if (i <= data.get縦番号() && new RString("0302").equals(data.get表番号())) {
-                    setList3Lower(data, yoshikiData);
+                } else if (i == 1 && new RString("0301").equals(data.get表番号())) {
+                    setList3Upper(1, data, yoshikiData);
+                    setList3Lower(2, data, yoshikiData);
+                } else if (i == 2 && new RString("0302").equals(data.get表番号())) {
+                    setList3Upper(1, data, yoshikiData);
+                    setList3Lower(2, data, yoshikiData);
                 }
             }
 
@@ -98,34 +96,46 @@ public class JigyohokokuGeppoYoshikiReport extends Report<JigyohokokuNenpoYoshik
         return dataBodyList;
     }
 
-    private void setList3Upper(JigyohokokuToukeiData data, JigyohokokuGeppoYoshikiData yoshikiData) {
+    private void setList1(JigyohokokuToukeiData data, JigyohokokuGeppoYoshikiData yoshikiData) {
         if (横番号_1 == data.get横番号()) {
-            yoshikiData.setList3Upper_1(data.get集計結果値());
+            yoshikiData.setList1_1(data.get集計結果値());
         } else if (横番号_2 == data.get横番号()) {
-            yoshikiData.setList3Upper_2(data.get集計結果値());
+            yoshikiData.setList1_2(data.get集計結果値());
         } else if (横番号_3 == data.get横番号()) {
-            yoshikiData.setList3Upper_3(data.get集計結果値());
+            yoshikiData.setList1_3(data.get集計結果値());
         } else if (横番号_4 == data.get横番号()) {
+            yoshikiData.setList1_4(data.get集計結果値());
+        }
+    }
+
+    private void setList3Upper(int i, JigyohokokuToukeiData data, JigyohokokuGeppoYoshikiData yoshikiData) {
+        if (i == data.get縦番号() && 横番号_1 == data.get横番号()) {
+            yoshikiData.setList3Upper_1(data.get集計結果値());
+        } else if (i == data.get縦番号() && 横番号_2 == data.get横番号()) {
+            yoshikiData.setList3Upper_2(data.get集計結果値());
+        } else if (i == data.get縦番号() && 横番号_3 == data.get横番号()) {
+            yoshikiData.setList3Upper_3(data.get集計結果値());
+        } else if (i == data.get縦番号() && 横番号_4 == data.get横番号()) {
             yoshikiData.setList3Upper_4(data.get集計結果値());
-        } else if (横番号_5 == data.get横番号()) {
+        } else if (i == data.get縦番号() && 横番号_5 == data.get横番号()) {
             yoshikiData.setList3Upper_5(data.get集計結果値());
-        } else if (横番号_6 == data.get横番号()) {
+        } else if (i == data.get縦番号() && 横番号_6 == data.get横番号()) {
             yoshikiData.setList3Upper_6(data.get集計結果値());
         }
     }
 
-    private void setList3Lower(JigyohokokuToukeiData data, JigyohokokuGeppoYoshikiData yoshikiData) {
-        if (横番号_1 == data.get横番号()) {
+    private void setList3Lower(int i, JigyohokokuToukeiData data, JigyohokokuGeppoYoshikiData yoshikiData) {
+        if (i == data.get縦番号() && 横番号_1 == data.get横番号()) {
             yoshikiData.setList3Lower_1(data.get集計結果値());
-        } else if (横番号_2 == data.get横番号()) {
+        } else if (i == data.get縦番号() && 横番号_2 == data.get横番号()) {
             yoshikiData.setList3Lower_2(data.get集計結果値());
-        } else if (横番号_3 == data.get横番号()) {
+        } else if (i == data.get縦番号() && 横番号_3 == data.get横番号()) {
             yoshikiData.setList3Lower_3(data.get集計結果値());
-        } else if (横番号_4 == data.get横番号()) {
+        } else if (i == data.get縦番号() && 横番号_4 == data.get横番号()) {
             yoshikiData.setList3Lower_4(data.get集計結果値());
-        } else if (横番号_5 == data.get横番号()) {
+        } else if (i == data.get縦番号() && 横番号_5 == data.get横番号()) {
             yoshikiData.setList3Lower_5(data.get集計結果値());
-        } else if (横番号_6 == data.get横番号()) {
+        } else if (i == data.get縦番号() && 横番号_6 == data.get横番号()) {
             yoshikiData.setList3Lower_6(data.get集計結果値());
         }
     }
@@ -144,14 +154,14 @@ public class JigyohokokuGeppoYoshikiReport extends Report<JigyohokokuNenpoYoshik
             } else if (0 < o1.get表番号().compareTo(o2.get表番号())) {
                 return 1;
             }
-            if (o1.get横番号() < o2.get縦番号()) {
-                return -1;
-            } else if (o2.get縦番号() < o1.get横番号()) {
-                return 1;
-            }
             if (o1.get縦番号() < o2.get縦番号()) {
                 return -1;
             } else if (o2.get縦番号() < o1.get縦番号()) {
+                return 1;
+            }
+            if (o1.get横番号() < o2.get横番号()) {
+                return -1;
+            } else if (o2.get横番号() < o1.get横番号()) {
                 return 1;
             }
             return 0;

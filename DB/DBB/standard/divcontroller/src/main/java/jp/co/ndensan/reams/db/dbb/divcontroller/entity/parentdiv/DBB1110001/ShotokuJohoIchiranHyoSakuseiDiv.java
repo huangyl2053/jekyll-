@@ -7,18 +7,25 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1110001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 
 /**
- * ShotokuJohoIchiranHyoSakusei のクラスファイル 
- * 
- * @author 自動生成
+ * ShotokuJohoIchiranHyoSakusei のクラスファイル
+ *
+ * @reamsid_L DBB-1650-040 lijunjun
  */
 public class ShotokuJohoIchiranHyoSakuseiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -61,7 +68,7 @@ public class ShotokuJohoIchiranHyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlShoriNendo(DropDownList ddlShoriNendo) {
+    public void setDdlShoriNendo(DropDownList ddlShoriNendo) {
         this.getShotokuJohoIchiranHyoSakuseiBatchParameter().setDdlShoriNendo(ddlShoriNendo);
     }
 
@@ -71,7 +78,7 @@ public class ShotokuJohoIchiranHyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLin1(HorizontalLine lin1) {
+    public void setLin1(HorizontalLine lin1) {
         this.getShotokuJohoIchiranHyoSakuseiBatchParameter().setLin1(lin1);
     }
 
@@ -81,7 +88,7 @@ public class ShotokuJohoIchiranHyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblChusgutsuTaisho(Label lblChusgutsuTaisho) {
+    public void setLblChusgutsuTaisho(Label lblChusgutsuTaisho) {
         this.getShotokuJohoIchiranHyoSakuseiBatchParameter().setLblChusgutsuTaisho(lblChusgutsuTaisho);
     }
 
@@ -91,7 +98,7 @@ public class ShotokuJohoIchiranHyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChkChushutsuTaisho(CheckBoxList chkChushutsuTaisho) {
+    public void setChkChushutsuTaisho(CheckBoxList chkChushutsuTaisho) {
         this.getShotokuJohoIchiranHyoSakuseiBatchParameter().setChkChushutsuTaisho(chkChushutsuTaisho);
     }
 
@@ -101,7 +108,7 @@ public class ShotokuJohoIchiranHyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadRirekiSelect(RadioButton radRirekiSelect) {
+    public void setRadRirekiSelect(RadioButton radRirekiSelect) {
         this.getShotokuJohoIchiranHyoSakuseiBatchParameter().setRadRirekiSelect(radRirekiSelect);
     }
 
@@ -111,7 +118,7 @@ public class ShotokuJohoIchiranHyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLin2(HorizontalLine lin2) {
+    public void setLin2(HorizontalLine lin2) {
         this.getShotokuJohoIchiranHyoSakuseiBatchParameter().setLin2(lin2);
     }
 
@@ -121,7 +128,7 @@ public class ShotokuJohoIchiranHyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setKoikiChushutsuJokenTanitsuTashaPanel(KoikiChushutsuJokenTanitsuTashaPanelDiv KoikiChushutsuJokenTanitsuTashaPanel) {
+    public void setKoikiChushutsuJokenTanitsuTashaPanel(KoikiChushutsuJokenTanitsuTashaPanelDiv KoikiChushutsuJokenTanitsuTashaPanel) {
         this.getShotokuJohoIchiranHyoSakuseiBatchParameter().setKoikiChushutsuJokenTanitsuTashaPanel(KoikiChushutsuJokenTanitsuTashaPanel);
     }
 
@@ -131,7 +138,7 @@ public class ShotokuJohoIchiranHyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKakuteiStYMD(Label lblKakuteiStYMD) {
+    public void setLblKakuteiStYMD(Label lblKakuteiStYMD) {
         this.getShotokuJohoIchiranHyoSakuseiBatchParameter().getKoikiChushutsuJokenTanitsuTashaPanel().setLblKakuteiStYMD(lblKakuteiStYMD);
     }
 
@@ -141,7 +148,7 @@ public class ShotokuJohoIchiranHyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKakuteiStTime(Label lblKakuteiStTime) {
+    public void setLblKakuteiStTime(Label lblKakuteiStTime) {
         this.getShotokuJohoIchiranHyoSakuseiBatchParameter().getKoikiChushutsuJokenTanitsuTashaPanel().setLblKakuteiStTime(lblKakuteiStTime);
     }
 
@@ -151,7 +158,7 @@ public class ShotokuJohoIchiranHyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKakuteiEdYMD(Label lblKakuteiEdYMD) {
+    public void setLblKakuteiEdYMD(Label lblKakuteiEdYMD) {
         this.getShotokuJohoIchiranHyoSakuseiBatchParameter().getKoikiChushutsuJokenTanitsuTashaPanel().setLblKakuteiEdYMD(lblKakuteiEdYMD);
     }
 
@@ -161,7 +168,7 @@ public class ShotokuJohoIchiranHyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKakuteiEdTime(Label lblKakuteiEdTime) {
+    public void setLblKakuteiEdTime(Label lblKakuteiEdTime) {
         this.getShotokuJohoIchiranHyoSakuseiBatchParameter().getKoikiChushutsuJokenTanitsuTashaPanel().setLblKakuteiEdTime(lblKakuteiEdTime);
     }
 
@@ -171,7 +178,7 @@ public class ShotokuJohoIchiranHyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblChushutsuKikan(Label lblChushutsuKikan) {
+    public void setLblChushutsuKikan(Label lblChushutsuKikan) {
         this.getShotokuJohoIchiranHyoSakuseiBatchParameter().getKoikiChushutsuJokenTanitsuTashaPanel().setLblChushutsuKikan(lblChushutsuKikan);
     }
 
@@ -181,7 +188,7 @@ public class ShotokuJohoIchiranHyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKakuteiStYMD(TextBoxDate txtKakuteiStYMD) {
+    public void setTxtKakuteiStYMD(TextBoxDate txtKakuteiStYMD) {
         this.getShotokuJohoIchiranHyoSakuseiBatchParameter().getKoikiChushutsuJokenTanitsuTashaPanel().setTxtKakuteiStYMD(txtKakuteiStYMD);
     }
 
@@ -191,7 +198,7 @@ public class ShotokuJohoIchiranHyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKakuteiStTime(TextBoxTime txtKakuteiStTime) {
+    public void setTxtKakuteiStTime(TextBoxTime txtKakuteiStTime) {
         this.getShotokuJohoIchiranHyoSakuseiBatchParameter().getKoikiChushutsuJokenTanitsuTashaPanel().setTxtKakuteiStTime(txtKakuteiStTime);
     }
 
@@ -201,7 +208,7 @@ public class ShotokuJohoIchiranHyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKara(Label lblKara) {
+    public void setLblKara(Label lblKara) {
         this.getShotokuJohoIchiranHyoSakuseiBatchParameter().getKoikiChushutsuJokenTanitsuTashaPanel().setLblKara(lblKara);
     }
 
@@ -211,7 +218,7 @@ public class ShotokuJohoIchiranHyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKakuteiEdYMD(TextBoxDate txtKakuteiEdYMD) {
+    public void setTxtKakuteiEdYMD(TextBoxDate txtKakuteiEdYMD) {
         this.getShotokuJohoIchiranHyoSakuseiBatchParameter().getKoikiChushutsuJokenTanitsuTashaPanel().setTxtKakuteiEdYMD(txtKakuteiEdYMD);
     }
 
@@ -221,7 +228,7 @@ public class ShotokuJohoIchiranHyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKakuteiEdTime(TextBoxTime txtKakuteiEdTime) {
+    public void setTxtKakuteiEdTime(TextBoxTime txtKakuteiEdTime) {
         this.getShotokuJohoIchiranHyoSakuseiBatchParameter().getKoikiChushutsuJokenTanitsuTashaPanel().setTxtKakuteiEdTime(txtKakuteiEdTime);
     }
 
@@ -231,7 +238,7 @@ public class ShotokuJohoIchiranHyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setKoikiChushutsuJokenKoikiPanel(KoikiChushutsuJokenKoikiPanelDiv KoikiChushutsuJokenKoikiPanel) {
+    public void setKoikiChushutsuJokenKoikiPanel(KoikiChushutsuJokenKoikiPanelDiv KoikiChushutsuJokenKoikiPanel) {
         this.getShotokuJohoIchiranHyoSakuseiBatchParameter().setKoikiChushutsuJokenKoikiPanel(KoikiChushutsuJokenKoikiPanel);
     }
 
@@ -241,7 +248,7 @@ public class ShotokuJohoIchiranHyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgShichosonIchiran(DataGrid<dgShichosonIchiran_Row> dgShichosonIchiran) {
+    public void setDgShichosonIchiran(DataGrid<dgShichosonIchiran_Row> dgShichosonIchiran) {
         this.getShotokuJohoIchiranHyoSakuseiBatchParameter().getKoikiChushutsuJokenKoikiPanel().setDgShichosonIchiran(dgShichosonIchiran);
     }
 

@@ -19,17 +19,20 @@ import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShiharaiHenk
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShoriKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashitomeEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenko.ShiharaiHohoHenkoEntity;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoKanriKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoMukoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoShuryoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoTorokuKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -79,8 +82,11 @@ public class IchijiSashitome2GoHandler {
 
     /**
      * 画面初期化処理です。
+     *
+     * @return Message エラーMSG
      */
-    public void onLoad() {
+    public Message onLoad() {
+        Message message = null;
         RString 押下ボタン = ShoriKubun.toValue(div.getKey_Button()).get名称();
         ShiharaiHohoHenko 支払方法変更管理業務概念 = DataPassingConverter.deserialize(div.getKey_ShiharaiHohoHenkoKanri(), ShiharaiHohoHenko.class);
         List<ShiharaiHohoHenko> 支払方法データ = new ArrayList();
@@ -103,7 +109,7 @@ public class IchijiSashitome2GoHandler {
                     }
                 }
                 if (支払方法データ.isEmpty()) {
-                    throw new ApplicationException(UrErrorMessages.対象ファイルが存在しない.getMessage().replace("支払方法変更"));
+                    return UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("支払方法変更");
                 } else {
                     ViewStateHolder.put(IchijiSashitome2GoHandler.二号一時差止ダイアロググキー.支払方法変更管理業務概念, 支払方法変更管理業務概念);
                 }
@@ -118,12 +124,13 @@ public class IchijiSashitome2GoHandler {
         }
         if (支払方法変更管理業務概念 == null || 支払方法変更レコード.isEmpty()) {
             if (押下ボタン.equals(_２号弁明書受理) || 押下ボタン.equals(_２号一時差止登録) || 押下ボタン.equals(_２号一時差止解除)) {
-                throw new ApplicationException(UrErrorMessages.対象ファイルが存在しない.getMessage().replace("支払方法変更"));
+                return UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("支払方法変更");
             } else {
                 div.setShinkiKubun(新規登録);
             }
         }
         initializeDisplayData(押下ボタン, ViewStateHolder.get(IchijiSashitome2GoHandler.二号一時差止ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class));
+        return message;
     }
 
     /**
@@ -188,7 +195,7 @@ public class IchijiSashitome2GoHandler {
             shiryoJokyoSource.add(new KeyValueDataSource(shuyoKubun.getコード(), shuyoKubun.get名称()));
         }
         div.getDdlShuryoJokyo().setDataSource(shiryoJokyoSource);
-        div.getDdlShuryoJokyo().setSelectedKey(shiryoJokyoSource.get(0).getKey());
+        div.getDdlShuryoJokyo().setSelectedKey(ShiharaiHenkoShuryoKubun._空.getコード());
         setStatus(押下ボタン, shiryoJokyoSource);
         setValue(押下ボタン, shiharaiHohoHenko);
     }
@@ -235,13 +242,13 @@ public class IchijiSashitome2GoHandler {
                 div.getTxtBemmeiNaiyoKetteiYMD().setDisabled(false);
                 div.getDdlNigoBenmeishoJuriBenmeiShinsakekka().setDisabled(false);
                 div.getDdlNigoBenmeishoJuriBenmeiRiyu().setDataSource(shiryoJokyoSource);
-                div.getDdlNigoBenmeishoJuriBenmeiRiyu().setSelectedKey(shiryoJokyoSource.get(0).getKey());
+                div.getDdlNigoBenmeishoJuriBenmeiRiyu().setSelectedKey(ShiharaiHenkoShuryoKubun._空.getコード());
                 List<KeyValueDataSource> bemmeiShinsaKekkaSource = new ArrayList();
                 for (ShiharaiHenkoBenmeiShinsaKekkaKubun bemmeiShinsaKekka : ShiharaiHenkoBenmeiShinsaKekkaKubun.values()) {
                     bemmeiShinsaKekkaSource.add(new KeyValueDataSource(bemmeiShinsaKekka.getコード(), bemmeiShinsaKekka.get名称()));
                 }
                 div.getDdlNigoBenmeishoJuriBenmeiShinsakekka().setDataSource(bemmeiShinsaKekkaSource);
-                div.getDdlNigoBenmeishoJuriBenmeiShinsakekka().setSelectedKey(bemmeiShinsaKekkaSource.get(0).getKey());
+                div.getDdlNigoBenmeishoJuriBenmeiShinsakekka().setSelectedKey(ShiharaiHenkoBenmeiShinsaKekkaKubun._空.getコード());
                 DisplayNone_２号予告者登録項目(true);
                 DisplayNone_２号一時差止登録(true);
                 DisplayNone_２号一時差止解除(true);
@@ -273,13 +280,13 @@ public class IchijiSashitome2GoHandler {
                     shinseiRiyuSource.add(new KeyValueDataSource(shinseRriyuCode.getコード(), shinseRriyuCode.get名称()));
                 }
                 div.getDdlIraiRiyu().setDataSource(shinseiRiyuSource);
-                div.getDdlIraiRiyu().setSelectedKey(shinseiRiyuSource.get(0).getKey());
+                div.getDdlIraiRiyu().setSelectedKey(ShiharaiHenkoShuryoShinseiRiyuCode._空.getコード());
                 List<KeyValueDataSource> shinsaKekkaSource = new ArrayList();
                 for (ShiharaiHenkoBenmeiShinsaKekkaKubun shinsaKekka : ShiharaiHenkoBenmeiShinsaKekkaKubun.values()) {
                     shinsaKekkaSource.add(new KeyValueDataSource(shinsaKekka.getコード(), shinsaKekka.get名称()));
                 }
                 div.getDdlIraiShinsaKekka().setDataSource(shinsaKekkaSource);
-                div.getDdlIraiShinsaKekka().setSelectedKey(shinsaKekkaSource.get(0).getKey());
+                div.getDdlIraiShinsaKekka().setSelectedKey(ShiharaiHenkoBenmeiShinsaKekkaKubun._空.getコード());
                 DisplayNone_２号予告者登録項目(true);
                 DisplayNone_２号弁明書受理項目(true);
                 DisplayNone_２号一時差止登録(true);
@@ -316,7 +323,11 @@ public class IchijiSashitome2GoHandler {
             div.getTxtTorokuJokyo().setValue(shiharaiHohoHenko.get登録区分());
             div.getTxtTekiyoKaishi().setValue(shiharaiHohoHenko.get適用開始年月日());
             div.getTxtTekiyoShuryo().setValue(shiharaiHohoHenko.get適用終了年月日());
-            div.getDdlShuryoJokyo().setSelectedKey(shiharaiHohoHenko.get終了区分());
+            if (shiharaiHohoHenko.get終了区分() == null) {
+                div.getDdlShuryoJokyo().setSelectedKey(ShiharaiHenkoShuryoKubun._空.getコード());
+            } else {
+                div.getDdlShuryoJokyo().setSelectedKey(shiharaiHohoHenko.get終了区分());
+            }
             switch (押下ボタン.toString()) {
                 case "２号予告者登録":
                     div.getTxtNigoYokokushaTorokuIraiJuribi().setValue(shiharaiHohoHenko.get差止依頼書受理年月日());
@@ -326,9 +337,17 @@ public class IchijiSashitome2GoHandler {
                     break;
                 case "２号弁明書受理":
                     div.getTxtNigoBenmeishoJuriBenmeishoUketsukebi().setValue(shiharaiHohoHenko.get弁明書受付年月日());
-                    div.getDdlNigoBenmeishoJuriBenmeiRiyu().setSelectedKey(shiharaiHohoHenko.get弁明理由コード());
+                    if (shiharaiHohoHenko.get弁明理由コード() == null) {
+                        div.getDdlNigoBenmeishoJuriBenmeiRiyu().setSelectedKey(ShiharaiHenkoShuryoKubun._空.getコード());
+                    } else {
+                        div.getDdlNigoBenmeishoJuriBenmeiRiyu().setSelectedKey(shiharaiHohoHenko.get弁明理由コード());
+                    }
                     div.getTxtBemmeiNaiyoKetteiYMD().setValue(shiharaiHohoHenko.get弁明審査決定年月日());
-                    div.getDdlNigoBenmeishoJuriBenmeiShinsakekka().setSelectedKey(shiharaiHohoHenko.get弁明審査結果区分());
+                    if (shiharaiHohoHenko.get弁明審査結果区分() == null) {
+                        div.getDdlNigoBenmeishoJuriBenmeiShinsakekka().setSelectedKey(ShiharaiHenkoBenmeiShinsaKekkaKubun._空.getコード());
+                    } else {
+                        div.getDdlNigoBenmeishoJuriBenmeiShinsakekka().setSelectedKey(shiharaiHohoHenko.get弁明審査結果区分());
+                    }
                     break;
                 case "２号一時差止登録":
                     div.getTxtSashitomeKetteiYMD().setValue(ViewStateHolder.get(IchijiSashitome2GoHandler.二号一時差止ダイアロググキー.支払方法変更差止,
@@ -408,7 +427,7 @@ public class IchijiSashitome2GoHandler {
 
     private DbT4021ShiharaiHohoHenkoEntity get２号予告者登録の登録Entity() {
         DbT4021ShiharaiHohoHenkoEntity entity = new DbT4021ShiharaiHohoHenkoEntity();
-        entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo("209007"));
+        entity.setShoKisaiHokenshaNo(証記載保険者番号());
         entity.setHihokenshaNo(new HihokenshaNo(div.getKey_HihokenshaNo()));
         entity.setKanriKubun(ShiharaiHenkoKanriKubun._２号差止.getコード());
         entity.setRirekiNo(get最大履歴番号() + 1);
@@ -432,7 +451,7 @@ public class IchijiSashitome2GoHandler {
 
     private DbT4021ShiharaiHohoHenkoEntity get２号一時差止の登録の登録Entity() {
         DbT4021ShiharaiHohoHenkoEntity entity = new DbT4021ShiharaiHohoHenkoEntity();
-        entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo("209007"));
+        entity.setShoKisaiHokenshaNo(証記載保険者番号());
         entity.setHihokenshaNo(new HihokenshaNo(div.getKey_HihokenshaNo()));
         entity.setKanriKubun(ShiharaiHenkoKanriKubun._２号差止.getコード());
         entity.setRirekiNo(get最大履歴番号() + 1);
@@ -458,7 +477,7 @@ public class IchijiSashitome2GoHandler {
         List<DbT4024ShiharaiHohoHenkoSashitomeEntity> list = new ArrayList();
         DbT4024ShiharaiHohoHenkoSashitomeEntity entity = new DbT4024ShiharaiHohoHenkoSashitomeEntity();
         int 連番 = 0;
-        entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo("209007"));
+        entity.setShoKisaiHokenshaNo(証記載保険者番号());
         entity.setHihokenshaNo(new HihokenshaNo(div.getKey_HihokenshaNo()));
         entity.setKanriKubun(ShiharaiHenkoKanriKubun._２号差止.getコード());
         entity.setRirekiNo(get最大履歴番号());
@@ -559,5 +578,16 @@ public class IchijiSashitome2GoHandler {
         } else {
             return Integer.parseInt(div.getKey_MaxRirekiNo().toString());
         }
+    }
+
+    private ShoKisaiHokenshaNo 証記載保険者番号() {
+        ShoKisaiHokenshaNo 証記載保険者番号 = ShoKisaiHokenshaNo.EMPTY;
+        ShichosonSecurityJoho 市町村情報 = ShichosonSecurityJohoFinder.createInstance()
+                .getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        if (市町村情報 != null) {
+            証記載保険者番号 = 市町村情報.get市町村情報().get証記載保険者番号();
+        }
+
+        return 証記載保険者番号;
     }
 }

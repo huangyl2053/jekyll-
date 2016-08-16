@@ -21,9 +21,11 @@ import jp.co.ndensan.reams.db.dbc.service.core.futanwariaishoikkatsu.FutanWariai
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3113RiyoshaFutanWariaiEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -73,6 +75,7 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
     private RString ソート順５;
     private int ページ;
     List<RString> 出力順BODY;
+    private Association 地方公共団体;
     private final List<PersonalData> personalDataList = new ArrayList<>();
     @BatchWriter
     private BatchReportWriter<FutanWariaiShoHakkoIchiranSource> batchReportWriter;
@@ -111,6 +114,7 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
         ソート順４ = RString.EMPTY;
         ソート順５ = RString.EMPTY;
         service = new FutanWariaishoIkkatsu();
+        地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         mapper = getMapper(IFutanwariaishoHakkoMapper.class);
         FutanwariaishoHakkoMybatisParameter param = parameter.toMybatisParameter();
         param.setサブ業務コード(SubGyomuCode.DBC介護給付.getColumnValue());
@@ -164,8 +168,8 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
     protected void process(RiyoshaFutanwariaishoTempEntity entity) {
         ページ = 連番 % NUM_THRITY == 0 ? (連番 / NUM_THRITY) : (連番 / NUM_THRITY) + 1;
         FutanWariaiShoHakkoIchiranEntity futanWariaiShoHakkoIchiranEntity = service.getHakkoIchiranSourceData(帳票制御共通,
-                entity, parameter, ソート順１, コンマ, ソート順１, ソート順２, ソート順３, ソート順４, ソート順５,
-                new RString(ページ), parameter.getバッチ起動時処理日時(), new RString(連番));
+                entity, parameter, 地方公共団体.get地方公共団体コード().value(), 地方公共団体.get市町村名(), ソート順１, ソート順２,
+                ソート順３, ソート順４, ソート順５, new RString(ページ), parameter.getバッチ起動時処理日時(), new RString(連番));
         FutanWariaiShoHakkoIchiranReport report = new FutanWariaiShoHakkoIchiranReport(futanWariaiShoHakkoIchiranEntity);
         report.writeBy(reportSourceWriter);
         FutanwariaiShoHakkoIchiranCSVEntity futanwariaiShoHakkoIchiranCSVEntity

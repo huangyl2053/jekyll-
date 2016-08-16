@@ -17,12 +17,14 @@ import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyout
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
+import jp.co.ndensan.reams.uz.uza.batch.journal.JournalWriter;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -68,13 +70,16 @@ public class KokuhorenKyoutsuuFileGetManager {
         KokuhorenKyoutsuuFileGetReturnEntity result
                 = new KokuhorenKyoutsuuFileGetReturnEntity();
         List<UzT0885SharedFileEntryEntity> entityList;
+        JournalWriter writer = new JournalWriter();
         try {
             entityList = SharedFile.searchSharedFile(PREFIX.concat(交換情報識別番号));
         } catch (Exception ex) {
-            Logger.getLogger(KokuhorenKyoutsuuFileGetManager.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            writer.writeErrorJournal(RDateTime.now(), new RString(ex.getMessage()));
             throw new BatchInterruptedException(ex.getMessage());
         }
         if (null == entityList || entityList.isEmpty()) {
+            writer.writeErrorJournal(RDateTime.now(), new RString(DbcErrorMessages.取込対象ファイルが存在しない.getMessage()
+                    .replace(PREFIX.concat(交換情報識別番号).toString()).toString()));
             throw new BatchInterruptedException(DbcErrorMessages.取込対象ファイルが存在しない.getMessage()
                     .replace(PREFIX.concat(交換情報識別番号).toString()).toString());
         }
@@ -96,6 +101,8 @@ public class KokuhorenKyoutsuuFileGetManager {
             }
         }
         if (null == fileNameSet || fileNameSet.isEmpty()) {
+            writer.writeErrorJournal(RDateTime.now(), new RString(DbcErrorMessages.取込対象ファイルが存在しない.getMessage()
+                    .replace(PREFIX.concat(交換情報識別番号).toString()).toString()));
             throw new BatchInterruptedException(DbcErrorMessages.取込対象ファイルが存在しない.getMessage()
                     .replace(PREFIX.concat(交換情報識別番号).toString()).toString());
         }

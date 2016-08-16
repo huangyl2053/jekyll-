@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.ichijisash
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IDialogResponse;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -28,7 +29,10 @@ public class IchijiSashitome2Go {
      * @return ResponseData<IchijiSashitome2GoDiv>
      */
     public ResponseData<IchijiSashitome2GoDiv> onLoad(IchijiSashitome2GoDiv div) {
-        getHandler(div).onLoad();
+        Message message = getHandler(div).onLoad();
+        if (message != null) {
+            return ResponseData.of(div).addMessage(message).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -53,11 +57,13 @@ public class IchijiSashitome2Go {
      * @return ResponseData<IchijiSashitome2GoDiv>
      */
     public ResponseData<IchijiSashitome2GoDiv> onClick_BtnKakutei(IchijiSashitome2GoDiv div) {
+        ResponseData<IchijiSashitome2GoDiv> response = new ResponseData();
         IDialogResponse dialogResponse = ResponseData.of(div);
         ValidationMessageControlPairs pairs = getHandler(div).onClick_BtnKakutei();
         if (pairs.iterator().hasNext()) {
             return dialogResponse.addValidationMessages(pairs).respond();
         }
+        response.data = div;
         return dialogResponse.dialogOKClose();
     }
 

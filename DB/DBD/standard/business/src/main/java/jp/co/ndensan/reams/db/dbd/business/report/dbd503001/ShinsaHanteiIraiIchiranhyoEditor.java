@@ -91,9 +91,8 @@ public class ShinsaHanteiIraiIchiranhyoEditor implements IShinsaHanteiIraiIchira
             source.listIraiichiranhyo2_6 = 帳票出力用申請情報Entity.get前回要介護状態区分コード();
             source.listIraiichiranhyo2_7 = 帳票出力用申請情報Entity.get前回認定有効期間開始().wareki().toDateString();
             source.listIraiichiranhyo2_8 = 帳票出力用申請情報Entity.get前回認定有効期間終了().wareki().toDateString();
+            source.listIraiichiranhyo2_9 = 帳票出力用申請情報Entity.get出力CSV状況申請();
         }
-        //TODO被保険者情報はなんですか
-//        source.listIraiichiranhyo2_9 =
         source.reportId = new RString("DBD503001");
     }
 

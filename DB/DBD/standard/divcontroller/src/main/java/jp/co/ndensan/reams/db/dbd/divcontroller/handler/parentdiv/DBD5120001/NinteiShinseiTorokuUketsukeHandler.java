@@ -76,6 +76,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
@@ -1713,7 +1714,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getTxtEnkiMikomiKikanTo().setValue(result.getEntity().get延期見込期間終了年月日());
         div.getTxtEnkiRiyu().setValue(result.getEntity().get延期理由());
         div.getTxtEnkiTsuchiHakkoYMD().setValue(result.getEntity().get延期通知発行年月日());
-        div.getTxtEnkiTsuchishoHakkoCount().setValue(result.getEntity().get延期通知発行回数());
+        div.getTxtEnkiTsuchishoHakkoCount().setValue(new Decimal(result.getEntity().get延期通知発行回数()));
     }
 
 }

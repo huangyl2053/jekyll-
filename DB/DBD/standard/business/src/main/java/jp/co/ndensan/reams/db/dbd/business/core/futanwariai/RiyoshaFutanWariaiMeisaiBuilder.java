@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link RiyoshaFutanWariaiMeisai}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-5010-011 zhaowei
  */
 public class RiyoshaFutanWariaiMeisaiBuilder {
 
@@ -206,6 +208,17 @@ public class RiyoshaFutanWariaiMeisaiBuilder {
     public RiyoshaFutanWariaiMeisaiBuilder set世帯コード(SetaiCode 世帯コード) {
         requireNonNull(世帯コード, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯コード"));
         entity.setSetaiCd(世帯コード);
+        return this;
+    }
+
+    /**
+     * 世帯コードを設定します。
+     *
+     * @param 論理削除フラグ 論理削除フラグ
+     * @return {@link RiyoshaFutanWariaiMeisaiBuilder}
+     */
+    public RiyoshaFutanWariaiMeisaiBuilder set論理削除フラグ(boolean 論理削除フラグ) {
+        entity.setLogicalDeletedFlag(論理削除フラグ);
         return this;
     }
 

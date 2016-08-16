@@ -119,15 +119,17 @@ public class JushotiTokureiIdou {
                 適用情報の保存(div);
                 div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
                         .replace("資格適用処理").evaluate()), RString.EMPTY, RString.EMPTY, true);
+                return ResponseData.of(div).setState(DBA2030011StateName.完了状態);
             }
             if (DBAMN25002_届出により解除.equals(UrControlDataFactory.createInstance().getMenuID())) {
                 解除情報の保存(div);
                 div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
                         .replace("資格解除処理").evaluate()), RString.EMPTY, RString.EMPTY, true);
+                return ResponseData.of(div).setState(DBA2030011StateName.完了状態);
             }
         }
 
-        return ResponseData.of(div).setState(DBA2030011StateName.完了状態);
+        return ResponseData.of(div).respond();
     }
 
     /**

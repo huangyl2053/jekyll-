@@ -16,6 +16,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBC {
 
     /**
+     * 高額合算自己負担額計算結果一覧表
+     */
+    DBC200029(new ReportId("DBC200029_GassanJikofutangakuKeisanKekkaIchiran"), new RString("高額合算自己負担額計算結果一覧表")),
+    /**
      * 高額サービス給付のお知らせ通知書（初回申請分）（提出期限あり）
      */
     DBC100011_申請分(new ReportId("DBC100011_KogakuOshiraseTsuchiTeshutsuKigenAriShoShokai"),
@@ -104,6 +108,10 @@ public enum ReportIdDBC {
      * 高額総合事業サービス費判定エラーリスト
      */
     DBC200076(new ReportId("DBC200076_KogakuSogoJigyoServicehiHanteiErrorIchiran"), new RString("高額総合事業サービス費判定エラーリスト ")),
+    /**
+     * 高額介護サービス費判定エラーリスト
+     */
+    DBC200017(new ReportId("DBC200017_KogakuShikyuShinseishoHakkoIchiran"), new RString("高額介護サービス費支給申請書発行一覧表 ")),
     /**
      * 高額介護サービス費判定エラーリスト
      */
@@ -279,6 +287,10 @@ public enum ReportIdDBC {
      * （受給者台帳（一覧表）帳票ＩＤです。
      */
     DBC200006(new ReportId("DBC200006_KokuhorenJukyushaDaichoIchiran"), new RString("受給者台帳（一覧表）")),
+    /**
+     * 給付管理票取込結果一覧表帳票ＩＤです。
+     */
+    DBC200073(new ReportId("DBC200073_KyufuKanrihyoTorikomiKekkaIchiran"), new RString("給付管理票取込結果一覧表")),
     /**
      * 総合事業費等請求額通知書（公費負担者分）帳票ＩＤです。
      */

@@ -84,4 +84,18 @@ public interface IChosaItakusakiAndChosainInputDiv extends ICommonChildDivBasePr
      * @param value ShoriType
      */
     void setMode_ShoriType(ShoriType value);
+
+    /**
+     * 調査員への連絡事項を取得します。
+     *
+     * @return RString
+     */
+    RString getChosainRenrakuJiko();
+
+    /**
+     * 調査員への連絡事項を設定します。
+     *
+     * @param chosainRenrakuJiko 調査員への連絡事項
+     */
+    void setChosainRenrakuJiko(RString chosainRenrakuJiko);
 }

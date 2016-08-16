@@ -9,7 +9,9 @@ import jp.co.ndensan.reams.db.dbd.business.core.dbt4030011.NinteishoJohoBusiness
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100025.ShogaishaKojoNinteishoProperty;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100025.ShogaishaKojoNinteishoReport;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd4030011.NinteishoJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100025.NinteishoJohoReportSource;
+import jp.co.ndensan.reams.db.dbd.service.core.ninteishojoho.NinteiShoJohoFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
@@ -42,10 +44,18 @@ public class ShogaishaKojoNinteishoPrintService {
         ShogaishaKojoNinteishoProperty property = new ShogaishaKojoNinteishoProperty();
         try (ReportAssembler<NinteishoJohoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<NinteishoJohoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+            target.set文書番号(NinteiShoJohoFinder.createInstance().文書番号取得());
+            NinteishoJohoEntity ninteishoJohoentity = NinteiShoJohoFinder.createInstance().set障がい者控除と認定年月日(target.get被保険者番号());
+            if (ninteishoJohoentity != null) {
+                target.set障害理由区分(ninteishoJohoentity.get障害理由区分());
+                target.set障害理由内容(ninteishoJohoentity.get障害理由内容());
+                target.set要介護認定日(ninteishoJohoentity.get要介護認定日());
+                target.set申告年(ninteishoJohoentity.get対象年度());
+            }
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD100025.getReportId(),
                     FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                     KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-            ShogaishaKojoNinteishoReport report = new ShogaishaKojoNinteishoReport(target, ninshoshaSource);
+            ShogaishaKojoNinteishoReport report = new ShogaishaKojoNinteishoReport(target.getNinteishoJohoEntity(), ninshoshaSource);
             report.writeBy(reportSourceWriter);
         }
     }

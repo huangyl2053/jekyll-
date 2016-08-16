@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.NullsOrder;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import jp.co.ndensan.reams.uz.uza.util.db.OrderBy;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -236,6 +237,34 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
                 table(DbT7037ShoKofuKaishu.class).
                 where(eq(shikibetsuCode, 識別コード)).
                 order(new OrderBy(lastUpdateTimestamp, Order.DESC, NullsOrder.LAST)).
+                limit(1).
+                toObject(DbT7037ShoKofuKaishuEntity.class);
+    }
+
+    /**
+     * 主キーで証交付回収を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 交付証種類 KofuShoShurui
+     * @return DbT7037ShoKofuKaishuEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7037ShoKofuKaishuEntity selectByKey(
+            HihokenshaNo 被保険者番号,
+            RString 交付証種類) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(引数_被保険者番号.toString()));
+        requireNonNull(交付証種類, UrSystemErrorMessages.値がnull.getReplacedMessage("交付証種類"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7037ShoKofuKaishu.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(kofuShoShurui, 交付証種類)
+                        )).
+                order(by(DbT7037ShoKofuKaishu.rirekiNo, Order.DESC)).
                 limit(1).
                 toObject(DbT7037ShoKofuKaishuEntity.class);
     }

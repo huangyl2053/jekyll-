@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchish
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -21,9 +23,11 @@ public class TokuchoKibetsuKingaku06UpdateProcess extends SimpleBatchProcessBase
     @Override
     protected void process() {
         TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko service = TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko.createInstance();
+        KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
+        IKozaSearchKey key = builder.build();
         RString 徴収方法 = ChoshuHohoKibetsu.特別徴収.getコード();
         service.update前年度特徴期別金額06(new TokuchoHeijunka6gatsuMyBatisParameter(
-                false, null, null, null, null, 徴収方法, null, null, null));
+                false, null, null, null, null, 徴収方法, null, null, null, key));
     }
 
 }

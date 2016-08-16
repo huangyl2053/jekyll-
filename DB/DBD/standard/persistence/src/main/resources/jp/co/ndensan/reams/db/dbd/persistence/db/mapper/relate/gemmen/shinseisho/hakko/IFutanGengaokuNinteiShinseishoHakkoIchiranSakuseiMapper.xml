@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBD-3530-080 mawy-->
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmen.shinseisho.hakko.IFutanGengaokuNinteiShinseishoHakkoIchiranSakuseiMapper">
+    <resultMap id="resultMap_get出力対象者情報Entity"  type="jp.co.ndensan.reams.db.dbd.entity.db.relate.futangendogakuninteishinseishohakkoichiran.FutanGendogakuNinteiShinseishoHakkoIchiran" autoMapping="true">
+        <result property="被保番号" column="被保険者番号"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+<!--        <result property="新規更新区分"  column="新規更新区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>-->
+        <result property="計画事業者コード" column="計画事業者コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="計画事業者名"  column="計画事業者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="is自己作成"  column="is自己作成"/>
+        <result property="利用者負担段階"  column="利用者負担段階"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="生保"  column="生保"/>
+        <result property="老齢"  column="老齢"/>
+        <result property="入所施設コード" column="入所施設コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="入所施設名" column="入所施設名"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="合計所得" column="合計所得"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="認定開始日"  column="認定開始日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定終了日" column="認定終了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="要介護認定状態区分コード" column="要介護認定状態区分コード"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="厚労省IF識別コード" column=" 厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="旧措置フラグ" column="旧措置フラグ"/>
+        <result property="世帯課税" column="世帯課税" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請年月日" column="申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="適用開始日"  column="適用開始日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="適用終了日"  column="適用終了日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="負担段階"  column="負担段階"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ユニット型順個室" column="ユニット型順個室" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="多床室" column="多床室" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="決定年月日"  column="決定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="有効期限" column="有効期限"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="食費負担額" column="食費負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="従来型特養" column="従来型特養"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="決定区分"  column="決定区分"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="旧措置"  column="旧措置"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ユニット型個室"  column="ユニット型個室"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="従来型老健"  column="従来型老健"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="住所地特例フラグ"  column="住所地特例フラグ"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="非課税年金勘案額"  column="非課税年金勘案額"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="年金収入額"  column="年金収入額"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+    </resultMap>
+  <select resultOrdered="true" id="get出力対象者情報"  
+              resultMap="resultMap_get出力対象者情報Entity" 
+              parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmen.shinseisho.hakko.FutanGendogakuMybatisParameter"
+              fetchSize="500">
+  SELECT  
+        E."hihokenshaNo" AS 被保番号,
+<!--        E.""   AS  新規更新区分,-->
+        E."riyoshaFutanDankai"  AS 負担段階,
+        E."isSeikatsuHogoJukyusha"  AS 生保,
+        E."isRoreiFukushiNenkinJukyusha"  AS 老齢,
+        E."gokeiShotokuKingaku"  AS 合計所得,
+        C."ninteiYukoKikanKaishiYMD"  AS 認定開始日,
+        C."ninteiYukoKikanShuryoYMD" AS 認定終了日,
+        C."kyuSochishaFlag"  AS 旧措置フラグ,
+        E."setaiKazeiKubun"  AS  世帯課税,
+        C."yokaigoJotaiKubunCode"  AS 要介護認定状態区分コード,
+        G."koroshoIfShikibetsuCode"  AS  厚労省IF識別コード,
+        F."shinseiYMD" AS 申請年月日,
+        F."tekiyoKaishiYMD"  AS 適用開始日,
+        F."riyoshaFutanDankai"  AS  前回利用者負担段階,
+        F."unitTypeJunKoshitsu"  AS  ユニット型順個室,
+        F."tashoshitsu"  AS  多床室,
+        F."ketteiYMD"  AS 決定年月日,
+        F."tekiyoShuryoYMD"  AS  適用終了日,
+        F."shokuhiFutanGendogaku"  AS  食費負担額,
+        F."juraiTypeKoshitsu_Tokuyo"  AS  従来型特養,
+        F."ketteiKubun"   AS  決定区分,
+        F."kyusochishaKubun"  AS  旧措置,
+        F."unitTypeKoshitsu"  AS ユニット型個室,
+        F."juraiTypeKoshitsu_Tokuyo"  AS  従来型老健,
+        H."nyushoShisetsuCode"  AS  入所施設コード,
+        J."jigyoshaName"  AS  入所施設名,
+        I."jigyoshaNo"  AS  計画事業者コード,
+        I."jigyoshaName"  AS 計画事業者名,
+        I."is自己作成"   AS  is自己作成,
+        M."jushochiTokureiFlag"  AS 住所地特例フラグ,
+        E."hikazeinenkinKananGaku"  AS  非課税年金勘案額,
+        E."nenkinShunyuGaku"  AS  年金収入額,
+       <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+  FROM  rgdb."DbT4032ShinseishoIkkatsuHakkoBatch"  AS A
+       INNER JOIN rgdb."DbT4033ShinseishoHakkoTaishoshas"  AS D
+       ON D."hakkoShoriID"  = A."hakkoShoriID"
+       INNER JOIN rgdb."DbT4031ShinseishoHakkoKohoshas"  AS E
+       ON  E."haakuShoriID" =A."haakuShoriId"
+       AND E."hihokenshaNo" = D."hihokenshaNo"
+       INNER JOIN  rgua."UaFt200FindShikibetsuTaisho"('',#{基準日},FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+       ON "ShikibetsuTaisho"."shikibetsuCode" = E."shikibetsuCode"
+       INNER JOIN rgdb."DbV4001JukyushaDaicho"   AS C
+       ON C."hihokenshaNo" = E."hihokenshaNo"
+       AND C."logicalDeletedFlag" IS FALSE 
+       INNER JOIN rgdb."DbT4101NinteiShinseiJoho"  AS G
+       ON G."shinseishoKanriNo"  = C."shinseishoKanriNo" 
+       LEFT  JOIN 
+       (
+        SELECT  
+                F2.*
+         FROM 
+                rgdb."DbT4018KaigoHokenFutanGendogakuNintei"  AS F2 
+       INNER JOIN  
+                ( 
+                   SELECT 
+                       rgdb."DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo" ,
+                        MAX(rgdb."DbT4018KaigoHokenFutanGendogakuNintei"."rirekiNo") AS "rirekiNo"
+                    FROM rgdb."DbT4018KaigoHokenFutanGendogakuNintei" 
+                    GROUP BY 
+                       rgdb."DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo"
+                     ) F1
+                     ON F1."hihokenshaNo" =F2."hihokenshaNo"
+                     AND F1."rirekiNo" =F2."rirekiNo"
+        )F
+                ON 
+                    F."hihokenshaNo" =E."hihokenshaNo"
+                LEFT JOIN 
+                ( 
+                    SELECT H2.*
+                    FROM  
+                        rgdb."DbT1004ShisetsuNyutaisho" AS H2 
+                        INNER JOIN 
+                        (SELECT    
+                               "shikibetsuCode",
+                               MAX("rirekiNo") AS "rirekiNo"
+                               FROM rgdb."DbT1004ShisetsuNyutaisho"
+                               WHERE "daichoShubetsu"='1'
+                               GROUP BY "shikibetsuCode"
+                               ) AS H1 
+                               ON H1."shikibetsuCode" =H2."shikibetsuCode"
+                               AND H1."rirekiNo" =H2."rirekiNo"
+                               )AS H
+                        ON H."shikibetsuCode"  =E."shikibetsuCode"
+                        LEFT JOIN rgdb."DbT7060KaigoJigyosha" AS J
+                        ON J."jigyoshaNo"  = H."nyushoShisetsuCode" 
+                        AND J."yukoKaishiYMD"  <![CDATA[<=]]>#{基準日}
+                        AND #{基準日}<![CDATA[<=]]>J."yukoShuryoYMD" 
+                        LEFT JOIN (
+                                    SELECT 
+                                            I1."hihokenshaNo",
+                                            I2."keikakuJigyoshaNo" AS "jigyoshaNo",
+                                            I3."jigyoshaName", 
+                                            (CASE WHEN I3."jigyoshaName"  IS NULL THEN TRUE ELSE FALSE END )AS is自己作成
+                                     FROM 
+                                            rgdb."DbT3005KyotakuKeikakuTodokede" AS I1
+                                    
+                                             LEFT JOIN 
+                                                        rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS I2
+                                                   ON   I2."hihokenshaNo" = I1."hihokenshaNo"
+                                                   AND  I2."taishoYM" =I1."taishoYM" 
+                                                   AND  I2."rirekiNo" =I1."rirekiNo"
+                                             LEFT JOIN 
+                                                        rgdb."DbT7060KaigoJigyosha"  AS I3
+                                                        ON I3."jigyoshaNo" = I2."itakusakiJigyoshaNo" 
+                                                        AND I3."yukoKaishiYMD" <![CDATA[<=]]>#{発行日}
+                                                        AND #{発行日} <![CDATA[<=]]>I3."yukoShuryoYMD"
+                                             WHERE 
+                                            NOT EXISTS (
+                                                         SELECT 1 
+                                                         FROM rgdb."DbT3005KyotakuKeikakuTodokede" AS _I1
+                                                         WHERE I1."hihokenshaNo" =_I1."hihokenshaNo"
+                                                         AND I1."taishoYM" <![CDATA[<]]>_I1."taishoYM" 
+                                                         OR(I1."taishoYM" =_I1."taishoYM"
+                                                         AND I1."rirekiNo" <![CDATA[<]]>_I1."rirekiNo" )
+                                                         )
+                                                 ) AS I 
+                                                        ON I."hihokenshaNo" =E."hihokenshaNo"
+                                              LEFT JOIN 
+                                                        (SELECT  
+                                                                    X.*
+                                                         FROM  
+                                                                (  SELECT 
+                                                                                    *,
+                                                                                    ROW_NUMBER()OVER (PARTITION BY "hihokenshaNo"
+                                                                                    ORDER BY "idoYMD" DESC ,"edaNo" DESC )AS 最大順
+                                                                   FROM             rgdb."DbT1001HihokenshaDaicho"
+                                                                   WHERE           "idoYMD"<![CDATA[<=]]>#{基準日}
+                                                                   )AS X
+                                                         WHERE    X."最大順" =1
+                                                         AND      X."shikakuShutokuYMD" <![CDATA[<=]]>#{基準日}
+                                                         AND      #{基準日}<![CDATA[<]]>(CASE  WHEN X."shikakuSoshitsuYMD" ='' THEN '99999999'
+                                                                    ELSE  X."shikakuSoshitsuYMD" END )
+                                                 )  AS M
+                                                 ON M."hihokenshaNo" =D."hihokenshaNo"
+                              WHERE  
+                                        A."hakkoShoriID" =#{発行処理ID}
+<!--                                ORDER BY 
+                                <if test="出力フラグ" >
+                                            A.""
+                                         </if>
+                                            #{出力順}                 -->
+  </select>
+</mapper>                                                   
+                                             
+                                                        
+                                                        
+                                                        
+                                                         
+                        
+                            
+    
+

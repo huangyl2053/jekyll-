@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
  */
 public class TodokedeshaDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -39,8 +39,6 @@ public class TodokedeshaDiv extends Panel {
     private TextBoxYubinNo txtTodokedeshaYubinNo;
     @JsonProperty("txtTodokedeshaJusho")
     private TextBox txtTodokedeshaJusho;
-    @JsonProperty("txtYubinNo")
-    private TextBoxYubinNo txtYubinNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -154,24 +152,6 @@ public class TodokedeshaDiv extends Panel {
     @JsonProperty("txtTodokedeshaJusho")
     public void setTxtTodokedeshaJusho(TextBox txtTodokedeshaJusho) {
         this.txtTodokedeshaJusho = txtTodokedeshaJusho;
-    }
-
-    /*
-     * gettxtYubinNo
-     * @return txtYubinNo
-     */
-    @JsonProperty("txtYubinNo")
-    public TextBoxYubinNo getTxtYubinNo() {
-        return txtYubinNo;
-    }
-
-    /*
-     * settxtYubinNo
-     * @param txtYubinNo txtYubinNo
-     */
-    @JsonProperty("txtYubinNo")
-    public void setTxtYubinNo(TextBoxYubinNo txtYubinNo) {
-        this.txtYubinNo = txtYubinNo;
     }
 
     // </editor-fold>

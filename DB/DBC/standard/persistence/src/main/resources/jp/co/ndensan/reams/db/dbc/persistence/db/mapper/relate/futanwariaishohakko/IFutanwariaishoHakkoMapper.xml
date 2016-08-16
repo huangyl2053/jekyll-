@@ -165,8 +165,15 @@
             "FutanWariKikanTemp" AS FutanWariKikanTemp
         ON  "DbT3113RiyoshaFutanWariai"."hihokenshaNo" = FutanWariKikanTemp."hihokenshaNo"     
         LEFT OUTER JOIN
-             rgdb."DbT7037ShoKofuKaishu" AS "DbT7037ShoKofuKaishu"
+            (SELECT * FROM rgdb."DbT7037ShoKofuKaishu" AS "A" WHERE "kofuShoShurui"='003'
+             AND NOT EXISTS(SELECT 'X' FROM rgdb."DbT7037ShoKofuKaishu" AS "B" 
+                            WHERE  "B"."hihokenshaNo" = "A"."hihokenshaNo"
+			    AND    "B"."kofuShoShurui" = "A"."kofuShoShurui" 
+                            AND    "B"."rirekiNo"  <![CDATA[>]]> "A"."rirekiNo"
+                          ) 
+            ) AS "DbT7037ShoKofuKaishu"
         ON   "DbT1001HihokenshaDaicho"."hihokenshaNo"  = "DbT7037ShoKofuKaishu"."hihokenshaNo"
+            
     </sql>
     
     <select resultOrdered="true" id="select利用者負担割合証Temp"

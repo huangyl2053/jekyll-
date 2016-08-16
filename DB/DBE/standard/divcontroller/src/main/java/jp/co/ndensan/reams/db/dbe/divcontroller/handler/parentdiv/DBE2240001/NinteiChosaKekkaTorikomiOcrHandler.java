@@ -228,7 +228,7 @@ public class NinteiChosaKekkaTorikomiOcrHandler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     getサービスの状況を変換(GaikyoChosahyouServiceJyouk99A.訪問看護.get連番()));
             joho = joho.createBuilderForEdit().setサービスの状況(getサービスの状況を変換(data.get訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽの回数())).build();
-            joho = joho.createBuilderForEdit().setサービスの状況(getサービスの状況を変換(data.get訪問看護の回数())).build();
+            joho = joho.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
             サービスの状況List.add(joho);
         }
         if (!サービスの状況_99A.contains(GaikyoChosahyouServiceJyouk99A.訪問リハビリ.get連番())) {
@@ -408,7 +408,7 @@ public class NinteiChosaKekkaTorikomiOcrHandler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     getサービスの状況を変換(GaikyoChosahyouServiceJyouk02A.訪問看護.get連番()));
             joho = joho.createBuilderForEdit().setサービスの状況(getサービスの状況を変換(data.get訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽの回数())).build();
-            joho = joho.createBuilderForEdit().setサービスの状況(getサービスの状況を変換(data.get訪問看護の回数())).build();
+            joho = joho.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
             サービスの状況List.add(joho);
         }
         if (!サービスの状況_02A.contains(GaikyoChosahyouServiceJyouk02A.訪問リハビリ.get連番())) {
@@ -618,7 +618,7 @@ public class NinteiChosaKekkaTorikomiOcrHandler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     getサービスの状況を変換(GaikyoChosahyouServiceJyouk09A.訪問看護.get連番()));
             joho = joho.createBuilderForEdit().setサービスの状況(getサービスの状況を変換(data.get訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽの回数())).build();
-            joho = joho.createBuilderForEdit().setサービスの状況(getサービスの状況を変換(data.get訪問看護の回数())).build();
+            joho = joho.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
             サービスの状況List.add(joho);
         }
         if (!サービスの状況_06A.contains(GaikyoChosahyouServiceJyouk09A.訪問リハビリ.get連番())) {
@@ -868,7 +868,7 @@ public class NinteiChosaKekkaTorikomiOcrHandler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     getサービスの状況を変換(GaikyoChosahyouServiceJyouk09A.訪問看護.get連番()));
             joho = joho.createBuilderForEdit().setサービスの状況(getサービスの状況を変換(data.get訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽの回数())).build();
-            joho = joho.createBuilderForEdit().setサービスの状況(getサービスの状況を変換(data.get訪問看護の回数())).build();
+            joho = joho.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
             サービスの状況List.add(joho);
         }
         if (!サービスの状況_09A.contains(GaikyoChosahyouServiceJyouk09A.訪問リハビリ.get連番())) {
@@ -1127,7 +1127,7 @@ public class NinteiChosaKekkaTorikomiOcrHandler {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
                     getサービスの状況を変換(GaikyoChosahyouServiceJyouk09B.訪問看護.get連番()));
             joho = joho.createBuilderForEdit().setサービスの状況(getサービスの状況を変換(data.get訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽの回数())).build();
-            joho = joho.createBuilderForEdit().setサービスの状況(getサービスの状況を変換(data.get訪問看護の回数())).build();
+            joho = joho.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
             サービスの状況List.add(joho);
         }
         if (!サービスの状況_09B.contains(GaikyoChosahyouServiceJyouk09B.訪問リハビリ.get連番())) {

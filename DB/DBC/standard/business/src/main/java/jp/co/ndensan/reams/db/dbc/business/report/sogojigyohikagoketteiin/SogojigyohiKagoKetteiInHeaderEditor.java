@@ -67,9 +67,9 @@ public class SogojigyohiKagoKetteiInHeaderEditor implements ISogojigyohiKagoKett
         }
         source.hokenshaName = 帳票出力対象データ.get保険者名();
         if (null != 帳票出力対象データ.get証記載保険者番号()) {
-            source.hokenshaNo = 帳票出力対象データ.get証記載保険者番号().getColumnValue();
+            source.shoKisaiHokenshaNo = 帳票出力対象データ.get証記載保険者番号().getColumnValue();
         }
-        source.hokenshaName = 帳票出力対象データ.get証記載保険者名();
+        source.shoKisaiHokenshaName = 帳票出力対象データ.get証記載保険者名();
         source.shutsuryokujun1 = get並び順(KEY_並び順の２件目);
         source.shutsuryokujun2 = get並び順(KEY_並び順の３件目);
         source.shutsuryokujun3 = get並び順(KEY_並び順の４件目);

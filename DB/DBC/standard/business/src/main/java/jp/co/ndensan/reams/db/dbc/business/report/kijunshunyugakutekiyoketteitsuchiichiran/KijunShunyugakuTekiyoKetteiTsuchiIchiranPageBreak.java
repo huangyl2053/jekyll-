@@ -39,6 +39,7 @@ public class KijunShunyugakuTekiyoKetteiTsuchiIchiranPageBreak extends PageBreak
     public boolean isBreak(ReportLineRecord<KijunShunyugakuTekiyoKetteiTsuchiIchiranSource> currentSource,
             ReportLineRecord<KijunShunyugakuTekiyoKetteiTsuchiIchiranSource> nextSource) {
         boolean flag = false;
+        // TODO Redmine#95716
         if (this.breakKeysList.contains(KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.年度.getフォームフィールド名())
                 && !currentSource.getSource().listHakkoTaishosha_3.equals(nextSource.getSource().listHakkoTaishosha_3)) {
             flag = true;
@@ -68,6 +69,7 @@ public class KijunShunyugakuTekiyoKetteiTsuchiIchiranPageBreak extends PageBreak
     public boolean is改頁(KijunShunyugakuTekiyoKetteiEntity currentSource,
             KijunShunyugakuTekiyoKetteiEntity nextSource) {
         boolean flag = false;
+        // TODO Redmine#95716
         if (this.breakKeysList.contains(KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.年度.getフォームフィールド名())
                 && !currentSource.get年度().equals(nextSource.get年度())) {
             flag = true;

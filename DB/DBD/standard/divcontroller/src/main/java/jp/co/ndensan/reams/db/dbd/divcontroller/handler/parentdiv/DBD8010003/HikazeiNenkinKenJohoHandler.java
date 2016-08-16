@@ -87,6 +87,8 @@ public class HikazeiNenkinKenJohoHandler {
         月DDL設定();
         div.getBtnDisplay().setDisabled(true);
         div.getBtnDelete().setDisabled(true);
+        div.getTbBirthday().setDisabled(true);
+        div.getDdlSex().setDisabled(true);
         return false;
     }
 
@@ -323,7 +325,17 @@ public class HikazeiNenkinKenJohoHandler {
             div.getTbBirthday().setDisabled(false);
             div.getTbNameKanji().setDisabled(false);
             div.getTbAddressKana().setDisabled(false);
-            div.getTbAddressKanji().setDisabled(false);
+            div.getTbAddressKanji().setReadOnly(false);
+            div.getDdlTsuki().setReadOnly(false);
+            div.getTbKingaku().setReadOnly(false);
+            div.getTbCreateDate().setReadOnly(false);
+            div.getTbTaishoNen().setReadOnly(false);
+            div.getTbNameKana().setReadOnly(false);
+            div.getDdlSex().setReadOnly(false);
+            div.getTbBirthday().setReadOnly(false);
+            div.getTbNameKanji().setReadOnly(false);
+            div.getTbAddressKana().setReadOnly(false);
+            div.getTbAddressKanji().setReadOnly(false);
         }
     }
 

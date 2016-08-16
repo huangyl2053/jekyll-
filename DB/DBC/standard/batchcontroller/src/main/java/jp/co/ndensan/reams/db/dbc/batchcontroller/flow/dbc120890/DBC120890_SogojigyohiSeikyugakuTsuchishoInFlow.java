@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -47,7 +46,6 @@ public class DBC120890_SogojigyohiSeikyugakuTsuchishoInFlow extends BatchFlowBas
     private static final String 取込済ファイル削除 = "deleteReveicedFile";
 
     private static final RString ファイル格納フォルダ名 = new RString("DBC120890");
-    private static final RString 帳票ID = new RString("DBC200087_SogojigyohiSeikyugakuTsuchisho");
 
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
     private FlowEntity flowEntity;
@@ -137,11 +135,8 @@ public class DBC120890_SogojigyohiSeikyugakuTsuchishoInFlow extends BatchFlowBas
     protected IBatchFlowCommand callDoIchiranhyoSakuseiProcess() {
         KohifutanshaDoIchiranhyoSakuseiProcessParameter parameter
                 = new KohifutanshaDoIchiranhyoSakuseiProcessParameter();
-        parameter.setサブ業務コード(SubGyomuCode.DBC介護給付);
-        parameter.set帳票ID(new ReportId(帳票ID));
         parameter.setシステム日付(RDateTime.now());
-        return simpleBatch(SogojigyohiSeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess.class).arguments(parameter).
-                define();
+        return loopBatch(SogojigyohiSeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess.class).arguments(parameter).define();
     }
 
     /**
@@ -153,7 +148,7 @@ public class DBC120890_SogojigyohiSeikyugakuTsuchishoInFlow extends BatchFlowBas
     protected IBatchFlowCommand callDoShoriKekkaListSakuseiProcess() {
         KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter parameter
                 = new KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter();
-        parameter.setエラーリストタイプ(KokuhorenJoho_TorikomiErrorListType.リストタイプ1);
+        parameter.setエラーリストタイプ(KokuhorenJoho_TorikomiErrorListType.リストタイプ0);
         return simpleBatch(KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess.class).arguments(parameter).define();
     }
 

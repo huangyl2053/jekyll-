@@ -47,7 +47,7 @@ public class HikazeiNenkinKensaku {
      * @return ResponseData<HikazeiNenkinKensakuDiv>
      */
     public ResponseData<HikazeiNenkinKensakuDiv> onClick_btnClose(HikazeiNenkinKensakuDiv div) {
-        return ResponseData.of(div).dialogOKClose();
+        return ResponseData.of(div).dialogNGClose();
     }
 
     private HikazeiNenkinKensakuHandler getHandler(HikazeiNenkinKensakuDiv div) {

@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakuoshirasetsuchiteshu
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakuoshirasetsuchiteshutsukigenari.KogakuOshiraseTsuchiTeshutsuKigenAriSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 高額サービス給付のお知らせ通知書（提出期限あり）のソースの編集クラスです。
@@ -17,6 +18,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBC-4770-040 zhujun
  */
 public class KogakuOshiraseTsuchiTeshutsuKigenAriEditor implements IKogakuOshiraseTsuchiTeshutsuKigenAriEditor {
+
+    private static final RString 調整予定金額 = new RString("調整（予定）金額");
+    private static final RString 支給予定金額 = new RString("支給（予定）金額");
 
     private final KogakuOshiraseTsuchiTeshutsuKigenAriEntity target;
 
@@ -45,7 +49,11 @@ public class KogakuOshiraseTsuchiTeshutsuKigenAriEditor implements IKogakuOshira
             source.taishoYM = ReportKomokuEditorUtil.パターン62(target.get申請情報帳票発行一時().getServiceTeikyoYMChohyo());
             // TODO QA.1189あり 利用者負担額と高額支給額は、一時表に存在しない
 //        source.zikoFutanGaku = ReportKomokuEditorUtil.金額1(target.get申請情報帳票発行一時().getRiyoshaFutanGakuGokeiChohyo());
-//        source.ketteiGaku = 
+            if (Decimal.ZERO.compareTo(target.get申請情報帳票発行一時().getGokeiKogakuShikyuGakuChohyo()) > 0) {
+                source.ketteiGaku = 調整予定金額;
+            } else {
+                source.ketteiGaku = 支給予定金額;
+            }
 //        source.shikyuGaku = 
             source.kigenYMD = ReportKomokuEditorUtil.パターン12(target.get申請書提出期限());
             source.remban = target.get連番();

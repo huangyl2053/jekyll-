@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 介護給付費等請求額通知書情報取込・ファイル読込を実行する。
+ * 介護給付費等請求額通知書情報取込・ファイル読込を実行クラスです。
  *
  * @reamsid_L DBC-2480-010 jiangwenkai
  */

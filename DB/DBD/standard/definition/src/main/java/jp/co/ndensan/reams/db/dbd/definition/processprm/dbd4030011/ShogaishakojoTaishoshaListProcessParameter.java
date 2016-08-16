@@ -7,7 +7,11 @@ package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd4030011;
 
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd4030011.ShogaishaKojoTaishoshaListMyBatisParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -85,8 +89,11 @@ public class ShogaishakojoTaishoshaListProcessParameter implements IBatchProcess
      * @return ShogaishaKojoTaishoshaListMyBatisParameter
      */
     public ShogaishaKojoTaishoshaListMyBatisParameter toShogaishaKojoTaishoshaListMyBatisParameter() {
+        ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.未定義);
+        IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey = key.build();
         return new ShogaishaKojoTaishoshaListMyBatisParameter(対象年度, 被保険者番号, 氏名, 認定区分, 認定内容,
-                認知症高齢者の日常生活自立度, 障害高齢者の日常生活自立度, 障がい者手帳, 喪失事由, 喪失日FROM, 喪失日TO, 決定日FROM, 決定日TO, 交付日);
+                認知症高齢者の日常生活自立度, 障害高齢者の日常生活自立度, 障がい者手帳, 喪失事由, 喪失日FROM, 喪失日TO,
+                決定日FROM, 決定日TO, 交付日, 前回非該当者, shikibetsuTaishoPSMSearchKey);
     }
 
 }

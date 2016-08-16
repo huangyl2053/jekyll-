@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
  * 総合事業費等請求額通知書帳票HeaderEditor
@@ -50,20 +51,20 @@ public class SogojigyohiSeikyugakuTsuchishoInHeaderEditor implements ISogojigyoh
                 .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
         source.printTimeStamp = 作成日.concat(RString.HALF_SPACE).concat(作成時);
         source.shinsaYM = doパターン56(帳票出力対象データ.get審査年月());
-        source.hokenshaNo = 帳票出力対象データ.get保険者番号().value();
+        source.hokenshaNo = getColumnValue(帳票出力対象データ.get保険者番号());
         source.hokenshaName = 帳票出力対象データ.get保険者名();
-        if (帳票出力対象データ.get款コード() != NUM) {
+        if (!NUM.equals(帳票出力対象データ.get款コード())) {
             source.kanName = 帳票出力対象データ.get款名();
         } else {
             source.kanName = 総合計;
         }
-        if (帳票出力対象データ.get項コード() != NUM) {
+        if (!NUM.equals(帳票出力対象データ.get項コード())) {
             source.kouName = 帳票出力対象データ.get項名();
         } else {
             source.kouName = RString.EMPTY;
         }
         source.kokuhorenName = 帳票出力対象データ.get国保連合会名();
-        source.shoKisaiHokenshaNo = 帳票出力対象データ.get証記載保険者番号().value();
+        source.shoKisaiHokenshaNo = getColumnValue(帳票出力対象データ.get証記載保険者番号());
 
         return source;
     }
@@ -74,5 +75,12 @@ public class SogojigyohiSeikyugakuTsuchishoInHeaderEditor implements ISogojigyoh
         }
         return 年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+    }
+
+    private RString getColumnValue(IDbColumnMappable entity) {
+        if (null != entity) {
+            return entity.getColumnValue();
+        }
+        return RString.EMPTY;
     }
 }

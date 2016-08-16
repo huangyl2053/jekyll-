@@ -5,28 +5,33 @@
  */
 package jp.co.ndensan.reams.db.dbd.service.core.ninteishojoho;
 
-import jp.co.ndensan.reams.db.dbd.business.core.dbt4030011.NinteishoJohoBusiness;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd4030011.ShogaishakojoTaishoshaListProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4038ShogaishaKoujoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd4030011.NinshoshaDenshiKoinDataEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd4030011.NinteishoJohoEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4038ShogaishaKoujoDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
-import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
-import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.bunshono.BunshoNoFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.bunshono.IBunshoNoFinder;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -41,29 +46,13 @@ public class NinteiShoJohoFinder {
     private static final ReportId 帳票分類ID = ReportIdDBD.DBD100025.getReportId();
     private final DbT4038ShogaishaKoujoDac 障がい者控除dac;
     private final DbT4001JukyushaDaichoDac 受給者台帳dac;
-    private final NinteishoJohoEntity ninteishoJohoentity;
 
     /**
      * コンストラクタです。
      */
-    public NinteiShoJohoFinder() {
+    NinteiShoJohoFinder() {
         障がい者控除dac = InstanceProvider.create(DbT4038ShogaishaKoujoDac.class);
         受給者台帳dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
-        ninteishoJohoentity = new NinteishoJohoEntity();
-    }
-
-    /**
-     * テスト用コンストラクタです。
-     *
-     * @param 受給者台帳dac {@link DbT4001JukyushaDaichoDac}
-     * @param ninteishoJohoentity {@link NinteishoJohoEntity}
-     */
-    NinteiShoJohoFinder(DbT4038ShogaishaKoujoDac 障がい者控除dac, DbT4001JukyushaDaichoDac 受給者台帳dac,
-            NinteishoJohoEntity ninteishoJohoentity) {
-        this.障がい者控除dac = 障がい者控除dac;
-        this.受給者台帳dac = 受給者台帳dac;
-        this.ninteishoJohoentity = ninteishoJohoentity;
-
     }
 
     /**
@@ -98,22 +87,6 @@ public class NinteiShoJohoFinder {
     }
 
     /**
-     * 認証者氏名取得。
-     *
-     * @param reportSourceWriter ReportSourceWriter
-     * @return NinshoshaDenshiKoinDataEntity
-     */
-    public NinshoshaDenshiKoinDataEntity set認証者氏名(ReportSourceWriter reportSourceWriter) {
-        NinshoshaDenshiKoinDataEntity entity = new NinshoshaDenshiKoinDataEntity();
-        NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, 帳票分類ID, FlexibleDate.getNowDate(),
-                NinshoshaDenshikoinshubetsuCode.toValue(NinshoshaDenshikoinshubetsuCode.保険者印.getコード()), reportSourceWriter);
-        entity.set認職者氏名(ninshoshaSource.ninshoshaShimeiKakeru);
-        entity.set電子公印(ninshoshaSource.denshiKoin);
-        return entity;
-
-    }
-
-    /**
      * 障がい者控除と認定年月日取得。
      *
      * @param 被保険者番号 HihokenshaNo
@@ -122,11 +95,12 @@ public class NinteiShoJohoFinder {
     @Transaction
     public NinteishoJohoEntity set障がい者控除と認定年月日(HihokenshaNo 被保険者番号) {
         DbT4001JukyushaDaichoEntity dbT4001entity = 受給者台帳dac.select認定年月日(被保険者番号);
-        DbT4038ShogaishaKoujoEntity dbT4038entity = 障がい者控除dac.selectAll(被保険者番号);
+        DbT4038ShogaishaKoujoEntity dbT4038entity = 障がい者控除dac.selectBy被保険者番号(被保険者番号);
         if (dbT4001entity == null) {
             return null;
         }
         dbT4001entity.initializeMd5();
+        NinteishoJohoEntity ninteishoJohoentity = new NinteishoJohoEntity();
         ninteishoJohoentity.set要介護認定日(dbT4001entity.getNinteiYMD());
         if (dbT4038entity == null) {
             return null;
@@ -134,7 +108,10 @@ public class NinteiShoJohoFinder {
         dbT4038entity.initializeMd5();
         ninteishoJohoentity.set障害理由区分(dbT4038entity.getNinteiKubun());
         ninteishoJohoentity.set障害理由内容(dbT4038entity.getNinteiNaiyo());
-        ninteishoJohoentity.set申告年(new RDate(dbT4038entity.getTaishoNendo().toString()));
+        FlexibleYear 年度 = dbT4038entity.getTaishoNendo();
+        if (年度 != null) {
+            ninteishoJohoentity.set申告年(new RDate(年度.toString()));
+        }
         return ninteishoJohoentity;
     }
 
@@ -146,26 +123,47 @@ public class NinteiShoJohoFinder {
      * @param reportSourceWriter ReportSourceWriter
      * @return NinteishoJohoBusiness
      */
-    public NinteishoJohoBusiness setTarget(NinteishoJohoBusiness target, ShogaishakojoTaishoshaListProcessParameter parameter,
+    public NinteishoJohoEntity setTarget(NinteishoJohoEntity target, ShogaishakojoTaishoshaListProcessParameter parameter,
             ReportSourceWriter reportSourceWriter) {
         target.set文書番号(文書番号取得());
         target.set発行日(parameter.get交付日());
-        target.set申請者(target.getNinteishoJohoEntity().get申請者氏名());
-        target.set申請者住所(target.getNinteishoJohoEntity().get申請者住所());
-        if (target.getNinteishoJohoEntity().get申請者住所() == null && target.getNinteishoJohoEntity().get申請者住所().isEmpty()) {
-            target.set申請者住所(new RStringBuilder().append(target.getNinteishoJohoEntity().getPsmEntity().getJusho().getColumnValue()).
-                    append(target.getNinteishoJohoEntity().getPsmEntity().getBanchi().getColumnValue()).
-                    append(target.getNinteishoJohoEntity().getPsmEntity().getKatagaki().getColumnValue()).toRString());
+        target.set申請者住所(target.get申請者住所());
+        if (target.get申請者住所() == null || target.get申請者住所().isEmpty()) {
+            AtenaJusho 住所 = target.getPsmEntity().getJusho();
+            RString 住所Val = 住所 != null ? 住所.getColumnValue() : RString.EMPTY;
+            AtenaBanchi 番地 = target.getPsmEntity().getBanchi();
+            RString 番地Val = 番地 != null ? 番地.getColumnValue() : RString.EMPTY;
+            Katagaki 方書 = target.getPsmEntity().getKatagaki();
+            RString 方書Val = 方書 != null ? 方書.getColumnValue() : RString.EMPTY;
+            target.set申請者住所(new RStringBuilder().append(住所Val).append(番地Val).append(方書Val).toRString());
         }
-        target.set申請者氏名(target.getNinteishoJohoEntity().get申請者氏名());
-        if (target.getNinteishoJohoEntity().get申請者氏名() == null && target.getNinteishoJohoEntity().get申請者氏名().isEmpty()) {
-            target.set申請者(target.getNinteishoJohoEntity().getPsmEntity().getMeisho().getColumnValue());
-            target.set申請者氏名(target.getNinteishoJohoEntity().getPsmEntity().getMeisho().getColumnValue());
+
+        target.set申請者(target.get申請者氏名());
+        target.set申請者氏名(target.get申請者氏名());
+        if (target.get申請者氏名() == null || target.get申請者氏名().isEmpty()) {
+            AtenaMeisho 被保険者氏名 = target.getPsmEntity().getMeisho();
+            RString 被保険者氏名Val = 被保険者氏名 != null ? 被保険者氏名.getColumnValue() : RString.EMPTY;
+            target.set申請者(被保険者氏名Val);
+            target.set申請者氏名(被保険者氏名Val);
         }
-        target.set対象者住所(target.getNinteishoJohoEntity().getPsmEntity().getJusho().getColumnValue());
-        target.set対象者氏名(target.getNinteishoJohoEntity().getPsmEntity().getMeisho().getColumnValue());
-        target.set対象者生年月日(target.getNinteishoJohoEntity().getPsmEntity().getSeinengappiYMD());
-        target.set対象者性別(target.getNinteishoJohoEntity().getPsmEntity().getSeibetsuCode());
+
+        AtenaJusho 住所 = target.getPsmEntity().getJusho();
+        RString 住所Val = 住所 != null ? 住所.getColumnValue() : RString.EMPTY;
+        target.set対象者住所(住所Val);
+        AtenaMeisho 被保険者氏名 = target.getPsmEntity().getMeisho();
+        RString 被保険者氏名Val = 被保険者氏名 != null ? 被保険者氏名.getColumnValue() : RString.EMPTY;
+        target.set対象者氏名(被保険者氏名Val);
+
+        IKojin ikojin = ShikibetsuTaishoFactory.createKojin(target.getPsmEntity());
+        if (ikojin.is日本人()) {
+            target.set対象者生年月日(new FlexibleDate(target.get対象者生年月日()).wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        } else {
+            target.set対象者生年月日((new FlexibleDate(target.get対象者生年月日()).seireki()
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString()));
+        }
+
+        target.set対象者性別(target.getPsmEntity().getSeibetsuCode());
         NinteishoJohoEntity ninteishoJohoentity = set障がい者控除と認定年月日(parameter.get被保険者番号());
         target.set障害理由区分(ninteishoJohoentity.get障害理由区分());
         target.set障害理由内容(ninteishoJohoentity.get障害理由内容());
