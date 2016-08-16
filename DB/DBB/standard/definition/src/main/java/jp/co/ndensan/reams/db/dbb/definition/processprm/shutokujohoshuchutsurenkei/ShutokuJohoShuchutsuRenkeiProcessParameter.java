@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 所得情報抽出・連携（バッチ）のProcessパラメータです。
  *
- * @reamsid_L DBC-1690-060 sunhui
+ * @reamsid_L DBB-1690-060 sunhui
  */
 @lombok.Getter
 @lombok.Setter
