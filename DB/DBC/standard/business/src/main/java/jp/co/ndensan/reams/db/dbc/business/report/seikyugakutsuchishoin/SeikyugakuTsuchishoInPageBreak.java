@@ -41,10 +41,9 @@ public class SeikyugakuTsuchishoInPageBreak extends PageBreaker<SeikyugakuTsuchi
         boolean flag = false;
         if (!currentSource.getSource().shoKisaiHokenshaNo.equals(nextSource.getSource().shoKisaiHokenshaNo)) {
             flag = true;
-            // TODO QA 内部番号 1241
-        } else if (!currentSource.getSource().kanName.equals(nextSource.getSource().kanName)) {
+        } else if (!currentSource.getSource().kanName.equals(nextSource.getSource().kanCode)) {
             flag = true;
-        } else if (!currentSource.getSource().kouName.equals(nextSource.getSource().kouName)) {
+        } else if (!currentSource.getSource().kouName.equals(nextSource.getSource().kouCode)) {
             flag = true;
         }
         return flag;
