@@ -153,6 +153,7 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
         div.getTyuusyutuHanni().getDdlHakkouTaisyou().setSelectedKey(KEY_1);
         div.getShuturyokuTyouhyou().getDdlSyuturyokuTyouhyou().setSelectedKey(KEY_1);
         div.setTorihikiKinyukikanShitennmei(取引先金融機関支店名称);
+        div.setItakusya(委託者名);
         div.getTyuusyutuJyoukenn().getTxtItakusya().setValue(委託者名);
         div.getTyuusyutuJyoukenn().getTxtItakusyaCode().setValue(委託者コード);
         div.getTxtTorihikiKinyukikan().setValue(取引先金融機関);
@@ -176,9 +177,11 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
             div.getTyuusyutuJyoukenn().getTxtItakusyaCode().setVisible(false);
         }
         if (口座.equals(支払方法)) {
+            div.getTyuusyutuJyoukenn().getTxtItakusya().setValue(div.getItakusya());
             div.getShuturyokuTyouhyou().getDdlSyuturyokuTyouhyou().setDisabled(false);
         } else {
-            div.getTyuusyutuJyoukenn().getTxtItakusya().setDisabled(true);
+            div.getTyuusyutuJyoukenn().getTxtItakusya().setValue(RString.EMPTY);
+            div.getTyuusyutuJyoukenn().getTxtTorihikiKinyukikan().setValue(RString.EMPTY);
             div.getShuturyokuTyouhyou().getDdlSyuturyokuTyouhyou().setSelectedKey(KEY_3);
             div.getShuturyokuTyouhyou().getDdlSyuturyokuTyouhyou().setDisabled(true);
         }
