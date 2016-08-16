@@ -70,7 +70,6 @@ public class TsuchishoJoho642 {
     }
 
     private KokuhorenDataTorikomiBatchParameter setBatchParameter(TsuchishoJoho642Div div) {
-        //TODO QA1119
         if (div.getCcdKokurenJohoTorikomi().get出力順ID() != null) {
             long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
             IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
