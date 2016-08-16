@@ -242,6 +242,11 @@ public final class TokutyoKariSanteiFukaHandler {
         fukaParameter.set出力帳票一覧List(listChange(出力帳票一覧List));
         TokuchoKaishiTsuchishoBatchParameter param = tokuchokarisanteifuka
                 .createTokuchoKariSanteiParameter(fukaParameter);
+        if (div.getTokutyoKariSanteiFukaChohyoHakko().
+                getTokutyoKariTsuchiKobetsuJoho().getTxtTokuKaishiTsuchiHakkoYMD2().getValue() != null) {
+            param.set発行日(new FlexibleDate(div.getTokutyoKariSanteiFukaChohyoHakko().
+                    getTokutyoKariTsuchiKobetsuJoho().getTxtTokuKaishiTsuchiHakkoYMD2().getValue().toDateString()));
+        }
         List<ShuturyokuTyoutuke> 出力帳票一覧 = new ArrayList();
         for (KarisanteiBatchEntity result : param.get出力帳票一覧()) {
             if (result.get出力順ID() == null) {

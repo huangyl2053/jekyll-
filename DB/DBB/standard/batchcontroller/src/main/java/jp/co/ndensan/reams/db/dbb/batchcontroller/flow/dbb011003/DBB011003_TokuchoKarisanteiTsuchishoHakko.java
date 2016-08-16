@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-0790-030 chenaoqi
  */
-public class TokuchoKarisanteiTsuchishoHakkoFlow extends BatchFlowBase<TokuchoKaishiTsuchishoBatchParameter> {
+public class DBB011003_TokuchoKarisanteiTsuchishoHakko extends BatchFlowBase<TokuchoKaishiTsuchishoBatchParameter> {
 
     private static final String システム日時の取得 = "getSystemDate";
     private static final String 計算後情報作成 = "keisangoJohoSakusei";
