@@ -86,13 +86,19 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         if (前年度情報有無) {
             前年度最終期普徴期別介護保険料 = get前年度最終期普徴期別介護保険料(仮算定通知書情報);
         }
-        EditedKojin 編集後個人 = new EditedKojin(仮算定通知書情報.get賦課の情報_更正後().get宛名(), 仮算定通知書情報.get帳票制御共通(), null);
-        EditedAtesaki 編集後宛先 = EditedAtesakiBuilder.create編集後宛先(仮算定通知書情報.get宛先情報(), 仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
+        EditedKojin 編集後個人 = new EditedKojin(仮算定通知書情報.get賦課の情報_更正後().get宛名(),
+                仮算定通知書情報.get帳票制御共通(), 仮算定通知書情報.get地方公共団体());
+        EditedAtesaki 編集後宛先 = EditedAtesakiBuilder
+                .create編集後宛先(仮算定通知書情報.get宛先情報(), 仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
         EditedKoza 編集後口座 = new EditedKoza(仮算定通知書情報.get口座情報(), 仮算定通知書情報.get帳票制御共通());
-        Decimal 普徴納付済額未到来期含まない = get納付済額未到来期含まない(普徴メソッド_収入, 仮算定通知書情報.get普徴納期情報リスト(), 仮算定通知書情報.get収入情報());
-        Decimal 特徴納付済額未到来期含まない = get納付済額未到来期含まない(特徴メソッド_収入, 仮算定通知書情報.get特徴納期情報リスト(), 仮算定通知書情報.get収入情報());
-        Decimal 普徴納付済額未到来期含む = get納付済額未到来期含む(普徴メソッド_収入, 仮算定通知書情報.get普徴納期情報リスト(), 仮算定通知書情報.get収入情報());
-        Decimal 特徴納付済額未到来期含む = get納付済額未到来期含む(特徴メソッド_収入, 仮算定通知書情報.get特徴納期情報リスト(), 仮算定通知書情報.get収入情報());
+        Decimal 普徴納付済額未到来期含まない
+                = get納付済額未到来期含まない(普徴メソッド_収入, 仮算定通知書情報.get普徴納期情報リスト(), 仮算定通知書情報.get収入情報());
+        Decimal 特徴納付済額未到来期含まない
+                = get納付済額未到来期含まない(特徴メソッド_収入, 仮算定通知書情報.get特徴納期情報リスト(), 仮算定通知書情報.get収入情報());
+        Decimal 普徴納付済額未到来期含む
+                = get納付済額未到来期含む(普徴メソッド_収入, 仮算定通知書情報.get普徴納期情報リスト(), 仮算定通知書情報.get収入情報());
+        Decimal 特徴納付済額未到来期含む
+                = get納付済額未到来期含む(特徴メソッド_収入, 仮算定通知書情報.get特徴納期情報リスト(), 仮算定通知書情報.get収入情報());
         Decimal 普徴既に納付すべき額 = 仮算定通知書情報.get賦課の情報_更正前() == null ? Decimal.ZERO
                 : get納付額By賦課情報(普徴メソッド_賦課, 仮算定通知書情報.get賦課の情報_更正前().get賦課情報(),
                         1, new KoseiTsukiHantei().find更正月(RDate.getNowDate()).get期AsInt());
