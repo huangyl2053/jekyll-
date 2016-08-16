@@ -82,10 +82,12 @@ public class JigyohokokuGeppoYoshikiReport extends Report<JigyohokokuNenpoYoshik
                     } else if (横番号_4 == data.get横番号()) {
                         yoshikiData.setList2_4(data.get集計結果値());
                     }
-                } else if (i <= data.get縦番号() && new RString("0301").equals(data.get表番号())) {
-                    setList3Upper(i, data, yoshikiData);
-                } else if (i <= data.get縦番号() && new RString("0302").equals(data.get表番号())) {
-                    setList3Lower(i, data, yoshikiData);
+                } else if (i == 1 && new RString("0301").equals(data.get表番号())) {
+                    setList3Upper(1, data, yoshikiData);
+                    setList3Lower(2, data, yoshikiData);
+                } else if (i == 2 && new RString("0302").equals(data.get表番号())) {
+                    setList3Upper(1, data, yoshikiData);
+                    setList3Lower(2, data, yoshikiData);
                 }
             }
 
