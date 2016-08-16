@@ -21,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KijunShunyugakuTekiyoKetteiBatchParameter extends BatchParameterBase {
+public class DBC100074_KijunShunyugakuTekiyoKetteiTsuchiIchiranParameter extends BatchParameterBase {
 
     private static final String KEY_抽出期間 = "抽出期間";
     private static final String KEY_市町村コード = "市町村コード";

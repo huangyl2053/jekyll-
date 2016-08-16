@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1000074;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kijunshunyugakutekiyokettei.KijunShunyugakuTekiyoKetteiBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.kijunshunyugakutekiyokettei.DBC100074_KijunShunyugakuTekiyoKetteiTsuchiIchiranParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ChushutsuKikan;
 import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.Insho;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000074.TsuuchishoHakkoDiv;
@@ -200,10 +200,10 @@ public class TsuuchishoHakkoHandler {
      * バッチパラメータ
      *
      * @param div TsuuchishoHakkoDiv
-     * @return KijunShunyugakuTekiyoKetteiBatchParameter
+     * @return DBC100074_KijunShunyugakuTekiyoKetteiTsuchiIchiranParameter
      */
-    public KijunShunyugakuTekiyoKetteiBatchParameter setBatchParameter(TsuuchishoHakkoDiv div) {
-        KijunShunyugakuTekiyoKetteiBatchParameter parameter = new KijunShunyugakuTekiyoKetteiBatchParameter();
+    public DBC100074_KijunShunyugakuTekiyoKetteiTsuchiIchiranParameter setBatchParameter(TsuuchishoHakkoDiv div) {
+        DBC100074_KijunShunyugakuTekiyoKetteiTsuchiIchiranParameter parameter = new DBC100074_KijunShunyugakuTekiyoKetteiTsuchiIchiranParameter();
         parameter.set抽出期間(div.getRadChushutsukikan().getSelectedKey());
         parameter.set市町村コード(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード());
         parameter.set市町村名(AssociationFinderFactory.createInstance().getAssociation().get市町村名());

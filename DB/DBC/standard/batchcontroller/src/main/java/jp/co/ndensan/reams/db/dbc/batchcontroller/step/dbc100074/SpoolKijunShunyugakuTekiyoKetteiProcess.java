@@ -76,6 +76,7 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
     private List<RString> 出力順リスト;
     private List<RString> 改頁List;
     private TsuchishoTeikeibunFinder finder;
+    List<TsuchishoTeikeibun> teikeibunList;
     private ITextHenkanRule rule;
     private List<KijunShunyugakuTekiyoKetteiEntity> 基準収入額適用管理List;
     private KijunShunyugakuTekiyoKanriManager 基準収入額適用管理manager;
@@ -83,11 +84,14 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
     private static final ReportId 帳票ID_通知書 = new ReportId("DBC100074_KijunShunyugakuTekiyoKetteiTsuchisho");
     private static final RString ORDER_BY = new RString("order by");
     private static final RString タイトル = new RString("基準収入額適用決定通知書");
-    private static final RString その他 = new RString("その他 ");
-    private static final RString 人 = new RString("人");
-    private static final RString 被保険者名1 = new RString("被保険者名カナ１");
-    private static final RString 被保険者名2 = new RString("被保険者名カナ２");
-    private static final RString 被保険者名3 = new RString("被保険者名カナ３");
+    private static final RString 定数_その他 = new RString("その他 ");
+    private static final RString 定数_人 = new RString("人");
+    private static final RString 定数_被保険者名1 = new RString("被保険者名カナ１");
+    private static final RString 定数_被保険者名2 = new RString("被保険者名カナ２");
+    private static final RString 定数_被保険者名3 = new RString("被保険者名カナ３");
+    private static final RString チェック項目名1 = new RString("hihokenshaNameKana1");
+    private static final RString チェック項目名2 = new RString("hihokenshaNameKana2");
+    private static final RString チェック項目名3 = new RString("hihokenshaNameKana3");
     private static final RString 定数_被保険者番号 = new RString("被保険者番号");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
@@ -114,6 +118,7 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
         改頁項目リスト = new ArrayList<>();
         出力順リスト = new ArrayList<>();
         finder = new TsuchishoTeikeibunFinder();
+        teikeibunList = finder.get通知書定型文パターン(SubGyomuCode.DBC介護給付, 帳票ID_通知書);
         rule = KaigoTextHenkanRuleCreator.createRule(SubGyomuCode.DBC介護給付, 帳票ID_通知書);
         基準収入額適用管理List = new ArrayList<>();
         基準収入額適用管理manager = new KijunShunyugakuTekiyoKanriManager();
@@ -268,7 +273,7 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
         }
         if (INT_3 < 基準収入額適用管理List.size()) {
             int その他の人 = 基準収入額適用管理List.size() - INT_3;
-            基準収入額適用決定通知書Parameter.setその他被保険者(その他.concat(String.valueOf(その他の人)).concat(人));
+            基準収入額適用決定通知書Parameter.setその他被保険者(定数_その他.concat(String.valueOf(その他の人)).concat(定数_人));
         }
         基準収入額適用決定通知書Parameter.setFlag(false);
         is文字切れ(基準収入額適用決定通知書Parameter);
@@ -286,7 +291,6 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
     }
 
     private void set通知文(KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書Parameter) {
-        List<TsuchishoTeikeibun> teikeibunList = finder.get通知書定型文パターン(SubGyomuCode.DBC介護給付, 帳票ID_通知書);
         for (TsuchishoTeikeibun teikeibun : teikeibunList) {
             set通知文１(teikeibun, 基準収入額適用決定通知書Parameter, rule);
             set通知文２(teikeibun, 基準収入額適用決定通知書Parameter, rule);
@@ -419,9 +423,9 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
 
     private enum チェック項目 implements ICheckTarget {
 
-        target1("hihokenshaNameKana1", 被保険者名1.toString(), CheckShubetsu.文字切れ),
-        target2("hihokenshaNameKana2", 被保険者名2.toString(), CheckShubetsu.文字切れ),
-        target3("hihokenshaNameKana3", 被保険者名3.toString(), CheckShubetsu.文字切れ);
+        target1(チェック項目名1.toString(), 定数_被保険者名1.toString(), CheckShubetsu.文字切れ),
+        target2(チェック項目名2.toString(), 定数_被保険者名2.toString(), CheckShubetsu.文字切れ),
+        target3(チェック項目名3.toString(), 定数_被保険者名3.toString(), CheckShubetsu.文字切れ);
 
         private final RString itemName;
         private final RString printName;
