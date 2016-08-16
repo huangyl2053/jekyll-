@@ -211,7 +211,7 @@ public class JuminIdoRendoTennyuManager {
                     処理対象者.getKanaShimei());
             IDbT1001HihokenshaDaichoMapper mapper = mapperProvider.create(IDbT1001HihokenshaDaichoMapper.class);
             List<DbT1001HihokenshaDaichoEntity> 処理対象list = mapper.get処理対象者(paraprm);
-            if (処理対象list == null || 処理対象list.isEmpty()) {
+            if (処理対象list != null || !処理対象list.isEmpty()) {
                 転入処理後Entity.set作成事由(TennyuSakuseiJiyu.別住民コードでの再転入.getコード());
                 return 転入処理後Entity;
             }
