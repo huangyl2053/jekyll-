@@ -50,6 +50,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * ビジネス設計_DBCMNK2001_利用者負担割合判定（service）
@@ -100,6 +101,7 @@ public class RiyoshaFutanWariaiHanteiManager {
      * @param 基準日 FlexibleDate
      * @return RiyoshaFutanWariaiHanteiManagerResult
      */
+    @Transaction
     public RiyoshaFutanWariaiHanteiManagerResult futanWariaiHantei(
             HihokenshaNo 被保険者番号,
             FlexibleYear 年度,
@@ -118,7 +120,7 @@ public class RiyoshaFutanWariaiHanteiManager {
                     createInstance().getTaishoKaishibi(new RYear(年度.toString()));
             List<RString> 対象終了日list = RiyoshaFutanWariaiHantei.
                     createInstance().getTaishoShuryobi(new RYear(年度.toString()));
-            for (int i = 判定基準日list.size() - 1; i >= 0; i--) {
+            for (int i = 判定基準日list.size() - 1; 0 <= i; i--) {
                 List<SetaiinShikibetsuCd> 世帯員識別コード情報list = SetaiinFinder.createInstance().
                         get世帯員識別コードBy被保番号(被保険者番号, new FlexibleDate(判定基準日list.get(i)));
                 HihokenshaDaicho 被保険者台帳 = get被保険者台帳の取得(
@@ -161,18 +163,20 @@ public class RiyoshaFutanWariaiHanteiManager {
                             new FlexibleDate(判定基準日list.get(i)));
                 }
                 HanteiTaishoshaTempEntity 判定対象者Temp = new HanteiTaishoshaTempEntity();
-                get判定対象者Temp(
-                        被保険者番号, 介護所得情報.get(0).get世帯コード(),
-                        被保険者台帳, 受給者台帳.get(0), 介護所得情報.get(0), 総合事業対象者.get(0),
-                        判定対象者Temp, jukyushaDaicholist, sogoJigyoTaishoshalist, 基準日時点で受給者台帳.get(0));
-                FutanWariaiHanteiRelateEntity entity = new FutanWariaiHanteiRelateEntity(
-                        判定対象者Temp, 生活保護該当情報Temp, 介護所得情報, new FlexibleDate(判定基準日list.get(i)));
-                FutanWariaiHanteiResult 負担割合判定の結果
-                        = RiyoshaFutanWariaiHantei.createInstance().futanWariaiHantei(entity);
                 RiyoshaFutanWariaiMeisaiTempEntity 利用者負担割合明細Temp = new RiyoshaFutanWariaiMeisaiTempEntity();
-                get利用者負担割合明細Temp(被保険者番号, 被保険者台帳, 負担割合判定の結果, 介護所得情報.get(0),
-                        介護所得情報.get(0).get世帯コード(), new FlexibleDate(判定基準日list.get(i)),
-                        生活保護該当情報Temp, 判定対象者Temp, 利用者負担割合明細Temp);
+                if (介護所得情報 != null && !介護所得情報.isEmpty() && 受給者台帳 != null && 受給者台帳.isEmpty()) {
+                    get判定対象者Temp(
+                            被保険者番号, 介護所得情報.get(0).get世帯コード(),
+                            被保険者台帳, 受給者台帳.get(0), 介護所得情報.get(0), 総合事業対象者.get(0),
+                            判定対象者Temp, jukyushaDaicholist, sogoJigyoTaishoshalist, 基準日時点で受給者台帳.get(0));
+                    FutanWariaiHanteiRelateEntity entity = new FutanWariaiHanteiRelateEntity(
+                            判定対象者Temp, 生活保護該当情報Temp, 介護所得情報, new FlexibleDate(判定基準日list.get(i)));
+                    FutanWariaiHanteiResult 負担割合判定の結果
+                            = RiyoshaFutanWariaiHantei.createInstance().futanWariaiHantei(entity);
+                    get利用者負担割合明細Temp(被保険者番号, 被保険者台帳, 負担割合判定の結果, 介護所得情報.get(0),
+                            介護所得情報.get(0).get世帯コード(), new FlexibleDate(判定基準日list.get(i)),
+                            生活保護該当情報Temp, 判定対象者Temp, 利用者負担割合明細Temp);
+                }
                 RiyoshaFutanWariaiKonkyoTempEntity 利用者負担割合根拠Temp
                         = new RiyoshaFutanWariaiKonkyoTempEntity();
                 get利用者負担割合根拠Temp(年度, 被保険者番号, new FlexibleDate(判定基準日list.get(i)),
@@ -184,7 +188,9 @@ public class RiyoshaFutanWariaiHanteiManager {
             List<RiyoshaFutanWariaiMeisaiTempEntity> 利用者負担割合明細情報 = RiyoshaFutanWariaiHantei.
                     createInstance().futanWariaiHanteiMerge(利用者負担割合明細Tempのマージデータ, 年度);
             DbT3113RiyoshaFutanWariaiEntity 利用者負担割合entity = new DbT3113RiyoshaFutanWariaiEntity();
-            get利用者負担割合entity(年度, 被保険者番号, 利用者負担割合entity, 利用者負担割合明細情報.get(0));
+            if (利用者負担割合明細情報 != null && !利用者負担割合明細情報.isEmpty()) {
+                get利用者負担割合entity(年度, 被保険者番号, 利用者負担割合entity, 利用者負担割合明細情報.get(0));
+            }
             判定結果.set利用者負担割合entity(利用者負担割合entity);
             List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 利用者負担割合明細list
                     = get利用者負担割合明細list(年度, 被保険者番号, 利用者負担割合明細情報);
@@ -197,7 +203,9 @@ public class RiyoshaFutanWariaiHanteiManager {
             RiyoshaFutanWariaiMeisai 現在の利用者負担割合明細 = RiyoshaFutanWariaiMeisaiManager.
                     createInstance().get利用者負担割合明細(利用者負担割合明細検索条件);
             //TODO QA1177
-            判定結果.set判定区分(get判定区分(現在の利用者負担割合明細, 利用者負担割合明細list.get(0)));
+            if (利用者負担割合明細list != null && !利用者負担割合明細list.isEmpty()) {
+                判定結果.set判定区分(get判定区分(現在の利用者負担割合明細, 利用者負担割合明細list.get(0)));
+            }
         }
         return 判定結果;
     }
