@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBB-5722-030 xuhao
  */
-public class DBB901002_NendoKirikaeFlow extends BatchFlowBase<NendoKirikaeBatchParameter> {
+public class DBB901002_NendoKirikae extends BatchFlowBase<NendoKirikaeBatchParameter> {
 
     private static final String 処理日付管理マスタ年度切替 = "inset処理日付管理マスタ";
     private static final String 徴収方法マスタ年度切替 = "inset徴収方法マスタ";
