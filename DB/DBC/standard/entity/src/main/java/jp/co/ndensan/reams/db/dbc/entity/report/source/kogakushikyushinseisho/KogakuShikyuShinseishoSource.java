@@ -64,4 +64,34 @@ public class KogakuShikyuShinseishoSource implements IReportSource {
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+
+    /**
+     * KogakuShikyuShinseishoSourceのENUM
+     */
+    public enum DBC100068SourceFields {
+
+        teikyoYM,
+        hakkoubi,
+        hihokenshaNameKana,
+        hokenshaNo,
+        hihokenshaName,
+        hihokenshaNo,
+        seibetsu,
+        birthYMD,
+        kojinNo,
+        hihokenJusho,
+        telNo,
+        ninshoshaYakushokuMei,
+        chuiTitle,
+        chuibun,
+        ginko,
+        honten,
+        shinkin,
+        shiten,
+        shinkumi,
+        shuccho,
+        nokyo,
+        shisho,
+        remban
+    }
 }
