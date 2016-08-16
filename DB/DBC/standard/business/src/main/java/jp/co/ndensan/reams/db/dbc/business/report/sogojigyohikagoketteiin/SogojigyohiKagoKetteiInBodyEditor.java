@@ -35,7 +35,7 @@ public class SogojigyohiKagoKetteiInBodyEditor implements ISogojigyohiKagoKettei
      *
      * @param 帳票出力対象データ SogojigyohiKagoKetteiInEntity
      * @param 集計Flag boolean
-     * @param no
+     * @param no int
      */
     public SogojigyohiKagoKetteiInBodyEditor(SogojigyohiKagoKetteiInEntity 帳票出力対象データ,
             boolean 集計Flag, int no) {
@@ -46,9 +46,10 @@ public class SogojigyohiKagoKetteiInBodyEditor implements ISogojigyohiKagoKettei
 
     @Override
     public SogojigyohiKagoKetteiInSource edit(SogojigyohiKagoKetteiInSource source) {
-        edit明細(source);
         if (集計Flag) {
             edit集計(source);
+        } else {
+            edit明細(source);
         }
         return source;
     }

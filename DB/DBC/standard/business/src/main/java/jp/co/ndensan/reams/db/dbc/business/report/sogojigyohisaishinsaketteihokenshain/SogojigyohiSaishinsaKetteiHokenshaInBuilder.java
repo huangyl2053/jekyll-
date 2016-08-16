@@ -20,7 +20,7 @@ public class SogojigyohiSaishinsaKetteiHokenshaInBuilder implements ISogojigyohi
     /**
      * コンストラクタです
      *
-     * @param editor
+     * @param editor ISogojigyohiSaishinsaKetteiHokenshaInEditor
      */
     public SogojigyohiSaishinsaKetteiHokenshaInBuilder(ISogojigyohiSaishinsaKetteiHokenshaInEditor editor) {
         this.editor = editor;
