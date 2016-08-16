@@ -116,7 +116,7 @@ public class JimuShinsakaishiryoBusiness {
      * @return shinsakaiIinJohoList1
      */
     public RString getshinsakaiIinJohoList1() {
-        if (0 < shinsakaiIinJohoList.size()) {
+        if (shinsakaiIinJohoList != null && 0 < shinsakaiIinJohoList.size()) {
             return shinsakaiIinJohoList.get(0).getShinsakaiIinShimei().value();
         }
         return RString.EMPTY;
@@ -128,7 +128,7 @@ public class JimuShinsakaishiryoBusiness {
      * @return shinsakaiIinJohoList2
      */
     public RString getshinsakaiIinJohoList2() {
-        if (1 < shinsakaiIinJohoList.size()) {
+        if (shinsakaiIinJohoList != null && 1 < shinsakaiIinJohoList.size()) {
             return shinsakaiIinJohoList.get(1).getShinsakaiIinShimei().value();
         }
         return RString.EMPTY;
@@ -140,7 +140,7 @@ public class JimuShinsakaishiryoBusiness {
      * @return shinsakaiIinJohoList3
      */
     public RString getshinsakaiIinJohoList3() {
-        if (2 < shinsakaiIinJohoList.size()) {
+        if (shinsakaiIinJohoList != null && 2 < shinsakaiIinJohoList.size()) {
             return shinsakaiIinJohoList.get(2).getShinsakaiIinShimei().value();
         }
         return RString.EMPTY;
@@ -152,7 +152,7 @@ public class JimuShinsakaishiryoBusiness {
      * @return shinsakaiIinJohoList4
      */
     public RString getshinsakaiIinJohoList4() {
-        if (SIZE_3 < shinsakaiIinJohoList.size()) {
+        if (shinsakaiIinJohoList != null && SIZE_3 < shinsakaiIinJohoList.size()) {
             return shinsakaiIinJohoList.get(SIZE_3).getShinsakaiIinShimei().value();
         }
         return RString.EMPTY;
@@ -164,7 +164,7 @@ public class JimuShinsakaishiryoBusiness {
      * @return shinsakaiIinJohoList5
      */
     public RString getshinsakaiIinJohoList5() {
-        if (SIZE_4 < shinsakaiIinJohoList.size()) {
+        if (shinsakaiIinJohoList != null && SIZE_4 < shinsakaiIinJohoList.size()) {
             return shinsakaiIinJohoList.get(SIZE_4).getShinsakaiIinShimei().value();
         }
         return RString.EMPTY;
@@ -176,7 +176,7 @@ public class JimuShinsakaishiryoBusiness {
      * @return shinsakaiIinJohoList6
      */
     public RString getshinsakaiIinJohoList6() {
-        if (SIZE_5 < shinsakaiIinJohoList.size()) {
+        if (shinsakaiIinJohoList != null && SIZE_5 < shinsakaiIinJohoList.size()) {
             return shinsakaiIinJohoList.get(SIZE_5).getShinsakaiIinShimei().value();
         }
         return RString.EMPTY;
@@ -188,7 +188,7 @@ public class JimuShinsakaishiryoBusiness {
      * @return shinsakaiIinJohoList7
      */
     public RString getshinsakaiIinJohoList7() {
-        if (SIZE_6 < shinsakaiIinJohoList.size()) {
+        if (shinsakaiIinJohoList != null && SIZE_6 < shinsakaiIinJohoList.size()) {
             return shinsakaiIinJohoList.get(SIZE_6).getShinsakaiIinShimei().value();
         }
         return RString.EMPTY;
@@ -200,7 +200,7 @@ public class JimuShinsakaishiryoBusiness {
      * @return shinsakaiIinJohoList8
      */
     public RString getshinsakaiIinJohoList8() {
-        if (SIZE_7 < shinsakaiIinJohoList.size()) {
+        if (shinsakaiIinJohoList != null && SIZE_7 < shinsakaiIinJohoList.size()) {
             return shinsakaiIinJohoList.get(SIZE_7).getShinsakaiIinShimei().value();
         }
         return RString.EMPTY;
@@ -393,7 +393,8 @@ public class JimuShinsakaishiryoBusiness {
         RString 一次判定結果 = RString.EMPTY;
         RString 一次判定結果_認知症加算 = RString.EMPTY;
         RStringBuilder builder = new RStringBuilder();
-        if (一次判定結果コード != null && !一次判定結果コード.isEmpty()) {
+        if (一次判定結果コード != null && !一次判定結果コード.isEmpty()
+                && 厚労省IF識別コード != null && !厚労省IF識別コード.isEmpty()) {
             if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード.value())) {
                 一次判定結果 = YokaigoJotaiKubun99.toValue(一次判定結果コード.getColumnValue()).get名称();
             } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード.value())) {
@@ -405,7 +406,8 @@ public class JimuShinsakaishiryoBusiness {
                 一次判定結果 = YokaigoJotaiKubun09.toValue(一次判定結果コード.getColumnValue()).get名称();
             }
         }
-        if (一次判定結果コード_認知症加算 != null && !一次判定結果コード_認知症加算.isEmpty()) {
+        if (一次判定結果コード_認知症加算 != null && !一次判定結果コード_認知症加算.isEmpty()
+                && 厚労省IF識別コード != null && !厚労省IF識別コード.isEmpty()) {
             if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード.value())) {
                 一次判定結果_認知症加算 = YokaigoJotaiKubun99.toValue(一次判定結果コード_認知症加算.getColumnValue()).get名称();
             } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード.value())) {
@@ -417,9 +419,16 @@ public class JimuShinsakaishiryoBusiness {
                 一次判定結果_認知症加算 = YokaigoJotaiKubun09.toValue(一次判定結果コード_認知症加算.getColumnValue()).get名称();
             }
         }
-        return builder.append(一次判定結果)
-                .append("→")
-                .append(一次判定結果_認知症加算).toRString();
+        if (!RString.isNullOrEmpty(一次判定結果) && !RString.isNullOrEmpty(一次判定結果_認知症加算)) {
+            return builder.append(一次判定結果)
+                    .append("→")
+                    .append(一次判定結果_認知症加算).toRString();
+        } else if (RString.isNullOrEmpty(一次判定結果) && !RString.isNullOrEmpty(一次判定結果_認知症加算)) {
+            return builder.append(一次判定結果_認知症加算).toRString();
+        } else if (!RString.isNullOrEmpty(一次判定結果) && RString.isNullOrEmpty(一次判定結果_認知症加算)) {
+            return builder.append(一次判定結果).toRString();
+        }
+        return RString.EMPTY;
     }
 
     private RString get開催年月日() {
