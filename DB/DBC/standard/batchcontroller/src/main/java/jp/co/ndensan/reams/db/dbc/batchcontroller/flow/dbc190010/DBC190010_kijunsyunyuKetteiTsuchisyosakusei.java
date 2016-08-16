@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc100074;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc190010;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc100074.SpoolKijunShunyugakuTekiyoKetteiProcess;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kijunshunyugakutekiyokettei.DBC100074_KijunShunyugakuTekiyoKetteiTsuchiIchiranParameter;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc190010.SpoolKijunShunyugakuTekiyoKetteiProcess;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.kijunshunyugakutekiyokettei.DBC190010_kijunsyunyuKetteiTsuchisyosakuseiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kijunshunyugakutekiyokettei.SpoolKijunShunyugakuTekiyoKetteiProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -17,8 +17,8 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBC-4610-030 xuhao
  */
-public class DBC100074_KijunShunyugakuTekiyoKetteiTsuchiIchiranFlow
-        extends BatchFlowBase<DBC100074_KijunShunyugakuTekiyoKetteiTsuchiIchiranParameter> {
+public class DBC190010_kijunsyunyuKetteiTsuchisyosakusei
+        extends BatchFlowBase<DBC190010_kijunsyunyuKetteiTsuchisyosakuseiParameter> {
 
     private static final String 帳票発行処理 = "spoolKijunShunyugakuTekiyoKettei";
 
