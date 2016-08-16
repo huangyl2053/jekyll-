@@ -272,6 +272,10 @@ public class NinteiChosaKekkaTorikomiOcr {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(), new RString("2"));
             ninteichosahyoGaikyoChosa = ninteichosahyoGaikyoChosa.createBuilderForEdit().set厚労省IF識別コード(
                     new Code(data.get厚労省IF識別コード())).build();
+            ninteichosahyoGaikyoChosa = ninteichosahyoGaikyoChosa.createBuilderForEdit().set認定調査依頼区分コード(data
+                    .get認定調査依頼区分コード()).build();
+            ninteichosahyoGaikyoChosa = ninteichosahyoGaikyoChosa.createBuilderForEdit().set認定調査回数(data
+                    .get認定調査回数()).build();
             if (!RString.isNullOrEmpty(data.get実施日時())) {
                 ninteichosahyoGaikyoChosa = ninteichosahyoGaikyoChosa.createBuilderForEdit().set認定調査実施年月日(
                         new FlexibleDate(data.get実施日時())).build();
@@ -341,6 +345,8 @@ public class NinteiChosaKekkaTorikomiOcr {
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(), 1);
             ninteichosahyoServiceJokyoFlag = ninteichosahyoServiceJokyoFlag.createBuilderForEdit().setサービスの状況フラグ(実施場所_在宅
                     .equals(data.get住宅改修のあり_なし())).build();
+            ninteichosahyoServiceJokyoFlag = ninteichosahyoServiceJokyoFlag.createBuilderForEdit().set厚労省IF識別コード(new Code(data
+                    .get厚労省IF識別コード())).build();
         } else {
             ninteichosahyoServiceJokyoFlag = ninteichosahyoServiceJokyoFlag.createBuilderForEdit().setサービスの状況フラグ(実施場所_在宅
                     .equals(data.get住宅改修のあり_なし())).build().modifiedModel();
@@ -424,6 +430,8 @@ public class NinteiChosaKekkaTorikomiOcr {
                 csvData.setイメージ共有ファイルID(関連データ.getイメージ共有ファイルID());
                 csvData.set認定調査委託先コード(関連データ.get認定調査委託先コード());
                 csvData.set認定調査員コード(関連データ.get認定調査員コード());
+                csvData.set認定調査依頼区分コード(関連データ.get認定調査依頼区分コード());
+                csvData.set認定調査回数(関連データ.get認定調査回数());
                 dB更新用.add(csvData);
             }
         }
