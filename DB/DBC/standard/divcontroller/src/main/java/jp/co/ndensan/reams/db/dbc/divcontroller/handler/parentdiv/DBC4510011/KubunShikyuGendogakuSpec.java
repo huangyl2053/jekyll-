@@ -55,8 +55,7 @@ public enum KubunShikyuGendogakuSpec implements IPredicate<KubunShikyuGendogakuD
                 }
                 if (!(isYMCompare(new RDate(item.getDefaultDataName2().toString()),
                         new RDate(item.getDefaultDataName3().toString()), startDate, endDate))) {
-                    //return Boolean.FALSE;
-                    return Boolean.TRUE;
+                    return Boolean.FALSE;
                 }
             }
             return Boolean.TRUE;
