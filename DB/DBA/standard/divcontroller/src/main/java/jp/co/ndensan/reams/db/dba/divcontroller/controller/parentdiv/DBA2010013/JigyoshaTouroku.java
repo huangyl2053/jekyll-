@@ -228,7 +228,9 @@ public class JigyoshaTouroku {
             KaigoJogaiTokureiParameter parameter
                 = KaigoJogaiTokureiParameter.createParam(事業者番号, yukoKaishiYMD, yukoShuryoYMD, null);
             if (!manager.checkKikanGorisei(parameter)) {
-                throw new ApplicationException(UrErrorMessages.期間が不正.getMessage());
+                ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+                validationMessages.add(new ValidationMessageControlPair(JigyoshaTourokuErrorMessage.期間が不正));
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }        
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
@@ -239,15 +241,16 @@ public class JigyoshaTouroku {
                 RealInitialLocker.release(前排他ロックキー);
                 return ResponseData.of(div).setState(DBA2010013StateName.完了状態);
             }
-        } else if (状態_修正.equals(初期_状態)) {
-            
+        } else if (状態_修正.equals(初期_状態)) {            
             KaigoJigyosha 旧事業者情報 = ViewStateHolder.get(ViewStateKeys.事業者登録情報, KaigoJigyosha.class);
             FlexibleDate yukoKaishiYMD = div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().getValue();
             FlexibleDate yukoShuryoYMD = div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().getValue();
             KaigoJogaiTokureiParameter parameter = KaigoJogaiTokureiParameter.createParam(
                 旧事業者情報.get事業者番号().getColumnValue(), yukoKaishiYMD, yukoShuryoYMD, null);
             if (!manager.checkKikanGorisei(parameter)) {
-                throw new ApplicationException(UrErrorMessages.期間が不正.getMessage());
+                ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+                validationMessages.add(new ValidationMessageControlPair(JigyoshaTourokuErrorMessage.期間が不正));
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
@@ -546,7 +549,8 @@ public class JigyoshaTouroku {
 
     private enum JigyoshaTourokuErrorMessage implements IValidationMessage {
 
-        排他_他のユーザが使用中(UrErrorMessages.排他_他のユーザが使用中);
+        排他_他のユーザが使用中(UrErrorMessages.排他_他のユーザが使用中),
+        期間が不正(UrErrorMessages.期間が不正);
         private final Message message;
 
         private JigyoshaTourokuErrorMessage(IMessageGettable message) {
