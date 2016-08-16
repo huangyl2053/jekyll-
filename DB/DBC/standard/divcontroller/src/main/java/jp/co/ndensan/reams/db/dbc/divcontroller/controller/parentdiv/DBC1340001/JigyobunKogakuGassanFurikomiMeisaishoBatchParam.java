@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1340001.Jig
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1340001.JigyobunKogakuGassanFurikomiMeisaishoBatchParamValidationHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -20,8 +19,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @reamsid_L DBC-4870-010 zhouchuanlin
  */
 public class JigyobunKogakuGassanFurikomiMeisaishoBatchParam {
-
-    private static final RString 発行済のみ = new RString("発行済のみ");
 
     /**
      * 画面初期化です。
@@ -47,6 +44,7 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParam {
      */
     public ResponseData<JigyobunKogakuGassanFurikomiMeisaishoBatchParamDiv> onChange_radSiharaihouhou(JigyobunKogakuGassanFurikomiMeisaishoBatchParamDiv div) {
         getHandler(div).initialize();
+        getHandler(div).onChangeDdlHakkouTaisyou(div);
         return ResponseData.of(div).respond();
     }
 
@@ -57,11 +55,7 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParam {
      * @return ResponseData
      */
     public ResponseData<JigyobunKogakuGassanFurikomiMeisaishoBatchParamDiv> onChange_ddlHakkouTaisyou(JigyobunKogakuGassanFurikomiMeisaishoBatchParamDiv div) {
-        if (発行済のみ.equals(div.getTyuusyutuHanni().getDdlHakkouTaisyou().getSelectedValue())) {
-            div.getTyuusyutuHanni().getTxt().setDisabled(false);
-        } else {
-            div.getTyuusyutuHanni().getTxt().setDisabled(true);
-        }
+        getHandler(div).onChangeDdlHakkouTaisyou(div);
         return ResponseData.of(div).respond();
     }
 
