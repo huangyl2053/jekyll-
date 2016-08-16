@@ -26,14 +26,13 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 総合事業費（経過措置）請求額通知書情報取込のバッチ処理フロー
+ * 総合事業費（経過措置）請求額通知書情報取込のバッチ処理フロークラスです
  *
  * @reamsid_L DBC-2480-011 jiangxiaolong
  */
@@ -48,7 +47,6 @@ public class DBC120250_SogojigyohiSeikyugakuTsuchishoKeikaSochiInFlow
     private static final String 一覧表作成 = "doIchiranhyoSakusei";
 
     private static final RString ファイル格納フォルダ名 = new RString("DBC120250");
-    private static final RString 帳票ID = new RString("DBC200068_SogojigyohiSeikyugakuTsuchishoKeikaSochi");
 
     private FlowEntity flowEntity;
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
@@ -85,7 +83,7 @@ public class DBC120250_SogojigyohiSeikyugakuTsuchishoKeikaSochiInFlow
     }
 
     /**
-     * ファイル取得です。
+     * ファイル取得メソッドです。
      *
      * @return KokuhorenkyoutsuGetFileProcess
      */
@@ -98,7 +96,7 @@ public class DBC120250_SogojigyohiSeikyugakuTsuchishoKeikaSochiInFlow
     }
 
     /**
-     * CSVファイル取込です。
+     * CSVファイル取込メソッドです。
      *
      * @return SogojigyohiSeikyugakuTsuchishoKeikaSochiReadCsvFileProcess
      */
@@ -111,7 +109,7 @@ public class DBC120250_SogojigyohiSeikyugakuTsuchishoKeikaSochiInFlow
     }
 
     /**
-     * 国保連インタフェース管理更新です。
+     * 国保連インタフェース管理更新メソッドです。
      *
      * @return KokuhorenkyoutsuDoInterfaceKanriKousinProcess
      */
@@ -128,23 +126,19 @@ public class DBC120250_SogojigyohiSeikyugakuTsuchishoKeikaSochiInFlow
     }
 
     /**
-     * 一覧表作成です。
+     * 一覧表作成メソッドです。
      *
      * @return KohifutanshaDoIchiranhyoSakuseiProcess
      */
     @Step(一覧表作成)
     protected IBatchFlowCommand callDoIchiranhyoSakuseiProcess() {
-        SogojigyohiSeiDoIchiranhyoSakuseiProcessParameter parameter
-                = new SogojigyohiSeiDoIchiranhyoSakuseiProcessParameter();
-        parameter.setサブ業務コード(SubGyomuCode.DBC介護給付);
-        parameter.set帳票ID(new ReportId(帳票ID));
+        SogojigyohiSeiDoIchiranhyoSakuseiProcessParameter parameter = new SogojigyohiSeiDoIchiranhyoSakuseiProcessParameter();
         parameter.setシステム日付(RDateTime.now());
-        return simpleBatch(SogojigyohiSeiDoIchiranhyoSakuseiProcess.class).arguments(parameter).
-                define();
+        return loopBatch(SogojigyohiSeiDoIchiranhyoSakuseiProcess.class).arguments(parameter).define();
     }
 
     /**
-     * 処理結果リスト作成です。
+     * 処理結果リスト作成メソッドです。
      *
      * @return KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess
      */
@@ -157,7 +151,7 @@ public class DBC120250_SogojigyohiSeikyugakuTsuchishoKeikaSochiInFlow
     }
 
     /**
-     * 取込済ファイル削除です。
+     * 取込済ファイル削除メソッドです。
      *
      * @return KokuhorenkyoutsuDeleteReveicedFileProcess
      */
