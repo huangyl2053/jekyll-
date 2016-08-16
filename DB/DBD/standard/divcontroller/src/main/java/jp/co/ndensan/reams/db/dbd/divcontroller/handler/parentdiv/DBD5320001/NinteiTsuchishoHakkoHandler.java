@@ -13,16 +13,16 @@ import jp.co.ndensan.reams.db.dbd.business.core.outputorderkey.ShiharaiHohoHenko
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiTsutisho;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiTsutishoBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiTsutishoIkkatsuHakkoJoho;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd532001.NinteiKekkaTsuchishoJoho;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd550001.NinteikyakkaTsuchishoJoho;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd550002.ServiceHenkoTsuchishoJoho;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd550003.YokaigodoHenkoTsuchishoJoho;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd5320001.ShutsuryokuTaishoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd5320001.TsutishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.yokaigoninteijoho.YokaigoNinteiTsutishoMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5320001.NinteiTsuchishoHakkoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5320001.dgTaishoshaIchiran_Row;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.ninteikekkatshuchishohakko.NinteiKekkaTsuchishoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.ninteikekkatshuchishohakko.NinteikyakkaTsuchishoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.ninteikekkatshuchishohakko.ServiceHenkoTsuchishoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.ninteikekkatshuchishohakko.YokaigodoHenkoTsuchishoEntity;
 import jp.co.ndensan.reams.db.dbd.service.core.yokaigoninteijoho.YokaigoNinteiTsutishoManager;
 import jp.co.ndensan.reams.db.dbd.service.report.dbd532001.YokaigoNinteiKekkaTshuchishoPrintService;
 import jp.co.ndensan.reams.db.dbd.service.report.dbd550001.YokaigoNinteiKyakkaTshuchishoPrintService;
@@ -64,7 +64,6 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportprinthistory.ChohyoHakkoRirekiJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportprinthistory.ChohyoHakkoRirekiSearchDefault;
-import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
@@ -914,7 +913,7 @@ public class NinteiTsuchishoHakkoHandler {
         return new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBD介護受給, パネル.getChohyoId());
     }
 
-    private SofubutsuAtesakiSource get送付物宛先情報(ChohyoSeigyoKyotsu 帳票共通情報) {
+    private EditedAtesaki get送付物宛先情報(ChohyoSeigyoKyotsu 帳票共通情報) {
         IAtesakiGyomuHanteiKey key = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給);
         AtesakiPSMSearchKeyBuilder builder = new AtesakiPSMSearchKeyBuilder(key);
         builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
@@ -926,15 +925,7 @@ public class NinteiTsuchishoHakkoHandler {
         builder.set法人代表者利用区分(HojinDaihyoshaRiyoKubun.利用しない);
         IAtesaki 宛先 = ShikibetsuTaishoService.getAtesakiFinder().get宛先(builder.build());
 
-        EditedAtesaki 編集後宛先 = EditedAtesakiBuilder.create編集後宛先(宛先, 地方公共団体, 帳票共通情報);
-        SofubutsuAtesakiSource sofubutsuAtesakiSource;
-        try {
-            sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
-        } catch (Exception e) {
-            sofubutsuAtesakiSource = new SofubutsuAtesakiSource();
-        }
-
-        return sofubutsuAtesakiSource;
+        return EditedAtesakiBuilder.create編集後宛先(宛先, 地方公共団体, 帳票共通情報);
     }
 
     private RString get通知文情報通知文(PanelType パネル, int パターン番号, int 項目番号) {
@@ -1020,13 +1011,11 @@ public class NinteiTsuchishoHakkoHandler {
         }
     }
 
-    private NinteiKekkaTsuchishoEntity create個別発行認定結果通知書データ(PanelType パネル, YokaigoNinteiTsutisho 画面選択データ) {
+    private NinteiKekkaTsuchishoJoho create個別発行認定結果通知書データ(PanelType パネル, YokaigoNinteiTsutisho 画面選択データ) {
         ChohyoSeigyoKyotsu 帳票共通情報 = get帳票共通情報(パネル);
         FlexibleDate 発行日 = div.getTxtNinteiKekkaSakuseiDay().getValue();
 
-        SofubutsuAtesakiSource 送付物宛先情報 = get送付物宛先情報(帳票共通情報);
-
-        NinteiKekkaTsuchishoEntity printEntity = new NinteiKekkaTsuchishoEntity();
+        NinteiKekkaTsuchishoJoho printEntity = new NinteiKekkaTsuchishoJoho();
         printEntity.setHakkoYMD(発行日);
         printEntity.setBunshoNo(div.getCcdKobetsuNinteiKekkaBunshoBango().get文書番号());
         printEntity.setTitle(getタイトル(ConfigNameDBA.要介護認定結果通知書));
@@ -1065,46 +1054,15 @@ public class NinteiTsuchishoHakkoHandler {
         printEntity.setTsuchibun6(get通知文情報通知文(パネル, 通知文_パターン番号_4, 通知文_項目番号_3));
         printEntity.setTsuchibun7(get通知文情報通知文(パネル, 通知文_パターン番号_4, 通知文_項目番号_4));
 
-        printEntity.setYubinNo(送付物宛先情報.yubinNo);
-        printEntity.setGyoseiku(送付物宛先情報.gyoseiku);
-        printEntity.setJushoText(送付物宛先情報.jushoText);
-        printEntity.setJusho1(送付物宛先情報.jusho1);
-        printEntity.setJusho2(送付物宛先情報.jusho2);
-        printEntity.setJusho3(送付物宛先情報.jusho3);
-        printEntity.setKatagakiText(送付物宛先情報.katagakiText);
-        printEntity.setKatagaki1(送付物宛先情報.katagaki1);
-        printEntity.setKatagaki2(送付物宛先情報.katagaki2);
-        printEntity.setKatagakiSmall1(送付物宛先情報.katagakiSmall1);
-        printEntity.setKatagakiSmall2(送付物宛先情報.katagakiSmall2);
-        printEntity.setDainoKubunMei(送付物宛先情報.dainoKubunMei);
-        printEntity.setShimeiText(送付物宛先情報.shimeiText);
-        printEntity.setShimei1(送付物宛先情報.shimei1);
-        printEntity.setShimei2(送付物宛先情報.shimei2);
-        printEntity.setShimeiSmall1(送付物宛先情報.shimeiSmall1);
-        printEntity.setShimeiSmall2(送付物宛先情報.shimeiSmall2);
-        printEntity.setSamabunShimeiText(送付物宛先情報.samabunShimeiText);
-        printEntity.setSamabunShimei1(送付物宛先情報.samabunShimei1);
-        printEntity.setSamabunShimei2(送付物宛先情報.samabunShimei2);
-        printEntity.setSamabunShimeiSmall1(送付物宛先情報.samabunShimeiSmall1);
-        printEntity.setSamabunShimeiSmall2(送付物宛先情報.samabunShimeiSmall2);
-        printEntity.setMeishoFuyo1(送付物宛先情報.meishoFuyo1);
-        printEntity.setMeishoFuyo2(送付物宛先情報.meishoFuyo2);
-        printEntity.setSamaBun1(送付物宛先情報.samaBun1);
-        printEntity.setSamaBun2(送付物宛先情報.samaBun2);
-        printEntity.setKakkoLeft1(送付物宛先情報.kakkoLeft1);
-        printEntity.setKakkoLeft2(送付物宛先情報.kakkoLeft2);
-        printEntity.setKakkoRight1(送付物宛先情報.kakkoRight1);
-        printEntity.setKakkoRight2(送付物宛先情報.kakkoRight2);
-        printEntity.setCustomerBarCode(送付物宛先情報.customerBarCode);
+        printEntity.set送付物宛先情報(get送付物宛先情報(帳票共通情報));
         return printEntity;
     }
 
-    private ServiceHenkoTsuchishoEntity create個別発行サービス変更通知書データ(PanelType パネル, YokaigoNinteiTsutisho 画面選択データ) {
+    private ServiceHenkoTsuchishoJoho create個別発行サービス変更通知書データ(PanelType パネル, YokaigoNinteiTsutisho 画面選択データ) {
         ChohyoSeigyoKyotsu 帳票共通情報 = get帳票共通情報(パネル);
         FlexibleDate 発行日 = div.getTxtServiceHenkoBunshoSakuseiDay().getValue();
-        SofubutsuAtesakiSource 送付物宛先情報 = get送付物宛先情報(帳票共通情報);
 
-        ServiceHenkoTsuchishoEntity printEntity = new ServiceHenkoTsuchishoEntity();
+        ServiceHenkoTsuchishoJoho printEntity = new ServiceHenkoTsuchishoJoho();
         printEntity.setHakkoYMD(発行日);
         printEntity.setBunshoNo(div.getCcdKobetsuServiceHenkoBunshoBango().get文書番号());
         printEntity.setTitle(getタイトル(ConfigNameDBA.サービス変更通知書));
@@ -1137,46 +1095,16 @@ public class NinteiTsuchishoHakkoHandler {
         printEntity.setTsuchibun5(get通知文情報通知文(パネル, 通知文_パターン番号_3, 通知文_項目番号_3));
         printEntity.setTsuchibun6(get通知文情報通知文(パネル, 通知文_パターン番号_4, 通知文_項目番号_2));
         printEntity.setTsuchibun7(get通知文情報通知文(パネル, 通知文_パターン番号_4, 通知文_項目番号_3));
-        printEntity.setYubinNo(送付物宛先情報.yubinNo);
-        printEntity.setGyoseiku(送付物宛先情報.gyoseiku);
-        printEntity.setJushoText(送付物宛先情報.jushoText);
-        printEntity.setJusho1(送付物宛先情報.jusho1);
-        printEntity.setJusho2(送付物宛先情報.jusho2);
-        printEntity.setJusho3(送付物宛先情報.jusho3);
-        printEntity.setKatagakiText(送付物宛先情報.katagakiText);
-        printEntity.setKatagaki1(送付物宛先情報.katagaki1);
-        printEntity.setKatagaki2(送付物宛先情報.katagaki2);
-        printEntity.setKatagakiSmall1(送付物宛先情報.katagakiSmall1);
-        printEntity.setKatagakiSmall2(送付物宛先情報.katagakiSmall2);
-        printEntity.setDainoKubunMei(送付物宛先情報.dainoKubunMei);
-        printEntity.setShimeiText(送付物宛先情報.shimeiText);
-        printEntity.setShimei1(送付物宛先情報.shimei1);
-        printEntity.setShimei2(送付物宛先情報.shimei2);
-        printEntity.setShimeiSmall1(送付物宛先情報.shimeiSmall1);
-        printEntity.setShimeiSmall2(送付物宛先情報.shimeiSmall2);
-        printEntity.setSamabunShimeiText(送付物宛先情報.samabunShimeiText);
-        printEntity.setSamabunShimei1(送付物宛先情報.samabunShimei1);
-        printEntity.setSamabunShimei2(送付物宛先情報.samabunShimei2);
-        printEntity.setSamabunShimeiSmall1(送付物宛先情報.samabunShimeiSmall1);
-        printEntity.setSamabunShimeiSmall2(送付物宛先情報.samabunShimeiSmall2);
-        printEntity.setMeishoFuyo1(送付物宛先情報.meishoFuyo1);
-        printEntity.setMeishoFuyo2(送付物宛先情報.meishoFuyo2);
-        printEntity.setSamaBun1(送付物宛先情報.samaBun1);
-        printEntity.setSamaBun2(送付物宛先情報.samaBun2);
-        printEntity.setKakkoLeft1(送付物宛先情報.kakkoLeft1);
-        printEntity.setKakkoLeft2(送付物宛先情報.kakkoLeft2);
-        printEntity.setKakkoRight1(送付物宛先情報.kakkoRight1);
-        printEntity.setKakkoRight2(送付物宛先情報.kakkoRight2);
-        printEntity.setCustomerBarCode(送付物宛先情報.customerBarCode);
+
+        printEntity.set送付物宛先情報(get送付物宛先情報(帳票共通情報));
         return printEntity;
     }
 
-    private YokaigodoHenkoTsuchishoEntity create個別発行要介護度変更通知書データ(PanelType パネル, YokaigoNinteiTsutisho 画面選択データ) {
+    private YokaigodoHenkoTsuchishoJoho create個別発行要介護度変更通知書データ(PanelType パネル, YokaigoNinteiTsutisho 画面選択データ) {
         ChohyoSeigyoKyotsu 帳票共通情報 = get帳票共通情報(パネル);
         FlexibleDate 発行日 = div.getTxtYokaigodoHenkoTsuchiSakuseiDay().getValue();
-        SofubutsuAtesakiSource 送付物宛先情報 = get送付物宛先情報(帳票共通情報);
 
-        YokaigodoHenkoTsuchishoEntity printEntity = new YokaigodoHenkoTsuchishoEntity();
+        YokaigodoHenkoTsuchishoJoho printEntity = new YokaigodoHenkoTsuchishoJoho();
         printEntity.setHakkoYMD(発行日);
         printEntity.setBunshoNo(div.getCcdKobetsuKaigodoHenkoBunshoBango().get文書番号());
         printEntity.setTitle(getタイトル(ConfigNameDBA.要介護度変更通知書));
@@ -1216,45 +1144,14 @@ public class NinteiTsuchishoHakkoHandler {
         printEntity.setTsuchibun7(get通知文情報通知文(パネル, 通知文_パターン番号_3, 通知文_項目番号_6));
         printEntity.setTsuchibun8(get通知文情報通知文(パネル, 通知文_パターン番号_4, 通知文_項目番号_5));
         printEntity.setTsuchibun9(get通知文情報通知文(パネル, 通知文_パターン番号_4, 通知文_項目番号_6));
-        printEntity.setYubinNo(送付物宛先情報.yubinNo);
-        printEntity.setGyoseiku(送付物宛先情報.gyoseiku);
-        printEntity.setJushoText(送付物宛先情報.jushoText);
-        printEntity.setJusho1(送付物宛先情報.jusho1);
-        printEntity.setJusho2(送付物宛先情報.jusho2);
-        printEntity.setJusho3(送付物宛先情報.jusho3);
-        printEntity.setKatagakiText(送付物宛先情報.katagakiText);
-        printEntity.setKatagaki1(送付物宛先情報.katagaki1);
-        printEntity.setKatagaki2(送付物宛先情報.katagaki2);
-        printEntity.setKatagakiSmall1(送付物宛先情報.katagakiSmall1);
-        printEntity.setKatagakiSmall2(送付物宛先情報.katagakiSmall2);
-        printEntity.setDainoKubunMei(送付物宛先情報.dainoKubunMei);
-        printEntity.setShimeiText(送付物宛先情報.shimeiText);
-        printEntity.setShimei1(送付物宛先情報.shimei1);
-        printEntity.setShimei2(送付物宛先情報.shimei2);
-        printEntity.setShimeiSmall1(送付物宛先情報.shimeiSmall1);
-        printEntity.setShimeiSmall2(送付物宛先情報.shimeiSmall2);
-        printEntity.setSamabunShimeiText(送付物宛先情報.samabunShimeiText);
-        printEntity.setSamabunShimei1(送付物宛先情報.samabunShimei1);
-        printEntity.setSamabunShimei2(送付物宛先情報.samabunShimei2);
-        printEntity.setSamabunShimeiSmall1(送付物宛先情報.samabunShimeiSmall1);
-        printEntity.setSamabunShimeiSmall2(送付物宛先情報.samabunShimeiSmall2);
-        printEntity.setMeishoFuyo1(送付物宛先情報.meishoFuyo1);
-        printEntity.setMeishoFuyo2(送付物宛先情報.meishoFuyo2);
-        printEntity.setSamaBun1(送付物宛先情報.samaBun1);
-        printEntity.setSamaBun2(送付物宛先情報.samaBun2);
-        printEntity.setKakkoLeft1(送付物宛先情報.kakkoLeft1);
-        printEntity.setKakkoLeft2(送付物宛先情報.kakkoLeft2);
-        printEntity.setKakkoRight1(送付物宛先情報.kakkoRight1);
-        printEntity.setKakkoRight2(送付物宛先情報.kakkoRight2);
-        printEntity.setCustomerBarCode(送付物宛先情報.customerBarCode);
+        printEntity.set送付物宛先情報(get送付物宛先情報(帳票共通情報));
         return printEntity;
     }
 
-    private NinteikyakkaTsuchishoEntity create個別発行認定却下通知書データ(PanelType パネル, YokaigoNinteiTsutisho 画面選択データ) {
+    private NinteikyakkaTsuchishoJoho create個別発行認定却下通知書データ(PanelType パネル, YokaigoNinteiTsutisho 画面選択データ) {
         ChohyoSeigyoKyotsu 帳票共通情報 = get帳票共通情報(パネル);
         FlexibleDate 発行日 = div.getTxtNinteiKyakkaTsuchi().getValue();
-        SofubutsuAtesakiSource 送付物宛先情報 = get送付物宛先情報(帳票共通情報);
-        NinteikyakkaTsuchishoEntity printEntity = new NinteikyakkaTsuchishoEntity();
+        NinteikyakkaTsuchishoJoho printEntity = new NinteikyakkaTsuchishoJoho();
 
         printEntity.setHakkoYMD(発行日);
         printEntity.setBunshoNo(div.getCcdKobetsuNinteiKyakkaBunshoBango().get文書番号());
@@ -1285,37 +1182,7 @@ public class NinteiTsuchishoHakkoHandler {
         printEntity.setTsuchibun5(get通知文情報通知文(パネル, 通知文_パターン番号_3, 通知文_項目番号_3));
         printEntity.setTsuchibun6(get通知文情報通知文(パネル, 通知文_パターン番号_4, 通知文_項目番号_2));
         printEntity.setTsuchibun7(get通知文情報通知文(パネル, 通知文_パターン番号_4, 通知文_項目番号_3));
-        printEntity.setYubinNo(送付物宛先情報.yubinNo);
-        printEntity.setGyoseiku(送付物宛先情報.gyoseiku);
-        printEntity.setJushoText(送付物宛先情報.jushoText);
-        printEntity.setJusho1(送付物宛先情報.jusho1);
-        printEntity.setJusho2(送付物宛先情報.jusho2);
-        printEntity.setJusho3(送付物宛先情報.jusho3);
-        printEntity.setKatagakiText(送付物宛先情報.katagakiText);
-        printEntity.setKatagaki1(送付物宛先情報.katagaki1);
-        printEntity.setKatagaki2(送付物宛先情報.katagaki2);
-        printEntity.setKatagakiSmall1(送付物宛先情報.katagakiSmall1);
-        printEntity.setKatagakiSmall2(送付物宛先情報.katagakiSmall2);
-        printEntity.setDainoKubunMei(送付物宛先情報.dainoKubunMei);
-        printEntity.setShimeiText(送付物宛先情報.shimeiText);
-        printEntity.setShimei1(送付物宛先情報.shimei1);
-        printEntity.setShimei2(送付物宛先情報.shimei2);
-        printEntity.setShimeiSmall1(送付物宛先情報.shimeiSmall1);
-        printEntity.setShimeiSmall2(送付物宛先情報.shimeiSmall2);
-        printEntity.setSamabunShimeiText(送付物宛先情報.samabunShimeiText);
-        printEntity.setSamabunShimei1(送付物宛先情報.samabunShimei1);
-        printEntity.setSamabunShimei2(送付物宛先情報.samabunShimei2);
-        printEntity.setSamabunShimeiSmall1(送付物宛先情報.samabunShimeiSmall1);
-        printEntity.setSamabunShimeiSmall2(送付物宛先情報.samabunShimeiSmall2);
-        printEntity.setMeishoFuyo1(送付物宛先情報.meishoFuyo1);
-        printEntity.setMeishoFuyo2(送付物宛先情報.meishoFuyo2);
-        printEntity.setSamaBun1(送付物宛先情報.samaBun1);
-        printEntity.setSamaBun2(送付物宛先情報.samaBun2);
-        printEntity.setKakkoLeft1(送付物宛先情報.kakkoLeft1);
-        printEntity.setKakkoLeft2(送付物宛先情報.kakkoLeft2);
-        printEntity.setKakkoRight1(送付物宛先情報.kakkoRight1);
-        printEntity.setKakkoRight2(送付物宛先情報.kakkoRight2);
-        printEntity.setCustomerBarCode(送付物宛先情報.customerBarCode);
+        printEntity.set送付物宛先情報(get送付物宛先情報(帳票共通情報));
         return printEntity;
     }
 

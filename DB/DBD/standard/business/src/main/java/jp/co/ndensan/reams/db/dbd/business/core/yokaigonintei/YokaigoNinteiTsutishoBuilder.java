@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengaku;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
@@ -29,7 +28,7 @@ public class YokaigoNinteiTsutishoBuilder {
     private final DbT4102NinteiKekkaJohoEntity 要介護認定結果情報Entity;
 
     /**
-     * {@link HomonKaigoRiyoshaFutangakuGengaku}の編集用Builderクラスを生成します。
+     * {@link YokaigoNinteiTsutisho}の編集用Builderクラスを生成します。
      *
      * @param 要介護認定申請情報認定Entity DbT5101NinteiShinseiJohoEntity
      * @param 主治医医療機関情報認定Entity DbT5911ShujiiIryoKikanJohoEntity
