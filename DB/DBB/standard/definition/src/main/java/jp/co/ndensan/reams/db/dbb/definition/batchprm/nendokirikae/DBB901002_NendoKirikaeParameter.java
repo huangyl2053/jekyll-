@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class NendoKirikaeBatchParameter extends BatchParameterBase {
+public class DBB901002_NendoKirikaeParameter extends BatchParameterBase {
 
     private FlexibleYear 調定年度;
 }
