@@ -109,15 +109,6 @@ public class JikoFutangakuKeisanIkkatsuPanel {
     private JikoFutangakuKeisanIkkatsuPanelBatchParameter setBatchParameter(JikoFutangakuKeisanIkkatsuPanelDiv div) {
         RString 被保険者番号指定RAD = new RString("hihokenshaNo");
         JikoFutangakuKeisanIkkatsuPanelBatchParameter parameter = new JikoFutangakuKeisanIkkatsuPanelBatchParameter();
-        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder iOutputOrder = finder.get出力順(
-                SubGyomuCode.DBC介護給付,
-                ReportIdDBC.DBC200203.getReportId(),
-                Long.valueOf(div.getCcdChohyoShutsuryokujun().get出力順ID().toString()));
-        if (iOutputOrder != null) {
-            IChohyoShutsuryokujunManager manager = new _ChohyoShutsuryokujunManager();
-            manager.save前回出力順(iOutputOrder);
-        }
         RString 出力対象区分;
         if (被保険者番号指定RAD.equals(div.getRadHihokenshaNo().getSelectedKey())) {
             出力対象区分 = 出力対象_2;
@@ -143,7 +134,7 @@ public class JikoFutangakuKeisanIkkatsuPanel {
         parameter.setRadSakuseiJoken(出力対象区分);
         parameter.setShuturyokuFlg(出力フラグ);
         Association 市町村コード_Temp = AssociationFinderFactory.createInstance().getAssociation();
-        parameter.setDantaiCd(市町村コード_Temp);
+        parameter.setDantaiCd(市町村コード_Temp.get地方公共団体コード());
         return parameter;
     }
     //TODO QA1080 

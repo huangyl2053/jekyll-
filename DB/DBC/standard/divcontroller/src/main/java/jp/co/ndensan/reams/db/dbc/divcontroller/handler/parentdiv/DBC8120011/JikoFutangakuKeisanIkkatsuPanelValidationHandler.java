@@ -74,7 +74,7 @@ public class JikoFutangakuKeisanIkkatsuPanelValidationHandler {
 
     private enum IdocheckMessages implements IValidationMessage {
 
-        必須設定項目_出力順(UrErrorMessages.必須, 出力順.toString());
+        必須設定項目_出力順(UrErrorMessages.出力順序を指定);
         private final Message message;
 
         private IdocheckMessages(IMessageGettable message, String... replacements) {
