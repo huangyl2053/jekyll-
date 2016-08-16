@@ -333,7 +333,7 @@
         "DbV4001JukyushaDaicho"."hihokenshaNo" = #{被保険者番号}
      </select>
      
-     <update id="updDbt4003YokaigoNinteiInterface"  parameterType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity">
+     <update id="updDbt4003YokaigoNinteiInterface"  parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity">
         UPDATE rgdb."DbT4003YokaigoNinteiInterface"
         SET
             "keshikomiFlag" = #{keshikomiFlag},
