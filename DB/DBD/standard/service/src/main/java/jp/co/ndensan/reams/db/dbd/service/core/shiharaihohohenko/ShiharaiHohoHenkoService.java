@@ -65,6 +65,26 @@ public class ShiharaiHohoHenkoService {
     }
 
     /**
+     * 支払方法変更管理情報を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return 支払方法変更管理情報List
+     */
+    public ArrayList<ShiharaiHohoHenko> find支払方法変更Ignore論理削除(HihokenshaNo 被保険者番号) {
+        ArrayList<ShiharaiHohoHenko> 支払方法変更管理情報List = new ArrayList<>();
+
+        IShiharaiHohoHenkoMapper mapper = mapperProvider.create(IShiharaiHohoHenkoMapper.class);
+        List<ShiharaiHohoHenkoEntity> entityList = mapper.findShiharaiHohoHenkoIgnoreDelete(被保険者番号);
+        if (entityList != null && !entityList.isEmpty()) {
+            for (ShiharaiHohoHenkoEntity entity : entityList) {
+                entity.initializeMd5ToEntities();
+                支払方法変更管理情報List.add(new ShiharaiHohoHenko(entity));
+            }
+        }
+        return 支払方法変更管理情報List;
+    }
+
+    /**
      * 償還払支給情報を取得します。
      *
      * @param 被保険者番号 被保険者番号

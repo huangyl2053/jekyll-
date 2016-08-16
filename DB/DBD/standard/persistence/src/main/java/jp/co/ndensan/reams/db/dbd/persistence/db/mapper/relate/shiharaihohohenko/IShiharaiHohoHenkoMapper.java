@@ -30,6 +30,14 @@ public interface IShiharaiHohoHenkoMapper {
     List<ShiharaiHohoHenkoEntity> findShiharaiHohoHenko(HihokenshaNo 被保険者番号);
 
     /**
+     * 支払方法変更管理情報を取得します。（論理削除フラグを問わず）
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return 支払方法変更管理情報List
+     */
+    List<ShiharaiHohoHenkoEntity> findShiharaiHohoHenkoIgnoreDelete(HihokenshaNo 被保険者番号);
+
+    /**
      * 償還払支給申請情報の取得
      *
      * @param 被保険者番号 被保険者番号
