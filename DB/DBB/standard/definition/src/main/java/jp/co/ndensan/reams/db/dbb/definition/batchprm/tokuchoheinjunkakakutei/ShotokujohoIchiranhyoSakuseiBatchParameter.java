@@ -95,6 +95,6 @@ public class ShotokujohoIchiranhyoSakuseiBatchParameter extends BatchParameterBa
      */
     public RegistShoriDateKanriProcessParameter toRegistShoriDateKanriProcessParameter() {
         return new RegistShoriDateKanriProcessParameter(導入形態コード, 処理年度, 開始日時, 終了日時, 市町村コード,
-                市町村名称, FlexibleDate.MAX, FlexibleDate.MAX, RString.EMPTY, RString.EMPTY, 市町村情報リスト);
+                市町村名称, FlexibleDate.MAX, FlexibleDate.MAX, RString.EMPTY, RString.EMPTY, 市町村情報リスト, null);
     }
 }

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbb1110001;
 
-import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb1110001.KoikiShichosonShotokuIchiarnProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb1110001.PrtKaigoHokenShotokuJohoIchiranProcess;
@@ -66,9 +65,12 @@ public class DBB1110001_ShotokujohoIchiranhyoSakuseiFlow extends BatchFlowBase<S
         RString 導入形態コード = getParameter().get導入形態コード();
         if (INDEX_112.equals(導入形態コード) || INDEX_120.equals(導入形態コード)) {
             executeStep(所得情報一覧表のデータ取得_単一);
+
         } else if (INDEX_111.equals(導入形態コード)) {
             executeStep(所得情報一覧表のデータ取得_広域);
+
         }
+        executeStep(処理日付管理マスタを登録);
         executeStep(介護保険所得情報一覧表出力);
         RString flag = getResult(RString.class, new RString(介護保険所得情報一覧表出力), PrtKaigoHokenShotokuJohoIchiranProcess.REPORT_FLAG);
         if (!INDEX_0.equals(flag)) {
@@ -132,6 +134,7 @@ public class DBB1110001_ShotokujohoIchiranhyoSakuseiFlow extends BatchFlowBase<S
     @Step(処理日付管理マスタを登録)
     protected IBatchFlowCommand registShoriDateKanriProcess() {
         RegistShoriDateKanriProcessParameter parameter = getParameter().toRegistShoriDateKanriProcessParameter();
+        parameter.set市町村情報リスト(getParameter().get市町村情報リスト());
         RString 導入形態コード = parameter.get導入形態コード();
         if (INDEX_112.equals(導入形態コード) || INDEX_120.equals(導入形態コード)) {
             requireNonNull(parameter.get抽出期間開始日時(), UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_開始日時.toString()));
@@ -139,14 +142,14 @@ public class DBB1110001_ShotokujohoIchiranhyoSakuseiFlow extends BatchFlowBase<S
             return loopBatch(RegistShoriDateKanriProcess.class).arguments(parameter).define();
         } else {
             requireNonNull(parameter.get市町村情報リスト(), UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_市町村情報リスト.toString()));
-            List<ShichosonJouhouResult> 市町村情報リスト = parameter.get市町村情報リスト();
-            for (ShichosonJouhouResult result : 市町村情報リスト) {
+            for (ShichosonJouhouResult result : getParameter().get市町村情報リスト()) {
                 parameter.set市町村コード(result.get市町村コード());
                 parameter.set市町村識別ID(result.get市町村識別ID());
                 parameter.set開始年月日(result.get開始年月日());
                 parameter.set終了年月日(result.get終了年月日());
                 parameter.set開始時刻(result.get開始時刻());
                 parameter.set終了時刻(result.get終了時刻());
+                parameter.set市町村情報(result);
                 return loopBatch(RegistShoriDateKanriProcess.class).arguments(parameter).define();
             }
         }
