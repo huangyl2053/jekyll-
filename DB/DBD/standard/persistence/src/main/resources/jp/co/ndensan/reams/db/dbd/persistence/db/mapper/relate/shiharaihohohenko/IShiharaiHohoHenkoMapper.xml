@@ -48,6 +48,54 @@
         AND DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_rirekiNo" = DbT4026ShiharaiHohoHenkoGengakuMeisai."dbT4026ShiharaiHohoHenkoGengakuMeisai_rirekiNo"
         WHERE
         DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_hihokenshaNo" = #{被保険者番号}
+        AND DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_logicalDeletedFlag" = FALSE
+        ORDER BY
+        DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_shoKisaiHokenshaNo",
+        DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_hihokenshaNo",
+        DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_kanriKubun" ASC,
+        DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_rirekiNo" DESC
+    </select>
+    
+    <select resultOrdered="true" id="findShiharaiHohoHenkoIgnoreDelete" resultMap="resultMap_ShiharaiHohoHenkoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo" fetchSize="500">
+        SELECT
+        DbT4021ShiharaiHohoHenko.*,
+        DbT4022ShiharaiHohoHenkoTaino.*,
+        DbT4024ShiharaiHohoHenkoSashitome.*,
+        DbT4025ShiharaiHohoHenkoGengaku.*,
+        DbT4026ShiharaiHohoHenkoGengakuMeisai.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.noDeleted_DbT4021ShiharaiHohoHenko" />) AS DbT4021ShiharaiHohoHenko
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4024ShiharaiHohoHenkoSashitomeMapper.noDeleted_DbT4024ShiharaiHohoHenkoSashitome" />) AS DbT4024ShiharaiHohoHenkoSashitome
+        ON
+        DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_shoKisaiHokenshaNo" = DbT4024ShiharaiHohoHenkoSashitome."dbT4024ShiharaiHohoHenkoSashitome_shoKisaiHokenshaNo"
+        AND DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_hihokenshaNo" = DbT4024ShiharaiHohoHenkoSashitome."dbT4024ShiharaiHohoHenkoSashitome_hihokenshaNo"
+        AND DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_kanriKubun" = DbT4024ShiharaiHohoHenkoSashitome."dbT4024ShiharaiHohoHenkoSashitome_kanriKubun"
+        AND DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_rirekiNo" = DbT4024ShiharaiHohoHenkoSashitome."dbT4024ShiharaiHohoHenkoSashitome_rirekiNo"
+        INNER JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.noDeleted_DbT4022ShiharaiHohoHenkoTaino" />) AS DbT4022ShiharaiHohoHenkoTaino
+        ON
+        DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_shoKisaiHokenshaNo" = DbT4022ShiharaiHohoHenkoTaino."dbT4022ShiharaiHohoHenkoTaino_shoKisaiHokenshaNo"
+        AND DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_hihokenshaNo" = DbT4022ShiharaiHohoHenkoTaino."dbT4022ShiharaiHohoHenkoTaino_hihokenshaNo"
+        AND DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_kanriKubun" = DbT4022ShiharaiHohoHenkoTaino."dbT4022ShiharaiHohoHenkoTaino_kanriKubun"
+        AND DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_rirekiNo" = DbT4022ShiharaiHohoHenkoTaino."dbT4022ShiharaiHohoHenkoTaino_rirekiNo"
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4025ShiharaiHohoHenkoGengakuMapper.noDeleted_DbT4025ShiharaiHohoHenkoGengaku" />) AS DbT4025ShiharaiHohoHenkoGengaku
+        ON
+        DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_shoKisaiHokenshaNo" = DbT4025ShiharaiHohoHenkoGengaku."dbT4025ShiharaiHohoHenkoGengaku_shoKisaiHokenshaNo"
+        AND DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_hihokenshaNo" = DbT4025ShiharaiHohoHenkoGengaku."dbT4025ShiharaiHohoHenkoGengaku_hihokenshaNo"
+        AND DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_kanriKubun" = DbT4025ShiharaiHohoHenkoGengaku."dbT4025ShiharaiHohoHenkoGengaku_kanriKubun"
+        AND DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_rirekiNo" = DbT4025ShiharaiHohoHenkoGengaku."dbT4025ShiharaiHohoHenkoGengaku_rirekiNo"
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4026ShiharaiHohoHenkoGengakuMeisaiMapper.noDeleted_DbT4026ShiharaiHohoHenkoGengakuMeisai" />) AS DbT4026ShiharaiHohoHenkoGengakuMeisai
+        ON
+        DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_shoKisaiHokenshaNo" = DbT4026ShiharaiHohoHenkoGengakuMeisai."dbT4026ShiharaiHohoHenkoGengakuMeisai_shoKisaiHokenshaNo"
+        AND DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_hihokenshaNo" = DbT4026ShiharaiHohoHenkoGengakuMeisai."dbT4026ShiharaiHohoHenkoGengakuMeisai_hihokenshaNo"
+        AND DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_kanriKubun" = DbT4026ShiharaiHohoHenkoGengakuMeisai."dbT4026ShiharaiHohoHenkoGengakuMeisai_kanriKubun"
+        AND DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_rirekiNo" = DbT4026ShiharaiHohoHenkoGengakuMeisai."dbT4026ShiharaiHohoHenkoGengakuMeisai_rirekiNo"
+        WHERE
+        DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_hihokenshaNo" = #{被保険者番号}
         ORDER BY
         DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_shoKisaiHokenshaNo",
         DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_hihokenshaNo",
