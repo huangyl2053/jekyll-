@@ -91,20 +91,6 @@ public class KogakuShikyuShinseishoYuchoEditor implements IKogakuShikyuShinseish
                 source.tuchoNo7 = 帳票出力対象データ.getTsuchoNoChohyo().substring(定値_6, 定値_7);
                 source.tuchoNo8 = 帳票出力対象データ.getTsuchoNoChohyo().substring(定値_7, 定値_8);
             }
-        } else {
-            source.tuchoKigo1 = RString.EMPTY;
-            source.tuchoKigo2 = RString.EMPTY;
-            source.tuchoKigo3 = RString.EMPTY;
-            source.tuchoKigo4 = RString.EMPTY;
-            source.tuchoKigo5 = RString.EMPTY;
-            source.tuchoNo1 = RString.EMPTY;
-            source.tuchoNo2 = RString.EMPTY;
-            source.tuchoNo3 = RString.EMPTY;
-            source.tuchoNo4 = RString.EMPTY;
-            source.tuchoNo5 = RString.EMPTY;
-            source.tuchoNo6 = RString.EMPTY;
-            source.tuchoNo7 = RString.EMPTY;
-            source.tuchoNo8 = RString.EMPTY;
         }
         source.remban = 連番;
         source.識別コード = 帳票出力対象データ.getShikibetsuCodeChohyo();
