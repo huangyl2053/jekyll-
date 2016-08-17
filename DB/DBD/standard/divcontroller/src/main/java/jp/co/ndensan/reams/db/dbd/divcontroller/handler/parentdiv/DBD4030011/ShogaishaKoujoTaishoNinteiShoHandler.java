@@ -53,7 +53,7 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
         div.getTyusyutuJyokenPanel().getDdlShogaiNichijoSeikatsuJiritsudo().setDataSource(setDdlShogaiDataSource());
         div.getTyusyutuJyokenPanel().getDdlSoshituJiyu().setDataSource(setDdlSoshituJiyuDataSource());
         div.getTyusyutuJyokenPanel().getDdlShogaishaTecho().setDataSource(setDdlShogaishaTechoDataSource());
-        div.getTyusyutuJyokenPanel().getDropDownList1().setDataSource(setDropDownListDataSource());
+        div.getTyusyutuJyokenPanel().getDdlZenkaiHigaito().setDataSource(setDropDownListDataSource());
     }
 
     private List<KeyValueDataSource> setDdlNinteiKbnDataSource() {
@@ -184,7 +184,7 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
         parameter.set喪失日TO(div.getTyusyutuJyokenPanel().getTxtSoshituDay().getToValue());
         parameter.set決定日FROM(div.getTyusyutuJyokenPanel().getTxtKeteiDay().getFromValue());
         parameter.set決定日TO(div.getTyusyutuJyokenPanel().getTxtKeteiDay().getToValue());
-        parameter.set前回非該当者(div.getTyusyutuJyokenPanel().getDropDownList1().getSelectedValue());
+        parameter.set前回非該当者(div.getTyusyutuJyokenPanel().getDdlZenkaiHigaito().getSelectedValue());
         parameter.set交付日(div.getShogaishaKojoNinteishoOutput().getTxtKofuDay().getValue());
 //        parameter.set出力順(get画面出力順());  QA 95838
         return parameter;
@@ -200,7 +200,7 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
         RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
         IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給,
                 ReportIdDBD.DBD100025.getReportId(), reamsLoginID,
-                div.getShogaishaKojoNinteishoOutput().getCommonChildDiv1().getSelected出力順().get出力順ID());
+                div.getShogaishaKojoNinteishoOutput().getCcdChohyoShutsuryokujun().getSelected出力順().get出力順ID());
         return MyBatisOrderByClauseCreator.create(BreakerFieldsEnum.class, outputOrder);
 
     }

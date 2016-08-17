@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1000074;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.kijunshunyugakutekiyokettei.DBC190010_kijunsyunyuKetteiTsuchisyosakuseiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ChushutsuKikan;
@@ -18,7 +20,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
@@ -41,8 +42,8 @@ public class TsuuchishoHakkoHandler {
     private static final RString 入力チェック_決定 = new RString("決定");
     private static final RString 入力チェック = new RString("入力チェック");
     private static final RString 処理名 = new RString("基準収入額適用決定通知書");
+    private static final RString 出力順を = new RString("出力順を");
     private static final ReportId 帳票ID = new ReportId("DBC100074_KijunShunyugakuTekiyoKetteiTsuchisho");
-    private static final SubGyomuCode サブ業務コード = new SubGyomuCode("DBC");
     private static final int NUM_1 = 1;
     private final RDate システム日付 = RDate.getNowDate();
 
@@ -68,9 +69,8 @@ public class TsuuchishoHakkoHandler {
         div.getRadChushutsukikan().setSelectedKey(ChushutsuKikan.申請年月日.getコード());
         div.getDdlInsho().setSelectedKey(Insho.発行済みも含める.getコード());
 
-        div.getTxtSakuseiYMD().setValue(new FlexibleDate(システム日付.toString()));
-        div.getTxtSakuseiYMD().setReadOnly(true);
-        div.getCcdChohyoShutsuryokujun().load(サブ業務コード, 帳票ID);
+        div.getTxtSakuseiYMD().setValue(FlexibleDate.getNowDate());
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
 
     }
 
@@ -79,8 +79,7 @@ public class TsuuchishoHakkoHandler {
      *
      */
     public void set文書番号() {
-        FlexibleDate 基準日 = new FlexibleDate(YMDHMS.now().getDate().toDateString());
-        div.getCcdBunshoBangoInput().initialize(帳票ID, 基準日);
+        div.getCcdBunshoBangoInput().initialize(帳票ID, FlexibleDate.getNowDate());
     }
 
     /**
@@ -151,7 +150,7 @@ public class TsuuchishoHakkoHandler {
      */
     public void set出力順の入力チェック() {
         if (div.getCcdChohyoShutsuryokujun().get出力順ID() == null) {
-            throw new ApplicationException(UrErrorMessages.未指定.getMessage());
+            throw new ApplicationException(UrErrorMessages.未指定.getMessage().replace((出力順を).toString()).evaluate());
         }
     }
 
@@ -192,6 +191,21 @@ public class TsuuchishoHakkoHandler {
             KeyValueDataSource dataSource = new KeyValueDataSource(通知書発行_印書.getコード(), 通知書発行_印書.get名称());
             dataSourceList.add(dataSource);
         }
+        Collections.sort(dataSourceList, new Comparator<KeyValueDataSource>() {
+            @Override
+            public int compare(KeyValueDataSource o1, KeyValueDataSource o2) {
+                RString key1 = o1.getKey();
+                RString key2 = o2.getKey();
+                int flag = 0;
+                if (key1 != null && key2 != null) {
+                    flag = key2.compareTo(key1);
+                    if (0 == flag) {
+                        flag = o2.getKey().compareTo(o1.getKey());
+                    }
+                }
+                return flag;
+            }
+        });
         return dataSourceList;
 
     }

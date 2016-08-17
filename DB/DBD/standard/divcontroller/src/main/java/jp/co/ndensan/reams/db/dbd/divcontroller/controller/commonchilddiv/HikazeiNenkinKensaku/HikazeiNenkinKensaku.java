@@ -5,9 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.commonchilddiv.HikazeiNenkinKensaku;
 
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.houshold.HousholdBusiness;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.HikazeiNenkinKensaku.HikazeiNenkinKensakuDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.HikazeiNenkinKensaku.HikazeiNenkinKensakuHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
@@ -25,7 +29,8 @@ public class HikazeiNenkinKensaku {
      * @return ResponseData<HikazeiNenkinKensakuDiv>
      */
     public ResponseData<HikazeiNenkinKensakuDiv> onLoad(HikazeiNenkinKensakuDiv div) {
-        getHandler(div).onLoad();
+        List<HousholdBusiness> 非課税年金検索 = getHandler(div).onLoad();
+        ViewStateHolder.put(ViewStateKey.非課税年金検索, new ArrayList(非課税年金検索));
         return ResponseData.of(div).respond();
     }
 
@@ -36,7 +41,8 @@ public class HikazeiNenkinKensaku {
      * @return ResponseData<HikazeiNenkinKensakuDiv>
      */
     public ResponseData<HikazeiNenkinKensakuDiv> onClick_SelectedItem(HikazeiNenkinKensakuDiv div) {
-        getHandler(div).onClick_SelectedItem();
+        ArrayList<HousholdBusiness> 非課税年金検索 = ViewStateHolder.get(ViewStateKey.非課税年金検索, ArrayList.class);
+        getHandler(div).onClick_SelectedItem(非課税年金検索);
         return ResponseData.of(div).dialogOKClose();
     }
 
@@ -52,5 +58,13 @@ public class HikazeiNenkinKensaku {
 
     private HikazeiNenkinKensakuHandler getHandler(HikazeiNenkinKensakuDiv div) {
         return new HikazeiNenkinKensakuHandler(div);
+    }
+
+    private enum ViewStateKey {
+
+        /**
+         * 非課税年金検索
+         */
+        非課税年金検索;
     }
 }

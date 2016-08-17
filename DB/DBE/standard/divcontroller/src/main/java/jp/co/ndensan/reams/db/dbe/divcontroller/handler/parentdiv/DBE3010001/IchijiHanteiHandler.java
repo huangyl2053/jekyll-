@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3010001.Ichi
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3010001.dgIchijiHanteiTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
@@ -88,10 +87,10 @@ public class IchijiHanteiHandler {
         ItziHanteiShoriBatchParamter parameter = new ItziHanteiShoriBatchParamter();
         List<dgIchijiHanteiTaishoshaIchiran_Row> rowList = div.getIchijiHanteiShoriTaishoshaIchiran().
                 getDgIchijiHanteiTaishoshaIchiran().getSelectedItems();
-        List<ShinseishoKanriNo> shinseishoKanriNo = new ArrayList<>();
+        List<RString> shinseishoKanriNo = new ArrayList<>();
         for (dgIchijiHanteiTaishoshaIchiran_Row row : rowList) {
 
-            shinseishoKanriNo.add(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+            shinseishoKanriNo.add(row.getShinseishoKanriNo());
         }
         parameter.setShinseishoKanriNoList(shinseishoKanriNo);
         parameter.setBattishuturyokukubun(バッチ出力区分);

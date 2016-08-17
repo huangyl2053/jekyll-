@@ -1017,7 +1017,7 @@
                     AND P003."ninteichosaRirekiNo" <![CDATA[<]]> P004."ninteichosaRirekiNo"
                 ) 
                 AND P003."shisetsuRiyoFlag" = TRUE 
-                AND P003."koroshoIfShikibetsuCode" = ( 
+                AND P003."koroshoIfShikibetsuCode" IN ( 
                   SELECT
                     A2."koroshoIfShikibetsuCode" 
                   FROM

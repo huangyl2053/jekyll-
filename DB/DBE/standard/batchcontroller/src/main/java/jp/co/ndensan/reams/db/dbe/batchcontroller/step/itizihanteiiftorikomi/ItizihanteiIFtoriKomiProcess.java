@@ -36,15 +36,12 @@ public class ItizihanteiIFtoriKomiProcess extends BatchProcessBase<IchijiHanteiz
     private RString 込ファイル名;
     private final int 項目数 = 328;
     private static final RString TABLE要介護認定一次判定結果情報 = new RString("IchijiHanteiKekkaJohoTemp");
-    private CsvListReader read;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 調査票概況調査サービスの状況TempTable;
 
     @Override
     protected void initialize() {
         込ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定ソフト一次判定用データ取込ファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        filePath = new RString("C:\\Users\\soft863\\wanghui\\").concat(込ファイル名);
-        read = new CsvListReader.InstanceBuilder(filePath).build();
     }
 
     @Override
@@ -73,7 +70,7 @@ public class ItizihanteiIFtoriKomiProcess extends BatchProcessBase<IchijiHanteiz
     @Override
     protected void process(IchijiHanteizumIfOutputEucCsvEntity entity) {
         IchijiHanteiKekkaJohoTempTableEntity tabEntity = new IchijiHanteiKekkaJohoTempTableEntity();
-//        CsvListReader read = new CsvListReader.InstanceBuilder(filePath).build();
+        CsvListReader read = new CsvListReader.InstanceBuilder(filePath).build();
         if (read.readLine().size() != 項目数) {
             return;
         }

@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.itizihanteishori;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,7 +20,7 @@ import lombok.Getter;
 @Getter
 public final class ItziHanteiShoriMybitisParamter implements IMyBatisParameter {
 
-    private final List<ShinseishoKanriNo> shinseishoKanriNoList;
+    private final List<RString> shinseishoKanriNoList;
     private final RString battishuturyokukubun;
     private final RString イメージ区分;
     private final RString 取下 = ShoriJotaiKubun.取下.getコード();
@@ -35,7 +34,7 @@ public final class ItziHanteiShoriMybitisParamter implements IMyBatisParameter {
      * @param イメージ区分 RString
      */
     private ItziHanteiShoriMybitisParamter(
-            List<ShinseishoKanriNo> shinseishoKanriNoList,
+            List<RString> shinseishoKanriNoList,
             RString battishuturyokukubun,
             RString イメージ区分) {
         this.shinseishoKanriNoList = shinseishoKanriNoList;
@@ -52,7 +51,7 @@ public final class ItziHanteiShoriMybitisParamter implements IMyBatisParameter {
      * @return ItziHanteiShoriMybitisParamter
      */
     public static ItziHanteiShoriMybitisParamter createParam(
-            List<ShinseishoKanriNo> shinseishoKanriNoList,
+            List<RString> shinseishoKanriNoList,
             RString battishuturyokukubun,
             RString イメージ区分
     ) {

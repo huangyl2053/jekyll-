@@ -84,7 +84,6 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
     @BatchWriter
     BatchPermanentTableWriter riyoshaFutanWariaiWriter;
 
-    private static final RString コンマ = new RString(",");
     private static final RString 定数_0 = new RString("0");
     private static final RString 定数_1 = new RString("1");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");

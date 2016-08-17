@@ -27,10 +27,9 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor implements
         ITokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor {
 
-    private static final int INDEX_5 = 5;
-    private static final int INDEX_7 = 7;
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_6 = 6;
     private static final int INDEX_8 = 8;
-    private static final int INDEX_10 = 10;
 
     private final KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報;
     private final RString 通知書定型文１;
@@ -126,8 +125,8 @@ public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor implements
                 && 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日() != null) {
             FlexibleDate 生年月日 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日_A4();
             source.birthYYYY = 生年月日.getYear().wareki().toDateString();
-            source.birthMM = new RString(生年月日.toString()).substring(INDEX_5, INDEX_7);
-            source.birthDD = new RString(生年月日.toString()).substring(INDEX_8, INDEX_10);
+            source.birthMM = new RString(生年月日.toString()).substring(INDEX_4, INDEX_6);
+            source.birthDD = new RString(生年月日.toString()).substring(INDEX_6, INDEX_8);
         }
     }
 

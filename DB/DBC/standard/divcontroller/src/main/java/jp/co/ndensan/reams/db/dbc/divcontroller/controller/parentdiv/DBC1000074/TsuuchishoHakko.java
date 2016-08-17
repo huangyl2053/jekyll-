@@ -66,6 +66,7 @@ public class TsuuchishoHakko {
      * @return ResponseData
      */
     public ResponseData<TsuuchishoHakkoDiv> onClick_btnExcuteCheck(TsuuchishoHakkoDiv div) {
+        getHandler(div).set出力順の入力チェック();
         RString 入力チェック_flag = getHandler(div).set入力チェック();
         if (入力チェック_申請.equals(入力チェック_flag)) {
             ValidationMessageControlPairs pairs = getValidationHandler(div).申請年月日チェックValidate();
@@ -89,7 +90,7 @@ public class TsuuchishoHakko {
      */
     public ResponseData<DBC190010_kijunsyunyuKetteiTsuchisyosakuseiParameter> onClick_btnExcute(TsuuchishoHakkoDiv div) {
         TsuuchishoHakkoHandler handler = getHandler(div);
-        handler.set出力順の入力チェック();
+
         handler.release前排他();
         return ResponseData.of(handler.setBatchParameter(div)).respond();
     }

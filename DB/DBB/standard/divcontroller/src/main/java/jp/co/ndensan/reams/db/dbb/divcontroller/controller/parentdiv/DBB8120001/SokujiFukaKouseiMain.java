@@ -72,7 +72,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class SokujiFukaKouseiMain {
 
-    private static final RString 保存する = new RString("SokujiFukaKouseibtn");
+    private static final RString 保存する = new RString("SokujiFukaKouseibtn2");
     private static final RString DBB_HIHOKENSHANO = new RString("DBBHihokenshaNo");
     private static final RString 翌年度の情報を表示する = new RString("翌年度の情報を表示する");
     private static final RString 前年度の情報を表示する = new RString("前年度の情報を表示する");

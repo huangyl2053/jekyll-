@@ -20,26 +20,26 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ItziHanteiShoriFlow extends BatchFlowBase<ItziHanteiShoriBatchParamter> {
 
-    private static final RString ITAKUSAKICHOSAINICHIRAN_FLOWID = new RString("ItakusakiChosainIchiranFlow");
+    private static final RString ITAKUSAKICHOSAINICHIRAN_FLOWID = new RString("DBE309001_IchijihanteiIfSakusei");
     private static final String ITAKUSAKICHOSAINICHIRAN_FLOW = "IchijiHanteizumIfOutputFlow";
-    private static final RString SHINCHOKUDATAOUTPUT_FLOWID = new RString("ShinchokuDataOutputFlow");
-    private static final String SHINCHOKUDATAOUTPUT_FLOW = "ShinchokuDataOutputFlow";
+    private static final RString SHINCHOKUDATAOUTPUT_FLOWID = new RString("DBE309002_IchijihanteiIfTorikomi");
+    private static final String SHINCHOKUDATAOUTPUT_FLOW = "ItizihanteiIFtoriKomiFlow";
     private static final RString バッチ出力区分 = new RString("1");
     private static final RString 一次判定IF取込 = new RString("2");
 
     @Override
     protected void defineFlow() {
         if (バッチ出力区分.equals(getParameter().getBattishuturyokukubun())) {
-            executeStep(SHINCHOKUDATAOUTPUT_FLOW);
-        } else if (一次判定IF取込.equals(getParameter().getBattishuturyokukubun())) {
             executeStep(ITAKUSAKICHOSAINICHIRAN_FLOW);
+        } else if (一次判定IF取込.equals(getParameter().getBattishuturyokukubun())) {
+            executeStep(SHINCHOKUDATAOUTPUT_FLOW);
         }
     }
 
     /**
-     * 一次判定IF取込バッチのです。
+     * 一次判定IF作成のです。
      *
-     * @return ItakusakiChosainIchiranFlow
+     * @return ShinchokuDataOutputFlow
      */
     @Step(ITAKUSAKICHOSAINICHIRAN_FLOW)
     protected IBatchFlowCommand callNinteiChosaIraiFlow() {
@@ -47,9 +47,9 @@ public class ItziHanteiShoriFlow extends BatchFlowBase<ItziHanteiShoriBatchParam
     }
 
     /**
-     * 一次判定IF作成のです。
+     * 一次判定IF取込バッチのです。
      *
-     * @return ShinchokuDataOutputFlow
+     * @return ItakusakiChosainIchiranFlow
      */
     @Step(SHINCHOKUDATAOUTPUT_FLOW)
     protected IBatchFlowCommand callShinchokuDataOutputFlow() {

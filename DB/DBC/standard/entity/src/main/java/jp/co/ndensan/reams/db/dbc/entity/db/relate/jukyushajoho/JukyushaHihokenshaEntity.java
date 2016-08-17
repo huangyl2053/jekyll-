@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001Hihoke
 /**
  * 被保険者一時TBLと受給者情報明細一時TBL結びついたエンティティ。
  *
- * @reamsid_L DBC-2730-010 chenjie
+ * @reamsid_L DBC-2730-030 chenjie
  */
 @lombok.Getter
 @lombok.Setter

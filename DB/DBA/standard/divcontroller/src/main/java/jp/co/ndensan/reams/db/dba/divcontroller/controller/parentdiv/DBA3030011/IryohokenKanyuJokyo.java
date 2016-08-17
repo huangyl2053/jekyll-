@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA3030011
 
 import jp.co.ndensan.reams.db.dba.business.core.iryohokenkanyujokyo.IryohokenKanyuJokyoBusiness;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA3030011.DBA3030011StateName;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA3030011.DBA3030011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA3030011.IryohokenKanyuJokyoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA3030011.IryohokenKanyuJokyoHandler;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshashikakuteisei.HihokenshaShikakuTeiseiManager;
@@ -48,23 +47,12 @@ public class IryohokenKanyuJokyo {
     }
 
     /**
-     * 「対象者検索に戻る」ボタンを押します。
-     *
-     * @param div 画面情報
-     * @return ResponseData<IryohokenKanyuJokyoDiv>
-     */
-    public ResponseData<IryohokenKanyuJokyoDiv> onClick_Modoru(IryohokenKanyuJokyoDiv div) {
-        return ResponseData.of(div).forwardWithEventName(DBA3030011TransitionEventName.再検索).respond();
-    }
-
-    /**
      * 「医療保険情報を保存する」ボタンを押します。
      *
      * @param div 画面情報
      * @return ResponseData<IryohokenKanyuJokyoDiv>
      */
     public ResponseData<IryohokenKanyuJokyoDiv> onClick_Save(IryohokenKanyuJokyoDiv div) {
-        IryohokenKanyuJokyoBusiness joho = ViewStateHolder.get(ViewStateKeys.初期化時医療保険情報, IryohokenKanyuJokyoBusiness.class);
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -72,6 +60,7 @@ public class IryohokenKanyuJokyo {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            IryohokenKanyuJokyoBusiness joho = ViewStateHolder.get(ViewStateKeys.初期化時医療保険情報, IryohokenKanyuJokyoBusiness.class);
             save(getKey().get識別コード(), joho, div);
             div.getKaigoKanryoyoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
             return ResponseData.of(div).setState(DBA3030011StateName.完了状態);
@@ -94,22 +83,12 @@ public class IryohokenKanyuJokyo {
         div.getIryoHokenIchiran().getCcdIryoHokenRireki().save();
     }
 
-    /**
-     * 「完了する」ボタンを押下しです。
-     *
-     * @param div IryohokenKanyuJokyoDiv
-     * @return IryohokenKanyuJokyoDiv
-     */
-    public ResponseData<IryohokenKanyuJokyoDiv> onClick_Kanryo(IryohokenKanyuJokyoDiv div) {
-        return ResponseData.of(div).setState(DBA3030011StateName.初期状態);
-    }
-
     private IryohokenKanyuJokyoHandler getHandler(IryohokenKanyuJokyoDiv div) {
         return new IryohokenKanyuJokyoHandler(div);
     }
 
     private TaishoshaKey getKey() {
-        return ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class);
+        return ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
     }
 
 }

@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoGaikyoChosa;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoServiceJokyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoServiceJokyoFlag;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoShisetsuRiyo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoGaikyoChosaManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoServiceJokyoFlagManager;
@@ -164,16 +165,11 @@ public class NinteiChosaKekkaTorikomiOcr {
     @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<NinteiChosaKekkaTorikomiOcrDiv> onclick_BtnUpload(NinteiChosaKekkaTorikomiOcrDiv div, FileData[] files) {
         for (FileData file : files) {
-            if (file.getFileName().endsWith(new RString("CSV"))) {
+            if (file.getFileName().endsWith(new RString("CSV"))
+                    || file.getFileName().endsWith(new RString("csv"))) {
                 savaCsvファイル(file);
             } else {
-                boolean 選択Flag = false;
-                for (dgTorikomiKekka_Row row : div.getDgTorikomiKekka().getDataSource()) {
-                    if (row.getSelected()) {
-                        選択Flag = true;
-                    }
-                }
-                if (!選択Flag) {
+                if (div.getDgTorikomiKekka().getActiveRow() == null) {
                     ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
                     validationMessages.add(getValidationHandler().check一覧対象未選択());
                     return ResponseData.of(div).addValidationMessages(validationMessages).respond();
@@ -283,7 +279,7 @@ public class NinteiChosaKekkaTorikomiOcr {
             ninteichosahyoGaikyoChosa = ninteichosahyoGaikyoChosa.createBuilderForEdit().set認定調査受領年月日(
                     FlexibleDate.getNowDate()).build();
             ninteichosahyoGaikyoChosa = ninteichosahyoGaikyoChosa.createBuilderForEdit().set認定調査区分コード(
-                    new Code("0")).build();
+                    new Code(ChosaKubun.新規調査.getコード())).build();
             if (!RString.isNullOrEmpty(data.get認定調査委託先コード())) {
                 ninteichosahyoGaikyoChosa = ninteichosahyoGaikyoChosa.createBuilderForEdit().set認定調査委託先コード(
                         new JigyoshaNo(data.get認定調査委託先コード())).build();
