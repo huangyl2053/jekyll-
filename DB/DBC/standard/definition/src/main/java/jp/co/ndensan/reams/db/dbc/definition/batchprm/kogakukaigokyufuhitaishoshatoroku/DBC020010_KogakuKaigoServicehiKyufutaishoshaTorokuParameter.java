@@ -21,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KogakuKaigoKyufuhiTaishoshaBatchParameter extends BatchParameterBase {
+public class DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter extends BatchParameterBase {
 
     private static final String KEY_MENUID = "menuId";
     private static final String KEY_SHUTURYOKUJUNN = "shuturyokuJunn";
