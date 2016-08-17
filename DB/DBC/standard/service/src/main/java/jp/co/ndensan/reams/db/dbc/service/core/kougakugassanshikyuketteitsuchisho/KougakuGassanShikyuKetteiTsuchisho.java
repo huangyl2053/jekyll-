@@ -44,9 +44,11 @@ public class KougakuGassanShikyuKetteiTsuchisho {
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
     private static final RString 定数_0 = new RString("0");
-    private static final RString 定数_1 = new RString("1");
+// TO DO
+//    private static final RString 定数_1 = new RString("1");
     private static final RString 項目名_取り消し線 = new RString("取り消し線");
     private static final RString 項目名_帳票タイトル = new RString("帳票タイトル");
+// TO DO
 //    private static final RString 項目名_帳票タイトル_抹消線あり１ = new RString("帳票タイトル_抹消線あり１");
 //    private static final RString 項目名_帳票タイトル_抹消線あり２ = new RString("帳票タイトル_抹消線あり２");
 //    private static final RString 項目名_帳票タイトル_抹消線あり３ = new RString("帳票タイトル_抹消線あり３");
