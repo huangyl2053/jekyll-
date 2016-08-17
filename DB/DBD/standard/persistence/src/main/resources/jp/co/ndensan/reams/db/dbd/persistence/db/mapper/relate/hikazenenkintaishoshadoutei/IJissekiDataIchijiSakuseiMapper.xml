@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-5810-030 mawy -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hikazenenkintaishoshadoutei.IJissekiDataIchijiSakuseiMapper">
+    <resultMap id="resultMap_JissekiDataIchijiSakuseiJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.JissekiDataIchijiSakuseiJohoEntity" autoMapping="true">
+        <result property="履歴番号" column="履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <collection property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <collection property="被保険者台帳管理NewestEntity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
+        <collection property="非課税年金対象者Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4037HikazeNenkinTaishoshaMapper.ResultMap_DbT4037HikazeNenkinTaishoshaEntity"/>
+    </resultMap>
+
+    <select resultOrdered="true" id="select実績データ一作成"
+            resultMap="resultMap_JissekiDataIchijiSakuseiJohoEntity"
+            fetchSize="500">
+        SELECT
+        被保険者台帳.*,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />,
+        非課税年金情報 .*
+        FROM
+        rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳
+        LEFT JOIN
+        (SELECT
+        *
+        FROM (
+        SELECT
+        非課税年金対象者.*
+        ,row_number() OVER (
+        PARTITION BY(
+        "dtnenkinhokenshacode",
+        SUBSTRING("dtnenkincode",0,3),
+        "dtkisonenkinno")
+        ORDER BY
+        "dttaishoy" DESC, "dtsakuseiymd" DESC, "dtnenkincode" DESC
+        ) AS 履歴番号
+        FROM
+        rgdb."DbT4037HikazeNenkinTaishosha" AS 非課税年金対象者
+        WHERE
+        "hihokenshano" != ''
+        ) AS 最大履歴
+        WHERE
+        最大履歴.履歴番号 = 1
+        ) AS 非課税年金情報
+        ON 被保険者台帳."hihokenshaNo" = 非課税年金情報."hihokenshano"
+        LEFT JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+        AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+        ON 被保険者台帳."shikibetsuCode" =<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
+    </select>
+</mapper>

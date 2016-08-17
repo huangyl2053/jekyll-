@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +26,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NenkinNoCheckListTempTableEntity extends DbTableEntityBase<NenkinNoCheckListTempTableEntity> implements IDbAccessable {
 
+    @TableName
     public static final RString TABLE_NAME = new RString("NenkinNoCheckListTempTable");
 
     @TempTableColumnOrder(1)
@@ -50,7 +52,7 @@ public class NenkinNoCheckListTempTableEntity extends DbTableEntityBase<NenkinNo
     @TempTableColumnOrder(11)
     private RString shoriKubunn;
     @TempTableColumnOrder(12)
-    private RString TaishoMonth;
+    private RString taishoMonth;
     @TempTableColumnOrder(13)
     private RString kisoNennkinnNo;
     @TempTableColumnOrder(14)
