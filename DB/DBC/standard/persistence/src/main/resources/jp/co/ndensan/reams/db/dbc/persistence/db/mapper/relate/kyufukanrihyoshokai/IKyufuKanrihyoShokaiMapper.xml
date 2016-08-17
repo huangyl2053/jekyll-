@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 給付管理票照会（画面）のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-2960-060 chenxiangyu -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufukanrihyoshokai.IKyufuKanrihyoShokaiMapper">
+    <resultMap id="resultMap_select給付管理票一覧" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoshokai.KyufuKanrihyoShokaiEntity" autoMapping="true">
+        <result property="insertDantaiCd" column="insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="isDeleted"/>
+        <result property="updateCount" column="updateCount"/>
+        <result property="lastUpdateTimestamp" column="lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="審査年月" column="shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="サービス提供年月" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="被保険者番号" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="給付管理票種別区分コード" column="kyufuKanrihyoShubetsuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付管理票明細行番号" column="kyufuKanrihyoMeisaiLineNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者番号" column="shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="居宅支援事業所番号" column="kyotakushienJigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="給付管理票情報作成区分コード" column="kyufuKanrihyoSakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付管理票作成年月日" column="kyufuKanrihyoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="保険者番号" column="hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="被保険者生年月日" column="hiHokenshaUmareYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="性別コード" column="seibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="要介護状態区分コード" column="yoKaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="限度額適用開始年月" column="gendogakuTekiyoKaishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="限度額適用終了年月" column="gendogakuTekiyoShuryoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="居宅_介護予防支給限度額" column="kyotakuKaigoYoboShikyuGendogaku"/>
+        <result property="居宅サービス計画作成区分コード" column="kyotakuServicePlanSakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービス事業所番号" column="serviceJigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="指定_基準該当_地域密着型サービス識別コード" column="shiteiKijungaitoChiikimitchakuServiceShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>   
+        <result property="サービス種類コード" column="serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="給付計画単位数_日数" column="kyufuKeikakuTanisuNissu"/> 
+        <result property="限度額管理期間における前月までの給付計画日数" column="kyufuKeikakuNissu"/>
+        <result property="指定サービス分小計" column="shiteiServiceSubTotal"/>
+        <result property="基準該当サービス分小計" column="kijyunGaitoServiceSubTotal"/>
+        <result property="給付計画合計単位数_日数" column="kyufuKeikakuTotalTanisuNissu"/>
+        <result property="担当介護支援専門員番号" column="担当介護支援専門員番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="委託先の居宅介護支援事業所番号" column="委託先の居宅介護支援事業所番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="委託先の担当介護支援専門員番号" column="委託先の担当介護支援専門員番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="当初登録年月日" column="toshoTorokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="取込年月" column="torikomiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="氏名" column="氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    <select id="select給付管理票一覧" resultMap="resultMap_select給付管理票一覧"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufukanrihyoshokai.KyufuKanrihyoShokaiMapperParameter" fetchSize="500" resultOrdered="true" >
+        SELECT
+          A.*
+          , '' AS 担当介護支援専門員番号
+          , '' AS 委託先の居宅介護支援事業所番号
+          , '' AS 委託先の担当介護支援専門員番号
+         , 宛名A."meisho" AS 氏名 
+        FROM
+          rgdb."DbT3014KyufuKanrihyo200004" A 
+          LEFT JOIN rgdb."DbV1001HihokenshaDaicho" 被保険者台帳A 
+            ON 被保険者台帳A."hihokenshaNo" = A."hiHokenshaNo"
+          LEFT JOIN rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','', TRUE,
+             '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+                true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS 宛名A
+            ON 被保険者台帳A."shikibetsuCode" = 宛名A."shikibetsuCode"
+        WHERE
+        <if test="被保番号Flag">
+          A."hiHokenshaNo"=#{被保番号}
+          AND 
+        </if>
+        <if test="支援事業者番号Flag">
+          A."kyotakushienJigyoshoNo"=#{支援事業者番号}
+          AND
+        </if>
+          A."serviceTeikyoYM" <![CDATA[>=]]> #{給付対象年月開始}
+          AND A."serviceTeikyoYM" <![CDATA[<=]]> #{給付対象年月終了}
+          AND A."kyufuKanrihyoMeisaiLineNo"='99' 
+        UNION 
+        SELECT
+          B.*
+         , 宛名B."meisho" AS 氏名 
+        FROM
+          rgdb."DbT3015KyufuKanrihyo200604" B 
+          LEFT JOIN rgdb."DbV1001HihokenshaDaicho" 被保険者台帳B 
+            ON 被保険者台帳B."hihokenshaNo" = B."hiHokenshaNo" 
+          LEFT JOIN rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','', TRUE,
+             '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+                true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS 宛名B 
+            ON 被保険者台帳B."shikibetsuCode" = 宛名B."shikibetsuCode"
+        WHERE
+        <if test="被保番号Flag">
+          B."hiHokenshaNo"=#{被保番号}
+          AND
+        </if>
+        <if test="支援事業者番号Flag">
+          B."kyotakushienJigyoshoNo"=#{支援事業者番号}
+          AND
+        </if>
+          B."serviceTeikyoYM" <![CDATA[>=]]> #{給付対象年月開始}
+          AND B."serviceTeikyoYM" <![CDATA[<=]]> #{給付対象年月終了}
+          AND B."kyufuMeisaiLineNo"='99'
+    </select>
+    <select id="select給付管理明細一覧" resultMap="resultMap_select給付管理票一覧"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufukanrihyoshokai.KyufuKanrihyoShokaiMapperParameter" fetchSize="500" resultOrdered="true" >
+        SELECT
+          A.*
+          , '' AS 担当介護支援専門員番号
+          , '' AS 委託先の居宅介護支援事業所番号
+          , '' AS 委託先の担当介護支援専門員番号
+          , 介護事業B."jigyoshaName" AS サービス事業者名 
+        FROM
+          rgdb."DbT3014KyufuKanrihyo200004" A 
+          LEFT JOIN ( 
+            SELECT
+              D."jigyoshaNo"
+              , D."jigyoshaName" 
+            FROM
+              rgdb."DbT7060KaigoJigyosha" D
+              , ( 
+                SELECT
+                  MAX(C."yukoKaishiYMD") AS 有効開始日
+                  , C."jigyoshaNo" 
+                FROM
+                  rgdb."DbT7060KaigoJigyosha" C
+                  , rgdb."DbT3014KyufuKanrihyo200004" A1 
+                WHERE
+                  A1."hiHokenshaNo" = #{被保険者番号}
+                  AND A1."shinsaYM" = #{審査年月}
+                  AND A1."serviceTeikyoYM" = #{サービス提供年月}
+                  AND SUBSTRING(C."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> A1."serviceTeikyoYM" 
+                  AND CASE 
+                    WHEN C."yukoShuryoYMD" != NULL 
+                    THEN SUBSTRING(C."yukoShuryoYMD", 1, 6) <![CDATA[>=]]> A1."serviceTeikyoYM" 
+                    END 
+                GROUP BY
+                  C."jigyoshaNo"
+              ) AS 介護事業A 
+            WHERE
+              介護事業A."有効開始日" = D."yukoKaishiYMD" 
+              AND 介護事業A."jigyoshaNo" = D."jigyoshaNo"
+          ) AS 介護事業B 
+          <!-- TODO QA#95946 テーブル「給付管理票200004」にフィールド「事業者番号」がありません-->
+            ON A."hiHokenshaNo" = 介護事業B."jigyoshaNo" 
+        WHERE
+          A."hiHokenshaNo" = #{被保険者番号} 
+          AND A."shinsaYM" = #{審査年月}
+          AND A."serviceTeikyoYM" = #{サービス提供年月}
+        UNION 
+        SELECT
+          B.*
+          , 介護事業C."jigyoshaName" AS サービス事業者名 
+        FROM
+          rgdb."DbT3015KyufuKanrihyo200604" B 
+          LEFT JOIN ( 
+            SELECT
+              E."jigyoshaNo"
+              , E."jigyoshaName" 
+            FROM
+              rgdb."DbT7060KaigoJigyosha" AS E
+              , ( 
+                SELECT
+                  MAX(F."yukoKaishiYMD") AS 有効開始日
+                  , F."jigyoshaNo" 
+                FROM
+                  rgdb."DbT7060KaigoJigyosha" AS F
+                  , rgdb."DbT3015KyufuKanrihyo200604" B1 
+                WHERE
+                  B1."hiHokenshaNo" = #{被保険者番号} 
+                  AND B1."shinsaYM" = #{審査年月}
+                  AND B1."serviceTeikyoYM" = #{サービス提供年月}
+                  AND substring(F."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> B1."serviceTeikyoYM" 
+                  AND CASE 
+                    WHEN F."yukoShuryoYMD" != NULL 
+                    THEN substring(F."yukoShuryoYMD", 1, 6) <![CDATA[>=]]> B1."serviceTeikyoYM" 
+                    END 
+                GROUP BY
+                  F."jigyoshaNo"
+              ) AS 介護事業D 
+            WHERE
+              介護事業D."有効開始日" = E."yukoKaishiYMD" 
+              AND 介護事業D."jigyoshaNo" = E."jigyoshaNo"
+          ) AS 介護事業C 
+          <!-- TODO QA#95946 テーブル「給付管理票200004」にフィールド「事業者番号」がありません-->
+            ON B."hiHokenshaNo" = 介護事業C."jigyoshaNo" 
+        WHERE
+          B."hiHokenshaNo" = #{被保険者番号} 
+          AND B."shinsaYM" = #{審査年月}
+          AND B."serviceTeikyoYM" = #{サービス提供年月}
+    </select>
+</mapper>
