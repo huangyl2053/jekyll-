@@ -6,18 +6,14 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0430011;
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc020020.DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0430011.DBC0430011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0430011.KogakuShikyuShinseishoIkkatsuHakkoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0430011.KogakuShikyuShinseishoIkkatsuHakkoHandler;
-import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 高額サービス費給付お知らせ通知書作成です。
@@ -95,6 +91,19 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
         div.getShinseishoHakkoParameters().getDdlServiceYM().setReadOnly(true);
         div.getShinseishoHakkoParameters().getRadShinsaYM().clearSelectedItem();
         div.getShinseishoHakkoParameters().getRadHihokenshaNo().clearSelectedItem();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 被保険者番号入力ガイドのメソッドです
+     *
+     * @param div KogakuShikyuShinseishoIkkatsuHakkoDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> onCancelClose(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
+        if (div.getShinseishoHakkoParameters().getTxtHihokenshaNo().getValue().isEmpty()) {
+            throw new ApplicationException(DbcErrorMessages.被保険者の高額介護サービス支給申請情報が無い.getMessage());
+        }
         return ResponseData.of(div).respond();
     }
 
