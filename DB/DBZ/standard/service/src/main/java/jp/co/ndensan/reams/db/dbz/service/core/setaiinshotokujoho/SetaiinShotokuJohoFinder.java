@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.business.core.view.KaigoShotokuAlive;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
-import jp.co.ndensan.reams.db.dbz.service.core.kyufu.KogakuServicehiTaishoshaManager;
 import jp.co.ndensan.reams.db.dbz.service.core.setai.SetaiinFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.view.ShotokuManager;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
@@ -23,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -37,7 +35,6 @@ public class SetaiinShotokuJohoFinder {
     private final SetaiinFinder 世帯員Finder;
     private final HihokenshaDaichoManager 被保険者台帳Manager;
     private final ShotokuManager 介護所得Manager;
-    private final KogakuServicehiTaishoshaManager 高額対象者情報有無Manager;
 
     /**
      * コンストラクタです。
@@ -47,7 +44,6 @@ public class SetaiinShotokuJohoFinder {
         this.世帯員Finder = SetaiinFinder.createInstance();
         this.被保険者台帳Manager = HihokenshaDaichoManager.createInstance();
         this.介護所得Manager = ShotokuManager.createInstance();
-        this.高額対象者情報有無Manager = KogakuServicehiTaishoshaManager.createInstance();
     }
 
     /**
@@ -59,12 +55,11 @@ public class SetaiinShotokuJohoFinder {
     SetaiinShotokuJohoFinder(
             // MapperProvider mapperProvider,
             SetaiinFinder 世帯員Finder,
-            HihokenshaDaichoManager 被保険者台帳Manager, ShotokuManager 介護所得Manager, KogakuServicehiTaishoshaManager 高額対象者情報有無Manager) {
+            HihokenshaDaichoManager 被保険者台帳Manager, ShotokuManager 介護所得Manager) {
         // this.mapperProvider = mapperProvider;
         this.世帯員Finder = 世帯員Finder;
         this.被保険者台帳Manager = 被保険者台帳Manager;
         this.介護所得Manager = 介護所得Manager;
-        this.高額対象者情報有無Manager = 高額対象者情報有無Manager;
     }
 
     /**
@@ -138,9 +133,6 @@ public class SetaiinShotokuJohoFinder {
                     世帯員.get住民票表示順(),
                     世帯員.get本人区分(),
                     世帯員.get世帯コード().value()));
-            if (被保険者台帳 != null && 給付情報取得有無 == true) {
-                高額対象者情報有無Manager.is高額対象者有無(被保険者台帳.get被保険者番号(), 世帯基準年月日);
-            }
         }
         return 世帯員所得情報リスト;
     }

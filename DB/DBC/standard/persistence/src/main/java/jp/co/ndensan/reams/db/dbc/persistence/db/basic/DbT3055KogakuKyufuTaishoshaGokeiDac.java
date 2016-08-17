@@ -2,20 +2,19 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
+package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokei;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokei.hihokenshaNo;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokei.rirekiNo;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokei.serviceTeikyoYM;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokei;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokei.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokei.rirekiNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokei.serviceTeikyoYM;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokei.kogakuTaishoGaiFlag;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -24,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -113,53 +111,5 @@ public class DbT3055KogakuKyufuTaishoshaGokeiDac implements ISaveable<DbT3055Kog
                 where((eq(hihokenshaNo, 被保険者番号))).
                 order(by(serviceTeikyoYM, Order.DESC), by(rirekiNo, Order.DESC)).
                 toList(DbT3055KogakuKyufuTaishoshaGokeiEntity.class);
-    }
-
-    /**
-     * 最大履歴番号を取得です。
-     *
-     * @param 被保険者番号 被保険者番号
-     * @param サービス提供年月 サービス提供年月
-     * @return 最大履歴番号
-     */
-    @Transaction
-    public DbT3055KogakuKyufuTaishoshaGokeiEntity get最大履歴番号(HihokenshaNo 被保険者番号, FlexibleDate サービス提供年月) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.selectSpecific(max(rirekiNo)).
-                table(DbT3055KogakuKyufuTaishoshaGokei.class).
-                where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(serviceTeikyoYM, サービス提供年月))).
-                toObject(DbT3055KogakuKyufuTaishoshaGokeiEntity.class);
-    }
-
-    /**
-     * （最新）高額介護サービス費給付対象者合計情報を取得します。
-     *
-     * @param 被保険者番号 HihokenshaNo
-     * @param サービス提供年月 ServiceTeikyoYM
-     * @param 履歴番号 RirekiNo
-     * @return DbT3055KogakuKyufuTaishoshaGokeiEntity
-     * @throws NullPointerException 引数のいずれかがnullの場合
-     */
-    @Transaction
-    public DbT3055KogakuKyufuTaishoshaGokeiEntity selectByKeyNew(
-            HihokenshaNo 被保険者番号,
-            FlexibleDate サービス提供年月,
-            Decimal 履歴番号) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号_MSG.toString()));
-        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
-        return accessor.select().
-                table(DbT3055KogakuKyufuTaishoshaGokei.class).
-                where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(serviceTeikyoYM, サービス提供年月),
-                                eq(rirekiNo, 履歴番号),
-                                eq(kogakuTaishoGaiFlag, false))).
-                toObject(DbT3055KogakuKyufuTaishoshaGokeiEntity.class);
     }
 }
