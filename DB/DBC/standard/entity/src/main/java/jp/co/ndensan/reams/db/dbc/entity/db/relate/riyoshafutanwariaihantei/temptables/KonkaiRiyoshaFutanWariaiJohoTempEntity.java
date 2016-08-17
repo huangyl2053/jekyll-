@@ -44,7 +44,7 @@ public class KonkaiRiyoshaFutanWariaiJohoTempEntity
     private RString honinGokeishotokuKingaku;
     @TempTableColumnOrder(8)
     //世帯１号被保険者数
-    private Integer SetaiFirstHihokenshaNo;
+    private Integer setaiFirstHihokenshaNo;
     @TempTableColumnOrder(9)
     //年金収入合計
     private RString nenkinShunyuGokei;

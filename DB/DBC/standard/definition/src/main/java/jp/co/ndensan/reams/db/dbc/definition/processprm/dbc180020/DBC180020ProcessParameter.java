@@ -70,6 +70,17 @@ public class DBC180020ProcessParameter implements IBatchProcessParameter {
     /**
      * toMyBatisParameter
      *
+     * @return DBC180020MyBatisParameter
+     */
+    public DBC180020MyBatisParameter toMyBatisParameter() {
+        return new DBC180020MyBatisParameter(hanteiKijunbi.get(hanteiKijunbiIndex),
+                taishoNendo == null ? RString.EMPTY
+                : new RString(taishoNendo.toString()), taishoGetsu.get(taishoGetsuIndex));
+    }
+
+    /**
+     * toMyBatisParameter
+     *
      * @param taishoShuryoYMD List<RString>
      * @return DBC180020MyBatisParameter
      */
