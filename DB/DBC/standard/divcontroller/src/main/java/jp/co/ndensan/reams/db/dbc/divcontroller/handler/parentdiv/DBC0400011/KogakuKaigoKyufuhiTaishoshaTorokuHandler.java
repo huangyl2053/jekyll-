@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0400011;
 
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kogakukaigokyufuhitaishoshatoroku.KogakuKaigoKyufuhiTaishoshaBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.kogakukaigokyufuhitaishoshatoroku.DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0400011.KogakuKaigoKyufuhiTaishoshaTorokuBatchParameterDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakukaigoservicehikyufutaishoshatoroku.KogakuKaigoServicehiKyufuTaishoshaToroku;
@@ -71,9 +71,9 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuHandler {
     /**
      * バッチパラメータ取得します。
      *
-     * @return KogakuKaigoKyufuhiTaishoshaBatchParameter
+     * @return DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter
      */
-    public KogakuKaigoKyufuhiTaishoshaBatchParameter getBatchParameter() {
+    public DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter getBatchParameter() {
         RString 審査年月From = div.getKogakuKaigoKyufuhiTaishoshaTorokuPanel()
                 .getTxtShinsaYM().getFromValue().getYearMonth().toDateString();
         RString 審査年月To = div.getKogakuKaigoKyufuhiTaishoshaTorokuPanel()
@@ -82,7 +82,7 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuHandler {
         Long shuturyokuJunn = div.getCcdChohyoShutsuryokujun().get出力順ID();
 
         KogakuKaigoServicehiKyufuTaishoshaToroku business = new KogakuKaigoServicehiKyufuTaishoshaToroku();
-        KogakuKaigoKyufuhiTaishoshaBatchParameter parameter
+        DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter parameter
                 = business.getKogakuKaigoServicehiKyufuTaishoshaTorokuBatchParameter(
                         審査年月From,
                         審査年月To,
