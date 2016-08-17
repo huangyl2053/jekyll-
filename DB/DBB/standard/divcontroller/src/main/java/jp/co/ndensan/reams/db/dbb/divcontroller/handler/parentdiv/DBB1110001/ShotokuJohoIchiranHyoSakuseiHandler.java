@@ -157,14 +157,11 @@ public class ShotokuJohoIchiranHyoSakuseiHandler {
         return 導入形態コード;
     }
 
-    /**
-     * 処理年度初期化のメソッドです。
-     */
-    public void set処理年度() {
+    private void set処理年度() {
         RYear 処理年度_調定年度 = new RYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
         List<KeyValueDataSource> 処理年度 = new ArrayList<>();
-        for (int i = 処理年度_調定年度.getYearValue(); i >= INDEX_処理年度; i--) {
+        for (int i = 処理年度_調定年度.getYearValue(); INDEX_処理年度 <= i; i--) {
             KeyValueDataSource dataSource = new KeyValueDataSource();
             dataSource.setKey(new RString(String.valueOf(i)));
             dataSource.setValue(new RYear(String.valueOf(i)).wareki().toDateString());
@@ -222,8 +219,7 @@ public class ShotokuJohoIchiranHyoSakuseiHandler {
             YMDHMS 抽出終了 = new YMDHMS(抽出終了年月日, 抽出終了時分秒);
             if (抽出終了.isBefore(抽出開始)) {
                 flag = true;
-            } else {
-                flag = false;
+                break;
             }
         }
         return flag;
