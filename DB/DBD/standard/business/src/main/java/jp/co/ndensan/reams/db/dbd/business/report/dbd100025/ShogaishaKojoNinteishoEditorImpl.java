@@ -48,6 +48,7 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
     }
 
     private NinteishoJohoReportSource edit項目(NinteishoJohoReportSource source) {
+        source.hihokenshaNo = target.get被保険者番号().getColumnValue();
         edit文書番号(source);
         edit発行日(source);
         edit認証者(source);
@@ -119,7 +120,7 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
     }
 
     private void edit申告年(NinteishoJohoReportSource source) {
-        source.shiyoMokuteki = target.get申告年() == null ? RString.EMPTY : target.get申告年().wareki().
+        source.shiyoMokuteki = target.get対象年度() == null ? RString.EMPTY : target.get対象年度().wareki().
                 eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
     }
 

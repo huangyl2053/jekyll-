@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -110,7 +109,7 @@ public class NinteiShoJohoFinder {
         ninteishoJohoentity.set障害理由内容(dbT4038entity.getNinteiNaiyo());
         FlexibleYear 年度 = dbT4038entity.getTaishoNendo();
         if (年度 != null) {
-            ninteishoJohoentity.set申告年(new RDate(年度.toString()));
+            ninteishoJohoentity.set対象年度(年度);
         }
         return ninteishoJohoentity;
     }
@@ -168,7 +167,7 @@ public class NinteiShoJohoFinder {
         target.set障害理由区分(ninteishoJohoentity.get障害理由区分());
         target.set障害理由内容(ninteishoJohoentity.get障害理由内容());
         target.set要介護認定日(ninteishoJohoentity.get要介護認定日());
-        target.set申告年(ninteishoJohoentity.get対象年度());
+        target.set対象年度(ninteishoJohoentity.get対象年度());
         return target;
     }
 

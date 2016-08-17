@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd4030011;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -33,10 +34,7 @@ public class NinteishoJohoEntity {
     private RString 障害理由区分;
     private RString 障害理由内容;
     private FlexibleDate 要介護認定日;
-    private RDate 申告年;
-    private RDate 対象年度;
+    private FlexibleYear 対象年度;
     private RString 文書番号;
     private UaFt200FindShikibetsuTaishoEntity psmEntity;
-    private NinshoshaDenshiKoinDataEntity ninshoshaDenshiKoinDataEntity;
-
 }
