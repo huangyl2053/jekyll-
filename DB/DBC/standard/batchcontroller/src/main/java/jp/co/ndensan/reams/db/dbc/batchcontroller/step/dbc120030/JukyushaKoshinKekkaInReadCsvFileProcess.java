@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120030;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorKubun;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaReadCsvFileProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.jukyushakoshinkekka.JukyushaKoshinKekkaReadCsvFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.DbWT5331JukyushaJohoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.JukyushaJohoControlCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.JukyushaJohoCsvEntity;
@@ -45,7 +45,7 @@ public class JukyushaKoshinKekkaInReadCsvFileProcess extends BatchProcessBase<RS
      * CSVファイル取込後の返したエンティティ
      */
     public static final RString PARAMETER_OUT_FLOWENTITY;
-    private KohifutanshaReadCsvFileProcessParameter parameter;
+    private JukyushaKoshinKekkaReadCsvFileProcessParameter parameter;
     private IJukyushaKoshinKekkaMapper mapper;
     private IKokuhorenKyoutsuuTempTableMapper 一時mapper;
     private JukyushaJohoCsvEntity entity;
@@ -113,7 +113,7 @@ public class JukyushaKoshinKekkaInReadCsvFileProcess extends BatchProcessBase<RS
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchSimpleReader(parameter.getファイル絶対パース());
+        return new BatchSimpleReader(parameter.getファイルパース());
     }
     
     /**
