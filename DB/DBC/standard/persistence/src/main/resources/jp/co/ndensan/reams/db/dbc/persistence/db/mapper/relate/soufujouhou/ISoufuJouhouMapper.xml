@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 再審査申立送付情報照会のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-3050-010 zhangzhiming -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.soufujouhou.ISoufuJouhouMapper">
+
+    <resultMap id="resultMap_SoufuJouhouRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.soufujouhou.SoufuJouhouRelateEntity" autoMapping="true">
+        <result property="事業所番号" column="事業所番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="事業所名" column="事業所名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="宛名名称" column="宛名名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービス提供年月" column="サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービス種類コード" column="サービス種類コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービス項目コード" column="サービス項目コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービス略称" column="サービス略称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申立年月日" column="申立年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申立者区分コード" column="申立者区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申立単位数" column="申立単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申立事由コード" column="申立事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+    <select id="select再審査申立送付情報" resultMap="resultMap_SoufuJouhouRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.soufujouhou.SoufuJouhouParameter" fetchSize="500" resultOrdered="true">
+        SELECT 
+            再審査申立."jigyoshoNo" AS 事業所番号
+	   ,介護事業者."jigyoshaName" AS 事業所名
+	   ,再審査申立."hiHokenshaNo" AS 被保険者番号
+	   ,宛名."meisho" AS 宛名名称
+	   ,再審査申立."serviceTeikyoYM" AS サービス提供年月
+	   ,再審査申立."serviceTeikyoShuruiCode" AS サービス種類コード
+	   ,再審査申立."serviceKomokuCode" AS サービス項目コード
+	   ,介護サービス内容."serviceNameRyaku" AS サービス略称
+	   ,再審査申立."shokisaiHokenshaNo" AS 証記載保険者番号
+	   ,再審査申立."moshitateYMD" AS 申立年月日
+	   ,再審査申立."moshitateshaKubunCode" AS 申立者区分コード
+	   ,再審査申立."moshitateTanisu" AS 申立単位数
+	   ,再審査申立."moshitateJiyuCode" AS 申立事由コード
+        FROM rgdb."DbT3062SaishinsaMoshitate" AS 再審査申立
+        LEFT JOIN rgdb."DbT7060KaigoJigyosha" AS 介護事業者
+            ON 再審査申立."jigyoshoNo" = 介護事業者."jigyoshaNo"
+            AND 介護事業者."yukoKaishiYMD" = (SELECT MAX("yukoKaishiYMD") FROM rgdb."DbT7060KaigoJigyosha")
+        LEFT JOIN rgdb."DbV1001HihokenshaDaicho" AS dbv1001
+            ON dbv1001."hihokenshaNo" = 再審査申立."hiHokenshaNo"
+        LEFT JOIN rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',TRUE,
+            '','','','','','','',FALSE,'','','','','','','','','','','',FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,
+            FALSE,'','','','','','','','',FALSE,'','',FALSE,FALSE,FALSE,'','','','','','','','','','','','','','','','','','','{}')
+            AS 宛名 ON 宛名."shikibetsuCode" = dbv1001."shikibetsuCode"
+        LEFT JOIN rgdb."DbT7131KaigoServiceNaiyou" AS 介護サービス内容
+            ON 再審査申立."serviceTeikyoShuruiCode" = 介護サービス内容."serviceShuruiCd"
+            AND 再審査申立."serviceKomokuCode" = 介護サービス内容."serviceKoumokuCd"
+            AND 介護サービス内容."teikyoKaishiYM" <![CDATA[<=]]> 再審査申立."serviceTeikyoYM"
+            AND 再審査申立."serviceTeikyoYM" <![CDATA[<=]]> 介護サービス内容."teikyoShuryoYM"
+            AND 介護サービス内容."rirekiNo" = (SELECT MAX("rirekiNo") FROM rgdb."DbT7131KaigoServiceNaiyou")
+        WHERE 
+            <if test="送付年月フラグ">
+                再審査申立."kokuhorenSofuYM" = #{送付年月}
+            </if>
+            <if test="!送付年月フラグ">
+                再審査申立."kokuhorenSofuYM" IS NULL
+            </if>
+            <if test="保険者番号フラグ">
+                AND substr(再審査申立."shokisaiHokenshaNo",1,5) = #{証記載保険者番号}
+            </if>
+            ORDER BY 再審査申立."hiHokenshaNo",再審査申立."serviceTeikyoYM",
+            再審査申立."jigyoshoNo",再審査申立."serviceTeikyoShuruiCode",再審査申立."rirekiNo" DESC
+    </select>
+</mapper>
