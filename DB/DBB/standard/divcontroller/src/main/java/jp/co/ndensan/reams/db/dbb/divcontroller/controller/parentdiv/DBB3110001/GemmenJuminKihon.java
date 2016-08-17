@@ -87,18 +87,20 @@ public class GemmenJuminKihon {
         // TODO QA1131 viewStateの賦課年度（ただし、検索画面で「全年度」を指定した場合は空白）  どのをより判断ですが？
         int 全賦課履歴データ件数 = handler.load全賦課履歴情報グリッド(被保険者番号, new FukaNendo(賦課年度));
         if (全賦課履歴データ件数 == ゼロ_定値) {
+            handler.loadパネル状態2();
+            handler.set全賦課履歴情報Visible(true);
             ValidationMessageControlPairs pairs = new GemmenJuminKihonValidationHandler(div).賦課情報の存在チェック();
-            if (pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(pairs).respond();
-            }
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
         } else if (全賦課履歴データ件数 == イチ_定値) {
             Fuka 賦課基本 = handler.get賦課基本();
             NendobunFukaGemmenListResult 減免リスト = KaigoHokenryoGemmen.createInstance()
                     .getJokyo(賦課基本.get調定年度(), 賦課基本.get賦課年度(),
                             div.getCcdKaigoFukaKihon().get通知書番号(), div.getCcdKaigoFukaKihon().get被保番号());
             load(減免リスト, div);
+            handler.set全賦課履歴情報Visible(false);
         } else {
             handler.loadパネル状態2();
+            handler.set全賦課履歴情報Visible(true);
         }
         return createResponse(div);
     }
@@ -116,6 +118,7 @@ public class GemmenJuminKihon {
         HihokenshaNo 被保険者番号 = 賦課対象者.get被保険者番号();
         NendobunFukaGemmenListResult 減免リスト = handler.onClick_選択ボタン(被保険者番号);
         load(減免リスト, div);
+        handler.set全賦課履歴情報Visible(true);
         return createResponse(div);
     }
 

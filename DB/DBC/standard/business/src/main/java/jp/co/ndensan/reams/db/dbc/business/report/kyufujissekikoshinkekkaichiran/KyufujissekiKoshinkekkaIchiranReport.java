@@ -31,7 +31,8 @@ public class KyufujissekiKoshinkekkaIchiranReport extends Report<KyufujissekiKos
     private final List<RString> 改頁項目List;
     private final YMDHMS システム日時;
     private final int 連番;
-    private final List<RString> indexList;
+    private final boolean flag;
+    private final int 合計;
 
     /**
      * インスタンスを生成します。
@@ -46,11 +47,12 @@ public class KyufujissekiKoshinkekkaIchiranReport extends Report<KyufujissekiKos
      * @param 改頁項目List List<RString>
      * @param システム日時 YMDHMS
      * @param 連番 int
-     * @param indexList List<RString>
+     * @param flag boolean
+     * @param 合計 int
      */
     public KyufujissekiKoshinkekkaIchiranReport(FlexibleYearMonth 処理年月, ChohyoShutsuryokuTaishoDateEntity entity,
             RString 並び順の１件目, RString 並び順の２件目, RString 並び順の３件目,
-            RString 並び順の４件目, RString 並び順の５件目, List<RString> 改頁項目List, YMDHMS システム日時, int 連番, List<RString> indexList) {
+            RString 並び順の４件目, RString 並び順の５件目, List<RString> 改頁項目List, YMDHMS システム日時, int 連番, boolean flag, int 合計) {
         this.処理年月 = 処理年月;
         this.entity = entity;
         this.並び順の１件目 = 並び順の１件目;
@@ -61,14 +63,15 @@ public class KyufujissekiKoshinkekkaIchiranReport extends Report<KyufujissekiKos
         this.改頁項目List = 改頁項目List;
         this.システム日時 = システム日時;
         this.連番 = 連番;
-        this.indexList = indexList;
+        this.flag = flag;
+        this.合計 = 合計;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<KyufujissekiKoshinkekkaIchiranSource> reportSourceWriter) {
         IKyufujissekiKoshinkekkaIchiranEditor editor
                 = new KyufujissekiKoshinkekkaIchiranEditor(処理年月, entity, 並び順の１件目, 並び順の２件目,
-                        並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目List, システム日時, 連番, indexList);
+                        並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目List, システム日時, 連番, flag, 合計);
         IKyufujissekiKoshinkekkaIchiranBuilder builder
                 = new KyufujissekiKoshinkekkaIchiranBuilder(editor);
         reportSourceWriter.writeLine(builder);

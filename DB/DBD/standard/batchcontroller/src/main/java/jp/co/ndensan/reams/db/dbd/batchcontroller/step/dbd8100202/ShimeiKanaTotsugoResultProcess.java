@@ -47,11 +47,9 @@ public class ShimeiKanaTotsugoResultProcess extends BatchProcessBase<ShimeiKanaT
 
     @Override
     protected void process(ShimeiKanaTotsugoResultEntity entity) {
-        // TODO 氏名カナ突合結果一時テーブルを登録する
         ShimeiKanaTotsugoResultTempTableEntity items = setShimeiKanaTotsugoResultTempTableEntity(entity);
 
         shimeiKanaTotsugoResultTemp.insert(items);
-
     }
 
     private ShimeiKanaTotsugoResultTempTableEntity setShimeiKanaTotsugoResultTempTableEntity(ShimeiKanaTotsugoResultEntity entity) {
@@ -181,6 +179,11 @@ public class ShimeiKanaTotsugoResultProcess extends BatchProcessBase<ShimeiKanaT
         } else {
             tempTable.setDtYobi3(entity.getDt予備3());
         }
+        return setVoidEntity(tempTable, entity);
+    }
+
+    private ShimeiKanaTotsugoResultTempTableEntity setVoidEntity(ShimeiKanaTotsugoResultTempTableEntity tempTable,
+            ShimeiKanaTotsugoResultEntity entity) {
         if (entity.getDt予備4() == null || entity.getDt予備4().isEmpty()) {
             tempTable.setDtYobi4(RString.EMPTY);
         } else {

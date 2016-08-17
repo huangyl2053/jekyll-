@@ -56,7 +56,7 @@ public class KubunShikyuGendogaku {
         if (div.getBtnTsuika().isDisabled()) {
             onSelect_Back(div);
         }
-        return ResponseData.of(div).setState(DBC4510011StateName.初期状態);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -180,7 +180,8 @@ public class KubunShikyuGendogaku {
      */
     public ResponseData<KubunShikyuGendogakuDiv> onSelect_Return(
             KubunShikyuGendogakuDiv div) {
-        return onLoad(div);
+        onLoad(div);
+        return ResponseData.of(div).setState(DBC4510011StateName.初期状態);
     }
 
     /**

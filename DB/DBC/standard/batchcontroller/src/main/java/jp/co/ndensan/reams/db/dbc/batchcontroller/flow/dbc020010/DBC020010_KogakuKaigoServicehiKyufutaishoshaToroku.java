@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc020010;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.KogakuKaigoKyufuhiTaishoshaTorokuProcess;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kogakukaigokyufuhitaishoshatoroku.KogakuKaigoKyufuhiTaishoshaBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.kogakukaigokyufuhitaishoshatoroku.DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBC-2010-040 huzongcheng
  */
-public class KogakuKaigoServicehiKyufutaishoshaTorokuFlow extends BatchFlowBase<KogakuKaigoKyufuhiTaishoshaBatchParameter> {
+public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlowBase<DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter> {
 
     private static final String 高額介護費給付対象者登録 = "KogakuKaigoKyufuhiTaishoshaToroku";
 

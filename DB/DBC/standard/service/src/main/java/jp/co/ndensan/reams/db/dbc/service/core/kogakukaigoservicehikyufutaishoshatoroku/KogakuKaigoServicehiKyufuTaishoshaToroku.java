@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.kogakukaigoservicehikyufutaishos
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kogakukaigokyufuhitaishoshatoroku.KogakuKaigoKyufuhiTaishoshaBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.kogakukaigokyufuhitaishoshatoroku.DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3104KokuhorenInterfaceKanriDac;
@@ -79,11 +79,11 @@ public class KogakuKaigoServicehiKyufuTaishoshaToroku {
      * @param 審査年月To RString
      * @param 出力フラグ RString
      * @param 出力順ID Long
-     * @return KogakuKaigoKyufuhiTaishoshaBatchParameter
+     * @return DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter
      */
-    public KogakuKaigoKyufuhiTaishoshaBatchParameter getKogakuKaigoServicehiKyufuTaishoshaTorokuBatchParameter(
+    public DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter getKogakuKaigoServicehiKyufuTaishoshaTorokuBatchParameter(
             RString 審査年月From, RString 審査年月To, boolean 出力フラグ, Long 出力順ID) {
-        KogakuKaigoKyufuhiTaishoshaBatchParameter param = new KogakuKaigoKyufuhiTaishoshaBatchParameter();
+        DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter param = new DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter();
         if (!RString.isNullOrEmpty(審査年月From)) {
             param.setShinsaYMFrom(new FlexibleYearMonth(審査年月From));
         } else {

@@ -15,7 +15,17 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.ChofukuTorikomiDat
  */
 public interface IChofukuTorikomiDataDeleteShoriMapper {
 
+    /**
+     * 重複取込データ除外処理
+     *
+     * @return List<ChofukuTorikomiDataDeleteShoriJohoEntity>
+     */
     List<ChofukuTorikomiDataDeleteShoriJohoEntity> get重複取込データ除外処理();
 
-    int deleceデータを削除処理();
+    /**
+     * deleteデータを削除処理
+     *
+     * @return deleteデータ
+     */
+    int deleteデータを削除処理();
 }
