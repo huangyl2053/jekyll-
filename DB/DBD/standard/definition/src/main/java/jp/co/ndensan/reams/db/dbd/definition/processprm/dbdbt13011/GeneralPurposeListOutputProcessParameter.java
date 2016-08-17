@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt13011;
 
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuHohoKubun;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.SoshitsuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbddt13011.GeneralPurposeListOutputMybatisParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
@@ -21,13 +23,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class GeneralPurposeListOutputProcessParameter implements IBatchProcessParameter {
 
-    private RString 抽出方法区分;
+    private ChushutsuHohoKubun 抽出方法区分;
     private RString 抽出項目区分;
     private FlexibleDate 基準日;
     private FlexibleDate 日付範囲From;
     private FlexibleDate 日付範囲To;
     private boolean 直近データ抽出;
-    private RString 喪失区分;
+    private SoshitsuKubun 喪失区分;
     private boolean 項目名付加;
     private boolean 連番付加;
     private boolean 日付スラッシュ付加;
@@ -52,13 +54,13 @@ public class GeneralPurposeListOutputProcessParameter implements IBatchProcessPa
      * @param 出力順 出力順
      * @param 出力項目 出力項目
      */
-    public GeneralPurposeListOutputProcessParameter(RString 抽出方法区分,
+    public GeneralPurposeListOutputProcessParameter(ChushutsuHohoKubun 抽出方法区分,
             RString 抽出項目区分,
             FlexibleDate 基準日,
             FlexibleDate 日付範囲From,
             FlexibleDate 日付範囲To,
             boolean 直近データ抽出,
-            RString 喪失区分,
+            SoshitsuKubun 喪失区分,
             boolean 項目名付加,
             boolean 連番付加,
             boolean 日付スラッシュ付加,
