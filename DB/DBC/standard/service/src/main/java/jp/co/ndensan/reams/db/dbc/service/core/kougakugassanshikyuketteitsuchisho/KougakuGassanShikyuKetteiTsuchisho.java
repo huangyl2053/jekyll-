@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.kougakugassanshikyuketteitsuchis
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunketteitsuchisho.KogakuGassanShikyuKetteiTsuchisho;
+import jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunketteitsuchisho.KougakugassanShikyuketteiTsuuchishoOutputEntity;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kougakugassanshikyuketteitsuchisho.KougakuGassanShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kougakugassanshikyuketteitsuchisho.JigyoKogakuGassanEntity;
@@ -44,8 +45,7 @@ public class KougakuGassanShikyuKetteiTsuchisho {
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
     private static final RString 定数_0 = new RString("0");
-// TO DO
-//    private static final RString 定数_1 = new RString("1");
+    private static final RString 定数_1 = new RString("1");
     private static final RString 項目名_取り消し線 = new RString("取り消し線");
     private static final RString 項目名_帳票タイトル = new RString("帳票タイトル");
 // TO DO
@@ -102,9 +102,10 @@ public class KougakuGassanShikyuKetteiTsuchisho {
      * @param 口座情報 口座情報
      * @return {@link KogakuGassanShikyuKetteiTsuchisho}
      */
-    public KogakuGassanShikyuKetteiTsuchisho editKougakugassanShikyuketteiTsuuchisho(ShikibetsuCode 識別コード,
+    public KougakugassanShikyuketteiTsuuchishoOutputEntity editKougakugassanShikyuketteiTsuuchisho(ShikibetsuCode 識別コード,
             HihokenshaNo 被保険者番号, ReportId 帳票ID, FlexibleYear 対象年度, RString 連絡票整理番号, int 履歴番号, RString 文書番号,
             FlexibleDate 発行日, FlexibleDate 支払予定日, Koza 口座情報) {
+        RString データ有無 = 定数_0;
         KougakuGassanShikyuKetteiTsuchishoParameter param = new KougakuGassanShikyuKetteiTsuchishoParameter();
         param.set対象年度(対象年度);
         param.set履歴番号(履歴番号);
@@ -112,6 +113,11 @@ public class KougakuGassanShikyuKetteiTsuchisho {
         param.set連絡票整理番号(連絡票整理番号);
         IKougakuGassanShikyuKetteiTsuchishoMapper mapper = mapperProvider.create(IKougakuGassanShikyuKetteiTsuchishoMapper.class);
         JigyoKogakuGassanEntity jigyoKogakuGassanEntity = mapper.select事業高額合算(param);
+        if (jigyoKogakuGassanEntity == null) {
+            データ有無 = 定数_1;
+        } else {
+            entity.set事業高額合算支給不支給決定(jigyoKogakuGassanEntity.get事業高額合算支給不支給決定());
+        }
         KogakuGassanShikyuKetteiTsuchisho entity = new KogakuGassanShikyuKetteiTsuchisho();
         ChohyoSeigyoHanyoManager manager = new ChohyoSeigyoHanyoManager();
         ChohyoSeigyoHanyo 帳票制御汎用_取り消し線
@@ -127,7 +133,6 @@ public class KougakuGassanShikyuKetteiTsuchisho {
 //                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200201.getReportId(), FlexibleYear.MIN, 項目名_帳票タイトル_抹消線あり３);
 //        ChohyoSeigyoHanyo 帳票制御汎用_帳票タイトル_抹消線あり４
 //                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200201.getReportId(), FlexibleYear.MIN, 項目名_帳票タイトル_抹消線あり４);
-        entity.set事業高額合算支給不支給決定(jigyoKogakuGassanEntity.get事業高額合算支給不支給決定());
         if (定数_0.equals(帳票制御汎用_取り消し線.get設定値())) {
             entity.setTitle(帳票制御汎用_帳票タイトル.get設定値());
         }
@@ -136,7 +141,10 @@ public class KougakuGassanShikyuKetteiTsuchisho {
         entity.set被保険者番号(被保険者番号);
         //TO DO   QA:95951
         set通知文(entity);
-        return entity;
+        KougakugassanShikyuketteiTsuuchishoOutputEntity target = new KougakugassanShikyuketteiTsuuchishoOutputEntity();
+        target.set事業分高額合算支給決定通知書(entity);
+        target.setデータ有無(データ有無);
+        return target;
     }
 
     private void set通知文(KogakuGassanShikyuKetteiTsuchisho entity) {
