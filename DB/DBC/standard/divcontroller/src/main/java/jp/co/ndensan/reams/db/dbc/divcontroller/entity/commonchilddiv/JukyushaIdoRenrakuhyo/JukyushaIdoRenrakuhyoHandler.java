@@ -133,8 +133,10 @@ public class JukyushaIdoRenrakuhyoHandler {
      * @param 履歴番号 int
      * @param 論理削除フラグ boolean
      * @param 異動日 FlexibleDate
+     *
+     * @return JukyushaIdoRenrakuhyo
      */
-    public void initialize(RString 処理モード, ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号,
+    public JukyushaIdoRenrakuhyo initialize(RString 処理モード, ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号,
             int 履歴番号, boolean 論理削除フラグ, FlexibleDate 異動日) {
         setDivModel(処理モード);
         set支給限度基準額エリア項目名称(異動日);
@@ -142,7 +144,7 @@ public class JukyushaIdoRenrakuhyoHandler {
         JukyushaIdoRenrakuhyo 受給者異動情報 = JukyushaTeiseiRenrakuhyoToroku.createInstance().
                 getJukyushaIdoJoho(処理モード, 識別コード, 被保険者番号, 履歴番号, 論理削除フラグ, 異動日);
         if (受給者異動情報 == null) {
-            return;
+            return 受給者異動情報;
         }
         if (新規モード.equals(処理モード)) {
             div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtShoKisaiHokenshaNo().setValue(受給者異動情報.get証記載保険者番号().value());
@@ -158,7 +160,7 @@ public class JukyushaIdoRenrakuhyoHandler {
             if (受給者異動情報.get訂正年月日() != null && !受給者異動情報.get訂正年月日().isEmpty()) {
                 div.getJukyushaIdoRenrakuhyoTeisei().getTxtTeiseiYMD().setValue(new RDate(受給者異動情報.get訂正年月日().toString()));
             }
-            return;
+            return 受給者異動情報;
         }
         div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtIdoYMD().setValue(受給者異動情報.get異動年月日());
         if (JukyushaIF_IdoKubunCode.新規.getコード().equals(受給者異動情報.get異動区分コード())) {
@@ -214,6 +216,7 @@ public class JukyushaIdoRenrakuhyoHandler {
         set二割負担エリア(受給者異動情報);
         set二次予防事業エリア(受給者異動情報);
         set老人保健エリア(受給者異動情報);
+        return 受給者異動情報;
     }
 
     private void setDivModel(RString 処理モード) {

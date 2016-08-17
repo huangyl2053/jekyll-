@@ -389,8 +389,10 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     @Override
     public void initialize(RString 処理モード, ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号,
             int 履歴番号, boolean 論理削除フラグ, FlexibleDate 異動日) {
+        JukyushaIdoRenrakuhyo 受給者異動送付
+                = JukyushaIdoRenrakuhyoHandler.of(this).initialize(処理モード, 識別コード, 被保険者番号, 履歴番号, 論理削除フラグ, 異動日);
         ViewStateHolder.put(ViewStateKeys.履歴番号, 履歴番号);
-        JukyushaIdoRenrakuhyoHandler.of(this).initialize(処理モード, 識別コード, 被保険者番号, 履歴番号, 論理削除フラグ, 異動日);
+        ViewStateHolder.put(ViewStateKeys.受給者異動送付, 受給者異動送付);
     }
 
     /**
