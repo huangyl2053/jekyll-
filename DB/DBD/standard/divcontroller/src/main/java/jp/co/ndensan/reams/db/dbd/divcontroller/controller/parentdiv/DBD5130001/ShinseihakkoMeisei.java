@@ -78,7 +78,7 @@ public class ShinseihakkoMeisei {
      * @param shinseihakkoMeiseiDiv ShinseihakkoMeiseiDiv
      * @return ResponseData
      */
-    public ResponseData<ShinseihakkoMeiseiDiv> onClick_btnPublish(ShinseihakkoMeiseiDiv shinseihakkoMeiseiDiv) {
+    public ResponseData<SourceDataCollection> onClick_btnPublish(ShinseihakkoMeiseiDiv shinseihakkoMeiseiDiv) {
         ShinseiShoEntity shinseiShoEntity = getHandler(shinseihakkoMeiseiDiv).getShinseiShoEntity();
         ResponseData<SourceDataCollection> response = new ResponseData<>();
         int radShinseiKubunSelectIndex = shinseihakkoMeiseiDiv.getShinseihakkoMeisei2().getPrintSelect().getRadShinseiKubun().getSelectedIndex();
@@ -95,7 +95,7 @@ public class ShinseihakkoMeisei {
             SourceDataCollection collection = reportManager.publish();
             response.data = collection;
         }
-        return ResponseData.of(shinseihakkoMeiseiDiv).respond();
+        return response;
     }
 
     /**
