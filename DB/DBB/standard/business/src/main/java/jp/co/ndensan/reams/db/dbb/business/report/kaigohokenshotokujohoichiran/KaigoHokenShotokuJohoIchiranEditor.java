@@ -121,17 +121,17 @@ public class KaigoHokenShotokuJohoIchiranEditor implements IKaigoHokenShotokuJoh
         RString 表示場合 = DbBusinessConfig.get(ConfigNameDBB.所得引出_住民税減免前後表示区分,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
         if (表示場合.equals(表示する)) {
-            source.kazeiKubun = 定数_減免前;
+            source.kazeiKubun = 定数_住民税課税区分;
+            source.kazeiKubunGemmenMae = 定数_減免前;
             source.kazeiKubunGemmenGo = 定数_減免後;
-            source.kazeiKubunGemmenMae = 定数_住民税課税区分;
             set課税区分減免前(source);
             set課税区分減免後(source);
         } else if (表示場合.equals(表示しない)) {
             source.listIchiranhyoUpper_7 = RString.EMPTY;
             source.listIchiranhyoUpper_8 = RString.EMPTY;
-            source.kazeiKubun = RString.EMPTY;
+            source.kazeiKubun = 定数_住民税;
+            source.kazeiKubunGemmenMae = RString.EMPTY;
             source.kazeiKubunGemmenGo = RString.EMPTY;
-            source.kazeiKubunGemmenMae = 定数_住民税;
         }
         source.listIchiranhyoUpper_9 = new RString(所得情報一覧.getGokeiShotokuGaku().toString());
         source.listIchiranhyoUpper_10 = new RString(所得情報一覧.getKazeiShotokuGaku().toString());
