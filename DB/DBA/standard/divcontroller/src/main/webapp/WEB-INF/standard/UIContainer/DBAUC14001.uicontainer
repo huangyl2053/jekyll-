@@ -37,7 +37,7 @@
      "layoutName": "DBA1040011",
      "layoutTitle": "資格変更異動",
      "eventName": "再検索",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",
@@ -53,6 +53,20 @@
      "eventName": "完了",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA1040011",
+     "layoutTitle": "資格変更異動",
+     "eventName": "検索結果一覧へ",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "該当者一覧"
     }
    ]
   }

@@ -111,6 +111,17 @@ public class ShikakuHenkouIdou {
         return ResponseData.of(div).forwardWithEventName(DBA1040011TransitionEventName.再検索).respond();
     }
 
+    /**
+     * 対象者検索に戻るボタン押下の場合、対象者検索画面に戻る
+     *
+     * @param div 資格変更異動DIV
+     * @return ResponseData<ShikakuHenkouIdouDiv>
+     */
+    public ResponseData<ShikakuHenkouIdouDiv> onClick_btnSearchResult(ShikakuHenkouIdouDiv div) {
+        RealInitialLocker.release(前排他ロックキー);
+        return ResponseData.of(div).forwardWithEventName(DBA1040011TransitionEventName.検索結果一覧へ).respond();
+    }
+
     private ShikakuHenkouIdouHandler getHandler(ShikakuHenkouIdouDiv div) {
         return new ShikakuHenkouIdouHandler(div);
     }
