@@ -38,6 +38,7 @@ public class RoreiFukushiNenkinShokaiHandler {
 
     private final RoreiFukushiNenkinShokaiDiv div;
     private static final RString 状態_追加 = new RString("追加");
+    private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
 
     /**
@@ -224,8 +225,14 @@ public class RoreiFukushiNenkinShokaiHandler {
             div.getDatagridRireki().getDataSource().remove(index);
             return;
         }
-        row.setJotai(hasChanged ? eventJotai : RString.EMPTY);
-        div.getDatagridRireki().getDataSource().set(index, row);
+        if (状態_修正.equals(eventJotai)) {
+            if (状態_追加.equals(row.getJotai())) {
+                div.getDatagridRireki().getDataSource().set(index, row);
+                return;
+            }
+            row.setJotai(hasChanged ? eventJotai : RString.EMPTY);
+            div.getDatagridRireki().getDataSource().set(index, row);
+        }
     }
 
     /**
@@ -235,13 +242,14 @@ public class RoreiFukushiNenkinShokaiHandler {
      */
     public ValidationMessageControlPairs validate() {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        pairs.add(validate受給期間());
-
         RString state = div.getPanelInput().getState();
+        if (状態_削除.equals(state)) {
+            return pairs; // 削除時には検査項目なし。
+        }
+        pairs.add(validate受給期間());
         if (状態_追加.equals(state)) {
             pairs.add(validate受給開始日_重複なし());
         }
-
         pairs.add(validate履歴内_受給期間_重複なし());
         return pairs;
     }
@@ -325,6 +333,15 @@ public class RoreiFukushiNenkinShokaiHandler {
         return pairs;
     }
 
+    /**
+     * 受給期間の重複判定用に、履歴データグリッドの内容をコピーします。
+     * ただし、入力中のデータとキー（開始日）が同じ物は、入力中の内容に設定します。
+     * また、削除データは無視します。
+     *
+     * @param list 現在のデータグリッドの全要素
+     * @param input 入力中の内容
+     * @return コピー結果
+     */
     private List<datagridRireki_Row> copiedRowsAddingInput(List<datagridRireki_Row> list, panelInputDiv input) {
         List<datagridRireki_Row> tempList = new ArrayList<>();
         int size = list.size();
@@ -332,11 +349,17 @@ public class RoreiFukushiNenkinShokaiHandler {
         boolean hasAppliedInput = false;
         for (int i = 0; i < size; i++) {
             datagridRireki_Row row = list.get(i);
+            // 入力中のデータは、入力内容に置き換えて設定する。
             if (Objects.equals(inputStartDate, row.getStartDate().getValue())) {
                 tempList.add(i, new datagridRireki_Row(RString.EMPTY, input.getTxtStartDate(), input.getTxtEndDate()));
                 hasAppliedInput = true;
                 continue;
             }
+            // 削除データは、スキップする。
+            if (Objects.equals(状態_削除, row.getJotai())) {
+                continue;
+            }
+            // その他は、そのまま追加する。
             tempList.add(i, new datagridRireki_Row(RString.EMPTY,
                     row.getStartDate(),
                     row.getEndDate()));
