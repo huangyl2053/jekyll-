@@ -71,6 +71,8 @@ public class DBC2000021PanelAll {
             FlexibleYear 年度 = new FlexibleYear(div.getDdlNendo().getSelectedKey());
             FlexibleDate 基準日 = new FlexibleDate(div.getTxtKijunbi().getValue().toDateString());
             RiyoshaFutanWariaiHanteiManagerResult 判定結果 = getHandler(div).hannTei(被保険者番号, 年度, 基準日);
+            判定結果.set基準日(基準日);
+            判定結果.set年度(年度);
             ViewStateHolder.put(ViewStateKeys.判定結果, 判定結果);
             return ResponseData.of(div).forwardWithEventName(判定実行).respond();
         }
