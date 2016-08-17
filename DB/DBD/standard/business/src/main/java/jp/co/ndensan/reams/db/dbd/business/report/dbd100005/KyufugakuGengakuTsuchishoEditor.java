@@ -169,15 +169,12 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
             source.hihokenshaNo9 = 被保険者番号.substring(NOCOUNT_8, NOCOUNT_9);
             source.hihokenshaNo10 = 被保険者番号.substring(NOCOUNT_9, NOCOUNT_10);
         }
-        if (null != 帳票制御共通) {
-            RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-            if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
-                source.tsuchibun = 通知書定型文リスト.get(NOCOUNT_1);
-                if (new RString("1").equals(定型文文字サイズ)) {
-                    source.renrakusakiHoka = 通知書定型文リスト.get(NOCOUNT_2);
-                } else {
-                    source.renrakusakiHoka = RString.EMPTY;
-                }
+
+        RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
+        if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
+            source.tsuchibun = 通知書定型文リスト.get(NOCOUNT_1);
+            if (new RString("1").equals(定型文文字サイズ)) {
+                source.renrakusakiHoka = 通知書定型文リスト.get(NOCOUNT_2);
             }
         }
     }
@@ -186,7 +183,6 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
         ShiharaiHohoHenkoGengaku 支払方法変更情報 = this.帳票情報.getShiharaiHohoHenkoGengakuList().get(0);
         ShiharaiHohoHenkoGengakuMeisai 支払方法変更減額明細 = 支払方法変更情報.getShiharaiHohoHenkoGengakuMeisaiList().get(index);
         if (null != this.帳票情報.getShiharaiHohoHenkoGengakuList()) {
-            //TODO   支払方法変更減額明細が設計書と違い
 //            source.gengakuKikan = 支払方法変更情報.get確定減額期間開始年月日().wareki().toDateString().concat("~").
 //                    concat(支払方法変更情報.get確定減額期間終了年月日().wareki().toDateString());
             source.listTainoJokyo_1 = 支払方法変更減額明細.get対象年度().toDateString();
