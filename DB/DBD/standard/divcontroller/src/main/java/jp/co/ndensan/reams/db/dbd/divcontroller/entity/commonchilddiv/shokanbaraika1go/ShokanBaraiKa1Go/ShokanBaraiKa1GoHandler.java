@@ -561,7 +561,7 @@ public class ShokanBaraiKa1GoHandler {
             if (null != shiharaiHohoHenko.get終了区分()) {
                 div.getDdlShuryoJokyo().setSelectedKey(shiharaiHohoHenko.get終了区分());
             }
-            div.getTxtTorokuJokyo().setValue(shiharaiHohoHenko.get登録区分());
+            div.getTxtTorokuJokyo().setValue(ShiharaiHenkoTorokuKubun.toValue(shiharaiHohoHenko.get登録区分()).get名称());
             div.getTxtTekiyoKikanKaishi().setValue(shiharaiHohoHenko.get適用開始年月日());
             div.getTxtTekiyoKikanShuryo().setValue(shiharaiHohoHenko.get適用終了年月日());
             switch (ShoriKubun.toValue(div.getKey_Button())) {
