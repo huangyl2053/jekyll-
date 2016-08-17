@@ -145,10 +145,6 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
             }
         }
         帳票データの取得Parameter.set出力順(出力順);
-    }
-
-    @Override
-    protected void beforeExecute() {
         if (並び順 != null) {
             int i = 0;
             for (ISetSortItem item : 並び順.get設定項目リスト()) {
@@ -178,11 +174,13 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
 
     @Override
     protected void createWriter() {
-        PageBreaker<KyufuKanrihyoTorikomiKekkaIchiranSource> breaker = new KyufuKanrihyoTorikomiKekkaIchiranPageBreak(改頁項目リスト);
+        PageBreaker<KyufuKanrihyoTorikomiKekkaIchiranSource> breaker
+                = new KyufuKanrihyoTorikomiKekkaIchiranPageBreak(改頁項目リスト);
         batchReportWriter_一覧表 = BatchReportFactory.createBatchReportWriter(
                 parameter.get帳票ID().value()).addBreak(breaker).create();
         reportSourceWriter_一覧表 = new ReportSourceWriter<>(batchReportWriter_一覧表);
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
+                EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
