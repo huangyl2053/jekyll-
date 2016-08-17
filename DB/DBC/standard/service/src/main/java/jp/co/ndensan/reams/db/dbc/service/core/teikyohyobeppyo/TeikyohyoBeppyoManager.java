@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.Service
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.ServiceTypeTotal;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.TankiRiyoNissuResult;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.TeikyohyoBeppyoEntityResult;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.teikyohyobeppyo.TankiRiyoNissuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.teikyohyobeppyo.TeikyohyoBeppyoEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.teikyohyobeppyo.ITeikyohyoBeppyoMapper;
@@ -26,6 +27,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbc.service.core.jigosakuseimeisaitouroku.JigoSakuseiMeisaiTouroku;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -47,6 +49,7 @@ public class TeikyohyoBeppyoManager {
     private static final RString 自己作成計画年月R = new RString("自己作成計画年月");
     private static final RString 対象年月R = new RString("対象年月");
     private static final RString 履歴番号R = new RString("履歴番号");
+    private static final RString 引数_自己作成0件 = new RString("自己作成0件");
 
     private final MapperProvider mapperProvider;
 
@@ -107,8 +110,12 @@ public class TeikyohyoBeppyoManager {
         List<KyufuJikoSakuseiResult> 帳票データ = manage.getServiceRiyouHyo(被保険者番号, 対象年月, 履歴番号,
                 自己作成計画年月);
         List<KyufuJikoSakuseiEntityResult> 帳票データresult = new ArrayList<>();
-        for (KyufuJikoSakuseiResult result : 帳票データ) {
-            帳票データresult.add(entity変換(result));
+        if (帳票データ.isEmpty()) {
+            throw new ApplicationException(DbcErrorMessages.帳票印刷不可.getMessage().replace(引数_自己作成0件.toString()));
+        } else {
+            for (KyufuJikoSakuseiResult result : 帳票データ) {
+                帳票データresult.add(entity変換(result));
+            }
         }
         return 帳票データresult;
     }
@@ -274,8 +281,8 @@ public class TeikyohyoBeppyoManager {
         for (ServiceTypeTotal total : manage.getServiceTypeGendo(自己作成計画年月, details)) {
             if (total.get限度超過単位数() == null) {
                 total.set限度超過単位数(Decimal.ZERO);
-                totals.add(total);
             }
+            totals.add(total);
         }
         return totals;
     }
