@@ -9,7 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho1;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekikubun.KyufuJissekiKubun;
-import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.ShokanbaraiJyokyoShokai;
+import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiShokaiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
@@ -45,8 +45,10 @@ public class KyufuJissekiHeaderHandler {
      * @param 識別番号 識別番号
      */
     public void initialize(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, RString 整理番号, NyuryokuShikibetsuNo 識別番号) {
-        List<KyufuJissekiHedajyoho1> 給付実績ヘッダ情報1 = ShokanbaraiJyokyoShokai.createInstance().getKyufuJissekiHeaderJoho1(被保険者番号).records();
-        List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報2 = ShokanbaraiJyokyoShokai.createInstance().getKyufuJissekiHeaderJoho2(被保険者番号, サービス提供年月, 整理番号, 識別番号).records();
+        List<KyufuJissekiHedajyoho1> 給付実績ヘッダ情報1 = KyufuJissekiShokaiFinder.createInstance().
+                getKyufuJissekiHeaderJoho1(被保険者番号).records();
+        List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報2 = KyufuJissekiShokaiFinder.createInstance().
+                getKyufuJissekiHeaderJoho2(被保険者番号, サービス提供年月, 整理番号, 識別番号).records();
         if (給付実績ヘッダ情報1 != null && !給付実績ヘッダ情報1.isEmpty()) {
             set給付実績ヘッダ情報1(給付実績ヘッダ情報1.get(0));
         }
