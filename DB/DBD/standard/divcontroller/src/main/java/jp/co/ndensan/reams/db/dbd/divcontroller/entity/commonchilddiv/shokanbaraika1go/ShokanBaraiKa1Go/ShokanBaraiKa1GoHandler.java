@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenk
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoShuryoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoTorokuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.taino.JikoKubun;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -101,7 +101,7 @@ public class ShokanBaraiKa1GoHandler {
             if (ShoriKubun._1号予告者登録.equals(押下ボタン区分)) {
                 div.setShinkiKubun(新規登録);
             } else {
-                return UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("支払方法変更");
+                return UrInformationMessages.該当データなし.getMessage();
             }
         } else {
             ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, 支払方法データ.get(0));
@@ -344,32 +344,22 @@ public class ShokanBaraiKa1GoHandler {
     private void update支払方法変更_1号弁明書受理(ShoKisaiHokenshaNo 証記載保険者番号) {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(一号償還払い化ダイアログキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         ShiharaiHohoHenkoBuilder builder = 支払方法変更管理業務概念.createBuilderForEdit();
-        if (支払方法変更管理業務概念.get証記載保険者番号().equals(証記載保険者番号)
-                && 支払方法変更管理業務概念.get被保険者番号().equals(new HihokenshaNo(div.getKey_HihokenshaNo()))
-                && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(支払方法変更管理業務概念.get管理区分())
-                && 支払方法変更管理業務概念.get履歴番号() == get最大履歴番号()) {
-            builder.set終了区分(ShiharaiHenkoShuryoKubun.弁明書受理.getコード())
-                    .set弁明書受付年月日(div.getTxtBemmeiUketsukeYMD().getValue())
-                    .set弁明理由コード(div.getDdlBemmeiRiyu().getSelectedKey())
-                    .set弁明審査決定年月日(div.getTxtBemmeiNaiyoKetteiYMD().getValue())
-                    .set弁明審査結果区分(div.getDdlBemmeiShinsaKekka().getSelectedKey());
-            builder.setState(EntityDataState.Modified);
-            ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, builder.build());
-        }
+        builder.set終了区分(ShiharaiHenkoShuryoKubun.弁明書受理.getコード())
+                .set弁明書受付年月日(div.getTxtBemmeiUketsukeYMD().getValue())
+                .set弁明理由コード(div.getDdlBemmeiRiyu().getSelectedKey())
+                .set弁明審査決定年月日(div.getTxtBemmeiNaiyoKetteiYMD().getValue())
+                .set弁明審査結果区分(div.getDdlBemmeiShinsaKekka().getSelectedKey());
+        builder.setState(EntityDataState.Modified);
+        ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, builder.build());
     }
 
     private void update支払方法変更_1号予告者(ShoKisaiHokenshaNo 証記載保険者番号) {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(一号償還払い化ダイアログキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         ShiharaiHohoHenkoBuilder builder = 支払方法変更管理業務概念.createBuilderForEdit();
-        if (支払方法変更管理業務概念.get証記載保険者番号().equals(証記載保険者番号)
-                && 支払方法変更管理業務概念.get被保険者番号().equals(new HihokenshaNo(div.getKey_HihokenshaNo()))
-                && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(支払方法変更管理業務概念.get管理区分())
-                && 支払方法変更管理業務概念.get履歴番号() == get最大履歴番号()) {
-            builder.set予告登録年月日(div.getTxtYokokuTorokuYMD().getValue())
-                    .set弁明書提出期限(div.getTxtBemmeishoTeishutsuKigenYMD().getValue());
-            builder.setState(EntityDataState.Modified);
-            ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, builder.build());
-        }
+        builder.set予告登録年月日(div.getTxtYokokuTorokuYMD().getValue())
+                .set弁明書提出期限(div.getTxtBemmeishoTeishutsuKigenYMD().getValue());
+        builder.setState(EntityDataState.Modified);
+        ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, builder.build());
     }
 
     private void update支払方法変更滞納(TainoHanteiResultKohen 滞納判定結果, RString 滞納判定区分) {
@@ -382,32 +372,22 @@ public class ShokanBaraiKa1GoHandler {
             int 連番 = 最小連番 + i;
             TaishoHanteiKubun 対象管理区分 = get対象管理区分(連番, summary.get時効区分().getコード(), 支払方法変更管理業務概念.getShiharaiHohoHenkoTainoList());
             for (ShiharaiHohoHenkoTaino shiharaiHohoHenkoTaino : 支払方法変更管理業務概念.getShiharaiHohoHenkoTainoList()) {
-                if (shiharaiHohoHenkoTaino.get証記載保険者番号().equals(new ShoKisaiHokenshaNo("209007"))
-                        && shiharaiHohoHenkoTaino.get被保険者番号().equals(new HihokenshaNo(div.getKey_HihokenshaNo()))
-                        && shiharaiHohoHenkoTaino.get履歴番号() == get最大履歴番号()
-                        && shiharaiHohoHenkoTaino.get連番() == 連番
-                        && shiharaiHohoHenkoTaino.get調定年度().equals(summary.get調定年度())
-                        && shiharaiHohoHenkoTaino.get賦課年度().equals(summary.get賦課年度())
-                        && shiharaiHohoHenkoTaino.get通知書番号().equals(summary.get通知書番号())
-                        && shiharaiHohoHenkoTaino.get特徴_普徴区分().equals(summary.get徴収方法().getコード())
-                        && shiharaiHohoHenkoTaino.get収納期_月().equals(summary.get期())) {
-                    shiharaiHohoHenkoTaino.createBuilderForEdit()
-                            .set滞納判定年月日(FlexibleDate.getNowDate())
-                            .set判定基準年月日(滞納判定結果.get滞納判定基準日())
-                            .set完納_未納区分(summary.get未納完納区分().getコード())
-                            .set対象管理区分(対象管理区分.getコード())
-                            .set控除額(summary.get控除額())
-                            .set時効区分(summary.get時効区分().getコード())
-                            .set時効後収入区分(summary.get時効後収入区分().getコード())
-                            .set時効起算年月日(summary.get時効起算日())
-                            .set滞納額(summary.get滞納額())
-                            .set納期限(new FlexibleDate(summary.get納期限().toDateString()))
-                            .set調定額(summary.get調定額());
-                    shiharaiHohoHenkoTaino.createBuilderForEdit().build();
-                    builder.setShiharaiHohoHenkoTaino(shiharaiHohoHenkoTaino);
-                    builder.setState(EntityDataState.Modified);
-                    break;
-                }
+                shiharaiHohoHenkoTaino.createBuilderForEdit()
+                        .set滞納判定年月日(FlexibleDate.getNowDate())
+                        .set判定基準年月日(滞納判定結果.get滞納判定基準日())
+                        .set完納_未納区分(summary.get未納完納区分().getコード())
+                        .set対象管理区分(対象管理区分.getコード())
+                        .set控除額(summary.get控除額())
+                        .set時効区分(summary.get時効区分().getコード())
+                        .set時効後収入区分(summary.get時効後収入区分().getコード())
+                        .set時効起算年月日(summary.get時効起算日())
+                        .set滞納額(summary.get滞納額())
+                        .set納期限(new FlexibleDate(summary.get納期限().toDateString()))
+                        .set調定額(summary.get調定額());
+                shiharaiHohoHenkoTaino.createBuilderForEdit().build();
+                builder.setShiharaiHohoHenkoTaino(shiharaiHohoHenkoTaino);
+                builder.setState(EntityDataState.Modified);
+                break;
             }
         }
         ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, builder.build());
@@ -416,35 +396,25 @@ public class ShokanBaraiKa1GoHandler {
     private void update支払方法変更_償還払い化登録(ShoKisaiHokenshaNo 証記載保険者番号) {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(一号償還払い化ダイアログキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         ShiharaiHohoHenkoBuilder builder = 支払方法変更管理業務概念.createBuilderForEdit();
-        if (支払方法変更管理業務概念.get証記載保険者番号().equals(証記載保険者番号)
-                && 支払方法変更管理業務概念.get被保険者番号().equals(new HihokenshaNo(div.getKey_HihokenshaNo()))
-                && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(支払方法変更管理業務概念.get管理区分())
-                && 支払方法変更管理業務概念.get履歴番号() == get最大履歴番号()) {
-            builder.set適用開始年月日(div.getTxtTekiyoKikanKaishi().getValue())
-                    .set償還払化決定年月日(div.getTxtHenkoKetteiYMD().getValue())
-                    .set被保険者証提出期限(div.getTxtHokenshoTeishutsuKigenYMD().getValue());
-            builder.setState(EntityDataState.Modified);
-            ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, builder.build());
-        }
+        builder.set適用開始年月日(div.getTxtTekiyoKikanKaishi().getValue())
+                .set償還払化決定年月日(div.getTxtHenkoKetteiYMD().getValue())
+                .set被保険者証提出期限(div.getTxtHokenshoTeishutsuKigenYMD().getValue());
+        builder.setState(EntityDataState.Modified);
+        ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, builder.build());
     }
 
     private void update支払方法変更_償還払い化終了申請(ShoKisaiHokenshaNo 証記載保険者番号) {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(一号償還払い化ダイアログキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         ShiharaiHohoHenkoBuilder builder = 支払方法変更管理業務概念.createBuilderForEdit();
-        if (支払方法変更管理業務概念.get証記載保険者番号().equals(証記載保険者番号)
-                && 支払方法変更管理業務概念.get被保険者番号().equals(new HihokenshaNo(div.getKey_HihokenshaNo()))
-                && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(支払方法変更管理業務概念.get管理区分())
-                && 支払方法変更管理業務概念.get履歴番号() == get最大履歴番号()) {
-            builder.set適用終了年月日(div.getTxtTekiyoKikanShuryo().getValue())
-                    .set終了区分(div.getDdlShuryoJokyo().getSelectedKey())
-                    .set終了申請書受付年月日(div.getTxtShinseiUketsukeYMD().getValue())
-                    .set終了申請年月日(div.getTxtShinseiYMD().getValue())
-                    .set終了申請理由コード(div.getDdlShinseiRiyu().getSelectedKey())
-                    .set終了申請審査決定年月日(div.getTxtShinseiNaiyoKetteiYMD().getValue())
-                    .set終了申請審査結果区分(div.getDdlShinseiShinsaKekka().getSelectedKey());
-            builder.setState(EntityDataState.Modified);
-            ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, builder.build());
-        }
+        builder.set適用終了年月日(div.getTxtTekiyoKikanShuryo().getValue())
+                .set終了区分(div.getDdlShuryoJokyo().getSelectedKey())
+                .set終了申請書受付年月日(div.getTxtShinseiUketsukeYMD().getValue())
+                .set終了申請年月日(div.getTxtShinseiYMD().getValue())
+                .set終了申請理由コード(div.getDdlShinseiRiyu().getSelectedKey())
+                .set終了申請審査決定年月日(div.getTxtShinseiNaiyoKetteiYMD().getValue())
+                .set終了申請審査結果区分(div.getDdlShinseiShinsaKekka().getSelectedKey());
+        builder.setState(EntityDataState.Modified);
+        ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, builder.build());
     }
 
     private void setStatus() {
