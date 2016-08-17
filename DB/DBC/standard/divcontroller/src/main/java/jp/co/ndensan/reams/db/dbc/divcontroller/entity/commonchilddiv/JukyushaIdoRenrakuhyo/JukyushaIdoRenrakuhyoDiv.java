@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
@@ -387,6 +389,7 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     @Override
     public void initialize(RString 処理モード, ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号,
             int 履歴番号, boolean 論理削除フラグ, FlexibleDate 異動日) {
+        ViewStateHolder.put(ViewStateKeys.履歴番号, 履歴番号);
         JukyushaIdoRenrakuhyoHandler.of(this).initialize(処理モード, 識別コード, 被保険者番号, 履歴番号, 論理削除フラグ, 異動日);
     }
 
@@ -415,10 +418,10 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
      *
      * @return ValidationMessageControlPairs
      */
+    @JsonIgnore
     @Override
     public ValidationMessageControlPairs validateCheck() {
-//        return getValidationHandler().validateCheck();
-        return null;
+        return getValidationHandler().validate入力チェック();
     }
 
     /**
@@ -426,9 +429,15 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
      *
      * @return JukyushaIdoRenrakuhyo
      */
+    @JsonIgnore
     @Override
     public JukyushaIdoRenrakuhyo get受給者異動送付() {
-        return null;
+        int 履歴番号 = ViewStateHolder.get(ViewStateKeys.履歴番号, Integer.class) + 1;
+        return JukyushaIdoRenrakuhyoHandler.of(this).get受給者異動送付(履歴番号);
+    }
+
+    private JukyushaIdoRenrakuhyoValidationHandler getValidationHandler() {
+        return new JukyushaIdoRenrakuhyoValidationHandler(this);
     }
 
 }
