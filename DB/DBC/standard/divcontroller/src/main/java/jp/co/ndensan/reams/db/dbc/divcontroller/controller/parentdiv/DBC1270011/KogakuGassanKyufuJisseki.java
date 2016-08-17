@@ -15,8 +15,14 @@ import jp.co.ndensan.reams.db.dbc.service.core.kogakugassankyufujisseki.KogakuGa
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -44,6 +50,7 @@ public class KogakuGassanKyufuJisseki {
                     DbcInformationMessages.被保険者でないデータ.getMessage().getCode(),
                     DbcInformationMessages.被保険者でないデータ.getMessage().evaluate())).respond();
         }
+        setアクセスログ(識別コード, 被保険者番号);
         List<jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanKyufuJisseki> 高額合算給付実績情報
                 = KogakuGassanKyufuJissekiFinder.createInstance().getKogakuGassanKyufuJisseki(被保険者番号).records();
         boolean isデータ存在 = KogakuGassanKyufuJissekiFinder.createInstance().isデータ存在チェック(被保険者番号);
@@ -87,5 +94,11 @@ public class KogakuGassanKyufuJisseki {
 
     private KogakuGassanKyufuJissekiValidationHandler getValidationHandler() {
         return new KogakuGassanKyufuJissekiValidationHandler();
+    }
+
+    private void setアクセスログ(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
+        PersonalData personalData = PersonalData.of(識別コード,
+                new ExpandedInformation(new Code("003"), new RString("被保険者番号"), 被保険者番号.value()));
+        AccessLogger.log(AccessLogType.照会, personalData);
     }
 }
