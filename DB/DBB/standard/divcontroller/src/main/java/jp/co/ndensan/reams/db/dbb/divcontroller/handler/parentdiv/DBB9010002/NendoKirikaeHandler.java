@@ -18,12 +18,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 年度切替のクラスです
  *
- * @reamsid_L DBB_9010_002 zhengshenlei
+ * @reamsid_L DBB_5722_010 zhengshenlei
  */
 public class NendoKirikaeHandler {
 
     private final NendoKirikaeDiv div;
-    private final int NUM_1;
+    private static final int NUM_1 = 1;
 
     /**
      * コンストラクタです。
@@ -31,7 +31,6 @@ public class NendoKirikaeHandler {
      * @param div NendoKirikaeDiv
      */
     public NendoKirikaeHandler(NendoKirikaeDiv div) {
-        this.NUM_1 = 1;
         this.div = div;
     }
 
@@ -52,10 +51,16 @@ public class NendoKirikaeHandler {
 
     /**
      * バッチ実行のメソッドです
+     *
+     * @return DBB901002_NendoKirikaeParameter
      */
-    public void バッチ実行() {
+    public DBB901002_NendoKirikaeParameter バッチ実行() {
         DBB901002_NendoKirikaeParameter parameter = new DBB901002_NendoKirikaeParameter();
-        parameter.set調定年度(new FlexibleYear(div.getDcLblTonendo().getValue().toString()));
+        RString 当年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
+                SubGyomuCode.DBB介護賦課);
+        FlexibleYear 調定年度 = new FlexibleYear(当年度.toString());
+        parameter.set調定年度(調定年度);
+        return parameter;
     }
 
 }
