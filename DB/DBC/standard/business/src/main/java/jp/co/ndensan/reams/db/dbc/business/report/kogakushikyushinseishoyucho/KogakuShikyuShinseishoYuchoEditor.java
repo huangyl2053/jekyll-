@@ -30,7 +30,7 @@ public class KogakuShikyuShinseishoYuchoEditor implements IKogakuShikyuShinseish
     private final boolean is金融機関表示;
     private final RString 連番;
     private final RString 注意文;
-    private static final RString 漢字_注意 = new RString("注意");
+    private static final RString 文字_注意 = new RString("注意");
     private static final int 定値_0 = 0;
     private static final int 定値_1 = 1;
     private static final int 定値_2 = 2;
@@ -71,7 +71,7 @@ public class KogakuShikyuShinseishoYuchoEditor implements IKogakuShikyuShinseish
         source.hihokenshaNo = getColumnValue(帳票出力対象データ.getHihokenshaNoChohyo());
         source.kojinNo = getColumnValue(帳票出力対象データ.getKojinNoChohyo());
         source.ninshoshaYakushokuMei = 認証者役職名;
-        source.chuiTitle = 漢字_注意;
+        source.chuiTitle = 文字_注意;
         source.chuibun = 注意文;
         if (this.is金融機関表示) {
             if (帳票出力対象データ.getTsuchoKigoChohyo() != null) {
