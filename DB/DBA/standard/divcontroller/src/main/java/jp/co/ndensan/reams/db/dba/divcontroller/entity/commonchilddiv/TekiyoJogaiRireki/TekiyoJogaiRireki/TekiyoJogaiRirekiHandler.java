@@ -157,7 +157,7 @@ public class TekiyoJogaiRirekiHandler {
                 div.getBtnInputClear().setVisible(true);
                 div.getBtnInputClear().setDisabled(true);
                 div.getBtnKakutei().setVisible(true);
-                div.getBtnKakutei().setDisabled(true);
+                div.getBtnKakutei().setDisabled(true);         
                 return;
             case 照会モード:
                 div.getBtnAdd().setVisible(false);
@@ -240,6 +240,16 @@ public class TekiyoJogaiRirekiHandler {
         div.getBtnInputClear().setDisabled(false);
         div.getBtnKakutei().setVisible(true);
         div.getBtnKakutei().setDisabled(false);
+        
+        if (div.getDatagridTekiyoJogai().getClickedItem().getKayijoDate()==null
+                ||div.getDatagridTekiyoJogai().getClickedItem().getKayijoDate().getText().isEmpty()){
+            div.getPanelTekiyoInput().getTxtTekiyoDate().setDisabled(false);
+            div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().setDisabled(false);
+            div.getPanelTekiyoInput().getDdlTekiyoJiyu().setDisabled(false);
+            div.getPanelTekiyoInput().getTxtKayijoDate().setDisabled(true);
+            div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().setDisabled(true);
+            div.getPanelTekiyoInput().getDdlKaijyoJiyu().setDisabled(true);                 
+        }
     }
 
     /**
