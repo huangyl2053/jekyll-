@@ -26,7 +26,7 @@ public class DbWT0002KokuhorenTorikomiErrorTempProcess extends BatchProcessBase<
     private static final RString NUM_0 = new RString(0);
 
     private static final RString エラー区分_登録対象なし = new RString("99");
-    private static final RString 処理結果リスト一時_TABLE_NAME = new RString("DbWT0002KokuhorenTorikomiErrorTemp");
+    private static final RString 処理結果リスト一時_TABLE_NAME = new RString("DbWT0002KokuhorenTorikomiError");
     @BatchWriter
     BatchEntityCreatedTempTableWriter 処理結果リスト一時tableWriter;
 
