@@ -405,7 +405,7 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
      * @return int
      */
     public int 基本送付情報の履歴番号チェック(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
-        return dbT3002dac.get基本送付情報の履歴番号Max(被保険者番号, 異動日);
+        return dbT3002dac.get基本送付情報の履歴番号Max(被保険者番号, 異動日).getRirekiNo();
     }
 
     /**
@@ -416,7 +416,7 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
      * @return int
      */
     public int 償還送付情報の履歴番号チェック(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
-        return dbT3003dac.get償還送付情報の履歴番号Max(被保険者番号, 異動日);
+        return dbT3003dac.get償還送付情報の履歴番号Max(被保険者番号, 異動日).getRirekiNo();
     }
 
     /**
@@ -427,7 +427,7 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
      * @return int
      */
     public int 高額送付情報の履歴番号チェック(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
-        return dbT3004dac.get高額送付情報の履歴番号Max(被保険者番号, 異動日);
+        return dbT3004dac.get高額送付情報の履歴番号Max(被保険者番号, 異動日).getRirekiNo();
     }
 
     /**
