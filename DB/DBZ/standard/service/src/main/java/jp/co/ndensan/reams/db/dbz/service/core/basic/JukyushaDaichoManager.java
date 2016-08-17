@@ -149,4 +149,22 @@ public class JukyushaDaichoManager {
         }
         return 1 == dac.save(受給者台帳.toEntity());
     }
+
+    /**
+     * 受給者台帳を全件返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return List<JukyushaDaicho>
+     */
+    @Transaction
+    public List<JukyushaDaicho> get受給者台帳情報(HihokenshaNo 被保険者番号) {
+        List<JukyushaDaicho> businessList = new ArrayList<>();
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        for (DbT4001JukyushaDaichoEntity entity : dac.get受給者台帳(被保険者番号)) {
+            entity.initializeMd5();
+            businessList.add(new JukyushaDaicho(entity));
+        }
+
+        return businessList;
+    }
 }
