@@ -189,6 +189,18 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
     }
 
     private KyufujissekiKoshinkekkaIchiranSource editor集計(KyufujissekiKoshinkekkaIchiranSource source) {
+//        RString value = new RString(連番);
+//        if (indexList.contains(value)) {
+//            int index = indexList.indexOf(value);
+//            if (index == NUM_0) {
+//                source.gokeiKensuTitle = 合計件数タイトル;
+//                source.gokeiKensu = value;
+//            } else {
+//                int frontValue = Integer.parseInt(indexList.get(index - NUM_1).toString());
+//                source.gokeiKensuTitle = 合計件数タイトル;
+//                source.gokeiKensu = new RString(連番 - frontValue);
+//            }
+//        }
         if (flag) {
             source.gokeiKensuTitle = 合計件数タイトル;
             source.gokeiKensu = new RString(合計);
