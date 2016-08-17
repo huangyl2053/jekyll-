@@ -245,7 +245,8 @@ public class JigyoshaTouroku {
                 = KaigoJogaiTokureiParameter.createParam(事業者番号, yukoKaishiYMD, yukoShuryoYMD, null);
             if (!manager.checkKikanGorisei(parameter)) {
                 ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-                validationMessages.add(new ValidationMessageControlPair(JigyoshaTourokuErrorMessage.期間が不正));
+                validationMessages.add(new ValidationMessageControlPair(JigyoshaTourokuErrorMessage.期間が不正,
+                        div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD(),div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD()));
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }        
             if (!ResponseHolder.isReRequest()) {
@@ -265,7 +266,8 @@ public class JigyoshaTouroku {
                 旧事業者情報.get事業者番号().getColumnValue(), yukoKaishiYMD, yukoShuryoYMD, null);
             if (!manager.checkKikanGorisei(parameter)) {
                 ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-                validationMessages.add(new ValidationMessageControlPair(JigyoshaTourokuErrorMessage.期間が不正));
+                validationMessages.add(new ValidationMessageControlPair(JigyoshaTourokuErrorMessage.期間が不正,
+                        div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD(),div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD()));
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
             if (!ResponseHolder.isReRequest()) {
