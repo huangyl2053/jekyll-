@@ -236,6 +236,7 @@ public class GemmenJuminKihonHandler {
     public void load決定情報パネル(GemmenJoho 最新減免の情報) {
         KeteiinfoDiv 決定情報パネル = div.getGemmenMain().getKeteiinfo();
         決定情報パネル.getRadKetteiKubun().setDataSource(get決定区分());
+        決定情報パネル.getRadKetteiKubun().setSelectedIndex(ゼロ_定値);
         if (最新減免の情報 != null) {
             決定情報パネル.getTxtZenkaiGemmengaku().setValue(最新減免の情報.get減免額());
             List<Gemmen> 介護賦課減免List = 最新減免の情報.getGemmenList();
@@ -876,7 +877,6 @@ public class GemmenJuminKihonHandler {
      * @param 年度分賦課減免リスト NendobunFukaGemmenList
      */
     public void loadパネル状態1(RString 状況, NendobunFukaGemmenList 年度分賦課減免リスト) {
-        div.getGemmenFukaRirekiAll().setDisplayNone(true);
         div.getGemmenMain().getTorikeshiInfo().setDisplayNone(true);
         ShinseiinfoDiv 申請情報パネル = div.getGemmenMain().getShinseiinfo();
         申請情報パネル.setDisplayNone(false);
@@ -890,6 +890,7 @@ public class GemmenJuminKihonHandler {
         div.getGemmenMain().getShinseiinfo().setDisplayNone(false);
         div.getGemmenMain().getKeteiinfo().setDisplayNone(false);
         div.getGemmenMain().getKiwarigaku().setDisplayNone(false);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(保存ボタン, false);
         if (状況_新規.equals(状況) || 状況_申請中.equals(状況)) {
             申請情報パネル.getTxtShinseiYMD().setReadOnly(false);
             申請情報パネル.getTxtShinseiGemmengaku().setReadOnly(false);
@@ -1111,7 +1112,6 @@ public class GemmenJuminKihonHandler {
      * 全賦課履歴情報.表示件数 ≠ 1件の場合、パネルの状態の設定する。
      */
     public void loadパネル状態2() {
-        div.getGemmenFukaRirekiAll().setDisplayNone(false);
         div.getGemmenMain().getShinseiJokyo().setDisplayNone(true);
         div.getGemmenMain().getTorikeshiInfo().setDisplayNone(true);
         div.getGemmenMain().getShinseiinfo().setDisplayNone(true);
@@ -1120,6 +1120,15 @@ public class GemmenJuminKihonHandler {
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(訂正をやめるボタン, true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(取消をやめるボタン, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン, true);
+    }
+
+    /**
+     * 全賦課履歴情報のVisibleを制御する。
+     *
+     * @param flag boolean
+     */
+    public void set全賦課履歴情報Visible(boolean flag) {
+        div.getGemmenFukaRirekiAll().setDisplayNone(!flag);
     }
 
     private RString get状況(RString 減免作成区分) {
@@ -1146,7 +1155,6 @@ public class GemmenJuminKihonHandler {
         if (介護賦課減免.get減免決定日() != null) {
             決定情報パネル.getTxtKetteiYMD().setValue(介護賦課減免.get減免決定日());
         }
-        決定情報パネル.getTxtZenkaiGemmengaku().setValue(介護賦課減免.get決定減免額());
         RString 減免状態区分 = 介護賦課減免.get減免状態区分();
         if (定値_二.equals(減免状態区分)) {
             決定情報パネル.getRadKetteiKubun().setSelectedValue(不承認);
