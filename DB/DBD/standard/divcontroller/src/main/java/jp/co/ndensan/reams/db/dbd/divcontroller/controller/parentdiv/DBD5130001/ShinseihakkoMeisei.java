@@ -84,11 +84,11 @@ public class ShinseihakkoMeisei {
         int radShinseiKubunSelectIndex = shinseihakkoMeiseiDiv.getShinseihakkoMeisei2().getPrintSelect().getRadShinseiKubun().getSelectedIndex();
         try (ReportManager reportManager = new ReportManager()) {
             if (radShinseiKubunSelectIndex == 2) {
-                YokaigoNinteiShinseishoPrintService shinseishoPrintService = new YokaigoNinteiShinseishoPrintService();
-                shinseishoPrintService.print(shinseiShoEntity, reportManager);
-            } else {
                 YokaigoNinteikbnHenkoShinseishoPrintService teiShinseishoPrintService = new YokaigoNinteikbnHenkoShinseishoPrintService();
                 teiShinseishoPrintService.print(shinseiShoEntity, reportManager);
+            } else {
+                YokaigoNinteiShinseishoPrintService shinseishoPrintService = new YokaigoNinteiShinseishoPrintService();
+                shinseishoPrintService.print(shinseiShoEntity, reportManager);
             }
             HashMap<Code, RString> hashMap = new HashMap();
             hashMap.put(new Code(GyomuKoyuJoho.被保番号.getコード()), shinseiShoEntity.get被保険者番号());
