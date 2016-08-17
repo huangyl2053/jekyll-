@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  * 帳票設計_DBC200067_介護給付費等請求額通知書（公費負担者分）Propertyクラスです。
  *
- * @reamsid_L DBC-2000-070 lijian
+ * @reamsid_L DBC-2790-030 lijian
  */
 public class SeikyugakuTsuchishoKohifutanshabunProperty extends
         ReportPropertyBase<SeikyugakuTsuchishoKohifutanshabunSource> {
@@ -36,10 +36,10 @@ public class SeikyugakuTsuchishoKohifutanshabunProperty extends
                 new RString(SeikyugakuTsuchishoKohifutanshabunSource.DBC200067SeikyugakuTsuchishoKohifutanshabunFields.kohiFutanshaNo.name()));
 
         pageBreakKeys.add(
-                new RString(SeikyugakuTsuchishoKohifutanshabunSource.DBC200067SeikyugakuTsuchishoKohifutanshabunFields.kanName.name()));
+                new RString(SeikyugakuTsuchishoKohifutanshabunSource.DBC200067SeikyugakuTsuchishoKohifutanshabunFields.kanCode.name()));
 
         pageBreakKeys.add(
-                new RString(SeikyugakuTsuchishoKohifutanshabunSource.DBC200067SeikyugakuTsuchishoKohifutanshabunFields.kouName.name()));
+                new RString(SeikyugakuTsuchishoKohifutanshabunSource.DBC200067SeikyugakuTsuchishoKohifutanshabunFields.kouCode.name()));
 
     }
 
