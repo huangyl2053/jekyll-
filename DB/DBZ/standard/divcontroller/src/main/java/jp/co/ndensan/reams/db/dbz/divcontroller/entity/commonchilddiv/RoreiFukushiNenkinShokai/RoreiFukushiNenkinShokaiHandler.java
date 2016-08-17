@@ -14,6 +14,8 @@ import java.util.Objects;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyusha;
 import jp.co.ndensan.reams.db.dbz.definition.core.roreifukushinenkinjoho.RoreiFukushiNenkinJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IPredicate;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.service.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -190,25 +192,40 @@ public class RoreiFukushiNenkinShokaiHandler {
      */
     public void setDatagridRirekichiran(RString eventJotai, boolean hasChanged) {
         datagridRireki_Row row = new datagridRireki_Row();
+        int index = -1;
         if (!状態_追加.equals(eventJotai)) {
-            row = div.getDatagridRireki().getActiveRow();
+            final RDate startDate = div.getPanelInput().getTxtStartDate().getValue();
+            row = ItemList.of(div.getDatagridRireki().getDataSource())
+                    .filter(new IPredicate<datagridRireki_Row>() {
+                        @Override
+                        public boolean evaluate(datagridRireki_Row t) {
+                            return Objects.equals(t.getStartDate().getValue(), startDate);
+                        }
+                    })
+                    .findFirst()
+                    .orElse(new datagridRireki_Row());
+            index = div.getDatagridRireki().getDataSource().indexOf(row);
         }
         row.getStartDate().setValue(div.getPanelInput().getTxtStartDate().getValue());
         row.getEndDate().setValue(div.getPanelInput().getTxtEndDate().getValue());
-        int index = div.getDatagridRireki().getClickedRowId();
         if (状態_追加.equals(eventJotai)) {
             row.setJotai(eventJotai);
             div.getDatagridRireki().getDataSource().add(row);
-        } else if (状態_削除.equals(eventJotai)
-                   && !状態_追加.equals(div.getDatagridRireki().getActiveRow().getJotai())) {
-            row.setJotai(eventJotai);
-        } else if (状態_削除.equals(eventJotai)
-                   && 状態_追加.equals(div.getDatagridRireki().getActiveRow().getJotai())) {
-            div.getDatagridRireki().getDataSource().remove(index);
-        } else {
-            row.setJotai(hasChanged ? eventJotai : RString.EMPTY);
-            div.getDatagridRireki().getDataSource().set(index, row);
+            return;
         }
+        if (状態_削除.equals(eventJotai) && !状態_追加.equals(row.getJotai())) {
+            row.setJotai(eventJotai);
+            return;
+        }
+        if (index == -1) {
+            return;
+        }
+        if (状態_削除.equals(eventJotai) && 状態_追加.equals(row.getJotai())) {
+            div.getDatagridRireki().getDataSource().remove(index);
+            return;
+        }
+        row.setJotai(hasChanged ? eventJotai : RString.EMPTY);
+        div.getDatagridRireki().getDataSource().set(index, row);
     }
 
     /**
@@ -225,7 +242,7 @@ public class RoreiFukushiNenkinShokaiHandler {
             pairs.add(validate受給開始日_重複なし());
         }
 
-        pairs.add(validate履歴内_受給期間_重複なし(state));
+        pairs.add(validate履歴内_受給期間_重複なし());
         return pairs;
     }
 
@@ -285,23 +302,10 @@ public class RoreiFukushiNenkinShokaiHandler {
     /**
      * 履歴一覧に１件以上、受給期間が存在する場合、受給期間が重複していれば、エラーとする。
      *
-     * @param state 状態
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs validate履歴内_受給期間_重複なし(RString state) {
-        List<datagridRireki_Row> list = copiedRows(div.getDatagridRireki().getDataSource());
-        if (状態_追加.equals(state)) {
-            list.add(new datagridRireki_Row(
-                    RString.EMPTY,
-                    div.getPanelInput().getTxtStartDate(),
-                    div.getPanelInput().getTxtEndDate()));
-        } else {
-            int clickID = div.getDatagridRireki().getClickedRowId();
-            list.set(clickID, new datagridRireki_Row(
-                    RString.EMPTY,
-                    div.getPanelInput().getTxtStartDate(),
-                    div.getPanelInput().getTxtEndDate()));
-        }
+    public ValidationMessageControlPairs validate履歴内_受給期間_重複なし() {
+        List<datagridRireki_Row> list = copiedRowsAddingInput(div.getDatagridRireki().getDataSource(), div.getPanelInput());
         Collections.sort(list, new ComparatorByStartDateSort());
 
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
@@ -321,14 +325,24 @@ public class RoreiFukushiNenkinShokaiHandler {
         return pairs;
     }
 
-    private List<datagridRireki_Row> copiedRows(List<datagridRireki_Row> list) {
+    private List<datagridRireki_Row> copiedRowsAddingInput(List<datagridRireki_Row> list, panelInputDiv input) {
         List<datagridRireki_Row> tempList = new ArrayList<>();
         int size = list.size();
+        RDate inputStartDate = input.getTxtStartDate().getValue();
+        boolean hasAppliedInput = false;
         for (int i = 0; i < size; i++) {
             datagridRireki_Row row = list.get(i);
+            if (Objects.equals(inputStartDate, row.getStartDate().getValue())) {
+                tempList.add(i, new datagridRireki_Row(RString.EMPTY, input.getTxtStartDate(), input.getTxtEndDate()));
+                hasAppliedInput = true;
+                continue;
+            }
             tempList.add(i, new datagridRireki_Row(RString.EMPTY,
                     row.getStartDate(),
                     row.getEndDate()));
+        }
+        if (!hasAppliedInput) {
+            tempList.add(new datagridRireki_Row(RString.EMPTY, input.getTxtStartDate(), input.getTxtEndDate()));
         }
         return tempList;
     }
