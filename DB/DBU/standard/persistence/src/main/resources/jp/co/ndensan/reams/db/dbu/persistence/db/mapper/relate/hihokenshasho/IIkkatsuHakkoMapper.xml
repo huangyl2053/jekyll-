@@ -197,10 +197,13 @@ and open the template in the editor.
         <result property="yubinNo" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
         <result property="seibetsuCode" column="seibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jukyuKubun" column="jukyuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="taisyoKubun" column="taisyoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seinengappiFushoKubun" column="seinengappiFushoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
     <!--被保険者台帳の異動者情報取得-->
-    <select resultOrdered="true" id="getHihokenshaDaichoIdo" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="getHihokenshaDaichoIdo" resultMap="resultMap_getIkkatsuHakkoRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT 
         DbT1001."hihokenshaNo",
         DbT1001."shikibetsuCode",
@@ -224,37 +227,142 @@ and open the template in the editor.
         WHERE
         rank_number = 1    
     </select>
-      
-    <!--受給者台帳異動情報の取得-->
-    <select resultOrdered="true" id="getJukyushaDaichoIdo" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    
+    <resultMap id="resultMap_get総合事業対象者" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.SogoJigyoTaishoshaRelateEntity" autoMapping="true">
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="市町村コード_受給" column="shichosonCode_Juji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="識別コード_受給" column="shikibetsuCode_Juji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="市町村コード_ビュー" column="shichosonCode_view" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="識別コード_ビュー" column="shikibetsuCode_view" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="挿入日時_受給" column="insertTimestam_Jujip" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="更新日時_受給" column="lastUpdateTimestamp_Juji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="挿入日時_総合" column="insertTimestamp_Sogo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="更新日時_総合" column="lastUpdateTimestamp_Sogo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="認定年月日" column="ninteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="チェックリスト実施日" column="checklistJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="適用開始日" column="tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="適用終了日" column="tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+    
+    <!-- 受給者台帳一時テーブルの作成 -->
+    <insert id="create受給者台帳Temp" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" >
+        CREATE TEMPORARY TABLE 受給者台帳Temp AS 
         SELECT
-        DbT4001."hihokenshaNo",
-        DbT4001."shikibetsuCode",
-        DbT4001."shichosonCode",
-        DbT4001."lastUpdateTimestamp",  
-        DbT4001."insertTimestamp"
-        FROM(  
-        SELECT 
-        "hihokenshaNo",
-        "shikibetsuCode",
-        "shichosonCode",
-        "lastUpdateTimestamp",  
-        "insertTimestamp",
-        row_number() over(partition by "hihokenshaNo" order by "rirekiNo" desc,"edaban" desc) as rank_number
+            a."hihokenshaNo",
+            a."shikibetsuCode",
+            a."shichosonCode",
+            a."lastUpdateTimestamp",  
+            a."insertTimestamp",
+            a."ninteiYMD"
         FROM
-        rgdb."DbT4001JukyushaDaicho"
+            rgdb."DbT4001JukyushaDaicho" AS a 
         WHERE
-        "chokkinIdoJiyuCode" IN ('01','02','04','10')
-        AND "logicalDeletedFlag"<![CDATA[<>]]> true
-        AND "yukoMukoKubun" = '1'
-        AND "insertTimestamp" <![CDATA[>=]]> #{konkaiFromYMDHMS}
-        AND "insertTimestamp" <![CDATA[<=]]> #{konkaiToYMDHMS})DbT4001
-        WHERE
-        rank_number = 1                
-    </select>
+            a."rirekiNo" = ( 
+                SELECT
+                  MAX(b."rirekiNo") 
+                FROM
+                  rgdb."DbT4001JukyushaDaicho" AS b 
+                WHERE
+                  a."hihokenshaNo" = b."hihokenshaNo" 
+                  AND b."yukoMukoKubun" = '1'
+                  AND b."logicalDeletedFlag" <![CDATA[<>]]> true) 
+        AND a."edaban" = ( 
+                SELECT
+                  MAX(c."edaban") 
+                FROM
+                  rgdb."DbT4001JukyushaDaicho" AS c 
+                WHERE
+                  a."hihokenshaNo" = c."hihokenshaNo" 
+                  AND a."rirekiNo" = c."rirekiNo" 
+                  AND c."yukoMukoKubun" = '1' 
+                  AND c."logicalDeletedFlag" <![CDATA[<>]]> true) 
+        AND a."chokkinIdoJiyuCode" IN ('01', '02', '04', '10')
+        AND a."insertTimestamp" <![CDATA[>=]]> #{konkaiFromYMDHMS}
+        AND a."insertTimestamp" <![CDATA[<=]]> #{konkaiToYMDHMS}
+    </insert>
       
+    <!-- 総合事業対象者一時テーブルの作成 -->
+    <insert id="create総合事業対象者Temp" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" >
+        CREATE TEMPORARY TABLE 総合事業対象者Temp AS
+        SELECT
+            a."hihokenshaNo",
+            a."checklistJisshiYMD",
+            a."lastUpdateTimestamp",  
+            a."insertTimestamp"
+        FROM
+            rgdb."DbT3105SogoJigyoTaishosha" AS a 
+        WHERE
+            a."rirekiNo" = ( 
+              SELECT
+                MAX(b."rirekiNo") 
+              FROM
+                rgdb."DbT3105SogoJigyoTaishosha" AS b 
+              WHERE
+                a."hihokenshaNo" = b."hihokenshaNo") 
+            AND a."insertTimestamp" <![CDATA[>=]]> #{konkaiFromYMDHMS}
+            AND a."insertTimestamp" <![CDATA[<=]]> #{konkaiToYMDHMS}
+    </insert>
+    
+    <select resultOrdered="true" id="get受給者台帳Tempのみ" resultMap="resultMap_get総合事業対象者">
+        SELECT
+            a."hihokenshaNo",
+            a."shikibetsuCode" AS "shikibetsuCode_Juji",
+            a."shichosonCode" AS "shichosonCode_Juji",
+            a."lastUpdateTimestamp",  
+            a."insertTimestamp" 
+        FROM 
+            受給者台帳Temp AS a
+        WHERE 
+             NOT EXISTS(
+                SELECT 'X'
+                FROM 
+                    総合事業対象者Temp b
+                WHERE 
+                    a."hihokenshaNo" = b."hihokenshaNo")
+    </select>
+    
+    <select resultOrdered="true" id="get総合事業対象者Tempのみ" resultMap="resultMap_get総合事業対象者">
+        SELECT
+            a."hihokenshaNo",
+            c."shikibetsuCode" AS "shikibetsuCode_view",
+            c."shichosonCode" AS "shichosonCode_view",
+            a."lastUpdateTimestamp" AS "lastUpdateTimestamp_Juji",  
+            a."insertTimestamp" AS "insertTimestamp_Juji"
+        FROM 
+            総合事業対象者Temp AS a
+        LEFT OUTER JOIN
+            rgdb."DbV1001HihokenshaDaicho" c
+        ON 
+            a."hihokenshaNo" = c."hihokenshaNo"
+        WHERE 
+             NOT EXISTS(
+                SELECT 'X'
+                FROM 
+                    受給者台帳Temp b
+                WHERE 
+                    a."hihokenshaNo" = b."hihokenshaNo")
+    </select>
+        
+    <select resultOrdered="true" id="get受給者台帳と総合事業対象者の両方" resultMap="resultMap_get総合事業対象者">
+        SELECT
+            b."hihokenshaNo",
+            a."shikibetsuCode" AS "shikibetsuCode_Juji",
+            a."shichosonCode" AS "shichosonCode_Juji",
+            b."lastUpdateTimestamp" AS "lastUpdateTimestamp_Sogo",  
+            b."insertTimestamp"  AS "insertTimestamp_Sogo",
+            a."ninteiYMD",
+            b."checklistJisshiYMD"
+        FROM 
+            受給者台帳Temp AS a
+        INNER JOIN
+            総合事業対象者Temp b
+        ON 
+            a."hihokenshaNo" = b."hihokenshaNo"
+    </select>
+   
     <!--年齢到達予定者情報の取得-->
-    <select resultOrdered="true" id="getNenreiTotatsuYotesha" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="getNenreiTotatsuYotesha" resultMap="resultMap_getIkkatsuHakkoRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT
         PSM."shikibetsuCode",
         PSM."genLasdecCode" AS "shichosonCode",
@@ -293,7 +401,7 @@ and open the template in the editor.
     <!-- 一時テーブルの作成 -->
     <insert id="createTmpHihokenshasho_Ichi">
         CREATE TEMP TABLE "TmpHihokenshasho_Ichi"
-        ("hihokenshaNo"character(10),
+        ("hihokenshaNo"character(11),
         "shichosonCode"rshare."UDD023LasdecCode",
         "shikibetsuCode"rshare."UDD001ShikibetsuCode",
         "insertTimestamp"timestamp,
@@ -478,7 +586,9 @@ and open the template in the editor.
         "kanaMeisho"rshare."UDD043AtenaKanaMeisho",
         "yubinNo"rshare."UDD003YubinNo",
         "seibetsuCode"text,
-        "jukyuKubun"text)
+        "jukyuKubun"text,
+        "taisyoKubun"text,
+        "seinengappiFushoKubun"text)
     </insert>
 
     <!-- データを一時テーブルに登録します。 -->
@@ -664,7 +774,16 @@ and open the template in the editor.
         #{jusho},
         #{banchi},
         #{katagaki},
-        #{shisetyuJotaiFlag})
+        #{shisetyuJotaiFlag},
+        #{juminShubetsuCode},
+        #{juminJotaiCode},
+        #{gyoseikuName},
+        #{kanaMeisho},
+        #{yubinNo},
+        #{seibetsuCode},
+        #{jukyuKubun},
+        #{taisyoKubun},
+        #{seinengappiFushoKubun})
     </insert>
     
     <!-- 一時テーブルの申請中状態フラグを更新します -->
@@ -783,7 +902,8 @@ and open the template in the editor.
     </select>
     
     <!--生年月日の値がある場合、適用除外者のチェック-->
-    <select resultOrdered="true" id="get最新適用除外者2" resultMap="resultMap_getIkkatsuHakkoRelateEntity"  parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="get最新適用除外者2" resultMap="resultMap_getIkkatsuHakkoRelateEntity"  
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT
             DbT1002."shikibetsuCode"
         FROM(
@@ -818,7 +938,8 @@ and open the template in the editor.
     </select>
     
     <!--生年月日の値がある場合、他市町村住所地特例のチェック-->
-    <select resultOrdered="true" id="get最新他市町村住所地特例2" resultMap="resultMap_getIkkatsuHakkoRelateEntity"  parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="get最新他市町村住所地特例2" resultMap="resultMap_getIkkatsuHakkoRelateEntity"  
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT
             DbT1003."shikibetsuCode"
         FROM(
@@ -857,7 +978,8 @@ and open the template in the editor.
     </select>
       
     <!--一括発行の場合、対象情報を取得します。-->
-    <select resultOrdered="true" id="getIkkatsuShoriDateKanri" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="getIkkatsuShoriDateKanri" resultMap="resultMap_getIkkatsuHakkoRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT
         "hihokenshaNo",
         "hakkoShoriTimestamp"
@@ -872,7 +994,8 @@ and open the template in the editor.
     </select>
       
     <!--画面で「再発行する」をチェックする場合、対象情報を取得します。-->
-    <select resultOrdered="true" id="getCheckShoriDateKanri" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="getCheckShoriDateKanri" resultMap="resultMap_getIkkatsuHakkoRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT 
         DbT7037."hihokenshaNo"
         FROM(
@@ -1411,6 +1534,7 @@ and open the template in the editor.
         rank_number = 1)DbT4001Joho
         ON
         Tmp."hihokenshaNo" = DbT4001Joho."hihokenshaNo"
+        AND Tmp."taisyoKubun" = '1'
     </select>
       
     <!--受給者台帳の情報取得を一時テーブルに更新します。-->
@@ -1503,7 +1627,8 @@ and open the template in the editor.
     </update>
         
     <!--要介護認定結果情報を取得します。-->
-    <select resultOrdered="true" id="getNinteiKekkaJoho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="getNinteiKekkaJoho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT
         Tmp."hihokenshaNo",
         DbT4102Joho."shinseishoKanriNo",
@@ -1775,7 +1900,8 @@ and open the template in the editor.
     </select>
       
     <!--居宅給付計画事業者作成情報の取得-->
-    <select resultOrdered="true" id="getKyotakuKeikakuJigyoshaSakusei" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="getKyotakuKeikakuJigyoshaSakusei" resultMap="resultMap_getIkkatsuHakkoRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT
         DbT3005Joho."hihokenshaNo",
         DbT3005Joho."taishoYM",
@@ -1870,7 +1996,8 @@ and open the template in the editor.
     </select>
       
     <!--居宅給付計画自己作成情報の取得-->
-    <select resultOrdered="true" id="getKyotakuKeikakuJikoSakusei" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="getKyotakuKeikakuJikoSakusei" resultMap="resultMap_getIkkatsuHakkoRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT
         DbT3005Joho."hihokenshaNo",
         DbT3005Joho."taishoYM",
@@ -1985,7 +2112,8 @@ and open the template in the editor.
     </update>
         
     <!--本人情報取得-->
-    <select resultOrdered="true" id="getHonninJoho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="getHonninJoho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT 
         Tmp."hihokenshaNo",
         PSM."shikibetsuCode",
@@ -1996,7 +2124,8 @@ and open the template in the editor.
         PSM."gyoseikuName",
         PSM."kanaMeisho",
         PSM."yubinNo",
-        PSM."seibetsuCode"
+        PSM."seibetsuCode",
+        PSM."seinengappiFushoKubun"
         FROM
         "TmpHihokenshasho_Ichi" AS Tmp
         INNER JOIN  
@@ -2018,13 +2147,15 @@ and open the template in the editor.
         "gyoseikuName" = #{gyoseikuName},
         "kanaMeisho" = #{kanaMeisho},
         "yubinNo" = #{yubinNo},
-        "seibetsuCode" = #{seibetsuCode}
+        "seibetsuCode" = #{seibetsuCode},
+        "seinengappiFushoKubun" = #{seinengappiFushoKubun}
         WHERE 
         "hihokenshaNo" = #{hihokenshaNo}
     </update>
       
     <!--送付先情報取得-->
-    <select resultOrdered="true" id="getSofusakiJoho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="getSofusakiJoho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT 
         Tmp."hihokenshaNo" ,
         psmAtesaki."kannaiKangaiKubun",
@@ -2037,7 +2168,47 @@ and open the template in the editor.
         rgua.${psmAtesaki} AS psmAtesaki
         ON
         psmAtesaki."shikibetsuCode" = Tmp."shikibetsuCode"     
-    </select>  
+    </select> 
+    
+    <!--総合事業対象者の情報取得-->
+    <select resultOrdered="true" id="get総合事業対象者" resultMap="resultMap_get総合事業対象者" fetchSize="500">
+        SELECT 
+            DbT3105SogoJigyoTaishosha."hihokenshaNo" ,
+            DbT3105SogoJigyoTaishosha."tekiyoKaishiYMD" ,
+            DbT3105SogoJigyoTaishosha."checklistJisshiYMD",
+            DbT3105SogoJigyoTaishosha."tekiyoShuryoYMD"
+        FROM
+            "TmpHihokenshasho_Ichi" AS Tmp
+        INNER JOIN
+            (SELECT 
+                dbT3105."hihokenshaNo" ,
+                dbT3105."rirekiNo",
+                dbT3105."tekiyoKaishiYMD",
+                dbT3105."tekiyoShuryoYMD",
+                dbT3105."uketsukeYMD",
+                dbT3105."ketteiYMD",
+                dbT3105."checklistJisshiYMD",
+                row_number() over(partition by "hihokenshaNo" order by "rirekiNo" desc) as rank_number
+            FROM
+                rgdb."DbT3105SogoJigyoTaishosha" AS dbT3105)DbT3105SogoJigyoTaishosha
+        ON
+            DbT3105SogoJigyoTaishosha."hihokenshaNo" = Tmp."hihokenshaNo" 
+        WHERE
+          rank_number = 1
+        AND Tmp."taisyoKubun" = '2'
+    </select>   
+    
+    <!--総合事業対象者情報を一時テーブルに更新します。-->
+    <update id="updateTmp総合事業対象者情報" parameterType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.SogoJigyoTaishoshaRelateEntity">
+        UPDATE 
+        "TmpHihokenshasho_Ichi"
+        SET
+        "ninteiYMD" = #{checklistJisshiYMD},
+        "ninteiYukoKikanKaishiYMD" = #{tekiyoKaishiYMD},
+        "ninteiYukoKikanShuryoYMD" = #{tekiyoShuryoYMD}
+        WHERE 
+        "hihokenshaNo" = #{hihokenshaNo}
+    </update>
       
     <!--送付先情報を一時テーブルに更新します。-->
     <update id="updateTmp_SofusakiJoho" parameterType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity">
@@ -2240,7 +2411,9 @@ and open the template in the editor.
         "kanaMeisho",
         "yubinNo",
         "seibetsuCode",
-        "jukyuKubun"
+        "jukyuKubun",
+        "taisyoKubun",
+        "seinengappiFushoKubun"
         FROM
         "TmpHihokenshasho_Ichi"
         WHERE
@@ -2435,7 +2608,9 @@ and open the template in the editor.
         "kanaMeisho",
         "yubinNo",
         "seibetsuCode",
-        "jukyuKubun"
+        "jukyuKubun",
+        "taisyoKubun",
+        "seinengappiFushoKubun"
         FROM
         "TmpHihokenshasho_Ichi"
         <if test="orderbyFlag">
@@ -2444,7 +2619,8 @@ and open the template in the editor.
     </select>
       
     <!--同一被保険者番号の最大履歴番号を取得します。 -->
-    <select resultOrdered="true" id="getSaishinrirekiNo" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="getSaishinrirekiNo" resultMap="resultMap_getIkkatsuHakkoRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT 
             "rirekiNo"
         FROM 
@@ -2509,7 +2685,6 @@ and open the template in the editor.
         AND "shoriName" = '被保険者証一括発行'
         AND "shoriEdaban" = #{shoriEdaban}
     </update>
-    
     <!-- 一時テーブルを削除します -->
     <update id="dropTmpHihokenshasho_Ichi">
         DROP TABLE
