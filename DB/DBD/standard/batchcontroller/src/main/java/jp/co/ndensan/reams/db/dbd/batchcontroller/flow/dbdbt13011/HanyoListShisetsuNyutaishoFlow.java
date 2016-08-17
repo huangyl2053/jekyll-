@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbdbt13011;
 
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt13011.GeneralPurposeListOutputExecProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbdbt13011.GeneralPurposeListOutputParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbdbt13011.HanyoListShisetsuNyutaishoBatchParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt13011.GeneralPurposeListOutputProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBD-1570-030 x_lilh
  */
-public class GeneralPurposeListOutputFlow extends BatchFlowBase<GeneralPurposeListOutputParameter> {
+public class HanyoListShisetsuNyutaishoFlow extends BatchFlowBase<HanyoListShisetsuNyutaishoBatchParameter> {
 
     private static final String BATCH_PROCESS = "batchProcess";
 
@@ -38,7 +38,7 @@ public class GeneralPurposeListOutputFlow extends BatchFlowBase<GeneralPurposeLi
     }
 
     private GeneralPurposeListOutputProcessParameter createParameter() {
-        GeneralPurposeListOutputParameter parameter = getParameter();
+        HanyoListShisetsuNyutaishoBatchParameter parameter = getParameter();
         return parameter.toGeneralPurposeListOutputProcessParameter(parameter.get抽出方法区分(), parameter.get抽出項目区分(),
                 parameter.get基準日(), parameter.get日付範囲From(),
                 parameter.get日付範囲To(), parameter.is直近データ抽出(), parameter.get喪失区分(), parameter.is項目名付加(),
