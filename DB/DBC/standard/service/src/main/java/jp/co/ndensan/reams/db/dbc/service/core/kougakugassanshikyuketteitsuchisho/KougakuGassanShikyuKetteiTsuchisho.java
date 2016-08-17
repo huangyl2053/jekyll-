@@ -113,12 +113,12 @@ public class KougakuGassanShikyuKetteiTsuchisho {
         param.set連絡票整理番号(連絡票整理番号);
         IKougakuGassanShikyuKetteiTsuchishoMapper mapper = mapperProvider.create(IKougakuGassanShikyuKetteiTsuchishoMapper.class);
         JigyoKogakuGassanEntity jigyoKogakuGassanEntity = mapper.select事業高額合算(param);
+        KogakuGassanShikyuKetteiTsuchisho entity = new KogakuGassanShikyuKetteiTsuchisho();
         if (jigyoKogakuGassanEntity == null) {
             データ有無 = 定数_1;
         } else {
             entity.set事業高額合算支給不支給決定(jigyoKogakuGassanEntity.get事業高額合算支給不支給決定());
         }
-        KogakuGassanShikyuKetteiTsuchisho entity = new KogakuGassanShikyuKetteiTsuchisho();
         ChohyoSeigyoHanyoManager manager = new ChohyoSeigyoHanyoManager();
         ChohyoSeigyoHanyo 帳票制御汎用_取り消し線
                 = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200201.getReportId(), FlexibleYear.MIN, 項目名_取り消し線);
