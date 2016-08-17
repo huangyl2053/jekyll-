@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -92,8 +93,8 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoFukaParam
     protected void defineFlow() {
         executeStep(システム日時の取得);
         createKarisanteiIdoKekkaProcessParameter();
-        parameter.set調定日時(getResult(RDateTime.class,
-                new RString(システム日時の取得), SystemTimeShutokuProcess.SYSTEM_TIME));
+        parameter.set調定日時(getResult(YMDHMS.class,
+                new RString(システム日時の取得), SystemTimeShutokuProcess.SYSTEM_TIME).getRDateTime());
         executeStep(資格異動者抽出);
         executeStep(特別徴収開始者抽出);
         executeStep(特別徴収停止者抽出);
@@ -358,7 +359,7 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoFukaParam
     private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter() {
         return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度(),
                 getParameter().get賦課年度(),
-                new RString(getResult(RDateTime.class, new RString(システム日時の取得),
+                new RString(getResult(YMDHMS.class, new RString(システム日時の取得),
                                 SystemTimeShutokuProcess.SYSTEM_TIME).toString()),
                 ShoriName.仮算定異動賦課.get名称(), RString.EMPTY);
     }
