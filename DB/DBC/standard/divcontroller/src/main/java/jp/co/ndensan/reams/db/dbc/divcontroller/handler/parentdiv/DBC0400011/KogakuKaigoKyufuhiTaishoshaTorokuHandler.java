@@ -25,9 +25,13 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuHandler {
     private final KogakuKaigoKyufuhiTaishoshaTorokuBatchParameterDiv div;
 
     private static final RString 高額介護サービス費給付対象者登録自庁 = new RString("DBCMN41002");
-    private static final RString 総合事業高額介護サービス費給付対象者登録自庁 = new RString("DBCMN41004");
+    private static final RString 総合事業高額介護サービス費給付対象者登録自庁 = new RString("DBCMNL1002");
     private static final RString 実行ボタン_DBCMN41002 = new RString("btnBatch41002");
-    private static final RString 実行ボタン_DBCMN41004 = new RString("btnBatch41004");
+    private static final RString 実行ボタン_DBCMNL1002 = new RString("btnBatchL1002");
+    private static final RString TITLE_ONE = new RString("高額介護サービス費給付対象者登録");
+    private static final RString TITLE_TWO = new RString("総合事業高額介護サービス費給付対象者登録");
+    private static final RString LABLE_ONE = new RString("高額介護サービス費給付対象者一覧表");
+    private static final RString LABLE_TWO = new RString("総合事業高額介護サービス費給付対象者一覧表");
 
     /**
      * コンストラクタです。
@@ -52,16 +56,20 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuHandler {
      * 初期化のメソッドです。
      */
     public void initializeDisplay() {
-        RString uiContainerId = ResponseHolder.getUIContainerId();
+        RString menuId = ResponseHolder.getMenuID();
         KogakuKaigoServicehiKyufuTaishoshaToroku business = new KogakuKaigoServicehiKyufuTaishoshaToroku();
-        KokuhorenInterfaceKanri result = business.getSinsaYM(uiContainerId);
+        KokuhorenInterfaceKanri result = business.getSinsaYM(menuId);
         div.getKogakuKaigoKyufuhiTaishoshaTorokuPanel().getTxtShinsaYM().setFromValue(result.get抽出開始日時().getDate());
         div.getKogakuKaigoKyufuhiTaishoshaTorokuPanel().getTxtShinsaYM().setToValue(result.get抽出開始日時().getDate());
         div.getPublishIchiranhyo().setIsPublish(true);
-        if (高額介護サービス費給付対象者登録自庁.equals(uiContainerId)) {
+        if (高額介護サービス費給付対象者登録自庁.equals(menuId)) {
+            div.setTitle(TITLE_TWO);
+            div.getPublishIchiranhyo().setTitle(LABLE_ONE);
             div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200016.getReportId());
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(実行ボタン_DBCMN41004, true);
-        } else if (総合事業高額介護サービス費給付対象者登録自庁.equals(uiContainerId)) {
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(実行ボタン_DBCMNL1002, true);
+        } else if (総合事業高額介護サービス費給付対象者登録自庁.equals(menuId)) {
+            div.setTitle(TITLE_ONE);
+            div.getPublishIchiranhyo().setTitle(LABLE_TWO);
             div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200077.getReportId());
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(実行ボタン_DBCMN41002, true);
         }
