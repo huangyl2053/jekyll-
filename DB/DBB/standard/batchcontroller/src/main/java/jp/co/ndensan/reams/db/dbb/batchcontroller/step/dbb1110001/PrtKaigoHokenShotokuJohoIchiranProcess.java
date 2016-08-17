@@ -64,7 +64,7 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
     private static final RString INDEX_111 = new RString("111");
     private static final RString INDEX_112 = new RString("112");
     private static final RString INDEX_120 = new RString("120");
-    private static final RString EUCファイル名 = new RString("介護保険所得情報一覧表");
+    private static final RString EUCファイル名 = new RString("KaigoHokenShotokuJohoIchiran.csv");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBB200009");
     private static final RString カンマ = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
@@ -84,7 +84,7 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
     private static final RString FORMAT_RIGHT = new RString("】");
     private static final RString 出力_コンマ = new RString(",");
     private static final RString CSV出力有無_有り = new RString("あり");
-    private static final RString CSVファイル名 = new RString("KaigoHokenShotokuJohoIchiran.csv");
+    private static final RString CSVファイル名 = new RString("介護保険所得情報一覧表");
     private static final RString MAPPER_PATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db."
             + "mapper.relate.shotokujohoichiranhyosakusei.IShotokuJohoIchiranhyoSakuseiMapper");
     private static final RString SELECTALL = new RString(MAPPER_PATH + ".selectTempAll");
@@ -217,14 +217,14 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
         出力条件リスト.add(builder.toRString());
         if (INDEX_112.equals(導入形態コード) || INDEX_120.equals(導入形態コード)) {
             builder = new RStringBuilder();
-            builder.append((FORMAT_LEFT).concat(出力_抽出期間開始日時).concat(FORMAT_RIGHT).concat(開始日時.toDateString()));
+            builder.append((FORMAT_LEFT).concat(出力_抽出期間開始日時).concat(FORMAT_RIGHT).concat(new RString(開始日時.toString())));
             出力条件リスト.add(builder.toRString());
             builder = new RStringBuilder();
-            builder.append((FORMAT_LEFT).concat(出力_抽出期間終了日時).concat(FORMAT_RIGHT).concat(終了日時.toDateString()));
+            builder.append((FORMAT_LEFT).concat(出力_抽出期間終了日時).concat(FORMAT_RIGHT).concat(new RString(終了日時.toString())));
             出力条件リスト.add(builder.toRString());
         } else if (INDEX_111.equals(導入形態コード)) {
-            builder = new RStringBuilder();
             for (ShichosonJouhouResult result : 市町村情報リスト) {
+                builder = new RStringBuilder();
                 builder.append((FORMAT_LEFT).concat(出力_市町村情報リスト).concat(FORMAT_RIGHT).concat(result.get市町村コード().value())
                         .concat(出力_コンマ).concat(result.get市町村識別ID()).concat(出力_コンマ).concat(new RString(result.get開始年月日().toString()))
                         .concat(出力_コンマ).concat(result.get開始時刻()).concat(出力_コンマ).concat(new RString(result.get終了年月日().toString()))
