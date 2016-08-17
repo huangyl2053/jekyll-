@@ -199,11 +199,11 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
         builder.append((FORMAT_LEFT).concat(出力_導入形態コード).concat(FORMAT_RIGHT).concat(導入形態コード));
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
-        市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード();
+        市町村コード = parameter.get市町村コード();
         builder.append((FORMAT_LEFT).concat(出力_市町村コード).concat(FORMAT_RIGHT).concat(市町村コード.getColumnValue()));
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
-        市町村名称 = AssociationFinderFactory.createInstance().getAssociation().get市町村名();
+        市町村名称 = parameter.get市町村名称();
         builder.append((FORMAT_LEFT).concat(出力_市町村名称).concat(FORMAT_RIGHT).concat(市町村名称));
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
