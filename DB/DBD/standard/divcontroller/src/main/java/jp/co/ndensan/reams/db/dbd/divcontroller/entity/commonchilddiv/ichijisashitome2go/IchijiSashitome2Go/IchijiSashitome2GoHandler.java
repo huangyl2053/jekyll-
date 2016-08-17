@@ -128,6 +128,7 @@ public class IchijiSashitome2GoHandler {
             } else {
                 div.setShinkiKubun(新規登録);
             }
+            ViewStateHolder.put(IchijiSashitome2GoHandler.二号一時差止ダイアロググキー.支払方法変更管理業務概念, 支払方法変更管理業務概念);
         }
         initializeDisplayData(押下ボタン, ViewStateHolder.get(IchijiSashitome2GoHandler.二号一時差止ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class));
         return message;
@@ -320,7 +321,7 @@ public class IchijiSashitome2GoHandler {
                     break;
             }
         } else if (shiharaiHohoHenko != null) {
-            div.getTxtTorokuJokyo().setValue(shiharaiHohoHenko.get登録区分());
+            div.getTxtTorokuJokyo().setValue(ShiharaiHenkoTorokuKubun.toValue(shiharaiHohoHenko.get登録区分()).get名称());
             div.getTxtTekiyoKaishi().setValue(shiharaiHohoHenko.get適用開始年月日());
             div.getTxtTekiyoShuryo().setValue(shiharaiHohoHenko.get適用終了年月日());
             if (shiharaiHohoHenko.get終了区分() == null) {

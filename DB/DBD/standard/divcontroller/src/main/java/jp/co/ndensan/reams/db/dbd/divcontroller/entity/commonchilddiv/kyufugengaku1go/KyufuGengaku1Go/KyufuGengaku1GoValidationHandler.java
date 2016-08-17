@@ -41,7 +41,7 @@ public class KyufuGengaku1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor滞納状況情報(ValidationMessageControlPairs pairs, KyufuGengaku1GoDiv div, ShiharaiHohoHenko shiharaiHohoHenko) {
         if ((ShoriKubun.toValue(div.getKey_Button()).get名称().equals(給付額減額))
-                && (shiharaiHohoHenko.getShiharaiHohoHenkoTainoList().isEmpty() || div.getTainoHanteiKekka().isEmpty())) {
+                && (shiharaiHohoHenko.getShiharaiHohoHenkoTainoList().isEmpty() && div.getTainoHanteiKekka().isEmpty())) {
             pairs.add(new ValidationMessageControlPair(KyufuGengaku1GoValidationHandler.KyufuGengaku1GoMessages.支払方法変更_要滞納状況確定));
         }
         return pairs;
