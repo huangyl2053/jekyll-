@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashite
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -173,6 +174,21 @@ public class JigyoshaTouroku {
             ViewStateHolder.put(ViewStateKeys.事業者番号,
                     ViewStateHolder.get(ViewStateKeys.事業者番号, RString.class));
         }
+        DbT1005KaigoJogaiTokureiTaishoShisetsuEntity tourokuEntity = new DbT1005KaigoJogaiTokureiTaishoShisetsuEntity();
+        tourokuEntity.setJigyoshaMeisho(new AtenaMeisho(div.getServiceJigyoshaJoho().getTxtJigyoshaName().getValue()));
+        tourokuEntity.setJigyoshaKanaMeisho(new AtenaKanaMeisho(div.getServiceJigyoshaJoho().getTxtJigyoshaNameKana().getValue()));
+        tourokuEntity.setJigyoshaJusho(div.getServiceJigyoshaJoho().getTxtJusho().getValue());
+        tourokuEntity.setJigyoshaKanaJusho(div.getServiceJigyoshaJoho().getTxtJushoKana().getValue());
+        tourokuEntity.setJigyoHaishiYMD(div.getServiceJigyoshaJoho().getTxtJigyoHaishiYMD().getValue());
+        tourokuEntity.setJigyoKaishiYMD(div.getServiceJigyoshaJoho().getTxtJigyoKaishiYMD().getValue());
+        tourokuEntity.setJigyoKyushiYMD(div.getServiceJigyoshaJoho().getTxtJigyoKyushuYMD().getValue());
+        tourokuEntity.setJigyoSaikaiYMD(div.getServiceJigyoshaJoho().getTxtJigyoSaikaiYMD().getValue());
+        tourokuEntity.setFaxNo(new TelNo(div.getServiceJigyoshaJoho().getTxtFaxNo().getValue()));
+        tourokuEntity.setTelNo(new TelNo(div.getServiceJigyoshaJoho().getTxtTelNo().getValue()));
+        tourokuEntity.setYubinNo(div.getServiceJigyoshaJoho().getTxtYubinNo().getValue());
+        tourokuEntity.setYukoKaishiYMD(div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().getValue());
+        tourokuEntity.setYukoShuryoYMD(div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().getValue());                
+        ViewStateHolder.put(ViewStateKeys.事業者登録情報, tourokuEntity);
         return ResponseData.of(div).forwardWithEventName(DBA2010013TransitionEventName.サービス追加).respond();
     }
 
