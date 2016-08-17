@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 /**
  * ShotokuJohoIchiranHyoSakuseiBatchParameter のクラスファイル
  *
- * @reamsid_L DBB-1650-040 lijunjun
+ * @reamsid_L DBB-1650-010 lijunjun
  */
 public class ShotokuJohoIchiranHyoSakuseiBatchParameterDiv extends PanelBatchParameter {
 

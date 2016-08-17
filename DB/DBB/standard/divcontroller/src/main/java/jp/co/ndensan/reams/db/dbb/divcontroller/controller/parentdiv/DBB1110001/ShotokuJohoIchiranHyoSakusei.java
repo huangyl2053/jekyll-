@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * 画面設計_DBBGM51003_所得情報一覧表作成のクラスです。
  *
- * @reamsid_L DBB-1650-040 lijunjun
+ * @reamsid_L DBB-1650-010 lijunjun
  */
 public class ShotokuJohoIchiranHyoSakusei {
 
