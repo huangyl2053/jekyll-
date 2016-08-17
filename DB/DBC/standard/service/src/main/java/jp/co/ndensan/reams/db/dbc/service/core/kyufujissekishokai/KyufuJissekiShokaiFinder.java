@@ -40,7 +40,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @reamsid_L DBC-2970-170 dingyi
  */
-public class ShokanbaraiJyokyoShokai {
+public class KyufuJissekiShokaiFinder {
 
     private final MapperProvider mapperProvider;
     private final DbV1001HihokenshaDaichoAliveDac dbV1001;
@@ -48,7 +48,7 @@ public class ShokanbaraiJyokyoShokai {
     /**
      * コンストラクタです。
      */
-    ShokanbaraiJyokyoShokai() {
+    KyufuJissekiShokaiFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.dbV1001 = InstanceProvider.create(DbV1001HihokenshaDaichoAliveDac.class);
 
@@ -60,18 +60,18 @@ public class ShokanbaraiJyokyoShokai {
      * @param mapperProvider MapperProvider
      * @param dbV1001 dbV1001
      */
-    ShokanbaraiJyokyoShokai(MapperProvider mapperProvider, DbV1001HihokenshaDaichoAliveDac dbV1001) {
+    KyufuJissekiShokaiFinder(MapperProvider mapperProvider, DbV1001HihokenshaDaichoAliveDac dbV1001) {
         this.mapperProvider = mapperProvider;
         this.dbV1001 = dbV1001;
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link ShokanbaraiJyokyoShokai}のインスタンスを返します。
+     * {@link InstanceProvider#create}にて生成した{@link KyufuJissekiShokaiFinder}のインスタンスを返します。
      *
-     * @return ShokanbaraiJyokyoShokai
+     * @return KyufuJissekiShokaiFinder
      */
-    public static ShokanbaraiJyokyoShokai createInstance() {
-        return InstanceProvider.create(ShokanbaraiJyokyoShokai.class);
+    public static KyufuJissekiShokaiFinder createInstance() {
+        return InstanceProvider.create(KyufuJissekiShokaiFinder.class);
     }
 
     /**
@@ -159,6 +159,7 @@ public class ShokanbaraiJyokyoShokai {
         if (事業所番号 == null || 事業所番号.isEmpty()) {
             return RString.EMPTY;
         }
+
         // TODO
         return RString.EMPTY;
     }
