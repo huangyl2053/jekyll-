@@ -221,7 +221,7 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
     }
 
     private void set適用(List<TaJushochiTokureisyaKanriParameter> paramaterList) {
-        if (!paramaterList.isEmpty() && 新規.equals(paramaterList.get(0).get状態())) {
+        if (!paramaterList.isEmpty()) {
             TaJushochiTokureisyaKanriParameter parameter1 = paramaterList.get(0);
             TaJushochiTokureisyaKanriParameter parameter = TaJushochiTokureisyaKanriParameter.createParamBy他市町村住所地特例者管理(
                     parameter1.getNyuusyoYMD(), parameter1.getTayishoYMD(), parameter1.getKaijoYMD(), parameter1.getTekiyoYMD(), SHINKI
@@ -231,7 +231,7 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
     }
 
     private void set解除(List<TaJushochiTokureisyaKanriParameter> paramaterList) {
-        if (!paramaterList.isEmpty() && 修正.equals(paramaterList.get(0).get状態())) {
+        if (!paramaterList.isEmpty()) {
             TaJushochiTokureisyaKanriParameter parameter1 = paramaterList.get(0);
             TaJushochiTokureisyaKanriParameter parameter = TaJushochiTokureisyaKanriParameter.createParamBy他市町村住所地特例者管理(
                     parameter1.getNyuusyoYMD(), parameter1.getTayishoYMD(), parameter1.getKaijoYMD(), parameter1.getTekiyoYMD(), SYUSEI

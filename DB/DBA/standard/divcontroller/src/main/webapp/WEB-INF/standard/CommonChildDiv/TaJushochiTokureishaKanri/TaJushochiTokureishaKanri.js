@@ -100,7 +100,7 @@ var DBA;
                 };
 
                 DisplayMode.prototype.Tekiyo = function () {
-                    this.controls.btnAdd().displayNone = true;
+                    this.controls.btnAdd().displayNone = false;
                     this.controls.btnKakunin().displayNone = false;
                     this.controls.btnTorikeshi().displayNone = true;
 
@@ -109,8 +109,8 @@ var DBA;
 
                     gridSetting.isShowRowState = false;
                     gridSetting.isShowSelectButtonColumn = false;
-                    gridSetting.isShowModifyButtonColumn = false;
-                    gridSetting.isShowDeleteButtonColumn = false;
+                    gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.isShowDeleteButtonColumn = true;
 
                     this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
 
