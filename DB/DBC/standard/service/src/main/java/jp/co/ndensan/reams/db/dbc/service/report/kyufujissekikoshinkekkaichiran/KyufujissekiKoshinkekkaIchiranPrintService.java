@@ -112,19 +112,22 @@ public class KyufujissekiKoshinkekkaIchiranPrintService {
                     return e1.get給付実績_コントロールレコード保険者番号().compareTo(e2.get給付実績_コントロールレコード保険者番号());
                 }
             });
-            List<RString> indexList = new ArrayList<>();
+            int count = INDEX_0;
+            int k = INDEX_1;
+            boolean flag = false;
             for (int j = INDEX_0; j < entityList.size() - INDEX_1; j++) {
+                int 合計 = INDEX_0;
+                count = count + INDEX_1;
                 if (!entityList.get(j).get給付実績_コントロールレコード保険者番号().equals(entityList.get(j + INDEX_1).
                         get給付実績_コントロールレコード保険者番号())) {
-                    indexList.add(new RString(j + INDEX_1));
+                    flag = true;
+                    合計 = count;
+                    count = INDEX_0;
                 }
-            }
-            indexList.add(new RString(entityList.size()));
-            int k = INDEX_1;
-            for (ChohyoShutsuryokuTaishoDateEntity entity : entityList) {
-                new KyufujissekiKoshinkekkaIchiranReport(処理年月, entity, 並び順の１件目, 並び順の２件目,
-                        並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目List, システム日時, k, indexList).writeBy(reportSourceWriter);
+                new KyufujissekiKoshinkekkaIchiranReport(処理年月, entityList.get(j), 並び順の１件目, 並び順の２件目,
+                        並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目List, システム日時, k, flag, 合計).writeBy(reportSourceWriter);
                 k = k + INDEX_1;
+                flag = false;
             }
         }
     }
