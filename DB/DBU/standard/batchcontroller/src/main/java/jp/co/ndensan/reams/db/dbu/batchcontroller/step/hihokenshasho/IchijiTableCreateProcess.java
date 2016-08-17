@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashohakkoichiranhyo.Hih
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.hihokenshasho.IkkatsuHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.SogoJigyoTaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshashohakkoichiranhyo.IchiranyoShohakkoshaEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hihokenshasho.IIkkatsuHakkoMapper;
 import jp.co.ndensan.reams.db.dbu.service.core.hihokenshashohakkoichiranhyo.HihokenshashoHakkoIchiranHyoFinder;
@@ -57,6 +58,7 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
     private IkkatsuHakkoProcessParameter processPrm;
     private IkkatsuHakkoMybatisParameter mybatisPrm;
     private IIkkatsuHakkoMapper iIkkatsuHakkoMapper;
+    private boolean 両方フラグ;
     private List<HihokenshashoHakkoIchiranHyoItem> itemList;
     @BatchWriter
     private BatchReportWriter<HihokenshashoHakkoIchiranhyoReportSource> batchReportWriter;
@@ -155,7 +157,56 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
     }
 
     private List<IkkatsuHakkoRelateEntity> get受給者のみ() {
-        return iIkkatsuHakkoMapper.getJukyushaDaichoIdo(mybatisPrm);
+        List<IkkatsuHakkoRelateEntity> 受給者EntityList = new ArrayList<>();
+        iIkkatsuHakkoMapper.create受給者台帳Temp(mybatisPrm);
+        iIkkatsuHakkoMapper.create総合事業対象者Temp(mybatisPrm);
+        List<SogoJigyoTaishoshaRelateEntity> 受給者台帳EntityList = iIkkatsuHakkoMapper.get受給者台帳Tempのみ();
+        for (SogoJigyoTaishoshaRelateEntity entity : 受給者台帳EntityList) {
+            受給者EntityList.add(get受給者台帳編集処理(entity));
+        }
+        List<SogoJigyoTaishoshaRelateEntity> 総合事業対象者EntityList = iIkkatsuHakkoMapper.get総合事業対象者Tempのみ();
+        for (SogoJigyoTaishoshaRelateEntity entity : 総合事業対象者EntityList) {
+            両方フラグ = false;
+            受給者EntityList.add(get総合事業対象者編集処理(entity, 両方フラグ));
+        }
+        List<SogoJigyoTaishoshaRelateEntity> 両方EntityList = iIkkatsuHakkoMapper.get受給者台帳と総合事業対象者の両方();
+        for (SogoJigyoTaishoshaRelateEntity entity : 両方EntityList) {
+            両方フラグ = false;
+            if (entity.get認定年月日().isBefore(entity.getチェックリスト実施日())) {
+                両方フラグ = true;
+                受給者EntityList.add(get総合事業対象者編集処理(entity, 両方フラグ));
+            } else {
+                受給者EntityList.add(get受給者台帳編集処理(entity));
+            }
+        }
+        return 受給者EntityList;
+    }
+
+    private IkkatsuHakkoRelateEntity get総合事業対象者編集処理(SogoJigyoTaishoshaRelateEntity entity, boolean 両方フラグ) {
+        IkkatsuHakkoRelateEntity 総合事業対象者Entity = new IkkatsuHakkoRelateEntity();
+        総合事業対象者Entity.setHihokenshaNo(entity.get被保険者番号());
+        if (両方フラグ) {
+            総合事業対象者Entity.setSeibetsuCode(entity.get識別コード_受給());
+            総合事業対象者Entity.setShichosonCode(entity.get市町村コード_受給());
+        } else {
+            総合事業対象者Entity.setSeibetsuCode(entity.get識別コード_ビュー());
+            総合事業対象者Entity.setShichosonCode(entity.get市町村コード_ビュー());
+        }
+        総合事業対象者Entity.setInsertTimestamp(entity.get挿入日時_総合());
+        総合事業対象者Entity.setLastUpdateTimestamp(entity.get更新日時_総合());
+        総合事業対象者Entity.setTaisyoKubun(new RString("2"));
+        return 総合事業対象者Entity;
+    }
+
+    private IkkatsuHakkoRelateEntity get受給者台帳編集処理(SogoJigyoTaishoshaRelateEntity entity) {
+        IkkatsuHakkoRelateEntity 受給者のみEntity = new IkkatsuHakkoRelateEntity();
+        受給者のみEntity.setHihokenshaNo(entity.get被保険者番号());
+        受給者のみEntity.setSeibetsuCode(entity.get識別コード_受給());
+        受給者のみEntity.setShichosonCode(entity.get市町村コード_受給());
+        受給者のみEntity.setInsertTimestamp(entity.get挿入日時_受給());
+        受給者のみEntity.setLastUpdateTimestamp(entity.get更新日時_受給());
+        受給者のみEntity.setTaisyoKubun(new RString("1"));
+        return 受給者のみEntity;
     }
 
     private List<IkkatsuHakkoRelateEntity> get年齢到達予定者() {

@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.hihokenshasho.IkkatsuHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.SogoJigyoTaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hihokenshasho.IIkkatsuHakkoMapper;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
@@ -57,7 +58,7 @@ public class IchijiTableUpdateProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void process() {
-        if (!一時表List.isEmpty()) {
+        if (一時表List != null && !一時表List.isEmpty()) {
             被保台帳を一時テーブルに更新();
             介護保険施設を一時テーブルに更新();
             受給者台帳を一時テーブルに更新();
@@ -66,6 +67,7 @@ public class IchijiTableUpdateProcess extends SimpleBatchProcessBase {
             居宅給付計画を一時テーブルに更新();
             本人情報を一時テーブルに更新();
             送付先情報を一時テーブルに更新();
+            総合事業対象者情報を一時テーブルに更新();
         }
     }
 
@@ -135,6 +137,13 @@ public class IchijiTableUpdateProcess extends SimpleBatchProcessBase {
             for (IkkatsuHakkoRelateEntity jikoSakuseiEntity : 自己作成List) {
                 iIkkatsuHakkoMapper.updateTmp_Kyotaku(jikoSakuseiEntity);
             }
+        }
+    }
+
+    private void 総合事業対象者情報を一時テーブルに更新() {
+        List<SogoJigyoTaishoshaRelateEntity> 総合事業対象者EntityList = iIkkatsuHakkoMapper.get総合事業対象者();
+        for (SogoJigyoTaishoshaRelateEntity entity : 総合事業対象者EntityList) {
+            iIkkatsuHakkoMapper.updateTmp総合事業対象者情報(entity);
         }
     }
 

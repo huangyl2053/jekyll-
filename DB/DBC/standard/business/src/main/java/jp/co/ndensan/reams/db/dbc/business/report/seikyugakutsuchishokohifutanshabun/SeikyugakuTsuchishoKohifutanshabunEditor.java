@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbc.entity.report.seikyugakutsuchishokohifutanshab
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -35,7 +34,6 @@ public class SeikyugakuTsuchishoKohifutanshabunEditor implements
     private static final RString 総合計 = new RString("＊＊　総合計　＊＊");
     private static final RString サービス種類コード値 = new RString("ST");
     private static final RString 作成 = new RString("作成");
-    private static final RString 審査年月_年 = new RString("年");
 
     /**
      * コンストラクタです。
@@ -57,7 +55,9 @@ public class SeikyugakuTsuchishoKohifutanshabunEditor implements
         source.kouCode = 請求額通知書帳票用データ.get項コード();
         source.printTimeStamp = getSakuseiYmhm(作成日時);
 
-        source.shinsaYM = getWareki(new RDate(請求額通知書帳票用データ.get審査年月().toString()));
+        source.shinsaYM = 請求額通知書帳票用データ.get審査年月().wareki().eraType(EraType.KANJI).
+                firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+
         source.kohiFutanshaNo = 請求額通知書帳票用データ.get公費負担者番号();
         source.kohiFutanshaName = 請求額通知書帳票用データ.get公費負担者名();
 
@@ -148,15 +148,6 @@ public class SeikyugakuTsuchishoKohifutanshabunEditor implements
         sakuseiYMD.append(RString.HALF_SPACE);
         sakuseiYMD.append(作成);
         return sakuseiYMD.toRString();
-    }
-
-    private RString getWareki(RDate date) {
-        RString wareki = RString.EMPTY;
-        if (date != null) {
-            wareki = date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK).getYear()
-                    .concat(審査年月_年).concat(date.wareki().separator(Separator.JAPANESE).fillType(FillType.BLANK).getMonth());
-        }
-        return wareki;
     }
 
     private RString doカンマ編集(Decimal decimal) {
