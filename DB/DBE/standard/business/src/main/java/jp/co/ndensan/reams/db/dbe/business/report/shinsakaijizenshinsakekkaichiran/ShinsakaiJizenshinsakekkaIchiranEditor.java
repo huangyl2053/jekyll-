@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.shinsakaijizenshinsakekkaichiran;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaijizenshinsakekkaichiran.ShinsakaiJizenshinsakekkaIchiranEntity;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakaijizenshinsakekkaichiran.ShinsakaiJizenshinsakekkaIchiranBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.shinsakaijizenshinsakekkaichiran.ShinsakaiJizenshinsakekkaIchiranReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class ShinsakaiJizenshinsakekkaIchiranEditor implements IShinsakaiJizenshinsakekkaIchiranEditor {
 
-    private final ShinsakaiJizenshinsakekkaIchiranEntity entity;
+    private final ShinsakaiJizenshinsakekkaIchiranBusiness entity;
     private static final RString 事前審査結果集計表 = new RString("事前審査結果集計表");
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
@@ -36,9 +36,9 @@ public class ShinsakaiJizenshinsakekkaIchiranEditor implements IShinsakaiJizensh
     /**
      * インスタンスを生成します。
      *
-     * @param entity item {@link ShinsakaiJizenshinsakekkaIchiranEntity}
+     * @param entity item {@link ShinsakaiJizenshinsakekkaIchiranBusiness}
      */
-    protected ShinsakaiJizenshinsakekkaIchiranEditor(ShinsakaiJizenshinsakekkaIchiranEntity entity) {
+    protected ShinsakaiJizenshinsakekkaIchiranEditor(ShinsakaiJizenshinsakekkaIchiranBusiness entity) {
         this.entity = entity;
     }
 
