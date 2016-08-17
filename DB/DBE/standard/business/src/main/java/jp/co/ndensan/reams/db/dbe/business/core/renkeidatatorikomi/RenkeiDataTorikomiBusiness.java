@@ -544,7 +544,7 @@ public class RenkeiDataTorikomiBusiness {
         dbt5123Entity.setNinteiShinsakaiYoteiYMD(setFlexibleDate(dbt5101tempEntity.get認定申請日(),
                 DbBusinessConfig.get(ConfigNameDBE.認定審査会予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
         dbt5123Entity.setCenterSoshinYoteiYMD(setFlexibleDate(dbt5101tempEntity.get認定申請日(),
-                DbBusinessConfig.get(ConfigNameDBE.認センター送信予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
+                DbBusinessConfig.get(ConfigNameDBE.センター送信予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
         return dbt5123Entity;
     }
 
@@ -567,7 +567,7 @@ public class RenkeiDataTorikomiBusiness {
         dbt5123Entity.setNinteiShinsakaiYoteiYMD(setFlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間(),
                 DbBusinessConfig.get(ConfigNameDBE.認定審査会予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
         dbt5123Entity.setCenterSoshinYoteiYMD(setFlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間(),
-                DbBusinessConfig.get(ConfigNameDBE.認センター送信予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
+                DbBusinessConfig.get(ConfigNameDBE.センター送信予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
         return dbt5123Entity;
     }
 
@@ -697,7 +697,9 @@ public class RenkeiDataTorikomiBusiness {
         dbt5101Entity.setNinteiChosaItakusakiCode(getChosaItakusakiCode(dbt5101tempEntity.get調査委託先コード()));
         dbt5101Entity.setShujiiIryokikanCode(getShujiiIryokikanCode(dbt5101tempEntity.get主治医医療機関コード()));
         dbt5101Entity.setShujiiCode(getShujiiCode(dbt5101tempEntity.get主治医番号()));
-        dbt5101Entity.setShisetsuNyushoFlag(true);
+        if (!RString.isNullOrEmpty(dbt5101tempEntity.get入所事業所コード())) {
+            dbt5101Entity.setShisetsuNyushoFlag(true);
+        }
         return dbt5101Entity;
     }
 
