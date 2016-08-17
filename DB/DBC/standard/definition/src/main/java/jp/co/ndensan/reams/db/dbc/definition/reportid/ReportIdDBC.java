@@ -298,7 +298,12 @@ public enum ReportIdDBC {
     /**
      * 総合事業費等請求額通知書（公費負担者分）帳票ＩＤです。
      */
-    DBC200082(new ReportId("DBC200082_SogojigyohiSeikyugakuTsuchishoKohi"), new RString("総合事業費等請求額通知書（公費負担者分）"));
+    DBC200082(new ReportId("DBC200082_SogojigyohiSeikyugakuTsuchishoKohi"), new RString("総合事業費等請求額通知書（公費負担者分）")),
+    
+    /**
+     * 総合事業費過誤決定通知書情報取込一覧表（公費）帳票ＩＤです。
+     */
+    DBC200086(new ReportId("DBC200086_SogojigyohiKagoKetteitsuchishoTorikomiIchiranKohi"), new RString("総合事業費過誤決定通知書情報取込一覧表（公費）"));
 
     private final ReportId reportId;
 
