@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100202.ChofukuTorikom
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100202.HikazeNenkinTaishoFirProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100202.JissekiDataIchijiSakuseiProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100202.NenkinNoCheckListProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100202.NenkinNoTotsugoGaitouJohoNasiProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100202.ShimeiKanaTotsugoGaitousyaNasiProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100202.ShimeiKanaTotsugoKensuProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100202.ShimeiKanaTotsugoResultProcess;
@@ -70,7 +71,7 @@ public class HikazeNenkinTaishoshaDouteiFlow extends BatchFlowBase<HikazeNenkinT
      */
     @Step(重複取込データ除外処理)
     protected IBatchFlowCommand chofukuTorikomiDataDeleteShoriProcess() {
-        return loopBatch(ChofukuTorikomiDataDeleteShoriProcess.class).arguments(createProcessParameter()).define();
+        return loopBatch(ChofukuTorikomiDataDeleteShoriProcess.class).define();
     }
 
     /**
@@ -90,7 +91,7 @@ public class HikazeNenkinTaishoshaDouteiFlow extends BatchFlowBase<HikazeNenkinT
      */
     @Step(年金番号突合_該当年金情報なし)
     protected IBatchFlowCommand nenkinNoTotsugoGaitouJohoNasiProcess() {
-        return loopBatch(HikazeNenkinTaishoFirProcess.class).define();
+        return loopBatch(NenkinNoTotsugoGaitouJohoNasiProcess.class).define();
     }
 
     /**

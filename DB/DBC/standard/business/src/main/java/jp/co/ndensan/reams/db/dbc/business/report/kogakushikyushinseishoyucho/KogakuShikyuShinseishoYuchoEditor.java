@@ -98,17 +98,11 @@ public class KogakuShikyuShinseishoYuchoEditor implements IKogakuShikyuShinseish
         return source;
     }
 
-    /**
-     * 日付の変換のメソッドです。
-     *
-     * @param ym 日付
-     * @return 日付
-     */
-    public static RString パターン62(FlexibleYearMonth ym) {
-        if (ym == null) {
+    private RString パターン62(FlexibleYearMonth 年月日) {
+        if (年月日 == null) {
             return RString.EMPTY;
         }
-        return ym.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        return 年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
     private RString doパターン12(FlexibleDate 年月日) {

@@ -76,6 +76,9 @@ public class SogojigyohiSeiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<
     protected void initialize() {
         super.initialize();
         改頁項目リスト = new ArrayList<>();
+        改頁項目リスト.add(new RString(SogojigyohiSeikyugakuTsuchishoKeikaSochiSource.DBC200068SogojigyohiSeikyugakuFields.shoKisaiHokenshaNo.name()));
+        改頁項目リスト.add(new RString(SogojigyohiSeikyugakuTsuchishoKeikaSochiSource.DBC200068SogojigyohiSeikyugakuFields.kanCode.name()));
+        改頁項目リスト.add(new RString(SogojigyohiSeikyugakuTsuchishoKeikaSochiSource.DBC200068SogojigyohiSeikyugakuFields.kouCode.name()));
     }
 
     @Override
@@ -102,9 +105,6 @@ public class SogojigyohiSeiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<
 
     @Override
     protected void beforeExecute() {
-        改頁項目リスト.add(new RString(SogojigyohiSeikyugakuTsuchishoKeikaSochiSource.DBC200068SogojigyohiSeikyugakuFields.shoKisaiHokenshaNo.name()));
-        改頁項目リスト.add(new RString(SogojigyohiSeikyugakuTsuchishoKeikaSochiSource.DBC200068SogojigyohiSeikyugakuFields.kanCode.name()));
-        改頁項目リスト.add(new RString(SogojigyohiSeikyugakuTsuchishoKeikaSochiSource.DBC200068SogojigyohiSeikyugakuFields.kouCode.name()));
     }
 
     @Override
