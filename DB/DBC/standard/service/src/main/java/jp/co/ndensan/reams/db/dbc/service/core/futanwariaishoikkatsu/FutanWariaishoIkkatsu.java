@@ -290,16 +290,16 @@ public class FutanWariaishoIkkatsu {
         source.set被保険者番号(利用者負担割合証.get被保台帳().getHihokenshaNo().getColumnValue());
         source.set送付先住所(編集後宛先.get編集後住所());
         source.set被保険者氏名(編集後個人.get名称().getName().getColumnValue());
-        source.set判定日(dateFormat基本形１(利用者負担割合証.get利用者負担割合().getHanteiYMD()));
+        source.set判定日(dateFormatパターン4(利用者負担割合証.get利用者負担割合().getHanteiYMD()));
         if (利用者負担割合証.get負担割合期間().getYukoKaishiYMD2() != null) {
-            source.set開始年月日(dateFormat基本形１(利用者負担割合証.get負担割合期間().getYukoKaishiYMD2()));
+            source.set開始年月日(dateFormatパターン4(利用者負担割合証.get負担割合期間().getYukoKaishiYMD2()));
         } else {
-            source.set開始年月日(dateFormat基本形１(利用者負担割合証.get負担割合期間().getYukoKaishiYMD1()));
+            source.set開始年月日(dateFormatパターン4(利用者負担割合証.get負担割合期間().getYukoKaishiYMD1()));
         }
         if (利用者負担割合証.get負担割合期間().getYukoShuryoYMD2() != null) {
-            source.set終了年月日(dateFormat基本形１(利用者負担割合証.get負担割合期間().getYukoShuryoYMD2()));
+            source.set終了年月日(dateFormatパターン4(利用者負担割合証.get負担割合期間().getYukoShuryoYMD2()));
         } else {
-            source.set終了年月日(dateFormat基本形１(利用者負担割合証.get負担割合期間().getYukoShuryoYMD1()));
+            source.set終了年月日(dateFormatパターン4(利用者負担割合証.get負担割合期間().getYukoShuryoYMD1()));
         }
         if (!RString.isNullOrEmpty(利用者負担割合証.get負担割合期間().getFutanWariaiKubun2())) {
             source.set負担割合(FutanwariaiKubun.toValue(利用者負担割合証.get負担割合期間().getFutanWariaiKubun2()).get名称());
@@ -397,6 +397,14 @@ public class FutanWariaishoIkkatsu {
         }
         return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+    }
+
+    private RString dateFormatパターン4(FlexibleDate date) {
+        if (date == null) {
+            return RString.EMPTY;
+        }
+        return date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
     }
 
     private RString dateFormatパターン107(FlexibleYear nendo) {
