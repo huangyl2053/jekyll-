@@ -101,7 +101,7 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanel {
      */
     public ResponseData<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelDiv> onClick_check(
             JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelDiv div) {
-        if (!div.getSakuseiPanel().getTxtZenkaiSakuseiYMD().getValue().toString().equals("")) {
+        if (!div.getSakuseiPanel().getTxtZenkaiSakuseiYMD().getValue().toString().equals(RString.EMPTY.toString())) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.確認_汎用.getMessage()).respond();
         }
         return ResponseData.of(div).respond();

@@ -90,7 +90,6 @@ public class ChoshuYuyoPrintinfoHandler {
         List<RString> list = new ArrayList<>();
         if (徴収猶予決定通知書.equals(div.getChoshuYuyoPrintinfo().getPritPublish2().getTitle())) {
             list.add(TsuchiSho.介護保険料徴収猶予決定通知書.get名称());
-            pama.set発行する帳票List(list);
         } else if (徴収猶予取消通知書.equals(div.getChoshuYuyoPrintinfo().getPritPublish2().getTitle())) {
             list.add(TsuchiSho.介護保険料徴収猶予取消通知書.get名称());
         }
