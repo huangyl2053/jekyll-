@@ -103,7 +103,7 @@
      "layoutName": "DBZ0200001",
      "layoutTitle": "対象者検索",
      "eventName": "終了",
-     "destroy": true,
+     "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0260011",
