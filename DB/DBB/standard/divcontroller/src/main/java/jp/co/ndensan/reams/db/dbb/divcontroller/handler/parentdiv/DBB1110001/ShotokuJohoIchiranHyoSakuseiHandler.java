@@ -152,8 +152,11 @@ public class ShotokuJohoIchiranHyoSakuseiHandler {
      * @return RString
      */
     public RString get導入形態コード() {
+        RString 導入形態コード = RString.EMPTY;
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        RString 導入形態コード = 市町村セキュリティ情報.get導入形態コード().value();
+        if (市町村セキュリティ情報 != null && 市町村セキュリティ情報.get導入形態コード() != null) {
+            導入形態コード = 市町村セキュリティ情報.get導入形態コード().value();
+        }
         return 導入形態コード;
     }
 
