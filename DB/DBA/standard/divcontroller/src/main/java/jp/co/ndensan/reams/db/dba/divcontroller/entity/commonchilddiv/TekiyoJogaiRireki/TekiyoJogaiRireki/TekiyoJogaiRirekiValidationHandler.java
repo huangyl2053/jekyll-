@@ -128,15 +128,16 @@ public class TekiyoJogaiRirekiValidationHandler {
                     div.getPanelTekiyoInput().getDdlTekiyoJiyu()));
         }
 
-        if (div.getPanelTekiyoInput()
-                .getTxtKayijoDate().getValue() == null) {
+        
+        if (!div.getPanelTekiyoInput().getTxtKayijoDate().isDisabled()
+                &&div.getPanelTekiyoInput().getTxtKayijoDate().getValue() == null) {
             result.add(new ValidationMessageControlPair(
                     RRVMessages.解除日_必須, div.getPanelTekiyoInput().getTxtKayijoDate()));
         }
 
-        if (div.getPanelTekiyoInput()
+        if (!div.getPanelTekiyoInput().getDdlKaijyoJiyu().isDisabled()&&(div.getPanelTekiyoInput()
                 .getDdlKaijyoJiyu().getSelectedKey() == null
-            || div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedKey().isEmpty()) {
+            || div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedKey().isEmpty())) {
             result.add(new ValidationMessageControlPair(
                     RRVMessages.解除事由_必須, div.getPanelTekiyoInput().getDdlKaijyoJiyu()));
         }

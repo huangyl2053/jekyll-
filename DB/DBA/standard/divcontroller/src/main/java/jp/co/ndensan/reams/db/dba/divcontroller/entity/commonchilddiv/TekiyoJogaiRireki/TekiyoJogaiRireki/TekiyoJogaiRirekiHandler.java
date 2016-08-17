@@ -234,7 +234,7 @@ public class TekiyoJogaiRirekiHandler {
             default:
                 setTekiyoInputToSelectedRow(div.getPanelTekiyoInput(), div.getDatagridTekiyoJogai().getClickedItem());
                 div.getPanelTekiyoInput().setDisabled(false);
-//                setDisabled(div.getPanelTekiyoInput(), false);
+                setDisabled(div.getPanelTekiyoInput(), false);
         }
         div.getBtnInputClear().setVisible(true);
         div.getBtnInputClear().setDisabled(false);
@@ -243,9 +243,6 @@ public class TekiyoJogaiRirekiHandler {
         
         if (div.getDatagridTekiyoJogai().getClickedItem().getKayijoDate()==null
                 ||div.getDatagridTekiyoJogai().getClickedItem().getKayijoDate().getText().isEmpty()){
-            div.getPanelTekiyoInput().getTxtTekiyoDate().setDisabled(false);
-            div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().setDisabled(false);
-            div.getPanelTekiyoInput().getDdlTekiyoJiyu().setDisabled(false);
             div.getPanelTekiyoInput().getTxtKayijoDate().setDisabled(true);
             div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().setDisabled(true);
             div.getPanelTekiyoInput().getDdlKaijyoJiyu().setDisabled(true);                 
@@ -475,7 +472,7 @@ public class TekiyoJogaiRirekiHandler {
             選択データ.setIdoJiyuCode(div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedKey());
             選択データ.setKaijoJiyu(div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedValue());
 
-            boolean is異動日変更 = !変更後解除日.toDateString().equals(選択データ.getHenkoumaeIdoYMD());
+            boolean is異動日変更 = 変更後解除日!=null? !変更後解除日.toDateString().equals(選択データ.getHenkoumaeIdoYMD()):false;
             RString 枝番 = 開始枝番;
             for (datagridTekiyoJogai_Row row : rowList) {
                 if (is異動日変更) {
@@ -499,7 +496,9 @@ public class TekiyoJogaiRirekiHandler {
             選択データ.setHenkoumaeIdoYMD(選択データ.getIdoYMD());
             選択データ.setHenkoumaeEdaNo(選択データ.getEdaNo());
             選択データ.setHenkougoTekiyoDate(変更後適用日.toDateString());
-            選択データ.setHenkougoIdoYMD(変更後解除日.toDateString());
+            if(変更後解除日!=null){
+                選択データ.setHenkougoIdoYMD(変更後解除日.toDateString());
+            }
             選択データ.setHenkougoEdaNo(枝番);
             TekiyoJogaisha tj = new TekiyoJogaisha(識別コード, new FlexibleDate(選択データ.getHenkougoIdoYMD()), 枝番);
             tekiyoJogaishas.add(tj);
