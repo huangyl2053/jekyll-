@@ -6,12 +6,29 @@
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd8100201;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 非課税年金対象者情報_年金番号SQLのパラメータクラスです．
  *
  * @reamsid_L DBD-4910-030 x_lilh
  */
+@Getter
+@Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class NennkinnBanngouCsvMybatisParameter implements IMyBatisParameter {
-// TODO
+
+    private RString 出力順;
+
+    /**
+     * コンストラクタです。
+     *
+     * @param 出力順
+     */
+    public NennkinnBanngouCsvMybatisParameter(RString 出力順) {
+        this.出力順 = 出力順;
+    }
+
 }
