@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.panelall;
 
+import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -15,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- * 画面設計_DBCMNK2001_利用者負担割合即時更正_新規。
+ * 画面設計_DBCMNK2001_利用者負担割合即時更正_新規のクラスです
  *
  * @reamsid_L DBC-5010-010 lihang
  */
@@ -27,14 +29,14 @@ public class HonsanteiIdoKanendo {
     private final RString 定数市町村コード = new RString("01");
 
     /**
-     * コンストラクタです。
+     * コンストラクタです
      */
     HonsanteiIdoKanendo() {
         this.処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
     }
 
     /**
-     * コンストラクタです。
+     * コンストラクタです
      *
      * @param dbT7022ShoriDateKanriDac
      */
@@ -43,7 +45,7 @@ public class HonsanteiIdoKanendo {
     }
 
     /**
-     * 初期化をします
+     * 初期化のメソッドです。
      *
      * @return
      * {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendo}のインスタンス
@@ -53,20 +55,25 @@ public class HonsanteiIdoKanendo {
     }
 
     /**
-     * 基準日を取得します
+     * 基準日取得のメソッドです。
      *
      * @param 処理名 RString
      * @param サブ業務コード SubGyomuCode
      * @param 市町村コード RString
      * @return List<ShoriDateKanri>
      */
-    public List<DbT7022ShoriDateKanriEntity> getNendo(SubGyomuCode サブ業務コード,
+    public List<ShoriDateKanri> getNendo(SubGyomuCode サブ業務コード,
             RString 市町村コード,
             RString 処理名) {
         requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(定数サブ業務コード.toString()));
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(定数市町村コード.toString()));
         requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(定数処理名.toString()));
-        return 処理日付管理Dac.selectNendo(サブ業務コード, 市町村コード, 処理名);
+        List<ShoriDateKanri> list = new ArrayList<>();
+        List<DbT7022ShoriDateKanriEntity> dbT7022ShoriDateKanriEntity = 処理日付管理Dac.selectNendo(サブ業務コード, 市町村コード, 処理名);
+        for (DbT7022ShoriDateKanriEntity entity : dbT7022ShoriDateKanriEntity) {
+            list.add(new ShoriDateKanri(entity));
+        }
+        return list;
     }
 
 }
