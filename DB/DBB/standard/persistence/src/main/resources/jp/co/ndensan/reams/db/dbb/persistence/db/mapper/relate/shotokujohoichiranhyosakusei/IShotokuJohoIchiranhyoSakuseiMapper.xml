@@ -72,13 +72,11 @@
         (SELECT
         "shotokuNendo",
         "shikibetsuCode"
-        <if test="チックボックス == 2">
+        <if test="ラジオボタン == 2">
         ,max("rirekiNo") AS rirekiNo
         </if>
         FROM rgdb."DbV2502KaigoShotoku" AS X
-        <if test="ラジオボタン == 2">
         GROUP BY X."shotokuNendo", X."shikibetsuCode"
-        </if>
         ) AS Y
         ON Y."shotokuNendo"=F."shotokuNendo"
         AND Y."shikibetsuCode"= F."shikibetsuCode"
