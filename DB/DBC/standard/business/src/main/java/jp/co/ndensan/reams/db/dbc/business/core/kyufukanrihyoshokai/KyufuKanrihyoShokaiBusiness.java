@@ -17,9 +17,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 給付管理票照会のBusinessです。
+ * 給付管理票照会（画面）のBusinessです。
  *
- * @reamsid_L DBC-2960-010 chenxiangyu
+ * @reamsid_L DBC-2960-060 chenxiangyu
  */
 public class KyufuKanrihyoShokaiBusiness {
 

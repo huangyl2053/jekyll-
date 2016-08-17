@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.business.core.kyufukanrihyoshokai;
 
 import java.io.Serializable;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoshokai.KyufuKanrihyoShokaiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -207,55 +206,5 @@ public final class KyufuKanrihyoShokaiDataModel implements Serializable {
                 business.get取込年月(),
                 business.get氏名(),
                 business.getサービス事業者名());
-    }
-
-    /**
-     * 給付管理票照会のBusinessを生成します。
-     *
-     * @return KyufuKanrihyoShokaiBusiness
-     */
-    public KyufuKanrihyoShokaiBusiness toBusiness() {
-        KyufuKanrihyoShokaiEntity entity = new KyufuKanrihyoShokaiEntity();
-        entity.setDeleted(isDeleted);
-        entity.setInsertContextId(insertContextId);
-        entity.setInsertDantaiCd(insertDantaiCd);
-        entity.setInsertReamsLoginId(insertReamsLoginId);
-        entity.setInsertTimestamp(insertTimestamp);
-        entity.setLastUpdateReamsLoginId(lastUpdateReamsLoginId);
-        entity.setLastUpdateTimestamp(lastUpdateTimestamp);
-        entity.setUpdateCount(updateCount);
-        entity.setサービス事業所番号(サービス事業所番号);
-        entity.setサービス事業者名(サービス事業者名);
-        entity.setサービス提供年月(サービス提供年月);
-        entity.setサービス種類コード(サービス種類コード);
-        entity.set保険者番号(保険者番号);
-        entity.set取込年月(取込年月);
-        entity.set基準該当サービス分小計(基準該当サービス分小計);
-        entity.set委託先の居宅介護支援事業所番号(委託先の居宅介護支援事業所番号);
-        entity.set委託先の担当介護支援専門員番号(委託先の担当介護支援専門員番号);
-        entity.set審査年月(審査年月);
-        entity.set居宅_介護予防支給限度額(居宅_介護予防支給限度額);
-        entity.set居宅サービス計画作成区分コード(居宅サービス計画作成区分コード);
-        entity.set居宅支援事業所番号(居宅支援事業所番号);
-        entity.set当初登録年月日(当初登録年月日);
-        entity.set性別コード(性別コード);
-        entity.set担当介護支援専門員番号(担当介護支援専門員番号);
-        entity.set指定_基準該当_地域密着型サービス識別コード(指定_基準該当_地域密着型サービス識別コード);
-        entity.set指定サービス分小計(指定サービス分小計);
-        entity.set氏名(氏名);
-        entity.set給付管理票作成年月日(給付管理票作成年月日);
-        entity.set給付管理票情報作成区分コード(給付管理票情報作成区分コード);
-        entity.set給付管理票明細行番号(給付管理票明細行番号);
-        entity.set給付管理票種別区分コード(給付管理票種別区分コード);
-        entity.set給付計画単位数_日数(給付計画単位数_日数);
-        entity.set被保険者生年月日(被保険者生年月日);
-        entity.set被保険者番号(被保険者番号);
-        entity.set要介護状態区分コード(要介護状態区分コード);
-        entity.set証記載保険者番号(証記載保険者番号);
-        entity.set限度額管理期間における前月までの給付計画日数(限度額管理期間における前月までの給付計画日数);
-        entity.set限度額適用終了年月(限度額適用終了年月);
-        entity.set限度額適用開始年月(限度額適用開始年月);
-        entity.set給付計画合計単位数_日数(給付計画合計単位数_日数);
-        return new KyufuKanrihyoShokaiBusiness(entity);
     }
 }
