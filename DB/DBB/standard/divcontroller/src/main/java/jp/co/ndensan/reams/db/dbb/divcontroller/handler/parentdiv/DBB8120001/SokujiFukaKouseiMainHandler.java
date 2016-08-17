@@ -1434,10 +1434,24 @@ public class SokujiFukaKouseiMainHandler {
         Tsuki from月 = Tsuki._4月;
         Tsuki to月 = Tsuki.翌年度5月;
         if (from月.compareTo(更正月.get月()) != 0) {
-            from月 = Tsuki.toValue(new RString(Month.of(更正月.get月AsInt()).minus(LONG_1).getValue()).padZeroToLeft(NUM_2));
+            if (Tsuki.翌年度5月.compareTo(更正月.get月()) == 0) {
+                from月 = Tsuki.翌年度4月;
+            } else if (Tsuki.翌年度4月.compareTo(更正月.get月()) == 0) {
+                from月 = Tsuki._3月;
+            } else if (Tsuki._1月.compareTo(更正月.get月()) == 0) {
+                from月 = Tsuki._12月;
+            } else {
+                from月 = Tsuki.toValue(new RString(Month.of(更正月.get月AsInt()).minus(LONG_1).getValue()).padZeroToLeft(NUM_2));
+            }
         }
-        if (to月.compareTo(更正月.get月()) != 0) {
-            to月 = Tsuki.toValue(new RString(Month.of(更正月.get月AsInt()).plus(LONG_1).getValue()).padZeroToLeft(NUM_2));
+        if (to月.compareTo(更正月.get月()) != 0 && Tsuki.翌年度4月.compareTo(更正月.get月()) != 0) {
+            if (Tsuki._12月.compareTo(更正月.get月()) == 0) {
+                to月 = Tsuki._1月;
+            } else if (Tsuki._3月.compareTo(更正月.get月()) == 0) {
+                to月 = Tsuki.翌年度4月;
+            } else {
+                to月 = Tsuki.toValue(new RString(Month.of(更正月.get月AsInt()).plus(LONG_1).getValue()).padZeroToLeft(NUM_2));
+            }
         }
         KitsukiList 期月リスト = 月期対応取得_普徴クラス.get期月リスト().subListBy月(from月, to月);
         for (Kitsuki kitsuki : 期月リスト.toList()) {
