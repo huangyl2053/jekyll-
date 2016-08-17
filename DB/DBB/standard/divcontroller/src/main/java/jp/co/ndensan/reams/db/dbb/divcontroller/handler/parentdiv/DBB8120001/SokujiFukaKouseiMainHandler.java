@@ -107,6 +107,7 @@ public class SokujiFukaKouseiMainHandler {
     private static final RString 一月一日 = new RString("0101");
     private static final RString 三月 = new RString("03");
     private static final RString カラ = new RString("～");
+    private static final RString FLAG_CHANGE = new RString("1");
 
     /**
      * コンストラクタです。
@@ -164,6 +165,7 @@ public class SokujiFukaKouseiMainHandler {
         }
         set過年度の徴収情報(更正前賦課リスト, 更正後賦課リスト);
         set保険料年額と事由タブエリア(更正前賦課リスト, 更正後賦課リスト, 保険料段階List);
+        div.setInitData(getPaneItem());
     }
 
     /**
@@ -183,6 +185,15 @@ public class SokujiFukaKouseiMainHandler {
                 && 納付額_２期.compareTo(Decimal.ZERO) == 0)
                 || (!ZERO.equals(div.getTokuchoNofugakuValue08())
                 && 納付額_３期.compareTo(Decimal.ZERO) == 0);
+    }
+
+    /**
+     * 入力内容をチェックです。
+     *
+     * @return is入力があれ
+     */
+    public boolean is入力があれ() {
+        return !div.getInitData().equals(getPaneItem()) || FLAG_CHANGE.equals(div.getIsDataChange());
     }
 
     /**
@@ -304,7 +315,6 @@ public class SokujiFukaKouseiMainHandler {
         tablePanel.getTxtFuchoNokigen03().setReadOnly(true);
         tablePanel.getTxtFuchoNokigenYoku04().setReadOnly(true);
         tablePanel.getTxtFuchoNokigenYoku05().setReadOnly(true);
-
     }
 
     /**
@@ -560,6 +570,14 @@ public class SokujiFukaKouseiMainHandler {
 
     private boolean is異なる(Decimal dec1, Decimal dec2) {
         return !dec1.equals(dec2);
+    }
+
+    private RString getRStringByTextBoxNum(TextBoxNum textBoxNum) {
+        return textBoxNum == null ? RString.EMPTY : new RString(textBoxNum.getValue().toString());
+    }
+
+    private RString getRStringByTextBoxDate(TextBoxDate textBoxDate) {
+        return textBoxDate == null ? RString.EMPTY : textBoxDate.getValue().toDateString();
     }
 
     private boolean set期別金額(FukaJoho 賦課の情報, int 期, RString 徴収方法期別, TextBoxNum textBoxNum, TextBoxDate textBoxDate, Boolean is差異がある) {
@@ -1566,5 +1584,45 @@ public class SokujiFukaKouseiMainHandler {
         }
         RYearMonth 該当月 = new RYearMonth(年度.toDateString().concat(コード_月));
         return 該当月.compareTo(調定年月) < 0;
+    }
+
+    private RString getPaneItem() {
+        RString data = RString.EMPTY;
+        data = data.concat(getRStringByTextBoxNum(div.getTxtGemmenGakuInput()));
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        data = data.concat(getRStringByTextBoxNum(tablePanel.getTxtTokuchoKoseiGo04()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtTokuchoKoseiGo06()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtTokuchoKoseiGo08()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtTokuchoKoseiGo10()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtTokuchoKoseiGo12()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtTokuchoKoseiGo02()));
+        data = data.concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGo04()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGo05()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGo06()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGo07()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGo08()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGo09()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGo10()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGo11()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGo12()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGo01()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGo02()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGo03()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGoYoku04()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGoYoku05()));
+        return data.concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigen04()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigen05()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigen06()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigen07()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigen08()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigen09()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigen10()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigen11()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigen12()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigen01()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigen02()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigen03()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigenYoku04()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigenYoku05()));
     }
 }
