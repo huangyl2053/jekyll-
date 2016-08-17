@@ -388,8 +388,8 @@ public class SaishinsaKetteiHokenshaInCsvFileRead {
         }
         hihokenshaTempentity.set市町村コード(LasdecCode.EMPTY);
         hihokenshaTempentity.set管内管外区分(RString.EMPTY);
-        hihokenshaTempentity.set郵便番号(RString.EMPTY);
-        hihokenshaTempentity.set町域コード(RString.EMPTY);
+        hihokenshaTempentity.set郵便番号(null);
+        hihokenshaTempentity.set町域コード(null);
         hihokenshaTempentity.set行政区コード(RString.EMPTY);
         hihokenshaTempentity.set行政区名(RString.EMPTY);
         hihokenshaTempentity.set住所(RString.EMPTY);
