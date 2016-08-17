@@ -162,15 +162,12 @@ public class SashitomeShobunTsuchishoNigoEditor implements ISashitomeShobunTsuch
             source.hihoNo9 = 被保険者番号.substring(NOCOUNT_8, NOCOUNT_9);
             source.hihoNo10 = 被保険者番号.substring(NOCOUNT_9, NOCOUNT_10);
         }
-        if (null != 帳票制御共通) {
-            RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-            if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
-                source.tsuchibun = 通知書定型文リスト.get(NOCOUNT_1);
-                if (new RString("1").equals(定型文文字サイズ)) {
-                    source.renrakusakiHoka = 通知書定型文リスト.get(NOCOUNT_2);
-                } else {
-                    source.renrakusakiHoka = RString.EMPTY;
-                }
+
+        RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
+        if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
+            source.tsuchibun = 通知書定型文リスト.get(NOCOUNT_1);
+            if (new RString("1").equals(定型文文字サイズ)) {
+                source.renrakusakiHoka = 通知書定型文リスト.get(NOCOUNT_2);
             }
         }
     }
