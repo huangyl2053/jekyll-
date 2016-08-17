@@ -9,13 +9,13 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisai;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisai.edaNo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisai.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisai.logicalDeletedFlag;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisai.nendo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisai.rirekiNo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisai.yukoKaishiYMD;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisai.yukoShuryoYMD;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenko.logicalDeletedFlag;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class DbT3114RiyoshaFutanWariaiMeisaiDac implements ISaveable<DbT3114RiyoshaFutanWariaiMeisaiEntity> {
 
+    private static final int NUM_1 = 1;
     private static final int NUM_6 = 6;
     @InjectSession
     private SqlSession session;
@@ -116,8 +117,8 @@ public class DbT3114RiyoshaFutanWariaiMeisaiDac implements ISaveable<DbT3114Riyo
                 table(DbT3114RiyoshaFutanWariaiMeisai.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
-                                leq(substr(yukoKaishiYMD, 0, NUM_6), 利用年月),
-                                leq(利用年月, substr(yukoShuryoYMD, 0, NUM_6)),
+                                leq(substr(yukoKaishiYMD, NUM_1, NUM_6), 利用年月),
+                                leq(利用年月, substr(yukoShuryoYMD, NUM_1, NUM_6)),
                                 eq(logicalDeletedFlag, false))).
                 toList(DbT3114RiyoshaFutanWariaiMeisaiEntity.class);
     }

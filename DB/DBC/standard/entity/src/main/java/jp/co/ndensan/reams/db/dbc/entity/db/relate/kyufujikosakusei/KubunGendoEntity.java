@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * ビジネス設計_DBC0120031_サービス利用票情報 区分限度額統計処理Entity
+ * 区分限度額統計処理Entityクラスです。
  *
- * @reamsid_L DBC-1930-060 xupeng
+ * @reamsid_L DBC-1930-060 cuilin
  */
 @lombok.Getter
 @lombok.Setter
