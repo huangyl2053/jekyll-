@@ -75,6 +75,9 @@ public class SeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess extends BatchKeyBre
     protected void initialize() {
         super.initialize();
         改頁項目リスト = new ArrayList<>();
+        改頁項目リスト.add(new RString(SeikyugakuTsuchishoSource.DBC200066SourceFields.shoKisaiHokenshaNo.name()));
+        改頁項目リスト.add(new RString(SeikyugakuTsuchishoSource.DBC200066SourceFields.kanCode.name()));
+        改頁項目リスト.add(new RString(SeikyugakuTsuchishoSource.DBC200066SourceFields.kouCode.name()));
     }
 
     @Override
@@ -103,9 +106,6 @@ public class SeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess extends BatchKeyBre
 
     @Override
     protected void beforeExecute() {
-        改頁項目リスト.add(new RString(SeikyugakuTsuchishoSource.DBC200066SourceFields.shoKisaiHokenshaNo.name()));
-        改頁項目リスト.add(new RString(SeikyugakuTsuchishoSource.DBC200066SourceFields.kanCode.name()));
-        改頁項目リスト.add(new RString(SeikyugakuTsuchishoSource.DBC200066SourceFields.kouCode.name()));
     }
 
     @Override
