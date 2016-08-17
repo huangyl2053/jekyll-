@@ -127,7 +127,6 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
                     .replace(実行不可MESSAGE.toString()).toString());
         }
-//         並び順 = get並び順(parameter.get帳票ID(), parameter.get出力順ID());
         RString 出力順 = MyBatisOrderByClauseCreator
                 .create(SogojigyohiKagoKetteInOutPutOrder.class, 並び順);
         if (RString.isNullOrEmpty(出力順)) {
@@ -159,6 +158,7 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
             }
         }
         帳票データの取得Parameter.set出力順(出力順);
+        pageBreakKeys.add(new RString(SogojigyohiKagoKetteiInSource.ReportSourceFields.shoKisaiHokenshaNo.name()));
     }
 
     @Override
@@ -187,7 +187,6 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
 
     @Override
     protected void beforeExecute() {
-        pageBreakKeys.add(new RString(SogojigyohiKagoKetteiInSource.ReportSourceFields.shoKisaiHokenshaNo.name()));
     }
 
     @Override
