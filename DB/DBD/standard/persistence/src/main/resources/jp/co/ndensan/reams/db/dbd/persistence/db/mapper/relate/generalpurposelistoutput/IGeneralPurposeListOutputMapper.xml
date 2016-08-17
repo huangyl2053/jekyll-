@@ -194,8 +194,8 @@
         <result property="自己作成_計画作成年月日" column="自己作成_計画作成年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="自己作成_計画変更年月日" column="自己作成_計画変更年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="自己作成_計画変更事由" column="自己作成_計画変更事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-      <!--  <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
-        <association property="atesakiEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>-->
+        <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <association property="atesakiEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
     </resultMap>
      <select resultOrdered="true" id="getGeneralPurposeListOutputInfo"
             resultMap="resultMap_GeneralPurposeListOutputEntity"
@@ -348,7 +348,7 @@ SELECT
     受給者台帳."ninteiYukoKikanKaishiYMD" AS 受給者台帳_認定有効期間開始年月日,
     受給者台帳."ninteiYukoKikanShuryoYMD" AS 受給者台帳_認定有効期間終了年月日,
     受給者台帳."kyuSochishaFlag" AS 受給者台帳_旧措置者フラグ,
-    <!--受給者台帳."minashiCode" AS 受給者台帳_みなし要介護区分コード,-->
+   <!-- 受給者台帳."minashiCode" AS 受給者台帳_みなし要介護区分コード,-->
     
     今回結果情報."shinsakaiIken" AS 今回結果情報_介護認定審査会意見,
     
@@ -477,23 +477,22 @@ SELECT
     計画事業者."jigyoshaNameKana" AS 計画事業者_事業者名称カナ,
     計画事業者代表者."daihyoshaShimei" AS 計画事業者代表者_代表者名,
     計画事業者代表者."daihyoshaKanaShimei" AS 計画事業者代表者_代表者名カナ,
-    
     事業者作成."tekiyoKaishiYMD" AS 事業者作成_適用開始年月日,
     事業者作成."tekiyoShuryoYMD" AS 事業者作成_適用終了年月日,
     居宅届出."todokedeYMD" AS 居宅届出_届出年月日,
     自己作成."keikakuSakuseiYMD" AS 自己作成_計画作成年月日,
     自己作成."keikakuHenkoYMD" AS 自己作成_計画変更年月日,
-    自己作成."keikakuHenkoJiyu" AS 自己作成_計画変更事由 <!--,
+    自己作成."keikakuHenkoJiyu" AS 自己作成_計画変更事由,
    
      <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
-    , <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />-->
+    , <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
     FROM
         rgdb."DbT1004ShisetsuNyutaisho"  AS 施設入所
     INNER JOIN
         rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳管理
         ON 被保険者台帳管理."shikibetsuCode" = 施設入所."shikibetsuCode"
 
- <!--   INNER JOIN
+    INNER JOIN
          <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
             AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
      ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = 被保険者台帳管理."shikibetsuCode"
@@ -501,7 +500,7 @@ SELECT
     INNER JOIN
          <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" /> AS "Atesaki"
      ON "Atesaki"."shikibetsuCode" = 被保険者台帳管理."shikibetsuCode"
--->
+
     LEFT JOIN 
         rgdb."DbV4001JukyushaDaicho" AS 受給者台帳
         ON 受給者台帳."hihokenshaNo" = 被保険者台帳管理."hihokenshaNo"
@@ -789,9 +788,8 @@ SELECT
      <if test="is宛名抽出条件_市町村コード_非全部">
  　　　　　AND (受給者台帳."shichosonCode"= #{shichosonCode}
            OR (受給者台帳."shichosonCode"= #{shichosonCode})
-     
      </if>
-     <!--
+     
          <if test="is住所From">
              AND #{jusho_From} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."tennyumaeZenkokuJushoCode"
          </if>
@@ -804,26 +802,24 @@ SELECT
           <if test="is行政区To">
              AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."gyoseikuCode" <![CDATA[<=]]> #{gyoseiku_To}
          </if>
-     </if>
-         <if test="is地区１From">
-             AND #{chiku1_From} <![CDATA[<=]]> ShikibetsuTaisho."chikuCode1"
+         <if test="is地区1From">
+             AND #{chiku1_From} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode1"
          </if>
-          <if test="is地区１To">
+          <if test="is地区1To">
              AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode1" <![CDATA[<=]]> #{chiku1_To}
          </if>
-         <if test="is地区２From">
+         <if test="is地区2From">
              AND #{chiku2_From} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode2"
          </if>
-          <if test="is地区２To">
+          <if test="is地区2To">
              AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode2" <![CDATA[<=]]> #{chiku2_To}
          </if>
-         <if test="is地区３From">
+         <if test="is地区3From">
              AND #{chiku3_From} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode3"
          </if>
-          <if test="is地区３To">
+          <if test="is地区3To">
              AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode3" <![CDATA[<=]]> #{chiku3_To}
          </if>
-     -->
      <!--ORDER BY
         #{outPut}-->
     </select>
