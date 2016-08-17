@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.chosaocrtorikomi.ChosaOCRTorikom
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikekkajoho.NinteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho2;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosaocrtorikomi.ChosaOCRTorikomiParameter;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001.ChosaOCRTorikomiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001.ChosaOCRTorikomiMainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001.TorikomiData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001.TorikomiEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001.TorikomiEntityCollection;
@@ -57,7 +57,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  *
  * @reamsid_L DBE-1560-010 suguangjun
  */
-public class ChosaOCRTorikomi {
+public class ChosaOCRTorikomiMain {
 
     private static final RString ファイル名 = new RString("OCRSHINSA.CSV");
     private static final int CSV項目数 = 38;
@@ -70,9 +70,10 @@ public class ChosaOCRTorikomi {
      * 画面初期化処理です。
      *
      * @param div 介護認定審査会審査結果登録
-     * @return ResponseData<ChosaOCRTorikomiDiv>
+     * @return ResponseData<ChosaOCRTorikomiMainDiv>
      */
-    public ResponseData<ChosaOCRTorikomiDiv> onLoad(ChosaOCRTorikomiDiv div) {
+    public ResponseData<ChosaOCRTorikomiMainDiv> onLoad(ChosaOCRTorikomiMainDiv div) {
+        ViewStateHolder.put(ViewStateKeys.審査会開催番号, new RString("11256"));
         審査会開催番号 = ViewStateHolder.get(ViewStateKeys.審査会開催番号, RString.class);
         ChosaOCRTorikomiParameter parameter = ChosaOCRTorikomiParameter.createParam(審査会開催番号, RString.EMPTY, RString.EMPTY);
         List<ChosaOCRTorikomiBusiness> torikomiList
@@ -88,14 +89,14 @@ public class ChosaOCRTorikomi {
      * 「審査結果OCRを取込」ボタンを押します。
      *
      * @param div 画面情報
-     * @return ResponseData<ImageinputDiv>
+     * @return ResponseData<ChosaOCRTorikomiMainDiv>
      */
-    public ResponseData<ChosaOCRTorikomiDiv> onClick_btnOCRTorikomi(ChosaOCRTorikomiDiv div) {
+    public ResponseData<ChosaOCRTorikomiMainDiv> onClick_BtnOCRTorikomi(ChosaOCRTorikomiMainDiv div) {
         csvCheck処理(getHandler(div).onClick_Ikensho(), div);
         return ResponseData.of(div).respond();
     }
 
-    private void csvCheck処理(List<TorikomiData> dataList, ChosaOCRTorikomiDiv div) {
+    private void csvCheck処理(List<TorikomiData> dataList, ChosaOCRTorikomiMainDiv div) {
         if (dataList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(ファイル名.toString()));
         }
@@ -248,7 +249,7 @@ public class ChosaOCRTorikomi {
      * @param div 画面情報
      * @return ResponseData<ImageinputDiv>
      */
-    public ResponseData<ChosaOCRTorikomiDiv> onClick_BtnSave(ChosaOCRTorikomiDiv div) {
+    public ResponseData<ChosaOCRTorikomiMainDiv> onClick_BtnSave(ChosaOCRTorikomiMainDiv div) {
         boolean 選択Flag = false;
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
@@ -269,7 +270,7 @@ public class ChosaOCRTorikomi {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
             db更新(div);
-            onClick_btnOCRTorikomi(div);
+            onClick_BtnOCRTorikomi(div);
         }
         return ResponseData.of(div).respond();
     }
@@ -279,10 +280,10 @@ public class ChosaOCRTorikomi {
      *
      * @param div 画面情報
      * @param files ファイル
-     * @return ResponseData<ChosaOCRTorikomiDiv>
+     * @return ResponseData<ChosaOCRTorikomiMainDiv>
      */
     @SuppressWarnings("checkstyle:illegaltoken")
-    public ResponseData<ChosaOCRTorikomiDiv> onclick_BtnUpload(ChosaOCRTorikomiDiv div, FileData[] files) {
+    public ResponseData<ChosaOCRTorikomiMainDiv> onclick_BtnUpload(ChosaOCRTorikomiMainDiv div, FileData[] files) {
         for (FileData file : files) {
             if (file.getFileName().endsWith(new RString("CSV"))) {
                 savaCsvファイル(file);
@@ -328,7 +329,7 @@ public class ChosaOCRTorikomi {
         return true;
     }
 
-    private void save共有フォルダ(ChosaOCRTorikomiDiv div, FilesystemPath path) {
+    private void save共有フォルダ(ChosaOCRTorikomiMainDiv div, FilesystemPath path) {
         List<TorikomiEntity> dataList = ViewStateHolder.get(ViewStateKeys.介護認定審査会審査結果登録, TorikomiEntityCollection.class).getDataList();
         for (TorikomiEntity data : dataList) {
             for (dgChosahyoTorikomiKekka_Row row : div.getDgChosahyoTorikomiKekka().getDataSource()) {
@@ -362,7 +363,7 @@ public class ChosaOCRTorikomi {
         mannger.saveイメージ情報(image);
     }
 
-    private void db更新(ChosaOCRTorikomiDiv div) {
+    private void db更新(ChosaOCRTorikomiMainDiv div) {
         List<TorikomiEntity> dataList = ViewStateHolder.get(ViewStateKeys.介護認定審査会審査結果登録, TorikomiEntityCollection.class).getDataList();
         for (dgChosahyoTorikomiKekka_Row row : div.getDgChosahyoTorikomiKekka().getDataSource()) {
             if (row.getSelected() && チェックOK.equals(row.getOkOrNg())) {
@@ -375,7 +376,7 @@ public class ChosaOCRTorikomi {
         }
     }
 
-    private void updateDbT5102(ChosaOCRTorikomiDiv div, dgChosahyoTorikomiKekka_Row row, TorikomiEntity data) {
+    private void updateDbT5102(ChosaOCRTorikomiMainDiv div, dgChosahyoTorikomiKekka_Row row, TorikomiEntity data) {
         NinteiKekkaJohoManager mange = new NinteiKekkaJohoManager();
         NinteiKekkaJoho ninteiKekkaJoho = mange.get要介護認定結果情報(data.get申請書管理番号());
         if (ninteiKekkaJoho == null) {
@@ -387,7 +388,7 @@ public class ChosaOCRTorikomi {
         mange.save要介護認定結果情報(ninteiKekkaJoho);
     }
 //
-//    private void updateDbT5503(ChosaOCRTorikomiDiv div, dgChosahyoTorikomiKekka_Row row, TorikomiData data) {
+//    private void updateDbT5503(ChosaOCRTorikomiMainDiv div, dgChosahyoTorikomiKekka_Row row, TorikomiData data) {
 //        NinteiKekkaJohoManager mange = new NinteiKekkaJohoManager();
 //        NinteiKekkaJoho ninteiKekkaJoho = mange.get要介護認定結果情報(data.get申請書管理番号());
 //        if (ninteiKekkaJoho == null) {
@@ -400,7 +401,7 @@ public class ChosaOCRTorikomi {
 //        mange.save要介護認定結果情報(ninteiKekkaJoho);
 //    }
 
-    private void updateDbT5511(ChosaOCRTorikomiDiv div, dgChosahyoTorikomiKekka_Row row, TorikomiEntity data) {
+    private void updateDbT5511(ChosaOCRTorikomiMainDiv div, dgChosahyoTorikomiKekka_Row row, TorikomiEntity data) {
         ShinsakaiKaisaiKekkaJohoManager mange = ShinsakaiKaisaiKekkaJohoManager.createInstance();
         ShinsakaiKaisaiKekkaJoho2 kekkaJoho = mange.get介護認定審査会開催結果情報(審査会開催番号);
         if (kekkaJoho == null) {
@@ -412,7 +413,7 @@ public class ChosaOCRTorikomi {
         mange.save介護認定審査会開催結果情報(kekkaJoho);
     }
 
-    private ChosaOCRTorikomiHandler getHandler(ChosaOCRTorikomiDiv div) {
+    private ChosaOCRTorikomiHandler getHandler(ChosaOCRTorikomiMainDiv div) {
         return new ChosaOCRTorikomiHandler(div);
     }
 

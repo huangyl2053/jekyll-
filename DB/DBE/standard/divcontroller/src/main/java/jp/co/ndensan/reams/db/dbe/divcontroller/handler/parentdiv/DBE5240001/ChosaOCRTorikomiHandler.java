@@ -10,8 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosaocrtorikomi.ChosaOCRTorikomiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikekkajoho.NinteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho2;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2260001.TorokuData;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001.ChosaOCRTorikomiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001.ChosaOCRTorikomiMainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001.TorikomiData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001.TorikomiEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001.dgChosahyoTorikomiKekka_Row;
@@ -33,8 +32,10 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
@@ -46,17 +47,20 @@ public class ChosaOCRTorikomiHandler {
 
     private static final RString 空白 = RString.EMPTY;
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
-    private static final RString ファイル名 = new RString("OCRIKEN.CSV");
+    private static final RString ファイル名 = new RString("OCRSHINSA.CSV");
     private final Code 識別コード_09A = new Code("09A");
     private final Code 識別コード_99A = new Code("99A");
-    private final ChosaOCRTorikomiDiv div;
+    private final ChosaOCRTorikomiMainDiv div;
+    private static final RString INDEX_1 = new RString("1");
+    private static final int INDEX_60 = 60;
+    private static final int INDEX_61 = 60;
 
     /**
      * コンストラクタです。
      *
      * @param div 介護認定審査会審査結果div
      */
-    public ChosaOCRTorikomiHandler(ChosaOCRTorikomiDiv div) {
+    public ChosaOCRTorikomiHandler(ChosaOCRTorikomiMainDiv div) {
         this.div = div;
     }
 
@@ -80,9 +84,11 @@ public class ChosaOCRTorikomiHandler {
             div.getTxtShinsakaijoJusho().setValue(CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DBECodeShubetsu.審査会地区コード.getコード(),
                     torikomiList.get(0).get介護認定審査会開催地区コード(), FlexibleDate.getNowDate()));
         }
-        div.getTxtKaisaiNichiji().setValue(new FlexibleDate(dateFormat1(torikomiList.get(0).get介護認定審査会開催年月日())));
-        div.getTxtKaisaiTimeRange().setFromValue(RTime.of(torikomiList.get(0).get介護認定審査会開始時刻()));
-        div.getTxtKaisaiTimeRange().setToValue(RTime.of(torikomiList.get(0).get介護認定審査会終了時刻()));
+        div.getTxtKaisaiNichiji().setValue(torikomiList.get(0).get介護認定審査会開催年月日());
+        div.getTxtKaisaiTimeRange().setFromValue(RTime.of(rStringToInt(torikomiList.get(0).get介護認定審査会開始時刻().substring(0, 2)),
+                rStringToInt(torikomiList.get(0).get介護認定審査会開始時刻().substring(2))));
+        div.getTxtKaisaiTimeRange().setToValue(RTime.of(rStringToInt(torikomiList.get(0).get介護認定審査会開始時刻().substring(0, 2)),
+                rStringToInt(torikomiList.get(0).get介護認定審査会開始時刻().substring(2))));
     }
 
     /**
@@ -138,38 +144,187 @@ public class ChosaOCRTorikomiHandler {
                     get二次判定結果(data),
                     data.get認定有効期間(),
                     get認定有効期間開始日(data),
-                    RString.EMPTY);
+                    get認定有効期間終了日(data));
             rowList.add(row);
         }
         div.getDgChosahyoTorikomiKekka().setDataSource(rowList);
     }
 
+    private RString get認定有効期間終了日(TorikomiEntity data) {
+        FlexibleDate 開始年月日 = new FlexibleDate(get認定有効期間開始日(data));
+        RStringBuilder builder = new RStringBuilder();
+        if (開始年月日.getDayValue() == 1) {
+            FlexibleDate date = 開始年月日.plusMonth(rStringToInt(data.get認定有効期間()) - 1);
+            builder.append(date.getYearMonth());
+            builder.append(date.getLastDay());
+        } else {
+            FlexibleDate date = 開始年月日.plusMonth(rStringToInt(data.get認定有効期間()));
+            builder.append(date.getYearMonth());
+            builder.append(date.getLastDay());
+        }
+        return dateFormat1(new FlexibleDate(builder.toRString()));
+    }
+
+    private int rStringToInt(RString data) {
+        if (data != null) {
+            return Integer.valueOf(data.toString());
+        }
+        return 0;
+    }
+
     private RString get認定有効期間開始日(TorikomiEntity data) {
         RString 認定有効期間開始日 = RString.EMPTY;
         if (data.get申請区分() != null && NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(data.get申請区分().value())
-                && (new RString("1").equals(data.get要支援1()) || new RString("1").equals(data.get要支援2()))) {
+                && (INDEX_1.equals(data.get要支援1()) || INDEX_1.equals(data.get要支援2()))) {
             認定有効期間開始日 = dateFormat1(data.get申請日());
+        }
+        if (data.get申請区分() != null && NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(data.get申請区分().value())
+                && (INDEX_1.equals(data.get要介護1()) || INDEX_1.equals(data.get要介護2())
+                || INDEX_1.equals(data.get要介護3()) || INDEX_1.equals(data.get要介護4())
+                || INDEX_1.equals(data.get要介護5()))) {
+            認定有効期間開始日 = dateFormat1(data.get申請日());
+        }
+        if (data.get申請区分() != null && NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(data.get申請区分().value())
+                && IchijiHanteiKekkaCode09.要支援2.getコード().equals(data.get一次判定結果().value()) && !data.get二次判定認定有効終了年月日().isEmpty()
+                && data.get申請日().isBefore(data.get二次判定認定有効終了年月日().minusDay(INDEX_60))
+                || INDEX_1.equals(data.get要支援1()) || INDEX_1.equals(data.get要支援2())) {
+            認定有効期間開始日 = dateFormat1(get認定有効終了年月日の次月１日(data.get二次判定認定有効終了年月日()));
+        }
+        認定有効期間開始日 = get認定有効期間開始日1(data, 認定有効期間開始日);
+        認定有効期間開始日 = get認定有効期間開始日2(data, 認定有効期間開始日);
+        認定有効期間開始日 = get認定有効期間開始日3(data, 認定有効期間開始日);
+        認定有効期間開始日 = get認定有効期間開始日4(data, 認定有効期間開始日);
+        認定有効期間開始日 = get認定有効期間開始日5(data, 認定有効期間開始日);
+        認定有効期間開始日 = get認定有効期間開始日6(data, 認定有効期間開始日);
+        認定有効期間開始日 = get認定有効期間開始日7(data, 認定有効期間開始日);
+        return 認定有効期間開始日;
+    }
+
+    private FlexibleDate get認定有効終了年月日の次月１日(FlexibleDate data) {
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(data.plusMonth(1).getYearMonth());
+        builder.append("01");
+        return new FlexibleDate(builder.toRString());
+    }
+
+    private RString get認定有効期間開始日1(TorikomiEntity data, RString 認定有効期間開始日) {
+        if (data.get申請区分() != null && NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(data.get申請区分().value())
+                && IchijiHanteiKekkaCode09.要支援2.getコード().equals(data.get一次判定結果().value()) && !data.get二次判定認定有効終了年月日().isEmpty()
+                && data.get申請日().isBefore(data.get二次判定認定有効終了年月日().minusDay(INDEX_61))
+                || INDEX_1.equals(data.get要支援1()) || INDEX_1.equals(data.get要支援2())) {
+            認定有効期間開始日 = dateFormat1(data.get二次判定年月日());
+        }
+        if (data.get申請区分() != null && NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(data.get申請区分().value())
+                && IchijiHanteiKekkaCode09.要支援2.getコード().equals(data.get一次判定結果().value())
+                || INDEX_1.equals(data.get要支援1()) || INDEX_1.equals(data.get要支援2())) {
+            認定有効期間開始日 = dateFormat1(data.get申請日());
+        }
+        return 認定有効期間開始日;
+    }
+
+    private RString get認定有効期間開始日2(TorikomiEntity data, RString 認定有効期間開始日) {
+        if (data.get申請区分() != null && NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(data.get申請区分().value())
+                && IchijiHanteiKekkaCode09.要支援2.getコード().equals(data.get一次判定結果().value())
+                || INDEX_1.equals(data.get要介護1()) || INDEX_1.equals(data.get要介護2()) || INDEX_1.equals(data.get要介護3())
+                || INDEX_1.equals(data.get要介護4()) || INDEX_1.equals(data.get要介護5())) {
+            認定有効期間開始日 = dateFormat1(data.get申請日());
+        }
+        return 認定有効期間開始日;
+    }
+
+    private RString get認定有効期間開始日3(TorikomiEntity data, RString 認定有効期間開始日) {
+        if (data.get申請区分() != null && NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(data.get申請区分().value())
+                && IchijiHanteiKekkaCode09.要介護1.getコード().equals(data.get一次判定結果().value())
+                || IchijiHanteiKekkaCode09.要介護2.getコード().equals(data.get一次判定結果().value())
+                || IchijiHanteiKekkaCode09.要介護3.getコード().equals(data.get一次判定結果().value())
+                || IchijiHanteiKekkaCode09.要介護4.getコード().equals(data.get一次判定結果().value())
+                || IchijiHanteiKekkaCode09.要介護5.getコード().equals(data.get一次判定結果().value())
+                && data.get申請日().isBefore(data.get二次判定認定有効終了年月日().minusDay(INDEX_60))
+                || INDEX_1.equals(data.get要介護1()) || INDEX_1.equals(data.get要介護2()) || INDEX_1.equals(data.get要介護3())
+                || INDEX_1.equals(data.get要介護4()) || INDEX_1.equals(data.get要介護5())) {
+            認定有効期間開始日 = dateFormat1(data.get二次判定年月日());
+        }
+        return 認定有効期間開始日;
+    }
+
+    private RString get認定有効期間開始日4(TorikomiEntity data, RString 認定有効期間開始日) {
+        if (data.get申請区分() != null && NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(data.get申請区分().value())
+                && IchijiHanteiKekkaCode09.要介護1.getコード().equals(data.get一次判定結果().value())
+                || IchijiHanteiKekkaCode09.要介護2.getコード().equals(data.get一次判定結果().value())
+                || IchijiHanteiKekkaCode09.要介護3.getコード().equals(data.get一次判定結果().value())
+                || IchijiHanteiKekkaCode09.要介護4.getコード().equals(data.get一次判定結果().value())
+                || IchijiHanteiKekkaCode09.要介護5.getコード().equals(data.get一次判定結果().value())
+                && data.get申請日().isBefore(data.get二次判定認定有効終了年月日().minusDay(INDEX_61))
+                || INDEX_1.equals(data.get要介護1()) || INDEX_1.equals(data.get要介護2()) || INDEX_1.equals(data.get要介護3())
+                || INDEX_1.equals(data.get要介護4()) || INDEX_1.equals(data.get要介護5())) {
+            認定有効期間開始日 = dateFormat1(get認定有効終了年月日の次月１日(data.get二次判定認定有効終了年月日()));
+        }
+        return 認定有効期間開始日;
+    }
+
+    private RString get認定有効期間開始日5(TorikomiEntity data, RString 認定有効期間開始日) {
+        if (data.get申請区分() != null && NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(data.get申請区分().value())
+                && IchijiHanteiKekkaCode09.要介護1.getコード().equals(data.get一次判定結果().value())
+                || IchijiHanteiKekkaCode09.要介護2.getコード().equals(data.get一次判定結果().value())
+                || IchijiHanteiKekkaCode09.要介護3.getコード().equals(data.get一次判定結果().value())
+                || IchijiHanteiKekkaCode09.要介護4.getコード().equals(data.get一次判定結果().value())
+                || IchijiHanteiKekkaCode09.要介護5.getコード().equals(data.get一次判定結果().value())
+                || INDEX_1.equals(data.get要介護1()) || INDEX_1.equals(data.get要介護2()) || INDEX_1.equals(data.get要介護3())
+                || INDEX_1.equals(data.get要介護4()) || INDEX_1.equals(data.get要介護5())) {
+            認定有効期間開始日 = dateFormat1(data.get申請日());
+        }
+        return 認定有効期間開始日;
+    }
+
+    private RString get認定有効期間開始日6(TorikomiEntity data, RString 認定有効期間開始日) {
+        if (data.get申請区分() != null && NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(data.get申請区分().value())
+                && IchijiHanteiKekkaCode09.要介護1.getコード().equals(data.get一次判定結果().value())
+                || IchijiHanteiKekkaCode09.要介護2.getコード().equals(data.get一次判定結果().value())
+                || IchijiHanteiKekkaCode09.要介護3.getコード().equals(data.get一次判定結果().value())
+                || IchijiHanteiKekkaCode09.要介護4.getコード().equals(data.get一次判定結果().value())
+                || IchijiHanteiKekkaCode09.要介護5.getコード().equals(data.get一次判定結果().value())
+                || INDEX_1.equals(data.get要支援1()) || INDEX_1.equals(data.get要支援2())) {
+            認定有効期間開始日 = dateFormat1(data.get二次判定年月日());
+        }
+        return 認定有効期間開始日;
+    }
+
+    private RString get認定有効期間開始日7(TorikomiEntity data, RString 認定有効期間開始日) {
+        if (data.get申請区分() != null && NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(data.get申請区分().value())
+                && IchijiHanteiKekkaCode09.要支援2.getコード().equals(data.get一次判定結果().value())
+                || INDEX_1.equals(data.get要介護1()) || INDEX_1.equals(data.get要介護2()) || INDEX_1.equals(data.get要介護3())
+                || INDEX_1.equals(data.get要介護4()) || INDEX_1.equals(data.get要介護5())) {
+            認定有効期間開始日 = dateFormat1(get認定有効終了年月日の次月１日(data.get二次判定認定有効終了年月日()));
+        }
+        if (data.get申請区分() != null && NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(data.get申請区分().value())
+                && IchijiHanteiKekkaCode09.要介護1.getコード().equals(data.get一次判定結果().value())
+                || IchijiHanteiKekkaCode09.要介護2.getコード().equals(data.get一次判定結果().value())
+                || IchijiHanteiKekkaCode09.要介護3.getコード().equals(data.get一次判定結果().value())
+                || IchijiHanteiKekkaCode09.要介護4.getコード().equals(data.get一次判定結果().value())
+                || IchijiHanteiKekkaCode09.要介護5.getコード().equals(data.get一次判定結果().value())
+                || INDEX_1.equals(data.get要支援1()) || INDEX_1.equals(data.get要支援2())) {
+            認定有効期間開始日 = dateFormat1(get認定有効終了年月日の次月１日(data.get二次判定認定有効終了年月日()));
         }
         return 認定有効期間開始日;
     }
 
     private RString get二次判定結果(TorikomiEntity data) {
         RString 二次判定結果 = RString.EMPTY;
-        if (new RString("1").equals(data.get非該当())) {
+        if (INDEX_1.equals(data.get非該当())) {
             二次判定結果 = new RString("非該当");
-        } else if (new RString("1").equals(data.get要支援1())) {
+        } else if (INDEX_1.equals(data.get要支援1())) {
             二次判定結果 = new RString("要支援1");
-        } else if (new RString("1").equals(data.get要支援2())) {
+        } else if (INDEX_1.equals(data.get要支援2())) {
             二次判定結果 = new RString("要支援2");
-        } else if (new RString("1").equals(data.get要介護1())) {
+        } else if (INDEX_1.equals(data.get要介護1())) {
             二次判定結果 = new RString("要介護1");
-        } else if (new RString("1").equals(data.get要介護2())) {
+        } else if (INDEX_1.equals(data.get要介護2())) {
             二次判定結果 = new RString("要介護2");
-        } else if (new RString("1").equals(data.get要介護3())) {
+        } else if (INDEX_1.equals(data.get要介護3())) {
             二次判定結果 = new RString("要介護3");
-        } else if (new RString("1").equals(data.get要介護4())) {
+        } else if (INDEX_1.equals(data.get要介護4())) {
             二次判定結果 = new RString("要介護4");
-        } else if (new RString("1").equals(data.get要介護5())) {
+        } else if (INDEX_1.equals(data.get要介護5())) {
             二次判定結果 = new RString("要介護5");
         }
         return 二次判定結果;
@@ -177,9 +332,9 @@ public class ChosaOCRTorikomiHandler {
 
     private RString get要介護状態像例(TorikomiEntity data) {
         RString 要介護状態像例 = RString.EMPTY;
-        if (new RString("1").equals(data.get状態像1())) {
+        if (INDEX_1.equals(data.get状態像1())) {
             要介護状態像例 = new RString("認知機能の低下");
-        } else if (new RString("1").equals(data.get状態像2())) {
+        } else if (INDEX_1.equals(data.get状態像2())) {
             要介護状態像例 = new RString("不安定な状態");
         }
         return 要介護状態像例;
@@ -208,7 +363,7 @@ public class ChosaOCRTorikomiHandler {
         RString imagePath = Path.combinePath(Path.getRootPath(空白), DbBusinessConfig
                 .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         RString csvReaderPath = Path.combinePath(imagePath, ファイル名);
-        CsvReader csvReader = new CsvReader.InstanceBuilder(csvReaderPath, TorokuData.class)
+        CsvReader csvReader = new CsvReader.InstanceBuilder(csvReaderPath, TorikomiData.class)
                 .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8)
                 .hasHeader(false).setNewLine(NewLine.CRLF).build();
         return readCsvFile(csvReader, csvReaderPath);
@@ -296,11 +451,12 @@ public class ChosaOCRTorikomiHandler {
         return RString.EMPTY;
     }
 
-//    private RString dateFormat143(RString date) {
-//        if (date != null) {
-//
-//            RTime.of(date).toFormattedTimeString(DisplayTimeFormat.HH_mm);
-//        }
-//        return RString.EMPTY;
-//    }
+    private RString dateFormat143(RString data) {
+        RString 時刻 = RString.EMPTY;
+        if (!RString.isNullOrEmpty(data)) {
+            RTime time = RTime.of(rStringToInt(data.substring(0, 2)), rStringToInt(data.substring(2)));
+            時刻 = time.toFormattedTimeString(DisplayTimeFormat.HH_mm);
+        }
+        return 時刻;
+    }
 }

@@ -30,15 +30,15 @@ public class KogakuShikyuShinseishoEditor implements IKogakuShikyuShinseishoEdit
     private final boolean is空白;
     private final RString 連番;
     private final RString 注意文;
-    private static final RString 漢字_注意 = new RString("注意");
-    private static final RString 漢字_銀行 = new RString("銀行");
-    private static final RString 漢字_信用金庫 = new RString("信用金庫");
-    private static final RString 漢字_信用組合 = new RString("信用組合");
-    private static final RString 漢字_農協 = new RString("農協");
-    private static final RString 漢字_本店 = new RString("本店");
-    private static final RString 漢字_支店 = new RString("支店");
-    private static final RString 漢字_主張書 = new RString("主張書");
-    private static final RString 漢字_支所 = new RString("支所");
+    private static final RString 文字_注意 = new RString("注意");
+    private static final RString 文字_銀行 = new RString("銀行");
+    private static final RString 文字_信用金庫 = new RString("信用金庫");
+    private static final RString 文字_信用組合 = new RString("信用組合");
+    private static final RString 文字_農協 = new RString("農協");
+    private static final RString 文字_本店 = new RString("本店");
+    private static final RString 文字_支店 = new RString("支店");
+    private static final RString 文字_主張書 = new RString("主張書");
+    private static final RString 文字_支所 = new RString("支所");
 
     /**
      * コンストラクタです
@@ -58,18 +58,7 @@ public class KogakuShikyuShinseishoEditor implements IKogakuShikyuShinseishoEdit
     @Override
     public KogakuShikyuShinseishoSource edit(
             KogakuShikyuShinseishoSource source) {
-        if (this.is空白) {
-            source.teikyoYM = RString.EMPTY;
-            source.hihokenshaNameKana = RString.EMPTY;
-            source.hihokenshaName = RString.EMPTY;
-            source.birthYMD = RString.EMPTY;
-            source.seibetsu = RString.EMPTY;
-            source.hihokenJusho = RString.EMPTY;
-            source.telNo = RString.EMPTY;
-            source.hokenshaNo = RString.EMPTY;
-            source.hihokenshaNo = RString.EMPTY;
-            source.kojinNo = RString.EMPTY;
-        } else {
+        if (!this.is空白) {
             source.teikyoYM = パターン62(帳票出力対象データ.getServiceTeikyoYMChohyo());
             source.hihokenshaNameKana = getColumnValue(帳票出力対象データ.getShimeikanaChohyo());
             source.hihokenshaName = getColumnValue(帳票出力対象データ.getMeishoChohyo());
@@ -83,33 +72,27 @@ public class KogakuShikyuShinseishoEditor implements IKogakuShikyuShinseishoEdit
         }
         source.hakkoubi = doパターン12(システム日付);
         source.ninshoshaYakushokuMei = 認証者役職名;
-        source.chuiTitle = 漢字_注意;
+        source.chuiTitle = 文字_注意;
         source.chuibun = 注意文;
-        source.ginko = 漢字_銀行;
-        source.shinkin = 漢字_信用金庫;
-        source.shinkumi = 漢字_信用組合;
-        source.nokyo = 漢字_農協;
-        source.honten = 漢字_本店;
-        source.shiten = 漢字_支店;
-        source.shuccho = 漢字_主張書;
-        source.shisho = 漢字_支所;
+        source.ginko = 文字_銀行;
+        source.shinkin = 文字_信用金庫;
+        source.shinkumi = 文字_信用組合;
+        source.nokyo = 文字_農協;
+        source.honten = 文字_本店;
+        source.shiten = 文字_支店;
+        source.shuccho = 文字_主張書;
+        source.shisho = 文字_支所;
         source.remban = 連番;
         source.識別コード = 帳票出力対象データ.getShikibetsuCodeChohyo();
 
         return source;
     }
 
-    /**
-     * 日付の変換のメソッドです。
-     *
-     * @param ym 日付
-     * @return 日付
-     */
-    public static RString パターン62(FlexibleYearMonth ym) {
-        if (ym == null) {
+    private RString パターン62(FlexibleYearMonth 年月日) {
+        if (年月日 == null) {
             return RString.EMPTY;
         }
-        return ym.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        return 年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
     private RString doパターン12(FlexibleDate 年月日) {

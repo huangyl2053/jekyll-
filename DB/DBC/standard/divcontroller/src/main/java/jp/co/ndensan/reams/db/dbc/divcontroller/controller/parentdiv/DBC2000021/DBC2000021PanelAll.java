@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000021.DBC2
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000021.DBC2000021PanelAllDiv;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000021.DBC2000021TransitionEventName.判定実行;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000021.PanelAllHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000021.PanelAllValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
@@ -100,9 +99,5 @@ public class DBC2000021PanelAll {
 
     private PanelAllHandler getHandler(DBC2000021PanelAllDiv div) {
         return new PanelAllHandler(div);
-    }
-
-    private PanelAllValidationHandler getValidationHandler(DBC2000021PanelAllDiv div) {
-        return new PanelAllValidationHandler(div);
     }
 }

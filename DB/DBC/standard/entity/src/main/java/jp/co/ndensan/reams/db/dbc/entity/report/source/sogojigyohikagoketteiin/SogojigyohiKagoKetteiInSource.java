@@ -2,7 +2,9 @@ package jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohikagoketteiin;
 
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 総合事業費（経過措置）過誤決定通知書情報取込一覧表帳票Source。
@@ -40,6 +42,8 @@ public class SogojigyohiKagoKetteiInSource implements IReportSource {
     public RString kaipage2;
     @ReportItem(name = "kaipage3", length = 20, order = 14)
     public RString kaipage3;
+    @ReportPerson(id = "A")
+    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "kaipage4", length = 20, order = 15)
     public RString kaipage4;
     @ReportItem(name = "kaipage5", length = 20, order = 16)
