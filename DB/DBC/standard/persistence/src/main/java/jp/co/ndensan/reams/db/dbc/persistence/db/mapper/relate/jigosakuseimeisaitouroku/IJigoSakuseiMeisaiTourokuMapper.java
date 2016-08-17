@@ -11,7 +11,9 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.KyufuJikoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.TankiNyushoParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KubunGendoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KyotakuServiceRirekiIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KyufuJikoSakuseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.RiyoNentstsuIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.ServiceTypeTotalEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.TankiNyushoEntity;
 
@@ -53,4 +55,20 @@ public interface IJigoSakuseiMeisaiTourokuMapper {
      * @return TankiNyushoEntity
      */
     TankiNyushoEntity get短期入所情報(TankiNyushoParameter param);
+
+    /**
+     * 居宅サービス履歴一覧取得
+     *
+     * @param param Map<String, Object>
+     * @return List<KyotakuHistoryDataEntity>
+     */
+    List<KyotakuServiceRirekiIchiranEntity> get居宅サービス履歴一覧(Map<String, Object> param);
+
+    /**
+     * 対象情報一覧取得
+     *
+     * @param param　Map<String, Object>
+     * @return List<NotificationEntity>
+     */
+    List<RiyoNentstsuIchiranEntity> get対象情報一覧(Map<String, Object> param);
 }

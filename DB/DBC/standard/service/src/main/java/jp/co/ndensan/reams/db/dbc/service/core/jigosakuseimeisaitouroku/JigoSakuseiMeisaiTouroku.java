@@ -12,7 +12,9 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.GokeiKeisan;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KubunGendo;
+import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KyotakuServiceRirekiIchiranEntityResult;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KyufuJikoSakuseiResult;
+import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.RiyoNentstsuIchiranEntityResult;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.ServiceTypeDetails;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.ServiceTypeTotal;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.TankiNyushoResult;
@@ -20,7 +22,9 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.KyufuJikoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.TankiNyushoParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KubunGendoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KyotakuServiceRirekiIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KyufuJikoSakuseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.RiyoNentstsuIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.ServiceTypeTotalEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.TankiNyushoEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jigosakuseimeisaitouroku.IJigoSakuseiMeisaiTourokuMapper;
@@ -61,6 +65,9 @@ public class JigoSakuseiMeisaiTouroku {
     private static final RString 区分_総合事業 = new RString("2");
     private static final RString 定値_01 = new RString("01");
     private static final RString KEY_利用年月 = new RString("利用年月");
+    private static final RString KEY_被保険者番号 = new RString("被保険者番号");
+    private static final RString KEY_対象年月 = new RString("対象年月");
+    private static final RString KEY_履歴番号 = new RString("履歴番号");
 
     /**
      * コンストラクタです。
@@ -398,5 +405,55 @@ public class JigoSakuseiMeisaiTouroku {
             businessList.add(new RiyoshaFutanWariaiMeisai(entity));
         }
         return businessList;
+    }
+
+    /**
+     * 居宅サービス履歴一覧取得
+     *
+     * @param 被保険者番号 RString
+     * @return List<KyotakuHistoryDataEntity>
+     */
+    public List<KyotakuServiceRirekiIchiranEntityResult> getKyotakuServiceRirekiIchiran(HihokenshaNo 被保険者番号) {
+        IJigoSakuseiMeisaiTourokuMapper mapper = mapperProvider.create(IJigoSakuseiMeisaiTourokuMapper.class);
+        Map<String, Object> param = new HashMap<>();
+        param.put(KEY_被保険者番号.toString(), 被保険者番号);
+        List<KyotakuServiceRirekiIchiranEntity> entityList = mapper.get居宅サービス履歴一覧(param);
+        if (entityList.isEmpty()) {
+            return Collections.emptyList();
+        }
+        List<KyotakuServiceRirekiIchiranEntityResult> 居宅サービス履歴一覧List = new ArrayList<>();
+        for (KyotakuServiceRirekiIchiranEntity entity : entityList) {
+            KyotakuServiceRirekiIchiranEntityResult entityResult = new KyotakuServiceRirekiIchiranEntityResult();
+            entityResult.setEntity(entity);
+            居宅サービス履歴一覧List.add(entityResult);
+        }
+        return 居宅サービス履歴一覧List;
+    }
+
+    /**
+     * 対象情報一覧を取得
+     *
+     * @param 対象年月　FlexibleYearMonth
+     * @param 履歴番号　int
+     * @param 被保険者番号　HihokenshaNo
+     * @return List<NotificationEntity>
+     */
+    public List<RiyoNentstsuIchiranEntityResult> getRiyoNentstsuIchiran(HihokenshaNo 被保険者番号, FlexibleYearMonth 対象年月, int 履歴番号) {
+        IJigoSakuseiMeisaiTourokuMapper mapper = mapperProvider.create(IJigoSakuseiMeisaiTourokuMapper.class);
+        Map<String, Object> param = new HashMap<>();
+        param.put(KEY_被保険者番号.toString(), 被保険者番号);
+        param.put(KEY_対象年月.toString(), 対象年月);
+        param.put(KEY_履歴番号.toString(), 履歴番号);
+        List<RiyoNentstsuIchiranEntity> entityList = mapper.get対象情報一覧(param);
+        if (entityList.isEmpty()) {
+            return Collections.emptyList();
+        }
+        List<RiyoNentstsuIchiranEntityResult> 対象情報一覧List = new ArrayList<>();
+        for (RiyoNentstsuIchiranEntity entity : entityList) {
+            RiyoNentstsuIchiranEntityResult entityResult = new RiyoNentstsuIchiranEntityResult();
+            entityResult.setEntity(entity);
+            対象情報一覧List.add(entityResult);
+        }
+        return 対象情報一覧List;
     }
 }
