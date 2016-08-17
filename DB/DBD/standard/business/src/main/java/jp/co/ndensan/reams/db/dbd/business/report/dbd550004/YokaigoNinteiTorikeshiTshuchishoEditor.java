@@ -150,18 +150,16 @@ public class YokaigoNinteiTorikeshiTshuchishoEditor implements IYokaigoNinteiTor
         source.tsuchibun3 = 通知書定型文リスト.get(2);
         if (TeikeibunMojiSize.フォント大.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
             source.tsuchibun5 = 通知書定型文リスト.get(NO_4);
-            return;
         }
         if (TeikeibunMojiSize.フォント上小下大.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
             source.tsuchibun6 = 通知書定型文リスト.get(NO_5);
             source.tsuchibun7 = 通知書定型文リスト.get(NO_6);
-            return;
         }
         if (TeikeibunMojiSize.フォント上大下小.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
             source.tsuchibun9 = 通知書定型文リスト.get(NO_7);
             source.tsuchibun8 = 通知書定型文リスト.get(NO_8);
-            return;
-        } else {
+        }
+        if (TeikeibunMojiSize.フォント小.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
             source.tsuchibun4 = 通知書定型文リスト.get(NO_3);
         }
 

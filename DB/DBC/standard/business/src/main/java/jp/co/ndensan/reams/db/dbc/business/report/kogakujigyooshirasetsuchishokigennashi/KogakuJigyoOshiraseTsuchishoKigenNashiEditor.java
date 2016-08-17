@@ -45,27 +45,28 @@ public class KogakuJigyoOshiraseTsuchishoKigenNashiEditor implements IKogakuJigy
         source.tsuchibun1 = entity.get通知文1();
         source.tsuchibun2 = entity.get通知文2();
         source.bunshoNo = entity.get文書番号文字列();
-
-        if (entity.get申請情報帳票発行一時() != null) {
-            source.hihokenshaNameKana = entity.get申請情報帳票発行一時().getShimeikanaChohyo().value();
-            source.hihokenshaName = entity.get申請情報帳票発行一時().getMeishoChohyo().value();
-            source.seibetsu = entity.get申請情報帳票発行一時().getSeibetsuCodeChohyo();
-            source.birthYMD = entity.get申請情報帳票発行一時().getSeinengappiYMDChohyo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-            source.hokensha_no = entity.get申請情報帳票発行一時().getShoKisaiHokenshaNoChohyo().value();
-            source.hihokenshaNo = entity.get申請情報帳票発行一時().getHihokenshaNoChohyo().value();
-            source.taishoYM = entity.get申請情報帳票発行一時().getServiceTeikyoYMChohyo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-            if (entity.get申請情報帳票発行一時().getRiyoshaFutanGakuGokeiChohyo() != null) {
-                source.zikoFutanGaku = DecimalFormatter.toコンマ区切りRString(entity.get申請情報帳票発行一時().getRiyoshaFutanGakuGokeiChohyo(), 0);
-            }
-            if (entity.get申請情報帳票発行一時().getGokeiKogakuShikyuGakuChohyo().compareTo(Decimal.ZERO) < ゼロ) {
-                source.ketteiGaku = 調整金額;
-            } else {
-                source.ketteiGaku = 支給金額;
-            }
-            if (entity.get申請情報帳票発行一時().getGokeiKogakuShikyuGakuChohyo() != null) {
-                source.shikyuGaku = DecimalFormatter.toコンマ区切りRString(entity.get申請情報帳票発行一時().getGokeiKogakuShikyuGakuChohyo(), 0);
+        if (!entity.is空白()) {
+            if (entity.get申請情報帳票発行一時() != null) {
+                source.hihokenshaNameKana = entity.get申請情報帳票発行一時().getShimeikanaChohyo().value();
+                source.hihokenshaName = entity.get申請情報帳票発行一時().getMeishoChohyo().value();
+                source.seibetsu = entity.get申請情報帳票発行一時().getSeibetsuCodeChohyo();
+                source.birthYMD = entity.get申請情報帳票発行一時().getSeinengappiYMDChohyo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                source.hokensha_no = entity.get申請情報帳票発行一時().getShoKisaiHokenshaNoChohyo().value();
+                source.hihokenshaNo = entity.get申請情報帳票発行一時().getHihokenshaNoChohyo().value();
+                source.taishoYM = entity.get申請情報帳票発行一時().getServiceTeikyoYMChohyo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                if (entity.get申請情報帳票発行一時().getRiyoshaFutanGakuGokeiChohyo() != null) {
+                    source.zikoFutanGaku = DecimalFormatter.toコンマ区切りRString(entity.get申請情報帳票発行一時().getRiyoshaFutanGakuGokeiChohyo(), 0);
+                }
+                if (entity.get申請情報帳票発行一時().getGokeiKogakuShikyuGakuChohyo().compareTo(Decimal.ZERO) < ゼロ) {
+                    source.ketteiGaku = 調整金額;
+                } else {
+                    source.ketteiGaku = 支給金額;
+                }
+                if (entity.get申請情報帳票発行一時().getGokeiKogakuShikyuGakuChohyo() != null) {
+                    source.shikyuGaku = DecimalFormatter.toコンマ区切りRString(entity.get申請情報帳票発行一時().getGokeiKogakuShikyuGakuChohyo(), 0);
+                }
             }
         }
         if (entity.get認証者() != null) {
