@@ -232,11 +232,11 @@ public class DbT3003KyodoShoriyoJukyushaIdoShokanSofuDac implements ISaveable<Db
      *
      * @param 被保険者番号 HihokenshaNo
      * @param 異動日 FlexibleDate
-     * @return int
+     * @return DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public int get償還送付情報の履歴番号Max(HihokenshaNo 被保険者番号, FlexibleDate 異動日) throws NullPointerException {
+    public DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity get償還送付情報の履歴番号Max(HihokenshaNo 被保険者番号, FlexibleDate 異動日) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
 
@@ -247,6 +247,6 @@ public class DbT3003KyodoShoriyoJukyushaIdoShokanSofuDac implements ISaveable<Db
                 where(and(eq(hiHokenshaNo, 被保険者番号),
                                 eq(idoYMD, 異動日))).
                 groupBy(hiHokenshaNo, idoYMD).
-                toObject(Integer.class).intValue();
+                toObject(DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity.class);
     }
 }
