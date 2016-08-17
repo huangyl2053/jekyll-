@@ -6,7 +6,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5101TempMapper">
 
     <sql id="allColumns_DbT5101Temp">
-       "シーケンシャル番号",
+        "シーケンシャル番号",
         "機能コード",
         "識別コード",
         "保険者番号",
@@ -204,9 +204,9 @@
         "申請者連絡先",
         "調査委託先コード"
     </sql>
-    
+
     <sql id="allColumns_DbT5101KoroshoTemp">
-       "シーケンシャル番号",
+        "シーケンシャル番号",
         "機能コード",
         "識別コード",
         "保険者番号",
@@ -581,40 +581,40 @@
         <result property="申請者連絡先" column="申請者連絡先" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="調査委託先コード" column="調査委託先コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    
+
     <select resultOrdered="true" id="get申請中間一時テーブル" resultMap="ResultMap_DbT5101TempEntity"
-        parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.renkeidatatorikomi.RenkeiDataTorikomiMybitisParamter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.renkeidatatorikomi.RenkeiDataTorikomiMybitisParamter" fetchSize="500">
         SELECT
-            <include refid="allColumns_DbT5101Temp" />
+        <include refid="allColumns_DbT5101Temp" />
         FROM
-            "DbT5101TyukanTemp"
+        "DbT5101TyukanTemp"
         WHERE
-         <foreach  
+        <foreach
             collection="申請情報データリスト"
             item="item"
-            open="("  
-            separator="OR"  
-            close=")">  
-           ("保険者番号" =  #{item.保険者番号} 
-            AND "被保険者番号" = #{item.被保険者番号} 
+            open="("
+            separator="OR"
+            close=")">
+            ("保険者番号" =  #{item.保険者番号}
+            AND "被保険者番号" = #{item.被保険者番号}
             AND "認定申請日" =  #{item.認定申請日}
             AND "申請区分_申請時コード" =  #{item.申請種別コード}
-             )
+            )
         </foreach>
     </select>
-    
+
     <select resultOrdered="true" id="get申請一時電算_東芝情報" resultMap="ResultMap_DbT5101TempEntity" fetchSize="500">
         SELECT
-            <include refid="allColumns_DbT5101Temp" />
+        <include refid="allColumns_DbT5101Temp" />
         FROM
-            "DbT5101Temp"
+        "DbT5101Temp"
     </select>
-    
+
     <select resultOrdered="true" id="get申請一時厚労省情報" resultMap="ResultMap_DbT5101TempEntity" fetchSize="500">
         SELECT
-            <include refid="allColumns_DbT5101KoroshoTemp" />
+        <include refid="allColumns_DbT5101KoroshoTemp" />
         FROM
-            "DbT5101Temp"
+        "DbT5101Temp"
     </select>
 
     <resultMap id="ResultMap_DbT5101ErrorTempEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101ErrorTempEntity" autoMapping="true">
@@ -642,8 +642,8 @@
         <result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="エラー内容" column="エラー内容" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-    </resultMap>  
-     
+    </resultMap>
+
     <sql id="allColumns_DbT5101ErrorTemp">
         "シーケンシャル番号",
         "機能コード",
@@ -669,15 +669,15 @@
         "郵便番号",
         "住所",
         "エラー内容"
-    </sql> 
-    
+    </sql>
+
     <select resultOrdered="true" id="get申請エラー一時テーブル" resultMap="ResultMap_DbT5101ErrorTempEntity" fetchSize="500">
         SELECT
-            <include refid="allColumns_DbT5101ErrorTemp" />
+        <include refid="allColumns_DbT5101ErrorTemp" />
         FROM
-            "DbT5101ErrorTemp"
-    </select>    
-    
+        "DbT5101ErrorTemp"
+    </select>
+
     <resultMap id="ResultMap_DbT5101NinteiShinseiJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101RelateEntity" autoMapping="true">
         <id column="dbT5101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <association property="dbt5101TempEntity" resultMap="ResultMap_DbT5101TempEntity"/>
@@ -686,36 +686,36 @@
     </resultMap>
     <select resultOrdered="true" id="get更新対象情報_電算東芝版" resultMap="ResultMap_DbT5101NinteiShinseiJoho" fetchSize="500">
         SELECT
-            <include refid="allColumns_DbT5101Temp" />,
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />,
-            <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5123NinteiKeikakuJohoMapper.allColumns_DbT5123NinteiKeikakuJoho" />
+        <include refid="allColumns_DbT5101Temp" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />,
+        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5123NinteiKeikakuJohoMapper.allColumns_DbT5123NinteiKeikakuJoho" />
         FROM
-            "DbT5101Temp" AS temp
-        LEFT JOIN 
-            rgdb."DbT5101NinteiShinseiJoho"
+        "DbT5101Temp" AS temp
+        LEFT JOIN
+        rgdb."DbT5101NinteiShinseiJoho"
         ON
-            "hihokenshaNo" = temp."被保険者番号"
+        "hihokenshaNo" = temp."被保険者番号"
         AND "shoKisaiHokenshaNo" = temp."保険者番号"
-        LEFT JOIN 
-            rgdb."DbT5123NinteiKeikakuJoho"
+        LEFT JOIN
+        rgdb."DbT5123NinteiKeikakuJoho"
         ON "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5123NinteiKeikakuJoho"."shinseishoKanriNo"
     </select>
-    
+
     <select resultOrdered="true" id="get更新対象情報_厚労省" resultMap="ResultMap_DbT5101NinteiShinseiJoho" fetchSize="500">
         SELECT
-            <include refid="allColumns_DbT5101Temp" />,
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />,
-            <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5123NinteiKeikakuJohoMapper.allColumns_DbT5123NinteiKeikakuJoho" />
+        <include refid="allColumns_DbT5101KoroshoTemp" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />,
+        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5123NinteiKeikakuJohoMapper.allColumns_DbT5123NinteiKeikakuJoho" />
         FROM
-            "DbT5101Temp" AS temp
-        LEFT JOIN 
-            rgdb."DbT5101NinteiShinseiJoho"
+        "DbT5101Temp" AS temp
+        LEFT JOIN
+        rgdb."DbT5101NinteiShinseiJoho"
         ON
-            "hihokenshaNo" = temp."被保険者番号"
+        "hihokenshaNo" = temp."被保険者番号"
         AND "shoKisaiHokenshaNo" = temp."保険者番号"
-        LEFT JOIN 
-            rgdb."DbT5123NinteiKeikakuJoho"
+        LEFT JOIN
+        rgdb."DbT5123NinteiKeikakuJoho"
         ON "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5123NinteiKeikakuJoho"."shinseishoKanriNo"
     </select>
-  
+
 </mapper>
