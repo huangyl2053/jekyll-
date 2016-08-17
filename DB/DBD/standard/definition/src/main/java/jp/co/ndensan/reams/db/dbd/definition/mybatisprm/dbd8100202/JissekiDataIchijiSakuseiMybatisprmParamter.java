@@ -23,6 +23,7 @@ public class JissekiDataIchijiSakuseiMybatisprmParamter implements IMyBatisParam
     private RString psmShikibetsuTaisho;
 
     /**
+     * 実績データ一時Mybatisパラメータ
      *
      * @param psmShikibetsuTaisho
      */

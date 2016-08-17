@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,6 +24,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShimeiKanaTotsugoKensuTempTableEntity extends DbTableEntityBase<ShimeiKanaTotsugoKensuTempTableEntity> implements IDbAccessable {
 
+    @TableName
     public static final RString TABLE_NAME = new RString("ShimeiKanaTotsugoKensuTempTable");
 
     @TempTableColumnOrder(1)

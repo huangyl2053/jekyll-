@@ -24,12 +24,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class HikazeNenkinTaishoFirProcess extends BatchProcessBase<HikazeNenkinTaishoFirJohoEntity> {
 
-    public static final RString 同定結果区分_1 = new RString("1");
-    public static final RString 該当事由_1 = new RString("1");
+    /**
+     * 同定結果区分 "1"
+     */
+    private static final RString 同定結果区分_1 = new RString("1");
+    /**
+     * 該当事由 "1"
+     */
+    private static final RString 該当事由_1 = new RString("1");
 
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hikazenenkintaishoshadoutei."
-                    + "INenkinNoTotsugoMapper.get年金番号突合");
+                    + "INenkinNoTotsugoMapper.get年金番号突合_非課税年金対象者情報");
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter tmpTableWriter;
@@ -56,7 +62,7 @@ public class HikazeNenkinTaishoFirProcess extends BatchProcessBase<HikazeNenkinT
         data.setDouteiResultKubun(同定結果区分_1);
         data.setFuicchiJiyu(RString.EMPTY);
         data.setGaitouJiyu(該当事由_1);
-        //TODO   data.setFuicchiItem();
+        data.setFuicchiItem(t.get不一致項目());
 
         data.setFuicchiItem(RString.EMPTY);
         data.setHihokenshaNo(t.get実績_被保険者番号());

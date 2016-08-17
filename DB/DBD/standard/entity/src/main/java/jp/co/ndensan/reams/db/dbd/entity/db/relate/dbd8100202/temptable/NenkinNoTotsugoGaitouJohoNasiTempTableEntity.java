@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.temptable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,8 +21,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class NenkinNoTotsugoGaitouJohoNasiTempTableEntity extends DbTableEntityBase<NenkinNoTotsugoGaitouJohoNasiTempTableEntity> implements IDbAccessable {
+public class NenkinNoTotsugoGaitouJohoNasiTempTableEntity extends DbTableEntityBase<NenkinNoTotsugoGaitouJohoNasiTempTableEntity>
+        implements IDbAccessable {
 
+    @TableName
     public static final RString TABLE_NAME = new RString("NenkinNoTotsugoGaitouJohoNasiTempTable");
 
     @TempTableColumnOrder(1)
