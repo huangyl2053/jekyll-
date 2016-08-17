@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410048
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.sogojigyohiseikyugakutsuchishokohi.DBC120900_SogojigyohiSeikyugakuTsuchishoKohiInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410048.DBC0410048TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410048.TsuchishoJoho632Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
@@ -68,16 +67,5 @@ public class TsuchishoJoho632 {
         parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toString()));
         parameter.setShutsuryokujunId(出力順ID);
         return parameter;
-    }
-
-    /**
-     * 「戻る」ボタン押下時のイベントメソッドです。
-     *
-     * @param div DBC0410011
-     * @return ResponseData<DBC0410011Div>
-     */
-    public ResponseData<TsuchishoJoho632Div> onClick_btnBack(TsuchishoJoho632Div div) {
-
-        return ResponseData.of(div).forwardWithEventName(DBC0410048TransitionEventName.戻る).respond();
     }
 }
