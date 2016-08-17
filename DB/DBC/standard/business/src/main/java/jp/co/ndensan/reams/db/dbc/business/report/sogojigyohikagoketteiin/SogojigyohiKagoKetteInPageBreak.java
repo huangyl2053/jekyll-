@@ -50,6 +50,7 @@ public class SogojigyohiKagoKetteInPageBreak extends PageBreaker<SogojigyohiKago
             flag = true;
         } else if (this.breakKeysList.contains(SogojigyohiKagoKetteInOutPutOrder.事業所番号.getフォームフィールド名())
                 && !currentSource.getSource().listUpper_3.equals(nextSource.getSource().listUpper_3)) {
+            flag = true;
         } else if (this.breakKeysList.contains(SogojigyohiKagoKetteInOutPutOrder.取り扱い年月.getフォームフィールド名())
                 && !currentSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2)) {
             flag = true;

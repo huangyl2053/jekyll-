@@ -98,26 +98,26 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
     private static final RString ダブル引用符 = new RString("\"");
     private KokuhorenIchiranhyoMybatisParameter 帳票データの取得Parameter;
     private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3060.\"hdrShoHokenshaNo\" ASC ");
+    private static final RString SAKUSEI = new RString("作成");
+    private final Code code = new Code("0003");
+    private final RString 被保険者番号 = new RString("被保険者番号");
 
     @BatchWriter
     private BatchReportWriter<SogojigyohiKagoKetteiInSource> batchReportWriter;
     private ReportSourceWriter<SogojigyohiKagoKetteiInSource> reportSourceWriter;
     private CsvWriter<SogojigyohiKagoKetteiInCsvEntity> sogojigyohiKagoKetteiInCsvWriter;
 
-    private static final RString 作成 = new RString("作成");
     private SogojigyohiKagoKetteiInEntity lastEntity;
     private Map<RString, RString> 出力順Map;
-    private Code code;
-    private RString 被保険者番号;
+    private Set<ShikibetsuCode> 識別コードset;
 
     @Override
     protected void initialize() {
         連番 = 1;
-        code = new Code("0003");
-        被保険者番号 = new RString("被保険者番号");
         pageBreakKeys = new ArrayList<>();
         証記載保険者番号 = null;
         帳票データの取得Parameter = new KokuhorenIchiranhyoMybatisParameter();
+        識別コードset = new HashSet<>();
         出力順Map = new HashMap<>();
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
         lastEntity = new SogojigyohiKagoKetteiInEntity();
@@ -258,7 +258,7 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
                     .fillType(FillType.BLANK).toDateString();
             RString 作成時 = 作成日時.getTime()
                     .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-            output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時).concat(作成));
+            output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時).concat(SAKUSEI));
         } else {
             output.set処理年月(RString.EMPTY);
             output.set作成日時(RString.EMPTY);
@@ -287,7 +287,6 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
 
         }
 
-        Set<ShikibetsuCode> 識別コードset = new HashSet<>();
         if (null != entity.get識別コード() && !entity.get識別コード().isEmpty()
                 && !識別コードset.contains(entity.get識別コード())) {
             PersonalData personalData = getPersonalData(entity);
