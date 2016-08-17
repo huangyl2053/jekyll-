@@ -11,8 +11,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagoketteiin.SogojigyohiKagoKetteInOutPutOrder;
 import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagoketteiin.SogojigyohiKagoKetteiInReport;
 import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagoketteiin.SogojigyohiKagoKetteInPageBreak;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.sogojigyohikagoketteiin.SogojigyohiKagoKetteiInCsvEntity;
@@ -21,6 +23,7 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohikagoketteiin.S
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
@@ -62,7 +65,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 /**
  * 一覧表作成。
  *
- * @reamsid_L DBC-2550-010 jianglaishen
+ * @reamsid_L DBC-2550-010 jianglaisheng
  */
 public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<SogojigyohiKagoKetteiInEntity> {
 
@@ -70,7 +73,7 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.sogojigyohikagoketteiin."
                     + "ISogojigyohiKagoKetteiInMapper.get帳票出力対象データ");
     private int 連番;
-    private IOutputOrder 出力順;
+    private IOutputOrder 並び順;
     private KohifutanshaDoIchiranhyoSakuseiProcessParameter parameter;
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
     private static final RString コンマ = new RString(",");
@@ -93,33 +96,53 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
     private static final RString 出力ファイル名
             = new RString("DBC200075_SogojigyohiKagoKetteiTsuchishoTorikomiIchiran.csv");
     private static final RString ダブル引用符 = new RString("\"");
+    private KokuhorenIchiranhyoMybatisParameter 帳票データの取得Parameter;
+    private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3060.\"hdrShoHokenshaNo\" ASC ");
 
     @BatchWriter
     private BatchReportWriter<SogojigyohiKagoKetteiInSource> batchReportWriter;
     private ReportSourceWriter<SogojigyohiKagoKetteiInSource> reportSourceWriter;
     private CsvWriter<SogojigyohiKagoKetteiInCsvEntity> sogojigyohiKagoKetteiInCsvWriter;
 
-    private static final RString 漢字_分 = new RString("分");
+    private static final RString 作成 = new RString("作成");
     private SogojigyohiKagoKetteiInEntity lastEntity;
     private Map<RString, RString> 出力順Map;
+    private Code code;
+    private RString 被保険者番号;
 
     @Override
     protected void initialize() {
         連番 = 1;
+        code = new Code("0003");
+        被保険者番号 = new RString("被保険者番号");
         pageBreakKeys = new ArrayList<>();
         証記載保険者番号 = null;
+        帳票データの取得Parameter = new KokuhorenIchiranhyoMybatisParameter();
         出力順Map = new HashMap<>();
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
         lastEntity = new SogojigyohiKagoKetteiInEntity();
-        出力順 = finder.get出力順(parameter.getサブ業務コード(), parameter.get帳票ID(),
+        並び順 = finder.get出力順(parameter.getサブ業務コード(), parameter.get帳票ID(),
                 parameter.get出力順ID());
-        if (null == 出力順) {
+        if (null == 並び順) {
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
                     .replace(実行不可MESSAGE.toString()).toString());
         }
+        RString 出力順 = MyBatisOrderByClauseCreator
+                .create(SogojigyohiKagoKetteInOutPutOrder.class, 並び順);
+        if (RString.isNullOrEmpty(出力順)) {
+            出力順 = デフォルト出力順;
+        } else {
+            List<RString> 出力順BODY = 出力順.split(コンマ.toString());
+            出力順 = デフォルト出力順;
+            if (出力順BODY.size() > 1) {
+                for (int i = 1; i < 出力順BODY.size(); i++) {
+                    出力順 = 出力順.concat(コンマ).concat(出力順BODY.get(i));
+                }
+            }
+        }
         int index = 0;
-        if (出力順 != null) {
-            for (ISetSortItem item : 出力順.get設定項目リスト()) {
+        if (並び順 != null) {
+            for (ISetSortItem item : 並び順.get設定項目リスト()) {
                 if (index == INDEX_1) {
                     出力順Map.put(KEY_並び順の２件目, item.get項目名());
                 } else if (index == INDEX_2) {
@@ -134,13 +157,15 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
                 index = index + 1;
             }
         }
-
+        帳票データの取得Parameter.set出力順(出力順);
+        pageBreakKeys.add(new RString(SogojigyohiKagoKetteiInSource.ReportSourceFields.shoKisaiHokenshaNo.name()));
     }
 
     @Override
     protected void createWriter() {
         PageBreaker<SogojigyohiKagoKetteiInSource> breaker = new SogojigyohiKagoKetteInPageBreak(pageBreakKeys);
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200075.getReportId().value()).addBreak(breaker).create();
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(
+                ReportIdDBC.DBC200075.getReportId().value()).addBreak(breaker).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
@@ -157,12 +182,11 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID);
+        return new BatchDbReader(MYBATIS_SELECT_ID, 帳票データの取得Parameter);
     }
 
     @Override
     protected void beforeExecute() {
-        pageBreakKeys.add(new RString(SogojigyohiKagoKetteiInSource.ReportSourceFields.shoKisaiHokenshaNo.name()));
     }
 
     @Override
@@ -177,13 +201,26 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
             集計Flag = true;
         }
         証記載保険者番号 = this証記載保険者番号;
-        if (集計Flag == true) {
-            SogojigyohiKagoKetteiInReport report = new SogojigyohiKagoKetteiInReport(lastEntity, 出力順Map, parameter.get処理年月(), parameter.getシステム日付(), 連番, true);
+        if (集計Flag) {
+            SogojigyohiKagoKetteiInReport report = new SogojigyohiKagoKetteiInReport(lastEntity,
+                    出力順Map,
+                    parameter.get処理年月(),
+                    parameter.getシステム日付(),
+                    連番,
+                    true);
             report.writeBy(reportSourceWriter);
         }
-        SogojigyohiKagoKetteiInReport report = new SogojigyohiKagoKetteiInReport(entity, 出力順Map, parameter.get処理年月(), parameter.getシステム日付(), 連番, false);
+        SogojigyohiKagoKetteiInReport report = new SogojigyohiKagoKetteiInReport(entity,
+                出力順Map,
+                parameter.get処理年月(),
+                parameter.getシステム日付(),
+                連番,
+                false);
         report.writeBy(reportSourceWriter);
-        SogojigyohiKagoKetteiInCsvEntity output = do帳票のCSVファイル作成(entity, parameter.get処理年月(), parameter.getシステム日付(), 集計Flag);
+        SogojigyohiKagoKetteiInCsvEntity output = do帳票のCSVファイル作成(entity,
+                parameter.get処理年月(),
+                parameter.getシステム日付(),
+                集計Flag);
         sogojigyohiKagoKetteiInCsvWriter.writeLine(output);
         連番++;
         lastEntity = entity;
@@ -191,9 +228,17 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
 
     @Override
     protected void afterExecute() {
-        SogojigyohiKagoKetteiInReport report = new SogojigyohiKagoKetteiInReport(lastEntity, 出力順Map, parameter.get処理年月(), parameter.getシステム日付(), 連番, true);
+        SogojigyohiKagoKetteiInReport report = new SogojigyohiKagoKetteiInReport(lastEntity,
+                出力順Map,
+                parameter.get処理年月(),
+                parameter.getシステム日付(),
+                連番,
+                true);
         report.writeBy(reportSourceWriter);
-        SogojigyohiKagoKetteiInCsvEntity output = do帳票のCSVファイル作成(lastEntity, parameter.get処理年月(), parameter.getシステム日付(), true);
+        SogojigyohiKagoKetteiInCsvEntity output = do帳票のCSVファイル作成(lastEntity,
+                parameter.get処理年月(),
+                parameter.getシステム日付(),
+                true);
         sogojigyohiKagoKetteiInCsvWriter.writeLine(output);
         sogojigyohiKagoKetteiInCsvWriter.close();
         if (!personalDataList.isEmpty()) {
@@ -207,25 +252,26 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
         SogojigyohiKagoKetteiInCsvEntity output = new SogojigyohiKagoKetteiInCsvEntity();
         if (連番 == 1) {
             output.set処理年月(処理年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(漢字_分));
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                     .fillType(FillType.BLANK).toDateString();
             RString 作成時 = 作成日時.getTime()
-                    .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE);
-            output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時));
+                    .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+            output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時).concat(作成));
         } else {
             output.set処理年月(RString.EMPTY);
             output.set作成日時(RString.EMPTY);
         }
+
+        output.set証記載保険者番号(getColumnValue(entity.get証記載保険者番号()));
+        output.set証記載保険者名(entity.get証記載保険者名());
 
         if (集計Flag) {
             output.set総合事業費_件数(new RString(entity.get介護給付費件数()));
             output.set総合事業費_単位数(doカンマ編集(entity.get介護給付費単位数()));
             output.set総合事業費_負担額(doカンマ編集(entity.get介護給付費保険者負担額()));
         } else {
-            output.set証記載保険者番号(getColumnValue(entity.get証記載保険者番号()));
-            output.set証記載保険者名(entity.get証記載保険者名());
             output.set取扱年月(doパターン54(entity.get取扱年月()));
             output.set事業者番号(getColumnValue(entity.get事業者番号()));
             output.set事業者名(entity.get事業者名());
@@ -242,16 +288,17 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
         }
 
         Set<ShikibetsuCode> 識別コードset = new HashSet<>();
-        if (!(null == entity.get識別コード() || entity.get識別コード().isEmpty()) && !(識別コードset.contains(entity.get識別コード()))) {
+        if (null != entity.get識別コード() && !entity.get識別コード().isEmpty()
+                && !識別コードset.contains(entity.get識別コード())) {
+            PersonalData personalData = getPersonalData(entity);
+            personalDataList.add(personalData);
             識別コードset.add(entity.get識別コード());
         }
-        PersonalData personalData = getPersonalData(entity);
-        personalDataList.add(personalData);
         return output;
     }
 
     private PersonalData getPersonalData(SogojigyohiKagoKetteiInEntity entity) {
-        ExpandedInformation expandedInformations = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
+        ExpandedInformation expandedInformations = new ExpandedInformation(code, 被保険者番号,
                 entity.get被保険者番号().getColumnValue());
         return PersonalData.of(entity.get識別コード(), expandedInformations);
     }

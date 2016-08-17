@@ -517,7 +517,6 @@ public class ChoshuYuyoJuminKihonHandler {
      */
     public void loadパネル状態1(RString 状況, ChoshuYuyoJoho 徴収猶予の情報) {
         div.getChoshuYuyoMain().setDisplayNone(false);
-        div.getChoshuYuyoFukaRirekiAll().getDghukainfo().setDisplayNone(true);
         div.getChoshuYuyoMain().getTorikeshiJoho().setDisplayNone(true);
         ShinseiJohoDiv 申請情報パネル = div.getChoshuYuyoMain().getShinseiJoho();
         申請情報パネル.getTxtChoteiNendo().setReadOnly(true);
@@ -551,11 +550,19 @@ public class ChoshuYuyoJuminKihonHandler {
      * 全賦課履歴情報.表示件数 ≠ 1件の場合、パネルの状態の設定する。
      */
     public void loadパネル状態2() {
-        div.getChoshuYuyoFukaRirekiAll().setDisplayNone(false);
         div.getChoshuYuyoMain().setDisplayNone(true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(訂正をやめるボタン, true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(取消をやめるボタン, true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(保存ボタン, true);
+    }
+
+    /**
+     * 全賦課履歴情報のVisibleを制御する。
+     *
+     * @param flag boolean
+     */
+    public void set全賦課履歴情報Visible(boolean flag) {
+        div.getChoshuYuyoFukaRirekiAll().setDisplayNone(!flag);
     }
 
     /**

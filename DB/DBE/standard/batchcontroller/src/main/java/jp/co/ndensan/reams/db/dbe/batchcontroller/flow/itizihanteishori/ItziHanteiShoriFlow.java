@@ -30,16 +30,16 @@ public class ItziHanteiShoriFlow extends BatchFlowBase<ItziHanteiShoriBatchParam
     @Override
     protected void defineFlow() {
         if (バッチ出力区分.equals(getParameter().getBattishuturyokukubun())) {
-            executeStep(SHINCHOKUDATAOUTPUT_FLOW);
-        } else if (一次判定IF取込.equals(getParameter().getBattishuturyokukubun())) {
             executeStep(ITAKUSAKICHOSAINICHIRAN_FLOW);
+        } else if (一次判定IF取込.equals(getParameter().getBattishuturyokukubun())) {
+            executeStep(SHINCHOKUDATAOUTPUT_FLOW);
         }
     }
 
     /**
-     * 一次判定IF取込バッチのです。
+     * 一次判定IF作成のです。
      *
-     * @return ItakusakiChosainIchiranFlow
+     * @return ShinchokuDataOutputFlow
      */
     @Step(ITAKUSAKICHOSAINICHIRAN_FLOW)
     protected IBatchFlowCommand callNinteiChosaIraiFlow() {
@@ -47,9 +47,9 @@ public class ItziHanteiShoriFlow extends BatchFlowBase<ItziHanteiShoriBatchParam
     }
 
     /**
-     * 一次判定IF作成のです。
+     * 一次判定IF取込バッチのです。
      *
-     * @return ShinchokuDataOutputFlow
+     * @return ItakusakiChosainIchiranFlow
      */
     @Step(SHINCHOKUDATAOUTPUT_FLOW)
     protected IBatchFlowCommand callShinchokuDataOutputFlow() {

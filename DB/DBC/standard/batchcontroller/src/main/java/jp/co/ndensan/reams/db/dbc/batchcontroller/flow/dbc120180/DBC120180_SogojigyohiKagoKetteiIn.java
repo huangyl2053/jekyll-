@@ -39,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 総合事業費（経過措置）過誤決定通知書情報取込のバッチ処理フロー。
  *
- * @reamsid_L DBC-2550-010 jianglaishen
+ * @reamsid_L DBC-2550-010 jianglaisheng
  */
 public class DBC120180_SogojigyohiKagoKetteiIn extends BatchFlowBase<DBC120180_SogojigyohiKagoKetteiInParameter> {
 
@@ -184,7 +184,7 @@ public class DBC120180_SogojigyohiKagoKetteiIn extends BatchFlowBase<DBC120180_S
     protected IBatchFlowCommand callDoShoriKekkaListSakuseiProcess() {
         KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter parameter
                 = new KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter();
-        parameter.setエラーリストタイプ(KokuhorenJoho_TorikomiErrorListType.リストタイプ1);
+        parameter.setエラーリストタイプ(KokuhorenJoho_TorikomiErrorListType.リストタイプ0);
         return simpleBatch(KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess.class).arguments(parameter).define();
     }
 

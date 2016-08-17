@@ -20,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JukyushaKoshinKekkaInBatchParameter extends BatchParameterBase {
+public class DBC120030_JukyushaKoshinKekkaInParameter extends BatchParameterBase {
 
     @BatchParameter(key = "処理年月", name = "処理年月")
     private FlexibleYearMonth 処理年月;

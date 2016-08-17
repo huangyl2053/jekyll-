@@ -30,6 +30,7 @@ public class YokaigoNinteiTorikeshiTshuchishoReport extends Report<YokaigoNintei
     private final RString bunshoNo;
     private final RString hihokenshaNo;
     private final RString hihokenshaName;
+    private final RString teishutsuKigenYMD;
     private final RString riyu;
 
     /**
@@ -44,9 +45,11 @@ public class YokaigoNinteiTorikeshiTshuchishoReport extends Report<YokaigoNintei
      * @param hihokenshaNo RString
      * @param hihokenshaName RString
      * @param riyu RString
+     * @param teishutsuKigenYMD
      */
-    public YokaigoNinteiTorikeshiTshuchishoReport(IAtesaki 宛先, Association 地方公共団体, ChohyoSeigyoKyotsu 帳票制御共通, List<RString> 通知書定型文リスト,
-            NinshoshaSource 認証者ソースビルダー, RString bunshoNo, RString hihokenshaNo, RString hihokenshaName, RString riyu) {
+    public YokaigoNinteiTorikeshiTshuchishoReport(IAtesaki 宛先, Association 地方公共団体, ChohyoSeigyoKyotsu 帳票制御共通,
+            List<RString> 通知書定型文リスト, NinshoshaSource 認証者ソースビルダー, RString bunshoNo, RString hihokenshaNo, RString hihokenshaName,
+            RString riyu, RString teishutsuKigenYMD) {
         this.宛先 = 宛先;
         this.地方公共団体 = 地方公共団体;
         this.帳票制御共通 = 帳票制御共通;
@@ -56,6 +59,7 @@ public class YokaigoNinteiTorikeshiTshuchishoReport extends Report<YokaigoNintei
         this.hihokenshaNo = hihokenshaNo;
         this.hihokenshaName = hihokenshaName;
         this.riyu = riyu;
+        this.teishutsuKigenYMD = teishutsuKigenYMD;
     }
 
     /**
@@ -66,7 +70,7 @@ public class YokaigoNinteiTorikeshiTshuchishoReport extends Report<YokaigoNintei
     @Override
     public void writeBy(ReportSourceWriter<YokaigoNinteiTorikeshiTshuchishoSource> writer) {
         IYokaigoNinteiTorikeshiTshuchishoEditor bodyEditor = new YokaigoNinteiTorikeshiTshuchishoEditor(宛先, 地方公共団体,
-                帳票制御共通, 通知書定型文リスト, 認証者ソースビルダー, bunshoNo, hihokenshaNo, hihokenshaName, riyu);
+                帳票制御共通, 通知書定型文リスト, 認証者ソースビルダー, bunshoNo, hihokenshaNo, hihokenshaName, riyu, teishutsuKigenYMD);
         IYokaigoNinteiTorikeshiTshuchishoBuilder buider = new YokaigoNinteiTorikeshiTshuchishoBuilder(bodyEditor);
         writer.writeLine(buider);
     }

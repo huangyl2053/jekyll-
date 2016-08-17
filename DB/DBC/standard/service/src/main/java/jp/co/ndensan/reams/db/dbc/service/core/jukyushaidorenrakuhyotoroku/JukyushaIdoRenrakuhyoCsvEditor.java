@@ -31,7 +31,8 @@ public class JukyushaIdoRenrakuhyoCsvEditor {
     private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");
     private static final RString 交換情報識別番号 = new RString("5311");
-    private static final RString データ種別 = new RString("531:受給者異動情報");
+    private static final RString データ種別 = new RString("531");
+    private static final RString ブランク = new RString("0x0D0A");
 
     /**
      * editor
@@ -65,8 +66,7 @@ public class JukyushaIdoRenrakuhyoCsvEditor {
         csvEntity.set媒体区分(媒体区分);
         csvEntity.set処理対象年月(RDate.getNowDate().getYearMonth().toDateString());
         csvEntity.setファイル管理番号(ONE);
-        //TODO
-        csvEntity.setブランク1(ONE);
+        csvEntity.setブランク1(ブランク);
     }
 
     private void editorファイルの第二レコード(JukyushaIdoRenrakuhyoCsvEntity csvEntity, JukyushaIdoRenrakuhyoTorokuEntity entity) {
@@ -84,7 +84,7 @@ public class JukyushaIdoRenrakuhyoCsvEditor {
         csvEntity.set資格取得年月日(formatYMD(entity.get資格取得年月日()));
         csvEntity.set資格喪失年月日(formatYMD(entity.get資格喪失年月日()));
         csvEntity.set老人保健市町村番号(entity.get老人保健市町村番号());
-        //TODO
+        //TODO QA1254
         csvEntity.set公費負担者番号(entity.get老人保健市町村番号());
         csvEntity.set老人保健受給者番号(entity.get老人保健受給者番号());
         csvEntity.set広域連合政令市保険者番号(entity.get広域保険者番号());
@@ -151,19 +151,17 @@ public class JukyushaIdoRenrakuhyoCsvEditor {
         csvEntity.set居住費新３負担限度額(entity.get新３());
         csvEntity.set二割負担適用開始年月日(formatYMD(entity.get二割負担適用開始年月日()));
         csvEntity.set二割負担適用終了年月日(formatYMD(entity.get二割負担適用終了年月日()));
-        //TODO
-        csvEntity.setブランク2(ZERO);
+        csvEntity.setブランク2(ブランク);
     }
 
     private RString formatYMD(FlexibleDate yearMonthDay) {
-        return new RString(yearMonthDay.seireki().
-                separator(Separator.NONE).fillType(FillType.NONE).toString());
+        return yearMonthDay.seireki().separator(Separator.NONE)
+                .fillType(FillType.NONE).toDateString();
     }
 
     private void editorファイルの最終レコード(JukyushaIdoRenrakuhyoCsvEntity csvEntity) {
         csvEntity.setレコード種別3(THREE);
         csvEntity.setレコード番号連3(THREE);
-        //TODO
-        csvEntity.setブランク3(ZERO);
+        csvEntity.setブランク3(ブランク);
     }
 }

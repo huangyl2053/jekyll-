@@ -112,7 +112,7 @@ public class NenjiRiyoshaFutanWariaiHantei {
             message.setInitialFocusButton(MessageDialogButtonType.Yes);
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (処理状態.equals(再処理前)) {
+        if (処理状態.equals(再処理前) && !ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(DbcQuestionMessages.年次負担割合再処理.getMessage().getCode(),
                     DbcQuestionMessages.年次負担割合再処理.getMessage().replace(div.getPanelAll().getTxtNendo().getValue().getYear().wareki().fillType(FillType.BLANK).getYear().toString()).evaluate());
             return ResponseData.of(div).addMessage(message).respond();

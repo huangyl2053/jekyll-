@@ -125,6 +125,25 @@ public class DbT7131KaigoServiceNaiyouDac {
     }
 
     /**
+     * サービスコードのフォーカスアウトです。
+     *
+     * @param サービス種類コード サービス種類コード
+     * @param サービス項目コード サービス項目コード
+     * @return List<DbT7131KaigoServiceNaiyouEntity>
+     * @throws NullPointerException NullPointerException
+     */
+    public List<DbT7131KaigoServiceNaiyouEntity> getサービス情報(ServiceShuruiCode サービス種類コード,
+            RString サービス項目コード) throws NullPointerException {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7131KaigoServiceNaiyou.class).
+                where(and(eq(DbT7131KaigoServiceNaiyou.serviceShuruiCd, サービス種類コード),
+                                eq(DbT7131KaigoServiceNaiyou.serviceKoumokuCd, サービス項目コード))).
+                toList(DbT7131KaigoServiceNaiyouEntity.class);
+    }
+
+    /**
      * キーで介護サービス内容を取得します。
      *
      * @param サービス年月 サービス年月

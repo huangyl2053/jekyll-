@@ -120,10 +120,17 @@ public class YokaigoNinteiTorikeshiTujishoHakko {
     public ResponseData<SourceDataCollection> onClick_btnReportPublish(YokaigoNinteiTorikeshiTujishoHakkoDiv div) {
         RString hihokenshaNo = div.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue();
         RString hihokenshaName = div.getCcdKaigoNinteiAtenaInfo().get被保険者氏名();
+        RString teishutsuKigenYMD;
+        if (div.getTujishoHakkoMeisai().getTxtHihokenshashoTeishutuKigen().getValue() == null) {
+            teishutsuKigenYMD = RString.EMPTY;
+        } else {
+            teishutsuKigenYMD = div.getTujishoHakkoMeisai().getTxtHihokenshashoTeishutuKigen().getValue().toDateString();
+        }
         try (ReportManager reportManager = new ReportManager()) {
             YokaigoNinteiTorikeshiTshuchishoPrintService printService = new YokaigoNinteiTorikeshiTshuchishoPrintService();
             printService.print(reportManager, div.getTujishoHakkoMeisai().getTxtSakuseibi().getValue(), div.getTujishoHakkoMeisai().
-                    getCcdBunshoBango().get文書番号(), hihokenshaNo, hihokenshaName, div.getTujishoHakkoMeisai().getTxtTorikeshiRiyu().getValue());
+                    getCcdBunshoBango().get文書番号(), hihokenshaNo, hihokenshaName, div.getTujishoHakkoMeisai().getTxtTorikeshiRiyu().
+                    getValue(), teishutsuKigenYMD);
             HashMap<Code, RString> hashMap = new HashMap();
             hashMap.put(new Code(GyomuKoyuJoho.被保番号.getコード()), div.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue());
             SourceDataCollection collection = reportManager.publish();

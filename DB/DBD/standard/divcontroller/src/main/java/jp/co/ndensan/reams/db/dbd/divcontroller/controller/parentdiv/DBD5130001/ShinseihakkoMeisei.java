@@ -78,24 +78,24 @@ public class ShinseihakkoMeisei {
      * @param shinseihakkoMeiseiDiv ShinseihakkoMeiseiDiv
      * @return ResponseData
      */
-    public ResponseData<ShinseihakkoMeiseiDiv> onClick_btnPublish(ShinseihakkoMeiseiDiv shinseihakkoMeiseiDiv) {
+    public ResponseData<SourceDataCollection> onClick_btnPublish(ShinseihakkoMeiseiDiv shinseihakkoMeiseiDiv) {
         ShinseiShoEntity shinseiShoEntity = getHandler(shinseihakkoMeiseiDiv).getShinseiShoEntity();
         ResponseData<SourceDataCollection> response = new ResponseData<>();
         int radShinseiKubunSelectIndex = shinseihakkoMeiseiDiv.getShinseihakkoMeisei2().getPrintSelect().getRadShinseiKubun().getSelectedIndex();
         try (ReportManager reportManager = new ReportManager()) {
             if (radShinseiKubunSelectIndex == 2) {
-                YokaigoNinteiShinseishoPrintService shinseishoPrintService = new YokaigoNinteiShinseishoPrintService();
-                shinseishoPrintService.print(shinseiShoEntity, reportManager);
-            } else {
                 YokaigoNinteikbnHenkoShinseishoPrintService teiShinseishoPrintService = new YokaigoNinteikbnHenkoShinseishoPrintService();
                 teiShinseishoPrintService.print(shinseiShoEntity, reportManager);
+            } else {
+                YokaigoNinteiShinseishoPrintService shinseishoPrintService = new YokaigoNinteiShinseishoPrintService();
+                shinseishoPrintService.print(shinseiShoEntity, reportManager);
             }
             HashMap<Code, RString> hashMap = new HashMap();
             hashMap.put(new Code(GyomuKoyuJoho.被保番号.getコード()), shinseiShoEntity.get被保険者番号());
             SourceDataCollection collection = reportManager.publish();
             response.data = collection;
         }
-        return ResponseData.of(shinseihakkoMeiseiDiv).respond();
+        return response;
     }
 
     /**

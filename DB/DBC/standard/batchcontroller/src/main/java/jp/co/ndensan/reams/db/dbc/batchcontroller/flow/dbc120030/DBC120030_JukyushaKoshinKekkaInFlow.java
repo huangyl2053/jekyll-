@@ -5,20 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc120030;
 
+import java.io.File;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120030.JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120030.JukyushaKoshinKekkaInReadCsvFileProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120070.KogakuKyufuTaishoshaInReadCsvFileProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120070.KogakuKyufuTaishoshaInSetSedaiShuuyakuBangoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoHihokenshaKanrenProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuGetFileProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetReturnEntity;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.jukyushakoshinkekkain.JukyushaKoshinKekkaInBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.jukyushakoshinkekkain.DBC120030_JukyushaKoshinKekkaInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.jukyushakoshinkekka.JukyushaKoshinKekkaReadCsvFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaDoIchiranhyoSakuseiProcessParameter;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaReadCsvFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDeleteReveicedFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter;
@@ -38,25 +37,26 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 受給者情報更新結果情報取込のバッチ処理フロー
  *
- * @reamsid_L DBC-2730-010 chenjie
+ * @reamsid DBC-2730-010 chenjie
  */
-public class DBC120030_JukyushaKoshinKekkaInFlow extends BatchFlowBase<JukyushaKoshinKekkaInBatchParameter> {
+public class DBC120030_JukyushaKoshinKekkaInFlow extends BatchFlowBase<DBC120030_JukyushaKoshinKekkaInParameter> {
 
     private static final String ファイル取得 = "getFile";
     private static final String CSVファイル取込 = "readCsvFile";
     private static final String 被保険者関連処理 = "doHihokenshaKanren";
-    private static final String 世帯集約番号設定 = "setSedaiShuuyakuBango";
     private static final String 国保連インタフェース管理更新 = "doInterfaceKanriKousin";
     private static final String 一覧表作成 = "doIchiranhyoSakusei";
     private static final String 処理結果リスト作成 = "doShoriKekkaListSakusei";
     private static final String 取込済ファイル削除 = "deleteReveicedFile";
 
     private static final RString ファイル格納フォルダ名 = new RString("DBC120030");
-    private static final RString 帳票ID = new RString("DBC200055_JukyushaKoshinkekkaIchiran");
+    private static final String 帳票ID = "DBC200055_JukyushaKoshinkekkaIchiran";
 
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
     private FlowEntity flowEntity;
-
+    private RString ファイル絶対パース;
+    private boolean 一回目実行フラグ;
+    private int 明細データ登録件数合算;
     private static RString 交換情報識別番号;
 
     @Override
@@ -70,15 +70,22 @@ public class DBC120030_JukyushaKoshinKekkaInFlow extends BatchFlowBase<JukyushaK
             returnEntity
                     = getResult(KokuhorenKyoutsuuFileGetReturnEntity.class, new RString(ファイル取得),
                             KokuhorenkyoutsuGetFileProcess.PARAMETER_OUT_RETURNENTITY);
-            executeStep(CSVファイル取込);
-            flowEntity = getResult(FlowEntity.class, new RString(CSVファイル取込),
-                    KogakuKyufuTaishoshaInReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
-            if (0 == flowEntity.get明細データ登録件数()) {
+            for (int i = 0; i < returnEntity.getFileNameList().size(); i++) {
+                String filePath = returnEntity.get保存先フォルダのパス() + File.separator
+                        + returnEntity.getFileNameList().get(i);
+                File path = new File(filePath);
+                ファイル絶対パース = new RString(path.getPath());
+                一回目実行フラグ = (0 == i);
+                executeStep(CSVファイル取込);
+                flowEntity = getResult(FlowEntity.class, new RString(CSVファイル取込),
+                        JukyushaKoshinKekkaInReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
+                明細データ登録件数合算 = 明細データ登録件数合算 + flowEntity.get明細データ登録件数();
+            }
+            if (0 == 明細データ登録件数合算) {
                 executeStep(国保連インタフェース管理更新);
                 executeStep(処理結果リスト作成);
             } else {
                 executeStep(被保険者関連処理);
-                executeStep(世帯集約番号設定);
                 executeStep(国保連インタフェース管理更新);
                 executeStep(一覧表作成);
                 executeStep(処理結果リスト作成);
@@ -111,11 +118,11 @@ public class DBC120030_JukyushaKoshinKekkaInFlow extends BatchFlowBase<JukyushaK
      */
     @Step(CSVファイル取込)
     protected IBatchFlowCommand callReadCsvFileProcess() {
-        KohifutanshaReadCsvFileProcessParameter parameter = new KohifutanshaReadCsvFileProcessParameter();
+        JukyushaKoshinKekkaReadCsvFileProcessParameter parameter = new JukyushaKoshinKekkaReadCsvFileProcessParameter();
         parameter.set処理年月(getParameter().get処理年月());
-        parameter.set保存先フォルダ(returnEntity.get保存先フォルダのパス().toRString());
-        parameter.setエントリ情報List(returnEntity.getFileNameList());
-        return simpleBatch(JukyushaKoshinKekkaInReadCsvFileProcess.class).arguments(parameter).define();
+        parameter.set一回目実行フラグ(一回目実行フラグ);
+        parameter.setファイルパース(ファイル絶対パース);
+        return loopBatch(JukyushaKoshinKekkaInReadCsvFileProcess.class).arguments(parameter).define();
     }
 
     /**
@@ -128,15 +135,6 @@ public class DBC120030_JukyushaKoshinKekkaInFlow extends BatchFlowBase<JukyushaK
         return simpleBatch(KokuhorenkyoutsuDoHihokenshaKanrenProcess.class).define();
     }
 
-    /**
-     * 世帯集約番号設定です。
-     *
-     * @return KohifutanshaDoMasterTorokuProcess
-     */
-    @Step(世帯集約番号設定)
-    protected IBatchFlowCommand callSetSedaiShuuyakuBangoProcess() {
-        return loopBatch(KogakuKyufuTaishoshaInSetSedaiShuuyakuBangoProcess.class).define();
-    }
     /**
      * 国保連インタフェース管理更新です。
      *
@@ -168,7 +166,7 @@ public class DBC120030_JukyushaKoshinKekkaInFlow extends BatchFlowBase<JukyushaK
         parameter.set出力順ID(getParameter().get出力順ID());
         parameter.set処理年月(getParameter().get処理年月());
         parameter.setシステム日付(RDateTime.now());
-        return simpleBatch(JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess.class).arguments(parameter).
+        return loopBatch(JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess.class).arguments(parameter).
                 define();
     }
 

@@ -4955,7 +4955,7 @@
                      SELECT 1
                      FROM "TmpHonsanteiIdoGennendoTsuchisyoIkatsuHako" AS B
                      WHERE
-                        B."dbT2015KeisangoJoho_kozaKubun" <![CDATA[!=]]> B."kozaKubun" 
+                        B."dbT2015KeisangoJoho_kozaKubun" <![CDATA[<>]]> B."kozaKubun" 
                        AND ( B."dbT2015KeisangoJoho_kakuteiHokenryo" = B."kakuteiHokenryo" 
                            AND(
                              B."dbT2015KeisangoJoho_tkKibetsuGaku01" = B."tkKibetsuGaku01" 
@@ -4978,7 +4978,11 @@
                              AND B."dbT2015KeisangoJoho_fuKibetsuGaku12" = B."fuKibetsuGaku12"
                              AND B."dbT2015KeisangoJoho_fuKibetsuGaku13" = B."fuKibetsuGaku13"
                              AND B."dbT2015KeisangoJoho_fuKibetsuGaku14" = B."fuKibetsuGaku14"
-                           )))
+                           ))
+                    AND B."dbT2015KeisangoJoho_choteiNendo" = A."dbT2015KeisangoJoho_choteiNendo"
+                    AND B."dbT2015KeisangoJoho_fukaNendo" = A."dbT2015KeisangoJoho_fukaNendo"
+                    AND B."dbT2015KeisangoJoho_tsuchishoNo" = A."dbT2015KeisangoJoho_tsuchishoNo"
+                )
             </if>
         ${出力順}
     </select>

@@ -15,7 +15,10 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kokuhorenkyotsu.KokuhorenkyoutsuCon
 import jp.co.ndensan.reams.db.dbc.entity.csv.kyufukanrihyoin.KyufukanrihyoInCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kyufukanrihyoin.KyufukanrihyoInMeisaiGoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kyufukanrihyoin.KyufukanrihyoInMeisaiZenEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT0001HihokenshaIchijiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT1121KyufuKanrihyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT1121KyufuKanrihyoTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002KokuhorenTorikomiErrorEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufukanrihyoin.IKyufukanrihyoInMapper;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
@@ -28,8 +31,10 @@ import jp.co.ndensan.reams.db.dbz.service.core.hokensha.HokenshaNyuryokuHojoFind
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
@@ -63,6 +68,7 @@ public class KyufukanrihyoReadCsvFileProcess extends BatchProcessBase<RString> {
     private IKokuhorenKyoutsuuTempTableMapper 一時表Mapper;
 
     private final RString レコード種別 = new RString("1");
+    private final RString レコード種別_エンド = new RString("3");
     private final RString 帳票レコード種別_D1 = new RString("D1");
     private static final Integer INDEX_0 = 0;
     private static final Integer INDEX_2 = 2;
@@ -82,6 +88,16 @@ public class KyufukanrihyoReadCsvFileProcess extends BatchProcessBase<RString> {
     private List<KyufukanrihyoInMeisaiZenEntity> meisaiZenList;
     private List<KyufukanrihyoInMeisaiGoEntity> meisaiGoList;
 
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter 被保険者一時tableWriter;
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter 処理結果リスト一時tableWriter;
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter 給付管理票一時tableWriter;
+    private static final RString 被保険者一時_TABLE_NAME = new RString("DbWT0001Hihokensha");
+    private static final RString 処理結果リスト一時_TABLE_NAME = new RString("DbWT0002KokuhorenTorikomiError");
+    private static final RString 給付管理票一時_TABLE_NAME = new RString("DbWT1121KyufuKanrihyo");
+
     @Override
     protected void initialize() {
         entity = new KyufukanrihyoInCsvEntity();
@@ -97,9 +113,6 @@ public class KyufukanrihyoReadCsvFileProcess extends BatchProcessBase<RString> {
     protected void beforeExecute() {
         mapper = getMapper(IKyufukanrihyoInMapper.class);
         一時表Mapper = getMapper(IKokuhorenKyoutsuuTempTableMapper.class);
-        if (parameter.isFirst()) {
-            一時TBL作成();
-        }
         証記載保険者番号取得の判断基準の取得();
     }
 
@@ -109,9 +122,23 @@ public class KyufukanrihyoReadCsvFileProcess extends BatchProcessBase<RString> {
     }
 
     @Override
+    protected void createWriter() {
+        被保険者一時tableWriter
+                = new BatchEntityCreatedTempTableWriter(被保険者一時_TABLE_NAME, DbWT0001HihokenshaIchijiEntity.class);
+        処理結果リスト一時tableWriter
+                = new BatchEntityCreatedTempTableWriter(処理結果リスト一時_TABLE_NAME,
+                        DbWT0002KokuhorenTorikomiErrorEntity.class);
+        給付管理票一時tableWriter
+                = new BatchEntityCreatedTempTableWriter(給付管理票一時_TABLE_NAME, DbWT1121KyufuKanrihyoEntity.class);
+    }
+
+    @Override
     protected void process(RString line) {
         List<RString> data = line.split(区切り文字.toString());
         if (data != null && !data.isEmpty()) {
+            if (レコード種別_エンド.equals(data.get(INDEX_0))) {
+                return;
+            }
             if (レコード種別.equals(data.get(INDEX_0))) {
                 controlCsvEntity = ListToObjectMappingHelper.
                         toObject(KokuhorenkyoutsuControlCsvEntity.class, data);
@@ -166,12 +193,6 @@ public class KyufukanrihyoReadCsvFileProcess extends BatchProcessBase<RString> {
         int レコード件数合算 = 連番 + Integer.valueOf(controlEntity.getCodeNum().toString());
         returnEntity.setレコード件数合算(レコード件数合算);
 
-    }
-
-    private void 一時TBL作成() {
-        mapper.create給付管理票一時TBL();
-        一時表Mapper.create被保険者一時TBL();
-        一時表Mapper.create処理結果リスト一時TBL();
     }
 
     private void 証記載保険者番号取得の判断基準の取得() {

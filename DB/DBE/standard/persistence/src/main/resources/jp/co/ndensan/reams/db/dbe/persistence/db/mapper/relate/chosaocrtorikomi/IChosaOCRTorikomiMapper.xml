@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： センター送信データ出力のマッピング用XMLです。 -->
+<!-- @reamsid_L DBE-1560-010 suguangjun -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosaocrtorikomi.IChosaOCRTorikomiMapper">
+
+    <resultMap id="resultMap_ChosaOCRTorikomiEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.chosaocrtorikomi.ChosaOCRTorikomiRelateEntity" autoMapping="true">
+        <result property="審査会名称" column="shinsakaiKaisaiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="合議体名称" column="dbT5591_gogitaiMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="介護認定審査会割当済み人数" column="dbT5501_shinsakaiWariateZumiNinzu" />
+        <result property="介護認定審査会実施人数" column="dbT5511_shinsakaiJisshiNinzu" />
+        <result property="介護認定審査会進捗状況" column="dbT5501_ShinsakaiShinchokuJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="介護認定審査会開催場所名称" column="dbT5592_shinsakaiKaisaiBashoName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="介護認定審査会開催地区コード" column="dbT5592_shinsakaiKaisaiChikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="介護認定審査会開催年月日" column="dbT5511_shinsakaiKaisaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="介護認定審査会開始時刻" column="dbT5511_shinsakaiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="介護認定審査会終了時刻" column="dbT5511_shinsakaiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="no" column="no" />
+        <result property="保険者" column="dbT7051_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="申請書管理番号" column="dbT5101_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
+        <result property="厚労省IF識別コード" column="dbT5101_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="認定申請年月日" column="dbT5101_ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="認定申請区分申請時コード" column="dbT5101_ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="被保険者氏名" column="dbT5101_hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="被保険者番号" column="dbT5101_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="証記載保険者番号" column="dbT5101_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="要介護認定一次判定結果コード" column="dbT5116_ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="二次判定要介護状態区分コード" column="dbT5102_nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="二次判定年月日" column="dbT5102_nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="二次判定認定有効終了年月日" column="dbT5102_nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="合議体番号" column="dbT5501_gogitaiNo" />
+        <result property="介護認定審査会開催予定場所コード" column="dbT5501_shinsakaiKaisaiYoteiBashoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="イメージ共有ファイルID" column="dbT5115_imageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler" />
+    </resultMap>
+    
+    <select resultOrdered="true" id="selectChosaOCRTorikomi" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosaocrtorikomi.ChosaOCRTorikomiParameter"
+            resultMap="resultMap_ChosaOCRTorikomiEntity" fetchSize="500">
+        SELECT                       
+            '第' || dbT5501."shinsakaiKaisaiNo" || '回審査会' AS "shinsakaiKaisaiName",                      
+            dbT5591."gogitaiMei" AS "dbT5591_gogitaiMei",                      
+            dbT5501."shinsakaiWariateZumiNinzu" AS "dbT5501_shinsakaiWariateZumiNinzu", 
+            dbT5511."shinsakaiJisshiNinzu" AS "dbT5511_shinsakaiJisshiNinzu",  
+            dbT5501."ShinsakaiShinchokuJokyo" AS "dbT5501_ShinsakaiShinchokuJokyo",  
+            dbT5592."shinsakaiKaisaiBashoName" AS "dbT5592_shinsakaiKaisaiBashoName",
+            dbT5592."shinsakaiKaisaiChikuCode" AS "dbT5592_shinsakaiKaisaiChikuCode", 
+            dbT5511."shinsakaiKaisaiYMD" AS "dbT5511_shinsakaiKaisaiYMD",  
+            dbT5511."shinsakaiKaishiTime" AS "dbT5511_shinsakaiKaishiTime", 
+            dbT5511."shinsakaiShuryoTime" AS "dbT5511_shinsakaiShuryoTime"
+        FROM                       
+         rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS  dbT5501
+         LEFT JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS dbT5511                    
+          ON dbT5511."shinsakaiKaisaiNo"=dbT5501."shinsakaiKaisaiNo"                      
+         INNER JOIN rgdb."DbT5591GogitaiJoho" AS dbT5591                      
+          ON dbT5591."gogitaiNo"=dbT5501."gogitaiNo"                     
+          AND dbT5591."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> dbT5511."shinsakaiKaisaiYMD"                     
+          AND dbT5511."shinsakaiKaisaiYMD" <![CDATA[<=]]> dbT5591."gogitaiYukoKikanShuryoYMD"                  
+         INNER JOIN rgdb."DbT5592ShinsakaiKaisaiBashoJoho" AS dbT5592                       
+          ON dbT5592."shinsakaiKaisaiBashoCode"=dbT5501."shinsakaiKaisaiYoteiBashoCode"                     
+        WHERE                       
+         dbT5501."shinsakaiKaisaiNo" = #{介護認定審査会開催番号}  
+    </select>
+    
+    <select resultOrdered="true" id="selectChosahyoTorikomiKekka" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosaocrtorikomi.ChosaOCRTorikomiParameter"
+            resultMap="resultMap_ChosaOCRTorikomiEntity" fetchSize="500">
+        SELECT     	
+            ROW_NUMBER() OVER() AS no,        
+            dbT7051."shichosonMeisho" AS "dbT7051_shichosonMeisho",         	
+            dbT5101."shinseishoKanriNo" AS "dbT5101_shinseishoKanriNo",     
+            dbT5101."koroshoIfShikibetsuCode" AS "dbT5101_koroshoIfShikibetsuCode",     
+            dbT5101."ninteiShinseiYMD" AS "dbT5101_ninteiShinseiYMD",     
+            dbT5101."ninteiShinseiShinseijiKubunCode" AS "dbT5101_ninteiShinseiShinseijiKubunCode",     
+            dbT5101."hihokenshaName" AS "dbT5101_hihokenshaName",
+            dbT5101."shoKisaiHokenshaNo" AS "dbT5101_shoKisaiHokenshaNo",
+            dbT5101."hihokenshaNo" AS "dbT5101_hihokenshaNo", 
+            dbT5116."ichijiHanteiKekkaCode" AS "dbT5116_ichijiHanteiKekkaCode",
+            dbT5102."nijiHanteiYokaigoJotaiKubunCode" AS "dbT5102_nijiHanteiYokaigoJotaiKubunCode",     
+            dbT5102."nijiHanteiYMD" AS "dbT5102_nijiHanteiYMD",     
+            dbT5102."nijiHanteiNinteiYukoShuryoYMD" AS "dbT5102_nijiHanteiNinteiYukoShuryoYMD",     
+            dbT5501."gogitaiNo" AS "dbT5501_gogitaiNo", 
+            dbT5501."shinsakaiKaisaiYoteiBashoCode" AS "dbT5501_shinsakaiKaisaiYoteiBashoCode",    
+            dbT5115."imageSharedFileId" AS "dbT5115_imageSharedFileId"     
+        FROM  	
+               rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
+               ON dbT7051."shichosonCode" = dbT5101."shoKisaiHokenshaNo"
+        INNER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS dbT5116        
+               ON dbT5116."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"       	
+        LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102        
+               ON dbT5102."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"       	
+        INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" AS dbT5502       
+               ON dbT5502."shinsakaiKaisaiNo" = #{介護認定審査会開催番号}       
+               AND dbT5502."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"       
+        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS dbT5501	
+               ON dbT5501."shinsakaiKaisaiNo" = dbT5502."shinsakaiKaisaiNo" 	
+        LEFT JOIN rgdb."DbT5115Image" AS dbT5115     	
+               ON dbT5115."shinseishoKanriNo"=dbT5101."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS dbT5105
+               ON dbT5105."shinseishoKanriNo"= dbT5101."shinseishoKanriNo"	      	
+        WHERE	     
+            dbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL        
+            AND dbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL       	
+            AND dbT5105."ninteichosaKanryoYMD" IS NOT NULL       	
+            AND dbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL       	
+            AND dbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL       	
+            AND dbT5105."ichijiHanteiKanryoYMD" IS NOT NULL       	
+            AND dbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL       	
+            AND dbT5105."maskingKanryoYMD" IS NOT NULL       	
+            AND dbT5105."ninteiShinsakaiKanryoYMD" IS NULL     	
+            AND dbT5105."centerSoshinYMD" IS NULL       	
+            AND dbT5101."shoriJotaiKubun" IN (#{通常},#{延期})       	
+            AND dbT5101."logicalDeletedFlag" = FALSE    
+   </select>
+   
+   <select resultOrdered="true" id="selectShinseishoKanriNo" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosaocrtorikomi.ChosaOCRTorikomiParameter"
+           resultType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+       SELECT A."shinseishoKanriNo"					
+       FROM rgdb."DbT5101NinteiShinseiJoho" AS A			
+       WHERE A."shoKisaiHokenshaNo" = #{保険者番号}
+       AND A."hihokenshaNo" = #{被保険者番号}   	
+   </select>
+</mapper>

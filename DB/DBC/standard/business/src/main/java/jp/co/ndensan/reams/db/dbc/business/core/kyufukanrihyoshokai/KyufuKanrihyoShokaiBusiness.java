@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.kyufukanrihyoshokai;
 
-import java.io.Serializable;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoshokai.KyufuKanrihyoShokaiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -18,13 +17,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 給付管理票照会のbusinessです。
+ * 給付管理票照会のBusinessです。
  *
  * @reamsid_L DBC-2960-010 chenxiangyu
  */
-public class KyufuKanrihyoShokaiBusiness implements Serializable {
-
-    private static final long serialVersionUID = -9210665008367509044L;
+public class KyufuKanrihyoShokaiBusiness {
 
     private final KyufuKanrihyoShokaiEntity entity;
 

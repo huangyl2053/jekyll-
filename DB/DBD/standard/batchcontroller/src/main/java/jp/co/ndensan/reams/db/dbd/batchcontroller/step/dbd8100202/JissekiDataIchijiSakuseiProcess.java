@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriterBuilders;
@@ -60,67 +61,73 @@ public class JissekiDataIchijiSakuseiProcess extends BatchProcessBase<JissekiDat
 
     @Override
     protected void process(JissekiDataIchijiSakuseiJohoEntity t) {
-        JissekiDataIchijiSakuseiTempTableEntity jissekiDataIchijiSakuseiTempTableEntity = createTempTableEntity(t);
-        tmpTableWriter.insert(jissekiDataIchijiSakuseiTempTableEntity);
+        JissekiDataIchijiSakuseiTempTableEntity jissekiDataTempTableEntity = createTempTableEntity(t);
+        tmpTableWriter.insert(jissekiDataTempTableEntity);
     }
 
-    private JissekiDataIchijiSakuseiTempTableEntity createTempTableEntity(JissekiDataIchijiSakuseiJohoEntity jissekiDataIchijiSakuseiJohoEntity) {
+    private JissekiDataIchijiSakuseiTempTableEntity createTempTableEntity(JissekiDataIchijiSakuseiJohoEntity jissekiDataEntity) {
 
-        JissekiDataIchijiSakuseiTempTableEntity jissekiDataIchijiSakuseiTempTableEntity = new JissekiDataIchijiSakuseiTempTableEntity();
-        DbT1001HihokenshaDaichoEntity 被保険者台帳管理NewestEntity = jissekiDataIchijiSakuseiJohoEntity.get被保険者台帳管理NewestEntity();
-        DbT4037HikazeNenkinTaishoshaEntity 非課税年金対象者Entity = jissekiDataIchijiSakuseiJohoEntity.get非課税年金対象者Entity();
-        IKojin 宛名Entity = ShikibetsuTaishoFactory.createKojin(jissekiDataIchijiSakuseiJohoEntity.get宛名Entity());
+        JissekiDataIchijiSakuseiTempTableEntity jissekiDataTempTableEntity = new JissekiDataIchijiSakuseiTempTableEntity();
+        DbT1001HihokenshaDaichoEntity 被保険者台帳管理NewestEntity = jissekiDataEntity.get被保険者台帳管理NewestEntity();
+        UaFt200FindShikibetsuTaishoEntity psmEntity = jissekiDataEntity.getPsmEntity();
+        IKojin 宛名Entity = null;
+        if (psmEntity != null) {
+            宛名Entity = ShikibetsuTaishoFactory.createKojin(psmEntity);
+        }
+        DbT4037HikazeNenkinTaishoshaEntity 非課税年金対象者Entity = jissekiDataEntity.get非課税年金対象者Entity();
 
-        jissekiDataIchijiSakuseiTempTableEntity.setHihokenshaNo(被保険者台帳管理NewestEntity.getHihokenshaNo());
-        jissekiDataIchijiSakuseiTempTableEntity.setAtenaKanaShimei(宛名Entity.get名称().getKana().getColumnValue());
-        jissekiDataIchijiSakuseiTempTableEntity.setAtenaSeinenngappi(宛名Entity.get生年月日().toFlexibleDate());
-        jissekiDataIchijiSakuseiTempTableEntity.setAtenaSeibetsu(宛名Entity.get性別().getCode());
-        jissekiDataIchijiSakuseiTempTableEntity.setShikibetsuCode(被保険者台帳管理NewestEntity.getShikibetsuCode());
-        jissekiDataIchijiSakuseiTempTableEntity.setShotaiCode(宛名Entity.get世帯コード().getColumnValue());
-        jissekiDataIchijiSakuseiTempTableEntity.setAtenaKanjiShimei(宛名Entity.get名称().getName().getColumnValue());
-        jissekiDataIchijiSakuseiTempTableEntity.setAtenaYubinNo(宛名Entity.get住所().get郵便番号().getColumnValue());
-        jissekiDataIchijiSakuseiTempTableEntity.setAtenakanaJusyo(宛名Entity.get住所().get住所());
-        jissekiDataIchijiSakuseiTempTableEntity.setNendo(非課税年金対象者Entity.getNendo());
-        jissekiDataIchijiSakuseiTempTableEntity.setShoriKubunn(非課税年金対象者Entity.getShorikubun());
-        jissekiDataIchijiSakuseiTempTableEntity.setTaishoMonth(非課税年金対象者Entity.getTaishom());
-        jissekiDataIchijiSakuseiTempTableEntity.setKisoNennkinnNo(非課税年金対象者Entity.getKisonenkinno());
-        jissekiDataIchijiSakuseiTempTableEntity.setGenKisoNennkinnNo(非課税年金対象者Entity.getGenkisonenkinno());
-        jissekiDataIchijiSakuseiTempTableEntity.setNennkinnCode(非課税年金対象者Entity.getNenkincode());
-        jissekiDataIchijiSakuseiTempTableEntity.setTourokuKubunn(非課税年金対象者Entity.getTorokukubun());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtRekoDoKubunn(非課税年金対象者Entity.getDtrecordkubun());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtShichosonCode(非課税年金対象者Entity.getDtcitycode());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtNennkinnHokenshaCode(非課税年金対象者Entity.getDtnenkinhokenshacode());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtTsuuchiContentCode(非課税年金対象者Entity.getDttsuchinaiyocode());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtYobi1(非課税年金対象者Entity.getDtyobi1());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtSeidoCode(非課税年金対象者Entity.getDtseidocode());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtCreateYMD(非課税年金対象者Entity.getDtsakuseiymd());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtKisoNennkinnNo(非課税年金対象者Entity.getDtkisonenkinno());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtNennkinnCode(非課税年金対象者Entity.getDtnenkincode());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtYobi2(非課税年金対象者Entity.getDtyobi2());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtSeinenngappi(非課税年金対象者Entity.getDtbirthday());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtSeibetsu(非課税年金対象者Entity.getDtseibetsu());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtKanaShimei(非課税年金対象者Entity.getDtkanashimei());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtShifutoCode1(非課税年金対象者Entity.getDtshiftcode1());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtKanjiShimei(非課税年金対象者Entity.getDtkanjishimei());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtShifutoCode2(非課税年金対象者Entity.getDtshiftcode2());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtYubinNo(非課税年金対象者Entity.getDtyubinno());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtKanajusyo(非課税年金対象者Entity.getDtkanajusho());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtShifutoCode3(非課税年金対象者Entity.getDtshiftcode3());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtKanjijusyo(非課税年金対象者Entity.getDtkanjijusho());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtShifutoCode4(非課税年金対象者Entity.getDtshiftcode4());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtTaisyoYear(非課税年金対象者Entity.getDttaishoy());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtTeiseiHyouji(非課税年金対象者Entity.getDtteiseihyoji());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtKakushuKubun(非課税年金対象者Entity.getDtkakushukubun());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtShoriResult(非課税年金対象者Entity.getDtshorikekka());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtYobi3(非課税年金対象者Entity.getDtyobi3());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtYobi4(非課税年金対象者Entity.getDtyobi4());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtkinngaku1(非課税年金対象者Entity.getDtkingaku1());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtKinngakuYobi1(非課税年金対象者Entity.getDtkingakuyobi1());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtKinngakuYobi2(非課税年金対象者Entity.getDtkingakuyobi2());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtYobi5(非課税年金対象者Entity.getDtyobi5());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtYobi5(非課税年金対象者Entity.getDtyobi5());
-        jissekiDataIchijiSakuseiTempTableEntity.setDtKyousaiNennkinnShoushoKigouNo(非課税年金対象者Entity.getDtkyosainenkinshoshokigono());
+        jissekiDataTempTableEntity.setHihokenshaNo(被保険者台帳管理NewestEntity.getHihokenshaNo());
+        if (宛名Entity != null) {
+            jissekiDataTempTableEntity.setAtenaKanaShimei(宛名Entity.get名称().getKana().getColumnValue());
+            jissekiDataTempTableEntity.setAtenaSeinenngappi(宛名Entity.get生年月日().toFlexibleDate());
+            jissekiDataTempTableEntity.setAtenaSeibetsu(宛名Entity.get性別().getCode());
+            jissekiDataTempTableEntity.setShotaiCode(宛名Entity.get世帯コード().getColumnValue());
+            jissekiDataTempTableEntity.setAtenaKanjiShimei(宛名Entity.get名称().getName().getColumnValue());
+            jissekiDataTempTableEntity.setAtenaYubinNo(宛名Entity.get住所().get郵便番号().getColumnValue());
+            jissekiDataTempTableEntity.setAtenakanaJusyo(宛名Entity.get住所().get住所());
+        }
+        jissekiDataTempTableEntity.setShikibetsuCode(被保険者台帳管理NewestEntity.getShikibetsuCode());
+        jissekiDataTempTableEntity.setNendo(非課税年金対象者Entity.getNendo());
+        jissekiDataTempTableEntity.setShoriKubunn(非課税年金対象者Entity.getShorikubun());
+        jissekiDataTempTableEntity.setTaishoMonth(非課税年金対象者Entity.getTaishom());
+        jissekiDataTempTableEntity.setKisoNennkinnNo(非課税年金対象者Entity.getKisonenkinno());
+        jissekiDataTempTableEntity.setGenKisoNennkinnNo(非課税年金対象者Entity.getGenkisonenkinno());
+        jissekiDataTempTableEntity.setNennkinnCode(非課税年金対象者Entity.getNenkincode());
+        jissekiDataTempTableEntity.setTourokuKubunn(非課税年金対象者Entity.getTorokukubun());
+        jissekiDataTempTableEntity.setDtRekoDoKubunn(非課税年金対象者Entity.getDtrecordkubun());
+        jissekiDataTempTableEntity.setDtShichosonCode(非課税年金対象者Entity.getDtcitycode());
+        jissekiDataTempTableEntity.setDtNennkinnHokenshaCode(非課税年金対象者Entity.getDtnenkinhokenshacode());
+        jissekiDataTempTableEntity.setDtTsuuchiContentCode(非課税年金対象者Entity.getDttsuchinaiyocode());
+        jissekiDataTempTableEntity.setDtYobi1(非課税年金対象者Entity.getDtyobi1());
+        jissekiDataTempTableEntity.setDtSeidoCode(非課税年金対象者Entity.getDtseidocode());
+        jissekiDataTempTableEntity.setDtCreateYMD(非課税年金対象者Entity.getDtsakuseiymd());
+        jissekiDataTempTableEntity.setDtKisoNennkinnNo(非課税年金対象者Entity.getDtkisonenkinno());
+        jissekiDataTempTableEntity.setDtNennkinnCode(非課税年金対象者Entity.getDtnenkincode());
+        jissekiDataTempTableEntity.setDtYobi2(非課税年金対象者Entity.getDtyobi2());
+        jissekiDataTempTableEntity.setDtSeinenngappi(非課税年金対象者Entity.getDtbirthday());
+        jissekiDataTempTableEntity.setDtSeibetsu(非課税年金対象者Entity.getDtseibetsu());
+        jissekiDataTempTableEntity.setDtKanaShimei(非課税年金対象者Entity.getDtkanashimei());
+        jissekiDataTempTableEntity.setDtShifutoCode1(非課税年金対象者Entity.getDtshiftcode1());
+        jissekiDataTempTableEntity.setDtKanjiShimei(非課税年金対象者Entity.getDtkanjishimei());
+        jissekiDataTempTableEntity.setDtShifutoCode2(非課税年金対象者Entity.getDtshiftcode2());
+        jissekiDataTempTableEntity.setDtYubinNo(非課税年金対象者Entity.getDtyubinno());
+        jissekiDataTempTableEntity.setDtKanajusyo(非課税年金対象者Entity.getDtkanajusho());
+        jissekiDataTempTableEntity.setDtShifutoCode3(非課税年金対象者Entity.getDtshiftcode3());
+        jissekiDataTempTableEntity.setDtKanjijusyo(非課税年金対象者Entity.getDtkanjijusho());
+        jissekiDataTempTableEntity.setDtShifutoCode4(非課税年金対象者Entity.getDtshiftcode4());
+        jissekiDataTempTableEntity.setDtTaisyoYear(非課税年金対象者Entity.getDttaishoy());
+        jissekiDataTempTableEntity.setDtTeiseiHyouji(非課税年金対象者Entity.getDtteiseihyoji());
+        jissekiDataTempTableEntity.setDtKakushuKubun(非課税年金対象者Entity.getDtkakushukubun());
+        jissekiDataTempTableEntity.setDtShoriResult(非課税年金対象者Entity.getDtshorikekka());
+        jissekiDataTempTableEntity.setDtYobi3(非課税年金対象者Entity.getDtyobi3());
+        jissekiDataTempTableEntity.setDtYobi4(非課税年金対象者Entity.getDtyobi4());
+        jissekiDataTempTableEntity.setDtkinngaku1(非課税年金対象者Entity.getDtkingaku1());
+        jissekiDataTempTableEntity.setDtKinngakuYobi1(非課税年金対象者Entity.getDtkingakuyobi1());
+        jissekiDataTempTableEntity.setDtKinngakuYobi2(非課税年金対象者Entity.getDtkingakuyobi2());
+        jissekiDataTempTableEntity.setDtYobi5(非課税年金対象者Entity.getDtyobi5());
+        jissekiDataTempTableEntity.setDtYobi5(非課税年金対象者Entity.getDtyobi5());
+        jissekiDataTempTableEntity.setDtKyousaiNennkinnShoushoKigouNo(非課税年金対象者Entity.getDtkyosainenkinshoshokigono());
 
-        return jissekiDataIchijiSakuseiTempTableEntity;
+        return jissekiDataTempTableEntity;
     }
 }

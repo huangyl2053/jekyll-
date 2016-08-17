@@ -35,6 +35,10 @@ public class JukyushaKoshinKekkaIchiranHeaderEditor implements IJukyushaKoshinKe
     private static final RString KEY_並び順の４件目 = new RString("KEY_並び順の４件目");
     private static final RString KEY_並び順の５件目 = new RString("KEY_並び順の５件目");
     private static final RString KEY_並び順の６件目 = new RString("KEY_並び順の６件目");
+    private static final RString タイトル = new RString("受給者情報更新結果");
+    private static final RString 訂正年月日 = new RString("訂正年月日");
+    private static final RString 訂正区分 = new RString("訂正区分");
+    
 
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
@@ -69,11 +73,9 @@ public class JukyushaKoshinKekkaIchiranHeaderEditor implements IJukyushaKoshinKe
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 作成時 = 作成日時.getTime()
                 .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
-        source.title = new RString("受給者情報更新結果");
+        source.title = タイトル;
         source.printTimeStamp = 作成日.concat(RString.HALF_SPACE).concat(作成時);
-        if (null != 対象者.get保険者番号()) {
-            source.hokenshaNo = 対象者.get保険者番号();
-        }
+        source.hokenshaNo = 対象者.get保険者番号();
         source.hokenshaName = 対象者.get保険者名();
         source.shutsuryokujun1 = get並び順(KEY_並び順の２件目);
         source.shutsuryokujun2 = get並び順(KEY_並び順の３件目);
@@ -85,8 +87,8 @@ public class JukyushaKoshinKekkaIchiranHeaderEditor implements IJukyushaKoshinKe
         source.kaiPege3 = get改頁(INDEX_3);
         source.kaiPege4 = get改頁(INDEX_4);
         source.kaiPege5 = get改頁(INDEX_5);
-        source.komokuName1 = new RString("訂正年月日");
-        source.komokuName2 = new RString("訂正区分");
+        source.komokuName1 = 訂正年月日;
+        source.komokuName2 = 訂正区分;
         source.komokuName3 = RString.EMPTY;
         return source;
     }
@@ -96,6 +98,6 @@ public class JukyushaKoshinKekkaIchiranHeaderEditor implements IJukyushaKoshinKe
     }
 
     private RString get改頁(int index) {
-        return 改頁リスト.size() > index ? 改頁リスト.get(index) : RString.EMPTY;
+        return index < 改頁リスト.size()? 改頁リスト.get(index) : RString.EMPTY;
     }
 }

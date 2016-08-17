@@ -110,4 +110,58 @@ public class ServiceRiyohyoInfoDivValidationHandler {
                 .add(ServiceRiyohyoInfoDivValidationMessage.給付率入力値が不正,
                         div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu()).build();
     }
+
+    /**
+     * サービス単位必須のチェックです。
+     *
+     * @return {@link ValidationMessageControlPairs}
+     */
+    public ValidationMessageControlPairs validateサービス単位必須() {
+        IValidationMessages message = new ServiceRiyohyoInfoDivValidator(div).validateサービス単位必須();
+        return createvalidateサービス単位必須Dictionary().check(message);
+    }
+
+    private ValidationDictionary createvalidateサービス単位必須Dictionary() {
+        return new ValidationDictionaryBuilder()
+                .add(ServiceRiyohyoInfoDivValidationMessage.サービス単位必須項目,
+                        div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu()).build();
+    }
+
+    /**
+     * サービス単位必須以外チェックです。
+     *
+     * @return {@link ValidationMessageControlPairs}
+     */
+    public ValidationMessageControlPairs validateサービス単位必須以外() {
+        IValidationMessages message = new ServiceRiyohyoInfoDivValidator(div).validateサービス単位必須以外();
+        return createサービス単位必須以外Dictionary().check(message);
+    }
+
+    private ValidationDictionary createサービス単位必須以外Dictionary() {
+        return new ValidationDictionaryBuilder()
+                .add(ServiceRiyohyoInfoDivValidationMessage.サービスコード必須項目)
+                .add(ServiceRiyohyoInfoDivValidationMessage.単位必須項目, div.getServiceRiyohyoBeppyoMeisai().getTxtTani())
+                .add(ServiceRiyohyoInfoDivValidationMessage.回数必須項目, div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu())
+                .add(ServiceRiyohyoInfoDivValidationMessage.単位数単価必須項目,
+                        div.getServiceRiyohyoBeppyoGokei().getTxtTanisuTanka())
+                .add(ServiceRiyohyoInfoDivValidationMessage.区分限度内単位必須項目,
+                        div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendonaiTani())
+                .build();
+    }
+
+    /**
+     * 給付率必須のチェックです。
+     *
+     * @return {@link ValidationMessageControlPairs}
+     */
+    public ValidationMessageControlPairs validate給付率必須() {
+        IValidationMessages message = new ServiceRiyohyoInfoDivValidator(div).validate給付率必須();
+        return create給付率必須Dictionary().check(message);
+    }
+
+    private ValidationDictionary create給付率必須Dictionary() {
+        return new ValidationDictionaryBuilder()
+                .add(ServiceRiyohyoInfoDivValidationMessage.給付率必須項目,
+                        div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu()).build();
+    }
 }

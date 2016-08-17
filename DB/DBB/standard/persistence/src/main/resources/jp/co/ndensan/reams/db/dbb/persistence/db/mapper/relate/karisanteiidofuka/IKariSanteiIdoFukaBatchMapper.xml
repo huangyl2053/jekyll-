@@ -865,6 +865,10 @@
                 rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
             ON
                 "UrT0705ChoteiKyotsu"."choteiId" = "DbT2003Kibetsu"."choteiId"
+                  ORDER BY "dbT2002Fuka_choteiNendo" DESC,
+                    "dbT2002Fuka_fukaNendo" DESC,
+                    "dbT2002Fuka_tsuchishoNo" DESC,
+                    "dbT2002Fuka_rirekiNo" DESC
     </select>
     
      <select  resultOrdered="true" id="select資格情報" 
@@ -999,6 +1003,10 @@
             DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_linkNo"
             LEFT JOIN  (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
             ON  資格喪失."shikakuSousitu_shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
+            ORDER BY 賦課Newest."dbT2002Fuka_choteiNendo" DESC,
+                    賦課Newest."dbT2002Fuka_fukaNendo" DESC,
+                    賦課Newest."dbT2002Fuka_tsuchishoNo" DESC,
+                    賦課Newest."dbT2002Fuka_rirekiNo" DESC
     </select>
     
     <select  resultOrdered="true" id="select特別徴収停止" 
@@ -1083,6 +1091,10 @@
             DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_linkNo"
             LEFT JOIN  (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
             ON  特別徴収停止."tokubetuTyoushuuTeisi_shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
+            ORDER BY 賦課Newest."dbT2002Fuka_choteiNendo" DESC,
+                    賦課Newest."dbT2002Fuka_fukaNendo" DESC,
+                    賦課Newest."dbT2002Fuka_tsuchishoNo" DESC,
+                    賦課Newest."dbT2002Fuka_rirekiNo" DESC
     </select>
     
     <select  resultOrdered="true" id="select資格取得" 
@@ -1173,6 +1185,10 @@
             DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_linkNo"
             LEFT JOIN  (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
             ON  資格取得."shikakuShutoku_shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
+            ORDER BY 賦課Newest."dbT2002Fuka_choteiNendo"DESC,
+                    賦課Newest."dbT2002Fuka_fukaNendo" DESC,
+                    賦課Newest."dbT2002Fuka_tsuchishoNo" DESC,
+                    賦課Newest."dbT2002Fuka_rirekiNo" DESC
     </select>
     
     <select  resultOrdered="true" id="select口座異動" 
@@ -1199,6 +1215,10 @@
             AND A."dbT2002Fuka_rirekiNo" = 介護期別."dbT2003Kibetsu_rirekiNo" 
             INNER JOIN (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.noDeleted_UrT0705ChoteiKyotsu" />) AS 調定共通
             ON 介護期別."dbT2003Kibetsu_choteiId" = 調定共通."urT0705ChoteiKyotsu_choteiId"
+            ORDER BY A."dbT2002Fuka_choteiNendo" DESC,
+                    A."dbT2002Fuka_fukaNendo" DESC,
+                    A."dbT2002Fuka_tsuchishoNo" DESC,
+                    A."dbT2002Fuka_rirekiNo" DESC
     </select>
     
     <select  resultOrdered="true" id="select8月特徴開始" 
@@ -1257,7 +1277,16 @@
             ON "DbT1001HihokenshaDaicho"."shikibetsuCode" = 老齢情報."dbT7006RoreiFukushiNenkinJukyusha_shikibetsuCode"
             LEFT JOIN  (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
             ON  "DbT1001HihokenshaDaicho"."shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
+            ORDER BY 賦課Newest."dbT2002Fuka_choteiNendo" DESC,
+                    賦課Newest."dbT2002Fuka_fukaNendo" DESC,
+                    賦課Newest."dbT2002Fuka_tsuchishoNo" DESC,
+                    賦課Newest."dbT2002Fuka_rirekiNo" DESC
     </select>
+    
+    <!-- 賦課の情報一時テーブルを削除します。-->
+    <delete id="delete賦課の情報一時テーブル">
+        DELETE FROM "DbT2002FukaJohoTemp"
+    </delete>
     
     <resultMap id="ResultMap_資格喪失" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka.ShikakuFukaResultEntity" autoMapping="true">
         <id  column="shikakuSousitu_hihokenshaNo"/>
