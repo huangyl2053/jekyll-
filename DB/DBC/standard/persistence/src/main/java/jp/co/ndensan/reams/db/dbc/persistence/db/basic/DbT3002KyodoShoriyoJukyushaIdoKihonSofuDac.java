@@ -246,7 +246,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuDac implements ISaveable<DbT
                 table(DbT3002KyodoShoriyoJukyushaIdoKihonSofu.class).
                 where(and(eq(hiHokenshaNo, 被保険者番号),
                                 eq(idoYMD, 異動日))).
-                groupBy(hiHokenshaNo, hiHokenshaNo).
+                groupBy(hiHokenshaNo, idoYMD).
                 toObject(DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity.class);
     }
 
