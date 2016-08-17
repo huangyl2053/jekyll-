@@ -71,14 +71,16 @@ public class ShotokuJohoIchiranHyoSakusei {
      */
     public ResponseData<ShotokuJohoIchiranHyoSakuseiDiv> onClick_BeforeRegisterCheck(ShotokuJohoIchiranHyoSakuseiDiv div) {
         RString 導入形態コード = getHandler(div).get導入形態コード();
+        boolean 広域保険者日付チェックflag = getHandler(div).is広域保険者日付チェック();
+        boolean 単一市町村日付チェックflag = getHandler(div).is単一市町村日付チェック();
         if (INDEX_111.equals(導入形態コード)) {
             if (getHandler(div).is広域保険者日付チェック()) {
-                ValidationMessageControlPairs validPairs = getHandler(div).check日付(getHandler(div).is広域保険者日付チェック());
+                ValidationMessageControlPairs validPairs = getHandler(div).check日付(広域保険者日付チェックflag);
                 validationCheck(validPairs, div);
             }
         } else if (INDEX_112.equals(導入形態コード) || INDEX_120.equals(導入形態コード)) {
             if (getHandler(div).is単一市町村日付チェック()) {
-                ValidationMessageControlPairs validPairs = getHandler(div).check日付(getHandler(div).is単一市町村日付チェック());
+                ValidationMessageControlPairs validPairs = getHandler(div).check日付(単一市町村日付チェックflag);
                 validationCheck(validPairs, div);
             }
         }
