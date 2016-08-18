@@ -50,6 +50,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class ShotokuJohoIchiranHyoSakuseiHandler {
 
     private static final int INDEX_0 = 0;
+    private static final int INDEX_1 = 1;
+    private static final int INDEX_4 = 4;
+    private static final RString ゼロ時ゼロ分ゼロ秒 = new RString("000000");
     private static final int INDEX_処理年度 = 1999;
     private static final RString 抽出対象_INDEX_1 = new RString("1");
     private static final RString 抽出対象_INDEX_2 = new RString("2");
@@ -98,7 +101,7 @@ public class ShotokuJohoIchiranHyoSakuseiHandler {
             KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
             広域現市町村リスト = finder.getGenShichosonJoho().records();
             List<TaishoShuryoYmd> 対象終了日時 = ichiranhyo.getTaishoShuryoNichiji(導入形態コード, LasdecCode.EMPTY, 広域現市町村リスト, 処理年度);
-            List<dgShichosonIchiran_Row> dgShichosonIchiran = set広域保険者(広域現市町村リスト, 対象終了日時, システム日付);
+            List<dgShichosonIchiran_Row> dgShichosonIchiran = set広域保険者(広域現市町村リスト, 対象終了日時, システム日付, 処理年度);
             div.getDgShichosonIchiran().setDataSource(dgShichosonIchiran);
         } else if (INDEX_112.equals(導入形態コード) || INDEX_120.equals(導入形態コード)) {
             ReamsDonyuDantaiCode 導入団体コード = ControlDataHolder.getReamsDonyuDantaiCode();
@@ -114,6 +117,15 @@ public class ShotokuJohoIchiranHyoSakuseiHandler {
                         .getDate().toString()).wareki().toDateString().toString()));
                 div.getTxtKakuteiEdTime().setValue(new RTime(システム日付.getRDateTime()
                         .getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒)));
+            } else {
+                div.getTxtKakuteiStYMD().setValue(new RDate(new FlexibleDate(処理年度.getYearValue(),
+                        INDEX_4, INDEX_1).wareki().toDateString().toString()));
+                div.getTxtKakuteiStTime().setValue(new RTime(new RTime(ゼロ時ゼロ分ゼロ秒)
+                        .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒)));
+                div.getTxtKakuteiEdYMD().setValue(new RDate(new FlexibleDate(システム日付
+                        .getDate().toString()).wareki().toDateString().toString()));
+                div.getTxtKakuteiEdTime().setValue(new RTime(システム日付.getRDateTime()
+                        .getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒)));
             }
         }
         div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBB介護賦課, 帳票ID);
@@ -122,25 +134,44 @@ public class ShotokuJohoIchiranHyoSakuseiHandler {
     private List<dgShichosonIchiran_Row> set広域保険者(
             List<KoikiZenShichosonJoho> 広域現市町村リスト,
             List<TaishoShuryoYmd> 対象終了日時,
-            YMDHMS システム日付) {
+            YMDHMS システム日付,
+            FlexibleYear 処理年度) {
         List<dgShichosonIchiran_Row> dgShichosonIchiran = new ArrayList<>();
-        for (KoikiZenShichosonJoho joho : 広域現市町村リスト) {
-            for (TaishoShuryoYmd shuryoYmd : 対象終了日時) {
-                if (joho.get市町村コード().equals(shuryoYmd.get市町村コード())) {
-                    dgShichosonIchiran_Row row = new dgShichosonIchiran_Row();
-                    row.getTxtShichosonCode().setValue(joho.get市町村コード().getColumnValue());
-                    row.getTxtShichosonName().setValue(joho.get市町村名称());
-                    row.getTxtShichosonShikibetsuID().setValue(joho.get市町村識別ID());
-                    row.getTxtShoriStYMD().setValue(new RDate(new FlexibleDate(shuryoYmd.get対象終了日時()
-                            .getDate().toString()).wareki().toDateString().toString()));
-                    row.getTxtShoriStTime().setValue(new RTime(shuryoYmd.get対象終了日時().getRDateTime()
-                            .getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒)));
-                    row.getTxtShoriEdYMD().setValue(new RDate(new FlexibleDate(システム日付.getDate().toString())
-                            .wareki().toDateString().toString()));
-                    row.getTxtShoriEdTime().setValue(new RTime(システム日付.getRDateTime().getTime()
-                            .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒)));
-                    dgShichosonIchiran.add(row);
+        if (対象終了日時 != null && !対象終了日時.isEmpty()) {
+            for (KoikiZenShichosonJoho joho : 広域現市町村リスト) {
+                for (TaishoShuryoYmd shuryoYmd : 対象終了日時) {
+                    if (joho.get市町村コード().equals(shuryoYmd.get市町村コード())) {
+                        dgShichosonIchiran_Row row = new dgShichosonIchiran_Row();
+                        row.getTxtShichosonCode().setValue(joho.get市町村コード().getColumnValue());
+                        row.getTxtShichosonName().setValue(joho.get市町村名称());
+                        row.getTxtShichosonShikibetsuID().setValue(joho.get市町村識別ID());
+                        row.getTxtShoriStYMD().setValue(new RDate(new FlexibleDate(shuryoYmd.get対象終了日時()
+                                .getDate().toString()).wareki().toDateString().toString()));
+                        row.getTxtShoriStTime().setValue(new RTime(shuryoYmd.get対象終了日時().getRDateTime()
+                                .getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒)));
+                        row.getTxtShoriEdYMD().setValue(new RDate(new FlexibleDate(システム日付.getDate().toString())
+                                .wareki().toDateString().toString()));
+                        row.getTxtShoriEdTime().setValue(new RTime(システム日付.getRDateTime().getTime()
+                                .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒)));
+                        dgShichosonIchiran.add(row);
+                    }
                 }
+            }
+        } else {
+            for (KoikiZenShichosonJoho joho : 広域現市町村リスト) {
+                dgShichosonIchiran_Row row = new dgShichosonIchiran_Row();
+                row.getTxtShichosonCode().setValue(joho.get市町村コード().getColumnValue());
+                row.getTxtShichosonName().setValue(joho.get市町村名称());
+                row.getTxtShichosonShikibetsuID().setValue(joho.get市町村識別ID());
+                row.getTxtShoriStYMD().setValue(new RDate(new FlexibleDate(処理年度.getYearValue(),
+                        INDEX_4, INDEX_1).wareki().toDateString().toString()));
+                row.getTxtShoriStTime().setValue(new RTime(new RTime(ゼロ時ゼロ分ゼロ秒)
+                        .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒)));
+                row.getTxtShoriEdYMD().setValue(new RDate(new FlexibleDate(システム日付.getDate().toString())
+                        .wareki().toDateString().toString()));
+                row.getTxtShoriEdTime().setValue(new RTime(システム日付.getRDateTime().getTime()
+                        .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒)));
+                dgShichosonIchiran.add(row);
             }
         }
         return dgShichosonIchiran;
@@ -258,7 +289,7 @@ public class ShotokuJohoIchiranHyoSakuseiHandler {
         RString 抽出対象ラジオボタン = get抽出対象ラジオボタン();
         parameter.setチェックボックス(抽出対象チックボックス);
         parameter.setラジオボタン(抽出対象ラジオボタン);
-        if (INDEX_112.equals(導入形態コード) && INDEX_120.equals(導入形態コード)) {
+        if (INDEX_112.equals(導入形態コード) || INDEX_120.equals(導入形態コード)) {
             RDate 抽出開始年月日 = div.getTxtKakuteiStYMD().getValue();
             RTime 抽出開始時分秒 = div.getTxtKakuteiStTime().getValue();
             RDate 抽出終了年月日 = div.getTxtKakuteiEdYMD().getValue();
@@ -288,9 +319,9 @@ public class ShotokuJohoIchiranHyoSakuseiHandler {
                 市町村情報List.add(result);
             }
             parameter.set市町村情報リスト(市町村情報List);
-            Long 出力順ID = div.getCcdChohyoShutsuryokujun().get出力順ID();
-            parameter.set出力順ID(出力順ID);
         }
+        Long 出力順ID = div.getCcdChohyoShutsuryokujun().get出力順ID();
+        parameter.set出力順ID(出力順ID);
         return parameter;
     }
 
