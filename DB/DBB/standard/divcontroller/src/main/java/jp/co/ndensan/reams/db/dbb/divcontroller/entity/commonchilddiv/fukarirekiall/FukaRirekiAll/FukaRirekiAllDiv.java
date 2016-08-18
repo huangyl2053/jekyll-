@@ -88,6 +88,11 @@ public class FukaRirekiAllDiv extends Panel implements IFukaRirekiAllDiv {
         return getHandler().get賦課履歴();
     }
 
+    @Override
+    public FukaRireki getClicked賦課履歴() {
+        return getHandler().getClicked賦課履歴();
+    }
+
     @JsonIgnore
     public FukaRirekiAllHandler getHandler() {
         return new FukaRirekiAllHandler(this);

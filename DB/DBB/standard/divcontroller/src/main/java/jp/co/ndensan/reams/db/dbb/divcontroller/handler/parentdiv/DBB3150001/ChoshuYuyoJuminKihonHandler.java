@@ -169,6 +169,26 @@ public class ChoshuYuyoJuminKihonHandler {
         return 状況;
     }
 
+    /**
+     * 申請情報パネル、決定情報パネルと取消情報パネルのvalueの初期化メソッドです。
+     */
+    public void clear() {
+        ShinseiJohoDiv 申請情報パネル = div.getChoshuYuyoMain().getShinseiJoho();
+        KetteiJohoDiv 決定情報パネル = div.getChoshuYuyoMain().getKetteiJoho();
+        TorikeshiJohoDiv 取消情報パネル = div.getChoshuYuyoMain().getTorikeshiJoho();
+        取消情報パネル.getTxtTorikeshiYMD().clearValue();
+        取消情報パネル.getTxtTorikeshiShurui().clearValue();
+        取消情報パネル.getTxtTorikeshiRiyu().clearValue();
+        申請情報パネル.getTxtChoteiNendo().clearValue();
+        申請情報パネル.getTxtFukaNendo().clearValue();
+        申請情報パネル.getTxtShinseiYMD().clearValue();
+        申請情報パネル.getTxtYuyoShurui().clearValue();
+        申請情報パネル.getTxtShinseiRiyu().setValue(null);
+        決定情報パネル.getTxtKetteiYMD().clearValue();
+        決定情報パネル.getRadKetteiKubun().setSelectedIndex(ゼロ_定値);
+        決定情報パネル.getTxtKetteiRiyu().setValue(null);
+    }
+
     private RString get状況(RString 徴収猶予状態区分) {
         if (徴収猶予状態区分 == null || 徴収猶予状態区分.isEmpty()) {
             return 空;
@@ -229,7 +249,9 @@ public class ChoshuYuyoJuminKihonHandler {
         KetteiJohoDiv 決定情報パネル = div.getChoshuYuyoMain().getKetteiJoho();
         決定情報パネル.getRadKetteiKubun().setDataSource(get決定区分());
         if (徴収猶予の情報 != null) {
-            決定情報パネル.getTxtKetteiYMD().setValue(new RDate(徴収猶予の情報.get徴収猶予決定年月日().toString()));
+            FlexibleDate 猶予決定年月日 = 徴収猶予の情報.get徴収猶予決定年月日();
+            RDate 決定年月日 = 猶予決定年月日 != null && !猶予決定年月日.isEmpty() ? new RDate(猶予決定年月日.toString()) : null;
+            決定情報パネル.getTxtKetteiYMD().setValue(決定年月日);
             List<ChoshuYuyo> 介護賦課徴収猶予List = 徴収猶予の情報.getChoshuYuyoList();
             if (介護賦課徴収猶予List != null && !介護賦課徴収猶予List.isEmpty()) {
                 set決定情報パネル(介護賦課徴収猶予List.get(ゼロ_定値), 決定情報パネル);
@@ -266,6 +288,8 @@ public class ChoshuYuyoJuminKihonHandler {
             if (普徴期別金額 != null) {
                 普通徴収_合計 = 普通徴収_合計.add(普徴期別金額);
                 期別徴収猶予期間.set普徴期別納付額(DecimalFormatter.toコンマ区切りRString(普徴期別金額, ゼロ_定値));
+            } else {
+                期別徴収猶予期間.set普徴期別納付額(空);
             }
             FlexibleDate 徴収猶予期間開始 = get徴収猶予期間開始(期_普徴, 徴収猶予の情報);
             if (徴収猶予期間開始 != null) {
@@ -572,7 +596,7 @@ public class ChoshuYuyoJuminKihonHandler {
      */
     public ChoshuYuyoJoho onClick_選択ボタン() {
         IFukaRirekiAllDiv 全賦課履歴 = div.getChoshuYuyoFukaRirekiAll().getDghukainfo();
-        IItemList<Fuka> 全賦課履歴データ = 全賦課履歴.get賦課履歴().get賦課履歴All();
+        IItemList<Fuka> 全賦課履歴データ = 全賦課履歴.getClicked賦課履歴().get賦課履歴All();
         Fuka 賦課基本 = 全賦課履歴データ.toList().get(ゼロ_定値);
         ChoshuYuyoJoho 徴収猶予の情報 = KaigoFukaChoshuYuyo.createInstance()
                 .getJokyo(賦課基本.get調定年度(), 賦課基本.get賦課年度(), 賦課基本.get通知書番号());

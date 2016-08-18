@@ -152,6 +152,20 @@ public class FukaRirekiAllHandler {
         }
     }
 
+    /**
+     * 選択されている行の賦課履歴を返します。行が選択されていない場合は全賦課履歴を返します。
+     *
+     * @return 賦課履歴
+     */
+    public FukaRireki getClicked賦課履歴() {
+        FukaRireki 賦課履歴 = new FukaRireki(PanelSessionAccessor.get(div, SESSION_NAME, ItemList.class).toList());
+        dgFukaRirekiAll_Row row = div.getDgFukaRirekiAll().getClickedItem();
+        FukaNendo 賦課年度 = new FukaNendo(row.getFukaNendoHidden().toString());
+        ChoteiNendo 調定年度 = new ChoteiNendo(row.getChoteiNendoHidden().toString());
+        TsuchishoNo 通知書番号 = new TsuchishoNo(row.getTsuchishoNo());
+        return new FukaRireki(賦課履歴.get賦課履歴(賦課年度, 調定年度, 通知書番号).toList());
+    }
+
     private int set全賦課履歴(IItemList<Fuka> modelList) {
 
         List<dgFukaRirekiAll_Row> rowList = new ArrayList<>();
