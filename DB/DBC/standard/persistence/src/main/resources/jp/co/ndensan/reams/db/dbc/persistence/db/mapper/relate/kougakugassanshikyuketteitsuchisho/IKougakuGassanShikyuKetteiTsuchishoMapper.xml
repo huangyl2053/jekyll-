@@ -46,7 +46,7 @@
         ON
             "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."hihokenshaNo" = "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."hihokenshaNo" 
             AND "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."taishoNendo" = "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."taishoNendo"
-            AND "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."shikyuSeiriNo" = "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."shikyuSeiriNo"
+            AND "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."shikyuShinseishoSeiriNo" = "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."shikyuSeiriNo"
             AND "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."rirekiNo" = "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."rirekiNo"
         WHERE
             "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."hihokenshaNo" = #{被保険者番号}
