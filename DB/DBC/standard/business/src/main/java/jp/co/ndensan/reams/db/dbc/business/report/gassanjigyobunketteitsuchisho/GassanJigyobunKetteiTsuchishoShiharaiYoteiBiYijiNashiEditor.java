@@ -108,21 +108,8 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
         this.edit通知書(source);
         if (entity.get事業高額合算支給不支給決定() != null) {
             事業高額合算支給不支給決定 = entity.get事業高額合算支給不支給決定();
-            if (Decimal.ZERO.compareTo(事業高額合算支給不支給決定.getShikyugaku()) < 0 && RSTRING_1.equals(事業高額合算支給不支給決定.getShikyuKubunCode())
-                    && RSTRING_1.equals(事業高額合算支給不支給決定.getShiharaiHohoKubun())) {
-                ワーク窓口払区分 = RSTRING_1;
-
-            }
-            if (Decimal.ZERO.compareTo(事業高額合算支給不支給決定.getShikyugaku()) < 0 && RSTRING_1.equals(事業高額合算支給不支給決定
-                    .getShikyuKubunCode()) && RSTRING_2.equals(事業高額合算支給不支給決定.
-                            getShiharaiHohoKubun())) {
-                ワーク口座払区分 = RSTRING_1;
-
-            }
-            if (Decimal.ZERO.compareTo(事業高額合算支給不支給決定.getShikyugaku()) >= 0 || RSTRING_2.equals(事業高額合算支給不支給決定
-                    .getShikyuKubunCode())) {
-                ワーク不支給区分 = RSTRING_1;
-
+            if (事業高額合算支給不支給決定.getShikyugaku() != null && 事業高額合算支給不支給決定.getShikyuKubunCode() != null) {
+                支払状態判定();
             }
             this.set事業高額合算支給不支給決定(source);
 
@@ -220,6 +207,23 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
         source.tsuchibun7 = entity.get文書7();
     }
 
+    private void 支払状態判定() {
+        if (事業高額合算支給不支給決定.getShiharaiHohoKubun() != null) {
+            if (Decimal.ZERO.compareTo(事業高額合算支給不支給決定.getShikyugaku()) < 0 && RSTRING_1.equals(事業高額合算支給不支給決定
+                    .getShikyuKubunCode()) && RSTRING_1.equals(事業高額合算支給不支給決定.getShiharaiHohoKubun())) {
+                ワーク窓口払区分 = RSTRING_1;
+            }
+            if (Decimal.ZERO.compareTo(事業高額合算支給不支給決定.getShikyugaku()) < 0 && RSTRING_1.equals(事業高額合算支給不支給決定
+                    .getShikyuKubunCode()) && RSTRING_2.equals(事業高額合算支給不支給決定.getShiharaiHohoKubun())) {
+                ワーク口座払区分 = RSTRING_1;
+            }
+        }
+        if (Decimal.ZERO.compareTo(事業高額合算支給不支給決定.getShikyugaku()) >= 0 || RSTRING_2.equals(事業高額合算支給不支給決定
+                .getShikyuKubunCode())) {
+            ワーク不支給区分 = RSTRING_1;
+        }
+    }
+
     private void set事業高額合算支給不支給決定(GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
         RString 計算対象期間開始年月 = getパターン62(事業高額合算支給不支給決定.getKeisanKaishiYMD());
         RString 計算対象期間終了年月 = getパターン62(事業高額合算支給不支給決定.getKeisanShuryoYMD());
@@ -293,14 +297,14 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
             return;
         }
         if (!shiharaiKaishiYMD.isEmpty()) {
-            RString 開始曜日 = new RString(shiharaiKaishiYMD.getDayOfWeek().getMiddleTerm());
+            RString 開始曜日 = new RString(shiharaiKaishiYMD.getDayOfWeek().getInFullParentheses());
             source.maStYmd = getパターン12(shiharaiKaishiYMD).concat(開始曜日).concat(波線);
         } else if (shiharaiKaishiYMD.isEmpty() && !shiharaiShuryoYMD.isEmpty()) {
-            RString 終了曜日 = new RString(shiharaiShuryoYMD.getDayOfWeek().getMiddleTerm());
+            RString 終了曜日 = new RString(shiharaiShuryoYMD.getDayOfWeek().getInFullParentheses());
             source.maStYmd = 波線.concat(getパターン12(shiharaiShuryoYMD)).concat(終了曜日);
         }
         if (!shiharaiKaishiYMD.isEmpty() && !shiharaiShuryoYMD.isEmpty()) {
-            RString 終了曜日 = new RString(shiharaiShuryoYMD.getDayOfWeek().getMiddleTerm());
+            RString 終了曜日 = new RString(shiharaiShuryoYMD.getDayOfWeek().getInFullParentheses());
             source.maEdYmd = getパターン12(shiharaiShuryoYMD).concat(終了曜日);
         }
         set支払期間(shiharaiKaishiYMD, shiharaiShuryoYMD, source);
@@ -358,13 +362,10 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
         for (ChohyoSeigyoHanyo キー : 帳票制御汎用キー) {
             if (持ち物内容文言１.equals(キー.get項目名())) {
                 source.mochimono1 = キー.get設定値();
-                break;
             } else if (持ち物内容文言2.equals(キー.get項目名())) {
                 source.mochimono2 = キー.get設定値();
-                break;
             } else if (持ち物内容文言3.equals(キー.get項目名())) {
                 source.mochimono3 = キー.get設定値();
-                break;
             }
         }
     }
