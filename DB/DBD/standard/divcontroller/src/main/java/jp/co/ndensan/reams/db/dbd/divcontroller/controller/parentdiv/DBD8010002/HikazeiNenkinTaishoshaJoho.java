@@ -31,7 +31,6 @@ public class HikazeiNenkinTaishoshaJoho {
      */
     public ResponseData<HikazeiNenkinTaishoshaJohoDiv> onLoad(HikazeiNenkinTaishoshaJohoDiv div) {
         List<RString> 取込対象市町村コードリスト = getHandler(div).onLoad(div);
-
         ViewStateHolder.put(ViewStateKeys.取込対象市町村コードリスト, new ArrayList<>(取込対象市町村コードリスト));
 
         if (DBD8010002StateName.非課税年金対象者情報_単一用.getName().equals(div.getHdnState())) {
@@ -52,8 +51,7 @@ public class HikazeiNenkinTaishoshaJoho {
      */
     public ResponseData<HikazeiNenkinTaishoshaJohoDiv> onChange_ddlShoriNendo(HikazeiNenkinTaishoshaJohoDiv div) {
         List<RString> 取込対象市町村コードリスト = getHandler(div).onChange_ddlShoriNendo(div);
-        ViewStateHolder.put(ViewStateKeys.取込対象市町村コードリスト,
-                取込対象市町村コードリスト == null ? null : new ArrayList<>(取込対象市町村コードリスト));
+        ViewStateHolder.put(ViewStateKeys.取込対象市町村コードリスト, new ArrayList<>(取込対象市町村コードリスト));
 
         return ResponseData.of(div).respond();
     }
@@ -66,8 +64,7 @@ public class HikazeiNenkinTaishoshaJoho {
      */
     public ResponseData<HikazeiNenkinTaishoshaJohoDiv> onChange_ddlTuki(HikazeiNenkinTaishoshaJohoDiv div) {
         List<RString> 取込対象市町村コードリスト = getHandler(div).onChange_ddlTuki(div);
-        ViewStateHolder.put(ViewStateKeys.取込対象市町村コードリスト,
-                取込対象市町村コードリスト == null ? null : new ArrayList<>(取込対象市町村コードリスト));
+        ViewStateHolder.put(ViewStateKeys.取込対象市町村コードリスト, new ArrayList<>(取込対象市町村コードリスト));
 
         return ResponseData.of(div).respond();
     }
