@@ -12,11 +12,14 @@ import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3005KyotakuKeikakuTo
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3005KyotakuKeikakuTodokede.rirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3005KyotakuKeikakuTodokede.taishoYM;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3005KyotakuKeikakuTodokedeEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -25,7 +28,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 居宅給付計画届出のデータアクセスクラスです。
  */
-public class DbT3005KyotakuKeikakuTodokedeDac implements ISaveable<DbT3005KyotakuKeikakuTodokedeEntity> {
+public class DbT3005KyotakuKeikakuTodokedeDac implements ISaveable<DbT3005KyotakuKeikakuTodokedeEntity>,
+        IDeletable<DbT3005KyotakuKeikakuTodokedeEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -60,6 +64,28 @@ public class DbT3005KyotakuKeikakuTodokedeDac implements ISaveable<DbT3005Kyotak
     }
 
     /**
+     * 最大履歴番号居宅給付計画届出を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return DbT3005KyotakuKeikakuTodokedeEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT3005KyotakuKeikakuTodokedeEntity select最大履歴番号(HihokenshaNo 被保険者番号)
+            throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3005KyotakuKeikakuTodokede.class).
+                where(eq(hihokenshaNo, 被保険者番号)).
+                order(by(rirekiNo, Order.DESC)).
+                limit(1).
+                toObject(DbT3005KyotakuKeikakuTodokedeEntity.class);
+    }
+
+    /**
      * 居宅給付計画届出を全件返します。
      *
      * @return List<DbT3005KyotakuKeikakuTodokedeEntity>
@@ -86,5 +112,18 @@ public class DbT3005KyotakuKeikakuTodokedeDac implements ISaveable<DbT3005Kyotak
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * DbT3005KyotakuKeikakuTodokedeEntityを物理削除します。
+     *
+     * @param entity entity
+     * @return 削除件数
+     */
+    @Override
+    public int delete(DbT3005KyotakuKeikakuTodokedeEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅給付計画届出エンティティ"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.deletePhysical(entity).execute();
     }
 }
