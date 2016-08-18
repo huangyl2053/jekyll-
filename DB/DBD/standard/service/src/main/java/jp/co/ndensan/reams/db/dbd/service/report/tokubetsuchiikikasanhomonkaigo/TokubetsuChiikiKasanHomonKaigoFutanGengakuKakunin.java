@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSour
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
-import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
+import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilders.ReportSourceBuilders;
 import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
 import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -124,10 +124,10 @@ public class TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin {
         FlexibleDate 生年月日 = business.get生年月日();
         if (生年月日 != null && !生年月日.isEmpty()) {
             if (JuminShubetsu.日本人.getCode().equals(住民種別コード)
-                    || JuminShubetsu.住登外個人_日本人.getCode().equals(住民種別コード)) {
+                || JuminShubetsu.住登外個人_日本人.getCode().equals(住民種別コード)) {
                 birthYMD = set生年月日_日本人(生年月日);
             } else if (JuminShubetsu.外国人.getCode().equals(住民種別コード)
-                    || JuminShubetsu.住登外個人_外国人.getCode().equals(住民種別コード)) {
+                       || JuminShubetsu.住登外個人_外国人.getCode().equals(住民種別コード)) {
                 birthYMD = set生年月日(生年月日, business.get生年月日不詳区分());
             }
         }

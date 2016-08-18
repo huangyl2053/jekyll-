@@ -43,7 +43,7 @@ public class ShisetsuJohoCommonChildDiv {
         JigyoshaMode mode = new JigyoshaMode();
 
         if (requestDiv.getRadKaigoHokenShisetsu().getSelectedKey() != null
-                && !requestDiv.getRadKaigoHokenShisetsu().getSelectedKey().isEmpty()) {
+            && !requestDiv.getRadKaigoHokenShisetsu().getSelectedKey().isEmpty()) {
 
             mode.setJigyoshaShubetsu(requestDiv.getRadKaigoHokenShisetsu().getSelectedKey());
             requestDiv.getRadKaigoHokenShisetsu().getDisabledItem().clear();
@@ -52,7 +52,7 @@ public class ShisetsuJohoCommonChildDiv {
         }
 
         if (requestDiv.getRadOtherTokureiShisetsu().getSelectedKey() != null
-                && !requestDiv.getRadOtherTokureiShisetsu().getSelectedKey().isEmpty()) {
+            && !requestDiv.getRadOtherTokureiShisetsu().getSelectedKey().isEmpty()) {
 
             mode.setJigyoshaShubetsu(requestDiv.getRadOtherTokureiShisetsu().getSelectedKey());
             requestDiv.getRadKaigoHokenShisetsu().getDisabledItem().clear();
@@ -61,7 +61,7 @@ public class ShisetsuJohoCommonChildDiv {
         }
 
         if (requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey() != null
-                && !requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey().isEmpty()) {
+            && !requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey().isEmpty()) {
 
             mode.setJigyoshaShubetsu(requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey());
             requestDiv.getRadKaigoHokenShisetsu().getDisabledItem().clear();
@@ -70,10 +70,10 @@ public class ShisetsuJohoCommonChildDiv {
         }
 
         if ((requestDiv.getRadKaigoHokenShisetsu().getSelectedKey() == null
-                || requestDiv.getRadKaigoHokenShisetsu().getSelectedKey().isEmpty())
-                && (requestDiv.getRadOtherTokureiShisetsu().getSelectedKey() == null
+             || requestDiv.getRadKaigoHokenShisetsu().getSelectedKey().isEmpty())
+            && (requestDiv.getRadOtherTokureiShisetsu().getSelectedKey() == null
                 || requestDiv.getRadOtherTokureiShisetsu().getSelectedKey().isEmpty())
-                && (requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey() == null
+            && (requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey() == null
                 || requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey().isEmpty())) {
 
             mode.setJigyoshaShubetsu(ShisetsuType.適用除外施設.getコード());
