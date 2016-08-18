@@ -97,4 +97,5 @@ public class FuicchiCsvProcessProperty {
             return myBatis項目名;
         }
     }
+
 }
