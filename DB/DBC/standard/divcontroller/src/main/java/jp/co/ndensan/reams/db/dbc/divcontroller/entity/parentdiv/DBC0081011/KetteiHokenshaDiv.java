@@ -45,6 +45,10 @@ public class KetteiHokenshaDiv extends Panel {
     private DataGrid<dgKetteiHokenshaDetail_Row> dgKetteiHokenshaDetail;
     @JsonProperty("kubunn")
     private RString kubunn;
+    @JsonProperty("toriatsukaiYM")
+    private RString toriatsukaiYM;
+    @JsonProperty("shichosonCode")
+    private RString shichosonCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -248,6 +252,42 @@ public class KetteiHokenshaDiv extends Panel {
     @JsonProperty("kubunn")
     public void setKubunn(RString kubunn) {
         this.kubunn = kubunn;
+    }
+
+    /*
+     * gettoriatsukaiYM
+     * @return toriatsukaiYM
+     */
+    @JsonProperty("toriatsukaiYM")
+    public RString getToriatsukaiYM() {
+        return toriatsukaiYM;
+    }
+
+    /*
+     * settoriatsukaiYM
+     * @param toriatsukaiYM toriatsukaiYM
+     */
+    @JsonProperty("toriatsukaiYM")
+    public void setToriatsukaiYM(RString toriatsukaiYM) {
+        this.toriatsukaiYM = toriatsukaiYM;
+    }
+
+    /*
+     * getshichosonCode
+     * @return shichosonCode
+     */
+    @JsonProperty("shichosonCode")
+    public RString getShichosonCode() {
+        return shichosonCode;
+    }
+
+    /*
+     * setshichosonCode
+     * @param shichosonCode shichosonCode
+     */
+    @JsonProperty("shichosonCode")
+    public void setShichosonCode(RString shichosonCode) {
+        this.shichosonCode = shichosonCode;
     }
 
     /*

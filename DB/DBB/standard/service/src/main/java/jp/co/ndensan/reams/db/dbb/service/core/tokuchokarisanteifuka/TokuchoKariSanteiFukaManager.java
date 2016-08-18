@@ -179,9 +179,9 @@ public class TokuchoKariSanteiFukaManager {
                     bodyList.add(RString.EMPTY);
                 }
                 if (entity.get特別徴収停止事由コード() == null || entity.get特別徴収停止事由コード().isEmpty()) {
-                    bodyList.add(DecimalFormatter.toコンマ区切りRString(entity.get特徴期期別金額01(), 整数_0));
-                    bodyList.add(DecimalFormatter.toコンマ区切りRString(entity.get特徴期期別金額02(), 整数_0));
-                    bodyList.add(DecimalFormatter.toコンマ区切りRString(entity.get特徴期期別金額03(), 整数_0));
+                    set特徴期期別金額01(entity, bodyList);
+                    set特徴期期別金額02(entity, bodyList);
+                    set特徴期期別金額03(entity, bodyList);
                     bodyList.add(RString.EMPTY);
                     bodyList.add(RString.EMPTY);
                 } else {
@@ -206,6 +206,30 @@ public class TokuchoKariSanteiFukaManager {
             }
             csvListWriter.close();
             manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
+        }
+    }
+
+    private void set特徴期期別金額03(TokuchoKariKeisangoFukaEntity entity, List<RString> bodyList) {
+        if (entity.get特徴期期別金額03() != null) {
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(entity.get特徴期期別金額03(), 整数_0));
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
+    }
+
+    private void set特徴期期別金額02(TokuchoKariKeisangoFukaEntity entity, List<RString> bodyList) {
+        if (entity.get特徴期期別金額02() != null) {
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(entity.get特徴期期別金額02(), 整数_0));
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
+    }
+
+    private void set特徴期期別金額01(TokuchoKariKeisangoFukaEntity entity, List<RString> bodyList) {
+        if (entity.get特徴期期別金額01() != null) {
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(entity.get特徴期期別金額01(), 整数_0));
+        } else {
+            bodyList.add(RString.EMPTY);
         }
     }
 
@@ -253,14 +277,30 @@ public class TokuchoKariSanteiFukaManager {
             Decimal 特徴期期別金額02,
             Decimal 特徴期期別金額03) {
         if (特別徴収停止事由コード == null || 特別徴収停止事由コード.isEmpty()) {
-            if (特徴期期別金額01.intValue() > 整数_0 && 特徴期期別金額02.intValue() > 整数_0 && 特徴期期別金額03.intValue() > 整数_0) {
+            if (set開始月_継続(特徴期期別金額01, 特徴期期別金額02, 特徴期期別金額03)) {
                 return 継続;
             }
-            if (特徴期期別金額01.equals(Decimal.ZERO) && 特徴期期別金額02.intValue() > 整数_0 && 特徴期期別金額03.intValue() > 整数_0) {
+            if (set開始月_6月(特徴期期別金額01, 特徴期期別金額02, 特徴期期別金額03)) {
                 return 開始月_6月;
             }
         }
         return RString.EMPTY;
+    }
+
+    private boolean set開始月_6月(Decimal 特徴期期別金額01, Decimal 特徴期期別金額02, Decimal 特徴期期別金額03) {
+        if (特徴期期別金額01 != null && 特徴期期別金額02 != null && 特徴期期別金額03 != null && 特徴期期別金額01.equals(Decimal.ZERO)
+                && 特徴期期別金額02.intValue() > 整数_0 && 特徴期期別金額03.intValue() > 整数_0) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean set開始月_継続(Decimal 特徴期期別金額01, Decimal 特徴期期別金額02, Decimal 特徴期期別金額03) {
+        if (特徴期期別金額01 != null && 特徴期期別金額02 != null && 特徴期期別金額03 != null && 特徴期期別金額01.intValue() > 整数_0
+                && 特徴期期別金額02.intValue() > 整数_0 && 特徴期期別金額03.intValue() > 整数_0) {
+            return true;
+        }
+        return false;
     }
 
     private RString get通知書番号(TsuchishoNo 通知書番号) {

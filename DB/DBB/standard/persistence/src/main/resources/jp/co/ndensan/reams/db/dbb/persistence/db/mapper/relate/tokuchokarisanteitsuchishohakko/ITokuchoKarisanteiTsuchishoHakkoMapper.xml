@@ -28,12 +28,12 @@
         年金特徴回付情報.*
         FROM
             "DbT2015KeisangoJohoTemp" AS 計算後情報
-        LEFT JOIN 
+        INNER JOIN 
             rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
                    '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
                    true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
             ON  "ShikibetsuTaisho"."shikibetsuCode" = 計算後情報."shikibetsuCode"
-         LEFT JOIN
+         INNER JOIN
              rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
             ON  "Atesaki"."shikibetsuCode" = 計算後情報."shikibetsuCode"
          LEFT JOIN

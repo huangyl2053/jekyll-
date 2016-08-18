@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -27,8 +27,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @reamsid_L DBC-5010-012 lijian
  */
 public class RiyoshaFutanWariaiKoushiConf {
-
-    private static final RString 発行する = new RString("btnPrint");
 
     /**
      * 画面初期化を実行します。
@@ -52,7 +50,6 @@ public class RiyoshaFutanWariaiKoushiConf {
      * @return ResponseData
      */
     public ResponseData<RiyoshaFutanWariaiKoushiConfDiv> onClick_btnPrint(RiyoshaFutanWariaiKoushiConfDiv div) {
-        CommonButtonHolder.setIsClientValidateByCommonButtonFieldName(発行する, true);
 
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(DbcQuestionMessages.負担割合証単票発行確認.getMessage()
@@ -74,19 +71,17 @@ public class RiyoshaFutanWariaiKoushiConf {
      * @param div RiyoshaFutanWariaiKoushiConfDiv
      * @return ResponseData
      */
-    public ResponseData<RiyoshaFutanWariaiKoushiConfDiv> onClick_btnReportPublish(RiyoshaFutanWariaiKoushiConfDiv div) {
+    public ResponseData<SourceDataCollection> onClick_btnReportPublish(RiyoshaFutanWariaiKoushiConfDiv div) {
 
         FutanWariaiSokujiKouseiServiceData 引継ぎデータ
                 = ViewStateHolder.get(ViewStateKeys.引き継ぎデータ, FutanWariaiSokujiKouseiServiceData.class);
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
 
-        getHandler(div).getソースデータ取得(div, 引継ぎデータ, 資格対象者);
-
         getHandler(div).updateDB(div, 引継ぎデータ);
 
         getHandler(div).insertDB(div, 引継ぎデータ, 資格対象者);
 
-        return ResponseData.of(div).respond();
+        return ResponseData.of(getHandler(div).getソースデータ取得(div, 引継ぎデータ, 資格対象者)).setState(DBC2000023StateName.初期表示);
 
     }
 

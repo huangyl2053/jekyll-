@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
@@ -102,10 +101,7 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
     }
 
     private void edit生年月日(NinteishoJohoReportSource source) {
-        if (target.get対象者生年月日() != null) {
-            source.birthYMD = new FlexibleDate(target.get対象者生年月日()).wareki().
-                    eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.ZERO).toDateString();;
-        }
+        source.birthYMD = target.get対象者生年月日();
     }
 
     private void edit対象者性別(NinteishoJohoReportSource source) {
@@ -113,6 +109,7 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
     }
 
     private void edit障害理由(NinteishoJohoReportSource source) {
+        // TODO QA 95838
         source.shogaiRiyu = target.get障害理由区分();
         source.shogaiRiyu = target.get障害理由内容();
     }

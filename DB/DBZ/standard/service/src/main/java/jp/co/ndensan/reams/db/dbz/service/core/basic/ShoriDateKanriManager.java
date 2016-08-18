@@ -551,4 +551,102 @@ public class ShoriDateKanriManager {
         }
         return SearchResult.of(shoriDateKanriList, 0, false);
     }
+
+    /**
+     * 処理日付管理マスタから、非課税年金対象者情報取込情報を取得します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 処理名 ShoriName
+     * @param 処理年度 FlexibleYear
+     * @param 年度内連番 RString
+     * @return SearchResult<ShoriDateKanri>
+     */
+    @Transaction
+    public SearchResult<ShoriDateKanri> get非課税年金対象者情報for月DDL(
+            SubGyomuCode サブ業務コード,
+            RString 処理名,
+            FlexibleYear 処理年度,
+            RString 年度内連番) {
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        requireNonNull(処理年度, UrSystemErrorMessages.値がnull.getReplacedMessage("処理年度"));
+        requireNonNull(年度内連番, UrSystemErrorMessages.値がnull.getReplacedMessage("年度内連番"));
+        List<ShoriDateKanri> shoriDateKanriList = new ArrayList<>();
+        List<DbT7022ShoriDateKanriEntity> entityList = dac.selectFor依頼金額計算基準日取得(
+                サブ業務コード,
+                処理名,
+                処理年度,
+                年度内連番);
+        for (DbT7022ShoriDateKanriEntity entity : entityList) {
+            entity.initializeMd5();
+            shoriDateKanriList.add(new ShoriDateKanri(entity));
+        }
+        return SearchResult.of(shoriDateKanriList, 0, false);
+    }
+
+    /**
+     * 処理日付管理マスタから、非課税年金対象者情報取込情報を取得します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 処理名 ShoriName
+     * @param 処理年度 FlexibleYear
+     * @param 市町村コード LasdecCode
+     * @param 年度内連番 RString
+     * @return SearchResult<ShoriDateKanri>
+     */
+    @Transaction
+    public SearchResult<ShoriDateKanri> get非課税年金対象者情報forチェック(
+            SubGyomuCode サブ業務コード,
+            RString 処理名,
+            FlexibleYear 処理年度,
+            LasdecCode 市町村コード,
+            RString 年度内連番) {
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        requireNonNull(処理年度, UrSystemErrorMessages.値がnull.getReplacedMessage("処理年度"));
+        requireNonNull(年度内連番, UrSystemErrorMessages.値がnull.getReplacedMessage("年度内連番"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        List<ShoriDateKanri> shoriDateKanriList = new ArrayList<>();
+        List<DbT7022ShoriDateKanriEntity> entityList = dac.select非課税年金対象者情報forチェック(
+                サブ業務コード,
+                処理名,
+                年度内連番,
+                処理年度,
+                市町村コード);
+        for (DbT7022ShoriDateKanriEntity entity : entityList) {
+            entity.initializeMd5();
+            shoriDateKanriList.add(new ShoriDateKanri(entity));
+        }
+        return SearchResult.of(shoriDateKanriList, 0, false);
+    }
+
+    /**
+     * 処理日付管理マスタを返します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 処理名 ShoriName
+     * @param 年度 Nendo
+     * @param 市町村コード ShichosonCode
+     * @return List<ShoriDateKanri>
+     */
+    @Transaction
+    public List<ShoriDateKanri> get処理日付管理マスタ(
+            SubGyomuCode サブ業務コード,
+            RString 処理名,
+            FlexibleYear 年度,
+            LasdecCode 市町村コード) {
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(年度メッセージ.toString()));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(市町村コードメッセージ.toString()));
+
+        List<ShoriDateKanri> result = new ArrayList<>();
+        List<DbT7022ShoriDateKanriEntity> entityList = dac.selectBySomeColumns(サブ業務コード, 処理名, 年度, 市町村コード);
+        for (DbT7022ShoriDateKanriEntity entity : entityList) {
+            entity.initializeMd5();
+            result.add(new ShoriDateKanri(entity));
+        }
+
+        return result;
+    }
 }

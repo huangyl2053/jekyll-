@@ -670,8 +670,7 @@ public class KyufuJissekiKoshinReadCsvFileService {
                 || KyufuJissekiYoshikiKubun._2176_様式第六の六.getコード().equals(入力識別番号)
                 || KyufuJissekiYoshikiKubun._7176_様式第六の六.getコード().equals(入力識別番号)
                 || KyufuJissekiYoshikiKubun._2177_様式第六の七.getコード().equals(入力識別番号)
-                || KyufuJissekiYoshikiKubun._7177_様式第六の七.getコード().equals(入力識別番号)
-                || KyufuJissekiYoshikiKubun._71P1_予防サービス_生活支援サービス.getコード().equals(入力識別番号)) {
+                || KyufuJissekiYoshikiKubun._7177_様式第六の七.getコード().equals(入力識別番号)) {
             doH1件数が0件チェック();
             doD1件数が0件チェック();
             doDD件数が1件以上チェック();
@@ -1055,7 +1054,7 @@ public class KyufuJissekiKoshinReadCsvFileService {
             doT1件数が1件以上チェック();
             doD9件数が1件以上チェック();
             doDA件数が1件以上チェック();
-            doDB件数が0件チェック(入力識別番号);
+            doDB件数が0件チェック();
         }
     }
 
@@ -1116,18 +1115,16 @@ public class KyufuJissekiKoshinReadCsvFileService {
     }
 
     private void doD1とDD件数チェック(RString 入力識別番号) {
-        if (KyufuJissekiYoshikiKubun._71R1_様式第二の三.getコード().equals(入力識別番号)
+        if ((KyufuJissekiYoshikiKubun._71R1_様式第二の三.getコード().equals(入力識別番号)
                 || KyufuJissekiYoshikiKubun._8171_様式第七の三.getコード().equals(入力識別番号)
                 || KyufuJissekiYoshikiKubun._2131_様式第二.getコード().equals(入力識別番号)
                 || KyufuJissekiYoshikiKubun._7131_様式第二.getコード().equals(入力識別番号)
                 || KyufuJissekiYoshikiKubun._2132_様式第二の二.getコード().equals(入力識別番号)
-                || KyufuJissekiYoshikiKubun._7132_様式第二の二.getコード().equals(入力識別番号)) {
-            if (件数_D1 == 0 && 件数_DD == 0) {
-                必須レコードなしフラグ = true;
-                必須レコードなしの備考 = 必須レコードなしの備考.concat(読点)
-                        .concat(KyufuJissekiRecordShubetsu.明細情報レコード.getコード())
-                        .concat(読点).concat(KyufuJissekiRecordShubetsu.明細情報_住所地特例レコード.getコード());
-            }
+                || KyufuJissekiYoshikiKubun._7132_様式第二の二.getコード().equals(入力識別番号)) && (件数_D1 == 0 && 件数_DD == 0)) {
+            必須レコードなしフラグ = true;
+            必須レコードなしの備考 = 必須レコードなしの備考.concat(読点)
+                    .concat(KyufuJissekiRecordShubetsu.明細情報レコード.getコード())
+                    .concat(読点).concat(KyufuJissekiRecordShubetsu.明細情報_住所地特例レコード.getコード());
         }
     }
 
@@ -1319,7 +1316,7 @@ public class KyufuJissekiKoshinReadCsvFileService {
         }
     }
 
-    private void doDB件数が0件チェック(RString 入力識別番号) {
+    private void doDB件数が0件チェック() {
         if (件数_DB == 0) {
             必須レコードなしフラグ = true;
             必須レコードなしの備考 = 必須レコードなしの備考.concat(読点)

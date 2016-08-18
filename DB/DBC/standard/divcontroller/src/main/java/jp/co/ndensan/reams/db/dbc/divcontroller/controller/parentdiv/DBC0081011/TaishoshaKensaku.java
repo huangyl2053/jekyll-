@@ -80,6 +80,8 @@ public class TaishoshaKensaku {
                 市町村コード, 市町村フラグ);
         List<TaishoshaKensakuBusiness> 再審査決定情報Business = getHandler(div).
                 onClick_btnSearch(保険者Business, 総合保険者Business, 公費負担者Business, 総合公費負担者Business, 履歴番号Business);
+        div.getKetteiHokensha().setToriatsukaiYM(div.getTxtToriatsukaiYM().getValue().getYearMonth().toDateString());
+        div.getKetteiHokensha().setShichosonCode(市町村コード);
         ValidationMessageControlPairs validPairs1 = getValidationHandler(div).再審査決定情報(再審査決定情報Business);
         if (!RString.isNullOrEmpty(div.getKetteiHokensha().getKubunn())) {
             getHandler(div).set再審査決定情報(再審査決定情報Business, div.getKetteiHokensha().getKubunn(), 履歴番号Business);
@@ -151,19 +153,18 @@ public class TaishoshaKensaku {
     }
 
     private ResponseData<TaishoshaKensakuDiv> get保険者情報(TaishoshaKensakuDiv div, RString 保険者区分, boolean 履歴番号フラグ) {
-        RString 市町村コード = RString.EMPTY;
+        RString 市町村コード = div.getKetteiHokensha().getShichosonCode();
         boolean 市町村フラグ = false;
-        if (!div.getDDLSityouson().getDataSource().isEmpty() && !キー.equals(div.getDDLSityouson().getSelectedKey())) {
-            市町村コード = div.getDDLSityouson().getSelectedKey().substring(0, 連番_5);
+        if (!RString.isNullOrEmpty(市町村コード) && !キー.equals(市町村コード)) {
             市町村フラグ = true;
         }
         int 履歴番号 = 0;
         if (!div.getDDLRireki().getDataSource().isEmpty()) {
             履歴番号 = Integer.parseInt(div.getDDLRireki().getSelectedKey().toString());
         }
-        List<TaishoshaKensakuBusiness> 総合保険者Business = get明細情報(div.getTxtToriatsukaiYM().getValue().getYearMonth().toDateString(),
+        List<TaishoshaKensakuBusiness> 総合保険者Business = get明細情報(div.getKetteiHokensha().getToriatsukaiYM(),
                 保険者区分, 履歴番号, 市町村コード, 履歴番号フラグ, 市町村フラグ);
-        List<TaishoshaKensakuBusiness> 履歴番号Business = get履歴番号(div.getTxtToriatsukaiYM().getValue().getYearMonth().toDateString(),
+        List<TaishoshaKensakuBusiness> 履歴番号Business = get履歴番号(div.getKetteiHokensha().getToriatsukaiYM(),
                 市町村コード, 市町村フラグ);
         getHandler(div).set再審査決定情報(総合保険者Business, 保険者区分, 履歴番号Business);
         return ResponseData.of(div).respond();

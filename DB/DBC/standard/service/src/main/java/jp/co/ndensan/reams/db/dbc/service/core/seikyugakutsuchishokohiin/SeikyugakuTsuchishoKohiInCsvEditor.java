@@ -119,7 +119,7 @@ public class SeikyugakuTsuchishoKohiInCsvEditor {
     }
 
     private void set合計項目(SeikyugakuTsuchishoKohiInCsvEntity csvEntity, DbWT1511SeikyugakuTsuchishoTempEntity entity) {
-        if (entity != null && entity.get合計_帳票レコード種別() != null && !entity.get合計_帳票レコード種別().isNullOrEmpty()) {
+        if (entity != null && !RString.isNullOrEmpty(entity.get合計_帳票レコード種別())) {
             Decimal 合計通常分件数 = entity.get合計_通常分_件数();
             if (合計通常分件数 != null) {
                 csvEntity.set合計通常分件数(DecimalFormatter.toコンマ区切りRString(合計通常分件数, ZERO_INDEX));
@@ -156,7 +156,7 @@ public class SeikyugakuTsuchishoKohiInCsvEditor {
     }
 
     private void set累計項目(SeikyugakuTsuchishoKohiInCsvEntity csvEntity, DbWT1511SeikyugakuTsuchishoTempEntity entity) {
-        if (entity != null && entity.get累計_帳票レコード種別() != null && !entity.get累計_帳票レコード種別().isNullOrEmpty()) {
+        if (entity != null && !RString.isNullOrEmpty(entity.get累計_帳票レコード種別())) {
             Decimal 累計通常分件数 = entity.get累計_通常分_件数();
             if (累計通常分件数 != null) {
                 csvEntity.set累計通常分件数(DecimalFormatter.toコンマ区切りRString(累計通常分件数, ZERO_INDEX));
@@ -195,7 +195,7 @@ public class SeikyugakuTsuchishoKohiInCsvEditor {
     }
 
     private void set審査支払手数料項目(SeikyugakuTsuchishoKohiInCsvEntity csvEntity, DbWT1511SeikyugakuTsuchishoTempEntity entity) {
-        if (entity != null && entity.get手数料_帳票レコード種別() != null && !entity.get手数料_帳票レコード種別().isNullOrEmpty()) {
+        if (entity != null && !RString.isNullOrEmpty(entity.get手数料_帳票レコード種別())) {
             Decimal 手数料請求額 = entity.get手数料_請求額();
             if (手数料請求額 != null) {
                 csvEntity.set手数料請求額(DecimalFormatter.toコンマ区切りRString(手数料請求額, ZERO_INDEX));

@@ -50,7 +50,7 @@ public enum ReportIdDBC {
     /**
      * 総合事業費過再審査定通知書情報
      */
-    DBC200080(new ReportId("DBC200080_SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiran"), new RString("総合事業費過再審査定通知書情報")),
+    DBC200080(new ReportId("DBC200080_SogojigyohiSaishinsaKetteiTsuchishoTorikomiIchiran"), new RString("総合事業費過再審査定通知書情報")),
     /**
      * 総合事業費（経過措置）過誤決定通知書情報取込一覧表
      */
@@ -75,6 +75,10 @@ public enum ReportIdDBC {
      * 受給者情報更新結果一覧表
      */
     DBC200055(new ReportId("DBC200055_JukyushaKoshinkekkaIchiran"), new RString("受給者情報更新結果一覧表")),
+    /**
+     * 受給者情報突合結果一覧表
+     */
+    DBC200058(new ReportId("DBC200058_JukyushaTotsugokekkaIchiran"), new RString("受給者情報突合結果一覧表")),
     /**
      * 負担割合証（カット紙）
      */

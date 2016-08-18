@@ -311,7 +311,7 @@ public class FutanWariaishoIkkatsu {
         }
         if (!RString.isNullOrEmpty(利用者負担割合証.get負担割合期間().getFutanWariaiKubun2())) {
             source.set負担割合(FutanwariaiKubun.toValue(利用者負担割合証.get負担割合期間().getFutanWariaiKubun2()).get名称());
-        } else {
+        } else if (!RString.isNullOrEmpty(利用者負担割合証.get負担割合期間().getFutanWariaiKubun1())) {
             source.set負担割合(FutanwariaiKubun.toValue(利用者負担割合証.get負担割合期間().getFutanWariaiKubun1()).get名称());
         }
         if (定数_ONE.equals(利用者負担割合証.get利用者負担割合().getHanteiKubun())) {
@@ -368,10 +368,12 @@ public class FutanWariaishoIkkatsu {
         }
         if (!RString.isNullOrEmpty(利用者負担割合証Temp.get負担割合期間().getFutanWariaiKubun2())) {
             csvEntity.set負担割合(FutanwariaiKubun.toValue(利用者負担割合証Temp.get負担割合期間().getFutanWariaiKubun2()).get名称());
-        } else {
+        } else if (!RString.isNullOrEmpty(利用者負担割合証Temp.get負担割合期間().getFutanWariaiKubun1())) {
             csvEntity.set負担割合(FutanwariaiKubun.toValue(利用者負担割合証Temp.get負担割合期間().getFutanWariaiKubun1()).get名称());
         }
-        csvEntity.set判定区分(FutanWariaiHanteiKubun.toValue(利用者負担割合証Temp.get利用者負担割合().getHanteiKubun()).get名称());
+        if (!RString.isNullOrEmpty(利用者負担割合証Temp.get利用者負担割合().getHanteiKubun())) {
+            csvEntity.set判定区分(FutanWariaiHanteiKubun.toValue(利用者負担割合証Temp.get利用者負担割合().getHanteiKubun()).get名称());
+        }
         if (定数_ZERO.equals(利用者負担割合証Temp.get利用者負担割合().getHakoKubun())) {
             csvEntity.set発行済(RString.EMPTY);
         } else {
@@ -381,11 +383,15 @@ public class FutanWariaishoIkkatsu {
             csvEntity.set事業対象者受給者区分(定数_事業対象者);
         } else if (定数_TWO.equals(利用者負担割合証Temp.get事業対象者受給者区分())) {
             csvEntity.set事業対象者受給者区分(定数_受給者);
+        } else {
+            csvEntity.set事業対象者受給者区分(RString.EMPTY);
         }
         if (!RString.isNullOrEmpty(利用者負担割合証Temp.get負担割合期間().getShikakuKubun2())) {
             csvEntity.set資格区分(利用者負担割合証Temp.get負担割合期間().getShikakuKubun2().concat(定数_号));
-        } else {
+        } else if (!RString.isNullOrEmpty(利用者負担割合証Temp.get負担割合期間().getShikakuKubun1())) {
             csvEntity.set資格区分(利用者負担割合証Temp.get負担割合期間().getShikakuKubun1().concat(定数_号));
+        } else {
+            csvEntity.set資格区分(RString.EMPTY);
         }
         csvEntity.set証記載保険者番号(getHokenshaCode(new HihokenshaDaicho(利用者負担割合証Temp.get被保台帳())).getColumnValue());
         return csvEntity;

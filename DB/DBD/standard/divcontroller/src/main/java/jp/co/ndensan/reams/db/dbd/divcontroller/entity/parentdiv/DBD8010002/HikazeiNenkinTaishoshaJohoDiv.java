@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 
@@ -29,6 +30,8 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     private HikazeiNenkinTaishoshaJohoTorikomiDiv HikazeiNenkinTaishoshaJohoTorikomi;
     @JsonProperty("ShoriSettei")
     private ShoriSetteiDiv ShoriSettei;
+    @JsonProperty("hdnState")
+    private RString hdnState;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -70,6 +73,24 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     @JsonProperty("ShoriSettei")
     public void setShoriSettei(ShoriSetteiDiv ShoriSettei) {
         this.ShoriSettei = ShoriSettei;
+    }
+
+    /*
+     * gethdnState
+     * @return hdnState
+     */
+    @JsonProperty("hdnState")
+    public RString getHdnState() {
+        return hdnState;
+    }
+
+    /*
+     * sethdnState
+     * @param hdnState hdnState
+     */
+    @JsonProperty("hdnState")
+    public void setHdnState(RString hdnState) {
+        this.hdnState = hdnState;
     }
 
     /*
@@ -386,13 +407,8 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun4() {
-        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun4();
-    }
-
-    @JsonIgnore
-    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun1() {
-        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun1();
+    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun2() {
+        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun2();
     }
 
     @JsonIgnore
@@ -401,8 +417,13 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun2() {
-        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun2();
+    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun1() {
+        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun1();
+    }
+
+    @JsonIgnore
+    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun4() {
+        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun4();
     }
 
     @JsonIgnore
