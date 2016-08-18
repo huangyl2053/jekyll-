@@ -184,7 +184,8 @@
         )
     </insert> 
 
-    <select resultOrdered="true" id="get帳票出力対象データ" resultMap="resultMap_DbWT0001DbWT5331Entity" fetchSize="500">
+    <select resultOrdered="true" id="get帳票出力対象データ" resultMap="resultMap_DbWT0001DbWT5331Entity" fetchSize="500"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter">
         SELECT <include refid="allColumns_DbWT0001DbWT5331"/>
         FROM "DbWT5331JukyushaJoho" AS DbWT5331 INNER JOIN "DbWT0001Hihokensha" AS DbWT0001 ON DbWT5331."renban" = DbWT0001."meisaiRenban"
         ${出力順}
@@ -283,7 +284,7 @@
         <result property="変換被保険者番号" column="DbWT0001_henkanHihokenshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="登録被保険者番号" column="DbWT0001_hihokenshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="市町村コード" column="DbWT0001_shichosonCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
-        <result property="管内管外区分" column="DbWT0001_KannaiKangaiKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="管内管外区分" column="DbWT0001_kannaiKangaiKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="郵便番号" column="DbWT0001_yubinNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="町域コード" column="DbWT0001_choikiCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="行政区コード" column="DbWT0001_gyoseikuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -395,7 +396,7 @@
         DbWT0001."henkanHihokenshaNo" as DbWT0001_henkanHihokenshaNo,
         DbWT0001."hihokenshaNo" as DbWT0001_hihokenshaNo,
         DbWT0001."shichosonCode" as DbWT0001_shichosonCode,
-        DbWT0001."KannaiKangaiKubun" as DbWT0001_KannaiKangaiKubun,
+        DbWT0001."KannaiKangaiKubun" as DbWT0001_kannaiKangaiKubun,
         DbWT0001."yubinNo" as DbWT0001_yubinNo,
         DbWT0001."choikiCode" as DbWT0001_choikiCode,
         DbWT0001."gyoseikuCode" as DbWT0001_gyoseikuCode,

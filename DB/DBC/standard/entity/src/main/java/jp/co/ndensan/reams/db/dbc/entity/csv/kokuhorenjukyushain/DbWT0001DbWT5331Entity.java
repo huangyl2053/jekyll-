@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 帳票出力対象データのEntity
  *
- * @author DBC-2740-010 fuyanling
+ * @reamsid_L DBC-2740-010 fuyanling
  */
 @lombok.Getter
 @lombok.Setter
