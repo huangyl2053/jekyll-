@@ -3,13 +3,14 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Aug 17 16:21:26 CST 2016 
+ * Thu Aug 18 18:34:38 CST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
 /**
@@ -35,6 +36,7 @@ public class dgTorikomiFileIchiran_Row extends DataRow {
     private RString shinseishoKanriNo;
     private RString koroshoIfShikibetsuCode;
     private RString kiguusuu;
+    private TextBoxNum ikenshoIraiRirekiNo;
 
     public dgTorikomiFileIchiran_Row() {
         super();
@@ -52,6 +54,7 @@ public class dgTorikomiFileIchiran_Row extends DataRow {
         this.shinseishoKanriNo = RString.EMPTY;
         this.koroshoIfShikibetsuCode = RString.EMPTY;
         this.kiguusuu = RString.EMPTY;
+        this.ikenshoIraiRirekiNo = new TextBoxNum();
         this.setOriginalData("checkBox", checkBox);
         this.setOriginalData("hokenshaBango", hokenshaBango);
         this.setOriginalData("hihokenshaBango", hihokenshaBango);
@@ -66,9 +69,10 @@ public class dgTorikomiFileIchiran_Row extends DataRow {
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.setOriginalData("koroshoIfShikibetsuCode", koroshoIfShikibetsuCode);
         this.setOriginalData("kiguusuu", kiguusuu);
+        this.setOriginalData("ikenshoIraiRirekiNo", ikenshoIraiRirekiNo);
     }
 
-    public dgTorikomiFileIchiran_Row(Boolean checkBox, RString hokenshaBango, RString hihokenshaBango, RString shinseibi, RString hihokenshaShimei, RString seninengapi, RString seibetu, RString yubinBangou, RString jyusyo, RString iryouKikanMei, RString shuziiMei, RString shinseishoKanriNo, RString koroshoIfShikibetsuCode, RString kiguusuu) {
+    public dgTorikomiFileIchiran_Row(Boolean checkBox, RString hokenshaBango, RString hihokenshaBango, RString shinseibi, RString hihokenshaShimei, RString seninengapi, RString seibetu, RString yubinBangou, RString jyusyo, RString iryouKikanMei, RString shuziiMei, RString shinseishoKanriNo, RString koroshoIfShikibetsuCode, RString kiguusuu, TextBoxNum ikenshoIraiRirekiNo) {
         super();
         this.setOriginalData("checkBox", checkBox);
         this.setOriginalData("hokenshaBango", hokenshaBango);
@@ -84,6 +88,7 @@ public class dgTorikomiFileIchiran_Row extends DataRow {
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.setOriginalData("koroshoIfShikibetsuCode", koroshoIfShikibetsuCode);
         this.setOriginalData("kiguusuu", kiguusuu);
+        this.setOriginalData("ikenshoIraiRirekiNo", ikenshoIraiRirekiNo);
         this.checkBox = checkBox;
         this.hokenshaBango = hokenshaBango;
         this.hihokenshaBango = hihokenshaBango;
@@ -98,6 +103,7 @@ public class dgTorikomiFileIchiran_Row extends DataRow {
         this.shinseishoKanriNo = shinseishoKanriNo;
         this.koroshoIfShikibetsuCode = koroshoIfShikibetsuCode;
         this.kiguusuu = kiguusuu;
+        this.ikenshoIraiRirekiNo = ikenshoIraiRirekiNo;
     }
 
     public Boolean getCheckBox() {
@@ -154,6 +160,10 @@ public class dgTorikomiFileIchiran_Row extends DataRow {
 
     public RString getKiguusuu() {
         return kiguusuu;
+    }
+
+    public TextBoxNum getIkenshoIraiRirekiNo() {
+        return ikenshoIraiRirekiNo;
     }
 
     public void setCheckBox(Boolean checkBox) {
@@ -224,6 +234,11 @@ public class dgTorikomiFileIchiran_Row extends DataRow {
     public void setKiguusuu(RString kiguusuu) {
         this.setOriginalData("kiguusuu", kiguusuu);
         this.kiguusuu = kiguusuu;
+    }
+
+    public void setIkenshoIraiRirekiNo(TextBoxNum ikenshoIraiRirekiNo) {
+        this.setOriginalData("ikenshoIraiRirekiNo", ikenshoIraiRirekiNo);
+        this.ikenshoIraiRirekiNo = ikenshoIraiRirekiNo;
     }
 
     // </editor-fold>
