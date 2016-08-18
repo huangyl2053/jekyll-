@@ -17,8 +17,11 @@ import jp.co.ndensan.reams.db.dbd.service.core.jukyushadaicho.JukyushaDaichoServ
 import jp.co.ndensan.reams.db.dbd.service.report.dbd550004.YokaigoNinteiTorikeshiTshuchishoPrintService;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.business.report.hakkorireki.GyomuKoyuJoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -27,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -36,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 要介護認定取消通知書発行のDivControllerです。
@@ -51,7 +56,9 @@ public class YokaigoNinteiTorikeshiTujishoHakko {
      * @return ResponseData<YokaigoNinteiTorikeshiTujishoHakkoDiv>
      */
     public ResponseData<YokaigoNinteiTorikeshiTujishoHakkoDiv> onLoad(YokaigoNinteiTorikeshiTujishoHakkoDiv div) {
-        creatYokaigoNinteiTorikeshiTujishoHakkoHandler(div).onLoad();
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        creatYokaigoNinteiTorikeshiTujishoHakkoHandler(div).onLoad(taishoshaKey.get被保険者番号().value(),
+                taishoshaKey.get識別コード().value());
         return ResponseData.of(div).respond();
     }
 
@@ -209,7 +216,8 @@ public class YokaigoNinteiTorikeshiTujishoHakko {
             異動理由 = RString.EMPTY;
         }
         if (div.getTujishoHakkoMeisai().getTxtYokaigodo().getValue() != null) {
-            要介護度 = div.getTujishoHakkoMeisai().getTxtYokaigodo().getValue();
+            要介護度 = YokaigoJotaiKubun.valueOf(RStringUtil.convert半角to全角(div.getTujishoHakkoMeisai().getTxtYokaigodo().getValue()).
+                    toString()).getコード();
         } else {
             要介護度 = RString.EMPTY;
         }
