@@ -18,7 +18,13 @@ public interface IJukyushaIdoRenrakuhyoDiv extends ICommonChildDivBaseProperties
 
     public void onClick_radNijiyoboJigyoKubun();
 
+    public void onClick_radKyotakuServiceSakuseiKubun();
+
     public void onBlur_txtIdoYMD();
+
+    public void onBlur_txtKyotakuKaigoShienJigyoshoNo();
+
+    public void onBlur_txtShisetsuShozaiHokenjaNo();
 
     public ValidationMessageControlPairs validateCheck();
 

@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 受給者異動連絡票関連共有子DivのSpecです。
@@ -342,10 +343,12 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
     private static class SpecHelper {
 
         private static final RString 非該当KEY = new RString("higaito");
-        //TODO
+        //TODO QA
         private static final RString 事業者対象KEY = new RString("yoshienKeikatekiYokaigo");
 
         private static final RString 空KEY = new RString("space");
+
+        private static final RString 画面ID_DBC0220012 = new RString("DBC0220012");
 
         /**
          * 異動日の必須チェックです。
@@ -421,7 +424,9 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
          */
         public static boolean check訂正日の必須(JukyushaIdoRenrakuhyoDiv div) {
             RDate 訂正日 = div.getJukyushaIdoRenrakuhyoTeisei().getTxtTeiseiYMD().getValue();
-            return (訂正日 == null || 訂正日.toString().isEmpty());
+            return (div.getJukyushaIdoRenrakuhyoTeisei().getTxtTeiseiYMD().isVisible()
+                    && 画面ID_DBC0220012.equals(ResponseHolder.getMenuID())
+                    && (訂正日 == null || 訂正日.toString().isEmpty()));
         }
 
         /**
@@ -432,7 +437,9 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
          */
         public static boolean check訂正区分の必須(JukyushaIdoRenrakuhyoDiv div) {
             RString 訂正区分 = div.getJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().getSelectedKey();
-            return RString.isNullOrEmpty(訂正区分);
+            return (div.getJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().isVisible()
+                    && 画面ID_DBC0220012.equals(ResponseHolder.getMenuID())
+                    && RString.isNullOrEmpty(訂正区分));
         }
 
         /**
@@ -582,7 +589,7 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
          */
         public static boolean check特例減額措置対象の必須(JukyushaIdoRenrakuhyoDiv div) {
             RString 特例減額措置対象 = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
-                    getRadTokuteiNyushoshaKaigoServiceKubun().getSelectedKey();
+                    getRadKaizeisoTokureiGengakuSochiTaishoFlag().getSelectedKey();
             return RString.isNullOrEmpty(特例減額措置対象);
         }
 
