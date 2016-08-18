@@ -572,11 +572,11 @@ public class SokujiFukaKouseiMainHandler {
     }
 
     private RString getRStringByTextBoxNum(TextBoxNum textBoxNum) {
-        return textBoxNum == null ? RString.EMPTY : new RString(textBoxNum.getValue().toString());
+        return textBoxNum.getValue() == null ? RString.EMPTY : new RString(textBoxNum.getValue().toString());
     }
 
     private RString getRStringByTextBoxDate(TextBoxDate textBoxDate) {
-        return textBoxDate == null ? RString.EMPTY : textBoxDate.getValue().toDateString();
+        return textBoxDate.getValue() == null ? RString.EMPTY : textBoxDate.getValue().toDateString();
     }
 
     private boolean set期別金額(FukaJoho 賦課の情報, int 期, RString 徴収方法期別, TextBoxNum textBoxNum, TextBoxDate textBoxDate, Boolean is差異がある) {
