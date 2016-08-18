@@ -28,8 +28,6 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuHandler {
     private static final RString 総合事業高額介護サービス費給付対象者登録自庁 = new RString("DBCMNL1002");
     private static final RString 実行ボタン_DBCMN41002 = new RString("btnBatch41002");
     private static final RString 実行ボタン_DBCMNL1002 = new RString("btnBatchL1002");
-    private static final RString TITLE_ONE = new RString("高額介護サービス費給付対象者登録");
-    private static final RString TITLE_TWO = new RString("総合事業高額介護サービス費給付対象者登録");
     private static final RString LABLE_ONE = new RString("高額介護サービス費給付対象者一覧表");
     private static final RString LABLE_TWO = new RString("総合事業高額介護サービス費給付対象者一覧表");
 
@@ -66,12 +64,10 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuHandler {
         div.getKogakuKaigoKyufuhiTaishoshaTorokuPanel().getTxtShinsaYM().setToValue(RDate.getNowDate().plusYear(1));
         div.getPublishIchiranhyo().setIsPublish(true);
         if (高額介護サービス費給付対象者登録自庁.equals(menuId)) {
-            div.setTitle(TITLE_TWO);
             div.getPublishIchiranhyo().setTitle(LABLE_ONE);
             div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200016.getReportId());
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(実行ボタン_DBCMNL1002, true);
         } else if (総合事業高額介護サービス費給付対象者登録自庁.equals(menuId)) {
-            div.setTitle(TITLE_ONE);
             div.getPublishIchiranhyo().setTitle(LABLE_TWO);
             div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200077.getReportId());
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(実行ボタン_DBCMN41002, true);

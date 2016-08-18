@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
@@ -101,7 +102,10 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
     }
 
     private void edit生年月日(NinteishoJohoReportSource source) {
-        source.birthYMD = new RString(target.get対象者生年月日().toString());
+        if (target.get対象者生年月日() != null) {
+            source.birthYMD = new FlexibleDate(target.get対象者生年月日()).wareki().
+                    eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.ZERO).toDateString();;
+        }
     }
 
     private void edit対象者性別(NinteishoJohoReportSource source) {

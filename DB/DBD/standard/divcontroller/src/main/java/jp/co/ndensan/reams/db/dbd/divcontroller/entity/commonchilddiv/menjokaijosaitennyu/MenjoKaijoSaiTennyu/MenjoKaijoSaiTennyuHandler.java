@@ -81,7 +81,7 @@ public class MenjoKaijoSaiTennyuHandler {
         int index = div.getDgMenjoKaijoOrSaitennyu().getClickedItem().getId();
         div.setKey_hannteiIndex(new RString(String.valueOf(index)));
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(免除解除再転入ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
-        div.getTxtTorokuJokyo().setValue(支払方法変更管理業務概念.get登録区分());
+        div.getTxtTorokuJokyo().setValue(ShiharaiHenkoTorokuKubun.toValue(支払方法変更管理業務概念.get登録区分()).get名称());
         div.getTxtGengakuTekiyoKikanKaishiYMD().setValue(支払方法変更管理業務概念.getShiharaiHohoHenkoGengakuList().get(index).get確定減額期間開始年月日());
         div.getTxtGengakuTekiyoKikanShuryoYMD().setValue(支払方法変更管理業務概念.getShiharaiHohoHenkoGengakuList().get(index).get確定減額期間終了年月日());
         div.getTxtChoshukenShometsuKikan().setValue(支払方法変更管理業務概念.getShiharaiHohoHenkoGengakuList().get(index).get徴収権消滅期間());

@@ -154,16 +154,16 @@ public class NinteiShoJohoFinder {
         target.set対象者氏名(被保険者氏名Val);
 
         IKojin ikojin = ShikibetsuTaishoFactory.createKojin(target.getPsmEntity());
-        if (ikojin.is日本人()) {
+        if (ikojin.is日本人() && target.get対象者生年月日() != null) {
             target.set対象者生年月日(new FlexibleDate(target.get対象者生年月日()).wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-        } else {
+        } else if (target.get対象者生年月日() != null) {
             target.set対象者生年月日((new FlexibleDate(target.get対象者生年月日()).seireki()
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString()));
         }
 
         target.set対象者性別(target.getPsmEntity().getSeibetsuCode());
-        NinteishoJohoEntity ninteishoJohoentity = set障がい者控除と認定年月日(parameter.get被保険者番号());
+        NinteishoJohoEntity ninteishoJohoentity = set障がい者控除と認定年月日(target.get被保険者番号());
         target.set障害理由区分(ninteishoJohoentity.get障害理由区分());
         target.set障害理由内容(ninteishoJohoentity.get障害理由内容());
         target.set要介護認定日(ninteishoJohoentity.get要介護認定日());
