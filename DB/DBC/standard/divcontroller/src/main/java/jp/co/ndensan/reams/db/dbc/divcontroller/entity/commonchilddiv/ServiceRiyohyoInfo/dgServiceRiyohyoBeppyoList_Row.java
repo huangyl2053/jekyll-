@@ -3,22 +3,18 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRi
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Aug 17 20:54:47 CST 2016 
+ * Thu Aug 18 14:11:56 CST 2016
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
-
 /**
- * dgServiceRiyohyoBeppyoList_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgServiceRiyohyoBeppyoList_Row のクラスファイル
+ *
+ * @reamsid_L DBC-1930-050 cuilin
  */
-
 public class dgServiceRiyohyoBeppyoList_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
 

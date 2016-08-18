@@ -46,6 +46,10 @@ module DBC {
                 return "onClick_btnModify";
             }
 
+            public static onClick_btnDelete(): string {
+                return "onClick_btnDelete";
+            }
+
             public static onBlur_txtTani(): string {
                 return "onBlur_txtTani";
             }
@@ -58,8 +62,20 @@ module DBC {
                 return "onBlur_txtKaisu";
             }
 
+            public static onClick_btnBeppyoMeisaiKakutei(): string {
+                return "onClick_btnBeppyoMeisaiKakutei";
+            }
+
+            public static onClick_btnCalcMeisaiGokei(): string {
+                return "onClick_btnCalcMeisaiGokei";
+            }
+
             public static onClick_btnCancelMeisaiInput(): string {
                 return "onClick_btnCancelMeisaiInput";
+            }
+
+            public static onClick_btnCalcMeisai(): string {
+                return "onClick_btnCalcMeisai";
             }
 
             public static onBlur_txtShuruiGendoChokaTani(): string {
@@ -86,8 +102,20 @@ module DBC {
                 return "onBlur_txtKyufuritsu";
             }
 
+            public static onClick_btnBeppyoGokeiKakutei(): string {
+                return "onClick_btnBeppyoGokeiKakutei";
+            }
+
             public static onClick_btnCancelGokeiInput(): string {
                 return "onClick_btnCancelGokeiInput";
+            }
+
+            public static onClick_btnGokeiKeisan(): string {
+                return "onClick_btnGokeiKeisan";
+            }
+
+            public static onClick_btnUpdate(): string {
+                return "onClick_btnUpdate";
             }
 
         }
@@ -335,12 +363,12 @@ module DBC {
                 return new UZA.Button(this.convFiledName("btnBeppyoGokeiKakutei"));
             }
 
-            public btnCalcGokei(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnCalcGokei"));
-            }
-
             public btnCancelGokeiInput(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnCancelGokeiInput"));
+            }
+
+            public btnCalcGokei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnCalcGokei"));
             }
 
             public ServiceRiyohyoBeppyoFooter(): UZA.Panel {

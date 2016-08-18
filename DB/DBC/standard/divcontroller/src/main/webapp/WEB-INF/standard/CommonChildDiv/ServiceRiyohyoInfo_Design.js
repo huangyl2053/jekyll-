@@ -40,6 +40,10 @@ var DBC;
                 return "onClick_btnModify";
             };
 
+            Events.onClick_btnDelete = function () {
+                return "onClick_btnDelete";
+            };
+
             Events.onBlur_txtTani = function () {
                 return "onBlur_txtTani";
             };
@@ -52,8 +56,20 @@ var DBC;
                 return "onBlur_txtKaisu";
             };
 
+            Events.onClick_btnBeppyoMeisaiKakutei = function () {
+                return "onClick_btnBeppyoMeisaiKakutei";
+            };
+
+            Events.onClick_btnCalcMeisaiGokei = function () {
+                return "onClick_btnCalcMeisaiGokei";
+            };
+
             Events.onClick_btnCancelMeisaiInput = function () {
                 return "onClick_btnCancelMeisaiInput";
+            };
+
+            Events.onClick_btnCalcMeisai = function () {
+                return "onClick_btnCalcMeisai";
             };
 
             Events.onBlur_txtShuruiGendoChokaTani = function () {
@@ -80,8 +96,20 @@ var DBC;
                 return "onBlur_txtKyufuritsu";
             };
 
+            Events.onClick_btnBeppyoGokeiKakutei = function () {
+                return "onClick_btnBeppyoGokeiKakutei";
+            };
+
             Events.onClick_btnCancelGokeiInput = function () {
                 return "onClick_btnCancelGokeiInput";
+            };
+
+            Events.onClick_btnGokeiKeisan = function () {
+                return "onClick_btnGokeiKeisan";
+            };
+
+            Events.onClick_btnUpdate = function () {
+                return "onClick_btnUpdate";
             };
             return Events;
         })();
@@ -315,12 +343,12 @@ var DBC;
                 return new UZA.Button(this.convFiledName("btnBeppyoGokeiKakutei"));
             };
 
-            Controls.prototype.btnCalcGokei = function () {
-                return new UZA.Button(this.convFiledName("btnCalcGokei"));
-            };
-
             Controls.prototype.btnCancelGokeiInput = function () {
                 return new UZA.Button(this.convFiledName("btnCancelGokeiInput"));
+            };
+
+            Controls.prototype.btnCalcGokei = function () {
+                return new UZA.Button(this.convFiledName("btnCalcGokei"));
             };
 
             Controls.prototype.ServiceRiyohyoBeppyoFooter = function () {
