@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 /**
  * JidoShokanTaishoJohoSettei のクラスファイル
  *
- * @@reamsid DBC-0430-011 zhengshenlei
+ * @@reamsid_L DBC-0430-011 zhengshenlei
  */
 public class JidoShokanTaishoJohoSetteiDiv extends Panel {
 

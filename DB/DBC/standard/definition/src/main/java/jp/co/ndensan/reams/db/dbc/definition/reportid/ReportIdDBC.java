@@ -314,7 +314,11 @@ public enum ReportIdDBC {
     /**
      * 給付費通知減免補正一覧表 帳票ＩＤです。
      */
-    DBC200043(new ReportId("DBC200043_KyufuhiTuchiGenmenhoseiIchiran"), new RString("給付費通知減免補正一覧表"));
+    DBC200043(new ReportId("DBC200043_KyufuhiTuchiGenmenhoseiIchiran"), new RString("給付費通知減免補正一覧表")),
+    /**
+     * 介護予防・日常生活支援総合事業費審査決定請求明細表帳票ＩＤです。
+     */
+    DBC200070(new ReportId("DBC200070_SogojigyohiShinsaKetteiSeikyumeisaihyo"), new RString("介護予防・日常生活支援総合事業費審査決定請求明細表"));
 
     private final ReportId reportId;
 
