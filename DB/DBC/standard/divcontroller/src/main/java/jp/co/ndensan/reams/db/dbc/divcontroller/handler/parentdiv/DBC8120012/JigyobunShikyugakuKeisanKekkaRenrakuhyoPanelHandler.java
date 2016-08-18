@@ -67,6 +67,7 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelHandler {
                 コントロールの非活性化();
                 throw new PessimisticLockingException();
             }
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(発行する, false);
             div.getCclKaigoAtenaInfo().initialize(識別コード);
             被保険者番号存在チェック(被保険者番号);
             div.getCcdKaigoShikakuKihon().initialize(被保険者番号);
@@ -276,7 +277,6 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelHandler {
     public void 前排他キーのセット(RString 被保険者番号) {
         LockingKey 排他キー = new LockingKey(DBCHIHOKENSHANO.concat(被保険者番号));
         RealInitialLocker.lock(排他キー);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(発行する, false);
     }
 
     /**
