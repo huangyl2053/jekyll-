@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000022.Riy
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc2000022.FutanWariaiSokujiKouseiServiceData;
 import jp.co.ndensan.reams.db.dbc.service.core.futanwariai.RiyoshaFutanWariaiSokujiKouseiFinder;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariai;
-import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiKonkyo;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisaiBuilder;
@@ -32,23 +31,22 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 利用者負担割合即時更正_修正です。
@@ -59,7 +57,6 @@ public class DBC2000022PanelAll {
 
     private static final RString RSTONE = new RString("1");
     private static final RString RSTTWO = new RString("2");
-    private static final RString RSTFORTY = new RString("40");
     private static final RString DBCUC20021 = new RString("DBCUC20021");
     private static final RString DBCUC20022 = new RString("DBCUC20022");
     private static final RString DBCUC20023 = new RString("DBCUC20023");
@@ -281,6 +278,7 @@ public class DBC2000022PanelAll {
             return ResponseData.of(div).addValidationMessages(validPairs2).respond();
         }
         getHandler(div).kakuteiShori(利用者負担割合, holder);
+        ViewStateHolder.put(ViewStateKeys.利用者負担割合明細, holder);
         return ResponseData.of(div).respond();
     }
 
@@ -319,30 +317,7 @@ public class DBC2000022PanelAll {
                     holder.get利用者負担割合明細(),
                     利用者負担割合根拠list);
         } else {
-            RiyoshaFutanWariaiBuilder 利用者負担割合builder = 利用者負担割合.createBuilderForEdit();
-            if (!div.getChkShoHakkoFuyo().getSelectedKeys().isEmpty()) {
-                利用者負担割合builder.set発行不要フラグ(true);
-            }
-            if (!div.getChkShokkenHenko().getSelectedKeys().isEmpty()) {
-                利用者負担割合builder.set職権変更フラグ(true);
-            }
-            利用者負担割合builder.set発行区分(div.getDdlHakkoKubun().getSelectedKey());
-            利用者負担割合builder.set発行日(FlexibleDate.EMPTY);
-            利用者負担割合builder.set交付日(FlexibleDate.EMPTY);
-            if (DBC2000022StateName.新規.getName().equals(処理モード)) {
-                利用者負担割合builder.set更正事由(利用者負担割合.get更正事由());
-            }
-            if (DBC2000022StateName.修正.getName().equals(処理モード)) {
-                利用者負担割合builder.set更正事由(new Code(RSTFORTY));
-            }
-
-            利用者負担割合 = 利用者負担割合builder.build();
-            if (DBC2000022StateName.新規.getName().equals(処理モード)) {
-                利用者負担割合.toEntity().setState(EntityDataState.Added);
-            }
-            if (DBC2000022StateName.修正.getName().equals(処理モード)) {
-                利用者負担割合.toEntity().setState(EntityDataState.Modified);
-            }
+            getHandler(div).update利用者負担割合情報(利用者負担割合, 処理モード);
             ViewStateHolder.put(ViewStateKeys.利用者負担割合, 利用者負担割合);
             ValidationMessageControlPairs validPairs1 = getCheckHandler(div).枝番間期間チェック();
             if (validPairs1.iterator().hasNext()) {
@@ -372,12 +347,12 @@ public class DBC2000022PanelAll {
     }
 
     /**
-     * 「負担割合証を印刷する」ボタンの処理です。
+     * 「負担割合証を印刷する」ボタンの処理前のチェック処理です。
      *
      * @param div div
      * @return ResponseData<DBC2000022PanelAllDiv>
      */
-    public ResponseData<DBC2000022PanelAllDiv> onClick_btnPrint(DBC2000022PanelAllDiv div) {
+    public ResponseData<DBC2000022PanelAllDiv> onClick_btnPrintCheck(DBC2000022PanelAllDiv div) {
         ValidationMessageControlPairs validPairs = getCheckHandler(div).発行日と交付日必須入力チェック();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -385,22 +360,33 @@ public class DBC2000022PanelAll {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(
                     DbcQuestionMessages.負担割合証単票発行確認.getMessage().getCode(),
-                    DbcQuestionMessages.負担割合証単票発行確認.getMessage().evaluate());
+                    DbcQuestionMessages.負担割合証単票発行確認.getMessage().evaluate(),
+                    ButtonSelectPattern.OKCancel);
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
-            TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-            FutanWariaiSokujiKouseiHolder holder
-                    = ViewStateHolder.get(ViewStateKeys.利用者負担割合明細, FutanWariaiSokujiKouseiHolder.class);
-            getHandler(div).onClick_btnPrint(資格対象者, holder.get利用者負担割合明細());
-            RiyoshaFutanWariai 利用者負担割合 = ViewStateHolder.get(ViewStateKeys.利用者負担割合, RiyoshaFutanWariai.class);
-            getHandler(div).利用者負担割合編集(利用者負担割合);
-            ViewStateHolder.put(ViewStateKeys.利用者負担割合, 利用者負担割合);
-            getHandler(div).onClick_btnUpdate(資格対象者.get識別コード(),
-                    利用者負担割合, null, null);
-            getHandler(div).insert証交付回収(利用者負担割合);
-        }
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「負担割合証を印刷する」ボタンの処理です。
+     *
+     * @param div div
+     * @return ResponseData<SourceDataCollection>
+     */
+    public ResponseData<SourceDataCollection> onClick_btnPrint(DBC2000022PanelAllDiv div) {
+        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        FutanWariaiSokujiKouseiHolder holder
+                = ViewStateHolder.get(ViewStateKeys.利用者負担割合明細, FutanWariaiSokujiKouseiHolder.class);
+
+        SourceDataCollection collection = getHandler(div).onClick_btnPrint(資格対象者, holder.get利用者負担割合明細());
+
+        RiyoshaFutanWariai 利用者負担割合 = ViewStateHolder.get(ViewStateKeys.利用者負担割合, RiyoshaFutanWariai.class);
+        getHandler(div).利用者負担割合編集(利用者負担割合);
+        ViewStateHolder.put(ViewStateKeys.利用者負担割合, 利用者負担割合);
+        getHandler(div).onClick_btnUpdate(資格対象者.get識別コード(),
+                利用者負担割合, null, null);
+        getHandler(div).insert証交付回収(利用者負担割合);
+        return ResponseData.of(collection).respond();
     }
 
     /**

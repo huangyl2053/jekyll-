@@ -32,7 +32,6 @@ import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMe
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisaiBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisaiIdentifier;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishuBuilder;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
@@ -58,11 +57,11 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -81,6 +80,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
     private static final RString RSTZERO = new RString("0");
     private static final RString RSTONE = new RString("1");
     private static final RString RSTTWO = new RString("2");
+    private static final RString RSTFORTY = new RString("40");
     private static final RString CODE = new RString("0003");
     private static final RString 交付証種類 = new RString("003");
     private static final RString 負担割合証交付事由 = new RString("0016");
@@ -299,7 +299,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
         }
         mybatisParameter.setFlag(処理区分);
         FutanWariaiSokujiKouseiResult 利用者負担割合情報 = finder.get利用者負担割合情報(mybatisParameter);
-        if (利用者負担割合情報 != null) {
+        if (利用者負担割合情報 != null && !利用者負担割合情報.get利用者負担割合明細list().isEmpty()) {
             List<dgFutanWariai_Row> rowsData = new ArrayList<>();
             for (RiyoshaFutanWariaiMeisai 利用者負担割合明細 : 利用者負担割合情報.get利用者負担割合明細list()) {
                 rowsData.add(getDataGridRow(利用者負担割合明細, 処理区分));
@@ -307,9 +307,6 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             div.getDgFutanWariai().setDataSource(rowsData);
             set補足項目(new RiyoshaFutanWariai(利用者負担割合情報.toEntity()), null, 処理区分);
         } else {
-            if (利用者負担割合情報 != null) {
-                setヘッダ項目(new RiyoshaFutanWariai(利用者負担割合情報.toEntity()), RSTTWO, 年度);
-            }
             throw new ApplicationException(DbcErrorMessages.該当年度負担割合情報なし.getMessage());
         }
 
@@ -339,10 +336,8 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
         rowData.getSonotaGokeiShotoku().setValue(利用者負担割合明細.getその他の合計所得金額合計());
         rowData.setBiko(利用者負担割合明細.get更正理由());
         rowData.setLogicalDeletedFlag(利用者負担割合明細.get論理削除フラグ());
-        if (RSTONE.equals(処理区分) || RSTTWO.equals(処理区分)) {
-            if (利用者負担割合明細.get論理削除フラグ()) {
-                rowData.setRowBgColor(DataGridCellBgColor.bgColorLightRed);
-            }
+        if ((RSTONE.equals(処理区分) || RSTTWO.equals(処理区分)) && 利用者負担割合明細.get論理削除フラグ()) {
+            rowData.setRowBgColor(DataGridCellBgColor.bgColorLightRed);
         }
         return rowData;
     }
@@ -565,8 +560,9 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
      *
      * @param 資格対象者 TaishoshaKey
      * @param 利用者負担割合明細 List<RiyoshaFutanWariaiMeisai>
+     * @return SourceDataCollection
      */
-    public void onClick_btnPrint(TaishoshaKey 資格対象者, List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細) {
+    public SourceDataCollection onClick_btnPrint(TaishoshaKey 資格対象者, List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細) {
         FutanWariaisho futanWariaisho = FutanWariaisho.createInstance();
         FutanWariaiShoDivParameter parameter = new FutanWariaiShoDivParameter();
         parameter.setカナ氏名(div.getCcdKaigoAtenaInfo().get氏名カナ());
@@ -574,7 +570,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
         parameter.set氏名(div.getCcdKaigoAtenaInfo().get氏名漢字());
         parameter.set生年月日(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getShokaiData().getTxtSeinengappiYMD().getValue());
         parameter.set性別(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getShokaiData().getTxtSeibetsu().getValue());
-//        futanWariaisho.getSourceData(資格対象者.get識別コード(), 資格対象者.get被保険者番号(), parameter, RSTTWO);
+        return futanWariaisho.getSourceDataSinger(資格対象者.get識別コード(), 資格対象者.get被保険者番号(), parameter, RSTONE);
     }
 
     /**
@@ -688,7 +684,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             holder.addRiyoshaFutanWariaiMeisai(new利用者負担割合明細);
         }
         sort利用者負担割合明細(holder.get利用者負担割合明細());
-        ViewStateHolder.put(ViewStateKeys.利用者負担割合明細, holder);
+
         List<dgFutanWariai_Row> dataGridList = new ArrayList<>();
         for (RiyoshaFutanWariaiMeisai 明細 : holder.get利用者負担割合明細()) {
             dgFutanWariai_Row rowData = new dgFutanWariai_Row();
@@ -720,6 +716,39 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
         }
         div.getDgFutanWariai().setDataSource(dataGridList);
         編集項目をクリアする();
+    }
+
+    /**
+     * 利用者負担割合情報を保存します。
+     *
+     * @param 利用者負担割合 RiyoshaFutanWariai
+     * @param 処理モード RString
+     */
+    public void update利用者負担割合情報(RiyoshaFutanWariai 利用者負担割合, RString 処理モード) {
+        RiyoshaFutanWariaiBuilder 利用者負担割合builder = 利用者負担割合.createBuilderForEdit();
+        if (!div.getChkShoHakkoFuyo().getSelectedKeys().isEmpty()) {
+            利用者負担割合builder.set発行不要フラグ(true);
+        }
+        if (!div.getChkShokkenHenko().getSelectedKeys().isEmpty()) {
+            利用者負担割合builder.set職権変更フラグ(true);
+        }
+        利用者負担割合builder.set発行区分(div.getDdlHakkoKubun().getSelectedKey());
+        利用者負担割合builder.set発行日(FlexibleDate.EMPTY);
+        利用者負担割合builder.set交付日(FlexibleDate.EMPTY);
+        if (DBC2000022StateName.新規.getName().equals(処理モード)) {
+            利用者負担割合builder.set更正事由(利用者負担割合.get更正事由());
+        }
+        if (DBC2000022StateName.修正.getName().equals(処理モード)) {
+            利用者負担割合builder.set更正事由(new Code(RSTFORTY));
+        }
+
+        利用者負担割合 = 利用者負担割合builder.build();
+        if (DBC2000022StateName.新規.getName().equals(処理モード)) {
+            利用者負担割合.toEntity().setState(EntityDataState.Added);
+        }
+        if (DBC2000022StateName.修正.getName().equals(処理モード)) {
+            利用者負担割合.toEntity().setState(EntityDataState.Modified);
+        }
     }
 
     private FutanWariaiSokujiKouseiResult setDataGridInfo(RString 処理区分) {
