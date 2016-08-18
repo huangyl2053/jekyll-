@@ -139,7 +139,8 @@ public class HonsanteiIdoHandler {
 
         // TODO TEST
 //        RDate date = RDate.getNowDate();
-        RDate date = new RDate("20161129");
+        RString testDate = DbBusinessConfig.get(ConfigNameDBB.年額計算_端数調整対象, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        RDate date = new RDate(testDate.toString());
         int 境界日付 = date.getLastDay() - Integer.valueOf(DbBusinessConfig.get(
                 ConfigNameDBB.日付関連_更正月判定日数, date, SubGyomuCode.DBB介護賦課).toString());
         int 日 = date.getDayValue();
