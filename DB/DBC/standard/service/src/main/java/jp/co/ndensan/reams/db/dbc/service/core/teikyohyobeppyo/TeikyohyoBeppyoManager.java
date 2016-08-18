@@ -6,12 +6,11 @@
 package jp.co.ndensan.reams.db.dbc.service.core.teikyohyobeppyo;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.TreeMap;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KubunGendo;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KyufuJikoSakuseiEntityResult;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KyufuJikoSakuseiResult;
@@ -28,8 +27,8 @@ import jp.co.ndensan.reams.db.dbc.service.core.jigosakuseimeisaitouroku.JigoSaku
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -44,7 +43,7 @@ public class TeikyohyoBeppyoManager {
     private static final RString 他事業者 = new RString("他事業者");
     private static final RString 他事業者合計 = new RString("他事業者合計");
     private static final RString 零 = new RString("0");
-    private static final RString 基準日R = new RString("基準日");
+    private static final RString 基準年月日R = new RString("基準日");
     private static final RString 被保険者番号R = new RString("被保険者番号");
     private static final RString 自己作成計画年月R = new RString("自己作成計画年月");
     private static final RString 対象年月R = new RString("対象年月");
@@ -74,14 +73,16 @@ public class TeikyohyoBeppyoManager {
      *
      * @param 被保険者番号 HihokenshaNo
      * @param 自己作成計画年月 FlexibleYearMonth
+     * @param 作成年月日 FlexibleDate
      * @return TeikyohyoBeppyoEntityResult
      */
-    public TeikyohyoBeppyoEntityResult get被保険者情報(HihokenshaNo 被保険者番号, FlexibleYearMonth 自己作成計画年月) {
+    public TeikyohyoBeppyoEntityResult get被保険者情報(HihokenshaNo 被保険者番号, FlexibleYearMonth 自己作成計画年月,
+            FlexibleDate 作成年月日) {
 
         TeikyohyoBeppyoEntityResult result = new TeikyohyoBeppyoEntityResult();
         ITeikyohyoBeppyoMapper mapper = mapperProvider.create(ITeikyohyoBeppyoMapper.class);
         Map<String, Object> map = new HashMap<>();
-        map.put(基準日R.toString(), RDate.getNowDate().toDateString());
+        map.put(基準年月日R.toString(), 作成年月日);
         map.put(被保険者番号R.toString(), 被保険者番号);
         map.put(自己作成計画年月R.toString(), 自己作成計画年月);
         TeikyohyoBeppyoEntity entity = mapper.get被保険者情報(map);
@@ -185,13 +186,14 @@ public class TeikyohyoBeppyoManager {
             FlexibleYearMonth 対象年月, int 履歴番号, FlexibleYearMonth 自己作成計画年月,
             List<KyufuJikoSakuseiEntityResult> 計画resultList, KyufuJikoSakuseiEntityResult 合計Entity) {
 
-        Map<JigyoshaNo, List<KyufuJikoSakuseiEntityResult>> 事業者別マップ = new HashMap<>();
+        Map<JigyoshaNo, List<KyufuJikoSakuseiEntityResult>> 事業者別マップ = new TreeMap<>();
         for (KyufuJikoSakuseiEntityResult result : 計画resultList) {
-            List<KyufuJikoSakuseiEntityResult> 新規List = new ArrayList<>();
             if (事業者別マップ.get(result.get事業者コード()) == null) {
-                合計Entity.set事業者(他事業者);
-                合計Entity.setサービス(他事業者合計);
-                新規List.add(合計Entity);
+                List<KyufuJikoSakuseiEntityResult> 新規List = new ArrayList<>();
+                KyufuJikoSakuseiEntityResult 新規Result = result新規(合計Entity);
+                新規Result.set事業者(他事業者);
+                新規Result.setサービス(他事業者合計);
+                新規List.add(新規Result);
                 新規List.add(result);
                 事業者別マップ.put(result.get事業者コード(), 新規List);
             } else {
@@ -220,41 +222,54 @@ public class TeikyohyoBeppyoManager {
                         get(result.get事業者コード()).get(0).get全額利用者負担額().subtract(result.get全額利用者負担額()));
             }
         }
-        return setMap逆順(事業者別マップ);
+        return sortMapByKey逆順(事業者別マップ);
+    }
+
+    private KyufuJikoSakuseiEntityResult result新規(KyufuJikoSakuseiEntityResult result) {
+        KyufuJikoSakuseiEntityResult 新規Result = new KyufuJikoSakuseiEntityResult();
+        新規Result.set事業者(result.get事業者());
+        新規Result.setサービス(result.getサービス());
+        新規Result.set単位(result.get単位());
+        新規Result.set割引適用後率(result.get割引適用後率());
+        新規Result.set割引適用後単位(result.get割引適用後単位());
+        新規Result.set回数(result.get回数());
+        新規Result.setサービス単位(result.getサービス単位());
+        新規Result.set種類限度超過単位(result.get種類限度超過単位());
+        新規Result.set種類限度内単位(result.get種類限度内単位());
+        新規Result.set単位数単価(result.get単位数単価());
+        新規Result.set区分限度超過単位(result.get区分限度超過単位());
+        新規Result.set区分限度内単位(result.get区分限度内単位());
+        新規Result.set給付率(result.get給付率());
+        新規Result.set給付計画単位数(result.get給付計画単位数());
+        新規Result.set費用総額(result.get費用総額());
+        新規Result.set保険給付額(result.get保険給付額());
+        新規Result.set保険対象利用者負担額(result.get保険対象利用者負担額());
+        新規Result.set全額利用者負担額(result.get全額利用者負担額());
+        新規Result.set事業者コード(result.get事業者コード());
+        新規Result.setサービス種類コード(result.getサービス種類コード());
+        新規Result.setサービス項目コード(result.getサービス項目コード());
+        新規Result.setステータス(result.getステータス());
+        新規Result.set合計フラグ(result.is合計フラグ());
+        新規Result.set限度額対象外フラグ(result.get限度額対象外フラグ());
+        新規Result.set定額利用者負担単価金額(result.get定額利用者負担単価金額());
+        新規Result.set支給限度単位数(result.get支給限度単位数());
+        新規Result.set適用開始年月日(result.get適用開始年月日());
+        新規Result.set適用終了年月日(result.get適用終了年月日());
+        return 新規Result;
     }
 
     /**
      * 2.5 事業者別マップの全てList<給付計画自己作成Entity>を逆順にします。
      */
-    private Map<JigyoshaNo, List<KyufuJikoSakuseiEntityResult>> setMap逆順(
-            Map<JigyoshaNo, List<KyufuJikoSakuseiEntityResult>> 事業者別マップ) {
-
-        Set<JigyoshaNo> keySet = 事業者別マップ.keySet();
-        List<JigyoshaNo> keyList = new ArrayList<>();
-        for (JigyoshaNo key : keySet) {
-            keyList.add(key);
+    private Map<JigyoshaNo, List<KyufuJikoSakuseiEntityResult>> sortMapByKey逆順(
+            Map<JigyoshaNo, List<KyufuJikoSakuseiEntityResult>> 事業者別Map) {
+        if (事業者別Map == null || 事業者別Map.isEmpty()) {
+            return null;
         }
-        List<JigyoshaNo> keyList逆順 = setKeyListComparator(keyList);
-        Map<JigyoshaNo, List<KyufuJikoSakuseiEntityResult>> 事業者別マップ逆順 = new HashMap<>();
-        for (int i = 0; i < keyList逆順.size(); i++) {
-            事業者別マップ逆順.put(keyList逆順.get(i), 事業者別マップ.get(keyList逆順.get(i)));
-        }
-        return 事業者別マップ逆順;
-    }
-
-    private List<JigyoshaNo> setKeyListComparator(List<JigyoshaNo> 事業者番号List) {
-        if (事業者番号List.isEmpty()) {
-            return 事業者番号List;
-        }
-        Collections.sort(事業者番号List,
-                new Comparator<JigyoshaNo>() {
-                    @Override
-                    public int compare(JigyoshaNo arg0, JigyoshaNo arg1) {
-                        return arg1.compareTo(arg0);
-                    }
-                }
-        );
-        return 事業者番号List;
+        Map<JigyoshaNo, List<KyufuJikoSakuseiEntityResult>> 事業者別Map逆順 = new TreeMap<
+                JigyoshaNo, List<KyufuJikoSakuseiEntityResult>>(new MapKeyComparator());
+        事業者別Map逆順.putAll(事業者別Map);
+        return 事業者別Map逆順;
     }
 
     /**
@@ -316,6 +331,18 @@ public class TeikyohyoBeppyoManager {
             resultList.add(result);
         }
         return resultList;
+    }
+
+}
+
+/**
+ * カスタムの比較器クラスです。
+ */
+class MapKeyComparator implements Comparator<JigyoshaNo> {
+
+    @Override
+    public int compare(JigyoshaNo arg0, JigyoshaNo arg1) {
+        return arg1.compareTo(arg0);
     }
 
 }

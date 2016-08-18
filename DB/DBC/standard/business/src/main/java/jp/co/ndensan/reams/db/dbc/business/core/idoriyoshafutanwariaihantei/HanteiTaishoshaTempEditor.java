@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.business.core.idoriyoshafutanwariaihantei;
 
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc180020.IdoDateTyuushutuKyoutsuuProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.idoriyoshafutanwariaihantei.HanteiTaishoshaTemp;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.idoriyoshafutanwariaihantei.IdoRiyoshaDateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.HanteiTaishoshaTempEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;

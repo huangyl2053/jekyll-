@@ -57,9 +57,11 @@ public class ServiceTeikyohyoBeppyoPrintMainHandler {
 
         div.getTxtJikoSakuseiKeikakuYm().setVisible(true);
         ServiceRiyohyoBeppyoParameter param = new ServiceRiyohyoBeppyoParameter();
+        FlexibleDate 作成年月日 = new FlexibleDate(div.getTxtSakuseiYmd().getValue().toDateString());
         FlexibleYearMonth 自己作成計画年月 = new FlexibleYearMonth(div.getTxtJikoSakuseiKeikakuYm().getValue().
                 getYearMonth().toDateString());
-        TeikyohyoBeppyoEntityResult 被保険者情報Result = manager.get被保険者情報(被保険者番号, 自己作成計画年月);
+        TeikyohyoBeppyoEntityResult 被保険者情報Result = manager.get被保険者情報(被保険者番号, 自己作成計画年月,
+                作成年月日);
         被保険者情報Result.set被保険者番号(被保険者番号);
         FlexibleYearMonth 対象年月 = 被保険者情報Result.get対象年月();
         int 履歴番号 = 被保険者情報Result.get履歴番号();
@@ -67,7 +69,7 @@ public class ServiceTeikyohyoBeppyoPrintMainHandler {
         List<KyufuJikoSakuseiEntityResult> 帳票データ = manager.帳票データ抽出(被保険者番号, 対象年月, 履歴番号,
                 自己作成計画年月);
         KyufuJikoSakuseiEntityResult 合計Entity = 帳票データ.get(帳票データ.size() - 1);
-        List<KyufuJikoSakuseiEntityResult> 計画EntityList = 帳票データ.subList(0, 帳票データ.size() - 1 - 1);
+        List<KyufuJikoSakuseiEntityResult> 計画EntityList = 帳票データ.subList(0, 帳票データ.size() - 1);
         合計Entity = manager.合計Entity単位設定(被保険者番号, 居宅総合事業区分, 自己作成計画年月, 合計Entity);
         KyufuJikoSakuseiEntityResult 合計Entity_合計情報用 = result新規(合計Entity);
         KyufuJikoSakuseiEntityResult 合計Entity_帳票情報用 = result新規(合計Entity);
@@ -75,7 +77,7 @@ public class ServiceTeikyohyoBeppyoPrintMainHandler {
         param.set帳票情報マップ(manager.creat事業者別マップ(被保険者番号, 対象年月, 履歴番号, 自己作成計画年月,
                 計画EntityList, 合計Entity_帳票情報用));
         param.set帳票ヘッダー(被保険者情報Result);
-        param.set作成日時(new FlexibleDate(div.getTxtSakuseiYmd().getValue().toDateString()));
+        param.set作成日時(作成年月日);
         param.set利用年月(自己作成計画年月);
         param.set種類別支給限度情報(manager.get種類別支給限度情報(自己作成計画年月, 計画EntityList));
         param.set短期入所情報(manager.get短期入所利用日数(被保険者番号, 対象年月, 履歴番号, 自己作成計画年月));

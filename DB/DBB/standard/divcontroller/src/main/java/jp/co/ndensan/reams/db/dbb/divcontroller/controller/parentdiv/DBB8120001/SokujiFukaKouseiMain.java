@@ -216,41 +216,6 @@ public class SokujiFukaKouseiMain {
         return ResponseData.of(div).setState(DBB8120001StateName.完了);
     }
 
-    private ResponseData<SokujiFukaKouseiMainDiv> getValidate特徴警告(
-            ValidationMessageControlPairs valid,
-            SokujiFukaKouseiMainValidationHandler validationHandler,
-            SokujiFukaKouseiMainDiv div,
-            boolean is保存の確認,
-            boolean is期別特徴停止の確認) {
-        valid = validationHandler.validate特徴警告();
-        if (valid.iterator().hasNext()
-                && !チェック済み.equals(div.getIsHasWarningFlag())
-                && (!ResponseHolder.isWarningIgnoredRequest()
-                || (ResponseHolder.getButtonType() == null && ResponseHolder.isWarningIgnoredRequest())
-                || is保存の確認
-                || is期別特徴停止の確認)) {
-            div.setIsHasWarningFlag(チェック済み);
-            return ResponseData.of(div).addValidationMessages(valid).respond();
-        }
-        return null;
-    }
-
-    private ResponseData<SokujiFukaKouseiMainDiv> getValidate普徴警告(
-            ValidationMessageControlPairs valid,
-            SokujiFukaKouseiMainValidationHandler validationHandler,
-            SokujiFukaKouseiMainDiv div,
-            boolean is保存の確認,
-            boolean is期別特徴停止の確認) {
-        valid = validationHandler.validate普徴警告();
-        if (valid.iterator().hasNext()
-                && (!ResponseHolder.isWarningIgnoredRequest()
-                || is保存の確認
-                || is期別特徴停止の確認)) {
-            return ResponseData.of(div).addValidationMessages(valid).respond();
-        }
-        return null;
-    }
-
     /**
      * 「再検索」ボタン押下時のイベントメソッドです。
      *
@@ -301,11 +266,7 @@ public class SokujiFukaKouseiMain {
             HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
             LockingKey 前排他キー = new LockingKey(DBB_HIHOKENSHANO.concat(被保険者番号.getColumnValue()));
             RealInitialLocker.release(前排他キー);
-            if (ViewStateHolder.get(ViewStateKeys.is経由該当者一覧画面, Boolean.class)) {
-                return ResponseData.of(div).forwardWithEventName(DBB8120001TransitionEventName.検索結果一覧に戻る).respond();
-            } else {
-                return ResponseData.of(div).forwardWithEventName(DBB8120001TransitionEventName.再検索する).respond();
-            }
+            return ResponseData.of(div).forwardWithEventName(DBB8120001TransitionEventName.再検索する).respond();
         } else {
             return ResponseData.of(div).forwardWithEventName(DBB8120001TransitionEventName.前画面に戻る).respond();
         }
@@ -354,6 +315,7 @@ public class SokujiFukaKouseiMain {
                 更正前後徴収方法, is本算定処理済フラグ);
         ViewStateHolder.put(ViewStateKeys.更正前, koseiZengoFuka.get更正前());
         ViewStateHolder.put(ViewStateKeys.更正後, koseiZengoFuka.get更正後());
+        ViewStateHolder.put(ViewStateKeys.通知書番号, 通知書番号);
         return getResponseData(div);
     }
 
@@ -655,5 +617,40 @@ public class SokujiFukaKouseiMain {
     private boolean is本算定後(NendobunFukaList 更正前賦課リスト) {
         HonsanteiIkoHantei honsanteiIkoHantei = HonsanteiIkoHantei.createInstance();
         return honsanteiIkoHantei.is本算定後(更正前賦課リスト.get最新賦課の情報());
+    }
+
+    private ResponseData<SokujiFukaKouseiMainDiv> getValidate特徴警告(
+            ValidationMessageControlPairs valid,
+            SokujiFukaKouseiMainValidationHandler validationHandler,
+            SokujiFukaKouseiMainDiv div,
+            boolean is保存の確認,
+            boolean is期別特徴停止の確認) {
+        valid = validationHandler.validate特徴警告();
+        if (valid.iterator().hasNext()
+                && !チェック済み.equals(div.getIsHasWarningFlag())
+                && (!ResponseHolder.isWarningIgnoredRequest()
+                || (ResponseHolder.getButtonType() == null && ResponseHolder.isWarningIgnoredRequest())
+                || is保存の確認
+                || is期別特徴停止の確認)) {
+            div.setIsHasWarningFlag(チェック済み);
+            return ResponseData.of(div).addValidationMessages(valid).respond();
+        }
+        return null;
+    }
+
+    private ResponseData<SokujiFukaKouseiMainDiv> getValidate普徴警告(
+            ValidationMessageControlPairs valid,
+            SokujiFukaKouseiMainValidationHandler validationHandler,
+            SokujiFukaKouseiMainDiv div,
+            boolean is保存の確認,
+            boolean is期別特徴停止の確認) {
+        valid = validationHandler.validate普徴警告();
+        if (valid.iterator().hasNext()
+                && (!ResponseHolder.isWarningIgnoredRequest()
+                || is保存の確認
+                || is期別特徴停止の確認)) {
+            return ResponseData.of(div).addValidationMessages(valid).respond();
+        }
+        return null;
     }
 }
