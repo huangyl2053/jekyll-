@@ -95,8 +95,6 @@ public class SashitomeYokokuTsuchishoNigoEditor implements ISashitomeYokokuTsuch
         source.gyoseiku1 = sofubutsuAtesakiSource.gyoseiku;
         source.jushoText = sofubutsuAtesakiSource.jushoText;
         source.katagakiText = sofubutsuAtesakiSource.katagakiText;
-
-        // TODO RSE項目名が設計書と違い
         source.shimei3 = sofubutsuAtesakiSource.shimei1;
         source.shimei4 = sofubutsuAtesakiSource.shimei2;
         source.katagaki3 = sofubutsuAtesakiSource.katagaki1;
@@ -104,7 +102,6 @@ public class SashitomeYokokuTsuchishoNigoEditor implements ISashitomeYokokuTsuch
         source.jusho4 = sofubutsuAtesakiSource.jusho1;
         source.jusho5 = sofubutsuAtesakiSource.jusho2;
         source.jusho6 = sofubutsuAtesakiSource.jusho3;
-
         source.dainoKubunMei = sofubutsuAtesakiSource.dainoKubunMei;
         source.samabunShimeiText = sofubutsuAtesakiSource.samabunShimeiText;
         source.kakkoLeft1 = sofubutsuAtesakiSource.kakkoLeft1;
