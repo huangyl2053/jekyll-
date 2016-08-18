@@ -541,23 +541,11 @@ public class SokujiFukaKouseiMainHandler {
     }
 
     private boolean is異なる(int num1, int num2) {
-        if (num1 == null && num2 == null) {
-            return Boolean.FALSE;
-        }
-        if (num1 != null && num1 == num2) {
-            return Boolean.FALSE;
-        }
-        return Boolean.TRUE;
+        return num1 != num2;
     }
 
     private boolean is異なる(long num1, long num2) {
-        if (num1 == null && num2 == null) {
-            return Boolean.FALSE;
-        }
-        if (num1 != null && num1 == num2) {
-            return Boolean.FALSE;
-        }
-        return Boolean.TRUE;
+        return num1 != num2;
     }
 
     private boolean is異なる(FlexibleDate date1, FlexibleDate date2) {
