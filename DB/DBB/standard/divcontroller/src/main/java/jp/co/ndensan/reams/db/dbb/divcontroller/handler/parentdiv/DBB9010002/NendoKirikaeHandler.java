@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RYear;
 /**
  * 年度切替のクラスです
  *
- * @reamsid_L DBB_5722_010 zhengshenlei
+ * @reamsid_L DBB-5722-010 zhengshenlei
  */
 public class NendoKirikaeHandler {
 
