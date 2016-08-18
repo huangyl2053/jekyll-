@@ -62,8 +62,6 @@ public class YokaigoJissiJyokyohyoMybatisParameter implements IMyBatisParameter 
             Code 開始地区コード,
             Code 終了地区コード,
             RString 集計単位,
-            FlexibleDate 対象年月日From,
-            FlexibleDate 対象年月日To,
             RString psmShikibetsuTaisho) {
         if (導入形態コード.equals(導入形態111)) {
             this.is導入形態コード111 = true;
@@ -94,8 +92,6 @@ public class YokaigoJissiJyokyohyoMybatisParameter implements IMyBatisParameter 
         } else if (集計単位.equals(集計単位法令)) {
             this.is申請区分法令 = true;
         }
-        this.対象年月日From = 対象年月日From;
-        this.対象年月日To = 対象年月日To;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
     }
 }
