@@ -39,4 +39,5 @@ public class NinteiShinseiJohoRelateEntity {
     private Code seibetsu;
     private YubinNo yubinNo;
     private AtenaJusho jusho;
+    private int ikenshoIraiRirekiNo;
 }

@@ -151,12 +151,21 @@ public class NinteiShinseiJohoIraiJohoData {
     /**
      * 厚労省IF識別コードを返します。
      *
-     * @return 主治医氏名
+     * @return 厚労省IF識別コード
      */
     public RString get厚労省IF識別コード() {
         if (relateEntity.getKoroshoIfShikibetsuCode() != null && !relateEntity.getKoroshoIfShikibetsuCode().isEmpty()) {
             return relateEntity.getKoroshoIfShikibetsuCode().value();
         }
         return RString.EMPTY;
+    }
+
+    /**
+     * 主治医意見書作成依頼履歴番号を返します。
+     *
+     * @return 主治医意見書作成依頼履歴番号
+     */
+    public int get主治医意見書作成依頼履歴番号() {
+        return relateEntity.getIkenshoIraiRirekiNo();
     }
 }

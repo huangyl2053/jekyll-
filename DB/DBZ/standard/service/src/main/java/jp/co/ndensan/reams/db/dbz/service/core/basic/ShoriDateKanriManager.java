@@ -619,4 +619,34 @@ public class ShoriDateKanriManager {
         }
         return SearchResult.of(shoriDateKanriList, 0, false);
     }
+
+    /**
+     * 処理日付管理マスタを返します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 処理名 ShoriName
+     * @param 年度 Nendo
+     * @param 市町村コード ShichosonCode
+     * @return List<ShoriDateKanri>
+     */
+    @Transaction
+    public List<ShoriDateKanri> get処理日付管理マスタ(
+            SubGyomuCode サブ業務コード,
+            RString 処理名,
+            FlexibleYear 年度,
+            LasdecCode 市町村コード) {
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(年度メッセージ.toString()));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(市町村コードメッセージ.toString()));
+
+        List<ShoriDateKanri> result = new ArrayList<>();
+        List<DbT7022ShoriDateKanriEntity> entityList = dac.selectBySomeColumns(サブ業務コード, 処理名, 年度, 市町村コード);
+        for (DbT7022ShoriDateKanriEntity entity : entityList) {
+            entity.initializeMd5();
+            result.add(new ShoriDateKanri(entity));
+        }
+
+        return result;
+    }
 }

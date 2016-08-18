@@ -158,6 +158,7 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         KeyValueDataSource dataSourceBlank = new KeyValueDataSource();
         dataSourceList.add(dataSourceBlank);
+        // TODO QA1279
         List<UzT0007CodeEntity> costlist = CodeMaster.getCode(
                 SubGyomuCode.DBC介護給付, DBCCodeShubetsu.過誤申立事由_上２桁_様式番号.getコード(), FlexibleDate.getNowDate());
         for (UzT0007CodeEntity list : costlist) {

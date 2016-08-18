@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC8140011
 
 import java.util.Map;
 import java.util.Set;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanShikyuFushikyuKettei;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunketteitsuchisho.KogakuGassanShikyuKetteiTsuchisho;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunketteitsuchisho.KougakugassanShikyuketteiTsuuchishoOutputEntity;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
@@ -15,11 +14,9 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8140011.DBC8
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8140011.DBC8140011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8140011.KogakuGassanShikyuKetteiTsuchishoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8140011.KogakuGassanShikyuKetteiTsuchishoPanelHandler;
-import jp.co.ndensan.reams.db.dbc.service.core.kougakugassanshikyuketteitsuchisho.KougakuGassanShikyuKetteiTsuchisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
-import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -39,8 +36,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class KogakuGassanShikyuKetteiTsuchishoPanel {
 
-    private KougakugassanShikyuketteiTsuuchishoOutputEntity outputEntity;
-
     /**
      * 画面初期化のメソッドます。
      *
@@ -57,7 +52,8 @@ public class KogakuGassanShikyuKetteiTsuchishoPanel {
             if (new RString(DbcInformationMessages.被保険者でないデータ.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                return ResponseData.of(div).setState(DBC8140011StateName.Default);
+                getHandler(div).状態4();
+                return ResponseData.of(div).respond();
             }
 
         }
@@ -69,7 +65,7 @@ public class KogakuGassanShikyuKetteiTsuchishoPanel {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        return ResponseData.of(div).setState(DBC8140011StateName.支給決定通知書発行);
+        return ResponseData.of(div).respond();
 
     }
 
@@ -169,10 +165,7 @@ public class KogakuGassanShikyuKetteiTsuchishoPanel {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        JigyoKogakuGassanShikyuFushikyuKettei 事業高額合算支給不支給決定 = ViewStateHolder.
-                get(ViewStateKeys.事業高額合算支給不支給決定, JigyoKogakuGassanShikyuFushikyuKettei.class);
-        Koza koza = KougakuGassanShikyuKetteiTsuchisho.createInstance().getKozaJyoho(事業高額合算支給不支給決定.get口座ID());
-        outputEntity = getHandler(div).editKougakugassanShikyuketteiTsuuchisho(koza);
+        KougakugassanShikyuketteiTsuuchishoOutputEntity outputEntity = getHandler(div).editKougakugassanShikyuketteiTsuuchisho();
         RString データ有無 = outputEntity.getデータ有無();
         pairs = getHandler(div).高額合算支給情報存在エラーチェック(データ有無);
         if (pairs.iterator().hasNext()) {
@@ -188,6 +181,7 @@ public class KogakuGassanShikyuKetteiTsuchishoPanel {
      * @return ResponseData
      */
     public ResponseData<SourceDataCollection> onClick_btnReportPublish(KogakuGassanShikyuKetteiTsuchishoPanelDiv div) {
+        KougakugassanShikyuketteiTsuuchishoOutputEntity outputEntity = getHandler(div).editKougakugassanShikyuketteiTsuuchisho();
         KogakuGassanShikyuKetteiTsuchisho tsuchisho = outputEntity.get事業分高額合算支給決定通知書();
         getHandler(div).データ更新();
         getHandler(div).set更新完了メッセージ();
