@@ -21,9 +21,12 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -34,6 +37,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBZ-1300-110 yaodongsheng
  */
 public class NinteiShinseiTodokedesha {
+
+    private static final RString 管内 = new RString("key0");
+    private static final RString 管外 = new RString("key1");
 
     /**
      * 認定区分radがonChangeです。
@@ -46,12 +52,16 @@ public class NinteiShinseiTodokedesha {
             setInput(div);
         }
         if (ShinseiTodokedeDaikoKubunCode.本人.getCode().equals(div.getDdlTodokledeDaikoKubun().getSelectedKey())) {
-            div.setHdnShimei(div.getTxtShimei().getValue());
-            div.setHdnKanaShimei(div.getTxtKanaShimei().getValue());
-            div.setHdnTsudukigara(div.getTxtHonninKankeisei().getValue());
-            div.setHdnYubinNo(div.getTxtYubinNo().getValue().getColumnValue());
-            div.setHdnJusho(div.getCcdZenkokuJushoInput().get全国住所名称());
-            div.setHdnTelNo(div.getTxtTelNo().getDomain().value());
+            div.getTxtShimei().setValue(div.getHdnShimei());
+            div.getTxtKanaShimei().setValue(div.getHdnKanaShimei());
+            div.getTxtHonninKankeisei().setValue(div.getHdnTsudukigara());
+            if (管内.equals(div.getRadKannaiKangai().getSelectedKey())) {
+                div.getTxtYubinNo().setValue(new YubinNo(div.getHdnYubinNo()));
+                div.getCcdChoikiInput().load(ChoikiCode.EMPTY, div.getHdnJusho());
+            } else if (管外.equals(div.getRadKannaiKangai().getSelectedKey())) {
+                div.getCcdZenkokuJushoInput().load(ZenkokuJushoCode.EMPTY, div.getHdnJusho(), new YubinNo(div.getHdnYubinNo()));
+            }
+            div.getTxtTelNo().setDomain(new TelNo(div.getHdnTelNo()));
         } else if (ShinseiTodokedeDaikoKubunCode.家族.getCode().equals(div.getDdlTodokledeDaikoKubun().getSelectedKey())) {
             div.getBtnSetaiIchiran().setDisabled(false);
         } else if (ShinseiTodokedeDaikoKubunCode.委任.getCode().equals(div.getDdlTodokledeDaikoKubun().getSelectedKey())) {
