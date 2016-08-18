@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * MapperIFの戻り値
  *
- * @reamsid_L DBD-3038-050 tianyh
+ * @reamsid_L DBD-3830-050 tianyh
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
