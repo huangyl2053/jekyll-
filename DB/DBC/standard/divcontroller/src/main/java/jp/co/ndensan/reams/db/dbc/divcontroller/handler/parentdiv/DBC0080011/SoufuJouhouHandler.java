@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.soufujouhou.SoufuJouhouBusiness;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0080011.SoufuJouhouDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0080011.dgSofuIchiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
@@ -36,10 +37,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 public class SoufuJouhouHandler {
 
     private final SoufuJouhouDiv div;
-    private static final RString 広域 = new RString("111");
     private static final RString 市町村識別ID_00 = new RString("00");
-    private static final RString 市町村識別ID_01 = new RString("01");
-    private static final RString 市町村識別ID_99 = new RString("99");
     private static final RString キー = new RString("000000");
     private static final int 連番_4 = 4;
 
@@ -61,7 +59,7 @@ public class SoufuJouhouHandler {
      */
     public void onLoad(ShichosonSecurityJoho 市町村情報, List<AuthorityItem> 市町村識別ID, List<KoikiZenShichosonJoho> 構成市町村) {
         List<KeyValueDataSource> list = new ArrayList<>();
-        if (広域.equals(市町村情報.get導入形態コード().value())) {
+        if (DonyuKeitaiCode.事務広域.getCode().equals(市町村情報.get導入形態コード().value())) {
             div.getDdlShichosonName().setDisplayNone(false);
             div.getDdlShichosonName().setVisible(true);
             if (!市町村識別ID.isEmpty() && 市町村識別ID_00.equals(市町村識別ID.get(0).getItemId())) {
@@ -80,8 +78,7 @@ public class SoufuJouhouHandler {
                     list.add(key);
                 }
             }
-            if (!市町村識別ID.isEmpty() && (市町村識別ID_01.equals(市町村識別ID.get(0).getItemId())
-                    || 市町村識別ID_99.equals(市町村識別ID.get(0).getItemId()))) {
+            if (!市町村識別ID.isEmpty() && !市町村識別ID_00.equals(市町村識別ID.get(0).getItemId())) {
                 KeyValueDataSource key = new KeyValueDataSource();
                 RStringBuilder builder = new RStringBuilder();
                 builder.append(市町村情報.get市町村情報().get市町村コード().value());
@@ -100,7 +97,7 @@ public class SoufuJouhouHandler {
     }
 
     /**
-     * 再審査申立決定情報照会を初期化です。
+     * 再審査申立決定情報照会を検索です。
      *
      * @param 再審査申立書情報Business 再審査申立書情報
      */

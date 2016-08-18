@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001.dgTo
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
@@ -86,6 +87,7 @@ public class IraiJohoDataTorikomiHandler {
                 dgTorikomiFileIchiran_Row row1 = rowList.get(i);
                 row1.setShinseishoKanriNo(nullToEmpty(ninteiShinseiJohoList.get(i).get申請書管理番号()));
                 row1.setKoroshoIfShikibetsuCode(nullToEmpty(ninteiShinseiJohoList.get(i).get厚労省IF識別コード()));
+                row1.getIkenshoIraiRirekiNo().setValue(new Decimal(ninteiShinseiJohoList.get(i).get主治医意見書作成依頼履歴番号()));
                 rowlist.add(row1);
                 dgTorikomiFileIchiran_Row row2 = rowList.get(i + 1);
                 row2.setHokenshaBango(nullToEmpty(ninteiShinseiJohoList.get(i).get保険者番号()));
@@ -98,11 +100,15 @@ public class IraiJohoDataTorikomiHandler {
                 row2.setJyusyo(nullToEmpty(ninteiShinseiJohoList.get(i).get住所()));
                 row2.setIryouKikanMei(nullToEmpty(ninteiShinseiJohoList.get(i).get医療機関名称()));
                 row2.setShuziiMei(nullToEmpty(ninteiShinseiJohoList.get(i).get主治医氏名()));
+                row2.setShinseishoKanriNo(nullToEmpty(ninteiShinseiJohoList.get(i).get申請書管理番号()));
+                row2.setKoroshoIfShikibetsuCode(nullToEmpty(ninteiShinseiJohoList.get(i).get厚労省IF識別コード()));
+                row2.getIkenshoIraiRirekiNo().setValue(new Decimal(ninteiShinseiJohoList.get(i).get主治医意見書作成依頼履歴番号()));
                 rowlist.add(row2);
             } else {
                 dgTorikomiFileIchiran_Row row1 = rowList.get(2 * i);
                 row1.setShinseishoKanriNo(nullToEmpty(ninteiShinseiJohoList.get(i).get申請書管理番号()));
                 row1.setKoroshoIfShikibetsuCode(nullToEmpty(ninteiShinseiJohoList.get(i).get厚労省IF識別コード()));
+                row1.getIkenshoIraiRirekiNo().setValue(new Decimal(ninteiShinseiJohoList.get(i).get主治医意見書作成依頼履歴番号()));
                 rowlist.add(row1);
                 dgTorikomiFileIchiran_Row row2 = rowList.get(2 * i + 1);
                 row2.setHokenshaBango(nullToEmpty(ninteiShinseiJohoList.get(i).get保険者番号()));
@@ -115,6 +121,9 @@ public class IraiJohoDataTorikomiHandler {
                 row2.setJyusyo(nullToEmpty(ninteiShinseiJohoList.get(i).get住所()));
                 row2.setIryouKikanMei(nullToEmpty(ninteiShinseiJohoList.get(i).get医療機関名称()));
                 row2.setShuziiMei(nullToEmpty(ninteiShinseiJohoList.get(i).get主治医氏名()));
+                row2.setShinseishoKanriNo(nullToEmpty(ninteiShinseiJohoList.get(i).get申請書管理番号()));
+                row2.setKoroshoIfShikibetsuCode(nullToEmpty(ninteiShinseiJohoList.get(i).get厚労省IF識別コード()));
+                row2.getIkenshoIraiRirekiNo().setValue(new Decimal(ninteiShinseiJohoList.get(i).get主治医意見書作成依頼履歴番号()));
                 rowlist.add(row2);
             }
         }

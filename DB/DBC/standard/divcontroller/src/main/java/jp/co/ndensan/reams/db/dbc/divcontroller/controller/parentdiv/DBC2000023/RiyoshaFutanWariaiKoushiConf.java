@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -28,8 +27,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @reamsid_L DBC-5010-012 lijian
  */
 public class RiyoshaFutanWariaiKoushiConf {
-
-    private static final RString 発行する = new RString("btnPrint");
 
     /**
      * 画面初期化を実行します。
@@ -53,7 +50,6 @@ public class RiyoshaFutanWariaiKoushiConf {
      * @return ResponseData
      */
     public ResponseData<RiyoshaFutanWariaiKoushiConfDiv> onClick_btnPrint(RiyoshaFutanWariaiKoushiConfDiv div) {
-        CommonButtonHolder.setIsClientValidateByCommonButtonFieldName(発行する, true);
 
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(DbcQuestionMessages.負担割合証単票発行確認.getMessage()

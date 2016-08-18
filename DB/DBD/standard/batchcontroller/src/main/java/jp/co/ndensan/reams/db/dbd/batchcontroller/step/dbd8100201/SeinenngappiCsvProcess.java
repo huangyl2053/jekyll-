@@ -51,8 +51,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
  */
 public class SeinenngappiCsvProcess extends BatchProcessBase<HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity> {
 
-    private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hikazeinennkintaishousyajohotorikomi."
-            + "IResultIchirannMapper.get生年月日情報");
+    private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate."
+            + "hikazeinennkintaishousyajohotorikomi.IResultIchirannMapper.get生年月日情報");
     private SeinenngappiCsvProcessParameter parameter;
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBD900004"));
     private FileSpoolManager manager;
@@ -68,9 +68,13 @@ public class SeinenngappiCsvProcess extends BatchProcessBase<HikazeNenkinTaishos
     private static final RString 生年月日 = new RString("生年月日");
     private static final RString 性別 = new RString("性別");
     private static final RString カナ氏名 = new RString("カナ氏名");
-    private static final int Seven = 7;
-    private static final int Three = 3;
-    private static final int Zero = 0;
+    private static final int SEVEN = 7;
+    private static final int THREE = 3;
+    private static final int ZERO = 0;
+    private static final RString ONE = new RString("1");
+    private static final RString TWO = new RString("2");
+    private static final RString THREE_T = new RString("3");
+    private static final RString BAR = new RString("-");
     private static final ReportId REPORT_DBD900004 = ReportIdDBD.DBD900004.getReportId();
 
     @Override
@@ -94,6 +98,16 @@ public class SeinenngappiCsvProcess extends BatchProcessBase<HikazeNenkinTaishos
                 .build();
     }
 
+    private RString get出力順() {
+        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+        IOutputOrder order = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD900004, reamsLoginID, parameter.get出力順ID3());
+        RString 出力順 = RString.EMPTY;
+        if (order != null) {
+            出力順 = MyBatisOrderByClauseCreator.create(SeinenngappiCsvProperty.DBD900004_ResultListEnum.class, order);
+        }
+        return 出力順;
+    }
+
     @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(MAPPERPATH, parameter.toSeinenngappiCsvMybatisParameter(get出力順()));
@@ -102,7 +116,7 @@ public class SeinenngappiCsvProcess extends BatchProcessBase<HikazeNenkinTaishos
     @Override
     protected void process(HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity t) {
         SeinenngappiCsvEntity eucCsvEntity = new SeinenngappiCsvEntity();
-        EucCsvEntity(eucCsvEntity, t);
+        eucCsvEntity(eucCsvEntity, t);
         csvWriterJunitoJugo.writeLine(eucCsvEntity);
         ExpandedInformation expandedInformations
                 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), t.getHihokenshaNo().getColumnValue());
@@ -121,38 +135,28 @@ public class SeinenngappiCsvProcess extends BatchProcessBase<HikazeNenkinTaishos
         csvWriterJunitoJugo.close();
     }
 
-    private RString get出力順() {
-        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder order = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD900004, reamsLoginID, parameter.get出力順ID3());
-        RString 出力順 = RString.EMPTY;
-        if (order != null) {
-            出力順 = MyBatisOrderByClauseCreator.create(SeinenngappiCsvProperty.DBD900004_ResultListEnum.class, order);
-        }
-        return 出力順;
-    }
-
-    private void EucCsvEntity(SeinenngappiCsvEntity eucCsvEntity, HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity t) {
+    private void eucCsvEntity(SeinenngappiCsvEntity eucCsvEntity, HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity t) {
         eucCsvEntity.set市町村コード(t.getDtShichosonCode());
         eucCsvEntity.set被保険者番号(t.getHihokenshaNo().getColumnValue());
         eucCsvEntity.set年金保険者コード(t.getDtNennkinnHokenshaCode());
-        eucCsvEntity.set年金保険者(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.年金保険者コード.getCodeShubetsu(),
-                new Code(t.getDtNennkinnHokenshaCode())));
+        eucCsvEntity.set年金保険者(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
+                UEXCodeShubetsu.年金保険者コード.getCodeShubetsu(), new Code(t.getDtNennkinnHokenshaCode())));
         eucCsvEntity.set基礎年金番号(t.getDtKisoNennkinnNo());
         eucCsvEntity.set年金コード(t.getNennkinnCode());
-        eucCsvEntity.set年金名称(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.年金保険者コード.getCodeShubetsu(),
-                new Code(set年金(t.getNennkinnCode()))));
+        eucCsvEntity.set年金名称(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
+                UEXCodeShubetsu.年金保険者コード.getCodeShubetsu(), new Code(set年金(t.getNennkinnCode()))));
         eucCsvEntity.set識別コード(t.getShikibetsuCode().getColumnValue());
         eucCsvEntity.set世帯コード(t.getShotaiCode());
         eucCsvEntity.set対象年(t.getDtTaisyoYear());
         eucCsvEntity.set生年月日市町村データ(set年月日(t.getAtenaSeinenngappi()));
         eucCsvEntity.set生年月日年金保険者データ(set年月日(t.getDtSeinenngappi()));
         eucCsvEntity.set性別コード市町村データ(t.getAtenaSeibetsu());
-        eucCsvEntity.set性別市町村データ(Enum性別コード(t.getAtenaSeibetsu()));
+        eucCsvEntity.set性別市町村データ(set性別コード(t.getAtenaSeibetsu()));
         eucCsvEntity.set性別コード年金保険者データ(t.getAtenaKanaShimei());
-        eucCsvEntity.set性別年金保険者データ(Enum性別コード(t.getAtenaKanaShimei()));
+        eucCsvEntity.set性別年金保険者データ(set性別コード(t.getAtenaKanaShimei()));
         eucCsvEntity.setカナ氏名市町村データ(t.getAtenaKanaShimei());
         eucCsvEntity.setカナ氏名年金保険者データ(t.getDtKanaShimei());
-        eucCsvEntity.set不一致項目(不一致事由(t.getFuicchiJiyu()));
+        eucCsvEntity.set不一致項目(set不一致(t.getFuicchiJiyu()));
     }
 
     private RString set年月日(RString 年月日) {
@@ -164,7 +168,7 @@ public class SeinenngappiCsvProcess extends BatchProcessBase<HikazeNenkinTaishos
         }
     }
 
-    private RString Enum性別コード(RString code) {
+    private RString set性別コード(RString code) {
         if (Seibetsu.男.getコード().equals(code)) {
             return 男;
         } else if (Seibetsu.女.getコード().equals(code)) {
@@ -174,12 +178,12 @@ public class SeinenngappiCsvProcess extends BatchProcessBase<HikazeNenkinTaishos
         }
     }
 
-    private RString 不一致事由(RString code) {
-        if ("1".equals(code)) {
+    private RString set不一致(RString code) {
+        if (ONE.equals(code)) {
             return 生年月日;
-        } else if ("2".equals(code)) {
+        } else if (TWO.equals(code)) {
             return 性別;
-        } else if ("3".equals(code)) {
+        } else if (THREE_T.equals(code)) {
             return カナ氏名;
         } else {
             return RString.EMPTY;
@@ -188,7 +192,7 @@ public class SeinenngappiCsvProcess extends BatchProcessBase<HikazeNenkinTaishos
 
     private RString set年金(RString obj) {
         if (!obj.isNullOrEmpty()) {
-            return obj.substring(Zero, Three);
+            return obj.substring(ZERO, THREE);
         } else {
             return RString.EMPTY;
         }

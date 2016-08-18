@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * {@link KaigoJigyosha}の編集を行うビルダークラスです。
  *
- * @reamsid_L DBC-1920-010 tianshuai
+ * @reamsid_L DBX-9999-022 tianshuai
  */
 public class KaigoJigyoshaBuilder {
 

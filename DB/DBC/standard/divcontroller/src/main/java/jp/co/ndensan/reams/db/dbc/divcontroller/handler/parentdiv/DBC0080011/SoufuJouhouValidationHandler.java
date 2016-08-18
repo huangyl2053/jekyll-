@@ -42,7 +42,7 @@ public class SoufuJouhouValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (div.getTxtSofuYM().getValue() == null) {
             validationMessages.add(new ValidationMessageControlPair(new SoufuJouhouValidationHandler.RRVMessages(
-                    UrErrorMessages.必須, "取扱年月")));
+                    UrErrorMessages.必須, "取扱年月"), div.getTxtSofuYM()));
         }
         return validationMessages;
     }

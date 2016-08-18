@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.Sh
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1110001.DBB1110001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1110001.ShotokuJohoIchiranHyoSakuseiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1110001.ShotokuJohoIchiranHyoSakuseiHandler;
+import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1110001.ShotokuJohoIchiranHyoSakuseiValidationHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -74,13 +75,13 @@ public class ShotokuJohoIchiranHyoSakusei {
         boolean 広域保険者日付チェックflag = getHandler(div).is広域保険者日付チェック();
         boolean 単一市町村日付チェックflag = getHandler(div).is単一市町村日付チェック();
         if (INDEX_111.equals(導入形態コード)) {
-            if (getHandler(div).is広域保険者日付チェック()) {
-                ValidationMessageControlPairs validPairs = getHandler(div).check日付(広域保険者日付チェックflag);
+            if (広域保険者日付チェックflag) {
+                ValidationMessageControlPairs validPairs = getValidationHandler().check日付(広域保険者日付チェックflag);
                 validationCheck(validPairs, div);
             }
         } else if (INDEX_112.equals(導入形態コード) || INDEX_120.equals(導入形態コード)) {
-            if (getHandler(div).is単一市町村日付チェック()) {
-                ValidationMessageControlPairs validPairs = getHandler(div).check日付(単一市町村日付チェックflag);
+            if (単一市町村日付チェックflag) {
+                ValidationMessageControlPairs validPairs = getValidationHandler().check日付(単一市町村日付チェックflag);
                 validationCheck(validPairs, div);
             }
         }
@@ -98,5 +99,9 @@ public class ShotokuJohoIchiranHyoSakusei {
 
     private ShotokuJohoIchiranHyoSakuseiHandler getHandler(ShotokuJohoIchiranHyoSakuseiDiv div) {
         return new ShotokuJohoIchiranHyoSakuseiHandler(div);
+    }
+
+    private ShotokuJohoIchiranHyoSakuseiValidationHandler getValidationHandler() {
+        return new ShotokuJohoIchiranHyoSakuseiValidationHandler();
     }
 }

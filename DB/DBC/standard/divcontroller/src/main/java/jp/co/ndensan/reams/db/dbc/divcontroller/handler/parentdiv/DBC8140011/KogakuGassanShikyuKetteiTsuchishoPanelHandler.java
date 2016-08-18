@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanShikyuGak
 import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoTaishosha;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunketteitsuchisho.KogakuGassanShikyuKetteiTsuchisho;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunketteitsuchisho.KougakugassanShikyuketteiTsuuchishoOutputEntity;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8140011.KogakuGassanShikyuKetteiTsuchishoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.JigyoKogakuGassanShikyuFushikyuKetteiManager;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.JigyoKogakuGassanShikyuGakuKeisanKekkaManager;
@@ -51,6 +52,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -77,8 +79,9 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
     private static final int 整数_ZERO = 0;
     private static final Code CODE_0003 = new Code("0003");
     private static final Code CODE_003 = new Code("003");
-    private static final ReportId DBC200201 = new ReportId("DBC200201_GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashi");
-    private static final ReportId DBC200202 = new ReportId("DBC200202_GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiAri");
+    private static final RString 発行する = new RString("btnReportPublish");
+    private static final RString 再検索する = new RString("btnResearch");
+    private static final RString 検索結果一覧へ = new RString("btnSearchResult");
 
     /**
      * コンストラクタです。
@@ -101,6 +104,7 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
         div.getKogakuGassanShikyuKetteiTsuchishoSakuseiKihon().initialize(識別コード);
         div.getKogakuGassanShikyuKetteiTsuchishoSakuseiKaigoKihon().initialize(被保険者番号);
         if (!get前排他(被保険者番号.getColumnValue())) {
+            状態4();
             throw new PessimisticLockingException();
         }
         AccessLogger.log(AccessLogType.照会, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
@@ -245,7 +249,7 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
         RString select対象年度 = div.getDdlTaishoNendo().getSelectedKey();
         RString select連絡票整理番号 = div.getDdlRearakuhyoSeiriNO().getSelectedKey();
         RString select履歴番号 = div.getDdlRirekiNO().getSelectedKey();
-        div.getTxtZenkaiHakkoYMD().setDisabled(false);
+        div.getTxtZenkaiHakkoYMD().setDisabled(true);
         RDate 前回発行日 = null;
         for (JigyoKogakuGassanShikyuFushikyuKettei shikyuKettei : 事業高額合算支給不支給決定List) {
             if (select対象年度.equals(shikyuKettei.get対象年度().toDateString())
@@ -441,6 +445,7 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
         if (RSTRING_1.equals(データ有無)) {
             validPairs = getValidationHandler().高額合算支給情報存在エラーチェック();
             if (validPairs.iterator().hasNext()) {
+                状態2();
                 return validPairs;
             }
         }
@@ -450,10 +455,12 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
     /**
      * 事業高額合算情報取得です。
      *
-     * @param koza Koza
      * @return KougakugassanShikyuketteiTsuuchishoOutputEntity
      */
-    public KougakugassanShikyuketteiTsuuchishoOutputEntity editKougakugassanShikyuketteiTsuuchisho(Koza koza) {
+    public KougakugassanShikyuketteiTsuuchishoOutputEntity editKougakugassanShikyuketteiTsuuchisho() {
+        JigyoKogakuGassanShikyuFushikyuKettei 事業高額合算支給不支給決定 = ViewStateHolder.
+                get(ViewStateKeys.事業高額合算支給不支給決定, JigyoKogakuGassanShikyuFushikyuKettei.class);
+        Koza koza = KougakuGassanShikyuKetteiTsuchisho.createInstance().getKozaJyoho(事業高額合算支給不支給決定.get口座ID());
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         RString 支払予定日印字有無 = ViewStateHolder.get(ViewStateKeys.支払予定日印字有無, RString.class);
@@ -463,9 +470,9 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
         FlexibleDate 支払予定日 = div.getTxtShiharaiYoteiYMD().getValue() != null
                 ? new FlexibleDate(div.getTxtShiharaiYoteiYMD().getValue().toDateString()) : FlexibleDate.EMPTY;
         if (RSTRING_0.equals(支払予定日印字有無)) {
-            reportId = DBC200201;
+            reportId = ReportIdDBC.DBC200201.getReportId();
         } else {
-            reportId = DBC200202;
+            reportId = ReportIdDBC.DBC200202.getReportId();
         }
         RString 文書番号 = div.getCcdBunshoNO().get文書番号() != null ? div.getCcdBunshoNO().get文書番号() : RString.EMPTY;
         FlexibleYear 対象年度 = new FlexibleYear(div.getDdlTaishoNendo().getSelectedKey());
@@ -475,6 +482,30 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
                 .editKougakugassanShikyuketteiTsuuchisho(識別コード, 被保険者番号, reportId, 対象年度, 連絡票整理番号, 履歴番号,
                         文書番号, 発行日, 支払予定日, koza);
         return outputEntity;
+    }
+
+    private void 状態2() {
+        div.getDdlTaishoNendo().setDisabled(true);
+        div.getDdlRearakuhyoSeiriNO().setDisabled(true);
+        div.getDdlRirekiNO().setDisabled(true);
+        div.getTxtHakkouYMD().setDisabled(true);
+        div.getTxtShiharaiYoteiYMD().setDisabled(true);
+        div.getCcdBunshoNO().setDisabled(true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(発行する, true);
+    }
+
+    /**
+     * 状態4設定です。
+     *
+     */
+    public void 状態4() {
+        div.setVisible(false);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(再検索する, true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(再検索する, false);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(検索結果一覧へ, true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(検索結果一覧へ, false);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(発行する, true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(発行する, true);
     }
 
     private KogakuGassanShikyuKetteiTsuchishoPanelValidationHandler getValidationHandler() {

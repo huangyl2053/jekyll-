@@ -94,7 +94,7 @@ public class NinteiShienCenterSoshin {
         parameter.setHas二次判定日_開始(div.getTxtNijiHanteibi().getFromValue() != null);
         parameter.setHas二次判定日_終了(div.getTxtNijiHanteibi().getToValue() != null);
         parameter.set二次判定日_開始(rDatetoFlexibleDate(div.getTxtNijiHanteibi().getFromValue()));
-        parameter.set二次判定日_終了(rDatetoFlexibleDate(div.getTxtNijiHanteibi().getFromValue()));
+        parameter.set二次判定日_終了(rDatetoFlexibleDate(div.getTxtNijiHanteibi().getToValue()));
         if (div.getTxtDispMax().getValue() != null) {
             parameter.set件数(div.getTxtDispMax().getValue().intValue());
         }

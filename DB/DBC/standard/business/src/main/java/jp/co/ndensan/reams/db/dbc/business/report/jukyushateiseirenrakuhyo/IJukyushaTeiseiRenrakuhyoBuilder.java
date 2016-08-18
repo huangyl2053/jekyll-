@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbc.entity.report.jukyushateiseirenrakuhyo.Jukyush
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
+ * 帳票設計_DBCMN81002_受給者訂正連絡票（紙媒体）Builderするクラスです.
  *
- * @author lijian
+ * @reamsid_L DBC-2101-060 lijian
  */
 public interface IJukyushaTeiseiRenrakuhyoBuilder extends IReportBuilder<JukyushaTeiseiRenrakuhyoSource> {
 

@@ -10,11 +10,13 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.saisinsaketeijyohou.TaishoshaKensakuBusiness;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0081011.TaishoshaKensakuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0081011.dgKetteiHokenshaDetail_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -33,10 +35,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 public class TaishoshaKensakuHandler {
 
     private final TaishoshaKensakuDiv div;
-    private static final RString 広域 = new RString("111");
     private static final RString 市町村識別ID_00 = new RString("00");
-    private static final RString 市町村識別ID_01 = new RString("01");
-    private static final RString 市町村識別ID_99 = new RString("99");
     private static final RString キー = new RString("000000");
     private static final RString 保険者区分_1 = new RString("1");
     private static final RString 保険者区分_3 = new RString("3");
@@ -63,7 +62,7 @@ public class TaishoshaKensakuHandler {
      * @param 構成市町村 構成市町村
      */
     public void onLoad(ShichosonSecurityJoho 市町村情報, List<AuthorityItem> 市町村識別ID, List<KoikiZenShichosonJoho> 構成市町村) {
-        if (広域.equals(市町村情報.get導入形態コード().value())) {
+        if (DonyuKeitaiCode.事務広域.getCode().equals(市町村情報.get導入形態コード().value())) {
             div.getDDLSityouson().setDisplayNone(false);
             div.getDDLSityouson().setVisible(true);
         }
@@ -74,7 +73,7 @@ public class TaishoshaKensakuHandler {
             keyValue.setValue(new RString("000000 全市町村"));
             list.add(keyValue);
             for (KoikiZenShichosonJoho koikiZen : 構成市町村) {
-                if (!new RString("0").equals(koikiZen.get所得引出方法())) {
+                if (!RString.isNullOrEmpty(koikiZen.get所得引出方法()) && !new RString("0").equals(koikiZen.get所得引出方法())) {
                     KeyValueDataSource key = new KeyValueDataSource();
                     RStringBuilder builder = new RStringBuilder();
                     builder.append(koikiZen.get市町村コード().value());
@@ -86,9 +85,8 @@ public class TaishoshaKensakuHandler {
                 }
             }
         }
-        if (広域.equals(市町村情報.get導入形態コード().value())
-                && !市町村識別ID.isEmpty() && (市町村識別ID_01.equals(市町村識別ID.get(0).getItemId())
-                || 市町村識別ID_99.equals(市町村識別ID.get(0).getItemId()))) {
+        if (DonyuKeitaiCode.事務広域.getCode().equals(市町村情報.get導入形態コード().value())
+                && !市町村識別ID.isEmpty() && !市町村識別ID_00.equals(市町村識別ID.get(0).getItemId())) {
             KeyValueDataSource key = new KeyValueDataSource();
             RStringBuilder builder = new RStringBuilder();
             builder.append(市町村情報.get市町村情報().get市町村コード().value());
@@ -173,6 +171,9 @@ public class TaishoshaKensakuHandler {
             div.getDgKetteiHokenshaDetail().getGridSetting().getColumn(保険者負担額).setVisible(true);
             div.getDgKetteiHokenshaDetail().getGridSetting().getColumn(公費負担額).setVisible(false);
             div.getDgKetteiHokenshaDetail().getGridSetting().getColumn(公費保険者番号).setVisible(false);
+            div.getLblSeikyuFutangaku().setText(new RString("請求保険者負担額"));
+            div.getLblKeteiFutangaku().setText(new RString("決定保険者負担額"));
+            div.getLblTyouseiFutangaku().setText(new RString("調整保険者負担額"));
         }
         if (保険者区分_3.equals(保険者区分) || 保険者区分_4.equals(保険者区分)) {
             div.getLblKetteihokenshaKaigokyuhuhi().setText(new RString("介護予防・日常生活支援総合事業費"));
@@ -252,6 +253,9 @@ public class TaishoshaKensakuHandler {
             div.getDgKetteiHokenshaDetail().getGridSetting().getColumn(保険者負担額).setVisible(true);
             div.getDgKetteiHokenshaDetail().getGridSetting().getColumn(公費負担額).setVisible(false);
             div.getDgKetteiHokenshaDetail().getGridSetting().getColumn(公費保険者番号).setVisible(false);
+            div.getLblSeikyuFutangaku().setText(new RString("請求保険者負担額"));
+            div.getLblKeteiFutangaku().setText(new RString("決定保険者負担額"));
+            div.getLblTyouseiFutangaku().setText(new RString("調整保険者負担額"));
         }
         if (保険者区分_3.equals(保険者区分) || 保険者区分_4.equals(保険者区分)) {
             div.getLblKetteihokenshaKaigokyuhuhi().setText(new RString("介護予防・日常生活支援総合事業費"));
@@ -304,7 +308,7 @@ public class TaishoshaKensakuHandler {
             row.setTxtHokenshaMoshitateRiyu(一覧明細.get申立事由コード());
             row.setTxtMousitateTaisyou(一覧明細.getコード名称());
             row.setTxtMote(一覧明細.get再審査申立事由());
-            row.setTxtHokenshaServiceTeikyoYM(一覧明細.getサービス提供年月());
+            row.setTxtHokenshaServiceTeikyoYM(new FlexibleDate(一覧明細.getサービス提供年月()).getYearMonth().wareki().toDateString());
             row.setTxtHokenshaServiceType(一覧明細.getサービス種類コード());
             row.setTxtHokenshaStyle(一覧明細.getサービス種類名());
             row.setTxtSasia(一覧明細.get再審査結果コード());

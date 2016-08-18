@@ -435,7 +435,7 @@ public class KyodoIdoRenrakuhyoHenkoMainHandler {
         if (is基本送付情報) {
             異動基本送付Entity = entity.get基本情報Entity();
             異動基本送付Entity = 異動基本送付Entity.createBuilderForEdit()
-                    .set送付年月(new FlexibleYearMonth(RDate.getNowDate().toDateString()))
+                    .set送付年月(new FlexibleYearMonth(RDate.getNowDate().getYearMonth().toDateString()))
                     .set訂正区分コード(訂正区分)
                     .set訂正年月日(訂正年月日)
                     .set論理削除フラグ(true)
@@ -445,7 +445,7 @@ public class KyodoIdoRenrakuhyoHenkoMainHandler {
         if (is償還送付情報) {
             異動償還送付Entity = entity.get償還情報Entity();
             異動償還送付Entity = 異動償還送付Entity.createBuilderForEdit()
-                    .set送付年月(new FlexibleYearMonth(RDate.getNowDate().toDateString()))
+                    .set送付年月(new FlexibleYearMonth(RDate.getNowDate().getYearMonth().toDateString()))
                     .set訂正区分コード(訂正区分)
                     .set訂正年月日(訂正年月日)
                     .set論理削除フラグ(true)
@@ -455,7 +455,7 @@ public class KyodoIdoRenrakuhyoHenkoMainHandler {
         if (is高額送付情報) {
             異動高額送付Entity = entity.get高額情報Entity();
             異動高額送付Entity = 異動高額送付Entity.createBuilderForEdit()
-                    .set送付年月(new FlexibleYearMonth(RDate.getNowDate().toDateString()))
+                    .set送付年月(new FlexibleYearMonth(RDate.getNowDate().getYearMonth().toDateString()))
                     .set訂正区分コード(訂正区分)
                     .set訂正年月日(訂正年月日)
                     .set論理削除フラグ(true)

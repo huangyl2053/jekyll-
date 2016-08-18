@@ -4,16 +4,20 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.JukyushaI
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 
 /**
- * KyufuSeigenPanel のクラスファイル 
- * 
- * @author 自動生成
+ * KyufuSeigenPanel のクラスファイル
+ *
+ * @reamsid_L DBC-4350-060 chenhui
  */
 public class KyufuSeigenPanelDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
