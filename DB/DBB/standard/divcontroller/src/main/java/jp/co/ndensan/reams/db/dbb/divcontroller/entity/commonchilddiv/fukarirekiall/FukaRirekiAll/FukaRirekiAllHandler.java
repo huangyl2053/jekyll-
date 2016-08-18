@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
 
@@ -153,17 +154,33 @@ public class FukaRirekiAllHandler {
     }
 
     /**
-     * 選択されている行の賦課履歴を返します。行が選択されていない場合は全賦課履歴を返します。
+     * 選択されている行の通知書番号を返します。
      *
-     * @return 賦課履歴
+     * @return 通知書番号 TsuchishoNo
      */
-    public FukaRireki getClicked賦課履歴() {
-        FukaRireki 賦課履歴 = new FukaRireki(PanelSessionAccessor.get(div, SESSION_NAME, ItemList.class).toList());
+    public TsuchishoNo getClicked通知書番号() {
         dgFukaRirekiAll_Row row = div.getDgFukaRirekiAll().getClickedItem();
-        FukaNendo 賦課年度 = new FukaNendo(row.getFukaNendoHidden().toString());
-        ChoteiNendo 調定年度 = new ChoteiNendo(row.getChoteiNendoHidden().toString());
-        TsuchishoNo 通知書番号 = new TsuchishoNo(row.getTsuchishoNo());
-        return new FukaRireki(賦課履歴.get賦課履歴(賦課年度, 調定年度, 通知書番号).toList());
+        return new TsuchishoNo(row.getTsuchishoNo());
+    }
+
+    /**
+     * 選択されている行の調定年度を返します。
+     *
+     * @return 調定年度 FlexibleYear
+     */
+    public FlexibleYear getClicked調定年度() {
+        dgFukaRirekiAll_Row row = div.getDgFukaRirekiAll().getClickedItem();
+        return new FlexibleYear(row.getChoteiNendo());
+    }
+
+    /**
+     * 選択されている行の賦課年度を返します。
+     *
+     * @return 賦課年度 FlexibleYear
+     */
+    public FlexibleYear getClicked賦課年度() {
+        dgFukaRirekiAll_Row row = div.getDgFukaRirekiAll().getClickedItem();
+        return new FlexibleYear(row.getFukaNendo());
     }
 
     private int set全賦課履歴(IItemList<Fuka> modelList) {
