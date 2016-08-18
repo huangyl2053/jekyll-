@@ -93,7 +93,7 @@ public class DBC120010_KyufukanrihyoInFlow extends BatchFlowBase<KokuhorenKyouts
                 レコード件数合算 = レコード件数合算 + flowEntity.getレコード件数合算();
             }
 
-            if (0 == flowEntity.getレコード件数合算()) {
+            if (0 == flowEntity.get明細件数合算()) {
                 executeStep(国保連インタフェース管理更新);
                 executeStep(処理結果リスト作成);
             } else {
