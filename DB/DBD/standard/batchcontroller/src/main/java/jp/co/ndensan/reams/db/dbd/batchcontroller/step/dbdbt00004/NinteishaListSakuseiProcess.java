@@ -314,8 +314,9 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
             eucCsvWriter2.writeLine(setBlank3());
             eucCsvWriter2.close();
         }
-        AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+        AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
         manager.spool(eucFilePath, log);
+
         if (processParameter.get対象リスト().equals(認定者)) {
             認定者バッチ出力条件リストの出力();
         } else {
