@@ -197,7 +197,6 @@ public class KougakuGassanShikyuKetteiTsuchisho {
     }
 
     private void set通知文(KogakuGassanShikyuKetteiTsuchisho entity) {
-        TsuchishoTeikeibunFinder finder = new TsuchishoTeikeibunFinder();
         entity.set文書1(get通知文文章(NUM_1, NUM_2));
         entity.set文書2(get通知文文章(NUM_1, NUM_3));
         entity.set文書3(get通知文文章(NUM_2, NUM_3));
