@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
 import jp.co.ndensan.reams.db.dbz.business.core.shisetujyoho.KaigoJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.business.core.shisetujyoho.KaigoJogaiTokureiTaishoShisetsuInputGuide;
+import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuDac;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -75,15 +75,16 @@ public class ShisetsuJohoInputGuideFinder {
     /**
      * 介護除外住所地特例対象施設を取得します。
      *
-     * @param 事業者種別 RString
+     * @param 事業者種別 事業者種別
+     * @param 事業者番号 事業者番号
      * @return List<KaigoJogaiTokureiTaishoShisetsuInputGuide> 介護除外住所地特例対象施設リスト
      */
     @Transaction
     public SearchResult<KaigoJogaiTokureiTaishoShisetsuInputGuide> getKaigoJogaiTokureiTaishoShisetsuInputGuide(
-            RString 事業者種別,RString 事業者番号) {
+            JigyosyaType 事業者種別, JigyoshaNo 事業者番号) {
         List<KaigoJogaiTokureiTaishoShisetsuInputGuide> taishoShisetsuList = new ArrayList<>();
         List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> dbT1005List = dbT1005Dac.
-                select介護除外住所地特例対象施設(事業者種別,事業者番号);
+                select介護除外住所地特例対象施設(事業者種別, 事業者番号);
         if (dbT1005List == null || dbT1005List.isEmpty()) {
             return SearchResult.of(Collections.<KaigoJogaiTokureiTaishoShisetsuInputGuide>emptyList(), 0, false);
         }

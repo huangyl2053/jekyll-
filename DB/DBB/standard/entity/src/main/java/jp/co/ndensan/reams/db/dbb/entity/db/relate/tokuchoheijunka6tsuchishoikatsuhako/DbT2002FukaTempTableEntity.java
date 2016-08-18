@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.ue.uex.definition.core.RenkeiShubetsu;
 import jp.co.ndensan.reams.ue.uex.definition.core.SeibetsuCodeNenkinTokucho;
 import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuSeidoCode;
 import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCode;
-import jp.co.ndensan.reams.ur.urz.definition.core.code.ZennoKubunCodeValue;
+import jp.co.ndensan.reams.ca.cax.definition.valueobject.code.ZennoKubunCodeValue;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.TorokuNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
