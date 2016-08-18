@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -31,8 +32,8 @@ public class SyoriHidukeKanriMasterUpdateProcess extends BatchProcessBase<DbT702
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MAPPERPATH, processParameter.MybatisParameter(processParameter.get保険者情報_保険者番号(),
-                processParameter.get処理名(), processParameter.get処理年度(), processParameter.get処理区分(), processParameter.get対象月()));
+        // TODO
+        return new BatchDbReader(MAPPERPATH, processParameter.toSyoriHidukeKanriMasterUpdateMybatisParameter(LasdecCode.EMPTY, RString.EMPTY));
     }
 
     @Override
@@ -59,11 +60,12 @@ public class SyoriHidukeKanriMasterUpdateProcess extends BatchProcessBase<DbT702
 
     private void edit処理日付管理マスタ挿入データ(DbT7022ShoriDateKanriEntity t) {
         t.setSubGyomuCode(SubGyomuCode.DBD介護受給);
-        t.setShichosonCode(processParameter.get保険者情報_保険者番号());
-        t.setShoriName(processParameter.get処理名());
+        // TODO
+//        t.setShichosonCode(processParameter.get保険者情報_保険者番号());
+//        t.setShoriName(processParameter.get処理名());
         t.setShoriEdaban(new RString("2"));
         t.setNendo(processParameter.get処理年度());
-        t.setNendoNaiRenban(processParameter.get処理区分_対象月());
+        //  t.setNendoNaiRenban(processParameter.get処理区分_対象月());
         t.setKijunYMD(processParameter.get処理年月日());
         t.setKijunTimestamp(processParameter.get処理日時());
     }
