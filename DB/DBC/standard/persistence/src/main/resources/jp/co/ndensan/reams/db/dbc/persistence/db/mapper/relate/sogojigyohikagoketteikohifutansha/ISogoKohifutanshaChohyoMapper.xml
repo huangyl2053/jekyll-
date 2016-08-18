@@ -22,8 +22,10 @@
             <result property="事業者番号" column="dbWT3061_jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
             <result property="公費受給者番号" column="dbWT3061_kohiJukyushaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
             <result property="公費受給者氏名" column="dbWT0001_orgHihokenshaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+            <result property="証記載保険者番号" column="dbWT0001_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
             <result property="サービ提供年月" column="dbWT3061_serviceTeikyoYm" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
             <result property="サービス種類コード" column="dbWT3061_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+            <result property="サービス種類名" column="dbWT3061_serviceShuruiMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
             <result property="単位数" column="dbWT3061_tanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
             <result property="事業者名" column="dbWT3061_jigyoshoMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
             <result property="被保険者番号" column="dbWT0001_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
@@ -43,8 +45,10 @@
         DbWT3061."jigyoshoNo" AS dbWT3061_jigyoshoNo,
         DbWT3061."kohiJukyushaNo" AS dbWT3061_kohiJukyushaNo,
         DbWT0001."orgHihokenshaShimei" AS dbWT0001_orgHihokenshaShimei,
+        DbWT0001."shoKisaiHokenshaNo" AS dbWT0001_shoKisaiHokenshaNo,
         DbWT3061."serviceTeikyoYm" AS dbWT3061_serviceTeikyoYm,
         DbWT3061."serviceShuruiCode" AS dbWT3061_serviceShuruiCode,
+        DbWT3061."serviceShuruiMei" AS dbWT3061_serviceShuruiMei,
         DbWT3061."tanisu" AS dbWT3061_tanisu,
         DbWT3061."jigyoshoMei" AS dbWT3061_jigyoshoMei,
         DbWT0001."hihokenshaNo" AS dbWT0001_hihokenshaNo,

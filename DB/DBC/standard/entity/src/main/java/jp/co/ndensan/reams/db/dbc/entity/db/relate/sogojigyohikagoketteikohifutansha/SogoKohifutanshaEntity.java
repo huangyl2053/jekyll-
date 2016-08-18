@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class SogoKohifutanshaEntity implements Serializable {
+
     private ShoKisaiHokenshaNo 公費負担者番号;
     private RString 公費負担者名;
     private int no;
@@ -30,8 +31,10 @@ public class SogoKohifutanshaEntity implements Serializable {
     private JigyoshaNo 事業者番号;
     private RString 公費受給者番号;
     private RString 公費受給者氏名;
+    private ShoKisaiHokenshaNo 証記載保険者番号;
     private FlexibleYearMonth サービ提供年月;
     private ServiceShuruiCode サービス種類コード;
+    private RString サービス種類名;
     private Decimal 単位数;
     private RString 事業者名;
     private HihokenshaNo 被保険者番号;
