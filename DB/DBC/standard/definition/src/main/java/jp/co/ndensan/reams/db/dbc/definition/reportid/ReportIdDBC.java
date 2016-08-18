@@ -50,12 +50,12 @@ public enum ReportIdDBC {
     /**
      * 総合事業費過再審査定通知書情報
      */
-    DBC200080(new ReportId("DBC200080_KyufujissekiKoshinkekkaIchiran"), new RString("総合事業費過再審査定通知書情報")),
+    DBC200080(new ReportId("DBC200080_SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiran"), new RString("総合事業費過再審査定通知書情報")),
     /**
      * 総合事業費（経過措置）過誤決定通知書情報取込一覧表
      */
     DBC200075(new ReportId("DBC200075_SogojigyohiKagoKetteiTsuchishoTorikomiIchiran"), new RString("総合事業費（経過措置）過誤決定通知書情報取込一覧表")),
-     /**
+    /**
      * 総合事業費審査決定請求明細表
      */
     DBC200084(new ReportId("DBC200084_SogojigyohiShinsaKetteiSeikyumeisaihyo"), new RString("総合事業費審査決定請求明細表")),
@@ -288,6 +288,10 @@ public enum ReportIdDBC {
      */
     DBC200067(new ReportId("DBC200067_SeikyugakuTsuchishoKohi"), new RString("介護給付費等請求額通知書（公費負担者分）")),
     /**
+     * 帳票設計_DBCMN81002_受給者訂正連絡票（紙媒体）の帳票ＩＤです。
+     */
+    DBC100014(new ReportId("DBC100014_JukyushaTeiseiRenrakuhyo"), new RString("受給者訂正連絡票（紙媒体）")),
+    /**
      * （受給者台帳（一覧表）帳票ＩＤです。
      */
     DBC200006(new ReportId("DBC200006_KokuhorenJukyushaDaichoIchiran"), new RString("受給者台帳（一覧表）")),
@@ -299,11 +303,14 @@ public enum ReportIdDBC {
      * 総合事業費等請求額通知書（公費負担者分）帳票ＩＤです。
      */
     DBC200082(new ReportId("DBC200082_SogojigyohiSeikyugakuTsuchishoKohi"), new RString("総合事業費等請求額通知書（公費負担者分）")),
-    
     /**
      * 総合事業費過誤決定通知書情報取込一覧表（公費）帳票ＩＤです。
      */
-    DBC200086(new ReportId("DBC200086_SogojigyohiKagoKetteitsuchishoTorikomiIchiranKohi"), new RString("総合事業費過誤決定通知書情報取込一覧表（公費）"));
+    DBC200086(new ReportId("DBC200086_SogojigyohiKagoKetteitsuchishoTorikomiIchiranKohi"), new RString("総合事業費過誤決定通知書情報取込一覧表（公費）")),
+    /**
+     * 介護給付費資格照合表 帳票ＩＤです。
+     */
+    DBC100017(new ReportId("DBC100017_ShikakuShogohyo"), new RString("介護給付費資格照合表"));
 
     private final ReportId reportId;
 

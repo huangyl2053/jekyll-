@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 総合事業費（経過措置）請求額通知書情報取込一覧表帳票のSource
  *
- * @reamsid_L DBC_2480_DBCMNF2002-151 jiangxiaolong
+ * @reamsid_L DBC-2480-031 jiangxiaolong
  */
 public class SogojigyohiSeikyugakuTsuchishoKeikaSochiSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

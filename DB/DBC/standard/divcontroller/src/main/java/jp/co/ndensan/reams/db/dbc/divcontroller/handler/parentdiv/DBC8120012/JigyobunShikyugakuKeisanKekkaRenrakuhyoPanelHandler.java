@@ -87,20 +87,26 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelHandler {
         div.getSakuseiPanel().getTxtZenkaiSakuseiYMD().clearValue();
         JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter parameter
                 = setJigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter(被保険者番号,
-                        new FlexibleYear(div.getDdlTaishoNendo().getSelectedValue()), null, null);
+                        new FlexibleYear(div.getDdlTaishoNendo().getSelectedKey()), null, null);
         List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResult> renrakuhyoPanelList = 対象データ取得(parameter);
         List<KeyValueDataSource> shoKisaiHokenshaNodataSource = new ArrayList();
         List<KeyValueDataSource> shikyuShinseishoSeiriNodataSource = new ArrayList();
         if (!renrakuhyoPanelList.isEmpty()) {
-            int i = 0;
             for (JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResult renrakuhyoPanel : renrakuhyoPanelList) {
-                shoKisaiHokenshaNodataSource.add(new KeyValueDataSource(
-                        new RString(Integer.toString(i)),
-                        renrakuhyoPanel.getEntity().getShoKisaiHokenshaNo().getColumnValue()));
-                shikyuShinseishoSeiriNodataSource.add(new KeyValueDataSource(
-                        new RString(Integer.toString(i)),
-                        renrakuhyoPanel.getEntity().getShikyuShinseishoSeiriNo()));
-                i++;
+                if (!(shoKisaiHokenshaNodataSource.contains(new KeyValueDataSource(
+                        renrakuhyoPanel.getEntity().getShoKisaiHokenshaNo().getColumnValue(),
+                        renrakuhyoPanel.getEntity().getShoKisaiHokenshaNo().getColumnValue())))) {
+                    shoKisaiHokenshaNodataSource.add(new KeyValueDataSource(
+                            renrakuhyoPanel.getEntity().getShoKisaiHokenshaNo().getColumnValue(),
+                            renrakuhyoPanel.getEntity().getShoKisaiHokenshaNo().getColumnValue()));
+                }
+                if (!(shikyuShinseishoSeiriNodataSource.contains(new KeyValueDataSource(
+                        renrakuhyoPanel.getEntity().getShikyuShinseishoSeiriNo(),
+                        renrakuhyoPanel.getEntity().getShikyuShinseishoSeiriNo())))) {
+                    shikyuShinseishoSeiriNodataSource.add(new KeyValueDataSource(
+                            renrakuhyoPanel.getEntity().getShikyuShinseishoSeiriNo(),
+                            renrakuhyoPanel.getEntity().getShikyuShinseishoSeiriNo()));
+                }
             }
             div.getDdlShoKisaiHokenshaNo().setDataSource(shoKisaiHokenshaNodataSource);
             div.getDdlShoKisaiHokenshaNo().setSelectedIndex(0);
@@ -120,18 +126,20 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelHandler {
         div.getSakuseiPanel().getTxtZenkaiSakuseiYMD().clearValue();
         JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter parameter
                 = setJigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter(被保険者番号,
-                        new FlexibleYear(div.getDdlTaishoNendo().getSelectedValue()),
+                        new FlexibleYear(div.getDdlTaishoNendo().getSelectedKey()),
                         div.getDdlShikyuShinseishoSeiriNo().getSelectedValue(),
                         null);
         List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResult> renrakuhyoPanelList = 対象データ取得(parameter);
         List<KeyValueDataSource> shoKisaiHokenshaNodataSource = new ArrayList();
         if (!renrakuhyoPanelList.isEmpty()) {
-            int i = 0;
             for (JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResult renrakuhyoPanel : renrakuhyoPanelList) {
-                shoKisaiHokenshaNodataSource.add(new KeyValueDataSource(
-                        new RString(Integer.toString(i)),
-                        renrakuhyoPanel.getEntity().getShoKisaiHokenshaNo().getColumnValue()));
-                i++;
+                if (!(shoKisaiHokenshaNodataSource.contains(new KeyValueDataSource(
+                        renrakuhyoPanel.getEntity().getShoKisaiHokenshaNo().getColumnValue(),
+                        renrakuhyoPanel.getEntity().getShoKisaiHokenshaNo().getColumnValue())))) {
+                    shoKisaiHokenshaNodataSource.add(new KeyValueDataSource(
+                            renrakuhyoPanel.getEntity().getShoKisaiHokenshaNo().getColumnValue(),
+                            renrakuhyoPanel.getEntity().getShoKisaiHokenshaNo().getColumnValue()));
+                }
             }
             div.getDdlShoKisaiHokenshaNo().setDataSource(shoKisaiHokenshaNodataSource);
             div.getDdlShoKisaiHokenshaNo().setSelectedIndex(0);
@@ -148,7 +156,7 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelHandler {
         div.getSakuseiPanel().getTxtZenkaiSakuseiYMD().clearValue();
         JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter parameter
                 = setJigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter(被保険者番号,
-                        new FlexibleYear(div.getDdlTaishoNendo().getSelectedValue()),
+                        new FlexibleYear(div.getDdlTaishoNendo().getSelectedKey()),
                         div.getDdlShikyuShinseishoSeiriNo().getSelectedValue(),
                         new HokenshaNo(div.getDdlShoKisaiHokenshaNo().getSelectedValue()));
         List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResult> renrakuhyoPanelList = 対象データ取得(parameter);
@@ -190,31 +198,20 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelHandler {
         List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResult> renrakuhyoPanelList = 対象データ取得(parameter);
         if (!renrakuhyoPanelList.isEmpty()) {
             List<KeyValueDataSource> taishoNendodataSource = new ArrayList();
-            List<KeyValueDataSource> shoKisaiHokenshaNodataSource = new ArrayList();
-            List<KeyValueDataSource> shikyuShinseishoSeiriNodataSource = new ArrayList();
-            int i = 0;
             for (JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResult renrakuhyoPanel : renrakuhyoPanelList) {
-                taishoNendodataSource.add(new KeyValueDataSource(
-                        new RString(Integer.toString(i)),
-                        renrakuhyoPanel.getEntity().getTaishoNendo().toDateString()));
-                shoKisaiHokenshaNodataSource.add(new KeyValueDataSource(
-                        new RString(Integer.toString(i)),
-                        renrakuhyoPanel.getEntity().getShoKisaiHokenshaNo().getColumnValue()));
-                shikyuShinseishoSeiriNodataSource.add(new KeyValueDataSource(
-                        new RString(Integer.toString(i)),
-                        renrakuhyoPanel.getEntity().getShikyuShinseishoSeiriNo()));
-                i++;
+
+                if (!(taishoNendodataSource.contains(new KeyValueDataSource(
+                        new RString(renrakuhyoPanel.getEntity().getTaishoNendo().getYearValue()),
+                        renrakuhyoPanel.getEntity().getTaishoNendo().wareki().getYear())))) {
+                    taishoNendodataSource.add(new KeyValueDataSource(
+                            new RString(renrakuhyoPanel.getEntity().getTaishoNendo().getYearValue()),
+                            renrakuhyoPanel.getEntity().getTaishoNendo().wareki().getYear()));
+                }
+
             }
             div.getDdlTaishoNendo().setDataSource(taishoNendodataSource);
-            div.getDdlShoKisaiHokenshaNo().setDataSource(shoKisaiHokenshaNodataSource);
-            div.getDdlShikyuShinseishoSeiriNo().setDataSource(shikyuShinseishoSeiriNodataSource);
             div.getDdlTaishoNendo().setSelectedIndex(0);
-            div.getDdlShoKisaiHokenshaNo().setSelectedIndex(0);
-            div.getDdlShikyuShinseishoSeiriNo().setSelectedIndex(0);
-            if (renrakuhyoPanelList.get(0).getEntity().getSikyugakuKeisanKekkaRenrakuhyoSakuseiYMD() != null) {
-                div.getTxtZenkaiSakuseiYMD().setValue(
-                        renrakuhyoPanelList.get(0).getEntity().getSikyugakuKeisanKekkaRenrakuhyoSakuseiYMD());
-            }
+            onChange対象年度DDL(parameter.get被保険者番号());
             div.getTxtSakuseiYMD().setValue(FlexibleDate.getNowDate());
         }
     }

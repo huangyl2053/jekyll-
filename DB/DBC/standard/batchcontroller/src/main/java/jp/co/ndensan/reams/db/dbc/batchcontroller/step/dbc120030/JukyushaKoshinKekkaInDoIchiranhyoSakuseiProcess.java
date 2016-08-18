@@ -225,7 +225,7 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, this.mybatisParameter);
+        return new BatchDbReader(MYBATIS_SELECT_ID, mybatisParameter);
     }
     
     @Override
@@ -299,7 +299,11 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
         output.set行政区コード(被保険者.get行政区コード());
         output.set行政区(被保険者.get行政区名());
         output.set町域コード(被保険者.get町域コード());
-        output.set住所(住所);
+        if (住所 != null && 住所.length() > 161) {
+            output.set住所(住所.substring(0, 161));
+        } else {
+            output.set住所(住所);
+        }
         output.set生年月日(date_to_string(受給者情報.get生年月日()));
         output.set性別(受給者情報.get性別コード());
         output.set性別名称(Seibetsu.toValue(受給者情報.get性別コード()).get名称());

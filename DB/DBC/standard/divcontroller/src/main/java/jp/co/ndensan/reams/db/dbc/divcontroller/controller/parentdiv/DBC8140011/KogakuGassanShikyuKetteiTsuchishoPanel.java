@@ -165,13 +165,16 @@ public class KogakuGassanShikyuKetteiTsuchishoPanel {
      * @return ResponseData
      */
     public ResponseData<KogakuGassanShikyuKetteiTsuchishoPanelDiv> onClick_validate(KogakuGassanShikyuKetteiTsuchishoPanelDiv div) {
+        ValidationMessageControlPairs pairs = getHandler(div).入力項目チェック();
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
         JigyoKogakuGassanShikyuFushikyuKettei 事業高額合算支給不支給決定 = ViewStateHolder.
                 get(ViewStateKeys.事業高額合算支給不支給決定, JigyoKogakuGassanShikyuFushikyuKettei.class);
-        KougakuGassanShikyuKetteiTsuchisho koutsuchisho = new KougakuGassanShikyuKetteiTsuchisho();
-        Koza koza = koutsuchisho.getKozaJyoho(事業高額合算支給不支給決定.get口座ID());
-        outputEntity = getHandler(div).editKougakugassanShikyuketteiTsuuchisho(koutsuchisho, koza);
+        Koza koza = KougakuGassanShikyuKetteiTsuchisho.createInstance().getKozaJyoho(事業高額合算支給不支給決定.get口座ID());
+        outputEntity = getHandler(div).editKougakugassanShikyuketteiTsuuchisho(koza);
         RString データ有無 = outputEntity.getデータ有無();
-        ValidationMessageControlPairs pairs = getHandler(div).発行チェック(データ有無);
+        pairs = getHandler(div).高額合算支給情報存在エラーチェック(データ有無);
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }

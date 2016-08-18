@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -53,18 +54,19 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
     private static final RString KAKKORIGHT = new RString(")");
     private static final RString KAKKOLEFT = new RString("(");
     private static final RString ADDRESSEE = new RString("宛名シール");
+    private static final RString TABLE_処理結果リスト一時TBL = new RString("ShorikekkarisutoichijiTBL");
+    private static final RString MYBATIS_SELECT_ID = new RString(
+            "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.atenasealcreate.IAtenaSealCreateDBZ100001Mapper.getEntityListTwo");
     private int 帳票枚数;
+    private boolean can終了;
     private AtenaSealCreateProcessParameter processParamter;
     private AtenaSealReportBusiness business;
     private List<AtenaSealCreateDBZ100001Entity> listDBZ100001;
     private List<AtenaSealReportBusiness> listBusiness;
-    private static final RString TABLE_処理結果リスト一時TBL = new RString("ShorikekkarisutoichijiTBL");
-    private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.atenasealcreate.IAtenaSealCreateDBZ100001Mapper.getEntityListTwo");
     @BatchWriter
     BatchEntityCreatedTempTableWriter 処理結果リスト一時TBL;
     @BatchWriter
-    BatchReportWriter<AtenaSealCreateReportSource> batchReportWriter;
+    private BatchReportWriter<AtenaSealCreateReportSource> batchReportWriter;
     private ReportSourceWriter<AtenaSealCreateReportSource> reportSourceWriter;
 
     @Override
@@ -100,8 +102,8 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
             if (listDBZ100001.size() == 1) {
                 onlyOne(listDBZ100001);
             } else {
-                boolean can終了 = false;
-                iTeraTion(listDBZ100001, can終了);
+                can終了 = false;
+                iTeraTion(listDBZ100001);
             }
             for (AtenaSealReportBusiness busi : listBusiness) {
                 AtenaSealReport report = new AtenaSealReport(busi);
@@ -110,7 +112,7 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         }
     }
 
-    private void iTeraTion(List<AtenaSealCreateDBZ100001Entity> listDBZ100001, boolean can終了) {
+    private void iTeraTion(List<AtenaSealCreateDBZ100001Entity> listDBZ100001) {
         帳票枚数 = 1;
         business = new AtenaSealReportBusiness();
         for (int i = 0; i < listDBZ100001.size(); i++) {
@@ -120,41 +122,41 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
             }
             if (i + 1 == listDBZ100001.size()) {
                 can終了 = true;
-                sss(can終了, business, i);
+                cyouHyou(business, i);
                 break;
             }
             if (!listDBZ100001.get(i).get市町村コード().equals(listDBZ100001.get(i + 1).get市町村コード())) {
                 can終了 = true;
             }
-            sss(can終了, business, i);
+            cyouHyou(business, i);
         }
     }
 
-    private void sss(boolean can終了, AtenaSealReportBusiness business, int i) {
+    private void cyouHyou(AtenaSealReportBusiness business, int i) {
         if (帳票枚数 % 枚数_TWELVE == 剰余_ONE) {
-            partOne(listDBZ100001, can終了, business, i);
+            partOne(listDBZ100001, business, i);
         } else if (帳票枚数 % 枚数_TWELVE == 剰余_TWO) {
-            partTwo(listDBZ100001, can終了, business, i);
+            partTwo(listDBZ100001, business, i);
         } else if (帳票枚数 % 枚数_TWELVE == 剰余_THREE) {
-            partThree(listDBZ100001, can終了, business, i);
+            partThree(listDBZ100001, business, i);
         } else if (帳票枚数 % 枚数_TWELVE == 剰余_FOUR) {
-            partFour(listDBZ100001, can終了, business, i);
+            partFour(listDBZ100001, business, i);
         } else if (帳票枚数 % 枚数_TWELVE == 剰余_FIVE) {
-            partFive(listDBZ100001, can終了, business, i);
+            partFive(listDBZ100001, business, i);
         } else if (帳票枚数 % 枚数_TWELVE == 剰余_SIX) {
-            partSix(listDBZ100001, can終了, business, i);
+            partSix(listDBZ100001, business, i);
         } else if (帳票枚数 % 枚数_TWELVE == 剰余_SEVEN) {
-            partSeven(listDBZ100001, can終了, business, i);
+            partSeven(listDBZ100001, business, i);
         } else if (帳票枚数 % 枚数_TWELVE == 剰余_EIGHT) {
-            partEight(listDBZ100001, can終了, business, i);
+            partEight(listDBZ100001, business, i);
         } else if (帳票枚数 % 枚数_TWELVE == 剰余_NINE) {
-            partNine(listDBZ100001, can終了, business, i);
+            partNine(listDBZ100001, business, i);
         } else if (帳票枚数 % 枚数_TWELVE == 剰余_TEN) {
-            partTen(listDBZ100001, can終了, business, i);
+            partTen(listDBZ100001, business, i);
         } else if (帳票枚数 % 枚数_TWELVE == 剰余_ELEVEN) {
-            partEleven(listDBZ100001, can終了, business, i);
+            partEleven(listDBZ100001, business, i);
         } else if (帳票枚数 % 枚数_TWELVE == 0) {
-            partTwelve(listDBZ100001, can終了, business, i);
+            partTwelve(listDBZ100001, business, i);
         }
         帳票枚数++;
     }
@@ -197,7 +199,7 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         listBusiness.add(business);
     }
 
-    private void partOne(List<AtenaSealCreateDBZ100001Entity> listDBZ100001, boolean can終了, AtenaSealReportBusiness business, int i) {
+    private void partOne(List<AtenaSealCreateDBZ100001Entity> listDBZ100001, AtenaSealReportBusiness business, int i) {
         business.setShichosonCode(listDBZ100001.get(i).get市町村コード());
         business.setShichosonName(listDBZ100001.get(i).get市町村名称());
         business.setTitle(ADDRESSEE);
@@ -229,7 +231,7 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         }
     }
 
-    private void partTwo(List<AtenaSealCreateDBZ100001Entity> listDBZ100001, boolean can終了, AtenaSealReportBusiness business, int i) {
+    private void partTwo(List<AtenaSealCreateDBZ100001Entity> listDBZ100001, AtenaSealReportBusiness business, int i) {
         business.setShichosonCode(listDBZ100001.get(i).get市町村コード());
         business.setShichosonName(listDBZ100001.get(i).get市町村名称());
         business.setTitle(ADDRESSEE);
@@ -261,7 +263,7 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         }
     }
 
-    private void partThree(List<AtenaSealCreateDBZ100001Entity> listDBZ100001, boolean can終了, AtenaSealReportBusiness business, int i) {
+    private void partThree(List<AtenaSealCreateDBZ100001Entity> listDBZ100001, AtenaSealReportBusiness business, int i) {
         business.setShichosonCode(listDBZ100001.get(i).get市町村コード());
         business.setShichosonName(listDBZ100001.get(i).get市町村名称());
         business.setTitle(ADDRESSEE);
@@ -293,7 +295,7 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         }
     }
 
-    private void partFour(List<AtenaSealCreateDBZ100001Entity> listDBZ100001, boolean can終了, AtenaSealReportBusiness business, int i) {
+    private void partFour(List<AtenaSealCreateDBZ100001Entity> listDBZ100001, AtenaSealReportBusiness business, int i) {
         business.setShichosonCode(listDBZ100001.get(i).get市町村コード());
         business.setShichosonName(listDBZ100001.get(i).get市町村名称());
         business.setTitle(ADDRESSEE);
@@ -325,7 +327,7 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         }
     }
 
-    private void partFive(List<AtenaSealCreateDBZ100001Entity> listDBZ100001, boolean can終了, AtenaSealReportBusiness business, int i) {
+    private void partFive(List<AtenaSealCreateDBZ100001Entity> listDBZ100001, AtenaSealReportBusiness business, int i) {
         business.setShichosonCode(listDBZ100001.get(i).get市町村コード());
         business.setShichosonName(listDBZ100001.get(i).get市町村名称());
         business.setTitle(ADDRESSEE);
@@ -357,7 +359,7 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         }
     }
 
-    private void partSix(List<AtenaSealCreateDBZ100001Entity> listDBZ100001, boolean can終了, AtenaSealReportBusiness business, int i) {
+    private void partSix(List<AtenaSealCreateDBZ100001Entity> listDBZ100001, AtenaSealReportBusiness business, int i) {
         business.setShichosonCode(listDBZ100001.get(i).get市町村コード());
         business.setShichosonName(listDBZ100001.get(i).get市町村名称());
         business.setTitle(ADDRESSEE);
@@ -389,7 +391,7 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         }
     }
 
-    private void partSeven(List<AtenaSealCreateDBZ100001Entity> listDBZ100001, boolean can終了, AtenaSealReportBusiness business, int i) {
+    private void partSeven(List<AtenaSealCreateDBZ100001Entity> listDBZ100001, AtenaSealReportBusiness business, int i) {
         business.setShichosonCode(listDBZ100001.get(i).get市町村コード());
         business.setShichosonName(listDBZ100001.get(i).get市町村名称());
         business.setTitle(ADDRESSEE);
@@ -421,7 +423,7 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         }
     }
 
-    private void partEight(List<AtenaSealCreateDBZ100001Entity> listDBZ100001, boolean can終了, AtenaSealReportBusiness business, int i) {
+    private void partEight(List<AtenaSealCreateDBZ100001Entity> listDBZ100001, AtenaSealReportBusiness business, int i) {
         business.setShichosonCode(listDBZ100001.get(i).get市町村コード());
         business.setShichosonName(listDBZ100001.get(i).get市町村名称());
         business.setTitle(ADDRESSEE);
@@ -453,7 +455,7 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         }
     }
 
-    private void partNine(List<AtenaSealCreateDBZ100001Entity> listDBZ100001, boolean can終了, AtenaSealReportBusiness business, int i) {
+    private void partNine(List<AtenaSealCreateDBZ100001Entity> listDBZ100001, AtenaSealReportBusiness business, int i) {
         business.setShichosonCode(listDBZ100001.get(i).get市町村コード());
         business.setShichosonName(listDBZ100001.get(i).get市町村名称());
         business.setTitle(ADDRESSEE);
@@ -485,7 +487,7 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         }
     }
 
-    private void partTen(List<AtenaSealCreateDBZ100001Entity> listDBZ100001, boolean can終了, AtenaSealReportBusiness business, int i) {
+    private void partTen(List<AtenaSealCreateDBZ100001Entity> listDBZ100001, AtenaSealReportBusiness business, int i) {
         business.setShichosonCode(listDBZ100001.get(i).get市町村コード());
         business.setShichosonName(listDBZ100001.get(i).get市町村名称());
         business.setTitle(ADDRESSEE);
@@ -517,7 +519,7 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         }
     }
 
-    private void partEleven(List<AtenaSealCreateDBZ100001Entity> listDBZ100001, boolean can終了, AtenaSealReportBusiness business, int i) {
+    private void partEleven(List<AtenaSealCreateDBZ100001Entity> listDBZ100001, AtenaSealReportBusiness business, int i) {
         business.setShichosonCode(listDBZ100001.get(i).get市町村コード());
         business.setShichosonName(listDBZ100001.get(i).get市町村名称());
         business.setTitle(ADDRESSEE);
@@ -549,7 +551,7 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         }
     }
 
-    private void partTwelve(List<AtenaSealCreateDBZ100001Entity> listDBZ100001, boolean can終了, AtenaSealReportBusiness business, int i) {
+    private void partTwelve(List<AtenaSealCreateDBZ100001Entity> listDBZ100001, AtenaSealReportBusiness business, int i) {
         business.setShichosonCode(listDBZ100001.get(i).get市町村コード());
         business.setShichosonName(listDBZ100001.get(i).get市町村名称());
         business.setTitle(ADDRESSEE);
@@ -577,12 +579,15 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setCustomerBarCode11(listDBZ100001.get(i).getバーコード住所());
         listBusiness.add(business);
         帳票枚数 = 0;
+        if (!can終了) {
+            can終了 = true;
+        }
     }
 
     private RString dateFormat(RString obj) {
         if (obj == null) {
             return RString.EMPTY;
         }
-        return new FlexibleDate(obj).wareki().toDateString();
+        return new FlexibleDate(obj).wareki().fillType(FillType.BLANK).toDateString();
     }
 }

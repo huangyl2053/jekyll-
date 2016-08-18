@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 /**
  * 受給者情報更新結果情報取込一覧表帳票のPageBreakクラスです。
  *
- * @reamsid_L DBC-2730-030　chenjie
+ * @reamsid_L DBC-2730-030 chenjie
  */
 public class JukyushaKoshinKekkaIchiranPageBreak extends PageBreaker<JukyushaKoshinKekkaIchiranSource> {
 

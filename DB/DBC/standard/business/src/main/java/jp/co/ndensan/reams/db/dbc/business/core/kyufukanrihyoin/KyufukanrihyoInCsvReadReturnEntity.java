@@ -23,5 +23,7 @@ public class KyufukanrihyoInCsvReadReturnEntity {
     private FlexibleDate 変換基準日;
     private FlexibleYearMonth 処理対象年月;
     private int レコード件数合算;
+    private int 明細件数合算;
+    private int 集計件数合算;
 
 }

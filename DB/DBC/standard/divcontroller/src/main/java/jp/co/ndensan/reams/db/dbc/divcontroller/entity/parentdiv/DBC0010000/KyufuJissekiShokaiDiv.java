@@ -15,27 +15,26 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KyufuJissekiShokai のクラスファイル
- *
+ * KyufuJissekiShokai のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class KyufuJissekiShokaiDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdKaigoAtenaInfo")
-    private KaigoAtenaInfoDiv ccdKaigoAtenaInfo;
-    @JsonProperty("ccdKaigoShikakuKihon")
-    private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
     @JsonProperty("KyufuJissekiSearchPanel")
     private KyufuJissekiSearchPanelDiv KyufuJissekiSearchPanel;
     @JsonProperty("KyufuJissekiListPanel")
     private KyufuJissekiListPanelDiv KyufuJissekiListPanel;
+    @JsonProperty("ccdKaigoShikakuKihon")
+    private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
+    @JsonProperty("ccdKaigoAtenaInfo")
+    private KaigoAtenaInfoDiv ccdKaigoAtenaInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -43,24 +42,6 @@ public class KyufuJissekiShokaiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getccdKaigoAtenaInfo
-     * @return ccdKaigoAtenaInfo
-     */
-    @JsonProperty("ccdKaigoAtenaInfo")
-    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
-        return ccdKaigoAtenaInfo;
-    }
-
-    /*
-     * getccdKaigoShikakuKihon
-     * @return ccdKaigoShikakuKihon
-     */
-    @JsonProperty("ccdKaigoShikakuKihon")
-    public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
-        return ccdKaigoShikakuKihon;
-    }
-
     /*
      * getKyufuJissekiSearchPanel
      * @return KyufuJissekiSearchPanel
@@ -98,6 +79,24 @@ public class KyufuJissekiShokaiDiv extends Panel {
     }
 
     /*
+     * getccdKaigoShikakuKihon
+     * @return ccdKaigoShikakuKihon
+     */
+    @JsonProperty("ccdKaigoShikakuKihon")
+    public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
+        return ccdKaigoShikakuKihon;
+    }
+
+    /*
+     * getccdKaigoAtenaInfo
+     * @return ccdKaigoAtenaInfo
+     */
+    @JsonProperty("ccdKaigoAtenaInfo")
+    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
+        return ccdKaigoAtenaInfo;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -106,7 +105,7 @@ public class KyufuJissekiShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setKyufuJissekiChushutsuHani(KyufuJissekiChushutsuHaniDiv KyufuJissekiChushutsuHani) {
+    public void  setKyufuJissekiChushutsuHani(KyufuJissekiChushutsuHaniDiv KyufuJissekiChushutsuHani) {
         this.getKyufuJissekiSearchPanel().setKyufuJissekiChushutsuHani(KyufuJissekiChushutsuHani);
     }
 
@@ -116,7 +115,7 @@ public class KyufuJissekiShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadNendo(RadioButton radNendo) {
+    public void  setRadNendo(RadioButton radNendo) {
         this.getKyufuJissekiSearchPanel().getKyufuJissekiChushutsuHani().setRadNendo(radNendo);
     }
 
@@ -126,7 +125,7 @@ public class KyufuJissekiShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlKyufuJissekiSearchNendo(DropDownList ddlKyufuJissekiSearchNendo) {
+    public void  setDdlKyufuJissekiSearchNendo(DropDownList ddlKyufuJissekiSearchNendo) {
         this.getKyufuJissekiSearchPanel().getKyufuJissekiChushutsuHani().setDdlKyufuJissekiSearchNendo(ddlKyufuJissekiSearchNendo);
     }
 
@@ -136,7 +135,7 @@ public class KyufuJissekiShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadKyufuJissekiSearchDateType(RadioButton radKyufuJissekiSearchDateType) {
+    public void  setRadKyufuJissekiSearchDateType(RadioButton radKyufuJissekiSearchDateType) {
         this.getKyufuJissekiSearchPanel().getKyufuJissekiChushutsuHani().setRadKyufuJissekiSearchDateType(radKyufuJissekiSearchDateType);
     }
 
@@ -146,7 +145,7 @@ public class KyufuJissekiShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKyufuJissekiSearchServiceTeikyoYM(TextBoxDateRange txtKyufuJissekiSearchServiceTeikyoYM) {
+    public void  setTxtKyufuJissekiSearchServiceTeikyoYM(TextBoxDateRange txtKyufuJissekiSearchServiceTeikyoYM) {
         this.getKyufuJissekiSearchPanel().getKyufuJissekiChushutsuHani().setTxtKyufuJissekiSearchServiceTeikyoYM(txtKyufuJissekiSearchServiceTeikyoYM);
     }
 
@@ -156,7 +155,7 @@ public class KyufuJissekiShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setKyufuJissekiKensakuTaisho(KyufuJissekiKensakuTaishoDiv KyufuJissekiKensakuTaisho) {
+    public void  setKyufuJissekiKensakuTaisho(KyufuJissekiKensakuTaishoDiv KyufuJissekiKensakuTaisho) {
         this.getKyufuJissekiSearchPanel().setKyufuJissekiKensakuTaisho(KyufuJissekiKensakuTaisho);
     }
 
@@ -166,7 +165,7 @@ public class KyufuJissekiShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadTaisho1(RadioButton radTaisho1) {
+    public void  setRadTaisho1(RadioButton radTaisho1) {
         this.getKyufuJissekiSearchPanel().getKyufuJissekiKensakuTaisho().setRadTaisho1(radTaisho1);
     }
 
@@ -176,7 +175,7 @@ public class KyufuJissekiShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnKyufuJissekiSearchClear(Button btnKyufuJissekiSearchClear) {
+    public void  setBtnKyufuJissekiSearchClear(Button btnKyufuJissekiSearchClear) {
         this.getKyufuJissekiSearchPanel().setBtnKyufuJissekiSearchClear(btnKyufuJissekiSearchClear);
     }
 
@@ -186,8 +185,108 @@ public class KyufuJissekiShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnKyufuJissekiSearch(Button btnKyufuJissekiSearch) {
+    public void  setBtnKyufuJissekiSearch(Button btnKyufuJissekiSearch) {
         this.getKyufuJissekiSearchPanel().setBtnKyufuJissekiSearch(btnKyufuJissekiSearch);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtKyufuJissekiListHihokenshaNo() {
+        return this.getKyufuJissekiListPanel().getTxtKyufuJissekiListHihokenshaNo();
+    }
+
+    @JsonIgnore
+    public void  setTxtKyufuJissekiListHihokenshaNo(TextBox txtKyufuJissekiListHihokenshaNo) {
+        this.getKyufuJissekiListPanel().setTxtKyufuJissekiListHihokenshaNo(txtKyufuJissekiListHihokenshaNo);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtKyufuJissekiListJuminShubetsu() {
+        return this.getKyufuJissekiListPanel().getTxtKyufuJissekiListJuminShubetsu();
+    }
+
+    @JsonIgnore
+    public void  setTxtKyufuJissekiListJuminShubetsu(TextBox txtKyufuJissekiListJuminShubetsu) {
+        this.getKyufuJissekiListPanel().setTxtKyufuJissekiListJuminShubetsu(txtKyufuJissekiListJuminShubetsu);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtKyufuJissekiListYokaigodo() {
+        return this.getKyufuJissekiListPanel().getTxtKyufuJissekiListYokaigodo();
+    }
+
+    @JsonIgnore
+    public void  setTxtKyufuJissekiListYokaigodo(TextBox txtKyufuJissekiListYokaigodo) {
+        this.getKyufuJissekiListPanel().setTxtKyufuJissekiListYokaigodo(txtKyufuJissekiListYokaigodo);
+    }
+
+    @JsonIgnore
+    public TextBoxDateRange getTxtKyufuJissekiListNinteiYukoKikan() {
+        return this.getKyufuJissekiListPanel().getTxtKyufuJissekiListNinteiYukoKikan();
+    }
+
+    @JsonIgnore
+    public void  setTxtKyufuJissekiListNinteiYukoKikan(TextBoxDateRange txtKyufuJissekiListNinteiYukoKikan) {
+        this.getKyufuJissekiListPanel().setTxtKyufuJissekiListNinteiYukoKikan(txtKyufuJissekiListNinteiYukoKikan);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtKyufuJissekiListName() {
+        return this.getKyufuJissekiListPanel().getTxtKyufuJissekiListName();
+    }
+
+    @JsonIgnore
+    public void  setTxtKyufuJissekiListName(TextBox txtKyufuJissekiListName) {
+        this.getKyufuJissekiListPanel().setTxtKyufuJissekiListName(txtKyufuJissekiListName);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtKyufuJissekiListSeibetsu() {
+        return this.getKyufuJissekiListPanel().getTxtKyufuJissekiListSeibetsu();
+    }
+
+    @JsonIgnore
+    public void  setTxtKyufuJissekiListSeibetsu(TextBox txtKyufuJissekiListSeibetsu) {
+        this.getKyufuJissekiListPanel().setTxtKyufuJissekiListSeibetsu(txtKyufuJissekiListSeibetsu);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtKyufuJissekiListSeinengappi() {
+        return this.getKyufuJissekiListPanel().getTxtKyufuJissekiListSeinengappi();
+    }
+
+    @JsonIgnore
+    public void  setTxtKyufuJissekiListSeinengappi(TextBox txtKyufuJissekiListSeinengappi) {
+        this.getKyufuJissekiListPanel().setTxtKyufuJissekiListSeinengappi(txtKyufuJissekiListSeinengappi);
+    }
+
+    @JsonIgnore
+    public DataGrid<dgKyufuJissekiMeisaiList_Row> getDgKyufuJissekiMeisaiList() {
+        return this.getKyufuJissekiListPanel().getDgKyufuJissekiMeisaiList();
+    }
+
+    @JsonIgnore
+    public void  setDgKyufuJissekiMeisaiList(DataGrid<dgKyufuJissekiMeisaiList_Row> dgKyufuJissekiMeisaiList) {
+        this.getKyufuJissekiListPanel().setDgKyufuJissekiMeisaiList(dgKyufuJissekiMeisaiList);
+    }
+
+    @JsonIgnore
+    public DataGrid<dgKyufuJissekiGokeiList_Row> getDgKyufuJissekiGokeiList() {
+        return this.getKyufuJissekiListPanel().getDgKyufuJissekiGokeiList();
+    }
+
+    @JsonIgnore
+    public void  setDgKyufuJissekiGokeiList(DataGrid<dgKyufuJissekiGokeiList_Row> dgKyufuJissekiGokeiList) {
+        this.getKyufuJissekiListPanel().setDgKyufuJissekiGokeiList(dgKyufuJissekiGokeiList);
+    }
+
+    @JsonIgnore
+    public Button getBtnKyufuJissekiResearch() {
+        return this.getKyufuJissekiListPanel().getBtnKyufuJissekiResearch();
+    }
+
+    @JsonIgnore
+    public void  setBtnKyufuJissekiResearch(Button btnKyufuJissekiResearch) {
+        this.getKyufuJissekiListPanel().setBtnKyufuJissekiResearch(btnKyufuJissekiResearch);
     }
 
     // </editor-fold>

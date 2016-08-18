@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.report.source.sogojigyohisaishinsake
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- * 総合事業費再審査決定通知書情報取込一覧表（保険者分）帳票Builder
+ * 総合事業費再審査決定通知書情報取込一覧表帳票Builder
  *
  * @reamsid_L DBC-4680-040 wangxue
  */

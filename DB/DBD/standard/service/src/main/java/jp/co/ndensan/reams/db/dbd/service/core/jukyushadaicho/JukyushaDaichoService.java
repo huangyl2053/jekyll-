@@ -77,7 +77,7 @@ public class JukyushaDaichoService {
         entity.setShichosonCode(daicho.get市町村コード());
         entity.setHihokenshaNo(daicho.get被保険者番号());
         Long 履歴番号 = Long.parseLong(daicho.get履歴番号().toString()) + 1;
-        entity.setRirekiNo(new RString(履歴番号.toString()));
+        entity.setRirekiNo(new RString(String.format("%04d", 履歴番号)));
         entity.setEdaban(daicho.get枝番());
         entity.setShinseishoKanriNo(daicho.get申請書管理番号());
         entity.setShinseiJokyoKubun(daicho.get申請状況区分());

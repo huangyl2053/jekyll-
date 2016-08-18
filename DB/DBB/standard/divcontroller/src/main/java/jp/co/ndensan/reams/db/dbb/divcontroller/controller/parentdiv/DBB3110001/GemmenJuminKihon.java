@@ -112,8 +112,8 @@ public class GemmenJuminKihon {
      * @return 介護保険料減免画面
      */
     public ResponseData<GemmenJuminKihonDiv> onSelectBySelectButton_dgFukaRirekiAll(GemmenJuminKihonDiv div) {
-        // TODO QA932 選択された全賦課履歴情報グリッドの明細の取得メソッドがありません。
         GemmenJuminKihonHandler handler = getHandler(div);
+        handler.clearパネル();
         FukaTaishoshaKey 賦課対象者 = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
         HihokenshaNo 被保険者番号 = 賦課対象者.get被保険者番号();
         NendobunFukaGemmenListResult 減免リスト = handler.onClick_選択ボタン(被保険者番号);
@@ -167,7 +167,7 @@ public class GemmenJuminKihon {
     public ResponseData<GemmenJuminKihonDiv> onClick_btnCalculate(GemmenJuminKihonDiv div) {
         FukaTaishoshaKey 賦課対象者 = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
         HihokenshaNo 被保険者番号 = 賦課対象者.get被保険者番号();
-        FlexibleYear 賦課年度 = 賦課対象者.get賦課年度();
+        FlexibleYear 賦課年度 = ViewStateHolder.get(ViewStateKeys.賦課年度, FlexibleYear.class);
         NendobunFukaGemmenList 年度分賦課減免リスト = ViewStateHolder.get(ViewStateKeys.年度分賦課減免リスト, NendobunFukaGemmenList.class);
         Map<RString, List> map = getHandler(div).計算する(年度分賦課減免リスト, 賦課年度, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.減免後の普徴金額LIST, (ArrayList) map.get(定値_ゼロ));
@@ -228,7 +228,7 @@ public class GemmenJuminKihon {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             FukaTaishoshaKey 賦課対象者 = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
             HihokenshaNo 被保険者番号 = 賦課対象者.get被保険者番号();
-            FlexibleYear 賦課年度 = 賦課対象者.get賦課年度();
+            FlexibleYear 賦課年度 = ViewStateHolder.get(ViewStateKeys.賦課年度, FlexibleYear.class);
             List<Decimal> 減免後の普徴金額LIST = ViewStateHolder.get(ViewStateKeys.減免後の普徴金額LIST, List.class);
             List<Decimal> 減免後の特徴と過年度金額LIST = ViewStateHolder.get(ViewStateKeys.減免後の特徴と過年度金額LIST, List.class);
             年度分賦課減免リスト = handler.保存前の編集(年度分賦課減免リスト,

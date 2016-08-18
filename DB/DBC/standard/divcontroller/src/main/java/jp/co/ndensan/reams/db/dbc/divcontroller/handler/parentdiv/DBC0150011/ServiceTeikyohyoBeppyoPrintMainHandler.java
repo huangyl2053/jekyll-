@@ -67,19 +67,53 @@ public class ServiceTeikyohyoBeppyoPrintMainHandler {
         List<KyufuJikoSakuseiEntityResult> 帳票データ = manager.帳票データ抽出(被保険者番号, 対象年月, 履歴番号,
                 自己作成計画年月);
         KyufuJikoSakuseiEntityResult 合計Entity = 帳票データ.get(帳票データ.size() - 1);
-        帳票データ.remove(帳票データ.size() - 1);
-        List<KyufuJikoSakuseiEntityResult> 計画EntityList = 帳票データ;
+        List<KyufuJikoSakuseiEntityResult> 計画EntityList = 帳票データ.subList(0, 帳票データ.size() - 1 - 1);
         合計Entity = manager.合計Entity単位設定(被保険者番号, 居宅総合事業区分, 自己作成計画年月, 合計Entity);
-        param.set合計情報(合計Entity);
+        KyufuJikoSakuseiEntityResult 合計Entity_合計情報用 = result新規(合計Entity);
+        KyufuJikoSakuseiEntityResult 合計Entity_帳票情報用 = result新規(合計Entity);
+        param.set合計情報(合計Entity_合計情報用);
         param.set帳票情報マップ(manager.creat事業者別マップ(被保険者番号, 対象年月, 履歴番号, 自己作成計画年月,
-                計画EntityList, 合計Entity));
+                計画EntityList, 合計Entity_帳票情報用));
         param.set帳票ヘッダー(被保険者情報Result);
         param.set作成日時(new FlexibleDate(div.getTxtSakuseiYmd().getValue().toDateString()));
         param.set利用年月(自己作成計画年月);
-        param.set種類別支給限度情報(manager.get種類別支給限度情報(自己作成計画年月, 帳票データ));
+        param.set種類別支給限度情報(manager.get種類別支給限度情報(自己作成計画年月, 計画EntityList));
         param.set短期入所情報(manager.get短期入所利用日数(被保険者番号, 対象年月, 履歴番号, 自己作成計画年月));
         ServiceRiyohyoBeppyoPrintService printService = new ServiceRiyohyoBeppyoPrintService();
         return printService.printSingle(param);
+    }
+
+    private KyufuJikoSakuseiEntityResult result新規(KyufuJikoSakuseiEntityResult result) {
+        KyufuJikoSakuseiEntityResult 新規Result = new KyufuJikoSakuseiEntityResult();
+        新規Result.set事業者(result.get事業者());
+        新規Result.setサービス(result.getサービス());
+        新規Result.set単位(result.get単位());
+        新規Result.set割引適用後率(result.get割引適用後率());
+        新規Result.set割引適用後単位(result.get割引適用後単位());
+        新規Result.set回数(result.get回数());
+        新規Result.setサービス単位(result.getサービス単位());
+        新規Result.set種類限度超過単位(result.get種類限度超過単位());
+        新規Result.set種類限度内単位(result.get種類限度内単位());
+        新規Result.set単位数単価(result.get単位数単価());
+        新規Result.set区分限度超過単位(result.get区分限度超過単位());
+        新規Result.set区分限度内単位(result.get区分限度内単位());
+        新規Result.set給付率(result.get給付率());
+        新規Result.set給付計画単位数(result.get給付計画単位数());
+        新規Result.set費用総額(result.get費用総額());
+        新規Result.set保険給付額(result.get保険給付額());
+        新規Result.set保険対象利用者負担額(result.get保険対象利用者負担額());
+        新規Result.set全額利用者負担額(result.get全額利用者負担額());
+        新規Result.set事業者コード(result.get事業者コード());
+        新規Result.setサービス種類コード(result.getサービス種類コード());
+        新規Result.setサービス項目コード(result.getサービス項目コード());
+        新規Result.setステータス(result.getステータス());
+        新規Result.set合計フラグ(result.is合計フラグ());
+        新規Result.set限度額対象外フラグ(result.get限度額対象外フラグ());
+        新規Result.set定額利用者負担単価金額(result.get定額利用者負担単価金額());
+        新規Result.set支給限度単位数(result.get支給限度単位数());
+        新規Result.set適用開始年月日(result.get適用開始年月日());
+        新規Result.set適用終了年月日(result.get適用終了年月日());
+        return 新規Result;
     }
 
 }

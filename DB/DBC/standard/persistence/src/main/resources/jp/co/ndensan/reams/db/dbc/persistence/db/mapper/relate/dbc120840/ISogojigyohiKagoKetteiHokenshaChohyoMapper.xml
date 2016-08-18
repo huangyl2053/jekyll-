@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-2550-011 jiangxiaolong -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc120840.ISogojigyohiKagoKetteiHokenshaChohyoMapper">
+    <select id="get帳票出力対象データ"
+                resultMap="resultMap_SogojigyohiKagoKetteiHokenshaChohyoEntity" parameterType="java.util.Map"  fetchSize="500" resultOrdered="true">
+        SELECT 
+        <include refid="allColumns_SogojigyohiKagoKetteiHokenshaChohyo" />
+        FROM "DbWT3060KagoKetteiShukei" AS DbWT3060 
+        INNER JOIN "DbWT3061KagoKetteiMeisai" AS DbWT3061 ON DbWT3060."hdrRirekiNo" = DbWT3061."rirekiNo"
+        INNER JOIN "DbWT0001Hihokensha" AS DbWT0001 ON DbWT3061."renban" = DbWT0001."meisaiRenban"
+        ${出力順}
+    </select>
+
+    <resultMap id="resultMap_SogojigyohiKagoKetteiHokenshaChohyoEntity"
+                   type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120840.SogojigyohiKagoKetteiHokenshaChohyoEntity"
+                   autoMapping="true">
+            <result property="保険者番号" column="dbWT3060_hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+            <result property="保険者名" column="dbWT3060_hokenshaMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+            <result property="証記載保険者番号" column="dbWT3060_hdrShoHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+            <result property="証記載保険者名" column="dbWT3060_hdrShoHokenshaMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+            <result property="取扱年月" column="dbWT3061_toriatsukaiYm" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+            <result property="事業者番号" column="dbWT3061_jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+            <result property="事業者名" column="dbWT3061_jigyoshoMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+            <result property="被保険者氏名" column="dbWT0001_orgHihokenshaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+            <result property="被保険者番号" column="dbWT0001_orgHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+            <result property="サービス提供年月" column="dbWT3061_serviceTeikyoYm" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+            <result property="サービス種類コード" column="dbWT3061_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+            <result property="サービス種類名" column="dbWT3061_serviceShuruiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+            <result property="過誤申立事由コード" column="dbWT3061_kagomoushitateJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+            <result property="過誤申立事由" column="dbWT3061_kagomoushitateJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+            <result property="単位数" column="dbWT3061_tanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+            <result property="負担額" column="dbWT3061_hokenshaFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+            <result property="総合事業費_件数" column="dbWT3060_kaigoKyufuhiKensu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+            <result property="総合事業費_単位数" column="dbWT3060_kaigoKyufuhiTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+            <result property="総合事業費_負担額" column="dbWT3060_kaigoKyufuhiFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+            <result property="識別コード" column="dbWT0001_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+            <result property="連番" column="row_number" />
+    </resultMap>
+
+    <sql id="allColumns_SogojigyohiKagoKetteiHokenshaChohyo">
+        DbWT3060."hokenshaNo" AS dbWT3060_hokenshaNo,
+        DbWT3060."hokenshaMei" AS dbWT3060_hokenshaMei,
+        DbWT3060."hdrShoHokenshaNo" AS dbWT3060_hdrShoHokenshaNo,
+        DbWT3060."hdrShoHokenshaMei" AS dbWT3060_hdrShoHokenshaMei,
+        DbWT3061."toriatsukaiYm" AS dbWT3061_toriatsukaiYm,
+        DbWT3061."jigyoshoNo" AS dbWT3061_jigyoshoNo,
+        DbWT3061."jigyoshoMei" AS dbWT3061_jigyoshoMei,
+        DbWT0001."orgHihokenshaNo" AS dbWT0001_orgHihokenshaNo,
+        DbWT0001."orgHihokenshaShimei" AS dbWT0001_orgHihokenshaShimei,
+        DbWT3061."serviceTeikyoYm" AS dbWT3061_serviceTeikyoYm,
+        DbWT3061."serviceShuruiCode" AS dbWT3061_serviceShuruiCode,
+        DbWT3061."serviceShuruiName" AS dbWT3061_serviceShuruiName,
+        DbWT3061."kagomoushitateJiyuCode" AS dbWT3061_kagomoushitateJiyuCode,
+        DbWT3061."kagomoushitateJiyu" AS dbWT3061_kagomoushitateJiyu,
+        DbWT3061."tanisu" AS dbWT3061_tanisu,
+        DbWT3061."hokenshaFutangaku" AS dbWT3061_hokenshaFutangaku,
+        DbWT3060."kaigoKyufuhiKensu" AS dbWT3060_kaigoKyufuhiKensu,
+        DbWT3060."kaigoKyufuhiTanisu" AS dbWT3060_kaigoKyufuhiTanisu,
+        DbWT3060."kaigoKyufuhiFutangaku" AS dbWT3060_kaigoKyufuhiFutangaku,
+        DbWT0001."shikibetsuCode" AS dbWT0001_shikibetsuCode,
+        ROW_NUMBER() OVER() AS row_number
+    </sql>
+
+</mapper>

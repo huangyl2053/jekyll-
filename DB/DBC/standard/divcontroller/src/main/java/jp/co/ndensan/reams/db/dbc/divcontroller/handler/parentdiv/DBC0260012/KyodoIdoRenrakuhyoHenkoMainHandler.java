@@ -276,7 +276,7 @@ public class KyodoIdoRenrakuhyoHenkoMainHandler {
                     基本_履歴番号, 償還_履歴番号, 高額_履歴番号, is基本送付活性, is償還送付活性, is高額送付活性,
                     is基本送付_追加, is償還送付_追加, is高額送付_追加, is基本送付_削除, is償還送付_削除, is高額送付_削除);
         }
-        AccessLogger.log(AccessLogType.照会, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
+        AccessLogger.log(AccessLogType.更新, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
         前排他キーの解除(被保険者番号.getColumnValue());
     }
 

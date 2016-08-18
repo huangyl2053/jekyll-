@@ -187,10 +187,13 @@ public class ShiharaiIchijiSashitomeTsuchishoEditor implements IShiharaiIchijiSa
             source.hihokenshaNo9 = 被保険者番号.substring(NOCOUNT_8, NOCOUNT_9);
             source.hihokenshaNo10 = 被保険者番号.substring(NOCOUNT_9, NOCOUNT_10);
         }
-        source.tsuchibun1 = 通知書定型文リスト.get(1);
+        if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
+            source.tsuchibun1 = 通知書定型文リスト.get(1);
+            source.tsuchibun2 = 通知書定型文リスト.get(2);
+        }
         if (null != 帳票制御共通) {
             RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-            if (new RString("1").equals(定型文文字サイズ)) {
+            if (null != 通知書定型文リスト && new RString("1").equals(定型文文字サイズ)) {
                 source.renrakusakiHoka = 通知書定型文リスト.get(NOCOUNT_3);
             }
         }
@@ -260,6 +263,7 @@ public class ShiharaiIchijiSashitomeTsuchishoEditor implements IShiharaiIchijiSa
                 if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
                     source.tsuchibun2 = 通知書定型文リスト.get(2);
                 }
+
                 if (null != 年度1リスト && 年度1リスト.size() > 0) {
                     source.hokenGokei1 = DecimalFormatter.toコンマ区切りRString(get保険料合計(年度1リスト), 0);
                     source.entaiGokei1 = DecimalFormatter.toコンマ区切りRString(get滞納額合計(年度1リスト), 0);
@@ -273,9 +277,6 @@ public class ShiharaiIchijiSashitomeTsuchishoEditor implements IShiharaiIchijiSa
                     source.entaiGokei3 = DecimalFormatter.toコンマ区切りRString(get滞納額合計(年度3リスト), 0);
                 }
 
-                if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
-                    source.tsuchibun2 = 通知書定型文リスト.get(2);
-                }
             }
         }
     }

@@ -55,6 +55,8 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
 
     private static final Code YUKOMUKOKUBUN_有効 = new Code("1");
     private static final int INT_6 = 6;
+    private static final Code 申請状況区分_0 = new Code("0");
+    private static final Code 申請状況区分_1 = new Code("1");
     private static final RString 履歴番号 = new RString("0000");
     private static final RString メッセージ_被保険者番号 = new RString("被保険者番号");
     private static final RString メッセージ_市町村コード = new RString("市町村コード");
@@ -613,5 +615,43 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(logicalDeletedFlag, false)))
                 .toList(DbT4001JukyushaDaichoEntity.class);
+    }
+
+    /**
+     * 認定申請中状況の取得
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT4001JukyushaDaichoEntity
+     */
+    @Transaction
+    public DbT4001JukyushaDaichoEntity get認定申請中状況(HihokenshaNo 被保険者番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT4001JukyushaDaicho.class).
+                where(and(
+                                eq(DbT4001JukyushaDaicho.hihokenshaNo, 被保険者番号),
+                                eq(yukoMukoKubun, YUKOMUKOKUBUN_有効),
+                                eq(shinseiJokyoKubun, 申請状況区分_0),
+                                eq(DbT4001JukyushaDaicho.logicalDeletedFlag, false)))
+                .order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).limit(1).toObject(DbT4001JukyushaDaichoEntity.class);
+    }
+
+    /**
+     * 認定完了状況の取得
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT4001JukyushaDaichoEntity
+     */
+    @Transaction
+    public DbT4001JukyushaDaichoEntity get認定完了状況(HihokenshaNo 被保険者番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT4001JukyushaDaicho.class).
+                where(and(
+                                eq(DbT4001JukyushaDaicho.hihokenshaNo, 被保険者番号),
+                                eq(yukoMukoKubun, YUKOMUKOKUBUN_有効),
+                                eq(shinseiJokyoKubun, 申請状況区分_1),
+                                eq(DbT4001JukyushaDaicho.logicalDeletedFlag, false)))
+                .order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).limit(1).toObject(DbT4001JukyushaDaichoEntity.class);
     }
 }

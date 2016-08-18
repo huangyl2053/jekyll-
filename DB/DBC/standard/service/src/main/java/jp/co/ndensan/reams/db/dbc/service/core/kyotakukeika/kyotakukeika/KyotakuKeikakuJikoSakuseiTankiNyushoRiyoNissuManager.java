@@ -128,4 +128,17 @@ public class KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuManager {
             dac.save(entity);
         }
     }
+
+    /**
+     * 居宅短期入所情報を登録します。
+     *
+     * @param 居宅短期入所情報 KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu
+     */
+    public void insert居宅短期入所情報(KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu 居宅短期入所情報) {
+        if (居宅短期入所情報 != null) {
+            DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity entity = 居宅短期入所情報.toEntity();
+            entity.setState(EntityDataState.Added);
+            dac.save(entity);
+        }
+    }
 }

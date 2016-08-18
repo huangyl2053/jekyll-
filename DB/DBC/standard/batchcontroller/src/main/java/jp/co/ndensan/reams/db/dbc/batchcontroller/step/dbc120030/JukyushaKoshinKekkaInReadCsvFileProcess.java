@@ -37,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 受給者情報更新結果情報取込のCSVファイル読取
  *
- * @reamsid DBC-2730-010 chenjie
+ * @reamsid_L DBC-2730-010 chenjie
  */
 public class JukyushaKoshinKekkaInReadCsvFileProcess extends BatchProcessBase<RString> {
 
