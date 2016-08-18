@@ -15,7 +15,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiT
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiTodokedesha.NinteiShinseiTodokedesha.NinteiShinseiTodokedeshaDiv;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
@@ -64,7 +67,20 @@ public class NinteiShinseiTodokedeshaHandler {
             shinseiKankeishaCodeList.add(code.getCode());
         }
         div.getDdlShinseiKankeisha().setDataSource(setDataSource(shinseiKankeishaCodeList, false));
+        if ((NinteiShinseiTodokedeshaDiv.ShoriType.ShokaiMode).equals(div.getMode_ShoriType())) {
+            div.getTxtJigyoshaCode().setValue(model.get申請届出代行事業者番号());
+            div.getTxtHonninKankeisei().setValue(model.get続柄());
+            div.getTxtShimei().setValue(model.get氏名());
+            div.getTxtKanaShimei().setValue(model.getカナ氏名());
+            div.getTxtTelNo().setDomain(new TelNo(model.get電話番号()));
+            div.getTxtYubinNo().setValue(new YubinNo(model.get郵便番号()));
+            div.getCcdChoikiInput().load(ChoikiCode.EMPTY, model.get住所());
+            div.getDdlTodokledeDaikoKubun().setSelectedKey(model.get申請届出代行区分コード());
+            div.getDdlShinseiKankeisha().setSelectedKey(model.get事業者区分());
+            div.getDdlTodokledeDaikoKubun().setSelectedKey(管内);
+        }
         setHidden(model);
+        div.setMode_DisplayType(NinteiShinseiTodokedeshaDiv.DisplayType.管内);
     }
 
     /**

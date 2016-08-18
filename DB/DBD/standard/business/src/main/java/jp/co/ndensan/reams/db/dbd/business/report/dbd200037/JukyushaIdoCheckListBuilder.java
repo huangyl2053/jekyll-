@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 受給者台帳異動チェックリストBuilderクラスです。
  *
- * @reamsid_L DBD-1770-030 donghj
+ * @reamsid_L DBD-1770-040 donghj
  */
 public class JukyushaIdoCheckListBuilder implements IJukyushaIdoCheckListBuilder {
 

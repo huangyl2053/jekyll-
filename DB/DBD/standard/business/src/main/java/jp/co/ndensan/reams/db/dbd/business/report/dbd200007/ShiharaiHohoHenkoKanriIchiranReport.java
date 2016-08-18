@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 支払方法変更管理リストのReportです。
  *
- * @reamsid_L DBD-3630-050 liangbc
+ * @reamsid_L DBD-3630-050 xuyue
  */
 public class ShiharaiHohoHenkoKanriIchiranReport extends Report<ShiharaiHohoHenkoKanriIchiranReportSource> {
 
@@ -25,8 +25,9 @@ public class ShiharaiHohoHenkoKanriIchiranReport extends Report<ShiharaiHohoHenk
     private final HokenshaNo 保険者番号;
     private final RString 保険者名称;
     private final IOutputOrder 出力順;
-    private final ShiharaiHohoHenkoEntity 支払方法変更リストEntity;
-    private int count;
+    private final ShiharaiHohoHenkoEntity 支払方法変更リストEntity_上;
+    private final ShiharaiHohoHenkoEntity 支払方法変更リストEntity_下;
+    private static final int 行数17 = 17;
 
     /**
      * インスタンスを生成します。
@@ -35,37 +36,21 @@ public class ShiharaiHohoHenkoKanriIchiranReport extends Report<ShiharaiHohoHenk
      * @param 保険者番号 保険者番号
      * @param 保険者名称 保険者名称
      * @param 出力順 出力順
-     * @param 支払方法変更リストEntity 支払方法変更リストEntity
-     * @return 社会福祉法人等利用者負担軽減対象確認申請書のReport
+     * @param 支払方法変更リストEntity_上 帳票上部の支払方法変更リストEntity
+     * @param 支払方法変更リストEntity_下 帳票下部の支払方法変更リストEntity
      */
-    public static ShiharaiHohoHenkoKanriIchiranReport createReport(RDateTime 作成日時,
+    public ShiharaiHohoHenkoKanriIchiranReport(RDateTime 作成日時,
             HokenshaNo 保険者番号,
             RString 保険者名称,
             IOutputOrder 出力順,
-            ShiharaiHohoHenkoEntity 支払方法変更リストEntity) {
-        return new ShiharaiHohoHenkoKanriIchiranReport(作成日時, 保険者番号, 保険者名称, 出力順, 支払方法変更リストEntity);
-    }
-
-    /**
-     * インスタンスを生成します。
-     *
-     * @param 作成日時 作成日時
-     * @param 保険者番号 保険者番号
-     * @param 保険者名称 保険者名称
-     * @param 出力順 出力順
-     * @param 支払方法変更リストEntity 支払方法変更リストEntity
-     */
-    protected ShiharaiHohoHenkoKanriIchiranReport(RDateTime 作成日時,
-            HokenshaNo 保険者番号,
-            RString 保険者名称,
-            IOutputOrder 出力順,
-            ShiharaiHohoHenkoEntity 支払方法変更リストEntity) {
+            ShiharaiHohoHenkoEntity 支払方法変更リストEntity_上,
+            ShiharaiHohoHenkoEntity 支払方法変更リストEntity_下) {
         this.作成日時 = 作成日時;
         this.保険者名称 = 保険者名称;
         this.保険者番号 = 保険者番号;
         this.出力順 = 出力順;
-        this.支払方法変更リストEntity = 支払方法変更リストEntity;
-        this.count = 1;
+        this.支払方法変更リストEntity_上 = 支払方法変更リストEntity_上;
+        this.支払方法変更リストEntity_下 = 支払方法変更リストEntity_下;
     }
 
     /**
@@ -75,11 +60,13 @@ public class ShiharaiHohoHenkoKanriIchiranReport extends Report<ShiharaiHohoHenk
      */
     @Override
     public void writeBy(ReportSourceWriter<ShiharaiHohoHenkoKanriIchiranReportSource> reportSourceWriter) {
-        IShiharaiHohoHenkoKanriIchiranEditor editor
-                = new ShiharaiHohoHenkoKanriIchiranEditorImpl(作成日時, 保険者番号, 保険者名称, 出力順, 支払方法変更リストEntity, count);
-        IShiharaiHohoHenkoKanriIchiranBuilder builder
-                = new ShiharaiHohoHenkoKanriIchiranBuilderImpl(editor);
-        count = count + 1;
-        reportSourceWriter.writeLine(builder);
+        for (int 行数 = 1; 行数 <= 行数17; 行数++) {
+            IShiharaiHohoHenkoKanriIchiranEditor editor
+                    = new ShiharaiHohoHenkoKanriIchiranEditorImpl(作成日時, 保険者番号, 保険者名称, 出力順,
+                            支払方法変更リストEntity_上, 支払方法変更リストEntity_下, 行数);
+            IShiharaiHohoHenkoKanriIchiranBuilder builder
+                    = new ShiharaiHohoHenkoKanriIchiranBuilderImpl(editor);
+            reportSourceWriter.writeLine(builder);
+        }
     }
 }

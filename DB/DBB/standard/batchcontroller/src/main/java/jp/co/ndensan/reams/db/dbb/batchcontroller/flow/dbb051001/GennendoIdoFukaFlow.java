@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.SystemTimeUpdat
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.TokuchoIraikinProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.TokuchoKaishishaProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.TsuchishoNoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.KeisangoJohoDelete;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.fukajohotoroku.FukaJohoTorokuBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.ChohyoResult;
@@ -55,6 +56,7 @@ public class GennendoIdoFukaFlow extends BatchFlowBase<CreateHonsanteiIdoBatchPa
     private static final RString 賦課の情報登録フローBATCHID = new RString("FukaJohoTorokuFlow");
     private static final RString 計算後情報作成BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
     private static final String 計算後情報作成 = "keisangoJohoSakusei";
+    private static final String 計算後情報テーブル削除 = "keisangoJohoDelete";
     private static final String 本算定異動_現年度_結果一覧表 = "spoolHonsanteiIdoKekkaIchiranData";
     private static final String 処理日付管理テーブル更新 = "updateSystemTimeProcess";
     private static final ReportId 帳票分類ID = new ReportId("DBB200015_HonsanteiIdouKekkaIchiran");
@@ -92,11 +94,13 @@ public class GennendoIdoFukaFlow extends BatchFlowBase<CreateHonsanteiIdoBatchPa
             executeStep(特徴依頼金計算_４月開始);
         }
         executeStep(賦課の情報登録フロー);
+        executeStep(計算後情報テーブル削除);
+        executeStep(計算後情報作成);
         for (ChohyoResult entity : parameter.get出力帳票List()) {
             if (帳票分類ID.equals(entity.get帳票分類ID())) {
                 processParameter.set出力帳票一覧(entity);
-                executeStep(計算後情報作成);
                 executeStep(本算定異動_現年度_結果一覧表);
+                break;
             }
         }
         executeStep(処理日付管理テーブル更新);
@@ -206,6 +210,16 @@ public class GennendoIdoFukaFlow extends BatchFlowBase<CreateHonsanteiIdoBatchPa
     protected IBatchFlowCommand choteiToroku() {
         return otherBatchFlow(賦課の情報登録フローBATCHID, SubGyomuCode.DBB介護賦課,
                 new FukaJohoTorokuBatchParameter(true)).define();
+    }
+
+    /**
+     * 計算後情報テーブル削除を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(計算後情報テーブル削除)
+    protected IBatchFlowCommand keisangoJohoDelete() {
+        return simpleBatch(KeisangoJohoDelete.class).define();
     }
 
     /**
