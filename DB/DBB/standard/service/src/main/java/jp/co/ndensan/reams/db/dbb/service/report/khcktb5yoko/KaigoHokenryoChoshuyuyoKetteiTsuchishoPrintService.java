@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigo
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.gyosekukaku.IGyoseiKukaku;
+import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
@@ -155,21 +157,25 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
     }
 
     private HyojiCodes get表示コード(KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho 徴収猶予決定通知書情報) {
-
-        HyojiCodeResearcher hyojiCodeResearcher = new HyojiCodeResearcher();
-        if (isNotNull(徴収猶予決定通知書情報.get帳票制御共通()) && isNotNull(徴収猶予決定通知書情報.get宛名())
-                && isNotNull(徴収猶予決定通知書情報.get納組情報())) {
-            return hyojiCodeResearcher.create表示コード情報(
-                    徴収猶予決定通知書情報.get帳票制御共通().toEntity(),
-                    徴収猶予決定通知書情報.get宛名().get住所().get町域コード().value(),
-                    徴収猶予決定通知書情報.get宛名().get行政区画().getGyoseiku().getコード().value(),
-                    徴収猶予決定通知書情報.get宛名().get行政区画().getChiku1().getコード().value(),
-                    徴収猶予決定通知書情報.get宛名().get行政区画().getChiku2().getコード().value(),
-                    徴収猶予決定通知書情報.get宛名().get行政区画().getChiku3().getコード().value(),
-                    徴収猶予決定通知書情報.get納組情報().getNokumi().getNokumiCode());
-        } else {
-            return null;
+        HyojiCodeResearcher researcher = new HyojiCodeResearcher();
+        HyojiCodes 表示コード = null;
+        if (isNotNull(徴収猶予決定通知書情報.get帳票制御共通())) {
+            IGyoseiKukaku 行政区画 = null;
+            IJusho 住所 = null;
+            if (isNotNull(徴収猶予決定通知書情報.get宛名())) {
+                行政区画 = 徴収猶予決定通知書情報.get宛名().get行政区画();
+                住所 = 徴収猶予決定通知書情報.get宛名().get住所();
+            }
+            表示コード = researcher.create表示コード情報(徴収猶予決定通知書情報.get帳票制御共通().toEntity(),
+                    住所 != null ? 住所.get町域コード().value() : RString.EMPTY,
+                    行政区画 != null ? 行政区画.getGyoseiku().getコード().value() : RString.EMPTY,
+                    行政区画 != null ? 行政区画.getChiku1().getコード().value() : RString.EMPTY,
+                    行政区画 != null ? 行政区画.getChiku2().getコード().value() : RString.EMPTY,
+                    行政区画 != null ? 行政区画.getChiku3().getコード().value() : RString.EMPTY,
+                    徴収猶予決定通知書情報.get納組情報() != null
+                    ? 徴収猶予決定通知書情報.get納組情報().getNokumi().getNokumiCode() : RString.EMPTY);
         }
+        return 表示コード;
     }
 
     private EditedAtesaki get編集後宛先(KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho 徴収猶予決定通知書情報) {
