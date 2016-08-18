@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd581001;
 
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd581001.YokaigoJissiJyokyohyoHakkouMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd581001.YokaigoJissiJyokyohyoMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -38,6 +39,8 @@ public class YokaigoJissiJyokyohyoProcessParameter implements IBatchProcessParam
     private RString 概況調査テキストイメージ区分;
     private RString 集計単位;
     private RString psmShikibetsuTaisho;
+    private RString 基準日;
+    private FlexibleDate 対象年度;
 
     public YokaigoJissiJyokyohyoProcessParameter(
             RString 出力帳票,
@@ -51,7 +54,9 @@ public class YokaigoJissiJyokyohyoProcessParameter implements IBatchProcessParam
             RString 地区区分,
             Code 開始地区コード,
             Code 終了地区コード,
-            RString 集計単位) {
+            RString 集計単位,
+            RString 基準日,
+            FlexibleDate 対象年度) {
         this.出力帳票 = 出力帳票;
         this.対象年月日From = 対象年月日From;
         this.対象年月日To = 対象年月日To;
@@ -60,10 +65,12 @@ public class YokaigoJissiJyokyohyoProcessParameter implements IBatchProcessParam
         this.年齢To = 年齢To;
         this.生年月日From = 生年月日From;
         this.生年月日To = 生年月日To;
-        this.集計単位 = 集計単位;
+        this.地区区分 = 地区区分;
         this.開始地区コード = 開始地区コード;
         this.終了地区コード = 終了地区コード;
         this.集計単位 = 集計単位;
+        this.基準日 = 基準日;
+        this.対象年度 = 対象年度;
 
     }
 
@@ -85,8 +92,15 @@ public class YokaigoJissiJyokyohyoProcessParameter implements IBatchProcessParam
                 開始地区コード,
                 終了地区コード,
                 集計単位,
-                対象年月日From,
-                対象年月日To,
                 psmShikibetsuTaisho);
+    }
+
+    /**
+     * バッチMybatisパラメターを取得します．
+     *
+     * @return YokaigoJissiJyokyohyoHakkouMybatisParameter
+     */
+    public YokaigoJissiJyokyohyoHakkouMybatisParameter toYokaigoJissiJyokyohyoHakkouMybatisParameter() {
+        return new YokaigoJissiJyokyohyoHakkouMybatisParameter(対象年月日From, 対象年月日To);
     }
 }
