@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakoshinkekka;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.seikyugakutsuchishofutanshain.DbWT1511SeikyugakuTsuchishoTempEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -22,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-public class DbWT5331JukyushaJohoTempEntity extends DbTableEntityBase<DbWT1511SeikyugakuTsuchishoTempEntity> implements IDbAccessable {
+public class DbWT5331JukyushaJohoTempEntity extends DbTableEntityBase<DbWT5331JukyushaJohoTempEntity> implements IDbAccessable {
 
     @TempTableColumnOrder(1)
     private int renban;
