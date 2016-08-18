@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 /**
  * 総合事業費過誤決定通知書情報取込（保険者分)帳票BodyEditor
  *
- * @reamsid_LDBC-2520-011 jiangxiaolong
+ * @reamsid_LDBC-2550-011 jiangxiaolong
  */
 public class SogojigyohiKagoKetteiHokenshaBodyEditor
         implements ISogojigyohiKagoKetteiHokenshaBunEditor {
