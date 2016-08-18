@@ -57,6 +57,8 @@ public class YokaigoJissiJyokyohyoParameter extends BatchParameterBase {
                 地区区分,
                 開始地区コード,
                 終了地区コード,
-                集計単位);
+                集計単位,
+                基準日,
+                対象年度);
     }
 }

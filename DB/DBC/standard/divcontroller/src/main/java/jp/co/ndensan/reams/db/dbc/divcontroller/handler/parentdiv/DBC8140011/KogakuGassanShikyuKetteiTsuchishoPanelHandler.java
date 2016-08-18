@@ -102,8 +102,6 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
         div.getKogakuGassanShikyuKetteiTsuchishoSakuseiKaigoKihon().initialize(被保険者番号);
         if (!get前排他(被保険者番号.getColumnValue())) {
             throw new PessimisticLockingException();
-        } else {
-            前排他キーのセット(被保険者番号.getColumnValue());
         }
         AccessLogger.log(AccessLogType.照会, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
         JukyushaDaichoManager manage1 = new JukyushaDaichoManager();
@@ -329,16 +327,6 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
     public boolean get前排他(RString 被保険者番号) {
         LockingKey 排他キー = new LockingKey(DBCHIHOKENSHANO.concat(被保険者番号));
         return RealInitialLocker.tryGetLock(排他キー);
-    }
-
-    /**
-     * 前排他キーのセットのンメソッドます。
-     *
-     * @param 被保険者番号 RString
-     */
-    public void 前排他キーのセット(RString 被保険者番号) {
-        LockingKey 排他キー = new LockingKey(DBCHIHOKENSHANO.concat(被保険者番号));
-        RealInitialLocker.lock(排他キー);
     }
 
     /**

@@ -23,5 +23,8 @@ public class KokuhorenkyotsuCsvFileReadProcessParameter implements IBatchProcess
     private FlexibleYearMonth 処理年月;
     private RString 保存先パース;
     private boolean isFirst;
+    private boolean isLast;
+    private int 明細件数合算;
+    private int 集計件数合算;
 
 }

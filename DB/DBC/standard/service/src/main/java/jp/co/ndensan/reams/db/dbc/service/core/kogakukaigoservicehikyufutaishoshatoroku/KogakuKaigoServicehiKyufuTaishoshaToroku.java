@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.kogakukaigoservicehikyufutaishos
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kogakukaigokyufuhitaishoshatoroku.DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc020040.DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3104KokuhorenInterfaceKanriDac;
