@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.kyotakukeika.kyotakukeikakujikosa
 import jp.co.ndensan.reams.db.dbc.service.core.kyotakukeika.yobokeikakujikosakuseimeisai.YoboKeikakuJikoSakuseiMeisaiManager;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3007KyotakuKeikakuJikoSakuseiDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -108,6 +109,28 @@ public class KyotakuKeikakuJikoSakuseiManager {
         save居宅給付計画自己作成明細リスト(居宅給付計画自己作成.getKyotakuKeikakuJikosakuseiMeisaiList());
         save予防給付計画自己作成明細リスト(居宅給付計画自己作成.getYoboKeikakuJikoSakuseiMeisaiList());
         return 1 == 居宅給付計画自己作成Dac.save(居宅給付計画自己作成.toEntity());
+    }
+
+    /**
+     * 居宅給付計画自己作成{@link KyotakuKeikakuJikoSakusei}を保存します。
+     *
+     * @param 居宅給付計画自己作成 居宅給付計画自己作成
+     * @return 更新あり:true、更新なし:false <br>
+     * いずれかのテーブルに更新があればtrueを返す、いずれのテーブルもunchangedで更新無しの場合falseを返す
+     */
+    @Transaction
+    public boolean saveByForDeletePhysical居宅給付計画自己作成(KyotakuKeikakuJikoSakusei 居宅給付計画自己作成) {
+        requireNonNull(居宅給付計画自己作成, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅給付計画自己作成"));
+
+        if (!居宅給付計画自己作成.hasChanged()) {
+            return false;
+        }
+        居宅給付計画自己作成 = 居宅給付計画自己作成.modifiedModel();
+        if (居宅給付計画自己作成.toEntity().getState().equals(EntityDataState.Deleted)) {
+            return 1 == 居宅給付計画自己作成Dac.delete(居宅給付計画自己作成.toEntity());
+        } else {
+            return 1 == 居宅給付計画自己作成Dac.save(居宅給付計画自己作成.toEntity());
+        }
     }
 
     private void save居宅給付計画自己作成明細リスト(List<KyotakuKeikakuJikosakuseiMeisai> 居宅給付計画自己作成明細List) {

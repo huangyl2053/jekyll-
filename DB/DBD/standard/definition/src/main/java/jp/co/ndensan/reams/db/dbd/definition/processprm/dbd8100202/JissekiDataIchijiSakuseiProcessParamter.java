@@ -12,8 +12,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * 非課税年金対象者同定_processのメタークラスですs
  *
- * @author tz_sunl
+ * @reamsid_L DBD-4910-040 x_tz_sunl
  */
 @Getter
 @Setter

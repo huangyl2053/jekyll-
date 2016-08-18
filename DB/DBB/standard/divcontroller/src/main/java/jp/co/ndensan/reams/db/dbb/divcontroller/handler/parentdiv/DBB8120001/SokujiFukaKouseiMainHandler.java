@@ -41,7 +41,6 @@ import jp.co.ndensan.reams.db.dbb.service.core.basic.GemmenManager;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.choteijiyu.ChoteiJiyuHantei;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
-import jp.co.ndensan.reams.db.dbb.service.core.kanri.HonsanteiIkoHantei;
 import jp.co.ndensan.reams.db.dbb.service.core.tokucho.TokuchoIraiJohoSakuseiJokyo;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
@@ -164,7 +163,7 @@ public class SokujiFukaKouseiMainHandler {
             set現年度の普通徴収情報の入力制御(更正後賦課リスト);
         }
         set過年度の徴収情報(更正前賦課リスト, 更正後賦課リスト);
-        set保険料年額と事由タブエリア(更正前賦課リスト, 更正後賦課リスト, 保険料段階List);
+        set保険料年額と事由タブエリア(更正前賦課リスト, 更正後賦課リスト, 保険料段階List, is本算定処理済フラグ);
         div.setInitData(getPaneItem());
     }
 
@@ -1120,12 +1119,11 @@ public class SokujiFukaKouseiMainHandler {
     }
 
     private void set保険料年額と事由タブエリア(NendobunFukaList 更正前賦課リスト, NendobunFukaList 更正後賦課リスト,
-            HokenryoDankaiList 保険料段階List) {
+            HokenryoDankaiList 保険料段階List, boolean is本算定処理済フラグ) {
         set更正前算定の基礎(更正前賦課リスト, 保険料段階List);
         set更正後算定の基礎(更正後賦課リスト, 保険料段階List);
         FukaJoho 更正後現年度 = 更正後賦課リスト.get現年度();
-        HonsanteiIkoHantei honsanteiIkoHantei = HonsanteiIkoHantei.createInstance();
-        if (!honsanteiIkoHantei.is本算定後(更正後賦課リスト.get現年度())) {
+        if (!is本算定処理済フラグ) {
             div.getSokujikouseiJiyu().setDisplayNone(true);
             return;
         }

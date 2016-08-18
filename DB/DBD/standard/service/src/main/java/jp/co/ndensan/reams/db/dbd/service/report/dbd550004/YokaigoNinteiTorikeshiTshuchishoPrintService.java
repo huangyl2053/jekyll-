@@ -53,7 +53,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 要介護認定取消通知書
  *
- * @reamsid_L DBD-1440-010 liuyl
+ * @reamsid_L DBD-1440-020 liuyl
  */
 public class YokaigoNinteiTorikeshiTshuchishoPrintService {
 

@@ -30,20 +30,20 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public class SogojigyohiSaishinsaService {
 
-    private final RString 決定タイトル = new RString("＜再審査決定＞");
-    private final RString 決定件数タイトル = new RString("件数");
-    private final RString 決定単位数タイトル = new RString("単位数");
-    private final RString 決定負担額タイトル = new RString("保険者負担額");
-    private final RString 調整タイトル = new RString("＜調整＞");
-    private final RString 調整件数タイトル = new RString("件数");
-    private final RString 調整単位数タイトル = new RString("単位数");
-    private final RString 調整負担額タイトル = new RString("保険者負担額");
-    private final RString 総合事業費タイトル = new RString("総合事業費");
-    private final int INT_0 = 0;
-    private final int INT_1 = 1;
-    private final int INT_2 = 2;
-    private final int INT_3 = 3;
-    private final int INT_4 = 4;
+    private static final RString 決定タイトル = new RString("＜再審査決定＞");
+    private static final RString 決定件数タイトル = new RString("件数");
+    private static final RString 決定単位数タイトル = new RString("単位数");
+    private static final RString 決定負担額タイトル = new RString("保険者負担額");
+    private static final RString 調整タイトル = new RString("＜調整＞");
+    private static final RString 調整件数タイトル = new RString("件数");
+    private static final RString 調整単位数タイトル = new RString("単位数");
+    private static final RString 調整負担額タイトル = new RString("保険者負担額");
+    private static final RString 総合事業費タイトル = new RString("総合事業費");
+    private static final int INT_0 = 0;
+    private static final int INT_1 = 1;
+    private static final int INT_2 = 2;
+    private static final int INT_3 = 3;
+    private static final int INT_4 = 4;
 
     /**
      * {@link InstanceProvider#create}にて生成した{@link ServicehiShikyuKetteiTsuchisho}のインスタンスを返します。

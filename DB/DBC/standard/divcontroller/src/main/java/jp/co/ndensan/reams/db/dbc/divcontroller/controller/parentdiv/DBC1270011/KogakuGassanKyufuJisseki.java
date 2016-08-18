@@ -51,8 +51,6 @@ public class KogakuGassanKyufuJisseki {
                     DbcInformationMessages.被保険者でないデータ.getMessage().evaluate())).respond();
         }
         setアクセスログ(識別コード, 被保険者番号);
-        List<jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanKyufuJisseki> 高額合算給付実績情報
-                = KogakuGassanKyufuJissekiFinder.createInstance().getKogakuGassanKyufuJisseki(被保険者番号).records();
         boolean isデータ存在 = KogakuGassanKyufuJissekiFinder.createInstance().isデータ存在チェック(被保険者番号);
         boolean is高額合算給付実績チェック = KogakuGassanKyufuJissekiFinder.createInstance().is高額合算給付実績チェック(被保険者番号);
         if (isデータ存在) {
@@ -63,6 +61,8 @@ public class KogakuGassanKyufuJisseki {
             div.getDataGrid1().getActiveRow().setSelectButtonState(DataGridButtonState.Disabled);
             return ResponseData.of(div).addValidationMessages(getValidationHandler().do高額合算給付実績チェック()).respond();
         }
+        List<jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanKyufuJisseki> 高額合算給付実績情報
+                = KogakuGassanKyufuJissekiFinder.createInstance().getKogakuGassanKyufuJisseki(被保険者番号).records();
         getHandler(div).onLoad(被保険者番号, 識別コード, 高額合算給付実績情報);
         return ResponseData.of(div).setState(DBC1270011StateName.初期化);
     }

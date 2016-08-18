@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 /**
  * 障がい者控除対象者认定の障がい者控除認定情報バリデーションクラスです。
  *
- * @reamsid_L DBD-3850-030 liuwei2
+ * @reamsid_L DBD-3850-010 liuwei2
  */
 public enum ShogaishaKojoNinteiJohoDivSpec implements IPredicate<DBD4010011Div> {
 

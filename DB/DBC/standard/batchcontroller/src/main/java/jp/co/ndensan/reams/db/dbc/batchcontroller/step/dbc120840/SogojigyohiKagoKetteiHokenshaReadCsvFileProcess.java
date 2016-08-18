@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 過誤決定通知書情報共通バッチ処理クラス．保険者分・ファイル読込を実行する
  *
- * @reamsid_L DBC-2520-011 jiangxiaolong
+ * @reamsid_L DBC-2550-011 jiangxiaolong
  */
 public class SogojigyohiKagoKetteiHokenshaReadCsvFileProcess extends SimpleBatchProcessBase {
 

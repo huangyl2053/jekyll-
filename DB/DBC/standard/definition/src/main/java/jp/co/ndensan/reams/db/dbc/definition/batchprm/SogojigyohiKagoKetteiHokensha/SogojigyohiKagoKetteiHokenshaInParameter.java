@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *総合事業費過誤決定通知書情報取込（保険者分)のパラメータ
@@ -29,12 +28,8 @@ public class SogojigyohiKagoKetteiHokenshaInParameter extends BatchParameterBase
 
     @BatchParameter(key = KEY_SHORIYM, name = NAME_SHORIYM)
     private FlexibleYearMonth shoriYM;
-    //private FlexibleYearMonth 処理年月;
     @BatchParameter(key = KEY_SAISHORIKUBUN, name = NAME_SAISHORIKUBUN)
     private SaiShoriKubun saishoriKubun;
-    //private RString saishoriKubun;
-    //private RString 再処理区分;
     @BatchParameter(key = KEY_SHUTSURYOKUJUNID, name = NAME_SHUTSURYOKUJUNID)
     private Long shutsuryokujunId;
-    //private Long 出力順ID;
 }
