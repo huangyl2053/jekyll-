@@ -4,6 +4,10 @@ var DBC;
         var Events = (function () {
             function Events() {
             }
+            Events.onBlur_txtRiyoYM = function () {
+                return "onBlur_txtRiyoYM";
+            };
+
             Events.onClick_btnShowShuruiGendogaku = function () {
                 return "onClick_btnShowShuruiGendogaku";
             };
@@ -30,6 +34,54 @@ var DBC;
 
             Events.onClick_btnSelect = function () {
                 return "onClick_btnSelect";
+            };
+
+            Events.onClick_btnModify = function () {
+                return "onClick_btnModify";
+            };
+
+            Events.onBlur_txtTani = function () {
+                return "onBlur_txtTani";
+            };
+
+            Events.onBlur_txtWaribikigoRitsu = function () {
+                return "onBlur_txtWaribikigoRitsu";
+            };
+
+            Events.onBlur_txtKaisu = function () {
+                return "onBlur_txtKaisu";
+            };
+
+            Events.onClick_btnCancelMeisaiInput = function () {
+                return "onClick_btnCancelMeisaiInput";
+            };
+
+            Events.onBlur_txtShuruiGendoChokaTani = function () {
+                return "onBlur_txtShuruiGendoChokaTani";
+            };
+
+            Events.onBlur_txtShuruiGendonaiTani = function () {
+                return "onBlur_txtShuruiGendonaiTani";
+            };
+
+            Events.onBlur_txtTanisuTanka = function () {
+                return "onBlur_txtTanisuTanka";
+            };
+
+            Events.onBlur_txtKubunGendoChokaTani = function () {
+                return "onBlur_txtKubunGendoChokaTani";
+            };
+
+            Events.onBlur_txtKubunGendonaiTani = function () {
+                return "onBlur_txtKubunGendonaiTani";
+            };
+
+            Events.onBlur_txtKyufuritsu = function () {
+                return "onBlur_txtKyufuritsu";
+            };
+
+            Events.onClick_btnCancelGokeiInput = function () {
+                return "onClick_btnCancelGokeiInput";
             };
             return Events;
         })();

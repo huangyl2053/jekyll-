@@ -213,7 +213,6 @@ public class JukyushaKoshinKekkaInReadCsvFileProcess extends BatchProcessBase<RS
                 受給者一時entity.set有料老人ホーム等同意書の有無(RString.EMPTY);
                 受給者一時entity.set突合結果区分(RString.EMPTY);
                 受給者一時entity.set突合情報区分(RString.EMPTY);
-                受給者一時entity.set保険者番号(コントロールレコード.getHokenshaNo());
                 Hokensha hokensha = 保険者名取得.getHokensha(new HokenjaNo(コントロールレコード.getHokenshaNo()));
                 if (hokensha != null) {
                     受給者一時entity.set保険者名(hokensha.get保険者名());

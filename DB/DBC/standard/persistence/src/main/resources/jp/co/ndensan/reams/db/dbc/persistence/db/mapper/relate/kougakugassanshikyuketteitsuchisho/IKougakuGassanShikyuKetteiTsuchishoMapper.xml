@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： KogakuServicehiDetail_高額サービス費詳細内容入力共有子Divのマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-4850-040 pengxingyi -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kougakugassanshikyuketteitsuchisho.IKougakuGassanShikyuKetteiTsuchishoMapper">
+  
+    <select id="getKozaJyoho" resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kougakugassanshikyuketteitsuchisho.KougakuGassanShikyuKetteiTsuchishoParameter"
+            resultMap="resultMap_KozaJyoho" fetchSize="500">
+        SELECT
+            GyomubetsuPrimaryKey."gyomuCode" as "gyomuCode",
+            GyomubetsuPrimaryKey."subGyomuCode" as "subGyomuCode",
+            GyomubetsuPrimaryKey."kamokuCode" as "kamokuCode",
+            Koza."gyomuKoyuKey"  as "gyomuKoyuKey",
+            Koza."yotoKubun" as "yotoKubun"
+        FROM
+            rgua."UaT0310Koza" AS Koza
+            LEFT JOIN 
+            rgua."UaT0100GyomubetsuPrimaryKey" AS GyomubetsuPrimaryKey
+            ON Koza."gyomubetsuPrimaryKey" = GyomubetsuPrimaryKey."gyomubetsuPrimaryKey"
+        WHERE 
+            Koza."kozaId" = #{口座ID}
+    </select>
+    
+    
+    <resultMap id="resultMap_KozaJyoho" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kougakugassanshikyuketteitsuchisho.KozaJyohoEntity" autoMapping="true">
+        <result property="業務コード"              column="gyomuCode"              typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyomuCodeTypeHandler"/>
+        <result property="サブ業務コード"          column="subGyomuCode"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
+        <result property="科目コード"              column="gyomuKoyuKey"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KamokuCodeTypeHandler"/>
+        <result property="業務固有キー"            column="gyomuKoyuKey"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="用途区分"                column="yotoKubun"              typeHandler="jp.co.ndensan.reams.ua.uax.entity.typehandlers.KozaYotoKubunCodeValueTypeHandler"/>        
+    </resultMap>
+   
+   <select id="select事業高額合算" resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kougakugassanshikyuketteitsuchisho.KougakuGassanShikyuKetteiTsuchishoParameter"
+            resultMap="resultMap_KougakuGassan" fetchSize="500">
+        SELECT 
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3174JigyoKogakuGassanShikyuFushikyuKetteiMapper.allColumns_DbT3174JigyoKogakuGassanShikyuFushikyuKettei" />,
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaMapper.allColumns_DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka" />
+        FROM
+            rgdb."DbT3174JigyoKogakuGassanShikyuFushikyuKettei" AS "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"
+        INNER JOIN    
+            rgdb."DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka" AS "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"
+        ON
+            "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."hihokenshaNo" = "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."hihokenshaNo" 
+            AND "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."taishoNendo" = "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."taishoNendo"
+            AND "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."shikyuSeiriNo" = "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."shikyuSeiriNo"
+            AND "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."rirekiNo" = "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."rirekiNo"
+        WHERE
+            "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."hihokenshaNo" = #{被保険者番号}
+            AND "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."taishoNendo" = #{対象年度}
+            AND "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."shikyuSeiriNo" = #{連絡票整理番号}
+            AND "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."rirekiNo" = #{履歴番号}
+            AND "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."isDeleted" = false
+            AND "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."isDeleted" = false
+   </select>
+   
+   <resultMap id="resultMap_KougakuGassan" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kougakugassanshikyuketteitsuchisho.JigyoKogakuGassanEntity" autoMapping="true">
+        <id column="dbT3174JigyoKogakuGassanShikyuFushikyuKettei_hihokenshaNo"/>
+        <association property="事業高額合算支給額計算結果" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaMapper.resultMap_DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity"/>
+        <association property="事業高額合算支給不支給決定" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3174JigyoKogakuGassanShikyuFushikyuKetteiMapper.ResultMap_DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity"/>    
+    </resultMap>
+   
+   
+</mapper>

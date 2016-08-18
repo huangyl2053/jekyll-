@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.business.core.dbt4030011;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd4030011.NinteishoJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -148,12 +149,12 @@ public class NinteishoJohoBusiness {
     }
 
     /**
-     * 申告年を設定します。
+     * 対象年度を設定します。
      *
-     * @param 申告年 申告年
+     * @param 対象年度 対象年度
      */
-    public void set申告年(RDate 申告年) {
-        ninteishoJohoEntity.set申告年(申告年);
+    public void set対象年度(FlexibleYear 対象年度) {
+        ninteishoJohoEntity.set対象年度(対象年度);
     }
 
 }

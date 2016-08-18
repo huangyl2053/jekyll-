@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 高額合算給付実績のデータアクセスクラスです。
  *
- * @reamsid_L DBC-3010-010 linghuhang
+ * @reamsid_L DBC-3010-030 linghuhang
  */
 public class DbT3075KogakuGassanKyufuJissekiDac implements ISaveable<DbT3075KogakuGassanKyufuJissekiEntity> {
 

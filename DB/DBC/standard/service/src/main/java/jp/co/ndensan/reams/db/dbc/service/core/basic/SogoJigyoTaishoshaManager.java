@@ -114,4 +114,22 @@ public class SogoJigyoTaishoshaManager {
         }
         return 1 == dac.save(総合事業対象者.toEntity());
     }
+
+    /**
+     * 総合事業対象者を全件返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return List<SogoJigyoTaishosha>
+     */
+    @Transaction
+    public List<SogoJigyoTaishosha> get総合事業対象者(
+            HihokenshaNo 被保険者番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        List<SogoJigyoTaishosha> businessList = new ArrayList<>();
+        for (DbT3105SogoJigyoTaishoshaEntity entity : dac.get総合事業対象者(被保険者番号)) {
+            entity.initializeMd5();
+            businessList.add(new SogoJigyoTaishosha(entity));
+        }
+        return businessList;
+    }
 }

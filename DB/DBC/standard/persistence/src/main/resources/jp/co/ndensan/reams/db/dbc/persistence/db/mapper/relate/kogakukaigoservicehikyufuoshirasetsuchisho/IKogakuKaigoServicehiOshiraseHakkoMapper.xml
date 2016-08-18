@@ -72,8 +72,8 @@
         AND tmp1."dbT3055KogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" <![CDATA[<=]]> #{ shoriYm }
         AND tmp1."dbT3056KogakuShikyuShinsei_hihokenshaNo" IN (SELECT DISTINCT "hihokenshaNoJoho" FROM "ShinseiJohoTemp")
         ORDER BY
-        tmp1."dbT3056KogakuShikyuShinsei_shoKisaiHokenshaNo" ASC,
-        tmp1."dbT3056KogakuShikyuShinsei_serviceTeikyoYM" ASC
+        tmp1."dbT3056KogakuShikyuShinsei_hihokenshaNo" ASC,
+        tmp1."dbT3056KogakuShikyuShinsei_serviceTeikyoYM" DESC
         ) サービス費申請情報
         WHERE 
         サービス費申請情報.rowNo = 2
@@ -96,8 +96,8 @@
         AND tmp1."dbT3110JigyoKogakuShikyuShinsei_shoKisaiHokenshaNo" = #{ 保険者番号 }
         AND tmp1."dbT3110JigyoKogakuShikyuShinsei_hihokenshaNo" IN (SELECT DISTINCT "hihokenshaNoJoho" FROM "ShinseiJohoTemp")
         ORDER BY
-        tmp1."dbT3110JigyoKogakuShikyuShinsei_shoKisaiHokenshaNo" ASC,
-        tmp1."dbT3110JigyoKogakuShikyuShinsei_serviceTeikyoYM" ASC
+        tmp1."dbT3110JigyoKogakuShikyuShinsei_hihokenshaNo" ASC,
+        tmp1."dbT3110JigyoKogakuShikyuShinsei_serviceTeikyoYM" DESC
         ) サービス費申請情報
         WHERE 
         サービス費申請情報.rowNo = 2
@@ -406,6 +406,10 @@
         <id column="dbT1001HihokenshaDaicho_hihokenshaNo" />
         <id column="dbT1001HihokenshaDaicho_idoYMD" />
         <id column="dbT1001HihokenshaDaicho_edaNo" />
+        <id column="hihokenshaNoJoho" />
+        <id column="serviceTeikyoYMJoho" />
+        <id column="shoKisaiHokenshaNoJoho" />
+        <id column="rirekiNoJoho" />
         <association property="被保険者台帳" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="申請情報" resultMap="resultMap_ShinseiJohoTempEntity"/>
     </resultMap>
@@ -413,6 +417,10 @@
         <id column="dbT1001HihokenshaDaicho_hihokenshaNo" />
         <id column="dbT1001HihokenshaDaicho_idoYMD" />
         <id column="dbT1001HihokenshaDaicho_edaNo" />
+        <id column="hihokenshaNoShokan" />
+        <id column="serviceTeikyoYMShokan" />
+        <id column="shoKisaiHokenshaNoShokan" />
+        <id column="rirekiNoShokan" />
         <association property="被保険者台帳" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="申請情報償還" resultMap="resultMap_ShinseiJohoShokanTempEntity"/>
     </resultMap>
@@ -680,7 +688,7 @@
         <result property="kogakuTaishoGaiFlagJoho" column="kogakuTaishoGaiFlagJoho" />
         <result property="jidoShokanTaishoFlagJoho" column="jidoShokanTaishoFlagJoho" />
         <result property="serviceHiyoGokeiGakuJoho" column="serviceHiyoGokeiGakuJoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="riyoshaFutanGakuJoho" column="riyoshaFutanGakuJoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="riyoshaFutanGakuGokeiJoho" column="riyoshaFutanGakuGokeiJoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="kogakuKyufuKonkyoJoho" column="kogakuKyufuKonkyoJoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="meisaiTaishoshaUketoriYMJoho" column="meisaiTaishoshaUketoriYMJoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="jigyoshaNoJoho" column="jigyoshaNoJoho" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>

@@ -50,7 +50,7 @@ public class ShogaishaKojoNinteishoPrintService {
                 target.set障害理由区分(ninteishoJohoentity.get障害理由区分());
                 target.set障害理由内容(ninteishoJohoentity.get障害理由内容());
                 target.set要介護認定日(ninteishoJohoentity.get要介護認定日());
-                target.set申告年(ninteishoJohoentity.get対象年度());
+                target.set対象年度(ninteishoJohoentity.get対象年度());
             }
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD100025.getReportId(),
                     FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),

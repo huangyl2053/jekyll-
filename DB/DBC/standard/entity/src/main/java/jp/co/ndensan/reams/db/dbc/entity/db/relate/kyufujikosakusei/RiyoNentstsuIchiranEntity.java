@@ -5,23 +5,21 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei;
 
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 短期入所情報用Entityクラスです。
  *
- * @reamsid_L DBC-1930-060 cuilin
+ * @reamsid_L DBC-0020-011 xuchangyong
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TankiNyushoEntity {
+public class RiyoNentstsuIchiranEntity {
 
-    private Decimal 前回迄利用日数;
-    private Decimal 今回計画利用日数;
-    private RString 暫定区分;
+    private FlexibleYearMonth 利用年月;
     private RString 更新区分;
+    private FlexibleDate 更新年月日;
     private FlexibleYearMonth 送付年月;
 }

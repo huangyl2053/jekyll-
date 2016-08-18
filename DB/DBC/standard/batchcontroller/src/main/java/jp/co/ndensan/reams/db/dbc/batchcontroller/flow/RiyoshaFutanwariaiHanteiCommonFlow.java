@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc180020;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
  *
  * @reamsid_L DBC-4950-030 liuyang
  */
-public class DBC180020_IdoRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC180020_IdoRiyoshaFutanwariaiHanteiParameter> {
+public class RiyoshaFutanwariaiHanteiCommonFlow extends BatchFlowBase<DBC180020_IdoRiyoshaFutanwariaiHanteiParameter> {
 
     @Override
     protected void defineFlow() {

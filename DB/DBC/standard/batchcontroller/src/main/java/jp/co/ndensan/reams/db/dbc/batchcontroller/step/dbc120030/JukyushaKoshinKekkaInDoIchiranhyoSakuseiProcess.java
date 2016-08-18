@@ -106,6 +106,7 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
     private static final int INDEX_5 = 5;
+    private static final int 保険者名最大桁 = 80;
 
     private static final RString KEY_並び順の２件目 = new RString("KEY_並び順の２件目");
     private static final RString KEY_並び順の３件目 = new RString("KEY_並び順の３件目");
@@ -191,6 +192,7 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
 
     @Override
     protected void usualProcess(JukyushaHihokenshaEntity 帳票出力対象データ) {
+        JukyushaHihokenshaEntity beforeEntity = getBefore();
         RString 管内管外区分 = 帳票出力対象データ.get被保険者一時().get管内管外区分();
         RString 住所 = 帳票出力対象データ.get被保険者一時().get住所();
         RString 番地 = 帳票出力対象データ.get被保険者一時().get番地();
@@ -198,9 +200,17 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
         RString 行政区名 = 帳票出力対象データ.get被保険者一時().get行政区名();
         LasdecCode 市町村コード = 帳票出力対象データ.get被保険者一時().get市町村コード();
         RString 編集住所 = 住所Editor.editJusho(管内管外区分, 住所, 番地, 方書, 行政区名, 市町村コード);
-        JukyushaKoshinKekkaIchiranReport report = new JukyushaKoshinKekkaIchiranReport(帳票出力対象データ, 編集住所, this.出力順Map, this.改頁リスト, parameter.getシステム日付());
+        JukyushaKoshinKekkaIchiranCsvEntity output;
+        if (beforeEntity != null) {
+            output = this.書き込むデータ作成(帳票出力対象データ.get受給者情報明細一時(), 
+                    帳票出力対象データ.get被保険者一時(), parameter.getシステム日付(), 編集住所, false);
+        } else {
+            output = this.書き込むデータ作成(帳票出力対象データ.get受給者情報明細一時(), 
+                    帳票出力対象データ.get被保険者一時(), parameter.getシステム日付(), 編集住所, true);
+        }
+        JukyushaKoshinKekkaIchiranReport report = new JukyushaKoshinKekkaIchiranReport(帳票出力対象データ, 
+                編集住所, this.出力順Map, this.改頁リスト, parameter.getシステム日付());
         report.writeBy(reportSourceWriter);
-        JukyushaKoshinKekkaIchiranCsvEntity output = this.書き込むデータ作成(帳票出力対象データ.get受給者情報明細一時(), 帳票出力対象データ.get被保険者一時(), parameter.getシステム日付(), 編集住所);
         csvWriter.writeLine(output);
     }
 
@@ -242,28 +252,37 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
      * @param 被保険者 DbWT0001HihokenshaTempEntity
      * @param 作成日時 RDateTime
      * @param 住所 RString
+     * @param ヘッダーフラグ boolean
      * @return　CSV書き込むデータ
      */
-    private JukyushaKoshinKekkaIchiranCsvEntity 書き込むデータ作成(DbWT5331JukyushaJohoTempEntity 受給者情報, DbWT0001HihokenshaTempEntity 被保険者, RDateTime 作成日時, RString 住所) {
+    private JukyushaKoshinKekkaIchiranCsvEntity 書き込むデータ作成(DbWT5331JukyushaJohoTempEntity 受給者情報, 
+            DbWT0001HihokenshaTempEntity 被保険者, RDateTime 作成日時, RString 住所, boolean ヘッダーフラグ) {
         JukyushaKoshinKekkaIchiranCsvEntity output = new JukyushaKoshinKekkaIchiranCsvEntity();
         RString 保険者名;
         if (受給者情報.get保険者名() == null) {
             保険者名 = RString.EMPTY;
         } else {
-            if (80 < 受給者情報.get保険者名().length()) {
-                保険者名 = 受給者情報.get保険者名().substring(0, 80);
+            if (保険者名最大桁 < 受給者情報.get保険者名().length()) {
+                保険者名 = 受給者情報.get保険者名().substring(0, 保険者名最大桁);
             } else {
                 保険者名 = 受給者情報.get保険者名();
             }
         }
-        output.set保険者番号(受給者情報.get保険者番号());
-        output.set保険者名(保険者名);
-        RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                .fillType(FillType.BLANK).toDateString();
-        RString 作成時 = 作成日時.getTime()
-                .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE);
-        output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時));
+        if (ヘッダーフラグ) {
+            output.set保険者番号(受給者情報.get保険者番号());
+            output.set保険者名(保険者名);
+            RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                    .fillType(FillType.BLANK).toDateString();
+            RString 作成時 = 作成日時.getTime()
+                    .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE);
+            output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時));
+        } else {
+            output.set保険者番号(RString.EMPTY);
+            output.set保険者名(RString.EMPTY);
+            output.set作成日時(RString.EMPTY);
+        }
+       
         output.set訂正年月日(date_to_string(受給者情報.get訂正年月日()));
         output.set訂正区分(受給者情報.get訂正区分コード());
         JukyushaIF_TeiseiKubunCode 訂正区分コード = JukyushaIF_TeiseiKubunCode.toValue(受給者情報.get訂正区分コード());

@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC2000021;
 
 import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihanteimanager.RiyoshaFutanWariaiHanteiManagerResult;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000021.DBC2000021TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000021.DBC2000021PanelAllDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000021.DBC2000021TransitionEventName;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000021.DBC2000021TransitionEventName.判定実行;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000021.PanelAllHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -28,8 +29,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class DBC2000021PanelAll {
 
+    private static final RString 基準日は指定年度内の日付を = new RString("基準日は指定年度内の日付を");
+
     /**
-     * 画面を初期化します。
+     * 画面初期化のメソッドです。
      *
      * @param div DBC2000021PanelAllDiv
      * @return ResponseData DBC2000021PanelAllDiv
@@ -46,7 +49,7 @@ public class DBC2000021PanelAll {
     }
 
     /**
-     * 基準日を設定します
+     * 基準日設定のメソッドです。
      *
      * @param div DBC2000021PanelAllDiv
      * @return ResponseData DBC2000021PanelAllDiv
@@ -57,7 +60,7 @@ public class DBC2000021PanelAll {
     }
 
     /**
-     * 新規判定を実行します
+     * 新規判定実行のメソッドです。
      *
      * @param div DBC2000021PanelAllDiv
      * @return ResponseData DBC2000021PanelAllDiv
@@ -65,7 +68,7 @@ public class DBC2000021PanelAll {
     public ResponseData<DBC2000021PanelAllDiv> onClick_btnJikko(DBC2000021PanelAllDiv div) {
 
         if (!getHandler(div).is基準日は指定年度内()) {
-            throw new ApplicationException(UrErrorMessages.未指定.getMessage().replace("基準日は指定年度内の日付を").evaluate());
+            throw new ApplicationException(UrErrorMessages.未指定.getMessage().replace(基準日は指定年度内の日付を.toString()).evaluate());
         } else {
             HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getCcdKaigoShikakuKihon().get被保険者番号());
             FlexibleYear 年度 = new FlexibleYear(div.getDdlNendo().getSelectedKey());
@@ -79,7 +82,7 @@ public class DBC2000021PanelAll {
     }
 
     /**
-     * 再検索をします
+     * 再検索のメソッドです。
      *
      * @param div DBC2000021PanelAllDiv
      * @return ResponseData DBC2000021PanelAllDiv
@@ -89,7 +92,7 @@ public class DBC2000021PanelAll {
     }
 
     /**
-     * 検索結果一覧に遷移します
+     * 検索結果一覧に遷移するのメソッドです。
      *
      *
      * @param div DBC2000021PanelAllDiv

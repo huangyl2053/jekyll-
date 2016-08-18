@@ -86,7 +86,8 @@ public class TaishoshaKensakuHandler {
                 }
             }
         }
-        if (!市町村識別ID.isEmpty() && (市町村識別ID_01.equals(市町村識別ID.get(0).getItemId())
+        if (広域.equals(市町村情報.get導入形態コード().value())
+                && !市町村識別ID.isEmpty() && (市町村識別ID_01.equals(市町村識別ID.get(0).getItemId())
                 || 市町村識別ID_99.equals(市町村識別ID.get(0).getItemId()))) {
             KeyValueDataSource key = new KeyValueDataSource();
             RStringBuilder builder = new RStringBuilder();
@@ -98,7 +99,10 @@ public class TaishoshaKensakuHandler {
             list.add(key);
         }
         div.getDDLSityouson().setDataSource(list);
-        if (!div.getDDLSityouson().getDataSource().isEmpty() && キー.equals(div.getDDLSityouson().getDataSource().get(0).getKey())) {
+        if (!list.isEmpty()) {
+            div.getDDLSityouson().setSelectedKey(list.get(0).getKey());
+        }
+        if (!div.getDDLSityouson().getDataSource().isEmpty() && !キー.equals(div.getDDLSityouson().getDataSource().get(0).getKey())) {
             div.getBtnKouhiFutansya().setDisabled(true);
             div.getBtnSougouKouhiFutansya().setDisabled(true);
         }

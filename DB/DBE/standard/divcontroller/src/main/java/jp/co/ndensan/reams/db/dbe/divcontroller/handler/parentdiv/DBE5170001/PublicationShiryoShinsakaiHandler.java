@@ -284,7 +284,7 @@ public class PublicationShiryoShinsakaiHandler {
         if (委員用出力条件資料.contains(印刷帳票_特記事項)) {
             委員用特記事項フラグ = new RString("1");
         }
-        if (事務用出力条件資料.contains(印刷帳票_一次判定結果票)) {
+        if (委員用出力条件資料.contains(印刷帳票_一次判定結果票)) {
             委員用一次判定結果票フラグ = new RString("1");
         }
         if (委員用出力条件資料.contains(印刷帳票_特記事項_一次判定)) {

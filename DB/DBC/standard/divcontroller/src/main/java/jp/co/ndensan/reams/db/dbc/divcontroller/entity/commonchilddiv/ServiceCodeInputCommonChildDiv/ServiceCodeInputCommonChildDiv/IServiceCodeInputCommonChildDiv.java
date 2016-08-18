@@ -55,4 +55,9 @@ public interface IServiceCodeInputCommonChildDiv extends ICommonChildDivBaseProp
      * @param サービス名称 RString
      */
     public void setサービス名称(RString サービス名称);
+
+    /**
+     * 画面をクリアします。
+     */
+    public abstract void clear();
 }

@@ -12,7 +12,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -55,8 +57,7 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissu extends ModelBase<
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity}より{@link YoboKeikakuJikoSakuseiTankiRiyoNissu}を生成します。
      *
-     * @param entity
-     * DBより取得した{@link DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity}
+     * @param entity DBより取得した{@link DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity}
      */
     public YoboKeikakuJikoSakuseiTankiRiyoNissu(DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("予防給付計画自己作成短期利用日数"));
@@ -127,6 +128,42 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissu extends ModelBase<
     }
 
     /**
+     * 暫定区分を返します。
+     *
+     * @return 暫定区分
+     */
+    public RString get暫定区分() {
+        return entity.getZanteiKubun();
+    }
+
+    /**
+     * 更新区分を返します。
+     *
+     * @return 更新区分
+     */
+    public RString get更新区分() {
+        return entity.getKoshinKubun();
+    }
+
+    /**
+     * 更新年月日を返します。
+     *
+     * @return 更新年月日
+     */
+    public FlexibleDate get更新年月日() {
+        return entity.getKoshinYMD();
+    }
+
+    /**
+     * 送付年月を返します。
+     *
+     * @return 送付年月
+     */
+    public FlexibleYearMonth get送付年月() {
+        return entity.getSofuYM();
+    }
+
+    /**
      * {@link DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity}のクローンを返します。
      *
      * @return {@link DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity}のクローン
@@ -139,8 +176,7 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissu extends ModelBase<
     /**
      * 予防給付計画自己作成短期利用日数の識別子{@link YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier}を返します。
      *
-     * @return
-     * 予防給付計画自己作成短期利用日数の識別子{@link YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier}
+     * @return 予防給付計画自己作成短期利用日数の識別子{@link YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier}
      */
     @Override
     public YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier identifier() {

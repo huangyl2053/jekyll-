@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3013YoboKeikakuJikoSak
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -99,5 +100,31 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuManager {
         }
 //        return 1 == dac.save(予防給付計画自己作成短期利用日数.toEntity());
         return false;
+    }
+
+    /**
+     * 予防短期入所情報を削除します。
+     *
+     * @param 予防短期入所情報 YoboKeikakuJikoSakuseiTankiRiyoNissu
+     */
+    public void delete予防短期入所情報(YoboKeikakuJikoSakuseiTankiRiyoNissu 予防短期入所情報) {
+        if (予防短期入所情報 != null) {
+            DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity entity = 予防短期入所情報.toEntity();
+            entity.setState(EntityDataState.Deleted);
+            dac.delete(entity);
+        }
+    }
+
+    /**
+     * 予防短期入所情報を更新します。
+     *
+     * @param 予防短期入所情報 YoboKeikakuJikoSakuseiTankiRiyoNissu
+     */
+    public void update予防短期入所情報(YoboKeikakuJikoSakuseiTankiRiyoNissu 予防短期入所情報) {
+        if (予防短期入所情報 != null) {
+            DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity entity = 予防短期入所情報.toEntity();
+            entity.setState(EntityDataState.Modified);
+            dac.save(entity);
+        }
     }
 }

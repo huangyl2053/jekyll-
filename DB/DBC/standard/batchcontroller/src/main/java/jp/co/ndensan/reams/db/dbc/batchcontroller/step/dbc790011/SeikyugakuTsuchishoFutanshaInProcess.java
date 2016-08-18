@@ -73,7 +73,7 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
     BatchEntityCreatedTempTableWriter 請求額通知書一時tableWriter;
 
     static {
-        PARAMETER_OUT_FLOWENTITY = new RString("flowEntity");
+        PARAMETER_OUT_FLOWENTITY = new RString("outFlowEntity");
     }
 
     private OutputParameter<FlowEntity> outFlowEntity;

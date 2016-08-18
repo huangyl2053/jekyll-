@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0020011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Aug 08 13:54:03 JST 2016 
+ * Wed Aug 17 11:26:02 CST 2016 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgKyotakuServiceRirekiIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
 
     private TextBoxDate taishoYM;
     private RString sakuseiKubun;
@@ -29,6 +29,18 @@ public class dgKyotakuServiceRirekiIchiran_Row extends DataRow {
     private TextBoxDate todokedeYMD;
     private RString todokedeKubun;
     private TextBoxDate koshinYMD;
+    private RString keikakuJigyoshaNo;
+    private RString jgsJigyoshaName;
+    private RString itakusakiJigyoshaNo;
+    private RString itkjgsJigyoshaName;
+    private RString rirekiNo;
+    private RString todokedeshaShimei;
+    private RString todokedeshaShimeiKana;
+    private RString todokedeshaKankeiKubun;
+    private RString todokedeshaTelNo;
+    private RString todokedeshaYubinNo;
+    private RString todokedeshaJusho;
+    private RString kyotakuSogoJigyoKubun;
 
     public dgKyotakuServiceRirekiIchiran_Row() {
         super();
@@ -39,6 +51,18 @@ public class dgKyotakuServiceRirekiIchiran_Row extends DataRow {
         this.todokedeYMD = new TextBoxDate();
         this.todokedeKubun = RString.EMPTY;
         this.koshinYMD = new TextBoxDate();
+        this.keikakuJigyoshaNo = RString.EMPTY;
+        this.jgsJigyoshaName = RString.EMPTY;
+        this.itakusakiJigyoshaNo = RString.EMPTY;
+        this.itkjgsJigyoshaName = RString.EMPTY;
+        this.rirekiNo = RString.EMPTY;
+        this.todokedeshaShimei = RString.EMPTY;
+        this.todokedeshaShimeiKana = RString.EMPTY;
+        this.todokedeshaKankeiKubun = RString.EMPTY;
+        this.todokedeshaTelNo = RString.EMPTY;
+        this.todokedeshaYubinNo = RString.EMPTY;
+        this.todokedeshaJusho = RString.EMPTY;
+        this.kyotakuSogoJigyoKubun = RString.EMPTY;
         this.setOriginalData("taishoYM", taishoYM);
         this.setOriginalData("sakuseiKubun", sakuseiKubun);
         this.setOriginalData("tekiyoKaishiYMD", tekiyoKaishiYMD);
@@ -46,9 +70,21 @@ public class dgKyotakuServiceRirekiIchiran_Row extends DataRow {
         this.setOriginalData("todokedeYMD", todokedeYMD);
         this.setOriginalData("todokedeKubun", todokedeKubun);
         this.setOriginalData("koshinYMD", koshinYMD);
+        this.setOriginalData("keikakuJigyoshaNo", keikakuJigyoshaNo);
+        this.setOriginalData("jgsJigyoshaName", jgsJigyoshaName);
+        this.setOriginalData("itakusakiJigyoshaNo", itakusakiJigyoshaNo);
+        this.setOriginalData("itkjgsJigyoshaName", itkjgsJigyoshaName);
+        this.setOriginalData("rirekiNo", rirekiNo);
+        this.setOriginalData("todokedeshaShimei", todokedeshaShimei);
+        this.setOriginalData("todokedeshaShimeiKana", todokedeshaShimeiKana);
+        this.setOriginalData("todokedeshaKankeiKubun", todokedeshaKankeiKubun);
+        this.setOriginalData("todokedeshaTelNo", todokedeshaTelNo);
+        this.setOriginalData("todokedeshaYubinNo", todokedeshaYubinNo);
+        this.setOriginalData("todokedeshaJusho", todokedeshaJusho);
+        this.setOriginalData("kyotakuSogoJigyoKubun", kyotakuSogoJigyoKubun);
     }
 
-    public dgKyotakuServiceRirekiIchiran_Row(TextBoxDate taishoYM, RString sakuseiKubun, TextBoxDate tekiyoKaishiYMD, TextBoxDate tekiyoShuryoYMD, TextBoxDate todokedeYMD, RString todokedeKubun, TextBoxDate koshinYMD) {
+    public dgKyotakuServiceRirekiIchiran_Row(TextBoxDate taishoYM, RString sakuseiKubun, TextBoxDate tekiyoKaishiYMD, TextBoxDate tekiyoShuryoYMD, TextBoxDate todokedeYMD, RString todokedeKubun, TextBoxDate koshinYMD, RString keikakuJigyoshaNo, RString jgsJigyoshaName, RString itakusakiJigyoshaNo, RString itkjgsJigyoshaName, RString rirekiNo, RString todokedeshaShimei, RString todokedeshaShimeiKana, RString todokedeshaKankeiKubun, RString todokedeshaTelNo, RString todokedeshaYubinNo, RString todokedeshaJusho, RString kyotakuSogoJigyoKubun) {
         super();
         this.setOriginalData("taishoYM", taishoYM);
         this.setOriginalData("sakuseiKubun", sakuseiKubun);
@@ -57,6 +93,18 @@ public class dgKyotakuServiceRirekiIchiran_Row extends DataRow {
         this.setOriginalData("todokedeYMD", todokedeYMD);
         this.setOriginalData("todokedeKubun", todokedeKubun);
         this.setOriginalData("koshinYMD", koshinYMD);
+        this.setOriginalData("keikakuJigyoshaNo", keikakuJigyoshaNo);
+        this.setOriginalData("jgsJigyoshaName", jgsJigyoshaName);
+        this.setOriginalData("itakusakiJigyoshaNo", itakusakiJigyoshaNo);
+        this.setOriginalData("itkjgsJigyoshaName", itkjgsJigyoshaName);
+        this.setOriginalData("rirekiNo", rirekiNo);
+        this.setOriginalData("todokedeshaShimei", todokedeshaShimei);
+        this.setOriginalData("todokedeshaShimeiKana", todokedeshaShimeiKana);
+        this.setOriginalData("todokedeshaKankeiKubun", todokedeshaKankeiKubun);
+        this.setOriginalData("todokedeshaTelNo", todokedeshaTelNo);
+        this.setOriginalData("todokedeshaYubinNo", todokedeshaYubinNo);
+        this.setOriginalData("todokedeshaJusho", todokedeshaJusho);
+        this.setOriginalData("kyotakuSogoJigyoKubun", kyotakuSogoJigyoKubun);
         this.taishoYM = taishoYM;
         this.sakuseiKubun = sakuseiKubun;
         this.tekiyoKaishiYMD = tekiyoKaishiYMD;
@@ -64,6 +112,18 @@ public class dgKyotakuServiceRirekiIchiran_Row extends DataRow {
         this.todokedeYMD = todokedeYMD;
         this.todokedeKubun = todokedeKubun;
         this.koshinYMD = koshinYMD;
+        this.keikakuJigyoshaNo = keikakuJigyoshaNo;
+        this.jgsJigyoshaName = jgsJigyoshaName;
+        this.itakusakiJigyoshaNo = itakusakiJigyoshaNo;
+        this.itkjgsJigyoshaName = itkjgsJigyoshaName;
+        this.rirekiNo = rirekiNo;
+        this.todokedeshaShimei = todokedeshaShimei;
+        this.todokedeshaShimeiKana = todokedeshaShimeiKana;
+        this.todokedeshaKankeiKubun = todokedeshaKankeiKubun;
+        this.todokedeshaTelNo = todokedeshaTelNo;
+        this.todokedeshaYubinNo = todokedeshaYubinNo;
+        this.todokedeshaJusho = todokedeshaJusho;
+        this.kyotakuSogoJigyoKubun = kyotakuSogoJigyoKubun;
     }
 
     public TextBoxDate getTaishoYM() {
@@ -92,6 +152,54 @@ public class dgKyotakuServiceRirekiIchiran_Row extends DataRow {
 
     public TextBoxDate getKoshinYMD() {
         return koshinYMD;
+    }
+
+    public RString getKeikakuJigyoshaNo() {
+        return keikakuJigyoshaNo;
+    }
+
+    public RString getJgsJigyoshaName() {
+        return jgsJigyoshaName;
+    }
+
+    public RString getItakusakiJigyoshaNo() {
+        return itakusakiJigyoshaNo;
+    }
+
+    public RString getItkjgsJigyoshaName() {
+        return itkjgsJigyoshaName;
+    }
+
+    public RString getRirekiNo() {
+        return rirekiNo;
+    }
+
+    public RString getTodokedeshaShimei() {
+        return todokedeshaShimei;
+    }
+
+    public RString getTodokedeshaShimeiKana() {
+        return todokedeshaShimeiKana;
+    }
+
+    public RString getTodokedeshaKankeiKubun() {
+        return todokedeshaKankeiKubun;
+    }
+
+    public RString getTodokedeshaTelNo() {
+        return todokedeshaTelNo;
+    }
+
+    public RString getTodokedeshaYubinNo() {
+        return todokedeshaYubinNo;
+    }
+
+    public RString getTodokedeshaJusho() {
+        return todokedeshaJusho;
+    }
+
+    public RString getKyotakuSogoJigyoKubun() {
+        return kyotakuSogoJigyoKubun;
     }
 
     public void setTaishoYM(TextBoxDate taishoYM) {
@@ -127,6 +235,66 @@ public class dgKyotakuServiceRirekiIchiran_Row extends DataRow {
     public void setKoshinYMD(TextBoxDate koshinYMD) {
         this.setOriginalData("koshinYMD", koshinYMD);
         this.koshinYMD = koshinYMD;
+    }
+
+    public void setKeikakuJigyoshaNo(RString keikakuJigyoshaNo) {
+        this.setOriginalData("keikakuJigyoshaNo", keikakuJigyoshaNo);
+        this.keikakuJigyoshaNo = keikakuJigyoshaNo;
+    }
+
+    public void setJgsJigyoshaName(RString jgsJigyoshaName) {
+        this.setOriginalData("jgsJigyoshaName", jgsJigyoshaName);
+        this.jgsJigyoshaName = jgsJigyoshaName;
+    }
+
+    public void setItakusakiJigyoshaNo(RString itakusakiJigyoshaNo) {
+        this.setOriginalData("itakusakiJigyoshaNo", itakusakiJigyoshaNo);
+        this.itakusakiJigyoshaNo = itakusakiJigyoshaNo;
+    }
+
+    public void setItkjgsJigyoshaName(RString itkjgsJigyoshaName) {
+        this.setOriginalData("itkjgsJigyoshaName", itkjgsJigyoshaName);
+        this.itkjgsJigyoshaName = itkjgsJigyoshaName;
+    }
+
+    public void setRirekiNo(RString rirekiNo) {
+        this.setOriginalData("rirekiNo", rirekiNo);
+        this.rirekiNo = rirekiNo;
+    }
+
+    public void setTodokedeshaShimei(RString todokedeshaShimei) {
+        this.setOriginalData("todokedeshaShimei", todokedeshaShimei);
+        this.todokedeshaShimei = todokedeshaShimei;
+    }
+
+    public void setTodokedeshaShimeiKana(RString todokedeshaShimeiKana) {
+        this.setOriginalData("todokedeshaShimeiKana", todokedeshaShimeiKana);
+        this.todokedeshaShimeiKana = todokedeshaShimeiKana;
+    }
+
+    public void setTodokedeshaKankeiKubun(RString todokedeshaKankeiKubun) {
+        this.setOriginalData("todokedeshaKankeiKubun", todokedeshaKankeiKubun);
+        this.todokedeshaKankeiKubun = todokedeshaKankeiKubun;
+    }
+
+    public void setTodokedeshaTelNo(RString todokedeshaTelNo) {
+        this.setOriginalData("todokedeshaTelNo", todokedeshaTelNo);
+        this.todokedeshaTelNo = todokedeshaTelNo;
+    }
+
+    public void setTodokedeshaYubinNo(RString todokedeshaYubinNo) {
+        this.setOriginalData("todokedeshaYubinNo", todokedeshaYubinNo);
+        this.todokedeshaYubinNo = todokedeshaYubinNo;
+    }
+
+    public void setTodokedeshaJusho(RString todokedeshaJusho) {
+        this.setOriginalData("todokedeshaJusho", todokedeshaJusho);
+        this.todokedeshaJusho = todokedeshaJusho;
+    }
+
+    public void setKyotakuSogoJigyoKubun(RString kyotakuSogoJigyoKubun) {
+        this.setOriginalData("kyotakuSogoJigyoKubun", kyotakuSogoJigyoKubun);
+        this.kyotakuSogoJigyoKubun = kyotakuSogoJigyoKubun;
     }
 
     // </editor-fold>

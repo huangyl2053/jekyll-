@@ -8,13 +8,16 @@ package jp.co.ndensan.reams.db.dbd.business.report.dbd100004;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
+import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.sashitome.ShiharaiHohoHenkoSashitome;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.taino.ShiharaiHohoHenkoTaino;
+import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShiharaiHenkoJohoBunruiKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shokankihonjiho.ShokanKihonJihoEntiy;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100004.TainoHokenryoKojoTsuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
+import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoKanriKubun;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -107,8 +110,6 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
         source.gyoseiku1 = sofubutsuAtesakiSource.gyoseiku;
         source.jushoText = sofubutsuAtesakiSource.jushoText;
         source.katagakiText = sofubutsuAtesakiSource.katagakiText;
-
-        // TODO RSE項目名が設計書と違い
         source.shimei3 = sofubutsuAtesakiSource.shimei1;
         source.shimei4 = sofubutsuAtesakiSource.shimei2;
         source.katagaki3 = sofubutsuAtesakiSource.katagaki1;
@@ -116,7 +117,6 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
         source.jusho4 = sofubutsuAtesakiSource.jusho1;
         source.jusho5 = sofubutsuAtesakiSource.jusho2;
         source.jusho6 = sofubutsuAtesakiSource.jusho3;
-
         source.dainoKubunMei = sofubutsuAtesakiSource.dainoKubunMei;
         source.samabunShimeiText = sofubutsuAtesakiSource.samabunShimeiText;
         source.kakkoLeft1 = sofubutsuAtesakiSource.kakkoLeft1;
@@ -168,37 +168,46 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
             source.hihokenshaNo9 = 被保険者番号.substring(NOCOUNT_8, NOCOUNT_9);
             source.hihokenshaNo10 = 被保険者番号.substring(NOCOUNT_9, NOCOUNT_10);
         }
-        if (null != 帳票制御共通) {
-            RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-            if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
-                source.tsuchibun1 = 通知書定型文リスト.get(1);
-                source.tsuchibun2 = 通知書定型文リスト.get(2);
-                source.tsuchibun3 = 通知書定型文リスト.get(NOCOUNT_3);
-                if (new RString("1").equals(定型文文字サイズ)) {
-                    source.renrakusakiHoka = 通知書定型文リスト.get(NOCOUNT_4);
-                } else {
-                    source.renrakusakiHoka = RString.EMPTY;
-                }
+
+        RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
+        if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
+            source.tsuchibun1 = 通知書定型文リスト.get(1);
+            source.tsuchibun2 = 通知書定型文リスト.get(2);
+            source.tsuchibun3 = 通知書定型文リスト.get(NOCOUNT_3);
+            if (new RString("1").equals(定型文文字サイズ)) {
+                source.renrakusakiHoka = 通知書定型文リスト.get(NOCOUNT_4);
             }
         }
-        if (null != 償還払集計情報リスト && 償還払集計情報リスト.size() > index) {
-            ShokanKihonJihoEntiy 償還払集計情報 = this.償還払集計情報リスト.get(index);
-            source.listKyufuhiNaiyo_1 = 償還払集計情報.getサービス提供年月().wareki().toDateString();
-            source.listKyufuhiNaiyo_2 = 償還払集計情報.getサービス種類コード();
-            source.listKyufuhiNaiyo_3 = DecimalFormatter.toコンマ区切りRString(new Decimal(償還払集計情報.get支払金額()), 0);
-            source.kyufugakuGokei = DecimalFormatter.toコンマ区切りRString(get給付額合計(), 0);
-            source.shikyuGaku = DecimalFormatter.toコンマ区切りRString(get給付額合計().subtract(get保険料額合計()), 0);
-            source.hokenryoGokei = DecimalFormatter.toコンマ区切りRString(get保険料額合計(), 0);
+
+        for (ShiharaiHohoHenkoSashitome 支払方法変更差止 : 帳票情報.getShiharaiHohoHenkoSashitomeList()) {
+            if (支払方法変更差止.get情報分類区分().equals(ShiharaiHenkoJohoBunruiKubun.保険料控除情報.getコード())) {
+                if (null != 償還払集計情報リスト && 償還払集計情報リスト.size() > index) {
+                    ShokanKihonJihoEntiy 償還払集計情報 = this.償還払集計情報リスト.get(index);
+                    source.listKyufuhiNaiyo_1 = 償還払集計情報.getサービス提供年月().wareki().toDateString();
+                    source.listKyufuhiNaiyo_2 = 償還払集計情報.getサービス種類コード();
+                    source.listKyufuhiNaiyo_3 = DecimalFormatter.toコンマ区切りRString(new Decimal(償還払集計情報.get支払金額()), 0);
+                    source.kyufugakuGokei = DecimalFormatter.toコンマ区切りRString(get給付額合計(), 0);
+                    source.shikyuGaku = DecimalFormatter.toコンマ区切りRString(get給付額合計().subtract(get保険料額合計()), 0);
+                    source.hokenryoGokei = DecimalFormatter.toコンマ区切りRString(get保険料額合計(), 0);
+                }
+                break;
+            }
         }
-        if (null != this.帳票情報.getShiharaiHohoHenkoTainoList() && this.帳票情報.getShiharaiHohoHenkoTainoList().size() > index) {
-            ShiharaiHohoHenkoTaino 支払方法変更滞納 = this.帳票情報.getShiharaiHohoHenkoTainoList().get(index);
-            source.listKojoHokenryo_1 = 支払方法変更滞納.get賦課年度().toDateString();
-            source.listKojoHokenryo_2 = 支払方法変更滞納.get収納期_月();
-            source.listKojoHokenryo_3 = DecimalFormatter.toコンマ区切りRString(支払方法変更滞納.get調定額(), 0);
-            source.listKojoHokenryo_4 = 支払方法変更滞納.get納期限().wareki().toDateString();
-            source.hokenryoGokei = DecimalFormatter.toコンマ区切りRString(get保険料額合計(), 0);
-            source.shikyuGaku = DecimalFormatter.toコンマ区切りRString(get給付額合計().subtract(get保険料額合計()), 0);
-            source.kyufugakuGokei = DecimalFormatter.toコンマ区切りRString(get給付額合計(), 0);
+        for (ShiharaiHohoHenkoSashitome 支払方法変更差止 : 帳票情報.getShiharaiHohoHenkoSashitomeList()) {
+            if (支払方法変更差止.get管理区分().equals(ShiharaiHenkoKanriKubun._１号償還払い化.getコード())
+                    && 支払方法変更差止.get情報分類区分().equals(ShiharaiHenkoJohoBunruiKubun.保険料控除情報.getコード())) {
+                if (null != this.帳票情報.getShiharaiHohoHenkoTainoList() && this.帳票情報.getShiharaiHohoHenkoTainoList().size() > index) {
+                    ShiharaiHohoHenkoTaino 支払方法変更滞納 = this.帳票情報.getShiharaiHohoHenkoTainoList().get(index);
+                    source.listKojoHokenryo_1 = 支払方法変更滞納.get賦課年度().toDateString();
+                    source.listKojoHokenryo_2 = 支払方法変更滞納.get収納期_月();
+                    source.listKojoHokenryo_3 = DecimalFormatter.toコンマ区切りRString(支払方法変更滞納.get調定額(), 0);
+                    source.listKojoHokenryo_4 = 支払方法変更滞納.get納期限().wareki().toDateString();
+                    source.hokenryoGokei = DecimalFormatter.toコンマ区切りRString(get保険料額合計(), 0);
+                    source.shikyuGaku = DecimalFormatter.toコンマ区切りRString(get給付額合計().subtract(get保険料額合計()), 0);
+                    source.kyufugakuGokei = DecimalFormatter.toコンマ区切りRString(get給付額合計(), 0);
+                }
+                break;
+            }
         }
 
     }

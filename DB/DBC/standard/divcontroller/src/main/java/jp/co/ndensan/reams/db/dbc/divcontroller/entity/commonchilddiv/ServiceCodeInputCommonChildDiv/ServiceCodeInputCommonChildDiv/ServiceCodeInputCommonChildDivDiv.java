@@ -4,9 +4,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCo
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
  * @author 自動生成
  */
 public class ServiceCodeInputCommonChildDivDiv extends Panel implements IServiceCodeInputCommonChildDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -222,6 +223,18 @@ public class ServiceCodeInputCommonChildDivDiv extends Panel implements IService
     @Override
     public void setサービス名称(RString サービス名称) {
         this.getTxtServiceCodeName().setValue(サービス名称);
+    }
+
+    /**
+     * サービス名称を返します。
+     *
+     * @param サービス名称 RString
+     */
+    @Override
+    public void clear() {
+        this.getTxtServiceCode1().clearValue();
+        this.getTxtServiceCode2().clearValue();
+        this.getTxtServiceCodeName().clearValue();
     }
 
 }

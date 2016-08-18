@@ -14,34 +14,34 @@
     <select resultOrdered="true" id="getサービス種類支給額" resultMap="resultMap_ServiceTypeTotalEntity"
             parameterType="java.util.Map" fetchSize="500">
         SELECT
-            B."serviceShuruiRyakusho" AS サービス種類略称,
-            (CASE 
-                WHEN 
-                    C."shikyuGendoTaniSu" IS NULL
-                THEN A."shikyuGendoTaniSu"
-                ELSE C."shikyuGendoTaniSu" 
-                END ) AS 支給限度単位数,
-            B."serviceShuruiCd" AS サービス種類コード 
+        B."serviceShuruiRyakusho" AS サービス種類略称,
+        (CASE 
+        WHEN 
+        C."shikyuGendoTaniSu" IS NULL
+        THEN A."shikyuGendoTaniSu"
+        ELSE C."shikyuGendoTaniSu" 
+        END ) AS 支給限度単位数,
+        B."serviceShuruiCd" AS サービス種類コード 
         FROM
-            rgdb."DbT7111ServiceShuruiShikyuGendoGaku" A
+        rgdb."DbT7111ServiceShuruiShikyuGendoGaku" A
         INNER JOIN 
-            rgdb."DbT7130KaigoServiceShurui" B
+        rgdb."DbT7130KaigoServiceShurui" B
         ON
-            A."serviceShuruiCode" = B."serviceShuruiCd"
-            AND A."tekiyoKaishiYM" = B."teikyoKaishiYM"
+        A."serviceShuruiCode" = B."serviceShuruiCd"
+        AND A."tekiyoKaishiYM" = B."teikyoKaishiYM"
         LEFT JOIN
-            rgdb."DbT7114UwanoseServiceShuruiShikyuGendoGaku" C
+        rgdb."DbT7114UwanoseServiceShuruiShikyuGendoGaku" C
         ON 
-            C."serviceShuruiCode" = A."serviceShuruiCode"
-            AND C."yoKaigoJotaiKubun" = A."yoKaigoJotaiKubun"
-            AND C."rirekiNo" = A."rirekiNo"
+        C."serviceShuruiCode" = A."serviceShuruiCode"
+        AND C."yoKaigoJotaiKubun" = A."yoKaigoJotaiKubun"
+        AND C."rirekiNo" = A."rirekiNo"
         WHERE
-                A."tekiyoKaishiYM" <![CDATA[<=]]> #{利用年月}
-            AND (A."tekiyoShuryoYM" IS NULL OR A."tekiyoShuryoYM" = '' OR A."tekiyoShuryoYM" <![CDATA[>=]]> #{利用年月})
-            AND C."tekiyoKaishiYM" <![CDATA[<=]]> #{利用年月}
-            AND (C."tekiyoShuryoYM" IS NULL OR C."tekiyoShuryoYM" = '' OR C."tekiyoShuryoYM" <![CDATA[>=]]> #{利用年月})
+        A."tekiyoKaishiYM" <![CDATA[<=]]> #{利用年月}
+        AND (A."tekiyoShuryoYM" IS NULL OR A."tekiyoShuryoYM" = '' OR A."tekiyoShuryoYM" <![CDATA[>=]]> #{利用年月})
+        AND C."tekiyoKaishiYM" <![CDATA[<=]]> #{利用年月}
+        AND (C."tekiyoShuryoYM" IS NULL OR C."tekiyoShuryoYM" = '' OR C."tekiyoShuryoYM" <![CDATA[>=]]> #{利用年月})
         ORDER BY
-            A."serviceShuruiCode" DESC
+        A."serviceShuruiCode" DESC
     </select>
     
     <resultMap id="resultMap_KyufuJikoSakuseiEntity" autoMapping="true"
@@ -69,97 +69,97 @@
     <select resultOrdered="true" id="getサービス利用票データ" resultMap="resultMap_KyufuJikoSakuseiEntity" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.KyufuJikoSakuseiParameter" fetchSize="500">
         SELECT
-            DbT7060KaigoJigyosha."jigyoshaName" AS 事業者,
-            (CASE 
-                WHEN A.サービス項目コード IS NULL OR A.サービス項目コード = ''
-                THEN DbT7130KaigoServiceShurui."serviceShuruiRyakusho"				
-                ELSE DbT7131KaigoServiceNaiyou."serviceNameRyaku"
-                END ) AS サービス,
-            A.単位 AS 単位,
-            A.割引適用後率 AS 割引適用後率,
-            A.割引適用後単位 AS 割引適用後単位,
-            A.回数 AS 回数,
-            A.種類限度超過単位 AS 種類限度超過単位,
-            A.種類限度内単位 AS 種類限度内単位,
-            A.単位数単価 AS 単位数単価,
-            A.区分限度超過単位 AS 区分限度超過単位,
-            A.区分限度内単位 AS 区分限度内単位,
-            A.給付率 AS 給付率,
-            A.給付計画単位数 AS 給付計画単位数,
-            A.サービス種類コード AS サービス種類コード,
-            A.サービス項目コード AS サービス項目コード,
-            A.事業者コード AS 事業者コード,
-            A.合計フラグ AS 合計フラグ,
-            A.定額利用者負担単価金額 AS 定額利用者負担単価金額,
-            DbT7131KaigoServiceNaiyou."gendogakuTaishogaiFlag" AS 限度額対象外フラグ
+        DbT7060KaigoJigyosha."jigyoshaName" AS 事業者,
+        (CASE 
+        WHEN A.サービス項目コード IS NULL OR A.サービス項目コード = ''
+        THEN DbT7130KaigoServiceShurui."serviceShuruiRyakusho"				
+        ELSE DbT7131KaigoServiceNaiyou."serviceNameRyaku"
+        END ) AS サービス,
+        A.単位 AS 単位,
+        A.割引適用後率 AS 割引適用後率,
+        A.割引適用後単位 AS 割引適用後単位,
+        A.回数 AS 回数,
+        A.種類限度超過単位 AS 種類限度超過単位,
+        A.種類限度内単位 AS 種類限度内単位,
+        A.単位数単価 AS 単位数単価,
+        A.区分限度超過単位 AS 区分限度超過単位,
+        A.区分限度内単位 AS 区分限度内単位,
+        A.給付率 AS 給付率,
+        A.給付計画単位数 AS 給付計画単位数,
+        A.サービス種類コード AS サービス種類コード,
+        A.サービス項目コード AS サービス項目コード,
+        A.事業者コード AS 事業者コード,
+        A.合計フラグ AS 合計フラグ,
+        A.定額利用者負担単価金額 AS 定額利用者負担単価金額,
+        DbT7131KaigoServiceNaiyou."gendogakuTaishogaiFlag" AS 限度額対象外フラグ
         FROM(
-            SELECT
-                B."serviceTeikyoJigyoshaNo" AS 事業者コード,
-                B."serviceShuruiCode" AS サービス種類コード,
-                B."serviceKomokuCode" AS サービス項目コード,
-                B."taniSu" AS 単位,
-                B."waribikiGoTekiyoRitsu" AS 割引適用後率,
-                B."waribikiGoTekiyoTaniSu" AS 割引適用後単位,
-                B."kaisu_Nissu" AS 回数,
-                B."shuruiGendoChokaTaniSu_Nissu" AS 種類限度超過単位,
-                B."shuruiGendoNaiTaniSu_Nissu" AS 種類限度内単位,
-                B."taniSuTanka" AS 単位数単価,
-                B."kubunGendoChokaTaniSu_Nissu" AS 区分限度超過単位,
-                B."kubunGendoNaiTaniSu_Nissu" AS 区分限度内単位,
-                B."kyufuRitsu" AS 給付率,
-                B."kyufuKeikakuTaniSu" AS 給付計画単位数,
-                B."goukeiFlag" AS 合計フラグ,
-                NULL AS 定額利用者負担単価金額
-            FROM
-                rgdb."DbT3119KyotakuKeikakuJikosakuseiKanri" AS B
-            WHERE
-                     B."hihokenshaNo" = #{被保険者番号}
-                AND  B."taishoYM" = #{対象年月}
-                AND  B."rirekiNo" = #{履歴番号}
-                AND  B."riyoYM"= #{利用年月}
+        SELECT
+        B."serviceTeikyoJigyoshaNo" AS 事業者コード,
+        B."serviceShuruiCode" AS サービス種類コード,
+        B."serviceKomokuCode" AS サービス項目コード,
+        B."taniSu" AS 単位,
+        B."waribikiGoTekiyoRitsu" AS 割引適用後率,
+        B."waribikiGoTekiyoTaniSu" AS 割引適用後単位,
+        B."kaisu_Nissu" AS 回数,
+        B."shuruiGendoChokaTaniSu_Nissu" AS 種類限度超過単位,
+        B."shuruiGendoNaiTaniSu_Nissu" AS 種類限度内単位,
+        B."taniSuTanka" AS 単位数単価,
+        B."kubunGendoChokaTaniSu_Nissu" AS 区分限度超過単位,
+        B."kubunGendoNaiTaniSu_Nissu" AS 区分限度内単位,
+        B."kyufuRitsu" AS 給付率,
+        B."kyufuKeikakuTaniSu" AS 給付計画単位数,
+        B."goukeiFlag" AS 合計フラグ,
+        NULL AS 定額利用者負担単価金額
+        FROM
+        rgdb."DbT3119KyotakuKeikakuJikosakuseiKanri" AS B
+        WHERE
+        B."hihokenshaNo" = #{被保険者番号}
+        AND  B."taishoYM" = #{対象年月}
+        AND  B."rirekiNo" = #{履歴番号}
+        AND  B."riyoYM"= #{利用年月}
         UNION
-            SELECT
-                C."serviceTeikyoJigyoshaNo" AS 事業者コード,
-                C."serviceShuruiCode" AS サービス種類コード,
-                C."serviceKomokuCode" AS サービス項目コード,
-                C."taniSu" AS 単位,
-                C."waribikiGoTekiyoRitsu" AS 割引適用後率,
-                C."waribikiGoTekiyoTaniSu" AS 割引適用後単位,
-                C."kaisu_Nissu" AS 回数,
-                C."shuruiGendoChokaTaniSu_Nissu" AS 種類限度超過単位,
-                C."shuruiGendoNaiTaniSu_Nissu" AS 種類限度内単位,
-                C."taniSuTanka" AS 単位数単価,
-                C."kubunGendoChokaTaniSu_Nissu" AS 区分限度超過単位,
-                C."kubunGendoNaiTaniSu_Nissu" AS 区分限度内単位,
-                C."kyufuRitsu" AS 給付率,
-                C."keikakuTaniSu" AS 給付計画単位数,
-                C."goukeiFlag" AS 合計フラグ,
-                C."teigakuRiyoshaFutanTankaKingaku" AS 定額利用者負担単価金額
-            FROM
-                rgdb."DbT3120YoboKeikakuJikoSakuseiKanri"  C
-            WHERE
-                C."hihokenshaNo" = #{被保険者番号}
-                AND  C."taishoYM" = #{対象年月}
-                AND  C."rirekiNo" = #{履歴番号}
-                AND C."riyoYM"= #{利用年月}
-            ) AS A
+        SELECT
+        C."serviceTeikyoJigyoshaNo" AS 事業者コード,
+        C."serviceShuruiCode" AS サービス種類コード,
+        C."serviceKomokuCode" AS サービス項目コード,
+        C."taniSu" AS 単位,
+        C."waribikiGoTekiyoRitsu" AS 割引適用後率,
+        C."waribikiGoTekiyoTaniSu" AS 割引適用後単位,
+        C."kaisu_Nissu" AS 回数,
+        C."shuruiGendoChokaTaniSu_Nissu" AS 種類限度超過単位,
+        C."shuruiGendoNaiTaniSu_Nissu" AS 種類限度内単位,
+        C."taniSuTanka" AS 単位数単価,
+        C."kubunGendoChokaTaniSu_Nissu" AS 区分限度超過単位,
+        C."kubunGendoNaiTaniSu_Nissu" AS 区分限度内単位,
+        C."kyufuRitsu" AS 給付率,
+        C."keikakuTaniSu" AS 給付計画単位数,
+        C."goukeiFlag" AS 合計フラグ,
+        C."teigakuRiyoshaFutanTankaKingaku" AS 定額利用者負担単価金額
+        FROM
+        rgdb."DbT3120YoboKeikakuJikoSakuseiKanri"  C
+        WHERE
+        C."hihokenshaNo" = #{被保険者番号}
+        AND  C."taishoYM" = #{対象年月}
+        AND  C."rirekiNo" = #{履歴番号}
+        AND C."riyoYM"= #{利用年月}
+        ) AS A
         INNER JOIN 
-            rgdb."DbT7060KaigoJigyosha" AS DbT7060KaigoJigyosha
+        rgdb."DbT7060KaigoJigyosha" AS DbT7060KaigoJigyosha
         ON
-            DbT7060KaigoJigyosha."jigyoshaNo" = A.事業者コード
+        DbT7060KaigoJigyosha."jigyoshaNo" = A.事業者コード
         LEFT JOIN
-            rgdb."DbT7131KaigoServiceNaiyou" AS DbT7131KaigoServiceNaiyou
+        rgdb."DbT7131KaigoServiceNaiyou" AS DbT7131KaigoServiceNaiyou
         ON
-            DbT7131KaigoServiceNaiyou."serviceShuruiCd" = A.サービス種類コード
-            AND DbT7131KaigoServiceNaiyou."serviceKoumokuCd" = A.サービス項目コード
+        DbT7131KaigoServiceNaiyou."serviceShuruiCd" = A.サービス種類コード
+        AND DbT7131KaigoServiceNaiyou."serviceKoumokuCd" = A.サービス項目コード
         LEFT JOIN									
-            rgdb."DbT7130KaigoServiceShurui" AS DbT7130KaigoServiceShurui
+        rgdb."DbT7130KaigoServiceShurui" AS DbT7130KaigoServiceShurui
         ON								
-            DbT7130KaigoServiceShurui."serviceShuruiCd" = A.サービス種類コード			
+        DbT7130KaigoServiceShurui."serviceShuruiCd" = A.サービス種類コード			
         ORDER BY									
-            A.事業者コード ASC,								
-            A.サービス種類コード ASC,						
-            A.合計フラグ ASC							
+        A.事業者コード ASC,								
+        A.サービス種類コード ASC,						
+        A.合計フラグ ASC							
     </select>
     
     <resultMap id="resultMap_KubunGendoEntity" autoMapping="true"
@@ -172,70 +172,199 @@
     <select resultOrdered="true" id="get区分限度額統計処理" resultMap="resultMap_KubunGendoEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.KubunGendoParameter" fetchSize="500">
         SELECT
-            限度額."shikyuGendoTaniSu" as 支給限度単位数,
-            二次予防事業対象者."tekiyoKaishiYMD" AS 適用開始年月日,
-            二次予防事業対象者."tekiyoShuryoYMD" AS 適用終了年月日
+        限度額."shikyuGendoTaniSu" as 支給限度単位数,
+        二次予防事業対象者."tekiyoKaishiYMD" AS 適用開始年月日,
+        二次予防事業対象者."tekiyoShuryoYMD" AS 適用終了年月日
         FROM
-            rgdb."DbT7117SogoJigyoKubunShikyuGendoGaku" AS 限度額
-       INNER JOIN
-            rgdb."DbT4001JukyushaDaicho" AS 受給者台帳
-        ON
-            受給者台帳."hihokenshaNo" = #{被保険者番号}
-            AND 受給者台帳."yokaigoJotaiKubunCode" = 限度額."yoKaigoJotaiKubun"
-            AND 受給者台帳."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{開始利用年月}
-            AND (受給者台帳."ninteiYukoKikanShuryoYMD" IS NULL OR 受給者台帳."ninteiYukoKikanShuryoYMD" = '' 
-                OR 受給者台帳."ninteiYukoKikanShuryoYMD" <![CDATA[>=]]> #{終了利用年月})
-            AND 受給者台帳."logicalDeletedFlag" = FALSE 
+        rgdb."DbT7117SogoJigyoKubunShikyuGendoGaku" AS 限度額
         INNER JOIN
-            rgdb."DbT3100NijiYoboJigyoTaishosha" AS 二次予防事業対象者
+        rgdb."DbT4001JukyushaDaicho" AS 受給者台帳
         ON
-            二次予防事業対象者."hihokenshaNo" = #{被保険者番号}
+        受給者台帳."hihokenshaNo" = #{被保険者番号}
+        AND 受給者台帳."yokaigoJotaiKubunCode" = 限度額."yoKaigoJotaiKubun"
+        AND 受給者台帳."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{開始利用年月}
+        AND (受給者台帳."ninteiYukoKikanShuryoYMD" IS NULL OR 受給者台帳."ninteiYukoKikanShuryoYMD" = '' 
+        OR 受給者台帳."ninteiYukoKikanShuryoYMD" <![CDATA[>=]]> #{終了利用年月})
+        AND 受給者台帳."logicalDeletedFlag" = FALSE 
+        INNER JOIN
+        rgdb."DbT3100NijiYoboJigyoTaishosha" AS 二次予防事業対象者
+        ON
+        二次予防事業対象者."hihokenshaNo" = #{被保険者番号}
         WHERE 
-            限度額."tekiyoKaishiYM"<![CDATA[<=]]> #{利用年月}
-            AND (限度額."tekiyoShuryoYM" IS NULL OR 限度額."tekiyoShuryoYM" = '' 
-                OR 限度額."tekiyoShuryoYM"<![CDATA[>=]]> #{利用年月})
+        限度額."tekiyoKaishiYM"<![CDATA[<=]]> #{利用年月}
+        AND (限度額."tekiyoShuryoYM" IS NULL OR 限度額."tekiyoShuryoYM" = '' 
+        OR 限度額."tekiyoShuryoYM"<![CDATA[>=]]> #{利用年月})
         ORDER BY
-            限度額."shikyuGendoTaniSu" DESC 
+        限度額."shikyuGendoTaniSu" DESC 
         LIMIT 1
     </select>
     
-    <resultMap id="resultMap_TankiNyushoEntity" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.TankiNyushoEntity">
-        <result property="前回迄利用日数" column="前回迄利用日数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="今回計画利用日数" column="今回計画利用日数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="暫定区分" column="暫定区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <select id="get居宅サービス履歴一覧"
+            resultMap="resultMap_KyotakuServiceRirekiIchiranEntity"
+            parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
+        SELECT
+        A.対象年月,
+        A.作成区分コード,
+        A.事業者番号,
+        A.事業者名,
+        A.委託先情報者コード,
+        A.委託先情報者名,
+        A.開始日,
+        A.終了日,
+        A.届出日,
+        A.更新日,
+        A.最大履歴番号,
+        A.届出区分,
+        A.氏名,
+        A.カナ,
+        A.関係区分,
+        A.電話番号,
+        A.郵便番号,
+        A.住所,
+        A.居宅・総合事業区分 
+        FROM(
+        SELECT
+        rgdb."DbT3005KyotakuKeikakuTodokede"."taishoYM" AS 対象年月
+        , rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"."sakuseiKubunCode" AS 作成区分コード
+        , rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"."keikakuJigyoshaNo"      AS 事業者番号  
+        , jgs."jigyoshaName"      AS 事業者名  
+        , rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"."itakusakiJigyoshaNo"      AS 委託先情報者コード  
+        , itkjgs."jigyoshaName"      AS 委託先情報者名  
+        , rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"."tekiyoKaishiYMD"      AS 開始日  
+        , rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"."tekiyoShuryoYMD"      AS 終了日  
+        , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeYMD"      AS 届出日  
+        , rgdb."DbT3005KyotakuKeikakuTodokede"."lastUpdateTimestamp"      AS 更新日  
+        , rgdb."DbT3005KyotakuKeikakuTodokede"."rirekiNo"      AS 最大履歴番号  
+        , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeKubun"      AS 届出区分  
+        , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeshaShimei"      AS 氏名
+        , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeshaShimeiKana"      AS カナ
+        , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeshaKankeiKubun"      AS 関係区分
+        , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeshaTelNo"      AS 電話番号
+        , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeshaYubinNo"      AS 郵便番号
+        , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeshaJusho"      AS 住所
+        , '' AS 居宅・総合事業区分  
+        , row_number() OVER (PARTITION BY         
+        rgdb."DbT3005KyotakuKeikakuTodokede"."hihokenshaNo",   
+        rgdb."DbT3005KyotakuKeikakuTodokede"."taishoYM"
+        ORDER BY
+        rgdb."DbT3005KyotakuKeikakuTodokede"."rirekiNo" DESC)    AS 履歴順  
+        FROM          
+        rgdb."DbT3005KyotakuKeikakuTodokede"         
+        INNER JOIN          
+        rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"
+        ON
+        rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"."hihokenshaNo" = rgdb."DbT3005KyotakuKeikakuTodokede"."hihokenshaNo"
+        AND rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"."taishoYM"     = rgdb."DbT3005KyotakuKeikakuTodokede"."taishoYM"
+        AND rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"."rirekiNo"     = rgdb."DbT3005KyotakuKeikakuTodokede"."rirekiNo"  
+        INNER JOIN          
+        rgdb."DbT7060KaigoJigyosha" AS jgs         
+        ON         
+        jgs."jigyoshaNo"     = rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"."keikakuJigyoshaNo"  
+        INNER JOIN          
+        rgdb."DbT7060KaigoJigyosha" AS itkjgs         
+        ON         
+        itkjgs."jigyoshaNo"     = rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"."itakusakiJigyoshaNo"  
+        WHERE          
+        rgdb."DbT3005KyotakuKeikakuTodokede"."hihokenshaNo" = #{被保険者番号}
+        UNION          
+        SELECT           
+        rgdb."DbT3005KyotakuKeikakuTodokede"."taishoYM"      AS 対象年月  
+        , rgdb."DbT3007KyotakuKeikakuJikoSakusei"."sakuseiKubunCode"      AS 作成区分コード  
+        , ''      AS 事業者番号  
+        , ''      AS 事業者名  
+        , ''      AS 委託先情報者コード  
+        , ''      AS 委託先情報者名  
+        , rgdb."DbT3007KyotakuKeikakuJikoSakusei"."tekiyoKaishiYMD"      AS 開始日  
+        , rgdb."DbT3007KyotakuKeikakuJikoSakusei"."tekiyoShuryoYMD"      AS 終了日  
+        , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeYMD"      AS 届出日  
+        , rgdb."DbT3005KyotakuKeikakuTodokede"."lastUpdateTimestamp"      AS 更新日  
+        , rgdb."DbT3005KyotakuKeikakuTodokede"."rirekiNo"      AS 最大履歴番号  
+        , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeKubun"      AS 届出区分
+        , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeshaShimei"      AS 氏名
+        , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeshaShimeiKana"      AS カナ
+        , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeshaKankeiKubun"      AS 関係区分
+        , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeshaTelNo"      AS 電話番号
+        , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeshaYubinNo"      AS 郵便番号
+        , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeshaJusho"      AS 住所
+        , rgdb."DbT3007KyotakuKeikakuJikoSakusei"."kyotaku_SogoJigyoKubun" AS 居宅・総合事業区分  
+        , row_number() OVER (PARTITION BY         
+        rgdb."DbT3005KyotakuKeikakuTodokede"."hihokenshaNo",        
+        rgdb."DbT3005KyotakuKeikakuTodokede"."taishoYM"        
+        ORDER BY         
+        rgdb."DbT3005KyotakuKeikakuTodokede"."rirekiNo" DESC)    AS 履歴順  
+        FROM          
+        rgdb."DbT3005KyotakuKeikakuTodokede"         
+        INNER JOIN          
+        rgdb."DbT3007KyotakuKeikakuJikoSakusei"         
+        ON         
+        rgdb."DbT3007KyotakuKeikakuJikoSakusei"."hihokenshaNo" = rgdb."DbT3005KyotakuKeikakuTodokede"."hihokenshaNo"  
+        AND rgdb."DbT3007KyotakuKeikakuJikoSakusei"."taishoYM"  = rgdb."DbT3005KyotakuKeikakuTodokede"."taishoYM"  
+        AND rgdb."DbT3007KyotakuKeikakuJikoSakusei"."rirekiNo"  = rgdb."DbT3005KyotakuKeikakuTodokede"."rirekiNo"  
+        WHERE          
+        rgdb."DbT3005KyotakuKeikakuTodokede"."hihokenshaNo"     = #{被保険者番号}
+        ) AS A           
+        WHERE           
+        A.履歴順   ='1'       
+        ORDER BY           
+        A.対象年月 DESC        
+    </select>
+    <resultMap id="resultMap_KyotakuServiceRirekiIchiranEntity" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KyotakuServiceRirekiIchiranEntity">
+        <result property="対象年月" column="対象年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="作成区分コード" column="作成区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>  
+        <result property="事業者番号" column="事業者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="事業者名" column="事業者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="委託先情報者コード" column="委託先情報者コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="委託先情報者名" column="委託先情報者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="開始日" column="開始日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="終了日" column="終了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="届出日" column="届出日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="更新日" column="更新日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="最大履歴番号" column="最大履歴番号"/>
+        <result property="届出区分" column="届出区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <select id="get対象情報一覧"
+            resultMap="resultMap_RiyoNentstsuIchiranEntity"
+            parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
+        SELECT             
+        A.利用年月
+        , A.更新区分         
+        , A.更新年月日         
+        , A.送付年月        
+        FROM(             
+        SELECT            
+        "riyoYM" as 利用年月
+        ,"koshinKubun" as 更新区分    
+        ,"koshinYMD"  as 更新年月日  
+        ,"sofuYM"   as   送付年月
+        FROM            
+        rgdb."DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"
+        WHERE            
+        "hihokenshaNo"   = #{被保険者番号}
+        AND "taishoYM"   = #{対象年月}
+        AND "rirekiNo"   = #{履歴番号}
+        UNION             
+        SELECT            
+        "riyoYM" as 利用年月
+        ,"koshinKubun" as 更新区分  
+        ,"koshinYMD" as 更新年月日
+        ,"sofuYM" as 送付年月
+        FROM            
+        rgdb."DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"
+        WHERE            
+        "hihokenshaNo"   = #{被保険者番号}
+        AND "taishoYM"   = #{対象年月}
+        AND "rirekiNo"   = #{履歴番号}
+        ) AS A             
+        ORDER BY
+        A."利用年月" DESC
+    </select>
+    <resultMap id="resultMap_RiyoNentstsuIchiranEntity" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.RiyoNentstsuIchiranEntity">
+        <result property="利用年月" column="利用年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="更新区分" column="更新区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="更新年月日" column="更新年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="送付年月" column="送付年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
     </resultMap>
-     <!--短期入所情報を取得します。-->
-     <select resultOrdered="true" id="get短期入所情報" resultMap="resultMap_TankiNyushoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.TankiNyushoParameter" fetchSize="500">
-         SELECT
-            DbT3010."zenkaiRiyoNissu" AS 前回迄利用日数,
-            DbT3010."konkaiKeikakuRiyoNissu" AS 今回計画利用日数,
-            DbT3010."zanteiKubun" AS 暫定区分,
-            DbT3010."koshinKubun" AS 更新区分,
-            DbT3010."sofuYM" AS 送付年月
-         FROM
-            rgdb."DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu" AS DbT3010
-         WHERE
-            DbT3010."hihokenshaNo" = #{被保険者番号}
-         AND DbT3010."taishoYM" = #{対象年月}
-         AND DbT3010."rirekiNo" = #{履歴番号}
-         AND DbT3010."riyoYM" = #{利用年月}
-         UNION
-         SELECT
-            DbT3013."zenkaiRiyoNissu" AS 前回迄利用日数,
-            DbT3013."konkaiKeikakuRiyoNissu" AS 今回計画利用日数,
-            DbT3013."zanteiKubun" AS 暫定区分,
-            DbT3013."koshinKubun" AS 更新区分,
-            DbT3013."sofuYM" AS 送付年月
-         FROM
-            rgdb."DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu" AS DbT3013
-         WHERE
-            DbT3013."hihokenshaNo" = #{被保険者番号}
-         AND DbT3013."taishoYM" = #{対象年月}
-         AND DbT3013."rirekiNo" = #{履歴番号}
-         AND DbT3013."riyoYM" = #{利用年月}
-     </select>
 </mapper>

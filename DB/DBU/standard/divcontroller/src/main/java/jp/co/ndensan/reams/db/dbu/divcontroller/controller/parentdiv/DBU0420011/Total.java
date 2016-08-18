@@ -161,6 +161,4 @@ public class Total {
     private TotalHandler createHandler(TotalDiv div) {
         return new TotalHandler(div);
     }
-    // TODO 「滞納状況」ボタン処理　共有子Div　dbz.TainoInfo未実装 QA1059
-    // TODO 「減額情報」ボタン処理　共有子Div  dbz.GenGakuInfo未実装 QA1059
 }

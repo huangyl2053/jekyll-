@@ -88,6 +88,7 @@ public class SokujiFukaKouseiMain {
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
     private static final int INT_5 = 5;
+    private static final RString FLAG_CHANGE = new RString("1");
 
     /**
      * 画面の初期化メソッドです。
@@ -219,10 +220,12 @@ public class SokujiFukaKouseiMain {
      * @return ResponseData<SokujiFukaKouseiMainDiv>
      */
     public ResponseData<SokujiFukaKouseiMainDiv> onClick_btnResearch(SokujiFukaKouseiMainDiv div) {
-        if (!ResponseHolder.isReRequest()) {
+        SokujiFukaKouseiMainHandler handler = getHandler(div);
+        boolean is入力があれ = handler.is入力があれ();
+        if (!ResponseHolder.isReRequest() && is入力があれ) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
         }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+        if (!is入力があれ || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
             LockingKey 前排他キー = new LockingKey(DBB_HIHOKENSHANO.concat(被保険者番号.getColumnValue()));
             RealInitialLocker.release(前排他キー);
@@ -238,24 +241,15 @@ public class SokujiFukaKouseiMain {
      * @return ResponseData<SokujiFukaKouseiMainDiv>
      */
     public ResponseData<SokujiFukaKouseiMainDiv> onClick_btnToSearchResult(SokujiFukaKouseiMainDiv div) {
-        if (!ResponseHolder.isReRequest()) {
+        SokujiFukaKouseiMainHandler handler = getHandler(div);
+        boolean is入力があれ = handler.is入力があれ();
+        if (!ResponseHolder.isReRequest() && is入力があれ) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
         }
-        if (ResponseHolder.getButtonType() != MessageDialogSelectedResult.Yes) {
-            return getResponseData(div);
+        if (!is入力があれ || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return toSearchResultResponseData(div);
         }
-        if (is特殊処理()) {
-            HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-            LockingKey 前排他キー = new LockingKey(DBB_HIHOKENSHANO.concat(被保険者番号.getColumnValue()));
-            RealInitialLocker.release(前排他キー);
-            if (ViewStateHolder.get(ViewStateKeys.is経由該当者一覧画面, Boolean.class)) {
-                return ResponseData.of(div).forwardWithEventName(DBB8120001TransitionEventName.検索結果一覧に戻る).respond();
-            } else {
-                return ResponseData.of(div).forwardWithEventName(DBB8120001TransitionEventName.再検索する).respond();
-            }
-        } else {
-            return ResponseData.of(div).forwardWithEventName(DBB8120001TransitionEventName.前画面に戻る).respond();
-        }
+        return getResponseData(div);
     }
 
     /**
@@ -315,6 +309,9 @@ public class SokujiFukaKouseiMain {
         ViewStateHolder.put(ViewStateKeys.更正前後賦課のリスト, (Serializable) 更正前後賦課のリスト);
         TsuchishoNo 通知書番号 = new TsuchishoNo(div.getDdlKoseigoTsuchishoNo().getSelectedKey());
         KoseiZengoFuka koseiZengoFuka = get更正前後賦課By通知書番号(更正前後賦課のリスト, 通知書番号);
+        if (handler.is入力があれ()) {
+            div.setIsDataChange(FLAG_CHANGE);
+        }
         handler.initialize更正前後データ(is特殊処理(), koseiZengoFuka.get更正前(), koseiZengoFuka.get更正後(),
                 更正前後徴収方法, is本算定処理済フラグ);
         ViewStateHolder.put(ViewStateKeys.更正前, koseiZengoFuka.get更正前());
@@ -543,8 +540,8 @@ public class SokujiFukaKouseiMain {
     private boolean is更正前と状態変更なし(List<KoseiZengoFuka> 更正前後賦課のリスト) {
         for (KoseiZengoFuka koseiZengoFuka : 更正前後賦課のリスト) {
             if (koseiZengoFuka.isHasChanged()) {
-                return Boolean.FALSE;
-            }
+        return Boolean.FALSE;
+    }
         }
         return Boolean.TRUE;
     }
@@ -594,6 +591,21 @@ public class SokujiFukaKouseiMain {
             return ResponseData.of(div).setState(DBB8120001StateName.即時賦課更正);
         } else {
             return ResponseData.of(div).setState(DBB8120001StateName.即時賦課更正_対象者検索以外);
+        }
+    }
+
+    private ResponseData<SokujiFukaKouseiMainDiv> toSearchResultResponseData(SokujiFukaKouseiMainDiv div) {
+        if (is特殊処理()) {
+            HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+            LockingKey 前排他キー = new LockingKey(DBB_HIHOKENSHANO.concat(被保険者番号.getColumnValue()));
+            RealInitialLocker.release(前排他キー);
+            if (ViewStateHolder.get(ViewStateKeys.is経由該当者一覧画面, Boolean.class)) {
+                return ResponseData.of(div).forwardWithEventName(DBB8120001TransitionEventName.検索結果一覧に戻る).respond();
+            } else {
+                return ResponseData.of(div).forwardWithEventName(DBB8120001TransitionEventName.再検索する).respond();
+            }
+        } else {
+            return ResponseData.of(div).forwardWithEventName(DBB8120001TransitionEventName.前画面に戻る).respond();
         }
     }
 

@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class GeneralPurposeListOutputParameter extends BatchParameterBase {
+public class HanyoListShisetsuNyutaishoBatchParameter extends BatchParameterBase {
 
     private ChushutsuHohoKubun 抽出方法区分;
     private RString 抽出項目区分;
@@ -56,7 +56,7 @@ public class GeneralPurposeListOutputParameter extends BatchParameterBase {
      * @param 出力順 出力順
      * @param 出力項目 出力項目
      */
-    public GeneralPurposeListOutputParameter(ChushutsuHohoKubun 抽出方法区分,
+    public HanyoListShisetsuNyutaishoBatchParameter(ChushutsuHohoKubun 抽出方法区分,
             RString 抽出項目区分,
             FlexibleDate 基準日,
             FlexibleDate 日付範囲From,

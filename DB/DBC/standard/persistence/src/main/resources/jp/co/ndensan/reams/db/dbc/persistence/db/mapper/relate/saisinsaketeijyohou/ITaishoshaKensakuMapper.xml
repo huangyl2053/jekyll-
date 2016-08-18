@@ -104,7 +104,7 @@
             ON コード種別管理表."schemaName" = 'rgdb'
             AND コード種別管理表."subGyomuCode" = 'DBC'
             AND コード種別管理表."codeShubetsu" = '0023'
-            AND コード種別管理表."code" = substr(再審査決定明細."moushitateJiyuCode",0,2)
+            AND コード種別管理表."code" = substr(再審査決定明細."moushitateJiyuCode",1,2)
         WHERE 再審査決定集計."toriatsukaiYM" = #{取扱年月}
             AND 再審査決定集計."hokenshaKubun" = #{保険者区分}
             <if test="履歴番号フラグ">
@@ -115,7 +115,7 @@
                 WHERE "toriatsukaiYM" = #{取扱年月} AND "hokenshaKubun" = #{保険者区分})
             </if>
             <if test="市町村フラグ">
-                AND substr(再審査決定集計."kohiFutanshaNo",0,5) = #{市町村コード}
+                AND substr(再審査決定集計."kohiFutanshaNo",1,5) = #{市町村コード}
             </if>
             ORDER BY 再審査決定集計."rirekiNo" DESC,再審査決定明細."jigyoshoNo"
     </select>
@@ -132,7 +132,7 @@
         FROM rgdb."DbT3063SaishinsaKetteiShukei" AS 再審査決定集計
         WHERE 再審査決定集計."toriatsukaiYM" = #{取扱年月}
             <if test="市町村フラグ">
-                AND substr(再審査決定集計."kohiFutanshaNo",0,5) = #{市町村コード}
+                AND substr(再審査決定集計."kohiFutanshaNo",1,5) = #{市町村コード}
             </if>
             ORDER BY 再審査決定集計."rirekiNo" DESC
     </select>

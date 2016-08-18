@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.shinsakaijizenshinsakekkaichiran;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaijizenshinsakekkaichiran.ShinsakaiJizenshinsakekkaIchiranEntity;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakaijizenshinsakekkaichiran.ShinsakaiJizenshinsakekkaIchiranBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.shinsakaijizenshinsakekkaichiran.ShinsakaiJizenshinsakekkaIchiranReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -17,14 +17,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ShinsakaiJizenshinsakekkaIchiranReport extends Report<ShinsakaiJizenshinsakekkaIchiranReportSource> {
 
-    private final ShinsakaiJizenshinsakekkaIchiranEntity data;
+    private final ShinsakaiJizenshinsakekkaIchiranBusiness data;
 
     /**
      * インスタンスを生成します。
      *
-     * @param data 帳票発行のdataList
+     * @param data 帳票発行のdata
      */
-    public ShinsakaiJizenshinsakekkaIchiranReport(ShinsakaiJizenshinsakekkaIchiranEntity data) {
+    public ShinsakaiJizenshinsakekkaIchiranReport(ShinsakaiJizenshinsakekkaIchiranBusiness data) {
         this.data = data;
     }
 

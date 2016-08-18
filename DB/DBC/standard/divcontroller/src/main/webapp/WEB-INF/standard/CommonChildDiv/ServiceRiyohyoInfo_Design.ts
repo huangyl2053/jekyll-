@@ -10,6 +10,10 @@ module DBC {
 
         export class Events {
 
+            public static onBlur_txtRiyoYM(): string {
+                return "onBlur_txtRiyoYM";
+            }
+
             public static onClick_btnShowShuruiGendogaku(): string {
                 return "onClick_btnShowShuruiGendogaku";
             }
@@ -36,6 +40,54 @@ module DBC {
 
             public static onClick_btnSelect(): string {
                 return "onClick_btnSelect";
+            }
+
+            public static onClick_btnModify(): string {
+                return "onClick_btnModify";
+            }
+
+            public static onBlur_txtTani(): string {
+                return "onBlur_txtTani";
+            }
+
+            public static onBlur_txtWaribikigoRitsu(): string {
+                return "onBlur_txtWaribikigoRitsu";
+            }
+
+            public static onBlur_txtKaisu(): string {
+                return "onBlur_txtKaisu";
+            }
+
+            public static onClick_btnCancelMeisaiInput(): string {
+                return "onClick_btnCancelMeisaiInput";
+            }
+
+            public static onBlur_txtShuruiGendoChokaTani(): string {
+                return "onBlur_txtShuruiGendoChokaTani";
+            }
+
+            public static onBlur_txtShuruiGendonaiTani(): string {
+                return "onBlur_txtShuruiGendonaiTani";
+            }
+
+            public static onBlur_txtTanisuTanka(): string {
+                return "onBlur_txtTanisuTanka";
+            }
+
+            public static onBlur_txtKubunGendoChokaTani(): string {
+                return "onBlur_txtKubunGendoChokaTani";
+            }
+
+            public static onBlur_txtKubunGendonaiTani(): string {
+                return "onBlur_txtKubunGendonaiTani";
+            }
+
+            public static onBlur_txtKyufuritsu(): string {
+                return "onBlur_txtKyufuritsu";
+            }
+
+            public static onClick_btnCancelGokeiInput(): string {
+                return "onClick_btnCancelGokeiInput";
             }
 
         }

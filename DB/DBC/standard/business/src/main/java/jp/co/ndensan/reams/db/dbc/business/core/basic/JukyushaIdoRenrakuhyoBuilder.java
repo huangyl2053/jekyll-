@@ -1002,6 +1002,30 @@ public class JukyushaIdoRenrakuhyoBuilder {
     }
 
     /**
+     * 訂正年月日を設定します。
+     *
+     * @param 訂正年月日 FlexibleDate
+     * @return {@link JukyushaIdoRenrakuhyoBuilder}
+     */
+    public JukyushaIdoRenrakuhyoBuilder set訂正年月日(FlexibleDate 訂正年月日) {
+        requireNonNull(訂正年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("訂正年月日"));
+        entity.setTeiseiYMD(訂正年月日);
+        return this;
+    }
+
+    /**
+     * 訂正区分コードを設定します。
+     *
+     * @param 訂正区分コード RString
+     * @return {@link JukyushaIdoRenrakuhyoBuilder}
+     */
+    public JukyushaIdoRenrakuhyoBuilder set訂正区分コード(RString 訂正区分コード) {
+        requireNonNull(訂正区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("訂正区分コード"));
+        entity.setTeiseiKubunCode(訂正区分コード);
+        return this;
+    }
+
+    /**
      * {@link JukyushaIdoRenrakuhyo}のインスタンスを生成します。
      *
      * @return {@link JukyushaIdoRenrakuhyo}のインスタンス
