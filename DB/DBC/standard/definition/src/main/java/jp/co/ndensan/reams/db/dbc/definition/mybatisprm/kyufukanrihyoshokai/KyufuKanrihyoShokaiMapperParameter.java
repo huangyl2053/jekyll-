@@ -26,6 +26,7 @@ public final class KyufuKanrihyoShokaiMapperParameter {
     private final RString 審査年月;
     private final RString サービス提供年月;
     private final RString 被保険者番号;
+    private final RString 給付管理票明細行番号 = new RString("99");
 
     private KyufuKanrihyoShokaiMapperParameter(
             RString 被保番号,

@@ -47,56 +47,55 @@
     </resultMap>
     <select id="select給付管理票一覧" resultMap="resultMap_select給付管理票一覧"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufukanrihyoshokai.KyufuKanrihyoShokaiMapperParameter" fetchSize="500" resultOrdered="true" >
+        WITH Temp AS ( 
+          SELECT
+            A.*
+            , '' AS 担当介護支援専門員番号
+            , '' AS 委託先の居宅介護支援事業所番号
+            , '' AS 委託先の担当介護支援専門員番号 
+          FROM
+            rgdb."DbT3014KyufuKanrihyo200004" A 
+          WHERE
+            <if test="被保番号Flag">
+             A."hiHokenshaNo" = #{被保番号} 
+             AND  
+            </if>     
+            <if test="支援事業者番号Flag">
+             A."kyotakushienJigyoshoNo" = #{支援事業者番号}
+             AND 
+            </if>
+            A."serviceTeikyoYM" <![CDATA[>=]]> #{給付対象年月開始} 
+            AND A."serviceTeikyoYM" <![CDATA[<=]]> #{給付対象年月終了} 
+            AND A."kyufuKanrihyoMeisaiLineNo" = #{給付管理票明細行番号}
+          UNION 
+          SELECT
+            B.* 
+          FROM
+            rgdb."DbT3015KyufuKanrihyo200604" B 
+          WHERE
+            <if test="被保番号Flag">
+             B."hiHokenshaNo" = #{被保番号} 
+             AND 
+            </if>                                           
+            <if test="支援事業者番号Flag">
+             B."kyotakushienJigyoshoNo" = #{支援事業者番号}
+             AND 
+            </if>
+            B."serviceTeikyoYM" <![CDATA[>=]]> #{給付対象年月開始}  
+            AND B."serviceTeikyoYM" <![CDATA[<=]]> #{給付対象年月終了} 
+            AND B."kyufuMeisaiLineNo" = #{給付管理票明細行番号}
+        ) 
         SELECT
-          A.*
-          , '' AS 担当介護支援専門員番号
-          , '' AS 委託先の居宅介護支援事業所番号
-          , '' AS 委託先の担当介護支援専門員番号
-         , 宛名A."meisho" AS 氏名 
+          Temp.*
+          , 宛名."meisho" AS 氏名
         FROM
-          rgdb."DbT3014KyufuKanrihyo200004" A 
-          LEFT JOIN rgdb."DbV1001HihokenshaDaicho" 被保険者台帳A 
-            ON 被保険者台帳A."hihokenshaNo" = A."hiHokenshaNo"
+          Temp 
+          LEFT JOIN rgdb."DbV1001HihokenshaDaicho" 被保険者台帳 
+            ON 被保険者台帳."hihokenshaNo" = Temp."hiHokenshaNo" 
           LEFT JOIN rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','', TRUE,
              '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-                true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS 宛名A
-            ON 被保険者台帳A."shikibetsuCode" = 宛名A."shikibetsuCode"
-        WHERE
-        <if test="被保番号Flag">
-          A."hiHokenshaNo"=#{被保番号}
-          AND 
-        </if>
-        <if test="支援事業者番号Flag">
-          A."kyotakushienJigyoshoNo"=#{支援事業者番号}
-          AND
-        </if>
-          A."serviceTeikyoYM" <![CDATA[>=]]> #{給付対象年月開始}
-          AND A."serviceTeikyoYM" <![CDATA[<=]]> #{給付対象年月終了}
-          AND A."kyufuKanrihyoMeisaiLineNo"='99' 
-        UNION 
-        SELECT
-          B.*
-         , 宛名B."meisho" AS 氏名 
-        FROM
-          rgdb."DbT3015KyufuKanrihyo200604" B 
-          LEFT JOIN rgdb."DbV1001HihokenshaDaicho" 被保険者台帳B 
-            ON 被保険者台帳B."hihokenshaNo" = B."hiHokenshaNo" 
-          LEFT JOIN rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','', TRUE,
-             '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-                true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS 宛名B 
-            ON 被保険者台帳B."shikibetsuCode" = 宛名B."shikibetsuCode"
-        WHERE
-        <if test="被保番号Flag">
-          B."hiHokenshaNo"=#{被保番号}
-          AND
-        </if>
-        <if test="支援事業者番号Flag">
-          B."kyotakushienJigyoshoNo"=#{支援事業者番号}
-          AND
-        </if>
-          B."serviceTeikyoYM" <![CDATA[>=]]> #{給付対象年月開始}
-          AND B."serviceTeikyoYM" <![CDATA[<=]]> #{給付対象年月終了}
-          AND B."kyufuMeisaiLineNo"='99'
+                true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS 宛名 
+            ON 被保険者台帳."shikibetsuCode" = 宛名."shikibetsuCode"
     </select>
     <select id="select給付管理明細一覧" resultMap="resultMap_select給付管理票一覧"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufukanrihyoshokai.KyufuKanrihyoShokaiMapperParameter" fetchSize="500" resultOrdered="true" >
@@ -137,8 +136,7 @@
               介護事業A."有効開始日" = D."yukoKaishiYMD" 
               AND 介護事業A."jigyoshaNo" = D."jigyoshaNo"
           ) AS 介護事業B 
-          <!-- TODO QA#95946 テーブル「給付管理票200004」にフィールド「事業者番号」がありません-->
-            ON A."hiHokenshaNo" = 介護事業B."jigyoshaNo" 
+            ON A."kyotakushienJigyoshoNo" = 介護事業B."jigyoshaNo" 
         WHERE
           A."hiHokenshaNo" = #{被保険者番号} 
           AND A."shinsaYM" = #{審査年月}
@@ -178,8 +176,7 @@
               介護事業D."有効開始日" = E."yukoKaishiYMD" 
               AND 介護事業D."jigyoshaNo" = E."jigyoshaNo"
           ) AS 介護事業C 
-          <!-- TODO QA#95946 テーブル「給付管理票200004」にフィールド「事業者番号」がありません-->
-            ON B."hiHokenshaNo" = 介護事業C."jigyoshaNo" 
+            ON B."kyotakushienJigyoshoNo" = 介護事業C."jigyoshaNo" 
         WHERE
           B."hiHokenshaNo" = #{被保険者番号} 
           AND B."shinsaYM" = #{審査年月}
