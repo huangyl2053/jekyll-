@@ -6,7 +6,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.atenasealcreate.IJukyuNinteiShinseityuIgaiMapper">
     <select  resultOrdered="true" id="getIttokiTaisyou1" fetchSize="500">
         SELECT
-            COUNT(*)
+            COUNT(1)
         FROM
             "DbWT2009AtenaShikibetuTaisyou1"
     </select>
