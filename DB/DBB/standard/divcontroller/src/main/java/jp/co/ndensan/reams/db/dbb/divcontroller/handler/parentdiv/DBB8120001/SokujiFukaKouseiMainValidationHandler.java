@@ -43,7 +43,7 @@ public class SokujiFukaKouseiMainValidationHandler {
     private static final RString コンマ = new RString("、");
     private static final RString 更正後年間保険料 = new RString("更正後年間保険料");
     private static final RString 特別徴収の更正後合計_普通徴収の更正後合計_減免額 = new RString("特別徴収の更正後合計+普通徴収の更正後合計ー減免額");
-    private static final RString 特殊処理のメニューID = new RString("DBBMNC3001");
+    private static final RString 特殊処理のメニューID = new RString("DBBMN13001");
     private static final RString 左括弧 = new RString("（");
     private static final RString 右括弧 = new RString("）");
     private static final Decimal 円_３００ = new Decimal(300);
