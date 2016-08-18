@@ -1,4 +1,4 @@
-/*
+﻿/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * 障がい者控除対象者认定のバリデーションハンドラークラスです。です。
  *
- * @reamsid_L DBD-3850-030 liuwei2
+ * @reamsid_L DBD-3850-010 liuwei2
  */
 public class DBD4010011ValidationHandler {
 
