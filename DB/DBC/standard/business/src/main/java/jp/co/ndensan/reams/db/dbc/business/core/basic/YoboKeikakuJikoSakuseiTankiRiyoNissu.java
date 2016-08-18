@@ -35,21 +35,26 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissu extends ModelBase<
      * @param 被保険者番号 被保険者番号
      * @param 対象年月 対象年月
      * @param 履歴番号 履歴番号
+     * @param 利用年月 利用年月
      */
     public YoboKeikakuJikoSakuseiTankiRiyoNissu(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
-            int 履歴番号) {
+            int 履歴番号,
+            FlexibleYearMonth 利用年月) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(利用年月, UrSystemErrorMessages.値がnull.getReplacedMessage("利用年月"));
         this.entity = new DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity();
         this.entity.setHihokenshaNo(被保険者番号);
         this.entity.setTaishoYM(対象年月);
         this.entity.setRirekiNo(履歴番号);
+        this.entity.setRiyoYM(利用年月);
         this.id = new YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier(
                 被保険者番号,
                 対象年月,
-                履歴番号
+                履歴番号,
+                利用年月
         );
     }
 
@@ -64,7 +69,8 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissu extends ModelBase<
         this.id = new YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier(
                 entity.getHihokenshaNo(),
                 entity.getTaishoYM(),
-                entity.getRirekiNo());
+                entity.getRirekiNo(),
+                entity.getRiyoYM());
     }
 
     /**
@@ -107,6 +113,15 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissu extends ModelBase<
      */
     public int get履歴番号() {
         return entity.getRirekiNo();
+    }
+
+    /**
+     * 利用年月を返します。
+     *
+     * @return 利用年月
+     */
+    public FlexibleYearMonth get利用年月() {
+        return entity.getRiyoYM();
     }
 
     /**
