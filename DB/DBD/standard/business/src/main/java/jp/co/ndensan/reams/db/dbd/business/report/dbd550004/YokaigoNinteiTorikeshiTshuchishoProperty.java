@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  * {@link YokaigoNinteiTorikeshiTshuchishoSource}のプロパティです。
  *
- * @reamsid_L DBD-1440-010 liuyl
+ * @reamsid_L DBD-1440-020 liuyl
  */
 public class YokaigoNinteiTorikeshiTshuchishoProperty extends ReportPropertyBase<YokaigoNinteiTorikeshiTshuchishoSource> {
 
