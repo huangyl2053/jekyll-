@@ -380,7 +380,7 @@ public class RiyoshaFutanWariaiHantei {
         対象終了日リスト.add(今年.concat(十一月).concat(三十日));
         対象終了日リスト.add(今年.concat(十二月).concat(三十一日));
         対象終了日リスト.add(来年.concat(一月).concat(三十一日));
-        if (年度.isLeapYear()) {
+        if (年度.plusYear(1).isLeapYear()) {
             対象終了日リスト.add(来年.concat(二月).concat(二十九日));
         } else {
             対象終了日リスト.add(来年.concat(二月).concat(二十八日));
