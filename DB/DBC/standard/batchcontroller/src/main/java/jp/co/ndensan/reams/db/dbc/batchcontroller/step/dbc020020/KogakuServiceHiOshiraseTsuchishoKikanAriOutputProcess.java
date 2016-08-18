@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020;
 
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakuoshirasetsuchiteshutsukigenari.KogakuOshiraseTsuchiTeshutsuKigenAriReport;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakuservicetsuchisho.KogakuJigyoShinseishoHakkoIchiranOrder;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyufuoshirasetsuchisho.KogakuKaigoServicehiOshiraseHakkoProcessParameter;
@@ -24,8 +25,6 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderBy
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
-import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibun;
-import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunFinder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -67,8 +66,6 @@ public class KogakuServiceHiOshiraseTsuchishoKikanAriOutputProcess extends Batch
     private RString 償還分通知文2;
     private int count;
 
-    private TsuchishoTeikeibunFinder find;
-
     @BatchWriter
     private BatchReportWriter<KogakuOshiraseTsuchiTeshutsuKigenAriSource> 通常分BatchReportWriter;
     private ReportSourceWriter<KogakuOshiraseTsuchiTeshutsuKigenAriSource> 通常分ReportSourceWriter;
@@ -87,11 +84,10 @@ public class KogakuServiceHiOshiraseTsuchishoKikanAriOutputProcess extends Batch
             parameter.setOrderBy(MyBatisOrderByClauseCreator.create(
                     KogakuJigyoShinseishoHakkoIchiranOrder.class, 出力順).replace(ORDER_BY, RString.EMPTY));
         }
-        find = new TsuchishoTeikeibunFinder();
         通常分通知文1 = get定型文(帳票分類ＩＤ, 1, 1);
         通常分通知文2 = get定型文(帳票分類ＩＤ, 1, パターン番号_2);
         償還分通知文1 = get定型文(帳票分類ＩＤ, パターン番号_21, 1);
-        通常分通知文2 = get定型文(帳票分類ＩＤ, パターン番号_21, パターン番号_2);
+        償還分通知文2 = get定型文(帳票分類ＩＤ, パターン番号_21, パターン番号_2);
 
     }
 
@@ -152,8 +148,7 @@ public class KogakuServiceHiOshiraseTsuchishoKikanAriOutputProcess extends Batch
     }
 
     private RString get定型文(ReportId reportId, int パターン番号, int 項目番号) {
-        TsuchishoTeikeibun teikeibun = find.get通知書定型文_最新適用開始日(SubGyomuCode.DBC介護給付,
-                reportId, KamokuCode.EMPTY, パターン番号, 項目番号);
-        return teikeibun == null ? RString.EMPTY : teikeibun.get文章();
+        Map<Integer, RString> map = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, reportId, KamokuCode.EMPTY, パターン番号);
+        return map == null ? RString.EMPTY : map.get(項目番号);
     }
 }

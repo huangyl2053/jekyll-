@@ -33,7 +33,7 @@ public class ShoriTaishogaiDataDeleteProcess extends BatchProcessBase<ShinseiJoh
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_ID, parameter.toMybatisParamter());
+        return new BatchDbReader(MYBATIS_ID);
     }
 
     @Override
