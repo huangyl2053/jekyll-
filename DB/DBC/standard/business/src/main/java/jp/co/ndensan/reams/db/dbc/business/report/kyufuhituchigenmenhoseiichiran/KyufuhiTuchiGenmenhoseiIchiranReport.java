@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * DBC200043_給付費通知減免補正一覧表 Reportクラスです。
  *
- * @reamsid_L DBC-2470-030 surun
+ * @reamsid_L DBC-2270-040 dongyabin
  */
 public class KyufuhiTuchiGenmenhoseiIchiranReport extends Report<KyufuhiTuchiGenmenhoseiIchiranReportSource> {
 
