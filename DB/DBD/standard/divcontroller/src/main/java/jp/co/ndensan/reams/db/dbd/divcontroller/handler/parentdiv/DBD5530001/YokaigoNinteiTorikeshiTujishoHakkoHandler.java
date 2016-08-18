@@ -31,6 +31,14 @@ public class YokaigoNinteiTorikeshiTujishoHakkoHandler {
     private final YokaigoNinteiTorikeshiTujishoHakkoDiv div;
     private final RString 被保番号 = new RString("被保番号");
     private static final RString コード = new RString("1");
+    private static final RString コード111 = new RString("111");
+    private static final RString コード112 = new RString("112");
+    private static final RString コード120 = new RString("120");
+    private static final RString コード211 = new RString("211");
+    private static final RString 単一市町村 = new RString("1");
+    private static final RString 広域市町村 = new RString("2");
+    private static final RString 広域保険者 = new RString("3");
+    private static final RString 広域審査会 = new RString("4");
 
     /**
      * コンストラクタです。
@@ -51,7 +59,20 @@ public class YokaigoNinteiTorikeshiTujishoHakkoHandler {
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().
                 getShichosonSecurityJoho(GyomuBunrui.介護事務);
         div.getTujishoHakkoJoken().getCcdKaigoNinteiAtenaInfo().setShoriType(コード);
-        div.getTujishoHakkoJoken().getCcdKaigoNinteiAtenaInfo().setKaigoDonyuKeitai(shichosonSecurityJoho.get導入形態コード().getCode());
+        RString 介護導入形態 = shichosonSecurityJoho.get導入形態コード().getCode();
+        if (介護導入形態.equals(コード111)) {
+            介護導入形態 = 広域保険者;
+        }
+        if (介護導入形態.equals(コード112)) {
+            介護導入形態 = 広域市町村;
+        }
+        if (介護導入形態.equals(コード120)) {
+            介護導入形態 = 単一市町村;
+        }
+        if (介護導入形態.equals(コード211)) {
+            介護導入形態 = 広域審査会;
+        }
+        div.getTujishoHakkoJoken().getCcdKaigoNinteiAtenaInfo().setKaigoDonyuKeitai(介護導入形態);
         div.getTujishoHakkoJoken().getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(ShinseishoKanriNo.EMPTY,
                 new ShikibetsuCode(識別コード));
         div.getTujishoHakkoJoken().getCcdKaigoNinteiAtenaInfo().initialize();

@@ -26,14 +26,15 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -178,7 +179,7 @@ public class ChoshuYuyoJuminKihonHandler {
         TorikeshiJohoDiv 取消情報パネル = div.getChoshuYuyoMain().getTorikeshiJoho();
         取消情報パネル.getTxtTorikeshiYMD().clearValue();
         取消情報パネル.getTxtTorikeshiShurui().clearValue();
-        取消情報パネル.getTxtTorikeshiRiyu().clearValue();
+        取消情報パネル.getTxtTorikeshiRiyu().setValue(null);
         申請情報パネル.getTxtChoteiNendo().clearValue();
         申請情報パネル.getTxtFukaNendo().clearValue();
         申請情報パネル.getTxtShinseiYMD().clearValue();
@@ -596,10 +597,11 @@ public class ChoshuYuyoJuminKihonHandler {
      */
     public ChoshuYuyoJoho onClick_選択ボタン() {
         IFukaRirekiAllDiv 全賦課履歴 = div.getChoshuYuyoFukaRirekiAll().getDghukainfo();
-        IItemList<Fuka> 全賦課履歴データ = 全賦課履歴.getClicked賦課履歴().get賦課履歴All();
-        Fuka 賦課基本 = 全賦課履歴データ.toList().get(ゼロ_定値);
+        TsuchishoNo 通知書番号 = 全賦課履歴.getClicked通知書番号();
+        FlexibleYear 調定年度 = 全賦課履歴.getClicked調定年度();
+        FlexibleYear 賦課年度 = 全賦課履歴.getClicked賦課年度();
         ChoshuYuyoJoho 徴収猶予の情報 = KaigoFukaChoshuYuyo.createInstance()
-                .getJokyo(賦課基本.get調定年度(), 賦課基本.get賦課年度(), 賦課基本.get通知書番号());
+                .getJokyo(調定年度, 賦課年度, 通知書番号);
         return 徴収猶予の情報;
     }
 

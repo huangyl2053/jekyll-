@@ -4,17 +4,19 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRi
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ServiceRiyohyoBeppyoGokeiFooter のクラスファイル 
- * 
- * @author 自動生成
+ * ServiceRiyohyoBeppyoGokeiFooter のクラスファイル
+ *
+ * @reamsid_L DBC-1930-050 cuilin
  */
 public class ServiceRiyohyoBeppyoGokeiFooterDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,10 +25,10 @@ public class ServiceRiyohyoBeppyoGokeiFooterDiv extends Panel {
      */
     @JsonProperty("btnBeppyoGokeiKakutei")
     private Button btnBeppyoGokeiKakutei;
-    @JsonProperty("btnCalcGokei")
-    private Button btnCalcGokei;
     @JsonProperty("btnCancelGokeiInput")
     private Button btnCancelGokeiInput;
+    @JsonProperty("btnCalcGokei")
+    private Button btnCalcGokei;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -53,24 +55,6 @@ public class ServiceRiyohyoBeppyoGokeiFooterDiv extends Panel {
     }
 
     /*
-     * getbtnCalcGokei
-     * @return btnCalcGokei
-     */
-    @JsonProperty("btnCalcGokei")
-    public Button getBtnCalcGokei() {
-        return btnCalcGokei;
-    }
-
-    /*
-     * setbtnCalcGokei
-     * @param btnCalcGokei btnCalcGokei
-     */
-    @JsonProperty("btnCalcGokei")
-    public void setBtnCalcGokei(Button btnCalcGokei) {
-        this.btnCalcGokei = btnCalcGokei;
-    }
-
-    /*
      * getbtnCancelGokeiInput
      * @return btnCancelGokeiInput
      */
@@ -86,6 +70,24 @@ public class ServiceRiyohyoBeppyoGokeiFooterDiv extends Panel {
     @JsonProperty("btnCancelGokeiInput")
     public void setBtnCancelGokeiInput(Button btnCancelGokeiInput) {
         this.btnCancelGokeiInput = btnCancelGokeiInput;
+    }
+
+    /*
+     * getbtnCalcGokei
+     * @return btnCalcGokei
+     */
+    @JsonProperty("btnCalcGokei")
+    public Button getBtnCalcGokei() {
+        return btnCalcGokei;
+    }
+
+    /*
+     * setbtnCalcGokei
+     * @param btnCalcGokei btnCalcGokei
+     */
+    @JsonProperty("btnCalcGokei")
+    public void setBtnCalcGokei(Button btnCalcGokei) {
+        this.btnCalcGokei = btnCalcGokei;
     }
 
     // </editor-fold>
