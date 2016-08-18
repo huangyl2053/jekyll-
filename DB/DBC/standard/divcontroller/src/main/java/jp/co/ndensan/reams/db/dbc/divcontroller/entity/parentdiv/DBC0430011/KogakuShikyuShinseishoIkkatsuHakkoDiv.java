@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 /**
  * KogakuShikyuShinseishoIkkatsuHakko のクラスファイル
  *
- * @reamsid_L DBC-4770-011 zhengshenlei
+ * @reamsid_L DBC-4770-010 zhengshenlei
  */
 public class KogakuShikyuShinseishoIkkatsuHakkoDiv extends Panel {
 
