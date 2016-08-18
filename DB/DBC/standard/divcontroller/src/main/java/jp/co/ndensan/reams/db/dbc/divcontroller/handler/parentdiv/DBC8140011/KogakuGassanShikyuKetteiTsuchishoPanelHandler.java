@@ -108,7 +108,7 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
         List<JukyushaDaicho> 受給者台帳 = manage1.get受給者台帳情報(被保険者番号);
         SogoJigyoTaishoshaManager manage2 = new SogoJigyoTaishoshaManager();
         List<SogoJigyoTaishosha> 総合事業対象者 = manage2.get総合事業対象者(被保険者番号);
-        if (受給者台帳.isEmpty() && 総合事業対象者.isEmpty()) {
+        if (受給者台帳.isEmpty() || 総合事業対象者.isEmpty()) {
             validPairs = getValidationHandler().受給共通_受給者登録なしチェック();
             if (validPairs.iterator().hasNext()) {
                 return validPairs;
@@ -245,16 +245,20 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
         RString select対象年度 = div.getDdlTaishoNendo().getSelectedKey();
         RString select連絡票整理番号 = div.getDdlRearakuhyoSeiriNO().getSelectedKey();
         RString select履歴番号 = div.getDdlRirekiNO().getSelectedKey();
+        RDate 前回発行日 = null;
         for (JigyoKogakuGassanShikyuFushikyuKettei shikyuKettei : 事業高額合算支給不支給決定List) {
             if (select対象年度.equals(shikyuKettei.get対象年度().toDateString())
                     && select連絡票整理番号.equals(shikyuKettei.get支給申請書整理番号())
                     && select履歴番号.equals(new RString(shikyuKettei.get履歴番号()))) {
-                RDate 前回発行日 = new RDate(shikyuKettei.get決定通知書作成年月日() != null
-                        ? shikyuKettei.get決定通知書作成年月日().toString() : null);
-                div.getTxtZenkaiHakkoYMD().setValue(前回発行日);
+                前回発行日 = shikyuKettei.get決定通知書作成年月日() != null
+                        ? new RDate(shikyuKettei.get決定通知書作成年月日().toString()) : null;
+
                 ViewStateHolder.put(ViewStateKeys.事業高額合算支給不支給決定, shikyuKettei);
                 break;
             }
+        }
+        if (前回発行日 != null) {
+            div.getTxtZenkaiHakkoYMD().setValue(前回発行日);
         }
     }
 
@@ -376,10 +380,12 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
             return null;
         }
         if (RSTRING_0.equals(支払予定日印字有無)) {
-            GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiPrintService printService = new GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiPrintService();
+            GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiPrintService printService
+                    = new GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiPrintService();
             return printService.printSingle(entity);
         } else {
-            GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiAriPrintService printService = new GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiAriPrintService();
+            GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiAriPrintService printService
+                    = new GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiAriPrintService();
             return printService.printSingle(entity);
         }
 
@@ -401,22 +407,15 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
     /**
      * 入力項目のチェックです。
      *
-     * @param データ有無 RString
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 発行チェック(RString データ有無) {
+    public ValidationMessageControlPairs 入力項目チェック() {
         RString 支払予定日印字有無 = ViewStateHolder.get(ViewStateKeys.支払予定日印字有無, RString.class);
         RDate 支払予定日 = div.getTxtShiharaiYoteiYMD().getValue();
         RDate 前回発行日 = div.getTxtZenkaiHakkoYMD().getValue();
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (RSTRING_1.equals(支払予定日印字有無) && 支払予定日 == null) {
             validPairs = getValidationHandler().未入力チェック();
-            if (validPairs.iterator().hasNext()) {
-                return validPairs;
-            }
-        }
-        if (RSTRING_1.equals(データ有無)) {
-            validPairs = getValidationHandler().高額合算支給情報存在エラーチェック();
             if (validPairs.iterator().hasNext()) {
                 return validPairs;
             }
@@ -431,14 +430,29 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
     }
 
     /**
+     * 高額合算支給情報存在エラーチェックです。
+     *
+     * @param データ有無 RString
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 高額合算支給情報存在エラーチェック(RString データ有無) {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        if (RSTRING_1.equals(データ有無)) {
+            validPairs = getValidationHandler().高額合算支給情報存在エラーチェック();
+            if (validPairs.iterator().hasNext()) {
+                return validPairs;
+            }
+        }
+        return validPairs;
+    }
+
+    /**
      * 事業高額合算情報取得です。
      *
-     * @param koutsuchisho KougakuGassanShikyuKetteiTsuchisho
      * @param koza Koza
      * @return KougakugassanShikyuketteiTsuuchishoOutputEntity
      */
-    public KougakugassanShikyuketteiTsuuchishoOutputEntity editKougakugassanShikyuketteiTsuuchisho(
-            KougakuGassanShikyuKetteiTsuchisho koutsuchisho, Koza koza) {
+    public KougakugassanShikyuketteiTsuuchishoOutputEntity editKougakugassanShikyuketteiTsuuchisho(Koza koza) {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         RString 支払予定日印字有無 = ViewStateHolder.get(ViewStateKeys.支払予定日印字有無, RString.class);
@@ -456,8 +470,9 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
         FlexibleYear 対象年度 = new FlexibleYear(div.getDdlTaishoNendo().getSelectedKey());
         RString 連絡票整理番号 = div.getDdlRearakuhyoSeiriNO().getSelectedKey();
         int 履歴番号 = Integer.parseInt(div.getDdlRirekiNO().getSelectedKey().toString());
-        KougakugassanShikyuketteiTsuuchishoOutputEntity outputEntity = koutsuchisho.editKougakugassanShikyuketteiTsuuchisho(
-                識別コード, 被保険者番号, reportId, 対象年度, 連絡票整理番号, 履歴番号, 文書番号, 発行日, 支払予定日, koza);
+        KougakugassanShikyuketteiTsuuchishoOutputEntity outputEntity = KougakuGassanShikyuKetteiTsuchisho.createInstance()
+                .editKougakugassanShikyuketteiTsuuchisho(識別コード, 被保険者番号, reportId, 対象年度, 連絡票整理番号, 履歴番号,
+                        文書番号, 発行日, 支払予定日, koza);
         return outputEntity;
     }
 
