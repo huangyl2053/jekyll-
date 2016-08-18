@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 受給者異動送付を管理するクラスです。
  *
- * @reamsid_L DBC-9999-010 quxiaodong
+ * @reamsid_L DBC-9999-012 quxiaodong
  */
 public class JukyushaIdoRenrakuhyo
         extends ModelBase<JukyushaIdoRenrakuhyoIdentifier, DbT3001JukyushaIdoRenrakuhyoEntity, JukyushaIdoRenrakuhyo>
@@ -885,6 +885,18 @@ public class JukyushaIdoRenrakuhyo
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new JukyushaIdoRenrakuhyo(deletedEntity, id);
+    }
+
+    /**
+     * add KogakuShikyuHanteiKekka
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public JukyushaIdoRenrakuhyo added() {
+        DbT3001JukyushaIdoRenrakuhyoEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        //TODO メッセージの検討
+        return new JukyushaIdoRenrakuhyo(addedEntity, id);
     }
 
     /**

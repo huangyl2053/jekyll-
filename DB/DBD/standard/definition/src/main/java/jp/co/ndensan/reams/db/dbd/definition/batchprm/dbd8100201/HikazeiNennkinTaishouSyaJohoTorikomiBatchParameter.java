@@ -11,11 +11,12 @@ import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100201.GaitouIchiran
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100201.NennkinnBanngouCsvProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100201.SeinenngappiCsvProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100201.TorikomiProcessParameter;
+import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,18 +30,45 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter extends BatchParameterBase {
 
+    private static final String TAISHOUNENDO = "taishouNendo";
+    private static final String SHORIKUBUNN = "shoriKubunn";
+    private static final String TAISHOUMONTH = "taishouMonth";
+    private static final String TESTSHORI = "testShori";
+    private static final String OUTPUTKUBUNN = "outputKubunn";
+    private static final String SHORISTATUS = "shoriStatus";
+    private static final String KOUSEISHICHOUSONNCODELIST = "kouseiShichousonnCodeList";
+    private static final String SHORIYMD = "shoriYmd";
+    private static final String SHORIDATETIME = "shoriDateTime";
+    private static final String OUTPUTJUNN1 = "outputJunn1";
+    private static final String OUTPUTJUNN2 = "outputJunn2";
+    private static final String OUTPUTJUNN3 = "outputJunn3";
+    private static final String OUTPUTJUNN4 = "outputJunn4";
+
+    @BatchParameter(key = TAISHOUNENDO, name = "処理年度")
     private FlexibleYear 処理年度;
+    @BatchParameter(key = SHORIKUBUNN, name = "処理区分")
     private RString 処理区分;
+    @BatchParameter(key = TAISHOUMONTH, name = "対象月")
     private RString 対象月;
+    @BatchParameter(key = TESTSHORI, name = "テスト処理")
     private RString テスト処理;
+    @BatchParameter(key = OUTPUTKUBUNN, name = "出力区分")
     private RString 出力区分;
+    @BatchParameter(key = SHORISTATUS, name = "処理状態")
     private RString 処理状態;
+    @BatchParameter(key = KOUSEISHICHOUSONNCODELIST, name = "構成市町村コードリスト")
     private List<RString> 構成市町村コードリスト;
+    @BatchParameter(key = SHORIYMD, name = "処理年月日")
     private FlexibleDate 処理年月日;
-    private RTime 処理日時;
+    @BatchParameter(key = SHORIDATETIME, name = "処理日時")
+    private YMDHMS 処理日時;
+    @BatchParameter(key = OUTPUTJUNN1, name = "出力順ID1")
     private Long 出力順ID1;
+    @BatchParameter(key = OUTPUTJUNN2, name = "出力順ID2")
     private Long 出力順ID2;
+    @BatchParameter(key = OUTPUTJUNN3, name = "出力順ID3")
     private Long 出力順ID3;
+    @BatchParameter(key = OUTPUTJUNN4, name = "出力順ID4")
     private Long 出力順ID4;
 
     /**
