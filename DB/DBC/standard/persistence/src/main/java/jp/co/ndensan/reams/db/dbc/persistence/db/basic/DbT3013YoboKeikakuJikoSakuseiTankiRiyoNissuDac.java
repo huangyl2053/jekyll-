@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 予防給付計画自己作成短期利用日数のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 cuilin
  */
 public class DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuDac
         implements ISaveable<DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity> {
