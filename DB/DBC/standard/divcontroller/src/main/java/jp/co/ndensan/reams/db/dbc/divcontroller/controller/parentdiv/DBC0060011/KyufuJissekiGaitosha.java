@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0060011;
 
 import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufukanrihyoshokai.KyufuKanrihyoShokaiBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufukanrihyoshokai.KyufuKanrihyoShokaiDataModel;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.KyotakuServiceKubun;
@@ -47,7 +48,12 @@ public class KyufuJissekiGaitosha {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        getHandler(div).onClick_btnSearch();
+        List<KyufuKanrihyoShokaiBusiness> 給付管理票一覧 = KyufuKanrihyoShokai.createInstance().selectKyufuKanrihyoList(
+                div.getSearchToKyufujissekiPanel().getTxtHihoNo().getValue(),
+                div.getSearchToKyufujissekiPanel().getTxtJigyoshaNo().getValue(),
+                div.getSearchToKyufujissekiPanel().getTxtTeikyoYMRange().getFromValue().toDateString(),
+                div.getSearchToKyufujissekiPanel().getTxtTeikyoYMRange().getToValue().toDateString());
+        getHandler(div).onClick_btnSearch(給付管理票一覧);
         return ResponseData.of(div).respond();
     }
 
