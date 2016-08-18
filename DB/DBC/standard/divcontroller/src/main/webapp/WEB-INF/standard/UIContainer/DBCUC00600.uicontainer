@@ -1,0 +1,130 @@
+﻿{
+ "uiContainerName": "DBCUC00600",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "給付管理票照会",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0060011",
+     "toLayoutTitle": "給付管理票照会",
+     "toState": ""
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0060011",
+     "layoutTitle": "給付管理票照会",
+     "eventName": "居宅サービスの給付管理照会へ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0060012",
+     "toLayoutTitle": "給付管理票照会",
+     "toState": ""
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0060012",
+     "layoutTitle": "給付管理票照会",
+     "eventName": "検索結果一覧へ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0060011",
+     "toLayoutTitle": "給付管理票照会",
+     "toState": ""
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0060011",
+     "layoutTitle": "給付管理票照会",
+     "eventName": "訪問通所サービスの給付管理照会へ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0060013",
+     "toLayoutTitle": "給付管理票照会",
+     "toState": ""
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0060013",
+     "layoutTitle": "給付管理票照会",
+     "eventName": "短期入所サービスへ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0060014",
+     "toLayoutTitle": "給付管理票照会",
+     "toState": ""
+    },
+    {
+     "id": "6",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0060014",
+     "layoutTitle": "給付管理票照会",
+     "eventName": "訪問通所サービスへ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0060013",
+     "toLayoutTitle": "給付管理票照会",
+     "toState": ""
+    },
+    {
+     "id": "7",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0060014",
+     "layoutTitle": "給付管理票照会",
+     "eventName": "検索結果一覧へ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0060011",
+     "toLayoutTitle": "給付管理票照会",
+     "toState": ""
+    },
+    {
+     "id": "8",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0060013",
+     "layoutTitle": "給付管理票照会",
+     "eventName": "検索結果一覧へ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0060011",
+     "toLayoutTitle": "給付管理票照会",
+     "toState": ""
+    },
+    {
+     "id": "9",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0060011",
+     "layoutTitle": "給付管理票照会",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
