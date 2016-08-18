@@ -170,7 +170,7 @@ public class FukaRirekiAllHandler {
      */
     public FlexibleYear getClicked調定年度() {
         dgFukaRirekiAll_Row row = div.getDgFukaRirekiAll().getClickedItem();
-        return new FlexibleYear(row.getChoteiNendo());
+        return new FlexibleYear(row.getChoteiNendoHidden());
     }
 
     /**
@@ -180,7 +180,7 @@ public class FukaRirekiAllHandler {
      */
     public FlexibleYear getClicked賦課年度() {
         dgFukaRirekiAll_Row row = div.getDgFukaRirekiAll().getClickedItem();
-        return new FlexibleYear(row.getFukaNendo());
+        return new FlexibleYear(row.getFukaNendoHidden());
     }
 
     private int set全賦課履歴(IItemList<Fuka> modelList) {

@@ -11,19 +11,26 @@ import jp.co.ndensan.reams.db.dbd.business.core.hikazeinenkintaishoshaJoho.Hikaz
 import jp.co.ndensan.reams.db.dbd.definition.core.syorijyoutaicode.SyoriJyoutaiCode;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.DBD8010002StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.HikazeiNenkinTaishoshaJohoDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.dgKoikiTaishoShoriItiran_Row;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.dgTanitsuTaishoShoriItchiran_Row;
+import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -54,6 +61,8 @@ public class HikazeiNenkinTaishoshaJohoHandler {
     private final RString 対象ファイル_Z52 = new RString("Z52*****.DTA");
     private final RString 広域保険者 = new RString("1");
     private final RString 単一保険者 = new RString("2");
+    private static final RString Z5100000 = new RString("Z5100000_");
+    private static final RString Z5200000 = new RString("Z5200000_");
 
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
@@ -74,8 +83,9 @@ public class HikazeiNenkinTaishoshaJohoHandler {
      * 画面初期化処理です。
      *
      * @param div JissiJyokyohyoDiv
+     * @return 取込対象市町村コードリスト
      */
-    public void onLoad(HikazeiNenkinTaishoshaJohoDiv div) {
+    public List<RString> onLoad(HikazeiNenkinTaishoshaJohoDiv div) {
 
         FlexibleYear 調定年度 = new FlexibleYear(get日付関連_調定年度());
 
@@ -98,11 +108,13 @@ public class HikazeiNenkinTaishoshaJohoHandler {
             div.getDdlShoriNendo().setDataSource(dataSource);
             div.getDdlShoriNendo().setSelectedKey(dataSource.get(INT_0).getKey());
 
-            this.onChange_ddlShoriNendo(div);
+            return this.onChange_ddlShoriNendo(div);
         } else {
+            div.setHdnState(DBD8010002StateName.遡及非課税年金対象者同定.getName());
             div.getCcdChohyoSyuturyokuJun1().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD900006.getReportId());
             div.getCcdChohyoSyuturyokuJun1().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD900007.getReportId());
             div.getCcdChohyoSyuturyokuJun1().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD900004.getReportId());
+            return new ArrayList<>();
         }
 
     }
@@ -111,13 +123,17 @@ public class HikazeiNenkinTaishoshaJohoHandler {
      * 年度DDLの選択処理です。
      *
      * @param div JissiJyokyohyoDiv
+     * @return 取込対象市町村コードリスト
      */
-    public void onChange_ddlShoriNendo(HikazeiNenkinTaishoshaJohoDiv div) {
+    public List<RString> onChange_ddlShoriNendo(HikazeiNenkinTaishoshaJohoDiv div) {
 
         if (単一保険者.equals(広域と市町村判断())) {
             単一年度DDLの選択処理();
+            div.setHdnState(DBD8010002StateName.非課税年金対象者情報_単一用.getName());
+            return new ArrayList<>();
         } else {
-            広域年度DDLの選択処理();
+            div.setHdnState(DBD8010002StateName.非課税年金対象者情報_広域用.getName());
+            return 広域年度DDLの選択処理();
         }
     }
 
@@ -125,9 +141,34 @@ public class HikazeiNenkinTaishoshaJohoHandler {
      * 月DDLの選択処理です。
      *
      * @param div JissiJyokyohyoDiv
+     * @return 取込対象市町村コードリスト
      */
-    public void onChange_ddlTuki(HikazeiNenkinTaishoshaJohoDiv div) {
+    public List<RString> onChange_ddlTuki(HikazeiNenkinTaishoshaJohoDiv div) {
 
+        SearchResult<ShoriDateKanri> 年次処理情報List = get処理日付管理マスタ情報for月DDL();
+
+        if (RSTRING_0.equals(div.getDdlTuki().getSelectedKey().substring(INT_0))) {
+            div.getTxtTaishoFuairu().setValue(対象ファイル_Z51);
+        } else if (RSTRING_1.equals(div.getDdlTuki().getSelectedKey().substring(INT_0))) {
+            div.getTxtTaishoFuairu().setValue(対象ファイル_Z52);
+        }
+
+        if (年次処理情報List == null || 年次処理情報List.totalCount() == 0) {
+            div.getTxtShoriJotai().setValue(SyoriJyoutaiCode.未処理.get名称());
+            div.getTxtShoriNichiji().setValue(RString.EMPTY);
+        } else {
+            for (ShoriDateKanri shoriDateKanri : 年次処理情報List.records()) {
+                if (div.getDdlTuki().getSelectedKey().equals(shoriDateKanri.get年度内連番())) {
+                    div.getTxtShoriJotai().setValue(SyoriJyoutaiCode.toValue(shoriDateKanri.get処理枝番()).get名称());
+                    div.getTxtShoriNichiji().setValue(shoriDateKanri.get基準日時().toDateString());
+                    break;
+                }
+                div.getTxtShoriJotai().setValue(SyoriJyoutaiCode.未処理.get名称());
+                div.getTxtShoriNichiji().setValue(RString.EMPTY);
+            }
+        }
+
+        return this.get対象市町村Grid();
     }
 
     private void 単一年度DDLの選択処理() {
@@ -198,7 +239,7 @@ public class HikazeiNenkinTaishoshaJohoHandler {
         div.getDgTanitsuTaishoShoriItchiran().setDataSource(rowList);
     }
 
-    private void 広域年度DDLの選択処理() {
+    private List<RString> 広域年度DDLの選択処理() {
 
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         dataSource.add(new KeyValueDataSource(get月コード(-1, false, RSTRING_0), get月(-1)));
@@ -224,7 +265,7 @@ public class HikazeiNenkinTaishoshaJohoHandler {
             }
         }
 
-        this.onChange_ddlTuki(div);
+        return this.onChange_ddlTuki(div);
     }
 
     private RString get日付関連_調定年度() {
@@ -304,6 +345,16 @@ public class HikazeiNenkinTaishoshaJohoHandler {
 
     }
 
+    private SearchResult<ShoriDateKanri> get処理日付管理マスタ情報for月DDL() {
+
+        ShoriDateKanriManager manager = new ShoriDateKanriManager();
+        return manager.get非課税年金対象者情報for月DDL(
+                SubGyomuCode.DBD介護受給,
+                ShoriName.非課税年金対象者情報取込.get名称(),
+                new FlexibleYear(div.getDdlShoriNendo().getSelectedKey()),
+                div.getDdlTuki().getSelectedKey());
+    }
+
     /**
      * 広域と市町村判断の処理します。
      *
@@ -328,5 +379,69 @@ public class HikazeiNenkinTaishoshaJohoHandler {
             return 単一保険者;
         }
         return RString.EMPTY;
+    }
+
+    private List<RString> get対象市町村Grid() {
+        List<KoseiShichosonMaster> 市町村情報リスト = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
+
+        List<dgKoikiTaishoShoriItiran_Row> 対象市町村Grid = new ArrayList<>();
+        List<RString> 取込対象市町村コードリスト = new ArrayList<>();
+
+        for (KoseiShichosonMaster master : 市町村情報リスト) {
+            dgKoikiTaishoShoriItiran_Row row = new dgKoikiTaishoShoriItiran_Row();
+            row.setHdnShichosonCode(master.get市町村コード().code市町村RString());
+            row.setTxtShichoson(master.get市町村名称());
+
+            RString 年次月次 = RString.EMPTY;
+            if (RSTRING_0.equals(div.getDdlTuki().getSelectedKey().substring(INT_0))) {
+                年次月次 = Z5100000;
+            } else if (RSTRING_1.equals(div.getDdlTuki().getSelectedKey().substring(INT_0))) {
+                年次月次 = Z5200000;
+            }
+            List<UzT0885SharedFileEntryEntity> result = SharedFile.searchSharedFile(
+                    年次月次.concat(div.getDdlShoriNendo().getSelectedKey()).
+                    concat(div.getDdlTuki().getSelectedKey()).concat(new RString("_")).
+                    concat(master.get市町村コード().code市町村RString()).concat(new RString(".DTA")));
+
+            if (result == null || result.isEmpty()) {
+                this.setチェックボックスfor共有フォルダ無(master.get市町村コード(), row);
+            } else {
+                取込対象市町村コードリスト.add(master.get市町村コード().code市町村RString());
+                row.setTxtTorikomi(Boolean.TRUE);
+            }
+            対象市町村Grid.add(row);
+        }
+
+        div.getDgKoikiTaishoShoriItiran().setDataSource(対象市町村Grid);
+
+        return 取込対象市町村コードリスト;
+    }
+
+    private void setチェックボックスfor共有フォルダ無(LasdecCode 市町村コード, dgKoikiTaishoShoriItiran_Row row) {
+
+        SearchResult<ShoriDateKanri> result = get処理日付管理マスタ情報forチェック(市町村コード);
+
+        if (result == null || result.totalCount() == 0) {
+            row.setTxtTorikomi(Boolean.FALSE);
+        } else {
+            for (ShoriDateKanri shoriDateKanri : result.records()) {
+                if (SyoriJyoutaiCode.処理なし.getコード().equals(shoriDateKanri.get処理枝番())) {
+                    row.setTxtTorikomi(Boolean.TRUE);
+                    break;
+                }
+                row.setTxtTorikomi(Boolean.FALSE);
+            }
+        }
+    }
+
+    private SearchResult<ShoriDateKanri> get処理日付管理マスタ情報forチェック(LasdecCode 市町村コード) {
+
+        ShoriDateKanriManager manager = new ShoriDateKanriManager();
+        return manager.get非課税年金対象者情報forチェック(
+                SubGyomuCode.DBD介護受給,
+                ShoriName.非課税年金対象者情報取込.get名称(),
+                new FlexibleYear(div.getDdlShoriNendo().getSelectedKey()),
+                市町村コード,
+                div.getDdlTuki().getSelectedKey());
     }
 }
