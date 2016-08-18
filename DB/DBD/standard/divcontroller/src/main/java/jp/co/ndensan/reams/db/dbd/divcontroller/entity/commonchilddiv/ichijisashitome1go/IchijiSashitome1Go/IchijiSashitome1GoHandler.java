@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.TainoHanteiK
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.TaishoHanteiKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4022ShiharaiHohoHenkoTainoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashitomeEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenko.ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbd.service.core.shiharaihohohenko.ShiharaiHohoHenkoService;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -105,7 +104,7 @@ public class IchijiSashitome1GoHandler {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = DataPassingConverter.deserialize(div.getKey_ShiharaiHohoHenkoKanri(), ShiharaiHohoHenko.class);
         ArrayList<ShiharaiHohoHenko> 支払方法変更レコード = new ArrayList();
         ArrayList<ShiharaiHohoHenkoSashitome> shiharaiHohoHenkoSashitomeList = new ArrayList();
-        ViewStateHolder.put(一号一時差止ダイアロググキー.支払方法変更管理業務概念, new ShiharaiHohoHenko(new ShiharaiHohoHenkoEntity()));
+        ViewStateHolder.put(一号一時差止ダイアロググキー.支払方法変更管理業務概念, 支払方法変更管理業務概念);
         if (支払方法変更管理業務概念 != null
                 && 支払方法変更管理業務概念.get被保険者番号().value().equals(div.getKey_HihokenshaNo())
                 && 支払方法変更管理業務概念.get管理区分().equals(ShiharaiHenkoKanriKubun._１号償還払い化.getコード())
