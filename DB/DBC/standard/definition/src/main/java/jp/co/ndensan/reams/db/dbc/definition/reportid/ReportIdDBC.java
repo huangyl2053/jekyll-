@@ -310,7 +310,13 @@ public enum ReportIdDBC {
     /**
      * 介護給付費資格照合表 帳票ＩＤです。
      */
-    DBC100017(new ReportId("DBC100017_ShikakuShogohyo"), new RString("介護給付費資格照合表"));
+    DBC100017(new ReportId("DBC100017_ShikakuShogohyo"), new RString("介護給付費資格照合表")),
+    /**
+     * 給付費通知減免補正一覧表 帳票ＩＤです。
+     */
+    DBC200043(new ReportId("DBC200043_KyufuhiTuchiGenmenhoseiIchiran"), new RString("給付費通知減免補正一覧表"));
+
+    KyufuhiTsuchiGenmenHoseiIchiranhyoProcess
 
     private final ReportId reportId;
 
