@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020;
 
-import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyufuoshirasetsuchisho.KogakuKaigoServicehiOshiraseHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshirasetsuchisho.HihokenshaDaichoShinseiRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshirasetsuchisho.ShinseiJohoShokanTempEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -28,14 +27,12 @@ public class HihokenshaDaichoForShinseiShokanProcess extends BatchProcessBase<Hi
             + "kogakukaigoservicehikyufuoshirasetsuchisho.IKogakuKaigoServicehiOshiraseHakkoMapper.get被保険者台帳データFor申請情報償還");
     private static final RString TABLE_NAME = new RString("ShinseiJohoShokanTemp");
 
-    private KogakuKaigoServicehiOshiraseHakkoProcessParameter parameter;
-
     @BatchWriter
     private IBatchTableWriter tempDbWriter;
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_ID, parameter.toMybatisParamter());
+        return new BatchDbReader(MYBATIS_ID);
     }
 
     @Override
