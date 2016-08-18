@@ -76,7 +76,7 @@ public class KogakuKaigoServicehiOshiraseHakkoProcessParameter implements IBatch
      * @param shutsuryokujunId shutsuryokujunId
      * @param bunshoMojiretsu 文書番号文字列
      * @param ininjoTeishutsusaki 申請書委任状提出先
-     * @param isShinseishoTelNoHyoji 申請書電話番号表示
+     * @param shinseishoTelNoHyoji 申請書電話番号表示
      */
     public KogakuKaigoServicehiOshiraseHakkoProcessParameter(FlexibleYearMonth shoriYm, FlexibleDate sakuseibi, HihokenshaNo hihokenshaNo,
             boolean isShinseishoHakko, boolean isOshiraseTsuchishoHakko, boolean isHakkoIchiranhyoHakko, boolean isKinyuKikanHyoji,
