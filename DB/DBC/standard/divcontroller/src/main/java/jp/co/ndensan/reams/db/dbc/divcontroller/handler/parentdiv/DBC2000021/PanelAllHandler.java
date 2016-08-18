@@ -138,8 +138,8 @@ public class PanelAllHandler {
 
         RDate 年度 = new RDate((div.getDdlNendo().getSelectedValue().concat(DbBusinessConfig
                 .get(ConfigNameDBC.利用者負担割合判定管理_年度終了月日, RDate.getNowDate(), SubGyomuCode.DBC介護給付)).toString()));
-        if (!(年度.plusDay(1).isBefore(div.getTxtKijunbi().getValue()))
-                || !(div.getTxtKijunbi().getValue().isBefore(年度.plusYear(1)))) {
+        if (!(年度.plusDay(1).isBeforeOrEquals(div.getTxtKijunbi().getValue()))
+                || !(div.getTxtKijunbi().getValue().isBeforeOrEquals(年度.plusYear(1)))) {
             return Boolean.TRUE;
         }
         return Boolean.FALSE;

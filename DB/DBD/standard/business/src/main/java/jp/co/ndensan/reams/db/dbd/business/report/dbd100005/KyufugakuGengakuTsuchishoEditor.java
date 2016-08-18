@@ -183,22 +183,22 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
         ShiharaiHohoHenkoGengaku 支払方法変更情報 = this.帳票情報.getShiharaiHohoHenkoGengakuList().get(0);
         ShiharaiHohoHenkoGengakuMeisai 支払方法変更減額明細 = 支払方法変更情報.getShiharaiHohoHenkoGengakuMeisaiList().get(index);
         if (null != this.帳票情報.getShiharaiHohoHenkoGengakuList()) {
-//            source.gengakuKikan = 支払方法変更情報.get確定減額期間開始年月日().wareki().toDateString().concat("~").
-//                    concat(支払方法変更情報.get確定減額期間終了年月日().wareki().toDateString());
+            source.gengakuKikan = 支払方法変更情報.get確定減額期間開始年月日().wareki().toDateString().concat("~").
+                    concat(支払方法変更情報.get確定減額期間終了年月日().wareki().toDateString());
             source.listTainoJokyo_1 = 支払方法変更減額明細.get対象年度().toDateString();
             source.listTainoJokyo_2 = DecimalFormatter.toコンマ区切りRString(支払方法変更減額明細.get未納_時効消滅減額(), 0);
             source.listTainoJokyo_3 = DecimalFormatter.toコンマ区切りRString(支払方法変更減額明細.get納付額(), 0);
             source.listTainoJokyo_4 = DecimalFormatter.toコンマ区切りRString(支払方法変更減額明細.get年賦課額(), 0);
         }
         source.santeiKonkyoKikan1 = new RString("徴収権消滅期間：（未納・時効消滅額／年賦課額）＋（未納・時効消滅額／年賦課額）＋・・");
-//        source.shometsuKikan = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get徴収権消滅期間(), 0);
+        source.shometsuKikan = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get徴収権消滅期間(), 0);
         source.santeiKonkyoKikan2 = new RString("納付済期間：（納付額／年賦課額）＋（納付額／年賦課額）＋・・・・・・・・・・・・・・");
-//        source.sumiKikan = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get納付済期間(), 0);
+        source.sumiKikan = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get納付済期間(), 0);
         source.calGengakuKikan = new RString("給付額減額期間＝徴収権消滅期間*徴収権消滅期間/(徴収権消滅期間＋納付済期間)/2*12");
-//        source.shometsuKikana = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get徴収権消滅期間(), 0);
-//        source.shometsuKikanb = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get徴収権消滅期間(), 0);
-//        source.shometsuKikanc = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get徴収権消滅期間(), 0);
-//        source.sumiKikana = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get納付済期間(), 0);
+        source.shometsuKikana = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get徴収権消滅期間(), 0);
+        source.shometsuKikanb = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get徴収権消滅期間(), 0);
+        source.shometsuKikanc = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get徴収権消滅期間(), 0);
+        source.sumiKikana = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get納付済期間(), 0);
     }
 
     private void setLayerFontLarge(KyufugakuGengakuTsuchishoReportSource source) {
