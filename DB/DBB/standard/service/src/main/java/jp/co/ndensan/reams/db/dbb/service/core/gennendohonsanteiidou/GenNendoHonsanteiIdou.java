@@ -47,6 +47,7 @@ import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.Id
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.TsuchishoNoCreateParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt44001.GennendoIdoFukaProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorListEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiHaakuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
@@ -64,6 +65,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.TokuCho
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.TokuKarisanteiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.TsukibetsuRankuEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2010FukaErrorListDac;
+import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2015KeisangoJohoDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.gennendohonsanteiidou.IGenNendoHonsanteiIdouMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.choteijiyu.ChoteiJiyuHantei;
@@ -141,6 +143,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     private final DbT2010FukaErrorListDac 賦課エラーDac;
     private final UaFt001FindIdoFunctionDac 宛名識別異動分Dac;
     private final DbT2001ChoshuHohoDac 徴収方法Dac;
+    private final DbT2015KeisangoJohoDac 計算後情報Dac = InstanceProvider.create(DbT2015KeisangoJohoDac.class);
     private final DbT7022ShoriDateKanriDac 処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
     private static final RString KEY_CHOTEINENDOYMD = new RString("choteiNendoYMD");
     private static final RString KEY_FUKANENDO = new RString("fukaNendo");
@@ -1437,6 +1440,20 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             entity.setKijunTimestamp(システム日時);
             entity.setState(EntityDataState.Modified);
             処理日付管理Dac.save(entity);
+        }
+    }
+
+    /**
+     * 計算後情報作成前に、計算後情報テーブルに処理名=DBZ介護共通Enum．処理名．異動賦課のレコードを削除する。
+     */
+    public void deleteKeisangoJohoTemp() {
+        List<DbT2015KeisangoJohoEntity> entityList = 計算後情報Dac.selectBy処理名(ShoriName.異動賦課.get名称());
+        if (entityList == null) {
+            return;
+        }
+        for (DbT2015KeisangoJohoEntity entity : entityList) {
+            entity.setState(EntityDataState.Deleted);
+            計算後情報Dac.delete(entity);
         }
     }
 }

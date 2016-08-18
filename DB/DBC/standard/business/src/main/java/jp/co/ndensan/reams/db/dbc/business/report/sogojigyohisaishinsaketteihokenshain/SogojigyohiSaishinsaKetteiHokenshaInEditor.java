@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohisaishinsaketteihok
 import jp.co.ndensan.reams.db.dbc.entity.db.report.source.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaKetteiHokenshaInSource;
 
 /**
- * 総合事業費再審査決定通知書情報取込一覧表（保険者分）帳票Editor
+ * 総合事業費再審査決定通知書情報取込一覧表帳票Editor
  *
  * @reamsid_L DBC-4680-040 wangxue
  */

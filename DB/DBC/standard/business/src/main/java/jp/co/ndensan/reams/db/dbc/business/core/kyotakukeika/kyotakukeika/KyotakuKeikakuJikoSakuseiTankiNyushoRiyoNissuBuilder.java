@@ -77,6 +77,18 @@ public class KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuBuilder {
     }
 
     /**
+     * 利用年月を設定します。
+     *
+     * @param 利用年月 利用年月
+     * @return {@link YoboKeikakuJikoSakuseiTankiRiyoNissuBuilder}
+     */
+    public KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuBuilder set利用年月(FlexibleYearMonth 利用年月) {
+        requireNonNull(利用年月, UrSystemErrorMessages.値がnull.getReplacedMessage("利用年月"));
+        entity.setRiyoYM(利用年月);
+        return this;
+    }
+
+    /**
      * 前回迄利用日数を設定します。
      *
      * @param 前回迄利用日数 前回迄利用日数

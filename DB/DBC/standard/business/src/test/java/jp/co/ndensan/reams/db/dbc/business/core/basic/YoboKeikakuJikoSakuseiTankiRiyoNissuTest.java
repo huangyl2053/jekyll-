@@ -10,9 +10,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
@@ -36,6 +34,7 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuTest extends DbcTestBase {
     private static HihokenshaNo 主キー名1;
     private static FlexibleYearMonth 主キー名2;
     private static int 主キー名3;
+    private static FlexibleYearMonth 主キー名4;
 
     @BeforeClass
     public static void setUpClass() {
@@ -58,24 +57,24 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuTest extends DbcTestBase {
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new YoboKeikakuJikoSakuseiTankiRiyoNissu(null, 主キー名2, 主キー名3);
+            sut = new YoboKeikakuJikoSakuseiTankiRiyoNissu(null, 主キー名2, 主キー名3, 主キー名4);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new YoboKeikakuJikoSakuseiTankiRiyoNissu(主キー名1, null, 主キー名3);
+            sut = new YoboKeikakuJikoSakuseiTankiRiyoNissu(主キー名1, null, 主キー名3, 主キー名4);
         }
 
         @Test
         public void 指定したキーが保持するDbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityにセットされている() {
-            sut = new YoboKeikakuJikoSakuseiTankiRiyoNissu(主キー名1, 主キー名2, 主キー名3);
+            sut = new YoboKeikakuJikoSakuseiTankiRiyoNissu(主キー名1, 主キー名2, 主キー名3, 主キー名4);
             assertThat(sut.get被保険者番号(), is(主キー名1));
             assertThat(sut.get対象年月(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するYoboKeikakuJikoSakuseiTankiRiyoNissuIdentifierにセットされている() {
-            sut = new YoboKeikakuJikoSakuseiTankiRiyoNissu(主キー名1, 主キー名2, 主キー名3);
+            sut = new YoboKeikakuJikoSakuseiTankiRiyoNissu(主キー名1, 主キー名2, 主キー名3, 主キー名4);
             assertThat(sut.identifier().get被保険者番号(), is(主キー名1));
             assertThat(sut.identifier().get対象年月(), is(主キー名2));
         }
