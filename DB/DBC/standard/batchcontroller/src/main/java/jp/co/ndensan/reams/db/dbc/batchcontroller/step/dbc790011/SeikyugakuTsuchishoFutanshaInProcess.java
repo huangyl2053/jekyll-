@@ -60,6 +60,7 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
     private DbWT1511SeikyugakuTsuchishoTempEntity suchishoTempentity;
     private List<SeikyugakuTsuchishoFutanshaInDataEntity> dataList;
     private List<SeikyugakuTsuchishoFutanshaInCsvMeisaiEntity> meisaiList;
+    private List<DbWT1511SeikyugakuTsuchishoTempEntity> suchishoList;
 
     private final RString レコード種別 = new RString("1");
     private final RString 帳票レコード種別_H1 = new RString("H1");
@@ -71,6 +72,8 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
     private static final Integer INDEX_3 = 3;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 請求額通知書一時tableWriter;
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter 処理結果リスト一時tableWriter;
 
     static {
         PARAMETER_OUT_FLOWENTITY = new RString("outFlowEntity");
@@ -90,6 +93,7 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
         gokeiCsvEntity = new SeikyugakuTsuchishoFutanshaInCsvGokeiEntity();
         ruikeiCsvEntity = new SeikyugakuTsuchishoFutanshaInCsvRuikeiEntity();
         tesuuyouCsvEntity = new SeikyugakuTsuchishoCsvFileToreraRecode3Entity();
+        suchishoList = new ArrayList<>();
         suchishoTempentity = new DbWT1511SeikyugakuTsuchishoTempEntity();
         dataList = new ArrayList<>();
         meisaiList = new ArrayList<>();
@@ -169,7 +173,11 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
         flowEntity.set明細データ登録件数(明細データ登録件数);
 
         outFlowEntity.setValue(flowEntity);
-        請求額通知書一時tableWriter.insert(suchishoTempentity);
+        if (suchishoList != null && !suchishoList.isEmpty()) {
+            for (int i = INDEX_0; i < suchishoList.size(); i++) {
+                請求額通知書一時tableWriter.insert(suchishoList.get(i));
+            }
+        }
     }
 
     private int setレコード(SeikyugakuTsuchishoFutanshaInEntity csvData) {
@@ -216,6 +224,7 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
                 set審査支払手数料レコード(suchishoTempentity, csvData.getCsvTesuuryouEntity(), 累計);
             }
         }
+        suchishoList.add(suchishoTempentity);
         return renban;
     }
 
