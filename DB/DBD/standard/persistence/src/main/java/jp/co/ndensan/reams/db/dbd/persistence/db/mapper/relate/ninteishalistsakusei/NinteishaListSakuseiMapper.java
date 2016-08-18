@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd200004.ShakaiFukushiHojinK
 /**
  * 対象者一次特定を取得します
  *
- * @a@reamsid_LDBD-3830-040 tianyh
+ * @reamsid_L DBD-3830-040 tianyh
  */
 public interface NinteishaListSakuseiMapper {
 

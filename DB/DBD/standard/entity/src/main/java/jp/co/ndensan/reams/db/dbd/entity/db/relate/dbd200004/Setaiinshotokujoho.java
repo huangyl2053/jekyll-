@@ -15,7 +15,7 @@ import lombok.Setter;
 /**
  * 世帯員所得情報クラスです
  *
- * @reamsid_LDBD-3830-040 tianyh
+ * @reamsid_L DBD-3830-040 tianyh
  */
 @Getter
 @Setter

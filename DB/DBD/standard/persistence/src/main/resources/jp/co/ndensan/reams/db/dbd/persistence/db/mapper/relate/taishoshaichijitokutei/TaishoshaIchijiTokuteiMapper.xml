@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- @reamsid_LDBD-3830-040 tianyh -->
+<!-- @reamsid_L DBD-3830-040 tianyh -->
 <!-- 概要： 対象者一次特定作成情報を抽出する用XMLです。 -->
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.taishoshaichijitokutei.TaishoshaIchijiTokuteiMapper">
     <select resultOrdered="true" id="select対象者一次特定" 
