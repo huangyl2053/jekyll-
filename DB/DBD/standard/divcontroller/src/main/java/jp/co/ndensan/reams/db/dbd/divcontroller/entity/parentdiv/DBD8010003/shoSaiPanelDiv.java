@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010003;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class shoSaiPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,11 +26,11 @@ public class shoSaiPanelDiv extends Panel {
     @JsonProperty("tbYear")
     private TextBox tbYear;
     @JsonProperty("tbNenkinHokenshaCode")
-    private TextBox tbNenkinHokenshaCode;
+    private TextBoxCode tbNenkinHokenshaCode;
     @JsonProperty("tbKisoNenkinNo")
-    private TextBox tbKisoNenkinNo;
+    private TextBoxCode tbKisoNenkinNo;
     @JsonProperty("tbNenkinCode")
-    private TextBox tbNenkinCode;
+    private TextBoxCode tbNenkinCode;
     @JsonProperty("btnDisplay")
     private Button btnDisplay;
     @JsonProperty("BtnDelete")
@@ -38,6 +39,10 @@ public class shoSaiPanelDiv extends Panel {
     private NaiyoAreaDiv NaiyoArea;
     @JsonProperty("NenkinJohoTukiaiKeyArea")
     private NenkinJohoTukiaiKeyAreaDiv NenkinJohoTukiaiKeyArea;
+    @JsonProperty("hiddenHihokenshaNo")
+    private RString hiddenHihokenshaNo;
+    @JsonProperty("hiddenTbNendon")
+    private RString hiddenTbNendon;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -68,7 +73,7 @@ public class shoSaiPanelDiv extends Panel {
      * @return tbNenkinHokenshaCode
      */
     @JsonProperty("tbNenkinHokenshaCode")
-    public TextBox getTbNenkinHokenshaCode() {
+    public TextBoxCode getTbNenkinHokenshaCode() {
         return tbNenkinHokenshaCode;
     }
 
@@ -77,7 +82,7 @@ public class shoSaiPanelDiv extends Panel {
      * @param tbNenkinHokenshaCode tbNenkinHokenshaCode
      */
     @JsonProperty("tbNenkinHokenshaCode")
-    public void setTbNenkinHokenshaCode(TextBox tbNenkinHokenshaCode) {
+    public void setTbNenkinHokenshaCode(TextBoxCode tbNenkinHokenshaCode) {
         this.tbNenkinHokenshaCode = tbNenkinHokenshaCode;
     }
 
@@ -86,7 +91,7 @@ public class shoSaiPanelDiv extends Panel {
      * @return tbKisoNenkinNo
      */
     @JsonProperty("tbKisoNenkinNo")
-    public TextBox getTbKisoNenkinNo() {
+    public TextBoxCode getTbKisoNenkinNo() {
         return tbKisoNenkinNo;
     }
 
@@ -95,7 +100,7 @@ public class shoSaiPanelDiv extends Panel {
      * @param tbKisoNenkinNo tbKisoNenkinNo
      */
     @JsonProperty("tbKisoNenkinNo")
-    public void setTbKisoNenkinNo(TextBox tbKisoNenkinNo) {
+    public void setTbKisoNenkinNo(TextBoxCode tbKisoNenkinNo) {
         this.tbKisoNenkinNo = tbKisoNenkinNo;
     }
 
@@ -104,7 +109,7 @@ public class shoSaiPanelDiv extends Panel {
      * @return tbNenkinCode
      */
     @JsonProperty("tbNenkinCode")
-    public TextBox getTbNenkinCode() {
+    public TextBoxCode getTbNenkinCode() {
         return tbNenkinCode;
     }
 
@@ -113,7 +118,7 @@ public class shoSaiPanelDiv extends Panel {
      * @param tbNenkinCode tbNenkinCode
      */
     @JsonProperty("tbNenkinCode")
-    public void setTbNenkinCode(TextBox tbNenkinCode) {
+    public void setTbNenkinCode(TextBoxCode tbNenkinCode) {
         this.tbNenkinCode = tbNenkinCode;
     }
 
@@ -190,6 +195,42 @@ public class shoSaiPanelDiv extends Panel {
     }
 
     /*
+     * gethiddenHihokenshaNo
+     * @return hiddenHihokenshaNo
+     */
+    @JsonProperty("hiddenHihokenshaNo")
+    public RString getHiddenHihokenshaNo() {
+        return hiddenHihokenshaNo;
+    }
+
+    /*
+     * sethiddenHihokenshaNo
+     * @param hiddenHihokenshaNo hiddenHihokenshaNo
+     */
+    @JsonProperty("hiddenHihokenshaNo")
+    public void setHiddenHihokenshaNo(RString hiddenHihokenshaNo) {
+        this.hiddenHihokenshaNo = hiddenHihokenshaNo;
+    }
+
+    /*
+     * gethiddenTbNendon
+     * @return hiddenTbNendon
+     */
+    @JsonProperty("hiddenTbNendon")
+    public RString getHiddenTbNendon() {
+        return hiddenTbNendon;
+    }
+
+    /*
+     * sethiddenTbNendon
+     * @param hiddenTbNendon hiddenTbNendon
+     */
+    @JsonProperty("hiddenTbNendon")
+    public void setHiddenTbNendon(RString hiddenTbNendon) {
+        this.hiddenTbNendon = hiddenTbNendon;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -203,12 +244,12 @@ public class shoSaiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTbGenkisoNenkinNo() {
+    public TextBoxCode getTbGenkisoNenkinNo() {
         return this.getNaiyoArea().getTbGenkisoNenkinNo();
     }
 
     @JsonIgnore
-    public void  setTbGenkisoNenkinNo(TextBox tbGenkisoNenkinNo) {
+    public void  setTbGenkisoNenkinNo(TextBoxCode tbGenkisoNenkinNo) {
         this.getNaiyoArea().setTbGenkisoNenkinNo(tbGenkisoNenkinNo);
     }
 
