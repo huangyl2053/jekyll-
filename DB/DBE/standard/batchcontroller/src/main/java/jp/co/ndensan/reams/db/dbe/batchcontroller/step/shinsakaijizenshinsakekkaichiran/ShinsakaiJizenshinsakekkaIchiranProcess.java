@@ -7,19 +7,14 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsakaijizenshinsakekk
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakaijizenshinsakekkaichiran.ShinsakaiJizenshinsakekkaIchiranBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsakaijizenshinsakekkaichiran.ShinsakaiJizenshinsakekkaIchiranReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shinsakaijizenshinsakekkaichiran.ShinsakaiJizenshinsakekkaIchiranProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaijizenshinsakekkaichiran.JizenShinsaKekkaRelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaijizenshinsakekkaichiran.ShinsakaiJizenshinsakekkaIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaijizenshinsakekkaichiran.ShinsakaiJizenshinsakekkaIchiranRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.shinsakaijizenshinsakekkaichiran.ShinsakaiJizenshinsakekkaIchiranReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaijizenshinsakekkaichiran.IShinsakaiJIzenShinsakekkaIchiranMapper;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -48,18 +43,8 @@ public class ShinsakaiJizenshinsakekkaIchiranProcess extends BatchProcessBase<Sh
             + "IShinsakaiJIzenShinsakekkaIchiranMapper.get審査会対象者情報");
     private static final ReportId REPORT_ID = ReportIdDBE.DBE520001.getReportId();
     private static final RString なし = new RString("なし");
-    private static final RString NULLNONE = new RString("※");
     private static final int ZERO = 0;
-    private static final int ITI = 1;
-    private static final int NI = 2;
-    private static final int SAN = 3;
     private static final int YON = 4;
-    private static final int LOKU = 6;
-    private static final RString コード99A = new RString("99A");
-    private static final RString コード02A = new RString("02A");
-    private static final RString コード06A = new RString("06A");
-    private static final RString コード09A = new RString("09A");
-    private static final RString コード09B = new RString("09B");
     private ShinsakaiJizenshinsakekkaIchiranProcessParameter parameter;
     private IShinsakaiJIzenShinsakekkaIchiranMapper mapper;
     private List<ShinsakaiJizenshinsakekkaIchiranRelateEntity> 審査会結果情報;
@@ -97,41 +82,9 @@ public class ShinsakaiJizenshinsakekkaIchiranProcess extends BatchProcessBase<Sh
 
     @Override
     protected void process(ShinsakaiJizenshinsakekkaIchiranRelateEntity 審査会対象者情報) {
-        ShinsakaiJizenshinsakekkaIchiranEntity entity = new ShinsakaiJizenshinsakekkaIchiranEntity(
-                set合議体番号(),
-                set介護認定審査会開催番号(),
-                dateFormat(),
-                get審査員(ZERO).getShinsakaiIinShimei(),
-                get審査員(ITI).getShinsakaiIinShimei(),
-                get審査員(NI).getShinsakaiIinShimei(),
-                get審査員(SAN).getShinsakaiIinShimei(),
-                get審査員(YON).getShinsakaiIinShimei(),
-                new RString(審査会対象者情報.getShinsakaiOrder()),
-                set特定疾病(審査会対象者情報.getNigoTokuteiShippeiCode()),
-                審査会対象者情報.getHihokenshaNo(),
-                set前回介護度(審査会対象者情報.getNijiHanteiYokaigoJotaiKubunCode(), 審査会対象者情報.getKoroshoIfShikibetsuCode()),
-                RString.EMPTY,
-                set対応結果(get審査員(ZERO).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
-                set有効期間(get審査員(ZERO).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
-                RString.EMPTY,
-                set対応結果(get審査員(ITI).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
-                set有効期間(get審査員(ITI).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
-                RString.EMPTY,
-                set対応結果(get審査員(NI).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
-                set有効期間(get審査員(NI).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
-                RString.EMPTY,
-                set対応結果(get審査員(SAN).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
-                set有効期間(get審査員(SAN).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
-                RString.EMPTY,
-                set対応結果(get審査員(YON).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
-                set有効期間(get審査員(YON).getShinsakaiIinCode(), new RString(審査会対象者情報.getShinsakaiOrder())),
-                set一次判定結果(審査会対象者情報.getIchijiHanteiKekkaCode(), 審査会対象者情報.getKoroshoIfShikibetsuCode()),
-                RString.EMPTY,
-                set区分(審査会対象者情報),
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                new RString(データフラグ)
-        );
-        ShinsakaiJizenshinsakekkaIchiranReport report = new ShinsakaiJizenshinsakekkaIchiranReport(entity);
+        ShinsakaiJizenshinsakekkaIchiranBusiness business = new ShinsakaiJizenshinsakekkaIchiranBusiness(
+                審査会対象者情報, 審査会情報, 審査員名, 審査会結果情報, データフラグ);
+        ShinsakaiJizenshinsakekkaIchiranReport report = new ShinsakaiJizenshinsakekkaIchiranReport(business);
         report.writeBy(reportSourceWriter);
     }
 
@@ -148,131 +101,6 @@ public class ShinsakaiJizenshinsakekkaIchiranProcess extends BatchProcessBase<Sh
                 ReportIdDBE.DBE520001.getReportName(), new RString(reportSourceWriter.pageCount().value()),
                 なし, なし, set出力条件());
         OutputJokenhyoFactory.createInstance(item).print();
-    }
-
-    private RString set合議体番号() {
-        if (審査会情報.size() == ZERO) {
-            return RString.EMPTY;
-        } else {
-            return new RString(審査会情報.get(ZERO).getGogitaiNo());
-        }
-    }
-
-    private RString set介護認定審査会開催番号() {
-        if (審査会情報.size() == ZERO) {
-            return RString.EMPTY;
-        } else {
-            return 審査会情報.get(ZERO).getShinsakaiKaisaiNo().substring(審査会情報.get(ZERO).getShinsakaiKaisaiNo().length() - YON);
-        }
-    }
-
-    private RString set特定疾病(RString 特定疾病) {
-        if (!RString.isNullOrEmpty(特定疾病)) {
-            return NULLNONE;
-        } else {
-            return RString.EMPTY;
-        }
-    }
-
-    private RString set有効期間(RString 審査員コード, RString 審査順) {
-        if (RString.isNullOrEmpty(審査員コード) || RString.isNullOrEmpty(審査順)) {
-            return RString.EMPTY;
-        }
-        for (ShinsakaiJizenshinsakekkaIchiranRelateEntity entity : 審査会結果情報) {
-            if (審査員コード.equals(entity.getShinsakaiIinCode()) && 審査順.equals(new RString(entity.getShinsakaiOrder()))) {
-                return entity.getYukokikan();
-            }
-        }
-        return RString.EMPTY;
-    }
-
-    private RString set対応結果(RString 審査員コード, RString 審査順) {
-        if (RString.isNullOrEmpty(審査員コード) || RString.isNullOrEmpty(審査順)) {
-            return RString.EMPTY;
-        }
-        for (ShinsakaiJizenshinsakekkaIchiranRelateEntity entity : 審査会結果情報) {
-            if (審査員コード.equals(entity.getShinsakaiIinCode()) && 審査順.equals(new RString(entity.getShinsakaiOrder()))) {
-                return set前回介護度(entity.getNijiHanteiKekkaCode(), entity.getKoroshoIfShikibetsuCode());
-            }
-        }
-        return RString.EMPTY;
-    }
-
-    private RString set前回介護度(RString 二次判定要介護状態区分コード, RString 厚労省IF識別コード) {
-        if (RString.isNullOrEmpty(二次判定要介護状態区分コード) || RString.isNullOrEmpty(厚労省IF識別コード)) {
-            return RString.EMPTY;
-        }
-        if (コード99A.equals(厚労省IF識別コード)) {
-            return YokaigoJotaiKubun99.toValue(二次判定要介護状態区分コード).get略称();
-        }
-        if (コード02A.equals(厚労省IF識別コード)) {
-            return YokaigoJotaiKubun02.toValue(二次判定要介護状態区分コード).get略称();
-        }
-        if (コード06A.equals(厚労省IF識別コード)) {
-            return YokaigoJotaiKubun06.toValue(二次判定要介護状態区分コード).get略称();
-        }
-        if (コード09A.equals(厚労省IF識別コード) || コード09B.equals(厚労省IF識別コード)) {
-            return YokaigoJotaiKubun09.toValue(二次判定要介護状態区分コード).get略称();
-        }
-        return RString.EMPTY;
-    }
-
-    private RString set一次判定結果(RString 要介護認定一次判定結果コード, RString 厚労省IF識別コード) {
-        if (RString.isNullOrEmpty(要介護認定一次判定結果コード) || RString.isNullOrEmpty(厚労省IF識別コード)) {
-            return RString.EMPTY;
-        }
-        if (コード99A.equals(厚労省IF識別コード)) {
-            return YokaigoJotaiKubun99.toValue(要介護認定一次判定結果コード).get名称();
-        }
-        if (コード02A.equals(厚労省IF識別コード)) {
-            return YokaigoJotaiKubun02.toValue(要介護認定一次判定結果コード).get名称();
-        }
-        if (コード06A.equals(厚労省IF識別コード)) {
-            return YokaigoJotaiKubun06.toValue(要介護認定一次判定結果コード).get名称();
-        }
-        if (コード09A.equals(厚労省IF識別コード) || コード09B.equals(厚労省IF識別コード)) {
-            return YokaigoJotaiKubun09.toValue(要介護認定一次判定結果コード).get名称();
-        }
-        return RString.EMPTY;
-    }
-
-    private RString set区分(ShinsakaiJizenshinsakekkaIchiranRelateEntity 審査会対象者情報) {
-        if (RString.isNullOrEmpty(審査会対象者情報.getNinteiShinseiShinseijiKubunCode())) {
-            return RString.EMPTY;
-        } else {
-            return NinteiShinseiShinseijiKubunCode.toValue(審査会対象者情報.getNinteiShinseiShinseijiKubunCode()).get名称();
-        }
-    }
-
-    private RString dateFormat() {
-        if (審査会情報.isEmpty()) {
-            return RString.EMPTY;
-        }
-        RString 年月日 = 審査会情報.get(ZERO).getShinsakaiKaisaiYoteiYMD();
-        RString 時分 = 審査会情報.get(ZERO).getShinsakaiKaishiYoteiTime();
-        return new RStringBuilder(年月日.substring(ZERO, YON)).append("年").append(年月日.substring(YON, LOKU))
-                .append("月").append(年月日.substring(LOKU)).append("日")
-                .append(" ").append(時分.substring(ZERO, NI)).append("時")
-                .append(時分.substring(NI)).append("分").toRString();
-    }
-
-    private JizenShinsaKekkaRelateEntity get審査員(int 審査員フラグ) {
-        if (審査員名.size() > ZERO && 審査員フラグ == ZERO) {
-            return 審査員名.get(審査員フラグ);
-        }
-        if (審査員名.size() > ITI && 審査員フラグ == ITI) {
-            return 審査員名.get(審査員フラグ);
-        }
-        if (審査員名.size() > NI && 審査員フラグ == NI) {
-            return 審査員名.get(審査員フラグ);
-        }
-        if (審査員名.size() > SAN && 審査員フラグ == SAN) {
-            return 審査員名.get(審査員フラグ);
-        }
-        if (審査員名.size() > YON && 審査員フラグ == YON) {
-            return 審査員名.get(審査員フラグ);
-        }
-        return new JizenShinsaKekkaRelateEntity();
     }
 
     private List<RString> set出力条件() {

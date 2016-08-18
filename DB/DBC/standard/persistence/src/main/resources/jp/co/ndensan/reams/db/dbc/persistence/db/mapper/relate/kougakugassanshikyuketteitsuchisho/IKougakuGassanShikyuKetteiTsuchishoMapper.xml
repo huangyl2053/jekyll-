@@ -57,7 +57,7 @@
             AND "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."isDeleted" = false
    </select>
    
-   <resultMap id="resultMap_KougakuGassan" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kougakugassanshikyuketteitsuchisho.KozaJyohoEntity" autoMapping="true">
+   <resultMap id="resultMap_KougakuGassan" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kougakugassanshikyuketteitsuchisho.JigyoKogakuGassanEntity" autoMapping="true">
         <id column="dbT3174JigyoKogakuGassanShikyuFushikyuKettei_hihokenshaNo"/>
         <association property="事業高額合算支給額計算結果" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaMapper.resultMap_DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity"/>
         <association property="事業高額合算支給不支給決定" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3174JigyoKogakuGassanShikyuFushikyuKetteiMapper.ResultMap_DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity"/>    

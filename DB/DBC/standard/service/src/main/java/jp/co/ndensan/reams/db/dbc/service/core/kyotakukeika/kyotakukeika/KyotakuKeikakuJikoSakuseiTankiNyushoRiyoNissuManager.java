@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3010KyotakuKeikakuJikoSakus
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -100,5 +101,31 @@ public class KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuManager {
             return false;
         }
         return 1 == dac.save(居宅給付計画自己作成短期入所利用日数.toEntity());
+    }
+
+    /**
+     * 居宅短期入所情報を削除します。
+     *
+     * @param 居宅短期入所情報 KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu
+     */
+    public void delete居宅短期入所情報(KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu 居宅短期入所情報) {
+        if (居宅短期入所情報 != null) {
+            DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity entity = 居宅短期入所情報.toEntity();
+            entity.setState(EntityDataState.Deleted);
+            dac.delete(entity);
+        }
+    }
+
+    /**
+     * 居宅短期入所情報を更新します。
+     *
+     * @param 居宅短期入所情報 KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu
+     */
+    public void update居宅短期入所情報(KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu 居宅短期入所情報) {
+        if (居宅短期入所情報 != null) {
+            DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity entity = 居宅短期入所情報.toEntity();
+            entity.setState(EntityDataState.Modified);
+            dac.save(entity);
+        }
     }
 }

@@ -48,7 +48,7 @@ public class KyufuJikoSakuseiEntityResult {
     private boolean 合計フラグ;
     private RString 限度額対象外フラグ;
     private Decimal 定額利用者負担単価金額;
-//    private KubunGendoEntity entity;
+
     private Decimal 支給限度単位数;
     private FlexibleDate 適用開始年月日;
     private FlexibleDate 適用終了年月日;

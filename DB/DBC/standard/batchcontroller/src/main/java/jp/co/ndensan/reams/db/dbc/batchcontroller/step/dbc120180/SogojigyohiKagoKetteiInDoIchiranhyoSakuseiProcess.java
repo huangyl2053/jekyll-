@@ -134,7 +134,7 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
         } else {
             List<RString> 出力順BODY = 出力順.split(コンマ.toString());
             出力順 = デフォルト出力順;
-            if (出力順BODY.size() > 1) {
+            if (1 < 出力順BODY.size()) {
                 for (int i = 1; i < 出力順BODY.size(); i++) {
                     出力順 = 出力順.concat(コンマ).concat(出力順BODY.get(i));
                 }

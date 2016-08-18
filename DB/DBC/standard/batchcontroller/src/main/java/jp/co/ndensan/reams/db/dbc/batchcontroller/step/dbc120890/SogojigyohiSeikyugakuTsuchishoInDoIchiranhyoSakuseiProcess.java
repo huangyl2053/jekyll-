@@ -75,6 +75,9 @@ public class SogojigyohiSeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess extends 
     protected void initialize() {
         super.initialize();
         改頁項目リスト = new ArrayList<>();
+        改頁項目リスト.add(new RString(SogojigyohiSeikyugakuTsuchishoInSource.ReportSourceFields.shoKisaiHokenshaNo.name()));
+        改頁項目リスト.add(new RString(SogojigyohiSeikyugakuTsuchishoInSource.ReportSourceFields.kanCode.name()));
+        改頁項目リスト.add(new RString(SogojigyohiSeikyugakuTsuchishoInSource.ReportSourceFields.kouCode.name()));
     }
 
     @Override
@@ -97,9 +100,7 @@ public class SogojigyohiSeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess extends 
 
     @Override
     protected void beforeExecute() {
-        改頁項目リスト.add(new RString(SogojigyohiSeikyugakuTsuchishoInSource.ReportSourceFields.shoKisaiHokenshaNo.name()));
-        改頁項目リスト.add(new RString(SogojigyohiSeikyugakuTsuchishoInSource.ReportSourceFields.kanCode.name()));
-        改頁項目リスト.add(new RString(SogojigyohiSeikyugakuTsuchishoInSource.ReportSourceFields.kouCode.name()));
+
     }
 
     @Override

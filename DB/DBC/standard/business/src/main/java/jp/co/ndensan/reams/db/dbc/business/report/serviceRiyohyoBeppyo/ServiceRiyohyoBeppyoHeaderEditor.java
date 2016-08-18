@@ -9,9 +9,13 @@ import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.Teikyoh
 import jp.co.ndensan.reams.db.dbc.entity.report.source.serviceRiyohyoBeppyo.ServiceRiyohyoBeppyoSource;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 帳票設計_DBC0150011_1_サービス提供票別表Editorのインターフェースクラスです。
@@ -63,7 +67,8 @@ public class ServiceRiyohyoBeppyoHeaderEditor implements IServiceRiyohyoBeppyoHe
     }
 
     private void setタイトル部(ServiceRiyohyoBeppyoSource source) {
-        source.nengo = this.利用年月.wareki().toDateString();
+        source.nengo = this.利用年月.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         source.hihoNo = this.帳票ヘッダー.get被保険者番号().getColumnValue();
         RString name = RString.EMPTY;
         if (this.帳票ヘッダー.get宛名() != null) {
@@ -95,7 +100,8 @@ public class ServiceRiyohyoBeppyoHeaderEditor implements IServiceRiyohyoBeppyoHe
             source.headSeikyugaku = 事業費;
             source.headRiyoushaFutan = 総合事業対象分;
         }
-        source.shoriYmdHms = this.作成日時.wareki().toDateString();
+        source.shoriYmdHms = this.作成日時.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         source.pagecnt = new RString(this.総ページ数);
     }
 }

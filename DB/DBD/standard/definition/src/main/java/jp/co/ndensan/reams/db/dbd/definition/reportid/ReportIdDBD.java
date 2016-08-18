@@ -218,7 +218,36 @@ public enum ReportIdDBD {
     /**
      * 要介護認定延期通知書発行一覧表の帳票ＩＤです。
      */
-    DBD522002(new ReportId("DBD522002_NinteiEnkiTsuchishoHakkoIchiranhyo"), new RString("要介護認定延期通知書発行一覧表"));
+    DBD522002(new ReportId("DBD522002_NinteiEnkiTsuchishoHakkoIchiranhyo"), new RString("要介護認定延期通知書発行一覧表")),
+    /**
+     * 非課税年金対象者情報一覧表の帳票ＩＤです。
+     */
+    DBD900001(new ReportId("DBD900001_HikazeiNenkinTaishoshaJohoIchiran"), new RString("非課税年金対象者情報一覧表")),
+    /**
+     * 非課税年金対象者情報該当一覧表の帳票ＩＤです。
+     */
+    DBD900002(new ReportId("DBD900002_HikazeiNenkinGaitoIchiran"), new RString("非課税年金対象者情報該当一覧表")),
+    /**
+     * 非課税年金対象者情報不一致チェックリストの帳票ＩＤです。
+     */
+    DBD900003(new ReportId("DBD900003_HikazeiNenkinFuicchiCheckList"), new RString("非課税年金対象者情報不一致チェックリスト")),
+    /**
+     * 非課税年金対象者情報生年月日・性別・カナ氏名チェックリストの帳票ＩＤです。
+     */
+    DBD900004(new ReportId("DBD900004_HikazeiNenkinUmareYMDSeibetsuNameCheckList"),
+            new RString("非課税年金対象者情報生年月日・性別・カナ氏名チェックリスト")),
+    /**
+     * 非課税年金年金番号チェックリストの帳票ＩＤです。
+     */
+    DBD900005(new ReportId("DBD900005_HikazeiNenkinNenkinNoCheckList"), new RString("非課税年金年金番号チェックリスト")),
+    /**
+     * 非課税年金対象者情報遡及該当者一覧表の帳票ＩＤです。
+     */
+    DBD900006(new ReportId("DBD900006_HikazeiNenkinSokyuGaitoIchiran"), new RString("非課税年金対象者情報遡及該当者一覧表")),
+    /**
+     * 非課税年金対象者情報遡及不一致チェックリストの帳票ＩＤです。
+     */
+    DBD900007(new ReportId("DBD900007_HikazeiNenkinSokyuFuicchiCheckList"), new RString("非課税年金対象者情報遡及不一致チェックリスト"));
 
     private final ReportId reportId;
     private final RString reportName;

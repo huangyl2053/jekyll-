@@ -160,7 +160,7 @@ public class KyufukanrihyoReadCsvFileProcess extends BatchProcessBase<RString> {
         entity.setListMeisaiZenEntity(meisaiZenList);
         entity.setListMeisaiGoEntity(meisaiGoList);
 
-        int 連番 = 0;
+        int 連番 = parameter.get明細件数合算();
         KokuhorenkyoutsuControlCsvEntity controlEntity = entity.getControlCsvEntity();
         if (null == returnEntity.get処理対象年月()) {
             FlexibleYearMonth 処理対象年月 = new FlexibleYearMonth(controlEntity.getShoriYM());
@@ -185,13 +185,14 @@ public class KyufukanrihyoReadCsvFileProcess extends BatchProcessBase<RString> {
             }
         }
 
-        if (連番 == INDEX_0) {
+        if (parameter.isLast() && 連番 == INDEX_0) {
             DbWT0002KokuhorenTorikomiErrorTempEntity errorTempentity = new DbWT0002KokuhorenTorikomiErrorTempEntity();
             errorTempentity.setエラー区分(NUM);
             一時表Mapper.処理結果リスト一時TBLに登録(errorTempentity);
         }
-        int レコード件数合算 = 連番 + Integer.valueOf(controlEntity.getCodeNum().toString());
-        returnEntity.setレコード件数合算(レコード件数合算);
+        returnEntity.set明細件数合算(連番);
+        returnEntity.setレコード件数合算(parameter.getレコード件数合算()
+                + Integer.valueOf(controlEntity.getCodeNum().toString()));
 
     }
 

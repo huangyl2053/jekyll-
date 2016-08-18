@@ -10,6 +10,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.YoboKeikakuJikoSakuseiKanri;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.YoboKeikakuJikoSakuseiTankiRiyoNissu;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.GokeiKeisan;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KubunGendo;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KyotakuServiceRirekiIchiranEntityResult;
@@ -18,15 +20,18 @@ import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.RiyoNen
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.ServiceTypeDetails;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.ServiceTypeTotal;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.TankiNyushoResult;
+import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeika.KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.KubunGendoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.KyufuJikoSakuseiParameter;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.TankiNyushoParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3120YoboKeikakuJikoSakuseiKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KubunGendoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KyotakuServiceRirekiIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KyufuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.RiyoNentstsuIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.ServiceTypeTotalEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.TankiNyushoEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuDac;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3120YoboKeikakuJikoSakuseiKanriDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jigosakuseimeisaitouroku.IJigoSakuseiMeisaiTourokuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
@@ -38,12 +43,15 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuR
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -56,6 +64,9 @@ public class JigoSakuseiMeisaiTouroku {
     private final MapperProvider mapperProvider;
     private final DbT4001JukyushaDaichoDac 受給者台帳dac;
     private final DbT3114RiyoshaFutanWariaiMeisaiDac 利用者負担割合明細Dac;
+    private final DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuDac 居宅給付計画自己作成短期入所利用日数Dac;
+    private final DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuDac 予防給付計画自己作成短期利用日数Dac;
+    private final DbT3120YoboKeikakuJikoSakuseiKanriDac 予防給付計画自己作成管理Dac;
     private static final Decimal 定値_100 = new Decimal("100");
     private static final RString 限度対象外フラグ = new RString("0");
     private static final RString 定値_合計 = new RString("合計");
@@ -68,6 +79,8 @@ public class JigoSakuseiMeisaiTouroku {
     private static final RString KEY_被保険者番号 = new RString("被保険者番号");
     private static final RString KEY_対象年月 = new RString("対象年月");
     private static final RString KEY_履歴番号 = new RString("履歴番号");
+    private static final RString 居宅予防区分_0 = new RString("0");
+    private static final RString 居宅予防区分_1 = new RString("1");
 
     /**
      * コンストラクタです。
@@ -76,6 +89,10 @@ public class JigoSakuseiMeisaiTouroku {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.受給者台帳dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
         this.利用者負担割合明細Dac = InstanceProvider.create(DbT3114RiyoshaFutanWariaiMeisaiDac.class);
+        this.居宅給付計画自己作成短期入所利用日数Dac
+                = InstanceProvider.create(DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuDac.class);
+        this.予防給付計画自己作成短期利用日数Dac = InstanceProvider.create(DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuDac.class);
+        this.予防給付計画自己作成管理Dac = InstanceProvider.create(DbT3120YoboKeikakuJikoSakuseiKanriDac.class);
     }
 
     /**
@@ -356,14 +373,18 @@ public class JigoSakuseiMeisaiTouroku {
      */
     public TankiNyushoResult getTankiNyuryo(HihokenshaNo 被保険者番号, FlexibleYearMonth 対象年月, int 履歴番号,
             FlexibleYearMonth 利用年月) {
-        IJigoSakuseiMeisaiTourokuMapper mapper = mapperProvider.create(IJigoSakuseiMeisaiTourokuMapper.class);
-        TankiNyushoParameter param = TankiNyushoParameter.creatParam(被保険者番号, 対象年月, 履歴番号, 利用年月);
-        TankiNyushoEntity entity = mapper.get短期入所情報(param);
-        if (entity == null) {
-            return null;
-        }
+        DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity 居宅短期入所情報
+                = 居宅給付計画自己作成短期入所利用日数Dac.select居宅短期入所情報(被保険者番号, 対象年月, 履歴番号, 利用年月);
+        DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity 予防短期入所情報
+                = 予防給付計画自己作成短期利用日数Dac.select予防短期入所情報(被保険者番号, 対象年月, 履歴番号, 利用年月);
         TankiNyushoResult result = new TankiNyushoResult();
-        result.setEntity(entity);
+        if (居宅短期入所情報 != null) {
+            result.set居宅短期入所情報(new KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu(居宅短期入所情報));
+            result.set居宅予防区分(居宅予防区分_0);
+        } else if (予防短期入所情報 != null) {
+            result.set予防短期入所情報(new YoboKeikakuJikoSakuseiTankiRiyoNissu(予防短期入所情報));
+            result.set居宅予防区分(居宅予防区分_1);
+        }
         return result;
     }
 
@@ -408,7 +429,46 @@ public class JigoSakuseiMeisaiTouroku {
     }
 
     /**
-     * 居宅サービス履歴一覧取得
+     * 予防給付計画自己作成管理情報を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年月 FlexibleYearMonth
+     * @param 履歴番号 int
+     * @param 利用年月 FlexibleYearMonth
+     * @param 居宅サービス区分 RString
+     * @param 明細番号 int
+     * @return YoboKeikakuJikoSakuseiKanri
+     */
+    public YoboKeikakuJikoSakuseiKanri select予防給付計画自己作成管理ByKey(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth 対象年月,
+            int 履歴番号,
+            FlexibleYearMonth 利用年月,
+            RString 居宅サービス区分,
+            int 明細番号) {
+        DbT3120YoboKeikakuJikoSakuseiKanriEntity entity
+                = 予防給付計画自己作成管理Dac.selectByKey(被保険者番号, 対象年月, 履歴番号, 利用年月, 居宅サービス区分, 明細番号);
+        if (entity != null) {
+            entity.initializeMd5();
+            return new YoboKeikakuJikoSakuseiKanri(entity);
+        }
+        return null;
+    }
+
+    /**
+     * 予防給付計画自己作成管理情報を更新します。
+     *
+     * @param 予防管理情報 YoboKeikakuJikoSakuseiKanri
+     */
+    public void update予防給付計画自己作成管理(YoboKeikakuJikoSakuseiKanri 予防管理情報) {
+        if (予防管理情報 != null) {
+            DbT3120YoboKeikakuJikoSakuseiKanriEntity entity = 予防管理情報.toEntity();
+            entity.setState(EntityDataState.Modified);
+            予防給付計画自己作成管理Dac.save(entity);
+        }
+    }
+
+    /**
+     * 居宅サービス履歴一覧を取得します。
      *
      * @param 被保険者番号 RString
      * @return List<KyotakuHistoryDataEntity>
@@ -431,14 +491,15 @@ public class JigoSakuseiMeisaiTouroku {
     }
 
     /**
-     * 対象情報一覧を取得
+     * 対象情報一覧を取得します。
      *
-     * @param 対象年月　FlexibleYearMonth
-     * @param 履歴番号　int
-     * @param 被保険者番号　HihokenshaNo
+     * @param 対象年月 FlexibleYearMonth
+     * @param 履歴番号 int
+     * @param 被保険者番号 HihokenshaNo
      * @return List<NotificationEntity>
      */
-    public List<RiyoNentstsuIchiranEntityResult> getRiyoNentstsuIchiran(HihokenshaNo 被保険者番号, FlexibleYearMonth 対象年月, int 履歴番号) {
+    public List<RiyoNentstsuIchiranEntityResult> getRiyoNentstsuIchiran(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth 対象年月, int 履歴番号) {
         IJigoSakuseiMeisaiTourokuMapper mapper = mapperProvider.create(IJigoSakuseiMeisaiTourokuMapper.class);
         Map<String, Object> param = new HashMap<>();
         param.put(KEY_被保険者番号.toString(), 被保険者番号);
