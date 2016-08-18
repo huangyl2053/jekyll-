@@ -320,8 +320,6 @@ public enum ReportIdDBC {
      */
     DBC200070(new ReportId("DBC200070_SogojigyohiShinsaKetteiSeikyumeisaihyo"), new RString("介護予防・日常生活支援総合事業費審査決定請求明細表"));
 
-    KyufuhiTsuchiGenmenHoseiIchiranhyoProcess
-
     private final ReportId reportId;
 
     private final RString reportName;
