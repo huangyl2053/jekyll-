@@ -45,6 +45,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
@@ -64,7 +65,6 @@ public class ChosaOCRTorikomiMain {
     private static final RString チェックOK = new RString("OK");
     private static final RString チェックNG = new RString("NG");
     private static final RString 記入無し = new RString("0");
-    private RString 審査会開催番号;
 
     /**
      * 画面初期化処理です。
@@ -74,7 +74,7 @@ public class ChosaOCRTorikomiMain {
      */
     public ResponseData<ChosaOCRTorikomiMainDiv> onLoad(ChosaOCRTorikomiMainDiv div) {
         ViewStateHolder.put(ViewStateKeys.審査会開催番号, new RString("11256"));
-        審査会開催番号 = ViewStateHolder.get(ViewStateKeys.審査会開催番号, RString.class);
+        RString 審査会開催番号 = ViewStateHolder.get(ViewStateKeys.審査会開催番号, RString.class);
         ChosaOCRTorikomiParameter parameter = ChosaOCRTorikomiParameter.createParam(審査会開催番号, RString.EMPTY, RString.EMPTY);
         List<ChosaOCRTorikomiBusiness> torikomiList
                 = ChosaOCRTorikomiFinder.createInstance().getChosaOCRTorikomi(parameter).records();
@@ -92,11 +92,26 @@ public class ChosaOCRTorikomiMain {
      * @return ResponseData<ChosaOCRTorikomiMainDiv>
      */
     public ResponseData<ChosaOCRTorikomiMainDiv> onClick_BtnOCRTorikomi(ChosaOCRTorikomiMainDiv div) {
-        csvCheck処理(getHandler(div).onClick_Ikensho(), div);
+        ViewStateHolder.put(ViewStateKeys.審査会開催番号, new RString("11256"));
+        RString 審査会開催番号 = ViewStateHolder.get(ViewStateKeys.審査会開催番号, RString.class);
+        List<TorikomiEntity> entityList = csvCheck処理(getHandler(div).onClick_Ikensho(), div, 審査会開催番号);
+        if (entityList.isEmpty()) {
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            validationMessages.add(getValidationHandler().check一覧データの存在());
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
+        int エラー件数 = 0;
+        for (TorikomiEntity entity : entityList) {
+            if (チェックNG.equals(entity.getOK_NG())) {
+                エラー件数++;
+            }
+        }
+        div.getTxtErrKensu().setValue(new Decimal(エラー件数));
+        dB処理用(entityList, div, 審査会開催番号);
         return ResponseData.of(div).respond();
     }
 
-    private void csvCheck処理(List<TorikomiData> dataList, ChosaOCRTorikomiMainDiv div) {
+    private List<TorikomiEntity> csvCheck処理(List<TorikomiData> dataList, ChosaOCRTorikomiMainDiv div, RString 審査会開催番号) {
         if (dataList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(ファイル名.toString()));
         }
@@ -126,6 +141,7 @@ public class ChosaOCRTorikomiMain {
                         = ChosaOCRTorikomiFinder.createInstance().getChosahyoTorikomiKekka(param).records();
                 for (ChosaOCRTorikomiBusiness 関連データ : 関連データList) {
                     if (関連データ.get証記載保険者番号().equals(csvData.get保険者番号()) && 関連データ.get被保険者番号().equals(csvData.get被保険者番号())) {
+                        csvData.setNo(関連データ.getNo());
                         csvData.set保険者(関連データ.get保険者());
                         csvData.set申請書管理番号(関連データ.get申請書管理番号());
                         csvData.set厚労省IF識別コード(関連データ.get厚労省IF識別コード());
@@ -146,13 +162,18 @@ public class ChosaOCRTorikomiMain {
                 }
             }
         }
-        getHandler(div).set画面一覧(dB更新用);
+        return dB更新用;
+    }
+
+    private void dB処理用(List<TorikomiEntity> dB更新用, ChosaOCRTorikomiMainDiv div, RString 審査会開催番号) {
+        getHandler(div).set画面一覧(dB更新用, 審査会開催番号);
         TorikomiEntityCollection collection = new TorikomiEntityCollection(dB更新用);
         ViewStateHolder.put(ViewStateKeys.介護認定審査会審査結果登録, collection);
     }
 
     private TorikomiEntity getTorikomiEntity(TorikomiData data) {
         TorikomiEntity entity = new TorikomiEntity();
+        entity.setOK_NG(data.getOK_NG());
         entity.setID1(data.getID1());
         entity.set審査会開催番号(data.get審査会開催番号());
         entity.set審査会開催日(data.get審査会開催日());
@@ -208,6 +229,16 @@ public class ChosaOCRTorikomiMain {
         entity.set申請区分(data.get認定申請区分申請時コード());
         entity.set被保険者氏名(data.get被保険者氏名());
         entity.set一次判定結果(data.get要介護認定一次判定結果コード());
+        entity.set保険者(data.get保険者());
+        entity.set申請書管理番号(data.get申請書管理番号());
+        entity.set厚労省IF識別コード(data.get厚労省IF識別コード());
+        entity.set被保険者番号(data.get被保険者番号());
+        entity.set証記載保険者番号(data.get証記載保険者番号());
+        entity.set二次判定要介護状態区分コード(data.get二次判定要介護状態区分コード());
+        entity.set二次判定年月日(data.get二次判定年月日());
+        entity.set二次判定認定有効終了年月日(data.get二次判定認定有効終了年月日());
+        entity.set合議体番号(data.get合議体番号());
+        entity.set介護認定審査会開催予定場所コード(data.get介護認定審査会開催予定場所コード());
         return entity;
     }
 
@@ -368,15 +399,21 @@ public class ChosaOCRTorikomiMain {
         for (dgChosahyoTorikomiKekka_Row row : div.getDgChosahyoTorikomiKekka().getDataSource()) {
             if (row.getSelected() && チェックOK.equals(row.getOkOrNg())) {
                 for (TorikomiEntity data : dataList) {
-                    updateDbT5102(div, row, data);
+                    if (row.getShoKisaiHokenshaNo().equals(data.get保険者番号())
+                            && row.getHihokenshaNo().equals(data.get被保険者番号())
+                            && row.getShinseishoKanriNo().equals(data.get申請書管理番号().value())) {
+                        updateDbT5102(div, row, data);
 //                    updateDbT5503(div, row, data);
-                    updateDbT5511(div, row, data);
+                        updateDbT5511(div, row, data);
+                    }
                 }
             }
         }
     }
 
     private void updateDbT5102(ChosaOCRTorikomiMainDiv div, dgChosahyoTorikomiKekka_Row row, TorikomiEntity data) {
+        ViewStateHolder.put(ViewStateKeys.審査会開催番号, new RString("11256"));
+        RString 審査会開催番号 = ViewStateHolder.get(ViewStateKeys.審査会開催番号, RString.class);
         NinteiKekkaJohoManager mange = new NinteiKekkaJohoManager();
         NinteiKekkaJoho ninteiKekkaJoho = mange.get要介護認定結果情報(data.get申請書管理番号());
         if (ninteiKekkaJoho == null) {
@@ -402,6 +439,8 @@ public class ChosaOCRTorikomiMain {
 //    }
 
     private void updateDbT5511(ChosaOCRTorikomiMainDiv div, dgChosahyoTorikomiKekka_Row row, TorikomiEntity data) {
+        ViewStateHolder.put(ViewStateKeys.審査会開催番号, new RString("11256"));
+        RString 審査会開催番号 = ViewStateHolder.get(ViewStateKeys.審査会開催番号, RString.class);
         ShinsakaiKaisaiKekkaJohoManager mange = ShinsakaiKaisaiKekkaJohoManager.createInstance();
         ShinsakaiKaisaiKekkaJoho2 kekkaJoho = mange.get介護認定審査会開催結果情報(審査会開催番号);
         if (kekkaJoho == null) {
