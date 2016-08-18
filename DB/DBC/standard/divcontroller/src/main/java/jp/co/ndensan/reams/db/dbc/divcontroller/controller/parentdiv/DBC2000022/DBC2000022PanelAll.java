@@ -377,9 +377,7 @@ public class DBC2000022PanelAll {
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         FutanWariaiSokujiKouseiHolder holder
                 = ViewStateHolder.get(ViewStateKeys.利用者負担割合明細, FutanWariaiSokujiKouseiHolder.class);
-
         SourceDataCollection collection = getHandler(div).onClick_btnPrint(資格対象者, holder.get利用者負担割合明細());
-
         RiyoshaFutanWariai 利用者負担割合 = ViewStateHolder.get(ViewStateKeys.利用者負担割合, RiyoshaFutanWariai.class);
         getHandler(div).利用者負担割合編集(利用者負担割合);
         ViewStateHolder.put(ViewStateKeys.利用者負担割合, 利用者負担割合);
@@ -397,13 +395,11 @@ public class DBC2000022PanelAll {
      */
     public ResponseData<DBC2000022PanelAllDiv> onClick_btnReSearch(DBC2000022PanelAllDiv div) {
         RString 処理モード = get処理モード();
-        if (DBC2000022StateName.新規.getName().equals(処理モード)) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(
-                        UrQuestionMessages.確認_汎用.getMessage().getCode(),
-                        UrQuestionMessages.確認_汎用.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
+        if (DBC2000022StateName.新規.getName().equals(処理モード) && !ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(
+                    UrQuestionMessages.確認_汎用.getMessage().getCode(),
+                    UrQuestionMessages.確認_汎用.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
         if (DBC2000022StateName.修正.getName().equals(処理モード)) {
             if (!データ項目変更判定()) {
@@ -432,13 +428,11 @@ public class DBC2000022PanelAll {
      */
     public ResponseData<DBC2000022PanelAllDiv> onClick_btnSearchResult(DBC2000022PanelAllDiv div) {
         RString 処理モード = get処理モード();
-        if (DBC2000022StateName.新規.getName().equals(処理モード)) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(
-                        UrQuestionMessages.確認_汎用.getMessage().getCode(),
-                        UrQuestionMessages.確認_汎用.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
+        if (DBC2000022StateName.新規.getName().equals(処理モード) && !ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(
+                    UrQuestionMessages.確認_汎用.getMessage().getCode(),
+                    UrQuestionMessages.確認_汎用.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
         if (DBC2000022StateName.修正.getName().equals(処理モード)) {
             if (!データ項目変更判定()) {
@@ -467,13 +461,11 @@ public class DBC2000022PanelAll {
      */
     public ResponseData<DBC2000022PanelAllDiv> onClick_btnBack(DBC2000022PanelAllDiv div) {
         RString 処理モード = get処理モード();
-        if (DBC2000022StateName.新規.getName().equals(処理モード)) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(
-                        UrQuestionMessages.確認_汎用.getMessage().getCode(),
-                        UrQuestionMessages.確認_汎用.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
+        if (DBC2000022StateName.新規.getName().equals(処理モード) && !ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(
+                    UrQuestionMessages.確認_汎用.getMessage().getCode(),
+                    UrQuestionMessages.確認_汎用.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
         if (DBC2000022StateName.修正.getName().equals(処理モード)) {
             if (!データ項目変更判定()) {
