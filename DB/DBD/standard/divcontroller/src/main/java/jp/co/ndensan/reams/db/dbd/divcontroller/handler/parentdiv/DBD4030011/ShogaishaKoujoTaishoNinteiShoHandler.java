@@ -170,7 +170,8 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
      */
     public ShogaishaKojoTaishoshaListParameter getParameter() {
         ShogaishaKojoTaishoshaListParameter parameter = new ShogaishaKojoTaishoshaListParameter();
-        parameter.set対象年度(new FlexibleYear(div.getTyusyutuJyokenPanel().getTxtTaishoNendo().getValue().toDateString()));
+        int index_4 = 4;
+        parameter.set対象年度(new FlexibleYear(div.getTyusyutuJyokenPanel().getTxtTaishoNendo().getValue().toDateString().substring(0, index_4)));
         if (div.getTyusyutuJyokenPanel().getTxtHihokenshaNo().getValue() != null) {
             parameter.set被保険者番号(new HihokenshaNo(div.getTyusyutuJyokenPanel().getTxtHihokenshaNo().getValue().toString()));
         }
