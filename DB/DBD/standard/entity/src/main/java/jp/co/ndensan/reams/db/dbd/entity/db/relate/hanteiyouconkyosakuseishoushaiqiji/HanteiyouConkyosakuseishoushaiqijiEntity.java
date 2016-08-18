@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 /**
  * 減免減額対象者判定用根拠作成対象者一時のEntity
  *
- * @reamsid_L DBD-3038-050 tianyh
+ * @reamsid_L DBD-3830-050 tianyh
  */
 @lombok.Getter
 @lombok.Setter
