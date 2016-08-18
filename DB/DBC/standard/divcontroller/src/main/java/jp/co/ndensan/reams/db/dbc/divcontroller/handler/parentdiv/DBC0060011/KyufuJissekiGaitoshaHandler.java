@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.kyufukanrihyoshokai.KyufuKanrihy
 import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.KyufukanrihyoSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0060011.KyufuJissekiGaitoshaDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0060011.dgHihokenshaSearchGaitosha_Row;
-import jp.co.ndensan.reams.db.dbc.service.core.kyufukanrihyoshokai.KyufuKanrihyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -51,13 +50,10 @@ public class KyufuJissekiGaitoshaHandler {
 
     /**
      * 「検索する」ボタンを押すの場合。
+     *
+     * @param 給付管理票一覧 給付管理票一覧
      */
-    public void onClick_btnSearch() {
-        List<KyufuKanrihyoShokaiBusiness> 給付管理票一覧 = KyufuKanrihyoShokai.createInstance().selectKyufuKanrihyoList(
-                div.getSearchToKyufujissekiPanel().getTxtHihoNo().getValue(),
-                div.getSearchToKyufujissekiPanel().getTxtJigyoshaNo().getValue(),
-                div.getSearchToKyufujissekiPanel().getTxtTeikyoYMRange().getFromValue().toDateString(),
-                div.getSearchToKyufujissekiPanel().getTxtTeikyoYMRange().getToValue().toDateString());
+    public void onClick_btnSearch(List<KyufuKanrihyoShokaiBusiness> 給付管理票一覧) {
         if (給付管理票一覧 != null) {
             List<dgHihokenshaSearchGaitosha_Row> rowList = new ArrayList<>();
             for (KyufuKanrihyoShokaiBusiness 給付管理票 : 給付管理票一覧) {
