@@ -548,7 +548,7 @@ public class IchijiSashitome2GoHandler {
         for (ShiharaiHohoHenkoSashitome shiharaiHohoHenkoSashitome : 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList()) {
             builder.setShiharaiHohoHenkoSashitome(shiharaiHohoHenkoSashitome.createBuilderForEdit()
                     .set差止控除状態区分(ShiharaiHenkoSashitomeKojoJotaiKubun.解除.getコード())
-                    .set差止通知書発行年月日(null)
+                    .set差止通知書発行年月日(FlexibleDate.EMPTY)
                     .set差止通知書再発行フラグ(false)
                     .set差止控除番号(RString.EMPTY)
                     .set差止解除年月日(FlexibleDate.getNowDate())
