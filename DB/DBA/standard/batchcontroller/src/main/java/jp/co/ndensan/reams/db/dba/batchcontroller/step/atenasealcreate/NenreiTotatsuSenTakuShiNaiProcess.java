@@ -5,17 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dba.batchcontroller.step.atenasealcreate;
 
-import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.core.atenaseal.AtenaSealReportBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.atenasealcreate.AtenaSealCreateResult;
 import jp.co.ndensan.reams.db.dba.definition.processprm.atenasealcreate.AtenaSealCreateProcessParameter;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.AtenaSealCreateDBZ100001Entity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.AtenaSealCreateRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.DbTAtenaSealCreateTempTableEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.ShorikekkarisutoichijiTBLEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
@@ -33,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -45,13 +39,10 @@ public class NenreiTotatsuSenTakuShiNaiProcess extends BatchProcessBase<AtenaSea
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.atenasealcreate.IAtenaSealCreateMapper.getHihokenshadai");
-    private AtenaSealCreateProcessParameter processParamter;
-    List<KoikiZenShichosonJoho> koikiZenShichosonJoho;
-    List<AtenaSealCreateRelateEntity> list = new ArrayList<>();
-    List<AtenaSealReportBusiness> listBusiness = new ArrayList<>();
-    List<AtenaSealCreateDBZ100001Entity> listDBZ100001 = new ArrayList<>();
     private static final RString TABLE_宛名識別対象一時テーブル2 = new RString("DbWT2009AtenaShikibetuTaisyou2");
     private static final RString TABLE_処理結果リスト一時TBL = new RString("ShorikekkarisutoichijiTBL");
+    private AtenaSealCreateProcessParameter processParamter;
+    private List<KoikiZenShichosonJoho> koikiZenShichosonJoho;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 宛名識別対象一時テーブル2;
     @BatchWriter
@@ -59,8 +50,6 @@ public class NenreiTotatsuSenTakuShiNaiProcess extends BatchProcessBase<AtenaSea
 
     @Override
     protected void initialize() {
-        DbBusinessConfig.get(ConfigNameDBU.年齢到達基準_第１号被保険者到達基準年齢, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        DbBusinessConfig.get(ConfigNameDBU.年齢到達基準_第２号被保険者到達基準年齢, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         koikiZenShichosonJoho = KoikiShichosonJohoFinder.createInstance().koseiShichosonJoho().records();
     }
 
