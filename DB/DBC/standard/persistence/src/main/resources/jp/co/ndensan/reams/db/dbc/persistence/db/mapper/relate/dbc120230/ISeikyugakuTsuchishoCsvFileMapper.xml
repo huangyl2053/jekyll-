@@ -6,6 +6,6 @@
         SELECT
             COUNT(1)
         FROM
-            "DbWT1511SeikyugakuTsuchishoTemp"
+            "DbWT1511SeikyugakuTsuchisho"
     </select>
 </mapper>
