@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -74,19 +75,17 @@ public class RiyoshaFutanWariaiKoushiConf {
      * @param div RiyoshaFutanWariaiKoushiConfDiv
      * @return ResponseData
      */
-    public ResponseData<RiyoshaFutanWariaiKoushiConfDiv> onClick_btnReportPublish(RiyoshaFutanWariaiKoushiConfDiv div) {
+    public ResponseData<SourceDataCollection> onClick_btnReportPublish(RiyoshaFutanWariaiKoushiConfDiv div) {
 
         FutanWariaiSokujiKouseiServiceData 引継ぎデータ
                 = ViewStateHolder.get(ViewStateKeys.引き継ぎデータ, FutanWariaiSokujiKouseiServiceData.class);
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
 
-        getHandler(div).getソースデータ取得(div, 引継ぎデータ, 資格対象者);
-
         getHandler(div).updateDB(div, 引継ぎデータ);
 
         getHandler(div).insertDB(div, 引継ぎデータ, 資格対象者);
 
-        return ResponseData.of(div).respond();
+        return ResponseData.of(getHandler(div).getソースデータ取得(div, 引継ぎデータ, 資格対象者)).setState(DBC2000023StateName.初期表示);
 
     }
 
