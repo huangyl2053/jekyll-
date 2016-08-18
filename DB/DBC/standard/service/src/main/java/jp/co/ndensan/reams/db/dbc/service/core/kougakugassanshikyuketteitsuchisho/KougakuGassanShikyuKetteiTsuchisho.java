@@ -64,6 +64,15 @@ public class KougakuGassanShikyuKetteiTsuchisho {
     }
 
     /**
+     * にて生成した{@link KougakuGassanShikyuKetteiTsuchisho}のインスタンスを返します。
+     *
+     * @return KougakuGassanShikyuKetteiTsuchisho
+     */
+    public static KougakuGassanShikyuKetteiTsuchisho createInstance() {
+        return InstanceProvider.create(KougakuGassanShikyuKetteiTsuchisho.class);
+    }
+
+    /**
      * 口座情報取得です。
      *
      * @param 口座ID 口座ID
