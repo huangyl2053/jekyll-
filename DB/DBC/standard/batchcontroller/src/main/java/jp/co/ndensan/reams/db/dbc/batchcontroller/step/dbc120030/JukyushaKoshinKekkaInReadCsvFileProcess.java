@@ -16,16 +16,19 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.JukyushaJohoDat
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT0001HihokenshaIchijiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002KokuhorenTorikomiErrorEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakoshinkekka.IJukyushaKoshinKekkaMapper;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper;
-import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.hokenshainputguide.Hokensha;
 import jp.co.ndensan.reams.db.dbz.service.core.hokensha.HokenshaNyuryokuHojoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -33,7 +36,6 @@ import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
@@ -50,7 +52,15 @@ public class JukyushaKoshinKekkaInReadCsvFileProcess extends BatchProcessBase<RS
     private JukyushaKoshinKekkaReadCsvFileProcessParameter parameter;
     private IJukyushaKoshinKekkaMapper mapper;
     private IKokuhorenKyoutsuuTempTableMapper 一時mapper;
-    private MapperProvider mapperProvider;
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter 被保険者一時tableWriter;
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter 処理結果リスト一時tableWriter;
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter 受給者情報一時tableWriter;
+    private static final RString 被保険者一時_TABLE_NAME = new RString("DbWT0001Hihokensha");
+    private static final RString 処理結果リスト一時_TABLE_NAME = new RString("DbWT0002KokuhorenTorikomiError");
+    private static final RString 受給者情報一時_TABLE_NAME = new RString("DbWT5331JukyushaJoho");
     private JukyushaJohoCsvEntity entity;
     private JukyushaJohoControlCsvEntity controlCsvEntity;
     private JukyushaJohoDataCsvEntity dataEntity;
@@ -79,9 +89,22 @@ public class JukyushaKoshinKekkaInReadCsvFileProcess extends BatchProcessBase<RS
         flowEntity = new OutputParameter<>();
         returnEntity = new FlowEntity();
         flowEntity.setValue(returnEntity);
-        mapperProvider = InstanceProvider.create(MapperProvider.class);
-        mapper = mapperProvider.create(IJukyushaKoshinKekkaMapper.class);
-        一時mapper = mapperProvider.create(IKokuhorenKyoutsuuTempTableMapper.class);
+    }
+
+    @Override
+    protected void createWriter() {
+        被保険者一時tableWriter
+                = new BatchEntityCreatedTempTableWriter(被保険者一時_TABLE_NAME, DbWT0001HihokenshaIchijiEntity.class);
+        処理結果リスト一時tableWriter
+                = new BatchEntityCreatedTempTableWriter(処理結果リスト一時_TABLE_NAME,
+                        DbWT0002KokuhorenTorikomiErrorEntity.class);
+        受給者情報一時tableWriter
+                = new BatchEntityCreatedTempTableWriter(受給者情報一時_TABLE_NAME, DbWT5331JukyushaJohoTempEntity.class);
+    }
+
+    @Override
+    protected IBatchReader createReader() {
+        return new BatchSimpleReader(parameter.getファイルパース());
     }
 
     @Override
@@ -101,9 +124,8 @@ public class JukyushaKoshinKekkaInReadCsvFileProcess extends BatchProcessBase<RS
 
     @Override
     protected void beforeExecute() {
-        if (parameter.is一回目実行フラグ()) {
-            一時TBL作成();
-        }
+        mapper = getMapper(IJukyushaKoshinKekkaMapper.class);
+        一時mapper = getMapper(IKokuhorenKyoutsuuTempTableMapper.class);
     }
 
     @Override
@@ -115,20 +137,6 @@ public class JukyushaKoshinKekkaInReadCsvFileProcess extends BatchProcessBase<RS
         returnEntity.setCodeNum(コントロールレコードのレコード件数の合計);
         returnEntity.set明細データ登録件数(明細件数合計);
         returnEntity.setShoriYM(処理対象年月);
-    }
-
-    @Override
-    protected IBatchReader createReader() {
-        return new BatchSimpleReader(parameter.getファイルパース());
-    }
-
-    /**
-     * 一時テーブル(受給者情報明細一時、被保険者一時、処理結果リスト一時)作成する。
-     */
-    public void 一時TBL作成() {
-        mapper.create受給者情報明細一時TBL();
-        一時mapper.create被保険者一時TBL();
-        一時mapper.create処理結果リスト一時TBL();
     }
 
     @Transaction
