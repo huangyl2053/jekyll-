@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagoketteikohifutansha;
 
-import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushajoho.JukyushaHihokenshaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagoketteikohifutansha.SogoKohifutanshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohikagoketteikohifutansha.SogojigyohiKagoKetteitsuchishoTorikomiIchiranSource;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -21,29 +21,31 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class SogojigyohiKagoKetteitsuchishoTorikomiIchiranReport extends Report<SogojigyohiKagoKetteitsuchishoTorikomiIchiranSource> {
 
-    private final JukyushaHihokenshaEntity 帳票出力対象データ;
-    private final RString 住所;
+    private final SogoKohifutanshaEntity 帳票出力対象データ;
+    private final boolean 集計flag;
     private final Map<RString, RString> 出力順Map;
-    private final List<RString> 改頁リスト;
     private final RDateTime 作成日時;
+    private final FlexibleYearMonth 処理年月;
+    private int 連番;
 
     /**
      * コンストラクタです
      *
      * @param 帳票出力対象データ SogojigyohiKagoKetteitsuchishoTorikomiIchiranSource
-     * @param 住所 RString
      * @param 出力順Map Map<RString, RString>
-     * @param 改頁リスト List<RString>
+     * @param 処理年月 FlexibleYearMonth
      * @param 作成日時 RDateTime
+     * @param 集計flag boolean
+     * @param 連番 int
      */
     public SogojigyohiKagoKetteitsuchishoTorikomiIchiranReport(
-            JukyushaHihokenshaEntity 帳票出力対象データ, RString 住所,
-            Map<RString, RString> 出力順Map, List<RString> 改頁リスト, RDateTime 作成日時) {
+            SogoKohifutanshaEntity 帳票出力対象データ, Map<RString, RString> 出力順Map, FlexibleYearMonth 処理年月, RDateTime 作成日時, boolean 集計flag, int 連番) {
         this.帳票出力対象データ = 帳票出力対象データ;
-        this.住所 = 住所; 
         this.出力順Map = 出力順Map;
-        this.改頁リスト = 改頁リスト;
         this.作成日時 = 作成日時;
+        this.処理年月 = 処理年月;
+        this.集計flag = 集計flag;
+        this.連番 = 連番;
     }
 
     @Override
@@ -51,26 +53,26 @@ public class SogojigyohiKagoKetteitsuchishoTorikomiIchiranReport extends Report<
         if (null == this.帳票出力対象データ) {
             return;
         }
-        writeLine(writer, this.帳票出力対象データ, this.住所);
+        writeLine(writer, this.帳票出力対象データ);
 
     }
 
     /**
-     * 
-     * @param writer ReportSourceWriter<SogojigyohiKagoKetteitsuchishoTorikomiIchiranSource>
-     * @param 帳票出力対象データ JukyushaHihokenshaEntity
-     * @param 住所情報 RString
+     *
+     * @param writer
+     * ReportSourceWriter<SogojigyohiKagoKetteitsuchishoTorikomiIchiranSource>
+     * @param 帳票出力対象データ SogoKohifutanshaEntity
      */
     private void writeLine(ReportSourceWriter<SogojigyohiKagoKetteitsuchishoTorikomiIchiranSource> writer,
-            JukyushaHihokenshaEntity 帳票出力対象データ, RString 住所情報) {
-//        ISogojigyohiKagoKetteiKohifutanshaInEditor headerEditor
-//                = new SogojigyohiKagoKetteiInHeaderEditor(
-//                        帳票出力対象データ, 出力順Map, 改頁リスト, 作成日時);
-//        ISogojigyohiKagoKetteiKohifutanshaInEditor bodyEditor
-//                = new SogojigyohiKagoKetteiInBodyEditor(帳票出力対象データ, 住所情報);
-//        ISogojigyohiKagoKetteiKohifutanshaInEditor builder
-//                = new SogojigyohiKagoKetteiInBuilder(headerEditor, bodyEditor);
-//        writer.writeLine(builder);
+            SogoKohifutanshaEntity 帳票出力対象データ) {
+        ISogojigyohiKagoKetteitsuchishoTorikomiEditor headerEditor
+                = new SogojigyohiKagoKetteitsuchishoTorikomiHeaderEditor(
+                        帳票出力対象データ, 出力順Map, 処理年月, 作成日時);
+        ISogojigyohiKagoKetteitsuchishoTorikomiEditor bodyEditor
+                = new SogojigyohiKagoKetteitsuchishoTorikomiBodyEditor(帳票出力対象データ, 集計flag, 連番);
+        ISogojigyohiKagoKetteitsuchishoTorikomiBuilder builder
+                = new SogojigyohiKagoKetteitsuchishoTorikomiBuilder(headerEditor, bodyEditor);
+        writer.writeLine(builder);
     }
 
 }

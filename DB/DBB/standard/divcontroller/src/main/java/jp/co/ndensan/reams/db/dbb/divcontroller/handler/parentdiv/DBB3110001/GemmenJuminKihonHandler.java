@@ -54,7 +54,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -281,10 +280,11 @@ public class GemmenJuminKihonHandler {
      */
     public NendobunFukaGemmenListResult onClick_選択ボタン(HihokenshaNo 被保険者番号) {
         IFukaRirekiAllDiv 全賦課履歴 = div.getGemmenFukaRirekiAll().getCcdFukaRirekiAll();
-        IItemList<Fuka> 全賦課履歴データ = 全賦課履歴.getClicked賦課履歴().get賦課履歴All();
-        Fuka 賦課基本 = 全賦課履歴データ.toList().get(0);
+        TsuchishoNo 通知書番号 = 全賦課履歴.getClicked通知書番号();
+        FlexibleYear 調定年度 = 全賦課履歴.getClicked調定年度();
+        FlexibleYear 賦課年度 = 全賦課履歴.getClicked賦課年度();
         NendobunFukaGemmenListResult 減免リスト = KaigoHokenryoGemmen.createInstance()
-                .getJokyo(賦課基本.get調定年度(), 賦課基本.get賦課年度(), 賦課基本.get通知書番号(), 被保険者番号);
+                .getJokyo(調定年度, 賦課年度, 通知書番号, 被保険者番号);
         return 減免リスト;
     }
 

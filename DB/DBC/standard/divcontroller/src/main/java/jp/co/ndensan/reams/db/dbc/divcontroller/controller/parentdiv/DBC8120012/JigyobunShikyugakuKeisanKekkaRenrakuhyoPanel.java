@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanel {
 
+    private static final RString この連絡票は既に印刷されていますが = new RString("この連絡票は既に印刷されていますが");
+
     /**
      * 画面を初期化します
      *
@@ -102,7 +104,7 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanel {
     public ResponseData<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelDiv> onClick_check(
             JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelDiv div) {
         if (!div.getSakuseiPanel().getTxtZenkaiSakuseiYMD().getValue().toString().equals(RString.EMPTY.toString())) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.確認_汎用.getMessage()).respond();
+            return ResponseData.of(div).addMessage(UrQuestionMessages.確認_汎用.getMessage().replace(この連絡票は既に印刷されていますが.toString())).respond();
         }
         return ResponseData.of(div).respond();
     }

@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -231,8 +232,9 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
      * @param div RiyoshaFutanWariaiKoushiConfDiv
      * @param 引継ぎデータ RiyoshaFutanWariaiKoushiConfData
      * @param 資格対象者 TaishoshaKey
+     * @return SourceDataCollection
      */
-    public void getソースデータ取得(RiyoshaFutanWariaiKoushiConfDiv div,
+    public SourceDataCollection getソースデータ取得(RiyoshaFutanWariaiKoushiConfDiv div,
             FutanWariaiSokujiKouseiServiceData 引継ぎデータ,
             TaishoshaKey 資格対象者) {
         FutanWariaisho futanWariaisho;
@@ -249,6 +251,6 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
         parameter.set適用期間開始日下段(new FlexibleDate(div.getPanelShutsuryokuNaiyo().getLbl1wariKaishiYmd().getText()));
         parameter.set適用期間終了日下段(new FlexibleDate(div.getPanelShutsuryokuNaiyo().getLbl1wariShuryoYmd().getText()));
 
-        futanWariaisho.getSourceData(識別コード, 被保険者番号, parameter, パラメータ);
+        return futanWariaisho.getSourceDataSinger(識別コード, 被保険者番号, parameter, パラメータ);
     }
 }

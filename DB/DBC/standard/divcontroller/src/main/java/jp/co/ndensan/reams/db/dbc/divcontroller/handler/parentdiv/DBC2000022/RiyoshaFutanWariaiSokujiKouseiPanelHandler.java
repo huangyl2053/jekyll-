@@ -574,7 +574,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
         parameter.set氏名(div.getCcdKaigoAtenaInfo().get氏名漢字());
         parameter.set生年月日(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getShokaiData().getTxtSeinengappiYMD().getValue());
         parameter.set性別(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getShokaiData().getTxtSeibetsu().getValue());
-        futanWariaisho.getSourceData(資格対象者.get識別コード(), 資格対象者.get被保険者番号(), parameter, RSTTWO);
+//        futanWariaisho.getSourceData(資格対象者.get識別コード(), 資格対象者.get被保険者番号(), parameter, RSTTWO);
     }
 
     /**
@@ -640,6 +640,12 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
         manage.save証交付回収(new証交付回収);
     }
 
+    /**
+     * 利用者負担割合情報を設定します。
+     *
+     * @param 利用者負担割合 RiyoshaFutanWariai
+     * @param holder FutanWariaiSokujiKouseiHolder
+     */
     public void kakuteiShori(RiyoshaFutanWariai 利用者負担割合, FutanWariaiSokujiKouseiHolder holder) {
         RiyoshaFutanWariaiMeisai 明細entity = holder.getRiyoshaFutanWariaiMeisai(
                 new RiyoshaFutanWariaiMeisaiIdentifier(利用者負担割合.get年度(),
