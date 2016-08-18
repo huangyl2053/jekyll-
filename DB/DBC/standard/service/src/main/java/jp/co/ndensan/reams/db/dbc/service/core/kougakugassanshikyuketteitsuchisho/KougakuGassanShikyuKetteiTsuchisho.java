@@ -10,7 +10,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunketteitsuchisho.KogakuGassanShikyuKetteiTsuchisho;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunketteitsuchisho.KougakugassanShikyuketteiTsuuchishoOutputEntity;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kougakugassanshikyuketteitsuchisho.KougakuGassanShikyuKetteiTsuchishoParameter;
-import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kougakugassanshikyuketteitsuchisho.JigyoKogakuGassanEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kougakugassanshikyuketteitsuchisho.KozaJyohoEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kougakugassanshikyuketteitsuchisho.IKougakuGassanShikyuKetteiTsuchishoMapper;
@@ -42,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class KougakuGassanShikyuKetteiTsuchisho {
 
     private final MapperProvider mapperProvider;
+    private static final ReportId 通知文情報帳票ID = new ReportId("DBC200201_GassanJigyobunKetteiTsuchisho");
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
@@ -131,7 +131,6 @@ public class KougakuGassanShikyuKetteiTsuchisho {
             entity.set事業高額合算支給不支給決定(jigyoKogakuGassanEntity.get事業高額合算支給不支給決定());
         }
         ChohyoSeigyoHanyoManager manager = new ChohyoSeigyoHanyoManager();
-        ReportId 通知文情報帳票ID = new ReportId("DBC200201_GassanJigyobunKetteiTsuchisho");
         ChohyoSeigyoHanyo 帳票制御汎用_取り消し線
                 = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 項目名_取り消し線);
         ChohyoSeigyoHanyo 帳票制御汎用_帳票タイトル
@@ -151,6 +150,7 @@ public class KougakuGassanShikyuKetteiTsuchisho {
         entity.set文書番号(文書番号);
         entity.set発行日(発行日);
         entity.set被保険者番号(被保険者番号);
+        entity.set口座情報(口座情報);
         //TO DO   QA:95951
         set通知文(entity);
         set送付物宛先(entity);
@@ -208,7 +208,7 @@ public class KougakuGassanShikyuKetteiTsuchisho {
 
     private RString get通知文文章(int パターン番号, int 項目番号) {
         TsuchishoTeikeibunFinder finder = new TsuchishoTeikeibunFinder();
-        TsuchishoTeikeibun tsuchishoTeikeibun = finder.get通知書定型文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200201.getReportId(),
+        TsuchishoTeikeibun tsuchishoTeikeibun = finder.get通知書定型文(SubGyomuCode.DBC介護給付, 通知文情報帳票ID,
                 KamokuCode.EMPTY, パターン番号, 項目番号, FlexibleDate.getNowDate());
         if (tsuchishoTeikeibun != null) {
             return tsuchishoTeikeibun.get文章();
