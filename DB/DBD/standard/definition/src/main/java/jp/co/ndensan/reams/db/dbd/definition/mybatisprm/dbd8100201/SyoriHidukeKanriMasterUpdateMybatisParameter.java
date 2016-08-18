@@ -6,6 +6,9 @@
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd8100201;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,5 +21,33 @@ import lombok.Setter;
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class SyoriHidukeKanriMasterUpdateMybatisParameter implements IMyBatisParameter {
-// TODO
+
+    private LasdecCode 保険者情報_保険者番号;
+    private RString 処理名;
+    private FlexibleYear 処理年度;
+    private RString 処理区分_対象月;
+
+    /**
+     * DB出力(処理日付管理マスタ)
+     *
+     * @param 保険者情報_保険者番号 保険者情報_保険者番号
+     * @param 処理名 処理名
+     * @param 処理年度 処理年度
+     * @param 処理区分 処理区分
+     * @param 対象月 対象月
+     */
+    public SyoriHidukeKanriMasterUpdateMybatisParameter(LasdecCode 保険者情報_保険者番号,
+            RString 処理名, FlexibleYear 処理年度, RString 処理区分, RString 対象月) {
+        this.保険者情報_保険者番号 = 保険者情報_保険者番号;
+        this.処理名 = 処理名;
+        this.処理年度 = 処理年度;
+        edit処理区分_対象月(処理区分, 対象月);
+    }
+
+    private void edit処理区分_対象月(RString 処理区分, RString 対象月) {
+
+        if (!処理区分.isNullOrEmpty() && !対象月.isNullOrEmpty()) {
+            処理区分_対象月 = 処理区分.concat(対象月);
+        }
+    }
 }
