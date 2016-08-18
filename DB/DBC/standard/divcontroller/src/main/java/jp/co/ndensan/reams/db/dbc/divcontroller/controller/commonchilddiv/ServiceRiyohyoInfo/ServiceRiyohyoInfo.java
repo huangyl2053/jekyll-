@@ -527,17 +527,6 @@ public class ServiceRiyohyoInfo {
     }
 
     /**
-     * サービス種類.サービス種類コードonBlurのイベントです。
-     *
-     * @param div ServiceRiyohyoInfoDiv
-     * @return ResponseData<ServiceRiyohyoInfoDiv>
-     */
-    public ResponseData<ServiceRiyohyoInfoDiv> onBlur_txtServiceTypeCode(ServiceRiyohyoInfoDiv div) {
-        // TODO
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * 明細・合計情報一覧の「修正」ボタンonClickのイベントです。
      *
      * @param div ServiceRiyohyoInfoDiv
@@ -545,6 +534,25 @@ public class ServiceRiyohyoInfo {
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnModify(ServiceRiyohyoInfoDiv div) {
         getHandler(div).init修正();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「合計情報を入力する」ボタンonClickのイベントです。
+     *
+     * @param div ServiceRiyohyoInfoDiv
+     * @return ResponseData<ServiceRiyohyoInfoDiv>
+     */
+    public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnCalcMeisaiGokei(ServiceRiyohyoInfoDiv div) {
+        RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+        getHandler(div).onClick_btnBeppyoMeisaiKakutei(状態);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        RDate 利用年月日 = div.getTxtRiyoYM().getValue();
+        FlexibleYearMonth 利用年月 = null;
+        if (利用年月日 != null) {
+            利用年月 = new FlexibleYearMonth(利用年月日.getYearMonth().toDateString());
+        }
+        getHandler(div).init合計情報追加(被保険者番号, 利用年月);
         return ResponseData.of(div).respond();
     }
 
