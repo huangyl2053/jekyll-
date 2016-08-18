@@ -221,7 +221,7 @@ public class TsuchiShoHakkogoIdoHaaku {
         List<TsuchiShoHakkoGoIdosha> entityList = new ArrayList<>();
         for (final DbT2017Uaft200EntityResult entity : dbt2017Uaf200entityList) {
             TsuchiShoHakkoGoIdosha idosha = new TsuchiShoHakkoGoIdosha();
-            idosha.set帳票ID(Integer.valueOf(entity.getDbT2017Entity().getReportID().getColumnValue().toString()));
+            idosha.set帳票ID(entity.getDbT2017Entity().getReportID());
             idosha.set帳票作成日時(entity.getDbT2017Entity().getChohyosakuseiTimestamp());
             idosha.set通知書番号(entity.getDbT2017Entity().getTsuchishoNo());
             idosha.set被保険者番号(entity.getDbT2017Entity().getHihokenshaNo());
