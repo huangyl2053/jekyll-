@@ -225,7 +225,7 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader();
+        return new BatchDbReader(MYBATIS_SELECT_ID, mybatisParameter);
     }
     
     @Override
