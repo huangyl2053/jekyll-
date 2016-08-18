@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 受給者台帳異動チェックリスト帳票のReportです。
  *
- * @reamsid_L DBD-1770-030 donghj
+ * @reamsid_L DBD-1770-040 donghj
  */
 public class JukyushaIdoCheckListReport extends Report<JukyushaIdoCheckListReportSource> {
 
