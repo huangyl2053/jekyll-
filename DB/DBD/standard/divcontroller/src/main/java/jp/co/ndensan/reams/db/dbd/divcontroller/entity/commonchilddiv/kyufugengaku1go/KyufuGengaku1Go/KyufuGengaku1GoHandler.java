@@ -106,7 +106,7 @@ public class KyufuGengaku1GoHandler {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = DataPassingConverter.deserialize(div.getKey_ShiharaiHohoHenkoKanri(), ShiharaiHohoHenko.class);
         List<ShiharaiHohoHenko> 支払方法データ = new ArrayList();
         List<ShiharaiHohoHenko> 支払方法変更レコード = new ArrayList();
-        ViewStateHolder.put(KyufuGengaku1GoHandler.一号給付額減額ダイアログキー.支払方法変更管理業務概念, new ShiharaiHohoHenko(new ShiharaiHohoHenkoEntity()));
+        ViewStateHolder.put(KyufuGengaku1GoHandler.一号給付額減額ダイアログキー.支払方法変更管理業務概念, 支払方法変更管理業務概念);
         if (支払方法変更管理業務概念 != null
                 && 支払方法変更管理業務概念.get被保険者番号().value().equals(div.getKey_HihokenshaNo())
                 && 支払方法変更管理業務概念.get管理区分().equals(ShiharaiHenkoKanriKubun._１号給付額減額.getコード())
@@ -281,7 +281,7 @@ public class KyufuGengaku1GoHandler {
             div.getTxtGengakuTekiyoKikanKaishiYMD().setValue(null);
             div.getTxtGengakuTekiyoKikanShuryoYMD().setValue(null);
         } else {
-            div.getTxtTorokuJokyo().setValue(shiharaiHohoHenko.get登録区分());
+            div.getTxtTorokuJokyo().setValue(ShiharaiHenkoTorokuKubun.toValue(shiharaiHohoHenko.get登録区分()).get名称());
             div.getTxtChoshukenShometsuKikan().setValue(shiharaiHohoHenkoGengaku.get徴収権消滅期間());
             div.getTxtNofuzumiKikan().setValue(shiharaiHohoHenkoGengaku.get納付済期間());
             div.getTxtKyufugakuGengakuKikan().setValue(get給付額減額期間(div.getTxtChoshukenShometsuKikan().getValue(), div.getTxtNofuzumiKikan().getValue()));
