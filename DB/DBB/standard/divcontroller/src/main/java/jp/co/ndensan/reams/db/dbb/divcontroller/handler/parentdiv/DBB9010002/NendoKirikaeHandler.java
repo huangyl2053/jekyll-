@@ -9,11 +9,13 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.nendokirikae.DBB901002_Nen
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9010002.NendoKirikaeDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYear;
 
 /**
  * 年度切替のクラスです
@@ -41,12 +43,10 @@ public class NendoKirikaeHandler {
     public void initialize() {
         RString 当年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課);
-        RString 新年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
-                SubGyomuCode.DBB介護賦課);
-        RString teikyoYM当年度 = DateConverter.toWarekiHalf(new RDate(当年度.toString()));
-        RString teikyoYM新年度 = DateConverter.toWarekiHalf(new RDate(新年度.toString()));
-        div.getDcLblTonendo().setValue(new RDate(teikyoYM当年度.toString()));
-        div.getDcLblShinnendo().setValue(new RDate(teikyoYM新年度.toString()).plusYear(NUM_1));
+        RYear tokyo当年度 = new RYear(当年度.toString());
+        RYear tokyo新年度 = tokyo当年度.plusYear(NUM_1);
+        div.getDcLblTonendo().setValue(new RDate(tokyo当年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString().toString()));
+        div.getDcLblShinnendo().setValue(new RDate(tokyo新年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString().toString()));
     }
 
     /**
