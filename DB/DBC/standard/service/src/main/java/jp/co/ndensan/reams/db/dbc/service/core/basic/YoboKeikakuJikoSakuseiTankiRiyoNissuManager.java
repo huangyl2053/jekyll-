@@ -127,4 +127,17 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuManager {
             dac.save(entity);
         }
     }
+
+    /**
+     * 予防短期入所情報を登録します。
+     *
+     * @param 予防短期入所情報 YoboKeikakuJikoSakuseiTankiRiyoNissu
+     */
+    public void insert予防短期入所情報(YoboKeikakuJikoSakuseiTankiRiyoNissu 予防短期入所情報) {
+        if (予防短期入所情報 != null) {
+            DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity entity = 予防短期入所情報.toEntity();
+            entity.setState(EntityDataState.Added);
+            dac.save(entity);
+        }
+    }
 }
