@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.batchprm.sogojigyohikagoketteiin;
+package jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc120840;
 
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -13,14 +13,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 総合事業費（経過措置）過誤決定通知書情報取込のバッチ用パラメータクラスです。
+ * 総合事業費過誤決定通知書情報取込（保険者分)のバッチ用パラメータクラスです。
  *
- * @reamsid_L DBC-2550-010 jianglaisheng
+ * @reamsid_L DBC-2550-011 jiangxiaolong
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBC120180_SogojigyohiKagoKetteiInParameter extends BatchParameterBase {
+public class SogojigyohiKagoKetteiHokenshaInParameter extends BatchParameterBase {
 
     @BatchParameter(key = "処理年月", name = "処理年月")
     private FlexibleYearMonth 処理年月;
