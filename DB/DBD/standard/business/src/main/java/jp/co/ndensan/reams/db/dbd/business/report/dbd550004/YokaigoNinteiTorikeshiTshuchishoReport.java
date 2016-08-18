@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 要介護認定取消通知書のReportです。
  *
- * @reamsid_L DBD-1440-010 liuyl
+ * @reamsid_L DBD-1440-020 liuyl
  */
 public class YokaigoNinteiTorikeshiTshuchishoReport extends Report<YokaigoNinteiTorikeshiTshuchishoSource> {
 

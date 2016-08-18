@@ -232,8 +232,6 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
         RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
         if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty() && new RString("2").equals(定型文文字サイズ)) {
             source.renrakusakiHokaLarge = 通知書定型文リスト.get(NOCOUNT_4);
-        } else {
-            source.renrakusakiHokaLarge = RString.EMPTY;
         }
     }
 
@@ -242,9 +240,6 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
         if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty() && new RString("3").equals(定型文文字サイズ)) {
             source.renrakusakiHokaJodanSmall = 通知書定型文リスト.get(NOCOUNT_4);
             source.renrakusakiHokaGedanLarge = 通知書定型文リスト.get(NOCOUNT_5);
-        } else {
-            source.renrakusakiHokaJodanSmall = RString.EMPTY;
-            source.renrakusakiHokaGedanLarge = RString.EMPTY;
         }
     }
 
@@ -253,9 +248,6 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
         if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty() && new RString("4").equals(定型文文字サイズ)) {
             source.renrakusakiHokaJodanLarge = 通知書定型文リスト.get(NOCOUNT_4);
             source.renrakusakiHokaGedanSmall = 通知書定型文リスト.get(NOCOUNT_5);
-        } else {
-            source.renrakusakiHokaJodanLarge = RString.EMPTY;
-            source.renrakusakiHokaGedanSmall = RString.EMPTY;
         }
     }
 
