@@ -39,10 +39,6 @@ public class HanyoListShisetsuNyutaishoFlow extends BatchFlowBase<HanyoListShise
 
     private GeneralPurposeListOutputProcessParameter createParameter() {
         HanyoListShisetsuNyutaishoBatchParameter parameter = getParameter();
-        return parameter.toGeneralPurposeListOutputProcessParameter(parameter.get抽出方法区分(), parameter.get抽出項目区分(),
-                parameter.get基準日(), parameter.get日付範囲From(),
-                parameter.get日付範囲To(), parameter.is直近データ抽出(), parameter.get喪失区分(), parameter.is項目名付加(),
-                parameter.is連番付加(), parameter.is日付スラッシュ付加(),
-                parameter.get宛名抽出条件(), parameter.get出力順(), parameter.get出力項目());
+        return parameter.toGeneralPurposeListOutputProcessParameter();
     }
 }

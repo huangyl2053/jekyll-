@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.tsuchishohakkogoido.IdoNaiyo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -26,7 +27,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TsuchiShoHakkoGoIdosha {
 
-    private int 帳票ID;
+    private ReportId 帳票ID;
     private YMDHMS 帳票作成日時;
     private TsuchishoNo 通知書番号;
     private HihokenshaNo 被保険者番号;
@@ -60,7 +61,7 @@ public class TsuchiShoHakkoGoIdosha {
      * @param 識別コード ShikibetsuCode
      * @param 賦課年度 RYear
      */
-    public TsuchiShoHakkoGoIdosha(int 帳票ID, YMDHMS 帳票作成日時, TsuchishoNo 通知書番号, HihokenshaNo 被保険者番号, int 該当連番,
+    public TsuchiShoHakkoGoIdosha(ReportId 帳票ID, YMDHMS 帳票作成日時, TsuchishoNo 通知書番号, HihokenshaNo 被保険者番号, int 該当連番,
             FlexibleDate 異動日, IdoNaiyo 異動内容, YMDHMS 計算処理日時, IName 氏名, ShikibetsuCode 識別コード, RYear 賦課年度) {
         this.帳票ID = 帳票ID;
         this.帳票作成日時 = 帳票作成日時;

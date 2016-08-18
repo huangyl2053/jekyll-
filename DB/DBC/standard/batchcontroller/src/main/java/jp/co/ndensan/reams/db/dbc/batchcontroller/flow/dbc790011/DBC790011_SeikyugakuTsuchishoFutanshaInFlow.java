@@ -25,10 +25,19 @@ public class DBC790011_SeikyugakuTsuchishoFutanshaInFlow extends BatchFlowBase<S
     private static final String CSVファイル取込 = "readCsvFile";
     private static final String 処理結果リスト一時登録 = "errorTempInsert";
     private static final Integer INDEX_0 = 0;
+    private SeikyugakuTsuchishoFutanshaInProcessParameter parameter;
 
     @Override
     protected void defineFlow() {
-        executeStep(CSVファイル取込);
+        parameter = new SeikyugakuTsuchishoFutanshaInProcessParameter();
+        parameter.setPath(getParameter().get保存先フォルダ());
+        List<RString> fileNameList = getParameter().getエントリ情報List();
+        if (fileNameList != null && !fileNameList.isEmpty()) {
+            for (int i = INDEX_0; i <= fileNameList.size(); i++) {
+                parameter.setFileName(fileNameList.get(i));
+                executeStep(CSVファイル取込);
+            }
+        }
         executeStep(処理結果リスト一時登録);
     }
 
@@ -39,16 +48,7 @@ public class DBC790011_SeikyugakuTsuchishoFutanshaInFlow extends BatchFlowBase<S
      */
     @Step(CSVファイル取込)
     protected IBatchFlowCommand callReadCsvFileProcess() {
-        SeikyugakuTsuchishoFutanshaInProcessParameter parameter = new SeikyugakuTsuchishoFutanshaInProcessParameter();
-        parameter.setPath(getParameter().get保存先フォルダ());
-        List<RString> fileNameList = getParameter().getエントリ情報List();
-        if (fileNameList != null && !fileNameList.isEmpty()) {
-            for (int i = INDEX_0; i <= fileNameList.size(); i++) {
-                parameter.setFileName(fileNameList.get(i));
-                return loopBatch(SeikyugakuTsuchishoFutanshaInProcess.class).arguments(parameter).define();
-            }
-        }
-        return null;
+        return loopBatch(SeikyugakuTsuchishoFutanshaInProcess.class).arguments(parameter).define();
     }
 
     /**
