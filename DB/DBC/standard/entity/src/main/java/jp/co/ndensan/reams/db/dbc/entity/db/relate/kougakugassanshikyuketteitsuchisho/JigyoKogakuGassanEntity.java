@@ -11,8 +11,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * ビジネス設計_DBCMNN2003_事業分高額合算支給決定通知書（単）のEntity。
  *
- * @author Saku
+ * @reamsid_L DBC-4850-040 pengxingyi
  */
 @Getter
 @Setter

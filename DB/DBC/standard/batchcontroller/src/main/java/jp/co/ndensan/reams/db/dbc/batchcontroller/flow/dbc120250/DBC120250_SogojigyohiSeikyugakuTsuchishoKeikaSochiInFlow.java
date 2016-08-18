@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc120250;
 
 import java.io.File;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120250.SogojigyohiSeiDoIchiranhyoSakuseiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120250.SogojigyohiSeikyugakuTsuchishoKeikaSochiReadCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120890.SogojigyohiSeikyugakuTsuchishoInReadCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
@@ -76,9 +75,6 @@ public class DBC120250_SogojigyohiSeikyugakuTsuchishoKeikaSochiInFlow
                         SogojigyohiSeikyugakuTsuchishoInReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
                 レコード件数合算 = flowEntity.get明細データ登録件数();
             }
-            executeStep(CSVファイル取込);
-            flowEntity = getResult(FlowEntity.class, new RString(CSVファイル取込),
-                    SogojigyohiSeikyugakuTsuchishoKeikaSochiReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
             if (0 == flowEntity.get明細データ登録件数()) {
                 executeStep(国保連インタフェース管理更新);
                 executeStep(処理結果リスト作成);

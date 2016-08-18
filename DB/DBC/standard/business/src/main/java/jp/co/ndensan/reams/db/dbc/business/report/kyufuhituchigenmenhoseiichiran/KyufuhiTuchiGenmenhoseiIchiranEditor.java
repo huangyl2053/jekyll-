@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 /**
  * DBC200043_給付費通知減免補正一覧表 Editorクラスです。
  *
- * @reamsid_L DBC-2470-030 surun
+ * @reamsid_L DBC-2270-040 dongyabin
  */
 public class KyufuhiTuchiGenmenhoseiIchiranEditor implements IKyufuhiTuchiGenmenhoseiIchiranEditor {
 

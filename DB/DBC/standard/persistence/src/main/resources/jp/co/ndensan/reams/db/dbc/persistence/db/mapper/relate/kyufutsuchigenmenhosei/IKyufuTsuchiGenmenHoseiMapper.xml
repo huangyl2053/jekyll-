@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-2270-030 lijia -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufutsuchigenmenhosei.IKyufuTsuchiGenmenHoseiMapper">
+    <!-- 給付費通知減免補正情報の取得 -->
+    <select resultOrdered="true" id="get給付費通知減免補正一覧"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufutsuchigenmenhosei.KyufuTsuchiGenmenHoseiMapperParameter" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufutsuchigenmenhosei.KyufuTsuchiGenmenHoseiEntity" fetchSize="500">
+        SELECT T1."shokisaiHokenshaNo",
+        T1."hiHokenshaNo",
+        T1."serviceTeikyoYM",
+        T2."jigyoshaName",
+        T1."jigyoshoNo",
+        T2."jigyoshaName",
+        T1."serviceShuruiCode",
+        T3."serviceShuruiMeisho",
+        T1."serviceHiyoTotal",
+        T1."riyoshaFutangaku"
+        FROM rgdb."DbT3067KyufuhiTuchiHosei" AS T1
+        LEFT JOIN (
+        SELECT * FROM (
+        SELECT 
+        rgdb."DbT7060KaigoJigyosha"."jigyoshaNo",
+        rgdb."DbT7060KaigoJigyosha"."yukoKaishiYMD",
+        rgdb."DbT7060KaigoJigyosha"."jigyoshaName",
+        row_number() over(partition by rgdb."DbT7060KaigoJigyosha"."jigyoshaNo" order by rgdb."DbT7060KaigoJigyosha"."jigyoshaNo",rgdb."DbT7060KaigoJigyosha"."yukoKaishiYMD" desc) AS rank_number1
+        FROM rgdb."DbT7060KaigoJigyosha") AS S1
+        WHERE S1."rank_number1" = 1) AS T2
+        ON T1."jigyoshoNo" = T2."jigyoshaNo"
+        LEFT JOIN (
+        SELECT * FROM (
+        SELECT 
+        rgdb."DbT7130KaigoServiceShurui"."serviceShuruiCd",
+        rgdb."DbT7130KaigoServiceShurui"."teikyoKaishiYM",
+        rgdb."DbT7130KaigoServiceShurui"."serviceShuruiMeisho",
+        row_number() over(partition by rgdb."DbT7130KaigoServiceShurui"."serviceShuruiCd" order by rgdb."DbT7130KaigoServiceShurui"."serviceShuruiCd",rgdb."DbT7130KaigoServiceShurui"."teikyoKaishiYM" desc) AS rank_number2
+        FROM rgdb."DbT7130KaigoServiceShurui") AS S2
+        WHERE S2."rank_number2" = 1) AS T3
+        ON T1."serviceShuruiCode" = T3."serviceShuruiCd"
+        LEFT JOIN (
+        SELECT 
+        rgdb."DbV1001HihokenshaDaicho"."hihokenshaNo",
+        rgdb."DbV1001HihokenshaDaicho"."shikibetsuCode"           
+        FROM rgdb."DbV1001HihokenshaDaicho") AS T4
+        ON T1."hiHokenshaNo" = T4."hihokenshaNo"
+        WHERE #{サービス開始年月} <![CDATA[<=]]> T1."serviceTeikyoYM"
+        AND T1."serviceTeikyoYM" <![CDATA[<=]]> #{サービス終了年月}
+        AND T1."shokisaiHokenshaNo" IN 
+        <foreach collection="市町村コードList" item="市町村コード" open="(" separator="," close=")"> #{市町村コード} </foreach>
+    </select>
+</mapper>

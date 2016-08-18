@@ -40,9 +40,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RString> {
 
-    /**
-     * returnEntity
-     */
     public static final RString PARAMETER_OUT_FLOWENTITY;
     private RString csvReaderPath;
     private static final RString KEY_分離文字 = new RString("\\");
@@ -60,6 +57,7 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
     private DbWT1511SeikyugakuTsuchishoTempEntity suchishoTempentity;
     private List<SeikyugakuTsuchishoFutanshaInDataEntity> dataList;
     private List<SeikyugakuTsuchishoFutanshaInCsvMeisaiEntity> meisaiList;
+    HokenshaNyuryokuHojoFinder hokenshaNyuryokuHojoFinder;
 
     private final RString レコード種別 = new RString("1");
     private final RString 帳票レコード種別_H1 = new RString("H1");
@@ -71,6 +69,8 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
     private static final Integer INDEX_3 = 3;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 請求額通知書一時tableWriter;
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter 処理結果リスト一時tableWriter;
 
     static {
         PARAMETER_OUT_FLOWENTITY = new RString("outFlowEntity");
@@ -78,7 +78,7 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
 
     private OutputParameter<FlowEntity> outFlowEntity;
 
-    private static final RString 請求額通知書一時_TABLE_NAME = new RString("DbWT1511SeikyugakuTsuchishoTemp");
+    private static final RString 請求額通知書一時_TABLE_NAME = new RString("DbWT1511SeikyugakuTsuchisho");
 
     @Override
     protected void initialize() {
@@ -96,10 +96,6 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
         flowEntity = new FlowEntity();
         outFlowEntity = new OutputParameter<>();
         csvReaderPath = parameter.getPath().concat(KEY_分離文字).concat(parameter.getFileName());
-    }
-
-    @Override
-    protected void beforeExecute() {
     }
 
     @Override
@@ -169,7 +165,6 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
         flowEntity.set明細データ登録件数(明細データ登録件数);
 
         outFlowEntity.setValue(flowEntity);
-        請求額通知書一時tableWriter.insert(suchishoTempentity);
     }
 
     private int setレコード(SeikyugakuTsuchishoFutanshaInEntity csvData) {
@@ -188,7 +183,7 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
                 if (保険者番号 != null && !保険者番号.isEmpty()) {
                     suchishoTempentity.setHokenshaNo(new ShoKisaiHokenshaNo(保険者番号));
                 }
-                HokenshaNyuryokuHojoFinder hokenshaNyuryokuHojoFinder = HokenshaNyuryokuHojoFinder.createInstance();
+                hokenshaNyuryokuHojoFinder = HokenshaNyuryokuHojoFinder.createInstance();
                 Hokensha hokensha = hokenshaNyuryokuHojoFinder.getHokensha(new HokenjaNo(保険者番号));
                 if (hokensha != null) {
                     suchishoTempentity.setHokenshaName(hokensha.get保険者名());
@@ -214,6 +209,7 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
                 set合計レコード(suchishoTempentity, listDataEntity.get(j).getCsvGokeiEntity(), 合計);
                 set累計レコード(suchishoTempentity, csvData.getCsvRuikeiEntity(), 累計);
                 set審査支払手数料レコード(suchishoTempentity, csvData.getCsvTesuuryouEntity(), 累計);
+                請求額通知書一時tableWriter.insert(suchishoTempentity);
             }
         }
         return renban;

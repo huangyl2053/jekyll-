@@ -101,7 +101,7 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
     }
 
     private void edit生年月日(NinteishoJohoReportSource source) {
-        source.birthYMD = new RString(target.get対象者生年月日().toString());
+        source.birthYMD = target.get対象者生年月日();
     }
 
     private void edit対象者性別(NinteishoJohoReportSource source) {
@@ -109,6 +109,7 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
     }
 
     private void edit障害理由(NinteishoJohoReportSource source) {
+        // TODO QA 95838
         source.shogaiRiyu = target.get障害理由区分();
         source.shogaiRiyu = target.get障害理由内容();
     }
