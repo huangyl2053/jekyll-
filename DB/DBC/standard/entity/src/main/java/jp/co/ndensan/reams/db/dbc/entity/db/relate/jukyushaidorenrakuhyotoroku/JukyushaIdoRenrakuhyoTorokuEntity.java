@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JukyushaIdoRenrakuhyoTorokuEntity {
 
+    private RString 性別コード;
     private FlexibleDate 作成年月日;
     private RString 証記載保険者番号;
     private RString 被保険者番号;
