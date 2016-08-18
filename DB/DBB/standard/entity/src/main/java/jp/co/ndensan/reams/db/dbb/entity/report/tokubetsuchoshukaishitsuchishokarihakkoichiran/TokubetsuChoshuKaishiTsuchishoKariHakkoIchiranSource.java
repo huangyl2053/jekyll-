@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishok
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
-import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 特別徴収開始通知書（仮算定）発行一覧表Source
@@ -64,7 +63,8 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource implements IRe
     public RString listUpper_6;
     @ReportItem(name = "listUpper_7", length = 20, order = 23)
     public RString listUpper_7;
-    @ReportPerson(id = "X")
+    //TODO 
+//    @ReportPerson(id = "X")
     @ReportItem(name = "listLower_1", length = 20, order = 24)
     public RString listLower_1;
     @ReportItem(name = "listLower_2", length = 15, order = 25)
