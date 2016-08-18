@@ -54,6 +54,7 @@ public class NinteiShienCenterSoshinHandler {
     public void onLoad() {
         div.getRadDataShutsuryoku().setSelectedKey(new RString("key0"));
         RDate システム日付 = RDate.getNowDate();
+        div.getTxtNijiHanteibi().clearFromValue();
         div.getTxtNijiHanteibi().setToValue(システム日付);
         RString 最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, システム日付, SubGyomuCode.DBU介護統計報告);
         RString 最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, システム日付, SubGyomuCode.DBU介護統計報告);
@@ -116,6 +117,7 @@ public class NinteiShienCenterSoshinHandler {
             rowList.add(row);
         }
         div.getDgTaishoshaIchiran().setDataSource(rowList);
+        div.getRadTennyuShiboJoho().setSelectedKey(new RString("key0"));
     }
 
     private RString get認定申請区分_申請時(NinteiShienCenterSoshinData data) {
