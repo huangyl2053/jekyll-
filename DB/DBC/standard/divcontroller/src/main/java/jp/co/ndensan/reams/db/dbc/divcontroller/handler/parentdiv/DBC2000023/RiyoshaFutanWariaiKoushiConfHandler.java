@@ -249,6 +249,6 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
         parameter.set適用期間開始日下段(new FlexibleDate(div.getPanelShutsuryokuNaiyo().getLbl1wariKaishiYmd().getText()));
         parameter.set適用期間終了日下段(new FlexibleDate(div.getPanelShutsuryokuNaiyo().getLbl1wariShuryoYmd().getText()));
 
-        futanWariaisho.getSourceData(識別コード, 被保険者番号, parameter, パラメータ);
+        futanWariaisho.getSourceDataSinger(識別コード, 被保険者番号, parameter, パラメータ);
     }
 }
