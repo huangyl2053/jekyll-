@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 帳票設計_DBC200080_総合事業費再審査決定通知書情報取込一覧表（保険者分） 出力順設定可能項目です。
+ * 総合事業費再審査決定通知書情報取込一覧表出力順設定可能項目です。
  *
  * @reamsid_L DBC-4680-040 wangxue
  */

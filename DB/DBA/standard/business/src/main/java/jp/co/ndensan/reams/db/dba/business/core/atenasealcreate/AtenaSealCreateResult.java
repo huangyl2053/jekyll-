@@ -104,6 +104,7 @@ public class AtenaSealCreateResult {
             一時テーブル1Entity.setZenkokuJushoCode(nullToEmpty(entity.getPsmEntity().getZenkokuJushoCode()));
             一時テーブル1Entity.setHihokenshaNo(entity.get被保険者番号().value());
             一時テーブル1Entity.setSeibetsuCode(entity.getPsmEntity().getSeibetsuCode());
+            //TODO バーコード住所 未実装です。
             return 一時テーブル1Entity;
         }
     }
@@ -193,6 +194,7 @@ public class AtenaSealCreateResult {
             一時テーブル2Entity.setZenkokuJushoCode(nullToEmpty(entity.getPsmEntity().getZenkokuJushoCode()));
             一時テーブル2Entity.setHihokenshaNo(nullToEmpty(entity.get被保険者番号()));
             一時テーブル2Entity.setSeibetsuCode(entity.getPsmEntity().getSeibetsuCode());
+            //TODO バーコード住所 未実装です。
             return 一時テーブル2Entity;
         }
     }
@@ -241,6 +243,7 @@ public class AtenaSealCreateResult {
             一時テーブル3Entity.setZenkokuJushoCode(RString.EMPTY);
             一時テーブル3Entity.setHihokenshaNo(RString.EMPTY);
             一時テーブル3Entity.setSeibetsuCode(RString.EMPTY);
+            //TODO バーコード住所 未実装です。
             return 一時テーブル3Entity;
         }
     }
@@ -279,6 +282,7 @@ public class AtenaSealCreateResult {
             一時テーブル4Entity.setZenkokuJushoCode(RString.EMPTY);
             一時テーブル4Entity.setHihokenshaNo(RString.EMPTY);
             一時テーブル4Entity.setSeibetsuCode(RString.EMPTY);
+            //TODO バーコード住所 未実装です。
             return 一時テーブル4Entity;
         }
     }
@@ -317,6 +321,7 @@ public class AtenaSealCreateResult {
             一時テーブル5Entity.setZenkokuJushoCode(RString.EMPTY);
             一時テーブル5Entity.setHihokenshaNo(RString.EMPTY);
             一時テーブル5Entity.setSeibetsuCode(RString.EMPTY);
+            //TODO バーコード住所 未実装です。
             return 一時テーブル5Entity;
         }
     }

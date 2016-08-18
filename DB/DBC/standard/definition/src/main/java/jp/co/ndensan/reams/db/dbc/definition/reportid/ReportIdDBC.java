@@ -50,7 +50,7 @@ public enum ReportIdDBC {
     /**
      * 総合事業費過再審査定通知書情報
      */
-    DBC200080(new ReportId("DBC200080_KyufujissekiKoshinkekkaIchiran"), new RString("総合事業費過再審査定通知書情報")),
+    DBC200080(new ReportId("DBC200080_SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiran"), new RString("総合事業費過再審査定通知書情報")),
     /**
      * 総合事業費（経過措置）過誤決定通知書情報取込一覧表
      */

@@ -33,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -164,11 +163,8 @@ public class DBC120850_SogojigyohiSaishinsaKetteiHokenshaInFlow extends BatchFlo
     @Step(一覧表作成)
     protected IBatchFlowCommand doIchiranhyoSakusei() {
         SogojigyohiSaishinsaDoIchiranhyoSakuseiProcessParameter parameter = new SogojigyohiSaishinsaDoIchiranhyoSakuseiProcessParameter();
-        parameter.setサブ業務コード(業務コード);
         parameter.set処理年月(getParameter().getShoriYM());
-        parameter.set帳票ID(帳票ID);
         parameter.set出力順ID(getParameter().getShutsuryokujunId());
-        parameter.setシステム日付(RDateTime.now());
         return loopBatch(SogojigyohiSaishinsaDoIchiranhyoSakuseiProcess.class).arguments(parameter).define();
     }
 
@@ -181,7 +177,6 @@ public class DBC120850_SogojigyohiSaishinsaKetteiHokenshaInFlow extends BatchFlo
     protected IBatchFlowCommand doShoriKekkaListSakusei() {
         KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter parameter
                 = new KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter();
-        // リストタイプ0?
         parameter.setエラーリストタイプ(KokuhorenJoho_TorikomiErrorListType.リストタイプ1);
         return simpleBatch(KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess.class).arguments(parameter).define();
     }

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBE-1600-010 lishengli -->
+<!-- イメージ取込み（規定・規定外）を検索用です -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.iraijohodatatorikomi.IIraiJohoDataTorikomiMapper">
+    <select resultOrdered="true" id="get要介護認定申請情報" parameterType="jp.co.ndensan.reams.db.dbe.definition.core.iraijohodatatorikomi.IraiJohoDataTorikomiParameter"
+            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.iraijohodatatorikomi.NinteiShinseiJohoRelateEntity" fetchSize="500">
+            SELECT
+                dbT5101."shinseishoKanriNo" AS shinseishoKanriNo,
+                dbT5101."koroshoIfShikibetsuCode" AS koroshoIfShikibetsuCode,
+                dbT5101."shujiiIryokikanCode" AS shujiiIryokikanCode,
+                dbT5101."shujiiCode" AS shujiiCode,
+                dbT5911."iryoKikanMeisho" AS iryoKikanMeisho,
+                dbT5912."shujiiName" AS shujiiName,
+                dbT5101."shoKisaiHokenshaNo" AS shoKisaiHokenshaNo,
+                dbT5101."hihokenshaNo" AS hihokenshaNo,
+                dbT5101."hihokenshaName" AS hihokenshaName,
+                dbT5101."ninteiShinseiYMD" AS ninteiShinseiYMD,
+                dbT5101."seinengappiYMD" AS seinengappiYMD,
+                dbT5101.seibetsu AS seibetsu,
+                dbT5101."yubinNo" AS yubinNo,
+                dbT5101.jusho AS jusho
+            FROM
+                rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
+            INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
+                ON dbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo" 
+            INNER JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS dbT5301
+                ON dbT5301."shujiiIryokikanCode" = dbT5101."shujiiIryokikanCode" 
+                AND dbT5301."shujiiCode" = dbT5101."shujiiCode"
+                AND dbT5301."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"
+                AND dbT5301."ikenshoIraiRirekiNo" = (SELECT MAX(t5301."ikenshoIraiRirekiNo") AS "ikenshoIraiRirekiNo"
+                                                     FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" AS t5301
+                                                     WHERE t5301."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"
+                                                           AND t5301."logicalDeletedFlag" = false
+                                                    )
+                AND dbT5301."logicalDeletedFlag" = false
+            INNER JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbT5911 
+                ON dbT5911."shichosonCode" = dbT7051."shichosonCode" 
+                AND dbT5911."shujiiIryokikanCode" = dbT5301."shujiiIryokikanCode"
+            INNER JOIN rgdb."DbT5912ShujiiJoho" AS dbT5912 
+                ON dbT5912."shichosonCode" = dbT7051."shichosonCode" 
+                AND dbT5912."shujiiIryokikanCode" = dbT5301."shujiiIryokikanCode"
+                AND dbT5912."shujiiCode" = dbT5301."shujiiCode"
+            LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS dbT5302 
+                ON dbT5302."shinseishoKanriNo" = dbT5301."shinseishoKanriNo" 
+                AND dbT5302."ikenshoIraiRirekiNo" = dbT5301."ikenshoIraiRirekiNo"
+            WHERE
+                dbT5101."shoKisaiHokenshaNo" = #{保険者番号}
+                AND dbT5101."hihokenshaNo" = #{被保険者番号}
+                AND dbT5101."ninteiShinseiYMD" = #{認定申請年月日}
+                AND (dbT5101."shoriJotaiKubun" = #{処理状態区分_0} OR dbT5101."shoriJotaiKubun" = #{処理状態区分_3})
+                AND dbT5101."logicalDeletedFlag" = false
+            ORDER BY dbT5101."shoKisaiHokenshaNo", dbT5101."hihokenshaNo"
+    </select>
+    
+    <select resultOrdered="true" id="要介護認定主治医意見書情報" parameterType="jp.co.ndensan.reams.db.dbe.definition.core.iraijohodatatorikomi.IraiJohoDataTorikomiParameter"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5302ShujiiIkenshoJohoEntity" fetchSize="500">
+        SELECT
+          dbT5302.*
+        FROM
+            rgdb."DbT5301ShujiiIkenshoIraiJoho" AS dbT5301
+        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS dbT5105 
+            ON dbT5105."shinseishoKanriNo" = dbT5301."shinseishoKanriNo" 
+            AND dbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+            AND dbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
+            AND dbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
+            AND dbT5105."ninteiShinsakaiKanryoYMD" IS NULL
+            AND dbT5105."centerSoshinYMD" IS NULL
+        INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS dbT5302 
+            ON dbT5302."shinseishoKanriNo" = dbT5301."shinseishoKanriNo" 
+            AND dbT5302."ikenshoIraiRirekiNo" = dbT5301."ikenshoIraiRirekiNo"
+            AND dbT5302."koroshoIfShikibetsuCode" = dbT5301."koroshoIfShikibetsuCode"
+        WHERE
+            dbT5301."shinseishoKanriNo" = #{申請書管理番号}
+            AND dbT5301."koroshoIfShikibetsuCode" = #{厚労省IF識別コード}
+            AND dbT5301."ikenshoIraiRirekiNo" =(SELECT
+                                                    MAX(t5301."ikenshoIraiRirekiNo") AS "ikenshoIraiRirekiNo"
+                                                FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" AS t5301
+                                                WHERE t5301."shinseishoKanriNo" = #{申請書管理番号}
+                                                    AND t5301."koroshoIfShikibetsuCode" = #{厚労省IF識別コード}
+                                                    AND t5301."logicalDeletedFlag" = false)
+            AND dbT5301."logicalDeletedFlag" = false
+    </select>
+    
+    <resultMap id="IraiJohoIkenItem_resultMap" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.iraijohodatatorikomi.ShujiiIkenshoIraiJohoIkenItemRelateEntity">
+        <result property="ikenshoIraiRirekiNo" column="ikenshoIraiRirekiNo" />
+        <collection property="entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5304ShujiiIkenshoIkenItemMapper.ResultMap_DbT5304ShujiiIkenshoIkenItemEntity"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="要介護認定主治医意見書意見項目" parameterType="jp.co.ndensan.reams.db.dbe.definition.core.iraijohodatatorikomi.IraiJohoDataTorikomiParameter"
+            resultMap="IraiJohoIkenItem_resultMap" fetchSize="500">
+        SELECT
+            dbT5301."ikenshoIraiRirekiNo" AS ikenshoIraiRirekiNo,
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5304ShujiiIkenshoIkenItemMapper.allColumns_DbT5304ShujiiIkenshoIkenItem" />
+        FROM
+            rgdb."DbT5301ShujiiIkenshoIraiJoho" AS dbT5301
+        LEFT JOIN rgdb."DbT5304ShujiiIkenshoIkenItem" AS "DbT5304ShujiiIkenshoIkenItem"
+            ON "DbT5304ShujiiIkenshoIkenItem"."shinseishoKanriNo" = dbT5301."shinseishoKanriNo"
+            AND "DbT5304ShujiiIkenshoIkenItem"."ikenshoIraiRirekiNo" = dbT5301."ikenshoIraiRirekiNo"
+            AND "DbT5304ShujiiIkenshoIkenItem"."koroshoIfShikibetsuCode" = dbT5301."koroshoIfShikibetsuCode"
+            AND "DbT5304ShujiiIkenshoIkenItem"."ikenshoIraiRirekiNo" = #{主治医意見書作成依頼履歴番号}
+            AND "DbT5304ShujiiIkenshoIkenItem"."remban" IN('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30',
+            '33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59','60','61','62','63','64','65',
+            '66','67','68','69','70','71','72','73','74','75','76','77','78','79','80','81','82','83','84','85','86','87','88','89','90','91','92','93','94','95','96','97','98',
+            '99','100','101','102','103','104','105','106','107','108','109','110','111','112','113')
+            AND ("DbT5304ShujiiIkenshoIkenItem"."ikenItem" IS NULL OR "DbT5304ShujiiIkenshoIkenItem"."ikenItem" = '')
+        WHERE
+            dbT5301."shinseishoKanriNo" = #{申請書管理番号}
+    </select>
+    
+    <resultMap id="IraiJohoKinyuItem_resultMap" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.iraijohodatatorikomi.ShujiiIkenshoIraiJohoKinyuItemRelateEntity">
+        <result property="ikenshoIraiRirekiNo" column="ikenshoIraiRirekiNo"/>
+        <collection property="entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5303ShujiiIkenshoKinyuItemMapper.ResultMap_DbT5303ShujiiIkenshoKinyuItemEntity"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="要介護認定主治医意見書記入項目" parameterType="jp.co.ndensan.reams.db.dbe.definition.core.iraijohodatatorikomi.IraiJohoDataTorikomiParameter"
+            resultMap="IraiJohoKinyuItem_resultMap" fetchSize="500">
+        SELECT
+            dbT5301."ikenshoIraiRirekiNo" AS ikenshoIraiRirekiNo,
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5303ShujiiIkenshoKinyuItemMapper.allColumns_DbT5303ShujiiIkenshoKinyuItem" />
+        FROM
+            rgdb."DbT5301ShujiiIkenshoIraiJoho" AS dbT5301
+        LEFT JOIN rgdb."DbT5303ShujiiIkenshoKinyuItem" AS "DbT5303ShujiiIkenshoKinyuItem"
+            ON "DbT5303ShujiiIkenshoKinyuItem"."shinseishoKanriNo" = dbT5301."shinseishoKanriNo"
+            AND "DbT5303ShujiiIkenshoKinyuItem"."ikenshoIraiRirekiNo" = dbT5301."ikenshoIraiRirekiNo"
+            AND "DbT5303ShujiiIkenshoKinyuItem"."koroshoIfShikibetsuCode" = dbT5301."koroshoIfShikibetsuCode"
+            AND "DbT5303ShujiiIkenshoKinyuItem"."ikenshoIraiRirekiNo" = #{主治医意見書作成依頼履歴番号}
+            AND "DbT5303ShujiiIkenshoKinyuItem"."remban" IN('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23')
+            AND ("DbT5303ShujiiIkenshoKinyuItem"."kinyuItem" IS NULL OR "DbT5303ShujiiIkenshoKinyuItem"."kinyuItem" = '')
+        WHERE
+            dbT5301."shinseishoKanriNo" = #{申請書管理番号}
+    </select>
+    
+    <select resultOrdered="true" id="主治医意見書依頼区分" parameterType="jp.co.ndensan.reams.db.dbe.definition.core.iraijohodatatorikomi.IraiJohoDataTorikomiParameter"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5302ShujiiIkenshoJohoEntity" fetchSize="500">
+        SELECT A.shujiiIryoKikanCode,
+               A.shujiiCode
+	FROM (SELECT
+                  dbT5302."shujiiIryoKikanCode" AS shujiiIryoKikanCode,
+                  dbT5302."shujiiCode" AS shujiiCode,
+                  row_number() over(PARTITION BY dbT5302."shinseishoKanriNo" ORDER BY dbT5302."ikenshoIraiRirekiNo" desc) as rank_number
+              FROM
+                  rgdb."DbT5302ShujiiIkenshoJoho" AS dbT5302
+              WHERE
+                  dbT5302."shinseishoKanriNo" = #{申請書管理番号}
+                  AND dbT5302."koroshoIfShikibetsuCode" = #{厚労省IF識別コード}) AS A
+        WHERE A.rank_number = 2
+    </select>
+</mapper>
