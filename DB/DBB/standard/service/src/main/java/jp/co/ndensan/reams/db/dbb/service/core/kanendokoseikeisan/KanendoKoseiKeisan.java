@@ -475,7 +475,6 @@ public class KanendoKoseiKeisan {
         kiwariKeisanInput.set生年月日(FlexibleDate.EMPTY);
         kiwariKeisanInput.set全部喪失年月日(FlexibleDate.EMPTY);
         kiwariKeisanInput.set特徴開始停止区分(0);
-        //TODO 仕様確認 QA1087追加
         kiwariKeisanInput.set特徴開始停止期(0);
 
         kiwariKeisanInput.set期別徴収方法区分(get期別徴収方法区分(徴収方法の情報));
