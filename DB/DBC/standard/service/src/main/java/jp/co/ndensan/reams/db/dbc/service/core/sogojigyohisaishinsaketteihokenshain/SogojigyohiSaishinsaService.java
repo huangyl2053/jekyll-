@@ -44,6 +44,7 @@ public class SogojigyohiSaishinsaService {
     private static final int INT_2 = 2;
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
+    private static final RString SAKUSEI = new RString("作成");
 
     /**
      * {@link InstanceProvider#create}にて生成した{@link ServicehiShikyuKetteiTsuchisho}のインスタンスを返します。
@@ -67,13 +68,13 @@ public class SogojigyohiSaishinsaService {
 
         SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranCSVEntity returnEntity
                 = to明細項目(entity);
-        returnEntity.set取込年月(parameter.get処理年月().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+        returnEntity.set取込年月(parameter.get処理年月().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         RDateTime systemTime = RDateTime.now();
-        RString 作成日 = systemTime.getDate().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+        RString 作成日 = systemTime.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        RString 作成時 = systemTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE);
-        returnEntity.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時).concat(RString.HALF_SPACE).concat(new RString("作成")));
+        RString 作成時 = systemTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+        returnEntity.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時).concat(RString.HALF_SPACE).concat(SAKUSEI));
         returnEntity.set国保連合会名(entity.get国保連合会名());
         returnEntity.set審査委員会名(entity.get審査委員会名());
         return returnEntity;
