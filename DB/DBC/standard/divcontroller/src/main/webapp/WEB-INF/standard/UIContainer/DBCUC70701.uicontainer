@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC70701",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "汎用リスト（共同処理用受給者情報（償還）",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC7040001",
+     "toLayoutTitle": "汎用リスト",
+     "toState": "共同処理用受給者情報（償還）"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC7040001",
+     "layoutTitle": "汎用リスト",
+     "eventName": "実行",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
