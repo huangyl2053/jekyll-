@@ -118,6 +118,7 @@ public class TaJushochiTokureishaKanriHandler {
                 break;
             case Tekiyo:
                 div.getDdlTekiyoJiyo().setDataSource(set適用事由());
+                div.getDdlKaijyoJiyo().setDataSource(set解除事由());
                 if (最新適用情報 != null) {
                     set他市町村住所地特例情報入力エリア(最新適用情報, 親画面状態);
                 }
@@ -294,6 +295,16 @@ public class TaJushochiTokureishaKanriHandler {
                 rireki_Row.setKaijoJiyuCode(div.getDdlKaijyoJiyo().getSelectedValue());
                 rireki_Row.setKaijoJiyu(div.getDdlKaijyoJiyo().getSelectedKey());
                 rireki_Row.setSochiHihokenshaNo(div.getTxtHihoNo().getValue());
+                if (div.getTxtNyusyobi().getValue() != null) {
+                rireki_Row.getNyushoYMD().setValue(new RDate(div.getTxtNyusyobi().getValue().toString()));
+                 }
+                 if (div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo() != null) {
+                rireki_Row.setNyushoShisetsu(div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo());
+                }
+                if (div.getCcdShisetsuJoho().getNyuryokuShisetsuMeisho() != null) {
+                rireki_Row.setNyushoShisetsuCode(div.getCcdShisetsuJoho().getNyuryokuShisetsuMeisho());
+                }
+                rireki_Row.setNyushoShisetsuShurui(div.getCcdShisetsuJoho().get施設種類());
                 if (div.getCcdHokensha().getHokenjaName() != null) {
                     rireki_Row.setSochiHokenshaNo(div.getCcdHokensha().getHokenjaName());
                 }
@@ -309,7 +320,9 @@ public class TaJushochiTokureishaKanriHandler {
                 TashichosonJushochiTokurei 住所地特例の識別子
                         = new TashichosonJushochiTokurei(識別コード,
                                 new FlexibleDate(div.getTxtKaijyobi().getValue().toDateString()), 変更後枝番);
+
                 他住所地特例Model.add(住所地特例の識別子);
+            Collections.sort(rowList, new DateComparator());
             }
             if (状態_削除.equals(div.getStrate())) {
                 if (RowState.Unchanged.equals(rireki_Row.getRowState())) {
@@ -351,42 +364,44 @@ public class TaJushochiTokureishaKanriHandler {
             }
             Collections.sort(rowList, new DateComparator());
         } else if (適用モード.equals(親画面状態)) {
-            Collections.sort(rowList, new DateComparatorRirekiNo());
-            dgJushochiTokureiRireki_Row row = new dgJushochiTokureiRireki_Row();
-            if (div.getTxtNyusyobi().getValue() != null) {
-                row.getNyushoYMD().setValue(new RDate(div.getTxtNyusyobi().getValue().toString()));
+            if (状態_追加.equals(div.getStrate())) {
+                rireki_Row = new dgJushochiTokureiRireki_Row();
             }
-            if (div.getTxtTekiyobi().getValue() != null) {
-                row.getTekiyoYMD().setValue(new RDate(div.getTxtTekiyobi().getValue().toString()));
-            }
-            if (div.getTxtTekiyoTodokedebi().getValue() != null) {
-                row.getTekiyoTodokedeYMD().setValue(new RDate(div.getTxtTekiyoTodokedebi().getValue().toString()));
-            }
-            if (div.getDdlTekiyoJiyo().getSelectedKey() != null) {
-                row.setTekiyoJiyu(div.getDdlTekiyoJiyo().getSelectedKey());
-                row.setTekiyoJiyuCode(div.getDdlTekiyoJiyo().getSelectedValue());
-            } else {
-                row.setTekiyoJiyuCode(RString.EMPTY);
-            }
-            if (div.getTxtHihoNo().getValue() != null) {
-                row.setSochiHihokenshaNo(div.getTxtHihoNo().getValue());
-            }
-            if (div.getCcdHokensha().getHokenjaNo() != null) {
-                row.setSochiHokensha(div.getCcdHokensha().getHokenjaNo());
-            }
-            if (div.getCcdHokensha().getHokenjaName() != null) {
-                row.setSochiHokenshaNo(div.getCcdHokensha().getHokenjaName());
-            }
-            if (div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo() != null) {
-                row.setNyushoShisetsu(div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo());
-            }
-            if (div.getCcdShisetsuJoho().getNyuryokuShisetsuMeisho() != null) {
-                row.setNyushoShisetsuCode(div.getCcdShisetsuJoho().getNyuryokuShisetsuMeisho());
-            }
-            row.setNyushoShisetsuShurui(div.getCcdShisetsuJoho().get施設種類());
-            row.setRowState(RowState.Added);
-            rowList.add(row);
-            int 最新履歴番号 = TaJushochiTokureisyaKanriManager.createInstance().get最新履歴番号(識別コード);
+            if (状態_修正.equals(div.getStrate())) {
+                rireki_Row.getTekiyoYMD().setValue(new RDate(div.getTxtTekiyobi().getValue().toString()));
+                rireki_Row.getTekiyoTodokedeYMD().setValue(new RDate(div.getTxtTekiyoTodokedebi().getValue().toString()));
+                if (div.getDdlTekiyoJiyo().getSelectedKey() != null) {
+                    rireki_Row.setTekiyoJiyu(div.getDdlTekiyoJiyo().getSelectedKey());
+                    rireki_Row.setTekiyoJiyuCode(div.getDdlTekiyoJiyo().getSelectedValue());
+                } else {
+                    rireki_Row.setTekiyoJiyuCode(RString.EMPTY);
+                }
+                rireki_Row.getKaijoYMD().setValue(new RDate(div.getTxtKaijyobi().getValue().toString()));
+                rireki_Row.getKaijoTodokedeYMD().setValue(new RDate(div.getTxtKaijyoTodokedebi().getValue().toString()));
+
+                rireki_Row.setSochiHihokenshaNo(div.getTxtHihoNo().getValue());
+                if (div.getTxtNyusyobi().getValue() != null) {
+                rireki_Row.getNyushoYMD().setValue(new RDate(div.getTxtNyusyobi().getValue().toString()));
+                 }
+                 if (div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo() != null) {
+                rireki_Row.setNyushoShisetsu(div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo());
+                }
+                if (div.getCcdShisetsuJoho().getNyuryokuShisetsuMeisho() != null) {
+                rireki_Row.setNyushoShisetsuCode(div.getCcdShisetsuJoho().getNyuryokuShisetsuMeisho());
+                }
+                rireki_Row.setNyushoShisetsuShurui(div.getCcdShisetsuJoho().get施設種類());
+                if (div.getCcdHokensha().getHokenjaName() != null) {
+                    rireki_Row.setSochiHokenshaNo(div.getCcdHokensha().getHokenjaName());
+                }
+                if (div.getCcdHokensha().getHokenjaNo() != null) {
+                    rireki_Row.setSochiHokensha(div.getCcdHokensha().getHokenjaNo());
+                }
+                rireki_Row.setIdoYMD(div.getTxtKaijyobi().getValue().toDateString());
+                rireki_Row.setHenkouzenEdaNo(変更後枝番);
+                if (RowState.Unchanged.equals(rireki_Row.getRowState())) {
+                    rireki_Row.setRowState(RowState.Modified);
+                }
+                 int 最新履歴番号 = TaJushochiTokureisyaKanriManager.createInstance().get最新履歴番号(識別コード);
             ShisetsuNyutaisho taisho = new ShisetsuNyutaisho(識別コード, 最新履歴番号);
             変更後枝番 = TaJushochiTokureisyaKanriManager.createInstance().
                     get最新枝番(識別コード, new FlexibleDate(div.getTxtTekiyobi().getValue().toString()));
@@ -394,9 +409,64 @@ public class TaJushochiTokureishaKanriHandler {
                     = new TashichosonJushochiTokurei(識別コード, new FlexibleDate(div.getTxtTekiyobi().getValue().toString()), 変更後枝番);
             他住所地特例Model.add(住所地特例の識別子);
             保険施設入退所Model.add(taisho);
-            div.getPanShisetsuJoho().setDisabled(true);
+            div.getPanShisetsuJoho().setDisabled(false);
             div.getCcdShisetsuJoho().clear();
             div.getCcdShisetsuJoho().initialize();
+            }
+             if (状態_削除.equals(div.getStrate())) {
+                if (RowState.Unchanged.equals(rireki_Row.getRowState())) {
+                    rireki_Row.setRowState(RowState.Deleted);
+                } else {
+                    rowList.remove(rireki_Row);
+                }
+                 div.getCcdShisetsuJoho().clear();
+              }
+            if (状態_追加.equals(div.getStrate())) {
+                rireki_Row.setRowState(RowState.Added);
+                rireki_Row.setShikibetsuCode(識別コード.getColumnValue());
+                rireki_Row.getTekiyoYMD().setValue(new RDate(div.getTxtTekiyobi().getValue().toString()));
+                rireki_Row.getTekiyoTodokedeYMD().setValue(new RDate(div.getTxtTekiyoTodokedebi().getValue().toString()));
+                if (div.getDdlTekiyoJiyo().getSelectedKey() != null) {
+                    rireki_Row.setTekiyoJiyu(div.getDdlTekiyoJiyo().getSelectedKey());
+                    rireki_Row.setTekiyoJiyuCode(div.getDdlTekiyoJiyo().getSelectedValue());
+                } else {
+                    rireki_Row.setTekiyoJiyuCode(RString.EMPTY);
+                }
+
+                rireki_Row.setSochiHihokenshaNo(div.getTxtHihoNo().getValue());
+                if (div.getTxtNyusyobi().getValue() != null) {
+                rireki_Row.getNyushoYMD().setValue(new RDate(div.getTxtNyusyobi().getValue().toString()));
+                 }
+                 if (div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo() != null) {
+                rireki_Row.setNyushoShisetsu(div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo());
+                }
+                if (div.getCcdShisetsuJoho().getNyuryokuShisetsuMeisho() != null) {
+                rireki_Row.setNyushoShisetsuCode(div.getCcdShisetsuJoho().getNyuryokuShisetsuMeisho());
+                }
+                rireki_Row.setNyushoShisetsuShurui(div.getCcdShisetsuJoho().get施設種類());
+                if (div.getCcdHokensha().getHokenjaName() != null) {
+                    rireki_Row.setSochiHokenshaNo(div.getCcdHokensha().getHokenjaName());
+                }
+                if (div.getCcdHokensha().getHokenjaNo() != null) {
+                    rireki_Row.setSochiHokensha(div.getCcdHokensha().getHokenjaNo());
+                }
+                rireki_Row.setHenkouzenEdaNo(変更後枝番);
+                if (RowState.Unchanged.equals(rireki_Row.getRowState())) {
+                    rireki_Row.setRowState(RowState.Modified);
+                }
+                 int 最新履歴番号 = TaJushochiTokureisyaKanriManager.createInstance().get最新履歴番号(識別コード);
+            ShisetsuNyutaisho taisho = new ShisetsuNyutaisho(識別コード, 最新履歴番号);
+            変更後枝番 = TaJushochiTokureisyaKanriManager.createInstance().
+                    get最新枝番(識別コード, new FlexibleDate(div.getTxtTekiyobi().getValue().toString()));
+            rowList.add(rireki_Row);           
+            TashichosonJushochiTokurei 住所地特例の識別子
+                    = new TashichosonJushochiTokurei(識別コード, new FlexibleDate(div.getTxtTekiyobi().getValue().toString()), 変更後枝番);
+            他住所地特例Model.add(住所地特例の識別子);
+            保険施設入退所Model.add(taisho);
+            div.getPanShisetsuJoho().setDisabled(false);
+            div.getCcdShisetsuJoho().clear();
+            div.getCcdShisetsuJoho().initialize();
+            }
             Collections.sort(rowList, new DateComparator());
         } else if (解除モード.equals(親画面状態)) {
             dgJushochiTokureiRireki_Row row = new dgJushochiTokureiRireki_Row();
@@ -479,7 +549,10 @@ public class TaJushochiTokureishaKanriHandler {
                             createBuilderForEdit().set論理削除フラグ(true).build().toEntity());
                 }
             } else if (適用モード.equals(new RString(div.getMode_DisplayMode().toString()))) {
-                HihokenshashikakusoshitsuManager.createInstance().shikakuSoshitsuCheck(識別コード, HihokenshaNo.EMPTY);
+                boolean shikakuSoshitsuCheck = HihokenshashikakusoshitsuManager.createInstance().shikakuSoshitsuCheck(識別コード, HihokenshaNo.EMPTY);
+                if (!shikakuSoshitsuCheck) {
+                    break;
+                } 
                 FlexibleDate 適用届出年月日 = FlexibleDate.EMPTY;
                 if (rowList.get(0).getTekiyoTodokedeYMD() != null && rowList.get(0).getTekiyoTodokedeYMD().getValue() != null) {
                     適用届出年月日 = new FlexibleDate(rowList.get(0).getTekiyoTodokedeYMD().getValue().toString());
@@ -641,6 +714,43 @@ public class TaJushochiTokureishaKanriHandler {
             div.getTajushochiTokureiInput().setHiddenInputEdaNo(kanriMaster.getEdaNo());
             div.getTxtHihoNo().setValue(kanriMaster.getSochiHihokenshaNo());
             div.getCcdHokensha().setHokenjaNo(kanriMaster.getSochiHokensha());
+            if (!RString.isNullOrEmpty(kanriMaster.getSochiHokenshaNo())) {
+                div.getCcdHokensha().setHokenjaName(kanriMaster.getSochiHokenshaNo());
+            }
+        } else if(適用モード.equals(親画面状態)){
+           if (kanriMaster.getNyushoYMD().getValue() != null) {
+                div.getTxtNyusyobi().setValue(new RDate(kanriMaster.getNyushoYMD().getValue().toString()));
+            } else {
+                div.getTxtNyusyobi().clearValue();
+            }
+             if (kanriMaster.getTekiyoYMD().getValue() != null) {
+                div.getTxtTekiyobi().setValue(new RDate(kanriMaster.getTekiyoYMD().getValue().toString()));
+            } else {
+                div.getTxtTekiyobi().clearValue();
+            }
+            if (kanriMaster.getTekiyoTodokedeYMD().getValue() != null) {
+                div.getTxtTekiyoTodokedebi().setValue(new RDate(kanriMaster.getTekiyoTodokedeYMD().getValue().toString()));
+            } else {
+                div.getTxtTekiyoTodokedebi().clearValue();
+            }
+            選択適用事由(kanriMaster.getTekiyoJiyu());
+            if (kanriMaster.getKaijoYMD().getValue() != null) {
+                div.getTxtKaijyobi().setValue(new RDate(kanriMaster.getKaijoYMD().getValue().toString()));
+            } else {
+                div.getTxtKaijyobi().clearValue();
+            }
+            if (kanriMaster.getKaijoTodokedeYMD().getValue() != null) {
+                div.getTxtKaijyoTodokedebi().setValue(new RDate(kanriMaster.getKaijoTodokedeYMD().getValue().toString()));
+            } else {
+                div.getTxtKaijyoTodokedebi().clearValue();
+            }
+            div.getTajushochiTokureiInput().setHiddenInputShikibetsuCode(kanriMaster.getShikibetsuCode());
+            div.getTajushochiTokureiInput().setHiddenInputIdoYMD(kanriMaster.getIdoYMD());
+            div.getTajushochiTokureiInput().setHiddenInputEdaNo(kanriMaster.getEdaNo());
+            div.getTxtHihoNo().setValue(kanriMaster.getSochiHihokenshaNo());
+            div.getCcdHokensha().setHokenjaNo(kanriMaster.getSochiHokensha());
+            div.getCcdShisetsuJoho().set施設種類(kanriMaster.getNyushoShisetsuShurui());
+            div.getCcdShisetsuJoho().setNyuryokuShisetsuKodo(kanriMaster.getNyushoShisetsu());
             if (!RString.isNullOrEmpty(kanriMaster.getSochiHokenshaNo())) {
                 div.getCcdHokensha().setHokenjaName(kanriMaster.getSochiHokenshaNo());
             }
@@ -876,9 +986,11 @@ public class TaJushochiTokureishaKanriHandler {
         div.getDdlKaijyoJiyo().setDisabled(true);
         div.getTxtHihoNo().setDisabled(true);
         div.getPanSotimotoJyoho().setDisabled(true);
+        div.getCcdShisetsuJoho().setDisabled(true);
     }
 
     private void set他市町村住所地特例情報入力エリア活性の設定() {
+        div.getTxtNyusyobi().setDisabled(false);
         div.getTxtTekiyobi().setDisabled(false);
         div.getTxtTekiyoTodokedebi().setDisabled(false);
         div.getDdlTekiyoJiyo().setDisabled(false);
@@ -889,6 +1001,7 @@ public class TaJushochiTokureishaKanriHandler {
         div.getPanSotimotoJyoho().setDisabled(false);
         div.getBtnKakunin().setDisabled(false);
         div.getBtnTorikeshi().setDisabled(false);
+        div.getCcdShisetsuJoho().setDisabled(false);
     }
 
     private void clear他市町村住所地特例情報入力エリア() {
@@ -901,6 +1014,7 @@ public class TaJushochiTokureishaKanriHandler {
         div.getDdlKaijyoJiyo().setSelectedKey(RString.EMPTY);
         div.getTxtHihoNo().clearValue();
         div.getCcdHokensha().clear();
+        div.getCcdShisetsuJoho().clear();
     }
 
     private RString nullTOEmpty(RString 項目) {
