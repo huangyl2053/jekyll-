@@ -131,10 +131,11 @@ public class KougakuGassanShikyuKetteiTsuchisho {
             entity.set事業高額合算支給不支給決定(jigyoKogakuGassanEntity.get事業高額合算支給不支給決定());
         }
         ChohyoSeigyoHanyoManager manager = new ChohyoSeigyoHanyoManager();
+        ReportId 通知文情報帳票ID = new ReportId("DBC200201_GassanJigyobunKetteiTsuchisho");
         ChohyoSeigyoHanyo 帳票制御汎用_取り消し線
-                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200201.getReportId(), FlexibleYear.MIN, 項目名_取り消し線);
+                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 項目名_取り消し線);
         ChohyoSeigyoHanyo 帳票制御汎用_帳票タイトル
-                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200201.getReportId(), FlexibleYear.MIN, 項目名_帳票タイトル);
+                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 項目名_帳票タイトル);
 // TO DO    QA:95951
 //        ChohyoSeigyoHanyo 帳票制御汎用_帳票タイトル_抹消線あり１
 //                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200201.getReportId(), FlexibleYear.MIN, 項目名_帳票タイトル_抹消線あり１);
