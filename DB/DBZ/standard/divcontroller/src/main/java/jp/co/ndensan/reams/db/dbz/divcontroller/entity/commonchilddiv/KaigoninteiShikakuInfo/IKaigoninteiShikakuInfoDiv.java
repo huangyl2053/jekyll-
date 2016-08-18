@@ -29,4 +29,6 @@ public interface IKaigoninteiShikakuInfoDiv extends ICommonChildDivBasePropertie
     TextBox getTxtHihokenshaNo();
 
     RString getHookenshaCode();
+
+    RString getHokensha();
 }

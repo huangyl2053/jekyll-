@@ -16,8 +16,8 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020.JigyoKogakuShin
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020.JigyoKogakuShinseiKanriForShinseiShokanProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020.JigyoKogakuShinseikanriMasterUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020.JigyoShinseishoHakoIchiranhyoOutputProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020.KogakuServiceHiOshiraseTsuchishoKikanAriOutputProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020.KogakuServiceHiOshiraseTsuchishoKigenNashiOutputProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020.KogakuServiceHiOshiraseTsuchishoKikanAriOutputProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020.KogakuServiceShikyuShinseishoOutputProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020.KogakuShinseiKanriForShinseiJyohoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020.KogakuShinseiKanriForShinseiShokanProcess;
@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020.ShinseishoHakoI
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020.ShokanJyohoForShinseiJyohoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020.ShoriTaishogaiDataDeleteProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc020020.DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.core.shunyugaku.ShutsuryokuJoken;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyufuoshirasetsuchisho.KogakuKaigoServicehiOshiraseHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -46,6 +47,8 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
@@ -59,6 +62,7 @@ public class DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchisho
 
     private static final RString ONE = new RString("1");
     private static final RString 高額介護サービス費 = new RString("DBCMN43001");
+    private static final FlexibleYearMonth 制度改正施行日 = new FlexibleYearMonth("200510");
     private static final String KOGAKU_MASTER_SHINSEI = "kogaku_master_shinsei";
     private static final String JIGYO_MASTER_SHINSEI = "jigyo_master_shinsei";
     private static final String HIHOKENSHADAICHO_SHINSEI = "hihokenshadaicho_shinsei";
@@ -81,6 +85,7 @@ public class DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchisho
     private static final String JIGYO_TSUCHISHO_KIGENNAI = "jigyo_tsuchisho_kigennai";
     private static final String JIGYO_TSUCHISHO_KIGENARI = "jigyo_tsuchisho_kigenari";
     private static final String JIGYO_UPDATE = "jigyo_update";
+    private static final RString 死亡者制御_0 = new RString("0");
 
     private KogakuKaigoServicehiOshiraseHakkoProcessParameter processParameter;
 
@@ -90,11 +95,15 @@ public class DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchisho
         if (高額介護サービス費.equals(processParameter.getMenuId())) {
             executeStep(KOGAKU_MASTER_SHINSEI);
             executeStep(HIHOKENSHADAICHO_SHINSEI);
-            executeStep(KOGAKU_MASTER_SHOKAN);
+            if (isShokanExcute()) {
+                executeStep(KOGAKU_MASTER_SHOKAN);
+            }
         } else {
             executeStep(JIGYO_MASTER_SHINSEI);
             executeStep(HIHOKENSHADAICHO_SHINSEI);
-            executeStep(JIGYO_MASTER_SHOKAN);
+            if (isShokanExcute()) {
+                executeStep(JIGYO_MASTER_SHOKAN);
+            }
         }
         // TODO QA.1223 該当処理不要？
         //executeStep(TAISHOGAI);
@@ -104,31 +113,62 @@ public class DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchisho
             executeStep(JUTAKUNAI);
         }
         executeStep(HIHOKENSHADAICHO_SHOKAN);
-        executeStep(SHIBOUSHA);
+
+        RString 死亡者制御 = BusinessConfig.get(ConfigNameDBC.高額自動償還_死亡者制御, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        if (死亡者制御_0.equals(死亡者制御)) {
+            executeStep(SHIBOUSHA);
+        }
+
         executeStep(SHOKAN_SHINSEI);
         executeStep(CHOHYO);
 
         if (高額介護サービス費.equals(processParameter.getMenuId())) {
             executeStep(ICHIRANHYO);
-            executeStep(KOGAKU_SHINSEISHO);
+            if (getParameter().isShinseishoHakko()) {
+                executeStep(KOGAKU_SHINSEISHO);
+            }
+            excuteShinseisho();
+            if (ShutsuryokuJoken.審査年月 == getParameter().getChushutsuJoken()) {
+                executeStep(KOGAKU_UPDATE);
+            }
+        } else {
+            executeStep(JIGYO_ICHIRANHYO);
+            if (getParameter().isShinseishoHakko()) {
+                executeStep(JIGYO_SHINSEISHO);
+            }
+            excuteOshirase();
+            if (ShutsuryokuJoken.審査年月 == getParameter().getChushutsuJoken()) {
+                executeStep(JIGYO_UPDATE);
+            }
+        }
+    }
+
+    private void excuteShinseisho() {
+        if (getParameter().isOshiraseTsuchishoHakko()) {
             if (getParameter().getShinseishoTeishutsuKigen() == null || getParameter().getShinseishoTeishutsuKigen().isEmpty()) {
                 executeStep(KOGAKU_TSUCHISHO_KIGENNAI);
             } else {
                 executeStep(KOGAKU_TSUCHISHO_KIGENARI);
             }
-            executeStep(KOGAKU_UPDATE);
-        } else {
-            executeStep(JIGYO_ICHIRANHYO);
-            executeStep(JIGYO_SHINSEISHO);
+        }
+    }
+
+    private boolean isShokanExcute() {
+        if (ShutsuryokuJoken.審査年月 == getParameter().getChushutsuJoken()
+                && 制度改正施行日.isBefore(getParameter().getShoriYm())) {
+            return true;
+        }
+        return false;
+    }
+
+    private void excuteOshirase() {
+        if (getParameter().isOshiraseTsuchishoHakko()) {
             if (getParameter().getShinseishoTeishutsuKigen() == null || getParameter().getShinseishoTeishutsuKigen().isEmpty()) {
                 executeStep(JIGYO_TSUCHISHO_KIGENNAI);
             } else {
                 executeStep(JIGYO_TSUCHISHO_KIGENARI);
             }
-            executeStep(JIGYO_UPDATE);
         }
-
-        // TODO QA.1164  白紙発行の処理、今は実装ない
     }
 
     @Step(KOGAKU_MASTER_SHINSEI)
@@ -244,10 +284,13 @@ public class DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchisho
     private void createParameter() {
         processParameter = getParameter().toProcessParameter();
 
-        processParameter.set保険者番号(BusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, SubGyomuCode.DBU介護統計報告));
-        processParameter.set事業高額(BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_事業高額));
+        processParameter.set保険者番号(
+                BusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+        processParameter.set事業高額(
+                BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_事業高額, RDate.getNowDate(), SubGyomuCode.DBC介護給付));
         // TODO QA.1142  DBC業務コンフィグ.自動高額償還_初回申請把握基準日はありません
-        processParameter.set初回申請把握基準日(BusinessConfig.get(ConfigNameDBC.高額自動償還_初回申請把握基準日));
+        processParameter.set初回申請把握基準日(
+                BusinessConfig.get(ConfigNameDBC.高額自動償還_初回申請把握基準日, RDate.getNowDate(), SubGyomuCode.DBC介護給付));
 
         processParameter.set宛名検索条件(new ShikibetsuTaishoPSMSearchKeyBuilder(
                 GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先).set基準日(FlexibleDate.getNowDate()).build());

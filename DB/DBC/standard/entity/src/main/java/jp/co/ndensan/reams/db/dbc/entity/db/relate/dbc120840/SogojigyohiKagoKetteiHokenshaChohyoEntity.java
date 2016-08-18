@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 総合事業費過誤決定通知書情報取込（保険者分）帳票出力対象
  *
- * @reamsid_L DBC-2520-011 jiangxiaolong
+ * @reamsid_L DBC-2550-011 jiangxiaolong
  */
 @lombok.Getter
 @lombok.Setter

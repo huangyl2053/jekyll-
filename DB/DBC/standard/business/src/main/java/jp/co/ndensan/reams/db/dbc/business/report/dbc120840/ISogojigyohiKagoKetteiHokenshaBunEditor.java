@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.db.dbc.entity.report.dbc120840.SogojigyohiKagoKetteiT
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- * 再審査決定通知書情報取込一覧表（公費負担者分）帳票IEditor
+ * 総合事業費過誤決定通知書情報取込一覧表帳票IEditor
  *
- * @reamsid_L  DBC-2520-011 jiangxiaolong
+ * @reamsid_L  DBC-2550-011 jiangxiaolong
  */
 public interface ISogojigyohiKagoKetteiHokenshaBunEditor extends
         IReportEditor<SogojigyohiKagoKetteiTorikomiIchiranSource> {

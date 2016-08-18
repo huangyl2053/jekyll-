@@ -67,30 +67,6 @@ public interface IKogakuKaigoServicehiOshiraseHakkoMapper {
     List<HihokenshaDaichoShinseiRelateEntity> get被保険者台帳データFor申請情報償還();
 
     /**
-     * 処理対象外のデータ(申請情報償還一時)を削除します。
-     */
-    void 処理対象外のデータを削除();
-
-    /**
-     * 処理対象外のデータ(申請情報償還一時,受託あり)を削除します。
-     *
-     * @param param パラメータ
-     */
-    void 自動償還For受託ありの申請情報償還一時を削除(KogakuKaigoServicehiOshiraseHakkoMybatisParameter param);
-
-    /**
-     * 処理対象外のデータ(申請情報償還一時,受託ない)を削除します。
-     *
-     * @param param パラメータ
-     */
-    void 自動償還For受託ないの申請情報償還一時を削除(KogakuKaigoServicehiOshiraseHakkoMybatisParameter param);
-
-    /**
-     * 死亡者を自動償還を削除削除します。
-     */
-    void 死亡者を自動償還を削除();
-
-    /**
      * 申請情報償還を取得します。
      *
      * @param param パラメータ

@@ -51,6 +51,7 @@ public class ShinseihakkoMeiseiHandler {
     private static final int NO_7 = 7;
     private static final int NO_8 = 8;
     private static final int NO_9 = 9;
+    // private static final RString コード = new RString("SyoriMode");
     private static final RString コード = new RString("1");
     private static final RString コード111 = new RString("111");
     private static final RString コード112 = new RString("112");
@@ -122,12 +123,13 @@ public class ShinseihakkoMeiseiHandler {
     public ShinseiShoEntity getShinseiShoEntity() {
         NinteiKanryoNinteiShinseiJohoManager manager = NinteiKanryoNinteiShinseiJohoManager.createInstance();
         ShinseiShoEntity shinseiShoEntity = new ShinseiShoEntity();
-        int radPrintMeeisaiSelectIndex = div.getShinseihakkoMeisei2().getPrintSelect().getRadPrintMeeisaiInfo().getSelectedIndex();
-        int radShinseiKubunSelectIndex = div.getShinseihakkoMeisei2().getPrintSelect().getRadShinseiKubun().getSelectedIndex();
         int radShinseishaKubunSelectIndex = div.getShinseihakkoMeisei2().getPrintSelect().getRadShinseishaKubun().getSelectedIndex();
+        int radShinseiKubunSelectIndex = div.getShinseihakkoMeisei2().getPrintSelect().getRadShinseiKubun().getSelectedIndex();
+        int radPrintMeeisaiSelectIndex = div.getShinseihakkoMeisei2().getPrintSelect().getRadPrintMeeisaiInfo().getSelectedIndex();
         KaigoninteiShikakuInfoDiv kaigoninteiShikakuInfoDiv = (KaigoninteiShikakuInfoDiv) div.getNinteishinseihakko().getCcdKaigoninteiShikakuInfo();
         KaigoNinteiAtenaInfoDiv kaigoNinteiAtenaInfoDiv = (KaigoNinteiAtenaInfoDiv) div.getNinteishinseihakko().getCcdKaigoNinteiAtenaInfo();
-        if (radShinseishaKubunSelectIndex == 0) {
+        if (radPrintMeeisaiSelectIndex == 0) {
+            shinseiShoEntity.set市町村名称(div.getNinteishinseihakko().getCcdKaigoninteiShikakuInfo().getHokensha());
             shinseiShoEntity.set被保険者番号(kaigoninteiShikakuInfoDiv.getTxtHihokenshaNo().getText());
             long hihokenshaNo = Long.parseLong(kaigoninteiShikakuInfoDiv.getTxtHihokenshaNo().getValue().toString());
             shinseiShoEntity = set被保険者番号(hihokenshaNo, shinseiShoEntity);
@@ -142,6 +144,7 @@ public class ShinseihakkoMeiseiHandler {
                 shinseiShoEntity.set出生元号昭和(正);
             }
             shinseiShoEntity.set生年月日(kaigoNinteiAtenaInfoDiv.getTxtBirthYMD().getValue().toDateString());
+            shinseiShoEntity.set生年月日(new RString(kaigoNinteiAtenaInfoDiv.getTxtBirthYMD().getValue().toString()));
             shinseiShoEntity.set生まれYY(kaigoNinteiAtenaInfoDiv.getTxtBirthYMD().getValue().getYear().toDateString());
             shinseiShoEntity.set出生月MM(new RString(String.valueOf(kaigoNinteiAtenaInfoDiv.getTxtBirthYMD().getValue().getMonthValue())));
             shinseiShoEntity.set出生日DD(new RString(String.valueOf(kaigoNinteiAtenaInfoDiv.getTxtBirthYMD().getValue().getDayValue())));
@@ -163,7 +166,7 @@ public class ShinseihakkoMeiseiHandler {
                     = ReportUtil.get通知文(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD501002.getReportId(), KamokuCode.EMPTY, 帳票タイトルInfo.getパターン番号());
             shinseiShoEntity.set通知文(通知文.get(帳票タイトルInfo.get項目番号()));
             if (radShinseiKubunSelectIndex != 0) {
-                shinseiShoEntity = set状態区分(radPrintMeeisaiSelectIndex, shinseiShoEntity);
+                shinseiShoEntity = set状態区分(radShinseishaKubunSelectIndex, shinseiShoEntity);
             }
         } else {
             shinseiShoEntity.set市町村名称(kaigoninteiShikakuInfoDiv.getTxtHokensha().getText());

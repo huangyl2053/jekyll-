@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 総合事業費（経過措置）過誤決定通知書情報取込一覧表帳票のPageBreakenum。
+ * 総合事業費過誤決定通知書情報取込一覧表 帳票のPageBreakenum。
  *
- * @reamsid_L DBC-2550-030　jianglaishen
+ * @reamsid_L DBC-2550-011　jiangxiaolong
  */
 public enum SogojigyohiKagoKetteiHokenshaInOutPutOrder implements IReportItems {
 
