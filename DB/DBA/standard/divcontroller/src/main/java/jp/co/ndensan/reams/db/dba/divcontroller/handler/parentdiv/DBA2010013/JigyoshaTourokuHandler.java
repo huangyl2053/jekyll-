@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dba.business.core.kaigojigyoshashisetsukanrio.Serv
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010013.JigyoshaTourokuDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010013.dgServiceList_Row;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.KaigoJigyosha;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
@@ -266,24 +268,42 @@ public class JigyoshaTourokuHandler {
      *
      * @param サービス一覧情報List サービス一覧情報List
      */
-    public void getサービス一覧情報再表示(List<KaigoJogaiTokureiBusiness> サービス一覧情報List) {
+    public void getサービス一覧情報再表示(List<KaigoJigyoshaShiteiService> サービス一覧情報List,boolean chkFlg) {
         List<dgServiceList_Row> サービス一覧データ = new ArrayList<>();
-        for (KaigoJogaiTokureiBusiness result : サービス一覧情報List) {
+        for (KaigoJigyoshaShiteiService result : サービス一覧情報List) {
             dgServiceList_Row row = new dgServiceList_Row();
-            if (!RString.isNullOrEmpty(result.getサービス種類コード())) {
-                row.setServiceType(result.getサービス種類コード());
-                TextBoxFlexibleDate 開始日 = new TextBoxFlexibleDate();
-                開始日.setValue(new FlexibleDate(result.get有効開始日()));
-                TextBoxFlexibleDate 終了日 = new TextBoxFlexibleDate();
-                終了日.setValue(
-                        result.get有効終了日() == null ? FlexibleDate.EMPTY : new FlexibleDate(result.get有効終了日()));
-                row.setKaishiDate(開始日);
-                row.setShuryoDate(終了日);
-                row.setJigyoshaMei(
-                        result.get事業者名称().isNullOrEmpty() ? RString.EMPTY : result.get事業者名称());
-                row.setKanrishaMei(
-                        result.get管理者氏名().isNullOrEmpty() ? RString.EMPTY : result.get管理者氏名());
-                サービス一覧データ.add(row);
+            if (!RString.isNullOrEmpty(result.getサービス種類コード().getColumnValue())) {
+                if(chkFlg && result.isDeleted()){
+                    row.setServiceType(result.getサービス種類コード().getColumnValue());
+                    TextBoxFlexibleDate 開始日 = new TextBoxFlexibleDate();
+                    開始日.setValue(new FlexibleDate(result.get有効開始日().toString()));
+                    TextBoxFlexibleDate 終了日 = new TextBoxFlexibleDate();
+                    終了日.setValue(
+                        result.get有効終了日() == null ? FlexibleDate.EMPTY : result.get有効終了日());
+                    row.setKaishiDate(開始日);
+                    row.setShuryoDate(終了日);
+                    row.setJigyoshaMei(                            
+                            result.get事業者名称() == null ? RString.EMPTY : result.get事業者名称().getColumnValue());
+                    row.setKanrishaMei(
+                            result.get管理者氏名() == null ? RString.EMPTY : result.get管理者氏名().getColumnValue());
+                    サービス一覧データ.add(row);
+                } else {
+                    row.setServiceType(result.getサービス種類コード().getColumnValue());
+                    TextBoxFlexibleDate 開始日 = new TextBoxFlexibleDate();
+                    開始日.setValue(new FlexibleDate(result.get有効開始日().toString()));
+                    TextBoxFlexibleDate 終了日 = new TextBoxFlexibleDate();
+                    終了日.setValue(
+                        result.get有効終了日() == null ? FlexibleDate.EMPTY : result.get有効終了日());
+                    row.setKaishiDate(開始日);
+                    row.setShuryoDate(終了日);
+                    row.setJigyoshaMei(                            
+                            result.get事業者名称() == null ? RString.EMPTY : result.get事業者名称().getColumnValue());
+                    row.setKanrishaMei(
+                            result.get管理者氏名() == null ? RString.EMPTY : result.get管理者氏名().getColumnValue());
+                    row.setModifyButtonState(DataGridButtonState.Disabled);
+                    row.setDeleteButtonState(DataGridButtonState.Disabled);
+                    サービス一覧データ.add(row);
+                }
             }
         }
         panelDiv.getServiceJoho().getDgServiceList().setDataSource(サービス一覧データ);

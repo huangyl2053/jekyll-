@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010014.JigyoshaServiceDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBZCodeShubetsu;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.hokenja.Hokenja;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaShubetsu;
@@ -57,11 +58,24 @@ public class JigyoshaServiceHandler {
      *
      * @param 事業者番号 事業者番号
      */
-    public void set状態_追加(RString 事業者番号) {
+    public void set状態_追加(RString 事業者番号,DbT1005KaigoJogaiTokureiTaishoShisetsuEntity 事業者登録情報) {
         div.getJigyoshaServiceKihon().getTxtTorokuHokenshaName().setDisabled(true);
         div.getJigyoshaServiceKihon().getDdlServiceShuruiChiikiMitchaku().setDisabled(false);
-        div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaNo().setDisabled(true);
+        div.getJigyoshaServiceKihon().getJigyosha().setDisabled(true);
         div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaNo().setValue(事業者番号);
+        div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaName().setValue(事業者登録情報.getJigyoshaMeisho().value());
+        div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaNameKana().setValue(事業者登録情報.getJigyoshaKanaMeisho().value());
+        div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaAddress().setValue(事業者登録情報.getJigyoshaJusho());
+        div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaAddressKana().setValue(事業者登録情報.getJigyoshaKanaJusho());
+        div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaTelNo().setValue(事業者登録情報.getTelNo().value());
+        div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaFaxNo().setValue(事業者登録情報.getFaxNo().value());
+        div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaYubinNo().setValue(事業者登録情報.getYubinNo());
+        div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoKaishiYMD().setValue(事業者登録情報.getYukoKaishiYMD());
+        div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoShuryoYMD().setValue(事業者登録情報.getYukoShuryoYMD());
+        div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoHaishiYMD().setValue(事業者登録情報.getJigyoHaishiYMD());
+        div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoKaishiYMD().setValue(事業者登録情報.getJigyoKaishiYMD());
+        div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoKyushiYMD().setValue(事業者登録情報.getJigyoKyushiYMD());
+        div.getJigyoshaServiceKihon().getJigyosha().getTxtJikyoSaikaiYMD().setValue(事業者登録情報.getJigyoSaikaiYMD());
     }
 
     /**
