@@ -141,6 +141,9 @@ public class JimuSonotashiryoBusiness {
      * @return その他資料
      */
     public RString getその他資料() {
+        if (entity.getImageSharedFileId() == null) {
+            return RString.EMPTY;
+        }
         RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
         boolean is存在;
         for (int i = index; i < ファイル名List.size(); i++) {
