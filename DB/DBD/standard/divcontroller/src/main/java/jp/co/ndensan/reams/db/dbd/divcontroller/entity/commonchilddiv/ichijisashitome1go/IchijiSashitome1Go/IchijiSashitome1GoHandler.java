@@ -563,72 +563,11 @@ public class IchijiSashitome1GoHandler {
         div.getIchijiSashitome1GoTorikeshi().setDisabled(true);
     }
 
-//TODO
     private void setValue(RString 押下ボタン) {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(一号一時差止ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         div.getDgSashitomeKojoIchiran().setDataSource(creatDateSource(押下ボタン, 支払方法変更管理業務概念));
-//        div.getDgSashitomeKojoIchiran().setDataSource(creatDateSourcenew(shokanHaraiShikyuList));
     }
 
-//    private List<dgSashitomeKojoIchiran_Row> creatDateSourcenew(ArrayList<ShokanHaraiShikyu> shokanHaraiShikyuList) {
-//        ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(一号一時差止ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
-//        List<dgSashitomeKojoIchiran_Row> rowList = new ArrayList();
-//        dgSashitomeKojoIchiran_Row row = new dgSashitomeKojoIchiran_Row();
-//        div.getTxtSagakuKingakuGokei().setValue(null);
-//        switch (div.getKey_Button().toString()) {
-//            case "給付一時差止登録":
-//                for (ShokanHaraiShikyu shokanHaraiShikyu : shokanHaraiShikyuList) {
-//                    row.setSashitome(shokanHaraiShikyu.get支払方法変更差止_SashitomeKojoJotaiKubun());
-//                    row.setSashitome2(shokanHaraiShikyu.get支払方法変更差止_SashitomeKojoJotaiKubun());
-//                    if (shokanHaraiShikyu.get支払方法変更差止_SashitomeKojoJotaiKubun() == ShiharaiHenkoSashitomeKojoJotaiKubun.登録.getコード()
-//                            && shokanHaraiShikyu.get支払方法変更差止_SashitomeKojoNo() == null) {
-//                        row.getKaijo().setDisabled(false);
-//                    } else {
-//                        row.getKaijo().setDisabled(true);
-//                    }
-//                    row.setSeiriNo(shokanHaraiShikyu.get支払方法変更差止_Sashitome_ShokanSeiriNo());
-//                    if (shokanHaraiShikyu.get支払方法変更差止_Sashitome_ServiceTeikyoYM().toDateString() != null) {
-//                        row.getTxtTeikyoYM().setValue(new FlexibleDate(shokanHaraiShikyu.get支払方法変更差止_Sashitome_ServiceTeikyoYM().toString()));
-//                    }
-//                    row.getTxtSashitomeTorokuYMD().setValue(shokanHaraiShikyu.get支払方法変更差止_Sashitome_KetteiYMD());
-//                    row.getTxtSashitomeKaijoYMD().setValue(shokanHaraiShikyu.get支払方法変更差止_Sashitome_KaijoYMD());
-//                    row.getTxtNofuKigenYMD().setValue(shokanHaraiShikyu.get支払方法変更差止_Sashitome_NofuYMD());
-//                    if (shokanHaraiShikyu.get支払方法変更差止_Sashitome_TsuchiHakkoYMD() != null) {
-//                        if (shokanHaraiShikyu.get支払方法変更差止_Sashitome_TsuchiHakkoYMD().isEmpty()) {
-//                            row.setSashitomeTsuchi(RString.EMPTY);
-//                        } else {
-//                            row.setSashitomeTsuchi(new RString("発行済"));
-//                        }
-//                    }
-//                    rowList.add(row);
-//                }
-//                break;
-//            case "保険料控除登録":
-//                for (ShokanHaraiShikyu shokanHaraiShikyu : shokanHaraiShikyuList) {
-//                    if (shokanHaraiShikyu.get支払方法変更差止_SashitomeKojoJotaiKubun() == ShiharaiHenkoSashitomeKojoJotaiKubun.登録.getコード()) {
-//                        row.setSashitome2(shokanHaraiShikyu.get支払方法変更差止_SashitomeKojoJotaiKubun());
-//                        row.setKojo(shokanHaraiShikyu.get支払方法変更差止_SashitomeKojoJotaiKubun());
-//                        row.setSeiriNo(shokanHaraiShikyu.get支払方法変更差止_Sashitome_ShokanSeiriNo());
-//                        row.getTxtTeikyoYM().setValue(new FlexibleDate(shokanHaraiShikyu.get支払方法変更差止_Sashitome_ServiceTeikyoYM().toString()));
-//                        row.setKojoNo(shokanHaraiShikyu.get支払方法変更差止_SashitomeKojoNo());
-//                        row.getTxtKojoTorokuYMD().setValue(shokanHaraiShikyu.get支払方法変更差止_Kojo_KetteiYMD());
-//                        row.setKaijoTsuchi(new RString(支払方法変更管理業務概念.get被保険者証提出期限().toString()));
-//                        row.getTxtShoTeishutsuKigenYMD().setValue(shokanHaraiShikyu.get支払方法変更差止_Kojo_TsuchiHakkoYMD());
-//                        if (shokanHaraiShikyu.get支払方法変更差止_SashitomeKojoNo() != null) {
-//                            row.getKaijo().setDisabled(false);
-//                        } else {
-//                            row.getKaijo().setDisabled(true);
-//                        }
-//                    }
-//                    rowList.add(row);
-//                }
-//                break;
-//            default:
-//                break;
-//
-//        }
-//        return rowList;
-//    }
     private List<dgSashitomeKojoIchiran_Row> creatDateSource(RString 押下ボタン, ShiharaiHohoHenko 支払方法変更管理業務概念) {
         List<dgSashitomeKojoIchiran_Row> rowList = new ArrayList();
         dgSashitomeKojoIchiran_Row row = new dgSashitomeKojoIchiran_Row();
