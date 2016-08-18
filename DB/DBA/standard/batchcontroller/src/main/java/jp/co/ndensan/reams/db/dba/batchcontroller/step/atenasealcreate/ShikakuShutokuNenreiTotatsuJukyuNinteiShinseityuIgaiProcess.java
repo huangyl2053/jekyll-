@@ -5,13 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dba.batchcontroller.step.atenasealcreate;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.atenasealcreate.AtenaSealCreateResult;
 import jp.co.ndensan.reams.db.dba.definition.processprm.atenasealcreate.AtenaSealCreateProcessParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.DbTAtenaSealCreateTempTableEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.JukyuNinteiShinseityuIgaiEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
-import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -28,19 +25,14 @@ public class ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiProcess extends
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.atenasealcreate.IJukyuNinteiShinseityuIgaiMapper.getList");
-    List<KoikiZenShichosonJoho> koikiZenShichosonJoho;
     private static final RString TABLE_宛名識別対象一時テーブル4 = new RString("DbWT2009AtenaShikibetuTaisyou4");
     private static final RString TABLE_宛名識別対象一時テーブル3 = new RString("DbWT2009AtenaShikibetuTaisyou3");
+    private static final RString 抽出対象者_資格取得者_年齢到達予定者 = new RString("3");
     private AtenaSealCreateProcessParameter processParamter;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 宛名識別対象一時テーブル3;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 宛名識別対象一時テーブル4;
-
-    @Override
-    protected void initialize() {
-        koikiZenShichosonJoho = KoikiShichosonJohoFinder.createInstance().koseiShichosonJoho().records();
-    }
 
     @Override
     protected IBatchReader createReader() {
@@ -49,7 +41,7 @@ public class ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiProcess extends
 
     @Override
     protected void createWriter() {
-        if (new RString("3").equals(processParamter.getChuushutsutaishousha())) {
+        if (抽出対象者_資格取得者_年齢到達予定者.equals(processParamter.getChuushutsutaishousha())) {
             宛名識別対象一時テーブル3 = new BatchEntityCreatedTempTableWriter(TABLE_宛名識別対象一時テーブル3,
                     DbTAtenaSealCreateTempTableEntity.class);
         }
