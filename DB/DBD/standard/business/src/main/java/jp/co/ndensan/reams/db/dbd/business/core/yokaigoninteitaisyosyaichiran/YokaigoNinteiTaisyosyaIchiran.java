@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbd.business.core.yokaigoninteitaisyosyaichiran;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteitaisyosyaichiran.YokaigoNinteiTaisyosyaIchiranEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 要介護認定処理対象者一覧画面のbusinessです。
@@ -276,7 +277,9 @@ public class YokaigoNinteiTaisyosyaIchiran implements Serializable {
      */
     public RString get取込日時() {
         if (要介護認定インターフェース情報Entity.getTorikomiTimestamp() != null) {
-            return 要介護認定インターフェース情報Entity.getTorikomiTimestamp().toDateString();
+            return 要介護認定インターフェース情報Entity.getTorikomiTimestamp().getDate().wareki().toDateString()
+                    .concat(" ")
+                    .concat(取込日時2.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分));
         } else {
             return RString.EMPTY;
         }
@@ -289,8 +292,11 @@ public class YokaigoNinteiTaisyosyaIchiran implements Serializable {
      * @return 取込日時2
      */
     public RString get取込日時2() {
+
         if (取込日時2 != null) {
-            return 取込日時2.toDateString();
+            return 取込日時2.getDate().wareki().toDateString()
+                    .concat(" ")
+                    .concat(取込日時2.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分));
         } else {
             return RString.EMPTY;
         }

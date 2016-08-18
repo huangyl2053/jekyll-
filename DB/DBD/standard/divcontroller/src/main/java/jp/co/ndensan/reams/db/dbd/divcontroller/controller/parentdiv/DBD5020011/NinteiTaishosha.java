@@ -7,19 +7,25 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5020011
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.YokaigoNinteiInterface;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5020011.DBD5020011StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5020011.DBD5020011TransitionEventName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5020011.NinteiTaishoshaDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5020011.dgNinteiTaishosha_Row;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5020011.YokaigoNinteiTaishoshaListHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.YokaigoNinteiInterface;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -48,12 +54,11 @@ public class NinteiTaishosha {
 
         div.getTxtGaitosha().setValue(new RString(ninteiTaishoshalist.size()));
         div.getDgNinteiTaishosha().setDataSource(ninteiTaishoshalist);
-        //TODO アクセスログを出力する。
-//        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY,
-//                new ExpandedInformation(new Code("0003"),
-//                        new RString("被保番号"),
-//                        div.getDgNinteiTaishosha().getActiveRow().get被保険者番号()));
-//        AccessLogger.log(AccessLogType.照会, personalData);
+        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY,
+                new ExpandedInformation(new Code("0003"),
+                        new RString("被保険者番号"),
+                        new RString("被保番号")));
+        AccessLogger.log(AccessLogType.照会, personalData);
         return ResponseData.of(div).setState(DBD5020011StateName.初期表示);
     }
 
