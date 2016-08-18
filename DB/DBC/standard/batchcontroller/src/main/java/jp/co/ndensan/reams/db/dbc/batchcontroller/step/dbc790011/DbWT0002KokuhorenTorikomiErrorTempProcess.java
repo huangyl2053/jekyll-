@@ -57,8 +57,4 @@ public class DbWT0002KokuhorenTorikomiErrorTempProcess extends BatchProcessBase<
             処理結果リスト一時tableWriter.insert(処理結果);
         }
     }
-
-    @Override
-    protected void afterExecute() {
-    }
 }
