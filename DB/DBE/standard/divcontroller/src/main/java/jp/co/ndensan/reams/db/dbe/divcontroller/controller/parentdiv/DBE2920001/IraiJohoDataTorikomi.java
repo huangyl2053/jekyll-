@@ -219,7 +219,8 @@ public class IraiJohoDataTorikomi {
             for (dgTorikomiFileIchiran_Row row : rowlist) {
                 if (row.getCheckBox()) {
                     IkenshokinyuyoshiBusiness business = getBusiness(csvEntityList, row, div);
-                    IraiJohoDataTorikomiManager.createInstance().各テーブルへの登録(row.getShinseishoKanriNo(), row.getKoroshoIfShikibetsuCode(),
+                    IraiJohoDataTorikomiManager.createInstance().各テーブルへの登録(row.getShinseishoKanriNo(),
+                            row.getIkenshoIraiRirekiNo().getValue().intValue(), row.getKoroshoIfShikibetsuCode(),
                             row.getShinseishoKanriNo(), row.getKoroshoIfShikibetsuCode(), business);
                 }
             }

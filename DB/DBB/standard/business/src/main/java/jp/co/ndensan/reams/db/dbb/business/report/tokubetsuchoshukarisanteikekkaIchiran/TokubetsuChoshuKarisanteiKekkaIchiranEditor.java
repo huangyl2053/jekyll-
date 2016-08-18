@@ -153,16 +153,34 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
         set特別徴収対象年金(source);
         if (特徴仮算定計算後賦課情報Entity.get特別徴収停止事由コード() == null || 特徴仮算定計算後賦課情報Entity.get特別徴収停止事由コード().isEmpty()) {
             source.listLower_6 = FOUR月;
-            source.listLower_7 = new RString(特徴仮算定計算後賦課情報Entity.get特徴期期別金額01().toString());
+            set特徴期期別金額01(source);
             source.listLower_8 = SIX月;
-            source.listLower_9 = new RString(特徴仮算定計算後賦課情報Entity.get特徴期期別金額02().toString());
+            set特徴期期別金額02(source);
             source.listLower_10 = EIGHT月;
-            source.listLower_11 = new RString(特徴仮算定計算後賦課情報Entity.get特徴期期別金額03().toString());
+            set特徴期期別金額03(source);
         }
 
         set特別徴収停止事由(source);
         return source;
 
+    }
+
+    private void set特徴期期別金額03(TokubetsuChoshuKarisanteiKekkaIchiranSource source) {
+        if (特徴仮算定計算後賦課情報Entity.get特徴期期別金額03() != null) {
+            source.listLower_11 = new RString(特徴仮算定計算後賦課情報Entity.get特徴期期別金額03().toString());
+        }
+    }
+
+    private void set特徴期期別金額02(TokubetsuChoshuKarisanteiKekkaIchiranSource source) {
+        if (特徴仮算定計算後賦課情報Entity.get特徴期期別金額02() != null) {
+            source.listLower_9 = new RString(特徴仮算定計算後賦課情報Entity.get特徴期期別金額02().toString());
+        }
+    }
+
+    private void set特徴期期別金額01(TokubetsuChoshuKarisanteiKekkaIchiranSource source) {
+        if (特徴仮算定計算後賦課情報Entity.get特徴期期別金額01() != null) {
+            source.listLower_7 = new RString(特徴仮算定計算後賦課情報Entity.get特徴期期別金額01().toString());
+        }
     }
 
     private void set行政区(TokubetsuChoshuKarisanteiKekkaIchiranSource source) {

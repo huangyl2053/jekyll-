@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 再審査申立送付情報RelateEntityクラスです。
  *
- * @reamsid_L DBC-3040-010 zhangzhiming
+ * @reamsid_L DBC-3050-010 zhangzhiming
  */
 @lombok.Getter
 @lombok.Setter

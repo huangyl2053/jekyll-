@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 再審査決定情報RelateEntityクラスです。
  *
- * @reamsid_L DBC-3040-010 zhangzhiming
+ * @reamsid_L DBC-3040-030 zhangzhiming
  */
 @lombok.Getter
 @lombok.Setter
