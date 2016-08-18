@@ -10,18 +10,18 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun
 import jp.co.ndensan.reams.db.dbc.definition.core.shinseisha.ShinseishaKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyufuoshirasetsuchisho.KogakuKaigoServicehiOshiraseHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshirasetsuchisho.HihokenshaDaichoShinseiRelateEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshirasetsuchisho.ShinseiJohoShokanTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshirasetsuchisho.ShinseiJohoTempEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
@@ -44,14 +44,14 @@ public class ShokanJyohoForShinseiJyohoProcess extends BatchProcessBase<Hihokens
 
     private KogakuKaigoServicehiOshiraseHakkoProcessParameter parameter;
     private RString 審査方法区分;
-    private RString 国保連共同処理受託区分_高額;
-    private RString 国保連共同処理受託区分_事業高額;
+    private RString 高額;
+    private RString 事業高額;
 
     @Override
     protected void initialize() {
-        審査方法区分 = BusinessConfig.get(ConfigNameDBC.償還支給申請書_審査方法初期表示);
-        国保連共同処理受託区分_高額 = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額);
-        国保連共同処理受託区分_事業高額 = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_事業高額);
+        審査方法区分 = BusinessConfig.get(ConfigNameDBC.償還支給申請書_審査方法初期表示, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        高額 = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        事業高額 = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_事業高額, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
     }
 
     @BatchWriter
@@ -85,14 +85,14 @@ public class ShokanJyohoForShinseiJyohoProcess extends BatchProcessBase<Hihokens
         申請情報.setShiharaiHohoKubunCodeJoho(ShiharaiHohoKubun.口座払.getコード());
         申請情報.setKozaIDJoho(entity.get申請情報償還().getKozaIDShokan());
         申請情報.setJidoShokanTaishoFlagJoho(true);
-        if (parameter.isJutakuAri()) {
+        if (!parameter.isJutakuAri()) {
             申請情報.setHanteiKekkaSofuYMJoho(FlexibleDate.getNowDate().getYearMonth());
             申請情報.setKetteishaUketoriYMJoho(FlexibleDate.getNowDate().getYearMonth());
-        } else if (MENU_ID_DBCMN43001.equals(parameter.getMenuId()) && 国保連共同処理受託区分_高額_ONE.equals(国保連共同処理受託区分_高額)
+        } else if (MENU_ID_DBCMN43001.equals(parameter.getMenuId()) && 国保連共同処理受託区分_高額_ONE.equals(高額)
                 && (申請情報.getHanteiKekkaSofuYMJoho() == null || 申請情報.getHanteiKekkaSofuYMJoho().isEmpty())) {
             申請情報.setHanteiKekkaSofuYMJoho(FlexibleDate.getNowDate().getYearMonth());
             申請情報.setKetteishaUketoriYMJoho(FlexibleDate.getNowDate().getYearMonth());
-        } else if (MENU_ID_DBCMNL3001.equals(parameter.getMenuId()) && 国保連共同処理受託区分_事業高額_ONE.equals(国保連共同処理受託区分_事業高額)
+        } else if (MENU_ID_DBCMNL3001.equals(parameter.getMenuId()) && 国保連共同処理受託区分_事業高額_ONE.equals(事業高額)
                 && (申請情報.getHanteiKekkaSofuYMJoho() == null || 申請情報.getHanteiKekkaSofuYMJoho().isEmpty())) {
             申請情報.setHanteiKekkaSofuYMJoho(FlexibleDate.getNowDate().getYearMonth());
             申請情報.setKetteishaUketoriYMJoho(FlexibleDate.getNowDate().getYearMonth());
