@@ -44,7 +44,7 @@
         <result property="履歴番号" column="dbwt3063_hdrRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="郵便番号" column="dbwt0001_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
         <result property="町域コード" column="dbwt0001_choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChoikiCodeTypeHandler"/>
-        <result property="行政区コード" column="dbwt0001_gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler"/>
+        <result property="行政区コード" column="dbwt0001_gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="氏名５０音カナ" column="dbwt0001_shimei50onKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="保険者番号" column="dbwt3063_hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>        
         <result property="保険者名" column="dbwt3063_hokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>     
