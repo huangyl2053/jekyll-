@@ -94,7 +94,7 @@ public class ShisetsuJohoCommonChildDiv {
         JigyoshaMode mode = DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class);
 
         if (mode.getJigyoshaNo() != null) {
-            requestDiv.getTxtNyuryokuShisetsuKodo().setValue(mode.getJigyoshaNo().value());//ぬるぽ
+            requestDiv.getTxtNyuryokuShisetsuKodo().setValue(mode.getJigyoshaNo().value());
         }
         if (mode.getJigyoshaName() != null) {
             requestDiv.getTxtNyuryokuShisetsuMeisho().setValue(mode.getJigyoshaName().value());
