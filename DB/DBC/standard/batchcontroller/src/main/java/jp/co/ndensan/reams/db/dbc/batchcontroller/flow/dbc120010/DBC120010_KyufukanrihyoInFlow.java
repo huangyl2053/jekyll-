@@ -26,13 +26,13 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuGetFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kyufukanrihyoin.KyufukanrihyoDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kyufukanrihyoin.KyufukanrihyoDoMasterTorokuProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -56,7 +56,6 @@ public class DBC120010_KyufukanrihyoInFlow extends BatchFlowBase<KokuhorenKyouts
     private static final String 取込済ファイル削除 = "deleteReveicedFile";
 
     private static final RString ファイル格納フォルダ名 = new RString("DBC120010");
-    private static final RString 帳票ID = new RString("DBC200073_KyufuKanrihyoTorikomiKekkaIchiran");
 
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
     private KyufukanrihyoInCsvReadReturnEntity flowEntity;
@@ -209,7 +208,7 @@ public class DBC120010_KyufukanrihyoInFlow extends BatchFlowBase<KokuhorenKyouts
         parameter.set処理年月(getParameter().getShoriYM());
         parameter.set出力順ID(getParameter().getShutsuryokujunId());
         parameter.set導入形態コード(flowEntity.get市町村セキュリティ情報().get導入形態コード());
-        parameter.set帳票ID(new ReportId(帳票ID));
+        parameter.set帳票ID(ReportIdDBC.DBC200073.getReportId());
         return loopBatch(KyufukanrihyoDoIchiranhyoSakuseiProcess.class).arguments(parameter).define();
     }
 
