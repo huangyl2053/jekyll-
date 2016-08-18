@@ -279,7 +279,7 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
                     .fillType(FillType.BLANK).toDateString();
             RString 作成時 = システム日時.getTime()
                     .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE);
-            output.set作成日時(作成日.concat(作成時).concat(SAKUSEI));
+            output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時).concat(RString.HALF_SPACE).concat(SAKUSEI));
         } else {
             output.set保険者番号(RString.EMPTY);
             output.set保険者名(RString.EMPTY);
