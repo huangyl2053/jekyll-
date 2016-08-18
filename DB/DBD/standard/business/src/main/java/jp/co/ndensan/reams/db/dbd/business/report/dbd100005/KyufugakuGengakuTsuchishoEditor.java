@@ -106,8 +106,6 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
         source.gyoseiku1 = sofubutsuAtesakiSource.gyoseiku;
         source.jushoText = sofubutsuAtesakiSource.jushoText;
         source.katagakiText = sofubutsuAtesakiSource.katagakiText;
-
-        // TODO RSE項目名が設計書と違い
         source.shimei3 = sofubutsuAtesakiSource.shimei1;
         source.shimei4 = sofubutsuAtesakiSource.shimei2;
         source.katagaki3 = sofubutsuAtesakiSource.katagaki1;
@@ -115,7 +113,6 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
         source.jusho4 = sofubutsuAtesakiSource.jusho1;
         source.jusho5 = sofubutsuAtesakiSource.jusho2;
         source.jusho6 = sofubutsuAtesakiSource.jusho3;
-
         source.dainoKubunMei = sofubutsuAtesakiSource.dainoKubunMei;
         source.samabunShimeiText = sofubutsuAtesakiSource.samabunShimeiText;
         source.kakkoLeft1 = sofubutsuAtesakiSource.kakkoLeft1;
@@ -205,8 +202,6 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
         RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
         if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty() && new RString("2").equals(定型文文字サイズ)) {
             source.renrakusakiHokaLarge = 通知書定型文リスト.get(NOCOUNT_2);
-        } else {
-            source.renrakusakiHokaLarge = RString.EMPTY;
         }
     }
 
@@ -216,9 +211,6 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
             if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty() && new RString("3").equals(定型文文字サイズ)) {
                 source.renrakusakiHokaJodanSmall = 通知書定型文リスト.get(NOCOUNT_2);
                 source.renrakusakiHokaGedanLarge = 通知書定型文リスト.get(NOCOUNT_3);
-            } else {
-                source.renrakusakiHokaJodanSmall = RString.EMPTY;
-                source.renrakusakiHokaGedanLarge = RString.EMPTY;
             }
         }
     }
@@ -229,9 +221,6 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
             if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty() && new RString("4").equals(定型文文字サイズ)) {
                 source.renrakusakiHokaJodanLarge = 通知書定型文リスト.get(NOCOUNT_2);
                 source.renrakusakiHokaGedanSmall = 通知書定型文リスト.get(NOCOUNT_3);
-            } else {
-                source.renrakusakiHokaJodanLarge = RString.EMPTY;
-                source.renrakusakiHokaGedanSmall = RString.EMPTY;
             }
         }
     }
