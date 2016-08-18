@@ -245,6 +245,7 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
         RString select対象年度 = div.getDdlTaishoNendo().getSelectedKey();
         RString select連絡票整理番号 = div.getDdlRearakuhyoSeiriNO().getSelectedKey();
         RString select履歴番号 = div.getDdlRirekiNO().getSelectedKey();
+        div.getTxtZenkaiHakkoYMD().setDisabled(false);
         RDate 前回発行日 = null;
         for (JigyoKogakuGassanShikyuFushikyuKettei shikyuKettei : 事業高額合算支給不支給決定List) {
             if (select対象年度.equals(shikyuKettei.get対象年度().toDateString())
