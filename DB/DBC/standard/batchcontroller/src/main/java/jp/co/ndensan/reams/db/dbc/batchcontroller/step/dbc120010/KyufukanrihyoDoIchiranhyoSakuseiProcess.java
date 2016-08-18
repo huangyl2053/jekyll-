@@ -207,7 +207,7 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
         if (null != beforeEntity) {
             if (null == csvEntity) {
                 csvEntity = new KyufukanrihyoIchiranCSVEntity();
-                editヘッダー項目(beforeEntity);
+                editヘッダー項目();
             }
             if (is改頁(beforeEntity, entity)) {
                 edit明細項目(beforeEntity);
@@ -230,7 +230,7 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
         if (!entityList.isEmpty()) {
             if (1 == entityList.size()) {
                 csvEntity = new KyufukanrihyoIchiranCSVEntity();
-                editヘッダー項目(currentRecord);
+                editヘッダー項目();
             }
             edit明細項目(currentRecord);
             edit集計項目(currentRecord);
@@ -328,7 +328,7 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
         return DecimalFormatter.toコンマ区切りRString(number, INT_0);
     }
 
-    private void editヘッダー項目(HihokenshaKyufukanrihyoEntity entity) {
+    private void editヘッダー項目() {
         csvEntity.set取込年月(parameter.get処理年月().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         RString 作成日 = parameter.getシステム日付().getDate().wareki().eraType(EraType.KANJI)
