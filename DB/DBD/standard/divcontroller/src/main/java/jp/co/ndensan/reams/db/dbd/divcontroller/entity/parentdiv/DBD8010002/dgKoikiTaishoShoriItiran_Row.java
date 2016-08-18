@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Aug 15 15:30:40 CST 2016 
+ * Thu Aug 18 16:00:06 CST 2016 
  */
 
 
@@ -23,21 +23,26 @@ public class dgKoikiTaishoShoriItiran_Row extends DataRow {
 
     private Boolean txtTorikomi;
     private RString txtShichoson;
+    private RString hdnShichosonCode;
 
     public dgKoikiTaishoShoriItiran_Row() {
         super();
         this.txtTorikomi = false;
         this.txtShichoson = RString.EMPTY;
+        this.hdnShichosonCode = RString.EMPTY;
         this.setOriginalData("txtTorikomi", txtTorikomi);
         this.setOriginalData("txtShichoson", txtShichoson);
+        this.setOriginalData("hdnShichosonCode", hdnShichosonCode);
     }
 
-    public dgKoikiTaishoShoriItiran_Row(Boolean txtTorikomi, RString txtShichoson) {
+    public dgKoikiTaishoShoriItiran_Row(Boolean txtTorikomi, RString txtShichoson, RString hdnShichosonCode) {
         super();
         this.setOriginalData("txtTorikomi", txtTorikomi);
         this.setOriginalData("txtShichoson", txtShichoson);
+        this.setOriginalData("hdnShichosonCode", hdnShichosonCode);
         this.txtTorikomi = txtTorikomi;
         this.txtShichoson = txtShichoson;
+        this.hdnShichosonCode = hdnShichosonCode;
     }
 
     public Boolean getTxtTorikomi() {
@@ -48,6 +53,10 @@ public class dgKoikiTaishoShoriItiran_Row extends DataRow {
         return txtShichoson;
     }
 
+    public RString getHdnShichosonCode() {
+        return hdnShichosonCode;
+    }
+
     public void setTxtTorikomi(Boolean txtTorikomi) {
         this.setOriginalData("txtTorikomi", txtTorikomi);
         this.txtTorikomi = txtTorikomi;
@@ -56,6 +65,11 @@ public class dgKoikiTaishoShoriItiran_Row extends DataRow {
     public void setTxtShichoson(RString txtShichoson) {
         this.setOriginalData("txtShichoson", txtShichoson);
         this.txtShichoson = txtShichoson;
+    }
+
+    public void setHdnShichosonCode(RString hdnShichosonCode) {
+        this.setOriginalData("hdnShichosonCode", hdnShichosonCode);
+        this.hdnShichosonCode = hdnShichosonCode;
     }
 
     // </editor-fold>

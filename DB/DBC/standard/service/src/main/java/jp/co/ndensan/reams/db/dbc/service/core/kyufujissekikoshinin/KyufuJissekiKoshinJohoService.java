@@ -136,6 +136,11 @@ public class KyufuJissekiKoshinJohoService {
         } else {
             resultEntity.set作成レコード種別_05食事(RString.EMPTY);
         }
+        明細設定(resultEntity, entity);
+        return resultEntity;
+    }
+
+    private void 明細設定(KyufuJissekiKoshinJohoIchiranCsvEntity resultEntity, ChohyoShutsuryokuTaishoDateEntity entity) {
         if (entity.get給付実績_レコード件数D5() >= 1) {
             resultEntity.set作成レコード種別_06計画(マルTWO);
         } else {
@@ -180,7 +185,6 @@ public class KyufuJissekiKoshinJohoService {
             KeikokuKubun 警告区分 = KeikokuKubun.toValue(entity.get給付実績_警告区分コード());
             resultEntity.set備考(警告区分.get名称());
         }
-        return resultEntity;
     }
 
     /**
