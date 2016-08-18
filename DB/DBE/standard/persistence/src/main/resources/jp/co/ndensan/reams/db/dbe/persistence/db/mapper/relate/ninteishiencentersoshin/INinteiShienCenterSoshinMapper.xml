@@ -47,7 +47,7 @@
             ON dbT7211."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"
         WHERE dbT5101."logicalDeletedFlag" = False
             <if test="is未出力">
-                <!--AND dbT7211."CenterSoshinChushutsuYMD" IS NULL-->
+                AND dbT7211."centerSoshinChushutsuYMD" IS NULL
             </if>
             <if test="has二次判定日_開始">
                 AND #{二次判定日_開始} <![CDATA[<=]]> dbT5102."nijiHanteiNinteiYukoKaishiYMD"

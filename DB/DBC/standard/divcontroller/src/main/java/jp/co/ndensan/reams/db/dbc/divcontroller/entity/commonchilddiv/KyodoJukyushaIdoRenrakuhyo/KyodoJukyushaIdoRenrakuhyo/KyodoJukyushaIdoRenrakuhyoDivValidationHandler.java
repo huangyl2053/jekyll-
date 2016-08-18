@@ -280,7 +280,7 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
      */
     public ValidationMessageControlPairs 高額送付情報の履歴番号チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        List<RString> 高額送付情報修正チェックボックス = div.getChkShokanSofuAdd().getSelectedKeys();
+        List<RString> 高額送付情報修正チェックボックス = div.getChkKogakuSofuAdd().getSelectedKeys();
         boolean 高額送付情報修正チェック = (!高額送付情報修正チェックボックス.isEmpty()
                 && チェックボックス_KEY.equals(高額送付情報修正チェックボックス.get(NUM_ZERO)));
         List<RString> 高額送付情報削除チェックボックス = div.getChkShokanSofuDelete().getSelectedKeys();
