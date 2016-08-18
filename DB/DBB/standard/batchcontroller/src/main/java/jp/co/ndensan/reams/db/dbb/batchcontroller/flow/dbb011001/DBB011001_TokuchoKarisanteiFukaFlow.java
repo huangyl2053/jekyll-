@@ -53,14 +53,9 @@ public class DBB011001_TokuchoKarisanteiFukaFlow extends BatchFlowBase<TokuchoKa
         executeStep(特徴仮算定対象抽出);
         executeStep(資格不整合データ抽出);
         executeStep(資格等最新化_４月開始);
-        // 呼び出しのbatchに問題がある
-        // executeStep(賦課の情報登録フロー_４月開始);
         executeStep(賦課計算_継続);
-        // 呼び出しのbatchに問題がある
-        // executeStep(賦課の情報登録フロー_継続);
         executeStep(賦課情報の計算登録_6月開始);
-        // 呼び出しのbatchに問題がある
-        // executeStep(賦課の情報登録フロー_6月開始);
+        executeStep(賦課の情報登録フロー_6月開始);
         executeStep(計算後情報作成);
         List<ShuturyokuTyoutuke> 出力帳票一覧List = getParameter().get出力帳票一覧();
         for (ShuturyokuTyoutuke 出力帳票一覧 : 出力帳票一覧List) {
