@@ -5,8 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbx.service.core.kaigojigyosha.kaigojigyoshashiteiservice;
 
+import java.util.ArrayList;
+import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7063KaigoJigyoshaShiteiServiceDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -48,5 +52,26 @@ public class KaigoJigyoshaShiteiServiceManager {
             return false;
         }
         return 1 == dac.save(介護事業者指定サービス.toEntity());
+    }
+
+    /**
+     * 介護事業者指定サービスを返します。
+     *
+     * @param 事業者番号 事業者番号
+     * @return List<KaigoJigyoshaShiteiService>。
+     */
+    @Transaction
+    public List<KaigoJigyoshaShiteiService> get介護事業者指定サービス(JigyoshaNo 事業者番号) {
+        List<KaigoJigyoshaShiteiService> list = new ArrayList<>();
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        List<DbT7063KaigoJigyoshaShiteiServiceEntity> relateList = dac.selectBy事業者番号(事業者番号);
+        if (relateList.isEmpty()) {
+            return list;
+        }
+        for (DbT7063KaigoJigyoshaShiteiServiceEntity relateEntity : relateList) {
+            relateEntity.initializeMd5();
+            list.add(new KaigoJigyoshaShiteiService(relateEntity));
+        }
+        return list;
     }
 }
