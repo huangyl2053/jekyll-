@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
+ * 総合事業費過誤決定通知書情報取込（公費負担者分）一覧表用entity。
  *
  * @reamsid_L DBC-2810-030 chenjie
  */
