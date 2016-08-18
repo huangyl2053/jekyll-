@@ -38,7 +38,7 @@ public class SogojigyohiSaishinsaKetteiHokenshaInPageBreak
     public boolean isBreak(ReportLineRecord<SogojigyohiSaishinsaKetteiHokenshaInSource> currentSource,
             ReportLineRecord<SogojigyohiSaishinsaKetteiHokenshaInSource> nextSource) {
         boolean flg = false;
-        if (this.breakKeysList.contains(SogojigyohiSaishinsaKetteiHokenshaInOutPutOrder.証記載保険者番号.getフォームフィールド名())
+        if (this.breakKeysList.contains(SogojigyohiSaishinsaKetteiHokenshaInOutPutOrder.証記載保険者番号.get項目ID())
                 && !currentSource.getSource().shoKisaiHokenshaNo.equals(nextSource.getSource().shoKisaiHokenshaNo)) {
             flg = true;
         }
