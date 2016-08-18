@@ -104,8 +104,8 @@ public class ChoshuYuyoJuminKihon {
      * @return 介護保険料徴収猶予画面
      */
     public ResponseData<ChoshuYuyoJuminKihonDiv> onSelectBySelectButton_dgFukaRirekiAll(ChoshuYuyoJuminKihonDiv div) {
-        // TODO QA932 選択された全賦課履歴情報グリッドの明細の取得メソッドがありません。
         ChoshuYuyoJuminKihonHandler handler = getHandler(div);
+        handler.clear();
         ChoshuYuyoJoho 徴収猶予の情報 = handler.onClick_選択ボタン();
         load(徴収猶予の情報, div);
         handler.set全賦課履歴情報Visible(true);

@@ -65,4 +65,11 @@ public interface IFukaRirekiAllDiv extends ICommonChildDivBaseProperties {
      */
     FukaRireki get賦課履歴();
 
+    /**
+     * 選択されている行の賦課履歴を返します。行が選択されていない場合は全賦課履歴を返します。
+     *
+     * @return 賦課履歴
+     */
+    FukaRireki getClicked賦課履歴();
+
 }
