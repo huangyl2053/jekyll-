@@ -316,8 +316,6 @@ public enum ReportIdDBC {
      */
     DBC200043(new ReportId("DBC200043_KyufuhiTuchiGenmenhoseiIchiran"), new RString("給付費通知減免補正一覧表"));
 
-    KyufuhiTsuchiGenmenHoseiIchiranhyoProcess
-
     private final ReportId reportId;
 
     private final RString reportName;
