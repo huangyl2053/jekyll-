@@ -152,8 +152,16 @@ public class FutanWariaishoIkkatsu {
         source.set生年月日(編集後個人.get生年月日For帳票());
         source.set性別(編集後個人.get性別());
         source.set負担割合１(entity.get負担割合期間().getFutanWariaiKubun1());
-        source.set適用開始年月日１(開始年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoKaishiYMD1())));
-        source.set適用終了年月日１(終了年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoShuryoYMD1())));
+        if (entity.get負担割合期間().getYukoKaishiYMD1() != null) {
+            source.set適用開始年月日１(開始年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoKaishiYMD1())));
+        } else {
+            source.set適用開始年月日１(RString.EMPTY);
+        }
+        if (entity.get負担割合期間().getYukoShuryoYMD1() != null) {
+            source.set適用終了年月日１(終了年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoShuryoYMD1())));
+        } else {
+            source.set適用終了年月日１(RString.EMPTY);
+        }
         source.set負担割合２(entity.get負担割合期間().getFutanWariaiKubun2());
         if (entity.get負担割合期間().getYukoKaishiYMD2() != null) {
             source.set適用開始年月日２(開始年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoKaishiYMD2())));
