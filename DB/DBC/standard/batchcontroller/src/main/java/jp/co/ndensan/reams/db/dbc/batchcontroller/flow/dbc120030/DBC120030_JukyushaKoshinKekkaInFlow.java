@@ -37,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 受給者情報更新結果情報取込のバッチ処理フロー
  *
- * @reamsid DBC-2730-010 chenjie
+ * @reamsid_L DBC-2730-010 chenjie
  */
 public class DBC120030_JukyushaKoshinKekkaInFlow extends BatchFlowBase<DBC120030_JukyushaKoshinKekkaInParameter> {
 

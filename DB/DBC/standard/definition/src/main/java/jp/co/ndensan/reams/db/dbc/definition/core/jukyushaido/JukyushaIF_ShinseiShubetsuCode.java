@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * @author DBC-2730-030 chenjie
+ * @reamsid_L DBC-2730-030 chenjie
  */
 public enum JukyushaIF_ShinseiShubetsuCode {
     /**

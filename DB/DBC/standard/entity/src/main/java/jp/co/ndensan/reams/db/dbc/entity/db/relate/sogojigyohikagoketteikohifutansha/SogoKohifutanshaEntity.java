@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  *
- * @reamsid DBC-2810-030 chenjie
+ * @reamsid_L DBC-2810-030 chenjie
  */
 @lombok.Getter
 @lombok.Setter

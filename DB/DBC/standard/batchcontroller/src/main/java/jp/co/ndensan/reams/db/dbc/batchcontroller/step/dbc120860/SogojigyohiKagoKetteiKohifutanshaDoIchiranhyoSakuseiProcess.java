@@ -86,7 +86,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 /**
  * 総合事業費過誤決定通知書情報取込（公費負担者分）一覧表作成。
  *
- * @reamsid DBC-2810-030 chenjie
+ * @reamsid_L DBC-2810-030 chenjie
  */
 public class SogojigyohiKagoKetteiKohifutanshaDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<SogoKohifutanshaEntity> {
     private KohifutanshaDoIchiranhyoSakuseiProcessParameter parameter;

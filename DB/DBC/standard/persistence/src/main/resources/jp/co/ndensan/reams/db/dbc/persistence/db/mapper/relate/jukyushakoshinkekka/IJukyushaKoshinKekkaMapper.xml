@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- @reamsid_L DBC-0980-360 chenaoqi -->
+<!-- @reamsid_L DBC-2730-030 chenjie -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakoshinkekka.IJukyushaKoshinKekkaMapper">
     <!--受給者情報明細一時テーブルを作成する -->
     <insert id="create受給者情報明細一時TBL">
