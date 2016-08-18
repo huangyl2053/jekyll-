@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 /**
  * 受給者台帳異動チェックリストのEditorです。
  *
- * @reamsid_L DBD-1770-030 donghj
+ * @reamsid_L DBD-1770-040 donghj
  */
 public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
 
