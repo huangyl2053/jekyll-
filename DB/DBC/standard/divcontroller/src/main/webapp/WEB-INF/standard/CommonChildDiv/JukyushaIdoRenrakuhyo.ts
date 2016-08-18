@@ -40,15 +40,15 @@ module DBC
                     this.controls.txtIdoYMD().disabled = false;	//異動日
                     this.controls.radIdoKubun().disabled = false;	//異動区分
                     this.controls.ddlJukyushaIdoJiyu().disabled = false;	//異動事由
-                    this.controls.txtHiHokenshaNo().disabled = false;	//被保険者番号
+                    this.controls.txtHiHokenshaNo().disabled = true;	//被保険者番号
                     this.controls.txtHiHokenshaNameKana().disabled = false;	//カナ氏名
                     this.controls.txtUmareYMD().disabled = false;	//生年月日
                     this.controls.radSeibetsu().disabled = false;	//性別
                     this.controls.txtShikakuShutokuYMD().disabled = false;	//資格取得日
                     this.controls.txtShikakuSoshitsuYMD().disabled = false;	//資格喪失日
                     this.controls.txtShoKisaiHokenshaNo().disabled = false;	//証記載保険者番号
-                    this.controls.txtKoikiHokenshaNo().disabled = false;	//広域保険者番号
-                    this.controls.txtSofuYM().disabled = false;	//送付年月
+                    this.controls.txtKoikiHokenshaNo().disabled = true;	//広域保険者番号
+                    this.controls.txtSofuYM().disabled = true;	//送付年月
                     
                     this.controls.JukyushaIdoRenrakuhyoTeisei().visible = false;
                     //this.controls.txtTeiseiYMD().disabled = false;	//訂正日
@@ -74,7 +74,7 @@ module DBC
                     this.controls.btnKyotakuServiceRireki().disabled = false;
                     this.controls.radKyotakuServiceSakuseiKubun().disabled = false;
                     this.controls.txtKyotakuKaigoShienJigyoshoNo().disabled = false;
-                    this.controls.txtKyotakuKaigoShienJigyoshoName().disabled = false;
+                    this.controls.txtKyotakuKaigoShienJigyoshoName().disabled = true;
                     this.controls.txtKyotakuServiceTekiyoYMD().disabled = false;
                     this.controls.radShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().disabled = false;
                     //住所地特例エリア
@@ -98,15 +98,15 @@ module DBC
                     //this.controls.KyufuSeigenPanel().disabled = true;
                     this.controls.btnKyufuSeigenRireki().disabled = false;
                     this.controls.radKohiFutanJogenGengakuAriFlag().disabled = false;
-                    this.controls.txtShokanbaraikaYMD().disabled = false;
-                    this.controls.txtKyufuritsuHikisage().disabled = false;
+                    this.controls.txtShokanbaraikaYMD().disabled = true;
+                    this.controls.txtKyufuritsuHikisage().disabled = true;
                     //二割負担
                     //this.controls.RiyosyaFutanWariaiPanel().disabled = true;
                     this.controls.txtRiyosyaFutanWariaiYukoYMD().disabled = false;
                     //二次予防事業エリア
                     //this.controls.NijiyoboJigyoPanel().disabled = true;
                     this.controls.radNijiyoboJigyoKubun().disabled = false;
-                    this.controls.txtNijiyoboJigyoYukoDateRange().disabled = false;
+                    this.controls.txtNijiyoboJigyoYukoDateRange().disabled = true;
                     //老人保健エリア
                     //this.controls.RojinHokenPanel().disabled = true;
                     this.controls.txtRojinHokenShichosonNo().disabled = false;
@@ -116,18 +116,18 @@ module DBC
                 
                 //訂正モード
                 public teisei(): void {
-                    this.controls.txtIdoYMD().disabled = false;	//異動日
+                    this.controls.txtIdoYMD().disabled = true;	//異動日
                     this.controls.radIdoKubun().disabled = false;	//異動区分
                     this.controls.ddlJukyushaIdoJiyu().disabled = false;	//異動事由
-                    this.controls.txtHiHokenshaNo().disabled = false;	//被保険者番号
+                    this.controls.txtHiHokenshaNo().disabled = true;	//被保険者番号
                     this.controls.txtHiHokenshaNameKana().disabled = false;	//カナ氏名
                     this.controls.txtUmareYMD().disabled = false;	//生年月日
                     this.controls.radSeibetsu().disabled = false;	//性別
                     this.controls.txtShikakuShutokuYMD().disabled = false;	//資格取得日
                     this.controls.txtShikakuSoshitsuYMD().disabled = false;	//資格喪失日
                     this.controls.txtShoKisaiHokenshaNo().disabled = false;	//証記載保険者番号
-                    this.controls.txtKoikiHokenshaNo().disabled = false;	//広域保険者番号
-                    this.controls.txtSofuYM().disabled = false;	//送付年月
+                    this.controls.txtKoikiHokenshaNo().disabled = true;	//広域保険者番号
+                    this.controls.txtSofuYM().disabled = true;	//送付年月
                     
                     this.controls.JukyushaIdoRenrakuhyoTeisei().disabled = false;
                     this.controls.txtTeiseiYMD().disabled = false;	//訂正日
@@ -153,7 +153,7 @@ module DBC
                     this.controls.btnKyotakuServiceRireki().disabled = false;
                     this.controls.radKyotakuServiceSakuseiKubun().disabled = false;
                     this.controls.txtKyotakuKaigoShienJigyoshoNo().disabled = false;
-                    this.controls.txtKyotakuKaigoShienJigyoshoName().disabled = false;
+                    this.controls.txtKyotakuKaigoShienJigyoshoName().disabled = true;
                     this.controls.txtKyotakuServiceTekiyoYMD().disabled = false;
                     this.controls.radShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().disabled = false;
                     //住所地特例エリア
@@ -177,8 +177,8 @@ module DBC
                     //this.controls.KyufuSeigenPanel().disabled = true;
                     this.controls.btnKyufuSeigenRireki().disabled = false;
                     this.controls.radKohiFutanJogenGengakuAriFlag().disabled = false;
-                    this.controls.txtShokanbaraikaYMD().disabled = false;
-                    this.controls.txtKyufuritsuHikisage().disabled = false;
+                    this.controls.txtShokanbaraikaYMD().disabled = true;
+                    this.controls.txtKyufuritsuHikisage().disabled = true;
                     //二割負担
                     //this.controls.RiyosyaFutanWariaiPanel().disabled = true;
                     this.controls.txtRiyosyaFutanWariaiYukoYMD().disabled = false;

@@ -54,6 +54,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoGemmenTorikeshiShurui;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -514,7 +515,7 @@ public class SokujiFukaKouseiMainHandler {
                 || is異なる(更正前賦課.get口座区分(), 更正後賦課.get口座区分())
                 || is異なる(更正前賦課.get境界層区分(), 更正後賦課.get境界層区分())
                 || is異なる(更正前賦課.get職権区分(), 更正後賦課.get職権区分())
-                || is異なる(更正前賦課.get賦課市町村コード().code市町村RString(), 更正後賦課.get賦課市町村コード().code市町村RString())
+                || is異なる(更正前賦課.get賦課市町村コード(), 更正後賦課.get賦課市町村コード())
                 || is異なる(更正前賦課.get特徴歳出還付額(), 更正後賦課.get特徴歳出還付額())
                 || is異なる(更正前賦課.get普徴歳出還付額(), 更正後賦課.get普徴歳出還付額());
     }
@@ -524,6 +525,16 @@ public class SokujiFukaKouseiMainHandler {
             return Boolean.FALSE;
         }
         if (!RString.isNullOrEmpty(rstr1) && rstr1.equals(rstr2)) {
+            return Boolean.FALSE;
+        }
+        return Boolean.TRUE;
+    }
+
+    private boolean is異なる(LasdecCode lasdecCode1, LasdecCode lasdecCode2) {
+        if (lasdecCode1 == null && lasdecCode2 == null) {
+            return Boolean.FALSE;
+        }
+        if (lasdecCode1 != null && lasdecCode1.getColumnValue().equals(lasdecCode2.getColumnValue())) {
             return Boolean.FALSE;
         }
         return Boolean.TRUE;
@@ -568,7 +579,13 @@ public class SokujiFukaKouseiMainHandler {
     }
 
     private boolean is異なる(Decimal dec1, Decimal dec2) {
-        return !dec1.equals(dec2);
+        if (dec1 == null && dec2 == null) {
+            return Boolean.FALSE;
+        }
+        if (dec1 != null && dec1.equals(dec2)) {
+            return Boolean.FALSE;
+        }
+        return Boolean.TRUE;
     }
 
     private RString getRStringByTextBoxNum(TextBoxNum textBoxNum) {

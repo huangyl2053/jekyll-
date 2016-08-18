@@ -70,5 +70,4 @@ public class SoufuJouhouFinder {
         }
         return SearchResult.of(businessList, 0, false);
     }
-
 }

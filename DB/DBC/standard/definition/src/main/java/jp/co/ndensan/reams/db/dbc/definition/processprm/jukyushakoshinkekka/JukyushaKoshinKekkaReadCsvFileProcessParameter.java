@@ -10,9 +10,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * KohifutanshaReadCsvFileProcessパラメータです。
+ * JukyushaKoshinKekkaReadCsvFileProcessパラメータです。
  *
- * @reamsid_L DBC-0980-420 zhangrui
+ * @reamsid_L DBC-2730-010 chenjie
  */
 @lombok.Getter
 @lombok.Setter

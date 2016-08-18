@@ -39,17 +39,17 @@ public interface IIraiJohoDataTorikomiMapper {
      * 要介護認定主治医意見書意見項目の取得する。
      *
      * @param parameter IraiJohoDataTorikomiParameter
-     * @return List<ShujiiIkenshoIraiJohoIkenItemRelateEntity>
+     * @return ShujiiIkenshoIraiJohoIkenItemRelateEntity
      */
-    List<ShujiiIkenshoIraiJohoIkenItemRelateEntity> 要介護認定主治医意見書意見項目(IraiJohoDataTorikomiParameter parameter);
+    ShujiiIkenshoIraiJohoIkenItemRelateEntity 要介護認定主治医意見書意見項目(IraiJohoDataTorikomiParameter parameter);
 
     /**
      * 要介護認定主治医意見書記入項目の取得する。
      *
      * @param parameter IraiJohoDataTorikomiParameter
-     * @return List<ShujiiIkenshoIraiJohoKinyuItemRelateEntity>
+     * @return ShujiiIkenshoIraiJohoKinyuItemRelateEntity
      */
-    List<ShujiiIkenshoIraiJohoKinyuItemRelateEntity> 要介護認定主治医意見書記入項目(IraiJohoDataTorikomiParameter parameter);
+    ShujiiIkenshoIraiJohoKinyuItemRelateEntity 要介護認定主治医意見書記入項目(IraiJohoDataTorikomiParameter parameter);
 
     /**
      * 主治医意見書依頼区分の取得する。

@@ -60,20 +60,19 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelHandler {
      * @throws ApplicationException
      */
     public void initialize(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter parameter) {
-        if (被保険者番号 != null && !get前排他(被保険者番号.getColumnValue())) {
-            コントロールの非活性化();
-            throw new PessimisticLockingException();
-        } else {
-            前排他キーのセット(被保険者番号.getColumnValue());
-        }
-        div.getCclKaigoAtenaInfo().initialize(識別コード);
         if (被保険者番号 == null || 被保険者番号.isEmpty()) {
             throw new ApplicationException(DbcInformationMessages.被保険者でないデータ.getMessage());
         } else {
+            if (!get前排他(被保険者番号.getColumnValue())) {
+                コントロールの非活性化();
+                throw new PessimisticLockingException();
+            }
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(発行する, false);
+            div.getCclKaigoAtenaInfo().initialize(識別コード);
             被保険者番号存在チェック(被保険者番号);
             div.getCcdKaigoShikakuKihon().initialize(被保険者番号);
+            ドロップダウンリスト項目と前回作成日TXTセット(parameter);
         }
-        ドロップダウンリスト項目と前回作成日TXTセット(parameter);
     }
 
     /**
@@ -278,7 +277,6 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelHandler {
     public void 前排他キーのセット(RString 被保険者番号) {
         LockingKey 排他キー = new LockingKey(DBCHIHOKENSHANO.concat(被保険者番号));
         RealInitialLocker.lock(排他キー);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(発行する, false);
     }
 
     /**

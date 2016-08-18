@@ -19,7 +19,7 @@ public interface ISeikyugakuTsuchishoCsvFileMapper {
      * select請求額通知書一時TBL件数。
      *
      * @param entity DbWT1511SeikyugakuTsuchishoTempEntity
-     * @return
+     * @return 請求額通知書一時TBL件数
      */
     int select請求額通知書一時TBL件数(DbWT1511SeikyugakuTsuchishoTempEntity entity);
 }

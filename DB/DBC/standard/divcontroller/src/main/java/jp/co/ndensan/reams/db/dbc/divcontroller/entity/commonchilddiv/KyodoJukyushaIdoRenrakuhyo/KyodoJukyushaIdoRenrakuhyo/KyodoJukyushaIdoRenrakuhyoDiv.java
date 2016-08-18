@@ -734,7 +734,7 @@ public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyus
     @JsonIgnore
     @Override
     public Decimal get償還送付_履歴番号() {
-        return this.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtRirekiNo().getValue();
+        return this.getKyodoJukyushaIdoRenrakuhyoShokanPanel().getTxtShokanRirekiNo().getValue();
     }
 
     /**
@@ -745,7 +745,7 @@ public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyus
     @JsonIgnore
     @Override
     public Decimal get高額送付_履歴番号() {
-        return this.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtRirekiNo().getValue();
+        return this.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getTxtKogakuRirekiNo().getValue();
     }
 
     /**

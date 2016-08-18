@@ -13,7 +13,7 @@ import lombok.Value;
 /**
  * 介護事業者の識別子です。
  *
- * @reamsid_L DBC-1920-010 tianshuai
+ * @reamsid_L DBX-9999-022 tianshuai
  */
 @Value
 @SuppressWarnings("PMD.UnusedPrivateField")

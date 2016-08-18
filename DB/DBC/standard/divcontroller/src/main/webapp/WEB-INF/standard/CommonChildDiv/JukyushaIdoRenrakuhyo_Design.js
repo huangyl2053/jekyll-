@@ -8,8 +8,16 @@ var DBC;
                 return "onBlur_txtIdoYMD";
             };
 
-            Events.onBlur_txtHokenshaNo = function () {
-                return "onBlur_txtHokenshaNo";
+            Events.onClick_radKyotakuServiceSakuseiKubun = function () {
+                return "onClick_radKyotakuServiceSakuseiKubun";
+            };
+
+            Events.onBlur_txtKyotakuKaigoShienJigyoshoNo = function () {
+                return "onBlur_txtKyotakuKaigoShienJigyoshoNo";
+            };
+
+            Events.onBlur_txtShisetsuShozaiHokenjaNo = function () {
+                return "onBlur_txtShisetsuShozaiHokenjaNo";
             };
 
             Events.onOkClose_btnSearch = function () {

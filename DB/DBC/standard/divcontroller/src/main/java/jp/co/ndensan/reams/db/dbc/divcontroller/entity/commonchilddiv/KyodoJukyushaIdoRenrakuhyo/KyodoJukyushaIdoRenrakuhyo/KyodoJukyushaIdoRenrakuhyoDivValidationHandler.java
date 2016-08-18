@@ -280,7 +280,7 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
      */
     public ValidationMessageControlPairs 高額送付情報の履歴番号チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        List<RString> 高額送付情報修正チェックボックス = div.getChkShokanSofuAdd().getSelectedKeys();
+        List<RString> 高額送付情報修正チェックボックス = div.getChkKogakuSofuAdd().getSelectedKeys();
         boolean 高額送付情報修正チェック = (!高額送付情報修正チェックボックス.isEmpty()
                 && チェックボックス_KEY.equals(高額送付情報修正チェックボックス.get(NUM_ZERO)));
         List<RString> 高額送付情報削除チェックボックス = div.getChkShokanSofuDelete().getSelectedKeys();
@@ -322,11 +322,9 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
         if (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei.equals(div.getMode_DisplayMode())
                 && 修正.equals(div.getKyodoJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().getSelectedValue())) {
             KyodoJukyushaIdoRenrakuhyoHandler hander = new KyodoJukyushaIdoRenrakuhyoHandler();
-            if (!hander.is基本送付情報変更あり(初期化異動情報Entity, 画面項目異動情報Entity, 基本送付情報Flag)) {
-                validPairs.add(new ValidationMessageControlPair(ValidationMessages.修正有無チェック));
-            } else if (!hander.is償還送付情報変更あり(初期化異動情報Entity, 画面項目異動情報Entity, 償還送付情報変Flag)) {
-                validPairs.add(new ValidationMessageControlPair(ValidationMessages.修正有無チェック));
-            } else if (!hander.is高額送付情報変更あり(初期化異動情報Entity, 画面項目異動情報Entity, 高額送付情報Flag)) {
+            if (!((hander.is高額送付情報変更あり(初期化異動情報Entity, 画面項目異動情報Entity, 高額送付情報Flag))
+                    || (hander.is基本送付情報変更あり(初期化異動情報Entity, 画面項目異動情報Entity, 基本送付情報Flag))
+                    || (hander.is償還送付情報変更あり(初期化異動情報Entity, 画面項目異動情報Entity, 償還送付情報変Flag)))) {
                 validPairs.add(new ValidationMessageControlPair(ValidationMessages.修正有無チェック));
             }
         }

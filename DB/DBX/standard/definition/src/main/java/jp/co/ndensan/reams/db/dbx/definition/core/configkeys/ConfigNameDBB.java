@@ -1681,7 +1681,11 @@ public enum ConfigNameDBB {
     /**
      * コード:無し 名称:特別徴収_年金支払日_2月 略称:定義なし
      */
-    特別徴収_年金支払日_2月("特別徴収_年金支払日_2月");
+    特別徴収_年金支払日_2月("特別徴収_年金支払日_2月"),
+    /**
+     * コード:無し 名称:収納状況照会_速報取込区分 略称:定義なし
+     */
+    収納状況照会_速報取込区分("収納状況照会_速報取込区分");
     private final RString fullName;
 
     private ConfigNameDBB(String fullname) {

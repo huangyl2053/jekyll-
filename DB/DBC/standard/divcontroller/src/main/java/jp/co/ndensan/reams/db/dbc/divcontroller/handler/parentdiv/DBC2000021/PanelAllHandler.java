@@ -52,7 +52,7 @@ public class PanelAllHandler {
     private static final RString 業務固有の識別情報名称 = new RString("業務固有の識別情報");
     private static final RString 無し = new RString("無し");
     private static final RString 有し = new RString("有し");
-    private static final RString 年次利用者負担割合判定を実行してください = new RString("年次利用者負担割合判定を");
+    private static final RString 年次利用者負担割合判定を実行してください = new RString("年次利用者負担割合判定");
     private FlexibleYear 負担割合年度;
     private RString 年度y;
     private static final RString 新年度 = new RString("新年度");
@@ -140,9 +140,9 @@ public class PanelAllHandler {
                 .get(ConfigNameDBC.利用者負担割合判定管理_年度終了月日, RDate.getNowDate(), SubGyomuCode.DBC介護給付)).toString()));
         if (!(年度.plusDay(1).isBeforeOrEquals(div.getTxtKijunbi().getValue()))
                 || !(div.getTxtKijunbi().getValue().isBeforeOrEquals(年度.plusYear(1)))) {
-            return Boolean.TRUE;
+            return Boolean.FALSE;
         }
-        return Boolean.FALSE;
+        return Boolean.TRUE;
     }
 
     /**

@@ -42,7 +42,7 @@ public class TaishoshaKensakuValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (div.getTxtToriatsukaiYM().getValue() == null) {
             validationMessages.add(new ValidationMessageControlPair(new TaishoshaKensakuValidationHandler.RRVMessages(
-                    UrErrorMessages.必須項目)));
+                    UrErrorMessages.必須, "取扱年月"), div.getTxtToriatsukaiYM()));
         }
         return validationMessages;
     }

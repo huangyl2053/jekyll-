@@ -6,14 +6,10 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC2000022;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.FutanWariaiSokujiKouseiHolder;
 import jp.co.ndensan.reams.db.dbc.business.core.futanwariai.FutanWariaiSokujiKouseiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihanteimanager.RiyoshaFutanWariaiHanteiManagerResult;
-import jp.co.ndensan.reams.db.dbc.definition.core.futanwariai.FutanWariaiShikakuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.futanwariai.FutanwariaiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariai.FutanWariaiMybatisParameter;
@@ -26,38 +22,31 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000022.Riy
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc2000022.FutanWariaiSokujiKouseiServiceData;
 import jp.co.ndensan.reams.db.dbc.service.core.futanwariai.RiyoshaFutanWariaiSokujiKouseiFinder;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariai;
-import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiKonkyo;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisaiBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisaiIdentifier;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishu;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishuBuilder;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoKofuKaishuManager;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 利用者負担割合即時更正_修正です。
@@ -68,8 +57,10 @@ public class DBC2000022PanelAll {
 
     private static final RString RSTONE = new RString("1");
     private static final RString RSTTWO = new RString("2");
-    private static final RString RSTFORTY = new RString("40");
-    private static final RString 交付証種類 = new RString("003");
+    private static final RString DBCUC20021 = new RString("DBCUC20021");
+    private static final RString DBCUC20022 = new RString("DBCUC20022");
+    private static final RString DBCUC20023 = new RString("DBCUC20023");
+    private static final RString 前排他キー = new RString("DBCHihokenshaNo");
 
     /**
      * Handlerクラスを取得する
@@ -90,9 +81,9 @@ public class DBC2000022PanelAll {
     public ResponseData<DBC2000022PanelAllDiv> onLoad(DBC2000022PanelAllDiv div) {
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         FlexibleYear 年度 = ViewStateHolder.get(ViewStateKeys.年度, FlexibleYear.class);
-        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         div.setHdnGyomuCode(GyomuCode.DB介護保険.getColumnValue());
-        div.setHdnShikibetsuCode(資格対象者.get被保険者番号().getColumnValue());
+        div.setHdnShikibetsuCode(資格対象者.get識別コード().getColumnValue());
+        RString 処理モード = get処理モード();
         if (DBC2000022StateName.新規.getName().equals(処理モード)) {
             RiyoshaFutanWariaiHanteiManagerResult 判定結果
                     = ViewStateHolder.get(ViewStateKeys.判定結果, RiyoshaFutanWariaiHanteiManagerResult.class);
@@ -136,7 +127,7 @@ public class DBC2000022PanelAll {
      * @return ResponseData<DBC2000022PanelAllDiv>
      */
     public ResponseData<DBC2000022PanelAllDiv> onClick_btnClear(DBC2000022PanelAllDiv div) {
-        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        RString 処理モード = get処理モード();
         if (DBC2000022StateName.修正.getName().equals(処理モード)) {
             クリア処理(div, 処理モード);
         }
@@ -153,7 +144,7 @@ public class DBC2000022PanelAll {
      * @return ResponseData<DBC2000022PanelAllDiv>
      */
     public ResponseData<DBC2000022PanelAllDiv> onChange_nendo(DBC2000022PanelAllDiv div) {
-        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        RString 処理モード = get処理モード();
         if (DBC2000022StateName.照会.getName().equals(処理モード)) {
             getHandler(div).nendoChange();
         }
@@ -214,6 +205,9 @@ public class DBC2000022PanelAll {
      * @return ResponseData<DBC2000022PanelAllDiv>
      */
     public ResponseData<DBC2000022PanelAllDiv> onClick_btnAddBefore(DBC2000022PanelAllDiv div) {
+        if (行選択チェック(div)) {
+            throw new ApplicationException(UrErrorMessages.対象行を選択.getMessage());
+        }
         RiyoshaFutanWariai 利用者負担割合 = ViewStateHolder.get(ViewStateKeys.利用者負担割合, RiyoshaFutanWariai.class);
         FutanWariaiSokujiKouseiHolder holder
                 = ViewStateHolder.get(ViewStateKeys.利用者負担割合明細, FutanWariaiSokujiKouseiHolder.class);
@@ -230,6 +224,9 @@ public class DBC2000022PanelAll {
      * @return ResponseData<DBC2000022PanelAllDiv>
      */
     public ResponseData<DBC2000022PanelAllDiv> onClick_btnAddNext(DBC2000022PanelAllDiv div) {
+        if (行選択チェック(div)) {
+            throw new ApplicationException(UrErrorMessages.対象行を選択.getMessage());
+        }
         RiyoshaFutanWariai 利用者負担割合 = ViewStateHolder.get(ViewStateKeys.利用者負担割合, RiyoshaFutanWariai.class);
         FutanWariaiSokujiKouseiHolder holder
                 = ViewStateHolder.get(ViewStateKeys.利用者負担割合明細, FutanWariaiSokujiKouseiHolder.class);
@@ -240,7 +237,7 @@ public class DBC2000022PanelAll {
     }
 
     /**
-     * 「下に追加する」ボタンの処理です。
+     * 「「修正する」ボタンの処理です。
      *
      * @param div div
      * @return ResponseData<DBC2000022PanelAllDiv>
@@ -280,76 +277,8 @@ public class DBC2000022PanelAll {
         if (validPairs2.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs2).respond();
         }
-        RiyoshaFutanWariaiMeisai 明細entity = holder.getRiyoshaFutanWariaiMeisai(
-                new RiyoshaFutanWariaiMeisaiIdentifier(利用者負担割合.get年度(),
-                        利用者負担割合.get被保険者番号(),
-                        利用者負担割合.get履歴番号(),
-                        Integer.parseInt(div.getDgFutanWariai().getClickedItem().getEdaNo().toString())));
-        if (明細entity != null) {
-            RiyoshaFutanWariaiMeisaiBuilder builderModified = 明細entity.createBuilderForEdit();
-            builderModified.set資格区分(div.getDdlShikaku().getSelectedKey());
-            builderModified.set負担割合区分(div.getDdlFutanWariai().getSelectedKey());
-            builderModified.set有効開始日(new FlexibleDate(div.getTxtTekiyoKaishibi().getValue().toDateString()));
-            builderModified.set有効終了日(new FlexibleDate(div.getTxtTekiyoShuryobi().getValue().toDateString()));
-            builderModified.set本人合計所得金額(div.getTxtHonninGokeiShotoku().getValue());
-            builderModified.set世帯１号被保険者数(div.getTxtSetaiinsu().getValue().intValue());
-            builderModified.set年金収入合計(div.getTxtNenkinShunyuGokei().getValue());
-            builderModified.setその他の合計所得金額合計(div.getTxtSonotaGokei().getValue());
-            builderModified.set更正理由(div.getTxtBiko().getValue());
-            builderModified.set世帯コード(new SetaiCode(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getHdnTxtSetaiCode()));
-            明細entity = builderModified.build();
-            明細entity.toEntity().setState(EntityDataState.Modified);
-            holder.addRiyoshaFutanWariaiMeisai(明細entity);
-        } else {
-            RiyoshaFutanWariaiMeisai new利用者負担割合明細 = new RiyoshaFutanWariaiMeisai(利用者負担割合.get年度(),
-                    利用者負担割合.get被保険者番号(),
-                    利用者負担割合.get履歴番号(),
-                    Integer.parseInt(div.getDgFutanWariai().getClickedItem().getEdaNo().toString()));
-            RiyoshaFutanWariaiMeisaiBuilder builder = new利用者負担割合明細.createBuilderForEdit();
-            builder.set資格区分(div.getDdlShikaku().getSelectedKey());
-            builder.set負担割合区分(div.getDdlFutanWariai().getSelectedKey());
-            builder.set有効開始日(new FlexibleDate(div.getTxtTekiyoKaishibi().getValue().toDateString()));
-            builder.set有効終了日(new FlexibleDate(div.getTxtTekiyoShuryobi().getValue().toDateString()));
-            builder.set本人合計所得金額(div.getTxtHonninGokeiShotoku().getValue());
-            builder.set世帯１号被保険者数(div.getTxtSetaiinsu().getValue().intValue());
-            builder.set年金収入合計(div.getTxtNenkinShunyuGokei().getValue());
-            builder.setその他の合計所得金額合計(div.getTxtSonotaGokei().getValue());
-            builder.set更正理由(div.getTxtBiko().getValue());
-            builder.set世帯コード(new SetaiCode(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getHdnTxtSetaiCode()));
-            new利用者負担割合明細 = builder.build();
-            new利用者負担割合明細.toEntity().setState(EntityDataState.Added);
-            holder.addRiyoshaFutanWariaiMeisai(new利用者負担割合明細);
-        }
-        sort利用者負担割合明細(holder.get利用者負担割合明細());
+        getHandler(div).kakuteiShori(利用者負担割合, holder);
         ViewStateHolder.put(ViewStateKeys.利用者負担割合明細, holder);
-        for (RiyoshaFutanWariaiMeisai 明細 : holder.get利用者負担割合明細()) {
-            dgFutanWariai_Row rowData = new dgFutanWariai_Row();
-            rowData.setNendo(明細.get年度().toDateString());
-            rowData.setRirekiNo(new RString(明細.get履歴番号()));
-            rowData.setEdaNo(new RString(明細.get枝番号()));
-            rowData.setShikakuCode(明細.get資格区分());
-            rowData.setFutanWariaiCode(明細.get負担割合区分());
-            rowData.setShikaku(FutanWariaiShikakuKubun.toValue(明細.get資格区分()).get名称());
-            rowData.setFutanWariai(FutanwariaiKubun.toValue(明細.get負担割合区分()).get名称());
-            FlexibleDate 適用開始日 = 明細.get有効終了日();
-            FlexibleDate 適用終了日 = 明細.get有効終了日();
-            if (適用開始日 != null) {
-                rowData.getTekiyoKaishibi().setValue(new RDate(適用開始日.toString()));
-            }
-            if (適用終了日 != null) {
-                rowData.getTekiyoShuryobi().setValue(new RDate(適用終了日.toString()));
-            }
-            rowData.getGokeiShotoku().setValue(明細.get本人合計所得金額());
-            rowData.getSetaiinsu().setValue(Decimal.valueOf(明細.get世帯１号被保険者数()));
-            rowData.getNenkinShunyuGokei().setValue(明細.get年金収入合計());
-            rowData.getSonotaGokeiShotoku().setValue(明細.getその他の合計所得金額合計());
-            rowData.setBiko(明細.get更正理由());
-            rowData.setLogicalDeletedFlag(明細.get論理削除フラグ());
-            if (明細.get論理削除フラグ()) {
-                rowData.setRowBgColor(DataGridCellBgColor.bgColorLightRed);
-            }
-        }
-        getHandler(div).編集項目をクリアする();
         return ResponseData.of(div).respond();
     }
 
@@ -360,10 +289,20 @@ public class DBC2000022PanelAll {
      * @return ResponseData<DBC2000022PanelAllDiv>
      */
     public ResponseData<DBC2000022PanelAllDiv> onClick_btnUpdate(DBC2000022PanelAllDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(
+                    UrQuestionMessages.保存の確認.getMessage().getCode(),
+                    UrQuestionMessages.保存の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (!MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
+            return ResponseData.of(div).respond();
+        }
+
         RiyoshaFutanWariai 利用者負担割合 = ViewStateHolder.get(ViewStateKeys.利用者負担割合, RiyoshaFutanWariai.class);
         FutanWariaiSokujiKouseiHolder holder
                 = ViewStateHolder.get(ViewStateKeys.利用者負担割合明細, FutanWariaiSokujiKouseiHolder.class);
-        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        RString 処理モード = get処理モード();
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         FutanWariaiSokujiKouseiServiceData 引き継ぎデータ = new FutanWariaiSokujiKouseiServiceData();
         if (DBC2000022StateName.新規.getName().equals(処理モード)) {
@@ -378,30 +317,7 @@ public class DBC2000022PanelAll {
                     holder.get利用者負担割合明細(),
                     利用者負担割合根拠list);
         } else {
-            RiyoshaFutanWariaiBuilder 利用者負担割合builder = 利用者負担割合.createBuilderForEdit();
-            if (!div.getChkShoHakkoFuyo().getSelectedKeys().isEmpty()) {
-                利用者負担割合builder.set発行不要フラグ(true);
-            }
-            if (!div.getChkShokkenHenko().getSelectedKeys().isEmpty()) {
-                利用者負担割合builder.set職権変更フラグ(true);
-            }
-            利用者負担割合builder.set発行区分(div.getDdlHakkoKubun().getSelectedKey());
-            利用者負担割合builder.set発行日(FlexibleDate.EMPTY);
-            利用者負担割合builder.set交付日(FlexibleDate.EMPTY);
-            if (DBC2000022StateName.新規.getName().equals(処理モード)) {
-                利用者負担割合builder.set更正事由(利用者負担割合.get更正事由());
-            }
-            if (DBC2000022StateName.修正.getName().equals(処理モード)) {
-                利用者負担割合builder.set更正事由(new Code(RSTFORTY));
-            }
-
-            利用者負担割合 = 利用者負担割合builder.build();
-            if (DBC2000022StateName.新規.getName().equals(処理モード)) {
-                利用者負担割合.toEntity().setState(EntityDataState.Added);
-            }
-            if (DBC2000022StateName.修正.getName().equals(処理モード)) {
-                利用者負担割合.toEntity().setState(EntityDataState.Modified);
-            }
+            getHandler(div).update利用者負担割合情報(利用者負担割合, 処理モード);
             ViewStateHolder.put(ViewStateKeys.利用者負担割合, 利用者負担割合);
             ValidationMessageControlPairs validPairs1 = getCheckHandler(div).枝番間期間チェック();
             if (validPairs1.iterator().hasNext()) {
@@ -411,20 +327,15 @@ public class DBC2000022PanelAll {
             if (validPairs2.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs2).respond();
             }
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(
-                        UrQuestionMessages.保存の確認.getMessage().getCode(),
-                        UrQuestionMessages.保存の確認.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType()) && データ項目変更判定()) {
+            if (データ項目変更判定()) {
                 getHandler(div).onClick_btnUpdate(資格対象者.get識別コード(),
                         利用者負担割合,
                         holder.get利用者負担割合明細(),
                         null);
+            } else {
+                throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
             }
         }
-
         FutanWariaiSokujiKouseiResult result = 利用者負担割合情報再検索(div.getDdlNendo().getSelectedKey(),
                 div.getCcdKaigoShikakuKihon().get被保険者番号());
         引き継ぎデータ.set利用者負担割合(new RiyoshaFutanWariai(result.toEntity()));
@@ -436,12 +347,12 @@ public class DBC2000022PanelAll {
     }
 
     /**
-     * 「負担割合証を印刷する」ボタンの処理です。
+     * 「負担割合証を印刷する」ボタンの処理前のチェック処理です。
      *
      * @param div div
      * @return ResponseData<DBC2000022PanelAllDiv>
      */
-    public ResponseData<DBC2000022PanelAllDiv> onClick_btnPrint(DBC2000022PanelAllDiv div) {
+    public ResponseData<DBC2000022PanelAllDiv> onClick_btnPrintCheck(DBC2000022PanelAllDiv div) {
         ValidationMessageControlPairs validPairs = getCheckHandler(div).発行日と交付日必須入力チェック();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -449,52 +360,31 @@ public class DBC2000022PanelAll {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(
                     DbcQuestionMessages.負担割合証単票発行確認.getMessage().getCode(),
-                    DbcQuestionMessages.負担割合証単票発行確認.getMessage().evaluate());
+                    DbcQuestionMessages.負担割合証単票発行確認.getMessage().evaluate(),
+                    ButtonSelectPattern.OKCancel);
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
-            TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-            FutanWariaiSokujiKouseiHolder holder
-                    = ViewStateHolder.get(ViewStateKeys.利用者負担割合明細, FutanWariaiSokujiKouseiHolder.class);
-            getHandler(div).onClick_btnPrint(資格対象者, holder.get利用者負担割合明細());
-
-            RiyoshaFutanWariai 利用者負担割合 = ViewStateHolder.get(ViewStateKeys.利用者負担割合, RiyoshaFutanWariai.class);
-            RiyoshaFutanWariaiBuilder 利用者負担割合builder = 利用者負担割合.createBuilderForEdit();
-            利用者負担割合builder.set発行区分(div.getDdlHakkoKubun().getSelectedKey());
-            利用者負担割合builder.set発行日(new FlexibleDate(div.getTxtHanteibi().getValue().toString()));
-            利用者負担割合builder.set交付日(new FlexibleDate(div.getTxtKofubi().getValue().toString()));
-            利用者負担割合builder.set論理削除フラグ(true);
-            利用者負担割合 = 利用者負担割合builder.build();
-            利用者負担割合.toEntity().setState(EntityDataState.Modified);
-            ViewStateHolder.put(ViewStateKeys.利用者負担割合, 利用者負担割合);
-            getHandler(div).onClick_btnUpdate(資格対象者.get識別コード(),
-                    利用者負担割合, null, null);
-            ShoKofuKaishuManager manager = new ShoKofuKaishuManager();
-            ShoKofuKaishu max履歴番号証交付回収entity = manager.get証交付回収(利用者負担割合.get被保険者番号(), 交付証種類);
-            ShoKofuKaishu new証交付回収 = new ShoKofuKaishu(
-                    new HihokenshaNo(div.getCcdKaigoShikakuKihon().get被保険者番号()),
-                    交付証種類,
-                    max履歴番号証交付回収entity.get履歴番号() + 1);
-            ShoKofuKaishuBuilder 証交付回収builder = new証交付回収.createBuilderForEdit();
-            証交付回収builder.set市町村コード(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード());
-            証交付回収builder.set識別コード(
-                    new ShikibetsuCode(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getHdnTxtShikibetsuCode()));
-            証交付回収builder.set交付年月日(new FlexibleDate(div.getTxtKofubi().getValue().toString()));
-            List<dgFutanWariai_Row> list = div.getDgFutanWariai().getDataSource();
-            証交付回収builder.set有効期限(new FlexibleDate(list.get(list.size() - 1).getTekiyoShuryobi().getValue().toString()));
-            RString 交付事由 = div.getDdlKofuJiyu().getSelectedKey();
-            if (交付事由 != null) {
-                証交付回収builder.set交付事由(交付事由);
-            }
-            証交付回収builder.set単票発行有無フラグ(true);
-            証交付回収builder.set発行処理日時(YMDHMS.now());
-            証交付回収builder.set論理削除フラグ(false);
-            new証交付回収 = 証交付回収builder.build();
-            new証交付回収.toEntity().setState(EntityDataState.Added);
-            ShoKofuKaishuManager manage = new ShoKofuKaishuManager();
-            manage.save証交付回収(new証交付回収);
-        }
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「負担割合証を印刷する」ボタンの処理です。
+     *
+     * @param div div
+     * @return ResponseData<SourceDataCollection>
+     */
+    public ResponseData<SourceDataCollection> onClick_btnPrint(DBC2000022PanelAllDiv div) {
+        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        FutanWariaiSokujiKouseiHolder holder
+                = ViewStateHolder.get(ViewStateKeys.利用者負担割合明細, FutanWariaiSokujiKouseiHolder.class);
+        SourceDataCollection collection = getHandler(div).onClick_btnPrint(資格対象者, holder.get利用者負担割合明細());
+        RiyoshaFutanWariai 利用者負担割合 = ViewStateHolder.get(ViewStateKeys.利用者負担割合, RiyoshaFutanWariai.class);
+        getHandler(div).利用者負担割合編集(利用者負担割合);
+        ViewStateHolder.put(ViewStateKeys.利用者負担割合, 利用者負担割合);
+        getHandler(div).onClick_btnUpdate(資格対象者.get識別コード(),
+                利用者負担割合, null, null);
+        getHandler(div).insert証交付回収(利用者負担割合);
+        return ResponseData.of(collection).respond();
     }
 
     /**
@@ -504,25 +394,28 @@ public class DBC2000022PanelAll {
      * @return ResponseData<DBC2000022PanelAllDiv>
      */
     public ResponseData<DBC2000022PanelAllDiv> onClick_btnReSearch(DBC2000022PanelAllDiv div) {
-        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        if (DBC2000022StateName.新規.getName().equals(処理モード)) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(
-                        UrQuestionMessages.確認_汎用.getMessage().getCode(),
-                        UrQuestionMessages.確認_汎用.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
+        RString 処理モード = get処理モード();
+        if (DBC2000022StateName.新規.getName().equals(処理モード) && !ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(
+                    UrQuestionMessages.確認_汎用.getMessage().getCode(),
+                    UrQuestionMessages.確認_汎用.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
         if (DBC2000022StateName.修正.getName().equals(処理モード)) {
-            if (データ項目変更判定() && !ResponseHolder.isReRequest()) {
+            if (!データ項目変更判定()) {
+                前排他キーの解除();
+                return ResponseData.of(div).forwardWithEventName(DBC2000022TransitionEventName.再検索).respond();
+            }
+            if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(
                         UrQuestionMessages.検索画面遷移の確認.getMessage().getCode(),
                         UrQuestionMessages.検索画面遷移の確認.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-        }
-        if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
-            return ResponseData.of(div).forwardWithEventName(DBC2000022TransitionEventName.再検索).respond();
+            if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
+                前排他キーの解除();
+                return ResponseData.of(div).forwardWithEventName(DBC2000022TransitionEventName.再検索).respond();
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -534,25 +427,28 @@ public class DBC2000022PanelAll {
      * @return ResponseData<DBC2000022PanelAllDiv>
      */
     public ResponseData<DBC2000022PanelAllDiv> onClick_btnSearchResult(DBC2000022PanelAllDiv div) {
-        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        if (DBC2000022StateName.新規.getName().equals(処理モード)) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(
-                        UrQuestionMessages.確認_汎用.getMessage().getCode(),
-                        UrQuestionMessages.確認_汎用.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
+        RString 処理モード = get処理モード();
+        if (DBC2000022StateName.新規.getName().equals(処理モード) && !ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(
+                    UrQuestionMessages.確認_汎用.getMessage().getCode(),
+                    UrQuestionMessages.確認_汎用.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
         if (DBC2000022StateName.修正.getName().equals(処理モード)) {
-            if (データ項目変更判定() && !ResponseHolder.isReRequest()) {
+            if (!データ項目変更判定()) {
+                前排他キーの解除();
+                return ResponseData.of(div).forwardWithEventName(DBC2000022TransitionEventName.検索結果一覧).respond();
+            }
+            if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(
                         UrQuestionMessages.検索画面遷移の確認.getMessage().getCode(),
                         UrQuestionMessages.検索画面遷移の確認.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-        }
-        if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
-            return ResponseData.of(div).forwardWithEventName(DBC2000022TransitionEventName.検索結果一覧).respond();
+            if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
+                前排他キーの解除();
+                return ResponseData.of(div).forwardWithEventName(DBC2000022TransitionEventName.検索結果一覧).respond();
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -564,25 +460,28 @@ public class DBC2000022PanelAll {
      * @return ResponseData<DBC2000022PanelAllDiv>
      */
     public ResponseData<DBC2000022PanelAllDiv> onClick_btnBack(DBC2000022PanelAllDiv div) {
-        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        if (DBC2000022StateName.新規.getName().equals(処理モード)) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(
-                        UrQuestionMessages.確認_汎用.getMessage().getCode(),
-                        UrQuestionMessages.確認_汎用.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
+        RString 処理モード = get処理モード();
+        if (DBC2000022StateName.新規.getName().equals(処理モード) && !ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(
+                    UrQuestionMessages.確認_汎用.getMessage().getCode(),
+                    UrQuestionMessages.確認_汎用.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
         if (DBC2000022StateName.修正.getName().equals(処理モード)) {
-            if (データ項目変更判定() && !ResponseHolder.isReRequest()) {
+            if (!データ項目変更判定()) {
+                前排他キーの解除();
+                return ResponseData.of(div).forwardWithEventName(DBC2000022TransitionEventName.戻る).respond();
+            }
+            if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(
                         UrQuestionMessages.検索画面遷移の確認.getMessage().getCode(),
                         UrQuestionMessages.検索画面遷移の確認.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-        }
-        if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
-            return ResponseData.of(div).forwardWithEventName(DBC2000022TransitionEventName.戻る).respond();
+            if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
+                前排他キーの解除();
+                return ResponseData.of(div).forwardWithEventName(DBC2000022TransitionEventName.戻る).respond();
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -602,23 +501,6 @@ public class DBC2000022PanelAll {
             getHandler(div).clear(処理モード);
         }
         return ResponseData.of(div).respond();
-    }
-
-    private void sort利用者負担割合明細(List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細list) {
-        Collections.sort(利用者負担割合明細list, new Comparator<RiyoshaFutanWariaiMeisai>() {
-            @Override
-            public int compare(RiyoshaFutanWariaiMeisai arg0, RiyoshaFutanWariaiMeisai arg1) {
-                if (arg0.get有効開始日() != null && arg1.get有効開始日() != null
-                        && arg0.get有効終了日() != null && arg1.get有効終了日() != null) {
-                    if (arg0.get有効開始日().compareTo(arg1.get有効開始日()) == 0) {
-                        return arg0.get有効終了日().compareTo(arg1.get有効終了日());
-                    } else {
-                        return arg0.get有効開始日().compareTo(arg1.get有効開始日());
-                    }
-                }
-                return 0;
-            }
-        });
     }
 
     private int getMax枝番(List<RiyoshaFutanWariaiMeisai> list) {
@@ -646,12 +528,14 @@ public class DBC2000022PanelAll {
         RiyoshaFutanWariai 利用者負担割合 = ViewStateHolder.get(ViewStateKeys.利用者負担割合, RiyoshaFutanWariai.class);
         FutanWariaiSokujiKouseiHolder holder
                 = ViewStateHolder.get(ViewStateKeys.利用者負担割合明細, FutanWariaiSokujiKouseiHolder.class);
-        if (利用者負担割合.hasChanged()) {
+        if (利用者負担割合 != null && 利用者負担割合.hasChanged()) {
             return true;
         }
-        for (RiyoshaFutanWariaiMeisai result : holder.get利用者負担割合明細()) {
-            if (result.hasChanged()) {
-                return true;
+        if (holder != null && holder.get利用者負担割合明細() != null) {
+            for (RiyoshaFutanWariaiMeisai result : holder.get利用者負担割合明細()) {
+                if (result.hasChanged()) {
+                    return true;
+                }
             }
         }
         return false;
@@ -659,5 +543,30 @@ public class DBC2000022PanelAll {
 
     private RiyoshaFutanWariaiSokujiKouseiPanelValidationHandler getCheckHandler(DBC2000022PanelAllDiv div) {
         return new RiyoshaFutanWariaiSokujiKouseiPanelValidationHandler(div);
+    }
+
+    private boolean 行選択チェック(DBC2000022PanelAllDiv div) {
+        dgFutanWariai_Row rowData = div.getDgFutanWariai().getClickedItem();
+        return rowData == null;
+    }
+
+    private RString get処理モード() {
+        RString containerId = ResponseHolder.getUIContainerId();
+        if (DBCUC20021.equals(containerId)) {
+            return DBC2000022StateName.新規.getName();
+        }
+        if (DBCUC20022.equals(containerId)) {
+            return DBC2000022StateName.修正.getName();
+        }
+        if (DBCUC20023.equals(containerId)) {
+            return DBC2000022StateName.照会.getName();
+        }
+        return RString.EMPTY;
+    }
+
+    private void 前排他キーの解除() {
+        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        LockingKey 排他キー = new LockingKey(前排他キー.concat(資格対象者.get被保険者番号().getColumnValue()));
+        RealInitialLocker.release(排他キー);
     }
 }

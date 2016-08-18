@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 /**
  * JukyushaIdoRenrakuhyo のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBC-4350-060 chenhui
  */
 public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenrakuhyoDiv {
 
@@ -385,6 +385,16 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    /**
+     * 画面初期化のメソッドです。
+     *
+     * @param 処理モード RString
+     * @param 識別コード ShikibetsuCode
+     * @param 被保険者番号 HihokenshaNo
+     * @param 履歴番号 int
+     * @param 論理削除フラグ boolean
+     * @param 異動日 FlexibleDate
+     */
     @JsonIgnore
     @Override
     public void initialize(RString 処理モード, ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号,
@@ -406,6 +416,16 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     }
 
     /**
+     * 「計画作成区分」操作制御のメソッドです。
+     *
+     */
+    @JsonIgnore
+    @Override
+    public void onClick_radKyotakuServiceSakuseiKubun() {
+        JukyushaIdoRenrakuhyoHandler.of(this).onClick_計画作成区分();
+    }
+
+    /**
      * 異動日focus outのメソッドです。
      *
      */
@@ -413,6 +433,26 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     @Override
     public void onBlur_txtIdoYMD() {
         JukyushaIdoRenrakuhyoHandler.of(this).onBlur_異動日();
+    }
+
+    /**
+     * 支援事業者番号focus outのメソッドです。
+     *
+     */
+    @JsonIgnore
+    @Override
+    public void onBlur_txtKyotakuKaigoShienJigyoshoNo() {
+        JukyushaIdoRenrakuhyoHandler.of(this).onBlur_支援事業者番号();
+    }
+
+    /**
+     * 住所地特例の保険者番号focus outのメソッドです。
+     *
+     */
+    @JsonIgnore
+    @Override
+    public void onBlur_txtShisetsuShozaiHokenjaNo() {
+        JukyushaIdoRenrakuhyoHandler.of(this).onBlur_保険者番号();
     }
 
     /**
@@ -427,7 +467,7 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     }
 
     /**
-     * 受給者異動送付をを取得の。メソッドです。
+     * 受給者異動送付をを取得のメソッドです。
      *
      * @return JukyushaIdoRenrakuhyo
      */
