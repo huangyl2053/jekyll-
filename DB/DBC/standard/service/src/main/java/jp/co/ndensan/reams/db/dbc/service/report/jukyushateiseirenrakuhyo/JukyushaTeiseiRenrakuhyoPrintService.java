@@ -9,6 +9,9 @@ import jp.co.ndensan.reams.db.dbc.business.report.jukyushateiseirenrakuhyo.Jukyu
 import jp.co.ndensan.reams.db.dbc.business.report.jukyushateiseirenrakuhyo.JukyushaTeiseiRenrakuhyoReport;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoTorokuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.jukyushateiseirenrakuhyo.JukyushaTeiseiRenrakuhyoSource;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
+import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -18,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 帳票設計_DBCMN81002_受給者訂正連絡票（紙媒体）PrintServiceクラスです。
@@ -56,7 +60,15 @@ public class JukyushaTeiseiRenrakuhyoPrintService {
         try (ReportAssembler<JukyushaTeiseiRenrakuhyoSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<JukyushaTeiseiRenrakuhyoSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
-            new JukyushaTeiseiRenrakuhyoReport(出力用受給者訂正情報Entity).writeBy(reportSourceWriter);
+            KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
+
+            SearchResult<KoikiZenShichosonJoho> list = finder.koseiShichosonJoho();
+            RString 市町村名称 = RString.EMPTY;
+            if (list != null && !list.records().isEmpty()) {
+                市町村名称 = list.records().get(0).get市町村名称();
+
+            }
+            new JukyushaTeiseiRenrakuhyoReport(出力用受給者訂正情報Entity, 市町村名称).writeBy(reportSourceWriter);
         }
     }
 

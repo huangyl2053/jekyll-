@@ -12,8 +12,16 @@ module DBC {
                 return "onBlur_txtIdoYMD";
             }
 
-            public static onBlur_txtHokenshaNo(): string {
-                return "onBlur_txtHokenshaNo";
+            public static onClick_radKyotakuServiceSakuseiKubun(): string {
+                return "onClick_radKyotakuServiceSakuseiKubun";
+            }
+
+            public static onBlur_txtKyotakuKaigoShienJigyoshoNo(): string {
+                return "onBlur_txtKyotakuKaigoShienJigyoshoNo";
+            }
+
+            public static onBlur_txtShisetsuShozaiHokenjaNo(): string {
+                return "onBlur_txtShisetsuShozaiHokenjaNo";
             }
 
             public static onOkClose_btnSearch(): string {

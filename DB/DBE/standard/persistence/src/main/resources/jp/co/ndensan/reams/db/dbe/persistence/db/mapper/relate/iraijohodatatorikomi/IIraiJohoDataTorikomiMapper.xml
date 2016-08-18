@@ -19,7 +19,8 @@
                 dbT5101."seinengappiYMD" AS seinengappiYMD,
                 dbT5101.seibetsu AS seibetsu,
                 dbT5101."yubinNo" AS yubinNo,
-                dbT5101.jusho AS jusho
+                dbT5101.jusho AS jusho,
+                dbT5301."ikenshoIraiRirekiNo" AS ikenshoIraiRirekiNo
             FROM
                 rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
             INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
