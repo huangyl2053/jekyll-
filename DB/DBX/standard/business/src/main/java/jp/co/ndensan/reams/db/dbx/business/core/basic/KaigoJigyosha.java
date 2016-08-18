@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護事業者を管理するクラスです。
  *
- * @reamsid_L DBC-1920-010 tianshuai
+ * @reamsid_L DBX-9999-022 tianshuai
  */
 public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7060KaigoJigyoshaEntity, KaigoJigyosha> implements Serializable {
 

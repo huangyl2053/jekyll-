@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.jukyushateiseirenrakuhyotoroku;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyo;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyoBuilder;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KeikakuSakuseiKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushaatenaayouhou.JukyushaAtenaJyouhouParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity;
@@ -112,18 +113,23 @@ public class JukyushaTeiseiRenrakuhyoToroku {
             JukyushaAtenaJyouhouParameter parameter_宛名 = JukyushaAtenaJyouhouParameter.createSelectByKeyParam(searchKey);
             JukyushaAtenaJyouhouEntity psm_entity = mapper.get宛名情報(parameter_宛名);
             List<ShoKisaiHokenshaNo> 証記載保険者番号と広域保険者番号 = getShokisaiNotoKouikiNo(被保険者番号, 異動日);
-            DbT3001JukyushaIdoRenrakuhyoEntity 受給者訂正Entity = new DbT3001JukyushaIdoRenrakuhyoEntity();
-            FlexibleDate システム日付 = new FlexibleDate(RDate.getNowDate().toDateString());
-            受給者訂正Entity.setShoKisaiHokenshaNo(証記載保険者番号と広域保険者番号.get(0));
-            受給者訂正Entity.setHiHokenshaNo(被保険者番号);
-            受給者訂正Entity.setIdoYMD(システム日付);
-            if (psm_entity != null) {
-                受給者訂正Entity.setSeibetsuCode(psm_entity.get性別コード());
-                受給者訂正Entity.setUmareYMD(psm_entity.get生年月日());
-                受給者訂正Entity.setHiHokenshaNameKana(psm_entity.getカナ名称());
+            ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(RString.EMPTY);
+            if (証記載保険者番号と広域保険者番号.get(0) != null) {
+                証記載保険者番号 = 証記載保険者番号と広域保険者番号.get(0);
             }
-            受給者訂正Entity.setSofuYM(システム日付.getYearMonth());
-            受給者訂正 = new JukyushaIdoRenrakuhyo(受給者訂正Entity);
+            FlexibleDate システム日付 = new FlexibleDate(RDate.getNowDate().toDateString());
+            受給者訂正 = new JukyushaIdoRenrakuhyo(
+                    システム日付, RString.EMPTY, RString.EMPTY, 証記載保険者番号, 被保険者番号, 履歴番号);
+            JukyushaIdoRenrakuhyoBuilder 受給者訂正Builder = 受給者訂正.createBuilderForEdit();
+            受給者訂正Builder.set送付年月(システム日付.getYearMonth());
+            受給者訂正Builder.set証記載保険者番号(証記載保険者番号);
+            受給者訂正Builder.set広域連合_政令市_保険者番号(証記載保険者番号と広域保険者番号.get(1));
+            if (psm_entity != null) {
+                受給者訂正Builder.set性別コード(psm_entity.get性別コード());
+                受給者訂正Builder.set生年月日(psm_entity.get生年月日());
+                受給者訂正Builder.set被保険者氏名カナ(psm_entity.getカナ名称());
+            }
+            受給者訂正 = 受給者訂正Builder.build();
         } else {
             DbT3001JukyushaIdoRenrakuhyoEntity 受給者訂正Entity
                     = dbt3001Dac.select受給者訂正情報(被保険者番号.getColumnValue(),

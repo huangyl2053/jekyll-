@@ -42,11 +42,9 @@ public class SeikyugakuTsuchishoKohiInPageBreak extends PageBreaker<SeikyugakuTs
     public boolean isBreak(ReportLineRecord<SeikyugakuTsuchishoKohifutanshabunSource> currentSource,
             ReportLineRecord<SeikyugakuTsuchishoKohifutanshabunSource> nextSource) {
         boolean flag = false;
-        if (!currentSource.getSource().kohiFutanshaNo.equals(nextSource.getSource().kohiFutanshaNo)) {
-            flag = true;
-        } else if (currentSource.getSource().kanName.equals(nextSource.getSource().kanName)) {
-            flag = true;
-        } else if (!currentSource.getSource().kouName.equals(nextSource.getSource().kouName)) {
+        if (!currentSource.getSource().kohiFutanshaNo.equals(nextSource.getSource().kohiFutanshaNo)
+                || !currentSource.getSource().kanName.equals(nextSource.getSource().kanName)
+                || !currentSource.getSource().kouName.equals(nextSource.getSource().kouName)) {
             flag = true;
         }
         return flag;

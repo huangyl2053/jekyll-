@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -34,16 +33,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
- * 画面設計_DBBGM51003_所得情報一覧表作成Handler
+ * 画面設計_DBBGM51003_所得情報一覧表作成Handlerのクラスです。
  *
  * @reamsid_L DBB-1650-010 lijunjun
  */
@@ -72,16 +66,6 @@ public class ShotokuJohoIchiranHyoSakuseiHandler {
      */
     public ShotokuJohoIchiranHyoSakuseiHandler(ShotokuJohoIchiranHyoSakuseiDiv div) {
         this.div = div;
-    }
-
-    /**
-     * コンストラクタです
-     *
-     * @param div ShotokuJohoIchiranHyoSakuseiDiv
-     * @return ShotokuJohoIchiranHyoSakuseiHandler
-     */
-    public ShotokuJohoIchiranHyoSakuseiHandler of(ShotokuJohoIchiranHyoSakuseiDiv div) {
-        return new ShotokuJohoIchiranHyoSakuseiHandler(div);
     }
 
     /**
@@ -260,21 +244,6 @@ public class ShotokuJohoIchiranHyoSakuseiHandler {
     }
 
     /**
-     * 日付のチェックエラーのメソッドです。
-     *
-     * @param flag boolean
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs check日付(boolean flag) {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (flag) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.終了日が開始日以前)));
-        }
-        return validPairs;
-    }
-
-    /**
      * BatchParameterを作成のメソッドです。
      *
      * @return ShotokujohoIchiranhyoSakuseiBatchParameter
@@ -349,17 +318,4 @@ public class ShotokuJohoIchiranHyoSakuseiHandler {
         return 抽出対象ラジオボタン;
     }
 
-    private static class IdocheckMessages implements IValidationMessage {
-
-        private final Message message;
-
-        public IdocheckMessages(IMessageGettable message, String... replacements) {
-            this.message = message.getMessage().replace(replacements);
-        }
-
-        @Override
-        public Message getMessage() {
-            return message;
-        }
-    }
 }
