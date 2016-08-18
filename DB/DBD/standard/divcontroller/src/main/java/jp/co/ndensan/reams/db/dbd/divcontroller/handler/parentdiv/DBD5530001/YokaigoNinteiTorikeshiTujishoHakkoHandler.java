@@ -30,10 +30,6 @@ public class YokaigoNinteiTorikeshiTujishoHakkoHandler {
 
     private final YokaigoNinteiTorikeshiTujishoHakkoDiv div;
     private final RString 被保番号 = new RString("被保番号");
-    private static final RString 市町村コード = new RString("123456");
-    private static final RString 識別コード = new RString("000000000000010");
-    private static final RString HDN_SETAI_KODO = new RString("1234567");
-    private static final RString 被保険者番号 = new RString("0000000001");
     private static final RString コード = new RString("1");
 
     /**
@@ -47,16 +43,20 @@ public class YokaigoNinteiTorikeshiTujishoHakkoHandler {
 
     /**
      * 画面初期化処理です。
+     *
+     * @param 被保険者番号 RString
+     * @param 識別コード RString
      */
-    public void onLoad() {
+    public void onLoad(RString 被保険者番号, RString 識別コード) {
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().
                 getShichosonSecurityJoho(GyomuBunrui.介護事務);
         div.getTujishoHakkoJoken().getCcdKaigoNinteiAtenaInfo().setShoriType(コード);
-        div.getTujishoHakkoJoken().getCcdKaigoNinteiAtenaInfo().setKaigoDonyuKeitai(shichosonSecurityJoho.get介護導入区分().code());
+        div.getTujishoHakkoJoken().getCcdKaigoNinteiAtenaInfo().setKaigoDonyuKeitai(shichosonSecurityJoho.get導入形態コード().getCode());
         div.getTujishoHakkoJoken().getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(ShinseishoKanriNo.EMPTY,
                 new ShikibetsuCode(識別コード));
         div.getTujishoHakkoJoken().getCcdKaigoNinteiAtenaInfo().initialize();
-        div.getTujishoHakkoJoken().getCcdKaigoninteiShikakuInfo().initialize(市町村コード, 被保険者番号);
+        div.getTujishoHakkoJoken().getCcdKaigoninteiShikakuInfo().initialize(shichosonSecurityJoho.get市町村情報().get市町村コード().
+                value(), 被保険者番号);
         div.getTujishoHakkoMeisai().getTxtSakuseibi().setValue(RDate.getNowDate());
         div.getTujishoHakkoMeisai().getTxtTorikeshibi().setValue(RDate.getNowDate());
         div.getTujishoHakkoMeisai().getTxtYokaigodo().setValue(div.getCcdKaigoninteiShikakuInfo().getTxtYokaigodo().getValue());
