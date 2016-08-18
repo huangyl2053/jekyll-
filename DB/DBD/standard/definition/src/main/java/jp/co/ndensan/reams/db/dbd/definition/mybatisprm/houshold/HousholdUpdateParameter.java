@@ -20,6 +20,9 @@ import lombok.Setter;
 public class HousholdUpdateParameter {
 
     private RString 基礎年金番号_キー;
+    private int updateCount;
+    private RString lastUpdateTimestamp;
+    private RString lastUpdateReamsLoginId;
     private RString 年金コード_キー;
     private RString 被保番号_キー;
     private RString 年金保険者コード_キー;
