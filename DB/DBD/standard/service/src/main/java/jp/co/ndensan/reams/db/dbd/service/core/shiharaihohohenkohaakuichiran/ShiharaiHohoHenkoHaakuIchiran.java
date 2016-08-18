@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbd.service.core.shiharaihohohenkohaakuichiran;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd207010.ShiharaiHohoHenkoHaakuMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd207010.ShiharaiHohoHenkoKanriMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoHaakuEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoKanriEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoKanriResultEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shiharaihohohenkohaakuichiran.IShiharaiHohoHenkoHaakuMapper;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shiharaihohohenkohaakuichiran.IShiharaiHohoHenkoKanriMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
@@ -26,13 +26,13 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * ビジネス設計_DBDMN32001_2_支払方法変更滞納者把握リスト作成（バッチ）
  *
- * @reamsid_L DBD-36500-040 x_lilh
+ * @reamsid_L DBD-3650-040 x_lilh
  */
 public class ShiharaiHohoHenkoHaakuIchiran {
 
     private final MapperProvider mapperProvider;
     private ShiharaiHohoHenkoHaakuEntity shiharaiHohoHenkoHaakuEntity;
-    private ShiharaiHohoHenkoKanriEntity shiharaiHohoHenkoKanriEntity;
+    private ShiharaiHohoHenkoKanriResultEntity shiharaiHohoHenkoKanriEntity;
 
     /**
      * コンストラクタです。
@@ -56,14 +56,14 @@ public class ShiharaiHohoHenkoHaakuIchiran {
      *
      * @param shiharaiHohoHenkoKanriEntity 支払方法変更管理リストEntity
      */
-    ShiharaiHohoHenkoHaakuIchiran(ShiharaiHohoHenkoKanriEntity shiharaiHohoHenkoKanriEntity) {
+    ShiharaiHohoHenkoHaakuIchiran(ShiharaiHohoHenkoKanriResultEntity shiharaiHohoHenkoKanriEntity) {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.shiharaiHohoHenkoKanriEntity = shiharaiHohoHenkoKanriEntity;
     }
 
     public void printShiharaiHohoHenkoKanriList() {
         if (shiharaiHohoHenkoKanriEntity != null) {
-            get出力順(shiharaiHohoHenkoKanriEntity.get改頁出力順ID(), shiharaiHohoHenkoKanriEntity.get帳票ID());
+            // get出力順(shiharaiHohoHenkoKanriEntity.get改頁出力順ID(), shiharaiHohoHenkoKanriEntity.get帳票ID());
         }
 
         if (shiharaiHohoHenkoHaakuEntity != null) {
