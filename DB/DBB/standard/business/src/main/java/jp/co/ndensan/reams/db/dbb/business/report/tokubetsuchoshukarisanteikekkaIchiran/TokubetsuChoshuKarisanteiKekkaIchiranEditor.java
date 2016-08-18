@@ -227,14 +227,13 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
         Decimal 特徴期期別金額01 = 特徴仮算定計算後賦課情報Entity.get特徴期期別金額01();
         Decimal 特徴期期別金額02 = 特徴仮算定計算後賦課情報Entity.get特徴期期別金額02();
         Decimal 特徴期期別金額03 = 特徴仮算定計算後賦課情報Entity.get特徴期期別金額03();
-        if (特徴期期別金額01.compareTo(Decimal.ZERO) > NUM_0 && 特徴期期別金額02.compareTo(Decimal.ZERO) > NUM_0
-                && 特徴期期別金額03.compareTo(Decimal.ZERO) > NUM_0) {
+        if (特徴期期別金額01 != null && 特徴期期別金額02 != null && 特徴期期別金額03 != null && 特徴期期別金額01.compareTo(Decimal.ZERO) > NUM_0
+                && 特徴期期別金額02.compareTo(Decimal.ZERO) > NUM_0 && 特徴期期別金額03.compareTo(Decimal.ZERO) > NUM_0) {
             source.listUpper_7 = 継続;
         }
-        if (Decimal.ZERO.equals(特徴期期別金額01) && 特徴期期別金額02.compareTo(Decimal.ZERO) > NUM_0
-                && 特徴期期別金額03.compareTo(Decimal.ZERO) > NUM_0) {
+        if (特徴期期別金額01 != null && 特徴期期別金額02 != null && 特徴期期別金額03 != null && Decimal.ZERO.equals(特徴期期別金額01)
+                && 特徴期期別金額02.compareTo(Decimal.ZERO) > NUM_0 && 特徴期期別金額03.compareTo(Decimal.ZERO) > NUM_0) {
             source.listUpper_7 = SIX月;
         }
-
     }
 }
