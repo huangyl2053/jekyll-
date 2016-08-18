@@ -90,7 +90,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelValidationHandler {
 
         if (div.getTxtSonotaGokei().getValue() != null && div.getTxtSonotaGokei().getValue().compareTo(Decimal.ZERO) < 0) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.大小関係が不正, その他の合計所得合計不正.toString())));
+                    UrErrorMessages.未入力, その他の合計所得合計不正.toString())));
         }
         return validPairs;
     }

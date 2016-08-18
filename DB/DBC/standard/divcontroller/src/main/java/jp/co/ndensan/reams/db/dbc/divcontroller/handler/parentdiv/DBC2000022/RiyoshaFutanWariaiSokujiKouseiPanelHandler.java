@@ -6,7 +6,10 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000022;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.FutanWariaiSokujiKouseiHolder;
 import jp.co.ndensan.reams.db.dbc.business.core.futanwariai.FutanWariaiSokujiKouseiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihanteimanager.RiyoshaFutanWariaiHanteiManagerResult;
 import jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho.FutanWariaiShoDivParameter;
@@ -23,14 +26,25 @@ import jp.co.ndensan.reams.db.dbc.service.core.futanwariai.RiyoshaFutanWariaiSok
 import jp.co.ndensan.reams.db.dbc.service.core.futanwariai.RiyoshaFutanWariaiSokujiKouseiManager;
 import jp.co.ndensan.reams.db.dbc.service.core.futanwariaisho.FutanWariaisho;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariai;
+import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiKonkyo;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
+import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisaiBuilder;
+import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisaiIdentifier;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishu;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishuBuilder;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoKofuKaishuManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
@@ -48,8 +62,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 画面設計_DBCMNK2001_利用者負担割合即時更正_修正のHandlerです。
@@ -62,19 +78,15 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
     private final RiyoshaFutanWariaiSokujiKouseiManager manager;
     private final RiyoshaFutanWariaiSokujiKouseiFinder finder;
 
-    private static final int INT_1 = 1;
     private static final RString RSTZERO = new RString("0");
     private static final RString RSTONE = new RString("1");
     private static final RString RSTTWO = new RString("2");
-    private static final RString RSTFORTY = new RString("40");
+    private static final RString CODE = new RString("0003");
+    private static final RString 交付証種類 = new RString("003");
+    private static final RString 負担割合証交付事由 = new RString("0016");
     private static final RString 職権変更 = new RString("職権変更");
     private static final RString 証発行不要 = new RString("証発行不要");
-    private static final RString 有り = new RString("有り");
-    private static final RString 無し = new RString("無し");
     private static final RString 被保険者番号R = new RString("被保険者番号");
-    private static final RString 負担割合証交付事由 = new RString("0016");
-    private static final RString 個人番号_利用有無 = new RString("個人番号 利用有無");
-    private static final RString 法人番号_利用有無 = new RString("法人番号 利用有無");
     private static final RString 前排他キー = new RString("DBCHihokenshaNo");
     private static final RString 負担割合証を印刷する = new RString("btnPrint");
     private static final RString 保存する = new RString("btnUpdate");
@@ -164,6 +176,8 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
         LockingKey key = new LockingKey(前排他キー.concat(資格対象者.get被保険者番号().getColumnValue()));
         if (!RealInitialLocker.tryGetLock(key)) {
             throw new PessimisticLockingException();
+        } else {
+            div.setDisabled(false);
         }
     }
 
@@ -293,6 +307,9 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             div.getDgFutanWariai().setDataSource(rowsData);
             set補足項目(new RiyoshaFutanWariai(利用者負担割合情報.toEntity()), null, 処理区分);
         } else {
+            if (利用者負担割合情報 != null) {
+                setヘッダ項目(new RiyoshaFutanWariai(利用者負担割合情報.toEntity()), RSTTWO, 年度);
+            }
             throw new ApplicationException(DbcErrorMessages.該当年度負担割合情報なし.getMessage());
         }
 
@@ -576,6 +593,129 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
         div.getPanelEdit().setDisabled(true);
     }
 
+    /**
+     * 利用者負担割合を設定します。
+     *
+     * @param 利用者負担割合 RiyoshaFutanWariai
+     */
+    public void 利用者負担割合編集(RiyoshaFutanWariai 利用者負担割合) {
+        RiyoshaFutanWariaiBuilder 利用者負担割合builder = 利用者負担割合.createBuilderForEdit();
+        利用者負担割合builder.set発行区分(div.getDdlHakkoKubun().getSelectedKey());
+        利用者負担割合builder.set発行日(new FlexibleDate(div.getTxtHanteibi().getValue().toString()));
+        利用者負担割合builder.set交付日(new FlexibleDate(div.getTxtKofubi().getValue().toString()));
+        利用者負担割合builder.set論理削除フラグ(true);
+        利用者負担割合 = 利用者負担割合builder.build();
+        利用者負担割合.toEntity().setState(EntityDataState.Modified);
+    }
+
+    /**
+     * 証交付回収情報を保存します。
+     *
+     * @param 利用者負担割合 RiyoshaFutanWariai
+     */
+    public void insert証交付回収(RiyoshaFutanWariai 利用者負担割合) {
+        ShoKofuKaishuManager 証交付回収manager = new ShoKofuKaishuManager();
+        ShoKofuKaishu max履歴番号証交付回収entity = 証交付回収manager.get証交付回収(利用者負担割合.get被保険者番号(), 交付証種類);
+        ShoKofuKaishu new証交付回収 = new ShoKofuKaishu(
+                new HihokenshaNo(div.getCcdKaigoShikakuKihon().get被保険者番号()),
+                交付証種類,
+                max履歴番号証交付回収entity.get履歴番号() + 1);
+        ShoKofuKaishuBuilder 証交付回収builder = new証交付回収.createBuilderForEdit();
+        証交付回収builder.set市町村コード(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード());
+        証交付回収builder.set識別コード(
+                new ShikibetsuCode(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getHdnTxtShikibetsuCode()));
+        証交付回収builder.set交付年月日(new FlexibleDate(div.getTxtKofubi().getValue().toString()));
+        List<dgFutanWariai_Row> list = div.getDgFutanWariai().getDataSource();
+        証交付回収builder.set有効期限(new FlexibleDate(list.get(list.size() - 1).getTekiyoShuryobi().getValue().toString()));
+        RString 交付事由 = div.getDdlKofuJiyu().getSelectedKey();
+        if (交付事由 != null) {
+            証交付回収builder.set交付事由(交付事由);
+        }
+        証交付回収builder.set単票発行有無フラグ(true);
+        証交付回収builder.set発行処理日時(YMDHMS.now());
+        証交付回収builder.set論理削除フラグ(false);
+        new証交付回収 = 証交付回収builder.build();
+        new証交付回収.toEntity().setState(EntityDataState.Added);
+        ShoKofuKaishuManager manage = new ShoKofuKaishuManager();
+        manage.save証交付回収(new証交付回収);
+    }
+
+    public void kakuteiShori(RiyoshaFutanWariai 利用者負担割合, FutanWariaiSokujiKouseiHolder holder) {
+        RiyoshaFutanWariaiMeisai 明細entity = holder.getRiyoshaFutanWariaiMeisai(
+                new RiyoshaFutanWariaiMeisaiIdentifier(利用者負担割合.get年度(),
+                        利用者負担割合.get被保険者番号(),
+                        利用者負担割合.get履歴番号(),
+                        Integer.parseInt(div.getDgFutanWariai().getClickedItem().getEdaNo().toString())));
+        if (明細entity != null) {
+            RiyoshaFutanWariaiMeisaiBuilder builderModified = 明細entity.createBuilderForEdit();
+            builderModified.set資格区分(div.getDdlShikaku().getSelectedKey());
+            builderModified.set負担割合区分(div.getDdlFutanWariai().getSelectedKey());
+            builderModified.set有効開始日(new FlexibleDate(div.getTxtTekiyoKaishibi().getValue().toDateString()));
+            builderModified.set有効終了日(new FlexibleDate(div.getTxtTekiyoShuryobi().getValue().toDateString()));
+            builderModified.set本人合計所得金額(div.getTxtHonninGokeiShotoku().getValue());
+            builderModified.set世帯１号被保険者数(div.getTxtSetaiinsu().getValue().intValue());
+            builderModified.set年金収入合計(div.getTxtNenkinShunyuGokei().getValue());
+            builderModified.setその他の合計所得金額合計(div.getTxtSonotaGokei().getValue());
+            builderModified.set更正理由(div.getTxtBiko().getValue());
+            builderModified.set世帯コード(new SetaiCode(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getHdnTxtSetaiCode()));
+            明細entity = builderModified.build();
+            明細entity.toEntity().setState(EntityDataState.Modified);
+            holder.addRiyoshaFutanWariaiMeisai(明細entity);
+        } else {
+            RiyoshaFutanWariaiMeisai new利用者負担割合明細 = new RiyoshaFutanWariaiMeisai(利用者負担割合.get年度(),
+                    利用者負担割合.get被保険者番号(),
+                    利用者負担割合.get履歴番号(),
+                    Integer.parseInt(div.getDgFutanWariai().getClickedItem().getEdaNo().toString()));
+            RiyoshaFutanWariaiMeisaiBuilder builder = new利用者負担割合明細.createBuilderForEdit();
+            builder.set資格区分(div.getDdlShikaku().getSelectedKey());
+            builder.set負担割合区分(div.getDdlFutanWariai().getSelectedKey());
+            builder.set有効開始日(new FlexibleDate(div.getTxtTekiyoKaishibi().getValue().toDateString()));
+            builder.set有効終了日(new FlexibleDate(div.getTxtTekiyoShuryobi().getValue().toDateString()));
+            builder.set本人合計所得金額(div.getTxtHonninGokeiShotoku().getValue());
+            builder.set世帯１号被保険者数(div.getTxtSetaiinsu().getValue().intValue());
+            builder.set年金収入合計(div.getTxtNenkinShunyuGokei().getValue());
+            builder.setその他の合計所得金額合計(div.getTxtSonotaGokei().getValue());
+            builder.set更正理由(div.getTxtBiko().getValue());
+            builder.set世帯コード(new SetaiCode(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getHdnTxtSetaiCode()));
+            new利用者負担割合明細 = builder.build();
+            new利用者負担割合明細.toEntity().setState(EntityDataState.Added);
+            holder.addRiyoshaFutanWariaiMeisai(new利用者負担割合明細);
+        }
+        sort利用者負担割合明細(holder.get利用者負担割合明細());
+        ViewStateHolder.put(ViewStateKeys.利用者負担割合明細, holder);
+        List<dgFutanWariai_Row> dataGridList = new ArrayList<>();
+        for (RiyoshaFutanWariaiMeisai 明細 : holder.get利用者負担割合明細()) {
+            dgFutanWariai_Row rowData = new dgFutanWariai_Row();
+            rowData.setNendo(明細.get年度().toDateString());
+            rowData.setRirekiNo(new RString(明細.get履歴番号()));
+            rowData.setEdaNo(new RString(明細.get枝番号()));
+            rowData.setShikakuCode(明細.get資格区分());
+            rowData.setFutanWariaiCode(明細.get負担割合区分());
+            rowData.setShikaku(FutanWariaiShikakuKubun.toValue(明細.get資格区分()).get名称());
+            rowData.setFutanWariai(FutanwariaiKubun.toValue(明細.get負担割合区分()).get名称());
+            FlexibleDate 適用開始日 = 明細.get有効終了日();
+            FlexibleDate 適用終了日 = 明細.get有効終了日();
+            if (適用開始日 != null) {
+                rowData.getTekiyoKaishibi().setValue(new RDate(適用開始日.toString()));
+            }
+            if (適用終了日 != null) {
+                rowData.getTekiyoShuryobi().setValue(new RDate(適用終了日.toString()));
+            }
+            rowData.getGokeiShotoku().setValue(明細.get本人合計所得金額());
+            rowData.getSetaiinsu().setValue(Decimal.valueOf(明細.get世帯１号被保険者数()));
+            rowData.getNenkinShunyuGokei().setValue(明細.get年金収入合計());
+            rowData.getSonotaGokeiShotoku().setValue(明細.getその他の合計所得金額合計());
+            rowData.setBiko(明細.get更正理由());
+            rowData.setLogicalDeletedFlag(明細.get論理削除フラグ());
+            if (明細.get論理削除フラグ()) {
+                rowData.setRowBgColor(DataGridCellBgColor.bgColorLightRed);
+            }
+            dataGridList.add(rowData);
+        }
+        div.getDgFutanWariai().setDataSource(dataGridList);
+        編集項目をクリアする();
+    }
+
     private FutanWariaiSokujiKouseiResult setDataGridInfo(RString 処理区分) {
         FutanWariaiMybatisParameter mybatisParameter = new FutanWariaiMybatisParameter();
         mybatisParameter.set年度(div.getDdlNendo().getSelectedKey());
@@ -689,14 +829,29 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
     }
 
     private PersonalData toPersonalData(ShikibetsuCode 識別コード, RString 被保険者番号) {
-        ExpandedInformation expandedInfo1 = new ExpandedInformation(new Code("0001"), 個人番号_利用有無, 有り);
-        ExpandedInformation expandedInfo2 = new ExpandedInformation(new Code("0002"), 法人番号_利用有無, 無し);
-        ExpandedInformation expandedInfo3 = new ExpandedInformation(new Code("0003"), 被保険者番号R, 被保険者番号);
-        return PersonalData.of(識別コード, expandedInfo1, expandedInfo2, expandedInfo3);
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE), 被保険者番号R, 被保険者番号);
+        return PersonalData.withKojinNo(識別コード, expandedInfo);
     }
 
     private void 前排他キーの解除(RString 被保険者番号) {
         LockingKey 排他キー = new LockingKey(前排他キー.concat(被保険者番号));
         RealInitialLocker.release(排他キー);
+    }
+
+    private void sort利用者負担割合明細(List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細list) {
+        Collections.sort(利用者負担割合明細list, new Comparator<RiyoshaFutanWariaiMeisai>() {
+            @Override
+            public int compare(RiyoshaFutanWariaiMeisai arg0, RiyoshaFutanWariaiMeisai arg1) {
+                if (arg0.get有効開始日() != null && arg1.get有効開始日() != null
+                        && arg0.get有効終了日() != null && arg1.get有効終了日() != null) {
+                    if (arg0.get有効開始日().compareTo(arg1.get有効開始日()) == 0) {
+                        return arg0.get有効終了日().compareTo(arg1.get有効終了日());
+                    } else {
+                        return arg0.get有効開始日().compareTo(arg1.get有効開始日());
+                    }
+                }
+                return 0;
+            }
+        });
     }
 }

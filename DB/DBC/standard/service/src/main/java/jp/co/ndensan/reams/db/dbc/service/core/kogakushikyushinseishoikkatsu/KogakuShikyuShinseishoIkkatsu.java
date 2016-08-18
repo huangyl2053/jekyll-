@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 高額サービス費給付お知らせ通知書作成のハンドラクラスです。
  *
- * @reamsid DBC-4770-010 zhengshenlei
+ * @reamsid_L DBC-4770-010 zhengshenlei
  */
 public class KogakuShikyuShinseishoIkkatsu {
 

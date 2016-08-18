@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000023.DBC2
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000023.DBC2000023TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000023.RiyoshaFutanWariaiKoushiConfDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000023.RiyoshaFutanWariaiKoushiConfHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000023.RiyoshaFutanWariaiKoushiConfValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc2000022.FutanWariaiSokujiKouseiServiceData;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
@@ -20,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -55,17 +53,6 @@ public class RiyoshaFutanWariaiKoushiConf {
      */
     public ResponseData<RiyoshaFutanWariaiKoushiConfDiv> onClick_btnPrint(RiyoshaFutanWariaiKoushiConfDiv div) {
         CommonButtonHolder.setIsClientValidateByCommonButtonFieldName(発行する, true);
-
-        RiyoshaFutanWariaiKoushiConfValidationHandler validationHandler
-                = new RiyoshaFutanWariaiKoushiConfValidationHandler(div);
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        pairs.add(validationHandler.validate交付日());
-        pairs.add(validationHandler.validate発行日());
-        pairs.add(validationHandler.validate交付事由未選択());
-
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
-        }
 
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(DbcQuestionMessages.負担割合証単票発行確認.getMessage()
