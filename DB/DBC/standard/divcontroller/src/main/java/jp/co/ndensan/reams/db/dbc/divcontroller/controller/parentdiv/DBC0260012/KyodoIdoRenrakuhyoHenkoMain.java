@@ -138,12 +138,21 @@ public class KyodoIdoRenrakuhyoHenkoMain {
      * @return ResponseData
      */
     public ResponseData<SourceDataCollection> onClick_btnReportPublish(KyodoIdoRenrakuhyoHenkoMainDiv div) {
-        getHandler(div).set更新完了メッセージ();
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         KyodoshoriyoJukyushaIdoRenrakuhyoParam 初期受給者異動情報 = ViewStateHolder.get(
                 ViewStateKeys.共同処理用受給者異動情報, KyodoshoriyoJukyushaIdoRenrakuhyoParam.class);
-        return ResponseData.of(getHandler(div).to帳票発行処理(初期受給者異動情報, 処理モード))
-                .setState(DBC0260012StateName.更新完了);
+        return ResponseData.of(getHandler(div).to帳票発行処理(初期受給者異動情報, 処理モード)).respond();
+    }
+
+    /**
+     * 「発行」ボタンを更新完了に状態遷移のメソッドです。
+     *
+     * @param div 画面Div
+     * @return ResponseData
+     */
+    public ResponseData<KyodoIdoRenrakuhyoHenkoMainDiv> toAfterPrint(KyodoIdoRenrakuhyoHenkoMainDiv div) {
+        getHandler(div).set更新完了メッセージ();
+        return ResponseData.of(div).setState(DBC0260012StateName.更新完了);
     }
 
     /**
