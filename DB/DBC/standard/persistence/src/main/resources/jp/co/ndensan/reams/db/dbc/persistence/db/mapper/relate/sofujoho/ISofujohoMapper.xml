@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 過誤申立送付情報照会のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-2950-010 jinjue -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.sofujoho.ISofujohoMapper">
+
+    <resultMap id="resultMap_SofujohoRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.sofujoho.SofujohoRelateEntity" autoMapping="true">
+        <result property="事業所番号" column="jigyoshoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="事業所名" column="jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="宛名名称" column="宛名名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申立者区分コード" column="moshitateshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申立事由コード" column="moshitateJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービス提供年月" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="申立年月日" column="moshitateYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="証記載保険者番号" column="shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+    <select id="select過誤申立送付情報照会" resultMap="resultMap_SofujohoRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.sofujoho.SofujohoMybatisParameter" fetchSize="500" resultOrdered="true">
+        WITH T AS (
+        SELECT
+        T3059."jigyoshoNo",
+        T7060."jigyoshaName",
+        T3059."hiHokenshaNo",
+        T3059."moshitateshaKubunCode",
+        T3059."moshitateJiyuCode",
+        T3059."serviceTeikyoYM",
+        T3059."moshitateYMD",
+        T3059."shokisaiHokenshaNo",
+        dbv1001."shikibetsuCode"
+        FROM
+        rgdb."DbT3059KagoMoshitate" AS T3059
+        INNER JOIN
+        rgdb."DbT7060KaigoJigyosha" AS T7060
+        ON	T7060."jigyoshaNo"=T3059."jigyoshoNo"
+        LEFT OUTER JOIN
+        rgdb."DbT7060KaigoJigyosha" AS Tb7060
+        ON	T3059."jigyoshoNo"=Tb7060."jigyoshaNo"
+        AND	Tb7060."yukoKaishiYMD" = (SELECT MAX("yukoKaishiYMD") FROM rgdb."DbT7060KaigoJigyosha")
+        LEFT JOIN
+        rgdb."DbV1001HihokenshaDaicho" AS dbv1001
+        ON	T3059."hiHokenshaNo" = dbv1001."hihokenshaNo"
+        WHERE
+        T3059."moshitateshoKubunCode"=#{申立書区分コード}
+        <if test="送付年月フラグ">
+            AND T3059."kokuhorenSofuYM" = #{送付年月}
+        </if>
+        <if test="!送付年月フラグ">
+            AND T3059."kokuhorenSofuYM" IS NULL
+        </if>
+        <if test="保険者番号フラグ">
+            AND substr(T3059."shokisaiHokenshaNo",1,5) = #{証記載保険者番号}
+        </if>
+        ORDER BY
+        T3059."jigyoshoNo",
+        T3059."hiHokenshaNo",
+        T3059."serviceTeikyoYM",
+        T3059."rirekiNo" DESC)
+        SELECT T.*,宛名."meisho" AS 宛名名称 FROM T
+        LEFT JOIN
+        rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',TRUE,
+        '','','','','','','',FALSE,'','','','','','','','','','','',FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,
+        FALSE,'','','','','','','','',FALSE,'','',FALSE,FALSE,FALSE,'','','','','','','','','','','','','','','','','','','{}')
+        AS 宛名
+        ON 宛名."shikibetsuCode" =T."shikibetsuCode"
+    </select>
+</mapper>
