@@ -142,6 +142,7 @@ public class RiyoshaFutangakuGemmenShinseishoHakko extends BatchProcessBase<Riyo
         RString csv出力有無 = なし;
         RString csvファイル名 = なし;
         List<RString> 出力条件 = new ArrayList<>();
+        builder = new RStringBuilder();
         builder.append(HAKKONICHI);
         builder.append(processParamter.get発行日().wareki().toDateString());
         出力条件.add(builder.toRString());

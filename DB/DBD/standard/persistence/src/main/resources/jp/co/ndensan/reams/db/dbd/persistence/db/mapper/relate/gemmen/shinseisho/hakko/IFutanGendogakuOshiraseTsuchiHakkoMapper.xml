@@ -6,8 +6,8 @@
  <resultMap id="resultMap_get出力対象者情報Entity"  type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmen.shinseisho.hakko.FutanGendogakuOshiraseTsuchiHakkoEntity" autoMapping="true">
      <result property="被保険者番号" column="被保険者番号"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
      <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-     <result property="旧措置者フラグ" column="旧措置者フラグ"/>
-     <result property="新規更新区分" column="新規更新区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+     <result property="旧措置者フラグ" column="旧措置者フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+     <result property="更新認定フラグ" column="更新認定フラグ"  typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
      <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
      <association property="宛先" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
  </resultMap>
@@ -19,7 +19,7 @@
              E."hihokenshaNo" AS 被保険者番号,
              E."shikibetsuCode" AS 識別コード,
              H."kyuSochishaFlag" AS 旧措置者フラグ ,
-<!--             E."",-->
+             E."willBeRenewed" AS 更新認定フラグ,
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
              <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
        FROM  
@@ -42,7 +42,6 @@
              AND H."logicalDeletedFlag" IS FALSE 
        WHERE 
              A."hakkoShoriID" =#{発行処理ID}
-<!--       ORDER　BY
-             #{出力順}-->
+       ${出力順}
 </select>
 </mapper>

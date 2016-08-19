@@ -56,6 +56,7 @@ public class FutanGengaokuNinteiShinseishoHakkoIchiranSakusei extends BatchProce
     private static final RString SHUTSURYOKUJUN = new RString("【出力順】");
     private static final RString なし = new RString("なし");
     private static final ReportId ID = new ReportId("DBD200022_FutanGendogakuNinteiShinseishoHakkoIchiran");
+    private static final int STARTINDEX = 9;
     private ShinseishoHakkoProcessParameter processParamter;
     private Association association;
     private RString 導入団体コード;
@@ -77,6 +78,9 @@ public class FutanGengaokuNinteiShinseishoHakkoIchiranSakusei extends BatchProce
                 processParamter.get帳票ID(),
                 processParamter.get改頁出力順ID());
         出力順 = MyBatisOrderByClauseCreator.create(FutangendogakuNinteiShinseishoOrderKey.class, order);
+        if (processParamter.is出力フラグ()) {
+            出力順 = 出力順.substring(STARTINDEX, 出力順.length());
+        }
     }
 
     @Override
@@ -116,6 +120,7 @@ public class FutanGengaokuNinteiShinseishoHakkoIchiranSakusei extends BatchProce
         RString csv出力有無 = なし;
         RString csvファイル名 = なし;
         List<RString> 出力条件 = new ArrayList<>();
+        builder = new RStringBuilder();
         builder.append(HAKKONICHI);
         builder.append(processParamter.get発行日().wareki().toDateString());
         出力条件.add(builder.toRString());
@@ -134,33 +139,43 @@ public class FutanGengaokuNinteiShinseishoHakkoIchiranSakusei extends BatchProce
         FutanGendogakuNinteiShinseishoHakkoIchiran 帳票情報 = new FutanGendogakuNinteiShinseishoHakkoIchiran();
         帳票情報.setユニット型個室(entity.getユニット型個室());
         帳票情報.setユニット型順個室(entity.getユニット型順個室());
-        帳票情報.set世帯課税(SetaiKazeiKubun.toValue(entity.get世帯課税()));
+        if (!RString.isNullOrEmpty(entity.get世帯課税())) {
+            帳票情報.set世帯課税(SetaiKazeiKubun.toValue(entity.get世帯課税()));
+        }
         帳票情報.set住所地特例フラグ(entity.get住所地特例フラグ());
         帳票情報.set住民となった日(entity.get宛名().getTorokuIdoYMD());
         帳票情報.set入所施設コード(entity.get入所施設コード());
         帳票情報.set入所施設名(entity.get入所施設名());
-        帳票情報.set利用者負担段階(RiyoshaFutanDankai.toValue(entity.get利用者負担段階()));
+        if (!RString.isNullOrEmpty(entity.get利用者負担段階())) {
+            帳票情報.set利用者負担段階(RiyoshaFutanDankai.toValue(entity.get利用者負担段階()));
+        }
         帳票情報.set厚労省IF識別コード(entity.get厚労省IF識別コード());
         帳票情報.set合計所得(entity.get合計所得());
         帳票情報.set多床室(entity.get多床室());
         帳票情報.set従来型特養(entity.get従来型特養());
         帳票情報.set従来型老健(entity.get従来型老健());
-        帳票情報.set旧措置(KyuSochishaKubun.toValue(entity.get旧措置()));
+        if (!RString.isNullOrEmpty(entity.get旧措置())) {
+            帳票情報.set旧措置(KyuSochishaKubun.toValue(entity.get旧措置()));
+        }
         帳票情報.set旧措置フラグ(entity.is旧措置フラグ());
         帳票情報.set有効期限(entity.get有効期限());
-        帳票情報.set決定区分(KetteiKubun.toValue(entity.get決定区分()));
+        if (!RString.isNullOrEmpty(entity.get決定区分())) {
+            帳票情報.set決定区分(KetteiKubun.toValue(entity.get決定区分()));
+        }
         帳票情報.set決定年月日(entity.get決定年月日());
         帳票情報.set生保(entity.is生保());
         帳票情報.set申請年月日(entity.get申請年月日());
         帳票情報.set老齢(entity.is老齢());
         帳票情報.set自己作成(entity.is自己作成());
-        帳票情報.set被保番号(entity.get被保番号());
+        帳票情報.set被保番号(entity.get被保険者番号());
         帳票情報.set要介護認定状態区分コード(entity.get要介護認定状態区分コード());
         帳票情報.set計画事業者コード(entity.get計画事業者コード());
         帳票情報.set計画事業者名(entity.get計画事業者名());
         帳票情報.set認定終了日(entity.get認定終了日());
         帳票情報.set認定開始日(entity.get認定開始日());
-        帳票情報.set負担段階(RiyoshaFutanDankai.toValue(entity.get負担段階()));
+        if (!RString.isNullOrEmpty(entity.get負担段階())) {
+            帳票情報.set負担段階(RiyoshaFutanDankai.toValue(entity.get負担段階()));
+        }
         帳票情報.set適用日(entity.get適用日());
         帳票情報.set非課税年金勘案額(entity.get非課税年金勘案額());
         帳票情報.set食費負担額(entity.get食費負担額());

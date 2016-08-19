@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.business.report.dbd800002;
+package jp.co.ndensan.reams.db.dbd.business.report.dbd800005;
 
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 介護保険利用者負担額減額・免除申請書 出力順設定可能項目です。
+ * 訪問介護利用者負担額減額申請書 出力順設定可能項目です。
  *
  * @reamsid_L DBD-3530-080 mawy
  */
-public enum RiyoshaFutangakuGengakuMenjyoShinseishoOrderKey implements IReportItems {
+public enum HomonKaigoRiyoshaFutangakuGengakuShinseishoOrderKey implements IReportItems {
 
     /**
      * 項目ID:0001 フォームフィールド名:郵便番号 MyBatis項目名:定義なし
@@ -48,7 +48,7 @@ public enum RiyoshaFutangakuGengakuMenjyoShinseishoOrderKey implements IReportIt
     private final RString フォームフィールド名;
     private final RString 項目名;
 
-    private RiyoshaFutangakuGengakuMenjyoShinseishoOrderKey(String 項目ID, String フォームフィールド名, String 項目名) {
+    private HomonKaigoRiyoshaFutangakuGengakuShinseishoOrderKey(String 項目ID, String フォームフィールド名, String 項目名) {
         this.項目ID = new RString(項目ID);
         this.フォームフィールド名 = new RString(フォームフィールド名);
         this.項目名 = new RString(項目名);
@@ -68,4 +68,5 @@ public enum RiyoshaFutangakuGengakuMenjyoShinseishoOrderKey implements IReportIt
     public RString getMyBatis項目名() {
         return 項目名;
     }
+
 }

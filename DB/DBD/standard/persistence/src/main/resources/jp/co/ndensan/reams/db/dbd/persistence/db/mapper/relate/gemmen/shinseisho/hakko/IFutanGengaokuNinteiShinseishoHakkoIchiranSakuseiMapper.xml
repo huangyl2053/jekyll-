@@ -2,17 +2,16 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--@reamsid_L DBD-3530-080 mawy-->
 
-
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmen.shinseisho.hakko.IFutanGengaokuNinteiShinseishoHakkoIchiranSakuseiMapper">
-    <resultMap id="resultMap_get出力対象者情報Entity"  type="jp.co.ndensan.reams.db.dbd.entity.db.relate.futangendogakuninteishinseishohakkoichiran.FutanGendogakuNinteiShinseishoHakkoIchiran" autoMapping="true">
-        <result property="被保番号" column="被保険者番号"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-<!--        <result property="新規更新区分"  column="新規更新区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>-->
+    <resultMap id="resultMap_get出力対象者情報Entity"  type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmen.shinseisho.hakko.FutanGendogakuNinteiShinseishoHakkoIchiranEntity" autoMapping="true">
+        <result property="被保険者番号" column="被保険者番号"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="更新認定フラグ"  column="更新認定フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
         <result property="計画事業者コード" column="計画事業者コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="計画事業者名"  column="計画事業者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="is自己作成"  column="is自己作成"/>
+        <result property="is自己作成"  column="is自己作成" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
         <result property="利用者負担段階"  column="利用者負担段階"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="生保"  column="生保"/>
-        <result property="老齢"  column="老齢"/>
+        <result property="生保"  column="生保" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="老齢"  column="老齢" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
         <result property="入所施設コード" column="入所施設コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="入所施設名" column="入所施設名"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="合計所得" column="合計所得"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
@@ -20,11 +19,11 @@
         <result property="認定終了日" column="認定終了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="要介護認定状態区分コード" column="要介護認定状態区分コード"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="厚労省IF識別コード" column=" 厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="旧措置フラグ" column="旧措置フラグ"/>
+        <result property="旧措置フラグ" column="旧措置フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
         <result property="世帯課税" column="世帯課税" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="申請年月日" column="申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="適用開始日"  column="適用開始日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="適用終了日"  column="適用終了日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="適用日"  column="適用開始日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="有効期限"  column="適用終了日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="負担段階"  column="負担段階"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ユニット型順個室" column="ユニット型順個室" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="多床室" column="多床室" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
@@ -46,9 +45,9 @@
               parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmen.shinseisho.hakko.FutanGendogakuMybatisParameter"
               fetchSize="500">
   SELECT  
-        E."hihokenshaNo" AS 被保番号,
-<!--        E.""   AS  新規更新区分,-->
-        E."riyoshaFutanDankai"  AS 負担段階,
+        E."hihokenshaNo" AS 被保険者番号,
+        E."willBeRenewed"  AS  更新認定フラグ,
+        E."riyoshaFutanDankai"  AS 利用者負担段階,
         E."isSeikatsuHogoJukyusha"  AS 生保,
         E."isRoreiFukushiNenkinJukyusha"  AS 老齢,
         E."gokeiShotokuKingaku"  AS 合計所得,
@@ -60,7 +59,7 @@
         G."koroshoIfShikibetsuCode"  AS  厚労省IF識別コード,
         F."shinseiYMD" AS 申請年月日,
         F."tekiyoKaishiYMD"  AS 適用開始日,
-        F."riyoshaFutanDankai"  AS  前回利用者負担段階,
+        F."riyoshaFutanDankai"  AS  負担段階,
         F."unitTypeJunKoshitsu"  AS  ユニット型順個室,
         F."tashoshitsu"  AS  多床室,
         F."ketteiYMD"  AS 決定年月日,
@@ -112,7 +111,7 @@
                      ) F1
                      ON F1."hihokenshaNo" =F2."hihokenshaNo"
                      AND F1."rirekiNo" =F2."rirekiNo"
-        )F
+        ) AS F
                 ON 
                     F."hihokenshaNo" =E."hihokenshaNo"
                 LEFT JOIN 
@@ -185,11 +184,11 @@
                                                  ON M."hihokenshaNo" =D."hihokenshaNo"
                               WHERE  
                                         A."hakkoShoriID" =#{発行処理ID}
-<!--                                ORDER BY 
-                                <if test="出力フラグ" >
-                                            A.""
-                                         </if>
-                                            #{出力順}                 -->
+                              <if test="出力フラグ" >
+                              ORDER BY 
+                                   E."willBeRenewed",
+                              </if>
+                                   ${出力順}                 
   </select>
 </mapper>                                                   
                                              
