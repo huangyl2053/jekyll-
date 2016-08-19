@@ -80,7 +80,6 @@ public class DBC120820_JukyushaTotsugoKekkaIn extends BatchFlowBase<DBC120820_Ju
                         + returnEntity.getFileNameList().get(i);
                 File path = new File(filePath);
                 ファイル絶対パース = new RString(path.getPath());
-                一回目実行フラグ = (0 == i);
                 if (i == 0) {
 
                     csvParameter.set処理年月(null);
@@ -90,7 +89,6 @@ public class DBC120820_JukyushaTotsugoKekkaIn extends BatchFlowBase<DBC120820_Ju
                     csvParameter.set連番(flowEntity.get連番());
                 }
                 csvParameter.set処理年月(getParameter().get処理年月());
-                csvParameter.set一回目実行フラグ(一回目実行フラグ);
                 csvParameter.setファイルパース(ファイル絶対パース);
                 executeStep(CSVファイル取込);
                 flowEntity = getResult(KokuhorenJukyushaFlowEntity.class, new RString(CSVファイル取込),
