@@ -10,12 +10,15 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufukanrihyoshokai.KyufuKanrihyoShokaiBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufukanrihyoshokai.KyufuKanrihyoShokaiDataModel;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.KyotakuServiceKubun;
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0060011.DBC0060011TransitionEventName.居宅サービスの給付管理照会へ;
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0060011.DBC0060011TransitionEventName.訪問通所サービスの給付管理照会へ;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0060011.KyufuJissekiGaitoshaDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0060011.KyufuJissekiGaitoshaHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0060011.KyufuJissekiGaitoshaValidationHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.kyufukanrihyoshokai.KyufuKanrihyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -76,13 +79,13 @@ public class KyufuJissekiGaitosha {
         Boolean 短期入所サービスフラグ = false;
         for (KyufuKanrihyoShokaiBusiness 給付管理明細 : 給付管理明細一覧) {
             給付管理明細一覧Model.add(KyufuKanrihyoShokaiDataModel.createDataModel(給付管理明細));
-            if (!居宅サービスフラグ && KyotakuServiceKubun.居宅サービス.get名称().equals(
+            if (!居宅サービスフラグ && KyotakuServiceKubun.居宅サービス.getコード().equals(
                     給付管理明細.get給付管理票種別区分コード())) {
                 居宅サービスフラグ = true;
-            } else if (!訪問通所サービスフラグ && KyotakuServiceKubun.訪問通所.get名称().equals(
+            } else if (!訪問通所サービスフラグ && KyotakuServiceKubun.訪問通所.getコード().equals(
                     給付管理明細.get給付管理票種別区分コード())) {
                 訪問通所サービスフラグ = true;
-            } else if (!短期入所サービスフラグ && KyotakuServiceKubun.短期入所.get名称().equals(
+            } else if (!短期入所サービスフラグ && KyotakuServiceKubun.短期入所.getコード().equals(
                     給付管理明細.get給付管理票種別区分コード())) {
                 短期入所サービスフラグ = true;
             }
@@ -92,15 +95,13 @@ public class KyufuJissekiGaitosha {
         ViewStateHolder.put(ViewStateKeys.訪問通所サービスフラグ, 訪問通所サービスフラグ);
         ViewStateHolder.put(ViewStateKeys.短期入所サービスフラグ, 短期入所サービスフラグ);
         ViewStateHolder.put(ViewStateKeys.居宅サービスフラグ, 居宅サービスフラグ);
-        // TODO QA#96146 UIコンテナは「DBCUC00600」が存在しない、画面を遷移できません。
-//        FlexibleYearMonth 支給限度額一本化年月 = new FlexibleYearMonth(div.getHdn支給限度額一本化年月());
-//        FlexibleYearMonth サービス提供年月 = 給付管理票.getサービス提供年月();
-//        if (支給限度額一本化年月.isBeforeOrEquals(サービス提供年月)) {
-//            return ResponseData.of(div).forwardWithEventName(居宅).respond();
-//        } else {
-//            return ResponseData.of(div).forwardWithEventName(訪問通所).respond();
-//        }
-        return ResponseData.of(div).respond();
+        FlexibleYearMonth 支給限度額一本化年月 = new FlexibleYearMonth(div.getHdn支給限度額一本化年月());
+        FlexibleYearMonth サービス提供年月 = 給付管理票.getサービス提供年月();
+        if (支給限度額一本化年月.isBeforeOrEquals(サービス提供年月)) {
+            return ResponseData.of(div).forwardWithEventName(居宅サービスの給付管理照会へ).respond();
+        } else {
+            return ResponseData.of(div).forwardWithEventName(訪問通所サービスの給付管理照会へ).respond();
+        }
     }
 
     private KyufuJissekiGaitoshaHandler getHandler(KyufuJissekiGaitoshaDiv div) {

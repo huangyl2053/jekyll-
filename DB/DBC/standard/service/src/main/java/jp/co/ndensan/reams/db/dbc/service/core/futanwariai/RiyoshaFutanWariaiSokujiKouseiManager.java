@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariai;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiKonkyo;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3113RiyoshaFutanWariaiEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3113RiyoshaFutanWariaiDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3114RiyoshaFutanWariaiMeisaiDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3115RiyoshaFutanWariaiKonkyoDac;
@@ -68,27 +69,35 @@ public class RiyoshaFutanWariaiSokujiKouseiManager {
     }
 
     /**
-     * Max履歴番号を取得します。
+     * 利用者負担割合明細情報を取得します。
      *
      * @param 年度 Nendo
      * @param 被保険者番号 HihokenshaNo
      *
-     * @return RiyoshaFutanWariai
+     * @return List<RiyoshaFutanWariaiMeisai>
      */
-    public RiyoshaFutanWariai selectMax履歴番号(FlexibleYear 年度, HihokenshaNo 被保険者番号) {
-        return new RiyoshaFutanWariai(利用者負担割合Dac.selectMax履歴番号(年度, 被保険者番号));
+    public List<RiyoshaFutanWariaiMeisai> select履歴番号BY年度と被保険者番号(FlexibleYear 年度, HihokenshaNo 被保険者番号) {
+
+        List<DbT3114RiyoshaFutanWariaiMeisaiEntity> list
+                = 利用者負担割合明細Dac.select履歴番号BY年度と被保険者番号(年度, 被保険者番号);
+        List<RiyoshaFutanWariaiMeisai> resultList = new ArrayList<>();
+        if (list != null && !list.isEmpty()) {
+            for (DbT3114RiyoshaFutanWariaiMeisaiEntity 利用者負担割合明細 : list) {
+                resultList.add(new RiyoshaFutanWariaiMeisai(利用者負担割合明細));
+            }
+        }
+        return resultList;
     }
 
     /**
      * Max履歴番号を取得します。
      *
-     * @param 年度 Nendo
      * @param 被保険者番号 HihokenshaNo
      *
      * @return List<DbT3113RiyoshaFutanWariaiEntity>
      */
-    public List<RiyoshaFutanWariai> selectBy年度と被保険者番号(FlexibleYear 年度, HihokenshaNo 被保険者番号) {
-        List<DbT3113RiyoshaFutanWariaiEntity> list = 利用者負担割合Dac.selectBy年度と被保険者番号(年度, 被保険者番号);
+    public List<RiyoshaFutanWariai> select年度By被保険者番号(HihokenshaNo 被保険者番号) {
+        List<DbT3113RiyoshaFutanWariaiEntity> list = 利用者負担割合Dac.select年度By被保険者番号(被保険者番号);
         List<RiyoshaFutanWariai> resultList = new ArrayList<>();
         for (DbT3113RiyoshaFutanWariaiEntity entity : list) {
             resultList.add(new RiyoshaFutanWariai(entity));
