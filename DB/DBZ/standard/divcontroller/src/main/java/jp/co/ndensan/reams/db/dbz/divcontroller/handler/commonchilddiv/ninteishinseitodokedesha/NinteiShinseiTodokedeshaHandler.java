@@ -77,7 +77,6 @@ public class NinteiShinseiTodokedeshaHandler {
             div.getCcdChoikiInput().load(ChoikiCode.EMPTY, model.get住所());
             div.getDdlTodokledeDaikoKubun().setSelectedKey(model.get申請届出代行区分コード());
             div.getDdlShinseiKankeisha().setSelectedKey(model.get事業者区分());
-            div.getDdlTodokledeDaikoKubun().setSelectedKey(管内);
         }
         setHidden(model);
         div.setMode_DisplayType(NinteiShinseiTodokedeshaDiv.DisplayType.管内);
