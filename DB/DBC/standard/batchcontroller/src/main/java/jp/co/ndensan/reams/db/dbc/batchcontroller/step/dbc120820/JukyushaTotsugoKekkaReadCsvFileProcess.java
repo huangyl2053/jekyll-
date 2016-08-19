@@ -10,12 +10,10 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_Tori
 import jp.co.ndensan.reams.db.dbc.definition.processprm.jukyushatotsugokekkain.JukyushaTotsugoKekkaReadCsvFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushatotsugokekka.JukyushaKekkaJohoControlCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushatotsugokekka.JukyushaKekkaJohoCsvMeisaiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kokuhorenjukyushain.KokuhorenJukyushaFlowEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakoshinkekka.DbWT5331JukyushaJohoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT0001HihokenshaIchijiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002KokuhorenTorikomiErrorEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.hokenshainputguide.Hokensha;
@@ -47,7 +45,6 @@ public class JukyushaTotsugoKekkaReadCsvFileProcess extends BatchProcessBase<RSt
      */
     public static final RString PARAMETER_OUT_FLOWENTITY;
     private JukyushaTotsugoKekkaReadCsvFileProcessParameter parameter;
-    private IKokuhorenKyoutsuuTempTableMapper 一時mapper;
     @BatchWriter
     IBatchTableWriter 被保険者一時tableWriter;
     @BatchWriter
@@ -97,7 +94,6 @@ public class JukyushaTotsugoKekkaReadCsvFileProcess extends BatchProcessBase<RSt
 
     @Override
     protected void beforeExecute() {
-        this.一時mapper = getMapper(IKokuhorenKyoutsuuTempTableMapper.class);
     }
 
     @Override
@@ -261,18 +257,18 @@ public class JukyushaTotsugoKekkaReadCsvFileProcess extends BatchProcessBase<RSt
     }
 
     private void 処理結果リスト一時に登録() {
-        DbWT0002KokuhorenTorikomiErrorTempEntity 処理結果リスト一時entity = new DbWT0002KokuhorenTorikomiErrorTempEntity();
-        処理結果リスト一時entity.setエラー区分(KokuhorenJoho_TorikomiErrorKubun.取込対象データなし.getコード());
-        処理結果リスト一時entity.set証記載保険者番号(ShoKisaiHokenshaNo.EMPTY);
-        処理結果リスト一時entity.set被保険者番号(HihokenshaNo.EMPTY);
-        処理結果リスト一時entity.setキー1(RString.EMPTY);
-        処理結果リスト一時entity.setキー2(RString.EMPTY);
-        処理結果リスト一時entity.setキー3(RString.EMPTY);
-        処理結果リスト一時entity.setキー4(RString.EMPTY);
-        処理結果リスト一時entity.setキー5(RString.EMPTY);
-        処理結果リスト一時entity.set被保険者カナ氏名(RString.EMPTY);
-        処理結果リスト一時entity.set被保険者氏名(RString.EMPTY);
-        処理結果リスト一時entity.set備考(RString.EMPTY);
-        this.一時mapper.処理結果リスト一時TBLに登録(処理結果リスト一時entity);
+        DbWT0002KokuhorenTorikomiErrorEntity 処理結果リスト一時entity = new DbWT0002KokuhorenTorikomiErrorEntity();
+        処理結果リスト一時entity.setErrorKubun(KokuhorenJoho_TorikomiErrorKubun.取込対象データなし.getコード());
+        処理結果リスト一時entity.setShoHokanehshaNo(ShoKisaiHokenshaNo.EMPTY);
+        処理結果リスト一時entity.setHihokenshaNo(HihokenshaNo.EMPTY);
+        処理結果リスト一時entity.setKey1(RString.EMPTY);
+        処理結果リスト一時entity.setKey2(RString.EMPTY);
+        処理結果リスト一時entity.setKey3(RString.EMPTY);
+        処理結果リスト一時entity.setKey4(RString.EMPTY);
+        処理結果リスト一時entity.setKey5(RString.EMPTY);
+        処理結果リスト一時entity.setHihokenshaKanaShimei(RString.EMPTY);
+        処理結果リスト一時entity.setHihokenshaShimei(RString.EMPTY);
+        処理結果リスト一時entity.setBiko(RString.EMPTY);
+        処理結果リスト一時tableWriter.insert(処理結果リスト一時entity);
     }
 }
