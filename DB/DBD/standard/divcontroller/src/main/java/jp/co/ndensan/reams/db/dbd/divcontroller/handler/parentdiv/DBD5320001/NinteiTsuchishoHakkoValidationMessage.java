@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5320001;
 
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -22,7 +23,7 @@ public enum NinteiTsuchishoHakkoValidationMessage implements IValidationMessage 
     /**
      * 個別印刷0件チェック。
      */
-    個別印刷0件チェック(DbdErrorMessages.通知書印刷不可, "要介護認定通知書発行"),
+    個別印刷0件チェック(UrErrorMessages.対象データなし),
     /**
      * 個別印刷選択0件チェック。
      */
