@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.definition.batchprm.shinchokudataoutput;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shinchokudataoutput.ShinchokuDataOutputProcessParamter;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -27,7 +26,7 @@ public class ShinchokuDataOutputBatchParamter extends BatchParameterBase {
     private static final String SHINSEISHOLANRINOLIST = "shinseishoKanriNoList";
     private static final String FAYIRUKUBEN = "fayirukuben";
     @BatchParameter(key = SHINSEISHOLANRINOLIST, name = "申請書管理番号リスト")
-    private List<ShinseishoKanriNo> shinseishoKanriNoList;
+    private List<RString> shinseishoKanriNoList;
     @BatchParameter(key = FAYIRUKUBEN, name = "ファイル区分")
     private RString fayirukuben;
 
@@ -45,7 +44,7 @@ public class ShinchokuDataOutputBatchParamter extends BatchParameterBase {
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     public ShinchokuDataOutputBatchParamter(
-            List<ShinseishoKanriNo> 申請書管理番号リスト,
+            List<RString> 申請書管理番号リスト,
             RString ファイル区分) {
         this.shinseishoKanriNoList = 申請書管理番号リスト;
         this.fayirukuben = ファイル区分;

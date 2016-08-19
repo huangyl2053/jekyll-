@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinchokudataoutput;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -20,7 +19,7 @@ import lombok.Getter;
 @Getter
 public final class ShinchokuDataOutputMybitisParamter implements IMyBatisParameter {
 
-    private final List<ShinseishoKanriNo> shinseishoKanriNoList;
+    private final List<RString> shinseishoKanriNoList;
     private final RString fayirukuben;
     private final RString イメージ区分;
 
@@ -31,7 +30,7 @@ public final class ShinchokuDataOutputMybitisParamter implements IMyBatisParamet
      * @param fayirukuben RString
      */
     private ShinchokuDataOutputMybitisParamter(
-            List<ShinseishoKanriNo> shinseishoKanriNoList,
+            List<RString> shinseishoKanriNoList,
             RString fayirukuben,
             RString イメージ区分) {
         this.shinseishoKanriNoList = shinseishoKanriNoList;
@@ -48,7 +47,7 @@ public final class ShinchokuDataOutputMybitisParamter implements IMyBatisParamet
      * @return ShinchokuDataOutputMybitisParamter
      */
     public static ShinchokuDataOutputMybitisParamter createParam(
-            List<ShinseishoKanriNo> shinseishoKanriNoList,
+            List<RString> shinseishoKanriNoList,
             RString fayirukuben,
             RString イメージ区分) {
         return new ShinchokuDataOutputMybitisParamter(shinseishoKanriNoList, fayirukuben, イメージ区分);
