@@ -13,15 +13,11 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kokuhorenjukyushain.KokuhorenJukyus
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenjukyushain.DbWT5331JukyushaJohoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT0001HihokenshaIchijiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002KokuhorenTorikomiErrorEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenjukyushain.IKokuhorenJukyushaMapper;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuMapper;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.hokenshainputguide.Hokensha;
 import jp.co.ndensan.reams.db.dbz.service.core.hokensha.HokenshaNyuryokuHojoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
-import jp.co.ndensan.reams.ux.uxx.persistence.db.mapper.util.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
@@ -33,8 +29,6 @@ import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 国保連保有受給者情報取込。
@@ -56,10 +50,6 @@ public class KokuhorenJukyushaInReadCsvFileProcess extends BatchProcessBase<RStr
     OutputParameter<KokuhorenJukyushaFlowEntity> returnFlowEntity;
     KokuhorenJukyushaFlowEntity flowEntity;
 
-    private MapperProvider mapperProvider;
-    private IKokuhorenJukyushaMapper mapper;
-    private IKokuhorenKyoutsuuTempTableMapper mapper1;
-    private IKokuhorenKyoutsuuMapper 処理結果mapper;
     private KagoKetteiHokenshaInControlCsvEntity controlCsvEntity;
     private KokuhorenJukyushaDataCsvEntity detialEntity;
     private final RString レコード種別 = new RString("1");
@@ -78,7 +68,6 @@ public class KokuhorenJukyushaInReadCsvFileProcess extends BatchProcessBase<RStr
     private final RString 区切り文字 = new RString(",");
     private final RString レコード種別_エンド = new RString("3");
 
-    private FlexibleYearMonth 処理対象年月;
     private RString 保険者番号;
     private int 連番;
 
@@ -89,14 +78,6 @@ public class KokuhorenJukyushaInReadCsvFileProcess extends BatchProcessBase<RStr
         flowEntity = new KokuhorenJukyushaFlowEntity();
         連番 = parameter.get連番();
 
-    }
-
-    @Override
-    protected void beforeExecute() {
-        mapperProvider = InstanceProvider.create(MapperProvider.class);
-        mapper = mapperProvider.create(IKokuhorenJukyushaMapper.class);
-        mapper1 = mapperProvider.create(IKokuhorenKyoutsuuTempTableMapper.class);
-        処理結果mapper = mapperProvider.create(IKokuhorenKyoutsuuMapper.class);
     }
 
     @Override
@@ -263,12 +244,5 @@ public class KokuhorenJukyushaInReadCsvFileProcess extends BatchProcessBase<RStr
         明細Entity.setOrgHihokenshaKanaShimei(保険者X.get被保険者氏名カナ());
         明細Entity.setHihokenshaNo(new HihokenshaNo(保険者X.get被保険者番号()));
         被保険者一時tableWriter.insert(明細Entity);
-    }
-
-    private Decimal toDecimal(RString 金額) {
-        if (RString.isNullOrEmpty(金額)) {
-            return Decimal.ZERO;
-        }
-        return new Decimal(金額.toString());
     }
 }
