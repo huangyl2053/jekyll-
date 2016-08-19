@@ -449,4 +449,10 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     public List<dgShisetsuNyutaishoRireki_Row> get施設入退所履歴一覧() {
         return getHandler().get施設入退所履歴一覧();
     }
+
+    @Override
+    public boolean isSavable() {
+        return getHandler().isSavable();
+    }
+
 }

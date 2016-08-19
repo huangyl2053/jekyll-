@@ -4,9 +4,9 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTo
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 import java.util.HashSet;
@@ -47,6 +47,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
  * @reamsid_L DBA-0130-011 huangh
  */
 public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirekiDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -202,7 +203,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             DataGridHeight[] enumArray = DataGridHeight.values();
 
             for (DataGridHeight enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -217,11 +218,11 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
     }
 
     public DataGridHeight getMode_DataGridHeight() {
-        return (DataGridHeight) _CommonChildDivModeUtil.getMode( this.modes, DataGridHeight.class );
+        return (DataGridHeight) _CommonChildDivModeUtil.getMode(this.modes, DataGridHeight.class);
     }
 
-    public void setMode_DataGridHeight( DataGridHeight value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, DataGridHeight.class , value );
+    public void setMode_DataGridHeight(DataGridHeight value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DataGridHeight.class, value);
     }
 
     public static enum DataGridWidth implements ICommonChildDivMode {
@@ -243,7 +244,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             DataGridWidth[] enumArray = DataGridWidth.values();
 
             for (DataGridWidth enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -258,11 +259,11 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
     }
 
     public DataGridWidth getMode_DataGridWidth() {
-        return (DataGridWidth) _CommonChildDivModeUtil.getMode( this.modes, DataGridWidth.class );
+        return (DataGridWidth) _CommonChildDivModeUtil.getMode(this.modes, DataGridWidth.class);
     }
 
-    public void setMode_DataGridWidth( DataGridWidth value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, DataGridWidth.class , value );
+    public void setMode_DataGridWidth(DataGridWidth value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DataGridWidth.class, value);
     }
 
     public static enum HokenshaJohoDisplayMode implements ICommonChildDivMode {
@@ -282,7 +283,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             HokenshaJohoDisplayMode[] enumArray = HokenshaJohoDisplayMode.values();
 
             for (HokenshaJohoDisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -297,11 +298,11 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
     }
 
     public HokenshaJohoDisplayMode getMode_HokenshaJohoDisplayMode() {
-        return (HokenshaJohoDisplayMode) _CommonChildDivModeUtil.getMode( this.modes, HokenshaJohoDisplayMode.class );
+        return (HokenshaJohoDisplayMode) _CommonChildDivModeUtil.getMode(this.modes, HokenshaJohoDisplayMode.class);
     }
 
-    public void setMode_HokenshaJohoDisplayMode( HokenshaJohoDisplayMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, HokenshaJohoDisplayMode.class , value );
+    public void setMode_HokenshaJohoDisplayMode(HokenshaJohoDisplayMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, HokenshaJohoDisplayMode.class, value);
     }
 
     public static enum BtnDisplayMode implements ICommonChildDivMode {
@@ -319,7 +320,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             BtnDisplayMode[] enumArray = BtnDisplayMode.values();
 
             for (BtnDisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -334,11 +335,11 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
     }
 
     public BtnDisplayMode getMode_BtnDisplayMode() {
-        return (BtnDisplayMode) _CommonChildDivModeUtil.getMode( this.modes, BtnDisplayMode.class );
+        return (BtnDisplayMode) _CommonChildDivModeUtil.getMode(this.modes, BtnDisplayMode.class);
     }
 
-    public void setMode_BtnDisplayMode( BtnDisplayMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, BtnDisplayMode.class , value );
+    public void setMode_BtnDisplayMode(BtnDisplayMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, BtnDisplayMode.class, value);
     }
 
     public static enum DialogCloseBtnDisplayMode implements ICommonChildDivMode {
@@ -356,7 +357,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             DialogCloseBtnDisplayMode[] enumArray = DialogCloseBtnDisplayMode.values();
 
             for (DialogCloseBtnDisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -371,11 +372,11 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
     }
 
     public DialogCloseBtnDisplayMode getMode_DialogCloseBtnDisplayMode() {
-        return (DialogCloseBtnDisplayMode) _CommonChildDivModeUtil.getMode( this.modes, DialogCloseBtnDisplayMode.class );
+        return (DialogCloseBtnDisplayMode) _CommonChildDivModeUtil.getMode(this.modes, DialogCloseBtnDisplayMode.class);
     }
 
-    public void setMode_DialogCloseBtnDisplayMode( DialogCloseBtnDisplayMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, DialogCloseBtnDisplayMode.class , value );
+    public void setMode_DialogCloseBtnDisplayMode(DialogCloseBtnDisplayMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DialogCloseBtnDisplayMode.class, value);
     }
 
     public static enum DisplayType implements ICommonChildDivMode {
@@ -395,7 +396,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             DisplayType[] enumArray = DisplayType.values();
 
             for (DisplayType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -410,11 +411,11 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
     }
 
     public DisplayType getMode_DisplayType() {
-        return (DisplayType) _CommonChildDivModeUtil.getMode( this.modes, DisplayType.class );
+        return (DisplayType) _CommonChildDivModeUtil.getMode(this.modes, DisplayType.class);
     }
 
-    public void setMode_DisplayType( DisplayType value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, DisplayType.class , value );
+    public void setMode_DisplayType(DisplayType value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DisplayType.class, value);
     }
 
     // </editor-fold>
@@ -428,7 +429,12 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
     @Override
     public void initialize(HihokenshaNo hihokenshaNo,
             ShikibetsuCode shikibetsuCode) {
+        initializeShichosonSecurity();
+        getShikakuShutokuRireki(hihokenshaNo, shikibetsuCode);
+    }
 
+    @Override
+    public void initializeShichosonSecurity() {
         // 「ビジネス設計_DBUMN00000_市町村情報セキュリティ情報取得」の「市町村セキュリティ情報を取得する」を参照する
         // １．０．１　導入形態の処理
         ShichosonSecurityJoho 市町村情報セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
@@ -475,11 +481,17 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
                 this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shikibetsuCode").setVisible(true);
             }
         }
+    }
+
+    @Override
+    public void getShikakuShutokuRireki(HihokenshaNo hihokenshaNo, ShikibetsuCode shikibetsuCode) {
+
         ShikakuTokusoFinder shikakuTokusoFinder = ShikakuTokusoFinder.createInstance();
         ShikakuTokusoParameter parmeter = ShikakuTokusoParameter.createParam(hihokenshaNo, shikibetsuCode);
 
         // 「ビジネス設計_DBAMN00000_資格得喪履歴」の「一覧データ取得」を参照する
         SearchResult<ShikakuTokuso> result = shikakuTokusoFinder.getShikakuTokuso(parmeter);
+
         List<dgShikakuShutokuRireki_Row> dgShikakuShutokuRirekiList = new ArrayList<>();
         for (ShikakuTokuso shikakuTokuso : result.records()) {
             dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row();
@@ -546,6 +558,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             row.setModifyButtonState(DataGridButtonState.Disabled);
             dgShikakuShutokuRirekiList.add(row);
         }
+
         this.getDgShikakuShutokuRireki().setDataSource(dgShikakuShutokuRirekiList);
         this.getBtnAddShikakuShutoku().setDisabled(true);
     }

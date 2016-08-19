@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.kojinjokyoshokai.KojinJokyoShokaiRelateEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IIchijiHanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaSupport;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -224,7 +225,18 @@ public class KojinJokyoShokai {
      * @return 二次判定要介護状態区分コード
      */
     public Code get二次判定要介護状態区分コード() {
-        return entity.getNijiHanteiYokaigoJotaiKubunCode();
+        return entity.getNijiHanteiYokaigoJotaiKubunCode() == null ? Code.EMPTY : entity.getNijiHanteiYokaigoJotaiKubunCode();
+    }
+
+    /**
+     * 二次判定結果の名称(要介護度)を返却します。
+     *
+     * @return 二次判定結果の名称
+     */
+    public RString get二次判定結果名称() {
+        return YokaigoJotaiKubunSupport.toValueOrEmpty(
+                get厚労省IF識別コード().value(), get二次判定要介護状態区分コード().value()
+        ).getName();
     }
 
     /**
@@ -309,11 +321,11 @@ public class KojinJokyoShokai {
         final RString kekkaCode = this.get要介護認定一次判定結果コード().value();
         final RString kasanCode = this.get要介護認定一次判定結果コード認知症加算().value();
 
-        IIchijiHanteiKekkaCode kekkaName = IchijiHanteiKekkaSupport.toValue(koroshoIFCode, kekkaCode);
+        IIchijiHanteiKekkaCode kekkaName = IchijiHanteiKekkaSupport.toValueOrEmpty(koroshoIFCode, kekkaCode);
         if (Objects.equals(kekkaCode, kasanCode) || RString.isNullOrEmpty(kasanCode)) {
             return kekkaName.get名称();
         }
-        IIchijiHanteiKekkaCode kasanName = IchijiHanteiKekkaSupport.toValue(koroshoIFCode, kasanCode);
+        IIchijiHanteiKekkaCode kasanName = IchijiHanteiKekkaSupport.toValueOrEmpty(koroshoIFCode, kasanCode);
         return new RStringBuilder().append(kekkaName.get略称()).append("→").append(kasanName.get略称()).toRString();
     }
 

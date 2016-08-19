@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.business.core.view.KaigoShotokuAlive;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
+import jp.co.ndensan.reams.db.dbz.service.core.kyufu.KogakuServicehiTaishoshaManager;
 import jp.co.ndensan.reams.db.dbz.service.core.setai.SetaiinFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.view.ShotokuManager;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
@@ -35,6 +36,7 @@ public class SetaiinShotokuJohoFinder {
     private final SetaiinFinder 世帯員Finder;
     private final HihokenshaDaichoManager 被保険者台帳Manager;
     private final ShotokuManager 介護所得Manager;
+    private final KogakuServicehiTaishoshaManager 高額対象者情報有無Manager;
 
     /**
      * コンストラクタです。
@@ -44,6 +46,7 @@ public class SetaiinShotokuJohoFinder {
         this.世帯員Finder = SetaiinFinder.createInstance();
         this.被保険者台帳Manager = HihokenshaDaichoManager.createInstance();
         this.介護所得Manager = ShotokuManager.createInstance();
+        this.高額対象者情報有無Manager = KogakuServicehiTaishoshaManager.createInstance();
     }
 
     /**
@@ -55,11 +58,12 @@ public class SetaiinShotokuJohoFinder {
     SetaiinShotokuJohoFinder(
             // MapperProvider mapperProvider,
             SetaiinFinder 世帯員Finder,
-            HihokenshaDaichoManager 被保険者台帳Manager, ShotokuManager 介護所得Manager) {
+            HihokenshaDaichoManager 被保険者台帳Manager, ShotokuManager 介護所得Manager, KogakuServicehiTaishoshaManager 高額対象者情報有無Manager) {
         // this.mapperProvider = mapperProvider;
         this.世帯員Finder = 世帯員Finder;
         this.被保険者台帳Manager = 被保険者台帳Manager;
         this.介護所得Manager = 介護所得Manager;
+        this.高額対象者情報有無Manager = 高額対象者情報有無Manager;
     }
 
     /**
@@ -99,11 +103,17 @@ public class SetaiinShotokuJohoFinder {
             return new ArrayList();
         }
         List<SetaiinShotoku> 世帯員所得情報リスト = new ArrayList();
+        boolean 高額対象者情報有無 = false;
         //TODO 動作優先でループ内のDBアクセス実装となっている。修正が必要。
         //TODO 給付実績より同月サービス情報を取得部分は未実装
         for (SetaiinJoho 世帯員 : 世帯員リスト) {
             HihokenshaDaicho 被保険者台帳 = 被保険者台帳Manager.find最新被保険者台帳(世帯員.get識別対象().get識別コード());
             KaigoShotokuAlive 介護所得 = 介護所得Manager.get介護所得AliveFromMapper(所得年度, 所得基準年月日, 世帯員.get識別対象().to個人().get識別コード());
+            if (被保険者台帳 != null && 給付情報取得有無) {
+                高額対象者情報有無 = 高額対象者情報有無Manager.is高額対象者有無(被保険者台帳.get被保険者番号(), 世帯基準年月日);
+            } else {
+                高額対象者情報有無 = false;
+            }
             世帯員所得情報リスト.add(new SetaiinShotoku(
                     世帯員.get識別対象().get識別コード(),
                     被保険者台帳 != null ? 被保険者台帳.get被保険者番号() : new HihokenshaNo(RString.EMPTY),
@@ -125,7 +135,7 @@ public class SetaiinShotokuJohoFinder {
                     介護所得 != null ? 介護所得.get課税所得額() : null,
                     介護所得 != null ? 介護所得.get登録業務() : RString.EMPTY,
                     介護所得 != null ? new FlexibleDate(介護所得.get更正日().getDate().toDateString()) : new FlexibleDate(RString.EMPTY),
-                    false,
+                    高額対象者情報有無,
                     世帯員.get識別対象().get異動年月日(),
                     世帯員.get住定異動年月日(),
                     世帯員.get識別対象().get異動事由().get異動事由コード(),

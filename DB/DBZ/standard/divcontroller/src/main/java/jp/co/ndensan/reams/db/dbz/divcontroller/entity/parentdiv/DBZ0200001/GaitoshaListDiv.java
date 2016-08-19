@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class GaitoshaListDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,8 +23,6 @@ public class GaitoshaListDiv extends Panel {
      */
     @JsonProperty("dgGaitoshaList")
     private DataGrid<dgGaitoshaList_Row> dgGaitoshaList;
-    @JsonProperty("btnReSearch")
-    private Button btnReSearch;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -48,24 +46,6 @@ public class GaitoshaListDiv extends Panel {
     @JsonProperty("dgGaitoshaList")
     public void setDgGaitoshaList(DataGrid<dgGaitoshaList_Row> dgGaitoshaList) {
         this.dgGaitoshaList = dgGaitoshaList;
-    }
-
-    /*
-     * getbtnReSearch
-     * @return btnReSearch
-     */
-    @JsonProperty("btnReSearch")
-    public Button getBtnReSearch() {
-        return btnReSearch;
-    }
-
-    /*
-     * setbtnReSearch
-     * @param btnReSearch btnReSearch
-     */
-    @JsonProperty("btnReSearch")
-    public void setBtnReSearch(Button btnReSearch) {
-        this.btnReSearch = btnReSearch;
     }
 
     // </editor-fold>

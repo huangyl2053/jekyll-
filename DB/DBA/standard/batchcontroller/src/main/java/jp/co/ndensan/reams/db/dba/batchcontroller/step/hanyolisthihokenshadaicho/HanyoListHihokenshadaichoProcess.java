@@ -18,14 +18,12 @@ import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.KijunbiKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.ShikakuChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.ShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.hanyolisthihokenshadaicho.HanyoListHihokenshadaichoMyBatisParameter;
 import jp.co.ndensan.reams.db.dba.definition.processprm.hanyolisthihokenshadaicho.HanyoListHihokenshadaichoProcessParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolisthihokenshadaicho.HanyoListHihokenshadaichoCSVEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolisthihokenshadaicho.HanyoListHihokenshadaichoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
@@ -469,20 +467,12 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
                 条件.append(ShikakuSoshitsuJiyu.転出.get名称());
                 条件.append(読点);
             }
-            if (ShikakuSoshitsuJiyu.年齢到達.getコード().equals(code)) {
-                条件.append(ShikakuSoshitsuJiyu.年齢到達.get名称());
-                条件.append(読点);
-            }
             if (ShikakuSoshitsuJiyu.死亡.getコード().equals(code)) {
                 条件.append(ShikakuSoshitsuJiyu.死亡.get名称());
                 条件.append(読点);
             }
             if (ShikakuSoshitsuJiyu.国籍喪失.getコード().equals(code)) {
                 条件.append(ShikakuSoshitsuJiyu.国籍喪失.get名称());
-                条件.append(読点);
-            }
-            if (ShikakuSoshitsuJiyu.自特例転入.getコード().equals(code)) {
-                条件.append(ShikakuSoshitsuJiyu.自特例転入.get名称());
                 条件.append(読点);
             }
             if (ShikakuSoshitsuJiyu.他特例者.getコード().equals(code)) {
@@ -493,16 +483,8 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
                 条件.append(ShikakuSoshitsuJiyu.自特例解除.get名称());
                 条件.append(読点);
             }
-            if (ShikakuSoshitsuJiyu.帰化.getコード().equals(code)) {
-                条件.append(ShikakuSoshitsuJiyu.帰化.get名称());
-                条件.append(読点);
-            }
             if (ShikakuSoshitsuJiyu.職権喪失.getコード().equals(code)) {
                 条件.append(ShikakuSoshitsuJiyu.職権喪失.get名称());
-                条件.append(読点);
-            }
-            if (ShikakuSoshitsuJiyu.広域内転出.getコード().equals(code)) {
-                条件.append(ShikakuSoshitsuJiyu.広域内転出.get名称());
                 条件.append(読点);
             }
             if (ShikakuSoshitsuJiyu.除外者.getコード().equals(code)) {
@@ -511,26 +493,6 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
             }
             if (ShikakuSoshitsuJiyu.その他.getコード().equals(code)) {
                 条件.append(ShikakuSoshitsuJiyu.その他.get名称());
-                条件.append(読点);
-            }
-            if (ShikakuSoshitsuJiyu.国籍取得.getコード().equals(code)) {
-                条件.append(ShikakuSoshitsuJiyu.国籍取得.get名称());
-                条件.append(読点);
-            }
-            if (ShikakuSoshitsuJiyu.広住特転入.getコード().equals(code)) {
-                条件.append(ShikakuSoshitsuJiyu.広住特転入.get名称());
-                条件.append(読点);
-            }
-            if (ShikakuSoshitsuJiyu.広住特解除.getコード().equals(code)) {
-                条件.append(ShikakuSoshitsuJiyu.広住特解除.get名称());
-                条件.append(読点);
-            }
-            if (ShikakuSoshitsuJiyu.一本化.getコード().equals(code)) {
-                条件.append(ShikakuSoshitsuJiyu.一本化.get名称());
-                条件.append(読点);
-            }
-            if (ShikakuSoshitsuJiyu.合併.getコード().equals(code)) {
-                条件.append(ShikakuSoshitsuJiyu.合併.get名称());
                 条件.append(読点);
             }
         }

@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class HihokenshanotsukibanFinder {
 
     private static final int 付番方法_LENGTH = 10;
-    private static final int 識別コード_LENGTH = 4;
+    private static final int 識別コード_LENGTH = 5;
     private static final RString 付番方法_住民コード付番 = new RString("1");
     private static final RString 付番方法_自動連番付番 = new RString("2");
     private static final RString 付番方法_任意手入力付番 = new RString("3");
@@ -94,6 +94,7 @@ public class HihokenshanotsukibanFinder {
         } else {
             被保険者番号 = entityDbT1001.getHihokenshaNo();
         }
+
         if (被保険者番号.getColumnValue().length() != 付番方法_LENGTH) {
             throw new ApplicationException(UrErrorMessages.桁数が不正.getMessage());
         } else {

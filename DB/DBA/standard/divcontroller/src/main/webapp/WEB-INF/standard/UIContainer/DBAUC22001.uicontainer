@@ -37,7 +37,7 @@
      "layoutName": "DBA2020011",
      "layoutTitle": "施設入退所異動",
      "eventName": "検索に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",

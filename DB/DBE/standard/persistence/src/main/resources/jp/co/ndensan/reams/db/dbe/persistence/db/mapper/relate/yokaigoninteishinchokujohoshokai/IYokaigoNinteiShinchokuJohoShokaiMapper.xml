@@ -188,34 +188,36 @@
                 <choose>
                     <when test="searchesShimeiByKana">
                         <if test="matchTypekey1">
-                            AND DbT5101."hihokenshaKana" LIKE #{shimei}||'%'
+                            AND replace(replace(DbT5101."hihokenshaKana",' ',''),'　','') LIKE #{shimei}||'%'
                         </if>
                         <if test="matchTypekey2">
-                            AND DbT5101."hihokenshaKana" LIKE '%'||#{shimei}
+                            AND replace(replace(DbT5101."hihokenshaKana",' ',''),'　','') LIKE '%'||#{shimei}
                         </if>
                         <if test="matchTypekey3">
-                            AND DbT5101."hihokenshaKana" = #{shimei}
+                            AND replace(replace(DbT5101."hihokenshaKana",' ',''),'　','') = #{shimei}
                         </if>
                         <if test="matchTypekey4">
-                            AND DbT5101."hihokenshaKana" LIKE '%'||#{shimei}||'%'
+                            AND replace(replace(DbT5101."hihokenshaKana",' ',''),'　','') LIKE '%'||#{shimei}||'%'
                         </if>
                     </when>
                     <otherwise>
                         <if test="matchTypekey1">
-                            AND DbT5101."hihokenshaName" LIKE #{shimei}||'%'
+                            AND replace(replace(DbT5101."hihokenshaName",' ',''),'　','') LIKE #{shimei}||'%'
                         </if>
                         <if test="matchTypekey2">
-                            AND DbT5101."hihokenshaName" LIKE '%'||#{shimei}
+                            AND replace(replace(DbT5101."hihokenshaName",' ',''),'　','') LIKE '%'||#{shimei}
                         </if>
                         <if test="matchTypekey3">
-                            AND DbT5101."hihokenshaName" = #{shimei}
+                            AND replace(replace(DbT5101."hihokenshaName",' ',''),'　','') = #{shimei}
                         </if>
                         <if test="matchTypekey4">
-                            AND DbT5101."hihokenshaName" LIKE '%'||#{shimei}||'%'
+                            AND replace(replace(DbT5101."hihokenshaName",' ',''),'　','') LIKE '%'||#{shimei}||'%'
                         </if>
                     </otherwise>
                 </choose>
             </if>
+
+
             <if test="radKensakuHohoKey1">
                 <choose>
                     <when test="hizukeHaniKey0">
@@ -240,7 +242,7 @@
                         </if>
                         <if test="!shiteiHizukeTo.isEmpty()">
                            AND DbT5301."ikenshoSakuseiIraiYMD" <![CDATA[<=]]> #{shiteiHizukeTo}
-                        </if>                        
+                        </if>
                     </when>
                 </choose>
                 <if test="ninteiChosaIraiKey0">

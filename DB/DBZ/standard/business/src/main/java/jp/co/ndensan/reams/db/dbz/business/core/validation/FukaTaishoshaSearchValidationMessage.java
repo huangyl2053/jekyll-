@@ -20,7 +20,7 @@ public enum FukaTaishoshaSearchValidationMessage implements IValidationMessage {
     /**
      * 「最大取得件数上限超過」を表す列挙体です。
      */
-    最大取得件数上限超過(UrErrorMessages.未指定.getMessage().replace("表示件数上限" + new GaitoshaKensakuConfig().get最大取得件数() + "以下に")),
+    最大取得件数上限超過(UrErrorMessages.未指定.getMessage().replace("1以上、表示件数上限" + new GaitoshaKensakuConfig().get最大取得件数() + "以下を")),
     /**
      * 「検索条件未指定」を表す列挙体です。
      */

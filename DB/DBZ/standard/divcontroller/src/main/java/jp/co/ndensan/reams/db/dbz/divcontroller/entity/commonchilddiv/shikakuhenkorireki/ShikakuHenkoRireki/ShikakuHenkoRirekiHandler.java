@@ -66,9 +66,14 @@ public class ShikakuHenkoRirekiHandler {
     private static final RString 半角コロン = new RString(":");
     private static final RString 追加状態 = new RString("追加");
     private static final RString 修正状態 = new RString("修正");
+    private static final RString 削除状態 = new RString("削除");
     private static final RString MENUID_DBAMN52003 = new RString("DBAMN52003");
     private static final RString MENUID_DBAMN52004 = new RString("DBAMN52004");
     private static final RString MENUID_DBAMN52002 = new RString("DBAMN52002");
+
+    private static final RString MENUID_DBAMN23001 = new RString("DBAMN23001");
+    private static final RString MENUID_DBAMN23002 = new RString("DBAMN23002");
+    private static final RString MENUID_DBAMN23003 = new RString("DBAMN23003");
 
     private final ShikakuHenkoRirekiDiv div;
 
@@ -174,6 +179,18 @@ public class ShikakuHenkoRirekiHandler {
         div.getTxtHenkoDate().clearValue();
         div.getTxtHenkoTodokedeDate().clearValue();
         div.getDdlHenkoJiyu().setSelectedIndex(0);
+
+        RString menuId = ResponseHolder.getMenuID();
+        if (MENUID_DBAMN23001.equals(menuId)) {
+            div.setDdlHenkoJiyu(ShikakuHenkoJiyu.転居.getコード(), true);
+        }
+        if (MENUID_DBAMN23002.equals(menuId)) {
+            div.setDdlHenkoJiyu(ShikakuHenkoJiyu.氏名変更.getコード(), true);
+        }
+        if (MENUID_DBAMN23003.equals(menuId)) {
+            div.setDdlHenkoJiyu(ShikakuHenkoJiyu.その他.getコード(), false);
+        }
+
         div.getDdlHenkoSochimotoHokensha().setSelectedIndex(0);
         div.getDdlHenkoKyuHokensha().setSelectedIndex(0);
         div.getDdlJuminJoho().setSelectedIndex(0);
@@ -228,7 +245,9 @@ public class ShikakuHenkoRirekiHandler {
                     異動日,
                     被保険者台帳情報.get枝番()
             );
-            div.getDgHenko().getDataSource().add(row);
+            List<dgHenko_Row> dataSource = div.getDgHenko().getDataSource();
+            dataSource.add(row);
+            Collections.sort(dataSource, new HenkoRirekiComparator());
             result.add(setHihokenshaDaicho(被保険者台帳情報, row));
         } else if (div.getInputMode().equals(ViewExecutionStatus.Modify.getValue())) {
             RString 状態 = 修正状態;
@@ -557,5 +576,35 @@ public class ShikakuHenkoRirekiHandler {
             }
         }
         return RString.EMPTY;
+    }
+
+    /**
+     * 新規に入力したデータ（グリッド上で状態を持つデータ）が存在しているかをチェックします。
+     *
+     * @return 1件以上、状態に値が設定されているデータが存在した場合{@code true}
+     */
+    public boolean checkInputNewData() {
+        for (dgHenko_Row row : div.getDgHenko().getDataSource()) {
+            if (row.getState().equals(追加状態)
+                    || row.getState().equals(修正状態)
+                    || row.getState().equals(削除状態)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private class HenkoRirekiComparator implements Comparator<dgHenko_Row> {
+
+        @Override
+        public int compare(dgHenko_Row o1, dgHenko_Row o2) {
+            return -1 * o1.getHenkoDate().getValue().compareTo(o2.getHenkoDate().getValue());
+        }
+
+    }
+
+    public void setDisabledMeisaiButtons(boolean isDisable) {
+        div.getBtnHenkoKakutei().setDisabled(isDisable);
+        div.getBtnHenkoTorikeshi().setDisabled(isDisable);
     }
 }

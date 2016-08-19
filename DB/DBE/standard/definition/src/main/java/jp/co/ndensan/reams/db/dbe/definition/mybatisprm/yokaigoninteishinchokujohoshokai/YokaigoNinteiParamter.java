@@ -270,8 +270,11 @@ public final class YokaigoNinteiParamter {
         } else if (DATE_SOURCE_KEY3.equals(matchType)) {
             matchTypekay3 = true;
         }
-        RString shimeiForKensaku = RString.isNullOrEmpty(shimei) ? RString.EMPTY
-                                   : RStrings.to半角カナOnlyOrRawTryToConvertかなto半角カナ(shimei);
+        RString shimeiForKensaku
+                = RString.isNullOrEmpty(shimei) ? RString.EMPTY
+                  : RStrings.to半角カナOnlyOrRawTryToConvertかなto半角カナ(RStrings.removedSpaces(
+                RStringUtil.removeSqlSpecialChars(shimei)
+        ));
         return new YokaigoNinteiParamter(matchTypekay0,
                 matchTypekay1,
                 matchTypekay2,

@@ -131,44 +131,39 @@ public class ShoKaishuKirokuKanri {
             return ResponseData.of(shoKaishuDiv).addValidationMessages(validationMessages).respond();
         }
 
-        if (!ResponseHolder.isReRequest() || ResponseHolder.isWarningIgnoredRequest()) {
-            return ResponseData.of(shoKaishuDiv).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+        if (状態_修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+            shoKaishuDiv.getDgKoufuKaishu().getClickedItem().setStatus(状態_修正);
+            List<dgKoufuKaishu_Row> list = shoKaishuDiv.getDgKoufuKaishu().getDataSource();
+            int rowcount = shoKaishuDiv.getDgKoufuKaishu().getClickedItem().getId();
+            dgKoufuKaishu_Row row = list.get(rowcount);
+            row.setKoufuType(shoKaishuDiv.getPanelInput().getTxtKoufuType().getValue());
+            row.getKoufuDate().setValue(shoKaishuDiv.getPanelInput().getTxtKoufuDate().getValue());
+            row.getYukoKigen().setValue(shoKaishuDiv.getPanelInput().getTxtYukouKigen().getValue());
+            row.setKoufuJiyu(shoKaishuDiv.getPanelInput().getDdlKoufuJiyu().getSelectedValue());
+            row.setKoufuJiyuNo(shoKaishuDiv.getPanelInput().getDdlKoufuJiyu().getSelectedKey());
+            row.setKofuRiyu(shoKaishuDiv.getPanelInput().getTxaKoufuRiyu().getValue());
+            row.getKaishuDate().setValue(shoKaishuDiv.getPanelInput().getTxtKaisyuDate().getValue());
+            row.setKaishuJiyu(shoKaishuDiv.getPanelInput().getDdlKaisyuJiyu().getSelectedValue());
+            row.setKaishuJiyuNo(shoKaishuDiv.getPanelInput().getDdlKaisyuJiyu().getSelectedKey());
+            row.setKaishuRiyu(shoKaishuDiv.getPanelInput().getTxaKaishuRiyu().getValue());
+            list.set(rowcount, row);
+            shoKaishuDiv.getDgKoufuKaishu().setDataSource(list);
+            createResponseData(shoKaishuDiv).data = shoKaishuDiv;
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-            && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
-            if (状態_修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-                shoKaishuDiv.getDgKoufuKaishu().getClickedItem().setStatus(状態_修正);
-                List<dgKoufuKaishu_Row> list = shoKaishuDiv.getDgKoufuKaishu().getDataSource();
-                int rowcount = shoKaishuDiv.getDgKoufuKaishu().getClickedItem().getId();
-                dgKoufuKaishu_Row row = list.get(rowcount);
-                row.setKoufuType(shoKaishuDiv.getPanelInput().getTxtKoufuType().getValue());
-                row.getKoufuDate().setValue(shoKaishuDiv.getPanelInput().getTxtKoufuDate().getValue());
-                row.getYukoKigen().setValue(shoKaishuDiv.getPanelInput().getTxtYukouKigen().getValue());
-                row.setKoufuJiyu(shoKaishuDiv.getPanelInput().getDdlKoufuJiyu().getSelectedValue());
-                row.setKoufuJiyuNo(shoKaishuDiv.getPanelInput().getDdlKoufuJiyu().getSelectedKey());
-                row.setKofuRiyu(shoKaishuDiv.getPanelInput().getTxaKoufuRiyu().getValue());
-                row.getKaishuDate().setValue(shoKaishuDiv.getPanelInput().getTxtKaisyuDate().getValue());
-                row.setKaishuJiyu(shoKaishuDiv.getPanelInput().getDdlKaisyuJiyu().getSelectedValue());
-                row.setKaishuJiyuNo(shoKaishuDiv.getPanelInput().getDdlKaisyuJiyu().getSelectedKey());
-                row.setKaishuRiyu(shoKaishuDiv.getPanelInput().getTxaKaishuRiyu().getValue());
-                list.set(rowcount, row);
-                shoKaishuDiv.getDgKoufuKaishu().setDataSource(list);
-                createResponseData(shoKaishuDiv).data = shoKaishuDiv;
-            }
-            if (状態_削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-                shoKaishuDiv.getDgKoufuKaishu().getClickedItem().setStatus(状態_削除);
-            }
-            shoKaishuDiv.getPanelInput().getTxtKoufuType().clearValue();
-            shoKaishuDiv.getPanelInput().getTxtKoufuDate().clearValue();
-            shoKaishuDiv.getPanelInput().getTxtYukouKigen().clearValue();
-            shoKaishuDiv.getPanelInput().getDdlKoufuJiyu().setSelectedValue(RString.EMPTY);
-            shoKaishuDiv.getPanelInput().getTxaKoufuRiyu().clearValue();
-            shoKaishuDiv.getPanelInput().getTxtKaisyuDate().clearValue();
-            shoKaishuDiv.getPanelInput().getDdlKaisyuJiyu().setSelectedValue(RString.EMPTY);
-            shoKaishuDiv.getPanelInput().getTxaKaishuRiyu().clearValue();
-            shoKaishuDiv.getPanelInput().getBtnConfirm().setDisabled(true);
-            shoKaishuDiv.getPanelInput().getBtnCancel().setDisabled(true);
+        if (状態_削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+            shoKaishuDiv.getDgKoufuKaishu().getClickedItem().setStatus(状態_削除);
         }
+        shoKaishuDiv.getPanelInput().getTxtKoufuType().clearValue();
+        shoKaishuDiv.getPanelInput().getTxtKoufuDate().clearValue();
+        shoKaishuDiv.getPanelInput().getTxtYukouKigen().clearValue();
+        shoKaishuDiv.getPanelInput().getDdlKoufuJiyu().setSelectedValue(RString.EMPTY);
+        shoKaishuDiv.getPanelInput().getTxaKoufuRiyu().clearValue();
+        shoKaishuDiv.getPanelInput().getTxtKaisyuDate().clearValue();
+        shoKaishuDiv.getPanelInput().getDdlKaisyuJiyu().setSelectedValue(RString.EMPTY);
+        shoKaishuDiv.getPanelInput().getTxaKaishuRiyu().clearValue();
+        shoKaishuDiv.getPanelInput().getBtnConfirm().setDisabled(true);
+        shoKaishuDiv.getPanelInput().getBtnCancel().setDisabled(true);
+
         ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
         return createResponseData(shoKaishuDiv);
 

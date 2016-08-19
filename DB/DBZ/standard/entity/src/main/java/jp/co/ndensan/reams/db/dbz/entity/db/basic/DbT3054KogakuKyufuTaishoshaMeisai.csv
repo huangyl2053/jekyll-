@@ -1,0 +1,9 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
+serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,サービス提供年月,A
+jigyoshaNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,事業者番号,A
+serviceShuruiCode,DbUDD005ServiceShuruiCode,ServiceShuruiCode,,,,,サービス種類コード,A
+rirekiNo,int2,int,,,,,履歴番号,A
+serviceHiyoGokeiGaku,numeric,Decimal,,,,,サービス費用合計額,A
+riyoshaFutanGaku,numeric,Decimal,,,,,利用者負担額,A
+kogakuKyufuKonkyo,varchar,RString,,,,,高額給付根拠,A
+taishoshaUketoriYM,UDD014YM,FlexibleYearMonth,,,,,対象者受取年月,A
