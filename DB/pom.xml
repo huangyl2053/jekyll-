@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>jp.co.ndensan.reams.db</groupId>
@@ -28,7 +28,7 @@
         <repository>
             <id>kibanJenkins</id>
             <name>r5 maven repository</name>
-            <url>http://http://221.6.25.212:8000/mvn/repo/</url>
+            <url>http://zrtechwiki.ndensan.co.jp/mvn/repo/</url>
             <releases>
                 <updatePolicy>always</updatePolicy>
             </releases>
@@ -48,6 +48,7 @@
         <jp.co.ndensan.reams.uexVersion>1.12.0</jp.co.ndensan.reams.uexVersion>
         <jp.co.ndensan.reams.uxxVersion>1.12.0</jp.co.ndensan.reams.uxxVersion>
         <jp.co.ndensan.reams.caxVersion>1.12.0</jp.co.ndensan.reams.caxVersion>
+        <jp.co.ndensan.reams.aaxVersion>1.12.0</jp.co.ndensan.reams.aaxVersion>
         <!-- other -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -182,6 +183,11 @@
                 <groupId>jp.co.ndensan.reams.ca.cax</groupId>
                 <artifactId>CaxBatchController</artifactId>
                 <version>${jp.co.ndensan.reams.caxVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.aa.aax</groupId>
+                <artifactId>AaxService</artifactId>
+                <version>${jp.co.ndensan.reams.aaxVersion}</version>
             </dependency>
             <!-- ツール -->
             <dependency>
@@ -324,7 +330,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <checkmode>full</checkmode>  <!-- full:DB接続を伴う完全なチェック, skip:チェックしない, default:1.9.1と同じ、DB接続なしのチェック -->
+                    <checkmode>full</checkmode>  
                 </configuration>
             </plugin>
             <plugin>
