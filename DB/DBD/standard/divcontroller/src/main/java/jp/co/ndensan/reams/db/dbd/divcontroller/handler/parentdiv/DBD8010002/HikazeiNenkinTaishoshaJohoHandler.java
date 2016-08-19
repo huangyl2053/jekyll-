@@ -8,12 +8,15 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD8010002;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.hikazeinenkintaishoshaJoho.HikazeiNenkinTaishoshaJohoBusiness;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100201.HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100203.SokyuHikazeiNenkinBatchParameter;
 import jp.co.ndensan.reams.db.dbd.definition.core.syorijyoutaicode.SyoriJyoutaiCode;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.DBD8010002StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.HikazeiNenkinTaishoshaJohoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.dgKoikiTaishoShoriItiran_Row;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.dgShoriSettei_Row;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.dgTanitsuTaishoShoriItchiran_Row;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
@@ -27,8 +30,14 @@ import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecuri
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunManager;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder._ChohyoShutsuryokujunManager;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -63,6 +72,8 @@ public class HikazeiNenkinTaishoshaJohoHandler {
     private final RString 単一保険者 = new RString("2");
     private static final RString Z5100000 = new RString("Z5100000_");
     private static final RString Z5200000 = new RString("Z5200000_");
+    private static final RString KEY0 = new RString("key0");
+    private static final RString KEY1 = new RString("key1");
 
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
@@ -169,6 +180,196 @@ public class HikazeiNenkinTaishoshaJohoHandler {
         }
 
         return this.get対象市町村Grid();
+    }
+
+    /**
+     * 処理設定のクリンク処理です。
+     *
+     * @param div JissiJyokyohyoDiv
+     */
+    public void onClick_btnShoriSettei(HikazeiNenkinTaishoshaJohoDiv div) {
+
+        List<HikazeiNenkinTaishoshaJohoBusiness> 対象処理List = new ArrayList<>();
+
+        HikazeiNenkinTaishoshaJohoBusiness 対象処理年次 = new HikazeiNenkinTaishoshaJohoBusiness();
+        RString 年次の月 = get月(-1);
+        RString 年次の月コード = get月コード(-1, true, RSTRING_0);
+
+        SearchResult<ShoriDateKanri> 年次処理情報List = get処理日付管理マスタ情報for単一();
+
+        ShoriDateKanri 年次処理情報 = getShoriDateKanriFor単一(年次の月コード, RSTRING_0, 年次処理情報List);
+
+        対象処理年次.set月(年次の月);
+        対象処理年次.set月コード(年次の月コード);
+        対象処理年次.set処理コード(RSTRING_0);
+        対象処理年次.set処理(年次);
+        if (年次処理情報 == null) {
+            対象処理年次.set処理日時(RString.EMPTY);
+            対象処理年次.set処理状態コード(RSTRING_1);
+            対象処理年次.set処理状態(SyoriJyoutaiCode.toValue(RSTRING_1).get名称());
+        } else {
+            対象処理年次.set処理日時(年次処理情報.get基準日時().toDateString());
+            対象処理年次.set処理状態コード(年次処理情報.get処理枝番());
+            対象処理年次.set処理状態(SyoriJyoutaiCode.toValue(年次処理情報.get処理枝番()).get名称());
+        }
+        対象処理List.add(対象処理年次);
+
+        for (int i = 1; i <= INT_12; i++) {
+            HikazeiNenkinTaishoshaJohoBusiness 対象処理 = new HikazeiNenkinTaishoshaJohoBusiness();
+            RString 月次の月 = get月(i);
+            RString 月次の月コード = get月コード(i, true, RSTRING_0);
+
+            ShoriDateKanri 月次処理情報 = getShoriDateKanriFor単一(月次の月コード, RSTRING_1, 年次処理情報List);
+            対象処理.set月(月次の月);
+            対象処理.set月コード(月次の月コード);
+            対象処理.set処理コード(RSTRING_1);
+            対象処理.set処理(月次);
+            if (月次処理情報 == null) {
+                対象処理.set処理日時(RString.EMPTY);
+                対象処理.set処理状態コード(RSTRING_1);
+                対象処理.set処理状態(SyoriJyoutaiCode.toValue(RSTRING_1).get名称());
+            } else {
+                対象処理.set処理日時(年次処理情報.get基準日時().toDateString());
+                対象処理.set処理状態コード(年次処理情報.get処理枝番());
+                対象処理.set処理状態(SyoriJyoutaiCode.toValue(年次処理情報.get処理枝番()).get名称());
+            }
+
+            対象処理List.add(対象処理);
+        }
+
+        List<dgShoriSettei_Row> rowList = new ArrayList<>();
+        for (HikazeiNenkinTaishoshaJohoBusiness 対象処理 : 対象処理List) {
+
+            dgShoriSettei_Row row = new dgShoriSettei_Row();
+            row.setTxtTuki(対象処理.get月());
+            row.setTxtShori(対象処理.get処理());
+            row.setHdnSyokiShoriJotai(対象処理.get処理状態());
+            row.getTxtShoriJotai().setDataSource(set処理状態List(対象処理.get処理状態()));
+            row.setTxtShoriNitchiji(対象処理.get処理日時());
+
+            rowList.add(row);
+        }
+
+        div.getDgShoriSettei().setDataSource(rowList);
+
+    }
+
+    /**
+     * 処理設定のクリンク処理です。
+     *
+     * @param div JissiJyokyohyoDiv
+     */
+    public void onClick_btnBatchRegister(HikazeiNenkinTaishoshaJohoDiv div) {
+
+        if (div.getCcdChohyoSyuturyokuJun1().get出力順ID() != null) {
+            long 出力順ID = div.getCcdChohyoSyuturyokuJun1().get出力順ID();
+            IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+            IOutputOrder iOutputOrder = finder.get出力順(
+                    SubGyomuCode.DBD介護受給,
+                    div.getCcdChohyoSyuturyokuJun1().get帳票ID(),
+                    出力順ID);
+            if (iOutputOrder != null) {
+                IChohyoShutsuryokujunManager manager = new _ChohyoShutsuryokujunManager();
+                manager.save前回出力順(iOutputOrder);
+            }
+        }
+
+        if (div.getCcdChohyoSyuturyokuJun2().get出力順ID() != null) {
+            long 出力順ID = div.getCcdChohyoSyuturyokuJun2().get出力順ID();
+            IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+            IOutputOrder iOutputOrder = finder.get出力順(
+                    SubGyomuCode.DBD介護受給,
+                    div.getCcdChohyoSyuturyokuJun2().get帳票ID(),
+                    出力順ID);
+            if (iOutputOrder != null) {
+                IChohyoShutsuryokujunManager manager = new _ChohyoShutsuryokujunManager();
+                manager.save前回出力順(iOutputOrder);
+            }
+        }
+
+        if (div.getCcdChohyoSyuturyokuJun3().get出力順ID() != null) {
+            long 出力順ID = div.getCcdChohyoSyuturyokuJun3().get出力順ID();
+            IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+            IOutputOrder iOutputOrder = finder.get出力順(
+                    SubGyomuCode.DBD介護受給,
+                    div.getCcdChohyoSyuturyokuJun3().get帳票ID(),
+                    出力順ID);
+            if (iOutputOrder != null) {
+                IChohyoShutsuryokujunManager manager = new _ChohyoShutsuryokujunManager();
+                manager.save前回出力順(iOutputOrder);
+            }
+        }
+        if (!DBDMN81002.equals(ResponseHolder.getMenuID())) {
+            return;
+        }
+        if (div.getCcdChohyoSyuturyokuJun1().get出力順ID() != null) {
+            long 出力順ID = div.getCcdChohyoSyuturyokuJun1().get出力順ID();
+            IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+            IOutputOrder iOutputOrder = finder.get出力順(
+                    SubGyomuCode.DBD介護受給,
+                    div.getCcdChohyoSyuturyokuJun1().get帳票ID(),
+                    出力順ID);
+            if (iOutputOrder != null) {
+                IChohyoShutsuryokujunManager manager = new _ChohyoShutsuryokujunManager();
+                manager.save前回出力順(iOutputOrder);
+            }
+        }
+
+    }
+
+    /**
+     * 非課税年金対象者情報取込のパラメータ作成処理です。
+     *
+     * @param div JissiJyokyohyoDiv
+     * @param 構成市町村コードリスト List<RString>
+     * @return HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter
+     */
+    public HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter createDBD301010BatchParamter(
+            HikazeiNenkinTaishoshaJohoDiv div,
+            List<RString> 構成市町村コードリスト) {
+
+        HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter parameter = new HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter();
+
+        parameter.set処理年度(new FlexibleYear(div.getDdlShoriNendo().getSelectedKey()));
+        parameter.set処理区分(div.getDdlTuki().getSelectedKey().substring(INT_0));
+        parameter.set対象月(div.getDdlTuki().getSelectedKey().substring(INT_1, INT_4));
+        parameter.setテスト処理(div.getHeddaeria().getChkTesutoShoriTorikomi().isAllSelected() ? RSTRING_1 : RSTRING_0);
+        if (KEY0.equals(div.getChohyoShutsuryokuUmu().getRadSonotaChohyo().getSelectedKey())) {
+            parameter.set出力区分(RSTRING_1);
+        } else if (KEY1.equals(div.getChohyoShutsuryokuUmu().getRadSonotaChohyo().getSelectedKey())) {
+            parameter.set出力区分(RSTRING_0);
+        }
+        parameter.set処理状態(div.getTxtShoriJotai().getText());
+        parameter.set構成市町村コードリスト(構成市町村コードリスト);
+        parameter.set処理日時(new YMDHMS(div.getTxtShoriNichiji().getValue()));
+        parameter.set出力順ID1(div.getCcdChohyoSyuturyokuJun1().get出力順ID());
+        parameter.set出力順ID2(div.getCcdChohyoSyuturyokuJun2().get出力順ID());
+        parameter.set出力順ID3(div.getCcdChohyoSyuturyokuJun3().get出力順ID());
+        parameter.set出力順ID4(div.getCcdChohyoSyuturyokuJun4().get出力順ID());
+
+        return parameter;
+    }
+
+    /**
+     * 遡及非課税年金対象者同定のパラメータ作成処理です。
+     *
+     * @param div JissiJyokyohyoDiv
+     * @return SokyuHikazeiNenkinBatchParameter
+     */
+    public SokyuHikazeiNenkinBatchParameter createDBD301020BatchParamter(
+            HikazeiNenkinTaishoshaJohoDiv div) {
+
+        SokyuHikazeiNenkinBatchParameter parameter = new SokyuHikazeiNenkinBatchParameter();
+
+        parameter.set処理年度(new FlexibleYear(new RString("9999")));
+        parameter.set処理区分(new RString("9"));
+        //parameter.set対象月(new RString("999"));
+        parameter.setテスト処理(div.getHeddaeria().getChkTesutoShoriTorikomi().isAllSelected() ? RSTRING_1 : RSTRING_0);
+        parameter.set出力順ID1(div.getCcdChohyoSyuturyokuJun1().get出力順ID());
+        parameter.set出力順ID2(div.getCcdChohyoSyuturyokuJun2().get出力順ID());
+        parameter.set出力順ID3(div.getCcdChohyoSyuturyokuJun3().get出力順ID());
+
+        return parameter;
     }
 
     private void 単一年度DDLの選択処理() {
@@ -444,4 +645,32 @@ public class HikazeiNenkinTaishoshaJohoHandler {
                 市町村コード,
                 div.getDdlTuki().getSelectedKey());
     }
+
+    private List<KeyValueDataSource> set処理状態List(RString 処理状態) {
+
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+
+        if (SyoriJyoutaiCode.未処理.getコード().equals(処理状態)) {
+            dataSource.add(new KeyValueDataSource(SyoriJyoutaiCode.未処理.getコード(), SyoriJyoutaiCode.未処理.get名称()));
+            dataSource.add(new KeyValueDataSource(SyoriJyoutaiCode.処理なし.getコード(), SyoriJyoutaiCode.処理なし.get名称()));
+        } else if (SyoriJyoutaiCode.処理済.getコード().equals(処理状態)) {
+            dataSource.add(new KeyValueDataSource(SyoriJyoutaiCode.処理済.getコード(), SyoriJyoutaiCode.処理済.get名称()));
+            dataSource.add(new KeyValueDataSource(SyoriJyoutaiCode.再処理前.getコード(), SyoriJyoutaiCode.再処理前.get名称()));
+            dataSource.add(new KeyValueDataSource(SyoriJyoutaiCode.追加取込前.getコード(), SyoriJyoutaiCode.追加取込前.get名称()));
+        } else if (SyoriJyoutaiCode.再処理前.getコード().equals(処理状態)) {
+            dataSource.add(new KeyValueDataSource(SyoriJyoutaiCode.再処理前.getコード(), SyoriJyoutaiCode.再処理前.get名称()));
+            dataSource.add(new KeyValueDataSource(SyoriJyoutaiCode.処理済.getコード(), SyoriJyoutaiCode.処理済.get名称()));
+            dataSource.add(new KeyValueDataSource(SyoriJyoutaiCode.追加取込前.getコード(), SyoriJyoutaiCode.追加取込前.get名称()));
+        } else if (SyoriJyoutaiCode.処理なし.getコード().equals(処理状態)) {
+            dataSource.add(new KeyValueDataSource(SyoriJyoutaiCode.処理なし.getコード(), SyoriJyoutaiCode.処理なし.get名称()));
+            dataSource.add(new KeyValueDataSource(SyoriJyoutaiCode.未処理.getコード(), SyoriJyoutaiCode.未処理.get名称()));
+        } else if (SyoriJyoutaiCode.追加取込前.getコード().equals(処理状態)) {
+            dataSource.add(new KeyValueDataSource(SyoriJyoutaiCode.追加取込前.getコード(), SyoriJyoutaiCode.追加取込前.get名称()));
+            dataSource.add(new KeyValueDataSource(SyoriJyoutaiCode.処理済.getコード(), SyoriJyoutaiCode.処理済.get名称()));
+            dataSource.add(new KeyValueDataSource(SyoriJyoutaiCode.再処理前.getコード(), SyoriJyoutaiCode.再処理前.get名称()));
+        }
+
+        return dataSource;
+    }
+
 }

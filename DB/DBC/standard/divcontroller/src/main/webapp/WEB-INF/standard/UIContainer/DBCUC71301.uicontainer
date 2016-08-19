@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC71301",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "汎用リスト（短期入所拡大該当者）",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC7130001",
+     "toLayoutTitle": "汎用リスト",
+     "toState": "短期入所拡大該当者"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC7130001",
+     "layoutTitle": "汎用リスト",
+     "eventName": "実行",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
