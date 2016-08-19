@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5320001;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -611,6 +612,10 @@ public class NinteiTsuchishoHakkoHandler {
         set一括発行サービス変更通知書(市町村コード, PanelType.一括発行サービス変更通知書パネル);
         set一括発行要介護区分変更通知書(市町村コード, PanelType.一括発行要介護度変更通知書パネル);
 
+        div.getChkOutPutSelect().setSelectedItemsByKey(
+                Arrays.asList(RadioValue.認定結果通知書.getKey(),
+                        RadioValue.サービス変更通知書.getKey(),
+                        RadioValue.要介護度変更通知書.getKey()));
     }
 
     private void set一括発行認定結果通知書(RString 市町村コード, PanelType パネル) {
@@ -1290,7 +1295,7 @@ public class NinteiTsuchishoHakkoHandler {
     }
 
     private RString getタイトル(ConfigNameDBA configName) {
-        RString タイトル = DbBusinessConfig.get(configName, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
+        RString タイトル = DbBusinessConfig.get(configName, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         return null != タイトル ? タイトル : RString.EMPTY;
     }
 
