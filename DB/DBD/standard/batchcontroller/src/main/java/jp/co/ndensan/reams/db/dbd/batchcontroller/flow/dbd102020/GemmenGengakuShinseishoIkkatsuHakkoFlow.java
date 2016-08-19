@@ -33,7 +33,7 @@ public class GemmenGengakuShinseishoIkkatsuHakkoFlow extends BatchFlowBase<DBD10
     private static final String RIYOSHAFUTANGAKUGENGAKUMENJYO = "DBD800002_RiyoshaFutangakuGengakuMenjyoShinseisho";
     private static final String FUTANGENGAKUSHINSEISHOHAKKO = "DBD800005_HomonKaigoRiyoshaFutangakuGengakuShinseisho";
     private static final String RIYOSHAFUTANGAKUKEIGENTAISHO
-            = "DBD800006_ShakaifukushihojinRiyoshaFutangakuKeigentaishoShinseisho";
+            = "DBD800006_ShafukuRiyoshaFutangakuKeigentaishoShinseisho";
 
     @Override
     protected void defineFlow() {

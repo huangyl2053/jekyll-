@@ -67,7 +67,7 @@ public class ShafukuRiyoshaKeigenShinseishoHakko extends BatchProcessBase<Riyosh
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmen.shinseisho.hakko."
             + "IRiyoshaFutangakuGemmenShinseishoHakkoMapper.get出力対象者情報");
     private ShinseishoHakkoProcessParameter processParamter;
-    private static final ReportId ID = new ReportId("DBD800006_ShakaifukushihojinRiyoshaFutangakuKeigentaishoShinseisho");
+    private static final ReportId ID = new ReportId("DBD800006_ShafukuRiyoshaFutangakuKeigentaishoShinseisho");
     private RString 導入団体コード;
     private RString 市町村名;
     @BatchWriter
@@ -84,6 +84,8 @@ public class ShafukuRiyoshaKeigenShinseishoHakko extends BatchProcessBase<Riyosh
         association = AssociationFinderFactory.createInstance().getAssociation();
         ninshosha = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, RString.EMPTY);
         hokenshaList = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護事務);
+        導入団体コード = association.getLasdecCode_().value();
+        市町村名 = association.get市町村名();
         通知書定型文 = new ArrayList();
         TsuchishoTeikeibunManager manager = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = manager.get通知書定型文項目(SubGyomuCode.DBD介護受給, processParamter.get帳票ID(), KamokuCode.EMPTY, 1);
@@ -157,6 +159,7 @@ public class ShafukuRiyoshaKeigenShinseishoHakko extends BatchProcessBase<Riyosh
         RString csv出力有無 = なし;
         RString csvファイル名 = なし;
         List<RString> 出力条件 = new ArrayList<>();
+        builder = new RStringBuilder();
         builder.append(HAKKONICHI);
         builder.append(processParamter.get発行日().wareki().toDateString());
         出力条件.add(builder.toRString());

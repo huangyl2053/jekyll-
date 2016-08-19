@@ -41,11 +41,11 @@
         AND F."logicalDeletedFlag" IS FALSE 
   WHERE 
         A."hakkoShoriID" =#{発行処理ID}
-<!--   ORDER BY 
-        <if test="出力フラグ" >
-            A.""
-        </if>
-            #{出力順}-->
+     <if test="出力フラグ" >
+  ORDER BY 
+         C."willBeRenewed",
+     </if>
+        ${出力順}
     </select>
 </mapper>
         

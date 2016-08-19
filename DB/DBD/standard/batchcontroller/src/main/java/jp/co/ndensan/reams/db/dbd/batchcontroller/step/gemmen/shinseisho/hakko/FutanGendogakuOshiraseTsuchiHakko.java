@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.gemmen.shinseisho.hakko;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100008.NinteiKoshinTsuchishoItem;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100008.NinteiKoshinTsuchishoReport;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd800001.FutangendogakuNinteiShinseishoOrderKey;
@@ -18,6 +17,7 @@ import jp.co.ndensan.reams.db.dbd.entity.report.dbd100008.NinteiKoshinTsuchishoR
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmen.shinseisho.hakko.IFutanGendogakuOshiraseTsuchiHakkoMapper;
 import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.teikeibunhenkan.KaigoTextHenkanRuleCreator;
@@ -74,11 +74,9 @@ public class FutanGendogakuOshiraseTsuchiHakko extends BatchProcessBase<FutanGen
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmen.shinseisho.hakko."
             + "IFutanGendogakuOshiraseTsuchiHakkoMapper.get出力対象者情報");
     private ShinseishoHakkoProcessParameter processParamter;
-    private static final ReportId ID = new ReportId("DBD100008_FutanGendoGakuNinteiKoshinTsuchisho");
-    private static final RString 種別コード = new RString("DBD100008_FutanGendoGakuNinteiKoshinTsuchisho");
+    private static final ReportId ID = new ReportId("DBD100008_FutanGendogakuNinteiKoshinTsuchisho");
+    private static final RString 種別コード = new RString("DBD100008");
     private static final RString GENERICKEY = new RString("負担限度額認定更新のお知らせ通知書");
-    private static final RString 新規更新区分_0 = new RString("0");
-    private static final RString 新規更新区分_1 = new RString("1");
     private static final RString JOBNO_NAME = new RString("【ジョブ番号】");
     private static final RString HAKKONICHI = new RString("【発行日】");
     private static final RString SHUTSURYOKUJUN = new RString("【出力順】");
@@ -105,6 +103,8 @@ public class FutanGendogakuOshiraseTsuchiHakko extends BatchProcessBase<FutanGen
     protected void initialize() {
         association = AssociationFinderFactory.createInstance().getAssociation();
         ninshosha = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, 種別コード);
+        導入団体コード = association.getLasdecCode_().value();
+        市町村名 = association.get市町村名();
         帳票制御共通 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御共通(ID);
         帳票制御汎用 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御汎用(ID);
         IOutputOrder order = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(
@@ -147,10 +147,8 @@ public class FutanGendogakuOshiraseTsuchiHakko extends BatchProcessBase<FutanGen
         IAtesaki atesaki = AtesakiFactory.createInstance(entity.get宛先());
         List<RString> 通知書定型文 = init通知書定型文(entity);
         set文書番号(entity);
-        //TODO　QA回答を待ち。
-        FutanGendogakuNintei 帳票情報 = new FutanGendogakuNintei(null, entity.get被保険者番号(), 0);
         NinteiKoshinTsuchishoItem item = new NinteiKoshinTsuchishoItem(
-                帳票情報,
+                null,
                 kojin,
                 atesaki,
                 new ChohyoSeigyoKyotsu(帳票制御共通),
@@ -165,6 +163,7 @@ public class FutanGendogakuOshiraseTsuchiHakko extends BatchProcessBase<FutanGen
                 processParamter.get帳票ID(),
                 ninshosha
         );
+        item.set編集後宛先(JushoHenshu.create編集後宛先(atesaki, association, new ChohyoSeigyoKyotsu(帳票制御共通)));
         NinteiKoshinTsuchishoReport report = new NinteiKoshinTsuchishoReport(item);
         report.writeBy(reportSourceWriter);
     }
@@ -180,11 +179,12 @@ public class FutanGendogakuOshiraseTsuchiHakko extends BatchProcessBase<FutanGen
         builder.append(RString.HALF_SPACE);
         builder.append(JobContextHolder.getJobId());
         RString ジョブ番号 = builder.toRString();
-        RString 帳票名 = ReportIdDBD.DBDPR12002_1_2.getReportName();
+        RString 帳票名 = ReportIdDBD.DBDPR12002_1_1.getReportName();
         RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount().value()));
         RString csv出力有無 = なし;
         RString csvファイル名 = なし;
         List<RString> 出力条件 = new ArrayList<>();
+        builder = new RStringBuilder();
         builder.append(HAKKONICHI);
         builder.append(processParamter.get発行日().wareki().toDateString());
         出力条件.add(builder.toRString());
@@ -204,12 +204,12 @@ public class FutanGendogakuOshiraseTsuchiHakko extends BatchProcessBase<FutanGen
         ITextHenkanRule textHenkanRule = KaigoTextHenkanRuleCreator.createRule(SubGyomuCode.DBD介護受給, processParamter.get帳票ID());
         TsuchishoTeikeibunManager manager = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo;
-        if (entity.get新規更新区分().equals(新規更新区分_0)) {
+        if (!entity.is更新認定フラグ()) {
             tsuchishoTeikeibunInfo = manager.get通知書定型文項目(SubGyomuCode.DBD介護受給, ID, KamokuCode.EMPTY, 項目番号_11);
-        } else if (entity.get新規更新区分().equals(新規更新区分_1) && entity.is旧措置者フラグ()) {
-            tsuchishoTeikeibunInfo = manager.get通知書定型文項目(SubGyomuCode.DBD介護受給, ID, KamokuCode.EMPTY, 項目番号_1);
-        } else {
+        } else if (entity.is旧措置者フラグ()) {
             tsuchishoTeikeibunInfo = manager.get通知書定型文項目(SubGyomuCode.DBD介護受給, ID, KamokuCode.EMPTY, 項目番号_21);
+        } else {
+            tsuchishoTeikeibunInfo = manager.get通知書定型文項目(SubGyomuCode.DBD介護受給, ID, KamokuCode.EMPTY, 項目番号_1);
         }
         for (TsuchishoTeikeibunEntity tsuchishoTeikeibunEntity : tsuchishoTeikeibunInfo.get通知書定型文List()) {
             int 項目番号 = tsuchishoTeikeibunEntity.getTsuchishoTeikeibunEntity().getSentenceNo();

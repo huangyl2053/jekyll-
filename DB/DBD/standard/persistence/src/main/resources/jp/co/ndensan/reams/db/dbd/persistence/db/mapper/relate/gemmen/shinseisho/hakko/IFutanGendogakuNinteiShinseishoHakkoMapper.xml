@@ -84,10 +84,10 @@
         ON G."shikibetsuCode" =C."shikibetsuCode" 
         WHERE 
             A."hakkoShoriID" = #{発行処理ID}
-<!--        ORDER BY 
         <if test="出力フラグ" >
-            A.""
+        ORDER BY 
+            C."willBeRenewed",
         </if>
-            #{出力順}-->
+            ${出力順}
     </select>
 </mapper>
