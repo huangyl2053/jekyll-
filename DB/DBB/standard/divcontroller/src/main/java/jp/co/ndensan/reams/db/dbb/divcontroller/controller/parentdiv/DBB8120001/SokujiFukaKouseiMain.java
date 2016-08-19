@@ -78,7 +78,8 @@ public class SokujiFukaKouseiMain {
     private static final RString 前年度の情報を表示する = new RString("前年度の情報を表示する");
     private static final RString 業務固有の識別情報名称 = new RString("業務固有の識別情報");
     private static final RString 四月一日 = new RString("0401");
-    private static final RString チェック済み = new RString("チェック済み");
+    private static final RString チェック済み_特徴警告 = new RString("チェック済み_特徴警告");
+    private static final RString チェック済み_普徴警告 = new RString("チェック済み_普徴警告");
     private static final RString メニューID_通知書発行後異動把握 = new RString("DBBMN32001");
     private static final RString メニューID_特徴仮算定賦課エラー一覧 = new RString("DBBMN33004");
     private static final RString メニューID_即時賦課更正 = new RString("DBBMN13001");
@@ -627,12 +628,13 @@ public class SokujiFukaKouseiMain {
             boolean is期別特徴停止の確認) {
         valid = validationHandler.validate特徴警告();
         if (valid.iterator().hasNext()
-                && !チェック済み.equals(div.getIsHasWarningFlag())
+                && !チェック済み_特徴警告.equals(div.getIsHasWarningFlag())
+                && !チェック済み_普徴警告.equals(div.getIsHasWarningFlag())
                 && (!ResponseHolder.isWarningIgnoredRequest()
                 || (ResponseHolder.getButtonType() == null && ResponseHolder.isWarningIgnoredRequest())
                 || is保存の確認
                 || is期別特徴停止の確認)) {
-            div.setIsHasWarningFlag(チェック済み);
+            div.setIsHasWarningFlag(チェック済み_特徴警告);
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
         return null;
@@ -647,8 +649,10 @@ public class SokujiFukaKouseiMain {
         valid = validationHandler.validate普徴警告();
         if (valid.iterator().hasNext()
                 && (!ResponseHolder.isWarningIgnoredRequest()
+                || (ResponseHolder.isWarningIgnoredRequest() && チェック済み_特徴警告.equals(div.getIsHasWarningFlag()))
                 || is保存の確認
                 || is期別特徴停止の確認)) {
+            div.setIsHasWarningFlag(チェック済み_普徴警告);
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
         return null;
