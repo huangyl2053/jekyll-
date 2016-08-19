@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.Karisant
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.TyouhyouEntity;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.karisanteiidokekka.KarisanteiIdoKekkaProcessParameter;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.karisanteiidofuka.IKariSanteiIdoFukaBatchMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
@@ -31,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -80,13 +82,19 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoFukaParam
     private static final ReportId ID = new ReportId("DBB200013_KarisanteiIdoKekkaIchiran");
 
     private KarisanteiIdoKekkaProcessParameter parameter;
+    private IKariSanteiIdoFukaBatchMapper mapper;
+
+    @Override
+    protected void initialize() {
+        mapper = getMapper(IKariSanteiIdoFukaBatchMapper.class);
+    }
 
     @Override
     protected void defineFlow() {
         executeStep(システム日時の取得);
         createKarisanteiIdoKekkaProcessParameter();
-        parameter.set調定日時(getResult(RDateTime.class,
-                new RString(システム日時の取得), SystemTimeShutokuProcess.SYSTEM_TIME));
+        parameter.set調定日時(getResult(YMDHMS.class,
+                new RString(システム日時の取得), SystemTimeShutokuProcess.SYSTEM_TIME).getRDateTime());
         executeStep(資格異動者抽出);
         executeStep(特別徴収開始者抽出);
         executeStep(特別徴収停止者抽出);
@@ -103,15 +111,19 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoFukaParam
         if (RSTZERO.equals(getParameter().get特徴捕捉対象者の依頼金額計算区分())) {
             executeStep(賦課計算_資格喪失);
             executeStep(賦課の情報登録フロー);
+            mapper.delete賦課の情報一時テーブル();
 
             executeStep(賦課計算_特別徴収停止);
             executeStep(賦課の情報登録フロー);
+            mapper.delete賦課の情報一時テーブル();
 
             executeStep(賦課計算_資格取得);
             executeStep(賦課の情報登録フロー);
+            mapper.delete賦課の情報一時テーブル();
 
             executeStep(賦課計算_口座異動のみ反映);
             executeStep(賦課の情報登録フロー);
+            mapper.delete賦課の情報一時テーブル();
         }
 
         executeStep(依頼金額計算区分);
@@ -263,7 +275,7 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoFukaParam
      * @return バッチコマンド
      */
     @Step(賦課の情報登録フロー)
-    protected IBatchFlowCommand choteiToroku() {
+    protected IBatchFlowCommand callChoteiToroku() {
         return otherBatchFlow(賦課の情報登録フローBATCHID, SubGyomuCode.DBB介護賦課,
                 new FukaJohoTorokuBatchParameter(true)).define();
     }
@@ -347,7 +359,7 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoFukaParam
     private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter() {
         return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度(),
                 getParameter().get賦課年度(),
-                new RString(getResult(RDateTime.class, new RString(システム日時の取得),
+                new RString(getResult(YMDHMS.class, new RString(システム日時の取得),
                                 SystemTimeShutokuProcess.SYSTEM_TIME).toString()),
                 ShoriName.仮算定異動賦課.get名称(), RString.EMPTY);
     }

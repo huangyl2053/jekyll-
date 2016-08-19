@@ -1,0 +1,1026 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBC&quot;,&quot;controlName&quot;:&quot;KyufuJissekiHeader&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCloseEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;&quot;,&quot;minHeight&quot;:&quot;&quot;,&quot;widthPercent&quot;:&quot;&quot;,&quot;heightPercent&quot;:&quot;&quot;,&quot;enterKeyAssignedControl&quot;:&quot;&quot;,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;txtJigyoshaVisible&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;txtJigyoshaDisplayNone&quot;,&quot;editType&quot;:1}]},&quot;txtJigyoshaVisible&quot;:true,&quot;txtJigyoshaDisplayNone&quot;:false}" data-is-composite-control="true" data-control-name="DBC.KyufuJissekiHeader"><div title="" class="UzPanel FloatLeft JSControl Panel panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-Default marginRight-Default marginTop-Default marginBottom-Default UzCommonChildDivPanel Width-G2 UzCompositeChild" id="KyufuJissekiHeader" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;KyufuJissekiHeader&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;KyufuJissekiHeader&quot;,&quot;title&quot;:&quot;&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;KyufuJissekiHeader&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="KyufuJissekiHeader_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="KyufuJissekiHeader_panel_body_area"><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtHihoNo" style="width: 157px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtHihoNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtHihoNo_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;被保番号&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtHihoNo_labelL" style="width: 70px;"><span>被保番号</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtHihoNo_core" style="width: 80px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtJuminShubetsu" style="width: 177px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtJuminShubetsu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;105px&quot;,&quot;selectControlID&quot;:&quot;txtJuminShubetsu_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;住民種別&quot;,&quot;labelLWidth&quot;:&quot;65px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtJuminShubetsu_labelL" style="width: 65px;"><span>住民種別</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtJuminShubetsu_core" style="width: 105px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtYoKaigodo" style="width: 182px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtYoKaigodo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;105px&quot;,&quot;selectControlID&quot;:&quot;txtYoKaigodo_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;要介護度&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtYoKaigodo_labelL" style="width: 70px;"><span>要介護度</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtYoKaigodo_core" style="width: 105px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="UzTextBoxDateRange TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtYukoKikan" style="width: 307px; height: 21px;" data-control-type="TextBoxDateRange" data-obj="{&quot;fieldName&quot;:&quot;txtYukoKikan&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDateRange&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtYukoKikan_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;有効期間&quot;,&quot;fromSelectControlID&quot;:&quot;txtYukoKikanFrom&quot;,&quot;toSelectControlID&quot;:&quot;txtYukoKikanTo&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtYukoKikan_labelL" style="width: 70px;"><span>有効期間</span></span><span class="CoreElement UzTextBox TextBoxDateRangeCore" id="txtYukoKikan_core" data-control-type="TextBoxDateRange"><input tabindex="-1" class="UzTextBox UzTextBoxDateRange readonlyColor AsIfDisabled" id="txtYukoKikanFrom" style="margin: 0em; width: 80px; font-size: inherit;" type="text" readonly="readonly" placeholder="" data-control-type="TextBoxDateRange" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate=""><span class="UzTextBoxDateRange Label-L text-align-center Width-XS" id="txtYukoKikanArrow" style="text-align: center; margin-right: 0.8em; margin-left: 0.8em;">～</span><input tabindex="-1" class="UzTextBox UzTextBoxDateRange readonlyColor AsIfDisabled" id="txtYukoKikanTo" style="margin: 0em; width: 80px; font-size: inherit;" type="text" readonly="readonly" placeholder="" data-control-type="TextBoxDateRange" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate=""></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="txtShimei" style="width: 452px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtShimei&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;375px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtShimei_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;氏名&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtShimei_labelL" style="width: 70px;"><span>氏名</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtShimei_core" style="width: 375px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtSeibetsu" style="width: 77px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtSeibetsu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;20px&quot;,&quot;selectControlID&quot;:&quot;txtSeibetsu_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;性別&quot;,&quot;labelLWidth&quot;:&quot;50px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSeibetsu_labelL" style="width: 50px;"><span>性別</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtSeibetsu_core" style="width: 20px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtSeinengappi" style="width: 157px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtSeinengappi&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtSeinengappi_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;生年月日&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSeinengappi_labelL" style="width: 70px;"><span>生年月日</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtSeinengappi_core" style="width: 80px;" type="text" readonly="readonly" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate=""></div><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="txtTeikyoNengetsu" style="width: 137px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtTeikyoNengetsu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;60px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtTeikyoNengetsu_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;提供年月&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;,&quot;ymdKubun&quot;:1}"><span class="word-wrap-break-word Label-L text-align-right" id="txtTeikyoNengetsu_labelL" style="width: 70px;"><span>提供年月</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtTeikyoNengetsu_core" style="width: 60px;" type="text" readonly="readonly" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-wareki-hirekijyou=""></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtJissekiKubun" style="width: 132px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtJissekiKubun&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;40px&quot;,&quot;selectControlID&quot;:&quot;txtJissekiKubun_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;実績区分&quot;,&quot;labelLWidth&quot;:&quot;85px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtJissekiKubun_labelL" style="width: 85px;"><span>実績区分</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtJissekiKubun_core" style="width: 40px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtSeiriNo" style="width: 157px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtSeiriNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtSeiriNo_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;整理番号&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSeiriNo_labelL" style="width: 70px;"><span>整理番号</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtSeiriNo_core" style="width: 80px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtHokensha" style="width: 432px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtHokensha&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;375px&quot;,&quot;selectControlID&quot;:&quot;txtHokensha_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;保険者&quot;,&quot;labelLWidth&quot;:&quot;50px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtHokensha_labelL" style="width: 50px;"><span>保険者</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtHokensha_core" style="width: 375px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="txtYoshikiNo" style="width: 452px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtYoshikiNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;375px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtYoshikiNo_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;様式番号&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtYoshikiNo_labelL" style="width: 70px;"><span>様式番号</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtYoshikiNo_core" style="width: 375px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtJigyosha" style="width: 432px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtJigyosha&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;375px&quot;,&quot;selectControlID&quot;:&quot;txtJigyosha_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;事業者&quot;,&quot;labelLWidth&quot;:&quot;50px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtJigyosha_labelL" style="width: 50px;"><span>事業者</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtJigyosha_core" style="width: 375px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBC;
+(function (DBC) {
+    (function (KyufuJissekiHeader) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        KyufuJissekiHeader.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "KyufuJissekiHeader";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.KyufuJissekiHeader = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtHihoNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtHihoNo"));
+            };
+
+            Controls.prototype.txtJuminShubetsu = function () {
+                return new UZA.TextBox(this.convFiledName("txtJuminShubetsu"));
+            };
+
+            Controls.prototype.txtYoKaigodo = function () {
+                return new UZA.TextBox(this.convFiledName("txtYoKaigodo"));
+            };
+
+            Controls.prototype.txtYukoKikan = function () {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtYukoKikan"));
+            };
+
+            Controls.prototype.txtShimei = function () {
+                return new UZA.TextBox(this.convFiledName("txtShimei"));
+            };
+
+            Controls.prototype.txtSeibetsu = function () {
+                return new UZA.TextBox(this.convFiledName("txtSeibetsu"));
+            };
+
+            Controls.prototype.txtSeinengappi = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSeinengappi"));
+            };
+
+            Controls.prototype.txtTeikyoNengetsu = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtTeikyoNengetsu"));
+            };
+
+            Controls.prototype.txtJissekiKubun = function () {
+                return new UZA.TextBox(this.convFiledName("txtJissekiKubun"));
+            };
+
+            Controls.prototype.txtSeiriNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtSeiriNo"));
+            };
+
+            Controls.prototype.txtHokensha = function () {
+                return new UZA.TextBox(this.convFiledName("txtHokensha"));
+            };
+
+            Controls.prototype.txtYoshikiNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtYoshikiNo"));
+            };
+
+            Controls.prototype.txtJigyosha = function () {
+                return new UZA.TextBox(this.convFiledName("txtJigyosha"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        KyufuJissekiHeader.Controls = Controls;
+    })(DBC.KyufuJissekiHeader || (DBC.KyufuJissekiHeader = {}));
+    var KyufuJissekiHeader = DBC.KyufuJissekiHeader;
+
+    var KyufuJissekiHeader_Design = (function (_super) {
+        __extends(KyufuJissekiHeader_Design, _super);
+        function KyufuJissekiHeader_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, KyufuJissekiHeader_Design.myLayout, fieldName);
+        }
+        Object.defineProperty(KyufuJissekiHeader_Design.prototype, "txtJigyoshaVisible", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"])["visible"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"])["visible"] = value;
+                } else {
+                    this.layout.items[0].items[12]["visible"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(KyufuJissekiHeader_Design.prototype, "txtJigyoshaDisplayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[12]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        KyufuJissekiHeader_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("txtJigyoshaVisible");
+            Uz.JSControlUtil.registProperty("txtJigyoshaDisplayNone");
+        };
+
+        KyufuJissekiHeader_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["txtJigyoshaVisible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]).getEditablePropertyInfo()["visible"];
+            editablePropertyInfo["txtJigyoshaDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+
+            return editablePropertyInfo;
+        };
+        KyufuJissekiHeader_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "KyufuJissekiHeader",
+                    "items": [
+                        {
+                            "fieldName": "txtHihoNo",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtHihoNo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "被保番号",
+                            "labelRText": "",
+                            "labelLWidth": "70",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtJuminShubetsu",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "105",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtJuminShubetsu_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "住民種別",
+                            "labelRText": "",
+                            "labelLWidth": "65",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtYoKaigodo",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "105",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtYoKaigodo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "要介護度",
+                            "labelRText": "",
+                            "labelLWidth": "70",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtYukoKikan",
+                            "items": [],
+                            "controlType": "TextBoxDateRange",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtYukoKikan_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "labelLText": "有効期間",
+                            "labelRText": "",
+                            "labelLWidth": "70",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "permitCharactor": "",
+                            "fromPlaceHolder": "",
+                            "toPlaceHolder": "",
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "minDate": "",
+                            "maxDate": "",
+                            "fromText": "",
+                            "toText": "",
+                            "fromValue": "",
+                            "toValue": ""
+                        },
+                        {
+                            "fieldName": "txtShimei",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "375",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtShimei_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "氏名",
+                            "labelRText": "",
+                            "labelLWidth": "70",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtSeibetsu",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "20",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtSeibetsu_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "性別",
+                            "labelRText": "",
+                            "labelLWidth": "50",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtSeinengappi",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtSeinengappi_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "value": "",
+                            "labelLText": "生年月日",
+                            "labelRText": "",
+                            "labelLWidth": "70",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "permitCharactor": "./_-",
+                            "ymdKubun": 2,
+                            "displayFormat": 0
+                        },
+                        {
+                            "fieldName": "txtTeikyoNengetsu",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "60",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtTeikyoNengetsu_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "value": "",
+                            "labelLText": "提供年月",
+                            "labelRText": "",
+                            "labelLWidth": "70",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "permitCharactor": "./_-",
+                            "ymdKubun": 2,
+                            "displayFormat": 0
+                        },
+                        {
+                            "fieldName": "txtJissekiKubun",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "40",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtJissekiKubun_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "実績区分",
+                            "labelRText": "",
+                            "labelLWidth": "85",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtSeiriNo",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtSeiriNo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "整理番号",
+                            "labelRText": "",
+                            "labelLWidth": "70",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtHokensha",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "375",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtHokensha_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "保険者",
+                            "labelRText": "",
+                            "labelLWidth": "50",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtYoshikiNo",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "375",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtYoshikiNo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "様式番号",
+                            "labelRText": "",
+                            "labelLWidth": "70",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtJigyosha",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "375",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtJigyosha_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "事業者",
+                            "labelRText": "",
+                            "labelLWidth": "50",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "G2",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "Default",
+                    "marginRight": "Default",
+                    "selectControlID": "KyufuJissekiHeader",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [],
+                    "requestSettings": [],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": true,
+                    "backgroundColor": 0,
+                    "widthAuto": true,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto",
+                    "canPost": false
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "businessId": "DBC",
+            "controlName": "KyufuJissekiHeader",
+            "marginTop": 0,
+            "marginBottom": 0,
+            "originalProperty": [
+                {
+                    "publicChildFieldName": "txtJigyosha",
+                    "publicChildProperty": "visible",
+                    "newPropertyName": "txtJigyoshaVisible"
+                },
+                {
+                    "publicChildFieldName": "txtJigyosha",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "txtJigyoshaDisplayNone"
+                }
+            ],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": ""
+        };
+        return KyufuJissekiHeader_Design;
+    })(Uz.CommonChildDiv);
+    DBC.KyufuJissekiHeader_Design = KyufuJissekiHeader_Design;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (KyufuJissekiHeader) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KyufuJissekiHeader.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        KyufuJissekiHeader.ModeController = ModeController;
+    })(DBC.KyufuJissekiHeader || (DBC.KyufuJissekiHeader = {}));
+    var KyufuJissekiHeader = DBC.KyufuJissekiHeader;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (KyufuJissekiHeader) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new KyufuJissekiHeader.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("txtJigyoshaVisible", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("txtJigyoshaDisplayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.gettxtJigyoshaVisible = function () {
+                return this.controls.txtJigyosha().visible;
+            };
+
+            PublicProperties.prototype.settxtJigyoshaVisible = function (value) {
+                this.controls.txtJigyosha().visible = value;
+            };
+
+            PublicProperties.prototype.gettxtJigyoshaDisplayNone = function () {
+                return this.controls.txtJigyosha().displayNone;
+            };
+
+            PublicProperties.prototype.settxtJigyoshaDisplayNone = function (value) {
+                this.controls.txtJigyosha().displayNone = value;
+            };
+            return PublicProperties;
+        })();
+        KyufuJissekiHeader.PublicProperties = PublicProperties;
+    })(DBC.KyufuJissekiHeader || (DBC.KyufuJissekiHeader = {}));
+    var KyufuJissekiHeader = DBC.KyufuJissekiHeader;
+})(DBC || (DBC = {}));
+</script>
+  
+         <script class="RamlConvert" type="text/javascript">
+var DBC= DBC? DBC: {};
+DBC['KYUFUJISSEKIHEADER'] = {};
+DBC['KYUFUJISSEKIHEADER'].KyufuJissekiHeaderRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_KyufuJissekiHeader').getProperty();parameter0.txtHihoNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHihoNo').getProperty();parameter0.txtJuminShubetsu = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtJuminShubetsu').getProperty();parameter0.txtYoKaigodo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtYoKaigodo').getProperty();parameter0.txtYukoKikan = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtYukoKikan').getProperty();parameter0.txtShimei = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShimei').getProperty();parameter0.txtSeibetsu = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeibetsu').getProperty();parameter0.txtSeinengappi = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeinengappi').getProperty();parameter0.txtTeikyoNengetsu = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtTeikyoNengetsu').getProperty();parameter0.txtJissekiKubun = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtJissekiKubun').getProperty();parameter0.txtSeiriNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeiriNo').getProperty();parameter0.txtHokensha = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHokensha').getProperty();parameter0.txtYoshikiNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtYoshikiNo').getProperty();parameter0.txtJigyosha = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtJigyosha').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBC;
+(function (DBC) {
+    (function (KyufuJissekiHeader) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        KyufuJissekiHeader.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "KyufuJissekiHeader";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBC.KyufuJissekiHeader.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBC.KyufuJissekiHeader.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.KyufuJissekiHeader = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtHihoNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtHihoNo"));
+            };
+
+            Controls.prototype.txtJuminShubetsu = function () {
+                return new UZA.TextBox(this.convFiledName("txtJuminShubetsu"));
+            };
+
+            Controls.prototype.txtYoKaigodo = function () {
+                return new UZA.TextBox(this.convFiledName("txtYoKaigodo"));
+            };
+
+            Controls.prototype.txtYukoKikan = function () {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtYukoKikan"));
+            };
+
+            Controls.prototype.txtShimei = function () {
+                return new UZA.TextBox(this.convFiledName("txtShimei"));
+            };
+
+            Controls.prototype.txtSeibetsu = function () {
+                return new UZA.TextBox(this.convFiledName("txtSeibetsu"));
+            };
+
+            Controls.prototype.txtSeinengappi = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSeinengappi"));
+            };
+
+            Controls.prototype.txtTeikyoNengetsu = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtTeikyoNengetsu"));
+            };
+
+            Controls.prototype.txtJissekiKubun = function () {
+                return new UZA.TextBox(this.convFiledName("txtJissekiKubun"));
+            };
+
+            Controls.prototype.txtSeiriNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtSeiriNo"));
+            };
+
+            Controls.prototype.txtHokensha = function () {
+                return new UZA.TextBox(this.convFiledName("txtHokensha"));
+            };
+
+            Controls.prototype.txtYoshikiNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtYoshikiNo"));
+            };
+
+            Controls.prototype.txtJigyosha = function () {
+                return new UZA.TextBox(this.convFiledName("txtJigyosha"));
+            };
+            return Controls;
+        })();
+        KyufuJissekiHeader.Controls = Controls;
+    })(DBC.KyufuJissekiHeader || (DBC.KyufuJissekiHeader = {}));
+    var KyufuJissekiHeader = DBC.KyufuJissekiHeader;
+})(DBC || (DBC = {}));
+var DBC;
+(function (DBC) {
+    (function (KyufuJissekiHeader) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KyufuJissekiHeader.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new KyufuJissekiHeader.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        KyufuJissekiHeader.ModeController = ModeController;
+    })(DBC.KyufuJissekiHeader || (DBC.KyufuJissekiHeader = {}));
+    var KyufuJissekiHeader = DBC.KyufuJissekiHeader;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (KyufuJissekiHeader) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KyufuJissekiHeader.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        KyufuJissekiHeader.PublicProperties = PublicProperties;
+    })(DBC.KyufuJissekiHeader || (DBC.KyufuJissekiHeader = {}));
+    var KyufuJissekiHeader = DBC.KyufuJissekiHeader;
+})(DBC || (DBC = {}));
+</script></div>

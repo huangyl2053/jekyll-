@@ -30,7 +30,7 @@ public class KogakuShikyuShinseishoYuchoEditor implements IKogakuShikyuShinseish
     private final boolean is金融機関表示;
     private final RString 連番;
     private final RString 注意文;
-    private static final RString 漢字_注意 = new RString("注意");
+    private static final RString 文字_注意 = new RString("注意");
     private static final int 定値_0 = 0;
     private static final int 定値_1 = 1;
     private static final int 定値_2 = 2;
@@ -71,7 +71,7 @@ public class KogakuShikyuShinseishoYuchoEditor implements IKogakuShikyuShinseish
         source.hihokenshaNo = getColumnValue(帳票出力対象データ.getHihokenshaNoChohyo());
         source.kojinNo = getColumnValue(帳票出力対象データ.getKojinNoChohyo());
         source.ninshoshaYakushokuMei = 認証者役職名;
-        source.chuiTitle = 漢字_注意;
+        source.chuiTitle = 文字_注意;
         source.chuibun = 注意文;
         if (this.is金融機関表示) {
             if (帳票出力対象データ.getTsuchoKigoChohyo() != null) {
@@ -91,20 +91,6 @@ public class KogakuShikyuShinseishoYuchoEditor implements IKogakuShikyuShinseish
                 source.tuchoNo7 = 帳票出力対象データ.getTsuchoNoChohyo().substring(定値_6, 定値_7);
                 source.tuchoNo8 = 帳票出力対象データ.getTsuchoNoChohyo().substring(定値_7, 定値_8);
             }
-        } else {
-            source.tuchoKigo1 = RString.EMPTY;
-            source.tuchoKigo2 = RString.EMPTY;
-            source.tuchoKigo3 = RString.EMPTY;
-            source.tuchoKigo4 = RString.EMPTY;
-            source.tuchoKigo5 = RString.EMPTY;
-            source.tuchoNo1 = RString.EMPTY;
-            source.tuchoNo2 = RString.EMPTY;
-            source.tuchoNo3 = RString.EMPTY;
-            source.tuchoNo4 = RString.EMPTY;
-            source.tuchoNo5 = RString.EMPTY;
-            source.tuchoNo6 = RString.EMPTY;
-            source.tuchoNo7 = RString.EMPTY;
-            source.tuchoNo8 = RString.EMPTY;
         }
         source.remban = 連番;
         source.識別コード = 帳票出力対象データ.getShikibetsuCodeChohyo();
@@ -112,17 +98,11 @@ public class KogakuShikyuShinseishoYuchoEditor implements IKogakuShikyuShinseish
         return source;
     }
 
-    /**
-     * 日付の変換のメソッドです。
-     *
-     * @param ym 日付
-     * @return 日付
-     */
-    public static RString パターン62(FlexibleYearMonth ym) {
-        if (ym == null) {
+    private RString パターン62(FlexibleYearMonth 年月日) {
+        if (年月日 == null) {
             return RString.EMPTY;
         }
-        return ym.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        return 年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
     private RString doパターン12(FlexibleDate 年月日) {

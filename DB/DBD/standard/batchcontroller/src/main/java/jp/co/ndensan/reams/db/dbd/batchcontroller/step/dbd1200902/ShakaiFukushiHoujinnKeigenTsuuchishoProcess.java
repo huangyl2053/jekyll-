@@ -25,5 +25,4 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoProcess extends BatchProcessBas
     protected void process(ShakaiFukushiHoujinnKeigenTsuuchishoEntity t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 }

@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 受給者異動送付を管理するクラスです。
  *
- * @reamsid_L DBC-9999-010 quxiaodong
+ * @reamsid_L DBC-9999-012 quxiaodong
  */
 public class JukyushaIdoRenrakuhyo
         extends ModelBase<JukyushaIdoRenrakuhyoIdentifier, DbT3001JukyushaIdoRenrakuhyoEntity, JukyushaIdoRenrakuhyo>
@@ -888,6 +888,18 @@ public class JukyushaIdoRenrakuhyo
     }
 
     /**
+     * add KogakuShikyuHanteiKekka
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public JukyushaIdoRenrakuhyo added() {
+        DbT3001JukyushaIdoRenrakuhyoEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        //TODO メッセージの検討
+        return new JukyushaIdoRenrakuhyo(addedEntity, id);
+    }
+
+    /**
      * {@link JukyushaIdoRenrakuhyo}のシリアライズ形式を提供します。
      *
      * @return {@link JukyushaIdoRenrakuhyo}のシリアライズ形式
@@ -899,7 +911,7 @@ public class JukyushaIdoRenrakuhyo
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

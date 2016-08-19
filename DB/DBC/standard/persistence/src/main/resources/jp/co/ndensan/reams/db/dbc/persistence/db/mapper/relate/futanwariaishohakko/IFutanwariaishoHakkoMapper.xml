@@ -573,11 +573,11 @@
             rgdb."DbT7022ShoriDateKanri"  AS "DbT7022ShoriDateKanri"
         WHERE 
             "DbT7022ShoriDateKanri"."subGyomuCode" = 'DBC'
-            AND  "DbT7022ShoriDateKanri"."shichosonCode" = #{市町村コード}
             AND  "DbT7022ShoriDateKanri"."shoriName" = '負担割合証発行（一括）'
             <if test="出力対象==0">AND "DbT7022ShoriDateKanri"."shoriEdaban" = '0000' </if>
             <if test="出力対象==1">AND "DbT7022ShoriDateKanri"."shoriEdaban" = '0001' </if>
             <if test="出力対象==2">AND "DbT7022ShoriDateKanri"."shoriEdaban" = '0002' </if>
+            AND  "DbT7022ShoriDateKanri"."nendo" = #{年度}
     </select>
         
    

@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
  * 申請情報帳票発行一時のエンティティクラスです。
@@ -127,7 +126,7 @@ public class ShinseiJohoChohyoTempEntity extends DbTableEntityBase<ShinseiJohoCh
     private LasdecCode koikinaiTokureiSochimotoShichosonCodeChohyo;
     private LasdecCode kyuShichosonCodeChohyo;
     private boolean kyuSochishaFlagChohyo;
-    private Code yokaigoJotaiKubunCode;
+    private Code yokaigoJotaiKubunCodeChohyo;
     private FlexibleDate ninteiYukoKikanKaishiYMDChohyo;
     private FlexibleDate ninteiYukoKikanShuryoYMDChohyo;
 

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -27,7 +28,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShogaishakojoTaishoshaListProcessParameter implements IBatchProcessParameter {
 
-    private RDate 対象年度;
+    private FlexibleYear 対象年度;
     private HihokenshaNo 被保険者番号;
     private RString 氏名;
     private RString 認定区分;
@@ -63,7 +64,7 @@ public class ShogaishakojoTaishoshaListProcessParameter implements IBatchProcess
      * @param 交付日 交付日
      * @param 出力順 出力順
      */
-    public ShogaishakojoTaishoshaListProcessParameter(RDate 対象年度, HihokenshaNo 被保険者番号, RString 氏名, RString 認定区分,
+    public ShogaishakojoTaishoshaListProcessParameter(FlexibleYear 対象年度, HihokenshaNo 被保険者番号, RString 氏名, RString 認定区分,
             RString 認定内容, RString 認知症高齢者の日常生活自立度, RString 障害高齢者の日常生活自立度, RString 障がい者手帳,
             RString 喪失事由, RDate 喪失日FROM, RDate 喪失日TO, RDate 決定日FROM, RDate 決定日TO, RString 前回非該当者, RDate 交付日, RString 出力順) {
         this.対象年度 = 対象年度;

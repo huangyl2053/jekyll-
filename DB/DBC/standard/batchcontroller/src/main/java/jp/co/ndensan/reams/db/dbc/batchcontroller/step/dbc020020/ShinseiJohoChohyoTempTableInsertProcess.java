@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -63,12 +62,12 @@ public class ShinseiJohoChohyoTempTableInsertProcess extends BatchProcessBase<Sh
                 && entity.getRirekiNoChohyo().equals(tmpEntity.getRirekiNoChohyo())
                 && entity.getNinteiYukoKikanKaishiYMDChohyo().equals(tmpEntity.getNinteiYukoKikanKaishiYMDChohyo())
                 && entity.getNinteiYukoKikanShuryoYMDChohyo().equals(tmpEntity.getNinteiYukoKikanShuryoYMDChohyo())
-                && entity.getYokaigoJotaiKubunCode().equals(tmpEntity.getYokaigoJotaiKubunCode())
+                && entity.getYokaigoJotaiKubunCodeChohyo().equals(tmpEntity.getYokaigoJotaiKubunCodeChohyo())
                 && entity.isKyuSochishaFlagChohyo() == tmpEntity.isKyuSochishaFlagChohyo()) {
             return;
         }
         if (申請書電話番号表示.equals(parameter.getShinseishoTelNoHyoji())) {
-            entity.setTelNoChohyo(TelNo.EMPTY);
+            entity.setTelNoChohyo(null);
         }
         entity.setIninjoTeishutsusakiChohyo(parameter.getIninjoTeishutsusaki());
         entity.setState(EntityDataState.Added);

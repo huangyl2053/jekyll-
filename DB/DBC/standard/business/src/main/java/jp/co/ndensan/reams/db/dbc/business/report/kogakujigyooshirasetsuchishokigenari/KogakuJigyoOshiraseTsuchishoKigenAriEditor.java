@@ -45,12 +45,13 @@ public class KogakuJigyoOshiraseTsuchishoKigenAriEditor implements IKogakuJigyoO
         source.tsuchibun1 = entity.get通知文1();
         source.tsuchibun2 = entity.get通知文2();
         source.bunshoNo = entity.get文書番号文字列();
-        if (entity.get申請書提出期限() != null) {
+
+        if (entity.get申請書提出期限() != null && !entity.is空白()) {
             source.kigenYMD = entity.get申請書提出期限().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
 
-        if (entity.get申請情報帳票発行一時() != null) {
+        if (entity.get申請情報帳票発行一時() != null && !entity.is空白()) {
             source.hihokenshaNameKana = entity.get申請情報帳票発行一時().getShimeikanaChohyo().value();
             source.hihokenshaName = entity.get申請情報帳票発行一時().getMeishoChohyo().value();
             source.seibetsu = entity.get申請情報帳票発行一時().getSeibetsuCodeChohyo();
@@ -72,7 +73,9 @@ public class KogakuJigyoOshiraseTsuchishoKigenAriEditor implements IKogakuJigyoO
                 source.shikyuGaku = DecimalFormatter.toコンマ区切りRString(entity.get申請情報帳票発行一時().getGokeiKogakuShikyuGakuChohyo(), 0);
             }
         }
-        if (entity.get認証者() != null) {
+
+        if (entity.get認証者()
+                != null) {
             source.denshiKoin = entity.get認証者().denshiKoin;
             source.hakkoYMD = entity.get認証者().hakkoYMD;
             source.koinMojiretsu = entity.get認証者().koinMojiretsu;
@@ -84,7 +87,9 @@ public class KogakuJigyoOshiraseTsuchishoKigenAriEditor implements IKogakuJigyoO
             source.ninshoshaYakushokuMei2 = entity.get認証者().ninshoshaYakushokuMei2;
 
         }
-        if (entity.get送付別宛先() != null) {
+
+        if (entity.get送付別宛先()
+                != null) {
             source.customerBarCode = entity.get送付別宛先().customerBarCode;
             source.dainoKubunMei = entity.get送付別宛先().dainoKubunMei;
             source.gyoseiku = entity.get送付別宛先().gyoseiku;

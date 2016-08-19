@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuGetFileProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -39,7 +40,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 総合事業費（経過措置）過誤決定通知書情報取込のバッチ処理フロー。
  *
- * @reamsid_L DBC-2550-010 jianglaishen
+ * @reamsid_L DBC-2550-010 jianglaisheng
  */
 public class DBC120180_SogojigyohiKagoKetteiIn extends BatchFlowBase<DBC120180_SogojigyohiKagoKetteiInParameter> {
 
@@ -53,7 +54,7 @@ public class DBC120180_SogojigyohiKagoKetteiIn extends BatchFlowBase<DBC120180_S
     private static final String 取込済ファイル削除 = "deleteReveicedFile";
 
     private static final RString ファイル格納フォルダ名 = new RString("DBC120180");
-    private static final RString 帳票ID = new RString("DBC200075_SogojigyohiKagoKetteiTsuchishoTorikomiIchiran");
+    private static ReportId 帳票ID;
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
     private FlowEntity flowEntity;
     private static RString 交換情報識別番号;
@@ -61,6 +62,7 @@ public class DBC120180_SogojigyohiKagoKetteiIn extends BatchFlowBase<DBC120180_S
     @Override
     protected void defineFlow() {
         try {
+            帳票ID = ReportIdDBC.DBC200075.getReportId();
             RDate now = RDate.getNowDate();
             交換情報識別番号 = DbBusinessConfig.get(
                     ConfigNameDBC.国保連取込_総合事業費経過措置過誤決定通知書情報_交換情報識別番号,
@@ -167,7 +169,7 @@ public class DBC120180_SogojigyohiKagoKetteiIn extends BatchFlowBase<DBC120180_S
         KohifutanshaDoIchiranhyoSakuseiProcessParameter parameter
                 = new KohifutanshaDoIchiranhyoSakuseiProcessParameter();
         parameter.setサブ業務コード(SubGyomuCode.DBC介護給付);
-        parameter.set帳票ID(new ReportId(帳票ID));
+        parameter.set帳票ID(帳票ID);
         parameter.set出力順ID(getParameter().get出力順ID());
         parameter.set処理年月(getParameter().get処理年月());
         parameter.setシステム日付(RDateTime.now());
@@ -184,7 +186,7 @@ public class DBC120180_SogojigyohiKagoKetteiIn extends BatchFlowBase<DBC120180_S
     protected IBatchFlowCommand callDoShoriKekkaListSakuseiProcess() {
         KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter parameter
                 = new KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter();
-        parameter.setエラーリストタイプ(KokuhorenJoho_TorikomiErrorListType.リストタイプ1);
+        parameter.setエラーリストタイプ(KokuhorenJoho_TorikomiErrorListType.リストタイプ0);
         return simpleBatch(KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess.class).arguments(parameter).define();
     }
 

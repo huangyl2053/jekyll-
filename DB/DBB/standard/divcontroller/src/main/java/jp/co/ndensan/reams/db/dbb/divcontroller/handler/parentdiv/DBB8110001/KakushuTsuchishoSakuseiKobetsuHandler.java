@@ -36,16 +36,22 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.ur.urz.business.core.date.DateEditor;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -118,6 +124,8 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     private static final RString 変更通知書帳票_略称 = new RString("変更通知書帳票略称");
     private static final RString 減免通知書帳票_略称 = new RString("減免通知書帳票略称");
     private static final RString 徴収猶予通知書帳票_略称 = new RString("徴収猶予通知書帳票略称");
+    private static final RString 業務固有の識別情報名称 = new RString("業務固有の識別情報");
+    private static final Code 業務固有 = new Code("0003");
 
     /**
      * コンストラクタです。
@@ -184,7 +192,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
      * @return 年度Map Map
      */
     public Map<RString, FlexibleYear> set調定パネル(ArrayList<FukaJoho> 賦課の情報List, ArrayList<YMDHMS> 調定日時List) {
-
         FukaJoho 賦課の情報 = 賦課の情報List.get(0);
         set調定パネルの共通エリア(賦課の情報);
         FlexibleYear 賦課年度 = 賦課の情報.get賦課年度();
@@ -318,7 +325,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     }
 
     private void set更正前賦課根拠(FukaJoho 賦課の情報) {
-
         if (賦課の情報.get賦課期日() != null) {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
                     .getLblFukankonkyoMae1().setText(DateEditor.to和暦(賦課の情報.get賦課期日()));
@@ -384,7 +390,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     }
 
     private void set更正後賦課根拠(FukaJoho 賦課の情報) {
-
         if (賦課の情報.get賦課期日() != null) {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
                     .getLblFukankonkyoAto1().setText(DateEditor.to和暦(賦課の情報.get賦課期日()));
@@ -450,7 +455,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     }
 
     private void set特別徴収(FukaJoho 更正前情報, FukaJoho 更正後情報) {
-
         clear更正前_特徴();
         clear更正後_特徴();
         clear期_特徴();
@@ -565,7 +569,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             RString 期_10月,
             RString 期_12月,
             RString 期_2月) {
-
         Decimal 更正前合計 = Decimal.ZERO;
         Decimal 更正前期別金額 = get特徴期別金額(期_4月, 更正前情報);
         if (更正前期別金額 != null) {
@@ -788,7 +791,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             RString 期_12月,
             RString 期_13月,
             RString 期_14月) {
-
         RDate 普徴期別納期限 = get納期限(期_4月, 更正後情報);
         if (普徴期別納期限 != null) {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
@@ -1274,7 +1276,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     }
 
     private void set納入通知書(List<RString> key, FlexibleYear 調定年度, FlexibleYear 賦課年度) {
-
         KoseiTsukiHantei koseiTsukiHantei = new KoseiTsukiHantei();
         FuchoKiUtil fuchoKiUtil = new FuchoKiUtil();
         List<KeyValueDataSource> keyValueDataSource = new ArrayList<>();
@@ -1358,7 +1359,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
      * @param map 賦課の情報
      */
     public void onChange更正前(Map<RString, FukaJoho> map) {
-
         FukaJoho 更正後Info = map.get(div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku()
                 .getDdlInjiKouseiAto().getSelectedKey());
         FukaJoho 更正前Info = map.get(div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku()
@@ -1387,7 +1387,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
      * @return 更正後Info FukaJoho
      */
     public FukaJoho onChange更正後(Map<RString, FukaJoho> map, List<YMDHMS> 調定日時List) {
-
         RString 更正後Key = div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku()
                 .getDdlInjiKouseiAto().getSelectedKey();
         List<YMDHMS> 更正後の調定日時 = new ArrayList<>();
@@ -1461,10 +1460,14 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
      *
      * @param map 賦課の情報
      * @param 帳票Map 発行する帳票
+     * @param 被保険者番号 HihokenshaNo
+     * @param 識別コード ShikibetsuCode
      * @return SourceDataCollection
      */
-    public SourceDataCollection to発行処理(Map<RString, FukaJoho> map, Map<RString, RString> 帳票Map) {
-
+    public SourceDataCollection to発行処理(Map<RString, FukaJoho> map,
+            Map<RString, RString> 帳票Map,
+            HihokenshaNo 被保険者番号,
+            ShikibetsuCode 識別コード) {
         RString 更正前Key = div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku()
                 .getDdlInjiKouseiMae().getSelectedKey();
         RString 更正後Key = div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku()
@@ -1517,6 +1520,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getTxtChoshuYuyoHakkoYMD().getValue());
         parameter.set徴収猶予通知書_文書番号(div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu()
                 .getCcdChoshuYuyoTsuchiBunshoNo().get文書番号());
+        AccessLogger.log(AccessLogType.更新, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
         return KakushuTsuchishoSakusei.createInstance().publish(parameter);
     }
 
@@ -1956,10 +1960,12 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
      *
      * @param 識別コード ShikibetsuCode
      * @param searchKey KaigoFukaKihonSearchKey
+     * @param 被保険者番号 HihokenshaNo
      */
-    public void setヘッダパネル(ShikibetsuCode 識別コード, KaigoFukaKihonSearchKey searchKey) {
+    public void setヘッダパネル(ShikibetsuCode 識別コード, KaigoFukaKihonSearchKey searchKey, HihokenshaNo 被保険者番号) {
         div.getJuminFukaShokai().getCcdKaigoatena().initialize(識別コード);
         div.getJuminFukaShokai().getCcdFukaKihon().load(searchKey);
+        AccessLogger.log(AccessLogType.照会, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
     }
 
     /**
@@ -1980,5 +1986,10 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         List<dgChohyoSentaku_Row> rowList = new ArrayList<>();
         div.getTsuchishoSakuseiKobetsu().getDgChohyoSentaku().setDataSource(rowList);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(発行する, true);
+    }
+
+    private PersonalData toPersonalData(ShikibetsuCode 識別コード, RString 被保険者番号) {
+        ExpandedInformation expandedInfo3 = new ExpandedInformation(業務固有, 業務固有の識別情報名称, 被保険者番号);
+        return PersonalData.of(識別コード, expandedInfo3);
     }
 }

@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 要介護認定取消通知書エディターのクラスです。
  *
- * @reamsid_L DBD-1440-010 liuyl
+ * @reamsid_L DBD-1440-020 liuyl
  */
 public class YokaigoNinteiTorikeshiTshuchishoEditor implements IYokaigoNinteiTorikeshiTshuchishoEditor {
 
@@ -37,6 +37,7 @@ public class YokaigoNinteiTorikeshiTshuchishoEditor implements IYokaigoNinteiTor
     private final RString hihokenshaNo;
     private final RString hihokenshaName;
     private final RString riyu;
+    private final RString teishutsuKigenYMD;
     private static final int NO_3 = 3;
     private static final int NO_4 = 4;
     private static final int NO_5 = 5;
@@ -57,10 +58,11 @@ public class YokaigoNinteiTorikeshiTshuchishoEditor implements IYokaigoNinteiTor
      * @param hihokenshaNo RString
      * @param hihokenshaName RString
      * @param riyu RString
+     * @param teishutsuKigenYMD RString
      */
     public YokaigoNinteiTorikeshiTshuchishoEditor(IAtesaki 宛先, Association 地方公共団体, ChohyoSeigyoKyotsu 帳票制御共通,
             List<RString> 通知書定型文リスト, NinshoshaSource 認証者ソースビルダー, RString bunshoNo, RString hihokenshaNo, RString hihokenshaName,
-            RString riyu) {
+            RString riyu, RString teishutsuKigenYMD) {
         this.宛先 = 宛先;
         this.地方公共団体 = 地方公共団体;
         this.帳票制御共通 = 帳票制御共通;
@@ -70,6 +72,7 @@ public class YokaigoNinteiTorikeshiTshuchishoEditor implements IYokaigoNinteiTor
         this.hihokenshaNo = hihokenshaNo;
         this.hihokenshaName = hihokenshaName;
         this.riyu = riyu;
+        this.teishutsuKigenYMD = teishutsuKigenYMD;
     }
 
     /**
@@ -127,7 +130,6 @@ public class YokaigoNinteiTorikeshiTshuchishoEditor implements IYokaigoNinteiTor
         source.kakkoRight1 = sofubutsuAtesakiSource.kakkoRight1;
         source.kakkoRight2 = sofubutsuAtesakiSource.kakkoRight2;
         source.customerBarCode = sofubutsuAtesakiSource.customerBarCode;
-        source.hihokenshaName = sofubutsuAtesakiSource.shimeiText;
     }
 
     private void set認証者情報(YokaigoNinteiTorikeshiTshuchishoSource source) {
@@ -156,7 +158,8 @@ public class YokaigoNinteiTorikeshiTshuchishoEditor implements IYokaigoNinteiTor
         if (TeikeibunMojiSize.フォント上大下小.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
             source.tsuchibun9 = 通知書定型文リスト.get(NO_7);
             source.tsuchibun8 = 通知書定型文リスト.get(NO_8);
-        } else {
+        }
+        if (TeikeibunMojiSize.フォント小.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
             source.tsuchibun4 = 通知書定型文リスト.get(NO_3);
         }
 
@@ -165,6 +168,7 @@ public class YokaigoNinteiTorikeshiTshuchishoEditor implements IYokaigoNinteiTor
     private void setYokaigoNinteiTorikeshiTshuchishoSource(YokaigoNinteiTorikeshiTshuchishoSource source) {
         source.bunshoNo = bunshoNo;
         source.hihokenshaName = hihokenshaName;
+        source.teishutsuKigenYMD = teishutsuKigenYMD;
         source.hihokenshaNo1 = hihokenshaNo.substring(0);
         source.hihokenshaNo2 = hihokenshaNo.substring(1);
         source.hihokenshaNo3 = hihokenshaNo.substring(2);

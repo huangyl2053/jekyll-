@@ -26,7 +26,7 @@
         LEFT JOIN
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3006KyotakuKeikakuJigyoshaSakuseiMapper.noDeleted_DbT3006KyotakuKeikakuJigyoshaSakusei" />) AS DbT3006KyotakuKeikakuJigyoshaSakusei
         ON
-        DbT3005KyotakuKeikakuTodokede."dbT3005KyotakuKeikakuTodokede_hihokenshaNo" = DbT3006KyotakuKeikakuJigyoshaSakusei."dbT3006KyotakuKeikakuJigyoshaSakusei_hihokenshano"
+        DbT3005KyotakuKeikakuTodokede."dbT3005KyotakuKeikakuTodokede_hihokenshaNo" = DbT3006KyotakuKeikakuJigyoshaSakusei."dbT3006KyotakuKeikakuJigyoshaSakusei_hihokenshaNo"
         AND
         DbT3005KyotakuKeikakuTodokede."dbT3005KyotakuKeikakuTodokede_taishoYM" = DbT3006KyotakuKeikakuJigyoshaSakusei."dbT3006KyotakuKeikakuJigyoshaSakusei_taishoYM"
         AND
@@ -124,4 +124,101 @@
                     ofType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyotakukeika.kyotakukeikakujikosakusei.KyotakuKeikakuJikoSakuseiEntity"
                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyotakukeika.kyotakukeikakujikosakusei.IKyotakuKeikakuJikoSakuseiMapper.resultMap_KyotakuKeikakuJikoSakuseiEntity"/>
     </resultMap>
+
+    <select id="select居宅給付計画届出履歴一覧" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyotakukeika.kyotakukeikakutodokede.KyotakuKeikakuTodokedeMapperParameter" 
+            resultMap="resultMap_KyotakuKeikakuTodokedeEntity" fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3005KyotakuKeikakuTodokedeMapper.allColumns_DbT3005KyotakuKeikakuTodokede" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3006KyotakuKeikakuJigyoshaSakuseiMapper.allColumns_DbT3006KyotakuKeikakuJigyoshaSakusei" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3007KyotakuKeikakuJikoSakuseiMapper.allColumns_DbT3007KyotakuKeikakuJikoSakusei" />
+        FROM
+        rgdb."DbT3005KyotakuKeikakuTodokede" AS "DbT3005KyotakuKeikakuTodokede"
+        LEFT JOIN
+        rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS "DbT3006KyotakuKeikakuJigyoshaSakusei"
+        ON
+        "DbT3005KyotakuKeikakuTodokede"."hihokenshaNo" = "DbT3006KyotakuKeikakuJigyoshaSakusei"."hihokenshaNo"
+        AND
+        "DbT3005KyotakuKeikakuTodokede"."taishoYM" = "DbT3006KyotakuKeikakuJigyoshaSakusei"."taishoYM"
+        AND
+        "DbT3005KyotakuKeikakuTodokede"."rirekiNo" = "DbT3006KyotakuKeikakuJigyoshaSakusei"."rirekiNo"
+        LEFT JOIN
+        rgdb."DbT3007KyotakuKeikakuJikoSakusei" AS "DbT3007KyotakuKeikakuJikoSakusei"
+        ON
+        "DbT3005KyotakuKeikakuTodokede"."hihokenshaNo" = "DbT3007KyotakuKeikakuJikoSakusei"."hihokenshaNo"
+        AND
+        "DbT3005KyotakuKeikakuTodokede"."taishoYM" = "DbT3007KyotakuKeikakuJikoSakusei"."taishoYM"
+        AND
+        "DbT3005KyotakuKeikakuTodokede"."rirekiNo" = "DbT3007KyotakuKeikakuJikoSakusei"."rirekiNo"
+        WHERE
+        "DbT3005KyotakuKeikakuTodokede"."hihokenshaNo" = #{被保険者番号}
+        ORDER BY
+        "DbT3005KyotakuKeikakuTodokede"."taishoYM" ASC,
+        "DbT3005KyotakuKeikakuTodokede"."hihokenshaNo" ASC
+    </select>
+
+    <select id="select居宅給付計画届出履歴" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyotakukeika.kyotakukeikakutodokede.KyotakuKeikakuTodokedeMapperParameter" 
+            resultMap="resultMap_KyotakuKeikakuTodokedeEntity" fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3005KyotakuKeikakuTodokedeMapper.allColumns_DbT3005KyotakuKeikakuTodokede" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3006KyotakuKeikakuJigyoshaSakuseiMapper.allColumns_DbT3006KyotakuKeikakuJigyoshaSakusei" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3007KyotakuKeikakuJikoSakuseiMapper.allColumns_DbT3007KyotakuKeikakuJikoSakusei" />
+        FROM
+        rgdb."DbT3005KyotakuKeikakuTodokede" AS "DbT3005KyotakuKeikakuTodokede"
+        LEFT JOIN
+        rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS "DbT3006KyotakuKeikakuJigyoshaSakusei"
+        ON
+        "DbT3005KyotakuKeikakuTodokede"."hihokenshaNo" = "DbT3006KyotakuKeikakuJigyoshaSakusei"."hihokenshaNo"
+        AND
+        "DbT3005KyotakuKeikakuTodokede"."taishoYM" = "DbT3006KyotakuKeikakuJigyoshaSakusei"."taishoYM"
+        AND
+        "DbT3005KyotakuKeikakuTodokede"."rirekiNo" = "DbT3006KyotakuKeikakuJigyoshaSakusei"."rirekiNo"
+        LEFT JOIN
+        rgdb."DbT3007KyotakuKeikakuJikoSakusei" AS "DbT3007KyotakuKeikakuJikoSakusei"
+        ON
+        "DbT3005KyotakuKeikakuTodokede"."hihokenshaNo" = "DbT3007KyotakuKeikakuJikoSakusei"."hihokenshaNo"
+        AND
+        "DbT3005KyotakuKeikakuTodokede"."taishoYM" = "DbT3007KyotakuKeikakuJikoSakusei"."taishoYM"
+        AND
+        "DbT3005KyotakuKeikakuTodokede"."rirekiNo" = "DbT3007KyotakuKeikakuJikoSakusei"."rirekiNo"
+        WHERE
+        "DbT3005KyotakuKeikakuTodokede"."hihokenshaNo" = #{被保険者番号}
+        AND "DbT3005KyotakuKeikakuTodokede"."taishoYM" = #{対象年月}
+        AND "DbT3005KyotakuKeikakuTodokede"."rirekiNo" = #{履歴番号}
+    </select>
+
+    <select id="select事業者の情報" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyotakukeika.kyotakukeikakutodokede.KyotakuKeikakuTodokedeMapperParameter" 
+            resultType="jp.co.ndensan.reams.db.dbc.definition.core.kyotakuserviceriyohyomain.KaigoJigyoshaResult" fetchSize="500">
+        SELECT
+        "DbT7060_A"."jigyoshaName" AS 計画事業者名,
+        "DbT7060_A"."yubinNo" AS 郵便番号,
+        "DbT7060_A"."jigyoshaAddress" AS 住所,
+        "DbT7060_A"."telNo" AS 電話番号,
+        "DbT7063Kaigo"."kanrishaName" AS 管理者名,
+        "DbT7060_B"."jigyoshaName"委託先事業者名
+        FROM
+        rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS "DbT3006Kyotaku"
+        INNER JOIN
+        rgdb."DbT7060KaigoJigyosha" AS "DbT7060_A"
+        ON "DbT7060_A"."jigyoshaNo" = "DbT3006Kyotaku"."keikakuJigyoshaNo"
+        LEFT JOIN
+        rgdb."DbT7060KaigoJigyosha" AS "DbT7060_B"
+        ON "DbT7060_B"."jigyoshaNo" = "DbT3006Kyotaku"."itakusakiJigyoshaNo"
+        INNER JOIN
+        rgdb."DbT7063KaigoJigyoshaShiteiService" AS "DbT7063Kaigo"
+        ON "DbT7063Kaigo"."jigyoshaNo" = "DbT3006Kyotaku"."keikakuJigyoshaNo"
+        AND "DbT7063Kaigo"."serviceShuruiCode" = "DbT3006Kyotaku"."serviceShuruiCode"
+        AND NOT EXISTS(
+        SELECT 'X' FROM rgdb."DbT7063KaigoJigyoshaShiteiService" AS "slv"
+        WHERE "DbT7063Kaigo"."jigyoshaNo"    = "slv"."jigyoshaNo"
+        AND "DbT7063Kaigo"."serviceShuruiCode"    = "slv"."serviceShuruiCode"
+        AND "DbT7063Kaigo"."yukoKaishiYMD" <![CDATA[<]]> "slv"."yukoKaishiYMD"
+        )
+        WHERE
+        "DbT3006Kyotaku"."hihokenshaNo" = #{被保険者番号}
+        AND "DbT3006Kyotaku"."taishoYM" = #{対象年月}
+        AND "DbT3006Kyotaku"."rirekiNo" = #{履歴番号}
+    </select>
 </mapper>

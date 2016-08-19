@@ -47,8 +47,8 @@ public class YokaigoNinteikbnHenkoShinseishoBodyEditor implements IYokaigoNintei
         source.hihokenshaYubinNo = entity.get郵便番号();
         source.seibetsu = entity.get性別();
         source.yokaigoKbn = entity.get要介護状態区分();
-        source.yokoKikanEDYMD = entity.get有効期間開始年月日();
-        source.yokoKikanSTYMD = entity.get有効期間終了年月日();
+        source.yokoKikanSTYMD = entity.get有効期間開始年月日();
+        source.yokoKikanEDYMD = entity.get有効期間終了年月日();
         source.yoshienKbn = entity.get要支援状態区分();
         source.tsuchiBun = entity.get通知文();
 

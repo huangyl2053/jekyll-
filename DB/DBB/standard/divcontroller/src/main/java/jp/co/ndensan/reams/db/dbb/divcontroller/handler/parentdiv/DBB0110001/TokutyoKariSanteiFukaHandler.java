@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0110001;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchokarisanteifuka.FukaParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchokarisanteifuka.TokuchoKariSanteiEntity;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
@@ -62,6 +63,7 @@ public final class TokutyoKariSanteiFukaHandler {
     private static final RString 実行する1 = new RString("btnTsuchishoSakusei");
     private static final RString 年額基準年度 = new RString("年額基準年度");
     private static final RString 特徴開始計算方法6月 = new RString("6月特徴開始計算方法");
+    private static final RString 特別徴収開始通知書仮算定 = new RString("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
     private static final RString 当年度 = new RString("当年度");
     private static final RString 翌年度 = new RString("翌年度");
     private static final RString 年度 = new RString("年度");
@@ -264,7 +266,12 @@ public final class TokutyoKariSanteiFukaHandler {
         }
         batchParam.set出力帳票一覧(出力帳票一覧);
         batchParam.setParameter(param);
-        batchParam.setFlag(param.is一括発行起動フラグ());
+        Map<RString, RString> 帳票IdAnd出力順Id = div.getTokutyoKariSanteiFukaChohyoHakko().getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id();
+        if (帳票IdAnd出力順Id.containsKey(特別徴収開始通知書仮算定)) {
+            batchParam.setFlag(param.is一括発行起動フラグ());
+        } else {
+            batchParam.setFlag(false);
+        }
         return batchParam;
     }
 

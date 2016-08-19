@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
@@ -24,6 +25,7 @@ import lombok.Getter;
 @Getter
 public final class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
 
+    private final RString 有効無効区分_有効 = YukoMukoKubun.有効.getコード();
     private final RString shutsuryokuJokenCode;
     private final RDateTime konkaiFromYMDHMS;
     private final FlexibleDate konkaiToYMD;

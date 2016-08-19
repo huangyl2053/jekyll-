@@ -42,13 +42,8 @@ public class KyodoIdoRenrakuhyoTorokuMainHandler {
 
     private final KyodoIdoRenrakuhyoTorokuMainDiv div;
     private static final RString DBCHIHOKENSHANO = new RString("DBCHihokenshaNo");
-    private static final RString 個人番号_利用有無名称 = new RString("個人番号 利用有無");
-    private static final RString 法人番号_利用有無名称 = new RString("法人番号 利用有無");
     private static final RString 業務固有の識別情報名称 = new RString("業務固有の識別情報");
-    private static final Code 個人番号 = new Code("0001");
-    private static final Code 法人番号 = new Code("0002");
     private static final Code 業務固有 = new Code("0003");
-    private static final RString 無し = new RString("無し");
     private static final RString 被保険者番号_なし = new RString("被保険者番号なし");
     private static final RString 完了メッセージメイン = new RString("共同処理用受給者異動連絡票の登録が完了しました。");
     private static final RString 連絡票を保存 = new RString("btnSave");
@@ -223,7 +218,7 @@ public class KyodoIdoRenrakuhyoTorokuMainHandler {
                 is基本送付情報,
                 is償還送付情報,
                 is高額送付情報);
-        AccessLogger.log(AccessLogType.照会, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
+        AccessLogger.log(AccessLogType.更新, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
         前排他キーの解除(被保険者番号.getColumnValue());
     }
 
@@ -252,10 +247,8 @@ public class KyodoIdoRenrakuhyoTorokuMainHandler {
     }
 
     private PersonalData toPersonalData(ShikibetsuCode 識別コード, RString 被保険者番号) {
-        ExpandedInformation expandedInfo1 = new ExpandedInformation(個人番号, 個人番号_利用有無名称, 無し);
-        ExpandedInformation expandedInfo2 = new ExpandedInformation(法人番号, 法人番号_利用有無名称, 無し);
         ExpandedInformation expandedInfo3 = new ExpandedInformation(業務固有, 業務固有の識別情報名称, 被保険者番号);
-        return PersonalData.of(識別コード, expandedInfo1, expandedInfo2, expandedInfo3);
+        return PersonalData.of(識別コード, expandedInfo3);
     }
 
     /**

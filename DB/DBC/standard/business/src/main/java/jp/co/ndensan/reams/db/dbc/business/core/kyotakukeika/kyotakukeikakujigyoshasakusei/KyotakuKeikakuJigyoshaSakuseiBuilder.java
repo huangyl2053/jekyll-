@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeikakujigy
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -57,7 +58,6 @@ public class KyotakuKeikakuJigyoshaSakuseiBuilder {
      * @return {@link KyotakuKeikakuJigyoshaSakuseiBuilder}
      */
     public KyotakuKeikakuJigyoshaSakuseiBuilder set適用終了年月日(FlexibleDate 適用終了年月日) {
-        requireNonNull(適用終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("適用終了年月日"));
         entity.setTekiyoShuryoYMD(適用終了年月日);
         return this;
     }
@@ -119,6 +119,18 @@ public class KyotakuKeikakuJigyoshaSakuseiBuilder {
     public KyotakuKeikakuJigyoshaSakuseiBuilder set事業者変更事由(RString 事業者変更事由) {
         requireNonNull(事業者変更事由, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者変更事由"));
         entity.setJigyoshaHenkoJiyu(事業者変更事由);
+        return this;
+    }
+
+    /**
+     * サービス種類コードを設定します。
+     *
+     * @param サービス種類コード サービス種類コード
+     * @return {@link KyotakuKeikakuJigyoshaSakuseiBuilder}
+     */
+    public KyotakuKeikakuJigyoshaSakuseiBuilder setサービス種類コード(ServiceShuruiCode サービス種類コード) {
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
+        entity.setServiceShuruiCode(サービス種類コード);
         return this;
     }
 

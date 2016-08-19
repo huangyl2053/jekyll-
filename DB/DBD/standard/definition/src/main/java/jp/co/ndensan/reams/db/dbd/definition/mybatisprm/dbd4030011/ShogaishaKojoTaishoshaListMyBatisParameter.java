@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -22,7 +23,7 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShogaishaKojoTaishoshaListMyBatisParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
 
-    private final RDate 対象年度;
+    private final FlexibleYear 対象年度;
     private final HihokenshaNo 被保険者番号;
     private final RString 氏名;
     private final RString 認定区分;
@@ -40,7 +41,7 @@ public class ShogaishaKojoTaishoshaListMyBatisParameter extends UaFt200FindShiki
     private final boolean 障がい者手帳ある;
     private final boolean 障がい者手帳なし;
     private final boolean 前回非該当者含まない;
-    private final RDate 対象年度plus1;
+    private final FlexibleYear 対象年度plus1;
 
     /**
      * コンストラクタです。
@@ -62,7 +63,7 @@ public class ShogaishaKojoTaishoshaListMyBatisParameter extends UaFt200FindShiki
      * @param 前回非該当者 前回非該当者
      * @param shikibetsuTaishoPSMSearchKey 宛名識別対象PSM検索キー
      */
-    public ShogaishaKojoTaishoshaListMyBatisParameter(RDate 対象年度, HihokenshaNo 被保険者番号, RString 氏名, RString 認定区分,
+    public ShogaishaKojoTaishoshaListMyBatisParameter(FlexibleYear 対象年度, HihokenshaNo 被保険者番号, RString 氏名, RString 認定区分,
             RString 認定内容, RString 認知症高齢者の日常生活自立度, RString 障害高齢者の日常生活自立度, RString 障がい者手帳,
             RString 喪失事由, RDate 喪失日FROM, RDate 喪失日TO, RDate 決定日FROM, RDate 決定日TO, RDate 交付日, RString 前回非該当者,
             IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey) {

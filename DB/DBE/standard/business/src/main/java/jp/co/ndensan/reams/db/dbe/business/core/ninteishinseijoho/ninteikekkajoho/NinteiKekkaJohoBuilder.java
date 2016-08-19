@@ -202,7 +202,7 @@ public class NinteiKekkaJohoBuilder {
      */
     public NinteiKekkaJohoBuilder set二次判定結果入力年月日(FlexibleDate 二次判定結果入力年月日) {
         requireNonNull(二次判定結果入力年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("二次判定結果入力年月日"));
-        entity.setNijiHanteiYMD(二次判定結果入力年月日);
+        entity.setNijiHanteiKekkaInputYMD(二次判定結果入力年月日);
         return this;
     }
 

@@ -158,7 +158,7 @@ public class JukyushaKoshinKekkaIchiranCsvEntity {
     private RString 老人保健市町村番号;
     @CsvField(order = 700, name = "老人保健受給者番号")
     private RString 老人保健受給者番号;
-    @CsvField(order = 710, name = "広域_政令市)_保険者番号")
+    @CsvField(order = 710, name = "広域(政令市)保険者番号")
     private RString 広域_政令市_保険者番号;
     @CsvField(order = 720, name = "小規模居宅サービス利用の有無")
     private RString 小規模居宅サービス利用の有無;
@@ -190,21 +190,21 @@ public class JukyushaKoshinKekkaIchiranCsvEntity {
     private RString 課税層の特例減額適用終了日;
     @CsvField(order = 860, name = "特定入所者食費負担限度額")
     private RString 特定入所者食費負担限度額;
-    @CsvField(order = 870, name = "居住費_ユニット型個室_負担限度額")
+    @CsvField(order = 870, name = "居住費（ユニット型個室）負担限度額")
     private RString 居住費_ユニット型個室_負担限度額;
-    @CsvField(order = 880, name = "居住費_従来型個室_特養等_負担限度額")
+    @CsvField(order = 880, name = "居住費（従来型個室（特養等））負担限度額")
     private RString 居住費_従来型個室_特養等_負担限度額;
-    @CsvField(order = 890, name = "居住費_多床室_負担限度額")
+    @CsvField(order = 890, name = "居住費（多床室）負担限度額")
     private RString 居住費_多床室_負担限度額;
-    @CsvField(order = 900, name = "居住費_新１_負担限度額")
+    @CsvField(order = 900, name = "居住費（新１）負担限度額")
     private RString 居住費_新１_負担限度額;
-    @CsvField(order = 910, name = "居住費_新２_負担限度額")
+    @CsvField(order = 910, name = "居住費（新２）負担限度額")
     private RString 居住費_新２_負担限度額;
-    @CsvField(order = 920, name = "居住費_新３_負担限度額")
+    @CsvField(order = 920, name = "居住費（新３）負担限度額")
     private RString 居住費_新３_負担限度額;
-    @CsvField(order = 930, name = "居住費_ユニット型準個室_負担限度額")
+    @CsvField(order = 930, name = "居住費（ユニット型準個室）負担限度額")
     private RString 居住費_ユニット型準個室_負担限度額;
-    @CsvField(order = 940, name = "居住費_従来型個室_老健_療養等_負担限度額")
+    @CsvField(order = 940, name = "居住費（従来型個室（老健、療養等））負担限度額")
     private RString 居住費_従来型個室_老健_療養等_負担限度額;
     @CsvField(order = 950, name = "二割割合適用開始日")
     private RString 二割割合適用開始日;

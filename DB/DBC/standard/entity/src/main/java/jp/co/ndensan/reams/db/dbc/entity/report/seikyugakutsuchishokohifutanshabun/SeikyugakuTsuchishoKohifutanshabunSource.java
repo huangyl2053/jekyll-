@@ -4,6 +4,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ *
+ * 帳票設計_DBC200067_介護給付費等請求額通知書（公費負担者分）Sourceするクラスです。
+ *
+ * @reamsid_L DBC-2790-030 lijian
+ */
 public class SeikyugakuTsuchishoKohifutanshabunSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
@@ -77,6 +83,10 @@ public class SeikyugakuTsuchishoKohifutanshabunSource implements IReportSource {
     public RString tesuryoSeikyugaku;
     @ReportItem(name = "tesuryoRuikeigaku", length = 15, order = 35)
     public RString tesuryoRuikeigaku;
+    @ReportItem(name = "kanCode", length = 15, order = 36)
+    public RString kanCode;
+    @ReportItem(name = "kouCode", length = 15, order = 37)
+    public RString kouCode;
 //    @ReportItemGroup(groupName = "aaaTest", order = 36)
 //    public AaaTest aaaTest;
 //    @ReportItemGroup(groupName = "bbbTest", order = 37)
@@ -130,6 +140,7 @@ public class SeikyugakuTsuchishoKohifutanshabunSource implements IReportSource {
         ruikeiRiyoshaFutangaku,
         tesuryoSeikyugaku,
         tesuryoRuikeigaku,
-
+        kanCode,
+        kouCode
     }
 }

@@ -53,7 +53,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 要介護認定取消通知書
  *
- * @reamsid_L DBD-1440-010 liuyl
+ * @reamsid_L DBD-1440-020 liuyl
  */
 public class YokaigoNinteiTorikeshiTshuchishoPrintService {
 
@@ -71,8 +71,10 @@ public class YokaigoNinteiTorikeshiTshuchishoPrintService {
      * @param hihokenshaNo RString
      * @param hihokenshaName RString
      * @param riyu RString
+     * @param teishutsuKigenYMD RString
      */
-    public void print(ReportManager reportManager, RDate date, RString bunshoNo, RString hihokenshaNo, RString hihokenshaName, RString riyu) {
+    public void print(ReportManager reportManager, RDate date, RString bunshoNo, RString hihokenshaNo, RString hihokenshaName, RString riyu,
+            RString teishutsuKigenYMD) {
         YokaigoNinteiTorikeshiTshuchishoProperty property = new YokaigoNinteiTorikeshiTshuchishoProperty();
         try (ReportAssembler<YokaigoNinteiTorikeshiTshuchishoSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<YokaigoNinteiTorikeshiTshuchishoSource> reportSourceWriter = new ReportSourceWriter(assembler);
@@ -82,7 +84,7 @@ public class YokaigoNinteiTorikeshiTshuchishoPrintService {
             List<RString> 通知書定型文リスト = get通知文情報();
             ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(get帳票制御(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD550004.getReportId()));
             YokaigoNinteiTorikeshiTshuchishoReport report = new YokaigoNinteiTorikeshiTshuchishoReport(宛先情報, association,
-                    帳票制御共通, 通知書定型文リスト, ninshoshaSource, bunshoNo, hihokenshaNo, hihokenshaName, riyu);
+                    帳票制御共通, 通知書定型文リスト, ninshoshaSource, bunshoNo, hihokenshaNo, hihokenshaName, riyu, teishutsuKigenYMD);
             report.writeBy(reportSourceWriter);
         }
     }

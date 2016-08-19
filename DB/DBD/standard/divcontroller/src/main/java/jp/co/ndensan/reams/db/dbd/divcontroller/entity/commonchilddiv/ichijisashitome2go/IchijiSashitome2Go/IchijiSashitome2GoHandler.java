@@ -91,7 +91,7 @@ public class IchijiSashitome2GoHandler {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = DataPassingConverter.deserialize(div.getKey_ShiharaiHohoHenkoKanri(), ShiharaiHohoHenko.class);
         List<ShiharaiHohoHenko> 支払方法データ = new ArrayList();
         List<ShiharaiHohoHenko> 支払方法変更レコード = new ArrayList();
-        ViewStateHolder.put(IchijiSashitome2GoHandler.二号一時差止ダイアロググキー.支払方法変更管理業務概念, new ShiharaiHohoHenko(new ShiharaiHohoHenkoEntity()));
+        ViewStateHolder.put(IchijiSashitome2GoHandler.二号一時差止ダイアロググキー.支払方法変更管理業務概念, 支払方法変更管理業務概念);
         if (支払方法変更管理業務概念 != null
                 && 支払方法変更管理業務概念.get被保険者番号().value().equals(div.getKey_HihokenshaNo())
                 && 支払方法変更管理業務概念.get管理区分().equals(ShiharaiHenkoKanriKubun._２号差止.getコード())
@@ -128,6 +128,7 @@ public class IchijiSashitome2GoHandler {
             } else {
                 div.setShinkiKubun(新規登録);
             }
+            ViewStateHolder.put(IchijiSashitome2GoHandler.二号一時差止ダイアロググキー.支払方法変更管理業務概念, 支払方法変更管理業務概念);
         }
         initializeDisplayData(押下ボタン, ViewStateHolder.get(IchijiSashitome2GoHandler.二号一時差止ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class));
         return message;
@@ -320,7 +321,7 @@ public class IchijiSashitome2GoHandler {
                     break;
             }
         } else if (shiharaiHohoHenko != null) {
-            div.getTxtTorokuJokyo().setValue(shiharaiHohoHenko.get登録区分());
+            div.getTxtTorokuJokyo().setValue(ShiharaiHenkoTorokuKubun.toValue(shiharaiHohoHenko.get登録区分()).get名称());
             div.getTxtTekiyoKaishi().setValue(shiharaiHohoHenko.get適用開始年月日());
             div.getTxtTekiyoShuryo().setValue(shiharaiHohoHenko.get適用終了年月日());
             if (shiharaiHohoHenko.get終了区分() == null) {
@@ -547,7 +548,7 @@ public class IchijiSashitome2GoHandler {
         for (ShiharaiHohoHenkoSashitome shiharaiHohoHenkoSashitome : 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList()) {
             builder.setShiharaiHohoHenkoSashitome(shiharaiHohoHenkoSashitome.createBuilderForEdit()
                     .set差止控除状態区分(ShiharaiHenkoSashitomeKojoJotaiKubun.解除.getコード())
-                    .set差止通知書発行年月日(null)
+                    .set差止通知書発行年月日(FlexibleDate.EMPTY)
                     .set差止通知書再発行フラグ(false)
                     .set差止控除番号(RString.EMPTY)
                     .set差止解除年月日(FlexibleDate.getNowDate())

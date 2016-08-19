@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.hiHokenshaNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.idoKubunCode;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.idoYMD;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.isDeleted;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.jukyushaIdoJiyu;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.logicalDeletedFlag;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.rirekiNo;
@@ -144,6 +145,29 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 lt(idoYMD, 異動日))).
+                order(by(DbT3001JukyushaIdoRenrakuhyo.idoYMD, Order.DESC)).
+                limit(1).
+                toObject(DbT3001JukyushaIdoRenrakuhyoEntity.class);
+    }
+
+    /**
+     * 受給者異動送付を全件返します。
+     *
+     * @param 被保険者番号 hiHokenshaNo
+     * @param 異動日 idoYMD
+     * @return List<DbT3001JukyushaIdoRenrakuhyoEntity>
+     */
+    @Transaction
+    public DbT3001JukyushaIdoRenrakuhyoEntity selectAll受給者異動連絡票情報(RString 被保険者番号, RString 異動日) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3001JukyushaIdoRenrakuhyo.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                lt(idoYMD, 異動日),
+                                eq(isDeleted, true))).
                 order(by(DbT3001JukyushaIdoRenrakuhyo.idoYMD, Order.DESC)).
                 limit(1).
                 toObject(DbT3001JukyushaIdoRenrakuhyoEntity.class);

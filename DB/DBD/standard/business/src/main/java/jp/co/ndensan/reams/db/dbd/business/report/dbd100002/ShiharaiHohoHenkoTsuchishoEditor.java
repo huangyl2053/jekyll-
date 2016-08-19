@@ -120,8 +120,6 @@ public class ShiharaiHohoHenkoTsuchishoEditor implements IShiharaiHohoHenkoTsuch
         source.gyoseiku1 = sofubutsuAtesakiSource.gyoseiku;
         source.jushoText = sofubutsuAtesakiSource.jushoText;
         source.katagakiText = sofubutsuAtesakiSource.katagakiText;
-
-        // TODO RSE項目名が設計書と違い
         source.shimei3 = sofubutsuAtesakiSource.shimei1;
         source.shimei4 = sofubutsuAtesakiSource.shimei2;
         source.katagaki3 = sofubutsuAtesakiSource.katagaki1;
@@ -129,7 +127,6 @@ public class ShiharaiHohoHenkoTsuchishoEditor implements IShiharaiHohoHenkoTsuch
         source.jusho4 = sofubutsuAtesakiSource.jusho1;
         source.jusho5 = sofubutsuAtesakiSource.jusho2;
         source.jusho6 = sofubutsuAtesakiSource.jusho3;
-
         source.dainoKubunMei = sofubutsuAtesakiSource.dainoKubunMei;
         source.samabunShimeiText = sofubutsuAtesakiSource.samabunShimeiText;
         source.kakkoLeft1 = sofubutsuAtesakiSource.kakkoLeft1;
@@ -184,10 +181,11 @@ public class ShiharaiHohoHenkoTsuchishoEditor implements IShiharaiHohoHenkoTsuch
             source.hihokenshaNo9 = 被保険者番号.substring(NOCOUNT_8, NOCOUNT_9);
             source.hihokenshaNo10 = 被保険者番号.substring(NOCOUNT_9, NOCOUNT_10);
         }
-
+        if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
+            source.tsuchibun = 通知書定型文リスト.get(NOCOUNT_1);
+        }
         RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
         if (null != 通知書定型文リスト && new RString("1").equals(定型文文字サイズ)) {
-            source.tsuchibun = 通知書定型文リスト.get(NOCOUNT_1);
             source.renrakusakiHoka = 通知書定型文リスト.get(NOCOUNT_2);
         }
     }
@@ -285,7 +283,7 @@ public class ShiharaiHohoHenkoTsuchishoEditor implements IShiharaiHohoHenkoTsuch
     private Decimal get3年以前滞納額合計() {
         Decimal 以前保険料合計 = Decimal.ZERO;
         for (ShiharaiHohoHenkoTaino 支払方法変更滞納 : this.帳票情報.getShiharaiHohoHenkoTainoList()) {
-            if (支払方法変更滞納.get賦課年度().isBeforeOrEquals(最新賦課年度.minusYear(3))) {
+            if (支払方法変更滞納.get賦課年度().isBeforeOrEquals(最新賦課年度.minusYear(NOCOUNT_3))) {
                 以前保険料合計 = 以前保険料合計.add(支払方法変更滞納.get滞納額());
             }
         }

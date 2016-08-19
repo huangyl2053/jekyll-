@@ -4,18 +4,22 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRi
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * ServiceRiyohyoBeppyoMeisai のクラスファイル 
- * 
- * @author 自動生成
+ * ServiceRiyohyoBeppyoMeisai のクラスファイル
+ *
+ * @reamsid_L DBC-1930-050 cuilin
  */
 public class ServiceRiyohyoBeppyoMeisaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -238,7 +242,7 @@ public class ServiceRiyohyoBeppyoMeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnBeppyoMeisaiKakutei(Button btnBeppyoMeisaiKakutei) {
+    public void setBtnBeppyoMeisaiKakutei(Button btnBeppyoMeisaiKakutei) {
         this.getServiceRiyohyoBeppyoMeisaiFooter().setBtnBeppyoMeisaiKakutei(btnBeppyoMeisaiKakutei);
     }
 
@@ -248,7 +252,7 @@ public class ServiceRiyohyoBeppyoMeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnCalcMeisaiGokei(Button btnCalcMeisaiGokei) {
+    public void setBtnCalcMeisaiGokei(Button btnCalcMeisaiGokei) {
         this.getServiceRiyohyoBeppyoMeisaiFooter().setBtnCalcMeisaiGokei(btnCalcMeisaiGokei);
     }
 
@@ -258,7 +262,7 @@ public class ServiceRiyohyoBeppyoMeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnCancelMeisaiInput(Button btnCancelMeisaiInput) {
+    public void setBtnCancelMeisaiInput(Button btnCancelMeisaiInput) {
         this.getServiceRiyohyoBeppyoMeisaiFooter().setBtnCancelMeisaiInput(btnCancelMeisaiInput);
     }
 
@@ -268,7 +272,7 @@ public class ServiceRiyohyoBeppyoMeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnCalcMeisai(Button btnCalcMeisai) {
+    public void setBtnCalcMeisai(Button btnCalcMeisai) {
         this.getServiceRiyohyoBeppyoMeisaiFooter().setBtnCalcMeisai(btnCalcMeisai);
     }
 

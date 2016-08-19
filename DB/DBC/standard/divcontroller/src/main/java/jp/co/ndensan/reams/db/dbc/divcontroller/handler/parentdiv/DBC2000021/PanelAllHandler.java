@@ -15,16 +15,15 @@ import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihanteimanager.R
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -35,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
- * 画面設計_DBCMNK2001_利用者負担割合即時更正_新規のクラスです。
+ * 画面設計_DBCMNK2001_利用者負担割合即時更正_新規のハンドラクラスです。
  *
  * @reamsid_L DBC-5010-010 lihang
  */
@@ -45,20 +44,23 @@ public class PanelAllHandler {
     private static final RString NUM_3 = new RString("3");
     private static final RString NUM_4 = new RString("4");
     private static final RString NUM_5 = new RString("5");
+    private static final RString NUM_0001 = new RString("0001");
+    private static final RString NUM_0002 = new RString("0002");
+    private static final RString NUM_0003 = new RString("0003");
     private static final RString 個人番号_利用有無名称 = new RString("個人番号 利用有無");
     private static final RString 法人番号_利用有無名称 = new RString("法人番号 利用有無");
     private static final RString 業務固有の識別情報名称 = new RString("業務固有の識別情報");
     private static final RString 無し = new RString("無し");
     private static final RString 有し = new RString("有し");
-    private static final RString 年次利用者負担割合判定を実行してください = new RString("年次利用者負担割合判定を実行してください");
-    private static FlexibleYear 負担割合年度;
-    private static RString 年度y;
+    private static final RString 年次利用者負担割合判定を実行してください = new RString("年次利用者負担割合判定");
+    private FlexibleYear 負担割合年度;
+    private RString 年度y;
     private static final RString 新年度 = new RString("新年度");
     private static final RString 現年度 = new RString("現年度");
     private static final RString 過年度 = new RString("過年度");
 
     /**
-     * コンストラクタです。
+     * コンストラクタです
      *
      * @param div DBC2000021PanelAllDiv
      */
@@ -67,7 +69,7 @@ public class PanelAllHandler {
     }
 
     /**
-     * 画面を初期化します。
+     * 画面初期化のメソッドです。
      *
      * @param 被保険者番号 被保険者番号
      * @param 識別コード 識別コード
@@ -76,15 +78,16 @@ public class PanelAllHandler {
         RString 処理名 = ShoriName.年次利用者負担割合判定.get名称();
         RString 市町村コード = Association.getLasdecCode().getColumnValue();
         List<KeyValueDataSource> keyValues = new ArrayList<>();
-        List<DbT7022ShoriDateKanriEntity> 処理日付管理情報 = HonsanteiIdoKanendo.createInstance().getNendo(
+        List<ShoriDateKanri> 処理日付管理情報 = HonsanteiIdoKanendo.createInstance().getNendo(
                 SubGyomuCode.DBC介護給付, 市町村コード, 処理名);
         div.getDdlNendo().getDataSource().clear();
         if (処理日付管理情報 == null || 処理日付管理情報.isEmpty()) {
             throw new ApplicationException(DbzErrorMessages.未実行.getMessage().replace(年次利用者負担割合判定を実行してください.toString()));
         } else {
-            for (DbT7022ShoriDateKanriEntity entity : 処理日付管理情報) {
+            for (ShoriDateKanri shoriDateKanri : 処理日付管理情報) {
                 keyValues.add(new KeyValueDataSource(new RString(
-                        Integer.toString(entity.getNendo().getYearValue())), entity.getNendo().wareki().getYear()));
+                        Integer.toString(shoriDateKanri.toEntity().getNendo().getYearValue())),
+                        shoriDateKanri.toEntity().getNendo().wareki().getYear()));
             }
             div.getDdlNendo().setDataSource(keyValues);
             div.getDdlNendo().setSelectedIndex(0);
@@ -95,7 +98,7 @@ public class PanelAllHandler {
     }
 
     /**
-     * 基準日をセットします
+     * 基準日セットのメソッドです。
      */
     public void set基準日() {
 
@@ -127,23 +130,23 @@ public class PanelAllHandler {
     }
 
     /**
-     * is基準日は指定年度内を判定します
+     * is基準日は指定年度内判定のメソッドです。
      *
-     * @return　Boolean
+     * @return Boolean
      */
     public boolean is基準日は指定年度内() {
 
         RDate 年度 = new RDate((div.getDdlNendo().getSelectedValue().concat(DbBusinessConfig
                 .get(ConfigNameDBC.利用者負担割合判定管理_年度終了月日, RDate.getNowDate(), SubGyomuCode.DBC介護給付)).toString()));
-        if (年度.plusDay(1).isBefore(div.getTxtKijunbi().getValue())
-                && div.getTxtKijunbi().getValue().isBefore(年度.plusYear(1))) {
-            return Boolean.TRUE;
+        if (!(年度.plusDay(1).isBeforeOrEquals(div.getTxtKijunbi().getValue()))
+                || !(div.getTxtKijunbi().getValue().isBeforeOrEquals(年度.plusYear(1)))) {
+            return Boolean.FALSE;
         }
-        return Boolean.FALSE;
+        return Boolean.TRUE;
     }
 
     /**
-     * 新規判定を実行します
+     * 新規判定を実行のメソッドです。
      *
      * @param 被保険者番号 HihokenshaNo
      * @param 年度 FlexibleYear
@@ -161,13 +164,12 @@ public class PanelAllHandler {
             throw new ApplicationException(DbcErrorMessages.基準日負担割合変更なし.toString());
         }
         return 判定結果;
-
     }
 
     private PersonalData toPersonalData(ShikibetsuCode 識別コード, RString 被保険者番号) {
-        ExpandedInformation expandedInfo1 = new ExpandedInformation(new Code("0001"), 個人番号_利用有無名称, 有し);
-        ExpandedInformation expandedInfo2 = new ExpandedInformation(new Code("0002"), 法人番号_利用有無名称, 無し);
-        ExpandedInformation expandedInfo3 = new ExpandedInformation(new Code("0003"), 業務固有の識別情報名称, 被保険者番号);
+        ExpandedInformation expandedInfo1 = new ExpandedInformation(new Code(NUM_0001), 個人番号_利用有無名称, 有し);
+        ExpandedInformation expandedInfo2 = new ExpandedInformation(new Code(NUM_0002), 法人番号_利用有無名称, 無し);
+        ExpandedInformation expandedInfo3 = new ExpandedInformation(new Code(NUM_0003), 業務固有の識別情報名称, 被保険者番号);
         return PersonalData.of(識別コード, expandedInfo1, expandedInfo2, expandedInfo3);
     }
 

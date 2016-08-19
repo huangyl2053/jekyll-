@@ -41,7 +41,6 @@ import jp.co.ndensan.reams.db.dbb.service.core.basic.GemmenManager;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.choteijiyu.ChoteiJiyuHantei;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
-import jp.co.ndensan.reams.db.dbb.service.core.kanri.HonsanteiIkoHantei;
 import jp.co.ndensan.reams.db.dbb.service.core.tokucho.TokuchoIraiJohoSakuseiJokyo;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
@@ -55,6 +54,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoGemmenTorikeshiShurui;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -107,6 +107,7 @@ public class SokujiFukaKouseiMainHandler {
     private static final RString 一月一日 = new RString("0101");
     private static final RString 三月 = new RString("03");
     private static final RString カラ = new RString("～");
+    private static final RString FLAG_CHANGE = new RString("1");
 
     /**
      * コンストラクタです。
@@ -163,7 +164,8 @@ public class SokujiFukaKouseiMainHandler {
             set現年度の普通徴収情報の入力制御(更正後賦課リスト);
         }
         set過年度の徴収情報(更正前賦課リスト, 更正後賦課リスト);
-        set保険料年額と事由タブエリア(更正前賦課リスト, 更正後賦課リスト, 保険料段階List);
+        set保険料年額と事由タブエリア(更正前賦課リスト, 更正後賦課リスト, 保険料段階List, is本算定処理済フラグ);
+        div.setInitData(getPaneItem());
     }
 
     /**
@@ -183,6 +185,15 @@ public class SokujiFukaKouseiMainHandler {
                 && 納付額_２期.compareTo(Decimal.ZERO) == 0)
                 || (!ZERO.equals(div.getTokuchoNofugakuValue08())
                 && 納付額_３期.compareTo(Decimal.ZERO) == 0);
+    }
+
+    /**
+     * 入力内容をチェックです。
+     *
+     * @return is入力があれ
+     */
+    public boolean is入力があれ() {
+        return !div.getInitData().equals(getPaneItem()) || FLAG_CHANGE.equals(div.getIsDataChange());
     }
 
     /**
@@ -304,7 +315,6 @@ public class SokujiFukaKouseiMainHandler {
         tablePanel.getTxtFuchoNokigen03().setReadOnly(true);
         tablePanel.getTxtFuchoNokigenYoku04().setReadOnly(true);
         tablePanel.getTxtFuchoNokigenYoku05().setReadOnly(true);
-
     }
 
     /**
@@ -505,7 +515,7 @@ public class SokujiFukaKouseiMainHandler {
                 || is異なる(更正前賦課.get口座区分(), 更正後賦課.get口座区分())
                 || is異なる(更正前賦課.get境界層区分(), 更正後賦課.get境界層区分())
                 || is異なる(更正前賦課.get職権区分(), 更正後賦課.get職権区分())
-                || is異なる(更正前賦課.get賦課市町村コード().code市町村RString(), 更正後賦課.get賦課市町村コード().code市町村RString())
+                || is異なる(更正前賦課.get賦課市町村コード(), 更正後賦課.get賦課市町村コード())
                 || is異なる(更正前賦課.get特徴歳出還付額(), 更正後賦課.get特徴歳出還付額())
                 || is異なる(更正前賦課.get普徴歳出還付額(), 更正後賦課.get普徴歳出還付額());
     }
@@ -515,6 +525,16 @@ public class SokujiFukaKouseiMainHandler {
             return Boolean.FALSE;
         }
         if (!RString.isNullOrEmpty(rstr1) && rstr1.equals(rstr2)) {
+            return Boolean.FALSE;
+        }
+        return Boolean.TRUE;
+    }
+
+    private boolean is異なる(LasdecCode lasdecCode1, LasdecCode lasdecCode2) {
+        if (lasdecCode1 == null && lasdecCode2 == null) {
+            return Boolean.FALSE;
+        }
+        if (lasdecCode1 != null && lasdecCode1.getColumnValue().equals(lasdecCode2.getColumnValue())) {
             return Boolean.FALSE;
         }
         return Boolean.TRUE;
@@ -559,7 +579,21 @@ public class SokujiFukaKouseiMainHandler {
     }
 
     private boolean is異なる(Decimal dec1, Decimal dec2) {
-        return !dec1.equals(dec2);
+        if (dec1 == null && dec2 == null) {
+            return Boolean.FALSE;
+        }
+        if (dec1 != null && dec1.equals(dec2)) {
+            return Boolean.FALSE;
+        }
+        return Boolean.TRUE;
+    }
+
+    private RString getRStringByTextBoxNum(TextBoxNum textBoxNum) {
+        return textBoxNum.getValue() == null ? RString.EMPTY : new RString(textBoxNum.getValue().toString());
+    }
+
+    private RString getRStringByTextBoxDate(TextBoxDate textBoxDate) {
+        return textBoxDate.getValue() == null ? RString.EMPTY : textBoxDate.getValue().toDateString();
     }
 
     private boolean set期別金額(FukaJoho 賦課の情報, int 期, RString 徴収方法期別, TextBoxNum textBoxNum, TextBoxDate textBoxDate, Boolean is差異がある) {
@@ -1102,12 +1136,11 @@ public class SokujiFukaKouseiMainHandler {
     }
 
     private void set保険料年額と事由タブエリア(NendobunFukaList 更正前賦課リスト, NendobunFukaList 更正後賦課リスト,
-            HokenryoDankaiList 保険料段階List) {
+            HokenryoDankaiList 保険料段階List, boolean is本算定処理済フラグ) {
         set更正前算定の基礎(更正前賦課リスト, 保険料段階List);
         set更正後算定の基礎(更正後賦課リスト, 保険料段階List);
         FukaJoho 更正後現年度 = 更正後賦課リスト.get現年度();
-        HonsanteiIkoHantei honsanteiIkoHantei = HonsanteiIkoHantei.createInstance();
-        if (!honsanteiIkoHantei.is本算定後(更正後賦課リスト.get現年度())) {
+        if (!is本算定処理済フラグ) {
             div.getSokujikouseiJiyu().setDisplayNone(true);
             return;
         }
@@ -1434,10 +1467,24 @@ public class SokujiFukaKouseiMainHandler {
         Tsuki from月 = Tsuki._4月;
         Tsuki to月 = Tsuki.翌年度5月;
         if (from月.compareTo(更正月.get月()) != 0) {
-            from月 = Tsuki.toValue(new RString(Month.of(更正月.get月AsInt()).minus(LONG_1).getValue()).padZeroToLeft(NUM_2));
+            if (Tsuki.翌年度5月.compareTo(更正月.get月()) == 0) {
+                from月 = Tsuki.翌年度4月;
+            } else if (Tsuki.翌年度4月.compareTo(更正月.get月()) == 0) {
+                from月 = Tsuki._3月;
+            } else if (Tsuki._1月.compareTo(更正月.get月()) == 0) {
+                from月 = Tsuki._12月;
+            } else {
+                from月 = Tsuki.toValue(new RString(Month.of(更正月.get月AsInt()).minus(LONG_1).getValue()).padZeroToLeft(NUM_2));
+            }
         }
-        if (to月.compareTo(更正月.get月()) != 0) {
-            to月 = Tsuki.toValue(new RString(Month.of(更正月.get月AsInt()).plus(LONG_1).getValue()).padZeroToLeft(NUM_2));
+        if (to月.compareTo(更正月.get月()) != 0 && Tsuki.翌年度4月.compareTo(更正月.get月()) != 0) {
+            if (Tsuki._12月.compareTo(更正月.get月()) == 0) {
+                to月 = Tsuki._1月;
+            } else if (Tsuki._3月.compareTo(更正月.get月()) == 0) {
+                to月 = Tsuki.翌年度4月;
+            } else {
+                to月 = Tsuki.toValue(new RString(Month.of(更正月.get月AsInt()).plus(LONG_1).getValue()).padZeroToLeft(NUM_2));
+            }
         }
         KitsukiList 期月リスト = 月期対応取得_普徴クラス.get期月リスト().subListBy月(from月, to月);
         for (Kitsuki kitsuki : 期月リスト.toList()) {
@@ -1552,5 +1599,45 @@ public class SokujiFukaKouseiMainHandler {
         }
         RYearMonth 該当月 = new RYearMonth(年度.toDateString().concat(コード_月));
         return 該当月.compareTo(調定年月) < 0;
+    }
+
+    private RString getPaneItem() {
+        RString data = RString.EMPTY;
+        data = data.concat(getRStringByTextBoxNum(div.getTxtGemmenGakuInput()));
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        data = data.concat(getRStringByTextBoxNum(tablePanel.getTxtTokuchoKoseiGo04()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtTokuchoKoseiGo06()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtTokuchoKoseiGo08()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtTokuchoKoseiGo10()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtTokuchoKoseiGo12()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtTokuchoKoseiGo02()));
+        data = data.concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGo04()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGo05()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGo06()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGo07()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGo08()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGo09()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGo10()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGo11()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGo12()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGo01()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGo02()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGo03()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGoYoku04()))
+                .concat(getRStringByTextBoxNum(tablePanel.getTxtFuchoKoseiGoYoku05()));
+        return data.concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigen04()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigen05()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigen06()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigen07()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigen08()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigen09()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigen10()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigen11()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigen12()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigen01()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigen02()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigen03()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigenYoku04()))
+                .concat(getRStringByTextBoxDate(tablePanel.getTxtFuchoNokigenYoku05()));
     }
 }

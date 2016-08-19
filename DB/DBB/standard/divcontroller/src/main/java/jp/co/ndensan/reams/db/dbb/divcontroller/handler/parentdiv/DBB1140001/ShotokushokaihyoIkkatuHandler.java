@@ -95,12 +95,9 @@ public class ShotokushokaihyoIkkatuHandler {
         if (再発行する.contains(キー_KEY0)) {
             div.getChkTestPrint().setDisabled(true);
             div.getChkShuturyokuTaisho().setDisabled(true);
-            div.getDgSaihakko().setSelectedItems(div.getDgSaihakko().getDataSource());
         } else {
             div.getChkTestPrint().setDisabled(false);
             div.getChkShuturyokuTaisho().setDisabled(false);
-            List<dgSaihakko_Row> dataList = new ArrayList<>();
-            div.getDgSaihakko().setSelectedItems(dataList);
         }
     }
 
@@ -186,9 +183,9 @@ public class ShotokushokaihyoIkkatuHandler {
             出力対象 = INDEX_0;
         } else if (selectedKeys.contains(キー_KEY0) && selectedKeys.contains(キー_KEY1)) {
             出力対象 = INDEX_1;
-        } else if (selectedKeys.contains(キー_KEY0) && !selectedKeys.contains(キー_KEY1)) {
+        } else if (selectedKeys.contains(キー_KEY0)) {
             出力対象 = INDEX_2;
-        } else if (selectedKeys.contains(キー_KEY0) && !selectedKeys.contains(キー_KEY1)) {
+        } else if (selectedKeys.contains(キー_KEY1)) {
             出力対象 = INDEX_3;
         }
         parameter.set出力対象(出力対象);

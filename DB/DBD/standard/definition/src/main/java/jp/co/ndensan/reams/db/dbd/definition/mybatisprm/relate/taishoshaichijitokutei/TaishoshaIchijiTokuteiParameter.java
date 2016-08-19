@@ -13,7 +13,7 @@ import lombok.Setter;
 /**
  * 社会福祉法人軽減認定者リスト作成のパラメータ
  *
- * @reamsid_LDBD-3830-040 tianyh
+ * @reamsid_L DBD-3830-040 tianyh
  */
 @Getter
 @Setter

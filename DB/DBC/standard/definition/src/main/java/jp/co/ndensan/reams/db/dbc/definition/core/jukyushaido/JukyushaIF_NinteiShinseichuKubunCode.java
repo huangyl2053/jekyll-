@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -11,10 +10,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * @author DBC-2730-030 chenjie
+ * @reamsid_L DBC-2730-030 chenjie
  */
 public enum JukyushaIF_NinteiShinseichuKubunCode {
-     /**
+
+    /**
      * コード:1 名称:申請無し 表示名称:申請無し
      */
     申請無し("1", "申請無し"),
@@ -25,7 +25,7 @@ public enum JukyushaIF_NinteiShinseichuKubunCode {
     /**
      * コード:2 名称:決定済み 表示名称:決定済み
      */
-    決定済み("2", "決定済み");
+    決定済み("3", "設定済み");
 
     private final RString code;
     private final RString fullName;

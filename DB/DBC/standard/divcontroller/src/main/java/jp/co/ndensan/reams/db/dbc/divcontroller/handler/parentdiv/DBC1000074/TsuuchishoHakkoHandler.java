@@ -69,7 +69,7 @@ public class TsuuchishoHakkoHandler {
         div.getRadChushutsukikan().setSelectedKey(ChushutsuKikan.申請年月日.getコード());
         div.getDdlInsho().setSelectedKey(Insho.発行済みも含める.getコード());
 
-        div.getTxtSakuseiYMD().setValue(new FlexibleDate(システム日付.toString()));
+        div.getTxtSakuseiYMD().setValue(FlexibleDate.getNowDate());
         div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
 
     }

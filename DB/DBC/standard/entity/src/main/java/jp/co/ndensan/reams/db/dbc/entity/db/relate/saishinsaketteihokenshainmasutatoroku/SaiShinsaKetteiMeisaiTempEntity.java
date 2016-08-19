@@ -6,9 +6,10 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsaketteihokenshainmasutatoroku;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -44,8 +45,7 @@ public class SaiShinsaKetteiMeisaiTempEntity extends
     @TempTableColumnOrder(7)
     private RString 公費受給者番号;
     @TempTableColumnOrder(8)
-//    private HokenshaNo 公費証記載保険者番号;
-    private RString 公費証記載保険者番号;
+    private HokenshaNo 公費証記載保険者番号;
     @TempTableColumnOrder(9)
     private FlexibleYearMonth サービス提供年月;
     @TempTableColumnOrder(10)
@@ -97,7 +97,7 @@ public class SaiShinsaKetteiMeisaiTempEntity extends
     @TempTableColumnOrder(33)
     private YubinNo 郵便番号;
     @TempTableColumnOrder(34)
-    private LasdecCode 町域コード;
+    private ChoikiCode 町域コード;
     @TempTableColumnOrder(35)
     private RString 行政区コード;
     @TempTableColumnOrder(36)

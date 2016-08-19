@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 /**
  * 障がい者控除対象者认定のハンドラクラスです。
  *
- * @reamsid_L DBD-3850-030 liuwei2
+ * @reamsid_L DBD-3850-010 liuwei2
  */
 public class DBD4010011Handler {
 

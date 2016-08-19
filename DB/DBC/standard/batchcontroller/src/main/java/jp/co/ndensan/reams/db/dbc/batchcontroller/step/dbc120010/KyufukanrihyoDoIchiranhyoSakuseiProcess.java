@@ -75,7 +75,8 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
 
     private KyufukanrihyoDoIchiranhyoSakuseiProcessParameter parameter;
     private IOutputOrder 並び順;
-    private List<RString> 改頁項目リスト;
+    private List<RString> 改頁項目名リスト;
+    private List<RString> 改頁リスト;
     private Map<RString, RString> 出力順Map;
     private KokuhorenIchiranhyoMybatisParameter 帳票データの取得Parameter;
     private List<HihokenshaKyufukanrihyoEntity> entityList;
@@ -113,7 +114,9 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
             + "kyufukanrihyoin.IKyufukanrihyoInMapper.get帳票出力対象データ");
     private static final RString 出力ファイル名
             = new RString("DBC200073_KyufuKanrihyoTorikomiKekkaIchiran.csv");
-    private static final RString デフォルト出力順 = new RString(" ORDER BY \"DbWT1121KyufuKanrihyo\".\"hokenshaNo\" ASC ");
+    private static final RString デフォルト出力順 = new RString(" ORDER BY \"temp\".\"hihokenshaNo\" ASC, "
+            + "\"DbWT1121KyufuKanrihyo\".\"serviceTeikyoYM\" ASC, \"DbWT1121KyufuKanrihyo\".\"kyufuSakuseiKubunCode\" ASC, "
+            + "\"DbWT1121KyufuKanrihyo\".\"kyufuShubetsuKubunCode\" ASC, \"DbWT1121KyufuKanrihyo\".\"hokenshaNo\" ASC ");
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
 
@@ -126,7 +129,8 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
     @Override
     protected void initialize() {
         super.initialize();
-        改頁項目リスト = new ArrayList<>();
+        改頁項目名リスト = new ArrayList<>();
+        改頁リスト = new ArrayList<>();
         出力順Map = new HashMap<>();
         entityList = new ArrayList<>();
         帳票データの取得Parameter = new KokuhorenIchiranhyoMybatisParameter();
@@ -145,15 +149,12 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
             }
         }
         帳票データの取得Parameter.set出力順(出力順);
-    }
-
-    @Override
-    protected void beforeExecute() {
         if (並び順 != null) {
             int i = 0;
             for (ISetSortItem item : 並び順.get設定項目リスト()) {
                 if (item.is改頁項目()) {
-                    改頁項目リスト.add(item.get項目名());
+                    改頁項目名リスト.add(item.get項目名());
+                    改頁リスト.add(item.get項目ID());
                 }
                 if (i == INT_1) {
                     出力順Map.put(KEY_並び順の２件目, item.get項目名());
@@ -178,11 +179,13 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
 
     @Override
     protected void createWriter() {
-        PageBreaker<KyufuKanrihyoTorikomiKekkaIchiranSource> breaker = new KyufuKanrihyoTorikomiKekkaIchiranPageBreak(改頁項目リスト);
+        PageBreaker<KyufuKanrihyoTorikomiKekkaIchiranSource> breaker
+                = new KyufuKanrihyoTorikomiKekkaIchiranPageBreak(改頁リスト);
         batchReportWriter_一覧表 = BatchReportFactory.createBatchReportWriter(
                 parameter.get帳票ID().value()).addBreak(breaker).create();
         reportSourceWriter_一覧表 = new ReportSourceWriter<>(batchReportWriter_一覧表);
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
+                EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
@@ -204,7 +207,7 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
         if (null != beforeEntity) {
             if (null == csvEntity) {
                 csvEntity = new KyufukanrihyoIchiranCSVEntity();
-                editヘッダー項目(beforeEntity);
+                editヘッダー項目();
             }
             if (is改頁(beforeEntity, entity)) {
                 edit明細項目(beforeEntity);
@@ -225,13 +228,13 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
     @Override
     protected void afterExecute() {
         if (!entityList.isEmpty()) {
-            writeLine(currentRecord, true);
             if (1 == entityList.size()) {
                 csvEntity = new KyufukanrihyoIchiranCSVEntity();
-                editヘッダー項目(currentRecord);
+                editヘッダー項目();
             }
             edit明細項目(currentRecord);
             edit集計項目(currentRecord);
+            writeLine(currentRecord, true);
         }
         eucCsvWriter.close();
 
@@ -302,7 +305,7 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
     private void writeLine(HihokenshaKyufukanrihyoEntity entity, boolean is集計) {
         KyufuKanrihyoTorikomiKekkaIchiranParameter パラメータ
                 = new KyufuKanrihyoTorikomiKekkaIchiranParameter(entity,
-                        出力順Map, 改頁項目リスト, parameter.get処理年月(),
+                        出力順Map, 改頁項目名リスト, parameter.get処理年月(),
                         parameter.getシステム日付(), parameter.get導入形態コード(), is集計, 連番);
         if (is集計) {
             パラメータ.set件数1(件数1);
@@ -325,7 +328,7 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
         return DecimalFormatter.toコンマ区切りRString(number, INT_0);
     }
 
-    private void editヘッダー項目(HihokenshaKyufukanrihyoEntity entity) {
+    private void editヘッダー項目() {
         csvEntity.set取込年月(parameter.get処理年月().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         RString 作成日 = parameter.getシステム日付().getDate().wareki().eraType(EraType.KANJI)

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NaiyoAreaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,7 +24,7 @@ public class NaiyoAreaDiv extends Panel {
     @JsonProperty("tbNenKinHokenshaName")
     private TextBoxMultiLine tbNenKinHokenshaName;
     @JsonProperty("tbGenkisoNenkinNo")
-    private TextBox tbGenkisoNenkinNo;
+    private TextBoxCode tbGenkisoNenkinNo;
     @JsonProperty("tbTaishoNenKin")
     private TextBoxMultiLine tbTaishoNenKin;
     @JsonProperty("ddlTsuki")
@@ -67,7 +67,7 @@ public class NaiyoAreaDiv extends Panel {
      * @return tbGenkisoNenkinNo
      */
     @JsonProperty("tbGenkisoNenkinNo")
-    public TextBox getTbGenkisoNenkinNo() {
+    public TextBoxCode getTbGenkisoNenkinNo() {
         return tbGenkisoNenkinNo;
     }
 
@@ -76,7 +76,7 @@ public class NaiyoAreaDiv extends Panel {
      * @param tbGenkisoNenkinNo tbGenkisoNenkinNo
      */
     @JsonProperty("tbGenkisoNenkinNo")
-    public void setTbGenkisoNenkinNo(TextBox tbGenkisoNenkinNo) {
+    public void setTbGenkisoNenkinNo(TextBoxCode tbGenkisoNenkinNo) {
         this.tbGenkisoNenkinNo = tbGenkisoNenkinNo;
     }
 

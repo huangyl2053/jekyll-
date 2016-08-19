@@ -289,8 +289,8 @@
     <update id="update仮算定一括発行一時_被保険者区分2">
         UPDATE "KarisanteiIkkatsuHakkoTemp" AS A
         SET "hihokenshaKubun" = '2'
-        WHERE(A."dbT2015KeisangoJoho_choshuHoho4gatsu" <![CDATA[<>]]> '1' AND "dbT2015KeisangoJoho_choshuHoho4gatsu" <![CDATA[<>]]> '2')
-        AND (A."dbT2015KeisangoJoho_choshuHoho6gatsu" = '1' OR "dbT2015KeisangoJoho_choshuHoho6gatsu" = '2')
+        WHERE A."dbT2015KeisangoJoho_choshuHoho4gatsu" NOT IN ('1','2')
+            AND A."dbT2015KeisangoJoho_choshuHoho6gatsu"  IN ('1','2')
     </update>
     
     <resultMap id="resultMap_出力対象情報の取得" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteitsuchishohakko.TsuchishoDataTempEntity" autoMapping="true">
@@ -298,7 +298,7 @@
         <id column="dbT2015KeisangoJoho_fukaNendo"/>
         <id column="dbT2015KeisangoJoho_tsuchishoNo"/>
         <id column="dbT2015KeisangoJoho_koseiZengoKubun"/>
-        <id column="dbT2015KeisangoJoho_sakuseiShoriName"/>
+        <id column="dbT2015KeisangoJoho_hihokenshaNo"/>
         <result property="被保険者区分" column="hihokenshaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="前年度特徴期別金額01" column="zennendoTokuchoKibetsuKingaku01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="前年度特徴期別金額02" column="zennendoTokuchoKibetsuKingaku02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>

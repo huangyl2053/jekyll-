@@ -30,6 +30,22 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public class SogojigyohiSaishinsaService {
 
+    private static final RString 決定タイトル = new RString("＜再審査決定＞");
+    private static final RString 決定件数タイトル = new RString("件数");
+    private static final RString 決定単位数タイトル = new RString("単位数");
+    private static final RString 決定負担額タイトル = new RString("保険者負担額");
+    private static final RString 調整タイトル = new RString("＜調整＞");
+    private static final RString 調整件数タイトル = new RString("件数");
+    private static final RString 調整単位数タイトル = new RString("単位数");
+    private static final RString 調整負担額タイトル = new RString("保険者負担額");
+    private static final RString 総合事業費タイトル = new RString("総合事業費");
+    private static final int INT_0 = 0;
+    private static final int INT_1 = 1;
+    private static final int INT_2 = 2;
+    private static final int INT_3 = 3;
+    private static final int INT_4 = 4;
+    private static final RString SAKUSEI = new RString("作成");
+
     /**
      * {@link InstanceProvider#create}にて生成した{@link ServicehiShikyuKetteiTsuchisho}のインスタンスを返します。
      *
@@ -52,12 +68,13 @@ public class SogojigyohiSaishinsaService {
 
         SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranCSVEntity returnEntity
                 = to明細項目(entity);
-        returnEntity.set取込年月(parameter.get処理年月().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+        returnEntity.set取込年月(parameter.get処理年月().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-        RString 作成日 = parameter.getシステム日付().getDate().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+        RDateTime systemTime = RDateTime.now();
+        RString 作成日 = systemTime.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        RString 作成時 = parameter.getシステム日付().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE);
-        returnEntity.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時).concat(RString.HALF_SPACE).concat(new RString("作成")));
+        RString 作成時 = systemTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+        returnEntity.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時).concat(RString.HALF_SPACE).concat(SAKUSEI));
         returnEntity.set国保連合会名(entity.get国保連合会名());
         returnEntity.set審査委員会名(entity.get審査委員会名());
         return returnEntity;
@@ -158,14 +175,14 @@ public class SogojigyohiSaishinsaService {
      * @param entity SogojigyohiSaishinsaKetteiHokenshaInEntity
      * @param outOrder IOutputOrder
      * @param 処理年月 FlexibleYearMonth
-     * @param systemTime RDateTime
      * @param 通番 int
      * @return SogojigyohiSaishinsaKetteiHokenshaInItem
      */
     public SogojigyohiSaishinsaKetteiHokenshaInItem setItem(SogojigyohiSaishinsaKetteiHokenshaInEntity entity,
-            IOutputOrder outOrder, FlexibleYearMonth 処理年月, RDateTime systemTime, int 通番) {
+            IOutputOrder outOrder, FlexibleYearMonth 処理年月, int 通番) {
 
         SogojigyohiSaishinsaKetteiHokenshaInItem outItem = new SogojigyohiSaishinsaKetteiHokenshaInItem();
+        RDateTime systemTime = RDateTime.now();
         RString 作成日 = systemTime.getDate().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 作成時 = systemTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE);
@@ -186,15 +203,15 @@ public class SogojigyohiSaishinsaService {
         RString 並び順の５件目 = RString.EMPTY;
         if (outOrder != null) {
             for (ISetSortItem item : outOrder.get設定項目リスト()) {
-                if (i == 0) {
+                if (i == INT_0) {
                     並び順の１件目 = item.get項目名();
-                } else if (i == 1) {
+                } else if (i == INT_1) {
                     並び順の２件目 = item.get項目名();
-                } else if (i == 2) {
+                } else if (i == INT_2) {
                     並び順の３件目 = item.get項目名();
-                } else if (i == 3) {
+                } else if (i == INT_3) {
                     並び順の４件目 = item.get項目名();
-                } else if (i == 4) {
+                } else if (i == INT_4) {
                     並び順の５件目 = item.get項目名();
                 }
                 i = i + 1;
@@ -230,15 +247,15 @@ public class SogojigyohiSaishinsaService {
         outItem.set原審単位数(doカンマ編集(entity.get原審単位数()));
         outItem.set調整単位数(doカンマ編集(entity.get調整単位数()));
 
-        outItem.set決定タイトル(new RString("＜再審査決定＞"));
-        outItem.set決定件数タイトル(new RString("件数"));
-        outItem.set決定単位数タイトル(new RString("単位数"));
-        outItem.set決定負担額タイトル(new RString("保険者負担額"));
-        outItem.set調整タイトル(new RString("＜調整＞"));
-        outItem.set調整件数タイトル(new RString("件数"));
-        outItem.set調整単位数タイトル(new RString("単位数"));
-        outItem.set調整負担額タイトル(new RString("保険者負担額"));
-        outItem.set総合事業費タイトル(new RString("総合事業費"));
+        outItem.set決定タイトル(決定タイトル);
+        outItem.set決定件数タイトル(決定件数タイトル);
+        outItem.set決定単位数タイトル(決定単位数タイトル);
+        outItem.set決定負担額タイトル(決定負担額タイトル);
+        outItem.set調整タイトル(調整タイトル);
+        outItem.set調整件数タイトル(調整件数タイトル);
+        outItem.set調整単位数タイトル(調整単位数タイトル);
+        outItem.set調整負担額タイトル(調整負担額タイトル);
+        outItem.set総合事業費タイトル(総合事業費タイトル);
         outItem.set総合事業費_決定_件数(doカンマ編集(entity.get総合事業費_決定_件数()));
         outItem.set総合事業費_決定_単位数(doカンマ編集(entity.get総合事業費_決定_単位数()));
         outItem.set総合事業費_決定_負担額(doカンマ編集(entity.get総合事業費_決定_負担額()));

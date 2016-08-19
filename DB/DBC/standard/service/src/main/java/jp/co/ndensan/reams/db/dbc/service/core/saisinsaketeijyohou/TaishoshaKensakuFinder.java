@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 画面設計_DBCMN11004_高額介護サービス費照会のクラスです。
  *
- * @reamsid_L DBC-3040-010 zhangzhiming
+ * @reamsid_L DBC-3040-030 zhangzhiming
  */
 public class TaishoshaKensakuFinder {
 

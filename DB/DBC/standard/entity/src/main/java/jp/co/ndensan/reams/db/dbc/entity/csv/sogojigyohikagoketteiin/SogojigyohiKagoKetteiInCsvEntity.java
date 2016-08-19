@@ -11,14 +11,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 帳票のCSVファイル作成のCsvEntity
  *
- * @reamsid_L　DBC-2550-010 jianglaishen
+ * @reamsid_L DBC-2550-010 jianglaisheng
  */
 @lombok.Setter
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class SogojigyohiKagoKetteiInCsvEntity {
 
-    @CsvField(order = 10, name = "処理年月")
+    @CsvField(order = 10, name = "取込年月")
     private RString 処理年月;
     @CsvField(order = 20, name = "作成日時")
     private RString 作成日時;
@@ -34,7 +34,7 @@ public class SogojigyohiKagoKetteiInCsvEntity {
     private RString 事業者名;
     @CsvField(order = 80, name = "被保険者番号")
     private RString 被保険者番号;
-    @CsvField(order = 90, name = "被保険者名")
+    @CsvField(order = 90, name = "被保険者氏名")
     private RString 被保険者名;
     @CsvField(order = 100, name = "サービス提供年月")
     private RString サービス提供年月;
@@ -50,10 +50,10 @@ public class SogojigyohiKagoKetteiInCsvEntity {
     private RString 単位数;
     @CsvField(order = 160, name = "負担額")
     private RString 負担額;
-    @CsvField(order = 170, name = "総合事業費_件数")
+    @CsvField(order = 170, name = "総合事業費・件数")
     private RString 総合事業費_件数;
-    @CsvField(order = 180, name = "総合事業費_単位数")
+    @CsvField(order = 180, name = "総合事業費・単位数")
     private RString 総合事業費_単位数;
-    @CsvField(order = 190, name = "総合事業費_負担額")
+    @CsvField(order = 190, name = "総合事業費・負担額")
     private RString 総合事業費_負担額;
 }

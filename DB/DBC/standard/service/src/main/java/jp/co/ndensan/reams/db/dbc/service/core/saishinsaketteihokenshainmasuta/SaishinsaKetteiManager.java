@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3063SaishinsaKetteiShu
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3064SaishinsaKetteiMeisaiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.saishinsaketteihokenshainmasutatoroku.ISaishinsaKetteiHokenshaInMasutaTorokuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -173,7 +172,7 @@ public class SaishinsaKetteiManager {
         再審査決定明細Entity.setJigyoshoName(entity.get事業所名());
         再審査決定明細Entity.setHiHokenshaNo(entity.get登録被保険者番号());
         再審査決定明細Entity.setKohiJukyushaNo(entity.get公費受給者番号());
-        再審査決定明細Entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get公費証記載保険者番号()));
+        再審査決定明細Entity.setShokisaiHokenshaNo(entity.get公費証記載保険者番号());
         再審査決定明細Entity.setServiceTeikyoYM(entity.getサービス提供年月());
         再審査決定明細Entity.setServiceShuruiCode(entity.getサービス種類コード());
         再審査決定明細Entity.setServiceShuruiName(entity.getサービス種類名());

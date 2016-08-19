@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic;
 /**
  * {@link jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity}のマッパーIFです。
  *
- * @author 
+ * @reamsid_L DBC-9999-012 pengxingyi
  */
 public interface IDbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaMapper {
 

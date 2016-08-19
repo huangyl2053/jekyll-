@@ -43,7 +43,7 @@ public class KyufuKanrihyoTorikomiKekkaIchiranPageBreak
         boolean flag = false;
         if (!currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo)) {
             flag = true;
-        } else if (this.breakKeysList.contains(DBC200073BreakerFieldsEnum.被保険者番号.getフォームフィールド名())
+        } else if (this.breakKeysList.contains(DBC200073BreakerFieldsEnum.被保険者番号.get項目ID())
                 && !currentSource.getSource().listCenter_4.equals(nextSource.getSource().listCenter_4)) {
             flag = true;
         }

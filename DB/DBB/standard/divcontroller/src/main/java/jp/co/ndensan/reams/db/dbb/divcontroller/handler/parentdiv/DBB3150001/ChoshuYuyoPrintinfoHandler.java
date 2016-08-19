@@ -57,22 +57,22 @@ public class ChoshuYuyoPrintinfoHandler {
         div.getPritPublish2().getComdiv1().initialize(true, null, false, true, null, false);
         div.getPritPublish2().getComdiv1().setSendDateDisable(true);
         ChoshuYuyoJoho 徴収猶予情報 = KaigoFukaChoshuYuyo.createInstance().getChoshuYuyoJoho(調定年度, 賦課年度, 通知書番号);
-        RString 徴収猶予状態区分 = 徴収猶予情報.get徴収猶予状態区分();
-        RString 徴収猶予作成区分 = 徴収猶予情報.get徴収猶予作成区分();
-        if ((申請.equals(徴収猶予状態区分) && 申請.equals(徴収猶予作成区分))
-                || 申請.equals(徴収猶予状態区分) && 取消.equals(徴収猶予作成区分)) {
-            div.getChoshuYuyoPrintinfo().getPritPublish2().setVisible(false);
-        }
-        if ((承認.equals(徴収猶予状態区分) && 承認.equals(徴収猶予作成区分))
-                || (不承認.equals(徴収猶予状態区分) && 不承認.equals(徴収猶予作成区分))
-                || (承認.equals(徴収猶予状態区分) && 訂正.equals(徴収猶予作成区分))
-                || (不承認.equals(徴収猶予状態区分) && 訂正.equals(徴収猶予作成区分))) {
-            div.getChoshuYuyoPrintinfo().getPritPublish2().setVisible(true);
-            div.getChoshuYuyoPrintinfo().getPritPublish2().setTitle(徴収猶予決定通知書);
-        }
-        if (承認.equals(徴収猶予状態区分) && 取消.equals(徴収猶予作成区分)) {
-            div.getChoshuYuyoPrintinfo().getPritPublish2().setVisible(true);
-            div.getChoshuYuyoPrintinfo().getPritPublish2().setTitle(徴収猶予取消通知書);
+        if (徴収猶予情報 != null) {
+            RString 徴収猶予状態区分 = 徴収猶予情報.get徴収猶予状態区分();
+            RString 徴収猶予作成区分 = 徴収猶予情報.get徴収猶予作成区分();
+            if ((申請.equals(徴収猶予状態区分) && 申請.equals(徴収猶予作成区分))
+                    || (申請.equals(徴収猶予状態区分) && 取消.equals(徴収猶予作成区分))) {
+                div.getChoshuYuyoPrintinfo().getPritPublish2().setVisible(false);
+            } else if ((承認.equals(徴収猶予状態区分) && 承認.equals(徴収猶予作成区分))
+                    || (不承認.equals(徴収猶予状態区分) && 不承認.equals(徴収猶予作成区分))
+                    || (承認.equals(徴収猶予状態区分) && 訂正.equals(徴収猶予作成区分))
+                    || (不承認.equals(徴収猶予状態区分) && 訂正.equals(徴収猶予作成区分))) {
+                div.getChoshuYuyoPrintinfo().getPritPublish2().setVisible(true);
+                div.getChoshuYuyoPrintinfo().getPritPublish2().setTitle(徴収猶予決定通知書);
+            } else if (承認.equals(徴収猶予状態区分) && 取消.equals(徴収猶予作成区分)) {
+                div.getChoshuYuyoPrintinfo().getPritPublish2().setVisible(true);
+                div.getChoshuYuyoPrintinfo().getPritPublish2().setTitle(徴収猶予取消通知書);
+            }
         }
     }
 
@@ -87,15 +87,13 @@ public class ChoshuYuyoPrintinfoHandler {
 
         FukaJoho 賦課情報 = KaigoFukaChoshuYuyo.createInstance().getFukaJoho(調定年度, 賦課年度, 通知書番号);
         KakushuTsuchishoParameter pama = new KakushuTsuchishoParameter();
+        List<RString> list = new ArrayList<>();
         if (徴収猶予決定通知書.equals(div.getChoshuYuyoPrintinfo().getPritPublish2().getTitle())) {
-            List<RString> list = new ArrayList<>();
             list.add(TsuchiSho.介護保険料徴収猶予決定通知書.get名称());
-            pama.set発行する帳票List(list);
         } else if (徴収猶予取消通知書.equals(div.getChoshuYuyoPrintinfo().getPritPublish2().getTitle())) {
-            List<RString> list = new ArrayList<>();
             list.add(TsuchiSho.介護保険料徴収猶予取消通知書.get名称());
-            pama.set発行する帳票List(list);
         }
+        pama.set発行する帳票List(list);
         pama.set賦課の情報_更正前(null);
         pama.set賦課の情報_更正後(賦課情報);
         RDate 発行日 = div.getChoshuYuyoPrintinfo().getPritPublish2().getComdiv1().getIssueDate();

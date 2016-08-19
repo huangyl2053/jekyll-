@@ -54,6 +54,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -97,18 +98,38 @@ public class FutanWariaisho {
     }
 
     /**
+     * ソースデータ取得By画面
+     *
+     * @param 識別コード ShikibetsuCode
+     * @param 被保険者番号 HihokenshaNo
+     * @param entity FutanWariaiShoDivParameter
+     * @param flag RString
+     * @return SourceDataCollection
+     */
+    public SourceDataCollection getSourceDataSinger(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号,
+            FutanWariaiShoDivParameter entity, RString flag) {
+        SourceDataCollection collection;
+        try (ReportManager reportManager = new ReportManager()) {
+            getSourceData(識別コード, 被保険者番号, entity, flag, reportManager);
+            collection = reportManager.publish();
+        }
+        return collection;
+    }
+
+    /**
      * ソースデータ取得
      *
      * @param 識別コード ShikibetsuCode
      * @param 被保険者番号 HihokenshaNo
      * @param entity FutanWariaiShoDivParameter
      * @param flag RString
+     * @param reportManager ReportManager
      */
-    public void getSourceData(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FutanWariaiShoDivParameter entity, RString flag) {
+    public void getSourceData(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FutanWariaiShoDivParameter entity,
+            RString flag, ReportManager reportManager) {
         if (識別コード == null || 被保険者番号 == null || entity == null || flag == null) {
             throw new NullPointerException();
         }
-        ReportManager reportManager = new ReportManager();
         FutanWariaiShoProperty property = new FutanWariaiShoProperty();
         try (ReportAssembler<FutanWariaiShoSource> assembler = createAssembler(property, reportManager)) {
             Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, 種別コード,
@@ -180,7 +201,6 @@ public class FutanWariaisho {
         RString 導入形態コード = 市町村セキュリティ情報.get導入形態コード().value();
         KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
         if (定数_事務広域.equals(導入形態コード) || 定数_認定広域.equals(導入形態コード)) {
-            //TODO QA#1175
             DbV1001HihokenshaDaichoEntity entity = dac.get被保険者台帳(被保険者番号);
             SearchResult<ShichosonCodeYoriShichoson> shichoson = null;
             if (entity.getKoikinaiTokureiSochimotoShichosonCode() == null) {

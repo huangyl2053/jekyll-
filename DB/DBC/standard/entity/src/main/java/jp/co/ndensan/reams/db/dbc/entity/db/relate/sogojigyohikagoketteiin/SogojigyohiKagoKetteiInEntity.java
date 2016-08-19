@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 総合事業費（経過措置）過誤決定通知書情報取込一覧表。
  *
- * @reamsid_L DBC-2550-010 jianglaishen
+ * @reamsid_L DBC-2550-010 jianglaisheng
  */
 @lombok.Getter
 @lombok.Setter

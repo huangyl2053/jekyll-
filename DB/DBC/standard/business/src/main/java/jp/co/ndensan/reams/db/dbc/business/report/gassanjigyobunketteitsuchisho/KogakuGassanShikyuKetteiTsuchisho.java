@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunketteitsuchisho
 
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -36,7 +36,7 @@ public class KogakuGassanShikyuKetteiTsuchisho {
     private RString 被保険者氏名;
     private HihokenshaNo 被保険者番号;
     private DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity 事業高額合算支給不支給決定;
-    private IKoza 口座情報;
+    private Koza 口座情報;
     private RString 文書2;
     private RString 文書3;
     private RString 文書4;

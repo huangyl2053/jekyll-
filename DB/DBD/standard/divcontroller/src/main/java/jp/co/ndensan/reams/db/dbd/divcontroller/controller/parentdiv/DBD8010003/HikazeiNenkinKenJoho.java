@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD8010003.Hik
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -89,7 +90,6 @@ public class HikazeiNenkinKenJoho {
     public ResponseData<HikazeiNenkinKenJohoDiv> onClick_btnSearch(HikazeiNenkinKenJohoDiv div) {
         div.setHiddenHihokenshaNo(div.getCcdKaigoShikaku().get被保険者番号());
         div.setHiddenNendo(div.getDdlYear().getSelectedKey());
-        //TODO 画面設計_HikazeiNenkinKensaku_非課税年金検索 未作成
         return ResponseData.of(div).respond();
     }
 
@@ -242,6 +242,7 @@ public class HikazeiNenkinKenJoho {
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             handler.削除解除_登録区分_画面登録_保存処理(非課税年金対象者一時);
             handler.前排他の解除(key.get被保険者番号());
+            div.getCcvComplateMsg().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
             return ResponseData.of(div).setState(complate);
         }
 

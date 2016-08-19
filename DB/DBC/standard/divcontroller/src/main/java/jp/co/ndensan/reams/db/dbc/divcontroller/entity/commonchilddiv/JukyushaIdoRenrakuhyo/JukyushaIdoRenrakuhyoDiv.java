@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,12 +21,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * JukyushaIdoRenrakuhyo のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBC-4350-060 chenhui
  */
 public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenrakuhyoDiv {
 
@@ -383,11 +385,24 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    /**
+     * 画面初期化のメソッドです。
+     *
+     * @param 処理モード RString
+     * @param 識別コード ShikibetsuCode
+     * @param 被保険者番号 HihokenshaNo
+     * @param 履歴番号 int
+     * @param 論理削除フラグ boolean
+     * @param 異動日 FlexibleDate
+     */
     @JsonIgnore
     @Override
     public void initialize(RString 処理モード, ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号,
             int 履歴番号, boolean 論理削除フラグ, FlexibleDate 異動日) {
-        JukyushaIdoRenrakuhyoHandler.of(this).initialize(処理モード, 識別コード, 被保険者番号, 履歴番号, 論理削除フラグ, 異動日);
+        JukyushaIdoRenrakuhyo 受給者異動送付
+                = JukyushaIdoRenrakuhyoHandler.of(this).initialize(処理モード, 識別コード, 被保険者番号, 履歴番号, 論理削除フラグ, 異動日);
+        ViewStateHolder.put(ViewStateKeys.履歴番号, 履歴番号);
+        ViewStateHolder.put(ViewStateKeys.受給者異動送付, 受給者異動送付);
     }
 
     /**
@@ -401,6 +416,16 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     }
 
     /**
+     * 「計画作成区分」操作制御のメソッドです。
+     *
+     */
+    @JsonIgnore
+    @Override
+    public void onClick_radKyotakuServiceSakuseiKubun() {
+        JukyushaIdoRenrakuhyoHandler.of(this).onClick_計画作成区分();
+    }
+
+    /**
      * 異動日focus outのメソッドです。
      *
      */
@@ -411,24 +436,50 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     }
 
     /**
+     * 支援事業者番号focus outのメソッドです。
+     *
+     */
+    @JsonIgnore
+    @Override
+    public void onBlur_txtKyotakuKaigoShienJigyoshoNo() {
+        JukyushaIdoRenrakuhyoHandler.of(this).onBlur_支援事業者番号();
+    }
+
+    /**
+     * 住所地特例の保険者番号focus outのメソッドです。
+     *
+     */
+    @JsonIgnore
+    @Override
+    public void onBlur_txtShisetsuShozaiHokenjaNo() {
+        JukyushaIdoRenrakuhyoHandler.of(this).onBlur_保険者番号();
+    }
+
+    /**
      * (共有子Div)受給者異動連絡票バリデーションチェックを行う。
      *
      * @return ValidationMessageControlPairs
      */
+    @JsonIgnore
     @Override
     public ValidationMessageControlPairs validateCheck() {
-//        return getValidationHandler().validateCheck();
-        return null;
+        return getValidationHandler().validate入力チェック();
     }
 
     /**
-     * 受給者異動送付をを取得の。メソッドです。
+     * 受給者異動送付をを取得のメソッドです。
      *
      * @return JukyushaIdoRenrakuhyo
      */
+    @JsonIgnore
     @Override
     public JukyushaIdoRenrakuhyo get受給者異動送付() {
-        return null;
+        int 履歴番号 = ViewStateHolder.get(ViewStateKeys.履歴番号, Integer.class) + 1;
+        return JukyushaIdoRenrakuhyoHandler.of(this).get受給者異動送付(履歴番号);
+    }
+
+    private JukyushaIdoRenrakuhyoValidationHandler getValidationHandler() {
+        return new JukyushaIdoRenrakuhyoValidationHandler(this);
     }
 
 }

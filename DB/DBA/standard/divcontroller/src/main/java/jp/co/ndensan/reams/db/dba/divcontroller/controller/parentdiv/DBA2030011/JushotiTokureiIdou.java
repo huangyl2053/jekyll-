@@ -51,7 +51,7 @@ public class JushotiTokureiIdou {
     private static final RString 利用モード = new RString("被保険者対象機能");
     private static final RString DBAMN25001_届出により適用 = new RString("DBAMN25001");
     private static final RString DBAMN25002_届出により解除 = new RString("DBAMN25002");
-    private static final LockingKey 前排他ロックキー = new LockingKey("ShikakuJutokuTekiyo、HihokenshaNo");
+    private LockingKey 前排他ロックキー;
     private final HihokenshaShikakuShutokuManager hihokenshaShikakuShutoku = HihokenshaShikakuShutokuManager.createInstance();
     private final JushotiTokureiIdouFinder jushotiTokureiIdouFinder = JushotiTokureiIdouFinder.createInstance();
 
@@ -71,9 +71,11 @@ public class JushotiTokureiIdou {
         div.getCcdHihosyosai().被保詳細モード(住所地特例モード);
         if (DBAMN25001_届出により適用.equals(UrControlDataFactory.createInstance().getMenuID())) {
             div.getCcdHihosyosai().住所地特例表示タイプ(適用モード);
+            前排他ロックキー = new LockingKey("ShikakuJutokuTekiyo、HihokenshaNo");
         }
         if (DBAMN25002_届出により解除.equals(UrControlDataFactory.createInstance().getMenuID())) {
             div.getCcdHihosyosai().住所地特例表示タイプ(解除モード);
+            前排他ロックキー = new LockingKey("ShikakuJutokuKaijo、HihokenshaNo");
         }
         div.getCcdHihosyosai().資格関連異動表示モード(照会モード);
         div.getCcdHihosyosai().施設入退所表示モード(表示モード);
@@ -114,6 +116,7 @@ public class JushotiTokureiIdou {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            RealInitialLocker.release(前排他ロックキー);
             div.getCcdHihosyosai().施設入退所保存処理();
             if (DBAMN25001_届出により適用.equals(UrControlDataFactory.createInstance().getMenuID())) {
                 適用情報の保存(div);
@@ -128,7 +131,6 @@ public class JushotiTokureiIdou {
                 return ResponseData.of(div).setState(DBA2030011StateName.完了状態);
             }
         }
-
         return ResponseData.of(div).respond();
     }
 

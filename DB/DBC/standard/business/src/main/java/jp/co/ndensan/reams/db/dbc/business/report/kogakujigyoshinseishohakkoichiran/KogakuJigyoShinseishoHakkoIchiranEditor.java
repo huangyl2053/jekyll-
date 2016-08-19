@@ -97,8 +97,8 @@ public class KogakuJigyoShinseishoHakkoIchiranEditor implements IKogakuJigyoShin
         }
         source.listHakkoTaishosha_8 = 帳票出力対象データ.getGyoseikuNameChohyo();
         source.listHakkoTaishosha_9 = new RString(String.valueOf(帳票出力対象データ.isKyuSochishaFlagChohyo()));
-        if (帳票出力対象データ.getYokaigoJotaiKubunCode() != null) {
-            source.listHakkoTaishosha_10 = 帳票出力対象データ.getYokaigoJotaiKubunCode().getColumnValue();
+        if (帳票出力対象データ.getYokaigoJotaiKubunCodeChohyo() != null) {
+            source.listHakkoTaishosha_10 = 帳票出力対象データ.getYokaigoJotaiKubunCodeChohyo().getColumnValue();
         }
         if (帳票出力対象データ.getNinteiYukoKikanKaishiYMDChohyo() != null) {
             source.listHakkoTaishosha_11 = 帳票出力対象データ.getNinteiYukoKikanKaishiYMDChohyo().wareki().toDateString();

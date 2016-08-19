@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 受給者台帳異動チェックリスト帳票のプロパティです。
  *
- * @reamsid_L DBD-1770-030 donghj
+ * @reamsid_L DBD-1770-040 donghj
  */
 @lombok.Getter
 @lombok.Setter

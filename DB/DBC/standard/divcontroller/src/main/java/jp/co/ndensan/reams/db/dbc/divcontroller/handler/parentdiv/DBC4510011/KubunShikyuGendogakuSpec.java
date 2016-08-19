@@ -24,6 +24,9 @@ public enum KubunShikyuGendogakuSpec implements IPredicate<KubunShikyuGendogakuD
     重複の入力チェック {
                 @Override
                 public boolean apply(KubunShikyuGendogakuDiv div) {
+                    if (div.getServiceShuruiShousai().getTxtTeikyoKaishiYM().getValue() == null) {
+                        return true;
+                    }
                     return SpecHelper.is重複の入力チェック(div);
                 }
             },
@@ -53,9 +56,16 @@ public enum KubunShikyuGendogakuSpec implements IPredicate<KubunShikyuGendogakuD
                 if (item.equals(selectRow)) {
                     continue;
                 }
-                if (!(isYMCompare(new RDate(item.getDefaultDataName2().toString()),
-                        new RDate(item.getDefaultDataName3().toString()), startDate, endDate))) {
-                    return Boolean.FALSE;
+                if (!item.getDefaultDataName3().isNullOrEmpty()) {
+                    if (!(isYMCompare(new RDate(item.getDefaultDataName2().toString()),
+                            new RDate(item.getDefaultDataName3().toString()), startDate, endDate))) {
+                        return Boolean.FALSE;
+                    }
+                } else {
+                    if (!(isYMCompare(new RDate(item.getDefaultDataName2().toString()),
+                            null, startDate, endDate))) {
+                        return Boolean.FALSE;
+                    }
                 }
             }
             return Boolean.TRUE;
@@ -69,20 +79,36 @@ public enum KubunShikyuGendogakuSpec implements IPredicate<KubunShikyuGendogakuD
         public static boolean isが各必須入力項目の必須入力チェック場合(KubunShikyuGendogakuDiv div) {
             return (div.getServiceShuruiShousai().getTxtServiceCode().getValue() != null
                     && div.getServiceShuruiShousai().getTxtTeikyoKaishiYM().getValue() != null
-                    && div.getServiceShuruiShousai().getTxtTeikyoShuryoYM().getValue() != null
                     && div.getServiceShuruiShousai().getTxtServiceMeisho().getValue() != null
-                    && div.getServiceShuruiShousai().getTxtServiceRyakusho() != null);
+                    && div.getServiceShuruiShousai().getTxtServiceRyakusho().getValue() != null);
         }
 
         private static boolean isYMCompare(RDate startTimeRow, RDate endTimeRow, RDate startDate, RDate endDate) {
-            if (startDate == null || endDate == null) {
-                return false;
-            }
-            if ((startTimeRow.isBeforeOrEquals(startDate) && startDate.isBeforeOrEquals(endTimeRow))
-                    || (startTimeRow.isBeforeOrEquals(endDate) && endDate.isBeforeOrEquals(endTimeRow))) {
-                return false;
+            if (endTimeRow != null) {
+                if (endDate != null) {
+                    isYMNotNullCompare(startTimeRow, endTimeRow, startDate, endDate);
+                } else {
+                    if (startTimeRow.isBeforeOrEquals(startDate) && startDate.isBeforeOrEquals(endTimeRow)) {
+                        return false;
+                    }
+                }
+            } else {
+                if (endDate != null) {
+                    if (startDate.isBeforeOrEquals(startTimeRow) && startTimeRow.isBeforeOrEquals(endDate)) {
+                        return false;
+                    }
+                } else {
+                    if (startTimeRow.equals(startDate)) {
+                        return false;
+                    }
+                }
             }
             return true;
+        }
+
+        private static boolean isYMNotNullCompare(RDate startTimeRow, RDate endTimeRow, RDate startDate, RDate endDate) {
+            return (!startTimeRow.isBeforeOrEquals(startDate) || !startDate.isBeforeOrEquals(endTimeRow))
+                    && (!startTimeRow.isBeforeOrEquals(endDate) || !endDate.isBeforeOrEquals(endTimeRow));
         }
     }
 }

@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.saisinsaketeijyohou.Taishosha
 /**
  * 高額介護サービス費照会のマッパーインタフェースです。
  *
- * @reamsid_L DBC-3040-010 zhangzhiming
+ * @reamsid_L DBC-3040-030 zhangzhiming
  */
 public interface ITaishoshaKensakuMapper {
 

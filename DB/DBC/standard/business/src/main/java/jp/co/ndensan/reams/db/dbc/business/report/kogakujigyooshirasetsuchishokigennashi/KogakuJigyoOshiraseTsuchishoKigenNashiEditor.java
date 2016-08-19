@@ -45,8 +45,8 @@ public class KogakuJigyoOshiraseTsuchishoKigenNashiEditor implements IKogakuJigy
         source.tsuchibun1 = entity.get通知文1();
         source.tsuchibun2 = entity.get通知文2();
         source.bunshoNo = entity.get文書番号文字列();
+        if (!entity.is空白() && entity.get申請情報帳票発行一時() != null) {
 
-        if (entity.get申請情報帳票発行一時() != null) {
             source.hihokenshaNameKana = entity.get申請情報帳票発行一時().getShimeikanaChohyo().value();
             source.hihokenshaName = entity.get申請情報帳票発行一時().getMeishoChohyo().value();
             source.seibetsu = entity.get申請情報帳票発行一時().getSeibetsuCodeChohyo();
@@ -68,6 +68,7 @@ public class KogakuJigyoOshiraseTsuchishoKigenNashiEditor implements IKogakuJigy
                 source.shikyuGaku = DecimalFormatter.toコンマ区切りRString(entity.get申請情報帳票発行一時().getGokeiKogakuShikyuGakuChohyo(), 0);
             }
         }
+
         if (entity.get認証者() != null) {
             source.denshiKoin = entity.get認証者().denshiKoin;
             source.hakkoYMD = entity.get認証者().hakkoYMD;

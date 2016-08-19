@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
@@ -169,7 +170,8 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
      */
     public ShogaishaKojoTaishoshaListParameter getParameter() {
         ShogaishaKojoTaishoshaListParameter parameter = new ShogaishaKojoTaishoshaListParameter();
-        parameter.set対象年度(div.getTyusyutuJyokenPanel().getTxtTaishoNendo().getValue());
+        int index_4 = 4;
+        parameter.set対象年度(new FlexibleYear(div.getTyusyutuJyokenPanel().getTxtTaishoNendo().getValue().toDateString().substring(0, index_4)));
         if (div.getTyusyutuJyokenPanel().getTxtHihokenshaNo().getValue() != null) {
             parameter.set被保険者番号(new HihokenshaNo(div.getTyusyutuJyokenPanel().getTxtHihokenshaNo().getValue().toString()));
         }

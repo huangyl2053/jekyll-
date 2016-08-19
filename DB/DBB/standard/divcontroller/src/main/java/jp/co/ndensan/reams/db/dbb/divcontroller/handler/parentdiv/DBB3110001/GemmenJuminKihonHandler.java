@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.gemmen.gemmen.Gemmen;
 import jp.co.ndensan.reams.db.dbb.business.core.gemmen.gemmenjoho.GemmenJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.gemmen.gemmenjoho.GemmenJohoBuilder;
+import jp.co.ndensan.reams.db.dbb.business.core.gemmen.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.kaigohokenryogemmen.FukaJohoSaishn;
 import jp.co.ndensan.reams.db.dbb.business.core.kaigohokenryogemmen.KaigoHokenryoGemmenParam;
 import jp.co.ndensan.reams.db.dbb.business.core.kaigohokenryogemmen.NendobunFukaGemmenListResult;
@@ -53,7 +54,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -102,6 +102,7 @@ public class GemmenJuminKihonHandler {
     private static final int ジュウヨ_定値 = 14;
     private static final int ジュウゴ_定値 = 15;
     private static final RString 期R = new RString("期");
+    private static final RString 月R = new RString("月");
     private static final RString 保存R = new RString("保存");
     private static final RString 氏名R = new RString("氏名");
     private static final RString コロン = new RString(":");
@@ -236,6 +237,7 @@ public class GemmenJuminKihonHandler {
     public void load決定情報パネル(GemmenJoho 最新減免の情報) {
         KeteiinfoDiv 決定情報パネル = div.getGemmenMain().getKeteiinfo();
         決定情報パネル.getRadKetteiKubun().setDataSource(get決定区分());
+        決定情報パネル.getRadKetteiKubun().setSelectedIndex(ゼロ_定値);
         if (最新減免の情報 != null) {
             決定情報パネル.getTxtZenkaiGemmengaku().setValue(最新減免の情報.get減免額());
             List<Gemmen> 介護賦課減免List = 最新減免の情報.getGemmenList();
@@ -278,11 +280,11 @@ public class GemmenJuminKihonHandler {
      */
     public NendobunFukaGemmenListResult onClick_選択ボタン(HihokenshaNo 被保険者番号) {
         IFukaRirekiAllDiv 全賦課履歴 = div.getGemmenFukaRirekiAll().getCcdFukaRirekiAll();
-        IItemList<Fuka> 全賦課履歴データ = 全賦課履歴.get賦課履歴().get賦課履歴All();
-        // TODO QA932 選択されたデータ。
-        Fuka 賦課基本 = 全賦課履歴データ.toList().get(0);
+        TsuchishoNo 通知書番号 = 全賦課履歴.getClicked通知書番号();
+        FlexibleYear 調定年度 = 全賦課履歴.getClicked調定年度();
+        FlexibleYear 賦課年度 = 全賦課履歴.getClicked賦課年度();
         NendobunFukaGemmenListResult 減免リスト = KaigoHokenryoGemmen.createInstance()
-                .getJokyo(賦課基本.get調定年度(), 賦課基本.get賦課年度(), 賦課基本.get通知書番号(), 被保険者番号);
+                .getJokyo(調定年度, 賦課年度, 通知書番号, 被保険者番号);
         return 減免リスト;
     }
 
@@ -317,6 +319,30 @@ public class GemmenJuminKihonHandler {
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(取消をやめるボタン, true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(保存ボタン, false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン, false);
+    }
+
+    /**
+     * 状況情報パネル、取消情報パネル、申請情報パネル、決定情報パネルと減免情報パネルのクリアメソッドです。
+     */
+    public void clearパネル() {
+        ShinseiinfoDiv 申請情報パネル = div.getGemmenMain().getShinseiinfo();
+        KeteiinfoDiv 決定情報パネル = div.getGemmenMain().getKeteiinfo();
+        KiwarigakuDiv 減免情報パネル = div.getGemmenMain().getKiwarigaku();
+        TorikeshiInfoDiv 取消情報パネル = div.getGemmenMain().getTorikeshiInfo();
+        申請情報パネル.getTxtChoteiYY().clearValue();
+        申請情報パネル.getTxtFukaYY().clearValue();
+        申請情報パネル.getTxtShinseiYMD().clearValue();
+        申請情報パネル.getTxtShinseiGemmengaku().clearValue();
+        申請情報パネル.getTxtGemmenShurui().clearValue();
+        申請情報パネル.getTxtShinseiRiyu().setValue(null);
+        決定情報パネル.getTxtKetteiYMD().clearValue();
+        決定情報パネル.getTxtZenkaiGemmengaku().clearValue();
+        決定情報パネル.getRadKetteiKubun().setSelectedIndex(ゼロ_定値);
+        決定情報パネル.getTxtKetteiRiyu().setValue(null);
+        取消情報パネル.getTxtTorikeshiYMD().clearValue();
+        取消情報パネル.getTxtTorikeshiShurui().clearValue();
+        取消情報パネル.getTxtTorikeshiRiyu().setValue(null);
+        減免情報パネル.getTxtGemmengaku().clearValue();
     }
 
     /**
@@ -417,45 +443,55 @@ public class GemmenJuminKihonHandler {
 
     private void set過年度情報グリッド1(GemmenJoho 過年度1) {
         KiwarigakuKanendo1Div 過年度1パネル = div.getGemmenMain().getKiwarigaku().getKiwarigakuKanendo1();
+        過年度1パネル.getLblKiwarigaku24Gatsu().setText(空);
         過年度1パネル.getTxtKanendoChoteiYY1().setValue(new RDate(過年度1.get調定年度().toString()));
         過年度1パネル.getTxtKanendoFukaYY1().setValue(new RDate(過年度1.get賦課年度().toString()));
-        RString 期_4月 = 過年度期月リスト.get月の期(Tsuki._4月).get期();
-        過年度1パネル.getKiwarigakuPanel2().getKi1().setText(get期(期_4月));
-        if (期_4月 == null || 期_4月.isEmpty()) {
-            過年度1パネル.getKiwarigakuPanel2().getMae1().setText(null);
-        } else {
-            Decimal 普徴期別金額_4月 = get減免前普徴期別金額(期_4月, 過年度1);
-            if (普徴期別金額_4月 != null) {
-                過年度1パネル.getKiwarigakuPanel2().getMae1().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_4月, ゼロ_定値));
-            }
-            // TODO QAxxx get過年度納期メソッド　は問題があります。
-//            Noki 賦課納期 = FukaNokiResearcher.createInstance().get過年度納期(Integer.valueOf(期_4月.toString()));
-//            RDate 納期限 = 賦課納期.get納期限();
-//            if (納期限 != null) {
-//                過年度1パネル.getKiwarigakuPanel2().getNokigen1().setText(納期限.wareki().toDateString());
-//            }
+
+        List<Kibetsu> 介護期別情報リスト = 過年度1.getKibetsuList();
+        if (介護期別情報リスト == null || 介護期別情報リスト.isEmpty()) {
+            return;
+        }
+        Kibetsu 介護期別情報 = 介護期別情報リスト.get(ゼロ_定値);
+        int 期 = 介護期別情報.get期();
+        int 月_期 = 過年度期月リスト.get期の最初月(期).get月AsInt();
+        RString 月 = new RString(月_期).concat(月R);
+        過年度1パネル.getLblKiwarigaku24Gatsu().setText(月);
+        過年度1パネル.getKiwarigakuPanel2().getKi1().setText(new RString(期).concat(期R));
+        Decimal 普徴期別金額 = get減免前普徴期別金額(new RString(期), 過年度1);
+        if (普徴期別金額 != null) {
+            過年度1パネル.getKiwarigakuPanel2().getMae1().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額, ゼロ_定値));
+        }
+        Noki 賦課納期 = FukaNokiResearcher.createInstance().get過年度納期(期);
+        RDate 納期限 = 賦課納期.get納期限();
+        if (納期限 != null) {
+            過年度1パネル.getKiwarigakuPanel2().getNokigen1().setText(納期限.wareki().toDateString());
         }
     }
 
     private void set過年度情報グリッド2(GemmenJoho 過年度2) {
         KiwarigakuKanendo2Div 過年度2パネル = div.getGemmenMain().getKiwarigaku().getKiwarigakuKanendo2();
+        過年度2パネル.getLblKiwarigaku34Gatsu().setText(空);
         過年度2パネル.getTxtKanendoChoteiYY2().setValue(new RDate(過年度2.get調定年度().toString()));
         過年度2パネル.getTxtKanendoFukaYY2().setValue(new RDate(過年度2.get賦課年度().toString()));
-        RString 期_4月 = 過年度期月リスト.get月の期(Tsuki._4月).get期();
-        過年度2パネル.getKiwarigakuPanel3().getKi2().setText(get期(期_4月));
-        if (期_4月 == null || 期_4月.isEmpty()) {
-            過年度2パネル.getKiwarigakuPanel3().getMae2().setText(null);
-        } else {
-            Decimal 普徴期別金額_4月 = get減免前普徴期別金額(期_4月, 過年度2);
-            if (普徴期別金額_4月 != null) {
-                過年度2パネル.getKiwarigakuPanel3().getMae2().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_4月, ゼロ_定値));
-            }
-            // TODO QAxxx get過年度納期メソッド　は問題があります。
-//            Noki 賦課納期 = FukaNokiResearcher.createInstance().get過年度納期(Integer.valueOf(期_4月.toString()));
-//            RDate 納期限 = 賦課納期.get納期限();
-//            if (納期限 != null) {
-//                過年度2パネル.getKiwarigakuPanel3().getNokigen().setText(納期限.wareki().toDateString());
-//            }
+        List<Kibetsu> 介護期別情報リスト = 過年度2.getKibetsuList();
+
+        if (介護期別情報リスト == null || 介護期別情報リスト.isEmpty()) {
+            return;
+        }
+        Kibetsu 介護期別情報 = 介護期別情報リスト.get(ゼロ_定値);
+        int 期 = 介護期別情報.get期();
+        int 月_期 = 過年度期月リスト.get期の最初月(期).get月AsInt();
+        RString 月 = new RString(月_期).concat(月R);
+        過年度2パネル.getLblKiwarigaku34Gatsu().setText(月);
+        過年度2パネル.getKiwarigakuPanel3().getKi2().setText(new RString(期).concat(期R));
+        Decimal 普徴期別金額 = get減免前普徴期別金額(new RString(期), 過年度2);
+        if (普徴期別金額 != null) {
+            過年度2パネル.getKiwarigakuPanel3().getMae2().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額, ゼロ_定値));
+        }
+        Noki 賦課納期 = FukaNokiResearcher.createInstance().get過年度納期(期);
+        RDate 納期限 = 賦課納期.get納期限();
+        if (納期限 != null) {
+            過年度2パネル.getKiwarigakuPanel3().getNokigen().setText(納期限.wareki().toDateString());
         }
     }
 
@@ -876,7 +912,6 @@ public class GemmenJuminKihonHandler {
      * @param 年度分賦課減免リスト NendobunFukaGemmenList
      */
     public void loadパネル状態1(RString 状況, NendobunFukaGemmenList 年度分賦課減免リスト) {
-        div.getGemmenFukaRirekiAll().setDisplayNone(true);
         div.getGemmenMain().getTorikeshiInfo().setDisplayNone(true);
         ShinseiinfoDiv 申請情報パネル = div.getGemmenMain().getShinseiinfo();
         申請情報パネル.setDisplayNone(false);
@@ -890,6 +925,7 @@ public class GemmenJuminKihonHandler {
         div.getGemmenMain().getShinseiinfo().setDisplayNone(false);
         div.getGemmenMain().getKeteiinfo().setDisplayNone(false);
         div.getGemmenMain().getKiwarigaku().setDisplayNone(false);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(保存ボタン, false);
         if (状況_新規.equals(状況) || 状況_申請中.equals(状況)) {
             申請情報パネル.getTxtShinseiYMD().setReadOnly(false);
             申請情報パネル.getTxtShinseiGemmengaku().setReadOnly(false);
@@ -975,12 +1011,18 @@ public class GemmenJuminKihonHandler {
             return;
         }
         FukaJoho 過年度1 = 計算結果.get年度分賦課リスト_更正後().get過年度1();
-        KiwarigakuKanendo1Div 過年度1パネル = div.getGemmenMain().getKiwarigaku().getKiwarigakuKanendo1();
-        // TODO 期は一もです。
-        RString 期_4月 = 過年度期月リスト.get月の期(Tsuki._4月).get期();
-        Decimal 普徴期別金額_4月 = get減免前普徴期別金額(期_4月, 過年度1);
-        if (普徴期別金額_4月 != null) {
-            過年度1パネル.getKiwarigakuPanel2().getGo1().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_4月, ゼロ_定値));
+        if (過年度1 == null) {
+            return;
+        }
+        List<jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu> 介護期別情報リスト = 過年度1.getKibetsuList();
+        if (介護期別情報リスト == null || 介護期別情報リスト.isEmpty()) {
+            return;
+        }
+        jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu 介護期別情報 = 介護期別情報リスト.get(ゼロ_定値);
+        Decimal 普徴期別金額 = get減免前普徴期別金額(new RString(介護期別情報.get期()), 過年度1);
+        if (普徴期別金額 != null) {
+            KiwarigakuKanendo1Div 過年度1パネル = div.getGemmenMain().getKiwarigaku().getKiwarigakuKanendo1();
+            過年度1パネル.getKiwarigakuPanel2().getGo1().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額, ゼロ_定値));
         }
     }
 
@@ -989,11 +1031,18 @@ public class GemmenJuminKihonHandler {
             return;
         }
         FukaJoho 過年度2 = 計算結果.get年度分賦課リスト_更正後().get過年度2();
-        KiwarigakuKanendo2Div 過年度2パネル = div.getGemmenMain().getKiwarigaku().getKiwarigakuKanendo2();
-        RString 期_4月 = 過年度期月リスト.get月の期(Tsuki._4月).get期();
-        Decimal 普徴期別金額_4月 = get減免前普徴期別金額(期_4月, 過年度2);
-        if (普徴期別金額_4月 != null) {
-            過年度2パネル.getKiwarigakuPanel3().getGo2().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_4月, ゼロ_定値));
+        if (過年度2 == null) {
+            return;
+        }
+        List<jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu> 介護期別情報リスト = 過年度2.getKibetsuList();
+        if (介護期別情報リスト == null || 介護期別情報リスト.isEmpty()) {
+            return;
+        }
+        jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu 介護期別情報 = 介護期別情報リスト.get(ゼロ_定値);
+        Decimal 普徴期別金額 = get減免前普徴期別金額(new RString(介護期別情報.get期()), 過年度2);
+        if (普徴期別金額 != null) {
+            KiwarigakuKanendo2Div 過年度2パネル = div.getGemmenMain().getKiwarigaku().getKiwarigakuKanendo2();
+            過年度2パネル.getKiwarigakuPanel3().getGo2().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額, ゼロ_定値));
         }
     }
 
@@ -1111,7 +1160,6 @@ public class GemmenJuminKihonHandler {
      * 全賦課履歴情報.表示件数 ≠ 1件の場合、パネルの状態の設定する。
      */
     public void loadパネル状態2() {
-        div.getGemmenFukaRirekiAll().setDisplayNone(false);
         div.getGemmenMain().getShinseiJokyo().setDisplayNone(true);
         div.getGemmenMain().getTorikeshiInfo().setDisplayNone(true);
         div.getGemmenMain().getShinseiinfo().setDisplayNone(true);
@@ -1120,6 +1168,15 @@ public class GemmenJuminKihonHandler {
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(訂正をやめるボタン, true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(取消をやめるボタン, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン, true);
+    }
+
+    /**
+     * 全賦課履歴情報のVisibleを制御する。
+     *
+     * @param flag boolean
+     */
+    public void set全賦課履歴情報Visible(boolean flag) {
+        div.getGemmenFukaRirekiAll().setDisplayNone(!flag);
     }
 
     private RString get状況(RString 減免作成区分) {
@@ -1146,7 +1203,6 @@ public class GemmenJuminKihonHandler {
         if (介護賦課減免.get減免決定日() != null) {
             決定情報パネル.getTxtKetteiYMD().setValue(介護賦課減免.get減免決定日());
         }
-        決定情報パネル.getTxtZenkaiGemmengaku().setValue(介護賦課減免.get決定減免額());
         RString 減免状態区分 = 介護賦課減免.get減免状態区分();
         if (定値_二.equals(減免状態区分)) {
             決定情報パネル.getRadKetteiKubun().setSelectedValue(不承認);
@@ -1303,9 +1359,9 @@ public class GemmenJuminKihonHandler {
      */
     public boolean onClick_btnUpt(NendobunFukaGemmenList 年度分賦課減免リスト) {
         boolean show発行ボタン = true;
-        FlexibleYear 調定年度 = 年度分賦課減免リスト.get最新減免の情報().toEntity().getChoteiNendo();
-        FlexibleYear 賦課年度 = 年度分賦課減免リスト.get最新減免の情報().toEntity().getFukaNendo();
-        TsuchishoNo 通知書番号 = 年度分賦課減免リスト.get最新減免の情報().toEntity().getTsuchishoNo();
+        FlexibleYear 調定年度 = 年度分賦課減免リスト.get最新減免の情報().get調定年度();
+        FlexibleYear 賦課年度 = 年度分賦課減免リスト.get最新減免の情報().get賦課年度();
+        TsuchishoNo 通知書番号 = 年度分賦課減免リスト.get最新減免の情報().get通知書番号();
         GemmenJoho 減免の情報 = KaigoHokenryoGemmen.createInstance().getGemmenJoho(調定年度, 賦課年度, 通知書番号);
         FukaJohoRelateMapperParameter 賦課の情報検索条件
                 = FukaJohoRelateMapperParameter.createSelectListParam(調定年度, 賦課年度, 通知書番号);
@@ -1378,9 +1434,9 @@ public class GemmenJuminKihonHandler {
      * @return SourceDataCollection
      */
     public SourceDataCollection onClick_発行(NendobunFukaGemmenList 年度分賦課減免リスト) {
-        FlexibleYear 調定年度 = 年度分賦課減免リスト.get最新減免の情報().toEntity().getChoteiNendo();
-        FlexibleYear 賦課年度 = 年度分賦課減免リスト.get最新減免の情報().toEntity().getFukaNendo();
-        TsuchishoNo 通知書番号 = 年度分賦課減免リスト.get最新減免の情報().toEntity().getTsuchishoNo();
+        FlexibleYear 調定年度 = 年度分賦課減免リスト.get最新減免の情報().get調定年度();
+        FlexibleYear 賦課年度 = 年度分賦課減免リスト.get最新減免の情報().get賦課年度();
+        TsuchishoNo 通知書番号 = 年度分賦課減免リスト.get最新減免の情報().get通知書番号();
         FukaJohoSaishn 賦課情報 = KaigoHokenryoGemmen.createInstance().getFukaJoho(調定年度, 賦課年度, 通知書番号);
         TuuchisyoGaihatuParam 通知書発行パラメータ = new TuuchisyoGaihatuParam();
         if (賦課情報 == null) {

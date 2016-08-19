@@ -10,15 +10,19 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001Hihoke
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT1121KyufuKanrihyoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoin.HihokenshaKyufukanrihyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kyufukanrihyo.KyufuKanrihyoTorikomiKekkaIchiranSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -89,16 +93,25 @@ public class KyufuKanrihyoTorikomiKekkaIchiranBodyEditor implements IKyufuKanrih
         DbWT0001HihokenshaTempEntity 被保険者 = 帳票出力対象データ.get被保険者();
         source.listCenter_1 = new RString(連番);
         source.listCenter_2 = doパターン54(給付管理票.getサービス提供年月());
-        source.listCenter_3 = 給付管理票.get給付管理票情報作成区分コード();
+        RString 作成区分名 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付,
+                DBCCodeShubetsu.給付管理票情報作成区分.getコード(),
+                new Code(給付管理票.get給付管理票情報作成区分コード()));
+        source.listCenter_3 = RString.isNullOrEmpty(作成区分名) ? RString.EMPTY : 作成区分名;
         source.listCenter_4 = getColumnValue(被保険者.get登録被保険者番号());
-        source.listCenter_5 = 給付管理票.get給付管理票種別区分コード();
+        RString 作成種別区分名 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付,
+                DBCCodeShubetsu.給付管理票種別区分.getコード(),
+                new Code(給付管理票.get給付管理票種別区分コード()));
+        source.listCenter_5 = RString.isNullOrEmpty(作成種別区分名) ? RString.EMPTY : 作成種別区分名;
         IYokaigoJotaiKubun 要介護状態区分 = YokaigoJotaiKubunSupport.toValue(給付管理票.getサービス提供年月(),
                 給付管理票.get要介護状態区分コード());
         if (null != 要介護状態区分) {
             source.listCenter_6 = 要介護状態区分.getName();
         }
         source.listCenter_7 = doパターン54(給付管理票.get限度額適用開始年月());
-        if (null != 給付管理票.get限度額適用開始年月() || null != 給付管理票.get限度額適用終了年月()) {
+        if ((null != 給付管理票.get限度額適用開始年月()
+                && !FlexibleYearMonth.EMPTY.equals(給付管理票.get限度額適用開始年月()))
+                || (null != 給付管理票.get限度額適用終了年月()
+                && !FlexibleYearMonth.EMPTY.equals(給付管理票.get限度額適用終了年月()))) {
             source.listCenter_8 = から;
         }
         source.listCenter_9 = doパターン54(給付管理票.get限度額適用終了年月());
@@ -122,12 +135,12 @@ public class KyufuKanrihyoTorikomiKekkaIchiranBodyEditor implements IKyufuKanrih
         }
         if (null != 被保険者.get宛名名称()) {
             source.listUpper_3 = 被保険者.get宛名名称().substringReturnAsPossible(0, 字数_10);
+            source.listLower_2 = 被保険者.get宛名名称().substringReturnAsPossible(字数_10, 字数_20);
         }
         if (!居宅サービス計画作成区分コード_自己作成.equals(計画作成区分コード)
                 && RString.isNullOrEmpty(給付管理票.get事業者名称())) {
             source.listUpper_4 = 備考_支援事業者未登録;
         }
-        source.listLower_2 = 被保険者.get宛名名称().substringReturnAsPossible(字数_10, 字数_20);
         if (導入形態コード.is広域()) {
             source.listLower_3 = getColumnValue(被保険者.get証記載保険者番号());
         }

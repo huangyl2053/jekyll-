@@ -158,9 +158,6 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
         if (メニューID_DBCMN43001.equals(menuID)) {
             List<KogakuShikyuShinsei> serviceTeikyoYMList
                     = KogakuShikyuShinseishoIkkatsu.createInstance().getServiceTeikyoByDbT3056(被保険者番号, 証記載保険者番号);
-            if (serviceTeikyoYMList.isEmpty()) {
-                throw new ApplicationException(DbcErrorMessages.被保険者の高額介護サービス支給申請情報が無い.getMessage());
-            }
             for (KogakuShikyuShinsei kogakuShikyuShinsei : serviceTeikyoYMList) {
                 FlexibleYearMonth サービス提供年月 = kogakuShikyuShinsei.getサービス提供年月();
                 datasource.add(new KeyValueDataSource(サービス提供年月.toDateString(), サービス提供年月.wareki().toDateString()));
@@ -248,7 +245,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
         parameter.setMenuId(menuID);
 
         RString 文書番号 = div.getShutsuryokuTaisho().getCcdBunshoNo().get文書番号();
-        if (文書番号.equals(RString.EMPTY)) {
+        if (RString.EMPTY.equals(文書番号)) {
             parameter.setBunshoMojiretsu(RString.EMPTY);
         } else {
             parameter.setBunshoMojiretsu(文書番号);

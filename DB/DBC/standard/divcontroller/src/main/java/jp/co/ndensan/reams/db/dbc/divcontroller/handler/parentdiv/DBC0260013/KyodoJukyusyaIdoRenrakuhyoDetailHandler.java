@@ -39,7 +39,7 @@ public class KyodoJukyusyaIdoRenrakuhyoDetailHandler {
     /**
      * コンストラクタです。
      *
-     * @param div ServiceTeikyohyoBeppyoPrintMainDiv
+     * @param div 画面DIV
      *
      * @return KyodoJukyusyaIdoRenrakuhyoDetailHandler
      */

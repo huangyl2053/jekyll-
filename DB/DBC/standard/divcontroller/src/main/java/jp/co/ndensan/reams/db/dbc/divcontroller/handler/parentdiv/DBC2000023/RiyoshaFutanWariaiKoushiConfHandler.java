@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.futanwariaisho.FutanWariaisho;
 import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariai;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishu;
 import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
@@ -24,7 +25,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -54,14 +55,12 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
     private static final boolean TRUE = true;
     private static final boolean FALSE = false;
     private static final RString 発行する = new RString("btnPrint");
-    private static final RString 個人番号_利用有無名称 = new RString("個人番号 利用有無");
-    private static final RString 法人番号_利用有無名称 = new RString("法人番号 利用有無");
-    private static final RString 業務固有の識別情報名称 = new RString("業務固有の識別情報");
-    private static final RString 無し = new RString("無し");
+    private static final RString 定数_被保険者番号 = new RString("被保険者番号");
     private static final RString コード種別 = new RString("0016");
     private static final RString 単票発行で発行済み = new RString("2");
     private static final RString パラメータ = new RString("2");
     private static final RString 交付証種類 = new RString("003");
+    private static final RString INFOCODE = new RString("0003");
 
     /**
      * コンストラクタです。
@@ -94,7 +93,7 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
             throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
         }
 
-        if (利用者負担割合.toEntity().getLogicalDeletedFlag()) {
+        if (利用者負担割合.get論理削除フラグ()) {
             div.getPanelHakko().getTxtHakkobi().clearValue();
             div.getPanelHakko().getTxtHakkobi().setDisabled(true);
             div.getPanelHakko().getTxtKofubi().clearValue();
@@ -108,7 +107,7 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
             div.getPanelShutsuryokuNaiyo().getLbl1wari().setText(RString.EMPTY);
             div.getPanelShutsuryokuNaiyo().getLbl1wariKaishiYmd().setText(RString.EMPTY);
             div.getPanelShutsuryokuNaiyo().getLbl1wariShuryoYmd().setText(RString.EMPTY);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(発行する, false);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(発行する, true);
         } else {
 
             RiyoshaFutanWariaiHantei source = new RiyoshaFutanWariaiHantei();
@@ -119,7 +118,7 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
             List<KeyValueDataSource> dataSourceList = get交付事由();
             div.getPanelHakko().getDdlKofuJiyu().setDataSource(dataSourceList);
 
-            if (利用者負担割合明細後list.size() > INT_1) {
+            if (INT_1 < 利用者負担割合明細後list.size()) {
 
                 RiyoshaFutanWariaiMeisai 利用者負担割合明細one = 利用者負担割合明細後list.get(利用者負担割合明細後list.size() - 2);
                 div.getPanelShutsuryokuNaiyo().getLbl2wari().setText(FutanwariaiKubun.toValue(利用者負担割合明細one.get負担割合区分()).get名称());
@@ -145,10 +144,9 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
     }
 
     private PersonalData toPersonalData(ShikibetsuCode 識別コード, RString 被保険者番号) {
-        ExpandedInformation expandedInfo1 = new ExpandedInformation(new Code("0001"), 個人番号_利用有無名称, 無し);
-        ExpandedInformation expandedInfo2 = new ExpandedInformation(new Code("0002"), 法人番号_利用有無名称, 無し);
-        ExpandedInformation expandedInfo3 = new ExpandedInformation(new Code("0003"), 業務固有の識別情報名称, 被保険者番号);
-        return PersonalData.of(識別コード, expandedInfo1, expandedInfo2, expandedInfo3);
+
+        ExpandedInformation expandedInfo3 = new ExpandedInformation(new Code(INFOCODE), 定数_被保険者番号, 被保険者番号);
+        return PersonalData.of(識別コード, expandedInfo3);
     }
 
     /**
@@ -160,8 +158,9 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         KeyValueDataSource dataSourceBlank = new KeyValueDataSource();
         dataSourceList.add(dataSourceBlank);
+        // TODO QA1279
         List<UzT0007CodeEntity> costlist = CodeMaster.getCode(
-                SubGyomuCode.DBC介護給付, new CodeShubetsu(コード種別), FlexibleDate.getNowDate());
+                SubGyomuCode.DBC介護給付, DBCCodeShubetsu.過誤申立事由_上２桁_様式番号.getコード(), FlexibleDate.getNowDate());
         for (UzT0007CodeEntity list : costlist) {
             KeyValueDataSource dataSource = new KeyValueDataSource(list.getコード().value(), list.getコード名称());
             dataSourceList.add(dataSource);
@@ -179,11 +178,11 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
 
         RiyoshaFutanWariai riyoshaFutanWariai = 引継ぎデータ.get利用者負担割合();
 
-        riyoshaFutanWariai.createBuilderForEdit().set発行区分(単票発行で発行済み).build();
-        riyoshaFutanWariai.createBuilderForEdit().
-                set発行日(new FlexibleDate(div.getPanelHakko().getTxtHakkobi().getValue().toDateString())).build();
-        riyoshaFutanWariai.createBuilderForEdit().
-                set交付日(new FlexibleDate(div.getPanelHakko().getTxtKofubi().getValue().toDateString())).build();
+        riyoshaFutanWariai.createBuilderForEdit().set発行区分(単票発行で発行済み)
+                .set発行日(new FlexibleDate(div.getPanelHakko().getTxtHakkobi().getValue().toDateString()))
+                .set交付日(new FlexibleDate(div.getPanelHakko().getTxtKofubi().getValue().toDateString()))
+                .build();
+
         riyoshaFutanWariai.toEntity().setState(EntityDataState.Modified);
         RiyoshaFutanWariaiSokujiKouseiManager manage = RiyoshaFutanWariaiSokujiKouseiManager.createInstance();
         manage.save(riyoshaFutanWariai, null, null);
@@ -205,28 +204,23 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
         int 履歴番号 = manage.get証交付回収(資格対象者.get被保険者番号(), 交付証種類).get履歴番号();
         ShoKofuKaishu shoKofuKaishu = new ShoKofuKaishu(資格対象者.get被保険者番号(), 交付証種類, 履歴番号);
 
-        shoKofuKaishu.createBuilderForEdit().set被保険者番号(資格対象者.get被保険者番号()).build();
-        shoKofuKaishu.createBuilderForEdit().set交付証種類(交付証種類).build();
-        shoKofuKaishu.createBuilderForEdit().set交付証種類(コード種別).build();
+        shoKofuKaishu.createBuilderForEdit().set被保険者番号(資格対象者.get被保険者番号()).set交付証種類(交付証種類)
+                .set交付証種類(コード種別).set履歴番号(shoKofuKaishu.get履歴番号() + 1)
+                .set市町村コード(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード())
+                .set識別コード(資格対象者.get識別コード())
+                .set交付年月日(new FlexibleDate(div.getPanelHakko().getTxtKofubi().getValue().toDateString()))
+                .set有効期限(new FlexibleDate(div.getPanelShutsuryokuNaiyo().getLbl1wariShuryoYmd().getText()))
+                .set交付事由(div.getPanelHakko().getDdlKofuJiyu().getSelectedValue())
+                .set交付理由(RString.EMPTY)
+                .set回収年月日(new FlexibleDate(RString.EMPTY))
+                .set回収事由(RString.EMPTY)
+                .set単票発行有無フラグ(TRUE)
+                .set発行処理日時(new YMDHMS(RDate.getNowDate().toDateString()))
+                .set新様式印書済区分コード(RString.EMPTY)
+                .set証様式区分コード(RString.EMPTY)
+                .set論理削除フラグ(FALSE)
+                .build();
 
-        shoKofuKaishu.createBuilderForEdit().set履歴番号(shoKofuKaishu.get履歴番号() + 1).build();
-        shoKofuKaishu.createBuilderForEdit()
-                .set市町村コード(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード()).build();
-        shoKofuKaishu.createBuilderForEdit().set識別コード(資格対象者.get識別コード()).build();
-        shoKofuKaishu.createBuilderForEdit().
-                set交付年月日(new FlexibleDate(div.getPanelHakko().getTxtKofubi().getValue().toDateString())).build();
-        shoKofuKaishu.createBuilderForEdit().
-                set有効期限(new FlexibleDate(div.getPanelShutsuryokuNaiyo().getLbl1wariShuryoYmd().getText())).build();
-        shoKofuKaishu.createBuilderForEdit().set交付事由(div.getPanelHakko().getDdlKofuJiyu().getSelectedValue()).build();
-        shoKofuKaishu.createBuilderForEdit().set交付理由(RString.EMPTY).build();
-        shoKofuKaishu.createBuilderForEdit().set回収年月日(new FlexibleDate(RString.EMPTY)).build();
-        shoKofuKaishu.createBuilderForEdit().set回収事由(RString.EMPTY).build();
-        shoKofuKaishu.createBuilderForEdit().set単票発行有無フラグ(TRUE).build();
-        RDate システム日付 = RDate.getNowDate();
-        shoKofuKaishu.createBuilderForEdit().set発行処理日時(new YMDHMS(システム日付.toDateString())).build();
-        shoKofuKaishu.createBuilderForEdit().set新様式印書済区分コード(RString.EMPTY).build();
-        shoKofuKaishu.createBuilderForEdit().set証様式区分コード(RString.EMPTY).build();
-        shoKofuKaishu.createBuilderForEdit().set論理削除フラグ(FALSE).build();
         shoKofuKaishu.toEntity().setState(EntityDataState.Added);
 
         manage.save証交付回収(shoKofuKaishu);
@@ -239,8 +233,9 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
      * @param div RiyoshaFutanWariaiKoushiConfDiv
      * @param 引継ぎデータ RiyoshaFutanWariaiKoushiConfData
      * @param 資格対象者 TaishoshaKey
+     * @return SourceDataCollection
      */
-    public void getソースデータ取得(RiyoshaFutanWariaiKoushiConfDiv div,
+    public SourceDataCollection getソースデータ取得(RiyoshaFutanWariaiKoushiConfDiv div,
             FutanWariaiSokujiKouseiServiceData 引継ぎデータ,
             TaishoshaKey 資格対象者) {
         FutanWariaisho futanWariaisho;
@@ -257,6 +252,6 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
         parameter.set適用期間開始日下段(new FlexibleDate(div.getPanelShutsuryokuNaiyo().getLbl1wariKaishiYmd().getText()));
         parameter.set適用期間終了日下段(new FlexibleDate(div.getPanelShutsuryokuNaiyo().getLbl1wariShuryoYmd().getText()));
 
-        futanWariaisho.getSourceData(識別コード, 被保険者番号, parameter, パラメータ);
+        return futanWariaisho.getSourceDataSinger(識別コード, 被保険者番号, parameter, パラメータ);
     }
 }

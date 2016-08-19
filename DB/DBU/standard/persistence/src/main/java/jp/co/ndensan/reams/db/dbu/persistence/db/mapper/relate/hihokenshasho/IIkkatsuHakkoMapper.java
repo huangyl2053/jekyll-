@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hihokenshasho;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.SogoJigyoTaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
 
@@ -24,12 +25,41 @@ public interface IIkkatsuHakkoMapper {
     List<IkkatsuHakkoRelateEntity> getHihokenshaDaichoIdo(IkkatsuHakkoMybatisParameter 検索条件);
 
     /**
-     * 受給者台帳異動情報を取得します。
+     * 受給者台帳一時テーブルの作成。
      *
      * @param 検索条件 検索条件
-     * @return {@link IkkatsuHakkoRelateEntity}
+     * @return 作成件数
      */
-    List<IkkatsuHakkoRelateEntity> getJukyushaDaichoIdo(IkkatsuHakkoMybatisParameter 検索条件);
+    int create受給者台帳Temp(IkkatsuHakkoMybatisParameter 検索条件);
+
+    /**
+     * 総合事業対象者一時テーブルの作成。
+     *
+     * @param 検索条件 検索条件
+     * @return 作成件数
+     */
+    int create総合事業対象者Temp(IkkatsuHakkoMybatisParameter 検索条件);
+
+    /**
+     * 受給者台帳Tempのみの取得。
+     *
+     * @return List<SogoJigyoTaishoshaRelateEntity>
+     */
+    List<SogoJigyoTaishoshaRelateEntity> get受給者台帳Tempのみ();
+
+    /**
+     * 総合事業対象者Tempのみの取得。
+     *
+     * @return List<SogoJigyoTaishoshaRelateEntity>
+     */
+    List<SogoJigyoTaishoshaRelateEntity> get総合事業対象者Tempのみ();
+
+    /**
+     * 受給者台帳と総合事業対象者の両方Tempのみの取得。
+     *
+     * @return List<SogoJigyoTaishoshaRelateEntity>
+     */
+    List<SogoJigyoTaishoshaRelateEntity> get受給者台帳と総合事業対象者の両方();
 
     /**
      * 年齢到達予定者情報を取得します。
@@ -302,6 +332,21 @@ public interface IIkkatsuHakkoMapper {
      * @return 更新件数
      */
     int updateTmp_SofusakiJoho(IkkatsuHakkoRelateEntity entity);
+
+    /**
+     * 総合事業対象者の情報を取得します。
+     *
+     * @return List<SogoJigyoTaishoshaRelateEntity>
+     */
+    List<SogoJigyoTaishoshaRelateEntity> get総合事業対象者();
+
+    /**
+     * 総合事業対象者情報を一時テーブルに更新します。
+     *
+     * @param entity entity
+     * @return 更新件数
+     */
+    int updateTmp総合事業対象者情報(SogoJigyoTaishoshaRelateEntity entity);
 
     /**
      * 被保険者証用データを取得します。

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.report.source.jukyushakoshinkekkaichiran;
 
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -217,6 +218,16 @@ public class JukyushaKoshinKekkaIchiranSource implements IReportSource {
     public RString listList8_12;
     @ReportItem(name = "listList8_13", length = 20, order = 101)
     public RString listList8_13;
+    @ReportItem(name = "yubinNo", length = 20, order = 102)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", length = 20, order = 103)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", length = 20, order = 104)
+    public RString gyoseikuCode;
+    @ReportItem(name = "shimei50onKana", length = 20, order = 105)
+    public RString shimei50onKana;
+    @ReportItem(name = "shichosonCode", length = 20, order = 106)
+    public LasdecCode shichosonCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -224,7 +235,7 @@ public class JukyushaKoshinKekkaIchiranSource implements IReportSource {
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
     /**
-     * KogakuKyufuTaishoshaIchiranSourceのENUM
+     * JukyushaKoshinKekkaIchiranSource
      */
     public enum ReportSourceFields {
         printTimeStamp,

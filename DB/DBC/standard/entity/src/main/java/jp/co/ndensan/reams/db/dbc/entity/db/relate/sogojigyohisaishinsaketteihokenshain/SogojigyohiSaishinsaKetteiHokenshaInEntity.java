@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -58,7 +57,7 @@ public class SogojigyohiSaishinsaKetteiHokenshaInEntity {
     private Decimal 履歴番号;
     private YubinNo 郵便番号;
     private ChoikiCode 町域コード;
-    private GyoseikuCode 行政区コード;
+    private RString 行政区コード;
     private RString 氏名５０音カナ;
     private HokenshaNo 保険者番号;
     private RString 保険者名;

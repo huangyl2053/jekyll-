@@ -7,11 +7,15 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRi
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.HashSet;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv.IServiceCodeInputCommonChildDiv;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceTypeInputCommonChildDiv.ServiceTypeInputCommonChildDiv.IServiceTypeInputCommonChildDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
@@ -19,12 +23,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * ServiceRiyohyoInfo のクラスファイル
@@ -33,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  */
 public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -538,16 +539,6 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     }
 
     @JsonIgnore
-    public Button getBtnCalcGokei() {
-        return this.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().getBtnCalcGokei();
-    }
-
-    @JsonIgnore
-    public void setBtnCalcGokei(Button btnCalcGokei) {
-        this.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().setBtnCalcGokei(btnCalcGokei);
-    }
-
-    @JsonIgnore
     public Button getBtnCancelGokeiInput() {
         return this.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().getBtnCancelGokeiInput();
     }
@@ -555,6 +546,16 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     @JsonIgnore
     public void setBtnCancelGokeiInput(Button btnCancelGokeiInput) {
         this.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().setBtnCancelGokeiInput(btnCancelGokeiInput);
+    }
+
+    @JsonIgnore
+    public Button getBtnCalcGokei() {
+        return this.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().getBtnCalcGokei();
+    }
+
+    @JsonIgnore
+    public void setBtnCalcGokei(Button btnCalcGokei) {
+        this.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().setBtnCalcGokei(btnCalcGokei);
     }
 
     @JsonIgnore

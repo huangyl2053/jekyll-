@@ -48,6 +48,7 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
     }
 
     private NinteishoJohoReportSource edit項目(NinteishoJohoReportSource source) {
+        source.hihokenshaNo = target.get被保険者番号().getColumnValue();
         edit文書番号(source);
         edit発行日(source);
         edit認証者(source);
@@ -100,7 +101,7 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
     }
 
     private void edit生年月日(NinteishoJohoReportSource source) {
-        source.birthYMD = new RString(target.get対象者生年月日().toString());
+        source.birthYMD = target.get対象者生年月日();
     }
 
     private void edit対象者性別(NinteishoJohoReportSource source) {
@@ -108,6 +109,7 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
     }
 
     private void edit障害理由(NinteishoJohoReportSource source) {
+        // TODO QA 95838
         source.shogaiRiyu = target.get障害理由区分();
         source.shogaiRiyu = target.get障害理由内容();
     }
@@ -119,7 +121,7 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
     }
 
     private void edit申告年(NinteishoJohoReportSource source) {
-        source.shiyoMokuteki = target.get申告年() == null ? RString.EMPTY : target.get申告年().wareki().
+        source.shiyoMokuteki = target.get対象年度() == null ? RString.EMPTY : target.get対象年度().wareki().
                 eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
     }
 

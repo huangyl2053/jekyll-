@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.KubunGendoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.KyufuJikoSakuseiParameter;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.TankiNyushoParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KubunGendoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KyotakuServiceRirekiIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KyufuJikoSakuseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.RiyoNentstsuIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.ServiceTypeTotalEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.TankiNyushoEntity;
 
 /**
  * サービス利用票情報 Mapperインタファースクラスです。
@@ -47,10 +47,18 @@ public interface IJigoSakuseiMeisaiTourokuMapper {
     KubunGendoEntity get区分限度額統計処理(KubunGendoParameter param);
 
     /**
-     * 短期入所情報を取得します。
+     * 居宅サービス履歴一覧を取得します。
      *
-     * @param param TankiNyushoParameter
-     * @return TankiNyushoEntity
+     * @param param Map<String, Object>
+     * @return List<KyotakuServiceRirekiIchiranEntity>
      */
-    TankiNyushoEntity get短期入所情報(TankiNyushoParameter param);
+    List<KyotakuServiceRirekiIchiranEntity> get居宅サービス履歴一覧(Map<String, Object> param);
+
+    /**
+     * 対象情報一覧を取得します。
+     *
+     * @param param Map<String, Object>
+     * @return List<RiyoNentstsuIchiranEntity>
+     */
+    List<RiyoNentstsuIchiranEntity> get対象情報一覧(Map<String, Object> param);
 }

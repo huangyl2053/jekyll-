@@ -152,8 +152,16 @@ public class FutanWariaishoIkkatsu {
         source.set生年月日(編集後個人.get生年月日For帳票());
         source.set性別(編集後個人.get性別());
         source.set負担割合１(entity.get負担割合期間().getFutanWariaiKubun1());
-        source.set適用開始年月日１(開始年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoKaishiYMD1())));
-        source.set適用終了年月日１(終了年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoShuryoYMD1())));
+        if (entity.get負担割合期間().getYukoKaishiYMD1() != null) {
+            source.set適用開始年月日１(開始年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoKaishiYMD1())));
+        } else {
+            source.set適用開始年月日１(RString.EMPTY);
+        }
+        if (entity.get負担割合期間().getYukoShuryoYMD1() != null) {
+            source.set適用終了年月日１(終了年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoShuryoYMD1())));
+        } else {
+            source.set適用終了年月日１(RString.EMPTY);
+        }
         source.set負担割合２(entity.get負担割合期間().getFutanWariaiKubun2());
         if (entity.get負担割合期間().getYukoKaishiYMD2() != null) {
             source.set適用開始年月日２(開始年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoKaishiYMD2())));
@@ -290,20 +298,20 @@ public class FutanWariaishoIkkatsu {
         source.set被保険者番号(利用者負担割合証.get被保台帳().getHihokenshaNo().getColumnValue());
         source.set送付先住所(編集後宛先.get編集後住所());
         source.set被保険者氏名(編集後個人.get名称().getName().getColumnValue());
-        source.set判定日(dateFormat基本形１(利用者負担割合証.get利用者負担割合().getHanteiYMD()));
+        source.set判定日(dateFormatパターン4(利用者負担割合証.get利用者負担割合().getHanteiYMD()));
         if (利用者負担割合証.get負担割合期間().getYukoKaishiYMD2() != null) {
-            source.set開始年月日(dateFormat基本形１(利用者負担割合証.get負担割合期間().getYukoKaishiYMD2()));
+            source.set開始年月日(dateFormatパターン4(利用者負担割合証.get負担割合期間().getYukoKaishiYMD2()));
         } else {
-            source.set開始年月日(dateFormat基本形１(利用者負担割合証.get負担割合期間().getYukoKaishiYMD1()));
+            source.set開始年月日(dateFormatパターン4(利用者負担割合証.get負担割合期間().getYukoKaishiYMD1()));
         }
         if (利用者負担割合証.get負担割合期間().getYukoShuryoYMD2() != null) {
-            source.set終了年月日(dateFormat基本形１(利用者負担割合証.get負担割合期間().getYukoShuryoYMD2()));
+            source.set終了年月日(dateFormatパターン4(利用者負担割合証.get負担割合期間().getYukoShuryoYMD2()));
         } else {
-            source.set終了年月日(dateFormat基本形１(利用者負担割合証.get負担割合期間().getYukoShuryoYMD1()));
+            source.set終了年月日(dateFormatパターン4(利用者負担割合証.get負担割合期間().getYukoShuryoYMD1()));
         }
         if (!RString.isNullOrEmpty(利用者負担割合証.get負担割合期間().getFutanWariaiKubun2())) {
             source.set負担割合(FutanwariaiKubun.toValue(利用者負担割合証.get負担割合期間().getFutanWariaiKubun2()).get名称());
-        } else {
+        } else if (!RString.isNullOrEmpty(利用者負担割合証.get負担割合期間().getFutanWariaiKubun1())) {
             source.set負担割合(FutanwariaiKubun.toValue(利用者負担割合証.get負担割合期間().getFutanWariaiKubun1()).get名称());
         }
         if (定数_ONE.equals(利用者負担割合証.get利用者負担割合().getHanteiKubun())) {
@@ -360,10 +368,12 @@ public class FutanWariaishoIkkatsu {
         }
         if (!RString.isNullOrEmpty(利用者負担割合証Temp.get負担割合期間().getFutanWariaiKubun2())) {
             csvEntity.set負担割合(FutanwariaiKubun.toValue(利用者負担割合証Temp.get負担割合期間().getFutanWariaiKubun2()).get名称());
-        } else {
+        } else if (!RString.isNullOrEmpty(利用者負担割合証Temp.get負担割合期間().getFutanWariaiKubun1())) {
             csvEntity.set負担割合(FutanwariaiKubun.toValue(利用者負担割合証Temp.get負担割合期間().getFutanWariaiKubun1()).get名称());
         }
-        csvEntity.set判定区分(FutanWariaiHanteiKubun.toValue(利用者負担割合証Temp.get利用者負担割合().getHanteiKubun()).get名称());
+        if (!RString.isNullOrEmpty(利用者負担割合証Temp.get利用者負担割合().getHanteiKubun())) {
+            csvEntity.set判定区分(FutanWariaiHanteiKubun.toValue(利用者負担割合証Temp.get利用者負担割合().getHanteiKubun()).get名称());
+        }
         if (定数_ZERO.equals(利用者負担割合証Temp.get利用者負担割合().getHakoKubun())) {
             csvEntity.set発行済(RString.EMPTY);
         } else {
@@ -373,11 +383,15 @@ public class FutanWariaishoIkkatsu {
             csvEntity.set事業対象者受給者区分(定数_事業対象者);
         } else if (定数_TWO.equals(利用者負担割合証Temp.get事業対象者受給者区分())) {
             csvEntity.set事業対象者受給者区分(定数_受給者);
+        } else {
+            csvEntity.set事業対象者受給者区分(RString.EMPTY);
         }
         if (!RString.isNullOrEmpty(利用者負担割合証Temp.get負担割合期間().getShikakuKubun2())) {
             csvEntity.set資格区分(利用者負担割合証Temp.get負担割合期間().getShikakuKubun2().concat(定数_号));
-        } else {
+        } else if (!RString.isNullOrEmpty(利用者負担割合証Temp.get負担割合期間().getShikakuKubun1())) {
             csvEntity.set資格区分(利用者負担割合証Temp.get負担割合期間().getShikakuKubun1().concat(定数_号));
+        } else {
+            csvEntity.set資格区分(RString.EMPTY);
         }
         csvEntity.set証記載保険者番号(getHokenshaCode(new HihokenshaDaicho(利用者負担割合証Temp.get被保台帳())).getColumnValue());
         return csvEntity;
@@ -397,6 +411,14 @@ public class FutanWariaishoIkkatsu {
         }
         return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+    }
+
+    private RString dateFormatパターン4(FlexibleDate date) {
+        if (date == null) {
+            return RString.EMPTY;
+        }
+        return date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
     }
 
     private RString dateFormatパターン107(FlexibleYear nendo) {

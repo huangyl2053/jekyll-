@@ -161,11 +161,11 @@ public class NinteiShinseirenkeiDataInsert {
     }
 
     private RString check医療機関一時テーブル電算(DbT5911TempEntity entity) {
-        RStringBuilder error = new RStringBuilder();
+        RString error = RString.EMPTY;
         if (RString.isNullOrEmpty(entity.get医療機関コード())) {
-            error.append(new RString("医療機関コードが未入力です"));
+            error = new RString("医療機関コードが未入力です");
         }
-        return error.toRString();
+        return error;
     }
 
     /**
@@ -222,12 +222,12 @@ public class NinteiShinseirenkeiDataInsert {
         if (RString.isNullOrEmpty(entity.get委託先コード())) {
             error.append(new RString("調査機関コードが未入力です;"));
         }
-        if (RString.isNullOrEmpty(entity.get調査員コード())) {
-            error.append(new RString("調査員コードが不正です;"));
-        }
         DbT5910NinteichosaItakusakiJohoDac dac = InstanceProvider.create(DbT5910NinteichosaItakusakiJohoDac.class);
         if (dac.selectBy認定調査委託先コード(entity.get委託先コード()) == null || dac.selectBy認定調査委託先コード(entity.get委託先コード()).isEmpty()) {
             error.append(new RString("調査機関コードが不正です;"));
+        }
+        if (RString.isNullOrEmpty(entity.get調査員コード())) {
+            error.append(new RString("調査員コードが不正です;"));
         }
         return error.toRString();
     }
@@ -356,8 +356,7 @@ public class NinteiShinseirenkeiDataInsert {
             errorBuilder.append(new RString("市町村コードが不正です;"));
         }
         check申請区分不正(entity.get申請区分_申請時コード(), errorBuilder);
-        if (RString.isNullOrEmpty(entity.get認定申請日())
-                || (!RString.isNullOrEmpty(entity.get認定申請日()) || new RString("00000000").equals(entity.get認定申請日()))) {
+        if (RString.isNullOrEmpty(entity.get認定申請日()) || new RString("00000000").equals(entity.get認定申請日())) {
             errorBuilder.append(new RString("申請日の入力がありません;"));
         }
         check被保険者番号未入力(entity.get被保険者番号(), errorBuilder);
@@ -380,13 +379,8 @@ public class NinteiShinseirenkeiDataInsert {
     private RString check申請情報一時テーブル_東芝版(DbT5101TempEntity entity, RenkeiDataTorikomiProcessParamter processParamter) {
         RStringBuilder errorBuilder = new RStringBuilder();
         nullCheck申請区分(entity.get申請区分_申請時コード(), errorBuilder);
-        if (!RString.isNullOrEmpty(processParamter.get市町村コード())
-                && processParamter.get市町村コード().equals(entity.get市町村コード())) {
-            errorBuilder.append(new RString("市町村コードが不正です;"));
-        }
         check申請区分不正(entity.get申請区分_申請時コード(), errorBuilder);
-        if (RString.isNullOrEmpty(entity.get認定申請日())
-                || (!RString.isNullOrEmpty(entity.get認定申請日()) || new RString("00000000").equals(entity.get認定申請日()))) {
+        if (RString.isNullOrEmpty(entity.get認定申請日()) || new RString("00000000").equals(entity.get認定申請日())) {
             errorBuilder.append(new RString("申請日の入力がありません;"));
         }
         check被保険者番号未入力(entity.get被保険者番号(), errorBuilder);
@@ -430,16 +424,14 @@ public class NinteiShinseirenkeiDataInsert {
     }
 
     private RStringBuilder check性別入力不正(RString value, RStringBuilder errorBuilder) {
-        if (!RString.isNullOrEmpty(value)
-                && !Seibetsu.女.getコード().equals(value) && !Seibetsu.男.getコード().equals(value)) {
+        if (!Seibetsu.女.getコード().equals(value) && !Seibetsu.男.getコード().equals(value)) {
             errorBuilder.append(new RString("性別のデータが不正です;"));
         }
         return errorBuilder;
     }
 
     private RStringBuilder check被保険者番号未入力(RString value, RStringBuilder errorBuilder) {
-        if (RString.isNullOrEmpty(value)
-                || (!RString.isNullOrEmpty(value) || new RString("0000000000").equals(value))) {
+        if (RString.isNullOrEmpty(value) || new RString("0000000000").equals(value)) {
             errorBuilder.append(new RString("被保険者番号の入力がありません;"));
         }
         return errorBuilder;
@@ -460,8 +452,7 @@ public class NinteiShinseirenkeiDataInsert {
     }
 
     private RStringBuilder check生年月日(RString value, RStringBuilder errorBuilder) {
-        if (RString.isNullOrEmpty(value)
-                || (!RString.isNullOrEmpty(value) || new RString("00000000").equals(value))) {
+        if (RString.isNullOrEmpty(value) || new RString("00000000").equals(value)) {
             errorBuilder.append(new RString("生年月日の入力がありません;"));
         }
         return errorBuilder;
@@ -515,7 +506,7 @@ public class NinteiShinseirenkeiDataInsert {
         for (NinteiShinseiShinseijiKubunCode code : NinteiShinseiShinseijiKubunCode.values()) {
             codeList.add(code.getコード());
         }
-        if (!RString.isNullOrEmpty(value) && codeList.contains(value)) {
+        if (!codeList.contains(value)) {
             errorBuilder.append(new RString("申請区分が不正です;"));
         }
         return errorBuilder;

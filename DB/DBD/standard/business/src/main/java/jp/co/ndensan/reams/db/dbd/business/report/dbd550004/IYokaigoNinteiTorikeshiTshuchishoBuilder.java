@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  * 要介護認定取消通知書Builderのインターフェースです。
  *
- * @reamsid_L DBD-1440-010 liuyl
+ * @reamsid_L DBD-1440-020 liuyl
  */
 interface IYokaigoNinteiTorikeshiTshuchishoBuilder extends IReportBuilder<YokaigoNinteiTorikeshiTshuchishoSource> {
 

@@ -90,7 +90,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelValidationHandler {
 
         if (div.getTxtSonotaGokei().getValue() != null && div.getTxtSonotaGokei().getValue().compareTo(Decimal.ZERO) < 0) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.大小関係が不正, その他の合計所得合計不正.toString())));
+                    UrErrorMessages.未入力, その他の合計所得合計不正.toString())));
         }
         return validPairs;
     }
@@ -157,11 +157,10 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelValidationHandler {
         RDate 年度終了月日1 = new RDate(div.getDdlNendo().getSelectedKey().concat(業務コンフィグ_年度終了月日).toString()).plusDay(1);
         RDate 年度終了月日2 = new RDate(new RString(Integer.parseInt(div.getDdlNendo().getSelectedKey().toString()) + 1)
                 .concat(業務コンフィグ_年度終了月日).toString());
-        if (最小適用開始日 != null && 最大適用終了日 != null) {
-            if (最小適用開始日.isBefore(年度終了月日1) || 最大適用終了日.isBefore(年度終了月日2)) {
-                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                        DbcErrorMessages.適用期間_年度エラー)));
-            }
+        if (最小適用開始日 != null && 最大適用終了日 != null
+                && (最小適用開始日.isBefore(年度終了月日1) || 最大適用終了日.isBefore(年度終了月日2))) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    DbcErrorMessages.適用期間_年度エラー)));
         }
         return validPairs;
     }

@@ -18,7 +18,7 @@ public interface ISeikyugakuTsuchishoInMapper {
     /**
      * 介護給付費サービス請求額通知書一時TBLの全件を取りメソッドです。
      *
-     * @return List<Map<String,Object>>
+     * @return List<DbWT1511SeikyugakuTsuchishoTempEntity>
      */
     List<DbWT1511SeikyugakuTsuchishoTempEntity> select介護給付費サービス請求額通知書一時TBLの全件();
 

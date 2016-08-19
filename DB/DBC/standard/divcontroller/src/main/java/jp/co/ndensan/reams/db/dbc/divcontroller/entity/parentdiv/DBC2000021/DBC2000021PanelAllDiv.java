@@ -4,21 +4,26 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000021;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.IKaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * DBC2000021PanelAll のクラスファイル 
- * 
- * @author 自動生成
+ * DBC2000021PanelAll のクラスファイル
+ *
+ * @reamsid_L DBC-5010-010 lihang
  */
 public class DBC2000021PanelAllDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -144,7 +149,7 @@ public class DBC2000021PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblNote1(Label lblNote1) {
+    public void setLblNote1(Label lblNote1) {
         this.getPanelNote().setLblNote1(lblNote1);
     }
 
@@ -154,7 +159,7 @@ public class DBC2000021PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblNote2(Label lblNote2) {
+    public void setLblNote2(Label lblNote2) {
         this.getPanelNote().setLblNote2(lblNote2);
     }
 

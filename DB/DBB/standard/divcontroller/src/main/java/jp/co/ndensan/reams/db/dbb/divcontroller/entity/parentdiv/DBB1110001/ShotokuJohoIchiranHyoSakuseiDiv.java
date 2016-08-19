@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 /**
  * ShotokuJohoIchiranHyoSakusei のクラスファイル
  *
- * @reamsid_L DBB-1650-040 lijunjun
+ * @reamsid_L DBB-1650-010 lijunjun
  */
 public class ShotokuJohoIchiranHyoSakuseiDiv extends Panel {
 

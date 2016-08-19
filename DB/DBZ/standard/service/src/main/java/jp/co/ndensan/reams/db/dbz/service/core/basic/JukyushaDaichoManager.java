@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -148,5 +149,80 @@ public class JukyushaDaichoManager {
             return false;
         }
         return 1 == dac.save(受給者台帳.toEntity());
+    }
+
+    /**
+     * 受給者台帳を全件返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return List<JukyushaDaicho>
+     */
+    @Transaction
+    public List<JukyushaDaicho> get受給者台帳情報(HihokenshaNo 被保険者番号) {
+        List<JukyushaDaicho> businessList = new ArrayList<>();
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        for (DbT4001JukyushaDaichoEntity entity : dac.get受給者台帳(被保険者番号)) {
+            entity.initializeMd5();
+            businessList.add(new JukyushaDaicho(entity));
+        }
+
+        return businessList;
+    }
+
+    /**
+     * 受給申請事由を返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return JukyushaDaicho
+     */
+    @Transaction
+    public JukyushaDaicho get受給申請事由認定完了(HihokenshaNo 被保険者番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        DbT4001JukyushaDaichoEntity entity = dac.get認定完了状況(被保険者番号);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new JukyushaDaicho(entity);
+    }
+
+    /**
+     * 受給申請事由を返します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 計画適用開始日 計画適用開始日
+     * @return List<JukyushaDaicho>
+     */
+    @Transaction
+    public List<JukyushaDaicho> select受給者台帳情報(HihokenshaNo 被保険者番号, FlexibleDate 計画適用開始日) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(計画適用開始日, UrSystemErrorMessages.値がnull.getReplacedMessage("計画適用開始日"));
+        List<DbT4001JukyushaDaichoEntity> entityList = dac.select受給者台帳情報By適用日(被保険者番号, 計画適用開始日);
+        List<JukyushaDaicho> businessList = new ArrayList<>();
+        if (entityList == null || entityList.isEmpty()) {
+            return businessList;
+        }
+        for (DbT4001JukyushaDaichoEntity entity : entityList) {
+            entity.initializeMd5();
+            businessList.add(new JukyushaDaicho(entity));
+        }
+        return businessList;
+    }
+
+    /**
+     * 受給申請事由を返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return JukyushaDaicho
+     */
+    @Transaction
+    public JukyushaDaicho get受給申請事由(HihokenshaNo 被保険者番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        DbT4001JukyushaDaichoEntity entity = dac.get認定申請中状況(被保険者番号);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new JukyushaDaicho(entity);
     }
 }
