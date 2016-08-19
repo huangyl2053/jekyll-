@@ -63,11 +63,11 @@ public class JigyoshaServiceHandler {
      *
      * @param 事業者番号 事業者番号
      */
-    public void set状態_追加(RString 事業者番号,DbT1005KaigoJogaiTokureiTaishoShisetsuEntity 事業者登録情報) {
+    public void set状態_追加(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity 事業者登録情報) {
         div.getJigyoshaServiceKihon().getTxtTorokuHokenshaName().setDisabled(true);
         div.getJigyoshaServiceKihon().getDdlServiceShuruiChiikiMitchaku().setDisabled(false);
         div.getJigyoshaServiceKihon().getJigyosha().setDisabled(true);
-        div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaNo().setValue(事業者番号);
+        div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaNo().setValue(事業者登録情報.getJigyoshaNo());
         div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaName().setValue(事業者登録情報.getJigyoshaMeisho().value());
         div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaNameKana().setValue(事業者登録情報.getJigyoshaKanaMeisho().value());
         div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaAddress().setValue(事業者登録情報.getJigyoshaJusho());
@@ -110,8 +110,6 @@ public class JigyoshaServiceHandler {
             set画面情報(list.get(0));
         }
         set追加情報(div);
-//        KaigoJigyoshaShiteiService beforeDiv = list.get(0);
-//        ViewStateHolder.put(ViewStateKeys.サービス登録情報, beforeDiv);
     }
     
            /**

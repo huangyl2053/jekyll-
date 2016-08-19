@@ -168,13 +168,8 @@ public class JigyoshaTouroku {
      */
     public ResponseData<JigyoshaTourokuDiv> onClick_btnAddService(JigyoshaTourokuDiv div) {
         ViewStateHolder.put(ViewStateKeys.画面状態, 状態_追加);
-        if (RString.isNullOrEmpty(ViewStateHolder.get(ViewStateKeys.事業者番号, RString.class))) {
-            ViewStateHolder.put(ViewStateKeys.事業者番号, div.getServiceJigyoshaJoho().getTxtJigyoshaNo().getValue());
-        } else {
-            ViewStateHolder.put(ViewStateKeys.事業者番号,
-                    ViewStateHolder.get(ViewStateKeys.事業者番号, RString.class));
-        }
         DbT1005KaigoJogaiTokureiTaishoShisetsuEntity tourokuEntity = new DbT1005KaigoJogaiTokureiTaishoShisetsuEntity();
+        tourokuEntity.setJigyoshaNo(div.getServiceJigyoshaJoho().getTxtJigyoshaNo().getValue());
         tourokuEntity.setJigyoshaMeisho(new AtenaMeisho(div.getServiceJigyoshaJoho().getTxtJigyoshaName().getValue()));
         tourokuEntity.setJigyoshaKanaMeisho(new AtenaKanaMeisho(div.getServiceJigyoshaJoho().getTxtJigyoshaNameKana().getValue()));
         tourokuEntity.setJigyoshaJusho(div.getServiceJigyoshaJoho().getTxtJusho().getValue());
