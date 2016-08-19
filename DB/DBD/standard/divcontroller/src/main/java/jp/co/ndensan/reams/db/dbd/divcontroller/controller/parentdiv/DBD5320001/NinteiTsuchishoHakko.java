@@ -85,7 +85,6 @@ public class NinteiTsuchishoHakko {
      */
     public ResponseData<NinteiTsuchishoHakkoDiv> onClick_btnKensaku(NinteiTsuchishoHakkoDiv div) {
 
-        getHandler(div).clearJoken();
         getHandler(div).clearChohyoArea();
         List<YokaigoNinteiTsutisho> 画面更新用データ = getHandler(div).kensaku();
 
