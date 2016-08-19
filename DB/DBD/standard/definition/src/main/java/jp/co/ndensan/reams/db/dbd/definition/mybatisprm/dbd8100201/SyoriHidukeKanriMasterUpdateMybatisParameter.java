@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd8100201;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -22,7 +21,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class SyoriHidukeKanriMasterUpdateMybatisParameter implements IMyBatisParameter {
 
-    private LasdecCode 保険者情報_保険者番号;
+    private RString 保険者情報_保険者番号;
     private RString 処理名;
     private FlexibleYear 処理年度;
     private RString 処理区分_対象月;
@@ -36,7 +35,7 @@ public class SyoriHidukeKanriMasterUpdateMybatisParameter implements IMyBatisPar
      * @param 処理区分 処理区分
      * @param 対象月 対象月
      */
-    public SyoriHidukeKanriMasterUpdateMybatisParameter(LasdecCode 保険者情報_保険者番号,
+    public SyoriHidukeKanriMasterUpdateMybatisParameter(RString 保険者情報_保険者番号,
             RString 処理名, FlexibleYear 処理年度, RString 処理区分, RString 対象月) {
         this.保険者情報_保険者番号 = 保険者情報_保険者番号;
         this.処理名 = 処理名;
