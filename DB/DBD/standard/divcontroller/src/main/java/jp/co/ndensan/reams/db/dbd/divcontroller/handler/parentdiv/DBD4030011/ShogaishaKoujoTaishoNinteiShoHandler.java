@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shogaishakoujo.N
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shogaishakoujo.Ninteikubun;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4030011.ShogaishaKoujoTaishoNinteiShoDiv;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
@@ -173,7 +172,7 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
         int index_4 = 4;
         parameter.set対象年度(new FlexibleYear(div.getTyusyutuJyokenPanel().getTxtTaishoNendo().getValue().toDateString().substring(0, index_4)));
         if (div.getTyusyutuJyokenPanel().getTxtHihokenshaNo().getValue() != null) {
-            parameter.set被保険者番号(new HihokenshaNo(div.getTyusyutuJyokenPanel().getTxtHihokenshaNo().getValue().toString()));
+            parameter.set被保険者番号(new RString(div.getTyusyutuJyokenPanel().getTxtHihokenshaNo().getValue().toString()));
         }
         parameter.set氏名(div.getTyusyutuJyokenPanel().getTxtShimei().getValue());
         parameter.set認定区分(div.getTyusyutuJyokenPanel().getDdlNinteiKbn().getSelectedKey());
