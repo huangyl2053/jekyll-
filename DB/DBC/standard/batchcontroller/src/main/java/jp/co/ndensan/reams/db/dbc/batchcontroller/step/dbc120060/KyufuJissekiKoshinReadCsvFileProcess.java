@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kyufujissekikoshinin.KyufuJissekiKo
 import jp.co.ndensan.reams.db.dbc.entity.csv.kyufujissekikoshinin.KyufuJissekiKoshinJohoCsvRecordKensuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kyufujissekikoshinin.KyufuJissekiKoshinJohoCsvTaisyogaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kyufujissekikoshinin.KyufuJissekiKoshinJohoDataEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kyufujissekikoshinin.KyufuJissekiKoshinJohoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT0001HihokenshaIchijiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.DbWT1111KyufuJissekiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002KokuhorenTorikomiErrorEntity;
@@ -68,14 +67,12 @@ public class KyufuJissekiKoshinReadCsvFileProcess extends BatchProcessBase<RStri
     private static final Integer INDEX_4 = 4;
     private static final RString エラー区分_登録対象なし = new RString("99");
 
-    private KyufuJissekiKoshinJohoEntity entity;
     private KyufuJissekiKoshinJohoControlCSVEntity controlCsvEntity;
     private KyufuJissekiKoshinJohoDataEntity dataEntity;
     private KyufuJissekiKoshinJohoCsvKihonMeisaiOneEntity kihonMeisaiOneEntity;
     private KyufuJissekiKoshinJohoCsvKihonMeisaiTwoEntity kihonMeisaiTwoEntity;
     private KyufuJissekiKoshinJohoCsvKougakuKaigoMeisaiEntity kougakuKaigoMeisaiEntity;
     private KyufuJissekiKoshinJohoCsvTaisyogaiMeisaiEntity taisyogaiMeisaiEntity;
-    private List<KyufuJissekiKoshinJohoDataEntity> dataList;
     private List<KyufuJissekiKoshinJohoCsvTaisyogaiMeisaiEntity> listCsvTaisyogaiMeisaiEntity;
     IKyufuJissekiKoshinJohoMapper mapper;
     IKokuhorenKyoutsuuTempTableMapper hokenshaMapper;
@@ -98,11 +95,9 @@ public class KyufuJissekiKoshinReadCsvFileProcess extends BatchProcessBase<RStri
     @Override
     protected void initialize() {
         service = KyufuJissekiKoshinReadCsvFileService.createInstance();
-        entity = new KyufuJissekiKoshinJohoEntity();
         controlCsvEntity = new KyufuJissekiKoshinJohoControlCSVEntity();
         dataEntity = new KyufuJissekiKoshinJohoDataEntity();
         taisyogaiMeisaiEntity = new KyufuJissekiKoshinJohoCsvTaisyogaiMeisaiEntity();
-        dataList = new ArrayList<>();
         listCsvTaisyogaiMeisaiEntity = new ArrayList<>();
         returnEntity = new FlowEntity();
         連番 = parameter.get連番();
@@ -172,34 +167,6 @@ public class KyufuJissekiKoshinReadCsvFileProcess extends BatchProcessBase<RStri
     @Override
     protected void afterExecute() {
         addMeisai();
-        entity.setControlCsvEntity(controlCsvEntity);
-        entity.setListDataEntity(dataList);
-        KyufuJissekiKoshinJohoControlCSVEntity controlEntity = entity.getControlCsvEntity();
-        if (controlEntity != null && controlEntity.getレコード件数() != null
-                && FlexibleYearMonth.canConvert(controlEntity.get処理対象年月())) {
-            returnEntity.setShoriYM(new FlexibleYearMonth(controlEntity.get処理対象年月()));
-        }
-        for (KyufuJissekiKoshinJohoDataEntity johoDataEntity : entity.getListDataEntity()) {
-            KyufuJissekiKoshinJohoCsvRecordKensuEntity recordKensu = johoDataEntity.getRecordNumber();
-            if (null != johoDataEntity.getKihonMeisaiOneEntity()) {
-                KyufuJissekiKoshinJohoCsvKihonMeisaiOneEntity kihonMeisaiOne = johoDataEntity.getKihonMeisaiOneEntity();
-                連番 = 連番 + 1;
-                service.insert給付実績一時TBL(連番, recordKensu, controlEntity, kihonMeisaiOne, null, null, mapper);
-                service.insert被保険者一時TBL(連番, kihonMeisaiOne, null, null, hokenshaMapper);
-            }
-            if (null != johoDataEntity.getKihonMeisaiTwoEntity()) {
-                KyufuJissekiKoshinJohoCsvKihonMeisaiTwoEntity kihonMeisaiTwo = johoDataEntity.getKihonMeisaiTwoEntity();
-                連番 = 連番 + 1;
-                service.insert給付実績一時TBL(連番, recordKensu, controlEntity, null, kihonMeisaiTwo, null, mapper);
-                service.insert被保険者一時TBL(連番, null, kihonMeisaiTwo, null, hokenshaMapper);
-            }
-            if (null != johoDataEntity.getKougakuKaigoMeisaiEntity()) {
-                KyufuJissekiKoshinJohoCsvKougakuKaigoMeisaiEntity kougakuKaigoMeisai = johoDataEntity.getKougakuKaigoMeisaiEntity();
-                連番 = 連番 + 1;
-                service.insert給付実績一時TBL(連番, recordKensu, controlEntity, null, null, kougakuKaigoMeisai, mapper);
-                service.insert被保険者一時TBL(連番, null, null, kougakuKaigoMeisai, hokenshaMapper);
-            }
-        }
         if ((連番 == INDEX_0)) {
             DbWT0002KokuhorenTorikomiErrorTempEntity errorTempentity = new DbWT0002KokuhorenTorikomiErrorTempEntity();
             errorTempentity.set証記載保険者番号(null);
@@ -207,6 +174,7 @@ public class KyufuJissekiKoshinReadCsvFileProcess extends BatchProcessBase<RStri
             errorTempentity.setエラー区分(エラー区分_登録対象なし);
             hokenshaMapper.処理結果リスト一時TBLに登録(errorTempentity);
         }
+        do処理対象年月設定();
         returnEntity.setCodeNum(連番);
         flowEntity = new OutputParameter<>();
         flowEntity.setValue(returnEntity);
@@ -217,24 +185,43 @@ public class KyufuJissekiKoshinReadCsvFileProcess extends BatchProcessBase<RStri
         if (null != kihonMeisaiOneEntity) {
             dataEntity = service.addMeisai(kihonMeisaiOneEntity, null, null, listCsvTaisyogaiMeisaiEntity, hokenshaMapper);
             if (null != dataEntity) {
-                dataList.add(dataEntity);
+                KyufuJissekiKoshinJohoCsvRecordKensuEntity recordKensu = dataEntity.getRecordNumber();
+                KyufuJissekiKoshinJohoCsvKihonMeisaiOneEntity kihonMeisaiOne = dataEntity.getKihonMeisaiOneEntity();
+                連番 = 連番 + 1;
+                service.insert給付実績一時TBL(連番, recordKensu, controlCsvEntity, kihonMeisaiOne, null, null, mapper);
+                service.insert被保険者一時TBL(連番, kihonMeisaiOne, null, null, hokenshaMapper);
             }
             kihonMeisaiOneEntity = null;
             listCsvTaisyogaiMeisaiEntity = new ArrayList<>();
         } else if (null != kihonMeisaiTwoEntity) {
             dataEntity = service.addMeisai(null, kihonMeisaiTwoEntity, null, listCsvTaisyogaiMeisaiEntity, hokenshaMapper);
             if (null != dataEntity) {
-                dataList.add(dataEntity);
+                KyufuJissekiKoshinJohoCsvRecordKensuEntity recordKensu = dataEntity.getRecordNumber();
+                KyufuJissekiKoshinJohoCsvKihonMeisaiTwoEntity kihonMeisaiTwo = dataEntity.getKihonMeisaiTwoEntity();
+                連番 = 連番 + 1;
+                service.insert給付実績一時TBL(連番, recordKensu, controlCsvEntity, null, kihonMeisaiTwo, null, mapper);
+                service.insert被保険者一時TBL(連番, null, kihonMeisaiTwo, null, hokenshaMapper);
             }
             kihonMeisaiTwoEntity = null;
             listCsvTaisyogaiMeisaiEntity = new ArrayList<>();
         } else if (null != kougakuKaigoMeisaiEntity) {
             dataEntity = service.addMeisai(null, null, kougakuKaigoMeisaiEntity, listCsvTaisyogaiMeisaiEntity, hokenshaMapper);
             if (null != dataEntity) {
-                dataList.add(dataEntity);
+                KyufuJissekiKoshinJohoCsvRecordKensuEntity recordKensu = dataEntity.getRecordNumber();
+                KyufuJissekiKoshinJohoCsvKougakuKaigoMeisaiEntity kougakuKaigoMeisai = dataEntity.getKougakuKaigoMeisaiEntity();
+                連番 = 連番 + 1;
+                service.insert給付実績一時TBL(連番, recordKensu, controlCsvEntity, null, null, kougakuKaigoMeisai, mapper);
+                service.insert被保険者一時TBL(連番, null, null, kougakuKaigoMeisai, hokenshaMapper);
             }
             kougakuKaigoMeisaiEntity = null;
             listCsvTaisyogaiMeisaiEntity = new ArrayList<>();
+        }
+    }
+
+    private void do処理対象年月設定() {
+        if (null == returnEntity.getShoriYM()) {
+            FlexibleYearMonth 処理対象年月 = new FlexibleYearMonth(controlCsvEntity.get処理対象年月());
+            returnEntity.setShoriYM(処理対象年月);
         }
     }
 }

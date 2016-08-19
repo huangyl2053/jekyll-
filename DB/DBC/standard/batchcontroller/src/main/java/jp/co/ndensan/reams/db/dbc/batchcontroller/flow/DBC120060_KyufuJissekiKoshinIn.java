@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuGetFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kyufujissekikoshinin.KyufuJissekiKoshinDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kyufujissekikoshinin.KyufuJissekiKoshinReadCsvFileProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -52,7 +53,6 @@ public class DBC120060_KyufuJissekiKoshinIn extends BatchFlowBase<KokuhorenKyout
     private static final String 取込済ファイル削除 = "deleteReveicedFile";
 
     private static final RString ファイル格納フォルダ名 = new RString("DBC120060");
-    private static final RString 帳票ID = new RString("DBC200054_KyufujissekiKoshinkekkaIchiran");
 
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
     private FlowEntity flowEntity;
@@ -162,7 +162,7 @@ public class DBC120060_KyufuJissekiKoshinIn extends BatchFlowBase<KokuhorenKyout
         parameter.set処理年月(getParameter().getShoriYM());
         parameter.set交換情報識別番号(交換情報識別番号);
         parameter.set処理対象年月(flowEntity.getShoriYM());
-        parameter.setレコード件数合計(flowEntity.getCodeNum());
+        parameter.setレコード件数合計(レコード件数合算);
         parameter.setFileNameList(returnEntity.getFileNameList());
         return simpleBatch(KokuhorenkyoutsuDoInterfaceKanriKousinProcess.class).arguments(parameter).define();
     }
@@ -177,7 +177,7 @@ public class DBC120060_KyufuJissekiKoshinIn extends BatchFlowBase<KokuhorenKyout
         KyufuJissekiKoshinDoIchiranhyoSakuseiProcessParameter parameter
                 = new KyufuJissekiKoshinDoIchiranhyoSakuseiProcessParameter();
         parameter.setサブ業務コード(SubGyomuCode.DBC介護給付);
-        parameter.set帳票ID(new ReportId(帳票ID));
+        parameter.set帳票ID(new ReportId(ReportIdDBC.DBC200054.getReportId().getColumnValue()));
         parameter.set出力順ID(Long.valueOf(getParameter().getShutsuryokujunId().toString()));
         parameter.set処理年月(getParameter().getShoriYM());
         parameter.setシステム日付(RDateTime.now());
