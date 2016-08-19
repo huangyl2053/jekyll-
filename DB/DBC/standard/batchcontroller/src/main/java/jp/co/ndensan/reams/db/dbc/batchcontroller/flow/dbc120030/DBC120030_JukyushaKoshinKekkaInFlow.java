@@ -56,8 +56,9 @@ public class DBC120030_JukyushaKoshinKekkaInFlow extends BatchFlowBase<DBC120030
     private KokuhorenJukyushaFlowEntity flowEntity;
     private RString ファイル絶対パース;
     private int 連番;
-    private int 明細データ登録件数合算;
+    private int 明細データ登録件数合算 = 0;
     private static RString 交換情報識別番号;
+    private boolean さいごファイルフラグ;
 
     @Override
     protected void defineFlow() {
@@ -75,6 +76,11 @@ public class DBC120030_JukyushaKoshinKekkaInFlow extends BatchFlowBase<DBC120030
                         + returnEntity.getFileNameList().get(i);
                 File path = new File(filePath);
                 ファイル絶対パース = new RString(path.getPath());
+                if (i == returnEntity.getFileNameList().size() - 1) {
+                    さいごファイルフラグ = true;
+                } else {
+                    さいごファイルフラグ = false;
+                }
                 executeStep(CSVファイル取込);
                 flowEntity = getResult(KokuhorenJukyushaFlowEntity.class, new RString(CSVファイル取込),
                         JukyushaKoshinKekkaInReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
@@ -126,6 +132,8 @@ public class DBC120030_JukyushaKoshinKekkaInFlow extends BatchFlowBase<DBC120030
         parameter.set処理年月(getParameter().get処理年月());
         parameter.set連番(連番);
         parameter.setファイルパース(ファイル絶対パース);
+        parameter.setさいごファイルフラグ(さいごファイルフラグ);
+        parameter.set明細データ登録件数合算(明細データ登録件数合算);
         return loopBatch(JukyushaKoshinKekkaInReadCsvFileProcess.class).arguments(parameter).define();
     }
 
