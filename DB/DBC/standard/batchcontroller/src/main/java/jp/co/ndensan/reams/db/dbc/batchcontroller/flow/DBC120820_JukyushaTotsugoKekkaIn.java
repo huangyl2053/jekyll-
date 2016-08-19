@@ -58,7 +58,6 @@ public class DBC120820_JukyushaTotsugoKekkaIn extends BatchFlowBase<DBC120820_Ju
     private KokuhorenJukyushaFlowEntity flowEntity;
 
     private RString ファイル絶対パース;
-    private boolean 一回目実行フラグ;
     private int 明細データ登録件数合算;
     private static RString 交換情報識別番号;
 
