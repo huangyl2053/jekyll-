@@ -180,13 +180,13 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
         parameter.set認定内容(div.getTyusyutuJyokenPanel().getDdlNinteiNaiyo().getSelectedKey());
         parameter.set認知症高齢者の日常生活自立度(div.getTyusyutuJyokenPanel().getDdlninchishoNichijoSeikatsuJiritsudo().getSelectedKey());
         parameter.set障害高齢者の日常生活自立度(div.getTyusyutuJyokenPanel().getDdlShogaiNichijoSeikatsuJiritsudo().getSelectedKey());
-        parameter.set障がい者手帳(div.getTyusyutuJyokenPanel().getDdlShogaishaTecho().getSelectedKey());
+        parameter.set障がい者手帳(div.getTyusyutuJyokenPanel().getDdlShogaishaTecho().getSelectedValue());
         parameter.set喪失事由(div.getTyusyutuJyokenPanel().getDdlSoshituJiyu().getSelectedKey());
         parameter.set喪失日FROM(div.getTyusyutuJyokenPanel().getTxtSoshituDay().getFromValue());
         parameter.set喪失日TO(div.getTyusyutuJyokenPanel().getTxtSoshituDay().getToValue());
         parameter.set決定日FROM(div.getTyusyutuJyokenPanel().getTxtKeteiDay().getFromValue());
         parameter.set決定日TO(div.getTyusyutuJyokenPanel().getTxtKeteiDay().getToValue());
-        parameter.set前回非該当者(div.getTyusyutuJyokenPanel().getDdlZenkaiHigaito().getSelectedKey());
+        parameter.set前回非該当者(div.getTyusyutuJyokenPanel().getDdlZenkaiHigaito().getSelectedValue());
         parameter.set交付日(div.getShogaishaKojoNinteishoOutput().getTxtKofuDay().getValue());
 //        parameter.set出力順(get画面出力順());  QA 95838
         return parameter;
