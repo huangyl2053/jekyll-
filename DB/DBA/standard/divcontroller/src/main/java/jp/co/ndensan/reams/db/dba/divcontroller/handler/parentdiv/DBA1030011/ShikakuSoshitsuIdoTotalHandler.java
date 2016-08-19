@@ -18,8 +18,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.TokusoRireki;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
@@ -372,10 +370,10 @@ public class ShikakuSoshitsuIdoTotalHandler {
 
     /**
      * 資格得喪履歴のグリッドに設定されているデータを確認し、資格取得中であるかを判定する。
-     * グリッドにデータが0件、もしくは最新データ（グリッド上の1件目）の資格取得・喪失日がEMPTYではない場合、資格取得中と判定する。
+     * グリッドにデータが0件、もしくは最新データ（グリッド上の1件目）の資格取得・喪失日がEMPTYではない場合、資格喪失中と判定する。
      *
-     * @TODO 城間 グリッドにデータが先に設定されていて、かつ取得日のDESCでソートされている前提になっている。再考が必要。
-     * @return 資格取得中と判定出来たらtrue
+     * @TODO 城間 グリッドにデータが先に設定されていて、かつ取得日のDESCでソートされている前提になっている。再考が必要か。
+     * @return 資格喪失中と判定出来たらtrue
      */
     public boolean is資格喪失中() {
         List<dgShikakuShutokuRireki_Row> dataSource
@@ -386,6 +384,10 @@ public class ShikakuSoshitsuIdoTotalHandler {
         }
         dgShikakuShutokuRireki_Row newestData = dataSource.get(0);
         return !newestData.getShutokuDate().getValue().isEmpty() && !newestData.getSoshitsuDate().getValue().isEmpty();
+    }
+
+    public boolean isSavable() {
+        return is資格喪失中();
     }
 
 }

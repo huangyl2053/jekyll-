@@ -773,4 +773,9 @@ public class HihosyosaiDiv extends Panel implements IHihosyosaiDiv {
     public ValidationMessageControlPairs 取得日と喪失日の前後順() {
         return getHandler().validateForUpdate();
     }
+
+    @Override
+    public boolean is資格変更情報追加済み() {
+        return this.getCcdShikakuKanrenIdo().is追加済み();
+    }
 }
