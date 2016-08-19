@@ -23,7 +23,7 @@
         AND DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_kanriKubun" = DbT4024ShiharaiHohoHenkoSashitome."dbT4024ShiharaiHohoHenkoSashitome_kanriKubun"
         AND DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_rirekiNo" = DbT4024ShiharaiHohoHenkoSashitome."dbT4024ShiharaiHohoHenkoSashitome_rirekiNo"
         AND DbT4024ShiharaiHohoHenkoSashitome."dbT4024ShiharaiHohoHenkoSashitome_logicalDeletedFlag" = FALSE
-        INNER JOIN
+        LEFT JOIN
         (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.noDeleted_DbT4022ShiharaiHohoHenkoTaino" />) AS DbT4022ShiharaiHohoHenkoTaino
         ON
         DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_shoKisaiHokenshaNo" = DbT4022ShiharaiHohoHenkoTaino."dbT4022ShiharaiHohoHenkoTaino_shoKisaiHokenshaNo"
@@ -73,7 +73,7 @@
         AND DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_hihokenshaNo" = DbT4024ShiharaiHohoHenkoSashitome."dbT4024ShiharaiHohoHenkoSashitome_hihokenshaNo"
         AND DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_kanriKubun" = DbT4024ShiharaiHohoHenkoSashitome."dbT4024ShiharaiHohoHenkoSashitome_kanriKubun"
         AND DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_rirekiNo" = DbT4024ShiharaiHohoHenkoSashitome."dbT4024ShiharaiHohoHenkoSashitome_rirekiNo"
-        INNER JOIN
+        LEFT JOIN
         (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.noDeleted_DbT4022ShiharaiHohoHenkoTaino" />) AS DbT4022ShiharaiHohoHenkoTaino
         ON
         DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_shoKisaiHokenshaNo" = DbT4022ShiharaiHohoHenkoTaino."dbT4022ShiharaiHohoHenkoTaino_shoKisaiHokenshaNo"
