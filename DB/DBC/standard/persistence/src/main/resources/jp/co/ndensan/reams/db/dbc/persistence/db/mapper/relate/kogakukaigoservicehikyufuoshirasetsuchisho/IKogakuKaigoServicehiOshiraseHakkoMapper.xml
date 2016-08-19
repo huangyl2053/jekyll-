@@ -324,7 +324,7 @@
         "ShinseiJohoTemp"."koikinaiJushochiTokureiFlagJoho" AS "koikinaiJushochiTokureiFlagChohyo",
         "ShinseiJohoTemp"."koikinaiTokureiSochimotoShichosonCodeJoho" AS "koikinaiTokureiSochimotoShichosonCodeChohyo",
         "ShinseiJohoTemp"."kyuShichosonCodeJoho" AS "kyuShichosonCodeChohyo",
-        "DbT4001JukyushaDaicho"."shichosonCode" as "dbT4001JukyushaDaicho_shichosonCode",
+        jukyushaDaicho."shichosonCode" as "dbT4001JukyushaDaicho_shichosonCode",
         jukyushaDaicho."hihokenshaNo" as "dbT4001JukyushaDaicho_hihokenshaNo",
         jukyushaDaicho."rirekiNo" as "dbT4001JukyushaDaicho_rirekiNo",
         jukyushaDaicho."edaban" as "dbT4001JukyushaDaicho_edaban",
