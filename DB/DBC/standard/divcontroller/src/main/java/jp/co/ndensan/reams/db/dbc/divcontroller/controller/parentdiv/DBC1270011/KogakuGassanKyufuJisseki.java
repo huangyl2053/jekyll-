@@ -45,26 +45,24 @@ public class KogakuGassanKyufuJisseki {
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         ShikibetsuCode 識別コード = 資格対象者.get識別コード();
         if (被保険者番号 == null || 被保険者番号.isEmpty()) {
-            div.getDataGrid1().getActiveRow().setSelectButtonState(DataGridButtonState.Disabled);
+            div.getDgRireki().getActiveRow().setSelectButtonState(DataGridButtonState.Disabled);
             return ResponseData.of(div).addMessage(new InformationMessage(
                     DbcInformationMessages.被保険者でないデータ.getMessage().getCode(),
                     DbcInformationMessages.被保険者でないデータ.getMessage().evaluate())).respond();
         }
         setアクセスログ(識別コード, 被保険者番号);
+        List<jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanKyufuJisseki> 高額合算給付実績情報
+                = KogakuGassanKyufuJissekiFinder.createInstance().getKogakuGassanKyufuJisseki(被保険者番号).records();
         boolean isデータ存在 = KogakuGassanKyufuJissekiFinder.createInstance().isデータ存在チェック(被保険者番号);
         boolean is高額合算給付実績チェック = KogakuGassanKyufuJissekiFinder.createInstance().is高額合算給付実績チェック(被保険者番号);
+        getHandler(div).onLoad(被保険者番号, 識別コード, 高額合算給付実績情報, is高額合算給付実績チェック);
         if (isデータ存在) {
-            div.getDataGrid1().getActiveRow().setSelectButtonState(DataGridButtonState.Disabled);
             return ResponseData.of(div).addValidationMessages(getValidationHandler().do受給共通チェック()).respond();
         }
         if (is高額合算給付実績チェック) {
-            div.getDataGrid1().getActiveRow().setSelectButtonState(DataGridButtonState.Disabled);
             return ResponseData.of(div).addValidationMessages(getValidationHandler().do高額合算給付実績チェック()).respond();
         }
-        List<jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanKyufuJisseki> 高額合算給付実績情報
-                = KogakuGassanKyufuJissekiFinder.createInstance().getKogakuGassanKyufuJisseki(被保険者番号).records();
-        getHandler(div).onLoad(被保険者番号, 識別コード, 高額合算給付実績情報);
-        return ResponseData.of(div).setState(DBC1270011StateName.初期化);
+        return ResponseData.of(div).setState(DBC1270011StateName.給付実績一覧);
     }
 
     /**
@@ -74,8 +72,8 @@ public class KogakuGassanKyufuJisseki {
      * @return ResponseData<KogakuGassanKyufuJissekiDiv>
      */
     public ResponseData<KogakuGassanKyufuJissekiDiv> onclik_selectButton(KogakuGassanKyufuJissekiDiv div) {
-        getHandler(div).onclik_selectButton(div.getDataGrid1().getActiveRow());
-        return ResponseData.of(div).setState(DBC1270011StateName.詳細);
+        getHandler(div).onclik_selectButton(div.getDgRireki().getActiveRow());
+        return ResponseData.of(div).setState(DBC1270011StateName.給付実績詳細);
     }
 
     /**
@@ -85,7 +83,7 @@ public class KogakuGassanKyufuJisseki {
      * @return ResponseData<KogakuGassanKyufuJissekiDiv>
      */
     public ResponseData<KogakuGassanKyufuJissekiDiv> onclik_itiranBack(KogakuGassanKyufuJissekiDiv div) {
-        return ResponseData.of(div).setState(DBC1270011StateName.初期化);
+        return ResponseData.of(div).setState(DBC1270011StateName.給付実績一覧);
     }
 
     private KogakuGassanKyufuJissekiHandler getHandler(KogakuGassanKyufuJissekiDiv div) {
