@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc790011;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.seikyugakutsuchishofutanshain.SeikyugakuTsuchishoFutanshaInProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.SeikyugakuTsuchishoCsvFileToreraRecode3Entity;
@@ -15,8 +14,6 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.seikyugakutsuchishofutanshain.Seiky
 import jp.co.ndensan.reams.db.dbc.entity.csv.seikyugakutsuchishofutanshain.SeikyugakuTsuchishoFutanshaInCsvHeadEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.seikyugakutsuchishofutanshain.SeikyugakuTsuchishoFutanshaInCsvMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.seikyugakutsuchishofutanshain.SeikyugakuTsuchishoFutanshaInCsvRuikeiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.seikyugakutsuchishofutanshain.SeikyugakuTsuchishoFutanshaInDataEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.seikyugakutsuchishofutanshain.SeikyugakuTsuchishoFutanshaInEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.seikyugakutsuchishofutanshain.DbWT1511SeikyugakuTsuchishoTempEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.hokenshainputguide.Hokensha;
@@ -40,62 +37,55 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RString> {
 
-    public static final RString PARAMETER_OUT_FLOWENTITY;
-    private RString csvReaderPath;
+    private static final RString 請求額通知書一時_TABLE_NAME = new RString("DbWT1511SeikyugakuTsuchisho");
     private static final RString KEY_分離文字 = new RString("\\");
-    private final RString 区切り文字 = new RString(",");
+    private static final RString 帳票レコード種別_H1 = new RString("H1");
+    private static final RString 帳票レコード種別_D1 = new RString("D1");
+    private static final RString 帳票レコード種別_T1 = new RString("T1");
+    private static final RString 帳票レコード種別_T2 = new RString("T2");
+    private static final RString 帳票レコード種別_T3 = new RString("T3");
+    private static final RString レコード種別 = new RString("1");
+    private static final RString 区切り文字 = new RString(",");
+    private static final Integer INDEX_0 = 0;
+    private static final Integer INDEX_3 = 3;
+    private static final RString PARAMETER_OUT_FLOWENTITY;
+
+    private RString csvReaderPath;
     private FlowEntity flowEntity;
+
     private SeikyugakuTsuchishoFutanshaInProcessParameter parameter;
-    private SeikyugakuTsuchishoFutanshaInEntity entity;
+
     private KagoKetteiHokenshaInControlCsvEntity controlCsvEntity;
-    private SeikyugakuTsuchishoFutanshaInDataEntity dataEntity;
     private SeikyugakuTsuchishoFutanshaInCsvHeadEntity headCsvEntity;
     private SeikyugakuTsuchishoFutanshaInCsvMeisaiEntity meisaiCsvEntity;
     private SeikyugakuTsuchishoFutanshaInCsvGokeiEntity gokeiCsvEntity;
     private SeikyugakuTsuchishoFutanshaInCsvRuikeiEntity ruikeiCsvEntity;
     private SeikyugakuTsuchishoCsvFileToreraRecode3Entity tesuuyouCsvEntity;
     private DbWT1511SeikyugakuTsuchishoTempEntity suchishoTempentity;
-    private List<SeikyugakuTsuchishoFutanshaInDataEntity> dataList;
-    private List<SeikyugakuTsuchishoFutanshaInCsvMeisaiEntity> meisaiList;
-    HokenshaNyuryokuHojoFinder hokenshaNyuryokuHojoFinder;
-
-    private final RString レコード種別 = new RString("1");
-    private final RString 帳票レコード種別_H1 = new RString("H1");
-    private final RString 帳票レコード種別_D1 = new RString("D1");
-    private final RString 帳票レコード種別_T1 = new RString("T1");
-    private final RString 帳票レコード種別_T2 = new RString("T2");
-    private final RString 帳票レコード種別_T3 = new RString("T3");
-    private static final Integer INDEX_0 = 0;
-    private static final Integer INDEX_3 = 3;
-    @BatchWriter
-    BatchEntityCreatedTempTableWriter 請求額通知書一時tableWriter;
-    @BatchWriter
-    BatchEntityCreatedTempTableWriter 処理結果リスト一時tableWriter;
 
     static {
         PARAMETER_OUT_FLOWENTITY = new RString("outFlowEntity");
     }
 
+    private HokenshaNyuryokuHojoFinder hokenshaNyuryokuHojoFinder;
     private OutputParameter<FlowEntity> outFlowEntity;
 
-    private static final RString 請求額通知書一時_TABLE_NAME = new RString("DbWT1511SeikyugakuTsuchisho");
+    private int renban;
+    private boolean 合計;
+    private boolean 累計;
+
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter 請求額通知書一時tableWriter;
 
     @Override
     protected void initialize() {
-        entity = new SeikyugakuTsuchishoFutanshaInEntity();
-        controlCsvEntity = new KagoKetteiHokenshaInControlCsvEntity();
-        dataEntity = new SeikyugakuTsuchishoFutanshaInDataEntity();
-        headCsvEntity = new SeikyugakuTsuchishoFutanshaInCsvHeadEntity();
-        meisaiCsvEntity = new SeikyugakuTsuchishoFutanshaInCsvMeisaiEntity();
-        gokeiCsvEntity = new SeikyugakuTsuchishoFutanshaInCsvGokeiEntity();
-        ruikeiCsvEntity = new SeikyugakuTsuchishoFutanshaInCsvRuikeiEntity();
-        tesuuyouCsvEntity = new SeikyugakuTsuchishoCsvFileToreraRecode3Entity();
-        suchishoTempentity = new DbWT1511SeikyugakuTsuchishoTempEntity();
-        dataList = new ArrayList<>();
-        meisaiList = new ArrayList<>();
+        合計 = false;
+        累計 = false;
+        renban = INDEX_0;
         flowEntity = new FlowEntity();
         outFlowEntity = new OutputParameter<>();
         csvReaderPath = parameter.getPath().concat(KEY_分離文字).concat(parameter.getFileName());
+        suchishoTempentity = new DbWT1511SeikyugakuTsuchishoTempEntity();
     }
 
     @Override
@@ -116,41 +106,26 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
             if (レコード種別.equals(data.get(INDEX_0))) {
                 controlCsvEntity = ListToObjectMappingHelper.toObject(KagoKetteiHokenshaInControlCsvEntity.class, data);
             } else if (帳票レコード種別_H1.equals(data.get(INDEX_3))) {
+                ヘッダ判断();
                 headCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoFutanshaInCsvHeadEntity.class, data);
             } else if (帳票レコード種別_D1.equals(data.get(INDEX_3))) {
+                明細判断();
                 meisaiCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoFutanshaInCsvMeisaiEntity.class, data);
-                meisaiList.add(meisaiCsvEntity);
             } else if (帳票レコード種別_T1.equals(data.get(INDEX_3))) {
                 gokeiCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoFutanshaInCsvGokeiEntity.class, data);
-                dataEntity.setCsvHeadEntity(headCsvEntity);
-
-                dataEntity.setListCsvMeisaiEntity(meisaiList);
-
-                dataEntity.setCsvGokeiEntity(gokeiCsvEntity);
-
-                dataList.add(dataEntity);
-                dataEntity = new SeikyugakuTsuchishoFutanshaInDataEntity();
-                headCsvEntity = new SeikyugakuTsuchishoFutanshaInCsvHeadEntity();
-                meisaiCsvEntity = new SeikyugakuTsuchishoFutanshaInCsvMeisaiEntity();
-                gokeiCsvEntity = new SeikyugakuTsuchishoFutanshaInCsvGokeiEntity();
-                meisaiList = new ArrayList<>();
             } else if (帳票レコード種別_T2.equals(data.get(INDEX_3))) {
                 ruikeiCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoFutanshaInCsvRuikeiEntity.class, data);
             } else if (帳票レコード種別_T3.equals(data.get(INDEX_3))) {
                 tesuuyouCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoCsvFileToreraRecode3Entity.class, data);
+                累計判断();
             }
         }
     }
 
     @Override
     protected void afterExecute() {
-        entity.setControlCsvEntity(controlCsvEntity);
-        entity.setListDataEntity(dataList);
-        entity.setCsvRuikeiEntity(ruikeiCsvEntity);
-        entity.setCsvTesuuryouEntity(tesuuyouCsvEntity);
-
+        ヘッダ判断();
         int レコード件数合算 = INDEX_0;
-        int 明細データ登録件数 = INDEX_0;
         if (controlCsvEntity != null && controlCsvEntity.getCodeNum() != null) {
             レコード件数合算 = Integer.parseInt(controlCsvEntity.getCodeNum().toString());
         }
@@ -158,61 +133,90 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
             FlexibleYearMonth 処理対象年月 = new FlexibleYearMonth(controlCsvEntity.getShoriYM());
             flowEntity.setShoriYM(処理対象年月);
         }
-        if (レコード件数合算 != INDEX_0) {
-            明細データ登録件数 = setレコード(entity);
-        }
         flowEntity.setCodeNum(レコード件数合算);
-        flowEntity.set明細データ登録件数(明細データ登録件数);
+        flowEntity.set明細データ登録件数(renban);
 
         outFlowEntity.setValue(flowEntity);
     }
 
-    private int setレコード(SeikyugakuTsuchishoFutanshaInEntity csvData) {
-        int renban = INDEX_0;
-        boolean 合計;
-        boolean 累計;
-        List<SeikyugakuTsuchishoFutanshaInDataEntity> listDataEntity = csvData.getListDataEntity();
-        for (int j = INDEX_0; j < listDataEntity.size(); j++) {
-            List<SeikyugakuTsuchishoFutanshaInCsvMeisaiEntity> listMeisaiEntity = listDataEntity.get(j).getListCsvMeisaiEntity();
-            for (int k = INDEX_0; k < listMeisaiEntity.size(); k++) {
-                renban = renban + 1;
-                合計 = false;
-                累計 = false;
-                suchishoTempentity.setRenban(renban);
-                RString 保険者番号 = csvData.getControlCsvEntity().getHokenshaNo();
-                if (保険者番号 != null && !保険者番号.isEmpty()) {
-                    suchishoTempentity.setHokenshaNo(new ShoKisaiHokenshaNo(保険者番号));
-                }
-                hokenshaNyuryokuHojoFinder = HokenshaNyuryokuHojoFinder.createInstance();
-                Hokensha hokensha = hokenshaNyuryokuHojoFinder.getHokensha(new HokenjaNo(保険者番号));
-                if (hokensha != null) {
-                    suchishoTempentity.setHokenshaName(hokensha.get保険者名());
-                }
-                suchishoTempentity.setShoKisaiHokenshaNo(null);
-                suchishoTempentity.setShoKisaiHokenshaName(RString.EMPTY);
-                suchishoTempentity.setKohiFutanshaNo(listDataEntity.get(j).getCsvHeadEntity().get公費負担者番号());
-                suchishoTempentity.setKohiFutanshaName(listDataEntity.get(j).getCsvHeadEntity().get公費負担者名());
-                suchishoTempentity.setKanCode(listDataEntity.get(j).getCsvHeadEntity().get款コード());
-                suchishoTempentity.setKanName(listDataEntity.get(j).getCsvHeadEntity().get款名());
-                suchishoTempentity.setKouCode(listDataEntity.get(j).getCsvHeadEntity().get項コード());
-                suchishoTempentity.setKouName(listDataEntity.get(j).getCsvHeadEntity().get項名());
-                suchishoTempentity.setShinsaYM(new FlexibleYearMonth(listDataEntity.get(j).getCsvHeadEntity().get審査年月()));
-                suchishoTempentity.setKokuhorenName(listDataEntity.get(j).getCsvHeadEntity().get国保連合会名());
-
-                set明細レコード(suchishoTempentity, listMeisaiEntity.get(k));
-                if (k == listMeisaiEntity.size() - 1) {
-                    合計 = true;
-                    if (j == listDataEntity.size() - 1) {
-                        累計 = true;
-                    }
-                }
-                set合計レコード(suchishoTempentity, listDataEntity.get(j).getCsvGokeiEntity(), 合計);
-                set累計レコード(suchishoTempentity, csvData.getCsvRuikeiEntity(), 累計);
-                set審査支払手数料レコード(suchishoTempentity, csvData.getCsvTesuuryouEntity(), 累計);
-                請求額通知書一時tableWriter.insert(suchishoTempentity);
-            }
+    private void ヘッダ判断() {
+        if (controlCsvEntity != null && headCsvEntity != null && meisaiCsvEntity != null && gokeiCsvEntity != null) {
+            合計 = true;
+            累計 = false;
+            set共通レコード(suchishoTempentity, controlCsvEntity, headCsvEntity);
+            set明細レコード(suchishoTempentity, meisaiCsvEntity);
+            set合計レコード(suchishoTempentity, gokeiCsvEntity, 合計);
+            set累計レコード(suchishoTempentity, ruikeiCsvEntity, 累計);
+            set審査支払手数料レコード(suchishoTempentity, tesuuyouCsvEntity, 累計);
+            請求額通知書一時tableWriter.insert(suchishoTempentity);
+            headCsvEntity = null;
+            meisaiCsvEntity = null;
+            gokeiCsvEntity = null;
+        } else if (controlCsvEntity != null && headCsvEntity != null && meisaiCsvEntity != null) {
+            合計 = false;
+            累計 = false;
+            set共通レコード(suchishoTempentity, controlCsvEntity, headCsvEntity);
+            set明細レコード(suchishoTempentity, meisaiCsvEntity);
+            set合計レコード(suchishoTempentity, gokeiCsvEntity, 合計);
+            set累計レコード(suchishoTempentity, ruikeiCsvEntity, 累計);
+            set審査支払手数料レコード(suchishoTempentity, tesuuyouCsvEntity, 累計);
+            請求額通知書一時tableWriter.insert(suchishoTempentity);
+            headCsvEntity = null;
+            meisaiCsvEntity = null;
         }
-        return renban;
+    }
+
+    private void 明細判断() {
+        if (meisaiCsvEntity != null) {
+            set共通レコード(suchishoTempentity, controlCsvEntity, headCsvEntity);
+            set明細レコード(suchishoTempentity, meisaiCsvEntity);
+            請求額通知書一時tableWriter.insert(suchishoTempentity);
+            meisaiCsvEntity = null;
+        }
+    }
+
+    private void 累計判断() {
+        if (controlCsvEntity != null && headCsvEntity != null && meisaiCsvEntity != null && gokeiCsvEntity != null && ruikeiCsvEntity != null) {
+            合計 = true;
+            累計 = true;
+            set共通レコード(suchishoTempentity, controlCsvEntity, headCsvEntity);
+            set明細レコード(suchishoTempentity, meisaiCsvEntity);
+            set合計レコード(suchishoTempentity, gokeiCsvEntity, 合計);
+            set累計レコード(suchishoTempentity, ruikeiCsvEntity, 累計);
+            set審査支払手数料レコード(suchishoTempentity, tesuuyouCsvEntity, 累計);
+            請求額通知書一時tableWriter.insert(suchishoTempentity);
+            controlCsvEntity = null;
+            headCsvEntity = null;
+            meisaiCsvEntity = null;
+            gokeiCsvEntity = null;
+            ruikeiCsvEntity = null;
+            tesuuyouCsvEntity = null;
+        }
+    }
+
+    private void set共通レコード(DbWT1511SeikyugakuTsuchishoTempEntity suchishoTempentity, KagoKetteiHokenshaInControlCsvEntity controlCsvEntity,
+            SeikyugakuTsuchishoFutanshaInCsvHeadEntity headCsvEntity) {
+        renban = renban + 1;
+        suchishoTempentity.setRenban(renban);
+        RString 保険者番号 = controlCsvEntity.getHokenshaNo();
+        if (保険者番号 != null && !保険者番号.isEmpty()) {
+            suchishoTempentity.setHokenshaNo(new ShoKisaiHokenshaNo(保険者番号));
+        }
+        hokenshaNyuryokuHojoFinder = HokenshaNyuryokuHojoFinder.createInstance();
+        Hokensha hokensha = hokenshaNyuryokuHojoFinder.getHokensha(new HokenjaNo(保険者番号));
+        if (hokensha != null) {
+            suchishoTempentity.setHokenshaName(hokensha.get保険者名());
+        }
+        suchishoTempentity.setShoKisaiHokenshaNo(null);
+        suchishoTempentity.setShoKisaiHokenshaName(RString.EMPTY);
+        suchishoTempentity.setKohiFutanshaNo(headCsvEntity.get公費負担者番号());
+        suchishoTempentity.setKohiFutanshaName(headCsvEntity.get公費負担者名());
+        suchishoTempentity.setKanCode(headCsvEntity.get款コード());
+        suchishoTempentity.setKanName(headCsvEntity.get款名());
+        suchishoTempentity.setKouCode(headCsvEntity.get項コード());
+        suchishoTempentity.setKouName(headCsvEntity.get項名());
+        suchishoTempentity.setShinsaYM(new FlexibleYearMonth(headCsvEntity.get審査年月()));
+        suchishoTempentity.setKokuhorenName(headCsvEntity.get国保連合会名());
     }
 
     private void set明細レコード(DbWT1511SeikyugakuTsuchishoTempEntity suchishoTempentity,
@@ -235,7 +239,6 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
 
     private void set合計レコード(DbWT1511SeikyugakuTsuchishoTempEntity suchishoTempentity,
             SeikyugakuTsuchishoFutanshaInCsvGokeiEntity gokeiCsvEntity, boolean flag) {
-
         if (flag) {
             suchishoTempentity.setGokeiChohyoRecordShubetsu(gokeiCsvEntity.get帳票レコード種別());
             suchishoTempentity.setT_GokeiKensu(getDecimal(gokeiCsvEntity.get通常分_件数()));
