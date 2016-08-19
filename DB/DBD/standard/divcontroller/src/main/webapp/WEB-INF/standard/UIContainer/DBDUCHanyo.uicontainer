@@ -1,0 +1,172 @@
+﻿{
+ "uiContainerName": "DBDUCHanyo",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "test",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBDHanyoListGuide",
+     "toLayoutTitle": "汎用リストテスト用ガイド",
+     "toState": "default"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBDHanyoListGuide",
+     "layoutTitle": "汎用リストテスト用ガイド",
+     "eventName": "施設入退所",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBDHanyoList",
+     "toLayoutTitle": "汎用リストテスト用",
+     "toState": "汎用リスト_施設入退所"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBDHanyoListGuide",
+     "layoutTitle": "汎用リストテスト用ガイド",
+     "eventName": "利用者負担額減免",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBDHanyoList",
+     "toLayoutTitle": "汎用リストテスト用",
+     "toState": "汎用リスト_利用者負担額減免"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBDHanyoListGuide",
+     "layoutTitle": "汎用リストテスト用ガイド",
+     "eventName": "訪問介護利用者負担額減額",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBDHanyoList",
+     "toLayoutTitle": "汎用リストテスト用",
+     "toState": "汎用リスト_訪問介護利用者負担額減額"
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBDHanyoListGuide",
+     "layoutTitle": "汎用リストテスト用ガイド",
+     "eventName": "社会福祉法人軽減",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBDHanyoList",
+     "toLayoutTitle": "汎用リストテスト用",
+     "toState": "汎用リスト_社会福祉法人軽減"
+    },
+    {
+     "id": "6",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBDHanyoListGuide",
+     "layoutTitle": "汎用リストテスト用ガイド",
+     "eventName": "特別地域加算減免",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBDHanyoList",
+     "toLayoutTitle": "汎用リストテスト用",
+     "toState": "汎用リスト_特別地域加算減免"
+    },
+    {
+     "id": "7",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBDHanyoListGuide",
+     "layoutTitle": "汎用リストテスト用ガイド",
+     "eventName": "負担限度額認定",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBDHanyoList",
+     "toLayoutTitle": "汎用リストテスト用",
+     "toState": "汎用リスト_負担限度額認定"
+    },
+    {
+     "id": "8",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBDHanyoListGuide",
+     "layoutTitle": "汎用リストテスト用ガイド",
+     "eventName": "国保",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBDHanyoList",
+     "toLayoutTitle": "汎用リストテスト用",
+     "toState": "汎用リスト_国保"
+    },
+    {
+     "id": "9",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBDHanyoListGuide",
+     "layoutTitle": "汎用リストテスト用ガイド",
+     "eventName": "後期高齢者",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBDHanyoList",
+     "toLayoutTitle": "汎用リストテスト用",
+     "toState": "汎用リスト_後期高齢者"
+    },
+    {
+     "id": "10",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBDHanyoListGuide",
+     "layoutTitle": "汎用リストテスト用ガイド",
+     "eventName": "事業対象者",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBDHanyoList",
+     "toLayoutTitle": "汎用リストテスト用",
+     "toState": "汎用リスト_事業対象者"
+    },
+    {
+     "id": "11",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBDHanyoListGuide",
+     "layoutTitle": "汎用リストテスト用ガイド",
+     "eventName": "利用者負担割合",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBDHanyoList",
+     "toLayoutTitle": "汎用リストテスト用",
+     "toState": "汎用リスト_利用者負担割合"
+    },
+    {
+     "id": "12",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBDHanyoList",
+     "layoutTitle": "汎用リストテスト用",
+     "eventName": "end",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
