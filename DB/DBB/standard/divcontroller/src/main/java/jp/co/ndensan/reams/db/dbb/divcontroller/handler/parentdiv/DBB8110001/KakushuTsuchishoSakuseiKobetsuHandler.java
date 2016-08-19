@@ -192,7 +192,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
      * @return 年度Map Map
      */
     public Map<RString, FlexibleYear> set調定パネル(ArrayList<FukaJoho> 賦課の情報List, ArrayList<YMDHMS> 調定日時List) {
-
         FukaJoho 賦課の情報 = 賦課の情報List.get(0);
         set調定パネルの共通エリア(賦課の情報);
         FlexibleYear 賦課年度 = 賦課の情報.get賦課年度();
@@ -326,7 +325,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     }
 
     private void set更正前賦課根拠(FukaJoho 賦課の情報) {
-
         if (賦課の情報.get賦課期日() != null) {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
                     .getLblFukankonkyoMae1().setText(DateEditor.to和暦(賦課の情報.get賦課期日()));
@@ -392,7 +390,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     }
 
     private void set更正後賦課根拠(FukaJoho 賦課の情報) {
-
         if (賦課の情報.get賦課期日() != null) {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
                     .getLblFukankonkyoAto1().setText(DateEditor.to和暦(賦課の情報.get賦課期日()));
@@ -458,7 +455,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     }
 
     private void set特別徴収(FukaJoho 更正前情報, FukaJoho 更正後情報) {
-
         clear更正前_特徴();
         clear更正後_特徴();
         clear期_特徴();
@@ -573,7 +569,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             RString 期_10月,
             RString 期_12月,
             RString 期_2月) {
-
         Decimal 更正前合計 = Decimal.ZERO;
         Decimal 更正前期別金額 = get特徴期別金額(期_4月, 更正前情報);
         if (更正前期別金額 != null) {
@@ -796,7 +791,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             RString 期_12月,
             RString 期_13月,
             RString 期_14月) {
-
         RDate 普徴期別納期限 = get納期限(期_4月, 更正後情報);
         if (普徴期別納期限 != null) {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
@@ -1282,7 +1276,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     }
 
     private void set納入通知書(List<RString> key, FlexibleYear 調定年度, FlexibleYear 賦課年度) {
-
         KoseiTsukiHantei koseiTsukiHantei = new KoseiTsukiHantei();
         FuchoKiUtil fuchoKiUtil = new FuchoKiUtil();
         List<KeyValueDataSource> keyValueDataSource = new ArrayList<>();
@@ -1366,7 +1359,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
      * @param map 賦課の情報
      */
     public void onChange更正前(Map<RString, FukaJoho> map) {
-
         FukaJoho 更正後Info = map.get(div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku()
                 .getDdlInjiKouseiAto().getSelectedKey());
         FukaJoho 更正前Info = map.get(div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku()
@@ -1395,7 +1387,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
      * @return 更正後Info FukaJoho
      */
     public FukaJoho onChange更正後(Map<RString, FukaJoho> map, List<YMDHMS> 調定日時List) {
-
         RString 更正後Key = div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku()
                 .getDdlInjiKouseiAto().getSelectedKey();
         List<YMDHMS> 更正後の調定日時 = new ArrayList<>();
@@ -1477,7 +1468,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             Map<RString, RString> 帳票Map,
             HihokenshaNo 被保険者番号,
             ShikibetsuCode 識別コード) {
-
         RString 更正前Key = div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku()
                 .getDdlInjiKouseiMae().getSelectedKey();
         RString 更正後Key = div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku()
