@@ -273,7 +273,8 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
         }
         日付項目編集(output, 受給者情報);
         数値項目編集(output, 受給者情報);
-        名称項目編集(output, 受給者情報, 被保険者);
+        名称項目編集1(output, 受給者情報, 被保険者);
+        名称項目編集2(output, 受給者情報, 被保険者);
         output.set訂正区分(受給者情報.get訂正区分コード());
         output.set異動区分(受給者情報.get異動区分コード());
         output.set異動事由(受給者情報.get異動事由区分());
@@ -394,7 +395,7 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
      * @param 受給者情報 DbWT5331JukyushaJohoCsvEntity
      * @param 被保険者 DbWT0001HihokenshaTempEntity
      */
-    private void 名称項目編集(JukyushaKoshinKekkaIchiranCsvEntity output, DbWT5331JukyushaJohoCsvEntity 受給者情報, DbWT0001HihokenshaTempEntity 被保険者) {
+    private void 名称項目編集1(JukyushaKoshinKekkaIchiranCsvEntity output, DbWT5331JukyushaJohoCsvEntity 受給者情報, DbWT0001HihokenshaTempEntity 被保険者) {
         if (RString.isNullOrEmpty(受給者情報.get訂正区分コード())) {
             output.set訂正区分名称(JukyushaIF_TeiseiKubunCode.toValue(受給者情報.get訂正区分コード()).get名称());
         }
@@ -423,6 +424,16 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
         if (RString.isNullOrEmpty(受給者情報.get居宅サービス計画作成区分コード())) {
             output.set計画作成区分名称(JukyushaIF_KeikakuSakuseiKubunCode.toValue(受給者情報.get居宅サービス計画作成区分コード()).get名称());
         }
+    }
+
+    /**
+     * 名称項目編集する。
+     *
+     * @param output JukyushaKoshinKekkaIchiranCsvEntity
+     * @param 受給者情報 DbWT5331JukyushaJohoCsvEntity
+     * @param 被保険者 DbWT0001HihokenshaTempEntity
+     */
+    private void 名称項目編集2(JukyushaKoshinKekkaIchiranCsvEntity output, DbWT5331JukyushaJohoCsvEntity 受給者情報, DbWT0001HihokenshaTempEntity 被保険者) {
         if (RString.isNullOrEmpty(受給者情報.get標準負担区分コード())) {
             output.set標準負担区分名称(JukyushaIF_HyojunFutanKubunCode.toValue(受給者情報.get標準負担区分コード()).get名称());
         }
@@ -454,7 +465,6 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
             output.set課税層の特例減額措置対象名称(JukyushaIF_TokureiGengakuSochiTaisho.toValue(受給者情報.get課税層の特例減額措置対象区分()).get名称());
         }
     }
-
     /**
      *
      * @param entity 被保険者情報
