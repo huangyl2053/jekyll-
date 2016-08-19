@@ -93,14 +93,14 @@ public class KyufuKanrihyoTorikomiKekkaIchiranBodyEditor implements IKyufuKanrih
         DbWT0001HihokenshaTempEntity 被保険者 = 帳票出力対象データ.get被保険者();
         source.listCenter_1 = new RString(連番);
         source.listCenter_2 = doパターン54(給付管理票.getサービス提供年月());
-        if (RString.isNullOrEmpty(給付管理票.get給付管理票情報作成区分コード())) {
+        if (!RString.isNullOrEmpty(給付管理票.get給付管理票情報作成区分コード())) {
             RString 作成区分名 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付,
                     DBCCodeShubetsu.給付管理票情報作成区分.getコード(),
                     new Code(給付管理票.get給付管理票情報作成区分コード()));
             source.listCenter_3 = 作成区分名;
         }
         source.listCenter_4 = getColumnValue(被保険者.get登録被保険者番号());
-        if (RString.isNullOrEmpty(給付管理票.get給付管理票種別区分コード())) {
+        if (!RString.isNullOrEmpty(給付管理票.get給付管理票種別区分コード())) {
             RString 作成種別区分名 = CodeMaster.getOption2(SubGyomuCode.DBC介護給付,
                     DBCCodeShubetsu.給付管理票種別区分.getコード(),
                     new Code(給付管理票.get給付管理票種別区分コード()));
