@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.shogaishakojotaishoshalist;
 
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd4030011.ShogaishakojoTaishoshaListProcessParameter;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -28,7 +27,7 @@ public class ShogaishaKojoTaishoshaListParameter extends BatchParameterBase {
     @BatchParameter(key = "対象年度", name = "対象年度")
     private FlexibleYear 対象年度;
     @BatchParameter(key = "被保険者番号", name = "被保険者番号")
-    private HihokenshaNo 被保険者番号;
+    private RString 被保険者番号;
     @BatchParameter(key = "氏名", name = "氏名")
     private RString 氏名;
     @BatchParameter(key = "認定区分", name = "認定区分")
