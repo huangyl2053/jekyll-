@@ -6,10 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120850;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import jp.co.ndensan.reams.db.dbc.business.core.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaKetteiHokenshaInOutPutOrder;
 import jp.co.ndensan.reams.db.dbc.business.core.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaKetteiHokenshaInPageBreak;
@@ -117,9 +115,8 @@ public class SogojigyohiSaishinsaDoIchiranhyoSakuseiProcess extends
     @Override
     protected IBatchReader createReader() {
 
-        Map<String, Object> mybatisParameter = new HashMap<>();
-        mybatisParameter.put(キー_出力順.toString(), 出力順);
-        return new BatchDbReader(MAPPERPATH);
+        parameter.set出力順(出力順);
+        return new BatchDbReader(MAPPERPATH, parameter.toパラメタ());
     }
 
     @Override

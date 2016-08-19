@@ -3,12 +3,15 @@
 <!-- @reamsid_L DBC-2820-010 sunhui -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.sogojigyohisaishinsaketteihokenshain.ISogojigyohiSaishinsaKetteiHokenshaInMapper">
     <select id="get帳票出力対象データ"
-                resultMap="resultMap_SogojigyohiSaishinsaKetteiHokenshaInEntity" parameterType="java.util.Map"  fetchSize="500" resultOrdered="true">
+                resultMap="resultMap_SogojigyohiSaishinsaKetteiHokenshaInEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaDoIchiranhyoSakuseiMyBatisParameter"  fetchSize="500" resultOrdered="true">
         SELECT 
         <include refid="allColumns_SogojigyohiSaishinsaKetteiHokenshaIn" />
         FROM "DbWT3063SaishinsaKetteiShukei" AS DbWT3063 
-        INNER JOIN "DbWT3064SaishinsaKetteiMeisai" AS DbWT3064 ON DbWT3063."hdrRirekiNo" = DbWT3064."rirekiNo"
-        INNER JOIN "DbWT0001Hihokensha" AS DbWT0001 ON DbWT3064."renban" = DbWT0001."meisaiRenban"
+        INNER JOIN "DbWT3064SaishinsaKetteiMeisai" AS DbWT3064 
+        ON DbWT3063."hdrRirekiNo" = DbWT3064."rirekiNo"
+        INNER JOIN "DbWT0001Hihokensha" AS DbWT0001 
+        ON DbWT3064."renban" = DbWT0001."meisaiRenban"
         ${出力順}
     </select>
     

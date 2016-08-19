@@ -79,22 +79,22 @@ public class HikazeiNennkinTaishouSyaJohoTorikomiFlow extends BatchFlowBase<Hika
 
     @Step(非課税年金対象者情報_該当一覧CSV)
     protected IBatchFlowCommand gaitouIchirannCsvProcess() {
-        return loopBatch(GaitouIchirannCsvProcess.class).define();
+        return loopBatch(GaitouIchirannCsvProcess.class).arguments(getParameter().toGaitouIchirannCsvProcessParameter()).define();
     }
 
     @Step(非課税年金対象者情報_不一致CSV)
     protected IBatchFlowCommand fuicchiCsvProcess() {
-        return loopBatch(FuicchiCsvProcess.class).define();
+        return loopBatch(FuicchiCsvProcess.class).arguments(getParameter().toFuicchiCsvProcessParameter()).define();
     }
 
     @Step(非課税年金対象者情報_生年月日CSV)
     protected IBatchFlowCommand seinenngappiCsvProcess() {
-        return loopBatch(SeinenngappiCsvProcess.class).define();
+        return loopBatch(SeinenngappiCsvProcess.class).arguments(getParameter().toSeinenngappiCsvProcessParameter()).define();
     }
 
     @Step(非課税年金対象者情報_年金番号CSV)
     protected IBatchFlowCommand nennkinnBanngouCsvProcess() {
-        return loopBatch(NennkinnBanngouCsvProcess.class).define();
+        return loopBatch(NennkinnBanngouCsvProcess.class).arguments(getParameter().toNennkinnBanngouCsvProcessParameter()).define();
     }
 
     @Step(削除非課税年金対象者)

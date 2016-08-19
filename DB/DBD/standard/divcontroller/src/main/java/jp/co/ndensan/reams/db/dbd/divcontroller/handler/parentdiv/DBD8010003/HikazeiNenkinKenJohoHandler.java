@@ -327,6 +327,7 @@ public class HikazeiNenkinKenJohoHandler {
         div.setHiddenModel(修正モード);
         div.getBtnDelete().setDisabled(非課税年金対象情報.get被保険者番号().isNullOrEmpty());
         div.getTbGenkisoNenkinNo().setDisabled(false);
+        div.getTbGenkisoNenkinNo().setReadOnly(false);
         if (TorokuKubun.画面登録.getコード().equals(非課税年金対象情報.get登録区分())) {
             div.getDdlTsuki().setDisabled(false);
             div.getTbKingaku().setDisabled(false);
@@ -449,7 +450,7 @@ public class HikazeiNenkinKenJohoHandler {
      * @param 非課税年金対象者一時 非課税年金対象者一時
      */
     public void 削除解除_登録区分_画面登録_保存処理(HousholdBusiness 非課税年金対象者一時) {
-        HousholdFinder.createIntance().削除解除_登録区分_画面登録_保存処理(非課税年金対象者一時);
+        HousholdFinder.createIntance().削除解除_登録区分_画面登録_保存処理(非課税年金対象者一時, ControlDataHolder.getUserId());
     }
 
     /**

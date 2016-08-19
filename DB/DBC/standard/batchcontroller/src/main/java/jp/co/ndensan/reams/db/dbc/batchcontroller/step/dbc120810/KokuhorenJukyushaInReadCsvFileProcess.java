@@ -64,9 +64,7 @@ public class KokuhorenJukyushaInReadCsvFileProcess extends BatchProcessBase<RStr
     private IKokuhorenJukyushaMapper mapper;
     private IKokuhorenKyoutsuuTempTableMapper mapper1;
     private IKokuhorenKyoutsuuMapper 処理結果mapper;
-    private KokuhorenJukyushaCsvEntity entity;
     private KagoKetteiHokenshaInControlCsvEntity controlCsvEntity;
-    private List<KokuhorenJukyushaDataCsvEntity> detialList;
     private KokuhorenJukyushaDataCsvEntity detialEntity;
     private final RString レコード種別 = new RString("1");
     private static final Integer INDEX_0 = 0;
@@ -86,14 +84,14 @@ public class KokuhorenJukyushaInReadCsvFileProcess extends BatchProcessBase<RStr
 
     private FlexibleYearMonth 処理対象年月;
     private RString 保険者番号;
+    private int 連番;
 
     @Override
     protected void initialize() {
-        entity = new KokuhorenJukyushaCsvEntity();
         controlCsvEntity = new KagoKetteiHokenshaInControlCsvEntity();
         returnFlowEntity = new OutputParameter<>();
-        detialList = new ArrayList();
         flowEntity = new KokuhorenJukyushaFlowEntity();
+        連番 = parameter.get連番();
 
     }
 
@@ -130,29 +128,22 @@ public class KokuhorenJukyushaInReadCsvFileProcess extends BatchProcessBase<RStr
             }
             if (レコード種別.equals(data.get(INDEX_0))) {
                 controlCsvEntity = ListToObjectMappingHelper.toObject(KagoKetteiHokenshaInControlCsvEntity.class, data);
+                保険者番号 = controlCsvEntity.getHokenshaNo();
             } else {
                 detialEntity = ListToObjectMappingHelper.toObject(KokuhorenJukyushaDataCsvEntity.class, data);
-                detialList.add(detialEntity);
+                連番 = 連番 + 1;
+                受給者情報明細一時TBL登録(detialEntity, 連番);
+                被保険者一時TBL登録(detialEntity, 連番);
             }
         }
     }
 
     @Override
     protected void afterExecute() {
-        entity.setControlCsvEntity(controlCsvEntity);
-        entity.setListDataEntity(detialList);
 
         if (null == parameter.get処理年月()) {
             FlexibleYearMonth 処理対象年月temp = new FlexibleYearMonth(controlCsvEntity.getShoriYM());
             parameter.set処理年月(処理対象年月temp);
-        }
-
-        int 連番 = parameter.get連番();
-        保険者番号 = controlCsvEntity.getHokenshaNo();
-        for (KokuhorenJukyushaDataCsvEntity 保険者X : entity.getListDataEntity()) {
-            連番 = 連番 + 1;
-            受給者情報明細一時TBL登録(保険者X, 連番);
-            被保険者一時TBL登録(保険者X, 連番);
         }
 
         if (連番 == parameter.get連番()) {

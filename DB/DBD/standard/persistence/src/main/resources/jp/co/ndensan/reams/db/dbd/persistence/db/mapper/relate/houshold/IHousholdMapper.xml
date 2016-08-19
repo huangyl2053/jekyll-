@@ -82,6 +82,9 @@
         UPDATE
         rgdb."DbT4037HikazeNenkinTaishosha"
         SET
+        "updateCount" = #{updateCount},
+        "lastUpdateTimestamp" = CURRENT_TIMESTAMP,
+        "lastUpdateReamsLoginId" = #{lastUpdateReamsLoginId},
         "genkisonenkinno" = #{現基礎年金番号},
         "hihokenshano" = #{被保険者番号}
         WHERE
@@ -98,6 +101,9 @@
         UPDATE
         rgdb."DbT4037HikazeNenkinTaishosha"
         SET
+        "updateCount" = #{updateCount},
+        "lastUpdateTimestamp" = CURRENT_TIMESTAMP,
+        "lastUpdateReamsLoginId" = #{lastUpdateReamsLoginId},
         "shorikubun" = #{処理区分},
         "taishom" = #{対象月},
         "genkisonenkinno" = #{現基礎年金番号},
@@ -137,6 +143,9 @@
     <insert id="新規_保存処理" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.houshold.HousholdUpdateParameter">
         INSERT INTO
         rgdb."DbT4037HikazeNenkinTaishosha"(
+                                            "updateCount",
+                                            "lastUpdateTimestamp",
+                                            "lastUpdateReamsLoginId",
                                             "nendo",
                                             "shorikubun",
                                             "taishom",
@@ -178,7 +187,10 @@
                                             "dtyobi5",
                                             "dtkyosainenkinshoshokigono"
                                             )
-        VALUES(#{年度},
+        VALUES(#{updateCount},
+               CURRENT_TIMESTAMP,
+               #{lastUpdateReamsLoginId},
+               #{年度},
                #{処理区分},
                #{対象月},
                #{基礎年金番号},

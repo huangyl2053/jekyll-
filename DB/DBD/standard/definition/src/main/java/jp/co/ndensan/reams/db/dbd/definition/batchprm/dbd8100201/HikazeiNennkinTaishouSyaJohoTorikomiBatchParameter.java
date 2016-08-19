@@ -83,40 +83,36 @@ public class HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter extends BatchPar
     /**
      * 結果一覧(該当一覧)CSV出力の引数を返します。。
      *
-     * @param 出力順ID1 出力順ID1
      * @return 結果一覧(該当一覧)CSV出力の引数
      */
-    public GaitouIchirannCsvProcessParameter toGaitouIchirannCsvProcessParameter(Long 出力順ID1) {
+    public GaitouIchirannCsvProcessParameter toGaitouIchirannCsvProcessParameter() {
         return new GaitouIchirannCsvProcessParameter(出力順ID1);
     }
 
     /**
      * 結果一覧(不一致)CSV出力の引数を返します。。
      *
-     * @param 出力順ID2 出力順ID2
      * @return 結果一覧(不一致)CSV出力の引数
      */
-    public FuicchiCsvProcessParameter toFuicchiCsvProcessParameter(Long 出力順ID2) {
+    public FuicchiCsvProcessParameter toFuicchiCsvProcessParameter() {
         return new FuicchiCsvProcessParameter(出力順ID2);
     }
 
     /**
      * 結果一覧(生年月日)CSV出力の引数を返します。。
      *
-     * @param 出力順ID3 出力順ID3
      * @return 結果一覧(生年月日)CSV出力の引数
      */
-    public SeinenngappiCsvProcessParameter toSeinenngappiCsvProcessParameter(Long 出力順ID3) {
+    public SeinenngappiCsvProcessParameter toSeinenngappiCsvProcessParameter() {
         return new SeinenngappiCsvProcessParameter(出力順ID3);
     }
 
     /**
      * 結果一覧(年金番号)CSV出力の引数を返します。。
      *
-     * @param 出力順ID4 出力順ID4
      * @return 結果一覧(年金番号)CSV出力の引数
      */
-    public NennkinnBanngouCsvProcessParameter toNennkinnBanngouCsvProcessParameter(Long 出力順ID4) {
+    public NennkinnBanngouCsvProcessParameter toNennkinnBanngouCsvProcessParameter() {
         return new NennkinnBanngouCsvProcessParameter(出力順ID4);
     }
 
