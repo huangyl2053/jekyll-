@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Aug 18 18:34:38 CST 2016 
+ * Fri Aug 19 11:23:23 CST 2016 
  */
 
 
@@ -37,6 +37,8 @@ public class dgTorikomiFileIchiran_Row extends DataRow {
     private RString koroshoIfShikibetsuCode;
     private RString kiguusuu;
     private TextBoxNum ikenshoIraiRirekiNo;
+    private RString shujiiCode;
+    private RString shujiiIryokikanCode;
 
     public dgTorikomiFileIchiran_Row() {
         super();
@@ -55,6 +57,8 @@ public class dgTorikomiFileIchiran_Row extends DataRow {
         this.koroshoIfShikibetsuCode = RString.EMPTY;
         this.kiguusuu = RString.EMPTY;
         this.ikenshoIraiRirekiNo = new TextBoxNum();
+        this.shujiiCode = RString.EMPTY;
+        this.shujiiIryokikanCode = RString.EMPTY;
         this.setOriginalData("checkBox", checkBox);
         this.setOriginalData("hokenshaBango", hokenshaBango);
         this.setOriginalData("hihokenshaBango", hihokenshaBango);
@@ -70,9 +74,11 @@ public class dgTorikomiFileIchiran_Row extends DataRow {
         this.setOriginalData("koroshoIfShikibetsuCode", koroshoIfShikibetsuCode);
         this.setOriginalData("kiguusuu", kiguusuu);
         this.setOriginalData("ikenshoIraiRirekiNo", ikenshoIraiRirekiNo);
+        this.setOriginalData("shujiiCode", shujiiCode);
+        this.setOriginalData("shujiiIryokikanCode", shujiiIryokikanCode);
     }
 
-    public dgTorikomiFileIchiran_Row(Boolean checkBox, RString hokenshaBango, RString hihokenshaBango, RString shinseibi, RString hihokenshaShimei, RString seninengapi, RString seibetu, RString yubinBangou, RString jyusyo, RString iryouKikanMei, RString shuziiMei, RString shinseishoKanriNo, RString koroshoIfShikibetsuCode, RString kiguusuu, TextBoxNum ikenshoIraiRirekiNo) {
+    public dgTorikomiFileIchiran_Row(Boolean checkBox, RString hokenshaBango, RString hihokenshaBango, RString shinseibi, RString hihokenshaShimei, RString seninengapi, RString seibetu, RString yubinBangou, RString jyusyo, RString iryouKikanMei, RString shuziiMei, RString shinseishoKanriNo, RString koroshoIfShikibetsuCode, RString kiguusuu, TextBoxNum ikenshoIraiRirekiNo, RString shujiiCode, RString shujiiIryokikanCode) {
         super();
         this.setOriginalData("checkBox", checkBox);
         this.setOriginalData("hokenshaBango", hokenshaBango);
@@ -89,6 +95,8 @@ public class dgTorikomiFileIchiran_Row extends DataRow {
         this.setOriginalData("koroshoIfShikibetsuCode", koroshoIfShikibetsuCode);
         this.setOriginalData("kiguusuu", kiguusuu);
         this.setOriginalData("ikenshoIraiRirekiNo", ikenshoIraiRirekiNo);
+        this.setOriginalData("shujiiCode", shujiiCode);
+        this.setOriginalData("shujiiIryokikanCode", shujiiIryokikanCode);
         this.checkBox = checkBox;
         this.hokenshaBango = hokenshaBango;
         this.hihokenshaBango = hihokenshaBango;
@@ -104,6 +112,8 @@ public class dgTorikomiFileIchiran_Row extends DataRow {
         this.koroshoIfShikibetsuCode = koroshoIfShikibetsuCode;
         this.kiguusuu = kiguusuu;
         this.ikenshoIraiRirekiNo = ikenshoIraiRirekiNo;
+        this.shujiiCode = shujiiCode;
+        this.shujiiIryokikanCode = shujiiIryokikanCode;
     }
 
     public Boolean getCheckBox() {
@@ -164,6 +174,14 @@ public class dgTorikomiFileIchiran_Row extends DataRow {
 
     public TextBoxNum getIkenshoIraiRirekiNo() {
         return ikenshoIraiRirekiNo;
+    }
+
+    public RString getShujiiCode() {
+        return shujiiCode;
+    }
+
+    public RString getShujiiIryokikanCode() {
+        return shujiiIryokikanCode;
     }
 
     public void setCheckBox(Boolean checkBox) {
@@ -239,6 +257,16 @@ public class dgTorikomiFileIchiran_Row extends DataRow {
     public void setIkenshoIraiRirekiNo(TextBoxNum ikenshoIraiRirekiNo) {
         this.setOriginalData("ikenshoIraiRirekiNo", ikenshoIraiRirekiNo);
         this.ikenshoIraiRirekiNo = ikenshoIraiRirekiNo;
+    }
+
+    public void setShujiiCode(RString shujiiCode) {
+        this.setOriginalData("shujiiCode", shujiiCode);
+        this.shujiiCode = shujiiCode;
+    }
+
+    public void setShujiiIryokikanCode(RString shujiiIryokikanCode) {
+        this.setOriginalData("shujiiIryokikanCode", shujiiIryokikanCode);
+        this.shujiiIryokikanCode = shujiiIryokikanCode;
     }
 
     // </editor-fold>
