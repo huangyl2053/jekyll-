@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbd.business.core.outputorderkey.ShiharaiHohoHenkoHaakuIchiranOrderKey;
+import jp.co.ndensan.reams.db.dbd.business.core.outputorderkey.NinteiTsuchishoHakkoOrderKey;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiTsutisho;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiTsutishoBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiTsutishoIkkatsuHakkoJoho;
@@ -908,7 +908,7 @@ public class NinteiTsuchishoHakkoHandler {
         IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
         List<IOutputOrder> 帳票出力順 = chohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBD介護受給, パネル.getChohyoId());
         if (null != 帳票出力順 && !帳票出力順.isEmpty()) {
-            return MyBatisOrderByClauseCreator.create(ShiharaiHohoHenkoHaakuIchiranOrderKey.class, 帳票出力順.get(0));
+            return MyBatisOrderByClauseCreator.create(NinteiTsuchishoHakkoOrderKey.class, 帳票出力順.get(0));
         } else {
             return RString.EMPTY;
         }
