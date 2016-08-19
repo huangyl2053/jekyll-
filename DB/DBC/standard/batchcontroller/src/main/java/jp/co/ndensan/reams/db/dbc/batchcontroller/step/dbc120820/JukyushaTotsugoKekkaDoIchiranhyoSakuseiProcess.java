@@ -247,7 +247,7 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
         csvWriter = new CsvWriter.InstanceBuilder(一覧ファイルパス)
                 .setDelimiter(コンマ)
                 .setEnclosure(ダブル引用符)
-                .setEncode(Encode.UTF_8withBOM)
+                .setEncode(Encode.SJIS)
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(true)
                 .build();
@@ -258,45 +258,24 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
             DbWT0001HihokenshaTempEntity 被保険者, RString 住所, boolean ヘッダーフラグ) {
         JukyushaKekkaIchiranCSVEntity output = new JukyushaKekkaIchiranCSVEntity();
 
-        RString 保険者名;
         if (ヘッダーフラグ) {
-            if (受給者情報.get保険者名() == null) {
-                保険者名 = RString.EMPTY;
-            } else {
-                if (最大桁_12 < 受給者情報.get保険者名().length()) {
-                    保険者名 = 受給者情報.get保険者名().substring(0, 最大桁_12);
-                } else {
-                    保険者名 = 受給者情報.get保険者名();
-                }
-            }
-            output.set保険者番号(受給者情報.get保険者番号());
-            output.set保険者名(保険者名);
-            RDateTime システム日時 = RDateTime.now();
-            RString 作成日 = システム日時.getDate().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                    .fillType(FillType.BLANK).toDateString();
-            RString 作成時 = システム日時.getTime()
-                    .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE);
-            output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時).concat(RString.HALF_SPACE).concat(SAKUSEI));
+            headEditor(output, 受給者情報);
         } else {
             output.set保険者番号(RString.EMPTY);
             output.set保険者名(RString.EMPTY);
             output.set作成日時(RString.EMPTY);
         }
         output.set突合結果(受給者情報.get突合結果区分());
-        output.set突合結果名称(JukyushaIF_TsugoKekkaKubun.toValue(
-                受給者情報.get突合結果区分()).get名称());
+        output.set突合結果名称(JukyushaIF_TsugoKekkaKubun.toValue(受給者情報.get突合結果区分()).get名称());
         output.set突合情報(受給者情報.get突合情報区分());
-        output.set突合情報名称(JukyushaIF_TsugoJohoKubun.toValue(
-                受給者情報.get突合情報区分()).get名称());
+        output.set突合情報名称(JukyushaIF_TsugoJohoKubun.toValue(受給者情報.get突合情報区分()).get名称());
         output.set異動年月日(date_to_string(受給者情報.get異動年月日()));
         RString 異動区分コード = 受給者情報.get異動区分コード();
         output.set異動区分(異動区分コード);
         output.set異動区分名称(JukyushaIF_IdoKubunCode.toValue(異動区分コード).get名称());
         output.set異動事由(受給者情報.get異動事由区分());
         output.set異動事由(受給者情報.get異動事由区分());
-        output.set異動事由名称(JukyushaIF_JukyushaIdoJiyu.toValue(
-                受給者情報.get異動事由区分()).get名称());
+        output.set異動事由名称(JukyushaIF_JukyushaIdoJiyu.toValue(受給者情報.get異動事由区分()).get名称());
         output.set被保険者番号(被保険者.get登録被保険者番号().getColumnValue());
         output.set被保険者氏名カナ(被保険者.get宛名カナ名称());
         output.set被保険者氏名(被保険者.get宛名名称());
@@ -310,16 +289,14 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
         output.set資格取得日(date_to_string(受給者情報.get資格取得年月日()));
         output.set資格喪失日(date_to_string(受給者情報.get資格喪失年月日()));
         output.setみなし区分(受給者情報.getみなし要介護区分コード());
-        output.setみなし区分名称(MinashiCode.toValue(
-                受給者情報.getみなし要介護区分コード()).get名称());
+        output.setみなし区分名称(MinashiCode.toValue(受給者情報.getみなし要介護区分コード()).get名称());
         output.set要介護区分(受給者情報.get要介護状態区分コード());
         output.set要介護区分名称(YokaigoJotaiKubunSupport.toValue(
                 被保険者.getサービス提供年月末日().getYearMonth(), 受給者情報.get要介護状態区分コード()).getName());
         output.set有効開始日(date_to_string(受給者情報.get認定有効期間開始年月日()));
         output.set有効終了日(date_to_string(受給者情報.get認定有効期間終了年月日()));
         output.set申請種別(受給者情報.get申請種別コード());
-        output.set申請種別名称(JukyushaIF_ShinseiShubetsuCode.toValue(
-                受給者情報.get申請種別コード()).get名称());
+        output.set申請種別名称(JukyushaIF_ShinseiShubetsuCode.toValue(受給者情報.get申請種別コード()).get名称());
         output.set変更申請区分(受給者情報.get変更申請中区分コード());
         output.set変更申請区分名称(JukyushaIF_HenkoShinseichuKubunCode.toValue(
                 受給者情報.get変更申請中区分コード()).get名称());
@@ -337,17 +314,14 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
         output.set短期入所管理開始日(date_to_string(受給者情報.get短期入所_上限管理適用期間開始年月日()));
         output.set短期入所管理終了日(date_to_string(受給者情報.get短期入所_上限管理適用期間終了年月日()));
         output.set標準負担区分(受給者情報.get標準負担区分コード());
-        output.set標準負担区分名称(JukyushaIF_HyojunFutanKubunCode.toValue(
-                受給者情報.get標準負担区分コード()).get名称());
+        output.set標準負担区分名称(JukyushaIF_HyojunFutanKubunCode.toValue(受給者情報.get標準負担区分コード()).get名称());
         output.set標準負担額(decimal_to_string(受給者情報.get負担額()));
         output.set標準負担適用開始日(date_to_string(受給者情報.get負担額適用開始年月日()));
         output.set標準負担適用終了日(date_to_string(受給者情報.get負担額適用終了年月日()));
         output.set減免中区分(受給者情報.get減免申請中区分コード());
-        output.set減免中区分名称(JukyushaIF_GemmenShinseichuKubunCode.toValue(
-                受給者情報.get減免申請中区分コード()).get名称());
+        output.set減免中区分名称(JukyushaIF_GemmenShinseichuKubunCode.toValue(受給者情報.get減免申請中区分コード()).get名称());
         output.set利用者負担区分(受給者情報.get利用者負担区分コード());
-        output.set利用者負担区分名称(JukyushaIF_RiyoshaFutanKubunCode.toValue(
-                受給者情報.get利用者負担区分コード()).get名称());
+        output.set利用者負担区分名称(JukyushaIF_RiyoshaFutanKubunCode.toValue(受給者情報.get利用者負担区分コード()).get名称());
         output.set給付率(decimal_to_string(受給者情報.get給付率()));
         output.set利用者負担適用開始日(date_to_string(受給者情報.get利用者負担適用開始年月日()));
         output.set利用者負担適用終了日(date_to_string(受給者情報.get利用者負担適用終了年月日()));
@@ -419,23 +393,34 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
         return output;
     }
 
-    /**
-     *
-     * @param entity 被保険者情報
-     * @return
-     */
+    private void headEditor(JukyushaKekkaIchiranCSVEntity output, DbWT5331JukyushaJohoCsvEntity 受給者情報) {
+        RString 保険者名;
+        if (受給者情報.get保険者名() == null) {
+            保険者名 = RString.EMPTY;
+        } else {
+            if (最大桁_12 < 受給者情報.get保険者名().length()) {
+                保険者名 = 受給者情報.get保険者名().substring(0, 最大桁_12);
+            } else {
+                保険者名 = 受給者情報.get保険者名();
+            }
+        }
+        output.set保険者番号(受給者情報.get保険者番号());
+        output.set保険者名(保険者名);
+        RDateTime システム日時 = RDateTime.now();
+        RString 作成日 = システム日時.getDate().wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                .fillType(FillType.BLANK).toDateString();
+        RString 作成時 = システム日時.getTime()
+                .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE);
+        output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時).concat(RString.HALF_SPACE).concat(SAKUSEI));
+    }
+
     private PersonalData getPersonalData(DbWT0001HihokenshaTempEntity entity) {
         ExpandedInformation expandedInformations = new ExpandedInformation(code, 被保険者番号,
                 getColumnValue(entity.get登録被保険者番号()));
         return PersonalData.of(new ShikibetsuCode(entity.get識別コード()), expandedInformations);
     }
 
-    /**
-     * 日付からstringに転換する。
-     *
-     * @param 年月日 日付
-     * @return stringで表示する日付
-     */
     private static RString date_to_string(FlexibleDate 年月日) {
         if (null == 年月日) {
             return RString.EMPTY;
@@ -444,12 +429,6 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
                 .fillType(FillType.BLANK).toDateString();
     }
 
-    /**
-     * 数値からstringに転換する。
-     *
-     * @param number 数値
-     * @return カンマで編集した値
-     */
     private static RString decimal_to_string(Decimal number) {
         if (null == number) {
             return RString.EMPTY;
