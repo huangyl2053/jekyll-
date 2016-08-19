@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1270011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Aug 17 14:30:22 CST 2016 
+ * Fri Aug 19 10:11:25 CST 2016 
  */
 
 
@@ -13,12 +13,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
 /**
- * DataGrid1_Row のクラスファイル 
+ * dgRireki_Row のクラスファイル 
  * 
  * @author 自動生成
  */
 
-public class DataGrid1_Row extends DataRow {
+public class dgRireki_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
 
     private RString txtKokanShikibetsu;
@@ -33,7 +33,7 @@ public class DataGrid1_Row extends DataRow {
     private RString txtJikoFutanSeiriNo;
     private RString txtShoriYM;
 
-    public DataGrid1_Row() {
+    public dgRireki_Row() {
         super();
         this.txtKokanShikibetsu = RString.EMPTY;
         this.txtShikyuShinseishoSeiriNo = RString.EMPTY;
@@ -59,7 +59,7 @@ public class DataGrid1_Row extends DataRow {
         this.setOriginalData("txtShoriYM", txtShoriYM);
     }
 
-    public DataGrid1_Row(RString txtKokanShikibetsu, RString txtShikyuShinseishoSeiriNo, RString txtSakuseiKubun, RString txtHokenshaNo, RString txtShinseiYMD, RString txtKetteiYMD, RString txtShikyugaku, RString txtUketoriNengetsu, RString txtSofuNengetsu, RString txtJikoFutanSeiriNo, RString txtShoriYM) {
+    public dgRireki_Row(RString txtKokanShikibetsu, RString txtShikyuShinseishoSeiriNo, RString txtSakuseiKubun, RString txtHokenshaNo, RString txtShinseiYMD, RString txtKetteiYMD, RString txtShikyugaku, RString txtUketoriNengetsu, RString txtSofuNengetsu, RString txtJikoFutanSeiriNo, RString txtShoriYM) {
         super();
         this.setOriginalData("txtKokanShikibetsu", txtKokanShikibetsu);
         this.setOriginalData("txtShikyuShinseishoSeiriNo", txtShikyuShinseishoSeiriNo);

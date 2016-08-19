@@ -21,34 +21,36 @@ public class KogakuGassanKyufuJissekiDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("TextBox1")
-    private TextBox TextBox1;
-    @JsonProperty("TextBox6")
-    private TextBox TextBox6;
-    @JsonProperty("TextBox5")
-    private TextBox TextBox5;
-    @JsonProperty("TextBox4")
-    private TextBox TextBox4;
-    @JsonProperty("TextBox3")
-    private TextBox TextBox3;
-    @JsonProperty("TextBoxDate1")
-    private TextBoxDate TextBoxDate1;
-    @JsonProperty("TextBoxDate3")
-    private TextBoxDate TextBoxDate3;
-    @JsonProperty("TextBoxNum1")
-    private TextBoxNum TextBoxNum1;
-    @JsonProperty("TextBoxNum3")
-    private TextBoxNum TextBoxNum3;
-    @JsonProperty("TextBoxDate6")
-    private TextBoxDate TextBoxDate6;
-    @JsonProperty("TextBoxDate5")
-    private TextBoxDate TextBoxDate5;
-    @JsonProperty("TextBoxDate4")
-    private TextBoxDate TextBoxDate4;
-    @JsonProperty("HorizontalLine5")
-    private HorizontalLine HorizontalLine5;
-    @JsonProperty("Button6")
-    private Button Button6;
+    @JsonProperty("txtKokanShikibetsu")
+    private TextBox txtKokanShikibetsu;
+    @JsonProperty("txtShikyuShinseishoSeiriNO")
+    private TextBox txtShikyuShinseishoSeiriNO;
+    @JsonProperty("txtJikofutangakuShomeishoSeiriNO")
+    private TextBox txtJikofutangakuShomeishoSeiriNO;
+    @JsonProperty("txtSakuseiKBN")
+    private TextBox txtSakuseiKBN;
+    @JsonProperty("txtHokeshaNO")
+    private TextBox txtHokeshaNO;
+    @JsonProperty("txtShinseiYMD")
+    private TextBoxDate txtShinseiYMD;
+    @JsonProperty("txtKetteiYMD")
+    private TextBoxDate txtKetteiYMD;
+    @JsonProperty("txtJikofutangaku")
+    private TextBoxNum txtJikofutangaku;
+    @JsonProperty("txtShikyugaku")
+    private TextBoxNum txtShikyugaku;
+    @JsonProperty("linLine2")
+    private HorizontalLine linLine2;
+    @JsonProperty("txtShoriYMD")
+    private TextBoxDate txtShoriYMD;
+    @JsonProperty("txtUketoriYMD")
+    private TextBoxDate txtUketoriYMD;
+    @JsonProperty("txtSoufuYMD")
+    private TextBoxDate txtSoufuYMD;
+    @JsonProperty("linLine3")
+    private HorizontalLine linLine3;
+    @JsonProperty("btnKyufujissekiNiModoru")
+    private Button btnKyufujissekiNiModoru;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -57,255 +59,273 @@ public class KogakuGassanKyufuJissekiDetailDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getTextBox1
-     * @return TextBox1
+     * gettxtKokanShikibetsu
+     * @return txtKokanShikibetsu
      */
-    @JsonProperty("TextBox1")
-    public TextBox getTextBox1() {
-        return TextBox1;
+    @JsonProperty("txtKokanShikibetsu")
+    public TextBox getTxtKokanShikibetsu() {
+        return txtKokanShikibetsu;
     }
 
     /*
-     * setTextBox1
-     * @param TextBox1 TextBox1
+     * settxtKokanShikibetsu
+     * @param txtKokanShikibetsu txtKokanShikibetsu
      */
-    @JsonProperty("TextBox1")
-    public void setTextBox1(TextBox TextBox1) {
-        this.TextBox1 = TextBox1;
+    @JsonProperty("txtKokanShikibetsu")
+    public void setTxtKokanShikibetsu(TextBox txtKokanShikibetsu) {
+        this.txtKokanShikibetsu = txtKokanShikibetsu;
     }
 
     /*
-     * getTextBox6
-     * @return TextBox6
+     * gettxtShikyuShinseishoSeiriNO
+     * @return txtShikyuShinseishoSeiriNO
      */
-    @JsonProperty("TextBox6")
-    public TextBox getTextBox6() {
-        return TextBox6;
+    @JsonProperty("txtShikyuShinseishoSeiriNO")
+    public TextBox getTxtShikyuShinseishoSeiriNO() {
+        return txtShikyuShinseishoSeiriNO;
     }
 
     /*
-     * setTextBox6
-     * @param TextBox6 TextBox6
+     * settxtShikyuShinseishoSeiriNO
+     * @param txtShikyuShinseishoSeiriNO txtShikyuShinseishoSeiriNO
      */
-    @JsonProperty("TextBox6")
-    public void setTextBox6(TextBox TextBox6) {
-        this.TextBox6 = TextBox6;
+    @JsonProperty("txtShikyuShinseishoSeiriNO")
+    public void setTxtShikyuShinseishoSeiriNO(TextBox txtShikyuShinseishoSeiriNO) {
+        this.txtShikyuShinseishoSeiriNO = txtShikyuShinseishoSeiriNO;
     }
 
     /*
-     * getTextBox5
-     * @return TextBox5
+     * gettxtJikofutangakuShomeishoSeiriNO
+     * @return txtJikofutangakuShomeishoSeiriNO
      */
-    @JsonProperty("TextBox5")
-    public TextBox getTextBox5() {
-        return TextBox5;
+    @JsonProperty("txtJikofutangakuShomeishoSeiriNO")
+    public TextBox getTxtJikofutangakuShomeishoSeiriNO() {
+        return txtJikofutangakuShomeishoSeiriNO;
     }
 
     /*
-     * setTextBox5
-     * @param TextBox5 TextBox5
+     * settxtJikofutangakuShomeishoSeiriNO
+     * @param txtJikofutangakuShomeishoSeiriNO txtJikofutangakuShomeishoSeiriNO
      */
-    @JsonProperty("TextBox5")
-    public void setTextBox5(TextBox TextBox5) {
-        this.TextBox5 = TextBox5;
+    @JsonProperty("txtJikofutangakuShomeishoSeiriNO")
+    public void setTxtJikofutangakuShomeishoSeiriNO(TextBox txtJikofutangakuShomeishoSeiriNO) {
+        this.txtJikofutangakuShomeishoSeiriNO = txtJikofutangakuShomeishoSeiriNO;
     }
 
     /*
-     * getTextBox4
-     * @return TextBox4
+     * gettxtSakuseiKBN
+     * @return txtSakuseiKBN
      */
-    @JsonProperty("TextBox4")
-    public TextBox getTextBox4() {
-        return TextBox4;
+    @JsonProperty("txtSakuseiKBN")
+    public TextBox getTxtSakuseiKBN() {
+        return txtSakuseiKBN;
     }
 
     /*
-     * setTextBox4
-     * @param TextBox4 TextBox4
+     * settxtSakuseiKBN
+     * @param txtSakuseiKBN txtSakuseiKBN
      */
-    @JsonProperty("TextBox4")
-    public void setTextBox4(TextBox TextBox4) {
-        this.TextBox4 = TextBox4;
+    @JsonProperty("txtSakuseiKBN")
+    public void setTxtSakuseiKBN(TextBox txtSakuseiKBN) {
+        this.txtSakuseiKBN = txtSakuseiKBN;
     }
 
     /*
-     * getTextBox3
-     * @return TextBox3
+     * gettxtHokeshaNO
+     * @return txtHokeshaNO
      */
-    @JsonProperty("TextBox3")
-    public TextBox getTextBox3() {
-        return TextBox3;
+    @JsonProperty("txtHokeshaNO")
+    public TextBox getTxtHokeshaNO() {
+        return txtHokeshaNO;
     }
 
     /*
-     * setTextBox3
-     * @param TextBox3 TextBox3
+     * settxtHokeshaNO
+     * @param txtHokeshaNO txtHokeshaNO
      */
-    @JsonProperty("TextBox3")
-    public void setTextBox3(TextBox TextBox3) {
-        this.TextBox3 = TextBox3;
+    @JsonProperty("txtHokeshaNO")
+    public void setTxtHokeshaNO(TextBox txtHokeshaNO) {
+        this.txtHokeshaNO = txtHokeshaNO;
     }
 
     /*
-     * getTextBoxDate1
-     * @return TextBoxDate1
+     * gettxtShinseiYMD
+     * @return txtShinseiYMD
      */
-    @JsonProperty("TextBoxDate1")
-    public TextBoxDate getTextBoxDate1() {
-        return TextBoxDate1;
+    @JsonProperty("txtShinseiYMD")
+    public TextBoxDate getTxtShinseiYMD() {
+        return txtShinseiYMD;
     }
 
     /*
-     * setTextBoxDate1
-     * @param TextBoxDate1 TextBoxDate1
+     * settxtShinseiYMD
+     * @param txtShinseiYMD txtShinseiYMD
      */
-    @JsonProperty("TextBoxDate1")
-    public void setTextBoxDate1(TextBoxDate TextBoxDate1) {
-        this.TextBoxDate1 = TextBoxDate1;
+    @JsonProperty("txtShinseiYMD")
+    public void setTxtShinseiYMD(TextBoxDate txtShinseiYMD) {
+        this.txtShinseiYMD = txtShinseiYMD;
     }
 
     /*
-     * getTextBoxDate3
-     * @return TextBoxDate3
+     * gettxtKetteiYMD
+     * @return txtKetteiYMD
      */
-    @JsonProperty("TextBoxDate3")
-    public TextBoxDate getTextBoxDate3() {
-        return TextBoxDate3;
+    @JsonProperty("txtKetteiYMD")
+    public TextBoxDate getTxtKetteiYMD() {
+        return txtKetteiYMD;
     }
 
     /*
-     * setTextBoxDate3
-     * @param TextBoxDate3 TextBoxDate3
+     * settxtKetteiYMD
+     * @param txtKetteiYMD txtKetteiYMD
      */
-    @JsonProperty("TextBoxDate3")
-    public void setTextBoxDate3(TextBoxDate TextBoxDate3) {
-        this.TextBoxDate3 = TextBoxDate3;
+    @JsonProperty("txtKetteiYMD")
+    public void setTxtKetteiYMD(TextBoxDate txtKetteiYMD) {
+        this.txtKetteiYMD = txtKetteiYMD;
     }
 
     /*
-     * getTextBoxNum1
-     * @return TextBoxNum1
+     * gettxtJikofutangaku
+     * @return txtJikofutangaku
      */
-    @JsonProperty("TextBoxNum1")
-    public TextBoxNum getTextBoxNum1() {
-        return TextBoxNum1;
+    @JsonProperty("txtJikofutangaku")
+    public TextBoxNum getTxtJikofutangaku() {
+        return txtJikofutangaku;
     }
 
     /*
-     * setTextBoxNum1
-     * @param TextBoxNum1 TextBoxNum1
+     * settxtJikofutangaku
+     * @param txtJikofutangaku txtJikofutangaku
      */
-    @JsonProperty("TextBoxNum1")
-    public void setTextBoxNum1(TextBoxNum TextBoxNum1) {
-        this.TextBoxNum1 = TextBoxNum1;
+    @JsonProperty("txtJikofutangaku")
+    public void setTxtJikofutangaku(TextBoxNum txtJikofutangaku) {
+        this.txtJikofutangaku = txtJikofutangaku;
     }
 
     /*
-     * getTextBoxNum3
-     * @return TextBoxNum3
+     * gettxtShikyugaku
+     * @return txtShikyugaku
      */
-    @JsonProperty("TextBoxNum3")
-    public TextBoxNum getTextBoxNum3() {
-        return TextBoxNum3;
+    @JsonProperty("txtShikyugaku")
+    public TextBoxNum getTxtShikyugaku() {
+        return txtShikyugaku;
     }
 
     /*
-     * setTextBoxNum3
-     * @param TextBoxNum3 TextBoxNum3
+     * settxtShikyugaku
+     * @param txtShikyugaku txtShikyugaku
      */
-    @JsonProperty("TextBoxNum3")
-    public void setTextBoxNum3(TextBoxNum TextBoxNum3) {
-        this.TextBoxNum3 = TextBoxNum3;
+    @JsonProperty("txtShikyugaku")
+    public void setTxtShikyugaku(TextBoxNum txtShikyugaku) {
+        this.txtShikyugaku = txtShikyugaku;
     }
 
     /*
-     * getTextBoxDate6
-     * @return TextBoxDate6
+     * getlinLine2
+     * @return linLine2
      */
-    @JsonProperty("TextBoxDate6")
-    public TextBoxDate getTextBoxDate6() {
-        return TextBoxDate6;
+    @JsonProperty("linLine2")
+    public HorizontalLine getLinLine2() {
+        return linLine2;
     }
 
     /*
-     * setTextBoxDate6
-     * @param TextBoxDate6 TextBoxDate6
+     * setlinLine2
+     * @param linLine2 linLine2
      */
-    @JsonProperty("TextBoxDate6")
-    public void setTextBoxDate6(TextBoxDate TextBoxDate6) {
-        this.TextBoxDate6 = TextBoxDate6;
+    @JsonProperty("linLine2")
+    public void setLinLine2(HorizontalLine linLine2) {
+        this.linLine2 = linLine2;
     }
 
     /*
-     * getTextBoxDate5
-     * @return TextBoxDate5
+     * gettxtShoriYMD
+     * @return txtShoriYMD
      */
-    @JsonProperty("TextBoxDate5")
-    public TextBoxDate getTextBoxDate5() {
-        return TextBoxDate5;
+    @JsonProperty("txtShoriYMD")
+    public TextBoxDate getTxtShoriYMD() {
+        return txtShoriYMD;
     }
 
     /*
-     * setTextBoxDate5
-     * @param TextBoxDate5 TextBoxDate5
+     * settxtShoriYMD
+     * @param txtShoriYMD txtShoriYMD
      */
-    @JsonProperty("TextBoxDate5")
-    public void setTextBoxDate5(TextBoxDate TextBoxDate5) {
-        this.TextBoxDate5 = TextBoxDate5;
+    @JsonProperty("txtShoriYMD")
+    public void setTxtShoriYMD(TextBoxDate txtShoriYMD) {
+        this.txtShoriYMD = txtShoriYMD;
     }
 
     /*
-     * getTextBoxDate4
-     * @return TextBoxDate4
+     * gettxtUketoriYMD
+     * @return txtUketoriYMD
      */
-    @JsonProperty("TextBoxDate4")
-    public TextBoxDate getTextBoxDate4() {
-        return TextBoxDate4;
+    @JsonProperty("txtUketoriYMD")
+    public TextBoxDate getTxtUketoriYMD() {
+        return txtUketoriYMD;
     }
 
     /*
-     * setTextBoxDate4
-     * @param TextBoxDate4 TextBoxDate4
+     * settxtUketoriYMD
+     * @param txtUketoriYMD txtUketoriYMD
      */
-    @JsonProperty("TextBoxDate4")
-    public void setTextBoxDate4(TextBoxDate TextBoxDate4) {
-        this.TextBoxDate4 = TextBoxDate4;
+    @JsonProperty("txtUketoriYMD")
+    public void setTxtUketoriYMD(TextBoxDate txtUketoriYMD) {
+        this.txtUketoriYMD = txtUketoriYMD;
     }
 
     /*
-     * getHorizontalLine5
-     * @return HorizontalLine5
+     * gettxtSoufuYMD
+     * @return txtSoufuYMD
      */
-    @JsonProperty("HorizontalLine5")
-    public HorizontalLine getHorizontalLine5() {
-        return HorizontalLine5;
+    @JsonProperty("txtSoufuYMD")
+    public TextBoxDate getTxtSoufuYMD() {
+        return txtSoufuYMD;
     }
 
     /*
-     * setHorizontalLine5
-     * @param HorizontalLine5 HorizontalLine5
+     * settxtSoufuYMD
+     * @param txtSoufuYMD txtSoufuYMD
      */
-    @JsonProperty("HorizontalLine5")
-    public void setHorizontalLine5(HorizontalLine HorizontalLine5) {
-        this.HorizontalLine5 = HorizontalLine5;
+    @JsonProperty("txtSoufuYMD")
+    public void setTxtSoufuYMD(TextBoxDate txtSoufuYMD) {
+        this.txtSoufuYMD = txtSoufuYMD;
     }
 
     /*
-     * getButton6
-     * @return Button6
+     * getlinLine3
+     * @return linLine3
      */
-    @JsonProperty("Button6")
-    public Button getButton6() {
-        return Button6;
+    @JsonProperty("linLine3")
+    public HorizontalLine getLinLine3() {
+        return linLine3;
     }
 
     /*
-     * setButton6
-     * @param Button6 Button6
+     * setlinLine3
+     * @param linLine3 linLine3
      */
-    @JsonProperty("Button6")
-    public void setButton6(Button Button6) {
-        this.Button6 = Button6;
+    @JsonProperty("linLine3")
+    public void setLinLine3(HorizontalLine linLine3) {
+        this.linLine3 = linLine3;
+    }
+
+    /*
+     * getbtnKyufujissekiNiModoru
+     * @return btnKyufujissekiNiModoru
+     */
+    @JsonProperty("btnKyufujissekiNiModoru")
+    public Button getBtnKyufujissekiNiModoru() {
+        return btnKyufujissekiNiModoru;
+    }
+
+    /*
+     * setbtnKyufujissekiNiModoru
+     * @param btnKyufujissekiNiModoru btnKyufujissekiNiModoru
+     */
+    @JsonProperty("btnKyufujissekiNiModoru")
+    public void setBtnKyufujissekiNiModoru(Button btnKyufujissekiNiModoru) {
+        this.btnKyufujissekiNiModoru = btnKyufujissekiNiModoru;
     }
 
     // </editor-fold>
