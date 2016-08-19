@@ -26,6 +26,7 @@ public class JukyushaKoshinKekkaIchiranReport extends Report<JukyushaKoshinKekka
     private final Map<RString, RString> 出力順Map;
     private final List<RString> 改頁リスト;
     private final RDateTime 作成日時;
+    private final RString 帳票ID;
 
     /**
      * コンストラクタです
@@ -38,12 +39,13 @@ public class JukyushaKoshinKekkaIchiranReport extends Report<JukyushaKoshinKekka
      */
     public JukyushaKoshinKekkaIchiranReport(
             JukyushaHihokenshaEntity 帳票出力対象データ, RString 住所,
-            Map<RString, RString> 出力順Map, List<RString> 改頁リスト, RDateTime 作成日時) {
+            Map<RString, RString> 出力順Map, List<RString> 改頁リスト, RDateTime 作成日時, RString 帳票ID) {
         this.帳票出力対象データ = 帳票出力対象データ;
         this.住所 = 住所; 
         this.出力順Map = 出力順Map;
         this.改頁リスト = 改頁リスト;
         this.作成日時 = 作成日時;
+        this.帳票ID = 帳票ID;
     }
 
     @Override
@@ -65,9 +67,9 @@ public class JukyushaKoshinKekkaIchiranReport extends Report<JukyushaKoshinKekka
             JukyushaHihokenshaEntity 帳票出力対象データ, RString 住所情報) {
         IJukyushaKoshinKekkaIchiranEditor headerEditor
                 = new JukyushaKoshinKekkaIchiranHeaderEditor(
-                        帳票出力対象データ, 出力順Map, 改頁リスト, 作成日時);
+                        帳票出力対象データ, 出力順Map, 改頁リスト, 作成日時, 帳票ID);
         IJukyushaKoshinKekkaIchiranEditor bodyEditor
-                = new JukyushaKoshinKekkaIchiranBodyEditor(帳票出力対象データ, 住所情報);
+                = new JukyushaKoshinKekkaIchiranBodyEditor(帳票出力対象データ, 住所情報, 帳票ID);
         IJukyushaKoshinKekkaIchiranBuilder builder
                 = new JukyushaKoshinKekkaIchiranBuilder(headerEditor, bodyEditor);
         writer.writeLine(builder);

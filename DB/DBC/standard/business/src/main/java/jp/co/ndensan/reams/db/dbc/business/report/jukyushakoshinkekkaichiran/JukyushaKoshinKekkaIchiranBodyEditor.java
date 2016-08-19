@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_Shinsei
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_ShokiboKyotakuServiceRIyoCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_TeiseiKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_TokureiGengakuSochiTaisho;
+import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_TsugoKekkaKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_kohiFutanJogengakuGengakuUmu;
 import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.DbWT5331JukyushaJohoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
@@ -50,22 +51,34 @@ public class JukyushaKoshinKekkaIchiranBodyEditor implements IJukyushaKoshinKekk
     private static final RString パーセント = new RString("%");
     private static final int 住所最大桁数 = 15;
     private static final int HUNDRED = 100;
+    private final RString 帳票ID;
+    private final RString DBC200006帳票ID = new RString("DBC200006_KokuhorenJukyushaDaichoIchiran");
+    private final RString DBC200055帳票ID = new RString("DBC200055_JukyushaKoshinkekkaIchiran");
+    private final RString DBC200058帳票ID = new RString("DBC200058_JukyushaTotsugokekkaIchiran");
 
     /**
      * コンストラクタです
      *
      * @param 帳票出力対象データ JukyushaHihokenshaEntity
      * @param 住所情報 RString
+     * @param 帳票ID RString
      */
-    public JukyushaKoshinKekkaIchiranBodyEditor(JukyushaHihokenshaEntity 帳票出力対象データ, RString 住所情報) {
+    public JukyushaKoshinKekkaIchiranBodyEditor(JukyushaHihokenshaEntity 帳票出力対象データ, RString 住所情報, RString 帳票ID) {
         this.帳票出力対象データ = 帳票出力対象データ;
         this.住所情報 = 住所情報;
+        this.帳票ID = 帳票ID;
     }
 
     @Override
     public JukyushaKoshinKekkaIchiranSource edit(JukyushaKoshinKekkaIchiranSource source) {
         DbWT5331JukyushaJohoTempEntity 受給者情報 = 帳票出力対象データ.get受給者情報明細一時();
         DbWT0001HihokenshaTempEntity 被保険者情報 = 帳票出力対象データ.get被保険者一時();
+         if (DBC200006帳票ID.equals(帳票ID) || DBC200055帳票ID.equals(帳票ID)) {
+             source.listList1_1 = date_to_string(受給者情報.get訂正年月日());
+        } else if(DBC200058帳票ID.equals(帳票ID)) {
+           RString 突合結果名称 = JukyushaIF_TsugoKekkaKubun.toValue(受給者情報.get突合結果区分()).get名称();
+            source.listList1_1 = 受給者情報.get突合結果区分().concat(コロン).concat(突合結果名称);
+        }
         source.listList1_4 = 被保険者情報.get登録被保険者番号().getColumnValue();
         source.listList1_5 = 被保険者情報.get宛名カナ名称();
         source.listList1_6 = 被保険者情報.get行政区コード();
@@ -230,7 +243,6 @@ public class JukyushaKoshinKekkaIchiranBodyEditor implements IJukyushaKoshinKekk
      */
     private void 日付項目設定(JukyushaKoshinKekkaIchiranSource source) {
         DbWT5331JukyushaJohoTempEntity 受給者情報 = 帳票出力対象データ.get受給者情報明細一時();
-        source.listList1_1 = date_to_string(受給者情報.get訂正年月日());
         source.listList1_2 = date_to_string(受給者情報.get異動年月日());
         source.listList1_8 = date_to_string(受給者情報.get生年月日());
         source.listList1_9 = date_to_string(受給者情報.get資格取得年月日());

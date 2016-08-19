@@ -230,7 +230,7 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
                     帳票出力対象データ.get被保険者一時(), parameter.getシステム日付(), 編集住所, true);
         }
         JukyushaKoshinKekkaIchiranReport report = new JukyushaKoshinKekkaIchiranReport(帳票出力対象データ,
-                編集住所, 出力順Map, 改頁リスト, parameter.getシステム日付());
+                編集住所, 出力順Map, 改頁リスト, parameter.getシステム日付(), 帳票分類ID);
         report.writeBy(reportSourceWriter);
         csvWriter.writeLine(output);
     }
