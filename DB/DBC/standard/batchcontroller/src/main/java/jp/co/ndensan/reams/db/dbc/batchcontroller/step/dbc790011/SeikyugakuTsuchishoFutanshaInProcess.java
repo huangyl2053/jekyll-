@@ -48,7 +48,7 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
     private static final RString 区切り文字 = new RString(",");
     private static final Integer INDEX_0 = 0;
     private static final Integer INDEX_3 = 3;
-    private static final RString PARAMETER_OUT_FLOWENTITY;
+    public static final RString PARAMETER_OUT_FLOWENTITY;
 
     private RString csvReaderPath;
     private FlowEntity flowEntity;
