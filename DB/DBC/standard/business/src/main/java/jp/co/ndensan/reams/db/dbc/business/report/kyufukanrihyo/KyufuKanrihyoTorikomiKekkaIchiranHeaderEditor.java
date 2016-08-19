@@ -101,6 +101,6 @@ public class KyufuKanrihyoTorikomiKekkaIchiranHeaderEditor implements IKyufuKanr
     }
 
     private RString get改頁(int index) {
-        return 改頁リスト.size() > index ? 改頁リスト.get(index) : RString.EMPTY;
+        return index < 改頁リスト.size() ? 改頁リスト.get(index) : RString.EMPTY;
     }
 }
