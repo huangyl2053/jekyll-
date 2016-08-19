@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.houshold.HousholdEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4037HikazeNenkinTaishoshaDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.houshold.IHousholdMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1001HihokenshaDaichoAliveDac;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
@@ -178,9 +180,10 @@ public class HousholdFinder {
      * @param 非課税年金対象者一時 非課税年金対象者一時
      * @param 現基礎年金番号 現基礎年金番号
      * @param 被保番号 被保番号
+     * @param userId userId
      */
     @Transaction
-    public void 取込_保存処理(HousholdBusiness 非課税年金対象者一時, RString 現基礎年金番号, RString 被保番号) {
+    public void 取込_保存処理(HousholdBusiness 非課税年金対象者一時, RString 現基礎年金番号, RString 被保番号, RString userId) {
         HousholdUpdateParameter parameter = new HousholdUpdateParameter();
         setキー(非課税年金対象者一時, parameter);
         if (null == 現基礎年金番号) {
@@ -218,22 +221,23 @@ public class HousholdFinder {
      * @param 対象年 対象年
      * @param 各種区分 各種区分
      * @param 金額 金額
+     * @param userId userId
      */
     @Transaction
     public void 新規_保存処理(RString 年度, RString 月, RString 基礎年金番号, RString 現基礎年金番号, RString 年金コード,
             RString 被保番号, RString 年金保険者コード, RDate 作成年月日, RDate 生年月日, RString 性別, RString 氏名カナ,
-            RString 氏名漢字, RString 住所カナ, RString 住所漢字, RString 対象年, RString 訂正区分, RString 各種区分, RString 金額) {
+            RString 氏名漢字, RString 住所カナ, RString 住所漢字, RString 対象年, RString 訂正区分, RString 各種区分, RString 金額, RString userId) {
         HousholdUpdateParameter parameter = new HousholdUpdateParameter();
         parameter.set年度(年度);
         parameter.set処理区分(get処理区分(月));
-        parameter.set対象月(月.substring(0));
+        parameter.set対象月(月.substring(1));
         parameter.set基礎年金番号(get左0埋めRString(基礎年金番号, 桁_10));
         parameter.set現基礎年金番号(get左0埋めRString(現基礎年金番号, 桁_10));
         parameter.set年金コード(get左0埋めRString(年金コード, 桁_4));
         parameter.set被保険者番号(被保番号);
         parameter.set登録区分(TorokuKubun.画面登録.getコード());
         parameter.setDtレコード区分(データレコード);
-        //DT市町村コード
+        parameter.setDt市町村コード(getDT市町村コード(被保番号));
         parameter.setDt年金保険者コード(get左0埋めRString(年金保険者コード, 桁_3));
         parameter.setDt通知内容コード(getDT通知内容コード(月));
         parameter.setDt作成年月日(作成年月日.toDateString());
@@ -254,6 +258,15 @@ public class HousholdFinder {
         mapper.新規_保存処理(parameter);
     }
 
+    private RString getDT市町村コード(RString 被保番号) {
+        DbV1001HihokenshaDaichoAliveDac dac = InstanceProvider.create(DbV1001HihokenshaDaichoAliveDac.class);
+        DbV1001HihokenshaDaichoEntity entity = dac.get被保険者台帳(new HihokenshaNo(被保番号));
+        if (null == entity || null == entity.getShichosonCode()) {
+            return RString.EMPTY;
+        }
+        return entity.getShichosonCode().getColumnValue();
+    }
+
     /**
      * 「DB出力(非課税年金対象者)」の「編集仕様(UPDATE)」の「更新条件検索キー」と「更新_画面登録」を参照し、DBに更新します。
      *
@@ -261,7 +274,7 @@ public class HousholdFinder {
      * @param 月 月
      * @param 現基礎年金番号 現基礎年金番号
      * @param 被保番号 被保番号
-     * @param 基礎年金番号 基礎年金番号
+     * @param 性別 性別
      * @param 生年月日 生年月日
      * @param 作成年月日 作成年月日
      * @param 氏名カナ 氏名カナ
@@ -270,20 +283,21 @@ public class HousholdFinder {
      * @param 住所漢字 住所漢字
      * @param 対象年 対象年
      * @param 金額 金額
+     * @param userId userId
      */
     @Transaction
     public void 修正_登録区分_画面登録_保存処理(HousholdBusiness 非課税年金対象者一時, RString 月, RString 現基礎年金番号,
-            RString 被保番号, RDate 作成年月日, RDate 生年月日, RString 基礎年金番号, RString 氏名カナ,
-            RString 氏名漢字, RString 住所カナ, RString 住所漢字, RString 対象年, RString 金額) {
+            RString 被保番号, RDate 作成年月日, RDate 生年月日, RString 性別, RString 氏名カナ,
+            RString 氏名漢字, RString 住所カナ, RString 住所漢字, RString 対象年, RString 金額, RString userId) {
         HousholdUpdateParameter parameter = new HousholdUpdateParameter();
         setキー(非課税年金対象者一時, parameter);
         parameter.set処理区分(get処理区分(月));
-        parameter.set対象月(月.substring(0));
+        parameter.set対象月(月.substring(1));
         parameter.set現基礎年金番号(get左0埋めRString(現基礎年金番号, 桁_10));
         parameter.set被保険者番号(被保番号);
         parameter.setDt作成年月日(作成年月日.toDateString());
         parameter.setDt生年月日(生年月日.toDateString());
-        parameter.setDt基礎年金番号(基礎年金番号);
+        parameter.setDt性別(性別);
         parameter.setDtカナ氏名(氏名カナ);
         parameter.setDt漢字氏名(氏名漢字);
         parameter.setDtカナ住所(住所カナ);

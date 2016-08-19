@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--  @reamsid_L DBE-1840-011 yaoyahui -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsataishodataoutput.IShinsaTaishoDataOutPutMapper">
+    
+    <resultMap id="resultMap_getShinsaTaishoDataOutPut" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.NijihanteiKekkaTorokuMobileShinsaiinRelateEntity" autoMapping="true">
+        <result property="介護認定審査会開催番号" column="shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="介護認定審査会開催予定年月日" column="shinsakaiKaisaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="介護認定審査会開始予定時刻" column="shinsakaiKaishiYoteiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="介護認定審査会終了予定時刻" column="shinsakaiShuryoYoteiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="介護認定審査会開催予定場所コード" column="shinsakaiKaisaiYoteiBashoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="合議体番号" column="gogitaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="介護認定審査会予定定員" column="shinsakaiYoteiTeiin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="介護認定審査会最大定員" column="shinsakaiSaidaiTeiin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="介護認定審査会自動割当定員" column="shinsakaiJidoWariateTeiin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="介護認定審査会委員定員" column="shinsakaiIinTeiin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="介護認定審査会資料作成年月日" column="shinsakaiShiryoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="介護認定審査会進捗状況" column="ShinsakaiShinchokuJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="介護認定審査会割当済み人数" column="shinsakaiWariateZumiNinzu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="資料作成済フラグ" column="shiryoSakuseiZumiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="介護認定審査会委員コード" column="shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="介護認定審査会開催年月日" column="shinsakaiKaisaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="介護認定審査会議長区分コード" column="kaigoninteiShinsakaiGichoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="委員出席" column="shussekiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="委員遅刻有無" column="existChikokuFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="委員出席時間" column="shussekiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="委員早退有無" column="existSotaiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="委員退席時間" column="taisekiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+    </resultMap>
+    <select resultOrdered="true" id="get認定審査会割当委員情報出力" resultMap="resultMap_getShinsaTaishoDataOutPut"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsataishodataoutput.ShinsaTaishoDataOutPutMybatisParameter" fetchSize="500">
+        select ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo",
+        ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD",
+        ShinsakaiKaisaiYoteiJoho."shinsakaiKaishiYoteiTime",
+        ShinsakaiKaisaiYoteiJoho."shinsakaiShuryoYoteiTime",
+        ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiBashoCode",
+        ShinsakaiKaisaiYoteiJoho."gogitaiNo",
+        ShinsakaiKaisaiYoteiJoho."shinsakaiYoteiTeiin",
+        ShinsakaiKaisaiYoteiJoho."shinsakaiSaidaiTeiin",
+        ShinsakaiKaisaiYoteiJoho."shinsakaiJidoWariateTeiin",
+        ShinsakaiKaisaiYoteiJoho."shinsakaiIinTeiin",
+        ShinsakaiKaisaiYoteiJoho."shinsakaiShiryoSakuseiYMD",
+        ShinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo",
+        ShinsakaiKaisaiYoteiJoho."shinsakaiWariateZumiNinzu",
+        ShinsakaiKaisaiYoteiJoho."shiryoSakuseiZumiFlag",
+        ShinsakaiKaisaiYoteiJoho."mobileDataOutputYMD",
+        ShinsakaiWariateIinJoho."shinsakaiIinCode",
+        ShinsakaiWariateIinJoho."shinsakaiKaisaiYMD",
+        ShinsakaiWariateIinJoho."kaigoninteiShinsakaiGichoKubunCode",
+        ShinsakaiWariateIinJoho."shussekiFlag",
+        ShinsakaiWariateIinJoho."existChikokuFlag",
+        ShinsakaiWariateIinJoho."shussekiTime",
+        ShinsakaiWariateIinJoho."existSotaiFlag",
+        ShinsakaiWariateIinJoho."taisekiTime"
+        from rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" as ShinsakaiKaisaiYoteiJoho   
+        left join rgdb."DbT5503ShinsakaiWariateIinJoho" as ShinsakaiWariateIinJoho on 
+        ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"=  ShinsakaiWariateIinJoho."shinsakaiKaisaiNo"
+        where ShinsakaiWariateIinJoho."shinsakaiKaisaiNo" = #{kaisaiBangou}
+        order by ShinsakaiWariateIinJoho."shinsakaiIinCode"
+			
+    </select>
+    <resultMap id="resultMap_getNijihanteiKekkaTorokuMobileRelateOutPut" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.NijihanteiKekkaTorokuMobileRelateEntity" autoMapping="true">
+        <result property="介護認定審査会開催番号" column="shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="合議体番号" column="gogitaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="介護認定審査会開催年月日" column="shinsakaiKaisaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="介護認定審査会開始時刻" column="shinsakaiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="介護認定審査会終了時刻" column="shinsakaiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="介護認定審査会開催場所コード" column="shinsakaiKaisaiBashoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="所要時間合計" column="shoyoJikanGokei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="介護認定審査会実施人数" column="shinsakaiJisshiNinzu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>   
+        <result property="介護認定審査会審査順" column="shinsakaiOrder" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="判定結果コード" column="hanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>      
+        <result property="二次判定年月日" column="nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="二次判定要介護状態区分コード" column="nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="二次判定認定有効期間" column="nijiHanteiNinteiYukoKikan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="二次判定認定有効開始年月日" column="nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="二次判定認定有効終了年月日" column="nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="介護認定審査会意見" column="shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="一次判定結果変更理由" column="ichijiHanteiKekkaHenkoRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="要介護状態像例コード" column="yokaigoJotaizoReiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="認定審査会意見種類" column="ninteishinsakaiIkenShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="審査会メモ" column="shinsakaiMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="二次判定結果入力方法" column="nijiHanteiKekkaInputHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="二次判定結果入力年月日" column="nijiHanteiKekkaInputYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>       
+        <result property="認定申請区分法令コード" column="ninteiShinseiHoreiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="申請書管理番号" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="厚労省IF識別コード" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="証記載保険者番号" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="認定申請年月日" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="認定申請区分申請時コード" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>  
+        <result property="認定申請区分申請時" column="shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="被保険者氏名" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="被保険者氏名カナ" column="hihokenshaKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="生年月日" column="seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="年齢" column="age" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="性別" column="seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="郵便番号" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="住所" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="電話番号" column="telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="市町村名称" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>        
+        <result property="要介護認定1_5次判定年月日" column="ichiGojiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="要介護認定1_5次判定結果コード" column="ichiGojiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="要介護認定1_5次判定結果コード認知症加算" column="ichiGojiHanteiKekkaNinchishoKasanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="要介護認定等基準時間" column="kijunJikan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="要介護認定等基準時間食事" column="kijunJikanShokuji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="要介護認定等基準時間排泄" column="kijunJikanHaisetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="要介護認定等基準時間移動" column="kijunJikanIdo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="要介護認定等基準時間清潔保持" column="kijunJikanSeiketsuHoji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="要介護認定等基準時間間接ケア" column="kijunJikanKansetsuCare" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="要介護認定等基準時間BPSD関連" column="kijunJikanKansetsuCare" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="要介護認定等基準時間機能訓練" column="kijunJikanKinoKunren" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="要介護認定等基準時間医療関連" column="kijunJikanIryoKanren" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="要介護認定等基準時間認知症加算" column="kijunJikanNinchishoKasan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="中間評価項目得点第1群" column="chukanHyokaKomoku1gun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="中間評価項目得点第2群" column="chukanHyokaKomoku2gun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="中間評価項目得点第3群" column="chukanHyokaKomoku3gun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="中間評価項目得点第4群" column="chukanHyokaKomoku4gun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="中間評価項目得点第5群" column="chukanHyokaKomoku5gun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="要介護認定1_5次判定警告コード" column="ichiGojiHnateiKeikokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="要介護認定状態の安定性コード" column="jotaiAnteiseiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="認知症自立度Ⅱ以上の蓋然性" column="ninchishoJiritsudoIIijoNoGaizensei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="認知機能及び状態安定性から推定される給付区分コード" column="suiteiKyufuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>      
+        <result property="一次判定年月日" column="ichijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="要介護認定一次判定結果コード" column="ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>    
+        <result property="認定調査依頼完了年月日" column="ninteichosaIraiKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>        
+        <result property="認定調査依頼履歴番号" column="ninteichosaRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="認定調査委託先コード" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="調査委託先" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="認定調査員コード" column="ninteichousaIraiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="調査員氏名" column="gaikyoChosaTextImageKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="概況特記テキストイメージ区分コード" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="概況特記テキストイメージ区分" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="認定調査依頼区分コード" column="ninteichousaIraiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="認定調査依頼区分" column="ninteichosaIraiKaisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>    
+        <result property="認定調査回数" column="updateCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="認定調査実施年月日" column="ninteichosaJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="認定調査受領年月日" column="ninteichosaJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="認定調査区分コード" column="ninteiChosaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="認定調査区分" column="ninteiChosaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>        
+        <result property="認定調査実施場所コード" column="chosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>       
+        <result property="認定調査実施場所名称" column="chosaJisshiBashoMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="認定調査サービス区分コード" column="serviceKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>      
+        <result property="利用施設名" column="riyoShisetsuShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="利用施設住所" column="riyoShisetsuJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="利用施設電話番号" column="riyoShisetsuTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="利用施設郵便番号" column="riyoShisetsuYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="特記" column="tokki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="認定調査特記事項受付年月日" column="tokkijikoUketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="認定調査特記事項受領年月日" column="tokkijikoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>         
+        <result property="住宅改修改修箇所" column="jutakuKaishu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="市町村特別給付サービス種類名" column="tokubetsuKyufuService" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="介護保険給付以外の在宅サービス種類名" column="zaitakuService" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="概況特記事項主訴" column="shuso" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="概況特記事項家族状況" column="kazokuJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="概況特記事項居住環境" column="kyojuKankyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="概況特記事項機器器械" column="kikaiKiki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>        
+        <result property="認定調査特記事項番号" column="ninteichosaTokkijikoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="認定調査特記事項連番" column="ninteichosaTokkijikoRemban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="原本マスク区分コード" column="genponMaskKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="原本マスク区分" column="genponMaskKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="特記事項" column="tokkiJiko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="サービスの状況連番" column="remban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="サービスの状況" column="serviceJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="サービスの状況フラグ連番" column="remban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="サービスの状況フラグ" column="serviceJokyoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>     
+        <result property="記入項目連番" column="remban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="サービスの状況記入" column="serviceJokyoKinyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>        
+        <result property="施設利用連番" column="remban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="施設利用フラグ" column="shisetsuRiyoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="認定調査認知症高齢者の日常生活自立度コード" column="ninchishoNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="認定調査障害高齢者の日常生活自立度コード" column="shogaiNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="調査項目連番" column="remban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="調査項目文言" column="researchItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="イメージ共有ファイルID" column="imageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>  
+    </resultMap>
+    <select resultOrdered="true" id="get二次判定結果登録用データ出力" resultMap="resultMap_getNijihanteiKekkaTorokuMobileRelateOutPut"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsataishodataoutput.ShinsaTaishoDataOutPutMybatisParameter" fetchSize="500">
+        select
+        T5511."shinsakaiKaisaiNo"
+        , T5511."gogitaiNo"
+        , T5511."shinsakaiKaisaiYMD"
+        , T5511."shinsakaiKaishiTime"
+        , T5511."shinsakaiShuryoTime"
+        , T5511."shinsakaiKaisaiBashoCode"
+        , T5511."shoyoJikanGokei"
+        , T5511."shinsakaiJisshiNinzu"
+        , T5502."shinsakaiOrder"
+        , T5502."hanteiKekkaCode"
+        , T5102."nijiHanteiYMD"
+        , T5102."nijiHanteiYokaigoJotaiKubunCode"
+        , T5102."nijiHanteiNinteiYukoKikan"
+        , T5102."nijiHanteiNinteiYukoKaishiYMD"
+        , T5102."nijiHanteiNinteiYukoShuryoYMD"
+        , T5102."shinsakaiIken"
+        , T5102."ichijiHanteiKekkaHenkoRiyu"
+        , T5102."yokaigoJotaizoReiCode"
+        , T5102."ninteishinsakaiIkenShurui"
+        , T5102."shinsakaiMemo"
+        , T5102."nijiHanteiKekkaInputHoho"
+        , T5102."nijiHanteiKekkaInputYMD"
+        , T5101."ninteiShinseiHoreiKubunCode"
+        , T5101."shinseishoKanriNo"
+        , T5101."koroshoIfShikibetsuCode"
+        , T5101."hihokenshaNo"
+        , T5101."ninteiShinseiYMD"
+        , T5101."ninteiShinseiShinseijiKubunCode"
+        , T5101."hihokenshaName"
+        , T5101."hihokenshaKana"
+        , T5101."seinengappiYMD"
+        , T5101."age"
+        , T5101."seibetsu"
+        , T5101."yubinNo"
+        , T5101."jusho"
+        , T5101."telNo"
+        , T7051."shichosonMeisho"
+        , T5510."ichiGojiHanteiYMD"
+        , T5510."ichiGojiHanteiKekkaCode"
+        , T5510."ichiGojiHanteiKekkaNinchishoKasanCode"
+        , T5510."kijunJikan"
+        , T5510."kijunJikanShokuji"
+        , T5510."kijunJikanHaisetsu"
+        , T5510."kijunJikanIdo"
+        , T5510."kijunJikanSeiketsuHoji"
+        , T5510."kijunJikanKansetsuCare"
+        , T5510."kijunJikanBPSDKanren"
+        , T5510."kijunJikanKinoKunren"
+        , T5510."kijunJikanIryoKanren"
+        , T5510."kijunJikanNinchishoKasan"
+        , T5510."chukanHyokaKomoku1gun"
+        , T5510."chukanHyokaKomoku2gun"
+        , T5510."chukanHyokaKomoku3gun"
+        , T5510."chukanHyokaKomoku4gun"
+        , T5510."chukanHyokaKomoku5gun"
+        , T5510."ichiGojiHnateiKeikokuCode"
+        , T5510."jotaiAnteiseiCode"
+        , T5510."ninchishoJiritsudoIIijoNoGaizensei"
+        , T5510."suiteiKyufuKubunCode"
+        , T5116."ichijiHanteiYMD"
+        , T5116."ichijiHanteiKekkaCode"
+        , T5105."ninteichosaIraiKanryoYMD"
+        , T5202."ninteichosaRirekiNo"
+        , T5202."gaikyoChosaTextImageKubun" 
+        , T5202."koroshoIfShikibetsuCode"
+        , T5202."ninteichousaIraiKubunCode"
+        , T5202."ninteichosaIraiKaisu"
+        , T5202."updateCount"
+        , T5202."ninteichosaJisshiYMD"
+        , T5202."ninteichosaJuryoYMD"
+        , T5202."ninteiChosaKubunCode"
+        , T5202."chosaItakusakiCode"
+        , T5202."chosainCode"
+        , T5202."chosaJisshiBashoCode"
+        , T5202."chosaJisshiBashoMeisho"
+        , T5202."serviceKubunCode"
+        , T5202."riyoShisetsuShimei"
+        , T5202."riyoShisetsuJusho"
+        , T5202."riyoShisetsuTelNo"
+        , T5202."riyoShisetsuYubinNo"
+        , T5202."tokki"
+        , T5202."tokkijikoUketsukeYMD"
+        , T5202."tokkijikoJuryoYMD"
+        , T5206."jutakuKaishu"
+        , T5206."tokubetsuKyufuService"
+        , T5206."zaitakuService"
+        , T5206."shuso"
+        , T5206."kazokuJokyo"
+        , T5206."kyojuKankyo"
+        , T5206."kikaiKiki"
+        , T5205."ninteichosaTokkijikoNo"
+        , T5205."ninteichosaTokkijikoRemban"
+        , T5205."genponMaskKubun"
+        , T5205."tokkiJiko"
+        , T5207."remban" as サービスの状況連番
+        , T5207."serviceJokyo"
+        , T5208."remban" as サービスの状況フラグ連番
+        , T5208."serviceJokyoFlag"
+        , T5209."remban" as 記入項目連番
+        , T5209."serviceJokyoKinyu"
+        , T5210."remban" as 施設利用連番
+        , T5210."shisetsuRiyoFlag"
+        , T5203."ninchishoNichijoSeikatsuJiritsudoCode"
+        , T5203."shogaiNichijoSeikatsuJiritsudoCode"
+        , T5211."remban" as 調査項目連番
+        , T5211."researchItem"
+        , T5115."imageSharedFileId"
+        , T5101."shoKisaiHokenshaNo"
+        , T5101."hihokenshaNo"
+        from
+        rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" T5511 
+        left join rgdb."DbT5502ShinsakaiWariateJoho" T5502 
+        on T5502."shinsakaiKaisaiNo" = T5511."shinsakaiKaisaiNo"
+        left join rgdb."DbT5101NinteiShinseiJoho" T5101 
+        on T5101."shinseishoKanriNo" = T5502."shinseishoKanriNo" 
+        and T5101."logicalDeletedFlag" = false 
+        inner join rgdb."DbT5201NinteichosaIraiJoho" T5201 
+        on T5101."shinseishoKanriNo" = T5201."shinseishoKanriNo" 
+        and T5201."logicalDeletedFlag" = false 
+        inner join ( 
+        select
+        max(DbT5201."ninteichosaIraiRirekiNo") as 最大履歴番号
+        , DbT5201."shinseishoKanriNo" 
+        from
+        rgdb."DbT5201NinteichosaIraiJoho" DbT5201 
+        where
+        DbT5201."logicalDeletedFlag" = false 
+        group by
+        DbT5201."shinseishoKanriNo"
+        ) AS 履歴書最大番号 
+        on 履歴書最大番号."shinseishoKanriNo" = T5201."shinseishoKanriNo" 
+        and 履歴書最大番号."最大履歴番号" = T5201."ninteichosaIraiRirekiNo"
+        left join rgdb."DbT7051KoseiShichosonMaster" T7051
+        on T7051."shoKisaiHokenshaNo" =  T5101."shoKisaiHokenshaNo"
+        left join rgdb."DbT5102NinteiKekkaJoho" T5102 
+        on T5101."shinseishoKanriNo" = T5102."shinseishoKanriNo" 
+        left join rgdb."DbT5510IchiGojiHanteiKekkaJoho" T5510 
+        on T5101."shinseishoKanriNo" = T5510."shinseishoKanriNo" 
+        left join rgdb."DbT5116IchijiHanteiKekkaJoho" T5116 
+        on T5116."shinseishoKanriNo" = T5101."shinseishoKanriNo" 
+        left join rgdb."DbT5105NinteiKanryoJoho" T5105 
+        on T5101."shinseishoKanriNo" = T5105."shinseishoKanriNo" 
+        left join rgdb."DbT5202NinteichosahyoGaikyoChosa" T5202 
+        on T5101."shinseishoKanriNo" = T5202."shinseishoKanriNo" 
+        and T5201."ninteichosaIraiRirekiNo" = T5202."ninteichosaRirekiNo" 
+        left join rgdb."DbT5206GaikyoTokki" T5206 
+        on T5101."shinseishoKanriNo" = T5206."shinseishoKanriNo" 
+        and T5201."ninteichosaIraiRirekiNo" = T5206."ninteichosaRirekiNo" 
+        left join rgdb."DbT5205NinteichosahyoTokkijiko" T5205 
+        on T5101."shinseishoKanriNo" = T5205."shinseishoKanriNo" 
+        and T5201."ninteichosaIraiRirekiNo" = T5205."ninteichosaRirekiNo" 
+        left join rgdb."DbT5207NinteichosahyoServiceJokyo" T5207 
+        on T5101."shinseishoKanriNo" = T5207."shinseishoKanriNo" 
+        and T5201."ninteichosaIraiRirekiNo" = T5207."ninteichosaRirekiNo" 
+        left join rgdb."DbT5208NinteichosahyoServiceJokyoFlag" T5208 
+        on T5101."shinseishoKanriNo" = T5208."shinseishoKanriNo" 
+        and T5201."ninteichosaIraiRirekiNo" = T5208."ninteichosaRirekiNo" 
+        left join rgdb."DbT5209NinteichosahyoKinyuItem" T5209 
+        on T5101."shinseishoKanriNo" = T5209."shinseishoKanriNo" 
+        and T5201."ninteichosaIraiRirekiNo" = T5209."ninteichosaRirekiNo" 
+        left join rgdb."DbT5210NinteichosahyoShisetsuRiyo" T5210 
+        on T5101."shinseishoKanriNo" = T5210."shinseishoKanriNo" 
+        and T5201."ninteichosaIraiRirekiNo" = T5210."ninteichosaRirekiNo" 
+        left join rgdb."DbT5203NinteichosahyoKihonChosa" T5203 
+        on T5101."shinseishoKanriNo" = T5203."shinseishoKanriNo" 
+        and T5201."ninteichosaIraiRirekiNo" = T5203."ninteichosaRirekiNo" 
+        left join rgdb."DbT5115Image" T5115 
+        on T5101."shinseishoKanriNo" = T5115."shinseishoKanriNo"
+        left join rgdb."DbT5211NinteichosahyoChosaItem" T5211 
+        on T5101."shinseishoKanriNo" = T5211."shinseishoKanriNo" 
+        and T5201."ninteichosaIraiRirekiNo"= T5211."ninteichosaRirekiNo"
+        where
+        T5511."shinsakaiKaisaiNo" = #{kaisaiBangou} 
+        order by
+        T5502."shinsakaiOrder"
+    </select>
+    <select resultOrdered="true" id="getDbT5501ShinsakaiKaisaiYoteiJoho" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5501ShinsakaiKaisaiYoteiJohoMapper.ResultMap_DbT5501ShinsakaiKaisaiYoteiJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsataishodataoutput.ShinsaTaishoDataOutPutMybatisParameter" fetchSize="500">
+        SELECT    
+        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5501ShinsakaiKaisaiYoteiJohoMapper.allColumns_DbT5501ShinsakaiKaisaiYoteiJoho" />
+        FROM 
+        rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"  Dbt5501
+        WHERE  Dbt5501."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo} 			
+    </select>
+</mapper>

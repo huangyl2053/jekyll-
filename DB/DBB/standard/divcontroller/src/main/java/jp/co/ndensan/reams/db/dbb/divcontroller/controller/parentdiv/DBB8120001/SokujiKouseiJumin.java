@@ -66,6 +66,7 @@ public class SokujiKouseiJumin {
         KaigoFukaKihonSearchKey 介護賦課基本情報の検索キー = new Builder(通知書番号, 賦課年度, 市町村コード, 識別コード).build();
         sokujiKouseiJuminDiv.getCcdSokujiKouseiKihon().load(介護賦課基本情報の検索キー);
         sokujiKouseiJuminDiv.getSokujiKouseiAtena().initialize(識別コード);
+        ViewStateHolder.put(ViewStateKeys.氏名, sokujiKouseiJuminDiv.getSokujiKouseiAtena().get氏名漢字());
         return ResponseData.of(sokujiKouseiJuminDiv).respond();
     }
 }

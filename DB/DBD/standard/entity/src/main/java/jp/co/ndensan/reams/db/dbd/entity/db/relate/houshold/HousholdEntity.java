@@ -20,6 +20,7 @@ import lombok.Setter;
 @Setter
 public class HousholdEntity implements Serializable {
 
+    private int count;
     private RString カナ氏名;
     private RString 漢字氏名;
     private RString 生年月日;

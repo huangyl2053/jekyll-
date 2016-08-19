@@ -24,6 +24,9 @@ public enum KubunShikyuGendogakuSpec implements IPredicate<KubunShikyuGendogakuD
     重複の入力チェック {
                 @Override
                 public boolean apply(KubunShikyuGendogakuDiv div) {
+                    if (div.getServiceShuruiShousai().getTxtTeikyoKaishiYM().getValue() == null) {
+                        return true;
+                    }
                     return SpecHelper.is重複の入力チェック(div);
                 }
             },
@@ -77,7 +80,7 @@ public enum KubunShikyuGendogakuSpec implements IPredicate<KubunShikyuGendogakuD
             return (div.getServiceShuruiShousai().getTxtServiceCode().getValue() != null
                     && div.getServiceShuruiShousai().getTxtTeikyoKaishiYM().getValue() != null
                     && div.getServiceShuruiShousai().getTxtServiceMeisho().getValue() != null
-                    && div.getServiceShuruiShousai().getTxtServiceRyakusho() != null);
+                    && div.getServiceShuruiShousai().getTxtServiceRyakusho().getValue() != null);
         }
 
         private static boolean isYMCompare(RDate startTimeRow, RDate endTimeRow, RDate startDate, RDate endDate) {

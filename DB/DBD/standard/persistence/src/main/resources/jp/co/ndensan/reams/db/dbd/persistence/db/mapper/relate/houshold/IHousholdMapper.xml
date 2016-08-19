@@ -6,6 +6,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.houshold.IHousholdMapper">
 
     <resultMap id="resultMap_非課税年金対象者情報" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.houshold.HousholdEntity" autoMapping="true">
+        <result property="count" column="count" typeHandler="org.apache.ibatis.type.IntegerTypeHandler" />
         <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="カナ氏名" column="カナ氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="漢字氏名" column="漢字氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -29,6 +30,7 @@
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.houshold.HousholdParameter"
             fetchSize="500">
         SELECT 
+            A."updateCount" AS count,
             A.hihokenshaNo AS 被保険者番号,
             A."dtkanashimei" AS カナ氏名,
             A."dtkanjishimei" AS 漢字氏名,
@@ -101,7 +103,7 @@
         "genkisonenkinno" = #{現基礎年金番号},
         "hihokenshano" = #{被保険者番号},
         "dtsakuseiymd" = #{dt作成年月日},
-        "kisonenkinno" = #{dt基礎年金番号},
+        "dtseibetsu" = #{dt性別},
         "dtbirthday" = #{dt生年月日},
         "dtkanashimei" = #{dtカナ氏名},
         "dtkanjishimei" = #{dt漢字氏名},
@@ -184,8 +186,6 @@
                #{年金コード},
                #{被保険者番号},
                #{登録区分},
-               #{dtレコード区分},
-               #{dt市町村コード},
                #{dtレコード区分},
                #{dt市町村コード},
                #{dt年金保険者コード},

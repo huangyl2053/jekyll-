@@ -198,16 +198,18 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
         builder = new RStringBuilder();
         builder.append((FORMAT_LEFT).concat(出力_導入形態コード).concat(FORMAT_RIGHT).concat(導入形態コード));
         出力条件リスト.add(builder.toRString());
+        市町村コード = parameter.get市町村コード();
         if (市町村コード != null) {
             builder = new RStringBuilder();
-            市町村コード = parameter.get市町村コード();
             builder.append((FORMAT_LEFT).concat(出力_市町村コード).concat(FORMAT_RIGHT).concat(市町村コード.getColumnValue()));
             出力条件リスト.add(builder.toRString());
         }
-        builder = new RStringBuilder();
         市町村名称 = parameter.get市町村名称();
-        builder.append((FORMAT_LEFT).concat(出力_市町村名称).concat(FORMAT_RIGHT).concat(市町村名称));
-        出力条件リスト.add(builder.toRString());
+        if (市町村名称 != null) {
+            builder = new RStringBuilder();
+            builder.append((FORMAT_LEFT).concat(出力_市町村名称).concat(FORMAT_RIGHT).concat(市町村名称));
+            出力条件リスト.add(builder.toRString());
+        }
         if (処理年度 != null) {
             builder = new RStringBuilder();
             builder.append((FORMAT_LEFT).concat(出力_処理年度).concat(FORMAT_RIGHT).concat(処理年度.wareki().toDateString()));
@@ -232,7 +234,8 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
             }
         } else if (INDEX_111.equals(導入形態コード)) {
             for (ShichosonJouhouResult result : 市町村情報リスト) {
-                if (result.get市町村コード() != null && result.get開始年月日() != null && result.get終了年月日() != null) {
+                if (result != null && result.get市町村コード() != null && result.get開始年月日() != null && result.get終了年月日() != null
+                        && result.get市町村識別ID() != null && result.get開始時刻() != null && result.get終了時刻() != null) {
                     builder = new RStringBuilder();
                     builder.append((FORMAT_LEFT).concat(出力_市町村情報リスト).concat(FORMAT_RIGHT).concat(result.get市町村コード().value())
                             .concat(出力_コンマ).concat(result.get市町村識別ID()).concat(出力_コンマ).concat(new RString(result.get開始年月日().toString()))
