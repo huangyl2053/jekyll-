@@ -62,7 +62,7 @@ public class ShinseiJohoChohyoTempTableInsertProcess extends BatchProcessBase<Sh
                 && entity.getRirekiNoChohyo().equals(tmpEntity.getRirekiNoChohyo())
                 && entity.getNinteiYukoKikanKaishiYMDChohyo().equals(tmpEntity.getNinteiYukoKikanKaishiYMDChohyo())
                 && entity.getNinteiYukoKikanShuryoYMDChohyo().equals(tmpEntity.getNinteiYukoKikanShuryoYMDChohyo())
-                && entity.getYokaigoJotaiKubunCode().equals(tmpEntity.getYokaigoJotaiKubunCode())
+                && entity.getYokaigoJotaiKubunCodeChohyo().equals(tmpEntity.getYokaigoJotaiKubunCodeChohyo())
                 && entity.isKyuSochishaFlagChohyo() == tmpEntity.isKyuSochishaFlagChohyo()) {
             return;
         }

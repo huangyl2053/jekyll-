@@ -126,7 +126,7 @@ public class ShinseiJohoChohyoTempEntity extends DbTableEntityBase<ShinseiJohoCh
     private LasdecCode koikinaiTokureiSochimotoShichosonCodeChohyo;
     private LasdecCode kyuShichosonCodeChohyo;
     private boolean kyuSochishaFlagChohyo;
-    private Code yokaigoJotaiKubunCode;
+    private Code yokaigoJotaiKubunCodeChohyo;
     private FlexibleDate ninteiYukoKikanKaishiYMDChohyo;
     private FlexibleDate ninteiYukoKikanShuryoYMDChohyo;
 
