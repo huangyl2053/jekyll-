@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd4030011;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -31,10 +32,10 @@ public class ShogaishaKojoTaishoshaListMyBatisParameter extends UaFt200FindShiki
     private final RString 障害高齢者の日常生活自立度;
     private final RString 障がい者手帳;
     private final RString 喪失事由;
-    private final RDate 喪失日FROM;
-    private final RDate 喪失日TO;
-    private final RDate 決定日FROM;
-    private final RDate 決定日TO;
+    private final FlexibleDate 喪失日FROM;
+    private final FlexibleDate 喪失日TO;
+    private final FlexibleDate 決定日FROM;
+    private final FlexibleDate 決定日TO;
     private final RDate 交付日;
     private final RString 前回非該当者;
     private final boolean 障がい者手帳ある;
@@ -64,7 +65,8 @@ public class ShogaishaKojoTaishoshaListMyBatisParameter extends UaFt200FindShiki
      */
     public ShogaishaKojoTaishoshaListMyBatisParameter(FlexibleYear 対象年度, RString 被保険者番号, RString 氏名, RString 認定区分,
             RString 認定内容, RString 認知症高齢者の日常生活自立度, RString 障害高齢者の日常生活自立度, RString 障がい者手帳,
-            RString 喪失事由, RDate 喪失日FROM, RDate 喪失日TO, RDate 決定日FROM, RDate 決定日TO, RDate 交付日, RString 前回非該当者,
+            RString 喪失事由, FlexibleDate 喪失日FROM, FlexibleDate 喪失日TO, FlexibleDate 決定日FROM, FlexibleDate 決定日TO,
+            RDate 交付日, RString 前回非該当者,
             IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey) {
 
         super(shikibetsuTaishoPSMSearchKey);
