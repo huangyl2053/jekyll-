@@ -106,7 +106,7 @@ public class SoufuJouhouHandler {
         for (SoufuJouhouBusiness business : 再審査申立書情報Business) {
             dgSofuIchiran_Row row = new dgSofuIchiran_Row();
             row.setTxtJigyoshaNo(business.get事業所番号());
-            row.setTxtHihoName(business.get事業所名());
+            row.setTxtJigyoshaName(business.get事業所名());
             row.setTxtHihoNo(business.get被保険者番号());
             row.setTxtHihoName(business.get宛名名称());
             row.setTxtServiceTeikyoYM(new FlexibleDate(business.getサービス提供年月()).getYearMonth().wareki().toDateString());
