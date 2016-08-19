@@ -15,9 +15,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
- * 総合事業費過誤決定通知書情報取込（保険者分)帳票BodyEditor
+ * 帳票設計_DBC200085_総合事業費過誤決定通知書情報取込一覧表帳票BodyEditor
  *
- * @reamsid_LDBC-2550-011 jiangxiaolong
+ * @reamsid_LDBC-2550-031 jiangxiaolong
  */
 public class SogojigyohiKagoKetteiHokenshaBodyEditor
         implements ISogojigyohiKagoKetteiHokenshaBunEditor {
@@ -28,8 +28,8 @@ public class SogojigyohiKagoKetteiHokenshaBodyEditor
 
     private static final RString 件数タイトル = new RString("件数");
     private static final RString 単位数タイトル = new RString("単位数");
-    private static final RString 負担額タイトル = new RString("負担額");
-    private static final RString 総合事業費_負担額タイトル = new RString("総合事業費_負担額");
+    private static final RString 負担額タイトル = new RString("保険者負担額");
+    private static final RString 総合事業費_負担額タイトル = new RString("総合事業費");
 
     /**
      *  コンストラクタです

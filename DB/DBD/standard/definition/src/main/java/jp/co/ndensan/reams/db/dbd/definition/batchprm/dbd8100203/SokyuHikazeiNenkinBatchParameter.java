@@ -5,6 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100203;
 
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100203.SokyuuFuicchiCsvProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100203.SokyuuGaitouIchirannCsvProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100203.SokyuuSeinenngappiCsvProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -47,4 +50,34 @@ public class SokyuHikazeiNenkinBatchParameter extends BatchParameterBase {
     private Long 出力順ID3;
     @BatchParameter(key = OUTPUTJUNN4, name = "出力順ID4")
     private Long 出力順ID4;
+
+    /**
+     * 結果一覧(遡及該当)CSV出力の引数を返します。。
+     *
+     * @param 出力順ID1 出力順ID1
+     * @return 結果一覧(遡及該当)CSV出力
+     */
+    public SokyuuGaitouIchirannCsvProcessParameter toSokyuuGaitouIchirannCsvProcessParameter(Long 出力順ID1) {
+        return new SokyuuGaitouIchirannCsvProcessParameter(出力順ID1);
+    }
+
+    /**
+     * 結果一覧(遡及不一致)CSV出力の引数を返します。。
+     *
+     * @param 出力順ID2 出力順ID2
+     * @return 結果一覧(遡及不一致)CSV出力
+     */
+    public SokyuuFuicchiCsvProcessParameter toSokyuuFuicchiCsvProcessParameter(Long 出力順ID2) {
+        return new SokyuuFuicchiCsvProcessParameter(出力順ID2);
+    }
+
+    /**
+     * 結果一覧(生年月日)CSV出力の引数を返します。。
+     *
+     * @param 出力順ID3 出力順ID3
+     * @return 結果一覧(生年月日)CSV出力
+     */
+    public SokyuuSeinenngappiCsvProcessParameter toSokyuuSeinenngappiCsvProcessParameter(Long 出力順ID3) {
+        return new SokyuuSeinenngappiCsvProcessParameter(出力順ID3);
+    }
 }

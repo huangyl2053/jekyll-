@@ -146,7 +146,7 @@ public class JukyushaTeiseiRenrakuhyoToroku {
      * 証記載保険者番号と広域保険者番号取得のメソッドです。
      *
      * @param 被保険者番号 HihokenshaNo
-     * @param 異動日 FlexibleDate return List<ShoKisaiHokenshaNo>
+     * @param 異動日 FlexibleDate
      *
      * @return List<ShoKisaiHokenshaNo>
      */

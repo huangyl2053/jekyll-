@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyotakukeika.kyotakukeikakutodokede;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.kyotakuserviceriyohyomain.KaigoJigyoshaResult;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuserviceriyohyomain.KaigoJigyoshaResult;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyotakukeika.kyotakukeikakutodokede.KyotakuKeikakuTodokedeMapperParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyotakukeika.kyotakukeikakutodokede.KyotakuKeikakuTodokedeEntity;
 

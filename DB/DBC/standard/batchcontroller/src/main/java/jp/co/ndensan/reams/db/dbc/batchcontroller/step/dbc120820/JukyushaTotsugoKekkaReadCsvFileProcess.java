@@ -88,6 +88,7 @@ public class JukyushaTotsugoKekkaReadCsvFileProcess extends BatchProcessBase<RSt
         controlCsvEntity = new JukyushaKekkaJohoControlCsvEntity();
         listDataEntity = new ArrayList<>();
         returnEntity = new FlowEntity();
+        flowEntity = new OutputParameter<>();
         flowEntity.setValue(returnEntity);
     }
 

@@ -24,11 +24,9 @@ import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.SogoJigyoTaishoshaManager;
 import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.RiyoshaFutanWariaiMeisaiMapperParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3113RiyoshaFutanWariaiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3115RiyoshaFutanWariaiKonkyoEntity;
-import jp.co.ndensan.reams.db.dbd.service.core.futanwariai.RiyoshaFutanWariaiMeisaiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
@@ -41,7 +39,6 @@ import jp.co.ndensan.reams.db.dbz.service.core.setai.SetaiinFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.setaiinshotokujoho.SetaiinShotokuJohoFinder;
 import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHogoJukyushaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -144,7 +141,9 @@ public class RiyoshaFutanWariaiHanteiManager {
                 List<JukyushaDaicho> 基準日時点で受給者台帳 = get受給者台帳と総合事業対象者該当チェック(
                         jukyushaDaicholist, sogoJigyoTaishoshalist, 受給者台帳, new FlexibleDate(判定基準日list.get(i)));
                 if (基準日.equals(new FlexibleDate(判定基準日list.get(i)))
-                        && (基準日時点で受給者台帳 == null || 基準日時点で受給者台帳.isEmpty())) {
+                        && (基準日時点で受給者台帳 == null || 基準日時点で受給者台帳.isEmpty())
+                        && (jukyushaDaicholist == null || jukyushaDaicholist.isEmpty())
+                        && (sogoJigyoTaishoshalist == null || sogoJigyoTaishoshalist.isEmpty())) {
                     判定結果.set判定区分(FIVE);
                     return 判定結果;
                 }
@@ -164,19 +163,9 @@ public class RiyoshaFutanWariaiHanteiManager {
                 }
                 HanteiTaishoshaTempEntity 判定対象者Temp = new HanteiTaishoshaTempEntity();
                 RiyoshaFutanWariaiMeisaiTempEntity 利用者負担割合明細Temp = new RiyoshaFutanWariaiMeisaiTempEntity();
-                if (介護所得情報 != null && !介護所得情報.isEmpty() && 受給者台帳 != null && 受給者台帳.isEmpty()) {
-                    get判定対象者Temp(
-                            被保険者番号, 介護所得情報.get(0).get世帯コード(),
-                            被保険者台帳, 受給者台帳.get(0), 介護所得情報.get(0), 総合事業対象者.get(0),
-                            判定対象者Temp, jukyushaDaicholist, sogoJigyoTaishoshalist, 基準日時点で受給者台帳.get(0));
-                    FutanWariaiHanteiRelateEntity entity = new FutanWariaiHanteiRelateEntity(
-                            判定対象者Temp, 生活保護該当情報Temp, 介護所得情報, new FlexibleDate(判定基準日list.get(i)));
-                    FutanWariaiHanteiResult 負担割合判定の結果
-                            = RiyoshaFutanWariaiHantei.createInstance().futanWariaiHantei(entity);
-                    get利用者負担割合明細Temp(被保険者番号, 被保険者台帳, 負担割合判定の結果, 介護所得情報.get(0),
-                            介護所得情報.get(0).get世帯コード(), new FlexibleDate(判定基準日list.get(i)),
-                            生活保護該当情報Temp, 判定対象者Temp, 利用者負担割合明細Temp);
-                }
+                get判定対象者Tempと利用者負担割合明細Temp(介護所得情報, 受給者台帳, 被保険者台帳, 総合事業対象者,
+                        判定対象者Temp, jukyushaDaicholist, sogoJigyoTaishoshalist,
+                        基準日時点で受給者台帳, 被保険者番号, 生活保護該当情報Temp, 利用者負担割合明細Temp, new FlexibleDate(判定基準日list.get(i)));
                 RiyoshaFutanWariaiKonkyoTempEntity 利用者負担割合根拠Temp
                         = new RiyoshaFutanWariaiKonkyoTempEntity();
                 get利用者負担割合根拠Temp(年度, 被保険者番号, new FlexibleDate(判定基準日list.get(i)),
@@ -198,16 +187,61 @@ public class RiyoshaFutanWariaiHanteiManager {
             List<DbT3115RiyoshaFutanWariaiKonkyoEntity> 利用者負担割合根拠list
                     = get利用者負担割合根拠list(年度, 被保険者番号, 利用者負担割合割合Tempのマージデータ);
             判定結果.set利用者負担割合根拠list(利用者負担割合根拠list);
-            RiyoshaFutanWariaiMeisaiMapperParameter 利用者負担割合明細検索条件
-                    = RiyoshaFutanWariaiMeisaiMapperParameter.createSelectByKeyParam(年度, 被保険者番号);
-            RiyoshaFutanWariaiMeisai 現在の利用者負担割合明細 = RiyoshaFutanWariaiMeisaiManager.
-                    createInstance().get利用者負担割合明細(利用者負担割合明細検索条件);
+//            RiyoshaFutanWariaiMeisaiMapperParameter 利用者負担割合明細検索条件
+//                    = RiyoshaFutanWariaiMeisaiMapperParameter.createSelectByKeyParam(年度, 被保険者番号);
+//            RiyoshaFutanWariaiMeisai 現在の利用者負担割合明細 = RiyoshaFutanWariaiMeisaiManager.
+//                    createInstance().get利用者負担割合明細(利用者負担割合明細検索条件);
+            DbT3114RiyoshaFutanWariaiMeisaiEntity entity = new DbT3114RiyoshaFutanWariaiMeisaiEntity();
+            entity.setEdaNo(1);
+            entity.setHihokenshaNo(new HihokenshaNo("0000150053"));
+            entity.setHonninGoukeiShotokuGaku(Decimal.ZERO);
+            entity.setNendo(new FlexibleYear("2008"));
+            entity.setRirekiNo(2);
+            entity.setFutanWariaiKubun(new RString("1"));
+            entity.setShikakuKubun(new RString("2"));
+            entity.setYukoKaishiYMD(new FlexibleDate("20060808"));
+            entity.setYukoShuryoYMD(new FlexibleDate("20060808"));
+            entity.setHonninGoukeiShotokuGaku(Decimal.ZERO);
+            entity.setSetaiIchigouHihokenshaSu(2);
+            entity.setNenkinShunyuGoukei(Decimal.ZERO);
+            entity.setSonotanoGoukeiShotokuKingakuGoukei(Decimal.ZERO);
+            entity.setKoseiRiyu(ZERO);
+            entity.setSetaiCd(SetaiCode.EMPTY);
+            RiyoshaFutanWariaiMeisai 現在の利用者負担割合明細 = new RiyoshaFutanWariaiMeisai(entity);
             //TODO QA1177
             if (利用者負担割合明細list != null && !利用者負担割合明細list.isEmpty()) {
                 判定結果.set判定区分(get判定区分(現在の利用者負担割合明細, 利用者負担割合明細list.get(0)));
             }
         }
         return 判定結果;
+    }
+
+    private void get判定対象者Tempと利用者負担割合明細Temp(
+            List<SetaiinShotoku> 介護所得情報,
+            List<JukyushaDaicho> 受給者台帳,
+            HihokenshaDaicho 被保険者台帳,
+            List<SogoJigyoTaishosha> 総合事業対象者,
+            HanteiTaishoshaTempEntity 判定対象者Temp,
+            List<JukyushaDaicho> jukyushaDaicholist,
+            List<SogoJigyoTaishosha> sogoJigyoTaishoshalist,
+            List<JukyushaDaicho> 基準日時点で受給者台帳,
+            HihokenshaNo 被保険者番号,
+            SeikatsuHogoGaitoJohoTempEntity 生活保護該当情報Temp,
+            RiyoshaFutanWariaiMeisaiTempEntity 利用者負担割合明細Temp,
+            FlexibleDate 判定基準日) {
+        if (介護所得情報 != null && !介護所得情報.isEmpty() && 受給者台帳 != null && !受給者台帳.isEmpty()) {
+            get判定対象者Temp(
+                    被保険者番号, 介護所得情報.get(0).get世帯コード(),
+                    被保険者台帳, 受給者台帳.get(0), 介護所得情報.get(0), 総合事業対象者.get(0),
+                    判定対象者Temp, jukyushaDaicholist, sogoJigyoTaishoshalist, 基準日時点で受給者台帳);
+            FutanWariaiHanteiRelateEntity entity = new FutanWariaiHanteiRelateEntity(
+                    判定対象者Temp, 生活保護該当情報Temp, 介護所得情報, 判定基準日);
+            FutanWariaiHanteiResult 負担割合判定の結果
+                    = RiyoshaFutanWariaiHantei.createInstance().futanWariaiHantei(entity);
+            get利用者負担割合明細Temp(被保険者番号, 被保険者台帳, 負担割合判定の結果, 介護所得情報.get(0),
+                    介護所得情報.get(0).get世帯コード(), 判定基準日,
+                    生活保護該当情報Temp, 判定対象者Temp, 利用者負担割合明細Temp);
+        }
     }
 
     private RString get判定区分(
@@ -323,6 +357,7 @@ public class RiyoshaFutanWariaiHanteiManager {
             //TODO 履歴番号 枝番号 QA1177
             利用者負担割合根拠entity.setSetaiinHihokenshaNo(entity.getSetaiinHihokenshaNo());
             利用者負担割合根拠entity.setSetaiinShotokuRirekiNo(entity.getSetaiinShotokuRirekiNo());
+            利用者負担割合根拠list.add(利用者負担割合根拠entity);
         }
         return 利用者負担割合根拠list;
     }
@@ -366,7 +401,7 @@ public class RiyoshaFutanWariaiHanteiManager {
         利用者負担割合entity.setShokenFlag(false);
         利用者負担割合entity.setHanteiYMD(FlexibleDate.getNowDate());
         利用者負担割合entity.setHanteiKubun(FOUR);
-        利用者負担割合entity.setKoseiJiyu(new Code(利用者負担割合明細Temp.getKoseiJiyu()));
+        //利用者負担割合entity.setKoseiJiyu(new Code(利用者負担割合明細Temp.getKoseiJiyu()));
         利用者負担割合entity.setHakoKubun(ZERO);
         利用者負担割合entity.setHakoYMD(FlexibleDate.EMPTY);
         利用者負担割合entity.setKofuYMD(FlexibleDate.EMPTY);
@@ -417,7 +452,8 @@ public class RiyoshaFutanWariaiHanteiManager {
         利用者負担割合明細Temp.setHonninGoukeiShotokuGaku(介護所得情報.get合計所得金額());
         利用者負担割合明細Temp.setSetaiIchigouHihokenshaSu(NUM_ONE);
         利用者負担割合明細Temp.setNenkinShunyuGoukei(介護所得情報.get年金収入額());
-        if (介護所得情報.get年金所得額().compareTo(介護所得情報.get合計所得金額()) < 0) {
+        if (介護所得情報.get年金所得額() != null && 介護所得情報.get合計所得金額() != null
+                && 介護所得情報.get年金所得額().compareTo(介護所得情報.get合計所得金額()) < 0) {
             利用者負担割合明細Temp.setSonotanoGoukeiShotokuKingakuGoukei(
                     介護所得情報.get合計所得金額().subtract(介護所得情報.get年金所得額()));
         } else {
@@ -442,16 +478,16 @@ public class RiyoshaFutanWariaiHanteiManager {
             HanteiTaishoshaTempEntity 判定対象者Temp,
             List<JukyushaDaicho> jukyushaDaicholist,
             List<SogoJigyoTaishosha> sogoJigyoTaishoshalist,
-            JukyushaDaicho 基準日時点で受給者台帳) {
+            List<JukyushaDaicho> 基準日時点で受給者台帳) {
         if (jukyushaDaicholist != null) {
             get受給者台帳_判定対象者Temp(被保険者番号, 世帯コード, 被保険者台帳, 受給者台帳, 介護所得情報, 判定対象者Temp);
         } else {
             if (sogoJigyoTaishoshalist != null) {
                 get総合事業対象者_受給者台帳_判定対象者Temp(
                         被保険者番号, 世帯コード, 被保険者台帳, 介護所得情報, 総合事業対象者, 判定対象者Temp);
-            } else {
+            } else if (!基準日時点で受給者台帳.isEmpty()) {
                 get受給者台帳_判定対象者Temp(被保険者番号, 世帯コード,
-                        被保険者台帳, 基準日時点で受給者台帳, 介護所得情報, 判定対象者Temp);
+                        被保険者台帳, 基準日時点で受給者台帳.get(0), 介護所得情報, 判定対象者Temp);
             }
         }
 
@@ -474,39 +510,43 @@ public class RiyoshaFutanWariaiHanteiManager {
     private List<JukyushaDaicho> get基準日時点で認定期間中のデータ(
             List<JukyushaDaicho> 受給者台帳,
             FlexibleDate 判定基準日) {
+        List<JukyushaDaicho> result = new ArrayList<>();
         for (JukyushaDaicho jukydai : 受給者台帳) {
-            if (定値_履歴番号.equals(jukydai.get履歴番号())
-                    && (jukydai.get認定有効期間終了年月日().isBefore(判定基準日)
-                    || 判定基準日.isBefore(jukydai.get認定有効期間開始年月日()))
+            if (!定値_履歴番号.equals(jukydai.get履歴番号())
+                    && (jukydai.get認定有効期間開始年月日().isBefore(判定基準日)
+                    || 判定基準日.isBefore(jukydai.get認定有効期間終了年月日()))
                     && jukydai.get要介護認定状態区分コード().value().equals(ZERO_ONE)) {
-                受給者台帳.remove(jukydai);
+                result.add(jukydai);
             }
         }
-        return 受給者台帳;
+        return result;
     }
 
     private List<SogoJigyoTaishosha> get基準時時点で事業対象者のデータ(
             List<SogoJigyoTaishosha> 総合事業対象者情報,
             FlexibleDate 判定基準日) {
+        List<SogoJigyoTaishosha> result = new ArrayList<>();
         for (SogoJigyoTaishosha 総合事業対象者 : 総合事業対象者情報) {
-            if (総合事業対象者.get適用終了年月日().isBefore(判定基準日)
-                    || 判定基準日.isBefore(総合事業対象者.get適用開始年月日())) {
-                総合事業対象者情報.remove(総合事業対象者);
+            if ((総合事業対象者.get適用終了年月日() != null && !総合事業対象者.get適用終了年月日().isEmpty())
+                    && (総合事業対象者.get適用開始年月日().isBefore(判定基準日)
+                    && 判定基準日.isBefore(総合事業対象者.get適用終了年月日()))) {
+                result.add(総合事業対象者);
             }
         }
-        return 総合事業対象者情報;
+        return result;
     }
 
     private List<JukyushaDaicho> get基準日時点で申請中のデータ(
             FlexibleDate 判定基準日,
             List<JukyushaDaicho> 受給者台帳情報) {
+        List<JukyushaDaicho> result = new ArrayList<>();
         for (JukyushaDaicho jukydai : 受給者台帳情報) {
-            if (!定値_履歴番号.equals(jukydai.get履歴番号())
-                    && 判定基準日.isBefore(jukydai.get受給申請年月日())) {
-                受給者台帳情報.remove(jukydai);
+            if (定値_履歴番号.equals(jukydai.get履歴番号())
+                    && (jukydai.get受給申請年月日().isBefore(判定基準日) || 判定基準日.equals(jukydai.get受給申請年月日()))) {
+                result.add(jukydai);
             }
         }
-        return 受給者台帳情報;
+        return result;
     }
 
     private void get受給者台帳_判定対象者Temp(
@@ -613,29 +653,31 @@ public class RiyoshaFutanWariaiHanteiManager {
     private List<SogoJigyoTaishosha> get総合事業対象者情報の取得(
             List<SogoJigyoTaishosha> 総合事業対象者情報,
             HihokenshaNo 被保険者番号) {
+        List<SogoJigyoTaishosha> result = new ArrayList<>();
         for (SogoJigyoTaishosha 総合事業対象者 : 総合事業対象者情報) {
-            if (!被保険者番号.equals(総合事業対象者.get被保険者番号())) {
-                総合事業対象者情報.remove(総合事業対象者);
+            if (被保険者番号.equals(総合事業対象者.get被保険者番号())) {
+                result.add(総合事業対象者);
             }
         }
-        Collections.sort(総合事業対象者情報, new Comparator<SogoJigyoTaishosha>() {
+        Collections.sort(result, new Comparator<SogoJigyoTaishosha>() {
             @Override
             public int compare(SogoJigyoTaishosha o1, SogoJigyoTaishosha o2) {
                 return new RString(o2.get履歴番号()).compareTo(new RString(o1.get履歴番号()));
             }
         });
-        return 総合事業対象者情報;
+        return result;
     }
 
     private List<JukyushaDaicho> get受給者台帳情報の取得(
             List<JukyushaDaicho> 受給者台帳情報, HihokenshaNo 被保険者番号) {
+        List<JukyushaDaicho> result = new ArrayList<>();
         for (JukyushaDaicho 受給者台帳 : 受給者台帳情報) {
-            if (受給者台帳.is論理削除フラグ() && 受給者台帳.get有効無効区分().value().equals(TWO)
-                    && !被保険者番号.equals(受給者台帳.get被保険者番号())) {
-                受給者台帳情報.remove(受給者台帳);
+            if (!受給者台帳.is論理削除フラグ() && !受給者台帳.get有効無効区分().value().equals(TWO)
+                    && 被保険者番号.equals(受給者台帳.get被保険者番号())) {
+                result.add(受給者台帳);
             }
         }
-        Collections.sort(受給者台帳情報, new Comparator<JukyushaDaicho>() {
+        Collections.sort(result, new Comparator<JukyushaDaicho>() {
             @Override
             public int compare(JukyushaDaicho o1, JukyushaDaicho o2) {
                 int flag = o2.get履歴番号().compareTo(o1.get履歴番号());
@@ -645,7 +687,7 @@ public class RiyoshaFutanWariaiHanteiManager {
                 return flag;
             }
         });
-        return 受給者台帳情報;
+        return result;
     }
 
     private List<SetaiinShotoku> get介護所得情報の取得(

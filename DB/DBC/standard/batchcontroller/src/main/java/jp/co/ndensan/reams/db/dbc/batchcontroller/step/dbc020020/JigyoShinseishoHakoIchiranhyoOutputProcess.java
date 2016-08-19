@@ -149,7 +149,7 @@ public class JigyoShinseishoHakoIchiranhyoOutputProcess extends BatchProcessBase
                 get行政区コード(entity.getGyoseikuCodeChohyo()),
                 entity.getGyoseikuNameChohyo(),
                 new RString(String.valueOf(entity.isKyuSochishaFlagChohyo())),
-                get要介護状態区分(entity.getYokaigoJotaiKubunCode()),
+                get要介護状態区分(entity.getYokaigoJotaiKubunCodeChohyo()),
                 getYMD(entity.getNinteiYukoKikanKaishiYMDChohyo()),
                 getYMD(entity.getNinteiYukoKikanShuryoYMDChohyo()),
                 get金額(entity.getHonninShiharaiGakuChohyo()),

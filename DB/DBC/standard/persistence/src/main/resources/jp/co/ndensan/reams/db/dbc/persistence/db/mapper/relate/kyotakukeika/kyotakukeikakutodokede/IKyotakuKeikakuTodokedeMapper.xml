@@ -190,7 +190,7 @@
 
     <select id="select事業者の情報" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyotakukeika.kyotakukeikakutodokede.KyotakuKeikakuTodokedeMapperParameter" 
-            resultType="jp.co.ndensan.reams.db.dbc.business.core.kyotakuserviceriyohyomain.KaigoJigyoshaResult" fetchSize="500">
+            resultType="jp.co.ndensan.reams.db.dbc.definition.core.kyotakuserviceriyohyomain.KaigoJigyoshaResult" fetchSize="500">
         SELECT
         "DbT7060_A"."jigyoshaName" AS 計画事業者名,
         "DbT7060_A"."yubinNo" AS 郵便番号,

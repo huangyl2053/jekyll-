@@ -48,8 +48,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
  */
 public class FuicchiCsvProcess extends BatchProcessBase<HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity> {
 
-    private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hikazeinennkintaishousyajohotorikomi."
-            + "IResultIchirannMapper.get不一致情報");
+    private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper."
+            + "relate.hikazeinennkintaishousyajohotorikomi.IResultIchirannMapper.get不一致情報");
     private FuicchiCsvProcessParameter parameter;
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBD900003"));
     private static final RString 男 = new RString("男");
@@ -71,9 +71,13 @@ public class FuicchiCsvProcess extends BatchProcessBase<HikazeNenkinTaishoshaDou
     private CsvWriter<FuicchiCsvEntity> csvWriterJunitoJugo;
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private static final int Seven = 7;
-    private static final int Three = 3;
-    private static final int Zero = 0;
+    private static final int SEVEN = 7;
+    private static final int THREE = 3;
+    private static final int ZERO = 0;
+    private static final RString ONE = new RString("1");
+    private static final RString TWO = new RString("2");
+    private static final RString THREE_T = new RString("3");
+    private static final RString BAR = new RString("-");
 
     private static final ReportId REPORT_DBD900003 = ReportIdDBD.DBD900003.getReportId();
 
@@ -97,25 +101,6 @@ public class FuicchiCsvProcess extends BatchProcessBase<HikazeNenkinTaishoshaDou
                 .build();
     }
 
-    @Override
-    protected IBatchReader createReader() {
-        return new BatchDbReader(MAPPERPATH, parameter.toFuicchiCsvMybatisParameter(get出力順()));
-    }
-
-    @Override
-    protected void process(HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity t) {
-        FuicchiCsvEntity eucCsvEntity = new FuicchiCsvEntity();
-        EucCsvEntity(eucCsvEntity, t);
-        csvWriterJunitoJugo.writeLine(eucCsvEntity);
-        manager.spool(fileName);
-
-    }
-
-    @Override
-    protected void afterExecute() {
-        csvWriterJunitoJugo.close();
-    }
-
     private RString get出力順() {
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
         IOutputOrder order = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD900003, reamsLoginID, parameter.get出力順ID2());
@@ -126,35 +111,54 @@ public class FuicchiCsvProcess extends BatchProcessBase<HikazeNenkinTaishoshaDou
         return 出力順;
     }
 
-    private void EucCsvEntity(FuicchiCsvEntity eucCsvEntity, HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity t) {
+    @Override
+    protected IBatchReader createReader() {
+        return new BatchDbReader(MAPPERPATH, parameter.toFuicchiCsvMybatisParameter(get出力順()));
+    }
+
+    @Override
+    protected void process(HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity t) {
+        FuicchiCsvEntity eucCsvEntity = new FuicchiCsvEntity();
+        eucCsvEntity(eucCsvEntity, t);
+        csvWriterJunitoJugo.writeLine(eucCsvEntity);
+        manager.spool(fileName);
+
+    }
+
+    @Override
+    protected void afterExecute() {
+        csvWriterJunitoJugo.close();
+    }
+
+    private void eucCsvEntity(FuicchiCsvEntity eucCsvEntity, HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity t) {
         eucCsvEntity.set市町村コード(t.getDtShichosonCode());
         eucCsvEntity.set年金保険者コード(t.getDtNennkinnHokenshaCode());
         eucCsvEntity.set年金保険者名称(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
                 UEXCodeShubetsu.年金保険者コード.getCodeShubetsu(), new Code(t.getDtNennkinnHokenshaCode())));
         eucCsvEntity.set基礎年金番号(t.getDtKisoNennkinnNo());
         eucCsvEntity.set年金コード(t.getDtNennkinnCode());
-        eucCsvEntity.set年金名称(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.年金保険者コード.getCodeShubetsu(),
-                new Code(set年金(t.getDtNennkinnCode()))));
+        eucCsvEntity.set年金名称(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
+                UEXCodeShubetsu.年金保険者コード.getCodeShubetsu(), new Code(set年金(t.getDtNennkinnCode()))));
         eucCsvEntity.set対象年(t.getDtTaisyoYear());
         eucCsvEntity.set生年月日(set年月日(t.getDtSeinenngappi()));
         eucCsvEntity.set性別コード(t.getDtSeibetsu());
-        eucCsvEntity.set性別(Enum性別コード(t.getDtSeibetsu()));
+        eucCsvEntity.set性別(set性別コード(t.getDtSeibetsu()));
         eucCsvEntity.setカナ氏名(t.getDtKanaShimei());
         eucCsvEntity.set漢字氏名(t.getDtKanjiShimei());
-        eucCsvEntity.set郵便番号(setフォーマット(t.getDtYubinNo()));
+        eucCsvEntity.set郵便番号(setフォ(t.getDtYubinNo()));
         eucCsvEntity.set住所(t.getDtKanajusyo());
         eucCsvEntity.set訂正表示コード(t.getDtTeiseiHyouji());
-        eucCsvEntity.set訂正表示(Enum訂正表示(t.getDtTeiseiHyouji()));
+        eucCsvEntity.set訂正表示(set訂正表示(t.getDtTeiseiHyouji()));
         eucCsvEntity.set各種区分コード(t.getDtKakushuKubun());
-        eucCsvEntity.set各種区分(Enum各種区分(t.getDtKakushuKubun()));
+        eucCsvEntity.set各種区分(set各種区分(t.getDtKakushuKubun()));
         eucCsvEntity.set処理結果コード(t.getDtShoriResult());
-        eucCsvEntity.set処理結果(Enum処理結果(t.getDtShoriResult()));
+        eucCsvEntity.set処理結果(set処理結果(t.getDtShoriResult()));
         eucCsvEntity.set金額(set除去(t.getDtkinngaku1()));
-        eucCsvEntity.set出力事由(不一致事由(t.getFuicchiJiyu()));
+        eucCsvEntity.set出力事由(set不一致事由(t.getFuicchiJiyu()));
 
     }
 
-    private RString Enum性別コード(RString code) {
+    private RString set性別コード(RString code) {
         if (Seibetsu.男.getコード().equals(code)) {
             return 男;
         } else if (Seibetsu.女.getコード().equals(code)) {
@@ -164,7 +168,7 @@ public class FuicchiCsvProcess extends BatchProcessBase<HikazeNenkinTaishoshaDou
         }
     }
 
-    private RString Enum訂正表示(RString code) {
+    private RString set訂正表示(RString code) {
         if (TeiseiHyoji.初回回付.getコード().equals(code)) {
             return 初回回付;
         } else if (TeiseiHyoji.月次回付.getコード().equals(code)) {
@@ -174,7 +178,7 @@ public class FuicchiCsvProcess extends BatchProcessBase<HikazeNenkinTaishoshaDou
         }
     }
 
-    private RString Enum各種区分(RString code) {
+    private RString set各種区分(RString code) {
         if (KakushuKubun.新規者.getコード().equals(code)) {
             return 新規者;
         } else if (KakushuKubun.前年度継続者.getコード().equals(code)) {
@@ -184,7 +188,7 @@ public class FuicchiCsvProcess extends BatchProcessBase<HikazeNenkinTaishoshaDou
         }
     }
 
-    private RString Enum処理結果(RString code) {
+    private RString set処理結果(RString code) {
         if (ShoriKekka.初期値.getコード().equals(code)) {
             return 初期値;
         } else if (ShoriKekka.受給権の失権.getコード().equals(code)) {
@@ -196,12 +200,12 @@ public class FuicchiCsvProcess extends BatchProcessBase<HikazeNenkinTaishoshaDou
         }
     }
 
-    private RString 不一致事由(RString code) {
-        if ("1".equals(code)) {
+    private RString set不一致事由(RString code) {
+        if (ONE.equals(code)) {
             return 同一日;
-        } else if ("2".equals(code)) {
+        } else if (TWO.equals(code)) {
             return 不一致;
-        } else if ("3".equals(code)) {
+        } else if (THREE_T.equals(code)) {
             return 同一人;
         } else {
             return RString.EMPTY;
@@ -217,14 +221,14 @@ public class FuicchiCsvProcess extends BatchProcessBase<HikazeNenkinTaishoshaDou
         }
     }
 
-    private RString setフォーマット(RString obj) {
+    private RString setフォ(RString obj) {
 
         StringBuilder builder = new StringBuilder();
 
-        if (!obj.isNullOrEmpty() && obj.length() >= Seven) {
-            builder.append(obj.substring(Zero, Three));
-            builder.append(new RString("-"));
-            builder.append(obj.substring(Three, Seven));
+        if (!obj.isNullOrEmpty() && obj.length() >= SEVEN) {
+            builder.append(obj.substring(ZERO, THREE));
+            builder.append(BAR);
+            builder.append(obj.substring(THREE, SEVEN));
         }
         return new RString(builder.toString());
     }
@@ -239,7 +243,7 @@ public class FuicchiCsvProcess extends BatchProcessBase<HikazeNenkinTaishoshaDou
 
     private RString set年金(RString obj) {
         if (!obj.isNullOrEmpty()) {
-            return obj.substring(Zero, Three);
+            return obj.substring(ZERO, THREE);
         } else {
             return RString.EMPTY;
         }

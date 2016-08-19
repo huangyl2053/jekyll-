@@ -10,7 +10,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeikakujigyoshasakusei.KyotakuKeikakuJigyoshaSakusei;
 import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeikakujikosakusei.KyotakuKeikakuJikoSakusei;
 import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeikakutodokede.KyotakuKeikakuTodokede;
-import jp.co.ndensan.reams.db.dbc.business.core.kyotakuserviceriyohyomain.KaigoJigyoshaResult;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuserviceriyohyomain.KaigoJigyoshaResult;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyotakukeika.kyotakukeikakutodokede.KyotakuKeikakuTodokedeMapperParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyotakukeika.kyotakukeikakutodokede.KyotakuKeikakuTodokedeEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyotakukeika.kyotakukeikakutodokede.IKyotakuKeikakuTodokedeMapper;

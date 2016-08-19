@@ -278,7 +278,8 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
     社会福祉法人軽減情報適用期間の関連チェック {
                 @Override
                 public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !(SpecHelper.check社会福祉法人軽減情報適用期間の関連(div) || SpecHelper.check社会福祉法人軽減情報適用期間の送付年月関連(div)
+                    return !(SpecHelper.check社会福祉法人軽減情報適用期間の関連(div)
+                    || SpecHelper.check社会福祉法人軽減情報適用期間の送付年月関連(div)
                     || SpecHelper.check社会福祉法人軽減情報適用期間の異動日関連(div));
                 }
             },
@@ -699,7 +700,8 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
          * @return 「false」エラー 「true」正常
          */
         public static boolean check社会福祉法人軽減情報適用期間の関連(JukyushaIdoRenrakuhyoDiv div) {
-            return 期間関連チェック(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().getJukyushaIdoRenrakuhyoFukushiHojinKeigen().
+            return 期間関連チェック(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
+                    getJukyushaIdoRenrakuhyoFukushiHojinKeigen().
                     getTxtKeigenritsuTekiyoYMD());
         }
 

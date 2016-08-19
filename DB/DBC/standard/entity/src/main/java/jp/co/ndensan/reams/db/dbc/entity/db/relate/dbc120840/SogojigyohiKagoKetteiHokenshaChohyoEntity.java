@@ -41,7 +41,6 @@ public class SogojigyohiKagoKetteiHokenshaChohyoEntity implements Serializable {
     private RString サービス種類名;
     private Code 過誤申立事由コード;
     private RString 過誤申立事由;
-   // private Decimal 保険者_負担額;
     private Decimal 単位数;
     private Decimal 負担額;
     private Decimal 総合事業費_件数;

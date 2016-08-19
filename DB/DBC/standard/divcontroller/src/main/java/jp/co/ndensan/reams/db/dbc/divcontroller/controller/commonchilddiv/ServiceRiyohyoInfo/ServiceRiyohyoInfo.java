@@ -47,7 +47,6 @@ public class ServiceRiyohyoInfo {
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
-    private static final RString 照会 = new RString("照会");
     private static final RString 限度額対象外フラグ_0 = new RString("0");
 
     private static final RString RSTRING_ONE = new RString("1");
@@ -86,7 +85,7 @@ public class ServiceRiyohyoInfo {
         FlexibleYearMonth 対象年月 = ViewStateHolder.get(ViewStateKeys.対象年月, FlexibleYearMonth.class);
         int 履歴番号 = ViewStateHolder.get(ViewStateKeys.履歴番号, Integer.class);
         FlexibleYearMonth 利用年月 = ViewStateHolder.get(ViewStateKeys.利用年月, FlexibleYearMonth.class);
-        getHandler(div).setサービス利用票(被保険者番号, 対象年月, 履歴番号, 利用年月);
+        getHandler(div).setサービス利用票(被保険者番号, 対象年月, 履歴番号, 利用年月.minusMonth(1));
         return ResponseData.of(div).respond();
     }
 
@@ -120,7 +119,24 @@ public class ServiceRiyohyoInfo {
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnBeppyoMeisaiNew(ServiceRiyohyoInfoDiv div) {
         div.getServiceRiyohyoBeppyoMeisai().setDisabled(false);
-        div.getServiceRiyohyoBeppyoMeisai().setVisible(true);
+        div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
+        div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setDisabled(false);
+        div.getServiceRiyohyoBeppyoMeisai().getTxtTani().clearValue();
+        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setDisabled(false);
+        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().clearValue();
+        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().setDisabled(false);
+        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().clearValue();
+        div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setDisabled(false);
+        div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().clearValue();
+        div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setDisabled(false);
+        div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().clearValue();
+        div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().setDisabled(false);
+        div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().clearValue();
+        div.getServiceRiyohyoBeppyoMeisai().getTxtTeigakuRiyoushaFutangaku().setDisabled(false);
+        div.getServiceRiyohyoBeppyoMeisai().getTxtTeigakuRiyoushaFutangaku().clearValue();
+        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisai().setDisabled(false);
+        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCancelMeisaiInput().setDisabled(false);
+        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisaiGokei().setDisabled(false);
         return ResponseData.of(div).respond();
     }
 
@@ -131,6 +147,16 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnBeppyoGokeiNew(ServiceRiyohyoInfoDiv div) {
+        div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendoChokaTani().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendonaiTani().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtTanisuTanka().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendoChokaTani().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendonaiTani().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtHiyoSogaku().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtHokenKyufugaku().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuHoken().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuZengaku().clearValue();
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         RDate 利用年月日 = div.getTxtRiyoYM().getValue();
         FlexibleYearMonth 利用年月 = null;
@@ -501,6 +527,7 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onBlur_txtRiyoYM(ServiceRiyohyoInfoDiv div) {
+        // TODO QAのNo.1277
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         RString 居宅総合事業区分 = ViewStateHolder.get(ViewStateKeys.居宅総合事業区分, RString.class);
         RDate 利用年月日 = div.getTxtRiyoYM().getValue();
@@ -563,7 +590,7 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnCancelMeisaiInput(ServiceRiyohyoInfoDiv div) {
-        getHandler(div).画面クリア();
+        getHandler(div).明細情報クリア();
         return ResponseData.of(div).respond();
     }
 
@@ -574,7 +601,7 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnCancelGokeiInput(ServiceRiyohyoInfoDiv div) {
-        getHandler(div).画面クリア();
+        getHandler(div).合計情報クリア();
         return ResponseData.of(div).respond();
     }
 

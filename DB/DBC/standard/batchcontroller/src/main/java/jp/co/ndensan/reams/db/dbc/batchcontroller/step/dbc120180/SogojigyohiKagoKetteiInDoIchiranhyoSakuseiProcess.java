@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagoketteiin.SogojigyohiKagoKetteInOutPutOrder;
-import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagoketteiin.SogojigyohiKagoKetteiInReport;
 import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagoketteiin.SogojigyohiKagoKetteInPageBreak;
+import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagoketteiin.SogojigyohiKagoKetteiInReport;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -258,7 +258,7 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
                     .fillType(FillType.BLANK).toDateString();
             RString 作成時 = 作成日時.getTime()
                     .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-            output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時).concat(SAKUSEI));
+            output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時).concat(RString.HALF_SPACE).concat(SAKUSEI));
         } else {
             output.set処理年月(RString.EMPTY);
             output.set作成日時(RString.EMPTY);

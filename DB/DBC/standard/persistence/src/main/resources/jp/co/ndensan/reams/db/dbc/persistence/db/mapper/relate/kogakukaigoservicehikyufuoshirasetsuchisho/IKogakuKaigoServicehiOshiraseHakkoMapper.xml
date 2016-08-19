@@ -324,14 +324,15 @@
         "ShinseiJohoTemp"."koikinaiJushochiTokureiFlagJoho" AS "koikinaiJushochiTokureiFlagChohyo",
         "ShinseiJohoTemp"."koikinaiTokureiSochimotoShichosonCodeJoho" AS "koikinaiTokureiSochimotoShichosonCodeChohyo",
         "ShinseiJohoTemp"."kyuShichosonCodeJoho" AS "kyuShichosonCodeChohyo",
-        jukyushaDaicho."kyuSochishaFlag" AS "kyuSochishaFlagChohyo",
+        "DbT4001JukyushaDaicho"."shichosonCode" as "dbT4001JukyushaDaicho_shichosonCode",
+        jukyushaDaicho."hihokenshaNo" as "dbT4001JukyushaDaicho_hihokenshaNo",
+        jukyushaDaicho."rirekiNo" as "dbT4001JukyushaDaicho_rirekiNo",
+        jukyushaDaicho."edaban" as "dbT4001JukyushaDaicho_edaban",
+        jukyushaDaicho."jukyuShinseiJiyu" as "dbT4001JukyushaDaicho_jukyuShinseiJiyu",
         jukyushaDaicho."yokaigoJotaiKubunCode" AS "yokaigoJotaiKubunCodeChohyo",
-        jukyushaDaicho."ninteiYukoKikanKaishiYMD" AS "ninteiYukoKikanKaishiYMDChohyo",
         jukyushaDaicho."ninteiYukoKikanShuryoYMD" AS "ninteiYukoKikanShuryoYMDChohyo",
         jukyushaDaicho."kyuSochishaFlag" AS "kyuSochishaFlagChohyo",
-        jukyushaDaicho."yokaigoJotaiKubunCode" AS "yokaigoJotaiKubunCodeChohyo",
         jukyushaDaicho."ninteiYukoKikanKaishiYMD" AS "ninteiYukoKikanKaishiYMDChohyo",
-        jukyushaDaicho."ninteiYukoKikanShuryoYMD" AS "ninteiYukoKikanShuryoYMDChohyo",
         "ShikibetsuTaisho"."meisho" AS "meishoChohyo",
         "ShikibetsuTaisho"."kanaMeisho" AS "shimeikanaChohyo",
         "ShikibetsuTaisho"."jusho" AS "jushoChohyo",
@@ -414,6 +415,11 @@
         <id column="serviceTeikyoYMChohyo" />
         <id column="shoKisaiHokenshaNoChohyo" />
         <id column="rirekiNoChohyo" />
+        <id column="dbT4001JukyushaDaicho_shichosonCode" />
+        <id column="dbT4001JukyushaDaicho_hihokenshaNo" />
+        <id column="dbT4001JukyushaDaicho_rirekiNo" />
+        <id column="dbT4001JukyushaDaicho_edaban" />
+        <id column="dbT4001JukyushaDaicho_jukyuShinseiJiyu" />
         <association property="申請情報" resultMap="result_ShinseiJohoChohyoTemp"/>
         <association property="宛先" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
     </resultMap>
@@ -788,7 +794,7 @@
         <result property="kogakuTaishoGaiFlagShokan" column="kogakuTaishoGaiFlagShokan" />
         <result property="jidoShokanTaishoFlagShokan" column="jidoShokanTaishoFlagShokan" />
         <result property="serviceHiyoGokeiGakuShokan" column="serviceHiyoGokeiGakuShokan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="riyoshaFutanGakuShokan" column="riyoshaFutanGakuShokan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="riyoshaFutanGakuGokeiShokan" column="riyoshaFutanGakuGokeiShokan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="kogakuKyufuKonkyoShokan" column="kogakuKyufuKonkyoShokan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="meisaiTaishoshaUketoriYMShokan" column="meisaiTaishoshaUketoriYMShokan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="jigyoshaNoShokan" column="jigyoshaNoShokan" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
@@ -873,7 +879,7 @@
         <result property="kogakuTaishoGaiFlagChohyo" column="kogakuTaishoGaiFlagChohyo" />
         <result property="jidoShokanTaishoFlagChohyo" column="jidoShokanTaishoFlagChohyo" />
         <result property="serviceHiyoGokeiGakuChohyo" column="serviceHiyoGokeiGakuChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="riyoshaFutanGakuChohyo" column="riyoshaFutanGakuChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="riyoshaFutanGakuGokeiChohyo" column="riyoshaFutanGakuGokeiChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="kogakuKyufuKonkyoChohyo" column="kogakuKyufuKonkyoChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="meisaiTaishoshaUketoriYMChohyo" column="meisaiTaishoshaUketoriYMChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="jigyoshaNoChohyo" column="jigyoshaNoChohyo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
@@ -909,6 +915,10 @@
         <result property="koikinaiJushochiTokureiFlagChohyo" column="koikinaiJushochiTokureiFlagChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="koikinaiTokureiSochimotoShichosonCodeChohyo" column="koikinaiTokureiSochimotoShichosonCodeChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="kyuShichosonCodeChohyo" column="kyuShichosonCodeChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="kyuSochishaFlagChohyo" column="kyuSochishaFlagChohyo" />
+        <result property="yokaigoJotaiKubunCodeChohyo" column="yokaigoJotaiKubunCodeChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ninteiYukoKikanKaishiYMDChohyo" column="ninteiYukoKikanKaishiYMDChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiYukoKikanShuryoYMDChohyo" column="ninteiYukoKikanShuryoYMDChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="meishoChohyo" column="meishoChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
         <result property="shimeikanaChohyo" column="shimeikanaChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
         <result property="jushoChohyo" column="jushoChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler" />
