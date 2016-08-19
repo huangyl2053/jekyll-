@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-1771-020 chenxin -->
+<!-- 概要： 受給者台帳マスタ一時テーブル用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.yokaigojissijyokyohyo.IYokaigoJissiJyokyohyoMapper">
+     <resultMap id="ResultMap_JissiJyokyohyoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd581001.JukyushaDaichoTempEntity" autoMapping="true">
+        <result property="市町村コード" column="dbT4001JukyushaDaicho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="被保険者番号" column="dbT4001JukyushaDaicho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="履歴番号" column="dbT4001JukyushaDaicho_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="枝番" column="dbT4001JukyushaDaicho_edaban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請書管理番号" column="dbT4001JukyushaDaicho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="申請状況区分" column="dbT4001JukyushaDaicho_shinseiJokyoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="支所コード" column="dbT4001JukyushaDaicho_shishoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="直近フラグ" column="dbT4001JukyushaDaicho_chokkinFlag" />
+        <result property="識別コード" column="dbT4001JukyushaDaicho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="受給申請事由" column="dbT4001JukyushaDaicho_jukyuShinseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="申請理由" column="dbT4001JukyushaDaicho_shinseiRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請者関係コード" column="dbT4001JukyushaDaicho_shinseishaKankeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="本人との関係" column="dbT4001JukyushaDaicho_homninKankei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="受給申請年月日" column="dbT4001JukyushaDaicho_jukyuShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="二号特定疾病コード" column="dbT4001JukyushaDaicho_nigoTokuteiShippeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="審査会依頼年月日" column="dbT4001JukyushaDaicho_shinsakaiIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="要介護認定状態区分コード" column="dbT4001JukyushaDaicho_yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="認定有効期間開始年月日" column="dbT4001JukyushaDaicho_ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定有効期間終了年月日" column="dbT4001JukyushaDaicho_ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定年月日" column="dbT4001JukyushaDaicho_ninteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="みなし要介護区分コード" column="dbT4001JukyushaDaicho_minashiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="指定サービス種類01" column="dbT4001JukyushaDaicho_shiteiServiceShurui01" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類02" column="dbT4001JukyushaDaicho_shiteiServiceShurui02" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類03" column="dbT4001JukyushaDaicho_shiteiServiceShurui03" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類04" column="dbT4001JukyushaDaicho_shiteiServiceShurui04" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類05" column="dbT4001JukyushaDaicho_shiteiServiceShurui05" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類06" column="dbT4001JukyushaDaicho_shiteiServiceShurui06" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類07" column="dbT4001JukyushaDaicho_shiteiServiceShurui07" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類08" column="dbT4001JukyushaDaicho_shiteiServiceShurui08" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類09" column="dbT4001JukyushaDaicho_shiteiServiceShurui09" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類10" column="dbT4001JukyushaDaicho_shiteiServiceShurui10" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類11" column="dbT4001JukyushaDaicho_shiteiServiceShurui11" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類12" column="dbT4001JukyushaDaicho_shiteiServiceShurui12" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類13" column="dbT4001JukyushaDaicho_shiteiServiceShurui13" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類14" column="dbT4001JukyushaDaicho_shiteiServiceShurui14" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類15" column="dbT4001JukyushaDaicho_shiteiServiceShurui15" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類16" column="dbT4001JukyushaDaicho_shiteiServiceShurui16" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類17" column="dbT4001JukyushaDaicho_shiteiServiceShurui17" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類18" column="dbT4001JukyushaDaicho_shiteiServiceShurui18" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類19" column="dbT4001JukyushaDaicho_shiteiServiceShurui19" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類20" column="dbT4001JukyushaDaicho_shiteiServiceShurui20" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類21" column="dbT4001JukyushaDaicho_shiteiServiceShurui21" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類22" column="dbT4001JukyushaDaicho_shiteiServiceShurui22" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類23" column="dbT4001JukyushaDaicho_shiteiServiceShurui23" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類24" column="dbT4001JukyushaDaicho_shiteiServiceShurui24" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類25" column="dbT4001JukyushaDaicho_shiteiServiceShurui25" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類26" column="dbT4001JukyushaDaicho_shiteiServiceShurui26" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類27" column="dbT4001JukyushaDaicho_shiteiServiceShurui27" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類28" column="dbT4001JukyushaDaicho_shiteiServiceShurui28" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類29" column="dbT4001JukyushaDaicho_shiteiServiceShurui29" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="指定サービス種類30" column="dbT4001JukyushaDaicho_shiteiServiceShurui30" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="喪失年月日" column="dbT4001JukyushaDaicho_soshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="直近異動年月日" column="dbT4001JukyushaDaicho_chokkinIdoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="直近異動事由コード" column="dbT4001JukyushaDaicho_chokkinIdoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="有効無効区分無効" column="dbT4001JukyushaDaicho_yukoMukoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="データ区分" column="dbT4001JukyushaDaicho_dataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="同一連番" column="dbT4001JukyushaDaicho_remban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="異動理由職権理由" column="dbT4001JukyushaDaicho_idoRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請書区分" column="dbT4001JukyushaDaicho_shinseishoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="削除事由コード" column="dbT4001JukyushaDaicho_sakujoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="要支援者認定申請区分以外" column="dbT4001JukyushaDaicho_yoshienshaNinteiShinseiFlag" />
+        <result property="支給限度単位数" column="dbT4001JukyushaDaicho_shikyuGendoTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="支給限度有効開始年月日" column="dbT4001JukyushaDaicho_shikyuGendoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="支給限度有効終了年月日" column="dbT4001JukyushaDaicho_shikyuGendoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="短期入所支給限度日数" column="dbT4001JukyushaDaicho_tankiSikyuGendoNissu" />
+        <result property="短期入所支給限度開始年月日" column="dbT4001JukyushaDaicho_tankiShikyuGendoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="短期入所支給限度終了年月日" column="dbT4001JukyushaDaicho_tankiShikyuGendoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="当初認定有効開始年月日" column="dbT4001JukyushaDaicho_toshoNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="当初認定有効終了年月日" column="dbT4001JukyushaDaicho_toshoNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="受給資格証明書発行年月日１" column="dbT4001JukyushaDaicho_jukyuShikakuShomeishoHakkoYMD1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="受給資格証明書発行年月日２" column="dbT4001JukyushaDaicho_jukyuShikakuShomeishoHakkoYMD2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="診断命令書発行年月日" column="dbT4001JukyushaDaicho_shindanMeireishoHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="二号申請受理通知書発行年月日" column="dbT4001JukyushaDaicho_nigoShinseiJuriTsuchishoHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定結果通知書発行年月日" column="dbT4001JukyushaDaicho_ninteiKekkaTsuchishoHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="区分変更通知書発行年月日" column="dbT4001JukyushaDaicho_kubunHenkoTsuchishoHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="サービス変更通知書発行年月日" column="dbT4001JukyushaDaicho_serviceHenkoTsuchishoHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定却下通知書発行年月日" column="dbT4001JukyushaDaicho_ninteiKyakkaTsuchishoHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定取消通知書発行年月日" column="dbT4001JukyushaDaicho_ninteiTorikeshiTsuchishoHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格取得前申請フラグ" column="dbT4001JukyushaDaicho_shikakuShutokuMaeShinseiFlag" />
+        <result property="旧措置者フラグ" column="dbT4001JukyushaDaicho_kyuSochishaFlag" />
+        <result property="論理削除フラグ" column="dbT4001JukyushaDaicho_logicalDeletedFlag" />
+        <result property="認定審査会割当予定年月日" column="T5123_ninteiShinsakaiWariateYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="認定調査予定年月日" column="T5123_ninteichosaYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="主治医意見書作成依頼予定年月日" column="T5123_ikenshoSakuseiIraiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="市町村番号" column="T7051_kokuhorenKoikiShichosonNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="市町村名" column="T7051_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査委託年月日" column="T4003_chosaItakuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="調査終了年月日" column="T4003_chosaShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="意見書依頼年月日" column="T4003_ikenshoIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="意見書取寄せ年月日" column="T4003_ikenshoToriyoseYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="審査会資料作成年月日" column="T4003_shinsakaiShiryoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="審査会予定年月日" column="T4003_shinsakaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="調査委託年月日" column="X4102_ninteichosaIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="調査終了年月日" column="X4102_ninteichosaJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="意見書依頼年月日" column="X4102_ikenshoSakuseiIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="意見書取寄せ年月日" column="X4102_ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="審査会資料作成年月日" column="X4102_shinsakaiShiryoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="審査会予定年月日" column="T4123_ninteiShinsakaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="資格喪失年月日" column="T1001_shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+     </resultMap>
+    
+    <select id="get受給者台帳マスタ" fetchSize="500" resultOrdered="true"
+            resultMap="ResultMap_JissiJyokyohyoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd581001.YokaigoJissiJyokyohyoMybatisParameter">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho" />,
+            T5123."ninteiShinsakaiWariateYoteiYMD" AS T5123_ninteiShinsakaiWariateYoteiYMD,
+            T5123."ninteichosaYoteiYMD" AS T5123_ninteichosaYoteiYMD,
+            T5123."ikenshoSakuseiIraiYoteiYMD" AS T5123_ikenshoSakuseiIraiYoteiYMD,
+            T7051."kokuhorenKoikiShichosonNo" AS T7051_kokuhorenKoikiShichosonNo,
+            T7051."shichosonMeisho" AS T7051_shichosonMeisho,
+            <if test="is導入形態コード111 || is導入形態コード112">
+                T4003."chosaItakuYMD" AS T4003_chosaItakuYMD,
+                T4003."chosaShuryoYMD" AS T4003_chosaShuryoYMD,
+                T4003."ikenshoIraiYMD" AS T4003_ikenshoIraiYMD,
+                T4003."ikenshoToriyoseYMD" AS T4003_ikenshoToriyoseYMD,
+                T4003."shinsakaiShiryoSakuseiYMD" AS T4003_shinsakaiShiryoSakuseiYMD,
+                T4003."shinsakaiYoteiYMD" AS T4003_shinsakaiYoteiYMD,
+            </if>
+            <if test="is導入形態コード120">
+                X4102_ninteichosaIraiYMD,
+                X4102_ninteichosaJisshiYMD,
+                X4102_ikenshoSakuseiIraiYMD,
+                X4102_ikenshoJuryoYMD,
+                X4102_shinsakaiShiryoSakuseiYMD,
+                T4123."ninteiShinsakaiYoteiYMD" AS T4123_ninteiShinsakaiYoteiYMD,
+            </if>
+            T1001."shikakuSoshitsuYMD" AS T1001_shikakuSoshitsuYMD
+        FROM
+            rgdb."DbT4001JukyushaDaicho" AS "DbT4001JukyushaDaicho"
+            INNER JOIN  rgdb."DbT4101NinteiShinseiJoho" AS T4101
+                ON      "DbT4001JukyushaDaicho"."shinseishoKanriNo" = T4101."shinseishoKanriNo"  
+                AND     T4101."logicalDeletedFlag" = FALSE
+            INNER JOIN  rgdb."DbT7051KoseiShichosonMaster" AS T7051
+                ON      T7051."shoKisaiHokenshaNo" = T4101."shoKisaiHokenshaNo"
+            INNER JOIN  rgdb."DbT4123NinteiKeikakuJoho" AS T4123
+                ON      "DbT4001JukyushaDaicho"."shinseishoKanriNo" = T4123."shinseishoKanriNo"
+            INNER JOIN  rgdb."DbT1001HihokenshaDaicho" AS T1001
+                ON      T1001."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
+            INNER JOIN  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />  
+            AS B
+            ON B."shikibetsuCode"  = "DbT4001JukyushaDaicho"."shikibetsuCode" 
+              
+            LEFT JOIN   rgdb."DbT5123NinteiKeikakuJoho" AS T5123
+                ON      "DbT4001JukyushaDaicho"."shinseishoKanriNo" = T5123."shinseishoKanriNo"  
+            <if test="is導入形態コード111 || is導入形態コード112">
+                INNER JOIN  rgdb."DbT4003YokaigoNinteiInterface" AS T4003
+                    ON      "DbT4001JukyushaDaicho"."hihokenshaNo" = T4003."hihokenshaNo"
+                    AND     "DbT4001JukyushaDaicho"."shinseishoKanriNo" = T4003."shinseishoKanriNo"
+            </if>
+            <if test="is導入形態コード120">
+                INNER JOIN  (
+                            SELECT
+                                T4102."shinseishoKanriNo",
+                                T4102."shinsakaiShiryoSakuseiYMD" AS X4102_shinsakaiShiryoSakuseiYMD,
+                                X4201_ninteichosaIraiYMD AS X4102_ninteichosaIraiYMD,
+                                X4202_ninteichosaJisshiYMD AS X4102_ninteichosaJisshiYMD,
+                                X4301_ikenshoSakuseiIraiYMD AS X4102_ikenshoSakuseiIraiYMD,
+                                X4302_ikenshoJuryoYMD AS X4102_ikenshoJuryoYMD
+                            FROM
+                                rgdb."DbT4102NinteiKekkaJoho" AS T4102
+                            LEFT JOIN(
+                                SELECT
+                                    T4201."shinseishoKanriNo" AS X4201_shinseishoKanriNo,
+                                    T4201."ninteichosaIraiYMD" AS X4201_ninteichosaIraiYMD,
+                                    row_number() over(partition by T4201."shinseishoKanriNo" order by T4201."ninteichosaIraiRirekiNo" desc) as rank_number
+                                FROM
+                                    rgdb."DbT4201NinteichosaIraiJoho" AS T4201
+                                WHERE
+                                    T4201."logicalDeletedFlag" = FALSE
+                               
+                            ) AS X4201
+                            ON  T4102."shinseishoKanriNo" = X4201_shinseishoKanriNo
+                            AND X4201.rank_number = 1
+                            LEFT JOIN(
+                                SELECT 
+                                    T4202."shinseishoKanriNo" AS X4202_shinseishoKanriNo,
+                                    T4202."ninteichosaJisshiYMD" AS X4202_ninteichosaJisshiYMD,
+                                    row_number() over(partition by T4202."shinseishoKanriNo" order by T4202."ninteichosaRirekiNo" desc) as rank_number
+                                 FROM
+                                    rgdb."DbT4202NinteichosahyoGaikyoChosa" AS T4202
+                                 WHERE
+                                    T4202."gaikyoChosaTextImageKubun" = #{概況調査テキストイメージ区分}
+                                   
+                            ) AS X4202
+                            ON  T4102."shinseishoKanriNo" = X4202_shinseishoKanriNo
+                            AND    X4202.rank_number = 1     
+                            LEFT JOIN(
+                                SELECT
+                                    T4301."shinseishoKanriNo" AS X4301_shinseishoKanriNo,
+                                    T4301."ikenshoSakuseiIraiYMD" AS X4301_ikenshoSakuseiIraiYMD,
+                                    row_number() over(partition by T4301."shinseishoKanriNo" order by T4301."ikenshoIraiRirekiNo" desc) as rank_number
+                                FROM
+                                    rgdb."DbT4301ShujiiIkenshoIraiJoho" AS T4301
+                                WHERE
+                                    T4301."logicalDeletedFlag" = FALSE
+                                
+                            ) AS X4301
+                            ON  T4102."shinseishoKanriNo" = X4301_shinseishoKanriNo
+                            AND X4301.rank_number = 1
+                            LEFT JOIN(
+                                SELECT
+                                    T4302."shinseishoKanriNo" AS X4302_shinseishoKanriNo,
+                                    T4302."ikenshoJuryoYMD" AS X4302_ikenshoJuryoYMD,
+                                    row_number() over(partition by T4302."shinseishoKanriNo" order by T4302."ikenshoIraiRirekiNo" desc) as rank_number
+                                FROM
+                                    rgdb."DbT4302ShujiiIkenshoJoho" AS T4302
+                                    
+                            ) AS X4302
+                            ON  T4102."shinseishoKanriNo" = X4302_shinseishoKanriNo
+                             AND  X4302.rank_number = 1
+                ) AS X4102
+                    ON      "DbT4001JukyushaDaicho"."shinseishoKanriNo" = X4102."shinseishoKanriNo"
+            </if>
+            <where>
+                1 = 1
+               <include refid="条件1" />
+               <include refid="条件2" />
+               <include refid="条件3" />
+            </where>
+            
+         ORDER BY
+            "DbT4001JukyushaDaicho"."hihokenshaNo"        
+    </select>
+    <sql id="条件1">
+        <if test="年齢基準日 != null and !年齢基準日.isEmpty()">
+            <if test="生年月日From2!=null and !生年月日From2.isEmpty()">
+                AND #{生年月日From2} <![CDATA[<=]]> B."seinengappiYMD"
+            </if>
+            <if test="生年月日To2!=null and !生年月日To2.isEmpty()">
+                AND B."seinengappiYMD" <![CDATA[<=]]> #{生年月日To2}
+            </if>
+        </if>
+        <if test="生年月日From!=null and !生年月日From.isEmpty() and 生年月日To!=null and !生年月日To.isEmpty() ">
+            <if test="生年月日From!=null and !生年月日From.isEmpty()">
+                AND #{生年月日From} <![CDATA[<=]]> B."seinengappiYMD"
+            </if>
+            <if test="生年月日To!=null and !生年月日To.isEmpty()">
+                AND B."seinengappiYMD" <![CDATA[<=]]> #{生年月日To}
+            </if>
+        </if>
+    </sql>
+    <sql id="条件2">
+        <if test="is住所">
+            <if test="開始地区コード!=null and !開始地区コード.isEmpty()">
+                AND #{開始地区コード} <![CDATA[<=]]> B."choikiCode"
+            </if>
+            <if test="終了地区コード!=null and !終了地区コード.isEmpty()">
+                AND B."choikiCode" <![CDATA[<=]]> #{終了地区コード}
+            </if>
+        </if>
+        <if test="is行政区">
+            <if test="開始地区コード!=null and !開始地区コード.isEmpty()">
+                AND #{開始地区コード} <![CDATA[<=]]> B."gyoseikucode"
+            </if>
+            <if test="終了地区コード!=null and !終了地区コード.isEmpty()">
+                AND B."gyoseikucode" <![CDATA[<=]]> #{終了地区コード}
+            </if>
+        </if>
+        <if test="is地区2">
+            <if test="開始地区コード!=null and !開始地区コード.isEmpty()">
+                AND #{開始地区コード} <![CDATA[<=]]> B."chikucode2"
+            </if>
+            <if test="終了地区コード!=null and !終了地区コード.isEmpty()">
+                AND B."chikucode2" <![CDATA[<=]]> #{終了地区コード}
+            </if>
+        </if>
+    </sql>
+    <sql id="条件3">
+        <if test="is受給申請事由">
+            AND "DbT4001JukyushaDaicho"."jukyuShinseiJiyu" IS NOT NULL
+        </if>
+        <if test="is申請区分申請時">
+             AND (
+                (T4101."ninteiShinseiHoreiKubunCode"='1' AND "DbT4001JukyushaDaicho"."jukyuShinseiJiyu" IN ('1','3','6'))
+                OR  (T4101."ninteiShinseiHoreiKubunCode"='2' AND "DbT4001JukyushaDaicho"."jukyuShinseiJiyu"=2)
+                OR  (T4101."ninteiShinseiHoreiKubunCode"='3' AND "DbT4001JukyushaDaicho"."jukyuShinseiJiyu"=4)
+                OR  (T4101."ninteiShinseiHoreiKubunCode"='4' OR T4101."ninteiShinseiHoreiKubunCode"=5 AND "DbT4001JukyushaDaicho"."jukyuShinseiJiyu"=7)
+                )
+         </if>
+         <if test="is申請区分法令">
+            AND(
+                (T4101."ninteiShinseiHoreiKubunCode"='1' AND "DbT4001JukyushaDaicho"."jukyuShinseiJiyu" IN ('1','3','6'))
+                OR  (T4101."ninteiShinseiHoreiKubunCode"='2' AND "DbT4001JukyushaDaicho"."jukyuShinseiJiyu"='2')
+                OR  (T4101."ninteiShinseiHoreiKubunCode"='3' AND "DbT4001JukyushaDaicho"."jukyuShinseiJiyu"='4')
+                OR  (T4101."ninteiShinseiHoreiKubunCode"='4' AND "DbT4001JukyushaDaicho"."jukyuShinseiJiyu"='7')
+                )
+         </if>        
+    </sql>
+</mapper>
