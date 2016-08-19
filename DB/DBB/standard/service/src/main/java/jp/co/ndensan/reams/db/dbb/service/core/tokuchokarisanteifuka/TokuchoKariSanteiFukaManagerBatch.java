@@ -1058,11 +1058,11 @@ public class TokuchoKariSanteiFukaManagerBatch {
             if (TokuchoNengakuKijunNendo6Gatsu.当年度.getコード().equals(特別徴収_年額基準年度_6月開始)) {
                 前年度の保険料段階リスト = HokenryoDankaiSettings.createInstance()
                         .get保険料段階ListIn(調定年度.minusYear(整数_1));
-                保険料率 = 前年度の保険料段階リスト.getBy段階区分(業務概念_賦課情報_6月開始.getHokenryoDankai()).get保険料率();
+                保険料率 = set保険料率1(業務概念_賦課情報_6月開始, 保険料率, 前年度の保険料段階リスト);
             } else if (TokuchoNengakuKijunNendo6Gatsu.翌年度.getコード().equals(特別徴収_年額基準年度_6月開始)) {
                 前年度の保険料段階リスト = HokenryoDankaiSettings.createInstance()
                         .get保険料段階ListIn(調定年度);
-                保険料率 = 前年度の保険料段階リスト.getBy段階区分(賦課情報.get保険料段階_仮算定時()).get保険料率();
+                保険料率 = set保険料率2(賦課情報, 保険料率, 前年度の保険料段階リスト);
             }
             TokuchoKarisanteiKiwariOutput 特徴仮算定期割 = get特徴仮算定期割(調定年度, 保険料率);
             Decimal 特徴期別金額01 = Decimal.ZERO;
@@ -1074,6 +1074,20 @@ public class TokuchoKariSanteiFukaManagerBatch {
             FukaJohoTempEntity 賦課の情報一時Entity = create賦課の情報一時Entity(賦課情報, 特徴期別金額01, 特徴期別金額02, 特徴期別金額03);
             mapper.inset賦課の情報一時テーブル(賦課の情報一時Entity);
         }
+    }
+
+    private Decimal set保険料率1(FukaJohoLokukatu 業務概念_賦課情報_6月開始, Decimal 保険料率, HokenryoDankaiList 前年度の保険料段階リスト) {
+        if (業務概念_賦課情報_6月開始.getHokenryoDankai() != null) {
+            保険料率 = 前年度の保険料段階リスト.getBy段階区分(業務概念_賦課情報_6月開始.getHokenryoDankai()).get保険料率();
+        }
+        return 保険料率;
+    }
+
+    private Decimal set保険料率2(FukaJoho 賦課情報, Decimal 保険料率, HokenryoDankaiList 前年度の保険料段階リスト) {
+        if (賦課情報.get保険料段階_仮算定時() != null) {
+            保険料率 = 前年度の保険料段階リスト.getBy段階区分(賦課情報.get保険料段階_仮算定時()).get保険料率();
+        }
+        return 保険料率;
     }
 
     private Decimal set特徴期別金額03(TokuchoKarisanteiKiwariOutput 特徴仮算定期割, Decimal 特徴期別金額03) {
