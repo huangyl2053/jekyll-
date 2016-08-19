@@ -446,10 +446,10 @@
         <association property="申請情報償還" resultMap="resultMap_ShinseiJohoShokanTempEntity"/>
     </resultMap>
     <resultMap id="result_申請情報償還For申請情報" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshirasetsuchisho.HihokenshaDaichoShinseiRelateEntity">
-        <id column="hihokenshaNoShokan" />
-        <id column="serviceTeikyoYMShokan" />
-        <id column="shoKisaiHokenshaNoShokan" />
-        <id column="rirekiNoShokan" />
+        <id column="hihokenshaNoJoho" />
+        <id column="serviceTeikyoYMJoho" />
+        <id column="shoKisaiHokenshaNoJoho" />
+        <id column="rirekiNoJoho" />
         <association property="申請情報" resultMap="resultMap_ShinseiJohoTempEntity"/>
         <association property="申請情報償還" resultMap="resultMap_ShinseiJohoShokanTempEntity"/>
     </resultMap>
