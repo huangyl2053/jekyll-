@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.dbc120840;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120840.SogojigyohiKagoKetteiHokenshaChohyoEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc120840.ISogojigyohiKagoKetteiHokenshaChohyoMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
@@ -18,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 総合事業費過誤決定通知書情報取込（保険者分）データ編集
  *
- * @reamsid_L DBC-2550-010 jiangxiaolong
+ * @reamsid_L DBC-2550-011 jiangxiaolong
  */
 public class SogojigyohiKagoKetteiHokenshaChohyoManager {
 
@@ -52,11 +53,11 @@ public class SogojigyohiKagoKetteiHokenshaChohyoManager {
     /**
      * 再審査決定通知書情報取込一覧表（公費負担者分）の帳票出力対象データ取得
      *
-     * @param parameter Map<String,Object>
+     * @param parameter KokuhorenIchiranhyoMybatisParameter
      * @return List<SaishinsaKetteiTsuchishoChohyoEntity>
      */
     @Transaction
-    public List<SogojigyohiKagoKetteiHokenshaChohyoEntity> get帳票出力対象データ(Map<String, Object> parameter) {
+    public List<SogojigyohiKagoKetteiHokenshaChohyoEntity> get帳票出力対象データ(KokuhorenIchiranhyoMybatisParameter parameter) {
         ISogojigyohiKagoKetteiHokenshaChohyoMapper mapper = mapperProvider.create(ISogojigyohiKagoKetteiHokenshaChohyoMapper.class);
         List<SogojigyohiKagoKetteiHokenshaChohyoEntity> list = mapper.get帳票出力対象データ(parameter);
         if (null == list) {
