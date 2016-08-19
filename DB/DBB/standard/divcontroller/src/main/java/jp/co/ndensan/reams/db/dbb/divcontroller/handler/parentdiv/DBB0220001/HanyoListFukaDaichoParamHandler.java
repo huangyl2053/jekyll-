@@ -13,6 +13,9 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0220001.Hany
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.common.CSVSettings;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.JukyushaHantei;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.KijunbiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -112,11 +115,9 @@ public class HanyoListFukaDaichoParamHandler {
         }
         parameter.set最新状態で抽出(div.getNendoKijumbiSitei().getChkKijyunbiSiteiUmu().isAllSelected());
         parameter.set基準日(div.getNendoKijumbiSitei().getTxtKijyunbi().getValue());
-        //TODO 　DBBEnum.賦課台帳.基準日区分 (QA#1027)
-        parameter.set基準日区分(null);
-        //TODO DBBEnum.賦課台帳.資格区分 DBBEnum.賦課台帳.受給者判定 (QA#1027)
-        parameter.set資格区分(null);
-        parameter.set受給者判定(null);
+        parameter.set基準日区分(div.getNendoKijumbiSitei().getRadKijumbiSentaku().getSelectedKey());
+        parameter.set資格区分(div.getChushutsuJokenPanel().getDdlShikakuKubun().getSelectedKey());
+        parameter.set受給者判定(div.getChushutsuJokenPanel().getDdlJukyushaHantei().getSelectedKey());
         parameter.set徴収方法(div.getChushutsuJokenPanel().getDdlChosyuHoho().getSelectedKey());
         parameter.set保険料段階s(div.getChushutsuJokenPanel().getChkHokenryoDankai().getSelectedKeys());
         return parameter;
@@ -182,8 +183,40 @@ public class HanyoListFukaDaichoParamHandler {
         keyList.add(定数KEY0);
         div.getNendoKijumbiSitei().getChkKijyunbiSiteiUmu().setSelectedItemsByKey(keyList);
         div.getNendoKijumbiSitei().getTxtKijyunbi().clearValue();
-        div.getNendoKijumbiSitei().getRadKijumbiSentaku().setSelectedKey(定数KEY0);
-        //TODO DBBEnum.賦課台帳.資格区分 DBBEnum.賦課台帳.受給者判定 (QA#1027)
+
+        List<KeyValueDataSource> 基準日区分_dataSource = new ArrayList<>();
+        for (KijunbiKubun 基準日区分 : KijunbiKubun.values()) {
+            KeyValueDataSource keyValue = new KeyValueDataSource();
+            keyValue.setKey(基準日区分.getコード());
+            keyValue.setValue(基準日区分.get名称());
+            基準日区分_dataSource.add(keyValue);
+        }
+        div.getNendoKijumbiSitei().getRadKijumbiSentaku().setDataSource(基準日区分_dataSource);
+        if (!基準日区分_dataSource.isEmpty()) {
+            div.getNendoKijumbiSitei().getRadKijumbiSentaku().setSelectedIndex(INDEX_ZERO);
+        }
+        List<KeyValueDataSource> 資格区分_dataSource = new ArrayList<>();
+        for (ShikakuKubun 資格区分 : ShikakuKubun.values()) {
+            KeyValueDataSource keyValue = new KeyValueDataSource();
+            keyValue.setKey(資格区分.getコード());
+            keyValue.setValue(資格区分.get名称());
+            資格区分_dataSource.add(keyValue);
+        }
+        div.getChushutsuJokenPanel().getDdlShikakuKubun().setDataSource(資格区分_dataSource);
+        if (!資格区分_dataSource.isEmpty()) {
+            div.getChushutsuJokenPanel().getDdlShikakuKubun().setSelectedIndex(INDEX_ZERO);
+        }
+        List<KeyValueDataSource> 受給者判定_dataSource = new ArrayList<>();
+        for (JukyushaHantei 受給者判定 : JukyushaHantei.values()) {
+            KeyValueDataSource keyValue = new KeyValueDataSource();
+            keyValue.setKey(受給者判定.getコード());
+            keyValue.setValue(受給者判定.get名称());
+            受給者判定_dataSource.add(keyValue);
+        }
+        div.getChushutsuJokenPanel().getDdlJukyushaHantei().setDataSource(受給者判定_dataSource);
+        if (!受給者判定_dataSource.isEmpty()) {
+            div.getChushutsuJokenPanel().getDdlJukyushaHantei().setSelectedIndex(INDEX_ZERO);
+        }
         List<KeyValueDataSource> 徴収方法_dataSource = new ArrayList<>();
         for (ChoshuHoho 徴収方法 : ChoshuHoho.values()) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
