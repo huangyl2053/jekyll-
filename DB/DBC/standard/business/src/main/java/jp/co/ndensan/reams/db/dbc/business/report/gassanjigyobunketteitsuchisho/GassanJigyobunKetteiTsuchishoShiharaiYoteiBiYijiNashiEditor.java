@@ -198,7 +198,6 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
             }
         }
         source.bangoTitle = 口座番号;
-        //TODO QA1180 source.sihaYoYmd
         source.tsuchibun2 = entity.get文書2();
         source.tsuchibun3 = entity.get文書3();
         source.tsuchibun4 = entity.get文書4();

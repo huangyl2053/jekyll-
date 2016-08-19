@@ -103,7 +103,7 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiAriEditor implement
         ワーク口座払区分 = RSTRING_0;
         ワーク不支給区分 = RSTRING_0;
         this.edit送付物宛先(source);
-//       TODO QA1080  this.edit文書(source);
+        this.edit文書(source);
         this.edit認証者(source);
         this.edit通知書(source);
         if (entity.get事業高額合算支給不支給決定() != null) {
@@ -153,14 +153,14 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiAriEditor implement
             source.kakkoRight2 = 送付物宛先.kakkoRight2;
         }
     }
-//TODO QA1080
-//    private GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiAriSource edit文書(
-//            GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiAriSource source) {
-//        if (entity.get文書番号() != null) {
-////            source.bunshoNo = entity.get文書番号();
-//        }
-//        return source;
-//    }
+
+    private GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiAriSource edit文書(
+            GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiAriSource source) {
+        if (entity.get文書番号() != null) {
+            source.bunshoNo = entity.get文書番号();
+        }
+        return source;
+    }
 
     private void edit認証者(GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiAriSource source) {
 
