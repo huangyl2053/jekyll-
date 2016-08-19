@@ -52,9 +52,9 @@ public class JukyushaKoshinKekkaIchiranBodyEditor implements IJukyushaKoshinKekk
     private static final int 住所最大桁数 = 15;
     private static final int HUNDRED = 100;
     private final RString 帳票ID;
-    private final RString DBC200006帳票ID = new RString("DBC200006_KokuhorenJukyushaDaichoIchiran");
-    private final RString DBC200055帳票ID = new RString("DBC200055_JukyushaKoshinkekkaIchiran");
-    private final RString DBC200058帳票ID = new RString("DBC200058_JukyushaTotsugokekkaIchiran");
+    private final RString 帳票DBC200006 = new RString("DBC200006_KokuhorenJukyushaDaichoIchiran");
+    private final RString 帳票DBC200055 = new RString("DBC200055_JukyushaKoshinkekkaIchiran");
+    private final RString 帳票DBC200058 = new RString("DBC200058_JukyushaTotsugokekkaIchiran");
 
     /**
      * コンストラクタです
@@ -73,9 +73,9 @@ public class JukyushaKoshinKekkaIchiranBodyEditor implements IJukyushaKoshinKekk
     public JukyushaKoshinKekkaIchiranSource edit(JukyushaKoshinKekkaIchiranSource source) {
         DbWT5331JukyushaJohoCsvEntity 受給者情報 = 帳票出力対象データ.get受給者情報明細一時();
         DbWT0001HihokenshaTempEntity 被保険者情報 = 帳票出力対象データ.get被保険者一時();
-         if (DBC200006帳票ID.equals(帳票ID) || DBC200055帳票ID.equals(帳票ID)) {
+         if (帳票DBC200006.equals(帳票ID) || 帳票DBC200055.equals(帳票ID)) {
              source.listList1_1 = date_to_string(受給者情報.get訂正年月日());
-        } else if(DBC200058帳票ID.equals(帳票ID)) {
+        } else if (帳票DBC200058.equals(帳票ID)) {
            RString 突合結果名称 = JukyushaIF_TsugoKekkaKubun.toValue(受給者情報.get突合結果区分()).get名称();
             source.listList1_1 = 受給者情報.get突合結果区分().concat(コロン).concat(突合結果名称);
         }
