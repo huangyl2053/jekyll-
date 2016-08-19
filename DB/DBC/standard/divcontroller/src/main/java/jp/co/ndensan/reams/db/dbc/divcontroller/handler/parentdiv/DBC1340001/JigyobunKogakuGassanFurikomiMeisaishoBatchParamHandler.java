@@ -59,7 +59,6 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
     private static final RString 振込指定日_MSG = new RString("振込指定日");
     private static final RString 発行済のみ = new RString("発行済のみ");
     private static final RString KEY_1 = new RString("1");
-    private static final RString KEY_3 = new RString("3");
     private static final RString 時 = new RString("時");
     private static final RString 分 = new RString("分");
     private static final RString 秒 = new RString("秒");
@@ -69,7 +68,6 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
     private static final int INDEX_4 = 4;
     private static final int INDEX_5 = 5;
     private static final int INDEX_6 = 6;
-    private static final int INDEX_9 = 9;
     private static final int INDEX_8 = 8;
     private static final ReportId 帳票ID = new ReportId("DBC200003_FurikomiMeisaiIchiran");
 
@@ -141,7 +139,7 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
                 SubGyomuCode.DBC介護給付);
         金融機関 = kinyuKikanManager.getValidKinyuKikanOn(new FlexibleDate(システム日付.toString()), 金融機関コード.substring(INDEX_0, INDEX_4));
         if (金融機関 != null) {
-            KinyuKikanShitenCode 支店コード = new KinyuKikanShitenCode(金融機関コード.substring(INDEX_5, INDEX_9));
+            KinyuKikanShitenCode 支店コード = new KinyuKikanShitenCode(金融機関コード.substring(INDEX_5, INDEX_8));
             支店 = 金融機関.get支店(支店コード, new FlexibleDate(システム日付.toString()));
             金融機関名 = 金融機関.get金融機関名称();
         }
@@ -156,7 +154,7 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
         div.setItakusya(委託者名);
         div.getTyuusyutuJyoukenn().getTxtItakusya().setValue(委託者名);
         div.getTyuusyutuJyoukenn().getTxtItakusyaCode().setValue(委託者コード);
-        div.getTxtTorihikiKinyukikan().setValue(取引先金融機関);
+        div.getTyuusyutuJyoukenn().getTxtTorihikiKinyukikan().setValue(取引先金融機関);
         div.getTyuusyutuHanni().getTxtKonnkaiTaisyouNenngappi().setToValue(システム日付);
         div.getShuturyokuTyouhyou().getTxtSakuseibi().setValue(システム日付);
         div.getShuturyokuTyouhyou().getTxtIraibi().setValue(システム日付);
@@ -182,7 +180,6 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
         } else {
             div.getTyuusyutuJyoukenn().getTxtItakusya().setValue(RString.EMPTY);
             div.getTyuusyutuJyoukenn().getTxtTorihikiKinyukikan().setValue(RString.EMPTY);
-            div.getShuturyokuTyouhyou().getDdlSyuturyokuTyouhyou().setSelectedKey(KEY_3);
             div.getShuturyokuTyouhyou().getDdlSyuturyokuTyouhyou().setDisabled(true);
         }
         if (口座.equals(div.getRadSiharaihouhou().getSelectedValue()) && ＦＤ作成_1.equals(ＦＤ作成)) {
