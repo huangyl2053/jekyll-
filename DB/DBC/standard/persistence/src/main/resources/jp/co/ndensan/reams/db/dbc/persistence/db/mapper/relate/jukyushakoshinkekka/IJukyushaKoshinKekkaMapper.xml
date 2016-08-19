@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- @reamsid_L DBC-2730-030 chenjie -->
+<!-- @reamsid_L DBC-2730-010 chenjie -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakoshinkekka.IJukyushaKoshinKekkaMapper">
     <!--受給者情報明細一時テーブルに登録します-->
-    <insert id="受給者情報明細一時TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.DbWT5331JukyushaJohoTempEntity" >
+    <insert id="受給者情報明細一時TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.DbWT5331JukyushaJohoCsvEntity" >
         INSERT INTO "DbWT5331JukyushaJoho"
         VALUES 
         (
@@ -218,11 +218,11 @@
     <resultMap id="ResultMap_DbWT5331JukyushaJohoDataEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushajoho.JukyushaHihokenshaEntity" autoMapping="true">
         <id column="dbWT331JukyushaJoho_renban" />
         <id column="dbWT0001HihokenshaTemp_meisaiRenban" />
-        <association property="受給者情報明細一時" resultMap="ResultMap_DbWT5331JukyushaJohoTempEntity"/>
+        <association property="受給者情報明細一時" resultMap="ResultMap_DbWT5331JukyushaJohoCsvEntity"/>
         <association property="被保険者一時" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuMapper.resultMap_DbWT0001HihokenshaTempEntity"/>
     </resultMap>
      <!--テーブルHihokenshaItijiEntityの項目をDbWT0001HihokenshaTempEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbWT5331JukyushaJohoTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.DbWT5331JukyushaJohoTempEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbWT5331JukyushaJohoCsvEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.DbWT5331JukyushaJohoCsvEntity" autoMapping="true">
         <result property="連番" column= "dbWT331JukyushaJoho_renban" />
         <result property="交換情報識別番号" column= "dbWT331JukyushaJoho_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="異動年月日" column= "dbWT331JukyushaJoho_idoYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
