@@ -674,7 +674,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         row.setTaishoYM(居宅給付計画届出履歴.get対象年月().toDateString());
         row.setKeikakuSakuseiKubun(KyotakuservicekeikakuSakuseikubunCode.toValue(
                 居宅給付計画事業者.get作成区分コード()).get名称());
-        row.setJigyoshaNo(居宅給付計画事業者.get被保険者番号().getColumnValue());
+        row.setJigyoshaNo(居宅給付計画事業者.get計画事業者番号().getColumnValue());
         row.setJigyoshaName(get事業者名(居宅給付計画事業者.get計画事業者番号().getColumnValue()));
         row.setYukoMuko(is直近履歴 ? FLAG_直近履歴 : FLAG_履歴);
         row.setRirekiNo(new RString(居宅給付計画事業者.get履歴番号()));
