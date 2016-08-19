@@ -216,7 +216,7 @@ public class YokaigoNinteiTorikeshiTujishoHakko {
             異動理由 = RString.EMPTY;
         }
         if (div.getTujishoHakkoMeisai().getTxtYokaigodo().getValue() != null) {
-            要介護度 = YokaigoJotaiKubun.valueOf(RStringUtil.convert半角to全角(div.getTujishoHakkoMeisai().getTxtYokaigodo().getValue()).
+            要介護度 = YokaigoJotaiKubun.valueOf(RStringUtil.convert全角to半角(div.getTujishoHakkoMeisai().getTxtYokaigodo().getValue()).
                     toString()).getコード();
         } else {
             要介護度 = RString.EMPTY;
