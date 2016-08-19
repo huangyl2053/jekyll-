@@ -22,4 +22,6 @@ public class JukyushaTotsugoKekkaReadCsvFileProcessParameter implements IBatchPr
     private FlexibleYearMonth 処理年月;
     private RString ファイルパース;
     private int 連番;
+    private boolean さいごファイルフラグ;
+    private int 明細データ登録件数合算;
 }
