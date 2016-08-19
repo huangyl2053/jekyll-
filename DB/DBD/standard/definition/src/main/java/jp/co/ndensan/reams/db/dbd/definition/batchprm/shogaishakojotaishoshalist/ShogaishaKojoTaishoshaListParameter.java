@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.definition.batchprm.shogaishakojotaishoshalis
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd4030011.ShogaishakojoTaishoshaListProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -43,13 +44,13 @@ public class ShogaishaKojoTaishoshaListParameter extends BatchParameterBase {
     @BatchParameter(key = "喪失事由", name = "喪失事由")
     private RString 喪失事由;
     @BatchParameter(key = "喪失日FROM", name = "喪失日FROM")
-    private RDate 喪失日FROM;
+    private FlexibleDate 喪失日FROM;
     @BatchParameter(key = "喪失日TO", name = "喪失日TO")
-    private RDate 喪失日TO;
+    private FlexibleDate 喪失日TO;
     @BatchParameter(key = "決定日FROM", name = "決定日FROM")
-    private RDate 決定日FROM;
+    private FlexibleDate 決定日FROM;
     @BatchParameter(key = "決定日TO", name = "決定日TO")
-    private RDate 決定日TO;
+    private FlexibleDate 決定日TO;
     @BatchParameter(key = "対象年度", name = "対象年度")
     private RString 前回非該当者;
     @BatchParameter(key = "交付日", name = "交付日")
