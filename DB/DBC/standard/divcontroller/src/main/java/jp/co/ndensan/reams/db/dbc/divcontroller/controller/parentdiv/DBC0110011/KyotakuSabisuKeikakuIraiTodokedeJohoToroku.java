@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -44,10 +45,14 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
 
     private static final RString メニューID_事業者作成 = new RString("DBCMN21001");
     private static final RString メニューID_自己作成 = new RString("DBCMN21002");
-    private static final RString TITLE_居宅サービス計画作成依頼届出情報登録 = new RString("居宅サービス計画作成依頼届出情報登録");
-    private static final RString TITLE_居宅サービス自己作成届出情報登録 = new RString("居宅サービス自己作成届出情報登録");
-    private static final RString 計画作成依頼届出完了メッセージ = new RString("「居宅サービス計画作成依頼届出の登録が完了しました。」");
-    private static final RString 自己作成届出完了メッセージ = new RString("「居宅サービス自己作成届出の登録が完了しました。」");
+    private static final RString TITLE_居宅サービス計画作成依頼届出情報登録
+            = new RString("居宅サービス計画作成依頼届出情報登録");
+    private static final RString TITLE_居宅サービス自己作成届出情報登録
+            = new RString("居宅サービス自己作成届出情報登録");
+    private static final RString 計画作成依頼届出完了メッセージ
+            = new RString("「居宅サービス計画作成依頼届出の登録が完了しました。」");
+    private static final RString 自己作成届出完了メッセージ
+            = new RString("「居宅サービス自己作成届出の登録が完了しました。」");
     private static final int NUM_1 = 1;
 
     /**
@@ -56,22 +61,30 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
      * @param div KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
      * @return ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv>
      */
-    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onLoad(KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onLoad(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
         if (ResponseHolder.isReRequest()) {
             return ResponseData.of(div).respond();
         }
         KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = getHandler(div);
         TaishoshaKey 引き継ぎ情報 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        if (引き継ぎ情報 == null || 引き継ぎ情報.get被保険者番号().isEmpty()) {
+        if (引き継ぎ情報 == null || 引き継ぎ情報.get被保険者番号() == null
+                || 引き継ぎ情報.get被保険者番号().isEmpty()) {
             if (!ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(DbcInformationMessages.被保険者でないデータ.getMessage()).respond();
+                return ResponseData.of(div).addMessage(
+                        DbcInformationMessages.被保険者でないデータ.getMessage()).respond();
             }
         }
         HihokenshaNo 被保険者番号 = 引き継ぎ情報.get被保険者番号();
+        if (!handler.get前排他(被保険者番号.getColumnValue())) {
+            throw new PessimisticLockingException();
+        }
         ShikibetsuCode 識別コード = 引き継ぎ情報.get識別コード();
         KyotakuKeikakuTodokedeManager manager = KyotakuKeikakuTodokedeManager.createInstance();
-        KyotakuKeikakuTodokedeMapperParameter parameter = KyotakuKeikakuTodokedeMapperParameter.createSelectByKeyParam(被保険者番号,
-                FlexibleYearMonth.MAX, Decimal.ZERO);
+        KyotakuKeikakuTodokedeMapperParameter parameter = KyotakuKeikakuTodokedeMapperParameter.createSelectByKeyParam(
+                被保険者番号,
+                FlexibleYearMonth.MAX,
+                Decimal.ZERO);
         List<KyotakuKeikakuTodokede> 居宅給付計画届出履歴一覧 = manager.get居宅給付計画届出履歴一覧(parameter);
         handler.initialize(被保険者番号, 識別コード, 居宅給付計画届出履歴一覧);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
@@ -85,12 +98,10 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
      * @param div KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
      * @return ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv>
      */
-    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onSelect_dgKyotakuServiceIchiran(KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onSelect_dgKyotakuServiceIchiran(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
         KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = getHandler(div);
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        dgKyotakuServiceIchiran_Row 選択行 = div.getRireki().getDgKyotakuServiceIchiran().getClickedItem();
-        KyotakuKeikakuTodokede 居宅給付計画届出 = get居宅給付計画届出履歴(被保険者番号, new FlexibleYearMonth(選択行.getTaishoYM()),
-                new Decimal(選択行.getRirekiNo().toString()));
+        KyotakuKeikakuTodokede 居宅給付計画届出 = get居宅給付計画届出履歴(div);
         handler.onSelect居宅サービス一覧(居宅給付計画届出);
         return ResponseData.of(div).setState(DBC0110011StateName.追加状態);
     }
@@ -101,12 +112,10 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
      * @param div KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
      * @return ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv>
      */
-    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onModify_dgKyotakuServiceIchiran(KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onModify_dgKyotakuServiceIchiran(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
         KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = getHandler(div);
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        dgKyotakuServiceIchiran_Row 選択行 = div.getRireki().getDgKyotakuServiceIchiran().getClickedItem();
-        KyotakuKeikakuTodokede 居宅給付計画届出 = get居宅給付計画届出履歴(被保険者番号, new FlexibleYearMonth(選択行.getTaishoYM()),
-                new Decimal(選択行.getRirekiNo().toString()));
+        KyotakuKeikakuTodokede 居宅給付計画届出 = get居宅給付計画届出履歴(div);
         handler.onModify居宅サービス一覧(居宅給付計画届出);
         ViewStateHolder.put(ViewStateKeys.居宅給付計画届出, 居宅給付計画届出);
         return ResponseData.of(div).setState(DBC0110011StateName.追加状態);
@@ -118,12 +127,10 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
      * @param div KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
      * @return ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv>
      */
-    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onDelete_dgKyotakuServiceIchiran(KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onDelete_dgKyotakuServiceIchiran(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
         KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = getHandler(div);
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        dgKyotakuServiceIchiran_Row 選択行 = div.getRireki().getDgKyotakuServiceIchiran().getClickedItem();
-        KyotakuKeikakuTodokede 居宅給付計画届出 = get居宅給付計画届出履歴(被保険者番号, new FlexibleYearMonth(選択行.getTaishoYM()),
-                new Decimal(選択行.getRirekiNo().toString()));
+        KyotakuKeikakuTodokede 居宅給付計画届出 = get居宅給付計画届出履歴(div);
         handler.onDelete居宅サービス一覧(居宅給付計画届出);
         ViewStateHolder.put(ViewStateKeys.居宅給付計画届出, 居宅給付計画届出);
         return ResponseData.of(div).setState(DBC0110011StateName.追加状態);
@@ -135,7 +142,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
      * @param div KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
      * @return ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv>
      */
-    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onClick_btnAdd(KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onClick_btnAdd(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
         KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = getHandler(div);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         handler.add居宅サービス(被保険者番号);
@@ -149,7 +157,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
      * @param div KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
      * @return ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv>
      */
-    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onChange_radKeikakuSakuseiKubun(KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onChange_radKeikakuSakuseiKubun(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
         KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = getHandler(div);
         handler.onChange計画作成区分();
         return ResponseData.of(div).setState(DBC0110011StateName.追加状態);
@@ -161,7 +170,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
      * @param div KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
      * @return ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv>
      */
-    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onOkClose_btnJigyoshaKensaku(KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onOkClose_btnJigyoshaKensaku(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
         JigyoshaMode mode = DataPassingConverter.deserialize(div.getJigyoshaMode(), JigyoshaMode.class);
         div.getTxtJigyoshaNo().setValue(mode.getJigyoshaNo().getColumnValue());
         div.getTxtJigyoshaName().setValue(mode.getJigyoshaName().getColumnValue());
@@ -174,7 +184,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
      * @param div KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
      * @return ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv>
      */
-    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onOkClose_btnItakuSakiJigyoshaKensaku(KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onOkClose_btnItakuSakiJigyoshaKensaku(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
         JigyoshaMode mode = DataPassingConverter.deserialize(div.getJigyoshaMode(), JigyoshaMode.class);
         div.getTxtItakusakiJigyoshaNo().setValue(mode.getJigyoshaNo().getColumnValue());
         div.getTxtItakusakiJigyoshaName().setValue(mode.getJigyoshaName().getColumnValue());
@@ -187,7 +198,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
      * @param div KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
      * @return KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
      */
-    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onStateTransition(KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onStateTransition(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
         getHandler(div).set保存する();
         return ResponseData.of(div).respond();
     }
@@ -198,12 +210,14 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
      * @param div KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
      * @return ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv>
      */
-    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onClick_btnSave(KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onClick_btnSave(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
         KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = getHandler(div);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         int 履歴番号 = get履歴番号の採番(被保険者番号);
-        KyotakuKeikakuTodokede 居宅給付計画届出 = ViewStateHolder.get(ViewStateKeys.居宅給付計画届出, KyotakuKeikakuTodokede.class);
+        KyotakuKeikakuTodokede 居宅給付計画届出 = ViewStateHolder.get(ViewStateKeys.居宅給付計画届出,
+                KyotakuKeikakuTodokede.class);
         if (居宅給付計画届出 == null) {
             居宅給付計画届出 = handler.create居宅給付計画届出(被保険者番号, 履歴番号);
         }
@@ -217,11 +231,13 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
             return ResponseData.of(div).setState(DBC0110011StateName.追加状態);
         }
         boolean isSelectedResultYes = ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes;
-        boolean isBefore居宅サービス小規模多機能確認 = isBeforeMessage(DbcQuestionMessages.居宅サービス小規模多機能.getMessage(),
+        boolean isBefore居宅サービス小規模多機能確認 = isBeforeMessage(
+                DbcQuestionMessages.居宅サービス小規模多機能.getMessage(),
                 isSelectedResultYes);
         boolean isBefore計画作成区分確認 = isBeforeMessage(DbcQuestionMessages.計画作成区分.getMessage(),
                 isSelectedResultYes);
-        boolean isBefore地域包括支援センター確認 = isBeforeMessage(DbcQuestionMessages.地域包括支援センター.getMessage(),
+        boolean isBefore地域包括支援センター確認 = isBeforeMessage(
+                DbcQuestionMessages.地域包括支援センター.getMessage(),
                 isSelectedResultYes);
         boolean isBefore居宅サービス受給者確認 = isBeforeMessage(DbcQuestionMessages.居宅サービス受給者.getMessage(),
                 isSelectedResultYes);
@@ -240,8 +256,10 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         if (質問チェックの結果 != null) {
             return 質問チェックの結果;
         }
-        質問チェックの結果 = check計画適用開始日での認定状態(div, handler, isReRequest, isBefore居宅サービス小規模多機能確認,
-                isBefore計画作成区分確認, isBefore地域包括支援センター確認,
+        質問チェックの結果 = check計画適用開始日での認定状態(div, handler, isReRequest,
+                isBefore居宅サービス小規模多機能確認,
+                isBefore計画作成区分確認,
+                isBefore地域包括支援センター確認,
                 被保険者番号);
         if (質問チェックの結果 != null) {
             return 質問チェックの結果;
@@ -266,8 +284,10 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
      * @param div KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
      * @return ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv>
      */
-    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onClick_btnResearch(KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
-        KyotakuKeikakuTodokede 居宅給付計画届出 = ViewStateHolder.get(ViewStateKeys.居宅給付計画届出, KyotakuKeikakuTodokede.class);
+    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onClick_btnResearch(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+        KyotakuKeikakuTodokede 居宅給付計画届出 = ViewStateHolder.get(ViewStateKeys.居宅給付計画届出,
+                KyotakuKeikakuTodokede.class);
         KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = getHandler(div);
         boolean is項目が変更 = handler.is項目が変更(居宅給付計画届出);
         if (is項目が変更 && !ResponseHolder.isReRequest()) {
@@ -285,8 +305,10 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
      * @param div KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
      * @return ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv>
      */
-    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onClick_btnToSearchResult(KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
-        KyotakuKeikakuTodokede 居宅給付計画届出 = ViewStateHolder.get(ViewStateKeys.居宅給付計画届出, KyotakuKeikakuTodokede.class);
+    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onClick_btnToSearchResult(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+        KyotakuKeikakuTodokede 居宅給付計画届出 = ViewStateHolder.get(ViewStateKeys.居宅給付計画届出,
+                KyotakuKeikakuTodokede.class);
         KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = getHandler(div);
         boolean is項目が変更 = handler.is項目が変更(居宅給付計画届出);
         if (is項目が変更 && !ResponseHolder.isReRequest()) {
@@ -304,7 +326,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
      * @param div KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
      * @return ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv>
      */
-    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onClick_btnComplete(KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onClick_btnComplete(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBC0110011TransitionEventName.完了).respond();
     }
 
@@ -312,11 +335,13 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         return message.getCode().equals(ResponseHolder.getMessageCode().toString()) && isSelectedResultYes;
     }
 
-    private KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler getHandler(KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+    private KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler getHandler(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
         return new KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler(div);
     }
 
-    private KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationHandler getValidationHandler(KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+    private KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationHandler getValidationHandler(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
         return new KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationHandler(div);
     }
 
@@ -336,7 +361,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         }
     }
 
-    private ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> getResponseData(KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+    private ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> getResponseData(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
         if (is事業者作成の場合()) {
             return ResponseData.of(div).rootTitle(TITLE_居宅サービス計画作成依頼届出情報登録).respond();
         }
@@ -425,11 +451,14 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         return null;
     }
 
-    private KyotakuKeikakuTodokede get居宅給付計画届出履歴(HihokenshaNo 被保険者番号, FlexibleYearMonth 対象年月,
-            Decimal 履歴番号) {
+    private KyotakuKeikakuTodokede get居宅給付計画届出履歴(KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        dgKyotakuServiceIchiran_Row 選択行 = div.getRireki().getDgKyotakuServiceIchiran().getClickedItem();
         KyotakuKeikakuTodokedeManager manager = KyotakuKeikakuTodokedeManager.createInstance();
-        KyotakuKeikakuTodokedeMapperParameter parameter = KyotakuKeikakuTodokedeMapperParameter.createSelectByKeyParam(被保険者番号,
-                対象年月, 履歴番号);
+        KyotakuKeikakuTodokedeMapperParameter parameter = KyotakuKeikakuTodokedeMapperParameter.createSelectByKeyParam(
+                被保険者番号,
+                new FlexibleYearMonth(選択行.getTaishoYM()),
+                new Decimal(選択行.getRirekiNo().toString()));
         return manager.get居宅給付計画届出履歴(parameter);
     }
 

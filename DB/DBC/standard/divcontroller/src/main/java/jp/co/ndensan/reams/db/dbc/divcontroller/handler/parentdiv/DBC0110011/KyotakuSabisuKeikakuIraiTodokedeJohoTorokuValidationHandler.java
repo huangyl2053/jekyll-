@@ -38,7 +38,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationHandler {
      *
      * @param div KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
      */
-    public KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationHandler(KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+    public KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationHandler(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
         this.div = div;
     }
 
@@ -57,18 +58,22 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationHandler {
         return validPairs;
     }
 
-    private void 編集なしで更新不可チェックValidate(ValidationMessageControlPairs validPairs, KyotakuKeikakuTodokede 居宅給付計画届出) {
+    private void 編集なしで更新不可チェックValidate(ValidationMessageControlPairs validPairs,
+            KyotakuKeikakuTodokede 居宅給付計画届出) {
         if (!居宅給付計画届出.hasChanged()) {
             validPairs.add(new ValidationMessageControlPair(
-                    new KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationMessages(UrErrorMessages.編集なしで更新不可)));
+                    new KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationMessages(
+                            UrErrorMessages.編集なしで更新不可)));
         }
     }
 
     private void 居宅適用開始日終了日不整合チェックValidate(ValidationMessageControlPairs validPairs) {
         if (div.getTxtKeikakuTekiyoEndYMD() != null
-                && div.getTxtKeikakuTekiyoStartYMD().getValue().compareTo(div.getTxtKeikakuTekiyoEndYMD().getValue()) > 0) {
+                && 0 < div.getTxtKeikakuTekiyoStartYMD().getValue().compareTo(
+                        div.getTxtKeikakuTekiyoEndYMD().getValue())) {
             validPairs.add(new ValidationMessageControlPair(
-                    new KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationMessages(DbcErrorMessages.居宅適用開始日終了日不整合)));
+                    new KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationMessages(
+                            DbcErrorMessages.居宅適用開始日終了日不整合)));
         }
 
     }
@@ -81,23 +86,28 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationHandler {
         KaigoJigyoshaShiteiServiceManager manager = new KaigoJigyoshaShiteiServiceManager();
         List<KaigoJigyoshaShiteiService> 介護事業者指定サービスリスト = manager.get介護事業者指定サービス(事業者番号);
         for (KaigoJigyoshaShiteiService 介護事業者指定サービス : 介護事業者指定サービスリスト) {
-            if (ServiceCategoryShurui.居宅支援.getコード().equals(介護事業者指定サービス.getサービス種類コード().value())
+            if (ServiceCategoryShurui.居宅支援.getコード().equals(
+                    介護事業者指定サービス.getサービス種類コード().value())
                     && ServiceCategoryShurui.居宅支援.getコード().equals(div.getRadServiceShurui().getSelectedKey())) {
                 return;
             }
-            if (ServiceCategoryShurui.予防支援.getコード().equals(介護事業者指定サービス.getサービス種類コード().value())
+            if (ServiceCategoryShurui.予防支援.getコード().equals(
+                    介護事業者指定サービス.getサービス種類コード().value())
                     && ServiceCategoryShurui.予防支援.getコード().equals(div.getRadServiceShurui().getSelectedKey())) {
                 return;
             }
-            if (ServiceCategoryShurui.地小短外.getコード().equals(介護事業者指定サービス.getサービス種類コード().value())
+            if (ServiceCategoryShurui.地小短外.getコード().equals(
+                    介護事業者指定サービス.getサービス種類コード().value())
                     && ServiceCategoryShurui.地小短外.getコード().equals(div.getRadServiceShurui().getSelectedKey())) {
                 return;
             }
-            if (ServiceCategoryShurui.地予小外.getコード().equals(介護事業者指定サービス.getサービス種類コード().value())
+            if (ServiceCategoryShurui.地予小外.getコード().equals(
+                    介護事業者指定サービス.getサービス種類コード().value())
                     && ServiceCategoryShurui.地予小外.getコード().equals(div.getRadServiceShurui().getSelectedKey())) {
                 return;
             }
-            if (ServiceCategoryShurui.予防ケア.getコード().equals(介護事業者指定サービス.getサービス種類コード().value())
+            if (ServiceCategoryShurui.予防ケア.getコード().equals(
+                    介護事業者指定サービス.getサービス種類コード().value())
                     && ServiceCategoryShurui.予防ケア.getコード().equals(div.getRadServiceShurui().getSelectedKey())) {
                 return;
             }
@@ -110,9 +120,11 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationHandler {
         if (!計画修正モード.equals(div.getMode())) {
             return;
         }
-        if (!div.getTxtKeikakuTekiyoStartYMD().getValue().getYearMonth().toDateString().equals(div.getKeikakuTekiyoStartYM())) {
+        if (!div.getTxtKeikakuTekiyoStartYMD().getValue().getYearMonth().toDateString().equals(
+                div.getKeikakuTekiyoStartYM())) {
             validPairs.add(new ValidationMessageControlPair(
-                    new KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationMessages(DbcErrorMessages.適用開始日_年月_変更,
+                    new KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationMessages(
+                            DbcErrorMessages.適用開始日_年月_変更,
                             div.getTxtKeikakuTekiyoStartYMD().getValue().getYearMonth().toString())));
         }
     }
@@ -121,11 +133,13 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationHandler {
         return メニューID_自己作成.equals(ResponseHolder.getMenuID());
     }
 
-    private static class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationMessages implements IValidationMessage {
+    private static class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationMessages
+            implements IValidationMessage {
 
         private final Message message;
 
-        KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationMessages(IMessageGettable message, String... replacements) {
+        KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationMessages(IMessageGettable message,
+                String... replacements) {
             this.message = message.getMessage().replace(replacements);
         }
 

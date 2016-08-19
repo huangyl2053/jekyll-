@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeikakujikos
 import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeikakujikosakusei.KyotakuKeikakuJikoSakuseiBuilder;
 import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeikakujikosakusei.KyotakuKeikakuJikoSakuseiIdentifier;
 import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeikakutodokede.KyotakuKeikakuTodokede;
-import jp.co.ndensan.reams.db.dbc.business.core.kyotakuserviceriyohyomain.KaigoJigyoshaResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KeikakuSakuseiKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.TodokedeshaKankeiKBN;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuserviceriyohyomain.KaigoJigyoshaResult;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyotakukeika.kyotakukeikakutodokede.KyotakuKeikakuTodokedeMapperParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0110011.DBC0110011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0110011.KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv;
@@ -42,7 +42,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -70,7 +69,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
     private static final RString DBCHIHOKENSHANO = new RString("DBCHihokenshaNo");
     private static final RString 業務固有の識別情報名称 = new RString("被保険者番号");
     private static final RString 居宅介護支援事業者 = new RString("居宅介護支援事業者");
-    private static final RString 介護予防支援事業者_地域包括支援センター = new RString("介護予防支援事業者・地域包括支援センター");
+    private static final RString 介護予防支援事業者_地域包括支援センター
+            = new RString("介護予防支援事業者・地域包括支援センター");
     private static final RString 自己作成 = new RString("自己作成");
     private static final Code 業務固有 = new Code("0003");
     private static final RString メニューID_事業者作成 = new RString("DBCMN21001");
@@ -132,9 +132,6 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
             List<KyotakuKeikakuTodokede> 居宅給付計画届出履歴一覧) {
         div.getKihonJoho().getCcdKaigoAtenaInfo().initialize(識別コード);
         div.getCcdKaigoShikakuKihon().initialize(被保険者番号);
-        if (!get前排他(被保険者番号.getColumnValue())) {
-            throw new PessimisticLockingException();
-        }
         set履歴一覧エリ(居宅給付計画届出履歴一覧);
         JigyoshaMode mode = new JigyoshaMode();
         mode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.getコード());
@@ -271,8 +268,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
      *
      */
     public void onChange計画作成区分() {
-        if (JukyushaIF_KeikakuSakuseiKubunCode.居宅介護支援事業所作成.getコード().equals(div.getRadKeikakuSakuseiKubun().
-                getSelectedKey())) {
+        if (JukyushaIF_KeikakuSakuseiKubunCode.居宅介護支援事業所作成.getコード().equals(
+                div.getRadKeikakuSakuseiKubun().getSelectedKey())) {
             div.getTxtItakusakiJigyoshaNo().setReadOnly(true);
         } else {
             div.getTxtItakusakiJigyoshaNo().setReadOnly(false);
@@ -287,14 +284,17 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
      * @return 居宅給付計画届出
      */
     public KyotakuKeikakuTodokede create居宅給付計画届出(HihokenshaNo 被保険者番号, int 履歴番号) {
-        FlexibleYearMonth 対象年月 = new FlexibleYearMonth(div.getTxtKeikakuTekiyoStartYMD().getValue().getYearMonth().toDateString());
+        FlexibleYearMonth 対象年月 = new FlexibleYearMonth(
+                div.getTxtKeikakuTekiyoStartYMD().getValue().getYearMonth().toDateString());
         KyotakuKeikakuTodokede 居宅給付計画届出 = new KyotakuKeikakuTodokede(被保険者番号, 対象年月, 履歴番号);
         if (is事業者作成の場合()) {
-            KyotakuKeikakuJigyoshaSakusei 居宅給付計画事業者作成 = new KyotakuKeikakuJigyoshaSakusei(被保険者番号, 対象年月, 履歴番号);
+            KyotakuKeikakuJigyoshaSakusei 居宅給付計画事業者作成 = new KyotakuKeikakuJigyoshaSakusei(
+                    被保険者番号, 対象年月, 履歴番号);
             居宅給付計画届出.createBuilderForEdit().setKyotakuKeikakuJigyoshaSakusei(居宅給付計画事業者作成);
         }
         if (is自己作成の場合()) {
-            KyotakuKeikakuJikoSakusei 居宅給付計画自己作成 = new KyotakuKeikakuJikoSakusei(被保険者番号, 対象年月, 履歴番号);
+            KyotakuKeikakuJikoSakusei 居宅給付計画自己作成 = new KyotakuKeikakuJikoSakusei(
+                    被保険者番号, 対象年月, 履歴番号);
             居宅給付計画届出.createBuilderForEdit().setKyotakuKeikakuJikoSakusei(居宅給付計画自己作成);
         }
         return 居宅給付計画届出;
@@ -436,7 +436,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         if (is事業者作成の場合()) {
             KyotakuKeikakuJigyoshaSakuseiIdentifier identifier = new KyotakuKeikakuJigyoshaSakuseiIdentifier(
                     居宅給付計画届出.get被保険者番号(), 居宅給付計画届出.get対象年月(), 居宅給付計画届出.get履歴番号());
-            KyotakuKeikakuJigyoshaSakusei 居宅給付計画事業者作成 = 居宅給付計画届出.getKyotakuKeikakuJigyoshaSakusei(identifier);
+            KyotakuKeikakuJigyoshaSakusei 居宅給付計画事業者作成
+                    = 居宅給付計画届出.getKyotakuKeikakuJigyoshaSakusei(identifier);
             KyotakuKeikakuJigyoshaSakuseiBuilder builder = 居宅給付計画事業者作成.createBuilderForEdit().
                     set適用開始年月日(new FlexibleDate(div.getTxtKeikakuTekiyoStartYMD().getValue().toDateString())).
                     set適用終了年月日(new FlexibleDate(div.getTxtKeikakuTekiyoEndYMD().getValue().toDateString()));
@@ -450,7 +451,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
                 builder.set事業者変更事由(div.getTxtJigyoshaHenkoJiyu().getValue());
             }
             builder.setサービス種類コード(new ServiceShuruiCode(div.getRadServiceShurui().getSelectedKey()));
-            居宅給付計画届出 = 居宅給付計画届出.createBuilderForEdit().setKyotakuKeikakuJigyoshaSakusei(builder.build()).build();
+            居宅給付計画届出 = 居宅給付計画届出.createBuilderForEdit().
+                    setKyotakuKeikakuJigyoshaSakusei(builder.build()).build();
         }
         if (is自己作成の場合()) {
             KyotakuKeikakuJikoSakuseiIdentifier identifier = new KyotakuKeikakuJikoSakuseiIdentifier(
@@ -461,7 +463,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
                     set適用開始年月日(new FlexibleDate(div.getTxtKeikakuTekiyoStartYMD().getValue().toDateString())).
                     set適用終了年月日(new FlexibleDate(div.getTxtKeikakuTekiyoEndYMD().getValue().toDateString())).
                     set作成区分コード(div.getRadKeikakuSakuseiKubun().getSelectedKey());
-            居宅給付計画届出 = 居宅給付計画届出.createBuilderForEdit().setKyotakuKeikakuJikoSakusei(builder.build()).build();
+            居宅給付計画届出 = 居宅給付計画届出.createBuilderForEdit().
+                    setKyotakuKeikakuJikoSakusei(builder.build()).build();
         }
         return 居宅給付計画届出;
     }
@@ -519,10 +522,12 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
             div.getRadTodokedeKubun().setSelectedKey(KEY_1);
         }
         if (is事業者作成の場合()) {
-            KyotakuKeikakuJigyoshaSakusei 居宅給付計画事業者作成 = 居宅給付計画届出.getKyotakuKeikakuJigyoshaSakuseiList().get(0);
+            KyotakuKeikakuJigyoshaSakusei 居宅給付計画事業者作成 = 居宅給付計画届出.
+                    getKyotakuKeikakuJigyoshaSakuseiList().get(0);
             div.getRadTodokedeKubun().setSelectedKey(KEY_1);
             div.getRadKeikakuKubun().setDisplayNone(true);
-            div.getTxtKeikakuTekiyoStartYMD().setValue(new RDate(居宅給付計画事業者作成.get適用開始年月日().toString()));
+            div.getTxtKeikakuTekiyoStartYMD().setValue(new RDate(
+                    居宅給付計画事業者作成.get適用開始年月日().toString()));
             div.getTxtKeikakuTekiyoEndYMD().setValue(new RDate(居宅給付計画事業者作成.get適用終了年月日().toString()));
             div.setKeikakuTekiyoStartYM(居宅給付計画事業者作成.get適用開始年月日().getYearMonth().toDateString());
             div.getRadKeikakuSakuseiKubun().setDataSource(get事業者作成計画作成区分DataSource());
@@ -558,7 +563,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
     }
 
     private void set計画事業者エリア照会(KyotakuKeikakuTodokede 居宅給付計画届出) {
-        KyotakuKeikakuJigyoshaSakusei 居宅給付計画事業者 = 居宅給付計画届出.getKyotakuKeikakuJigyoshaSakuseiList().get(0);
+        KyotakuKeikakuJigyoshaSakusei 居宅給付計画事業者
+                = 居宅給付計画届出.getKyotakuKeikakuJigyoshaSakuseiList().get(0);
         dgKyotakuServiceIchiran_Row 選択行 = div.getRireki().getDgKyotakuServiceIchiran().getClickedItem();
         div.getTxtJigyoshaNo().setValue(選択行.getJigyoshaNo());
         div.getTxtJigyoshaName().setValue(選択行.getJigyoshaName());
@@ -652,7 +658,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         if (居宅給付計画届出履歴.getKyotakuKeikakuJigyoshaSakuseiList().isEmpty()) {
             return;
         }
-        KyotakuKeikakuJigyoshaSakusei 居宅給付計画事業者 = 居宅給付計画届出履歴.getKyotakuKeikakuJigyoshaSakuseiList().get(0);
+        KyotakuKeikakuJigyoshaSakusei 居宅給付計画事業者
+                = 居宅給付計画届出履歴.getKyotakuKeikakuJigyoshaSakuseiList().get(0);
         dgKyotakuServiceIchiran_Row row = new dgKyotakuServiceIchiran_Row();
         if (is事業者作成(居宅給付計画事業者.get作成区分コード())) {
             row.setSelectButtonState(DataGridButtonState.Enabled);
@@ -665,7 +672,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         }
         row.setTekiyoKaishiYMD(居宅給付計画事業者.get適用開始年月日().getYearMonth().wareki().toDateString());
         row.setTaishoYM(居宅給付計画届出履歴.get対象年月().toDateString());
-        row.setKeikakuSakuseiKubun(KyotakuservicekeikakuSakuseikubunCode.toValue(居宅給付計画事業者.get作成区分コード()).get名称());
+        row.setKeikakuSakuseiKubun(KyotakuservicekeikakuSakuseikubunCode.toValue(
+                居宅給付計画事業者.get作成区分コード()).get名称());
         row.setJigyoshaNo(居宅給付計画事業者.get被保険者番号().getColumnValue());
         row.setJigyoshaName(get事業者名(居宅給付計画事業者.get計画事業者番号().getColumnValue()));
         row.setYukoMuko(is直近履歴 ? FLAG_直近履歴 : FLAG_履歴);
@@ -693,7 +701,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         }
         row.setTekiyoKaishiYMD(居宅給付計画自己作成.get適用開始年月日().getYearMonth().wareki().toDateString());
         row.setTaishoYM(居宅給付計画届出履歴.get対象年月().toDateString());
-        row.setKeikakuSakuseiKubun(KyotakuservicekeikakuSakuseikubunCode.toValue(居宅給付計画自己作成.get作成区分コード()).get名称());
+        row.setKeikakuSakuseiKubun(KyotakuservicekeikakuSakuseikubunCode.toValue(
+                居宅給付計画自己作成.get作成区分コード()).get名称());
         row.setJigyoshaNo(RString.EMPTY);
         row.setJigyoshaName(RString.EMPTY);
         row.setYukoMuko(is直近履歴 ? FLAG_直近履歴 : FLAG_履歴);
@@ -748,7 +757,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
     private List<KeyValueDataSource> get届出者関係区分DataSource() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (TodokedeshaKankeiKBN 届出者関係区分 : TodokedeshaKankeiKBN.values()) {
-            KeyValueDataSource dataSource = new KeyValueDataSource(届出者関係区分.getコード(), 届出者関係区分.get名称());
+            KeyValueDataSource dataSource = new KeyValueDataSource(
+                    届出者関係区分.getコード(), 届出者関係区分.get名称());
             dataSourceList.add(dataSource);
         }
         return dataSourceList;
