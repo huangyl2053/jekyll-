@@ -15,9 +15,9 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 総合事業費過誤決定通知書情報取込（保険者分）帳票Report
+ * 帳票設計_DBC200085_総合事業費過誤決定通知書情報取込一覧表帳票Report
  *
- * @reamsid_L DBC-2550-011 jiangxiaolong
+ * @reamsid_L DBC-2550-031 jiangxiaolong
  */
 public class SogojigyohiKagoKetteiHokenshaInReport
         extends Report<SogojigyohiKagoKetteiTorikomiIchiranSource> {
