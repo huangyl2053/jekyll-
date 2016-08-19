@@ -183,11 +183,11 @@ public class SogojigyohiSaishinsaService {
 
         SogojigyohiSaishinsaKetteiHokenshaInItem outItem = new SogojigyohiSaishinsaKetteiHokenshaInItem();
         RDateTime systemTime = RDateTime.now();
-        RString 作成日 = systemTime.getDate().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+        RString 作成日 = systemTime.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        RString 作成時 = systemTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE);
-        outItem.set印刷日時(作成日.concat(RString.HALF_SPACE).concat(作成時).concat(RString.HALF_SPACE).concat(new RString("作成")));
-        outItem.set取込年月(処理年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+        RString 作成時 = systemTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+        outItem.set印刷日時(作成日.concat(RString.HALF_SPACE).concat(作成時).concat(RString.HALF_SPACE).concat(SAKUSEI));
+        outItem.set取込年月(処理年月.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         outItem.set国保連合会名(entity.get国保連合会名());
         outItem.set審査委員会名(entity.get審査委員会名());
