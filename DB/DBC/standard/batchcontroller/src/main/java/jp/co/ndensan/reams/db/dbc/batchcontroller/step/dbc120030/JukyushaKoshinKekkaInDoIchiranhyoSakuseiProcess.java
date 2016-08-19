@@ -247,7 +247,7 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
     /**
      * CSV書き込むデータを作成する。
      *
-     * @param 受給者情報 DbWT5331JukyushaJohoTempEntity
+     * @param 受給者情報 DbWT5331JukyushaJohoCsvEntity
      * @param 被保険者 DbWT0001HihokenshaTempEntity
      * @param 作成日時 RDateTime
      * @param 住所 RString
@@ -327,7 +327,7 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
      * 日付項目編集する。
      *
      * @param output JukyushaKoshinKekkaIchiranCsvEntity
-     * @param 受給者情報 DbWT5331JukyushaJohoTempEntity
+     * @param 受給者情報 DbWT5331JukyushaJohoCsvEntity
      */
     private void 日付項目編集(JukyushaKoshinKekkaIchiranCsvEntity output, DbWT5331JukyushaJohoCsvEntity 受給者情報) {
         output.set訂正年月日(date_to_string(受給者情報.get訂正年月日()));
@@ -368,7 +368,7 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
      * 数値項目編集する。
      *
      * @param output JukyushaKoshinKekkaIchiranCsvEntity
-     * @param 受給者情報 DbWT5331JukyushaJohoTempEntity
+     * @param 受給者情報 DbWT5331JukyushaJohoCsvEntity
      */
     private void 数値項目編集(JukyushaKoshinKekkaIchiranCsvEntity output, DbWT5331JukyushaJohoCsvEntity 受給者情報) {
         output.set訪問通所支給限度基準額(decimal_to_string(受給者情報.get訪問通所_支給限度基準額()));
@@ -391,7 +391,7 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
      * 名称項目編集する。
      *
      * @param output JukyushaKoshinKekkaIchiranCsvEntity
-     * @param 受給者情報 DbWT5331JukyushaJohoTempEntity
+     * @param 受給者情報 DbWT5331JukyushaJohoCsvEntity
      * @param 被保険者 DbWT0001HihokenshaTempEntity
      */
     private void 名称項目編集(JukyushaKoshinKekkaIchiranCsvEntity output, DbWT5331JukyushaJohoCsvEntity 受給者情報, DbWT0001HihokenshaTempEntity 被保険者) {
