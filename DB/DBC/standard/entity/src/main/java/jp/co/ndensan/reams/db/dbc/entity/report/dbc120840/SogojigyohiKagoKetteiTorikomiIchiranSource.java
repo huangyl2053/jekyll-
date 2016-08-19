@@ -1,11 +1,12 @@
-
 package jp.co.ndensan.reams.db.dbc.entity.report.dbc120840;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+
 /**
  * 総合事業費過誤決定通知書情報取込一覧表source
+ *
  * @reamsid_L DBC-2550-031 jiangxiaolong
  */
 public class SogojigyohiKagoKetteiTorikomiIchiranSource implements IReportSource {
@@ -89,43 +90,47 @@ public class SogojigyohiKagoKetteiTorikomiIchiranSource implements IReportSource
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
-public enum ReportSourceFields {
-printTimeStamp,				
-pageCount,			
-torikomiYM,				
-hokenshaNo,				
-hokenshaName,				
-shoKisaiHokenshaNo,				
-shoKisaiHokenshaName,				
-shutsuryokujun1,				
-shutsuryokujun2,				
-shutsuryokujun3,				
-shutsuryokujun4,				
-shutsuryokujun5,				
-kaipage1,				
-kaipage2,				
-kaipage3,				
-kaipage4,				
-kaipage5,						
-listUpper_1,			
-listUpper_2,				
-listUpper_3,				
-listUpper_4,				
-listUpper_5,				
-listUpper_6,				
-listUpper_7,				
-listUpper_8,				
-listUpper_9,				
-listLower_1,				
-listLower_2,				
-listLower_3,				
-listLower_4,							
-kensuTitle,				
-tanisuTitle,				
-futangakuTitle,				
-sogojigyohiTitle,				
-sogojigyohiKensu,				
-sogojigyohiTanisu,				
-sogojigyohiFutangaku				
-}
+
+    /**
+     * SogojigyohiKagoKetteiTorikomiIchiranSourceのENUM
+     */
+    public enum ReportSourceFields {
+        printTimeStamp,
+        pageCount,
+        torikomiYM,
+        hokenshaNo,
+        hokenshaName,
+        shoKisaiHokenshaNo,
+        shoKisaiHokenshaName,
+        shutsuryokujun1,
+        shutsuryokujun2,
+        shutsuryokujun3,
+        shutsuryokujun4,
+        shutsuryokujun5,
+        kaipage1,
+        kaipage2,
+        kaipage3,
+        kaipage4,
+        kaipage5,
+        listUpper_1,
+        listUpper_2,
+        listUpper_3,
+        listUpper_4,
+        listUpper_5,
+        listUpper_6,
+        listUpper_7,
+        listUpper_8,
+        listUpper_9,
+        listLower_1,
+        listLower_2,
+        listLower_3,
+        listLower_4,
+        kensuTitle,
+        tanisuTitle,
+        futangakuTitle,
+        sogojigyohiTitle,
+        sogojigyohiKensu,
+        sogojigyohiTanisu,
+        sogojigyohiFutangaku
+    }
 }

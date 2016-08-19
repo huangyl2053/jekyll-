@@ -21,10 +21,10 @@ public class KogakuGassanKyufuJissekiListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("CheckBoxList1")
-    private CheckBoxList CheckBoxList1;
-    @JsonProperty("DataGrid1")
-    private DataGrid<DataGrid1_Row> DataGrid1;
+    @JsonProperty("chkRirekiHyoji")
+    private CheckBoxList chkRirekiHyoji;
+    @JsonProperty("dgRireki")
+    private DataGrid<dgRireki_Row> dgRireki;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -33,39 +33,39 @@ public class KogakuGassanKyufuJissekiListDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getCheckBoxList1
-     * @return CheckBoxList1
+     * getchkRirekiHyoji
+     * @return chkRirekiHyoji
      */
-    @JsonProperty("CheckBoxList1")
-    public CheckBoxList getCheckBoxList1() {
-        return CheckBoxList1;
+    @JsonProperty("chkRirekiHyoji")
+    public CheckBoxList getChkRirekiHyoji() {
+        return chkRirekiHyoji;
     }
 
     /*
-     * setCheckBoxList1
-     * @param CheckBoxList1 CheckBoxList1
+     * setchkRirekiHyoji
+     * @param chkRirekiHyoji chkRirekiHyoji
      */
-    @JsonProperty("CheckBoxList1")
-    public void setCheckBoxList1(CheckBoxList CheckBoxList1) {
-        this.CheckBoxList1 = CheckBoxList1;
+    @JsonProperty("chkRirekiHyoji")
+    public void setChkRirekiHyoji(CheckBoxList chkRirekiHyoji) {
+        this.chkRirekiHyoji = chkRirekiHyoji;
     }
 
     /*
-     * getDataGrid1
-     * @return DataGrid1
+     * getdgRireki
+     * @return dgRireki
      */
-    @JsonProperty("DataGrid1")
-    public DataGrid<DataGrid1_Row> getDataGrid1() {
-        return DataGrid1;
+    @JsonProperty("dgRireki")
+    public DataGrid<dgRireki_Row> getDgRireki() {
+        return dgRireki;
     }
 
     /*
-     * setDataGrid1
-     * @param DataGrid1 DataGrid1
+     * setdgRireki
+     * @param dgRireki dgRireki
      */
-    @JsonProperty("DataGrid1")
-    public void setDataGrid1(DataGrid<DataGrid1_Row> DataGrid1) {
-        this.DataGrid1 = DataGrid1;
+    @JsonProperty("dgRireki")
+    public void setDgRireki(DataGrid<dgRireki_Row> dgRireki) {
+        this.dgRireki = dgRireki;
     }
 
     // </editor-fold>

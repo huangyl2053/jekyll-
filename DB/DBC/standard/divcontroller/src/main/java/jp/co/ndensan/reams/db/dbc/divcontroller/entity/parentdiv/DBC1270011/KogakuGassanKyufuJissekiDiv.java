@@ -26,8 +26,8 @@ public class KogakuGassanKyufuJissekiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("HorizontalLine4")
-    private HorizontalLine HorizontalLine4;
+    @JsonProperty("linLine1")
+    private HorizontalLine linLine1;
     @JsonProperty("KogakuGassanKyufuJissekiList")
     private KogakuGassanKyufuJissekiListDiv KogakuGassanKyufuJissekiList;
     @JsonProperty("KogakuGassanKyufuJissekiDetail")
@@ -44,21 +44,21 @@ public class KogakuGassanKyufuJissekiDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getHorizontalLine4
-     * @return HorizontalLine4
+     * getlinLine1
+     * @return linLine1
      */
-    @JsonProperty("HorizontalLine4")
-    public HorizontalLine getHorizontalLine4() {
-        return HorizontalLine4;
+    @JsonProperty("linLine1")
+    public HorizontalLine getLinLine1() {
+        return linLine1;
     }
 
     /*
-     * setHorizontalLine4
-     * @param HorizontalLine4 HorizontalLine4
+     * setlinLine1
+     * @param linLine1 linLine1
      */
-    @JsonProperty("HorizontalLine4")
-    public void setHorizontalLine4(HorizontalLine HorizontalLine4) {
-        this.HorizontalLine4 = HorizontalLine4;
+    @JsonProperty("linLine1")
+    public void setLinLine1(HorizontalLine linLine1) {
+        this.linLine1 = linLine1;
     }
 
     /*
@@ -119,163 +119,173 @@ public class KogakuGassanKyufuJissekiDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public CheckBoxList getCheckBoxList1() {
-        return this.getKogakuGassanKyufuJissekiList().getCheckBoxList1();
+    public CheckBoxList getChkRirekiHyoji() {
+        return this.getKogakuGassanKyufuJissekiList().getChkRirekiHyoji();
     }
 
     @JsonIgnore
-    public void  setCheckBoxList1(CheckBoxList CheckBoxList1) {
-        this.getKogakuGassanKyufuJissekiList().setCheckBoxList1(CheckBoxList1);
+    public void  setChkRirekiHyoji(CheckBoxList chkRirekiHyoji) {
+        this.getKogakuGassanKyufuJissekiList().setChkRirekiHyoji(chkRirekiHyoji);
     }
 
     @JsonIgnore
-    public DataGrid<DataGrid1_Row> getDataGrid1() {
-        return this.getKogakuGassanKyufuJissekiList().getDataGrid1();
+    public DataGrid<dgRireki_Row> getDgRireki() {
+        return this.getKogakuGassanKyufuJissekiList().getDgRireki();
     }
 
     @JsonIgnore
-    public void  setDataGrid1(DataGrid<DataGrid1_Row> DataGrid1) {
-        this.getKogakuGassanKyufuJissekiList().setDataGrid1(DataGrid1);
+    public void  setDgRireki(DataGrid<dgRireki_Row> dgRireki) {
+        this.getKogakuGassanKyufuJissekiList().setDgRireki(dgRireki);
     }
 
     @JsonIgnore
-    public TextBox getTextBox1() {
-        return this.getKogakuGassanKyufuJissekiDetail().getTextBox1();
+    public TextBox getTxtKokanShikibetsu() {
+        return this.getKogakuGassanKyufuJissekiDetail().getTxtKokanShikibetsu();
     }
 
     @JsonIgnore
-    public void  setTextBox1(TextBox TextBox1) {
-        this.getKogakuGassanKyufuJissekiDetail().setTextBox1(TextBox1);
+    public void  setTxtKokanShikibetsu(TextBox txtKokanShikibetsu) {
+        this.getKogakuGassanKyufuJissekiDetail().setTxtKokanShikibetsu(txtKokanShikibetsu);
     }
 
     @JsonIgnore
-    public TextBox getTextBox6() {
-        return this.getKogakuGassanKyufuJissekiDetail().getTextBox6();
+    public TextBox getTxtShikyuShinseishoSeiriNO() {
+        return this.getKogakuGassanKyufuJissekiDetail().getTxtShikyuShinseishoSeiriNO();
     }
 
     @JsonIgnore
-    public void  setTextBox6(TextBox TextBox6) {
-        this.getKogakuGassanKyufuJissekiDetail().setTextBox6(TextBox6);
+    public void  setTxtShikyuShinseishoSeiriNO(TextBox txtShikyuShinseishoSeiriNO) {
+        this.getKogakuGassanKyufuJissekiDetail().setTxtShikyuShinseishoSeiriNO(txtShikyuShinseishoSeiriNO);
     }
 
     @JsonIgnore
-    public TextBox getTextBox5() {
-        return this.getKogakuGassanKyufuJissekiDetail().getTextBox5();
+    public TextBox getTxtJikofutangakuShomeishoSeiriNO() {
+        return this.getKogakuGassanKyufuJissekiDetail().getTxtJikofutangakuShomeishoSeiriNO();
     }
 
     @JsonIgnore
-    public void  setTextBox5(TextBox TextBox5) {
-        this.getKogakuGassanKyufuJissekiDetail().setTextBox5(TextBox5);
+    public void  setTxtJikofutangakuShomeishoSeiriNO(TextBox txtJikofutangakuShomeishoSeiriNO) {
+        this.getKogakuGassanKyufuJissekiDetail().setTxtJikofutangakuShomeishoSeiriNO(txtJikofutangakuShomeishoSeiriNO);
     }
 
     @JsonIgnore
-    public TextBox getTextBox4() {
-        return this.getKogakuGassanKyufuJissekiDetail().getTextBox4();
+    public TextBox getTxtSakuseiKBN() {
+        return this.getKogakuGassanKyufuJissekiDetail().getTxtSakuseiKBN();
     }
 
     @JsonIgnore
-    public void  setTextBox4(TextBox TextBox4) {
-        this.getKogakuGassanKyufuJissekiDetail().setTextBox4(TextBox4);
+    public void  setTxtSakuseiKBN(TextBox txtSakuseiKBN) {
+        this.getKogakuGassanKyufuJissekiDetail().setTxtSakuseiKBN(txtSakuseiKBN);
     }
 
     @JsonIgnore
-    public TextBox getTextBox3() {
-        return this.getKogakuGassanKyufuJissekiDetail().getTextBox3();
+    public TextBox getTxtHokeshaNO() {
+        return this.getKogakuGassanKyufuJissekiDetail().getTxtHokeshaNO();
     }
 
     @JsonIgnore
-    public void  setTextBox3(TextBox TextBox3) {
-        this.getKogakuGassanKyufuJissekiDetail().setTextBox3(TextBox3);
+    public void  setTxtHokeshaNO(TextBox txtHokeshaNO) {
+        this.getKogakuGassanKyufuJissekiDetail().setTxtHokeshaNO(txtHokeshaNO);
     }
 
     @JsonIgnore
-    public TextBoxDate getTextBoxDate1() {
-        return this.getKogakuGassanKyufuJissekiDetail().getTextBoxDate1();
+    public TextBoxDate getTxtShinseiYMD() {
+        return this.getKogakuGassanKyufuJissekiDetail().getTxtShinseiYMD();
     }
 
     @JsonIgnore
-    public void  setTextBoxDate1(TextBoxDate TextBoxDate1) {
-        this.getKogakuGassanKyufuJissekiDetail().setTextBoxDate1(TextBoxDate1);
+    public void  setTxtShinseiYMD(TextBoxDate txtShinseiYMD) {
+        this.getKogakuGassanKyufuJissekiDetail().setTxtShinseiYMD(txtShinseiYMD);
     }
 
     @JsonIgnore
-    public TextBoxDate getTextBoxDate3() {
-        return this.getKogakuGassanKyufuJissekiDetail().getTextBoxDate3();
+    public TextBoxDate getTxtKetteiYMD() {
+        return this.getKogakuGassanKyufuJissekiDetail().getTxtKetteiYMD();
     }
 
     @JsonIgnore
-    public void  setTextBoxDate3(TextBoxDate TextBoxDate3) {
-        this.getKogakuGassanKyufuJissekiDetail().setTextBoxDate3(TextBoxDate3);
+    public void  setTxtKetteiYMD(TextBoxDate txtKetteiYMD) {
+        this.getKogakuGassanKyufuJissekiDetail().setTxtKetteiYMD(txtKetteiYMD);
     }
 
     @JsonIgnore
-    public TextBoxNum getTextBoxNum1() {
-        return this.getKogakuGassanKyufuJissekiDetail().getTextBoxNum1();
+    public TextBoxNum getTxtJikofutangaku() {
+        return this.getKogakuGassanKyufuJissekiDetail().getTxtJikofutangaku();
     }
 
     @JsonIgnore
-    public void  setTextBoxNum1(TextBoxNum TextBoxNum1) {
-        this.getKogakuGassanKyufuJissekiDetail().setTextBoxNum1(TextBoxNum1);
+    public void  setTxtJikofutangaku(TextBoxNum txtJikofutangaku) {
+        this.getKogakuGassanKyufuJissekiDetail().setTxtJikofutangaku(txtJikofutangaku);
     }
 
     @JsonIgnore
-    public TextBoxNum getTextBoxNum3() {
-        return this.getKogakuGassanKyufuJissekiDetail().getTextBoxNum3();
+    public TextBoxNum getTxtShikyugaku() {
+        return this.getKogakuGassanKyufuJissekiDetail().getTxtShikyugaku();
     }
 
     @JsonIgnore
-    public void  setTextBoxNum3(TextBoxNum TextBoxNum3) {
-        this.getKogakuGassanKyufuJissekiDetail().setTextBoxNum3(TextBoxNum3);
+    public void  setTxtShikyugaku(TextBoxNum txtShikyugaku) {
+        this.getKogakuGassanKyufuJissekiDetail().setTxtShikyugaku(txtShikyugaku);
     }
 
     @JsonIgnore
-    public TextBoxDate getTextBoxDate6() {
-        return this.getKogakuGassanKyufuJissekiDetail().getTextBoxDate6();
+    public HorizontalLine getLinLine2() {
+        return this.getKogakuGassanKyufuJissekiDetail().getLinLine2();
     }
 
     @JsonIgnore
-    public void  setTextBoxDate6(TextBoxDate TextBoxDate6) {
-        this.getKogakuGassanKyufuJissekiDetail().setTextBoxDate6(TextBoxDate6);
+    public void  setLinLine2(HorizontalLine linLine2) {
+        this.getKogakuGassanKyufuJissekiDetail().setLinLine2(linLine2);
     }
 
     @JsonIgnore
-    public TextBoxDate getTextBoxDate5() {
-        return this.getKogakuGassanKyufuJissekiDetail().getTextBoxDate5();
+    public TextBoxDate getTxtShoriYMD() {
+        return this.getKogakuGassanKyufuJissekiDetail().getTxtShoriYMD();
     }
 
     @JsonIgnore
-    public void  setTextBoxDate5(TextBoxDate TextBoxDate5) {
-        this.getKogakuGassanKyufuJissekiDetail().setTextBoxDate5(TextBoxDate5);
+    public void  setTxtShoriYMD(TextBoxDate txtShoriYMD) {
+        this.getKogakuGassanKyufuJissekiDetail().setTxtShoriYMD(txtShoriYMD);
     }
 
     @JsonIgnore
-    public TextBoxDate getTextBoxDate4() {
-        return this.getKogakuGassanKyufuJissekiDetail().getTextBoxDate4();
+    public TextBoxDate getTxtUketoriYMD() {
+        return this.getKogakuGassanKyufuJissekiDetail().getTxtUketoriYMD();
     }
 
     @JsonIgnore
-    public void  setTextBoxDate4(TextBoxDate TextBoxDate4) {
-        this.getKogakuGassanKyufuJissekiDetail().setTextBoxDate4(TextBoxDate4);
+    public void  setTxtUketoriYMD(TextBoxDate txtUketoriYMD) {
+        this.getKogakuGassanKyufuJissekiDetail().setTxtUketoriYMD(txtUketoriYMD);
     }
 
     @JsonIgnore
-    public HorizontalLine getHorizontalLine5() {
-        return this.getKogakuGassanKyufuJissekiDetail().getHorizontalLine5();
+    public TextBoxDate getTxtSoufuYMD() {
+        return this.getKogakuGassanKyufuJissekiDetail().getTxtSoufuYMD();
     }
 
     @JsonIgnore
-    public void  setHorizontalLine5(HorizontalLine HorizontalLine5) {
-        this.getKogakuGassanKyufuJissekiDetail().setHorizontalLine5(HorizontalLine5);
+    public void  setTxtSoufuYMD(TextBoxDate txtSoufuYMD) {
+        this.getKogakuGassanKyufuJissekiDetail().setTxtSoufuYMD(txtSoufuYMD);
     }
 
     @JsonIgnore
-    public Button getButton6() {
-        return this.getKogakuGassanKyufuJissekiDetail().getButton6();
+    public HorizontalLine getLinLine3() {
+        return this.getKogakuGassanKyufuJissekiDetail().getLinLine3();
     }
 
     @JsonIgnore
-    public void  setButton6(Button Button6) {
-        this.getKogakuGassanKyufuJissekiDetail().setButton6(Button6);
+    public void  setLinLine3(HorizontalLine linLine3) {
+        this.getKogakuGassanKyufuJissekiDetail().setLinLine3(linLine3);
+    }
+
+    @JsonIgnore
+    public Button getBtnKyufujissekiNiModoru() {
+        return this.getKogakuGassanKyufuJissekiDetail().getBtnKyufujissekiNiModoru();
+    }
+
+    @JsonIgnore
+    public void  setBtnKyufujissekiNiModoru(Button btnKyufujissekiNiModoru) {
+        this.getKogakuGassanKyufuJissekiDetail().setBtnKyufujissekiNiModoru(btnKyufujissekiNiModoru);
     }
 
     // </editor-fold>
