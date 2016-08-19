@@ -57,6 +57,42 @@ public class KyufuJissekiHeaderHandler {
         }
     }
 
+    /**
+     * サービス提供年月の前月を設定します。
+     *
+     * @param サービス提供年月 サービス提供年月
+     */
+    public void set前月(RDate サービス提供年月) {
+        div.getTxtTeikyoNengetsu().setValue(サービス提供年月);
+    }
+
+    /**
+     * サービス提供年月の次月を設定します。
+     *
+     * @param サービス提供年月 サービス提供年月
+     */
+    public void set次月(RDate サービス提供年月) {
+        div.getTxtTeikyoNengetsu().setValue(サービス提供年月);
+    }
+
+    /**
+     * 事業者名称の前事業者を設定します。
+     *
+     * @param 事業者名称 事業者名称
+     */
+    public void set前事業者(RString 事業者名称) {
+        div.getTxtJigyosha().setValue(事業者名称);
+    }
+
+    /**
+     * 事業者名称の後事業者を設定します。
+     *
+     * @param 事業者名称 事業者名称
+     */
+    public void set後事業者(RString 事業者名称) {
+        div.getTxtJigyosha().setValue(事業者名称);
+    }
+
     private void set給付実績ヘッダ情報1(KyufuJissekiHedajyoho1 給付実績ヘッダ情報1) {
         div.getTxtHihoNo().setValue(get被保険者番号(給付実績ヘッダ情報1.get被保険者番号()));
         div.getTxtJuminShubetsu().setValue(get住民種別(給付実績ヘッダ情報1.get資格取得事由コード()));

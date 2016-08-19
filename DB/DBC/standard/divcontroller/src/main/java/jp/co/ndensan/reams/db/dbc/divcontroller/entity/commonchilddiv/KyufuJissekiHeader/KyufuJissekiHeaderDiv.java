@@ -4,13 +4,14 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuJiss
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
  * @reamsid_L DBC-2970-160 linghuhang
  */
 public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -301,8 +303,56 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
         return new KyufuJissekiHeaderHandler(this);
     }
 
+    /**
+     * 給付実績基本情報に初期化を設定します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 識別番号 識別番号
+     * @param 整理番号 整理番号
+     */
     @Override
     public void initialize(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, RString 整理番号, NyuryokuShikibetsuNo 識別番号) {
         getHandler().initialize(被保険者番号, サービス提供年月, 整理番号, 識別番号);
+    }
+
+    /**
+     * サービス提供年月の前月を設定します。
+     *
+     * @param サービス提供年月 サービス提供年月
+     */
+    @Override
+    public void set前月(RDate サービス提供年月) {
+        getHandler().set前月(サービス提供年月);
+    }
+
+    /**
+     * サービス提供年月の次月を設定します。
+     *
+     * @param サービス提供年月 サービス提供年月
+     */
+    @Override
+    public void set次月(RDate サービス提供年月) {
+        getHandler().set次月(サービス提供年月);
+    }
+
+    /**
+     * 前事業者を設定します。
+     *
+     * @param 事業者名称 事業者名称
+     */
+    @Override
+    public void set前事業者(RString 事業者名称) {
+        getHandler().set前事業者(事業者名称);
+    }
+
+    /**
+     * 後事業者を設定します。
+     *
+     * @param 事業者名称 事業者名称
+     */
+    @Override
+    public void set後事業者(RString 事業者名称) {
+        getHandler().set後事業者(事業者名称);
     }
 }
