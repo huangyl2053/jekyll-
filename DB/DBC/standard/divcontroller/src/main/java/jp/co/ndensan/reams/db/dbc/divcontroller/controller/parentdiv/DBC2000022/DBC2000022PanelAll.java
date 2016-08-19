@@ -80,7 +80,6 @@ public class DBC2000022PanelAll {
      */
     public ResponseData<DBC2000022PanelAllDiv> onLoad(DBC2000022PanelAllDiv div) {
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        FlexibleYear 年度 = ViewStateHolder.get(ViewStateKeys.年度, FlexibleYear.class);
         div.setHdnGyomuCode(GyomuCode.DB介護保険.getColumnValue());
         div.setHdnShikibetsuCode(資格対象者.get識別コード().getColumnValue());
         RString 処理モード = get処理モード();
@@ -104,14 +103,14 @@ public class DBC2000022PanelAll {
             return ResponseData.of(div).setState(DBC2000022StateName.新規);
         }
         if (DBC2000022StateName.修正.getName().equals(処理モード)) {
-            FutanWariaiSokujiKouseiResult 利用者負担割合情報 = getHandler(div).shuseiInitialize(資格対象者, 年度);
+            FutanWariaiSokujiKouseiResult 利用者負担割合情報 = getHandler(div).shuseiInitialize(資格対象者);
             ViewStateHolder.put(ViewStateKeys.利用者負担割合, new RiyoshaFutanWariai(利用者負担割合情報.toEntity()));
             ViewStateHolder.put(ViewStateKeys.利用者負担割合明細,
                     new FutanWariaiSokujiKouseiHolder(利用者負担割合情報.get利用者負担割合明細list()));
             return ResponseData.of(div).setState(DBC2000022StateName.修正);
         }
         if (DBC2000022StateName.照会.getName().equals(処理モード)) {
-            FutanWariaiSokujiKouseiResult 利用者負担割合情報 = getHandler(div).shokaiInitialize(資格対象者, 年度);
+            FutanWariaiSokujiKouseiResult 利用者負担割合情報 = getHandler(div).shokaiInitialize(資格対象者);
             ViewStateHolder.put(ViewStateKeys.利用者負担割合, new RiyoshaFutanWariai(利用者負担割合情報.toEntity()));
             ViewStateHolder.put(ViewStateKeys.利用者負担割合明細,
                     new FutanWariaiSokujiKouseiHolder(利用者負担割合情報.get利用者負担割合明細list()));
@@ -128,10 +127,17 @@ public class DBC2000022PanelAll {
      */
     public ResponseData<DBC2000022PanelAllDiv> onClick_btnClear(DBC2000022PanelAllDiv div) {
         RString 処理モード = get処理モード();
-        if (DBC2000022StateName.修正.getName().equals(処理モード)) {
-            クリア処理(div, 処理モード);
-        }
-        if (DBC2000022StateName.照会.getName().equals(処理モード)) {
+        if (DBC2000022StateName.修正.getName().equals(処理モード) && データ項目変更判定()) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(
+                        DbcQuestionMessages.編集クリア確認.getMessage().getCode(),
+                        DbcQuestionMessages.編集クリア確認.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
+                getHandler(div).clear(処理モード);
+            }
+        } else {
             getHandler(div).clear(処理モード);
         }
         return ResponseData.of(div).respond();
@@ -159,7 +165,7 @@ public class DBC2000022PanelAll {
      */
     public ResponseData<DBC2000022PanelAllDiv> onClick_btnHyoji(DBC2000022PanelAllDiv div) {
         FutanWariaiSokujiKouseiResult 利用者負担割合情報
-                = getHandler(div).onClick_Hyoji(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
+                = getHandler(div).onClick_Hyoji(get処理モード());
         ViewStateHolder.put(ViewStateKeys.利用者負担割合, new RiyoshaFutanWariai(利用者負担割合情報.toEntity()));
         ViewStateHolder.put(ViewStateKeys.利用者負担割合明細,
                 new FutanWariaiSokujiKouseiHolder(利用者負担割合情報.get利用者負担割合明細list()));
@@ -482,23 +488,6 @@ public class DBC2000022PanelAll {
                 前排他キーの解除();
                 return ResponseData.of(div).forwardWithEventName(DBC2000022TransitionEventName.戻る).respond();
             }
-        }
-        return ResponseData.of(div).respond();
-    }
-
-    private ResponseData<DBC2000022PanelAllDiv> クリア処理(DBC2000022PanelAllDiv div, RString 処理モード) {
-        if (データ項目変更判定()) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(
-                        DbcQuestionMessages.編集クリア確認.getMessage().getCode(),
-                        DbcQuestionMessages.編集クリア確認.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
-                getHandler(div).clear(処理モード);
-            }
-        } else {
-            getHandler(div).clear(処理モード);
         }
         return ResponseData.of(div).respond();
     }
