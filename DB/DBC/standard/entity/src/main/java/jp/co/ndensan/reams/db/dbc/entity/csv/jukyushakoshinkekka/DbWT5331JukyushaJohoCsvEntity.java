@@ -20,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DbWT5331JukyushaJohoTempEntity {
+public class DbWT5331JukyushaJohoCsvEntity {
     private int 連番;
     private RString 交換情報識別番号;
     private FlexibleDate 異動年月日;

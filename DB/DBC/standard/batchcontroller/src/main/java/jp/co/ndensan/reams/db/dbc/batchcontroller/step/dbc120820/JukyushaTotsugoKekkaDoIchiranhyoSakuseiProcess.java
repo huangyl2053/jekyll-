@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_kohiFut
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakoshinkekka.JukyushaKoshinKekkaMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
-import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.DbWT5331JukyushaJohoTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.DbWT5331JukyushaJohoCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushatotsugokekka.JukyushaKekkaIchiranCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushajoho.JukyushaHihokenshaEntity;
@@ -254,7 +254,7 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
 
     }
 
-    private JukyushaKekkaIchiranCSVEntity createOutput(DbWT5331JukyushaJohoTempEntity 受給者情報,
+    private JukyushaKekkaIchiranCSVEntity createOutput(DbWT5331JukyushaJohoCsvEntity 受給者情報,
             DbWT0001HihokenshaTempEntity 被保険者, RString 住所, boolean ヘッダーフラグ) {
         JukyushaKekkaIchiranCSVEntity output = new JukyushaKekkaIchiranCSVEntity();
 
