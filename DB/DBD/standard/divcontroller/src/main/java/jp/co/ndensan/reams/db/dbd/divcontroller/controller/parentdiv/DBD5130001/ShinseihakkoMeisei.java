@@ -50,6 +50,8 @@ public class ShinseihakkoMeisei {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
+//        HihokenshaNo 被保険者番号 = new HihokenshaNo(new RString("6000000010"));
+//        ShikibetsuCode 識別コード = new ShikibetsuCode(new RString("000000000000010"));
         getHandler(shinseihakkoMeiseiDiv).initialize(識別コード, 被保険者番号);
         return ResponseData.of(shinseihakkoMeiseiDiv).respond();
     }

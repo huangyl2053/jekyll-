@@ -51,8 +51,7 @@ public class ShinseihakkoMeiseiHandler {
     private static final int NO_7 = 7;
     private static final int NO_8 = 8;
     private static final int NO_9 = 9;
-    // private static final RString コード = new RString("SyoriMode");
-    private static final RString コード = new RString("1");
+    private static final RString コード = new RString("2");
     private static final RString コード111 = new RString("111");
     private static final RString コード112 = new RString("112");
     private static final RString コード120 = new RString("120");
