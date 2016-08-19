@@ -1,10 +1,13 @@
-// TODO: 業務に合わせてパスを変更してください
+
 package jp.co.ndensan.reams.db.dbc.entity.report.dbc120840;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
-
+/**
+ * 総合事業費過誤決定通知書情報取込一覧表source
+ * @reamsid_L DBC-2550-031 jiangxiaolong
+ */
 public class SogojigyohiKagoKetteiTorikomiIchiranSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuGetFileProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetReturnEntity;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.SogojigyohiKagoKetteiHokensha.SogojigyohiKagoKetteiHokenshaInParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.SogojigyohiKagoKetteiHokensha.DBC120840_SogojigyohiKagoKetteiHokenshaInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaDoMasterTorokuProcessParameter;
@@ -40,7 +40,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *総合事業費過誤決定通知書情報取込（保険者分)みのバッチ
  * @reamsid_L DBC-2550-011 jiangxiaolong
  */
-public class DBC120840_SogojigyohiKagoKetteiHokenshaIn extends BatchFlowBase<SogojigyohiKagoKetteiHokenshaInParameter> {
+public class DBC120840_SogojigyohiKagoKetteiHokenshaIn extends BatchFlowBase<DBC120840_SogojigyohiKagoKetteiHokenshaInParameter> {
     private static final String ファイル取得 = "getFile";
     private static final String CSVファイル取込 = "readCsvFile";
     private static final String 被保険者関連処理 = "doHihokenshaKanren";
@@ -76,8 +76,7 @@ public class DBC120840_SogojigyohiKagoKetteiHokenshaIn extends BatchFlowBase<Sog
                 executeStep(処理結果リスト作成);
             } else {
                 executeStep(被保険者関連処理);
-                //TODO
-                //executeStep(マスタ登録);
+                executeStep(マスタ登録);
                 executeStep(国保連インタフェース管理更新);
                 executeStep(一覧表作成);
                 executeStep(処理結果リスト作成);
@@ -93,7 +92,7 @@ public class DBC120840_SogojigyohiKagoKetteiHokenshaIn extends BatchFlowBase<Sog
     /**
      * ファイル取得です。
      *
-     * @return KohifutanshaGetFileProcess
+     * @return KokuhorenkyoutsuGetFileProcess
      */
     @Step(ファイル取得)
     protected IBatchFlowCommand callGetFileProcess() {

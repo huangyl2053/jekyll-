@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class SogojigyohiKagoKetteiHokenshaInParameter extends BatchParameterBase {
+public class DBC120840_SogojigyohiKagoKetteiHokenshaInParameter extends BatchParameterBase {
      private static final String KEY_SHORIYM = "shoriYM";
     private static final String NAME_SHORIYM = "処理年月";
     private static final String KEY_SAISHORIKUBUN = "saishoriKubun";
