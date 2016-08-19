@@ -148,9 +148,9 @@
         "ShinseiJohoShokanTemp".*,
         "ShinseiJohoTemp".*
         FROM
-        "ShinseiJohoShokanTemp"
-        INNER JOIN 
         "ShinseiJohoTemp"
+        INNER JOIN 
+        "ShinseiJohoShokanTemp"
         ON "ShinseiJohoShokanTemp"."hihokenshaNoShokan" = "ShinseiJohoTemp"."hihokenshaNoJoho"
         WHERE 
         #{ 初回申請把握基準日 } <![CDATA[ <= ]]> "ShinseiJohoShokanTemp"."uketsukeYMDShokan"

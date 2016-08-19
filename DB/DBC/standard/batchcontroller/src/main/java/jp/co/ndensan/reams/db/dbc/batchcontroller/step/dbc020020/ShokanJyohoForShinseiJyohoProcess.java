@@ -36,7 +36,7 @@ public class ShokanJyohoForShinseiJyohoProcess extends BatchProcessBase<Hihokens
 
     private static final RString MYBATIS_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kogakukaigoservicehikyufuoshirasetsuchisho.IKogakuKaigoServicehiOshiraseHakkoMapper.get申請情報償還For申請情報");
-    private static final RString TABLE_NAME = new RString("ShinseiJohoShokanTemp");
+    private static final RString TABLE_NAME = new RString("ShinseiJohoTemp");
     private static final RString MENU_ID_DBCMN43001 = new RString("DBCMN43001");
     private static final RString MENU_ID_DBCMNL3001 = new RString("DBCMNL3001");
     private static final RString 国保連共同処理受託区分_高額_ONE = new RString("1");
