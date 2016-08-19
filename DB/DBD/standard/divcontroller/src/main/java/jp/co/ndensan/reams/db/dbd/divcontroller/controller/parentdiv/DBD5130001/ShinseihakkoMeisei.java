@@ -68,7 +68,7 @@ public class ShinseihakkoMeisei {
         if (selectIndex == 1 && (yokaigodo == null || yokaigodo.isEmpty())) {
             throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().replace("要介護度が空白の", "更新申請の選択が"));
         }
-        if (selectIndex == 1 && (yokaigodo == null || yokaigodo.isEmpty())) {
+        if (selectIndex == 2 && (yokaigodo == null || yokaigodo.isEmpty())) {
             throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().replace("要介護度が空白の", "区分変更申請の選択が"));
         }
         return ResponseData.of(div).respond();
