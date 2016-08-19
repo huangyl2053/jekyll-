@@ -179,15 +179,18 @@ public class ChoshuYuyoJuminKihonHandler {
         TorikeshiJohoDiv 取消情報パネル = div.getChoshuYuyoMain().getTorikeshiJoho();
         取消情報パネル.getTxtTorikeshiYMD().clearValue();
         取消情報パネル.getTxtTorikeshiShurui().clearValue();
-        取消情報パネル.getTxtTorikeshiRiyu().setValue(null);
+        取消情報パネル.getTxtTorikeshiRiyu().clearValue();
+        取消情報パネル.getTxtTorikeshiRiyu().clearValue();
         申請情報パネル.getTxtChoteiNendo().clearValue();
         申請情報パネル.getTxtFukaNendo().clearValue();
         申請情報パネル.getTxtShinseiYMD().clearValue();
         申請情報パネル.getTxtYuyoShurui().clearValue();
-        申請情報パネル.getTxtShinseiRiyu().setValue(null);
+        申請情報パネル.getTxtShinseiRiyu().clearValue();
+        申請情報パネル.getTxtShinseiRiyu().clearValue();
         決定情報パネル.getTxtKetteiYMD().clearValue();
         決定情報パネル.getRadKetteiKubun().setSelectedIndex(ゼロ_定値);
-        決定情報パネル.getTxtKetteiRiyu().setValue(null);
+        決定情報パネル.getTxtKetteiRiyu().clearValue();
+        決定情報パネル.getTxtKetteiRiyu().clearValue();
     }
 
     private RString get状況(RString 徴収猶予状態区分) {
@@ -237,7 +240,12 @@ public class ChoshuYuyoJuminKihonHandler {
             申請情報パネル.getTxtYuyoShurui().setValue(CodeMaster.getCodeRyakusho(
                     SubGyomuCode.DBB介護賦課, 保険料徴収猶予種類_コード種別, 介護賦課徴収猶予.get徴収猶予種類コード(), FlexibleDate.getNowDate()));
         }
-        申請情報パネル.getTxtShinseiRiyu().setValue(介護賦課徴収猶予.get申請事由());
+        RString 申請事由 = 介護賦課徴収猶予.get申請事由();
+        if (申請事由 == null || 申請事由.isEmpty()) {
+            申請情報パネル.getTxtShinseiRiyu().clearValue();;
+        } else {
+            申請情報パネル.getTxtShinseiRiyu().setValue(申請事由);
+        }
         return 介護賦課徴収猶予.get徴収猶予種類コード();
     }
 
@@ -267,7 +275,12 @@ public class ChoshuYuyoJuminKihonHandler {
         } else {
             決定情報パネル.getRadKetteiKubun().setSelectedValue(承認);
         }
-        決定情報パネル.getTxtKetteiRiyu().setValue(介護賦課徴収猶予.get徴収猶予事由());
+        RString 徴収猶予事由 = 介護賦課徴収猶予.get徴収猶予事由();
+        if (徴収猶予事由 == null || 徴収猶予事由.isEmpty()) {
+            決定情報パネル.getTxtKetteiRiyu().clearValue();
+        } else {
+            決定情報パネル.getTxtKetteiRiyu().setValue(介護賦課徴収猶予.get徴収猶予事由());
+        }
     }
 
     /**
@@ -821,7 +834,7 @@ public class ChoshuYuyoJuminKihonHandler {
         TorikeshiJohoDiv 取消情報パネル = div.getChoshuYuyoMain().getTorikeshiJoho();
         KaigoFukaChoshuYuyoParam param = new KaigoFukaChoshuYuyoParam();
         param.set状況(div.getChoshuYuyoMain().getTxtShinseiJokyo().getValue());
-        RString 決定区分 = 決定情報パネル.getRadKetteiKubun().getSelectedValue();
+        RString 決定区分 = 決定情報パネル.getRadKetteiKubun().getSelectedKey();
         param.set決定区分(定値_ゼロ.equals(決定区分));
         param.set調定年度(徴収猶予の情報.get調定年度());
         param.set賦課年度(徴収猶予の情報.get賦課年度());

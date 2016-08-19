@@ -262,10 +262,8 @@ public class ChoshuYuyoJuminKihon {
      */
     public ResponseData<ChoshuYuyoJuminKihonDiv> onClick_btnExcute(ChoshuYuyoJuminKihonDiv div) {
 
-        FlexibleYear 賦課年度 = ViewStateHolder.get(ViewStateKeys.賦課年度, FlexibleYear.class);
-        FlexibleYear 調定年度 = ViewStateHolder.get(ViewStateKeys.調定年度, FlexibleYear.class);
-        TsuchishoNo 通知書番号 = ViewStateHolder.get(ViewStateKeys.通知書番号, TsuchishoNo.class);
-        createHandler(div).onClick発行する(賦課年度, 調定年度, 通知書番号);
+        ChoshuYuyoJoho 徴収猶予の情報 = ViewStateHolder.get(ViewStateKeys.徴収猶予の情報, ChoshuYuyoJoho.class);
+        createHandler(div).onClick発行する(徴収猶予の情報.get賦課年度(), 徴収猶予の情報.get調定年度(), 徴収猶予の情報.get通知書番号());
         return ResponseData.of(div).respond();
     }
 

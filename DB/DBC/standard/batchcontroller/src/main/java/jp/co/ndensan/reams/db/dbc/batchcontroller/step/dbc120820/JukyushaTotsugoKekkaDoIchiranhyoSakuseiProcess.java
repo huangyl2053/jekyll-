@@ -150,28 +150,6 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
         pageBreakKeys = new ArrayList<>();
         pageBreakKeys.add(new RString(JukyushaKoshinKekkaIchiranSource.ReportSourceFields.hokenshaNo.name()));
         RString orderByStr = MyBatisOrderByClauseCreator.create(JukyushaKoshinKekkaIchiranOutputOrder.class, 出力順情報);
-        if (出力順情報 != null) {
-            int i = 0;
-            this.改頁リスト = new ArrayList();
-            for (ISetSortItem item : 出力順情報.get設定項目リスト()) {
-                if (item.is改頁項目()) {
-                    改頁リスト.add(item.get項目名());
-                    pageBreakKeys.add(item.get項目ID());
-                }
-                if (i == INDEX_1) {
-                    出力順Map.put(KEY_並び順の２件目, item.get項目名());
-                } else if (i == INDEX_2) {
-                    出力順Map.put(KEY_並び順の３件目, item.get項目名());
-                } else if (i == INDEX_3) {
-                    出力順Map.put(KEY_並び順の４件目, item.get項目名());
-                } else if (i == INDEX_4) {
-                    出力順Map.put(KEY_並び順の５件目, item.get項目名());
-                } else if (i == INDEX_5) {
-                    出力順Map.put(KEY_並び順の６件目, item.get項目名());
-                }
-                i = i + 1;
-            }
-        }
         if (RString.isNullOrEmpty(orderByStr)) {
             orderByStr = デフォルト出力順;
         } else {
@@ -182,6 +160,26 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
                     orderByStr = orderByStr.concat(コンマ).concat(出力順BODY.get(i));
                 }
             }
+        }
+        int i = 0;
+        this.改頁リスト = new ArrayList();
+        for (ISetSortItem item : 出力順情報.get設定項目リスト()) {
+            if (item.is改頁項目()) {
+                改頁リスト.add(item.get項目名());
+                pageBreakKeys.add(item.get項目ID());
+            }
+            if (i == INDEX_1) {
+                出力順Map.put(KEY_並び順の２件目, item.get項目名());
+            } else if (i == INDEX_2) {
+                出力順Map.put(KEY_並び順の３件目, item.get項目名());
+            } else if (i == INDEX_3) {
+                出力順Map.put(KEY_並び順の４件目, item.get項目名());
+            } else if (i == INDEX_4) {
+                出力順Map.put(KEY_並び順の５件目, item.get項目名());
+            } else if (i == INDEX_5) {
+                出力順Map.put(KEY_並び順の６件目, item.get項目名());
+            }
+            i = i + 1;
         }
         mybatisParameter = new JukyushaKoshinKekkaMybatisParameter();
         mybatisParameter.setOrderBy(orderByStr);
@@ -219,7 +217,7 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
                     帳票出力対象データ.get被保険者一時(), 編集住所, true);
         }
         JukyushaKoshinKekkaIchiranReport report = new JukyushaKoshinKekkaIchiranReport(帳票出力対象データ,
-                編集住所, this.出力順Map, this.改頁リスト, parameter.getシステム日付());
+                編集住所, this.出力順Map, this.改頁リスト, parameter.getシステム日付(), 帳票分類ID);
         report.writeBy(reportSourceWriter);
         csvWriter.writeLine(output);
     }
