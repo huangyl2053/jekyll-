@@ -229,12 +229,12 @@ public class SogojigyohiSaishinsaService {
         outItem.set改頁５(RString.EMPTY);
 
         outItem.set通番(new RString(String.valueOf(通番)));
-        outItem.set取扱年月(entity.get取扱年月().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        outItem.set取扱年月(entity.get取扱年月().wareki().separator(Separator.PERIOD)
+                .fillType(FillType.BLANK).toDateString());
         outItem.set事業者番号(entity.get事業者番号() == null ? RString.EMPTY : entity.get事業者番号().getColumnValue());
         outItem.set事業者名(entity.get事業者名());
-        outItem.setサービス提供年月(entity.getサービス提供年月().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        outItem.setサービス提供年月(entity.getサービス提供年月().wareki().separator(Separator.PERIOD)
+                .fillType(FillType.BLANK).toDateString());
         outItem.setサービス種類コード(entity.getサービス種類コード() == null ? RString.EMPTY : entity.getサービス種類コード().getColumnValue());
         outItem.setサービス種類名(entity.getサービス種類名());
         outItem.set当初請求単位数(doカンマ編集(entity.get当初請求単位数()));
