@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.jukyushakoshinkekkaichiran;
 
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.DbWT5331JukyushaJohoTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.DbWT5331JukyushaJohoCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushajoho.JukyushaHihokenshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.jukyushakoshinkekkaichiran.JukyushaKoshinKekkaIchiranSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -78,7 +78,7 @@ public class JukyushaKoshinKekkaIchiranHeaderEditor implements IJukyushaKoshinKe
     @Override
     public JukyushaKoshinKekkaIchiranSource edit(
             JukyushaKoshinKekkaIchiranSource source) {
-        DbWT5331JukyushaJohoTempEntity 対象者 = 帳票出力対象データ.get受給者情報明細一時();
+        DbWT5331JukyushaJohoCsvEntity 対象者 = 帳票出力対象データ.get受給者情報明細一時();
         RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 作成時 = 作成日時.getTime()

@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_kohiFut
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakoshinkekka.JukyushaKoshinKekkaMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
-import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.DbWT5331JukyushaJohoTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.DbWT5331JukyushaJohoCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.JukyushaKoshinKekkaIchiranCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushajoho.JukyushaHihokenshaEntity;
@@ -254,7 +254,7 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
      * @param ヘッダーフラグ boolean
      * @return　CSV書き込むデータ
      */
-    private JukyushaKoshinKekkaIchiranCsvEntity 書き込むデータ作成(DbWT5331JukyushaJohoTempEntity 受給者情報,
+    private JukyushaKoshinKekkaIchiranCsvEntity 書き込むデータ作成(DbWT5331JukyushaJohoCsvEntity 受給者情報,
             DbWT0001HihokenshaTempEntity 被保険者, RDateTime 作成日時, RString 住所, boolean ヘッダーフラグ) {
         JukyushaKoshinKekkaIchiranCsvEntity output = new JukyushaKoshinKekkaIchiranCsvEntity();
         if (ヘッダーフラグ) {
@@ -329,7 +329,7 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
      * @param output JukyushaKoshinKekkaIchiranCsvEntity
      * @param 受給者情報 DbWT5331JukyushaJohoTempEntity
      */
-    private void 日付項目編集(JukyushaKoshinKekkaIchiranCsvEntity output, DbWT5331JukyushaJohoTempEntity 受給者情報) {
+    private void 日付項目編集(JukyushaKoshinKekkaIchiranCsvEntity output, DbWT5331JukyushaJohoCsvEntity 受給者情報) {
         output.set訂正年月日(date_to_string(受給者情報.get訂正年月日()));
         output.set異動年月日(date_to_string(受給者情報.get異動年月日()));
         output.set生年月日(date_to_string(受給者情報.get生年月日()));
@@ -370,7 +370,7 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
      * @param output JukyushaKoshinKekkaIchiranCsvEntity
      * @param 受給者情報 DbWT5331JukyushaJohoTempEntity
      */
-    private void 数値項目編集(JukyushaKoshinKekkaIchiranCsvEntity output, DbWT5331JukyushaJohoTempEntity 受給者情報) {
+    private void 数値項目編集(JukyushaKoshinKekkaIchiranCsvEntity output, DbWT5331JukyushaJohoCsvEntity 受給者情報) {
         output.set訪問通所支給限度基準額(decimal_to_string(受給者情報.get訪問通所_支給限度基準額()));
         output.set短期入所支給限度基準額(decimal_to_string(受給者情報.get短期入所_支給限度基準額()));
         output.set標準負担額(decimal_to_string(受給者情報.get負担額()));
@@ -394,7 +394,7 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
      * @param 受給者情報 DbWT5331JukyushaJohoTempEntity
      * @param 被保険者 DbWT0001HihokenshaTempEntity
      */
-    private void 名称項目編集(JukyushaKoshinKekkaIchiranCsvEntity output, DbWT5331JukyushaJohoTempEntity 受給者情報, DbWT0001HihokenshaTempEntity 被保険者) {
+    private void 名称項目編集(JukyushaKoshinKekkaIchiranCsvEntity output, DbWT5331JukyushaJohoCsvEntity 受給者情報, DbWT0001HihokenshaTempEntity 被保険者) {
         if (RString.isNullOrEmpty(受給者情報.get訂正区分コード())) {
             output.set訂正区分名称(JukyushaIF_TeiseiKubunCode.toValue(受給者情報.get訂正区分コード()).get名称());
         }
