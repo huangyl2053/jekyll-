@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-1771-033 donghj -->
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.yokaigoninteitsukibetsujukyushasujokyohyo.IYokaigoNinteiTsukibetsuJukyushaSuJokyohyoMapper">
+
+    <resultMap id="ResultMap_YokaigoNintei" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd582001.YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity" autoMapping="true">
+        <result property="取得条件" column="取得条件"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="市町村コード" column="shichosonCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="市町村名称" column="shichosonMeisho"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="件数" column="件数"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="件数旧措置" column="件数（旧措置）"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="新規" column="新規"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="新規旧措置" column="新規（旧措置）"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="要支援" column="（要支援）"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="要支援旧措置" column="（要支援）（旧措置）"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="更新" column="更新"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="更新旧措置" column="更新（旧措置）"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="区分変更" column="区分変更"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="区分変更旧措置" column="区分変更（旧措置）"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="転入" column="転入"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="転入旧措置" column="転入（旧措置）"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="職権他" column="職権他"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="職権他旧措置" column="職権他（旧措置）"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+    </resultMap>
+    
+    <select id="get印刷対象" fetchSize="500" resultOrdered="true" resultMap="ResultMap_YokaigoNintei"
+        parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd582001.YokaigoNinteiTsukibetsuJukyushaMybatisParameter">
+        (<include refid="select認定件数の場合" />)
+        UNION
+        (<include refid="select要介護度１の場合" />)
+        UNION
+        (<include refid="select要介護度２の場合" />)
+        UNION
+        (<include refid="select要介護度３の場合" />)
+        UNION
+        (<include refid="select要介護度４の場合" />)
+        UNION
+        (<include refid="select要介護度５の場合" />)
+        UNION
+        (<include refid="select要支援１の場合" />)
+        UNION
+        (<include refid="select要支援２の場合" />)
+        UNION
+        (<include refid="select要支援の場合" />)
+        UNION
+        (<include refid="select自立の場合" />)
+        ORDER BY 取得条件
+    </select>
+    
+    <sql id = "selectSql1">
+            A."shichosonCode",
+            A."shichosonMeisho",
+            SUM(A."件数") AS "件数",
+            SUM(A."件数（旧措置）") AS "件数（旧措置）",
+            SUM(A."新規") AS "新規",
+            SUM(A."新規（旧措置）") AS "新規（旧措置）",
+            SUM(A."（要支援）") AS "（要支援）",
+            SUM(A."（要支援）（旧措置）") AS "（要支援）（旧措置）",
+            SUM(A."更新") AS "更新",
+            SUM(A."更新（旧措置）") AS "更新（旧措置）",
+            SUM(A."区分変更") AS "区分変更",
+            SUM(A."区分変更（旧措置）") AS "区分変更（旧措置）",
+            SUM(A."転入") AS "転入",
+            SUM(A."転入（旧措置）") AS "転入（旧措置）",
+            SUM(A."職権他") AS "職権他",
+            SUM(A."職権他（旧措置）") AS "職権他（旧措置）"
+        FROM(
+            SELECT
+                T7051."shichosonCode",
+                T7051."shichosonMeisho",
+                COUNT(0) AS "件数",
+                CASE WHEN T4001."kyuSochishaFlag" = TRUE THEN COUNT(0) ELSE 0 END AS "件数（旧措置）",
+                CASE WHEN ( T4001."jukyuShinseiJiyu" = '1' 
+                OR T4001."jukyuShinseiJiyu" = '3'
+                OR ( T4001."jukyuShinseiJiyu" = '4' AND T4001."yoshienshaNinteiShinseiFlag" = TRUE )
+                OR T4001."jukyuShinseiJiyu" = '6'
+                ) THEN COUNT(0) ELSE 0 END AS "新規",
+                CASE WHEN ( T4001."jukyuShinseiJiyu" = '1' 
+                OR T4001."jukyuShinseiJiyu" = '3'
+                OR ( T4001."jukyuShinseiJiyu" = '4' AND T4001."yoshienshaNinteiShinseiFlag" = TRUE )
+                OR T4001."jukyuShinseiJiyu" = '6'
+                ) AND T4001."kyuSochishaFlag" = TRUE THEN COUNT(0) ELSE 0 END AS "新規（旧措置）",
+                CASE WHEN T4001."jukyuShinseiJiyu" = '4' AND T4001."yoshienshaNinteiShinseiFlag" = TRUE THEN 
+                COUNT(0) ELSE 0 END AS "（要支援）",
+                CASE WHEN T4001."jukyuShinseiJiyu" = '4' AND T4001."yoshienshaNinteiShinseiFlag" = TRUE AND T4001."kyuSochishaFlag" = TRUE THEN 
+                COUNT(0) ELSE 0 END AS "（要支援）（旧措置）",
+                CASE WHEN T4001."jukyuShinseiJiyu" = '2' THEN COUNT(0) ELSE 0 END AS "更新",
+                CASE WHEN T4001."jukyuShinseiJiyu" = '2' AND T4001."kyuSochishaFlag" = TRUE THEN COUNT(0) ELSE 0 END AS "更新（旧措置）",
+                CASE WHEN T4001."jukyuShinseiJiyu" = '4' AND T4001."yoshienshaNinteiShinseiFlag" != TRUE THEN 
+                COUNT(0) ELSE 0 END AS "区分変更",
+                CASE WHEN T4001."jukyuShinseiJiyu" = '4' AND T4001."yoshienshaNinteiShinseiFlag" != TRUE AND T4001."kyuSochishaFlag" = TRUE THEN 
+                COUNT(0) ELSE 0 END AS "区分変更（旧措置）",
+                CASE WHEN T4001."jukyuShinseiJiyu" = '7' AND ( T4001."dataKubun" IS NULL OR T4001."dataKubun" = '' ) THEN 
+                COUNT(0) ELSE 0 END AS "転入",
+                CASE WHEN T4001."jukyuShinseiJiyu" = '7' AND ( T4001."dataKubun" IS NULL OR T4001."dataKubun" = '' ) 
+                AND T4001."kyuSochishaFlag" = TRUE THEN 
+                COUNT(0) ELSE 0 END AS "転入（旧措置）",
+                CASE WHEN T4001."jukyuShinseiJiyu" = '7'
+                AND ( SUBSTRING ( T4001."dataKubun",1,1 ) = '0' OR SUBSTRING ( T4001."dataKubun",1,1 ) = '1' ) THEN 
+                COUNT(0) ELSE 0 END AS "職権他",
+                CASE WHEN T4001."jukyuShinseiJiyu" = '7'
+                AND ( SUBSTRING ( T4001."dataKubun",1,1 ) = '0' OR SUBSTRING ( T4001."dataKubun",1,1 ) = '1' ) 
+                AND T4001."kyuSochishaFlag" = TRUE THEN 
+                COUNT(0) ELSE 0 END AS "職権他（旧措置）"
+            FROM
+                rgdb."DbT4001JukyushaDaicho" AS T4001
+            INNER JOIN
+                rgdb."DbT4101NinteiShinseiJoho" AS T4101
+            ON 
+                T4001."shinseishoKanriNo" = T4101."shinseishoKanriNo"
+            AND
+                T4101."logicalDeletedFlag" = FALSE
+            INNER JOIN
+                rgdb."DbT7051KoseiShichosonMaster" AS T7051
+            ON
+                T7051."shoKisaiHokenshaNo" = T4101."shoKisaiHokenshaNo"
+            INNER JOIN
+                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+                AS B
+            ON
+                T4001."shikibetsuCode" = B."shikibetsuCode"
+            WHERE
+    </sql>
+    
+    <sql id="selectSql2">
+        GROUP BY
+                T4001."jukyuShinseiJiyu",
+                T4001."kyuSochishaFlag",
+                T4001."dataKubun",
+                T4001."yoshienshaNinteiShinseiFlag",
+                T7051."shichosonCode",
+                T7051."shichosonMeisho"
+        ) AS A
+        GROUP BY
+            A."shichosonCode",
+            A."shichosonMeisho"
+        ORDER BY
+            A."shichosonCode"
+    </sql>
+    
+    <sql id="select認定件数の場合">
+        SELECT
+            '01' AS 取得条件,
+           <include refid="selectSql1" />
+           <include refid="認定件数の場合" />
+           <include refid="条件3" />
+           <include refid="条件4" />
+           <include refid="条件5" />
+           <include refid="selectSql2" />
+    </sql>
+    <sql id="select要介護度１の場合">
+        SELECT
+            '02' AS 取得条件,
+           <include refid="selectSql1" />
+           <include refid="要介護度１の場合" />
+           <include refid="条件3" />
+           <include refid="条件4" />
+           <include refid="条件5" />
+           <include refid="selectSql2" />
+    </sql>
+    <sql id="select要介護度２の場合">
+        SELECT
+            '03' as 取得条件,
+           <include refid="selectSql1" />
+           <include refid="要介護度２の場合" />
+           <include refid="条件3" />
+           <include refid="条件4" />
+           <include refid="条件5" />
+           <include refid="selectSql2" />
+    </sql>
+    <sql id="select要介護度３の場合">
+        SELECT
+            '04' as 取得条件,
+           <include refid="selectSql1" />
+           <include refid="要介護度３の場合" />
+           <include refid="条件3" />
+           <include refid="条件4" />
+           <include refid="条件5" />
+           <include refid="selectSql2" />
+    </sql>
+    <sql id="select要介護度４の場合">
+        SELECT
+            '05' as 取得条件,
+           <include refid="selectSql1" />
+           <include refid="要介護度４の場合" />
+           <include refid="条件3" />
+           <include refid="条件4" />
+           <include refid="条件5" />
+           <include refid="selectSql2" />
+    </sql>
+    <sql id="select要介護度５の場合">
+        SELECT
+            '06' as 取得条件,
+           <include refid="selectSql1" />
+           <include refid="要介護度５の場合" />
+           <include refid="条件3" />
+           <include refid="条件4" />
+           <include refid="条件5" />
+           <include refid="selectSql2" />
+    </sql>
+    <sql id="select要支援１の場合">
+        SELECT
+            '07' as 取得条件,
+           <include refid="selectSql1" />
+           <include refid="要支援１の場合" />
+           <include refid="条件3" />
+           <include refid="条件4" />
+           <include refid="条件5" />
+           <include refid="selectSql2" />
+    </sql>
+    <sql id="select要支援２の場合">
+        SELECT
+            '08' as 取得条件,
+           <include refid="selectSql1" />
+           <include refid="要支援２の場合" />
+           <include refid="条件3" />
+           <include refid="条件4" />
+           <include refid="条件5" />
+           <include refid="selectSql2" />
+    </sql>
+    <sql id="select要支援の場合">
+        SELECT
+            '09' as 取得条件,
+           <include refid="selectSql1" />
+           <include refid="要支援の場合" />
+           <include refid="条件3" />
+           <include refid="条件4" />
+           <include refid="条件5" />
+           <include refid="selectSql2" />
+    </sql>
+    <sql id="select自立の場合">
+        SELECT
+            '10' as 取得条件,
+           <include refid="selectSql1" />
+           <include refid="自立の場合" />
+           <include refid="条件3" />
+           <include refid="条件4" />
+           <include refid="条件5" />
+           <include refid="selectSql2" />
+    </sql>
+  
+    <sql id="認定件数の場合">
+        (T4001."dataKubun" IS NULL OR SUBSTRING ( T4001."dataKubun",1,1 ) = '0' OR SUBSTRING ( T4001."dataKubun",1,1 ) = '1')
+        AND (T4001."yukoMukoKubun" = '1' OR T4001."yukoMukoKubun" = '2')
+        AND T4001."yokaigoJotaiKubunCode" = '01'
+        <include refid="条件2の基準フラグ1" />
+    </sql>
+     
+    <sql id="要介護度１の場合">
+        <include refid="条件1の場合１" />
+        AND T4001."yokaigoJotaiKubunCode" = '21'
+        <include refid="条件2の基準フラグ2" />
+    </sql>
+    
+    <sql id="要介護度２の場合">
+        <include refid="条件1の場合１" />
+        AND T4001."yokaigoJotaiKubunCode" = '22'
+        <include refid="条件2の基準フラグ2" />
+    </sql>
+    
+    <sql id="要介護度３の場合">
+        <include refid="条件1の場合１" />
+        AND T4001."yokaigoJotaiKubunCode" = '23'
+        <include refid="条件2の基準フラグ2" />
+    </sql> 
+    
+    <sql id="要介護度４の場合">
+        <include refid="条件1の場合１" />
+        AND T4001."yokaigoJotaiKubunCode" = '24'
+        <include refid="条件2の基準フラグ2" />
+    </sql> 
+    
+    <sql id="要介護度５の場合">
+        <include refid="条件1の場合１" />
+        AND T4001."yokaigoJotaiKubunCode" = '25'
+        <include refid="条件2の基準フラグ2" />
+    </sql> 
+    
+    <sql id="要支援１の場合">
+        <include refid="条件1の場合１" />
+        AND T4001."yokaigoJotaiKubunCode" = '12'
+        <include refid="条件2の基準フラグ2" />
+    </sql> 
+    
+    <sql id="要支援２の場合">
+        <include refid="条件1の場合１" />
+        AND T4001."yokaigoJotaiKubunCode" = '13'
+        <include refid="条件2の基準フラグ2" />
+    </sql> 
+    
+    <sql id="要支援の場合">
+        <include refid="条件1の場合１" />
+        AND T4001."yokaigoJotaiKubunCode" = '11'
+        <include refid="条件2の基準フラグ2" />
+    </sql> 
+    
+    <sql id="自立の場合">
+        (T4001."dataKubun" IS NULL OR SUBSTRING ( T4001."dataKubun",1,1 ) = '0' OR SUBSTRING ( T4001."dataKubun",1,1 ) = '1')
+        AND T4001."yokaigoJotaiKubunCode" = '01'
+        <include refid="条件2の基準フラグ1" />
+    </sql> 
+    
+    <sql id="条件1の場合１">
+        (T4001."dataKubun" IS NULL OR SUBSTRING ( T4001."dataKubun",1,1 ) = '0' OR SUBSTRING ( T4001."dataKubun",1,1 ) = '1')
+        AND T4001."yukoMukoKubun" = '1'
+    </sql>
+    
+    <sql id="条件2の基準フラグ1">
+        <if test = "#{基準フラグ} == 's0'">
+            AND T4001."ninteiYMD" <![CDATA[<=]]> #{基準年月日}
+        </if>
+        <if test = "#{基準フラグ} == 's1'">
+            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月}
+        </if>
+    </sql>
+    
+    <sql id="条件2の基準フラグ2">
+        <if test = "#{基準フラグ} == 's0'">
+            AND T4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{基準年月日}
+            AND #{基準年月日} <![CDATA[<=]]> T4001."ninteiYukoKikanShuryoYMD"
+        </if>
+        <if test = "#{基準フラグ} == 's1'">
+            AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",0,6) <![CDATA[<=]]> #{基準年月}
+            AND #{基準年月} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",0,6)
+            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月}
+        </if>
+    </sql>
+    
+    <sql id="条件3">
+        <if test = "#{年齢基準日} != ''">
+            <if test = "#{生年月日From2} != ''">
+                AND #{生年月日From2} <![CDATA[<=]]> B."seinengappiYMD"
+            </if>
+            <if test = "#{生年月日To2} != ''">
+            AND B."seinengappiYMD" <![CDATA[<=]]> #{生年月日To2}
+            </if>
+        </if>
+        <if test = "#{生年月日From} != ''">
+            AND #{生年月日From2} <![CDATA[<=]]> B."seinengappiYMD"
+        </if>
+        <if test = "#{生年月日To} != ''">
+            AND B."seinengappiYMD" <![CDATA[<=]]> #{生年月日To2}
+        </if>
+    </sql>
+    
+    <sql id="条件4">
+        <if test= "#{地区区分} == 'JUSHO'">
+            <if test = "#{開始地区コード} != ''">
+                AND #{開始地区コード} <![CDATA[<=]]> B."choikiCode"
+            </if>
+            <if test = "#{終了地区コード} != ''">
+                AND B."choikiCode" <![CDATA[<=]]> #{終了地区コード}
+            </if>
+        </if>
+        <if test = "#{地区区分} == 'GYOSEIKU'">
+            <if test = "#{開始地区コード} != ''">
+                AND #{開始地区コード} <![CDATA[<=]]> B."gyoseikuCode"
+            </if>
+            <if test = "#{終了地区コード} != ''">
+                AND B."gyoseikuCode" <![CDATA[<=]]> #{終了地区コード}
+            </if>
+        </if>
+        <if test = "#{地区区分} == 'CHIKU2'">
+            <if test = "#{開始地区コード} != ''">
+                AND #{開始地区コード} <![CDATA[<=]]> B."chikuCode2"
+            </if>
+            <if test = "#{終了地区コード} != ''">
+                AND B."chikuCode2" <![CDATA[<=]]> #{終了地区コード}
+            </if>
+        </if>
+    </sql>
+    
+    <sql id="条件5">
+        <if test = "#{集計単位} == 'ZIYU'">
+            AND T4001."jukyuShinseiJiyu" IS NOT NULL
+        </if>
+        <if test = "#{集計単位} == 'SHINSEIZI'">
+            AND ((T4101."ninteiShinseiHoreiKubunCode" = '1' 
+                    AND T4001."jukyuShinseiJiyu" IN('1','3','6'))
+                OR (T4101."ninteiShinseiHoreiKubunCode" = '2' 
+                    AND T4001."jukyuShinseiJiyu" = '2')
+                OR (T4101."ninteiShinseiHoreiKubunCode" = '3' 
+                    AND T4001."jukyuShinseiJiyu" = '4')
+                OR ((T4101."ninteiShinseiHoreiKubunCode" = '4' 
+                    OR T4101."ninteiShinseiHoreiKubunCode" = '5') 
+                    AND T4001."jukyuShinseiJiyu" = '7'))
+        </if>
+        <if test = "#{集計単位} == 'HOUREI'">
+            AND ((T4101."ninteiShinseiHoreiKubunCode" = '1' 
+                    AND T4001."jukyuShinseiJiyu" IN('1','3','6'))
+                OR (T4101."ninteiShinseiHoreiKubunCode" = '2' 
+                    AND T4001."jukyuShinseiJiyu" = '2')
+                OR (T4101."ninteiShinseiHoreiKubunCode" = '3' 
+                    AND T4001."jukyuShinseiJiyu" = '4')
+                OR (T4101."ninteiShinseiHoreiKubunCode" = '4' 
+                    AND T4001."jukyuShinseiJiyu" = '7'))
+        </if>
+    </sql>
+    
+    
+
+</mapper>
