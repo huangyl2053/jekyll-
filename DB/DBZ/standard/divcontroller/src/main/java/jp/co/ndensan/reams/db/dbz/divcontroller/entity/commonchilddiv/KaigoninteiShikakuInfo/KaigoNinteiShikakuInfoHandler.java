@@ -76,8 +76,10 @@ public class KaigoNinteiShikakuInfoHandler {
         if (ninteiShikakuInfoBusiness.get資格喪失年月日() != null) {
             div.getTxtSoshitsuYmd().setValue(new FlexibleDate(ninteiShikakuInfoBusiness.get資格喪失年月日().toString()));
         }
-        div.getTxtSoshitsuJiyu().setValue(ShikakuSoshitsuJiyu.toValue(ninteiShikakuInfoBusiness.get資格喪失事由コード()).getName());
-        if (ninteiShikakuInfoBusiness.get住所地特例フラグ().equals(new RString("1"))) {
+        if (!RString.isNullOrEmpty(ninteiShikakuInfoBusiness.get資格喪失事由コード())) {
+            div.getTxtSoshitsuJiyu().setValue(ShikakuSoshitsuJiyu.toValue(ninteiShikakuInfoBusiness.get資格喪失事由コード()).getName());
+        }
+        if (new RString("1").equals(ninteiShikakuInfoBusiness.get住所地特例フラグ())) {
             div.getTxtJutokuKubun().setValue(JushochitokureishaKubun.toValue(ninteiShikakuInfoBusiness.get住所地特例フラグ()).get名称());
         } else {
             div.getTxtJutokuKubun().setValue(RString.EMPTY);
@@ -86,9 +88,12 @@ public class KaigoNinteiShikakuInfoHandler {
             div.getTxtYokaigoJotaiKubun().setValue(YokaigoJotaiKubunSupport.toValue(FlexibleDate.getNowDate(),
                     new RString(ninteiShikakuInfoBusiness.get要介護認定状態区分コード().toString())).getName());
         }
-
-        div.getTxtNinteiKaishiYmd().setValue(new RDate(ninteiShikakuInfoBusiness.get認定有効期間開始年月日().toString()));
-        div.getTxtNinteiShuryoYmd().setValue(new RDate(ninteiShikakuInfoBusiness.get認定有効期間終了年月日().toString()));
+        if (ninteiShikakuInfoBusiness.get認定有効期間開始年月日() != null) {
+            div.getTxtNinteiKaishiYmd().setValue(new RDate(ninteiShikakuInfoBusiness.get認定有効期間開始年月日().toString()));
+        }
+        if (ninteiShikakuInfoBusiness.get認定有効期間終了年月日() != null) {
+            div.getTxtNinteiShuryoYmd().setValue(new RDate(ninteiShikakuInfoBusiness.get認定有効期間終了年月日().toString()));
+        }
         div.getTxtHookenshaCode().setValue(codeYoriShichoson.get(0).get証記載保険者番号().getColumnValue());
         div.getTxtHokensha().setValue(new RString(codeYoriShichoson.get(0).get市町村名称().toString()));
         div.setHdnShinchsonCode(hdnShinchsonCode);

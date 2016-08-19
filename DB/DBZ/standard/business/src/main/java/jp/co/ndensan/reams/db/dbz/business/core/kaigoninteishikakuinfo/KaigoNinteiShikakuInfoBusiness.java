@@ -40,7 +40,10 @@ public class KaigoNinteiShikakuInfoBusiness {
      * @return 被保険者番号
      */
     public HihokenshaNo get被保険者番号() {
-        return dbt1001entity.getHihokenshaNo();
+        if (dbt1001entity != null) {
+            return dbt1001entity.getHihokenshaNo();
+        }
+        return HihokenshaNo.EMPTY;
     }
 
     /**
@@ -49,7 +52,10 @@ public class KaigoNinteiShikakuInfoBusiness {
      * @return 資格取得年月日
      */
     public FlexibleDate get資格取得年月日() {
-        return dbt1001entity.getShikakuShutokuYMD();
+        if (dbt1001entity != null) {
+            return dbt1001entity.getShikakuShutokuYMD();
+        }
+        return null;
     }
 
     /**
@@ -58,7 +64,10 @@ public class KaigoNinteiShikakuInfoBusiness {
      * @return 資格取得事由コード
      */
     public RString get資格取得事由コード() {
-        return dbt1001entity.getShikakuShutokuJiyuCode();
+        if (dbt1001entity != null) {
+            return dbt1001entity.getShikakuShutokuJiyuCode();
+        }
+        return null;
     }
 
     /**
@@ -67,7 +76,10 @@ public class KaigoNinteiShikakuInfoBusiness {
      * @return 資格喪失年月日
      */
     public FlexibleDate get資格喪失年月日() {
-        return dbt1001entity.getShikakuSoshitsuYMD();
+        if (dbt1001entity != null) {
+            return dbt1001entity.getShikakuSoshitsuYMD();
+        }
+        return null;
     }
 
     /**
@@ -76,7 +88,10 @@ public class KaigoNinteiShikakuInfoBusiness {
      * @return 資格喪失事由コード
      */
     public RString get資格喪失事由コード() {
-        return dbt1001entity.getShikakuSoshitsuJiyuCode();
+        if (dbt1001entity != null) {
+            return dbt1001entity.getShikakuSoshitsuJiyuCode();
+        }
+        return null;
     }
 
     /**
@@ -85,7 +100,10 @@ public class KaigoNinteiShikakuInfoBusiness {
      * @return 住所地特例フラグ
      */
     public RString get住所地特例フラグ() {
-        return dbt1001entity.getJushochiTokureiFlag();
+        if (dbt1001entity != null) {
+            return dbt1001entity.getJushochiTokureiFlag();
+        }
+        return RString.EMPTY;
     }
 
     /**
@@ -94,7 +112,10 @@ public class KaigoNinteiShikakuInfoBusiness {
      * @return 要介護認定状態区分コード
      */
     public Code get要介護認定状態区分コード() {
-        return dbt4001entity.getYokaigoJotaiKubunCode();
+        if (dbt4001entity != null) {
+            return dbt4001entity.getYokaigoJotaiKubunCode();
+        }
+        return null;
     }
 
     /**
@@ -103,7 +124,10 @@ public class KaigoNinteiShikakuInfoBusiness {
      * @return 認定有効期間開始年月日
      */
     public FlexibleDate get認定有効期間開始年月日() {
-        return dbt4001entity.getNinteiYukoKikanKaishiYMD();
+        if (dbt4001entity != null) {
+            return dbt4001entity.getNinteiYukoKikanKaishiYMD();
+        }
+        return null;
     }
 
     /**
@@ -112,7 +136,10 @@ public class KaigoNinteiShikakuInfoBusiness {
      * @return 認定有効期間終了年月日
      */
     public FlexibleDate get認定有効期間終了年月日() {
-        return dbt4001entity.getNinteiYukoKikanShuryoYMD();
+        if (dbt4001entity != null) {
+            return dbt4001entity.getNinteiYukoKikanShuryoYMD();
+        }
+        return null;
     }
 
 }
