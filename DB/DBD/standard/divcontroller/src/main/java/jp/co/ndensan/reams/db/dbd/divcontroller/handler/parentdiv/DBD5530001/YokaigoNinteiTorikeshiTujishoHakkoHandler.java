@@ -30,7 +30,7 @@ public class YokaigoNinteiTorikeshiTujishoHakkoHandler {
 
     private final YokaigoNinteiTorikeshiTujishoHakkoDiv div;
     private final RString 被保番号 = new RString("被保番号");
-    private static final RString コード = new RString("1");
+    private static final RString コード = new RString("2");
     private static final RString コード111 = new RString("111");
     private static final RString コード112 = new RString("112");
     private static final RString コード120 = new RString("120");
