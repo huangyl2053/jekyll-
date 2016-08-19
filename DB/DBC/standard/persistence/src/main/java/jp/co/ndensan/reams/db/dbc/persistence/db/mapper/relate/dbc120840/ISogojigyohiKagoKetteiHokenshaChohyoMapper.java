@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc120840;
 
 import java.util.List;
-import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120840.SogojigyohiKagoKetteiHokenshaChohyoEntity;
 
 /**
@@ -19,8 +19,8 @@ public interface ISogojigyohiKagoKetteiHokenshaChohyoMapper {
     /**
      * 帳票出力対象データを取得する。
      *
-     * @param parameter Map<String, Object>
+     * @param parameter KokuhorenIchiranhyoMybatisParameter
      * @return List<KagoKetteiKohifutanshaInItem>
      */
-    List<SogojigyohiKagoKetteiHokenshaChohyoEntity> get帳票出力対象データ(Map<String, Object> parameter);
+    List<SogojigyohiKagoKetteiHokenshaChohyoEntity> get帳票出力対象データ(KokuhorenIchiranhyoMybatisParameter parameter);
 }
