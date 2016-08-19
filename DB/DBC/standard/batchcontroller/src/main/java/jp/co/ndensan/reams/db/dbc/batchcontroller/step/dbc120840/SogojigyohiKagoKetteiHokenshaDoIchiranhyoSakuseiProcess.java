@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120840;
 
 import java.util.ArrayList;
@@ -64,10 +63,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
- *一覧表作成。
+ * 一覧表作成。
+ *
  * @reamsid_L DBC-2550-011 jiangxiaolong
  */
 public class SogojigyohiKagoKetteiHokenshaDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<SogojigyohiKagoKetteiHokenshaChohyoEntity> {
+
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc120840."
                     + "ISogojigyohiKagoKetteiHokenshaChohyoMapper.get帳票出力対象データ");
@@ -109,7 +110,7 @@ public class SogojigyohiKagoKetteiHokenshaDoIchiranhyoSakuseiProcess extends Bat
     private SogojigyohiKagoKetteiHokenshaChohyoEntity lastEntity;
     private Map<RString, RString> 出力順Map;
     private Set<ShikibetsuCode> 識別コードset;
-    
+
     @Override
     protected void initialize() {
         連番 = 1;
@@ -174,14 +175,14 @@ public class SogojigyohiKagoKetteiHokenshaDoIchiranhyoSakuseiProcess extends Bat
                 .setEnclosure(ダブル引用符)
                 .setEncode(Encode.SJIS)
                 .setNewLine(NewLine.CRLF)
-                .hasHeader(false)
+                .hasHeader(true)
                 .build();
 
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID,帳票データの取得Parameter);
+        return new BatchDbReader(MYBATIS_SELECT_ID, 帳票データの取得Parameter);
     }
 
     @Override
@@ -205,10 +206,11 @@ public class SogojigyohiKagoKetteiHokenshaDoIchiranhyoSakuseiProcess extends Bat
                     , 出力順Map, parameter.get処理年月(), parameter.getシステム日付(), 連番, true);
             report.writeBy(reportSourceWriter);
         }
-        SogojigyohiKagoKetteiHokenshaInReport report = new SogojigyohiKagoKetteiHokenshaInReport(entity
-                , 出力順Map, parameter.get処理年月(), parameter.getシステム日付(), 連番, false);
+        SogojigyohiKagoKetteiHokenshaInReport report = new SogojigyohiKagoKetteiHokenshaInReport(entity, 出力順Map
+                , parameter.get処理年月(), parameter.getシステム日付(), 連番, false);
         report.writeBy(reportSourceWriter);
-        SogojigyohiKagoKetteiHokenshaIchiranCSVEntity output = do帳票のCSVファイル作成(entity, parameter.get処理年月(), parameter.getシステム日付(), 集計Flag);
+        SogojigyohiKagoKetteiHokenshaIchiranCSVEntity output = do帳票のCSVファイル作成(entity
+                , parameter.get処理年月(), parameter.getシステム日付(), 集計Flag);
         sogojigyohiKagoKetteiInCsvWriter.writeLine(output);
         連番++;
         lastEntity = entity;
@@ -219,7 +221,8 @@ public class SogojigyohiKagoKetteiHokenshaDoIchiranhyoSakuseiProcess extends Bat
         SogojigyohiKagoKetteiHokenshaInReport report = new SogojigyohiKagoKetteiHokenshaInReport(lastEntity
                 , 出力順Map, parameter.get処理年月(), parameter.getシステム日付(), 連番, true);
         report.writeBy(reportSourceWriter);
-        SogojigyohiKagoKetteiHokenshaIchiranCSVEntity output = do帳票のCSVファイル作成(lastEntity, parameter.get処理年月(), parameter.getシステム日付(), true);
+        SogojigyohiKagoKetteiHokenshaIchiranCSVEntity output = do帳票のCSVファイル作成(lastEntity
+                , parameter.get処理年月(), parameter.getシステム日付(), true);
         sogojigyohiKagoKetteiInCsvWriter.writeLine(output);
         sogojigyohiKagoKetteiInCsvWriter.close();
         if (!personalDataList.isEmpty()) {
@@ -232,28 +235,27 @@ public class SogojigyohiKagoKetteiHokenshaDoIchiranhyoSakuseiProcess extends Bat
             FlexibleYearMonth 処理年月, RDateTime 作成日時, boolean 集計Flag) {
         SogojigyohiKagoKetteiHokenshaIchiranCSVEntity output = new SogojigyohiKagoKetteiHokenshaIchiranCSVEntity();
         if (連番 == 1) {
-            output.set処理年月(処理年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+            output.set取扱年月(処理年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                     .fillType(FillType.BLANK).toDateString();
             RString 作成時 = 作成日時.getTime()
                     .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE);
-            output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(SAKUSEI));
+            output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時).concat(SAKUSEI));
         } else {
-            output.set処理年月(RString.EMPTY);
+            output.set取込年月(RString.EMPTY);
             output.set作成日時(RString.EMPTY);
         }
         output.set証記載保険者番号(getColumnValue(entity.get証記載保険者番号()));
         output.set証記載保険者名(entity.get証記載保険者名());
 
         if (集計Flag) {
+            setEmpty(output);
             output.set総合事業費_件数(doカンマ編集(entity.get総合事業費_件数()));
             output.set総合事業費_単位数(doカンマ編集(entity.get総合事業費_単位数()));
             output.set総合事業費_負担額(doカンマ編集(entity.get総合事業費_負担額()));
         } else {
-            output.set証記載保険者番号(getColumnValue(entity.get証記載保険者番号()));
-            output.set証記載保険者名(entity.get証記載保険者名());
             output.set取扱年月(doパターン54(entity.get取扱年月()));
             output.set事業者番号(getColumnValue(entity.get事業者番号()));
             output.set事業者名(entity.get事業者名());
@@ -269,11 +271,12 @@ public class SogojigyohiKagoKetteiHokenshaDoIchiranhyoSakuseiProcess extends Bat
 
         }
 
-        if (!(null == entity.get識別コード() || entity.get識別コード().isEmpty()) && !(識別コードset.contains(entity.get識別コード()))) {
+        if (null != entity.get識別コード() && !entity.get識別コード().isEmpty()
+                && !識別コードset.contains(entity.get識別コード())) {
             識別コードset.add(entity.get識別コード());
+            PersonalData personalData = getPersonalData(entity);
+            personalDataList.add(personalData);
         }
-        PersonalData personalData = getPersonalData(entity);
-        personalDataList.add(personalData);
         return output;
     }
 
@@ -281,6 +284,21 @@ public class SogojigyohiKagoKetteiHokenshaDoIchiranhyoSakuseiProcess extends Bat
         ExpandedInformation expandedInformations = new ExpandedInformation(code, 被保険者番号,
                 entity.get被保険者番号().getColumnValue());
         return PersonalData.of(entity.get識別コード(), expandedInformations);
+    }
+
+    private void setEmpty(SogojigyohiKagoKetteiHokenshaIchiranCSVEntity output) {
+        output.set取扱年月(RString.EMPTY);
+        output.set事業者番号(RString.EMPTY);
+        output.set事業者名(RString.EMPTY);
+        output.set被保険者番号(RString.EMPTY);
+        output.set被保険者氏名(RString.EMPTY);
+        output.setサービス提供年月(RString.EMPTY);
+        output.setサービス種類コード(RString.EMPTY);
+        output.setサービス種類名(RString.EMPTY);
+        output.set過誤申立事由コード(RString.EMPTY);
+        output.set過誤申立事由(RString.EMPTY);
+        output.set単位数(RString.EMPTY);
+        output.set負担額(RString.EMPTY);
     }
 
     private RString doカンマ編集(Decimal number) {
@@ -305,4 +323,3 @@ public class SogojigyohiKagoKetteiHokenshaDoIchiranhyoSakuseiProcess extends Bat
     }
 
 }
-    
