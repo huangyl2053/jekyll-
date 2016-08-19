@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakoshinkekka;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.DbWT5331JukyushaJohoTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.DbWT5331JukyushaJohoCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushajoho.JukyushaHihokenshaEntity;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 
@@ -23,7 +23,7 @@ public interface IJukyushaKoshinKekkaMapper {
      * @param entity DbWT5331JukyushaJohoTempEntity
      * @return int 登録成功の件数
      */
-    int 受給者情報明細一時TBLに登録(DbWT5331JukyushaJohoTempEntity entity);
+    int 受給者情報明細一時TBLに登録(DbWT5331JukyushaJohoCsvEntity entity);
 
     /**
      * 帳票出力対象データを取得する。

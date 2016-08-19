@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120820;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.jukyushatotsugokekkain.JukyushaTotsugoKekkaReadCsvFileProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.DbWT5331JukyushaJohoTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.DbWT5331JukyushaJohoCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushatotsugokekka.JukyushaKekkaJohoControlCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushatotsugokekka.JukyushaKekkaJohoCsvMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
@@ -93,7 +93,7 @@ public class JukyushaTotsugoKekkaReadCsvFileProcess extends BatchProcessBase<RSt
                 = new BatchEntityCreatedTempTableWriter(処理結果リスト一時_TABLE_NAME,
                         DbWT0002KokuhorenTorikomiErrorEntity.class);
         受給者情報一時tableWriter
-                = new BatchEntityCreatedTempTableWriter(受給者情報一時_TABLE_NAME, DbWT5331JukyushaJohoTempEntity.class);
+                = new BatchEntityCreatedTempTableWriter(受給者情報一時_TABLE_NAME, DbWT5331JukyushaJohoCsvEntity.class);
     }
 
     @Override
@@ -138,7 +138,7 @@ public class JukyushaTotsugoKekkaReadCsvFileProcess extends BatchProcessBase<RSt
     private void 受給者情報明細一時TBLに登録() {
         HokenshaNyuryokuHojoFinder 保険者名取得 = HokenshaNyuryokuHojoFinder.createInstance();
         連番 = 連番 + 1;
-        DbWT5331JukyushaJohoTempEntity 受給者一時entity = new DbWT5331JukyushaJohoTempEntity();
+        DbWT5331JukyushaJohoCsvEntity 受給者一時entity = new DbWT5331JukyushaJohoCsvEntity();
         受給者一時entity.set連番(連番);
         受給者一時entity.setみなし要介護区分コード(dataEntity.getMinashiYokaigoKubunCode());
         受給者一時entity.set交換情報識別番号(dataEntity.getKokanJohoShikibetsuNo());

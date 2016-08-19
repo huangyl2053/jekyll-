@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_TeiseiK
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_TokureiGengakuSochiTaisho;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_TsugoKekkaKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_kohiFutanJogengakuGengakuUmu;
-import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.DbWT5331JukyushaJohoTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.DbWT5331JukyushaJohoCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushajoho.JukyushaHihokenshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.jukyushakoshinkekkaichiran.JukyushaKoshinKekkaIchiranSource;
@@ -71,7 +71,7 @@ public class JukyushaKoshinKekkaIchiranBodyEditor implements IJukyushaKoshinKekk
 
     @Override
     public JukyushaKoshinKekkaIchiranSource edit(JukyushaKoshinKekkaIchiranSource source) {
-        DbWT5331JukyushaJohoTempEntity 受給者情報 = 帳票出力対象データ.get受給者情報明細一時();
+        DbWT5331JukyushaJohoCsvEntity 受給者情報 = 帳票出力対象データ.get受給者情報明細一時();
         DbWT0001HihokenshaTempEntity 被保険者情報 = 帳票出力対象データ.get被保険者一時();
          if (DBC200006帳票ID.equals(帳票ID) || DBC200055帳票ID.equals(帳票ID)) {
              source.listList1_1 = date_to_string(受給者情報.get訂正年月日());
@@ -126,7 +126,7 @@ public class JukyushaKoshinKekkaIchiranBodyEditor implements IJukyushaKoshinKekk
      * @param source 受給者情報更新結果情報取込一覧表帳票ソース
      */
     private void コード項目設定1(JukyushaKoshinKekkaIchiranSource source) {
-        DbWT5331JukyushaJohoTempEntity 受給者情報 = 帳票出力対象データ.get受給者情報明細一時();
+        DbWT5331JukyushaJohoCsvEntity 受給者情報 = 帳票出力対象データ.get受給者情報明細一時();
         RString 異動区分コード = 受給者情報.get異動区分コード();
         if (!RString.isNullOrEmpty(異動区分コード)) {
             source.listList1_3 = 異動区分コード.concat(コロン)
@@ -177,7 +177,7 @@ public class JukyushaKoshinKekkaIchiranBodyEditor implements IJukyushaKoshinKekk
      * @param source 受給者情報更新結果情報取込一覧表帳票ソース
      */
     private void コード項目設定2(JukyushaKoshinKekkaIchiranSource source) {
-        DbWT5331JukyushaJohoTempEntity 受給者情報 = 帳票出力対象データ.get受給者情報明細一時();
+        DbWT5331JukyushaJohoCsvEntity 受給者情報 = 帳票出力対象データ.get受給者情報明細一時();
         DbWT0001HihokenshaTempEntity 被保険者情報 = 帳票出力対象データ.get被保険者一時();
         RString 減免中区分 = 受給者情報.get減免申請中区分コード();
         if (!RString.isNullOrEmpty(減免中区分)) {
@@ -242,7 +242,7 @@ public class JukyushaKoshinKekkaIchiranBodyEditor implements IJukyushaKoshinKekk
      * @param source 受給者情報更新結果情報取込一覧表帳票ソース
      */
     private void 日付項目設定(JukyushaKoshinKekkaIchiranSource source) {
-        DbWT5331JukyushaJohoTempEntity 受給者情報 = 帳票出力対象データ.get受給者情報明細一時();
+        DbWT5331JukyushaJohoCsvEntity 受給者情報 = 帳票出力対象データ.get受給者情報明細一時();
         source.listList1_2 = date_to_string(受給者情報.get異動年月日());
         source.listList1_8 = date_to_string(受給者情報.get生年月日());
         source.listList1_9 = date_to_string(受給者情報.get資格取得年月日());
@@ -282,7 +282,7 @@ public class JukyushaKoshinKekkaIchiranBodyEditor implements IJukyushaKoshinKekk
      * @param source 受給者情報更新結果情報取込一覧表帳票ソース
      */
     private void 数値項目設定(JukyushaKoshinKekkaIchiranSource source) {
-        DbWT5331JukyushaJohoTempEntity 受給者情報 = 帳票出力対象データ.get受給者情報明細一時();
+        DbWT5331JukyushaJohoCsvEntity 受給者情報 = 帳票出力対象データ.get受給者情報明細一時();
         source.listList3_7 = decimal_to_string(受給者情報.get訪問通所_支給限度基準額());
         source.listList3_9 = decimal_to_string(受給者情報.get短期入所_支給限度基準額());
         source.listList4_8 = decimal_to_string(受給者情報.get負担額());

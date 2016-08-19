@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.jukyushakoshinkekka.JukyushaKoshinKekkaReadCsvFileProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.DbWT5331JukyushaJohoTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.DbWT5331JukyushaJohoCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.JukyushaJohoControlCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.JukyushaJohoCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.JukyushaJohoDataCsvEntity;
@@ -99,7 +99,7 @@ public class JukyushaKoshinKekkaInReadCsvFileProcess extends BatchProcessBase<RS
                 = new BatchEntityCreatedTempTableWriter(処理結果リスト一時_TABLE_NAME,
                         DbWT0002KokuhorenTorikomiErrorEntity.class);
         受給者情報一時tableWriter
-                = new BatchEntityCreatedTempTableWriter(受給者情報一時_TABLE_NAME, DbWT5331JukyushaJohoTempEntity.class);
+                = new BatchEntityCreatedTempTableWriter(受給者情報一時_TABLE_NAME, DbWT5331JukyushaJohoCsvEntity.class);
     }
 
     @Override
@@ -145,7 +145,7 @@ public class JukyushaKoshinKekkaInReadCsvFileProcess extends BatchProcessBase<RS
         JukyushaJohoControlCsvEntity コントロールレコード = csvEntity.getControlCsvEntity();
         for (JukyushaJohoDataCsvEntity 受給者情報 : csvEntity.getListDataEntity()) {
             連番 = 連番 + 1;
-            DbWT5331JukyushaJohoTempEntity 受給者一時entity = new DbWT5331JukyushaJohoTempEntity();
+            DbWT5331JukyushaJohoCsvEntity 受給者一時entity = new DbWT5331JukyushaJohoCsvEntity();
             受給者一時entity.set連番(連番);
             受給者一時entity.setみなし要介護区分コード(受給者情報.getMinashiYokaigoKubunCode());
             受給者一時entity.set保険者番号(コントロールレコード.getHokenshaNo());
