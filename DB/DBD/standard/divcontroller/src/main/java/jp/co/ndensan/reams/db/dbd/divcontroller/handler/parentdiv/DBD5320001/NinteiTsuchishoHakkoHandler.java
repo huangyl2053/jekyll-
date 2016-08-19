@@ -296,7 +296,7 @@ public class NinteiTsuchishoHakkoHandler {
 
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護事務);
         div.getChkSeibetsu().setDataSource(get性別データソース());
-        div.getChkSeibetsu().setSelectedItemsByKey(new ArrayList<RString>());
+        div.getChkSeibetsu().setSelectedItemsByKey(Arrays.asList(RadioValue.男.getKey(), RadioValue.女.getKey()));
 
         div.getDdlMachJoken().setDataSource(get検索条件区分データソース());
         div.getDdlMachJoken().setSelectedKey(RadioValue.前方一致.getKey());
@@ -786,7 +786,7 @@ public class NinteiTsuchishoHakkoHandler {
         div.getChkOutPutSelect().setSelectedItemsByKey(new ArrayList<RString>());
         div.getTxtSakuseiDaytxtSakuseiDaytxtSakuseiDay().clearValue();
         div.getRadTanpyoHakkoZumi().setDataSource(get単票発行済みデータソース());
-        div.getRadTanpyoHakkoZumi().setSelectedKey(RadioValue.発行済みを出力する.getKey());
+        div.getRadTanpyoHakkoZumi().setSelectedKey(RadioValue.発行済みを出力しない.getKey());
 
         clear一括発行認定結果通知書();
         clear一括発行サービス変更通知書();

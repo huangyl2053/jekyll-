@@ -211,8 +211,7 @@ public class NinteiTsuchishoHakko {
      * @return ResponseData<NinteiTsuchishoHakkoDiv>
      */
     public ResponseData<NinteiTsuchishoHakkoDiv> onClick_btnCopyJiyuToRiyu(NinteiTsuchishoHakkoDiv div) {
-
-        div.getTxtIdoJiyu().setValue(div.getTxtKyakkaRiyu().getValue());
+        div.getTxtKyakkaRiyu().setValue(div.getTxtIdoJiyu().getValue());
         return ResponseData.of(div).respond();
     }
 
