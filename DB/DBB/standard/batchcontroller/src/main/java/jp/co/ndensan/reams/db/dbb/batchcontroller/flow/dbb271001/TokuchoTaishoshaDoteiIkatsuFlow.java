@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -89,8 +91,12 @@ public class TokuchoTaishoshaDoteiIkatsuFlow extends BatchFlowBase<TokuchoTaisho
         parameter.setDoteiHoho(同定方法_宛名同定);
         parameter.setGyomuCode(null);
         parameter.setShoriTime(getParameter().get処理日時());
-        //TODO QA 882がありますので、コーディングできません、「ビジネス設計_ShoriJokyo_処理状況.xlsx」の年度切替を呼び出し
-        parameter.setNendoKirikaeAto(Boolean.TRUE);
+        boolean 年度切替後 = Boolean.FALSE;
+        FlexibleYear システム日付の年 = FlexibleDate.getNowDate().getYear();
+        if (システム日付の年.equals(getParameter().get処理年度())) {
+            年度切替後 = Boolean.TRUE;
+        }
+        parameter.setNendoKirikaeAto(年度切替後);
         return parameter;
     }
 
