@@ -206,7 +206,7 @@ public class SokujiFukaKouseiMainValidationHandler {
     private void 項目に対する制約チェックValidate(ValidationMessageControlPairs validPairs) {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         FukakonkyoAtoDiv fukakonkyoAtoDiv = div.getTabSokujiKousei().getSokujiKoseiTab1().getSokujikouseiFukakonkyo().getFukakonkyoAto();
-        Decimal 更正後年間保険料額 = fukakonkyoAtoDiv.getTxtGemmenGaku2().getValue();
+        Decimal 更正後年間保険料額 = fukakonkyoAtoDiv.getTxtNenkanHokenryo2().getValue();
         Decimal 減免額 = div.getGemmenGakuInput().getTxtGemmenGakuInput().getValue();
         if (!更正後年間保険料額.equals(getFormat金額(tablePanel.getLblTokuchoKoseiGoSum().getText()).add(getFormat金額(tablePanel.getLblFuchoKoseiGoSum().getText())).
                 multiply(減免額))) {
