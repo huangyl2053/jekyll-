@@ -55,7 +55,7 @@ public class SeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess extends BatchKeyBre
     List<RString> 改頁項目リスト;
     private int index = 0;
     FileSpoolManager seikyugakuTsuchishoInManager;
-    private RString seikyugakuTsuchishoInEucFilePath;
+    private RString seikyugEucFilePath;
     private static final RString 出力ファイル名
             = new RString("DBC200066_SeikyugakuTsuchisho.csv");
     private static final RString コンマ = new RString(",");
@@ -92,10 +92,10 @@ public class SeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess extends BatchKeyBre
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         seikyugakuTsuchishoInManager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID,
                 UzUDE0831EucAccesslogFileType.Csv);
-        seikyugakuTsuchishoInEucFilePath = Path.combinePath(seikyugakuTsuchishoInManager.getEucOutputDirectry(),
+        seikyugEucFilePath = Path.combinePath(seikyugakuTsuchishoInManager.getEucOutputDirectry(),
                 出力ファイル名);
         seikyugakuTsuchishoInCsvWriter = BatchWriters.csvWriter(SeikyugakuTsuchishoInCsvEntity.class).
-                filePath(seikyugakuTsuchishoInEucFilePath).
+                filePath(seikyugEucFilePath).
                 setDelimiter(コンマ).
                 setEnclosure(ダブル引用符).
                 setEncode(Encode.UTF_8withBOM).
