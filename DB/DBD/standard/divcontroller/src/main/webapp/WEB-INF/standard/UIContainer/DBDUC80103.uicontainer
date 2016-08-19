@@ -47,7 +47,7 @@
      "layoutName": "DBD8010003",
      "layoutTitle": "非課税年金対象者情報登録",
      "eventName": "対象者検索条件へ",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",
