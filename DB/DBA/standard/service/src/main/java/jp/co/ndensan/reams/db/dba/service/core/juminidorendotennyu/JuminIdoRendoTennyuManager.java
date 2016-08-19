@@ -211,7 +211,7 @@ public class JuminIdoRendoTennyuManager {
                     処理対象者.getKanaShimei());
             IDbT1001HihokenshaDaichoMapper mapper = mapperProvider.create(IDbT1001HihokenshaDaichoMapper.class);
             List<DbT1001HihokenshaDaichoEntity> 処理対象list = mapper.get処理対象者(paraprm);
-            if (処理対象list != null || !処理対象list.isEmpty()) {
+            if (!処理対象list.isEmpty()) {
                 転入処理後Entity.set作成事由(TennyuSakuseiJiyu.別住民コードでの再転入.getコード());
                 return 転入処理後Entity;
             }
@@ -219,18 +219,19 @@ public class JuminIdoRendoTennyuManager {
         RString 年齢到達基準 = DbBusinessConfig.get(ConfigNameDBU.年齢到達基準_第１号被保険者到達基準年齢,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         if (年齢到達基準 != null && 転入前Entity.get年齢() < Integer.parseInt(年齢到達基準.toString())) {
-            HihokenshanotsukibanFinder finder = HihokenshanotsukibanFinder.createInstance();
-            被保険者番号 = finder.getHihokenshanotsukiban(処理対象者.getShikibetsuCode());
-            if (被保険者番号 != null && 被保険者番号.isEmpty()) {
-                //TODO  DBAのEnum. JuminRendoFuseigoは存在しない。QA1497
-                転入処理後Entity.setデータ不整合理由(new RString("1001"));
-                return 転入処理後Entity;
-            }
+            return 転入処理後Entity;
         }
-        RString 取得事由 = RString.EMPTY;
-        FlexibleDate 登録異動日 = FlexibleDate.EMPTY;
-        FlexibleDate 登録届出日 = FlexibleDate.EMPTY;
-        FlexibleDate 年齢到達日 = FlexibleDate.EMPTY;
+        HihokenshanotsukibanFinder finder = HihokenshanotsukibanFinder.createInstance();
+        被保険者番号 = finder.getHihokenshanotsukiban(処理対象者.getShikibetsuCode());
+        if (被保険者番号 == null || 被保険者番号.isEmpty()) {
+            //TODO  DBAのEnum. JuminRendoFuseigoは存在しない。QA1497
+            転入処理後Entity.setデータ不整合理由(new RString("1001"));
+            return 転入処理後Entity;
+        }
+        RString 取得事由;
+        FlexibleDate 登録異動日;
+        FlexibleDate 登録届出日;
+        FlexibleDate 年齢到達日;
         if (転入前Entity.get年齢到達日() != null && 転入前Entity.get登録異動日() != null
                 && 転入前Entity.get年齢到達日().isBeforeOrEquals(転入前Entity.get登録異動日())) {
             取得事由 = ShikakuShutokuJiyu.転入.getCode();
@@ -266,45 +267,46 @@ public class JuminIdoRendoTennyuManager {
         RString 転入前年齢 = DbBusinessConfig.get(ConfigNameDBU.年齢到達基準_第１号被保険者到達基準年齢,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         if (転入前年齢 != null && 転入前Entity.get年齢() < Integer.parseInt(転入前年齢.toString())) {
-            HihokenshanotsukibanFinder finder = HihokenshanotsukibanFinder.createInstance();
-            被保険者番号 = finder.getHihokenshanotsukiban(処理対象者.getShikibetsuCode());
-            if (被保険者番号 != null && 被保険者番号.isEmpty()) {
-                //TODO  DBAのEnum. JuminRendoFuseigoは存在しない。QA1497
-                転入処理後Entity.setデータ不整合理由(new RString("1001"));
-                return 転入処理後Entity;
-            }
-            RString 取得事由 = RString.EMPTY;
-            FlexibleDate 登録異動日 = FlexibleDate.EMPTY;
-            FlexibleDate 登録届出日 = FlexibleDate.EMPTY;
-            FlexibleDate 年齢到達日 = FlexibleDate.EMPTY;
-            if (転入前Entity.get年齢到達日() != null && 転入前Entity.get登録異動日() != null
-                    && 転入前Entity.get年齢到達日().isBeforeOrEquals(転入前Entity.get登録異動日())) {
-                取得事由 = ShikakuShutokuJiyu.転入.getCode();
-                登録異動日 = 転入前Entity.get登録異動日();
-                登録届出日 = 転入前Entity.get登録届出日();
-                年齢到達日 = 転入前Entity.get登録異動日();
-            } else {
-                取得事由 = ShikakuShutokuJiyu.年齢到達.getCode();
-                登録異動日 = 転入前Entity.get年齢到達日();
-                登録届出日 = 転入前Entity.get年齢到達日();
-                年齢到達日 = 転入前Entity.get年齢到達日();
-            }
-            if (直近被保データ.getShikakuSoshitsuJiyuCode().equals(ShikakuSoshitsuJiyu.死亡.getコード())) {
-                //TODO  DBAのEnum. JuminRendoFuseigoは存在しない。QA1497
-                転入処理後Entity.setデータ不整合理由(new RString("0003"));
-                転入処理後Entity.set作成事由(TennyuSakuseiJiyu.死亡喪失.getコード());
-                return 転入処理後Entity;
-            }
-            if (直近被保データ.getShikakuSoshitsuYMD() != null && 転入前Entity.get登録異動日().isBefore(直近被保データ.getShikakuSoshitsuYMD())) {
-                転入処理後Entity.setデータ不整合理由(new RString("0004"));
-                転入処理後Entity.set作成事由(TennyuSakuseiJiyu.日付不整合.getコード());
-                return 転入処理後Entity;
-            }
-            set資格喪失者(転入前Entity, 喪失被保険者list,
-                    取得事由, 登録異動日,
-                    年齢到達日, 登録届出日, 処理対象者, 被保険者番号);
-            転入処理後Entity.set被保険者台帳list(喪失被保険者list);
+            return 転入処理後Entity;
         }
+        HihokenshanotsukibanFinder finder = HihokenshanotsukibanFinder.createInstance();
+        被保険者番号 = finder.getHihokenshanotsukiban(処理対象者.getShikibetsuCode());
+        if (被保険者番号 == null || 被保険者番号.isEmpty()) {
+            //TODO  DBAのEnum. JuminRendoFuseigoは存在しない。QA1497
+            転入処理後Entity.setデータ不整合理由(new RString("1001"));
+            return 転入処理後Entity;
+        }
+        RString 取得事由;
+        FlexibleDate 登録異動日;
+        FlexibleDate 登録届出日;
+        FlexibleDate 年齢到達日;
+        if (転入前Entity.get年齢到達日() != null && 転入前Entity.get登録異動日() != null
+                && 転入前Entity.get年齢到達日().isBeforeOrEquals(転入前Entity.get登録異動日())) {
+            取得事由 = ShikakuShutokuJiyu.転入.getCode();
+            登録異動日 = 転入前Entity.get登録異動日();
+            登録届出日 = 転入前Entity.get登録届出日();
+            年齢到達日 = 転入前Entity.get登録異動日();
+        } else {
+            取得事由 = ShikakuShutokuJiyu.年齢到達.getCode();
+            登録異動日 = 転入前Entity.get年齢到達日();
+            登録届出日 = 転入前Entity.get年齢到達日();
+            年齢到達日 = 転入前Entity.get年齢到達日();
+        }
+        if (直近被保データ.getShikakuSoshitsuJiyuCode().equals(ShikakuSoshitsuJiyu.死亡.getコード())) {
+            //TODO  DBAのEnum. JuminRendoFuseigoは存在しない。QA1497
+            転入処理後Entity.setデータ不整合理由(new RString("0003"));
+            転入処理後Entity.set作成事由(TennyuSakuseiJiyu.死亡喪失.getコード());
+            return 転入処理後Entity;
+        }
+        if (直近被保データ.getShikakuSoshitsuYMD() != null && 転入前Entity.get登録異動日().isBefore(直近被保データ.getShikakuSoshitsuYMD())) {
+            転入処理後Entity.setデータ不整合理由(new RString("0004"));
+            転入処理後Entity.set作成事由(TennyuSakuseiJiyu.日付不整合.getコード());
+            return 転入処理後Entity;
+        }
+        set資格喪失者(転入前Entity, 喪失被保険者list,
+                取得事由, 登録異動日,
+                年齢到達日, 登録届出日, 処理対象者, 被保険者番号);
+        転入処理後Entity.set被保険者台帳list(喪失被保険者list);
         return 転入処理後Entity;
     }
 
