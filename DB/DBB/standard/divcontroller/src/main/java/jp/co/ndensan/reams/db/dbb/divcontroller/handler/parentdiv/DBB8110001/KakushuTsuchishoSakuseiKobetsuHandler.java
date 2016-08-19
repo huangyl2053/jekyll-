@@ -36,16 +36,22 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.ur.urz.business.core.date.DateEditor;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -118,6 +124,8 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     private static final RString 変更通知書帳票_略称 = new RString("変更通知書帳票略称");
     private static final RString 減免通知書帳票_略称 = new RString("減免通知書帳票略称");
     private static final RString 徴収猶予通知書帳票_略称 = new RString("徴収猶予通知書帳票略称");
+    private static final RString 業務固有の識別情報名称 = new RString("業務固有の識別情報");
+    private static final Code 業務固有 = new Code("0003");
 
     /**
      * コンストラクタです。
@@ -1461,9 +1469,14 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
      *
      * @param map 賦課の情報
      * @param 帳票Map 発行する帳票
+     * @param 被保険者番号 HihokenshaNo
+     * @param 識別コード ShikibetsuCode
      * @return SourceDataCollection
      */
-    public SourceDataCollection to発行処理(Map<RString, FukaJoho> map, Map<RString, RString> 帳票Map) {
+    public SourceDataCollection to発行処理(Map<RString, FukaJoho> map,
+            Map<RString, RString> 帳票Map,
+            HihokenshaNo 被保険者番号,
+            ShikibetsuCode 識別コード) {
 
         RString 更正前Key = div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku()
                 .getDdlInjiKouseiMae().getSelectedKey();
@@ -1517,6 +1530,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getTxtChoshuYuyoHakkoYMD().getValue());
         parameter.set徴収猶予通知書_文書番号(div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu()
                 .getCcdChoshuYuyoTsuchiBunshoNo().get文書番号());
+        AccessLogger.log(AccessLogType.更新, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
         return KakushuTsuchishoSakusei.createInstance().publish(parameter);
     }
 
@@ -1956,10 +1970,12 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
      *
      * @param 識別コード ShikibetsuCode
      * @param searchKey KaigoFukaKihonSearchKey
+     * @param 被保険者番号 HihokenshaNo
      */
-    public void setヘッダパネル(ShikibetsuCode 識別コード, KaigoFukaKihonSearchKey searchKey) {
+    public void setヘッダパネル(ShikibetsuCode 識別コード, KaigoFukaKihonSearchKey searchKey, HihokenshaNo 被保険者番号) {
         div.getJuminFukaShokai().getCcdKaigoatena().initialize(識別コード);
         div.getJuminFukaShokai().getCcdFukaKihon().load(searchKey);
+        AccessLogger.log(AccessLogType.照会, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
     }
 
     /**
@@ -1980,5 +1996,10 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         List<dgChohyoSentaku_Row> rowList = new ArrayList<>();
         div.getTsuchishoSakuseiKobetsu().getDgChohyoSentaku().setDataSource(rowList);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(発行する, true);
+    }
+
+    private PersonalData toPersonalData(ShikibetsuCode 識別コード, RString 被保険者番号) {
+        ExpandedInformation expandedInfo3 = new ExpandedInformation(業務固有, 業務固有の識別情報名称, 被保険者番号);
+        return PersonalData.of(識別コード, expandedInfo3);
     }
 }
