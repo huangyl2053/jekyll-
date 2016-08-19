@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -69,15 +68,12 @@ public class IraiJohoDataTorikomiValidationHandler {
     /**
      * 取込みファイル対象未選択チェックを行います。
      *
-     * @param files FileData[]
      * @return ValidationMessageControlPairs
      */
     @SuppressWarnings("checkstyle:illegaltoken")
-    public ValidationMessageControlPairs 取込みファイル対象未選択チェック(FileData[] files) {
+    public ValidationMessageControlPairs 取込みファイル対象未選択チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (files == null) {
-            validationMessages.add(new ValidationMessageControlPair(IraiJohoDataTorikomiMessages.取込みファイル対象未選択チェック));
-        }
+        validationMessages.add(new ValidationMessageControlPair(IraiJohoDataTorikomiMessages.取込みファイル対象未選択チェック));
         return validationMessages;
     }
 
