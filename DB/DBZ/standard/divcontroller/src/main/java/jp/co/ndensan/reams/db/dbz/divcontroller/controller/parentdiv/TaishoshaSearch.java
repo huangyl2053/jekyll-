@@ -51,7 +51,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.FlexibleDateOperator;
@@ -416,6 +415,12 @@ public class TaishoshaSearch {
         RString 番地 = 識別対象.get住所().get番地() != null ? 識別対象.get住所().get番地().getBanchi().value() : RString.EMPTY;
         RString 住所番地 = 住所.concat(番地);
 
+        RString sort用生年月日 = 個人.get生年月日() != null ? new RString(個人.get生年月日().toFlexibleDate().toString()) : RString.EMPTY;
+        if (!sort用生年月日.isEmpty() && sort用生年月日.length() < FlexibleDate.MAX.toString().length()) {
+            int padNum = FlexibleDate.MAX.toString().length() - sort用生年月日.length();
+            sort用生年月日.padRight("0", padNum);
+        }
+
         dgGaitoshaList_Row newRow = new dgGaitoshaList_Row(
                 資格検索結果.getHihokenshaNo() != null ? 資格検索結果.getHihokenshaNo().value() : RString.EMPTY,
                 識別対象.get識別コード() != null ? 識別対象.get識別コード().getColumnValue() : RString.EMPTY,
@@ -424,18 +429,15 @@ public class TaishoshaSearch {
                 名称カナ,
                 識別対象.get名称() != null ? 名称.concat(名称カナ) : RString.EMPTY,
                 個人.get性別() != null ? (個人.get性別().getName() != null ? 個人.get性別().getName().getShortJapanese() : RString.EMPTY) : RString.EMPTY,
-                new TextBoxNum(),
                 生年月日,
                 個人.get年齢算出().get年齢(),
+                sort用生年月日,
                 郵便番号,
                 住所番地,
                 個人.get個人番号() != null ? 個人.get個人番号().value() : RString.EMPTY,
                 個人.get住民状態() != null ? 個人.get住民状態().住民状態略称() : RString.EMPTY,
                 個人.get世帯コード() != null ? 個人.get世帯コード().value() : RString.EMPTY);
 
-        if (!個人.get年齢算出().get年齢().isEmpty()) {
-            newRow.getIntNenrei().setValue(new Decimal(個人.get年齢算出().get年齢().toString()));
-        }
         return newRow;
     }
 

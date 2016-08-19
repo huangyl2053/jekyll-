@@ -88,16 +88,27 @@ public class ShikakuHenkouIdou {
      * @return ResponseData<ShikakuHenkouIdouDiv>
      */
     public ResponseData<ShikakuHenkouIdouDiv> onClick_btnUpdate(ShikakuHenkouIdouDiv div) {
+
         if (!ResponseHolder.isReRequest()) {
+
+            if (!isSavable(div)) {
+                throw new ApplicationException(UrErrorMessages.保存データなし.getMessage());
+            }
+
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             saveGamenData(div);
+            RealInitialLocker.release(前排他ロックキー);
+            div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
+            return ResponseData.of(div).setState(DBA1040011StateName.完了状態);
         }
-        RealInitialLocker.release(前排他ロックキー);
-        div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
-        return ResponseData.of(div).setState(DBA1040011StateName.完了状態);
+        return ResponseData.of(div).respond();
+    }
+
+    private boolean isSavable(ShikakuHenkouIdouDiv div) {
+        return getHandler(div).isSavable();
     }
 
     /**

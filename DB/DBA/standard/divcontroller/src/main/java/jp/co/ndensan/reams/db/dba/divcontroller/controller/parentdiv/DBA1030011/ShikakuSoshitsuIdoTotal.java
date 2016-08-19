@@ -145,6 +145,11 @@ public class ShikakuSoshitsuIdoTotal {
      */
     public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_btnUpdate(ShikakuSoshitsuIdoTotalDiv div) {
         if (!ResponseHolder.isReRequest()) {
+
+            if (!isSavable(div)) {
+                throw new ApplicationException(UrErrorMessages.保存データなし.getMessage());
+            }
+
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
@@ -157,6 +162,10 @@ public class ShikakuSoshitsuIdoTotal {
             return ResponseData.of(div).setState(DBA1030011StateName.完了状態);
         }
         return ResponseData.of(div).respond();
+    }
+
+    private boolean isSavable(ShikakuSoshitsuIdoTotalDiv div) {
+        return createHandler(div).isSavable();
     }
 
     /**
