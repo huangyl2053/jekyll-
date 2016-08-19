@@ -11,27 +11,27 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 要介護認定実施状況のエンティティクラスです。
  *
- * @reamsid_L DBD-1771-030 b_liuyang2
+ * @reamsid_L DBD-1771-030 chenxin2
  */
 @lombok.Getter
 @lombok.Setter
-public class YokaigoNinteiJisshiJokyohyoEntity {
+public class YokaigoNinteiJisshiJokyohyoReportEntity {
 
     private RString 市町村名;
     private RString 市町村番号;
     private FlexibleYear 対象年度;
     private RString 集計項目;
-    private int 一月の合計;
-    private int 二月の合計;
-    private int 三月の合計;
-    private int 四月の合計;
-    private int 五月の合計;
-    private int 六月の合計;
-    private int 七月の合計;
-    private int 八月の合計;
-    private int 九月の合計;
-    private int 十月の合計;
-    private int 十一月の合計;
-    private int 十二月の合計;
-    private int 年度合計;
+    private RString 一月の合計;
+    private RString 二月の合計;
+    private RString 三月の合計;
+    private RString 四月の合計;
+    private RString 五月の合計;
+    private RString 六月の合計;
+    private RString 七月の合計;
+    private RString 八月の合計;
+    private RString 九月の合計;
+    private RString 十月の合計;
+    private RString 十一月の合計;
+    private RString 十二月の合計;
+    private RString 年度合計;
 }

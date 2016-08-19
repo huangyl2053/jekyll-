@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class JissiJyokyohyoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -31,10 +31,10 @@ public class JissiJyokyohyoDiv extends Panel {
     private JokenPanelDiv JokenPanel;
     @JsonProperty("lblComment1")
     private Label lblComment1;
-    @JsonProperty("lblComment2")
-    private Label lblComment2;
     @JsonProperty("lblComment3")
     private Label lblComment3;
+    @JsonProperty("lblComment2")
+    private Label lblComment2;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -115,24 +115,6 @@ public class JissiJyokyohyoDiv extends Panel {
     }
 
     /*
-     * getlblComment2
-     * @return lblComment2
-     */
-    @JsonProperty("lblComment2")
-    public Label getLblComment2() {
-        return lblComment2;
-    }
-
-    /*
-     * setlblComment2
-     * @param lblComment2 lblComment2
-     */
-    @JsonProperty("lblComment2")
-    public void setLblComment2(Label lblComment2) {
-        this.lblComment2 = lblComment2;
-    }
-
-    /*
      * getlblComment3
      * @return lblComment3
      */
@@ -148,6 +130,24 @@ public class JissiJyokyohyoDiv extends Panel {
     @JsonProperty("lblComment3")
     public void setLblComment3(Label lblComment3) {
         this.lblComment3 = lblComment3;
+    }
+
+    /*
+     * getlblComment2
+     * @return lblComment2
+     */
+    @JsonProperty("lblComment2")
+    public Label getLblComment2() {
+        return lblComment2;
+    }
+
+    /*
+     * setlblComment2
+     * @param lblComment2 lblComment2
+     */
+    @JsonProperty("lblComment2")
+    public void setLblComment2(Label lblComment2) {
+        this.lblComment2 = lblComment2;
     }
 
     /*

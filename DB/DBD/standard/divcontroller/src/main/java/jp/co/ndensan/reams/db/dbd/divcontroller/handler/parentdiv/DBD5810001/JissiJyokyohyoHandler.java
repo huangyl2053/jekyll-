@@ -50,7 +50,6 @@ public class JissiJyokyohyoHandler {
         div.getJyoukenPanel().getRdoKijyun().setReadOnly(true);
         div.getJyoukenPanel().getDdlKijyunhi().setReadOnly(true);
         div.getJokenPanel().getTxtSeinen().setReadOnly(true);
-        ddlChiku(div, true, true, true, true, true, true);
     }
 
     /**
@@ -95,13 +94,13 @@ public class JissiJyokyohyoHandler {
     public void onChange_ddlChiku(JissiJyokyohyoDiv div) {
         if (div.getCyouhyouPanel().getRdoCyouhyou().getSelectedKey().equals(帳票キー0)
                 && div.getJokenPanel().getDdlChiku().getSelectedKey().equals(地区キー1)) {
-            ddlChiku(div, false, false, true, true, true, true);
+            ddlChiku(div, true, true, true, false, false, false, false, false, false);
         } else if (div.getJokenPanel().getDdlChiku().getSelectedKey().equals(地区キー2)) {
-            ddlChiku(div, true, true, false, false, true, true);
+            ddlChiku(div, false, false, false, true, true, true, false, false, false);
         } else if (div.getJokenPanel().getDdlChiku().getSelectedKey().equals(地区キー3)) {
-            ddlChiku(div, true, true, true, true, false, false);
+            ddlChiku(div, false, false, false, false, false, false, true, true, true);
         } else {
-            ddlChiku(div, true, true, true, true, true, true);
+            ddlChiku(div, true, true, true, true, true, true, true, true, true);
         }
     }
 
@@ -184,17 +183,23 @@ public class JissiJyokyohyoHandler {
 
     private void ddlChiku(JissiJyokyohyoDiv div,
             boolean ccdJyuusyoStart,
+            boolean lblFromTo1,
             boolean ccdJyuusyoEnd,
             boolean ccdChikuStart,
+            boolean lblFromTo2,
             boolean ccdChikuEnd,
             boolean ccdGyouseiStart,
+            boolean lblFromTo3,
             boolean ccdGyouseiEnd) {
-        div.getJokenPanel().getCcdJyuusyoStart().setReadOnly(ccdJyuusyoStart);
-        div.getJokenPanel().getCcdJyuusyoEnd().setReadOnly(ccdJyuusyoEnd);
-        div.getJokenPanel().getCcdChikuStart().setReadOnly(ccdChikuStart);
-        div.getJokenPanel().getCcdChikuEnd().setReadOnly(ccdChikuEnd);
-        div.getJokenPanel().getCcdGyouseiStart().setReadOnly(ccdGyouseiStart);
-        div.getJokenPanel().getCcdGyouseiEnd().setReadOnly(ccdGyouseiEnd);
+        div.getJokenPanel().getCcdJyuusyoStart().setVisible(ccdJyuusyoStart);
+        div.getJokenPanel().getLblFromTo1().setVisible(lblFromTo1);
+        div.getJokenPanel().getCcdJyuusyoEnd().setVisible(ccdJyuusyoEnd);
+        div.getJokenPanel().getCcdChikuStart().setVisible(ccdChikuStart);
+        div.getJokenPanel().getLblFromTo2().setVisible(lblFromTo2);
+        div.getJokenPanel().getCcdChikuEnd().setVisible(ccdChikuEnd);
+        div.getJokenPanel().getCcdGyouseiStart().setVisible(ccdGyouseiStart);
+        div.getJokenPanel().getLblFromTo3().setVisible(lblFromTo3);
+        div.getJokenPanel().getCcdGyouseiEnd().setVisible(ccdGyouseiEnd);
     }
 
     private void set地区(YokaigoJissiJyokyohyoParameter parameter,

@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5810001.Jiss
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5810001.JissiJyokyohyoHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5810001.JissiJyokyohyoValidationHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -38,16 +39,6 @@ public class JissiJyokyohyo {
      */
     public ResponseData<JissiJyokyohyoDiv> onChange_rdoCyouhyou(JissiJyokyohyoDiv div) {
         getHandler().onChange_rdoCyouhyou(div);
-        return ResponseData.of(div).respond();
-    }
-
-    public ResponseData<JissiJyokyohyoDiv> onChange_rdoKijyun(JissiJyokyohyoDiv div) {
-
-        return ResponseData.of(div).respond();
-    }
-
-    public ResponseData<JissiJyokyohyoDiv> onChange_rdoshinsei(JissiJyokyohyoDiv div) {
-
         return ResponseData.of(div).respond();
     }
 
@@ -91,8 +82,12 @@ public class JissiJyokyohyo {
         getValidationHandler().validateFor行政区大小関係チェック(pairs, div);
         getValidationHandler().validateFor地区２大小関係チェック(pairs, div);
         getValidationHandler().validateFor住所大小関係チェック(pairs, div);
-        getValidationHandler().validateFor年齢の未入力チェック(pairs, div);
-        getValidationHandler().validateFor生年月日の未入力チェック(pairs, div);
+        if (div.getJokenPanel().getRdoNenrei().getSelectedKey().equals(new RString("0"))) {
+            getValidationHandler().validateFor年齢の未入力チェック(pairs, div);
+        }
+        if (div.getJokenPanel().getRdoNenrei().getSelectedKey().equals(new RString("1"))) {
+            getValidationHandler().validateFor生年月日の未入力チェック(pairs, div);
+        }
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }

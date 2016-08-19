@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
- * バッチパラメタークラスです．
+ * 要介護認定実施状況表（統計表）バッチパラメタークラスです．
  *
  * @reamsid_L DBD-1771-020 chenxin
  */
@@ -21,6 +21,12 @@ public class YokaigoJissiJyokyohyoHakkouMybatisParameter implements IMyBatisPara
     FlexibleDate 対象年月日From;
     FlexibleDate 対象年月日To;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param 対象年月日From
+     * @param 対象年月日To
+     */
     public YokaigoJissiJyokyohyoHakkouMybatisParameter(
             FlexibleDate 対象年月日From,
             FlexibleDate 対象年月日To) {
