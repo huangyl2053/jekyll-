@@ -5,24 +5,40 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100203;
 
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.temptable.HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4037HikazeNenkinTaishoshaEntity;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 非課税年金対象者更新_process処理クラスです。
  *
- * @reamsid_L DBD-4910-050 x_lilh
+ * @author DBD-4910-050 x_xuliang
  */
-public class HikazeiNennkinnTaishousyaUpdateProcess extends BatchProcessBase<HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity> {
+public class HikazeiNennkinnTaishousyaUpdateProcess extends BatchProcessBase<DbT4037HikazeNenkinTaishoshaEntity> {
+
+    private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.sokyuhikazeinenkintaishousyadoutei."
+            + "IHikazeiNennkinnTaishousyaUpdateMapper.get非課税年金対象者情報");
+
+    @BatchWriter
+    private BatchPermanentTableWriter<DbT4037HikazeNenkinTaishoshaEntity> hikazeNenkinTableEntity;
 
     @Override
     protected IBatchReader createReader() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new BatchDbReader(MAPPERPATH);
     }
 
     @Override
-    protected void process(HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    protected void process(DbT4037HikazeNenkinTaishoshaEntity updatehikazeNenkinTableEntity) {
+        edit非課税年金対象者更新情報(updatehikazeNenkinTableEntity);
+        hikazeNenkinTableEntity.update(updatehikazeNenkinTableEntity);
+    }
+
+    private void edit非課税年金対象者更新情報(DbT4037HikazeNenkinTaishoshaEntity updatehikazeNenkinTableEntity) {
+        updatehikazeNenkinTableEntity.setKisonenkinno(updatehikazeNenkinTableEntity.getKisonenkinno());
+        updatehikazeNenkinTableEntity.setHihokenshano(updatehikazeNenkinTableEntity.getHihokenshano());
     }
 }
