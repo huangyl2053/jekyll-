@@ -28,16 +28,16 @@ public class KagoMoshitatePanelDiv extends Panel {
      */
     @JsonProperty("hl")
     private HorizontalLine hl;
-    @JsonProperty("Label1")
-    private Label Label1;
-    @JsonProperty("HorizontalLine2")
-    private HorizontalLine HorizontalLine2;
+    @JsonProperty("lblKyotakuNyusho")
+    private Label lblKyotakuNyusho;
+    @JsonProperty("lin2")
+    private HorizontalLine lin2;
     @JsonProperty("Service")
     private ServiceDiv Service;
-    @JsonProperty("CommonKaigoshikakuKihonChildDiv2")
-    private KaigoShikakuKihonDiv CommonKaigoshikakuKihonChildDiv2;
     @JsonProperty("CommonKaigpAtenainfoChildDiv1")
     private KaigoAtenaInfoDiv CommonKaigpAtenainfoChildDiv1;
+    @JsonProperty("CommonKaigoshikakuKihonChildDiv2")
+    private KaigoShikakuKihonDiv CommonKaigoshikakuKihonChildDiv2;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -64,39 +64,39 @@ public class KagoMoshitatePanelDiv extends Panel {
     }
 
     /*
-     * getLabel1
-     * @return Label1
+     * getlblKyotakuNyusho
+     * @return lblKyotakuNyusho
      */
-    @JsonProperty("Label1")
-    public Label getLabel1() {
-        return Label1;
+    @JsonProperty("lblKyotakuNyusho")
+    public Label getLblKyotakuNyusho() {
+        return lblKyotakuNyusho;
     }
 
     /*
-     * setLabel1
-     * @param Label1 Label1
+     * setlblKyotakuNyusho
+     * @param lblKyotakuNyusho lblKyotakuNyusho
      */
-    @JsonProperty("Label1")
-    public void setLabel1(Label Label1) {
-        this.Label1 = Label1;
+    @JsonProperty("lblKyotakuNyusho")
+    public void setLblKyotakuNyusho(Label lblKyotakuNyusho) {
+        this.lblKyotakuNyusho = lblKyotakuNyusho;
     }
 
     /*
-     * getHorizontalLine2
-     * @return HorizontalLine2
+     * getlin2
+     * @return lin2
      */
-    @JsonProperty("HorizontalLine2")
-    public HorizontalLine getHorizontalLine2() {
-        return HorizontalLine2;
+    @JsonProperty("lin2")
+    public HorizontalLine getLin2() {
+        return lin2;
     }
 
     /*
-     * setHorizontalLine2
-     * @param HorizontalLine2 HorizontalLine2
+     * setlin2
+     * @param lin2 lin2
      */
-    @JsonProperty("HorizontalLine2")
-    public void setHorizontalLine2(HorizontalLine HorizontalLine2) {
-        this.HorizontalLine2 = HorizontalLine2;
+    @JsonProperty("lin2")
+    public void setLin2(HorizontalLine lin2) {
+        this.lin2 = lin2;
     }
 
     /*
@@ -118,21 +118,21 @@ public class KagoMoshitatePanelDiv extends Panel {
     }
 
     /*
-     * getCommonKaigoshikakuKihonChildDiv2
-     * @return CommonKaigoshikakuKihonChildDiv2
-     */
-    @JsonProperty("CommonKaigoshikakuKihonChildDiv2")
-    public IKaigoShikakuKihonDiv getCommonKaigoshikakuKihonChildDiv2() {
-        return CommonKaigoshikakuKihonChildDiv2;
-    }
-
-    /*
      * getCommonKaigpAtenainfoChildDiv1
      * @return CommonKaigpAtenainfoChildDiv1
      */
     @JsonProperty("CommonKaigpAtenainfoChildDiv1")
     public IKaigoAtenaInfoDiv getCommonKaigpAtenainfoChildDiv1() {
         return CommonKaigpAtenainfoChildDiv1;
+    }
+
+    /*
+     * getCommonKaigoshikakuKihonChildDiv2
+     * @return CommonKaigoshikakuKihonChildDiv2
+     */
+    @JsonProperty("CommonKaigoshikakuKihonChildDiv2")
+    public IKaigoShikakuKihonDiv getCommonKaigoshikakuKihonChildDiv2() {
+        return CommonKaigoshikakuKihonChildDiv2;
     }
 
     /*
@@ -229,16 +229,6 @@ public class KagoMoshitatePanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxt13() {
-        return this.getService().getTxt13();
-    }
-
-    @JsonIgnore
-    public void  setTxt13(TextBox txt13) {
-        this.getService().setTxt13(txt13);
-    }
-
-    @JsonIgnore
     public TextBox getTxt12() {
         return this.getService().getTxt12();
     }
@@ -246,6 +236,16 @@ public class KagoMoshitatePanelDiv extends Panel {
     @JsonIgnore
     public void  setTxt12(TextBox txt12) {
         this.getService().setTxt12(txt12);
+    }
+
+    @JsonIgnore
+    public TextBox getTxt13() {
+        return this.getService().getTxt13();
+    }
+
+    @JsonIgnore
+    public void  setTxt13(TextBox txt13) {
+        this.getService().setTxt13(txt13);
     }
 
     @JsonIgnore
