@@ -8,6 +8,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.chokkinFlag;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.edaban;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.jukyuShinseiJiyu;
@@ -156,5 +157,24 @@ public class DbV4001JukyushaDaichoAliveDac implements ISaveable<DbV4001JukyushaD
                 table(DbV4001JukyushaDaicho.class).
                 where(eq(hihokenshaNo, 被保険者番号)).order(by(jukyuShinseiYMD, ASC)).limit(1).
                 toList(DbV4001JukyushaDaichoEntity.class);
+    }
+
+    /**
+     * 被保険者番号をキーとし、受給者台帳を検索し、最新の申請書管理番号を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return DbV4001JukyushaDaichoEntityの{@code list}
+     */
+    @Transaction
+    public DbV4001JukyushaDaichoEntity select申請書管理番号(HihokenshaNo 被保険者番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV4001JukyushaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(chokkinFlag, true))).
+                order(by(jukyuShinseiYMD, ASC)).limit(1).
+                toObject(DbV4001JukyushaDaichoEntity.class);
     }
 }

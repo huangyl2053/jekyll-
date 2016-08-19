@@ -68,21 +68,23 @@ public class KekkaShosaiJoho {
             div.getCcdNinteiInput().initialize(passModel);
             div.getCcdShinseiSonotaJohoInput().initialize();
         }
-        if (!モード_入力.equals(mode)) {
-            div.getCcdNinteiInput().initialize(model.getDataPassModel());
-            div.getCcdShinseiSonotaJohoInput().initialize();
+        div.getCcdNinteiInput().initialize(model.getDataPassModel());
+        div.getCcdShinseiSonotaJohoInput().initialize();
+        if (!RString.isNullOrEmpty(model.getIdoJiyuCode())) {
             div.getCcdShinseiSonotaJohoInput().set異動事由(model.getIdoJiyuCode());
-            div.getCcdShinseiSonotaJohoInput().set削除事由(model.getSakujoJiyuCode());
-            div.getCcdShinseiSonotaJohoInput().set理由(model.getRiyu());
-            div.getCcdShinseiSonotaJohoInput().set喪失日(model.getSoshitsuDay());
-            div.getCcdShinseiSonotaJohoInput().set取消日(model.getTorisageDay());
-            div.getCcdShinseiSonotaJohoInput().set当初認定期間From(model.getToshoNinteiKikanFrom());
-            div.getCcdShinseiSonotaJohoInput().set当初認定期間To(model.getToshoNinteiKikanTo());
-            div.getCcdShinseiSonotaJohoInput().set発行日１(model.getJukyuShikakuHakkoDay1());
-            div.getCcdShinseiSonotaJohoInput().set発行日2(model.getJukyuShikakuHakkoDay2());
-            div.getTxtShinseiKubunShinsei().setValue(model.getShinseiKubunShinsei());
-            div.getTxtShinseiKubunLaw().setValue(model.getShinseiKubunLaw());
         }
+        if (!RString.isNullOrEmpty(model.getSakujoJiyuCode())) {
+            div.getCcdShinseiSonotaJohoInput().set削除事由(model.getSakujoJiyuCode());
+        }
+        div.getCcdShinseiSonotaJohoInput().set理由(model.getRiyu());
+        div.getCcdShinseiSonotaJohoInput().set喪失日(model.getSoshitsuDay());
+        div.getCcdShinseiSonotaJohoInput().set取消日(model.getTorisageDay());
+        div.getCcdShinseiSonotaJohoInput().set当初認定期間From(model.getToshoNinteiKikanFrom());
+        div.getCcdShinseiSonotaJohoInput().set当初認定期間To(model.getToshoNinteiKikanTo());
+        div.getCcdShinseiSonotaJohoInput().set発行日１(model.getJukyuShikakuHakkoDay1());
+        div.getCcdShinseiSonotaJohoInput().set発行日2(model.getJukyuShikakuHakkoDay2());
+        div.getTxtShinseiKubunShinsei().setValue(model.getShinseiKubunShinsei());
+        div.getTxtShinseiKubunLaw().setValue(model.getShinseiKubunLaw());
         return ResponseData.of(div).respond();
     }
 

@@ -37,7 +37,7 @@
      "layoutName": "DBD5510001",
      "layoutTitle": "職権修正",
      "eventName": "一覧へ戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBD",
      "toLayoutName": "DBD5020011",
