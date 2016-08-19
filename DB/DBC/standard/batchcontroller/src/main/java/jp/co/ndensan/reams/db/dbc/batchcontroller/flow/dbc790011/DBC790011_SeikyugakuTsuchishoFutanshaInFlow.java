@@ -33,7 +33,7 @@ public class DBC790011_SeikyugakuTsuchishoFutanshaInFlow extends BatchFlowBase<S
         parameter.setPath(getParameter().get保存先フォルダ());
         List<RString> fileNameList = getParameter().getエントリ情報List();
         if (fileNameList != null && !fileNameList.isEmpty()) {
-            for (int i = INDEX_0; i <= fileNameList.size(); i++) {
+            for (int i = INDEX_0; i < fileNameList.size(); i++) {
                 parameter.setFileName(fileNameList.get(i));
                 executeStep(CSVファイル取込);
             }
