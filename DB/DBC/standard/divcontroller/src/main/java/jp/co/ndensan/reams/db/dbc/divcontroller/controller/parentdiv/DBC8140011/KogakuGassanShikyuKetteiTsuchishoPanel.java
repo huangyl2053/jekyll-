@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -43,24 +44,22 @@ public class KogakuGassanShikyuKetteiTsuchishoPanel {
      * @return ResponseData
      */
     public ResponseData<KogakuGassanShikyuKetteiTsuchishoPanelDiv> onLoad(KogakuGassanShikyuKetteiTsuchishoPanelDiv div) {
-
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         TaishoshaKey 引き継ぎEntity = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         if (引き継ぎEntity.get被保険者番号() == null || 引き継ぎEntity.get被保険者番号().isEmpty()) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(DbcInformationMessages.被保険者でないデータ.getMessage()).respond();
             }
-            if (new RString(DbcInformationMessages.被保険者でないデータ.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                getHandler(div).状態4();
-                return ResponseData.of(div).respond();
-            }
-
         }
         ShikibetsuCode 識別コード = 引き継ぎEntity.get識別コード();
         HihokenshaNo 被保険者番号 = 引き継ぎEntity.get被保険者番号();
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
+        if (!getHandler(div).get前排他(被保険者番号.getColumnValue())) {
+            throw new PessimisticLockingException();
+        }
         ValidationMessageControlPairs validPairs = getHandler(div).initialize(被保険者番号, 識別コード);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();

@@ -6,9 +6,8 @@
 package jp.co.ndensan.reams.db.dbd.business.report.dbd300004;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteitsukibetsujukyushasujokyohyo.YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijisshijokyohyo.YokaigoNinteiJisshiJokyohyoReportEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd300004.YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -29,9 +28,9 @@ public class YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEditor implements IYokaigo
     private final FlexibleDate 基準日;
     private final RString 年齢;
     private final RString 地区;
-    private final Code 集計単位;
+    private final RString 集計単位;
     private final FlexibleYear 年度;
-    private final List<YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity> 受給状況Entityリスト;
+    private final List<YokaigoNinteiJisshiJokyohyoReportEntity> 受給状況Entityリスト;
     private final int index;
 
     /**
@@ -42,11 +41,11 @@ public class YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEditor implements IYokaigo
      * @param 地区 RString
      * @param 集計単位 Code
      * @param 年度 FlexibleYear
-     * @param 受給状況Entityリスト List<YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity>
+     * @param 受給状況Entityリスト List<YokaigoNinteiJisshiJokyohyoEntity>
      * @param index int
      */
-    public YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEditor(FlexibleDate 基準日, RString 年齢, RString 地区, Code 集計単位,
-            FlexibleYear 年度, List<YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity> 受給状況Entityリスト, int index) {
+    public YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEditor(FlexibleDate 基準日, RString 年齢, RString 地区, RString 集計単位,
+            FlexibleYear 年度, List<YokaigoNinteiJisshiJokyohyoReportEntity> 受給状況Entityリスト, int index) {
         this.基準日 = 基準日;
         this.年齢 = 年齢;
         this.地区 = 地区;
@@ -66,7 +65,7 @@ public class YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEditor implements IYokaigo
         source.kijunbi = this.基準日.wareki().toDateString();
         source.nenrei = this.年齢;
         source.chiku = this.地区;
-        source.shukeiTani = this.集計単位.getColumnValue();
+        source.shukeiTani = this.集計単位;
         source.printTimeStamp = get印刷日時();
         source.title_a1 = RString.EMPTY;
         source.title_a2 = RString.EMPTY;
@@ -75,9 +74,9 @@ public class YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEditor implements IYokaigo
         source.nendo = this.年度.toDateString();
         if (null != 受給状況Entityリスト && !受給状況Entityリスト.isEmpty()) {
             source.shichosonName = 受給状況Entityリスト.get(index).get市町村名();
-            source.hokenshaNo = 受給状況Entityリスト.get(index).get市町村コード();
+            source.hokenshaNo = 受給状況Entityリスト.get(index).get市町村番号();
             source.hokenshaName = 受給状況Entityリスト.get(index).get市町村名();
-            YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity 受給状況Entity = 受給状況Entityリスト.get(index);
+            YokaigoNinteiJisshiJokyohyoReportEntity 受給状況Entity = 受給状況Entityリスト.get(index);
             source.list_1 = 受給状況Entity.get集計項目();
             source.list_2 = 受給状況Entity.get四月の合計();
             source.list_3 = 受給状況Entity.get五月の合計();

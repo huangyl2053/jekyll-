@@ -7,7 +7,7 @@
 
     <resultMap id="ResultMap_YokaigoNintei" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd582001.YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity" autoMapping="true">
         <result property="取得条件" column="取得条件"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="市町村コード" column="shichosonCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="市町村コード" column="市町村コード"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
         <result property="市町村名称" column="shichosonMeisho"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="件数" column="件数"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
         <result property="件数旧措置" column="件数（旧措置）"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
@@ -50,8 +50,8 @@
     </select>
     
     <sql id = "selectSql1">
-            A."shichosonCode",
-            A."shichosonMeisho",
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名称,
             SUM(A."件数") AS "件数",
             SUM(A."件数（旧措置）") AS "件数（旧措置）",
             SUM(A."新規") AS "新規",
@@ -138,6 +138,25 @@
             A."shichosonMeisho"
         ORDER BY
             A."shichosonCode"
+    </sql>
+    
+    <sql id="sql3">
+        '000000' AS 市町村コード, 
+            '000000' AS 市町村名称,
+            '0' AS "件数",
+            '0' AS "件数（旧措置）",
+            '0' AS "新規",
+            '0' AS "新規（旧措置）",
+            '0' AS "（要支援）",
+            '0' AS "（要支援）（旧措置）",
+            '0' AS "更新",
+            '0' AS "更新（旧措置）",
+            '0' AS "区分変更",
+            '0' AS "区分変更（旧措置）",
+            '0' AS "転入",
+            '0' AS "転入（旧措置）",
+            '0' AS "職権他",
+            '0' AS "職権他（旧措置）"
     </sql>
     
     <sql id="select認定件数の場合">
@@ -308,20 +327,20 @@
     </sql>
     
     <sql id="条件2の基準フラグ1">
-        <if test = "#{基準フラグ} == 's0'">
+        <if test = "is基準フラグ0">
             AND T4001."ninteiYMD" <![CDATA[<=]]> #{基準年月日}
         </if>
-        <if test = "#{基準フラグ} == 's1'">
+        <if test = "is基準フラグ1">
             AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月}
         </if>
     </sql>
     
     <sql id="条件2の基準フラグ2">
-        <if test = "#{基準フラグ} == 's0'">
+        <if test = "is基準フラグ0">
             AND T4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{基準年月日}
             AND #{基準年月日} <![CDATA[<=]]> T4001."ninteiYukoKikanShuryoYMD"
         </if>
-        <if test = "#{基準フラグ} == 's1'">
+        <if test = "is基準フラグ1">
             AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",0,6) <![CDATA[<=]]> #{基準年月}
             AND #{基準年月} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",0,6)
             AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月}

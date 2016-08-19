@@ -36,17 +36,17 @@ public class JukyushaKoshinKekkaIchiranHeaderEditor implements IJukyushaKoshinKe
     private static final RString KEY_並び順の５件目 = new RString("KEY_並び順の５件目");
     private static final RString KEY_並び順の６件目 = new RString("KEY_並び順の６件目");
     private final RString 帳票ID;
-    private final RString DBC200006帳票ID = new RString("DBC200006_KokuhorenJukyushaDaichoIchiran");
-    private final RString DBC200055帳票ID = new RString("DBC200055_JukyushaKoshinkekkaIchiran");
-    private final RString DBC200058帳票ID = new RString("DBC200058_JukyushaTotsugokekkaIchiran");
+    private final RString 帳票DBC200006 = new RString("DBC200006_KokuhorenJukyushaDaichoIchiran");
+    private final RString 帳票DBC200055 = new RString("DBC200055_JukyushaKoshinkekkaIchiran");
+    private final RString 帳票DBC200058 = new RString("DBC200058_JukyushaTotsugokekkaIchiran");
     private static final RString DBC200006タイトル = new RString("受給者台帳（一覧表)");
     private static final RString DBC200055タイトル = new RString("受給者情報更新結果");
     private static final RString DBC200058タイトル = new RString("受給者情報突合結果");
-    private static final RString BC200006とDBC200055item1 = new RString("訂正年月日");
-    private static final RString DBC200058item1 = new RString("突合結果");
-    private static final RString DBC200055item2 = new RString("訂正区分");
-    private static final RString DBC200058item2 = new RString("突合情報");
-    private static final RString DBC200006item3 = new RString("有料老人ホーム同意書");
+    private static final RString BC200006_DBC200055_項目1 = new RString("訂正年月日");
+    private static final RString DBC200058_項目1 = new RString("突合結果");
+    private static final RString DBC200055_項目2 = new RString("訂正区分");
+    private static final RString DBC200058_項目2 = new RString("突合情報");
+    private static final RString DBC20000_項目3 = new RString("有料老人ホーム同意書");
 
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
@@ -83,20 +83,20 @@ public class JukyushaKoshinKekkaIchiranHeaderEditor implements IJukyushaKoshinKe
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 作成時 = 作成日時.getTime()
                 .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
-        if (DBC200006帳票ID.equals(帳票ID)) {
+        if (帳票DBC200006.equals(帳票ID)) {
             source.title = DBC200006タイトル;
-            source.komokuName1 = BC200006とDBC200055item1;
+            source.komokuName1 = BC200006_DBC200055_項目1;
             source.komokuName2 = RString.EMPTY;
-            source.komokuName3 = DBC200006item3;
-        } else if (DBC200055帳票ID.equals(帳票ID)) {
+            source.komokuName3 = DBC20000_項目3;
+        } else if (帳票DBC200055.equals(帳票ID)) {
             source.title = DBC200055タイトル;
-            source.komokuName1 = BC200006とDBC200055item1;
-            source.komokuName2 = DBC200055item2;
+            source.komokuName1 = BC200006_DBC200055_項目1;
+            source.komokuName2 = DBC200055_項目2;
             source.komokuName3 = RString.EMPTY;
-        } else if(DBC200058帳票ID.equals(帳票ID)) {
+        } else if (帳票DBC200058.equals(帳票ID)) {
             source.title = DBC200058タイトル;
-            source.komokuName1 = DBC200058item1;
-            source.komokuName2 = DBC200058item2;
+            source.komokuName1 = DBC200058_項目1;
+            source.komokuName2 = DBC200058_項目2;
             source.komokuName3 = RString.EMPTY;
         }
         source.printTimeStamp = 作成日.concat(RString.HALF_SPACE).concat(作成時);

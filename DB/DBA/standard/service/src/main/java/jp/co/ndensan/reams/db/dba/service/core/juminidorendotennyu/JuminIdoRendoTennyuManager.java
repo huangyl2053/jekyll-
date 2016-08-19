@@ -325,7 +325,8 @@ public class JuminIdoRendoTennyuManager {
                 直近被保データ.getIdoYMD());
         IDbT1001HihokenshaDaichoMapper mapper = mapperProvider.create(IDbT1001HihokenshaDaichoMapper.class);
         DbT1001HihokenshaDaichoEntity 直近被保データEntity = mapper.ge直近被保データ(paramtet);
-        if (ShikakuJutokuTekiyoJiyu.自特例適用.getコード().equals(直近被保データEntity.getIdoJiyuCode())
+        if (直近被保データEntity.getIdoJiyuCode() != null
+                && ShikakuJutokuTekiyoJiyu.自特例適用.getコード().equals(直近被保データEntity.getIdoJiyuCode())
                 && (ShikakuJutokuKaijoJiyu.自特例転入.getコード().equals(直近被保データ.getIdoJiyuCode()))
                 && (直近被保データ.getShikakuShutokuYMD().equals(転入前Entity.get登録異動日()))
                 && (直近被保データ.getShikakuShutokuTodokedeYMD().equals(転入前Entity.get登録届出日()))) {
@@ -337,21 +338,19 @@ public class JuminIdoRendoTennyuManager {
                 && 住所地特例フラグ.equals(直近被保データ.getKoikinaiJushochiTokureiFlag())) {
             is措置元再転入 = true;
         }
-        is措置元再転入 = true;
-        if (is措置元再転入) {
-            execute転入処理_住特_措置元(処理対象者, 直近被保データ, 転入前Entity, is措置元再転入);
+        if (住所地特例フラグ.equals(直近被保データ.getJushochiTokureiFlag())) {
+            set措置元再転入(is措置元再転入, 直近被保データ, 処理対象者, 転入前Entity);
         } else {
-            execute転入処理_住特(処理対象者, 直近被保データ, 転入前Entity);
-        }
-        if (特例フラグ.equals(直近被保データ.getJushochiTokureiFlag())
-                && (ShikakuShutokuJiyu.転入.getCode().equals(直近被保データ.getShikakuShutokuJiyuCode())
-                && (直近被保データ.getShikakuShutokuYMD().equals(転入前Entity.get登録異動日()))
-                && (直近被保データ.getShikakuShutokuTodokedeYMD().equals(転入前Entity.get登録届出日())))) {
-            //TODO  DBAのEnum. JuminRendoFuseigoは存在しない。QA1497
-            転入処理後Entity.setデータ不整合理由(new RString("0017"));
-        }
-        if (転入前Entity.is広域()) {
-            転入処理後Entity.set作成事由(TennyuSakuseiJiyu.広域内転入.getコード());
+            if (特例フラグ.equals(直近被保データ.getJushochiTokureiFlag())
+                    && (ShikakuShutokuJiyu.転入.getCode().equals(直近被保データ.getShikakuShutokuJiyuCode())
+                    && (直近被保データ.getShikakuShutokuYMD().equals(転入前Entity.get登録異動日()))
+                    && (直近被保データ.getShikakuShutokuTodokedeYMD().equals(転入前Entity.get登録届出日())))) {
+                //TODO  DBAのEnum. JuminRendoFuseigoは存在しない。QA1497
+                転入処理後Entity.setデータ不整合理由(new RString("0017"));
+            }
+            if (転入前Entity.is広域()) {
+                転入処理後Entity.set作成事由(TennyuSakuseiJiyu.広域内転入.getコード());
+            }
         }
         return 転入処理後Entity;
     }
@@ -533,6 +532,15 @@ public class JuminIdoRendoTennyuManager {
         return 1 == dbT1001Dac.save(dbT1001Entity);
     }
 
+    private void set措置元再転入(boolean is措置元再転入, DbV1001HihokenshaDaichoEntity 直近被保データ,
+            UaFt200FindShikibetsuTaishoEntity 処理対象者, TennyuuMaeparametaEntity 転入前Entity) {
+        if (住所地特例フラグ.equals(直近被保データ.getJushochiTokureiFlag())) {
+            execute転入処理_住特_措置元(処理対象者, 直近被保データ, 転入前Entity, is措置元再転入);
+        } else {
+            execute転入処理_住特(処理対象者, 直近被保データ, 転入前Entity);
+        }
+    }
+
     private void set被保険者台帳なし(TennyuuMaeparametaEntity 転入前Entity, List<DbT1001HihokenshaDaichoEntity> 喪失被保険者list, RString 取得事由,
             FlexibleDate 登録異動日,
             FlexibleDate 年齢到達日,
@@ -589,15 +597,15 @@ public class JuminIdoRendoTennyuManager {
         HihokenshaDaicho business = new HihokenshaDaicho(直近被保データ.getHihokenshaNo(), 転入前Entity.get年齢到達日(), 枝番);
         HihokenshaDaichoBuilder builder = business.createBuilderForEdit();
         builder.set異動事由コード(ShikakuHenkoJiyu._１号到達.getコード());
-        builder.set市町村コード(直近被保データ.getShichosonCode());
-        builder.set識別コード(new ShikibetsuCode(直近被保データ.getShikakuSoshitsuJiyuCode().toString()));
+        builder.set市町村コード(nullOrEntity(直近被保データ.getShichosonCode()));
+        builder.set識別コード(直近被保データ.getShikibetsuCode());
         builder.set資格取得事由コード(直近被保データ.getShikakuShutokuJiyuCode());
         builder.set資格取得年月日(直近被保データ.getShikakuShutokuYMD());
-        builder.set資格取得届出年月日(直近被保データ.getIchigoShikakuShutokuYMD());
-        builder.set第1号資格取得年月日(転入前Entity.get登録異動日());
+        builder.set資格取得届出年月日(直近被保データ.getShikakuShutokuTodokedeYMD());
+        builder.set第1号資格取得年月日(転入前Entity.get年齢到達日());
         builder.set被保険者区分コード(ShikakuKubun._１号.getコード());
         builder.set資格喪失事由コード(直近被保データ.getShikakuSoshitsuJiyuCode());
-        builder.set資格喪失年月日(直近被保データ.getShikakuSoshitsuYMD());
+        builder.set資格喪失年月日(nullorentity(直近被保データ.getShikakuSoshitsuYMD()));
         builder.set資格喪失届出年月日(直近被保データ.getShikakuSoshitsuTodokedeYMD());
         builder.set資格変更事由コード(ShikakuHenkoJiyu._１号到達.getコード());
         builder.set資格変更年月日(転入前Entity.get年齢到達日());
@@ -622,12 +630,12 @@ public class JuminIdoRendoTennyuManager {
         HihokenshaDaicho business = new HihokenshaDaicho(直近被保データ.getHihokenshaNo(), 転入前Entity.get登録異動日(), 枝番);
         HihokenshaDaichoBuilder builder = business.createBuilderForEdit();
         builder.set異動事由コード(ShikakuJutokuKaijoJiyu.自特例転入.getコード());
-        builder.set市町村コード(直近被保データ.getShichosonCode());
-        builder.set識別コード(new ShikibetsuCode(直近被保データ.getShikakuSoshitsuJiyuCode().toString()));
+        builder.set市町村コード(nullOrEntity(直近被保データ.getShichosonCode()));
+        builder.set識別コード(直近被保データ.getShikibetsuCode());
         builder.set資格取得事由コード(直近被保データ.getShikakuShutokuJiyuCode());
         builder.set資格取得年月日(直近被保データ.getShikakuShutokuYMD());
-        builder.set資格取得届出年月日(直近被保データ.getIchigoShikakuShutokuYMD());
-        builder.set第1号資格取得年月日(転入前Entity.get登録異動日());
+        builder.set資格取得届出年月日(直近被保データ.getShikakuShutokuTodokedeYMD());
+        builder.set第1号資格取得年月日(転入前Entity.get年齢到達日());
         builder.set被保険者区分コード(ShikakuKubun._１号.getコード());
         builder.set資格喪失事由コード(直近被保データ.getShikakuSoshitsuJiyuCode());
         builder.set資格喪失年月日(nullorentity(直近被保データ.getShikakuSoshitsuYMD()));
@@ -655,12 +663,12 @@ public class JuminIdoRendoTennyuManager {
         HihokenshaDaicho business = new HihokenshaDaicho(直近被保データ.getHihokenshaNo(), 転入前Entity.get登録異動日(), 枝番_1);
         HihokenshaDaichoBuilder builder = business.createBuilderForEdit();
         builder.set異動事由コード(ShikakuHenkoJiyu.広住特転入.getコード());
-        builder.set市町村コード(直近被保データ.getShichosonCode());
-        builder.set識別コード(new ShikibetsuCode(直近被保データ.getShikakuSoshitsuJiyuCode().toString()));
+        builder.set市町村コード(nullOrEntity(直近被保データ.getShichosonCode()));
+        builder.set識別コード(直近被保データ.getShikibetsuCode());
         builder.set資格取得事由コード(直近被保データ.getShikakuShutokuJiyuCode());
         builder.set資格取得年月日(直近被保データ.getShikakuShutokuYMD());
-        builder.set資格取得届出年月日(直近被保データ.getIchigoShikakuShutokuYMD());
-        builder.set第1号資格取得年月日(転入前Entity.get登録異動日());
+        builder.set資格取得届出年月日(直近被保データ.getShikakuShutokuTodokedeYMD());
+        builder.set第1号資格取得年月日(転入前Entity.get年齢到達日());
         builder.set被保険者区分コード(ShikakuKubun._１号.getコード());
         builder.set資格喪失事由コード(直近被保データ.getShikakuSoshitsuJiyuCode());
         builder.set資格喪失年月日(nullorentity(直近被保データ.getShikakuSoshitsuYMD()));
@@ -673,7 +681,7 @@ public class JuminIdoRendoTennyuManager {
         builder.set適用届出年月日(直近被保データ.getJushochitokureiTekiyoTodokedeYMD());
         builder.set住所地特例解除事由コード(ShikakuJutokuKaijoJiyu.自特例転入.getコード());
         builder.set解除年月日(転入前Entity.get登録異動日());
-        builder.set解除届出年月日(転入前Entity.get登録異動日());
+        builder.set解除届出年月日(転入前Entity.get登録届出日());
         builder.set住所地特例フラグ(特例フラグ);
         builder.set広域内住所地特例フラグ(特例フラグ);
         builder.set論理削除フラグ(false);
@@ -686,7 +694,7 @@ public class JuminIdoRendoTennyuManager {
         HihokenshaDaicho business = new HihokenshaDaicho(直近被保データ.getHihokenshaNo(), 転入前Entity.get登録異動日(), 枝番);
         HihokenshaDaichoBuilder builder = business.createBuilderForEdit();
         builder.set異動事由コード(ShikakuJutokuKaijoJiyu.自特例転入.getコード());
-        builder.set市町村コード(直近被保データ.getShichosonCode());
+        builder.set市町村コード(nullOrEntity(直近被保データ.getShichosonCode()));
         builder.set識別コード(new ShikibetsuCode(直近被保データ.getShikakuSoshitsuJiyuCode().toString()));
         builder.set資格取得事由コード(直近被保データ.getShikakuShutokuJiyuCode());
         builder.set資格取得年月日(直近被保データ.getShikakuShutokuYMD());
@@ -717,7 +725,7 @@ public class JuminIdoRendoTennyuManager {
         HihokenshaDaicho business = new HihokenshaDaicho(直近被保データ.getHihokenshaNo(), 転入前Entity.get登録異動日(), 枝番);
         HihokenshaDaichoBuilder builder = business.createBuilderForEdit();
         builder.set異動事由コード(ShikakuJutokuKaijoJiyu.自特例転入.getコード());
-        builder.set市町村コード(直近被保データ.getShichosonCode());
+        builder.set市町村コード(nullOrEntity(直近被保データ.getShichosonCode()));
         builder.set識別コード(new ShikibetsuCode(直近被保データ.getShikakuSoshitsuJiyuCode().toString()));
         builder.set資格取得事由コード(直近被保データ.getShikakuShutokuJiyuCode());
         builder.set資格取得年月日(直近被保データ.getShikakuShutokuYMD());
@@ -747,7 +755,7 @@ public class JuminIdoRendoTennyuManager {
         HihokenshaDaicho business = new HihokenshaDaicho(直近被保データ.getHihokenshaNo(), 転入前Entity.get年齢到達日(), 枝番);
         HihokenshaDaichoBuilder builder = business.createBuilderForEdit();
         builder.set異動事由コード(ShikakuHenkoJiyu._１号到達.getコード());
-        builder.set市町村コード(直近被保データ.getShichosonCode());
+        builder.set市町村コード(nullOrEntity(直近被保データ.getShichosonCode()));
         builder.set識別コード(new ShikibetsuCode(直近被保データ.getShikakuSoshitsuJiyuCode().toString()));
         builder.set資格取得事由コード(直近被保データ.getShikakuShutokuJiyuCode());
         builder.set資格取得年月日(直近被保データ.getShikakuShutokuYMD());
@@ -777,7 +785,7 @@ public class JuminIdoRendoTennyuManager {
         HihokenshaDaicho business = new HihokenshaDaicho(直近被保データ.getHihokenshaNo(), 転入前Entity.get登録異動日(), 枝番);
         HihokenshaDaichoBuilder builder = business.createBuilderForEdit();
         builder.set異動事由コード(ShikakuJutokuKaijoJiyu.自特例転入.getコード());
-        builder.set市町村コード(直近被保データ.getShichosonCode());
+        builder.set市町村コード(nullOrEntity(直近被保データ.getShichosonCode()));
         builder.set識別コード(直近被保データ.getShikibetsuCode());
         builder.set資格取得事由コード(直近被保データ.getShikakuShutokuJiyuCode());
         builder.set資格取得年月日(直近被保データ.getShikakuShutokuYMD());
@@ -790,7 +798,10 @@ public class JuminIdoRendoTennyuManager {
         builder.set資格変更事由コード(直近被保データ.getShikakuHenkoJiyuCode());
         builder.set資格変更年月日(直近被保データ.getShikakuHenkoYMD());
         builder.set資格変更届出年月日(直近被保データ.getShikakuHenkoTodokedeYMD());
-        builder.set住所地特例適用事由コード(ShikakuJutokuKaijoJiyu.自特例転入.getコード());
+        builder.set住所地特例適用事由コード(直近被保データ.getJushochitokureiTekiyoJiyuCode());
+        builder.set適用年月日(直近被保データ.getJushochitokureiTekiyoYMD());
+        builder.set適用届出年月日(直近被保データ.getJushochitokureiTekiyoTodokedeYMD());
+        builder.set住所地特例解除事由コード(ShikakuJutokuKaijoJiyu.自特例転入.getコード());
         builder.set解除年月日(転入前Entity.get登録異動日());
         builder.set解除届出年月日(転入前Entity.get登録届出日());
         builder.set住所地特例フラグ(特例フラグ);
@@ -807,7 +818,7 @@ public class JuminIdoRendoTennyuManager {
         HihokenshaDaicho business = new HihokenshaDaicho(直近被保データ.getHihokenshaNo(), 転入前Entity.get登録異動日(), 枝番_1);
         HihokenshaDaichoBuilder builder = business.createBuilderForEdit();
         builder.set異動事由コード(ShikakuHenkoJiyu.広住特転入.getコード());
-        builder.set市町村コード(直近被保データ.getShichosonCode());
+        builder.set市町村コード(nullOrEntity(直近被保データ.getShichosonCode()));
         builder.set識別コード(直近被保データ.getShikibetsuCode());
         builder.set資格取得事由コード(直近被保データ.getShikakuShutokuJiyuCode());
         builder.set資格取得年月日(nullorentity(直近被保データ.getShikakuShutokuYMD()));
@@ -835,7 +846,7 @@ public class JuminIdoRendoTennyuManager {
         HihokenshaDaicho business = new HihokenshaDaicho(直近被保データ.getHihokenshaNo(), 転入前Entity.get登録異動日(), 枝番);
         HihokenshaDaichoBuilder builder = business.createBuilderForEdit();
         builder.set異動事由コード(ShikakuJutokuKaijoJiyu.自特例転入.getコード());
-        builder.set市町村コード(直近被保データ.getShichosonCode());
+        builder.set市町村コード(nullOrEntity(直近被保データ.getShichosonCode()));
         builder.set識別コード(直近被保データ.getShikibetsuCode());
         builder.set資格取得事由コード(直近被保データ.getShikakuShutokuJiyuCode());
         builder.set資格取得年月日(直近被保データ.getShikakuShutokuYMD());
@@ -848,7 +859,10 @@ public class JuminIdoRendoTennyuManager {
         builder.set資格変更事由コード(直近被保データ.getShikakuHenkoJiyuCode());
         builder.set資格変更年月日(直近被保データ.getShikakuHenkoYMD());
         builder.set資格変更届出年月日(直近被保データ.getShikakuHenkoTodokedeYMD());
-        builder.set住所地特例適用事由コード(ShikakuJutokuKaijoJiyu.自特例転入.getコード());
+        builder.set住所地特例適用事由コード(直近被保データ.getJushochitokureiTekiyoJiyuCode());
+        builder.set適用年月日(直近被保データ.getJushochitokureiTekiyoYMD());
+        builder.set適用届出年月日(直近被保データ.getJushochitokureiTekiyoTodokedeYMD());
+        builder.set住所地特例解除事由コード(ShikakuJutokuKaijoJiyu.自特例転入.getコード());
         builder.set解除年月日(転入前Entity.get登録異動日());
         builder.set解除届出年月日(転入前Entity.get登録届出日());
         builder.set住所地特例フラグ(特例フラグ);
@@ -865,7 +879,7 @@ public class JuminIdoRendoTennyuManager {
         HihokenshaDaicho business = new HihokenshaDaicho(直近被保データ.getHihokenshaNo(), 転入前Entity.get登録異動日(), 枝番_1);
         HihokenshaDaichoBuilder builder = business.createBuilderForEdit();
         builder.set異動事由コード(ShikakuHenkoJiyu.広住特転入.getコード());
-        builder.set市町村コード(直近被保データ.getShichosonCode());
+        builder.set市町村コード(nullOrEntity(直近被保データ.getShichosonCode()));
         builder.set識別コード(直近被保データ.getShikibetsuCode());
         builder.set資格取得事由コード(直近被保データ.getShikakuShutokuJiyuCode());
         builder.set資格取得年月日(直近被保データ.getShikakuShutokuYMD());
@@ -878,7 +892,10 @@ public class JuminIdoRendoTennyuManager {
         builder.set資格変更事由コード(ShikakuHenkoJiyu.広住特転入.getコード());
         builder.set資格変更年月日(転入前Entity.get登録異動日());
         builder.set資格変更届出年月日(転入前Entity.get登録届出日());
-        builder.set住所地特例適用事由コード(ShikakuJutokuKaijoJiyu.自特例転入.getコード());
+        builder.set住所地特例適用事由コード(直近被保データ.getJushochitokureiTekiyoJiyuCode());
+        builder.set適用年月日(直近被保データ.getJushochitokureiTekiyoYMD());
+        builder.set適用届出年月日(直近被保データ.getJushochitokureiTekiyoTodokedeYMD());
+        builder.set住所地特例解除事由コード(ShikakuJutokuKaijoJiyu.自特例転入.getコード());
         builder.set解除年月日(転入前Entity.get登録異動日());
         builder.set解除届出年月日(転入前Entity.get登録届出日());
         builder.set住所地特例フラグ(特例フラグ);
@@ -893,7 +910,7 @@ public class JuminIdoRendoTennyuManager {
         HihokenshaDaicho business = new HihokenshaDaicho(直近被保データ.getHihokenshaNo(), 転入前Entity.get年齢到達日(), 枝番);
         HihokenshaDaichoBuilder builder = business.createBuilderForEdit();
         builder.set異動事由コード(ShikakuHenkoJiyu._１号到達.getコード());
-        builder.set市町村コード((直近被保データ.getShichosonCode()));
+        builder.set市町村コード(nullOrEntity(直近被保データ.getShichosonCode()));
         builder.set識別コード(直近被保データ.getShikibetsuCode());
         builder.set資格取得事由コード(直近被保データ.getShikakuShutokuJiyuCode());
         builder.set資格取得年月日(直近被保データ.getShikakuShutokuYMD());
@@ -906,7 +923,10 @@ public class JuminIdoRendoTennyuManager {
         builder.set資格変更事由コード(ShikakuHenkoJiyu._１号到達.getコード());
         builder.set資格変更年月日(転入前Entity.get年齢到達日());
         builder.set資格変更届出年月日(転入前Entity.get年齢到達日());
-        builder.set住所地特例適用事由コード(ShikakuJutokuKaijoJiyu.自特例転入.getコード());
+        builder.set住所地特例適用事由コード(直近被保データ.getJushochitokureiTekiyoJiyuCode());
+        builder.set適用年月日(直近被保データ.getJushochitokureiTekiyoYMD());
+        builder.set適用届出年月日(直近被保データ.getJushochitokureiTekiyoTodokedeYMD());
+        builder.set住所地特例解除事由コード(ShikakuJutokuKaijoJiyu.自特例転入.getコード());
         builder.set解除年月日(転入前Entity.get登録異動日());
         builder.set解除届出年月日(転入前Entity.get登録届出日());
         builder.set住所地特例フラグ(特例フラグ);
@@ -954,6 +974,13 @@ public class JuminIdoRendoTennyuManager {
     private FlexibleDate nullorentity(FlexibleDate obj) {
         if (obj == null) {
             return FlexibleDate.EMPTY;
+        }
+        return obj;
+    }
+
+    private LasdecCode nullOrEntity(LasdecCode obj) {
+        if (obj == null) {
+            return LasdecCode.EMPTY;
         }
         return obj;
     }

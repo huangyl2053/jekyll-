@@ -40,7 +40,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -80,8 +79,6 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
     private static final Code CODE_0003 = new Code("0003");
     private static final Code CODE_003 = new Code("003");
     private static final RString 発行する = new RString("btnReportPublish");
-    private static final RString 再検索する = new RString("btnResearch");
-    private static final RString 検索結果一覧へ = new RString("btnSearchResult");
 
     /**
      * コンストラクタです。
@@ -103,10 +100,8 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         div.getKogakuGassanShikyuKetteiTsuchishoSakuseiKihon().initialize(識別コード);
         div.getKogakuGassanShikyuKetteiTsuchishoSakuseiKaigoKihon().initialize(被保険者番号);
-        if (!get前排他(被保険者番号.getColumnValue())) {
-            状態4();
-            throw new PessimisticLockingException();
-        }
+        div.setDisabled(false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(発行する, false);
         AccessLogger.log(AccessLogType.照会, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
         JukyushaDaichoManager manage1 = new JukyushaDaichoManager();
         List<JukyushaDaicho> 受給者台帳 = manage1.get受給者台帳情報(被保険者番号);
@@ -491,20 +486,6 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
         div.getTxtHakkouYMD().setDisabled(true);
         div.getTxtShiharaiYoteiYMD().setDisabled(true);
         div.getCcdBunshoNO().setDisabled(true);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(発行する, true);
-    }
-
-    /**
-     * 状態4設定です。
-     *
-     */
-    public void 状態4() {
-        div.setVisible(false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(再検索する, true);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(再検索する, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(検索結果一覧へ, true);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(検索結果一覧へ, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(発行する, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(発行する, true);
     }
 

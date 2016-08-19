@@ -16,22 +16,24 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBD-1771-033 donghj
  */
 @lombok.Getter
+@lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class YokaigoNinteiTsukibetsuJukyushaMybatisParameter implements IMyBatisParameter {
 
-    private final RString 基準フラグ;
-    private final FlexibleDate 年齢基準日;
-    private final FlexibleDate 基準年月日;
-    private final RString 基準年月;
-    private final FlexibleDate 生年月日From;
-    private final FlexibleDate 生年月日To;
-    private final FlexibleDate 生年月日From2;
-    private final FlexibleDate 生年月日To2;
-    private final RString 地区区分;
-    private final Code 開始地区コード;
-    private final Code 終了地区コード;
-    private final RString 集計単位;
-    private final RString psmShikibetsuTaisho;
+    private boolean is基準フラグ0;
+    private boolean is基準フラグ1;
+    private FlexibleDate 年齢基準日;
+    private FlexibleDate 基準年月日;
+    private RString 基準年月;
+    private FlexibleDate 生年月日From;
+    private FlexibleDate 生年月日To;
+    private FlexibleDate 生年月日From2;
+    private FlexibleDate 生年月日To2;
+    private RString 地区区分;
+    private Code 開始地区コード;
+    private Code 終了地区コード;
+    private RString 集計単位;
+    private RString psmShikibetsuTaisho;
 
     /**
      * コンストラクタです。
@@ -50,10 +52,25 @@ public class YokaigoNinteiTsukibetsuJukyushaMybatisParameter implements IMyBatis
      * @param 年齢To 年齢To
      * @param psmShikibetsuTaisho psmShikibetsuTaisho
      */
-    public YokaigoNinteiTsukibetsuJukyushaMybatisParameter(RString 基準フラグ, FlexibleDate 年齢基準日, FlexibleDate 基準年月日,
-            RString 基準年月, FlexibleDate 生年月日From, FlexibleDate 生年月日To, RString 地区区分, Code 開始地区コード, Code 終了地区コード,
-            RString 集計単位, int 年齢From, int 年齢To, RString psmShikibetsuTaisho) {
-        this.基準フラグ = 基準フラグ;
+    public YokaigoNinteiTsukibetsuJukyushaMybatisParameter(
+            RString 基準フラグ,
+            FlexibleDate 年齢基準日,
+            FlexibleDate 基準年月日,
+            RString 基準年月,
+            FlexibleDate 生年月日From,
+            FlexibleDate 生年月日To,
+            RString 地区区分,
+            Code 開始地区コード,
+            Code 終了地区コード,
+            RString 集計単位,
+            int 年齢From,
+            int 年齢To,
+            RString psmShikibetsuTaisho) {
+        if (基準フラグ.equals(new RString("0"))) {
+            this.is基準フラグ0 = true;
+        } else if (基準フラグ.equals(new RString("1"))) {
+            this.is基準フラグ1 = true;
+        }
         this.年齢基準日 = 年齢基準日;
         this.基準年月日 = 基準年月日;
         this.基準年月 = 基準年月;
@@ -66,7 +83,5 @@ public class YokaigoNinteiTsukibetsuJukyushaMybatisParameter implements IMyBatis
         this.終了地区コード = 終了地区コード;
         this.集計単位 = 集計単位;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
-
     }
-
 }

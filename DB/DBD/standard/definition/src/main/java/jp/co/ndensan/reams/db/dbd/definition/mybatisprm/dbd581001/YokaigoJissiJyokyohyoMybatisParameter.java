@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * バッチパラメタークラスです．
+ * 要介護認定実施状況表（統計表）バッチパラメタークラスです．
  *
  * @reamsid_L DBD-1771-020 chenxin
  */
@@ -50,6 +50,22 @@ public class YokaigoJissiJyokyohyoMybatisParameter implements IMyBatisParameter 
     private FlexibleDate 対象年月日To;
     private RString psmShikibetsuTaisho;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param 導入形態コード
+     * @param 概況調査テキストイメージ区分
+     * @param 年齢基準日
+     * @param 年齢From
+     * @param 年齢To
+     * @param 生年月日From
+     * @param 生年月日To
+     * @param 地区区分
+     * @param 開始地区コード
+     * @param 終了地区コード
+     * @param 集計単位
+     * @param psmShikibetsuTaisho
+     */
     public YokaigoJissiJyokyohyoMybatisParameter(
             RString 導入形態コード,
             RString 概況調査テキストイメージ区分,

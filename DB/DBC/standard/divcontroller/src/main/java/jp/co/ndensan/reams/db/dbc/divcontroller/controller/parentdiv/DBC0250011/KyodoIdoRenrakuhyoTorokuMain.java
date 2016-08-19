@@ -103,8 +103,18 @@ public class KyodoIdoRenrakuhyoTorokuMain {
      * @return ResponseData
      */
     public ResponseData<SourceDataCollection> onClick_btnReportPublish(KyodoIdoRenrakuhyoTorokuMainDiv div) {
+        return ResponseData.of(getHandler(div).to帳票発行処理()).respond();
+    }
+
+    /**
+     * 「発行」ボタンを更新完了に状態遷移のメソッドです。
+     *
+     * @param div 画面Div
+     * @return ResponseData
+     */
+    public ResponseData<KyodoIdoRenrakuhyoTorokuMainDiv> toAfterPrint(KyodoIdoRenrakuhyoTorokuMainDiv div) {
         getHandler(div).set更新完了メッセージ();
-        return ResponseData.of(getHandler(div).to帳票発行処理()).setState(DBC0250011StateName.更新完了);
+        return ResponseData.of(div).setState(DBC0250011StateName.更新完了);
     }
 
     /**
