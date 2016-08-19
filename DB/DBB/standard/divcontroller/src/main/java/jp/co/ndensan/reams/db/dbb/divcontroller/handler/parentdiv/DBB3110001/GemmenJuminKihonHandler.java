@@ -1209,7 +1209,12 @@ public class GemmenJuminKihonHandler {
         } else {
             決定情報パネル.getRadKetteiKubun().setSelectedValue(承認);
         }
-        決定情報パネル.getTxtKetteiRiyu().setValue(介護賦課減免.get減免事由());
+        RString 減免事由 = 介護賦課減免.get減免事由();
+        if (減免事由 == null || 減免事由.isEmpty()) {
+            決定情報パネル.getTxtKetteiRiyu().clearValue();
+        } else {
+            決定情報パネル.getTxtKetteiRiyu().setValue(介護賦課減免.get減免事由());
+        }
     }
 
     private Code set申請情報パネル(Gemmen 介護賦課減免, ShinseiinfoDiv 申請情報パネル) {
@@ -1221,7 +1226,12 @@ public class GemmenJuminKihonHandler {
             申請情報パネル.getTxtGemmenShurui().setValue(CodeMaster.getCodeRyakusho(
                     SubGyomuCode.DBB介護賦課, 減免種類_コード種別, 介護賦課減免.get減免取消種類コード(), FlexibleDate.getNowDate()));
         }
-        申請情報パネル.getTxtShinseiRiyu().setValue(介護賦課減免.get申請事由());
+        RString 申請事由 = 介護賦課減免.get申請事由();
+        if (申請事由 == null || 申請事由.isEmpty()) {
+            申請情報パネル.getTxtShinseiRiyu().clearValue();
+        } else {
+            申請情報パネル.getTxtShinseiRiyu().setValue(申請事由);
+        }
         return 介護賦課減免.get減免取消種類コード();
     }
 
