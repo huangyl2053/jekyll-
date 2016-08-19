@@ -5,7 +5,7 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3054KogakuKyufuTaishoshaMeisaiMapper">
-    
+
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT3054KogakuKyufuTaishoshaMeisai">
      SELECT
@@ -38,7 +38,7 @@
 
 
     <!--テーブルDbT3054KogakuKyufuTaishoshaMeisaiの項目をDbT3054KogakuKyufuTaishoshaMeisaiEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT3054KogakuKyufuTaishoshaMeisaiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3054KogakuKyufuTaishoshaMeisaiEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT3054KogakuKyufuTaishoshaMeisaiEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3054KogakuKyufuTaishoshaMeisaiEntity" autoMapping="true">
         <id property="hihokenshaNo" column="dbT3054KogakuKyufuTaishoshaMeisai_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="serviceTeikyoYM" column="dbT3054KogakuKyufuTaishoshaMeisai_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <id property="jigyoshaNo" column="dbT3054KogakuKyufuTaishoshaMeisai_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
