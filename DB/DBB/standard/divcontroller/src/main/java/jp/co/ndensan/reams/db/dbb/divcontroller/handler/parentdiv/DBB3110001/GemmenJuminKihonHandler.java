@@ -262,11 +262,19 @@ public class GemmenJuminKihonHandler {
         }
         GemmenJoho 過年度1 = 減免リスト.get年度分賦課減免リスト().get過年度1();
         GemmenJoho 過年度2 = 減免リスト.get年度分賦課減免リスト().get過年度2();
+        KiwarigakuKanendo1Div 過年度1パネル = div.getGemmenMain().getKiwarigaku().getKiwarigakuKanendo1();
+        KiwarigakuKanendo2Div 過年度2パネル = div.getGemmenMain().getKiwarigaku().getKiwarigakuKanendo2();
         if (過年度1 != null && 過年度2 == null) {
+            過年度1パネル.setDisplayNone(false);
+            過年度2パネル.setDisplayNone(true);
             set過年度情報グリッド1(過年度1);
         } else if (過年度1 == null && 過年度2 != null) {
+            過年度1パネル.setDisplayNone(false);
+            過年度2パネル.setDisplayNone(true);
             set過年度情報グリッド1(過年度2);
         } else if (過年度1 != null && 過年度2 != null) {
+            過年度1パネル.setDisplayNone(false);
+            過年度2パネル.setDisplayNone(false);
             set過年度情報グリッド1(過年度1);
             set過年度情報グリッド2(過年度2);
         }
@@ -453,18 +461,25 @@ public class GemmenJuminKihonHandler {
         }
         Kibetsu 介護期別情報 = 介護期別情報リスト.get(ゼロ_定値);
         int 期 = 介護期別情報.get期();
-        int 月_期 = 過年度期月リスト.get期の最初月(期).get月AsInt();
+        List<Kitsuki> 期の月List = 過年度期月リスト.get期の月(期);
+        int 月_期 = 期の月List.get(0).get月AsInt();
         RString 月 = new RString(月_期).concat(月R);
         過年度1パネル.getLblKiwarigaku24Gatsu().setText(月);
         過年度1パネル.getKiwarigakuPanel2().getKi1().setText(new RString(期).concat(期R));
         Decimal 普徴期別金額 = get減免前普徴期別金額(new RString(期), 過年度1);
         if (普徴期別金額 != null) {
             過年度1パネル.getKiwarigakuPanel2().getMae1().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額, ゼロ_定値));
+            過年度1パネル.getKiwarigakuPanel2().getMaeTotalMae1().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額, ゼロ_定値));
+        } else {
+            過年度1パネル.getKiwarigakuPanel2().getMae1().setText(null);
+            過年度1パネル.getKiwarigakuPanel2().getMaeTotalMae1().setText(null);
         }
         Noki 賦課納期 = FukaNokiResearcher.createInstance().get過年度納期(期);
         RDate 納期限 = 賦課納期.get納期限();
         if (納期限 != null) {
             過年度1パネル.getKiwarigakuPanel2().getNokigen1().setText(納期限.wareki().toDateString());
+        } else {
+            過年度1パネル.getKiwarigakuPanel2().getNokigen1().setText(null);
         }
     }
 
@@ -480,18 +495,25 @@ public class GemmenJuminKihonHandler {
         }
         Kibetsu 介護期別情報 = 介護期別情報リスト.get(ゼロ_定値);
         int 期 = 介護期別情報.get期();
-        int 月_期 = 過年度期月リスト.get期の最初月(期).get月AsInt();
+        List<Kitsuki> 期の月List = 過年度期月リスト.get期の月(期);
+        int 月_期 = 期の月List.get(0).get月AsInt();
         RString 月 = new RString(月_期).concat(月R);
         過年度2パネル.getLblKiwarigaku34Gatsu().setText(月);
         過年度2パネル.getKiwarigakuPanel3().getKi2().setText(new RString(期).concat(期R));
         Decimal 普徴期別金額 = get減免前普徴期別金額(new RString(期), 過年度2);
         if (普徴期別金額 != null) {
             過年度2パネル.getKiwarigakuPanel3().getMae2().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額, ゼロ_定値));
+            過年度2パネル.getKiwarigakuPanel3().getMaeTotalMae2().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額, ゼロ_定値));
+        } else {
+            過年度2パネル.getKiwarigakuPanel3().getMae2().setText(null);
+            過年度2パネル.getKiwarigakuPanel3().getMaeTotalMae2().setText(null);
         }
         Noki 賦課納期 = FukaNokiResearcher.createInstance().get過年度納期(期);
         RDate 納期限 = 賦課納期.get納期限();
         if (納期限 != null) {
             過年度2パネル.getKiwarigakuPanel3().getNokigen().setText(納期限.wareki().toDateString());
+        } else {
+            過年度2パネル.getKiwarigakuPanel3().getNokigen().setText(null);
         }
     }
 
@@ -519,26 +541,38 @@ public class GemmenJuminKihonHandler {
         if (特徴期別金額_4月 != null) {
             特別徴収_合計 = 特別徴収_合計.add(特徴期別金額_4月);
             減免情報パネル.getLblTokuchoGemmemMae1().setText(DecimalFormatter.toコンマ区切りRString(特徴期別金額_4月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblTokuchoGemmemMae1().setText(null);
         }
         if (特徴期別金額_6月 != null) {
             特別徴収_合計 = 特別徴収_合計.add(特徴期別金額_6月);
             減免情報パネル.getLblTokuchoGemmemMae2().setText(DecimalFormatter.toコンマ区切りRString(特徴期別金額_6月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblTokuchoGemmemMae2().setText(null);
         }
         if (特徴期別金額_8月 != null) {
             特別徴収_合計 = 特別徴収_合計.add(特徴期別金額_8月);
             減免情報パネル.getLblTokuchoGemmemMae3().setText(DecimalFormatter.toコンマ区切りRString(特徴期別金額_8月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblTokuchoGemmemMae3().setText(null);
         }
         if (特徴期別金額_10月 != null) {
             特別徴収_合計 = 特別徴収_合計.add(特徴期別金額_10月);
             減免情報パネル.getLblTokuchoGemmemMae4().setText(DecimalFormatter.toコンマ区切りRString(特徴期別金額_10月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblTokuchoGemmemMae4().setText(null);
         }
         if (特徴期別金額_12月 != null) {
             特別徴収_合計 = 特別徴収_合計.add(特徴期別金額_12月);
             減免情報パネル.getLblTokuchoGemmemMae5().setText(DecimalFormatter.toコンマ区切りRString(特徴期別金額_12月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblTokuchoGemmemMae5().setText(null);
         }
         if (特徴期別金額_2月 != null) {
-            特別徴収_合計 = 特別徴収_合計.add(特徴期別金額_4月);
+            特別徴収_合計 = 特別徴収_合計.add(特徴期別金額_2月);
             減免情報パネル.getLblTokuchoGemmemMae6().setText(DecimalFormatter.toコンマ区切りRString(特徴期別金額_2月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblTokuchoGemmemMae6().setText(null);
         }
         減免情報パネル.getLblTokuchoGemmemMaeTotal().setText(DecimalFormatter.toコンマ区切りRString(特別徴収_合計, ゼロ_定値));
     }
@@ -709,58 +743,86 @@ public class GemmenJuminKihonHandler {
         if (普徴期別金額_4月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_4月);
             減免情報パネル.getLblFuchoGemmemGo13().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_4月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemGo13().setText(null);
         }
         if (普徴期別金額_5月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_5月);
             減免情報パネル.getLblFuchoGemmemGo14().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_5月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemGo14().setText(null);
         }
         if (普徴期別金額_6月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_6月);
             減免情報パネル.getLblFuchoGemmemGo1().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_6月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemGo1().setText(null);
         }
         if (普徴期別金額_7月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_7月);
             減免情報パネル.getLblFuchoGemmemGo2().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_7月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemGo2().setText(null);
         }
         if (普徴期別金額_8月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_8月);
             減免情報パネル.getLblFuchoGemmemGo3().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_8月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemGo3().setText(null);
         }
         if (普徴期別金額_9月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_9月);
             減免情報パネル.getLblFuchoGemmemGo4().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_9月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemGo4().setText(null);
         }
         if (普徴期別金額_10月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_10月);
             減免情報パネル.getLblFuchoGemmemGo5().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_10月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemGo5().setText(null);
         }
         if (普徴期別金額_11月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_11月);
             減免情報パネル.getLblFuchoGemmemGo6().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_11月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemGo6().setText(null);
         }
         if (普徴期別金額_12月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_12月);
             減免情報パネル.getLblFuchoGemmemGo7().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_12月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemGo7().setText(null);
         }
         if (普徴期別金額_1月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_1月);
             減免情報パネル.getLblFuchoGemmemGo8().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_1月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemGo8().setText(null);
         }
         if (普徴期別金額_2月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_2月);
             減免情報パネル.getLblFuchoGemmemGo9().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_2月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemGo9().setText(null);
         }
         if (普徴期別金額_3月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_3月);
             減免情報パネル.getLblFuchoGemmemGo10().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_3月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemGo10().setText(null);
         }
         if (普徴期別金額_翌年4月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_翌年4月);
             減免情報パネル.getLblFuchoGemmemGo11().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_翌年4月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemGo11().setText(null);
         }
         if (普徴期別金額_翌年5月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_翌年5月);
             減免情報パネル.getLblFuchoGemmemGo12().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_翌年5月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemGo12().setText(null);
         }
         return 普通徴収_合計;
     }
@@ -773,58 +835,86 @@ public class GemmenJuminKihonHandler {
         if (普徴期別金額_4月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_4月);
             減免情報パネル.getLblFuchoGemmemMae13().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_4月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemMae13().setText(null);
         }
         if (普徴期別金額_5月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_5月);
             減免情報パネル.getLblFuchoGemmemMae14().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_5月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemMae14().setText(null);
         }
         if (普徴期別金額_6月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_6月);
             減免情報パネル.getLblFuchoGemmemMae1().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_6月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemMae1().setText(null);
         }
         if (普徴期別金額_7月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_7月);
             減免情報パネル.getLblFuchoGemmemMae2().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_7月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemMae2().setText(null);
         }
         if (普徴期別金額_8月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_8月);
             減免情報パネル.getLblFuchoGemmemMae3().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_8月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemMae3().setText(null);
         }
         if (普徴期別金額_9月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_9月);
             減免情報パネル.getLblFuchoGemmemMae4().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_9月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemMae4().setText(null);
         }
         if (普徴期別金額_10月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_10月);
             減免情報パネル.getLblFuchoGemmemMae5().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_10月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemMae5().setText(null);
         }
         if (普徴期別金額_11月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_11月);
             減免情報パネル.getLblFuchoGemmemMae6().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_11月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemMae6().setText(null);
         }
         if (普徴期別金額_12月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_12月);
             減免情報パネル.getLblFuchoGemmemMae7().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_12月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemMae7().setText(null);
         }
         if (普徴期別金額_1月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_1月);
             減免情報パネル.getLblFuchoGemmemMae8().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_1月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemMae8().setText(null);
         }
         if (普徴期別金額_2月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_2月);
             減免情報パネル.getLblFuchoGemmemMae9().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_2月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemMae9().setText(null);
         }
         if (普徴期別金額_3月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_3月);
             減免情報パネル.getLblFuchoGemmemMae10().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_3月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemMae10().setText(null);
         }
         if (普徴期別金額_翌年4月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_翌年4月);
             減免情報パネル.getLblFuchoGemmemMae11().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_翌年4月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemMae11().setText(null);
         }
         if (普徴期別金額_翌年5月 != null) {
             普通徴収_合計 = 普通徴収_合計.add(普徴期別金額_翌年5月);
             減免情報パネル.getLblFuchoGemmemMae12().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額_翌年5月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblFuchoGemmemMae12().setText(null);
         }
         return 普通徴収_合計;
     }
@@ -1020,9 +1110,13 @@ public class GemmenJuminKihonHandler {
         }
         jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu 介護期別情報 = 介護期別情報リスト.get(ゼロ_定値);
         Decimal 普徴期別金額 = get減免前普徴期別金額(new RString(介護期別情報.get期()), 過年度1);
+        KiwarigakuKanendo1Div 過年度1パネル = div.getGemmenMain().getKiwarigaku().getKiwarigakuKanendo1();
         if (普徴期別金額 != null) {
-            KiwarigakuKanendo1Div 過年度1パネル = div.getGemmenMain().getKiwarigaku().getKiwarigakuKanendo1();
             過年度1パネル.getKiwarigakuPanel2().getGo1().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額, ゼロ_定値));
+            過年度1パネル.getKiwarigakuPanel2().getMaeTotalGo1().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額, ゼロ_定値));
+        } else {
+            過年度1パネル.getKiwarigakuPanel2().getGo1().setText(null);
+            過年度1パネル.getKiwarigakuPanel2().getMaeTotalGo1().setText(null);
         }
     }
 
@@ -1040,9 +1134,13 @@ public class GemmenJuminKihonHandler {
         }
         jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu 介護期別情報 = 介護期別情報リスト.get(ゼロ_定値);
         Decimal 普徴期別金額 = get減免前普徴期別金額(new RString(介護期別情報.get期()), 過年度2);
+        KiwarigakuKanendo2Div 過年度2パネル = div.getGemmenMain().getKiwarigaku().getKiwarigakuKanendo2();
         if (普徴期別金額 != null) {
-            KiwarigakuKanendo2Div 過年度2パネル = div.getGemmenMain().getKiwarigaku().getKiwarigakuKanendo2();
             過年度2パネル.getKiwarigakuPanel3().getGo2().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額, ゼロ_定値));
+            過年度2パネル.getKiwarigakuPanel3().getMaeTotalGo2().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額, ゼロ_定値));
+        } else {
+            過年度2パネル.getKiwarigakuPanel3().getGo2().setText(null);
+            過年度2パネル.getKiwarigakuPanel3().getMaeTotalGo2().setText(null);
         }
     }
 
@@ -1075,26 +1173,38 @@ public class GemmenJuminKihonHandler {
         if (特徴期別金額_4月 != null) {
             特別徴収_合計 = 特別徴収_合計.add(特徴期別金額_4月);
             減免情報パネル.getLblTokuchoGemmemGo1().setText(DecimalFormatter.toコンマ区切りRString(特徴期別金額_4月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblTokuchoGemmemGo1().setText(null);
         }
         if (特徴期別金額_6月 != null) {
             特別徴収_合計 = 特別徴収_合計.add(特徴期別金額_6月);
             減免情報パネル.getLblTokuchoGemmemGo2().setText(DecimalFormatter.toコンマ区切りRString(特徴期別金額_6月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblTokuchoGemmemGo2().setText(null);
         }
         if (特徴期別金額_8月 != null) {
             特別徴収_合計 = 特別徴収_合計.add(特徴期別金額_8月);
             減免情報パネル.getLblTokuchoGemmemGo3().setText(DecimalFormatter.toコンマ区切りRString(特徴期別金額_8月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblTokuchoGemmemGo3().setText(null);
         }
         if (特徴期別金額_10月 != null) {
             特別徴収_合計 = 特別徴収_合計.add(特徴期別金額_10月);
             減免情報パネル.getLblTokuchoGemmemGo4().setText(DecimalFormatter.toコンマ区切りRString(特徴期別金額_10月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblTokuchoGemmemGo4().setText(null);
         }
         if (特徴期別金額_12月 != null) {
             特別徴収_合計 = 特別徴収_合計.add(特徴期別金額_12月);
             減免情報パネル.getLblTokuchoGemmemGo5().setText(DecimalFormatter.toコンマ区切りRString(特徴期別金額_12月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblTokuchoGemmemGo5().setText(null);
         }
         if (特徴期別金額_2月 != null) {
             特別徴収_合計 = 特別徴収_合計.add(特徴期別金額_4月);
             減免情報パネル.getLblTokuchoGemmemGo6().setText(DecimalFormatter.toコンマ区切りRString(特徴期別金額_2月, ゼロ_定値));
+        } else {
+            減免情報パネル.getLblTokuchoGemmemGo6().setText(null);
         }
         減免情報パネル.getLblTokuchoGemmemGoTotal().setText(DecimalFormatter.toコンマ区切りRString(特別徴収_合計, ゼロ_定値));
         return 減免後の特徴と過年度金額LIST;
