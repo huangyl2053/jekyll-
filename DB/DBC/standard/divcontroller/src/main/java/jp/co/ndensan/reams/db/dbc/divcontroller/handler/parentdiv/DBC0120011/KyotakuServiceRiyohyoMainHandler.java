@@ -123,10 +123,10 @@ public class KyotakuServiceRiyohyoMainHandler {
             div.getTxtTodokedeKubun().setValue(居宅給付計画届出.get届出区分());
         }
         div.getTxtTekiyoKikan().setFromValue(new RDate(row.getTekiyoKaishiYMD().getValue().toString()));
-        if (row.getTekiyoKaishiYMD() == null) {
+        if (row.getTekiyoShuryoYMD() == null) {
             div.getTxtTekiyoKikan().clearToValue();
         } else {
-            div.getTxtTekiyoKikan().setToValue(new RDate(row.getTekiyoKaishiYMD().getValue().toString()));
+            div.getTxtTekiyoKikan().setToValue(new RDate(row.getTekiyoShuryoYMD().getValue().toString()));
         }
         set届出者情報(居宅給付計画届出);
     }

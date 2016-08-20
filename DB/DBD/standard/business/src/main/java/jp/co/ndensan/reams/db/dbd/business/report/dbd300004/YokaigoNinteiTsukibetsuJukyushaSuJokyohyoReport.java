@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public final class YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReport extends
         Report<YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource> {
 
+    private static final int NOCOUNT_80 = 80;
     private final FlexibleDate 基準日;
     private final RString 年齢;
     private final RString 地区;
@@ -45,7 +46,7 @@ public final class YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReport extends
         return new YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReport(基準日, 年齢, 地区, 集計単位, 年度, 受給状況Entityリスト);
     }
 
-    public YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReport(FlexibleDate 基準日, RString 年齢, RString 地区,
+    private YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReport(FlexibleDate 基準日, RString 年齢, RString 地区,
             RString 集計単位, FlexibleYear 年度, List<YokaigoNinteiJisshiJokyohyoReportEntity> 受給状況Entityリスト) {
         this.基準日 = 基準日;
         this.年齢 = 年齢;
@@ -62,7 +63,7 @@ public final class YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReport extends
      */
     @Override
     public void writeBy(ReportSourceWriter<YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource> writer) {
-        for (int index = 0; index < 80; index++) {
+        for (int index = 0; index < NOCOUNT_80; index++) {
             IYokaigoNinteiTsukibetsuJukyushaSuJokyohyoEditor bodyEditor
                     = new YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEditor(基準日, 年齢, 地区, 集計単位, 年度, 受給状況Entityリスト, index);
             IYokaigoNinteiTsukibetsuJukyushaSuJokyohyoBuilder builder = new YokaigoNinteiTsukibetsuJukyushaSuJokyohyoBuilder(bodyEditor);
