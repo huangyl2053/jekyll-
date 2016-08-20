@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.IRiyoshaFutanWariaiMeisaiTempMapper">
+
+    <sql id="allColumns_RiyoshaFutanWariaiMeisaiTemp">
+        "RiyoshaFutanWariaiMeisaiTemp"."nendo"as "RiyoshaFutanWariaiMeisaiTemp_nendo",
+        "RiyoshaFutanWariaiMeisaiTemp"."hihokenshaNo"as "RiyoshaFutanWariaiMeisaiTemp_hihokenshaNo",
+        "RiyoshaFutanWariaiMeisaiTemp"."edaNo"as "RiyoshaFutanWariaiMeisaiTemp_edaNo",
+        "RiyoshaFutanWariaiMeisaiTemp"."shikakuKubun"as "RiyoshaFutanWariaiMeisaiTemp_shikakuKubun",
+        "RiyoshaFutanWariaiMeisaiTemp"."futanWariaiKubun"as "RiyoshaFutanWariaiMeisaiTemp_futanWariaiKubun",
+        "RiyoshaFutanWariaiMeisaiTemp"."yukoKaishiYMD"as "RiyoshaFutanWariaiMeisaiTemp_yukoKaishiYMD",
+        "RiyoshaFutanWariaiMeisaiTemp"."yukoShuryoYMD"as "RiyoshaFutanWariaiMeisaiTemp_yukoShuryoYMD",
+        "RiyoshaFutanWariaiMeisaiTemp"."honninGoukeiShotokuGaku"as "RiyoshaFutanWariaiMeisaiTemp_honninGoukeiShotokuGaku",
+        "RiyoshaFutanWariaiMeisaiTemp"."setaiIchigouHihokenshaSu"as "RiyoshaFutanWariaiMeisaiTemp_setaiIchigouHihokenshaSu",
+        "RiyoshaFutanWariaiMeisaiTemp"."nenkinShunyuGoukei"as "RiyoshaFutanWariaiMeisaiTemp_nenkinShunyuGoukei",
+        "RiyoshaFutanWariaiMeisaiTemp"."sonotanoGoukeiShotokuKingakuGoukei"as "RiyoshaFutanWariaiMeisaiTemp_sonotanoGoukeiShotokuKingakuGoukei",
+        "RiyoshaFutanWariaiMeisaiTemp"."koseiRiyu"as "RiyoshaFutanWariaiMeisaiTemp_koseiRiyu",
+        "RiyoshaFutanWariaiMeisaiTemp"."setaiCd"as "RiyoshaFutanWariaiMeisaiTemp_setaiCd",
+        "RiyoshaFutanWariaiMeisaiTemp"."koseiJiyu"as "RiyoshaFutanWariaiMeisaiTemp_koseiJiyu",
+        "RiyoshaFutanWariaiMeisaiTemp"."hanteiKubun"as "RiyoshaFutanWariaiMeisaiTemp_hanteiKubun",
+        "RiyoshaFutanWariaiMeisaiTemp"."ninteiYukoKaishiDate"as "RiyoshaFutanWariaiMeisaiTemp_ninteiYukoKaishiDate",
+        "RiyoshaFutanWariaiMeisaiTemp"."jukyuKaishiYMD"as "RiyoshaFutanWariaiMeisaiTemp_jukyuKaishiYMD",
+        "RiyoshaFutanWariaiMeisaiTemp"."jukyuHaishiYMD"as "RiyoshaFutanWariaiMeisaiTemp_jukyuHaishiYMD",
+        "RiyoshaFutanWariaiMeisaiTemp"."atenaIdobi"as "RiyoshaFutanWariaiMeisaiTemp_atenaIdobi"
+    </sql>
+
+    <sql id="allColumns">
+        "nendo",
+        "hihokenshaNo",
+        "edaNo",
+        "shikakuKubun",
+        "futanWariaiKubun",
+        "yukoKaishiYMD",
+        "yukoShuryoYMD",
+        "honninGoukeiShotokuGaku",
+        "setaiIchigouHihokenshaSu",
+        "nenkinShunyuGoukei",
+        "sonotanoGoukeiShotokuKingakuGoukei",
+        "koseiRiyu",
+        "setaiCd",
+        "koseiJiyu",
+        "hanteiKubun",
+        "ninteiYukoKaishiDate",
+        "jukyuKaishiYMD",
+        "jukyuHaishiYMD",
+        "atenaIdobi"
+    </sql>
+
+    <resultMap id="ResultMap_RiyoshaFutanWariaiMeisaiTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.RiyoshaFutanWariaiMeisaiTempEntity" autoMapping="true">
+        <result property="nendo" column="RiyoshaFutanWariaiMeisaiTemp_nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="hihokenshaNo" column="RiyoshaFutanWariaiMeisaiTemp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="edaNo" column="RiyoshaFutanWariaiMeisaiTemp_edaNo" />
+        <result property="shikakuKubun" column="RiyoshaFutanWariaiMeisaiTemp_shikakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanWariaiKubun" column="RiyoshaFutanWariaiMeisaiTemp_futanWariaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yukoKaishiYMD" column="RiyoshaFutanWariaiMeisaiTemp_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="yukoShuryoYMD" column="RiyoshaFutanWariaiMeisaiTemp_yukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="honninGoukeiShotokuGaku" column="RiyoshaFutanWariaiMeisaiTemp_honninGoukeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="setaiIchigouHihokenshaSu" column="RiyoshaFutanWariaiMeisaiTemp_setaiIchigouHihokenshaSu" />
+        <result property="nenkinShunyuGoukei" column="RiyoshaFutanWariaiMeisaiTemp_nenkinShunyuGoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sonotanoGoukeiShotokuKingakuGoukei" column="RiyoshaFutanWariaiMeisaiTemp_sonotanoGoukeiShotokuKingakuGoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="koseiRiyu" column="RiyoshaFutanWariaiMeisaiTemp_koseiRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiCd" column="RiyoshaFutanWariaiMeisaiTemp_setaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
+        <result property="koseiJiyu" column="RiyoshaFutanWariaiMeisaiTemp_koseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hanteiKubun" column="RiyoshaFutanWariaiMeisaiTemp_hanteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiYukoKaishiDate" column="RiyoshaFutanWariaiMeisaiTemp_ninteiYukoKaishiDate" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jukyuKaishiYMD" column="RiyoshaFutanWariaiMeisaiTemp_jukyuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jukyuHaishiYMD" column="RiyoshaFutanWariaiMeisaiTemp_jukyuHaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="atenaIdobi" column="RiyoshaFutanWariaiMeisaiTemp_atenaIdobi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+
+</mapper>
+
+

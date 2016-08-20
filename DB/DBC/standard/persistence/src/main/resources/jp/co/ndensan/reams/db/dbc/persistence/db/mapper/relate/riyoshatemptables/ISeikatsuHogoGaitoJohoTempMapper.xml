@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-4950-030 liuyang -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.ISeikatsuHogoGaitoJohoTempMapper">
+    <sql id="allColumns_SeikatsuHogoGaitoJohoTemp">
+        "SeikatsuHogoGaitoJohoTemp"."taishoNendo"as "SeikatsuHogoGaitoJohoTemp_taishoNendo",
+        "SeikatsuHogoGaitoJohoTemp"."taishoTsuki"as "SeikatsuHogoGaitoJohoTemp_taishoTsuki",
+        "SeikatsuHogoGaitoJohoTemp"."shikibetsuCode"as "SeikatsuHogoGaitoJohoTemp_shikibetsuCode",
+        "SeikatsuHogoGaitoJohoTemp"."jukyuKaishiYMD"as "SeikatsuHogoGaitoJohoTemp_jukyuKaishiYMD",
+        "SeikatsuHogoGaitoJohoTemp"."jukyuHaishiYMD"as "SeikatsuHogoGaitoJohoTemp_jukyuHaishiYMD"
+    </sql>
+
+    <resultMap id="ResultMap_SeikatsuHogoGaitoJohoTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SeikatsuHogoGaitoJohoTempEntity" autoMapping="true">
+        <result property="taishoNendo" column="SeikatsuHogoGaitoJohoTemp_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="taishoTsuki" column="SeikatsuHogoGaitoJohoTemp_taishoTsuki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikibetsuCode" column="SeikatsuHogoGaitoJohoTemp_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="jukyuKaishiYMD" column="SeikatsuHogoGaitoJohoTemp_jukyuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jukyuHaishiYMD" column="SeikatsuHogoGaitoJohoTemp_jukyuHaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+</mapper>

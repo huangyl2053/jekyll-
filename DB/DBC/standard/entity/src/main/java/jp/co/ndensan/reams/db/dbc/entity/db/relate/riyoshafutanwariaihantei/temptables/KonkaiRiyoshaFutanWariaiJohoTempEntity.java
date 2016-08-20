@@ -5,10 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
 /**
  * 今回利用者負担割合情報の一時表エンティティです。
@@ -21,38 +23,27 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 public class KonkaiRiyoshaFutanWariaiJohoTempEntity
         extends DbTableEntityBase<KonkaiRiyoshaFutanWariaiJohoTempEntity> implements IDbAccessable {
 
-    @TempTableColumnOrder(1)
-    //年度
-    private RString nendo;
-    @TempTableColumnOrder(2)
     //被保険者番号
-    private RString hihokenshaNo;
-    @TempTableColumnOrder(3)
-    //枝番号
-    private RString edaNo;
-    @TempTableColumnOrder(4)
-    //負担割合区分
-    private boolean futanWariaiKubun;
-    @TempTableColumnOrder(5)
-    //有効開始日
-    private RString yukoKaishiDate;
-    @TempTableColumnOrder(6)
-    //有効終了日
-    private RString yukoShuryoDate;
-    @TempTableColumnOrder(7)
-    //本人合計所得金額
-    private RString honinGokeishotokuKingaku;
-    @TempTableColumnOrder(8)
-    //世帯１号被保険者数
-    private Integer setaiFirstHihokenshaNo;
-    @TempTableColumnOrder(9)
-    //年金収入合計
-    private RString nenkinShunyuGokei;
-    @TempTableColumnOrder(10)
-    //その他の合計所得金額合計
-    private RString sonotaGokeiShotokuKingakuGokei;
-    @TempTableColumnOrder(11)
+    private HihokenshaNo hihokenshaNo;
     //更正事由
     private RString koseiJiyu;
+    //年度
+    private RString nendo;
+    //枝番号
+    private int edaNo;
+    //負担割合区分
+    private RString futanWariaiKubun;
+    //本人合計所得金額
+    private Decimal honinGokeishotokuKingaku;
+    //世帯１号被保険者数
+    private Integer setaiIchigouHihokenshaSu;
+    //有効開始日
+    private FlexibleDate yukoKaishiYMD;
+    //有効終了日
+    private FlexibleDate yukoShuryoYMD;
+    //年金収入合計
+    private Decimal nenkinShunyuGoukei;
+    //その他の合計所得金額合計
+    private Decimal sonotaGokeiShotokuKingaku;
 
 }

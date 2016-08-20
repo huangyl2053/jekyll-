@@ -74,7 +74,7 @@ public class HanteiTaishoshaTempEditor {
         entity.setTaishoNendo(param.get対象年度());
         entity.setTaishoKubun(出力条件);
         if (定数_0.equals(出力条件)) {
-            entity.setHihokenshaNo(異動データ.get被保険者台帳().getHihokenshaNo().getColumnValue());
+            entity.setHihokenshaNo(異動データ.get被保険者台帳().getHihokenshaNo());
             entity.setCityCode(RString.EMPTY);
             entity.setRirekiNo(RString.EMPTY);
             entity.setEdaNo(RString.EMPTY);
@@ -84,7 +84,7 @@ public class HanteiTaishoshaTempEditor {
             entity.setNinteiDate(FlexibleDate.EMPTY);
             entity.setYoKaigoninteiJoutaiKubunCode(RString.EMPTY);
         } else if (定数_1.equals(出力条件)) {
-            entity.setHihokenshaNo(異動データ.get受給者台帳().getHihokenshaNo().getColumnValue());
+            entity.setHihokenshaNo(異動データ.get受給者台帳().getHihokenshaNo());
             entity.setCityCode(異動データ.get受給者台帳().getShichosonCode().getColumnValue());
             entity.setRirekiNo(異動データ.get受給者台帳().getRirekiNo());
             entity.setEdaNo(異動データ.get受給者台帳().getEdaban());
@@ -103,7 +103,7 @@ public class HanteiTaishoshaTempEditor {
             }
             entity.setKyuSochishaFlag(異動データ.get受給者台帳().getKyuSochishaFlag());
         } else if (定数_2.equals(出力条件)) {
-            entity.setHihokenshaNo(異動データ.get総合事業対象者().getHihokenshaNo().getColumnValue());
+            entity.setHihokenshaNo(異動データ.get総合事業対象者().getHihokenshaNo());
             entity.setCityCode(RString.EMPTY);
             entity.setRirekiNo(new RString(異動データ.get総合事業対象者().getRirekiNo()));
             entity.setEdaNo(RString.EMPTY);
@@ -118,8 +118,8 @@ public class HanteiTaishoshaTempEditor {
             entity.setNinteiDate(異動データ.get総合事業対象者().getChecklistJisshiYMD());
             entity.setYoKaigoninteiJoutaiKubunCode(要介護認定状態区分コード_06.getColumnValue());
         }
-        entity.setShikibetsuCode(異動データ.get被保険者台帳().getShikibetsuCode().getColumnValue());
-        entity.setSetaiCode(異動データ.get世帯コード().getColumnValue());
+        entity.setShikibetsuCode(異動データ.get被保険者台帳().getShikibetsuCode());
+        entity.setSetaiCode(異動データ.get世帯コード());
         entity.setIdoShubetsu(get異動種別名(異動種別));
         if (異動データ.get宛名識別対象異動分() != null) {
             entity.setAtenaIdobi(異動データ.get宛名識別対象異動分().getIdoYMD());

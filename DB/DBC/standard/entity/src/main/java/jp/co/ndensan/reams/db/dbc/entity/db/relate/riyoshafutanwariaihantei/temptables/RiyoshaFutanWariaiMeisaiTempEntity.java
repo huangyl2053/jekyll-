@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -14,19 +15,20 @@ import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
- * 判定対象者Tempエンティティのクラスです。
+ * 利用者負担割合明細Tempエンティティのクラスです。
  *
  * @reamsid_L DBC-4950-032 liuyang
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class RiyoshaFutanWariaiMeisaiTempEntity extends DbTableEntityBase<RiyoshaFutanWariaiMeisaiTempEntity> implements IDbAccessable {
+public class RiyoshaFutanWariaiMeisaiTempEntity
+        extends DbTableEntityBase<RiyoshaFutanWariaiMeisaiTempEntity> implements IDbAccessable {
 
     //年度
     private FlexibleYear nendo;
     //被保険者番号
-    private RString hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     //枝番号
     private int edaNo;
     //    資格区分

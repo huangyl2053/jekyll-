@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-4950-030 liuyang -->
+<!--判定対象者Temp-->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.IHanteiTaishoshaTempMapper">
+    <select resultOrdered="true" id="selectHanteiTaishoshaTempAll" 
+        resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.IHanteiTaishoshaTempMapper.ResultMap_HanteiTaishoshaTempEntity"
+        fetchSize="500">
+        SELECT
+            <include refid="allColumns_HanteiTaishoshaTemp" />
+        FROM
+            "HanteiTaishoshaTemp"
+    </select>
+    
+    <sql id="allColumns_HanteiTaishoshaTemp">
+        "HanteiTaishoshaTemp"."taishoNendo"as "HanteiTaishoshaTemp_taishoNendo",
+        "HanteiTaishoshaTemp"."taishoTsuki"as "HanteiTaishoshaTemp_taishoTsuki",
+        "HanteiTaishoshaTemp"."taishoKubun"as "HanteiTaishoshaTemp_taishoKubun",
+        "HanteiTaishoshaTemp"."hihokenshaNo"as "HanteiTaishoshaTemp_hihokenshaNo",
+        "HanteiTaishoshaTemp"."shikibetsuCode"as "HanteiTaishoshaTemp_shikibetsuCode",
+        "HanteiTaishoshaTemp"."setaiCode"as "HanteiTaishoshaTemp_setaiCode",
+        "HanteiTaishoshaTemp"."idoShubetsu"as "HanteiTaishoshaTemp_idoShubetsu",
+        "HanteiTaishoshaTemp"."atenaIdobi"as "HanteiTaishoshaTemp_atenaIdobi",
+        "HanteiTaishoshaTemp"."atenaIdoJiyu"as "HanteiTaishoshaTemp_atenaIdoJiyu",
+        "HanteiTaishoshaTemp"."idobi"as "HanteiTaishoshaTemp_idobi",
+        "HanteiTaishoshaTemp"."idoJiyuCode"as "HanteiTaishoshaTemp_idoJiyuCode",
+        "HanteiTaishoshaTemp"."shikakuShiyutokiDate"as "HanteiTaishoshaTemp_shikakuShiyutokiDate",
+        "HanteiTaishoshaTemp"."firstShikakuShiyutokiDate"as "HanteiTaishoshaTemp_firstShikakuShiyutokiDate",
+        "HanteiTaishoshaTemp"."hihokenshaKubunCode"as "HanteiTaishoshaTemp_hihokenshaKubunCode",
+        "HanteiTaishoshaTemp"."cityCode"as "HanteiTaishoshaTemp_cityCode",
+        "HanteiTaishoshaTemp"."rirekiNo"as "HanteiTaishoshaTemp_rirekiNo",
+        "HanteiTaishoshaTemp"."edaNo"as "HanteiTaishoshaTemp_edaNo",
+        "HanteiTaishoshaTemp"."jukyuShinseiJiyu"as "HanteiTaishoshaTemp_jukyuShinseiJiyu",
+        "HanteiTaishoshaTemp"."ninteiYukoKaishiDate"as "HanteiTaishoshaTemp_ninteiYukoKaishiDate",
+        "HanteiTaishoshaTemp"."ninteiYukoShuryoDate"as "HanteiTaishoshaTemp_ninteiYukoShuryoDate",
+        "HanteiTaishoshaTemp"."ninteiDate"as "HanteiTaishoshaTemp_ninteiDate",
+        "HanteiTaishoshaTemp"."yoKaigoninteiJoutaiKubunCode"as "HanteiTaishoshaTemp_yoKaigoninteiJoutaiKubunCode",
+        "HanteiTaishoshaTemp"."kyuSochishaFlag"as "HanteiTaishoshaTemp_kyuSochishaFlag",
+        "HanteiTaishoshaTemp"."shotokuNendo"as "HanteiTaishoshaTemp_shotokuNendo",
+        "HanteiTaishoshaTemp"."shotokuRirekiNo"as "HanteiTaishoshaTemp_shotokuRirekiNo",
+        "HanteiTaishoshaTemp"."kazeiKubun"as "HanteiTaishoshaTemp_kazeiKubun",
+        "HanteiTaishoshaTemp"."kazeiKubunGemmenGo"as "HanteiTaishoshaTemp_kazeiKubunGemmenGo",
+        "HanteiTaishoshaTemp"."gokeiShotokuGaku"as "HanteiTaishoshaTemp_gokeiShotokuGaku",
+        "HanteiTaishoshaTemp"."nenkiniShunyuGaku"as "HanteiTaishoshaTemp_nenkiniShunyuGaku",
+        "HanteiTaishoshaTemp"."nenkiniShotokuGaku"as "HanteiTaishoshaTemp_nenkiniShotokuGaku",
+        "HanteiTaishoshaTemp"."kazeiShotokuGaku"as "HanteiTaishoshaTemp_kazeiShotokuGaku",
+        "HanteiTaishoshaTemp"."gekihenKanwaKubun"as "HanteiTaishoshaTemp_gekihenKanwaKubun",
+        "HanteiTaishoshaTemp"."hanteiKijunYMD" as "HanteiTaishoshaTemp_hanteiKijunYMD"
+    </sql>
+    
+    <sql id="allColumns">
+        "taishoNendo",
+        "taishoTsuki",
+        "taishoKubun",
+        "hihokenshaNo",
+        "shikibetsuCode",
+        "setaiCode",
+        "idoShubetsu",
+        "atenaIdobi",
+        "atenaIdoJiyu",
+        "idobi",
+        "idoJiyuCode",
+        "shikakuShiyutokiDate",
+        "firstShikakuShiyutokiDate",
+        "hihokenshaKubunCode",
+        "cityCode",
+        "rirekiNo",
+        "edaNo",
+        "jukyuShinseiJiyu",
+        "ninteiYukoKaishiDate",
+        "ninteiYukoShuryoDate",
+        "ninteiDate",
+        "yoKaigoninteiJoutaiKubunCode",
+        "kyuSochishaFlag",
+        "shotokuNendo",
+        "shotokuRirekiNo",
+        "kazeiKubun",
+        "kazeiKubunGemmenGo",
+        "gokeiShotokuGaku",
+        "nenkiniShunyuGaku",
+        "nenkiniShotokuGaku",
+        "kazeiShotokuGaku",
+        "gekihenKanwaKubun",
+        "hanteiKijunYMD"
+    </sql>
+
+    <resultMap id="ResultMap_HanteiTaishoshaTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.HanteiTaishoshaTempEntity" autoMapping="true">
+        <result property="taishoNendo" column="HanteiTaishoshaTemp_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="taishoTsuki" column="HanteiTaishoshaTemp_taishoTsuki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="taishoKubun" column="HanteiTaishoshaTemp_taishoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaNo" column="HanteiTaishoshaTemp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="shikibetsuCode" column="HanteiTaishoshaTemp_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="setaiCode" column="HanteiTaishoshaTemp_setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
+        <result property="idoShubetsu" column="HanteiTaishoshaTemp_idoShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="atenaIdobi" column="HanteiTaishoshaTemp_atenaIdobi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="atenaIdoJiyu" column="HanteiTaishoshaTemp_atenaIdoJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="idobi" column="HanteiTaishoshaTemp_idobi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="idoJiyuCode" column="HanteiTaishoshaTemp_idoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuShiyutokiDate" column="HanteiTaishoshaTemp_shikakuShiyutokiDate" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="firstShikakuShiyutokiDate" column="HanteiTaishoshaTemp_firstShikakuShiyutokiDate" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hihokenshaKubunCode" column="HanteiTaishoshaTemp_hihokenshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="cityCode" column="HanteiTaishoshaTemp_cityCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="rirekiNo" column="HanteiTaishoshaTemp_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="edaNo" column="HanteiTaishoshaTemp_edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jukyuShinseiJiyu" column="HanteiTaishoshaTemp_jukyuShinseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiYukoKaishiDate" column="HanteiTaishoshaTemp_ninteiYukoKaishiDate" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiYukoShuryoDate" column="HanteiTaishoshaTemp_ninteiYukoShuryoDate" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiDate" column="HanteiTaishoshaTemp_ninteiDate" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="yoKaigoninteiJoutaiKubunCode" column="HanteiTaishoshaTemp_yoKaigoninteiJoutaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyuSochishaFlag" column="HanteiTaishoshaTemp_kyuSochishaFlag" />
+        <result property="shotokuNendo" column="HanteiTaishoshaTemp_shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="shotokuRirekiNo" column="HanteiTaishoshaTemp_shotokuRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kazeiKubun" column="HanteiTaishoshaTemp_kazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kazeiKubunGemmenGo" column="HanteiTaishoshaTemp_kazeiKubunGemmenGo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gokeiShotokuGaku" column="HanteiTaishoshaTemp_gokeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="nenkiniShunyuGaku" column="HanteiTaishoshaTemp_nenkiniShunyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="nenkiniShotokuGaku" column="HanteiTaishoshaTemp_nenkiniShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kazeiShotokuGaku" column="HanteiTaishoshaTemp_kazeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="gekihenKanwaKubun" column="HanteiTaishoshaTemp_gekihenKanwaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hanteiKijunYMD" column="HanteiTaishoshaTemp_hanteiKijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+</mapper>
