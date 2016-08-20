@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd102020;
 
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.gemmen.shinseisho.hakko.ShinseishoHakkoProcessParameter;
+import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -23,12 +24,31 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter extends BatchParameterBase {
 
+    private static final String HAKKOSHORIID = "hakkoshoriid";
+    private static final String SHUTSURYOKUFLAG = "shutsuryokuflag";
+    private static final String KAIPAGESHUTSURYOKUJUNID = "kaipageshutsuryokujunid";
+    private static final String KIZYUNNICHI = "kizyunnichi";
+    private static final String CYOHYOID = "cyohyoid";
+    private static final String HAKKONICHI = "hakkonichi";
+
+    @BatchParameter(key = HAKKOSHORIID, name = "発行処理ID")
     private UUID 発行処理ID;
+    @BatchParameter(key = SHUTSURYOKUFLAG, name = "出力フラグ")
     private boolean 出力フラグ;
+    @BatchParameter(key = KAIPAGESHUTSURYOKUJUNID, name = "改頁出力順ID")
     private long 改頁出力順ID;
+    @BatchParameter(key = KIZYUNNICHI, name = "基準日")
     private FlexibleDate 基準日;
+    @BatchParameter(key = CYOHYOID, name = "帳票ID")
     private ReportId 帳票ID;
+    @BatchParameter(key = HAKKONICHI, name = "発行日")
     private FlexibleDate 発行日;
+
+    /**
+     * コンストラクタです。
+     */
+    public DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter() {
+    }
 
     /**
      * コンストラクタです。
