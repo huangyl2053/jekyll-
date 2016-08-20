@@ -58,39 +58,48 @@ public class KyufuJissekiHeaderHandler {
     }
 
     /**
-     * サービス提供年月の前月を設定します。
+     * サービス提供年月を設定します。
      *
      * @param サービス提供年月 サービス提供年月
      */
-    public void set前月(RDate サービス提供年月) {
+    public void setサービス提供年月(RDate サービス提供年月) {
         div.getTxtTeikyoNengetsu().setValue(サービス提供年月);
     }
 
     /**
-     * サービス提供年月の次月を設定します。
+     * 実績区分を設定します。
      *
-     * @param サービス提供年月 サービス提供年月
+     * @param 実績区分 実績区分
      */
-    public void set次月(RDate サービス提供年月) {
-        div.getTxtTeikyoNengetsu().setValue(サービス提供年月);
+    public void set実績区分(RString 実績区分) {
+        div.getTxtJissekiKubun().setValue(get実績区分(実績区分));
     }
 
     /**
-     * 事業者名称の前事業者を設定します。
+     * 事業者名称を設定します。
      *
      * @param 事業者名称 事業者名称
      */
-    public void set前事業者(RString 事業者名称) {
+    public void set事業者名称(RString 事業者名称) {
         div.getTxtJigyosha().setValue(事業者名称);
     }
 
     /**
-     * 事業者名称の後事業者を設定します。
+     * 整理番号を設定します。
      *
-     * @param 事業者名称 事業者名称
+     * @param 整理番号 整理番号
      */
-    public void set後事業者(RString 事業者名称) {
-        div.getTxtJigyosha().setValue(事業者名称);
+    public void set整理番号(RString 整理番号) {
+        div.getTxtSeiriNo().setValue(整理番号);
+    }
+
+    /**
+     * 識別番号名称を設定します。
+     *
+     * @param 識別番号名称 識別番号名称
+     */
+    public void set識別番号名称(RString 識別番号名称) {
+        div.getTxtYoshikiNo().setValue(識別番号名称);
     }
 
     private void set給付実績ヘッダ情報1(KyufuJissekiHedajyoho1 給付実績ヘッダ情報1) {
