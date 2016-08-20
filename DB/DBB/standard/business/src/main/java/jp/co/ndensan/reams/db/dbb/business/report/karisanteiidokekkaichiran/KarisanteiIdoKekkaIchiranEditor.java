@@ -2,12 +2,12 @@ package jp.co.ndensan.reams.db.dbb.business.report.karisanteiidokekkaichiran;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.genendoidoukekkaichiran.KeisanjohoAtenaKozaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.karisanteiidokekkaichiran.KarisanteiIdoKekkaIchiranSource;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
+import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -114,12 +114,12 @@ public class KarisanteiIdoKekkaIchiranEditor implements IKarisanteiIdoKekkaIchir
 
     private void edit更正後情報(KarisanteiIdoKekkaIchiranSource source) {
         source.listLower_1 = 計算後情報_宛名_口座_更正後Entity.get調定日時().getDate().wareki().toDateString();
-        source.listLower_2 = 金額Formatter(計算後情報_宛名_口座_更正後Entity.get特徴期別金額01()
-                .add(計算後情報_宛名_口座_更正後Entity.get特徴期別金額02())
-                .add(計算後情報_宛名_口座_更正後Entity.get特徴期別金額03()));
-        source.listLower_3 = 金額Formatter(計算後情報_宛名_口座_更正後Entity.get普徴期別金額01()
-                .add(計算後情報_宛名_口座_更正後Entity.get普徴期別金額02())
-                .add(計算後情報_宛名_口座_更正後Entity.get普徴期別金額03()));
+        source.listLower_2 = 金額Formatter(nullTOZero(計算後情報_宛名_口座_更正後Entity.get特徴期別金額01())
+                .add(nullTOZero(計算後情報_宛名_口座_更正後Entity.get特徴期別金額02()))
+                .add(nullTOZero(計算後情報_宛名_口座_更正後Entity.get特徴期別金額03())));
+        source.listLower_3 = 金額Formatter(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額01())
+                .add(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額02()))
+                .add(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額03())));
         source.listLower_4 = 金額Formatter(計算後情報_宛名_口座_更正後Entity.get減免額());
         source.listLower_5 = 金額Formatter(計算後情報_宛名_口座_更正後Entity.get特徴期別金額01());
         source.listLower_6 = 金額Formatter(計算後情報_宛名_口座_更正後Entity.get特徴期別金額02());
@@ -147,10 +147,18 @@ public class KarisanteiIdoKekkaIchiranEditor implements IKarisanteiIdoKekkaIchir
         }
         source.listLower_15 = 口座異動編集(計算後情報_宛名_口座_更正後Entity);
         source.listLower_16 = 徴収方法編集(計算後情報_宛名_口座_更正後Entity);
-        source.listChoteijiyu1_1 = ChoteiJiyuCode.toValue(計算後情報_宛名_口座_更正後Entity.get調定事由1()).get名称();
-        source.listChoteiJiyu2_1 = ChoteiJiyuCode.toValue(計算後情報_宛名_口座_更正後Entity.get調定事由2()).get名称();
-        source.listChoteijiyu3_1 = ChoteiJiyuCode.toValue(計算後情報_宛名_口座_更正後Entity.get調定事由3()).get名称();
-        source.listChoteijiyu4_1 = ChoteiJiyuCode.toValue(計算後情報_宛名_口座_更正後Entity.get調定事由4()).get名称();
+        if (計算後情報_宛名_口座_更正後Entity.get調定事由1() != null && !計算後情報_宛名_口座_更正後Entity.get調定事由1().isEmpty()) {
+            source.listChoteijiyu1_1 = ChoteiJiyuCode.toValue(計算後情報_宛名_口座_更正後Entity.get調定事由1()).get名称();
+        }
+        if (計算後情報_宛名_口座_更正後Entity.get調定事由2() != null && !計算後情報_宛名_口座_更正後Entity.get調定事由2().isEmpty()) {
+            source.listChoteiJiyu2_1 = ChoteiJiyuCode.toValue(計算後情報_宛名_口座_更正後Entity.get調定事由2()).get名称();
+        }
+        if (計算後情報_宛名_口座_更正後Entity.get調定事由3() != null && !計算後情報_宛名_口座_更正後Entity.get調定事由3().isEmpty()) {
+            source.listChoteijiyu3_1 = ChoteiJiyuCode.toValue(計算後情報_宛名_口座_更正後Entity.get調定事由3()).get名称();
+        }
+        if (計算後情報_宛名_口座_更正後Entity.get調定事由4() != null && !計算後情報_宛名_口座_更正後Entity.get調定事由4().isEmpty()) {
+            source.listChoteijiyu4_1 = ChoteiJiyuCode.toValue(計算後情報_宛名_口座_更正後Entity.get調定事由4()).get名称();
+        }
     }
 
     private void edit更正前情報(KarisanteiIdoKekkaIchiranSource source) {
@@ -165,12 +173,12 @@ public class KarisanteiIdoKekkaIchiranEditor implements IKarisanteiIdoKekkaIchir
         口座情報編集(source);
         普徴期編集(source);
         source.listCenter_1 = 計算後情報_宛名_口座_更正前Entity.get調定日時().getDate().wareki().toDateString();
-        source.listCenter_2 = 金額Formatter(計算後情報_宛名_口座_更正前Entity.get特徴期別金額01()
-                .add(計算後情報_宛名_口座_更正前Entity.get特徴期別金額02())
-                .add(計算後情報_宛名_口座_更正前Entity.get特徴期別金額03()));
-        source.listCenter_3 = 金額Formatter(計算後情報_宛名_口座_更正前Entity.get普徴期別金額01()
-                .add(計算後情報_宛名_口座_更正前Entity.get普徴期別金額02())
-                .add(計算後情報_宛名_口座_更正前Entity.get普徴期別金額03()));
+        source.listCenter_2 = 金額Formatter(nullTOZero(計算後情報_宛名_口座_更正前Entity.get特徴期別金額01())
+                .add(nullTOZero(計算後情報_宛名_口座_更正前Entity.get特徴期別金額02()))
+                .add(nullTOZero(計算後情報_宛名_口座_更正前Entity.get特徴期別金額03())));
+        source.listCenter_3 = 金額Formatter(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額01())
+                .add(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額02()))
+                .add(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額03())));
         source.listCenter_4 = 金額Formatter(計算後情報_宛名_口座_更正前Entity.get減免額());
         source.listCenter_5 = 金額Formatter(計算後情報_宛名_口座_更正前Entity.get特徴期別金額01());
         source.listCenter_6 = 金額Formatter(計算後情報_宛名_口座_更正前Entity.get特徴期別金額02());
@@ -321,7 +329,7 @@ public class KarisanteiIdoKekkaIchiranEditor implements IKarisanteiIdoKekkaIchir
     }
 
     private Decimal get仮算定普徴期合計(KeisanjohoAtenaKozaEntity entity) {
-        Decimal 仮算定普徴期合計 = new Decimal(0);
+        Decimal 仮算定普徴期合計 = Decimal.ZERO;
         if (月List.contains(NUM_1)) {
             仮算定普徴期合計 = 仮算定普徴期合計.add(nullTOZero(entity.get普徴期別金額01()));
         }

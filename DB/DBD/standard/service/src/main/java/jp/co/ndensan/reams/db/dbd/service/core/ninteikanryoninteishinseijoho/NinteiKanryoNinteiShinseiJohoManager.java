@@ -143,16 +143,16 @@ public class NinteiKanryoNinteiShinseiJohoManager {
     /**
      * get被保険者名称カナ
      *
-     * @param 識別コード 識別コード
+     * @param shikibetsuCode ShikibetsuCode
      * @return RString KanaName
      */
-    public RString getKanaName(ShikibetsuCode 識別コード) {
+    public RString getKanaName(ShikibetsuCode shikibetsuCode) {
         ShikibetsuTaishoSearchKeyBuilder builder = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先));
-        IShikibetsuTaishoSearchKey searchKey = builder.set識別コード(識別コード).build();
+        IShikibetsuTaishoSearchKey searchKey = builder.set識別コード(shikibetsuCode).build();
         List<IShikibetsuTaisho> 識別対象 = ShikibetsuTaishoService.getShikibetsuTaishoFinder().get識別対象s(searchKey);
-        if (!識別対象.isEmpty()) {
-            return 識別対象.get(0).toEntity().getKanaName();
+        if (!識別対象.isEmpty() && !識別対象.get(0).toEntity().getKanaMeisho().isEmpty()) {
+            return 識別対象.get(0).toEntity().getKanaMeisho().value();
         } else {
             return null;
         }

@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD8010002
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100201.HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100203.SokyuHikazeiNenkinBatchParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.DBD8010002StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.HikazeiNenkinTaishoshaJohoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD8010002.HikazeiNenkinTaishoshaJohoHandler;
@@ -22,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @reamsid_L DBD-4910-010 huangh
  */
 public class HikazeiNenkinTaishoshaJoho {
+
+    private static final RString DBDMN81002 = new RString("DBDMN81002");
 
     /**
      * 画面初期化処理です。
@@ -67,6 +71,60 @@ public class HikazeiNenkinTaishoshaJoho {
         ViewStateHolder.put(ViewStateKeys.取込対象市町村コードリスト, new ArrayList<>(取込対象市町村コードリスト));
 
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 処理設定のクリンク処理です。
+     *
+     * @param div JissiJyokyohyoDiv
+     * @return ResponseData<JissiJyokyohyoDiv>
+     */
+    public ResponseData<HikazeiNenkinTaishoshaJohoDiv> onClick_btnShoriSettei(HikazeiNenkinTaishoshaJohoDiv div) {
+
+        getHandler(div).onClick_btnShoriSettei(div);
+
+        return ResponseData.of(div).setState(DBD8010002StateName.処理設定);
+    }
+
+    /**
+     * 処理設定のクリンク処理です。
+     *
+     * @param div JissiJyokyohyoDiv
+     * @return ResponseData<JissiJyokyohyoDiv>
+     */
+    public ResponseData<HikazeiNenkinTaishoshaJohoDiv> onClick_btnBatchRegister(HikazeiNenkinTaishoshaJohoDiv div) {
+
+//        if (DBDMN81002.equals(ResponseHolder.getMenuID())) {
+//            //TODO check
+//        } else {
+//        }
+        getHandler(div).onClick_btnBatchRegister(div);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 処理設定のクリンク処理です。
+     *
+     * @param div JissiJyokyohyoDiv
+     * @return HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter
+     */
+    public ResponseData<HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter> createDBD301010BatchParamter(HikazeiNenkinTaishoshaJohoDiv div) {
+
+        List<RString> 構成市町村コードリスト = ViewStateHolder.
+                get(ViewStateKeys.取込対象市町村コードリスト, new ArrayList<>().getClass());
+
+        return ResponseData.of(getHandler(div).createDBD301010BatchParamter(div, 構成市町村コードリスト)).respond();
+    }
+
+    /**
+     * 処理設定のクリンク処理です。
+     *
+     * @param div JissiJyokyohyoDiv
+     * @return SokyuHikazeiNenkinBatchParameter
+     */
+    public ResponseData<SokyuHikazeiNenkinBatchParameter> createDBD301020BatchParamter(HikazeiNenkinTaishoshaJohoDiv div) {
+
+        return ResponseData.of(getHandler(div).createDBD301020BatchParamter(div)).respond();
     }
 
     private HikazeiNenkinTaishoshaJohoHandler getHandler(HikazeiNenkinTaishoshaJohoDiv div) {

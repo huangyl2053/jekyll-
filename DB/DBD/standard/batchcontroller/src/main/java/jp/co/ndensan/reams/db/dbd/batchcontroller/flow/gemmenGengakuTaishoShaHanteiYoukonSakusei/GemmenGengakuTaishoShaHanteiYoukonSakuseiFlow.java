@@ -24,32 +24,47 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class GemmenGengakuTaishoShaHanteiYoukonSakuseiFlow extends BatchFlowBase<GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter> {
 
-    private static final String set世帯員把握入力 = "SetaiinHaakuInputSakusei";
-    private static final String Call世帯員把握Flow = "SetaiShotokuKazeiHanteiFlow";
+    private static final String 世帯員把握入力 = "SetaiinHaakuInputSakusei";
+    private static final String 世帯員把握 = "SetaiShotokuKazeiHanteiFlow";
     private static final String 減免減額対象者判定用根拠作成 = "GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei";
-    private static final RString SetaiShotokuKazeiHanteiFlow = new RString("SetaiShotokuKazeiHanteiFlow");
+    private static final RString SETSHOTOKUKAZEIHANTEIFLOW = new RString("SetaiShotokuKazeiHanteiFlow");
 
     @Override
     protected void defineFlow() {
-        executeStep(set世帯員把握入力);
-        executeStep(Call世帯員把握Flow);
+        executeStep(世帯員把握入力);
+        executeStep(世帯員把握);
         executeStep(減免減額対象者判定用根拠作成);
     }
 
-    @Step(set世帯員把握入力)
-    protected IBatchFlowCommand SetaiinHaakuInputSakusei() {
+    /**
+     * batchProcessです。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(世帯員把握入力)
+    protected IBatchFlowCommand setaiinHaakuInputSakusei() {
         return loopBatch(SetaiinHaakuInputSakusei.class)
                 .arguments(getParameter().toGemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter())
                 .define();
     }
 
-    @Step(Call世帯員把握Flow)
-    protected IBatchFlowCommand SetaiShotokuKazeiHanteiFlow() {
-        return otherBatchFlow(SetaiShotokuKazeiHanteiFlow, SubGyomuCode.DBZ介護共通, getSetaiShotokuKazeiHanteiBatchParameter()).define();
+    /**
+     * batchProcessです。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(世帯員把握)
+    protected IBatchFlowCommand setaiShotokuKazeiHanteiFlow() {
+        return otherBatchFlow(SETSHOTOKUKAZEIHANTEIFLOW, SubGyomuCode.DBZ介護共通, getSetaiShotokuKazeiHanteiBatchParameter()).define();
     }
 
+    /**
+     * batchProcessです。
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(減免減額対象者判定用根拠作成)
-    protected IBatchFlowCommand GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei() {
+    protected IBatchFlowCommand gemmmenGengakuTaishoshaHanteiYoKonkyoSakusei() {
         if (getParameter().get所得年度() == null || getParameter().get所得年度().isEmpty()) {
             return loopBatch(GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei.class)
                     .arguments(getParameter().toGemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter(new HizukeConfig().get所得年度()))

@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5320001.DBD5
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5320001.NinteiTsuchishoHakkoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5320001.NinteiTsuchishoHakkoHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5320001.NinteiTsuchishoHakkoValidationHandler;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -25,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -85,7 +83,6 @@ public class NinteiTsuchishoHakko {
      */
     public ResponseData<NinteiTsuchishoHakkoDiv> onClick_btnKensaku(NinteiTsuchishoHakkoDiv div) {
 
-        getHandler(div).clearJoken();
         getHandler(div).clearChohyoArea();
         List<YokaigoNinteiTsutisho> 画面更新用データ = getHandler(div).kensaku();
 
@@ -212,8 +209,7 @@ public class NinteiTsuchishoHakko {
      * @return ResponseData<NinteiTsuchishoHakkoDiv>
      */
     public ResponseData<NinteiTsuchishoHakkoDiv> onClick_btnCopyJiyuToRiyu(NinteiTsuchishoHakkoDiv div) {
-
-        div.getTxtIdoJiyu().setValue(div.getTxtKyakkaRiyu().getValue());
+        div.getTxtKyakkaRiyu().setValue(div.getTxtIdoJiyu().getValue());
         return ResponseData.of(div).respond();
     }
 
@@ -257,14 +253,8 @@ public class NinteiTsuchishoHakko {
      * @return ResponseData<NinteiTsuchishoHakkoDiv>
      */
     public ResponseData<NinteiTsuchishoHakkoDiv> onClick_btnUpdateAfterPrint(NinteiTsuchishoHakkoDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
-        } else if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            div.getCcdKanryoMessege().setMessage(new RString("更新処理が正常に終了しました。"), RString.EMPTY, RString.EMPTY, true);
-            return ResponseData.of(div).forwardWithEventName(DBD5320001TransitionEventName.完了).respond();
-        }
-
-        return ResponseData.of(div).respond();
+        div.getCcdKanryoMessege().setMessage(new RString("更新処理が正常に終了しました。"), RString.EMPTY, RString.EMPTY, true);
+        return ResponseData.of(div).forwardWithEventName(DBD5320001TransitionEventName.完了).respond();
     }
 
     /**
@@ -277,6 +267,17 @@ public class NinteiTsuchishoHakko {
         TsutishoHakkoParameter param = getHandler(div).createTsutishoHakkoParameter();
         div.getCcdKanryoMessege().setMessage(new RString("更新処理が正常に終了しました。"), RString.EMPTY, RString.EMPTY, true);
         return ResponseData.of(param).forwardWithEventName(DBD5320001TransitionEventName.完了).respond();
+    }
+
+    /**
+     * 「出力対象」チェックの変更処理
+     *
+     * @param div NinteiTsuchishoHakkoDiv
+     * @return ResponseData<NinteiTsuchishoHakkoDiv>
+     */
+    public ResponseData<NinteiTsuchishoHakkoDiv> onChange_chkOutPutSelect(NinteiTsuchishoHakkoDiv div) {
+        getHandler(div).changeChkOutPutSelect();
+        return ResponseData.of(div).respond();
     }
 
     private NinteiTsuchishoHakkoHandler getHandler(NinteiTsuchishoHakkoDiv div) {

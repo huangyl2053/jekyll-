@@ -71,8 +71,7 @@ public class ShakaiFukushiHojinKeigenNinteishaListFlow extends BatchFlowBase<DBD
      */
     @Step(減免減額対象者判定用根拠作成)
     protected IBatchFlowCommand 減免減額対象者判定用根拠作成() {
-        youkonsakuseiparameter = new GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter();
-        youkonsakuseiparameter.set所得年度(getParameter().get所得年度());
+        youkonsakuseiparameter = new GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter(getParameter().get所得年度());
         return otherBatchFlow(バッチID_DBDBZZ0001, SubGyomuCode.DBD介護受給, youkonsakuseiparameter).define();
     }
 

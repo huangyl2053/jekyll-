@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-4950-030 liuyang -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.ISetaiShotokuTempMapper">
+
+    <sql id="allColumns_TmpSetaiShotoku">
+        "TmpSetaiShotoku"."kijunYMD"as "TmpSetaiShotoku_kijunYMD",
+        "TmpSetaiShotoku"."jushochiTokureiFlag"as "TmpSetaiShotoku_jushochiTokureiFlag",
+        "TmpSetaiShotoku"."setaiCode"as "TmpSetaiShotoku_setaiCode",
+        "TmpSetaiShotoku"."honninKubun"as "TmpSetaiShotoku_honninKubun",
+        "TmpSetaiShotoku"."kazeiKubun"as "TmpSetaiShotoku_kazeiKubun",
+        "TmpSetaiShotoku"."kazeiKubunGemmenGo"as "TmpSetaiShotoku_kazeiKubunGemmenGo",
+        "TmpSetaiShotoku"."gekihenKanwaKubun"as "TmpSetaiShotoku_gekihenKanwaKubun",
+        "TmpSetaiShotoku"."gokeiShotokuGaku"as "TmpSetaiShotoku_gokeiShotokuGaku",
+        "TmpSetaiShotoku"."nenkiniShunyuGaku"as "TmpSetaiShotoku_nenkiniShunyuGaku",
+        "TmpSetaiShotoku"."nenkiniShotokuGaku"as "TmpSetaiShotoku_nenkiniShotokuGaku",
+        "TmpSetaiShotoku"."kazeiShotokuGaku"as "TmpSetaiShotoku_kazeiShotokuGaku",
+        "TmpSetaiShotoku"."torokuGyomu"as "TmpSetaiShotoku_torokuGyomu",
+        "TmpSetaiShotoku"."hihokenshaNo"as "TmpSetaiShotoku_hihokenshaNo",
+        "TmpSetaiShotoku"."shikibetsuCode"as "TmpSetaiShotoku_shikibetsuCode",
+        "TmpSetaiShotoku"."shotokuNendo"as "TmpSetaiShotoku_shotokuNendo"
+    </sql>
+
+    <resultMap id="resultMap_SetaiShotokuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SetaiShotokuEntity" autoMapping="true">
+        <result property="kijunYMD" column="TmpSetaiShotoku_kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochiTokureiFlag" column="TmpSetaiShotoku_jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiCode" column="TmpSetaiShotoku_setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
+        <result property="honninKubun" column="TmpSetaiShotoku_honninKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kazeiKubun" column="TmpSetaiShotoku_kazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kazeiKubunGemmenGo" column="TmpSetaiShotoku_kazeiKubunGemmenGo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gekihenKanwaKubun" column="TmpSetaiShotoku_gekihenKanwaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gokeiShotokuGaku" column="TmpSetaiShotoku_gokeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="nenkiniShunyuGaku" column="TmpSetaiShotoku_nenkiniShunyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="nenkiniShotokuGaku" column="TmpSetaiShotoku_nenkiniShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kazeiShotokuGaku" column="TmpSetaiShotoku_kazeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="torokuGyomu" column="TmpSetaiShotoku_torokuGyomu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaNo" column="TmpSetaiShotoku_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="shikibetsuCode" column="TmpSetaiShotoku_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="shotokuNendo" column="TmpSetaiShotoku_shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+    </resultMap>
+
+</mapper>

@@ -20,7 +20,8 @@ public enum DBD5510001StateName implements IStateEnumerations {
     区分変更認定("区分変更認定"),
     サービス変更認定("サービス変更認定"),
     区変認定完了("区変認定完了"),
-    サ変認定完了("サ変認定完了");
+    サ変認定完了("サ変認定完了"),
+    完了("完了");
 
     private final RString name;
 

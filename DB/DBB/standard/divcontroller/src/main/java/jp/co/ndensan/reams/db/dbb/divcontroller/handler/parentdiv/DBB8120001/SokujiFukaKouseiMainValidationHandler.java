@@ -209,7 +209,7 @@ public class SokujiFukaKouseiMainValidationHandler {
         Decimal 更正後年間保険料額 = fukakonkyoAtoDiv.getTxtNenkanHokenryo2().getValue();
         Decimal 減免額 = div.getGemmenGakuInput().getTxtGemmenGakuInput().getValue();
         if (!更正後年間保険料額.equals(getFormat金額(tablePanel.getLblTokuchoKoseiGoSum().getText()).add(getFormat金額(tablePanel.getLblFuchoKoseiGoSum().getText())).
-                multiply(減免額))) {
+                subtract(減免額))) {
             validPairs.add(new ValidationMessageControlPair(new SokujiFukaKouseiMainValidationMessages(UrErrorMessages.項目に対する制約,
                     更正後年間保険料.toString(), 特別徴収の更正後合計_普通徴収の更正後合計_減免額.toString())));
         }

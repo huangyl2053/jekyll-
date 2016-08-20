@@ -39,7 +39,7 @@ public class SogojigyohiSaishinsaService {
     private static final RString 調整単位数タイトル = new RString("単位数");
     private static final RString 調整負担額タイトル = new RString("保険者負担額");
     private static final RString 総合事業費タイトル = new RString("総合事業費");
-    private static final int INT_0 = 0;
+    private static final int INT_5 = 5;
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
     private static final int INT_3 = 3;
@@ -183,11 +183,11 @@ public class SogojigyohiSaishinsaService {
 
         SogojigyohiSaishinsaKetteiHokenshaInItem outItem = new SogojigyohiSaishinsaKetteiHokenshaInItem();
         RDateTime systemTime = RDateTime.now();
-        RString 作成日 = systemTime.getDate().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+        RString 作成日 = systemTime.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        RString 作成時 = systemTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE);
-        outItem.set印刷日時(作成日.concat(RString.HALF_SPACE).concat(作成時).concat(RString.HALF_SPACE).concat(new RString("作成")));
-        outItem.set取込年月(処理年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+        RString 作成時 = systemTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+        outItem.set印刷日時(作成日.concat(RString.HALF_SPACE).concat(作成時).concat(RString.HALF_SPACE).concat(SAKUSEI));
+        outItem.set取込年月(処理年月.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         outItem.set国保連合会名(entity.get国保連合会名());
         outItem.set審査委員会名(entity.get審査委員会名());
@@ -203,15 +203,15 @@ public class SogojigyohiSaishinsaService {
         RString 並び順の５件目 = RString.EMPTY;
         if (outOrder != null) {
             for (ISetSortItem item : outOrder.get設定項目リスト()) {
-                if (i == INT_0) {
+                if (i == INT_1) {
                     並び順の１件目 = item.get項目名();
-                } else if (i == INT_1) {
-                    並び順の２件目 = item.get項目名();
                 } else if (i == INT_2) {
-                    並び順の３件目 = item.get項目名();
+                    並び順の２件目 = item.get項目名();
                 } else if (i == INT_3) {
-                    並び順の４件目 = item.get項目名();
+                    並び順の３件目 = item.get項目名();
                 } else if (i == INT_4) {
+                    並び順の４件目 = item.get項目名();
+                } else if (i == INT_5) {
                     並び順の５件目 = item.get項目名();
                 }
                 i = i + 1;
@@ -229,19 +229,19 @@ public class SogojigyohiSaishinsaService {
         outItem.set改頁５(RString.EMPTY);
 
         outItem.set通番(new RString(String.valueOf(通番)));
-        outItem.set取扱年月(entity.get取扱年月().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        outItem.set取扱年月(entity.get取扱年月().wareki().separator(Separator.PERIOD)
+                .fillType(FillType.BLANK).toDateString());
         outItem.set事業者番号(entity.get事業者番号() == null ? RString.EMPTY : entity.get事業者番号().getColumnValue());
         outItem.set事業者名(entity.get事業者名());
-        outItem.setサービス提供年月(entity.getサービス提供年月().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        outItem.setサービス提供年月(entity.getサービス提供年月().wareki().separator(Separator.PERIOD)
+                .fillType(FillType.BLANK).toDateString());
         outItem.setサービス種類コード(entity.getサービス種類コード() == null ? RString.EMPTY : entity.getサービス種類コード().getColumnValue());
         outItem.setサービス種類名(entity.getサービス種類名());
         outItem.set当初請求単位数(doカンマ編集(entity.get当初請求単位数()));
         outItem.set決定単位数(doカンマ編集(entity.get決定単位数()));
         outItem.set保険者負担額(doカンマ編集(entity.get保険者負担額()));
         outItem.set被保険者番号(entity.get被保険者番号() == null ? RString.EMPTY : entity.get被保険者番号().getColumnValue());
-        outItem.set被保険者氏名(entity.get被保険者氏名());
+        outItem.set被保険者氏名(entity.get宛名名称());
         outItem.set申立事由コード(entity.get申立事由コード() == null ? RString.EMPTY : entity.get申立事由コード().getColumnValue());
         outItem.set申立事由(entity.get申立事由());
         outItem.set原審単位数(doカンマ編集(entity.get原審単位数()));

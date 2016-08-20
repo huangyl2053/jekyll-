@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * バッチパラメタークラスです．
+ * 要介護認定実施状況表（統計表）バッチパラメタークラスです．
  *
  * @reamsid_L DBD-1771-020 chenxin
  */
@@ -37,19 +37,35 @@ public class YokaigoJissiJyokyohyoMybatisParameter implements IMyBatisParameter 
     private boolean is受給申請事由;
     private boolean is申請区分申請時;
     private boolean is申請区分法令;
-    private final RString 導入形態111 = new RString("111");
-    private final RString 導入形態112 = new RString("112");
-    private final RString 導入形態120 = new RString("120");
-    private final RString 地区区分住所 = new RString("JUSHO");
-    private final RString 地区区分行政区 = new RString("GYOSEIKU");
-    private final RString 地区区分地区２ = new RString("TIKU");
-    private final RString 集計単位申請事由 = new RString("ZIYU");
-    private final RString 集計単位申請時 = new RString("SHINSEIZI");
-    private final RString 集計単位法令 = new RString("HOUREI");
+    private static final RString 導入形態111 = new RString("111");
+    private static final RString 導入形態112 = new RString("112");
+    private static final RString 導入形態120 = new RString("120");
+    private static final RString 地区区分住所 = new RString("JUSHO");
+    private static final RString 地区区分行政区 = new RString("GYOSEIKU");
+    private static final RString 地区区分地区２ = new RString("TIKU");
+    private static final RString 集計単位申請事由 = new RString("ZIYU");
+    private static final RString 集計単位申請時 = new RString("SHINSEIZI");
+    private static final RString 集計単位法令 = new RString("HOUREI");
     private FlexibleDate 対象年月日From;
     private FlexibleDate 対象年月日To;
     private RString psmShikibetsuTaisho;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param 導入形態コード
+     * @param 概況調査テキストイメージ区分
+     * @param 年齢基準日
+     * @param 年齢From
+     * @param 年齢To
+     * @param 生年月日From
+     * @param 生年月日To
+     * @param 地区区分
+     * @param 開始地区コード
+     * @param 終了地区コード
+     * @param 集計単位
+     * @param psmShikibetsuTaisho
+     */
     public YokaigoJissiJyokyohyoMybatisParameter(
             RString 導入形態コード,
             RString 概況調査テキストイメージ区分,

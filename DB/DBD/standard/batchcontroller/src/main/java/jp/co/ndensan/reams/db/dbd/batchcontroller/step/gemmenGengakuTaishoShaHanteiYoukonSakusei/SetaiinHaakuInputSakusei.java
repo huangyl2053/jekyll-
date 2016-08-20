@@ -5,15 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.gemmenGengakuTaishoShaHanteiYoukonSakusei;
 
-import jp.co.ndensan.reams.db.dbd.definition.processprm.gemmenGengakuTaishoShaHanteiYoukonSakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmenGengakuTaishoShaHanteiYoukonSakusei.SetaiinHaakuJohoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmenGengakuTaishoShaHanteiYoukonSakusei.SetaiinHaakuJohoTempTableEntity;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.hanteiyoukonsakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengakutaishoshahanteiyoukonsakusei.SetaiinHaakuJohoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengakutaishoshahanteiyoukonsakusei.SetaiinHaakuJohoTempTableEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -23,17 +22,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class SetaiinHaakuInputSakusei extends BatchProcessBase<SetaiinHaakuJohoEntity> {
 
-    private static final RString MYBATIS_SELECT_ID_世帯員把握情報 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenGengakuTaishoShaHanteiYoukonSakusei.ISetaiinHaakuJohoMapper.get世帯員把握情報");
+    private static final RString MYBATIS_SELECT_ID_世帯員把握情報 = new RString("jp.co.ndensan.reams.db.dbd.persistence"
+            + ".db.mapper.relate.gemmenGengakuTaishoShaHanteiYoukonSakusei.ISetaiinHaakuJohoMapper.get世帯員把握情報");
 
     private GemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter processParamter;
 
     private SetaiinHaakuJohoTempTableEntity item;
     @BatchWriter
-    BatchEntityCreatedTempTableWriter setaiinHaakuJohoEntityTemp;
+    private BatchEntityCreatedTempTableWriter setaiinHaakuJohoEntityTemp;
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID_世帯員把握情報, processParamter.GemmenGengakuTaishoShaHanteiYoukonSakuseiMyBatisParameter());
+        return new BatchDbReader(MYBATIS_SELECT_ID_世帯員把握情報, processParamter.toGemmenGengakuTaishoShaHanteiYoukonSakuseiMyBatisParameter());
     }
 
     @Override
@@ -44,11 +44,11 @@ public class SetaiinHaakuInputSakusei extends BatchProcessBase<SetaiinHaakuJohoE
 
     @Override
     protected void process(SetaiinHaakuJohoEntity list) {
-        item = set減免減額対象者判定用根拠作成対象者(list, processParamter.get所得年度());
+        item = set減免減額対象者判定用根拠作成対象者(list);
         setaiinHaakuJohoEntityTemp.insert(item);
     }
 
-    private SetaiinHaakuJohoTempTableEntity set減免減額対象者判定用根拠作成対象者(SetaiinHaakuJohoEntity list, FlexibleYear 所得年度) {
+    private SetaiinHaakuJohoTempTableEntity set減免減額対象者判定用根拠作成対象者(SetaiinHaakuJohoEntity list) {
         SetaiinHaakuJohoTempTableEntity tempTable = new SetaiinHaakuJohoTempTableEntity();
         tempTable.setHihokenshaNo(list.get被保険者番号());
         tempTable.setShikibetsuCode(list.get識別コード());

@@ -72,27 +72,23 @@ public class ShotokuJohoIchiranHyoSakusei {
      */
     public ResponseData<ShotokuJohoIchiranHyoSakuseiDiv> onClick_BeforeRegisterCheck(ShotokuJohoIchiranHyoSakuseiDiv div) {
         RString 導入形態コード = getHandler(div).get導入形態コード();
-        boolean 広域保険者日付チェックflag = getHandler(div).is広域保険者日付チェック();
-        boolean 単一市町村日付チェックflag = getHandler(div).is単一市町村日付チェック();
+        boolean 広域保険者日付チェックflag = false;
+        boolean 単一市町村日付チェックflag = false;
         if (INDEX_111.equals(導入形態コード)) {
-            if (広域保険者日付チェックflag) {
-                ValidationMessageControlPairs validPairs = getValidationHandler().check日付(広域保険者日付チェックflag);
-                validationCheck(validPairs, div);
-            }
+            広域保険者日付チェックflag = getHandler(div).is広域保険者日付チェック();
         } else if (INDEX_112.equals(導入形態コード) || INDEX_120.equals(導入形態コード)) {
-            if (単一市町村日付チェックflag) {
-                ValidationMessageControlPairs validPairs = getValidationHandler().check日付(単一市町村日付チェックflag);
-                validationCheck(validPairs, div);
-            }
+            単一市町村日付チェックflag = getHandler(div).is単一市町村日付チェック();
         }
-        return ResponseData.of(div).respond();
-    }
-
-    private ResponseData<ShotokuJohoIchiranHyoSakuseiDiv> validationCheck(
-            ValidationMessageControlPairs validPairs,
-            ShotokuJohoIchiranHyoSakuseiDiv div) {
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        if (INDEX_111.equals(導入形態コード) && 広域保険者日付チェックflag) {
+            ValidationMessageControlPairs validPairs = getValidationHandler().check日付(広域保険者日付チェックflag);
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
+        } else if ((INDEX_112.equals(導入形態コード) || INDEX_120.equals(導入形態コード)) && 単一市町村日付チェックflag) {
+            ValidationMessageControlPairs validPairs = getValidationHandler().check日付(単一市町村日付チェックflag);
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
         }
         return ResponseData.of(div).respond();
     }

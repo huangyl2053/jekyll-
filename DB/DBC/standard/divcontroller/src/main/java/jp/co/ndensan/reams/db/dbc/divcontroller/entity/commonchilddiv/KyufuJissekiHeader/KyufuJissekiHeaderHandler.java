@@ -57,6 +57,60 @@ public class KyufuJissekiHeaderHandler {
         }
     }
 
+    /**
+     * サービス提供年月を設定します。
+     *
+     * @param サービス提供年月 サービス提供年月
+     */
+    public void setサービス提供年月(RDate サービス提供年月) {
+        div.getTxtTeikyoNengetsu().setValue(サービス提供年月);
+    }
+
+    /**
+     * 実績区分を設定します。
+     *
+     * @param 実績区分 実績区分
+     */
+    public void set実績区分(RString 実績区分) {
+        div.getTxtJissekiKubun().setValue(get実績区分(実績区分));
+    }
+
+    /**
+     * 事業者名称を設定します。
+     *
+     * @param 事業者名称 事業者名称
+     */
+    public void set事業者名称(RString 事業者名称) {
+        div.getTxtJigyosha().setValue(事業者名称);
+    }
+
+    /**
+     * 整理番号を設定します。
+     *
+     * @param 整理番号 整理番号
+     */
+    public void set整理番号(RString 整理番号) {
+        div.getTxtSeiriNo().setValue(整理番号);
+    }
+
+    /**
+     * 識別番号名称を設定します。
+     *
+     * @param 識別番号名称 識別番号名称
+     */
+    public void set識別番号名称(RString 識別番号名称) {
+        div.getTxtYoshikiNo().setValue(識別番号名称);
+    }
+
+    /**
+     * 保険者を設定します。
+     *
+     * @param 保険者名称 保険者名称
+     */
+    public void set保険者(RString 保険者名称) {
+        div.getTxtHokensha().setValue(保険者名称);
+    }
+
     private void set給付実績ヘッダ情報1(KyufuJissekiHedajyoho1 給付実績ヘッダ情報1) {
         div.getTxtHihoNo().setValue(get被保険者番号(給付実績ヘッダ情報1.get被保険者番号()));
         div.getTxtJuminShubetsu().setValue(get住民種別(給付実績ヘッダ情報1.get資格取得事由コード()));

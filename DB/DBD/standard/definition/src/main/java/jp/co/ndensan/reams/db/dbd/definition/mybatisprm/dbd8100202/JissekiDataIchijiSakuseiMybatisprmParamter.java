@@ -25,7 +25,7 @@ public class JissekiDataIchijiSakuseiMybatisprmParamter implements IMyBatisParam
     /**
      * 実績データ一時Mybatisパラメータ
      *
-     * @param psmShikibetsuTaisho
+     * @param psmShikibetsuTaisho psmShikibetsuTaisho
      */
     public JissekiDataIchijiSakuseiMybatisprmParamter(RString psmShikibetsuTaisho) {
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;

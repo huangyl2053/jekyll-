@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables;
 
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
  * 生活保護該当情報の一時表エンティティです。
@@ -21,20 +21,17 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class SeikatsuHogoGaitoJohoTempEntity extends DbTableEntityBase<SeikatsuHogoGaitoJohoTempEntity> implements IDbAccessable {
 
-    @TempTableColumnOrder(1)
     //対象年度
     private RString taishoNendo;
-    @TempTableColumnOrder(2)
     //対象月
-    private RString taishoGetsu;
-    @TempTableColumnOrder(3)
+    private RString taishoTsuki;
     //識別コード
-    private RString shikibetsuCode;
-    @TempTableColumnOrder(4)
+    @PrimaryKey
+    private ShikibetsuCode shikibetsuCode;
     //受給開始日
-    private FlexibleDate jukyuKaishibi;
-    @TempTableColumnOrder(5)
+    @PrimaryKey
+    private RString jukyuKaishiYMD;
     //受給廃止日
-    private FlexibleDate jukyuShuryobi;
+    private RString jukyuHaishiYMD;
 
 }

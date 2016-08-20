@@ -15,9 +15,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * 要介護認定実施状況表（統計表）のProcessパラメータクラスです。
  *
- *
- * @reamsid_L DBD-1771-020 chenxin
+ * @reamsid_L DBD-1771-033 chenxin
  */
 @Getter
 @Setter
@@ -42,6 +42,24 @@ public class YokaigoJissiJyokyohyoProcessParameter implements IBatchProcessParam
     private RString 基準日;
     private FlexibleDate 対象年度;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param 出力帳票
+     * @param 対象年月日From
+     * @param 対象年月日To
+     * @param 年齢基準日
+     * @param 年齢From
+     * @param 年齢To
+     * @param 生年月日From
+     * @param 生年月日To
+     * @param 地区区分
+     * @param 開始地区コード
+     * @param 終了地区コード
+     * @param 集計単位
+     * @param 基準日
+     * @param 対象年度
+     */
     public YokaigoJissiJyokyohyoProcessParameter(
             RString 出力帳票,
             FlexibleDate 対象年月日From,

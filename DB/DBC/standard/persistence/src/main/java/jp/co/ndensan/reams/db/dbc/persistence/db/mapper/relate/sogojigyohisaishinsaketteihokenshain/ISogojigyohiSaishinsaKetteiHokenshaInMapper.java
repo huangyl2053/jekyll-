@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.sogojigyohisaishinsaketteihokenshain;
 
-import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaDoIchiranhyoSakuseiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaKetteiHokenshaInEntity;
 
 /**
@@ -21,6 +21,6 @@ public interface ISogojigyohiSaishinsaKetteiHokenshaInMapper {
      * @param parameter Map<String, Object>
      * @return SogojigyohiSaishinsaKetteiHokenshaInEntity
      */
-    SogojigyohiSaishinsaKetteiHokenshaInEntity get帳票出力対象データ(Map<String, Object> parameter);
+    SogojigyohiSaishinsaKetteiHokenshaInEntity get帳票出力対象データ(SogojigyohiSaishinsaDoIchiranhyoSakuseiMyBatisParameter parameter);
 
 }

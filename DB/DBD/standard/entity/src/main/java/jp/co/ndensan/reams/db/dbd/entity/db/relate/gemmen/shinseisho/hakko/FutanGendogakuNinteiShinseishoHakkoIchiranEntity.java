@@ -21,8 +21,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class FutanGendogakuNinteiShinseishoHakkoIchiranEntity {
 
-    private HihokenshaNo 被保番号;
-//    private RString 新規更新区分;
+    private HihokenshaNo 被保険者番号;
+    private boolean 更新認定フラグ;
     private UaFt200FindShikibetsuTaishoEntity 宛名;
     private RString 計画事業者コード;
     private RString 計画事業者名;

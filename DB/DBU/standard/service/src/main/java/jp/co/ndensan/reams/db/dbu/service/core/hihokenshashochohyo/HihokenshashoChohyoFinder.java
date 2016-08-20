@@ -517,7 +517,7 @@ public class HihokenshashoChohyoFinder {
         business.set構成性別1(戸籍上の);
         INinshoshaManager ninshoshaManager = NinshoshaFinderFactory.createInstance();
         Ninshosha ninshosha = ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
-        business.set複合コントロール(new RString(ninshosha.toString()));
+        business.set複合コントロール(ninshosha.get公印().getImagePath());
         ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
         ChohyoSeigyoHanyo chohyoSeigyoHanyo = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBA介護資格, 帳票分類ID,
                 FlexibleDate.getNowDate().getYear(), 要介護認定期限切れ_表示有無);

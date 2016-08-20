@@ -2,9 +2,9 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- @reamsid_L DBC-2480-013 sunqingzhu -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc120230.ISeikyugakuTsuchishoCsvFileMapper">
-    <select  resultOrdered="true" id="select請求額通知書一時TBL件数"  resultType="RString" fetchSize="500">
+    <select  resultOrdered="true" id="select請求額通知書一時TBL件数"  resultType="int" fetchSize="500">
         SELECT
-            COUNT(1)
+            COUNT(*)
         FROM
             "DbWT1511SeikyugakuTsuchisho"
     </select>

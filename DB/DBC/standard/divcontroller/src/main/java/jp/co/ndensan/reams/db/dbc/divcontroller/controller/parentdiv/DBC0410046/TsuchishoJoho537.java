@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410046
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.kokuhorendatatorikomi.KokuhorenDataTorikomiBatchParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410046.DBC0410046TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410046.TsuchishoJoho537Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
@@ -41,18 +40,9 @@ public class TsuchishoJoho537 {
     public ResponseData<TsuchishoJoho537Div> onLoad(TsuchishoJoho537Div div) {
         KokuhorenDataTorikomiViewStateClass parmater = ViewStateHolder.get(ViewStateHolderName.国保連取込情報,
                 KokuhorenDataTorikomiViewStateClass.class);
+
         div.getCcdKokurenJohoTorikomi().initialize(parmater, SubGyomuCode.DBC介護給付, REPORTID);
         return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 「戻る」ボタン事件のメソッドです。
-     *
-     * @param div TsuchishoJoho537Div
-     * @return ResponseData
-     */
-    public ResponseData<TsuchishoJoho537Div> onClick_btnBack(TsuchishoJoho537Div div) {
-        return ResponseData.of(div).forwardWithEventName(DBC0410046TransitionEventName.戻る).respond();
     }
 
     /**
@@ -69,7 +59,7 @@ public class TsuchishoJoho537 {
     }
 
     private KokuhorenDataTorikomiBatchParameter setBatchParameter(TsuchishoJoho537Div div) {
-        //TODO QA1119
+
         if (div.getCcdKokurenJohoTorikomi().get出力順ID() != null) {
             long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
             IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();

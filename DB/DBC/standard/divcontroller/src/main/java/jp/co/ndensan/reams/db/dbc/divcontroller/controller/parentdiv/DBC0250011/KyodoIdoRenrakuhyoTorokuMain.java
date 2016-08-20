@@ -33,6 +33,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class KyodoIdoRenrakuhyoTorokuMain {
 
+    private static final RString 起動 = new RString("1");
+    private static final RString 停止 = new RString("0");
+
     /**
      * 画面初期化のメソッドです。
      *
@@ -56,6 +59,7 @@ public class KyodoIdoRenrakuhyoTorokuMain {
      * @return ResponseData
      */
     public ResponseData<KyodoIdoRenrakuhyoTorokuMainDiv> onClick_btnSave(KyodoIdoRenrakuhyoTorokuMainDiv div) {
+        div.getHdnFlag().setValue(起動);
         boolean 保存の確認flag = new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode());
         ValidationMessageControlPairs pairs = div.getKyodoIdoRenrakuhyoTorokuInfo().get一時差止日の入力チェック();
@@ -103,8 +107,18 @@ public class KyodoIdoRenrakuhyoTorokuMain {
      * @return ResponseData
      */
     public ResponseData<SourceDataCollection> onClick_btnReportPublish(KyodoIdoRenrakuhyoTorokuMainDiv div) {
+        return ResponseData.of(getHandler(div).to帳票発行処理()).respond();
+    }
+
+    /**
+     * 「発行」ボタンを更新完了に状態遷移のメソッドです。
+     *
+     * @param div 画面Div
+     * @return ResponseData
+     */
+    public ResponseData<KyodoIdoRenrakuhyoTorokuMainDiv> toAfterPrint(KyodoIdoRenrakuhyoTorokuMainDiv div) {
         getHandler(div).set更新完了メッセージ();
-        return ResponseData.of(getHandler(div).to帳票発行処理()).setState(DBC0250011StateName.更新完了);
+        return ResponseData.of(div).setState(DBC0250011StateName.更新完了);
     }
 
     /**
@@ -114,6 +128,7 @@ public class KyodoIdoRenrakuhyoTorokuMain {
      * @return ResponseData
      */
     public ResponseData<KyodoIdoRenrakuhyoTorokuMainDiv> onClick_btnSearchResult(KyodoIdoRenrakuhyoTorokuMainDiv div) {
+        div.getHdnFlag().setValue(停止);
         return getCheckMessage(div, DBC0250011TransitionEventName.検索結果一覧);
     }
 
@@ -124,6 +139,7 @@ public class KyodoIdoRenrakuhyoTorokuMain {
      * @return ResponseData
      */
     public ResponseData<KyodoIdoRenrakuhyoTorokuMainDiv> onClick_btnResearch(KyodoIdoRenrakuhyoTorokuMainDiv div) {
+        div.getHdnFlag().setValue(停止);
         return getCheckMessage(div, DBC0250011TransitionEventName.再検索);
     }
 

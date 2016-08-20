@@ -37,7 +37,7 @@ public class YokaigoNinteiTsutishoIkkatsuHakkoJoho {
      * @return 対象開始年月日 FlexibleDate
      */
     public FlexibleDate get対象開始年月日() {
-        return null == entity ? FlexibleDate.EMPTY : entity.getTaishoKaishiYMD();
+        return null == entity ? FlexibleDate.EMPTY : new FlexibleDate(entity.getTaishoKaishiTimestamp().getDate().toDateString());
     }
 
     /**
@@ -46,7 +46,7 @@ public class YokaigoNinteiTsutishoIkkatsuHakkoJoho {
      * @return 対象終了年月日 FlexibleDate
      */
     public FlexibleDate get対象終了年月日() {
-        return null == entity ? FlexibleDate.EMPTY : entity.getTaishoShuryoYMD();
+        return null == entity ? FlexibleDate.EMPTY : new FlexibleDate(entity.getTaishoShuryoTimestamp().getDate().toDateString());
     }
 
     /**
@@ -55,7 +55,7 @@ public class YokaigoNinteiTsutishoIkkatsuHakkoJoho {
      * @return 対象開始日時 RTime
      */
     public RTime get対象開始日時() {
-        return null == entity ? null : new RTime(entity.getTaishoKaishiTimestamp().toDateString());
+        return null == entity ? null : entity.getTaishoKaishiTimestamp().getRDateTime().getTime();
     }
 
     /**
@@ -64,7 +64,7 @@ public class YokaigoNinteiTsutishoIkkatsuHakkoJoho {
      * @return 対象終了日時 RTime
      */
     public RTime get対象終了日時() {
-        return null == entity ? null : new RTime(entity.getTaishoShuryoTimestamp().toDateString());
+        return null == entity ? null : entity.getTaishoShuryoTimestamp().getRDateTime().getTime();
     }
 
     /**

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushajoho;
 
-import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.DbWT5331JukyushaJohoTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.DbWT5331JukyushaJohoCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 
 /**
@@ -18,6 +18,6 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001Hihoke
 public class JukyushaHihokenshaEntity {
 
     private DbWT0001HihokenshaTempEntity 被保険者一時;
-    private DbWT5331JukyushaJohoTempEntity 受給者情報明細一時;
+    private DbWT5331JukyushaJohoCsvEntity 受給者情報明細一時;
 
 }

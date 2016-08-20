@@ -29,15 +29,22 @@ public class GemmenGengakuTaishoGaiShaListProcessParameter implements IBatchProc
 
     /**
      *
-     * @param 減免減額種類
-     * @param 基準日
+     * @param 減免減額種類 GemmenGengakuShurui
+     * @param 基準日 FlexibleDate
      */
     public GemmenGengakuTaishoGaiShaListProcessParameter(GemmenGengakuShurui 減免減額種類, FlexibleDate 基準日) {
         this.基準日 = 基準日;
         this.減免減額種類 = 減免減額種類;
     }
 
-    public GemmenGengakuTaishoGaiShaListMyBatisParameter GemmenGengakuTaishoGaiShaListMyBatisParameter(FlexibleDate 開始日, FlexibleDate 終了日) {
+    /**
+     * MybatisParameterを取得する。
+     *
+     * @param 開始日 FlexibleDate
+     * @param 終了日 FlexibleDate
+     * @return MybatisParameter
+     */
+    public GemmenGengakuTaishoGaiShaListMyBatisParameter toGemmenGengakuTaishoGaiShaListMyBatisParameter(FlexibleDate 開始日, FlexibleDate 終了日) {
         this.前年度の開始日 = 開始日;
         this.前年度の終了日 = 終了日;
         return new GemmenGengakuTaishoGaiShaListMyBatisParameter(基準日, 減免減額種類, 前年度の開始日, 前年度の終了日);

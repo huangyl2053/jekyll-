@@ -331,8 +331,10 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
 
         // TODO. for test
         model.set電話番号(new RString("02552141527"));
-        model.set郵便番号(new RString("12345678960"));
+        model.set郵便番号(new RString("012-1234"));
         model.set住所(new RString("testtest"));
+        model.set申請届出代行区分コード(new RString("1"));
+        model.set事業者区分(new RString("10"));
 
         申請届出者Div.initialize(model);
         申請届出者Div.set状態(new RString(NinteiShinseiTodokedeshaDiv.ShoriType.ShokaiMode.toString()));

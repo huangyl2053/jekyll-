@@ -75,7 +75,6 @@ public class JissekiDataIchijiSakuseiProcess extends BatchProcessBase<JissekiDat
             宛名Entity = ShikibetsuTaishoFactory.createKojin(psmEntity);
         }
         DbT4037HikazeNenkinTaishoshaEntity 非課税年金対象者Entity = jissekiDataEntity.get非課税年金対象者Entity();
-
         jissekiDataTempTableEntity.setHihokenshaNo(被保険者台帳管理NewestEntity.getHihokenshaNo());
         if (宛名Entity != null) {
             jissekiDataTempTableEntity.setAtenaKanaShimei(宛名Entity.get名称().getKana().getColumnValue());
@@ -125,9 +124,7 @@ public class JissekiDataIchijiSakuseiProcess extends BatchProcessBase<JissekiDat
         jissekiDataTempTableEntity.setDtKinngakuYobi1(非課税年金対象者Entity.getDtkingakuyobi1());
         jissekiDataTempTableEntity.setDtKinngakuYobi2(非課税年金対象者Entity.getDtkingakuyobi2());
         jissekiDataTempTableEntity.setDtYobi5(非課税年金対象者Entity.getDtyobi5());
-        jissekiDataTempTableEntity.setDtYobi5(非課税年金対象者Entity.getDtyobi5());
         jissekiDataTempTableEntity.setDtKyousaiNennkinnShoushoKigouNo(非課税年金対象者Entity.getDtkyosainenkinshoshokigono());
-
         return jissekiDataTempTableEntity;
     }
 }

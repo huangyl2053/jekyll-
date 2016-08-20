@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-3300-170 wangxingpeng -->
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hihokenshajohosoufudatasakuseyi.IKokuhorenSofuJohoMapper">
+ <!--TODO QA1283 -->
+    <select resultOrdered="true" id = "select国保連送付情報取得" resultMap="resultmap_getKokuhorenSofuJoho" parameterType="java.util.Map" fetchSize="500">
+  SELECT
+    C. "shoriYM" AS 処理年月
+    ,C. "kokanShikibetsuNo" AS 交換情報識別番号
+    ,C. "shoriJotaiKubun" AS 処理状態区分
+    ,C. "shoriJisshiTimestamp" AS 当月処理実施日時
+    ,C. "saiShoriKanoKubun" AS 再処理可能区分
+    ,E. "shoriJotaiKubun" AS 前月処理状態区分 
+    ,G. "shoriJotaiKubun" AS 前々月処理状態区分
+  FROM
+    rgdb. "DbT3104KokuhorenInterfaceKanri" AS A
+        INNER JOIN (
+        SELECT
+            B. "shoriJotaiKubun"
+            ,B. "kokanShikibetsuNo"
+            ,B. "shoriYM"
+            ,B. "sofuTorikomiKubun"
+            ,B. "saiShoriKanoKubun"
+            ,B. "shoriJisshiTimestamp"
+        FROM
+            rgdb. "DbT3104KokuhorenInterfaceKanri" AS B
+        WHERE
+            #{当月処理年月} = B. "shoriYM"
+    ) AS C
+            ON A. "kokanShikibetsuNo" = C. "kokanShikibetsuNo"
+    AND A. "shoriYM" = C. "shoriYM"
+    AND C. "sofuTorikomiKubun" = '1'
+        LEFT JOIN (
+        SELECT
+            D. "shoriJotaiKubun"
+            ,D. "kokanShikibetsuNo"
+            ,D. "shoriYM"
+            ,D. "sofuTorikomiKubun"
+            ,D. "saiShoriKanoKubun"
+            ,D. "shoriJisshiTimestamp"
+        FROM
+            rgdb. "DbT3104KokuhorenInterfaceKanri" AS D
+        WHERE
+            #{前月処理年月} = D. "shoriYM"
+    ) AS E
+            ON A. "kokanShikibetsuNo" = E. "kokanShikibetsuNo"
+    AND A. "shoriYM" = E. "shoriYM"
+    AND E. "sofuTorikomiKubun" = '1'
+        LEFT JOIN (
+        SELECT
+            F. "shoriJotaiKubun"
+            ,F. "kokanShikibetsuNo"
+            ,F. "shoriYM"
+            ,F. "sofuTorikomiKubun"
+            ,F. "saiShoriKanoKubun"
+            ,F. "shoriJisshiTimestamp"
+        FROM
+            rgdb. "DbT3104KokuhorenInterfaceKanri" AS F
+        WHERE
+            #{前々月処理年月} = F. "shoriYM"
+    ) AS G
+            ON A. "kokanShikibetsuNo" = G. "kokanShikibetsuNo"
+    AND A. "shoriYM" = G. "shoriYM"
+    AND G. "sofuTorikomiKubun" = '1'   
+    </select>
+    
+    <resultMap id="resultmap_getKokuhorenSofuJoho" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.hihokenshajohosoufudatasakuseyi.KokuhorenSofuJohoEntity" autoMapping="true">
+        <id property="処理年月" column="処理年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="交換情報識別番号" column="交換情報識別番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="処理状態区分" column="処理状態区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="前月処理状態区分" column="前月処理状態区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="前々月処理状態区分" column="前々月処理状態区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="当月処理実施日時" column="当月処理実施日時" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <id property="再処理可能区分" column="再処理可能区分" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+    </resultMap>
+</mapper>

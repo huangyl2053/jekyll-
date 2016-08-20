@@ -107,10 +107,10 @@ public class DbT3114RiyoshaFutanWariaiMeisaiDac implements ISaveable<DbT3114Riyo
      *
      * @param 被保険者番号 HihokenshaNo
      * @param 利用年月 FlexibleYearMonth
-     * @return List<DbT3114RiyoshaFutanWariaiMeisaiEntity>
+     * @return DbT3114RiyoshaFutanWariaiMeisaiEntity
      */
     @Transaction
-    public List<DbT3114RiyoshaFutanWariaiMeisaiEntity> select負担割合区分(HihokenshaNo 被保険者番号, FlexibleYearMonth 利用年月) {
+    public DbT3114RiyoshaFutanWariaiMeisaiEntity select負担割合区分(HihokenshaNo 被保険者番号, FlexibleYearMonth 利用年月) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
@@ -120,6 +120,27 @@ public class DbT3114RiyoshaFutanWariaiMeisaiDac implements ISaveable<DbT3114Riyo
                                 leq(substr(yukoKaishiYMD, NUM_1, NUM_6), 利用年月),
                                 leq(利用年月, substr(yukoShuryoYMD, NUM_1, NUM_6)),
                                 eq(logicalDeletedFlag, false))).
+                toObject(DbT3114RiyoshaFutanWariaiMeisaiEntity.class);
+    }
+
+    /**
+     * 利用者負担割合明細を取得します。
+     *
+     * @param 年度 FlexibleYear
+     * @param 被保険者番号 HihokenshaNo
+     * @return List<DbT3114RiyoshaFutanWariaiMeisaiEntity>
+     */
+    @Transaction
+    public List<DbT3114RiyoshaFutanWariaiMeisaiEntity> select履歴番号BY年度と被保険者番号(
+            FlexibleYear 年度,
+            HihokenshaNo 被保険者番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3114RiyoshaFutanWariaiMeisai.class).
+                where(and(
+                                eq(nendo, 年度),
+                                eq(hihokenshaNo, 被保険者番号))).
                 toList(DbT3114RiyoshaFutanWariaiMeisaiEntity.class);
     }
 }

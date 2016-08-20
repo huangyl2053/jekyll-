@@ -5,12 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
- * 世帯員把握テーブルのエンティティクラスです。
+ * 世帯員所得情報一時テーブルのエンティティクラスです。
  *
  * @reamsid_L DBC-4950-030 liuyang
  */
@@ -19,9 +24,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class SetaiShotokuEntity implements IDbAccessable {
 
-    private RString kijunYMD;
+    private HihokenshaNo hihokenshaNo;
+    private ShikibetsuCode shikibetsuCode;
+    private FlexibleDate kijunYMD;
+    private FlexibleYear shotokuNendo;
     private RString jushochiTokureiFlag;
-    private RString setaiCode;
+    private SetaiCode setaiCode;
     private RString honninKubun;
     private RString kazeiKubun;
     private RString kazeiKubunGemmenGo;
@@ -31,8 +39,5 @@ public class SetaiShotokuEntity implements IDbAccessable {
     private Decimal nenkiniShotokuGaku;
     private Decimal kazeiShotokuGaku;
     private RString torokuGyomu;
-    private RString hihokenshaNo;
-    private RString shikibetsuCode;
-    private RString shotokuNendo;
 
 }

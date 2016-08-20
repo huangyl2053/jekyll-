@@ -22,7 +22,7 @@ and open the template in the editor.
         A."利用者負担段階" as "riyoshaFutanDankai",
         A."合計所得金額" as "GoukeiShotokuGaku",
         A."年金収入額" as "nenkinShunyuGaku",
-        F."nyushoShisetsuCode" as "Jigy oshaNo",
+        F."nyushoShisetsuCode" as "JigyoshaNo",
         A."非課税年金勘案額" as "hikazeinenkinkannangaku"
         FROM
         "taishoShaHanteiYoukonkyoItokiTemp" A
@@ -50,19 +50,19 @@ and open the template in the editor.
         WHERE
         '1' = '1'
         <if test="is利用者負担段階_利用者負担1至3段階">
-            AND A."riyoshaFutanDankai" IN (#{Code_利用者負担1階},#{Code_利用者負担2段階},#{Code_利用者負担3段階})
+            AND A."利用者負担段階" IN (#{CODE_利用者負担1段階},#{CODE_利用者負担2段階},#{CODE_利用者負担3段階})
         </if>
         <if test="is利用者負担段階_利用者負担1段階">
-            AND A."riyoshaFutanDankai" = #{Code_利用者負担1階}
+            AND A."利用者負担段階" = #{CODE_利用者負担1段階}
         </if>
         <if test="is利用者負担段階_利用者負担2段階">
-            AND  A."riyoshaFutanDankai" = #{Code_利用者負担2段階}
+            AND  A."利用者負担段階" = #{CODE_利用者負担2段階}
         </if>
         <if test="is利用者負担段階_利用者負担3段階">
-            AND  A."riyoshaFutanDankai" = #{Code_利用者負担3段階}
+            AND  A."利用者負担段階" = #{CODE_利用者負担3段階}
         </if>
         <if test="is利用者負担段階_利用者負担4段階">
-            AND  A."riyoshaFutanDankai" = #{Code_利用者負担4段階}
+            AND  A."利用者負担段階" = #{CODE_利用者負担4段階}
         </if>
     </select>
 
@@ -81,7 +81,7 @@ and open the template in the editor.
         A."利用者負担段階" as "riyoshaFutanDankai",
         A."合計所得金額" as "GoukeiShotokuGaku",
         A."年金収入額" as "nenkinShunyuGaku",
-        F."nyushoShisetsuCode" as "Jigy oshaNo",
+        F."nyushoShisetsuCode" as "JigyoshaNo",
         A."非課税年金勘案額" as "hikazeinenkinkannangaku"
         FROM
         "taishoShaHanteiYoukonkyoItokiTemp" A
@@ -109,10 +109,10 @@ and open the template in the editor.
         WHERE
         '1' = '1'
         <if test="市町村民税非課税世帯">
-            AND  A."世帯課税区分" = #{Code_世帯課税区分_非課税}
+            AND  A."世帯課税区分" = #{CODE_世帯課税区分_非課税}
         </if>
         <if test="市町村民税本人非課税者">
-            AND  A."本人課税区分" = #{Code_世帯課税区分_課税}
+            AND  A."本人課税区分" = #{CODE_世帯課税区分_課税}
         </if>
         <if test="老齢福祉年金受給者">
             AND   A."is老齢福祉年金受給者" = TRUE
@@ -163,10 +163,10 @@ and open the template in the editor.
         WHERE
         '1' = '1'
         <if test="市町村民税非課税世帯">
-            AND  A."世帯課税区分"  = #{Code_世帯課税区分_非課税}
+            AND  A."世帯課税区分"  = #{CODE_世帯課税区分_非課税}
         </if>
         <if test="市町村民税本人非課税者">
-            AND  A."本人課税区分" = #{Code_世帯課税区分_課税}
+            AND  A."本人課税区分" = #{CODE_世帯課税区分_課税}
         </if>
         <if test="老齢福祉年金受給者">
             AND A."is老齢福祉年金受給者" = TRUE
@@ -191,7 +191,7 @@ and open the template in the editor.
         A."利用者負担段階" as "riyoshaFutanDankai",
         A."合計所得金額" as "GoukeiShotokuGaku",
         A."年金収入額" as "nenkinShunyuGaku",
-        F."nyushoShisetsuCode" as "Jigy oshaNo",
+        F."nyushoShisetsuCode" as "JigyoshaNo",
         A."非課税年金勘案額" as "hikazeinenkinkannangaku"
         FROM
         "taishoShaHanteiYoukonkyoItokiTemp" A
@@ -219,10 +219,10 @@ and open the template in the editor.
         WHERE
         '1' = '1'
         <if test="市町村民税非課税世帯">
-            AND  A."世帯課税区分"  = #{Code_世帯課税区分_非課税}
+            AND  A."世帯課税区分"  = #{CODE_世帯課税区分_非課税}
         </if>
         <if test="市町村民税本人非課税者">
-            AND   A."本人課税区分" = #{Code_世帯課税区分_課税}
+            AND   A."本人課税区分" = #{CODE_世帯課税区分_課税}
         </if>
         <if test="老齢福祉年金受給者">
             AND  A."is老齢福祉年金受給者" = TRUE
@@ -231,10 +231,10 @@ and open the template in the editor.
             AND  A."is生活保護受給者" = TRUE
         </if>
         <if test="課税世帯の被保険者を含む">
-            AND  A."世帯課税区分" = #{Code_世帯課税区分_課税}
+            AND  A."世帯課税区分" = #{CODE_世帯課税区分_課税}
         </if>
         <if test="!課税世帯の被保険者を含む">
-            AND  A."世帯課税区分" = #{Code_世帯課税区分_非課税}
+            AND  A."世帯課税区分" = #{CODE_世帯課税区分_非課税}
         </if>
     </select>
     <resultMap id="RseultMap_ShinseishoHakkoTaishoJohoSakuseiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmenshinseishotaishohaaku.ShinseishoHakkoTaishoJohoSakuseiEntity" autoMapping="true">

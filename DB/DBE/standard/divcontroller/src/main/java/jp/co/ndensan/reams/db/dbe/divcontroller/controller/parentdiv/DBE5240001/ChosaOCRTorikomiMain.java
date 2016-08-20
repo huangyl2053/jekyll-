@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosaocrtorikomi.ChosaOCRTorikomiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikekkajoho.NinteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho2;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosaocrtorikomi.ChosaOCRTorikomiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001.ChosaOCRTorikomiMainDiv;
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5240001.Cho
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5240001.ChosaOCRTorikomiValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.chosaocrtorikomi.ChosaOCRTorikomiFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.ninteikekkajoho.NinteiKekkaJohoManager;
+import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -30,6 +32,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
@@ -65,6 +68,8 @@ public class ChosaOCRTorikomiMain {
     private static final RString チェックOK = new RString("OK");
     private static final RString チェックNG = new RString("NG");
     private static final RString 記入無し = new RString("0");
+    private static final RString INDEX_0 = new RString("0");
+    private static final RString INDEX_1 = new RString("1");
 
     /**
      * 画面初期化処理です。
@@ -94,7 +99,7 @@ public class ChosaOCRTorikomiMain {
     public ResponseData<ChosaOCRTorikomiMainDiv> onClick_BtnOCRTorikomi(ChosaOCRTorikomiMainDiv div) {
         ViewStateHolder.put(ViewStateKeys.審査会開催番号, new RString("11256"));
         RString 審査会開催番号 = ViewStateHolder.get(ViewStateKeys.審査会開催番号, RString.class);
-        List<TorikomiEntity> entityList = csvCheck処理(getHandler(div).onClick_Ikensho(), div, 審査会開催番号);
+        List<TorikomiEntity> entityList = csvCheck処理(getHandler(div).onClick_Ikensho());
         if (entityList.isEmpty()) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(getValidationHandler().check一覧データの存在());
@@ -111,7 +116,7 @@ public class ChosaOCRTorikomiMain {
         return ResponseData.of(div).respond();
     }
 
-    private List<TorikomiEntity> csvCheck処理(List<TorikomiData> dataList, ChosaOCRTorikomiMainDiv div, RString 審査会開催番号) {
+    private List<TorikomiEntity> csvCheck処理(List<TorikomiData> dataList) {
         if (dataList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(ファイル名.toString()));
         }
@@ -281,6 +286,7 @@ public class ChosaOCRTorikomiMain {
      * @return ResponseData<ImageinputDiv>
      */
     public ResponseData<ChosaOCRTorikomiMainDiv> onClick_BtnSave(ChosaOCRTorikomiMainDiv div) {
+        RString 審査会開催番号 = ViewStateHolder.get(ViewStateKeys.審査会開催番号, RString.class);
         boolean 選択Flag = false;
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
@@ -300,7 +306,7 @@ public class ChosaOCRTorikomiMain {
                 validationMessages.add(getValidationHandler().check一覧対象未選択());
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
-            db更新(div);
+            db更新(div, 審査会開催番号);
             onClick_BtnOCRTorikomi(div);
         }
         return ResponseData.of(div).respond();
@@ -394,7 +400,7 @@ public class ChosaOCRTorikomiMain {
         mannger.saveイメージ情報(image);
     }
 
-    private void db更新(ChosaOCRTorikomiMainDiv div) {
+    private void db更新(ChosaOCRTorikomiMainDiv div, RString 審査会開催番号) {
         List<TorikomiEntity> dataList = ViewStateHolder.get(ViewStateKeys.介護認定審査会審査結果登録, TorikomiEntityCollection.class).getDataList();
         for (dgChosahyoTorikomiKekka_Row row : div.getDgChosahyoTorikomiKekka().getDataSource()) {
             if (row.getSelected() && チェックOK.equals(row.getOkOrNg())) {
@@ -402,18 +408,16 @@ public class ChosaOCRTorikomiMain {
                     if (row.getShoKisaiHokenshaNo().equals(data.get保険者番号())
                             && row.getHihokenshaNo().equals(data.get被保険者番号())
                             && row.getShinseishoKanriNo().equals(data.get申請書管理番号().value())) {
-                        updateDbT5102(div, row, data);
-//                    updateDbT5503(div, row, data);
-                        updateDbT5511(div, row, data);
+                        updateDbT5102(div, row, data, 審査会開催番号);
+                        updateDbT5503(div, row, data, 審査会開催番号);
+                        updateDbT5511(div, row, data, 審査会開催番号);
                     }
                 }
             }
         }
     }
 
-    private void updateDbT5102(ChosaOCRTorikomiMainDiv div, dgChosahyoTorikomiKekka_Row row, TorikomiEntity data) {
-        ViewStateHolder.put(ViewStateKeys.審査会開催番号, new RString("11256"));
-        RString 審査会開催番号 = ViewStateHolder.get(ViewStateKeys.審査会開催番号, RString.class);
+    private void updateDbT5102(ChosaOCRTorikomiMainDiv div, dgChosahyoTorikomiKekka_Row row, TorikomiEntity data, RString 審査会開催番号) {
         NinteiKekkaJohoManager mange = new NinteiKekkaJohoManager();
         NinteiKekkaJoho ninteiKekkaJoho = mange.get要介護認定結果情報(data.get申請書管理番号());
         if (ninteiKekkaJoho == null) {
@@ -424,23 +428,53 @@ public class ChosaOCRTorikomiMain {
         }
         mange.save要介護認定結果情報(ninteiKekkaJoho);
     }
-//
-//    private void updateDbT5503(ChosaOCRTorikomiMainDiv div, dgChosahyoTorikomiKekka_Row row, TorikomiData data) {
-//        NinteiKekkaJohoManager mange = new NinteiKekkaJohoManager();
-//        NinteiKekkaJoho ninteiKekkaJoho = mange.get要介護認定結果情報(data.get申請書管理番号());
-//        if (ninteiKekkaJoho == null) {
-//            ninteiKekkaJoho = new NinteiKekkaJoho(data.get申請書管理番号());
-//            ninteiKekkaJoho = getHandler(div).editNinteiKekkaJoho(ninteiKekkaJoho, row, data, 審査会開催番号);
-//        } else {
-//            ninteiKekkaJoho = new NinteiKekkaJoho(data.get申請書管理番号());
-//            ninteiKekkaJoho = getHandler(div).editNinteiKekkaJoho(ninteiKekkaJoho.modifiedModel(), row, data, 審査会開催番号);
-//        }
-//        mange.save要介護認定結果情報(ninteiKekkaJoho);
-//    }
 
-    private void updateDbT5511(ChosaOCRTorikomiMainDiv div, dgChosahyoTorikomiKekka_Row row, TorikomiEntity data) {
-        ViewStateHolder.put(ViewStateKeys.審査会開催番号, new RString("11256"));
-        RString 審査会開催番号 = ViewStateHolder.get(ViewStateKeys.審査会開催番号, RString.class);
+    private void updateDbT5503(ChosaOCRTorikomiMainDiv div, dgChosahyoTorikomiKekka_Row row, TorikomiEntity data, RString 審査会開催番号) {
+        ShinsakaiWariateIinJohoManager mange = new ShinsakaiWariateIinJohoManager();
+        ShinsakaiWariateIinJoho shinsakaiWariateIinJoho1 = mange.get介護認定審査会割当委員情報(審査会開催番号, data.get審査員コード1());
+        if (shinsakaiWariateIinJoho1 == null) {
+            shinsakaiWariateIinJoho1 = new ShinsakaiWariateIinJoho(審査会開催番号, data.get審査員コード1());
+            shinsakaiWariateIinJoho1 = getHandler(div).editShinsakaiWariateIinJoho(shinsakaiWariateIinJoho1, row, data, 審査会開催番号);
+            shinsakaiWariateIinJoho1.createBuilderForEdit().set介護認定審査会議長区分コード(get介護認定審査会議長区分コード(data.get審査員1審査員長フラグ()));
+            shinsakaiWariateIinJoho1.createBuilderForEdit().set委員出席(get委員出席(data.get審査員1出席状況()));
+        } else {
+            shinsakaiWariateIinJoho1 = getHandler(div).editShinsakaiWariateIinJoho(shinsakaiWariateIinJoho1.modifiedModel(), row, data, 審査会開催番号);
+            shinsakaiWariateIinJoho1.createBuilderForEdit().set介護認定審査会議長区分コード(get介護認定審査会議長区分コード(data.get審査員1審査員長フラグ()));
+            shinsakaiWariateIinJoho1.createBuilderForEdit().set委員出席(get委員出席(data.get審査員1出席状況()));
+        }
+        mange.save介護認定審査会割当委員情報(shinsakaiWariateIinJoho1);
+        ShinsakaiWariateIinJoho shinsakaiWariateIinJoho2 = mange.get介護認定審査会割当委員情報(審査会開催番号, data.get審査員コード1());
+        if (shinsakaiWariateIinJoho2 == null) {
+            shinsakaiWariateIinJoho2 = new ShinsakaiWariateIinJoho(審査会開催番号, data.get審査員コード1());
+            shinsakaiWariateIinJoho2 = getHandler(div).editShinsakaiWariateIinJoho(shinsakaiWariateIinJoho2, row, data, 審査会開催番号);
+            shinsakaiWariateIinJoho2.createBuilderForEdit().set介護認定審査会議長区分コード(get介護認定審査会議長区分コード(data.get審査員1審査員長フラグ()));
+            shinsakaiWariateIinJoho2.createBuilderForEdit().set委員出席(get委員出席(data.get審査員1出席状況()));
+        } else {
+            shinsakaiWariateIinJoho2 = getHandler(div).editShinsakaiWariateIinJoho(shinsakaiWariateIinJoho2.modifiedModel(), row, data, 審査会開催番号);
+            shinsakaiWariateIinJoho2.createBuilderForEdit().set介護認定審査会議長区分コード(get介護認定審査会議長区分コード(data.get審査員1審査員長フラグ()));
+            shinsakaiWariateIinJoho2.createBuilderForEdit().set委員出席(get委員出席(data.get審査員1出席状況()));
+        }
+        mange.save介護認定審査会割当委員情報(shinsakaiWariateIinJoho2);
+    }
+
+    private Code get介護認定審査会議長区分コード(RString 審査員長フラグ) {
+        Code 会議長区分コード = Code.EMPTY;
+        if (INDEX_1.equals(審査員長フラグ)) {
+            会議長区分コード = new Code("1");
+        } else if (INDEX_0.equals(審査員長フラグ)) {
+            会議長区分コード = new Code("0");
+        }
+        return 会議長区分コード;
+    }
+
+    private boolean get委員出席(RString 出席状況) {
+        if (INDEX_1.equals(出席状況)) {
+            return true;
+        }
+        return false;
+    }
+
+    private void updateDbT5511(ChosaOCRTorikomiMainDiv div, dgChosahyoTorikomiKekka_Row row, TorikomiEntity data, RString 審査会開催番号) {
         ShinsakaiKaisaiKekkaJohoManager mange = ShinsakaiKaisaiKekkaJohoManager.createInstance();
         ShinsakaiKaisaiKekkaJoho2 kekkaJoho = mange.get介護認定審査会開催結果情報(審査会開催番号);
         if (kekkaJoho == null) {

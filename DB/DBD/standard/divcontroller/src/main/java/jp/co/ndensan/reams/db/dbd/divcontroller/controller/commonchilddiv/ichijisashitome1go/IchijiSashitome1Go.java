@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.ichijisash
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IDialogResponse;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -29,10 +28,7 @@ public class IchijiSashitome1Go {
      * @return ResponseData<IchijiSashitome1GoDiv>
      */
     public ResponseData<IchijiSashitome1GoDiv> onLoad(IchijiSashitome1GoDiv div) {
-        Message message = getHandler(div).onLoad();
-        if (message != null) {
-            return ResponseData.of(div).addMessage(message).respond();
-        }
+        getHandler(div).onLoad();
         return ResponseData.of(div).respond();
     }
 

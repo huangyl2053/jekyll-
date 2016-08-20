@@ -55,7 +55,7 @@ public class KogakuGassanKyufuJisseki {
                 = KogakuGassanKyufuJissekiFinder.createInstance().getKogakuGassanKyufuJisseki(被保険者番号).records();
         boolean isデータ存在 = KogakuGassanKyufuJissekiFinder.createInstance().isデータ存在チェック(被保険者番号);
         boolean is高額合算給付実績チェック = KogakuGassanKyufuJissekiFinder.createInstance().is高額合算給付実績チェック(被保険者番号);
-        getHandler(div).onLoad(被保険者番号, 識別コード, 高額合算給付実績情報, is高額合算給付実績チェック);
+        getHandler(div).onLoad(被保険者番号, 識別コード, 高額合算給付実績情報, isデータ存在);
         if (isデータ存在) {
             return ResponseData.of(div).addValidationMessages(getValidationHandler().do受給共通チェック()).respond();
         }

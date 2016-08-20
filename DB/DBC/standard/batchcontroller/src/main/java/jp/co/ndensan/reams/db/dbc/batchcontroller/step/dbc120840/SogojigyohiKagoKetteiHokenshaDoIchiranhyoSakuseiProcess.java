@@ -251,7 +251,6 @@ public class SogojigyohiKagoKetteiHokenshaDoIchiranhyoSakuseiProcess extends Bat
         output.set証記載保険者名(entity.get証記載保険者名());
 
         if (集計Flag) {
-            setEmpty(output);
             output.set総合事業費_件数(doカンマ編集(entity.get総合事業費_件数()));
             output.set総合事業費_単位数(doカンマ編集(entity.get総合事業費_単位数()));
             output.set総合事業費_負担額(doカンマ編集(entity.get総合事業費_負担額()));
@@ -285,22 +284,6 @@ public class SogojigyohiKagoKetteiHokenshaDoIchiranhyoSakuseiProcess extends Bat
                 entity.get被保険者番号().getColumnValue());
         return PersonalData.of(entity.get識別コード(), expandedInformations);
     }
-
-    private void setEmpty(SogojigyohiKagoKetteiHokenshaIchiranCSVEntity output) {
-        output.set取扱年月(RString.EMPTY);
-        output.set事業者番号(RString.EMPTY);
-        output.set事業者名(RString.EMPTY);
-        output.set被保険者番号(RString.EMPTY);
-        output.set被保険者氏名(RString.EMPTY);
-        output.setサービス提供年月(RString.EMPTY);
-        output.setサービス種類コード(RString.EMPTY);
-        output.setサービス種類名(RString.EMPTY);
-        output.set過誤申立事由コード(RString.EMPTY);
-        output.set過誤申立事由(RString.EMPTY);
-        output.set単位数(RString.EMPTY);
-        output.set負担額(RString.EMPTY);
-    }
-
     private RString doカンマ編集(Decimal number) {
         if (null == number) {
             return RString.EMPTY;

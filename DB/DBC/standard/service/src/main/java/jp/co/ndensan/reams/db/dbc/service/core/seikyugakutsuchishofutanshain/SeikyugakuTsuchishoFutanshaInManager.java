@@ -108,7 +108,6 @@ public class SeikyugakuTsuchishoFutanshaInManager {
                 dataEntity.setCsvGokeiEntity(gokeiCsvEntity);
 
                 dataList.add(dataEntity);
-
                 headCsvEntity = new SeikyugakuTsuchishoFutanshaInCsvHeadEntity();
                 meisaiCsvEntity = new SeikyugakuTsuchishoFutanshaInCsvMeisaiEntity();
                 gokeiCsvEntity = new SeikyugakuTsuchishoFutanshaInCsvGokeiEntity();

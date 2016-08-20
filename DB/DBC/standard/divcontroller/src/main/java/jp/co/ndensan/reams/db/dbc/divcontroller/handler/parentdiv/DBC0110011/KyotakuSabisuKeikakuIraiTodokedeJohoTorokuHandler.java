@@ -246,7 +246,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         }
         if (is自己作成の場合()) {
             div.getRadTodokedeKubun().setSelectedKey(KEY_0);
-            div.getRadKeikakuKubun().setDisplayNone(true);
+            div.getRadKeikakuKubun().setDisplayNone(false);
             div.getRadKeikakuKubun().setSelectedKey(KEY_0);
             div.getRadKeikakuSakuseiKubun().setDataSource(get自己作成DataSource());
             div.getRadKeikakuSakuseiKubun().setSelectedIndex(0);
@@ -535,7 +535,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         }
         if (is自己作成の場合()) {
             KyotakuKeikakuJikoSakusei 居宅給付計画自己作成 = 居宅給付計画届出.getKyotakuKeikakuJikoSakuseiList().get(0);
-            div.getRadKeikakuKubun().setDisplayNone(true);
+            div.getRadKeikakuKubun().setDisplayNone(false);
             if (居宅.equals(居宅給付計画自己作成.get居宅_総合事業区分())) {
                 div.getRadKeikakuKubun().setSelectedKey(KEY_0);
             } else if (総合事業.equals(居宅給付計画自己作成.get居宅_総合事業区分())) {
@@ -674,7 +674,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         row.setTaishoYM(居宅給付計画届出履歴.get対象年月().toDateString());
         row.setKeikakuSakuseiKubun(KyotakuservicekeikakuSakuseikubunCode.toValue(
                 居宅給付計画事業者.get作成区分コード()).get名称());
-        row.setJigyoshaNo(居宅給付計画事業者.get被保険者番号().getColumnValue());
+        row.setJigyoshaNo(居宅給付計画事業者.get計画事業者番号().getColumnValue());
         row.setJigyoshaName(get事業者名(居宅給付計画事業者.get計画事業者番号().getColumnValue()));
         row.setYukoMuko(is直近履歴 ? FLAG_直近履歴 : FLAG_履歴);
         row.setRirekiNo(new RString(居宅給付計画事業者.get履歴番号()));

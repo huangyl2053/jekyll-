@@ -78,7 +78,8 @@ public class SokujiFukaKouseiMain {
     private static final RString 前年度の情報を表示する = new RString("前年度の情報を表示する");
     private static final RString 業務固有の識別情報名称 = new RString("業務固有の識別情報");
     private static final RString 四月一日 = new RString("0401");
-    private static final RString チェック済み = new RString("チェック済み");
+    private static final RString チェック済み_特徴警告 = new RString("チェック済み_特徴警告");
+    private static final RString チェック済み_普徴警告 = new RString("チェック済み_普徴警告");
     private static final RString メニューID_通知書発行後異動把握 = new RString("DBBMN32001");
     private static final RString メニューID_特徴仮算定賦課エラー一覧 = new RString("DBBMN33004");
     private static final RString メニューID_即時賦課更正 = new RString("DBBMN13001");
@@ -291,10 +292,11 @@ public class SokujiFukaKouseiMain {
     public ResponseData<SokujiFukaKouseiMainDiv> onChange_ddlKoseigoTsuchishoNo(SokujiFukaKouseiMainDiv div) {
         KoseiZengoChoshuHoho 更正前後徴収方法 = ViewStateHolder.get(ViewStateKeys.更正前後徴収方法, KoseiZengoChoshuHoho.class);
         List<KoseiZengoFuka> 更正前後賦課のリスト = ViewStateHolder.get(ViewStateKeys.更正前後賦課のリスト, List.class);
+        NendobunFukaList 更正前 = ViewStateHolder.get(ViewStateKeys.更正前, NendobunFukaList.class);
         NendobunFukaList 更正後 = ViewStateHolder.get(ViewStateKeys.更正後, NendobunFukaList.class);
         boolean is本算定処理済フラグ = ViewStateHolder.get(ViewStateKeys.本算定処理済フラグ, Boolean.class);
         SokujiFukaKouseiMainHandler handler = getHandler(div);
-        handler.set画面入力項目を反映(更正後);
+        handler.set画面入力項目を反映(更正前, 更正後);
         KoseiZengoFuka 更正前後賦課 = new KoseiZengoFuka();
         for (KoseiZengoFuka koseiZengoFuka : 更正前後賦課のリスト) {
             if (更正後.get通知書番号().getColumnValue().equals(koseiZengoFuka.get通知書番号().getColumnValue())) {
@@ -395,9 +397,10 @@ public class SokujiFukaKouseiMain {
      * @return ResponseData<SokujiFukaKouseiMainDiv>
      */
     public ResponseData<SokujiFukaKouseiMainDiv> onClick_btnYokunendoHyoji(SokujiFukaKouseiMainDiv div) {
+        NendobunFukaList 更正前 = ViewStateHolder.get(ViewStateKeys.更正前, NendobunFukaList.class);
         NendobunFukaList 更正後 = ViewStateHolder.get(ViewStateKeys.更正後, NendobunFukaList.class);
         SokujiFukaKouseiMainHandler handler = getHandler(div);
-        boolean isChange = handler.set画面入力項目を反映(更正後);
+        boolean isChange = handler.set画面入力項目を反映(更正前, 更正後);
         if (isChange) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(DbzQuestionMessages.変更未保存の確認.getMessage()).respond();
@@ -627,12 +630,13 @@ public class SokujiFukaKouseiMain {
             boolean is期別特徴停止の確認) {
         valid = validationHandler.validate特徴警告();
         if (valid.iterator().hasNext()
-                && !チェック済み.equals(div.getIsHasWarningFlag())
+                && !チェック済み_特徴警告.equals(div.getIsHasWarningFlag())
+                && !チェック済み_普徴警告.equals(div.getIsHasWarningFlag())
                 && (!ResponseHolder.isWarningIgnoredRequest()
                 || (ResponseHolder.getButtonType() == null && ResponseHolder.isWarningIgnoredRequest())
                 || is保存の確認
                 || is期別特徴停止の確認)) {
-            div.setIsHasWarningFlag(チェック済み);
+            div.setIsHasWarningFlag(チェック済み_特徴警告);
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
         return null;
@@ -647,8 +651,10 @@ public class SokujiFukaKouseiMain {
         valid = validationHandler.validate普徴警告();
         if (valid.iterator().hasNext()
                 && (!ResponseHolder.isWarningIgnoredRequest()
+                || (ResponseHolder.isWarningIgnoredRequest() && チェック済み_特徴警告.equals(div.getIsHasWarningFlag()))
                 || is保存の確認
                 || is期別特徴停止の確認)) {
+            div.setIsHasWarningFlag(チェック済み_普徴警告);
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
         return null;

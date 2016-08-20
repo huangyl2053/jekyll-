@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd4030011;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -24,7 +24,7 @@ import lombok.Getter;
 public class ShogaishaKojoTaishoshaListMyBatisParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
 
     private final FlexibleYear 対象年度;
-    private final HihokenshaNo 被保険者番号;
+    private final RString 被保険者番号;
     private final RString 氏名;
     private final RString 認定区分;
     private final RString 認定内容;
@@ -32,13 +32,13 @@ public class ShogaishaKojoTaishoshaListMyBatisParameter extends UaFt200FindShiki
     private final RString 障害高齢者の日常生活自立度;
     private final RString 障がい者手帳;
     private final RString 喪失事由;
-    private final RDate 喪失日FROM;
-    private final RDate 喪失日TO;
-    private final RDate 決定日FROM;
-    private final RDate 決定日TO;
+    private final FlexibleDate 喪失日FROM;
+    private final FlexibleDate 喪失日TO;
+    private final FlexibleDate 決定日FROM;
+    private final FlexibleDate 決定日TO;
     private final RDate 交付日;
     private final RString 前回非該当者;
-    private final boolean 障がい者手帳ある;
+    private final boolean 障がい者手帳あり;
     private final boolean 障がい者手帳なし;
     private final boolean 前回非該当者含まない;
     private final FlexibleYear 対象年度plus1;
@@ -63,9 +63,10 @@ public class ShogaishaKojoTaishoshaListMyBatisParameter extends UaFt200FindShiki
      * @param 前回非該当者 前回非該当者
      * @param shikibetsuTaishoPSMSearchKey 宛名識別対象PSM検索キー
      */
-    public ShogaishaKojoTaishoshaListMyBatisParameter(FlexibleYear 対象年度, HihokenshaNo 被保険者番号, RString 氏名, RString 認定区分,
+    public ShogaishaKojoTaishoshaListMyBatisParameter(FlexibleYear 対象年度, RString 被保険者番号, RString 氏名, RString 認定区分,
             RString 認定内容, RString 認知症高齢者の日常生活自立度, RString 障害高齢者の日常生活自立度, RString 障がい者手帳,
-            RString 喪失事由, RDate 喪失日FROM, RDate 喪失日TO, RDate 決定日FROM, RDate 決定日TO, RDate 交付日, RString 前回非該当者,
+            RString 喪失事由, FlexibleDate 喪失日FROM, FlexibleDate 喪失日TO, FlexibleDate 決定日FROM, FlexibleDate 決定日TO,
+            RDate 交付日, RString 前回非該当者,
             IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey) {
 
         super(shikibetsuTaishoPSMSearchKey);
@@ -83,7 +84,7 @@ public class ShogaishaKojoTaishoshaListMyBatisParameter extends UaFt200FindShiki
         this.決定日FROM = 決定日FROM;
         this.決定日TO = 決定日TO;
         this.交付日 = 交付日;
-        this.障がい者手帳ある = new RString("ある").equals(障がい者手帳);
+        this.障がい者手帳あり = new RString("あり").equals(障がい者手帳);
         this.障がい者手帳なし = new RString("なし").equals(障がい者手帳);
         this.前回非該当者 = 前回非該当者;
         this.前回非該当者含まない = new RString("含まない").equals(前回非該当者);

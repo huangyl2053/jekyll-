@@ -39,10 +39,10 @@ public class ServiceDiv extends Panel {
     private DataGrid<dgServive_Row> dgServive;
     @JsonProperty("txt11")
     private TextBox txt11;
-    @JsonProperty("txt13")
-    private TextBox txt13;
     @JsonProperty("txt12")
     private TextBox txt12;
+    @JsonProperty("txt13")
+    private TextBox txt13;
     @JsonProperty("txt15")
     private TextBox txt15;
     @JsonProperty("txt17")
@@ -219,24 +219,6 @@ public class ServiceDiv extends Panel {
     }
 
     /*
-     * gettxt13
-     * @return txt13
-     */
-    @JsonProperty("txt13")
-    public TextBox getTxt13() {
-        return txt13;
-    }
-
-    /*
-     * settxt13
-     * @param txt13 txt13
-     */
-    @JsonProperty("txt13")
-    public void setTxt13(TextBox txt13) {
-        this.txt13 = txt13;
-    }
-
-    /*
      * gettxt12
      * @return txt12
      */
@@ -252,6 +234,24 @@ public class ServiceDiv extends Panel {
     @JsonProperty("txt12")
     public void setTxt12(TextBox txt12) {
         this.txt12 = txt12;
+    }
+
+    /*
+     * gettxt13
+     * @return txt13
+     */
+    @JsonProperty("txt13")
+    public TextBox getTxt13() {
+        return txt13;
+    }
+
+    /*
+     * settxt13
+     * @param txt13 txt13
+     */
+    @JsonProperty("txt13")
+    public void setTxt13(TextBox txt13) {
+        this.txt13 = txt13;
     }
 
     /*

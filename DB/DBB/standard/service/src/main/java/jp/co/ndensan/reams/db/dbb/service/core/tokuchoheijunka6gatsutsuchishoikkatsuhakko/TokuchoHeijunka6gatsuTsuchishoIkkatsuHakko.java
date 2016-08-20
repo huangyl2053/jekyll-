@@ -96,8 +96,9 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
     private static final ReportId 帳票分類ID_DBB100012 = new ReportId("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBB200004"));
+    private static final ReportId 代行プリント送付票_帳票ID = new ReportId("URU000A10_DaikoPrintCheck");
     private static final ReportId REPORT_ID_DBB100012 = new ReportId("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
-    private static final RString 処理名 = new RString("特徴平準化（特徴6月分）通知書一括発行");
+    private static final RString 代行プリント送付票_処理名 = new RString("特徴平準化（特徴6月分）通知書一括発行");
     private static final RString ファイル名 = new RString("TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranData.csv");
     private static final RString ファイル名TEMP = new RString("TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranDataTemp.csv");
     private static final RString 拡張子_TEMP = new RString("Temp");
@@ -545,8 +546,8 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         DaikoPrintItem daikoPrintItem = new DaikoPrintItem(SubGyomuCode.DBB介護賦課,
                 導入団体クラス.getLasdecCode_(), 導入団体クラス.get市町村名(),
                 ジョブ番号.concat(RString.HALF_SPACE).concat(new RString(String.valueOf(JobContextHolder.getJobId()))),
-                処理名,
-                param.get帳票ID(),
+                代行プリント送付票_処理名,
+                代行プリント送付票_帳票ID.getColumnValue(),
                 帳票名List, ページ数List, 抽出条件List,
                 出力順項目List, 改ページ項目List, Collections.<RString>emptyList());
         IDaikoPrint daikoPrint = DaikoPrintFactory.createInstance(daikoPrintItem);

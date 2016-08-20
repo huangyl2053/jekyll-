@@ -93,8 +93,6 @@ public class KokuhorenJukyushaInMakeCsvFileProcess extends BatchKeyBreakBase<DbW
     private IOutputOrder 並び順;
     private Map<RString, RString> 出力順Map;
     private KokuhorenIchiranhyoMybatisParameter 帳票データの取得Parameter;
-    private List<DbWT0001DbWT5331Entity> entityList;
-    private DbWT0001DbWT5331Entity currentRecord;
     private KokuhorenJukyushaOutCsvEntity csvEntity;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
@@ -132,6 +130,8 @@ public class KokuhorenJukyushaInMakeCsvFileProcess extends BatchKeyBreakBase<DbW
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
     private static final RString 百分率 = new RString("%");
+    private static final RString CODE = new RString("0003");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
 
     @Override
     protected void initialize() {
@@ -139,7 +139,6 @@ public class KokuhorenJukyushaInMakeCsvFileProcess extends BatchKeyBreakBase<DbW
         改頁項目名リスト = new ArrayList<>();
         改頁リスト = new ArrayList<>();
         出力順Map = new HashMap<>();
-        entityList = new ArrayList<>();
         帳票データの取得Parameter = new KokuhorenIchiranhyoMybatisParameter();
 
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
@@ -150,8 +149,7 @@ public class KokuhorenJukyushaInMakeCsvFileProcess extends BatchKeyBreakBase<DbW
                     .replace(実行不可MESSAGE.toString()).toString());
         }
         並び順 = order;
-        RString 出力順 = MyBatisOrderByClauseCreator.create(KokuhorenJukyushaDaichoIchiranProperty//
-                .DBC200006ShutsuryokujunEnum.class, order);
+        RString 出力順 = MyBatisOrderByClauseCreator.create(KokuhorenJukyushaDaichoIchiranProperty.DBC200006ShutsuryokujunEnum.class, order);
         if (RString.isNullOrEmpty(出力順)) {
             出力順 = デフォルト出力順;
         } else {
@@ -222,30 +220,18 @@ public class KokuhorenJukyushaInMakeCsvFileProcess extends BatchKeyBreakBase<DbW
     protected void usualProcess(DbWT0001DbWT5331Entity entity) {
         アクセスログ対象追加(entity);
 
-        currentRecord = entity;
-        entityList.add(entity);
+        csvEntity = new KokuhorenJukyushaOutCsvEntity();
         DbWT0001DbWT5331Entity beforeEntity = getBefore();
-        if (null != beforeEntity) {
-            if (null == csvEntity) {
-                csvEntity = new KokuhorenJukyushaOutCsvEntity();
-                editヘッダー項目(beforeEntity);
-            }
-            setSource(beforeEntity);
-            writeLine(beforeEntity);
-
+        if (null == beforeEntity) {
+            editヘッダー項目(entity);
         }
+        setSource(entity);
+        writeLine(entity);
+
     }
 
     @Override
     protected void afterExecute() {
-        if (!entityList.isEmpty()) {
-            writeLine(currentRecord);
-            if (1 == entityList.size()) {
-                csvEntity = new KokuhorenJukyushaOutCsvEntity();
-                editヘッダー項目(currentRecord);
-            }
-            setSource(currentRecord);
-        }
         eucCsvWriter.close();
 
         if (!personalDataList.isEmpty()) {
@@ -416,11 +402,10 @@ public class KokuhorenJukyushaInMakeCsvFileProcess extends BatchKeyBreakBase<DbW
         csvEntity.set国保被保険者証番号(出力対象.get被保険者証番号国保());
         csvEntity.set個人番号(出力対象.get宛名番号());
         eucCsvWriter.writeLine(csvEntity);
-        csvEntity = new KokuhorenJukyushaOutCsvEntity();
     }
 
     private PersonalData getPersonalData(DbWT0001DbWT5331Entity entity) {
-        ExpandedInformation expandedInformations = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
+        ExpandedInformation expandedInformations = new ExpandedInformation(new Code(CODE), 被保険者番号,
                 getColumnValue(entity.get登録被保険者番号()));
         return PersonalData.of(new ShikibetsuCode(entity.get識別コード()), expandedInformations);
     }

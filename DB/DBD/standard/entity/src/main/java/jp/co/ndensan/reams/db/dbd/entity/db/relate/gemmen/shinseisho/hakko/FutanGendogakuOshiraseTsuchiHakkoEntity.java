@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 負担限度額認定お知らせ通知書発行Entityクラスです。
@@ -24,7 +23,7 @@ public class FutanGendogakuOshiraseTsuchiHakkoEntity {
     private HihokenshaNo 被保険者番号;
     private ShikibetsuCode 識別コード;
     private boolean 旧措置者フラグ;
-    private RString 新規更新区分;
+    private boolean 更新認定フラグ;
     private UaFt200FindShikibetsuTaishoEntity 宛名;
     private UaFt250FindAtesakiEntity 宛先;
 }

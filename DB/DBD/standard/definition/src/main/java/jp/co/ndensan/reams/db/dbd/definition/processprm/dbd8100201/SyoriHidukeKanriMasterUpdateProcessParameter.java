@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100201;
 
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd8100201.SyoriHidukeKanriMasterUpdateMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -38,7 +37,7 @@ public class SyoriHidukeKanriMasterUpdateProcessParameter implements IBatchProce
      * @param 処理名 処理名
      * @return 処理日付管理マスタ更新SQLのパラメター
      */
-    public SyoriHidukeKanriMasterUpdateMybatisParameter toSyoriHidukeKanriMasterUpdateMybatisParameter(LasdecCode 保険者情報_保険者番号,
+    public SyoriHidukeKanriMasterUpdateMybatisParameter toSyoriHidukeKanriMasterUpdateMybatisParameter(RString 保険者情報_保険者番号,
             RString 処理名) {
         return new SyoriHidukeKanriMasterUpdateMybatisParameter(保険者情報_保険者番号, 処理名, 処理年度, 処理区分, 対象月);
     }

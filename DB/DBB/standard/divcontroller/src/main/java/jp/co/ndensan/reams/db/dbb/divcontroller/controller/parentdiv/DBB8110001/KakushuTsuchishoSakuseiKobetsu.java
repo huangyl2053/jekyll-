@@ -67,12 +67,13 @@ public class KakushuTsuchishoSakuseiKobetsu {
         FlexibleYear 賦課年度;
         LasdecCode 市町村コード;
         ShikibetsuCode 識別コード;
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        HihokenshaNo 被保険者番号;
         if (即時賦課更正.equals(ResponseHolder.getMenuID())) {
             通知書番号 = ViewStateHolder.get(ViewStateKeys.通知書番号, TsuchishoNo.class);
             賦課年度 = ViewStateHolder.get(ViewStateKeys.賦課年度, FlexibleYear.class);
             市町村コード = ViewStateHolder.get(ViewStateKeys.市町村コード, LasdecCode.class);
             識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+            被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(再検索する, true);
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(検索結果一覧へ, true);
         } else if (通知書発行後異動把握_仮算定.equals(ResponseHolder.getMenuID())
@@ -85,12 +86,14 @@ public class KakushuTsuchishoSakuseiKobetsu {
                 賦課年度 = listPar.get(0).getFukaNendo();
                 市町村コード = null;
                 識別コード = listPar.get(0).getShikibetsuCode();
+                被保険者番号 = null;
             } else {
                 // TODO この画面が実装できない。
                 通知書番号 = null;
                 賦課年度 = null;
                 市町村コード = null;
                 識別コード = null;
+                被保険者番号 = null;
             }
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(再検索する, true);
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(検索結果一覧へ, true);
@@ -100,6 +103,7 @@ public class KakushuTsuchishoSakuseiKobetsu {
             賦課年度 = key.get賦課年度();
             市町村コード = key.get市町村コード();
             識別コード = key.get識別コード();
+            被保険者番号 = key.get被保険者番号();
             if (フラグ_1.equals(ViewStateHolder.get(ViewStateKeys.各種通知書作成フラグ, RString.class))) {
                 CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(検索結果一覧へ, true);
             }

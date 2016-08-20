@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.idoriyoshafutanwariaihentei;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -20,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class IdoRiyoshaFutanwariaiHanteiMybatisParameter implements IMyBatisParameter {
 
-    private final LasdecCode 市町村コード;
     private final FlexibleYear 対象年度;
     private final RString 処理名;
 
@@ -31,8 +29,7 @@ public class IdoRiyoshaFutanwariaiHanteiMybatisParameter implements IMyBatisPara
      * @param 対象年度 対象年度
      * @param 処理名 処理名
      */
-    public IdoRiyoshaFutanwariaiHanteiMybatisParameter(LasdecCode 市町村コード, FlexibleYear 対象年度, RString 処理名) {
-        this.市町村コード = 市町村コード;
+    public IdoRiyoshaFutanwariaiHanteiMybatisParameter(FlexibleYear 対象年度, RString 処理名) {
         this.対象年度 = 対象年度;
         this.処理名 = 処理名;
     }

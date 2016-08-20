@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-2460-011 jiangwenkai -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hokenshakyufujissekiout.IHokenshaKyufujissekiOutMapper">
+    <select resultOrdered="true" id="select処理結果リスト一時TBL" resultMap="resut_getTempList" fetchSize="500">
+        SELECT *
+        FROM "DbWT1002KokuhorenSakuseiError"
+        ORDER BY "errorKubun" ASC,
+        "shoHokanehshaNo" ASC,
+        "hihokenshaNo" ASC,
+        "key1" ASC,
+        "key2" ASC,
+        "key3" ASC,
+        "key4" ASC,
+        "key5" ASC
+    </select>
+    
+    <resultMap id="resut_getTempList" type="jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1002KokuhorenSakuseiErrorTempEntity" autoMapping="true">
+        <result property="エラー区分" column="errorKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者番号" column="shoHokanehshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="キー1" column="key1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="キー2" column="key2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="キー3" column="key3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="キー4" column="key4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="キー5" column="key5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者カナ氏名" column="hihokenshaKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者氏名" column="hihokenshaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="備考" column="biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+</mapper>

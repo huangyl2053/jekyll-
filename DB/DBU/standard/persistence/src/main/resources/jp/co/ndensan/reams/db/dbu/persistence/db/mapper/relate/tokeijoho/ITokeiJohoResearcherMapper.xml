@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBU-4120-030 sunhaidi -->
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokeijoho.ITokeiJohoResearcherMapper">
+
+    <select resultOrdered="true" id="get資格人数" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokeijoho.TokeiJohoResearcherMybatisParameter"
+            resultType="int" fetchSize="500">
+      SELECT COUNT(*) 
+        FROM (
+              SELECT row_number() OVER (PARTITION BY B."hihokenshaNo" ORDER BY B."idoYMD" DESC, B."edaNo" DESC) AS 履歴番号
+              FROM (
+                    SELECT A."hihokenshaNo"
+                           ,A."idoYMD"
+                           ,A."edaNo"
+                    FROM rgdb."DbT1001HihokenshaDaicho" AS A
+                    WHERE A."logicalDeletedFlag" = FALSE
+                      AND A."shikakuShutokuYMD" <![CDATA[<=]]> #{基準日}
+                      AND (
+                           #{基準日} <![CDATA[<=]]> A."shikakuSoshitsuYMD"
+                           OR A."shikakuSoshitsuYMD" = ''
+                           OR A."shikakuSoshitsuYMD" IS NULL
+                      )
+                      AND A."hihokennshaKubunCode" = #{被保険者区分コード}
+                      AND A."jushochiTokureiFlag" = #{住所地特例フラグ}
+
+                    <if test="uses市町村コード">
+                         AND A."shichosonCode" = #{市町村コード}
+                    </if>
+              ) AS B
+        ) AS C
+        WHERE 
+              C.履歴番号 = 1
+    </select>
+     <select resultOrdered="true" id="get適用除外者人数" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokeijoho.TokeiJohoResearcherMybatisParameter"
+            resultType="int" fetchSize="500">
+      SELECT COUNT(*) 
+        FROM (
+              SELECT row_number() OVER (PARTITION BY B."shikibetsuCode" ORDER BY B."idoYMD" DESC, B."edaNo" DESC) AS 履歴番号
+              FROM (
+                    SELECT A."shikibetsuCode"
+                           ,A."idoYMD"
+                           ,A."edaNo"
+                    FROM rgdb."DbT1002TekiyoJogaisha" AS A
+                    WHERE A."logicalDeletedFlag" = FALSE
+                      AND A."tekiyoYMD" <![CDATA[<=]]> #{基準日}
+                      AND (
+                           #{基準日} <![CDATA[<=]]> A."kaijoYMD"
+                           OR A."kaijoYMD" = ''
+                           OR A."kaijoYMD" IS NULL
+                      )
+                    <if test="uses市町村コード">
+                         AND A."shichosonCode" = #{市町村コード}
+                    </if>
+              ) AS B
+        ) AS C
+        WHERE 
+              C.履歴番号 = 1
+    </select>
+    <select resultOrdered="true" id="get他住所地特例者人数" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokeijoho.TokeiJohoResearcherMybatisParameter"
+            resultType="int" fetchSize="500">
+      SELECT COUNT(*) 
+        FROM (
+              SELECT row_number() OVER (PARTITION BY B."shichosonCode" ORDER BY B."idoYMD" DESC, B."edaNo" DESC) AS 履歴番号
+              FROM (
+                    SELECT A."shichosonCode"
+                           ,A."idoYMD"
+                           ,A."edaNo"
+                    FROM rgdb."DbT1003TashichosonJushochiTokurei" AS A
+                    WHERE A."logicalDeletedFlag" = FALSE
+                      AND A."tekiyoYMD" <![CDATA[<=]]> #{基準日}
+                      AND (
+                           #{基準日} <![CDATA[<=]]> A."kaijoYMD"
+                           OR A."kaijoYMD" = ''
+                           OR A."kaijoYMD" IS NULL
+                      )
+                    <if test="uses市町村コード">
+                         AND A."shichosonCode" = #{市町村コード}
+                    </if>
+              ) AS B
+        ) AS C
+        WHERE 
+              C.履歴番号 = 1
+    </select>
+     <select resultOrdered="true" id="get特別徴収人数" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokeijoho.TokeiJohoResearcherMybatisParameter"
+            resultType="int" fetchSize="500">
+      SELECT COUNT(*) 
+        FROM (
+              SELECT row_number() OVER (PARTITION BY B."hihokenshaNo" ORDER BY B."rirekiNo") AS rrkno
+              FROM (
+                    SELECT A1."hihokenshaNo"
+                           ,A1."rirekiNo"
+                    FROM rgdb."DbT2001ChoshuHoho" A1
+                    INNER JOIN rgdb."DbT1001HihokenshaDaicho" AS A2
+                           ON  A1."hihokenshaNo" = A2."hihokenshaNo"
+                    WHERE A2."logicalDeletedFlag" = FALSE
+                      AND A2."shikakuShutokuYMD" <![CDATA[<=]]> #{基準日}
+                      AND (
+                           #{基準日} <![CDATA[<=]]> A2."shikakuSoshitsuYMD"
+                           OR A2."shikakuSoshitsuYMD" = ''
+                           OR A2."shikakuSoshitsuYMD" IS NULL
+                      )
+                      AND A1."fukaNendo" = #{賦課年度}
+                     <if test="徴収方法月 == 1">
+                         AND A1."choshuHoho1gatsu" = #{徴収方法}
+                     </if>
+                     <if test="徴収方法月 == 2">
+                         AND A1."choshuHoho2gatsu" = #{徴収方法}
+                     </if>
+                     <if test="徴収方法月 == 3">
+                         AND A1."choshuHoho3gatsu" = #{徴収方法}
+                     </if>
+                     <if test="徴収方法月 == 4">
+                         AND A1."choshuHoho4gatsu" = #{徴収方法}
+                     </if>
+                     <if test="徴収方法月 == 5">
+                         AND A1."choshuHoho5gatsu" = #{徴収方法}
+                     </if>
+                     <if test="徴収方法月 == 6">
+                         AND A1."choshuHoho6gatsu" = #{徴収方法}
+                     </if>
+                     <if test="徴収方法月 == 7">
+                         AND A1."choshuHoho7gatsu" = #{徴収方法}
+                     </if>
+                     <if test="徴収方法月 == 8">
+                         AND A1."choshuHoho8gatsu" = #{徴収方法}
+                     </if>
+                     <if test="徴収方法月 == 9">
+                         AND A1."choshuHoho9gatsu" = #{徴収方法}
+                     </if>
+                     <if test="徴収方法月 == 10">
+                         AND A1."choshuHoho10gatsu" = #{徴収方法}
+                     </if>
+                     <if test="徴収方法月 == 11">
+                         AND A1."choshuHoho11gatsu" = #{徴収方法}
+                     </if>
+                     <if test="徴収方法月 == 12">
+                         AND A1."choshuHoho12gatsu" = #{徴収方法}
+                     </if>
+                    <if test="uses市町村コード">
+                         AND A2."shichosonCode" = #{市町村コード}
+                    </if>
+              ) AS B
+        ) AS C
+        WHERE 
+              C.rrkno = 1
+    </select>
+    
+     <select resultOrdered="true" id="get要介護人数" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokeijoho.TokeiJohoResearcherMybatisParameter"
+            resultType="int" fetchSize="500">
+      SELECT COUNT(*) 
+        FROM (
+              SELECT row_number() OVER (PARTITION BY B."hihokenshaNo" ORDER BY B."rirekiNo" DESC, B."edaban" DESC) AS rrkno
+              FROM (
+                    SELECT A."hihokenshaNo"
+                           ,A."rirekiNo"
+                           ,A."edaban"
+                    FROM rgdb."DbT4001JukyushaDaicho" AS A
+                    WHERE A."logicalDeletedFlag" = FALSE
+                      AND A."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{基準日}
+                      AND (
+                           #{基準日} <![CDATA[<=]]> A."ninteiYukoKikanShuryoYMD"
+                           OR A."ninteiYukoKikanShuryoYMD" = ''
+                           OR A."ninteiYukoKikanShuryoYMD" IS NULL
+                      )
+                      AND A."jukyuShinseiJiyu" <![CDATA[<>]]>  '5'
+                      AND A."yukoMukoKubun" = '1'
+                      AND A."yokaigoJotaiKubunCode" = #{要介護認定状態区分コード}
+                    <if test="uses市町村コード">
+                         AND A."shichosonCode" = #{市町村コード}
+                    </if>
+              ) AS B
+        ) AS C
+        WHERE 
+              C.rrkno = 1
+    </select>
+     <select resultOrdered="true" id="get自立人数" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokeijoho.TokeiJohoResearcherMybatisParameter"
+            resultType="int" fetchSize="500">
+      SELECT COUNT(*) 
+        FROM (
+              SELECT row_number() OVER (PARTITION BY B."hihokenshaNo" ORDER BY B."rirekiNo" DESC, B."edaban" DESC) AS rrkno
+              FROM (
+                    SELECT A."hihokenshaNo"
+                           ,A."rirekiNo"
+                           ,A."edaban"
+                    FROM rgdb."DbT4001JukyushaDaicho" AS A
+                    WHERE A."logicalDeletedFlag" = FALSE
+                      AND A."ninteiYMD" <![CDATA[<=]]> #{基準日}
+                      AND (
+                           #{基準日} <![CDATA[<=]]> A."soshitsuYMD"
+                           OR A."soshitsuYMD" = ''
+                           OR A."soshitsuYMD" IS NULL
+                      )
+                      AND A."jukyuShinseiJiyu" <![CDATA[<>]]> '5'
+                      AND A."yukoMukoKubun" = '2'
+                      AND A."yokaigoJotaiKubunCode" = '01'
+                    <if test="uses市町村コード">
+                         AND A."shichosonCode" = #{市町村コード}
+                    </if>
+              ) AS B
+        ) AS C
+        WHERE 
+              C.rrkno = 1
+    </select>
+</mapper>

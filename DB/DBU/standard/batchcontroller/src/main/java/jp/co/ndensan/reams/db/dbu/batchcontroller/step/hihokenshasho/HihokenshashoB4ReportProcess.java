@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
@@ -65,8 +66,16 @@ public class HihokenshashoB4ReportProcess extends BatchProcessBase<IkkatsuHakkoR
 
     @Override
     protected void process(IkkatsuHakkoRelateEntity entity) {
-        AccessLogger.log(AccessLogType.照会, PersonalData.of(entity.getShikibetsuCode()));
+        アクセスログ(entity);
         帳票用Pram.add(new HihokenshashoBReportResult().setHihokenshashoChohyoParameter(entity, processPrm.getKofuYMD()));
+    }
+
+    private void アクセスログ(IkkatsuHakkoRelateEntity entity) {
+        if (entity.getShikibetsuCode() != null && !entity.getShikibetsuCode().isEmpty()) {
+            AccessLogger.log(AccessLogType.照会, PersonalData.of(entity.getShikibetsuCode()));
+        } else {
+            AccessLogger.log(AccessLogType.照会, PersonalData.of(ShikibetsuCode.EMPTY));
+        }
     }
 
     @Override

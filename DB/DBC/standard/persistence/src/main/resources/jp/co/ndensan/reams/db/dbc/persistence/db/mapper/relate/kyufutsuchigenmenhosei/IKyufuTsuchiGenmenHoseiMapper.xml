@@ -43,6 +43,11 @@
         rgdb."DbV1001HihokenshaDaicho"."shikibetsuCode"           
         FROM rgdb."DbV1001HihokenshaDaicho") AS T4
         ON T1."hiHokenshaNo" = T4."hihokenshaNo"
+        LEFT JOIN 
+        rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS PSM
+        ON T4."shikibetsuCode" = PSM."shikibetsuCode"
         WHERE #{サービス開始年月} <![CDATA[<=]]> T1."serviceTeikyoYM"
         AND T1."serviceTeikyoYM" <![CDATA[<=]]> #{サービス終了年月}
         AND T1."shokisaiHokenshaNo" IN 

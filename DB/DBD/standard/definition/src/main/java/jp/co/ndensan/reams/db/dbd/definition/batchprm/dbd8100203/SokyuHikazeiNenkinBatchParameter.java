@@ -54,30 +54,27 @@ public class SokyuHikazeiNenkinBatchParameter extends BatchParameterBase {
     /**
      * 結果一覧(遡及該当)CSV出力の引数を返します。。
      *
-     * @param 出力順ID1 出力順ID1
      * @return 結果一覧(遡及該当)CSV出力
      */
-    public SokyuuGaitouIchirannCsvProcessParameter toSokyuuGaitouIchirannCsvProcessParameter(Long 出力順ID1) {
+    public SokyuuGaitouIchirannCsvProcessParameter toSokyuuGaitouIchirannCsvProcessParameter() {
         return new SokyuuGaitouIchirannCsvProcessParameter(出力順ID1);
     }
 
     /**
      * 結果一覧(遡及不一致)CSV出力の引数を返します。。
      *
-     * @param 出力順ID2 出力順ID2
      * @return 結果一覧(遡及不一致)CSV出力
      */
-    public SokyuuFuicchiCsvProcessParameter toSokyuuFuicchiCsvProcessParameter(Long 出力順ID2) {
+    public SokyuuFuicchiCsvProcessParameter toSokyuuFuicchiCsvProcessParameter() {
         return new SokyuuFuicchiCsvProcessParameter(出力順ID2);
     }
 
     /**
      * 結果一覧(生年月日)CSV出力の引数を返します。。
      *
-     * @param 出力順ID3 出力順ID3
      * @return 結果一覧(生年月日)CSV出力
      */
-    public SokyuuSeinenngappiCsvProcessParameter toSokyuuSeinenngappiCsvProcessParameter(Long 出力順ID3) {
+    public SokyuuSeinenngappiCsvProcessParameter toSokyuuSeinenngappiCsvProcessParameter() {
         return new SokyuuSeinenngappiCsvProcessParameter(出力順ID3);
     }
 }

@@ -5,21 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120820;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.jukyushatotsugokekkain.JukyushaTotsugoKekkaReadCsvFileProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.DbWT5331JukyushaJohoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushatotsugokekka.JukyushaKekkaJohoControlCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushatotsugokekka.JukyushaKekkaJohoCsvMeisaiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushatotsugokekka.JukyushaKekkaJohoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kokuhorenjukyushain.KokuhorenJukyushaFlowEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakoshinkekka.DbWT5331JukyushaJohoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT0001HihokenshaIchijiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002KokuhorenTorikomiErrorEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakoshinkekka.IJukyushaKoshinKekkaMapper;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.hokenshainputguide.Hokensha;
@@ -30,13 +24,14 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 受給者情報突合結果情報取込・ファイル読込を実行する。
@@ -50,27 +45,23 @@ public class JukyushaTotsugoKekkaReadCsvFileProcess extends BatchProcessBase<RSt
      */
     public static final RString PARAMETER_OUT_FLOWENTITY;
     private JukyushaTotsugoKekkaReadCsvFileProcessParameter parameter;
-    private IJukyushaKoshinKekkaMapper mapper;
-    private IKokuhorenKyoutsuuTempTableMapper 一時mapper;
     @BatchWriter
-    BatchEntityCreatedTempTableWriter 被保険者一時tableWriter;
+    IBatchTableWriter 被保険者一時tableWriter;
     @BatchWriter
-    BatchEntityCreatedTempTableWriter 処理結果リスト一時tableWriter;
+    IBatchTableWriter 処理結果リスト一時tableWriter;
     @BatchWriter
-    BatchEntityCreatedTempTableWriter 受給者情報一時tableWriter;
+    IBatchTableWriter 受給者情報一時tableWriter;
     private static final RString 被保険者一時_TABLE_NAME = new RString("DbWT0001Hihokensha");
     private static final RString 処理結果リスト一時_TABLE_NAME = new RString("DbWT0002KokuhorenTorikomiError");
     private static final RString 受給者情報一時_TABLE_NAME = new RString("DbWT5331JukyushaJoho");
-    private JukyushaKekkaJohoEntity entity;
     private JukyushaKekkaJohoControlCsvEntity controlCsvEntity;
     private JukyushaKekkaJohoCsvMeisaiEntity dataEntity;
-    private List<JukyushaKekkaJohoCsvMeisaiEntity> listDataEntity;
     private final RString レコード種別_コントロール = new RString("1");
     private final RString レコード種別_データ = new RString("2");
     private static final RString カンマ = new RString(",");
     private static final Integer INDEX_0 = 0;
 
-    private int 連番 = 0;
+    private int 連番;
     private int コントロールレコードのレコード件数の合計 = 0;
     private int 明細件数合計 = 0;
     private FlexibleYearMonth 処理対象年月;
@@ -79,17 +70,15 @@ public class JukyushaTotsugoKekkaReadCsvFileProcess extends BatchProcessBase<RSt
         PARAMETER_OUT_FLOWENTITY = new RString("flowEntity");
     }
 
-    private OutputParameter<FlowEntity> flowEntity;
-    private FlowEntity returnEntity;
+    private OutputParameter<KokuhorenJukyushaFlowEntity> flowEntity;
+    private KokuhorenJukyushaFlowEntity returnEntity;
 
     @Override
     protected void initialize() {
-        entity = new JukyushaKekkaJohoEntity();
+        連番 = parameter.get連番();
         controlCsvEntity = new JukyushaKekkaJohoControlCsvEntity();
-        listDataEntity = new ArrayList<>();
-        returnEntity = new FlowEntity();
+        returnEntity = new KokuhorenJukyushaFlowEntity();
         flowEntity = new OutputParameter<>();
-        flowEntity.setValue(returnEntity);
     }
 
     @Override
@@ -102,10 +91,9 @@ public class JukyushaTotsugoKekkaReadCsvFileProcess extends BatchProcessBase<RSt
         受給者情報一時tableWriter
                 = new BatchEntityCreatedTempTableWriter(受給者情報一時_TABLE_NAME, DbWT5331JukyushaJohoTempEntity.class);
     }
+
     @Override
     protected void beforeExecute() {
-        mapper = getMapper(IJukyushaKoshinKekkaMapper.class);
-        this.一時mapper = getMapper(IKokuhorenKyoutsuuTempTableMapper.class);
     }
 
     @Override
@@ -119,10 +107,12 @@ public class JukyushaTotsugoKekkaReadCsvFileProcess extends BatchProcessBase<RSt
         if (data != null && !data.isEmpty()) {
             if (レコード種別_コントロール.equals(data.get(INDEX_0))) {
                 controlCsvEntity = ListToObjectMappingHelper.toObject(JukyushaKekkaJohoControlCsvEntity.class, data);
+                処理対象年月 = controlCsvEntity.get処理対象年月();
                 コントロールレコードのレコード件数の合計++;
             } else if (レコード種別_データ.equals(data.get(INDEX_0))) {
                 dataEntity = ListToObjectMappingHelper.toObject(JukyushaKekkaJohoCsvMeisaiEntity.class, data);
-                listDataEntity.add(dataEntity);
+                this.受給者情報明細一時TBLに登録();
+                this.被保険者一時TBLに登録();
                 明細件数合計++;
             }
         }
@@ -130,161 +120,155 @@ public class JukyushaTotsugoKekkaReadCsvFileProcess extends BatchProcessBase<RSt
 
     @Override
     protected void afterExecute() {
-        entity.setControlCsvEntity(controlCsvEntity);
-        entity.setListDataEntity(listDataEntity);
-        処理対象年月 = controlCsvEntity.get処理対象年月();
-        受給者情報明細一時TBLに登録(entity);
+        int 明細データ登録件数合算 = parameter.get明細データ登録件数合算() + 明細件数合計;
+        if (parameter.isさいごファイルフラグ() && 0 == 明細データ登録件数合算) {
+            処理結果リスト一時に登録();
+        }
         returnEntity.setCodeNum(コントロールレコードのレコード件数の合計);
         returnEntity.set明細データ登録件数(明細件数合計);
         returnEntity.setShoriYM(処理対象年月);
+        returnEntity.set連番(連番);
+        flowEntity.setValue(returnEntity);
     }
 
-    @Transaction
-    private void 受給者情報明細一時TBLに登録(JukyushaKekkaJohoEntity csvEntity) {
+    private void 受給者情報明細一時TBLに登録() {
         HokenshaNyuryokuHojoFinder 保険者名取得 = HokenshaNyuryokuHojoFinder.createInstance();
-        JukyushaKekkaJohoControlCsvEntity コントロールレコード = csvEntity.getControlCsvEntity();
-        for (JukyushaKekkaJohoCsvMeisaiEntity 受給者情報 : csvEntity.getListDataEntity()) {
-            連番 = 連番 + 1;
-            DbWT5331JukyushaJohoTempEntity 受給者一時entity = new DbWT5331JukyushaJohoTempEntity();
-            受給者一時entity.set連番(連番);
-            受給者一時entity.setみなし要介護区分コード(受給者情報.getMinashiYokaigoKubunCode());
-            受給者一時entity.set交換情報識別番号(受給者情報.getKokanJohoShikibetsuNo());
-            受給者一時entity.set異動年月日(受給者情報.getIdoYmd());
-            受給者一時entity.set異動区分コード(受給者情報.getIdoKubunCode());
-            受給者一時entity.set訂正年月日(FlexibleDate.EMPTY);
-            受給者一時entity.set訂正区分コード(RString.EMPTY);
-            受給者一時entity.set異動事由区分(受給者情報.getIdoJiyuKubun());
-            受給者一時entity.set生年月日(受給者情報.getSeinengappiYmd());
-            受給者一時entity.set性別コード(受給者情報.getSeibetsuCode());
-            受給者一時entity.set資格取得年月日(受給者情報.getShikakuShutokuYmd());
-            受給者一時entity.set資格喪失年月日(受給者情報.getShikakuSoshitsuYmd());
-            受給者一時entity.set老人保健市町村番号(受給者情報.getRojinHokenShichosonNo());
-            受給者一時entity.set老人保健受給者番号(受給者情報.getRojinHokenJukyushaNo());
-            受給者一時entity.set広域連合_政令市_保険者番号(受給者情報.getKoikiRengoHokenshaNo());
-            受給者一時entity.set申請種別コード(受給者情報.getShinseiShubetsuCode());
-            受給者一時entity.set変更申請中区分コード(受給者情報.getHenkoShinseichuKubunCode());
-            受給者一時entity.set申請年月日(受給者情報.getShinseiYmd());
-            受給者一時entity.set要介護状態区分コード(受給者情報.getYokaigoJotaiKubunCode());
-            受給者一時entity.set認定有効期間開始年月日(受給者情報.getNinteiYukokikanFromYmd());
-            受給者一時entity.set認定有効期間終了年月日(受給者情報.getNinteiYukokikanToYmd());
-            受給者一時entity.set居宅サービス計画作成区分コード(受給者情報.getKyotakuServiceKubunCode());
-            受給者一時entity.set居宅介護支援事業所番号(受給者情報.getKyotakuKaigoShienJigyoshoNo());
-            受給者一時entity.set居宅サービス計画適用開始年月日(受給者情報.getKyotakuServiceTekiyoFromYmd());
-            受給者一時entity.set居宅サービス計画適用終了年月日(受給者情報.getKyotakuServiceTekiyoToYmd());
-            受給者一時entity.set訪問通所_支給限度基準額(受給者情報.getHomonShikyugendoKijungaku());
-            受給者一時entity.set訪問通所_上限管理適用期間開始年月日(受給者情報.getHomonJogenKanriTekiyoKikanFromYmd());
-            受給者一時entity.set訪問通所_上限管理適用期間終了年月日(受給者情報.getHomonJogenKanriTekiyoKikanToYmd());
-            受給者一時entity.set短期入所_支給限度基準額(受給者情報.getTankiShikyugendoKijungaku());
-            受給者一時entity.set短期入所_上限管理適用期間開始年月日(受給者情報.getTankiJogenKanriTekiyoKikanFromYmd());
-            受給者一時entity.set短期入所_上限管理適用期間終了年月日(受給者情報.getTankiJogenKanriTekiyoKikanToYmd());
-            受給者一時entity.set公費負担上限額減額の有無(受給者情報.getKohiFutanJogengakuGengakuUmu());
-            受給者一時entity.set償還払化開始年月日(受給者情報.getShokanHaraikaFromYmd());
-            受給者一時entity.set償還払化終了年月日(受給者情報.getShokanHaraikaToYmd());
-            受給者一時entity.set給付率引下げ開始年月日(受給者情報.getKyufuritsuHikisageFromYmd());
-            受給者一時entity.set給付率引下げ終了年月日(受給者情報.getKyufuritsuHikisageToYmd());
-            受給者一時entity.set減免申請中区分コード(受給者情報.getGenmenShinseichuKubunCode());
-            受給者一時entity.set利用者負担区分コード(受給者情報.getRiyoshaFutanKubunCode());
-            受給者一時entity.set給付率(受給者情報.getKyufuRitsu());
-            受給者一時entity.set利用者負担適用開始年月日(受給者情報.getRiyoshaFutanTekiyoFromYmd());
-            受給者一時entity.set利用者負担適用終了年月日(受給者情報.getRiyoshaFutanTekiyoToYmd());
-            受給者一時entity.set標準負担区分コード(受給者情報.getHyojunFutanKubunCode());
-            受給者一時entity.set負担額(受給者情報.getFutanGaku());
-            受給者一時entity.set負担額適用開始年月日(受給者情報.getFutanGakuTekiyoFromYmd());
-            受給者一時entity.set負担額適用終了年月日(受給者情報.getFutanGakuTekiyoToYmd());
-            受給者一時entity.set特定入所者認定申請中区分コード(受給者情報.getTokuteiNyushoshaNinteiShinseichuKubunCode());
-            受給者一時entity.set特定入所者介護サービス区分コード(受給者情報.getTokuteiNyushoshaKaigoServiceKubunCode());
-            受給者一時entity.set課税層の特例減額措置対象区分(受給者情報.getKazeisoNoTokureiGengakuSochiTaishoKubun());
-            受給者一時entity.set特定入所者食費負担限度額(受給者情報.getTokuteiNyushoshaShokuhiFutanGendoGaku());
-            受給者一時entity.set居住費_ユニット型個室_負担限度額(受給者情報.getKyojuhiUnitKoshitsuFutanGendoGaku());
-            受給者一時entity.set居住費_ユニット型準個室_負担限度額(受給者情報.getKyojuhiUnitJunkoshitsuFutanGendoGaku());
-            受給者一時entity.set居住費_従来型個室_特養等_負担限度額(受給者情報.getKyojuhiTokuyotoFutanGenndoGaku());
-            受給者一時entity.set居住費_従来型個室_老健_療養等_負担限度額(受給者情報.getKyojuhiRokenRyoyotoFutanGendoGaku());
-            受給者一時entity.set居住費_多床室_負担限度額(受給者情報.getKyojuhiTashoShitsuFutanGendoGaku());
-            受給者一時entity.set負担限度額適用開始年月日(受給者情報.getFutanGendoGakuTekiyoFromYmd());
-            受給者一時entity.set負担限度額適用終了年月日(受給者情報.getFutanGendoGakuTekiyoToYmd());
-            受給者一時entity.set軽減率(受給者情報.getKeigenRitsu());
-            受給者一時entity.set軽減率適用開始年月日(受給者情報.getKeigenRitsuTekiyoFromYmd());
-            受給者一時entity.set軽減率適用終了年月日(受給者情報.getKeigenRitsuTekiyoToYmd());
-            受給者一時entity.set小規模居宅サービス利用有無(受給者情報.getShokiboKyotakuServiceRiyoUmu());
-            受給者一時entity.set保険者番号_後期_(受給者情報.getKokiHokenshaNo());
-            受給者一時entity.set被保険者番号_後期_(受給者情報.getKokiHihokenshaNo());
-            受給者一時entity.set保険者番号_国保_(受給者情報.getKokuhoHokenshaNo());
-            受給者一時entity.set被保険者証番号_国保_(受給者情報.getKokuhoHihokenshashoNo());
-            受給者一時entity.set宛名番号(受給者情報.getAtenaNo());
-            受給者一時entity.set二次予防事業区分コード(受給者情報.getNijiyoboJigyoKubunCode());
-            受給者一時entity.set二次予防事業有効期間開始年月日(受給者情報.getNijiyoboJigyoYukokikanFromYmd());
-            受給者一時entity.set二次予防事業有効期間終了年月日(受給者情報.getNijiyoboJigyoYukokikanToYmd());
-            受給者一時entity.set住所地特例対象者区分コード(受給者情報.getJushochiTokureiTaishoshaKubunCode());
-            受給者一時entity.set施設所在保険者番号(受給者情報.getShisetsuShozaiHokenshaNo());
-            受給者一時entity.set住所地特例適用開始年月日(受給者情報.getJushochiTokureiTekiyoFromYmd());
-            受給者一時entity.set住所地特例適用終了年月日(受給者情報.getJushochiTokureiTekiyoToYmd());
-            受給者一時entity.set居住費_新１_負担限度額(受給者情報.getKyojuhi1FutanGendogaku());
-            受給者一時entity.set居住費_新２_負担限度額(受給者情報.getKyojuhi2FutanGendogaku());
-            受給者一時entity.set居住費_新３_負担限度額(受給者情報.getKyojuhi3FutanGendogaku());
-            受給者一時entity.set二割負担適用開始年月日(受給者情報.getNiwariFutanTekiyoFromYmd());
-            受給者一時entity.set二割負担適用終了年月日(受給者情報.getNiwariFutanTekiyoToYmd());
-            受給者一時entity.set有料老人ホーム等同意書の有無(RString.EMPTY);
-            受給者一時entity.set突合結果区分(受給者情報.getTsugoKekkaKubun());
-            受給者一時entity.set突合情報区分(受給者情報.getTsugoJohoKubun());
-            受給者一時entity.set保険者番号(コントロールレコード.get保険者番号());
-            Hokensha hokensha = 保険者名取得.getHokensha(new HokenjaNo(コントロールレコード.get保険者番号()));
-            if (hokensha != null) {
-                受給者一時entity.set保険者名(hokensha.get保険者名());
-            }
-            受給者一時entity.set取込年月(処理対象年月);
-            this.mapper.受給者情報明細一時TBLに登録(受給者一時entity);
-            this.被保険者一時TBLに登録(受給者情報);
-            this.処理結果リスト一時に登録();
+        連番 = 連番 + 1;
+        DbWT5331JukyushaJohoTempEntity 受給者一時entity = new DbWT5331JukyushaJohoTempEntity();
+        受給者一時entity.setRenban(連番);
+        受給者一時entity.setMinashiYokaigoKubunCode(dataEntity.getMinashiYokaigoKubunCode());
+        受給者一時entity.setKokanJohoShikibetsuNo(dataEntity.getKokanJohoShikibetsuNo());
+        受給者一時entity.setIdoYmd(dataEntity.getIdoYmd());
+        受給者一時entity.setIdoKubunCode(dataEntity.getIdoKubunCode());
+        受給者一時entity.setTeiseiYmd(FlexibleDate.EMPTY);
+        受給者一時entity.setTeiseiKubunCode(RString.EMPTY);
+        受給者一時entity.setIdoJiyuKubun(dataEntity.getIdoJiyuKubun());
+        受給者一時entity.setSeinengappiYmd(dataEntity.getSeinengappiYmd());
+        受給者一時entity.setSeibetsuCode(dataEntity.getSeibetsuCode());
+        受給者一時entity.setShikakuShutokuYmd(dataEntity.getShikakuShutokuYmd());
+        受給者一時entity.setShikakuSoshitsuYmd(dataEntity.getShikakuSoshitsuYmd());
+        受給者一時entity.setRojinHokenShichosonNo(dataEntity.getRojinHokenShichosonNo());
+        受給者一時entity.setRojinHokenJukyushaNo(dataEntity.getRojinHokenJukyushaNo());
+        受給者一時entity.setKoikiRengoHokenshaNo(dataEntity.getKoikiRengoHokenshaNo());
+        受給者一時entity.setShinseiShubetsuCode(dataEntity.getShinseiShubetsuCode());
+        受給者一時entity.setHenkoShinseichuKubunCode(dataEntity.getHenkoShinseichuKubunCode());
+        受給者一時entity.setShinseiYmd(dataEntity.getShinseiYmd());
+        受給者一時entity.setYokaigoJotaiKubunCode(dataEntity.getYokaigoJotaiKubunCode());
+        受給者一時entity.setNinteiYukokikanFromYmd(dataEntity.getNinteiYukokikanFromYmd());
+        受給者一時entity.setNinteiYukokikanToYmd(dataEntity.getNinteiYukokikanToYmd());
+        受給者一時entity.setKyotakuServiceKubunCode(dataEntity.getKyotakuServiceKubunCode());
+        受給者一時entity.setKyotakuKaigoShienJigyoshoNo(dataEntity.getKyotakuKaigoShienJigyoshoNo());
+        受給者一時entity.setKyotakuServiceTekiyoFromYmd(dataEntity.getKyotakuServiceTekiyoFromYmd());
+        受給者一時entity.setKyotakuServiceTekiyoToYmd(dataEntity.getKyotakuServiceTekiyoToYmd());
+        受給者一時entity.setHomonShikyugendoKijungaku(dataEntity.getHomonShikyugendoKijungaku());
+        受給者一時entity.setHomonJogenKanriTekiyoKikanFromYmd(dataEntity.getHomonJogenKanriTekiyoKikanFromYmd());
+        受給者一時entity.setHomonJogenKanriTekiyoKikanToYmd(dataEntity.getHomonJogenKanriTekiyoKikanToYmd());
+        受給者一時entity.setTankiShikyugendoKijungaku(dataEntity.getTankiShikyugendoKijungaku());
+        受給者一時entity.setTankiJogenKanriTekiyoKikanFromYmd(dataEntity.getTankiJogenKanriTekiyoKikanFromYmd());
+        受給者一時entity.setTankiJogenKanriTekiyoKikanToYmd(dataEntity.getTankiJogenKanriTekiyoKikanToYmd());
+        受給者一時entity.setKohiFutanJogengakuGengakuUmu(dataEntity.getKohiFutanJogengakuGengakuUmu());
+        受給者一時entity.setShokanHaraikaFromYmd(dataEntity.getShokanHaraikaFromYmd());
+        受給者一時entity.setShokanHaraikaToYmd(dataEntity.getShokanHaraikaToYmd());
+        受給者一時entity.setKyufuritsuHikisageFromYmd(dataEntity.getKyufuritsuHikisageFromYmd());
+        受給者一時entity.setKyufuritsuHikisageToYmd(dataEntity.getKyufuritsuHikisageToYmd());
+        受給者一時entity.setGenmenShinseichuKubunCode(dataEntity.getGenmenShinseichuKubunCode());
+        受給者一時entity.setRiyoshaFutanKubunCode(dataEntity.getRiyoshaFutanKubunCode());
+        受給者一時entity.setKyufuRitsu(dataEntity.getKyufuRitsu());
+        受給者一時entity.setRiyoshaFutanTekiyoFromYmd(dataEntity.getRiyoshaFutanTekiyoFromYmd());
+        受給者一時entity.setRiyoshaFutanTekiyoToYmd(dataEntity.getRiyoshaFutanTekiyoToYmd());
+        受給者一時entity.setHyojunFutanKubunCode(dataEntity.getHyojunFutanKubunCode());
+        受給者一時entity.setFutanGaku(dataEntity.getFutanGaku());
+        受給者一時entity.setFutanGakuTekiyoFromYmd(dataEntity.getFutanGakuTekiyoFromYmd());
+        受給者一時entity.setFutanGakuTekiyoToYmd(dataEntity.getFutanGakuTekiyoToYmd());
+        受給者一時entity.setTokuteiNyushoshaNinteiShinseichuKubunCode(dataEntity.getTokuteiNyushoshaNinteiShinseichuKubunCode());
+        受給者一時entity.setTokuteiNyushoshaKaigoServiceKubunCode(dataEntity.getTokuteiNyushoshaKaigoServiceKubunCode());
+        受給者一時entity.setKazeisoNoTokureiGengakuSochiTaishoKubun(dataEntity.getKazeisoNoTokureiGengakuSochiTaishoKubun());
+        受給者一時entity.setTokuteiNyushoshaShokuhiFutanGendoGaku(dataEntity.getTokuteiNyushoshaShokuhiFutanGendoGaku());
+        受給者一時entity.setKyojuhiUnitKoshitsuFutanGendoGaku(dataEntity.getKyojuhiUnitKoshitsuFutanGendoGaku());
+        受給者一時entity.setKyojuhiUnitJunkoshitsuFutanGendoGaku(dataEntity.getKyojuhiUnitJunkoshitsuFutanGendoGaku());
+        受給者一時entity.setKyojuhiTokuyotoFutanGenndoGaku(dataEntity.getKyojuhiTokuyotoFutanGenndoGaku());
+        受給者一時entity.setKyojuhiRokenRyoyotoFutanGendoGaku(dataEntity.getKyojuhiRokenRyoyotoFutanGendoGaku());
+        受給者一時entity.setKyojuhiTashoShitsuFutanGendoGaku(dataEntity.getKyojuhiTashoShitsuFutanGendoGaku());
+        受給者一時entity.setFutanGendoGakuTekiyoFromYmd(dataEntity.getFutanGendoGakuTekiyoFromYmd());
+        受給者一時entity.setFutanGendoGakuTekiyoToYmd(dataEntity.getFutanGendoGakuTekiyoToYmd());
+        受給者一時entity.setKeigenRitsu(dataEntity.getKeigenRitsu());
+        受給者一時entity.setKeigenRitsuTekiyoFromYmd(dataEntity.getKeigenRitsuTekiyoFromYmd());
+        受給者一時entity.setKeigenRitsuTekiyoToYmd(dataEntity.getKeigenRitsuTekiyoToYmd());
+        受給者一時entity.setShokiboKyotakuServiceRiyoUmu(dataEntity.getShokiboKyotakuServiceRiyoUmu());
+        受給者一時entity.setKokiHokenshaNo(dataEntity.getKokiHokenshaNo());
+        受給者一時entity.setKokiHihokenshaNo(dataEntity.getKokiHihokenshaNo());
+        受給者一時entity.setKokuhoHokenshaNo(dataEntity.getKokuhoHokenshaNo());
+        受給者一時entity.setKokuhoHihokenshashoNo(dataEntity.getKokuhoHihokenshashoNo());
+        受給者一時entity.setAtenaNo(dataEntity.getAtenaNo());
+        受給者一時entity.setNijiyoboJigyoKubunCode(dataEntity.getNijiyoboJigyoKubunCode());
+        受給者一時entity.setNijiyoboJigyoYukokikanFromYmd(dataEntity.getNijiyoboJigyoYukokikanFromYmd());
+        受給者一時entity.setNijiyoboJigyoYukokikanToYmd(dataEntity.getNijiyoboJigyoYukokikanToYmd());
+        受給者一時entity.setJushochiTokureiTaishoshaKubunCode(dataEntity.getJushochiTokureiTaishoshaKubunCode());
+        受給者一時entity.setShisetsuShozaiHokenshaNo(dataEntity.getShisetsuShozaiHokenshaNo());
+        受給者一時entity.setJushochiTokureiTekiyoFromYmd(dataEntity.getJushochiTokureiTekiyoFromYmd());
+        受給者一時entity.setJushochiTokureiTekiyoToYmd(dataEntity.getJushochiTokureiTekiyoToYmd());
+        受給者一時entity.setKyojuhi1FutanGendogaku(dataEntity.getKyojuhi1FutanGendogaku());
+        受給者一時entity.setKyojuhi2FutanGendogaku(dataEntity.getKyojuhi2FutanGendogaku());
+        受給者一時entity.setKyojuhi3FutanGendogaku(dataEntity.getKyojuhi3FutanGendogaku());
+        受給者一時entity.setNiwariFutanTekiyoFromYmd(dataEntity.getNiwariFutanTekiyoFromYmd());
+        受給者一時entity.setNiwariFutanTekiyoToYmd(dataEntity.getNiwariFutanTekiyoToYmd());
+        受給者一時entity.setYuryoRojinHomeDoishoUmu(RString.EMPTY);
+        受給者一時entity.setTsugoKekkaKubun(dataEntity.getTsugoKekkaKubun());
+        受給者一時entity.setTsugoJohoKubun(dataEntity.getTsugoJohoKubun());
+        受給者一時entity.setHokenshaNo(controlCsvEntity.get保険者番号());
+        Hokensha hokensha = 保険者名取得.getHokensha(new HokenjaNo(controlCsvEntity.get保険者番号()));
+        if (hokensha != null) {
+            受給者一時entity.setHokenshaName(hokensha.get保険者名());
         }
+        受給者一時entity.setTorikomiYM(処理対象年月);
+        受給者情報一時tableWriter.insert(受給者一時entity);
     }
 
-    @Transaction
-    private void 被保険者一時TBLに登録(JukyushaKekkaJohoCsvMeisaiEntity 受給者情報) {
-        DbWT0001HihokenshaTempEntity 被保険者一時entity = new DbWT0001HihokenshaTempEntity();
-        被保険者一時entity.set連番(連番);
-        被保険者一時entity.set証記載保険者番号(new ShoKisaiHokenshaNo(受給者情報.getShoukizaihokenshashoNo()));
-        被保険者一時entity.set被保険者番号(new HihokenshaNo(受給者情報.getHihokenshashoNo()));
-        被保険者一時entity.setサービス提供年月末日(受給者情報.getIdoYmd());
-        被保険者一時entity.set被保険者カナ氏名(受給者情報.getHihokenshaShimeikana());
-        被保険者一時entity.set被保険者氏名(RString.EMPTY);
-        被保険者一時entity.set旧市町村コード(LasdecCode.EMPTY);
-        被保険者一時entity.set変換被保険者番号(HihokenshaNo.EMPTY);
-        被保険者一時entity.set登録被保険者番号(new HihokenshaNo(受給者情報.getHihokenshashoNo()));
-        被保険者一時entity.set市町村コード(LasdecCode.EMPTY);
-        被保険者一時entity.set管内管外区分(RString.EMPTY);
-        被保険者一時entity.set郵便番号(RString.EMPTY);
-        被保険者一時entity.set町域コード(RString.EMPTY);
-        被保険者一時entity.set行政区コード(RString.EMPTY);
-        被保険者一時entity.set行政区名(RString.EMPTY);
-        被保険者一時entity.set住所(RString.EMPTY);
-        被保険者一時entity.set番地(RString.EMPTY);
-        被保険者一時entity.set方書(RString.EMPTY);
-        被保険者一時entity.set宛名カナ名称(RString.EMPTY);
-        被保険者一時entity.set宛名名称(RString.EMPTY);
-        被保険者一時entity.set氏名50音カナ(RString.EMPTY);
-        被保険者一時entity.set識別コード(RString.EMPTY);
-        被保険者一時entity.set資格取得日(FlexibleDate.EMPTY);
-        被保険者一時entity.set資格取得事由コード(RString.EMPTY);
-        被保険者一時entity.set資格喪失日(FlexibleDate.EMPTY);
-        被保険者一時entity.set資格喪失事由コード(RString.EMPTY);
-        被保険者一時entity.set世帯集約番号(RString.EMPTY);
-        this.一時mapper.被保険者一時TBLに登録(被保険者一時entity);
+    private void 被保険者一時TBLに登録() {
+        DbWT0001HihokenshaIchijiEntity 被保険者一時entity = new DbWT0001HihokenshaIchijiEntity();
+        被保険者一時entity.setMeisaiRenban(連番);
+        被保険者一時entity.setShoHokenshaNo(new ShoKisaiHokenshaNo(dataEntity.getShoukizaihokenshashoNo()));
+        被保険者一時entity.setOrgHihokenshaNo(new HihokenshaNo(dataEntity.getHihokenshashoNo()));
+        被保険者一時entity.setServiceTeikyoYmd(dataEntity.getIdoYmd());
+        被保険者一時entity.setOrgHihokenshaKanaShimei(dataEntity.getHihokenshaShimeikana());
+        被保険者一時entity.setOrgHihokenshaShimei(RString.EMPTY);
+        被保険者一時entity.setOldShichosonCode(LasdecCode.EMPTY);
+        被保険者一時entity.setHenkanHihokenshaNo(HihokenshaNo.EMPTY);
+        被保険者一時entity.setHihokenshaNo(new HihokenshaNo(dataEntity.getHihokenshashoNo()));
+        被保険者一時entity.setShichosonCode(LasdecCode.EMPTY);
+        被保険者一時entity.setKannaiKangaiKubun(RString.EMPTY);
+        被保険者一時entity.setYubinNo(RString.EMPTY);
+        被保険者一時entity.setChoikiCode(RString.EMPTY);
+        被保険者一時entity.setGyoseikuCode(RString.EMPTY);
+        被保険者一時entity.setGyoseikuMei(RString.EMPTY);
+        被保険者一時entity.setJusho(RString.EMPTY);
+        被保険者一時entity.setBanchi(RString.EMPTY);
+        被保険者一時entity.setKatagaki(RString.EMPTY);
+        被保険者一時entity.setKanaMeisho(RString.EMPTY);
+        被保険者一時entity.setMeisho(RString.EMPTY);
+        被保険者一時entity.setShimei50onKana(RString.EMPTY);
+        被保険者一時entity.setShikibetsuCode(ShikibetsuCode.EMPTY);
+        被保険者一時entity.setShikakuShutokuYmd(FlexibleDate.EMPTY);
+        被保険者一時entity.setShikakuShutokuJiyuCode(RString.EMPTY);
+        被保険者一時entity.setShikakuSoshitsuYmd(FlexibleDate.EMPTY);
+        被保険者一時entity.setShikakuSoshitsuJiyuCode(RString.EMPTY);
+        被保険者一時entity.setSetaiShuyakuNo(HihokenshaNo.EMPTY);
+        被保険者一時tableWriter.insert(被保険者一時entity);
     }
 
-    @Transaction
     private void 処理結果リスト一時に登録() {
-        DbWT0002KokuhorenTorikomiErrorTempEntity 処理結果リスト一時entity = new DbWT0002KokuhorenTorikomiErrorTempEntity();
-        処理結果リスト一時entity.setエラー区分(KokuhorenJoho_TorikomiErrorKubun.取込対象データなし.getコード());
-        処理結果リスト一時entity.set証記載保険者番号(ShoKisaiHokenshaNo.EMPTY);
-        処理結果リスト一時entity.set被保険者番号(HihokenshaNo.EMPTY);
-        処理結果リスト一時entity.setキー1(RString.EMPTY);
-        処理結果リスト一時entity.setキー2(RString.EMPTY);
-        処理結果リスト一時entity.setキー3(RString.EMPTY);
-        処理結果リスト一時entity.setキー4(RString.EMPTY);
-        処理結果リスト一時entity.setキー5(RString.EMPTY);
-        処理結果リスト一時entity.set被保険者カナ氏名(RString.EMPTY);
-        処理結果リスト一時entity.set被保険者氏名(RString.EMPTY);
-        処理結果リスト一時entity.set備考(RString.EMPTY);
-        this.一時mapper.処理結果リスト一時TBLに登録(処理結果リスト一時entity);
+        DbWT0002KokuhorenTorikomiErrorEntity 処理結果リスト一時entity = new DbWT0002KokuhorenTorikomiErrorEntity();
+        処理結果リスト一時entity.setErrorKubun(KokuhorenJoho_TorikomiErrorKubun.取込対象データなし.getコード());
+        処理結果リスト一時entity.setShoHokanehshaNo(ShoKisaiHokenshaNo.EMPTY);
+        処理結果リスト一時entity.setHihokenshaNo(HihokenshaNo.EMPTY);
+        処理結果リスト一時entity.setKey1(RString.EMPTY);
+        処理結果リスト一時entity.setKey2(RString.EMPTY);
+        処理結果リスト一時entity.setKey3(RString.EMPTY);
+        処理結果リスト一時entity.setKey4(RString.EMPTY);
+        処理結果リスト一時entity.setKey5(RString.EMPTY);
+        処理結果リスト一時entity.setHihokenshaKanaShimei(RString.EMPTY);
+        処理結果リスト一時entity.setHihokenshaShimei(RString.EMPTY);
+        処理結果リスト一時entity.setBiko(RString.EMPTY);
+        処理結果リスト一時tableWriter.insert(処理結果リスト一時entity);
     }
 }

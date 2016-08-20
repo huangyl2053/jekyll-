@@ -1,20 +1,21 @@
 package jp.co.ndensan.reams.db.dbd.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import javax.annotation.CheckForNull;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 非課税年金対象者テーブルのエンティティクラスです。
- * <br/>  連合会から送付される非課税年金対象者情報と被保険者との関連を管理する
+ * <br/> 連合会から送付される非課税年金対象者情報と被保険者との関連を管理する
  */
 public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT4037HikazeNenkinTaishoshaEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4037HikazeNenkinTaishosha");
 
@@ -68,8 +69,17 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
     private RString dtkyosainenkinshoshokigono;
 
     /**
+     * updateCountのgetメソッドです。
+     *
+     * @return updateCount
+     */
+    public int getUpdateCount() {
+        return updateCount;
+    }
+
+    /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -78,7 +88,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -87,7 +97,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -96,17 +106,16 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -117,7 +126,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * 年度のgetメソッドです。
      * <br/>
      * <br/>取込、登録各画面で指定した処理年度。処理扱いをした調定年度に相当する
-     * 
+     *
      * @return 年度
      */
     @CheckForNull
@@ -129,7 +138,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * 年度のsetメソッドです。
      * <br/>
      * <br/>取込、登録各画面で指定した処理年度。処理扱いをした調定年度に相当する
-     * 
+     *
      * @param nendo 年度
      */
     public void setNendo(FlexibleYear nendo) {
@@ -140,7 +149,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * 処理区分のgetメソッドです。
      * <br/>
      * <br/>11：年次処理、12：月次処理
-     * 
+     *
      * @return 処理区分
      */
     @CheckForNull
@@ -152,7 +161,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * 処理区分のsetメソッドです。
      * <br/>
      * <br/>11：年次処理、12：月次処理
-     * 
+     *
      * @param shorikubun 処理区分
      */
     public void setShorikubun(RString shorikubun) {
@@ -163,7 +172,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * 対象月のgetメソッドです。
      * <br/>
      * <br/>5月、7月～12月を"005", "007"～"012"、翌1月～6月を"101"～"106"のように管理する
-     * 
+     *
      * @return 対象月
      */
     @CheckForNull
@@ -175,7 +184,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * 対象月のsetメソッドです。
      * <br/>
      * <br/>5月、7月～12月を"005", "007"～"012"、翌1月～6月を"101"～"106"のように管理する
-     * 
+     *
      * @param taishom 対象月
      */
     public void setTaishom(RString taishom) {
@@ -186,7 +195,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * 基礎年金番号のgetメソッドです。
      * <br/>
      * <br/>DT基礎年金番号と必ず一致する（登録画面の入力項目管理）
-     * 
+     *
      * @return 基礎年金番号
      */
     @CheckForNull
@@ -198,7 +207,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * 基礎年金番号のsetメソッドです。
      * <br/>
      * <br/>DT基礎年金番号と必ず一致する（登録画面の入力項目管理）
-     * 
+     *
      * @param kisonenkinno 基礎年金番号
      */
     public void setKisonenkinno(RString kisonenkinno) {
@@ -209,7 +218,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * 現基礎年金番号のgetメソッドです。
      * <br/>
      * <br/>判定時に同一年金とみなすキーの１つ（対象年+DT年金保険者コード+現基礎年金番号+年金コード先頭3桁）
-     * 
+     *
      * @return 現基礎年金番号
      */
     @CheckForNull
@@ -221,7 +230,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * 現基礎年金番号のsetメソッドです。
      * <br/>
      * <br/>判定時に同一年金とみなすキーの１つ（対象年+DT年金保険者コード+現基礎年金番号+年金コード先頭3桁）
-     * 
+     *
      * @param genkisonenkinno 現基礎年金番号
      */
     public void setGenkisonenkinno(RString genkisonenkinno) {
@@ -232,7 +241,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * 年金コードのgetメソッドです。
      * <br/>
      * <br/>DT年金コードと必ず一致する（登録画面の入力項目管理）、判定時に同一年金とみなすキーの１つ（対象年+DT年金保険者コード+現基礎年金番号+年金コード先頭3桁）
-     * 
+     *
      * @return 年金コード
      */
     @CheckForNull
@@ -244,7 +253,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * 年金コードのsetメソッドです。
      * <br/>
      * <br/>DT年金コードと必ず一致する（登録画面の入力項目管理）、判定時に同一年金とみなすキーの１つ（対象年+DT年金保険者コード+現基礎年金番号+年金コード先頭3桁）
-     * 
+     *
      * @param nenkincode 年金コード
      */
     public void setNenkincode(RString nenkincode) {
@@ -255,7 +264,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * 被保険者番号のgetメソッドです。
      * <br/>
      * <br/>関連付けられた被保険者番号。被保険者と関連づいていない非課税年金対象者情報は、被保険者番号空白
-     * 
+     *
      * @return 被保険者番号
      */
     @CheckForNull
@@ -267,7 +276,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * 被保険者番号のsetメソッドです。
      * <br/>
      * <br/>関連付けられた被保険者番号。被保険者と関連づいていない非課税年金対象者情報は、被保険者番号空白
-     * 
+     *
      * @param hihokenshano 被保険者番号
      */
     public void setHihokenshano(RString hihokenshano) {
@@ -278,7 +287,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * 登録区分のgetメソッドです。
      * <br/>
      * <br/>1：取込、2：画面登録
-     * 
+     *
      * @return 登録区分
      */
     @CheckForNull
@@ -290,7 +299,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * 登録区分のsetメソッドです。
      * <br/>
      * <br/>1：取込、2：画面登録
-     * 
+     *
      * @param torokukubun 登録区分
      */
     public void setTorokukubun(RString torokukubun) {
@@ -301,7 +310,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DTレコード区分のgetメソッドです。
      * <br/>
      * <br/>（以下、"DT"項目は国保連合会から送付の「非課税年金対象者情報」の内容を格納）2：データレコード
-     * 
+     *
      * @return DTレコード区分
      */
     @CheckForNull
@@ -313,7 +322,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DTレコード区分のsetメソッドです。
      * <br/>
      * <br/>（以下、"DT"項目は国保連合会から送付の「非課税年金対象者情報」の内容を格納）2：データレコード
-     * 
+     *
      * @param dtrecordkubun DTレコード区分
      */
     public void setDtrecordkubun(RString dtrecordkubun) {
@@ -324,7 +333,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT市町村コードのgetメソッドです。
      * <br/>
      * <br/>総務省で定められた地方公共団体コード
-     * 
+     *
      * @return DT市町村コード
      */
     @CheckForNull
@@ -336,7 +345,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT市町村コードのsetメソッドです。
      * <br/>
      * <br/>総務省で定められた地方公共団体コード
-     * 
+     *
      * @param dtcitycode DT市町村コード
      */
     public void setDtcitycode(RString dtcitycode) {
@@ -347,7 +356,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT年金保険者コードのgetメソッドです。
      * <br/>
      * <br/>年金保険者コード※コードマスタは使用しない。判定時に同一年金とみなすキーの１つ（対象年+DT年金保険者コード+現基礎年金番号+年金コード先頭3桁）
-     * 
+     *
      * @return DT年金保険者コード
      */
     @CheckForNull
@@ -359,7 +368,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT年金保険者コードのsetメソッドです。
      * <br/>
      * <br/>年金保険者コード※コードマスタは使用しない。判定時に同一年金とみなすキーの１つ（対象年+DT年金保険者コード+現基礎年金番号+年金コード先頭3桁）
-     * 
+     *
      * @param dtnenkinhokenshacode DT年金保険者コード
      */
     public void setDtnenkinhokenshacode(RString dtnenkinhokenshacode) {
@@ -370,7 +379,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT通知内容コードのgetメソッドです。
      * <br/>
      * <br/>93：補足給付初回回付（年次）情報、94：補足給付初回回付（月次）情報
-     * 
+     *
      * @return DT通知内容コード
      */
     @CheckForNull
@@ -382,7 +391,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT通知内容コードのsetメソッドです。
      * <br/>
      * <br/>93：補足給付初回回付（年次）情報、94：補足給付初回回付（月次）情報
-     * 
+     *
      * @param dttsuchinaiyocode DT通知内容コード
      */
     public void setDttsuchinaiyocode(RString dttsuchinaiyocode) {
@@ -393,7 +402,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT予備１のgetメソッドです。
      * <br/>
      * <br/>オールスペース（半角）
-     * 
+     *
      * @return DT予備１
      */
     @CheckForNull
@@ -405,7 +414,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT予備１のsetメソッドです。
      * <br/>
      * <br/>オールスペース（半角）
-     * 
+     *
      * @param dtyobi1 DT予備１
      */
     public void setDtyobi1(RString dtyobi1) {
@@ -416,7 +425,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT制度コードのgetメソッドです。
      * <br/>
      * <br/>5：介護（補足給付）
-     * 
+     *
      * @return DT制度コード
      */
     @CheckForNull
@@ -428,7 +437,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT制度コードのsetメソッドです。
      * <br/>
      * <br/>5：介護（補足給付）
-     * 
+     *
      * @param dtseidocode DT制度コード
      */
     public void setDtseidocode(RString dtseidocode) {
@@ -439,7 +448,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT作成年月日のgetメソッドです。
      * <br/>
      * <br/>レコード作成時の年月日。同一年金のが存在する場合、DT作成年月日がより新しいものを勘案する
-     * 
+     *
      * @return DT作成年月日
      */
     @CheckForNull
@@ -451,7 +460,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT作成年月日のsetメソッドです。
      * <br/>
      * <br/>レコード作成時の年月日。同一年金のが存在する場合、DT作成年月日がより新しいものを勘案する
-     * 
+     *
      * @param dtsakuseiymd DT作成年月日
      */
     public void setDtsakuseiymd(RString dtsakuseiymd) {
@@ -462,7 +471,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT基礎年金番号のgetメソッドです。
      * <br/>
      * <br/>非課税年金対象者の基礎年金番号
-     * 
+     *
      * @return DT基礎年金番号
      */
     @CheckForNull
@@ -474,7 +483,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT基礎年金番号のsetメソッドです。
      * <br/>
      * <br/>非課税年金対象者の基礎年金番号
-     * 
+     *
      * @param dtkisonenkinno DT基礎年金番号
      */
     public void setDtkisonenkinno(RString dtkisonenkinno) {
@@ -486,7 +495,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * <br/>
      * <br/>非課税年金対象者の"年金種別"2桁-"年金区分コード１"1桁-"年金区分コード２"1桁
      * <br/>※コードマスタは使用しない。
-     * 
+     *
      * @return DT年金コード
      */
     @CheckForNull
@@ -499,7 +508,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * <br/>
      * <br/>非課税年金対象者の"年金種別"2桁-"年金区分コード１"1桁-"年金区分コード２"1桁
      * <br/>※コードマスタは使用しない。
-     * 
+     *
      * @param dtnenkincode DT年金コード
      */
     public void setDtnenkincode(RString dtnenkincode) {
@@ -510,7 +519,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT予備２のgetメソッドです。
      * <br/>
      * <br/>オールスペース（半角）
-     * 
+     *
      * @return DT予備２
      */
     @CheckForNull
@@ -522,7 +531,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT予備２のsetメソッドです。
      * <br/>
      * <br/>オールスペース（半角）
-     * 
+     *
      * @param dtyobi2 DT予備２
      */
     public void setDtyobi2(RString dtyobi2) {
@@ -533,7 +542,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT生年月日のgetメソッドです。
      * <br/>
      * <br/>非課税年金対象者の生年月日
-     * 
+     *
      * @return DT生年月日
      */
     @CheckForNull
@@ -545,7 +554,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT生年月日のsetメソッドです。
      * <br/>
      * <br/>非課税年金対象者の生年月日
-     * 
+     *
      * @param dtbirthday DT生年月日
      */
     public void setDtbirthday(RString dtbirthday) {
@@ -556,7 +565,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT性別のgetメソッドです。
      * <br/>
      * <br/>非課税年金対象者の性別コード　1：男、2：女
-     * 
+     *
      * @return DT性別
      */
     @CheckForNull
@@ -568,7 +577,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT性別のsetメソッドです。
      * <br/>
      * <br/>非課税年金対象者の性別コード　1：男、2：女
-     * 
+     *
      * @param dtseibetsu DT性別
      */
     public void setDtseibetsu(RString dtseibetsu) {
@@ -580,7 +589,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * <br/>
      * <br/>非課税年金対象者のカナ氏名
      * <br/>（カナ文字については、カナ大文字のみが設定される）
-     * 
+     *
      * @return DTカナ氏名
      */
     @CheckForNull
@@ -593,7 +602,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * <br/>
      * <br/>非課税年金対象者のカナ氏名
      * <br/>（カナ文字については、カナ大文字のみが設定される）
-     * 
+     *
      * @param dtkanashimei DTカナ氏名
      */
     public void setDtkanashimei(RString dtkanashimei) {
@@ -604,7 +613,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DTシフトコード１のgetメソッドです。
      * <br/>
      * <br/>漢字シフトコード：16進"1B2442"
-     * 
+     *
      * @return DTシフトコード１
      */
     @CheckForNull
@@ -616,7 +625,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DTシフトコード１のsetメソッドです。
      * <br/>
      * <br/>漢字シフトコード：16進"1B2442"
-     * 
+     *
      * @param dtshiftcode1 DTシフトコード１
      */
     public void setDtshiftcode1(RString dtshiftcode1) {
@@ -627,7 +636,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT漢字氏名のgetメソッドです。
      * <br/>
      * <br/>非課税年金の漢字氏名
-     * 
+     *
      * @return DT漢字氏名
      */
     @CheckForNull
@@ -639,7 +648,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT漢字氏名のsetメソッドです。
      * <br/>
      * <br/>非課税年金の漢字氏名
-     * 
+     *
      * @param dtkanjishimei DT漢字氏名
      */
     public void setDtkanjishimei(RString dtkanjishimei) {
@@ -650,7 +659,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DTシフトコード２のgetメソッドです。
      * <br/>
      * <br/>カナシフトコード：16進"1B284A"
-     * 
+     *
      * @return DTシフトコード２
      */
     @CheckForNull
@@ -662,7 +671,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DTシフトコード２のsetメソッドです。
      * <br/>
      * <br/>カナシフトコード：16進"1B284A"
-     * 
+     *
      * @param dtshiftcode2 DTシフトコード２
      */
     public void setDtshiftcode2(RString dtshiftcode2) {
@@ -673,7 +682,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT郵便番号のgetメソッドです。
      * <br/>
      * <br/>非課税年金対象者の郵便番号
-     * 
+     *
      * @return DT郵便番号
      */
     @CheckForNull
@@ -685,7 +694,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT郵便番号のsetメソッドです。
      * <br/>
      * <br/>非課税年金対象者の郵便番号
-     * 
+     *
      * @param dtyubinno DT郵便番号
      */
     public void setDtyubinno(RString dtyubinno) {
@@ -698,7 +707,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * <br/>非課税年金対象者のカナ住所
      * <br/>島しょ以外の市町村については、都道府県名は省略される。
      * <br/>（カナ文字については、カナ大文字のみが設定される）
-     * 
+     *
      * @return DTカナ住所
      */
     @CheckForNull
@@ -712,7 +721,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * <br/>非課税年金対象者のカナ住所
      * <br/>島しょ以外の市町村については、都道府県名は省略される。
      * <br/>（カナ文字については、カナ大文字のみが設定される）
-     * 
+     *
      * @param dtkanajusho DTカナ住所
      */
     public void setDtkanajusho(RString dtkanajusho) {
@@ -723,7 +732,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DTシフトコード３のgetメソッドです。
      * <br/>
      * <br/>漢字シフトコード：16進"1B2442"
-     * 
+     *
      * @return DTシフトコード３
      */
     @CheckForNull
@@ -735,7 +744,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DTシフトコード３のsetメソッドです。
      * <br/>
      * <br/>漢字シフトコード：16進"1B2442"
-     * 
+     *
      * @param dtshiftcode3 DTシフトコード３
      */
     public void setDtshiftcode3(RString dtshiftcode3) {
@@ -747,7 +756,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * <br/>
      * <br/>非課税年金対象者の漢字住所
      * <br/>島しょ以外の市町村については、都道府県名は省略される。
-     * 
+     *
      * @return DT漢字住所
      */
     @CheckForNull
@@ -760,7 +769,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * <br/>
      * <br/>非課税年金対象者の漢字住所
      * <br/>島しょ以外の市町村については、都道府県名は省略される。
-     * 
+     *
      * @param dtkanjijusho DT漢字住所
      */
     public void setDtkanjijusho(RString dtkanjijusho) {
@@ -771,7 +780,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DTシフトコード４のgetメソッドです。
      * <br/>
      * <br/>カナシフトコード：16進"1B284A"
-     * 
+     *
      * @return DTシフトコード４
      */
     @CheckForNull
@@ -783,7 +792,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DTシフトコード４のsetメソッドです。
      * <br/>
      * <br/>カナシフトコード：16進"1B284A"
-     * 
+     *
      * @param dtshiftcode4 DTシフトコード４
      */
     public void setDtshiftcode4(RString dtshiftcode4) {
@@ -794,7 +803,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT対象年のgetメソッドです。
      * <br/>
      * <br/>計単対象年（西暦）。年金の受給年を表し、負担限度額認定には、認定年度前年分を勘案する。判定時に同一年金とみなすキーの１つ（対象年+DT年金保険者コード+現基礎年金番号+年金コード先頭3桁）
-     * 
+     *
      * @return DT対象年
      */
     @CheckForNull
@@ -806,7 +815,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT対象年のsetメソッドです。
      * <br/>
      * <br/>計単対象年（西暦）。年金の受給年を表し、負担限度額認定には、認定年度前年分を勘案する。判定時に同一年金とみなすキーの１つ（対象年+DT年金保険者コード+現基礎年金番号+年金コード先頭3桁）
-     * 
+     *
      * @param dttaishoy DT対象年
      */
     public void setDttaishoy(RString dttaishoy) {
@@ -817,7 +826,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT訂正表示のgetメソッドです。
      * <br/>
      * <br/>0：初回回付（年次／新裁分）、1：月次回付（遡及改定分）
-     * 
+     *
      * @return DT訂正表示
      */
     @CheckForNull
@@ -829,7 +838,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT訂正表示のsetメソッドです。
      * <br/>
      * <br/>0：初回回付（年次／新裁分）、1：月次回付（遡及改定分）
-     * 
+     *
      * @param dtteiseihyoji DT訂正表示
      */
     public void setDtteiseihyoji(RString dtteiseihyoji) {
@@ -840,7 +849,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT各種区分のgetメソッドです。
      * <br/>
      * <br/>01：新規者、02：前年度継続者
-     * 
+     *
      * @return DT各種区分
      */
     @CheckForNull
@@ -852,7 +861,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT各種区分のsetメソッドです。
      * <br/>
      * <br/>01：新規者、02：前年度継続者
-     * 
+     *
      * @param dtkakushukubun DT各種区分
      */
     public void setDtkakushukubun(RString dtkakushukubun) {
@@ -863,7 +872,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT処理結果のgetメソッドです。
      * <br/>
      * <br/>00：初期値、01：受給権の失権（死亡失権は含まない）、02：差止・一時停止・停止
-     * 
+     *
      * @return DT処理結果
      */
     @CheckForNull
@@ -875,7 +884,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT処理結果のsetメソッドです。
      * <br/>
      * <br/>00：初期値、01：受給権の失権（死亡失権は含まない）、02：差止・一時停止・停止
-     * 
+     *
      * @param dtshorikekka DT処理結果
      */
     public void setDtshorikekka(RString dtshorikekka) {
@@ -886,7 +895,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT予備３のgetメソッドです。
      * <br/>
      * <br/>オールスペース（半角）
-     * 
+     *
      * @return DT予備３
      */
     @CheckForNull
@@ -898,7 +907,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT予備３のsetメソッドです。
      * <br/>
      * <br/>オールスペース（半角）
-     * 
+     *
      * @param dtyobi3 DT予備３
      */
     public void setDtyobi3(RString dtyobi3) {
@@ -909,7 +918,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT予備４のgetメソッドです。
      * <br/>
      * <br/>オールスペース（半角）
-     * 
+     *
      * @return DT予備４
      */
     @CheckForNull
@@ -921,7 +930,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT予備４のsetメソッドです。
      * <br/>
      * <br/>オールスペース（半角）
-     * 
+     *
      * @param dtyobi4 DT予備４
      */
     public void setDtyobi4(RString dtyobi4) {
@@ -932,7 +941,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT金額１のgetメソッドです。
      * <br/>
      * <br/>非課税年金対象者の非課税年金額（右詰、11桁左ゼロ埋め）
-     * 
+     *
      * @return DT金額１
      */
     @CheckForNull
@@ -944,7 +953,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT金額１のsetメソッドです。
      * <br/>
      * <br/>非課税年金対象者の非課税年金額（右詰、11桁左ゼロ埋め）
-     * 
+     *
      * @param dtkingaku1 DT金額１
      */
     public void setDtkingaku1(RString dtkingaku1) {
@@ -955,7 +964,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT金額予備１のgetメソッドです。
      * <br/>
      * <br/>オールスペース（半角）
-     * 
+     *
      * @return DT金額予備１
      */
     @CheckForNull
@@ -967,7 +976,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT金額予備１のsetメソッドです。
      * <br/>
      * <br/>オールスペース（半角）
-     * 
+     *
      * @param dtkingakuyobi1 DT金額予備１
      */
     public void setDtkingakuyobi1(RString dtkingakuyobi1) {
@@ -978,7 +987,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT金額予備２のgetメソッドです。
      * <br/>
      * <br/>オールスペース（半角）
-     * 
+     *
      * @return DT金額予備２
      */
     @CheckForNull
@@ -990,7 +999,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT金額予備２のsetメソッドです。
      * <br/>
      * <br/>オールスペース（半角）
-     * 
+     *
      * @param dtkingakuyobi2 DT金額予備２
      */
     public void setDtkingakuyobi2(RString dtkingakuyobi2) {
@@ -1001,7 +1010,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT予備５のgetメソッドです。
      * <br/>
      * <br/>オールスペース（半角）
-     * 
+     *
      * @return DT予備５
      */
     @CheckForNull
@@ -1013,7 +1022,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT予備５のsetメソッドです。
      * <br/>
      * <br/>オールスペース（半角）
-     * 
+     *
      * @param dtyobi5 DT予備５
      */
     public void setDtyobi5(RString dtyobi5) {
@@ -1024,7 +1033,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT共済年金証書記号番号のgetメソッドです。
      * <br/>
      * <br/>共済年金記号番号。共済組合以外はオールスペース（半角）。農林原簿移管者は共通農林整理番号
-     * 
+     *
      * @return DT共済年金証書記号番号
      */
     @CheckForNull
@@ -1036,7 +1045,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
      * DT共済年金証書記号番号のsetメソッドです。
      * <br/>
      * <br/>共済年金記号番号。共済組合以外はオールスペース（半角）。農林原簿移管者は共通農林整理番号
-     * 
+     *
      * @param dtkyosainenkinshoshokigono DT共済年金証書記号番号
      */
     public void setDtkyosainenkinshoshokigono(RString dtkyosainenkinshoshokigono) {
@@ -1045,10 +1054,9 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
 
     /**
      * このエンティティの主キーが他の{@literal DbT4037HikazeNenkinTaishoshaEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT4037HikazeNenkinTaishoshaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT4037HikazeNenkinTaishoshaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT4037HikazeNenkinTaishoshaEntity other) {
@@ -1107,6 +1115,7 @@ public class DbT4037HikazeNenkinTaishoshaEntity extends DbTableEntityBase<DbT403
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

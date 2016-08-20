@@ -75,8 +75,8 @@ public class KyufuKanrihyoShokai {
             if (給付管理票一覧Entity.isEmpty()) {
                 給付管理票一覧 = null;
             } else {
+                給付管理票一覧 = new ArrayList<>();
                 for (KyufuKanrihyoShokaiEntity entity : 給付管理票一覧Entity) {
-                    給付管理票一覧 = new ArrayList<>();
                     給付管理票一覧.add(new KyufuKanrihyoShokaiBusiness(entity));
                 }
             }
@@ -107,8 +107,8 @@ public class KyufuKanrihyoShokai {
             if (給付管理明細一覧Entity.isEmpty()) {
                 給付管理明細一覧 = null;
             } else {
+                給付管理明細一覧 = new ArrayList<>();
                 for (KyufuKanrihyoShokaiEntity entity : 給付管理明細一覧Entity) {
-                    給付管理明細一覧 = new ArrayList<>();
                     給付管理明細一覧.add(new KyufuKanrihyoShokaiBusiness(entity));
                 }
             }

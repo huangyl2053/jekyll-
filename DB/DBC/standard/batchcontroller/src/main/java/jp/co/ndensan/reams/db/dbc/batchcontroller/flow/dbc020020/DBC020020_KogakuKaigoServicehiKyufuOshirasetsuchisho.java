@@ -154,11 +154,7 @@ public class DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchisho
     }
 
     private boolean isShokanExcute() {
-        if (ShutsuryokuJoken.審査年月 == getParameter().getChushutsuJoken()
-                && 制度改正施行日.isBefore(getParameter().getShoriYm())) {
-            return true;
-        }
-        return false;
+        return ShutsuryokuJoken.審査年月 == getParameter().getChushutsuJoken() && 制度改正施行日.isBefore(getParameter().getShoriYm());
     }
 
     private void excuteOshirase() {

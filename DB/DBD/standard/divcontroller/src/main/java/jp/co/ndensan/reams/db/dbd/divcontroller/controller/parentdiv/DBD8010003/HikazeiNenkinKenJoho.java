@@ -195,22 +195,7 @@ public class HikazeiNenkinKenJoho {
 
         if (!ResponseHolder.isReRequest()) {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-            HikazeiNenkinKenJohoValidationHandler validationHandler = getValidationHandler();
-
-            validationHandler.現基礎年金番号の未入力チェック(pairs, div);
-            validationHandler.月の未入力チェック(pairs, div);
-            validationHandler.金額の未入力チェック(pairs, div);
-            validationHandler.作成年月日の未入力チェック(pairs, div);
-            validationHandler.対象年の未入力チェック(pairs, div);
-            validationHandler.氏名カナの未入力チェック(pairs, div);
-            validationHandler.性別の未入力チェック(pairs, div);
-            validationHandler.生年月日の未入力チェック(pairs, div);
-            validationHandler.氏名漢字の未入力チェック(pairs, div);
-            validationHandler.住所漢字の未入力チェック(pairs, div);
-            validationHandler.登録区分の未入力チェック(pairs, div);
-            validationHandler.年金保険者コードの未入力チェック(pairs, div);
-            validationHandler.基礎年金番号の未入力チェック(pairs, div);
-            validationHandler.年金コードの未入力チェック(pairs, div);
+            保存チェック(pairs, div);
 
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -266,6 +251,25 @@ public class HikazeiNenkinKenJoho {
 
         return ResponseData.of(div).respond();
 
+    }
+
+    private void 保存チェック(ValidationMessageControlPairs pairs, HikazeiNenkinKenJohoDiv div) {
+        HikazeiNenkinKenJohoValidationHandler validationHandler = getValidationHandler();
+
+        if (修正モード.equals(div.getHiddenModel()) || 新規モード.equals(div.getHiddenModel())) {
+            validationHandler.現基礎年金番号の未入力チェック(pairs, div);
+            if (TorokuKubun.画面登録.getコード().equals(div.getTbLoadCata().getValue()) || 新規モード.equals(div.getHiddenModel())) {
+                validationHandler.月の未入力チェック(pairs, div);
+                validationHandler.金額の未入力チェック(pairs, div);
+                validationHandler.作成年月日の未入力チェック(pairs, div);
+                validationHandler.対象年の未入力チェック(pairs, div);
+                validationHandler.氏名カナの未入力チェック(pairs, div);
+                validationHandler.性別の未入力チェック(pairs, div);
+                validationHandler.生年月日の未入力チェック(pairs, div);
+                validationHandler.氏名漢字の未入力チェック(pairs, div);
+                validationHandler.住所漢字の未入力チェック(pairs, div);
+            }
+        }
     }
 
     private Message get新規モードMessage(HikazeiNenkinKenJohoDiv div, int 重複チェック) {

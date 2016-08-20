@@ -131,6 +131,22 @@
     </update>
     
     <!-- 給付管理票一時データごとに、1件目の介護事業者指定サービスデータ．事業者名称を一時TBLに登録する -->
+    <select id="get事業者名称_居宅介護支援事業所作成の場合" resultMap="ResultMap_KyufukanrihyoJigyoshaEntity"  fetchSize="500" resultOrdered="true">
+       SELECT temp.*
+        FROM
+          (SELECT <include refid="allColumns_DbWT1121DbT7063" />,
+                  row_number() OVER (PARTITION BY "DbWT1121KyufuKanrihyo"."kyotakushienJigyoshoNo","DbWT1121KyufuKanrihyo"."renban"
+                                     ORDER BY "DbT7063KaigoJigyoshaShiteiService"."yukoKaishiYMD" DESC, "DbT7063KaigoJigyoshaShiteiService"."serviceShuruiCode" ASC) AS rrkno
+           FROM "DbWT1121KyufuKanrihyo"
+           INNER JOIN "DbT7063KaigoJigyoshaShiteiService" ON "DbWT1121KyufuKanrihyo"."kyotakushienJigyoshoNo" = "DbT7063KaigoJigyoshaShiteiService" ."jigyoshaNo"
+           WHERE "DbWT1121KyufuKanrihyo"."kyotakuServicePlanSakuseiKubunCode" = '1'
+             AND "DbWT1121KyufuKanrihyo"."kyufuMeisaiLineNo" = '99'
+             AND "DbT7063KaigoJigyoshaShiteiService"."serviceShuruiCode" IN ('43', '73')
+             AND "DbT7063KaigoJigyoshaShiteiService"."yukoKaishiYMD" <![CDATA[<=]]> ("DbWT1121KyufuKanrihyo"."serviceTeikyoYM"||'31')) AS temp
+        WHERE rrkno = 1
+    </select>
+    
+    <!-- 給付管理票一時データごとに、1件目の介護事業者指定サービスデータ．事業者名称を一時TBLに登録する -->
     <update id="do事業者名称登録_介護予防支援事業所地域包括支援センター作成の場合" >
        UPDATE "DbWT1121KyufuKanrihyo"
         SET "jigyoshaName" =
@@ -150,6 +166,22 @@
            WHERE rrkno = 1) AS A
         WHERE A."DbWT1121_kyotakushienJigyoshoNo" = "DbWT1121KyufuKanrihyo"."kyotakushienJigyoshoNo")
     </update>
+    
+    <!-- 給付管理票一時データごとに、1件目の介護事業者指定サービスデータ．事業者名称を一時TBLに登録する -->
+    <select id="get事業者名称_介護予防支援事業所地域包括支援センター作成の場合" resultMap="ResultMap_KyufukanrihyoJigyoshaEntity"  fetchSize="500" resultOrdered="true">
+       SELECT temp.*
+        FROM
+          (SELECT <include refid="allColumns_DbWT1121DbT7063" />,
+                  row_number() OVER (PARTITION BY "DbWT1121KyufuKanrihyo"."kyotakushienJigyoshoNo","DbWT1121KyufuKanrihyo"."renban"
+                                     ORDER BY "DbT7063KaigoJigyoshaShiteiService"."yukoKaishiYMD" DESC, "DbT7063KaigoJigyoshaShiteiService"."serviceShuruiCode" ASC) AS rrkno
+           FROM "DbWT1121KyufuKanrihyo"
+           INNER JOIN "DbT7063KaigoJigyoshaShiteiService" ON "DbWT1121KyufuKanrihyo"."kyotakushienJigyoshoNo" = "DbT7063KaigoJigyoshaShiteiService" ."jigyoshaNo"
+           WHERE "DbWT1121KyufuKanrihyo"."kyotakuServicePlanSakuseiKubunCode" = '1'
+             AND "DbWT1121KyufuKanrihyo"."kyufuMeisaiLineNo" = '99'
+             AND "DbT7063KaigoJigyoshaShiteiService"."serviceShuruiCode" IN ('43', '73')
+             AND "DbT7063KaigoJigyoshaShiteiService"."yukoKaishiYMD" <![CDATA[<=]]> ("DbWT1121KyufuKanrihyo"."serviceTeikyoYM"||'31')) AS temp
+        WHERE rrkno = 1
+    </select>
     
     <select id="get給付管理票一時と被保険者一時のデータ"
                 resultMap="ResultMap_HihokenshaKyufukanrihyoEntity"  fetchSize="500" resultOrdered="true">
@@ -328,6 +360,11 @@
     
     <resultMap id="ResultMap_HihokenshaKyufukanrihyoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoin.HihokenshaKyufukanrihyoEntity" autoMapping="true">
         <association property="被保険者" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper.resultMap_DbWT0001HihokenshaTempEntity"/>
+        <association property="給付管理票" resultMap="ResultMap_DbWT1121KyufuKanrihyoTempEntity"/>
+    </resultMap>
+    
+    <resultMap id="ResultMap_KyufukanrihyoJigyoshaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoin.KyufukanrihyoJigyoshaEntity" autoMapping="true">
+        <result property="事業者名称" column="DbT7063_jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="給付管理票" resultMap="ResultMap_DbWT1121KyufuKanrihyoTempEntity"/>
     </resultMap>
     

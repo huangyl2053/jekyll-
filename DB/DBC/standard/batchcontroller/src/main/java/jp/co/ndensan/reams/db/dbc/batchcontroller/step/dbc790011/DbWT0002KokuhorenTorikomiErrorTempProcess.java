@@ -18,12 +18,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2790-011 hemin
  */
-public class DbWT0002KokuhorenTorikomiErrorTempProcess extends BatchProcessBase<RString> {
+public class DbWT0002KokuhorenTorikomiErrorTempProcess extends BatchProcessBase<Integer> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc120230."
             + "ISeikyugakuTsuchishoCsvFileMapper.select請求額通知書一時TBL件数");
-    private static final RString NUM_0 = new RString(0);
+    private static final Integer NUM_0 = new Integer(0);
 
     private static final RString エラー区分_登録対象なし = new RString("99");
     private static final RString 処理結果リスト一時_TABLE_NAME = new RString("DbWT0002KokuhorenTorikomiError");
@@ -50,8 +50,8 @@ public class DbWT0002KokuhorenTorikomiErrorTempProcess extends BatchProcessBase<
     }
 
     @Override
-    protected void process(RString num) {
-        if (num == NUM_0) {
+    protected void process(Integer num) {
+        if (NUM_0.equals(num)) {
             DbWT0002KokuhorenTorikomiErrorEntity 処理結果 = new DbWT0002KokuhorenTorikomiErrorEntity();
             処理結果.setErrorKubun(エラー区分_登録対象なし);
             処理結果リスト一時tableWriter.insert(処理結果);

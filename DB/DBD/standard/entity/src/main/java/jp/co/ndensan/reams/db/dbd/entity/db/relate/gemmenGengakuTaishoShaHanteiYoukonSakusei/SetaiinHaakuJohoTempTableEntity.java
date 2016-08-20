@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmenGengakuTaishoShaHanteiYoukonSakusei;
+package jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengakutaishoshahanteiyoukonsakusei;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -12,18 +12,25 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 世帯員把握入力entityクラスです。
  *
  * @reamsid_L DBD-3710-090 liuwei2
  */
-@OnNextSchema("rgdb")
+@Getter
+@Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class SetaiinHaakuJohoTempTableEntity extends DbTableEntityBase<SetaiinHaakuJohoTempTableEntity> implements IDbAccessable {
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
+    /**
+     * テーブル名です。
+     */
     @TableName
     public static final RString TABLE_NAME;
 
@@ -40,46 +47,6 @@ public class SetaiinHaakuJohoTempTableEntity extends DbTableEntityBase<SetaiinHa
     private RString jushochiTokureiFlag;
     @TempTableColumnOrder(5)
     private FlexibleYear shotokuNendo;
-
-    public HihokenshaNo getHihokenshaNo() {
-        return hihokenshaNo;
-    }
-
-    public ShikibetsuCode getShikibetsuCode() {
-        return shikibetsuCode;
-    }
-
-    public FlexibleDate getKijunYMD() {
-        return kijunYMD;
-    }
-
-    public RString getJushochiTokureiFlag() {
-        return jushochiTokureiFlag;
-    }
-
-    public FlexibleYear getShotokuNendo() {
-        return shotokuNendo;
-    }
-
-    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
-        this.hihokenshaNo = hihokenshaNo;
-    }
-
-    public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
-        this.shikibetsuCode = shikibetsuCode;
-    }
-
-    public void setKijunYMD(FlexibleDate kijunYMD) {
-        this.kijunYMD = kijunYMD;
-    }
-
-    public void setJushochiTokureiFlag(RString jushochiTokureiFlag) {
-        this.jushochiTokureiFlag = jushochiTokureiFlag;
-    }
-
-    public void setShotokuNendo(FlexibleYear shotokuNendo) {
-        this.shotokuNendo = shotokuNendo;
-    }
 
     /**
      * コンストラクタです。

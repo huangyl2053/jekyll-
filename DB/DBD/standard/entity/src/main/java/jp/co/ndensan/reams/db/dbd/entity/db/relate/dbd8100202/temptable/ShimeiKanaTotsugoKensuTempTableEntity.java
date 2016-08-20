@@ -24,8 +24,15 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShimeiKanaTotsugoKensuTempTableEntity extends DbTableEntityBase<ShimeiKanaTotsugoKensuTempTableEntity> implements IDbAccessable {
 
+    /**
+     * 氏名カナ突合結果件数一時テーブルの名称.
+     */
     @TableName
-    public static final RString TABLE_NAME = new RString("ShimeiKanaTotsugoKensuTempTable");
+    public static final RString TABLE_NAME;
+
+    static {
+        TABLE_NAME = new RString("ShimeiKanaTotsugoKensuTempTable");
+    }
 
     @TempTableColumnOrder(1)
     private RString dtNennkinnHokenshaCode;

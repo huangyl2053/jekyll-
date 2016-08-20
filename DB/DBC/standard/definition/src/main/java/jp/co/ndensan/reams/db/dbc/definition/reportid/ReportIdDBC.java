@@ -322,7 +322,11 @@ public enum ReportIdDBC {
     /**
      * 介護予防・日常生活支援総合事業費審査決定請求明細表帳票ＩＤです。
      */
-    DBC200070(new ReportId("DBC200070_SogojigyohiShinsaKetteiSeikyumeisaihyo"), new RString("介護予防・日常生活支援総合事業費審査決定請求明細表"));
+    DBC200070(new ReportId("DBC200070_SogojigyohiShinsaKetteiSeikyumeisaihyo"), new RString("介護予防・日常生活支援総合事業費審査決定請求明細表")),
+    /**
+     * 介護給付費資格照合表 帳票ＩＤです。
+     */
+    DBC300003(new ReportId("DBC300003_NenreiKeikyuBetsuRiyoJyokyo"), new RString("年齢階級別利用状況作成"));
 
     private final ReportId reportId;
 

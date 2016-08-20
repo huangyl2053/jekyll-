@@ -67,6 +67,7 @@ public class SokujiKouseiJumin {
         sokujiKouseiJuminDiv.getCcdSokujiKouseiKihon().load(介護賦課基本情報の検索キー);
         sokujiKouseiJuminDiv.getSokujiKouseiAtena().initialize(識別コード);
         ViewStateHolder.put(ViewStateKeys.氏名, sokujiKouseiJuminDiv.getSokujiKouseiAtena().get氏名漢字());
+        ViewStateHolder.put(ViewStateKeys.市町村コード, 市町村コード);
         return ResponseData.of(sokujiKouseiJuminDiv).respond();
     }
 }

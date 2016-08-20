@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuGetFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kokuhorenjukyushain.KokuhorenJukyushaFlowEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -49,16 +49,16 @@ public class DBC120820_JukyushaTotsugoKekkaIn extends BatchFlowBase<DBC120820_Ju
     private static final String 一覧表作成 = "doIchiranhyoSakusei";
     private static final String 処理結果リスト作成 = "doShoriKekkaListSakusei";
     private static final String 取込済ファイル削除 = "deleteReveicedFile";
+    private JukyushaTotsugoKekkaReadCsvFileProcessParameter csvParameter;
 
     private static final RString ファイル格納フォルダ名 = new RString("DBC120820");
     private static ReportId 帳票ID;
 
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
-    private FlowEntity flowEntity;
+    private KokuhorenJukyushaFlowEntity flowEntity;
 
     private RString ファイル絶対パース;
-    private boolean 一回目実行フラグ;
-    private int 明細データ登録件数合算;
+    private int 明細データ登録件数合算 = 0;
     private static RString 交換情報識別番号;
 
     @Override
@@ -73,14 +73,29 @@ public class DBC120820_JukyushaTotsugoKekkaIn extends BatchFlowBase<DBC120820_Ju
             returnEntity
                     = getResult(KokuhorenKyoutsuuFileGetReturnEntity.class, new RString(ファイル取得),
                             KokuhorenkyoutsuGetFileProcess.PARAMETER_OUT_RETURNENTITY);
+            csvParameter = new JukyushaTotsugoKekkaReadCsvFileProcessParameter();
             for (int i = 0; i < returnEntity.getFileNameList().size(); i++) {
                 String filePath = returnEntity.get保存先フォルダのパス() + File.separator
                         + returnEntity.getFileNameList().get(i);
                 File path = new File(filePath);
                 ファイル絶対パース = new RString(path.getPath());
-                一回目実行フラグ = (0 == i);
+                if (i == 0) {
+
+                    csvParameter.set処理年月(null);
+                    csvParameter.set連番(0);
+                } else {
+                    csvParameter.set処理年月(flowEntity.getShoriYM());
+                    csvParameter.set連番(flowEntity.get連番());
+                }
+                if (i == returnEntity.getFileNameList().size() - 1) {
+                    csvParameter.setさいごファイルフラグ(true);
+                } else {
+                    csvParameter.setさいごファイルフラグ(false);
+                }
+                csvParameter.setファイルパース(ファイル絶対パース);
+                csvParameter.set明細データ登録件数合算(明細データ登録件数合算);
                 executeStep(CSVファイル取込);
-                flowEntity = getResult(FlowEntity.class, new RString(CSVファイル取込),
+                flowEntity = getResult(KokuhorenJukyushaFlowEntity.class, new RString(CSVファイル取込),
                         JukyushaTotsugoKekkaReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
                 明細データ登録件数合算 = 明細データ登録件数合算 + flowEntity.get明細データ登録件数();
             }
@@ -121,11 +136,7 @@ public class DBC120820_JukyushaTotsugoKekkaIn extends BatchFlowBase<DBC120820_Ju
      */
     @Step(CSVファイル取込)
     protected IBatchFlowCommand callReadCsvFileProcess() {
-        JukyushaTotsugoKekkaReadCsvFileProcessParameter parameter = new JukyushaTotsugoKekkaReadCsvFileProcessParameter();
-        parameter.set処理年月(getParameter().get処理年月());
-        parameter.set一回目実行フラグ(一回目実行フラグ);
-        parameter.setファイルパース(ファイル絶対パース);
-        return loopBatch(JukyushaTotsugoKekkaReadCsvFileProcess.class).arguments(parameter).define();
+        return loopBatch(JukyushaTotsugoKekkaReadCsvFileProcess.class).arguments(csvParameter).define();
     }
 
     /**

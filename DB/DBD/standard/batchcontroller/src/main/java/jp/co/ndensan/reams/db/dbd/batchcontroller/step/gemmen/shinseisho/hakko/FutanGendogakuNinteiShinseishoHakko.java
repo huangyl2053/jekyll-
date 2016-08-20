@@ -62,8 +62,9 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmen.shinseisho.hakko."
             + "IFutanGendogakuNinteiShinseishoHakkoMapper.get出力対象者情報");
-    private ShinseishoHakkoProcessParameter processParamter;
     private static final ReportId ID = new ReportId("DBD800001_FutangendogakuNinteiShinseisho");
+    private static final int STARTINDEX = 9;
+    private ShinseishoHakkoProcessParameter processParamter;
     private RString 導入団体コード;
     private RString 市町村名;
     @BatchWriter
@@ -78,6 +79,8 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
     protected void initialize() {
         association = AssociationFinderFactory.createInstance().getAssociation();
         ninshosha = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, RString.EMPTY);
+        導入団体コード = association.getLasdecCode_().value();
+        市町村名 = association.get市町村名();
         通知書定型文 = new ArrayList();
         TsuchishoTeikeibunManager manager = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = manager.get通知書定型文項目(SubGyomuCode.DBD介護受給, processParamter.get帳票ID(), KamokuCode.EMPTY, 1);
@@ -104,6 +107,9 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
                 processParamter.get帳票ID(),
                 processParamter.get改頁出力順ID());
         出力順 = MyBatisOrderByClauseCreator.create(FutangendogakuNinteiShinseishoOrderKey.class, order);
+        if (processParamter.is出力フラグ()) {
+            出力順 = 出力順.substring(STARTINDEX, 出力順.length());
+        }
         return new BatchDbReader(MYBATIS_SELECT_ID,
                 processParamter.toFutanGendogakuMybatisParameter(出力順));
     }
@@ -148,6 +154,7 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
         RString csv出力有無 = なし;
         RString csvファイル名 = なし;
         List<RString> 出力条件 = new ArrayList<>();
+        builder = new RStringBuilder();
         builder.append(HAKKONICHI);
         builder.append(processParamter.get発行日().wareki().toDateString());
         出力条件.add(builder.toRString());
