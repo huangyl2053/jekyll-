@@ -157,11 +157,11 @@ public class PanelAllHandler {
         RiyoshaFutanWariaiHanteiManagerResult 判定結果
                 = RiyoshaFutanWariaiHanteiManager.createInstance().futanWariaiHantei(被保険者番号, 年度, 基準日);
         if (NUM_5.equals(判定結果.get判定区分())) {
-            throw new ApplicationException(DbcErrorMessages.基準日被保険者データなし.toString());
+            throw new ApplicationException(DbcErrorMessages.基準日被保険者データなし.getMessage().evaluate());
         } else if (NUM_4.equals(判定結果.get判定区分())) {
-            throw new ApplicationException(DbcErrorMessages.基準日受給者_事業対象者データなし.toString());
+            throw new ApplicationException(DbcErrorMessages.基準日受給者_事業対象者データなし.getMessage().evaluate());
         } else if (NUM_3.equals(判定結果.get判定区分())) {
-            throw new ApplicationException(DbcErrorMessages.基準日負担割合変更なし.toString());
+            throw new ApplicationException(DbcErrorMessages.基準日負担割合変更なし.getMessage().evaluate());
         }
         return 判定結果;
     }
