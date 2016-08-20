@@ -12,16 +12,14 @@
         FROM (
         SELECT
         rgdb."DbT7022ShoriDateKanri".*,
-        row_number() over (PARTITION BY "subGyomuCode", "shichosonCode", "shoriName", "nendo" ORDER BY "shoriEdaban" DESC, "nendoNaiRenban" DESC ) AS rowNo 
+        row_number() over (PARTITION BY "shoriName", "nendo" ORDER BY "nendoNaiRenban" DESC ) AS rowNo 
         FROM
         rgdb."DbT7022ShoriDateKanri"
         WHERE
         rgdb."DbT7022ShoriDateKanri"."isDeleted" = FALSE
         and rgdb."DbT7022ShoriDateKanri"."subGyomuCode" = 'DBC'
-        AND rgdb."DbT7022ShoriDateKanri"."shichosonCode" = #{ 市町村コード }
         AND rgdb."DbT7022ShoriDateKanri"."shoriName" = #{ 処理名 }
         AND rgdb."DbT7022ShoriDateKanri"."nendo" = #{ 対象年度 }
-        ORDER BY rgdb."DbT7022ShoriDateKanri"."shoriEdaban" DESC, rgdb."DbT7022ShoriDateKanri"."nendoNaiRenban"DESC
         ) as "DbT7022ShoriDateKanri" 
         WHERE "DbT7022ShoriDateKanri".rowNo = 1
     </select>

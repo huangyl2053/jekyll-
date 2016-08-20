@@ -78,7 +78,7 @@ public class ShinseishoHakoIchiranhyoOutputProcess extends BatchProcessBase<Shin
                 concat(RDate.getNowDate().toDateString()).concat(CSV);
         breakItemIds = new ArrayList<>();
         出力順 = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBC介護給付,
-                ReportIdDBC.DBC200017.getReportId(), parameter.getShutsuryokujunId());
+                ReportIdDBC.DBC100011.getReportId(), parameter.getShutsuryokujunId());
         if (出力順 != null) {
             // TODO QA.1247 出力順の項目に、町域コードと氏名５０音カナはありません
             parameter.setOrderBy(MyBatisOrderByClauseCreator.create(
