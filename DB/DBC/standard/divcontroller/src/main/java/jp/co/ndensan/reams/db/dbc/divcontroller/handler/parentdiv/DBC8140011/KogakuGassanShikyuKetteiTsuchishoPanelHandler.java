@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.db.dbc.service.core.kougakugassanshikyuketteitsuchish
 import jp.co.ndensan.reams.db.dbc.service.report.gassanjigyobunketteitsuchisho.GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiAriPrintService;
 import jp.co.ndensan.reams.db.dbc.service.report.gassanjigyobunketteitsuchisho.GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
@@ -51,7 +50,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -432,10 +430,11 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
 
     /**
      * 更新完了メッセージ設定です。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @param 被保険者番号 HihokenshaNo
      */
-    public void set更新完了メッセージ() {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+    public void set更新完了メッセージ(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
         AccessLogger.log(AccessLogType.照会, personalData(識別コード, 被保険者番号.getColumnValue()));
         div.getCcdKanryoMessage().setMessage(完了メッセージメイン,
                 被保険者番号.getColumnValue(),
