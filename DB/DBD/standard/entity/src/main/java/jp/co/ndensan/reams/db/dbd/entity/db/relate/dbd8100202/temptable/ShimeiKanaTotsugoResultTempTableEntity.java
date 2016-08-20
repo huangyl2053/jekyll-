@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
@@ -29,8 +28,15 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShimeiKanaTotsugoResultTempTableEntity extends DbTableEntityBase<ShimeiKanaTotsugoResultTempTableEntity> implements IDbAccessable {
 
+    /**
+     * 氏名カナ突合結果一時テーブルの名称.
+     */
     @TableName
-    public static final RString TABLE_NAME = new RString("ShimeiKanaTotsugoResultTempTable");
+    public static final RString TABLE_NAME;
+
+    static {
+        TABLE_NAME = new RString("ShimeiKanaTotsugoResultTempTable");
+    }
 
     @TempTableColumnOrder(1)
     private RString dtRekoDoKubunn;
@@ -45,7 +51,7 @@ public class ShimeiKanaTotsugoResultTempTableEntity extends DbTableEntityBase<Sh
     @TempTableColumnOrder(6)
     private RString dtSeidoCode;
     @TempTableColumnOrder(7)
-    private FlexibleYear dtCreateYMD;
+    private FlexibleDate dtCreateYMD;
     @TempTableColumnOrder(8)
     private RString dtKisoNennkinnNo;
     @TempTableColumnOrder(9)

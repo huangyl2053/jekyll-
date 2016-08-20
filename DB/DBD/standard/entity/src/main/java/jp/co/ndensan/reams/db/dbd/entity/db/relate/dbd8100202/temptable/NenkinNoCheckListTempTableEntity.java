@@ -26,8 +26,15 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NenkinNoCheckListTempTableEntity extends DbTableEntityBase<NenkinNoCheckListTempTableEntity> implements IDbAccessable {
 
+    /**
+     * 年金番号チェックリスト一時テーブルの名称.
+     */
     @TableName
-    public static final RString TABLE_NAME = new RString("NenkinNoCheckListTempTable");
+    public static final RString TABLE_NAME;
+
+    static {
+        TABLE_NAME = new RString("NenkinNoCheckListTempTable");
+    }
 
     @TempTableColumnOrder(1)
     private HihokenshaNo hihokenshaNo;
