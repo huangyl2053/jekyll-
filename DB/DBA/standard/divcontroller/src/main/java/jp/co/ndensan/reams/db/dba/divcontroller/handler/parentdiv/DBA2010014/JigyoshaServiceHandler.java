@@ -81,6 +81,7 @@ public class JigyoshaServiceHandler {
         div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoKaishiYMD().setValue(事業者登録情報.getJigyoKaishiYMD());
         div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoKyushiYMD().setValue(事業者登録情報.getJigyoKyushiYMD());
         div.getJigyoshaServiceKihon().getJigyosha().getTxtJikyoSaikaiYMD().setValue(事業者登録情報.getJigyoSaikaiYMD());
+        div.getJigyoshaServiceShosai().setDisplayNone(true);
     }
 
     /**
@@ -90,6 +91,7 @@ public class JigyoshaServiceHandler {
         div.getJigyoshaServiceKihon().getDdlServiceShuruiChiikiMitchaku().setDisabled(false);
         div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaNo().setDisabled(true);
         div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().setDisabled(true);
+        div.getJigyoshaServiceShosai().setDisplayNone(true);
     }
 
     /**
@@ -98,6 +100,7 @@ public class JigyoshaServiceHandler {
     public void set状態_削除() {
         div.getJigyoshaServiceKihon().setDisabled(true);
         div.getJigyoshaServiceShosai().setDisabled(true);
+        div.getJigyoshaServiceShosai().setDisplayNone(true);
     }
 
     /**
