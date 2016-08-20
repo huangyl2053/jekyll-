@@ -168,8 +168,13 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
 
     private void 明細判断() {
         if (meisaiCsvEntity != null) {
+            合計 = false;
+            累計 = false;
             set共通レコード(suchishoTempentity, controlCsvEntity, headCsvEntity);
             set明細レコード(suchishoTempentity, meisaiCsvEntity);
+            set合計レコード(suchishoTempentity, gokeiCsvEntity, 合計);
+            set累計レコード(suchishoTempentity, ruikeiCsvEntity, 累計);
+            set審査支払手数料レコード(suchishoTempentity, tesuuyouCsvEntity, 累計);
             請求額通知書一時tableWriter.insert(suchishoTempentity);
             meisaiCsvEntity = null;
         }
