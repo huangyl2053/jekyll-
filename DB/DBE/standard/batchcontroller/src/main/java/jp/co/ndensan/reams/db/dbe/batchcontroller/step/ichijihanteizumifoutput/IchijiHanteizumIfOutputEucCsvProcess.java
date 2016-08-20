@@ -145,9 +145,8 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RStringBuilder jokenBuilder = new RStringBuilder();
         RString ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定ソフト一次判定用データ送信ファイル名09B, RDate.getNowDate());
-        jokenBuilder.append(ファイル名);
-        jokenBuilder.append(new RString("_"));
-        jokenBuilder.append(entity.getKoroshoIfShikibetsuCode());
+        jokenBuilder.append(ファイル名.replace(".csv", "_"));
+        jokenBuilder.append(entity.getKoroshoIfShikibetsuCode().concat(new RString(".csv")));
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), jokenBuilder.toRString());
         RString 一次判定IF文字コード = DbBusinessConfig.get(ConfigNameDBE.一次判定IF文字コード, RDate.getNowDate());
         if (new RString("1").equals(一次判定IF文字コード)) {
