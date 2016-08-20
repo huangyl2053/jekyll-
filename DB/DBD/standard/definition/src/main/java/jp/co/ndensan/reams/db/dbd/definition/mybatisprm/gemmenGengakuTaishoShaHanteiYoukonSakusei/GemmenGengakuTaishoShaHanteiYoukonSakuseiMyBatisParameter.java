@@ -21,18 +21,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class GemmenGengakuTaishoShaHanteiYoukonSakuseiMyBatisParameter implements IMyBatisParameter {
 
     private FlexibleYear 所得年度;
-    private FlexibleYear Last所得年度;
-    private RString DBB介護賦課;
-    private RString DB介護保険;
+    private FlexibleYear 年度;
+    private RString 介護賦課;
+    private RString 介護保険;
 
     /**
      *
-     * @param 所得年度
+     * @param 所得年度 FlexibleYear
      */
     public GemmenGengakuTaishoShaHanteiYoukonSakuseiMyBatisParameter(FlexibleYear 所得年度) {
         this.所得年度 = 所得年度;
-        this.Last所得年度 = new FlexibleYear(Integer.toString(所得年度.getYearValue() - 1));
-        this.DBB介護賦課 = new RString(SubGyomuCode.DBB介護賦課.getGyomuCode().toString());;
-        this.DB介護保険 = new RString(GyomuCode.DB介護保険.getColumnValue().toString());;
+        this.年度 = new FlexibleYear(Integer.toString(所得年度.getYearValue() - 1));
+        this.介護賦課 = new RString(SubGyomuCode.DBB介護賦課.getGyomuCode().toString());
+        this.介護保険 = new RString(GyomuCode.DB介護保険.getColumnValue().toString());
     }
 }

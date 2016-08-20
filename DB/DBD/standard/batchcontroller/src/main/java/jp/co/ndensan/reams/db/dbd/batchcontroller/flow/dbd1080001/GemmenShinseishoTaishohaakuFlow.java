@@ -29,8 +29,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class GemmenShinseishoTaishohaakuFlow extends BatchFlowBase<ShinseishoHakkoTaishoshaHaakuParameter> {
 
     private static final String 減免減額対象者判定用根拠作成対象者を作成 = "get減免減額対象者判定用根拠作成対象者";
-    private static final String Call減免減額対象者判定用根拠を作成Flow = "GemmenGengakuTaishoShaHanteiYoukonSakuseiFlow";
-    private static final RString GemmenGengakuTaishoShaHanteiYoukonSakuseiFlow = new RString("GemmenGengakuTaishoShaHanteiYoukonSakuseiFlow");
+    private static final String 減免減額対象者判定用根拠を作成 = "GemmenGengakuTaishoShaHanteiYoukonSakuseiFlow";
+    private static final RString TAISSHAHANTYOUKSAKUSFLOW = new RString("GemmenGengakuTaishoShaHanteiYoukonSakuseiFlow");
     private static final String 申請書発行対象者情報を作成する = "get申請書発行対象者情報";
     private static final String 更新申請対象外者情報を取得する = "get更新申請対象外者情報";
     private static final String 減免減額更新申請対象外者一覧CSV = "CSV_PROCESS";
@@ -38,15 +38,20 @@ public class GemmenShinseishoTaishohaakuFlow extends BatchFlowBase<ShinseishoHak
     @Override
     protected void defineFlow() {
         executeStep(減免減額対象者判定用根拠作成対象者を作成);
-        executeStep(Call減免減額対象者判定用根拠を作成Flow);
+        executeStep(減免減額対象者判定用根拠を作成);
         executeStep(申請書発行対象者情報を作成する);
         if (getResult(UUID.class, new RString(申請書発行対象者情報を作成する), ShinseishoHakkoTaishoJohoSakuseiProcess.OUT_把握処理ID) != null) {
             executeStep(更新申請対象外者情報を取得する);
-            executeStep(Call減免減額対象者判定用根拠を作成Flow);
+            executeStep(減免減額対象者判定用根拠を作成);
             executeStep(減免減額更新申請対象外者一覧CSV);
         }
     }
 
+    /**
+     * batchProcessです。
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(減免減額対象者判定用根拠作成対象者を作成)
     protected IBatchFlowCommand get減免減額対象者判定用根拠作成対象者() {
         return loopBatch(GemmenShinseishoTaishohaakuProcess.class)
@@ -54,11 +59,22 @@ public class GemmenShinseishoTaishohaakuFlow extends BatchFlowBase<ShinseishoHak
                 .define();
     }
 
-    @Step(Call減免減額対象者判定用根拠を作成Flow)
-    protected IBatchFlowCommand Call減免減額対象者判定用根拠を作成Flow() {
-        return otherBatchFlow(GemmenGengakuTaishoShaHanteiYoukonSakuseiFlow, SubGyomuCode.DBD介護受給, getGemmenGengakuTaishoShaHanteiYoukonSakuseiBatchParameter()).define();
+    /**
+     * batchProcessです。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(減免減額対象者判定用根拠を作成)
+    protected IBatchFlowCommand call減免減額対象者判定用根拠を作成() {
+        return otherBatchFlow(TAISSHAHANTYOUKSAKUSFLOW, SubGyomuCode.DBD介護受給,
+                getGemmenGengakuTaishoShaHanteiYoukonSakuseiBatchParameter()).define();
     }
 
+    /**
+     * batchProcessです。
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(申請書発行対象者情報を作成する)
     protected IBatchFlowCommand get申請書発行対象者情報() {
         return loopBatch(ShinseishoHakkoTaishoJohoSakuseiProcess.class)
@@ -66,6 +82,11 @@ public class GemmenShinseishoTaishohaakuFlow extends BatchFlowBase<ShinseishoHak
                 .define();
     }
 
+    /**
+     * batchProcessです。
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(更新申請対象外者情報を取得する)
     protected IBatchFlowCommand get更新申請対象外者情報() {
         return loopBatch(KousinSinseiTaishougaishaJohoProcess.class)

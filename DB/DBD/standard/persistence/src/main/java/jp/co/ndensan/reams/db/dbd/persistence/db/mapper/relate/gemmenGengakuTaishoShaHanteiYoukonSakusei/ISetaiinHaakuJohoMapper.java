@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenGengakuTai
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenGengakuTaishoShaHanteiYoukonSakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiMyBatisParameter;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmenGengakuTaishoShaHanteiYoukonSakusei.SetaiinHaakuJohoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengakutaishoshahanteiyoukonsakusei.SetaiinHaakuJohoEntity;
 
 /**
  * 世帯員把握情報を取得のMapperクラスです。

@@ -29,7 +29,16 @@ public class KousinSinseiTaishougaishaJohoProcessParameter implements IBatchProc
     private GemmenGengakuShurui 減免減額種類;
     private UUID 把握処理ID;
 
-    public KousinSinseiTaishougaishaJohoMyBatisParameter ShinseishoHakkoTaishoJohoSakuseiMybatisParameter(FlexibleDate 開始日, FlexibleDate 終了日, UUID 把握処理ID) {
+    /**
+     * MybatisParameterを取得する。
+     *
+     * @param 開始日 FlexibleDate
+     * @param 終了日 FlexibleDate
+     * @param 把握処理ID UUID
+     * @return MybatisParameter
+     */
+    public KousinSinseiTaishougaishaJohoMyBatisParameter toShinseishoHakkoTaishoJohoSakuseiMybatisParameter(FlexibleDate 開始日,
+            FlexibleDate 終了日, UUID 把握処理ID) {
         this.前年度の開始日 = 開始日;
         this.前年度の終了日 = 終了日;
         this.把握処理ID = 把握処理ID;
