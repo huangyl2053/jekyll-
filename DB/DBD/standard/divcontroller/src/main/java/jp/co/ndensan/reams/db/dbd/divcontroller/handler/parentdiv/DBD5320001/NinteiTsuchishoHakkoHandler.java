@@ -1002,7 +1002,7 @@ public class NinteiTsuchishoHakkoHandler {
                 List<ShikibetsuCode> shikibetsuCodeList = new ArrayList<>();
                 shikibetsuCodeList.add(画面選択データ.get識別コード());
                 for (SourceData data : collection) {
-                    insert発行履歴(data, div.getTxtNinteiKekkaSakuseiDay().getValue(), shikibetsuCodeList, hashMap);
+                    insert発行履歴(data, div.getTxtServiceHenkoBunshoSakuseiDay().getValue(), shikibetsuCodeList, hashMap);
                 }
             }
             return collection;
@@ -1021,7 +1021,7 @@ public class NinteiTsuchishoHakkoHandler {
                 List<ShikibetsuCode> shikibetsuCodeList = new ArrayList<>();
                 shikibetsuCodeList.add(画面選択データ.get識別コード());
                 for (SourceData data : collection) {
-                    insert発行履歴(data, div.getTxtNinteiKekkaSakuseiDay().getValue(), shikibetsuCodeList, hashMap);
+                    insert発行履歴(data, div.getTxtYokaigodoHenkoTsuchiSakuseiDay().getValue(), shikibetsuCodeList, hashMap);
                 }
             }
             return collection;
@@ -1040,7 +1040,7 @@ public class NinteiTsuchishoHakkoHandler {
                 List<ShikibetsuCode> shikibetsuCodeList = new ArrayList<>();
                 shikibetsuCodeList.add(画面選択データ.get識別コード());
                 for (SourceData data : collection) {
-                    insert発行履歴(data, div.getTxtNinteiKekkaSakuseiDay().getValue(), shikibetsuCodeList, hashMap);
+                    insert発行履歴(data, div.getTxtNinteiKyakkaTsuchi().getValue(), shikibetsuCodeList, hashMap);
                 }
             }
             return collection;
