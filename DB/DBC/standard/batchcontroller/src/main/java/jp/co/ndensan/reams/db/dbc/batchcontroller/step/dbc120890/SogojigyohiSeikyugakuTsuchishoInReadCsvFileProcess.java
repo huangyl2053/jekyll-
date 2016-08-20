@@ -245,8 +245,9 @@ public class SogojigyohiSeikyugakuTsuchishoInReadCsvFileProcess extends BatchPro
 
     @Override
     protected void afterExecute() {
-        if (controlCsvEntity != null && headRecordEntity != null && meisaiEntity != null) {
-            合計 = false;
+        if (controlCsvEntity != null && headRecordEntity != null && meisaiEntity != null
+                && toreraRecord1Entity != null) {
+            合計 = true;
             累計 = false;
             set共通レコード(shoTempentity, controlCsvEntity, headRecordEntity);
             set明細レコード(shoTempentity, meisaiEntity);
@@ -254,10 +255,9 @@ public class SogojigyohiSeikyugakuTsuchishoInReadCsvFileProcess extends BatchPro
             setトレーラレコード2_累計(shoTempentity, toreraRecord2Entity, 累計);
             setトレーラレコード3_審査支払手数料(shoTempentity, toreraRecord3Entity, 累計);
             請求額通知書一時tableWriter.insert(shoTempentity);
-        } else if (controlCsvEntity != null && headRecordEntity != null && meisaiEntity != null
-                && toreraRecord1Entity != null && toreraRecord2Entity != null) {
-            合計 = true;
-            累計 = true;
+        } else if (controlCsvEntity != null && headRecordEntity != null && meisaiEntity != null) {
+            合計 = false;
+            累計 = false;
             set共通レコード(shoTempentity, controlCsvEntity, headRecordEntity);
             set明細レコード(shoTempentity, meisaiEntity);
             setトレーラレコード1_合計(shoTempentity, toreraRecord1Entity, 合計);
