@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-4950-030 liuyang -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.ITuikaHanteiTaishoshaTempMapper">
+
+    <sql id="allColumns_TuikaHanteiTaishoshaTemp">
+        "TuikaHanteiTaishoshaTemp"."hihokenshaNo"as "TuikaHanteiTaishoshaTemp_hihokenshaNo",
+        "TuikaHanteiTaishoshaTemp"."shikibetsuCode"as "TuikaHanteiTaishoshaTemp_shikibetsuCode",
+        "TuikaHanteiTaishoshaTemp"."honinShikibetsuCode"as "TuikaHanteiTaishoshaTemp_honinShikibetsuCode",
+        "TuikaHanteiTaishoshaTemp"."kijunYMD"as "TuikaHanteiTaishoshaTemp_kijunYMD",
+        "TuikaHanteiTaishoshaTemp"."shotokuNendo"as "TuikaHanteiTaishoshaTemp_shotokuNendo",
+        "TuikaHanteiTaishoshaTemp"."jutokuGaitoFlag"as "TuikaHanteiTaishoshaTemp_jutokuGaitoFlag",
+        "TuikaHanteiTaishoshaTemp"."taishoNendo"as "TuikaHanteiTaishoshaTemp_taishoNendo",
+        "TuikaHanteiTaishoshaTemp"."taishoTsuki"as "TuikaHanteiTaishoshaTemp_taishoTsuki",
+        "TuikaHanteiTaishoshaTemp"."setaiCode"as "TuikaHanteiTaishoshaTemp_setaiCode",
+        "SetainJohoTemp"."setaiShotokuHonninKubun"as "SetainJohoTemp_setaiShotokuHonninKubun"
+    </sql>
+
+    <resultMap id="ResultMap_SetainJohoTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SetainJohoTempEntity" autoMapping="true">
+        <result property="hihokenshaNo" column="TuikaHanteiTaishoshaTemp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikibetsuCode" column="TuikaHanteiTaishoshaTemp_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="honinShikibetsuCode" column="TuikaHanteiTaishoshaTemp_honinShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kijunYMD" column="TuikaHanteiTaishoshaTemp_kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shotokuNendo" column="TuikaHanteiTaishoshaTemp_shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jutokuGaitoFlag" column="TuikaHanteiTaishoshaTemp_jutokuGaitoFlag" />
+        <result property="taishoNendo" column="TuikaHanteiTaishoshaTemp_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="taishoTsuki" column="TuikaHanteiTaishoshaTemp_taishoTsuki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiCode" column="TuikaHanteiTaishoshaTemp_setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiShotokuHonninKubun" column="SetainJohoTemp_setaiShotokuHonninKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+</mapper>
