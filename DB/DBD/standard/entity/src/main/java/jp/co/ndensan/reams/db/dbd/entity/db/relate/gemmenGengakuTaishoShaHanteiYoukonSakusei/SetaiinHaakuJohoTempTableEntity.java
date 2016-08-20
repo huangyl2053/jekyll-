@@ -26,7 +26,11 @@ import lombok.Setter;
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class SetaiinHaakuJohoTempTableEntity extends DbTableEntityBase<SetaiinHaakuJohoTempTableEntity> implements IDbAccessable {
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
+    /**
+     * テーブル名です。
+     */
     @TableName
     public static final RString TABLE_NAME;
 

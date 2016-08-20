@@ -7,10 +7,9 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 
-
-<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenGengakuTaishoShaHanteiYoukonSakusei.ITaishouJohoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengakutaishoshahanteiyoukonsakusei.ITaishouJohoMapper">
     <select id="get対象情報"
-            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenGengakuTaishoShaHanteiYoukonSakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiMyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanteiYoukonSakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiMyBatisParameter"
             resultMap="RseultMap_TaishouJohoEntity" fetchSize="500">
         SELECT
         A."hihokenshaNo",

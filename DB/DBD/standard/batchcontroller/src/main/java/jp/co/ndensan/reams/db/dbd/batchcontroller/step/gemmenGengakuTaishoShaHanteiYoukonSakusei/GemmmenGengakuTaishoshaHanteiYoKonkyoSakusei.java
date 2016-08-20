@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.gemmenGengakuTaishoShaHanteiYoukonSakusei;
 
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
-import jp.co.ndensan.reams.db.dbd.definition.processprm.gemmengengakutaishoshahanteiyoukonsakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.hanteiyoukonsakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengakutaishoshahanteiyoukonsakusei.TaishoShaHanteiYoukonkyoItokiTempTableEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengakutaishoshahanteiyoukonsakusei.TaishouJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -45,7 +45,7 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
     private IKojin iKojin;
     private ISetai isetai;
     @BatchWriter
-    private BatchEntityCreatedTempTableWriter YoukonkyoItokiTemp;
+    private BatchEntityCreatedTempTableWriter youkonkyoItokiTemp;
 
     @Override
     protected IBatchReader createReader() {
@@ -54,7 +54,7 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
 
     @Override
     protected void createWriter() {
-        YoukonkyoItokiTemp = new BatchEntityCreatedTempTableWriter(TaishoShaHanteiYoukonkyoItokiTempTableEntity.TABLE_NAME,
+        youkonkyoItokiTemp = new BatchEntityCreatedTempTableWriter(TaishoShaHanteiYoukonkyoItokiTempTableEntity.TABLE_NAME,
                 TaishoShaHanteiYoukonkyoItokiTempTableEntity.class);
     }
 
@@ -96,40 +96,13 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
             set減免減額対象者判定用根拠作成_非私(tempTable);
         }
 
-        if (list.get本人区分().equals(HonninKubun.本人.getCode())) {
-            if ((list.get識別コード_生活保護受給者() == null || list.get識別コード_生活保護受給者().isEmpty())
-                    || (list.get識別コード_老齢福祉年金受給者().isEmpty() || list.get識別コード_老齢福祉年金受給者().isEmpty())) {
-                tempTable.set利用者負担段階(RiyoshaFutanDankai.第一段階.getコード());
-            }
-            set減免減額対象者判定用根拠作成_本人(list, tempTable);
-            isetai = get世帯(list.get識別コード(), list.get基準日());
-            iKojin = get世帯(list.get識別コード(), list.get基準日()).get世帯員(list.get識別コード());
-            if (isetai.get配偶者(isetai.get世帯員(list.get識別コード())) == null) {
-                tempTable.set配偶者課税区分(RString.EMPTY);
-                tempTable.set配偶者識別コード(ShikibetsuCode.EMPTY);
-            } else {
-                set識別コードValue(tempTable, list);
-            }
-            setis高齢者複数世帯(tempTable, list.get識別コード(), list.get基準日());
-        } else {
-            if (list.get課税区分_住民税減免前().equals(KazeiKubun.課税.getコード())) {
-                tempTable.set利用者負担段階(RiyoshaFutanDankai.第四段階.getコード());
-            } else if (!list.get本人区分().equals(HonninKubun.本人.getCode())
-                    && ((list.get年金収入額().longValue() + list.get合計所得金額().longValue()) <= processParamter.getNumber().longValue())) {
-                tempTable.set利用者負担段階(RiyoshaFutanDankai.第二段階.getコード());
-            } else {
-                tempTable.set利用者負担段階(RiyoshaFutanDankai.第三段階.getコード());
-            }
-            set減免減額対象者判定用根拠作成_非私(tempTable);
-        }
-
         if (0 < list.get課税所得額().longValue()) {
             tempTable.setIs所得税課税世帯(Boolean.TRUE);
         } else {
             tempTable.setIs所得税課税世帯(Boolean.FALSE);
         }
         tempTable.set課税所得額(list.get課税所得額());
-        YoukonkyoItokiTemp.insert(tempTable);
+        youkonkyoItokiTemp.insert(tempTable);
     }
 
     private void set識別コードValue(TaishoShaHanteiYoukonkyoItokiTempTableEntity tempTable, TaishouJohoEntity list) {

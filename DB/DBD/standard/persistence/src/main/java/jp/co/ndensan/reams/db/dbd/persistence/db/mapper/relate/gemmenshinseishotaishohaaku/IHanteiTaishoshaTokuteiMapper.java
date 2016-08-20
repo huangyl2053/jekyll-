@@ -23,7 +23,7 @@ public interface IHanteiTaishoshaTokuteiMapper {
      * @param parameter HanteiTaishoshaTokuteiMyBatisParameter
      * @return List<HanteiTaishoshaTokuteiEntity>
      */
-    List<HanteiTaishoshaTokuteiEntity> get減免減額対象者判定用根拠作成対象者_負担限度額認定(HanteiTaishoshaTokuteiMyBatisParameter Parameter);
+    List<HanteiTaishoshaTokuteiEntity> get減免減額対象者判定用根拠作成対象者_負担限度額認定(HanteiTaishoshaTokuteiMyBatisParameter parameter);
 
     /**
      * 減免減額対象者判定用根拠作成対象者_利用者負担額減額を取得する。
@@ -31,7 +31,7 @@ public interface IHanteiTaishoshaTokuteiMapper {
      * @param parameter HanteiTaishoshaTokuteiMyBatisParameter
      * @return List<HanteiTaishoshaTokuteiEntity>
      */
-    List<HanteiTaishoshaTokuteiEntity> get減免減額対象者判定用根拠作成対象者_利用者負担額減額(HanteiTaishoshaTokuteiMyBatisParameter Parameter);
+    List<HanteiTaishoshaTokuteiEntity> get減免減額対象者判定用根拠作成対象者_利用者負担額減額(HanteiTaishoshaTokuteiMyBatisParameter parameter);
 
     /**
      * 減免減額対象者判定用根拠作成対象者_訪問介護利用者負担額減額を取得する。
@@ -39,7 +39,7 @@ public interface IHanteiTaishoshaTokuteiMapper {
      * @param parameter HanteiTaishoshaTokuteiMyBatisParameter
      * @return List<HanteiTaishoshaTokuteiEntity>
      */
-    List<HanteiTaishoshaTokuteiEntity> get減免減額対象者判定用根拠作成対象者_訪問介護利用者負担額減額(HanteiTaishoshaTokuteiMyBatisParameter Parameter);
+    List<HanteiTaishoshaTokuteiEntity> get減免減額対象者判定用根拠作成対象者_訪問介護利用者負担額減額(HanteiTaishoshaTokuteiMyBatisParameter parameter);
 
     /**
      * 減免減額対象者判定用根拠作成対象者_社会福祉法人等利用者負担軽減を取得する。
@@ -47,5 +47,5 @@ public interface IHanteiTaishoshaTokuteiMapper {
      * @param parameter HanteiTaishoshaTokuteiMyBatisParameter
      * @return List<HanteiTaishoshaTokuteiEntity>
      */
-    List<HanteiTaishoshaTokuteiEntity> get減免減額対象者判定用根拠作成対象者_社会福祉法人等利用者負担軽減(HanteiTaishoshaTokuteiMyBatisParameter Parameter);
+    List<HanteiTaishoshaTokuteiEntity> get減免減額対象者判定用根拠作成対象者_社会福祉法人等利用者負担軽減(HanteiTaishoshaTokuteiMyBatisParameter parameter);
 }
