@@ -39,7 +39,7 @@ public class SogojigyohiSaishinsaService {
     private static final RString 調整単位数タイトル = new RString("単位数");
     private static final RString 調整負担額タイトル = new RString("保険者負担額");
     private static final RString 総合事業費タイトル = new RString("総合事業費");
-    private static final int INT_0 = 0;
+    private static final int INT_5 = 5;
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
     private static final int INT_3 = 3;
@@ -203,15 +203,15 @@ public class SogojigyohiSaishinsaService {
         RString 並び順の５件目 = RString.EMPTY;
         if (outOrder != null) {
             for (ISetSortItem item : outOrder.get設定項目リスト()) {
-                if (i == INT_0) {
+                if (i == INT_1) {
                     並び順の１件目 = item.get項目名();
-                } else if (i == INT_1) {
-                    並び順の２件目 = item.get項目名();
                 } else if (i == INT_2) {
-                    並び順の３件目 = item.get項目名();
+                    並び順の２件目 = item.get項目名();
                 } else if (i == INT_3) {
-                    並び順の４件目 = item.get項目名();
+                    並び順の３件目 = item.get項目名();
                 } else if (i == INT_4) {
+                    並び順の４件目 = item.get項目名();
+                } else if (i == INT_5) {
                     並び順の５件目 = item.get項目名();
                 }
                 i = i + 1;
