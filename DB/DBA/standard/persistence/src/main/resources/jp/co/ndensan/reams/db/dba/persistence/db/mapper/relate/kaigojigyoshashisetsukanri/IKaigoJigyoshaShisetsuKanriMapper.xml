@@ -33,7 +33,7 @@
         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7062KaigoJigyoshaDaihyoshaMapper.allColumns_DbT7062KaigoJigyoshaDaihyosha" />
         FROM
         rgdb."DbT7060KaigoJigyosha"
-        INNER JOIN
+        LEFT OUTER JOIN
         rgdb."DbT7062KaigoJigyoshaDaihyosha"
         ON
         rgdb."DbT7060KaigoJigyosha"."jigyoshaNo" =  rgdb."DbT7062KaigoJigyoshaDaihyosha"."jigyoshaNo"
