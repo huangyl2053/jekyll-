@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.report.jukyushateiseirenrakuhyo;
 
+import jp.co.ndensan.reams.db.dbc.business.core.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoTorokuEntity;
 import jp.co.ndensan.reams.db.dbc.business.report.jukyushateiseirenrakuhyo.JukyushaTeiseiRenrakuhyoProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.jukyushateiseirenrakuhyo.JukyushaTeiseiRenrakuhyoReport;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoTorokuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.jukyushateiseirenrakuhyo.JukyushaTeiseiRenrakuhyoSource;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
