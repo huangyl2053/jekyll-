@@ -28,7 +28,7 @@ public class TaJushochiTokureishaKanri {
     private static final RString 状態_削除 = new RString("削除");
 
     /**
-     * 「過去の履歴を追加する」ボタンを押下する場合、他市町村住所地特例情報入力エリア全項目をクリアします。
+     * 「追加する」ボタンを押下する場合、他市町村住所地特例情報入力エリア全項目をクリアします。
      *
      * @param requestDiv 他住所地特例者管理Div
      * @return ResponseData<TaJushochiTokureishaKanriDiv>
@@ -108,7 +108,7 @@ public class TaJushochiTokureishaKanri {
     }
 
     /**
-     * 「異動内容を確認する」ボタンを押下する場合、入力の内容を最新の適用情報に反映します。
+     * 「他特例情報を確定する」ボタンを押下する場合、入力の内容を最新の適用情報に反映します。
      *
      * @param requestDiv 他住所地特例者管理Div
      * @return ResponseData<TaJushochiTokureishaKanriDiv>
@@ -119,16 +119,7 @@ public class TaJushochiTokureishaKanri {
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         } else {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                        UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-                return ResponseData.of(requestDiv).addMessage(message).respond();
-            }
-            if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 getHandler(requestDiv).onClick_BtnKakunin(requestDiv.getDgJushochiTokureiRireki().getActiveRow(), 親画面状態);
-            }
         }
         return ResponseData.of(requestDiv).respond();
     }
