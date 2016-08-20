@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb055001.InsShoriDateKan
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb055001.SelectKanendoIdoDataProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb055001.SpoolKanendoIdoKekkaIchiranProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.fukajohotoroku.FukaJohoTorokuBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendofuka.HonSanteiIdoFukaBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendofuka.HonSanteiIdoKanendoFukaBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
@@ -47,10 +48,12 @@ public class DBB055001_KanendoIdoFukaFlow extends BatchFlowBase<HonSanteiIdoFuka
     private static final String 結果一覧表出力 = "spoolKanendoIdoKekkaIchiran";
     private static final String 処理日付管理テーブル登録 = "insertShoriDateKanri";
     private static final String 本算定通知書一括発行_過年度 = "callKanendoIdoTsuchishoHakkoFlow";
+    private static final String 賦課情報登録 = "callChoteiToroku";
 
     private static final int 定値_イチ = 1;
     private static final int 定値_二 = 2;
     private static final RString 二_定値 = new RString("2");
+    private static final RString 賦課の情報登録フローBATCHID = new RString("FukaJohoTorokuFlow");
     private static final RString KANENDOIDOTSUCHISHO_FLOW = new RString("DBB055003_KanendoIdoTsuchishoHakko");
     private static final RString SETAISHOTOKUKAZEIHANTEI_FLOW = new RString("SetaiShotokuKazeiHanteiFlow");
     private static final RString KEISANGOJOHOSAKUEEIFLOW_FLOWID = new RString("KeisangoJohoSakuseiFlow");
@@ -67,6 +70,7 @@ public class DBB055001_KanendoIdoFukaFlow extends BatchFlowBase<HonSanteiIdoFuka
         executeStep(世帯員把握);
         executeStep(世帯員把握バッチフロー);
         executeStep(賦課計算);
+        executeStep(賦課情報登録);
         executeStep(過年度賦課_計算後情報を削除);
         executeStep(計算後情報作成_イチ);
         if (二_定値.equals(processParameter.get日付関連_年度サイクル())) {
@@ -130,6 +134,17 @@ public class DBB055001_KanendoIdoFukaFlow extends BatchFlowBase<HonSanteiIdoFuka
     @Step(賦課計算)
     protected IBatchFlowCommand calculateFuka() {
         return simpleBatch(CalculateFukaProcess.class).arguments(processParameter).define();
+    }
+
+    /**
+     * 賦課情報登録メソッドです。
+     *
+     * @return バッチコマンド
+     */
+    @Step(賦課情報登録)
+    protected IBatchFlowCommand callChoteiToroku() {
+        return otherBatchFlow(賦課の情報登録フローBATCHID, SubGyomuCode.DBB介護賦課,
+                new FukaJohoTorokuBatchParameter(true)).define();
     }
 
     /**
