@@ -22,7 +22,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JigyoshaMeisyoAndShikibetsuNoKanrenEntity {
     
-    private DbWT1111KyufuJissekiTempEntity 給付実績;
+    private DbWT1111KyufuJissekiEntity 給付実績;
     private List<DbT7060KaigoJigyoshaEntity> 介護事業者List;
     private DbT3118ShikibetsuNoKanriEntity 識別番号;
 }

@@ -6,14 +6,14 @@
 
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
-import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
 /**
@@ -26,8 +26,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 @lombok.Setter
 public class DbWT1111KyufuJissekiEntity extends DbTableEntityBase<DbWT1111KyufuJissekiEntity> implements IDbAccessable {
     
+    @PrimaryKey
     @TempTableColumnOrder(1)
-    private Decimal renban;
+    private int renban;
     @TempTableColumnOrder(2)
     private RString kokanJohoShikibetsuNo;
     @TempTableColumnOrder(3)
@@ -45,41 +46,41 @@ public class DbWT1111KyufuJissekiEntity extends DbTableEntityBase<DbWT1111KyufuJ
     @TempTableColumnOrder(9)
     private RString seiriNo;
     @TempTableColumnOrder(10)
-    private Decimal recordKensuH1;
+    private int recordKensuH1;
     @TempTableColumnOrder(11)
-    private Decimal recordKensuD1;
+    private int recordKensuD1;
     @TempTableColumnOrder(12)
-    private Decimal recordKensuDD;
+    private int recordKensuDD;
     @TempTableColumnOrder(13)
-    private Decimal recordKensuD2;
+    private int recordKensuD2;
     @TempTableColumnOrder(14)
-    private Decimal recordKensuDC;
+    private int recordKensuDC;
     @TempTableColumnOrder(15)
-    private Decimal recordKensuD3;
+    private int recordKensuD3;
     @TempTableColumnOrder(16)
-    private Decimal recordKensuD4;
+    private int recordKensuD4;
     @TempTableColumnOrder(17)
-    private Decimal recordKensuD5;
+    private int recordKensuD5;
     @TempTableColumnOrder(18)
-    private Decimal recordKensuD6;
+    private int recordKensuD6;
     @TempTableColumnOrder(19)
-    private Decimal recordKensuD7;
+    private int recordKensuD7;
     @TempTableColumnOrder(20)
-    private Decimal recordKensuD8;
+    private int recordKensuD8;
     @TempTableColumnOrder(21)
-    private Decimal recordKensuDE;
+    private int recordKensuDE;
     @TempTableColumnOrder(22)
-    private Decimal recordKensuT1;
+    private int recordKensuT1;
     @TempTableColumnOrder(23)
-    private Decimal recordKensuD9;
+    private int recordKensuD9;
     @TempTableColumnOrder(24)
-    private Decimal recordKensuDA;
+    private int recordKensuDA;
     @TempTableColumnOrder(25)
-    private Decimal recordKensuDB;
+    private int recordKensuDB;
     @TempTableColumnOrder(26)
     private RString keikokuKubunCode;
     @TempTableColumnOrder(27)
-    private HokenjaNo hokenshaNo;
+    private HokenshaNo hokenshaNo;
     @TempTableColumnOrder(28)
     private RString hokenshaName;
     @TempTableColumnOrder(29)

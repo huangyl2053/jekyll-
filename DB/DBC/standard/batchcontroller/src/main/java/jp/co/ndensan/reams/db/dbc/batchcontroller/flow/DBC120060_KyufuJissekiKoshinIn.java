@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import java.io.File;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120060.KyufuJissekiKoshinDoIchiranhyoSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120060.KyufuJissekiKoshinGetJigyoshaNameProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120060.KyufuJissekiKoshinGetNameProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120060.KyufuJissekiKoshinReadCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
@@ -45,7 +46,8 @@ public class DBC120060_KyufuJissekiKoshinIn extends BatchFlowBase<KokuhorenKyout
 
     private static final String ファイル取得 = "getFile";
     private static final String CSVファイル取込 = "readCsvFile";
-    private static final String 名称取得 = "getName";
+    private static final String 事業者名称取得 = "getJigyoshaName";
+    private static final String 入力識別名称取得 = "getName";
     private static final String 被保険者関連処理 = "doHihokenshaKanren";
     private static final String 国保連インタフェース管理更新 = "doInterfaceKanriKousin";
     private static final String 一覧表作成 = "doIchiranhyoSakusei";
@@ -88,7 +90,8 @@ public class DBC120060_KyufuJissekiKoshinIn extends BatchFlowBase<KokuhorenKyout
                 executeStep(国保連インタフェース管理更新);
                 executeStep(処理結果リスト作成);
             } else {
-                executeStep(名称取得);
+                executeStep(事業者名称取得);
+                executeStep(入力識別名称取得);
                 executeStep(被保険者関連処理);
                 executeStep(国保連インタフェース管理更新);
                 executeStep(一覧表作成);
@@ -131,11 +134,21 @@ public class DBC120060_KyufuJissekiKoshinIn extends BatchFlowBase<KokuhorenKyout
     }
 
     /**
-     * 名称取得です。
+     * 事業者名称取得です。
      *
-     * @return KohifutanshaReadCsvFileProcess
+     * @return KyufuJissekiKoshinGetJigyoshaNameProcess
      */
-    @Step(名称取得)
+    @Step(事業者名称取得)
+    protected IBatchFlowCommand callGetJigyoshaNameProcess() {
+        return loopBatch(KyufuJissekiKoshinGetJigyoshaNameProcess.class).define();
+    }
+
+    /**
+     * 入力識別名称取得です。
+     *
+     * @return KyufuJissekiKoshinGetNameProcess
+     */
+    @Step(入力識別名称取得)
     protected IBatchFlowCommand callGetNameProcess() {
         return loopBatch(KyufuJissekiKoshinGetNameProcess.class).define();
     }

@@ -3,79 +3,6 @@
 
 <!-- @reamsid_L DBC-2470-010 liuhui -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufujissekikoshinin.IKyufuJissekiKoshinJohoMapper">
-    <!--給付実績一時テーブルを作成します-->
-    <insert id="create給付実績一時TBL">
-        CREATE TEMP TABLE "DbWT1111KyufuJisseki"
-        (
-        "renban" smallint,
-        "kokanJohoShikibetsuNo" character(40),
-        "nyuryokuShikibetsuNo" character varying(40),
-        "recordShubetsuCode" character varying(40),
-        "kyufuJissekiSakuseiKubunCode" character varying(40),
-        "serviceTeikyoYM" rshare."UDD014YM",
-        "kyufuJissekiKubun" character varying(40),
-        "jigyoshoNo" rgdb."DbUDD004JigyoshaNo",
-        "seiriNo" character varying(10),
-        "recordKensuH1" smallint,
-        "recordKensuD1" smallint,
-        "recordKensuDD" smallint,
-        "recordKensuD2" smallint,
-        "recordKensuDC" smallint,
-        "recordKensuD3" smallint,
-        "recordKensuD4" smallint,
-        "recordKensuD5" smallint,
-        "recordKensuD6" smallint,
-        "recordKensuD7" smallint,
-        "recordKensuD8" smallint,
-        "recordKensuDE" smallint,
-        "recordKensuT1" smallint,
-        "recordKensuD9" smallint,
-        "recordKensuDA" smallint,
-        "recordKensuDB" smallint,
-        "keikokuKubunCode" character varying(40),
-        "hokenshaNo" rgdb."DbUDD003HokenshaNo",
-        "hokenshaName" character varying(40),
-        "jigyoshaName" character varying(40),
-        "nyuryokuShikibetsuMeisho" character varying(40)
-        )
-    </insert>
-    
-    <!--給付実績一時テーブルに登録します-->
-    <insert id="do給付実績一時TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.DbWT1111KyufuJissekiTempEntity">
-        INSERT INTO "DbWT1111KyufuJisseki" 
-        VALUES 
-        (
-        #{連番},
-        #{交換情報識別番号},
-        #{入力識別番号},
-        #{レコード種別コード},
-        #{給付実績情報作成区分コード},
-        #{サービス提供年月},
-        #{給付実績区分},
-        #{事業所番号},
-        #{整理番号},
-        #{件数_H1},
-        #{件数_D1},
-        #{件数_DD},
-        #{件数_D2},
-        #{件数_DC},
-        #{件数_D3},
-        #{件数_D4},
-        #{件数_D5},
-        #{件数_D6},
-        #{件数_D7},
-        #{件数_D8},
-        #{件数_DE},
-        #{件数_T1},
-        #{件数_D9},
-        #{件数_DA},
-        #{件数_DB},
-        #{警告区分コード},
-        #{コントロールレコード保険者番号},
-        #{コントロールレコード保険者名},
-        #{事業者名称},
-        #{入力識別名称})
-    </insert>
     
     <select id="get帳票出力対象データ"
             resultMap="resultMap_ChohyoShutsuryokuTaishoDateEntity" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter"  fetchSize="500" resultOrdered="true">
@@ -116,13 +43,6 @@
                     resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.ResultMap_DbT7060KaigoJigyoshaEntity"/>
     </resultMap>
     
-    <!-- 事業者名称の登録 -->
-    <update id="do事業者名称の登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.DbWT1111KyufuJissekiTempEntity">
-        UPDATE "DbWT1111KyufuJisseki"
-        SET    "jigyoshaName" = #{事業者名称}
-        WHERE  "renban" = #{連番}
-    </update>
-    
     <select id="select入力識別名称関連リスト"
             resultMap="resultMap_ShikibetsuNoKanrenEntity" fetchSize="500" resultOrdered="true">
         SELECT
@@ -149,13 +69,6 @@
         <association property="給付実績" resultMap="ResultMap_DbWT1111KyufuJissekiEntity"/>
         <association property="識別番号" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3118ShikibetsuNoKanriMapper.ResultMap_DbT3118ShikibetsuNoKanriEntity"/>
     </resultMap>
-    
-    <!-- 入力識別名称の登録 -->
-    <update id="do入力識別名称の登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.DbWT1111KyufuJissekiTempEntity">
-        UPDATE "DbWT1111KyufuJisseki"
-        SET    "nyuryokuShikibetsuMeisho" = #{入力識別名称}
-        WHERE  "renban" = #{連番}
-    </update>
 
     <!--テーブルDbWT0001HihokenshaとDbWT1111KyufuJissekiの項目をChohyoShutsuryokuTaishoDateEntityの項目にマッピングします。-->
     <resultMap id="resultMap_ChohyoShutsuryokuTaishoDateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.chohyoshutsuryokutaishodate.ChohyoShutsuryokuTaishoDateEntity" autoMapping="true">
@@ -219,37 +132,37 @@
     </resultMap>
     
     <!--テーブルDbWT1111KyufuJissekiの項目をDbWT1111KyufuJissekiTempEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbWT1111KyufuJissekiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.DbWT1111KyufuJissekiTempEntity" autoMapping="true">
-        <result property="連番" column="dbWT1111_連番"/>
-        <result property="交換情報識別番号" column="dbWT1111_交換情報識別番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="入力識別番号" column="dbWT1111_入力識別番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler"/>
-        <result property="レコード種別コード" column="dbWT1111_レコード種別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="給付実績情報作成区分コード" column="dbWT1111_給付実績情報作成区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="サービス提供年月" column="dbWT1111_サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="給付実績区分" column="dbWT1111_給付実績区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="事業所番号" column="dbWT1111_事業所番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
-        <result property="整理番号" column="dbWT1111_整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="件数_H1" column="dbWT1111_H1件数"/>
-        <result property="件数_D1" column="dbWT1111_D1件数"/>
-        <result property="件数_DD" column="dbWT1111_DD件数"/>
-        <result property="件数_D2" column="dbWT1111_D2件数"/>
-        <result property="件数_DC" column="dbWT1111_DC件数"/>
-        <result property="件数_D3" column="dbWT1111_D3件数"/>
-        <result property="件数_D4" column="dbWT1111_D4件数"/>
-        <result property="件数_D5" column="dbWT1111_D5件数"/>
-        <result property="件数_D6" column="dbWT1111_D6件数"/>
-        <result property="件数_D7" column="dbWT1111_D7件数"/>
-        <result property="件数_D8" column="dbWT1111_D8件数"/>
-        <result property="件数_DE" column="dbWT1111_DE件数"/>
-        <result property="件数_T1" column="dbWT1111_T1件数"/>
-        <result property="件数_D9" column="dbWT1111_D9件数"/>
-        <result property="件数_DA" column="dbWT1111_DA件数"/>
-        <result property="件数_DB" column="dbWT1111_DB件数"/>
-        <result property="警告区分コード" column="dbWT1111_警告区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="コントロールレコード保険者番号" column="dbWT1111_コントロールレコード保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
-        <result property="コントロールレコード保険者名" column="dbWT1111_コントロールレコード保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="事業者名称" column="dbWT1111_事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="入力識別名称" column="dbWT1111_入力識別名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <resultMap id="ResultMap_DbWT1111KyufuJissekiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.DbWT1111KyufuJissekiEntity" autoMapping="true">
+        <result property="renban" column="dbWT1111_連番"/>
+        <result property="kokanJohoShikibetsuNo" column="dbWT1111_交換情報識別番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nyuryokuShikibetsuNo" column="dbWT1111_入力識別番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler"/>
+        <result property="recordShubetsuCode" column="dbWT1111_レコード種別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyufuJissekiSakuseiKubunCode" column="dbWT1111_給付実績情報作成区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="serviceTeikyoYM" column="dbWT1111_サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="kyufuJissekiKubun" column="dbWT1111_給付実績区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jigyoshoNo" column="dbWT1111_事業所番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="seiriNo" column="dbWT1111_整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="recordKensuH1" column="dbWT1111_H1件数"/>
+        <result property="recordKensuD1" column="dbWT1111_D1件数"/>
+        <result property="recordKensuDD" column="dbWT1111_DD件数"/>
+        <result property="recordKensuD2" column="dbWT1111_D2件数"/>
+        <result property="recordKensuDC" column="dbWT1111_DC件数"/>
+        <result property="recordKensuD3" column="dbWT1111_D3件数"/>
+        <result property="recordKensuD4" column="dbWT1111_D4件数"/>
+        <result property="recordKensuD5" column="dbWT1111_D5件数"/>
+        <result property="recordKensuD6" column="dbWT1111_D6件数"/>
+        <result property="recordKensuD7" column="dbWT1111_D7件数"/>
+        <result property="recordKensuD8" column="dbWT1111_D8件数"/>
+        <result property="recordKensuDE" column="dbWT1111_DE件数"/>
+        <result property="recordKensuT1" column="dbWT1111_T1件数"/>
+        <result property="recordKensuD9" column="dbWT1111_D9件数"/>
+        <result property="recordKensuDA" column="dbWT1111_DA件数"/>
+        <result property="recordKensuDB" column="dbWT1111_DB件数"/>
+        <result property="keikokuKubunCode" column="dbWT1111_警告区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenshaNo" column="dbWT1111_コントロールレコード保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="hokenshaName" column="dbWT1111_コントロールレコード保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jigyoshaName" column="dbWT1111_事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nyuryokuShikibetsuMeisho" column="dbWT1111_入力識別名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
     <sql id="allColumns_chohyoShutsuryokuTaishoDate">
