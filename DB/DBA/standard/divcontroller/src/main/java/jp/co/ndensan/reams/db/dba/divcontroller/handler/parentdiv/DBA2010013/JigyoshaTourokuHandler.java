@@ -268,12 +268,12 @@ public class JigyoshaTourokuHandler {
      *
      * @param サービス一覧情報List サービス一覧情報List
      */
-    public void getサービス一覧情報再表示(List<KaigoJigyoshaShiteiService> サービス一覧情報List,boolean chkFlg) {
+    public void getサービス一覧情報再表示(List<ServiceItiranHyojiJohoBusiness> サービス一覧情報List,boolean chkFlg) {
         List<dgServiceList_Row> サービス一覧データ = new ArrayList<>();
-        for (KaigoJigyoshaShiteiService result : サービス一覧情報List) {
+        for (ServiceItiranHyojiJohoBusiness result : サービス一覧情報List) {
             dgServiceList_Row row = new dgServiceList_Row();
             if (!RString.isNullOrEmpty(result.getサービス種類コード().getColumnValue())) {
-                if(chkFlg && result.isDeleted()){
+                if(chkFlg && result.get削除フラグ()){
                     row.setServiceType(result.getサービス種類コード().getColumnValue());
                     TextBoxFlexibleDate 開始日 = new TextBoxFlexibleDate();
                     開始日.setValue(new FlexibleDate(result.get有効開始日().toString()));

@@ -24,6 +24,7 @@
         <result property="jigyoshaName" column="jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="kanrishaName" column="kanrishaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="serviceShuruiRyakusho" column="serviceShuruiRyakusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="isDeleted" column="isDeleted" />
     </resultMap> 
     <select resultOrdered="true" id="getJigyoshaJoho" resultMap="resultMap_getShikakuJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaShisetsuKanriMapperParameter" fetchSize="500">
@@ -55,6 +56,7 @@
         DbT7063."jigyoshaName",
         DbT7063."kanrishaName",
         DbT7063."serviceShuruiCode",
+        DbT7063."isDeleted",        
         DbT7130."serviceShuruiRyakusho"
         FROM
         rgdb."DbT7060KaigoJigyosha" as DbT7060

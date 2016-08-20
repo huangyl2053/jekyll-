@@ -155,8 +155,9 @@ public class JigyoshaTouroku {
         FlexibleDate 有効終了日 = div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().getValue();
         サービス一覧パラメータ = KaigoJogaiTokureiParameter.createParam(
                 事業者番号, 有効開始日, 有効終了日, RDate.getNowDate().getYearMonth());
-        List<KaigoJigyoshaShiteiService> サービス一覧情報List = manager.getServiceItiranJoho(サービス一覧パラメータ).records();
-        getHandler(div).getサービス一覧情報再表示(サービス一覧情報List,chkFlag);
+//        List<KaigoJigyoshaShiteiService> サービス一覧情報List = manager.getServiceItiranJoho(サービス一覧パラメータ).records();
+        List<ServiceItiranHyojiJohoBusiness> サービス一覧表示情報List = manager.getServiceItiranHyojiJoho(サービス一覧パラメータ).records();
+        getHandler(div).getサービス一覧情報再表示(サービス一覧表示情報List,chkFlag);
         return ResponseData.of(div).respond();
     }
 
