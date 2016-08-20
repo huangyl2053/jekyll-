@@ -124,6 +124,7 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
     private static final RString デフォルト出力順 = new RString(" ORDER BY JUKYUSHAJOHOTEMP.\"hokenshaNo\" ASC");
     private static final RString コンマ = new RString(",");
     private static final RString 帳票分類ID = new RString("DBC200055_JukyushaKoshinkekkaIchiran");
+    private static final RString 固定改頁項目ID = new RString("0365");
 
     private FileSpoolManager manager;
     @BatchWriter
@@ -143,7 +144,7 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
                     .replace(実行不可MESSAGE.toString()).toString());
         }
         pageBreakKeys = new ArrayList<>();
-        pageBreakKeys.add(new RString(JukyushaKoshinKekkaIchiranSource.ReportSourceFields.hokenshaNo.name()));
+        pageBreakKeys.add(固定改頁項目ID);
         RString orderByStr = MyBatisOrderByClauseCreator.create(JukyushaKoshinKekkaIchiranOutputOrder.class, 出力順情報);
         if (出力順情報 != null) {
             int i = 0;
