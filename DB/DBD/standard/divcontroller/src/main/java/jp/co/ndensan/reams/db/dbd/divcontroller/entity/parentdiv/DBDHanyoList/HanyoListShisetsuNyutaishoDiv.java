@@ -41,6 +41,8 @@ public class HanyoListShisetsuNyutaishoDiv extends Panel {
     private DropDownList ddlIsCsvrenbanfuka1;
     @JsonProperty("ddlIsCsvhitsukesurasyuhensyu1")
     private DropDownList ddlIsCsvhitsukesurasyuhensyu1;
+    @JsonProperty("txtCyohyoid1")
+    private TextBox txtCyohyoid1;
     @JsonProperty("txtSyutsuryokukomoku1")
     private TextBox txtSyutsuryokukomoku1;
 
@@ -228,6 +230,24 @@ public class HanyoListShisetsuNyutaishoDiv extends Panel {
     @JsonProperty("ddlIsCsvhitsukesurasyuhensyu1")
     public void setDdlIsCsvhitsukesurasyuhensyu1(DropDownList ddlIsCsvhitsukesurasyuhensyu1) {
         this.ddlIsCsvhitsukesurasyuhensyu1 = ddlIsCsvhitsukesurasyuhensyu1;
+    }
+
+    /*
+     * gettxtCyohyoid1
+     * @return txtCyohyoid1
+     */
+    @JsonProperty("txtCyohyoid1")
+    public TextBox getTxtCyohyoid1() {
+        return txtCyohyoid1;
+    }
+
+    /*
+     * settxtCyohyoid1
+     * @param txtCyohyoid1 txtCyohyoid1
+     */
+    @JsonProperty("txtCyohyoid1")
+    public void setTxtCyohyoid1(TextBox txtCyohyoid1) {
+        this.txtCyohyoid1 = txtCyohyoid1;
     }
 
     /*
