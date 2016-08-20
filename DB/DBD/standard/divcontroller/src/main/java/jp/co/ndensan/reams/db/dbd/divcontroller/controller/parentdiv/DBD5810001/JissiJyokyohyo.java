@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5810001;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd581001.YokaigoJissiJyokyohyoParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd581001.DBD581001Parameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5810001.JissiJyokyohyoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5810001.JissiJyokyohyoHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5810001.JissiJyokyohyoValidationHandler;
@@ -70,14 +70,20 @@ public class JissiJyokyohyo {
      * @param div JissiJyokyohyoDiv
      * @return ResponseData<JissiJyokyohyoDiv>
      */
-    public ResponseData<YokaigoJissiJyokyohyoParameter> onCilck_btnJikkou(JissiJyokyohyoDiv div) {
+    public ResponseData<DBD581001Parameter> onCilck_btnBatchRegister(JissiJyokyohyoDiv div) {
 
-        YokaigoJissiJyokyohyoParameter parameter = new YokaigoJissiJyokyohyoParameter();
-        getHandler().onCilck_btnJikkou(div, parameter);
+        DBD581001Parameter parameter = new DBD581001Parameter();
+        getHandler().onCilck_btnBatchRegister(div, parameter);
         return ResponseData.of(parameter).respond();
     }
 
-    public ResponseData<JissiJyokyohyoDiv> onBeforeCilck_btnJikkou(JissiJyokyohyoDiv div) {
+    /**
+     * バッチ起動前のチェックです。
+     *
+     * @param div JissiJyokyohyoDiv
+     * @return
+     */
+    public ResponseData<JissiJyokyohyoDiv> onBeforeCilck_btnBatchRegister(JissiJyokyohyoDiv div) {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         getValidationHandler().validateFor行政区大小関係チェック(pairs, div);
         getValidationHandler().validateFor地区２大小関係チェック(pairs, div);

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd581000;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd581001.YokaigoJissiJyokyohyoParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd581001.DBD581001Parameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd582001.DBD582001Parameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -43,8 +43,8 @@ public class DBD581000Parameter extends BatchParameterBase {
      *
      * @return parameter YokaigoJissiJyokyohyoParameter
      */
-    public YokaigoJissiJyokyohyoParameter toDBD581001Parameter() {
-        YokaigoJissiJyokyohyoParameter parameter = new YokaigoJissiJyokyohyoParameter();
+    public DBD581001Parameter toDBD581001Parameter() {
+        DBD581001Parameter parameter = new DBD581001Parameter();
         parameter.set出力帳票(出力帳票);
         parameter.set対象年度(対象年度);
         parameter.set集計単位(集計単位);
