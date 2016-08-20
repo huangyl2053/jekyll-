@@ -227,7 +227,7 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
         RString 計算対象期間開始年月 = getパターン62(事業高額合算支給不支給決定.getKeisanKaishiYMD());
         RString 計算対象期間終了年月 = getパターン62(事業高額合算支給不支給決定.getKeisanShuryoYMD());
         source.taisyoStYm = 計算対象期間開始年月;
-        source.taisyoEdYm = 計算対象期間開始年月.concat(波線).concat(計算対象期間終了年月);
+        source.taisyoEdYm = 計算対象期間終了年月;
         source.shinseiYmd = getパターン12(事業高額合算支給不支給決定.getShinseiYMD());
         source.ketteiYmd = getパターン12(事業高額合算支給不支給決定.getKetteiYMD());
         source.shiharaiGaku = get共通ポリシー金額1(事業高額合算支給不支給決定.getJikoFutanSogaku());
@@ -236,16 +236,12 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
         if (事業高額合算支給不支給決定.getShikyuKubunCode() != null && RSTRING_1.equals(事業高額合算支給不支給決定.getShikyuKubunCode())) {
             source.kekka = 支給;
             source.riyu = 備考;
-            source.riyu1 = 事業高額合算支給不支給決定.getBiko();
-            source.riyu2 = 事業高額合算支給不支給決定.getBiko();
-            source.riyu3 = 事業高額合算支給不支給決定.getBiko();
+            this.set理由(source, 事業高額合算支給不支給決定.getBiko());
         }
         if (事業高額合算支給不支給決定.getShikyuKubunCode() != null && RSTRING_2.equals(事業高額合算支給不支給決定.getShikyuKubunCode())) {
             source.kekka = 不支給;
             source.riyu = 不支給の理由;
-            source.riyu1 = 事業高額合算支給不支給決定.getFushikyuRiyu();
-            source.riyu2 = 事業高額合算支給不支給決定.getFushikyuRiyu();
-            source.riyu3 = 事業高額合算支給不支給決定.getFushikyuRiyu();
+            this.set理由(source, 事業高額合算支給不支給決定.getFushikyuRiyu());
         }
         RString kyufuShurui = 事業高額合算支給不支給決定.getKyufuShurui();
         if (kyufuShurui != null && !kyufuShurui.isEmpty()) {
@@ -266,6 +262,26 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
         }
         if (事業高額合算支給不支給決定.getShikyuSeiriNo() != null) {
             source.tsuchiNo = 事業高額合算支給不支給決定.getShikyuSeiriNo();
+        }
+    }
+
+    private void set理由(GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source, RString riyu) {
+        if (riyu != null && !riyu.isEmpty()) {
+            if (riyu.length() <= INT_38) {
+                source.riyu1 = riyu.substring(0, riyu.length());
+            } else if (riyu.length() > INT_38 && riyu.length() <= INT_76) {
+                source.riyu1 = riyu.substring(0, INT_38);
+                source.riyu2 = riyu.substring(INT_38, riyu.length());
+            } else if (riyu.length() > INT_76 && riyu.length() <= INT_114) {
+                source.riyu1 = riyu.substring(0, INT_38);
+                source.riyu2 = riyu.substring(INT_38, INT_76);
+                source.riyu3 = riyu.substring(INT_76, riyu.length());
+
+            } else {
+                source.riyu1 = riyu.substring(0, INT_38);
+                source.riyu2 = riyu.substring(INT_38, INT_76);
+                source.riyu3 = riyu.substring(INT_76, INT_114);
+            }
         }
     }
 
@@ -299,8 +315,7 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
             RString 開始曜日 = new RString(shiharaiKaishiYMD.getDayOfWeek().getInFullParentheses());
             source.maStYmd = getパターン12(shiharaiKaishiYMD).concat(開始曜日).concat(波線);
         } else if (shiharaiKaishiYMD.isEmpty() && !shiharaiShuryoYMD.isEmpty()) {
-            RString 終了曜日 = new RString(shiharaiShuryoYMD.getDayOfWeek().getInFullParentheses());
-            source.maStYmd = 波線.concat(getパターン12(shiharaiShuryoYMD)).concat(終了曜日);
+            source.maStYmd = 波線;
         }
         if (!shiharaiKaishiYMD.isEmpty() && !shiharaiShuryoYMD.isEmpty()) {
             RString 終了曜日 = new RString(shiharaiShuryoYMD.getDayOfWeek().getInFullParentheses());
