@@ -27,8 +27,15 @@ import lombok.Setter;
 public class HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity extends DbTableEntityBase<HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity>
         implements IDbAccessable {
 
+    /**
+     * 非課税年金対象者同定結果情報一時テーブの名称
+     */
     @TableName
-    public static final RString TABLE_NAME = new RString("HikazeNenkinTaishoshaDouteiResultJohoTempTable");
+    public static final RString TABLE_NAME;
+
+    static {
+        TABLE_NAME = new RString("HikazeNenkinTaishoshaDouteiResultJohoTempTable");
+    }
 
     @TempTableColumnOrder(1)
     private RString douteiResultKubun;

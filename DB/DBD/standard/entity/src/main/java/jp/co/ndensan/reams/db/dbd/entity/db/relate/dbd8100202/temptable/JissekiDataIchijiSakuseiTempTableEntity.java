@@ -27,8 +27,15 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JissekiDataIchijiSakuseiTempTableEntity extends DbTableEntityBase<JissekiDataIchijiSakuseiTempTableEntity> implements IDbAccessable {
 
+    /**
+     * 実績データ一時テーブルの名称．
+     */
     @TableName
-    public static final RString TABLE_NAME = new RString("JissekiDataIchijiSakuseiTempTable");
+    public static final RString TABLE_NAME;
+
+    static {
+        TABLE_NAME = new RString("JissekiDataIchijiSakuseiTempTable");
+    }
 
     @TempTableColumnOrder(1)
     private HihokenshaNo hihokenshaNo;
