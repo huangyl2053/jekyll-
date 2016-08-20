@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc120010;
 import java.io.File;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120010.KyufukanrihyoDoIchiranhyoSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120010.KyufukanrihyoDoMasterTorokuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120010.KyufukanrihyoGetJigyoshaNameKyotakuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120010.KyufukanrihyoGetJigyoshaNameYobouProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120010.KyufukanrihyoGetShokisaiHokenshaNoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120010.KyufukanrihyoReadCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
@@ -49,6 +51,8 @@ public class DBC120010_KyufukanrihyoInFlow extends BatchFlowBase<KokuhorenKyouts
     private static final String CSVファイル取込 = "readCsvFile";
     private static final String 証記載保険者番号取得 = "getShokisaiHokenshaNo";
     private static final String 被保険者関連処理 = "doHihokenshaKanren";
+    private static final String 事業者名称取得_居宅介護支援事業所作成 = "getJigyoshaNameKyotaku";
+    private static final String 事業者名称取得_介護予防支援事業所作成 = "getJigyoshaNameYobou";
     private static final String 事業者名称登録_マスタ登録 = "doMasterToroku";
     private static final String 国保連インタフェース管理更新 = "doInterfaceKanriKousin";
     private static final String 一覧表作成 = "doIchiranhyoSakusei";
@@ -101,6 +105,8 @@ public class DBC120010_KyufukanrihyoInFlow extends BatchFlowBase<KokuhorenKyouts
                     executeStep(証記載保険者番号取得);
                 }
                 executeStep(被保険者関連処理);
+                executeStep(事業者名称取得_居宅介護支援事業所作成);
+                executeStep(事業者名称取得_介護予防支援事業所作成);
                 executeStep(事業者名称登録_マスタ登録);
                 executeStep(国保連インタフェース管理更新);
                 executeStep(一覧表作成);
@@ -163,6 +169,28 @@ public class DBC120010_KyufukanrihyoInFlow extends BatchFlowBase<KokuhorenKyouts
     @Step(被保険者関連処理)
     protected IBatchFlowCommand callDoHihokenshaKanrenProcess() {
         return simpleBatch(KokuhorenkyoutsuDoHihokenshaKanrenProcess.class).define();
+    }
+
+    /**
+     * 事業者名称取得です。<br>
+     * 居宅サービス計画作成区分コード＝1：居宅介護支援事業所作成の場合。
+     *
+     * @return KyufukanrihyoGetJigyoshaNameKyotakuProcess
+     */
+    @Step(事業者名称取得_居宅介護支援事業所作成)
+    protected IBatchFlowCommand callGetJigyoshaNameKyotakuProcess() {
+        return loopBatch(KyufukanrihyoGetJigyoshaNameKyotakuProcess.class).define();
+    }
+
+    /**
+     * 事業者名称取得です。<br>
+     * 居宅サービス計画作成区分コード＝3：介護予防支援事業所・地域包括支援センター作成の場合。
+     *
+     * @return KyufukanrihyoGetJigyoshaNameYobouProcess
+     */
+    @Step(事業者名称取得_介護予防支援事業所作成)
+    protected IBatchFlowCommand callGetJigyoshaNameYobouProcess() {
+        return loopBatch(KyufukanrihyoGetJigyoshaNameYobouProcess.class).define();
     }
 
     /**

@@ -361,17 +361,21 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
             csvEntity.set計画作成区分(RString.EMPTY);
         }
         csvEntity.set作成区分(給付管理票.get給付管理票情報作成区分コード());
-        RString 作成区分名 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付,
-                DBCCodeShubetsu.給付管理票情報作成区分.getコード(),
-                new Code(給付管理票.get給付管理票情報作成区分コード()));
-        csvEntity.set作成区分名(RString.isNullOrEmpty(作成区分名) ? RString.EMPTY : 作成区分名);
+        if (!RString.isNullOrEmpty(給付管理票.get給付管理票情報作成区分コード())) {
+            RString 作成区分名 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付,
+                    DBCCodeShubetsu.給付管理票情報作成区分.getコード(),
+                    new Code(給付管理票.get給付管理票情報作成区分コード()));
+            csvEntity.set作成区分名(作成区分名);
+        }
         csvEntity.set被保険者番号(getColumnValue(被保険者.get登録被保険者番号()));
         csvEntity.set被保険者氏名(被保険者.get宛名名称());
         csvEntity.set作成種別区分(給付管理票.get給付管理票種別区分コード());
-        RString 作成種別区分名 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付,
-                DBCCodeShubetsu.給付管理票種別区分.getコード(),
-                new Code(給付管理票.get給付管理票種別区分コード()));
-        csvEntity.set作成種別区分名(RString.isNullOrEmpty(作成種別区分名) ? RString.EMPTY : 作成種別区分名);
+        if (!RString.isNullOrEmpty(給付管理票.get給付管理票種別区分コード())) {
+            RString 作成種別区分名 = CodeMaster.getOption2(SubGyomuCode.DBC介護給付,
+                    DBCCodeShubetsu.給付管理票種別区分.getコード(),
+                    new Code(給付管理票.get給付管理票種別区分コード()));
+            csvEntity.set作成種別区分名(作成種別区分名);
+        }
         csvEntity.set要介護状態区分(給付管理票.get要介護状態区分コード());
         IYokaigoJotaiKubun 要介護状態区分 = YokaigoJotaiKubunSupport.toValue(給付管理票.getサービス提供年月(),
                 給付管理票.get要介護状態区分コード());
