@@ -9,7 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.core.syorijyoutaicode.SyoriJyoutaiCode;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.HikazeiNenkinTaishoshaJohoDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.HikazeiNenkinTaishoshaJohoDivSpec;
+//import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.HikazeiNenkinTaishoshaJohoDivSpec;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.dgShoriSettei_Row;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
@@ -47,8 +47,8 @@ public class HikazeiNenkinTaishoshaJohoValidationHandler {
     public ValidationMessageControlPairs validateFor編集なし(ValidationMessageControlPairs pairs) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(HikazeiNenkinTaishoshaJohoDivSpec.編集なしチェック)
-                .thenAdd(NoInputMessages.編集なしチェック).messages());
+        //messages.add(ValidateChain.validateStart(div).ifNot(HikazeiNenkinTaishoshaJohoDivSpec.編集なしチェック)
+        //        .thenAdd(NoInputMessages.編集なしチェック).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 NoInputMessages.編集なしチェック).build().check(messages));
         return pairs;
