@@ -171,12 +171,12 @@ public class FukaKeisan {
         for (FukaShikakuPair pair : 更正対象) {
             更正計算パラメータ.set年度分賦課リスト_更正前(pair.get年度分賦課リスト());
             更正計算パラメータ.set資格の情報(pair.get資格の情報());
-            KoseiShorikoaResult 更正処理情報 = do更正計算(更正計算パラメータ);
 
             KoseiZengoFuka 更正前後賦課 = new KoseiZengoFuka();
             更正前後賦課.set賦課年度(param.get賦課年度());
             更正前後賦課.set通知書番号(param.get通知書番号());
             更正前後賦課.set更正前(pair.get年度分賦課リスト());
+            KoseiShorikoaResult 更正処理情報 = do更正計算(更正計算パラメータ);
             更正前後賦課.set更正後(更正処理情報.get年度分賦課リスト_更正後());
             更正前後賦課リスト.add(更正前後賦課);
 
@@ -253,6 +253,25 @@ public class FukaKeisan {
             throw new SystemException(エラーメッセージ.toString());
         }
         return 賦課の情報_資格の情報ペアのリスト;
+    }
+
+    private NendobunFukaList 年度分賦課リストローン(NendobunFukaList 年度分賦課リスト) {
+        if (年度分賦課リスト == null) {
+            return null;
+        }
+        NendobunFukaList 年度分賦課リストローン = new NendobunFukaList();
+        年度分賦課リストローン.set賦課年度(年度分賦課リスト.get賦課年度());
+        年度分賦課リストローン.set通知書番号(年度分賦課リスト.get通知書番号());
+        年度分賦課リストローン.set現年度(賦課の情報クローン(年度分賦課リスト.get現年度()));
+        年度分賦課リストローン.set過年度1(賦課の情報クローン(年度分賦課リスト.get過年度1()));
+        年度分賦課リストローン.set過年度2(賦課の情報クローン(年度分賦課リスト.get過年度2()));
+        年度分賦課リストローン.set過年度3(賦課の情報クローン(年度分賦課リスト.get過年度3()));
+        年度分賦課リストローン.set過年度4(賦課の情報クローン(年度分賦課リスト.get過年度4()));
+        年度分賦課リストローン.set過年度5(賦課の情報クローン(年度分賦課リスト.get過年度5()));
+        年度分賦課リストローン.set賦課期日(年度分賦課リスト.get賦課期日());
+        年度分賦課リストローン.setHas過年度賦課(年度分賦課リスト.isHas過年度賦課());
+        年度分賦課リストローン.set最新賦課の情報(賦課の情報クローン(年度分賦課リスト.get最新賦課の情報()));
+        return 年度分賦課リストローン;
     }
 
     private List<HihokenshaDaicho> get有効な資格の情報(List<HihokenshaDaicho> 資格の情報リスト, FlexibleYear 賦課年度) {
@@ -662,7 +681,7 @@ public class FukaKeisan {
 
     private KoseiShorikoaResult create既存の賦課処理コア(KoseiShorikoaParameter param, FukaKokyoParameter 賦課根拠パラメータ,
             CalculateChoteiParameter 調定計算パラメータ, Decimal 年額保険料) {
-        NendobunFukaList 調定計算用年度分賦課リスト = param.get年度分賦課リスト_更正前();
+        NendobunFukaList 調定計算用年度分賦課リスト = 年度分賦課リストローン(param.get年度分賦課リスト_更正前());
         if (param.get年度分賦課リスト_更正前().get現年度() != null) {
             賦課根拠パラメータ.set賦課の情報_設定前(param.get年度分賦課リスト_更正前().get現年度());
             FukaJoho 賦課の情報 = reflect賦課根拠(賦課根拠パラメータ);
@@ -1053,6 +1072,9 @@ public class FukaKeisan {
     }
 
     private FukaJoho 賦課の情報クローン(FukaJoho 賦課の情報) {
+        if (賦課の情報 == null) {
+            return null;
+        }
         FukaJohoRelateEntity 賦課RelateEntity = new FukaJohoRelateEntity();
         賦課RelateEntity.set介護賦課Entity(賦課の情報.toEntity());
         List<KibetsuEntity> 介護期別RelateEntity = new ArrayList<>();
