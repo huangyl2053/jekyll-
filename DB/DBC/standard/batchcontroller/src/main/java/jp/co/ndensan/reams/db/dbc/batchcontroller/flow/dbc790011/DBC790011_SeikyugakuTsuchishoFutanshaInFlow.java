@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc790011.DbWT0002Kokuhor
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc790011.SeikyugakuTsuchishoFutanshaInProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.seikyugakutsuchishofutanshain.SeikyugakuTsuchishoFutanshaInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.seikyugakutsuchishofutanshain.SeikyugakuTsuchishoFutanshaInProcessParameter;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -25,7 +26,10 @@ public class DBC790011_SeikyugakuTsuchishoFutanshaInFlow extends BatchFlowBase<S
     private static final String CSVファイル取込 = "readCsvFile";
     private static final String 処理結果リスト一時登録 = "errorTempInsert";
     private static final Integer INDEX_0 = 0;
+    private int 明細データ登録件数合算 = 0;
+    private int レコード件数合算 = 0;
     private SeikyugakuTsuchishoFutanshaInProcessParameter parameter;
+    private FlowEntity flowEntity;
 
     @Override
     protected void defineFlow() {
@@ -36,6 +40,10 @@ public class DBC790011_SeikyugakuTsuchishoFutanshaInFlow extends BatchFlowBase<S
             for (int i = INDEX_0; i < fileNameList.size(); i++) {
                 parameter.setFileName(fileNameList.get(i));
                 executeStep(CSVファイル取込);
+                flowEntity = getResult(FlowEntity.class, new RString(CSVファイル取込),
+                        SeikyugakuTsuchishoFutanshaInProcess.PARAMETER_OUT_FLOWENTITY);
+                レコード件数合算 = レコード件数合算 + flowEntity.getCodeNum();
+                明細データ登録件数合算 = 明細データ登録件数合算 + flowEntity.get明細データ登録件数();
             }
         }
         executeStep(処理結果リスト一時登録);

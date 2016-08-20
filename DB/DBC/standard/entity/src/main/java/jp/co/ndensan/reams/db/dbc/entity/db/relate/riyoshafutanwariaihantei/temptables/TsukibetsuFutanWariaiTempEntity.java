@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
@@ -25,10 +26,10 @@ public class TsukibetsuFutanWariaiTempEntity extends DbTableEntityBase<Tsukibets
     private RString taishoNendo;
     @TempTableColumnOrder(2)
 //被保険者番号
-    private RString hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @TempTableColumnOrder(3)
 //履歴番号
-    private RString rirekiNo;
+    private int rirekiNo;
     @TempTableColumnOrder(4)
 //職権変更フラグ
     private boolean shokenFlag;

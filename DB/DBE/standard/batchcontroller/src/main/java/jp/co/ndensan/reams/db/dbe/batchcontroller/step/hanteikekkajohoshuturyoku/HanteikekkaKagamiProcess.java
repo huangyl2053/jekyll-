@@ -11,8 +11,10 @@ import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkakagami.HanteikekkaKagamiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.hanteikekkakagami.HanteikekkaKagamiReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -73,6 +75,8 @@ public class HanteikekkaKagamiProcess extends BatchProcessBase<DbT5511ShinsakaiK
         hanteikekkaKagamiEntity.setNinshoshaSource(ReportUtil.get認証者情報(
                 SubGyomuCode.DBE認定支援, ID,
                 new FlexibleDate(システム時刻.getDate().toDateString()),
+                NinshoshaDenshikoinshubetsuCode.認定用印.getコード(),
+                KenmeiFuyoKubunType.付与なし,
                 reportSourceWriter));
         Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ID, KamokuCode.EMPTY, パターン番号);
         hanteikekkaKagamiEntity.setTsuchibun1(通知文.get(INDEX_1));

@@ -3,7 +3,7 @@
 <!-- @reamsid_L DBC-2730-010 chenjie -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakoshinkekka.IJukyushaKoshinKekkaMapper">
     <select id="get帳票出力対象データ"
-                resultMap="ResultMap_DbWT5331JukyushaJohoDataEntity" parameterType="jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter"  fetchSize="500" resultOrdered="true">
+                resultMap="ResultMap_DbWT5331JukyushaJohoDataEntity" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakoshinkekka.JukyushaKoshinKekkaMybatisParameter"  fetchSize="500" resultOrdered="true">
         SELECT <include refid="allColumns_DbWT5331JukyushaJoho" />,
                 <include refid="allColumns_DbWT0001Hihokensha" />
                 FROM "DbWT5331JukyushaJoho" AS JUKYUSHAJOHOTEMP

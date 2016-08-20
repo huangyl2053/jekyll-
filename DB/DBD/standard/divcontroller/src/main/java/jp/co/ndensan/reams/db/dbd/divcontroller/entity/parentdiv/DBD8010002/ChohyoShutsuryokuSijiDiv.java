@@ -26,14 +26,14 @@ public class ChohyoShutsuryokuSijiDiv extends Panel {
      */
     @JsonProperty("ChohyoShutsuryokuUmu")
     private ChohyoShutsuryokuUmuDiv ChohyoShutsuryokuUmu;
-    @JsonProperty("ccdChohyoSyuturyokuJun2")
-    private ChohyoShutsuryokujunDiv ccdChohyoSyuturyokuJun2;
-    @JsonProperty("ccdChohyoSyuturyokuJun3")
-    private ChohyoShutsuryokujunDiv ccdChohyoSyuturyokuJun3;
     @JsonProperty("ccdChohyoSyuturyokuJun1")
     private ChohyoShutsuryokujunDiv ccdChohyoSyuturyokuJun1;
     @JsonProperty("ccdChohyoSyuturyokuJun4")
     private ChohyoShutsuryokujunDiv ccdChohyoSyuturyokuJun4;
+    @JsonProperty("ccdChohyoSyuturyokuJun3")
+    private ChohyoShutsuryokujunDiv ccdChohyoSyuturyokuJun3;
+    @JsonProperty("ccdChohyoSyuturyokuJun2")
+    private ChohyoShutsuryokujunDiv ccdChohyoSyuturyokuJun2;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -60,24 +60,6 @@ public class ChohyoShutsuryokuSijiDiv extends Panel {
     }
 
     /*
-     * getccdChohyoSyuturyokuJun2
-     * @return ccdChohyoSyuturyokuJun2
-     */
-    @JsonProperty("ccdChohyoSyuturyokuJun2")
-    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun2() {
-        return ccdChohyoSyuturyokuJun2;
-    }
-
-    /*
-     * getccdChohyoSyuturyokuJun3
-     * @return ccdChohyoSyuturyokuJun3
-     */
-    @JsonProperty("ccdChohyoSyuturyokuJun3")
-    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun3() {
-        return ccdChohyoSyuturyokuJun3;
-    }
-
-    /*
      * getccdChohyoSyuturyokuJun1
      * @return ccdChohyoSyuturyokuJun1
      */
@@ -93,6 +75,24 @@ public class ChohyoShutsuryokuSijiDiv extends Panel {
     @JsonProperty("ccdChohyoSyuturyokuJun4")
     public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun4() {
         return ccdChohyoSyuturyokuJun4;
+    }
+
+    /*
+     * getccdChohyoSyuturyokuJun3
+     * @return ccdChohyoSyuturyokuJun3
+     */
+    @JsonProperty("ccdChohyoSyuturyokuJun3")
+    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun3() {
+        return ccdChohyoSyuturyokuJun3;
+    }
+
+    /*
+     * getccdChohyoSyuturyokuJun2
+     * @return ccdChohyoSyuturyokuJun2
+     */
+    @JsonProperty("ccdChohyoSyuturyokuJun2")
+    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun2() {
+        return ccdChohyoSyuturyokuJun2;
     }
 
     /*

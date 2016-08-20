@@ -24,7 +24,7 @@ public class JissekiDataIchijiSakuseiProcessParamter implements IBatchProcessPar
     /**
      * 実績データ一時の引数を返します
      *
-     * @param psmShikibetsuTaisho RString
+     * @param psmShikibetsuTaisho psmShikibetsuTaisho
      * @return JissekiDataIchijiSakuseiMybatisprmParamter
      */
     public JissekiDataIchijiSakuseiMybatisprmParamter toJissekiDataIchijiSakuseiMybatisprmParamter(RString psmShikibetsuTaisho) {

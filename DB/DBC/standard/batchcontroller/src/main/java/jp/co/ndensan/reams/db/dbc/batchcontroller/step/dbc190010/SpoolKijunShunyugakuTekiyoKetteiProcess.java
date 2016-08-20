@@ -44,6 +44,7 @@ import jp.co.ndensan.reams.ur.urz.business.report.checklist.CheckShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.report.checklist.ICheckListInfo;
 import jp.co.ndensan.reams.ur.urz.business.report.checklist.ICheckTarget;
 import jp.co.ndensan.reams.ur.urz.business.report.checklist.ISpecificKey;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
@@ -279,11 +280,13 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
         is文字切れ(基準収入額適用決定通知書Parameter);
         if (基準収入額適用決定通知書Parameter.isFlag()) {
             NinshoshaSource compNinshoshaソース = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, 帳票ID_通知書,
-                    parameter.get作成日(), NinshoshaDenshikoinshubetsuCode.保険者印, reportSourceWriter_通知書_文字切れ);
+                    parameter.get作成日(), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
+                    KenmeiFuyoKubunType.付与なし, reportSourceWriter_通知書_文字切れ);
             基準収入額適用決定通知書Parameter.setCompNinshoshaソース(compNinshoshaソース);
         } else {
             NinshoshaSource compNinshoshaソース = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, 帳票ID_通知書,
-                    parameter.get作成日(), NinshoshaDenshikoinshubetsuCode.保険者印, reportSourceWriter_通知書);
+                    parameter.get作成日(), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
+                    KenmeiFuyoKubunType.付与なし, reportSourceWriter_通知書);
             基準収入額適用決定通知書Parameter.setCompNinshoshaソース(compNinshoshaソース);
         }
         set通知文(基準収入額適用決定通知書Parameter);

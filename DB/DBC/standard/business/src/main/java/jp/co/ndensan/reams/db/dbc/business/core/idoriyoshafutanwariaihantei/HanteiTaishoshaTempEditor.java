@@ -27,18 +27,6 @@ public class HanteiTaishoshaTempEditor {
     private static final RString 定数_0 = new RString("0");
     private static final RString 定数_1 = new RString("1");
     private static final RString 定数_2 = new RString("2");
-    private static final RString 定数_3 = new RString("3");
-    private static final RString 定数_4 = new RString("4");
-    private static final RString 定数_5 = new RString("5");
-    private static final RString 定数_6 = new RString("6");
-    private static final RString 定数_7 = new RString("7");
-    private static final RString 定数_受給者台帳 = new RString("受給者台帳");
-    private static final RString 定数_総合事業対象者 = new RString("総合事業対象者");
-    private static final RString 定数_被保険者台帳 = new RString("被保険者台帳");
-    private static final RString 定数_介護所得 = new RString("介護所得");
-    private static final RString 定数_宛名識別対象 = new RString("宛名識別対象");
-    private static final RString 定数_生活保護 = new RString("生活保護");
-    private static final RString 定数_世帯員 = new RString("世帯員");
     private static final int NUM_1 = 1;
     private static final int NUM_7 = 7;
     private static final int NUM_8 = 8;
@@ -74,7 +62,7 @@ public class HanteiTaishoshaTempEditor {
         entity.setTaishoNendo(param.get対象年度());
         entity.setTaishoKubun(出力条件);
         if (定数_0.equals(出力条件)) {
-            entity.setHihokenshaNo(異動データ.get被保険者台帳().getHihokenshaNo().getColumnValue());
+            entity.setHihokenshaNo(異動データ.get被保険者台帳().getHihokenshaNo());
             entity.setCityCode(RString.EMPTY);
             entity.setRirekiNo(RString.EMPTY);
             entity.setEdaNo(RString.EMPTY);
@@ -84,7 +72,7 @@ public class HanteiTaishoshaTempEditor {
             entity.setNinteiDate(FlexibleDate.EMPTY);
             entity.setYoKaigoninteiJoutaiKubunCode(RString.EMPTY);
         } else if (定数_1.equals(出力条件)) {
-            entity.setHihokenshaNo(異動データ.get受給者台帳().getHihokenshaNo().getColumnValue());
+            entity.setHihokenshaNo(異動データ.get受給者台帳().getHihokenshaNo());
             entity.setCityCode(異動データ.get受給者台帳().getShichosonCode().getColumnValue());
             entity.setRirekiNo(異動データ.get受給者台帳().getRirekiNo());
             entity.setEdaNo(異動データ.get受給者台帳().getEdaban());
@@ -103,7 +91,7 @@ public class HanteiTaishoshaTempEditor {
             }
             entity.setKyuSochishaFlag(異動データ.get受給者台帳().getKyuSochishaFlag());
         } else if (定数_2.equals(出力条件)) {
-            entity.setHihokenshaNo(異動データ.get総合事業対象者().getHihokenshaNo().getColumnValue());
+            entity.setHihokenshaNo(異動データ.get総合事業対象者().getHihokenshaNo());
             entity.setCityCode(RString.EMPTY);
             entity.setRirekiNo(new RString(異動データ.get総合事業対象者().getRirekiNo()));
             entity.setEdaNo(RString.EMPTY);
@@ -118,8 +106,8 @@ public class HanteiTaishoshaTempEditor {
             entity.setNinteiDate(異動データ.get総合事業対象者().getChecklistJisshiYMD());
             entity.setYoKaigoninteiJoutaiKubunCode(要介護認定状態区分コード_06.getColumnValue());
         }
-        entity.setShikibetsuCode(異動データ.get被保険者台帳().getShikibetsuCode().getColumnValue());
-        entity.setSetaiCode(異動データ.get世帯コード().getColumnValue());
+        entity.setShikibetsuCode(異動データ.get被保険者台帳().getShikibetsuCode());
+        entity.setSetaiCode(異動データ.get世帯コード());
         entity.setIdoShubetsu(get異動種別名(異動種別));
         if (異動データ.get宛名識別対象異動分() != null) {
             entity.setAtenaIdobi(異動データ.get宛名識別対象異動分().getIdoYMD());
@@ -151,21 +139,6 @@ public class HanteiTaishoshaTempEditor {
         if (定数_0.equals(出力条件)) {
             return RString.EMPTY;
         }
-        if (定数_1.equals(異動種別)) {
-            return 定数_受給者台帳;
-        } else if (定数_2.equals(異動種別)) {
-            return 定数_総合事業対象者;
-        } else if (定数_3.equals(異動種別)) {
-            return 定数_被保険者台帳;
-        } else if (定数_4.equals(異動種別)) {
-            return 定数_介護所得;
-        } else if (定数_5.equals(異動種別)) {
-            return 定数_宛名識別対象;
-        } else if (定数_6.equals(異動種別)) {
-            return 定数_生活保護;
-        } else if (定数_7.equals(異動種別)) {
-            return 定数_世帯員;
-        }
-        return RString.EMPTY;
+        return 異動種別;
     }
 }

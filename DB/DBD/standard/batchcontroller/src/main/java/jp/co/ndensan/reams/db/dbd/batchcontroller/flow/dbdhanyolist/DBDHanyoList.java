@@ -39,26 +39,26 @@ public class DBDHanyoList extends BatchFlowBase<DBDHanyoListParameter> {
 
     @Step("汎用リスト出力_施設入退所")
     protected IBatchFlowCommand callHanyoListShisetsuNyutaishoFlow() {
-        return otherBatchFlow(new RString("HanyoListShisetsuNyutaishoFlow"), SubGyomuCode.DBD介護受給, getParameter().getShisetsuNyutaishoBatchParameter()).define();
+        return otherBatchFlow(new RString("DBD710150_HanyoListShisetsuNyutaisho"), SubGyomuCode.DBD介護受給, getParameter().getShisetsuNyutaishoBatchParameter()).define();
     }
 
     @Step("汎用リスト出力_国保")
     protected IBatchFlowCommand callHanyoListKokuhoFlow() {
-        return otherBatchFlow(new RString("HanyoListKokuhoFlow"), SubGyomuCode.DBD介護受給, getParameter().getKokuhoParameter()).define();
+        return otherBatchFlow(new RString("DBD710110_HanyoListKokuho"), SubGyomuCode.DBD介護受給, getParameter().getKokuhoParameter()).define();
     }
 
     @Step("汎用リスト出力_後期高齢者")
     protected IBatchFlowCommand callHanyoListKokiKoreishaFlow() {
-        return otherBatchFlow(new RString("HanyoListKokiKoreishaFlow"), SubGyomuCode.DBD介護受給, getParameter().getKokiKoreishaParameter()).define();
+        return otherBatchFlow(new RString("DBD710120_HanyoListKokiKoreisha"), SubGyomuCode.DBD介護受給, getParameter().getKokiKoreishaParameter()).define();
     }
 
     @Step("汎用リスト出力_事業対象者")
     protected IBatchFlowCommand callHanyoListJigyoTaishoshaFlow() {
-        return otherBatchFlow(new RString("HanyoListJigyoTaishoshaFlow"), SubGyomuCode.DBD介護受給, getParameter().getJigyoTaishoshaParameter()).define();
+        return otherBatchFlow(new RString("DBD710130_HanyoListJigyoTaishosha"), SubGyomuCode.DBD介護受給, getParameter().getJigyoTaishoshaParameter()).define();
     }
 
     @Step("汎用リスト出力_利用者負担割合")
     protected IBatchFlowCommand callHanyoListRiyoshaFutanWariaiFlow() {
-        return otherBatchFlow(new RString("HanyoListRiyoshaFutanWariaiFlow"), SubGyomuCode.DBD介護受給, getParameter().getRiyoshaFutanwariaiParameter()).define();
+        return otherBatchFlow(new RString("DBD710140_HanyoListRiyoshaFutanwariai"), SubGyomuCode.DBD介護受給, getParameter().getRiyoshaFutanwariaiParameter()).define();
     }
 }

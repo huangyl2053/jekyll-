@@ -74,16 +74,16 @@
             AND "DbT4101NinteiShinseiJoho"."hihokenshaName" LIKE #{氏名}
         </if>
         <if test="null != 申請開始日 and !申請開始日.isEmpty()">
-            AND "DbT4101NinteiShinseiJoho"."ninteiShinseiYMD" <![CDATA[>]]> #{申請開始日}
+            AND "DbT4101NinteiShinseiJoho"."ninteiShinseiYMD" <![CDATA[>=]]> #{申請開始日}
         </if>
         <if test="null != 申請終了日 and !申請終了日.isEmpty()">
-            AND "DbT4101NinteiShinseiJoho"."ninteiShinseiYMD" <![CDATA[<]]> #{申請終了日}
+            AND "DbT4101NinteiShinseiJoho"."ninteiShinseiYMD" <![CDATA[<=]]> #{申請終了日}
         </if>
         <if test="null != 認定開始日 and !認定開始日.isEmpty()">
-            AND "DbT4001JukyushaDaicho"."ninteiYMD" <![CDATA[>]]> #{認定開始日}
+            AND "DbT4001JukyushaDaicho"."ninteiYMD" <![CDATA[>=]]> #{認定開始日}
         </if>
         <if test="null != 認定終了日 and !認定終了日.isEmpty()">
-            AND "DbT4001JukyushaDaicho"."ninteiYMD" <![CDATA[<]]> #{認定終了日}
+            AND "DbT4001JukyushaDaicho"."ninteiYMD" <![CDATA[<=]]> #{認定終了日}
         </if>
         ORDER BY "DbT4101NinteiShinseiJoho"."hihokenshaNo"
         LIMIT #{最大表示件数}
@@ -103,8 +103,8 @@
         WHERE
         "DbT4102NinteiKekkaJoho"."shinseishoKanriNo" = #{申請書管理番号}
         
-        #{出力順}
-        
+        ${出力順}
+
         LIMIT 1
      </select>
      
@@ -130,7 +130,7 @@
             AND "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD" = #{認定有効期間終了年月日}
         </if>
         
-        #{出力順}
+        ${出力順}
         
         LIMIT #{最大表示件数}
      </select>
@@ -320,7 +320,7 @@
         AND "TEMP"."dbT4001JukyushaDaicho_rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
         AND "TEMP"."dbT4001JukyushaDaicho_edaban" = "DbT4001JukyushaDaicho"."edaban"
         AND "TEMP"."dbT4001JukyushaDaicho_jukyuShinseiJiyu" = "DbT4001JukyushaDaicho"."jukyuShinseiJiyu"
-        #{出力順}
+        ${出力順}
      </select>
      
      <resultMap id="ResultMap_TsutishoWithoutKekkaJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiIkatusHakkoEntity" autoMapping="true">
@@ -367,7 +367,7 @@
             AND "DbT4001JukyushaDaicho"."serviceHenkoTsuchishoHakkoYMD" IS NULL
         </if>
 
-        #{出力順}
+        ${出力順}
         
         LIMIT 2
      </select>
@@ -408,7 +408,7 @@
             AND "DbT4001JukyushaDaicho"."kubunHenkoTsuchishoHakkoYMD" IS NULL
         </if>
 
-        #{出力順}
+        ${出力順}
         
         LIMIT 2
      </select>

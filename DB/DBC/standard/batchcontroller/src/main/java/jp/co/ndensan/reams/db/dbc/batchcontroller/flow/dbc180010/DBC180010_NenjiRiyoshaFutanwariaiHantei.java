@@ -13,15 +13,13 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.RiyoshaFutanWar
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.ShoriDateKanriProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.SinseicyuDateDeleteProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.SogoJigyoTaishoshaTempProcess;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.futanwariaiichiran.FutanWariaiIchiranBatchParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.nenjiriyoshafutanwariaihantei.NenjiRiyoshaFutanwariaiHanteiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -38,12 +36,12 @@ public class DBC180010_NenjiRiyoshaFutanwariaiHantei extends BatchFlowBase<Nenji
     private static final String 利用者負担割合を削除する = "deleteRiyoshaFutanWariai";
     private static final String 利用者負担割合明細を削除する = "deleteRiyoshaFutanWariaiMeisai";
     private static final String 利用者負担割合世帯員を削除する = "deleteRiyoshaFutanWariaiKonkyo";
-    // TODO 削除
+    private static final String 利用者負担割合判定 = "riyoshaFutanWariaiHantei";
     private static final String 負担割合判定一覧出力 = "futanwariaiHantei";
     private static final RString 負担割合判定一覧BATCH_ID = new RString("FutanWariaiIchiranFlow");
+    private static final RString 利用者負担割合判定BATCH_ID = new RString("RiyoshaFutanwariaiHanteiCommonFlow");
     private static final String 処理日付管理マスタAND受給管理情報の更新 = "updateDate";
-    // TODO 1->3
-    private static final RString 再処理前 = new RString("1");
+    private static final RString 再処理前 = new RString("3");
 
     @Override
     protected void defineFlow() {
@@ -56,8 +54,7 @@ public class DBC180010_NenjiRiyoshaFutanwariaiHantei extends BatchFlowBase<Nenji
             executeStep(利用者負担割合明細を削除する);
             executeStep(利用者負担割合世帯員を削除する);
         }
-        // TODO 「利用者負担割合判定」共通処理を呼び出し
-        // TODO 「バッチ設計_DBC180010_負担割合判定一覧出力（共通）」（サブフロー）を呼び出す
+        executeStep(利用者負担割合判定);
         executeStep(負担割合判定一覧出力);
         executeStep(処理日付管理マスタAND受給管理情報の更新);
 
@@ -101,18 +98,35 @@ public class DBC180010_NenjiRiyoshaFutanwariaiHantei extends BatchFlowBase<Nenji
     }
 
     /**
-     * 世帯員把握バッチを呼び出す。
+     * 利用者負担割合判定バッチを呼び出す。
+     *
+     * @return バッチコマンド
+     */
+    @Step(利用者負担割合判定)
+    protected IBatchFlowCommand riyoshaFutanWariaiHantei() {
+        DBC180020_IdoRiyoshaFutanwariaiHanteiParameter parameter = new DBC180020_IdoRiyoshaFutanwariaiHanteiParameter();
+        parameter.setTaishoNendo(getParameter().get対象年度());
+        parameter.setKijunbi(getParameter().get基準日());
+        parameter.setShoriKubun(getParameter().get処理区分().getコード());
+        parameter.setTestMode(getParameter().isテストモード());
+        parameter.setShoriNichiji(getParameter().get処理日時());
+        return otherBatchFlow(利用者負担割合判定BATCH_ID, SubGyomuCode.DBC介護給付,
+                parameter).define();
+    }
+
+    /**
+     * 負担割合判定一覧出力バッチを呼び出す。
      *
      * @return バッチコマンド
      */
     @Step(負担割合判定一覧出力)
     protected IBatchFlowCommand futanwariaiHantei() {
         FutanWariaiIchiranBatchParameter parameter = new FutanWariaiIchiranBatchParameter();
-        parameter.set対象年度(new FlexibleYear("2008"));
-        parameter.set基準日(new FlexibleDate("20080808"));
-        parameter.set処理区分(new RString("3"));
-        parameter.setテストモード(true);
-        parameter.set処理日時(RDateTime.now());
+        parameter.set対象年度(getParameter().get対象年度());
+        parameter.set基準日(getParameter().get基準日());
+        parameter.set処理区分(getParameter().get処理区分().getコード());
+        parameter.setテストモード(getParameter().isテストモード());
+        parameter.set処理日時(getParameter().get処理日時());
         return otherBatchFlow(負担割合判定一覧BATCH_ID, SubGyomuCode.DBC介護給付,
                 parameter).define();
     }

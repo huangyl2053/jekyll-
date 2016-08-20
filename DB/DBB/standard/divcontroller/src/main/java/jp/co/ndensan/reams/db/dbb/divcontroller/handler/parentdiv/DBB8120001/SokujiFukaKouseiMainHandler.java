@@ -518,8 +518,8 @@ public class SokujiFukaKouseiMainHandler {
         for (Kibetsu kibetsu : 更正前賦課.getKibetsuList()) {
             ChoteiKyotsuIdentifier choteiKyotsuIdentifier = new ChoteiKyotsuIdentifier(kibetsu.get調定ID().longValue());
             ChoteiKyotsu 更正前介護期別 = kibetsu.getChoteiKyotsu(choteiKyotsuIdentifier);
-            KibetsuIdentifier kibetsuIdentifier = new KibetsuIdentifier(kibetsu.get調定年度(), kibetsu.get賦課年度(),
-                    kibetsu.get通知書番号(), kibetsu.get履歴番号(), kibetsu.get徴収方法(), kibetsu.get期());
+            KibetsuIdentifier kibetsuIdentifier = new KibetsuIdentifier(更正後賦課.get調定年度(), 更正後賦課.get賦課年度(),
+                    更正後賦課.get通知書番号(), 更正後賦課.get履歴番号(), kibetsu.get徴収方法(), kibetsu.get期());
             ChoteiKyotsu 更正後介護期別 = 更正後賦課.getKibetsu(kibetsuIdentifier).getChoteiKyotsu(choteiKyotsuIdentifier);
             if (is調定共通異なる(更正前介護期別, 更正後介護期別)) {
                 return Boolean.TRUE;

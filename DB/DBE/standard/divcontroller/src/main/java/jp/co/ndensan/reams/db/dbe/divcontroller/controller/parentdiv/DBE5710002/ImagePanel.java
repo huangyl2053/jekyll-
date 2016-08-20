@@ -64,12 +64,12 @@ public class ImagePanel {
         YokaigoninteiimageShutsuryokuFinder finder = new YokaigoninteiimageShutsuryokuFinder(ro_sfed);
         ImagePanelHandler handler = new ImagePanelHandler();
         List<RString> 存在するファイル = finder.getSharedFile();
-        List<RString> 存在する調査票概況特記ファイル = finder.get存在したイメージファイル(handler.get調査票概況特記イメージ(), 存在するファイル);
-        List<RString> 存在する調査票特記ファイル = finder.get存在したイメージファイル(handler.get調査票特記イメージ(), 存在するファイル);
+        List<RString> 存在する調査票ファイル = finder.get存在したイメージファイル(handler.get調査票イメージ(), 存在するファイル);
+        List<RString> 存在する調査票概況ファイル = finder.get存在したイメージファイル(handler.get調査票概況ファイル(), 存在するファイル);
         List<RString> 存在する主治医意見書ファイル = finder.get存在したイメージファイル(handler.get主治医意見書イメージ(), 存在するファイル);
         List<RString> 存在するその他資料ファイル = finder.get存在したイメージファイル(handler.getその他資料イメージ(), 存在するファイル);
         ValidationMessageControlPairs controlPairs = new ImagePanelValidationHandler(div)
-                .do事前チェック(存在するファイル, 存在する調査票概況特記ファイル, 存在する調査票特記ファイル, 存在する主治医意見書ファイル, 存在するその他資料ファイル);
+                .do事前チェック(存在するファイル, 存在する調査票ファイル, 存在する調査票概況ファイル, 存在する主治医意見書ファイル, 存在するその他資料ファイル);
         if (controlPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(controlPairs).respond();
         }

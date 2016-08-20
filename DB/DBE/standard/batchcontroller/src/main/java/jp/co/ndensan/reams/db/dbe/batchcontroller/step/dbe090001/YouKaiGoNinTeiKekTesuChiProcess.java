@@ -18,8 +18,10 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.youkaigoninteikekktesuchi.You
 import jp.co.ndensan.reams.db.dbe.entity.report.johoteikyoshiryo.JohoTeikyoShiryoReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.youkaigoninteikekktesuchi.IYouKaiGoNinTeiKekTesuChiMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshosakuseiirai.ShujiiIkenshoSakuseiIraiManager;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
@@ -109,7 +111,8 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
     }
 
     private JohoTeikyoShiryo eidtItem(YouKaiGoNinTeiKekTesuChiRelateEntity entity) {
-        NinshoshaSource 認証者情報 = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_ID, FlexibleDate.getNowDate(), retortWrite);
+        NinshoshaSource 認証者情報 = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_ID, FlexibleDate.getNowDate(),
+                NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, retortWrite);
         Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_ID, KamokuCode.EMPTY, 通知文1);
         RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE090001.getReportId(), FlexibleDate.getNowDate());
         ShujiiIraiAtenaJoho 宛先情報 = get宛先();

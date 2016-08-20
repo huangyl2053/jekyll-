@@ -41,9 +41,9 @@ public class SeikyugakuTsuchishoInPageBreak extends PageBreaker<SeikyugakuTsuchi
         boolean flag = false;
         if (!currentSource.getSource().shoKisaiHokenshaNo.equals(nextSource.getSource().shoKisaiHokenshaNo)) {
             flag = true;
-        } else if (!currentSource.getSource().kanName.equals(nextSource.getSource().kanCode)) {
+        } else if (!currentSource.getSource().kanCode.equals(nextSource.getSource().kanCode)) {
             flag = true;
-        } else if (!currentSource.getSource().kouName.equals(nextSource.getSource().kouCode)) {
+        } else if (!currentSource.getSource().kouCode.equals(nextSource.getSource().kouCode)) {
             flag = true;
         }
         return flag;

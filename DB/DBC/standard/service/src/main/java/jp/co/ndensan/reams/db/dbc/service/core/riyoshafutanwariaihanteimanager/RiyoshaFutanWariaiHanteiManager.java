@@ -77,7 +77,8 @@ public class RiyoshaFutanWariaiHanteiManager {
     /**
      * 初期化メソッドです。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link RiyoshaFutanWariaiHanteiManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link RiyoshaFutanWariaiHanteiManager}のインスタンス
      */
     public static RiyoshaFutanWariaiHanteiManager createInstance() {
         return InstanceProvider.create(RiyoshaFutanWariaiHanteiManager.class);
@@ -443,7 +444,7 @@ public class RiyoshaFutanWariaiHanteiManager {
             SeikatsuHogoGaitoJohoTempEntity 生活保護該当情報Temp,
             HanteiTaishoshaTempEntity 判定対象者Temp,
             RiyoshaFutanWariaiMeisaiTempEntity 利用者負担割合明細Temp) {
-        利用者負担割合明細Temp.setHihokenshaNo(被保険者番号.value());
+        利用者負担割合明細Temp.setHihokenshaNo(被保険者番号);
         利用者負担割合明細Temp.setEdaNo(判定基準日.getMonthValue());
         利用者負担割合明細Temp.setShikakuKubun(被保険者台帳.get被保険者区分コード());
         利用者負担割合明細Temp.setFutanWariaiKubun(負担割合判定の結果.get負担割合区分());
@@ -464,7 +465,7 @@ public class RiyoshaFutanWariaiHanteiManager {
         利用者負担割合明細Temp.setKoseiJiyu(RString.EMPTY);
         利用者負担割合明細Temp.setHanteiKubun(負担割合判定の結果.get判定区分());
         利用者負担割合明細Temp.setNinteiYukoKaishiDate(判定対象者Temp.getNinteiYukoKaishiDate());
-        利用者負担割合明細Temp.setJukyuKaishiYMD(生活保護該当情報Temp.getJukyuKaishibi());
+        利用者負担割合明細Temp.setJukyuKaishiYMD(new FlexibleDate(生活保護該当情報Temp.getJukyuKaishiYMD()));
 
     }
 
@@ -557,9 +558,9 @@ public class RiyoshaFutanWariaiHanteiManager {
             SetaiinShotoku 介護所得情報,
             HanteiTaishoshaTempEntity 判定対象者Temp) {
         判定対象者Temp.setTaishoKubun(ONE);
-        判定対象者Temp.setHihokenshaNo(被保険者番号.value());
-        判定対象者Temp.setShikibetsuCode(被保険者台帳.get識別コード().value());
-        判定対象者Temp.setSetaiCode(世帯コード);
+        判定対象者Temp.setHihokenshaNo(被保険者番号);
+        判定対象者Temp.setShikibetsuCode(被保険者台帳.get識別コード());
+        判定対象者Temp.setSetaiCode(new SetaiCode(世帯コード));
         判定対象者Temp.setIdoShubetsu(RString.EMPTY);
         判定対象者Temp.setIdobi(被保険者台帳.get異動日());
         判定対象者Temp.setIdoJiyuCode(被保険者台帳.get異動事由コード());
@@ -591,9 +592,9 @@ public class RiyoshaFutanWariaiHanteiManager {
             SogoJigyoTaishosha 総合事業対象者,
             HanteiTaishoshaTempEntity 判定対象者Temp) {
         判定対象者Temp.setTaishoKubun(TWO);
-        判定対象者Temp.setHihokenshaNo(被保険者番号.value());
-        判定対象者Temp.setShikibetsuCode(被保険者台帳.get識別コード().value());
-        判定対象者Temp.setSetaiCode(世帯コード);
+        判定対象者Temp.setHihokenshaNo(被保険者番号);
+        判定対象者Temp.setShikibetsuCode(被保険者台帳.get識別コード());
+        判定対象者Temp.setSetaiCode(new SetaiCode(世帯コード));
         判定対象者Temp.setIdoShubetsu(RString.EMPTY);
         判定対象者Temp.setIdobi(被保険者台帳.get異動日());
         判定対象者Temp.setIdoJiyuCode(被保険者台帳.get異動事由コード());
@@ -623,10 +624,14 @@ public class RiyoshaFutanWariaiHanteiManager {
             UrT0508SeikatsuHogoJukyushaEntity 生活保護受給者entity,
             FlexibleDate 判定基準日) {
         //TODO 対象月
-        生活保護該当情報Temp.setTaishoGetsu(new RString(判定基準日.getMonthValue()));
-        生活保護該当情報Temp.setShikibetsuCode(生活保護受給者entity.getShikibetsuCode().value());
-        生活保護該当情報Temp.setJukyuKaishibi(生活保護受給者entity.getJukyuKaishiYMD());
-        生活保護該当情報Temp.setJukyuShuryobi(生活保護受給者entity.getJukyuHaishiYMD());
+        生活保護該当情報Temp.setTaishoTsuki(new RString(判定基準日.getMonthValue()));
+        生活保護該当情報Temp.setShikibetsuCode(生活保護受給者entity.getShikibetsuCode());
+        FlexibleDate jukyuKaishiYMD = 生活保護受給者entity.getJukyuKaishiYMD();
+        FlexibleDate jukyuHaishiYMD = 生活保護受給者entity.getJukyuHaishiYMD();
+
+        生活保護受給者entity.getJukyuHaishiYMD();
+        生活保護該当情報Temp.setJukyuKaishiYMD(jukyuKaishiYMD == null ? RString.EMPTY : new RString(jukyuKaishiYMD.toString()));
+        生活保護該当情報Temp.setJukyuHaishiYMD(jukyuHaishiYMD == null ? RString.EMPTY : new RString(jukyuHaishiYMD.toString()));
 
     }
 

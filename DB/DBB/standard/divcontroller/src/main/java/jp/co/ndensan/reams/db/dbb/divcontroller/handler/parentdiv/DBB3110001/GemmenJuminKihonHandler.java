@@ -1022,7 +1022,7 @@ public class GemmenJuminKihonHandler {
         年度分賦課減免リスト.get過年度3().hashCode();
         賦課年度 = new FlexibleYear("2016");
         FlexibleYear 調定年度 = new FlexibleYear("2016");
-        TsuchishoNo 通知書番号 = new TsuchishoNo("123");
+        TsuchishoNo 通知書番号 = new TsuchishoNo("0000000000005105");
         NendobunFukaGemmenListResult 計算結果 = KaigoHokenryoGemmen.createInstance().getJokyo(調定年度, 賦課年度, 通知書番号, 被保険者番号);
 
         // TODO QA1115  設定値は不正です。

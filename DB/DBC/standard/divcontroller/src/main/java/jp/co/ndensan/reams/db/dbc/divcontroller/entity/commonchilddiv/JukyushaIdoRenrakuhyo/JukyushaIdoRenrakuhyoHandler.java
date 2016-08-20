@@ -334,7 +334,8 @@ public class JukyushaIdoRenrakuhyoHandler {
                         getJukyushaIdoRenrakuhyoRiyoshaFutan().getRadRiyoshaFutanKubunCode().setSelectedKey(空KEY);
             } else {
                 div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
-                        getJukyushaIdoRenrakuhyoRiyoshaFutan().getRadRiyoshaFutanKubunCode().setSelectedKey(受給者異動情報.get利用者負担区分コード());
+                        getJukyushaIdoRenrakuhyoRiyoshaFutan().getRadRiyoshaFutanKubunCode().
+                        setSelectedKey(受給者異動情報.get利用者負担区分コード());
             }
         }
         div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
@@ -583,7 +584,9 @@ public class JukyushaIdoRenrakuhyoHandler {
         if (異動日 != null && !異動日.toString().isEmpty()) {
             List<ShoKisaiHokenshaNo> 証記載保険者番号と広域保険者番号
                     = JukyushaTeiseiRenrakuhyoToroku.createInstance().getShokisaiNotoKouikiNo(new HihokenshaNo(保険者番号), 異動日);
-            div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtShoKisaiHokenshaNo().setValue(証記載保険者番号と広域保険者番号.get(0).value());
+            if (証記載保険者番号と広域保険者番号.get(0) != null) {
+                div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtShoKisaiHokenshaNo().setValue(証記載保険者番号と広域保険者番号.get(0).value());
+            }
         }
     }
 
@@ -659,8 +662,10 @@ public class JukyushaIdoRenrakuhyoHandler {
         受給者異動送付Builder.set性別コード(div.getJukyushaIdoRenrakuhyoKihonJoho().getRadSeibetsu().getSelectedKey());
         受給者異動送付Builder.set資格取得年月日(div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtShikakuShutokuYMD().getValue());
         受給者異動送付Builder.set資格喪失年月日(div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtShikakuSoshitsuYMD().getValue());
-        受給者異動送付Builder.set広域連合_政令市_保険者番号(
-                new ShoKisaiHokenshaNo(div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtKoikiHokenshaNo().getValue()));
+        if (div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtKoikiHokenshaNo() != null) {
+            受給者異動送付Builder.set広域連合_政令市_保険者番号(
+                    new ShoKisaiHokenshaNo(div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtKoikiHokenshaNo().getValue()));
+        }
         受給者異動送付Builder.set送付年月(div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtSofuYM().getValue().getYearMonth());
         受給者異動送付Builder.set訂正年月日(new FlexibleDate(
                 div.getJukyushaIdoRenrakuhyoTeisei().getTxtTeiseiYMD().getValue().toString()));
@@ -682,35 +687,57 @@ public class JukyushaIdoRenrakuhyoHandler {
         受給者異動送付Builder.set申請種別コード(div.getYokaigoNinteiPanel().getRadShinseiShubetsu().getSelectedKey());
         受給者異動送付Builder.set要介護状態区分コード(div.getYokaigoNinteiPanel().getDdlYokaigoJotaiKubun().getSelectedKey());
         受給者異動送付Builder.set変更申請中区分コード(div.getYokaigoNinteiPanel().getRadHenkoShinseichuKubun().getSelectedKey());
-        受給者異動送付Builder.set認定有効期間開始年月日(
-                new FlexibleDate(div.getYokaigoNinteiPanel().getTxtNinteiYukoKikanYMD().getFromValue().toString()));
-        受給者異動送付Builder.set認定有効期間終了年月日(
-                new RString(div.getYokaigoNinteiPanel().getTxtNinteiYukoKikanYMD().getFromValue().toString()));
+        if (div.getYokaigoNinteiPanel().getTxtNinteiYukoKikanYMD().getFromValue() != null) {
+            受給者異動送付Builder.set認定有効期間開始年月日(
+                    new FlexibleDate(div.getYokaigoNinteiPanel().getTxtNinteiYukoKikanYMD().getFromValue().toString()));
+        }
+        if (div.getYokaigoNinteiPanel().getTxtNinteiYukoKikanYMD().getToValue() != null) {
+            受給者異動送付Builder.set認定有効期間終了年月日(
+                    new RString(div.getYokaigoNinteiPanel().getTxtNinteiYukoKikanYMD().getToValue().toString()));
+        }
         受給者異動送付Builder.setみなし要介護状態区分コード(div.getYokaigoNinteiPanel().getRadMinashiYokaigoJotaiKubun().getSelectedKey());
     }
 
     private void set支給限度基準額エリアBuilder(JukyushaIdoRenrakuhyoBuilder 受給者異動送付Builder) {
-        受給者異動送付Builder.set訪問通所サービス支給限度基準額(div.getShikyuGendoKijungakuPanel().
-                getTxtHomonTsushoServiceShikyuGendoKijungaku().getValue().intValue());
-        受給者異動送付Builder.set訪問通所サービス上限管理適用期間開始年月日(new FlexibleDate(
-                div.getShikyuGendoKijungakuPanel().getTxtHomonTsushoServiceJogenKanriTekiyoYMD().getFromValue().toString()));
-        受給者異動送付Builder.set訪問通所サービス上限管理適用期間終了年月日(new RString(
-                div.getShikyuGendoKijungakuPanel().getTxtHomonTsushoServiceJogenKanriTekiyoYMD().getFromValue().toString()));
-        受給者異動送付Builder.set短期入所サービス支給限度基準額(
-                div.getShikyuGendoKijungakuPanel().getTxtTankiNyushoServiceShikyuGendoKijungaku().getValue().intValue());
-        受給者異動送付Builder.set短期入所サービス上限管理適用期間開始年月日(new FlexibleDate(
-                div.getShikyuGendoKijungakuPanel().getTxtTankinyushoServiceJogenKanriTekiyoYMD().getFromValue().toString()));
-        受給者異動送付Builder.set短期入所サービス上限管理適用期間終了年月日(new FlexibleDate(
-                div.getShikyuGendoKijungakuPanel().getTxtTankinyushoServiceJogenKanriTekiyoYMD().getFromValue().toString()));
+        if (div.getShikyuGendoKijungakuPanel().
+                getTxtHomonTsushoServiceShikyuGendoKijungaku().getValue() != null) {
+            受給者異動送付Builder.set訪問通所サービス支給限度基準額(div.getShikyuGendoKijungakuPanel().
+                    getTxtHomonTsushoServiceShikyuGendoKijungaku().getValue().intValue());
+        }
+        if (div.getShikyuGendoKijungakuPanel().getTxtHomonTsushoServiceJogenKanriTekiyoYMD().getFromValue() != null) {
+            受給者異動送付Builder.set訪問通所サービス上限管理適用期間開始年月日(new FlexibleDate(
+                    div.getShikyuGendoKijungakuPanel().getTxtHomonTsushoServiceJogenKanriTekiyoYMD().getFromValue().toString()));
+        }
+        if (div.getShikyuGendoKijungakuPanel().getTxtHomonTsushoServiceJogenKanriTekiyoYMD().getToValue() != null) {
+            受給者異動送付Builder.set訪問通所サービス上限管理適用期間終了年月日(new RString(
+                    div.getShikyuGendoKijungakuPanel().getTxtHomonTsushoServiceJogenKanriTekiyoYMD().getToValue().toString()));
+        }
+        if (div.getShikyuGendoKijungakuPanel().getTxtTankiNyushoServiceShikyuGendoKijungaku().getValue() != null) {
+            受給者異動送付Builder.set短期入所サービス支給限度基準額(
+                    div.getShikyuGendoKijungakuPanel().getTxtTankiNyushoServiceShikyuGendoKijungaku().getValue().intValue());
+        }
+        if (div.getShikyuGendoKijungakuPanel().getTxtTankinyushoServiceJogenKanriTekiyoYMD().getFromValue() != null) {
+            受給者異動送付Builder.set短期入所サービス上限管理適用期間開始年月日(new FlexibleDate(
+                    div.getShikyuGendoKijungakuPanel().getTxtTankinyushoServiceJogenKanriTekiyoYMD().getFromValue().toString()));
+        }
+        if (div.getShikyuGendoKijungakuPanel().getTxtTankinyushoServiceJogenKanriTekiyoYMD().getToValue() != null) {
+            受給者異動送付Builder.set短期入所サービス上限管理適用期間終了年月日(new FlexibleDate(
+                    div.getShikyuGendoKijungakuPanel().getTxtTankinyushoServiceJogenKanriTekiyoYMD().getToValue().toString()));
+        }
     }
 
     private void set居宅サービス計画エリアBuilder(JukyushaIdoRenrakuhyoBuilder 受給者異動送付Builder) {
-        受給者異動送付Builder.set居宅サービス計画作成区分コード(div.getKyotakuServicePlanPanel().getRadKyotakuServiceSakuseiKubun().getSelectedKey());
+        受給者異動送付Builder.set居宅サービス計画作成区分コード(div.getKyotakuServicePlanPanel().
+                getRadKyotakuServiceSakuseiKubun().getSelectedKey());
         受給者異動送付Builder.set居宅介護支援事業所番号(div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().getValue());
-        受給者異動送付Builder.set居宅サービス計画適用開始年月日(
-                new RString(div.getKyotakuServicePlanPanel().getTxtKyotakuServiceTekiyoYMD().getFromValue().toString()));
-        受給者異動送付Builder.set居宅サービス計画適用終了年月日(
-                new RString(div.getKyotakuServicePlanPanel().getTxtKyotakuServiceTekiyoYMD().getToValue().toString()));
+        if (div.getKyotakuServicePlanPanel().getTxtKyotakuServiceTekiyoYMD().getFromValue() != null) {
+            受給者異動送付Builder.set居宅サービス計画適用開始年月日(
+                    new RString(div.getKyotakuServicePlanPanel().getTxtKyotakuServiceTekiyoYMD().getFromValue().toString()));
+        }
+        if (div.getKyotakuServicePlanPanel().getTxtKyotakuServiceTekiyoYMD().getToValue() != null) {
+            受給者異動送付Builder.set居宅サービス計画適用終了年月日(
+                    new RString(div.getKyotakuServicePlanPanel().getTxtKyotakuServiceTekiyoYMD().getToValue().toString()));
+        }
         if (JukyushaIF_ShokiboKyotakuServiceRIyoCode.利用有り.getコード().
                 equals(div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().getSelectedKey())) {
             受給者異動送付Builder.set小多機能居宅介護利用開始月利用有フラグ(true);
@@ -720,11 +747,17 @@ public class JukyushaIdoRenrakuhyoHandler {
     }
 
     private void set住所地特例エリアBuilder(JukyushaIdoRenrakuhyoBuilder 受給者異動送付Builder) {
-        受給者異動送付Builder.set住所地特例対象者区分コード(div.getJushochiTokureiPanel().getRadJushochiTokureiTaishoshaKubun().getSelectedKey());
-        受給者異動送付Builder.set住所地特例適用開始日(
-                new RString(div.getJushochiTokureiPanel().getTxtJushochiTokureiTekiyoYMD().getFromValue().toString()));
-        受給者異動送付Builder.set住所地特例適用終了日(
-                new RString(div.getJushochiTokureiPanel().getTxtJushochiTokureiTekiyoYMD().getToValue().toString()));
+        if (!空KEY.equals(div.getJushochiTokureiPanel().getRadJushochiTokureiTaishoshaKubun().getSelectedKey())) {
+            受給者異動送付Builder.set住所地特例対象者区分コード(div.getJushochiTokureiPanel().getRadJushochiTokureiTaishoshaKubun().getSelectedKey());
+        }
+        if (div.getJushochiTokureiPanel().getTxtJushochiTokureiTekiyoYMD().getFromValue() != null) {
+            受給者異動送付Builder.set住所地特例適用開始日(
+                    new RString(div.getJushochiTokureiPanel().getTxtJushochiTokureiTekiyoYMD().getFromValue().toString()));
+        }
+        if (div.getJushochiTokureiPanel().getTxtJushochiTokureiTekiyoYMD().getToValue() != null) {
+            受給者異動送付Builder.set住所地特例適用終了日(
+                    new RString(div.getJushochiTokureiPanel().getTxtJushochiTokureiTekiyoYMD().getToValue().toString()));
+        }
         受給者異動送付Builder.set施設所在保険者番号(
                 div.getJushochiTokureiPanel().getHokenshaJohoPanel().getTxtShisetsuShozaiHokenjaNo().getValue());
     }
@@ -735,68 +768,138 @@ public class JukyushaIdoRenrakuhyoHandler {
                 getJukyushaIdoRenrakuhyoRiyoshaFutan().getRadRiyoshaFutanKubunCode().getSelectedKey());
         受給者異動送付Builder.set給付率(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
                 getJukyushaIdoRenrakuhyoRiyoshaFutan().getTxtKyufuritsu().getValue());
-        受給者異動送付Builder.set適用開始年月日(new RString(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
-                getJukyushaIdoRenrakuhyoRiyoshaFutan().getTxtTekiyoYMD().getFromValue().toString()));
-        受給者異動送付Builder.set適用終了年月日(new RString(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
-                getJukyushaIdoRenrakuhyoRiyoshaFutan().getTxtTekiyoYMD().getToValue().toString()));
-        受給者異動送付Builder.set軽減率(new RString(div.getGemmenGengakuPanel().
+        if (div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
+                getJukyushaIdoRenrakuhyoRiyoshaFutan().getTxtTekiyoYMD().getFromValue() != null) {
+            受給者異動送付Builder.set適用開始年月日(new RString(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
+                    getJukyushaIdoRenrakuhyoRiyoshaFutan().getTxtTekiyoYMD().getFromValue().toString()));
+        }
+        if (div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
+                getJukyushaIdoRenrakuhyoRiyoshaFutan().getTxtTekiyoYMD().getToValue() != null) {
+            受給者異動送付Builder.set適用終了年月日(new RString(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
+                    getJukyushaIdoRenrakuhyoRiyoshaFutan().getTxtTekiyoYMD().getToValue().toString()));
+        }
+        if (div.getGemmenGengakuPanel().
                 getJukyushaIdoRenrakuhyoGemmenGengakuSub().getJukyushaIdoRenrakuhyoFukushiHojinKeigen().
-                getTxtKeigenritsu().getValue().toString()));
-        受給者異動送付Builder.set軽減率適用開始年月日(new RString(div.getGemmenGengakuPanel().
+                getTxtKeigenritsu().getValue() != null) {
+            受給者異動送付Builder.set軽減率(new RString(div.getGemmenGengakuPanel().
+                    getJukyushaIdoRenrakuhyoGemmenGengakuSub().getJukyushaIdoRenrakuhyoFukushiHojinKeigen().
+                    getTxtKeigenritsu().getValue().toString()));
+        }
+        if (div.getGemmenGengakuPanel().
                 getJukyushaIdoRenrakuhyoGemmenGengakuSub().getJukyushaIdoRenrakuhyoFukushiHojinKeigen().
-                getTxtKeigenritsuTekiyoYMD().getFromValue().toString()));
-        受給者異動送付Builder.set軽減率適用終了年月日(new RString(div.getGemmenGengakuPanel().
+                getTxtKeigenritsuTekiyoYMD().getFromValue() != null) {
+            受給者異動送付Builder.set軽減率適用開始年月日(new RString(div.getGemmenGengakuPanel().
+                    getJukyushaIdoRenrakuhyoGemmenGengakuSub().getJukyushaIdoRenrakuhyoFukushiHojinKeigen().
+                    getTxtKeigenritsuTekiyoYMD().getFromValue().toString()));
+        }
+        if (div.getGemmenGengakuPanel().
                 getJukyushaIdoRenrakuhyoGemmenGengakuSub().getJukyushaIdoRenrakuhyoFukushiHojinKeigen().
-                getTxtKeigenritsuTekiyoYMD().getToValue().toString()));
+                getTxtKeigenritsuTekiyoYMD().getToValue() != null) {
+            受給者異動送付Builder.set軽減率適用終了年月日(new RString(div.getGemmenGengakuPanel().
+                    getJukyushaIdoRenrakuhyoGemmenGengakuSub().getJukyushaIdoRenrakuhyoFukushiHojinKeigen().
+                    getTxtKeigenritsuTekiyoYMD().getToValue().toString()));
+        }
         受給者異動送付Builder.set標準負担区分コード(div.getGemmenGengakuPanel().
                 getJukyushaIdoRenrakuhyoGemmenGengakuSub().getJukyushaIdoRenrakuhyoHyojunFutan().
                 getRadHyojunFutanKubun().getSelectedKey());
         受給者異動送付Builder.set負担額(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
                 getJukyushaIdoRenrakuhyoHyojunFutan().getTxtFutangaku().getValue());
-        受給者異動送付Builder.set負担額適用開始年月日(new RString(div.getGemmenGengakuPanel().
+        if (div.getGemmenGengakuPanel().
                 getJukyushaIdoRenrakuhyoGemmenGengakuSub().getJukyushaIdoRenrakuhyoHyojunFutan().
-                getTxtFutangakuTekiyoYMD().getFromValue().toString()));
-        受給者異動送付Builder.set負担額適用終了年月日(new RString(div.getGemmenGengakuPanel().
+                getTxtFutangakuTekiyoYMD().getFromValue() != null) {
+            受給者異動送付Builder.set負担額適用開始年月日(new RString(div.getGemmenGengakuPanel().
+                    getJukyushaIdoRenrakuhyoGemmenGengakuSub().getJukyushaIdoRenrakuhyoHyojunFutan().
+                    getTxtFutangakuTekiyoYMD().getFromValue().toString()));
+        }
+        if (div.getGemmenGengakuPanel().
                 getJukyushaIdoRenrakuhyoGemmenGengakuSub().getJukyushaIdoRenrakuhyoHyojunFutan().
-                getTxtFutangakuTekiyoYMD().getToValue().toString()));
+                getTxtFutangakuTekiyoYMD().getToValue() != null) {
+            受給者異動送付Builder.set負担額適用終了年月日(new RString(div.getGemmenGengakuPanel().
+                    getJukyushaIdoRenrakuhyoGemmenGengakuSub().getJukyushaIdoRenrakuhyoHyojunFutan().
+                    getTxtFutangakuTekiyoYMD().getToValue().toString()));
+        }
         受給者異動送付Builder.set特定入所者認定申請中区分コード(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
                 getRadTokuteiNyushoshaNinteiShinseichuKubun().getSelectedKey());
         受給者異動送付Builder.set特定入所者介護サービス区分コード(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
                 getRadTokuteiNyushoshaKaigoServiceKubun().getSelectedKey());
-        受給者異動送付Builder.set課税層の特例減額措置対象フラグ(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
-                getRadKaizeisoTokureiGengakuSochiTaishoFlag().getSelectedKey());
-        受給者異動送付Builder.set食費負担限度額(new RString(div.getGemmenGengakuPanel().
-                getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getTxtShokuhiFutanGendogaku().getValue().toString()));
-        受給者異動送付Builder.set負担限度額適用開始年月日(new RString(
-                div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
-                getTxtFutanGendogakuTekiyoYMD().getFromValue().toString()));
-        受給者異動送付Builder.set負担限度額適用終了年月日(new RString(
-                div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
-                getTxtFutanGendogakuTekiyoYMD().getToValue().toString()));
-        受給者異動送付Builder.set居住費従来型個室特養等負担限度額(new RString(div.getGemmenGengakuPanel().
+        if (!空KEY.equals(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                getRadKaizeisoTokureiGengakuSochiTaishoFlag().getSelectedKey())) {
+            受給者異動送付Builder.set課税層の特例減額措置対象フラグ(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getRadKaizeisoTokureiGengakuSochiTaishoFlag().getSelectedKey());
+        }
+        if (div.getGemmenGengakuPanel().
+                getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getTxtShokuhiFutanGendogaku().getValue() != null) {
+            受給者異動送付Builder.set食費負担限度額(new RString(div.getGemmenGengakuPanel().
+                    getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getTxtShokuhiFutanGendogaku().getValue().toString()));
+        }
+        if (div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                getTxtFutanGendogakuTekiyoYMD().getFromValue() != null) {
+            受給者異動送付Builder.set負担限度額適用開始年月日(new RString(
+                    div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtFutanGendogakuTekiyoYMD().getFromValue().toString()));
+        }
+        if (div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                getTxtFutanGendogakuTekiyoYMD().getToValue() != null) {
+            受給者異動送付Builder.set負担限度額適用終了年月日(new RString(
+                    div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtFutanGendogakuTekiyoYMD().getToValue().toString()));
+        }
+        if (div.getGemmenGengakuPanel().
                 getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
-                getTxtJuraigataKoshitsuTokuyoFutanGendogaku().getValue().toString()));
-        受給者異動送付Builder.set居住費従来型個室老健療養等負担限度額(new RString(div.getGemmenGengakuPanel().
+                getTxtJuraigataKoshitsuTokuyoFutanGendogaku().getValue() != null) {
+            受給者異動送付Builder.set居住費従来型個室特養等負担限度額(new RString(div.getGemmenGengakuPanel().
+                    getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtJuraigataKoshitsuTokuyoFutanGendogaku().getValue().toString()));
+        }
+        if (div.getGemmenGengakuPanel().
                 getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
-                getTxtJuraigataKoshitsuRokenRyoyoFutanGendogaku().getValue().toString()));
-        受給者異動送付Builder.set居住費多床室負担限度額(new RString(div.getGemmenGengakuPanel().
+                getTxtJuraigataKoshitsuRokenRyoyoFutanGendogaku().getValue() != null) {
+            受給者異動送付Builder.set居住費従来型個室老健療養等負担限度額(new RString(div.getGemmenGengakuPanel().
+                    getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtJuraigataKoshitsuRokenRyoyoFutanGendogaku().getValue().toString()));
+        }
+        if (div.getGemmenGengakuPanel().
                 getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getTxtTashoshitsu().
-                getValue().toString()));
-        受給者異動送付Builder.set居住費ユニット型個室負担限度額(new RString(div.getGemmenGengakuPanel().
+                getValue() != null) {
+            受給者異動送付Builder.set居住費多床室負担限度額(new RString(div.getGemmenGengakuPanel().
+                    getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getTxtTashoshitsu().
+                    getValue().toString()));
+        }
+        if (div.getGemmenGengakuPanel().
                 getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getTxtUnitKoshitsuGendogaku().
-                getValue().toString()));
-        受給者異動送付Builder.set居住費ユニット型準個室負担限度額(new RString(div.getGemmenGengakuPanel().
+                getValue() != null) {
+            受給者異動送付Builder.set居住費ユニット型個室負担限度額(new RString(div.getGemmenGengakuPanel().
+                    getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getTxtUnitKoshitsuGendogaku().
+                    getValue().toString()));
+        }
+        if (div.getGemmenGengakuPanel().
                 getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getTxtUnitJunKoshitsuFutanGendogaku().
-                getValue().toString()));
-        受給者異動送付Builder.set居宅費_新１_負担限度額(new RString(div.getGemmenGengakuPanel().
+                getValue() != null) {
+            受給者異動送付Builder.set居住費ユニット型準個室負担限度額(new RString(div.getGemmenGengakuPanel().
+                    getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getTxtUnitJunKoshitsuFutanGendogaku().
+                    getValue().toString()));
+        }
+        if (div.getGemmenGengakuPanel().
                 getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getTxtKyotakuhiShin1FutanGendogaku().
-                getValue().toString()));
-        受給者異動送付Builder.set居宅費_新２_負担限度額(new RString(div.getGemmenGengakuPanel().
+                getValue() != null) {
+            受給者異動送付Builder.set居宅費_新１_負担限度額(new RString(div.getGemmenGengakuPanel().
+                    getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getTxtKyotakuhiShin1FutanGendogaku().
+                    getValue().toString()));
+        }
+        if (div.getGemmenGengakuPanel().
                 getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getTxtKyotakuhiShin2FutanGendogaku().
-                getValue().toString()));
-        受給者異動送付Builder.set居宅費_新３_負担限度額(new RString(div.getGemmenGengakuPanel().
+                getValue() != null) {
+            受給者異動送付Builder.set居宅費_新２_負担限度額(new RString(div.getGemmenGengakuPanel().
+                    getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getTxtKyotakuhiShin2FutanGendogaku().
+                    getValue().toString()));
+        }
+        if (div.getGemmenGengakuPanel().
                 getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getTxtKyotakuhiShin3utanGendogaku().
-                getValue().toString()));
+                getValue() != null) {
+            受給者異動送付Builder.set居宅費_新３_負担限度額(new RString(div.getGemmenGengakuPanel().
+                    getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getTxtKyotakuhiShin3utanGendogaku().
+                    getValue().toString()));
+        }
     }
 
     private void set後期高齢_国保エリアBuilder(JukyushaIdoRenrakuhyoBuilder 受給者異動送付Builder) {
@@ -819,29 +922,45 @@ public class JukyushaIdoRenrakuhyoHandler {
         } else {
             受給者異動送付Builder.set公費負担上限額減額有フラグ(false);
         }
-        受給者異動送付Builder.set償還払化開始年月日(new RString(
-                div.getKyufuSeigenPanel().getTxtShokanbaraikaYMD().getFromValue().toString()));
-        受給者異動送付Builder.set償還払化終了年月日(new RString(
-                div.getKyufuSeigenPanel().getTxtShokanbaraikaYMD().getToValue().toString()));
-        受給者異動送付Builder.set給付率引下げ開始年月日(new RString(
-                div.getKyufuSeigenPanel().getTxtKyufuritsuHikisage().getFromValue().toString()));
-        受給者異動送付Builder.set給付率引下げ終了年月日(new RString(
-                div.getKyufuSeigenPanel().getTxtKyufuritsuHikisage().getToValue().toString()));
+        if (div.getKyufuSeigenPanel().getTxtShokanbaraikaYMD().getFromValue() != null) {
+            受給者異動送付Builder.set償還払化開始年月日(new RString(
+                    div.getKyufuSeigenPanel().getTxtShokanbaraikaYMD().getFromValue().toString()));
+        }
+        if (div.getKyufuSeigenPanel().getTxtShokanbaraikaYMD().getToValue() != null) {
+            受給者異動送付Builder.set償還払化終了年月日(new RString(
+                    div.getKyufuSeigenPanel().getTxtShokanbaraikaYMD().getToValue().toString()));
+        }
+        if (div.getKyufuSeigenPanel().getTxtKyufuritsuHikisage().getFromValue() != null) {
+            受給者異動送付Builder.set給付率引下げ開始年月日(new RString(
+                    div.getKyufuSeigenPanel().getTxtKyufuritsuHikisage().getFromValue().toString()));
+        }
+        if (div.getKyufuSeigenPanel().getTxtKyufuritsuHikisage().getToValue() != null) {
+            受給者異動送付Builder.set給付率引下げ終了年月日(new RString(
+                    div.getKyufuSeigenPanel().getTxtKyufuritsuHikisage().getToValue().toString()));
+        }
     }
 
     private void set二割負担エリアBuilder(JukyushaIdoRenrakuhyoBuilder 受給者異動送付Builder) {
-        受給者異動送付Builder.set利用者負担割合有効開始日(new RString(
-                div.getRiyosyaFutanWariaiPanel().getTxtRiyosyaFutanWariaiYukoYMD().getFromValue().toString()));
-        受給者異動送付Builder.set利用者負担割合有効終了日(new RString(
-                div.getRiyosyaFutanWariaiPanel().getTxtRiyosyaFutanWariaiYukoYMD().getToValue().toString()));
+        if (div.getRiyosyaFutanWariaiPanel().getTxtRiyosyaFutanWariaiYukoYMD().getFromValue() != null) {
+            受給者異動送付Builder.set利用者負担割合有効開始日(new RString(
+                    div.getRiyosyaFutanWariaiPanel().getTxtRiyosyaFutanWariaiYukoYMD().getFromValue().toString()));
+        }
+        if (div.getRiyosyaFutanWariaiPanel().getTxtRiyosyaFutanWariaiYukoYMD().getToValue() != null) {
+            受給者異動送付Builder.set利用者負担割合有効終了日(new RString(
+                    div.getRiyosyaFutanWariaiPanel().getTxtRiyosyaFutanWariaiYukoYMD().getToValue().toString()));
+        }
     }
 
     private void set二次予防事業エリアBuilder(JukyushaIdoRenrakuhyoBuilder 受給者異動送付Builder) {
         受給者異動送付Builder.set二次予防事業区分コード(div.getNijiyoboJigyoPanel().getRadNijiyoboJigyoKubun().getSelectedKey());
-        受給者異動送付Builder.set二次予防事業有効期間開始年月日(new FlexibleDate(
-                div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().getFromValue().toString()));
-        受給者異動送付Builder.set二次予防事業有効期間終了年月日(new FlexibleDate(
-                div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().getToValue().toString()));
+        if (div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().getFromValue() != null) {
+            受給者異動送付Builder.set二次予防事業有効期間開始年月日(new FlexibleDate(
+                    div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().getFromValue().toString()));
+        }
+        if (div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().getToValue() != null) {
+            受給者異動送付Builder.set二次予防事業有効期間終了年月日(new FlexibleDate(
+                    div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().getToValue().toString()));
+        }
     }
 
     private void set老人保健エリアBuilder(JukyushaIdoRenrakuhyoBuilder 受給者異動送付Builder) {
