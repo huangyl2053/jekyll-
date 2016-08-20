@@ -747,7 +747,9 @@ public class JukyushaIdoRenrakuhyoHandler {
     }
 
     private void set住所地特例エリアBuilder(JukyushaIdoRenrakuhyoBuilder 受給者異動送付Builder) {
-        受給者異動送付Builder.set住所地特例対象者区分コード(div.getJushochiTokureiPanel().getRadJushochiTokureiTaishoshaKubun().getSelectedKey());
+        if (!空KEY.equals(div.getJushochiTokureiPanel().getRadJushochiTokureiTaishoshaKubun().getSelectedKey())) {
+            受給者異動送付Builder.set住所地特例対象者区分コード(div.getJushochiTokureiPanel().getRadJushochiTokureiTaishoshaKubun().getSelectedKey());
+        }
         if (div.getJushochiTokureiPanel().getTxtJushochiTokureiTekiyoYMD().getFromValue() != null) {
             受給者異動送付Builder.set住所地特例適用開始日(
                     new RString(div.getJushochiTokureiPanel().getTxtJushochiTokureiTekiyoYMD().getFromValue().toString()));
@@ -820,8 +822,11 @@ public class JukyushaIdoRenrakuhyoHandler {
                 getRadTokuteiNyushoshaNinteiShinseichuKubun().getSelectedKey());
         受給者異動送付Builder.set特定入所者介護サービス区分コード(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
                 getRadTokuteiNyushoshaKaigoServiceKubun().getSelectedKey());
-        受給者異動送付Builder.set課税層の特例減額措置対象フラグ(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
-                getRadKaizeisoTokureiGengakuSochiTaishoFlag().getSelectedKey());
+        if (!空KEY.equals(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                getRadKaizeisoTokureiGengakuSochiTaishoFlag().getSelectedKey())) {
+            受給者異動送付Builder.set課税層の特例減額措置対象フラグ(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getRadKaizeisoTokureiGengakuSochiTaishoFlag().getSelectedKey());
+        }
         if (div.getGemmenGengakuPanel().
                 getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getTxtShokuhiFutanGendogaku().getValue() != null) {
             受給者異動送付Builder.set食費負担限度額(new RString(div.getGemmenGengakuPanel().

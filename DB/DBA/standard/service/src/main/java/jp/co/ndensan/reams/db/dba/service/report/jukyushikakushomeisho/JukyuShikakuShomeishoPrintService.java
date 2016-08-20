@@ -12,7 +12,9 @@ import jp.co.ndensan.reams.db.dba.business.report.jukyushikakushomeisho.JukyuShi
 import jp.co.ndensan.reams.db.dba.business.report.jukyushikakushomeisho.JukyuShikakuShomeishoProerty;
 import jp.co.ndensan.reams.db.dba.business.report.jukyushikakushomeisho.JukyuShikakuShomeishoReport;
 import jp.co.ndensan.reams.db.dba.entity.report.jukyushikakushomeisho.JukyuShikakuShomeishoReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -47,6 +49,8 @@ public class JukyuShikakuShomeishoPrintService {
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援,
                         property.reportId(),
                         FlexibleDate.getNowDate(),
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
+                        KenmeiFuyoKubunType.付与なし,
                         reportSourceWriter);
                 for (JukyuShikakuShomeishoBodyItem bodyItem : bodyItemList) {
                     bodyItem = new JukyuShikakuShomeishoBodyItem(

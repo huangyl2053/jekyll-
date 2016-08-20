@@ -18,7 +18,9 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaiiinwaritsuke.Shi
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.kaigoninteishinsakaischedulekagami.IKaigoNinteiShinsakaiScheduleKagamiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -97,7 +99,8 @@ public class KaigoNinteiShinsakaiScheduleKagamiProcess extends BatchProcessBase<
         }
         CustomerBarCode barcode = new CustomerBarCode();
         RString customerBarCode = barcode.convertCustomerBarCode(entity.getYubinNo(), entity.getJushoText()).getCustomerBarCode();
-        NinshoshaSource compNinshosha = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_ID, FlexibleDate.getNowDate(), reportSourceWriter);
+        NinshoshaSource compNinshosha = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_ID, FlexibleDate.getNowDate(),
+                NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
         Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_ID, KamokuCode.EMPTY, 1);
         return new ShinsaschedulekagamiItem(DbBusinessConfig.get(ConfigNameDBE.介護認定審査会スケジュール表鑑,
                 RDate.getNowDate(), SubGyomuCode.DBE認定支援),
