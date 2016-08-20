@@ -15,7 +15,6 @@
         <result property="介護認定審査会開催年月日" column="dbT5511_shinsakaiKaisaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="介護認定審査会開始時刻" column="dbT5511_shinsakaiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="介護認定審査会終了時刻" column="dbT5511_shinsakaiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="no" column="no" />
         <result property="保険者" column="dbT7051_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="申請書管理番号" column="dbT5101_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
         <result property="厚労省IF識別コード" column="dbT5101_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
@@ -30,6 +29,7 @@
         <result property="二次判定認定有効終了年月日" column="dbT5102_nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="合議体番号" column="dbT5501_gogitaiNo" />
         <result property="介護認定審査会開催予定場所コード" column="dbT5501_shinsakaiKaisaiYoteiBashoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="介護認定審査会開催予定年月日" column="dbT5501_shinsakaiKaisaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="イメージ共有ファイルID" column="dbT5115_imageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler" />
     </resultMap>
     
@@ -65,7 +65,6 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosaocrtorikomi.ChosaOCRTorikomiParameter"
             resultMap="resultMap_ChosaOCRTorikomiEntity" fetchSize="500">
         SELECT     	
-            ROW_NUMBER() OVER() AS no,        
             dbT7051."shichosonMeisho" AS "dbT7051_shichosonMeisho",         	
             dbT5101."shinseishoKanriNo" AS "dbT5101_shinseishoKanriNo",     
             dbT5101."koroshoIfShikibetsuCode" AS "dbT5101_koroshoIfShikibetsuCode",     
@@ -79,37 +78,28 @@
             dbT5102."nijiHanteiYMD" AS "dbT5102_nijiHanteiYMD",     
             dbT5102."nijiHanteiNinteiYukoShuryoYMD" AS "dbT5102_nijiHanteiNinteiYukoShuryoYMD",     
             dbT5501."gogitaiNo" AS "dbT5501_gogitaiNo", 
-            dbT5501."shinsakaiKaisaiYoteiBashoCode" AS "dbT5501_shinsakaiKaisaiYoteiBashoCode",    
+            dbT5501."shinsakaiKaisaiYoteiBashoCode" AS "dbT5501_shinsakaiKaisaiYoteiBashoCode",
+            dbT5501."shinsakaiKaisaiYoteiYMD" AS "dbT5501_shinsakaiKaisaiYoteiYMD"
             dbT5115."imageSharedFileId" AS "dbT5115_imageSharedFileId"     
         FROM  	
-               rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
-               ON dbT7051."shichosonCode" = dbT5101."shoKisaiHokenshaNo"
-        INNER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS dbT5116        
-               ON dbT5116."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"       	
-        LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102        
-               ON dbT5102."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"       	
-        INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" AS dbT5502       
-               ON dbT5502."shinsakaiKaisaiNo" = #{介護認定審査会開催番号}       
-               AND dbT5502."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"       
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS dbT5501	
-               ON dbT5501."shinsakaiKaisaiNo" = dbT5502."shinsakaiKaisaiNo" 	
-        LEFT JOIN rgdb."DbT5115Image" AS dbT5115     	
-               ON dbT5115."shinseishoKanriNo"=dbT5101."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS dbT5105
-               ON dbT5105."shinseishoKanriNo"= dbT5101."shinseishoKanriNo"	      	
+               rgdb."DbT5101NinteiShinseiJoho" AS dbT5101 
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbT7051 
+                ON dbT7051."shichosonCode" = dbT5101."shoKisaiHokenshaNo" 
+        INNER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS dbT5116 
+                ON dbT5116."shinseishoKanriNo" = dbT5101."shinseishoKanriNo" 
+        INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" AS dbT5502 
+                ON dbT5502."shinsakaiKaisaiNo" = #{介護認定審査会開催番号}  
+                AND dbT5502."shinseishoKanriNo" = dbT5101."shinseishoKanriNo" 
+        LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS dbT5121
+                ON dbT5121."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102 
+                ON dbT5102."shinseishoKanriNo" = dbT5121."zenkaiShinseishoKanriNo"	
+        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS dbT5501 
+                ON dbT5501."shinsakaiKaisaiNo" = dbT5502."shinsakaiKaisaiNo" 
+        LEFT JOIN rgdb."DbT5115Image" AS dbT5115 
+                ON dbT5115."shinseishoKanriNo" = dbT5101."shinseishoKanriNo" 	      	
         WHERE	     
-            dbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL        
-            AND dbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL       	
-            AND dbT5105."ninteichosaKanryoYMD" IS NOT NULL       	
-            AND dbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL       	
-            AND dbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL       	
-            AND dbT5105."ichijiHanteiKanryoYMD" IS NOT NULL       	
-            AND dbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL       	
-            AND dbT5105."maskingKanryoYMD" IS NOT NULL       	
-            AND dbT5105."ninteiShinsakaiKanryoYMD" IS NULL     	
-            AND dbT5105."centerSoshinYMD" IS NULL       	
-            AND dbT5101."shoriJotaiKubun" IN (#{通常},#{延期})       	
+            dbT5101."shoriJotaiKubun" IN (#{通常},#{延期})       	
             AND dbT5101."logicalDeletedFlag" = FALSE    
    </select>
    
