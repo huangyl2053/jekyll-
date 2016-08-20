@@ -241,7 +241,7 @@ public class SogojigyohiSaishinsaService {
         outItem.set決定単位数(doカンマ編集(entity.get決定単位数()));
         outItem.set保険者負担額(doカンマ編集(entity.get保険者負担額()));
         outItem.set被保険者番号(entity.get被保険者番号() == null ? RString.EMPTY : entity.get被保険者番号().getColumnValue());
-        outItem.set被保険者氏名(entity.get被保険者氏名());
+        outItem.set被保険者氏名(entity.get宛名名称());
         outItem.set申立事由コード(entity.get申立事由コード() == null ? RString.EMPTY : entity.get申立事由コード().getColumnValue());
         outItem.set申立事由(entity.get申立事由());
         outItem.set原審単位数(doカンマ編集(entity.get原審単位数()));
