@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.JukyushaIdoRenrakuhyo;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -343,10 +345,6 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
 
     private static class SpecHelper {
 
-        private static final RString 非該当KEY = new RString("higaito");
-        //TODO QA
-        private static final RString 事業者対象KEY = new RString("yoshienKeikatekiYokaigo");
-
         private static final RString 空KEY = new RString("space");
 
         private static final RString 画面ID_DBC0220012 = new RString("DBC0220012");
@@ -463,7 +461,7 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
         public static boolean check認定期間_Fromの必須(JukyushaIdoRenrakuhyoDiv div) {
             RString 状態区分 = div.getYokaigoNinteiPanel().getDdlYokaigoJotaiKubun().getSelectedKey();
             RDate 認定期間_From = div.getYokaigoNinteiPanel().getTxtNinteiYukoKikanYMD().getFromValue();
-            return (!非該当KEY.equals(状態区分) && (認定期間_From == null || 認定期間_From.toString().isEmpty()));
+            return (!YokaigoJotaiKubun99.非該当.getコード().equals(状態区分) && (認定期間_From == null || 認定期間_From.toString().isEmpty()));
         }
 
         /**
@@ -475,7 +473,8 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
         public static boolean check認定期間_Toの必須(JukyushaIdoRenrakuhyoDiv div) {
             RString 状態区分 = div.getYokaigoNinteiPanel().getDdlYokaigoJotaiKubun().getSelectedKey();
             RDate 認定期間_To = div.getYokaigoNinteiPanel().getTxtNinteiYukoKikanYMD().getToValue();
-            return (!非該当KEY.equals(状態区分) && !事業者対象KEY.equals(状態区分)
+            return (!YokaigoJotaiKubun99.非該当.getコード().equals(状態区分)
+                    && !YokaigoJotaiKubun.事業対象外.getコード().equals(状態区分)
                     && (認定期間_To == null || 認定期間_To.toString().isEmpty()));
         }
 
