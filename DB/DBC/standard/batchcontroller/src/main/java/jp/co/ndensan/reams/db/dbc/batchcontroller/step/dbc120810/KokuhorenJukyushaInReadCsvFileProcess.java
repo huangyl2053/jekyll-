@@ -48,8 +48,8 @@ public class KokuhorenJukyushaInReadCsvFileProcess extends BatchProcessBase<RStr
     static {
         PARAMETER_OUT_FLOWENTITY = new RString("returnFlowEntity");
     }
-    OutputParameter<KokuhorenJukyushaFlowEntity> returnFlowEntity;
-    KokuhorenJukyushaFlowEntity flowEntity;
+    private OutputParameter<KokuhorenJukyushaFlowEntity> returnFlowEntity;
+    private KokuhorenJukyushaFlowEntity flowEntity;
 
     private KagoKetteiHokenshaInControlCsvEntity controlCsvEntity;
     private KokuhorenJukyushaDataCsvEntity detialEntity;
@@ -58,11 +58,11 @@ public class KokuhorenJukyushaInReadCsvFileProcess extends BatchProcessBase<RStr
     private static final RString エラー区分_取込対象データなし = new RString("99");
 
     @BatchWriter
-    IBatchTableWriter 被保険者一時tableWriter;
+    private IBatchTableWriter 被保険者一時tableWriter;
     @BatchWriter
-    IBatchTableWriter 処理結果リスト一時tableWriter;
+    private IBatchTableWriter 処理結果リスト一時tableWriter;
     @BatchWriter
-    IBatchTableWriter 受給者情報明細一時tableWriter;
+    private IBatchTableWriter 受給者情報明細一時tableWriter;
     private static final RString 被保険者一時_TABLE_NAME = new RString("DbWT0001Hihokensha");
     private static final RString 処理結果リスト一時_TABLE_NAME = new RString("DbWT0002KokuhorenTorikomiError");
     private static final RString 受給者情報明細一時_TABLE_NAME = new RString("DbWT5331JukyushaJoho");

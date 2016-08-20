@@ -98,8 +98,8 @@ public class HanyoListParamHandler {
     public ValidationMessageControlPairs getCheckMessage() {
 
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        RString 支給申請書整理番号From = div.getTxtSikyuSinseishoSeiriBangoKaishi().getLabelLText();
-        RString 支給申請書整理番号To = div.getTxtSikyuSinseishoSeiriBangoKaishi().getLabelRText();
+        RString 支給申請書整理番号From = div.getTxtSikyuSinseishoSeiriBangoKaishi().getValue();
+        RString 支給申請書整理番号To = div.getTxtSikyuSinseishoSeiriBangoShuryo().getValue();
         if (null != 支給申請書整理番号From && null != 支給申請書整理番号To) {
             int 支給申請書整理番号F = Integer.parseInt(支給申請書整理番号From.toString());
             int 支給申請書整理番号T = Integer.parseInt(支給申請書整理番号To.toString());
@@ -158,8 +158,8 @@ public class HanyoListParamHandler {
                 div.getDdlTaishoNendo().getSelectedKey(),
                 申請年月日From,
                 申請年月日To,
-                div.getTxtSikyuSinseishoSeiriBangoKaishi().getLabelLText(),
-                div.getTxtSikyuSinseishoSeiriBangoKaishi().getLabelRText(),
+                div.getTxtSikyuSinseishoSeiriBangoKaishi().getValue(),
+                div.getTxtSikyuSinseishoSeiriBangoShuryo().getValue(),
                 送付年月From,
                 送付年月To,
                 項目名,
@@ -188,9 +188,9 @@ public class HanyoListParamHandler {
         FlexibleDate 申請年月日To = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, new RString("flexibleDateTo"));
         div.getTxtSinseibi().setToValue(new RDate(申請年月日To.toString()));
         RString 支給申請書整理番号From = restoreBatchParameterMap.getParameterValue(RString.class, new RString("shikyuShinseishoSeiriNoFrom"));
-        div.getTxtSikyuSinseishoSeiriBangoKaishi().setLabelLText(支給申請書整理番号From);
+        div.getTxtSikyuSinseishoSeiriBangoKaishi().setValue(支給申請書整理番号From);
         RString 支給申請書整理番号To = restoreBatchParameterMap.getParameterValue(RString.class, new RString("shikyuShinseishoSeiriNoTo"));
-        div.getTxtSikyuSinseishoSeiriBangoKaishi().setLabelRText(支給申請書整理番号To);
+        div.getTxtSikyuSinseishoSeiriBangoShuryo().setValue(支給申請書整理番号To);
         FlexibleDate 送付年月From = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, new RString("flexibleYearMonthFrom"));
         div.getTxtSofuNengetsu().setFromValue(new RDate(送付年月From.toString()));
         FlexibleDate 送付年月To = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, new RString("flexibleYearMonthTo"));
@@ -238,12 +238,24 @@ public class HanyoListParamHandler {
             batchparam.setKaigoGassanShinseiJokyoKubun(div.getDdlSinseiJokyoKubun().getSelectedKey());
         }
         batchparam.setFlexibleYear(div.getDdlTaishoNendo().getSelectedKey());
-        batchparam.setFlexibleDateFrom(new FlexibleDate(div.getTxtSinseibi().getFromValue().toString()));
-        batchparam.setFlexibleDateTo(new FlexibleDate(div.getTxtSinseibi().getToValue().toString()));
-        batchparam.setShikyuShinseishoSeiriNoFrom(div.getTxtSikyuSinseishoSeiriBangoKaishi().getLabelLText());
-        batchparam.setShikyuShinseishoSeiriNoTo(div.getTxtSikyuSinseishoSeiriBangoKaishi().getLabelRText());
-        batchparam.setFlexibleYearMonthFrom(new FlexibleDate(div.getTxtSofuNengetsu().getFromValue().toString()));
-        batchparam.setFlexibleYearMonthTo(new FlexibleDate(div.getTxtSofuNengetsu().getToValue().toString()));
+        if (null != div.getTxtSinseibi().getFromValue()) {
+            batchparam.setFlexibleDateFrom(new FlexibleDate(div.getTxtSinseibi().getFromValue().toString()));
+        }
+        if (null != div.getTxtSinseibi().getToValue()) {
+            batchparam.setFlexibleDateTo(new FlexibleDate(div.getTxtSinseibi().getToValue().toString()));
+        }
+        if (null != div.getTxtSikyuSinseishoSeiriBangoKaishi()) {
+            batchparam.setShikyuShinseishoSeiriNoFrom(div.getTxtSikyuSinseishoSeiriBangoKaishi().getValue());
+        }
+        if (null != div.getTxtSikyuSinseishoSeiriBangoShuryo()) {
+            batchparam.setShikyuShinseishoSeiriNoTo(div.getTxtSikyuSinseishoSeiriBangoShuryo().getValue());
+        }
+        if (null != div.getTxtSofuNengetsu().getFromValue()) {
+            batchparam.setFlexibleYearMonthFrom(new FlexibleDate(div.getTxtSofuNengetsu().getFromValue().toString()));
+        }
+        if (null != div.getTxtSofuNengetsu().getToValue()) {
+            batchparam.setFlexibleYearMonthTo(new FlexibleDate(div.getTxtSofuNengetsu().getToValue().toString()));
+        }
         List<RString> selectKey = div.getChkCsvHenshuHoho().getSelectedKeys();
         if (selectKey.contains(項目名付加)) {
             batchparam.setRebanFuka(true);
