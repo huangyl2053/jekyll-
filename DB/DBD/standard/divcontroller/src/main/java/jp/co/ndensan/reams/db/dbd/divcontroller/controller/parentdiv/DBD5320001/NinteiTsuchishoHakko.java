@@ -269,6 +269,17 @@ public class NinteiTsuchishoHakko {
         return ResponseData.of(param).forwardWithEventName(DBD5320001TransitionEventName.完了).respond();
     }
 
+    /**
+     * 「出力対象」チェックの変更処理
+     *
+     * @param div NinteiTsuchishoHakkoDiv
+     * @return ResponseData<NinteiTsuchishoHakkoDiv>
+     */
+    public ResponseData<NinteiTsuchishoHakkoDiv> onChange_chkOutPutSelect(NinteiTsuchishoHakkoDiv div) {
+        getHandler(div).changeChkOutPutSelect();
+        return ResponseData.of(div).respond();
+    }
+
     private NinteiTsuchishoHakkoHandler getHandler(NinteiTsuchishoHakkoDiv div) {
         return new NinteiTsuchishoHakkoHandler(div);
     }
