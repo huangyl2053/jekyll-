@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 国保連保有受給者情報取込。
@@ -123,7 +124,7 @@ public class KokuhorenJukyushaInReadCsvFileProcess extends BatchProcessBase<RStr
             parameter.set処理年月(処理対象年月temp);
         }
 
-        if (連番 == parameter.get連番()) {
+        if (parameter.isLast() && 連番 == INDEX_0) {
             登録対象なしエラー登録();
         }
         flowEntity.setShoriYM(parameter.get処理年月());
@@ -136,6 +137,7 @@ public class KokuhorenJukyushaInReadCsvFileProcess extends BatchProcessBase<RStr
     private void 登録対象なしエラー登録() {
         DbWT0002KokuhorenTorikomiErrorEntity 処理結果 = new DbWT0002KokuhorenTorikomiErrorEntity();
         処理結果.setErrorKubun(エラー区分_取込対象データなし);
+        処理結果.setState(EntityDataState.Added);
         処理結果リスト一時tableWriter.insert(処理結果);
     }
 
@@ -230,8 +232,9 @@ public class KokuhorenJukyushaInReadCsvFileProcess extends BatchProcessBase<RStr
             明細Entity.setHokenshaName(hokensha.get保険者名());
         }
         明細Entity.setTorikomiYM(parameter.get処理年月());
+        明細Entity.setState(EntityDataState.Added);
         受給者情報明細一時tableWriter.insert(明細Entity);
-        
+
     }
 
     private void 被保険者一時TBL登録(KokuhorenJukyushaDataCsvEntity 保険者X, int 連番) {
@@ -243,6 +246,9 @@ public class KokuhorenJukyushaInReadCsvFileProcess extends BatchProcessBase<RStr
         明細Entity.setServiceTeikyoYmd(new FlexibleDate(保険者X.get異動年月日()));
         明細Entity.setOrgHihokenshaKanaShimei(保険者X.get被保険者氏名カナ());
         明細Entity.setHihokenshaNo(new HihokenshaNo(保険者X.get被保険者番号()));
+        明細Entity.setChoikiCode(RString.EMPTY);
+        明細Entity.setGyoseikuCode(RString.EMPTY);
+        明細Entity.setState(EntityDataState.Added);
         被保険者一時tableWriter.insert(明細Entity);
     }
 }

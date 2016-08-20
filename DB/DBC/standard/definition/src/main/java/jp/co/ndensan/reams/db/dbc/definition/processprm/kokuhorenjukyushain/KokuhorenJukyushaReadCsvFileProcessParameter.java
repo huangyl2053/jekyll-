@@ -23,5 +23,6 @@ public class KokuhorenJukyushaReadCsvFileProcessParameter implements IBatchProce
     private RString 保存先フォルダ;
     private RString エントリ情報;
     private int 連番;
+    private boolean isLast;
 
 }

@@ -69,7 +69,8 @@ public class DBC120810_KokuhorenJukyushaInFlow extends BatchFlowBase<KokuhorenKy
                     = getResult(KokuhorenKyoutsuuFileGetReturnEntity.class, new RString(ファイル取得),
                             KokuhorenkyoutsuGetFileProcess.PARAMETER_OUT_RETURNENTITY);
             csvParameter = new KokuhorenJukyushaReadCsvFileProcessParameter();
-            for (int i = 0; i < returnEntity.getFileNameList().size(); i++) {
+            int size = returnEntity.getFileNameList().size();
+            for (int i = 0; i < size; i++) {
                 String filePath = returnEntity.get保存先フォルダのパス() + File.separator
                         + returnEntity.getFileNameList().get(i);
                 File path = new File(filePath);
@@ -82,6 +83,10 @@ public class DBC120810_KokuhorenJukyushaInFlow extends BatchFlowBase<KokuhorenKy
                 } else {
                     csvParameter.set処理年月(flowEntity.getShoriYM());
                     csvParameter.set連番(flowEntity.get連番());
+                }
+                csvParameter.setLast(false);
+                if (i == size - 1) {
+                    csvParameter.setLast(true);
                 }
                 csvParameter.set保存先フォルダ(csvFullPath);
                 executeStep(CSVファイル取込);
