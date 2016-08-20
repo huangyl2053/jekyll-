@@ -46,9 +46,9 @@ public final class YokaigoNinteiTorikeshiTshuchishoReport extends Report<Yokaigo
      * @param hihokenshaName RString
      * @param riyu RString
      * @param teishutsuKigenYMD
-     * @return 要介護認定取消通知書
+     *
      */
-    private YokaigoNinteiTorikeshiTshuchishoReport(IAtesaki 宛先, Association 地方公共団体, ChohyoSeigyoKyotsu 帳票制御共通,
+    public YokaigoNinteiTorikeshiTshuchishoReport(IAtesaki 宛先, Association 地方公共団体, ChohyoSeigyoKyotsu 帳票制御共通,
             List<RString> 通知書定型文リスト, NinshoshaSource 認証者ソースビルダー, RString bunshoNo, RString hihokenshaNo,
             RString hihokenshaName, RString riyu, RString teishutsuKigenYMD) {
         this.宛先 = 宛先;
