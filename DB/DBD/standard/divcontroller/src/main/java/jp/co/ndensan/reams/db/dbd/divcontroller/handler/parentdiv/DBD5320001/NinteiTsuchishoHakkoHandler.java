@@ -1230,13 +1230,13 @@ public class NinteiTsuchishoHakkoHandler {
 
     private YokaigoNinteiTsutisho edit個別発行受給者台帳(YokaigoNinteiTsutisho データ, PanelType パネル) {
         YokaigoNinteiTsutishoBuilder builder = データ.createBuilderForNyukyushaAddEdit();
-        if (パネル.equals(パネル)) {
+        if (PanelType.個別発行認定結果通知書パネル.equals(パネル)) {
             builder.set認定結果通知書発行年月日(div.getTxtNinteiKekkaSakuseiDay().getValue());
-        } else if (パネル.equals(パネル)) {
+        } else if (PanelType.個別発行サービス変更通知書パネル.equals(パネル)) {
             builder.setサービス変更通知書発行年月日(div.getTxtServiceHenkoBunshoSakuseiDay().getValue());
-        } else if (パネル.equals(パネル)) {
+        } else if (PanelType.個別発行要介護度変更通知書パネル.equals(パネル)) {
             builder.set区分変更通知書発行年月日(div.getTxtYokaigodoHenkoTsuchiSakuseiDay().getValue());
-        } else if (パネル.equals(パネル)) {
+        } else if (PanelType.個別発行認定却下通知書パネル.equals(パネル)) {
             builder.set認定却下通知書発行年月日(div.getTxtNinteiKyakkaTsuchi().getValue());
         }
 
