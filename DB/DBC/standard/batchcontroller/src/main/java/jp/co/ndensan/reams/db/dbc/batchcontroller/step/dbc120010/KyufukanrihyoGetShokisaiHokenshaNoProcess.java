@@ -7,13 +7,15 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120010;
 
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT0001HihokenshaIchijiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoin.HihokenshaKanriDataEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufukanrihyoin.IKyufukanrihyoInMapper;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002KokuhorenTorikomiErrorEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishokisaihokenshano.KoikiShokisaiHokenshaNoFinder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -29,13 +31,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KyufukanrihyoGetShokisaiHokenshaNoProcess extends BatchProcessBase<HihokenshaKanriDataEntity> {
 
     private KoikiShokisaiHokenshaNoFinder finder;
-    private IKyufukanrihyoInMapper mapper;
-    private IKokuhorenKyoutsuuTempTableMapper 一時Mapper;
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kyufukanrihyoin.IKyufukanrihyoInMapper.get直近の被保険者台帳管理データ");
 
     private static final RString エラー区分_証記載保険者番号取得エラー = new RString("41");
+
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter 被保険者一時tableWriter;
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter 処理結果リスト一時tableWriter;
+    private static final RString 被保険者一時_TABLE_NAME = new RString("DbWT0001Hihokensha");
+    private static final RString 処理結果リスト一時_TABLE_NAME = new RString("DbWT0002KokuhorenTorikomiError");
 
     @Override
     protected IBatchReader createReader() {
@@ -43,10 +50,17 @@ public class KyufukanrihyoGetShokisaiHokenshaNoProcess extends BatchProcessBase<
     }
 
     @Override
+    protected void createWriter() {
+        被保険者一時tableWriter
+                = new BatchEntityCreatedTempTableWriter(被保険者一時_TABLE_NAME, DbWT0001HihokenshaIchijiEntity.class);
+        処理結果リスト一時tableWriter
+                = new BatchEntityCreatedTempTableWriter(処理結果リスト一時_TABLE_NAME,
+                        DbWT0002KokuhorenTorikomiErrorEntity.class);
+    }
+
+    @Override
     protected void beforeExecute() {
         finder = KoikiShokisaiHokenshaNoFinder.createInstance();
-        mapper = getMapper(IKyufukanrihyoInMapper.class);
-        一時Mapper = getMapper(IKokuhorenKyoutsuuTempTableMapper.class);
     }
 
     @Override
@@ -64,8 +78,9 @@ public class KyufukanrihyoGetShokisaiHokenshaNoProcess extends BatchProcessBase<
             doエラー登録(被保険者一時);
             return;
         }
-        被保険者一時.set証記載保険者番号(証記載保険者番号);
-        mapper.被保険者一時データに証記載保険者番号を登録する(被保険者一時);
+        DbWT0001HihokenshaIchijiEntity 被保険者 = 被保険者一時.toEntity();
+        被保険者.setShoHokenshaNo(証記載保険者番号);
+        被保険者一時tableWriter.update(被保険者);
     }
 
     private void doエラー登録(DbWT0001HihokenshaTempEntity 被保険者一時) {
@@ -83,7 +98,7 @@ public class KyufukanrihyoGetShokisaiHokenshaNoProcess extends BatchProcessBase<
         エラー結果.set被保険者カナ氏名(被保険者一時.get被保険者カナ氏名());
         エラー結果.set被保険者氏名(被保険者一時.get被保険者氏名());
         エラー結果.set備考(RString.EMPTY);
-        一時Mapper.処理結果リスト一時TBLに登録(エラー結果);
+        処理結果リスト一時tableWriter.insert(エラー結果.toEntity());
     }
 
 }

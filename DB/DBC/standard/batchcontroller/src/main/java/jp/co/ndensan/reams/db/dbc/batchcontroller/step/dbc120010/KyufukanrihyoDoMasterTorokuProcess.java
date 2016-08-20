@@ -17,7 +17,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -38,16 +40,29 @@ public class KyufukanrihyoDoMasterTorokuProcess extends BatchProcessBase<Hihoken
 
     private KyufukanrihyoDoMasterTorokuProcessParameter parameter;
 
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter 給付管理票200004tableWriter;
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter 給付管理票200604tableWriter;
+
     @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(READ_DATA_ID);
     }
 
     @Override
+    protected void createWriter() {
+        給付管理票200004tableWriter
+                = new BatchEntityCreatedTempTableWriter(DbT3014KyufuKanrihyo200004Entity.TABLE_NAME,
+                        DbT3014KyufuKanrihyo200004Entity.class);
+        給付管理票200604tableWriter
+                = new BatchEntityCreatedTempTableWriter(DbT3015KyufuKanrihyo200604Entity.TABLE_NAME,
+                        DbT3015KyufuKanrihyo200604Entity.class);
+    }
+
+    @Override
     protected void beforeExecute() {
         mapper = getMapper(IKyufukanrihyoInMapper.class);
-        mapper.do事業者名称登録_居宅介護支援事業所作成の場合();
-        mapper.do事業者名称登録_介護予防支援事業所地域包括支援センター作成の場合();
         if (SaiShoriKubun.再処理.equals(parameter.get再処理区分())) {
             mapper.do給付管理票200004TBL処理済のデータの削除();
             mapper.do給付管理票200604TBL処理済のデータの削除();
@@ -103,6 +118,7 @@ public class KyufukanrihyoDoMasterTorokuProcess extends BatchProcessBase<Hihoken
         entity.setKyufuKeikakuTotalTanisuNissu(給付管理票.get給付計画合計単位数_日数());
         entity.setToshoTorokuYMD(給付管理票.get当初登録年月日());
         entity.setTorikomiYM(給付管理票.get取込年月());
+        給付管理票200004tableWriter.insert(entity);
 
     }
 
@@ -168,6 +184,7 @@ public class KyufukanrihyoDoMasterTorokuProcess extends BatchProcessBase<Hihoken
         entity.setItakusakiTantoKaigoShienSemmoninNo(給付管理票.get委託先の担当介護支援専門員番号());
         entity.setToshoTorokuYMD(給付管理票.get当初登録年月日());
         entity.setTorikomiYM(給付管理票.get取込年月());
+        給付管理票200604tableWriter.insert(entity);
     }
 
 }

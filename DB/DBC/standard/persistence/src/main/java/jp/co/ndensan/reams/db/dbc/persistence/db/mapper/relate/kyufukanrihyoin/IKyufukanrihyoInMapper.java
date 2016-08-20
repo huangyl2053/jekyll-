@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3015KyufuKanrihyo200604Enti
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT1121KyufuKanrihyoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoin.HihokenshaKanriDataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoin.HihokenshaKyufukanrihyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoin.KyufukanrihyoJigyoshaEntity;
 
 /**
  * 給付管理票情報取込のMapperです。
@@ -62,11 +63,25 @@ public interface IKyufukanrihyoInMapper {
     int do事業者名称登録_居宅介護支援事業所作成の場合();
 
     /**
+     * 給付管理票一時TBL．居宅サービス計画作成区分コード＝1：居宅介護支援事業所作成の場合。
+     *
+     * @return List<KyufukanrihyoJigyoshaEntity>
+     */
+    List<KyufukanrihyoJigyoshaEntity> get事業者名称_居宅介護支援事業所作成の場合();
+
+    /**
      * 給付管理票一時TBL．居宅サービス計画作成区分コード＝3：介護予防支援事業所・地域包括支援センター作成の場合。
      *
      * @return int 登録成功データ数
      */
     int do事業者名称登録_介護予防支援事業所地域包括支援センター作成の場合();
+
+    /**
+     * 給付管理票一時TBL．居宅サービス計画作成区分コード＝3：介護予防支援事業所・地域包括支援センター作成の場合。
+     *
+     * @return List<KyufukanrihyoJigyoshaEntity>
+     */
+    List<KyufukanrihyoJigyoshaEntity> get事業者名称_介護予防支援事業所地域包括支援センター作成の場合();
 
     /**
      * 給付管理票一時TBLのデータと被保険者を取ります。
