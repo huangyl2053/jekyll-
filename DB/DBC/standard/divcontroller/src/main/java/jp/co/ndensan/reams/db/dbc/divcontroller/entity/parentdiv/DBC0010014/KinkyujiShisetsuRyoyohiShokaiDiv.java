@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010014;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuJissekiHeader.IKyufuJissekiHeaderDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010011.KyufuJissekiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
@@ -230,12 +231,12 @@ public class KinkyujiShisetsuRyoyohiShokaiDiv extends Panel {
 
     @JsonIgnore
     public DataGrid<dgKinkyujiShisetsuRyoyohi_Row> getDgKinkyujiShisetsuRyoyohi() {
-        return this.getKyufuJisseki().getDgKinkyujiShisetsuRyoyohi();
+        return null; //this.getKyufuJisseki().getDgKinkyujiShisetsuRyoyohi();
     }
 
     @JsonIgnore
     public void setDgKinkyujiShisetsuRyoyohi(DataGrid<dgKinkyujiShisetsuRyoyohi_Row> dgKinkyujiShisetsuRyoyohi) {
-        this.getKyufuJisseki().setDgKinkyujiShisetsuRyoyohi(dgKinkyujiShisetsuRyoyohi);
+        // this.getKyufuJisseki().setDgKinkyujiShisetsuRyoyohi(dgKinkyujiShisetsuRyoyohi);
     }
 
     @JsonIgnore
@@ -290,7 +291,7 @@ public class KinkyujiShisetsuRyoyohiShokaiDiv extends Panel {
 
     @JsonIgnore
     public IKyufuJissekiHeaderDiv getCcdKyufuJissekiHeader() {
-        return this.getKyufuJisseki().getCcdKyufuJissekiHeader();
+        return null;//this.getKyufuJisseki().getCcdKyufuJissekiHeader();
     }
 
     @JsonIgnore
