@@ -189,7 +189,8 @@ public class KinkyujiShisetsuRyoyohiShokaiHandler {
      * @param サービス提供年月 サービス提供年月
      */
     public void setButton(RString サービス提供年月) {
-        ShikibetsuNoKanri 識別番号管理 = ShokanbaraiJyokyoShokai.createInstance().get識別番号管理データ().get(0);
+        // ShikibetsuNoKanri 識別番号管理 = ShokanbaraiJyokyoShokai.createInstance().get識別番号管理データ().get(0);
+        ShikibetsuNoKanri 識別番号管理 = null;
         if (ZERO.equals(識別番号管理.get基本設定区分())) {
             div.getBtnKihon().setDisabled(true);
         } else {
