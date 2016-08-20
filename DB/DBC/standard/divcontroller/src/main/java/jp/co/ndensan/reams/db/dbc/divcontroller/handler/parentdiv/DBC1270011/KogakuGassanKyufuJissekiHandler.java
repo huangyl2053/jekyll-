@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -47,12 +48,13 @@ public class KogakuGassanKyufuJissekiHandler {
      * @param 被保険者番号 被保険者番号
      * @param 識別コード 識別コード
      * @param 高額合算給付実績情報 高額合算給付実績情報
+     * @param isデータ存在 isデータ存在
      */
     public void onLoad(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード,
-            List<KogakuGassanKyufuJisseki> 高額合算給付実績情報, boolean is高額合算給付実績チェック) {
+            List<KogakuGassanKyufuJisseki> 高額合算給付実績情報, boolean isデータ存在) {
         div.getKogakuGassanKyufuJissekiKihon().initialize(識別コード);
         div.getKogakuGassanKyufuJissekiKaigoKihon().initialize(被保険者番号);
-        set一覧(高額合算給付実績情報, is高額合算給付実績チェック);
+        set一覧(高額合算給付実績情報, isデータ存在);
     }
 
     /**
@@ -73,8 +75,8 @@ public class KogakuGassanKyufuJissekiHandler {
             div.getTxtKetteiYMD().setValue(new RDate(row.getTxtKetteiYMD().toString()));
         }
         if (!RString.isNullOrEmpty(row.getTxtShikyugaku())) {
-            div.getTxtJikofutangaku().setValue(new Decimal(row.getTxtShikyugaku().toString()));
-            div.getTxtShikyugaku().setValue(new Decimal(row.getTxtShikyugaku().toString()));
+            div.getTxtJikofutangaku().setValue(to金額(row.getTxtShikyugaku()));
+            div.getTxtShikyugaku().setValue(to金額(row.getTxtShikyugaku()));
         } else {
             div.getTxtJikofutangaku().setValue(new Decimal(0));
             div.getTxtShikyugaku().setValue(new Decimal(0));
@@ -90,11 +92,11 @@ public class KogakuGassanKyufuJissekiHandler {
         }
     }
 
-    private void set一覧(List<KogakuGassanKyufuJisseki> 高額合算給付実績情報, boolean is高額合算給付実績チェック) {
+    private void set一覧(List<KogakuGassanKyufuJisseki> 高額合算給付実績情報, boolean isデータ存在) {
         List<dgRireki_Row> rowList = new ArrayList<>();
         for (KogakuGassanKyufuJisseki 高額合算給付実績 : 高額合算給付実績情報) {
             dgRireki_Row row = new dgRireki_Row();
-            if (!is高額合算給付実績チェック) {
+            if (isデータ存在) {
                 row.setSelectButtonState(DataGridButtonState.Disabled);
             }
             row.setTxtKokanShikibetsu(get交換情報識別番号(高額合算給付実績.get交換情報識別番号()));
@@ -164,5 +166,14 @@ public class KogakuGassanKyufuJissekiHandler {
             return DecimalFormatter.toコンマ区切りRString(金額, 0);
         }
         return new RString("0");
+    }
+
+    private Decimal to金額(RString 金額) {
+        RStringBuilder builder = new RStringBuilder();
+        List<RString> kinnlist = 金額.split(",");
+        for (RString kinn : kinnlist) {
+            builder.append(kinn);
+        }
+        return new Decimal(builder.toString());
     }
 }
