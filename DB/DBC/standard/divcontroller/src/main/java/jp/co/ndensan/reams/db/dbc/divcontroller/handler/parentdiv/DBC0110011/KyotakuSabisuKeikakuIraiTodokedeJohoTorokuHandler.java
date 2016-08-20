@@ -246,7 +246,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         }
         if (is自己作成の場合()) {
             div.getRadTodokedeKubun().setSelectedKey(KEY_0);
-            div.getRadKeikakuKubun().setDisplayNone(true);
+            div.getRadKeikakuKubun().setDisplayNone(false);
             div.getRadKeikakuKubun().setSelectedKey(KEY_0);
             div.getRadKeikakuSakuseiKubun().setDataSource(get自己作成DataSource());
             div.getRadKeikakuSakuseiKubun().setSelectedIndex(0);
@@ -535,7 +535,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         }
         if (is自己作成の場合()) {
             KyotakuKeikakuJikoSakusei 居宅給付計画自己作成 = 居宅給付計画届出.getKyotakuKeikakuJikoSakuseiList().get(0);
-            div.getRadKeikakuKubun().setDisplayNone(true);
+            div.getRadKeikakuKubun().setDisplayNone(false);
             if (居宅.equals(居宅給付計画自己作成.get居宅_総合事業区分())) {
                 div.getRadKeikakuKubun().setSelectedKey(KEY_0);
             } else if (総合事業.equals(居宅給付計画自己作成.get居宅_総合事業区分())) {
