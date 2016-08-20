@@ -61,5 +61,5 @@ public class SogojigyohiSaishinsaKetteiHokenshaInEntity {
     private RString 氏名５０音カナ;
     private HokenshaNo 保険者番号;
     private RString 保険者名;
-
+    private RString 宛名名称;
 }

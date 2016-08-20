@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.JukyushaIdoRenrakuhyo;
 
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyo;
+import jp.co.ndensan.reams.db.dbc.business.core.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoTorokuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -71,5 +72,19 @@ public interface IJukyushaIdoRenrakuhyoDiv extends ICommonChildDivBaseProperties
      * @return JukyushaIdoRenrakuhyo
      */
     public JukyushaIdoRenrakuhyo get受給者異動送付();
+
+    /**
+     * 出力用受給者訂正情報Entityをを取得のメソッドです。
+     *
+     * @return JukyushaIdoRenrakuhyoSakuseiRelateEntity
+     */
+    public JukyushaIdoRenrakuhyoTorokuEntity get受給者訂正連絡票Entity();
+
+    /**
+     * 出力用受給者異動連絡票Entityをを取得のメソッドです。
+     *
+     * @return JukyushaIdoRenrakuhyoSakuseiRelateEntity
+     */
+    public JukyushaIdoRenrakuhyoTorokuEntity get受給者異動連絡票Entity();
 
 }

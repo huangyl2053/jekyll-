@@ -136,11 +136,24 @@ public class SogojigyohiSeikyugakuTsuchishoInReadCsvFileProcess extends BatchPro
     }
 
     private void ヘッダ判断() {
-        if (toreraRecord1Entity != null) {
-            合計 = true;
+        if (meisaiEntity != null && toreraRecord1Entity == null) {
+            合計 = false;
+            累計 = false;
             set共通レコード(shoTempentity, controlCsvEntity, headRecordEntity);
             set明細レコード(shoTempentity, meisaiEntity);
             setトレーラレコード1_合計(shoTempentity, toreraRecord1Entity, 合計);
+            setトレーラレコード2_累計(shoTempentity, toreraRecord2Entity, 累計);
+            setトレーラレコード3_審査支払手数料(shoTempentity, toreraRecord3Entity, 累計);
+            請求額通知書一時tableWriter.insert(shoTempentity);
+            meisaiEntity = null;
+        } else if (meisaiEntity != null && toreraRecord1Entity != null) {
+            合計 = true;
+            累計 = false;
+            set共通レコード(shoTempentity, controlCsvEntity, headRecordEntity);
+            set明細レコード(shoTempentity, meisaiEntity);
+            setトレーラレコード1_合計(shoTempentity, toreraRecord1Entity, 合計);
+            setトレーラレコード2_累計(shoTempentity, toreraRecord2Entity, 累計);
+            setトレーラレコード3_審査支払手数料(shoTempentity, toreraRecord3Entity, 累計);
             請求額通知書一時tableWriter.insert(shoTempentity);
             toreraRecord1Entity = null;
             headRecordEntity = null;
@@ -150,8 +163,13 @@ public class SogojigyohiSeikyugakuTsuchishoInReadCsvFileProcess extends BatchPro
 
     private void 明細判断() {
         if (meisaiEntity != null) {
+            合計 = false;
+            累計 = false;
             set共通レコード(shoTempentity, controlCsvEntity, headRecordEntity);
             set明細レコード(shoTempentity, meisaiEntity);
+            setトレーラレコード1_合計(shoTempentity, toreraRecord1Entity, 合計);
+            setトレーラレコード2_累計(shoTempentity, toreraRecord2Entity, 累計);
+            setトレーラレコード3_審査支払手数料(shoTempentity, toreraRecord3Entity, 累計);
             請求額通知書一時tableWriter.insert(shoTempentity);
             meisaiEntity = null;
         }

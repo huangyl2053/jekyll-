@@ -47,6 +47,30 @@ public class NinteiShinseiJohoIraiJohoData {
     }
 
     /**
+     * 主治医医療機関コードを返します。
+     *
+     * @return 主治医医療機関コード
+     */
+    public RString get主治医医療機関コード() {
+        if (relateEntity.getShujiiIryokikanCode() != null) {
+            return relateEntity.getShujiiIryokikanCode().value();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 主治医コードを返します。
+     *
+     * @return 主治医コード
+     */
+    public RString get主治医コード() {
+        if (relateEntity.getShujiiIryokikanCode() != null) {
+            return relateEntity.getShujiiCode().value();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
      * 認定申請年月日を返します。
      *
      * @return 認定申請年月日

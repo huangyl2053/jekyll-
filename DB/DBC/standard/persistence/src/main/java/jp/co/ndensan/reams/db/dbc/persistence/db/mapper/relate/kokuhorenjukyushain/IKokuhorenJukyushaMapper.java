@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenjukyush
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kokuhorenjukyushain.DbWT0001DbWT5331Entity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kokuhorenjukyushain.DbWT5331JukyushaJohoEntity;
 
 /**
  * 国保連保有受給者情報取込
@@ -16,14 +15,6 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kokuhorenjukyushain.DbWT5331Jukyush
  * @reamsid_L DBC-2740-010 fuyanling
  */
 public interface IKokuhorenJukyushaMapper {
-
-    /**
-     * 受給者情報明細一時TBLに登録する。
-     *
-     * @param entity DbWT0001HihokenshaTempEntity
-     * @return int
-     */
-    int insert受給者情報明細一時TBLに登録(DbWT5331JukyushaJohoEntity entity);
 
     /**
      * 帳票出力対象データ

@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBD-1440-020 liuyl
  */
-public class YokaigoNinteiTorikeshiTshuchishoReport extends Report<YokaigoNinteiTorikeshiTshuchishoSource> {
+public final class YokaigoNinteiTorikeshiTshuchishoReport extends Report<YokaigoNinteiTorikeshiTshuchishoSource> {
 
     private final IAtesaki 宛先;
     private final Association 地方公共団体;
@@ -46,10 +46,11 @@ public class YokaigoNinteiTorikeshiTshuchishoReport extends Report<YokaigoNintei
      * @param hihokenshaName RString
      * @param riyu RString
      * @param teishutsuKigenYMD
+     *
      */
     public YokaigoNinteiTorikeshiTshuchishoReport(IAtesaki 宛先, Association 地方公共団体, ChohyoSeigyoKyotsu 帳票制御共通,
-            List<RString> 通知書定型文リスト, NinshoshaSource 認証者ソースビルダー, RString bunshoNo, RString hihokenshaNo, RString hihokenshaName,
-            RString riyu, RString teishutsuKigenYMD) {
+            List<RString> 通知書定型文リスト, NinshoshaSource 認証者ソースビルダー, RString bunshoNo, RString hihokenshaNo,
+            RString hihokenshaName, RString riyu, RString teishutsuKigenYMD) {
         this.宛先 = 宛先;
         this.地方公共団体 = 地方公共団体;
         this.帳票制御共通 = 帳票制御共通;

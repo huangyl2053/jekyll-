@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmenshinseishotaishohaaku.G
 import jp.co.ndensan.reams.db.dbd.service.core.gemmenshinseishotaishohaaku.ZenNendoResearcher;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
+import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.honninkubun.HonninKubun;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -47,10 +48,14 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  */
 public class GemmenGengakuTaishoGaiShaListCsvProcess extends BatchProcessBase<GemmenGengakuTaishoGaiShaEntity> {
 
-    private static final RString MYBATIS_SELECT_ID_負担限度額認定 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenshinseishotaishohaaku.IGemmenGengakuTaishoGaiShaListCsvMapper.get減免減額更新申請対象外者一覧CSV情報_負担限度額認定");
-    private static final RString MYBATIS_SELECT_ID_利用者負担額減額 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenshinseishotaishohaaku.IGemmenGengakuTaishoGaiShaListCsvMapper.get減免減額更新申請対象外者一覧CSV情報_利用者負担額減額");
-    private static final RString MYBATIS_SELECT_ID_訪問介護利用者負担額減額 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenshinseishotaishohaaku.IGemmenGengakuTaishoGaiShaListCsvMapper.get減免減額更新申請対象外者一覧CSV情報_訪問介護利用者負担額減額");
-    private static final RString MYBATIS_SELECT_ID_社会福祉法人等利用者負担軽減 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenshinseishotaishohaaku.IGemmenGengakuTaishoGaiShaListCsvMapper.get減免減額更新申請対象外者一覧CSV情報_社会福祉法人等利用者負担軽減");
+    private static final RString MYBATIS_SELECT_ID_負担限度額認定 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate"
+            + ".gemmenshinseishotaishohaaku.IGemmenGengakuTaishoGaiShaListCsvMapper.get減免減額更新申請対象外者一覧CSV情報_負担限度額認定");
+    private static final RString MYBATIS_SELECT_ID_利用者負担額減額 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate"
+            + ".gemmenshinseishotaishohaaku.IGemmenGengakuTaishoGaiShaListCsvMapper.get減免減額更新申請対象外者一覧CSV情報_利用者負担額減額");
+    private static final RString MYBATIS_SELECT_ID_訪問介護利用者 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper"
+            + ".relate.gemmenshinseishotaishohaaku.IGemmenGengakuTaishoGaiShaListCsvMapper.get減免減額更新申請対象外者一覧CSV情報_訪問介護利用者負担額減額");
+    private static final RString MYBATIS_SELECT_ID_社会福祉法人 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper"
+            + ".relate.gemmenshinseishotaishohaaku.IGemmenGengakuTaishoGaiShaListCsvMapper.get減免減額更新申請対象外者一覧CSV情報_社会福祉法人等利用者負担軽減");
 
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBD102001"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
@@ -76,13 +81,13 @@ public class GemmenGengakuTaishoGaiShaListCsvProcess extends BatchProcessBase<Ge
     @Override
     protected IBatchReader createReader() {
         if (processParamter.get減免減額種類().equals(GemmenGengakuShurui.負担限度額認定)) {
-            return new BatchDbReader(MYBATIS_SELECT_ID_負担限度額認定, processParamter.GemmenGengakuTaishoGaiShaListMyBatisParameter(開始日, 終了日));
+            return new BatchDbReader(MYBATIS_SELECT_ID_負担限度額認定, processParamter.toGemmenGengakuTaishoGaiShaListMyBatisParameter(開始日, 終了日));
         } else if (processParamter.get減免減額種類().equals(GemmenGengakuShurui.利用者負担額減額)) {
-            return new BatchDbReader(MYBATIS_SELECT_ID_利用者負担額減額, processParamter.GemmenGengakuTaishoGaiShaListMyBatisParameter(開始日, 終了日));
+            return new BatchDbReader(MYBATIS_SELECT_ID_利用者負担額減額, processParamter.toGemmenGengakuTaishoGaiShaListMyBatisParameter(開始日, 終了日));
         } else if (processParamter.get減免減額種類().equals(GemmenGengakuShurui.訪問介護利用者負担額減額)) {
-            return new BatchDbReader(MYBATIS_SELECT_ID_訪問介護利用者負担額減額, processParamter.GemmenGengakuTaishoGaiShaListMyBatisParameter(開始日, 終了日));
+            return new BatchDbReader(MYBATIS_SELECT_ID_訪問介護利用者, processParamter.toGemmenGengakuTaishoGaiShaListMyBatisParameter(開始日, 終了日));
         } else {
-            return new BatchDbReader(MYBATIS_SELECT_ID_社会福祉法人等利用者負担軽減, processParamter.GemmenGengakuTaishoGaiShaListMyBatisParameter(開始日, 終了日));
+            return new BatchDbReader(MYBATIS_SELECT_ID_社会福祉法人, processParamter.toGemmenGengakuTaishoGaiShaListMyBatisParameter(開始日, 終了日));
         }
     }
 
@@ -137,7 +142,13 @@ public class GemmenGengakuTaishoGaiShaListCsvProcess extends BatchProcessBase<Ge
         csvEntity.set識別コード(list.get識別コード().value());
         csvEntity.set市町村コード(list.get市町村コード().value());
         csvEntity.set基準年月日(set年月日(list.get基準年月日()));
-        csvEntity.set所得年度(list.get所得年度().toDateString());
+
+        if (list.get所得年度() == null) {
+            csvEntity.set所得年度(RString.EMPTY);
+        } else {
+            csvEntity.set所得年度(list.get所得年度().toDateString());
+        }
+
         csvEntity.set証記載保険者番号(list.get証記載保険者番号().value());
         csvEntity.set世帯課税(list.get世帯課税区分());
         csvEntity.set利用者負担段階(list.get利用者負担段階());
@@ -153,10 +164,29 @@ public class GemmenGengakuTaishoGaiShaListCsvProcess extends BatchProcessBase<Ge
         } else {
             csvEntity.set所得税区分(KazeiKubun.非課税.get名称());
         }
-        csvEntity.set課税区分(list.get課税区分());
-        csvEntity.set入所施設コード(list.get入所施設コード());
-        csvEntity.set入所施設名称(list.get入所施設名称());
-        csvEntity.set要介護度(YokaigoJotaiKubunSupport.toValue(list.get厚労省IF識別コード(), list.get要介護認定状態区分コード()).getName());
+        if (list.get課税区分() == null) {
+            csvEntity.set課税区分(RString.EMPTY);
+        } else {
+            csvEntity.set課税区分(list.get課税区分());
+        }
+        if (list.get入所施設コード() == null) {
+            csvEntity.set入所施設コード(RString.EMPTY);
+        } else {
+            csvEntity.set入所施設コード(list.get入所施設コード());
+        }
+        if (list.get入所施設名称() == null) {
+            csvEntity.set入所施設名称(RString.EMPTY);
+        } else {
+            csvEntity.set入所施設名称(list.get入所施設名称());
+        }
+
+        if (list.get厚労省IF識別コード() == null) {
+            csvEntity.set要介護度(RString.EMPTY);
+        } else {
+            csvEntity.set要介護度(YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(list.get厚労省IF識別コード()),
+                    list.get要介護認定状態区分コード()).getName());
+        }
+
         csvEntity.set旧措置(list.get旧措置());
         csvEntity.set要介護認定日(set年月日(list.get要介護認定日()));
         csvEntity.set認定開始日(set年月日(list.get認定開始日()));

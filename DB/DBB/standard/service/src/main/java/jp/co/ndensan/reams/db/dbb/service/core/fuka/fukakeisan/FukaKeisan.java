@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.KoseiTaishoParam
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.KoseiZengoChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.KoseiZengoFuka;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.NendobunFukaList;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJohoBuilder;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
@@ -1004,10 +1005,10 @@ public class FukaKeisan {
      * @return FukaJoho
      */
     public FukaJoho reflect賦課根拠(FukaKokyoParameter param) {
-        FukaJoho 賦課の情報 = param.get賦課の情報_設定前();
-        if (賦課の情報 == null) {
+        if (param.get賦課の情報_設定前() == null) {
             return null;
         }
+        FukaJoho 賦課の情報 = 賦課の情報クローン(param.get賦課の情報_設定前());
         FukaJohoBuilder builder = 賦課の情報.createBuilderForEdit();
         FlexibleDate 本年度開始日 = new FlexibleDate(NendoUtil.toNendoStartDate(賦課の情報.get賦課年度()).toDateString());
         FlexibleDate 本年度終了日 = new FlexibleDate(賦課の情報.get賦課年度().plusYear(INT_1).getYearValue(),
@@ -1031,10 +1032,10 @@ public class FukaKeisan {
      * @return FukaJoho
      */
     public FukaJoho reflect賦課根拠(FukaKokyoBatchParameter param) {
-        FukaJoho 賦課の情報 = param.get賦課の情報_設定前();
-        if (賦課の情報 == null) {
+        if (param.get賦課の情報_設定前() == null) {
             return null;
         }
+        FukaJoho 賦課の情報 = 賦課の情報クローン(param.get賦課の情報_設定前());
         FukaJohoBuilder builder = 賦課の情報.createBuilderForEdit();
         FlexibleDate 本年度開始日 = new FlexibleDate(NendoUtil.toNendoStartDate(賦課の情報.get賦課年度()).toDateString());
         FlexibleDate 本年度終了日 = new FlexibleDate(賦課の情報.get賦課年度().plusYear(INT_1).getYearValue(),
@@ -1049,6 +1050,24 @@ public class FukaKeisan {
         set新しい賦課の情報_バッチ(builder, param);
         賦課の情報 = builder.build();
         return 賦課の情報;
+    }
+
+    private FukaJoho 賦課の情報クローン(FukaJoho 賦課の情報) {
+        FukaJohoRelateEntity 賦課RelateEntity = new FukaJohoRelateEntity();
+        賦課RelateEntity.set介護賦課Entity(賦課の情報.toEntity());
+        List<KibetsuEntity> 介護期別RelateEntity = new ArrayList<>();
+        for (Kibetsu kibetsu : 賦課の情報.getKibetsuList()) {
+            KibetsuEntity entity = new KibetsuEntity();
+            List<UrT0705ChoteiKyotsuEntity> 調定共通Entity = new ArrayList<>();
+            for (ChoteiKyotsu choteiKyotsu : kibetsu.getChoteiKyotsuList()) {
+                調定共通Entity.add(choteiKyotsu.toEntity());
+            }
+            entity.set介護期別Entity(kibetsu.toEntity());
+            entity.set調定共通Entity(調定共通Entity);
+            介護期別RelateEntity.add(entity);
+        }
+        賦課RelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
+        return new FukaJoho(賦課RelateEntity);
     }
 
     private void set生活保護(FukaJohoBuilder builder, List<SeikatsuHogoJukyusha> 生保情報のリスト,

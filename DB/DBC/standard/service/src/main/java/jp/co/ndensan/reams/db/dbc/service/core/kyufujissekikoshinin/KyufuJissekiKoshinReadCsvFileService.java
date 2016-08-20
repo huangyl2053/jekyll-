@@ -8,8 +8,6 @@ package jp.co.ndensan.reams.db.dbc.service.core.kyufujissekikoshinin;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KyufuJissekiRecordShubetsu;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekiyoshikikubun.KyufuJissekiYoshikiKubun;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kyufujissekikoshinin.KyufuJissekiKoshinJohoControlCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kyufujissekikoshinin.KyufuJissekiKoshinJohoCsvKihonMeisaiOneEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kyufujissekikoshinin.KyufuJissekiKoshinJohoCsvKihonMeisaiTwoEntity;
@@ -17,9 +15,9 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kyufujissekikoshinin.KyufuJissekiKo
 import jp.co.ndensan.reams.db.dbc.entity.csv.kyufujissekikoshinin.KyufuJissekiKoshinJohoCsvRecordKensuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kyufujissekikoshinin.KyufuJissekiKoshinJohoCsvTaisyogaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kyufujissekikoshinin.KyufuJissekiKoshinJohoDataEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.DbWT1111KyufuJissekiTempEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufujissekikoshinin.IKyufuJissekiKoshinJohoMapper;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT0001HihokenshaIchijiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.DbWT1111KyufuJissekiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002KokuhorenTorikomiErrorEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -28,9 +26,12 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.db.dbz.business.core.hokenshainputguide.Hokensha;
 import jp.co.ndensan.reams.db.dbz.service.core.hokensha.HokenshaNyuryokuHojoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
+import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -93,161 +94,161 @@ public class KyufuJissekiKoshinReadCsvFileService {
      * @param kihonMeisaiTwo KyufuJissekiKoshinJohoCsvKihonMeisaiTwoEntity
      * @param kougakuKaigoMeisai
      * KyufuJissekiKoshinJohoCsvKougakuKaigoMeisaiEntity
-     * @param mapper IKyufuJissekiKoshinJohoMapper
+     * @param tableWriter IBatchTableWriter
      *
      */
     public void insert給付実績一時TBL(int 連番, KyufuJissekiKoshinJohoCsvRecordKensuEntity recordKensu,
             KyufuJissekiKoshinJohoControlCSVEntity controlEntity,
             KyufuJissekiKoshinJohoCsvKihonMeisaiOneEntity kihonMeisaiOne,
             KyufuJissekiKoshinJohoCsvKihonMeisaiTwoEntity kihonMeisaiTwo,
-            KyufuJissekiKoshinJohoCsvKougakuKaigoMeisaiEntity kougakuKaigoMeisai, IKyufuJissekiKoshinJohoMapper mapper) {
+            KyufuJissekiKoshinJohoCsvKougakuKaigoMeisaiEntity kougakuKaigoMeisai, IBatchTableWriter tableWriter) {
 
-        DbWT1111KyufuJissekiTempEntity temp = new DbWT1111KyufuJissekiTempEntity();
+        DbWT1111KyufuJissekiEntity temp = new DbWT1111KyufuJissekiEntity();
         if (null != kihonMeisaiOne) {
-            temp.set連番(連番);
-            temp.set交換情報識別番号(kihonMeisaiOne.get交換情報識別番号());
-            temp.set入力識別番号(new NyuryokuShikibetsuNo(kihonMeisaiOne.get入力識別番号()));
-            temp.setレコード種別コード(kihonMeisaiOne.getレコード種別コード());
-            temp.set給付実績情報作成区分コード(kihonMeisaiOne.get給付実績情報作成区分コード());
-            temp.setサービス提供年月(kihonMeisaiOne.getサービス提供年月());
-            temp.set給付実績区分(kihonMeisaiOne.get給付実績区分コード());
+            temp.setRenban(連番);
+            temp.setKokanJohoShikibetsuNo(kihonMeisaiOne.get交換情報識別番号());
+            temp.setNyuryokuShikibetsuNo(new NyuryokuShikibetsuNo(kihonMeisaiOne.get入力識別番号()));
+            temp.setRecordShubetsuCode(kihonMeisaiOne.getレコード種別コード());
+            temp.setKyufuJissekiSakuseiKubunCode(kihonMeisaiOne.get給付実績情報作成区分コード());
+            temp.setServiceTeikyoYM(kihonMeisaiOne.getサービス提供年月());
+            temp.setKyufuJissekiKubun(kihonMeisaiOne.get給付実績区分コード());
             if (null != kihonMeisaiOne.get事業所番号()) {
-                temp.set事業所番号(new JigyoshaNo(kihonMeisaiOne.get事業所番号()));
+                temp.setJigyoshoNo(new JigyoshaNo(kihonMeisaiOne.get事業所番号()));
             } else {
-                temp.set事業所番号(JigyoshaNo.EMPTY);
+                temp.setJigyoshoNo(JigyoshaNo.EMPTY);
             }
             if (null != kihonMeisaiOne.get整理番号()) {
-                temp.set整理番号(kihonMeisaiOne.get整理番号());
+                temp.setSeiriNo(kihonMeisaiOne.get整理番号());
             } else {
-                temp.set整理番号(RString.EMPTY);
+                temp.setSeiriNo(RString.EMPTY);
             }
-            temp.set件数_H1(recordKensu.get件数_H1());
-            temp.set件数_D1(recordKensu.get件数_D1());
-            temp.set件数_DD(recordKensu.get件数_DD());
-            temp.set件数_D2(recordKensu.get件数_D2());
-            temp.set件数_DC(recordKensu.get件数_DC());
-            temp.set件数_D3(recordKensu.get件数_D3());
-            temp.set件数_D4(recordKensu.get件数_D4());
-            temp.set件数_D5(recordKensu.get件数_D5());
-            temp.set件数_D6(recordKensu.get件数_D6());
-            temp.set件数_D7(recordKensu.get件数_D7());
-            temp.set件数_D8(recordKensu.get件数_D8());
-            temp.set件数_DE(recordKensu.get件数_DE());
-            temp.set件数_T1(recordKensu.get件数_T1());
-            temp.set件数_D9(recordKensu.get件数_D9());
-            temp.set件数_DA(recordKensu.get件数_DA());
-            temp.set件数_DB(recordKensu.get件数_DB());
-            temp.set警告区分コード(kihonMeisaiOne.get警告区分コード());
-            temp.setコントロールレコード保険者番号(new HokenshaNo(controlEntity.get保険者番号()));
+            temp.setRecordKensuH1(recordKensu.get件数_H1());
+            temp.setRecordKensuD1(recordKensu.get件数_D1());
+            temp.setRecordKensuDD(recordKensu.get件数_DD());
+            temp.setRecordKensuD2(recordKensu.get件数_D2());
+            temp.setRecordKensuDC(recordKensu.get件数_DC());
+            temp.setRecordKensuD3(recordKensu.get件数_D3());
+            temp.setRecordKensuD4(recordKensu.get件数_D4());
+            temp.setRecordKensuD5(recordKensu.get件数_D5());
+            temp.setRecordKensuD6(recordKensu.get件数_D6());
+            temp.setRecordKensuD7(recordKensu.get件数_D7());
+            temp.setRecordKensuD8(recordKensu.get件数_D8());
+            temp.setRecordKensuDE(recordKensu.get件数_DE());
+            temp.setRecordKensuT1(recordKensu.get件数_T1());
+            temp.setRecordKensuD9(recordKensu.get件数_D9());
+            temp.setRecordKensuDA(recordKensu.get件数_DA());
+            temp.setRecordKensuDB(recordKensu.get件数_DB());
+            temp.setKeikokuKubunCode(kihonMeisaiOne.get警告区分コード());
+            temp.setHokenshaNo(new HokenshaNo(controlEntity.get保険者番号()));
             HokenshaNyuryokuHojoFinder hokenshaNyuryokuHojoFinder = HokenshaNyuryokuHojoFinder.createInstance();
             Hokensha hokensha = hokenshaNyuryokuHojoFinder.getHokensha(new HokenjaNo(controlEntity.get保険者番号()));
             if (hokensha != null) {
-                temp.setコントロールレコード保険者名(hokensha.get保険者名());
+                temp.setHokenshaName(hokensha.get保険者名());
             } else {
-                temp.setコントロールレコード保険者名(RString.EMPTY);
+                temp.setHokenshaName(RString.EMPTY);
             }
-            temp.set事業者名称(RString.EMPTY);
-            temp.set入力識別名称(RString.EMPTY);
-            mapper.do給付実績一時TBLに登録(temp);
-
+            temp.setJigyoshaName(RString.EMPTY);
+            temp.setNyuryokuShikibetsuMeisho(RString.EMPTY);
+            temp.setState(EntityDataState.Added);
+            tableWriter.insert(temp);
         } else if (null != kihonMeisaiTwo) {
-            temp.set連番(連番);
-            temp.set交換情報識別番号(kihonMeisaiTwo.get交換情報識別番号());
-            temp.set入力識別番号(new NyuryokuShikibetsuNo(kihonMeisaiTwo.get入力識別番号()));
-            temp.setレコード種別コード(kihonMeisaiTwo.getレコード種別コード());
-            temp.set給付実績情報作成区分コード(kihonMeisaiTwo.get給付実績情報作成区分コード());
-            temp.setサービス提供年月(kihonMeisaiTwo.getサービス提供年月());
-            temp.set給付実績区分(kihonMeisaiTwo.get給付実績区分コード());
+            temp.setRenban(連番);
+            temp.setKokanJohoShikibetsuNo(kihonMeisaiTwo.get交換情報識別番号());
+            temp.setNyuryokuShikibetsuNo(new NyuryokuShikibetsuNo(kihonMeisaiTwo.get入力識別番号()));
+            temp.setRecordShubetsuCode(kihonMeisaiTwo.getレコード種別コード());
+            temp.setKyufuJissekiSakuseiKubunCode(kihonMeisaiTwo.get給付実績情報作成区分コード());
+            temp.setServiceTeikyoYM(kihonMeisaiTwo.getサービス提供年月());
+            temp.setKyufuJissekiKubun(kihonMeisaiTwo.get給付実績区分コード());
             if (null != kihonMeisaiTwo.get事業所番号()) {
-                temp.set事業所番号(new JigyoshaNo(kihonMeisaiTwo.get事業所番号()));
+                temp.setJigyoshoNo(new JigyoshaNo(kihonMeisaiTwo.get事業所番号()));
             } else {
-                temp.set事業所番号(JigyoshaNo.EMPTY);
+                temp.setJigyoshoNo(JigyoshaNo.EMPTY);
             }
             if (null != kihonMeisaiTwo.get整理番号()) {
-                temp.set整理番号(kihonMeisaiTwo.get整理番号());
+                temp.setSeiriNo(kihonMeisaiTwo.get整理番号());
             } else {
-                temp.set整理番号(RString.EMPTY);
+                temp.setSeiriNo(RString.EMPTY);
             }
-            temp.set件数_H1(recordKensu.get件数_H1());
-            temp.set件数_D1(recordKensu.get件数_D1());
-            temp.set件数_DD(recordKensu.get件数_DD());
-            temp.set件数_D2(recordKensu.get件数_D2());
-            temp.set件数_DC(recordKensu.get件数_DC());
-            temp.set件数_D3(recordKensu.get件数_D3());
-            temp.set件数_D4(recordKensu.get件数_D4());
-            temp.set件数_D5(recordKensu.get件数_D5());
-            temp.set件数_D6(recordKensu.get件数_D6());
-            temp.set件数_D7(recordKensu.get件数_D7());
-            temp.set件数_D8(recordKensu.get件数_D8());
-            temp.set件数_DE(recordKensu.get件数_DE());
-            temp.set件数_T1(recordKensu.get件数_T1());
-            temp.set件数_D9(recordKensu.get件数_D9());
-            temp.set件数_DA(recordKensu.get件数_DA());
-            temp.set件数_DB(recordKensu.get件数_DB());
-            temp.set警告区分コード(kihonMeisaiTwo.get警告区分コード());
-            temp.setコントロールレコード保険者番号(new HokenshaNo(controlEntity.get保険者番号()));
+            temp.setRecordKensuH1(recordKensu.get件数_H1());
+            temp.setRecordKensuD1(recordKensu.get件数_D1());
+            temp.setRecordKensuDD(recordKensu.get件数_DD());
+            temp.setRecordKensuD2(recordKensu.get件数_D2());
+            temp.setRecordKensuDC(recordKensu.get件数_DC());
+            temp.setRecordKensuD3(recordKensu.get件数_D3());
+            temp.setRecordKensuD3(recordKensu.get件数_D4());
+            temp.setRecordKensuD3(recordKensu.get件数_D5());
+            temp.setRecordKensuD6(recordKensu.get件数_D6());
+            temp.setRecordKensuD7(recordKensu.get件数_D7());
+            temp.setRecordKensuD8(recordKensu.get件数_D8());
+            temp.setRecordKensuDE(recordKensu.get件数_DE());
+            temp.setRecordKensuT1(recordKensu.get件数_T1());
+            temp.setRecordKensuD9(recordKensu.get件数_D9());
+            temp.setRecordKensuDA(recordKensu.get件数_DA());
+            temp.setRecordKensuDB(recordKensu.get件数_DB());
+            temp.setKeikokuKubunCode(kihonMeisaiTwo.get警告区分コード());
+            temp.setHokenshaNo(new HokenshaNo(controlEntity.get保険者番号()));
             HokenshaNyuryokuHojoFinder hokenshaNyuryokuHojoFinder = HokenshaNyuryokuHojoFinder.createInstance();
             Hokensha hokensha = hokenshaNyuryokuHojoFinder.getHokensha(new HokenjaNo(controlEntity.get保険者番号()));
             if (hokensha != null) {
-                temp.setコントロールレコード保険者名(hokensha.get保険者名());
+                temp.setHokenshaName(hokensha.get保険者名());
             } else {
-                temp.setコントロールレコード保険者名(RString.EMPTY);
+                temp.setHokenshaName(RString.EMPTY);
             }
-            temp.set事業者名称(RString.EMPTY);
-            temp.set入力識別名称(RString.EMPTY);
-            mapper.do給付実績一時TBLに登録(temp);
-
+            temp.setJigyoshaName(RString.EMPTY);
+            temp.setNyuryokuShikibetsuMeisho(RString.EMPTY);
+            temp.setState(EntityDataState.Added);
+            tableWriter.insert(temp);
         } else if (null != kougakuKaigoMeisai) {
-            temp.set連番(連番);
-            temp.set交換情報識別番号(kougakuKaigoMeisai.get交換情報識別番号());
+            temp.setRenban(連番);
+            temp.setKokanJohoShikibetsuNo(kougakuKaigoMeisai.get交換情報識別番号());
 
             if (null != kougakuKaigoMeisai.get入力識別番号()) {
-                temp.set入力識別番号(new NyuryokuShikibetsuNo(kougakuKaigoMeisai.get入力識別番号()));
+                temp.setNyuryokuShikibetsuNo(new NyuryokuShikibetsuNo(kougakuKaigoMeisai.get入力識別番号()));
             } else {
                 if (KyufuJissekiRecordShubetsu.介護給付費_高額介護サービス費情報レコード.getコード()
                         .equals(kougakuKaigoMeisai.getレコード種別コード())) {
-                    temp.set入力識別番号(new NyuryokuShikibetsuNo(入力識別番号_3411));
+                    temp.setNyuryokuShikibetsuNo(new NyuryokuShikibetsuNo(入力識別番号_3411));
                 } else if (KyufuJissekiRecordShubetsu.総合事業費_高額介護サービス費情報レコード.getコード()
                         .equals(kougakuKaigoMeisai.getレコード種別コード())) {
-                    temp.set入力識別番号(new NyuryokuShikibetsuNo(入力識別番号_3421));
+                    temp.setNyuryokuShikibetsuNo(new NyuryokuShikibetsuNo(入力識別番号_3421));
                 }
             }
-            temp.setレコード種別コード(kougakuKaigoMeisai.getレコード種別コード());
-            temp.set給付実績情報作成区分コード(kougakuKaigoMeisai.get給付実績情報作成区分コード());
-            temp.setサービス提供年月(kougakuKaigoMeisai.getサービス提供年月());
-            temp.set給付実績区分(kougakuKaigoMeisai.get給付実績区分コード());
-            temp.set事業所番号(JigyoshaNo.EMPTY);
-            temp.set整理番号(RString.EMPTY);
-            temp.set件数_H1(recordKensu.get件数_H1());
-            temp.set件数_D1(recordKensu.get件数_D1());
-            temp.set件数_DD(recordKensu.get件数_DD());
-            temp.set件数_D2(recordKensu.get件数_D2());
-            temp.set件数_DC(recordKensu.get件数_DC());
-            temp.set件数_D3(recordKensu.get件数_D3());
-            temp.set件数_D4(recordKensu.get件数_D4());
-            temp.set件数_D5(recordKensu.get件数_D5());
-            temp.set件数_D6(recordKensu.get件数_D6());
-            temp.set件数_D7(recordKensu.get件数_D7());
-            temp.set件数_D8(recordKensu.get件数_D8());
-            temp.set件数_DE(recordKensu.get件数_DE());
-            temp.set件数_T1(recordKensu.get件数_T1());
-            temp.set件数_D9(recordKensu.get件数_D9());
-            temp.set件数_DA(recordKensu.get件数_DA());
-            temp.set件数_DB(recordKensu.get件数_DB());
-            temp.set警告区分コード(RString.EMPTY);
-            temp.setコントロールレコード保険者番号(new HokenshaNo(controlEntity.get保険者番号()));
+            temp.setRecordShubetsuCode(kougakuKaigoMeisai.getレコード種別コード());
+            temp.setKyufuJissekiSakuseiKubunCode(kougakuKaigoMeisai.get給付実績情報作成区分コード());
+            temp.setServiceTeikyoYM(kougakuKaigoMeisai.getサービス提供年月());
+            temp.setKyufuJissekiKubun(kougakuKaigoMeisai.get給付実績区分コード());
+            temp.setJigyoshoNo(JigyoshaNo.EMPTY);
+            temp.setSeiriNo(RString.EMPTY);
+            temp.setRecordKensuH1(recordKensu.get件数_H1());
+            temp.setRecordKensuD1(recordKensu.get件数_D1());
+            temp.setRecordKensuDD(recordKensu.get件数_DD());
+            temp.setRecordKensuD2(recordKensu.get件数_D2());
+            temp.setRecordKensuDC(recordKensu.get件数_DC());
+            temp.setRecordKensuD3(recordKensu.get件数_D3());
+            temp.setRecordKensuD3(recordKensu.get件数_D4());
+            temp.setRecordKensuD3(recordKensu.get件数_D5());
+            temp.setRecordKensuD6(recordKensu.get件数_D6());
+            temp.setRecordKensuD7(recordKensu.get件数_D7());
+            temp.setRecordKensuD8(recordKensu.get件数_D8());
+            temp.setRecordKensuDE(recordKensu.get件数_DE());
+            temp.setRecordKensuT1(recordKensu.get件数_T1());
+            temp.setRecordKensuD9(recordKensu.get件数_D9());
+            temp.setRecordKensuDA(recordKensu.get件数_DA());
+            temp.setRecordKensuDB(recordKensu.get件数_DB());
+            temp.setKeikokuKubunCode(RString.EMPTY);
+            temp.setHokenshaNo(new HokenshaNo(controlEntity.get保険者番号()));
             HokenshaNyuryokuHojoFinder hokenshaNyuryokuHojoFinder = HokenshaNyuryokuHojoFinder.createInstance();
             Hokensha hokensha = hokenshaNyuryokuHojoFinder.getHokensha(new HokenjaNo(controlEntity.get保険者番号()));
             if (hokensha != null) {
-                temp.setコントロールレコード保険者名(hokensha.get保険者名());
+                temp.setHokenshaName(hokensha.get保険者名());
             } else {
-                temp.setコントロールレコード保険者名(RString.EMPTY);
+                temp.setHokenshaName(RString.EMPTY);
             }
-            temp.set事業者名称(RString.EMPTY);
-            temp.set入力識別名称(RString.EMPTY);
-            mapper.do給付実績一時TBLに登録(temp);
+            temp.setJigyoshaName(RString.EMPTY);
+            temp.setNyuryokuShikibetsuMeisho(RString.EMPTY);
+            temp.setState(EntityDataState.Added);
+            tableWriter.insert(temp);
         }
-
     }
 
     /**
@@ -258,139 +259,138 @@ public class KyufuJissekiKoshinReadCsvFileService {
      * @param kihonMeisaiTwo KyufuJissekiKoshinJohoCsvKihonMeisaiTwoEntity
      * @param kougakuKaigoMeisai
      * KyufuJissekiKoshinJohoCsvKougakuKaigoMeisaiEntity
-     * @param hokenshaMapper IKokuhorenKyoutsuuTempTableMapper
+     * @param tableWriter IBatchTableWriter
      *
      */
     public void insert被保険者一時TBL(int 連番, KyufuJissekiKoshinJohoCsvKihonMeisaiOneEntity kihonMeisaiOne,
             KyufuJissekiKoshinJohoCsvKihonMeisaiTwoEntity kihonMeisaiTwo,
-            KyufuJissekiKoshinJohoCsvKougakuKaigoMeisaiEntity kougakuKaigoMeisai, IKokuhorenKyoutsuuTempTableMapper hokenshaMapper) {
+            KyufuJissekiKoshinJohoCsvKougakuKaigoMeisaiEntity kougakuKaigoMeisai, IBatchTableWriter tableWriter) {
 
-        DbWT0001HihokenshaTempEntity hihokensha = new DbWT0001HihokenshaTempEntity();
+        DbWT0001HihokenshaIchijiEntity hihokensha = new DbWT0001HihokenshaIchijiEntity();
         if (null != kihonMeisaiOne) {
 
-            hihokensha.set連番(連番);
+            hihokensha.setMeisaiRenban(連番);
             if (!RString.isNullOrEmpty(kihonMeisaiOne.get証記載保険者番号())) {
-                hihokensha.set証記載保険者番号(new ShoKisaiHokenshaNo(kihonMeisaiOne.get証記載保険者番号()));
+                hihokensha.setShoHokenshaNo(new ShoKisaiHokenshaNo(kihonMeisaiOne.get証記載保険者番号()));
             }
             if (!RString.isNullOrEmpty(kihonMeisaiOne.get被保険者番号())) {
-                hihokensha.set被保険者番号(new HihokenshaNo(kihonMeisaiOne.get被保険者番号()));
+                hihokensha.setOrgHihokenshaNo(new HihokenshaNo(kihonMeisaiOne.get被保険者番号()));
             }
             if (null != kihonMeisaiOne.getサービス提供年月()) {
                 int lastDay = kihonMeisaiOne.getサービス提供年月().getLastDay();
-                hihokensha.setサービス提供年月末日(new FlexibleDate(kihonMeisaiOne.getサービス提供年月().toDateString()
+                hihokensha.setServiceTeikyoYmd(new FlexibleDate(kihonMeisaiOne.getサービス提供年月().toDateString()
                         .concat(new RString(lastDay))));
             }
-            hihokensha.set被保険者カナ氏名(RString.EMPTY);
-            hihokensha.set被保険者氏名(RString.EMPTY);
-            hihokensha.set旧市町村コード(LasdecCode.EMPTY);
-            hihokensha.set変換被保険者番号(null);
+            hihokensha.setOrgHihokenshaKanaShimei(RString.EMPTY);
+            hihokensha.setOrgHihokenshaShimei(RString.EMPTY);
+            hihokensha.setOldShichosonCode(LasdecCode.EMPTY);
+            hihokensha.setHenkanHihokenshaNo(null);
             if (!RString.isNullOrEmpty(kihonMeisaiOne.get被保険者番号())) {
-                hihokensha.set登録被保険者番号(new HihokenshaNo(kihonMeisaiOne.get被保険者番号()));
+                hihokensha.setHihokenshaNo(new HihokenshaNo(kihonMeisaiOne.get被保険者番号()));
             }
-            hihokensha.set市町村コード(LasdecCode.EMPTY);
-            hihokensha.set管内管外区分(RString.EMPTY);
-            hihokensha.set郵便番号(RString.EMPTY);
-            hihokensha.set町域コード(RString.EMPTY);
-            hihokensha.set行政区コード(RString.EMPTY);
-            hihokensha.set行政区名(RString.EMPTY);
-            hihokensha.set住所(RString.EMPTY);
-            hihokensha.set番地(RString.EMPTY);
-            hihokensha.set方書(RString.EMPTY);
-            hihokensha.set宛名カナ名称(RString.EMPTY);
-            hihokensha.set宛名名称(RString.EMPTY);
-            hihokensha.set氏名50音カナ(RString.EMPTY);
-            hihokensha.set識別コード(RString.EMPTY);
-            hihokensha.set資格取得日(null);
-            hihokensha.set資格取得事由コード(RString.EMPTY);
-            hihokensha.set資格喪失日(null);
-            hihokensha.set資格喪失事由コード(RString.EMPTY);
-            hihokensha.set世帯集約番号(RString.EMPTY);
-            hokenshaMapper.被保険者一時TBLに登録(hihokensha);
-
+            hihokensha.setShichosonCode(LasdecCode.EMPTY);
+            hihokensha.setKannaiKangaiKubun(RString.EMPTY);
+            hihokensha.setYubinNo(RString.EMPTY);
+            hihokensha.setChoikiCode(RString.EMPTY);
+            hihokensha.setGyoseikuCode(RString.EMPTY);
+            hihokensha.setGyoseikuMei(RString.EMPTY);
+            hihokensha.setJusho(RString.EMPTY);
+            hihokensha.setBanchi(RString.EMPTY);
+            hihokensha.setKatagaki(RString.EMPTY);
+            hihokensha.setKanaMeisho(RString.EMPTY);
+            hihokensha.setMeisho(RString.EMPTY);
+            hihokensha.setShimei50onKana(RString.EMPTY);
+            hihokensha.setShikibetsuCode(ShikibetsuCode.EMPTY);
+            hihokensha.setShikakuShutokuYmd(FlexibleDate.EMPTY);
+            hihokensha.setShikakuShutokuJiyuCode(RString.EMPTY);
+            hihokensha.setShikakuSoshitsuYmd(FlexibleDate.EMPTY);
+            hihokensha.setShikakuSoshitsuJiyuCode(RString.EMPTY);
+            hihokensha.setSetaiShuyakuNo(HihokenshaNo.EMPTY);
+            hihokensha.setState(EntityDataState.Added);
+            tableWriter.insert(hihokensha);
         } else if (null != kihonMeisaiTwo) {
 
-            hihokensha.set連番(連番);
+            hihokensha.setMeisaiRenban(連番);
             if (!RString.isNullOrEmpty(kihonMeisaiTwo.get証記載保険者番号())) {
-                hihokensha.set証記載保険者番号(new ShoKisaiHokenshaNo(kihonMeisaiTwo.get証記載保険者番号()));
+                hihokensha.setShoHokenshaNo(new ShoKisaiHokenshaNo(kihonMeisaiTwo.get証記載保険者番号()));
             }
             if (!RString.isNullOrEmpty(kihonMeisaiTwo.get被保険者番号())) {
-                hihokensha.set被保険者番号(new HihokenshaNo(kihonMeisaiTwo.get被保険者番号()));
+                hihokensha.setOrgHihokenshaNo(new HihokenshaNo(kihonMeisaiTwo.get被保険者番号()));
             }
             if (null != kihonMeisaiTwo.getサービス提供年月()) {
                 int lastDay = kihonMeisaiTwo.getサービス提供年月().getLastDay();
-                hihokensha.setサービス提供年月末日(new FlexibleDate(kihonMeisaiTwo.getサービス提供年月().toDateString()
+                hihokensha.setServiceTeikyoYmd(new FlexibleDate(kihonMeisaiTwo.getサービス提供年月().toDateString()
                         .concat(new RString(lastDay))));
             }
-            hihokensha.set被保険者カナ氏名(RString.EMPTY);
-            hihokensha.set被保険者氏名(RString.EMPTY);
-            hihokensha.set旧市町村コード(LasdecCode.EMPTY);
-            hihokensha.set変換被保険者番号(null);
+            hihokensha.setOrgHihokenshaKanaShimei(RString.EMPTY);
+            hihokensha.setOrgHihokenshaShimei(RString.EMPTY);
+            hihokensha.setOldShichosonCode(LasdecCode.EMPTY);
+            hihokensha.setHenkanHihokenshaNo(null);
             if (!RString.isNullOrEmpty(kihonMeisaiTwo.get被保険者番号())) {
-                hihokensha.set登録被保険者番号(new HihokenshaNo(kihonMeisaiTwo.get被保険者番号()));
+                hihokensha.setHihokenshaNo(new HihokenshaNo(kihonMeisaiTwo.get被保険者番号()));
             }
-            hihokensha.set市町村コード(LasdecCode.EMPTY);
-            hihokensha.set管内管外区分(RString.EMPTY);
-            hihokensha.set郵便番号(RString.EMPTY);
-            hihokensha.set町域コード(RString.EMPTY);
-            hihokensha.set行政区コード(RString.EMPTY);
-            hihokensha.set行政区名(RString.EMPTY);
-            hihokensha.set住所(RString.EMPTY);
-            hihokensha.set番地(RString.EMPTY);
-            hihokensha.set方書(RString.EMPTY);
-            hihokensha.set宛名カナ名称(RString.EMPTY);
-            hihokensha.set宛名名称(RString.EMPTY);
-            hihokensha.set氏名50音カナ(RString.EMPTY);
-            hihokensha.set識別コード(RString.EMPTY);
-            hihokensha.set資格取得日(null);
-            hihokensha.set資格取得事由コード(RString.EMPTY);
-            hihokensha.set資格喪失日(null);
-            hihokensha.set資格喪失事由コード(RString.EMPTY);
-            hihokensha.set世帯集約番号(RString.EMPTY);
-            hokenshaMapper.被保険者一時TBLに登録(hihokensha);
-
+            hihokensha.setShichosonCode(LasdecCode.EMPTY);
+            hihokensha.setKannaiKangaiKubun(RString.EMPTY);
+            hihokensha.setYubinNo(RString.EMPTY);
+            hihokensha.setChoikiCode(RString.EMPTY);
+            hihokensha.setGyoseikuCode(RString.EMPTY);
+            hihokensha.setGyoseikuMei(RString.EMPTY);
+            hihokensha.setJusho(RString.EMPTY);
+            hihokensha.setBanchi(RString.EMPTY);
+            hihokensha.setKatagaki(RString.EMPTY);
+            hihokensha.setKanaMeisho(RString.EMPTY);
+            hihokensha.setMeisho(RString.EMPTY);
+            hihokensha.setShimei50onKana(RString.EMPTY);
+            hihokensha.setShikibetsuCode(ShikibetsuCode.EMPTY);
+            hihokensha.setShikakuShutokuYmd(FlexibleDate.EMPTY);
+            hihokensha.setShikakuShutokuJiyuCode(RString.EMPTY);
+            hihokensha.setShikakuSoshitsuYmd(FlexibleDate.EMPTY);
+            hihokensha.setShikakuSoshitsuJiyuCode(RString.EMPTY);
+            hihokensha.setSetaiShuyakuNo(HihokenshaNo.EMPTY);
+            hihokensha.setState(EntityDataState.Added);
+            tableWriter.insert(hihokensha);
         } else if (null != kougakuKaigoMeisai) {
 
-            hihokensha.set連番(連番);
+            hihokensha.setMeisaiRenban(連番);
             if (!RString.isNullOrEmpty(kougakuKaigoMeisai.get証記載保険者番号())) {
-                hihokensha.set証記載保険者番号(new ShoKisaiHokenshaNo(kougakuKaigoMeisai.get証記載保険者番号()));
+                hihokensha.setShoHokenshaNo(new ShoKisaiHokenshaNo(kougakuKaigoMeisai.get証記載保険者番号()));
             }
             if (!RString.isNullOrEmpty(kougakuKaigoMeisai.get被保険者番号())) {
-                hihokensha.set被保険者番号(new HihokenshaNo(kougakuKaigoMeisai.get被保険者番号()));
+                hihokensha.setOrgHihokenshaNo(new HihokenshaNo(kougakuKaigoMeisai.get被保険者番号()));
             }
             if (null != kougakuKaigoMeisai.getサービス提供年月()) {
                 int lastDay = kougakuKaigoMeisai.getサービス提供年月().getLastDay();
-                hihokensha.setサービス提供年月末日(new FlexibleDate(kougakuKaigoMeisai.getサービス提供年月().toDateString()
+                hihokensha.setServiceTeikyoYmd(new FlexibleDate(kougakuKaigoMeisai.getサービス提供年月().toDateString()
                         .concat(new RString(lastDay))));
             }
-            hihokensha.set被保険者カナ氏名(RString.EMPTY);
-            hihokensha.set被保険者氏名(RString.EMPTY);
-            hihokensha.set旧市町村コード(LasdecCode.EMPTY);
-            hihokensha.set変換被保険者番号(null);
+            hihokensha.setOrgHihokenshaKanaShimei(RString.EMPTY);
+            hihokensha.setOrgHihokenshaShimei(RString.EMPTY);
+            hihokensha.setOldShichosonCode(LasdecCode.EMPTY);
+            hihokensha.setHenkanHihokenshaNo(null);
             if (!RString.isNullOrEmpty(kougakuKaigoMeisai.get被保険者番号())) {
-                hihokensha.set登録被保険者番号(new HihokenshaNo(kougakuKaigoMeisai.get被保険者番号()));
+                hihokensha.setHihokenshaNo(new HihokenshaNo(kougakuKaigoMeisai.get被保険者番号()));
             }
-            hihokensha.set市町村コード(LasdecCode.EMPTY);
-            hihokensha.set管内管外区分(RString.EMPTY);
-            hihokensha.set郵便番号(RString.EMPTY);
-            hihokensha.set町域コード(RString.EMPTY);
-            hihokensha.set行政区コード(RString.EMPTY);
-            hihokensha.set行政区名(RString.EMPTY);
-            hihokensha.set住所(RString.EMPTY);
-            hihokensha.set番地(RString.EMPTY);
-            hihokensha.set方書(RString.EMPTY);
-            hihokensha.set宛名カナ名称(RString.EMPTY);
-            hihokensha.set宛名名称(RString.EMPTY);
-            hihokensha.set氏名50音カナ(RString.EMPTY);
-            hihokensha.set識別コード(RString.EMPTY);
-            hihokensha.set資格取得日(null);
-            hihokensha.set資格取得事由コード(RString.EMPTY);
-            hihokensha.set資格喪失日(null);
-            hihokensha.set資格喪失事由コード(RString.EMPTY);
-            hihokensha.set世帯集約番号(RString.EMPTY);
-            hokenshaMapper.被保険者一時TBLに登録(hihokensha);
-
+            hihokensha.setShichosonCode(LasdecCode.EMPTY);
+            hihokensha.setKannaiKangaiKubun(RString.EMPTY);
+            hihokensha.setYubinNo(RString.EMPTY);
+            hihokensha.setChoikiCode(RString.EMPTY);
+            hihokensha.setGyoseikuCode(RString.EMPTY);
+            hihokensha.setGyoseikuMei(RString.EMPTY);
+            hihokensha.setJusho(RString.EMPTY);
+            hihokensha.setBanchi(RString.EMPTY);
+            hihokensha.setKatagaki(RString.EMPTY);
+            hihokensha.setKanaMeisho(RString.EMPTY);
+            hihokensha.setMeisho(RString.EMPTY);
+            hihokensha.setShimei50onKana(RString.EMPTY);
+            hihokensha.setShikibetsuCode(ShikibetsuCode.EMPTY);
+            hihokensha.setShikakuShutokuYmd(FlexibleDate.EMPTY);
+            hihokensha.setShikakuShutokuJiyuCode(RString.EMPTY);
+            hihokensha.setShikakuSoshitsuYmd(FlexibleDate.EMPTY);
+            hihokensha.setShikakuSoshitsuJiyuCode(RString.EMPTY);
+            hihokensha.setSetaiShuyakuNo(HihokenshaNo.EMPTY);
+            hihokensha.setState(EntityDataState.Added);
+            tableWriter.insert(hihokensha);
         }
-
     }
 
     /**
@@ -404,7 +404,7 @@ public class KyufuJissekiKoshinReadCsvFileService {
      * KyufuJissekiKoshinJohoCsvKougakuKaigoMeisaiEntity
      * @param listCsvTaisyogaiMeisaiEntity
      * List<KyufuJissekiKoshinJohoCsvTaisyogaiMeisaiEntity>
-     * @param hokenshaMapper IKokuhorenKyoutsuuTempTableMapper
+     * @param tableWriter IBatchTableWriter
      * @return dataEntity KyufuJissekiKoshinJohoDataEntity
      *
      */
@@ -412,7 +412,7 @@ public class KyufuJissekiKoshinReadCsvFileService {
             KyufuJissekiKoshinJohoCsvKihonMeisaiTwoEntity kihonMeisaiTwoEntity,
             KyufuJissekiKoshinJohoCsvKougakuKaigoMeisaiEntity kougakuKaigoMeisaiEntity,
             List<KyufuJissekiKoshinJohoCsvTaisyogaiMeisaiEntity> listCsvTaisyogaiMeisaiEntity,
-            IKokuhorenKyoutsuuTempTableMapper hokenshaMapper) {
+            IBatchTableWriter tableWriter) {
         dataEntity = new KyufuJissekiKoshinJohoDataEntity();
         recordKensu = new KyufuJissekiKoshinJohoCsvRecordKensuEntity();
         組み合わせ不正フラグ = false;
@@ -439,30 +439,30 @@ public class KyufuJissekiKoshinReadCsvFileService {
         件数_DB = 0;
         RString 申請先頭レコードのキー項目値;
         RString 入力識別番号;
+        DbWT0002KokuhorenTorikomiErrorEntity errorTempentity = new DbWT0002KokuhorenTorikomiErrorEntity();
         if (null != kihonMeisaiOneEntity) {
             件数_H1 = 件数_H1 + 1;
             入力識別番号 = kihonMeisaiOneEntity.get入力識別番号();
             申請先頭レコードのキー項目値 = kihonMeisaiOneEntity.get交換情報識別番号().concat(入力識別番号)
                     .concat(kihonMeisaiOneEntity.get被保険者番号()).concat(kihonMeisaiOneEntity.getサービス提供年月().toDateString())
                     .concat(kihonMeisaiOneEntity.get事業所番号()).concat(kihonMeisaiOneEntity.get整理番号());
-            doキー項目値チェック(申請先頭レコードのキー項目値, listCsvTaisyogaiMeisaiEntity, hokenshaMapper);
+            doキー項目値チェック(申請先頭レコードのキー項目値, listCsvTaisyogaiMeisaiEntity, tableWriter);
             if (do件数チェック(入力識別番号)) {
                 setレコード件数();
                 dataEntity.setRecordNumber(recordKensu);
                 dataEntity.setKihonMeisaiOneEntity(kihonMeisaiOneEntity);
                 return dataEntity;
             } else {
-                DbWT0002KokuhorenTorikomiErrorTempEntity errorTempentity = new DbWT0002KokuhorenTorikomiErrorTempEntity();
-                errorTempentity.set証記載保険者番号(new ShoKisaiHokenshaNo(kihonMeisaiOneEntity.get証記載保険者番号()));
-                errorTempentity.set被保険者番号(new HihokenshaNo(kihonMeisaiOneEntity.get被保険者番号()));
-                errorTempentity.setキー1(kihonMeisaiOneEntity.get交換情報識別番号());
-                errorTempentity.setキー2(kihonMeisaiOneEntity.get入力識別番号());
-                errorTempentity.setキー3(kihonMeisaiOneEntity.getサービス提供年月().toDateString());
-                errorTempentity.setキー4(kihonMeisaiOneEntity.get事業所番号());
-                errorTempentity.setキー5(kihonMeisaiOneEntity.get整理番号());
-                組み合わせ不正登録(errorTempentity, hokenshaMapper);
-                必須レコードなし登録(errorTempentity, hokenshaMapper);
-                複数レコード不可登録(errorTempentity, hokenshaMapper);
+                errorTempentity.setShoHokanehshaNo(new ShoKisaiHokenshaNo(kihonMeisaiOneEntity.get証記載保険者番号()));
+                errorTempentity.setHihokenshaNo(new HihokenshaNo(kihonMeisaiOneEntity.get被保険者番号()));
+                errorTempentity.setKey1(kihonMeisaiOneEntity.get交換情報識別番号());
+                errorTempentity.setKey2(kihonMeisaiOneEntity.get入力識別番号());
+                errorTempentity.setKey3(kihonMeisaiOneEntity.getサービス提供年月().toDateString());
+                errorTempentity.setKey4(kihonMeisaiOneEntity.get事業所番号());
+                errorTempentity.setKey5(kihonMeisaiOneEntity.get整理番号());
+                組み合わせ不正登録(errorTempentity, tableWriter);
+                必須レコードなし登録(errorTempentity, tableWriter);
+                複数レコード不可登録(errorTempentity, tableWriter);
             }
         } else if (null != kihonMeisaiTwoEntity) {
             件数_H1 = 件数_H1 + 1;
@@ -470,24 +470,23 @@ public class KyufuJissekiKoshinReadCsvFileService {
             申請先頭レコードのキー項目値 = kihonMeisaiTwoEntity.get交換情報識別番号().concat(入力識別番号)
                     .concat(kihonMeisaiTwoEntity.get被保険者番号()).concat(kihonMeisaiTwoEntity.getサービス提供年月().toDateString())
                     .concat(kihonMeisaiTwoEntity.get事業所番号()).concat(kihonMeisaiTwoEntity.get整理番号());
-            doキー項目値チェック(申請先頭レコードのキー項目値, listCsvTaisyogaiMeisaiEntity, hokenshaMapper);
+            doキー項目値チェック(申請先頭レコードのキー項目値, listCsvTaisyogaiMeisaiEntity, tableWriter);
             if (do件数チェック(入力識別番号)) {
                 setレコード件数();
                 dataEntity.setRecordNumber(recordKensu);
                 dataEntity.setKihonMeisaiTwoEntity(kihonMeisaiTwoEntity);
                 return dataEntity;
             } else {
-                DbWT0002KokuhorenTorikomiErrorTempEntity errorTempentity = new DbWT0002KokuhorenTorikomiErrorTempEntity();
-                errorTempentity.set証記載保険者番号(new ShoKisaiHokenshaNo(kihonMeisaiTwoEntity.get証記載保険者番号()));
-                errorTempentity.set被保険者番号(new HihokenshaNo(kihonMeisaiTwoEntity.get被保険者番号()));
-                errorTempentity.setキー1(kihonMeisaiTwoEntity.get交換情報識別番号());
-                errorTempentity.setキー2(kihonMeisaiTwoEntity.get入力識別番号());
-                errorTempentity.setキー3(kihonMeisaiTwoEntity.getサービス提供年月().toDateString());
-                errorTempentity.setキー4(kihonMeisaiTwoEntity.get事業所番号());
-                errorTempentity.setキー5(kihonMeisaiTwoEntity.get整理番号());
-                組み合わせ不正登録(errorTempentity, hokenshaMapper);
-                必須レコードなし登録(errorTempentity, hokenshaMapper);
-                複数レコード不可登録(errorTempentity, hokenshaMapper);
+                errorTempentity.setShoHokanehshaNo(new ShoKisaiHokenshaNo(kihonMeisaiTwoEntity.get証記載保険者番号()));
+                errorTempentity.setHihokenshaNo(new HihokenshaNo(kihonMeisaiTwoEntity.get被保険者番号()));
+                errorTempentity.setKey1(kihonMeisaiTwoEntity.get交換情報識別番号());
+                errorTempentity.setKey2(kihonMeisaiTwoEntity.get入力識別番号());
+                errorTempentity.setKey3(kihonMeisaiTwoEntity.getサービス提供年月().toDateString());
+                errorTempentity.setKey4(kihonMeisaiTwoEntity.get事業所番号());
+                errorTempentity.setKey5(kihonMeisaiTwoEntity.get整理番号());
+                組み合わせ不正登録(errorTempentity, tableWriter);
+                必須レコードなし登録(errorTempentity, tableWriter);
+                複数レコード不可登録(errorTempentity, tableWriter);
             }
         } else if (null != kougakuKaigoMeisaiEntity) {
             if (KyufuJissekiRecordShubetsu.介護給付費_高額介護サービス費情報レコード.getコード()
@@ -501,54 +500,56 @@ public class KyufuJissekiKoshinReadCsvFileService {
             申請先頭レコードのキー項目値 = kougakuKaigoMeisaiEntity.get交換情報識別番号().concat(入力識別番号)
                     .concat(kougakuKaigoMeisaiEntity.get被保険者番号()).concat(kougakuKaigoMeisaiEntity.getサービス提供年月().toDateString())
                     .concat(RString.EMPTY).concat(RString.EMPTY);
-            doキー項目値チェック(申請先頭レコードのキー項目値, listCsvTaisyogaiMeisaiEntity, hokenshaMapper);
+            doキー項目値チェック(申請先頭レコードのキー項目値, listCsvTaisyogaiMeisaiEntity, tableWriter);
             if (do件数チェック(入力識別番号)) {
                 setレコード件数();
                 dataEntity.setRecordNumber(recordKensu);
                 dataEntity.setKougakuKaigoMeisaiEntity(kougakuKaigoMeisaiEntity);
                 return dataEntity;
             } else {
-                DbWT0002KokuhorenTorikomiErrorTempEntity errorTempentity = new DbWT0002KokuhorenTorikomiErrorTempEntity();
-                errorTempentity.set証記載保険者番号(new ShoKisaiHokenshaNo(kougakuKaigoMeisaiEntity.get証記載保険者番号()));
-                errorTempentity.set被保険者番号(new HihokenshaNo(kougakuKaigoMeisaiEntity.get被保険者番号()));
-                errorTempentity.setキー1(kougakuKaigoMeisaiEntity.get交換情報識別番号());
-                errorTempentity.setキー2(kougakuKaigoMeisaiEntity.get入力識別番号());
-                errorTempentity.setキー3(kougakuKaigoMeisaiEntity.getサービス提供年月().toDateString());
-                組み合わせ不正登録(errorTempentity, hokenshaMapper);
-                必須レコードなし登録(errorTempentity, hokenshaMapper);
-                複数レコード不可登録(errorTempentity, hokenshaMapper);
+                errorTempentity.setShoHokanehshaNo(new ShoKisaiHokenshaNo(kougakuKaigoMeisaiEntity.get証記載保険者番号()));
+                errorTempentity.setHihokenshaNo(new HihokenshaNo(kougakuKaigoMeisaiEntity.get被保険者番号()));
+                errorTempentity.setKey1(kougakuKaigoMeisaiEntity.get交換情報識別番号());
+                errorTempentity.setKey2(kougakuKaigoMeisaiEntity.get入力識別番号());
+                errorTempentity.setKey3(kougakuKaigoMeisaiEntity.getサービス提供年月().toDateString());
+                組み合わせ不正登録(errorTempentity, tableWriter);
+                必須レコードなし登録(errorTempentity, tableWriter);
+                複数レコード不可登録(errorTempentity, tableWriter);
             }
         }
         return null;
     }
 
-    private void 組み合わせ不正登録(DbWT0002KokuhorenTorikomiErrorTempEntity errorTempentity, IKokuhorenKyoutsuuTempTableMapper hokenshaMapper) {
+    private void 組み合わせ不正登録(DbWT0002KokuhorenTorikomiErrorEntity errorTempentity, IBatchTableWriter tableWriter) {
         if (組み合わせ不正フラグ) {
-            errorTempentity.setエラー区分(エラー区分_レコード構成不正);
-            errorTempentity.set備考(組み合わせ不正の備考.substring(1));
-            hokenshaMapper.処理結果リスト一時TBLに登録(errorTempentity);
+            errorTempentity.setErrorKubun(エラー区分_レコード構成不正);
+            errorTempentity.setBiko(組み合わせ不正の備考.substring(1));
+            errorTempentity.setState(EntityDataState.Added);
+            tableWriter.insert(errorTempentity);
         }
     }
 
-    private void 必須レコードなし登録(DbWT0002KokuhorenTorikomiErrorTempEntity errorTempentity, IKokuhorenKyoutsuuTempTableMapper hokenshaMapper) {
+    private void 必須レコードなし登録(DbWT0002KokuhorenTorikomiErrorEntity errorTempentity, IBatchTableWriter tableWriter) {
         if (必須レコードなしフラグ) {
-            errorTempentity.setエラー区分(エラー区分_必須レコードなし);
-            errorTempentity.set備考(必須レコードなしの備考.substring(1));
-            hokenshaMapper.処理結果リスト一時TBLに登録(errorTempentity);
+            errorTempentity.setErrorKubun(エラー区分_必須レコードなし);
+            errorTempentity.setBiko(必須レコードなしの備考.substring(1));
+            errorTempentity.setState(EntityDataState.Added);
+            tableWriter.insert(errorTempentity);
         }
     }
 
-    private void 複数レコード不可登録(DbWT0002KokuhorenTorikomiErrorTempEntity errorTempentity, IKokuhorenKyoutsuuTempTableMapper hokenshaMapper) {
+    private void 複数レコード不可登録(DbWT0002KokuhorenTorikomiErrorEntity errorTempentity, IBatchTableWriter tableWriter) {
         if (複数レコード不可フラグ) {
-            errorTempentity.setエラー区分(エラー区分_複数レコード不可);
-            errorTempentity.set備考(複数レコード不可の備考.substring(1));
-            hokenshaMapper.処理結果リスト一時TBLに登録(errorTempentity);
+            errorTempentity.setErrorKubun(エラー区分_複数レコード不可);
+            errorTempentity.setBiko(複数レコード不可の備考.substring(1));
+            errorTempentity.setState(EntityDataState.Added);
+            tableWriter.insert(errorTempentity);
         }
     }
 
     private void doキー項目値チェック(RString 申請先頭レコードのキー項目値,
             List<KyufuJissekiKoshinJohoCsvTaisyogaiMeisaiEntity> listCsvTaisyogaiMeisaiEntity,
-            IKokuhorenKyoutsuuTempTableMapper hokenshaMapper) {
+            IBatchTableWriter tableWriter) {
         if (null != listCsvTaisyogaiMeisaiEntity && !listCsvTaisyogaiMeisaiEntity.isEmpty()) {
             for (int index = 0; index < listCsvTaisyogaiMeisaiEntity.size(); index++) {
                 KyufuJissekiKoshinJohoCsvTaisyogaiMeisaiEntity taisyogaiMeisai = listCsvTaisyogaiMeisaiEntity.get(index);
@@ -556,16 +557,17 @@ public class KyufuJissekiKoshinReadCsvFileService {
                         .concat(taisyogaiMeisai.get被保険者番号()).concat(taisyogaiMeisai.getサービス提供年月())
                         .concat(taisyogaiMeisai.get事業所番号()).concat(taisyogaiMeisai.get整理番号());
                 if (!申請先頭以外レコードのキー項目値.equals(申請先頭レコードのキー項目値)) {
-                    DbWT0002KokuhorenTorikomiErrorTempEntity errorTempentity = new DbWT0002KokuhorenTorikomiErrorTempEntity();
-                    errorTempentity.set証記載保険者番号(new ShoKisaiHokenshaNo(taisyogaiMeisai.get証記載保険者番号()));
-                    errorTempentity.set被保険者番号(new HihokenshaNo(taisyogaiMeisai.get被保険者番号()));
-                    errorTempentity.setキー1(taisyogaiMeisai.get交換情報識別番号());
-                    errorTempentity.setキー2(taisyogaiMeisai.get入力識別番号());
-                    errorTempentity.setキー3(taisyogaiMeisai.getサービス提供年月());
-                    errorTempentity.setキー4(taisyogaiMeisai.get事業所番号());
-                    errorTempentity.setキー5(taisyogaiMeisai.get整理番号());
-                    errorTempentity.setエラー区分(エラー区分_キー項目不一致);
-                    hokenshaMapper.処理結果リスト一時TBLに登録(errorTempentity);
+                    DbWT0002KokuhorenTorikomiErrorEntity errorTempentity = new DbWT0002KokuhorenTorikomiErrorEntity();
+                    errorTempentity.setShoHokanehshaNo(new ShoKisaiHokenshaNo(taisyogaiMeisai.get証記載保険者番号()));
+                    errorTempentity.setHihokenshaNo(new HihokenshaNo(taisyogaiMeisai.get被保険者番号()));
+                    errorTempentity.setKey1(taisyogaiMeisai.get交換情報識別番号());
+                    errorTempentity.setKey2(taisyogaiMeisai.get入力識別番号());
+                    errorTempentity.setKey3(taisyogaiMeisai.getサービス提供年月());
+                    errorTempentity.setKey4(taisyogaiMeisai.get事業所番号());
+                    errorTempentity.setKey5(taisyogaiMeisai.get整理番号());
+                    errorTempentity.setErrorKubun(エラー区分_キー項目不一致);
+                    errorTempentity.setState(EntityDataState.Added);
+                    tableWriter.insert(errorTempentity);
                     listCsvTaisyogaiMeisaiEntity.remove(index);
                     index--;
                 } else {

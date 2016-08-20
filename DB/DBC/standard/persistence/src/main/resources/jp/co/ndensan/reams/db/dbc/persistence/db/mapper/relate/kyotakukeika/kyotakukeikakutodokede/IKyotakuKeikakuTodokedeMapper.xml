@@ -203,9 +203,19 @@
         INNER JOIN
         rgdb."DbT7060KaigoJigyosha" AS "DbT7060_A"
         ON "DbT7060_A"."jigyoshaNo" = "DbT3006Kyotaku"."keikakuJigyoshaNo"
+        AND NOT EXISTS(
+        SELECT 'X' FROM rgdb."DbT7060KaigoJigyosha" AS "slv1"
+        WHERE "DbT7060_A"."jigyoshaNo"    = "slv1"."jigyoshaNo"
+        AND "DbT7060_A"."yukoKaishiYMD" <![CDATA[<]]> "slv1"."yukoKaishiYMD"
+        )
         LEFT JOIN
         rgdb."DbT7060KaigoJigyosha" AS "DbT7060_B"
         ON "DbT7060_B"."jigyoshaNo" = "DbT3006Kyotaku"."itakusakiJigyoshaNo"
+        AND NOT EXISTS(
+        SELECT 'X' FROM rgdb."DbT7060KaigoJigyosha" AS "slv2"
+        WHERE "DbT7060_B"."jigyoshaNo"    = "slv2"."jigyoshaNo"
+        AND "DbT7060_B"."yukoKaishiYMD" <![CDATA[<]]> "slv2"."yukoKaishiYMD"
+        )
         INNER JOIN
         rgdb."DbT7063KaigoJigyoshaShiteiService" AS "DbT7063Kaigo"
         ON "DbT7063Kaigo"."jigyoshaNo" = "DbT3006Kyotaku"."keikakuJigyoshaNo"

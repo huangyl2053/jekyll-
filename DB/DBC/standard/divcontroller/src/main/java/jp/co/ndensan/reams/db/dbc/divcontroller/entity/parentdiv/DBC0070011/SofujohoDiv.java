@@ -1,14 +1,13 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0070011;
-/**
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0070011.SofuIchiranDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * Sofujoho のクラスファイル 
@@ -16,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class SofujohoDiv extends Panel {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,6 +30,14 @@ public class SofujohoDiv extends Panel {
     private Button btnSearchSofuzumi;
     @JsonProperty("btnSearchMisofu")
     private Button btnSearchMisofu;
+    @JsonProperty("lin1")
+    private HorizontalLine lin1;
+    @JsonProperty("btnKagiMoshitate")
+    private Button btnKagiMoshitate;
+    @JsonProperty("btnSogojigyohiKeikasochi")
+    private Button btnSogojigyohiKeikasochi;
+    @JsonProperty("btnSogojigyohi")
+    private Button btnSogojigyohi;
     @JsonProperty("SofuIchiran")
     private SofuIchiranDiv SofuIchiran;
 
@@ -39,54 +47,180 @@ public class SofujohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettxtSofuYM
+     * @return txtSofuYM
+     */
     @JsonProperty("txtSofuYM")
     public TextBoxDate getTxtSofuYM() {
         return txtSofuYM;
     }
 
+    /*
+     * settxtSofuYM
+     * @param txtSofuYM txtSofuYM
+     */
     @JsonProperty("txtSofuYM")
     public void setTxtSofuYM(TextBoxDate txtSofuYM) {
-        this.txtSofuYM=txtSofuYM;
+        this.txtSofuYM = txtSofuYM;
     }
 
+    /*
+     * getddlShichosonName
+     * @return ddlShichosonName
+     */
     @JsonProperty("ddlShichosonName")
     public DropDownList getDdlShichosonName() {
         return ddlShichosonName;
     }
 
+    /*
+     * setddlShichosonName
+     * @param ddlShichosonName ddlShichosonName
+     */
     @JsonProperty("ddlShichosonName")
     public void setDdlShichosonName(DropDownList ddlShichosonName) {
-        this.ddlShichosonName=ddlShichosonName;
+        this.ddlShichosonName = ddlShichosonName;
     }
 
+    /*
+     * getbtnSearchSofuzumi
+     * @return btnSearchSofuzumi
+     */
     @JsonProperty("btnSearchSofuzumi")
     public Button getBtnSearchSofuzumi() {
         return btnSearchSofuzumi;
     }
 
+    /*
+     * setbtnSearchSofuzumi
+     * @param btnSearchSofuzumi btnSearchSofuzumi
+     */
     @JsonProperty("btnSearchSofuzumi")
     public void setBtnSearchSofuzumi(Button btnSearchSofuzumi) {
-        this.btnSearchSofuzumi=btnSearchSofuzumi;
+        this.btnSearchSofuzumi = btnSearchSofuzumi;
     }
 
+    /*
+     * getbtnSearchMisofu
+     * @return btnSearchMisofu
+     */
     @JsonProperty("btnSearchMisofu")
     public Button getBtnSearchMisofu() {
         return btnSearchMisofu;
     }
 
+    /*
+     * setbtnSearchMisofu
+     * @param btnSearchMisofu btnSearchMisofu
+     */
     @JsonProperty("btnSearchMisofu")
     public void setBtnSearchMisofu(Button btnSearchMisofu) {
-        this.btnSearchMisofu=btnSearchMisofu;
+        this.btnSearchMisofu = btnSearchMisofu;
     }
 
+    /*
+     * getlin1
+     * @return lin1
+     */
+    @JsonProperty("lin1")
+    public HorizontalLine getLin1() {
+        return lin1;
+    }
+
+    /*
+     * setlin1
+     * @param lin1 lin1
+     */
+    @JsonProperty("lin1")
+    public void setLin1(HorizontalLine lin1) {
+        this.lin1 = lin1;
+    }
+
+    /*
+     * getbtnKagiMoshitate
+     * @return btnKagiMoshitate
+     */
+    @JsonProperty("btnKagiMoshitate")
+    public Button getBtnKagiMoshitate() {
+        return btnKagiMoshitate;
+    }
+
+    /*
+     * setbtnKagiMoshitate
+     * @param btnKagiMoshitate btnKagiMoshitate
+     */
+    @JsonProperty("btnKagiMoshitate")
+    public void setBtnKagiMoshitate(Button btnKagiMoshitate) {
+        this.btnKagiMoshitate = btnKagiMoshitate;
+    }
+
+    /*
+     * getbtnSogojigyohiKeikasochi
+     * @return btnSogojigyohiKeikasochi
+     */
+    @JsonProperty("btnSogojigyohiKeikasochi")
+    public Button getBtnSogojigyohiKeikasochi() {
+        return btnSogojigyohiKeikasochi;
+    }
+
+    /*
+     * setbtnSogojigyohiKeikasochi
+     * @param btnSogojigyohiKeikasochi btnSogojigyohiKeikasochi
+     */
+    @JsonProperty("btnSogojigyohiKeikasochi")
+    public void setBtnSogojigyohiKeikasochi(Button btnSogojigyohiKeikasochi) {
+        this.btnSogojigyohiKeikasochi = btnSogojigyohiKeikasochi;
+    }
+
+    /*
+     * getbtnSogojigyohi
+     * @return btnSogojigyohi
+     */
+    @JsonProperty("btnSogojigyohi")
+    public Button getBtnSogojigyohi() {
+        return btnSogojigyohi;
+    }
+
+    /*
+     * setbtnSogojigyohi
+     * @param btnSogojigyohi btnSogojigyohi
+     */
+    @JsonProperty("btnSogojigyohi")
+    public void setBtnSogojigyohi(Button btnSogojigyohi) {
+        this.btnSogojigyohi = btnSogojigyohi;
+    }
+
+    /*
+     * getSofuIchiran
+     * @return SofuIchiran
+     */
     @JsonProperty("SofuIchiran")
     public SofuIchiranDiv getSofuIchiran() {
         return SofuIchiran;
     }
 
+    /*
+     * setSofuIchiran
+     * @param SofuIchiran SofuIchiran
+     */
     @JsonProperty("SofuIchiran")
     public void setSofuIchiran(SofuIchiranDiv SofuIchiran) {
-        this.SofuIchiran=SofuIchiran;
+        this.SofuIchiran = SofuIchiran;
     }
 
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public DataGrid<dgSofuIchiran_Row> getDgSofuIchiran() {
+        return this.getSofuIchiran().getDgSofuIchiran();
+    }
+
+    @JsonIgnore
+    public void  setDgSofuIchiran(DataGrid<dgSofuIchiran_Row> dgSofuIchiran) {
+        this.getSofuIchiran().setDgSofuIchiran(dgSofuIchiran);
+    }
+
+    // </editor-fold>
 }

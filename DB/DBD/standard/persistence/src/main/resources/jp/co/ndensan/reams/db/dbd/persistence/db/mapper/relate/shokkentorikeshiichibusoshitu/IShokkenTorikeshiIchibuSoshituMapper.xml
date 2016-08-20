@@ -18,7 +18,7 @@
         <association property="t4102Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4102NinteiKekkaJohoMapper.ResultMap_DbT4102NinteiKekkaJohoEntity"/>
         <association property="t4120Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4120ShinseitodokedeJohoMapper.ResultMap_DbT4120ShinseitodokedeJohoEntity"/>
     </resultMap>
-    <resultMap id="resultMap_前回情報" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.shokkentorikeshiichibusoshitu.ShokkenTorikeshiNinteiJohoEntity" autoMapping="true">
+    <resultMap id="resultMap_前回情報" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.shokkentorikeshiichibusoshitu.ShokkenTorikeshiNinteiJohoKonkaiEntity" autoMapping="true">
         <id property="t4101Entity.shinseishoKanriNo" column="dbT4101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <association property="t4101Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"/>
         <association property="t4001Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>

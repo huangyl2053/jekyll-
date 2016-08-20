@@ -16,8 +16,13 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.iraijohodatatorikomi.ShujiiIk
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.iraijohodatatorikomi.IIraiJohoDataTorikomiMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKinyuMapping02A;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKinyuMapping06A;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKinyuMapping09A;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKinyuMapping09B;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKinyuMapping99A;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping09B;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5302ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5303ShujiiIkenshoKinyuItemEntity;
@@ -189,7 +194,7 @@ public class IraiJohoDataTorikomiManager {
         DbT5302ShujiiIkenshoJohoEntity entity = new DbT5302ShujiiIkenshoJohoEntity();
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(申請書管理番号));
         entity.setIkenshoIraiRirekiNo(主治医意見書作成依頼履歴番号);
-        entity.setKoroshoIfShikibetsuCode(new RString("09B"));
+        entity.setKoroshoIfShikibetsuCode(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード());
         entity.setIkenshoIraiKubun(IkenshoIraiKubun.初回依頼.getコード());
         entity.setShujiiIryoKikanCode(主治医医療機関コード);
         entity.setShujiiCode(主治医コード);
@@ -201,19 +206,19 @@ public class IraiJohoDataTorikomiManager {
         entity.setIkenshoDoiFlag(business.is同意の有無());
         entity.setSaishuShinryoYMD(business.get最終診察日());
         entity.setExistTakaJushinFlag(business.is他科受診有無());
-        entity.setExistNaikaJushinFlag(business.get他科名().startsWith(選択項目, 0));
-        entity.setExistSeishinkaJushinFlag(business.get他科名().startsWith(選択項目, 1));
-        entity.setExistGekaJushinFlag(business.get他科名().startsWith(選択項目, 2));
-        entity.setExistSeikeigekaJushinFlag(business.get他科名().startsWith(選択項目, INT_3));
-        entity.setExistNoshinkeigekaJushinFlag(business.get他科名().startsWith(選択項目, INT_4));
-        entity.setExistHifukaJushinFlag(business.get他科名().startsWith(選択項目, INT_5));
-        entity.setExistHinyokikaJushinFlag(business.get他科名().startsWith(選択項目, INT_6));
-        entity.setExistFujinkaJushinFlag(business.get他科名().startsWith(選択項目, INT_7));
-        entity.setExistJibiinkokaJushinFlag(business.get他科名().startsWith(選択項目, INT_8));
-        entity.setExistRehabilitationkaJushinFlag(business.get他科名().startsWith(選択項目, INT_9));
-        entity.setExistShikaJushinFlag(business.get他科名().startsWith(選択項目, INT_10));
-        entity.setExistGankaJushinFlag(business.get他科名().startsWith(選択項目, INT_11));
-        entity.setExistSonotaJushinkaFlag(business.get他科名().startsWith(選択項目, INT_12));
+        entity.setExistNaikaJushinFlag(選択項目.equals(business.get他科名().substring(0, 1)));
+        entity.setExistSeishinkaJushinFlag(選択項目.equals(business.get他科名().substring(1, 2)));
+        entity.setExistGekaJushinFlag(選択項目.equals(business.get他科名().substring(2, INT_3)));
+        entity.setExistSeikeigekaJushinFlag(選択項目.equals(business.get他科名().substring(INT_3, INT_4)));
+        entity.setExistNoshinkeigekaJushinFlag(選択項目.equals(business.get他科名().substring(INT_4, INT_5)));
+        entity.setExistHifukaJushinFlag(選択項目.equals(business.get他科名().substring(INT_5, INT_6)));
+        entity.setExistHinyokikaJushinFlag(選択項目.equals(business.get他科名().substring(INT_6, INT_7)));
+        entity.setExistFujinkaJushinFlag(選択項目.equals(business.get他科名().substring(INT_7, INT_8)));
+        entity.setExistJibiinkokaJushinFlag(選択項目.equals(business.get他科名().substring(INT_8, INT_9)));
+        entity.setExistRehabilitationkaJushinFlag(選択項目.equals(business.get他科名().substring(INT_9, INT_10)));
+        entity.setExistShikaJushinFlag(選択項目.equals(business.get他科名().substring(INT_10, INT_11)));
+        entity.setExistGankaJushinFlag(選択項目.equals(business.get他科名().substring(INT_11, INT_12)));
+        entity.setExistSonotaJushinkaFlag(選択項目.equals(business.get他科名().substring(INT_12, INT_13)));
         entity.setSonotaJushinKaMei(business.getその他の他科名());
         entity.setShindamMei1(business.get診断名1());
         entity.setHasshoYMD1(get発症年月日(business.get発症年月日1()));
@@ -244,19 +249,19 @@ public class IraiJohoDataTorikomiManager {
         entity.setIkenshoDoiFlag(business.is同意の有無());
         entity.setSaishuShinryoYMD(business.get最終診察日());
         entity.setExistTakaJushinFlag(business.is他科受診有無());
-        entity.setExistNaikaJushinFlag(business.get他科名().startsWith(選択項目, 0));
-        entity.setExistSeishinkaJushinFlag(business.get他科名().startsWith(選択項目, 1));
-        entity.setExistGekaJushinFlag(business.get他科名().startsWith(選択項目, 2));
-        entity.setExistSeikeigekaJushinFlag(business.get他科名().startsWith(選択項目, INT_3));
-        entity.setExistNoshinkeigekaJushinFlag(business.get他科名().startsWith(選択項目, INT_4));
-        entity.setExistHifukaJushinFlag(business.get他科名().startsWith(選択項目, INT_5));
-        entity.setExistHinyokikaJushinFlag(business.get他科名().startsWith(選択項目, INT_6));
-        entity.setExistFujinkaJushinFlag(business.get他科名().startsWith(選択項目, INT_7));
-        entity.setExistJibiinkokaJushinFlag(business.get他科名().startsWith(選択項目, INT_8));
-        entity.setExistRehabilitationkaJushinFlag(business.get他科名().startsWith(選択項目, INT_9));
-        entity.setExistShikaJushinFlag(business.get他科名().startsWith(選択項目, INT_10));
-        entity.setExistGankaJushinFlag(business.get他科名().startsWith(選択項目, INT_11));
-        entity.setExistSonotaJushinkaFlag(business.get他科名().startsWith(選択項目, INT_12));
+        entity.setExistNaikaJushinFlag(選択項目.equals(business.get他科名().substring(0, 1)));
+        entity.setExistSeishinkaJushinFlag(選択項目.equals(business.get他科名().substring(1, 2)));
+        entity.setExistGekaJushinFlag(選択項目.equals(business.get他科名().substring(2, INT_3)));
+        entity.setExistSeikeigekaJushinFlag(選択項目.equals(business.get他科名().substring(INT_3, INT_4)));
+        entity.setExistNoshinkeigekaJushinFlag(選択項目.equals(business.get他科名().substring(INT_4, INT_5)));
+        entity.setExistHifukaJushinFlag(選択項目.equals(business.get他科名().substring(INT_5, INT_6)));
+        entity.setExistHinyokikaJushinFlag(選択項目.equals(business.get他科名().substring(INT_6, INT_7)));
+        entity.setExistFujinkaJushinFlag(選択項目.equals(business.get他科名().substring(INT_7, INT_8)));
+        entity.setExistJibiinkokaJushinFlag(選択項目.equals(business.get他科名().substring(INT_8, INT_9)));
+        entity.setExistRehabilitationkaJushinFlag(選択項目.equals(business.get他科名().substring(INT_9, INT_10)));
+        entity.setExistShikaJushinFlag(選択項目.equals(business.get他科名().substring(INT_10, INT_11)));
+        entity.setExistGankaJushinFlag(選択項目.equals(business.get他科名().substring(INT_11, INT_12)));
+        entity.setExistSonotaJushinkaFlag(選択項目.equals(business.get他科名().substring(INT_12, INT_13)));
         entity.setSonotaJushinKaMei(business.getその他の他科名());
         entity.setShindamMei1(business.get診断名1());
         entity.setHasshoYMD1(get発症年月日(business.get発症年月日1()));
@@ -292,7 +297,7 @@ public class IraiJohoDataTorikomiManager {
         int count = 0;
         for (int i = 1; i < INT_114; i++) {
             entity.setRemban(i);
-            entity.setIkenItem(get意見項目1(i, business));
+            entity.setIkenItem(get09B意見項目1(i, business));
             entity.setState(EntityDataState.Added);
             count = count + dbT5304Dac.save(entity);
         }
@@ -308,7 +313,7 @@ public class IraiJohoDataTorikomiManager {
         }
         for (DbT5304ShujiiIkenshoIkenItemEntity entity : entityList) {
             if (連番List.contains(entity.getRemban())) {
-                entity.setIkenItem(get意見項目1(entity.getRemban(), business));
+                entity.setIkenItem(get意見項目(entity.getRemban(), entity.getKoroshoIfShikibetsuCode(), business));
                 entity.setState(EntityDataState.Modified);
                 count = count + dbT5304Dac.save(entity);
                 連番List.remove(entity.getRemban());
@@ -320,7 +325,7 @@ public class IraiJohoDataTorikomiManager {
             dbT5304Entity.setIkenshoIraiRirekiNo(主治医意見書作成依頼履歴番号);
             dbT5304Entity.setRemban(連番);
             dbT5304Entity.setKoroshoIfShikibetsuCode(B_09);
-            dbT5304Entity.setIkenItem(get意見項目1(連番, business));
+            dbT5304Entity.setIkenItem(get09B意見項目1(連番, business));
             dbT5304Entity.setState(EntityDataState.Added);
             count = count + dbT5304Dac.save(dbT5304Entity);
         }
@@ -341,7 +346,7 @@ public class IraiJohoDataTorikomiManager {
         int count = 0;
         for (int i = 1; i <= INT_23; i++) {
             entity.setRemban(i);
-            entity.setKinyuItem(get記入項目1(i, business));
+            entity.setKinyuItem(get09B記入項目1(i, business));
             entity.setState(EntityDataState.Added);
             dbT5303Dac.save(entity);
         }
@@ -357,7 +362,7 @@ public class IraiJohoDataTorikomiManager {
         }
         for (DbT5303ShujiiIkenshoKinyuItemEntity entity : entityList) {
             if (連番List.contains(entity.getRemban())) {
-                entity.setKinyuItem(get記入項目1(entity.getRemban(), business));
+                entity.setKinyuItem(get記入項目(entity.getRemban(), entity.getKoroshoIfShikibetsuCode(), business));
                 entity.setState(EntityDataState.Modified);
                 count = count + dbT5303Dac.save(entity);
                 連番List.remove(entity.getRemban());
@@ -369,7 +374,7 @@ public class IraiJohoDataTorikomiManager {
             dbT5303Entity.setIkenshoIraiRirekiNo(主治医意見書作成依頼履歴番号);
             dbT5303Entity.setRemban(連番);
             dbT5303Entity.setKoroshoIfShikibetsuCode(B_09);
-            dbT5303Entity.setKinyuItem(get記入項目1(連番, business));
+            dbT5303Entity.setKinyuItem(get09B記入項目1(連番, business));
             dbT5303Entity.setState(EntityDataState.Added);
             count = count + dbT5303Dac.save(dbT5303Entity);
         }
@@ -400,7 +405,44 @@ public class IraiJohoDataTorikomiManager {
         return Code.EMPTY;
     }
 
-    private RString get記入項目1(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get記入項目(int 連番, Code 厚労省IF識別コード, IkenshokinyuyoshiBusiness business) {
+        RString 記入項目 = RString.EMPTY;
+        if (厚労省IF識別コード != null && !厚労省IF識別コード.isEmpty()) {
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード.value())) {
+                記入項目 = get02A記入項目1(連番, business);
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード.value())) {
+                記入項目 = get06A記入項目1(連番, business);
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード.value())) {
+                記入項目 = get09A記入項目1(連番, business);
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード.value())) {
+                記入項目 = get09B記入項目1(連番, business);
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード.value())) {
+                記入項目 = get99A記入項目1(連番, business);
+            }
+        }
+        return 記入項目;
+    }
+
+    private RString get意見項目(int 連番, Code 厚労省IF識別コード, IkenshokinyuyoshiBusiness business) {
+        RString 記入項目 = RString.EMPTY;
+        IkenshoKomoku ikenshoKomoku = new IkenshoKomoku();
+        if (厚労省IF識別コード != null && !厚労省IF識別コード.isEmpty()) {
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード.value())) {
+                記入項目 = ikenshoKomoku.get02A意見項目1(連番, business);
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード.value())) {
+                記入項目 = ikenshoKomoku.get06A意見項目1(連番, business);
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード.value())) {
+                記入項目 = ikenshoKomoku.get09A意見項目1(連番, business);
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード.value())) {
+                記入項目 = get09B意見項目1(連番, business);
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード.value())) {
+                記入項目 = ikenshoKomoku.get99A意見項目1(連番, business);
+            }
+        }
+        return 記入項目;
+    }
+
+    private RString get09B記入項目1(int 連番, IkenshokinyuyoshiBusiness business) {
         if (IkenshoKinyuMapping09B.その他.getコード().equals(new RString(連番))) {
             return business.get周辺症状詳細().substring(INT_11, INT_12);
         } else if (IkenshoKinyuMapping09B.その他の精神_神経症状.getコード().equals(new RString(連番))) {
@@ -434,11 +476,11 @@ public class IraiJohoDataTorikomiManager {
         } else if (IkenshoKinyuMapping09B.介護サービスの留意事項_血圧.getコード().equals(new RString(連番))) {
             return business.getサービス提供血圧();
         } else {
-            return get記入項目2(連番, business);
+            return get09B記入項目2(連番, business);
         }
     }
 
-    private RString get記入項目2(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get09B記入項目2(int 連番, IkenshokinyuyoshiBusiness business) {
         if (IkenshoKinyuMapping09B.介護サービスの留意事項_移動.getコード().equals(new RString(連番))) {
             return business.getサービス提供移動();
         } else if (IkenshoKinyuMapping09B.介護サービスの留意事項_摂食.getコード().equals(new RString(連番))) {
@@ -456,7 +498,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get意見項目1(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get09B意見項目1(int 連番, IkenshokinyuyoshiBusiness business) {
         if (IkenshoKomokuMapping09B.点滴の管理.getコード().equals(new RString(連番))) {
             return business.get処置内容().substring(0, 1);
         } else if (IkenshoKomokuMapping09B.中心静脈栄養.getコード().equals(new RString(連番))) {
@@ -492,11 +534,11 @@ public class IraiJohoDataTorikomiManager {
         } else if (IkenshoKomokuMapping09B.伝達能力.getコード().equals(new RString(連番))) {
             return business.get伝達能力();
         } else {
-            return get意見項目2(連番, business);
+            return get09B意見項目2(連番, business);
         }
     }
 
-    private RString get意見項目2(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get09B意見項目2(int 連番, IkenshokinyuyoshiBusiness business) {
         if (IkenshoKomokuMapping09B.認知症の周辺症状.getコード().equals(new RString(連番))) {
             return business.get周辺症状有無();
         } else if (IkenshoKomokuMapping09B.幻視_幻聴.getコード().equals(new RString(連番))) {
@@ -532,11 +574,11 @@ public class IraiJohoDataTorikomiManager {
         } else if (IkenshoKomokuMapping09B.過去6カ月の体重の変化.getコード().equals(new RString(連番))) {
             return business.get体重の変化();
         } else {
-            return get意見項目3(連番, business);
+            return get09B意見項目3(連番, business);
         }
     }
 
-    private RString get意見項目3(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get09B意見項目3(int 連番, IkenshokinyuyoshiBusiness business) {
         if (IkenshoKomokuMapping09B.四肢欠損.getコード().equals(new RString(連番))) {
             return business.get四肢欠損();
         } else if (IkenshoKomokuMapping09B.麻痺.getコード().equals(new RString(連番))) {
@@ -572,11 +614,11 @@ public class IraiJohoDataTorikomiManager {
         } else if (IkenshoKomokuMapping09B.関節の痛み.getコード().equals(new RString(連番))) {
             return business.get関節痛み();
         } else {
-            return get意見項目4(連番, business);
+            return get09B意見項目4(連番, business);
         }
     }
 
-    private RString get意見項目4(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get09B意見項目4(int 連番, IkenshokinyuyoshiBusiness business) {
         if (IkenshoKomokuMapping09B.関節の痛み_程度.getコード().equals(new RString(連番))) {
             return business.get関節痛み程度();
         } else if (IkenshoKomokuMapping09B.失調_不随意運動.getコード().equals(new RString(連番))) {
@@ -614,11 +656,11 @@ public class IraiJohoDataTorikomiManager {
         } else if (IkenshoKomokuMapping09B.食事行為.getコード().equals(new RString(連番))) {
             return business.get食事行為();
         } else {
-            return get意見項目5(連番, business);
+            return get09B意見項目5(連番, business);
         }
     }
 
-    private RString get意見項目5(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get09B意見項目5(int 連番, IkenshokinyuyoshiBusiness business) {
         if (IkenshoKomokuMapping09B.現在の栄養状態.getコード().equals(new RString(連番))) {
             return business.get現在の栄養状態();
         } else if (IkenshoKomokuMapping09B.尿失禁.getコード().equals(new RString(連番))) {
@@ -652,11 +694,11 @@ public class IraiJohoDataTorikomiManager {
         } else if (IkenshoKomokuMapping09B.生活機能の維持_改善の見通し.getコード().equals(new RString(連番))) {
             return business.getサービス利用による生活機能の維持_改善の見通し();
         } else {
-            return get意見項目6(連番, business);
+            return get09B意見項目6(連番, business);
         }
     }
 
-    private RString get意見項目6(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get09B意見項目6(int 連番, IkenshokinyuyoshiBusiness business) {
         if (IkenshoKomokuMapping09B.訪問診療.getコード().equals(new RString(連番))) {
             return business.get発生可能性状態().substring(0, 1);
         } else if (IkenshoKomokuMapping09B.訪問看護.getコード().equals(new RString(連番))) {
@@ -690,11 +732,11 @@ public class IraiJohoDataTorikomiManager {
         } else if (IkenshoKomokuMapping09B.訪問薬剤管理指導_必要性.getコード().equals(new RString(連番))) {
             return business.get発生可能性状態().substring(INT_7, INT_8);
         } else {
-            return get意見項目7(連番, business);
+            return get09B意見項目7(連番, business);
         }
     }
 
-    private RString get意見項目7(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get09B意見項目7(int 連番, IkenshokinyuyoshiBusiness business) {
         if (IkenshoKomokuMapping09B.訪問リハビリテーション_必要性.getコード().equals(new RString(連番))) {
             return business.get発生可能性状態().substring(2, INT_3);
         } else if (IkenshoKomokuMapping09B.短期入所療養介護_必要性.getコード().equals(new RString(連番))) {
@@ -718,6 +760,210 @@ public class IraiJohoDataTorikomiManager {
         } else if (IkenshoKomokuMapping09B.介護サービスの留意事項_嚥下.getコード().equals(new RString(連番))) {
             return business.getサービス提供嚥下();
         } else if (IkenshoKomokuMapping09B.感染症の有無.getコード().equals(new RString(連番))) {
+            return business.get感染症有無();
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString get09A記入項目1(int 連番, IkenshokinyuyoshiBusiness business) {
+        if (IkenshoKinyuMapping09A.その他.getコード().equals(new RString(連番))) {
+            return business.get周辺症状詳細().substring(INT_11, INT_12);
+        } else if (IkenshoKinyuMapping09A.その他の精神_神経症状.getコード().equals(new RString(連番))) {
+            return business.get精神神経症状有無();
+        } else if (IkenshoKinyuMapping09A.身長.getコード().equals(new RString(連番))) {
+            return business.get身長();
+        } else if (IkenshoKinyuMapping09A.体重.getコード().equals(new RString(連番))) {
+            return business.get体重();
+        } else if (IkenshoKinyuMapping09A.四肢欠損.getコード().equals(new RString(連番))) {
+            return business.get四肢欠損();
+        } else if (IkenshoKinyuMapping09A.麻痺_その他.getコード().equals(new RString(連番))) {
+            return business.get麻痺その他();
+        } else if (IkenshoKinyuMapping09A.筋力の低下.getコード().equals(new RString(連番))) {
+            return business.get筋力低下();
+        } else if (IkenshoKinyuMapping09A.関節の拘縮.getコード().equals(new RString(連番))) {
+            return business.get関節拘縮();
+        } else if (IkenshoKinyuMapping09A.関節の痛み.getコード().equals(new RString(連番))) {
+            return business.get関節痛み();
+        } else if (IkenshoKinyuMapping09A.じょくそう.getコード().equals(new RString(連番))) {
+            return business.get褥瘡();
+        } else if (IkenshoKinyuMapping09A.その他の皮膚疾患.getコード().equals(new RString(連番))) {
+            return business.getその他皮膚疾患();
+        } else if (IkenshoKinyuMapping09A.栄養_食生活上の留意点.getコード().equals(new RString(連番))) {
+            return business.get栄養_食生活上の留意点();
+        } else if (IkenshoKinyuMapping09A.病態_その他.getコード().equals(new RString(連番))) {
+            return business.get発生可能性状態().substring(INT_13, INT_14);
+        } else if (IkenshoKinyuMapping09A.病態_対処方針.getコード().equals(new RString(連番))) {
+            return business.get対処方針内容();
+        } else if (IkenshoKinyuMapping09A.その他の医療系のサービス.getコード().equals(new RString(連番))) {
+            return business.get発生可能性状態().substring(INT_9, INT_10);
+        } else if (IkenshoKinyuMapping09A.介護サービスの留意事項_血圧.getコード().equals(new RString(連番))) {
+            return business.getサービス提供血圧();
+        } else {
+            return get09A記入項目2(連番, business);
+        }
+    }
+
+    private RString get09A記入項目2(int 連番, IkenshokinyuyoshiBusiness business) {
+        if (IkenshoKinyuMapping09A.介護サービスの留意事項_移動.getコード().equals(new RString(連番))) {
+            return business.getサービス提供移動();
+        } else if (IkenshoKinyuMapping09A.介護サービスの留意事項_摂食.getコード().equals(new RString(連番))) {
+            return business.getサービス提供摂食();
+        } else if (IkenshoKinyuMapping09A.介護サービスの留意事項_運動.getコード().equals(new RString(連番))) {
+            return business.getサービス提供運動();
+        } else if (IkenshoKinyuMapping09A.介護サービスの留意事項_嚥下.getコード().equals(new RString(連番))) {
+            return business.getサービス提供嚥下();
+        } else if (IkenshoKinyuMapping09A.介護サービスの留意事項_その他.getコード().equals(new RString(連番))) {
+            return business.getサービス提供その他の留意事項();
+        } else if (IkenshoKinyuMapping09A.感染症の有無.getコード().equals(new RString(連番))) {
+            return business.get感染症有無();
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString get06A記入項目1(int 連番, IkenshokinyuyoshiBusiness business) {
+        if (IkenshoKinyuMapping06A.その他.getコード().equals(new RString(連番))) {
+            return business.get周辺症状詳細().substring(INT_11, INT_12);
+        } else if (IkenshoKinyuMapping06A.その他の精神_神経症状.getコード().equals(new RString(連番))) {
+            return business.get精神神経症状有無();
+        } else if (IkenshoKinyuMapping06A.身長.getコード().equals(new RString(連番))) {
+            return business.get身長();
+        } else if (IkenshoKinyuMapping06A.体重.getコード().equals(new RString(連番))) {
+            return business.get体重();
+        } else if (IkenshoKinyuMapping06A.四肢欠損.getコード().equals(new RString(連番))) {
+            return business.get四肢欠損();
+        } else if (IkenshoKinyuMapping06A.麻痺_その他.getコード().equals(new RString(連番))) {
+            return business.get麻痺その他();
+        } else if (IkenshoKinyuMapping06A.筋力の低下.getコード().equals(new RString(連番))) {
+            return business.get筋力低下();
+        } else if (IkenshoKinyuMapping06A.関節の拘縮.getコード().equals(new RString(連番))) {
+            return business.get関節拘縮();
+        } else if (IkenshoKinyuMapping06A.関節の痛み.getコード().equals(new RString(連番))) {
+            return business.get関節痛み();
+        } else if (IkenshoKinyuMapping06A.じょくそう.getコード().equals(new RString(連番))) {
+            return business.get褥瘡();
+        } else if (IkenshoKinyuMapping06A.その他の皮膚疾患.getコード().equals(new RString(連番))) {
+            return business.getその他皮膚疾患();
+        } else if (IkenshoKinyuMapping06A.栄養_食生活上の留意点.getコード().equals(new RString(連番))) {
+            return business.get栄養_食生活上の留意点();
+        } else if (IkenshoKinyuMapping06A.病態_その他.getコード().equals(new RString(連番))) {
+            return business.get発生可能性状態().substring(INT_13, INT_14);
+        } else if (IkenshoKinyuMapping06A.病態_対処方針.getコード().equals(new RString(連番))) {
+            return business.get対処方針内容();
+        } else if (IkenshoKinyuMapping06A.その他の医療系のサービス.getコード().equals(new RString(連番))) {
+            return business.get発生可能性状態().substring(INT_9, INT_10);
+        } else if (IkenshoKinyuMapping06A.介護サービスの留意事項_血圧.getコード().equals(new RString(連番))) {
+            return business.getサービス提供血圧();
+        } else {
+            return get06A記入項目2(連番, business);
+        }
+    }
+
+    private RString get06A記入項目2(int 連番, IkenshokinyuyoshiBusiness business) {
+        if (IkenshoKinyuMapping06A.介護サービスの留意事項_移動.getコード().equals(new RString(連番))) {
+            return business.getサービス提供移動();
+        } else if (IkenshoKinyuMapping06A.介護サービスの留意事項_摂食.getコード().equals(new RString(連番))) {
+            return business.getサービス提供摂食();
+        } else if (IkenshoKinyuMapping06A.介護サービスの留意事項_運動.getコード().equals(new RString(連番))) {
+            return business.getサービス提供運動();
+        } else if (IkenshoKinyuMapping06A.介護サービスの留意事項_嚥下.getコード().equals(new RString(連番))) {
+            return business.getサービス提供嚥下();
+        } else if (IkenshoKinyuMapping06A.介護サービスの留意事項_その他.getコード().equals(new RString(連番))) {
+            return business.getサービス提供その他の留意事項();
+        } else if (IkenshoKinyuMapping06A.感染症の有無.getコード().equals(new RString(連番))) {
+            return business.get感染症有無();
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString get02A記入項目1(int 連番, IkenshokinyuyoshiBusiness business) {
+        if (IkenshoKinyuMapping02A.その他.getコード().equals(new RString(連番))) {
+            return business.get周辺症状詳細().substring(INT_11, INT_12);
+        } else if (IkenshoKinyuMapping02A.その他の精神_神経症状.getコード().equals(new RString(連番))) {
+            return business.get精神神経症状有無();
+        } else if (IkenshoKinyuMapping02A.身長.getコード().equals(new RString(連番))) {
+            return business.get身長();
+        } else if (IkenshoKinyuMapping02A.体重.getコード().equals(new RString(連番))) {
+            return business.get体重();
+        } else if (IkenshoKinyuMapping02A.四肢欠損.getコード().equals(new RString(連番))) {
+            return business.get四肢欠損();
+        } else if (IkenshoKinyuMapping02A.筋力の低下.getコード().equals(new RString(連番))) {
+            return business.get筋力低下();
+        } else if (IkenshoKinyuMapping02A.じょくそう.getコード().equals(new RString(連番))) {
+            return business.get褥瘡();
+        } else if (IkenshoKinyuMapping02A.その他の皮膚疾患.getコード().equals(new RString(連番))) {
+            return business.getその他皮膚疾患();
+        } else if (IkenshoKinyuMapping02A.病態_その他.getコード().equals(new RString(連番))) {
+            return business.get発生可能性状態().substring(INT_13, INT_14);
+        } else if (IkenshoKinyuMapping02A.病態_対処方針.getコード().equals(new RString(連番))) {
+            return business.get対処方針内容();
+        } else if (IkenshoKinyuMapping02A.その他の医療系のサービス.getコード().equals(new RString(連番))) {
+            return business.get発生可能性状態().substring(INT_9, INT_10);
+        } else if (IkenshoKinyuMapping02A.介護サービスの留意事項_血圧.getコード().equals(new RString(連番))) {
+            return business.getサービス提供血圧();
+        } else {
+            return get02A記入項目2(連番, business);
+        }
+    }
+
+    private RString get02A記入項目2(int 連番, IkenshokinyuyoshiBusiness business) {
+        if (IkenshoKinyuMapping02A.介護サービスの留意事項_移動.getコード().equals(new RString(連番))) {
+            return business.getサービス提供移動();
+        } else if (IkenshoKinyuMapping02A.介護サービスの留意事項_摂食.getコード().equals(new RString(連番))) {
+            return business.getサービス提供摂食();
+        } else if (IkenshoKinyuMapping02A.介護サービスの留意事項_嚥下.getコード().equals(new RString(連番))) {
+            return business.getサービス提供嚥下();
+        } else if (IkenshoKinyuMapping02A.介護サービスの留意事項_その他.getコード().equals(new RString(連番))) {
+            return business.getサービス提供その他の留意事項();
+        } else if (IkenshoKinyuMapping02A.感染症の有無.getコード().equals(new RString(連番))) {
+            return business.get感染症有無();
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString get99A記入項目1(int 連番, IkenshokinyuyoshiBusiness business) {
+        if (IkenshoKinyuMapping99A.その他.getコード().equals(new RString(連番))) {
+            return business.get周辺症状詳細().substring(INT_11, INT_12);
+        } else if (IkenshoKinyuMapping99A.その他の精神_神経症状.getコード().equals(new RString(連番))) {
+            return business.get精神神経症状有無();
+        } else if (IkenshoKinyuMapping99A.身長.getコード().equals(new RString(連番))) {
+            return business.get身長();
+        } else if (IkenshoKinyuMapping99A.体重.getコード().equals(new RString(連番))) {
+            return business.get体重();
+        } else if (IkenshoKinyuMapping99A.四肢欠損.getコード().equals(new RString(連番))) {
+            return business.get四肢欠損();
+        } else if (IkenshoKinyuMapping99A.筋力の低下.getコード().equals(new RString(連番))) {
+            return business.get筋力低下();
+        } else if (IkenshoKinyuMapping99A.じょくそう.getコード().equals(new RString(連番))) {
+            return business.get褥瘡();
+        } else if (IkenshoKinyuMapping99A.その他の皮膚疾患.getコード().equals(new RString(連番))) {
+            return business.getその他皮膚疾患();
+        } else if (IkenshoKinyuMapping99A.病態_その他.getコード().equals(new RString(連番))) {
+            return business.get発生可能性状態().substring(INT_13, INT_14);
+        } else if (IkenshoKinyuMapping99A.病態_対処方針.getコード().equals(new RString(連番))) {
+            return business.get対処方針内容();
+        } else if (IkenshoKinyuMapping99A.その他の医療系のサービス.getコード().equals(new RString(連番))) {
+            return business.get発生可能性状態().substring(INT_9, INT_10);
+        } else if (IkenshoKinyuMapping99A.介護サービスの留意事項_血圧.getコード().equals(new RString(連番))) {
+            return business.getサービス提供血圧();
+        } else {
+            return get99A記入項目2(連番, business);
+        }
+    }
+
+    private RString get99A記入項目2(int 連番, IkenshokinyuyoshiBusiness business) {
+        if (IkenshoKinyuMapping99A.介護サービスの留意事項_移動.getコード().equals(new RString(連番))) {
+            return business.getサービス提供移動();
+        } else if (IkenshoKinyuMapping99A.介護サービスの留意事項_摂食.getコード().equals(new RString(連番))) {
+            return business.getサービス提供摂食();
+        } else if (IkenshoKinyuMapping99A.介護サービスの留意事項_嚥下.getコード().equals(new RString(連番))) {
+            return business.getサービス提供嚥下();
+        } else if (IkenshoKinyuMapping99A.介護サービスの留意事項_その他.getコード().equals(new RString(連番))) {
+            return business.getサービス提供その他の留意事項();
+        } else if (IkenshoKinyuMapping99A.感染症の有無.getコード().equals(new RString(連番))) {
             return business.get感染症有無();
         } else {
             return RString.EMPTY;

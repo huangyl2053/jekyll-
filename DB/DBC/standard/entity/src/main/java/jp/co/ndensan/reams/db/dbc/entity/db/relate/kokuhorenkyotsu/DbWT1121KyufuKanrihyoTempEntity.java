@@ -54,4 +54,47 @@ public class DbWT1121KyufuKanrihyoTempEntity {
     private RString コントロールレコード保険者名;
     private RString 事業者名称;
 
+    /**
+     * DbWT0001HihokenshaIchijiEntityにかわる。
+     *
+     * @return DbWT0001HihokenshaIchijiEntity
+     */
+    public DbWT1121KyufuKanrihyoEntity toEntity() {
+        DbWT1121KyufuKanrihyoEntity entity = new DbWT1121KyufuKanrihyoEntity();
+        entity.setRenban(連番);
+        entity.setKokanJohoShikibetsuNo(交換情報識別番号);
+        entity.setShinsaYM(審査年月);
+        entity.setServiceTeikyoYM(サービス提供年月);
+        entity.setKyufuShubetsuKubunCode(給付管理票種別区分コード);
+        entity.setKyufuMeisaiLineNo(給付管理票明細行番号);
+        entity.setKyotakushienJigyoshoNo(居宅支援事業所番号);
+        entity.setKyufuSakuseiKubunCode(給付管理票情報作成区分コード);
+        entity.setKyufuSakuseiYMD(給付管理票作成年月日);
+        entity.setMeisaiHokenshaNo(保険者番号);
+        entity.setHiHokenshaUmareYMD(被保険者生年月日);
+        entity.setSeibetsuCode(性別コード);
+        entity.setYoKaigoJotaiKubunCode(要介護状態区分コード);
+        entity.setGendogakuTekiyoKaishiYM(限度額適用開始年月);
+        entity.setGendogakuTekiyoShuryoYM(限度額適用終了年月);
+        entity.setKyotakuKaigoYoboShikyuGendogaku(居宅_介護予防支給限度額);
+        entity.setKyotakuServicePlanSakuseiKubunCode(居宅サービス計画作成区分コード);
+        entity.setServiceJigyoshoNo(サービス事業所番号);
+        entity.setShiteiKijungaitoChiikimitchakuServiceShikibetsuCode(指定_基準該当_地域密着型サービス識別コード);
+        entity.setServiceShuruiCode(サービス種類コード);
+        entity.setKyufuKeikakuTanisuNissu(給付計画単位数_日数);
+        entity.setKyufuKeikakuNissu(限度額管理期間における前月までの給付計画日数);
+        entity.setShiteiServiceSubTotal(指定サービス分小計);
+        entity.setKijyunGaitoServiceSubTotal(基準該当サービス分小計);
+        entity.setKyufuKeikakuTotalTanisuNissu(給付計画合計単位数_日数);
+        entity.setTantoKaigoShienSemmoninNo(担当介護支援専門員番号);
+        entity.setKaigoShienJigyoshaNo(委託先の居宅介護支援事業所番号);
+        entity.setItakusakiTantoKaigoShienSemmoninNo(委託先の担当介護支援専門員番号);
+        entity.setToshoTorokuYMD(当初登録年月日);
+        entity.setTorikomiYM(取込年月);
+        entity.setHokenshaNo(コントロールレコード保険者番号);
+        entity.setHokenshaName(コントロールレコード保険者名);
+        entity.setJigyoshaName(事業者名称);
+        return entity;
+    }
+
 }

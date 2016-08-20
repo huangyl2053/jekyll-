@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyouManager;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShuruiManager;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -209,7 +210,7 @@ public class ServiceRiyohyoInfoDivHandler {
         if (追加.equals(表示モード)) {
             div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getGridSetting().setIsShowSelectButtonColumn(false);
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(true);
-            div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setVisible(false);
+            div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisabled(false);
             div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(true);
             div.getServiceRiyohyoBeppyoGokei().setDisplayNone(true);
             div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(true);
@@ -217,7 +218,7 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getBtnZengetsuCopy().setDisabled(true);
             div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getGridSetting().setIsShowSelectButtonColumn(false);
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(true);
-            div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setVisible(false);
+            div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisabled(false);
             div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(true);
             div.getServiceRiyohyoBeppyoGokei().setDisplayNone(true);
             div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(true);
@@ -228,7 +229,7 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getGridSetting().setIsShowModifyButtonColumn(false);
             div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getGridSetting().setIsShowDeleteButtonColumn(false);
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(false);
-            div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setVisible(false);
+            div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisabled(true);
             div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
             div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
         } else if (照会.equals(表示モード)) {
@@ -379,9 +380,16 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().setDataSource(rowList);
             return;
         }
+        int i = 0;
         for (KyufuJikoSakuseiResult result : サービス利用票情報) {
             dgServiceRiyohyoBeppyoList_Row row = setRow(result);
+            if (i == サービス利用票情報.size() - 1) {
+                row.setHdnGokeiGyoFlag(RSTRING_ONE);
+            } else {
+                row.setHdnGokeiGyoFlag(RSTRING_ZERO);
+            }
             rowList.add(row);
+            i++;
         }
         div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().setDataSource(rowList);
         ViewStateHolder.put(ViewStateKeys.給付計画自己作成EntityList, (Serializable) サービス利用票情報);
@@ -554,10 +562,10 @@ public class ServiceRiyohyoInfoDivHandler {
             サービス種類Tmp = サービス種類コード;
             サービスフラグTmp = true;
             KaigoServiceNaiyouManager manager = new KaigoServiceNaiyouManager();
-            List<KaigoServiceNaiyou> 利用サービスリスト = manager.getServiceList(
+            KaigoServiceNaiyou 利用サービスリスト = manager.getServiceList(
                     サービス種類コード, サービス項目コード, 利用年月);
             //TODO 8.1.2 searchResult many records
-            利用サービス = 利用サービスリスト.isEmpty() ? null : 利用サービスリスト.get(0);
+            利用サービス = 利用サービスリスト;
         } else {
             サービス種類Tmp = 種類コード;
             サービスフラグTmp = false;
@@ -652,8 +660,7 @@ public class ServiceRiyohyoInfoDivHandler {
     private void 総合事業以外の場合(RString サービス種類Tmp, KaigoServiceNaiyou 利用サービス) {
         dgServiceRiyohyoBeppyoList_Row row
                 = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getClickedItem();
-        //合計フラグ datagrid
-        if (合計.equals(row.getHdnGendogakuTaishogaiFlag())
+        if (合計有り.equals(row.getHdnGokeiGyoFlag())
                 && row.getHdnJigyoshaCode().equals(div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo())
                 && row.getHdnServiceShuruiCode().equals(サービス種類Tmp)) {
             int 単位数 = 利用サービス.get単位数();
@@ -710,16 +717,12 @@ public class ServiceRiyohyoInfoDivHandler {
                 = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource();
         dgServiceRiyohyoBeppyoList_Row row
                 = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getClickedItem();
-//        dgServiceRiyohyoBeppyoList_Row lastRow = rowList.get(rowList.size() - 1);
         if (row == null) {
             row = new dgServiceRiyohyoBeppyoList_Row();
             row.setRowState(RowState.Added);
             //TODO 利用年月 ＝ 画面.対象年月
-            //合隶｡行有无判定
-//            if (lastRow.get) {
-//            }
-            rowList.add(rowList.size() - INT_2, row);
-//            rowList.add(rowList.size() - 1, row);
+            rowList.add(row);
+            div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().setDataSource(rowList);
         } else {
             選択データありの場合(row, 状態);
         }
@@ -767,18 +770,30 @@ public class ServiceRiyohyoInfoDivHandler {
 //        div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().clearValue();
 //        div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().clearValue();
 //        div.getServiceRiyohyoBeppyoMeisai().getTxtTeigakuRiyoushaFutangaku().clearValue();
-        div.getServiceRiyohyoBeppyoMeisai().setVisible(false);
+//        div.getServiceRiyohyoBeppyoMeisai().setVisible(false);
     }
 
     private List<dgServiceRiyohyoBeppyoList_Row> ソードGrid(List<dgServiceRiyohyoBeppyoList_Row> rowList) {
-        // TODO 合計フラグ ASC
         Collections.sort(rowList, new Comparator<dgServiceRiyohyoBeppyoList_Row>() {
             @Override
             public int compare(dgServiceRiyohyoBeppyoList_Row arg0, dgServiceRiyohyoBeppyoList_Row arg1) {
-                return arg0.getHdnJigyoshaCode().compareTo(arg1.getHdnJigyoshaCode());
+                return sort(arg0, arg1);
             }
         });
         return rowList;
+    }
+
+    private int sort(dgServiceRiyohyoBeppyoList_Row arg0, dgServiceRiyohyoBeppyoList_Row arg1) {
+        int flag = arg0.getHdnGokeiGyoFlag().compareTo(arg1.getHdnGokeiGyoFlag());
+        if (flag == 0) {
+            int flag1 = arg0.getHdnJigyoshaCode().compareTo(arg1.getHdnJigyoshaCode());
+            if (flag1 == 0) {
+                return arg0.getHdnGokeiFlag().compareTo(arg1.getHdnGokeiFlag());
+            } else {
+                return flag1;
+            }
+        }
+        return flag;
     }
 
     /**
@@ -815,10 +830,10 @@ public class ServiceRiyohyoInfoDivHandler {
         if (種類限度内単位.add(種類限度超過単位).compareTo(Decimal.ZERO) > 0
                 && 種類限度内単位.add(種類限度超過単位).equals(
                         div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().getValue())) {
-            throw new ApplicationException(DbcErrorMessages.重複データサービス.getMessage()
+            throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage()
                     .replace(種類限度単位指定エラー.toString()));
         } else if (!Decimal.ZERO.equals(div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().getValue())) {
-            throw new ApplicationException(DbcErrorMessages.重複データサービス.getMessage()
+            throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage()
                     .replace(区分限度単位指定エラー.toString()));
         }
     }
@@ -835,12 +850,12 @@ public class ServiceRiyohyoInfoDivHandler {
                 ワークメッセージ編集 = 種類区分限度単位指定エラー;
             }
             if (!ワークサービス単位.equals(区分限度内単位.add(種類限度超過単位).add(区分限度超過単位))) {
-                throw new ApplicationException(DbcErrorMessages.重複データサービス.getMessage()
+                throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage()
                         .replace(ワークメッセージ編集.toString()));
             }
             //TODO 没有「限度額対象外フラグ」控件。
         } else if (!サービス単位.equals(区分限度内単位.add(種類限度超過単位).add(区分限度超過単位))) {
-            throw new ApplicationException(DbcErrorMessages.重複データサービス.getMessage()
+            throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage()
                     .replace(種類区分限度単位指定エラー.toString()));
         }
     }
@@ -874,8 +889,7 @@ public class ServiceRiyohyoInfoDivHandler {
      * @param 状態 RString
      */
     public void onClick_btnBeppyoGokeiKakutei(RString 状態) {
-        //TODO 螟・晁ｯｦ扈・
-        ステータス設定(状態);
+        合計反映(状態);
         合計パネルを初期化();
         List<dgServiceRiyohyoBeppyoList_Row> rowList
                 = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource();
@@ -888,6 +902,31 @@ public class ServiceRiyohyoInfoDivHandler {
 //        dgServiceRiyohyoBeppyoList_Row lastRow = rowList.get(rowList.size() - 1);
 
         rowListToResult(rowList);
+    }
+
+    private void 合計反映(RString 状態) {
+        ステータス設定(状態);
+        List<dgServiceRiyohyoBeppyoList_Row> rowList = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource();
+        dgServiceRiyohyoBeppyoList_Row row = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getClickedItem();
+        if (row == null) {
+            row = rowList.get(rowList.size() - 1);
+        }
+        setRowInButtonKakutei(row);
+    }
+
+    private void setRowInButtonKakutei(dgServiceRiyohyoBeppyoList_Row row) {
+        RString サービス種類コードTmp;
+        RString サービス項目コードTmp;
+        RString サービスTmp;
+        if (!div.getCcdServiceCodeInput().isDisplayNone()) {
+            サービス種類コードTmp = div.getCcdServiceCodeInput().getサービスコード1();
+            サービス項目コードTmp = div.getCcdServiceCodeInput().getサービスコード2();
+            サービスTmp = div.getCcdServiceCodeInput().getサービス名称();
+        } else {
+            サービス種類コードTmp = div.getCcdServiceCodeInput().getサービスコード1();
+            サービス項目コードTmp = RString.EMPTY;
+            サービスTmp = div.getCcdServiceTypeInput().getサービス種類名称();
+        }
     }
 
     private void 合計パネルを初期化() {
@@ -940,16 +979,17 @@ public class ServiceRiyohyoInfoDivHandler {
      * 合計情報追加初期化します。
      *
      * @param 被保険者番号 HihokenshaNo
+     * @param 利用年月 FlexibleYearMonth
      */
     public void init合計情報追加(HihokenshaNo 被保険者番号, FlexibleYearMonth 利用年月) {
         JigoSakuseiMeisaiTouroku jigoSakusei = JigoSakuseiMeisaiTouroku.createInstance();
-        List<RiyoshaFutanWariaiMeisai> 合計情報 = jigoSakusei.get給付率(被保険者番号, 利用年月);
+        RiyoshaFutanWariaiMeisai 合計情報 = jigoSakusei.get給付率(被保険者番号, 利用年月);
         Decimal 給付率 = 給付率_90;
-        if (合計情報 != null && !合計情報.isEmpty()) {
+        if (合計情報 != null) {
             // TODO QAのNo.1217 (Redmine#96071)
-            if (負担割合区分_1割.equals(合計情報.get(0).get負担割合区分())) {
+            if (負担割合区分_1割.equals(合計情報.get負担割合区分())) {
                 給付率 = 給付率_100.subtract(一割);
-            } else if (負担割合区分_2割.equals(合計情報.get(0).get負担割合区分())) {
+            } else if (負担割合区分_2割.equals(合計情報.get負担割合区分())) {
                 給付率 = 給付率_100.subtract(二割);
             }
         }

@@ -292,10 +292,11 @@ public class SokujiFukaKouseiMain {
     public ResponseData<SokujiFukaKouseiMainDiv> onChange_ddlKoseigoTsuchishoNo(SokujiFukaKouseiMainDiv div) {
         KoseiZengoChoshuHoho 更正前後徴収方法 = ViewStateHolder.get(ViewStateKeys.更正前後徴収方法, KoseiZengoChoshuHoho.class);
         List<KoseiZengoFuka> 更正前後賦課のリスト = ViewStateHolder.get(ViewStateKeys.更正前後賦課のリスト, List.class);
+        NendobunFukaList 更正前 = ViewStateHolder.get(ViewStateKeys.更正前, NendobunFukaList.class);
         NendobunFukaList 更正後 = ViewStateHolder.get(ViewStateKeys.更正後, NendobunFukaList.class);
         boolean is本算定処理済フラグ = ViewStateHolder.get(ViewStateKeys.本算定処理済フラグ, Boolean.class);
         SokujiFukaKouseiMainHandler handler = getHandler(div);
-        handler.set画面入力項目を反映(更正後);
+        handler.set画面入力項目を反映(更正前, 更正後);
         KoseiZengoFuka 更正前後賦課 = new KoseiZengoFuka();
         for (KoseiZengoFuka koseiZengoFuka : 更正前後賦課のリスト) {
             if (更正後.get通知書番号().getColumnValue().equals(koseiZengoFuka.get通知書番号().getColumnValue())) {
@@ -396,9 +397,10 @@ public class SokujiFukaKouseiMain {
      * @return ResponseData<SokujiFukaKouseiMainDiv>
      */
     public ResponseData<SokujiFukaKouseiMainDiv> onClick_btnYokunendoHyoji(SokujiFukaKouseiMainDiv div) {
+        NendobunFukaList 更正前 = ViewStateHolder.get(ViewStateKeys.更正前, NendobunFukaList.class);
         NendobunFukaList 更正後 = ViewStateHolder.get(ViewStateKeys.更正後, NendobunFukaList.class);
         SokujiFukaKouseiMainHandler handler = getHandler(div);
-        boolean isChange = handler.set画面入力項目を反映(更正後);
+        boolean isChange = handler.set画面入力項目を反映(更正前, 更正後);
         if (isChange) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(DbzQuestionMessages.変更未保存の確認.getMessage()).respond();

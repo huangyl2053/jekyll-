@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyo;
+import jp.co.ndensan.reams.db.dbc.business.core.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoTorokuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -480,6 +481,27 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
 
     private JukyushaIdoRenrakuhyoValidationHandler getValidationHandler() {
         return new JukyushaIdoRenrakuhyoValidationHandler(this);
+    }
+
+    /**
+     * 出力用受給者訂正情報Entity取得のメソッドです。
+     *
+     * @return JukyushaIdoRenrakuhyoSakuseiRelateEntity
+     */
+    @Override
+    public JukyushaIdoRenrakuhyoTorokuEntity get受給者訂正連絡票Entity() {
+        return JukyushaIdoRenrakuhyoHandler.of(this).get受給者訂正連絡票Entity();
+    }
+
+    /**
+     * 出力用受給者異動連絡票Entity取得のメソッドです。
+     *
+     * @return JukyushaIdoRenrakuhyoTorokuEntity
+     */
+    @Override
+    public JukyushaIdoRenrakuhyoTorokuEntity get受給者異動連絡票Entity() {
+
+        return JukyushaIdoRenrakuhyoHandler.of(this).get受給者異動連絡票Entity();
     }
 
 }

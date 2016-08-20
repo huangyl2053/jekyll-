@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import java.io.File;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120060.KyufuJissekiKoshinDoIchiranhyoSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120060.KyufuJissekiKoshinGetJigyoshaNameProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120060.KyufuJissekiKoshinGetNameProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120060.KyufuJissekiKoshinReadCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
@@ -45,20 +46,20 @@ public class DBC120060_KyufuJissekiKoshinIn extends BatchFlowBase<KokuhorenKyout
 
     private static final String ファイル取得 = "getFile";
     private static final String CSVファイル取込 = "readCsvFile";
-    private static final String 名称取得 = "getName";
+    private static final String 事業者名称取得 = "getJigyoshaName";
+    private static final String 入力識別名称取得 = "getName";
     private static final String 被保険者関連処理 = "doHihokenshaKanren";
     private static final String 国保連インタフェース管理更新 = "doInterfaceKanriKousin";
     private static final String 一覧表作成 = "doIchiranhyoSakusei";
     private static final String 処理結果リスト作成 = "doShoriKekkaListSakusei";
     private static final String 取込済ファイル削除 = "deleteReveicedFile";
-
     private static final RString ファイル格納フォルダ名 = new RString("DBC120060");
 
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
     private FlowEntity flowEntity;
     private RString csvFullPath;
     private int レコード件数合算 = 0;
-
+    private boolean isLast = false;
     private static RString 交換情報識別番号;
 
     @Override
@@ -72,11 +73,15 @@ public class DBC120060_KyufuJissekiKoshinIn extends BatchFlowBase<KokuhorenKyout
             returnEntity
                     = getResult(KokuhorenKyoutsuuFileGetReturnEntity.class, new RString(ファイル取得),
                             KokuhorenkyoutsuGetFileProcess.PARAMETER_OUT_RETURNENTITY);
-            for (int i = 0; i < returnEntity.getFileNameList().size(); i++) {
+            int size = returnEntity.getFileNameList().size();
+            for (int i = 0; i < size; i++) {
                 String filePath = returnEntity.get保存先フォルダのパス() + File.separator
                         + returnEntity.getFileNameList().get(i);
                 File path = new File(filePath);
                 csvFullPath = new RString(path.getPath());
+                if (i == size - 1) {
+                    isLast = true;
+                }
                 executeStep(CSVファイル取込);
                 flowEntity = getResult(FlowEntity.class, new RString(CSVファイル取込),
                         KyufuJissekiKoshinReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
@@ -88,7 +93,8 @@ public class DBC120060_KyufuJissekiKoshinIn extends BatchFlowBase<KokuhorenKyout
                 executeStep(国保連インタフェース管理更新);
                 executeStep(処理結果リスト作成);
             } else {
-                executeStep(名称取得);
+                executeStep(事業者名称取得);
+                executeStep(入力識別名称取得);
                 executeStep(被保険者関連処理);
                 executeStep(国保連インタフェース管理更新);
                 executeStep(一覧表作成);
@@ -127,15 +133,26 @@ public class DBC120060_KyufuJissekiKoshinIn extends BatchFlowBase<KokuhorenKyout
         parameter.set保存先フォルダ(csvFullPath);
         parameter.setエントリ情報List(returnEntity.getFileNameList());
         parameter.set連番(レコード件数合算);
+        parameter.setLast(isLast);
         return loopBatch(KyufuJissekiKoshinReadCsvFileProcess.class).arguments(parameter).define();
     }
 
     /**
-     * 名称取得です。
+     * 事業者名称取得です。
      *
-     * @return KohifutanshaReadCsvFileProcess
+     * @return KyufuJissekiKoshinGetJigyoshaNameProcess
      */
-    @Step(名称取得)
+    @Step(事業者名称取得)
+    protected IBatchFlowCommand callGetJigyoshaNameProcess() {
+        return loopBatch(KyufuJissekiKoshinGetJigyoshaNameProcess.class).define();
+    }
+
+    /**
+     * 入力識別名称取得です。
+     *
+     * @return KyufuJissekiKoshinGetNameProcess
+     */
+    @Step(入力識別名称取得)
     protected IBatchFlowCommand callGetNameProcess() {
         return loopBatch(KyufuJissekiKoshinGetNameProcess.class).define();
     }

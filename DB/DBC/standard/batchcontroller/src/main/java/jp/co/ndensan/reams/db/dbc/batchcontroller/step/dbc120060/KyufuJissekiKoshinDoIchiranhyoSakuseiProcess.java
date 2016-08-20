@@ -93,6 +93,12 @@ public class KyufuJissekiKoshinDoIchiranhyoSakuseiProcess extends BatchKeyBreakB
     RString 並び順の３件目 = RString.EMPTY;
     RString 並び順の４件目 = RString.EMPTY;
     RString 並び順の５件目 = RString.EMPTY;
+    private static final int INDEX_1 = 1;
+    private static final int INDEX_2 = 2;
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
+    private static final RString CODE = new RString("0003");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
 
     @Override
     protected void initialize() {
@@ -115,13 +121,13 @@ public class KyufuJissekiKoshinDoIchiranhyoSakuseiProcess extends BatchKeyBreakB
                 }
                 if (i == 0) {
                     並び順の１件目 = item.get項目名();
-                } else if (i == 1) {
+                } else if (i == INDEX_1) {
                     並び順の２件目 = item.get項目名();
-                } else if (i == 2) {
+                } else if (i == INDEX_2) {
                     並び順の３件目 = item.get項目名();
-                } else if (i == 3) {
+                } else if (i == INDEX_3) {
                     並び順の４件目 = item.get項目名();
-                } else if (i == 4) {
+                } else if (i == INDEX_4) {
                     並び順の５件目 = item.get項目名();
                 }
                 i = i + 1;
@@ -212,11 +218,10 @@ public class KyufuJissekiKoshinDoIchiranhyoSakuseiProcess extends BatchKeyBreakB
         } else {
             manager.spool(eucFilePath);
         }
-        batchReportWriter.close();
     }
 
     private PersonalData getPersonalData(ChohyoShutsuryokuTaishoDateEntity entity) {
-        ExpandedInformation expandedInformations = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
+        ExpandedInformation expandedInformations = new ExpandedInformation(new Code(CODE), 被保険者番号,
                 getColumnValue(new HihokenshaNo(entity.get被保険者_登録被保険者番号())));
         return PersonalData.of(new ShikibetsuCode(entity.get被保険者_識別コード()), expandedInformations);
     }

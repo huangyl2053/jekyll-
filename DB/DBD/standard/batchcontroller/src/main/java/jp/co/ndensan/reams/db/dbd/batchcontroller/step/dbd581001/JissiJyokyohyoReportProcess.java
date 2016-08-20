@@ -40,12 +40,10 @@ public class JissiJyokyohyoReportProcess extends BatchProcessBase<JukyushaDaicho
     private YokaigoJissiJyokyohyoProcessParameter parameter;
     @BatchWriter
     BatchEntityCreatedTempTableWriter tempWriter;
-    private final RString 出力帳票 = new RString("要介護認定実施状況表（その月に申請・認定を受けた受給者の統計）");
+    private static final RString 出力帳票 = new RString("要介護認定実施状況表（その月に申請・認定を受けた受給者の統計）");
 
     @Override
     protected void initialize() {
-        tempWriter = new BatchEntityCreatedTempTableWriter(new RString("受給者台帳一時テーブル"),
-                JukyushaDaichoTempEntity.class);
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
@@ -64,19 +62,25 @@ public class JissiJyokyohyoReportProcess extends BatchProcessBase<JukyushaDaicho
     }
 
     @Override
+    protected void createWriter() {
+        tempWriter = new BatchEntityCreatedTempTableWriter(new RString("受給者台帳一時テーブル"),
+                JukyushaDaichoTempEntity.class);
+    }
+
+    @Override
     protected void process(JukyushaDaichoTempEntity entity) {
         if (parameter.get出力帳票().equals(出力帳票)) {
-            entity.set認定年月(new RString(entity.get認定年月日().toString()).substring(0, 6));
-            entity.set受給申請年月(new RString(entity.get受給申請年月日().toString()).substring(0, 6));
-            entity.set調査委託年月(new RString(entity.get調査委託年月日().toString()).substring(0, 6));
-            entity.set調査終了年月(new RString(entity.get調査終了年月日().toString()).substring(0, 6));
-            entity.set意見書依頼年月(new RString(entity.get意見書依頼年月日().toString()).substring(0, 6));
-            entity.set意見書取寄せ年月(new RString(entity.get意見書取寄せ年月日().toString()).substring(0, 6));
-            entity.set審査会依頼年月(new RString(entity.get審査会依頼年月日().toString()).substring(0, 6));
-            entity.set認定審査会割当予定年月(new RString(entity.get認定審査会割当予定年月日().toString()).substring(0, 6));
-            entity.set審査会資料作成年月(new RString(entity.get審査会資料作成年月日().toString()).substring(0, 6));
-            entity.set認定調査予定年月(new RString(entity.get認定調査予定年月日().toString()).substring(0, 6));
-            entity.set主治医意見書作成依頼予定年月(new RString(entity.get主治医意見書作成依頼予定年月日().toString()).substring(0, 6));
+            entity.set認定年月(entity.get認定年月日().getYearMonth().seireki().toDateString());
+            entity.set受給申請年月(entity.get受給申請年月日().getYearMonth().seireki().toDateString());
+            entity.set調査委託年月(entity.get調査委託年月日().getYearMonth().seireki().toDateString());
+            entity.set調査終了年月(entity.get調査終了年月日().getYearMonth().seireki().toDateString());
+            entity.set意見書依頼年月(entity.get意見書依頼年月日().getYearMonth().seireki().toDateString());
+            entity.set意見書取寄せ年月(entity.get意見書取寄せ年月日().getYearMonth().seireki().toDateString());
+            entity.set審査会依頼年月(entity.get審査会依頼年月日().getYearMonth().seireki().toDateString());
+            entity.set認定審査会割当予定年月(entity.get認定審査会割当予定年月日().getYearMonth().seireki().toDateString());
+            entity.set審査会資料作成年月(entity.get審査会資料作成年月日().getYearMonth().seireki().toDateString());
+            entity.set認定調査予定年月(entity.get認定調査予定年月日().getYearMonth().seireki().toDateString());
+            entity.set主治医意見書作成依頼予定年月(entity.get主治医意見書作成依頼予定年月日().getYearMonth().seireki().toDateString());
             tempWriter.insert(entity);
         }
 

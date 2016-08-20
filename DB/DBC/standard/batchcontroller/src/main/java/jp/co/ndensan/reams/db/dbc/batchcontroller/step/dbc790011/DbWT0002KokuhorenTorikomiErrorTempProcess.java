@@ -51,7 +51,7 @@ public class DbWT0002KokuhorenTorikomiErrorTempProcess extends BatchProcessBase<
 
     @Override
     protected void process(Integer num) {
-        if (num == NUM_0) {
+        if (NUM_0.equals(num)) {
             DbWT0002KokuhorenTorikomiErrorEntity 処理結果 = new DbWT0002KokuhorenTorikomiErrorEntity();
             処理結果.setErrorKubun(エラー区分_登録対象なし);
             処理結果リスト一時tableWriter.insert(処理結果);

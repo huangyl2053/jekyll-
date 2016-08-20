@@ -90,7 +90,7 @@
         </if>
             
         WHERE T4037."dbT4038ShogaishaKoujo_ninteishoHakkoTaishogai" = false
-        <if test="被保険者番号 != null">
+        <if test="被保険者番号 != null and !被保険者番号.isEmpty()">
             AND T4037."dbT4038ShogaishaKoujo_hihokenshaNo" = #{被保険者番号}
         </if>
         <if test="氏名!=null and !氏名.isEmpty()">
@@ -109,7 +109,7 @@
             AND T4037."dbT4038ShogaishaKoujo_shogaiNichijoSeikatsuJiritsudoCode" = #{障害高齢者の日常生活自立度}
         </if>
         <if test="障がい者手帳!=null and !障がい者手帳.isEmpty()">
-            <if test="障がい者手帳ある">
+            <if test="障がい者手帳あり">
                 AND T4037."dbT4038ShogaishaKoujo_shogaishaTechoUmu" = true
             </if>
             <if test="障がい者手帳なし">
@@ -119,16 +119,16 @@
         <if test="喪失事由!= null and !喪失事由.isEmpty()">
             AND T4037."dbT4038ShogaishaKoujo_shikakuSoshitsuJiyuCode" = #{喪失事由}
         </if>
-        <if test="喪失日FROM != null">
+        <if test="喪失日FROM != null and !喪失日FROM.isEmpty()">
             AND #{喪失日FROM} <![CDATA[<=]]> T4037."dbT4038ShogaishaKoujo_shikakuSoshitsuYMD"
         </if>
-        <if test="喪失日TO != null">
+        <if test="喪失日TO != null and !喪失日TO.isEmpty()">
             AND T4037."dbT4038ShogaishaKoujo_shikakuSoshitsuYMD" <![CDATA[<=]]> #{喪失日TO}
         </if>
-        <if test="決定日FROM != null">
+        <if test="決定日FROM != null and !決定日FROM.isEmpty()">
             AND #{決定日FROM} <![CDATA[<=]]> T4037."dbT4038ShogaishaKoujo_ketteiYMD"
         </if>
-        <if test="決定日TO != null">
+        <if test="決定日TO != null and !決定日TO.isEmpty()">
             AND T4037."dbT4038ShogaishaKoujo_ketteiYMD" <![CDATA[<=]]> #{決定日TO}
         </if>
     </select>

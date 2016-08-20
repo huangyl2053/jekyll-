@@ -148,6 +148,9 @@ public class HanteiTaishoshaTempEditor {
     }
 
     private RString get異動種別名(RString 異動種別) {
+        if (定数_0.equals(出力条件)) {
+            return RString.EMPTY;
+        }
         if (定数_1.equals(異動種別)) {
             return 定数_受給者台帳;
         } else if (定数_2.equals(異動種別)) {

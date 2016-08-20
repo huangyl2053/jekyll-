@@ -39,7 +39,7 @@ and open the template in the editor.
         C."nendo",
         C."kijunTimestamp"
         FROM rgdb."DbT7022ShoriDateKanri" C
-        WHERE C."subGyomuCode" = #{DBB介護賦課}
+        WHERE C."subGyomuCode" = #{介護賦課}
         AND C."shoriName" = '当初所得引出'
         AND C."shoriEdaban" = '0001'
         AND C."nendoNaiRenban" = '0001'
@@ -52,7 +52,7 @@ and open the template in the editor.
         "kijunYMD",
         "jushochiTokureiFlag"
     </select>
-    <resultMap id="RseultMap_SetaiinHaakuJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmenGengakuTaishoShaHanteiYoukonSakusei.SetaiinHaakuJohoEntity" autoMapping="true">
+    <resultMap id="RseultMap_SetaiinHaakuJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengakutaishoshahanteiyoukonsakusei.SetaiinHaakuJohoEntity" autoMapping="true">
         <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
         <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
         <result property="基準年月日" column="kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />

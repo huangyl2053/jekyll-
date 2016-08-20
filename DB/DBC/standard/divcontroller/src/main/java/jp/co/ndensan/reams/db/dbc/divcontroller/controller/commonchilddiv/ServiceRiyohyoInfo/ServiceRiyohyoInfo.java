@@ -57,6 +57,9 @@ public class ServiceRiyohyoInfo {
     private static final RString RSTRING_67 = new RString("67");
     private static final RString RSTRING_88 = new RString("88");
 
+    private static final Decimal DECIMAL_90 = new Decimal(90);
+    private static final Decimal DECIMAL_80 = new Decimal(80);
+
     private ServiceRiyohyoInfoDivHandler getHandler(ServiceRiyohyoInfoDiv div) {
         return new ServiceRiyohyoInfoDivHandler(div);
     }
@@ -233,7 +236,7 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnBeppyoMeisaiKakutei(ServiceRiyohyoInfoDiv div) {
-        RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+        RString 状態 = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
         getHandler(div).onClick_btnBeppyoMeisaiKakutei(状態);
         return ResponseData.of(div).respond();
     }
@@ -281,8 +284,25 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnBeppyoGokeiKakutei(ServiceRiyohyoInfoDiv div) {
-        RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
-        getHandler(div).onClick_btnBeppyoGokeiKakutei(状態);
+        Decimal 給付率 = ViewStateHolder.get(ViewStateKeys.給付率, Decimal.class);
+        Decimal 給付率div = div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().getValue() == null
+                ? Decimal.ZERO : div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().getValue();
+        if (給付率.compareTo(給付率div) != 0) {
+            if (給付率.compareTo(DECIMAL_90) == 0 && !ResponseHolder.isReRequest()) {
+                return ResponseData.of(div).addMessage(
+                        DbcQuestionMessages.給付率修正確認.getMessage().replace(RSTRING_ONE.toString())).respond();
+            } else if (給付率.compareTo(DECIMAL_80) == 0 && !ResponseHolder.isReRequest()) {
+                return ResponseData.of(div).addMessage(
+                        DbcQuestionMessages.給付率修正確認.getMessage().replace(RSTRING_TWO.toString())).respond();
+            }
+        }
+        if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())
+                || !new RString(DbcQuestionMessages.給付率修正確認
+                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+
+            RString 状態 = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
+            getHandler(div).onClick_btnBeppyoGokeiKakutei(状態);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -571,7 +591,7 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnCalcMeisaiGokei(ServiceRiyohyoInfoDiv div) {
-        RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+        RString 状態 = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
         getHandler(div).onClick_btnBeppyoMeisaiKakutei(状態);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         RDate 利用年月日 = div.getTxtRiyoYM().getValue();

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -25,18 +26,17 @@ public class KaigoShotokuIdoProcess extends BatchProcessBase<IdoRiyoshaDateEntit
 
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.idoriyoshafutanwariaihantei."
-                    + "IIdoRiyoshaFutanwariaiHanteiMapper.select介護所得異動");
-    private IdoDateTyuushutuKyoutsuuProcessParameter parameter;
-    private RString 出力条件;
-
-    @BatchWriter
-    BatchEntityCreatedTempTableWriter tableWriter;
-
+                    + "IIdoDateTyuushutuKyoutsuuMapper.select介護所得異動");
     private static final RString 異動種別_4 = new RString("4");
     private static final RString 出力条件_受給者台帳 = new RString("1");
     private static final RString 出力条件_総合事業対象者 = new RString("2");
     private static final RString 出力条件_なし = new RString("0");
     private static final RString TABLE_NAME = new RString("HanteiTaishoshaTemp");
+    private IdoDateTyuushutuKyoutsuuProcessParameter parameter;
+    private RString 出力条件;
+
+    @BatchWriter
+    IBatchTableWriter tableWriter;
 
     @Override
     protected IBatchReader createReader() {

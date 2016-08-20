@@ -60,6 +60,10 @@ public class KyufuTsuchiGenmenHoseiHandler {
         List<AuthorityItem> 市町村識別IDList = ShichosonSecurityJoho.getShichosonShikibetsuId(userId);
 
         List<KeyValueDataSource> 市町村DDL = new ArrayList<>();
+        KeyValueDataSource source1 = new KeyValueDataSource();
+        source1.setKey(new RString("000000"));
+        source1.setValue(new RString("000000 全市町村"));
+        市町村DDL.add(source1);
         for (AuthorityItem item : 市町村識別IDList) {
             if (市町村識別ID.equals(item.getItemId())) {
                 市町村DDL = get現市町村情報();
@@ -68,7 +72,7 @@ public class KyufuTsuchiGenmenHoseiHandler {
                 source.setKey(item.getItemId());
                 StringBuilder strBuilder = new StringBuilder();
                 strBuilder.append(item.getItemId());
-                strBuilder.append(" ");
+                strBuilder.append(RString.HALF_SPACE);
                 strBuilder.append(item.getItemName());
                 source.setValue(new RString(strBuilder.toString()));
                 市町村DDL.add(source);
@@ -124,6 +128,10 @@ public class KyufuTsuchiGenmenHoseiHandler {
 
     private List<KeyValueDataSource> get現市町村情報() {
         List<KeyValueDataSource> 市町村DDL = new ArrayList<>();
+        KeyValueDataSource source1 = new KeyValueDataSource();
+        source1.setKey(new RString("000000"));
+        source1.setValue(new RString("000000 全市町村"));
+        市町村DDL.add(source1);
         KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
         List<KoikiZenShichosonJoho> 現市町村情報list = finder.getGenShichosonJoho().records();
         for (KoikiZenShichosonJoho business : 現市町村情報list) {
@@ -131,7 +139,7 @@ public class KyufuTsuchiGenmenHoseiHandler {
             source.setKey(business.get市町村コード().value());
             StringBuilder strBuilder = new StringBuilder();
             strBuilder.append(business.get市町村コード().value());
-            strBuilder.append(" ");
+            strBuilder.append(RString.HALF_SPACE);
             strBuilder.append(business.get市町村名称());
             source.setValue(new RString(strBuilder.toString()));
             市町村DDL.add(source);

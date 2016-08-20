@@ -72,7 +72,7 @@ public class IraiJohoDataTorikomi {
     }
 
     /**
-     * データ取込ボタンのonClick処理です。
+     * アップロードボタンのonClick処理です。
      *
      * @param div IraiJohoDataTorikomiDiv
      * @param files ファイル
@@ -80,10 +80,6 @@ public class IraiJohoDataTorikomi {
      */
     @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<IraiJohoDataTorikomiDiv> onClick_BtnUpload(IraiJohoDataTorikomiDiv div, FileData[] files) {
-        ValidationMessageControlPairs validationMessages = getValidationHandler(div).取込みファイル対象未選択チェック(files);
-        if (validationMessages.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-        }
         for (FileData file : files) {
             savaCsvファイル(file);
         }
@@ -125,9 +121,12 @@ public class IraiJohoDataTorikomi {
         RString imagePath = Path.combinePath(Path.getRootPath(RString.EMPTY), DbBusinessConfig
                 .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         RString csvReaderPath = Path.combinePath(imagePath, CSVファイル名);
-
-        List<IraiJohoDataTorikomiCsvEntity> csvEntityList = insertCsvDate(csvReaderPath);
-
+        List<IraiJohoDataTorikomiCsvEntity> csvEntityList;
+        try {
+            csvEntityList = insertCsvDate(csvReaderPath);
+        } catch (Exception e) {
+            return ResponseData.of(div).addValidationMessages(getValidationHandler(div).取込みファイル対象未選択チェック()).respond();
+        }
         ValidationMessageControlPairs validationMessages = getValidationHandler(div).データを取込のチェック(csvEntityList);
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
@@ -177,7 +176,8 @@ public class IraiJohoDataTorikomi {
         for (dgTorikomiFileIchiran_Row row : rowList) {
             if (row.getCheckBox()) {
                 for (IraiJohoDataTorikomiCsvEntity csvEntity : csvEntityList) {
-                    if (csvEntity.get保険者番号().equals(row.getHokenshaBango()) && csvEntity.get被保険者番号().equals(row.getHihokenshaBango())) {
+                    if (csvEntity.get保険者番号().equals(row.getHokenshaBango()) && csvEntity.get被保険者番号().equals(row.getHihokenshaBango())
+                            && csvEntity.get申請日().equals(row.getShinseibi())) {
                         businessList.add(getHandler(div).帳票出力用情報の編集(csvEntity));
                     }
                 }
@@ -215,13 +215,13 @@ public class IraiJohoDataTorikomi {
             if (validationMessages.iterator().hasNext() && !ResponseHolder.isWarningIgnoredRequest()) {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
-            List<dgTorikomiFileIchiran_Row> rowlist = div.getDgTorikomiFileIchiran().getDataSource();
+            List<dgTorikomiFileIchiran_Row> rowlist = div.getDgTorikomiFileIchiran().getSelectedItems();
             for (dgTorikomiFileIchiran_Row row : rowlist) {
                 if (row.getCheckBox()) {
                     IkenshokinyuyoshiBusiness business = getBusiness(csvEntityList, row, div);
                     IraiJohoDataTorikomiManager.createInstance().各テーブルへの登録(row.getShinseishoKanriNo(),
                             row.getIkenshoIraiRirekiNo().getValue().intValue(), row.getKoroshoIfShikibetsuCode(),
-                            row.getShinseishoKanriNo(), row.getKoroshoIfShikibetsuCode(), business);
+                            row.getShujiiIryokikanCode(), row.getShujiiCode(), business);
                 }
             }
         }
@@ -232,7 +232,8 @@ public class IraiJohoDataTorikomi {
             dgTorikomiFileIchiran_Row row, IraiJohoDataTorikomiDiv div) {
         IkenshokinyuyoshiBusiness business = new IkenshokinyuyoshiBusiness();
         for (IraiJohoDataTorikomiCsvEntity csvEntity : csvEntityList) {
-            if (csvEntity.get保険者番号().equals(row.getHokenshaBango()) && csvEntity.get被保険者番号().equals(row.getHihokenshaBango())) {
+            if (csvEntity.get保険者番号().equals(row.getHokenshaBango()) && csvEntity.get被保険者番号().equals(row.getHihokenshaBango())
+                    && csvEntity.get申請日().equals(row.getShinseibi())) {
                 business = getHandler(div).帳票出力用情報の編集(csvEntity);
             }
         }

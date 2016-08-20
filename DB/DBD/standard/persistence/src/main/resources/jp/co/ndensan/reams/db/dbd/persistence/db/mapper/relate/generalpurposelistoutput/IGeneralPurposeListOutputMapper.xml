@@ -728,14 +728,14 @@ SELECT
                  ORDER BY "rirekiNo" DESC) AS 施設入退所_番号
                 FROM
                     rgdb."DbT1004ShisetsuNyutaisho"
+                WHERE 
+                    row_number() OVER (PARTITION BY "shikibetsuCode", "rirekiNo" ORDER BY "rirekiNo" DESC) = 1 
+                    AND "isDeleted" = false
                 ) AS 介護保険施設入退所2
                
         ON 介護保険施設入退所2."shikibetsuCode" = 施設入所."shikibetsuCode"
         AND 介護保険施設入退所2."rirekiNo" = 施設入所."rirekiNo"
 
-        WHERE 
-             介護保険施設入退所2.施設入退所_番号 = 1 AND 
-             介護保険施設入退所2."isDeleted" = false
     </if>
     <if test="is抽出方法区分_基準日">
         AND 施設入所."taishoYMD" IS NOT NULL
