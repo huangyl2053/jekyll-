@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100201.HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100203.SokyuHikazeiNenkinBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.message.DbdQuestionMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.DBD8010002StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.HikazeiNenkinTaishoshaJohoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD8010002.HikazeiNenkinTaishoshaJohoHandler;
@@ -16,6 +17,10 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD8010002.Hik
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -31,7 +36,7 @@ public class HikazeiNenkinTaishoshaJoho {
      * 画面初期化処理です。
      *
      * @param div JissiJyokyohyoDiv
-     * @return ResponseData<JissiJyokyohyoDiv>
+     * @return ResponseData<HikazeiNenkinTaishoshaJohoDiv>
      */
     public ResponseData<HikazeiNenkinTaishoshaJohoDiv> onLoad(HikazeiNenkinTaishoshaJohoDiv div) {
         List<RString> 取込対象市町村コードリスト = getHandler(div).onLoad(div);
@@ -51,7 +56,7 @@ public class HikazeiNenkinTaishoshaJoho {
      * 年度DDLの選択処理です。
      *
      * @param div JissiJyokyohyoDiv
-     * @return ResponseData<JissiJyokyohyoDiv>
+     * @return ResponseData<HikazeiNenkinTaishoshaJohoDiv>
      */
     public ResponseData<HikazeiNenkinTaishoshaJohoDiv> onChange_ddlShoriNendo(HikazeiNenkinTaishoshaJohoDiv div) {
         List<RString> 取込対象市町村コードリスト = getHandler(div).onChange_ddlShoriNendo(div);
@@ -64,7 +69,7 @@ public class HikazeiNenkinTaishoshaJoho {
      * 月DDLの選択処理です。
      *
      * @param div JissiJyokyohyoDiv
-     * @return ResponseData<JissiJyokyohyoDiv>
+     * @return ResponseData<HikazeiNenkinTaishoshaJohoDiv>
      */
     public ResponseData<HikazeiNenkinTaishoshaJohoDiv> onChange_ddlTuki(HikazeiNenkinTaishoshaJohoDiv div) {
         List<RString> 取込対象市町村コードリスト = getHandler(div).onChange_ddlTuki(div);
@@ -77,7 +82,7 @@ public class HikazeiNenkinTaishoshaJoho {
      * 処理設定のクリンク処理です。
      *
      * @param div JissiJyokyohyoDiv
-     * @return ResponseData<JissiJyokyohyoDiv>
+     * @return ResponseData<HikazeiNenkinTaishoshaJohoDiv>
      */
     public ResponseData<HikazeiNenkinTaishoshaJohoDiv> onClick_btnShoriSettei(HikazeiNenkinTaishoshaJohoDiv div) {
 
@@ -90,7 +95,7 @@ public class HikazeiNenkinTaishoshaJoho {
      * 処理設定のクリンク処理です。
      *
      * @param div JissiJyokyohyoDiv
-     * @return ResponseData<JissiJyokyohyoDiv>
+     * @return ResponseData<HikazeiNenkinTaishoshaJohoDiv>
      */
     public ResponseData<HikazeiNenkinTaishoshaJohoDiv> onClick_btnBatchRegister(HikazeiNenkinTaishoshaJohoDiv div) {
 
@@ -125,6 +130,50 @@ public class HikazeiNenkinTaishoshaJoho {
     public ResponseData<SokyuHikazeiNenkinBatchParameter> createDBD301020BatchParamter(HikazeiNenkinTaishoshaJohoDiv div) {
 
         return ResponseData.of(getHandler(div).createDBD301020BatchParamter(div)).respond();
+    }
+
+    /**
+     * 「保存する」ボタンのクリンク処理です。
+     *
+     * @param div JissiJyokyohyoDiv
+     * @return SokyuHikazeiNenkinBatchParameter
+     */
+    public ResponseData<HikazeiNenkinTaishoshaJohoDiv> onClick_btnUpdate(HikazeiNenkinTaishoshaJohoDiv div) {
+
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        getValidationHandler(div).validateFor編集なし(pairs);
+
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
+
+        if (!ResponseHolder.isReRequest()
+                && getValidationHandler(div).validateFor再処理確認()) {
+            QuestionMessage message = new QuestionMessage(DbdQuestionMessages.非課税年金再処理確認.getMessage().getCode(),
+                    DbdQuestionMessages.非課税年金再処理確認.getMessage().evaluate());
+
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+
+        if (new RString(DbdQuestionMessages.非課税年金再処理確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.No)) {
+            return ResponseData.of(div).respond();
+        }
+
+        getHandler(div).onClick_btnUpdate(div);
+        return onLoad(div);
+
+    }
+
+    /**
+     * 「戻る」ボタンのクリンク処理です。
+     *
+     * @param div JissiJyokyohyoDiv
+     * @return SokyuHikazeiNenkinBatchParameter
+     */
+    public ResponseData<HikazeiNenkinTaishoshaJohoDiv> onClick_btnBack(HikazeiNenkinTaishoshaJohoDiv div) {
+
+        return onLoad(div);
     }
 
     private HikazeiNenkinTaishoshaJohoHandler getHandler(HikazeiNenkinTaishoshaJohoDiv div) {

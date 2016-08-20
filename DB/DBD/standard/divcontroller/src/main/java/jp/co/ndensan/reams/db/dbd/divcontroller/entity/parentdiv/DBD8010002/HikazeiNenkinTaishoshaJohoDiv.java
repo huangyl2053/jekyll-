@@ -407,8 +407,13 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun2() {
-        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun2();
+    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun1() {
+        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun1();
+    }
+
+    @JsonIgnore
+    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun4() {
+        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun4();
     }
 
     @JsonIgnore
@@ -417,13 +422,8 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun1() {
-        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun1();
-    }
-
-    @JsonIgnore
-    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun4() {
-        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun4();
+    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun2() {
+        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun2();
     }
 
     @JsonIgnore
