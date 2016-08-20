@@ -40,7 +40,7 @@ public class GemmenShinseishoTaishohaakuProcess extends BatchProcessBase<HanteiT
     private FlexibleDate 開始日;
     private GemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTempTableEntity item;
     @BatchWriter
-    private BatchEntityCreatedTempTableWriter HantYoukSakusTaishosTemp;
+    private BatchEntityCreatedTempTableWriter hantYoukSakusTaishosTemp;
 
     @Override
     protected void initialize() {
@@ -63,19 +63,20 @@ public class GemmenShinseishoTaishohaakuProcess extends BatchProcessBase<HanteiT
 
     @Override
     protected void createWriter() {
-        HantYoukSakusTaishosTemp = new BatchEntityCreatedTempTableWriter(GemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTempTableEntity.TABLE_NAME,
+        hantYoukSakusTaishosTemp = new BatchEntityCreatedTempTableWriter(GemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTempTableEntity.TABLE_NAME,
                 GemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTempTableEntity.class);
     }
 
     @Override
     protected void process(HanteiTaishoshaTokuteiEntity list) {
         item = set減免減額対象者判定用根拠作成対象者(list.get被保険者番号(), processParamter.get基準日());
-        HantYoukSakusTaishosTemp.insert(item);
+        hantYoukSakusTaishosTemp.insert(item);
     }
 
     private GemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTempTableEntity set減免減額対象者判定用根拠作成対象者(HihokenshaNo 被保険者番号,
             FlexibleDate 基準日) {
-        GemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTempTableEntity tempTable = new GemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTempTableEntity();
+        GemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTempTableEntity tempTable
+                = new GemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTempTableEntity();
         tempTable.setKijunYMD(基準日);
         tempTable.setHihokenshaNo(被保険者番号);
         return tempTable;

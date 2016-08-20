@@ -27,14 +27,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KousinSinseiTaishougaishaJohoProcess extends BatchProcessBase<KousinSinseiTaishougaishaJohoEntity> {
 
-    private static final RString MYBATIS_SELECT_ID_更新_負担 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db"
-            + ".mapper.relate.gemmenshinseishotaishohaaku.IKousinSinseiTaishougaishaJohoMapper.get更新申請対象外者情報_負担限度額認定");
+    private static final RString MYBATIS_SELECT_ID_更新_負担限度額 = new RString("jp.co.ndensan.reams.db.dbd.persistence"
+            + ".db.mapper.relate.gemmenshinseishotaishohaaku.IKousinSinseiTaishougaishaJohoMapper.get更新申請対象外者情報_負担限度額認定");
     private static final RString MYBATIS_SELECT_ID_更新_利用者 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db"
             + ".mapper.relate.gemmenshinseishotaishohaaku.IKousinSinseiTaishougaishaJohoMapper.get更新申請対象外者情報_利用者負担額減額");
-    private static final RString MYBATIS_SELECT_ID_更新_訪問 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db"
-            + ".mapper.relate.gemmenshinseishotaishohaaku.IKousinSinseiTaishougaishaJohoMapper.get更新申請対象外者情報_訪問介護利用者負担額減額");
-    private static final RString MYBATIS_SELECT_ID_更新_社会 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db"
-            + ".mapper.relate.gemmenshinseishotaishohaaku.IKousinSinseiTaishougaishaJohoMapper.get更新申請対象外者情報_社会福祉法人等利用者負担軽減");
+    private static final RString MYBATIS_SELECT_ID_更新_訪問 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db."
+            + "mapper.relate.gemmenshinseishotaishohaaku.IKousinSinseiTaishougaishaJohoMapper.get更新申請対象外者情報_訪問介護利用者負担額減額");
+    private static final RString MYBATIS_SELECT_ID_更新_社会 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper"
+            + ".relate.gemmenshinseishotaishohaaku.IKousinSinseiTaishougaishaJohoMapper.get更新申請対象外者情報_社会福祉法人等利用者負担軽減");
 
     private KousinSinseiTaishougaishaJohoProcessParameter processParamter;
     private IKousinSinseiTaishougaishaJohoMapper mapper;
@@ -59,7 +59,7 @@ public class KousinSinseiTaishougaishaJohoProcess extends BatchProcessBase<Kousi
     @Override
     protected IBatchReader createReader() {
         if (processParamter.get減免減額種類().equals(GemmenGengakuShurui.負担限度額認定)) {
-            return new BatchDbReader(MYBATIS_SELECT_ID_更新_負担,
+            return new BatchDbReader(MYBATIS_SELECT_ID_更新_負担限度額,
                     processParamter.toShinseishoHakkoTaishoJohoSakuseiMybatisParameter(開始日, 終了日, processParamter.get把握処理ID()));
         } else if (processParamter.get減免減額種類().equals(GemmenGengakuShurui.利用者負担額減額)) {
             return new BatchDbReader(MYBATIS_SELECT_ID_更新_利用者,

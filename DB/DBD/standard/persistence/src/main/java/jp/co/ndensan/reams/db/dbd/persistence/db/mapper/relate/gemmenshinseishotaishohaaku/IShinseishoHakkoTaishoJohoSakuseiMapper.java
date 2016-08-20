@@ -24,7 +24,7 @@ public interface IShinseishoHakkoTaishoJohoSakuseiMapper {
      *
      * @return List<ShinseishoHakkoTaishoJohoSakuseiEntity> 更新申請対象外者情報
      */
-    List<ShinseishoHakkoTaishoJohoSakuseiEntity> get申請書発行対象者情報_負担限度額認定(ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter Parameter);
+    List<ShinseishoHakkoTaishoJohoSakuseiEntity> get申請書発行対象者情報_負担限度額認定(ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter parameter);
 
     /**
      * get申請書発行対象者情報_利用者負担額減額のメソッドです。
@@ -33,7 +33,7 @@ public interface IShinseishoHakkoTaishoJohoSakuseiMapper {
      *
      * @return List<ShinseishoHakkoTaishoJohoSakuseiEntity> 更新申請対象外者情報
      */
-    List<ShinseishoHakkoTaishoJohoSakuseiEntity> get申請書発行対象者情報_利用者負担額減額(ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter Parameter);
+    List<ShinseishoHakkoTaishoJohoSakuseiEntity> get申請書発行対象者情報_利用者負担額減額(ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter parameter);
 
     /**
      * get申請書発行対象者情報_訪問介護利用者負担額減額のメソッドです。
@@ -42,7 +42,7 @@ public interface IShinseishoHakkoTaishoJohoSakuseiMapper {
      *
      * @return List<ShinseishoHakkoTaishoJohoSakuseiEntity> 更新申請対象外者情報
      */
-    List<ShinseishoHakkoTaishoJohoSakuseiEntity> get申請書発行対象者情報_訪問介護利用者負担額減額(ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter Parameter);
+    List<ShinseishoHakkoTaishoJohoSakuseiEntity> get申請書発行対象者情報_訪問介護利用者負担額減額(ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter parameter);
 
     /**
      * get申請書発行対象者情報_社会福祉法人等利用者負担軽減のメソッドです。
@@ -51,6 +51,6 @@ public interface IShinseishoHakkoTaishoJohoSakuseiMapper {
      *
      * @return List<ShinseishoHakkoTaishoJohoSakuseiEntity> 更新申請対象外者情報
      */
-    List<ShinseishoHakkoTaishoJohoSakuseiEntity> get申請書発行対象者情報_社会福祉法人等利用者負担軽減(ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter Parameter);
+    List<ShinseishoHakkoTaishoJohoSakuseiEntity> get申請書発行対象者情報_社会福祉法人等利用者負担軽減(ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter parameter);
 
 }

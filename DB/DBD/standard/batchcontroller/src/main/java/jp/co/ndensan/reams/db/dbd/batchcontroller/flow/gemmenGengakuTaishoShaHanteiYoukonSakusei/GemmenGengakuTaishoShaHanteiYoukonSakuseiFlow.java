@@ -25,14 +25,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class GemmenGengakuTaishoShaHanteiYoukonSakuseiFlow extends BatchFlowBase<GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter> {
 
     private static final String 世帯員把握入力 = "SetaiinHaakuInputSakusei";
-    private static final String 世帯員把握Flow = "SetaiShotokuKazeiHanteiFlow";
+    private static final String 世帯員把握 = "SetaiShotokuKazeiHanteiFlow";
     private static final String 減免減額対象者判定用根拠作成 = "GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei";
-    private static final RString setshotokukazeihanteiflow = new RString("SetaiShotokuKazeiHanteiFlow");
+    private static final RString SETSHOTOKUKAZEIHANTEIFLOW = new RString("SetaiShotokuKazeiHanteiFlow");
 
     @Override
     protected void defineFlow() {
         executeStep(世帯員把握入力);
-        executeStep(世帯員把握Flow);
+        executeStep(世帯員把握);
         executeStep(減免減額対象者判定用根拠作成);
     }
 
@@ -53,9 +53,9 @@ public class GemmenGengakuTaishoShaHanteiYoukonSakuseiFlow extends BatchFlowBase
      *
      * @return IBatchFlowCommand
      */
-    @Step(世帯員把握Flow)
+    @Step(世帯員把握)
     protected IBatchFlowCommand setaiShotokuKazeiHanteiFlow() {
-        return otherBatchFlow(setshotokukazeihanteiflow, SubGyomuCode.DBZ介護共通, getSetaiShotokuKazeiHanteiBatchParameter()).define();
+        return otherBatchFlow(SETSHOTOKUKAZEIHANTEIFLOW, SubGyomuCode.DBZ介護共通, getSetaiShotokuKazeiHanteiBatchParameter()).define();
     }
 
     /**
