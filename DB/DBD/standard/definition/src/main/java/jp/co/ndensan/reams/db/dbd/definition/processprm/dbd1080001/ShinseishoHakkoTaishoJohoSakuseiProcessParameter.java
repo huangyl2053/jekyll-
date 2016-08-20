@@ -36,7 +36,15 @@ public class ShinseishoHakkoTaishoJohoSakuseiProcessParameter implements IBatchP
     private FlexibleDate 前年度の開始日;
     private FlexibleDate 前年度の終了日;
 
-    public ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter ShinseishoHakkoTaishoJohoSakuseiMybatisParameter(FlexibleDate 開始日, FlexibleDate 終了日) {
+    /**
+     * MybatisParameterを取得する。
+     *
+     * @param 開始日 FlexibleDate
+     * @param 終了日 FlexibleDate
+     * @return MybatisParameter
+     */
+    public ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter toShinseishoHakkoTaishoJohoSakuseiMybatisParameter(FlexibleDate 開始日,
+            FlexibleDate 終了日) {
         this.前年度の開始日 = 開始日;
         this.前年度の終了日 = 終了日;
         return new ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter(課税世帯の被保険者を含む, 減免減額種類, 利用者負担段階, 市町村民税非課税世帯, 市町村民税本人非課税者, 老齢福祉年金受給者, 生活保護受給者,

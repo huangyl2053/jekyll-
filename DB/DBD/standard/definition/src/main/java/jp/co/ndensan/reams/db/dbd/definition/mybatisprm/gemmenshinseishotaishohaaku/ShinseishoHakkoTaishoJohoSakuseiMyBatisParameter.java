@@ -38,16 +38,30 @@ public class ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter implements IMyBati
     private FlexibleDate 前年度の開始日;
     private FlexibleDate 前年度の終了日;
 
-    private RString Code_利用者負担1至3段階 = RiyoshaFutanDankaiHanni.利用者負担1から3段階.get名称();
-    private RString Code_利用者負担1段階 = RiyoshaFutanDankaiHanni.利用者負担1段階.get名称();
-    private RString Code_利用者負担2段階 = RiyoshaFutanDankaiHanni.利用者負担2段階.get名称();
-    private RString Code_利用者負担3段階 = RiyoshaFutanDankaiHanni.利用者負担3段階.get名称();
-    private RString Code_利用者負担4段階 = RiyoshaFutanDankaiHanni.利用者負担4段階_高齢者複数世帯.get名称();
+    private RString CODE_利用者負担1至3段階 = RiyoshaFutanDankaiHanni.利用者負担1から3段階.get名称();
+    private RString CODE_利用者負担1段階 = RiyoshaFutanDankaiHanni.利用者負担1段階.get名称();
+    private RString CODE_利用者負担2段階 = RiyoshaFutanDankaiHanni.利用者負担2段階.get名称();
+    private RString CODE_利用者負担3段階 = RiyoshaFutanDankaiHanni.利用者負担3段階.get名称();
+    private RString CODE_利用者負担4段階 = RiyoshaFutanDankaiHanni.利用者負担4段階_高齢者複数世帯.get名称();
 
-    private RString Code_世帯課税区分_課税 = SetaiKazeiKubun.課税.getコード();
-    private RString Code_世帯課税区分_非課税 = SetaiKazeiKubun.非課税.getコード();
+    private RString CODE_世帯課税区分_課税 = SetaiKazeiKubun.課税.getコード();
+    private RString CODE_世帯課税区分_非課税 = SetaiKazeiKubun.非課税.getコード();
 
-    public ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter(boolean 課税世帯の被保険者を含む, GemmenGengakuShurui 減免減額種類, RString 利用者負担段階, boolean 市町村民税非課税世帯, boolean 市町村民税本人非課税者, boolean 老齢福祉年金受給者, boolean 生活保護受給者,
+    /**
+     *
+     * @param 基準日 FlexibleDate
+     * @param 利用者負担段階 RString
+     * @param 課税世帯の被保険者を含む boolean
+     * @param 市町村民税非課税世帯 boolean
+     * @param 市町村民税本人非課税者 boolean
+     * @param 老齢福祉年金受給者 boolean
+     * @param 生活保護受給者 boolean
+     * @param 減免減額種類 GemmenGengakuShurui
+     * @param 前年度の開始日 FlexibleDate
+     * @param 前年度の終了日 FlexibleDate
+     */
+    public ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter(boolean 課税世帯の被保険者を含む,
+            GemmenGengakuShurui 減免減額種類, RString 利用者負担段階, boolean 市町村民税非課税世帯, boolean 市町村民税本人非課税者, boolean 老齢福祉年金受給者, boolean 生活保護受給者,
             FlexibleDate 基準日, FlexibleDate 前年度の開始日, FlexibleDate 前年度の終了日) {
         this.市町村民税本人非課税者 = 市町村民税本人非課税者;
         this.市町村民税非課税世帯 = 市町村民税非課税世帯;
@@ -55,49 +69,31 @@ public class ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter implements IMyBati
         this.老齢福祉年金受給者 = 老齢福祉年金受給者;
         this.課税世帯の被保険者を含む = 課税世帯の被保険者を含む;
         this.基準日 = 基準日;
-        this.減免減額種類 = 減免減額種類;
-        this.利用者負担段階 = 利用者負担段階;
-        this.前年度の開始日 = 前年度の開始日;
-        this.前年度の終了日 = 前年度の終了日;
-    }
-
-    public ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter(FlexibleDate 基準日, RString 利用者負担段階, boolean 課税世帯の被保険者を含む,
-            boolean 市町村民税非課税世帯, boolean 市町村民税本人非課税者, boolean 老齢福祉年金受給者, boolean 生活保護受給者, RString Code_利用者負担1至3段階,
-            RString Code_利用者負担1段階, RString Code_利用者負担2段階, RString Code_利用者負担3段階, RString Code_利用者負担4段階,
-            RString Code_世帯課税区分_課税, RString Code_世帯課税区分_非課税, FlexibleDate 前年度の開始日, FlexibleDate 前年度の終了日) {
-        this.基準日 = 基準日;
-        this.課税世帯の被保険者を含む = 課税世帯の被保険者を含む;
-        this.市町村民税非課税世帯 = 市町村民税非課税世帯;
-        this.市町村民税本人非課税者 = 市町村民税本人非課税者;
-        this.老齢福祉年金受給者 = 老齢福祉年金受給者;
-        this.生活保護受給者 = 生活保護受給者;
         set利用者負担段階について(利用者負担段階);
-        this.Code_利用者負担1至3段階 = RiyoshaFutanDankaiHanni.利用者負担1から3段階.getコード();
-        this.Code_利用者負担1段階 = RiyoshaFutanDankaiHanni.利用者負担1段階.getコード();
-        this.Code_利用者負担2段階 = RiyoshaFutanDankaiHanni.利用者負担2段階.getコード();
-        this.Code_利用者負担3段階 = RiyoshaFutanDankaiHanni.利用者負担3段階.getコード();
-        this.Code_利用者負担4段階 = RiyoshaFutanDankaiHanni.利用者負担4段階_高齢者複数世帯.getコード();
-        this.Code_世帯課税区分_課税 = SetaiKazeiKubun.課税.getコード();
-        this.Code_世帯課税区分_非課税 = SetaiKazeiKubun.非課税.getコード();
+        this.減免減額種類 = 減免減額種類;
         this.前年度の開始日 = 前年度の開始日;
         this.前年度の終了日 = 前年度の終了日;
     }
 
     private void set利用者負担段階について(RString 利用者負担段階) {
-        RString 利用者負担段階_利用者負担1至3段階 = new RString("利用者負担1～3段階");
-        RString 利用者負担段階_利用者負担1段階 = new RString("利用者負担1段階");
-        RString 利用者負担段階_利用者負担2段階 = new RString("利用者負担2段階");
-        RString 利用者負担段階_利用者負担3段階 = new RString("利用者負担3段階");
-        RString 利用者負担段階_利用者負担4段階 = new RString("利用者負担4段階（高齢者複数世帯） ");
-        if (利用者負担段階_利用者負担1至3段階.equals(Code_利用者負担1至3段階)) {
+        is利用者負担段階_利用者負担1至3段階 = false;
+        is利用者負担段階_利用者負担1段階 = false;
+        is利用者負担段階_利用者負担2段階 = false;
+        is利用者負担段階_利用者負担3段階 = false;
+        is利用者負担段階_利用者負担4段階 = false;
+        if (CODE_利用者負担1至3段階.equals(利用者負担段階)) {
             is利用者負担段階_利用者負担1至3段階 = true;
-        } else if (利用者負担段階_利用者負担1段階.equals(Code_利用者負担1段階)) {
+        }
+        if (CODE_利用者負担1段階.equals(利用者負担段階)) {
             is利用者負担段階_利用者負担1段階 = true;
-        } else if (利用者負担段階_利用者負担2段階.equals(Code_利用者負担2段階)) {
+        }
+        if (CODE_利用者負担2段階.equals(利用者負担段階)) {
             is利用者負担段階_利用者負担2段階 = true;
-        } else if (利用者負担段階_利用者負担3段階.equals(Code_利用者負担3段階)) {
+        }
+        if (CODE_利用者負担3段階.equals(利用者負担段階)) {
             is利用者負担段階_利用者負担3段階 = true;
-        } else if (利用者負担段階_利用者負担4段階.equals(Code_利用者負担4段階)) {
+        }
+        if (CODE_利用者負担4段階.equals(利用者負担段階)) {
             is利用者負担段階_利用者負担4段階 = true;
         }
     }

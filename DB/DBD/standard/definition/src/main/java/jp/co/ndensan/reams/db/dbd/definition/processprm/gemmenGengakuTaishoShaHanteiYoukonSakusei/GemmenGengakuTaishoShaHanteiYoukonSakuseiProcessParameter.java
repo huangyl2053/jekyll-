@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.processprm.gemmenGengakuTaishoShaHanteiYoukonSakusei;
+package jp.co.ndensan.reams.db.dbd.definition.processprm.gemmengengakutaishoshahanteiyoukonsakusei;
 
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenGengakuTaishoShaHanteiYoukonSakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
@@ -34,6 +34,7 @@ public class GemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter implement
     /**
      * コンストラクタです。
      *
+     * @param 所得年度 FlexibleYear
      */
     public GemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter(FlexibleYear 所得年度) {
         this.所得年度 = 所得年度;
@@ -45,7 +46,7 @@ public class GemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter implement
      *
      * @return MyBatisパラメータ
      */
-    public GemmenGengakuTaishoShaHanteiYoukonSakuseiMyBatisParameter GemmenGengakuTaishoShaHanteiYoukonSakuseiMyBatisParameter() {
+    public GemmenGengakuTaishoShaHanteiYoukonSakuseiMyBatisParameter toGemmenGengakuTaishoShaHanteiYoukonSakuseiMyBatisParameter() {
         return new GemmenGengakuTaishoShaHanteiYoukonSakuseiMyBatisParameter(所得年度);
     }
 }

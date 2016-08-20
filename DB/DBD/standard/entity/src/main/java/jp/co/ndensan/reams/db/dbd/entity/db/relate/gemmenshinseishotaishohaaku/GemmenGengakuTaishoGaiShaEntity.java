@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmenshinseishotaishohaaku;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -47,11 +46,10 @@ public class GemmenGengakuTaishoGaiShaEntity {
     private RString 入所施設コード;
     private RString 入所施設名称;
     private RString 要介護認定状態区分コード;
-    private KoroshoInterfaceShikibetsuCode 厚労省IF識別コード;
+    private RString 厚労省IF識別コード;
     private RString 旧措置;
     private FlexibleDate 要介護認定日;
     private FlexibleDate 認定開始日;
     private FlexibleDate 認定終了日;
     private UaFt200FindShikibetsuTaishoEntity psmEntity;
-
 }

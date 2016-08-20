@@ -29,7 +29,7 @@ and open the template in the editor.
         ON  B."hihokenshaNo" = A."hihokenshaNo"
         LEFT JOIN rgur."UrT0508SeikatsuHogoJukyusha" C
         ON C."shikibetsuCode" = B."shikibetsuCode"
-        AND C."gyomuCode" = #{DB介護保険}
+        AND C."gyomuCode" = #{介護保険}
         AND C."jukyuKaishiYMD" <![CDATA[!=]]> A."kijunYMD"
         AND A."kijunYMD" <![CDATA[!=]]> C."jukyuHaishiYMD"
         LEFT JOIN rgdb."DbT7006RoreiFukushiNenkinJukyusha" D
@@ -47,7 +47,7 @@ and open the template in the editor.
         Y."dtkingaku1",
         row_number() over(partition by Y."dtnenkinhokenshacode","genkisonenkinno",substring(Y."dtnenkincode",1,3) ORDER BY Y."dtsakuseiymd" DESC) AS 最大順
         FROM rgdb."DbT4037HikazeNenkinTaishosha" Y
-        WHERE Y."dttaishoy" = #{Last所得年度}
+        WHERE Y."dttaishoy" = #{年度}
         )AS X
         WHERE 最大順 = '1'
         GROUP BY

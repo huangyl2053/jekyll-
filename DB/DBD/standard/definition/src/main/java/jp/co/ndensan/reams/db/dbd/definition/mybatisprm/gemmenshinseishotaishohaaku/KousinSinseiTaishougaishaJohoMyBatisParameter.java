@@ -23,6 +23,14 @@ public class KousinSinseiTaishougaishaJohoMyBatisParameter implements IMyBatisPa
     private GemmenGengakuShurui 減免減額種類;
     private UUID 把握処理ID;
 
+    /**
+     *
+     * @param 把握処理ID UUID
+     * @param 減免減額種類 GemmenGengakuShurui
+     * @param 基準日 FlexibleDate
+     * @param 前年度の開始日 FlexibleDate
+     * @param 前年度の終了日 FlexibleDate
+     */
     public KousinSinseiTaishougaishaJohoMyBatisParameter(UUID 把握処理ID, GemmenGengakuShurui 減免減額種類,
             FlexibleDate 基準日, FlexibleDate 前年度の開始日, FlexibleDate 前年度の終了日) {
         this.前年度の終了日 = 前年度の終了日;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmenGengakuTaishoShaHanteiYoukonSakusei;
+package jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengakutaishoshahanteiyoukonsakusei;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -11,16 +11,19 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 減免減額対象者判定用根拠一時entityクラスです。
  *
  * @reamsid_L DBD-3710-090 liuwei2
  */
-@OnNextSchema("rgdb")
+@Getter
+@Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class TaishoShaHanteiYoukonkyoItokiTempTableEntity extends DbTableEntityBase<TaishoShaHanteiYoukonkyoItokiTempTableEntity> implements IDbAccessable {
 
     @TableName
@@ -62,134 +65,6 @@ public class TaishoShaHanteiYoukonkyoItokiTempTableEntity extends DbTableEntityB
     @TempTableColumnOrder(11)
     private Decimal 課税所得額;
 
-    public Decimal get課税所得額() {
-        return 課税所得額;
-    }
-
-    public HihokenshaNo get被保険者番号() {
-        return 被保険者番号;
-    }
-
-    public ShikibetsuCode get本人識別コード() {
-        return 本人識別コード;
-    }
-
-    public RString get本人課税区分() {
-        return 本人課税区分;
-    }
-
-    public RString get利用者負担段階() {
-        return 利用者負担段階;
-    }
-
-    public ShikibetsuCode get配偶者識別コード() {
-        return 配偶者識別コード;
-    }
-
-    public RString get配偶者課税区分() {
-        return 配偶者課税区分;
-    }
-
-    public RString get世帯課税区分() {
-        return 世帯課税区分;
-    }
-
-    public Boolean isIs生活保護受給者() {
-        return is生活保護受給者;
-    }
-
-    public Boolean isIs老齢福祉年金受給者() {
-        return is老齢福祉年金受給者;
-    }
-
-    public Decimal get合計所得金額() {
-        return 合計所得金額;
-    }
-
-    public Decimal get年金収入額() {
-        return 年金収入額;
-    }
-
-    public Decimal get非課税年金勘案額() {
-        return 非課税年金勘案額;
-    }
-
-    public Boolean isIs高齢者複数世帯() {
-        return is高齢者複数世帯;
-    }
-
-    public Boolean isIs所得税課税世帯() {
-        return is所得税課税世帯;
-    }
-
-    public Boolean isIs所得税課税者() {
-        return is所得税課税者;
-    }
-
-    public void set被保険者番号(HihokenshaNo 被保険者番号) {
-        this.被保険者番号 = 被保険者番号;
-    }
-
-    public void set本人識別コード(ShikibetsuCode 本人識別コード) {
-        this.本人識別コード = 本人識別コード;
-    }
-
-    public void set本人課税区分(RString 本人課税区分) {
-        this.本人課税区分 = 本人課税区分;
-    }
-
-    public void set利用者負担段階(RString 利用者負担段階) {
-        this.利用者負担段階 = 利用者負担段階;
-    }
-
-    public void set配偶者識別コード(ShikibetsuCode 配偶者識別コード) {
-        this.配偶者識別コード = 配偶者識別コード;
-    }
-
-    public void set配偶者課税区分(RString 配偶者課税区分) {
-        this.配偶者課税区分 = 配偶者課税区分;
-    }
-
-    public void set世帯課税区分(RString 世帯課税区分) {
-        this.世帯課税区分 = 世帯課税区分;
-    }
-
-    public void setIs生活保護受給者(Boolean is生活保護受給者) {
-        this.is生活保護受給者 = is生活保護受給者;
-    }
-
-    public void setIs老齢福祉年金受給者(Boolean is老齢福祉年金受給者) {
-        this.is老齢福祉年金受給者 = is老齢福祉年金受給者;
-    }
-
-    public void set合計所得金額(Decimal 合計所得金額) {
-        this.合計所得金額 = 合計所得金額;
-    }
-
-    public void set年金収入額(Decimal 年金収入額) {
-        this.年金収入額 = 年金収入額;
-    }
-
-    public void set非課税年金勘案額(Decimal 非課税年金勘案額) {
-        this.非課税年金勘案額 = 非課税年金勘案額;
-    }
-
-    public void setIs高齢者複数世帯(Boolean is高齢者複数世帯) {
-        this.is高齢者複数世帯 = is高齢者複数世帯;
-    }
-
-    public void setIs所得税課税世帯(Boolean is所得税課税世帯) {
-        this.is所得税課税世帯 = is所得税課税世帯;
-    }
-
-    public void setIs所得税課税者(Boolean is所得税課税者) {
-        this.is所得税課税者 = is所得税課税者;
-    }
-
-    public void set課税所得額(Decimal 課税所得額) {
-        this.課税所得額 = 課税所得額;
-    }
-
     /**
      * コンストラクタです。
      *
@@ -225,14 +100,14 @@ public class TaishoShaHanteiYoukonkyoItokiTempTableEntity extends DbTableEntityB
         this.set配偶者識別コード(entity.get配偶者識別コード());
         this.set配偶者課税区分(entity.get配偶者課税区分());
         this.set世帯課税区分(entity.get世帯課税区分());
-        this.setIs生活保護受給者(entity.isIs生活保護受給者());
-        this.setIs老齢福祉年金受給者(entity.isIs老齢福祉年金受給者());
+        this.setIs生活保護受給者(entity.getIs生活保護受給者());
+        this.setIs老齢福祉年金受給者(entity.getIs老齢福祉年金受給者());
         this.set合計所得金額(entity.get合計所得金額());
         this.set年金収入額(entity.get年金収入額());
         this.set非課税年金勘案額(entity.get非課税年金勘案額());
-        this.setIs高齢者複数世帯(entity.isIs高齢者複数世帯());
-        this.setIs所得税課税世帯(entity.isIs所得税課税世帯());
-        this.setIs所得税課税者(entity.isIs所得税課税者());
+        this.setIs高齢者複数世帯(entity.getIs高齢者複数世帯());
+        this.setIs所得税課税世帯(entity.getIs所得税課税世帯());
+        this.setIs所得税課税者(entity.getIs所得税課税者());
         this.set課税所得額(entity.get課税所得額());
     }
 
