@@ -98,7 +98,8 @@ public class JigoSakuseiMeisaiTouroku {
     /**
      * {@link InstanceProvider#create}にて生成した{@link JigoSakuseiMeisaiTouroku}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link JigoSakuseiMeisaiTouroku}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link JigoSakuseiMeisaiTouroku}のインスタンス
      */
     public static JigoSakuseiMeisaiTouroku createInstance() {
         return InstanceProvider.create(JigoSakuseiMeisaiTouroku.class);
@@ -413,19 +414,15 @@ public class JigoSakuseiMeisaiTouroku {
      *
      * @param 被保険者番号 HihokenshaNo
      * @param 利用年月 FlexibleYearMonth
-     * @return List<RiyoshaFutanWariaiMeisai>
+     * @return RiyoshaFutanWariaiMeisai
      */
-    public List<RiyoshaFutanWariaiMeisai> get給付率(HihokenshaNo 被保険者番号, FlexibleYearMonth 利用年月) {
-        List<DbT3114RiyoshaFutanWariaiMeisaiEntity> entityList = 利用者負担割合明細Dac.select負担割合区分(被保険者番号, 利用年月);
-        if (entityList == null || entityList.isEmpty()) {
-            return Collections.emptyList();
+    public RiyoshaFutanWariaiMeisai get給付率(HihokenshaNo 被保険者番号, FlexibleYearMonth 利用年月) {
+        DbT3114RiyoshaFutanWariaiMeisaiEntity entity = 利用者負担割合明細Dac.select負担割合区分(被保険者番号, 利用年月);
+        if (entity == null) {
+            return null;
         }
-        List<RiyoshaFutanWariaiMeisai> businessList = new ArrayList<>();
-        for (DbT3114RiyoshaFutanWariaiMeisaiEntity entity : entityList) {
-            entity.initializeMd5();
-            businessList.add(new RiyoshaFutanWariaiMeisai(entity));
-        }
-        return businessList;
+        entity.initializeMd5();
+        return new RiyoshaFutanWariaiMeisai(entity);
     }
 
     /**
@@ -474,10 +471,13 @@ public class JigoSakuseiMeisaiTouroku {
      * @return List<KyotakuHistoryDataEntity>
      */
     public List<KyotakuServiceRirekiIchiranEntityResult> getKyotakuServiceRirekiIchiran(HihokenshaNo 被保険者番号) {
-        IJigoSakuseiMeisaiTourokuMapper mapper = mapperProvider.create(IJigoSakuseiMeisaiTourokuMapper.class);
+        IJigoSakuseiMeisaiTourokuMapper mapper = mapperProvider.create(IJigoSakuseiMeisaiTourokuMapper.class
+        );
         Map<String, Object> param = new HashMap<>();
+
         param.put(KEY_被保険者番号.toString(), 被保険者番号);
         List<KyotakuServiceRirekiIchiranEntity> entityList = mapper.get居宅サービス履歴一覧(param);
+
         if (entityList.isEmpty()) {
             return Collections.emptyList();
         }
@@ -500,12 +500,15 @@ public class JigoSakuseiMeisaiTouroku {
      */
     public List<RiyoNentstsuIchiranEntityResult> getRiyoNentstsuIchiran(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月, int 履歴番号) {
-        IJigoSakuseiMeisaiTourokuMapper mapper = mapperProvider.create(IJigoSakuseiMeisaiTourokuMapper.class);
+        IJigoSakuseiMeisaiTourokuMapper mapper = mapperProvider.create(IJigoSakuseiMeisaiTourokuMapper.class
+        );
         Map<String, Object> param = new HashMap<>();
+
         param.put(KEY_被保険者番号.toString(), 被保険者番号);
         param.put(KEY_対象年月.toString(), 対象年月);
         param.put(KEY_履歴番号.toString(), 履歴番号);
         List<RiyoNentstsuIchiranEntity> entityList = mapper.get対象情報一覧(param);
+
         if (entityList.isEmpty()) {
             return Collections.emptyList();
         }
