@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosaocrtorikomi.ChosaOCRTorikomiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikekkajoho.NinteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho2;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001.ChosaOCRTorikomiMainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001.TorikomiData;
@@ -51,6 +52,7 @@ public class ChosaOCRTorikomiHandler {
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString ファイル名 = new RString("OCRSHINSA.CSV");
     private final Code 識別コード_09A = new Code("09A");
+    private final Code 識別コード_09B = new Code("09B");
     private final Code 識別コード_99A = new Code("99A");
     private final ChosaOCRTorikomiMainDiv div;
     private static final RString INDEX_1 = new RString("1");
@@ -370,7 +372,7 @@ public class ChosaOCRTorikomiHandler {
         if (data != null && data.get一次判定結果() != null) {
             if (識別コード_99A.equals(data.get厚労省IF識別コード())) {
                 判定結果 = IchijiHanteiKekkaCode99.toValue(data.get一次判定結果().value()).get名称();
-            } else if (識別コード_09A.equals(data.get厚労省IF識別コード())) {
+            } else if (識別コード_09A.equals(data.get厚労省IF識別コード()) || 識別コード_09B.equals(data.get厚労省IF識別コード())) {
                 判定結果 = IchijiHanteiKekkaCode09.toValue(data.get一次判定結果().value()).get名称();
             }
         }
@@ -418,8 +420,8 @@ public class ChosaOCRTorikomiHandler {
         if (row.getNinteiYukoKikan() != null) {
             認定有効期間 = Integer.valueOf(row.getNinteiYukoKikan().toString());
         }
-        return ninteiKekkaJoho.createBuilderForEdit().set二次判定年月日(new FlexibleDate(data.get審査会開催日()))
-                .set二次判定要介護状態区分コード(Code.EMPTY)
+        return ninteiKekkaJoho.createBuilderForEdit().set二次判定年月日(new FlexibleDate(get審査会開催日(data.get審査会開催日())))
+                .set二次判定要介護状態区分コード(get二次判定要介護状態区分コード(data, row))
                 .set二次判定認定有効期間(認定有効期間)
                 .set二次判定認定有効開始年月日(new FlexibleDate(dateFormat34(row.getNinteiYukoKikanKaishiYMD())))
                 .set二次判定認定有効終了年月日(new FlexibleDate(dateFormat34(row.getNinteiYukoKikanShuryoYMD())))
@@ -432,6 +434,37 @@ public class ChosaOCRTorikomiHandler {
                 .set審査会メモ(空白)
                 .set二次判定結果入力方法(new Code(NijiHanteiKekkaInputHoho.OCR取込み.getコード()))
                 .set二次判定結果入力年月日(FlexibleDate.getNowDate())
+                .build();
+    }
+
+    private Code get二次判定要介護状態区分コード(TorikomiEntity data, dgChosahyoTorikomiKekka_Row row) {
+        RString 状態区分コード = RString.EMPTY;
+        if (!RString.isNullOrEmpty(row.getSecondJudgmentResult())) {
+            if (識別コード_99A.equals(data.get厚労省IF識別コード())) {
+                状態区分コード = IchijiHanteiKekkaCode99.toValue(row.getSecondJudgmentResult()).getコード();
+            } else if (識別コード_09A.equals(data.get厚労省IF識別コード()) || 識別コード_09B.equals(data.get厚労省IF識別コード())) {
+                状態区分コード = IchijiHanteiKekkaCode09.toValue(row.getSecondJudgmentResult()).getコード();
+            }
+        }
+        return new Code(状態区分コード);
+    }
+
+    /**
+     * 介護認定審査会割当委員情報を設定します。
+     *
+     * @param shinsakaiWariateIinJoho 介護認定審査会割当委員情報
+     * @param row 画面一覧
+     * @param data 登録用オブジェクト
+     * @param 審査会開催番号 審査会開催番号
+     * @return NinteiKekkaJoho 介護認定審査会割当委員情報
+     */
+    public ShinsakaiWariateIinJoho editShinsakaiWariateIinJoho(ShinsakaiWariateIinJoho shinsakaiWariateIinJoho, dgChosahyoTorikomiKekka_Row row,
+            TorikomiEntity data, RString 審査会開催番号) {
+        return shinsakaiWariateIinJoho.createBuilderForEdit().set介護認定審査会開催年月日(new FlexibleDate(get審査会開催日(data.get審査会開催日())))
+                .set委員遅刻有無(false)
+                .set委員出席時間(data.get開催開始時間())
+                .set委員早退有無(false)
+                .set委員退席時間(data.get開催終了時間())
                 .build();
     }
 

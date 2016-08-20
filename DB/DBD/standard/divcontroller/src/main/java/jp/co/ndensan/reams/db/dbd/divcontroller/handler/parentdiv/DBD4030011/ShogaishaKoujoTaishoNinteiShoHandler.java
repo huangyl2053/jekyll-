@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -181,10 +182,18 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
         parameter.set障害高齢者の日常生活自立度(div.getTyusyutuJyokenPanel().getDdlShogaiNichijoSeikatsuJiritsudo().getSelectedKey());
         parameter.set障がい者手帳(div.getTyusyutuJyokenPanel().getDdlShogaishaTecho().getSelectedValue());
         parameter.set喪失事由(div.getTyusyutuJyokenPanel().getDdlSoshituJiyu().getSelectedKey());
-        parameter.set喪失日FROM(div.getTyusyutuJyokenPanel().getTxtSoshituDay().getFromValue());
-        parameter.set喪失日TO(div.getTyusyutuJyokenPanel().getTxtSoshituDay().getToValue());
-        parameter.set決定日FROM(div.getTyusyutuJyokenPanel().getTxtKeteiDay().getFromValue());
-        parameter.set決定日TO(div.getTyusyutuJyokenPanel().getTxtKeteiDay().getToValue());
+        if (div.getTyusyutuJyokenPanel().getTxtSoshituDay().getFromValue() != null) {
+            parameter.set喪失日FROM(new FlexibleDate(div.getTyusyutuJyokenPanel().getTxtSoshituDay().getFromValue().toDateString()));
+        }
+        if (div.getTyusyutuJyokenPanel().getTxtSoshituDay().getToValue() != null) {
+            parameter.set喪失日TO(new FlexibleDate(div.getTyusyutuJyokenPanel().getTxtSoshituDay().getToValue().toDateString()));
+        }
+        if (div.getTyusyutuJyokenPanel().getTxtKeteiDay().getFromValue() != null) {
+            parameter.set決定日FROM(new FlexibleDate(div.getTyusyutuJyokenPanel().getTxtKeteiDay().getFromValue().toDateString()));
+        }
+        if (div.getTyusyutuJyokenPanel().getTxtKeteiDay().getToValue() != null) {
+            parameter.set決定日TO(new FlexibleDate(div.getTyusyutuJyokenPanel().getTxtKeteiDay().getToValue().toDateString()));
+        }
         parameter.set前回非該当者(div.getTyusyutuJyokenPanel().getDdlZenkaiHigaito().getSelectedValue());
         parameter.set交付日(div.getShogaishaKojoNinteishoOutput().getTxtKofuDay().getValue());
 //        parameter.set出力順(get画面出力順());  QA 95838

@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC22100",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "市町村特別給付サービス事業者管理",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC2210011",
+     "toLayoutTitle": "市町村特別給付サービス事業者管理",
+     "toState": "検索初期"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC2210011",
+     "layoutTitle": "市町村特別給付サービス事業者管理",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

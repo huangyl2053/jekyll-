@@ -38,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -135,7 +136,11 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
     }
 
     private void アクセスログ(IkkatsuHakkoRelateEntity entity) {
-        AccessLogger.log(AccessLogType.照会, PersonalData.of(entity.getShikibetsuCode()));
+        if (entity.getShikibetsuCode() != null && !entity.getShikibetsuCode().isEmpty()) {
+            AccessLogger.log(AccessLogType.照会, PersonalData.of(entity.getShikibetsuCode()));
+        } else {
+            AccessLogger.log(AccessLogType.照会, PersonalData.of(ShikibetsuCode.EMPTY));
+        }
     }
 
     private List<IkkatsuHakkoRelateEntity> データ抽出() {
@@ -186,10 +191,10 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
         IkkatsuHakkoRelateEntity 総合事業対象者Entity = new IkkatsuHakkoRelateEntity();
         総合事業対象者Entity.setHihokenshaNo(entity.get被保険者番号());
         if (両方フラグ) {
-            総合事業対象者Entity.setSeibetsuCode(entity.get識別コード_受給());
+            総合事業対象者Entity.setShikibetsuCode(getShikibetsuCode(entity.get識別コード_受給()));
             総合事業対象者Entity.setShichosonCode(entity.get市町村コード_受給());
         } else {
-            総合事業対象者Entity.setSeibetsuCode(entity.get識別コード_ビュー());
+            総合事業対象者Entity.setShikibetsuCode(getShikibetsuCode(entity.get識別コード_ビュー()));
             総合事業対象者Entity.setShichosonCode(entity.get市町村コード_ビュー());
         }
         総合事業対象者Entity.setInsertTimestamp(entity.get挿入日時_総合());
@@ -198,10 +203,18 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
         return 総合事業対象者Entity;
     }
 
+    private ShikibetsuCode getShikibetsuCode(RString value) {
+        ShikibetsuCode shikibetsuCode = ShikibetsuCode.EMPTY;
+        if (!RString.isNullOrEmpty(value)) {
+            shikibetsuCode = new ShikibetsuCode(value);
+        }
+        return shikibetsuCode;
+    }
+
     private IkkatsuHakkoRelateEntity get受給者台帳編集処理(SogoJigyoTaishoshaRelateEntity entity) {
         IkkatsuHakkoRelateEntity 受給者のみEntity = new IkkatsuHakkoRelateEntity();
         受給者のみEntity.setHihokenshaNo(entity.get被保険者番号());
-        受給者のみEntity.setSeibetsuCode(entity.get識別コード_受給());
+        受給者のみEntity.setShikibetsuCode(getShikibetsuCode(entity.get識別コード_受給()));
         受給者のみEntity.setShichosonCode(entity.get市町村コード_受給());
         受給者のみEntity.setInsertTimestamp(entity.get挿入日時_受給());
         受給者のみEntity.setLastUpdateTimestamp(entity.get更新日時_受給());

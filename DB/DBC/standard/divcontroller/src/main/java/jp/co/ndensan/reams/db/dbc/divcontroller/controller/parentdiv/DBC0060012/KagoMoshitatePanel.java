@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0060012
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufukanrihyoshokai.KyufuKanrihyoShokaiDataModel;
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0060012.DBC0060012TransitionEventName.検索結果一覧へ;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0060012.KagoMoshitatePanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0060012.KagoMoshitatePanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0060012.KagoMoshitatePanelValidationHandler;
@@ -56,7 +57,7 @@ public class KagoMoshitatePanel {
         List<KyufuKanrihyoShokaiDataModel> 給付管理表示用明細一覧
                 = ViewStateHolder.get(ViewStateKeys.給付管理明細一覧, ArrayList.class);
         Boolean 居宅サービスフラグ = ViewStateHolder.get(ViewStateKeys.居宅サービスフラグ, Boolean.class);
-        if (居宅サービスフラグ) {
+        if (居宅サービスフラグ && 給付管理表示用明細一覧 != null) {
             getHandler(div).set給付管理明細一覧(給付管理表示用明細一覧);
         }
         アクセスログ(給付管理票.get被保険者番号());
@@ -71,8 +72,7 @@ public class KagoMoshitatePanel {
      * @return 居宅サービスの給付管理照会
      */
     public ResponseData<KagoMoshitatePanelDiv> onClick_btnSave(KagoMoshitatePanelDiv div) {
-        // TODO QA#96146 UIコンテナは「DBCUC00600」が存在しない、画面を遷移できません。
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(検索結果一覧へ).respond();
     }
 
     private void アクセスログ(HihokenshaNo 被保険者番号) {

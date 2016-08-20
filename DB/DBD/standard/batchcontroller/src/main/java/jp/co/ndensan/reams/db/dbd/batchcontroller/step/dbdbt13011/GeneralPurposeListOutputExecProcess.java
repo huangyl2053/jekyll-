@@ -42,10 +42,13 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
+import jp.co.ndensan.reams.ur.urz.business.config.jushoinput.IJushoNyuryokuConfig;
+import jp.co.ndensan.reams.ur.urz.business.config.jushoinput.JushoNyuryokuConfigFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.definition.core.config.jushoinput.ConfigKeysCodeName;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.EucFileOutputJokenhyoFactory;
@@ -138,12 +141,8 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     private static final RString 出力条件表_右丸括弧 = new RString(")");
     private static final RString 出力条件表_生年月日 = new RString("生年月日：");
     private static final RString 出力条件表_HALF_SPACE = RString.HALF_SPACE;
-
-    private static final RString 出力条件表_住所 = new RString("住所： ");
     private static final RString 出力条件表_行政区 = new RString("行政区： ");
-    private static final RString 出力条件表_地区１ = new RString("地区１： ");
-    private static final RString 出力条件表_地区２ = new RString("地区２： ");
-    private static final RString 出力条件表_地区３ = new RString("地区３： ");
+    private static final RString 出力条件表_町域 = new RString("町域：");
 
     private static final RString TRUE = new RString("true");
     private static final RString FALSE = new RString("false");
@@ -940,8 +939,8 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         if (processParamter.get喪失区分() != null && !資格判定なし.equals(processParamter.get喪失区分().get名称())) {
             list.add(出力条件表_喪失区分.concat(processParamter.get喪失区分().get名称()));
         }
-
-        set出力条件表_年齢(atenaSelectBatchParameter, nenreiSoChushutsuHoho, list);
+        set出力条件表_年齢(atenaSelectBatchParameter, nenreiSoChushutsuHoho, list
+        );
         set出力条件表_生年月日(atenaSelectBatchParameter, nenreiSoChushutsuHoho, list);
         set出力条件表_地区選択(atenaSelectBatchParameter, list);
         return list;
@@ -1031,12 +1030,42 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     private void set出力条件表_地区選択(AtenaSelectBatchParameter atenaSelectBatchParameter, List<RString> list) {
         if (atenaSelectBatchParameter.getChiku_Kubun() != null && 全て.equals(atenaSelectBatchParameter.getChiku_Kubun().get名称())) {
 
-            list.add(出力条件表_住所.concat(edit地区選択(atenaSelectBatchParameter.getJusho_From(), atenaSelectBatchParameter.getJusho_To())));
+            list.add(出力条件表_町域.concat(edit地区選択(atenaSelectBatchParameter.getJusho_From(), atenaSelectBatchParameter.getJusho_To())));
             list.add(出力条件表_行政区.concat(edit地区選択(atenaSelectBatchParameter.getGyoseiku_From(), atenaSelectBatchParameter.getGyoseiku_To())));
-            list.add(出力条件表_地区１.concat(edit地区選択(atenaSelectBatchParameter.getChiku1_From(), atenaSelectBatchParameter.getChiku1_To())));
-            list.add(出力条件表_地区２.concat(edit地区選択(atenaSelectBatchParameter.getChiku2_From(), atenaSelectBatchParameter.getChiku2_To())));
-            list.add(出力条件表_地区３.concat(edit地区選択(atenaSelectBatchParameter.getChiku3_From(), atenaSelectBatchParameter.getChiku3_To())));
+
+            IJushoNyuryokuConfig config = JushoNyuryokuConfigFactory.createInstance();
+            RString 名称1 = config.getコード名称(ConfigKeysCodeName.コード名称_地区の分類１);
+            RString 名称2 = config.getコード名称(ConfigKeysCodeName.コード名称_地区の分類２);
+            RString 名称3 = config.getコード名称(ConfigKeysCodeName.コード名称_地区の分類３);
+
+            list.add(edit地区(名称1, atenaSelectBatchParameter.getChiku1_From(), atenaSelectBatchParameter.getChiku1_FromMesho(),
+                    atenaSelectBatchParameter.getChiku1_To(), atenaSelectBatchParameter.getChiku1_ToMesho()));
+            list.add(edit地区(名称2, atenaSelectBatchParameter.getChiku2_From(), atenaSelectBatchParameter.getChiku2_FromMesho(),
+                    atenaSelectBatchParameter.getChiku2_To(), atenaSelectBatchParameter.getChiku2_ToMesho()));
+            list.add(edit地区(名称3, atenaSelectBatchParameter.getChiku3_From(), atenaSelectBatchParameter.getChiku3_FromMesho(),
+                    atenaSelectBatchParameter.getChiku3_To(), atenaSelectBatchParameter.getChiku3_ToMesho()));
         }
+    }
+
+    private RString edit地区(RString 名称, RString 地区From, RString 地区To, RString 地区From名称, RString 地区To名称) {
+        RString 地区Str = RString.EMPTY;
+
+        地区Str.concat(名称);
+        if (!地区From.isNullOrEmpty() && !地区To.isNullOrEmpty()) {
+            地区Str.concat(地区From).concat(地区From名称).concat(出力条件表_中間符号)
+                    .concat(地区To).concat(地区To名称);
+        }
+
+        if (!地区From.isNullOrEmpty() && 地区To.isNullOrEmpty()) {
+            地区Str.concat(地区From).concat(地区From名称).concat(出力条件表_中間符号)
+                    .concat(地区From).concat(地区From名称);
+        }
+
+        if (地区From.isNullOrEmpty() && !地区To.isNullOrEmpty()) {
+            地区Str.concat(地区To).concat(地区To名称).concat(出力条件表_中間符号)
+                    .concat(地区To).concat(地区To名称);
+        }
+        return 地区Str;
     }
 
     private RString edit地区選択(RString from, RString to) {

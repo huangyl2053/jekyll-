@@ -45,8 +45,7 @@ public class KagoMousitatesyoSouhuJyohouFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KagoMousitatesyoSouhuJyohouFinder}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link KagoMousitatesyoSouhuJyohouFinder}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link KagoMousitatesyoSouhuJyohouFinder}のインスタンス
      */
     public static KagoMousitatesyoSouhuJyohouFinder createInstance() {
         return InstanceProvider.create(KagoMousitatesyoSouhuJyohouFinder.class);
@@ -67,7 +66,7 @@ public class KagoMousitatesyoSouhuJyohouFinder {
             return SearchResult.of(Collections.<SofujohoBusiness>emptyList(), 0, false);
         }
         for (SofujohoRelateEntity entity : entityList) {
-            businessList.add(new SofujohoBusiness(entity));
+            //   businessList.add(new SofujohoBusiness(entity));
         }
         return SearchResult.of(businessList, 0, false);
     }

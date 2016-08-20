@@ -115,7 +115,7 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
         RString 帳票作成時 = システム日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
         source.printTimeStamp = 帳票作成年月日.concat(RString.HALF_SPACE).concat(帳票作成時)
                 .concat(RString.HALF_SPACE).concat(SAKUSEI);
-        source.shoriYM = 処理年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+        source.shoriYM = 処理年月.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         if (entity != null) {
             source.hokenshaNo = entity.get給付実績_コントロールレコード保険者番号();

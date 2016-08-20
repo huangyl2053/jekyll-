@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC71201",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "汎用リスト（再審査結果情報）",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC7110001",
+     "toLayoutTitle": "汎用リスト",
+     "toState": "再審査結果情報"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC7110001",
+     "layoutTitle": "汎用リスト",
+     "eventName": "実行",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
