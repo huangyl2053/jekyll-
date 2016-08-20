@@ -102,6 +102,15 @@ public class KyufuJissekiHeaderHandler {
         div.getTxtYoshikiNo().setValue(識別番号名称);
     }
 
+    /**
+     * 保険者を設定します。
+     *
+     * @param 保険者名称 保険者名称
+     */
+    public void set保険者(RString 保険者名称) {
+        div.getTxtHokensha().setValue(保険者名称);
+    }
+
     private void set給付実績ヘッダ情報1(KyufuJissekiHedajyoho1 給付実績ヘッダ情報1) {
         div.getTxtHihoNo().setValue(get被保険者番号(給付実績ヘッダ情報1.get被保険者番号()));
         div.getTxtJuminShubetsu().setValue(get住民種別(給付実績ヘッダ情報1.get資格取得事由コード()));

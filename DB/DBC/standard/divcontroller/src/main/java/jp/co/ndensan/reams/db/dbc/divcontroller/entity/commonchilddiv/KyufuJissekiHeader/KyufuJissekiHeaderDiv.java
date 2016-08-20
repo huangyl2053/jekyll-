@@ -365,4 +365,14 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     public void set識別番号名称(RString 識別番号名称) {
         getHandler().set識別番号名称(識別番号名称);
     }
+
+    /**
+     * 保険者名称を設定します。
+     *
+     * @param 保険者名称 保険者名称
+     */
+    @Override
+    public void set保険者(RString 保険者名称) {
+        getHandler().set保険者(保険者名称);
+    }
 }
