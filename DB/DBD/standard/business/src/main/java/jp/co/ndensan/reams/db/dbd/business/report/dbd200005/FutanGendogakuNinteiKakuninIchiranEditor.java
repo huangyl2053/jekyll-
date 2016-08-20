@@ -88,10 +88,9 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
     private void setHead(FutanGendogakuNinteiKakuninIchiranReportSource source) {
         source.printTimeStamp = get印刷日時();
         source.title = new RString("負担限度額認定（一括）確認リスト");
-        //TODO導入団体にgetShichosonCode_()がないです。
-//        source.hokenshaNo = this.導入団体.getShichosonCode_();
         if (null != 導入団体) {
-            source.hokenshaName = this.導入団体.getShichosonName_();
+            source.hokenshaNo = this.導入団体.get地方公共団体コード().value();
+            source.hokenshaName = this.導入団体.get市町村名();
         }
         if (null != 帳票出力順) {
             List<ISetSortItem> 設定項目リスト = this.帳票出力順.get設定項目リスト();
@@ -175,14 +174,13 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             } else {
                 source.list4_3 = new RString("認");
             }
-            //TODO判断条件が違いますが、編集元が同じ、判断の意味がない,そして、利社対地はなんですか
-//        if (Boolean.valueOf(負担限度額認定確認.get特地減免().toString())) {
-//                source.list4_4 = 負担限度額認定確認.利社対地
-//        } else if (負担限度額認定確認.get特地減免().isEmpty()) {
-//                source.list4_4 = 負担限度額認定確認.利社対地
-//        } else {
-//                source.list4_4 = 負担限度額認定確認.利社対地
-//        }
+            if (Boolean.valueOf(負担限度額認定確認.get特地減免().toString())) {
+                source.list4_4 = new RString("申");
+            } else if (負担限度額認定確認.get特地減免().isEmpty()) {
+                source.list4_4 = RString.EMPTY;
+            } else {
+                source.list4_4 = new RString("認");
+            }
 
             if (負担限度額認定確認.is生活保護受給者()) {
                 source.list1_4 = new RString("*");
