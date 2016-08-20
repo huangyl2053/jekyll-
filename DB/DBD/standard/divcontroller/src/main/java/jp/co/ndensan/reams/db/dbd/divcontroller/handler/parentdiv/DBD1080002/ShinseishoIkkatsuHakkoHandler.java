@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
@@ -324,10 +325,26 @@ public class ShinseishoIkkatsuHakkoHandler {
     }
 
     private DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter toParameter(UUID 発行処理ID, ReportId reportId) {
-        return new DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter(発行処理ID, div.getGenmenShinseiHaakuList().
-                getGenmenShinseiHaakuShinseisho().getChkShinkiKoshin().isAllSelected(), div.getGenmenShinseiHaakuList().
-                getGenmenShinseiHaakuShinseisho().getCcdChohyoShutsuryokujun().get出力順ID(), div.getGenmenShinseiHaakuList().
-                getTxtKijunYMD().getValue(), reportId, div.getGenmenShinseiHaakuList().
-                getGenmenShinseiHaakuShinseisho().getTxtHakkoYMD().getValue());
+        DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter parameter = new DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter();
+        parameter.set出力フラグ(div.getGenmenShinseiHaakuList().getGenmenShinseiHaakuShinseisho().getChkShinkiKoshin().isAllSelected());
+        parameter.set帳票ID(reportId);
+        parameter.set発行処理ID(発行処理ID);
+        if (div.getGenmenShinseiHaakuList().getTxtKijunYMD() == null) {
+            parameter.set基準日(FlexibleDate.EMPTY);
+        } else {
+            parameter.set基準日(div.getGenmenShinseiHaakuList().getTxtKijunYMD().getValue());
+        }
+        if (div.getGenmenShinseiHaakuList().getGenmenShinseiHaakuShinseisho().getCcdChohyoShutsuryokujun().get出力順ID() == null) {
+            parameter.set改頁出力順ID(0);
+        } else {
+            parameter.set改頁出力順ID(div.getGenmenShinseiHaakuList().getGenmenShinseiHaakuShinseisho().
+                    getCcdChohyoShutsuryokujun().get出力順ID());
+        }
+        if (div.getGenmenShinseiHaakuList().getGenmenShinseiHaakuShinseisho().getTxtHakkoYMD() == null) {
+            parameter.set発行日(FlexibleDate.EMPTY);
+        } else {
+            parameter.set発行日(div.getGenmenShinseiHaakuList().getGenmenShinseiHaakuShinseisho().getTxtHakkoYMD().getValue());
+        }
+        return parameter;
     }
 }

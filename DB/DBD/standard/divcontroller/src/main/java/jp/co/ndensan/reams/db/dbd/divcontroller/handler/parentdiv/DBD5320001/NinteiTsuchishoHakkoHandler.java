@@ -436,6 +436,37 @@ public class NinteiTsuchishoHakkoHandler {
         return parameter;
     }
 
+    /**
+     * 「出力対象」チェックのonChange処理
+     */
+    public void changeChkOutPutSelect() {
+        List<RString> selectedList = div.getChkOutPutSelect().getSelectedKeys();
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        if (null == 市町村セキュリティ情報) {
+            return;
+        }
+        RString 市町村コード = 市町村セキュリティ情報.get市町村情報().get市町村コード().value();
+
+        if (selectedList.contains(RadioValue.認定結果通知書.getKey())) {
+            set一括発行認定結果通知書(市町村コード, PanelType.一括発行認定結果通知書パネル);
+        } else {
+            clear一括発行認定結果通知書();
+        }
+
+        if (selectedList.contains(RadioValue.サービス変更通知書.getKey())) {
+            set一括発行サービス変更通知書(市町村コード, PanelType.一括発行サービス変更通知書パネル);
+        } else {
+            clear一括発行サービス変更通知書();
+        }
+
+        if (selectedList.contains(RadioValue.要介護度変更通知書.getKey())) {
+            set一括発行要介護区分変更通知書(市町村コード, PanelType.一括発行要介護度変更通知書パネル);
+        } else {
+            clear一括発行要介護度変更通知書();
+        }
+
+    }
+
     private List<KeyValueDataSource> get通知書発行方法データソース() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         dataSource.add(new KeyValueDataSource(RadioValue.個別発行を行う.getKey(), RadioValue.個別発行を行う.getValue()));
@@ -690,7 +721,7 @@ public class NinteiTsuchishoHakkoHandler {
     }
 
     private void clear個別発行認定結果通知書() {
-        div.getCcdKobetsuNinteiKekkaBunshoBango().initialize(ReportIdDBD.DBD532001.getReportId());
+        div.getCcdKobetsuNinteiKekkaBunshoBango().initialize(ReportId.EMPTY);
         div.getRadNinteiKekkaRireki().setDataSource(get発行履歴データソース());
         div.getRadNinteiKekkaRireki().setSelectedKey(RadioValue.残す.getKey());
         div.getTxtNinteiKekkaSakuseiDay().clearValue();
@@ -702,7 +733,7 @@ public class NinteiTsuchishoHakkoHandler {
     }
 
     private void clear個別発行サービス変更通知書() {
-        div.getCcdKobetsuServiceHenkoBunshoBango().initialize(ReportIdDBD.DBD550002.getReportId());
+        div.getCcdKobetsuServiceHenkoBunshoBango().initialize(ReportId.EMPTY);
         div.getRadServiceHenkoBunshoRireki().setDataSource(get発行履歴データソース());
         div.getRadServiceHenkoBunshoRireki().setSelectedKey(RadioValue.残す.getKey());
         div.getTxtServiceHenkoBunshoSakuseiDay().clearValue();
@@ -715,7 +746,7 @@ public class NinteiTsuchishoHakkoHandler {
     }
 
     private void clear個別発行要介護度変更通知書() {
-        div.getCcdKobetsuKaigodoHenkoBunshoBango().initialize(ReportIdDBD.DBD550003.getReportId());
+        div.getCcdKobetsuKaigodoHenkoBunshoBango().initialize(ReportId.EMPTY);
         div.getRadYokaigodoHenkoRireki().setDataSource(get発行履歴データソース());
         div.getRadYokaigodoHenkoRireki().setSelectedKey(RadioValue.残す.getKey());
         div.getTxtYokaigodoHenkoTsuchiSakuseiDay().clearValue();
@@ -728,7 +759,7 @@ public class NinteiTsuchishoHakkoHandler {
     }
 
     private void clear個別発行認定却下通知書() {
-        div.getCcdKobetsuNinteiKyakkaBunshoBango().initialize(ReportIdDBD.DBD550001.getReportId());
+        div.getCcdKobetsuNinteiKyakkaBunshoBango().initialize(ReportId.EMPTY);
         div.getRadNinteiKyakkaRireki().setDataSource(get発行履歴データソース());
         div.getRadNinteiKyakkaRireki().setSelectedKey(RadioValue.残す.getKey());
         div.getTxtNinteiKyakkaTsuchi().clearValue();
@@ -753,7 +784,7 @@ public class NinteiTsuchishoHakkoHandler {
         div.getTxtNinteiKekkaKonkaiTimeFrom().clearValue();
         div.getTxtNinteiKekkaKonkaiYMDTo().clearValue();
         div.getTxtNinteiKekkaKonkaiTimeTo().clearValue();
-        div.getCcdIkkatsuNinteiKekkaBunshoBango().initialize(ReportIdDBD.DBD532001.getReportId());
+        div.getCcdIkkatsuNinteiKekkaBunshoBango().initialize(ReportId.EMPTY);
     }
 
     private void clear一括発行サービス変更通知書() {
@@ -765,7 +796,7 @@ public class NinteiTsuchishoHakkoHandler {
         div.getTxtServiceHenkoKonkaiTimeFrom().clearValue();
         div.getTxtServiceHenkoKonkaiYMDTo().clearValue();
         div.getTxtServiceHenkoKonkaiTimeTo().clearValue();
-        div.getCcdIkkatsuServiceHenkoBunshoBango().initialize(ReportIdDBD.DBD550002.getReportId());
+        div.getCcdIkkatsuServiceHenkoBunshoBango().initialize(ReportId.EMPTY);
 
     }
 
@@ -778,7 +809,7 @@ public class NinteiTsuchishoHakkoHandler {
         div.getTxtKubunHenkoKonkaiTimeFrom().clearValue();
         div.getTxtKubunHenkoKonkaiYMDTo().clearValue();
         div.getTxtKubunHenkoKonkaiTimeTo().clearValue();
-        div.getCcdIkkatsuKubunHenkoBunshoBango().initialize(ReportIdDBD.DBD550003.getReportId());
+        div.getCcdIkkatsuKubunHenkoBunshoBango().initialize(ReportId.EMPTY);
     }
 
     private void clear一括発行() {

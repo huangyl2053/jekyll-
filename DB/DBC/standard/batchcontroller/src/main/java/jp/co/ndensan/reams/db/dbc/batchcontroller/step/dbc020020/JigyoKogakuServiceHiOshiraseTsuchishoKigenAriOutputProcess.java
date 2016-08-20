@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
@@ -112,9 +113,9 @@ public class JigyoKogakuServiceHiOshiraseTsuchishoKigenAriOutputProcess extends 
     @Override
     protected void beforeExecute() {
         認証者情報_通常分 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, 帳票分類ＩＤ, FlexibleDate.getNowDate(),
-                NinshoshaDenshikoinshubetsuCode.保険者印, 通常分ReportSourceWriter);
+                NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, 通常分ReportSourceWriter);
         認証者情報_償還分 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, 帳票分類ＩＤ, FlexibleDate.getNowDate(),
-                NinshoshaDenshikoinshubetsuCode.保険者印, 自動償還分ReportSourceWriter);
+                NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, 自動償還分ReportSourceWriter);
 
         ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
         帳票制御共通 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, 帳票分類ＩＤ);

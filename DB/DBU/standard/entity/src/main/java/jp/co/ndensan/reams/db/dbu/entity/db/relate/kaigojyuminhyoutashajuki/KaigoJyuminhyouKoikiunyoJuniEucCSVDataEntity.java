@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.entity.db.kaigojyuminhyoutashajuki;
+package jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojyuminhyoutashajuki;
 
 import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.IKaigoJuminhyoEucCsvEntity;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;

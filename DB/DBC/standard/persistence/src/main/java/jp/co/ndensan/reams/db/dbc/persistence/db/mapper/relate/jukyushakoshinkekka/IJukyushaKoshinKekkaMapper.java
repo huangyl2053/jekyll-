@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakoshinkekka;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakoshinkekka.JukyushaKoshinKekkaMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushajoho.JukyushaHihokenshaEntity;
-import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 
 /**
  * 受給者情報更新結果情報取込みのバッチのDB操作です。
@@ -19,8 +19,8 @@ public interface IJukyushaKoshinKekkaMapper {
     /**
      * 帳票出力対象データを取得する。
      *
-     * @param parameter IMyBatisParameter
+     * @param parameter JukyushaKoshinKekkaMybatisParameter
      * @return List<JukyushaHihokenshaEntity>
      */
-    List<JukyushaHihokenshaEntity> get帳票出力対象データ(IMyBatisParameter parameter);
+    List<JukyushaHihokenshaEntity> get帳票出力対象データ(JukyushaKoshinKekkaMybatisParameter parameter);
 }
