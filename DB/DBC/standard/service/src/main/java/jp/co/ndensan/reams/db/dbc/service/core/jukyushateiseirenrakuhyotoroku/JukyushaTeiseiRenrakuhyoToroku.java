@@ -123,7 +123,9 @@ public class JukyushaTeiseiRenrakuhyoToroku {
             JukyushaIdoRenrakuhyoBuilder 受給者訂正Builder = 受給者訂正.createBuilderForEdit();
             受給者訂正Builder.set送付年月(システム日付.getYearMonth());
             受給者訂正Builder.set証記載保険者番号(証記載保険者番号);
-            受給者訂正Builder.set広域連合_政令市_保険者番号(証記載保険者番号と広域保険者番号.get(1));
+            if (証記載保険者番号と広域保険者番号.get(1) != null) {
+                受給者訂正Builder.set広域連合_政令市_保険者番号(証記載保険者番号と広域保険者番号.get(1));
+            }
             if (psm_entity != null) {
                 受給者訂正Builder.set性別コード(psm_entity.get性別コード());
                 受給者訂正Builder.set生年月日(psm_entity.get生年月日());
