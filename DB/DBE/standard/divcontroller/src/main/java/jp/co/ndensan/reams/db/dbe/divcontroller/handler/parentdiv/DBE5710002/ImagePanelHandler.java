@@ -2,11 +2,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710002;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 
 /**
  * 要介護認定イメージ情報出力のバリデーションハンドラークラスです。
@@ -44,38 +40,44 @@ public class ImagePanelHandler {
     }
 
     /**
-     * 調査票概況特記イメージ名を取得します。
+     * 調査票概況特記と調査票特記イメージ名を取得します。
      *
      * @return List<RString>
      */
-    public List<RString> get調査票概況特記イメージ() {
-        List<RString> 調査票概況特記 = new ArrayList<>();
-        調査票概況特記.add(new RString("C0001"));
-        調査票概況特記.add(new RString("C0002"));
-        調査票概況特記.add(new RString("C0003"));
-        調査票概況特記.add(new RString("C0004"));
-        調査票概況特記.add(new RString("C0005"));
-        調査票概況特記.add(new RString("C0006"));
-        調査票概況特記.add(new RString("C0007"));
-        調査票概況特記.add(new RString("C0007_BAK"));
-        return 調査票概況特記;
+    public List<RString> get調査票イメージ() {
+        List<RString> 調査票 = new ArrayList<>();
+        調査票.add(new RString("C0001"));
+        調査票.add(new RString("C0002"));
+        調査票.add(new RString("C0003"));
+        調査票.add(new RString("C0004"));
+        調査票.add(new RString("C0005"));
+        調査票.add(new RString("C0006"));
+        調査票.add(new RString("C0007"));
+        調査票.add(new RString("C0007_BAK"));
+        get調査票特記イメージ(調査票);
+        return 調査票;
     }
 
     /**
-     * 調査票特記イメージ名を取得します。
+     * 調査票概況イメージ名を取得します。
      *
      * @return List<RString>
      */
-    public List<RString> get調査票特記イメージ() {
-        List<RString> 調査票特記 = new ArrayList<>();
+    public List<RString> get調査票概況ファイル() {
+        List<RString> 調査票概況 = new ArrayList<>();
+        調査票概況.add(new RString("G0001"));
+        return 調査票概況;
+    }
+
+    private List<RString> get調査票特記イメージ(List<RString> 調査票) {
         for (RString 連番範囲 : get調査票特記連番範囲イメージ()) {
             for (RString 特記範囲 : get調査票特記範囲イメージ()) {
-                調査票特記.add(特記範囲.concat("-").concat(連番範囲));
-                調査票特記.add(特記範囲.concat("-").concat(連番範囲).concat("_BAK"));
+                調査票.add(特記範囲.concat("-").concat(連番範囲));
+                調査票.add(特記範囲.concat("-").concat(連番範囲).concat("_BAK"));
             }
         }
-        get調査票特記資料イメージ(調査票特記);
-        return 調査票特記;
+        get調査票特記資料イメージ(調査票);
+        return 調査票;
     }
 
     private void get調査票特記資料イメージ(List<RString> 調査票特記) {
@@ -246,25 +248,5 @@ public class ImagePanelHandler {
         その他資料範囲.add(new RString("F1401E"));
         その他資料範囲.add(new RString("F1401F"));
         return その他資料範囲;
-    }
-
-    private enum ImageValidationMessage implements IValidationMessage {
-
-        調査票(UrErrorMessages.存在しない, "調査票(概況+調査票特記)のイメージファイル"),
-        調査票概況(UrErrorMessages.存在しない, "調査票概況のイメージファイル"),
-        主治医意見書(UrErrorMessages.存在しない, "主治医意見書のイメージファイル"),
-        その他資料(UrErrorMessages.存在しない, "その他資料のイメージファイル"),
-        出力項目を指定(UrErrorMessages.出力項目を指定);
-
-        private final Message message;
-
-        private ImageValidationMessage(IMessageGettable message, String... replacements) {
-            this.message = message.getMessage().replace(replacements);
-        }
-
-        @Override
-        public Message getMessage() {
-            return message;
-        }
     }
 }

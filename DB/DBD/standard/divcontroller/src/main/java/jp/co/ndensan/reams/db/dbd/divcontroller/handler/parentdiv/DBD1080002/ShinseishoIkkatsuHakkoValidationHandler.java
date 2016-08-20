@@ -35,7 +35,7 @@ public class ShinseishoIkkatsuHakkoValidationHandler {
         messages.add(ValidateChain.validateStart(div).ifNot(ShinseishoIkkatsuHakkoSpec.候補者を選択しないチェック)
                 .thenAdd(NoInputMessages.候補者を選択しない).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                NoInputMessages.候補者を選択しない, div.getGenmenShinseiHaakuList().getGenmenShinseiHaakuShinseisho()).build().check(messages));
+                NoInputMessages.候補者を選択しない, div.getGenmenShinseiHaakuList().getDdlKohoshaList()).build().check(messages));
         return pairs;
     }
 
