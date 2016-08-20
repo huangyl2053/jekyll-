@@ -161,6 +161,55 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         div.getTxtSakuseiTime5().setValue(RTime.now());
         div.getTxtSakuseiTime6().setValue(RTime.now());
         div.getTxtSakuseiTime7().setValue(RTime.now());
+        if (div.getTxtShukeiYM1().getValue().isEmpty()) {
+            div.getTxtSakuseiYMD1().setReadOnly(true);
+            div.getTxtSakuseiTime1().setReadOnly(true);
+        } else {
+            div.getTxtSakuseiYMD1().setReadOnly(false);
+            div.getTxtSakuseiTime1().setReadOnly(false);
+        }
+        if (div.getTxtShukeiYM2().getValue().isEmpty()) {
+            div.getTxtSakuseiYMD2().setReadOnly(true);
+            div.getTxtSakuseiTime2().setReadOnly(true);
+        } else {
+            div.getTxtSakuseiYMD2().setReadOnly(false);
+            div.getTxtSakuseiTime2().setReadOnly(false);
+        }
+        if (div.getTxtShukeiYM3().getValue().isEmpty()) {
+            div.getTxtSakuseiYMD3().setReadOnly(true);
+            div.getTxtSakuseiTime3().setReadOnly(true);
+        } else {
+            div.getTxtSakuseiYMD3().setReadOnly(false);
+            div.getTxtSakuseiTime3().setReadOnly(false);
+        }
+        if (div.getTxtShukeiYM4().getValue().isEmpty()) {
+            div.getTxtSakuseiYMD4().setReadOnly(true);
+            div.getTxtSakuseiTime4().setReadOnly(true);
+        } else {
+            div.getTxtSakuseiYMD4().setReadOnly(false);
+            div.getTxtSakuseiTime4().setReadOnly(false);
+        }
+        if (div.getTxtShukeiYM5().getValue().isEmpty()) {
+            div.getTxtSakuseiYMD5().setReadOnly(true);
+            div.getTxtSakuseiTime5().setReadOnly(true);
+        } else {
+            div.getTxtSakuseiYMD5().setReadOnly(false);
+            div.getTxtSakuseiTime5().setReadOnly(false);
+        }
+        if (div.getTxtShukeiYM6().getValue().isEmpty()) {
+            div.getTxtSakuseiYMD6().setReadOnly(true);
+            div.getTxtSakuseiTime6().setReadOnly(true);
+        } else {
+            div.getTxtSakuseiYMD6().setReadOnly(false);
+            div.getTxtSakuseiTime6().setReadOnly(false);
+        }
+        if (div.getTxtShukeiYM7().getValue().isEmpty()) {
+            div.getTxtSakuseiYMD7().setReadOnly(true);
+            div.getTxtSakuseiTime7().setReadOnly(true);
+        } else {
+            div.getTxtSakuseiYMD7().setReadOnly(false);
+            div.getTxtSakuseiTime7().setReadOnly(false);
+        }
     }
 
     /**
@@ -203,6 +252,9 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
      * @param 報告年月 RDate
      */
     public void set入力された報告年月より各集計年月の設定(RDate 報告年月) {
+        FlexibleDate 入力決定年月 = new FlexibleDate("平成21年7月");
+        FlexibleDate 入力決定年月6 = new FlexibleDate("平成18年6月");
+        FlexibleDate 入力決定年月7 = new FlexibleDate("平成24年6月");
         RDate 日付 = new RDate("平成12年5月");
         RDate 報告年月の前月 = 報告年月.minusMonth(1);
         RDate 報告年月の前々月 = 報告年月.minusMonth(2);
@@ -280,7 +332,34 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         } else {
             div.getTxtShukeiYM7().clearValue();
         }
-
+        if (div.getTxtShukeiYM3().getValue().isBefore(入力決定年月)) {
+            div.getTxtSakuseiYMD3().setDisabled(true);
+            div.getTxtSakuseiTime3().setDisabled(true);
+        } else {
+            div.getTxtSakuseiYMD3().setDisabled(false);
+            div.getTxtSakuseiTime3().setDisabled(false);
+        }
+        if (div.getTxtShukeiYM5().getValue().isBefore(入力決定年月)) {
+            div.getTxtSakuseiYMD5().setDisabled(true);
+            div.getTxtSakuseiTime5().setDisabled(true);
+        } else {
+            div.getTxtSakuseiYMD5().setDisabled(false);
+            div.getTxtSakuseiTime5().setDisabled(false);
+        }
+        if (div.getTxtShukeiYM6().getValue().isBefore(入力決定年月6)) {
+            div.getTxtSakuseiYMD6().setDisabled(true);
+            div.getTxtSakuseiTime6().setDisabled(true);
+        } else {
+            div.getTxtSakuseiYMD6().setDisabled(false);
+            div.getTxtSakuseiTime6().setDisabled(false);
+        }
+        if (div.getTxtShukeiYM7().getValue().isBefore(入力決定年月7)) {
+            div.getTxtSakuseiYMD7().setDisabled(true);
+            div.getTxtSakuseiTime7().setDisabled(true);
+        } else {
+            div.getTxtSakuseiYMD7().setDisabled(false);
+            div.getTxtSakuseiTime7().setDisabled(false);
+        }
     }
 
     /**
