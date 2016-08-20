@@ -110,7 +110,9 @@ public class JukyushaIdoRenrakuhyoHandler {
             }
             div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtHiHokenshaNo().setValue(被保険者番号.value());
             div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtIdoYMD().setValue(受給者異動情報.get異動年月日());
-            div.getJukyushaIdoRenrakuhyoKihonJoho().getRadSeibetsu().setSelectedKey(受給者異動情報.get性別コード());
+            if (受給者異動情報.get性別コード() != null) {
+                div.getJukyushaIdoRenrakuhyoKihonJoho().getRadSeibetsu().setSelectedKey(受給者異動情報.get性別コード());
+            }
             div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtHiHokenshaNameKana().setValue(受給者異動情報.get被保険者氏名カナ());
             div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtUmareYMD().setValue(受給者異動情報.get生年月日());
             if (受給者異動情報.get訂正年月日() != null && !受給者異動情報.get訂正年月日().isEmpty()) {
