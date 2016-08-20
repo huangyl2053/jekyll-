@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaihanteiichiran.FutanwariaiHanteiIchiranMybaticParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaihanteiichiran.FutanwariaiHanteiIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaihanteiichiran.MaeRiyoshaFutanWariaiHanteiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.KonkaiRiyoshaFutanWariaiJohoTempEntity;
 
 /**
  * 負担割合判定一覧出力（共通）のマッパーインタフェースです。
@@ -16,6 +17,14 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaihanteiichiran.MaeR
  * @reamsid_L DBC-4980-031 yuanzhenxia
  */
 public interface IFutanwariaiHanteiIchiranMapper {
+
+    /**
+     * 今回利用者負担割合判定データの抽出です。
+     *
+     * @param parameter FutanwariaiHanteiIchiranMybaticParameter
+     * @return KonkaiRiyoshaFutanWariaiJohoTempEntity
+     */
+    List<KonkaiRiyoshaFutanWariaiJohoTempEntity> get今回利用者負担割合判定(FutanwariaiHanteiIchiranMybaticParameter parameter);
 
     /**
      * 前回利用者負担割合判定データの抽出です。
