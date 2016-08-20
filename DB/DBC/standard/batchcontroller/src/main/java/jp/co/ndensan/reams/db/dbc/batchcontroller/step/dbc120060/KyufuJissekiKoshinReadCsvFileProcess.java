@@ -76,17 +76,17 @@ public class KyufuJissekiKoshinReadCsvFileProcess extends BatchProcessBase<RStri
     private KyufuJissekiKoshinReadCsvFileService service;
 
     @BatchWriter
-    IBatchTableWriter 被保険者一時tableWriter;
+    private IBatchTableWriter 被保険者一時tableWriter;
     @BatchWriter
-    IBatchTableWriter 処理結果リスト一時tableWriter;
+    private IBatchTableWriter 処理結果リスト一時tableWriter;
     @BatchWriter
-    IBatchTableWriter 給付実績一時tableWriter;
+    private IBatchTableWriter 給付実績一時tableWriter;
     private static final RString 被保険者一時_TABLE_NAME = new RString("DbWT0001Hihokensha");
     private static final RString 処理結果リスト一時_TABLE_NAME = new RString("DbWT0002KokuhorenTorikomiError");
     private static final RString 給付実績一時_TABLE_NAME = new RString("DbWT1111KyufuJisseki");
 
-    OutputParameter<FlowEntity> flowEntity;
-    FlowEntity returnEntity;
+    private OutputParameter<FlowEntity> flowEntity;
+    private FlowEntity returnEntity;
     int 連番;
 
     @Override

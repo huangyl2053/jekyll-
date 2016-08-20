@@ -88,11 +88,11 @@ public class KyufuJissekiKoshinDoIchiranhyoSakuseiProcess extends BatchKeyBreakB
     private ReportSourceWriter<KyufujissekiKoshinkekkaIchiranSource> reportSourceWriter;
     private int 連番 = 0;
     private int 合計件数 = 0;
-    RString 並び順の１件目 = RString.EMPTY;
-    RString 並び順の２件目 = RString.EMPTY;
-    RString 並び順の３件目 = RString.EMPTY;
-    RString 並び順の４件目 = RString.EMPTY;
-    RString 並び順の５件目 = RString.EMPTY;
+    private RString 並び順の１件目 = RString.EMPTY;
+    private RString 並び順の２件目 = RString.EMPTY;
+    private RString 並び順の３件目 = RString.EMPTY;
+    private RString 並び順の４件目 = RString.EMPTY;
+    private RString 並び順の５件目 = RString.EMPTY;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
@@ -242,19 +242,20 @@ public class KyufuJissekiKoshinDoIchiranhyoSakuseiProcess extends BatchKeyBreakB
     }
 
     private RString get出力順() {
-        RString 出力順 = MyBatisOrderByClauseCreator.create(KyufujissekiKoshinkekkaIchiranProperty.DBC200054_KyufujissekiKoshinkekkaIchiran.class, 並び順);
-        if (RString.isNullOrEmpty(出力順)) {
-            出力順 = デフォルト出力順;
+        RString syuturyokuJun = MyBatisOrderByClauseCreator
+                .create(KyufujissekiKoshinkekkaIchiranProperty.DBC200054_KyufujissekiKoshinkekkaIchiran.class, 並び順);
+        if (RString.isNullOrEmpty(syuturyokuJun)) {
+            syuturyokuJun = デフォルト出力順;
         } else {
-            List<RString> 出力順BODY = 出力順.split(コンマ.toString());
-            出力順 = デフォルト出力順;
+            List<RString> 出力順BODY = syuturyokuJun.split(コンマ.toString());
+            syuturyokuJun = デフォルト出力順;
             if (出力順BODY.size() > 1) {
                 for (int i = 1; i < 出力順BODY.size(); i++) {
-                    出力順 = 出力順.concat(コンマ).concat(出力順BODY.get(i));
+                    syuturyokuJun = syuturyokuJun.concat(コンマ).concat(出力順BODY.get(i));
                 }
             }
         }
-        return 出力順;
+        return syuturyokuJun;
     }
 
 }
