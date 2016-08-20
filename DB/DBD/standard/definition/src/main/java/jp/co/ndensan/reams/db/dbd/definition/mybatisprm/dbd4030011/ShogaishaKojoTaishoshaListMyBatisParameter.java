@@ -38,7 +38,7 @@ public class ShogaishaKojoTaishoshaListMyBatisParameter extends UaFt200FindShiki
     private final FlexibleDate 決定日TO;
     private final RDate 交付日;
     private final RString 前回非該当者;
-    private final boolean 障がい者手帳ある;
+    private final boolean 障がい者手帳あり;
     private final boolean 障がい者手帳なし;
     private final boolean 前回非該当者含まない;
     private final FlexibleYear 対象年度plus1;
@@ -84,7 +84,7 @@ public class ShogaishaKojoTaishoshaListMyBatisParameter extends UaFt200FindShiki
         this.決定日FROM = 決定日FROM;
         this.決定日TO = 決定日TO;
         this.交付日 = 交付日;
-        this.障がい者手帳ある = new RString("ある").equals(障がい者手帳);
+        this.障がい者手帳あり = new RString("あり").equals(障がい者手帳);
         this.障がい者手帳なし = new RString("なし").equals(障がい者手帳);
         this.前回非該当者 = 前回非該当者;
         this.前回非該当者含まない = new RString("含まない").equals(前回非該当者);

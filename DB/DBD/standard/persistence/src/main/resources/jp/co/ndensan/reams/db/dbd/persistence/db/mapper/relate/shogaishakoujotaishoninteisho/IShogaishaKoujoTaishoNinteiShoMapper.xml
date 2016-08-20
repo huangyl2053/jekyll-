@@ -109,7 +109,7 @@
             AND T4037."dbT4038ShogaishaKoujo_shogaiNichijoSeikatsuJiritsudoCode" = #{障害高齢者の日常生活自立度}
         </if>
         <if test="障がい者手帳!=null and !障がい者手帳.isEmpty()">
-            <if test="障がい者手帳ある">
+            <if test="障がい者手帳あり">
                 AND T4037."dbT4038ShogaishaKoujo_shogaishaTechoUmu" = true
             </if>
             <if test="障がい者手帳なし">
