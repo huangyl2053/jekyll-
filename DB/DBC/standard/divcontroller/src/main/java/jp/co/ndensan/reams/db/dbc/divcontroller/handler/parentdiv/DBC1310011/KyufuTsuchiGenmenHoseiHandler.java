@@ -72,7 +72,7 @@ public class KyufuTsuchiGenmenHoseiHandler {
                 source.setKey(item.getItemId());
                 StringBuilder strBuilder = new StringBuilder();
                 strBuilder.append(item.getItemId());
-                strBuilder.append(" ");
+                strBuilder.append(RString.HALF_SPACE);
                 strBuilder.append(item.getItemName());
                 source.setValue(new RString(strBuilder.toString()));
                 市町村DDL.add(source);
@@ -139,7 +139,7 @@ public class KyufuTsuchiGenmenHoseiHandler {
             source.setKey(business.get市町村コード().value());
             StringBuilder strBuilder = new StringBuilder();
             strBuilder.append(business.get市町村コード().value());
-            strBuilder.append(" ");
+            strBuilder.append(RString.HALF_SPACE);
             strBuilder.append(business.get市町村名称());
             source.setValue(new RString(strBuilder.toString()));
             市町村DDL.add(source);
