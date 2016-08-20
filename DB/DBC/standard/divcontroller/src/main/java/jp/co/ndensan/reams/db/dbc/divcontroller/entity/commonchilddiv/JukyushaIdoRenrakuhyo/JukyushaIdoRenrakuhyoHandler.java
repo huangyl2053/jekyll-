@@ -9,12 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyoBuilder;
+import jp.co.ndensan.reams.db.dbc.business.core.jukyushaidorenrakuhyosakusei.JukyushaIdoRenrakuhyoSakuseiRelateEntity;
 import jp.co.ndensan.reams.db.dbc.business.core.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoTorokuEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_JukyushaIdoJiyu;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KeikakuSakuseiKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_NijiyoboJigyoKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_ShokiboKyotakuServiceRIyoCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_kohiFutanJogengakuGengakuUmu;
+import jp.co.ndensan.reams.db.dbc.service.core.jukyushaidorenrakuhyosakusei.JukyushaIdoRenrakuhyoSakusei;
 import jp.co.ndensan.reams.db.dbc.service.core.jukyushateiseirenrakuhyotoroku.JukyushaTeiseiRenrakuhyoToroku;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -1050,11 +1052,9 @@ public class JukyushaIdoRenrakuhyoHandler {
                 getTxtRiyosyaFutanWariaiYukoYMD().getToValue().toDateString()));
         entity.set訂正年月日(new FlexibleDate(div.getJukyushaIdoRenrakuhyoTeisei().getTxtTeiseiYMD().getValue().toDateString()));
         entity.set訂正区分コード(div.getJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().getSelectedKey());
-        //TODO dummy
-//        JukyushaIdoRenrakuhyoSakusei business = JukyushaIdoRenrakuhyoSakusei.createInstance();
-//        JukyushaIdoRenrakuhyoTorokuEntity entityReturn = business.出力用受給者訂正情報Entity(entity);
-//        return entityReturn;
-        return entity;
+        JukyushaIdoRenrakuhyoSakusei business = JukyushaIdoRenrakuhyoSakusei.createInstance();
+        JukyushaIdoRenrakuhyoSakuseiRelateEntity entityReturn = business.出力用受給者訂正情報Entity(entity);
+        return entityReturn.get出力用受給者訂正情報Entity();
     }
 
     /**
