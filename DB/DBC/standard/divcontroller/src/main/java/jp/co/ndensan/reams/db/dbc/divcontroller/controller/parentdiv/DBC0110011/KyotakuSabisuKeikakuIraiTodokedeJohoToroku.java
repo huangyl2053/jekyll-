@@ -310,7 +310,10 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         KyotakuKeikakuTodokede 居宅給付計画届出 = ViewStateHolder.get(ViewStateKeys.居宅給付計画届出,
                 KyotakuKeikakuTodokede.class);
         KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = getHandler(div);
-        boolean is項目が変更 = handler.is項目が変更(居宅給付計画届出);
+        boolean is項目が変更 = Boolean.FALSE;
+        if (居宅給付計画届出 != null) {
+            is項目が変更 = handler.is項目が変更(居宅給付計画届出);
+        }
         if (is項目が変更 && !ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(DbcQuestionMessages.居宅サービス変更.getMessage()).respond();
         }
