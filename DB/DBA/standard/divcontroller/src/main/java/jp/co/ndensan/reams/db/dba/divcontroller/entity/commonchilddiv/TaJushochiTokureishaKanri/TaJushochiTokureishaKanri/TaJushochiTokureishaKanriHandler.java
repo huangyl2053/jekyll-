@@ -54,6 +54,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
  */
 public class TaJushochiTokureishaKanriHandler {
 
+    private static final RString 状態_空白 = new RString("");
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
@@ -365,7 +366,7 @@ public class TaJushochiTokureishaKanriHandler {
             }
             Collections.sort(rowList, new DateComparator());
         } else if (適用モード.equals(親画面状態)) {
-            if (状態_追加.equals(div.getStrate())) {
+            if ((状態_追加.equals(div.getStrate())) || (状態_空白.equals(div.getStrate()))) {
                 rireki_Row = new dgJushochiTokureiRireki_Row();
             }
             if (状態_修正.equals(div.getStrate())) {
@@ -432,7 +433,7 @@ public class TaJushochiTokureishaKanriHandler {
                 }
                  div.getCcdShisetsuJoho().clear();
               }
-            if (状態_追加.equals(div.getStrate())) {
+            if ((状態_追加.equals(div.getStrate())) || (状態_空白.equals(div.getStrate()))) {
                 rireki_Row.setRowState(RowState.Added);
                 rireki_Row.setShikibetsuCode(識別コード.getColumnValue());
                 rireki_Row.getTekiyoYMD().setValue(new RDate(div.getTxtTekiyobi().getValue().toString()));
