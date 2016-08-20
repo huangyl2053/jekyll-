@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
@@ -41,9 +41,9 @@ public class KyufukanrihyoDoMasterTorokuProcess extends BatchProcessBase<Hihoken
     private KyufukanrihyoDoMasterTorokuProcessParameter parameter;
 
     @BatchWriter
-    BatchEntityCreatedTempTableWriter 給付管理票200004tableWriter;
+    BatchPermanentTableWriter 給付管理票200004tableWriter;
     @BatchWriter
-    BatchEntityCreatedTempTableWriter 給付管理票200604tableWriter;
+    BatchPermanentTableWriter 給付管理票200604tableWriter;
 
     @Override
     protected IBatchReader createReader() {
@@ -53,10 +53,10 @@ public class KyufukanrihyoDoMasterTorokuProcess extends BatchProcessBase<Hihoken
     @Override
     protected void createWriter() {
         給付管理票200004tableWriter
-                = new BatchEntityCreatedTempTableWriter(DbT3014KyufuKanrihyo200004Entity.TABLE_NAME,
+                = new BatchPermanentTableWriter(
                         DbT3014KyufuKanrihyo200004Entity.class);
         給付管理票200604tableWriter
-                = new BatchEntityCreatedTempTableWriter(DbT3015KyufuKanrihyo200604Entity.TABLE_NAME,
+                = new BatchPermanentTableWriter(
                         DbT3015KyufuKanrihyo200604Entity.class);
     }
 
