@@ -13,7 +13,7 @@ and open the template in the editor.-->
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.KousinSinseiTaishougaishaJohoMyBatisParameter"
             resultMap="ResultMap_KousinSinseiTaishougaishaJohoEntity" fetchSize="500">
         SELECT
-        A."dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo"
+        A."dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo" AS hihokenshaNo
         FROM (
         SELECT
         <include refid="allColumns_DbT4018KaigoHokenFutanGendogakuNintei" />
@@ -48,17 +48,17 @@ and open the template in the editor.-->
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.KousinSinseiTaishougaishaJohoMyBatisParameter"
             resultMap="ResultMap_KousinSinseiTaishougaishaJohoEntity" fetchSize="500">
         SELECT
-        A."dbT4014RiyoshaFutangakuGengaku_hihokenshaNo"
+        A."dbT4014RiyoshaFutangakuGengaku_hihokenshaNo" AS hihokenshaNo
         FROM (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4014RiyoshaFutangakuGengakuMapper.allColumns_DbT4014RiyoshaFutangakuGengaku" />
+        <include refid="allColumns_DbT4014RiyoshaFutangakuGengaku" />
         FROM rgdb."DbT4014RiyoshaFutangakuGengaku" AS  "DbT4014RiyoshaFutangakuGengaku"
         INNER JOIN
         (
         SELECT
         "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo",
         MAX( "DbT4014RiyoshaFutangakuGengaku"."rirekiNo") AS M
-        FROM rgdb."DbT4014RiyoshaFutangakuGengaku" AS  "DbT4014RiyoshaFutangakuGengaku"
+        FROM rgdb."DbT4014RiyoshaFutangakuGengaku"
         WHERE
         "DbT4014RiyoshaFutangakuGengaku"."ketteiKubun" = '1'
         AND #{前年度の開始日} <![CDATA[<=]]>  "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"
@@ -82,7 +82,7 @@ and open the template in the editor.-->
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.KousinSinseiTaishougaishaJohoMyBatisParameter"
             resultMap="ResultMap_KousinSinseiTaishougaishaJohoEntity" fetchSize="500">
         SELECT
-        A."dbT4016HomonKaigoRiyoshaFutangakuGengaku_hihokenshaNo"
+        A."dbT4016HomonKaigoRiyoshaFutangakuGengaku_hihokenshaNo" AS hihokenshaNo
         FROM (
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4016HomonKaigoRiyoshaFutangakuGengakuMapper.allColumns_DbT4016HomonKaigoRiyoshaFutangakuGengaku" />
@@ -116,7 +116,7 @@ and open the template in the editor.-->
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.KousinSinseiTaishougaishaJohoMyBatisParameter"
             resultMap="ResultMap_KousinSinseiTaishougaishaJohoEntity" fetchSize="500">
         SELECT
-        A."dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_hihokenshaNo"
+        A."dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_hihokenshaNo" AS hihokenshaNo
         FROM (
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4017ShakaiFukushiHojinRiyoshaFutanKeigenMapper.allColumns_DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen" />
@@ -236,5 +236,27 @@ and open the template in the editor.-->
         "DbT4018KaigoHokenFutanGendogakuNintei"."ninteiBatchExecutedTimestamp" as "dbT4018KaigoHokenFutanGendogakuNintei_ninteiBatchExecutedTimestamp",
         "DbT4018KaigoHokenFutanGendogakuNintei"."izokuNenkinJukyuFlag" as "dbT4018KaigoHokenFutanGendogakuNintei_izokuNenkinJukyuFlag",
         "DbT4018KaigoHokenFutanGendogakuNintei"."shogaiNenkinJukyuFlag" as "dbT4018KaigoHokenFutanGendogakuNintei_shogaiNenkinJukyuFlag"
+    </sql>
+    <sql id="allColumns_DbT4014RiyoshaFutangakuGengaku">
+        "DbT4014RiyoshaFutangakuGengaku"."shoKisaiHokenshaNo" as "dbT4014RiyoshaFutangakuGengaku_shoKisaiHokenshaNo",
+        "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo" as "dbT4014RiyoshaFutangakuGengaku_hihokenshaNo",
+        "DbT4014RiyoshaFutangakuGengaku"."rirekiNo" as "dbT4014RiyoshaFutangakuGengaku_rirekiNo",
+        "DbT4014RiyoshaFutangakuGengaku"."insertDantaiCd" as "dbT4014RiyoshaFutangakuGengaku_insertDantaiCd",
+        "DbT4014RiyoshaFutangakuGengaku"."insertTimestamp" as "dbT4014RiyoshaFutangakuGengaku_insertTimestamp",
+        "DbT4014RiyoshaFutangakuGengaku"."insertReamsLoginId" as "dbT4014RiyoshaFutangakuGengaku_insertReamsLoginId",
+        "DbT4014RiyoshaFutangakuGengaku"."insertContextId" as "dbT4014RiyoshaFutangakuGengaku_insertContextId",
+        "DbT4014RiyoshaFutangakuGengaku"."isDeleted" as "dbT4014RiyoshaFutangakuGengaku_isDeleted",
+        "DbT4014RiyoshaFutangakuGengaku"."updateCount" as "dbT4014RiyoshaFutangakuGengaku_updateCount",
+        "DbT4014RiyoshaFutangakuGengaku"."lastUpdateTimestamp" as "dbT4014RiyoshaFutangakuGengaku_lastUpdateTimestamp",
+        "DbT4014RiyoshaFutangakuGengaku"."lastUpdateReamsLoginId" as "dbT4014RiyoshaFutangakuGengaku_lastUpdateReamsLoginId",
+        "DbT4014RiyoshaFutangakuGengaku"."shinseiYMD" as "dbT4014RiyoshaFutangakuGengaku_shinseiYMD",
+        "DbT4014RiyoshaFutangakuGengaku"."ketteiYMD" as "dbT4014RiyoshaFutangakuGengaku_ketteiYMD",
+        "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" as "dbT4014RiyoshaFutangakuGengaku_tekiyoKaishiYMD",
+        "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD" as "dbT4014RiyoshaFutangakuGengaku_tekiyoShuryoYMD",
+        "DbT4014RiyoshaFutangakuGengaku"."ketteiKubun" as "dbT4014RiyoshaFutangakuGengaku_ketteiKubun",
+        "DbT4014RiyoshaFutangakuGengaku"."hiShoninRiyu" as "dbT4014RiyoshaFutangakuGengaku_hiShoninRiyu",
+        "DbT4014RiyoshaFutangakuGengaku"."kyuSochishaUmu" as "dbT4014RiyoshaFutangakuGengaku_kyuSochishaUmu",
+        "DbT4014RiyoshaFutangakuGengaku"."shinseiJiyu" as "dbT4014RiyoshaFutangakuGengaku_shinseiJiyu",
+        "DbT4014RiyoshaFutangakuGengaku"."kyuhuritsu" as "dbT4014RiyoshaFutangakuGengaku_kyuhuritsu"
     </sql>
 </mapper>

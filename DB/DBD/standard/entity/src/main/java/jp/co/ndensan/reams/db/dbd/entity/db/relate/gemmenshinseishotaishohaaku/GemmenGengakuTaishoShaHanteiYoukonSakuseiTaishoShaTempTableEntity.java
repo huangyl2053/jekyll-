@@ -10,17 +10,21 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 減免減額対象者判定用根拠作成対象者一時entityクラスです。
  *
  * @reamsid_L DBD-3530-030 liuwei2
  */
-@OnNextSchema("rgdb")
-public class GemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTempTableEntity extends DbTableEntityBase<GemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTempTableEntity> implements IDbAccessable {
+@Getter
+@Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
+public class GemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTempTableEntity
+        extends DbTableEntityBase<GemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTempTableEntity> implements IDbAccessable {
 
     @TableName
     public static final RString TABLE_NAME;
@@ -32,22 +36,6 @@ public class GemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTempTableEntity e
     private HihokenshaNo hihokenshaNo;
     @TempTableColumnOrder(2)
     private FlexibleDate kijunYMD;
-
-    public HihokenshaNo getHihokenshaNo() {
-        return hihokenshaNo;
-    }
-
-    public FlexibleDate getKijunYMD() {
-        return kijunYMD;
-    }
-
-    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
-        this.hihokenshaNo = hihokenshaNo;
-    }
-
-    public void setKijunYMD(FlexibleDate kijunYMD) {
-        this.kijunYMD = kijunYMD;
-    }
 
     /**
      * コンストラクタです。

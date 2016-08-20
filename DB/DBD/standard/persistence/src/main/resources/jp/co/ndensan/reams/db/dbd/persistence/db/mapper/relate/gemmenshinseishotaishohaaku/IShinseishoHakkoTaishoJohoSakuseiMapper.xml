@@ -22,7 +22,7 @@ and open the template in the editor.
         A."利用者負担段階" as "riyoshaFutanDankai",
         A."合計所得金額" as "GoukeiShotokuGaku",
         A."年金収入額" as "nenkinShunyuGaku",
-        F."nyushoShisetsuCode" as "Jigy oshaNo",
+        F."nyushoShisetsuCode" as "JigyoshaNo",
         A."非課税年金勘案額" as "hikazeinenkinkannangaku"
         FROM
         "taishoShaHanteiYoukonkyoItokiTemp" A
@@ -81,7 +81,7 @@ and open the template in the editor.
         A."利用者負担段階" as "riyoshaFutanDankai",
         A."合計所得金額" as "GoukeiShotokuGaku",
         A."年金収入額" as "nenkinShunyuGaku",
-        F."nyushoShisetsuCode" as "Jigy oshaNo",
+        F."nyushoShisetsuCode" as "JigyoshaNo",
         A."非課税年金勘案額" as "hikazeinenkinkannangaku"
         FROM
         "taishoShaHanteiYoukonkyoItokiTemp" A
@@ -191,7 +191,7 @@ and open the template in the editor.
         A."利用者負担段階" as "riyoshaFutanDankai",
         A."合計所得金額" as "GoukeiShotokuGaku",
         A."年金収入額" as "nenkinShunyuGaku",
-        F."nyushoShisetsuCode" as "Jigy oshaNo",
+        F."nyushoShisetsuCode" as "JigyoshaNo",
         A."非課税年金勘案額" as "hikazeinenkinkannangaku"
         FROM
         "taishoShaHanteiYoukonkyoItokiTemp" A

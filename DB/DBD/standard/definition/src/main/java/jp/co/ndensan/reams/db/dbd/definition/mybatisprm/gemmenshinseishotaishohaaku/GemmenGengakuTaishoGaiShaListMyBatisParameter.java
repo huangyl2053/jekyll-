@@ -28,6 +28,13 @@ public class GemmenGengakuTaishoGaiShaListMyBatisParameter implements IMyBatisPa
     private FlexibleDate 前年度の開始日;
     private FlexibleDate 前年度の終了日;
 
+    /**
+     *
+     * @param 基準日 FlexibleDate
+     * @param 減免減額種類 GemmenGengakuShurui
+     * @param 前年度の開始日 FlexibleDate
+     * @param 前年度の終了日 FlexibleDate
+     */
     public GemmenGengakuTaishoGaiShaListMyBatisParameter(FlexibleDate 基準日, GemmenGengakuShurui 減免減額種類, FlexibleDate 前年度の開始日, FlexibleDate 前年度の終了日) {
         this.基準日 = 基準日;
         this.減免減額種類 = 減免減額種類;

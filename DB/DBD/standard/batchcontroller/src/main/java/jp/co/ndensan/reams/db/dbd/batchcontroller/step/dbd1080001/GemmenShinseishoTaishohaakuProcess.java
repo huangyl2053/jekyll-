@@ -26,18 +26,21 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class GemmenShinseishoTaishohaakuProcess extends BatchProcessBase<HanteiTaishoshaTokuteiEntity> {
 
-    private static final RString MYBATIS_SELECT_ID_負担限度額認定 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenshinseishotaishohaaku.IHanteiTaishoshaTokuteiMapper.get減免減額対象者判定用根拠作成対象者_負担限度額認定");
-    private static final RString MYBATIS_SELECT_ID_利用者負担額減額 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenshinseishotaishohaaku.IHanteiTaishoshaTokuteiMapper.get減免減額対象者判定用根拠作成対象者_利用者負担額減額");
-    private static final RString MYBATIS_SELECT_ID_訪問介護利用者負担額減額 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenshinseishotaishohaaku.IHanteiTaishoshaTokuteiMapper.get減免減額対象者判定用根拠作成対象者_訪問介護利用者負担額減額");
-    private static final RString MYBATIS_SELECT_ID_社会福祉法人等利用者負担軽減 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenshinseishotaishohaaku.IHanteiTaishoshaTokuteiMapper.get減免減額対象者判定用根拠作成対象者_社会福祉法人等利用者負担軽減");
+    private static final RString MYBATIS_SELECT_ID_減免減額_負担 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate"
+            + ".gemmenshinseishotaishohaaku.IHanteiTaishoshaTokuteiMapper.get減免減額対象者判定用根拠作成対象者_負担限度額認定");
+    private static final RString MYBATIS_SELECT_ID_減免減額_利用者 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate"
+            + ".gemmenshinseishotaishohaaku.IHanteiTaishoshaTokuteiMapper.get減免減額対象者判定用根拠作成対象者_利用者負担額減額");
+    private static final RString MYBATIS_SELECT_ID_減免減額_訪問 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper"
+            + ".relate.gemmenshinseishotaishohaaku.IHanteiTaishoshaTokuteiMapper.get減免減額対象者判定用根拠作成対象者_訪問介護利用者負担額減額");
+    private static final RString MYBATIS_SELECT_ID_減免減額_社会 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper"
+            + ".relate.gemmenshinseishotaishohaaku.IHanteiTaishoshaTokuteiMapper.get減免減額対象者判定用根拠作成対象者_社会福祉法人等利用者負担軽減");
 
     private GemmenShinseishoTaishohaakuProcessParameter processParamter;
     private FlexibleDate 終了日;
     private FlexibleDate 開始日;
-    private FlexibleDate 基準日;
     private GemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTempTableEntity item;
     @BatchWriter
-    BatchEntityCreatedTempTableWriter gemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTemp;
+    private BatchEntityCreatedTempTableWriter HantYoukSakusTaishosTemp;
 
     @Override
     protected void initialize() {
@@ -48,29 +51,30 @@ public class GemmenShinseishoTaishohaakuProcess extends BatchProcessBase<HanteiT
     @Override
     protected IBatchReader createReader() {
         if (processParamter.get減免減額種類().equals(GemmenGengakuShurui.負担限度額認定)) {
-            return new BatchDbReader(MYBATIS_SELECT_ID_負担限度額認定, processParamter.GemmenShinseishoTaishohaakuMybatisParameter(開始日, 終了日));
+            return new BatchDbReader(MYBATIS_SELECT_ID_減免減額_負担, processParamter.toGemmenShinseishoTaishohaakuMybatisParameter(開始日, 終了日));
         } else if (processParamter.get減免減額種類().equals(GemmenGengakuShurui.利用者負担額減額)) {
-            return new BatchDbReader(MYBATIS_SELECT_ID_利用者負担額減額, processParamter.GemmenShinseishoTaishohaakuMybatisParameter(開始日, 終了日));
+            return new BatchDbReader(MYBATIS_SELECT_ID_減免減額_利用者, processParamter.toGemmenShinseishoTaishohaakuMybatisParameter(開始日, 終了日));
         } else if (processParamter.get減免減額種類().equals(GemmenGengakuShurui.訪問介護利用者負担額減額)) {
-            return new BatchDbReader(MYBATIS_SELECT_ID_訪問介護利用者負担額減額, processParamter.GemmenShinseishoTaishohaakuMybatisParameter(開始日, 終了日));
+            return new BatchDbReader(MYBATIS_SELECT_ID_減免減額_訪問, processParamter.toGemmenShinseishoTaishohaakuMybatisParameter(開始日, 終了日));
         } else {
-            return new BatchDbReader(MYBATIS_SELECT_ID_社会福祉法人等利用者負担軽減, processParamter.GemmenShinseishoTaishohaakuMybatisParameter(開始日, 終了日));
+            return new BatchDbReader(MYBATIS_SELECT_ID_減免減額_社会, processParamter.toGemmenShinseishoTaishohaakuMybatisParameter(開始日, 終了日));
         }
     }
 
     @Override
     protected void createWriter() {
-        gemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTemp = new BatchEntityCreatedTempTableWriter(GemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTempTableEntity.TABLE_NAME,
+        HantYoukSakusTaishosTemp = new BatchEntityCreatedTempTableWriter(GemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTempTableEntity.TABLE_NAME,
                 GemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTempTableEntity.class);
     }
 
     @Override
     protected void process(HanteiTaishoshaTokuteiEntity list) {
         item = set減免減額対象者判定用根拠作成対象者(list.get被保険者番号(), processParamter.get基準日());
-        gemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTemp.insert(item);
+        HantYoukSakusTaishosTemp.insert(item);
     }
 
-    private GemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTempTableEntity set減免減額対象者判定用根拠作成対象者(HihokenshaNo 被保険者番号, FlexibleDate 基準日) {
+    private GemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTempTableEntity set減免減額対象者判定用根拠作成対象者(HihokenshaNo 被保険者番号,
+            FlexibleDate 基準日) {
         GemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTempTableEntity tempTable = new GemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTempTableEntity();
         tempTable.setKijunYMD(基準日);
         tempTable.setHihokenshaNo(被保険者番号);
