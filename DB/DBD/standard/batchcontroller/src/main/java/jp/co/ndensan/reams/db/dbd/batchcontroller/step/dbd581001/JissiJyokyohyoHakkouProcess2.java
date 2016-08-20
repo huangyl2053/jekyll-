@@ -447,7 +447,7 @@ public class JissiJyokyohyoHakkouProcess2 extends BatchProcessBase<JissiJyokyohy
             集計単位 = 申請区分法令;
         }
 
-        YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReport report = new YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReport(
+        YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReport report = YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReport.createReport(
                 基準日,
                 年齢,
                 地区,

@@ -342,7 +342,7 @@ public class JissiJyokyohyoHakkouProcess extends BatchProcessBase<JissiJyokyohyo
         } else if (parameter.get集計単位().equals(集計単位法令)) {
             集計単位 = 申請区分法令;
         }
-        YokaigoNinteiJisshiJokyohyoReport report = new YokaigoNinteiJisshiJokyohyoReport(
+        YokaigoNinteiJisshiJokyohyoReport report = YokaigoNinteiJisshiJokyohyoReport.createReport(
                 基準日,
                 年齢,
                 地区,
