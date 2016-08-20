@@ -5,7 +5,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.fuka.ISetaiShotokuKazeiHanteiMapper">
     <!--世帯員所得情報一時テーブルを作成します -->
     <insert id="createTmpSetaiShotoku">
-        CREATE TEMP TABLE "TmpSetaiShotoku"
+        CREATE TEMP TABLE IF NOT EXISTS "TmpSetaiShotoku" 
         (
         "kijunYMD" rshare."UDD015YMD",
         "jushochiTokureiFlag" character varying(1),
@@ -24,7 +24,7 @@
         "shotokuNendo" rshare."UDD012YSeireki"
         )
     </insert>
-    
+
      <resultMap id="resultMap_SetaiHakuEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.fuka.SetaiHakuEntity" autoMapping="true">
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="shotokuNendo" column="shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
