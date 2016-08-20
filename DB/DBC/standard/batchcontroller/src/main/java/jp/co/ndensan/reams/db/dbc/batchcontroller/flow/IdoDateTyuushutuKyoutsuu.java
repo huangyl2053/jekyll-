@@ -51,7 +51,7 @@ public class IdoDateTyuushutuKyoutsuu extends BatchFlowBase<DBC180020_IdoRiyosha
     }
 
     /**
-     * 利用者負担割合期間Insertです。
+     * 受給者台帳異動データ抽出です。
      *
      * @return IBatchFlowCommand
      */
@@ -63,7 +63,7 @@ public class IdoDateTyuushutuKyoutsuu extends BatchFlowBase<DBC180020_IdoRiyosha
     }
 
     /**
-     * 利用者負担割合期間Insertです。
+     * 総合事業対象者異動データ抽出です。
      *
      * @return IBatchFlowCommand
      */
@@ -75,7 +75,7 @@ public class IdoDateTyuushutuKyoutsuu extends BatchFlowBase<DBC180020_IdoRiyosha
     }
 
     /**
-     * 利用者負担割合期間Insertです。
+     * 被保険者台帳異動データ抽出です。
      *
      * @return IBatchFlowCommand
      */
@@ -87,7 +87,7 @@ public class IdoDateTyuushutuKyoutsuu extends BatchFlowBase<DBC180020_IdoRiyosha
     }
 
     /**
-     * 利用者負担割合期間Insertです。
+     * 介護所得異動データ抽出です。
      *
      * @return IBatchFlowCommand
      */
@@ -99,7 +99,7 @@ public class IdoDateTyuushutuKyoutsuu extends BatchFlowBase<DBC180020_IdoRiyosha
     }
 
     /**
-     * 利用者負担割合期間Insertです。
+     * 宛名識別対象異動データ抽出です。
      *
      * @return IBatchFlowCommand
      */
@@ -111,7 +111,7 @@ public class IdoDateTyuushutuKyoutsuu extends BatchFlowBase<DBC180020_IdoRiyosha
     }
 
     /**
-     * 利用者負担割合期間Insertです。
+     * 生活保護受給者異動データ抽出です。
      *
      * @return IBatchFlowCommand
      */

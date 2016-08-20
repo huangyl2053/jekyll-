@@ -2,7 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- @reamsid_L DBC-4950-033 pengxingyi -->
-<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.idoriyoshafutanwariaihantei.IIdoRiyoshaFutanwariaiHanteiMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.idoriyoshafutanwariaihantei.IIdoDateTyuushutuKyoutsuuMapper">
                     
     <select resultOrdered="true" id="select受給者台帳異動"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.IdoDateTyuushutuKyoutsuuMyBatisParameter"
@@ -40,7 +40,7 @@
                 OR("ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{対象年度開始日} AND #{対象年度開始日} <![CDATA[<=]]> "ninteiYukoKikanShuryoYMD"  ))
             AND NOT EXISTS(SELECT 'X' FROM rgdb."DbT4001JukyushaDaicho" AS "A" 
                             WHERE  "B"."hihokenshaNo" = "A"."hihokenshaNo"
-                            AND    "B"."ninteiYukoKikanKaishiYMD"  <![CDATA[>]]> "A"."ninteiYukoKikanKaishiYMD"
+                            AND    "A"."ninteiYukoKikanKaishiYMD" <![CDATA[<]]> "B"."ninteiYukoKikanKaishiYMD" 
                           )     
             ) AS "DbT4001JukyushaDaicho" 
         ON 
@@ -52,7 +52,7 @@
                 OR("tekiyoKaishiYMD" <![CDATA[<=]]> #{対象年度開始日} AND #{対象年度開始日} <![CDATA[<=]]> "tekiyoShuryoYMD"  ))
              AND NOT EXISTS(SELECT 'X' FROM rgdb."DbT3105SogoJigyoTaishosha" AS "B" 
                             WHERE  "A"."hihokenshaNo" = "B"."hihokenshaNo"
-                            AND    "A"."tekiyoKaishiYMD"  <![CDATA[>]]> "B"."tekiyoKaishiYMD"
+                            AND   "B"."tekiyoKaishiYMD" <![CDATA[<]]>  "A"."tekiyoKaishiYMD" 
                           )     
             ) AS "DbT3105SogoJigyoTaishosha"
          ON   
@@ -102,7 +102,7 @@
                 OR("ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{対象年度開始日} AND #{対象年度開始日} <![CDATA[<=]]> "ninteiYukoKikanShuryoYMD"  ))
             AND NOT EXISTS(SELECT 'X' FROM rgdb."DbT4001JukyushaDaicho" AS "A" 
                             WHERE  "B"."hihokenshaNo" = "A"."hihokenshaNo"
-                            AND    "B"."ninteiYukoKikanKaishiYMD"  <![CDATA[>]]> "A"."ninteiYukoKikanKaishiYMD"
+                            AND    "A"."ninteiYukoKikanKaishiYMD" <![CDATA[<]]> "B"."ninteiYukoKikanKaishiYMD" 
                           )     
             ) AS "DbT4001JukyushaDaicho" 
         ON 
@@ -114,7 +114,7 @@
                 OR("tekiyoKaishiYMD" <![CDATA[<=]]> #{対象年度開始日} AND #{対象年度開始日} <![CDATA[<=]]> "tekiyoShuryoYMD"  ))
              AND NOT EXISTS(SELECT 1 FROM rgdb."DbT3105SogoJigyoTaishosha" AS "B" 
                             WHERE  "A"."hihokenshaNo" = "B"."hihokenshaNo"
-                            AND    "A"."tekiyoKaishiYMD"  <![CDATA[>]]> "B"."tekiyoKaishiYMD"
+                            AND    "B"."tekiyoKaishiYMD"  <![CDATA[<]]> "A"."tekiyoKaishiYMD"
                           )     
             ) AS "DbT3105SogoJigyoTaishosha"
          ON   
@@ -161,7 +161,7 @@
                 OR("ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{対象年度開始日} AND #{対象年度開始日} <![CDATA[<=]]> "ninteiYukoKikanShuryoYMD"  ))
             AND NOT EXISTS(SELECT 1 FROM rgdb."DbT4001JukyushaDaicho" AS "A" 
                             WHERE  "B"."hihokenshaNo" = "A"."hihokenshaNo"
-                            AND    "B"."ninteiYukoKikanKaishiYMD"  <![CDATA[>]]> "A"."ninteiYukoKikanKaishiYMD"
+                            AND    "A"."ninteiYukoKikanKaishiYMD"  <![CDATA[<]]> "B"."ninteiYukoKikanKaishiYMD"
                           )     
             ) AS "DbT4001JukyushaDaicho" 
         ON 
@@ -173,8 +173,8 @@
                 OR("tekiyoKaishiYMD" <![CDATA[<=]]> #{対象年度開始日} AND #{対象年度開始日} <![CDATA[<=]]> "tekiyoShuryoYMD"  ))
              AND NOT EXISTS(SELECT 'X' FROM rgdb."DbT3105SogoJigyoTaishosha" AS "B" 
                             WHERE  "A"."hihokenshaNo" = "B"."hihokenshaNo"
-                            AND    "A"."tekiyoKaishiYMD"  <![CDATA[>]]> "B"."tekiyoKaishiYMD"
-                          )     
+                            AND    "B"."tekiyoKaishiYMD"  <![CDATA[<]]> "A"."tekiyoKaishiYMD"
+                          )  
             ) AS "DbT3105SogoJigyoTaishosha"
          ON   
             "DbT1001HihokenshaDaicho"."hihokenshaNo" =  "DbT3105SogoJigyoTaishosha"."hihokenshaNo"
@@ -226,7 +226,7 @@
                 OR("ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{対象年度開始日} AND #{対象年度開始日} <![CDATA[<=]]> "ninteiYukoKikanShuryoYMD"  ))
             AND NOT EXISTS(SELECT 'X' FROM rgdb."DbT4001JukyushaDaicho" AS "A" 
                             WHERE  "B"."hihokenshaNo" = "A"."hihokenshaNo"
-                            AND    "B"."ninteiYukoKikanKaishiYMD"  <![CDATA[>]]> "A"."ninteiYukoKikanKaishiYMD"
+                            AND    "A"."ninteiYukoKikanKaishiYMD"  <![CDATA[<]]> "B"."ninteiYukoKikanKaishiYMD"
                           )     
             ) AS "DbT4001JukyushaDaicho" 
         ON 
@@ -238,7 +238,7 @@
                 OR("tekiyoKaishiYMD" <![CDATA[<=]]> #{対象年度開始日} AND #{対象年度開始日} <![CDATA[<=]]> "tekiyoShuryoYMD"  ))
              AND NOT EXISTS(SELECT 'X' FROM rgdb."DbT3105SogoJigyoTaishosha" AS "B" 
                             WHERE  "A"."hihokenshaNo" = "B"."hihokenshaNo"
-                            AND    "A"."tekiyoKaishiYMD"  <![CDATA[>]]> "B"."tekiyoKaishiYMD"
+                            AND    "B"."tekiyoKaishiYMD"  <![CDATA[<]]> "A"."tekiyoKaishiYMD"
                           )     
             ) AS "DbT3105SogoJigyoTaishosha"
          ON   
@@ -279,7 +279,7 @@
                 OR("ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{対象年度開始日} AND #{対象年度開始日} <![CDATA[<=]]> "ninteiYukoKikanShuryoYMD"  ))
             AND NOT EXISTS(SELECT 'X' FROM rgdb."DbT4001JukyushaDaicho" AS "A" 
                             WHERE  "B"."hihokenshaNo" = "A"."hihokenshaNo"
-                            AND    "B"."ninteiYukoKikanKaishiYMD"  <![CDATA[>]]> "A"."ninteiYukoKikanKaishiYMD"
+                            AND    "A"."ninteiYukoKikanKaishiYMD"  <![CDATA[<]]> "B"."ninteiYukoKikanKaishiYMD"
                           )     
             ) AS "DbT4001JukyushaDaicho" 
         ON 
@@ -291,7 +291,7 @@
                 OR("tekiyoKaishiYMD" <![CDATA[<=]]> #{対象年度開始日} AND #{対象年度開始日} <![CDATA[<=]]> "tekiyoShuryoYMD"  ))
              AND NOT EXISTS(SELECT 'X' FROM rgdb."DbT3105SogoJigyoTaishosha" AS "B" 
                             WHERE  "A"."hihokenshaNo" = "B"."hihokenshaNo"
-                            AND    "A"."tekiyoKaishiYMD"  <![CDATA[>]]> "B"."tekiyoKaishiYMD"
+                            AND    "B"."tekiyoKaishiYMD"  <![CDATA[<]]> "A"."tekiyoKaishiYMD"
                           )     
             ) AS "DbT3105SogoJigyoTaishosha"
          ON   
@@ -344,7 +344,7 @@
                 OR("ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{対象年度開始日} AND #{対象年度開始日} <![CDATA[<=]]> "ninteiYukoKikanShuryoYMD"  ))
             AND NOT EXISTS(SELECT 'X' FROM rgdb."DbT4001JukyushaDaicho" AS "A" 
                             WHERE  "B"."hihokenshaNo" = "A"."hihokenshaNo"
-                            AND    "B"."ninteiYukoKikanKaishiYMD"  <![CDATA[>]]> "A"."ninteiYukoKikanKaishiYMD"
+                            AND   "A"."ninteiYukoKikanKaishiYMD" <![CDATA[<]]> "B"."ninteiYukoKikanKaishiYMD"  
                           )     
             ) AS "DbT4001JukyushaDaicho" 
         ON 
@@ -356,7 +356,7 @@
                 OR("tekiyoKaishiYMD" <![CDATA[<=]]> #{対象年度開始日} AND #{対象年度開始日} <![CDATA[<=]]> "tekiyoShuryoYMD"  ))
              AND NOT EXISTS(SELECT 'X' FROM rgdb."DbT3105SogoJigyoTaishosha" AS "B" 
                             WHERE  "A"."hihokenshaNo" = "B"."hihokenshaNo"
-                            AND    "A"."tekiyoKaishiYMD"  <![CDATA[>]]> "B"."tekiyoKaishiYMD"
+                            AND    "B"."tekiyoKaishiYMD" <![CDATA[<]]> "A"."tekiyoKaishiYMD"  
                           )     
             ) AS "DbT3105SogoJigyoTaishosha"
          ON   
