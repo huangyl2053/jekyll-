@@ -12,6 +12,10 @@ module DBZ {
                 return "onBlur_txtServiceType";
             }
 
+            public static onChange_txtServiceType(): string {
+                return "onChange_txtServiceType";
+            }
+
         }
 
         export class Controls {

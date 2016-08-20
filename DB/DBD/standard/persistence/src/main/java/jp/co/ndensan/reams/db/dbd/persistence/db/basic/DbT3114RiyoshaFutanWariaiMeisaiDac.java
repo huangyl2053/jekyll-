@@ -107,10 +107,10 @@ public class DbT3114RiyoshaFutanWariaiMeisaiDac implements ISaveable<DbT3114Riyo
      *
      * @param 被保険者番号 HihokenshaNo
      * @param 利用年月 FlexibleYearMonth
-     * @return List<DbT3114RiyoshaFutanWariaiMeisaiEntity>
+     * @return DbT3114RiyoshaFutanWariaiMeisaiEntity
      */
     @Transaction
-    public List<DbT3114RiyoshaFutanWariaiMeisaiEntity> select負担割合区分(HihokenshaNo 被保険者番号, FlexibleYearMonth 利用年月) {
+    public DbT3114RiyoshaFutanWariaiMeisaiEntity select負担割合区分(HihokenshaNo 被保険者番号, FlexibleYearMonth 利用年月) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
@@ -120,7 +120,7 @@ public class DbT3114RiyoshaFutanWariaiMeisaiDac implements ISaveable<DbT3114Riyo
                                 leq(substr(yukoKaishiYMD, NUM_1, NUM_6), 利用年月),
                                 leq(利用年月, substr(yukoShuryoYMD, NUM_1, NUM_6)),
                                 eq(logicalDeletedFlag, false))).
-                toList(DbT3114RiyoshaFutanWariaiMeisaiEntity.class);
+                toObject(DbT3114RiyoshaFutanWariaiMeisaiEntity.class);
     }
 
     /**

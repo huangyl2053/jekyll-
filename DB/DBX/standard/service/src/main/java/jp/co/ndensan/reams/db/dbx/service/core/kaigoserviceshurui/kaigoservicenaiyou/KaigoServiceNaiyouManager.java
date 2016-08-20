@@ -135,18 +135,18 @@ public class KaigoServiceNaiyouManager {
      * @param サービス種類コード サービス種類コード
      * @param サービス項目コード サービス項目コード
      * @param 利用年月 利用年月
-     * @return List<KaigoServiceNaiyou>
+     * @return KaigoServiceNaiyou
      */
-    public List<KaigoServiceNaiyou> getServiceList(RString サービス種類コード,
+    public KaigoServiceNaiyou getServiceList(RString サービス種類コード,
             RString サービス項目コード, FlexibleYearMonth 利用年月) {
-        List<DbT7131KaigoServiceNaiyouEntity> サービスコード情報リスト = dac.getサービス内容(new ServiceShuruiCode(サービス種類コード),
+        DbT7131KaigoServiceNaiyouEntity サービスコード情報 = dac.getサービス内容情報(new ServiceShuruiCode(サービス種類コード),
                 サービス項目コード,
                 利用年月);
-        List<KaigoServiceNaiyou> サービスコード情報検索リスト = new ArrayList<>();
-        for (DbT7131KaigoServiceNaiyouEntity kaigoServiceNaiyouEntity : サービスコード情報リスト) {
-            サービスコード情報検索リスト.add(new KaigoServiceNaiyou(kaigoServiceNaiyouEntity));
+        if (サービスコード情報 == null) {
+            return null;
         }
-        return サービスコード情報検索リスト;
+        サービスコード情報.initializeMd5();
+        return new KaigoServiceNaiyou(サービスコード情報);
     }
 
 }
