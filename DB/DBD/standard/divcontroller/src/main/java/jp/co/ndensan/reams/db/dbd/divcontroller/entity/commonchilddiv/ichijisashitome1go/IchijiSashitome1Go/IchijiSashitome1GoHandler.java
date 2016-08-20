@@ -34,11 +34,11 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenk
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoTorokuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.taino.JikoKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellDetails;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
@@ -95,11 +95,8 @@ public class IchijiSashitome1GoHandler {
 
     /**
      * 画面初期化処理です。
-     *
-     * @return Message エラーMSG
      */
-    public Message onLoad() {
-        Message message = null;
+    public void onLoad() {
         RString 押下ボタン = ShoriKubun.toValue(div.getKey_Button()).get名称();
         ShiharaiHohoHenko 支払方法変更管理業務概念 = DataPassingConverter.deserialize(div.getKey_ShiharaiHohoHenkoKanri(), ShiharaiHohoHenko.class);
         ArrayList<ShiharaiHohoHenko> 支払方法変更レコード = new ArrayList();
@@ -123,14 +120,13 @@ public class IchijiSashitome1GoHandler {
             支払方法変更レコード.add(支払方法変更管理業務概念);
         }
         if (支払方法変更管理業務概念 == null || 支払方法変更レコード.isEmpty()) {
-            return UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("支払方法変更");
+            throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("支払方法変更"));
         }
         ViewStateHolder.put(一号一時差止ダイアロググキー.支払方法変更管理業務概念, 支払方法変更管理業務概念);
         ShiharaiHohoHenkoService service = ShiharaiHohoHenkoService.createIntance();
         ArrayList<ShokanHaraiShikyu> shokanHaraiShikyuList = service.find償還払い支給(new HihokenshaNo(div.getKey_HihokenshaNo()));
         ViewStateHolder.put(一号一時差止ダイアロググキー.償還払支給の情報List, shokanHaraiShikyuList);
         initializeDisplayData(押下ボタン);
-        return message;
     }
 
     /**
@@ -518,7 +514,8 @@ public class IchijiSashitome1GoHandler {
 
     private boolean 抽出条件(RString 押下ボタン, ShiharaiHohoHenko shiharaiHohoHenko) {
         boolean 抽出条件 = false;
-        if (押下ボタン.equals(_給付一時差止登録) && !shiharaiHohoHenko.get差止対象決定年月日().isEmpty()) {
+        if (押下ボタン.equals(_給付一時差止登録) && shiharaiHohoHenko.get差止対象決定年月日() != null
+                && !shiharaiHohoHenko.get差止対象決定年月日().isEmpty()) {
             抽出条件 = true;
         } else if (押下ボタン.equals(_保険料控除登録)
                 && (shiharaiHohoHenko.get差止対象決定年月日().isEmpty()
