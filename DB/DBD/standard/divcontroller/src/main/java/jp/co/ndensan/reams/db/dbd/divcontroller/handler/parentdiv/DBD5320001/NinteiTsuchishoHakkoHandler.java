@@ -1288,11 +1288,13 @@ public class NinteiTsuchishoHakkoHandler {
             return 連絡前文字列;
         }
 
+        RString 略称 = CodeMaster.getCodeRyakusho(DBDCodeShubetsu.指定サービス種類コード.getコード(),
+                new Code(サービス種類.value()), FlexibleDate.getNowDate());
         if (null == 連絡前文字列 || 連絡前文字列.isEmpty()) {
-            return サービス種類.value();
+            return 略称;
         }
 
-        return 連絡前文字列.concat(連絡符号).concat(サービス種類.value());
+        return 連絡前文字列.concat(連絡符号).concat(略称);
     }
 
     private RString get要介護度名(RString 厚労省IF識別コード, RString 要介護度コード) {
