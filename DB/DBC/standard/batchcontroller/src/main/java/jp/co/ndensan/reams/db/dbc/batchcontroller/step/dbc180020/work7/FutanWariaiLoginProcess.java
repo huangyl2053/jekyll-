@@ -52,14 +52,13 @@ public class FutanWariaiLoginProcess extends BatchKeyBreakBase<FutanWariaiRelate
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");
-    private static final RString SJIS類字 = new RString("SJIS類字");
     private static final RString TABLENAME = new RString("KonkaiRiyoshaFutanWariaiJohoTemp");
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "riyoshafutanwariaihantei.IRiyoshaFutanwariaiMapper.select負担割合と明細");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("RiyoshaFutanWariaiHantei"));
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("shoriKekkaKakuninList"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private static final RString CSVFILENAME = new RString("RiyoshaFutanWariaiHantei.csv");
+    private static final RString CSVFILENAME = new RString("shoriKekkaKakuninList.csv");
     private DBC180020ProcessParameter parameter;
     private HihokenshaNo beforeNo;
     private HihokenshaNo nowNo;
