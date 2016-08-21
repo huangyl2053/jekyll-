@@ -111,6 +111,10 @@ var DBC;
             Events.onClick_btnUpdate = function () {
                 return "onClick_btnUpdate";
             };
+
+            Events.onClick_btnBackRiyoNengetsuIchiran = function () {
+                return "onClick_btnBackRiyoNengetsuIchiran";
+            };
             return Events;
         })();
         ServiceRiyohyoInfo.Events = Events;
@@ -253,14 +257,6 @@ var DBC;
 
             Controls.prototype.txtTeigakuRiyoushaFutangaku = function () {
                 return new UZA.TextBoxNum(this.convFiledName("txtTeigakuRiyoushaFutangaku"));
-            };
-
-            Controls.prototype.txtHdnGendogakuTaishogaiFlg = function () {
-                return new UZA.TextBox(this.convFiledName("txtHdnGendogakuTaishogaiFlg"));
-            };
-
-            Controls.prototype.txtHdnRiyoshaFutanTeiritsuTeigakuKbn = function () {
-                return new UZA.TextBox(this.convFiledName("txtHdnRiyoshaFutanTeiritsuTeigakuKbn"));
             };
 
             Controls.prototype.ServiceRiyohyoBeppyoMeisaiFooter = function () {

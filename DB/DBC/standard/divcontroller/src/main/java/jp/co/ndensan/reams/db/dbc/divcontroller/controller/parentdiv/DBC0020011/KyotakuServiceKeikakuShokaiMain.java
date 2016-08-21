@@ -106,6 +106,17 @@ public class KyotakuServiceKeikakuShokaiMain {
                 DBC0020011TransitionEventName.完了).respond();
     }
 
+    /**
+     * 「利用月一覧に戻る」ボタンクリック時の事件です。
+     *
+     * @param div JikoFutangakuHoseiDiv
+     * @return ResponseData
+     */
+    public ResponseData<KyotakuServiceKeikakuShokaiMainDiv> onClick_btnBackRiyoNengetsuIchiran(
+            KyotakuServiceKeikakuShokaiMainDiv div) {
+        return ResponseData.of(div).setState(DBC0020011StateName.届出表示);
+    }
+
     private KyotakuServiceKeikakuShokaiMainHander getHander(KyotakuServiceKeikakuShokaiMainDiv div) {
         return new KyotakuServiceKeikakuShokaiMainHander(div);
     }
