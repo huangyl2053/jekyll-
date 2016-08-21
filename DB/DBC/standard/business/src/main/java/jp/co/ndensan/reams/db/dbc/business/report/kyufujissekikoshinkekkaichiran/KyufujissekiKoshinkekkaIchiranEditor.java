@@ -123,7 +123,9 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
             set出力順And改ページ(source);
             source.listUpper_1 = new RString(連番);
             source.listUpper_2 = entity.get給付実績_入力識別番号();
-            source.listUpper_3 = entity.get給付実績_入力識別名称().substring(NUM_0, NUM_8);
+            if (entity.get給付実績_入力識別名称() != null && entity.get給付実績_入力識別名称().length() >= NUM_8) {
+                source.listUpper_3 = entity.get給付実績_入力識別名称().substring(NUM_0, NUM_8);
+            }
             if (entity.get給付実績_給付実績情報作成区分コード() != null) {
                 source.listUpper_4 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, DBCCodeShubetsu.給付実績情報作成区分.getコード(),
                         new Code(entity.get給付実績_給付実績情報作成区分コード()), FlexibleDate.getNowDate());
