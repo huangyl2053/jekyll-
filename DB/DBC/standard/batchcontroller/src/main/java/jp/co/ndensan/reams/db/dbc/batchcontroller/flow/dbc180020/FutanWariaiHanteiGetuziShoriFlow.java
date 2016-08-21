@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work7.FutanWari
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work7.FutanWariaiHanteiTukiziProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work7.FutanWariaiKonkyoLoginProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work7.FutanWariaiLoginProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work7.SetainTuikaProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work7.TsukibetsuFutanWariaiGenTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work7.TsukibetsuFutanWariaiNewTempProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHanteiUtil;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
@@ -98,7 +98,7 @@ public class FutanWariaiHanteiGetuziShoriFlow
 
     @Step(月別負担割合現の作成)
     IBatchFlowCommand setainTuikaProcess() {
-        return loopBatch(SetainTuikaProcess.class).arguments(processPrm).define();
+        return loopBatch(TsukibetsuFutanWariaiGenTempProcess.class).arguments(processPrm).define();
     }
 
     @Step(負担割合登録)

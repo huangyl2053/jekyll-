@@ -91,29 +91,29 @@
                         rgdb."DbV3113RiyoshaFutanWariai" AS "a"
                 WHERE 
                         "a"."nendo"=#{対象年度}
+                    AND
+                        NOT (EXISTS (
+                        SELECT
+                            "a"."hihokenshaNo"
+                        FROM
+                            "HanteiTaishoshaTemp" AS "a"
+                        WHERE 
+                               "a"."hihokenshaNo"="DbT3113RiyoshaFutanWariai"."hihokenshaNo"
+                        ))
+                    AND
+                        NOT (EXISTS (
+                        SELECT
+                            "b"."hihokenshaNo"
+                        FROM
+                            "TuikaHanteiTaishoshaTemp" AS "b"
+                        WHERE 
+                                "b"."hihokenshaNo"="DbT3113RiyoshaFutanWariai"."hihokenshaNo"
+                        ))
                 ) AS "DbT3113RiyoshaFutanWariai"
                 ON
                     "DbT3113RiyoshaFutanWariai"."hihokenshaNo"="DbT1001HihokenshaDaicho"."hihokenshaNo"
             WHERE
                     "TmpSetaiShotoku"."honninKubun"<![CDATA[<>]]>'1'
-                AND 
-                    NOT (EXISTS (
-                    SELECT
-                        "a"."hihokenshaNo"
-                    FROM
-                        "HanteiTaishoshaTemp" AS "a"
-                    WHERE 
-                           "a"."hihokenshaNo"="DbT3113RiyoshaFutanWariai"."hihokenshaNo"
-                    ))
-                AND
-                    NOT (EXISTS (
-                    SELECT
-                        "b"."hihokenshaNo"
-                    FROM
-                        "TuikaHanteiTaishoshaTemp" AS "b"
-                    WHERE 
-                            "b"."hihokenshaNo"="DbT3113RiyoshaFutanWariai"."hihokenshaNo"
-                    ))
     </select>
     <!--処理詳細3判定対象者Tempの追加-->
     <select resultOrdered="true" id="select判定対象者追加" 
