@@ -102,12 +102,12 @@ var DBA;
                 DisplayMode.prototype.Tekiyo = function () {
                     this.controls.btnAdd().displayNone = false;
                     this.controls.btnKakunin().displayNone = false;
-                    this.controls.btnTorikeshi().displayNone = true;
+                    this.controls.btnTorikeshi().displayNone = false;
 
                     var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
                     var columns = gridSetting.columns;
 
-                    gridSetting.isShowRowState = false;
+                    gridSetting.isShowRowState = true;
                     gridSetting.isShowSelectButtonColumn = false;
                     gridSetting.isShowModifyButtonColumn = true;
                     gridSetting.isShowDeleteButtonColumn = true;
@@ -127,7 +127,7 @@ var DBA;
                     this.controls.txtKaijyobi().displayNone = true;
                     this.controls.txtKaijyoTodokedebi().displayNone = true;
                     this.controls.ddlKaijyoJiyo().displayNone = true;
-
+                    this.controls.btnTorikeshi().disabled = true;
                     this.controls.panSotimotoJyoho().displayNone = false;
                     this.controls.panShisetsuJoho().displayNone = false;
                 };
@@ -135,14 +135,14 @@ var DBA;
                 DisplayMode.prototype.Kaijyo = function () {
                     this.controls.btnAdd().displayNone = true;
                     this.controls.btnKakunin().displayNone = false;
-                    this.controls.btnTorikeshi().displayNone = true;
+                    this.controls.btnTorikeshi().displayNone = false;
 
                     var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
                     var columns = gridSetting.columns;
 
-                    gridSetting.isShowRowState = false;
+                    gridSetting.isShowRowState = true;
                     gridSetting.isShowSelectButtonColumn = false;
-                    gridSetting.isShowModifyButtonColumn = false;
+                    gridSetting.isShowModifyButtonColumn = true;
                     gridSetting.isShowDeleteButtonColumn = false;
 
                     this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
@@ -158,8 +158,14 @@ var DBA;
 
                     this.controls.txtTasyobi().displayNone = false;
                     this.controls.txtKaijyobi().displayNone = false;
+
+                    this.controls.btnTorikeshi().disabled = true;
                     this.controls.txtKaijyoTodokedebi().displayNone = false;
                     this.controls.ddlKaijyoJiyo().displayNone = false;
+                    this.controls.txtTasyobi().disabled = true;
+                    this.controls.txtKaijyobi().disabled = true;
+                    this.controls.txtKaijyoTodokedebi().disabled = true;
+                    this.controls.ddlKaijyoJiyo().disabled = true;
                     this.controls.txtKaijyobi().wrap = false;
 
                     this.controls.panSotimotoJyoho().displayNone = true;
