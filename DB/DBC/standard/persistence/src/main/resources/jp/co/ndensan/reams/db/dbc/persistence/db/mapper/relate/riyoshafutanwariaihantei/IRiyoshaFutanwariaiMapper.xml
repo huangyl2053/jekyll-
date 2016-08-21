@@ -87,10 +87,10 @@
                 ON  
                     "TmpSetaiShotoku"."shikibetsuCode"="DbT1001HihokenshaDaicho"."shikibetsuCode"
             INNER JOIN
-                (SELECT "a".* FROM
-                        rgdb."DbV3113RiyoshaFutanWariai" AS "a"
+                (SELECT "b".* FROM
+                        rgdb."DbV3113RiyoshaFutanWariai" AS "b"
                 WHERE 
-                        "a"."nendo"=#{対象年度}
+                        "b"."nendo"=#{対象年度}
                     AND
                         NOT (EXISTS (
                         SELECT
@@ -98,16 +98,16 @@
                         FROM
                             "HanteiTaishoshaTemp" AS "a"
                         WHERE 
-                               "a"."hihokenshaNo"="DbT3113RiyoshaFutanWariai"."hihokenshaNo"
+                               "a"."hihokenshaNo"="b"."hihokenshaNo"
                         ))
                     AND
                         NOT (EXISTS (
                         SELECT
-                            "b"."hihokenshaNo"
+                            "a"."hihokenshaNo"
                         FROM
-                            "TuikaHanteiTaishoshaTemp" AS "b"
+                            "TuikaHanteiTaishoshaTemp" AS "a"
                         WHERE 
-                                "b"."hihokenshaNo"="DbT3113RiyoshaFutanWariai"."hihokenshaNo"
+                                "a"."hihokenshaNo"="b"."hihokenshaNo"
                         ))
                 ) AS "DbT3113RiyoshaFutanWariai"
                 ON
