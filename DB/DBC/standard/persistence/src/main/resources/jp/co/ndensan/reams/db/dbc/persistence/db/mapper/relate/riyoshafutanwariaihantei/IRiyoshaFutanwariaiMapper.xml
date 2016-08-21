@@ -64,12 +64,9 @@
                         AND
                             "a"."setaiCode"="TmpSetaiShotoku"."setaiCode"
                         AND
-                            1=1
-                        OR(
-                                "TmpSetaiShotoku"."honninKubun"='1'
-                            AND
-                                "a"."honinShikibetsuCode"="TmpSetaiShotoku"."shikibetsuCode"
-                                )
+                            "TmpSetaiShotoku"."honninKubun"='1'
+                        AND
+                            "a"."honinShikibetsuCode"="TmpSetaiShotoku"."shikibetsuCode"
                         ))
     </select>
     <!--処理詳細2(4)世帯員（利用者負担割合・本人）追加-->
@@ -1110,6 +1107,7 @@
             "DbV2512KaigoShotokuNewest"
         ON
             "DbV2512KaigoShotokuNewest"."shotokuNendo"=#{対象年度}
+            AND "RiyoshaFutanWariaiKonkyoTemp"."hihokenshaNo"="DbV2512KaigoShotokuNewest"."hihokenshaNo"
         WHERE
             "TsukibetsuFutanWariaiNewTemp"."futanwariaiKubunAug" <![CDATA[<>]]>"TsukibetsuFutanWariaiGenTemp"."futanwariaiKubunAug"
          OR

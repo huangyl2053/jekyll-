@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -36,13 +37,13 @@ public class Work12Process extends BatchKeyBreakBase<DbT3115SakuseiEntity> {
     private RString nowNo;
     private boolean existingFlag;
     @BatchWriter
-    private BatchPermanentTableWriter 利用者負担割合根拠;
+    private IBatchTableWriter 利用者負担割合根拠;
 
     @Override
     protected void initialize() {
         existingFlag = false;
         rirekiNo = 1;
-        edaNo = 0;
+        edaNo = 1;
         nendo = new FlexibleYear(parameter.getTaishoNendo().toDateString());
     }
 
@@ -66,14 +67,13 @@ public class Work12Process extends BatchKeyBreakBase<DbT3115SakuseiEntity> {
         last = entity;
         beforeNo = getBefore().get被保険者番号() == null ? RString.EMPTY : getBefore().get被保険者番号().value();
         nowNo = last.get被保険者番号() == null ? RString.EMPTY : last.get被保険者番号().value();
-        edaNo++;
-        DbT3115SakuseiEntity before = getBefore();
-        loopHandle(before);
+        loopHandle(getBefore());
         if (!beforeNo.equals(nowNo)) {
             rirekiNo = 1;
         } else {
             rirekiNo++;
         }
+        edaNo++;
     }
 
     @Override
@@ -81,7 +81,7 @@ public class Work12Process extends BatchKeyBreakBase<DbT3115SakuseiEntity> {
         if (!existingFlag) {
             return;
         }
-        loopHandle(last);
+        loopHandle(getBefore());
     }
 
     @Override
