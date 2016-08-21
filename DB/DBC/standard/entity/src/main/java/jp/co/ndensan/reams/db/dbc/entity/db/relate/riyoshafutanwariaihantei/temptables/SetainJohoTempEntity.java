@@ -23,8 +23,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class SetainJohoTempEntity implements IDbAccessable {
 
-    private static final RString ONE = new RString("1");
-
     private HihokenshaNo hihokenshaNo;
     private ShikibetsuCode shikibetsuCode;
     private ShikibetsuCode honinShikibetsuCode;
@@ -35,13 +33,4 @@ public class SetainJohoTempEntity implements IDbAccessable {
     private RString taishoTsuki;
     private SetaiCode setaiCode;
     private RString setaiShotokuHonninKubun;
-
-    /**
-     * 本人識別コード初期化のメソッドです。
-     */
-    public void 本人識別コード初期化() {
-        if (ONE.equals(setaiShotokuHonninKubun)) {
-            this.setHoninShikibetsuCode(shikibetsuCode);
-        }
-    }
 }
