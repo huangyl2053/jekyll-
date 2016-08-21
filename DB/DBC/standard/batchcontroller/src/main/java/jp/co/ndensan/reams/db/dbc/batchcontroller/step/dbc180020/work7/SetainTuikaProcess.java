@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work2;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work7;
 
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc180020.DBC180020ProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SetainJohoTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.TsukibetsuFutanWariaiTempEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -16,23 +16,24 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 世帯員情報Tempの作成のクラスです。<br/>
- * 処理詳細2.part4
+ * 月別負担割合現Temp作成のクラスです。<br/>
+ * 処理詳細9
  *
  * @reamsid_L DBC-4950-030 liuyang
  */
-public class SetainTuikaProcess extends BatchProcessBase<SetainJohoTempEntity> {
+public class SetainTuikaProcess extends BatchProcessBase<TsukibetsuFutanWariaiTempEntity> {
 
-    private static final RString TABLENAME = new RString("TuikaHanteiTaishoshaTemp");
+    private static final RString TABLENAME = new RString("TsukibetsuFutanWariaiGenTemp");
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "riyoshafutanwariaihantei.IRiyoshaFutanwariaiMapper.select世帯員追加");
+            + "riyoshafutanwariaihantei.IRiyoshaFutanwariaiMapper.select月別負担割合作成現");
     private DBC180020ProcessParameter parameter;
     @BatchWriter
-    private BatchEntityCreatedTempTableWriter 追加判定対象者Temp;
+    private BatchEntityCreatedTempTableWriter 月別負担割合現Temp;
 
     @Override
     protected void createWriter() {
-        追加判定対象者Temp = new BatchEntityCreatedTempTableWriter(TABLENAME, SetainJohoTempEntity.class);
+        月別負担割合現Temp
+                = new BatchEntityCreatedTempTableWriter(TABLENAME, TsukibetsuFutanWariaiTempEntity.class);
     }
 
     @Override
@@ -42,7 +43,8 @@ public class SetainTuikaProcess extends BatchProcessBase<SetainJohoTempEntity> {
     }
 
     @Override
-    protected void process(SetainJohoTempEntity entity) {
-        追加判定対象者Temp.insert(entity);
+    protected void process(TsukibetsuFutanWariaiTempEntity entity) {
+        月別負担割合現Temp.insert(entity);
+
     }
 }

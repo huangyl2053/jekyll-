@@ -25,25 +25,15 @@ public class SetainJohoTempEntity implements IDbAccessable {
 
     private static final RString ONE = new RString("1");
 
-//被保険者番号
     private HihokenshaNo hihokenshaNo;
-//識別コード
     private ShikibetsuCode shikibetsuCode;
-//本人識別コード
     private ShikibetsuCode honinShikibetsuCode;
-//基準年月日
     private FlexibleDate kijunYMD;
-//所得年度
     private FlexibleYear shotokuNendo;
-//住所地特例該当
     private boolean jutokuGaitoFlag;
-//対象年度
     private FlexibleYear taishoNendo;
-//対象月
     private RString taishoTsuki;
-//世帯コード
     private SetaiCode setaiCode;
-//世帯員所得一時.本人区分
     private RString setaiShotokuHonninKubun;
 
     /**

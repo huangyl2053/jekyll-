@@ -12,14 +12,11 @@ import lombok.Getter;
 /**
  * ＣＳＶを定義したEntityクラスです。
  *
- * @reamsid_L DBC-4980-031 yuanzhenxia
+ * @reamsid_L DBC-4950-030 liuyang
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 public class RiyoshaFutanWariaiHanteiCsvEntity {
-
-    private static final RString TITLE被保険者番号 = new RString("被保険者番号");
-    private static final RString TITLE確認内容 = new RString("確認内容");
 
     @CsvField(order = 1, name = "被保険者番号")
     private RString 被保険者番号;
@@ -31,15 +28,6 @@ public class RiyoshaFutanWariaiHanteiCsvEntity {
      *
      */
     public RiyoshaFutanWariaiHanteiCsvEntity() {
-    }
-
-    /**
-     * getTitleのメソッドです。
-     *
-     * @return RiyoshaFutanWariaiHanteiCsvEntity
-     */
-    public RiyoshaFutanWariaiHanteiCsvEntity getTitle() {
-        return new RiyoshaFutanWariaiHanteiCsvEntity(TITLE被保険者番号, TITLE確認内容);
     }
 
     /**

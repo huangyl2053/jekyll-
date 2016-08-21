@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 生活保護該当情報Tempの作成<br/>
+ * 生活保護該当情報Tempの作成のクラスです。<br/>
  * 処理詳細5
  *
  * @reamsid_L DBC-4950-030 liuyang
