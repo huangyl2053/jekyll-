@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengakutaishoshahanteiyoukonsakusei;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanteiYoukonSakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiMyBatisParameter;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanteiyoukonsakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengakutaishoshahanteiyoukonsakusei.SetaiinHaakuJohoEntity;
 
 /**
