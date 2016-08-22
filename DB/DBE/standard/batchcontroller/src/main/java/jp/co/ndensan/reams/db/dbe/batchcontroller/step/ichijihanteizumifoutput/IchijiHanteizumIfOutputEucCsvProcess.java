@@ -5,10 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.ichijihanteizumifoutput;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteizumifoutput.ichijihanteizumi.IchijiHanteizumIfOutputBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput.NinteiChosaDataOutputResult;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.itizihanteishori.ItziHanteiShoriProcessParamter;
@@ -57,8 +53,6 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
     private ItziHanteiShoriProcessParamter paramter;
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    List<IchijiHanteizumIfOutputRelateEntity> kaigoJuminhyoEntityList = new ArrayList<>();
-    private Map<RString, IchijiHanteizumIfOutputRelateEntity> kaigoJuminhyoMap;
     private RString koroshoIfShikibetsuCode = RString.EMPTY;
     private RString eucFilePath;
     private IchijiHanteizumIfOutputBusiness business;
@@ -71,7 +65,6 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), 一次判定IF文字コードファイル名);
         RString イメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate());
         paramter.setイメージ区分(イメージ区分);
-        kaigoJuminhyoMap = new HashMap();
     }
 
     @Override
@@ -105,6 +98,7 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
         if (!entity.getKoroshoIfShikibetsuCode().equals(koroshoIfShikibetsuCode)) {
             manager.spool(eucFilePath);
             koroshoIfShikibetsuCode = entity.getKoroshoIfShikibetsuCode();
+            eucCsvWriterJunitoJugo.close();
         }
     }
 
