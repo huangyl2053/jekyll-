@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0220011;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.TaishoshaIchiran.TaishoshaIchiran.ITaishoshaIchiranDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.TaishoshaIchiran.TaishoshaIchiran.TaishoshaIchiranDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -17,15 +18,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("CommonChildDiv")
-    private TaishoshaIchiranDiv CommonChildDiv;
+    @JsonProperty("btnResearch")
+    private Button btnResearch;
+    @JsonProperty("ccdTaishoshaIchiran")
+    private TaishoshaIchiranDiv ccdTaishoshaIchiran;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -34,12 +37,30 @@ public class JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getCommonChildDiv
-     * @return CommonChildDiv
+     * getbtnResearch
+     * @return btnResearch
      */
-    @JsonProperty("CommonChildDiv")
-    public ITaishoshaIchiranDiv getCommonChildDiv() {
-        return CommonChildDiv;
+    @JsonProperty("btnResearch")
+    public Button getBtnResearch() {
+        return btnResearch;
+    }
+
+    /*
+     * setbtnResearch
+     * @param btnResearch btnResearch
+     */
+    @JsonProperty("btnResearch")
+    public void setBtnResearch(Button btnResearch) {
+        this.btnResearch = btnResearch;
+    }
+
+    /*
+     * getccdTaishoshaIchiran
+     * @return ccdTaishoshaIchiran
+     */
+    @JsonProperty("ccdTaishoshaIchiran")
+    public ITaishoshaIchiranDiv getCcdTaishoshaIchiran() {
+        return ccdTaishoshaIchiran;
     }
 
     // </editor-fold>

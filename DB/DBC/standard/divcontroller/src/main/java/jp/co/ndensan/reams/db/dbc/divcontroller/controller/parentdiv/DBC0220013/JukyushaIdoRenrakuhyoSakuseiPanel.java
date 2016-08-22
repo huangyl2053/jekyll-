@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0220013;
 
 import jp.co.ndensan.reams.db.dbc.business.core.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoTorokuEntity;
+import jp.co.ndensan.reams.db.dbc.business.core.kyodojukyushataishosha.KyodoJukyushaTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0220013.JukyushaIdoRenrakuhyoSakuseiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0250011.DBC0250011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0220013.JukyushaIdoRenrakuhyoSakuseiPanelHandler;
@@ -62,31 +63,30 @@ public class JukyushaIdoRenrakuhyoSakuseiPanel {
      * @return ResponseData
      */
     public ResponseData<JukyushaIdoRenrakuhyoSakuseiPanelDiv> onLoad(JukyushaIdoRenrakuhyoSakuseiPanelDiv div) {
-//        KyodoJukyushaTaishoshaEntity entity = ViewStateHolder.get(ViewStateKeys.一覧検索キー, KyodoJukyushaTaishoshaEntity.class);
-//        int 履歴番号 = entity.get履歴番号();
-//        boolean 論理削除フラグ = entity.is論理削除フラグ();
-//         FlexibleDate 異動日 = entity.get異動日();
-//        HihokenshaNo 被保険者番号 = entity.get被保番号();
-//         ShikibetsuCode 識別コード =
+        KyodoJukyushaTaishoshaEntity entity = ViewStateHolder.get(
+                ViewStateKeys.一覧検索キー, KyodoJukyushaTaishoshaEntity.class);
+        int 履歴番号 = entity.get履歴番号();
+        boolean 論理削除フラグ = entity.is論理削除フラグ();
+        FlexibleDate 異動日 = entity.get異動日();
+        HihokenshaNo 被保険者番号 = entity.get被保番号();
         div.getTxtHakkoDate().setValue(RDate.getNowDate());
-        FlexibleDate 作成年月日 = new FlexibleDate(div.getJukyushaIdoRenrakuhyoHenkoPrint().getTxtHakkoDate().getValue().toDateString());
+        FlexibleDate 作成年月日 = new FlexibleDate(div.getJukyushaIdoRenrakuhyoHenkoPrint().
+                getTxtHakkoDate().getValue().toDateString());
         ViewStateHolder.put(ViewStateKeys.作成年月日, 作成年月日);
         RString 氏名性別生年月日を印字する = ZERO;
         if (div.getJukyushaIdoRenrakuhyoHenkoPrint().getChkJukyushaIdoRenrakuhyo().isAllSelected()) {
             氏名性別生年月日を印字する = ONE;
         }
         ViewStateHolder.put(ViewStateKeys.氏名性別生年月日を印字する, 氏名性別生年月日を印字する);
-        ShikibetsuCode 識別コード = new ShikibetsuCode("1");
-        HihokenshaNo 被保険者番号 = new HihokenshaNo("0000150053");
-        int 履歴番号 = 1;
-        boolean 論理削除フラグ = false;
-        FlexibleDate 異動日 = new FlexibleDate("20080808");
+        //TODO
+        ShikibetsuCode 識別コード = new ShikibetsuCode("0000000010");
         if ((被保険者番号.isEmpty()) && !ResponseHolder.isReRequest()) {
             throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage().replace(
                     被保険者番号_なし.toString()));
         }
         ViewStateHolder.put(ViewStateKeys.履歴番号, 履歴番号);
-        div.getCcdJukyushaIdoRenrakuhyo().initialize(処理モード, ShikibetsuCode.EMPTY, 被保険者番号, 履歴番号, 論理削除フラグ, 異動日);
+        div.getCcdJukyushaIdoRenrakuhyo().initialize(
+                処理モード, ShikibetsuCode.EMPTY, 被保険者番号, 履歴番号, 論理削除フラグ, 異動日);
         AccessLogger.log(AccessLogType.照会, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
         return ResponseData.of(div).respond();
 
@@ -142,18 +142,9 @@ public class JukyushaIdoRenrakuhyoSakuseiPanel {
      */
     public ResponseData<JukyushaIdoRenrakuhyoSakuseiPanelDiv> onClick_btnResearch(
             JukyushaIdoRenrakuhyoSakuseiPanelDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return getCheckMessage(div, DBC0250011TransitionEventName.再検索);
-        } else {
-            return ResponseData.of(div).respond();
-        }
+
+        return getCheckMessage(div, DBC0250011TransitionEventName.再検索);
+
     }
 
     /**
@@ -207,7 +198,8 @@ public class JukyushaIdoRenrakuhyoSakuseiPanel {
      * @param div KyodoIdoRenrakuhyoTorokuMainDiv
      * @return ResponseData
      */
-    public ResponseData<JukyushaIdoRenrakuhyoSakuseiPanelDiv> onClick_btnComplete(JukyushaIdoRenrakuhyoSakuseiPanelDiv div) {
+    public ResponseData<JukyushaIdoRenrakuhyoSakuseiPanelDiv> onClick_btnComplete(
+            JukyushaIdoRenrakuhyoSakuseiPanelDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBC0250011TransitionEventName.完了).respond();
     }
 

@@ -4,7 +4,7 @@
 <!-- @reamsid_L DBU-1080-010 zhengshukai -->
 <mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.benmeisyo.IBenmeisyoMapper">
 
-    <resultMap id="getBenmeisyoResultMap" type="jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo.BenmeiJohoResultEntity" autoMapping="true">
+    <resultMap id="getBenmeisyoResultMap" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.benmeisyo.BenmeiJohoResultEntity" autoMapping="true">
         <result property="処分種類コード" column="shobunShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="弁明書作成日" column="bemmeishoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="弁明内容" column="bemmeiNaiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

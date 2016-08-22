@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohisaishinsaketteihokenshain;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.report.source.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaKetteiHokenshaInSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaKetteiHokenshaInSource;
 
 /**
  * 総合事業費再審査決定通知書情報取込一覧表帳票Editor

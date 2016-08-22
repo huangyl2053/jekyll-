@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.benmeisyo;
 
 import jp.co.ndensan.reams.db.dbu.definition.core.benmeisyo.BenmeiAtenaParameter;
 import jp.co.ndensan.reams.db.dbu.definition.core.benmeisyo.BenmeisyoMapperParameter;
-import jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo.BenmeiJohoResultEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.benmeisyo.BenmeiJohoResultEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 
 /**

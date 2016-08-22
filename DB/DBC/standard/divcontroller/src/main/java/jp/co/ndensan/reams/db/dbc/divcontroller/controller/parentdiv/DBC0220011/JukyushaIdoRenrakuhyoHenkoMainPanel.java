@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.taishoshakensaku.TaishoshaKensakuResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0220011.DBC0220011StateName;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0220011.DBC0220011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0220011.JukyushaIdoRenrakuhyoHenkoMainPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0220011.JukyushaIdoRenrakuhyoHenkoMainPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0220011.JukyushaIdoRenrakuhyoHenkoMainPanelValidationHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0220011.JukyushaIdoRenrakuhyoHenkoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.taishoshaichiran.TaishoshaIchiranParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.taishoshakensaku.TaishoshaKensaku;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -36,6 +38,7 @@ public class JukyushaIdoRenrakuhyoHenkoMainPanel {
     private static final RString 修正モード = new RString("修正");
     private static final RString 選択モード = new RString("選択");
     private static final RString KEY = new RString("isDeletedDataSearch");
+    private static final RString 受給者異動_訂正連絡票発行 = new RString("DBCMN83001");
 
     /**
      * 申請情報検索_画面初期化です。
@@ -148,7 +151,45 @@ public class JukyushaIdoRenrakuhyoHenkoMainPanel {
     public ResponseData<JukyushaIdoRenrakuhyoHenkoMainPanelDiv> onClick_btnSelect(
             JukyushaIdoRenrakuhyoHenkoMainPanelDiv div) {
         ViewStateHolder.put(ViewStateKeys.処理モード, 選択モード);
-        return ResponseData.of(div).respond();
+        if (ResponseHolder.getMenuID().equals(受給者異動_訂正連絡票発行)) {
+            return ResponseData.of(div).forwardWithEventName(DBC0220011TransitionEventName.連絡票変更).respond();
+        }
+        return ResponseData.of(div).forwardWithEventName(DBC0220011TransitionEventName.連絡票情報照会).respond();
+    }
+
+    /**
+     * 「「該当者を検索する」ボタン」押下
+     *
+     * @param div JukyushaIdoRenrakuhyoHenkoMainPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<JukyushaIdoRenrakuhyoHenkoMainPanelDiv> onClick_btnSearchHihokensha(
+            JukyushaIdoRenrakuhyoHenkoMainPanelDiv div) {
+        FlexibleDate 異動日From = FlexibleDate.EMPTY;
+        FlexibleDate 異動日To = FlexibleDate.EMPTY;
+        HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
+        boolean 削除データ = false;
+        if (div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().getTxtIdoDateRange().getFromValue() != null) {
+            異動日From = new FlexibleDate(div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().
+                    getTxtIdoDateRange().getFromValue().toString());
+        }
+        if (div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().getTxtIdoDateRange().getToValue() != null) {
+            異動日To = new FlexibleDate(div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().
+                    getTxtIdoDateRange().getToValue().toString());
+        }
+        if (div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().getTxtSearchHihoNo().getValue() != null
+                && !div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().
+                getTxtSearchHihoNo().getValue().isEmpty()) {
+            被保険者番号 = new HihokenshaNo(div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().
+                    getTxtSearchHihoNo().getValue());
+        }
+        if (div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().getChkIsSearchDeletedData().isAllSelected()) {
+            削除データ = true;
+        }
+        JukyushaIdoRenrakuhyoHenkoParameter parameter = new JukyushaIdoRenrakuhyoHenkoParameter(
+                異動日From, 異動日To, 被保険者番号, 削除データ);
+        ViewStateHolder.put(ViewStateKeys.検索退避用, parameter);
+        return ResponseData.of(div).forwardWithEventName(DBC0220011TransitionEventName.該当者検索).respond();
     }
 
     /**
@@ -160,7 +201,7 @@ public class JukyushaIdoRenrakuhyoHenkoMainPanel {
     public ResponseData<JukyushaIdoRenrakuhyoHenkoMainPanelDiv> onClick_btnModify(
             JukyushaIdoRenrakuhyoHenkoMainPanelDiv div) {
         ViewStateHolder.put(ViewStateKeys.処理モード, 修正モード);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0220011TransitionEventName.連絡票変更).respond();
     }
 
     private JukyushaIdoRenrakuhyoHenkoMainPanelHandler getHandler(JukyushaIdoRenrakuhyoHenkoMainPanelDiv div) {
@@ -171,5 +212,4 @@ public class JukyushaIdoRenrakuhyoHenkoMainPanel {
             getCheckHandler(JukyushaIdoRenrakuhyoHenkoMainPanelDiv div) {
         return new JukyushaIdoRenrakuhyoHenkoMainPanelValidationHandler(div);
     }
-
 }

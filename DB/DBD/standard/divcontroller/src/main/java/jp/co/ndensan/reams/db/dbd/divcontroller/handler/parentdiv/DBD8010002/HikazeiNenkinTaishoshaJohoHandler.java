@@ -49,6 +49,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -398,14 +399,28 @@ public class HikazeiNenkinTaishoshaJohoHandler {
                         SubGyomuCode.DBD介護受給,
                         new LasdecCode(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)),
                         ShoriName.非課税年金対象者情報取込.get名称(),
+                        row.getHdnSyokiShoriJotai(),
+                        new FlexibleYear(div.getShoriSettei().getHdnShoriNendo()),
+                        row.getHdnShori().concat(row.getHdnTuki()));
+
+                shoriDateKanri.toEntity().setState(EntityDataState.Added);
+                ShoriDateKanri deletedShoriDateKanri = shoriDateKanri.deleted();
+                ShoriDateKanriManager manager = new ShoriDateKanriManager();
+                manager.save処理日付管理マスタForDeletePhysical(deletedShoriDateKanri);
+
+                ShoriDateKanri insertShoriDateKanri = new ShoriDateKanri(
+                        SubGyomuCode.DBD介護受給,
+                        new LasdecCode(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)),
+                        ShoriName.非課税年金対象者情報取込.get名称(),
                         row.getTxtShoriJotai().getSelectedKey(),
                         new FlexibleYear(div.getShoriSettei().getHdnShoriNendo()),
                         row.getHdnShori().concat(row.getHdnTuki()));
 
-                ShoriDateKanriBuilder builder = shoriDateKanri.createBuilderForEdit();
+                ShoriDateKanriBuilder builder = insertShoriDateKanri.createBuilderForEdit();
                 ShoriDateKanri newShoriDateKanri = builder.build();
-                ShoriDateKanriManager manager = new ShoriDateKanriManager();
-                manager.save処理日付管理マスタ(newShoriDateKanri);
+                ShoriDateKanriManager insertManager = new ShoriDateKanriManager();
+                insertManager.save処理日付管理マスタ(newShoriDateKanri);
+
             }
         }
     }

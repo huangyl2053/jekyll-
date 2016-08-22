@@ -7,8 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0220013;
 
 import jp.co.ndensan.reams.db.dbc.business.core.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoTorokuEntity;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0220013.JukyushaIdoRenrakuhyoSakuseiPanelDiv;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -19,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class JukyushaIdoRenrakuhyoSakuseiPanelHandler {
 
-    private static final RString DBCHIHOKENSHANO = new RString("DBCHihokenshaNo");
     private final JukyushaIdoRenrakuhyoSakuseiPanelDiv div;
 
     /**
@@ -63,13 +60,4 @@ public class JukyushaIdoRenrakuhyoSakuseiPanelHandler {
         return entity;
     }
 
-    /**
-     * 前排他キーの解除のンメソッドです。
-     *
-     * @param 被保番号 RString
-     */
-    public void 前排他キーの解除(RString 被保番号) {
-        LockingKey 排他キー = new LockingKey(DBCHIHOKENSHANO.concat(被保番号));
-        RealInitialLocker.release(排他キー);
-    }
 }

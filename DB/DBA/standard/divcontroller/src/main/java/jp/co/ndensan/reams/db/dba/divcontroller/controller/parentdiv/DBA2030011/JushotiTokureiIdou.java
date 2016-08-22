@@ -44,6 +44,7 @@ public class JushotiTokureiIdou {
     private static final RString 住所地特例モード = new RString("teiseitoroku_jyusyoti");
     private static final RString 適用モード = new RString("tekiyo");
     private static final RString 解除モード = new RString("kaijo");
+    private static final RString 資格異動モード = new RString("teiseitoroku");
     private static final RString 照会モード = new RString("shokai");
     private static final RString 表示モード = new RString("資格異動");
     private static final RString 表示幅モード = new RString("モード1");
@@ -51,6 +52,7 @@ public class JushotiTokureiIdou {
     private static final RString 利用モード = new RString("被保険者対象機能");
     private static final RString DBAMN25001_届出により適用 = new RString("DBAMN25001");
     private static final RString DBAMN25002_届出により解除 = new RString("DBAMN25002");
+    private static final RString DBAMN25003_届出により施設変更 = new RString("DBAMN25003");
     private LockingKey 前排他ロックキー;
     private final HihokenshaShikakuShutokuManager hihokenshaShikakuShutoku = HihokenshaShikakuShutokuManager.createInstance();
     private final JushotiTokureiIdouFinder jushotiTokureiIdouFinder = JushotiTokureiIdouFinder.createInstance();
@@ -75,6 +77,10 @@ public class JushotiTokureiIdou {
         }
         if (DBAMN25002_届出により解除.equals(UrControlDataFactory.createInstance().getMenuID())) {
             div.getCcdHihosyosai().住所地特例表示タイプ(解除モード);
+            前排他ロックキー = new LockingKey("ShikakuJutokuKaijo、HihokenshaNo");
+        }
+        if (DBAMN25003_届出により施設変更.equals(UrControlDataFactory.createInstance().getMenuID())) {
+            div.getCcdHihosyosai().住所地特例表示タイプ(資格異動モード);
             前排他ロックキー = new LockingKey("ShikakuJutokuKaijo、HihokenshaNo");
         }
         div.getCcdHihosyosai().資格関連異動表示モード(照会モード);
@@ -130,6 +136,12 @@ public class JushotiTokureiIdou {
                         .replace("資格解除処理").evaluate()), RString.EMPTY, RString.EMPTY, true);
                 return ResponseData.of(div).setState(DBA2030011StateName.完了状態);
             }
+            if (DBAMN25003_届出により施設変更.equals(UrControlDataFactory.createInstance().getMenuID())) {
+                変更情報の保存(div);
+                div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
+                        .replace("資格変更処理").evaluate()), RString.EMPTY, RString.EMPTY, true);
+                return ResponseData.of(div).setState(DBA2030011StateName.完了状態);
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -162,6 +174,18 @@ public class JushotiTokureiIdou {
     }
 
     private void 解除情報の保存(JushotiTokureiIdouDiv div) {
+        List<HihokenshaDaicho> hihokenshaDaichoList = div.getCcdHihosyosai().住所地特例履歴情報取得().records();
+        for (HihokenshaDaicho hihokenshaDaicho : hihokenshaDaichoList) {
+            jushotiTokureiIdouFinder.shikakuJutokuCheck(
+                    getKey().get識別コード(), getKey().get被保険者番号(), hihokenshaDaicho.get適用年月日(), hihokenshaDaicho.get解除年月日());
+            jushotiTokureiIdouFinder.saveShikakuJutoku(
+                    getKey().get識別コード(), getKey().get被保険者番号(),
+                    hihokenshaDaicho.get適用年月日(), hihokenshaDaicho.get適用届出年月日(), hihokenshaDaicho.get住所地特例適用事由コード(),
+                    hihokenshaDaicho.get解除年月日(), hihokenshaDaicho.get解除届出年月日(), hihokenshaDaicho.get住所地特例解除事由コード());
+        }
+    }
+
+    private void 変更情報の保存(JushotiTokureiIdouDiv div) {
         List<HihokenshaDaicho> hihokenshaDaichoList = div.getCcdHihosyosai().住所地特例履歴情報取得().records();
         for (HihokenshaDaicho hihokenshaDaicho : hihokenshaDaichoList) {
             jushotiTokureiIdouFinder.shikakuJutokuCheck(

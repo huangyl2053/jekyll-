@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class TaishoshaIchijiTokuteiProcess extends BatchProcessBase<HanteiyouConkyosakuseishoushaiqijiRelateEntity> {
 
     private static final RString MAPPER_ID = new RString(
-            "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.taishoshaichijitokutei.TaishoshaIchijiTokuteiMapper.select対象者一次特定");
+            "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.taishoshaichijitokutei.ITaishoshaIchijiTokuteiMapper.select対象者一次特定");
     private static final RString TABLE_NAME = new RString("gemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTemp");
     private TaishoshaIchijiTokuteiProcessParameter processParameter;
 
@@ -43,14 +43,9 @@ public class TaishoshaIchijiTokuteiProcess extends BatchProcessBase<HanteiyouCon
 
     @Override
     protected void process(HanteiyouConkyosakuseishoushaiqijiRelateEntity t) {
-        if (t != null) {
-            HanteiyouConkyosakuseishoushaiqijiEntity entity = new HanteiyouConkyosakuseishoushaiqijiEntity();
-            if (t.get被保険者番号() != null) {
-                entity.setHihokenshaNo(t.get被保険者番号());
-            }
-            entity.setKijunYMD(processParameter.get課税判定等基準日());
-            tempTableWriter.insert(entity);
-        }
+        HanteiyouConkyosakuseishoushaiqijiEntity entity = new HanteiyouConkyosakuseishoushaiqijiEntity();
+        entity.setHihokenshaNo(t.get被保険者番号());
+        entity.setKijunYMD(processParameter.get課税判定等基準日());
+        tempTableWriter.insert(entity);
     }
-
 }
