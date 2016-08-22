@@ -427,7 +427,7 @@ public class IchijiSashitome2GoHandler {
         entity.setShoKisaiHokenshaNo(証記載保険者番号());
         entity.setHihokenshaNo(new HihokenshaNo(div.getKey_HihokenshaNo()));
         entity.setKanriKubun(ShiharaiHenkoKanriKubun._２号差止.getコード());
-        entity.setRirekiNo(get最大履歴番号() + 1);
+        entity.setRirekiNo(get最大履歴番号());
         entity.setTorokuKubun(ShiharaiHenkoTorokuKubun._２号予告登録者.getコード());
         entity.setShuryoKubun(ShiharaiHenkoShuryoKubun._空.getコード());
         entity.setYokoku_TorokuYMD(div.getTxtNigoYokokushaTorokuYokokuTorokubi().getValue());
@@ -451,7 +451,7 @@ public class IchijiSashitome2GoHandler {
         entity.setShoKisaiHokenshaNo(証記載保険者番号());
         entity.setHihokenshaNo(new HihokenshaNo(div.getKey_HihokenshaNo()));
         entity.setKanriKubun(ShiharaiHenkoKanriKubun._２号差止.getコード());
-        entity.setRirekiNo(get最大履歴番号() + 1);
+        entity.setRirekiNo(get最大履歴番号());
         entity.setTorokuKubun(ShiharaiHenkoTorokuKubun._２号差止登録.getコード());
         entity.setTekiyoKaishiYMD(div.getTxtTekiyoKaishi().getValue());
         entity.setShuryoKubun(ShiharaiHenkoShuryoKubun._空.getコード());
