@@ -135,7 +135,8 @@ public class IraiJohoDataTorikomiManager {
      */
     public void 各テーブルへの登録(RString 申請書管理番号, int 主治医意見書作成依頼履歴番号, RString 厚労省IF識別コード, RString 主治医医療機関コード, RString 主治医コード,
             IkenshokinyuyoshiBusiness business) {
-        DbT5302ShujiiIkenshoJohoEntity shujiiIkenshoIraiJohoJoho = 要介護認定主治医意見書情報(申請書管理番号, 厚労省IF識別コード);
+        DbT5302ShujiiIkenshoJohoEntity shujiiIkenshoIraiJohoJoho = get要介護認定主治医意見書情報(申請書管理番号, 厚労省IF識別コード,
+                主治医意見書作成依頼履歴番号);
         if (shujiiIkenshoIraiJohoJoho == null) {
             insert要介護認定主治医意見書情報(申請書管理番号, 主治医意見書作成依頼履歴番号, 主治医医療機関コード, 主治医コード, business);
         } else {
@@ -143,7 +144,8 @@ public class IraiJohoDataTorikomiManager {
                     get主治医意見書依頼区分(申請書管理番号, 厚労省IF識別コード, shujiiIkenshoIraiJohoJoho.getShujiiCode(),
                             shujiiIkenshoIraiJohoJoho.getShujiiIryoKikanCode()));
         }
-        ShujiiIkenshoIraiJohoIkenItemRelateEntity ikenItemEntity = 要介護認定主治医意見書意見項目(申請書管理番号, 厚労省IF識別コード);
+        ShujiiIkenshoIraiJohoIkenItemRelateEntity ikenItemEntity = get要介護認定主治医意見書意見項目(申請書管理番号, 厚労省IF識別コード,
+                主治医意見書作成依頼履歴番号);
         if (ikenItemEntity == null) {
             insert要介護認定主治医意見書意見項目(new ShinseishoKanriNo(申請書管理番号), 主治医意見書作成依頼履歴番号, business);
         } else {
@@ -153,7 +155,8 @@ public class IraiJohoDataTorikomiManager {
                 update要介護認定主治医意見書意見項目(ikenItemEntity.getEntity(), 申請書管理番号, 主治医意見書作成依頼履歴番号, business);
             }
         }
-        ShujiiIkenshoIraiJohoKinyuItemRelateEntity kinyuItemEntity = 要介護認定主治医意見書記入項目(申請書管理番号, 厚労省IF識別コード);
+        ShujiiIkenshoIraiJohoKinyuItemRelateEntity kinyuItemEntity = get要介護認定主治医意見書記入項目(申請書管理番号, 厚労省IF識別コード,
+                主治医意見書作成依頼履歴番号);
         if (kinyuItemEntity == null) {
             insert要介護認定主治医意見書記入項目(new ShinseishoKanriNo(申請書管理番号), 主治医意見書作成依頼履歴番号, business);
         } else {
@@ -165,26 +168,32 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private DbT5302ShujiiIkenshoJohoEntity 要介護認定主治医意見書情報(RString 申請書管理番号, RString 厚労省IF識別コード) {
+    private DbT5302ShujiiIkenshoJohoEntity get要介護認定主治医意見書情報(RString 申請書管理番号, RString 厚労省IF識別コード,
+            int 主治医意見書作成依頼履歴番号) {
         IraiJohoDataTorikomiParameter parameter = new IraiJohoDataTorikomiParameter();
         parameter.set申請書管理番号(申請書管理番号);
         parameter.set厚労省IF識別コード(厚労省IF識別コード);
+        parameter.set主治医意見書作成依頼履歴番号(new RString(主治医意見書作成依頼履歴番号));
         IIraiJohoDataTorikomiMapper mapper = mapperProvider.create(IIraiJohoDataTorikomiMapper.class);
         return mapper.要介護認定主治医意見書情報(parameter);
     }
 
-    private ShujiiIkenshoIraiJohoIkenItemRelateEntity 要介護認定主治医意見書意見項目(RString 申請書管理番号, RString 厚労省IF識別コード) {
+    private ShujiiIkenshoIraiJohoIkenItemRelateEntity get要介護認定主治医意見書意見項目(RString 申請書管理番号, RString 厚労省IF識別コード,
+            int 主治医意見書作成依頼履歴番号) {
         IraiJohoDataTorikomiParameter parameter = new IraiJohoDataTorikomiParameter();
         parameter.set申請書管理番号(申請書管理番号);
         parameter.set厚労省IF識別コード(厚労省IF識別コード);
+        parameter.set主治医意見書作成依頼履歴番号(new RString(主治医意見書作成依頼履歴番号));
         IIraiJohoDataTorikomiMapper mapper = mapperProvider.create(IIraiJohoDataTorikomiMapper.class);
         return mapper.要介護認定主治医意見書意見項目(parameter);
     }
 
-    private ShujiiIkenshoIraiJohoKinyuItemRelateEntity 要介護認定主治医意見書記入項目(RString 申請書管理番号, RString 厚労省IF識別コード) {
+    private ShujiiIkenshoIraiJohoKinyuItemRelateEntity get要介護認定主治医意見書記入項目(RString 申請書管理番号, RString 厚労省IF識別コード,
+            int 主治医意見書作成依頼履歴番号) {
         IraiJohoDataTorikomiParameter parameter = new IraiJohoDataTorikomiParameter();
         parameter.set申請書管理番号(申請書管理番号);
         parameter.set厚労省IF識別コード(厚労省IF識別コード);
+        parameter.set主治医意見書作成依頼履歴番号(new RString(主治医意見書作成依頼履歴番号));
         IIraiJohoDataTorikomiMapper mapper = mapperProvider.create(IIraiJohoDataTorikomiMapper.class);
         return mapper.要介護認定主治医意見書記入項目(parameter);
     }
