@@ -42,7 +42,7 @@ public class ShinseiKensaku {
     private static final RString MENUID_DBEMN31005 = new RString("DBEMN31005");
     private static final RString MENUID_DBEMN21001 = new RString("DBEMN21001");
     private static final RString MENUID_DBEMN33001 = new RString("DBEMN33001");
-    private static final RString MENUID_DBEMN62001 = new RString("DBEMN62001");
+    private static final RString MENUID_DBEMN62001 = new RString("DBEMN72001");
     private static final RString BUTTON_BTNITIRANPRINT = new RString("btnitiranprint");
 
     /**
