@@ -326,7 +326,11 @@ public enum ReportIdDBC {
     /**
      * 介護給付費資格照合表 帳票ＩＤです。
      */
-    DBC300003(new ReportId("DBC300003_NenreiKeikyuBetsuRiyoJyokyo"), new RString("年齢階級別利用状況作成"));
+    DBC300003(new ReportId("DBC300003_NenreiKeikyuBetsuRiyoJyokyo"), new RString("年齢階級別利用状況作成")),
+    /**
+     * 介護給付費等審査決定請求明細表帳票ＩＤです。
+     */
+    DBC200069(new ReportId("DBC200069_KyufuhiShinsaKetteiSeikyuMeisaihyo"), new RString("介護給付費等審査決定請求明細表"));
 
     private final ReportId reportId;
 
