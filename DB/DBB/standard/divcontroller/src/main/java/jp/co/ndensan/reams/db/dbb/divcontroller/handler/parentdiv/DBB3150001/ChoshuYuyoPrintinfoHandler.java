@@ -56,6 +56,7 @@ public class ChoshuYuyoPrintinfoHandler {
     public void initialize(FlexibleYear 賦課年度, FlexibleYear 調定年度, TsuchishoNo 通知書番号) {
 
         div.getPritPublish2().getComdiv1().initialize(true, null, false, true, null, false);
+        div.getChoshuYuyoPrintinfo().getPritPublish2().getBunshoBango1().initialize(null);
         div.getPritPublish2().getComdiv1().setSendDateDisable(true);
         ChoshuYuyoJoho 徴収猶予情報 = KaigoFukaChoshuYuyo.createInstance().getChoshuYuyoJoho(調定年度, 賦課年度, 通知書番号);
         if (徴収猶予情報 != null) {
@@ -117,7 +118,7 @@ public class ChoshuYuyoPrintinfoHandler {
         pama.set納入通知書_発行日(FlexibleDate.EMPTY);
         pama.set調定事由List(null);
         pama.set郵振納付書_出力期(RString.EMPTY);
-
+        initialize(賦課年度, 調定年度, 通知書番号);
         return KaigoFukaChoshuYuyo.createInstance().publish(pama);
     }
 }
