@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd4010011;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,7 +21,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter extends BatchParameterBase {
 
-    private RDate 基準日;
+    private FlexibleDate 基準日;
     private FlexibleYear 対象年度;
     private FlexibleDate 申請年月日;
     private FlexibleDate 決定年月日;

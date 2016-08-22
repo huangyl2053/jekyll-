@@ -67,12 +67,21 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
         } else {
             tempTable.set世帯課税区分(SetaiKazeiKubun.非課税.getコード());
         }
+        if (list.get本人区分().equals(HonninKubun.本人.getCode()) && ((list.get識別コード_生活保護受給者() != null
+                || !list.get識別コード_生活保護受給者().isEmpty())
+                || (list.get識別コード_老齢福祉年金受給者() != null || !list.get識別コード_老齢福祉年金受給者().isEmpty()))) {
+            tempTable.set利用者負担段階(RiyoshaFutanDankai.第一段階.getコード());
+        } else if (list.get課税区分_住民税減免前().equals(KazeiKubun.課税.getコード())) {
+            tempTable.set利用者負担段階(RiyoshaFutanDankai.第四段階.getコード());
+        } else if (!list.get本人区分().equals(HonninKubun.本人.getCode()) && ((list.get年金収入額().longValue()
+                + list.get合計所得金額().longValue()) <= processParamter.getNumber().longValue())) {
+            tempTable.set利用者負担段階(RiyoshaFutanDankai.第二段階.getコード());
+        } else {
+            tempTable.set利用者負担段階(RiyoshaFutanDankai.第三段階.getコード());
+        }
 
         if (list.get本人区分().equals(HonninKubun.本人.getCode())) {
-            if ((list.get識別コード_生活保護受給者() != null && !list.get識別コード_生活保護受給者().isEmpty())
-                    || (list.get識別コード_老齢福祉年金受給者() != null && !list.get識別コード_老齢福祉年金受給者().isEmpty())) {
-                tempTable.set利用者負担段階(RiyoshaFutanDankai.第一段階.getコード());
-            }
+
             set減免減額対象者判定用根拠作成_本人(list, tempTable);
             isetai = get世帯(list.get識別コード(), list.get基準日());
             iKojin = get世帯(list.get識別コード(), list.get基準日()).get世帯員(list.get識別コード());
@@ -85,14 +94,6 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
             setis高齢者複数世帯(tempTable, list.get識別コード(), list.get基準日());
 
         } else {
-            if (list.get課税区分_住民税減免前().equals(KazeiKubun.課税.getコード())) {
-                tempTable.set利用者負担段階(RiyoshaFutanDankai.第四段階.getコード());
-            } else if (!list.get本人区分().equals(HonninKubun.本人.getCode()) && ((list.get年金収入額().longValue()
-                    + list.get合計所得金額().longValue()) <= processParamter.getNumber().longValue())) {
-                tempTable.set利用者負担段階(RiyoshaFutanDankai.第二段階.getコード());
-            } else {
-                tempTable.set利用者負担段階(RiyoshaFutanDankai.第三段階.getコード());
-            }
             set減免減額対象者判定用根拠作成_非私(tempTable);
         }
 

@@ -112,7 +112,7 @@ and open the template in the editor.
             AND  A."世帯課税区分" = #{CODE_世帯課税区分_非課税}
         </if>
         <if test="市町村民税本人非課税者">
-            AND  A."本人課税区分" = #{CODE_世帯課税区分_課税}
+            AND  A."本人課税区分" != #{CODE_世帯課税区分_課税}
         </if>
         <if test="老齢福祉年金受給者">
             AND   A."is老齢福祉年金受給者" = TRUE
@@ -166,7 +166,7 @@ and open the template in the editor.
             AND  A."世帯課税区分"  = #{CODE_世帯課税区分_非課税}
         </if>
         <if test="市町村民税本人非課税者">
-            AND  A."本人課税区分" = #{CODE_世帯課税区分_課税}
+            AND  A."本人課税区分" != #{CODE_世帯課税区分_課税}
         </if>
         <if test="老齢福祉年金受給者">
             AND A."is老齢福祉年金受給者" = TRUE
@@ -222,7 +222,7 @@ and open the template in the editor.
             AND  A."世帯課税区分"  = #{CODE_世帯課税区分_非課税}
         </if>
         <if test="市町村民税本人非課税者">
-            AND   A."本人課税区分" = #{CODE_世帯課税区分_課税}
+            AND   A."本人課税区分" != #{CODE_世帯課税区分_課税}
         </if>
         <if test="老齢福祉年金受給者">
             AND  A."is老齢福祉年金受給者" = TRUE
