@@ -32,6 +32,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
     private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");
     private static final RString CIRCLE = new RString("○");
+    private static final RString DOT = new RString(".");
 
     /**
      * コンストラクタです
@@ -208,7 +209,8 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
     private RString commonYMD(FlexibleDate 年月日) {
         return 年月日.wareki()
                 .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.NONE).fillType(FillType.ZERO).toDateString();
+                .separator(Separator.PERIOD).fillType(FillType.ZERO)
+                .toDateString().substring(2).replace(DOT, RString.EMPTY);
     }
 
     private RString 性別男の場合() {
