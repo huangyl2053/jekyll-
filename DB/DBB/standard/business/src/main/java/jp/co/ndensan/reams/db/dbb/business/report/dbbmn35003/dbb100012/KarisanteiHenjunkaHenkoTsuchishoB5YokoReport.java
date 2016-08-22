@@ -279,12 +279,12 @@ public class KarisanteiHenjunkaHenkoTsuchishoB5YokoReport extends Report<Karisan
             更正後普徴期別金額リスト = new ArrayList<>();
         }
         for (UniversalPhase 期別金額 : 更正前普徴期別金額リスト) {
-            if (new RString(期別金額.get期()).equals(期別)) {
+            if (new RString(期別金額.get期()).padZeroToLeft(2).equals(期別.padZeroToLeft(2))) {
                 更正前期別金額 = 期別金額.get金額();
             }
         }
         for (UniversalPhase 期別金額 : 更正後普徴期別金額リスト) {
-            if (new RString(期別金額.get期()).equals(期別)) {
+            if (new RString(期別金額.get期()).padZeroToLeft(2).equals(期別.padZeroToLeft(2))) {
                 更正後期別金額 = 期別金額.get金額();
             }
         }
