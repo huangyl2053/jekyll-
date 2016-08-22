@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 概要： 総合照会_住民固有情報 用XMLです。 -->
+<!-- @reamsid_L DBU-4100-060 houtianpeng -->
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jyumikonyujyoho.IJyuMiKoNyuJyoHoMapper">
+    <resultMap id="resultMap_JyuMiKoNyuJyoHoEntity" 
+               type="jp.co.ndensan.reams.db.dbu.entity.db.relate.jyumikonyujyoho.JyuMiKoNyuJyoHoEntity" autoMapping="true">
+        <result property="jukyuKaishiYMD" column="jukyuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="jukyuHaishiYMD" column="jukyuHaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="jukyuTeishiKaishiYMD" column="jukyuTeishiKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="jukyuTeishiShuryoYMD" column="jukyuTeishiShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="tekiyoKaishiYM" column="tekiyoKaishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
+        <result property="gengakuGoHokenryoDankai" column="gengakuGoHokenryoDankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <association property="境界層該当者Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1006KyokaisoGaitoshaMapper.ResultMap_DbT1006KyokaisoGaitoshaEntity"/>
+    </resultMap>
+
+    <select id="get生保受給者情報" resultMap="resultMap_JyuMiKoNyuJyoHoEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jyumikonyujyoho.JyuMiKoNyuJyoHoParameter" 
+            resultOrdered="true" fetchSize="500">
+         SELECT
+             UrT0508."jukyuKaishiYMD",
+             UrT0508."jukyuHaishiYMD",
+             UrT0528."jukyuTeishiKaishiYMD",
+             UrT0528."jukyuTeishiShuryoYMD"
+         FROM
+             rgur."UrT0508SeikatsuHogoJukyusha" UrT0508
+         LEFT JOIN
+             rgur."UrT0528SeikatsuHogoTeishikikan" UrT0528
+         ON
+             UrT0508."shikibetsuCode" = UrT0528."shikibetsuCode" AND
+             UrT0508."gyomuCode" = UrT0528."gyomuCode" AND
+             UrT0508."jukyuKaishiYMD" = UrT0528."jukyuKaishiYMD"
+         WHERE
+             UrT0508."shikibetsuCode" = #{識別コード}
+             AND UrT0508."gyomuCode" = #{業務コード}
+         ORDER BY  
+             UrT0508."jukyuKaishiYMD" DESC,
+             UrT0528."jukyuTeishiKaishiYMD"  DESC
+         LIMIT 1
+</select>
+ <select id="get生活保護扶助種類" resultType="jp.co.ndensan.reams.uz.uza.lang.RString" 
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jyumikonyujyoho.JyuMiKoNyuJyoHoParameter" 
+            resultOrdered="true" fetchSize="500">
+       SELECT
+           UrT0526."fujoShuruiCode"
+       FROM
+       (SELECT 
+               B."shikibetsuCode",
+               B."gyomuCode",
+               B."jukyuKaishiYMD" FROM 
+           (SELECT 
+               UrT0508."shikibetsuCode",
+               UrT0508."gyomuCode",
+               UrT0508."jukyuKaishiYMD",
+               ROW_NUMBER() OVER (PARTITION BY  UrT0508."shikibetsuCode",UrT0508."gyomuCode"
+                                     ORDER BY  UrT0508."jukyuKaishiYMD"  DESC)  as  rrkno 
+           FROM rgur."UrT0508SeikatsuHogoJukyusha" UrT0508 
+           WHERE UrT0508."shikibetsuCode" = #{識別コード}
+             AND UrT0508."gyomuCode" = #{業務コード}) AS B
+           WHERE B."rrkno" = 1) AS A 
+       LEFT JOIN 
+          rgur."UrT0526SeikatsuHogoFujoShurui" UrT0526
+       ON
+          A."shikibetsuCode" = UrT0526."shikibetsuCode" AND 
+          A."gyomuCode" = UrT0526."gyomuCode" AND 
+          A."jukyuKaishiYMD" = UrT0526."jukyuKaishiYMD"
+</select>   
+ <select id="get境界層管理情報取得" resultMap="resultMap_JyuMiKoNyuJyoHoEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jyumikonyujyoho.JyuMiKoNyuJyoHoParameter" 
+            resultOrdered="true" fetchSize="500">
+      SELECT
+           "DbT1006KyokaisoGaitosha".*,
+           DbT1007."tekiyoKaishiYM",
+           DbT1007."gengakuGoHokenryoDankai"
+       FROM
+           rgdb."DbT1006KyokaisoGaitosha" as "DbT1006KyokaisoGaitosha"
+       LEFT JOIN
+           rgdb."DbT1007KyokaisoHokenryoDankai" DbT1007
+       ON
+           "DbT1006KyokaisoGaitosha"."hihokenshaNo" = DbT1007."hihokenshaNo" AND
+           "DbT1006KyokaisoGaitosha"."linkNo" = DbT1007."linkNo"
+       WHERE
+           "DbT1006KyokaisoGaitosha"."hihokenshaNo" = #{被保険者番号}
+       ORDER  BY
+           "DbT1006KyokaisoGaitosha"."rirekiNo"  DESC,
+           DbT1007."tekiyoKaishiYM"  DESC
+       LIMIT  1
+</select>
+</mapper>
