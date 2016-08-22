@@ -43,6 +43,7 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
     private final int count;
     private static final RString 作成 = new RString("作成");
     private static final RString タイトル = new RString("支払方法変更管理リスト");
+    private static final RString 過年度 = new RString("過年度");
     private static final RString ホシ = new RString("*");
     private static final RString 左括弧 = new RString("＜");
     private static final RString 右括弧 = new RString("度保険料＞");
@@ -121,7 +122,6 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         source.hokenshaNo = 保険者番号.value();
         source.hokenshaName = 保険者名称;
 
-        // TODO QA 95838
         List<ISetSortItem> list = new ArrayList<>();
         if (出力順 != null && 出力順.get設定項目リスト() == null) {
             list = 出力順.get設定項目リスト();
@@ -166,7 +166,6 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
             source = edit上部の認定情報(source);
             source = edit上部の償還未払い情報(source);
             source = edit上部の滞納管理情報(source);
-            source = edit上部の収納情報_過年度(source);
             source = edit上部の合計(source);
             if (収納情報なし.equals(支払方法変更リストEntity_上.get収納情報なし())) {
                 source.shunonashiUpper = 収納情報なし文字;
@@ -186,7 +185,6 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
             source = edit下部の認定情報(source);
             source = edit下部の償還未払い情報(source);
             source = edit下部の滞納管理情報(source);
-            source = edit下部の収納情報_過年度(source);
             source = edit下部の合計(source);
             if (収納情報なし.equals(支払方法変更リストEntity_下.get収納情報なし())) {
                 source.shunonashiLower = 収納情報なし文字;
@@ -388,6 +386,13 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         edit上部_年度１の期(source);
         edit上部_年度２の期(source);
         edit上部_年度３の期(source);
+        if (count == 15 && 支払方法変更リストEntity_上.get日付関連_調定年度().plusYear(2).equals(支払方法変更リストEntity_上.get賦課年度())) {
+            edit上部_年度１の過年度(source);
+        } else if (count == 15 && 支払方法変更リストEntity_上.get日付関連_調定年度().plusYear(1).equals(支払方法変更リストEntity_上.get賦課年度())) {
+            edit上部_年度２の過年度(source);
+        } else if (count == 15 && 支払方法変更リストEntity_上.get日付関連_調定年度().equals(支払方法変更リストEntity_上.get賦課年度())) {
+            edit上部_年度３の過年度(source);
+        }
         return source;
     }
 
@@ -395,6 +400,9 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         ShunoNendoEntity 年度１の収納 = new ShunoNendoEntity();
         if (支払方法変更リストEntity_上.get収納情報List() != null && 支払方法変更リストEntity_上.get収納情報List().size() > 0) {
             年度１の収納 = 支払方法変更リストEntity_上.get収納情報List().get(0);
+        }
+        if (年度１の収納.is過年度フラグ()) {
+            return source;
         }
         if (年度１の収納.get期別情報() != null && 年度１の収納.get期別情報().size() > count - 1) {
             ShunoKibetsuEntity 年度１の期 = 年度１の収納.get期別情報().get(count - 1);
@@ -421,10 +429,35 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         return source;
     }
 
+    private ShiharaiHohoHenkoKanriIchiranReportSource edit上部_年度１の過年度(ShiharaiHohoHenkoKanriIchiranReportSource source) {
+        source.listUpper3_1 = 過年度;
+        ShunoNendoEntity 年度１の収納 = new ShunoNendoEntity();
+        if (支払方法変更リストEntity_上.get収納情報List() != null && 支払方法変更リストEntity_上.get収納情報List().size() > 0) {
+            年度１の収納 = 支払方法変更リストEntity_上.get収納情報List().get(0);
+        }
+        ShunoKibetsuEntity 過年度の期 = new ShunoKibetsuEntity();
+        if (年度１の収納.get期別情報() != null && 年度１の収納.get期別情報().size() > 0) {
+            過年度の期 = 年度１の収納.get期別情報().get(0);
+        }
+        source.listUpper3_3 = 過年度の期.get納期限().wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        source.listUpper3_4 = new RString(KingakuFormatter.create(過年度の期.get滞納額()).format(KingakuUnit.円)
+                .setCommaSeparated().toString());
+        if (過年度の期.get時効起算日() != null) {
+            source.listUpper3_6 = 過年度の期.get時効起算日().wareki().eraType(EraType.KANJI_RYAKU)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        }
+        source.listUpper3_7 = 過年度の期.get時効起算事由();
+        return source;
+    }
+
     private ShiharaiHohoHenkoKanriIchiranReportSource edit上部_年度２の期(ShiharaiHohoHenkoKanriIchiranReportSource source) {
         ShunoNendoEntity 年度２の収納 = new ShunoNendoEntity();
         if (支払方法変更リストEntity_上.get収納情報List() != null && 支払方法変更リストEntity_上.get収納情報List().size() > 1) {
             年度２の収納 = 支払方法変更リストEntity_上.get収納情報List().get(1);
+        }
+        if (年度２の収納.is過年度フラグ()) {
+            return source;
         }
         if (年度２の収納.get期別情報() != null && 年度２の収納.get期別情報().size() > count - 1) {
             ShunoKibetsuEntity 年度２の期 = 年度２の収納.get期別情報().get(count - 1);
@@ -451,10 +484,35 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         return source;
     }
 
+    private ShiharaiHohoHenkoKanriIchiranReportSource edit上部_年度２の過年度(ShiharaiHohoHenkoKanriIchiranReportSource source) {
+        source.listUpper4_1 = 過年度;
+        ShunoNendoEntity 年度２の収納 = new ShunoNendoEntity();
+        if (支払方法変更リストEntity_上.get収納情報List() != null && 支払方法変更リストEntity_上.get収納情報List().size() > 1) {
+            年度２の収納 = 支払方法変更リストEntity_上.get収納情報List().get(1);
+        }
+        ShunoKibetsuEntity 過年度の期 = new ShunoKibetsuEntity();
+        if (年度２の収納.get期別情報() != null && 年度２の収納.get期別情報().size() > 0) {
+            過年度の期 = 年度２の収納.get期別情報().get(0);
+        }
+        source.listUpper4_3 = 過年度の期.get納期限().wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        source.listUpper4_4 = new RString(KingakuFormatter.create(過年度の期.get滞納額()).format(KingakuUnit.円)
+                .setCommaSeparated().toString());
+        if (過年度の期.get時効起算日() != null) {
+            source.listUpper4_6 = 過年度の期.get時効起算日().wareki().eraType(EraType.KANJI_RYAKU)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        }
+        source.listUpper4_7 = 過年度の期.get時効起算事由();
+        return source;
+    }
+
     private ShiharaiHohoHenkoKanriIchiranReportSource edit上部_年度３の期(ShiharaiHohoHenkoKanriIchiranReportSource source) {
         ShunoNendoEntity 年度３の収納 = new ShunoNendoEntity();
         if (支払方法変更リストEntity_上.get収納情報List() != null && 支払方法変更リストEntity_上.get収納情報List().size() > 2) {
             年度３の収納 = 支払方法変更リストEntity_上.get収納情報List().get(2);
+        }
+        if (年度３の収納.is過年度フラグ()) {
+            return source;
         }
         if (年度３の収納.get期別情報() != null && 年度３の収納.get期別情報().size() > count - 1) {
             ShunoKibetsuEntity 年度３の期 = 年度３の収納.get期別情報().get(count - 1);
@@ -478,6 +536,28 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
             }
             source.listUpper5_7 = 年度３の期.get時効起算事由();
         }
+        return source;
+    }
+
+    private ShiharaiHohoHenkoKanriIchiranReportSource edit上部_年度３の過年度(ShiharaiHohoHenkoKanriIchiranReportSource source) {
+        source.listUpper5_1 = 過年度;
+        ShunoNendoEntity 年度３の収納 = new ShunoNendoEntity();
+        if (支払方法変更リストEntity_上.get収納情報List() != null && 支払方法変更リストEntity_上.get収納情報List().size() > 2) {
+            年度３の収納 = 支払方法変更リストEntity_上.get収納情報List().get(2);
+        }
+        ShunoKibetsuEntity 過年度の期 = new ShunoKibetsuEntity();
+        if (年度３の収納.get期別情報() != null && 年度３の収納.get期別情報().size() > 0) {
+            過年度の期 = 年度３の収納.get期別情報().get(0);
+        }
+        source.listUpper5_3 = 過年度の期.get納期限().wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        source.listUpper5_4 = new RString(KingakuFormatter.create(過年度の期.get滞納額()).format(KingakuUnit.円)
+                .setCommaSeparated().toString());
+        if (過年度の期.get時効起算日() != null) {
+            source.listUpper5_6 = 過年度の期.get時効起算日().wareki().eraType(EraType.KANJI_RYAKU)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        }
+        source.listUpper5_7 = 過年度の期.get時効起算事由();
         return source;
     }
 
@@ -547,11 +627,6 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
                 .setCommaSeparated().toString());
         source.tainogakuGokeiUpper3 = new RString(KingakuFormatter.create(滞納額合計３).format(KingakuUnit.円)
                 .setCommaSeparated().toString());
-        return source;
-    }
-
-    private ShiharaiHohoHenkoKanriIchiranReportSource edit上部の収納情報_過年度(ShiharaiHohoHenkoKanriIchiranReportSource source) {
-        //TODO #89884
         return source;
     }
 
@@ -744,6 +819,13 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         edit下部_年度１の期(source);
         edit下部_年度２の期(source);
         edit下部_年度３の期(source);
+        if (count == 15 && 支払方法変更リストEntity_下.get日付関連_調定年度().plusYear(2).equals(支払方法変更リストEntity_下.get賦課年度())) {
+            edit下部_年度１の過年度(source);
+        } else if (count == 15 && 支払方法変更リストEntity_下.get日付関連_調定年度().plusYear(1).equals(支払方法変更リストEntity_下.get賦課年度())) {
+            edit下部_年度２の過年度(source);
+        } else if (count == 15 && 支払方法変更リストEntity_下.get日付関連_調定年度().equals(支払方法変更リストEntity_下.get賦課年度())) {
+            edit下部_年度３の過年度(source);
+        }
         return source;
     }
 
@@ -751,6 +833,9 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         ShunoNendoEntity 年度１の収納 = new ShunoNendoEntity();
         if (支払方法変更リストEntity_下.get収納情報List() != null && 支払方法変更リストEntity_下.get収納情報List().size() > 0) {
             年度１の収納 = 支払方法変更リストEntity_下.get収納情報List().get(0);
+        }
+        if (年度１の収納.is過年度フラグ()) {
+            return source;
         }
         if (年度１の収納.get期別情報() != null && 年度１の収納.get期別情報().size() > count - 1) {
             ShunoKibetsuEntity 年度１の期 = 年度１の収納.get期別情報().get(count - 1);
@@ -777,10 +862,35 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         return source;
     }
 
+    private ShiharaiHohoHenkoKanriIchiranReportSource edit下部_年度１の過年度(ShiharaiHohoHenkoKanriIchiranReportSource source) {
+        source.listLower3_1 = 過年度;
+        ShunoNendoEntity 年度１の収納 = new ShunoNendoEntity();
+        if (支払方法変更リストEntity_下.get収納情報List() != null && 支払方法変更リストEntity_下.get収納情報List().size() > 0) {
+            年度１の収納 = 支払方法変更リストEntity_下.get収納情報List().get(0);
+        }
+        ShunoKibetsuEntity 過年度の期 = new ShunoKibetsuEntity();
+        if (年度１の収納.get期別情報() != null && 年度１の収納.get期別情報().size() > 0) {
+            過年度の期 = 年度１の収納.get期別情報().get(0);
+        }
+        source.listLower3_3 = 過年度の期.get納期限().wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        source.listLower3_4 = new RString(KingakuFormatter.create(過年度の期.get滞納額()).format(KingakuUnit.円)
+                .setCommaSeparated().toString());
+        if (過年度の期.get時効起算日() != null) {
+            source.listLower3_6 = 過年度の期.get時効起算日().wareki().eraType(EraType.KANJI_RYAKU)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        }
+        source.listLower3_7 = 過年度の期.get時効起算事由();
+        return source;
+    }
+
     private ShiharaiHohoHenkoKanriIchiranReportSource edit下部_年度２の期(ShiharaiHohoHenkoKanriIchiranReportSource source) {
         ShunoNendoEntity 年度２の収納 = new ShunoNendoEntity();
         if (支払方法変更リストEntity_下.get収納情報List() != null && 支払方法変更リストEntity_下.get収納情報List().size() > 1) {
             年度２の収納 = 支払方法変更リストEntity_下.get収納情報List().get(1);
+        }
+        if (年度２の収納.is過年度フラグ()) {
+            return source;
         }
         if (年度２の収納.get期別情報() != null && 年度２の収納.get期別情報().size() > count - 1) {
             ShunoKibetsuEntity 年度２の期 = 年度２の収納.get期別情報().get(count - 1);
@@ -807,12 +917,36 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         return source;
     }
 
+    private ShiharaiHohoHenkoKanriIchiranReportSource edit下部_年度２の過年度(ShiharaiHohoHenkoKanriIchiranReportSource source) {
+        source.listLower4_1 = 過年度;
+        ShunoNendoEntity 年度２の収納 = new ShunoNendoEntity();
+        if (支払方法変更リストEntity_下.get収納情報List() != null && 支払方法変更リストEntity_下.get収納情報List().size() > 1) {
+            年度２の収納 = 支払方法変更リストEntity_下.get収納情報List().get(1);
+        }
+        ShunoKibetsuEntity 過年度の期 = new ShunoKibetsuEntity();
+        if (年度２の収納.get期別情報() != null && 年度２の収納.get期別情報().size() > 0) {
+            過年度の期 = 年度２の収納.get期別情報().get(0);
+        }
+        source.listLower4_3 = 過年度の期.get納期限().wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        source.listLower4_4 = new RString(KingakuFormatter.create(過年度の期.get滞納額()).format(KingakuUnit.円)
+                .setCommaSeparated().toString());
+        if (過年度の期.get時効起算日() != null) {
+            source.listLower4_6 = 過年度の期.get時効起算日().wareki().eraType(EraType.KANJI_RYAKU)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        }
+        source.listLower4_7 = 過年度の期.get時効起算事由();
+        return source;
+    }
+
     private ShiharaiHohoHenkoKanriIchiranReportSource edit下部_年度３の期(ShiharaiHohoHenkoKanriIchiranReportSource source) {
         ShunoNendoEntity 年度３の収納 = new ShunoNendoEntity();
         if (支払方法変更リストEntity_下.get収納情報List() != null && 支払方法変更リストEntity_下.get収納情報List().size() > 2) {
             年度３の収納 = 支払方法変更リストEntity_下.get収納情報List().get(2);
         }
-
+        if (年度３の収納.is過年度フラグ()) {
+            return source;
+        }
         if (年度３の収納.get期別情報() != null && 年度３の収納.get期別情報().size() > count - 1) {
             ShunoKibetsuEntity 年度３の期 = 年度３の収納.get期別情報().get(count - 1);
             source.listLower5_1 = 年度３の期.get期別();
@@ -835,6 +969,28 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
             }
             source.listLower5_7 = 年度３の期.get時効起算事由();
         }
+        return source;
+    }
+
+    private ShiharaiHohoHenkoKanriIchiranReportSource edit下部_年度３の過年度(ShiharaiHohoHenkoKanriIchiranReportSource source) {
+        source.listLower5_1 = 過年度;
+        ShunoNendoEntity 年度３の収納 = new ShunoNendoEntity();
+        if (支払方法変更リストEntity_下.get収納情報List() != null && 支払方法変更リストEntity_下.get収納情報List().size() > 2) {
+            年度３の収納 = 支払方法変更リストEntity_下.get収納情報List().get(2);
+        }
+        ShunoKibetsuEntity 過年度の期 = new ShunoKibetsuEntity();
+        if (年度３の収納.get期別情報() != null && 年度３の収納.get期別情報().size() > 0) {
+            過年度の期 = 年度３の収納.get期別情報().get(0);
+        }
+        source.listLower5_3 = 過年度の期.get納期限().wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        source.listLower5_4 = new RString(KingakuFormatter.create(過年度の期.get滞納額()).format(KingakuUnit.円)
+                .setCommaSeparated().toString());
+        if (過年度の期.get時効起算日() != null) {
+            source.listLower5_6 = 過年度の期.get時効起算日().wareki().eraType(EraType.KANJI_RYAKU)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        }
+        source.listLower5_7 = 過年度の期.get時効起算事由();
         return source;
     }
 
@@ -904,11 +1060,6 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
                 .setCommaSeparated().toString());
         source.tainogakuGokeiLower3 = new RString(KingakuFormatter.create(滞納額合計３).format(KingakuUnit.円)
                 .setCommaSeparated().toString());
-        return source;
-    }
-
-    private ShiharaiHohoHenkoKanriIchiranReportSource edit下部の収納情報_過年度(ShiharaiHohoHenkoKanriIchiranReportSource source) {
-        //TODO #89884
         return source;
     }
 

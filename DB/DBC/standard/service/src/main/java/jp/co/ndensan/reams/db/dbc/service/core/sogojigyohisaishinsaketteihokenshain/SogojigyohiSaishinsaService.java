@@ -179,7 +179,7 @@ public class SogojigyohiSaishinsaService {
      * @return SogojigyohiSaishinsaKetteiHokenshaInItem
      */
     public SogojigyohiSaishinsaKetteiHokenshaInItem setItem(SogojigyohiSaishinsaKetteiHokenshaInEntity entity,
-            IOutputOrder outOrder, FlexibleYearMonth 処理年月, int 通番) {
+            IOutputOrder outOrder, FlexibleYearMonth 処理年月, int 通番, boolean 集計flg) {
 
         SogojigyohiSaishinsaKetteiHokenshaInItem outItem = new SogojigyohiSaishinsaKetteiHokenshaInItem();
         RDateTime systemTime = RDateTime.now();
@@ -247,21 +247,23 @@ public class SogojigyohiSaishinsaService {
         outItem.set原審単位数(doカンマ編集(entity.get原審単位数()));
         outItem.set調整単位数(doカンマ編集(entity.get調整単位数()));
 
-        outItem.set決定タイトル(決定タイトル);
-        outItem.set決定件数タイトル(決定件数タイトル);
-        outItem.set決定単位数タイトル(決定単位数タイトル);
-        outItem.set決定負担額タイトル(決定負担額タイトル);
-        outItem.set調整タイトル(調整タイトル);
-        outItem.set調整件数タイトル(調整件数タイトル);
-        outItem.set調整単位数タイトル(調整単位数タイトル);
-        outItem.set調整負担額タイトル(調整負担額タイトル);
-        outItem.set総合事業費タイトル(総合事業費タイトル);
-        outItem.set総合事業費_決定_件数(doカンマ編集(entity.get総合事業費_決定_件数()));
-        outItem.set総合事業費_決定_単位数(doカンマ編集(entity.get総合事業費_決定_単位数()));
-        outItem.set総合事業費_決定_負担額(doカンマ編集(entity.get総合事業費_決定_負担額()));
-        outItem.set総合事業費_調整_件数(doカンマ編集(entity.get総合事業費_調整_件数()));
-        outItem.set総合事業費_調整_単位数(doカンマ編集(entity.get総合事業費_調整_単位数()));
-        outItem.set総合事業費_調整_負担額(doカンマ編集(entity.get総合事業費_調整_負担額()));
+        if (集計flg) {
+            outItem.set決定タイトル(決定タイトル);
+            outItem.set決定件数タイトル(決定件数タイトル);
+            outItem.set決定単位数タイトル(決定単位数タイトル);
+            outItem.set決定負担額タイトル(決定負担額タイトル);
+            outItem.set調整タイトル(調整タイトル);
+            outItem.set調整件数タイトル(調整件数タイトル);
+            outItem.set調整単位数タイトル(調整単位数タイトル);
+            outItem.set調整負担額タイトル(調整負担額タイトル);
+            outItem.set総合事業費タイトル(総合事業費タイトル);
+            outItem.set総合事業費_決定_件数(doカンマ編集(entity.get総合事業費_決定_件数()));
+            outItem.set総合事業費_決定_単位数(doカンマ編集(entity.get総合事業費_決定_単位数()));
+            outItem.set総合事業費_決定_負担額(doカンマ編集(entity.get総合事業費_決定_負担額()));
+            outItem.set総合事業費_調整_件数(doカンマ編集(entity.get総合事業費_調整_件数()));
+            outItem.set総合事業費_調整_単位数(doカンマ編集(entity.get総合事業費_調整_単位数()));
+            outItem.set総合事業費_調整_負担額(doカンマ編集(entity.get総合事業費_調整_負担額()));
+        }
         return outItem;
     }
 }

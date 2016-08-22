@@ -69,6 +69,10 @@ public class JukyushaIdoRenrakuhyoSakuseiPanel {
         boolean 論理削除フラグ = entity.is論理削除フラグ();
         FlexibleDate 異動日 = entity.get異動日();
         HihokenshaNo 被保険者番号 = entity.get被保番号();
+        if (被保険者番号 == null || 被保険者番号.isEmpty()) {
+            throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage().replace(
+                    被保険者番号_なし.toString()));
+        }
         div.getTxtHakkoDate().setValue(RDate.getNowDate());
         FlexibleDate 作成年月日 = new FlexibleDate(div.getJukyushaIdoRenrakuhyoHenkoPrint().
                 getTxtHakkoDate().getValue().toDateString());
@@ -78,12 +82,8 @@ public class JukyushaIdoRenrakuhyoSakuseiPanel {
             氏名性別生年月日を印字する = ONE;
         }
         ViewStateHolder.put(ViewStateKeys.氏名性別生年月日を印字する, 氏名性別生年月日を印字する);
-        //TODO
+        //TODO  QA1300
         ShikibetsuCode 識別コード = new ShikibetsuCode("0000000010");
-        if ((被保険者番号.isEmpty()) && !ResponseHolder.isReRequest()) {
-            throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage().replace(
-                    被保険者番号_なし.toString()));
-        }
         ViewStateHolder.put(ViewStateKeys.履歴番号, 履歴番号);
         div.getCcdJukyushaIdoRenrakuhyo().initialize(
                 処理モード, ShikibetsuCode.EMPTY, 被保険者番号, 履歴番号, 論理削除フラグ, 異動日);
