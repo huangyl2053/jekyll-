@@ -15,10 +15,10 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200
  * @reamsid_L DBC-1951-010 wangkanglei
  */
 @lombok.Getter
-@lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KyodoIdoRenrakuhyoTaishoshaKensakuParameter extends UaFt200FindShikibetsuTaishoParam {
+public final class KyodoIdoRenrakuhyoTaishoshaKensakuParameter {
 
+    private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
     private final HihokenshaNo 被保険者番号;
 
     /**
@@ -27,8 +27,9 @@ public class KyodoIdoRenrakuhyoTaishoshaKensakuParameter extends UaFt200FindShik
      * @param searchKey IShikibetsuTaishoPSMSearchKey
      * @param 被保険者番号 HihokenshaNo
      */
-    public KyodoIdoRenrakuhyoTaishoshaKensakuParameter(IShikibetsuTaishoPSMSearchKey searchKey, HihokenshaNo 被保険者番号) {
-        super(searchKey);
+    private KyodoIdoRenrakuhyoTaishoshaKensakuParameter(IShikibetsuTaishoPSMSearchKey searchKey,
+            HihokenshaNo 被保険者番号) {
+        this.shikibetsutaishoParam = new UaFt200FindShikibetsuTaishoParam(searchKey);
         this.被保険者番号 = 被保険者番号;
     }
 
