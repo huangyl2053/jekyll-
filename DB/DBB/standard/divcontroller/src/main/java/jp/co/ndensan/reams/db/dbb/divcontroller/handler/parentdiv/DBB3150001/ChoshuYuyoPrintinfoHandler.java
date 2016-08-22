@@ -118,7 +118,14 @@ public class ChoshuYuyoPrintinfoHandler {
         pama.set納入通知書_発行日(FlexibleDate.EMPTY);
         pama.set調定事由List(null);
         pama.set郵振納付書_出力期(RString.EMPTY);
-        initialize(賦課年度, 調定年度, 通知書番号);
         return KaigoFukaChoshuYuyo.createInstance().publish(pama);
+    }
+
+    /**
+     * 初期化の状態に戻るのメソッドです。
+     */
+    public void clearBanmen() {
+        div.getPritPublish2().getComdiv1().initialize(true, null, false, true, null, false);
+        div.getChoshuYuyoPrintinfo().getPritPublish2().getBunshoBango1().initialize(null);
     }
 }
