@@ -53,9 +53,9 @@ public class NinteiShinseiRenrakusakiJohoHandler {
      */
     public void setClear() {
         div.getRenrakusakiNyuryoku().getTxtRenban().clearValue();
-        div.getDdlRenrakusakiKubun().getDataSource().clear();
-        div.getDdlShisho().getDataSource().clear();
-        div.getDdlTsuzukigara().getDataSource().clear();
+        div.getDdlRenrakusakiKubun().setSelectedIndex(0);
+        div.getDdlShisho().setSelectedIndex(0);
+        div.getDdlTsuzukigara().setSelectedIndex(0);
         div.getTxtShimei().clearValue();
         div.getTxtKanaShimei().clearValue();
         div.getTxtYubinNo().clearValue();
@@ -259,7 +259,7 @@ public class NinteiShinseiRenrakusakiJohoHandler {
     public List<RenrakusakiJoho> setBusiness(List<RenrakusakiJoho> dbdBusiness) {
         for (dgRenrakusakiIchiran_Row row : div.getDgRenrakusakiIchiran().getDataSource()) {
             if (RString.isNullOrEmpty(row.getShinseishoKanriNo())) {
-                RenrakusakiJoho business = new RenrakusakiJoho(ShinseishoKanriNo.EMPTY, Integer.parseInt(div.getTxtRenban().getValue().toString()));
+                RenrakusakiJoho business = new RenrakusakiJoho(ShinseishoKanriNo.EMPTY, Integer.parseInt(row.getRenban().toString()));
                 business = business.createBuilderForEdit().set連絡先氏名(new AtenaMeisho(row.getShimei())).build();
                 business = business.createBuilderForEdit().set連絡先続柄(row.getTsuzukigara()).build();
                 business = business.createBuilderForEdit().set連絡先住所(new AtenaJusho(row.getJusho())).build();

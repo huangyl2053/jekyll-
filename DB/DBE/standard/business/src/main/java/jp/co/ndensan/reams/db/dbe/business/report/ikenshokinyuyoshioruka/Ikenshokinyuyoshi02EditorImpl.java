@@ -180,23 +180,16 @@ public class Ikenshokinyuyoshi02EditorImpl implements IIkenshokinyuyoshi02Editor
         if (IkenKomoku13.チェック有.getコード().equals(business.get失調不随意運動())) {
             source.shitchoUmu = チェック;
         }
-        if (選択.equals(business.get失調不随意運動上肢().substring(0, 1))) {
-            source.shitchoJoshiRight = チェック;
+        if (!RString.isNullOrEmpty(business.get失調不随意運動上肢())) {
+            source = set失調不随意運動上肢(source);
         }
-        if (選択.equals(business.get失調不随意運動上肢().substring(1))) {
-            source.shitchoJoshiLeft = チェック;
-        }
-        if (選択.equals(business.get失調不随意運動下肢().substring(0, 1))) {
-            source.shitchoKashiRight = チェック;
-        }
-        if (選択.equals(business.get失調不随意運動下肢().substring(1))) {
-            source.shitchoKashiLeft = チェック;
-        }
-        if (選択.equals(business.get体幹().substring(0, 1))) {
-            source.shitchoTaikanRight = チェック;
-        }
-        if (選択.equals(business.get体幹().substring(1))) {
-            source.shitchoTaikanLeft = チェック;
+        if (!RString.isNullOrEmpty(business.get体幹())) {
+            if (選択.equals(business.get体幹().substring(0, 1))) {
+                source.shitchoTaikanRight = チェック;
+            }
+            if (選択.equals(business.get体幹().substring(1))) {
+                source.shitchoTaikanLeft = チェック;
+            }
         }
         if (IkenKomoku13.チェック有.getコード().equals(business.get褥瘡())) {
             source.jokusoUmu = チェック;
@@ -210,6 +203,22 @@ public class Ikenshokinyuyoshi02EditorImpl implements IIkenshokinyuyoshi02Editor
             source.jokusoJu = チェック;
         }
         return editSource4(source);
+    }
+
+    private Ikenshokinyuyoshi02ReportSource set失調不随意運動上肢(Ikenshokinyuyoshi02ReportSource source) {
+        if (選択.equals(business.get失調不随意運動上肢().substring(0, 1))) {
+            source.shitchoJoshiRight = チェック;
+        }
+        if (選択.equals(business.get失調不随意運動上肢().substring(1))) {
+            source.shitchoJoshiLeft = チェック;
+        }
+        if (選択.equals(business.get失調不随意運動下肢().substring(0, 1))) {
+            source.shitchoKashiRight = チェック;
+        }
+        if (選択.equals(business.get失調不随意運動下肢().substring(1))) {
+            source.shitchoKashiLeft = チェック;
+        }
+        return source;
     }
 
     private Ikenshokinyuyoshi02ReportSource editSource4(Ikenshokinyuyoshi02ReportSource source) {
@@ -238,14 +247,8 @@ public class Ikenshokinyuyoshi02EditorImpl implements IIkenshokinyuyoshi02Editor
         } else if (IkenKomoku12.主に他人が操作している.getコード().equals(business.get車いすの使用())) {
             source.kurumaisuTaso = チェック;
         }
-        if (選択.equals(business.get歩行補助具_装具の使用().substring(0, 1))) {
-            source.hokohojoFushiyo = チェック;
-        }
-        if (選択.equals(business.get歩行補助具_装具の使用().substring(1, 2))) {
-            source.hokohojoOkugai = チェック;
-        }
-        if (選択.equals(business.get歩行補助具_装具の使用().substring(2))) {
-            source.hokohojoOkunai = チェック;
+        if (!RString.isNullOrEmpty(business.get歩行補助具_装具の使用())) {
+            source = set歩行補助具_装具の使用(source);
         }
         if (IkenKomoku14.自立ないし何とか自分で食べられる.getコード().equals(business.get食事行為())) {
             source.shokujikoiJiritsu = チェック;
@@ -258,51 +261,66 @@ public class Ikenshokinyuyoshi02EditorImpl implements IIkenshokinyuyoshi02Editor
             source.eiyojotaiFuryo = チェック;
         }
         source.eiyoryuiten = business.get栄養_食生活上の留意点();
-        if (選択.equals(business.get発生可能性状態().substring(0, 1))) {
+        if (!RString.isNullOrEmpty(business.get発生可能性状態()) && 選択.equals(business.get発生可能性状態().substring(0, 1))) {
             source.genjoNyoshikkin = チェック;
         }
         return editSource5(source);
     }
 
+    private Ikenshokinyuyoshi02ReportSource set歩行補助具_装具の使用(Ikenshokinyuyoshi02ReportSource source) {
+        if (選択.equals(business.get歩行補助具_装具の使用().substring(0, 1))) {
+            source.hokohojoFushiyo = チェック;
+        }
+        if (選択.equals(business.get歩行補助具_装具の使用().substring(1, 2))) {
+            source.hokohojoOkugai = チェック;
+        }
+        if (選択.equals(business.get歩行補助具_装具の使用().substring(2))) {
+            source.hokohojoOkunai = チェック;
+        }
+        return source;
+    }
+
     private Ikenshokinyuyoshi02ReportSource editSource5(Ikenshokinyuyoshi02ReportSource source) {
-        if (選択.equals(business.get発生可能性状態().substring(1, 2))) {
-            source.genjoTento = チェック;
-        }
-        if (選択.equals(business.get発生可能性状態().substring(2, LENGTH_3))) {
-            source.genjoIdoteika = チェック;
-        }
-        if (選択.equals(business.get発生可能性状態().substring(LENGTH_3, LENGTH_4))) {
-            source.genjoJokuso = チェック;
-        }
-        if (選択.equals(business.get発生可能性状態().substring(LENGTH_4, LENGTH_5))) {
-            source.genjoShimpaiteika = チェック;
-        }
-        if (選択.equals(business.get発生可能性状態().substring(LENGTH_5, LENGTH_6))) {
-            source.genjoTojikomori = チェック;
-        }
-        if (選択.equals(business.get発生可能性状態().substring(LENGTH_6, LENGTH_7))) {
-            source.genjoIyokuteika = チェック;
-        }
-        if (選択.equals(business.get発生可能性状態().substring(LENGTH_7, LENGTH_8))) {
-            source.genjoHaikai = チェック;
-        }
-        if (選択.equals(business.get発生可能性状態().substring(LENGTH_8, LENGTH_9))) {
-            source.genjoTeieiyo = チェック;
-        }
-        if (選択.equals(business.get発生可能性状態().substring(LENGTH_9, LENGTH_10))) {
-            source.genjoSesshokuteika = チェック;
-        }
-        if (選択.equals(business.get発生可能性状態().substring(LENGTH_10, LENGTH_11))) {
-            source.genjoDassui = チェック;
-        }
-        if (選択.equals(business.get発生可能性状態().substring(LENGTH_11, LENGTH_12))) {
-            source.genjoIkansen = チェック;
-        }
-        if (選択.equals(business.get発生可能性状態().substring(LENGTH_12, LENGTH_13))) {
-            source.genjoTontsu = チェック;
-        }
-        if (選択.equals(business.get発生可能性状態().substring(LENGTH_13))) {
-            source.genjoSonota = チェック;
+        if (!RString.isNullOrEmpty(business.get発生可能性状態())) {
+            if (選択.equals(business.get発生可能性状態().substring(1, 2))) {
+                source.genjoTento = チェック;
+            }
+            if (選択.equals(business.get発生可能性状態().substring(2, LENGTH_3))) {
+                source.genjoIdoteika = チェック;
+            }
+            if (選択.equals(business.get発生可能性状態().substring(LENGTH_3, LENGTH_4))) {
+                source.genjoJokuso = チェック;
+            }
+            if (選択.equals(business.get発生可能性状態().substring(LENGTH_4, LENGTH_5))) {
+                source.genjoShimpaiteika = チェック;
+            }
+            if (選択.equals(business.get発生可能性状態().substring(LENGTH_5, LENGTH_6))) {
+                source.genjoTojikomori = チェック;
+            }
+            if (選択.equals(business.get発生可能性状態().substring(LENGTH_6, LENGTH_7))) {
+                source.genjoIyokuteika = チェック;
+            }
+            if (選択.equals(business.get発生可能性状態().substring(LENGTH_7, LENGTH_8))) {
+                source.genjoHaikai = チェック;
+            }
+            if (選択.equals(business.get発生可能性状態().substring(LENGTH_8, LENGTH_9))) {
+                source.genjoTeieiyo = チェック;
+            }
+            if (選択.equals(business.get発生可能性状態().substring(LENGTH_9, LENGTH_10))) {
+                source.genjoSesshokuteika = チェック;
+            }
+            if (選択.equals(business.get発生可能性状態().substring(LENGTH_10, LENGTH_11))) {
+                source.genjoDassui = チェック;
+            }
+            if (選択.equals(business.get発生可能性状態().substring(LENGTH_11, LENGTH_12))) {
+                source.genjoIkansen = チェック;
+            }
+            if (選択.equals(business.get発生可能性状態().substring(LENGTH_12, LENGTH_13))) {
+                source.genjoTontsu = チェック;
+            }
+            if (選択.equals(business.get発生可能性状態().substring(LENGTH_13))) {
+                source.genjoSonota = チェック;
+            }
         }
         source.genjoSonotaName = business.getその他の状態名();
         source.genjoTaisho = business.get対処方針内容();
@@ -313,68 +331,72 @@ public class Ikenshokinyuyoshi02EditorImpl implements IIkenshokinyuyoshi02Editor
         } else if (IkenKomoku16.不明.getコード().equals(business.getサービス利用による生活機能の維持_改善の見通し())) {
             source.seikatsuijiFumei = チェック;
         }
-        if (選択.equals(business.get医学的管理の必要性().substring(0, 1))) {
-            source.igakukanriShinryo = チェック;
-        } else if (下線あり.equals(business.get医学的管理の必要性().substring(0, 1))) {
-            source.igakulineShinryo = 下線;
-        }
         return editSource6(source);
     }
 
     private Ikenshokinyuyoshi02ReportSource editSource6(Ikenshokinyuyoshi02ReportSource source) {
-        if (選択.equals(business.get医学的管理の必要性().substring(1, 2))) {
-            source.igakukanriKango = チェック;
-        } else if (下線あり.equals(business.get医学的管理の必要性().substring(1, 2))) {
-            source.igakulineKango = 下線;
-        }
-        if (選択.equals(business.get医学的管理の必要性().substring(2, LENGTH_3))) {
-            source.igakukanriShien = チェック;
-        } else if (下線あり.equals(business.get医学的管理の必要性().substring(2, LENGTH_3))) {
-            source.igakulineShien = 下線;
-        }
-        if (選択.equals(business.get医学的管理の必要性().substring(LENGTH_3, LENGTH_4))) {
-            source.igakukanriShika = チェック;
-        } else if (下線あり.equals(business.get医学的管理の必要性().substring(LENGTH_3, LENGTH_4))) {
-            source.igakulineShika = 下線;
-        }
-        if (選択.equals(business.get医学的管理の必要性().substring(LENGTH_4, LENGTH_5))) {
-            source.igakukanriYakuzai = チェック;
-        } else if (下線あり.equals(business.get医学的管理の必要性().substring(LENGTH_4, LENGTH_5))) {
-            source.igakulineYakuzai = 下線;
-        }
-        if (選択.equals(business.get医学的管理の必要性().substring(LENGTH_5, LENGTH_6))) {
-            source.igakukanriHomonriha = チェック;
-        } else if (下線あり.equals(business.get医学的管理の必要性().substring(LENGTH_5, LENGTH_6))) {
-            source.igakulineHomonriha = 下線;
-        }
-        if (選択.equals(business.get医学的管理の必要性().substring(LENGTH_6, LENGTH_7))) {
-            source.igakukanriNyusho = チェック;
-        } else if (下線あり.equals(business.get医学的管理の必要性().substring(LENGTH_6, LENGTH_7))) {
-            source.igakulineNyusho = 下線;
-        }
-        if (選択.equals(business.get医学的管理の必要性().substring(LENGTH_7, LENGTH_8))) {
-            source.igakukanriShikaeisei = チェック;
-        } else if (下線あり.equals(business.get医学的管理の必要性().substring(LENGTH_7, LENGTH_8))) {
-            source.igakulineShikaeisei = 下線;
-        }
-        if (選択.equals(business.get医学的管理の必要性().substring(LENGTH_8, LENGTH_9))) {
-            source.igakukanriEiyo = チェック;
-        } else if (下線あり.equals(business.get医学的管理の必要性().substring(LENGTH_8, LENGTH_9))) {
-            source.igakulineEiyo = 下線;
-        }
-        if (選択.equals(business.get医学的管理の必要性().substring(LENGTH_9, LENGTH_10))) {
-            source.igakukanriTsushoriha = チェック;
-        } else if (下線あり.equals(business.get医学的管理の必要性().substring(LENGTH_9, LENGTH_10))) {
-            source.igakulineTsushoriha = 下線;
+        if (!RString.isNullOrEmpty(business.get医学的管理の必要性())) {
+            if (選択.equals(business.get医学的管理の必要性().substring(0, 1))) {
+                source.igakukanriShinryo = チェック;
+            } else if (下線あり.equals(business.get医学的管理の必要性().substring(0, 1))) {
+                source.igakulineShinryo = 下線;
+            }
+            if (選択.equals(business.get医学的管理の必要性().substring(1, 2))) {
+                source.igakukanriKango = チェック;
+            } else if (下線あり.equals(business.get医学的管理の必要性().substring(1, 2))) {
+                source.igakulineKango = 下線;
+            }
+            if (選択.equals(business.get医学的管理の必要性().substring(2, LENGTH_3))) {
+                source.igakukanriShien = チェック;
+            } else if (下線あり.equals(business.get医学的管理の必要性().substring(2, LENGTH_3))) {
+                source.igakulineShien = 下線;
+            }
+            if (選択.equals(business.get医学的管理の必要性().substring(LENGTH_3, LENGTH_4))) {
+                source.igakukanriShika = チェック;
+            } else if (下線あり.equals(business.get医学的管理の必要性().substring(LENGTH_3, LENGTH_4))) {
+                source.igakulineShika = 下線;
+            }
+            if (選択.equals(business.get医学的管理の必要性().substring(LENGTH_4, LENGTH_5))) {
+                source.igakukanriYakuzai = チェック;
+            } else if (下線あり.equals(business.get医学的管理の必要性().substring(LENGTH_4, LENGTH_5))) {
+                source.igakulineYakuzai = 下線;
+            }
+            if (選択.equals(business.get医学的管理の必要性().substring(LENGTH_5, LENGTH_6))) {
+                source.igakukanriHomonriha = チェック;
+            } else if (下線あり.equals(business.get医学的管理の必要性().substring(LENGTH_5, LENGTH_6))) {
+                source.igakulineHomonriha = 下線;
+            }
+            if (選択.equals(business.get医学的管理の必要性().substring(LENGTH_6, LENGTH_7))) {
+                source.igakukanriNyusho = チェック;
+            } else if (下線あり.equals(business.get医学的管理の必要性().substring(LENGTH_6, LENGTH_7))) {
+                source.igakulineNyusho = 下線;
+            }
+            if (選択.equals(business.get医学的管理の必要性().substring(LENGTH_7, LENGTH_8))) {
+                source.igakukanriShikaeisei = チェック;
+            } else if (下線あり.equals(business.get医学的管理の必要性().substring(LENGTH_7, LENGTH_8))) {
+                source.igakulineShikaeisei = 下線;
+            }
         }
         return editSource7(source);
     }
 
     private Ikenshokinyuyoshi02ReportSource editSource7(Ikenshokinyuyoshi02ReportSource source) {
-        if (選択.equals(business.get医学的管理の必要性().substring(LENGTH_10, LENGTH_11))) {
-            source.igakukanriSonota = チェック;
-        } else if (下線あり.equals(business.get医学的管理の必要性().substring(LENGTH_10, LENGTH_11))) {
-            source.igakulineSonota = 下線;
+        if (!RString.isNullOrEmpty(business.get医学的管理の必要性())) {
+            if (選択.equals(business.get医学的管理の必要性().substring(LENGTH_8, LENGTH_9))) {
+                source.igakukanriEiyo = チェック;
+            } else if (下線あり.equals(business.get医学的管理の必要性().substring(LENGTH_8, LENGTH_9))) {
+                source.igakulineEiyo = 下線;
+            }
+            if (選択.equals(business.get医学的管理の必要性().substring(LENGTH_9, LENGTH_10))) {
+                source.igakukanriTsushoriha = チェック;
+            } else if (下線あり.equals(business.get医学的管理の必要性().substring(LENGTH_9, LENGTH_10))) {
+                source.igakulineTsushoriha = 下線;
+            }
+            if (選択.equals(business.get医学的管理の必要性().substring(LENGTH_10, LENGTH_11))) {
+                source.igakukanriSonota = チェック;
+            } else if (下線あり.equals(business.get医学的管理の必要性().substring(LENGTH_10, LENGTH_11))) {
+                source.igakulineSonota = 下線;
+            }
         }
         source.igakukanriSonotaName = business.getその他の医学的管理();
         if (IkenKomoku17.特になし.getコード().equals(business.getサービス提供血圧())) {
@@ -408,6 +430,13 @@ public class Ikenshokinyuyoshi02EditorImpl implements IIkenshokinyuyoshi02Editor
         }
         source.ryuijikoUndo = business.getサービス提供運動留意事項();
         source.ryuijikoSonota = business.getサービス提供その他の留意事項();
+        source = set感染症有無(source);
+        source.kansenshoName = business.get感染症名();
+        source.sonoTatokki = business.getその他特記事項();
+        return source;
+    }
+
+    private Ikenshokinyuyoshi02ReportSource set感染症有無(Ikenshokinyuyoshi02ReportSource source) {
         if (IkenKomoku18.無.getコード().equals(business.get感染症有無())) {
             source.kansenshoNashi = チェック;
         } else if (IkenKomoku18.有.getコード().equals(business.get感染症有無())) {
@@ -415,102 +444,6 @@ public class Ikenshokinyuyoshi02EditorImpl implements IIkenshokinyuyoshi02Editor
         } else if (IkenKomoku18.不明.getコード().equals(business.get感染症有無())) {
             source.kansenshoFumei = チェック;
         }
-        source.kansenshoName = business.get感染症名();
-        source.sonoTatokki = business.getその他特記事項();
         return source;
     }
-
-    //TODO 改行コード(CRLF)を垂直タブ(VT)で置き換え（先頭から11個まで）その他特記事項は700文字／12行以内の処理対応待ち。
-//    private RString getその他特記事項() {
-//        List<RString> list = business.getその他特記事項().split("\r\n");
-//        RStringBuilder その他特記事項 = new RStringBuilder();
-//        if (0 < list.size()) {
-//            その他特記事項.append(list.get(0)).append(System.lineSeparator());
-//        }
-//        if (1 < list.size()) {
-//            if (その他特記事項.length() <= LENGTH_700) {
-//                その他特記事項 = その他特記事項.append(list.get(1)).append(System.lineSeparator());
-//            } else {
-//                return その他特記事項.substring(0, LENGTH_700);
-//            }
-//        }
-//        if (2 > list.size()) {
-//            if (その他特記事項.length() <= LENGTH_700) {
-//                その他特記事項 = その他特記事項.append(list.get(2)).append(System.lineSeparator());
-//            } else {
-//                return その他特記事項.substring(0, LENGTH_700);
-//            }
-//        }
-//        if (LENGTH_3 < list.size()) {
-//            if (その他特記事項.length() <= LENGTH_700) {
-//                その他特記事項 = その他特記事項.append(list.get(LENGTH_3)).append(System.lineSeparator());
-//            } else {
-//                return その他特記事項.substring(0, LENGTH_700);
-//            }
-//        }
-//        if (LENGTH_4 < list.size()) {
-//            if (その他特記事項.length() <= LENGTH_700) {
-//                その他特記事項 = その他特記事項.append(list.get(LENGTH_4)).append(System.lineSeparator());
-//            } else {
-//                return その他特記事項.substring(0, LENGTH_700);
-//            }
-//        }
-//        if (LENGTH_5 < list.size()) {
-//            if (その他特記事項.length() <= LENGTH_700) {
-//                その他特記事項 = その他特記事項.append(list.get(LENGTH_5)).append(System.lineSeparator());
-//            } else {
-//                return その他特記事項.substring(0, LENGTH_700);
-//            }
-//        }
-//        if (LENGTH_6 < list.size()) {
-//            if (その他特記事項.length() <= LENGTH_700) {
-//                その他特記事項 = その他特記事項.append(list.get(LENGTH_6)).append(System.lineSeparator());
-//            } else {
-//                return その他特記事項.substring(0, LENGTH_700);
-//            }
-//        }
-//        if (LENGTH_7 < list.size()) {
-//            if (その他特記事項.length() <= LENGTH_700) {
-//                その他特記事項 = その他特記事項.append(list.get(LENGTH_7)).append(System.lineSeparator());
-//            } else {
-//                return その他特記事項.substring(0, LENGTH_700);
-//            }
-//        }
-//        if (LENGTH_8 < list.size()) {
-//            if (その他特記事項.length() <= LENGTH_700) {
-//                その他特記事項 = その他特記事項.append(list.get(LENGTH_8)).append(System.lineSeparator());
-//            } else {
-//                return その他特記事項.substring(0, LENGTH_700);
-//            }
-//        }
-//        return getその他特記事項(その他特記事項, list);
-//    }
-//
-//    private RString getその他特記事項(RStringBuilder その他特記事項, List<RString> list) {
-//        if (LENGTH_9 < list.size()) {
-//            if (その他特記事項.length() <= LENGTH_700) {
-//                その他特記事項 = その他特記事項.append(list.get(LENGTH_9)).append(System.lineSeparator());
-//            } else {
-//                return その他特記事項.substring(0, LENGTH_700);
-//            }
-//        }
-//        if (LENGTH_10 < list.size()) {
-//            if (その他特記事項.length() <= LENGTH_700) {
-//                その他特記事項 = その他特記事項.append(list.get(LENGTH_10)).append(System.lineSeparator());
-//            } else {
-//                return その他特記事項.substring(0, LENGTH_700);
-//            }
-//        }
-//        if (LENGTH_11 < list.size()) {
-//            if (その他特記事項.length() <= LENGTH_700) {
-//                その他特記事項 = その他特記事項.append(list.get(LENGTH_11)).append(System.lineSeparator());
-//            } else {
-//                return その他特記事項.substring(0, LENGTH_700);
-//            }
-//        }
-//        if (LENGTH_700 <= その他特記事項.length()) {
-//            return その他特記事項.substring(0, LENGTH_700);
-//        }
-//        return その他特記事項.toRString();
-//    }
 }

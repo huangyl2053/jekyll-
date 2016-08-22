@@ -147,8 +147,13 @@ public class NinteiShinseiRenrakusakiJoho {
         if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
             NinteiShinseiBusinessCollection data = ViewStateHolder.get(ViewStateKeys.連絡先情報, NinteiShinseiBusinessCollection.class);
-            List<RenrakusakiJoho> johoList = data.getDbdBusiness();
             List<dgRenrakusakiIchiran_Row> dateSoruce = div.getDgRenrakusakiIchiran().getDataSource();
+            if (data == null) {
+                dateSoruce.remove(div.getDgRenrakusakiIchiran().getActiveRow());
+                div.getDgRenrakusakiIchiran().setDataSource(dateSoruce);
+                return ResponseData.of(div).respond();
+            }
+            List<RenrakusakiJoho> johoList = data.getDbdBusiness();
             for (int i = 0; i < johoList.size(); i++) {
                 RenrakusakiJoho joho = johoList.get(i);
                 dgRenrakusakiIchiran_Row row = div.getDgRenrakusakiIchiran().getActiveRow();
@@ -159,8 +164,7 @@ public class NinteiShinseiRenrakusakiJoho {
             }
             data.setDbdBusiness(johoList);
             ViewStateHolder.put(ViewStateKeys.連絡先情報, data);
-            dateSoruce.remove(div.getDgRenrakusakiIchiran().getActiveRow());
-            div.getDgRenrakusakiIchiran().setDataSource(dateSoruce);
+
         }
         return ResponseData.of(div).respond();
     }
@@ -193,8 +197,12 @@ public class NinteiShinseiRenrakusakiJoho {
      */
     public ResponseData<NinteiShinseiRenrakusakiJohoDiv> onClick_btnKakutei(NinteiShinseiRenrakusakiJohoDiv div) {
         NinteiShinseiBusinessCollection collection = new NinteiShinseiBusinessCollection();
-        collection.setDbdBusiness(getHandler(div).setBusiness(ViewStateHolder
-                .get(ViewStateKeys.連絡先情報, NinteiShinseiBusinessCollection.class).getDbdBusiness()));
+        NinteiShinseiBusinessCollection dataPass = ViewStateHolder.get(ViewStateKeys.連絡先情報, NinteiShinseiBusinessCollection.class);
+        if (dataPass != null) {
+            collection.setDbdBusiness(getHandler(div).setBusiness(dataPass.getDbdBusiness()));
+        } else {
+            collection.setDbdBusiness(getHandler(div).setBusiness(new ArrayList<RenrakusakiJoho>()));
+        }
         div.setNinteiShinseiBusinessCollection(DataPassingConverter.serialize(collection));
         return ResponseData.of(div).dialogOKClose();
     }
