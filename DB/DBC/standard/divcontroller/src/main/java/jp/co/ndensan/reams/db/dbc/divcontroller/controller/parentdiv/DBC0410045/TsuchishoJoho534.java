@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410045;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kogakukyufuketteiin.KogakuKyufuKetteiInBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.kokuhorenkyoutsu.KokuhorenKyoutsuBatchParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410045.DBC0410045TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410045.TsuchishoJoho534Div;
@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -61,23 +62,17 @@ public class TsuchishoJoho534 {
      * @param div TsuchishoJoho534Div
      * @return ResponseData
      */
-    public ResponseData<KogakuKyufuKetteiInBatchParameter> onClick_btnExcute(TsuchishoJoho534Div div) {
+    public ResponseData<KokuhorenKyoutsuBatchParameter> onClick_btnExcute(TsuchishoJoho534Div div) {
         if (setBatchParameter(div) != null) {
             return ResponseData.of(setBatchParameter(div)).respond();
         }
-        return ResponseData.of(new KogakuKyufuKetteiInBatchParameter()).respond();
+        return ResponseData.of(new KokuhorenKyoutsuBatchParameter()).respond();
     }
 
-    /**
-     * 「実行する」ボタン事件のメソッドです。
-     *
-     * @param div TsuchishoJoho534Div
-     * @return KogakuKyufuKetteiInBatchParameter
-     */
-    public KogakuKyufuKetteiInBatchParameter setBatchParameter(TsuchishoJoho534Div div) {
+    private KokuhorenKyoutsuBatchParameter setBatchParameter(TsuchishoJoho534Div div) {
         //TODO QA993
         if (div.getCcdKokurenJohoTorikomi().get出力順ID() != null) {
-            long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
+            Long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
             IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
             IOutputOrder iOutputOrder = finder.get出力順(
                     SubGyomuCode.DBC介護給付,
@@ -87,7 +82,7 @@ public class TsuchishoJoho534 {
                 IChohyoShutsuryokujunManager manager = new _ChohyoShutsuryokujunManager();
                 manager.save前回出力順(iOutputOrder);
             }
-            KogakuKyufuKetteiInBatchParameter parameter = new KogakuKyufuKetteiInBatchParameter();
+            KokuhorenKyoutsuBatchParameter parameter = new KokuhorenKyoutsuBatchParameter();
             RDate 処理年月 = div.getCcdKokurenJohoTorikomi().get処理年月();
             SaiShoriKubun 再処理区分 = null;
             if (SaiShoriKubun.再処理.get名称().equals(div.getCcdKokurenJohoTorikomi().get再処理区分())) {
@@ -97,7 +92,7 @@ public class TsuchishoJoho534 {
             }
             parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toDateString()));
             parameter.setSaishoriKubun(再処理区分);
-            parameter.setShutsuryokujunId(出力順ID);
+            parameter.setShutsuryokujunId(new RString(出力順ID.toString()));
             return parameter;
         }
         return null;
