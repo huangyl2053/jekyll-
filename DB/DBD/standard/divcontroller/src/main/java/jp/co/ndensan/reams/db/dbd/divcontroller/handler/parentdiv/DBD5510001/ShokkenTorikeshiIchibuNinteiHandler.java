@@ -85,6 +85,7 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
     private static final int ONE = 1;
     private static final RString 認定区分_却 = new RString("却");
     private static final RString 認定区分_喪 = new RString("喪");
+    private static final RString 渡された認定区分_却下 = new RString("却");
 
     /**
      * コンストラクタです。
@@ -190,19 +191,19 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
     }
 
     /**
-     * 「今回認定値」ダイアログ或は「前回認定値」ダイアログOPENボタン押した後のメソッドです。
+     * 「今回認定値」ダイアログOPENボタン押した後のメソッドです。
      *
      * @param 認定情報 認定情報
      * @param menuId メニューID
+     * @param is今回 今回情報かどうか
      * @return 結果詳細情報画面のパラメータ
      */
-    public KekkaShosaiJohoModel getKekkaShosaiJohoModel(ShokkenTorikeshiNinteiJohoKonkaiBusiness 認定情報, RString menuId) {
+    public KekkaShosaiJohoModel getKekkaShosaiJohoModel(ShokkenTorikeshiNinteiJohoKonkaiBusiness 認定情報, RString menuId, boolean is今回) {
 
+        KekkaShosaiJohoOutModel outModel = DataPassingConverter.deserialize(div.getHdnKekkaShosaiJohoOutModel(), KekkaShosaiJohoOutModel.class);
+        KekkaShosaiJohoModel model = new KekkaShosaiJohoModel();
         NinteiInputDataPassModel passModel = new NinteiInputDataPassModel();
         passModel.setSubGyomuCode(SubGyomuCode.DBD介護受給.value());
-        passModel.set認定区分(new RString("1"));
-        passModel.setみなし更新認定(new ArrayList<RString>());
-        KekkaShosaiJohoModel model = new KekkaShosaiJohoModel();
         if (メニュID_職権修正.equals(menuId)) {
             model.setMode(new RString(KekkaShosaiJohoDiv.ShoriType.SoshitsuMode.toString()));
         } else if (メニュID_職権取消一部喪失.equals(menuId)) {
@@ -210,33 +211,68 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
         } else {
             model.setMode(new RString(KekkaShosaiJohoDiv.ShoriType.InputMode.toString()));
         }
-        if (認定情報 == null) {
-            passModel.set申請書管理番号(ShinseishoKanriNo.EMPTY);
+        if (!is今回 || (is今回 && outModel == null)) {
+            passModel.set認定区分(new RString("1"));
+            passModel.setみなし更新認定(new ArrayList<RString>());
+            if (認定情報 == null) {
+                passModel.set申請書管理番号(ShinseishoKanriNo.EMPTY);
+                model.setDataPassModel(passModel);
+                return model;
+            }
+            DbT4101NinteiShinseiJoho 要介護認定申請情報 = 認定情報.get要介護認定申請情報();
+            passModel.set申請書管理番号(要介護認定申請情報.get申請書管理番号());
+            JukyushaDaicho 受給者台帳 = 認定情報.get受給者台帳();
+            passModel.set厚労省IFコード(convertCodeToRString(要介護認定申請情報.get厚労省IF識別コード()));
+            passModel.set有効開始年月日(受給者台帳.get認定有効期間開始年月日());
+            passModel.set有効終了年月日(受給者台帳.get認定有効期間終了年月日());
+            passModel.set要介護度コード(受給者台帳.get要介護認定状態区分コード().getKey());
+            passModel.set要介護度名称(get要介護度名(要介護認定申請情報.get厚労省IF識別コード(), 受給者台帳.get要介護認定状態区分コード().value()));
+            passModel.set審査会意見(認定情報.get要介護認定結果情報().get介護認定審査会意見());
+            passModel.set認定年月日(受給者台帳.get認定年月日());
             model.setDataPassModel(passModel);
-            return model;
+            model.setIdoJiyuCode(convertCodeToRString(受給者台帳.getデータ区分()));
+            model.setJukyuShikakuHakkoDay1(受給者台帳.get受給資格証明書発行年月日１());
+            model.setJukyuShikakuHakkoDay2(受給者台帳.get受給資格証明書発行年月日２());
+            model.setRiyu(受給者台帳.get異動理由());
+            model.setSakujoJiyuCode(convertCodeToRString(受給者台帳.get削除事由コード()));
+            model.setShinseiKubunLaw(convertCodeToRString(要介護認定申請情報.get認定申請区分_法令_コード()));
+            model.setShinseiKubunShinsei(convertCodeToRString(要介護認定申請情報.get認定申請区分_申請時_コード()));
+            model.setSoshitsuDay(受給者台帳.get喪失年月日());
+            model.setTorisageDay(要介護認定申請情報.get取下年月日());
+            model.setToshoNinteiKikanFrom(受給者台帳.get当初認定有効開始年月日());
+            model.setToshoNinteiKikanTo(受給者台帳.get当初認定有効終了年月日());
+        } else {
+            NinteiInputNaiyo 認定内容 = outModel.get認定内容();
+            passModel.set認定区分(認定内容.get認定区分());
+            passModel.setみなし更新認定(認定内容.getみなし更新認定());
+            passModel.set有効開始年月日(認定内容.get有効開始年月日());
+            passModel.set有効終了年月日(認定内容.get有効終了年月日());
+            passModel.set要介護度コード(認定内容.get要介護度コード());
+            passModel.set要介護度名称(認定内容.get要介護度名称());
+            passModel.set審査会意見(認定内容.get審査会意見());
+            passModel.set認定年月日(認定内容.get認定年月日());
+            if (認定情報 == null) {
+                passModel.set申請書管理番号(ShinseishoKanriNo.EMPTY);
+                model.setDataPassModel(passModel);
+                return model;
+            }
+            DbT4101NinteiShinseiJoho 要介護認定申請情報 = 認定情報.get要介護認定申請情報();
+            passModel.set申請書管理番号(要介護認定申請情報.get申請書管理番号());
+            JukyushaDaicho 受給者台帳 = 認定情報.get受給者台帳();
+            passModel.set厚労省IFコード(convertCodeToRString(要介護認定申請情報.get厚労省IF識別コード()));
+            model.setDataPassModel(passModel);
+            model.setIdoJiyuCode(convertCodeToRString(受給者台帳.getデータ区分()));
+            model.setJukyuShikakuHakkoDay1(受給者台帳.get受給資格証明書発行年月日１());
+            model.setJukyuShikakuHakkoDay2(受給者台帳.get受給資格証明書発行年月日２());
+            model.setRiyu(受給者台帳.get異動理由());
+            model.setSakujoJiyuCode(convertCodeToRString(受給者台帳.get削除事由コード()));
+            model.setShinseiKubunLaw(convertCodeToRString(要介護認定申請情報.get認定申請区分_法令_コード()));
+            model.setShinseiKubunShinsei(convertCodeToRString(要介護認定申請情報.get認定申請区分_申請時_コード()));
+            model.setSoshitsuDay(受給者台帳.get喪失年月日());
+            model.setTorisageDay(要介護認定申請情報.get取下年月日());
+            model.setToshoNinteiKikanFrom(受給者台帳.get当初認定有効開始年月日());
+            model.setToshoNinteiKikanTo(受給者台帳.get当初認定有効終了年月日());
         }
-        DbT4101NinteiShinseiJoho 要介護認定申請情報 = 認定情報.get要介護認定申請情報();
-        passModel.set申請書管理番号(要介護認定申請情報.get申請書管理番号());
-        JukyushaDaicho 受給者台帳 = 認定情報.get受給者台帳();
-        passModel.set厚労省IFコード(convertCodeToRString(要介護認定申請情報.get厚労省IF識別コード()));
-        passModel.set有効開始年月日(受給者台帳.get認定有効期間開始年月日());
-        passModel.set有効終了年月日(受給者台帳.get認定有効期間終了年月日());
-        passModel.set要介護度コード(受給者台帳.get要介護認定状態区分コード().getKey());
-        passModel.set要介護度名称(get要介護度名(要介護認定申請情報.get厚労省IF識別コード(), 受給者台帳.get要介護認定状態区分コード().value()));
-        passModel.set審査会意見(認定情報.get要介護認定結果情報().get介護認定審査会意見());
-        passModel.set認定年月日(受給者台帳.get認定年月日());
-        model.setDataPassModel(passModel);
-        model.setIdoJiyuCode(convertCodeToRString(受給者台帳.getデータ区分()));
-        model.setJukyuShikakuHakkoDay1(受給者台帳.get受給資格証明書発行年月日１());
-        model.setJukyuShikakuHakkoDay2(受給者台帳.get受給資格証明書発行年月日２());
-        model.setRiyu(受給者台帳.get異動理由());
-        model.setSakujoJiyuCode(convertCodeToRString(受給者台帳.get削除事由コード()));
-        model.setShinseiKubunLaw(convertCodeToRString(要介護認定申請情報.get認定申請区分_法令_コード()));
-        model.setShinseiKubunShinsei(convertCodeToRString(要介護認定申請情報.get認定申請区分_申請時_コード()));
-        model.setSoshitsuDay(受給者台帳.get喪失年月日());
-        model.setTorisageDay(要介護認定申請情報.get取下年月日());
-        model.setToshoNinteiKikanFrom(受給者台帳.get当初認定有効開始年月日());
-        model.setToshoNinteiKikanTo(受給者台帳.get当初認定有効終了年月日());
         return model;
     }
 
@@ -253,7 +289,11 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
         }
         NinteiInputNaiyo 認定内容 = model.get認定内容();
         div.setHdnYokaigodoCodeKonkai(認定内容.get要介護度コード());
-        div.getTxtYokaigodoKonkai().setValue(認定内容.get要介護度名称());
+        if (!RString.isNullOrEmpty(認定内容.get要介護度コード())) {
+            div.getTxtYokaigodoKonkai().setValue(認定内容.get要介護度名称());
+        } else {
+            div.getTxtYokaigodoKonkai().setValue(RString.EMPTY);
+        }
         div.getTxtYukoKaishibiKonkai().setValue(認定内容.get有効開始年月日());
         div.getTxtYukoShuryobiKonkai().setValue(認定内容.get有効終了年月日());
         div.getTxtNinteibiKonkai().setValue(認定内容.get認定年月日());
@@ -272,7 +312,7 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
         div.getTxtShinsakaiIkenKonkai().setValue(認定内容.get審査会意見());
 
         if (メニュID_区分変更認定.equals(menuId) || メニュID_サービス変更認定.equals(menuId) || メニュID_認定データ更新.equals(menuId)) {
-            if (new RString("03").equals(model.get異動事由コード()) || new RString("05").equals(model.get異動事由コード())) {
+            if (渡された認定区分_却下.equals(model.get認定内容().get認定区分())) {
                 div.getTxtKubunKonkai().setValue(認定区分_却);
             } else {
                 div.getTxtKubunKonkai().setValue(RString.EMPTY);
@@ -282,37 +322,6 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
         } else {
             div.getTxtKubunKonkai().setValue(RString.EMPTY);
         }
-    }
-
-    /**
-     * 「前回認定値」ダイアログのOKボタンを押した後のメソッドです。
-     *
-     * @param model 結果詳細情報画面の出力パラメータ
-     */
-    public void setZenkaiNinteichi(KekkaShosaiJohoOutModel model) {
-
-        if (model == null) {
-            return;
-        }
-        NinteiInputNaiyo 認定内容 = model.get認定内容();
-        div.setHdnYokaigodoCodeZenkai(認定内容.get要介護度コード());
-        div.getTxtYokaigodoZenkai().setValue(認定内容.get要介護度名称());
-        div.getTxtYukoKaishibiZenkai().setValue(認定内容.get有効開始年月日());
-        div.getTxtYukoShuryobiZenkai().setValue(認定内容.get有効終了年月日());
-        div.getTxtNinteibiZenkai().setValue(認定内容.get認定年月日());
-        RString サービス種類 = RString.EMPTY;
-        List<KekkaShosaiJohoServiceShuri> サービス類リスト = model.getサービス類リスト();
-        if (サービス類リスト != null && !サービス類リスト.isEmpty()) {
-            for (int i = 0; i < サービス類リスト.size(); i++) {
-                if (i == 0) {
-                    サービス種類 = サービス類リスト.get(i).getServiceShuriCode();
-                } else {
-                    サービス種類 = サービス種類.concat(符号).concat(サービス類リスト.get(i).getServiceShuriCode());
-                }
-            }
-        }
-        div.getTxtServiceShuruiZenkai().setValue(サービス種類);
-        div.getTxtShinsakaiIkenZenkai().setValue(認定内容.get審査会意見());
     }
 
     /**
