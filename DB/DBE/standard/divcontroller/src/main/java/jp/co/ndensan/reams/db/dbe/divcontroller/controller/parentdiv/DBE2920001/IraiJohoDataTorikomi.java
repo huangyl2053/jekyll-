@@ -202,8 +202,8 @@ public class IraiJohoDataTorikomi {
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+        if ((new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) || ResponseHolder.isWarningIgnoredRequest()) {
             ValidationMessageControlPairs validationMessages = getValidationHandler(div).申請日のチェック();
             if (validationMessages.iterator().hasNext() && !ResponseHolder.isWarningIgnoredRequest()) {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
