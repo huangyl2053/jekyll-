@@ -452,7 +452,7 @@ public class JissiJyokyohyoHakkouProcess2 extends BatchProcessBase<JissiJyokyohy
                 年齢,
                 地区,
                 集計単位,
-                parameter.get対象年度().getYear(),
+                parameter.get対象年度(),
                 実施状況Entity.get実施状況リスト());
         report.writeBy(reportSourceWriter);
         outputJokenhyoFactory();

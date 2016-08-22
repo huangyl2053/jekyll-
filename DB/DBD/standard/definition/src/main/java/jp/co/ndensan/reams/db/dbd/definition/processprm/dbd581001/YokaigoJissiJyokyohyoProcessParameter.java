@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd581001.YokaigoJissiJy
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,7 +41,7 @@ public class YokaigoJissiJyokyohyoProcessParameter implements IBatchProcessParam
     private RString 集計単位;
     private RString psmShikibetsuTaisho;
     private RString 基準日;
-    private FlexibleDate 対象年度;
+    private FlexibleYear 対象年度;
 
     /**
      * コンストラクタです。
@@ -74,7 +75,7 @@ public class YokaigoJissiJyokyohyoProcessParameter implements IBatchProcessParam
             Code 終了地区コード,
             RString 集計単位,
             RString 基準日,
-            FlexibleDate 対象年度) {
+            FlexibleYear 対象年度) {
         this.出力帳票 = 出力帳票;
         this.対象年月日From = 対象年月日From;
         this.対象年月日To = 対象年月日To;
