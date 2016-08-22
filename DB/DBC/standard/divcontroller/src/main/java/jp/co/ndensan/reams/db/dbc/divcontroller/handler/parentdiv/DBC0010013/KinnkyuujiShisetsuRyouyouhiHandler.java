@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKinkyuShisetsu
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010013.KinnkyuujiShisetsuRyouyouhiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010013.dgKinkyujiShisetsuRyoyohi_Row;
-import jp.co.ndensan.reams.db.dbc.service.core.kyufujisseki.KyufuJissekiManager;
 import jp.co.ndensan.reams.db.dbx.business.util.DateConverter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
@@ -64,10 +63,8 @@ public class KinnkyuujiShisetsuRyouyouhiHandler {
      *
      */
     public void setDataGrid() {
-        List<KyufujissekiKinkyuShisetsuRyoyo> 給付実績緊急時施設療養データ取得 = KyufuJissekiManager.createInstance().
-                get給付実績情報照会();
         List<dgKinkyujiShisetsuRyoyohi_Row> rowList = new ArrayList<>();
-        // List<KyufujissekiKinkyuShisetsuRyoyo> 給付実績緊急時施設療養データ取得 = new ArrayList<>();
+        List<KyufujissekiKinkyuShisetsuRyoyo> 給付実績緊急時施設療養データ取得 = new ArrayList<>();
         int size = 給付実績緊急時施設療養データ取得.size();
         for (int index = 0; index < size; index++) {
             rowList.add(getデータ(index, 給付実績緊急時施設療養データ取得));
