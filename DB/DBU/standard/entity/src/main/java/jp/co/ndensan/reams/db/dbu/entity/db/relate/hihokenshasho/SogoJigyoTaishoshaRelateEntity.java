@@ -30,6 +30,6 @@ public class SogoJigyoTaishoshaRelateEntity implements IDbAccessable {
     private FlexibleDate チェックリスト実施日;
     private FlexibleDate 認定年月日;
     private RString 対象区分;
-    private RString 適用開始日;
-    private RString 適用終了日;
+    private FlexibleDate 適用開始日;
+    private FlexibleDate 適用終了日;
 }
