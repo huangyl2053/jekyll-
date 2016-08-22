@@ -294,6 +294,57 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
     }
 
     /**
+     * 受給者異動送付を全件返します。
+     *
+     * @param 被保険者番号 hiHokenshaNo
+     * @param 異動年月日 idoYMD
+     * @param 履歴番号 int
+     * @param 論理削除フラグ boolean
+     * @return DbT3001JukyushaIdoRenrakuhyoEntity
+     */
+    @Transaction
+    public DbT3001JukyushaIdoRenrakuhyoEntity selectAllByKey(
+            HihokenshaNo 被保険者番号,
+            FlexibleDate 異動年月日,
+            int 履歴番号,
+            boolean 論理削除フラグ) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険番号.toString()));
+        requireNonNull(異動年月日, UrSystemErrorMessages.値がnull.getReplacedMessage(異動日.toString()));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(履歴号.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3001JukyushaIdoRenrakuhyo.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(idoYMD, 異動年月日),
+                                eq(rirekiNo, 履歴番号),
+                                eq(logicalDeletedFlag, 論理削除フラグ))).
+                toObject(DbT3001JukyushaIdoRenrakuhyoEntity.class);
+    }
+
+    /**
+     * 受給者異動送付を全件返します。
+     *
+     * @param 被保険者番号 hiHokenshaNo
+     * @param 異動年月日 idoYMD
+     * @return List<DbT3001JukyushaIdoRenrakuhyoEntity>
+     */
+    @Transaction
+    public DbT3001JukyushaIdoRenrakuhyoEntity select受給者訂正情報を取得(RString 被保険者番号, RString 異動年月日) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(異動年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3001JukyushaIdoRenrakuhyo.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(idoYMD, 異動年月日))).
+                order(by(DbT3001JukyushaIdoRenrakuhyo.rirekiNo, Order.DESC)).
+                limit(1).
+                toObject(DbT3001JukyushaIdoRenrakuhyoEntity.class);
+    }
+
+    /**
      * DbT3001JukyushaIdoRenrakuhyoEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
      * @param entity entity
