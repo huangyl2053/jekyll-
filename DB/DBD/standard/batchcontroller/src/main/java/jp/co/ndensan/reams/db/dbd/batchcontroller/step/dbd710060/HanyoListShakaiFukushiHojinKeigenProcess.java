@@ -104,6 +104,7 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
     private static final RString HOKENSHA = new RString("保険者：");
     private static final RString NENDO = new RString("年度：");
     private static final RString KIZYUNNICHI = new RString("基準日：");
+    private static final RString NENLEIKIZYUNNICHI = new RString("年齢基準日:");
     private static final RString 直近のみ = new RString("対象データ：直近のみ");
     private static final RString 申請者のみ = new RString("対象データ：申請者のみ");
     private static final RString 利用者負担段階 = new RString("利用者負担段階：");
@@ -175,6 +176,7 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
     private static final RString SPACE = new RString(" ");
     private static final RString POINT = new RString("・");
     private static final RString COLON = new RString(":");
+    private static final RString COMMA = new RString(",");
     private static final RString カラ = new RString("～");
     private static final RString 左記号 = new RString("(");
     private static final RString 右記号 = new RString(")");
@@ -647,7 +649,7 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
     }
 
     private void setEucCsvEntity2(ShakaiFukushiHojinKeigenEucCsvEntity eucCsvEntity, ShakaiFukushiHojinKeigenEntity entity) {
-        eucCsvEntity.set意見依頼日(set年月日(entity.get今回意見書作成依頼_主治医意見書作成依頼年月日()));
+        eucCsvEntity.set意見依頼日(set年月日(entity.get今回意見書作成依頼_主治医意見書作成依頼()));
         eucCsvEntity.set意見予定日(set年月日(entity.get今回計画情報_主治医意見書登録予定年月日()));
         eucCsvEntity.set意見取寄日(set年月日(entity.get今回意見書情報_主治医意見書受領年月日()));
         eucCsvEntity.set資料作成日(set年月日(entity.get今回結果情報_介護認定審査会資料作成年月日()));
@@ -657,7 +659,7 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
         eucCsvEntity.set認定終了日(set年月日(entity.get受給者台帳_認定有効期間終了年月日()));
         eucCsvEntity.set認定日(set年月日(entity.get受給者台帳_認定年月日()));
         eucCsvEntity.set旧措置(entity.is受給者台帳_旧措置者フラグ() ? 旧措置者 : RString.EMPTY);
-        eucCsvEntity.setみなし更新認定(setみなし更新認定(entity.get受給者台帳_みなし要介護区分コード()));
+//        eucCsvEntity.setみなし更新認定(setみなし更新認定(entity.get受給者台帳_みなし要介護区分コード()));
         eucCsvEntity.set審査会意見(entity.get今回結果情報_介護認定審査会意見());
         RStringBuilder サービス種類 = new RStringBuilder();
         サービス種類.append(entity.get受給者台帳_指定サービス種類01())
@@ -714,8 +716,8 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
         eucCsvEntity.set前々回当初認定有効開始日(set年月日(entity.get前々回受給情報_当初認定有効開始年月日()));
         eucCsvEntity.set前々回当初認定有効終了日(set年月日(entity.get前々回受給情報_当初認定有効終了年月日()));
         eucCsvEntity.set前々回支援申請事由(set申請区分(entity.get前々回受給情報_要支援者認定申請区分()));
-        eucCsvEntity.set障害高齢者自立度(set障害高齢者自立度(entity.get今回調査結果_基本_認定調査_障害高齢者の日常生活自立度コード()));
-        eucCsvEntity.set認知症高齢者自立度(set認知症高齢者自立度(entity.get今回調査結果_基本_認定調査_認知症高齢者の日常生活自立度コード()));
+        eucCsvEntity.set障害高齢者自立度(set障害高齢者自立度(entity.get今回調査結果_基本障害高齢者自立度コード()));
+        eucCsvEntity.set認知症高齢者自立度(set認知症高齢者自立度(entity.get今回調査結果_基本認知症高齢者自立度コード()));
         eucCsvEntity.set訪問支給限度額単位数(entity.get受給者台帳_支給限度単位数());
         eucCsvEntity.set訪問支給限度有効開始年月日(set年月日(entity.get受給者台帳_支給限度有効開始年月日()));
         eucCsvEntity.set訪問支給限度有効終了年月日(set年月日(entity.get受給者台帳_支給限度有効終了年月日()));
@@ -747,7 +749,8 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
         eucCsvEntity.set社会福祉法人軽減承認区分(entity.get社会福祉法人等利用者負担軽減_決定区分().equals(区分_0) ? 却下 : 承認);
         eucCsvEntity.set社会福祉法人軽減開始日(set年月日(entity.get社会福祉法人等利用者負担軽減_適用開始年月日()));
         eucCsvEntity.set社会福祉法人軽減終了日(set年月日(entity.get社会福祉法人等利用者負担軽減_適用終了年月日()));
-        eucCsvEntity.set社会福祉法人軽減率(entity.get社会福祉法人等利用者負担軽減_軽減率_分子().concat("/")
+        eucCsvEntity.set社会福祉法人軽減率(entity.get社会福祉法人等利用者負担軽減_軽減率_分子() == null
+                ? RString.EMPTY : entity.get社会福祉法人等利用者負担軽減_軽減率_分子().concat("/")
                 .concat(entity.get社会福祉法人等利用者負担軽減_軽減率_分母()));
         eucCsvEntity.set社会福祉法人軽減事由(entity.get社会福祉法人等利用者負担軽減_減免区分());
         eucCsvEntity.set居宅サービス区分(entity.is社会福祉法人等利用者負担軽減_居宅サービス限定() ? 居宅サービス限定 : RString.EMPTY);
@@ -1081,17 +1084,17 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
             IAssociationFinder finder = AssociationFinderFactory.createInstance();
             Association 地方公共団体 = finder.getAssociation(processParamter.getAtenacyusyutsujyoken().getShichoson_Code());
             builder.append(地方公共団体.get市町村名());
-            出力条件.add(builder.toRString());
+            builder.append(COMMA);
         }
         if (null != processParamter.getNendo()) {
             builder.append(NENDO);
             builder.append(processParamter.getNendo().wareki().toDateString());
-            出力条件.add(builder.toRString());
+            builder.append(COMMA);
         }
         if (null != processParamter.getKizyunnichi()) {
             builder.append(KIZYUNNICHI);
             builder.append(processParamter.getKizyunnichi().wareki().toDateString());
-            出力条件.add(builder.toRString());
+            builder.append(COMMA);
         }
         builder.append(ChushutsuHohoKubun.toValue(processParamter.getCyusyutsuhohokubun()));
         builder.append(SPACE);
@@ -1106,37 +1109,36 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
             builder.append(SPACE);
             builder.append(processParamter.getHitsukehanito().wareki().toDateString());
         }
-        出力条件.add(builder.toRString());
+        builder.append(COMMA);
+        if (!builder.toRString().isNullOrEmpty()) {
+            List<RString> builderList = builder.toRString().substring(0, builder.toRString().length() - 1).split(COMMA.toString());
+            for (RString build : builderList) {
+                出力条件.add(build);
+            }
+            builder = new RStringBuilder();
+        }
         if (null != processParamter.getAtenacyusyutsujyoken()
                 && null != processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun()) {
             出力条件.add(get宛名抽出区分情報());
         }
         if (null != processParamter.getAtenacyusyutsujyoken()
                 && null != processParamter.getAtenacyusyutsujyoken().getChiku_Kubun()) {
-            出力条件.add(get地区選択区分情報());
+            RString get地区区分情報 = get地区選択区分情報();
+            if (!get地区区分情報.isNullOrEmpty()) {
+                List<RString> 地区区分情報 = get地区区分情報.substring(0, get地区区分情報.length() - 1).split(COMMA.toString());
+                for (RString 情報 : 地区区分情報) {
+                    出力条件.add(情報);
+                }
+            }
         }
-        出力条件.add(get対象データ());
-        if (!RString.isNullOrEmpty(processParamter.getKyakasha())) {
-            builder.append(旧措置者);
-            builder.append(COLON);
-            builder.append(Kyakasha.toValue(processParamter.getKyakasha()).get名称());
-            出力条件.add(builder.toRString());
+        if (!get対象データ().isNullOrEmpty()) {
+            出力条件.add(get対象データ());
         }
-        if (!RString.isNullOrEmpty(processParamter.getHobetsukubun())) {
-            builder.append(法別区分);
-            builder.append(HobetsuKubun.toValue(processParamter.getHobetsukubun()).get名称());
-            出力条件.add(builder.toRString());
-        }
-        if (!RString.isNullOrEmpty(processParamter.getKyakasha())) {
-            builder.append(却下者);
-            builder.append(Kyakasha.toValue(processParamter.getKyakasha()).get名称());
-            出力条件.add(builder.toRString());
-        }
-        if (!RString.isNullOrEmpty(processParamter.getSoshitsukubun())
-                && !SoshitsuKubun.資格判定なし.getコード().equals(processParamter.getSoshitsukubun())) {
-            builder.append(喪失区分);
-            builder.append(SoshitsuKubun.toValue(processParamter.getKyakasha()).get名称());
-            出力条件.add(builder.toRString());
+        if (!get特定対象データ(builder).isNullOrEmpty()) {
+            List<RString> builderList = get特定対象データ(builder).substring(0, get特定対象データ(builder).length() - 1).split(COMMA.toString());
+            for (RString build : builderList) {
+                出力条件.add(build);
+            }
         }
         出力条件.add(get旧措置者());
         出力条件.add(get利用者負担段階());
@@ -1157,20 +1159,28 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
 
     private RString get宛名抽出区分情報() {
         RStringBuilder builder = new RStringBuilder();
-        if (NenreiSoChushutsuHoho.年齢範囲.equals(processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun())) {
+        if (NenreiSoChushutsuHoho.年齢範囲.equals(processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun())
+                && processParamter.getAtenacyusyutsujyoken().getNenreiKijunbi() != null) {
             builder.append(NENLEI);
             builder.append(COLON);
-            if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom()) {
+            if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange()
+                    && null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom()) {
                 builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom().toString()));
                 builder.append(SAI);
             }
             builder.append(SPACE);
             builder.append(カラ);
-            if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo()) {
+            if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange()
+                    && null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo()) {
                 builder.append(SPACE);
                 builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo().toString()));
                 builder.append(SAI);
             }
+            builder.append(SPACE);
+            builder.append(左記号);
+            builder.append(NENLEIKIZYUNNICHI);
+            builder.append(processParamter.getAtenacyusyutsujyoken().getNenreiKijunbi().wareki().toDateString());
+            builder.append(右記号);
         } else if (NenreiSoChushutsuHoho.生年月日範囲.equals(processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun())) {
             builder.append(SEINENGAPPI);
             builder.append(COLON);
@@ -1198,6 +1208,7 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
                         processParamter.getAtenacyusyutsujyoken().getChiku1_FromMesho(),
                         processParamter.getAtenacyusyutsujyoken().getChiku1_To(),
                         processParamter.getAtenacyusyutsujyoken().getChiku1_ToMesho()));
+                builder.append(COMMA);
             } else if (!RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getChiku2_From())
                     && RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getChiku2_To())) {
                 builder.append(CHIKI_2);
@@ -1206,6 +1217,7 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
                         processParamter.getAtenacyusyutsujyoken().getChiku2_FromMesho(),
                         RString.EMPTY,
                         RString.EMPTY));
+                builder.append(COMMA);
             } else if (RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getChiku3_From())
                     && !RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getChiku3_To())) {
                 builder.append(CHIKI_3);
@@ -1214,6 +1226,7 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
                         RString.EMPTY,
                         processParamter.getAtenacyusyutsujyoken().getChiku3_To(),
                         processParamter.getAtenacyusyutsujyoken().getChiku3_ToMesho()));
+                builder.append(COMMA);
             }
         } else if (Chiku.行政区.equals(processParamter.getAtenacyusyutsujyoken().getChiku_Kubun())) {
             builder.append(GYOSEIKU);
@@ -1222,6 +1235,7 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
                     processParamter.getAtenacyusyutsujyoken().getGyoseiku_FromMesho(),
                     processParamter.getAtenacyusyutsujyoken().getGyoseiku_To(),
                     processParamter.getAtenacyusyutsujyoken().getGyoseiku_ToMesho()));
+            builder.append(COMMA);
         } else if (Chiku.住所.equals(processParamter.getAtenacyusyutsujyoken().getChiku_Kubun())) {
             builder.append(JUSYO);
             builder.append(COLON);
@@ -1229,22 +1243,48 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
                     processParamter.getAtenacyusyutsujyoken().getJusho_FromMesho(),
                     processParamter.getAtenacyusyutsujyoken().getJusho_To(),
                     processParamter.getAtenacyusyutsujyoken().getJusho_ToMesho()));
+            builder.append(COMMA);
         }
         return builder.toRString();
     }
 
     private RString get対象データ() {
         RStringBuilder builder = new RStringBuilder();
-        if (processParamter.isNendochokindatacyusyutsu() || processParamter.isChokindatacyusyutsu()
-                || processParamter.isJigyotaisyoshadatacyushutsu()) {
+        if (processParamter.isChokindatacyusyutsu()) {
             if (processParamter.isShinseishadatacyushutsu()) {
                 builder.append(直近_申請者のみ);
             } else {
                 builder.append(直近のみ);
             }
-        } else if (!processParamter.isNendochokindatacyusyutsu() && !processParamter.isChokindatacyusyutsu()
-                && !processParamter.isJigyotaisyoshadatacyushutsu()) {
+        } else if (!processParamter.isChokindatacyusyutsu()
+                && processParamter.isShinseishadatacyushutsu()) {
             builder.append(申請者のみ);
+        }
+        return builder.toRString();
+    }
+
+    private RString get特定対象データ(RStringBuilder builder) {
+        if (!RString.isNullOrEmpty(processParamter.getKyakasha())) {
+            builder.append(旧措置者);
+            builder.append(COLON);
+            builder.append(Kyakasha.toValue(processParamter.getKyakasha()).get名称());
+            builder.append(COMMA);
+        }
+        if (!RString.isNullOrEmpty(processParamter.getHobetsukubun())) {
+            builder.append(法別区分);
+            builder.append(HobetsuKubun.toValue(processParamter.getHobetsukubun()).get名称());
+            builder.append(COMMA);
+        }
+        if (!RString.isNullOrEmpty(processParamter.getKyakasha())) {
+            builder.append(却下者);
+            builder.append(Kyakasha.toValue(processParamter.getKyakasha()).get名称());
+            builder.append(COMMA);
+        }
+        if (!RString.isNullOrEmpty(processParamter.getSoshitsukubun())
+                && !SoshitsuKubun.資格判定なし.getコード().equals(processParamter.getSoshitsukubun())) {
+            builder.append(喪失区分);
+            builder.append(SoshitsuKubun.toValue(processParamter.getKyakasha()).get名称());
+            builder.append(COMMA);
         }
         return builder.toRString();
     }
