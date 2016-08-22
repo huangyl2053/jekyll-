@@ -190,7 +190,6 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
             set累計レコード(suchishoTempentity, ruikeiCsvEntity, 累計);
             set審査支払手数料レコード(suchishoTempentity, tesuuyouCsvEntity, 累計);
             請求額通知書一時tableWriter.insert(suchishoTempentity);
-            controlCsvEntity = null;
             headCsvEntity = null;
             meisaiCsvEntity = null;
             gokeiCsvEntity = null;
