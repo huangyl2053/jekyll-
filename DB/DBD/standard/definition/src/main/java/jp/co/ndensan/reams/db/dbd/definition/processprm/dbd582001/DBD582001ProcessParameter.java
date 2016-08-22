@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd582001.YokaigoNinteiT
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,7 +37,7 @@ public class DBD582001ProcessParameter implements IBatchProcessParameter {
     private RString psmShikibetsuTaisho;
     private int 年齢From;
     private int 年齢To;
-    private FlexibleDate 対象年度;
+    private FlexibleYear 対象年度;
 
     /**
      * コンストラクタです。
@@ -68,7 +69,7 @@ public class DBD582001ProcessParameter implements IBatchProcessParameter {
             RString 集計単位,
             int 年齢From,
             int 年齢To,
-            FlexibleDate 対象年度) {
+            FlexibleYear 対象年度) {
         this.基準フラグ = 基準フラグ;
         this.年齢基準日 = 年齢基準日;
         this.基準年月日 = 基準年月日;

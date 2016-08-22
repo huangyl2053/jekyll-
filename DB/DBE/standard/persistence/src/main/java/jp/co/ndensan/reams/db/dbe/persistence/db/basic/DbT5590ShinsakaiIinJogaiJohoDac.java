@@ -15,7 +15,9 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -79,5 +81,23 @@ public class DbT5590ShinsakaiIinJogaiJohoDac implements ISaveable<DbT5590Shinsak
     public int save(DbT5590ShinsakaiIinJogaiJohoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("審査会委員除外情報エンティティ"));
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 申請書管理番号で審査会委員除外情報を取得します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return DbT5590ShinsakaiIinJogaiJohoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT5590ShinsakaiIinJogaiJohoEntity> selectShinsakaiIinJogaiJohoBy申請書管理番号(
+            ShinseishoKanriNo 申請書管理番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT5590ShinsakaiIinJogaiJoho.class).
+                where(eq(shinseishoKanriNo, 申請書管理番号)).
+                order(by(renban, Order.DESC)).
+                toList(DbT5590ShinsakaiIinJogaiJohoEntity.class);
     }
 }

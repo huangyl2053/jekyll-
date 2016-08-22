@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class ShoriDateKanriFinder {
 
+    private static final RString 処理名_自己負担証明書作成_一括 = new RString("自己負担証明書作成_一括");
+    private static final RString 処理枝番_0001 = new RString("0001");
     private final DbT7022ShoriDateKanriDac dac;
 
     /**
@@ -48,8 +50,8 @@ public class ShoriDateKanriFinder {
         DbT7022ShoriDateKanriEntity entity = dac.select(
                 SubGyomuCode.DBC介護給付,
                 市町村コード,
-                new RString("自己負担証明書作成_一括"),
-                new RString("0001"));
+                処理名_自己負担証明書作成_一括,
+                処理枝番_0001);
         if (entity == null) {
             return null;
         }

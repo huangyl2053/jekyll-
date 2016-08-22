@@ -61,6 +61,7 @@ public class DBC2000022PanelAll {
     private static final RString DBCUC20022 = new RString("DBCUC20022");
     private static final RString DBCUC20023 = new RString("DBCUC20023");
     private static final RString 前排他キー = new RString("DBCHihokenshaNo");
+    private static final RString 計算結果は破棄されます = new RString("計算結果は破棄されます。");
 
     /**
      * Handlerクラスを取得する
@@ -402,10 +403,17 @@ public class DBC2000022PanelAll {
     public ResponseData<DBC2000022PanelAllDiv> onClick_btnReSearch(DBC2000022PanelAllDiv div) {
         RString 処理モード = get処理モード();
         if (DBC2000022StateName.新規.getName().equals(処理モード) && !ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(
-                    UrQuestionMessages.確認_汎用.getMessage().getCode(),
-                    UrQuestionMessages.確認_汎用.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(
+                        UrQuestionMessages.確認_汎用.getMessage().getCode(),
+                        UrQuestionMessages.確認_汎用.getMessage().replace(計算結果は破棄されます.toString()).evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                前排他キーの解除();
+                return ResponseData.of(div).forwardWithEventName(DBC2000022TransitionEventName.再検索).respond();
+            }
         }
         if (DBC2000022StateName.修正.getName().equals(処理モード)) {
             if (!データ項目変更判定()) {
@@ -435,10 +443,17 @@ public class DBC2000022PanelAll {
     public ResponseData<DBC2000022PanelAllDiv> onClick_btnSearchResult(DBC2000022PanelAllDiv div) {
         RString 処理モード = get処理モード();
         if (DBC2000022StateName.新規.getName().equals(処理モード) && !ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(
-                    UrQuestionMessages.確認_汎用.getMessage().getCode(),
-                    UrQuestionMessages.確認_汎用.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(
+                        UrQuestionMessages.確認_汎用.getMessage().getCode(),
+                        UrQuestionMessages.確認_汎用.getMessage().replace(計算結果は破棄されます.toString()).evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                前排他キーの解除();
+                return ResponseData.of(div).forwardWithEventName(DBC2000022TransitionEventName.検索結果一覧).respond();
+            }
         }
         if (DBC2000022StateName.修正.getName().equals(処理モード)) {
             if (!データ項目変更判定()) {
@@ -468,10 +483,17 @@ public class DBC2000022PanelAll {
     public ResponseData<DBC2000022PanelAllDiv> onClick_btnBack(DBC2000022PanelAllDiv div) {
         RString 処理モード = get処理モード();
         if (DBC2000022StateName.新規.getName().equals(処理モード) && !ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(
-                    UrQuestionMessages.確認_汎用.getMessage().getCode(),
-                    UrQuestionMessages.確認_汎用.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(
+                        UrQuestionMessages.確認_汎用.getMessage().getCode(),
+                        UrQuestionMessages.確認_汎用.getMessage().replace(計算結果は破棄されます.toString()).evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                前排他キーの解除();
+                return ResponseData.of(div).forwardWithEventName(DBC2000022TransitionEventName.戻る).respond();
+            }
         }
         if (DBC2000022StateName.修正.getName().equals(処理モード)) {
             if (!データ項目変更判定()) {

@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link DbT4101NinteiShinseiJoho}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBZ-9999-011 zuotao
  */
 public class DbT4101NinteiShinseiJohoBuilder {
 

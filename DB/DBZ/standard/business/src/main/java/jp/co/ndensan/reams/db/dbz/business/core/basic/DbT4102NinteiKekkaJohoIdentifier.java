@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 
 /**
  * 要介護認定結果情報の識別子です。
+ *
+ * @reamsid_L DBZ-9999-011 zuotao
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value

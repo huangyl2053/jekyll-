@@ -19,9 +19,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 要介護認定結果情報を管理するクラスです。
+ *
+ * @reamsid_L DBZ-9999-011 zuotao
  */
-public class DbT4102NinteiKekkaJoho extends ParentModelBase<DbT4102NinteiKekkaJohoIdentifier,
-        DbT4102NinteiKekkaJohoEntity, DbT4102NinteiKekkaJoho> implements Serializable {
+public class DbT4102NinteiKekkaJoho
+        extends ParentModelBase<DbT4102NinteiKekkaJohoIdentifier, DbT4102NinteiKekkaJohoEntity, DbT4102NinteiKekkaJoho>
+        implements Serializable {
 
     private static final long serialVersionUID = -1551586583413755117L;
     private final DbT4102NinteiKekkaJohoEntity entity;

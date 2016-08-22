@@ -20,6 +20,9 @@
         ${出力順}
     </select>
     <resultMap id="resultMap_KyufuhiShinsaKetteiSeikyuMeisaihyoEntity" type="jp.co.ndensan.reams.db.dbc.business.report.kyufuhishinsaketteiseikyumeisaihyo.KyufuhiShinsaKetteiSeikyuMeisaihyoEntity" autoMapping="true">
+        <id column="meisaiRirekiNo"/>
+        <id column="kogakuRirekiNo"/>
+        <id column="gokeiRirekiNo"/>
         <association property="明細テータ" resultMap="resultMap_DbWT1611SinsaKetteiSeikyuMeisai"/>
         <association property="高額テータ" resultMap="resultMap_DbWT1612SinsaKetteiSeikyuKogaku"/>
         <association property="合計テータ" resultMap="resultMap_DbWT1613SinsaKetteiSeikyuGokei"/>
@@ -42,7 +45,7 @@
     </resultMap> 
     
     <resultMap id="resultMap_DbWT1612SinsaKetteiSeikyuKogaku" type="jp.co.ndensan.reams.db.dbc.business.report.kyufuhishinsaketteiseikyumeisaihyo.DbWT1612SinsaKetteiSeikyuKogaku" autoMapping="true">
-         <id property="履歴番号" column="kogakuRirekiNo"/>
+        <id property="履歴番号" column="kogakuRirekiNo"/>
         <result property="高額_高額該当件数" column="kogakuGaitoKensu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="高額_高額介護サービス費" column="kogakuKaigoServicehi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="高額_公費負担額" column="kogakuKohiFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>

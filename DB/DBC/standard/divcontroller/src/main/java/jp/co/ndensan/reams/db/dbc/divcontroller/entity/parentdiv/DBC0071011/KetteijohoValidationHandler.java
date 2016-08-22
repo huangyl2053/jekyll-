@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0071011;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.taishoshakensakubusiness.TaishoshaKensakuRelateBusiness;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -39,12 +38,12 @@ public class KetteijohoValidationHandler {
      * @return バリデーション結果
      */
     public ValidationMessageControlPairs validateForKakutei() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        RString 取扱年月 = new RString("取扱年月");
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (div.getTxtToriatsukaiYM().getValue() == null) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須, 取扱年月.toString())));
+            validationMessages.add(new ValidationMessageControlPair(new KetteijohoValidationHandler.IdocheckMessages(
+                    UrErrorMessages.必須, "取扱年月"), div.getTxtToriatsukaiYM()));
         }
-        return validPairs;
+        return validationMessages;
     }
 
     /**

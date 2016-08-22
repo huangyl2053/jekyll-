@@ -21,9 +21,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 申請届出情報を管理するクラスです。
+ *
+ * @reamsid_L DBZ-9999-011 zuotao
  */
-public class DbT4120ShinseitodokedeJoho extends ParentModelBase<DbT4120ShinseitodokedeJohoIdentifier,
-        DbT4120ShinseitodokedeJohoEntity, DbT4120ShinseitodokedeJoho> implements Serializable {
+public class DbT4120ShinseitodokedeJoho
+        extends ParentModelBase<DbT4120ShinseitodokedeJohoIdentifier, DbT4120ShinseitodokedeJohoEntity, DbT4120ShinseitodokedeJoho>
+        implements Serializable {
 
     private static final long serialVersionUID = -1196816268885746094L;
     private final DbT4120ShinseitodokedeJohoEntity entity;
@@ -40,8 +43,8 @@ public class DbT4120ShinseitodokedeJoho extends ParentModelBase<DbT4120Shinseito
         this.entity = new DbT4120ShinseitodokedeJohoEntity();
         this.entity.setShinseishoKanriNo(申請書管理番号);
         this.id = new DbT4120ShinseitodokedeJohoIdentifier(
-        申請書管理番号
-                );
+                申請書管理番号
+        );
     }
 
     /**
@@ -219,6 +222,7 @@ public class DbT4120ShinseitodokedeJoho extends ParentModelBase<DbT4120Shinseito
         }
         return new DbT4120ShinseitodokedeJoho(deletedEntity, id);
     }
+
     /**
      * {@link DbT4120ShinseitodokedeJoho}のシリアライズ形式を提供します。
      *
@@ -256,5 +260,4 @@ public class DbT4120ShinseitodokedeJoho extends ParentModelBase<DbT4120Shinseito
     }
 
 //TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
-
 }

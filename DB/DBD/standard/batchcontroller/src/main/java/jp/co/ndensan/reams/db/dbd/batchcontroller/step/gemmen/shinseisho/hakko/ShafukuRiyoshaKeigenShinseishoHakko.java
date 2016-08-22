@@ -68,6 +68,7 @@ public class ShafukuRiyoshaKeigenShinseishoHakko extends BatchProcessBase<Riyosh
             + "IRiyoshaFutangakuGemmenShinseishoHakkoMapper.get出力対象者情報");
     private ShinseishoHakkoProcessParameter processParamter;
     private static final ReportId ID = new ReportId("DBD800006_ShafukuRiyoshaFutangakuKeigentaishoShinseisho");
+    private static final int STARTINDEX = 9;
     private RString 導入団体コード;
     private RString 市町村名;
     @BatchWriter
@@ -87,6 +88,7 @@ public class ShafukuRiyoshaKeigenShinseishoHakko extends BatchProcessBase<Riyosh
         導入団体コード = association.getLasdecCode_().value();
         市町村名 = association.get市町村名();
         通知書定型文 = new ArrayList();
+        出力順 = RString.EMPTY;
         TsuchishoTeikeibunManager manager = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = manager.get通知書定型文項目(SubGyomuCode.DBD介護受給, processParamter.get帳票ID(), KamokuCode.EMPTY, 1);
         ITextHenkanRule textHenkanRule = KaigoTextHenkanRuleCreator.createRule(SubGyomuCode.DBD介護受給, processParamter.get帳票ID());
@@ -104,7 +106,12 @@ public class ShafukuRiyoshaKeigenShinseishoHakko extends BatchProcessBase<Riyosh
                 SubGyomuCode.DBD介護受給,
                 processParamter.get帳票ID(),
                 processParamter.get改頁出力順ID());
-        出力順 = Ddb102020MyBatisOrderByClauseCreator.create(ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoOrderKey.class, order);
+        if (order != null) {
+            出力順 = Ddb102020MyBatisOrderByClauseCreator.create(ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoOrderKey.class, order);
+            if (processParamter.is出力フラグ()) {
+                出力順 = 出力順.substring(STARTINDEX, 出力順.length());
+            }
+        }
         return new BatchDbReader(MYBATIS_SELECT_ID,
                 processParamter.toFutanGendogakuMybatisParameter(出力順));
     }

@@ -890,7 +890,7 @@ public class GenNendoHonsanteiIdouFath {
     }
 
     private RString get口座情報(KeisanjohoAtenaKozaEntity 更正後Entity) {
-        if (更正後Entity == null) {
+        if (更正後Entity == null || 更正後Entity.get口座Entity() == null) {
             return RString.EMPTY;
         }
         IKoza 口座_更正後 = new Koza(更正後Entity.get口座Entity());
@@ -900,7 +900,7 @@ public class GenNendoHonsanteiIdouFath {
         RString 口座名義人漢字 = 口座_更正後.get口座名義人漢字().value();
         RString 支店コード = 口座_更正後.get支店コード().value();
         RString 口座番号 = 口座_更正後.get口座番号();
-        RString 口座種別 = 口座_更正後.get預金種別().get預金種別略称();
+        RString 口座種別 = 口座_更正後.get預金種別() == null ? RString.EMPTY : 口座_更正後.get預金種別().get預金種別略称();
         if (ゆうちょ銀行.equals(金融機関コード.substringReturnAsPossible(0, INT_4))) {
             return 金融機関コード.substringReturnAsPossible(0, INT_4).concat(RString.HALF_SPACE)
                     .concat(通帳記号.substringReturnAsPossible(0, INT_5))
@@ -911,7 +911,7 @@ public class GenNendoHonsanteiIdouFath {
         } else {
             return 金融機関コード.substringReturnAsPossible(0, INT_4).concat(HYPHEN)
                     .concat(支店コード.substringReturnAsPossible(0, INT_3)).concat(RString.HALF_SPACE)
-                    .concat(口座種別.substringReturnAsPossible(0, INT_2)).concat(HYPHEN)
+                    .concat(口座種別.isEmpty() ? 口座種別 : 口座種別.substringReturnAsPossible(0, INT_2)).concat(HYPHEN)
                     .concat(口座番号.substringReturnAsPossible(0, INT_7)).concat(RString.HALF_SPACE)
                     .concat(口座名義人漢字);
         }

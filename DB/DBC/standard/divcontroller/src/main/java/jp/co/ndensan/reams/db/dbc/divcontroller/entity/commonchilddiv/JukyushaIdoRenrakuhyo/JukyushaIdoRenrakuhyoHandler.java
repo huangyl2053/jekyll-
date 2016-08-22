@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyoBuilder;
 import jp.co.ndensan.reams.db.dbc.business.core.jukyushaidorenrakuhyosakusei.JukyushaIdoRenrakuhyoSakuseiRelateEntity;
 import jp.co.ndensan.reams.db.dbc.business.core.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoTorokuEntity;
+import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_IdoKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_JukyushaIdoJiyu;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KeikakuSakuseiKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_NijiyoboJigyoKubunCode;
@@ -120,6 +121,10 @@ public class JukyushaIdoRenrakuhyoHandler {
             if (受給者異動情報.get訂正年月日() != null && !受給者異動情報.get訂正年月日().isEmpty()) {
                 div.getJukyushaIdoRenrakuhyoTeisei().getTxtTeiseiYMD().setValue(new RDate(受給者異動情報.get訂正年月日().toString()));
             }
+            if (受給者異動情報.get送付年月() != null) {
+                div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtSofuYM().setValue(new FlexibleDate(受給者異動情報.get送付年月().toDateString()));
+            }
+            div.getJukyushaIdoRenrakuhyoKihonJoho().getRadIdoKubun().setSelectedKey(JukyushaIF_IdoKubunCode.新規.getコード());
             return 受給者異動情報;
         }
         div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtIdoYMD().setValue(受給者異動情報.get異動年月日());
@@ -748,7 +753,8 @@ public class JukyushaIdoRenrakuhyoHandler {
 
     private void set住所地特例エリアBuilder(JukyushaIdoRenrakuhyoBuilder 受給者異動送付Builder) {
         if (!空KEY.equals(div.getJushochiTokureiPanel().getRadJushochiTokureiTaishoshaKubun().getSelectedKey())) {
-            受給者異動送付Builder.set住所地特例対象者区分コード(div.getJushochiTokureiPanel().getRadJushochiTokureiTaishoshaKubun().getSelectedKey());
+            受給者異動送付Builder.set住所地特例対象者区分コード(div.getJushochiTokureiPanel().
+                    getRadJushochiTokureiTaishoshaKubun().getSelectedKey());
         }
         if (div.getJushochiTokureiPanel().getTxtJushochiTokureiTekiyoYMD().getFromValue() != null) {
             受給者異動送付Builder.set住所地特例適用開始日(
