@@ -73,13 +73,16 @@ public class FutanGengaokuNinteiShinseishoHakkoIchiranSakusei extends BatchProce
         association = AssociationFinderFactory.createInstance().getAssociation();
         導入団体コード = association.getLasdecCode_().value();
         市町村名 = association.get市町村名();
+        出力順 = RString.EMPTY;
         order = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(
                 SubGyomuCode.DBD介護受給,
                 processParamter.get帳票ID(),
                 processParamter.get改頁出力順ID());
-        出力順 = Ddb102020MyBatisOrderByClauseCreator.create(FutangendogakuNinteiShinseishoOrderKey.class, order);
-        if (processParamter.is出力フラグ()) {
-            出力順 = 出力順.substring(STARTINDEX, 出力順.length());
+        if (order != null) {
+            出力順 = Ddb102020MyBatisOrderByClauseCreator.create(FutangendogakuNinteiShinseishoOrderKey.class, order);
+            if (processParamter.is出力フラグ()) {
+                出力順 = 出力順.substring(STARTINDEX, 出力順.length());
+            }
         }
     }
 

@@ -584,7 +584,7 @@ public class SokujiFukaKouseiMain {
 
     private KoseiZengoFuka get更正前後賦課By通知書番号(List<KoseiZengoFuka> 更正前後賦課のリスト, TsuchishoNo 通知書番号) {
         for (KoseiZengoFuka koseiZengoFuka : 更正前後賦課のリスト) {
-            if (通知書番号.getColumnValue().equals(koseiZengoFuka.get通知書番号().getColumnValue())) {
+            if (通知書番号.getColumnValue().equals(koseiZengoFuka.get更正後().get通知書番号().getColumnValue())) {
                 return koseiZengoFuka;
             }
         }

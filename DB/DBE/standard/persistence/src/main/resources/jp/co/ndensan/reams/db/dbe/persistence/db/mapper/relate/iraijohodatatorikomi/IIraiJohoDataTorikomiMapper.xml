@@ -29,9 +29,11 @@
                 ON dbT5301."shujiiIryokikanCode" = dbT5101."shujiiIryokikanCode" 
                 AND dbT5301."shujiiCode" = dbT5101."shujiiCode"
                 AND dbT5301."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"
+                AND dbT5301."koroshoIfShikibetsuCode" = dbT5101."koroshoIfShikibetsuCode"
                 AND dbT5301."ikenshoIraiRirekiNo" = (SELECT MAX(t5301."ikenshoIraiRirekiNo") AS "ikenshoIraiRirekiNo"
                                                      FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" AS t5301
                                                      WHERE t5301."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"
+                                                           AND t5301."koroshoIfShikibetsuCode" = dbT5101."koroshoIfShikibetsuCode"
                                                            AND t5301."logicalDeletedFlag" = false
                                                     )
                 AND dbT5301."logicalDeletedFlag" = false
@@ -70,7 +72,6 @@
         INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS dbT5302 
             ON dbT5302."shinseishoKanriNo" = dbT5301."shinseishoKanriNo" 
             AND dbT5302."ikenshoIraiRirekiNo" = dbT5301."ikenshoIraiRirekiNo"
-            AND dbT5302."koroshoIfShikibetsuCode" = dbT5301."koroshoIfShikibetsuCode"
         WHERE
             dbT5301."shinseishoKanriNo" = #{申請書管理番号}
             AND dbT5301."koroshoIfShikibetsuCode" = #{厚労省IF識別コード}
@@ -104,9 +105,16 @@
             '33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59','60','61','62','63','64','65',
             '66','67','68','69','70','71','72','73','74','75','76','77','78','79','80','81','82','83','84','85','86','87','88','89','90','91','92','93','94','95','96','97','98',
             '99','100','101','102','103','104','105','106','107','108','109','110','111','112','113')
-            AND "DbT5304ShujiiIkenshoIkenItem"."ikenItem" IS NOT NULL
         WHERE
             dbT5301."shinseishoKanriNo" = #{申請書管理番号}
+            AND dbT5301."koroshoIfShikibetsuCode" = #{厚労省IF識別コード}
+            AND dbT5301."ikenshoIraiRirekiNo" =(SELECT
+                                                    MAX(t5301."ikenshoIraiRirekiNo") AS "ikenshoIraiRirekiNo"
+                                                FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" AS t5301
+                                                WHERE t5301."shinseishoKanriNo" = #{申請書管理番号}
+                                                    AND t5301."koroshoIfShikibetsuCode" = #{厚労省IF識別コード}
+                                                    AND t5301."logicalDeletedFlag" = false)
+            AND dbT5301."logicalDeletedFlag" = false
     </select>
     
     <resultMap id="IraiJohoKinyuItem_resultMap" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.iraijohodatatorikomi.ShujiiIkenshoIraiJohoKinyuItemRelateEntity">
@@ -127,9 +135,16 @@
             AND "DbT5303ShujiiIkenshoKinyuItem"."koroshoIfShikibetsuCode" = dbT5301."koroshoIfShikibetsuCode"
             AND "DbT5303ShujiiIkenshoKinyuItem"."ikenshoIraiRirekiNo" = #{主治医意見書作成依頼履歴番号}
             AND "DbT5303ShujiiIkenshoKinyuItem"."remban" IN('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23')
-            AND ("DbT5303ShujiiIkenshoKinyuItem"."kinyuItem" IS NULL OR "DbT5303ShujiiIkenshoKinyuItem"."kinyuItem" = '')
         WHERE
             dbT5301."shinseishoKanriNo" = #{申請書管理番号}
+            AND dbT5301."koroshoIfShikibetsuCode" = #{厚労省IF識別コード}
+            AND dbT5301."ikenshoIraiRirekiNo" =(SELECT
+                                                    MAX(t5301."ikenshoIraiRirekiNo") AS "ikenshoIraiRirekiNo"
+                                                FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" AS t5301
+                                                WHERE t5301."shinseishoKanriNo" = #{申請書管理番号}
+                                                    AND t5301."koroshoIfShikibetsuCode" = #{厚労省IF識別コード}
+                                                    AND t5301."logicalDeletedFlag" = false)
+            AND dbT5301."logicalDeletedFlag" = false
     </select>
     
     <select resultOrdered="true" id="主治医意見書依頼区分" parameterType="jp.co.ndensan.reams.db.dbe.definition.core.iraijohodatatorikomi.IraiJohoDataTorikomiParameter"

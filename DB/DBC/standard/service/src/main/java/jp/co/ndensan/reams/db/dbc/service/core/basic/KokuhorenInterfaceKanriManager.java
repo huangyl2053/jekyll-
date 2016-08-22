@@ -91,6 +91,35 @@ public class KokuhorenInterfaceKanriManager {
     }
 
     /**
+     * 主キーに合致する国保連インターフェース管理を返します。
+     *
+     * @param type RString
+     * @param 送付取込区分 sofuTorikomiKubun
+     * @param 処理状態区分 shoriJotaiKubun
+     * @param 交換情報識別番号 KokanShikibetsuNo
+     * @return KokuhorenInterfaceKanri
+     */
+    @Transaction
+    public KokuhorenInterfaceKanri get新国保連インターフェース管理(RString type, RString 送付取込区分, RString 処理状態区分,
+            RString 交換情報識別番号) {
+        requireNonNull(type, UrSystemErrorMessages.値がnull.getReplacedMessage("type"));
+        requireNonNull(送付取込区分, UrSystemErrorMessages.値がnull.getReplacedMessage("送付取込区分"));
+        requireNonNull(処理状態区分, UrSystemErrorMessages.値がnull.getReplacedMessage("処理状態区分"));
+        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
+
+        DbT3104KokuhorenInterfaceKanriEntity entity = dac.select(
+                type,
+                送付取込区分,
+                処理状態区分,
+                交換情報識別番号);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new KokuhorenInterfaceKanri(entity);
+    }
+
+    /**
      * 国保連インターフェース管理を全件返します。
      *
      * @return List<KokuhorenInterfaceKanri>

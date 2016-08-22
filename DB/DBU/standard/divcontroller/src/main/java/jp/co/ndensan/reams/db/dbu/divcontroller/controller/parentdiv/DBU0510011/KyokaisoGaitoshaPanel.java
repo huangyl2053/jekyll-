@@ -323,7 +323,10 @@ public class KyokaisoGaitoshaPanel {
      * @return ResponseData<KyokaisoGaitoshaPanelDiv>
      */
     public ResponseData<KyokaisoGaitoshaPanelDiv> onClick_btnKakutei(KyokaisoGaitoshaPanelDiv div) {
-
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForKakuninn();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(
                 jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
         RString イベント状態 = div.getKyokaisouGaitouItiran().getIranState();
