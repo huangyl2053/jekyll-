@@ -246,7 +246,9 @@ public class KogakuGassanShikyuKetteiTsuchishoPanel {
      * @return ResponseData
      */
     public ResponseData<KogakuGassanShikyuKetteiTsuchishoPanelDiv> toAfterPrint(KogakuGassanShikyuKetteiTsuchishoPanelDiv div) {
-        getHandler(div).set更新完了メッセージ();
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        getHandler(div).set更新完了メッセージ(識別コード, 被保険者番号);
         return ResponseData.of(div).setState(DBC8140011StateName.完了メッセージ);
     }
 

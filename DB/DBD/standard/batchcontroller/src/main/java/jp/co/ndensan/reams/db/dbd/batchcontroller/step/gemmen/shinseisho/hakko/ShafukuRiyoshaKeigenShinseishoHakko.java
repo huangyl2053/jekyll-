@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.gemmen.shinseisho.hakko;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmen.shinseisho.hakko.Ddb102020MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd800006.ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoItem;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd800006.ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoOrderKey;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd800006.ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoReport;
@@ -24,7 +25,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.core.teikeibunhenkan.ITextHenkanRule;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
@@ -104,7 +104,7 @@ public class ShafukuRiyoshaKeigenShinseishoHakko extends BatchProcessBase<Riyosh
                 SubGyomuCode.DBD介護受給,
                 processParamter.get帳票ID(),
                 processParamter.get改頁出力順ID());
-        出力順 = MyBatisOrderByClauseCreator.create(ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoOrderKey.class, order);
+        出力順 = Ddb102020MyBatisOrderByClauseCreator.create(ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoOrderKey.class, order);
         return new BatchDbReader(MYBATIS_SELECT_ID,
                 processParamter.toFutanGendogakuMybatisParameter(出力順));
     }

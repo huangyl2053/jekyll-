@@ -20,12 +20,12 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 負担割合判定マージ<br/>
+ * 負担割合判定マージのクラスです。<br/>
  * 処理詳細8
  *
  * @reamsid_L DBC-4950-030 liuyang
  */
-public class Work8Process extends BatchKeyBreakBase<RiyoshaFutanWariaiMeisaiTempEntity> {
+public class FutanWariaiHanteiMergeProcess extends BatchKeyBreakBase<RiyoshaFutanWariaiMeisaiTempEntity> {
 
     private static final RString TABLENAME = new RString("RiyoshaFutanWariaiMeisaiTemp");
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."

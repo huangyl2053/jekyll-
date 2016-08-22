@@ -103,7 +103,12 @@ public class HikazeiNenkinKenJoho {
         HousholdBusiness 非課税年金対象者情報
                 = DataPassingConverter.deserialize(div.getHiddenLastInputHousehold(), HousholdBusiness.class);
         getHandler(div).画面編集制御処理(非課税年金対象者情報);
+        div.getTbNenkinHokenshaCode().setDisabled(true);
+        div.getTbKisoNenkinNo().setDisabled(true);
+        div.getTbNenkinCode().setDisabled(true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, false);
         ViewStateHolder.put(ViewStateKeys.非課税年金対象者一時テーブル, 非課税年金対象者情報);
+        div.getShoSaiPanel().setDisabled(false);
         return ResponseData.of(div).respond();
     }
 
@@ -154,6 +159,7 @@ public class HikazeiNenkinKenJoho {
         div.getTbKisoNenkinNo().setDisabled(true);
         div.getTbNenkinCode().setDisabled(true);
         div.getBtnDisplay().setDisabled(true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, false);
         return ResponseData.of(div).respond();
     }
 
@@ -315,15 +321,18 @@ public class HikazeiNenkinKenJoho {
      * @return ResponseData<HikazeiNenkinKenJohoDiv>
      */
     public ResponseData<HikazeiNenkinKenJohoDiv> onClick_btnCreate(HikazeiNenkinKenJohoDiv div) {
+        div.getShoSaiPanel().setDisabled(false);
         if (!ResponseHolder.isReRequest()) {
             if (削除解除モード.equals(div.getHiddenModel())) {
                 return ResponseData.of(div).addMessage(DbdQuestionMessages.編集破棄確認.getMessage()).respond();
             }
+            div.setHiddenModel(RString.EMPTY);
             getHandler(div).新規ボタンの処理();
         }
         if (new RString(DbdQuestionMessages.編集破棄確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             getHandler(div).新規ボタンの処理();
+            div.setHiddenModel(RString.EMPTY);
         }
         return ResponseData.of(div).respond();
     }

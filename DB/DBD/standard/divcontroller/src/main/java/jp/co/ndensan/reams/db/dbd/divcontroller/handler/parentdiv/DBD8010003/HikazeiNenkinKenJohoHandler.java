@@ -28,11 +28,13 @@ import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
@@ -59,6 +61,7 @@ public class HikazeiNenkinKenJohoHandler {
     private final RString 性別_男 = new RString("1");
     private final RString 女 = new RString("女");
     private final RString 男 = new RString("男");
+    private final RString 保存する = new RString("btnUpdate");
 
     /**
      * コンストラクタです。
@@ -91,6 +94,7 @@ public class HikazeiNenkinKenJohoHandler {
         div.getBtnDelete().setDisabled(true);
         div.getTbBirthday().setDisabled(true);
         div.getDdlSex().setDisabled(true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, true);
         return false;
     }
 
@@ -184,15 +188,17 @@ public class HikazeiNenkinKenJohoHandler {
     }
 
     private void 対象年金保険者And象年金表示() {
-        RString 対象年金保険者 = CodeMaster.getCodeMeisho(
-                DBZCodeShubetsu.介護従業者の欠員による減算の状況の有無.getコード(), new Code(div.getTbNenkinHokenshaCode().getValue()));
+        RString 対象年金保険者
+                = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, DBZCodeShubetsu.介護従業者の欠員による減算の状況の有無.getコード(),
+                        new Code(div.getTbNenkinHokenshaCode().getValue()), new FlexibleDate(RDate.getNowDate().toDateString()));
         if (対象年金保険者.isNullOrEmpty()) {
             throw new ApplicationException(DbdErrorMessages.年金保険者入力不正.getMessage());
         }
         RString 年金コード = div.getTbNenkinCode().getValue();
         RString 年金コード先頭３桁 = 年金コード.isNullOrEmpty() ? RString.EMPTY : 年金コード.substring(0, INT_3);
-        RString 対象年金 = CodeMaster.getCodeMeisho(
-                DBZCodeShubetsu.介護支援専門員の欠員による減算の状況の有無.getコード(), new Code(年金コード先頭３桁));
+        RString 対象年金
+                = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, DBZCodeShubetsu.介護支援専門員の欠員による減算の状況の有無.getコード(),
+                        new Code(年金コード先頭３桁), new FlexibleDate(RDate.getNowDate().toDateString()));
         if (対象年金.isNullOrEmpty()) {
             throw new ApplicationException(DbdErrorMessages.年金入力不正.getMessage());
         }
@@ -223,7 +229,7 @@ public class HikazeiNenkinKenJohoHandler {
         div.getTbAddressKanji().setValue(div.getCcdKaigoAtena().get住所().getColumnValue());
         対象年金保険者And象年金表示();
         div.getDdlTsuki().setSelectedKey(HousholdFinder.createIntance()
-                .get月DDLKey(div.getDdlYear().getSelectedKey(), div.getDdlYear().getDataSource().get(0).getKey()));
+                .get月DDLKey(div.getDdlYear().getSelectedKey(), div.getDdlTsuki().getDataSource().get(0).getKey()));
         div.getTbKingaku().clearValue();
         if (div.getDdlYear().getSelectedKey().equals(get日付関連_調定年度())) {
             div.getTbCreateDate().setValue(RDate.getNowDate());
@@ -580,7 +586,12 @@ public class HikazeiNenkinKenJohoHandler {
         div.getTbNenkinHokenshaCode().setReadOnly(false);
         div.getTbKisoNenkinNo().setReadOnly(false);
         div.getTbNenkinCode().setReadOnly(false);
+        div.getTbNenkinHokenshaCode().setDisabled(false);
+        div.getTbKisoNenkinNo().setDisabled(false);
+        div.getTbNenkinCode().setDisabled(false);
         div.getBtnDisplay().setDisabled(false);
+        div.getBtnDelete().setDisabled(true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, true);
     }
 
 }

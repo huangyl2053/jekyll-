@@ -16,23 +16,23 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 月別負担割合（新）Temp<br/>
+ * 月別負担割合現Temp作成のクラスです。<br/>
  * 処理詳細9
  *
  * @reamsid_L DBC-4950-030 liuyang
  */
-public class Work9Process extends BatchProcessBase<TsukibetsuFutanWariaiTempEntity> {
+public class TsukibetsuFutanWariaiGenTempProcess extends BatchProcessBase<TsukibetsuFutanWariaiTempEntity> {
 
-    private static final RString TABLENAME = new RString("TsukibetsuFutanWariaiNewTemp");
+    private static final RString TABLENAME = new RString("TsukibetsuFutanWariaiGenTemp");
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "riyoshafutanwariaihantei.IRiyoshaFutanwariaiMapper.select月別負担割合作成新");
+            + "riyoshafutanwariaihantei.IRiyoshaFutanwariaiMapper.select月別負担割合作成現");
     private DBC180020ProcessParameter parameter;
     @BatchWriter
-    private BatchEntityCreatedTempTableWriter 月別負担割合新Temp;
+    private BatchEntityCreatedTempTableWriter 月別負担割合現Temp;
 
     @Override
     protected void createWriter() {
-        月別負担割合新Temp
+        月別負担割合現Temp
                 = new BatchEntityCreatedTempTableWriter(TABLENAME, TsukibetsuFutanWariaiTempEntity.class);
     }
 
@@ -44,6 +44,7 @@ public class Work9Process extends BatchProcessBase<TsukibetsuFutanWariaiTempEnti
 
     @Override
     protected void process(TsukibetsuFutanWariaiTempEntity entity) {
-        月別負担割合新Temp.insert(entity);
+        月別負担割合現Temp.insert(entity);
+
     }
 }

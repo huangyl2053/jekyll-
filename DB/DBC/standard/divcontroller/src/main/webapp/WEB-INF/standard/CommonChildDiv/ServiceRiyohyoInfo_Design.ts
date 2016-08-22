@@ -118,6 +118,10 @@ module DBC {
                 return "onClick_btnUpdate";
             }
 
+            public static onClick_btnBackRiyoNengetsuIchiran(): string {
+                return "onClick_btnBackRiyoNengetsuIchiran";
+            }
+
         }
 
         export class Controls {
@@ -273,14 +277,6 @@ module DBC {
 
             public txtTeigakuRiyoushaFutangaku(): UZA.TextBoxNum {
                 return new UZA.TextBoxNum(this.convFiledName("txtTeigakuRiyoushaFutangaku"));
-            }
-
-            public txtHdnGendogakuTaishogaiFlg(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtHdnGendogakuTaishogaiFlg"));
-            }
-
-            public txtHdnRiyoshaFutanTeiritsuTeigakuKbn(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtHdnRiyoshaFutanTeiritsuTeigakuKbn"));
             }
 
             public ServiceRiyohyoBeppyoMeisaiFooter(): UZA.Panel {

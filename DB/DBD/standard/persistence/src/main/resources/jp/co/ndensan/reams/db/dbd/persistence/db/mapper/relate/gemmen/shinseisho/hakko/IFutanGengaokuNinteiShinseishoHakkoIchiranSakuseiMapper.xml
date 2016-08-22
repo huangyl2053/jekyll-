@@ -38,6 +38,11 @@
         <result property="住所地特例フラグ"  column="住所地特例フラグ"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="非課税年金勘案額"  column="非課税年金勘案額"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="年金収入額"  column="年金収入額"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="町域コード" column="町域コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChoikiCodeTypeHandler"/>
+        <result property="行政区コード" column="行政区コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler"/>
+        <result property="氏名カナ"  column="氏名カナ"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="生年月日"  column="生年月日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
   <select resultOrdered="true" id="get出力対象者情報"  
@@ -78,6 +83,11 @@
         M."jushochiTokureiFlag"  AS 住所地特例フラグ,
         E."hikazeinenkinKananGaku"  AS  非課税年金勘案額,
         E."nenkinShunyuGaku"  AS  年金収入額,
+        "ShikibetsuTaisho"."yubinNo" AS 郵便番号,
+        "ShikibetsuTaisho"."choikiCode" AS 町域コード,
+        "ShikibetsuTaisho"."gyoseikuCode" AS 行政区コード,
+        "ShikibetsuTaisho"."kanaShimei" AS 氏名カナ,
+        "ShikibetsuTaisho"."seinengappiYMD" AS 生年月日,
        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
   FROM  rgdb."DbT4032ShinseishoIkkatsuHakkoBatch"  AS A
        INNER JOIN rgdb."DbT4033ShinseishoHakkoTaishoshas"  AS D

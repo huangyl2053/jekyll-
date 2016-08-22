@@ -51,8 +51,7 @@ public class ShinsakaiJIzenShinsakekkaIchiranFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShinsakaiJIzenShinsakekkaIchiranFinder}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link ShinsakaiJIzenShinsakekkaIchiranFinder}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link ShinsakaiJIzenShinsakekkaIchiranFinder}のインスタンス
      */
     public static ShinsakaiJIzenShinsakekkaIchiranFinder createInstance() {
         return InstanceProvider.create(ShinsakaiJIzenShinsakekkaIchiranFinder.class);

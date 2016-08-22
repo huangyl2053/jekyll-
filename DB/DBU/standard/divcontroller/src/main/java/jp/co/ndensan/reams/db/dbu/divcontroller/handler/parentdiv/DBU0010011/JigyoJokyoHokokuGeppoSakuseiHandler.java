@@ -332,6 +332,10 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         } else {
             div.getTxtShukeiYM7().clearValue();
         }
+        set入力年月(入力決定年月, 入力決定年月6, 入力決定年月7);
+    }
+
+    private void set入力年月(FlexibleDate 入力決定年月, FlexibleDate 入力決定年月6, FlexibleDate 入力決定年月7) {
         if (div.getTxtShukeiYM3().getValue().isBefore(入力決定年月)) {
             div.getTxtSakuseiYMD3().setDisabled(true);
             div.getTxtSakuseiTime3().setDisabled(true);
