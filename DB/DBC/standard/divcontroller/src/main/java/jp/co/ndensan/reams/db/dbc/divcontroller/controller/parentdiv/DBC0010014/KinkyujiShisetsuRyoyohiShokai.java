@@ -5,10 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0010014;
 
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010014.DBC0010014TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010014.KinkyujiShisetsuRyoyohiShokaiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010014.dgKinkyujiShisetsuRyoyohi_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010014.KinkyujiShisetsuRyoyohiShokaiHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 給付実績の所定疾患施設療養費を照会の画面処理クラスです。
@@ -24,19 +31,15 @@ public class KinkyujiShisetsuRyoyohiShokai {
      * @return ResponseData<KinkyujiShisetsuRyoyohiShokaiDiv>
      */
     public ResponseData<KinkyujiShisetsuRyoyohiShokaiDiv> onLoad(KinkyujiShisetsuRyoyohiShokaiDiv div) {
-//        KojinKakuteiKey 資格対象者情報 = ViewStateHolder.get(ViewStateKeys.資格対象者, KojinKakuteiKey.class);
-//
-//        HihokenshaNo 被保険者番号 = 資格対象者情報.get被保険者番号().value();
-//        div.getCcdKyufuJissekiHeader().initialize(
-//                    ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
-//                    ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class),
-//                    ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
-//                    ViewStateHolder.get(ViewStateKeys.識別コード, NyuryokuShikibetsuNo.class));
-//        KyufuJissekiPrm KyufuJissekiPrm = ViewStateHolder.get(
-//                "給付実績情報照会Entity", KyufuJissekiPrm.class);
-//        List<KyufujissekiShoteiShikkanShisetsuRyoyo> 所定疾患施設療養費等データ = KyufuJissekiPrm.get所定疾患施設療養費等データ();
-//        getHandler(div).setKinkyujiShisetsuRyoyohi(get所定疾患施設療養費等データ());
-//        getHandler(div).setButton(ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class),)
+        KyufuJissekiPrmBusiness 給付実績情報照会情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
+        div.getCcdKyufuJissekiHeader().initialize(
+                給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(),
+                ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class),
+                ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
+                ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class));
+        getHandler(div).setKinkyujiShisetsuRyoyohi(給付実績情報照会情報.getCsData_P());
+        getHandler(div).setButton(ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class),
+                ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class));
         div.getKyufuJissekiTekiyoPanel().setIsOpen(false);
         return ResponseData.of(div).respond();
     }
@@ -61,10 +64,10 @@ public class KinkyujiShisetsuRyoyohiShokai {
      * @return ResponseData<KinkyujiShisetsuRyoyohiShokaiDiv>
      */
     public ResponseData<KinkyujiShisetsuRyoyohiShokaiDiv> onClick_btnMaeJigyosha(KinkyujiShisetsuRyoyohiShokaiDiv div) {
-//        KyufuJissekiPrm KyufuJissekiPrm = ViewStateHolder.get(
-//                "給付実績情報照会Entity", KyufuJissekiPrm.class);
-//        List<KyufujissekiShoteiShikkanShisetsuRyoyo> 所定疾患施設療養費等データ = KyufuJissekiPrm.get所定疾患施設療養費等データ();
-//        getHandler(div).to前事業者(所定疾患施設療養費等データ);
+        if (div.getKyufuJissekiTekiyoPanel().isIsOpen()) {
+            div.getKyufuJissekiTekiyoPanel().setIsOpen(false);
+        }
+        getHandler(div).change事業者(new RString("前事業者"));
         return ResponseData.of(div).respond();
     }
 
@@ -75,10 +78,10 @@ public class KinkyujiShisetsuRyoyohiShokai {
      * @return ResponseData<KinkyujiShisetsuRyoyohiShokaiDiv>
      */
     public ResponseData<KinkyujiShisetsuRyoyohiShokaiDiv> onClick_btnAtoJigyosha(KinkyujiShisetsuRyoyohiShokaiDiv div) {
-//        KyufuJissekiPrm KyufuJissekiPrm = ViewStateHolder.get(
-//                "給付実績情報照会Entity", KyufuJissekiPrm.class);
-//        List<KyufujissekiShoteiShikkanShisetsuRyoyo> 所定疾患施設療養費等データ = KyufuJissekiPrm.get所定疾患施設療養費等データ();
-//        getHandler(div).to後事業者(所定疾患施設療養費等データ);
+        if (div.getKyufuJissekiTekiyoPanel().isIsOpen()) {
+            div.getKyufuJissekiTekiyoPanel().setIsOpen(false);
+        }
+        getHandler(div).change事業者(new RString("後事業者"));
         return ResponseData.of(div).respond();
     }
 
@@ -89,10 +92,10 @@ public class KinkyujiShisetsuRyoyohiShokai {
      * @return ResponseData<KinkyujiShisetsuRyoyohiShokaiDiv>
      */
     public ResponseData<KinkyujiShisetsuRyoyohiShokaiDiv> onClick_btnZengetsu(KinkyujiShisetsuRyoyohiShokaiDiv div) {
-//        KyufuJissekiPrm KyufuJissekiPrm = ViewStateHolder.get(
-//                "給付実績情報照会Entity", KyufuJissekiPrm.class);
-//        List<KyufujissekiShoteiShikkanShisetsuRyoyo> 所定疾患施設療養費等データ = KyufuJissekiPrm.get所定疾患施設療養費等データ();
-//        getHandler(div).to前月(所定疾患施設療養費等データ);
+        if (div.getKyufuJissekiTekiyoPanel().isIsOpen()) {
+            div.getKyufuJissekiTekiyoPanel().setIsOpen(false);
+        }
+        getHandler(div).change年月(new RString("前月"));
         return ResponseData.of(div).respond();
     }
 
@@ -103,10 +106,10 @@ public class KinkyujiShisetsuRyoyohiShokai {
      * @return ResponseData<KinkyujiShisetsuRyoyohiShokaiDiv>
      */
     public ResponseData<KinkyujiShisetsuRyoyohiShokaiDiv> onClick_btnJigetsu(KinkyujiShisetsuRyoyohiShokaiDiv div) {
-//        KyufuJissekiPrm KyufuJissekiPrm = ViewStateHolder.get(
-//                "給付実績情報照会Entity", KyufuJissekiPrm.class);
-//        List<KyufujissekiShoteiShikkanShisetsuRyoyo> 所定疾患施設療養費等データ = KyufuJissekiPrm.get所定疾患施設療養費等データ();
-//        getHandler(div).to次月(所定疾患施設療養費等データ);
+        if (div.getKyufuJissekiTekiyoPanel().isIsOpen()) {
+            div.getKyufuJissekiTekiyoPanel().setIsOpen(false);
+        }
+        getHandler(div).change年月(new RString("次月"));
         return ResponseData.of(div).respond();
     }
 
@@ -249,5 +252,9 @@ public class KinkyujiShisetsuRyoyohiShokai {
      */
     public ResponseData onClick_btnReturn(KinkyujiShisetsuRyoyohiShokaiDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBC0010014TransitionEventName.給付実績照会検索一覧).respond();
+    }
+
+    private KinkyujiShisetsuRyoyohiShokaiHandler getHandler(KinkyujiShisetsuRyoyohiShokaiDiv div) {
+        return new KinkyujiShisetsuRyoyohiShokaiHandler(div);
     }
 }

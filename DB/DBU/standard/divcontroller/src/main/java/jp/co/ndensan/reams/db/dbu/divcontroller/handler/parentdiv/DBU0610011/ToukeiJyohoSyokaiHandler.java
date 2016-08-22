@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0610011;
 import jp.co.ndensan.reams.db.dbu.business.core.tokeijoho.FukaSummary;
 import jp.co.ndensan.reams.db.dbu.business.core.tokeijoho.JukyuSummary;
 import jp.co.ndensan.reams.db.dbu.business.core.tokeijoho.ShikakuSummary;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0610011.KijunYMDDiv;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0610011.ToukeiJyohoSyokaiDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
@@ -20,16 +20,16 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  *
  * @reamsid_L DBU-4120-010 sunhaidi
  */
-public class KijunYMDHandler {
+public class ToukeiJyohoSyokaiHandler {
 
-    private final KijunYMDDiv div;
+    private final ToukeiJyohoSyokaiDiv div;
 
     /**
      * コンストラクタ。
      *
-     * @param div KijunYMDDiv
+     * @param div ToukeiJyohoSyokaiDiv
      */
-    public KijunYMDHandler(KijunYMDDiv div) {
+    public ToukeiJyohoSyokaiHandler(ToukeiJyohoSyokaiDiv div) {
         this.div = div;
     }
 

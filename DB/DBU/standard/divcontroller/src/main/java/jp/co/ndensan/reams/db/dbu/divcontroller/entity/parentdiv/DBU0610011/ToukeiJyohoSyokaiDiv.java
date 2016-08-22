@@ -13,11 +13,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KijunYMD のクラスファイル 
+ * ToukeiJyohoSyokai のクラスファイル 
  * 
  * @author 自動生成
  */
-public class KijunYMDDiv extends Panel {
+public class ToukeiJyohoSyokaiDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]

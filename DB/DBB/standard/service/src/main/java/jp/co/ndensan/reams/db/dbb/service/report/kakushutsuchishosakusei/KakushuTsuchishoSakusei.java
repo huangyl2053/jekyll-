@@ -1045,7 +1045,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
 
         List<KaigoHokenryogakuHenkoKenChushiTsuchishoJoho> entities = new ArrayList<>();
         KaigoHokenryogakuHenkoKenChushiTsuchishoJoho 決定通知書情報 = new KaigoHokenryogakuHenkoKenChushiTsuchishoJoho();
-        決定通知書情報.set文書番号(parameter.get決定通知書_文書番号());
+        決定通知書情報.set文書番号(parameter.get変更通知書_文書番号());
         決定通知書情報.set本算定決定通知書情報(本算定決定通知書情報);
         List<RString> 調定事由リスト = new ArrayList<>();
         if (parameter.get調定事由List() != null) {
