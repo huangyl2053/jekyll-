@@ -9,7 +9,7 @@
                 FROM "DbWT5331JukyushaJoho" AS JUKYUSHAJOHOTEMP
                 INNER JOIN "DbWT0001Hihokensha" AS HIHOKENSHATEMP 
                 ON JUKYUSHAJOHOTEMP."renban" = HIHOKENSHATEMP."meisaiRenban"
-                ${出力順}
+                ${orderBy}
     </select>
     <sql id="allColumns_DbWT5331JukyushaJoho">
         JUKYUSHAJOHOTEMP."renban"	 AS "dbWT331JukyushaJoho_renban",
@@ -126,14 +126,14 @@
         HIHOKENSHATEMP."shikibetsuCode" AS "dbWT0001HihokenshaTemp_shikibetsuCode"
     </sql>
     <resultMap id="ResultMap_DbWT5331JukyushaJohoDataEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushajoho.JukyushaHihokenshaEntity" autoMapping="true">
-        <id column="dbWT331JukyushaJoho_renban" />
-        <id column="dbWT0001HihokenshaTemp_meisaiRenban" />
+        <id column="dbWT331JukyushaJoho_renban"/>
+        <id column="dbWT0001HihokenshaTemp_meisaiRenban"/>
         <association property="受給者情報明細一時" resultMap="ResultMap_DbWT5331JukyushaJohoCsvEntity"/>
         <association property="被保険者一時" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuMapper.resultMap_DbWT0001HihokenshaTempEntity"/>
     </resultMap>
      <!--テーブルHihokenshaItijiEntityの項目をDbWT0001HihokenshaTempEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbWT5331JukyushaJohoCsvEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.DbWT5331JukyushaJohoCsvEntity" autoMapping="true">
-        <result property="連番" column= "dbWT331JukyushaJoho_renban" />
+        <result property="連番" column= "dbWT331JukyushaJoho_renban"/>
         <result property="交換情報識別番号" column= "dbWT331JukyushaJoho_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="異動年月日" column= "dbWT331JukyushaJoho_idoYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="異動区分コード" column= "dbWT331JukyushaJoho_idoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120030;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -144,6 +145,7 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
                     .replace(実行不可MESSAGE.toString()).toString());
         }
         pageBreakKeys = new ArrayList<>();
+        出力順Map = new HashMap<>();
         pageBreakKeys.add(固定改頁項目ID);
         RString orderByStr = MyBatisOrderByClauseCreator.create(JukyushaKoshinKekkaIchiranOutputOrder.class, 出力順情報);
         if (出力順情報 != null) {
@@ -466,6 +468,7 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
             output.set課税層の特例減額措置対象名称(JukyushaIF_TokureiGengakuSochiTaisho.toValue(受給者情報.get課税層の特例減額措置対象区分()).get名称());
         }
     }
+
     /**
      *
      * @param entity 被保険者情報

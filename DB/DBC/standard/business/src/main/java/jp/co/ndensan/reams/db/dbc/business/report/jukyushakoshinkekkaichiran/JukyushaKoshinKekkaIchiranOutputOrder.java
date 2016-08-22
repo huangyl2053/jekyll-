@@ -18,31 +18,31 @@ public enum JukyushaKoshinKekkaIchiranOutputOrder implements IReportItems {
     /**
      * 保険者番号
      */
-    保険者番号(new RString("0365"), new RString("hokenshaNo"), new RString("DbWT5331.\"hokenshaNo\"")),
+    保険者番号(new RString("0365"), new RString("hokenshaNo"), new RString("JUKYUSHAJOHOTEMP.\"hokenshaNo\"")),
     /**
      * 被保険者番号
      */
-    被保険者番号(new RString("0164"), new RString("hihokenshaNo"), new RString("DbWT0001.\"hihokenshaNo\"")),
+    被保険者番号(new RString("0164"), new RString("hihokenshaNo"), new RString("HIHOKENSHATEMP.\"hihokenshaNo\"")),
     /**
      * 郵便番号
      */
-    郵便番号(new RString("0001"), new RString("yubinNo"), new RString("DbWT0001.\"yubinNo\"")),
+    郵便番号(new RString("0001"), new RString("yubinNo"), new RString("HIHOKENSHATEMP.\"yubinNo\"")),
     /**
      * 町域コード
      */
-    町域コード(new RString("0002"), new RString("choikiCode"), new RString("DbWT0001.\"choikiCode\"")),
+    町域コード(new RString("0002"), new RString("choikiCode"), new RString("HIHOKENSHATEMP.\"choikiCode\"")),
     /**
      * 行政区コード
      */
-    行政区コード(new RString("0004"), new RString("gyoseikuCode"), new RString("DbWT0001.\"gyoseikuCode\"")),
+    行政区コード(new RString("0004"), new RString("gyoseikuCode"), new RString("HIHOKENSHATEMP.\"gyoseikuCode\"")),
     /**
      * 氏名５０音カナ
      */
-    氏名５０音カナ(new RString("0010"), new RString("shimei50onKana"), new RString("DbWT0001.\"shimei50onKana\"")),
+    氏名５０音カナ(new RString("0010"), new RString("shimei50onKana"), new RString("HIHOKENSHATEMP.\"shimei50onKana\"")),
     /**
      * 市町村コード
      */
-    市町村コード(new RString("0016"), new RString("shichosonCode"), new RString("DbWT0001.\"shichosonCode\""));
+    市町村コード(new RString("0016"), new RString("shichosonCode"), new RString("HIHOKENSHATEMP.\"shichosonCode\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;
