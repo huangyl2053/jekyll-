@@ -14,13 +14,13 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanteiyouconkyosakuseishousha
  *
  * @reamsid_L DBD-3830-040 tianyh
  */
-public interface TaishoshaIchijiTokuteiMapper {
+public interface ITaishoshaIchijiTokuteiMapper {
 
     /**
      * 対象者一次特定を取得します。
      *
      * @param parameter TaishoshaIchijiTokuteiParameter
-     * @return HanteiyouConkyosakuseishoushaiqijiRelateEntity{@code list}
+     * @return HanteiyouConkyosakuseishoushaiqijiRelateEntity{@literal list}
      */
     List<HanteiyouConkyosakuseishoushaiqijiRelateEntity> select対象者一次特定(TaishoshaIchijiTokuteiParameter parameter);
 
