@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class JukyushaIdoRenrakuhyoSakuseiPanelHandler {
 
-    private static final RString DBCHIHOKENSHANO = new RString("DBCHihokenshaNo");
     private final JukyushaIdoRenrakuhyoSakuseiPanelDiv div;
 
     /**
