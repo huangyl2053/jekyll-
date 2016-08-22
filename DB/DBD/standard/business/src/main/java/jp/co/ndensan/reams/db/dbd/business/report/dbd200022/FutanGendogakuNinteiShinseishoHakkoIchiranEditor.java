@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -183,15 +184,18 @@ public class FutanGendogakuNinteiShinseishoHakkoIchiranEditor implements IFutanG
                 source.listLower_5 = new RString("*");
             }
             if (this.帳票情報.get非課税年金勘案額() != null) {
-                source.listLower_6 = new RString("*");
+                if (this.帳票情報.get非課税年金勘案額().compareTo(Decimal.ZERO) == 0) {
+                    source.listLower_6 = RString.EMPTY;
+                } else {
+                    source.listLower_6 = new RString("*");
+                }
             }
             if (this.帳票情報.get住民となった日() != null) {
                 source.listLower_7 = this.帳票情報.get住民となった日().wareki().toDateString();
             }
-            RString 世帯課税 = RString.EMPTY;
             RString 世帯課税名称 = RString.EMPTY;
             if (this.帳票情報.get世帯課税() != null) {
-                世帯課税 = this.帳票情報.get世帯課税().getコード();
+                RString 世帯課税 = this.帳票情報.get世帯課税().getコード();
                 世帯課税名称 = SetaiKazeiKubun.toValue(世帯課税).get名称();
             }
             source.listLower_8 = 世帯課税名称;
@@ -212,7 +216,7 @@ public class FutanGendogakuNinteiShinseishoHakkoIchiranEditor implements IFutanG
                 source.listLower_11 = new RString(this.帳票情報.getユニット型個室().toString());
             }
             if (this.帳票情報.get従来型老健() != null) {
-                source.listLower_11 = new RString(this.帳票情報.get従来型老健().toString());
+                source.listLower_12 = new RString(this.帳票情報.get従来型老健().toString());
             }
         }
     }

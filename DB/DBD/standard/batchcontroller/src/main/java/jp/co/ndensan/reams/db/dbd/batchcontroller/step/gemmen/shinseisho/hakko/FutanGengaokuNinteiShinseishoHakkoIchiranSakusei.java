@@ -53,6 +53,7 @@ public class FutanGengaokuNinteiShinseishoHakkoIchiranSakusei extends BatchProce
             + "IFutanGengaokuNinteiShinseishoHakkoIchiranSakuseiMapper.get出力対象者情報");
     private static final RString JOBNO_NAME = new RString("【ジョブ番号】");
     private static final RString HAKKONICHI = new RString("【発行日】");
+    private static final RString JIKOSAKUSEI = new RString("自己作成");
     private static final RString SHUTSURYOKUJUN = new RString("【出力順】");
     private static final RString なし = new RString("なし");
     private static final ReportId ID = new ReportId("DBD200022_FutanGendogakuNinteiShinseishoHakkoIchiran");
@@ -173,7 +174,7 @@ public class FutanGengaokuNinteiShinseishoHakkoIchiranSakusei extends BatchProce
         帳票情報.set被保番号(entity.get被保険者番号());
         帳票情報.set要介護認定状態区分コード(entity.get要介護認定状態区分コード());
         帳票情報.set計画事業者コード(entity.get計画事業者コード());
-        帳票情報.set計画事業者名(entity.get計画事業者名());
+        帳票情報.set計画事業者名(entity.is自己作成() ? JIKOSAKUSEI : entity.get計画事業者名());
         帳票情報.set認定終了日(entity.get認定終了日());
         帳票情報.set認定開始日(entity.get認定開始日());
         if (!RString.isNullOrEmpty(entity.get負担段階())) {
