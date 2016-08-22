@@ -264,7 +264,7 @@
         LEFT JOIN
             "KuBunnGaTsurakuTemp" AS "KuBunnGaTsurakuTemp"
         ON  "HonSanJonTyuShutuTemp"."hihokenshaNo" = "KuBunnGaTsurakuTemp"."hihokenshaNo"
-        INNER JOIN 
+        LEFT JOIN 
             "TmpSetaiShotoku" AS "TmpSetaiShotoku"
         ON "HonSanJonTyuShutuTemp"."hihokenshaNo" = "TmpSetaiShotoku"."hihokenshaNo"
         INNER JOIN 
