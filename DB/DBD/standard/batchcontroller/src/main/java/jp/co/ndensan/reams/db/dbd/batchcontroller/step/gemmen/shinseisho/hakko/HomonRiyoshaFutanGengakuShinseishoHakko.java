@@ -11,16 +11,9 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmen.shinseisho.hakko.Ddb10202
 import jp.co.ndensan.reams.db.dbd.business.report.dbd800005.HomonKaigoRiyoshaFutangakuGengakuShinseishoOrderKey;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.gemmen.shinseisho.hakko.ShinseishoHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmen.shinseisho.hakko.RiyoshaFutangakuGemmenShinseishoHakkoEntity;
-import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.service.core.teikeibunhenkan.KaigoTextHenkanRuleCreator;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.teikeibunhenkan.ITextHenkanRule;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
 import jp.co.ndensan.reams.ux.uxx.entity.db.relate.tsuchishoteikeibun.TsuchishoTeikeibunEntity;
@@ -28,7 +21,6 @@ import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeike
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -43,19 +35,21 @@ public class HomonRiyoshaFutanGengakuShinseishoHakko extends BatchProcessBase<Ri
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmen.shinseisho.hakko."
             + "IRiyoshaFutangakuGemmenShinseishoHakkoMapper.get出力対象者情報");
+    private static final int STARTINDEX = 9;
     private ShinseishoHakkoProcessParameter processParamter;
-    private Association association;
-    private Ninshosha ninshosha;
-    private HokenshaList hokenshaList;
+//    private Association association;
+//    private Ninshosha ninshosha;
+//    private HokenshaList hokenshaList;
     private List<RString> 通知書定型文;
     private RString 出力順;
 
     @Override
     protected void initialize() {
-        association = AssociationFinderFactory.createInstance().getAssociation();
-        ninshosha = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, RString.EMPTY);
-        hokenshaList = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護事務);
+//        association = AssociationFinderFactory.createInstance().getAssociation();
+//        ninshosha = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, RString.EMPTY);
+//        hokenshaList = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護事務);
         通知書定型文 = new ArrayList();
+        出力順 = RString.EMPTY;
         TsuchishoTeikeibunManager manager = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = manager.get通知書定型文項目(SubGyomuCode.DBD介護受給, processParamter.get帳票ID(), KamokuCode.EMPTY, 1);
         ITextHenkanRule textHenkanRule = KaigoTextHenkanRuleCreator.createRule(SubGyomuCode.DBD介護受給, processParamter.get帳票ID());
@@ -73,7 +67,12 @@ public class HomonRiyoshaFutanGengakuShinseishoHakko extends BatchProcessBase<Ri
                 SubGyomuCode.DBD介護受給,
                 processParamter.get帳票ID(),
                 processParamter.get改頁出力順ID());
-        出力順 = Ddb102020MyBatisOrderByClauseCreator.create(HomonKaigoRiyoshaFutangakuGengakuShinseishoOrderKey.class, order);
+        if (order != null) {
+            出力順 = Ddb102020MyBatisOrderByClauseCreator.create(HomonKaigoRiyoshaFutangakuGengakuShinseishoOrderKey.class, order);
+            if (processParamter.is出力フラグ()) {
+                出力順 = 出力順.substring(STARTINDEX, 出力順.length());
+            }
+        }
         return new BatchDbReader(MYBATIS_SELECT_ID,
                 processParamter.toFutanGendogakuMybatisParameter(出力順));
     }
