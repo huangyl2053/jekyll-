@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 受給者訂正連絡票データ作成です
  *
- * @reamsid_L DBC-2102-010 fangyuan
+ * @reamsid_L DBC-2102-020 lihang
  */
 public class DbT3001JukyushaIdoRenrakuhyoSakuseiDac {
 

@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000011.Nenj
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -24,8 +23,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogButtonType;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -106,27 +103,12 @@ public class NenjiRiyoshaFutanWariaiHantei {
      */
     public ResponseData<NenjiRiyoshaFutanWariaiHanteiDiv> onClick_beforeBatch(NenjiRiyoshaFutanWariaiHanteiDiv div) {
         RString 処理状態 = div.getPanelAll().getTxtShoriJotai().getValue();
-        if (処理状態.equals(未処理) && !ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            message.setInitialFocusButton(MessageDialogButtonType.Yes);
-            return ResponseData.of(div).addMessage(message).respond();
-        }
         if (処理状態.equals(再処理前) && !ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(DbcQuestionMessages.年次負担割合再処理.getMessage().getCode(),
-                    DbcQuestionMessages.年次負担割合再処理.getMessage().replace(div.getPanelAll().getTxtNendo().getValue().getYear().wareki().fillType(FillType.BLANK).getYear().toString()).evaluate());
+                    DbcQuestionMessages.年次負担割合再処理.getMessage().replace(div.getPanelAll().getTxtNendo().getValue().
+                            getYear().wareki().fillType(FillType.BLANK).getYear().toString()).evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (new RString(DbcQuestionMessages.年次負担割合再処理.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            message.setInitialFocusButton(MessageDialogButtonType.Yes);
-            return ResponseData.of(div).addMessage(message).respond();
-
-        }
-
         return ResponseData.of(div).respond();
     }
 
