@@ -186,8 +186,7 @@
                     WHERE A."logicalDeletedFlag" = FALSE
                       AND A."ninteiYMD" <![CDATA[<=]]> #{基準日}
                       AND (
-                           #{基準日} <![CDATA[<=]]> A."soshitsuYMD"
-                           OR A."soshitsuYMD" = ''
+                           A."soshitsuYMD" = ''
                            OR A."soshitsuYMD" IS NULL
                       )
                       AND A."jukyuShinseiJiyu" <![CDATA[<>]]> '5'
