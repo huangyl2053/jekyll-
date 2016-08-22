@@ -14,6 +14,7 @@ import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7112ShokanShuruiShik
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7112ShokanShuruiShikyuGendoGaku.tekiyoShuryoYM;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7112ShokanShuruiShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -35,7 +36,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @reamsid_L DBC-9999-012 xicongwang
  */
-public class DbT7112ShokanShuruiShikyuGendoGakuDac implements ISaveable<DbT7112ShokanShuruiShikyuGendoGakuEntity> {
+public class DbT7112ShokanShuruiShikyuGendoGakuDac implements
+        ISaveable<DbT7112ShokanShuruiShikyuGendoGakuEntity>, IDeletable<DbT7112ShokanShuruiShikyuGendoGakuEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -70,6 +72,31 @@ public class DbT7112ShokanShuruiShikyuGendoGakuDac implements ISaveable<DbT7112S
     }
 
     /**
+     * キーで償還払い給付種類支給限度額を取得します。
+     *
+     * @param サービス種類コード ServiceShuruiCode
+     * @param 適用開始年月 TekiyoKaishiYM
+     * @return DbT7112ShokanShuruiShikyuGendoGakuEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7112ShokanShuruiShikyuGendoGakuEntity selectByValue(
+            ServiceShuruiCode サービス種類コード,
+            FlexibleYearMonth 適用開始年月) throws NullPointerException {
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
+        requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("適用開始年月"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7112ShokanShuruiShikyuGendoGaku.class).
+                where(and(
+                                eq(serviceShuruiCode, サービス種類コード),
+                                eq(tekiyoKaishiYM, 適用開始年月))).
+                toObject(DbT7112ShokanShuruiShikyuGendoGakuEntity.class);
+    }
+
+    /**
      * 償還払い給付種類支給限度額を全件返します。
      *
      * @return List<DbT7112ShokanShuruiShikyuGendoGakuEntity>
@@ -80,6 +107,22 @@ public class DbT7112ShokanShuruiShikyuGendoGakuDac implements ISaveable<DbT7112S
 
         return accessor.select().
                 table(DbT7112ShokanShuruiShikyuGendoGaku.class).
+                toList(DbT7112ShokanShuruiShikyuGendoGakuEntity.class);
+    }
+
+    /**
+     * 償還払い給付種類支給限度額を全件返します。
+     *
+     * @return List<DbT7112ShokanShuruiShikyuGendoGakuEntity>
+     */
+    @Transaction
+    public List<DbT7112ShokanShuruiShikyuGendoGakuEntity> selectAllOrder() {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7112ShokanShuruiShikyuGendoGaku.class).order(
+                        by(tekiyoKaishiYM, Order.DESC),
+                        by(serviceShuruiCode, Order.ASC)).
                 toList(DbT7112ShokanShuruiShikyuGendoGakuEntity.class);
     }
 
@@ -149,5 +192,18 @@ public class DbT7112ShokanShuruiShikyuGendoGakuDac implements ISaveable<DbT7112S
                                                 leq(サービス提供年月, tekiyoShuryoYM))))).
                 order(by(tekiyoKaishiYM, Order.DESC), by(rirekiNo, Order.DESC)).
                 toList(DbT7112ShokanShuruiShikyuGendoGakuEntity.class);
+    }
+
+    /**
+     * データを物理削除する
+     *
+     * @param entity DbT7112ShokanShuruiShikyuGendoGakuEntity
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Override
+    public int delete(DbT7112ShokanShuruiShikyuGendoGakuEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払い給付種類支給限度額エンティティ"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.delete(entity).execute();
     }
 }

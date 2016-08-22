@@ -69,6 +69,30 @@ public class ShokanShuruiShikyuGendoGakuManager {
     }
 
     /**
+     * キーに合致する償還払い給付種類支給限度額を返します。
+     *
+     * @param サービス種類コード ServiceShuruiCode
+     * @param 適用開始年月 TekiyoKaishiYM
+     * @return ShokanShuruiShikyuGendoGaku
+     */
+    @Transaction
+    public ShokanShuruiShikyuGendoGaku get償還払い給付種類支給限度額ByValue(
+            ServiceShuruiCode サービス種類コード,
+            FlexibleYearMonth 適用開始年月) {
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
+        requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("適用開始年月"));
+
+        DbT7112ShokanShuruiShikyuGendoGakuEntity entity = dac.selectByValue(
+                サービス種類コード,
+                適用開始年月);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new ShokanShuruiShikyuGendoGaku(entity);
+    }
+
+    /**
      * 償還払い給付種類支給限度額を全件返します。
      *
      * @return List<ShokanShuruiShikyuGendoGaku>
@@ -78,6 +102,23 @@ public class ShokanShuruiShikyuGendoGakuManager {
         List<ShokanShuruiShikyuGendoGaku> businessList = new ArrayList<>();
 
         for (DbT7112ShokanShuruiShikyuGendoGakuEntity entity : dac.selectAll()) {
+            entity.initializeMd5();
+            businessList.add(new ShokanShuruiShikyuGendoGaku(entity));
+        }
+
+        return businessList;
+    }
+
+    /**
+     * 償還払い給付種類支給限度額を全件返します。
+     *
+     * @return List<ShokanShuruiShikyuGendoGaku>
+     */
+    @Transaction
+    public List<ShokanShuruiShikyuGendoGaku> get償還払い給付種類支給限度額データ() {
+        List<ShokanShuruiShikyuGendoGaku> businessList = new ArrayList<>();
+
+        for (DbT7112ShokanShuruiShikyuGendoGakuEntity entity : dac.selectAllOrder()) {
             entity.initializeMd5();
             businessList.add(new ShokanShuruiShikyuGendoGaku(entity));
         }
@@ -98,5 +139,86 @@ public class ShokanShuruiShikyuGendoGakuManager {
             return false;
         }
         return 1 == dac.save(償還払い給付種類支給限度額.toEntity());
+    }
+
+    /**
+     * 償還払い給付種類支給限度額{@link ShokanShuruiShikyuGendoGaku}を保存します。
+     *
+     * @param insert償還List {@link ShokanShuruiShikyuGendoGaku}
+     * @param update償還List {@link ShokanShuruiShikyuGendoGaku}
+     */
+    @Transaction
+    public void insertAndUpdate償還(List<ShokanShuruiShikyuGendoGaku> insert償還List, List<ShokanShuruiShikyuGendoGaku> update償還List) {
+        if (!insert償還List.isEmpty()) {
+            for (ShokanShuruiShikyuGendoGaku insert償還 : insert償還List) {
+                requireNonNull(insert償還, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払い給付種類支給限度額"));
+                if (!insert償還.hasChanged()) {
+                    return;
+                }
+                dac.save(insert償還.toEntity());
+            }
+        }
+        if (!update償還List.isEmpty()) {
+            for (ShokanShuruiShikyuGendoGaku update償還 : update償還List) {
+                requireNonNull(update償還, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払い給付種類支給限度額"));
+                if (!update償還.hasChanged()) {
+                    return;
+                }
+                dac.save(update償還.toEntity());
+            }
+        }
+    }
+
+    /**
+     * 償還払い給付種類支給限度額{@link ShokanShuruiShikyuGendoGaku}を保存します。
+     *
+     * @param delete償還List {@link ShokanShuruiShikyuGendoGaku}
+     * @param update償還List {@link ShokanShuruiShikyuGendoGaku}
+     */
+    @Transaction
+    public void deleteAndUpdate償還(List<ShokanShuruiShikyuGendoGaku> delete償還List, List<ShokanShuruiShikyuGendoGaku> update償還List) {
+        if (!delete償還List.isEmpty()) {
+            for (ShokanShuruiShikyuGendoGaku delete償還 : delete償還List) {
+                requireNonNull(delete償還, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払い給付種類支給限度額"));
+                if (delete償還.hasChanged()) {
+                    return;
+                }
+                dac.delete(delete償還.toEntity());
+            }
+        }
+        if (!update償還List.isEmpty()) {
+            for (ShokanShuruiShikyuGendoGaku update償還 : update償還List) {
+                requireNonNull(update償還, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払い給付種類支給限度額"));
+                if (!update償還.hasChanged()) {
+                    return;
+                }
+                dac.save(update償還.toEntity());
+            }
+        }
+    }
+
+    /**
+     * 主キーに合致する償還払い給付種類支給限度額を削除する。
+     *
+     * @param サービス種類コード ServiceShuruiCode
+     * @param 適用開始年月 TekiyoKaishiYM
+     * @param 履歴番号 RirekiNo
+     * @return 更新が成功するかどうか
+     */
+    @Transaction
+    public Boolean データを物理削除する(
+            ServiceShuruiCode サービス種類コード,
+            FlexibleYearMonth 適用開始年月,
+            int 履歴番号) {
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
+        requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("適用開始年月"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+
+        DbT7112ShokanShuruiShikyuGendoGakuEntity entity = dac.selectByKey(
+                サービス種類コード,
+                適用開始年月,
+                履歴番号);
+        entity.initializeMd5();
+        return 1 == dac.delete(entity);
     }
 }
