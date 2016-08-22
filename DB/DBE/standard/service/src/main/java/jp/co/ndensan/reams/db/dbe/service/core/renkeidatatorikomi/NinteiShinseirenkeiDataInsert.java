@@ -309,7 +309,7 @@ public class NinteiShinseirenkeiDataInsert {
     public DbT5101ErrorTempEntity getDbT5101ErrorTempEntity(DbT5101TempEntity entity, RenkeiDataTorikomiProcessParamter processParamter) {
         RString error;
         if (processParamter.is東芝版フラグ()) {
-            error = check申請情報一時テーブル_東芝版(entity, processParamter);
+            error = check申請情報一時テーブル_東芝版(entity);
         } else {
             error = check申請情報一時テーブル電算(entity, processParamter);
         }
@@ -376,7 +376,7 @@ public class NinteiShinseirenkeiDataInsert {
         return errorBuilder.toRString();
     }
 
-    private RString check申請情報一時テーブル_東芝版(DbT5101TempEntity entity, RenkeiDataTorikomiProcessParamter processParamter) {
+    private RString check申請情報一時テーブル_東芝版(DbT5101TempEntity entity) {
         RStringBuilder errorBuilder = new RStringBuilder();
         nullCheck申請区分(entity.get申請区分_申請時コード(), errorBuilder);
         check申請区分不正(entity.get申請区分_申請時コード(), errorBuilder);

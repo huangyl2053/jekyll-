@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.sofujoho.SofujohoRelateEntity
 /**
  * 過誤申立送付情報照会のマッパーインタフェースです。
  *
- * @reamsid_L DBC-2950-010 jinjue
+ * @reamsid_L DBC-2950-030 jinjue
  */
 public interface ISofujohoMapper {
 

@@ -6,7 +6,9 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7050KaigoHokensha;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7050KaigoHokensha.koikiHokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7050KaigoHokensha.koikiHokenshaShichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7050KaigoHokenshaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -20,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護保険者のデータアクセスクラスです。
+ *
+ * @reamsid_L DBE-9999-021 chengsanyuan
  */
 public class DbT7050KaigoHokenshaDac implements ISaveable<DbT7050KaigoHokenshaEntity> {
 
@@ -58,6 +62,26 @@ public class DbT7050KaigoHokenshaDac implements ISaveable<DbT7050KaigoHokenshaEn
         return accessor.select().
                 table(DbT7050KaigoHokensha.class).
                 toList(DbT7050KaigoHokenshaEntity.class);
+    }
+
+    /**
+     * 広域保険者番号で介護保険者を取得します。
+     *
+     * @param 広域保険者番号 広域保険者番号
+     * @return DbT7050KaigoHokenshaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7050KaigoHokenshaEntity selectByHokenshaNo(
+            ShoKisaiHokenshaNo 広域保険者番号) throws NullPointerException {
+        requireNonNull(広域保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("広域保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7050KaigoHokensha.class).
+                where(eq(koikiHokenshaNo, 広域保険者番号)).
+                toObject(DbT7050KaigoHokenshaEntity.class);
     }
 
     /**

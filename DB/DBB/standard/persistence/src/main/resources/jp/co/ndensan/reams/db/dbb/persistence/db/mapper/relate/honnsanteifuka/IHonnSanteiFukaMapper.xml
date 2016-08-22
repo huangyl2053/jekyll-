@@ -36,19 +36,24 @@
         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>
         FROM rgdb."DbV2002Fuka" AS "DbT2002Fuka"
-        INNER JOIN
+        LEFT JOIN
             rgdb."DbT2003Kibetsu" AS "DbT2003Kibetsu"
         ON
             "DbT2003Kibetsu"."choteiNendo" = "DbT2002Fuka"."choteiNendo" and
             "DbT2003Kibetsu"."fukaNendo" = "DbT2002Fuka"."fukaNendo" and
             "DbT2003Kibetsu"."tsuchishoNo" = "DbT2002Fuka"."tsuchishoNo" and
             "DbT2003Kibetsu"."rirekiNo" = "DbT2002Fuka"."rirekiNo"
-            INNER JOIN
+            LEFT JOIN
             rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
         ON
             "UrT0705ChoteiKyotsu"."choteiId" = "DbT2003Kibetsu"."choteiId"
         WHERE "DbT2002Fuka"."choteiNendo"=#{調定年度}
         AND "DbT2002Fuka"."fukaNendo"=#{賦課年度}
+        ORDER BY
+            "DbT2002Fuka"."choteiNendo",
+            "DbT2002Fuka"."fukaNendo",
+            "DbT2002Fuka"."tsuchishoNo",
+            "DbT2002Fuka"."rirekiNo"
     </select>
     
     <!--資格の情報を取得します。--> 
@@ -256,10 +261,10 @@
             koza.*
         FROM
             "HonSanJonTyuShutuTemp" AS "HonSanJonTyuShutuTemp"
-        INNER JOIN
+        LEFT JOIN
             "KuBunnGaTsurakuTemp" AS "KuBunnGaTsurakuTemp"
         ON  "HonSanJonTyuShutuTemp"."hihokenshaNo" = "KuBunnGaTsurakuTemp"."hihokenshaNo"
-        INNER JOIN 
+        LEFT JOIN 
             "TmpSetaiShotoku" AS "TmpSetaiShotoku"
         ON "HonSanJonTyuShutuTemp"."hihokenshaNo" = "TmpSetaiShotoku"."hihokenshaNo"
         INNER JOIN 
@@ -328,6 +333,19 @@
         LEFT JOIN 
             (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
         ON "HonSanJonTyuShutuTemp"."shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
+        ORDER BY
+            "dbT1001HihokenshaDaicho_hihokenshaNo",
+            "dbT1001HihokenshaDaicho_idoYMD",
+            "dbT1001HihokenshaDaicho_edaNo",
+            "choteiNendo",
+            "fukaNendo",
+            "tsuchishoNo",
+            "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode",
+            "UrT0508SeikatsuHogoJukyusha"."gyomuCode",
+            "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD",
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo",
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo",
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" 
     </select>
     
     <resultMap id="resultMap_SeikatsuHogoJukyushaRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity" autoMapping="true">

@@ -107,44 +107,46 @@ public class Ikenshokinyuyoshi01EditorImpl implements IIkenshokinyuyoshi01Editor
         }
         source.takajushinAri = get他科受診有チェック();
         source.takajushinNashi = get他科受診無チェック();
-        if (選択.equals(business.get他科名().substring(0, 1))) {
-            source.taNaika = チェック;
-        }
-        if (選択.equals(business.get他科名().substring(1, 2))) {
-            source.taSeishinka = チェック;
-        }
-        if (選択.equals(business.get他科名().substring(2, LENGTH_3))) {
-            source.taGeka = チェック;
-        }
-        if (選択.equals(business.get他科名().substring(LENGTH_3, LENGTH_4))) {
-            source.taSeikeigeka = チェック;
-        }
-        if (選択.equals(business.get他科名().substring(LENGTH_4, LENGTH_5))) {
-            source.taNoshinkeigeka = チェック;
-        }
-        if (選択.equals(business.get他科名().substring(LENGTH_5, LENGTH_6))) {
-            source.taHifuka = チェック;
-        }
-        if (選択.equals(business.get他科名().substring(LENGTH_6, LENGTH_7))) {
-            source.taHinyokika = チェック;
-        }
-        if (選択.equals(business.get他科名().substring(LENGTH_7, LENGTH_8))) {
-            source.taFujinka = チェック;
-        }
-        if (選択.equals(business.get他科名().substring(LENGTH_8, LENGTH_9))) {
-            source.taGanka = チェック;
-        }
-        if (選択.equals(business.get他科名().substring(LENGTH_9, LENGTH_10))) {
-            source.taJibiinkoka = チェック;
-        }
-        if (選択.equals(business.get他科名().substring(LENGTH_10, LENGTH_11))) {
-            source.taRihabirika = チェック;
-        }
-        if (選択.equals(business.get他科名().substring(LENGTH_11, LENGTH_12))) {
-            source.taShika = チェック;
-        }
-        if (選択.equals(business.get他科名().substring(LENGTH_12))) {
-            source.taSonota = チェック;
+        if (!RString.isNullOrEmpty(business.get他科名())) {
+            if (選択.equals(business.get他科名().substring(0, 1))) {
+                source.taNaika = チェック;
+            }
+            if (選択.equals(business.get他科名().substring(1, 2))) {
+                source.taSeishinka = チェック;
+            }
+            if (選択.equals(business.get他科名().substring(2, LENGTH_3))) {
+                source.taGeka = チェック;
+            }
+            if (選択.equals(business.get他科名().substring(LENGTH_3, LENGTH_4))) {
+                source.taSeikeigeka = チェック;
+            }
+            if (選択.equals(business.get他科名().substring(LENGTH_4, LENGTH_5))) {
+                source.taNoshinkeigeka = チェック;
+            }
+            if (選択.equals(business.get他科名().substring(LENGTH_5, LENGTH_6))) {
+                source.taHifuka = チェック;
+            }
+            if (選択.equals(business.get他科名().substring(LENGTH_6, LENGTH_7))) {
+                source.taHinyokika = チェック;
+            }
+            if (選択.equals(business.get他科名().substring(LENGTH_7, LENGTH_8))) {
+                source.taFujinka = チェック;
+            }
+            if (選択.equals(business.get他科名().substring(LENGTH_8, LENGTH_9))) {
+                source.taGanka = チェック;
+            }
+            if (選択.equals(business.get他科名().substring(LENGTH_9, LENGTH_10))) {
+                source.taJibiinkoka = チェック;
+            }
+            if (選択.equals(business.get他科名().substring(LENGTH_10, LENGTH_11))) {
+                source.taRihabirika = チェック;
+            }
+            if (選択.equals(business.get他科名().substring(LENGTH_11, LENGTH_12))) {
+                source.taShika = チェック;
+            }
+            if (選択.equals(business.get他科名().substring(LENGTH_12))) {
+                source.taSonota = チェック;
+            }
         }
         source.taSonotakamei = business.getその他の他科名();
         source.shindamName1 = business.get診断名1();
@@ -153,6 +155,12 @@ public class Ikenshokinyuyoshi01EditorImpl implements IIkenshokinyuyoshi01Editor
         source.hasshoYMD2 = パターン12(business.get発症年月日2());
         source.shindamName3 = business.get診断名3();
         source.hasshoYMD3 = パターン12(business.get発症年月日3());
+        source = set症状安定性(source);
+        source.gutaitekiJokyo = business.get症状不安定時の具体的状況();
+        return editSource2(source);
+    }
+
+    private Ikenshokinyuyoshi01ReportSource set症状安定性(Ikenshokinyuyoshi01ReportSource source) {
         if (Anteisei.安定.getコード().equals(business.get症状安定性())) {
             source.byojoAntei = チェック;
         } else if (Anteisei.不安定.getコード().equals(business.get症状安定性())) {
@@ -160,44 +168,47 @@ public class Ikenshokinyuyoshi01EditorImpl implements IIkenshokinyuyoshi01Editor
         } else if (Anteisei.不明.getコード().equals(business.get症状安定性())) {
             source.byojoFumei = チェック;
         }
-        source.gutaitekiJokyo = business.get症状不安定時の具体的状況();
-        return editSource2(source);
+        return source;
     }
 
     private Ikenshokinyuyoshi01ReportSource editSource2(Ikenshokinyuyoshi01ReportSource source) {
         source.chiryonaiyo = business.get経過及び治療内容();
-        if (選択.equalsIgnoreCase(business.get処置内容().substring(0, 1))) {
-            source.tokubetsuTenteki = チェック;
+        if (!RString.isNullOrEmpty(business.get処置内容())) {
+            if (選択.equalsIgnoreCase(business.get処置内容().substring(0, 1))) {
+                source.tokubetsuTenteki = チェック;
+            }
+            if (選択.equalsIgnoreCase(business.get処置内容().substring(1, 2))) {
+                source.tokubetsuEiyo = チェック;
+            }
+            if (選択.equalsIgnoreCase(business.get処置内容().substring(2, LENGTH_3))) {
+                source.tokubetsuToseki = チェック;
+            }
+            if (選択.equalsIgnoreCase(business.get処置内容().substring(LENGTH_3, LENGTH_4))) {
+                source.tokubetsuSutoma = チェック;
+            }
+            if (選択.equalsIgnoreCase(business.get処置内容().substring(LENGTH_4, LENGTH_5))) {
+                source.tokubetsuSanso = チェック;
+            }
+            if (選択.equalsIgnoreCase(business.get処置内容().substring(LENGTH_5, LENGTH_6))) {
+                source.tokubetsuResupireta = チェック;
+            }
+            if (選択.equalsIgnoreCase(business.get処置内容().substring(LENGTH_6, LENGTH_7))) {
+                source.tokubetsuKikansekkai = チェック;
+            }
+            if (選択.equalsIgnoreCase(business.get処置内容().substring(LENGTH_7, LENGTH_8))) {
+                source.tokubetsuTotsu = チェック;
+            }
+            if (選択.equalsIgnoreCase(business.get処置内容().substring(LENGTH_8))) {
+                source.tokubetsuKeikaneiyo = チェック;
+            }
         }
-        if (選択.equalsIgnoreCase(business.get処置内容().substring(1, 2))) {
-            source.tokubetsuEiyo = チェック;
-        }
-        if (選択.equalsIgnoreCase(business.get処置内容().substring(2, LENGTH_3))) {
-            source.tokubetsuToseki = チェック;
-        }
-        if (選択.equalsIgnoreCase(business.get処置内容().substring(LENGTH_3, LENGTH_4))) {
-            source.tokubetsuSutoma = チェック;
-        }
-        if (選択.equalsIgnoreCase(business.get処置内容().substring(LENGTH_4, LENGTH_5))) {
-            source.tokubetsuSanso = チェック;
-        }
-        if (選択.equalsIgnoreCase(business.get処置内容().substring(LENGTH_5, LENGTH_6))) {
-            source.tokubetsuResupireta = チェック;
-        }
-        if (選択.equalsIgnoreCase(business.get処置内容().substring(LENGTH_6, LENGTH_7))) {
-            source.tokubetsuKikansekkai = チェック;
-        }
-        if (選択.equalsIgnoreCase(business.get処置内容().substring(LENGTH_7, LENGTH_8))) {
-            source.tokubetsuTotsu = チェック;
-        }
-        if (選択.equalsIgnoreCase(business.get処置内容().substring(LENGTH_8))) {
-            source.tokubetsuKeikaneiyo = チェック;
-        }
-        if (選択.equalsIgnoreCase(business.get特別な対応().substring(0, 1))) {
-            source.tokubetsuMonita = チェック;
-        }
-        if (選択.equalsIgnoreCase(business.get特別な対応().substring(1))) {
-            source.tokubetsuJokuso = チェック;
+        if (!RString.isNullOrEmpty(business.get特別な対応())) {
+            if (選択.equalsIgnoreCase(business.get特別な対応().substring(0, 1))) {
+                source.tokubetsuMonita = チェック;
+            }
+            if (選択.equalsIgnoreCase(business.get特別な対応().substring(1))) {
+                source.tokubetsuJokuso = チェック;
+            }
         }
         if (選択.equals(business.get失禁への対応())) {
             source.tokubetsuKateteru = チェック;
@@ -285,41 +296,43 @@ public class Ikenshokinyuyoshi01EditorImpl implements IIkenshokinyuyoshi01Editor
     }
 
     private Ikenshokinyuyoshi01ReportSource editSource5(Ikenshokinyuyoshi01ReportSource source) {
-        if (選択.equals(business.get周辺症状詳細().substring(0, 1))) {
-            source.shuhenjokyoGenshi = チェック;
-        }
-        if (選択.equals(business.get周辺症状詳細().substring(1, 2))) {
-            source.shuhenjokyoMoso = チェック;
-        }
-        if (選択.equals(business.get周辺症状詳細().substring(2, LENGTH_3))) {
-            source.shuhenjokyoGyakuten = チェック;
-        }
-        if (選択.equals(business.get周辺症状詳細().substring(LENGTH_3, LENGTH_4))) {
-            source.shuhenjokyoBogen = チェック;
-        }
-        if (選択.equals(business.get周辺症状詳細().substring(LENGTH_4, LENGTH_5))) {
-            source.shuhenjokyoBoko = チェック;
-        }
-        if (選択.equals(business.get周辺症状詳細().substring(LENGTH_5, LENGTH_6))) {
-            source.shuhenjokyoTeiko = チェック;
-        }
-        if (選択.equals(business.get周辺症状詳細().substring(LENGTH_6, LENGTH_7))) {
-            source.shuhenjokyoHaikai = チェック;
-        }
-        if (選択.equals(business.get周辺症状詳細().substring(LENGTH_7, LENGTH_8))) {
-            source.shuhenjoHi = チェック;
-        }
-        if (選択.equals(business.get周辺症状詳細().substring(LENGTH_8, LENGTH_9))) {
-            source.shuhenjoFuketsu = チェック;
-        }
-        if (選択.equals(business.get周辺症状詳細().substring(LENGTH_9, LENGTH_10))) {
-            source.shuhenjoIshoku = チェック;
-        }
-        if (選択.equals(business.get周辺症状詳細().substring(LENGTH_10, LENGTH_11))) {
-            source.shuhenjoSeiteki = チェック;
-        }
-        if (選択.equals(business.get周辺症状詳細().substring(LENGTH_11))) {
-            source.shuhenjoSonota = チェック;
+        if (!RString.isNullOrEmpty(business.get周辺症状詳細())) {
+            if (選択.equals(business.get周辺症状詳細().substring(0, 1))) {
+                source.shuhenjokyoGenshi = チェック;
+            }
+            if (選択.equals(business.get周辺症状詳細().substring(1, 2))) {
+                source.shuhenjokyoMoso = チェック;
+            }
+            if (選択.equals(business.get周辺症状詳細().substring(2, LENGTH_3))) {
+                source.shuhenjokyoGyakuten = チェック;
+            }
+            if (選択.equals(business.get周辺症状詳細().substring(LENGTH_3, LENGTH_4))) {
+                source.shuhenjokyoBogen = チェック;
+            }
+            if (選択.equals(business.get周辺症状詳細().substring(LENGTH_4, LENGTH_5))) {
+                source.shuhenjokyoBoko = チェック;
+            }
+            if (選択.equals(business.get周辺症状詳細().substring(LENGTH_5, LENGTH_6))) {
+                source.shuhenjokyoTeiko = チェック;
+            }
+            if (選択.equals(business.get周辺症状詳細().substring(LENGTH_6, LENGTH_7))) {
+                source.shuhenjokyoHaikai = チェック;
+            }
+            if (選択.equals(business.get周辺症状詳細().substring(LENGTH_7, LENGTH_8))) {
+                source.shuhenjoHi = チェック;
+            }
+            if (選択.equals(business.get周辺症状詳細().substring(LENGTH_8, LENGTH_9))) {
+                source.shuhenjoFuketsu = チェック;
+            }
+            if (選択.equals(business.get周辺症状詳細().substring(LENGTH_9, LENGTH_10))) {
+                source.shuhenjoIshoku = チェック;
+            }
+            if (選択.equals(business.get周辺症状詳細().substring(LENGTH_10, LENGTH_11))) {
+                source.shuhenjoSeiteki = チェック;
+            }
+            if (選択.equals(business.get周辺症状詳細().substring(LENGTH_11))) {
+                source.shuhenjoSonota = チェック;
+            }
         }
         source.shuhenjoSonotaKisai = business.getその他の周辺症状();
         if (IkenKomoku07.有.getコード().equals(business.get精神神経症状有無())) {
@@ -341,99 +354,6 @@ public class Ikenshokinyuyoshi01EditorImpl implements IIkenshokinyuyoshi01Editor
         return source;
     }
 
-    //TODO 改行コード(CRLF)を垂直タブ(VT)で置き換え（先頭から11個まで）その他特記事項は700文字／12行以内の処理対応待ち。
-//    private RString get経過及び治療内容() {
-//        List<RString> list = business.get経過及び治療内容().split("\r\n");
-//        RStringBuilder 経過及び治療内容 = new RStringBuilder();
-//        if (0 < list.size()) {
-//            経過及び治療内容.append(list.get(0)).append(System.lineSeparator());
-//        }
-//        if (1 < list.size()) {
-//            if (経過及び治療内容.length() <= LENGTH_700) {
-//                経過及び治療内容 = 経過及び治療内容.append(list.get(1)).append(System.lineSeparator());
-//            } else {
-//                return 経過及び治療内容.substring(0, LENGTH_700);
-//            }
-//        }
-//        if (2 > list.size()) {
-//            if (経過及び治療内容.length() <= LENGTH_700) {
-//                経過及び治療内容 = 経過及び治療内容.append(list.get(2)).append(System.lineSeparator());
-//            } else {
-//                return 経過及び治療内容.substring(0, LENGTH_700);
-//            }
-//        }
-//        if (LENGTH_3 < list.size()) {
-//            if (経過及び治療内容.length() <= LENGTH_700) {
-//                経過及び治療内容 = 経過及び治療内容.append(list.get(LENGTH_3)).append(System.lineSeparator());
-//            } else {
-//                return 経過及び治療内容.substring(0, LENGTH_700);
-//            }
-//        }
-//        if (LENGTH_4 < list.size()) {
-//            if (経過及び治療内容.length() <= LENGTH_700) {
-//                経過及び治療内容 = 経過及び治療内容.append(list.get(LENGTH_4)).append(System.lineSeparator());
-//            } else {
-//                return 経過及び治療内容.substring(0, LENGTH_700);
-//            }
-//        }
-//        if (LENGTH_5 < list.size()) {
-//            if (経過及び治療内容.length() <= LENGTH_700) {
-//                経過及び治療内容 = 経過及び治療内容.append(list.get(LENGTH_5)).append(System.lineSeparator());
-//            } else {
-//                return 経過及び治療内容.substring(0, LENGTH_700);
-//            }
-//        }
-//        if (LENGTH_6 < list.size()) {
-//            if (経過及び治療内容.length() <= LENGTH_700) {
-//                経過及び治療内容 = 経過及び治療内容.append(list.get(LENGTH_6)).append(System.lineSeparator());
-//            } else {
-//                return 経過及び治療内容.substring(0, LENGTH_700);
-//            }
-//        }
-//        if (LENGTH_7 < list.size()) {
-//            if (経過及び治療内容.length() <= LENGTH_700) {
-//                経過及び治療内容 = 経過及び治療内容.append(list.get(LENGTH_7)).append(System.lineSeparator());
-//            } else {
-//                return 経過及び治療内容.substring(0, LENGTH_700);
-//            }
-//        }
-//        if (LENGTH_8 < list.size()) {
-//            if (経過及び治療内容.length() <= LENGTH_700) {
-//                経過及び治療内容 = 経過及び治療内容.append(list.get(LENGTH_8)).append(System.lineSeparator());
-//            } else {
-//                return 経過及び治療内容.substring(0, LENGTH_700);
-//            }
-//        }
-//        return get経過及び治療内容(経過及び治療内容, list);
-//    }
-//
-//    private RString get経過及び治療内容(RStringBuilder 経過及び治療内容, List<RString> list) {
-//        if (LENGTH_9 < list.size()) {
-//            if (経過及び治療内容.length() <= LENGTH_700) {
-//                経過及び治療内容 = 経過及び治療内容.append(list.get(LENGTH_9)).append(System.lineSeparator());
-//            } else {
-//                return 経過及び治療内容.substring(0, LENGTH_700);
-//            }
-//        }
-//        if (LENGTH_10 < list.size()) {
-//            if (経過及び治療内容.length() <= LENGTH_700) {
-//                経過及び治療内容 = 経過及び治療内容.append(list.get(LENGTH_10)).append(System.lineSeparator());
-//            } else {
-//                return 経過及び治療内容.substring(0, LENGTH_700);
-//            }
-//        }
-//        if (LENGTH_11 < list.size()) {
-//            if (経過及び治療内容.length() <= LENGTH_700) {
-//                経過及び治療内容 = 経過及び治療内容.append(list.get(LENGTH_11)).append(System.lineSeparator());
-//            } else {
-//                return 経過及び治療内容.substring(0, LENGTH_700);
-//            }
-//        }
-//        if (LENGTH_700 <= 経過及び治療内容.length()) {
-//            return 経過及び治療内容.substring(0, LENGTH_700);
-//        }
-//        return 経過及び治療内容.toRString();
-//    }
     private RString get他科受診有チェック() {
         if (business.is他科受診有無()) {
             return チェック;

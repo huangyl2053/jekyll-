@@ -11,6 +11,7 @@ import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1003TashichosonJusho
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1003TashichosonJushochiTokurei.idoYMD;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1003TashichosonJushochiTokurei.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1003TashichosonJushochiTokureiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -87,5 +88,24 @@ public class DbV1003TashichosonJushochiTokureiAliveDac implements ISaveable<DbV1
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 他市町村住所地特例情報の取得します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return DbT1003TashichosonJushochiTokureiEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT1003TashichosonJushochiTokureiEntity get他市町村住所地特例情報(ShikibetsuCode 識別コード) throws NullPointerException {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV1003TashichosonJushochiTokurei.class).
+                where(eq(shikibetsuCode, 識別コード)).
+                toObject(DbT1003TashichosonJushochiTokureiEntity.class);
     }
 }

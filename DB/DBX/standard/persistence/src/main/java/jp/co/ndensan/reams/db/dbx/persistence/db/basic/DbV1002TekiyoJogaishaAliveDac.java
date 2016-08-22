@@ -7,11 +7,14 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1002TekiyoJogaisha;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1002TekiyoJogaisha.*;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1002TekiyoJogaisha.edaNo;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1002TekiyoJogaisha.idoYMD;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1002TekiyoJogaisha.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1002TekiyoJogaishaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
@@ -84,5 +87,21 @@ public class DbV1002TekiyoJogaishaAliveDac {
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 適用除外者台帳管理Aliveを全件返します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return DbT1002TekiyoJogaishaEntity
+     */
+    @Transaction
+    public DbT1002TekiyoJogaishaEntity get適用除外者情報(ShikibetsuCode 識別コード) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV1002TekiyoJogaisha.class).
+                where(eq(shikibetsuCode, 識別コード)).
+                toObject(DbT1002TekiyoJogaishaEntity.class);
     }
 }

@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd582001.DBD582001Paramet
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,7 +26,7 @@ import lombok.Setter;
 public class DBD581000Parameter extends BatchParameterBase {
 
     private RString 出力帳票;
-    private FlexibleDate 対象年度;
+    private FlexibleYear 対象年度;
     private RString 集計単位;
     private int 年齢From;
     private int 年齢To;

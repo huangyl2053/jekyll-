@@ -190,8 +190,11 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
         } else {
             List<RiyoshaFutanWariai> 利用者負担割合list = manager.select年度By被保険者番号(資格対象者.get被保険者番号());
             for (RiyoshaFutanWariai result : 利用者負担割合list) {
-                dataSourceList.add(new KeyValueDataSource(new RString(result.get年度().getYearValue()),
-                        result.get年度().wareki().toDateString()));
+                if (!dataSourceList.contains(new KeyValueDataSource(new RString(result.get年度().getYearValue()),
+                        result.get年度().wareki().toDateString()))) {
+                    dataSourceList.add(new KeyValueDataSource(new RString(result.get年度().getYearValue()),
+                            result.get年度().wareki().toDateString()));
+                }
             }
         }
         div.getDdlNendo().setDataSource(dataSourceList);
@@ -200,17 +203,25 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             List<RiyoshaFutanWariaiMeisai> 履歴番号list = manager.select履歴番号BY年度と被保険者番号(
                     new FlexibleYear(div.getDdlNendo().getSelectedKey()),
                     資格対象者.get被保険者番号());
-            List<KeyValueDataSource> ddl履歴番号List = new ArrayList<>();
-            if (履歴番号list != null && !履歴番号list.isEmpty()) {
-                for (RiyoshaFutanWariaiMeisai 明細 : 履歴番号list) {
+            div.getDdlRirekiNo().setDataSource(get履歴番号list(履歴番号list));
+            div.getDdlRirekiNo().setSelectedIndex(0);
+        }
+    }
+
+    private List<KeyValueDataSource> get履歴番号list(List<RiyoshaFutanWariaiMeisai> 履歴番号list) {
+        List<KeyValueDataSource> ddl履歴番号List = new ArrayList<>();
+        if (履歴番号list != null && !履歴番号list.isEmpty()) {
+            for (RiyoshaFutanWariaiMeisai 明細 : 履歴番号list) {
+                if (!ddl履歴番号List.contains(new KeyValueDataSource(
+                        new RString(明細.get履歴番号()),
+                        new RString(明細.get履歴番号())))) {
                     ddl履歴番号List.add(new KeyValueDataSource(
                             new RString(明細.get履歴番号()),
                             new RString(明細.get履歴番号())));
                 }
             }
-            div.getDdlRirekiNo().setDataSource(ddl履歴番号List);
-            div.getDdlRirekiNo().setSelectedIndex(0);
         }
+        return ddl履歴番号List;
     }
 
     private void setヘッダ項目(RiyoshaFutanWariai 利用者負担割合, RString 処理区分) {

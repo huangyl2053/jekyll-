@@ -246,4 +246,20 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
                 ).toObject(DbT7060KaigoJigyoshaEntity.class);
 
     }
+
+    /**
+     * 入所施設名称_事業者番号の取得。
+     *
+     * @param 入所施設コード RString
+     * @return DbT7060KaigoJigyoshaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    public DbT7060KaigoJigyoshaEntity get事業者名称_入所施設コード(RString 入所施設コード) throws NullPointerException {
+        requireNonNull(入所施設コード, UrSystemErrorMessages.値がnull.getReplacedMessage(入所施設コード.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7060KaigoJigyosha.class).
+                where(eq(DbT7060KaigoJigyosha.jigyoshaNo, 入所施設コード)).
+                toObject(DbT7060KaigoJigyoshaEntity.class);
+    }
 }

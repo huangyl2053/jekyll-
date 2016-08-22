@@ -131,6 +131,7 @@ public class TokuchoKariSanteiFukaManagerBatch {
     private static final RString 文字列_01 = new RString("01");
     private static final RString 文字列_03 = new RString("03");
     private static final RString 文字列_31 = new RString("31");
+    private static final RString 文字列_060 = new RString("060");
     private static final RString 文字列_0000 = new RString("0000");
     private static final ReportId 特別徴収仮算定結果一覧表_帳票分類ID = new ReportId("DBB200002_TokubetsuChoshuKarisanteiKekkaIchiran");
     private static final ReportId 帳票ID = new ReportId("DBB200002_TokubetsuChoshuKarisanteiKekkaIchiran");
@@ -743,7 +744,7 @@ public class TokuchoKariSanteiFukaManagerBatch {
         // TODO 呼び出す方法は問題がある
 //        TsukibetsuHokenryoDankai 月別保険料段階 = new HokenryoDankaiHantei().determine月別保険料段階(hokenryoDankaiHanteiParameter);
 //        RString 保険料段階 = 月別保険料段階.get保険料段階04月().edit表示用保険料段階();
-        RString 保険料段階 = RString.EMPTY;
+        RString 保険料段階 = 文字列_060;
         賦課の情報一時Entity.setHokenryoDankaiKarisanntei(保険料段階);
         set保険料段階_仮算定時(保険料段階, 賦課の情報_更正前, 賦課の情報一時Entity);
         set市町村コード(資格の情報, 賦課の情報一時Entity);
@@ -1360,7 +1361,7 @@ public class TokuchoKariSanteiFukaManagerBatch {
         // TODO 呼び出す方法は問題がある
 //        TsukibetsuHokenryoDankai 月別保険料段階 = new HokenryoDankaiHantei().determine月別保険料段階(hokenryoDankaiHanteiParameter);
 //        賦課情報Builder.set保険料段階_仮算定時(月別保険料段階.get保険料段階04月().edit表示用保険料段階());
-        賦課情報Builder.set保険料段階_仮算定時(RString.EMPTY);
+        賦課情報Builder.set保険料段階_仮算定時(文字列_060);
         set市町村コード_共通編集(資格の情報, 賦課情報Builder);
         賦課情報Builder.set被保険者番号(資格の情報.get被保険者番号());
         賦課情報Builder.set識別コード(資格の情報.get識別コード());

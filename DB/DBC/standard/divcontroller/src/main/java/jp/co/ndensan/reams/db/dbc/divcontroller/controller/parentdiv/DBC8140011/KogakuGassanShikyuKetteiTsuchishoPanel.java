@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -234,6 +235,9 @@ public class KogakuGassanShikyuKetteiTsuchishoPanel {
         KougakugassanShikyuketteiTsuuchishoOutputEntity outputEntity = getHandler(div).editKougakugassanShikyuketteiTsuuchisho(
                 事業高額合算支給不支給決定, 識別コード, 被保険者番号, 支払予定日印字有無);
         KogakuGassanShikyuKetteiTsuchisho tsuchisho = outputEntity.get事業分高額合算支給決定通知書();
+        FlexibleDate 支払予定日 = div.getTxtShiharaiYoteiYMD().getValue() != null
+                ? new FlexibleDate(div.getTxtShiharaiYoteiYMD().getValue().toDateString()) : FlexibleDate.EMPTY;
+        tsuchisho.set支払予定日(支払予定日);
         getHandler(div).データ更新(事業高額合算支給不支給決定, 識別コード, 被保険者番号);
         return ResponseData.of(getHandler(div).to帳票発行処理(tsuchisho, 支払予定日印字有無)).respond();
     }

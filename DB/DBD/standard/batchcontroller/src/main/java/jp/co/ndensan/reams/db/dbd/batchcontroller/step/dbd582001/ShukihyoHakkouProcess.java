@@ -242,7 +242,7 @@ public class ShukihyoHakkouProcess extends BatchProcessBase<YokaigoNinteiTsukibe
                 年齢,
                 地区,
                 集計単位,
-                parameter.get対象年度().getYear(),
+                parameter.get対象年度(),
                 受給状況Entity.get受給状況リスト());
         report.writeBy(reportSourceWriter);
         outputJokenhyoFactory();
