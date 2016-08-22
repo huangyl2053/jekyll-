@@ -58,7 +58,7 @@ public class TaJushochiTokureishaKanriHandler {
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
-    private static final RString 他特例解除 = new RString("01");
+    private static final RString 他特例解除 = new RString("51");
     private static final RString 転入 = new RString("01");
     private static final RString 除外者適用 = new RString("01");
 

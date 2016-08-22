@@ -13,6 +13,8 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.TaJushochiTokureisyaKanriMaster;
 import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.TashichosonBusiness;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.ShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TaJushochiTokureisyaKanriRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TashichosonRelateEntity;
@@ -240,7 +242,7 @@ public class TaJushochiTokureisyaKanriManager {
     public void saveHihokenshaSositu(KaigoTatokuTekiyoJiyu 適用事由,
             FlexibleDate 適用年月日, FlexibleDate 適用届出年月日, ShikibetsuCode 識別コード) {
         HihokenshashikakusoshitsuManager.createInstance().saveHihokenshaShikakuSoshitsu(
-                識別コード, HihokenshaNo.EMPTY, 適用年月日, new RString("05"), 適用届出年月日);
+                識別コード, HihokenshaNo.EMPTY, 適用年月日, ShikakuSoshitsuJiyu.他特例者.getコード(), 適用届出年月日);
     }
 
     /**
@@ -316,12 +318,12 @@ public class TaJushochiTokureisyaKanriManager {
             生年月日 = 宛名情報PSM.getSeinengappiYMD();
         }
         dbT1001entity.setIdoYMD(解除年月日);
-        dbT1001entity.setIdoJiyuCode(他特例居住);
+        dbT1001entity.setIdoJiyuCode(ShikakuShutokuJiyu.他特例居住.getコード());
         if (市町村コード != null && !市町村コード.isEmpty()) {
             dbT1001entity.setShichosonCode(市町村コード);
         }
         dbT1001entity.setShikibetsuCode(識別コード);
-        dbT1001entity.setShikakuShutokuJiyuCode(他特例居住);
+        dbT1001entity.setShikakuShutokuJiyuCode(ShikakuShutokuJiyu.他特例居住.getコード());
         dbT1001entity.setShikakuShutokuYMD(解除年月日);
         dbT1001entity.setShikakuShutokuTodokedeYMD(解除届出年月日);
         if (旧市町村コード != null && !旧市町村コード.isEmpty()) {
