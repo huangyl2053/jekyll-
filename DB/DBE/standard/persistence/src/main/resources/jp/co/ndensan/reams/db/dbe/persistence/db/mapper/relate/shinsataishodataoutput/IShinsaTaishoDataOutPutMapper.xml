@@ -358,7 +358,7 @@
         SELECT    
         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5501ShinsakaiKaisaiYoteiJohoMapper.allColumns_DbT5501ShinsakaiKaisaiYoteiJoho" />
         FROM 
-        rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"  Dbt5501
-        WHERE  Dbt5501."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo} 			
+        rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" 
+        WHERE "shinsakaiKaisaiNo" = #{kaisaiBangou} 			
     </select>
 </mapper>
