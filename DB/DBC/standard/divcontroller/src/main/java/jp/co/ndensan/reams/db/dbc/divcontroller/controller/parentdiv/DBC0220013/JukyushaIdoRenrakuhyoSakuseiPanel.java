@@ -142,18 +142,9 @@ public class JukyushaIdoRenrakuhyoSakuseiPanel {
      */
     public ResponseData<JukyushaIdoRenrakuhyoSakuseiPanelDiv> onClick_btnResearch(
             JukyushaIdoRenrakuhyoSakuseiPanelDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return getCheckMessage(div, DBC0250011TransitionEventName.再検索);
-        } else {
-            return ResponseData.of(div).respond();
-        }
+
+        return getCheckMessage(div, DBC0250011TransitionEventName.再検索);
+
     }
 
     /**
