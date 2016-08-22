@@ -15,10 +15,12 @@ import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.j
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.jukyuShinseiYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.rirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.shichosonCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
@@ -175,6 +177,28 @@ public class DbV4001JukyushaDaichoAliveDac implements ISaveable<DbV4001JukyushaD
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(chokkinFlag, true))).
                 order(by(jukyuShinseiYMD, ASC)).limit(1).
+                toObject(DbV4001JukyushaDaichoEntity.class);
+    }
+
+    /**
+     * 被保険者番号と識別コードで受給者台帳Aliveを取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 識別コード 識別コード
+     * @return DbV4001JukyushaDaichoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbV4001JukyushaDaichoEntity selectBy被保険者番号And識別コード(
+            HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbV4001JukyushaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(shikibetsuCode, 識別コード))).
                 toObject(DbV4001JukyushaDaichoEntity.class);
     }
 }
