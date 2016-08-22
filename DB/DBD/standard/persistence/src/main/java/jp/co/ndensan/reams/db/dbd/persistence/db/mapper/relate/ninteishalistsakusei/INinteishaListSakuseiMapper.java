@@ -14,13 +14,13 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd200004.ShakaiFukushiHojinK
  *
  * @reamsid_L DBD-3830-040 tianyh
  */
-public interface NinteishaListSakuseiMapper {
+public interface INinteishaListSakuseiMapper {
 
     /**
      * select社会福祉法人軽減情報。
      *
      * @param parameter NinteishaListSakuseiParameter
-     * @return ShakaiFukushiHojinKeigenGaitoshaIchiranEntity{@code list}
+     * @return ShakaiFukushiHojinKeigenGaitoshaIchiranEntity{@literal list}
      */
     List<ShakaiFukushiHojinKeigenGaitoshaIchiranEntity> select社会福祉法人軽減情報(NinteishaListSakuseiParameter parameter);
 
