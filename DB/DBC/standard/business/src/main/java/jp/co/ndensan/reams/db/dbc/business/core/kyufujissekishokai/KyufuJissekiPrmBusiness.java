@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufuJissekiCareManagementHi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufuJissekiShakaiFukushiHojinKeigengaku;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiFukushiYoguHanbaihi;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKyotakuService
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiMeisaiJushochiTokurei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiShokujiHiyo;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiShoteiShikkanShisetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiShukei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiTokuteiNyushosyaKaigoServiceHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiTokuteiSinryoTokubetsuRyoyo;
@@ -49,22 +51,23 @@ public class KyufuJissekiPrmBusiness {
     private DataRow selectRow;
     private Boolean blnMaxKensuFG;
     private Boolean blnRirekiFG;
-    private KyufujissekiKihon csData_A;
-    private KyufujissekiMeisai csData_B;
-    private KyufujissekiKinkyuShisetsuRyoyo csData_C;
-    private KyufujissekiTokuteiSinryohi csData_D;
-    private KyufujissekiTokuteiSinryoTokubetsuRyoyo csData_J;
-    private KyufujissekiShokujiHiyo csData_E;
-    private KyufujissekiKyotakuService csData_F;
-    private KyufujissekiFukushiYoguHanbaihi csData_G;
-    private KyufujissekiJutakuKaishuhi csData_H;
-    private KyufujissekiKogakuKaigoServicehi csData_I;
-    private KyufujissekiTokuteiNyushosyaKaigoServiceHiyo csData_K;
-    private KyufuJissekiShakaiFukushiHojinKeigengaku csData_L;
-    private KyufuJissekiCareManagementHi csData_M;
-    private KyufujissekiMeisaiJushochiTokurei csData_N;
-    private KyufujissekiShukei csData_Z;
-    private JukyushaDaicho jukyushaData;
+    private List<KyufujissekiKihon> csData_A;
+    private List<KyufujissekiMeisai> csData_B;
+    private List<KyufujissekiKinkyuShisetsuRyoyo> csData_C;
+    private List<KyufujissekiTokuteiSinryohi> csData_D;
+    private List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> csData_J;
+    private List<KyufujissekiShokujiHiyo> csData_E;
+    private List<KyufujissekiKyotakuService> csData_F;
+    private List<KyufujissekiFukushiYoguHanbaihi> csData_G;
+    private List<KyufujissekiJutakuKaishuhi> csData_H;
+    private List<KyufujissekiKogakuKaigoServicehi> csData_I;
+    private List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyo> csData_K;
+    private List<KyufuJissekiShakaiFukushiHojinKeigengaku> csData_L;
+    private List<KyufuJissekiCareManagementHi> csData_M;
+    private List<KyufujissekiMeisaiJushochiTokurei> csData_N;
+    private List<KyufujissekiShukei> csData_Z;
+    private List<KyufujissekiShoteiShikkanShisetsuRyoyo> csData_P;
+    private List<JukyushaDaicho> jukyushaData;
 //    private Data_N data_N; 給付実績情報照会
     private RString hiHokenShaName;
     private RString yoKaiGoDoName;
