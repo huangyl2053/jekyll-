@@ -30,9 +30,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 public class KinnkyuujiShisetsuRyouyouhiHandler {
 
     private final RString 前月 = new RString("前月");
-    private final RString 前事業者 = new RString("前事業者");
+    //private final RString 前事業者 = new RString("前事業者");
     private final KinnkyuujiShisetsuRyouyouhiDiv div;
-    private final RString ZERO = new RString("0");
+    private static final RString ZERO = new RString("0");
     //private final RString NI = new RString("2");
     private static final int INT_1 = 1;
     private static final int INT_12 = 12;
@@ -384,16 +384,16 @@ public class KinnkyuujiShisetsuRyouyouhiHandler {
 
     }
 
-    /**
-     * 事業者番号の設定です。
-     *
-     * @param 事業者番号リスト　List<Header2>
-     * @param サービス提供年月　FlexibleYearMonth
-     * @param 整理番号 RString
-     * @param 事業者番号 RString
-     * @param 样式番号 RString
-     * @return int
-     */
+//    /**
+//     * 事業者番号の設定です。
+//     *
+//     * @param 事業者番号リスト　List<Header2>
+//     * @param サービス提供年月　FlexibleYearMonth
+//     * @param 整理番号 RString
+//     * @param 事業者番号 RString
+//     * @param 样式番号 RString
+//     * @return int
+//     */
     //public int get事業者番号index(List<Header2> 事業者番号リスト, RDate サービス提供年月, RString 整理番号, RString 事業者番号, RString 样式番号) {
 //        for (int index = 0; index < 事業者番号リスト.size(); index++) {
 //            if (事業者番号リスト.get(index).get事業者番号().compareTo(事業者番号) == 0 && 整理番号.equals(事業者番号リスト.get(index).get整理番号())
@@ -401,7 +401,7 @@ public class KinnkyuujiShisetsuRyouyouhiHandler {
 //                return index;
 //            }
 //        }
-     //   return 0;
+    //   return 0;
     //  }
     /**
      * change年月です。
