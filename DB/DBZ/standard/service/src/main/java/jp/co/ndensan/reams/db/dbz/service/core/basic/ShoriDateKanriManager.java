@@ -548,7 +548,7 @@ public class ShoriDateKanriManager {
             entity.initializeMd5();
             shoriDateKanriList.add(new ShoriDateKanri(entity));
         }
-        return SearchResult.of(shoriDateKanriList, 0, false);
+        return SearchResult.of(shoriDateKanriList, shoriDateKanriList.size(), false);
     }
 
     /**
@@ -579,7 +579,7 @@ public class ShoriDateKanriManager {
             entity.initializeMd5();
             shoriDateKanriList.add(new ShoriDateKanri(entity));
         }
-        return SearchResult.of(shoriDateKanriList, 0, false);
+        return SearchResult.of(shoriDateKanriList, shoriDateKanriList.size(), false);
     }
 
     /**
@@ -611,7 +611,7 @@ public class ShoriDateKanriManager {
             entity.initializeMd5();
             shoriDateKanriList.add(new ShoriDateKanri(entity));
         }
-        return SearchResult.of(shoriDateKanriList, 0, false);
+        return SearchResult.of(shoriDateKanriList, shoriDateKanriList.size(), false);
     }
 
     /**
@@ -647,7 +647,7 @@ public class ShoriDateKanriManager {
             entity.initializeMd5();
             shoriDateKanriList.add(new ShoriDateKanri(entity));
         }
-        return SearchResult.of(shoriDateKanriList, 0, false);
+        return SearchResult.of(shoriDateKanriList, shoriDateKanriList.size(), false);
     }
 
     /**
@@ -693,6 +693,8 @@ public class ShoriDateKanriManager {
 //        if (!処理日付管理マスタ.hasChanged()) {
 //            return false;
 //        }
-        return 1 == dac.saveOrDeletePhysicalBy(処理日付管理マスタ.toEntity());
+        DbT7022ShoriDateKanriEntity entity = 処理日付管理マスタ.toEntity();
+        entity.setState(EntityDataState.Deleted);
+        return 1 == dac.saveOrDeletePhysicalBy(entity);
     }
 }

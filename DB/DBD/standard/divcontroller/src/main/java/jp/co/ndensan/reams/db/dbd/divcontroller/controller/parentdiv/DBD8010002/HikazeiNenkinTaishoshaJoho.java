@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD8010002;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100201.HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter;
@@ -15,6 +16,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.Hika
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD8010002.HikazeiNenkinTaishoshaJohoHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD8010002.HikazeiNenkinTaishoshaJohoValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -86,7 +88,8 @@ public class HikazeiNenkinTaishoshaJoho {
      */
     public ResponseData<HikazeiNenkinTaishoshaJohoDiv> onClick_btnShoriSettei(HikazeiNenkinTaishoshaJohoDiv div) {
 
-        getHandler(div).onClick_btnShoriSettei(div);
+        List<ShoriDateKanri> 更新用List = getHandler(div).onClick_btnShoriSettei(div);
+        ViewStateHolder.put(ViewStateKeys.非課税年金対象者情報取込初期情報, (Serializable) 更新用List);
 
         return ResponseData.of(div).setState(DBD8010002StateName.処理設定);
     }
@@ -140,6 +143,8 @@ public class HikazeiNenkinTaishoshaJoho {
      */
     public ResponseData<HikazeiNenkinTaishoshaJohoDiv> onClick_btnUpdate(HikazeiNenkinTaishoshaJohoDiv div) {
 
+        List<ShoriDateKanri> 画面更新用情報
+                = ViewStateHolder.get(ViewStateKeys.非課税年金対象者情報取込初期情報, new ArrayList<>().getClass());
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         getValidationHandler(div).validateFor編集なし(pairs);
 
@@ -160,7 +165,7 @@ public class HikazeiNenkinTaishoshaJoho {
             return ResponseData.of(div).respond();
         }
 
-        getHandler(div).onClick_btnUpdate(div);
+        getHandler(div).onClick_btnUpdate(画面更新用情報);
         return onLoad(div);
 
     }

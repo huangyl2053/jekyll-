@@ -49,7 +49,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -176,7 +175,7 @@ public class HikazeiNenkinTaishoshaJohoHandler {
             for (ShoriDateKanri shoriDateKanri : 年次処理情報List.records()) {
                 if (div.getDdlTuki().getSelectedKey().equals(shoriDateKanri.get年度内連番())) {
                     div.getTxtShoriJotai().setValue(SyoriJyoutaiCode.toValue(shoriDateKanri.get処理枝番()).get名称());
-                    div.getTxtShoriNichiji().setValue(shoriDateKanri.get基準日時().toDateString());
+                    div.getTxtShoriNichiji().setValue(shoriDateKanri.get基準日時() == null ? RString.EMPTY : shoriDateKanri.get基準日時().toDateString());
                     break;
                 }
                 div.getTxtShoriJotai().setValue(SyoriJyoutaiCode.未処理.get名称());
@@ -191,13 +190,15 @@ public class HikazeiNenkinTaishoshaJohoHandler {
      * 処理設定のクリンク処理です。
      *
      * @param div JissiJyokyohyoDiv
+     * @return List<ShoriDateKanri>
      */
-    public void onClick_btnShoriSettei(HikazeiNenkinTaishoshaJohoDiv div) {
+    public List<ShoriDateKanri> onClick_btnShoriSettei(HikazeiNenkinTaishoshaJohoDiv div) {
 
         div.getShoriSettei().setHdnShoriNendo(div.getDdlShoriNendo().getSelectedKey());
         div.getShoriSettei().getTxtShoriSetteiNendo().setValue(div.getDdlShoriNendo().getSelectedValue());
 
         List<HikazeiNenkinTaishoshaJohoBusiness> 対象処理List = new ArrayList<>();
+        List<ShoriDateKanri> 更新用List = new ArrayList<>();
 
         HikazeiNenkinTaishoshaJohoBusiness 対象処理年次 = new HikazeiNenkinTaishoshaJohoBusiness();
         RString 年次の月 = get月(-1);
@@ -216,7 +217,8 @@ public class HikazeiNenkinTaishoshaJohoHandler {
             対象処理年次.set処理状態コード(RSTRING_1);
             対象処理年次.set処理状態(SyoriJyoutaiCode.toValue(RSTRING_1).get名称());
         } else {
-            対象処理年次.set処理日時(年次処理情報.get基準日時().toDateString());
+            更新用List.add(年次処理情報);
+            対象処理年次.set処理日時(年次処理情報.get基準日時() == null ? RString.EMPTY : 年次処理情報.get基準日時().toDateString());
             対象処理年次.set処理状態コード(年次処理情報.get処理枝番());
             対象処理年次.set処理状態(SyoriJyoutaiCode.toValue(年次処理情報.get処理枝番()).get名称());
         }
@@ -237,7 +239,8 @@ public class HikazeiNenkinTaishoshaJohoHandler {
                 対象処理.set処理状態コード(RSTRING_1);
                 対象処理.set処理状態(SyoriJyoutaiCode.toValue(RSTRING_1).get名称());
             } else {
-                対象処理.set処理日時(年次処理情報.get基準日時().toDateString());
+                更新用List.add(月次処理情報);
+                対象処理.set処理日時(年次処理情報.get基準日時() == null ? RString.EMPTY : 年次処理情報.get基準日時().toDateString());
                 対象処理.set処理状態コード(年次処理情報.get処理枝番());
                 対象処理.set処理状態(SyoriJyoutaiCode.toValue(年次処理情報.get処理枝番()).get名称());
             }
@@ -262,6 +265,7 @@ public class HikazeiNenkinTaishoshaJohoHandler {
         }
 
         div.getDgShoriSettei().setDataSource(rowList);
+        return 更新用List;
 
     }
 
@@ -386,28 +390,20 @@ public class HikazeiNenkinTaishoshaJohoHandler {
     /**
      * 「保存する」ボタンのクリンク処理です。
      *
-     * @param div JissiJyokyohyoDiv
+     * @param 更新用List List<ShoriDateKanri>
      */
-    public void onClick_btnUpdate(HikazeiNenkinTaishoshaJohoDiv div) {
+    public void onClick_btnUpdate(List<ShoriDateKanri> 更新用List) {
 
         List<dgShoriSettei_Row> rowList = div.getDgShoriSettei().getDataSource();
         for (dgShoriSettei_Row row : rowList) {
             if (!row.getHdnSyokiShoriJotai().equals(row.getTxtShoriJotai().getSelectedKey())) {
-                DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+                for (ShoriDateKanri 処理日付管理マスタ : 更新用List) {
+                    if (処理日付管理マスタ.get年度内連番().equals(row.getHdnShori().concat(row.getHdnTuki()))) {
 
-                ShoriDateKanri shoriDateKanri = new ShoriDateKanri(
-                        SubGyomuCode.DBD介護受給,
-                        new LasdecCode(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)),
-                        ShoriName.非課税年金対象者情報取込.get名称(),
-                        row.getHdnSyokiShoriJotai(),
-                        new FlexibleYear(div.getShoriSettei().getHdnShoriNendo()),
-                        row.getHdnShori().concat(row.getHdnTuki()));
-
-                shoriDateKanri.toEntity().setState(EntityDataState.Added);
-                ShoriDateKanri deletedShoriDateKanri = shoriDateKanri.deleted();
-                ShoriDateKanriManager manager = new ShoriDateKanriManager();
-                manager.save処理日付管理マスタForDeletePhysical(deletedShoriDateKanri);
-
+                        ShoriDateKanriManager manager = new ShoriDateKanriManager();
+                        manager.save処理日付管理マスタForDeletePhysical(処理日付管理マスタ);
+                    }
+                }
                 ShoriDateKanri insertShoriDateKanri = new ShoriDateKanri(
                         SubGyomuCode.DBD介護受給,
                         new LasdecCode(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)),
@@ -447,7 +443,7 @@ public class HikazeiNenkinTaishoshaJohoHandler {
             対象処理年次.set処理状態コード(RSTRING_1);
             対象処理年次.set処理状態(SyoriJyoutaiCode.toValue(RSTRING_1).get名称());
         } else {
-            対象処理年次.set処理日時(年次処理情報.get基準日時().toDateString());
+            対象処理年次.set処理日時(年次処理情報.get基準日時() == null ? RString.EMPTY : 年次処理情報.get基準日時().toDateString());
             対象処理年次.set処理状態コード(年次処理情報.get処理枝番());
             対象処理年次.set処理状態(SyoriJyoutaiCode.toValue(年次処理情報.get処理枝番()).get名称());
         }
@@ -469,7 +465,7 @@ public class HikazeiNenkinTaishoshaJohoHandler {
                 対象処理.set処理状態コード(RSTRING_1);
                 対象処理.set処理状態(SyoriJyoutaiCode.toValue(RSTRING_1).get名称());
             } else {
-                対象処理.set処理日時(年次処理情報.get基準日時().toDateString());
+                対象処理.set処理日時(年次処理情報.get基準日時() == null ? RString.EMPTY : 年次処理情報.get基準日時().toDateString());
                 対象処理.set処理状態コード(年次処理情報.get処理枝番());
                 対象処理.set処理状態(SyoriJyoutaiCode.toValue(年次処理情報.get処理枝番()).get名称());
             }
@@ -580,8 +576,8 @@ public class HikazeiNenkinTaishoshaJohoHandler {
             return null;
         }
         for (ShoriDateKanri shoriDateKanri : resultList.records()) {
-            if (月コード.equals(shoriDateKanri.get年度内連番().substring(INT_0))
-                    && 処理コード.equals(shoriDateKanri.get年度内連番().substring(INT_1, INT_4))) {
+            if (処理コード.equals(shoriDateKanri.get年度内連番().substring(INT_0, INT_1))
+                    && 月コード.equals(shoriDateKanri.get年度内連番().substring(INT_1, INT_4))) {
                 return shoriDateKanri;
             }
         }
