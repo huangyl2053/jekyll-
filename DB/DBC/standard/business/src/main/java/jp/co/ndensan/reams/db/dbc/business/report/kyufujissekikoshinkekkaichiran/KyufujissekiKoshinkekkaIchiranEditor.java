@@ -211,12 +211,10 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
         if (entity.get給付実績_レコード件数DC() >= NUM_1) {
             source.listUpper_23 = 図形_ONE;
         }
-        if (entity.get給付実績_警告区分コード() != null && !entity.get給付実績_警告区分コード().isEmpty()) {
-            if (NUM_ONE.equals(entity.get給付実績_警告区分コード())) {
-                source.listUpper_24 = RString.EMPTY;
-            } else {
-                source.listUpper_24 = KeikokuKubun.toValue(entity.get給付実績_警告区分コード()).get名称();
-            }
+        if (NUM_ONE.equals(entity.get給付実績_警告区分コード())) {
+            source.listUpper_24 = RString.EMPTY;
+        } else {
+            source.listUpper_24 = KeikokuKubun.toValue(entity.get給付実績_警告区分コード()).get名称();
         }
         int 入力識別名称Length = entity.get給付実績_入力識別名称().length();
         if (入力識別名称Length >= NUM_9 && 入力識別名称Length < NUM_16) {
