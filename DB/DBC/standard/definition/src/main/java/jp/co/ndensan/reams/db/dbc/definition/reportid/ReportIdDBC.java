@@ -247,7 +247,7 @@ public enum ReportIdDBC {
     DBC100071(
             new ReportId("DBC100071_KogakuJigyoShikyuShinseishoYucho"), new RString("介護保険高額総合事業サービス費支給申請書（ゆうちょ銀行）")),
     /**
-     * 事業分高額合算支給決定通知書（単）
+     * （高額合算支給（不支給）決定通知書）支払予定日なし帳票ＩＤです。
      */
     DBC200201(new ReportId("DBC200201_GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashi"), new RString("事業分高額合算支給決定通知書（単）")),
     /**
@@ -330,7 +330,15 @@ public enum ReportIdDBC {
     /**
      * 介護給付費等審査決定請求明細表帳票ＩＤです。
      */
-    DBC200069(new ReportId("DBC200069_KyufuhiShinsaKetteiSeikyuMeisaihyo"), new RString("介護給付費等審査決定請求明細表"));
+    DBC200069(new ReportId("DBC200069_KyufuhiShinsaKetteiSeikyuMeisaihyo"), new RString("介護給付費等審査決定請求明細表")),
+    /**
+     * （高額合算支給（不支給）決定通知書）支払予定日なし帳票ＩＤです。
+     */
+    DBC100053(new ReportId("DBC100053_GassanKetteiTsuchishoShiharaiYoteiBiYijiNashi"), new RString("高額合算支給（不支給）決定通知書（単）")),
+    /**
+     * （高額合算支給（不支給）決定通知書）支払予定日あり帳票ＩＤです。
+     */
+    DBC100054(new ReportId("DBC100054_GassanKetteiTsuchishoShiharaiYoteiBiYijiAri"), new RString("高額合算支給（不支給）決定通知書（単）"));
 
     private final ReportId reportId;
 

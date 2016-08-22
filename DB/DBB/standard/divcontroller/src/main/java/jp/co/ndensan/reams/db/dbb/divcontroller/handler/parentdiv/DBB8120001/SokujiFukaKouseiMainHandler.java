@@ -222,29 +222,29 @@ public class SokujiFukaKouseiMainHandler {
                 null, is差異がある);
 
         is差異がある = set期別金額(最新賦課の情報, NUM_1, ChoshuHohoKibetsu.普通徴収.getコード(), tablePanel.getTxtFuchoKoseiGo04(),
-                tablePanel.getTxtFuchoNokigen01(), is差異がある);
-        is差異がある = set期別金額(最新賦課の情報, NUM_2, ChoshuHohoKibetsu.普通徴収.getコード(), tablePanel.getTxtFuchoKoseiGo05(),
-                tablePanel.getTxtFuchoNokigen02(), is差異がある);
-        is差異がある = set期別金額(最新賦課の情報, NUM_3, ChoshuHohoKibetsu.普通徴収.getコード(), tablePanel.getTxtFuchoKoseiGo06(),
-                tablePanel.getTxtFuchoNokigen03(), is差異がある);
-        is差異がある = set期別金額(最新賦課の情報, NUM_4, ChoshuHohoKibetsu.普通徴収.getコード(), tablePanel.getTxtFuchoKoseiGo07(),
                 tablePanel.getTxtFuchoNokigen04(), is差異がある);
-        is差異がある = set期別金額(最新賦課の情報, NUM_5, ChoshuHohoKibetsu.普通徴収.getコード(), tablePanel.getTxtFuchoKoseiGo08(),
+        is差異がある = set期別金額(最新賦課の情報, NUM_2, ChoshuHohoKibetsu.普通徴収.getコード(), tablePanel.getTxtFuchoKoseiGo05(),
                 tablePanel.getTxtFuchoNokigen05(), is差異がある);
-        is差異がある = set期別金額(最新賦課の情報, NUM_6, ChoshuHohoKibetsu.普通徴収.getコード(), tablePanel.getTxtFuchoKoseiGo09(),
+        is差異がある = set期別金額(最新賦課の情報, NUM_3, ChoshuHohoKibetsu.普通徴収.getコード(), tablePanel.getTxtFuchoKoseiGo06(),
                 tablePanel.getTxtFuchoNokigen06(), is差異がある);
-        is差異がある = set期別金額(最新賦課の情報, NUM_7, ChoshuHohoKibetsu.普通徴収.getコード(), tablePanel.getTxtFuchoKoseiGo10(),
+        is差異がある = set期別金額(最新賦課の情報, NUM_4, ChoshuHohoKibetsu.普通徴収.getコード(), tablePanel.getTxtFuchoKoseiGo07(),
                 tablePanel.getTxtFuchoNokigen07(), is差異がある);
-        is差異がある = set期別金額(最新賦課の情報, NUM_8, ChoshuHohoKibetsu.普通徴収.getコード(), tablePanel.getTxtFuchoKoseiGo11(),
+        is差異がある = set期別金額(最新賦課の情報, NUM_5, ChoshuHohoKibetsu.普通徴収.getコード(), tablePanel.getTxtFuchoKoseiGo08(),
                 tablePanel.getTxtFuchoNokigen08(), is差異がある);
-        is差異がある = set期別金額(最新賦課の情報, NUM_9, ChoshuHohoKibetsu.普通徴収.getコード(), tablePanel.getTxtFuchoKoseiGo12(),
+        is差異がある = set期別金額(最新賦課の情報, NUM_6, ChoshuHohoKibetsu.普通徴収.getコード(), tablePanel.getTxtFuchoKoseiGo09(),
                 tablePanel.getTxtFuchoNokigen09(), is差異がある);
-        is差異がある = set期別金額(最新賦課の情報, NUM_10, ChoshuHohoKibetsu.普通徴収.getコード(), tablePanel.getTxtFuchoKoseiGo01(),
+        is差異がある = set期別金額(最新賦課の情報, NUM_7, ChoshuHohoKibetsu.普通徴収.getコード(), tablePanel.getTxtFuchoKoseiGo10(),
                 tablePanel.getTxtFuchoNokigen10(), is差異がある);
-        is差異がある = set期別金額(最新賦課の情報, NUM_11, ChoshuHohoKibetsu.普通徴収.getコード(), tablePanel.getTxtFuchoKoseiGo02(),
+        is差異がある = set期別金額(最新賦課の情報, NUM_8, ChoshuHohoKibetsu.普通徴収.getコード(), tablePanel.getTxtFuchoKoseiGo11(),
                 tablePanel.getTxtFuchoNokigen11(), is差異がある);
-        is差異がある = set期別金額(最新賦課の情報, NUM_12, ChoshuHohoKibetsu.普通徴収.getコード(), tablePanel.getTxtFuchoKoseiGo03(),
+        is差異がある = set期別金額(最新賦課の情報, NUM_9, ChoshuHohoKibetsu.普通徴収.getコード(), tablePanel.getTxtFuchoKoseiGo12(),
                 tablePanel.getTxtFuchoNokigen12(), is差異がある);
+        is差異がある = set期別金額(最新賦課の情報, NUM_10, ChoshuHohoKibetsu.普通徴収.getコード(), tablePanel.getTxtFuchoKoseiGo01(),
+                tablePanel.getTxtFuchoNokigen01(), is差異がある);
+        is差異がある = set期別金額(最新賦課の情報, NUM_11, ChoshuHohoKibetsu.普通徴収.getコード(), tablePanel.getTxtFuchoKoseiGo02(),
+                tablePanel.getTxtFuchoNokigen02(), is差異がある);
+        is差異がある = set期別金額(最新賦課の情報, NUM_12, ChoshuHohoKibetsu.普通徴収.getコード(), tablePanel.getTxtFuchoKoseiGo03(),
+                tablePanel.getTxtFuchoNokigen03(), is差異がある);
         is差異がある = set期別金額(最新賦課の情報, NUM_13, ChoshuHohoKibetsu.普通徴収.getコード(), tablePanel.getTxtFuchoKoseiGoYoku04(),
                 tablePanel.getTxtFuchoNokigenYoku04(), is差異がある);
         is差異がある = set期別金額(最新賦課の情報, NUM_14, ChoshuHohoKibetsu.普通徴収.getコード(), tablePanel.getTxtFuchoKoseiGoYoku05(),

@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shunyugaku.ShutsuryokuJoken;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyufuoshirasetsuchisho.KogakuKaigoServicehiOshiraseHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
@@ -50,7 +51,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 高額サービス費給付お知らせ通知書作成のバッチフロークラスです。
@@ -114,7 +114,7 @@ public class DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchisho
         }
         executeStep(HIHOKENSHADAICHO_SHOKAN);
 
-        RString 死亡者制御 = BusinessConfig.get(ConfigNameDBC.高額自動償還_死亡者制御, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        RString 死亡者制御 = DbBusinessConfig.get(ConfigNameDBC.高額自動償還_死亡者制御, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         if (死亡者制御_0.equals(死亡者制御)) {
             executeStep(SHIBOUSHA);
         }
@@ -281,12 +281,12 @@ public class DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchisho
         processParameter = getParameter().toProcessParameter();
 
         processParameter.set保険者番号(
-                BusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+                DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
         processParameter.set事業高額(
-                BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_事業高額, RDate.getNowDate(), SubGyomuCode.DBC介護給付));
+                DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_事業高額, RDate.getNowDate(), SubGyomuCode.DBC介護給付));
         // TODO QA.1142  DBC業務コンフィグ.自動高額償還_初回申請把握基準日はありません
         processParameter.set初回申請把握基準日(
-                BusinessConfig.get(ConfigNameDBC.高額自動償還_初回申請把握基準日, RDate.getNowDate(), SubGyomuCode.DBC介護給付));
+                DbBusinessConfig.get(ConfigNameDBC.高額自動償還_初回申請把握基準日, RDate.getNowDate(), SubGyomuCode.DBC介護給付));
 
         processParameter.set宛名検索条件(new ShikibetsuTaishoPSMSearchKeyBuilder(
                 GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先).set基準日(FlexibleDate.getNowDate()).build());

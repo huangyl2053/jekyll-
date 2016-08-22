@@ -31,16 +31,8 @@ public class ShinseiJohoChohyoTempTableInsertProcess extends BatchProcessBase<Sh
 
     private KogakuKaigoServicehiOshiraseHakkoProcessParameter parameter;
 
-    private ShinseiJohoChohyoTempEntity tmpEntity;
-    private boolean isFirst;
-
     @BatchWriter
     private IBatchTableWriter tempDbWriter;
-
-    @Override
-    protected void initialize() {
-        isFirst = true;
-    }
 
     @Override
     protected IBatchReader createReader() {
@@ -54,24 +46,11 @@ public class ShinseiJohoChohyoTempTableInsertProcess extends BatchProcessBase<Sh
 
     @Override
     protected void process(ShinseiJohoChohyoTempEntity entity) {
-        if (isFirst) {
-            isFirst = false;
-        } else if (entity.getHihokenshaNoChohyo().equals(tmpEntity.getHihokenshaNoChohyo())
-                && entity.getServiceTeikyoYMChohyo().equals(tmpEntity.getServiceTeikyoYMChohyo())
-                && entity.getShoKisaiHokenshaNoChohyo().equals(tmpEntity.getShoKisaiHokenshaNoChohyo())
-                && entity.getRirekiNoChohyo().equals(tmpEntity.getRirekiNoChohyo())
-                && entity.getNinteiYukoKikanKaishiYMDChohyo().equals(tmpEntity.getNinteiYukoKikanKaishiYMDChohyo())
-                && entity.getNinteiYukoKikanShuryoYMDChohyo().equals(tmpEntity.getNinteiYukoKikanShuryoYMDChohyo())
-                && entity.getYokaigoJotaiKubunCodeChohyo().equals(tmpEntity.getYokaigoJotaiKubunCodeChohyo())
-                && entity.isKyuSochishaFlagChohyo() == tmpEntity.isKyuSochishaFlagChohyo()) {
-            return;
-        }
         if (申請書電話番号表示.equals(parameter.getShinseishoTelNoHyoji())) {
             entity.setTelNoChohyo(null);
         }
         entity.setIninjoTeishutsusakiChohyo(parameter.getIninjoTeishutsusaki());
         entity.setState(EntityDataState.Added);
         tempDbWriter.insert(entity);
-        tmpEntity = entity;
     }
 }
