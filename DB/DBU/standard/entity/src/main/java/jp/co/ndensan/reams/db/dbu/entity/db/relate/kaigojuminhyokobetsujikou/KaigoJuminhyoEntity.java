@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo;
+package jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyokobetsujikou;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
@@ -18,9 +18,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 構成介護住民票個別事項連携情報[他社住基]Entityクラスです。
- * 
- * @reamsid_L DBU-0350-020  lijia
- * 
+ *
+ * @reamsid_L DBU-0350-020 lijia
+ *
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
