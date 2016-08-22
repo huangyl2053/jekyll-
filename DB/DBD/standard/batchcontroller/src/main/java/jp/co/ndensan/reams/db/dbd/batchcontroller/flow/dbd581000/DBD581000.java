@@ -43,7 +43,7 @@ public class DBD581000 extends BatchFlowBase<DBD581000Parameter> {
      */
     @Step(実施状況表の発行)
     protected IBatchFlowCommand jissiJyokyohyoHakkou() {
-        return otherBatchFlow(BATCH_ID_DBD581001, SubGyomuCode.DBZ介護共通, getParameter().toDBD581001Parameter()).define();
+        return otherBatchFlow(BATCH_ID_DBD581001, SubGyomuCode.DBD介護受給, getParameter().toDBD581001Parameter()).define();
     }
 
     /**
@@ -53,7 +53,7 @@ public class DBD581000 extends BatchFlowBase<DBD581000Parameter> {
      */
     @Step(受給者数状況表の発行)
     protected IBatchFlowCommand ukeishaJyokyohyoHakkou() {
-        return otherBatchFlow(BATCH_ID_DBD582001, SubGyomuCode.DBZ介護共通, getParameter().toDBD582001Parameter()).define();
+        return otherBatchFlow(BATCH_ID_DBD582001, SubGyomuCode.DBD介護受給, getParameter().toDBD582001Parameter()).define();
     }
 
 }
