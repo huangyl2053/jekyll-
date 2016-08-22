@@ -654,4 +654,22 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                                 eq(DbT4001JukyushaDaicho.logicalDeletedFlag, false)))
                 .order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).limit(1).toObject(DbT4001JukyushaDaichoEntity.class);
     }
+
+    /**
+     * 受給者台帳情報を取得する。
+     *
+     * @param 識別コード 識別コード
+     * @return DbT4001JukyushaDaichoEntity 受給者台帳のデータ
+     */
+    @Transaction
+    public DbT4001JukyushaDaichoEntity get受給者台帳情報By識別コード(
+            ShikibetsuCode 識別コード) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT4001JukyushaDaicho.class).
+                where(
+                        eq(shikibetsuCode, 識別コード)).
+                order(by(rirekiNo, Order.DESC)).
+                toObject(DbT4001JukyushaDaichoEntity.class);
+    }
 }
