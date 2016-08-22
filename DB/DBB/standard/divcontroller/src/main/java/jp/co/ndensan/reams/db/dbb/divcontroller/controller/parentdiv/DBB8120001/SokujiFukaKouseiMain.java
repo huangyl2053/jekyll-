@@ -15,12 +15,9 @@ import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.NendobunFukaList
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.sokujikosei.SokujiFukaKoseiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.sokujikosei.SokujiFukaKoseiResult;
-import jp.co.ndensan.reams.db.dbb.business.core.sokujikosei.SokujiFukaKousei;
 import jp.co.ndensan.reams.db.dbb.business.core.sokujikosei.YokunenFukaKoseiResult;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoHosokuMonth;
-import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbInformationMessages;
-import jp.co.ndensan.reams.db.dbb.definition.message.DbbWarningMessages;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fukajoho.FukaJohoRelateMapperParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8120001.DBB8120001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8120001.DBB8120001TransitionEventName;
@@ -32,7 +29,6 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.idotaishoshaichiranparam
 import jp.co.ndensan.reams.db.dbb.service.core.basic.ChoshuHohoManager;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.sokujikosei.SokujiFukaKoseiService;
 import jp.co.ndensan.reams.db.dbb.service.core.fukajoho.fukajoho.FukaJohoManager;
-import jp.co.ndensan.reams.db.dbb.service.core.fukakousei.SokujiFukaKouseiManager;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HonsanteiIkoHantei;
 import jp.co.ndensan.reams.db.dbb.service.core.tokucho.TokuchoIraiJohoSakuseiJokyo;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
@@ -50,7 +46,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -166,54 +161,54 @@ public class SokujiFukaKouseiMain {
      * @return ResponseData<SokujiFukaKouseiMainDiv>
      */
     public ResponseData<SokujiFukaKouseiMainDiv> onClick_SokujiFukaKouseibtn(SokujiFukaKouseiMainDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
-        }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-            return getResponseData(div);
-        }
-        boolean is保存の確認 = UrQuestionMessages.保存の確認.getMessage().getCode().
-                equals(ResponseHolder.getMessageCode().toString()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes;
-        boolean is期別特徴停止の確認 = DbbWarningMessages.期別修正による特徴停止.getMessage().getCode().
-                equals(ResponseHolder.getMessageCode().toString()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes;
-        SokujiFukaKouseiMainHandler handler = getHandler(div);
-        if (!ResponseHolder.isWarningIgnoredRequest()) {
-            div.setIsHasWarningFlag(RString.EMPTY);
-        }
-        if (handler.is期別修正による特徴停止(is特殊処理())
-                && !ResponseHolder.isWarningIgnoredRequest()
-                && (!ResponseHolder.isReRequest() || is保存の確認)) {
-            return ResponseData.of(div).addMessage(DbbWarningMessages.期別修正による特徴停止.getMessage()).respond();
-        }
-        KoseiZengoChoshuHoho 更正前後徴収方法 = ViewStateHolder.get(ViewStateKeys.更正前後徴収方法, KoseiZengoChoshuHoho.class);
-        SokujiFukaKouseiMainValidationHandler validationHandler = getValidationHandler(div);
-        ValidationMessageControlPairs valid = validationHandler.validate(更正前後徴収方法);
-        if (valid.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(valid).respond();
-        }
-        ResponseData<SokujiFukaKouseiMainDiv> responseData = getValidate特徴警告(valid, validationHandler, div,
-                is保存の確認, is期別特徴停止の確認);
-        if (responseData != null) {
-            return responseData;
-        }
-        responseData = getValidate普徴警告(valid, validationHandler, div,
-                is保存の確認, is期別特徴停止の確認);
-        if (responseData != null) {
-            return responseData;
-        }
-        NendobunFukaList 更正前 = ViewStateHolder.get(ViewStateKeys.更正前, NendobunFukaList.class);
-        NendobunFukaList 更正後 = ViewStateHolder.get(ViewStateKeys.更正後, NendobunFukaList.class);
-        SokujiFukaKousei sokujiFukaKousei = handler.set保存処理(is特殊処理(), 更正前, 更正後, 更正前後徴収方法);
-        if (sokujiFukaKousei.get賦課の情報リスト().isEmpty()) {
-            throw new ApplicationException(DbbErrorMessages.賦課変更なしで保存不可.getMessage());
-        }
-        SokujiFukaKouseiManager manager = SokujiFukaKouseiManager.createInstance();
-        manager.do即時賦課更正(sokujiFukaKousei);
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        AccessLogger.log(AccessLogType.更新, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
-        LockingKey 前排他キー = new LockingKey(DBB_HIHOKENSHANO.concat(被保険者番号.getColumnValue()));
-        RealInitialLocker.release(前排他キー);
+//        if (!ResponseHolder.isReRequest()) {
+//            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
+//        }
+//        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+//            return getResponseData(div);
+//        }
+//        boolean is保存の確認 = UrQuestionMessages.保存の確認.getMessage().getCode().
+//                equals(ResponseHolder.getMessageCode().toString()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes;
+//        boolean is期別特徴停止の確認 = DbbWarningMessages.期別修正による特徴停止.getMessage().getCode().
+//                equals(ResponseHolder.getMessageCode().toString()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes;
+//        SokujiFukaKouseiMainHandler handler = getHandler(div);
+//        if (!ResponseHolder.isWarningIgnoredRequest()) {
+//            div.setIsHasWarningFlag(RString.EMPTY);
+//        }
+//        if (handler.is期別修正による特徴停止(is特殊処理())
+//                && !ResponseHolder.isWarningIgnoredRequest()
+//                && (!ResponseHolder.isReRequest() || is保存の確認)) {
+//            return ResponseData.of(div).addMessage(DbbWarningMessages.期別修正による特徴停止.getMessage()).respond();
+//        }
+//        KoseiZengoChoshuHoho 更正前後徴収方法 = ViewStateHolder.get(ViewStateKeys.更正前後徴収方法, KoseiZengoChoshuHoho.class);
+//        SokujiFukaKouseiMainValidationHandler validationHandler = getValidationHandler(div);
+//        ValidationMessageControlPairs valid = validationHandler.validate(更正前後徴収方法);
+//        if (valid.iterator().hasNext()) {
+//            return ResponseData.of(div).addValidationMessages(valid).respond();
+//        }
+//        ResponseData<SokujiFukaKouseiMainDiv> responseData = getValidate特徴警告(valid, validationHandler, div,
+//                is保存の確認, is期別特徴停止の確認);
+//        if (responseData != null) {
+//            return responseData;
+//        }
+//        responseData = getValidate普徴警告(valid, validationHandler, div,
+//                is保存の確認, is期別特徴停止の確認);
+//        if (responseData != null) {
+//            return responseData;
+//        }
+//        NendobunFukaList 更正前 = ViewStateHolder.get(ViewStateKeys.更正前, NendobunFukaList.class);
+//        NendobunFukaList 更正後 = ViewStateHolder.get(ViewStateKeys.更正後, NendobunFukaList.class);
+//        SokujiFukaKousei sokujiFukaKousei = handler.set保存処理(is特殊処理(), 更正前, 更正後, 更正前後徴収方法);
+//        if (sokujiFukaKousei.get賦課の情報リスト().isEmpty()) {
+//            throw new ApplicationException(DbbErrorMessages.賦課変更なしで保存不可.getMessage());
+//        }
+//        SokujiFukaKouseiManager manager = SokujiFukaKouseiManager.createInstance();
+//        manager.do即時賦課更正(sokujiFukaKousei);
+//        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+//        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+//        AccessLogger.log(AccessLogType.更新, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
+//        LockingKey 前排他キー = new LockingKey(DBB_HIHOKENSHANO.concat(被保険者番号.getColumnValue()));
+//        RealInitialLocker.release(前排他キー);
         return ResponseData.of(div).setState(DBB8120001StateName.完了);
     }
 
@@ -299,7 +294,7 @@ public class SokujiFukaKouseiMain {
         handler.set画面入力項目を反映(更正前, 更正後);
         KoseiZengoFuka 更正前後賦課 = new KoseiZengoFuka();
         for (KoseiZengoFuka koseiZengoFuka : 更正前後賦課のリスト) {
-            if (更正後.get通知書番号().getColumnValue().equals(koseiZengoFuka.get通知書番号().getColumnValue())) {
+            if (更正後.get通知書番号().getColumnValue().equals(koseiZengoFuka.get更正後().get通知書番号().getColumnValue())) {
                 更正前後賦課 = koseiZengoFuka;
                 更正前後賦課のリスト.remove(koseiZengoFuka);
                 break;
@@ -454,7 +449,7 @@ public class SokujiFukaKouseiMain {
             handler.set更正前後賦課のリスト降順(更正前後賦課のリスト);
             更正前賦課リスト = 更正前後賦課のリスト.get(0).get更正前();
             更正後賦課リスト = 更正前後賦課のリスト.get(0).get更正後();
-            TsuchishoNo 通知書番号選択 = 更正前後賦課のリスト.get(0).get通知書番号();
+            TsuchishoNo 通知書番号選択 = 更正後賦課リスト.get通知書番号();
             handler.initializeヘッダエリア(is特殊処理(), 賦課年度, 更正前後賦課のリスト, 通知書番号選択, 更正前後徴収方法);
             handler.initialize更正前後データ(is特殊処理(), 更正前賦課リスト, 更正後賦課リスト, 更正前後徴収方法, is本算定処理済フラグ);
         }
