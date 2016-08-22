@@ -70,7 +70,7 @@
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jyumikonyujyoho.JyuMiKoNyuJyoHoParameter" 
             resultOrdered="true" fetchSize="500">
       SELECT
-           "DbT1006KyokaisoGaitosha".*,
+           <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1006KyokaisoGaitoshaMapper.allColumns_DbT1006KyokaisoGaitosha" />,
            DbT1007."tekiyoKaishiYM",
            DbT1007."gengakuGoHokenryoDankai"
        FROM
