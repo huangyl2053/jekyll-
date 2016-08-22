@@ -73,7 +73,7 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
     public ResponseData<TennyuTenshutsuHoryuTaishoshaIchiranDiv> onLoad(TennyuTenshutsuHoryuTaishoshaIchiranDiv div) {
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (市町村セキュリティ情報 == null) {
-        return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.完了する).respond();
+          return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.完了する).respond();
         }
         DonyuKeitaiCode 導入形態コード = DonyuKeitaiCode.toValue(市町村セキュリティ情報.get導入形態コード().value());
         if (導入形態コード.is広域()) {
@@ -82,6 +82,7 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
             div.getTabTennyuTenshutsuHoryuTaishosha().setSelectedItem(div.getTplKoiki());
         } else {
             div.getTplKoiki().setVisible(false);
+            
         }
         save転入転出保留対象者情報ToViewState();
         List<ITennyuTenshutsuHoryuTaishosha> 転出保留対象者情報 = manager.getTenshutsuHoryuTaishoshaList().records();
