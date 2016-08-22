@@ -1019,7 +1019,7 @@ public class GemmenJuminKihonHandler {
 //        KoseiShorikoaResult 計算結果 = FukaKeisan.createInstance().do調定計算(para);
 
         // TODO test用
-        年度分賦課減免リスト.get過年度3().hashCode();
+        年度分賦課減免リスト.hashCode();
         賦課年度 = new FlexibleYear("2016");
         FlexibleYear 調定年度 = new FlexibleYear("2016");
         TsuchishoNo 通知書番号 = new TsuchishoNo("0000000000005105");
