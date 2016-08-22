@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.jukyushaidorenrakuhyosakusei;
 import jp.co.ndensan.reams.db.dbc.business.core.jukyushaidorenrakuhyosakusei.JukyushaIdoRenrakuhyoSakuseiRelateEntity;
 import jp.co.ndensan.reams.db.dbc.business.core.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoTorokuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3001JukyushaIdoRenrakuhyoSakuseiDac;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3001JukyushaIdoRenrakuhyoDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -23,20 +23,20 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class JukyushaIdoRenrakuhyoSakusei {
 
-    private final DbT3001JukyushaIdoRenrakuhyoSakuseiDac dac;
+    private final DbT3001JukyushaIdoRenrakuhyoDac dac;
 
     /**
      * コンストラクタです。
      */
     JukyushaIdoRenrakuhyoSakusei() {
-        dac = InstanceProvider.create(DbT3001JukyushaIdoRenrakuhyoSakuseiDac.class);
+        dac = InstanceProvider.create(DbT3001JukyushaIdoRenrakuhyoDac.class);
     }
 
     /**
      * 単体テスト用のコンストラクタです。
      *
      */
-    JukyushaIdoRenrakuhyoSakusei(DbT3001JukyushaIdoRenrakuhyoSakuseiDac dbT3001Dac) {
+    JukyushaIdoRenrakuhyoSakusei(DbT3001JukyushaIdoRenrakuhyoDac dbT3001Dac) {
         this.dac = dbT3001Dac;
     }
 
@@ -240,7 +240,7 @@ public class JukyushaIdoRenrakuhyoSakusei {
     public JukyushaIdoRenrakuhyoTorokuEntity 変更前受給者訂正情報作成(JukyushaIdoRenrakuhyoTorokuEntity entity) {
         JukyushaIdoRenrakuhyoTorokuEntity relateEntity = new JukyushaIdoRenrakuhyoTorokuEntity();
         DbT3001JukyushaIdoRenrakuhyoEntity 変更前Entity = dac.select受給者訂正情報を取得(entity.get被保険者番号(),
-                new RString(relateEntity.get異動年月日().toString()));
+                new RString(entity.get異動年月日().toString()));
         if (変更前Entity == null) {
             return null;
         }
