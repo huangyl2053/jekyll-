@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.testyou.CreateTestProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work3.HanteiTaishoshaTuikaProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work5.SeikatsuHogoGaitoJohoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work6.FutanWariaiHanteiNenziProcess;
@@ -32,6 +33,7 @@ public class RiyoshaFutanwariaiHanteiCommonFlow extends BatchFlowBase<DBC180020_
     private static final RString BATCHID_WORK2 = new RString("SetainHakunyuryokuFlow");
     private static final RString BATCHID_WORK4 = new RString("SetainJohoTempTuikaFlow");
     private static final RString BATCHID_WORK7 = new RString("FutanWariaiHanteiGetuziShoriFlow");
+    private static final String FLOW_WORK1 = "work1";
     private static final String FLOW_WORK2 = "work2";
     private static final String FLOW_WORK3 = "work3";
     private static final String FLOW_WORK4 = "work4";
@@ -63,6 +65,7 @@ public class RiyoshaFutanwariaiHanteiCommonFlow extends BatchFlowBase<DBC180020_
 
     @Override
     protected void defineFlow() {
+        executeStep(FLOW_WORK1);
         executeStep(FLOW_WORK2);
         executeStep(FLOW_WORK3);
         executeStep(FLOW_WORK4);
@@ -77,6 +80,11 @@ public class RiyoshaFutanwariaiHanteiCommonFlow extends BatchFlowBase<DBC180020_
             executeStep(FLOW_WORK51);
             executeStep(FLOW_WORK6);
         }
+    }
+
+    @Step(FLOW_WORK1)
+    IBatchFlowCommand work1() {
+        return loopBatch(CreateTestProcess.class).arguments(processPrm).define();
     }
 
     @Step(FLOW_WORK2)

@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd581001.DBD581001Paramet
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5810001.JissiJyokyohyoDiv;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -103,7 +104,7 @@ public class JissiJyokyohyoHandler {
         if (div.getCyouhyouPanel().getRdoCyouhyou().getSelectedKey().equals(帳票キー0)
                 && div.getJokenPanel().getDdlChiku().getSelectedKey().equals(地区キー1)) {
             div.getJokenPanel().getCcdJyuusyoStart().setReadOnly(false);
-            div.getJokenPanel().getCcdJyuusyoStart().setReadOnly(false);
+            div.getJokenPanel().getCcdJyuusyoEnd().setReadOnly(false);
             ddlChiku(div, true, true, true, false, false, false, false, false, false);
         } else if (div.getJokenPanel().getDdlChiku().getSelectedKey().equals(地区キー2)) {
             div.getJokenPanel().getCcdChikuStart().setReadOnly(false);
@@ -130,7 +131,7 @@ public class JissiJyokyohyoHandler {
         } else {
             parameter.set出力帳票(要介護認定月別受給者認定者数状況表);
         }
-        parameter.set対象年度(div.getJyoukenPanel().getTxtnendo().getValue());
+        parameter.set対象年度(new FlexibleYear(div.getJyoukenPanel().getTxtnendo().getText().substring(0, 4)));
         if (div.getCyouhyouPanel().getRdoCyouhyou().getSelectedKey().equals(帳票キー0)
                 && div.getJyoukenPanel().getRdoKijyun().getSelectedKey().equals(基準キー0)) {
             parameter.set基準フラグ(基準フラグ0);

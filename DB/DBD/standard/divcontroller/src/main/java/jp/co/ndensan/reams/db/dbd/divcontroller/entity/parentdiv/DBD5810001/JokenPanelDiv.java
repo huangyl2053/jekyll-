@@ -34,24 +34,24 @@ public class JokenPanelDiv extends Panel {
     private Label lblChiku;
     @JsonProperty("ddlChiku")
     private DropDownList ddlChiku;
-    @JsonProperty("ccdJyuusyoStart")
-    private ChoikiInputDiv ccdJyuusyoStart;
     @JsonProperty("lblFromTo1")
     private Label lblFromTo1;
-    @JsonProperty("ccdJyuusyoEnd")
-    private ChoikiInputDiv ccdJyuusyoEnd;
-    @JsonProperty("ccdGyouseiStart")
-    private GyoseikuInputDiv ccdGyouseiStart;
-    @JsonProperty("lblFromTo3")
-    private Label lblFromTo3;
-    @JsonProperty("ccdGyouseiEnd")
-    private GyoseikuInputDiv ccdGyouseiEnd;
-    @JsonProperty("ccdChikuStart")
-    private Chiku2InputDiv ccdChikuStart;
     @JsonProperty("lblFromTo2")
     private Label lblFromTo2;
+    @JsonProperty("lblFromTo3")
+    private Label lblFromTo3;
+    @JsonProperty("ccdChikuStart")
+    private Chiku2InputDiv ccdChikuStart;
+    @JsonProperty("ccdJyuusyoStart")
+    private ChoikiInputDiv ccdJyuusyoStart;
+    @JsonProperty("ccdJyuusyoEnd")
+    private ChoikiInputDiv ccdJyuusyoEnd;
+    @JsonProperty("ccdGyouseiEnd")
+    private GyoseikuInputDiv ccdGyouseiEnd;
     @JsonProperty("ccdChikuEnd")
     private Chiku2InputDiv ccdChikuEnd;
+    @JsonProperty("ccdGyouseiStart")
+    private GyoseikuInputDiv ccdGyouseiStart;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -114,15 +114,6 @@ public class JokenPanelDiv extends Panel {
     }
 
     /*
-     * getccdJyuusyoStart
-     * @return ccdJyuusyoStart
-     */
-    @JsonProperty("ccdJyuusyoStart")
-    public IChoikiInputDiv getCcdJyuusyoStart() {
-        return ccdJyuusyoStart;
-    }
-
-    /*
      * getlblFromTo1
      * @return lblFromTo1
      */
@@ -138,60 +129,6 @@ public class JokenPanelDiv extends Panel {
     @JsonProperty("lblFromTo1")
     public void setLblFromTo1(Label lblFromTo1) {
         this.lblFromTo1 = lblFromTo1;
-    }
-
-    /*
-     * getccdJyuusyoEnd
-     * @return ccdJyuusyoEnd
-     */
-    @JsonProperty("ccdJyuusyoEnd")
-    public IChoikiInputDiv getCcdJyuusyoEnd() {
-        return ccdJyuusyoEnd;
-    }
-
-    /*
-     * getccdGyouseiStart
-     * @return ccdGyouseiStart
-     */
-    @JsonProperty("ccdGyouseiStart")
-    public IGyoseikuInputDiv getCcdGyouseiStart() {
-        return ccdGyouseiStart;
-    }
-
-    /*
-     * getlblFromTo3
-     * @return lblFromTo3
-     */
-    @JsonProperty("lblFromTo3")
-    public Label getLblFromTo3() {
-        return lblFromTo3;
-    }
-
-    /*
-     * setlblFromTo3
-     * @param lblFromTo3 lblFromTo3
-     */
-    @JsonProperty("lblFromTo3")
-    public void setLblFromTo3(Label lblFromTo3) {
-        this.lblFromTo3 = lblFromTo3;
-    }
-
-    /*
-     * getccdGyouseiEnd
-     * @return ccdGyouseiEnd
-     */
-    @JsonProperty("ccdGyouseiEnd")
-    public IGyoseikuInputDiv getCcdGyouseiEnd() {
-        return ccdGyouseiEnd;
-    }
-
-    /*
-     * getccdChikuStart
-     * @return ccdChikuStart
-     */
-    @JsonProperty("ccdChikuStart")
-    public IChiku2InputDiv getCcdChikuStart() {
-        return ccdChikuStart;
     }
 
     /*
@@ -213,12 +150,75 @@ public class JokenPanelDiv extends Panel {
     }
 
     /*
+     * getlblFromTo3
+     * @return lblFromTo3
+     */
+    @JsonProperty("lblFromTo3")
+    public Label getLblFromTo3() {
+        return lblFromTo3;
+    }
+
+    /*
+     * setlblFromTo3
+     * @param lblFromTo3 lblFromTo3
+     */
+    @JsonProperty("lblFromTo3")
+    public void setLblFromTo3(Label lblFromTo3) {
+        this.lblFromTo3 = lblFromTo3;
+    }
+
+    /*
+     * getccdChikuStart
+     * @return ccdChikuStart
+     */
+    @JsonProperty("ccdChikuStart")
+    public IChiku2InputDiv getCcdChikuStart() {
+        return ccdChikuStart;
+    }
+
+    /*
+     * getccdJyuusyoStart
+     * @return ccdJyuusyoStart
+     */
+    @JsonProperty("ccdJyuusyoStart")
+    public IChoikiInputDiv getCcdJyuusyoStart() {
+        return ccdJyuusyoStart;
+    }
+
+    /*
+     * getccdJyuusyoEnd
+     * @return ccdJyuusyoEnd
+     */
+    @JsonProperty("ccdJyuusyoEnd")
+    public IChoikiInputDiv getCcdJyuusyoEnd() {
+        return ccdJyuusyoEnd;
+    }
+
+    /*
+     * getccdGyouseiEnd
+     * @return ccdGyouseiEnd
+     */
+    @JsonProperty("ccdGyouseiEnd")
+    public IGyoseikuInputDiv getCcdGyouseiEnd() {
+        return ccdGyouseiEnd;
+    }
+
+    /*
      * getccdChikuEnd
      * @return ccdChikuEnd
      */
     @JsonProperty("ccdChikuEnd")
     public IChiku2InputDiv getCcdChikuEnd() {
         return ccdChikuEnd;
+    }
+
+    /*
+     * getccdGyouseiStart
+     * @return ccdGyouseiStart
+     */
+    @JsonProperty("ccdGyouseiStart")
+    public IGyoseikuInputDiv getCcdGyouseiStart() {
+        return ccdGyouseiStart;
     }
 
     /*
