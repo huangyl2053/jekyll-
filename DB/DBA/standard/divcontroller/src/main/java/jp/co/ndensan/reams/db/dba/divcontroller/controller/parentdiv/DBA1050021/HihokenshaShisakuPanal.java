@@ -74,26 +74,25 @@ public class HihokenshaShisakuPanal {
         HihokenshaNo 被保番号 = 対象者キー.get被保険者番号();
         ShikibetsuCode 識別コード = 対象者キー.get識別コード();
 
-        ShikakuRirekiJoho 資格得喪情報
-                = ViewStateHolder.get(ViewStateKeys.資格得喪情報, ShikakuRirekiJoho.class);
-        if (状態_追加.equals(初期_状態)) {
-            getHandler(div).initialize(初期_状態, 被保番号, 識別コード, 資格得喪情報);
-            return ResponseData.of(div).setState(DBA1050021StateName.追加状態);
-        } else if (状態_修正.equals(初期_状態)) {
-            getHandler(div).initialize(初期_状態, 被保番号, 識別コード, 資格得喪情報);
-            return ResponseData.of(div).setState(DBA1050021StateName.修正状態);
-        } else if (状態_削除.equals(初期_状態)) {
-            getHandler(div).initialize(初期_状態, 被保番号, 識別コード, 資格得喪情報);
-            return ResponseData.of(div).setState(DBA1050021StateName.削除状態);
-        } else if (状態_照会.equals(初期_状態)) {
-            getHandler(div).initialize(初期_状態, 被保番号, 識別コード, 資格得喪情報);
-            return ResponseData.of(div).setState(DBA1050021StateName.照会状態);
-        }
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
             div.setReadOnly(true);
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(new ValidationMessageControlPair(HihokenshaShisakuPanalErrorMessage.排他_他のユーザが使用中));
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
+
+        ShikakuRirekiJoho 資格得喪情報
+                = ViewStateHolder.get(ViewStateKeys.資格得喪情報, ShikakuRirekiJoho.class);
+
+        getHandler(div).initialize(初期_状態, 被保番号, 識別コード, 資格得喪情報);
+        if (状態_追加.equals(初期_状態)) {
+            return ResponseData.of(div).setState(DBA1050021StateName.追加状態);
+        } else if (状態_修正.equals(初期_状態)) {
+            return ResponseData.of(div).setState(DBA1050021StateName.修正状態);
+        } else if (状態_削除.equals(初期_状態)) {
+            return ResponseData.of(div).setState(DBA1050021StateName.削除状態);
+        } else if (状態_照会.equals(初期_状態)) {
+            return ResponseData.of(div).setState(DBA1050021StateName.照会状態);
         }
         return ResponseData.of(div).respond();
     }
@@ -112,7 +111,7 @@ public class HihokenshaShisakuPanal {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             資格異動訂正の保存処理(div);
             RealInitialLocker.release(前排他ロックキー);
-            return ResponseData.of(div).forwardWithEventName(DBA1050021TransitionEventName.履歴一覧に戻る).respond();
+            return ResponseData.of(div).forwardWithEventName(DBA1050021TransitionEventName.資格異動の訂正を保存する).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -198,7 +197,7 @@ public class HihokenshaShisakuPanal {
             FlexibleDate 取得日 = ViewStateHolder.get(ViewStateKeys.資格得喪情報, ShikakuRirekiJoho.class).getShutokuDate();
             manager.deleteHihokenshaShikakuTeisei(被保険者番号, 取得日);
             RealInitialLocker.release(前排他ロックキー);
-            return ResponseData.of(div).forwardWithEventName(DBA1050021TransitionEventName.履歴一覧に戻る).respond();
+            return ResponseData.of(div).forwardWithEventName(DBA1050021TransitionEventName.資格異動の訂正を保存する).respond();
         }
         return ResponseData.of(div).respond();
     }

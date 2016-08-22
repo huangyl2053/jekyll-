@@ -72,6 +72,7 @@ public class SikakuIdouTeiseiHandler {
         div.getShikakuShutokuJoho().getShikakuTokusoRirekii().getCcdShikakuTokusoRireki().initialize(被保険者番号, 識別コード);
 
         if (div.getShikakuShutokuJoho().getShikakuTokusoRirekii().getCcdShikakuTokusoRireki().getDataGridDataSource().isEmpty()) {
+            div.setReadOnly(true);
             throw new ApplicationException(
                     UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("被保履歴情報"));
         }
@@ -89,7 +90,7 @@ public class SikakuIdouTeiseiHandler {
         return joho;
     }
 
-    private void setButtonDisable() {
+    public void setButtonDisable() {
         div.getShikakuShutokuJoho().getShikakuTokusoRirekii().getCcdShikakuTokusoRireki().set追加するボタン(false);
         List<dgShikakuShutokuRireki_Row> dataSource = new ArrayList<>();
         for (dgShikakuShutokuRireki_Row row : div.getShikakuShutokuJoho()
