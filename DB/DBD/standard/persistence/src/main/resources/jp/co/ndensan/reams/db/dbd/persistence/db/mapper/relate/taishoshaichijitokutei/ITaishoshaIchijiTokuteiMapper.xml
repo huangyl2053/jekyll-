@@ -2,7 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- @reamsid_L DBD-3830-040 tianyh -->
 <!-- 概要： 対象者一次特定作成情報を抽出する用XMLです。 -->
-<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.taishoshaichijitokutei.TaishoshaIchijiTokuteiMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.taishoshaichijitokutei.ITaishoshaIchijiTokuteiMapper">
     <select resultOrdered="true" id="select対象者一次特定" 
             resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.hanteiyouconkyosakuseishoushaiqiji.HanteiyouConkyosakuseishoushaiqijiRelateEntity"
     parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.taishoshaichijitokutei.TaishoshaIchijiTokuteiParameter" fetchSize="500">
@@ -10,7 +10,7 @@
   </select>
     <sql id="selectHanteiyouConkyosakuseishoushaiqijiRelateEntityList">
         SELECT
-        被保険者台帳."hihokenshaNo" AS 被保険者番号
+        DISTINCT 被保険者台帳."hihokenshaNo" AS 被保険者番号
         FROM
         rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳
         LEFT JOIN rgdb."DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen" AS 社会福祉法人等利用者負担軽減

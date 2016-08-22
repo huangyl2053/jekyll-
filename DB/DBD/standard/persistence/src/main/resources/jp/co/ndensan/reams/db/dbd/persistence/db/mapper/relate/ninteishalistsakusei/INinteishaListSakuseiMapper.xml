@@ -2,7 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- @reamsid_L DBD-3830-040 tianyh  -->
 <!-- 概要： 社会福祉法人軽減情報を抽出する用XMLです。-->
-<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninteishalistsakusei.NinteishaListSakuseiMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninteishalistsakusei.INinteishaListSakuseiMapper">
     <select resultOrdered="true" id="select社会福祉法人軽減情報"  resultMap="NinteishaListSakuseiEntityResult"
     parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.ninteishalistsakusei.NinteishaListSakuseiParameter" fetchSize="500">
     <include refid="selectNinteishaListSakuseiEntityList" />
@@ -227,7 +227,7 @@ resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku
                         )
                   )
                <if test="対象リスト==2">
-               <foreach collection="世帯非課税等" index="index" item="世帯非課税" open="(" separator="or" close=")">
+               <foreach collection="世帯非課税等" index="index" item="世帯非課税" open="" separator="" close="">
                      <if test="世帯非課税==1">
                          AND 減免減額対象者判定用根拠."世帯課税区分"='2'
                      </if>
