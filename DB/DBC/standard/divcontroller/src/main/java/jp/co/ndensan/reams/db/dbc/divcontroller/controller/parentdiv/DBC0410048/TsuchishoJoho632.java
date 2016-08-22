@@ -64,7 +64,7 @@ public class TsuchishoJoho632 {
         }
         RString 出力順ID = RString.EMPTY;
         parameter.setSaishoriKubun(再処理区分);
-        parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toString()));
+        parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toDateString()));
         parameter.setShutsuryokujunId(出力順ID);
         return parameter;
     }

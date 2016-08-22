@@ -62,11 +62,11 @@ public class TsuchishoJoho178 {
      * 「実行する」詳細処理のメソッドです。
      *
      * @param div TsuchishoJoho178Div
-     * @return DBC120870_DBC120850_SogojigyohiSaishinsaKetteiHokenshaInParameter
+     * @return DBC120850_SogojigyohiSaishinsaKetteiHokenshaInParameter
      */
     public DBC120850_SogojigyohiSaishinsaKetteiHokenshaInParameter setBatchParameter(TsuchishoJoho178Div div) {
         if (div.getCcdKokurenJohoTorikomi().get出力順ID() != null) {
-            long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
+            Long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
             IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
             IOutputOrder iOutputOrder = finder.get出力順(
                     SubGyomuCode.DBC介護給付,
