@@ -14,7 +14,10 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuK
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -77,7 +80,9 @@ public class ShoKaishuKirokuKanri {
     }
 
     private List<KeyValueDataSource> getCode(CodeShubetsu codeShubetsu) {
-        List<UzT0007CodeEntity> codeValueList = CodeMaster.getCode(codeShubetsu);
+        List<UzT0007CodeEntity> codeValueList = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
+                codeShubetsu, new FlexibleDate(RDate.getNowDate().toDateString()));
+
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (UzT0007CodeEntity codeValueObject : codeValueList) {
             dataSourceList.add(new KeyValueDataSource(codeValueObject.getコード().getKey(), codeValueObject.getコード略称()));

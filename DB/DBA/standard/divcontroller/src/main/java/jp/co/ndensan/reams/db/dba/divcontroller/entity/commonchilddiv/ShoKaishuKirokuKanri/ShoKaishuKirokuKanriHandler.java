@@ -171,7 +171,8 @@ public class ShoKaishuKirokuKanriHandler {
     }
 
     private List<KeyValueDataSource> getCode(CodeShubetsu codeShubetsu) {
-        List<UzT0007CodeEntity> codeValueList = CodeMaster.getCode(codeShubetsu);
+        List<UzT0007CodeEntity> codeValueList = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
+                codeShubetsu, new FlexibleDate(RDate.getNowDate().toDateString()));
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (UzT0007CodeEntity codeValueObject : codeValueList) {
             dataSourceList.add(new KeyValueDataSource(codeValueObject.getコード().getKey(), codeValueObject.getコード略称()));
