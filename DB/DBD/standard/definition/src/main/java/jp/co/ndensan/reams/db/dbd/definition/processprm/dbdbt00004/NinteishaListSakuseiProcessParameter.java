@@ -36,11 +36,31 @@ public class NinteishaListSakuseiProcessParameter implements IBatchProcessParame
     private RString 受給者区分;
     private List<RString> 世帯非課税等;
     private RString 抽出対象;
-    private List<RString> CSV出力設定;
+    private List<RString> 出力設定;
     private long 改頁出力順ID;
     private RString 帳票ID;
     private YMDHMS 帳票作成日時;
 
+    /**
+     * パラメターを返却します．
+     *
+     * @param 対象リスト
+     * @param 対象期間指定
+     * @param 対象年度の開始年月日
+     * @param 対象年度の終了年月日
+     * @param 旧措置者区分
+     * @param 世帯表示
+     * @param 所得年度
+     * @param 基準日
+     * @param 課税判定等基準日
+     * @param 受給者区分
+     * @param 世帯非課税等
+     * @param 抽出対象
+     * @param CSV出力設定
+     * @param 改頁出力順ID
+     * @param 帳票ID
+     * @param 帳票作成日時
+     */
     public NinteishaListSakuseiProcessParameter(
             RString 対象リスト,
             RString 対象期間指定,
@@ -70,7 +90,7 @@ public class NinteishaListSakuseiProcessParameter implements IBatchProcessParame
         this.受給者区分 = 受給者区分;
         this.世帯非課税等 = 世帯非課税等;
         this.抽出対象 = 抽出対象;
-        this.CSV出力設定 = CSV出力設定;
+        this.出力設定 = CSV出力設定;
         this.改頁出力順ID = 改頁出力順ID;
         this.帳票ID = 帳票ID;
         this.帳票作成日時 = 帳票作成日時;
