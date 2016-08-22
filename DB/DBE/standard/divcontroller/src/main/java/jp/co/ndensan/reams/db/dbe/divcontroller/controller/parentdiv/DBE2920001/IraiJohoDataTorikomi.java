@@ -88,7 +88,7 @@ public class IraiJohoDataTorikomi {
 
     private boolean savaCsvファイル(FileData file) {
         RString imagePath = Path.combinePath(Path.getRootPath(RString.EMPTY), DbBusinessConfig
-                .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+                .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援), CSVファイル名);
         File localファイル = new File(file.getFilePath().toString());
         File サーバパス = new File(imagePath.toString());
         boolean fileFlag;
@@ -119,7 +119,7 @@ public class IraiJohoDataTorikomi {
     @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<IraiJohoDataTorikomiDiv> onClick_BtnDataTorikomi(IraiJohoDataTorikomiDiv div) {
         RString imagePath = Path.combinePath(Path.getRootPath(RString.EMPTY), DbBusinessConfig
-                .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+                .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援), CSVファイル名);
         RString csvReaderPath = Path.combinePath(imagePath, CSVファイル名);
         List<IraiJohoDataTorikomiCsvEntity> csvEntityList;
         try {
