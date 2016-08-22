@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020;
 
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakujigyoshikyushinseisho.KogakuJigyoShikyuShinseishoReport;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakujigyoshikyushinseishoucho.KogakuJigyoShikyuShinseishoYuchoReport;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakuservicetsuchisho.KogakuJigyoShinseishoHakkoIchiranOrder;
@@ -15,14 +16,13 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshi
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakujigyoshikyushinseishoyuchosource.KogakuJigyoShikyuShinseishoYuchoSource;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakujigyoshikyushinseisho.KogakuJigyoShikyuShinseishoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakujigyoshikyushinseisho.KogakuJigyoShikyuShinseishoSource;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
-import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibun;
-import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunFinder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -76,13 +76,11 @@ public class JigyoKogakuServiceShikyuShinseishoOutputProcess extends BatchProces
                     KogakuJigyoShinseishoHakkoIchiranOrder.class, 出力順).replace(ORDER_BY, RString.EMPTY));
         }
 
-        TsuchishoTeikeibunFinder find = new TsuchishoTeikeibunFinder();
-        TsuchishoTeikeibun teikeibun = find.get通知書定型文_最新適用開始日(SubGyomuCode.DBC介護給付,
-                ReportIdDBC.DBC100070.getReportId(), KamokuCode.EMPTY, 1, 1);
-        if (teikeibun == null) {
+        Map<Integer, RString> map = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100070.getReportId(), KamokuCode.EMPTY, 1);
+        if (map == null) {
             注意文 = RString.EMPTY;
         } else {
-            注意文 = teikeibun.get文章();
+            注意文 = map.get(1);
         }
     }
 

@@ -9,11 +9,11 @@ import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0600011.SogoSyokaiDiv;
 import jp.co.ndensan.reams.db.dbu.service.core.sogosyokai.SoyoSyokaiService;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.KaigoJigyosha;
-import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbx.business.core.view.HihokenshaDaichoAlive;
+import jp.co.ndensan.reams.db.dbx.business.core.view.ShisetsuNyutaishoAlive;
+import jp.co.ndensan.reams.db.dbx.business.core.view.TashichosonJushochiTokureiAlive;
+import jp.co.ndensan.reams.db.dbx.business.core.view.TekiyoJogaishaAlive;
 import jp.co.ndensan.reams.db.dbz.business.core.KaigoJogaiTokureiTaishoShisetsu;
-import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
-import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
-import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
 import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
 import jp.co.ndensan.reams.db.dbz.definition.core.jogaiidojiyu.JogaiKaijoJiyu;
@@ -78,7 +78,7 @@ public class SogoSyokaiHandler {
      *
      * @param hihokenshadaicho HihokenshaDaicho
      */
-    public void set被保険者(HihokenshaDaicho hihokenshadaicho) {
+    public void set被保険者(HihokenshaDaichoAlive hihokenshadaicho) {
         if (hihokenshadaicho != null) {
             if (hihokenshadaicho.get資格取得年月日() != null) {
                 div.getSyutokuYYMMDD().setValue(new RDate(hihokenshadaicho.get資格取得年月日().toString()));
@@ -131,7 +131,7 @@ public class SogoSyokaiHandler {
      *
      * @param shisetsunyutaisho ShisetsuNyutaisho
      */
-    public void set施設入退所(ShisetsuNyutaisho shisetsunyutaisho) {
+    public void set施設入退所(ShisetsuNyutaishoAlive shisetsunyutaisho) {
         if (shisetsunyutaisho != null) {
             if (shisetsunyutaisho.get入所年月日() != null) {
                 div.getNyusyoYYMMDD().setValue(new RDate(shisetsunyutaisho.get入所年月日().toString()));
@@ -160,7 +160,7 @@ public class SogoSyokaiHandler {
      * @param tashichosonjushochitokurei TashichosonJushochiTokurei
      * @param 識別コード ShikibetsuCode
      */
-    public void set他市町村住所地特例情報(TashichosonJushochiTokurei tashichosonjushochitokurei, ShikibetsuCode 識別コード) {
+    public void set他市町村住所地特例情報(TashichosonJushochiTokureiAlive tashichosonjushochitokurei, ShikibetsuCode 識別コード) {
         if (tashichosonjushochitokurei != null) {
             if (tashichosonjushochitokurei.get適用年月日() != null) {
                 div.getHokaSityosonTekiyoYYMMDD().setValue(new RDate(tashichosonjushochitokurei.get適用年月日().toString()));
@@ -183,7 +183,7 @@ public class SogoSyokaiHandler {
                         get他市町村住所地特例解除事由コード()).get名称());
             }
         }
-        ShisetsuNyutaisho shisetsunyutaisho = SoyoSyokaiService.createInstance().get施設入退所Order(識別コード,
+        ShisetsuNyutaishoAlive shisetsunyutaisho = SoyoSyokaiService.createInstance().get施設入退所Order(識別コード,
                 DaichoType.他市町村住所地特例者.getコード());
         if (shisetsunyutaisho != null) {
             if (shisetsunyutaisho.get入所施設種類() != null) {
@@ -204,7 +204,7 @@ public class SogoSyokaiHandler {
      * @param tekiyojogaisha TekiyoJogaisha
      * @param 識別コード ShikibetsuCode
      */
-    public void set適用除外者情報(TekiyoJogaisha tekiyojogaisha, ShikibetsuCode 識別コード) {
+    public void set適用除外者情報(TekiyoJogaishaAlive tekiyojogaisha, ShikibetsuCode 識別コード) {
         if (tekiyojogaisha != null) {
             if (tekiyojogaisha.get適用年月日() != null) {
                 div.getTekiyoJyogaisyaTekiyoYYMMDD().setValue(new RDate(tekiyojogaisha.get適用年月日().toString()));
@@ -219,7 +219,7 @@ public class SogoSyokaiHandler {
                 div.getTekiyoJyogaisyaKaijoJiyu().setValue(JogaiKaijoJiyu.toValue(tekiyojogaisha.get適用除外解除事由コード()).get名称());
             }
         }
-        ShisetsuNyutaisho shisetsunyutaisho = SoyoSyokaiService.createInstance().get施設入退所Order(識別コード, DaichoType.適用除外者.getコード());
+        ShisetsuNyutaishoAlive shisetsunyutaisho = SoyoSyokaiService.createInstance().get施設入退所Order(識別コード, DaichoType.適用除外者.getコード());
         if (shisetsunyutaisho != null) {
             if (shisetsunyutaisho.get入所施設種類() != null) {
                 div.getTekiyoJyogaisyaSisetuSyubetu().setValue(ShisetsuType.toValue(shisetsunyutaisho.get入所施設種類()).get名称());

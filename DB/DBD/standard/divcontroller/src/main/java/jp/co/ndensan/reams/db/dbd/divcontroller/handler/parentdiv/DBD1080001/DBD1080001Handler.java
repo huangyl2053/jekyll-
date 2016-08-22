@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1080001;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.RiyoshaFutanDankaiHanni;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd1080001.ShinseishoHakkoTaishoshaHaakuParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1080001.ShinseishoHakkoTaishoshaHaakuParameterMainDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
@@ -113,7 +114,7 @@ public class DBD1080001Handler {
         boolean 老齢福祉年金受給者 = taishoshaHaakuMainDiv.getParameters().getChkIsRoreiJukyusha().getSelectedValues().contains(new RString("老齢福祉年金受給者"));
         boolean 生活保護受給者 = taishoshaHaakuMainDiv.getParameters().getChkIsSeihoJukyusha().getSelectedValues().contains(new RString("生活保護受給者"));
         RString 施設入所区分 = taishoshaHaakuMainDiv.getParameters().getDdlKyushochishaKubun1().getSelectedValue();
-        RString 利用者負担段階 = taishoshaHaakuMainDiv.getParameters().getDdlRiyoshaFutanDankai().getSelectedValue();
+        RString 利用者負担段階 = RiyoshaFutanDankaiHanni.valueOf(taishoshaHaakuMainDiv.getParameters().getDdlRiyoshaFutanDankai().getSelectedValue().toString()).getコード();
         FlexibleDate 基準日 = taishoshaHaakuMainDiv.getParameters().getTxtKijunYMD().getValue();
         FlexibleYear 所得年度 = taishoshaHaakuMainDiv.getParameters().getTxtShotokuNendo().getDomain();
 
