@@ -69,8 +69,8 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
         }
 
         if (list.get本人区分().equals(HonninKubun.本人.getCode())) {
-            if ((list.get識別コード_生活保護受給者() == null || list.get識別コード_生活保護受給者().isEmpty())
-                    || (list.get識別コード_老齢福祉年金受給者().isEmpty() || list.get識別コード_老齢福祉年金受給者().isEmpty())) {
+            if ((list.get識別コード_生活保護受給者() != null && !list.get識別コード_生活保護受給者().isEmpty())
+                    || (list.get識別コード_老齢福祉年金受給者() != null && !list.get識別コード_老齢福祉年金受給者().isEmpty())) {
                 tempTable.set利用者負担段階(RiyoshaFutanDankai.第一段階.getコード());
             }
             set減免減額対象者判定用根拠作成_本人(list, tempTable);

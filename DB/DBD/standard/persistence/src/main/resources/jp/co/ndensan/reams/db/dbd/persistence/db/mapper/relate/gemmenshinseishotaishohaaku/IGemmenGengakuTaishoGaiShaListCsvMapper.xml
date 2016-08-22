@@ -16,7 +16,7 @@ and open the template in the editor.-->
         B."shikibetsuCode" AS "shikibetsuCode",
         C."shichosonCode" AS "shichosonCode",
         B."kijunYMD" AS "kijunYMD",
-        B."shotokuNendo" AS "kijunYMD",
+        B."shotokuNendo" AS "shotokuNendo",
 
         A."dbT4018KaigoHokenFutanGendogakuNintei_shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo",
         A."dbT4018KaigoHokenFutanGendogakuNintei_ketteiKubun" AS "ketteiKubun",
@@ -130,7 +130,6 @@ and open the template in the editor.-->
      )AS H
         ON H."hihokenshaNo" = B."hihokenshaNo"
         AND H."ninteiYMD" <![CDATA[<=]]> #{基準日}
-        AND H."logicalDeletedFlag" = FALSE
 
         LEFT JOIN
         rgdb."DbT5101NinteiShinseiJoho" J
@@ -149,7 +148,7 @@ and open the template in the editor.-->
         B."shikibetsuCode" AS "shikibetsuCode",
         C."shichosonCode" AS "shichosonCode",
         B."kijunYMD" AS "kijunYMD",
-        B."shotokuNendo" AS "kijunYMD",
+        B."shotokuNendo" AS "shotokuNendo",
 
         A."dbT4014RiyoshaFutangakuGengaku_shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo",
         A."dbT4014RiyoshaFutangakuGengaku_ketteiKubun" AS "ketteiKubun",
@@ -263,7 +262,6 @@ and open the template in the editor.-->
      )AS H  
         ON H."hihokenshaNo" = B."hihokenshaNo"
         AND H."ninteiYMD" <![CDATA[<=]]> #{基準日}
-        AND H."logicalDeletedFlag" = FALSE
 
         LEFT JOIN
         rgdb."DbT5101NinteiShinseiJoho" J
@@ -282,7 +280,7 @@ and open the template in the editor.-->
         B."shikibetsuCode" AS "shikibetsuCode",
         C."shichosonCode" AS "shichosonCode",
         B."kijunYMD" AS "kijunYMD",
-        B."shotokuNendo" AS "kijunYMD",
+        B."shotokuNendo" AS "shotokuNendo",
 
         A."dbT4014RiyoshaFutangakuGengaku_shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo",
         A."dbT4014RiyoshaFutangakuGengaku_ketteiKubun" AS "ketteiKubun",
@@ -396,7 +394,6 @@ and open the template in the editor.-->
      )AS H    
         ON H."hihokenshaNo" = B."hihokenshaNo"
         AND H."ninteiYMD" <![CDATA[<=]]> #{基準日}
-        AND H."logicalDeletedFlag" = FALSE
 
         LEFT JOIN
         rgdb."DbT5101NinteiShinseiJoho" J
@@ -415,7 +412,7 @@ and open the template in the editor.-->
         B."shikibetsuCode" AS "shikibetsuCode",
         C."shichosonCode" AS "shichosonCode",
         B."kijunYMD" AS "kijunYMD",
-        B."shotokuNendo" AS "kijunYMD",
+        B."shotokuNendo" AS "shotokuNendo",
 
         A."dbT4018KaigoHokenFutanGendogakuNintei_shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo",
         A."dbT4018KaigoHokenFutanGendogakuNintei_ketteiKubun" AS "ketteiKubun",
@@ -529,7 +526,6 @@ and open the template in the editor.-->
      )AS H
         ON H."hihokenshaNo" = B."hihokenshaNo"
         AND H."ninteiYMD" <![CDATA[<=]]> #{基準日}
-        AND H."logicalDeletedFlag" = FALSE
 
         LEFT JOIN
         rgdb."DbT5101NinteiShinseiJoho" J
@@ -545,7 +541,7 @@ and open the template in the editor.-->
         <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
         <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
         <result property="基準年月日" column="kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="所得年度" column="shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
+        <result property="所得年度" column="shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler" />
         <result property="証記載保険者番号" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
         <result property="決定区分" column="ketteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="減免申請日" column="shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />

@@ -72,7 +72,7 @@ and open the template in the editor.
             <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.allColumns_DbT4018KaigoHokenFutanGendogakuNintei" />
             FROM
             rgdb."DbT4018KaigoHokenFutanGendogakuNintei"
-            WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo" = "hihokenshaNo"
+            WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo" = A."hihokenshaNo"
             AND #{前年度の開始日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"
             AND  "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{前年度の終了日}
             AND  "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiKubun" = '1'
@@ -84,7 +84,7 @@ and open the template in the editor.
             <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.allColumns_DbT4018KaigoHokenFutanGendogakuNintei" />
             FROM
             rgdb."DbT4018KaigoHokenFutanGendogakuNintei"
-            WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo" = "hihokenshaNo"
+            WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo" = A."hihokenshaNo"
             AND #{前年度の開始日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"
             AND  "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> #{前年度の終了日}
             AND  "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiKubun" = '1'
@@ -176,7 +176,7 @@ and open the template in the editor.
             <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4014RiyoshaFutangakuGengakuMapper.allColumns_DbT4014RiyoshaFutangakuGengaku" />
             FROM
             rgdb."DbT4014RiyoshaFutangakuGengaku"
-            WHERE "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo" = "hihokenshaNo"
+            WHERE "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo" = A."hihokenshaNo"
             AND #{前年度の開始日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"
             AND  "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<]]> #{前年度の終了日}
             AND  "DbT4014RiyoshaFutangakuGengaku"."ketteiKubun" = '1'
@@ -188,7 +188,7 @@ and open the template in the editor.
             <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4014RiyoshaFutangakuGengakuMapper.allColumns_DbT4014RiyoshaFutangakuGengaku" />
             FROM
             rgdb."DbT4014RiyoshaFutangakuGengaku"
-            WHERE "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo" = "hihokenshaNo"
+            WHERE "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo" = A."hihokenshaNo"
             AND #{前年度の開始日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"
             AND  "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> #{前年度の終了日}
             AND  "DbT4014RiyoshaFutangakuGengaku"."ketteiKubun" = '1'
@@ -277,7 +277,7 @@ and open the template in the editor.
             <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4016HomonKaigoRiyoshaFutangakuGengakuMapper.allColumns_DbT4016HomonKaigoRiyoshaFutangakuGengaku" />
             FROM
             rgdb."DbT4016HomonKaigoRiyoshaFutangakuGengaku"
-            WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."hihokenshaNo" = "hihokenshaNo"
+            WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."hihokenshaNo" = A."hihokenshaNo"
             AND #{前年度の開始日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"
             AND  "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> #{前年度の終了日}
             AND  "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiKubun" = '1'
@@ -289,7 +289,7 @@ and open the template in the editor.
             <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4016HomonKaigoRiyoshaFutangakuGengakuMapper.allColumns_DbT4016HomonKaigoRiyoshaFutangakuGengaku" />
             FROM
             rgdb."DbT4016HomonKaigoRiyoshaFutangakuGengaku"
-            WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."hihokenshaNo" = "hihokenshaNo"
+            WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."hihokenshaNo" = A."hihokenshaNo"
             AND #{前年度の開始日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"
             AND  "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> #{前年度の終了日}
             AND  "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiKubun" = '1'
@@ -378,7 +378,7 @@ and open the template in the editor.
             <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4017ShakaiFukushiHojinRiyoshaFutanKeigenMapper.allColumns_DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen" />
             FROM
             rgdb."DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"
-            WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo" = "hihokenshaNo"
+            WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo" = A."hihokenshaNo"
             AND #{前年度の開始日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"
             AND  "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> #{前年度の終了日}
             AND  "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiKubun" = '1'
@@ -390,7 +390,7 @@ and open the template in the editor.
             <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4017ShakaiFukushiHojinRiyoshaFutanKeigenMapper.allColumns_DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen" />
             FROM
             rgdb."DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"
-            WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo" = "hihokenshaNo"
+            WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo" = A."hihokenshaNo"
             AND #{前年度の開始日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"
             AND  "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> #{前年度の終了日}
             AND  "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiKubun" = '1'
