@@ -56,11 +56,11 @@ public class SogojigyohiSeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess extends 
     private FileSpoolManager manager;
     List<RString> 改頁項目リスト;
     private int index = 0;
-    private RString sogojigyohiSeikyugakuTsuchishoInEucFilePath;
+    private RString sogojigyohiEucFilePath;
     @BatchWriter
     private BatchReportWriter<SogojigyohiSeikyugakuTsuchishoInSource> batchReportWriter;
     private ReportSourceWriter<SogojigyohiSeikyugakuTsuchishoInSource> reportSourceWriter;
-    private CsvWriter<SogojigyohiSeikyugakuTsuchishoCsvEntity> sogojigyohiSeikyugakuTsuchishoCsvWriter;
+    private CsvWriter<SogojigyohiSeikyugakuTsuchishoCsvEntity> sogojigyohiCsvWriter;
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc120890."
             + "ISogojigyohiSeikyugakuTsuchishoMapper.select帳票出力対象データ");
     private static final RString 出力ファイル名
@@ -86,10 +86,10 @@ public class SogojigyohiSeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess extends 
         batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200087.getReportId().value()).addBreak(breaker).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        sogojigyohiSeikyugakuTsuchishoInEucFilePath = Path.combinePath(manager.getEucOutputDirectry(),
+        sogojigyohiEucFilePath = Path.combinePath(manager.getEucOutputDirectry(),
                 出力ファイル名);
-        sogojigyohiSeikyugakuTsuchishoCsvWriter = BatchWriters.csvWriter(SogojigyohiSeikyugakuTsuchishoCsvEntity.class).
-                filePath(sogojigyohiSeikyugakuTsuchishoInEucFilePath).
+        sogojigyohiCsvWriter = BatchWriters.csvWriter(SogojigyohiSeikyugakuTsuchishoCsvEntity.class).
+                filePath(sogojigyohiEucFilePath).
                 setDelimiter(コンマ).
                 setEnclosure(ダブル引用符).
                 setEncode(Encode.UTF_8withBOM).
@@ -110,17 +110,17 @@ public class SogojigyohiSeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess extends 
     @Override
     protected void usualProcess(DbWT1511SeikyugakuTsuchishoTempEntity entity) {
 
-        SogojigyohiSeikyugakuTsuchishoInReport sogojigyohiSeikyugakuTsuchishoInReport
+        SogojigyohiSeikyugakuTsuchishoInReport sogojigyohiReport
                 = new SogojigyohiSeikyugakuTsuchishoInReport(entity, parameter.getシステム日付());
-        sogojigyohiSeikyugakuTsuchishoInReport.writeBy(reportSourceWriter);
+        sogojigyohiReport.writeBy(reportSourceWriter);
         SogojigyohiSeikyugakuTsuchishoCsvEntity output = get帳票のCSVファイル作成(entity, parameter.getシステム日付());
-        sogojigyohiSeikyugakuTsuchishoCsvWriter.writeLine(output);
+        sogojigyohiCsvWriter.writeLine(output);
 
     }
 
     @Override
     protected void afterExecute() {
-        sogojigyohiSeikyugakuTsuchishoCsvWriter.close();
+        sogojigyohiCsvWriter.close();
     }
 
     @Override
