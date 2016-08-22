@@ -258,9 +258,13 @@
         WHERE
         "DbT4001JukyushaDaicho"."jukyuShinseiJiyu" IN ('1', '2', '3')
         AND "DbT4001JukyushaDaicho"."yokaigoJotaiKubunCode" IS NOT NULL
+        AND "DbT4001JukyushaDaicho"."yokaigoJotaiKubunCode" != ''
         AND "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD" IS NOT NULL
+        AND "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD" != ''
         AND "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD" IS NOT NULL
+        AND "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD" != ''
         AND "DbT4001JukyushaDaicho"."ninteiYMD" IS NOT NULL
+        AND "DbT4001JukyushaDaicho"."ninteiYMD" != ''
         <if test="!単票発行済み">
             AND "DbT4001JukyushaDaicho"."ninteiKekkaTsuchishoHakkoYMD" IS NULL
         </if>
@@ -277,9 +281,13 @@
             WHERE
             "DbT4001JukyushaDaicho"."jukyuShinseiJiyu" IN ('1', '2', '3')
             AND "DbT4001JukyushaDaicho"."yokaigoJotaiKubunCode" IS NOT NULL
+            AND "DbT4001JukyushaDaicho"."yokaigoJotaiKubunCode" != ''
             AND "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD" IS NOT NULL
+            AND "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD" != ''
             AND "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD" IS NOT NULL
+            AND "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD" != ''
             AND "DbT4001JukyushaDaicho"."ninteiYMD" IS NOT NULL
+            AND "DbT4001JukyushaDaicho"."ninteiYMD" != ''
             <if test="!単票発行済み">
                 AND "DbT4001JukyushaDaicho"."ninteiKekkaTsuchishoHakkoYMD" IS NULL
             </if>
@@ -307,11 +315,17 @@
         WHERE
         "DbT4001JukyushaDaicho"."jukyuShinseiJiyu" IN ('1', '2', '3')
         AND "DbT4001JukyushaDaicho"."yokaigoJotaiKubunCode" IS NOT NULL
+        AND "DbT4001JukyushaDaicho"."yokaigoJotaiKubunCode" != ''
         AND "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD" IS NOT NULL
+        AND "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD" != ''
         AND "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD" IS NOT NULL
+        AND "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD" != ''
         AND "DbT4001JukyushaDaicho"."ninteiYMD" IS NOT NULL
+        AND "DbT4001JukyushaDaicho"."ninteiYMD" != ''
         <if test="!単票発行済み">
-            AND "DbT4001JukyushaDaicho"."ninteiKekkaTsuchishoHakkoYMD" IS NULL
+            AND ("DbT4001JukyushaDaicho"."ninteiKekkaTsuchishoHakkoYMD" IS NULL
+                OR "DbT4001JukyushaDaicho"."ninteiKekkaTsuchishoHakkoYMD" = ''
+            )
         </if>
         AND "DbT4001JukyushaDaicho"."chokkinFlag" IS TRUE
         ) AS "TEMP"
@@ -364,7 +378,9 @@
         "DbT4001JukyushaDaicho"."chokkinIdoJiyuCode" = '04'
         AND "DbT4001JukyushaDaicho"."jukyuShinseiJiyu" = '5'
         <if test="!単票発行済み">
-            AND "DbT4001JukyushaDaicho"."serviceHenkoTsuchishoHakkoYMD" IS NULL
+            AND ("DbT4001JukyushaDaicho"."serviceHenkoTsuchishoHakkoYMD" IS NULL
+                OR "DbT4001JukyushaDaicho"."serviceHenkoTsuchishoHakkoYMD" = ''
+            )
         </if>
 
         ${出力順}
@@ -401,11 +417,17 @@
         "DbT4001JukyushaDaicho"."chokkinIdoJiyuCode" = '02'
         AND "DbT4001JukyushaDaicho"."jukyuShinseiJiyu" = '4'
         AND "DbT4001JukyushaDaicho"."yokaigoJotaiKubunCode" IS NOT NULL
+        AND "DbT4001JukyushaDaicho"."yokaigoJotaiKubunCode" != ''
         AND "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD" IS NOT NULL
+        AND "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD" != ''
         AND "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD" IS NOT NULL
+        AND "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD" != ''
         AND "DbT4001JukyushaDaicho"."ninteiYMD" IS NOT NULL
+        AND "DbT4001JukyushaDaicho"."ninteiYMD" != ''
         <if test="!単票発行済み">
-            AND "DbT4001JukyushaDaicho"."kubunHenkoTsuchishoHakkoYMD" IS NULL
+            AND ("DbT4001JukyushaDaicho"."kubunHenkoTsuchishoHakkoYMD" IS NULL
+                OR "DbT4001JukyushaDaicho"."kubunHenkoTsuchishoHakkoYMD" = ''
+            )
         </if>
 
         ${出力順}

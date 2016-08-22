@@ -10,15 +10,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.UploadPanel;
 
 /**
- * TaishoShoriPanel のクラスファイル 
- * 
+ * TaishoShoriPanel のクラスファイル
+ *
  * @author 自動生成
  */
 public class TaishoShoriPanelDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -36,6 +41,8 @@ public class TaishoShoriPanelDiv extends Panel {
     private RString hdnShichosonCode;
     @JsonProperty("hdnNendo")
     private RString hdnNendo;
+    @JsonProperty("hdnLine")
+    private RString hdnLine;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -125,6 +132,24 @@ public class TaishoShoriPanelDiv extends Panel {
     }
 
     /*
+     * gethdnLine
+     * @return hdnLine
+     */
+    @JsonProperty("hdnLine")
+    public RString getHdnLine() {
+        return hdnLine;
+    }
+
+    /*
+     * sethdnLine
+     * @param hdnLine hdnLine
+     */
+    @JsonProperty("hdnLine")
+    public void setHdnLine(RString hdnLine) {
+        this.hdnLine = hdnLine;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -133,7 +158,7 @@ public class TaishoShoriPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlShoriNendo(DropDownList ddlShoriNendo) {
+    public void setDdlShoriNendo(DropDownList ddlShoriNendo) {
         this.getTaishoShoriIchiranPanel().setDdlShoriNendo(ddlShoriNendo);
     }
 
@@ -143,7 +168,7 @@ public class TaishoShoriPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlShichosonshitei(DropDownList ddlShichosonshitei) {
+    public void setDdlShichosonshitei(DropDownList ddlShichosonshitei) {
         this.getTaishoShoriIchiranPanel().setDdlShichosonshitei(ddlShichosonshitei);
     }
 
@@ -153,7 +178,7 @@ public class TaishoShoriPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnShoriSettei(Button btnShoriSettei) {
+    public void setBtnShoriSettei(Button btnShoriSettei) {
         this.getTaishoShoriIchiranPanel().setBtnShoriSettei(btnShoriSettei);
     }
 
@@ -163,7 +188,7 @@ public class TaishoShoriPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgTaishoShoriItchiran(DataGrid<dgTaishoShoriItchiran_Row> dgTaishoShoriItchiran) {
+    public void setDgTaishoShoriItchiran(DataGrid<dgTaishoShoriItchiran_Row> dgTaishoShoriItchiran) {
         this.getTaishoShoriIchiranPanel().setDgTaishoShoriItchiran(dgTaishoShoriItchiran);
     }
 
@@ -173,7 +198,7 @@ public class TaishoShoriPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setFuairuAppurodo(FuairuAppurodoDiv FuairuAppurodo) {
+    public void setFuairuAppurodo(FuairuAppurodoDiv FuairuAppurodo) {
         this.getTaishoShoriIchiranPanel().setFuairuAppurodo(FuairuAppurodo);
     }
 
@@ -183,7 +208,7 @@ public class TaishoShoriPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setUplTaishoFuairu(UploadPanel uplTaishoFuairu) {
+    public void setUplTaishoFuairu(UploadPanel uplTaishoFuairu) {
         this.getTaishoShoriIchiranPanel().getFuairuAppurodo().setUplTaishoFuairu(uplTaishoFuairu);
     }
 
@@ -193,7 +218,7 @@ public class TaishoShoriPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnAppurodo(Button btnAppurodo) {
+    public void setBtnAppurodo(Button btnAppurodo) {
         this.getTaishoShoriIchiranPanel().getFuairuAppurodo().setBtnAppurodo(btnAppurodo);
     }
 
@@ -203,7 +228,7 @@ public class TaishoShoriPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShoriSetteiNendo(TextBox txtShoriSetteiNendo) {
+    public void setTxtShoriSetteiNendo(TextBox txtShoriSetteiNendo) {
         this.getShoriSetteiPanel().setTxtShoriSetteiNendo(txtShoriSetteiNendo);
     }
 
@@ -213,7 +238,7 @@ public class TaishoShoriPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShichosonshitei(TextBox txtShichosonshitei) {
+    public void setTxtShichosonshitei(TextBox txtShichosonshitei) {
         this.getShoriSetteiPanel().setTxtShichosonshitei(txtShichosonshitei);
     }
 
@@ -223,7 +248,7 @@ public class TaishoShoriPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgShoriSettei(DataGrid<dgShoriSettei_Row> dgShoriSettei) {
+    public void setDgShoriSettei(DataGrid<dgShoriSettei_Row> dgShoriSettei) {
         this.getShoriSetteiPanel().setDgShoriSettei(dgShoriSettei);
     }
 

@@ -5,8 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD8010001;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbd.definition.core.shorijotaikubun.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010001.TaishoShoriPanelDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010001.dgShoriSettei_Row;
@@ -190,6 +198,41 @@ public class TaishoShoriHandler {
             return new ShoriDateKanriManager().save処理日付管理リスト(編集後用登録情報, 編集後用削除情報);
         }
         return true;
+    }
+
+    /**
+     * ファイルの読込処理
+     */
+    public void readFile() {
+        RString filePath = div.getUplTaishoFuairu().getDefaultOpenDialogPath();
+        RString line = RString.EMPTY;
+        try {
+            BufferedReader in = new BufferedReader(new FileReader(filePath.toString()));
+            line = new RString(in.readLine());
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TaishoShoriHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(TaishoShoriHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        div.setHdnLine(line);
+
+    }
+
+    /**
+     * ファイルupload処理
+     */
+    public void upload() {
+        RString line = div.getHdnLine();
+        RString filePath = RString.EMPTY;
+        try (BufferedWriter out = new BufferedWriter(new FileWriter(filePath.toString()))) {
+            out.write(line.toString());
+            out.flush();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TaishoShoriHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(TaishoShoriHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     private ShoriDateKanri get更新対象(List<ShoriDateKanri> 画面更新用情報, dgShoriSettei_Row 処理設定) {
