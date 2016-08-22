@@ -274,7 +274,7 @@ public class ShoriDateKanriManager {
         for (ShoriDateKanri 処理日付管理マスタ : 処理日付管理削除リスト) {
             DbT7022ShoriDateKanriEntity entity = 処理日付管理マスタ.toEntity();
             entity.setState(EntityDataState.Deleted);
-            if (1 != dac.save(entity)) {
+            if (1 != dac.saveOrDeletePhysicalBy(entity)) {
                 return false;
             }
         }
