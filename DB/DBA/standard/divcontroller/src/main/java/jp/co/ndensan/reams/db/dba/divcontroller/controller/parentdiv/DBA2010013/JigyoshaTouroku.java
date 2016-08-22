@@ -137,6 +137,23 @@ public class JigyoshaTouroku {
         return ResponseData.of(div).respond();
     }
 
+        /**
+     * 事業者登録DivをonActiveします。
+     *
+     * @param div 事業者登録Div
+     * @return ResponseData<JigyoshaTourokuDiv> 事業者登録Div
+     */
+    public ResponseData<JigyoshaTourokuDiv> onActive(JigyoshaTourokuDiv div) {
+        RString 事業者番号 = div.getServiceJigyoshaJoho().getTxtJigyoshaNo().getValue();
+        FlexibleDate 有効開始日 = div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().getValue();
+        FlexibleDate 有効終了日 = div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().getValue();
+        サービス一覧パラメータ = KaigoJogaiTokureiParameter.createParam(
+                事業者番号, 有効開始日, 有効終了日, RDate.getNowDate().getYearMonth());
+        List<ServiceItiranHyojiJohoBusiness> サービス一覧表示情報List = manager.getServiceItiranHyojiJoho(サービス一覧パラメータ).records(); 
+        getHandler(div).getサービス一覧情報(サービス一覧表示情報List); 
+        return ResponseData.of(div).respond();
+    }
+    
     /**
      * サービス一覧の「再表示」ボタンの押下を処理です。
      *
