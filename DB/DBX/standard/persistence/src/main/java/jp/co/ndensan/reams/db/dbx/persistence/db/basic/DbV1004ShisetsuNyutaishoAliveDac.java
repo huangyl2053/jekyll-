@@ -11,7 +11,6 @@ import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1004ShisetsuNyutaish
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1004ShisetsuNyutaisho.rirekiNo;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1004ShisetsuNyutaisho.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1004ShisetsuNyutaishoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -97,13 +96,13 @@ public class DbV1004ShisetsuNyutaishoAliveDac implements ISaveable<DbV1004Shiset
      * @return DbT1004ShisetsuNyutaishoEntity
      */
     @Transaction
-    public DbT1004ShisetsuNyutaishoEntity get施設入退所(ShikibetsuCode 識別コード) {
+    public DbV1004ShisetsuNyutaishoEntity get施設入退所(ShikibetsuCode 識別コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
                 table(DbV1004ShisetsuNyutaisho.class).
                 where(eq(shikibetsuCode, 識別コード)).
-                toObject(DbT1004ShisetsuNyutaishoEntity.class);
+                toObject(DbV1004ShisetsuNyutaishoEntity.class);
     }
 
     /**
@@ -114,7 +113,7 @@ public class DbV1004ShisetsuNyutaishoAliveDac implements ISaveable<DbV1004Shiset
      * @return DbT1004ShisetsuNyutaishoEntity
      */
     @Transaction
-    public DbT1004ShisetsuNyutaishoEntity get施設入退所Order(ShikibetsuCode 識別コード, RString 台帳種別) {
+    public DbV1004ShisetsuNyutaishoEntity get施設入退所Order(ShikibetsuCode 識別コード, RString 台帳種別) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
@@ -124,6 +123,6 @@ public class DbV1004ShisetsuNyutaishoAliveDac implements ISaveable<DbV1004Shiset
                                 eq(daichoShubetsu, 台帳種別))).
                 order(new OrderBy(rirekiNo, Order.DESC, NullsOrder.LAST)).
                 limit(件数_1).
-                toObject(DbT1004ShisetsuNyutaishoEntity.class);
+                toObject(DbV1004ShisetsuNyutaishoEntity.class);
     }
 }

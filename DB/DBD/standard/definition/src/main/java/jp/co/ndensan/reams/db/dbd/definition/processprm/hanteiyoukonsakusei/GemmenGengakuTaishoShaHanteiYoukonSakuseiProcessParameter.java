@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.processprm.hanteiyoukonsakusei;
 
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanteiYoukonSakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiMyBatisParameter;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanteiyoukonsakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

@@ -59,7 +59,7 @@ public class TorikomiProcess extends BatchProcessBase<RString> {
     private int i = 0;
     private int k = 0;
     private RString batFileName;
-    private static final int ROW_LENGTH = 1514;
+    private static final int ROW_LENGTH = 1596;
     private final RString エラー = new RString("入力データエラー");
     private List<RString> codeList;
 

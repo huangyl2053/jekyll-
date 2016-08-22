@@ -11,7 +11,6 @@ import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1003TashichosonJusho
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1003TashichosonJushochiTokurei.idoYMD;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1003TashichosonJushochiTokurei.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1003TashichosonJushochiTokureiEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -98,7 +97,7 @@ public class DbV1003TashichosonJushochiTokureiAliveDac implements ISaveable<DbV1
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public DbT1003TashichosonJushochiTokureiEntity get他市町村住所地特例情報(ShikibetsuCode 識別コード) throws NullPointerException {
+    public DbV1003TashichosonJushochiTokureiEntity get他市町村住所地特例情報(ShikibetsuCode 識別コード) throws NullPointerException {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -106,6 +105,6 @@ public class DbV1003TashichosonJushochiTokureiAliveDac implements ISaveable<DbV1
         return accessor.select().
                 table(DbV1003TashichosonJushochiTokurei.class).
                 where(eq(shikibetsuCode, 識別コード)).
-                toObject(DbT1003TashichosonJushochiTokureiEntity.class);
+                toObject(DbV1003TashichosonJushochiTokureiEntity.class);
     }
 }

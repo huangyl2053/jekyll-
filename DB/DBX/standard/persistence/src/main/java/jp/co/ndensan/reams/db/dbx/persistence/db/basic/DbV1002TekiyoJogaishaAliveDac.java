@@ -11,7 +11,6 @@ import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1002TekiyoJogaisha.e
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1002TekiyoJogaisha.idoYMD;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1002TekiyoJogaisha.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1002TekiyoJogaishaEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -96,12 +95,12 @@ public class DbV1002TekiyoJogaishaAliveDac {
      * @return DbT1002TekiyoJogaishaEntity
      */
     @Transaction
-    public DbT1002TekiyoJogaishaEntity get適用除外者情報(ShikibetsuCode 識別コード) {
+    public DbV1002TekiyoJogaishaEntity get適用除外者情報(ShikibetsuCode 識別コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
                 table(DbV1002TekiyoJogaisha.class).
                 where(eq(shikibetsuCode, 識別コード)).
-                toObject(DbT1002TekiyoJogaishaEntity.class);
+                toObject(DbV1002TekiyoJogaishaEntity.class);
     }
 }
