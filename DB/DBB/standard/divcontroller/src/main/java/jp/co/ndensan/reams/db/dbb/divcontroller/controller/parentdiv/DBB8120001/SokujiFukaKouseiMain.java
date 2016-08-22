@@ -451,6 +451,7 @@ public class SokujiFukaKouseiMain {
             更正前後賦課のリスト = reasult.get更正前後賦課のリスト();
             更正前後徴収方法 = reasult.get更正前後徴収方法();
             is本算定処理済フラグ = reasult.is本算定処理済フラグ();
+            handler.set更正前後賦課のリスト降順(更正前後賦課のリスト);
             更正前賦課リスト = 更正前後賦課のリスト.get(0).get更正前();
             更正後賦課リスト = 更正前後賦課のリスト.get(0).get更正後();
             TsuchishoNo 通知書番号選択 = 更正前後賦課のリスト.get(0).get通知書番号();

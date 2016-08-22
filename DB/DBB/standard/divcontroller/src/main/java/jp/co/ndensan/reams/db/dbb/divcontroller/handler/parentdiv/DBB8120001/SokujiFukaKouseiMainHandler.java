@@ -1641,7 +1641,7 @@ public class SokujiFukaKouseiMainHandler {
                 dataSourceList.add(dataSource);
             }
         }
-        if (dataSourceList.size() >= NUM_1) {
+        if (dataSourceList.size() > NUM_1) {
             div.getDdlKoseigoTsuchishoNo().setDisplayNone(false);
         } else {
             div.getDdlKoseigoTsuchishoNo().setDisplayNone(true);
