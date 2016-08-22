@@ -320,25 +320,25 @@ public class IraiJohoDataTorikomiManager {
     private int update要介護認定主治医意見書意見項目(List<DbT5304ShujiiIkenshoIkenItemEntity> entityList,
             RString 申請書管理番号, int 主治医意見書作成依頼履歴番号, IkenshokinyuyoshiBusiness business) {
         int count = 0;
-        List<Integer> 連番List = new ArrayList<>();
+        List<RString> 連番List = new ArrayList<>();
         for (int i = 1; i < INT_114; i++) {
-            連番List.add(i);
+            連番List.add(new RString(i));
         }
         for (DbT5304ShujiiIkenshoIkenItemEntity entity : entityList) {
-            if (連番List.contains(entity.getRemban())) {
+            if (連番List.contains(new RString(entity.getRemban()))) {
                 entity.setIkenItem(get意見項目(entity.getRemban(), entity.getKoroshoIfShikibetsuCode(), business));
                 entity.setState(EntityDataState.Modified);
                 count = count + dbT5304Dac.save(entity);
-                連番List.remove(entity.getRemban());
+                連番List.remove(new RString(entity.getRemban()));
             }
         }
-        for (Integer 連番 : 連番List) {
+        for (RString 連番 : 連番List) {
             DbT5304ShujiiIkenshoIkenItemEntity dbT5304Entity = new DbT5304ShujiiIkenshoIkenItemEntity();
             dbT5304Entity.setShinseishoKanriNo(new ShinseishoKanriNo(申請書管理番号));
             dbT5304Entity.setIkenshoIraiRirekiNo(主治医意見書作成依頼履歴番号);
-            dbT5304Entity.setRemban(連番);
+            dbT5304Entity.setRemban(Integer.valueOf(連番.toString()));
             dbT5304Entity.setKoroshoIfShikibetsuCode(B_09);
-            dbT5304Entity.setIkenItem(get09B意見項目1(連番, business));
+            dbT5304Entity.setIkenItem(get09B意見項目1(Integer.valueOf(連番.toString()), business));
             dbT5304Entity.setState(EntityDataState.Added);
             count = count + dbT5304Dac.save(dbT5304Entity);
         }
@@ -369,25 +369,25 @@ public class IraiJohoDataTorikomiManager {
     private int update要介護認定主治医意見書記入項目(List<DbT5303ShujiiIkenshoKinyuItemEntity> entityList,
             RString 申請書管理番号, int 主治医意見書作成依頼履歴番号, IkenshokinyuyoshiBusiness business) {
         int count = 0;
-        List<Integer> 連番List = new ArrayList<>();
+        List<RString> 連番List = new ArrayList<>();
         for (int i = 1; i <= INT_23; i++) {
-            連番List.add(i);
+            連番List.add(new RString(i));
         }
         for (DbT5303ShujiiIkenshoKinyuItemEntity entity : entityList) {
-            if (連番List.contains(entity.getRemban())) {
+            if (連番List.contains(new RString(entity.getRemban()))) {
                 entity.setKinyuItem(get記入項目(entity.getRemban(), entity.getKoroshoIfShikibetsuCode(), business));
                 entity.setState(EntityDataState.Modified);
                 count = count + dbT5303Dac.save(entity);
-                連番List.remove(entity.getRemban());
+                連番List.remove(new RString(entity.getRemban()));
             }
         }
-        for (Integer 連番 : 連番List) {
+        for (RString 連番 : 連番List) {
             DbT5303ShujiiIkenshoKinyuItemEntity dbT5303Entity = new DbT5303ShujiiIkenshoKinyuItemEntity();
             dbT5303Entity.setShinseishoKanriNo(new ShinseishoKanriNo(申請書管理番号));
             dbT5303Entity.setIkenshoIraiRirekiNo(主治医意見書作成依頼履歴番号);
-            dbT5303Entity.setRemban(連番);
+            dbT5303Entity.setRemban(Integer.valueOf(連番.toString()));
             dbT5303Entity.setKoroshoIfShikibetsuCode(B_09);
-            dbT5303Entity.setKinyuItem(get09B記入項目1(連番, business));
+            dbT5303Entity.setKinyuItem(get09B記入項目1(Integer.valueOf(連番.toString()), business));
             dbT5303Entity.setState(EntityDataState.Added);
             count = count + dbT5303Dac.save(dbT5303Entity);
         }
