@@ -44,7 +44,6 @@ public class ShinseishoTorokuHandler {
     private static final RString 八月一日 = new RString("0801");
     private static final RString 七月三十一日 = new RString("0731");
     private static final ReportId 帳票ID = new ReportId("DBC100064_KijunShunyugakuTekiyoShinseisho");
-    private static final SubGyomuCode サブ業務コード = new SubGyomuCode("DBC");
     private static final RString 零 = new RString("0001");
     private static final RString 日 = new RString("01");
     private static final RString 本年 = new RString("本年");
@@ -87,7 +86,7 @@ public class ShinseishoTorokuHandler {
         div.getChkTsuchisho().setSelectedItems(div.getChkTsuchisho().getDataSource());
         div.getChkShinseisho().setSelectedItems(div.getChkShinseisho().getDataSource());
         div.getChkIchiranhyoCsv().setSelectedItems(div.getChkIchiranhyoCsv().getDataSource());
-        div.getCcdChohyoShutsuryokujun().load(サブ業務コード, 帳票ID);
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
     }
 
     /**
