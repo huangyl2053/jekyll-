@@ -1635,8 +1635,8 @@ public class SokujiFukaKouseiMainHandler {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (KoseiZengoFuka koseiZengoFuka : 更正前後賦課のリスト) {
             KeyValueDataSource dataSource = new KeyValueDataSource();
-            dataSource.setKey(koseiZengoFuka.get通知書番号().getColumnValue());
-            dataSource.setValue(koseiZengoFuka.get通知書番号().getColumnValue());
+            dataSource.setKey(koseiZengoFuka.get更正後().get通知書番号().getColumnValue());
+            dataSource.setValue(koseiZengoFuka.get更正後().get通知書番号().getColumnValue());
             if (!dataSourceList.contains(dataSource)) {
                 dataSourceList.add(dataSource);
             }
