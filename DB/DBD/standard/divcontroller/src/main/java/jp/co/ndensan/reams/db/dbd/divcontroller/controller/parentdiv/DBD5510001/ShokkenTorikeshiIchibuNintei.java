@@ -30,9 +30,11 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNy
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.IParentResponse;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -64,35 +66,36 @@ public class ShokkenTorikeshiIchibuNintei {
         ShinseishoKanriNo 申請書管理番号;
         ShokkenTorikeshiIchibuSoshituManager manager = ShokkenTorikeshiIchibuSoshituManager.createInstance();
         if (メニュID_職権修正.equals(menuId) || メニュID_職権取消一部喪失.equals(menuId)) {
-            ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo("20216990000004526"));
-            ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo("0000000019"));
-            ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
-            被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-            申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        } else {
             TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
             被保険者番号 = key.get被保険者番号();
             識別コード = key.get識別コード();
             申請書管理番号 = manager.select申請書管理番号(被保険者番号);
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
+        } else {
+            被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+            申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         }
         List<ShokkenTorikeshiNinteiJohoKonkaiBusiness> 今回情報List = manager.select今回情報(申請書管理番号.value()).records();
         ShokkenTorikeshiNinteiJohoKonkaiBusiness 今回情報 = null;
         if (!今回情報List.isEmpty()) {
             今回情報 = 今回情報List.get(0);
         }
-        DBD5510001StateName state = get初期状態(menuId);
-        if (メニュID_職権修正.equals(menuId) || メニュID_職権取消一部喪失.equals(menuId)) {
-            ValidationMessageControlPairs pairs = createValidationHandler(div).cheackLoad(今回情報);
-            if (pairs.iterator().hasNext()) {
-                ResponseData.of(div).addValidationMessages(pairs).respond();
-                return ResponseData.of(div).setState(state);
-            }
-        }
         ShokkenTorikeshiNinteiJohoKonkaiBusiness 前回情報 = manager.select前回情報(申請書管理番号.value());
         ViewStateHolder.put(ViewStateKeys.前回認定情報, 前回情報);
         ViewStateHolder.put(ViewStateKeys.今回認定情報, 今回情報);
         createHandler(div).initialize(申請書管理番号, 被保険者番号, 識別コード, menuId, 今回情報, 前回情報);
+        DBD5510001StateName state = get初期状態(menuId);
+        if (メニュID_職権修正.equals(menuId) || メニュID_職権取消一部喪失.equals(menuId)) {
+            ValidationMessageControlPairs pairs = createValidationHandler(div).cheackLoad(今回情報);
+            if (pairs.iterator().hasNext()) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), true);
+                IParentResponse<ShokkenTorikeshiIchibuNinteiDiv> response = ResponseData.of(div);
+                response.setState(state);
+                return response.addValidationMessages(pairs).respond();
+            } else {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
+            }
+        }
         return ResponseData.of(div).setState(state);
     }
 
@@ -161,7 +164,7 @@ public class ShokkenTorikeshiIchibuNintei {
     public ResponseData<ShokkenTorikeshiIchibuNinteiDiv> onBeforeOpenDialog_btnZenkaiNinteichi(ShokkenTorikeshiIchibuNinteiDiv div) {
 
         ShokkenTorikeshiNinteiJohoKonkaiBusiness 前回情報 = ViewStateHolder.get(ViewStateKeys.前回認定情報, ShokkenTorikeshiNinteiJohoKonkaiBusiness.class);
-        KekkaShosaiJohoModel model = createHandler(div).getKekkaShosaiJohoModel(前回情報, ResponseHolder.getMenuID());
+        KekkaShosaiJohoModel model = createHandler(div).getKekkaShosaiJohoModel(前回情報, ResponseHolder.getMenuID(), false);
         model.setMode(new RString(KekkaShosaiJohoDiv.ShoriType.ShokaiMode.toString()));
         div.setHdnZenkaiSerializedBusiness(DataPassingConverter.serialize(model));
         return ResponseData.of(div).respond();
@@ -177,7 +180,7 @@ public class ShokkenTorikeshiIchibuNintei {
 
         ShokkenTorikeshiNinteiJohoKonkaiBusiness 今回情報 = ViewStateHolder.get(ViewStateKeys.今回認定情報, ShokkenTorikeshiNinteiJohoKonkaiBusiness.class);
         div.setHdnKonkaiSerializedBusiness(
-                DataPassingConverter.serialize(createHandler(div).getKekkaShosaiJohoModel(今回情報, ResponseHolder.getMenuID())));
+                DataPassingConverter.serialize(createHandler(div).getKekkaShosaiJohoModel(今回情報, ResponseHolder.getMenuID(), true)));
         return ResponseData.of(div).respond();
     }
 

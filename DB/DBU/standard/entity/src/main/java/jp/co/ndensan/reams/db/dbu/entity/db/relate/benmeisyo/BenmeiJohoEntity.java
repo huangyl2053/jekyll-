@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo;
+package jp.co.ndensan.reams.db.dbu.entity.db.relate.benmeisyo;
 
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 認証者・電子公印Entityです。
+ * 弁明情報Entityです。
  *
  * @reamsid_L DBU-1080-010 zhengshukai
  *
@@ -16,11 +17,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class NinshoshaDenshiKoinDataEntity {
+public class BenmeiJohoEntity {
 
-    private RString 認証者役職名;
-    private RString 認職者氏名;
-    private RString 電子公印;
-    private RString 公印省略;
-    private RString 公印文字列;
+    private FlexibleDate 弁明書作成日;
+    private RString 弁明の件名;
+    private RString 弁明の内容;
 }

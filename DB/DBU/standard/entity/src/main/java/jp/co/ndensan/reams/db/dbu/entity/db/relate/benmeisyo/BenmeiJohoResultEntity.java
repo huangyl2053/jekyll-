@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo;
+package jp.co.ndensan.reams.db.dbu.entity.db.relate.benmeisyo;
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 弁明情報Entityです。
+ * 弁明情報取得のマッパーの戻るEntityです。
  *
  * @reamsid_L DBU-1080-010 zhengshukai
  *
@@ -17,9 +17,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class BenmeiJohoEntity {
+public class BenmeiJohoResultEntity {
 
+    private RString 処分種類コード;
     private FlexibleDate 弁明書作成日;
-    private RString 弁明の件名;
-    private RString 弁明の内容;
+    private RString 弁明内容;
+
 }

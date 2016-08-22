@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0220011;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -16,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class JukyushaIdoRenrakuhyoHenkoMainPanelDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,8 +26,6 @@ public class JukyushaIdoRenrakuhyoHenkoMainPanelDiv extends Panel {
     private JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv JukyushaIdoRenrakuhyoHenkoSearchConditionPanel;
     @JsonProperty("JukyushaIdoRenrakuhyoHenkoSearchResultListPanel")
     private JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv JukyushaIdoRenrakuhyoHenkoSearchResultListPanel;
-    @JsonProperty("btnResearch")
-    private Button btnResearch;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -70,24 +67,6 @@ public class JukyushaIdoRenrakuhyoHenkoMainPanelDiv extends Panel {
     @JsonProperty("JukyushaIdoRenrakuhyoHenkoSearchResultListPanel")
     public void setJukyushaIdoRenrakuhyoHenkoSearchResultListPanel(JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv JukyushaIdoRenrakuhyoHenkoSearchResultListPanel) {
         this.JukyushaIdoRenrakuhyoHenkoSearchResultListPanel = JukyushaIdoRenrakuhyoHenkoSearchResultListPanel;
-    }
-
-    /*
-     * getbtnResearch
-     * @return btnResearch
-     */
-    @JsonProperty("btnResearch")
-    public Button getBtnResearch() {
-        return btnResearch;
-    }
-
-    /*
-     * setbtnResearch
-     * @param btnResearch btnResearch
-     */
-    @JsonProperty("btnResearch")
-    public void setBtnResearch(Button btnResearch) {
-        this.btnResearch = btnResearch;
     }
 
     // </editor-fold>
