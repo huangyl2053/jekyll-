@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core.sogojigyohisaishinsaketteihokenshain;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.entity.db.report.source.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaKetteiHokenshaInSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaKetteiHokenshaInSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
