@@ -384,7 +384,7 @@ public class JikoFutangakuHosei2ValidationHandler {
         補正後チェック２(DbcErrorMessages.高額合算自己負担額関連１),
         補正後チェック３(DbcErrorMessages.事業高額合算自己負担額関連１),
         補正後チェック４(DbcErrorMessages.うち70_74歳に係る負担額関連１),
-        補正後チェック５(DbcErrorMessages.うち70_74歳に係る負担額関連１),
+        補正後チェック５(DbcErrorMessages.うち70_74歳に係る負担額関連４),
         補正後チェック６(DbcErrorMessages.うち70_74歳に係る負担額関連２),
         高額総合事業サービス費チェック(DbcErrorMessages.事業高額合算自己負担額関連２);
         private final Message message;
