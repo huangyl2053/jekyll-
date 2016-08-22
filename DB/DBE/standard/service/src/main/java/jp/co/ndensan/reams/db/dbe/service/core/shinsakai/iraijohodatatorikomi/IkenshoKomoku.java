@@ -41,27 +41,27 @@ public class IkenshoKomoku {
      */
     public RString get09A意見項目1(int 連番, IkenshokinyuyoshiBusiness business) {
         if (IkenshoKomokuMapping09A.点滴の管理.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(0, 1);
+            return get処置内容の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping09A.中心静脈栄養.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(1, 2);
+            return get処置内容の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping09A.透析.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(2, INT_3);
+            return get処置内容の意見項目(2, INT_3, business);
         } else if (IkenshoKomokuMapping09A.ストーマの処置.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(INT_3, INT_4);
+            return get処置内容の意見項目(INT_3, INT_4, business);
         } else if (IkenshoKomokuMapping09A.酸素療法.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(INT_4, INT_5);
+            return get処置内容の意見項目(INT_4, INT_5, business);
         } else if (IkenshoKomokuMapping09A.レスピレーター.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(INT_5, INT_6);
+            return get処置内容の意見項目(INT_5, INT_6, business);
         } else if (IkenshoKomokuMapping09A.気管切開の処置.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(INT_6, INT_7);
+            return get処置内容の意見項目(INT_6, INT_7, business);
         } else if (IkenshoKomokuMapping09A.疼痛の看護.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(INT_7, INT_8);
+            return get処置内容の意見項目(INT_7, INT_8, business);
         } else if (IkenshoKomokuMapping09A.経管栄養.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(INT_8, INT_9);
+            return get処置内容の意見項目(INT_8, INT_9, business);
         } else if (IkenshoKomokuMapping09A.モニター測定.getコード().equals(new RString(連番))) {
-            return business.get特別な対応().substring(0, 1);
+            return get特別な対応の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping09A.じょくそうの処置.getコード().equals(new RString(連番))) {
-            return business.get特別な対応().substring(1, 2);
+            return get特別な対応の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping09A.カテーテル.getコード().equals(new RString(連番))) {
             return business.get失禁への対応();
         } else if (IkenshoKomokuMapping09A.寝たきり度.getコード().equals(new RString(連番))) {
@@ -83,29 +83,29 @@ public class IkenshoKomoku {
         if (IkenshoKomokuMapping09A.認知症の周辺症状.getコード().equals(new RString(連番))) {
             return business.get周辺症状有無();
         } else if (IkenshoKomokuMapping09A.幻視_幻聴.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(0, 1);
+            return get周辺症状詳細の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping09A.妄想.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(1, 2);
+            return get周辺症状詳細の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping09A.昼夜逆転.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(2, INT_3);
+            return get周辺症状詳細の意見項目(2, INT_3, business);
         } else if (IkenshoKomokuMapping09A.暴言.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_3, INT_4);
+            return get周辺症状詳細の意見項目(INT_3, INT_4, business);
         } else if (IkenshoKomokuMapping09A.暴行.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_4, INT_5);
+            return get周辺症状詳細の意見項目(INT_4, INT_5, business);
         } else if (IkenshoKomokuMapping09A.介護への抵抗.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_5, INT_6);
+            return get周辺症状詳細の意見項目(INT_5, INT_6, business);
         } else if (IkenshoKomokuMapping09A.徘徊_認知症の周辺症状.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_6, INT_7);
+            return get周辺症状詳細の意見項目(INT_6, INT_7, business);
         } else if (IkenshoKomokuMapping09A.火の不始末.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_7, INT_8);
+            return get周辺症状詳細の意見項目(INT_7, INT_8, business);
         } else if (IkenshoKomokuMapping09A.不潔行為.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_8, INT_9);
+            return get周辺症状詳細の意見項目(INT_8, INT_9, business);
         } else if (IkenshoKomokuMapping09A.異食行動.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_9, INT_10);
+            return get周辺症状詳細の意見項目(INT_9, INT_10, business);
         } else if (IkenshoKomokuMapping09A.性的問題行動.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_10, INT_11);
+            return get周辺症状詳細の意見項目(INT_10, INT_11, business);
         } else if (IkenshoKomokuMapping09A.その他.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_11, INT_12);
+            return get周辺症状詳細の意見項目(INT_11, INT_12, business);
         } else if (IkenshoKomokuMapping09A.その他の精神_神経症状.getコード().equals(new RString(連番))) {
             return business.get精神神経症状有無();
         } else if (IkenshoKomokuMapping09A.専門医受診の有無.getコード().equals(new RString(連番))) {
@@ -165,17 +165,17 @@ public class IkenshoKomoku {
         } else if (IkenshoKomokuMapping09A.失調_不随意運動.getコード().equals(new RString(連番))) {
             return business.get失調不随意運動();
         } else if (IkenshoKomokuMapping09A.失調_不随意運動_上肢_左.getコード().equals(new RString(連番))) {
-            return business.get失調不随意運動上肢().substring(0, 1);
+            return get不随意運動上肢の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping09A.失調_不随意運動_上肢_右.getコード().equals(new RString(連番))) {
-            return business.get失調不随意運動上肢().substring(1, 2);
+            return get不随意運動上肢の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping09A.失調_不随意運動_下肢_左.getコード().equals(new RString(連番))) {
-            return business.get失調不随意運動下肢().substring(0, 1);
+            return get不随意運動下肢の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping09A.失調_不随意運動_下肢_右.getコード().equals(new RString(連番))) {
-            return business.get失調不随意運動下肢().substring(1, 2);
+            return get不随意運動下肢の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping09A.失調_不随意運動_体幹_左.getコード().equals(new RString(連番))) {
-            return business.get体幹().substring(0, 1);
+            return get体幹の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping09A.失調_不随意運動_体幹_右.getコード().equals(new RString(連番))) {
-            return business.get体幹().substring(1, 2);
+            return get体幹の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping09A.じょくそう.getコード().equals(new RString(連番))) {
             return business.get褥瘡();
         } else if (IkenshoKomokuMapping09A.じょくそう_程度.getコード().equals(new RString(連番))) {
@@ -189,11 +189,11 @@ public class IkenshoKomoku {
         } else if (IkenshoKomokuMapping09A.車いすの使用.getコード().equals(new RString(連番))) {
             return business.get車いすの使用();
         } else if (IkenshoKomokuMapping09A.歩行補助具_装具の使用_用いていない.getコード().equals(new RString(連番))) {
-            return business.get歩行補助具_装具の使用().substring(0, 1);
+            return get歩行補助具_装具の使用の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping09A.歩行補助具_装具の使用_屋外で使用.getコード().equals(new RString(連番))) {
-            return business.get歩行補助具_装具の使用().substring(1, 2);
+            return get歩行補助具_装具の使用の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping09A.歩行補助具_装具の使用_屋内で使用.getコード().equals(new RString(連番))) {
-            return business.get歩行補助具_装具の使用().substring(2, INT_3);
+            return get歩行補助具_装具の使用の意見項目(2, INT_3, business);
         } else if (IkenshoKomokuMapping09A.食事行為.getコード().equals(new RString(連番))) {
             return business.get食事行為();
         } else {
@@ -205,33 +205,33 @@ public class IkenshoKomoku {
         if (IkenshoKomokuMapping09A.現在の栄養状態.getコード().equals(new RString(連番))) {
             return business.get現在の栄養状態();
         } else if (IkenshoKomokuMapping09A.尿失禁.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(0, 1);
+            return get発生可能性状態の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping09A.転倒_骨折.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(1, 2);
+            return get発生可能性状態の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping09A.移動能力の低下.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(2, INT_3);
+            return get発生可能性状態の意見項目(2, INT_3, business);
         } else if (IkenshoKomokuMapping09A.褥瘡.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_3, INT_4);
+            return get発生可能性状態の意見項目(INT_3, INT_4, business);
         } else if (IkenshoKomokuMapping09A.心肺機能の低下.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_4, INT_5);
+            return get発生可能性状態の意見項目(INT_4, INT_5, business);
         } else if (IkenshoKomokuMapping09A.閉じこもり.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_5, INT_6);
+            return get発生可能性状態の意見項目(INT_5, INT_6, business);
         } else if (IkenshoKomokuMapping09A.意欲低下.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_6, INT_7);
+            return get発生可能性状態の意見項目(INT_6, INT_7, business);
         } else if (IkenshoKomokuMapping09A.徘徊_可能性が高い病態.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_7, INT_8);
+            return get発生可能性状態の意見項目(INT_7, INT_8, business);
         } else if (IkenshoKomokuMapping09A.低栄養.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_8, INT_9);
+            return get発生可能性状態の意見項目(INT_8, INT_9, business);
         } else if (IkenshoKomokuMapping09A.摂食_嚥下機能低下.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_9, INT_10);
+            return get発生可能性状態の意見項目(INT_9, INT_10, business);
         } else if (IkenshoKomokuMapping09A.脱水.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_10, INT_11);
+            return get発生可能性状態の意見項目(INT_10, INT_11, business);
         } else if (IkenshoKomokuMapping09A.易感染性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_11, INT_12);
+            return get発生可能性状態の意見項目(INT_11, INT_12, business);
         } else if (IkenshoKomokuMapping09A.がん等による疼痛.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_12, INT_13);
+            return get発生可能性状態の意見項目(INT_12, INT_13, business);
         } else if (IkenshoKomokuMapping09A.病態_その他.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_13, INT_14);
+            return get発生可能性状態の意見項目(INT_13, INT_14, business);
         } else if (IkenshoKomokuMapping09A.生活機能の維持_改善の見通し.getコード().equals(new RString(連番))) {
             return business.getサービス利用による生活機能の維持_改善の見通し();
         } else {
@@ -241,37 +241,37 @@ public class IkenshoKomoku {
 
     private RString get09A意見項目6(int 連番, IkenshokinyuyoshiBusiness business) {
         if (IkenshoKomokuMapping09A.訪問診療.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(0, 1);
+            return get医学的管理の必要性の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping09A.訪問看護.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(1, 2);
+            return get医学的管理の必要性の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping09A.看護職員による相談.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_10, INT_11);
+            return get医学的管理の必要性の意見項目(INT_10, INT_11, business);
         } else if (IkenshoKomokuMapping09A.訪問歯科診療.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_5, INT_6);
+            return get医学的管理の必要性の意見項目(INT_5, INT_6, business);
         } else if (IkenshoKomokuMapping09A.訪問薬剤管理指導.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_7, INT_8);
+            return get医学的管理の必要性の意見項目(INT_7, INT_8, business);
         } else if (IkenshoKomokuMapping09A.訪問リハビリテーション.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(2, INT_3);
+            return get医学的管理の必要性の意見項目(2, INT_3, business);
         } else if (IkenshoKomokuMapping09A.短期入所療養介護.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_4, INT_5);
+            return get医学的管理の必要性の意見項目(INT_4, INT_5, business);
         } else if (IkenshoKomokuMapping09A.訪問歯科衛生指導.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_6, INT_7);
+            return get医学的管理の必要性の意見項目(INT_6, INT_7, business);
         } else if (IkenshoKomokuMapping09A.訪問栄養食事指導.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_8, INT_9);
+            return get医学的管理の必要性の意見項目(INT_8, INT_9, business);
         } else if (IkenshoKomokuMapping09A.通所リハビリテーション.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_3, INT_4);
+            return get医学的管理の必要性の意見項目(INT_3, INT_4, business);
         } else if (IkenshoKomokuMapping09A.その他の医療系のサービス.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_9, INT_10);
+            return get医学的管理の必要性の意見項目(INT_9, INT_10, business);
         } else if (IkenshoKomokuMapping09A.訪問診療_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(0, 1);
+            return get医学的管理の必要性の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping09A.訪問看護_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(1, 2);
+            return get医学的管理の必要性の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping09A.看護職員による相談_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_10, INT_11);
+            return get医学的管理の必要性の意見項目(INT_10, INT_11, business);
         } else if (IkenshoKomokuMapping09A.訪問歯科診療_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_5, INT_6);
+            return get医学的管理の必要性の意見項目(INT_5, INT_6, business);
         } else if (IkenshoKomokuMapping09A.訪問薬剤管理指導_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_7, INT_8);
+            return get医学的管理の必要性の意見項目(INT_7, INT_8, business);
         } else {
             return get09A意見項目7(連番, business);
         }
@@ -279,17 +279,17 @@ public class IkenshoKomoku {
 
     private RString get09A意見項目7(int 連番, IkenshokinyuyoshiBusiness business) {
         if (IkenshoKomokuMapping09A.訪問リハビリテーション_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(2, INT_3);
+            return get医学的管理の必要性の意見項目(2, INT_3, business);
         } else if (IkenshoKomokuMapping09A.短期入所療養介護_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_4, INT_5);
+            return get医学的管理の必要性の意見項目(INT_4, INT_5, business);
         } else if (IkenshoKomokuMapping09A.訪問歯科衛生指導_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_6, INT_7);
+            return get医学的管理の必要性の意見項目(INT_6, INT_7, business);
         } else if (IkenshoKomokuMapping09A.訪問栄養食事指導_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_8, INT_9);
+            return get医学的管理の必要性の意見項目(INT_8, INT_9, business);
         } else if (IkenshoKomokuMapping09A.通所リハビリテーション_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_3, INT_4);
+            return get医学的管理の必要性の意見項目(INT_3, INT_4, business);
         } else if (IkenshoKomokuMapping09A.その他の医療系のサービス_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_9, INT_10);
+            return get医学的管理の必要性の意見項目(INT_9, INT_10, business);
         } else if (IkenshoKomokuMapping09A.介護サービスの留意事項_血圧.getコード().equals(new RString(連番))) {
             return business.getサービス提供血圧();
         } else if (IkenshoKomokuMapping09A.介護サービスの留意事項_移動.getコード().equals(new RString(連番))) {
@@ -316,27 +316,27 @@ public class IkenshoKomoku {
      */
     public RString get99A意見項目1(int 連番, IkenshokinyuyoshiBusiness business) {
         if (IkenshoKomokuMapping99A.点滴の管理.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(0, 1);
+            return get処置内容の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping99A.中心静脈栄養.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(1, 2);
+            return get処置内容の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping99A.透析.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(2, INT_3);
+            return get処置内容の意見項目(2, INT_3, business);
         } else if (IkenshoKomokuMapping99A.ストーマの処置.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(INT_3, INT_4);
+            return get処置内容の意見項目(INT_3, INT_4, business);
         } else if (IkenshoKomokuMapping99A.酸素療法.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(INT_4, INT_5);
+            return get処置内容の意見項目(INT_4, INT_5, business);
         } else if (IkenshoKomokuMapping99A.レスピレーター.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(INT_5, INT_6);
+            return get処置内容の意見項目(INT_5, INT_6, business);
         } else if (IkenshoKomokuMapping99A.気管切開の処置.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(INT_6, INT_7);
+            return get処置内容の意見項目(INT_6, INT_7, business);
         } else if (IkenshoKomokuMapping99A.疼痛の看護.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(INT_7, INT_8);
+            return get処置内容の意見項目(INT_7, INT_8, business);
         } else if (IkenshoKomokuMapping99A.経管栄養.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(INT_8, INT_9);
+            return get処置内容の意見項目(INT_8, INT_9, business);
         } else if (IkenshoKomokuMapping99A.モニター測定.getコード().equals(new RString(連番))) {
-            return business.get特別な対応().substring(0, 1);
+            return get特別な対応の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping99A.じょくそうの処置.getコード().equals(new RString(連番))) {
-            return business.get特別な対応().substring(1, 2);
+            return get特別な対応の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping99A.カテーテル.getコード().equals(new RString(連番))) {
             return business.get失禁への対応();
         } else if (IkenshoKomokuMapping99A.寝たきり度.getコード().equals(new RString(連番))) {
@@ -358,27 +358,27 @@ public class IkenshoKomoku {
         if (IkenshoKomokuMapping99A.認知症の周辺症状.getコード().equals(new RString(連番))) {
             return business.get周辺症状有無();
         } else if (IkenshoKomokuMapping99A.幻視_幻聴.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(0, 1);
+            return get周辺症状詳細の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping99A.妄想.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(1, 2);
+            return get周辺症状詳細の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping99A.昼夜逆転.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(2, INT_3);
+            return get周辺症状詳細の意見項目(2, INT_3, business);
         } else if (IkenshoKomokuMapping99A.暴言.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_3, INT_4);
+            return get周辺症状詳細の意見項目(INT_3, INT_4, business);
         } else if (IkenshoKomokuMapping99A.暴行.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_4, INT_5);
+            return get周辺症状詳細の意見項目(INT_4, INT_5, business);
         } else if (IkenshoKomokuMapping99A.介護への抵抗.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_5, INT_6);
+            return get周辺症状詳細の意見項目(INT_5, INT_6, business);
         } else if (IkenshoKomokuMapping99A.火の不始末.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_7, INT_8);
+            return get周辺症状詳細の意見項目(INT_7, INT_8, business);
         } else if (IkenshoKomokuMapping99A.不潔行為.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_8, INT_9);
+            return get周辺症状詳細の意見項目(INT_8, INT_9, business);
         } else if (IkenshoKomokuMapping99A.異食行動.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_9, INT_10);
+            return get周辺症状詳細の意見項目(INT_9, INT_10, business);
         } else if (IkenshoKomokuMapping99A.性的問題行動.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_10, INT_11);
+            return get周辺症状詳細の意見項目(INT_10, INT_11, business);
         } else if (IkenshoKomokuMapping99A.その他.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_11, INT_12);
+            return get周辺症状詳細の意見項目(INT_11, INT_12, business);
         } else if (IkenshoKomokuMapping99A.その他の精神_神経症状.getコード().equals(new RString(連番))) {
             return business.get精神神経症状有無();
         } else if (IkenshoKomokuMapping99A.専門医受診の有無.getコード().equals(new RString(連番))) {
@@ -410,17 +410,17 @@ public class IkenshoKomoku {
         if (IkenshoKomokuMapping99A.失調_不随意運動.getコード().equals(new RString(連番))) {
             return business.get失調不随意運動();
         } else if (IkenshoKomokuMapping99A.失調_不随意運動_上肢_左.getコード().equals(new RString(連番))) {
-            return business.get失調不随意運動上肢().substring(0, 1);
+            return get不随意運動上肢の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping99A.失調_不随意運動_上肢_右.getコード().equals(new RString(連番))) {
-            return business.get失調不随意運動上肢().substring(1, 2);
+            return get不随意運動上肢の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping99A.失調_不随意運動_下肢_左.getコード().equals(new RString(連番))) {
-            return business.get失調不随意運動下肢().substring(0, 1);
+            return get不随意運動下肢の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping99A.失調_不随意運動_下肢_右.getコード().equals(new RString(連番))) {
-            return business.get失調不随意運動下肢().substring(1, 2);
+            return get不随意運動下肢の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping99A.失調_不随意運動_体幹_左.getコード().equals(new RString(連番))) {
-            return business.get体幹().substring(0, 1);
+            return get体幹の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping99A.失調_不随意運動_体幹_右.getコード().equals(new RString(連番))) {
-            return business.get体幹().substring(1, 2);
+            return get体幹の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping99A.じょくそう.getコード().equals(new RString(連番))) {
             return business.get褥瘡();
         } else if (IkenshoKomokuMapping99A.じょくそう_程度.getコード().equals(new RString(連番))) {
@@ -436,23 +436,23 @@ public class IkenshoKomoku {
 
     private RString get99A意見項目5(int 連番, IkenshokinyuyoshiBusiness business) {
         if (IkenshoKomokuMapping99A.尿失禁.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(0, 1);
+            return get発生可能性状態の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping99A.転倒_骨折.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(1, 2);
+            return get発生可能性状態の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping99A.褥瘡.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_3, INT_4);
+            return get発生可能性状態の意見項目(INT_3, INT_4, business);
         } else if (IkenshoKomokuMapping99A.心肺機能の低下.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_4, INT_5);
+            return get発生可能性状態の意見項目(INT_4, INT_5, business);
         } else if (IkenshoKomokuMapping99A.徘徊_可能性が高い病態.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_7, INT_8);
+            return get発生可能性状態の意見項目(INT_7, INT_8, business);
         } else if (IkenshoKomokuMapping99A.脱水.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_10, INT_11);
+            return get発生可能性状態の意見項目(INT_10, INT_11, business);
         } else if (IkenshoKomokuMapping99A.易感染性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_11, INT_12);
+            return get発生可能性状態の意見項目(INT_11, INT_12, business);
         } else if (IkenshoKomokuMapping99A.がん等による疼痛.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_12, INT_13);
+            return get発生可能性状態の意見項目(INT_12, INT_13, business);
         } else if (IkenshoKomokuMapping99A.病態_その他.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_13, INT_14);
+            return get発生可能性状態の意見項目(INT_13, INT_14, business);
         } else {
             return get99A意見項目6(連番, business);
         }
@@ -460,33 +460,33 @@ public class IkenshoKomoku {
 
     private RString get99A意見項目6(int 連番, IkenshokinyuyoshiBusiness business) {
         if (IkenshoKomokuMapping99A.訪問診療.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(0, 1);
+            return get医学的管理の必要性の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping99A.訪問看護.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(1, 2);
+            return get医学的管理の必要性の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping99A.訪問歯科診療.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_5, INT_6);
+            return get医学的管理の必要性の意見項目(INT_5, INT_6, business);
         } else if (IkenshoKomokuMapping99A.訪問薬剤管理指導.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_7, INT_8);
+            return get医学的管理の必要性の意見項目(INT_7, INT_8, business);
         } else if (IkenshoKomokuMapping99A.訪問リハビリテーション.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(2, INT_3);
+            return get医学的管理の必要性の意見項目(2, INT_3, business);
         } else if (IkenshoKomokuMapping99A.短期入所療養介護.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_4, INT_5);
+            return get医学的管理の必要性の意見項目(INT_4, INT_5, business);
         } else if (IkenshoKomokuMapping99A.訪問歯科衛生指導.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_6, INT_7);
+            return get医学的管理の必要性の意見項目(INT_6, INT_7, business);
         } else if (IkenshoKomokuMapping99A.訪問栄養食事指導.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_8, INT_9);
+            return get医学的管理の必要性の意見項目(INT_8, INT_9, business);
         } else if (IkenshoKomokuMapping99A.通所リハビリテーション.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_3, INT_4);
+            return get医学的管理の必要性の意見項目(INT_3, INT_4, business);
         } else if (IkenshoKomokuMapping99A.その他の医療系のサービス.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_9, INT_10);
+            return get医学的管理の必要性の意見項目(INT_9, INT_10, business);
         } else if (IkenshoKomokuMapping99A.訪問診療_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(0, 1);
+            return get医学的管理の必要性の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping99A.訪問看護_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(1, 2);
+            return get医学的管理の必要性の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping99A.訪問歯科診療_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_5, INT_6);
+            return get医学的管理の必要性の意見項目(INT_5, INT_6, business);
         } else if (IkenshoKomokuMapping99A.訪問薬剤管理指導_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_7, INT_8);
+            return get医学的管理の必要性の意見項目(INT_7, INT_8, business);
         } else {
             return get99A意見項目7(連番, business);
         }
@@ -494,17 +494,17 @@ public class IkenshoKomoku {
 
     private RString get99A意見項目7(int 連番, IkenshokinyuyoshiBusiness business) {
         if (IkenshoKomokuMapping99A.訪問リハビリテーション_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(2, INT_3);
+            return get医学的管理の必要性の意見項目(2, INT_3, business);
         } else if (IkenshoKomokuMapping99A.短期入所療養介護_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_4, INT_5);
+            return get医学的管理の必要性の意見項目(INT_4, INT_5, business);
         } else if (IkenshoKomokuMapping99A.訪問歯科衛生指導_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_6, INT_7);
+            return get医学的管理の必要性の意見項目(INT_6, INT_7, business);
         } else if (IkenshoKomokuMapping99A.訪問栄養食事指導_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_8, INT_9);
+            return get医学的管理の必要性の意見項目(INT_8, INT_9, business);
         } else if (IkenshoKomokuMapping99A.通所リハビリテーション_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_3, INT_4);
+            return get医学的管理の必要性の意見項目(INT_3, INT_4, business);
         } else if (IkenshoKomokuMapping99A.その他の医療系のサービス_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_9, INT_10);
+            return get医学的管理の必要性の意見項目(INT_9, INT_10, business);
         } else if (IkenshoKomokuMapping99A.介護サービスの留意事項_血圧.getコード().equals(new RString(連番))) {
             return business.getサービス提供血圧();
         } else if (IkenshoKomokuMapping99A.介護サービスの留意事項_移動.getコード().equals(new RString(連番))) {
@@ -529,27 +529,27 @@ public class IkenshoKomoku {
      */
     public RString get06A意見項目1(int 連番, IkenshokinyuyoshiBusiness business) {
         if (IkenshoKomokuMapping06A.点滴の管理.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(0, 1);
+            return get処置内容の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping06A.中心静脈栄養.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(1, 2);
+            return get処置内容の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping06A.透析.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(2, INT_3);
+            return get処置内容の意見項目(2, INT_3, business);
         } else if (IkenshoKomokuMapping06A.ストーマの処置.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(INT_3, INT_4);
+            return get処置内容の意見項目(INT_3, INT_4, business);
         } else if (IkenshoKomokuMapping06A.酸素療法.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(INT_4, INT_5);
+            return get処置内容の意見項目(INT_4, INT_5, business);
         } else if (IkenshoKomokuMapping06A.レスピレーター.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(INT_5, INT_6);
+            return get処置内容の意見項目(INT_5, INT_6, business);
         } else if (IkenshoKomokuMapping06A.気管切開の処置.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(INT_6, INT_7);
+            return get処置内容の意見項目(INT_6, INT_7, business);
         } else if (IkenshoKomokuMapping06A.疼痛の看護.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(INT_7, INT_8);
+            return get処置内容の意見項目(INT_7, INT_8, business);
         } else if (IkenshoKomokuMapping06A.経管栄養.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(INT_8, INT_9);
+            return get処置内容の意見項目(INT_8, INT_9, business);
         } else if (IkenshoKomokuMapping06A.モニター測定.getコード().equals(new RString(連番))) {
-            return business.get特別な対応().substring(0, 1);
+            return get特別な対応の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping06A.じょくそうの処置.getコード().equals(new RString(連番))) {
-            return business.get特別な対応().substring(1, 2);
+            return get特別な対応の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping06A.カテーテル.getコード().equals(new RString(連番))) {
             return business.get失禁への対応();
         } else if (IkenshoKomokuMapping06A.寝たきり度.getコード().equals(new RString(連番))) {
@@ -571,29 +571,29 @@ public class IkenshoKomoku {
         if (IkenshoKomokuMapping06A.認知症の周辺症状.getコード().equals(new RString(連番))) {
             return business.get周辺症状有無();
         } else if (IkenshoKomokuMapping06A.幻視_幻聴.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(0, 1);
+            return get周辺症状詳細の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping06A.妄想.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(1, 2);
+            return get周辺症状詳細の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping06A.昼夜逆転.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(2, INT_3);
+            return get周辺症状詳細の意見項目(2, INT_3, business);
         } else if (IkenshoKomokuMapping06A.暴言.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_3, INT_4);
+            return get周辺症状詳細の意見項目(INT_3, INT_4, business);
         } else if (IkenshoKomokuMapping06A.暴行.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_4, INT_5);
+            return get周辺症状詳細の意見項目(INT_4, INT_5, business);
         } else if (IkenshoKomokuMapping06A.介護への抵抗.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_5, INT_6);
+            return get周辺症状詳細の意見項目(INT_5, INT_6, business);
         } else if (IkenshoKomokuMapping06A.徘徊_認知症の周辺症状.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_6, INT_7);
+            return get周辺症状詳細の意見項目(INT_6, INT_7, business);
         } else if (IkenshoKomokuMapping06A.火の不始末.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_7, INT_8);
+            return get周辺症状詳細の意見項目(INT_7, INT_8, business);
         } else if (IkenshoKomokuMapping06A.不潔行為.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_8, INT_9);
+            return get周辺症状詳細の意見項目(INT_8, INT_9, business);
         } else if (IkenshoKomokuMapping06A.異食行動.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_9, INT_10);
+            return get周辺症状詳細の意見項目(INT_9, INT_10, business);
         } else if (IkenshoKomokuMapping06A.性的問題行動.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_10, INT_11);
+            return get周辺症状詳細の意見項目(INT_10, INT_11, business);
         } else if (IkenshoKomokuMapping06A.その他.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_11, INT_12);
+            return get周辺症状詳細の意見項目(INT_11, INT_12, business);
         } else if (IkenshoKomokuMapping06A.その他の精神_神経症状.getコード().equals(new RString(連番))) {
             return business.get精神神経症状有無();
         } else if (IkenshoKomokuMapping06A.専門医受診の有無.getコード().equals(new RString(連番))) {
@@ -653,17 +653,17 @@ public class IkenshoKomoku {
         } else if (IkenshoKomokuMapping06A.失調_不随意運動.getコード().equals(new RString(連番))) {
             return business.get失調不随意運動();
         } else if (IkenshoKomokuMapping06A.失調_不随意運動_上肢_左.getコード().equals(new RString(連番))) {
-            return business.get失調不随意運動上肢().substring(0, 1);
+            return get不随意運動上肢の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping06A.失調_不随意運動_上肢_右.getコード().equals(new RString(連番))) {
-            return business.get失調不随意運動上肢().substring(1, 2);
+            return get不随意運動上肢の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping06A.失調_不随意運動_下肢_左.getコード().equals(new RString(連番))) {
-            return business.get失調不随意運動下肢().substring(0, 1);
+            return get不随意運動下肢の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping06A.失調_不随意運動_下肢_右.getコード().equals(new RString(連番))) {
-            return business.get失調不随意運動下肢().substring(1, 2);
+            return get不随意運動下肢の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping06A.失調_不随意運動_体幹_左.getコード().equals(new RString(連番))) {
-            return business.get体幹().substring(0, 1);
+            return get体幹の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping06A.失調_不随意運動_体幹_右.getコード().equals(new RString(連番))) {
-            return business.get体幹().substring(1, 2);
+            return get体幹の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping06A.じょくそう.getコード().equals(new RString(連番))) {
             return business.get褥瘡();
         } else if (IkenshoKomokuMapping06A.じょくそう_程度.getコード().equals(new RString(連番))) {
@@ -677,11 +677,11 @@ public class IkenshoKomoku {
         } else if (IkenshoKomokuMapping06A.車いすの使用.getコード().equals(new RString(連番))) {
             return business.get車いすの使用();
         } else if (IkenshoKomokuMapping06A.歩行補助具_装具の使用_用いていない.getコード().equals(new RString(連番))) {
-            return business.get歩行補助具_装具の使用().substring(0, 1);
+            return get歩行補助具_装具の使用の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping06A.歩行補助具_装具の使用_屋外で使用.getコード().equals(new RString(連番))) {
-            return business.get歩行補助具_装具の使用().substring(1, 2);
+            return get歩行補助具_装具の使用の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping06A.歩行補助具_装具の使用_屋内で使用.getコード().equals(new RString(連番))) {
-            return business.get歩行補助具_装具の使用().substring(2, INT_3);
+            return get歩行補助具_装具の使用の意見項目(2, INT_3, business);
         } else if (IkenshoKomokuMapping06A.食事行為.getコード().equals(new RString(連番))) {
             return business.get食事行為();
         } else {
@@ -693,33 +693,33 @@ public class IkenshoKomoku {
         if (IkenshoKomokuMapping06A.現在の栄養状態.getコード().equals(new RString(連番))) {
             return business.get現在の栄養状態();
         } else if (IkenshoKomokuMapping06A.尿失禁.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(0, 1);
+            return get発生可能性状態の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping06A.転倒_骨折.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(1, 2);
+            return get発生可能性状態の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping06A.移動能力の低下.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(2, INT_3);
+            return get発生可能性状態の意見項目(2, INT_3, business);
         } else if (IkenshoKomokuMapping06A.褥瘡.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_3, INT_4);
+            return get発生可能性状態の意見項目(INT_3, INT_4, business);
         } else if (IkenshoKomokuMapping06A.心肺機能の低下.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_4, INT_5);
+            return get発生可能性状態の意見項目(INT_4, INT_5, business);
         } else if (IkenshoKomokuMapping06A.閉じこもり.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_5, INT_6);
+            return get発生可能性状態の意見項目(INT_5, INT_6, business);
         } else if (IkenshoKomokuMapping06A.意欲低下.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_6, INT_7);
+            return get発生可能性状態の意見項目(INT_6, INT_7, business);
         } else if (IkenshoKomokuMapping06A.徘徊_可能性が高い病態.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_7, INT_8);
+            return get発生可能性状態の意見項目(INT_7, INT_8, business);
         } else if (IkenshoKomokuMapping06A.低栄養.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_8, INT_9);
+            return get発生可能性状態の意見項目(INT_8, INT_9, business);
         } else if (IkenshoKomokuMapping06A.摂食_嚥下機能低下.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_9, INT_10);
+            return get発生可能性状態の意見項目(INT_9, INT_10, business);
         } else if (IkenshoKomokuMapping06A.脱水.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_10, INT_11);
+            return get発生可能性状態の意見項目(INT_10, INT_11, business);
         } else if (IkenshoKomokuMapping06A.易感染性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_11, INT_12);
+            return get発生可能性状態の意見項目(INT_11, INT_12, business);
         } else if (IkenshoKomokuMapping06A.がん等による疼痛.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_12, INT_13);
+            return get発生可能性状態の意見項目(INT_12, INT_13, business);
         } else if (IkenshoKomokuMapping06A.病態_その他.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_13, INT_14);
+            return get発生可能性状態の意見項目(INT_13, INT_14, business);
         } else if (IkenshoKomokuMapping06A.生活機能の維持_改善の見通し.getコード().equals(new RString(連番))) {
             return business.getサービス利用による生活機能の維持_改善の見通し();
         } else {
@@ -729,33 +729,33 @@ public class IkenshoKomoku {
 
     private RString get06A意見項目6(int 連番, IkenshokinyuyoshiBusiness business) {
         if (IkenshoKomokuMapping06A.訪問診療.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(0, 1);
+            return get医学的管理の必要性の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping06A.訪問看護.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(1, 2);
+            return get医学的管理の必要性の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping06A.訪問歯科診療.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_5, INT_6);
+            return get医学的管理の必要性の意見項目(INT_5, INT_6, business);
         } else if (IkenshoKomokuMapping06A.訪問薬剤管理指導.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_7, INT_8);
+            return get医学的管理の必要性の意見項目(INT_7, INT_8, business);
         } else if (IkenshoKomokuMapping06A.訪問リハビリテーション.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(2, INT_3);
+            return get医学的管理の必要性の意見項目(2, INT_3, business);
         } else if (IkenshoKomokuMapping06A.短期入所療養介護.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_4, INT_5);
+            return get医学的管理の必要性の意見項目(INT_4, INT_5, business);
         } else if (IkenshoKomokuMapping06A.訪問歯科衛生指導.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_6, INT_7);
+            return get医学的管理の必要性の意見項目(INT_6, INT_7, business);
         } else if (IkenshoKomokuMapping06A.訪問栄養食事指導.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_8, INT_9);
+            return get医学的管理の必要性の意見項目(INT_8, INT_9, business);
         } else if (IkenshoKomokuMapping06A.通所リハビリテーション.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_3, INT_4);
+            return get医学的管理の必要性の意見項目(INT_3, INT_4, business);
         } else if (IkenshoKomokuMapping06A.その他の医療系のサービス.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_9, INT_10);
+            return get医学的管理の必要性の意見項目(INT_9, INT_10, business);
         } else if (IkenshoKomokuMapping06A.訪問診療_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(0, 1);
+            return get医学的管理の必要性の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping06A.訪問看護_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(1, 2);
+            return get医学的管理の必要性の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping06A.訪問歯科診療_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_5, INT_6);
+            return get医学的管理の必要性の意見項目(INT_5, INT_6, business);
         } else if (IkenshoKomokuMapping06A.訪問薬剤管理指導_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_7, INT_8);
+            return get医学的管理の必要性の意見項目(INT_7, INT_8, business);
         } else {
             return get06A意見項目7(連番, business);
         }
@@ -763,17 +763,17 @@ public class IkenshoKomoku {
 
     private RString get06A意見項目7(int 連番, IkenshokinyuyoshiBusiness business) {
         if (IkenshoKomokuMapping06A.訪問リハビリテーション_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(2, INT_3);
+            return get医学的管理の必要性の意見項目(2, INT_3, business);
         } else if (IkenshoKomokuMapping06A.短期入所療養介護_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_4, INT_5);
+            return get医学的管理の必要性の意見項目(INT_4, INT_5, business);
         } else if (IkenshoKomokuMapping06A.訪問歯科衛生指導_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_6, INT_7);
+            return get医学的管理の必要性の意見項目(INT_6, INT_7, business);
         } else if (IkenshoKomokuMapping06A.訪問栄養食事指導_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_8, INT_9);
+            return get医学的管理の必要性の意見項目(INT_8, INT_9, business);
         } else if (IkenshoKomokuMapping06A.通所リハビリテーション_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_3, INT_4);
+            return get医学的管理の必要性の意見項目(INT_3, INT_4, business);
         } else if (IkenshoKomokuMapping06A.その他の医療系のサービス_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_9, INT_10);
+            return get医学的管理の必要性の意見項目(INT_9, INT_10, business);
         } else if (IkenshoKomokuMapping06A.介護サービスの留意事項_血圧.getコード().equals(new RString(連番))) {
             return business.getサービス提供血圧();
         } else if (IkenshoKomokuMapping06A.介護サービスの留意事項_移動.getコード().equals(new RString(連番))) {
@@ -800,27 +800,27 @@ public class IkenshoKomoku {
      */
     public RString get02A意見項目1(int 連番, IkenshokinyuyoshiBusiness business) {
         if (IkenshoKomokuMapping02A.点滴の管理.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(0, 1);
+            return get処置内容の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping02A.中心静脈栄養.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(1, 2);
+            return get処置内容の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping02A.透析.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(2, INT_3);
+            return get処置内容の意見項目(2, INT_3, business);
         } else if (IkenshoKomokuMapping02A.ストーマの処置.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(INT_3, INT_4);
+            return get処置内容の意見項目(INT_3, INT_4, business);
         } else if (IkenshoKomokuMapping02A.酸素療法.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(INT_4, INT_5);
+            return get処置内容の意見項目(INT_4, INT_5, business);
         } else if (IkenshoKomokuMapping02A.レスピレーター.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(INT_5, INT_6);
+            return get処置内容の意見項目(INT_5, INT_6, business);
         } else if (IkenshoKomokuMapping02A.気管切開の処置.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(INT_6, INT_7);
+            return get処置内容の意見項目(INT_6, INT_7, business);
         } else if (IkenshoKomokuMapping02A.疼痛の看護.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(INT_7, INT_8);
+            return get処置内容の意見項目(INT_7, INT_8, business);
         } else if (IkenshoKomokuMapping02A.経管栄養.getコード().equals(new RString(連番))) {
-            return business.get処置内容().substring(INT_8, INT_9);
+            return get処置内容の意見項目(INT_8, INT_9, business);
         } else if (IkenshoKomokuMapping02A.モニター測定.getコード().equals(new RString(連番))) {
-            return business.get特別な対応().substring(0, 1);
+            return get特別な対応の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping02A.じょくそうの処置.getコード().equals(new RString(連番))) {
-            return business.get特別な対応().substring(1, 2);
+            return get特別な対応の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping02A.カテーテル.getコード().equals(new RString(連番))) {
             return business.get失禁への対応();
         } else if (IkenshoKomokuMapping02A.寝たきり度.getコード().equals(new RString(連番))) {
@@ -842,27 +842,27 @@ public class IkenshoKomoku {
         if (IkenshoKomokuMapping02A.認知症の周辺症状.getコード().equals(new RString(連番))) {
             return business.get周辺症状有無();
         } else if (IkenshoKomokuMapping02A.幻視_幻聴.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(0, 1);
+            return get周辺症状詳細の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping02A.妄想.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(1, 2);
+            return get周辺症状詳細の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping02A.昼夜逆転.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(2, INT_3);
+            return get周辺症状詳細の意見項目(2, INT_3, business);
         } else if (IkenshoKomokuMapping02A.暴言.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_3, INT_4);
+            return get周辺症状詳細の意見項目(INT_3, INT_4, business);
         } else if (IkenshoKomokuMapping02A.暴行.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_4, INT_5);
+            return get周辺症状詳細の意見項目(INT_4, INT_5, business);
         } else if (IkenshoKomokuMapping02A.介護への抵抗.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_5, INT_6);
+            return get周辺症状詳細の意見項目(INT_5, INT_6, business);
         } else if (IkenshoKomokuMapping02A.火の不始末.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_7, INT_8);
+            return get周辺症状詳細の意見項目(INT_7, INT_8, business);
         } else if (IkenshoKomokuMapping02A.不潔行為.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_8, INT_9);
+            return get周辺症状詳細の意見項目(INT_8, INT_9, business);
         } else if (IkenshoKomokuMapping02A.異食行動.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_9, INT_10);
+            return get周辺症状詳細の意見項目(INT_9, INT_10, business);
         } else if (IkenshoKomokuMapping02A.性的問題行動.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_10, INT_11);
+            return get周辺症状詳細の意見項目(INT_10, INT_11, business);
         } else if (IkenshoKomokuMapping02A.その他.getコード().equals(new RString(連番))) {
-            return business.get周辺症状詳細().substring(INT_11, INT_12);
+            return get周辺症状詳細の意見項目(INT_11, INT_12, business);
         } else if (IkenshoKomokuMapping02A.その他の精神_神経症状.getコード().equals(new RString(連番))) {
             return business.get精神神経症状有無();
         } else if (IkenshoKomokuMapping02A.専門医受診の有無.getコード().equals(new RString(連番))) {
@@ -894,17 +894,17 @@ public class IkenshoKomoku {
         if (IkenshoKomokuMapping02A.失調_不随意運動.getコード().equals(new RString(連番))) {
             return business.get失調不随意運動();
         } else if (IkenshoKomokuMapping02A.失調_不随意運動_上肢_左.getコード().equals(new RString(連番))) {
-            return business.get失調不随意運動上肢().substring(0, 1);
+            return get不随意運動上肢の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping02A.失調_不随意運動_上肢_右.getコード().equals(new RString(連番))) {
-            return business.get失調不随意運動上肢().substring(1, 2);
+            return get不随意運動上肢の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping02A.失調_不随意運動_下肢_左.getコード().equals(new RString(連番))) {
-            return business.get失調不随意運動下肢().substring(0, 1);
+            return get不随意運動下肢の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping02A.失調_不随意運動_下肢_右.getコード().equals(new RString(連番))) {
-            return business.get失調不随意運動下肢().substring(1, 2);
+            return get不随意運動下肢の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping02A.失調_不随意運動_体幹_左.getコード().equals(new RString(連番))) {
-            return business.get体幹().substring(0, 1);
+            return get体幹の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping02A.失調_不随意運動_体幹_右.getコード().equals(new RString(連番))) {
-            return business.get体幹().substring(1, 2);
+            return get体幹の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping02A.じょくそう.getコード().equals(new RString(連番))) {
             return business.get褥瘡();
         } else if (IkenshoKomokuMapping02A.じょくそう_程度.getコード().equals(new RString(連番))) {
@@ -920,23 +920,23 @@ public class IkenshoKomoku {
 
     private RString get02A意見項目5(int 連番, IkenshokinyuyoshiBusiness business) {
         if (IkenshoKomokuMapping02A.尿失禁.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(0, 1);
+            return get発生可能性状態の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping02A.転倒_骨折.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(1, 2);
+            return get発生可能性状態の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping02A.褥瘡.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_3, INT_4);
+            return get発生可能性状態の意見項目(INT_3, INT_4, business);
         } else if (IkenshoKomokuMapping02A.心肺機能の低下.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_4, INT_5);
+            return get発生可能性状態の意見項目(INT_4, INT_5, business);
         } else if (IkenshoKomokuMapping02A.徘徊_可能性が高い病態.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_7, INT_8);
+            return get発生可能性状態の意見項目(INT_7, INT_8, business);
         } else if (IkenshoKomokuMapping02A.脱水.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_10, INT_11);
+            return get発生可能性状態の意見項目(INT_10, INT_11, business);
         } else if (IkenshoKomokuMapping02A.易感染性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_11, INT_12);
+            return get発生可能性状態の意見項目(INT_11, INT_12, business);
         } else if (IkenshoKomokuMapping02A.がん等による疼痛.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_12, INT_13);
+            return get発生可能性状態の意見項目(INT_12, INT_13, business);
         } else if (IkenshoKomokuMapping02A.病態_その他.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_13, INT_14);
+            return get発生可能性状態の意見項目(INT_13, INT_14, business);
         } else {
             return get02A意見項目6(連番, business);
         }
@@ -944,33 +944,33 @@ public class IkenshoKomoku {
 
     private RString get02A意見項目6(int 連番, IkenshokinyuyoshiBusiness business) {
         if (IkenshoKomokuMapping02A.訪問診療.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(0, 1);
+            return get医学的管理の必要性の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping02A.訪問看護.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(1, 2);
+            return get医学的管理の必要性の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping02A.訪問歯科診療.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_5, INT_6);
+            return get医学的管理の必要性の意見項目(INT_5, INT_6, business);
         } else if (IkenshoKomokuMapping02A.訪問薬剤管理指導.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_7, INT_8);
+            return get医学的管理の必要性の意見項目(INT_7, INT_8, business);
         } else if (IkenshoKomokuMapping02A.訪問リハビリテーション.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(2, INT_3);
+            return get医学的管理の必要性の意見項目(2, INT_3, business);
         } else if (IkenshoKomokuMapping02A.短期入所療養介護.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_4, INT_5);
+            return get医学的管理の必要性の意見項目(INT_4, INT_5, business);
         } else if (IkenshoKomokuMapping02A.訪問歯科衛生指導.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_6, INT_7);
+            return get医学的管理の必要性の意見項目(INT_6, INT_7, business);
         } else if (IkenshoKomokuMapping02A.訪問栄養食事指導.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_8, INT_9);
+            return get医学的管理の必要性の意見項目(INT_8, INT_9, business);
         } else if (IkenshoKomokuMapping02A.通所リハビリテーション.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_3, INT_4);
+            return get医学的管理の必要性の意見項目(INT_3, INT_4, business);
         } else if (IkenshoKomokuMapping02A.その他の医療系のサービス.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_9, INT_10);
+            return get医学的管理の必要性の意見項目(INT_9, INT_10, business);
         } else if (IkenshoKomokuMapping02A.訪問診療_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(0, 1);
+            return get医学的管理の必要性の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping02A.訪問看護_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(1, 2);
+            return get医学的管理の必要性の意見項目(1, 2, business);
         } else if (IkenshoKomokuMapping02A.訪問歯科診療_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_5, INT_6);
+            return get医学的管理の必要性の意見項目(INT_5, INT_6, business);
         } else if (IkenshoKomokuMapping02A.訪問薬剤管理指導_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_7, INT_8);
+            return get医学的管理の必要性の意見項目(INT_7, INT_8, business);
         } else {
             return get02A意見項目7(連番, business);
         }
@@ -978,17 +978,17 @@ public class IkenshoKomoku {
 
     private RString get02A意見項目7(int 連番, IkenshokinyuyoshiBusiness business) {
         if (IkenshoKomokuMapping02A.訪問リハビリテーション_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(2, INT_3);
+            return get医学的管理の必要性の意見項目(2, INT_3, business);
         } else if (IkenshoKomokuMapping02A.短期入所療養介護_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_4, INT_5);
+            return get医学的管理の必要性の意見項目(INT_4, INT_5, business);
         } else if (IkenshoKomokuMapping02A.訪問歯科衛生指導_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_6, INT_7);
+            return get医学的管理の必要性の意見項目(INT_6, INT_7, business);
         } else if (IkenshoKomokuMapping02A.訪問栄養食事指導_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_8, INT_9);
+            return get医学的管理の必要性の意見項目(INT_8, INT_9, business);
         } else if (IkenshoKomokuMapping02A.通所リハビリテーション_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_3, INT_4);
+            return get医学的管理の必要性の意見項目(INT_3, INT_4, business);
         } else if (IkenshoKomokuMapping02A.その他の医療系のサービス_必要性.getコード().equals(new RString(連番))) {
-            return business.get発生可能性状態().substring(INT_9, INT_10);
+            return get医学的管理の必要性の意見項目(INT_9, INT_10, business);
         } else if (IkenshoKomokuMapping02A.介護サービスの留意事項_血圧.getコード().equals(new RString(連番))) {
             return business.getサービス提供血圧();
         } else if (IkenshoKomokuMapping02A.介護サービスの留意事項_移動.getコード().equals(new RString(連番))) {
@@ -999,6 +999,78 @@ public class IkenshoKomoku {
             return business.getサービス提供嚥下();
         } else if (IkenshoKomokuMapping02A.感染症の有無.getコード().equals(new RString(連番))) {
             return business.get感染症有無();
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString get処置内容の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+        if (!RString.isNullOrEmpty(business.get処置内容())) {
+            return business.get処置内容().substring(start, end);
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString get周辺症状詳細の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+        if (!RString.isNullOrEmpty(business.get周辺症状詳細())) {
+            return business.get周辺症状詳細().substring(start, end);
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString get発生可能性状態の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+        if (!RString.isNullOrEmpty(business.get発生可能性状態())) {
+            return business.get発生可能性状態().substring(start, end);
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString get医学的管理の必要性の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+        if (!RString.isNullOrEmpty(business.get医学的管理の必要性())) {
+            return business.get医学的管理の必要性().substring(start, end);
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString get特別な対応の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+        if (!RString.isNullOrEmpty(business.get特別な対応())) {
+            return business.get特別な対応().substring(start, end);
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString get不随意運動上肢の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+        if (!RString.isNullOrEmpty(business.get失調不随意運動上肢())) {
+            return business.get失調不随意運動上肢().substring(start, end);
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString get不随意運動下肢の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+        if (!RString.isNullOrEmpty(business.get失調不随意運動下肢())) {
+            return business.get失調不随意運動下肢().substring(start, end);
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString get体幹の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+        if (!RString.isNullOrEmpty(business.get体幹())) {
+            return business.get体幹().substring(start, end);
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString get歩行補助具_装具の使用の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+        if (!RString.isNullOrEmpty(business.get歩行補助具_装具の使用())) {
+            return business.get歩行補助具_装具の使用().substring(start, end);
         } else {
             return RString.EMPTY;
         }
