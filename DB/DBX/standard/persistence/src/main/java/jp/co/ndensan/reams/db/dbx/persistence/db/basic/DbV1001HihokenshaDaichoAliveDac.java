@@ -12,7 +12,6 @@ import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho.idoYMD;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -161,7 +160,7 @@ public class DbV1001HihokenshaDaichoAliveDac {
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public DbT1001HihokenshaDaichoEntity get被保険者台帳取得(HihokenshaNo 被保険者番号) throws NullPointerException {
+    public DbV1001HihokenshaDaichoEntity get被保険者台帳取得(HihokenshaNo 被保険者番号) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(項目名_被保険者番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -169,6 +168,6 @@ public class DbV1001HihokenshaDaichoAliveDac {
         return accessor.select().
                 table(DbV1001HihokenshaDaicho.class).
                 where(eq(hihokenshaNo, 被保険者番号)).
-                toObject(DbT1001HihokenshaDaichoEntity.class);
+                toObject(DbV1001HihokenshaDaichoEntity.class);
     }
 }
