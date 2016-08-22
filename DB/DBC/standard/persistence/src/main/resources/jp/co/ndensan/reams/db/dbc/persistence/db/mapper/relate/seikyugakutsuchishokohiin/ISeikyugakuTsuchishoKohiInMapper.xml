@@ -7,7 +7,7 @@
                 resultMap="resultMap_DbWT1511SeikyugakuTsuchishoTempEntity"  fetchSize="500" resultOrdered="true">
         SELECT 
         <include refid="allColumns_SeikyugakuTsuchisho" />
-        FROM "DbWT1511SeikyugakuTsuchishoTemp" AS DbWT1511
+        FROM "DbWT1511SeikyugakuTsuchisho" AS DbWT1511
         ORDER BY DbWT1511."hokenshaNo" ASC , DbWT1511."renban" ASC,
         DbWT1511."kohiFutanshaNo" ASC, DbWT1511."kanCode" ASC, DbWT1511."kouCode" ASC
     </select>
