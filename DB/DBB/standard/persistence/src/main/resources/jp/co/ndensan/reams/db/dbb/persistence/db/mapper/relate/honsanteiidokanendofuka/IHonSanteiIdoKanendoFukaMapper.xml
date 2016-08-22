@@ -181,68 +181,53 @@
     <!-- 生保の異動を「異動Temp」に追加する-->
     <select resultOrdered="true" id="select生保の異動" resultMap="resultMap_IdoTmpEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofuka.KanendoFukaParameter" fetchSize="500">
         SELECT
-        DISTINCT A."hihokenshaNo"
+            DISTINCT A."hihokenshaNo"
         FROM
-        ( <include refid="maxHihokenshaNo_DbT1001HihokenshaDaicho" /> ) AS A
+            rgdb."DbT1001HihokenshaDaicho" AS A
         INNER JOIN
-        rgur."UrT0508SeikatsuHogoJukyusha" AS B
+            rgur."UrT0508SeikatsuHogoJukyusha" AS B
         ON
-        A."shikibetsuCode" = B."shikibetsuCode"
+            A."shikibetsuCode" = B."shikibetsuCode"
         INNER JOIN
-        rgur."UrT0526SeikatsuHogoFujoShurui" AS C
+            rgur."UrT0526SeikatsuHogoFujoShurui" AS C
         ON
-        B."shikibetsuCode" = C."shikibetsuCode"
+            B."shikibetsuCode" = C."shikibetsuCode"
         AND B."gyomuCode" = C."gyomuCode"
         AND B."jukyuKaishiYMD" = C."jukyuKaishiYMD"
         WHERE
-        #{抽出開始日時} <![CDATA[<=]]> A."lastUpdateTimestamp"
-        AND A."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
-        AND #{抽出開始日時} <![CDATA[<=]]> B."lastUpdateTimestamp" 
+            B."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
         AND B."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
-        AND B."gyomuCode" = 'DB'
-        AND B."jukyuKaishiYMD" <![CDATA[<]]> A."idoYMD"
-        AND (B."jukyuHaishiYMD" IS NULL OR B."jukyuHaishiYMD" = '' OR A."idoYMD" <![CDATA[<]]> B."jukyuHaishiYMD" )
+        AND C."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
+        AND C."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
     </select>
     
     <!-- 老齢の異動を「異動Temp」に追加する-->
     <select resultOrdered="true" id="select老齢の異動" resultMap="resultMap_IdoTmpEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofuka.KanendoFukaParameter" fetchSize="500">
         SELECT
-        DISTINCT A."hihokenshaNo"
+            DISTINCT A."hihokenshaNo"
         FROM
-        ( <include refid="maxHihokenshaNo_DbT1001HihokenshaDaicho" /> ) AS A
+            rgdb."DbT1001HihokenshaDaicho" AS A
         INNER JOIN
-        rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS B
+            rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS B
         ON
-        A."shikibetsuCode" = B."shikibetsuCode"
+            A."shikibetsuCode" = B."shikibetsuCode"
         WHERE
-        #{抽出開始日時} <![CDATA[<=]]> A."lastUpdateTimestamp"
+            A."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
         AND A."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
-        AND B."jukyuKaishiYMD" <![CDATA[<]]> A."idoYMD"
-        AND (B."jukyuHaishiYMD" IS NULL OR B."jukyuHaishiYMD" = '' OR A."idoYMD" <![CDATA[<]]> B."jukyuHaishiYMD")
     </select>
     
     <!-- 境界層の異動を「異動Temp」に追加する-->
     <select resultOrdered="true" id="select境界層の異動" resultMap="resultMap_IdoTmpEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofuka.KanendoFukaParameter" fetchSize="500">
         SELECT
-        DISTINCT A."hihokenshaNo"
+           DISTINCT A."hihokenshaNo"
         FROM
-        rgdb."DbT1006KyokaisoGaitosha" AS A
+            rgdb."DbT1006KyokaisoGaitosha" AS A
         LEFT JOIN
-        rgdb."DbT1007KyokaisoHokenryoDankai" AS B
+            rgdb."DbT1007KyokaisoHokenryoDankai" AS B
         ON
-        A."hihokenshaNo" = B."hihokenshaNo"
-        AND A."rirekiNo" = B."rirekiNo"
-        AND A."linkNo" = B."linkNo"
-        LEFT JOIN
-        rgdb."DbT1013KyokaisoSochiShinsei" AS C
-        ON
-        A."hihokenshaNo" = C."hihokenshaNo"
-        AND A."rirekiNo" = C."rirekiNo"
-        AND A."linkNo" = C."linkNo"
+            A."hihokenshaNo" = B."hihokenshaNo"
         WHERE
-        #{抽出開始日時} <![CDATA[<=]]> A."lastUpdateTimestamp"
-        AND A."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
-        AND #{抽出開始日時} <![CDATA[<=]]> B."lastUpdateTimestamp"
+            B."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
         AND B."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
     </select>
     
@@ -306,7 +291,7 @@
         "UrT0705ChoteiKyotsu"."choteiId" = "DbT2003Kibetsu"."choteiId"
         WHERE
         "DbT2002Fuka"."fukaNendo" = #{ 賦課年度 }
-        ORDER BY "DbT2002Fuka"."choteiNendo" ,
+        ORDER BY "DbT2002Fuka"."choteiNendo",
         "DbT2002Fuka"."fukaNendo",
         "DbT2002Fuka"."tsuchishoNo",
         "DbT2002Fuka"."rirekiNo"
@@ -368,7 +353,7 @@
         koza.*
         FROM
         "CalculateFukaTmp" AS A
-        INNER JOIN "TsukibetsuRankuTmp" AS 月別ランク
+        LEFT JOIN "TsukibetsuRankuTmp" AS 月別ランク
         ON  A."dbT1001HihokenshaDaicho_hihokenshaNo" = 月別ランク."hihokenshaNo" and A."tmp_fukaNendo" = 月別ランク."fukaNendo"
         INNER JOIN "TmpSetaiShotoku" AS SetaiShotoku
         ON A."dbT1001HihokenshaDaicho_hihokenshaNo" = SetaiShotoku."hihokenshaNo" and A."tmp_fukaNendo" = SetaiShotoku."shotokuNendo"
@@ -430,11 +415,29 @@
         LEFT JOIN 
         (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
         ON A."dbT1001HihokenshaDaicho_shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
-        ORDER BY A."tmp_fukaNendo", A."tmp_tsuchishoNo"
+        ORDER BY
+        A."dbT1001HihokenshaDaicho_hihokenshaNo",
+        A."dbT1001HihokenshaDaicho_idoYMD",
+        A."dbT1001HihokenshaDaicho_edaNo",
+        A."tmp_fukaNendo", 
+        A."tmp_tsuchishoNo",
+        A."dbT2002Fuka_choteiNendo",
+        A."dbT2002Fuka_rirekiNo",
+        DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo",
+        DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo",
+        DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo",
+        "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode",
+        "UrT0508SeikatsuHogoJukyusha"."gyomuCode",
+        "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD" 
     </select>
     <resultMap id="resultMap_CalculateFukaEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.CalculateFukaEntity" autoMapping="true">
         <id column="tmp_fukaNendo" />
         <id column="tmp_tsuchishoNo" />
+        <id column="dbT1001HihokenshaDaicho_hihokenshaNo" />
+        <id column="dbT1001HihokenshaDaicho_idoYMD" />
+        <id column="dbT1001HihokenshaDaicho_edaNo" />
+        <id column="dbT2002Fuka_choteiNendo" />
+        <id column="dbT2002Fuka_rirekiNo" />
         <result property="賦課年度" column="tmp_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="通知書番号" column="tmp_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
         <result property="賦課期日" column="tmp_fukaKijitsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -472,8 +475,13 @@
             OR "DbT2015KeisangoJoho"."fukaNendo"::int = #{調定年度}::int - 2)
         </if>
         AND "DbT2015KeisangoJoho"."sakuseiShoriName" = '過年度賦課'
-        AND "DbT2015KeisangoJoho"."choteiNichiji" = #{調定日時}
-        ${出力順}
+        <!--AND "DbT2015KeisangoJoho"."choteiNichiji" = #{調定日時}-->
+        ${出力順},
+        "dbT2015KeisangoJoho_choteiNendo",
+        "dbT2015KeisangoJoho_fukaNendo",
+        "dbT2015KeisangoJoho_tsuchishoNo",
+        "dbT2015KeisangoJoho_koseiZengoKubun",
+        "dbT2015KeisangoJoho_sakuseiShoriName"
     </select>
     <resultMap id="resultMap_KeisangojohoToKozaEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.KeisangojohoToKozaEntity" autoMapping="true">
         <id column="dbT2015KeisangoJoho_choteiNendo" />
@@ -1293,7 +1301,7 @@
         <id property="shikibetsuCode" column="UrT0526SeikatsuHogoFujoShurui_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <id property="gyomuCode" column="UrT0526SeikatsuHogoFujoShurui_gyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyomuCodeTypeHandler"/>
         <id property="jukyuKaishiYMD" column="UrT0526SeikatsuHogoFujoShurui_jukyuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <!--<id property="fujoShuruiCode" column="UrT0526SeikatsuHogoFujoShurui_fujoShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>-->
+        <id property="fujoShuruiCode" column="UrT0526SeikatsuHogoFujoShurui_fujoShuruiCode" typeHandler="jp.co.ndensan.reams.ur.urd.entity.typehandlers.FujoShuruiCodeValueTypeHandler"/>
         <result property="insertDantaiCd" column="UrT0526SeikatsuHogoFujoShurui_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="UrT0526SeikatsuHogoFujoShurui_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="UrT0526SeikatsuHogoFujoShurui_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
