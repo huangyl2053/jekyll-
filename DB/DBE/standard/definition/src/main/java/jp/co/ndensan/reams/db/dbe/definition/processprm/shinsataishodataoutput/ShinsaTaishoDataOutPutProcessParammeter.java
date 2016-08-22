@@ -41,8 +41,4 @@ public class ShinsaTaishoDataOutPutProcessParammeter implements IBatchProcessPar
     public ShinsaTaishoDataOutPutMybatisParameter toShinsaTaishoDataOutMybatisParameter() {
         return new ShinsaTaishoDataOutPutMybatisParameter(kaisaiBangou);
     }
-
-    public char getNinteichosaItakusakiCode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

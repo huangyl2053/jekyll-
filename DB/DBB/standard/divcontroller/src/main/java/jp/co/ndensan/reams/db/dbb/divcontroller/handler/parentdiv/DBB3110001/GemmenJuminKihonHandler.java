@@ -1141,7 +1141,7 @@ public class GemmenJuminKihonHandler {
             減免情報パネル.getLblTokuchoGemmemGo5().setText(null);
         }
         if (特徴期別金額_2月 != null) {
-            特別徴収_合計 = 特別徴収_合計.add(特徴期別金額_4月);
+            特別徴収_合計 = 特別徴収_合計.add(特徴期別金額_2月);
             減免情報パネル.getLblTokuchoGemmemGo6().setText(DecimalFormatter.toコンマ区切りRString(特徴期別金額_2月, ゼロ_定値));
         } else {
             減免情報パネル.getLblTokuchoGemmemGo6().setText(null);

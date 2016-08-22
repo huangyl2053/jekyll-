@@ -21,9 +21,13 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiCh
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -46,21 +50,21 @@ public class ShinsaTaishoDataOutPutResult {
         eucCsvEntity.set介護認定審査会委員コード(entity.get介護認定審査会委員コード());
         eucCsvEntity.set介護認定審査会委員定員(entity.get介護認定審査会委員定員());
         eucCsvEntity.set介護認定審査会最大定員(entity.get介護認定審査会最大定員());
-        eucCsvEntity.set介護認定審査会終了予定時刻(entity.get介護認定審査会終了予定時刻());
+        eucCsvEntity.set介護認定審査会終了予定時刻(strToTime(entity.get介護認定審査会終了予定時刻()));
         eucCsvEntity.set介護認定審査会自動割当定員(entity.get介護認定審査会自動割当定員());
         eucCsvEntity.set介護認定審査会議長区分コード(entity.get介護認定審査会議長区分コード());
-        eucCsvEntity.set介護認定審査会資料作成年月日(entity.get介護認定審査会資料作成年月日());
+        eucCsvEntity.set介護認定審査会資料作成年月日(setDateFormat(entity.get介護認定審査会資料作成年月日()));
         eucCsvEntity.set介護認定審査会進捗状況(entity.get介護認定審査会進捗状況());
         eucCsvEntity.set介護認定審査会開催予定場所コード(entity.get介護認定審査会開催予定場所コード());
-        eucCsvEntity.set介護認定審査会開催予定年月日(entity.get介護認定審査会開催予定年月日());
-        eucCsvEntity.set介護認定審査会開催年月日(entity.get介護認定審査会開催年月日());
+        eucCsvEntity.set介護認定審査会開催予定年月日(setDateFormat(entity.get介護認定審査会開催予定年月日()));
+        eucCsvEntity.set介護認定審査会開催年月日(setDateFormat(entity.get介護認定審査会開催年月日()));
         eucCsvEntity.set介護認定審査会開催番号(entity.get介護認定審査会開催番号());
-        eucCsvEntity.set介護認定審査会開始予定時刻(entity.get介護認定審査会開始予定時刻());
+        eucCsvEntity.set介護認定審査会開始予定時刻(strToTime(entity.get介護認定審査会開始予定時刻()));
         eucCsvEntity.set合議体番号(entity.get合議体番号());
         eucCsvEntity.set委員出席(entity.get委員出席());
-        eucCsvEntity.set委員出席時間(entity.get委員出席時間());
+        eucCsvEntity.set委員出席時間(strToTime(entity.get委員出席時間()));
         eucCsvEntity.set委員早退有無(entity.get委員早退有無());
-        eucCsvEntity.set委員退席時間(entity.get委員退席時間());
+        eucCsvEntity.set委員退席時間(strToTime(entity.get委員退席時間()));
         eucCsvEntity.set委員遅刻有無(entity.get委員遅刻有無());
         eucCsvEntity.set資料作成済フラグ(entity.get資料作成済フラグ());
         return eucCsvEntity;
@@ -77,7 +81,7 @@ public class ShinsaTaishoDataOutPutResult {
 
         eucCsvEntity.set介護認定審査会開催番号(entity.get介護認定審査会開催番号());
         eucCsvEntity.set合議体番号(entity.get合議体番号());
-        eucCsvEntity.set介護認定審査会開催年月日(entity.get介護認定審査会開催年月日());
+        eucCsvEntity.set介護認定審査会開催年月日(setDateFormat(entity.get介護認定審査会開催年月日()));
         eucCsvEntity.set介護認定審査会開始時刻(entity.get介護認定審査会開始時刻());
         eucCsvEntity.set介護認定審査会終了時刻(entity.get介護認定審査会終了時刻());
         eucCsvEntity.set介護認定審査会開催場所コード(entity.get介護認定審査会開催場所コード());
@@ -85,18 +89,18 @@ public class ShinsaTaishoDataOutPutResult {
         eucCsvEntity.set介護認定審査会実施人数(entity.get介護認定審査会実施人数());
         eucCsvEntity.set介護認定審査会審査順(entity.get介護認定審査会審査順());
         eucCsvEntity.set判定結果コード(entity.get判定結果コード());
-        eucCsvEntity.set二次判定年月日(entity.get二次判定年月日());
+        eucCsvEntity.set二次判定年月日(setDateFormat(entity.get二次判定年月日()));
         eucCsvEntity.set二次判定要介護状態区分コード(entity.get二次判定要介護状態区分コード());
         eucCsvEntity.set二次判定認定有効期間(entity.get二次判定認定有効期間());
-        eucCsvEntity.set二次判定認定有効開始年月日(entity.get二次判定認定有効開始年月日());
-        eucCsvEntity.set二次判定認定有効終了年月日(entity.get二次判定認定有効終了年月日());
+        eucCsvEntity.set二次判定認定有効開始年月日(setDateFormat(entity.get二次判定認定有効開始年月日()));
+        eucCsvEntity.set二次判定認定有効終了年月日(setDateFormat(entity.get二次判定認定有効終了年月日()));
         eucCsvEntity.set介護認定審査会意見(entity.get介護認定審査会意見());
         eucCsvEntity.set一次判定結果変更理由(entity.get一次判定結果変更理由());
         eucCsvEntity.set要介護状態像例コード(entity.get要介護状態像例コード());
         eucCsvEntity.set認定審査会意見種類(entity.get認定審査会意見種類());
         eucCsvEntity.set審査会メモ(entity.get審査会メモ());
         eucCsvEntity.set二次判定結果入力方法(entity.get二次判定結果入力方法());
-        eucCsvEntity.set二次判定結果入力年月日(entity.get二次判定結果入力年月日());
+        eucCsvEntity.set二次判定結果入力年月日(setDateFormat(entity.get二次判定結果入力年月日()));
         eucCsvEntity.set認定申請区分法令コード(entity.get認定申請区分法令コード());
         eucCsvEntity.set要介護認定1_5次判定年月日(entity.get要介護認定1_5次判定年月日());
         eucCsvEntity.set要介護認定1_5次判定結果コード(entity.get要介護認定1_5次判定結果コード());
@@ -125,21 +129,21 @@ public class ShinsaTaishoDataOutPutResult {
         eucCsvEntity.set厚労省認定ソフトのバージョン(KoroshoIfShikibetsuCode.toValue(entity.get厚労省IF識別コード()).get名称());
         eucCsvEntity.set証記載保険者番号(entity.get証記載保険者番号());
         eucCsvEntity.set被保険者番号(entity.get被保険者番号());
-        eucCsvEntity.set認定申請年月日(entity.get認定申請年月日());
+        eucCsvEntity.set認定申請年月日(setDateFormat(entity.get認定申請年月日()));
         eucCsvEntity.set認定申請区分申請時コード(entity.get認定申請区分申請時コード());
         eucCsvEntity.set認定申請区分申請時(entity.get認定申請区分申請時());
         eucCsvEntity.set被保険者氏名(entity.get被保険者氏名());
         eucCsvEntity.set被保険者氏名カナ(entity.get被保険者氏名カナ());
-        eucCsvEntity.set生年月日(entity.get生年月日());
+        eucCsvEntity.set生年月日(setDateFormat(entity.get生年月日()));
         eucCsvEntity.set年齢(entity.get年齢());
         eucCsvEntity.set性別(entity.get性別());
-        eucCsvEntity.set郵便番号(entity.get郵便番号());
+        eucCsvEntity.set郵便番号(setYobuinNoFormat(entity.get郵便番号()));
         eucCsvEntity.set住所(entity.get住所());
         eucCsvEntity.set電話番号(entity.get電話番号());
         eucCsvEntity.set保険者名(entity.get保険者名());
-        eucCsvEntity.set一次判定年月日(entity.get一次判定年月日());
+        eucCsvEntity.set一次判定年月日(setDateFormat(entity.get一次判定年月日()));
         eucCsvEntity.set要介護認定一次判定結果コード(entity.get要介護認定一次判定結果コード());
-        eucCsvEntity.set認定調査依頼完了年月日(entity.get認定調査依頼完了年月日());
+        eucCsvEntity.set認定調査依頼完了年月日(setDateFormat(entity.get認定調査依頼完了年月日()));
         eucCsvEntity.set認定調査依頼履歴番号(entity.get認定調査依頼履歴番号());
         eucCsvEntity.set認定調査委託先コード(entity.get認定調査委託先コード());
         eucCsvEntity.set調査委託先(entity.get調査委託先());
@@ -150,8 +154,8 @@ public class ShinsaTaishoDataOutPutResult {
         eucCsvEntity.set認定調査依頼区分コード(entity.get認定調査依頼区分コード());
         eucCsvEntity.set認定調査依頼区分(NinteiChousaIraiKubunCode.toValue(entity.get認定調査依頼区分コード()).get名称());
         eucCsvEntity.set認定調査回数(entity.get認定調査回数());
-        eucCsvEntity.set認定調査実施年月日(entity.get認定調査実施年月日());
-        eucCsvEntity.set認定調査受領年月日(entity.get認定調査受領年月日());
+        eucCsvEntity.set認定調査実施年月日(setDateFormat(entity.get認定調査実施年月日()));
+        eucCsvEntity.set認定調査受領年月日(setDateFormat(entity.get認定調査受領年月日()));
         eucCsvEntity.set認定調査区分コード(entity.get認定調査区分コード());
         eucCsvEntity.set認定調査区分(ChosaKubun.toValue(entity.get認定調査区分コード()).get名称());
         eucCsvEntity.set認定調査実施場所コード(entity.get認定調査実施場所コード());
@@ -162,10 +166,10 @@ public class ShinsaTaishoDataOutPutResult {
         eucCsvEntity.set利用施設名(entity.get利用施設名());
         eucCsvEntity.set利用施設住所(entity.get利用施設住所());
         eucCsvEntity.set利用施設電話番号(entity.get利用施設電話番号());
-        eucCsvEntity.set利用施設郵便番号(entity.get利用施設郵便番号());
+        eucCsvEntity.set利用施設郵便番号(setYobuinNoFormat(entity.get利用施設郵便番号()));
         eucCsvEntity.set特記(entity.get特記());
-        eucCsvEntity.set認定調査特記事項受付年月日(entity.get認定調査特記事項受付年月日());
-        eucCsvEntity.set認定調査特記事項受領年月日(entity.get認定調査特記事項受領年月日());
+        eucCsvEntity.set認定調査特記事項受付年月日(setDateFormat(entity.get認定調査特記事項受付年月日()));
+        eucCsvEntity.set認定調査特記事項受領年月日(setDateFormat(entity.get認定調査特記事項受領年月日()));
         eucCsvEntity.set住宅改修改修箇所(entity.get住宅改修改修箇所());
         eucCsvEntity.set市町村特別給付サービス種類名(entity.get市町村特別給付サービス種類名());
         eucCsvEntity.set介護保険給付以外の在宅サービス種類名(entity.get介護保険給付以外の在宅サービス種類名());
@@ -263,6 +267,30 @@ public class ShinsaTaishoDataOutPutResult {
         }
         return codeMasterEucCsvEntityList;
 
+    }
+
+    private RString setDateFormat(RString date) {
+        RString formatDate = RString.EMPTY;
+        if (!RString.isNullOrEmpty(date)) {
+            formatDate = new FlexibleDate(date).wareki().toDateString();
+        }
+        return formatDate;
+    }
+
+    private RString setYobuinNoFormat(RString yobuinNo) {
+        RString formatYobuinNo = RString.EMPTY;
+        if (!RString.isNullOrEmpty(yobuinNo)) {
+            formatYobuinNo = new YubinNo(yobuinNo).getEditedYubinNo();
+        }
+        return formatYobuinNo;
+    }
+
+    private RString strToTime(RString str) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+        str = str.insert(2, ":");
+        return RTime.parse(str).toFormattedTimeString(DisplayTimeFormat.HH_mm);
     }
 
     /**
