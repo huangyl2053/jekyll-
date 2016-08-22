@@ -83,7 +83,7 @@ public class JukyushaIdoRenrakuhyoSakuseiPanel {
         }
         ViewStateHolder.put(ViewStateKeys.氏名性別生年月日を印字する, 氏名性別生年月日を印字する);
         //TODO  QA1300
-        ShikibetsuCode 識別コード = new ShikibetsuCode("0000000010");
+        ShikibetsuCode 識別コード = new ShikibetsuCode("00000000000010");
         ViewStateHolder.put(ViewStateKeys.履歴番号, 履歴番号);
         div.getCcdJukyushaIdoRenrakuhyo().initialize(
                 処理モード, ShikibetsuCode.EMPTY, 被保険者番号, 履歴番号, 論理削除フラグ, 異動日);
