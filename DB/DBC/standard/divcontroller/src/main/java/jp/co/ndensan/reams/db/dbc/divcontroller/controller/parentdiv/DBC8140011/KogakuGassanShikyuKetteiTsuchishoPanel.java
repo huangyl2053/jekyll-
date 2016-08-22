@@ -205,7 +205,6 @@ public class KogakuGassanShikyuKetteiTsuchishoPanel {
                 事業高額合算支給不支給決定, 識別コード, 被保険者番号, 支払予定日印字有無);
         RString データ有無 = outputEntity.getデータ有無();
         if (RSTRING_1.equals(データ有無)) {
-            getHandler(div).状態2();
             ValidationMessageControlPairs pairs = getValidationHandler().高額合算支給情報存在エラーチェック();
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
