@@ -8,9 +8,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.commonchilddiv.menjo
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.menjokaijosaitennyu.MenjoKaijoSaiTennyu.MenjoKaijoSaiTennyuDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.menjokaijosaitennyu.MenjoKaijoSaiTennyu.MenjoKaijoSaiTennyuHandler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.IDialogResponse;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -52,9 +50,10 @@ public class MenjoKaijoSaiTennyu {
      * @return ResponseData<MenjoKaijoSaiTennyuDiv>
      */
     public ResponseData<MenjoKaijoSaiTennyuDiv> onClick_btnToJiRu(MenjoKaijoSaiTennyuDiv div) {
-        IDialogResponse dialogResponse = ResponseData.of(div);
+        ResponseData<MenjoKaijoSaiTennyuDiv> response = new ResponseData();
         getHandler(div).onClick_btnToJiRu();
-        return dialogResponse.dialogOKClose();
+        response.data = div;
+        return ResponseData.of(div).dialogOKClose();
 
     }
 
@@ -70,7 +69,6 @@ public class MenjoKaijoSaiTennyu {
         }
         div.getBtnTorikeshi().setDisabled(true);
         div.getBtnKakutei().setDisabled(true);
-        div.getDgMenjoKaijoOrSaitennyu().getClickedItem().setJotai(new RString("修正"));
         return ResponseData.of(div).respond();
     }
 
@@ -87,7 +85,7 @@ public class MenjoKaijoSaiTennyu {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         response.data = div;
-        return ResponseData.of(div).dialogOKClose();
+        return ResponseData.of(div).respond();
     }
 
     /**

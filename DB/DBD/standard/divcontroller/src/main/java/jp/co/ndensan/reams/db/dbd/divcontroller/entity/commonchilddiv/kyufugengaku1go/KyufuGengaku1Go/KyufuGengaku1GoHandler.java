@@ -340,7 +340,7 @@ public class KyufuGengaku1GoHandler {
         entity.setShoKisaiHokenshaNo(証記載保険者番号());
         entity.setHihokenshaNo(new HihokenshaNo(div.getKey_HihokenshaNo()));
         entity.setKanriKubun(ShiharaiHenkoKanriKubun._１号給付額減額.getコード());
-        entity.setRirekiNo(get最大履歴番号() + 1);
+        entity.setRirekiNo(get最大履歴番号());
         entity.setTorokuKubun(ShiharaiHenkoTorokuKubun._１号給付額減額登録.getコード());
         entity.setShuryoKubun(ShiharaiHenkoShuryoKubun._空.getコード());
         entity.setYokoku_TsuchiSaiHakkoFlag(false);
@@ -371,7 +371,7 @@ public class KyufuGengaku1GoHandler {
             entity.setShoKisaiHokenshaNo(証記載保険者番号());
             entity.setHihokenshaNo(new HihokenshaNo(div.getKey_HihokenshaNo()));
             entity.setKanriKubun(ShiharaiHenkoKanriKubun._１号給付額減額.getコード());
-            entity.setRirekiNo(get最大履歴番号() + 1);
+            entity.setRirekiNo(get最大履歴番号());
             entity.setTainoHanteiKubun(TainoHanteiKubun.給付額減額登録.getコード());
             entity.setRenNo(連番++);
             entity.setChoteiNendo(summary.get調定年度());
@@ -409,7 +409,7 @@ public class KyufuGengaku1GoHandler {
         支払方法変更減額Entity.setShoKisaiHokenshaNo(証記載保険者番号());
         支払方法変更減額Entity.setHihokenshaNo(new HihokenshaNo(div.getKey_HihokenshaNo()));
         支払方法変更減額Entity.setKanriKubun(ShiharaiHenkoKanriKubun._１号給付額減額.getコード());
-        支払方法変更減額Entity.setRirekiNo(get最大履歴番号() + 1);
+        支払方法変更減額Entity.setRirekiNo(get最大履歴番号());
         支払方法変更減額Entity.setTainoHanteiYMD(FlexibleDate.getNowDate());
         支払方法変更減額Entity.setHanteiKijunYMD(滞納判定結果.get滞納判定基準日());
         支払方法変更減額Entity.setChoshukenShometsuKikan(kyufugakuGengakuInfo.get徴収権消滅期間());
@@ -421,7 +421,7 @@ public class KyufuGengaku1GoHandler {
         支払方法変更減額明細Entity.setShoKisaiHokenshaNo(証記載保険者番号());
         支払方法変更減額明細Entity.setHihokenshaNo(new HihokenshaNo(div.getKey_HihokenshaNo()));
         支払方法変更減額明細Entity.setKanriKubun(ShiharaiHenkoKanriKubun._１号給付額減額.getコード());
-        支払方法変更減額明細Entity.setRirekiNo(get最大履歴番号() + 1);
+        支払方法変更減額明細Entity.setRirekiNo(get最大履歴番号());
         支払方法変更減額明細Entity.setTaishoNendo(給付額減額明細マップ.get(滞納判定結果.get滞納判定基準日().getYear()).get調定年度());
         支払方法変更減額明細Entity.setMino_JikoShometsuGengaku(給付額減額明細マップ.get(滞納判定結果.get滞納判定基準日().getYear()).get時効到来未納額());
         支払方法変更減額明細Entity.setNofugaku(給付額減額明細マップ.get(滞納判定結果.get滞納判定基準日().getYear()).get収入額());
@@ -440,7 +440,7 @@ public class KyufuGengaku1GoHandler {
         entity.setShoKisaiHokenshaNo(証記載保険者番号());
         entity.setHihokenshaNo(new HihokenshaNo(div.getKey_HihokenshaNo()));
         entity.setKanriKubun(ShiharaiHenkoKanriKubun._１号給付額減額.getコード());
-        entity.setRirekiNo(get最大履歴番号() + 1);
+        entity.setRirekiNo(get最大履歴番号());
         entity.setTaishoNendo(給付額減額明細マップ.get(滞納判定結果.get滞納判定基準日().getYear()).get調定年度());
         entity.setMino_JikoShometsuGengaku(給付額減額明細マップ.get(滞納判定結果.get滞納判定基準日().getYear()).get時効到来未納額());
         entity.setNofugaku(給付額減額明細マップ.get(滞納判定結果.get滞納判定基準日().getYear()).get収入額());
