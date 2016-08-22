@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0610011
 import jp.co.ndensan.reams.db.dbu.business.core.tokeijoho.FukaSummary;
 import jp.co.ndensan.reams.db.dbu.business.core.tokeijoho.JukyuSummary;
 import jp.co.ndensan.reams.db.dbu.business.core.tokeijoho.ShikakuSummary;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0610011.KijunYMDDiv;
-import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0610011.KijunYMDHandler;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0610011.ToukeiJyohoSyokaiDiv;
+import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0610011.ToukeiJyohoSyokaiHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.tokeijoho.TokeiJohoResearcher;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
@@ -22,15 +22,15 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  *
  * @reamsid_L DBU-4120-010 sunhaidi
  */
-public class KijunYMD {
+public class ToukeiJyohoSyokai {
 
     /**
      * 画面初期化処理です。
      *
      * @param div 画面情報
-     * @return ResponseData<KijunYMDDiv>
+     * @return ResponseData<ToukeiJyohoSyokaiDiv>
      */
-    public ResponseData<KijunYMDDiv> onLoad(KijunYMDDiv div) {
+    public ResponseData<ToukeiJyohoSyokaiDiv> onLoad(ToukeiJyohoSyokaiDiv div) {
         ShichosonSecurityJoho 市町村情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         getHandler(div).onLoad(市町村情報);
         return ResponseData.of(div).respond();
@@ -40,9 +40,9 @@ public class KijunYMD {
      * 集計ボタンを押下します。
      *
      * @param div 画面情報
-     * @return ResponseData<KijunYMDDiv>
+     * @return ResponseData<ToukeiJyohoSyokaiDiv>
      */
-    public ResponseData<KijunYMDDiv> onClick_btnShukei(KijunYMDDiv div) {
+    public ResponseData<ToukeiJyohoSyokaiDiv> onClick_btnShukei(ToukeiJyohoSyokaiDiv div) {
         TokeiJohoResearcher tokeiJohoResearcher = new TokeiJohoResearcher();
         FlexibleDate 基準日 = new FlexibleDate(div.getTxtKijunYMD().getValue().toDateString());
         LasdecCode 市町村コード = null;
@@ -56,7 +56,7 @@ public class KijunYMD {
         return ResponseData.of(div).respond();
     }
 
-    private KijunYMDHandler getHandler(KijunYMDDiv div) {
-        return new KijunYMDHandler(div);
+    private ToukeiJyohoSyokaiHandler getHandler(ToukeiJyohoSyokaiDiv div) {
+        return new ToukeiJyohoSyokaiHandler(div);
     }
 }
