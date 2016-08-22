@@ -103,7 +103,12 @@
         WHERE
         "DbT4102NinteiKekkaJoho"."shinseishoKanriNo" = #{申請書管理番号}
         
-        ORDER BY "DbT4001JukyushaDaicho"."rirekiNo" DESC
+        <if test="null != 出力順 and !出力順.isEmpty()">
+            ${出力順}, "DbT4001JukyushaDaicho"."rirekiNo" DESC
+        </if>
+        <if test="null == 出力順 or 出力順.isEmpty()">
+            ORDER BY "DbT4001JukyushaDaicho"."rirekiNo" DESC
+        </if>
 
         LIMIT 1
      </select>
@@ -130,7 +135,12 @@
             AND "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD" = #{認定有効期間終了年月日}
         </if>
         
-        ORDER BY "DbT4001JukyushaDaicho"."rirekiNo" DESC
+        <if test="null != 出力順 and !出力順.isEmpty()">
+            ${出力順}, "DbT4001JukyushaDaicho"."rirekiNo" DESC
+        </if>
+        <if test="null == 出力順 or 出力順.isEmpty()">
+            ORDER BY "DbT4001JukyushaDaicho"."rirekiNo" DESC
+        </if>
         
         LIMIT #{最大表示件数}
      </select>
@@ -334,7 +344,12 @@
         AND "TEMP"."dbT4001JukyushaDaicho_rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
         AND "TEMP"."dbT4001JukyushaDaicho_edaban" = "DbT4001JukyushaDaicho"."edaban"
         AND "TEMP"."dbT4001JukyushaDaicho_jukyuShinseiJiyu" = "DbT4001JukyushaDaicho"."jukyuShinseiJiyu"
-        ORDER BY "DbT4001JukyushaDaicho"."rirekiNo" DESC
+        <if test="null != 出力順 and !出力順.isEmpty()">
+            ${出力順}, "DbT4001JukyushaDaicho"."rirekiNo" DESC
+        </if>
+        <if test="null == 出力順 or 出力順.isEmpty()">
+            ORDER BY "DbT4001JukyushaDaicho"."rirekiNo" DESC
+        </if>
      </select>
      
      <resultMap id="ResultMap_TsutishoWithoutKekkaJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiIkatusHakkoEntity" autoMapping="true">
@@ -383,7 +398,12 @@
             )
         </if>
 
-        ORDER BY "DbT4001JukyushaDaicho"."rirekiNo" DESC
+        <if test="null != 出力順 and !出力順.isEmpty()">
+            ${出力順}, "DbT4001JukyushaDaicho"."rirekiNo" DESC
+        </if>
+        <if test="null == 出力順 or 出力順.isEmpty()">
+            ORDER BY "DbT4001JukyushaDaicho"."rirekiNo" DESC
+        </if>
         
         LIMIT 2
      </select>
@@ -430,7 +450,12 @@
             )
         </if>
 
-        ORDER BY "DbT4001JukyushaDaicho"."rirekiNo" DESC
+        <if test="null != 出力順 and !出力順.isEmpty()">
+            ${出力順}, "DbT4001JukyushaDaicho"."rirekiNo" DESC
+        </if>
+        <if test="null == 出力順 or 出力順.isEmpty()">
+            ORDER BY "DbT4001JukyushaDaicho"."rirekiNo" DESC
+        </if>
         
         LIMIT 2
      </select>
