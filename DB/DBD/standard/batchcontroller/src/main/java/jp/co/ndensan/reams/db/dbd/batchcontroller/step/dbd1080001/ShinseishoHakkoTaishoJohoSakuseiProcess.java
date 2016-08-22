@@ -57,7 +57,7 @@ public class ShinseishoHakkoTaishoJohoSakuseiProcess extends BatchProcessBase<Sh
     public static final RString OUT_把握処理ID;
 
     static {
-        OUT_把握処理ID = new RString("OUT_uuID");
+        OUT_把握処理ID = new RString("uuId");
     }
 
     private OutputParameter<UUID> uuId;
