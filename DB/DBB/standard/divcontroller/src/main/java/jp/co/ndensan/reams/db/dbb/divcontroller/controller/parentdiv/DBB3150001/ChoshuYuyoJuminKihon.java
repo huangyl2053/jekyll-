@@ -266,6 +266,7 @@ public class ChoshuYuyoJuminKihon {
         ChoshuYuyoJoho 徴収猶予の情報 = ViewStateHolder.get(ViewStateKeys.徴収猶予の情報, ChoshuYuyoJoho.class);
         SourceDataCollection data = createHandler(div).onClick発行する(
                 徴収猶予の情報.get賦課年度(), 徴収猶予の情報.get調定年度(), 徴収猶予の情報.get通知書番号());
+        createHandler(div).clearBanmen();
         return ResponseData.of(data).respond();
     }
 

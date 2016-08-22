@@ -79,7 +79,7 @@
             dbT5102."nijiHanteiNinteiYukoShuryoYMD" AS "dbT5102_nijiHanteiNinteiYukoShuryoYMD",     
             dbT5501."gogitaiNo" AS "dbT5501_gogitaiNo", 
             dbT5501."shinsakaiKaisaiYoteiBashoCode" AS "dbT5501_shinsakaiKaisaiYoteiBashoCode",
-            dbT5501."shinsakaiKaisaiYoteiYMD" AS "dbT5501_shinsakaiKaisaiYoteiYMD"
+            dbT5501."shinsakaiKaisaiYoteiYMD" AS "dbT5501_shinsakaiKaisaiYoteiYMD",
             dbT5115."imageSharedFileId" AS "dbT5115_imageSharedFileId"     
         FROM  	
                rgdb."DbT5101NinteiShinseiJoho" AS dbT5101 

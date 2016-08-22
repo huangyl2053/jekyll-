@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.shinsakaiwariateiinjoho;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5503ShinsakaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -24,9 +23,9 @@ public class ShinsakaiWariateIinJohoBuilder {
     private final ShinsakaiWariateIinJohoIdentifier id;
 
     /**
-     * {@link DbT5102NinteiKekkaJohoEntity}より{@link ShinsakaiWariateIinJoho}の編集用Builderクラスを生成します。
+     * {@link DbT5503ShinsakaiWariateIinJohoEntity}より{@link ShinsakaiWariateIinJoho}の編集用Builderクラスを生成します。
      *
-     * @param entity {@link DbT5102NinteiKekkaJohoEntity}
+     * @param entity {@link DbT5503ShinsakaiWariateIinJohoEntity}
      * @param id {@link ShinsakaiWariateIinJohoIdentifier}
      *
      */

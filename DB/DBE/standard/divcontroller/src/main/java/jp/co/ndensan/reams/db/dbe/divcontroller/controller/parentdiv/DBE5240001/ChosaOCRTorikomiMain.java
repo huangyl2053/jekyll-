@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -48,6 +49,10 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -145,6 +150,7 @@ public class ChosaOCRTorikomiMain {
                 List<ChosaOCRTorikomiBusiness> 関連データList
                         = ChosaOCRTorikomiFinder.createInstance().getChosahyoTorikomiKekka(param).records();
                 for (ChosaOCRTorikomiBusiness 関連データ : 関連データList) {
+                    AccessLogger.log(AccessLogType.照会, toPersonalData(関連データ.get申請書管理番号()));
                     if (関連データ.get証記載保険者番号().equals(csvData.get保険者番号()) && 関連データ.get被保険者番号().equals(csvData.get被保険者番号())) {
                         csvData.setNo(関連データ.getNo());
                         csvData.set保険者(関連データ.get保険者());
@@ -161,6 +167,7 @@ public class ChosaOCRTorikomiMain {
                         csvData.set二次判定認定有効終了年月日(関連データ.get二次判定認定有効終了年月日());
                         csvData.set合議体番号(関連データ.get合議体番号());
                         csvData.set介護認定審査会開催予定場所コード(関連データ.get介護認定審査会開催予定場所コード());
+                        csvData.set介護認定審査会開催予定年月日(関連データ.get介護認定審査会開催予定年月日());
                     }
                     TorikomiEntity entity = getTorikomiEntity(csvData);
                     dB更新用.add(entity);
@@ -168,6 +175,15 @@ public class ChosaOCRTorikomiMain {
             }
         }
         return dB更新用;
+    }
+
+    private PersonalData toPersonalData(ShinseishoKanriNo 申請書管理番号) {
+        RString 番号 = RString.EMPTY;
+        if (申請書管理番号 != null) {
+            番号 = 申請書管理番号.value();
+        }
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 番号);
+        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
     private void dB処理用(List<TorikomiEntity> dB更新用, ChosaOCRTorikomiMainDiv div, RString 審査会開催番号) {
@@ -244,6 +260,7 @@ public class ChosaOCRTorikomiMain {
         entity.set二次判定認定有効終了年月日(data.get二次判定認定有効終了年月日());
         entity.set合議体番号(data.get合議体番号());
         entity.set介護認定審査会開催予定場所コード(data.get介護認定審査会開催予定場所コード());
+        entity.set介護認定審査会開催予定年月日(data.get介護認定審査会開催予定年月日());
         return entity;
     }
 
