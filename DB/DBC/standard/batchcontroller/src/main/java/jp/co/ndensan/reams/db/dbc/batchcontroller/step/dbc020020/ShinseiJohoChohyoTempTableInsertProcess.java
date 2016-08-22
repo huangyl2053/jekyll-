@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020020;
 
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyufuoshirasetsuchisho.KogakuKaigoServicehiOshiraseHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshirasetsuchisho.ShinseiJohoChohyoTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshirasetsuchisho.ShinseiJohoChohyoTempRelateEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -21,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  *
  * @reamsid_L DBC-4770-030 zhujun
  */
-public class ShinseiJohoChohyoTempTableInsertProcess extends BatchProcessBase<ShinseiJohoChohyoTempEntity> {
+public class ShinseiJohoChohyoTempTableInsertProcess extends BatchProcessBase<ShinseiJohoChohyoTempRelateEntity> {
 
     private static final RString MYBATIS_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kogakukaigoservicehikyufuoshirasetsuchisho.IKogakuKaigoServicehiOshiraseHakkoMapper.get帳票出力用データ");
@@ -45,7 +46,8 @@ public class ShinseiJohoChohyoTempTableInsertProcess extends BatchProcessBase<Sh
     }
 
     @Override
-    protected void process(ShinseiJohoChohyoTempEntity entity) {
+    protected void process(ShinseiJohoChohyoTempRelateEntity tmp) {
+        ShinseiJohoChohyoTempEntity entity = tmp.get申請情報();
         if (申請書電話番号表示.equals(parameter.getShinseishoTelNoHyoji())) {
             entity.setTelNoChohyo(null);
         }
