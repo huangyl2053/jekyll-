@@ -1077,6 +1077,6 @@
             A."shinseishoKanriNo" IN
         <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
           ORDER BY
-           A."koroshoIfShikibetsuCode" A."shinseishoKanriNo"             
+           A."koroshoIfShikibetsuCode", A."shinseishoKanriNo"             
       </select>
 </mapper>
