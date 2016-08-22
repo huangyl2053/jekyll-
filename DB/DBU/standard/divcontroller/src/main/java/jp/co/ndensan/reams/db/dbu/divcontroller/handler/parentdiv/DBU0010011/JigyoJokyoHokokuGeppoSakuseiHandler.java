@@ -81,7 +81,6 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
     private void set合併市町村用保険者選択ラジオボタン() {
         if (is合併あり() && is単一()) {
             div.getTblJikkoTani().getRadGappeiShichoson().setVisible(true);
-
         } else if (!is合併あり() && is単一()
                 || is広域()) {
             div.getTblJikkoTani().getRadGappeiShichoson().setVisible(false);
@@ -91,7 +90,6 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
     private void set広域構成市町村用保険者選択ラジオボタン() {
         if (is広域()) {
             div.getTblJikkoTani().getRadKoikiRengo().setVisible(true);
-
         } else if (is単一()) {
             div.getTblJikkoTani().getRadKoikiRengo().setVisible(false);
         }
