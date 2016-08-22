@@ -52,6 +52,12 @@ public class JissiJyokyohyoHandler {
         div.getJyoukenPanel().getRdoKijyun().setReadOnly(true);
         div.getJyoukenPanel().getDdlKijyunhi().setReadOnly(true);
         div.getJokenPanel().getTxtSeinen().setReadOnly(true);
+        div.getJokenPanel().getCcdChikuEnd().setReadOnly(true);
+        div.getJokenPanel().getCcdChikuStart().setReadOnly(true);
+        div.getJokenPanel().getCcdGyouseiEnd().setReadOnly(true);
+        div.getJokenPanel().getCcdGyouseiStart().setReadOnly(true);
+        div.getJokenPanel().getCcdJyuusyoEnd().setReadOnly(true);
+        div.getJokenPanel().getCcdJyuusyoStart().setReadOnly(true);
     }
 
     /**
@@ -96,13 +102,19 @@ public class JissiJyokyohyoHandler {
     public void onChange_ddlChiku(JissiJyokyohyoDiv div) {
         if (div.getCyouhyouPanel().getRdoCyouhyou().getSelectedKey().equals(帳票キー0)
                 && div.getJokenPanel().getDdlChiku().getSelectedKey().equals(地区キー1)) {
+            div.getJokenPanel().getCcdJyuusyoStart().setReadOnly(false);
+            div.getJokenPanel().getCcdJyuusyoStart().setReadOnly(false);
             ddlChiku(div, true, true, true, false, false, false, false, false, false);
         } else if (div.getJokenPanel().getDdlChiku().getSelectedKey().equals(地区キー2)) {
+            div.getJokenPanel().getCcdChikuStart().setReadOnly(false);
+            div.getJokenPanel().getCcdChikuEnd().setReadOnly(false);
             ddlChiku(div, false, false, false, true, true, true, false, false, false);
         } else if (div.getJokenPanel().getDdlChiku().getSelectedKey().equals(地区キー3)) {
+            div.getJokenPanel().getCcdGyouseiStart().setReadOnly(false);
+            div.getJokenPanel().getCcdGyouseiEnd().setReadOnly(false);
             ddlChiku(div, false, false, false, false, false, false, true, true, true);
         } else {
-            ddlChiku(div, true, true, true, true, true, true, true, true, true);
+            ddlChiku(div, false, false, false, false, false, false, false, false, false);
         }
     }
 
