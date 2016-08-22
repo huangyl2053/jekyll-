@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyuf
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshirasetsuchisho.HihokenshaDaichoShinseiRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshirasetsuchisho.ShinseiJohoTempEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -24,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -49,9 +49,9 @@ public class ShokanJyohoForShinseiJyohoProcess extends BatchProcessBase<Hihokens
 
     @Override
     protected void initialize() {
-        審査方法区分 = BusinessConfig.get(ConfigNameDBC.償還支給申請書_審査方法初期表示, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        高額 = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        事業高額 = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_事業高額, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        審査方法区分 = DbBusinessConfig.get(ConfigNameDBC.償還支給申請書_審査方法初期表示, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        高額 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        事業高額 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_事業高額, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
     }
 
     @BatchWriter
