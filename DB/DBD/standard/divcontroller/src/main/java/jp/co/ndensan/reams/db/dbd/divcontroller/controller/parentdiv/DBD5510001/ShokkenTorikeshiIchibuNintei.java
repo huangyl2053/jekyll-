@@ -92,8 +92,6 @@ public class ShokkenTorikeshiIchibuNintei {
                 IParentResponse<ShokkenTorikeshiIchibuNinteiDiv> response = ResponseData.of(div);
                 response.setState(state);
                 return response.addValidationMessages(pairs).respond();
-            } else {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
             }
         }
         return ResponseData.of(div).setState(state);
