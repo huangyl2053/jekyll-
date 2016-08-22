@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.taishoshakensakum
 /**
  * 過誤申立決定情報照会を検索するクラスです。
  *
- * @reamsid_L DBC-2940-010 jinjue
+ * @reamsid_L DBC-2940-030 jinjue
  */
 public class TaishoshaKensakuRelateFinder {
 
