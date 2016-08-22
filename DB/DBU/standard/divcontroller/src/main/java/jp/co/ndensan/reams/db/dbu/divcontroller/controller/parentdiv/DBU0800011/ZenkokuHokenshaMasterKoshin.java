@@ -115,34 +115,34 @@ public class ZenkokuHokenshaMasterKoshin {
      */
     public ResponseData<ZenkokuHokenshaMasterKoshinDiv> onBlur_ddlTodofuken(ZenkokuHokenshaMasterKoshinDiv div) {
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validate変更内容();
-        if (!validPairs.iterator().hasNext()) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
+        if (validPairs.iterator().hasNext()) {
+            LockingKey old前排他ロックキー = new LockingKey(DB.concat(div.getHokenshaIchiran().getHdnTodofuken()).concat(HOKENSJA));
+            RealInitialLocker.release(old前排他ロックキー);
+            LockingKey new前排他ロックキー = new LockingKey(DB.concat(div.getDdlTodofuken().getSelectedKey()).concat(HOKENSJA));
+            if (!RealInitialLocker.tryGetLock(new前排他ロックキー)) {
+                throw new PessimisticLockingException();
             }
-            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                LockingKey old前排他ロックキー = new LockingKey(DB.concat(div.getHokenshaIchiran().getHdnTodofuken()).concat(HOKENSJA));
-                RealInitialLocker.release(old前排他ロックキー);
-                LockingKey new前排他ロックキー = new LockingKey(DB.concat(div.getDdlTodofuken().getSelectedKey()).concat(HOKENSJA));
-                if (!RealInitialLocker.tryGetLock(new前排他ロックキー)) {
-                    throw new PessimisticLockingException();
-                }
-                getHander(div).set保険者一覧(search保険者一覧(div));
-                return ResponseData.of(div).respond();
-            } else {
-                return ResponseData.of(div).respond();
+            getHander(div).set保険者一覧(search保険者一覧(div));
+            return ResponseData.of(div).respond();
+        }
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            LockingKey old前排他ロックキー = new LockingKey(DB.concat(div.getHokenshaIchiran().getHdnTodofuken()).concat(HOKENSJA));
+            RealInitialLocker.release(old前排他ロックキー);
+            LockingKey new前排他ロックキー = new LockingKey(DB.concat(div.getDdlTodofuken().getSelectedKey()).concat(HOKENSJA));
+            if (!RealInitialLocker.tryGetLock(new前排他ロックキー)) {
+                throw new PessimisticLockingException();
             }
+            getHander(div).set保険者一覧(search保険者一覧(div));
+            return ResponseData.of(div).respond();
+        } else {
+            return ResponseData.of(div).respond();
         }
-        LockingKey old前排他ロックキー = new LockingKey(DB.concat(div.getHokenshaIchiran().getHdnTodofuken()).concat(HOKENSJA));
-        RealInitialLocker.release(old前排他ロックキー);
-        LockingKey new前排他ロックキー = new LockingKey(DB.concat(div.getDdlTodofuken().getSelectedKey()).concat(HOKENSJA));
-        if (!RealInitialLocker.tryGetLock(new前排他ロックキー)) {
-            throw new PessimisticLockingException();
-        }
-        getHander(div).set保険者一覧(search保険者一覧(div));
-        return ResponseData.of(div).respond();
     }
 
     /**
