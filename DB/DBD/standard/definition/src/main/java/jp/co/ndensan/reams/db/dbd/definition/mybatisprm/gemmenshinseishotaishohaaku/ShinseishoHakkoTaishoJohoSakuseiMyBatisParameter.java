@@ -38,11 +38,11 @@ public class ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter implements IMyBati
     private FlexibleDate 前年度の開始日;
     private FlexibleDate 前年度の終了日;
 
-    private RString CODE_利用者負担1至3段階 = RiyoshaFutanDankaiHanni.利用者負担1から3段階.get名称();
-    private RString CODE_利用者負担1段階 = RiyoshaFutanDankaiHanni.利用者負担1段階.get名称();
-    private RString CODE_利用者負担2段階 = RiyoshaFutanDankaiHanni.利用者負担2段階.get名称();
-    private RString CODE_利用者負担3段階 = RiyoshaFutanDankaiHanni.利用者負担3段階.get名称();
-    private RString CODE_利用者負担4段階 = RiyoshaFutanDankaiHanni.利用者負担4段階_高齢者複数世帯.get名称();
+    private RString CODE_利用者負担1至3段階 = RiyoshaFutanDankaiHanni.利用者負担1から3段階.getコード();
+    private RString CODE_利用者負担1段階 = RiyoshaFutanDankaiHanni.利用者負担1段階.getコード();
+    private RString CODE_利用者負担2段階 = RiyoshaFutanDankaiHanni.利用者負担2段階.getコード();
+    private RString CODE_利用者負担3段階 = RiyoshaFutanDankaiHanni.利用者負担3段階.getコード();
+    private RString CODE_利用者負担4段階 = RiyoshaFutanDankaiHanni.利用者負担4段階_高齢者複数世帯.getコード();
 
     private RString CODE_世帯課税区分_課税 = SetaiKazeiKubun.課税.getコード();
     private RString CODE_世帯課税区分_非課税 = SetaiKazeiKubun.非課税.getコード();
