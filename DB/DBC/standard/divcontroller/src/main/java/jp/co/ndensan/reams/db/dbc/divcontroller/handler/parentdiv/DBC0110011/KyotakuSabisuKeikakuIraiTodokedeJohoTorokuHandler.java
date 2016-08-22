@@ -526,7 +526,6 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         if (is事業者作成の場合()) {
             KyotakuKeikakuJigyoshaSakusei 居宅給付計画事業者作成 = 居宅給付計画届出.
                     getKyotakuKeikakuJigyoshaSakuseiList().get(0);
-            div.getRadTodokedeKubun().setSelectedKey(KEY_1);
             div.getRadKeikakuKubun().setDisplayNone(true);
             div.getTxtKeikakuTekiyoStartYMD().setValue(new RDate(
                     居宅給付計画事業者作成.get適用開始年月日().toString()));
@@ -613,14 +612,18 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         if (jukyushaDaicho == null) {
             return;
         }
-        if (JukyuShinseiJiyu.初回申請.getコード().equals(jukyushaDaicho.get申請理由())) {
+        if (JukyuShinseiJiyu.初回申請.getコード().equals(jukyushaDaicho.get受給申請事由().getColumnValue())) {
             div.getServiceAddAndServicePlanCreate().getTxtNinteiShinseiShinki().setReadOnly(false);
-        } else if (JukyuShinseiJiyu.再申請_有効期限内.getコード().equals(jukyushaDaicho.get申請理由())
-                || JukyuShinseiJiyu.再申請_有効期限外.getコード().equals(jukyushaDaicho.get申請理由())) {
+        } else if (JukyuShinseiJiyu.再申請_有効期限内.getコード().equals(
+                jukyushaDaicho.get受給申請事由().getColumnValue())
+                || JukyuShinseiJiyu.再申請_有効期限外.getコード().equals(
+                        jukyushaDaicho.get受給申請事由().getColumnValue())) {
             div.getServiceAddAndServicePlanCreate().getTxtNinteiShinseiSaishinsei().setReadOnly(false);
-        } else if (JukyuShinseiJiyu.要介護度変更申請.getコード().equals(jukyushaDaicho.get申請理由())) {
+        } else if (JukyuShinseiJiyu.要介護度変更申請.getコード().equals(
+                jukyushaDaicho.get受給申請事由().getColumnValue())) {
             div.getServiceAddAndServicePlanCreate().getTxtNinteiShinseiHenkoShinsei().setReadOnly(false);
-        } else if (JukyuShinseiJiyu.指定サービス種類変更申請.getコード().equals(jukyushaDaicho.get申請理由())) {
+        } else if (JukyuShinseiJiyu.指定サービス種類変更申請.getコード().equals(
+                jukyushaDaicho.get受給申請事由().getColumnValue())) {
             div.getServiceAddAndServicePlanCreate().getTxtNinteiShinseiServiceHenko().setReadOnly(false);
         }
     }
