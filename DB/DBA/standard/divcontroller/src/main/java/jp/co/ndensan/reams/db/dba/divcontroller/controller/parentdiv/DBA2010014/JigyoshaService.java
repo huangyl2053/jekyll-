@@ -71,8 +71,8 @@ public class JigyoshaService {
     public ResponseData<JigyoshaServiceDiv> onLoad(JigyoshaServiceDiv div) {
         setサービス種類(div);
         RString 画面状態 = ViewStateHolder.get(ViewStateKeys.画面状態, RString.class);
-        DbT1005KaigoJogaiTokureiTaishoShisetsuEntity 事業者登録情報 = ViewStateHolder.get(ViewStateKeys.事業者登録情報, DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
         if (状態_追加.equals(画面状態)) {
+            DbT1005KaigoJogaiTokureiTaishoShisetsuEntity 事業者登録情報 = ViewStateHolder.get(ViewStateKeys.事業者登録情報, DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
             getHandler(div).set状態_追加(事業者登録情報);
             List<RString> chkKihonJunkyoFlag = new ArrayList<>();
             chkKihonJunkyoFlag.add(new RString("0"));
@@ -129,8 +129,8 @@ public class JigyoshaService {
      */
     public ResponseData<JigyoshaServiceDiv> onChange_ChkKihonJunkyoFlag(JigyoshaServiceDiv div) {
         RString 画面状態 = ViewStateHolder.get(ViewStateKeys.画面状態, RString.class);
-        DbT1005KaigoJogaiTokureiTaishoShisetsuEntity 事業者登録情報 = ViewStateHolder.get(ViewStateKeys.事業者登録情報, DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
         if (状態_追加.equals(画面状態)) {
+            DbT1005KaigoJogaiTokureiTaishoShisetsuEntity 事業者登録情報 = ViewStateHolder.get(ViewStateKeys.事業者登録情報, DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
             if(!div.getJigyoshaServiceKihon().getChkKihonJunkyoFlag().getSelectedKeys().isEmpty()){
                  getHandler(div).set状態_追加(事業者登録情報);
             }else{
