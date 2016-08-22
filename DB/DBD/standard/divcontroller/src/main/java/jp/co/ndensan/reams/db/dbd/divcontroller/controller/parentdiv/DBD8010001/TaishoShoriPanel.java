@@ -10,10 +10,13 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010001.DBD8010001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010001.TaishoShoriPanelDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD8010001.TaishoShoriHandler;
+import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD8010001.TaishoShoriValidationHandler;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -41,6 +44,11 @@ public class TaishoShoriPanel {
      * @return ResponseData
      */
     public ResponseData<TaishoShoriPanelDiv> onLoad(TaishoShoriPanelDiv div) {
+        ValidationMessageControlPairs pairs = getValidationHandler(div).validate調定年度();
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
+
         List<ShoriDateKanri> 画面情報 = getHandler(div).onLoad();
 
         ViewStateHolder.put(画面キー.画面更新用情報, (Serializable) 画面情報);
@@ -94,7 +102,6 @@ public class TaishoShoriPanel {
      */
     public ResponseData<TaishoShoriPanelDiv> onSelectBySelectButton(TaishoShoriPanelDiv div) {
         div.getFuairuAppurodo().setDisplayNone(false);
-        // TODO. URL設定処理が必要があると思ます。
         return ResponseData.of(div).respond();
     }
 
@@ -105,7 +112,24 @@ public class TaishoShoriPanel {
      * @return ResponseData
      */
     public ResponseData<TaishoShoriPanelDiv> onClick_btnUpload(TaishoShoriPanelDiv div) {
-        // TODO. upload処理
+        ValidationMessageControlPairs pairs = getValidationHandler(div).validateファイル値();
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
+
+        getHandler(div).readFile();
+
+        pairs = getValidationHandler(div).validateファイル内容();
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
+
+        Message message = getValidationHandler(div).validate作成年月日();
+        if (null != message) {
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+
+        getHandler(div).upload();
 
         div.getCcdKaigoKanryoMessage().setSuccessMessage(
                 new RString(UrInformationMessages.正常終了.getMessage().replace("アップロード処理").evaluate()));
@@ -134,7 +158,10 @@ public class TaishoShoriPanel {
      * @return ResponseData
      */
     public ResponseData<TaishoShoriPanelDiv> onClick_btnUpdate(TaishoShoriPanelDiv div) {
-        // TODO. check処理
+        ValidationMessageControlPairs pairs = getValidationHandler(div).validate();
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
         List<ShoriDateKanri> 画面更新用情報 = ViewStateHolder.get(画面キー.画面更新用情報, List.class);
         getHandler(div).save(画面更新用情報);
 
@@ -144,5 +171,9 @@ public class TaishoShoriPanel {
 
     private TaishoShoriHandler getHandler(TaishoShoriPanelDiv div) {
         return new TaishoShoriHandler(div);
+    }
+
+    private TaishoShoriValidationHandler getValidationHandler(TaishoShoriPanelDiv div) {
+        return new TaishoShoriValidationHandler(div);
     }
 }

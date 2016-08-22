@@ -221,7 +221,7 @@ public class TsutishoHakkoCommonProcess {
      */
     public static RString getタイトル(ConfigNameDBA configName) {
 
-        RString タイトル = DbBusinessConfig.get(configName, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
+        RString タイトル = DbBusinessConfig.get(configName, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         return null != タイトル ? タイトル : RString.EMPTY;
     }
 

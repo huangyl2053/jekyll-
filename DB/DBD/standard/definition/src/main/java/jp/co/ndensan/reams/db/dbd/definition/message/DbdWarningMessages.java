@@ -6,8 +6,10 @@
 package jp.co.ndensan.reams.db.dbd.definition.message;
 
 import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
+import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 
 /**
@@ -26,7 +28,8 @@ public enum DbdWarningMessages implements IMessageGettable {
     非課税年金月次取込確認(7, "選択したファイルが作成されたのは?です。処理年月：?の月次処理では、通常作成年月：?のファイルを処理します。"
             + "<br>指定したファイルの取込処理を行ってよいですか？");
 
-    private final Message message;
+    private final String message;
+    private final int no;
 
     /**
      * コンストラクタです。
@@ -35,11 +38,22 @@ public enum DbdWarningMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbdWarningMessages(int no, String message) {
-        this.message = new WarningMessage(toCode("DBDW", no), message);
+        this.message = message;
+        this.no = no;
     }
 
     @Override
     public Message getMessage() {
-        return message;
+        return new QuestionMessage(toCode("DBDQ", no), message);
+    }
+
+    /**
+     * 選択可能ボタンを指定してメッセージを返します。
+     *
+     * @param pattern ボタンセレクトパターン
+     * @return メッセージ
+     */
+    public Message getMessage(ButtonSelectPattern pattern) {
+        return new WarningMessage(toCode("W", no).toString(), message, pattern);
     }
 }
