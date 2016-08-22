@@ -30,6 +30,7 @@ public class RiyoshaFutanWariaiHanteiUtil {
 
     private static final RString STR0801 = new RString("0801");
     private static final RString STR0731 = new RString("0731");
+    private static final int NUM0 = 0;
     private static final int NUM3 = 3;
     private static final int NUM4 = 4;
     private static final int NUM6 = 6;
@@ -71,8 +72,8 @@ public class RiyoshaFutanWariaiHanteiUtil {
         if (RString.isNullOrEmpty(現在の判定基準日) || RString.isNullOrEmpty(有効期間開始年月日)) {
             return false;
         }
-        RString 判定基準日の月 = 現在の判定基準日.substring(NUM4, NUM6);
-        RString 有効開始年月日の月 = 有効期間開始年月日.substring(NUM4, NUM6);
+        RString 判定基準日の月 = 現在の判定基準日.substring(NUM0, NUM6);
+        RString 有効開始年月日の月 = 認定有効期間開始年月日.getYearMonth().toDateString();
         FlexibleDate 現在判定基準日 = new FlexibleDate(現在の判定基準日);
         return 判定基準日の月.equals(有効開始年月日の月) && 現在判定基準日.isBefore(認定有効期間開始年月日);
     }

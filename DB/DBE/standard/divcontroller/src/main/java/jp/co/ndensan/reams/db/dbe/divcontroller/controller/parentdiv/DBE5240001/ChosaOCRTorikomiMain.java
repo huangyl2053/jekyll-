@@ -406,8 +406,7 @@ public class ChosaOCRTorikomiMain {
             if (row.getSelected() && チェックOK.equals(row.getOkOrNg())) {
                 for (TorikomiEntity data : dataList) {
                     if (row.getShoKisaiHokenshaNo().equals(data.get保険者番号())
-                            && row.getHihokenshaNo().equals(data.get被保険者番号())
-                            && row.getShinseishoKanriNo().equals(data.get申請書管理番号().value())) {
+                            && row.getHihokenshaNo().equals(data.get被保険者番号())) {
                         updateDbT5102(div, row, data, 審査会開催番号);
                         updateDbT5503(div, row, data, 審査会開催番号);
                         updateDbT5511(div, row, data, 審査会開催番号);
@@ -430,31 +429,63 @@ public class ChosaOCRTorikomiMain {
     }
 
     private void updateDbT5503(ChosaOCRTorikomiMainDiv div, dgChosahyoTorikomiKekka_Row row, TorikomiEntity data, RString 審査会開催番号) {
-        ShinsakaiWariateIinJohoManager mange = new ShinsakaiWariateIinJohoManager();
-        ShinsakaiWariateIinJoho shinsakaiWariateIinJoho1 = mange.get介護認定審査会割当委員情報(審査会開催番号, data.get審査員コード1());
-        if (shinsakaiWariateIinJoho1 == null) {
-            shinsakaiWariateIinJoho1 = new ShinsakaiWariateIinJoho(審査会開催番号, data.get審査員コード1());
-            shinsakaiWariateIinJoho1 = getHandler(div).editShinsakaiWariateIinJoho(shinsakaiWariateIinJoho1, row, data, 審査会開催番号);
-            shinsakaiWariateIinJoho1.createBuilderForEdit().set介護認定審査会議長区分コード(get介護認定審査会議長区分コード(data.get審査員1審査員長フラグ()));
-            shinsakaiWariateIinJoho1.createBuilderForEdit().set委員出席(get委員出席(data.get審査員1出席状況()));
-        } else {
-            shinsakaiWariateIinJoho1 = getHandler(div).editShinsakaiWariateIinJoho(shinsakaiWariateIinJoho1.modifiedModel(), row, data, 審査会開催番号);
-            shinsakaiWariateIinJoho1.createBuilderForEdit().set介護認定審査会議長区分コード(get介護認定審査会議長区分コード(data.get審査員1審査員長フラグ()));
-            shinsakaiWariateIinJoho1.createBuilderForEdit().set委員出席(get委員出席(data.get審査員1出席状況()));
+        List<RString> 審査員コードList = get審査員コードList(data);
+        List<RString> 審査員長フラグList = get審査員長フラグList(data);
+        List<RString> 審査員出席状況List = get審査員出席状況List(data);
+        for (int i = 0; i < 審査員コードList.size(); i++) {
+            ShinsakaiWariateIinJohoManager mange = new ShinsakaiWariateIinJohoManager();
+            ShinsakaiWariateIinJoho shinsakaiWariateIinJoho = mange.get介護認定審査会割当委員情報(審査会開催番号, data.get審査員コード1());
+            if (shinsakaiWariateIinJoho == null) {
+                shinsakaiWariateIinJoho = new ShinsakaiWariateIinJoho(審査会開催番号, 審査員コードList.get(i));
+                shinsakaiWariateIinJoho = getHandler(div).editShinsakaiWariateIinJoho(shinsakaiWariateIinJoho, row, data, 審査会開催番号);
+                shinsakaiWariateIinJoho.createBuilderForEdit().set介護認定審査会議長区分コード(get介護認定審査会議長区分コード(審査員長フラグList.get(i)));
+                shinsakaiWariateIinJoho.createBuilderForEdit().set委員出席(get委員出席(審査員出席状況List.get(i)));
+            } else {
+                shinsakaiWariateIinJoho = getHandler(div).editShinsakaiWariateIinJoho(shinsakaiWariateIinJoho.modifiedModel(), row, data, 審査会開催番号);
+                shinsakaiWariateIinJoho.createBuilderForEdit().set介護認定審査会議長区分コード(get介護認定審査会議長区分コード(審査員長フラグList.get(i)));
+                shinsakaiWariateIinJoho.createBuilderForEdit().set委員出席(get委員出席(審査員出席状況List.get(i)));
+            }
+            mange.save介護認定審査会割当委員情報(shinsakaiWariateIinJoho);
         }
-        mange.save介護認定審査会割当委員情報(shinsakaiWariateIinJoho1);
-        ShinsakaiWariateIinJoho shinsakaiWariateIinJoho2 = mange.get介護認定審査会割当委員情報(審査会開催番号, data.get審査員コード1());
-        if (shinsakaiWariateIinJoho2 == null) {
-            shinsakaiWariateIinJoho2 = new ShinsakaiWariateIinJoho(審査会開催番号, data.get審査員コード1());
-            shinsakaiWariateIinJoho2 = getHandler(div).editShinsakaiWariateIinJoho(shinsakaiWariateIinJoho2, row, data, 審査会開催番号);
-            shinsakaiWariateIinJoho2.createBuilderForEdit().set介護認定審査会議長区分コード(get介護認定審査会議長区分コード(data.get審査員1審査員長フラグ()));
-            shinsakaiWariateIinJoho2.createBuilderForEdit().set委員出席(get委員出席(data.get審査員1出席状況()));
-        } else {
-            shinsakaiWariateIinJoho2 = getHandler(div).editShinsakaiWariateIinJoho(shinsakaiWariateIinJoho2.modifiedModel(), row, data, 審査会開催番号);
-            shinsakaiWariateIinJoho2.createBuilderForEdit().set介護認定審査会議長区分コード(get介護認定審査会議長区分コード(data.get審査員1審査員長フラグ()));
-            shinsakaiWariateIinJoho2.createBuilderForEdit().set委員出席(get委員出席(data.get審査員1出席状況()));
-        }
-        mange.save介護認定審査会割当委員情報(shinsakaiWariateIinJoho2);
+    }
+
+    private List<RString> get審査員コードList(TorikomiEntity data) {
+        List<RString> 審査員コードList = new ArrayList<>();
+        審査員コードList.add(data.get審査員コード1());
+        審査員コードList.add(data.get審査員コード2());
+        審査員コードList.add(data.get審査員コード3());
+        審査員コードList.add(data.get審査員コード4());
+        審査員コードList.add(data.get審査員コード5());
+        審査員コードList.add(data.get審査員コード6());
+        審査員コードList.add(data.get審査員コード7());
+        審査員コードList.add(data.get審査員コード8());
+        return 審査員コードList;
+    }
+
+    private List<RString> get審査員出席状況List(TorikomiEntity data) {
+        List<RString> 審査員出席状況List = new ArrayList<>();
+        審査員出席状況List.add(data.get審査員1出席状況());
+        審査員出席状況List.add(data.get審査員2出席状況());
+        審査員出席状況List.add(data.get審査員3出席状況());
+        審査員出席状況List.add(data.get審査員4出席状況());
+        審査員出席状況List.add(data.get審査員5出席状況());
+        審査員出席状況List.add(data.get審査員6出席状況());
+        審査員出席状況List.add(data.get審査員7出席状況());
+        審査員出席状況List.add(data.get審査員8出席状況());
+        return 審査員出席状況List;
+    }
+
+    private List<RString> get審査員長フラグList(TorikomiEntity data) {
+        List<RString> 審査員長フラグList = new ArrayList<>();
+        審査員長フラグList.add(data.get審査員1審査員長フラグ());
+        審査員長フラグList.add(data.get審査員2審査員長フラグ());
+        審査員長フラグList.add(data.get審査員3審査員長フラグ());
+        審査員長フラグList.add(data.get審査員4審査員長フラグ());
+        審査員長フラグList.add(data.get審査員5審査員長フラグ());
+        審査員長フラグList.add(data.get審査員6審査員長フラグ());
+        審査員長フラグList.add(data.get審査員7審査員長フラグ());
+        審査員長フラグList.add(data.get審査員8審査員長フラグ());
+        return 審査員長フラグList;
     }
 
     private Code get介護認定審査会議長区分コード(RString 審査員長フラグ) {
@@ -468,10 +499,7 @@ public class ChosaOCRTorikomiMain {
     }
 
     private boolean get委員出席(RString 出席状況) {
-        if (INDEX_1.equals(出席状況)) {
-            return true;
-        }
-        return false;
+        return INDEX_1.equals(出席状況);
     }
 
     private void updateDbT5511(ChosaOCRTorikomiMainDiv div, dgChosahyoTorikomiKekka_Row row, TorikomiEntity data, RString 審査会開催番号) {

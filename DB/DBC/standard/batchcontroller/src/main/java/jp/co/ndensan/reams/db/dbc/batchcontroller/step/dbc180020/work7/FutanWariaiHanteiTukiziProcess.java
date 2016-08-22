@@ -32,12 +32,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 負担割合判定（月次）<br/>
+ * 負担割合判定（月次）のクラスです。<br/>
  * 処理詳細7
  *
  * @reamsid_L DBC-4950-030 liuyang
  */
-public class Work7Process extends BatchKeyBreakBase<FutanWariaiHanteiJohoEntity> {
+public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWariaiHanteiJohoEntity> {
 
     private static final int NUM12 = 12;
     private static final RString TABLENAME = new RString("RiyoshaFutanWariaiKonkyoTemp");
