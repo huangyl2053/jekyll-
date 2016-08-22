@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojyuminhyoutashajuki;
 
-import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.IKaigoJuminhyoEucCsvEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyokobetsujikou.IKaigoJuminhyoEucCsvEntity;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

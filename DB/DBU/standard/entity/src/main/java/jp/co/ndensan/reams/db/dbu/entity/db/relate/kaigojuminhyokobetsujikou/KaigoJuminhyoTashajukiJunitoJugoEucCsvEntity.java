@@ -3,23 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojyuminhyoutashajuki;
+package jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyokobetsujikou;
 
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyokobetsujikou.IKaigoJuminhyoEucCsvEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 介護住民票個別事項連携情報作成【広域運用】CSV用データEntity
+ * ＣＳＶを定義したEntityクラスです。
  *
- * @reamsid_L DBU-0550-030 wanghui
+ * @reamsid_L DBU-0350-020 lijia
  *
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
-public class KaigoJyuminhyouTashajukiEucCSVDateEntity implements IKaigoJuminhyoEucCsvEntity {
+public class KaigoJuminhyoTashajukiJunitoJugoEucCsvEntity implements IKaigoJuminhyoEucCsvEntity {
 
     @CsvField(order = 10, name = "市町村コード")
     private final RString 市町村コード;
@@ -86,7 +85,7 @@ public class KaigoJyuminhyouTashajukiEucCSVDateEntity implements IKaigoJuminhyoE
      * @param 作成日時 RString
      * @param 更新日時 RString
      */
-    public KaigoJyuminhyouTashajukiEucCSVDateEntity(
+    public KaigoJuminhyoTashajukiJunitoJugoEucCsvEntity(
             RString 市町村コード,
             RString 識別ＩＤ,
             RString タイムスタンプ,
