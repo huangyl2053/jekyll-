@@ -89,5 +89,5 @@ public class ShiharaiHohoHenkoEntity {
     private RYear 日付関連_調定年度;
 
     // TODO 臨時追加
-    private RYear 調定年度;
+    private RYear 賦課年度;
 }
