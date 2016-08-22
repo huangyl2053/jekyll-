@@ -57,6 +57,7 @@ public class PanelAtena {
         List<JyuMiKoNyuJyoHoBusiness> 境界層管理情報 = get境界層管理情報取得(被保険者番号);
         HokenryoDankaiList 保険料段階リスト = get保険料段階リスト(div, 境界層管理情報);
         getHandler(div).editSyori(老齢福祉年金受給者情報, 生保受給者情報, 生活保護扶助種類, 境界層管理情報, 保険料段階リスト);
+        // TODO QA1569
         return ResponseData.of(div).respond();
     }
 
