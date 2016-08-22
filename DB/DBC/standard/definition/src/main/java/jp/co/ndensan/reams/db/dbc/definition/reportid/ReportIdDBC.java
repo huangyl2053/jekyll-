@@ -16,6 +16,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBC {
 
     /**
+     * 自己負担額補正一覧表
+     */
+    DBC200031(new ReportId("DBC200031_GassanJikofutangakuHoseiIchiran"), new RString("自己負担額補正一覧表")),
+    /**
      * 高額合算自己負担額計算結果一覧表
      */
     DBC200029(new ReportId("DBC200029_GassanJikofutangakuKeisanKekkaIchiran"), new RString("高額合算自己負担額計算結果一覧表")),
