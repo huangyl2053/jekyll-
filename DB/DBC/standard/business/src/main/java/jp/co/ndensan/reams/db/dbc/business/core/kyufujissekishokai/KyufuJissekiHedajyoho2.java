@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -23,6 +24,7 @@ public class KyufuJissekiHedajyoho2 {
     private FlexibleYearMonth サービス提供年月;
     private RString 給付実績区分コード;
     private RString 整理番号;
+    private JigyoshaNo 事業所番号;
     private RString 事業者名称;
     private RString 識別番号名称;
 }
