@@ -527,14 +527,14 @@
         "DbV2002FukaBrfore"."gokeiShotokuGaku" AS gokeiShotokuGakuBefore,
         "DbV2002FukaBrfore"."nenkinShunyuGaku" AS nenkinShunyuGakuBefore
         FROM rgdb."DbV2002Fuka" AS "DbV2002Fuka"
-        LEFT JOIN rgdb."DbT2003Kibetsu" AS "DbT2003Kibetsu"
+        INNER JOIN rgdb."DbT2003Kibetsu" AS "DbT2003Kibetsu"
         ON "DbT2003Kibetsu"."choteiNendo" = "DbV2002Fuka"."choteiNendo"
         AND "DbT2003Kibetsu"."fukaNendo" = "DbV2002Fuka"."fukaNendo"
         AND "DbT2003Kibetsu"."tsuchishoNo" = "DbV2002Fuka"."tsuchishoNo"
         AND "DbT2003Kibetsu"."rirekiNo" = "DbV2002Fuka"."rirekiNo"
         AND "DbT2003Kibetsu"."choshuHouhou" IN ('1')
         AND "DbT2003Kibetsu"."ki" = 1
-        LEFT JOIN rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
+        INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
         ON "UrT0705ChoteiKyotsu"."choteiId" = "DbT2003Kibetsu"."choteiId"
         AND "UrT0705ChoteiKyotsu"."choteigaku" <![CDATA[>]]> 0
         INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳管理Newest
