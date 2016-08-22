@@ -51,6 +51,12 @@ public class ShokkenTorikeshiIchibuNintei {
     private static final RString メニュID_職権修正 = new RString("DBDMN55002");
     private static final RString メニュID_職権取消一部喪失 = new RString("DBDMN55004");
     private static final RString メニュID_区分変更認定 = new RString("DBDMN52003");
+    private static final RString メニュID_サービス変更認定 = new RString("DBDMN52004");
+    private static final RString メニュID_認定データ更新 = new RString("DBDMN52013");
+    private static final RString タイトル_職権修正 = new RString("職権修正");
+    private static final RString タイトル_職権取消一部喪失 = new RString("職権取消(一部喪失)");
+    private static final RString タイトル_要介護認定区分変更認定 = new RString("区分変更認定");
+    private static final RString タイトル_要介護認定サービス変更認定 = new RString("サービス変更認定");
 
     /**
      * 職権修正/職権取消(一部)/認定結果入力(サ変・区変)画面の初期化を実行します。
@@ -60,6 +66,7 @@ public class ShokkenTorikeshiIchibuNintei {
      */
     public ResponseData<ShokkenTorikeshiIchibuNinteiDiv> onLoad(ShokkenTorikeshiIchibuNinteiDiv div) {
 
+        IParentResponse<ShokkenTorikeshiIchibuNinteiDiv> response = ResponseData.of(div);
         RString menuId = ResponseHolder.getMenuID();
         ShikibetsuCode 識別コード = ShikibetsuCode.EMPTY;
         HihokenshaNo 被保険者番号;
@@ -72,8 +79,9 @@ public class ShokkenTorikeshiIchibuNintei {
             申請書管理番号 = manager.select申請書管理番号(被保険者番号);
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
         } else {
-            被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-            申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+            被保険者番号 = new HihokenshaNo(ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class));
+            申請書管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
+            ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
         }
         List<ShokkenTorikeshiNinteiJohoKonkaiBusiness> 今回情報List = manager.select今回情報(申請書管理番号.value()).records();
         ShokkenTorikeshiNinteiJohoKonkaiBusiness 今回情報 = null;
@@ -89,14 +97,16 @@ public class ShokkenTorikeshiIchibuNintei {
             ValidationMessageControlPairs pairs = createValidationHandler(div).cheackLoad(今回情報);
             if (pairs.iterator().hasNext()) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), true);
-                IParentResponse<ShokkenTorikeshiIchibuNinteiDiv> response = ResponseData.of(div);
                 response.setState(state);
+                response.rootTitle(getRootTitle(menuId, div));
                 return response.addValidationMessages(pairs).respond();
             } else {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), false);
             }
         }
-        return ResponseData.of(div).setState(state);
+        response.setState(state);
+        response.rootTitle(getRootTitle(menuId, div));
+        return response.respond();
     }
 
     /**
@@ -283,6 +293,21 @@ public class ShokkenTorikeshiIchibuNintei {
         } else {
             return DBD5510001StateName.サ変認定完了;
         }
+    }
+
+    private RString getRootTitle(RString menuId, ShokkenTorikeshiIchibuNinteiDiv div) {
+        RString title = RString.EMPTY;
+        if (メニュID_職権修正.equals(menuId)) {
+            title = タイトル_職権修正;
+        } else if (メニュID_職権取消一部喪失.equals(menuId)) {
+            title = タイトル_職権取消一部喪失;
+        } else if (メニュID_区分変更認定.equals(menuId) || メニュID_認定データ更新.equals(menuId)) {
+            title = タイトル_要介護認定区分変更認定;
+        } else if (メニュID_サービス変更認定.equals(menuId)) {
+            title = タイトル_要介護認定サービス変更認定;
+        }
+        div.setTitle(title);
+        return title;
     }
 
     private ShokkenTorikeshiIchibuNinteiHandler createHandler(ShokkenTorikeshiIchibuNinteiDiv div) {

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekikubun.KyufuJisseki
 import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiShokaiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -114,8 +115,8 @@ public class KyufuJissekiHeaderHandler {
     private void set給付実績ヘッダ情報1(KyufuJissekiHedajyoho1 給付実績ヘッダ情報1) {
         div.getTxtHihoNo().setValue(get被保険者番号(給付実績ヘッダ情報1.get被保険者番号()));
         div.getTxtJuminShubetsu().setValue(get住民種別(給付実績ヘッダ情報1.get資格取得事由コード()));
-        // TODO 凌護行 QA1529_#96077回答まち、項目設定が無し、 2016/08/22
-//        div.getTxtYoKaigodo().setValue(給付実績ヘッダ情報1.get要介護認定状態区分コード());
+        div.getTxtYoKaigodo().setValue(YokaigoJotaiKubunSupport.toValue(
+                給付実績ヘッダ情報1.get認定年月日().getYearMonth(), 給付実績ヘッダ情報1.get要介護認定状態区分コード()).getName());
         if (給付実績ヘッダ情報1.get認定有効期間開始年月日() != null && !給付実績ヘッダ情報1.get認定有効期間開始年月日().isEmpty()) {
             div.getTxtYukoKikan().setFromValue(new RDate(給付実績ヘッダ情報1.get認定有効期間開始年月日().toString()));
         }
