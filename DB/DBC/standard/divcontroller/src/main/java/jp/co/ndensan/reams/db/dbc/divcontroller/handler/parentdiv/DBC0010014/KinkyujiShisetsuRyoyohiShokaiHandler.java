@@ -59,8 +59,13 @@ public class KinkyujiShisetsuRyoyohiShokaiHandler {
     public void setKinkyujiShisetsuRyoyohi(List<KyufujissekiShoteiShikkanShisetsuRyoyo> 所定疾患施設療養費等データリスト) {
         List<dgKinkyujiShisetsuRyoyohi_Row> rowList = new ArrayList<>();
         for (KyufujissekiShoteiShikkanShisetsuRyoyo 所定疾患施設療養費等データ : 所定疾患施設療養費等データリスト) {
-            rowList.add(setRow(所定疾患施設療養費等データ));
-            rowList.add(setRow_後(所定疾患施設療養費等データ));
+            if (div.getCcdKyufuJissekiHeader().getTxtTeikyoNengetsu().toString()
+                    .equals(所定疾患施設療養費等データ.getサービス提供年月().toString())
+                    && div.getCcdKyufuJissekiHeader().getTxtJigyosha().toString()
+                    .equals(所定疾患施設療養費等データ.get事業所番号().toString())) {
+                rowList.add(setRow(所定疾患施設療養費等データ));
+                rowList.add(setRow_後(所定疾患施設療養費等データ));
+            }
         }
         div.getDgKinkyujiShisetsuRyoyohi().setDataSource(rowList);
     }
@@ -423,7 +428,16 @@ public class KinkyujiShisetsuRyoyohiShokaiHandler {
         } else {
             div.getCcdKyufuJissekiHeader().initialize(被保険者番号, get次月(サービス提供年月), 整理番号, 識別番号);
         }
-
+        List<dgKinkyujiShisetsuRyoyohi_Row> rowList = new ArrayList<>();
+        List<KyufujissekiShoteiShikkanShisetsuRyoyo> 所定疾患施設療養費等データ取得リスト
+                = ViewStateHolder.get(ViewStateKeys.資格対象者, KyufuJissekiPrmBusiness.class).getCsData_P();
+        for (KyufujissekiShoteiShikkanShisetsuRyoyo 所定疾患施設療養費等データ取得 : 所定疾患施設療養費等データ取得リスト) {
+            if (get前月(サービス提供年月).equals(所定疾患施設療養費等データ取得.getサービス提供年月())) {
+                rowList.add(setRow(所定疾患施設療養費等データ取得));
+                rowList.add(setRow_後(所定疾患施設療養費等データ取得));
+            }
+        }
+        div.getDgKinkyujiShisetsuRyoyohi().setDataSource(rowList);
     }
 
     /**
@@ -453,11 +467,13 @@ public class KinkyujiShisetsuRyoyohiShokaiHandler {
         div.getCcdKyufuJissekiHeader().set整理番号(事業者番号リスト.get(index + i).get整理番号());
         div.getCcdKyufuJissekiHeader().set識別番号名称(new RString(事業者番号リスト.get(index + i).get識別番号名称().toString()));
         List<dgKinkyujiShisetsuRyoyohi_Row> rowList = new ArrayList<>();
-        List<KyufujissekiShoteiShikkanShisetsuRyoyo> 所定疾患施設療養費等データ取得リスト = ViewStateHolder.get(ViewStateKeys.資格対象者, KyufuJissekiPrmBusiness.class)
-                .getCsData_P();
+        List<KyufujissekiShoteiShikkanShisetsuRyoyo> 所定疾患施設療養費等データ取得リスト
+                = ViewStateHolder.get(ViewStateKeys.資格対象者, KyufuJissekiPrmBusiness.class).getCsData_P();
         for (KyufujissekiShoteiShikkanShisetsuRyoyo 所定疾患施設療養費等データ取得 : 所定疾患施設療養費等データ取得リスト) {
-            rowList.add(setRow(所定疾患施設療養費等データ取得));
-            rowList.add(setRow_後(所定疾患施設療養費等データ取得));
+            if (事業者番号リスト.get(index + i).get事業所番号().equals(所定疾患施設療養費等データ取得.get事業所番号())) {
+                rowList.add(setRow(所定疾患施設療養費等データ取得));
+                rowList.add(setRow_後(所定疾患施設療養費等データ取得));
+            }
         }
         div.getDgKinkyujiShisetsuRyoyohi().setDataSource(rowList);
     }
