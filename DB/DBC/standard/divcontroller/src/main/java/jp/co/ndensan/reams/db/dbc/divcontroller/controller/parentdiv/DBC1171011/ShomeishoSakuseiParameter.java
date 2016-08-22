@@ -47,13 +47,14 @@ public class ShomeishoSakuseiParameter {
      * @return 画面
      */
     public ResponseData<ShomeishoSakuseiParameterDiv> onLoad(ShomeishoSakuseiParameterDiv div) {
+        RDate newDate = RDate.getNowDate();
         ShoriDateKanriFinder finder = ShoriDateKanriFinder.createInstance();
         ShoriDateKanri 前回の実行情報 = finder.get前回の実行情報(new LasdecCode(
-                DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)));
+                DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, newDate, SubGyomuCode.DBU介護統計報告)));
         KokuhorenInterfaceKanriManager manager = new KokuhorenInterfaceKanriManager();
         KokuhorenInterfaceKanri 実行された最新のデータ = manager.get実行された最新のデータ(
                 DbBusinessConfig.get(ConfigNameDBC.国保連取込_高額合算自己負担額確認情報_交換情報識別番号,
-                        RDate.getNowDate(), SubGyomuCode.DBC介護給付));
+                        newDate, SubGyomuCode.DBC介護給付));
         getHandler(div).onLoad(前回の実行情報, 実行された最新のデータ);
         return ResponseData.of(div).respond();
     }
