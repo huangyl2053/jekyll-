@@ -107,6 +107,20 @@ public class MenjoKaijoSaiTennyuHandler {
         update支払方法変更減額();
         div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(ViewStateHolder.get(免除解除再転入ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class)));
         div.getDgMenjoKaijoOrSaitennyu().getClickedItem().setJotai(new RString("修正"));
+        div.getTxtTorokuJokyo().setValue(RString.EMPTY);
+        div.setTxtKyufugakuGengakuKikan(null);
+        div.setTxtGengakuTekiyoKikanKaishiYMD(null);
+        div.setTxtGengakuTekiyoKikanShuryoYMD(null);
+        div.setTxtChoshukenShometsuKikan(null);
+        div.setTxtNofuzumiKikan(null);
+        div.setTxtGengakuKetteiYMD(null);
+        div.setTxtZenkaiKikanKaishiYMD(null);
+        div.setTxtZenkaiKikanShuryoYMD(null);
+        div.setTxtGengakuTsuchiHakkoYMD(null);
+        div.setTxtKonkaiKikanKaishiYMD(null);
+        div.setTxtKonkaiKikanShuryoYMD(null);
+        div.getKyufugakuGengakuToroku().getTxtTainoJokyo().setIconNameEnum(IconName.Info);
+        div.getTxtTainoJokyo().setDisabled(false);
         div.getBtnTorikeshi().setDisabled(true);
         div.getBtnKakutei().setDisabled(true);
         return pairs;
@@ -168,7 +182,7 @@ public class MenjoKaijoSaiTennyuHandler {
             row.setGengakuTekiyoKikan(new RString(shiharaiHohoHenko.getShiharaiHohoHenkoGengakuList().get(i).get確定減額期間開始年月日()
                     .wareki(DateRoundingType.変換なし).toDateString().toString()).concat(new RString("～"))
                     .concat(new RString(shiharaiHohoHenko.getShiharaiHohoHenkoGengakuList().get(i).get確定減額期間終了年月日()
-                            .wareki(DateRoundingType.変換なし).toDateString().toString())));
+                                    .wareki(DateRoundingType.変換なし).toDateString().toString())));
             row.getTxtGengakuKetteiYMD().setValue(shiharaiHohoHenko.get減額決定年月日());
             row.setMenjoShinseiRiyu(shiharaiHohoHenko.get終了申請理由コード());
             row.getTxtMenjoShinseiUketsukeYMD().setValue(shiharaiHohoHenko.get終了申請書受付年月日());
