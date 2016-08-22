@@ -25,5 +25,5 @@ public class IraiJohoDataTorikomiParameter {
     private RString 処理状態区分_3;
     private RString 申請書管理番号;
     private RString 厚労省IF識別コード;
-    private RString 主治医意見書作成依頼履歴番号;
+    private int 主治医意見書作成依頼履歴番号;
 }

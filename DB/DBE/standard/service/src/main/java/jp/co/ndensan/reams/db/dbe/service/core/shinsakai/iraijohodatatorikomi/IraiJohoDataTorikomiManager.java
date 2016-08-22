@@ -173,7 +173,7 @@ public class IraiJohoDataTorikomiManager {
         IraiJohoDataTorikomiParameter parameter = new IraiJohoDataTorikomiParameter();
         parameter.set申請書管理番号(申請書管理番号);
         parameter.set厚労省IF識別コード(厚労省IF識別コード);
-        parameter.set主治医意見書作成依頼履歴番号(new RString(主治医意見書作成依頼履歴番号));
+        parameter.set主治医意見書作成依頼履歴番号(主治医意見書作成依頼履歴番号);
         IIraiJohoDataTorikomiMapper mapper = mapperProvider.create(IIraiJohoDataTorikomiMapper.class);
         return mapper.要介護認定主治医意見書情報(parameter);
     }
@@ -183,7 +183,7 @@ public class IraiJohoDataTorikomiManager {
         IraiJohoDataTorikomiParameter parameter = new IraiJohoDataTorikomiParameter();
         parameter.set申請書管理番号(申請書管理番号);
         parameter.set厚労省IF識別コード(厚労省IF識別コード);
-        parameter.set主治医意見書作成依頼履歴番号(new RString(主治医意見書作成依頼履歴番号));
+        parameter.set主治医意見書作成依頼履歴番号(主治医意見書作成依頼履歴番号);
         IIraiJohoDataTorikomiMapper mapper = mapperProvider.create(IIraiJohoDataTorikomiMapper.class);
         return mapper.要介護認定主治医意見書意見項目(parameter);
     }
@@ -193,7 +193,7 @@ public class IraiJohoDataTorikomiManager {
         IraiJohoDataTorikomiParameter parameter = new IraiJohoDataTorikomiParameter();
         parameter.set申請書管理番号(申請書管理番号);
         parameter.set厚労省IF識別コード(厚労省IF識別コード);
-        parameter.set主治医意見書作成依頼履歴番号(new RString(主治医意見書作成依頼履歴番号));
+        parameter.set主治医意見書作成依頼履歴番号(主治医意見書作成依頼履歴番号);
         IIraiJohoDataTorikomiMapper mapper = mapperProvider.create(IIraiJohoDataTorikomiMapper.class);
         return mapper.要介護認定主治医意見書記入項目(parameter);
     }
