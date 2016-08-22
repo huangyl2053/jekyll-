@@ -78,10 +78,10 @@ public class HanteiTaishoshaTempEditor {
             entity.setEdaNo(異動データ.get受給者台帳().getEdaban());
             entity.setJukyuShinseiJiyu(異動データ.get受給者台帳().getJukyuShinseiJiyu().getColumnValue());
             if (異動データ.get受給者台帳().getNinteiYukoKikanKaishiYMD() != null
-                    && !対象年度開始YMD.isBefore(異動データ.get受給者台帳().getNinteiYukoKikanKaishiYMD())) {
-                entity.setNinteiYukoKaishiDate(対象年度開始YMD);
-            } else {
+                    && 対象年度開始YMD.isBefore(異動データ.get受給者台帳().getNinteiYukoKikanKaishiYMD())) {
                 entity.setNinteiYukoKaishiDate(異動データ.get受給者台帳().getNinteiYukoKikanKaishiYMD());
+            } else {
+                entity.setNinteiYukoKaishiDate(対象年度開始YMD);
             }
             entity.setNinteiYukoShuryoDate(対象年度終了YMD);
             entity.setNinteiDate(異動データ.get受給者台帳().getNinteiYMD());
@@ -97,10 +97,10 @@ public class HanteiTaishoshaTempEditor {
             entity.setEdaNo(RString.EMPTY);
             entity.setJukyuShinseiJiyu(RString.EMPTY);
             if (異動データ.get総合事業対象者().getTekiyoKaishiYMD() != null
-                    && !対象年度開始YMD.isBefore(異動データ.get総合事業対象者().getTekiyoKaishiYMD())) {
+                    && 対象年度開始YMD.isBefore(異動データ.get総合事業対象者().getTekiyoKaishiYMD())) {
                 entity.setNinteiYukoKaishiDate(異動データ.get総合事業対象者().getTekiyoKaishiYMD());
             } else {
-                entity.setNinteiYukoKaishiDate(異動データ.get受給者台帳().getNinteiYukoKikanKaishiYMD());
+                entity.setNinteiYukoKaishiDate(対象年度開始YMD);
             }
             entity.setNinteiYukoShuryoDate(対象年度終了YMD);
             entity.setNinteiDate(異動データ.get総合事業対象者().getChecklistJisshiYMD());
