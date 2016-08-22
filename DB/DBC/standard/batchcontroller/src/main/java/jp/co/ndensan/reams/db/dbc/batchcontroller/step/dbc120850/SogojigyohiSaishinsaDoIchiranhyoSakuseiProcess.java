@@ -108,7 +108,7 @@ public class SogojigyohiSaishinsaDoIchiranhyoSakuseiProcess extends
             }
         }
         出力順 = get出力順();
-        count = INT_1;
+        count = 0;
     }
 
     @Override
@@ -143,9 +143,16 @@ public class SogojigyohiSaishinsaDoIchiranhyoSakuseiProcess extends
     @Override
     protected void usualProcess(SogojigyohiSaishinsaKetteiHokenshaInEntity entity) {
 
-        SogojigyohiSaishinsaKetteiHokenshaInReport report
-                = new SogojigyohiSaishinsaKetteiHokenshaInReport(service.setItem(entity, 並び順, parameter.get処理年月(), count));
-        report.writeBy(reportSourceWriter);
+        boolean 集計flg = false;
+        if (null != beforeEntity) {
+            if (!beforeEntity.get証記載保険者番号().equals(entity.get証記載保険者番号())) {
+                集計flg = true;
+            }
+            SogojigyohiSaishinsaKetteiHokenshaInReport report
+                    = new SogojigyohiSaishinsaKetteiHokenshaInReport(service.setItem(beforeEntity, 並び順,
+                                    parameter.get処理年月(), count, 集計flg));
+            report.writeBy(reportSourceWriter);
+        }
         if (null == beforeEntity) {
             eucCsvWriter.writeLine(service.toヘッダのデータ(entity, parameter));
         } else {
@@ -169,6 +176,10 @@ public class SogojigyohiSaishinsaDoIchiranhyoSakuseiProcess extends
     protected void afterExecute() {
 
         if (null != beforeEntity) {
+            SogojigyohiSaishinsaKetteiHokenshaInReport report
+                    = new SogojigyohiSaishinsaKetteiHokenshaInReport(service.setItem(beforeEntity, 並び順,
+                                    parameter.get処理年月(), count, true));
+            report.writeBy(reportSourceWriter);
             eucCsvWriter.writeLine(service.to集計項目(beforeEntity));
         }
         eucCsvWriter.close();
