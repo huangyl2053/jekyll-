@@ -1019,7 +1019,7 @@ public class GemmenJuminKihonHandler {
 //        KoseiShorikoaResult 計算結果 = FukaKeisan.createInstance().do調定計算(para);
 
         // TODO test用
-        年度分賦課減免リスト.get過年度3().hashCode();
+        年度分賦課減免リスト.hashCode();
         賦課年度 = new FlexibleYear("2016");
         FlexibleYear 調定年度 = new FlexibleYear("2016");
         TsuchishoNo 通知書番号 = new TsuchishoNo("0000000000005105");
@@ -1141,7 +1141,7 @@ public class GemmenJuminKihonHandler {
             減免情報パネル.getLblTokuchoGemmemGo5().setText(null);
         }
         if (特徴期別金額_2月 != null) {
-            特別徴収_合計 = 特別徴収_合計.add(特徴期別金額_4月);
+            特別徴収_合計 = 特別徴収_合計.add(特徴期別金額_2月);
             減免情報パネル.getLblTokuchoGemmemGo6().setText(DecimalFormatter.toコンマ区切りRString(特徴期別金額_2月, ゼロ_定値));
         } else {
             減免情報パネル.getLblTokuchoGemmemGo6().setText(null);

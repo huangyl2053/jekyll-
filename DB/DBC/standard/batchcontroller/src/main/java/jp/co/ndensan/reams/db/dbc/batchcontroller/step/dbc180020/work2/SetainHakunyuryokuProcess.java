@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 世帯員把握入力Tempの入力<br/>
+ * 世帯員把握入力Tempの入力のクラスです。<br/>
  * 処理詳細2.part1/処理詳細4.part1
  *
  * @reamsid_L DBC-4950-030 liuyang

@@ -196,8 +196,8 @@ public class KyodoJukyushaTaishoshaFinder {
      * @return 被保険者情報 IShikibetsuTaisho
      */
     public IShikibetsuTaisho get被保険者情報(IShikibetsuTaishoPSMSearchKey searchKey, HihokenshaNo 被保険者番号) {
-        KyodoIdoRenrakuhyoTaishoshaKensakuParameter parameter = new KyodoIdoRenrakuhyoTaishoshaKensakuParameter(
-                searchKey, 被保険者番号);
+        KyodoIdoRenrakuhyoTaishoshaKensakuParameter parameter = KyodoIdoRenrakuhyoTaishoshaKensakuParameter
+                .createSelectByKeyParam(searchKey, 被保険者番号);
         IKyodoJukyushaTaishoshaFinderMapper mapper = mapperProvider.create(IKyodoJukyushaTaishoshaFinderMapper.class);
         List<UaFt200FindShikibetsuTaishoEntity> 宛名PSMlist = mapper.get被保険者情報(parameter);
         if (宛名PSMlist == null || 宛名PSMlist.isEmpty()) {

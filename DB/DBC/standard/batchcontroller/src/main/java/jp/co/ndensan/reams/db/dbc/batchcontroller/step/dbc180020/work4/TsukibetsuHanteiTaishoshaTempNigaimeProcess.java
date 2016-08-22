@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * Work4_4_2Processです。
+ * TsukibetsuHanteiTaishoshaTempNigaimeProcessのクラスです。
  *
  * @reamsid_L DBC-4950-030 liuyang
  */

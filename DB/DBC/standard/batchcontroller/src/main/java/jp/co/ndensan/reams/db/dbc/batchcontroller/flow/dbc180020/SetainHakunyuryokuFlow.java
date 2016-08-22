@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc180020;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.dataclear.ClearSetaiinJohoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.dataclear.ClearSetainHakuNyuryokuTempProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.dataclear.ClearTmpSetaiShotokuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work1.HanteiKijunbiSetteiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work2.SetainHakunyuryokuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work2.SetainJohoSakuseiProcess;
@@ -36,7 +35,6 @@ public class SetainHakunyuryokuFlow
 
     private static final String 判定基準日設定 = "hanteiKijunbiSetteiProcess";
     private static final String CLEAR世帯員情報 = "clearSetaiinJohoTempProcess";
-    private static final String CLEAR世帯員所得情報 = "clearTmpSetaiShotokuProcess";
     private static final String CLEAR世帯員把握入力 = "clearSetainHakuNyuryokuTempProcess";
     private static final String 世帯員把握入力 = "setainHakunyuryokuProcess";
     private static final RString 世帯員把握BATCHID = new RString("SetaiShotokuKazeiHanteiFlow");
@@ -90,11 +88,6 @@ public class SetainHakunyuryokuFlow
     @Step(CLEAR世帯員情報)
     IBatchFlowCommand clearSetaiinJohoTempProcess() {
         return loopBatch(ClearSetaiinJohoTempProcess.class).arguments(processPrm).define();
-    }
-
-    @Step(CLEAR世帯員所得情報)
-    IBatchFlowCommand clearTmpSetaiShotokuProcess() {
-        return loopBatch(ClearTmpSetaiShotokuProcess.class).arguments(processPrm).define();
     }
 
     @Step(CLEAR世帯員把握入力)

@@ -131,7 +131,7 @@ public class DBC180020ProcessParameter implements IBatchProcessParameter {
     }
 
     /**
-     * toMyBatisParameter
+     * toMyBatisParameterのメソッドです。
      *
      * @return DBC180020MyBatisParameter
      */
@@ -143,7 +143,7 @@ public class DBC180020ProcessParameter implements IBatchProcessParameter {
     }
 
     /**
-     * toMyBatisParameter
+     * toMyBatisParameterのメソッドです。
      *
      * @param index int
      * @return DBC180020MyBatisParameter
@@ -156,7 +156,7 @@ public class DBC180020ProcessParameter implements IBatchProcessParameter {
     }
 
     /**
-     * toMyBatisParameter
+     * toMyBatisParameterのメソッドです。
      *
      * @param 異動 boolean
      * @return DBC180020MyBatisParameter
@@ -174,7 +174,7 @@ public class DBC180020ProcessParameter implements IBatchProcessParameter {
     }
 
     /**
-     * toMyBatisParameter
+     * toMyBatisParameterのメソッドです。
      *
      * @param taishoShuryoYMD List<RString>
      * @return DBC180020MyBatisParameter

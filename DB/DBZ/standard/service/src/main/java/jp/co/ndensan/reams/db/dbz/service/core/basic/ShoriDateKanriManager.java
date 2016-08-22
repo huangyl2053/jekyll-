@@ -260,6 +260,36 @@ public class ShoriDateKanriManager {
     }
 
     /**
+     * 処理日付管理リスト{@link List<ShoriDateKanri>}を保存します。
+     *
+     * @param 処理日付管理登録リスト {@link List<ShoriDateKanri>}
+     * @param 処理日付管理削除リスト {@link List<ShoriDateKanri>}
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean save処理日付管理リスト(List<ShoriDateKanri> 処理日付管理登録リスト,
+            List<ShoriDateKanri> 処理日付管理削除リスト) {
+        requireNonNull(処理日付管理登録リスト, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日付管理登録リスト"));
+
+        for (ShoriDateKanri 処理日付管理マスタ : 処理日付管理削除リスト) {
+            DbT7022ShoriDateKanriEntity entity = 処理日付管理マスタ.toEntity();
+            entity.setState(EntityDataState.Deleted);
+            if (1 != dac.saveOrDeletePhysicalBy(entity)) {
+                return false;
+            }
+        }
+
+        for (ShoriDateKanri 処理日付管理マスタ : 処理日付管理登録リスト) {
+            DbT7022ShoriDateKanriEntity entity = 処理日付管理マスタ.toEntity();
+            entity.setState(EntityDataState.Added);
+            if (1 != dac.save(処理日付管理マスタ.toEntity())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * 処理日付管理マスタを返します。
      *
      * @param サブ業務コード SubGyomuCode
@@ -648,5 +678,21 @@ public class ShoriDateKanriManager {
         }
 
         return result;
+    }
+
+    /**
+     * 処理日付管理マスタ{@link ShoriDateKanri}を保存します。
+     *
+     * @param 処理日付管理マスタ {@link ShoriDateKanri}
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean save処理日付管理マスタForDeletePhysical(ShoriDateKanri 処理日付管理マスタ) {
+        requireNonNull(処理日付管理マスタ, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日付管理マスタ"));
+        // TODO
+//        if (!処理日付管理マスタ.hasChanged()) {
+//            return false;
+//        }
+        return 1 == dac.saveOrDeletePhysicalBy(処理日付管理マスタ.toEntity());
     }
 }

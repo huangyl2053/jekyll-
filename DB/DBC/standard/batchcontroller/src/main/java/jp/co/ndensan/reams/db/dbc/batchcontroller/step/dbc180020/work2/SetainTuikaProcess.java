@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 世帯員情報Tempの作成<br/>
+ * 世帯員情報Tempの作成のクラスです。<br/>
  * 処理詳細2.part4
  *
  * @reamsid_L DBC-4950-030 liuyang

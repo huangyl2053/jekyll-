@@ -29,12 +29,4 @@ public class SetaiHaakuEntity implements IDbAccessable {
     private FlexibleYear shotokuNendo;
     private RString jushochiTokureiFlag;
 
-    /**
-     * 識別コード初期化のメソッドです。
-     */
-    public void 識別コード初期化() {
-        if (this.shikibetsuCode == null || this.shikibetsuCode.isEmpty()) {
-            this.setShikibetsuCode(this.shikibetsuCode2);
-        }
-    }
 }

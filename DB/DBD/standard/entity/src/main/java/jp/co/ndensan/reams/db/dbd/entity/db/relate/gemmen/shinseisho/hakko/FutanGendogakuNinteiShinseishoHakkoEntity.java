@@ -9,10 +9,14 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護保険負担限度額認定申請書Entityクラスです。
@@ -31,7 +35,11 @@ public class FutanGendogakuNinteiShinseishoHakkoEntity {
     private LasdecCode 市町村コード;
     private LasdecCode 広住特措置元市町村コード;
     private JigyoshaNo 事業者名称;
-    private YubinNo 郵便場号;
+    private YubinNo 郵便番号;
     private AtenaJusho 事業者住所;
     private TelNo 電話番号;
+    private ChoikiCode 町域コード;
+    private GyoseikuCode 行政区コード;
+    private RString 氏名カナ;
+    private FlexibleDate 生年月日;
 }

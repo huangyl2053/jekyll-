@@ -35,4 +35,5 @@ public class KyufuJissekiHedajyoho1 {
     private FlexibleDate 生年月日;
     private Association 地方公共団体;
     private IAtesaki 宛先情報;
+    private FlexibleDate 認定年月日;
 }

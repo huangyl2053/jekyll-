@@ -16,13 +16,14 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 世帯員情報Tempの作成<br/>
+ * 世帯員情報Tempの作成のクラスです。<br/>
  * 処理詳細2.part3/処理詳細4.part3
  *
  * @reamsid_L DBC-4950-030 liuyang
  */
 public class SetainJohoSakuseiProcess extends BatchProcessBase<SetainJohoTempEntity> {
 
+    private static final RString ONE = new RString("1");
     private static final RString TABLENAME = new RString("SetainJohoTemp");
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "riyoshafutanwariaihantei.IRiyoshaFutanwariaiMapper.select世帯員情報");
@@ -43,7 +44,9 @@ public class SetainJohoSakuseiProcess extends BatchProcessBase<SetainJohoTempEnt
 
     @Override
     protected void process(SetainJohoTempEntity entity) {
-        entity.本人識別コード初期化();
+        if (ONE.equals(entity.getSetaiShotokuHonninKubun())) {
+            entity.setHoninShikibetsuCode(entity.getShikibetsuCode());
+        }
         世帯員情報Temp.insert(entity);
     }
 }

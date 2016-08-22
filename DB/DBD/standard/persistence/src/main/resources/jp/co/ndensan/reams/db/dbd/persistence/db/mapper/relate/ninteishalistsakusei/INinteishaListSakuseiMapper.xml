@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-3830-040 tianyh  -->
+<!-- 概要： 社会福祉法人軽減情報を抽出する用XMLです。-->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninteishalistsakusei.INinteishaListSakuseiMapper">
+    <select resultOrdered="true" id="select社会福祉法人軽減情報"  resultMap="NinteishaListSakuseiEntityResult"
+    parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.ninteishalistsakusei.NinteishaListSakuseiParameter" fetchSize="500">
+    <include refid="selectNinteishaListSakuseiEntityList" />
+  </select>
+  <resultMap id="NinteishaListSakuseiEntityResult" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd200004.ShakaiFukushiHojinKeigenGaitoshaIchiranEntity">
+        <id property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="本人課税区分" column="本人課税区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="is老齢福祉年金受給者" column="is老齢福祉年金受給者"  typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="is所得税課税者" column="is所得税課税者"  typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="is生活保護受給者" column="is生活保護受給者"  typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="要介護状態区分コード" column="yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="厚労省IF識別コード" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定年月日" column="ninteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定有効期間開始日" column="ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定有効期間終了日" column="ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="旧措置者フラグ" column="kyuSochishaFlag"  typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="入所施設コード" column="入所施設コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="入所施設名称" column="入所施設名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="計画事業者番号" column="計画事業者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="計画事業者名" column="計画事業者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="is自己作成" column="is自己作成"  typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <association  property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <association  property="社会福祉法人等利用者負担軽減の情報"  
+resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.shafukukeigen.IShafukuRiyoshaFutanKeigenMapper.resultMap_ShafukuRiyoshaFutanKeigenEntity"/>
+        <collection property="世帯員リスト" resultMap="resultMap_setaiinshotokujoho"/>
+    </resultMap>
+    <sql id="selectNinteishaListSakuseiEntityList">
+        SELECT
+        減免減額対象者判定用根拠."被保険者番号",
+        減免減額対象者判定用根拠."本人課税区分",
+        減免減額対象者判定用根拠."is老齢福祉年金受給者",
+        減免減額対象者判定用根拠."is所得税課税者",
+        減免減額対象者判定用根拠."is生活保護受給者",
+        宛名.*,
+        認定情報.*,
+        要介護認定申請情報."koroshoIfShikibetsuCode",
+        受給者台帳Newest."kyuSochishaFlag",
+        社会福祉法人等利用者負担軽減.*,
+        減免減額申請.*,
+        世帯員情報.*,
+        施設入所情報.*
+        FROM
+        "taishoShaHanteiYoukonkyoItokiTemp" AS 減免減額対象者判定用根拠
+        LEFT JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
+        AS 宛名
+        ON
+        宛名."shikibetsuCode" = 減免減額対象者判定用根拠."本人識別コード"
+        LEFT JOIN
+         (
+           SELECT 
+                有効受給認定結果."hihokenshaNo",
+                有効受給認定結果."yokaigoJotaiKubunCode",
+                有効受給認定結果."ninteiYMD",
+                有効受給認定結果."ninteiYukoKikanKaishiYMD",
+                有効受給認定結果."ninteiYukoKikanShuryoYMD",
+                有効受給認定結果."shinseishoKanriNo"
+                FROM(
+                    SELECT 
+                         * ,ROW_NUMBER() OVER(PARTITION BY "shichosonCode" ORDER BY "ninteiYMD" DESC) AS 受給者台帳_番号  
+                         FROM 
+                           rgdb."DbT4001JukyushaDaicho" AS 受給者台帳
+                         WHERE 
+                            受給者台帳."ninteiYukoKikanKaishiYMD"<![CDATA[<=]]>#{課税判定等基準日}
+                            AND #{課税判定等基準日}<![CDATA[<=]]>受給者台帳."ninteiYukoKikanShuryoYMD"
+                            AND 受給者台帳."logicalDeletedFlag"=false
+                            AND 受給者台帳."yukoMukoKubun" = '1'
+                      ) AS 有効受給認定結果
+        WHERE 有効受給認定結果."受給者台帳_番号" = '1'
+       )AS 認定情報
+            ON 認定情報."hihokenshaNo" = 減免減額対象者判定用根拠."被保険者番号"
+        LEFT JOIN 
+            rgdb."DbT4101NinteiShinseiJoho" AS 要介護認定申請情報
+            ON 
+              認定情報."shinseishoKanriNo" = 要介護認定申請情報."shinseishoKanriNo"
+        LEFT JOIN  
+              rgdb."DbV4001JukyushaDaicho" AS 受給者台帳Newest
+              ON 
+              受給者台帳Newest."hihokenshaNo" = 減免減額対象者判定用根拠."被保険者番号"
+        LEFT JOIN 
+              rgdb."DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen" AS 社会福祉法人等利用者負担軽減
+              ON 
+              社会福祉法人等利用者負担軽減."hihokenshaNo"= 減免減額対象者判定用根拠."被保険者番号"
+        LEFT JOIN 
+               rgdb."DbT4010GemmenGengakuShinsei" AS 減免減額申請
+               ON
+               減免減額申請."hihokenshaNo" = 社会福祉法人等利用者負担軽減."hihokenshaNo"
+               AND 
+               減免減額申請."shinseiRirekiNo" = 社会福祉法人等利用者負担軽減."rirekiNo"
+        LEFT JOIN
+               (
+               SELECT 
+                     世帯員所得情報一時."hihokenshaNo",
+                     世帯員所得情報一時."shikibetsuCode",
+                     世帯員所得情報一時."kazeiKubun",
+                     世帯員所得情報一時."kazeiShotokuGaku",
+                     世帯員宛名.*
+               FROM
+                     "TmpSetaiShotoku" AS 世帯員所得情報一時
+               INNER JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
+                      AS 世帯員宛名
+               ON 
+               世帯員宛名."shikibetsuCode" = 世帯員所得情報一時."shikibetsuCode"
+               WHERE 
+               <![CDATA[世帯員所得情報一時."honninKubun"<>'1']]>
+              <if test="世帯表示 ==2">
+                    AND false
+              </if>
+        )AS 世帯員情報
+               ON 世帯員情報."hihokenshaNo"=減免減額対象者判定用根拠."被保険者番号"
+            LEFT JOIN(
+                SELECT 
+                        居宅計画届出."hihokenshaNo",
+                        居宅給付計画事業者作成."keikakuJigyoshaNo" AS 計画事業者番号,
+                        居宅計画事業者."jigyoshaName" AS  計画事業者名,
+                       (CASE WHEN 居宅計画事業者."jigyoshaName" IS NULL THEN false ELSE true END) AS is自己作成
+                    FROM(
+                        SELECT
+                             *,ROW_NUMBER() OVER(PARTITION BY "hihokenshaNo" ORDER BY "todokedeYMD" DESC ) AS 居宅計画届出_番号
+                        FROM
+                            rgdb."DbT3005KyotakuKeikakuTodokede" AS 居宅給付計画届出
+                        WHERE
+                            居宅給付計画届出."todokedeYMD"<![CDATA[<=]]>#{課税判定等基準日}
+                         )AS 居宅計画届出
+               LEFT JOIN
+                     rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS 居宅給付計画事業者作成
+                     ON
+                     居宅給付計画事業者作成."hihokenshaNo"=居宅計画届出."hihokenshaNo"
+                     AND
+                     居宅給付計画事業者作成."taishoYM"=居宅計画届出."taishoYM"
+                     AND
+                     居宅給付計画事業者作成."rirekiNo"=居宅計画届出."rirekiNo"
+               LEFT JOIN(
+                    SELECT *
+                    FROM(
+                        SELECT 
+                        *,ROW_NUMBER() OVER (PARTITION BY "jigyoshaNo" ORDER BY "yukoKaishiYMD" DESC) AS 計画事業者_番号
+                        FROM 
+                        rgdb."DbT7060KaigoJigyosha" AS 介護事業者
+                        WHERE 
+                        介護事業者."yukoKaishiYMD"<![CDATA[<=]]>#{課税判定等基準日}
+                        )AS A 
+                        WHERE
+                        計画事業者_番号 = '1'
+                    )AS 居宅計画事業者    
+                        ON 居宅計画事業者."jigyoshaName" = 居宅給付計画事業者作成."keikakuJigyoshaNo"
+                     WHERE
+                        居宅計画届出_番号 = '1'
+                  )AS 居宅サービス計画
+                      ON 居宅サービス計画."hihokenshaNo"=減免減額対象者判定用根拠."被保険者番号"
+                  LEFT JOIN(
+                    SELECT 
+                           介護保険施設入退所."shikibetsuCode",
+                           介護保険施設入退所."nyushoShisetsuCode" AS 入所施設コード,
+                           入所施設."jigyoshaName" AS 入所施設名称
+                    FROM rgdb."DbT1004ShisetsuNyutaisho" AS 介護保険施設入退所
+                    INNER JOIN(
+                        SELECT
+                        * ,ROW_NUMBER() OVER (PARTITION BY "jigyoshaNo"  ORDER BY "yukoKaishiYMD" DESC) AS 入所施設_番号
+                        FROM
+                               rgdb."DbT7060KaigoJigyosha"
+                        WHERE
+                               rgdb."DbT7060KaigoJigyosha"."yukoKaishiYMD"<![CDATA[<=]]>#{課税判定等基準日}
+                      )AS 入所施設
+                         ON 
+                              入所施設."jigyoshaNo" = 介護保険施設入退所."nyushoShisetsuCode"
+                         WHERE 
+                                入所施設.入所施設_番号 = '1'
+                         AND
+                                介護保険施設入退所."nyushoYMD"<![CDATA[<=]]>#{課税判定等基準日}
+                         AND 
+                                #{課税判定等基準日}<![CDATA[<=]]>介護保険施設入退所."taishoYMD"
+                  )AS  施設入所情報
+                        ON 施設入所情報."shikibetsuCode" = 減免減額対象者判定用根拠."本人識別コード"
+                  WHERE (
+                        減免減額申請."gemmenGengakuShurui" = '04'
+                     OR 減免減額申請."gemmenGengakuShurui" IS NULL 
+                  )
+                  AND (
+                        社会福祉法人等利用者負担軽減."hihokenshaNo"  IS NULL 
+                        OR(
+                            1=1
+                             <if test="対象期間指定 ==1">
+                                 AND 
+                                 (
+                                 社会福祉法人等利用者負担軽減."ketteiKubun"='1'
+                                 AND
+                                 #{対象年度の開始日}<![CDATA[<=]]>社会福祉法人等利用者負担軽減."tekiyoKaishiYMD"
+                                 AND
+                                 社会福祉法人等利用者負担軽減."tekiyoShuryoYMD"<![CDATA[<=]]>#{対象年度の開始日}
+                                 )
+                                  <if test="抽出対象 ==1">
+                                      OR
+                                      (
+                                      社会福祉法人等利用者負担軽減."ketteiKubun" IS NULL 
+                                      AND
+                                      #{対象年度の開始日}<![CDATA[<=]]>社会福祉法人等利用者負担軽減."shinseiYMD"
+                                      AND
+                                      社会福祉法人等利用者負担軽減."shinseiYMD"<![CDATA[<=]]>#{対象年度の開始日}
+                                      )
+                                  </if>
+                             </if>
+                              <if test="対象期間指定 ==2">
+                                 AND 
+                                (
+                                 社会福祉法人等利用者負担軽減."ketteiKubun"='1'
+                                 AND
+                                 社会福祉法人等利用者負担軽減."tekiyoKaishiYMD"<![CDATA[<=]]>#{基準日}
+                                 AND
+                                 #{基準日}<![CDATA[<=]]>社会福祉法人等利用者負担軽減."tekiyoShuryoYMD"
+                                 )
+                                  <if test="抽出対象 ==1">
+                                      OR
+                                      (   
+                                            社会福祉法人等利用者負担軽減."ketteiKubun" IS NULL 
+                                        AND
+                                             社会福祉法人等利用者負担軽減."shinseiYMD"<![CDATA[<=]]>#{基準日}
+                                        )
+                                  </if>
+                             </if>
+                             
+                        )
+                  )
+               <if test="対象リスト==2">
+               <foreach collection="世帯非課税等" index="index" item="世帯非課税" open="" separator="" close="">
+                     <if test="世帯非課税==1">
+                         AND 減免減額対象者判定用根拠."世帯課税区分"='2'
+                     </if>
+                     <if test="世帯非課税==2">
+                         AND 減免減額対象者判定用根拠."所得税課税世帯"=FALSE
+                     </if>
+                     <if test="世帯非課税==3">
+                         AND 減免減額対象者判定用根拠."本人課税区分"='1'
+                     </if>
+                     <if test="世帯非課税==4">
+                         AND 減免減額対象者判定用根拠."is老齢福祉年金受給者"=TRUE
+                     </if>
+                     <if test="世帯非課税==5">
+                         AND 減免減額対象者判定用根拠."is生活保護受給者"=TRUE
+                     </if>
+              </foreach>
+            </if>
+           ${出力順}
+    </sql>
+    
+    <resultMap id="resultMap_setaiinshotokujoho" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd200004.Setaiinshotokujoho" autoMapping="true">
+        <id property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="本人課税区分" column="kazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="課税所得額" column="kazeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <association  property="世帯員宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+    </resultMap>
+  </mapper>

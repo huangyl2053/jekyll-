@@ -75,7 +75,6 @@ public class ShokkenTorikeshiIchibuNinteiValidationHandler {
         validateResult.add(check有効開始日());
         validateResult.add(check有効終了日());
         validateResult.add(check期間日());
-        validateResult.add(check期間日());
         return validateResult;
     }
 

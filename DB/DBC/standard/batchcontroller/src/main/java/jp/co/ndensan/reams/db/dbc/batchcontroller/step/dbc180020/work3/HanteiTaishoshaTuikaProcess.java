@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 判定対象者Tempの入力<br/>
+ * 判定対象者Tempの入力のクラスです。<br/>
  * 処理詳細3
  *
  * @reamsid_L DBC-4950-030 liuyang

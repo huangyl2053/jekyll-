@@ -21,17 +21,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class SeikatsuHogoGaitoJohoTempEntity extends DbTableEntityBase<SeikatsuHogoGaitoJohoTempEntity> implements IDbAccessable {
 
-    //対象年度
     private RString taishoNendo;
-    //対象月
     private RString taishoTsuki;
-    //識別コード
     @PrimaryKey
     private ShikibetsuCode shikibetsuCode;
-    //受給開始日
     @PrimaryKey
     private RString jukyuKaishiYMD;
-    //受給廃止日
     private RString jukyuHaishiYMD;
 
 }

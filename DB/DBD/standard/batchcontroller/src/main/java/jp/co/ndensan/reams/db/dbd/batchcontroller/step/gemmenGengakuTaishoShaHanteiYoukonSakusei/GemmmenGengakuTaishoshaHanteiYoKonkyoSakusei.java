@@ -40,7 +40,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBase<TaishouJohoEntity> {
 
     private static final RString MYBATIS_SELECT_ID_対象情報 = new RString("jp.co.ndensan.reams.db.dbd.persistence"
-            + ".db.mapper.relate.gemmenGengakuTaishoShaHanteiYoukonSakusei.ITaishouJohoMapper.get対象情報");
+            + ".db.mapper.relate.gemmengengakutaishoshahanteiyoukonsakusei.ITaishouJohoMapper.get対象情報");
     private GemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter processParamter;
     private IKojin iKojin;
     private ISetai isetai;

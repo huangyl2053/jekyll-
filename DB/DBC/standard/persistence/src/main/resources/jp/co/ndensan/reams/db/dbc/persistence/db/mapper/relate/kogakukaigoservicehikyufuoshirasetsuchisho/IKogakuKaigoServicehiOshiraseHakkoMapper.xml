@@ -344,9 +344,9 @@
         "ShikibetsuTaisho"."renrakusaki1" AS "telNoChohyo",
         "ShikibetsuTaisho"."kojinNo" AS "kojinNoChohyo"
         <if test="hasValidKamoku">
-            ,"Koza"."kinyuKikanCode" AS "kinyuKikanCodeChohyo",
-            "Koza"."tsuchoKigo" AS "tsuchoKigoChohyo",
-            "Koza"."tsuchoNo" AS "tsuchoNoChohyo"
+            ,"Koza"."uaT0310Koza_kinyuKikanCode" AS "kinyuKikanCodeChohyo",
+            "Koza"."uaT0310Koza_tsuchoKigo" AS "tsuchoKigoChohyo",
+            "Koza"."uaT0310Koza_tsuchoNo" AS "tsuchoNoChohyo"
         </if>
         FROM
         "ShinseiJohoTemp"

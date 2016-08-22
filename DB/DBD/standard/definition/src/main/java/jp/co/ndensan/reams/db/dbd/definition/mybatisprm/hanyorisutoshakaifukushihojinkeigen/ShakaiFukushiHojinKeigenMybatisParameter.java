@@ -79,12 +79,12 @@ public class ShakaiFukushiHojinKeigenMybatisParameter implements IMyBatisParamet
     private boolean has行政区From;
     private boolean has行政区To;
     private boolean is地区;
-    private boolean has地区１From;
-    private boolean has地区１To;
-    private boolean has地区２From;
-    private boolean has地区２To;
-    private boolean has地区３From;
-    private boolean has地区３To;
+    private boolean has地区1From;
+    private boolean has地区1To;
+    private boolean has地区2From;
+    private boolean has地区2To;
+    private boolean has地区3From;
+    private boolean has地区3To;
     private final RString psmShikibetsuTaisho;
     private final RString psmAtesaki;
 
@@ -174,7 +174,8 @@ public class ShakaiFukushiHojinKeigenMybatisParameter implements IMyBatisParamet
             if (nullHandan(年齢範囲) && nullHandan(年齢範囲.getFrom())) {
                 has年齢From = true;
                 年齢From年月日 = get逆算した生年月日From(年齢範囲.getFrom());
-            } else if (nullHandan(年齢範囲) && nullHandan(年齢範囲.getTo())) {
+            }
+            if (nullHandan(年齢範囲) && nullHandan(年齢範囲.getTo())) {
                 has年齢To = true;
                 年齢To年月日 = get逆算した生年月日To(年齢範囲.getTo());
             }
@@ -184,7 +185,8 @@ public class ShakaiFukushiHojinKeigenMybatisParameter implements IMyBatisParamet
             if (nullHandan(生年月日範囲) && nullHandan(生年月日範囲.getFrom())) {
                 has生年月日From = true;
                 生年月日From = new FlexibleDate(生年月日範囲.getFrom().toDateString());
-            } else if (nullHandan(生年月日範囲) && nullHandan(生年月日範囲.getTo())) {
+            }
+            if (nullHandan(生年月日範囲) && nullHandan(生年月日範囲.getTo())) {
                 has生年月日To = true;
                 生年月日To = new FlexibleDate(生年月日範囲.getTo().toDateString());
             }
@@ -194,7 +196,7 @@ public class ShakaiFukushiHojinKeigenMybatisParameter implements IMyBatisParamet
     private void set市町村コード() {
         if (nullHandan(atenacyusyutsujyoken.getShichoson_Code())) {
             has市町村コード = true;
-            市町村コード = atenacyusyutsujyoken.getShichoson_Code().code市町村RString();
+            市町村コード = atenacyusyutsujyoken.getShichoson_Code().value();
         }
     }
 
@@ -238,27 +240,27 @@ public class ShakaiFukushiHojinKeigenMybatisParameter implements IMyBatisParamet
     private void set地区情報() {
         if (nullHandan(atenacyusyutsujyoken.getChiku1_From())) {
             地区選択コードFrom = atenacyusyutsujyoken.getChiku1_From();
-            has地区１From = true;
+            has地区1From = true;
         }
         if (nullHandan(atenacyusyutsujyoken.getChiku1_To())) {
             地区選択コードTo = atenacyusyutsujyoken.getChiku1_To();
-            has地区１To = true;
+            has地区1To = true;
         }
         if (nullHandan(atenacyusyutsujyoken.getChiku2_From())) {
             地区選択コードFrom = atenacyusyutsujyoken.getChiku2_From();
-            has地区２From = true;
+            has地区2From = true;
         }
         if (nullHandan(atenacyusyutsujyoken.getChiku2_To())) {
             地区選択コードTo = atenacyusyutsujyoken.getChiku2_To();
-            has地区２To = true;
+            has地区2To = true;
         }
         if (nullHandan(atenacyusyutsujyoken.getChiku3_From())) {
             地区選択コードFrom = atenacyusyutsujyoken.getChiku3_From();
-            has地区３From = true;
+            has地区3From = true;
         }
         if (nullHandan(atenacyusyutsujyoken.getChiku3_To())) {
             地区選択コードTo = atenacyusyutsujyoken.getChiku3_To();
-            has地区３To = true;
+            has地区3To = true;
         }
     }
 

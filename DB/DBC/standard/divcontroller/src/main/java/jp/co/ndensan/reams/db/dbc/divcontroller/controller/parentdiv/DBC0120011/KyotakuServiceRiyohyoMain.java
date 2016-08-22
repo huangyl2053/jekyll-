@@ -89,7 +89,6 @@ public class KyotakuServiceRiyohyoMain {
         HihokenshaNo 被保険者番号 = 居宅給付計画届出.get被保険者番号();
         FlexibleYearMonth 対象年月 = 居宅給付計画届出.get対象年月();
         int 履歴番号 = 居宅給付計画届出.get履歴番号();
-        //TODO
         div.getCcdServiceRiyohyoInfo().initialize(追加, null, 対象年月, 被保険者番号, 総合事業区分, 履歴番号);
         return ResponseData.of(div).setState(DBC0120011StateName.明細表示);
     }
@@ -172,6 +171,17 @@ public class KyotakuServiceRiyohyoMain {
         KyotakuServiceRiyohyoMainHandler handler = getHandler(div);
         handler.initializeDisplay(被保険者番号);
         return ResponseData.of(div).setState(DBC0120011StateName.初期表示);
+    }
+
+    /**
+     * 「利用月一覧に戻る」ボタンクリック時の事件です。
+     *
+     * @param div JikoFutangakuHoseiDiv
+     * @return ResponseData
+     */
+    public ResponseData<KyotakuServiceRiyohyoMainDiv> onClick_btnBackRiyoNengetsuIchiran(
+            KyotakuServiceRiyohyoMainDiv div) {
+        return ResponseData.of(div).setState(DBC0120011StateName.届出表示);
     }
 
     private KyotakuServiceRiyohyoMainHandler getHandler(KyotakuServiceRiyohyoMainDiv div) {

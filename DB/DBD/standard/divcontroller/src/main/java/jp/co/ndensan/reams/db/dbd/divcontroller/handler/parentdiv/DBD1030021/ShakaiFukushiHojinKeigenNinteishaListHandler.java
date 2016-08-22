@@ -158,6 +158,7 @@ public class ShakaiFukushiHojinKeigenNinteishaListHandler {
      * @return DBD200004_ShakaiFukushiHojinKeigenNinteishaBatchParameter
      */
     public DBD200004_ShakaiFukushiHojinKeigenNinteishaBatchParameter createParameter() {
+        DBD200004_ShakaiFukushiHojinKeigenNinteishaBatchParameter batchParameter = new DBD200004_ShakaiFukushiHojinKeigenNinteishaBatchParameter();
         RString 対象リスト;
         RString 対象期間指定;
         FlexibleDate 対象年度の開始年月日 = new FlexibleDate("");
@@ -177,9 +178,13 @@ public class ShakaiFukushiHojinKeigenNinteishaListHandler {
         if (div.getRadTaishoList().getSelectedIndex() == NO_0) {
             対象リスト = TargetList.認定者リスト.getコード();
             帳票ID = new RString("DBD200015_ShakaiFukushiHojinKeigenNinteishaIchiran");
+            batchParameter.set帳票ID(帳票ID);
+            batchParameter.set対象リスト(対象リスト);
         } else {
             対象リスト = TargetList.該当者リスト.getコード();
             帳票ID = new RString("DBD200004_ShakaiFukushiHojinKeigenGaitoshaIchiran");
+            batchParameter.set帳票ID(帳票ID);
+            batchParameter.set対象リスト(対象リスト);
         }
         if (div.getRadTaishoKikanShitei().getSelectedIndex() == NO_0) {
             対象期間指定 = TaishoKikan.対象年度.getコード();
@@ -246,8 +251,7 @@ public class ShakaiFukushiHojinKeigenNinteishaListHandler {
             }
         }
 
-        DBD200004_ShakaiFukushiHojinKeigenNinteishaBatchParameter batchParameter = new DBD200004_ShakaiFukushiHojinKeigenNinteishaBatchParameter();
-        batchParameter.setCSV出力設定(出力設定);
+        batchParameter.set出力設定(出力設定);
         batchParameter.set世帯表示(世帯表示);
         batchParameter.set世帯非課税等(世帯非課税等);
         batchParameter.set受給者区分(受給者区分);

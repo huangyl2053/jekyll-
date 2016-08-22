@@ -106,8 +106,8 @@
                 </if>
             </if>		
             <if test="has市町村コード">
-                AND (最新被保台帳."shichosonCode"　=　#{shichosoncode}
-                OR 最新被保台帳."koikinaiTokureiSochimotoShichosonCode" = #{shichosoncode})
+                AND (最新被保台帳."shichosonCode"=#{市町村コード}
+                OR 最新被保台帳."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード})
             </if>
             <if test="is住所">
                 <if test="has地区選択From">
@@ -126,22 +126,22 @@
                 </if>
             </if>
             <if test="is地区">
-                <if test="has地区１From">
+                <if test="has地区1From">
                     AND #{地区選択コードFrom} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode1"
                 </if>
-                <if test="has地区１To">
+                <if test="has地区1To">
                     AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode1" <![CDATA[<=]]> #{地区選択コードTo}
                 </if>
-                <if test="has地区２From">
+                <if test="has地区2From">
                     AND #{地区選択コードFrom} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode2"
                 </if>
-                <if test="has地区２To">
+                <if test="has地区2To">
                     AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode2" <![CDATA[<=]]> #{地区選択コードTo}
                 </if>
-                <if test="has地区３From">
+                <if test="has地区3From">
                     AND #{地区選択コードFrom} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode3"
                 </if>
-                <if test="has地区３To">
+                <if test="has地区3To">
                     AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode3" <![CDATA[<=]]> #{地区選択コードTo}
                 </if>
             </if>

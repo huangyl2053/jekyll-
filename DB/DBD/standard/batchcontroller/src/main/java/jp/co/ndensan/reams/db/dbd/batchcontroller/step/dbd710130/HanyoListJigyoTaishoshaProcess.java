@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd710130;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuHohoKubun;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuKomokuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd710130.HanyoListJigyoTaishoshaProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutojigyotaishosha.HanyoRisutoJigyoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutojigyotaishosha.HanyoRisutoJigyoTaishoshaEucCsvEntity;
@@ -82,9 +82,11 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
     private static final RString CHIKI_1 = new RString("地区１");
     private static final RString CHIKI_2 = new RString("地区２");
     private static final RString CHIKI_3 = new RString("地区３");
+    private static final RString JUSHO = new RString("町域：");
     private static final RString GYOSEIKU = new RString("行政区");
     private static final RString JUSYO = new RString("住所");
     private static final RString NENLEI = new RString("年齢");
+    private static final RString NENLEIKIZYUNNICHI = new RString("年齢基準日:");
     private static final RString SAI = new RString("歳");
     private static final RString SEINENGAPPI = new RString("生年月日");
     private static final RString SPACE = new RString(" ");
@@ -371,14 +373,14 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
             IAssociationFinder finder = AssociationFinderFactory.createInstance();
             Association 地方公共団体 = finder.getAssociation(processParamter.getAtenacyusyutsujyoken().getShichoson_Code());
             builder.append(地方公共団体.get市町村名());
-            出力条件.add(builder.toRString());
+            builder.append(COMMA);
         }
         if (null != processParamter.getKizyunnichi()) {
             builder.append(KIZYUNNICHI);
             builder.append(processParamter.getKizyunnichi().wareki().toDateString());
-            出力条件.add(builder.toRString());
+            builder.append(COMMA);
         }
-        builder.append(ChushutsuHohoKubun.toValue(processParamter.getCyusyutsuhohokubun()));
+        builder.append(ChushutsuKomokuKubun.toValue(processParamter.getCyusyutsukomokukubun()).get名称());
         builder.append(SPACE);
         builder.append(COLON);
         builder.append(SPACE);
@@ -391,9 +393,14 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
             builder.append(SPACE);
             builder.append(processParamter.getHitsukehanito().wareki().toDateString());
         }
-        出力条件.add(builder.toRString());
+        builder.append(COMMA);
         if (processParamter.isJigyotaishoshadatacyusyutsu()) {
-            出力条件.add(CHOKINNOMI);
+            builder.append(CHOKINNOMI);
+            builder.append(COMMA);
+        }
+        List<RString> builderList = builder.toRString().substring(0, builder.toRString().length() - 1).split(COMMA.toString());
+        for (RString build : builderList) {
+            出力条件.add(build);
         }
         if (null != processParamter.getAtenacyusyutsujyoken()
                 && null != processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun()) {
@@ -401,7 +408,10 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
         }
         if (null != processParamter.getAtenacyusyutsujyoken()
                 && null != processParamter.getAtenacyusyutsujyoken().getChiku_Kubun()) {
-            出力条件.add(get地区選択区分情報());
+            List<RString> 地区区分情報 = get地区選択区分情報().substring(0, get地区選択区分情報().length() - 1).split(COMMA.toString());
+            for (RString 情報 : 地区区分情報) {
+                出力条件.add(情報);
+            }
         }
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 new RString("DBD701013"),
@@ -419,29 +429,39 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
 
     private RString get宛名抽出区分情報() {
         RStringBuilder builder = new RStringBuilder();
-        if (NenreiSoChushutsuHoho.年齢範囲.equals(processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun())) {
+        if (NenreiSoChushutsuHoho.年齢範囲.equals(processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun())
+                && processParamter.getAtenacyusyutsujyoken().getNenreiKijunbi() != null) {
             builder.append(NENLEI);
             builder.append(COLON);
-            if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom()) {
+            if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange()
+                    && null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom()) {
                 builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom().toString()));
                 builder.append(SAI);
             }
             builder.append(SPACE);
             builder.append(カラ);
-            if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo()) {
+            if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange()
+                    && null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo()) {
                 builder.append(SPACE);
                 builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo().toString()));
                 builder.append(SAI);
             }
+            builder.append(SPACE);
+            builder.append(左記号);
+            builder.append(NENLEIKIZYUNNICHI);
+            builder.append(processParamter.getAtenacyusyutsujyoken().getNenreiKijunbi().wareki().toDateString());
+            builder.append(右記号);
         } else if (NenreiSoChushutsuHoho.生年月日範囲.equals(processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun())) {
             builder.append(SEINENGAPPI);
             builder.append(COLON);
-            if (null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom()) {
+            if (null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange()
+                    && null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom()) {
                 builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom().toString()));
             }
             builder.append(SPACE);
             builder.append(カラ);
-            if (null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo()) {
+            if (null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange()
+                    && null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo()) {
                 builder.append(SPACE);
                 builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo().toString()));
             }
@@ -451,6 +471,29 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
 
     private RString get地区選択区分情報() {
         RStringBuilder builder = new RStringBuilder();
+        if (!RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getJusho_From())
+                && !RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getJusho_To())) {
+            builder.append(JUSHO);
+            builder.append(get地区区間出力条件(processParamter.getAtenacyusyutsujyoken().getJusho_From(),
+                    processParamter.getAtenacyusyutsujyoken().getJusho_FromMesho(),
+                    processParamter.getAtenacyusyutsujyoken().getJusho_To(),
+                    processParamter.getAtenacyusyutsujyoken().getJusho_ToMesho()));
+            builder.append(COMMA);
+        } else if (!RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getJusho_From())
+                && RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getJusho_To())) {
+            builder.append(get地区区間出力条件(processParamter.getAtenacyusyutsujyoken().getJusho_From(),
+                    processParamter.getAtenacyusyutsujyoken().getJusho_FromMesho(),
+                    processParamter.getAtenacyusyutsujyoken().getJusho_To(),
+                    processParamter.getAtenacyusyutsujyoken().getJusho_ToMesho()));
+            builder.append(COMMA);
+        } else if (RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getJusho_From())
+                && !RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getJusho_To())) {
+            builder.append(get地区区間出力条件(processParamter.getAtenacyusyutsujyoken().getJusho_From(),
+                    processParamter.getAtenacyusyutsujyoken().getJusho_FromMesho(),
+                    processParamter.getAtenacyusyutsujyoken().getJusho_To(),
+                    processParamter.getAtenacyusyutsujyoken().getJusho_ToMesho()));
+            builder.append(COMMA);
+        }
         if (Chiku.地区.equals(processParamter.getAtenacyusyutsujyoken().getChiku_Kubun())) {
             if (!RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getChiku1_From())
                     && !RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getChiku1_To())) {
@@ -477,6 +520,7 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
                         processParamter.getAtenacyusyutsujyoken().getChiku3_To(),
                         processParamter.getAtenacyusyutsujyoken().getChiku3_ToMesho()));
             }
+            builder.append(COMMA);
         } else if (Chiku.行政区.equals(processParamter.getAtenacyusyutsujyoken().getChiku_Kubun())) {
             builder.append(GYOSEIKU);
             builder.append(COLON);
@@ -484,6 +528,7 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
                     processParamter.getAtenacyusyutsujyoken().getGyoseiku_FromMesho(),
                     processParamter.getAtenacyusyutsujyoken().getGyoseiku_To(),
                     processParamter.getAtenacyusyutsujyoken().getGyoseiku_ToMesho()));
+            builder.append(COMMA);
         } else if (Chiku.住所.equals(processParamter.getAtenacyusyutsujyoken().getChiku_Kubun())) {
             builder.append(JUSYO);
             builder.append(COLON);
@@ -491,6 +536,7 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
                     processParamter.getAtenacyusyutsujyoken().getJusho_FromMesho(),
                     processParamter.getAtenacyusyutsujyoken().getJusho_To(),
                     processParamter.getAtenacyusyutsujyoken().getJusho_ToMesho()));
+            builder.append(COMMA);
         }
         return builder.toRString();
     }

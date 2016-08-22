@@ -22,12 +22,14 @@ import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMas
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanriBuilder;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -47,6 +49,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -65,6 +68,7 @@ public class HikazeiNenkinTaishoshaJohoHandler {
     private static final RString RSTRING_0 = new RString("0");
     private static final RString RSTRING_1 = new RString("1");
     private final RString 年次 = new RString("年次");
+    private final RString 年度 = new RString("年度");
     private final RString 月次 = new RString("月次");
     private final RString 対象ファイル_Z51 = new RString("Z51*****.DTA");
     private final RString 対象ファイル_Z52 = new RString("Z52*****.DTA");
@@ -106,14 +110,15 @@ public class HikazeiNenkinTaishoshaJohoHandler {
 
         if (DBDMN81002.equals(ResponseHolder.getMenuID())) {
             div.getCcdChohyoSyuturyokuJun1().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD900002.getReportId());
-            div.getCcdChohyoSyuturyokuJun1().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD900003.getReportId());
-            div.getCcdChohyoSyuturyokuJun1().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD900004.getReportId());
-            div.getCcdChohyoSyuturyokuJun1().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD900005.getReportId());
+            div.getCcdChohyoSyuturyokuJun2().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD900003.getReportId());
+            div.getCcdChohyoSyuturyokuJun3().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD900004.getReportId());
+            div.getCcdChohyoSyuturyokuJun4().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD900005.getReportId());
 
             FlexibleYear 平成年度 = 平成28年度;
             List<KeyValueDataSource> dataSource = new ArrayList<>();
             while (調定年度.isBeforeOrEquals(平成年度)) {
-                dataSource.add(new KeyValueDataSource(new RString(平成年度.getYearValue()), 平成年度.wareki().eraType(EraType.KANJI).toDateString()));
+                dataSource.add(new KeyValueDataSource(
+                        new RString(平成年度.getYearValue()), 平成年度.wareki().eraType(EraType.KANJI).toDateString().concat(年度)));
                 平成年度 = 平成年度.minusYear(1);
             }
             div.getDdlShoriNendo().setDataSource(dataSource);
@@ -123,8 +128,8 @@ public class HikazeiNenkinTaishoshaJohoHandler {
         } else {
             div.setHdnState(DBD8010002StateName.遡及非課税年金対象者同定.getName());
             div.getCcdChohyoSyuturyokuJun1().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD900006.getReportId());
-            div.getCcdChohyoSyuturyokuJun1().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD900007.getReportId());
-            div.getCcdChohyoSyuturyokuJun1().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD900004.getReportId());
+            div.getCcdChohyoSyuturyokuJun2().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD900007.getReportId());
+            div.getCcdChohyoSyuturyokuJun3().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD900004.getReportId());
             return new ArrayList<>();
         }
 
@@ -189,6 +194,9 @@ public class HikazeiNenkinTaishoshaJohoHandler {
      */
     public void onClick_btnShoriSettei(HikazeiNenkinTaishoshaJohoDiv div) {
 
+        div.getShoriSettei().setHdnShoriNendo(div.getDdlShoriNendo().getSelectedKey());
+        div.getShoriSettei().getTxtShoriSetteiNendo().setValue(div.getDdlShoriNendo().getSelectedValue());
+
         List<HikazeiNenkinTaishoshaJohoBusiness> 対象処理List = new ArrayList<>();
 
         HikazeiNenkinTaishoshaJohoBusiness 対象処理年次 = new HikazeiNenkinTaishoshaJohoBusiness();
@@ -242,9 +250,12 @@ public class HikazeiNenkinTaishoshaJohoHandler {
 
             dgShoriSettei_Row row = new dgShoriSettei_Row();
             row.setTxtTuki(対象処理.get月());
+            row.setHdnTuki(対象処理.get月コード());
             row.setTxtShori(対象処理.get処理());
-            row.setHdnSyokiShoriJotai(対象処理.get処理状態());
-            row.getTxtShoriJotai().setDataSource(set処理状態List(対象処理.get処理状態()));
+            row.setHdnShori(対象処理.get処理コード());
+            row.setHdnSyokiShoriJotai(対象処理.get処理状態コード());
+            row.getTxtShoriJotai().setDataSource(set処理状態List(対象処理.get処理状態コード()));
+            row.getTxtShoriJotai().setSelectedKey(対象処理.get処理状態コード());
             row.setTxtShoriNitchiji(対象処理.get処理日時());
 
             rowList.add(row);
@@ -370,6 +381,48 @@ public class HikazeiNenkinTaishoshaJohoHandler {
         parameter.set出力順ID3(div.getCcdChohyoSyuturyokuJun3().get出力順ID());
 
         return parameter;
+    }
+
+    /**
+     * 「保存する」ボタンのクリンク処理です。
+     *
+     * @param div JissiJyokyohyoDiv
+     */
+    public void onClick_btnUpdate(HikazeiNenkinTaishoshaJohoDiv div) {
+
+        List<dgShoriSettei_Row> rowList = div.getDgShoriSettei().getDataSource();
+        for (dgShoriSettei_Row row : rowList) {
+            if (!row.getHdnSyokiShoriJotai().equals(row.getTxtShoriJotai().getSelectedKey())) {
+                DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+
+                ShoriDateKanri shoriDateKanri = new ShoriDateKanri(
+                        SubGyomuCode.DBD介護受給,
+                        new LasdecCode(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)),
+                        ShoriName.非課税年金対象者情報取込.get名称(),
+                        row.getHdnSyokiShoriJotai(),
+                        new FlexibleYear(div.getShoriSettei().getHdnShoriNendo()),
+                        row.getHdnShori().concat(row.getHdnTuki()));
+
+                shoriDateKanri.toEntity().setState(EntityDataState.Added);
+                ShoriDateKanri deletedShoriDateKanri = shoriDateKanri.deleted();
+                ShoriDateKanriManager manager = new ShoriDateKanriManager();
+                manager.save処理日付管理マスタForDeletePhysical(deletedShoriDateKanri);
+
+                ShoriDateKanri insertShoriDateKanri = new ShoriDateKanri(
+                        SubGyomuCode.DBD介護受給,
+                        new LasdecCode(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)),
+                        ShoriName.非課税年金対象者情報取込.get名称(),
+                        row.getTxtShoriJotai().getSelectedKey(),
+                        new FlexibleYear(div.getShoriSettei().getHdnShoriNendo()),
+                        row.getHdnShori().concat(row.getHdnTuki()));
+
+                ShoriDateKanriBuilder builder = insertShoriDateKanri.createBuilderForEdit();
+                ShoriDateKanri newShoriDateKanri = builder.build();
+                ShoriDateKanriManager insertManager = new ShoriDateKanriManager();
+                insertManager.save処理日付管理マスタ(newShoriDateKanri);
+
+            }
+        }
     }
 
     private void 単一年度DDLの選択処理() {

@@ -121,6 +121,7 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnBeppyoMeisaiNew(ServiceRiyohyoInfoDiv div) {
+        ViewStateHolder.put(ViewStateKeys.選択有无, false);
         div.getServiceRiyohyoBeppyoMeisai().setDisabled(false);
         div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setDisabled(false);
@@ -137,6 +138,8 @@ public class ServiceRiyohyoInfo {
         div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().clearValue();
         div.getServiceRiyohyoBeppyoMeisai().getTxtTeigakuRiyoushaFutangaku().setDisabled(false);
         div.getServiceRiyohyoBeppyoMeisai().getTxtTeigakuRiyoushaFutangaku().clearValue();
+        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisai().setVisible(true);
+        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnBeppyoMeisaiKakutei().setVisible(true);
         div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisai().setDisabled(false);
         div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCancelMeisaiInput().setDisabled(false);
         div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisaiGokei().setDisabled(false);
@@ -150,6 +153,7 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnBeppyoGokeiNew(ServiceRiyohyoInfoDiv div) {
+        ViewStateHolder.put(ViewStateKeys.選択有无, false);
         div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendoChokaTani().clearValue();
         div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendonaiTani().clearValue();
         div.getServiceRiyohyoBeppyoGokei().getTxtTanisuTanka().clearValue();
@@ -177,6 +181,7 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnSelect(ServiceRiyohyoInfoDiv div) {
+        ViewStateHolder.put(ViewStateKeys.選択有无, true);
         getHandler(div).setパネルにデータ反映();
         return ResponseData.of(div).respond();
     }
@@ -324,6 +329,7 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnDelete(ServiceRiyohyoInfoDiv div) {
+        ViewStateHolder.put(ViewStateKeys.選択有无, true);
         getHandler(div).setパネルにデータ反映();
         getHandler(div).init削除();
         return ResponseData.of(div).respond();
@@ -580,6 +586,7 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnModify(ServiceRiyohyoInfoDiv div) {
+        ViewStateHolder.put(ViewStateKeys.選択有无, true);
         getHandler(div).init修正();
         return ResponseData.of(div).respond();
     }
