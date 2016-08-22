@@ -23,9 +23,12 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.Ich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -43,6 +46,7 @@ public class ShinchokuDataOutputHandler {
     private static final Code 認定ｿﾌﾄ2006 = new Code(new RString("06A"));
     private static final Code 認定ｿﾌﾄ2009_A = new Code(new RString("09A"));
     private static final Code 認定ｿﾌﾄ2009_B = new Code(new RString("09B"));
+    private static final RString 結果情報 = new RString("0");
 
     /**
      * コンストラクタです。
@@ -56,9 +60,9 @@ public class ShinchokuDataOutputHandler {
     /**
      * 画面の初期化です。
      */
-    public void intialize() {
+    public void onLoad() {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
-        div.getRadKubun().setSelectedKey(new RString("0"));
+        div.getRadKubun().setSelectedKey(結果情報);
         div.getTxtChuishutsuRange().setFromValue(new RDate(RDate.getNowDate().toString()));
         div.getTxtChuishutsuRange().setToValue(new RDate(RDate.getNowDate().toString()));
         div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.
@@ -71,7 +75,7 @@ public class ShinchokuDataOutputHandler {
      * 画面の検索条件入力項目をクリアする。
      */
     public void btnJokenClear() {
-        div.getRadKubun().setSelectedKey(new RString("0"));
+        div.getRadKubun().setSelectedKey(結果情報);
         div.getTxtChuishutsuRange().clearFromValue();
         div.getTxtChuishutsuRange().clearToValue();
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
@@ -83,61 +87,60 @@ public class ShinchokuDataOutputHandler {
      * 対象者一覧編集です。。
      *
      * @param list List<YouKaigoNinteiShinchokuJohouBusiness>
-     * @param personalData personalData
      */
-    public void setdgShinchokuIchiran(List<YouKaigoNinteiShinchokuJohouBusiness> list, PersonalData personalData) {
+    public void setdgShinchokuIchiran(List<YouKaigoNinteiShinchokuJohouBusiness> list) {
         List<dgShinchokuIchiran_Row> dgChosainList = new ArrayList<>();
-        if (!list.isEmpty()) {
-            for (YouKaigoNinteiShinchokuJohouBusiness business : list) {
-                dgShinchokuIchiran_Row row = new dgShinchokuIchiran_Row();
-                row.setHihoNo(nullOrEmptv(business.get被保険者番号()));
-                row.setName(nullOrEmptv(business.get被保険者氏名()));
-                row.setSeibetsu(Seibetsu.toValue(business.get性別()).get名称());
-                if (business.get生年月日() != null) {
-                    row.getBirthYMD().setValue(new RDate(business.get生年月日().toString()));
-                }
-                if (business.get認定申請年月日() != null) {
-                    row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
-                }
-                row.setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分申請時コード()).get名称());
-                row.setShiseiKubunHorei(NinteiShinseiHoreiCode.toValue(business.get認定申請区分法令コード()).get名称());
-                if (!RString.isNullOrEmpty(business.get厚労省IF識別コード())
-                        && !RString.isNullOrEmpty(business.get二次判定要介護状態区分コード())) {
-                    row.setHanteiKekka(一次判定結果の名称を取得する(new Code(business.get厚労省IF識別コード().toString()),
-                            new Code(business.get二次判定要介護状態区分コード().toString())));
-                }
-                if (!RString.isNullOrEmpty(business.get認定調査依頼年月日())) {
-                    row.getNinteiChosaItakuDay().setValue(new RDate(business.get認定調査依頼年月日().toString()));
-                }
-                if (!RString.isNullOrEmpty(business.get認定調査実施年月日())) {
-                    row.getNinteiChosaJisshiDay().setValue(new RDate(business.get認定調査実施年月日().toString()));
-                }
-                row.setNinteiChosaItakusaki(nullOrEmptv(business.get事業者名称()));
-                row.setNinteiChosain(nullOrEmptv(business.get調査員氏名()));
-                if (!RString.isNullOrEmpty(business.get主治医意見書受領年月日())) {
-                    row.getIkenshoJuryoDay().setValue(new RDate(business.get主治医意見書受領年月日().toString()));
-                }
-                if (!RString.isNullOrEmpty(business.get要介護認定一次判定年月日())) {
-                    row.getIhijiHanteiDay().setValue(new RDate(business.get要介護認定一次判定年月日().toString()));
-                }
-                if (!RString.isNullOrEmpty(business.get要介護認定一次判定結果コード())) {
-                    row.setIchijiHanteiKekka(一次判定結果の名称を取得する(new Code(business.get厚労省IF識別コード().toString()),
-                            new Code(business.get要介護認定一次判定結果コード().toString())));
-                }
-                if (!RString.isNullOrEmpty(business.get介護認定審査会資料作成年月日())) {
-                    row.getShinsakaiShiryoSakuseiDay().setValue(new RDate(business.get介護認定審査会資料作成年月日().toString()));
-                }
-                if (!RString.isNullOrEmpty(business.get介護認定審査会開催予定年月日())) {
-                    row.getShinsakaiKaisaiYoteiDay().setValue(new RDate(business.get介護認定審査会開催予定年月日().toString()));
-                }
-                if (!RString.isNullOrEmpty(business.get介護認定審査会開催年月日())) {
-                    row.getShinsakaiKaisaiDay().setValue(new RDate(business.get介護認定審査会開催年月日().toString()));
-                }
-                row.setShinseishoNo(business.get申請書管理番号());
-                personalData.addExpandedInfo(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                        business.get申請書管理番号()));
-                dgChosainList.add(row);
+        for (YouKaigoNinteiShinchokuJohouBusiness business : list) {
+            dgShinchokuIchiran_Row row = new dgShinchokuIchiran_Row();
+            row.setHihoNo(nullOrEmpty(business.get被保険者番号()));
+            row.setName(nullOrEmpty(business.get被保険者氏名()));
+            row.setSeibetsu(Seibetsu.toValue(business.get性別()).get名称());
+            if (!RString.isNullOrEmpty(business.get生年月日())) {
+                row.getBirthYMD().setValue(new RDate(business.get生年月日().toString()));
             }
+            if (!RString.isNullOrEmpty(business.get認定申請年月日())) {
+                row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
+            }
+            row.setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分申請時コード()).get名称());
+            row.setShiseiKubunHorei(NinteiShinseiHoreiCode.toValue(business.get認定申請区分法令コード()).get名称());
+            if (!RString.isNullOrEmpty(business.get厚労省IF識別コード())
+                    && !RString.isNullOrEmpty(business.get二次判定要介護状態区分コード())) {
+                row.setHanteiKekka(get一次判定結果の名称を取得する(new Code(business.get厚労省IF識別コード().toString()),
+                        new Code(business.get二次判定要介護状態区分コード().toString())));
+            }
+            if (!RString.isNullOrEmpty(business.get認定調査依頼年月日())) {
+                row.getNinteiChosaItakuDay().setValue(new RDate(business.get認定調査依頼年月日().toString()));
+            }
+            if (!RString.isNullOrEmpty(business.get認定調査実施年月日())) {
+                row.getNinteiChosaJisshiDay().setValue(new RDate(business.get認定調査実施年月日().toString()));
+            }
+            row.setNinteiChosaItakusaki(nullOrEmpty(business.get事業者名称()));
+            row.setNinteiChosain(nullOrEmpty(business.get調査員氏名()));
+            if (!RString.isNullOrEmpty(business.get主治医意見書受領年月日())) {
+                row.getIkenshoJuryoDay().setValue(new RDate(business.get主治医意見書受領年月日().toString()));
+            }
+            if (!RString.isNullOrEmpty(business.get要介護認定一次判定年月日())) {
+                row.getIhijiHanteiDay().setValue(new RDate(business.get要介護認定一次判定年月日().toString()));
+            }
+            if (!RString.isNullOrEmpty(business.get要介護認定一次判定結果コード())) {
+                row.setIchijiHanteiKekka(get一次判定結果の名称を取得する(new Code(business.get厚労省IF識別コード().toString()),
+                        new Code(business.get要介護認定一次判定結果コード().toString())));
+            }
+            if (!RString.isNullOrEmpty(business.get介護認定審査会資料作成年月日())) {
+                row.getShinsakaiShiryoSakuseiDay().setValue(new RDate(business.get介護認定審査会資料作成年月日().toString()));
+            }
+            if (!RString.isNullOrEmpty(business.get介護認定審査会開催予定年月日())) {
+                row.getShinsakaiKaisaiYoteiDay().setValue(new RDate(business.get介護認定審査会開催予定年月日().toString()));
+            }
+            if (!RString.isNullOrEmpty(business.get介護認定審査会開催年月日())) {
+                row.getShinsakaiKaisaiDay().setValue(new RDate(business.get介護認定審査会開催年月日().toString()));
+            }
+            row.setShinseishoNo(business.get申請書管理番号());
+            PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
+            personalData.addExpandedInfo(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                    business.get申請書管理番号()));
+            AccessLogger.log(AccessLogType.照会, personalData);
+            dgChosainList.add(row);
         }
         div.getDgShinchokuIchiran().setDataSource(dgChosainList);
     }
@@ -163,12 +166,13 @@ public class ShinchokuDataOutputHandler {
         } else {
             抽出期間終了日 = div.getTxtChuishutsuRange().getToValue().toDateString();
         }
-        if (div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号() == null) {
+        if (div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号() == null
+                && div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().isEmpty()) {
             証記載保険者番号 = RString.EMPTY;
         } else {
             証記載保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value();
         }
-        if (div.getTxtHihokenshaCode() == null) {
+        if (RString.isNullOrEmpty(div.getTxtHihokenshaCode().getValue())) {
             被保険者番号 = RString.EMPTY;
         } else {
             被保険者番号 = div.getTxtHihokenshaCode().getValue();
@@ -200,25 +204,23 @@ public class ShinchokuDataOutputHandler {
         return batchparamter;
     }
 
-    private RString 一次判定結果の名称を取得する(Code 厚労省IF識別コード, Code 一次判定結果コード) {
+    private RString get一次判定結果の名称を取得する(Code 厚労省IF識別コード, Code 一次判定結果コード) {
 
-        if (一次判定結果コード != null && !一次判定結果コード.isEmpty()) {
-            if (認定ｿﾌﾄ99.equals(厚労省IF識別コード)) {
-                return IchijiHanteiKekkaCode99.toValue(一次判定結果コード.getKey()).get名称();
-            } else if (認定ｿﾌﾄ2002.equals(厚労省IF識別コード)) {
-                return IchijiHanteiKekkaCode02.toValue(一次判定結果コード.getKey()).get名称();
-            } else if (認定ｿﾌﾄ2006.equals(厚労省IF識別コード)) {
-                return IchijiHanteiKekkaCode06.toValue(一次判定結果コード.getKey()).get名称();
-            } else if (認定ｿﾌﾄ2009_A.equals(厚労省IF識別コード)
-                    || 認定ｿﾌﾄ2009_B.equals(厚労省IF識別コード)) {
-                return IchijiHanteiKekkaCode09.toValue(一次判定結果コード.getKey()).get名称();
-            }
+        if (認定ｿﾌﾄ99.equals(厚労省IF識別コード)) {
+            return IchijiHanteiKekkaCode99.toValue(一次判定結果コード.getKey()).get名称();
+        } else if (認定ｿﾌﾄ2002.equals(厚労省IF識別コード)) {
+            return IchijiHanteiKekkaCode02.toValue(一次判定結果コード.getKey()).get名称();
+        } else if (認定ｿﾌﾄ2006.equals(厚労省IF識別コード)) {
+            return IchijiHanteiKekkaCode06.toValue(一次判定結果コード.getKey()).get名称();
+        } else if (認定ｿﾌﾄ2009_A.equals(厚労省IF識別コード)
+                || 認定ｿﾌﾄ2009_B.equals(厚労省IF識別コード)) {
+            return IchijiHanteiKekkaCode09.toValue(一次判定結果コード.getKey()).get名称();
         }
         return RString.EMPTY;
     }
 
-    private RString nullOrEmptv(RString obj) {
-        if (obj == null) {
+    private RString nullOrEmpty(RString obj) {
+        if (RString.isNullOrEmpty(obj)) {
             return RString.EMPTY;
         }
         return obj;
