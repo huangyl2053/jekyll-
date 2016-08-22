@@ -113,12 +113,25 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyodojukyushataishosha.KyodoIdoRenrakuhyoTaishoshaKensakuParameter"
             resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
             fetchSize="500" resultOrdered="true">
-        SELECT 
-             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
-            FROM rgdb."DbV1001HihokenshaDaicho" AS DbV1001
-            INNER JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
-            AS "ShikibetsuTaisho"
-            ON DbV1001."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
-            WHERE DbV1001."hihokenshaNo" = #{被保険者番号}
+            WITH hihokenshaDaicho AS (
+                SELECT
+                    DbV1001."shikibetsuCode"
+                FROM   rgdb."DbV1001HihokenshaDaicho" as DbV1001
+                WHERE DbV1001."hihokenshaNo" = #{被保険者番号}
+            )
+            SELECT
+                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+            FROM
+                hihokenshaDaicho
+            LEFT OUTER JOIN
+                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+                (
+                    SELECT
+                        ARRAY_AGG(CAST ("shikibetsuCode" AS TEXT))
+                    FROM
+                        hihokenshaDaicho
+                 )
+              <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" /> AS "ShikibetsuTaisho"
+               ON hihokenshaDaicho."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode";
     </select>
 </mapper>
