@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010013;
 
-import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 
 /**
  * このコードはツールによって生成されました。</br>
@@ -18,7 +18,7 @@ public enum DBC0010013TransitionEventName implements IContainerEvents {
     完了("完了"),
     給付実績照会検索一覧("給付実績照会検索一覧"),
     基本情報("基本情報"),
-    明細集計("明細・集計"),
+    明細_集計("明細_集計"),
     所定疾患施設療養費("所定疾患施設療養費"),
     特定診療費("特定診療費"),
     食事費用("食事費用"),
