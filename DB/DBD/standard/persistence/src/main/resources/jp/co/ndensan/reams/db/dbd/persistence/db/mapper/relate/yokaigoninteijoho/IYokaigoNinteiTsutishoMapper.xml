@@ -103,7 +103,7 @@
         WHERE
         "DbT4102NinteiKekkaJoho"."shinseishoKanriNo" = #{申請書管理番号}
         
-        ${出力順}
+        ORDER BY "DbT4001JukyushaDaicho"."rirekiNo" DESC
 
         LIMIT 1
      </select>
@@ -130,7 +130,7 @@
             AND "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD" = #{認定有効期間終了年月日}
         </if>
         
-        ${出力順}
+        ORDER BY "DbT4001JukyushaDaicho"."rirekiNo" DESC
         
         LIMIT #{最大表示件数}
      </select>
@@ -334,7 +334,7 @@
         AND "TEMP"."dbT4001JukyushaDaicho_rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
         AND "TEMP"."dbT4001JukyushaDaicho_edaban" = "DbT4001JukyushaDaicho"."edaban"
         AND "TEMP"."dbT4001JukyushaDaicho_jukyuShinseiJiyu" = "DbT4001JukyushaDaicho"."jukyuShinseiJiyu"
-        ${出力順}
+        ORDER BY "DbT4001JukyushaDaicho"."rirekiNo" DESC
      </select>
      
      <resultMap id="ResultMap_TsutishoWithoutKekkaJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiIkatusHakkoEntity" autoMapping="true">
@@ -383,7 +383,7 @@
             )
         </if>
 
-        ${出力順}
+        ORDER BY "DbT4001JukyushaDaicho"."rirekiNo" DESC
         
         LIMIT 2
      </select>
@@ -430,7 +430,7 @@
             )
         </if>
 
-        ${出力順}
+        ORDER BY "DbT4001JukyushaDaicho"."rirekiNo" DESC
         
         LIMIT 2
      </select>
