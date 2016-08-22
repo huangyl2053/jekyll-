@@ -79,7 +79,7 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
     /**
      * コンストラクタです。
      *
-     * @param div HeijunkaKakuteiDiv
+     * @param div KogakuGassanShikyuKetteiTsuchishoPanelDiv
      */
     public KogakuGassanShikyuKetteiTsuchishoPanelHandler(KogakuGassanShikyuKetteiTsuchishoPanelDiv div) {
         this.div = div;
