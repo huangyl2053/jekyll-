@@ -9,8 +9,8 @@ and open the template in the editor.
 
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengakutaishoshahanteiyoukonsakusei.ITaishouJohoMapper">
     <select id="get対象情報"
-            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanteiYoukonSakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiMyBatisParameter"
-            resultMap="RseultMap_TaishouJohoEntity" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanteiyoukonsakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiMyBatisParameter"
+            resultMap="ResultMap_TaishouJohoEntity" fetchSize="500">
         SELECT
         A."hihokenshaNo",
         B."shikibetsuCode",
@@ -58,7 +58,7 @@ and open the template in the editor.
         B."honninKubun"
     </select>
 
-    <resultMap id="RseultMap_TaishouJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengakutaishoshahanteiyoukonsakusei.TaishouJohoEntity" autoMapping="true">
+    <resultMap id="ResultMap_TaishouJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengakutaishoshahanteiyoukonsakusei.TaishouJohoEntity" autoMapping="true">
         <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
         <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
         <result property="本人区分" column="honninKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanteiYoukonSakusei;
+package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanteiyoukonsakusei;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
