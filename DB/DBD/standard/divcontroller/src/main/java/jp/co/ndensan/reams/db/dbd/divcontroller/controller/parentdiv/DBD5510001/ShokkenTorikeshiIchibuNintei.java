@@ -88,10 +88,12 @@ public class ShokkenTorikeshiIchibuNintei {
         if (メニュID_職権修正.equals(menuId) || メニュID_職権取消一部喪失.equals(menuId)) {
             ValidationMessageControlPairs pairs = createValidationHandler(div).cheackLoad(今回情報);
             if (pairs.iterator().hasNext()) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), true);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), true);
                 IParentResponse<ShokkenTorikeshiIchibuNinteiDiv> response = ResponseData.of(div);
                 response.setState(state);
                 return response.addValidationMessages(pairs).respond();
+            } else {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), false);
             }
         }
         return ResponseData.of(div).setState(state);

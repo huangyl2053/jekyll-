@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * ビジネス設計_DBCMN83001_受給者異動連絡票作成（画面）です
  *
- * @reamsid_L DBC-2102-020 lihang
+ * @reamsid_L DBC-2102-020 quxiaodong
  */
 public class JukyushaIdoRenrakuhyoSakusei {
 
@@ -70,7 +70,7 @@ public class JukyushaIdoRenrakuhyoSakusei {
             return obj2;
         } else if ((obj1 != null && !obj1.isEmpty()) && (obj2 == null || obj2.isEmpty())) {
             return FlexibleDate.EMPTY;
-        } else if (!obj1.equals(obj2)) {
+        } else if (obj1 != null && !obj1.equals(obj2)) {
             return obj2;
         }
         return FlexibleDate.EMPTY;
@@ -241,10 +241,10 @@ public class JukyushaIdoRenrakuhyoSakusei {
         JukyushaIdoRenrakuhyoTorokuEntity relateEntity = new JukyushaIdoRenrakuhyoTorokuEntity();
         DbT3001JukyushaIdoRenrakuhyoEntity 変更前Entity = dac.select受給者訂正情報を取得(entity.get被保険者番号(),
                 new RString(relateEntity.get異動年月日().toString()));
-        relateEntity.set上限管理終了年月日１(変更前Entity.getNijiyoboJigyoYukoKikanKaishiYMD());
         if (変更前Entity == null) {
             return null;
         }
+        relateEntity.set上限管理終了年月日１(変更前Entity.getNijiyoboJigyoYukoKikanKaishiYMD());
         relateEntity.set作成年月日(new FlexibleDate(RDate.getNowDate().toDateString()));
         if (変更前Entity.getShoKisaiHokenshaNo() != null) {
             relateEntity.set証記載保険者番号(変更前Entity.getShoKisaiHokenshaNo().getColumnValue());

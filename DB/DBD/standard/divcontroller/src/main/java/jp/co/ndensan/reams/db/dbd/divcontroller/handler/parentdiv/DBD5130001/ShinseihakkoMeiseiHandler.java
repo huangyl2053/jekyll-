@@ -22,8 +22,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoninteiShikakuInfo.KaigoninteiShikakuInfoDiv;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
-import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
-import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -51,6 +49,7 @@ public class ShinseihakkoMeiseiHandler {
     private static final int NO_7 = 7;
     private static final int NO_8 = 8;
     private static final int NO_9 = 9;
+    private static final int 通知文_項目番号_1 = 1;
     private static final RString コード = new RString("2");
     private static final RString コード111 = new RString("111");
     private static final RString コード112 = new RString("112");
@@ -159,11 +158,9 @@ public class ShinseihakkoMeiseiHandler {
             shinseiShoEntity.set郵便番号(kaigoNinteiAtenaInfoDiv.getTxtYubinNo().getValue().value());
             shinseiShoEntity.set電話番号(kaigoNinteiAtenaInfoDiv.getTxtTelNo().getDomain().value());
             shinseiShoEntity.set住所(kaigoNinteiAtenaInfoDiv.getTxtJusho().getDomain().value());
-            TsuchishoTeikeibunManager mag = new TsuchishoTeikeibunManager();
-            TsuchishoTeikeibunInfo 帳票タイトルInfo = mag.get通知書定型文パターン(ReportIdDBD.DBD501002.getReportId(), SubGyomuCode.DBD介護受給);
             Map<Integer, RString> 通知文
-                    = ReportUtil.get通知文(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD501002.getReportId(), KamokuCode.EMPTY, 帳票タイトルInfo.getパターン番号());
-            shinseiShoEntity.set通知文(通知文.get(帳票タイトルInfo.get項目番号()));
+                    = ReportUtil.get通知文(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD501002.getReportId(), KamokuCode.EMPTY, 通知文_項目番号_1);
+            shinseiShoEntity.set通知文(通知文.get(通知文_項目番号_1));
             if (radShinseiKubunSelectIndex != 0) {
                 shinseiShoEntity = set状態区分(radShinseishaKubunSelectIndex, shinseiShoEntity);
             }

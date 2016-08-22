@@ -20,10 +20,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KyufuJissekiJyohoRelateEntity {
 
-    private HihokenshaNo 被保険者番号;
-    private FlexibleYearMonth サービス提供年月;
-    private RString 整理番号;
-    private RString 給付実績情報作成区分コード;
-    private JigyoshaNo 事業所番号;
-    private RString 識別番号名称;
+    private HihokenshaNo hiHokenshaNo;
+    private FlexibleYearMonth serviceTeikyoYM;
+    private RString seiriNo;
+    private RString kyufuSakuseiKubunCode;
+    private JigyoshaNo jigyoshoNo;
+    private RString shikibetsuMeisho;
 }

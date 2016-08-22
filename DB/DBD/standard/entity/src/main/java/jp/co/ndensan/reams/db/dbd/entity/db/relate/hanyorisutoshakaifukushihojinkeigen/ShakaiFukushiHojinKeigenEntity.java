@@ -84,7 +84,7 @@ public class ShakaiFukushiHojinKeigenEntity {
     private FlexibleDate 今回計画情報_認定審査会予定年月日;
     private FlexibleDate 今回計画情報_主治医意見書登録予定年月日;
     private FlexibleDate 今回完了情報_認定調査完了年月日;
-    private FlexibleDate 今回意見書作成依頼_主治医意見書作成依頼年月日;
+    private FlexibleDate 今回意見書作成依頼_主治医意見書作成依頼;
     private FlexibleDate 今回意見書情報_主治医意見書受領年月日;
     private FlexibleDate 今回結果情報_介護認定審査会資料作成年月日;
     private RString 今回結果情報_介護認定審査会意見;
@@ -102,7 +102,7 @@ public class ShakaiFukushiHojinKeigenEntity {
     private FlexibleDate 受給者台帳_認定有効期間開始年月日;
     private FlexibleDate 受給者台帳_認定有効期間終了年月日;
     private boolean 受給者台帳_旧措置者フラグ;
-    private RString 受給者台帳_みなし要介護区分コード;
+//    private RString 受給者台帳_みなし要介護区分コード;
     private RString 受給者台帳_指定サービス種類01;
     private RString 受給者台帳_指定サービス種類02;
     private RString 受給者台帳_指定サービス種類03;
@@ -149,8 +149,8 @@ public class ShakaiFukushiHojinKeigenEntity {
     private RString 前々回受給情報_みなし要介護区分コード;
     private FlexibleDate 前々回受給情報_当初認定有効開始年月日;
     private FlexibleDate 前々回受給情報_当初認定有効終了年月日;
-    private RString 今回調査結果_基本_認定調査_障害高齢者の日常生活自立度コード;
-    private RString 今回調査結果_基本_認定調査_認知症高齢者の日常生活自立度コード;
+    private RString 今回調査結果_基本障害高齢者自立度コード;
+    private RString 今回調査結果_基本認知症高齢者自立度コード;
     private RString 受給者台帳_支給限度単位数;
     private FlexibleDate 受給者台帳_支給限度有効開始年月日;
     private FlexibleDate 受給者台帳_支給限度有効終了年月日;

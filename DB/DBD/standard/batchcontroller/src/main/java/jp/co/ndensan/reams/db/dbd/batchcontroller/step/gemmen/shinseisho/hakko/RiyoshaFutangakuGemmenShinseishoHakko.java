@@ -63,6 +63,7 @@ public class RiyoshaFutangakuGemmenShinseishoHakko extends BatchProcessBase<Riyo
             + "IRiyoshaFutangakuGemmenShinseishoHakkoMapper.get出力対象者情報");
     private ShinseishoHakkoProcessParameter processParamter;
     private static final ReportId ID = new ReportId("DBD800002_RiyoshaFutangakuGengakuMenjyoShinseisho");
+    private static final int STARTINDEX = 9;
     private RString 導入団体コード;
     private RString 市町村名;
     @BatchWriter
@@ -80,6 +81,7 @@ public class RiyoshaFutangakuGemmenShinseishoHakko extends BatchProcessBase<Riyo
         hokenshaList = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護事務);
         導入団体コード = association.getLasdecCode_().value();
         市町村名 = association.get市町村名();
+        出力順 = RString.EMPTY;
     }
 
     @Override
@@ -95,7 +97,12 @@ public class RiyoshaFutangakuGemmenShinseishoHakko extends BatchProcessBase<Riyo
                 SubGyomuCode.DBD介護受給,
                 processParamter.get帳票ID(),
                 processParamter.get改頁出力順ID());
-        出力順 = Ddb102020MyBatisOrderByClauseCreator.create(RiyoshaFutangakuGengakuMenjyoShinseishoOrderKey.class, order);
+        if (order != null) {
+            出力順 = Ddb102020MyBatisOrderByClauseCreator.create(RiyoshaFutangakuGengakuMenjyoShinseishoOrderKey.class, order);
+            if (processParamter.is出力フラグ()) {
+                出力順 = 出力順.substring(STARTINDEX, 出力順.length());
+            }
+        }
         return new BatchDbReader(MYBATIS_SELECT_ID,
                 processParamter.toFutanGendogakuMybatisParameter(出力順));
     }

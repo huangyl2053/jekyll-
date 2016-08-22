@@ -46,8 +46,6 @@ public class HeijunkaKeisanHandler {
     private final RString 状況未 = new RString("未");
     private final RString 状況済 = new RString("済");
     private final RString 平準化しない = new RString("0");
-    private final RString 前半と後半1_1 = new RString("前半と後半を１：１にする");
-    private final RString 年額より４月分 = new RString("年額より４月分を引いた額を５期で割る");
     private final RString 平準化するを判定し = new RString("1");
     private final RString 特別徴収平準化計算_特別徴収6月分 = new RString("特別徴収平準化計算（特別徴収6月分）");
     private final RString 仮算定額変更通知書_平準化 = new RString("仮算定額変更通知書(平準化)");
@@ -121,18 +119,18 @@ public class HeijunkaKeisanHandler {
         RString 減額 = RString.EMPTY;
         RString 減額コンフィグ = DbBusinessConfig.
                 get(ConfigNameDBB.特別徴収_平準化計算方法_6月分減額, RDate.getNowDate(), SubGyomuCode.DBB介護賦課, 調定年度.toDateString());
-        if (平準化しない.toString().equals(減額コンフィグ.toString())) {
+        if (平準化しない.equals(減額コンフィグ)) {
             減額 = TokuchoHeijunkaKeisanHoho6Gatsu.平準化しない.get名称();
-        } else if (平準化するを判定し.toString().equals(減額コンフィグ.toString())) {
+        } else if (平準化するを判定し.equals(減額コンフィグ)) {
             減額 = TokuchoHeijunkaKeisanHoho6Gatsu.toValue(DbBusinessConfig.
                     get(ConfigNameDBB.特別徴収_平準化計算方法_6月分, RDate.getNowDate(), SubGyomuCode.DBB介護賦課, 調定年度.toDateString())).get名称();
         }
         RString 増額 = RString.EMPTY;
         RString 増額コンフィグ = DbBusinessConfig.
                 get(ConfigNameDBB.特別徴収_平準化計算方法_6月分増額, RDate.getNowDate(), SubGyomuCode.DBB介護賦課, 調定年度.toDateString());
-        if (平準化しない.toString().equals(増額コンフィグ.toString())) {
+        if (平準化しない.equals(増額コンフィグ)) {
             増額 = TokuchoHeijunkaKeisanHoho6Gatsu.平準化しない.get名称();
-        } else if (平準化するを判定し.toString().equals(増額コンフィグ.toString())) {
+        } else if (平準化するを判定し.equals(増額コンフィグ)) {
             増額 = TokuchoHeijunkaKeisanHoho6Gatsu.toValue(DbBusinessConfig.
                     get(ConfigNameDBB.特別徴収_平準化計算方法_6月分, RDate.getNowDate(), SubGyomuCode.DBB介護賦課, 調定年度.toDateString())).get名称();
         }
@@ -173,20 +171,24 @@ public class HeijunkaKeisanHandler {
         HeijunkaKeisanPageJoho data = new HeijunkaKeisanPageJoho();
         data.set調定年度(div.getShoriJokyo().getHeijunkaShoriNaiyo().getTxtChoteiNendo().getDomain());
         data.set賦課年度(div.getShoriJokyo().getHeijunkaShoriNaiyo().getTxtFukaNendo().getDomain());
-        if (平準化しない.equals(div.getHeijunkaKeisanHoho().getTxtKeisanHohoZougaku().getText())) {
-            data.set増額平準化方法(new RString("0"));
-        } else if (前半と後半1_1.equals(div.getHeijunkaKeisanHoho().getTxtKeisanHohoZougaku().getText())) {
-            data.set増額平準化方法(new RString("1"));
-        } else if (年額より４月分.equals(div.getHeijunkaKeisanHoho().getTxtKeisanHohoZougaku().getText())) {
-            data.set増額平準化方法(new RString("2"));
+        if (TokuchoHeijunkaKeisanHoho6Gatsu.平準化しない.get名称().equals(div.getHeijunkaKeisanHoho().getTxtKeisanHohoZougaku().getText())) {
+            data.set増額平準化方法(TokuchoHeijunkaKeisanHoho6Gatsu.平準化しない.getコード());
+        } else if (TokuchoHeijunkaKeisanHoho6Gatsu.前半と後半を１_１にする.get名称()
+                .equals(div.getHeijunkaKeisanHoho().getTxtKeisanHohoZougaku().getText())) {
+            data.set増額平準化方法(TokuchoHeijunkaKeisanHoho6Gatsu.前半と後半を１_１にする.getコード());
+        } else if (TokuchoHeijunkaKeisanHoho6Gatsu.年額より４月分を引いた額を５期で割る.get名称()
+                .equals(div.getHeijunkaKeisanHoho().getTxtKeisanHohoZougaku().getText())) {
+            data.set増額平準化方法(TokuchoHeijunkaKeisanHoho6Gatsu.年額より４月分を引いた額を５期で割る.getコード());
         }
 
-        if (平準化しない.equals(div.getHeijunkaKeisanHoho().getTxtKeisanHohoGengaku().getText())) {
-            data.set減額平準化方法(new RString("0"));
-        } else if (前半と後半1_1.equals(div.getHeijunkaKeisanHoho().getTxtKeisanHohoGengaku().getText())) {
-            data.set減額平準化方法(new RString("1"));
-        } else if (年額より４月分.equals(div.getHeijunkaKeisanHoho().getTxtKeisanHohoGengaku().getText())) {
-            data.set減額平準化方法(new RString("2"));
+        if (TokuchoHeijunkaKeisanHoho6Gatsu.平準化しない.get名称().equals(div.getHeijunkaKeisanHoho().getTxtKeisanHohoGengaku().getText())) {
+            data.set減額平準化方法(TokuchoHeijunkaKeisanHoho6Gatsu.平準化しない.getコード());
+        } else if (TokuchoHeijunkaKeisanHoho6Gatsu.前半と後半を１_１にする.get名称()
+                .equals(div.getHeijunkaKeisanHoho().getTxtKeisanHohoGengaku().getText())) {
+            data.set減額平準化方法(TokuchoHeijunkaKeisanHoho6Gatsu.前半と後半を１_１にする.getコード());
+        } else if (TokuchoHeijunkaKeisanHoho6Gatsu.年額より４月分を引いた額を５期で割る.get名称()
+                .equals(div.getHeijunkaKeisanHoho().getTxtKeisanHohoGengaku().getText())) {
+            data.set減額平準化方法(TokuchoHeijunkaKeisanHoho6Gatsu.年額より４月分を引いた額を５期で割る.getコード());
         }
         data.set帳票グループ(div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get帳票出力グループコード());
 

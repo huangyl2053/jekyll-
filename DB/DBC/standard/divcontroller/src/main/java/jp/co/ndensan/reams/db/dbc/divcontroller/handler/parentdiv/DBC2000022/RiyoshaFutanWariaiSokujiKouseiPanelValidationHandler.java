@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000022.DBC2000022PanelAllDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000022.dgFutanWariai_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -20,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 画面設計_DBCMNK2001_利用者負担割合即時更正_修正。
@@ -153,7 +153,8 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelValidationHandler {
                 break;
             }
         }
-        RString 業務コンフィグ_年度終了月日 = BusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年度終了月日, SubGyomuCode.DBC介護給付);
+        RString 業務コンフィグ_年度終了月日 = DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年度終了月日,
+                RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         RDate 年度終了月日1 = new RDate(div.getDdlNendo().getSelectedKey().concat(業務コンフィグ_年度終了月日).toString()).plusDay(1);
         RDate 年度終了月日2 = new RDate(new RString(Integer.parseInt(div.getDdlNendo().getSelectedKey().toString()) + 1)
                 .concat(業務コンフィグ_年度終了月日).toString());
