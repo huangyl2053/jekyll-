@@ -27,9 +27,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJot
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -53,7 +50,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class IraiJohoDataTorikomi {
 
-    private static final LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
     private static final RString CSVファイル名 = new RString("依頼情報データ受取（オルカ）.csv");
     private static final RString 奇数行 = new RString("1");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
@@ -65,9 +61,6 @@ public class IraiJohoDataTorikomi {
      * @return レスポンスデータ
      */
     public ResponseData<IraiJohoDataTorikomiDiv> onLoad(IraiJohoDataTorikomiDiv div) {
-        if (!RealInitialLocker.tryGetLock(排他キー)) {
-            throw new PessimisticLockingException();
-        }
         return ResponseData.of(div).setState(DBE2920001StateName.初期状態);
     }
 
