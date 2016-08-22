@@ -405,7 +405,7 @@ public class JimuShinsakaishiryoBusiness {
                 一次判定結果 = YokaigoJotaiKubun09.toValue(一次判定結果コード.getColumnValue()).get名称();
             }
         }
-        RString 一次判定結果_認知症加算 = get一次判定結果_認知症加算(厚労省IF識別コード, 一次判定結果コード, 一次判定結果コード_認知症加算);
+        RString 一次判定結果_認知症加算 = get一次判定結果_認知症加算(厚労省IF識別コード, 一次判定結果コード_認知症加算);
         if (!RString.isNullOrEmpty(一次判定結果) && !RString.isNullOrEmpty(一次判定結果_認知症加算)) {
             return builder.append(一次判定結果)
                     .append("→")
@@ -418,7 +418,7 @@ public class JimuShinsakaishiryoBusiness {
         return RString.EMPTY;
     }
 
-    private RString get一次判定結果_認知症加算(Code 厚労省IF識別コード, Code 一次判定結果コード, Code 一次判定結果コード_認知症加算) {
+    private RString get一次判定結果_認知症加算(Code 厚労省IF識別コード, Code 一次判定結果コード_認知症加算) {
         RString 一次判定結果_認知症加算 = RString.EMPTY;
         if (一次判定結果コード_認知症加算 != null && !一次判定結果コード_認知症加算.isEmpty()
                 && 厚労省IF識別コード != null && !厚労省IF識別コード.isEmpty()) {
