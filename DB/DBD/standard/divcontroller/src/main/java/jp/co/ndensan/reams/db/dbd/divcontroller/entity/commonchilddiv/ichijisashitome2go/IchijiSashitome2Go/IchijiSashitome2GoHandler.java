@@ -502,11 +502,16 @@ public class IchijiSashitome2GoHandler {
     private void update支払方法変更_２号弁明書受理() {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(IchijiSashitome2GoHandler.二号一時差止ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         ShiharaiHohoHenkoBuilder builder = 支払方法変更管理業務概念.createBuilderForEdit();
-        builder.set終了区分(div.getDdlShuryoJokyo().getSelectedKey())
-                .set弁明書受付年月日(div.getTxtNigoBenmeishoJuriBenmeishoUketsukebi().getValue())
+        if (!ShiharaiHenkoBenmeiShinsaKekkaKubun.申請却下.getコード().equals(div.getDdlNigoBenmeishoJuriBenmeiShinsakekka().getSelectedKey())) {
+            builder.set終了区分(div.getDdlShuryoJokyo().getSelectedKey());
+            builder.set弁明審査結果区分(div.getDdlNigoBenmeishoJuriBenmeiShinsakekka().getSelectedKey());
+        } else {
+            builder.set弁明審査結果区分(ShiharaiHenkoBenmeiShinsaKekkaKubun.申請却下.getコード());
+        }
+
+        builder.set弁明書受付年月日(div.getTxtNigoBenmeishoJuriBenmeishoUketsukebi().getValue())
                 .set弁明理由コード(div.getDdlNigoBenmeishoJuriBenmeiRiyu().getSelectedKey())
                 .set弁明審査決定年月日(div.getTxtBemmeiNaiyoKetteiYMD().getValue())
-                .set弁明審査結果区分(div.getDdlNigoBenmeishoJuriBenmeiShinsakekka().getSelectedKey())
                 .setState(EntityDataState.Modified);
         ViewStateHolder.put(IchijiSashitome2GoHandler.二号一時差止ダイアロググキー.支払方法変更管理業務概念, builder.build());
     }
