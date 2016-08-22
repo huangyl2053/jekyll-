@@ -1031,13 +1031,16 @@ public class JukyushaIdoRenrakuhyoHandler {
     /**
      * 出力用受給者訂正情報Entityをを取得のメソッドです。
      *
+     * @param 作成年月日 FlexibleDate
+     * @param 氏名性別生年月日を印字する RString
      * @return JukyushaIdoRenrakuhyoTorokuEntity
      */
-    public JukyushaIdoRenrakuhyoTorokuEntity get受給者訂正連絡票Entity() {
+    public JukyushaIdoRenrakuhyoTorokuEntity get受給者訂正連絡票Entity(
+            FlexibleDate 作成年月日,
+            RString 氏名性別生年月日を印字する) {
         JukyushaIdoRenrakuhyoTorokuEntity entity = new JukyushaIdoRenrakuhyoTorokuEntity();
         entity.set証記載保険者番号(div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtShoKisaiHokenshaNo().getValue());
-        entity.set被保険者番号(div.getKokiKoureiIryoHokenshaPanel().getKokuhoPanel().
-                getTxtKokuhoHiHokenshaNo().getValue());
+        entity.set被保険者番号(div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtHiHokenshaNo().getValue());
         entity.set異動年月日(div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtIdoYMD().getValue());
         entity.set異動区分(div.getJukyushaIdoRenrakuhyoKihonJoho().getRadIdoKubun().getSelectedKey());
         entity.set性別(div.getJukyushaIdoRenrakuhyoKihonJoho().getRadSeibetsu().getSelectedKey());
@@ -1177,6 +1180,8 @@ public class JukyushaIdoRenrakuhyoHandler {
                 getTxtRiyosyaFutanWariaiYukoYMD().getToValue().toDateString()));
         entity.set訂正年月日(new FlexibleDate(div.getJukyushaIdoRenrakuhyoTeisei().getTxtTeiseiYMD().getValue().toDateString()));
         entity.set訂正区分コード(div.getJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().getSelectedKey());
+        entity.set作成年月日(作成年月日);
+        entity.set氏名性別生年月日を印字する(氏名性別生年月日を印字する);
         JukyushaIdoRenrakuhyoSakusei business = JukyushaIdoRenrakuhyoSakusei.createInstance();
         JukyushaIdoRenrakuhyoSakuseiRelateEntity entityReturn = business.出力用受給者訂正情報Entity(entity);
         return entityReturn.get出力用受給者訂正情報Entity();
@@ -1190,7 +1195,7 @@ public class JukyushaIdoRenrakuhyoHandler {
     public JukyushaIdoRenrakuhyoTorokuEntity get受給者異動連絡票Entity() {
         JukyushaIdoRenrakuhyoTorokuEntity entity = new JukyushaIdoRenrakuhyoTorokuEntity();
         entity.set証記載保険者番号(div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtShoKisaiHokenshaNo().getValue());
-        entity.set被保険者番号(div.getKokiKoureiIryoHokenshaPanel().getKokuhoPanel().getTxtKokuhoHiHokenshaNo().getValue());
+        entity.set被保険者番号(div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtHiHokenshaNo().getValue());
         entity.set異動年月日(div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtIdoYMD().getValue());
         entity.set異動区分(div.getJukyushaIdoRenrakuhyoKihonJoho().getRadIdoKubun().getSelectedKey());
         entity.set性別(div.getJukyushaIdoRenrakuhyoKihonJoho().getRadSeibetsu().getSelectedKey());
