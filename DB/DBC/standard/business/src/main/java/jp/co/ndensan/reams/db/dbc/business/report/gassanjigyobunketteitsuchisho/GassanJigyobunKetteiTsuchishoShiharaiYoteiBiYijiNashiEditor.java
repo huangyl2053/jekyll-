@@ -291,15 +291,6 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
         } else if (kyufuShurui.length() > INT_38 && kyufuShurui.length() <= INT_76) {
             source.kyuhuShu = kyufuShurui.substring(0, INT_38);
             source.kyuhuShu2 = kyufuShurui.substring(INT_38, kyufuShurui.length());
-        } else if (kyufuShurui.length() > INT_76 && kyufuShurui.length() <= INT_114) {
-            source.kyuhuShu = kyufuShurui.substring(0, INT_38);
-            source.kyuhuShu2 = kyufuShurui.substring(INT_38, INT_76);
-            source.kyuhuShu3 = kyufuShurui.substring(INT_76, kyufuShurui.length());
-
-        } else {
-            source.kyuhuShu = kyufuShurui.substring(0, INT_38);
-            source.kyuhuShu2 = kyufuShurui.substring(INT_38, INT_76);
-            source.kyuhuShu3 = kyufuShurui.substring(INT_76, INT_114);
         }
     }
 
