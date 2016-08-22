@@ -1522,7 +1522,8 @@ public class SokujiFukaKouseiMainHandler {
         Collections.sort(更正前後賦課のリスト, new Comparator<KoseiZengoFuka>() {
             @Override
             public int compare(KoseiZengoFuka arg0, KoseiZengoFuka arg1) {
-                return arg1.get通知書番号().getColumnValue().compareTo(arg0.get通知書番号().getColumnValue());
+                return arg1.get更正後().get通知書番号().getColumnValue().compareTo(
+                        arg0.get更正後().get通知書番号().getColumnValue());
             }
         });
     }
