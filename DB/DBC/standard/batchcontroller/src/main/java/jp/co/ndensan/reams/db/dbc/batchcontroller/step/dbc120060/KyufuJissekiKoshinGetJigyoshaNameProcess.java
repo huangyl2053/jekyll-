@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 給付実績更新結果情報取込・名称取得を実行する。
+ * 給付実績更新結果情報取込・事業者名称取得を実行する。
  *
  * @reamsid_L DBC-2470-010 liuhui
  */
@@ -31,9 +31,9 @@ public class KyufuJissekiKoshinGetJigyoshaNameProcess extends BatchProcessBase<J
             + "kyufujissekikoshinin.IKyufuJissekiKoshinJohoMapper.select事業者名称関連リスト");
     private static final RString エラー区分_名称取得エラー = new RString("05");
     @BatchWriter
-    IBatchTableWriter 処理結果リスト一時tableWriter;
+    private IBatchTableWriter 処理結果リスト一時tableWriter;
     @BatchWriter
-    IBatchTableWriter 給付実績一時tableWriter;
+    private IBatchTableWriter 給付実績一時tableWriter;
     private static final RString 処理結果リスト一時_TABLE_NAME = new RString("DbWT0002KokuhorenTorikomiError");
     private static final RString 給付実績一時_TABLE_NAME = new RString("DbWT1111KyufuJisseki");
 

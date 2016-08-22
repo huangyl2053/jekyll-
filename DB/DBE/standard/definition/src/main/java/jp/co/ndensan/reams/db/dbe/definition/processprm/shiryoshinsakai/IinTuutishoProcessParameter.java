@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTuuti
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 審査会資料一括作成（委員）のProcessParameterです。
@@ -24,7 +23,6 @@ public class IinTuutishoProcessParameter implements IBatchProcessParameter {
     private RString shinsakaiKaisaiNo;
     private RString shuturyokuSutairu;
     private RString printHou;
-    private Decimal chohyoIinHusu;
     private FlexibleDate shinsakaiKaisaiYoteiYMD;
     private RString shinsakaiKaishiYoteiTime;
     private RString shinsakaiKaisaiBashoName;
@@ -52,7 +50,6 @@ public class IinTuutishoProcessParameter implements IBatchProcessParameter {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shuturyokuSutairu = shuturyokuSutairu;
         this.printHou = printHou;
-        this.chohyoIinHusu = chohyoIinHusu;
         this.shinsakaiKaisaiYoteiYMD = shinsakaiKaisaiYoteiYMD;
         this.shinsakaiKaishiYoteiTime = shinsakaiKaishiYoteiTime;
         this.shinsakaiKaisaiBashoName = shinsakaiKaisaiBashoName;

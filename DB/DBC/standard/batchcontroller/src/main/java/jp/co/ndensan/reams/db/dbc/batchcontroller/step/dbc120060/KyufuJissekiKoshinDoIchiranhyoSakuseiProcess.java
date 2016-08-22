@@ -88,11 +88,18 @@ public class KyufuJissekiKoshinDoIchiranhyoSakuseiProcess extends BatchKeyBreakB
     private ReportSourceWriter<KyufujissekiKoshinkekkaIchiranSource> reportSourceWriter;
     private int 連番 = 0;
     private int 合計件数 = 0;
-    RString 並び順の１件目 = RString.EMPTY;
-    RString 並び順の２件目 = RString.EMPTY;
-    RString 並び順の３件目 = RString.EMPTY;
-    RString 並び順の４件目 = RString.EMPTY;
-    RString 並び順の５件目 = RString.EMPTY;
+    private RString 並び順の１件目 = RString.EMPTY;
+    private RString 並び順の２件目 = RString.EMPTY;
+    private RString 並び順の３件目 = RString.EMPTY;
+    private RString 並び順の４件目 = RString.EMPTY;
+    private RString 並び順の５件目 = RString.EMPTY;
+    private static final int INDEX_1 = 1;
+    private static final int INDEX_2 = 2;
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
+    private static final RString CODE = new RString("0003");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
+    private static final RString 固定改頁項目ID = new RString("0365");
 
     @Override
     protected void initialize() {
@@ -101,7 +108,9 @@ public class KyufuJissekiKoshinDoIchiranhyoSakuseiProcess extends BatchKeyBreakB
         識別コードset = new HashSet<>();
         改頁項目リスト = new ArrayList<>();
         改頁リスト = new ArrayList<>();
+        改頁リスト.add(固定改頁項目ID);
         並び順 = get並び順();
+        
         if (null == 並び順) {
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
                     .replace(実行不可MESSAGE.toString()).toString());
@@ -115,13 +124,13 @@ public class KyufuJissekiKoshinDoIchiranhyoSakuseiProcess extends BatchKeyBreakB
                 }
                 if (i == 0) {
                     並び順の１件目 = item.get項目名();
-                } else if (i == 1) {
+                } else if (i == INDEX_1) {
                     並び順の２件目 = item.get項目名();
-                } else if (i == 2) {
+                } else if (i == INDEX_2) {
                     並び順の３件目 = item.get項目名();
-                } else if (i == 3) {
+                } else if (i == INDEX_3) {
                     並び順の４件目 = item.get項目名();
-                } else if (i == 4) {
+                } else if (i == INDEX_4) {
                     並び順の５件目 = item.get項目名();
                 }
                 i = i + 1;
@@ -212,11 +221,10 @@ public class KyufuJissekiKoshinDoIchiranhyoSakuseiProcess extends BatchKeyBreakB
         } else {
             manager.spool(eucFilePath);
         }
-        batchReportWriter.close();
     }
 
     private PersonalData getPersonalData(ChohyoShutsuryokuTaishoDateEntity entity) {
-        ExpandedInformation expandedInformations = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
+        ExpandedInformation expandedInformations = new ExpandedInformation(new Code(CODE), 被保険者番号,
                 getColumnValue(new HihokenshaNo(entity.get被保険者_登録被保険者番号())));
         return PersonalData.of(new ShikibetsuCode(entity.get被保険者_識別コード()), expandedInformations);
     }
@@ -237,19 +245,20 @@ public class KyufuJissekiKoshinDoIchiranhyoSakuseiProcess extends BatchKeyBreakB
     }
 
     private RString get出力順() {
-        RString 出力順 = MyBatisOrderByClauseCreator.create(KyufujissekiKoshinkekkaIchiranProperty.DBC200054_KyufujissekiKoshinkekkaIchiran.class, 並び順);
-        if (RString.isNullOrEmpty(出力順)) {
-            出力順 = デフォルト出力順;
+        RString syuturyokuJun = MyBatisOrderByClauseCreator
+                .create(KyufujissekiKoshinkekkaIchiranProperty.DBC200054_KyufujissekiKoshinkekkaIchiran.class, 並び順);
+        if (RString.isNullOrEmpty(syuturyokuJun)) {
+            syuturyokuJun = デフォルト出力順;
         } else {
-            List<RString> 出力順BODY = 出力順.split(コンマ.toString());
-            出力順 = デフォルト出力順;
+            List<RString> 出力順BODY = syuturyokuJun.split(コンマ.toString());
+            syuturyokuJun = デフォルト出力順;
             if (出力順BODY.size() > 1) {
                 for (int i = 1; i < 出力順BODY.size(); i++) {
-                    出力順 = 出力順.concat(コンマ).concat(出力順BODY.get(i));
+                    syuturyokuJun = syuturyokuJun.concat(コンマ).concat(出力順BODY.get(i));
                 }
             }
         }
-        return 出力順;
+        return syuturyokuJun;
     }
 
 }

@@ -29,11 +29,11 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -84,7 +84,7 @@ public class FutanWariaiHanteiIchiranProcess extends BatchProcessBase<Futanwaria
     @BatchWriter
     private BatchReportWriter<FutanWariaiHanteiIchiranSource> batchReportWriter;
     private ReportSourceWriter<FutanWariaiHanteiIchiranSource> reportSourceWriter;
-    private EucCsvWriter<FutanWariaiHanteiIchiranCsvEntity> eucCsvWriter;
+    private CsvWriter<FutanWariaiHanteiIchiranCsvEntity> eucCsvWriter;
 
     @Override
     protected void initialize() {
@@ -98,7 +98,7 @@ public class FutanWariaiHanteiIchiranProcess extends BatchProcessBase<Futanwaria
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, CSVMEISHO);
-        eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.UTF_8withBOM).

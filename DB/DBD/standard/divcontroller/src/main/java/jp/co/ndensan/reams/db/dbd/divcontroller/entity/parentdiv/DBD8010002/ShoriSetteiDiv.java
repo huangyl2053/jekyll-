@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -27,6 +28,8 @@ public class ShoriSetteiDiv extends Panel {
     private HorizontalLine linShoriSettei;
     @JsonProperty("dgShoriSettei")
     private DataGrid<dgShoriSettei_Row> dgShoriSettei;
+    @JsonProperty("hdnShoriNendo")
+    private RString hdnShoriNendo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -86,6 +89,24 @@ public class ShoriSetteiDiv extends Panel {
     @JsonProperty("dgShoriSettei")
     public void setDgShoriSettei(DataGrid<dgShoriSettei_Row> dgShoriSettei) {
         this.dgShoriSettei = dgShoriSettei;
+    }
+
+    /*
+     * gethdnShoriNendo
+     * @return hdnShoriNendo
+     */
+    @JsonProperty("hdnShoriNendo")
+    public RString getHdnShoriNendo() {
+        return hdnShoriNendo;
+    }
+
+    /*
+     * sethdnShoriNendo
+     * @param hdnShoriNendo hdnShoriNendo
+     */
+    @JsonProperty("hdnShoriNendo")
+    public void setHdnShoriNendo(RString hdnShoriNendo) {
+        this.hdnShoriNendo = hdnShoriNendo;
     }
 
     // </editor-fold>

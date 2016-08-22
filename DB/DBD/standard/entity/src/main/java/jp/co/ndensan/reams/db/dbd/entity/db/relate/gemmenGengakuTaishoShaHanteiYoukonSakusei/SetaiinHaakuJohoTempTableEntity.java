@@ -27,6 +27,9 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class SetaiinHaakuJohoTempTableEntity extends DbTableEntityBase<SetaiinHaakuJohoTempTableEntity> implements IDbAccessable {
 
+    /**
+     * テーブル名です。
+     */
     @TableName
     public static final RString TABLE_NAME;
 

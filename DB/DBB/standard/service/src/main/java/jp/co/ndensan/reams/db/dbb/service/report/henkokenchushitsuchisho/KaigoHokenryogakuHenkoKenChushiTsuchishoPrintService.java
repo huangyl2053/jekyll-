@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.KaigoT
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.KaigoToiawasesakiManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -73,7 +74,8 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoPrintService {
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課,
                         property.reportId(),
                         発行日,
-                        NinshoshaDenshikoinshubetsuCode.保険者印,
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
+                        KenmeiFuyoKubunType.付与なし,
                         reportSourceWriter);
                 CompKaigoToiawasesakiSource compKaigoToiawasesakiSource = getCompKaigoToiawasesakiSource(帳票分類ID);
                 for (KaigoHokenryogakuHenkoKenChushiTsuchishoJoho joho : entities) {
@@ -123,7 +125,8 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoPrintService {
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課,
                         property.reportId(),
                         発行日,
-                        NinshoshaDenshikoinshubetsuCode.保険者印,
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
+                        KenmeiFuyoKubunType.付与なし,
                         reportSourceWriter);
                 CompKaigoToiawasesakiSource compKaigoToiawasesakiSource = getCompKaigoToiawasesakiSource(帳票分類ID);
                 for (KaigoHokenryogakuHenkoKenChushiTsuchishoJoho joho : entities) {

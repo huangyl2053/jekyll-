@@ -51,23 +51,23 @@ public class KyufuKanrihyoTorikomiKekkaIchiranProperty
         /**
          * 郵便番号
          */
-        郵便番号(new RString("0001"), new RString(""), new RString("")),
+        郵便番号(new RString("0001"), new RString(""), new RString("TEMP.\"yubinNo\"")),
         /**
          * 町域コード
          */
-        町域コード(new RString("0002"), new RString(""), new RString("")),
+        町域コード(new RString("0002"), new RString(""), new RString("TEMP.\"choikiCode\"")),
         /**
          * 行政区コード
          */
-        行政区コード(new RString("0004"), new RString(""), new RString("")),
+        行政区コード(new RString("0004"), new RString(""), new RString("TEMP.\"gyoseikuCode\"")),
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString(""), new RString("")),
+        氏名５０音カナ(new RString("0010"), new RString(""), new RString("TEMP.\"shimei50onKana\"")),
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0016"), new RString(""), new RString("")),
+        市町村コード(new RString("0016"), new RString(""), new RString("TEMP.\"shichosonCode\"")),
         /**
          * 被保険者番号
          */

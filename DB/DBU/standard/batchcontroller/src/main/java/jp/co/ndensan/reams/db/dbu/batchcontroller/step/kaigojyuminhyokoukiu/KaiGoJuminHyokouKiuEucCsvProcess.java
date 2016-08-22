@@ -13,11 +13,11 @@ import jp.co.ndensan.reams.db.dbu.definition.processprm.kaigojyuminhyokoukiu.Kai
 import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.IKaigoJuminhyoEucCsvEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.KaigoJuminhyoEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.RendoPatternEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.kaigojyuminhyoutashajuki.KaigoJyuminhyouKoikiunyoJuniCSVDataEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.kaigojyuminhyoutashajuki.KaigoJyuminhyouKoikiunyoJuniEucCSVDataEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.kaigojyuminhyoutashajuki.KaigoJyuminhyouTashajukiCSVDateEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.kaigojyuminhyoutashajuki.KaigoJyuminhyouTashajukiDateEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.kaigojyuminhyoutashajuki.KaigoJyuminhyouTashajukiEucCSVDateEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojyuminhyoutashajuki.KaigoJyuminhyouKoikiunyoJuniCSVDataEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojyuminhyoutashajuki.KaigoJyuminhyouKoikiunyoJuniEucCSVDataEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojyuminhyoutashajuki.KaigoJyuminhyouTashajukiCSVDateEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojyuminhyoutashajuki.KaigoJyuminhyouTashajukiDateEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojyuminhyoutashajuki.KaigoJyuminhyouTashajukiEucCSVDateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyo.KaigoJuminhyoRelateEntity;
 import jp.co.ndensan.reams.db.dbu.service.core.kaigojuminhyobatchparameter.KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder;
 import jp.co.ndensan.reams.db.dbu.service.core.kaigojyuminhyoutashajuki.KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder;

@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100202.JissekiDataIc
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 非課税年金対象者同定フロークラスです．
@@ -27,6 +28,9 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  * @reamsid_L DBD-4910-040 x_lilh
  */
 public class HikazeNenkinTaishoshaDouteiFlow extends BatchFlowBase<HikazeNenkinTaishoshaDouteiBatchParameter> {
+
+    private static final RString 処理区_1 = new RString("1");
+    private static final RString 処理区_9 = new RString("9");
 
     private static final String 実績データ一時作成 = "実績データ一時作成";
     private static final String 重複取込データ除外処理 = "重複取込データ除外処理";
@@ -45,6 +49,9 @@ public class HikazeNenkinTaishoshaDouteiFlow extends BatchFlowBase<HikazeNenkinT
         executeStep(重複取込データ除外処理);
         executeStep(年金番号突合_非課税年金対象者情報１_登録);
         executeStep(年金番号突合_該当年金情報なし);
+        if (!処理区_1.equals(getParameter().get処理区分()) && !処理区_9.equals(getParameter().get処理区分())) {
+            executeStep(年金番号チェックリスト);
+        }
         executeStep(氏名カナ突合結果一時);
         executeStep(氏名カナ突合結果件数一時);
         executeStep(氏名カナ突合_非課税年金対象者情報２_登録);
@@ -71,7 +78,10 @@ public class HikazeNenkinTaishoshaDouteiFlow extends BatchFlowBase<HikazeNenkinT
      */
     @Step(重複取込データ除外処理)
     protected IBatchFlowCommand chofukuTorikomiDataDeleteShoriProcess() {
-        return loopBatch(ChofukuTorikomiDataDeleteShoriProcess.class).define();
+        return loopBatch(ChofukuTorikomiDataDeleteShoriProcess.class)
+                .arguments(getParameter().toChofukuTorikomiDataDeleteShoriProcessParmeter())
+                .define();
+
     }
 
     /**

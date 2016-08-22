@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.definition.processprm.idoriyoshafutanwariaihe
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.idoriyoshafutanwariaihentei.IdoRiyoshaFutanwariaiHanteiMybatisParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -26,7 +25,6 @@ public class IdoRiyoshaFutanwariaiHanteiProcessParameter implements IBatchProces
     private FlexibleYear taishoNendo;
     private YMDHMS chushutsuKaishiTime;
     private YMDHMS chushutsuShuryoTime;
-    private LasdecCode 市町村コード;
 
     /**
      * コンストラクタです。
@@ -47,6 +45,6 @@ public class IdoRiyoshaFutanwariaiHanteiProcessParameter implements IBatchProces
      * @return MYBATISパラメータ
      */
     public IdoRiyoshaFutanwariaiHanteiMybatisParameter toMybatisParameter() {
-        return new IdoRiyoshaFutanwariaiHanteiMybatisParameter(市町村コード, taishoNendo, ShoriName.異動分負担割合判定.get名称());
+        return new IdoRiyoshaFutanwariaiHanteiMybatisParameter(taishoNendo, ShoriName.異動分負担割合判定.get名称());
     }
 }

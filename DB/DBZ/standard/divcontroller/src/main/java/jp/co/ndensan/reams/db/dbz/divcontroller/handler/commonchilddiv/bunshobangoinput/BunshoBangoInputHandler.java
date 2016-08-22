@@ -51,6 +51,10 @@ public class BunshoBangoInputHandler {
         div.getTxtBunshoNo().clearValue();
         div.getTxtBunshoFooter().clearValue();
 
+        if (null == 帳票ID || 帳票ID.isEmpty()) {
+            return;
+        }
+
         IBunshoNoFinder finder = BunshoNoFinderFactory.createInstance();
 
         BunshoNo bunshoNo = finder.get文書番号管理(帳票ID, 基準日);

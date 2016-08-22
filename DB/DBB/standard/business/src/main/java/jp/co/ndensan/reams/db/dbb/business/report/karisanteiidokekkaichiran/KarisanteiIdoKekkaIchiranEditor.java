@@ -147,19 +147,18 @@ public class KarisanteiIdoKekkaIchiranEditor implements IKarisanteiIdoKekkaIchir
         }
         source.listLower_15 = 口座異動編集(計算後情報_宛名_口座_更正後Entity);
         source.listLower_16 = 徴収方法編集(計算後情報_宛名_口座_更正後Entity);
-        if (計算後情報_宛名_口座_更正後Entity.get調定事由1() != null) {
+        if (計算後情報_宛名_口座_更正後Entity.get調定事由1() != null && !計算後情報_宛名_口座_更正後Entity.get調定事由1().isEmpty()) {
             source.listChoteijiyu1_1 = ChoteiJiyuCode.toValue(計算後情報_宛名_口座_更正後Entity.get調定事由1()).get名称();
         }
-        if (計算後情報_宛名_口座_更正後Entity.get調定事由2() != null) {
+        if (計算後情報_宛名_口座_更正後Entity.get調定事由2() != null && !計算後情報_宛名_口座_更正後Entity.get調定事由2().isEmpty()) {
             source.listChoteiJiyu2_1 = ChoteiJiyuCode.toValue(計算後情報_宛名_口座_更正後Entity.get調定事由2()).get名称();
         }
-        if (計算後情報_宛名_口座_更正後Entity.get調定事由3() != null) {
+        if (計算後情報_宛名_口座_更正後Entity.get調定事由3() != null && !計算後情報_宛名_口座_更正後Entity.get調定事由3().isEmpty()) {
             source.listChoteijiyu3_1 = ChoteiJiyuCode.toValue(計算後情報_宛名_口座_更正後Entity.get調定事由3()).get名称();
         }
-        if (計算後情報_宛名_口座_更正後Entity.get調定事由4() != null) {
+        if (計算後情報_宛名_口座_更正後Entity.get調定事由4() != null && !計算後情報_宛名_口座_更正後Entity.get調定事由4().isEmpty()) {
             source.listChoteijiyu4_1 = ChoteiJiyuCode.toValue(計算後情報_宛名_口座_更正後Entity.get調定事由4()).get名称();
         }
-
     }
 
     private void edit更正前情報(KarisanteiIdoKekkaIchiranSource source) {

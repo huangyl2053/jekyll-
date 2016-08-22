@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
- * 世帯員把握テーブルのエンティティクラスです。
+ * 世帯員把握入力Tempテーブルのエンティティクラスです。
  *
  * @reamsid_L DBC-4950-030 liuyang
  */
@@ -23,10 +23,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 public class SetaiHaakuEntity implements IDbAccessable {
 
     private HihokenshaNo hihokenshaNo;
-    private ShikibetsuCode shikibetsuCode1;
+    private ShikibetsuCode shikibetsuCode;
     private ShikibetsuCode shikibetsuCode2;
     private FlexibleDate kijunYMD;
-    private FlexibleDate kijunYMD2;
     private FlexibleYear shotokuNendo;
     private RString jushochiTokureiFlag;
 

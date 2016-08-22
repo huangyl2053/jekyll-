@@ -11,11 +11,12 @@
     
     <sql id="selectDbT3002">
       SELECT DbT3002.*
-            from rgdb."DbT3002KyodoShoriyoJukyushaIdoKihonSofu" as DbT3002
-            where DbT3002."rirekiNo" = 
-            (select max(A."rirekiNo") from rgdb."DbT3002KyodoShoriyoJukyushaIdoKihonSofu" as A
-            WHERE  DbT3002."hiHokenshaNo" = A."hiHokenshaNo" 
-            and DbT3002."idoYMD" = A."idoYMD" )
+            FROM rgdb."DbT3002KyodoShoriyoJukyushaIdoKihonSofu" as DbT3002
+            INNER  JOIN (select "hiHokenshaNo","idoYMD",max("rirekiNo") as max from rgdb."DbT3002KyodoShoriyoJukyushaIdoKihonSofu" group by "hiHokenshaNo","idoYMD")AS A
+            ON  DbT3002."rirekiNo" = A.max
+            and DbT3002."hiHokenshaNo" = A."hiHokenshaNo" 
+            and DbT3002."idoYMD" = A."idoYMD"
+        WHERE 1=1
             <if test="異動日From != null and !異動日From.isEmpty()">
             AND #{異動日From}<![CDATA[<=]]> DbT3002."idoYMD"
             </if>
@@ -39,12 +40,12 @@
     
     <sql id="select被保険者氏名">
       SELECT DbT3002.*
-            from rgdb."DbT3002KyodoShoriyoJukyushaIdoKihonSofu" as DbT3002
-            where DbT3002."rirekiNo" = 
-            (select max(A."rirekiNo") from rgdb."DbT3002KyodoShoriyoJukyushaIdoKihonSofu" as A
-            WHERE  DbT3002."hiHokenshaNo" = A."hiHokenshaNo" 
-            and DbT3002."idoYMD" = A."idoYMD" )
-            and DbT3002."hiHokenshaNo" = #{被保険者番号}
+            FROM rgdb."DbT3002KyodoShoriyoJukyushaIdoKihonSofu" as DbT3002
+            INNER  JOIN (select "hiHokenshaNo","idoYMD",max("rirekiNo") as max from rgdb."DbT3002KyodoShoriyoJukyushaIdoKihonSofu" group by "hiHokenshaNo","idoYMD")AS A
+            ON  DbT3002."rirekiNo" = A.max
+            and DbT3002."hiHokenshaNo" = A."hiHokenshaNo" 
+            and DbT3002."idoYMD" = A."idoYMD"
+            WHERE DbT3002."hiHokenshaNo" = #{被保険者番号}
             and  DbT3002."idoYMD"<![CDATA[<=]]> #{異動日To}
             and  DbT3002."logicalDeletedFlag"= false
             order by DbT3002."idoYMD" DESC
@@ -57,12 +58,13 @@
     </select>
     
     <sql id="selectDbT3003">
-      SELECT DbT3003.*
-            from rgdb."DbT3003KyodoShoriyoJukyushaIdoShokanSofu" as DbT3003
-            where DbT3003."rirekiNo" = 
-            (select max(A."rirekiNo") from rgdb."DbT3003KyodoShoriyoJukyushaIdoShokanSofu" as A
-            WHERE  DbT3003."hiHokenshaNo" = A."hiHokenshaNo" 
-            and DbT3003."idoYMD" = A."idoYMD" )
+        SELECT DbT3003.*
+            FROM rgdb."DbT3003KyodoShoriyoJukyushaIdoShokanSofu" as DbT3003
+            INNER  JOIN (select "hiHokenshaNo","idoYMD",max("rirekiNo") as max from rgdb."DbT3003KyodoShoriyoJukyushaIdoShokanSofu" group by "hiHokenshaNo","idoYMD")AS A
+            ON  DbT3003."rirekiNo" = A.max
+            and DbT3003."hiHokenshaNo" = A."hiHokenshaNo" 
+            and DbT3003."idoYMD" = A."idoYMD"
+        WHERE 1=1
             <if test="異動日From != null and !異動日From.isEmpty()">
             AND #{異動日From}<![CDATA[<=]]> DbT3003."idoYMD"
             </if>
@@ -85,12 +87,13 @@
     </select>
     
     <sql id="selectDbT3004">
-      SELECT DbT3004.*
-            from rgdb."DbT3004KyodoShoriyoJukyushaIdoKogakuSofu" as DbT3004
-            where DbT3004."rirekiNo" = 
-            (select max(A."rirekiNo") from rgdb."DbT3004KyodoShoriyoJukyushaIdoKogakuSofu" as A
-            WHERE  DbT3004."hiHokenshaNo" = A."hiHokenshaNo" 
-            and DbT3004."idoYMD" = A."idoYMD" )
+         SELECT DbT3004.*
+            FROM rgdb."DbT3004KyodoShoriyoJukyushaIdoKogakuSofu" as DbT3004
+            INNER  JOIN (select "hiHokenshaNo","idoYMD",max("rirekiNo") as max from rgdb."DbT3004KyodoShoriyoJukyushaIdoKogakuSofu" group by "hiHokenshaNo","idoYMD")AS A
+            ON  DbT3004."rirekiNo" = A.max
+            and DbT3004."hiHokenshaNo" = A."hiHokenshaNo" 
+            and DbT3004."idoYMD" = A."idoYMD"
+        WHERE 1=1
             <if test="異動日From != null and !異動日From.isEmpty()">
             AND #{異動日From}<![CDATA[<=]]> DbT3004."idoYMD"
             </if>

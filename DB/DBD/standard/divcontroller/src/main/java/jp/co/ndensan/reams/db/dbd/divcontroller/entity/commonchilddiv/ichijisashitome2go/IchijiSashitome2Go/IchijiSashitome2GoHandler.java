@@ -30,9 +30,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenk
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoTorokuKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -82,11 +82,8 @@ public class IchijiSashitome2GoHandler {
 
     /**
      * 画面初期化処理です。
-     *
-     * @return Message エラーMSG
      */
-    public Message onLoad() {
-        Message message = null;
+    public void onLoad() {
         RString 押下ボタン = ShoriKubun.toValue(div.getKey_Button()).get名称();
         ShiharaiHohoHenko 支払方法変更管理業務概念 = DataPassingConverter.deserialize(div.getKey_ShiharaiHohoHenkoKanri(), ShiharaiHohoHenko.class);
         List<ShiharaiHohoHenko> 支払方法データ = new ArrayList();
@@ -109,7 +106,7 @@ public class IchijiSashitome2GoHandler {
                     }
                 }
                 if (支払方法データ.isEmpty()) {
-                    return UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("支払方法変更");
+                    throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("支払方法変更"));
                 } else {
                     ViewStateHolder.put(IchijiSashitome2GoHandler.二号一時差止ダイアロググキー.支払方法変更管理業務概念, 支払方法変更管理業務概念);
                 }
@@ -124,14 +121,13 @@ public class IchijiSashitome2GoHandler {
         }
         if (支払方法変更管理業務概念 == null || 支払方法変更レコード.isEmpty()) {
             if (押下ボタン.equals(_２号弁明書受理) || 押下ボタン.equals(_２号一時差止登録) || 押下ボタン.equals(_２号一時差止解除)) {
-                return UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("支払方法変更");
+                throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("支払方法変更"));
             } else {
                 div.setShinkiKubun(新規登録);
             }
             ViewStateHolder.put(IchijiSashitome2GoHandler.二号一時差止ダイアロググキー.支払方法変更管理業務概念, 支払方法変更管理業務概念);
         }
         initializeDisplayData(押下ボタン, ViewStateHolder.get(IchijiSashitome2GoHandler.二号一時差止ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class));
-        return message;
     }
 
     /**
@@ -555,7 +551,7 @@ public class IchijiSashitome2GoHandler {
                     .setState(EntityDataState.Modified).build())
                     .setState(EntityDataState.Modified);
         }
-        ViewStateHolder.put(IchijiSashitome2GoHandler.二号一時差止ダイアロググキー.支払方法変更管理業務概念, 支払方法変更管理業務概念);
+        ViewStateHolder.put(IchijiSashitome2GoHandler.二号一時差止ダイアロググキー.支払方法変更管理業務概念, builder.build());
 
     }
 

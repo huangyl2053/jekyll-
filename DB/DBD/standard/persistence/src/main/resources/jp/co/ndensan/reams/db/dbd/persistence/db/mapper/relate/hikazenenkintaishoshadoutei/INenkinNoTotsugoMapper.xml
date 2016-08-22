@@ -5,7 +5,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hikazenenkintaishoshadoutei.INenkinNoTotsugoMapper">
     <resultMap id="resultMap_HikazeNenkinTaishoFirJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.HikazeNenkinTaishoFirJohoEntity" autoMapping="true">
-        <result property="連番" column="連番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="連番" column="連番" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
         <result property="非課税_DTレコード区分" column="DTレコード区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="非課税_DT市町村コード" column="DT市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="非課税_DT年金保険者コード" column="DT年金保険者コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -48,7 +48,7 @@
         <result property="実績_宛名漢字氏名" column="実績_宛名漢字氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="実績_宛名郵便番号" column="実績_宛名郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="実績_宛名漢字住所" column="実績_宛名漢字住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="実績_年度" column="実績_年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="実績_年度" column="実績_年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="実績_処理区分" column="実績_処理区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="実績_対象月" column="実績_対象月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="実績_基礎年金番号" column="実績_基礎年金番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -65,7 +65,7 @@
         <result property="実績_DT基礎年金番号" column="実績_DT基礎年金番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="実績_DT年金コード" column="実績_DT年金コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="実績_DT予備2" column="実績_DT予備2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="実績_DT生年月日" column="実績_DT生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="実績_DT生年月日" column="実績_DT生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="実績_DT性別" column="実績_DT性別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="実績_DTカナ氏名" column="実績_DTカナ氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="実績_DTシフトコード1" column="実績_DTシフトコード1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -204,7 +204,7 @@
         <result property="取込_DT基礎年金番号" column="DT基礎年金番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="取込_DT年金コード" column="DT年金コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="取込_DT予備2" column="DT予備2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="取込_DT生年月日" column=" " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="取込_DT生年月日" column="DT生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="取込_DT性別" column="DT性別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="取込_DTカナ氏名" column="DTカナ氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="取込_DTシフトコード1" column="DTシフトコード1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -304,16 +304,16 @@
         A."tourokuKubunn",
         A."dtRekoDoKubunn",
         A."dtShichosonCode",
-        A."dtDTnennkinnHokennshaCode",
+        A."dtNennkinnHokenshaCode",
         A."dtTsuuchiContentCode",
         A."dtYobi1",
         A."dtSeidoCode",
         A."dtCreateYMD",
         A."dtKisoNennkinnNo",
-        A."dtnennkinnCode",
+        A."dtNennkinnCode",
         A."dtYobi2",
         A."dtSeinenngappi",
-        A."dtseibetsu",
+        A."dtSeibetsu",
         A."dtKanaShimei",
         A."dtShifutoCode1",
         A."dtKanjiShimei",
@@ -334,18 +334,18 @@
         A."dtKinngakuYobi2",
         A."dtYobi5",
         A."dtKyousaiNennkinnShoushoKigouNo"
-        FROM "TorikomiTempTable" AS A
-        WHERE A.dtCreateYMD IS NOT NULL
-        AND A.dtCreateYMD != ''
-        AND A.dtCreateYMD = #{年度} - 2
+        FROM "JissekiDataIchijiSakuseiTempTable" AS A
+        WHERE A."dtTaisyoYear" IS NOT NULL
+        AND A."dtTaisyoYear" != ''
+        AND A."dtTaisyoYear" = #{年度}
         AND NOT EXISTS
         (
         SELECT *
         FROM "HikazeNenkinTaishoshaDouteiResultJohoTempTable" AS B
         WHERE B."douteiResultKubun" = '1'
         AND	B."gaitouJiyu"= '1'
-        AND	A."dtDTnennkinnHokennshaCode" = B."tNennkinnHokenshaCode"
-        AND	subString(A."dtnennkinnCode",1,3) = subString(B."dtNennkinnCode",1,3)
+        AND	A."dtNennkinnHokenshaCode" = B."dtNennkinnHokenshaCode"
+        AND	subString(A."dtNennkinnCode",1,3) = subString(B."dtNennkinnCode",1,3)
         AND	A."dtKisoNennkinnNo" = B."dtKisoNennkinnNo"
         )
 </select>

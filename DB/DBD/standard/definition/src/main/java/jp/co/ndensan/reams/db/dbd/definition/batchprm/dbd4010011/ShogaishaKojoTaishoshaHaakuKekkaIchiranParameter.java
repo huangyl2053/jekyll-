@@ -6,8 +6,9 @@
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd4010011;
 
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,9 +23,9 @@ import lombok.Setter;
 public class ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter extends BatchParameterBase {
 
     private RDate 基準日;
-    private TextBoxDate 対象年度;
-    private TextBoxDate 申請年月日;
-    private TextBoxDate 決定年月日;
+    private FlexibleYear 対象年度;
+    private FlexibleDate 申請年月日;
+    private FlexibleDate 決定年月日;
     private boolean 前回把握時の非該当者;
     private boolean 基準日より後に資格喪失した者;
 

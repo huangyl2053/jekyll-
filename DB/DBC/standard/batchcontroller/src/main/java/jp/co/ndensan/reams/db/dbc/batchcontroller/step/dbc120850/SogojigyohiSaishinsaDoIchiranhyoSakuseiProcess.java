@@ -64,7 +64,6 @@ public class SogojigyohiSaishinsaDoIchiranhyoSakuseiProcess extends
     private static final RString 出力ファイル名
             = new RString("DBC200080_SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiran.csv");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
-    private static final RString キー_出力順 = new RString("出力順");
     private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3063.\"hdrShoHokenshaNo\" ASC ");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Aug 18 19:43:03 CST 2016 
+ * Sat Aug 20 16:25:40 CST 2016 
  */
 
 
@@ -28,6 +28,8 @@ public class dgShoriSettei_Row extends DataRow {
     private DropDownList txtShoriJotai;
     private RString txtShoriNitchiji;
     private RString hdnSyokiShoriJotai;
+    private RString hdnTuki;
+    private RString hdnShori;
 
     public dgShoriSettei_Row() {
         super();
@@ -36,25 +38,33 @@ public class dgShoriSettei_Row extends DataRow {
         this.txtShoriJotai = new DropDownList();
         this.txtShoriNitchiji = RString.EMPTY;
         this.hdnSyokiShoriJotai = RString.EMPTY;
+        this.hdnTuki = RString.EMPTY;
+        this.hdnShori = RString.EMPTY;
         this.setOriginalData("txtTuki", txtTuki);
         this.setOriginalData("txtShori", txtShori);
         this.setOriginalData("txtShoriJotai", txtShoriJotai);
         this.setOriginalData("txtShoriNitchiji", txtShoriNitchiji);
         this.setOriginalData("hdnSyokiShoriJotai", hdnSyokiShoriJotai);
+        this.setOriginalData("hdnTuki", hdnTuki);
+        this.setOriginalData("hdnShori", hdnShori);
     }
 
-    public dgShoriSettei_Row(RString txtTuki, RString txtShori, DropDownList txtShoriJotai, RString txtShoriNitchiji, RString hdnSyokiShoriJotai) {
+    public dgShoriSettei_Row(RString txtTuki, RString txtShori, DropDownList txtShoriJotai, RString txtShoriNitchiji, RString hdnSyokiShoriJotai, RString hdnTuki, RString hdnShori) {
         super();
         this.setOriginalData("txtTuki", txtTuki);
         this.setOriginalData("txtShori", txtShori);
         this.setOriginalData("txtShoriJotai", txtShoriJotai);
         this.setOriginalData("txtShoriNitchiji", txtShoriNitchiji);
         this.setOriginalData("hdnSyokiShoriJotai", hdnSyokiShoriJotai);
+        this.setOriginalData("hdnTuki", hdnTuki);
+        this.setOriginalData("hdnShori", hdnShori);
         this.txtTuki = txtTuki;
         this.txtShori = txtShori;
         this.txtShoriJotai = txtShoriJotai;
         this.txtShoriNitchiji = txtShoriNitchiji;
         this.hdnSyokiShoriJotai = hdnSyokiShoriJotai;
+        this.hdnTuki = hdnTuki;
+        this.hdnShori = hdnShori;
     }
 
     public dgShoriSettei_Row(DataGridSetting gridSetting) {
@@ -64,11 +74,15 @@ public class dgShoriSettei_Row extends DataRow {
         this.txtShoriJotai = DropDownList.createInstance(gridSetting.getColumn("txtShoriJotai").getCellDetails());
         this.txtShoriNitchiji = RString.EMPTY;
         this.hdnSyokiShoriJotai = RString.EMPTY;
+        this.hdnTuki = RString.EMPTY;
+        this.hdnShori = RString.EMPTY;
         this.setOriginalData("txtTuki", txtTuki);
         this.setOriginalData("txtShori", txtShori);
         this.setOriginalData("txtShoriJotai", txtShoriJotai);
         this.setOriginalData("txtShoriNitchiji", txtShoriNitchiji);
         this.setOriginalData("hdnSyokiShoriJotai", hdnSyokiShoriJotai);
+        this.setOriginalData("hdnTuki", hdnTuki);
+        this.setOriginalData("hdnShori", hdnShori);
     }
 
     public RString getTxtTuki() {
@@ -89,6 +103,14 @@ public class dgShoriSettei_Row extends DataRow {
 
     public RString getHdnSyokiShoriJotai() {
         return hdnSyokiShoriJotai;
+    }
+
+    public RString getHdnTuki() {
+        return hdnTuki;
+    }
+
+    public RString getHdnShori() {
+        return hdnShori;
     }
 
     public void setTxtTuki(RString txtTuki) {
@@ -114,6 +136,16 @@ public class dgShoriSettei_Row extends DataRow {
     public void setHdnSyokiShoriJotai(RString hdnSyokiShoriJotai) {
         this.setOriginalData("hdnSyokiShoriJotai", hdnSyokiShoriJotai);
         this.hdnSyokiShoriJotai = hdnSyokiShoriJotai;
+    }
+
+    public void setHdnTuki(RString hdnTuki) {
+        this.setOriginalData("hdnTuki", hdnTuki);
+        this.hdnTuki = hdnTuki;
+    }
+
+    public void setHdnShori(RString hdnShori) {
+        this.setOriginalData("hdnShori", hdnShori);
+        this.hdnShori = hdnShori;
     }
 
     // </editor-fold>

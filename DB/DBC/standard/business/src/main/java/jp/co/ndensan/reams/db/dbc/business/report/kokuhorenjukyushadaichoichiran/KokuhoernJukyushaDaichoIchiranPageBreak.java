@@ -41,13 +41,13 @@ public class KokuhoernJukyushaDaichoIchiranPageBreak extends PageBreaker<Jukyush
         boolean flag = false;
         if (!currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo)) {
             flag = true;
-        } else if (this.breakKeysList.contains(KokuhorenJukyushaDaichoIchiranProperty.DBC200006ShutsuryokujunEnum.被保険者番号.getフォームフィールド名())
+        } else if (this.breakKeysList.contains(KokuhorenJukyushaDaichoIchiranProperty.DBC200006ShutsuryokujunEnum.被保険者番号.get項目ID())
                 && !currentSource.getSource().listList1_4.equals(nextSource.getSource().listList1_4)) {
             flag = true;
-        } else if (this.breakKeysList.contains(KokuhorenJukyushaDaichoIchiranProperty.DBC200006ShutsuryokujunEnum.町域コード.getフォームフィールド名())
+        } else if (this.breakKeysList.contains(KokuhorenJukyushaDaichoIchiranProperty.DBC200006ShutsuryokujunEnum.町域コード.get項目ID())
                 && !currentSource.getSource().listList2_4.equals(nextSource.getSource().listList2_4)) {
             flag = true;
-        } else if (this.breakKeysList.contains(KokuhorenJukyushaDaichoIchiranProperty.DBC200006ShutsuryokujunEnum.行政区コード.getフォームフィールド名())
+        } else if (this.breakKeysList.contains(KokuhorenJukyushaDaichoIchiranProperty.DBC200006ShutsuryokujunEnum.行政区コード.get項目ID())
                 && !currentSource.getSource().listList1_6.equals(nextSource.getSource().listList1_6)) {
             flag = true;
         }

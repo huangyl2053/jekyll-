@@ -42,11 +42,11 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenk
 import jp.co.ndensan.reams.db.dbz.definition.core.taino.JikoKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -97,11 +97,8 @@ public class KyufuGengaku1GoHandler {
 
     /**
      * 画面初期化処理です。
-     *
-     * @return Message エラーMSG
      */
-    public Message onLoad() {
-        Message message = null;
+    public void onLoad() {
         RString 押下ボタン = ShoriKubun.toValue(div.getKey_Button()).get名称();
         ShiharaiHohoHenko 支払方法変更管理業務概念 = DataPassingConverter.deserialize(div.getKey_ShiharaiHohoHenkoKanri(), ShiharaiHohoHenko.class);
         List<ShiharaiHohoHenko> 支払方法データ = new ArrayList();
@@ -122,20 +119,19 @@ public class KyufuGengaku1GoHandler {
                 }
             }
             if (支払方法データ.isEmpty()) {
-                return UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("支払方法変更");
+                throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("支払方法変更"));
             }
             支払方法変更レコード.add(支払方法変更管理業務概念);
 
         }
         if (支払方法変更管理業務概念 == null || 支払方法変更レコード.isEmpty()) {
             if (押下ボタン.equals(_減額免除申請)) {
-                return UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("支払方法変更");
+                throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("支払方法変更"));
             } else {
                 div.setShinkiKubun(新規登録);
             }
         }
         initializeDisplayData(押下ボタン, ViewStateHolder.get(KyufuGengaku1GoHandler.一号給付額減額ダイアログキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class));
-        return message;
     }
 
     /**
@@ -160,7 +156,7 @@ public class KyufuGengaku1GoHandler {
         TainoHanteiResultKohen 滞納判定結果 = DataPassingConverter.deserialize(div.getTainoHanteiKekka(), TainoHanteiResultKohen.class);
         ShiharaiHohoHenkoEntity 支払方法変更Entity = new ShiharaiHohoHenkoEntity();
         switch (ShoriKubun.toValue(div.getKey_Button()).get名称().toString()) {
-            case "給付額減額":
+            case "給付額減額登録":
                 if (div.getShinkiKubun().equals(新規登録)) {
                     支払方法変更Entity.set支払方法変更Entity(get給付額減額の登録Entity());
                     支払方法変更Entity.set支払方法変更滞納Entity(get支払方法変更滞納Entity(滞納判定結果));

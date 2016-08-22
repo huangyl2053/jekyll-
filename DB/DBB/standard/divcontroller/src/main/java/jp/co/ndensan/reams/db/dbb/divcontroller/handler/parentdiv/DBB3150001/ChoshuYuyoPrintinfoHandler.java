@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
  * 画面設計_DBBGM62001_1_更新結果確認 のhandlerです。
@@ -82,8 +83,9 @@ public class ChoshuYuyoPrintinfoHandler {
      * @param 賦課年度 FlexibleYear
      * @param 調定年度 FlexibleYear
      * @param 通知書番号 TsuchishoNo
+     * @return SourceDataCollection
      */
-    public void onClick発行する(FlexibleYear 賦課年度, FlexibleYear 調定年度, TsuchishoNo 通知書番号) {
+    public SourceDataCollection onClick発行する(FlexibleYear 賦課年度, FlexibleYear 調定年度, TsuchishoNo 通知書番号) {
 
         FukaJoho 賦課情報 = KaigoFukaChoshuYuyo.createInstance().getFukaJoho(調定年度, 賦課年度, 通知書番号);
         KakushuTsuchishoParameter pama = new KakushuTsuchishoParameter();
@@ -116,6 +118,6 @@ public class ChoshuYuyoPrintinfoHandler {
         pama.set調定事由List(null);
         pama.set郵振納付書_出力期(RString.EMPTY);
 
-        KaigoFukaChoshuYuyo.createInstance().publish(pama);
+        return KaigoFukaChoshuYuyo.createInstance().publish(pama);
     }
 }

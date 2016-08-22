@@ -24,8 +24,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TaishoShaHanteiYoukonkyoItokiTempTableEntity extends DbTableEntityBase<TaishoShaHanteiYoukonkyoItokiTempTableEntity> implements IDbAccessable {
+public class TaishoShaHanteiYoukonkyoItokiTempTableEntity extends
+        DbTableEntityBase<TaishoShaHanteiYoukonkyoItokiTempTableEntity> implements IDbAccessable {
 
+    /**
+     * テーブル名です。
+     */
     @TableName
     public static final RString TABLE_NAME;
 

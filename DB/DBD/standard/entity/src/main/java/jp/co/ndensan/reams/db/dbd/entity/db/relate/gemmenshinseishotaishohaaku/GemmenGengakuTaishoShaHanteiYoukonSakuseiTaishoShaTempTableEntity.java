@@ -26,6 +26,9 @@ import lombok.Setter;
 public class GemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTempTableEntity
         extends DbTableEntityBase<GemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTempTableEntity> implements IDbAccessable {
 
+    /**
+     * テーブル名です。
+     */
     @TableName
     public static final RString TABLE_NAME;
 

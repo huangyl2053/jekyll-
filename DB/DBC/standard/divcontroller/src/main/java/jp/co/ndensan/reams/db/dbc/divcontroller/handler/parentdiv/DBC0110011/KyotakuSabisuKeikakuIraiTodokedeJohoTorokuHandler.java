@@ -194,6 +194,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         set届出内容エリア照会(居宅給付計画届出);
         if (is事業者作成の場合()) {
             set計画事業者エリア照会(居宅給付計画届出);
+            onChange計画作成区分();
         }
         if (is自己作成の場合()) {
             div.getServiceAddAndServicePlanCreate().getJigyoshaJoho().setDisplayNone(true);
@@ -246,7 +247,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         }
         if (is自己作成の場合()) {
             div.getRadTodokedeKubun().setSelectedKey(KEY_0);
-            div.getRadKeikakuKubun().setDisplayNone(true);
+            div.getRadKeikakuKubun().setDisplayNone(false);
             div.getRadKeikakuKubun().setSelectedKey(KEY_0);
             div.getRadKeikakuSakuseiKubun().setDataSource(get自己作成DataSource());
             div.getRadKeikakuSakuseiKubun().setSelectedIndex(0);
@@ -261,6 +262,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         div.getTxtTodokedeshaJusho().clearValue();
         div.getTxtTodokedeshaTelNo().clearValue();
         div.getDdlTodokedeshaKankeiKubun().setDataSource(get届出者関係区分DataSource());
+        div.getServiceAddAndServicePlanCreate().setReadOnly(false);
     }
 
     /**
@@ -535,7 +537,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         }
         if (is自己作成の場合()) {
             KyotakuKeikakuJikoSakusei 居宅給付計画自己作成 = 居宅給付計画届出.getKyotakuKeikakuJikoSakuseiList().get(0);
-            div.getRadKeikakuKubun().setDisplayNone(true);
+            div.getRadKeikakuKubun().setDisplayNone(false);
             if (居宅.equals(居宅給付計画自己作成.get居宅_総合事業区分())) {
                 div.getRadKeikakuKubun().setSelectedKey(KEY_0);
             } else if (総合事業.equals(居宅給付計画自己作成.get居宅_総合事業区分())) {
@@ -596,11 +598,11 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
             div.getTxtJigyoshaHenkoYMD().clearValue();
         }
         if (KEY_0.equals(div.getRadTodokedeKubun().getSelectedKey())) {
-            div.getTxtItakusakiJigyoshaName().setReadOnly(false);
-            div.getTxtJigyoshaHenkoYMD().setReadOnly(false);
-        } else {
             div.getTxtItakusakiJigyoshaName().setReadOnly(true);
             div.getTxtJigyoshaHenkoYMD().setReadOnly(true);
+        } else {
+            div.getTxtItakusakiJigyoshaName().setReadOnly(false);
+            div.getTxtJigyoshaHenkoYMD().setReadOnly(false);
         }
         div.getTxtJigyoshaHenkoJiyu().setValue(居宅給付計画事業者.get事業者変更事由());
     }

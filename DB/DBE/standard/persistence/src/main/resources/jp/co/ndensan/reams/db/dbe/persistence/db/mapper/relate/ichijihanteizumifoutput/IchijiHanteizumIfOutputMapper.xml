@@ -261,7 +261,7 @@
         <result property="zenkaiYukoKikanEnd" column="A_zenkaiYukoKikanEnd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shujiiIryokikanCode" column="A_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shujiiCode" column="A_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="ikenshoSakuseiIraiYMD" column="D_ikenshoIraiRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ikenshoSakuseiIraiYMD" column="D_ikenshoSakuseiIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ikenshoJuryoYMD" column="E_ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="主治医一時remban14" column= "要介護認定主治医一時テーブル_remban14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="主治医一時remban15" column="要介護認定主治医一時テーブル_remban15" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -495,7 +495,7 @@
         <result property="前回jotaiAnteiseiCode" column= "V_jotaiAnteiseiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="前回ninchishoJiritsudoIIijoNoGaizensei" column="V_ninchishoJiritsudoIIijoNoGaizensei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="前回suiteiKyufuKubunCode" column="V_suiteiKyufuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="前回ninteiShinseiYMD" column="A2_A2_ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回ninteiShinseiYMD" column="DbT5101_ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="前回nijiHanteiYMD" column="W_nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="前回serviceKubunCode" column="X_serviceKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="po2remban" column="P02_P02_remban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -519,10 +519,10 @@
         <result property="前回サービスremban18" column="前回調査票概況調査状況一時テーブル_remban18" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="前回サービスremban19" column="前回調査票概況調査状況一時テーブル_remban19" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="前回サービスremban20" column= "前回調査票概況調査状況一時テーブル_remban20" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="前回serviceJokyoFlag" column="DbT5208Z_serviceJokyoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="前回koroshoIfShikibetsuCode" column="Z_serviceJokyoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="前回ninteishinsakaiIkenShurui" column= "A2_A2_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="前回shinsakaiMemo" column= "N_shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回serviceJokyoFlag" column="Z_serviceJokyoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回koroshoIfShikibetsuCode" column="A2_A2_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回ninteishinsakaiIkenShurui" column= "N_shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回shinsakaiMemo" column= "N_shinsakaiMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
        <select resultOrdered="true" id="get日次進捗データ作成CSV出力" resultMap="resultMap_ShinchokuDataOutputRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.itizihanteishori.ItziHanteiShoriMybitisParamter" fetchSize="500">
@@ -553,7 +553,7 @@
            , A."zenkaiYukoKikanEnd"                     AS "A_zenkaiYukoKikanEnd"
            , A."shujiiIryokikanCode"                    AS "A_shujiiIryokikanCode"
            , A."shujiiCode"                             AS "A_shujiiCode"
-           , D."ikenshoIraiRirekiNo"                    AS "D_ikenshoIraiRirekiNo"
+           , D."ikenshoSakuseiIraiYMD"                    AS "D_ikenshoSakuseiIraiYMD"
            , E."ikenshoJuryoYMD"                        AS "E_ikenshoJuryoYMD"
            ,要介護認定主治医一時テーブル."remban14" as "要介護認定主治医一時テーブル_remban14"
            ,要介護認定主治医一時テーブル."remban15" as "要介護認定主治医一時テーブル_remban15"
@@ -787,7 +787,7 @@
            , V."jotaiAnteiseiCode"                      AS "V_jotaiAnteiseiCode"
            , V."ninchishoJiritsudoIIijoNoGaizensei"     AS "V_ninchishoJiritsudoIIijoNoGaizensei"
            , V."suiteiKyufuKubunCode"                   AS "V_suiteiKyufuKubunCode"
-           , A2."A2_ninteiShinseiYMD"                   AS "A2_A2_ninteiShinseiYMD"
+           , DbT5101."ninteiShinseiYMD"                 AS "DbT5101_ninteiShinseiYMD"
            , W."nijiHanteiYMD"                          AS "W_nijiHanteiYMD"
            , X."serviceKubunCode"                       AS "X_serviceKubunCode"
            , P02."P02_remban"                           AS "P02_P02_remban"
@@ -814,6 +814,7 @@
            , Z."serviceJokyoFlag"                       AS "Z_serviceJokyoFlag"
            , A2."A2_koroshoIfShikibetsuCode"            AS "A2_A2_koroshoIfShikibetsuCode"
            , N."shinsakaiIken"                          AS "N_shinsakaiIken"
+           , N."shinsakaiMemo" AS "N_shinsakaiMemo"
           FROM
             rgdb."DbT5101NinteiShinseiJoho" AS A 
             INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS A1
@@ -938,7 +939,6 @@
                 AND P001."koroshoIfShikibetsuCode" = A."koroshoIfShikibetsuCode" 
               ORDER BY
                 P001."remban" 
-              LIMIT(1)
             ) AS PO1 
               ON A."shinseishoKanriNo" = PO1."PO1_shinseishoKanriNo"
              LEFT JOIN
@@ -1001,7 +1001,7 @@
               SELECT
                 P003."remban" AS "P02_remban"
                 , P003."shinseishoKanriNo" AS "P02_shinseishoKanriNo"
-                , T."shinseishoKanriNo"
+                , T."shinseishoKanriNo" AS "T_shinseishoKanriNo"
               FROM
                 rgdb."DbT5210NinteichosahyoShisetsuRiyo" AS P003
                 , rgdb."DbT5121ShinseiRirekiJoho" AS T 
@@ -1028,9 +1028,8 @@
                 ) 
               ORDER BY
                 P003."remban" 
-              LIMIT(1)
             ) AS P02 
-              ON A."shinseishoKanriNo" = P02."P02_shinseishoKanriNo" 
+              ON A."shinseishoKanriNo" = P02."T_shinseishoKanriNo" 
             LEFT JOIN
                     "ZenkaiChosaGaikyouJohoTemp" as 前回調査票概況調査状況一時テーブル
              ON A."shinseishoKanriNo" = 前回調査票概況調査状況一時テーブル."shinseishoKanriNo"  
@@ -1064,12 +1063,14 @@
                 rgdb."DbT5101NinteiShinseiJoho" AS A
                 , rgdb."DbT5121ShinseiRirekiJoho" AS T 
               WHERE
-                A."shinseishoKanriNo" = T."zenkaiShinseishoKanriNo" 
+                A."shinseishoKanriNo" = T."shinseishoKanriNo" 
               ORDER BY
                 A."shinseishoKanriNo" 
-              LIMIT(1)
             ) AS A2 
               ON A."shinseishoKanriNo" = A2."A2_shinseishoKanriNo" 
+           LEFT JOIN
+             rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+          ON A2."A2_zenkaiShinseishoKanriNo" =  DbT5101."shinseishoKanriNo"    
           WHERE
             A."logicalDeletedFlag" = FALSE  AND
             A."shinseishoKanriNo" IN

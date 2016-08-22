@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.gemmenGengakuTaishoShaHanteiYoukonSakusei;
 
-import jp.co.ndensan.reams.db.dbd.definition.processprm.gemmengengakutaishoshahanteiyoukonsakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.hanteiyoukonsakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengakutaishoshahanteiyoukonsakusei.SetaiinHaakuJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengakutaishoshahanteiyoukonsakusei.SetaiinHaakuJohoTempTableEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class SetaiinHaakuInputSakusei extends BatchProcessBase<SetaiinHaakuJohoEntity> {
 
     private static final RString MYBATIS_SELECT_ID_世帯員把握情報 = new RString("jp.co.ndensan.reams.db.dbd.persistence"
-            + ".db.mapper.relate.gemmenGengakuTaishoShaHanteiYoukonSakusei.ISetaiinHaakuJohoMapper.get世帯員把握情報");
+            + ".db.mapper.relate.gemmengengakutaishoshahanteiyoukonsakusei.ISetaiinHaakuJohoMapper.get世帯員把握情報");
 
     private GemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter processParamter;
 

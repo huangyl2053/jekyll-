@@ -317,42 +317,62 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     }
 
     /**
-     * サービス提供年月の前月を設定します。
+     * サービス提供年月を設定します。
      *
      * @param サービス提供年月 サービス提供年月
      */
     @Override
-    public void set前月(RDate サービス提供年月) {
-        getHandler().set前月(サービス提供年月);
+    public void setサービス提供年月(RDate サービス提供年月) {
+        getHandler().setサービス提供年月(サービス提供年月);
     }
 
     /**
-     * サービス提供年月の次月を設定します。
-     *
-     * @param サービス提供年月 サービス提供年月
-     */
-    @Override
-    public void set次月(RDate サービス提供年月) {
-        getHandler().set次月(サービス提供年月);
-    }
-
-    /**
-     * 前事業者を設定します。
+     * 事業者名称を設定します。
      *
      * @param 事業者名称 事業者名称
      */
     @Override
-    public void set前事業者(RString 事業者名称) {
-        getHandler().set前事業者(事業者名称);
+    public void set事業者名称(RString 事業者名称) {
+        getHandler().set事業者名称(事業者名称);
     }
 
     /**
-     * 後事業者を設定します。
+     * 実績区分を設定します。
      *
-     * @param 事業者名称 事業者名称
+     * @param 実績区分コード 実績区分コード
      */
     @Override
-    public void set後事業者(RString 事業者名称) {
-        getHandler().set後事業者(事業者名称);
+    public void set実績区分(RString 実績区分コード) {
+        getHandler().set実績区分(実績区分コード);
+    }
+
+    /**
+     * 整理番号を設定します。
+     *
+     * @param 整理番号 整理番号
+     */
+    @Override
+    public void set整理番号(RString 整理番号) {
+        getHandler().set整理番号(整理番号);
+    }
+
+    /**
+     * 識別番号名称を設定します。
+     *
+     * @param 識別番号名称 識別番号名称
+     */
+    @Override
+    public void set識別番号名称(RString 識別番号名称) {
+        getHandler().set識別番号名称(識別番号名称);
+    }
+
+    /**
+     * 保険者名称を設定します。
+     *
+     * @param 保険者名称 保険者名称
+     */
+    @Override
+    public void set保険者(RString 保険者名称) {
+        getHandler().set保険者(保険者名称);
     }
 }

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100202;
 
+import jp.co.ndensan.reams.db.dbd.definition.core.hikazeinenkin.TorokuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100202.ShimeiKanaTotsugoGaitousyaNasiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.ShimeiKanaTotsugoGaitousyaNasiJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.temptable.HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity;
@@ -77,7 +78,7 @@ public class ShimeiKanaTotsugoGaitousyaNasiProcess extends BatchProcessBase<Shim
             data.setKisoNennkinnNo(entity.get氏名カナ_DT基礎年金番号());
             data.setGenKisoNennkinnNo(空);
             data.setNennkinnCode(entity.get氏名カナ_DT年金コード());
-            data.setTourokuKubunn(一);
+            data.setTourokuKubunn(TorokuKubun.取込.getコード());
             data.setDtRekoDoKubunn(entity.get氏名カナ_DTレコード区分());
             data.setDtShichosonCode(entity.get氏名カナ_DT市町村コード());
             data.setDtNennkinnHokenshaCode(entity.get氏名カナ_DT年金保険者コード());

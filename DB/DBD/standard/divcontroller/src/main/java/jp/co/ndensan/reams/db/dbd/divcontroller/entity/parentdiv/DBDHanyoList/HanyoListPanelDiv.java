@@ -47,6 +47,8 @@ public class HanyoListPanelDiv extends Panel {
     private HanyoListRiyoshaFutanwariaiDiv HanyoListRiyoshaFutanwariai;
     @JsonProperty("ChushutsuJoken")
     private ChushutsuJokenDiv ChushutsuJoken;
+    @JsonProperty("btnShutsuryokujun")
+    private Button btnShutsuryokujun;
     @JsonProperty("ccdShutsuryokujun")
     private ChohyoShutsuryokujunDiv ccdShutsuryokujun;
 
@@ -255,6 +257,24 @@ public class HanyoListPanelDiv extends Panel {
     }
 
     /*
+     * getbtnShutsuryokujun
+     * @return btnShutsuryokujun
+     */
+    @JsonProperty("btnShutsuryokujun")
+    public Button getBtnShutsuryokujun() {
+        return btnShutsuryokujun;
+    }
+
+    /*
+     * setbtnShutsuryokujun
+     * @param btnShutsuryokujun btnShutsuryokujun
+     */
+    @JsonProperty("btnShutsuryokujun")
+    public void setBtnShutsuryokujun(Button btnShutsuryokujun) {
+        this.btnShutsuryokujun = btnShutsuryokujun;
+    }
+
+    /*
      * getccdShutsuryokujun
      * @return ccdShutsuryokujun
      */
@@ -364,6 +384,16 @@ public class HanyoListPanelDiv extends Panel {
     @JsonIgnore
     public void  setDdlIsCsvhitsukesurasyuhensyu1(DropDownList ddlIsCsvhitsukesurasyuhensyu1) {
         this.getHanyoListShisetsuNyutaisho().setDdlIsCsvhitsukesurasyuhensyu1(ddlIsCsvhitsukesurasyuhensyu1);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtCyohyoid1() {
+        return this.getHanyoListShisetsuNyutaisho().getTxtCyohyoid1();
+    }
+
+    @JsonIgnore
+    public void  setTxtCyohyoid1(TextBox txtCyohyoid1) {
+        this.getHanyoListShisetsuNyutaisho().setTxtCyohyoid1(txtCyohyoid1);
     }
 
     @JsonIgnore

@@ -40,6 +40,8 @@ public class KyodoIdoRenrakuhyoHenkoMain {
 
     private static final RString 訂正モード = new RString("訂正");
     private static final RString 削除モード = new RString("削除");
+    private static final RString 起動 = new RString("1");
+    private static final RString 停止 = new RString("0");
 
     /**
      * 画面初期化のメソッドです。
@@ -79,6 +81,7 @@ public class KyodoIdoRenrakuhyoHenkoMain {
      * @return ResponseData
      */
     public ResponseData<KyodoIdoRenrakuhyoHenkoMainDiv> onClick_btnSave(KyodoIdoRenrakuhyoHenkoMainDiv div) {
+        div.getHdnFlag().setValue(起動);
         KyodoshoriyoJukyushaIdoRenrakuhyoParam 初期受給者異動情報 = ViewStateHolder.get(
                 ViewStateKeys.共同処理用受給者異動情報, KyodoshoriyoJukyushaIdoRenrakuhyoParam.class);
         KyodoshoriyoJukyushaIdoRenrakuhyoParam entity = div.getKyodoIdoRenrakuhyoHenkoDetailInfo().getNewデータ();
@@ -162,6 +165,7 @@ public class KyodoIdoRenrakuhyoHenkoMain {
      * @return ResponseData
      */
     public ResponseData<KyodoIdoRenrakuhyoHenkoMainDiv> onClick_btnSearchResult(KyodoIdoRenrakuhyoHenkoMainDiv div) {
+        div.getHdnFlag().setValue(停止);
         return getCheckMessage(div, DBC0260012TransitionEventName.検索結果一覧);
     }
 
@@ -172,6 +176,7 @@ public class KyodoIdoRenrakuhyoHenkoMain {
      * @return ResponseData
      */
     public ResponseData<KyodoIdoRenrakuhyoHenkoMainDiv> onClick_btnResearch(KyodoIdoRenrakuhyoHenkoMainDiv div) {
+        div.getHdnFlag().setValue(停止);
         return getCheckMessage(div, DBC0260012TransitionEventName.再検索);
     }
 

@@ -76,25 +76,23 @@ public class KyufuJissekiKoshinReadCsvFileProcess extends BatchProcessBase<RStri
     private KyufuJissekiKoshinReadCsvFileService service;
 
     @BatchWriter
-    IBatchTableWriter 被保険者一時tableWriter;
+    private IBatchTableWriter 被保険者一時tableWriter;
     @BatchWriter
-    IBatchTableWriter 処理結果リスト一時tableWriter;
+    private IBatchTableWriter 処理結果リスト一時tableWriter;
     @BatchWriter
-    IBatchTableWriter 給付実績一時tableWriter;
+    private IBatchTableWriter 給付実績一時tableWriter;
     private static final RString 被保険者一時_TABLE_NAME = new RString("DbWT0001Hihokensha");
     private static final RString 処理結果リスト一時_TABLE_NAME = new RString("DbWT0002KokuhorenTorikomiError");
     private static final RString 給付実績一時_TABLE_NAME = new RString("DbWT1111KyufuJisseki");
 
-    OutputParameter<FlowEntity> flowEntity;
-    FlowEntity returnEntity;
+    private OutputParameter<FlowEntity> flowEntity;
+    private FlowEntity returnEntity;
     int 連番;
 
     @Override
     protected void initialize() {
         service = KyufuJissekiKoshinReadCsvFileService.createInstance();
         controlCsvEntity = new KyufuJissekiKoshinJohoControlCSVEntity();
-        dataEntity = new KyufuJissekiKoshinJohoDataEntity();
-        taisyogaiMeisaiEntity = new KyufuJissekiKoshinJohoCsvTaisyogaiMeisaiEntity();
         listCsvTaisyogaiMeisaiEntity = new ArrayList<>();
         returnEntity = new FlowEntity();
         連番 = parameter.get連番();
@@ -129,7 +127,6 @@ public class KyufuJissekiKoshinReadCsvFileProcess extends BatchProcessBase<RStri
                     || 交換情報識別番号_1143.equals(data.get(INDEX_2))
                     || 交換情報識別番号_1144.equals(data.get(INDEX_2)))) {
                 addMeisai();
-                kihonMeisaiOneEntity = new KyufuJissekiKoshinJohoCsvKihonMeisaiOneEntity();
                 kihonMeisaiOneEntity = ListToObjectMappingHelper.
                         toObject(KyufuJissekiKoshinJohoCsvKihonMeisaiOneEntity.class, data);
             } else if (KyufuJissekiRecordShubetsu.基本情報レコード.getコード().equals(data.get(INDEX_4))
@@ -138,13 +135,11 @@ public class KyufuJissekiKoshinReadCsvFileProcess extends BatchProcessBase<RStri
                     || 交換情報識別番号_1147.equals(data.get(INDEX_2))
                     || 交換情報識別番号_1148.equals(data.get(INDEX_2)))) {
                 addMeisai();
-                kihonMeisaiTwoEntity = new KyufuJissekiKoshinJohoCsvKihonMeisaiTwoEntity();
                 kihonMeisaiTwoEntity = ListToObjectMappingHelper.
                         toObject(KyufuJissekiKoshinJohoCsvKihonMeisaiTwoEntity.class, data);
             } else if (KyufuJissekiRecordShubetsu.介護給付費_高額介護サービス費情報レコード.getコード().equals(data.get(INDEX_4))
                     || KyufuJissekiRecordShubetsu.総合事業費_高額介護サービス費情報レコード.getコード().equals(data.get(INDEX_4))) {
                 addMeisai();
-                kougakuKaigoMeisaiEntity = new KyufuJissekiKoshinJohoCsvKougakuKaigoMeisaiEntity();
                 kougakuKaigoMeisaiEntity = ListToObjectMappingHelper.
                         toObject(KyufuJissekiKoshinJohoCsvKougakuKaigoMeisaiEntity.class, data);
             } else {
@@ -158,7 +153,7 @@ public class KyufuJissekiKoshinReadCsvFileProcess extends BatchProcessBase<RStri
     @Override
     protected void afterExecute() {
         addMeisai();
-        if ((連番 == parameter.get連番())) {
+        if (parameter.isLast() && 連番 == INDEX_0) {
             DbWT0002KokuhorenTorikomiErrorEntity errorTempentity = new DbWT0002KokuhorenTorikomiErrorEntity();
             errorTempentity.setShoHokanehshaNo(null);
             errorTempentity.setHihokenshaNo(null);

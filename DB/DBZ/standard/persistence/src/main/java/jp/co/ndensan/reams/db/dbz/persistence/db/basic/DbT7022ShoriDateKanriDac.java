@@ -128,6 +128,20 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     }
 
     /**
+     * 主キーで処理日付管理マスタを削除します。
+     *
+     * @param entity DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public void deletePhysicalByKey(
+            DbT7022ShoriDateKanriEntity entity) throws NullPointerException {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        accessor.deletePhysical(entity);
+    }
+
+    /**
      * 主キーで処理日付管理マスタを取得します。
      *
      * @param サブ業務コード SubGyomuCode

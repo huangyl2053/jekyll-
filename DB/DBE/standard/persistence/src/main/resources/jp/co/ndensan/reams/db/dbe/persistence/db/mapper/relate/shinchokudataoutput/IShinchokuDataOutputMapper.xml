@@ -259,7 +259,7 @@
         <result property="zenkaiYukoKikanEnd" column="A_zenkaiYukoKikanEnd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shujiiIryokikanCode" column="A_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shujiiCode" column="A_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="ikenshoSakuseiIraiYMD" column="D_ikenshoIraiRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ikenshoSakuseiIraiYMD" column="D_ikenshoSakuseiIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ikenshoJuryoYMD" column="E_ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="主治医一時remban14" column= "要介護認定主治医一時テーブル_remban14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="主治医一時remban15" column="要介護認定主治医一時テーブル_remban15" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -548,8 +548,8 @@
         <result property="前回サービスremban19" column="前回調査票概況調査状況一時テーブル_remban19" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="前回サービスremban20" column= "前回調査票概況調査状況一時テーブル_remban20" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="前回serviceJokyoFlag" column="DbT5208Z_serviceJokyoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="前回koroshoIfShikibetsuCode" column="Z_serviceJokyoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="前回ninteishinsakaiIkenShurui" column= "A2_A2_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回koroshoIfShikibetsuCode" column="A2_A2_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回shinsakaiIken" column= "N_shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="前回shinsakaiMemo" column= "N_shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
        <select resultOrdered="true" id="get日次進捗データ作成CSV出力" resultMap="resultMap_ShinchokuDataOutputRelateEntity"
@@ -581,7 +581,7 @@
            , A."zenkaiYukoKikanEnd"                     AS "A_zenkaiYukoKikanEnd"
            , A."shujiiIryokikanCode"                    AS "A_shujiiIryokikanCode"
            , A."shujiiCode"                             AS "A_shujiiCode"
-           , D."ikenshoIraiRirekiNo"                    AS "D_ikenshoIraiRirekiNo"
+           , D."ikenshoSakuseiIraiYMD"                    AS "D_ikenshoIraiRirekiNo"
            , E."ikenshoJuryoYMD"                        AS "E_ikenshoJuryoYMD"
            ,要介護認定主治医一時テーブル."remban14" as "要介護認定主治医一時テーブル_remban14"
            ,要介護認定主治医一時テーブル."remban15" as "要介護認定主治医一時テーブル_remban15"
@@ -872,6 +872,7 @@
            , Z."serviceJokyoFlag"                       AS "Z_serviceJokyoFlag"
            , A2."A2_koroshoIfShikibetsuCode"            AS "A2_A2_koroshoIfShikibetsuCode"
            , N."shinsakaiIken"                          AS "N_shinsakaiIken"
+           , N."shinsakaiMemo" AS "N_shinsakaiMemo"
           FROM
             rgdb."DbT5101NinteiShinseiJoho" AS A 
             INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS A1

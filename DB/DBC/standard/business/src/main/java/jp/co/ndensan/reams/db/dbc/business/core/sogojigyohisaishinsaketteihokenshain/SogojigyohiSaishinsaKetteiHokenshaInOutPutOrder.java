@@ -38,7 +38,7 @@ public enum SogojigyohiSaishinsaKetteiHokenshaInOutPutOrder implements IReportIt
     /**
      * 被保険者番号
      */
-    被保険者番号(new RString("0360"), new RString("hihokenshaNo"), new RString("DbWT0001.\"orgHihokenshaShimei\"")),
+    被保険者番号(new RString("0360"), new RString("hihokenshaNo"), new RString("DbWT0001.\"hihokenshaNo\"")),
     /**
      * サービス提供年月
      */

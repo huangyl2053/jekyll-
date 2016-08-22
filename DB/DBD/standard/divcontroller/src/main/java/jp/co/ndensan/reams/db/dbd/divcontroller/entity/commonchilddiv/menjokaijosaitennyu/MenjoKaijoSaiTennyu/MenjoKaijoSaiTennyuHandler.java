@@ -15,10 +15,10 @@ import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.TainoHanteiK
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoKanriKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoTorokuKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.DateRoundingType;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -52,11 +52,8 @@ public class MenjoKaijoSaiTennyuHandler {
 
     /**
      * 画面初期化処理です。
-     *
-     * @return Message エラーMSG
      */
-    public Message onLoad() {
-        Message message = null;
+    public void onLoad() {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = DataPassingConverter.deserialize(div.getKey_ShiharaiHohoHenkoKanri(), ShiharaiHohoHenko.class);
         ViewStateHolder.put(免除解除再転入ダイアロググキー.支払方法変更管理業務概念, 支払方法変更管理業務概念);
         List<ShiharaiHohoHenko> 支払方法変更レコード = new ArrayList();
@@ -68,10 +65,9 @@ public class MenjoKaijoSaiTennyuHandler {
             支払方法変更レコード.add(支払方法変更管理業務概念);
         }
         if (支払方法変更管理業務概念 == null || 支払方法変更レコード.isEmpty() || 支払方法変更管理業務概念.getShiharaiHohoHenkoGengakuList().isEmpty()) {
-            return UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("支払方法変更");
+            throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("支払方法変更"));
         }
         initializeDisplayData(ViewStateHolder.get(免除解除再転入ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class));
-        return message;
     }
 
     /**
@@ -172,7 +168,7 @@ public class MenjoKaijoSaiTennyuHandler {
             row.setGengakuTekiyoKikan(new RString(shiharaiHohoHenko.getShiharaiHohoHenkoGengakuList().get(i).get確定減額期間開始年月日()
                     .wareki(DateRoundingType.変換なし).toDateString().toString()).concat(new RString("～"))
                     .concat(new RString(shiharaiHohoHenko.getShiharaiHohoHenkoGengakuList().get(i).get確定減額期間終了年月日()
-                                    .wareki(DateRoundingType.変換なし).toDateString().toString())));
+                            .wareki(DateRoundingType.変換なし).toDateString().toString())));
             row.getTxtGengakuKetteiYMD().setValue(shiharaiHohoHenko.get減額決定年月日());
             row.setMenjoShinseiRiyu(shiharaiHohoHenko.get終了申請理由コード());
             row.getTxtMenjoShinseiUketsukeYMD().setValue(shiharaiHohoHenko.get終了申請書受付年月日());
@@ -202,9 +198,9 @@ public class MenjoKaijoSaiTennyuHandler {
         builder.setShiharaiHohoHenkoGengaku(shiharaiHohoHenkoGengaku.createBuilderForEdit()
                 .set確定減額期間終了年月日(div.getTxtKonkaiKikanShuryoYMD().getValue())
                 .set確定減額期間開始年月日(div.getTxtKonkaiKikanKaishiYMD().getValue())
-                .setState(EntityDataState.Modified)
-                .build());
-        ViewStateHolder.put(免除解除再転入ダイアロググキー.支払方法変更管理業務概念, 支払方法変更管理業務概念);
+                .setState(EntityDataState.Modified).build())
+                .setState(EntityDataState.Modified);
+        ViewStateHolder.put(免除解除再転入ダイアロググキー.支払方法変更管理業務概念, builder.build());
     }
 
     private Decimal get給付額減額期間(Decimal value, Decimal value0) {

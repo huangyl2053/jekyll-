@@ -21,6 +21,8 @@ import lombok.Setter;
 @Setter
 public class DBC180020MyBatisParameter implements IMyBatisParameter {
 
+    private static final RString 開始 = new RString("0801");
+    private static final RString 終了 = new RString("0731");
     private static final int NUM2 = 2;
     private static final int NUM3 = 3;
     private static final int NUM5 = 5;
@@ -64,11 +66,33 @@ public class DBC180020MyBatisParameter implements IMyBatisParameter {
      * @param 判定基準日 RString
      * @param 対象年度 RString
      * @param 対象月 RString
+     * @param 対象開始日 RString
+     * @param 対象終了日 RString
      */
-    public DBC180020MyBatisParameter(RString 判定基準日, RString 対象年度, RString 対象月) {
+    public DBC180020MyBatisParameter(RString 判定基準日, RString 対象年度, RString 対象月, RString 対象開始日,
+            RString 対象終了日) {
         this.判定基準日 = 判定基準日;
         this.判定基準日の月 = RString.isNullOrEmpty(判定基準日) ? RString.EMPTY : 判定基準日.substring(NUM4, NUM6);
         this.対象年度 = 対象年度;
+        this.対象月 = 対象月;
+        this.対象開始日 = 対象開始日;
+        this.対象終了日 = 対象終了日;
+        if (対象年度 != null) {
+            this.対象年度開始日 = 対象年度.concat(new RString("0801"));
+            this.対象年度終了日 = new RString(Integer.parseInt(対象年度.trim().toString()) + 1).concat(new RString("0731"));
+        }
+    }
+
+    /**
+     * DBC180020MyBatisParameterのコンストラクタです。
+     *
+     * @param 対象開始日 RString
+     * @param 対象終了日 RString
+     * @param 対象月 RString
+     */
+    public DBC180020MyBatisParameter(RString 対象開始日, RString 対象終了日, RString 対象月) {
+        this.対象開始日 = 対象開始日;
+        this.対象終了日 = 対象終了日;
         this.対象月 = 対象月;
     }
 
@@ -79,12 +103,21 @@ public class DBC180020MyBatisParameter implements IMyBatisParameter {
      * @param 対象年度 RString
      * @param 対象月 RString
      * @param 対象終了日リスト List<RString>
+     * @param 対象開始日 RString
+     * @param 対象終了日 RString
      */
-    public DBC180020MyBatisParameter(RString 判定基準日, RString 対象年度, RString 対象月, List<RString> 対象終了日リスト) {
+    public DBC180020MyBatisParameter(RString 判定基準日, RString 対象年度, RString 対象月, RString 対象開始日,
+            RString 対象終了日, List<RString> 対象終了日リスト) {
         this.判定基準日 = 判定基準日;
         this.判定基準日の月 = RString.isNullOrEmpty(判定基準日) ? RString.EMPTY : 判定基準日.substring(NUM4, NUM6);
         this.対象年度 = 対象年度;
         this.対象月 = 対象月;
+        this.対象終了日 = 対象終了日;
+        this.対象開始日 = 対象開始日;
+        if (対象年度 != null) {
+            this.対象年度開始日 = 対象年度.concat(開始);
+            this.対象年度終了日 = new RString(Integer.parseInt(対象年度.trim().toString()) + 1).concat(終了);
+        }
         if (対象終了日リスト == null || 対象終了日リスト.isEmpty()) {
             return;
         }

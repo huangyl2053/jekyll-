@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-4950-030 liuyang -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.ISetainHakuNyuryokuTempMapper">
+    <sql id="allColumns_SetainHakuNyuryokuTemp">
+        "SetainHakuNyuryokuTemp"."hihokenshaNo"as "SetainHakuNyuryokuTemp_hihokenshaNo",
+        "SetainHakuNyuryokuTemp"."shikibetsuCode"as "SetainHakuNyuryokuTemp_shikibetsuCode",
+        "SetainHakuNyuryokuTemp"."shikibetsuCode2"as "SetainHakuNyuryokuTemp_shikibetsuCode2",
+        "SetainHakuNyuryokuTemp"."kijunYMD"as "SetainHakuNyuryokuTemp_kijunYMD",
+        "SetainHakuNyuryokuTemp"."shotokuNendo"as "SetainHakuNyuryokuTemp_shotokuNendo",
+        "SetainHakuNyuryokuTemp"."jushochiTokureiFlag"as "SetainHakuNyuryokuTemp_jushochiTokureiFlag"
+    </sql>
+    <resultMap id="ResultMap_SetaiHaakuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SetaiHaakuEntity" autoMapping="true">
+        <result property="hihokenshaNo" column="SetainHakuNyuryokuTemp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="shikibetsuCode" column="SetainHakuNyuryokuTemp_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="shikibetsuCode2" column="SetainHakuNyuryokuTemp_shikibetsuCode2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="kijunYMD" column="SetainHakuNyuryokuTemp_kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shotokuNendo" column="SetainHakuNyuryokuTemp_shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="jushochiTokureiFlag" column="SetainHakuNyuryokuTemp_jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+   </resultMap>
+</mapper>

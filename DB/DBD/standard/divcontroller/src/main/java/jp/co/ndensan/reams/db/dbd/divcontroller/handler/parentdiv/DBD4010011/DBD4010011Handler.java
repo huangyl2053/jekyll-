@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4010011;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd4010011.ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4010011.DBD4010011Div;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
@@ -43,9 +45,9 @@ public class DBD4010011Handler {
         boolean 基準日より後に資格喪失した者 = dBD4010011Div.getShogaishaKojoTaishoshaHaakuJoken().getChkJogaiJoken().getSelectedKeys().contains(new RString("removeSoshitsusha"));
         boolean 前回把握時の非該当者 = dBD4010011Div.getShogaishaKojoTaishoshaHaakuJoken().getChkJogaiJoken().getSelectedKeys().contains(new RString("includeHigaishosha"));
         parameter.set基準日(dBD4010011Div.getShogaishaKojoTaishoshaHaakuJoken().getTxtKijunYMD().getValue());
-        parameter.set対象年度(ToTextBoxDate(対象年度));
-        parameter.set申請年月日(ToTextBoxDate(申請年月日));
-        parameter.set決定年月日(ToTextBoxDate(決定年月日));
+        parameter.set対象年度(new FlexibleYear(対象年度.toDateString()));
+        parameter.set申請年月日(new FlexibleDate(申請年月日.toDateString()));
+        parameter.set決定年月日(new FlexibleDate(決定年月日.toDateString()));
         parameter.set基準日より後に資格喪失した者(基準日より後に資格喪失した者);
         parameter.set前回把握時の非該当者(前回把握時の非該当者);
 

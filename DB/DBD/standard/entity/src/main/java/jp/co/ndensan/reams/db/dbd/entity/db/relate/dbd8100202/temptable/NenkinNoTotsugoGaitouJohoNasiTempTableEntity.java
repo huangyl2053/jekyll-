@@ -24,8 +24,15 @@ import lombok.Setter;
 public class NenkinNoTotsugoGaitouJohoNasiTempTableEntity extends DbTableEntityBase<NenkinNoTotsugoGaitouJohoNasiTempTableEntity>
         implements IDbAccessable {
 
+    /**
+     * 該当年金情報なし一時テーブルの名称．
+     */
     @TableName
-    public static final RString TABLE_NAME = new RString("NenkinNoTotsugoGaitouJohoNasiTempTable");
+    public static final RString TABLE_NAME;
+
+    static {
+        TABLE_NAME = new RString("NenkinNoTotsugoGaitouJohoNasiTempTable");
+    }
 
     @TempTableColumnOrder(1)
     private RString dtRekoDoKubunn;

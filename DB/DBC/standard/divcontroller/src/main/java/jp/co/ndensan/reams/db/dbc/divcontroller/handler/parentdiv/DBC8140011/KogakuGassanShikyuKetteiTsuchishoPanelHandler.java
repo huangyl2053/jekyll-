@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8140011;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -28,7 +27,6 @@ import jp.co.ndensan.reams.db.dbc.service.core.kougakugassanshikyuketteitsuchish
 import jp.co.ndensan.reams.db.dbc.service.report.gassanjigyobunketteitsuchisho.GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiAriPrintService;
 import jp.co.ndensan.reams.db.dbc.service.report.gassanjigyobunketteitsuchisho.GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
@@ -52,8 +50,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -90,37 +86,75 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
     }
 
     /**
-     * 画面初期化のメソッドます。
+     * 画面初期化のメソッドです。
      *
      * @param 被保険者番号 HihokenshaNo
      * @param 識別コード ShikibetsuCode
-     * @return ValidationMessageControlPairs
+     * @param 支払予定日印字有無 RString
      */
-    public ValidationMessageControlPairs initialize(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+    public void initialize(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, RString 支払予定日印字有無) {
         div.getKogakuGassanShikyuKetteiTsuchishoSakuseiKihon().initialize(識別コード);
         div.getKogakuGassanShikyuKetteiTsuchishoSakuseiKaigoKihon().initialize(被保険者番号);
         div.setDisabled(false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(発行する, false);
         AccessLogger.log(AccessLogType.照会, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
-        JukyushaDaichoManager manage1 = new JukyushaDaichoManager();
-        List<JukyushaDaicho> 受給者台帳 = manage1.get受給者台帳情報(被保険者番号);
-        SogoJigyoTaishoshaManager manage2 = new SogoJigyoTaishoshaManager();
-        List<SogoJigyoTaishosha> 総合事業対象者 = manage2.get総合事業対象者(被保険者番号);
-        if (受給者台帳.isEmpty() || 総合事業対象者.isEmpty()) {
-            validPairs = getValidationHandler().受給共通_受給者登録なしチェック();
-            if (validPairs.iterator().hasNext()) {
-                return validPairs;
-            }
+        div.getTxtZenkaiHakkoYMD().setDisabled(true);
+        if (RSTRING_0.equals(支払予定日印字有無)) {
+            div.getTxtShiharaiYoteiYMD().setVisible(false);
+
         }
-        JigyoKogakuGassanShikyuFushikyuKetteiManager manage3 = new JigyoKogakuGassanShikyuFushikyuKetteiManager();
-        List<JigyoKogakuGassanShikyuFushikyuKettei> 事業高額合算支給不支給決定List = manage3.get事業高額合算支給不支給決定一覧(被保険者番号);
-        if (事業高額合算支給不支給決定List.isEmpty()) {
-            validPairs = getValidationHandler().高額合算支給不支給マスタデータなしチェック();
-            if (validPairs.iterator().hasNext()) {
-                return validPairs;
-            }
+        if (RSTRING_1.equals(支払予定日印字有無)) {
+            div.getTxtShiharaiYoteiYMD().setVisible(true);
+            div.getTxtShiharaiYoteiYMD().setDisabled(false);
         }
+        div.getCcdBunshoNO().initialize(帳票ID);
+        div.getTxtHakkouYMD().setValue(RDate.getNowDate());
+    }
+
+    /**
+     * 受給者台帳のメソッドです。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return JukyushaDaichoの{@code list}
+     */
+    public List<JukyushaDaicho> get受給者台帳(HihokenshaNo 被保険者番号) {
+        JukyushaDaichoManager manager = new JukyushaDaichoManager();
+        List<JukyushaDaicho> 受給者台帳 = manager.get受給者台帳情報(被保険者番号);
+        return 受給者台帳;
+    }
+
+    /**
+     * 総合事業対象者のメソッドです。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return SogoJigyoTaishoshaの{@code list}
+     */
+    public List<SogoJigyoTaishosha> get総合事業対象者(HihokenshaNo 被保険者番号) {
+        SogoJigyoTaishoshaManager manager = new SogoJigyoTaishoshaManager();
+        List<SogoJigyoTaishosha> 総合事業対象者 = manager.get総合事業対象者(被保険者番号);
+        return 総合事業対象者;
+    }
+
+    /**
+     * 事業高額合算支給不支給決定Listのメソッドです。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return JigyoKogakuGassanShikyuFushikyuKetteiの{@code list}
+     */
+    public List<JigyoKogakuGassanShikyuFushikyuKettei> get事業高額合算支給不支給決定List(HihokenshaNo 被保険者番号) {
+        JigyoKogakuGassanShikyuFushikyuKetteiManager manager = new JigyoKogakuGassanShikyuFushikyuKetteiManager();
+        List<JigyoKogakuGassanShikyuFushikyuKettei> 事業高額合算支給不支給決定List = manager.get事業高額合算支給不支給決定一覧(被保険者番号);
+        return 事業高額合算支給不支給決定List;
+    }
+
+    /**
+     * 事業高額合算支給不支給決定Listのセットです。
+     *
+     * @param 事業高額合算支給不支給決定List JigyoKogakuGassanShikyuFushikyuKetteiの{@code list}
+     * @return JigyoKogakuGassanShikyuFushikyuKetteiの{@code list}
+     */
+    public List<JigyoKogakuGassanShikyuFushikyuKettei> set事業高額合算支給不支給決定List(
+            List<JigyoKogakuGassanShikyuFushikyuKettei> 事業高額合算支給不支給決定List) {
         List<JigyoKogakuGassanShikyuFushikyuKettei> 事業高額合算支給不支給決定List1 = new ArrayList<>();
         JigyoKogakuGassanShikyuGakuKeisanKekkaManager manage4 = new JigyoKogakuGassanShikyuGakuKeisanKekkaManager();
         for (JigyoKogakuGassanShikyuFushikyuKettei shikyuKettei : 事業高額合算支給不支給決定List) {
@@ -134,31 +168,15 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
 
             }
         }
-        ViewStateHolder.put(ViewStateKeys.事業高額合算支給不支給決定List, (Serializable) 事業高額合算支給不支給決定List1);
-        getMap(事業高額合算支給不支給決定List1);
-        Map<FlexibleYear, Set<RString>> 対象年度_連絡票整理番号 = ViewStateHolder.get(ViewStateKeys.対象年度_連絡票整理番号Map, Map.class);
-        Map<RString, Set<RString>> 連絡票整理番号_履歴番号 = ViewStateHolder.get(ViewStateKeys.連絡票整理番号_履歴番号Map, Map.class);
-        RString 帳票制御汎用キー = set支払予定日印字有無();
-        if (RSTRING_0.equals(帳票制御汎用キー)) {
-            div.getTxtShiharaiYoteiYMD().setVisible(false);
-
-        }
-        if (RSTRING_1.equals(帳票制御汎用キー)) {
-            div.getTxtShiharaiYoteiYMD().setVisible(true);
-            div.getTxtShiharaiYoteiYMD().setDisabled(false);
-        }
-        div.getDdlTaishoNendo().getDataSource().clear();
-        set対象年度(対象年度_連絡票整理番号);
-        set連絡票整理番号(対象年度_連絡票整理番号);
-        set履歴番号(連絡票整理番号_履歴番号);
-        set前回発行日();
-        div.getCcdBunshoNO().initialize(帳票ID);
-        div.getTxtHakkouYMD().setValue(RDate.getNowDate());
-        return validPairs;
-
+        return 事業高額合算支給不支給決定List1;
     }
 
-    private void set対象年度(Map<FlexibleYear, Set<RString>> map) {
+    /**
+     * 対象年度のセットのンメソッドです。
+     *
+     * @param map Map
+     */
+    public void set対象年度(Map<FlexibleYear, Set<RString>> map) {
         List<FlexibleYear> 対象年度List = new ArrayList<>(map.keySet());
         if (!対象年度List.isEmpty()) {
             Comparator<FlexibleYear> comparator = new Comparator<FlexibleYear>() {
@@ -236,41 +254,47 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
     /**
      * 前回発行日のセットのンメソッドです。
      *
-     *
+     * @param shikyuKettei JigyoKogakuGassanShikyuFushikyuKettei
      */
-    public void set前回発行日() {
-        List<JigyoKogakuGassanShikyuFushikyuKettei> 事業高額合算支給不支給決定List = ViewStateHolder.
-                get(ViewStateKeys.事業高額合算支給不支給決定List, List.class);
-        RString select対象年度 = div.getDdlTaishoNendo().getSelectedKey();
-        RString select連絡票整理番号 = div.getDdlRearakuhyoSeiriNO().getSelectedKey();
-        RString select履歴番号 = div.getDdlRirekiNO().getSelectedKey();
+    public void set前回発行日(JigyoKogakuGassanShikyuFushikyuKettei shikyuKettei) {
         div.getTxtZenkaiHakkoYMD().setDisabled(true);
-        RDate 前回発行日 = null;
-        for (JigyoKogakuGassanShikyuFushikyuKettei shikyuKettei : 事業高額合算支給不支給決定List) {
-            if (select対象年度.equals(shikyuKettei.get対象年度().toDateString())
-                    && select連絡票整理番号.equals(shikyuKettei.get支給申請書整理番号())
-                    && select履歴番号.equals(new RString(shikyuKettei.get履歴番号()))) {
-                前回発行日 = shikyuKettei.get決定通知書作成年月日() != null
-                        ? new RDate(shikyuKettei.get決定通知書作成年月日().toString()) : null;
-
-                ViewStateHolder.put(ViewStateKeys.事業高額合算支給不支給決定, shikyuKettei);
-                break;
-            }
-        }
+        RDate 前回発行日 = shikyuKettei.get決定通知書作成年月日() != null
+                ? new RDate(shikyuKettei.get決定通知書作成年月日().toString()) : null;
         if (前回発行日 != null) {
             div.getTxtZenkaiHakkoYMD().setValue(前回発行日);
         }
     }
 
     /**
+     * 事業高額合算支給不支給決定のンメソッドです。
+     *
+     * @param 事業高額合算支給不支給決定List JigyoKogakuGassanShikyuFushikyuKetteiの{@code list}
+     * @return JigyoKogakuGassanShikyuFushikyuKettei
+     */
+    public JigyoKogakuGassanShikyuFushikyuKettei get事業高額合算支給不支給決定(
+            List<JigyoKogakuGassanShikyuFushikyuKettei> 事業高額合算支給不支給決定List) {
+        RString select対象年度 = div.getDdlTaishoNendo().getSelectedKey();
+        RString select連絡票整理番号 = div.getDdlRearakuhyoSeiriNO().getSelectedKey();
+        RString select履歴番号 = div.getDdlRirekiNO().getSelectedKey();
+        for (JigyoKogakuGassanShikyuFushikyuKettei shikyuKettei : 事業高額合算支給不支給決定List) {
+            if (select対象年度.equals(shikyuKettei.get対象年度().toDateString())
+                    && select連絡票整理番号.equals(shikyuKettei.get支給申請書整理番号())
+                    && select履歴番号.equals(new RString(shikyuKettei.get履歴番号()))) {
+                return shikyuKettei;
+            }
+        }
+        return null;
+    }
+
+    /**
      * データを更新のンメソッドです。
      *
+     * @param 事業高額合算支給不支給決定 JigyoKogakuGassanShikyuFushikyuKettei
+     * @param 識別コード ShikibetsuCode
+     * @param 被保険者番号 HihokenshaNo
      */
-    public void データ更新() {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        JigyoKogakuGassanShikyuFushikyuKettei 事業高額合算支給不支給決定 = ViewStateHolder.
-                get(ViewStateKeys.事業高額合算支給不支給決定, JigyoKogakuGassanShikyuFushikyuKettei.class);
+    public void データ更新(JigyoKogakuGassanShikyuFushikyuKettei 事業高額合算支給不支給決定, ShikibetsuCode 識別コード,
+            HihokenshaNo 被保険者番号) {
         if (div.getTxtHakkouYMD().getValue() != null) {
             FlexibleDate 発行日 = new FlexibleDate(div.getTxtHakkouYMD().getValue().toDateString());
             事業高額合算支給不支給決定 = 事業高額合算支給不支給決定.createBuilderForEdit().set決定通知書作成年月日(発行日).build();
@@ -282,9 +306,14 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
         }
     }
 
-    private void getMap(List<JigyoKogakuGassanShikyuFushikyuKettei> 事業高額合算支給不支給決定List) {
+    /**
+     * 対象年度_連絡票整理番号Mapのメソッドです。
+     *
+     * @param 事業高額合算支給不支給決定List JigyoKogakuGassanShikyuFushikyuKetteiの{@code list}
+     * @return Map
+     */
+    public Map<FlexibleYear, Set<RString>> put対象年度_連絡票整理番号(List<JigyoKogakuGassanShikyuFushikyuKettei> 事業高額合算支給不支給決定List) {
         Map<FlexibleYear, Set<RString>> 対象年度_連絡票整理番号 = new HashMap<>();
-        Map<RString, Set<RString>> 連絡票整理番号_履歴番号 = new HashMap<>();
         for (JigyoKogakuGassanShikyuFushikyuKettei shikyuKettei : 事業高額合算支給不支給決定List) {
             if (対象年度_連絡票整理番号.containsKey(shikyuKettei.get対象年度())) {
                 対象年度_連絡票整理番号.get(shikyuKettei.get対象年度()).add(shikyuKettei.get支給申請書整理番号());
@@ -293,6 +322,19 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
                 連絡票整理番号.add(shikyuKettei.get支給申請書整理番号());
                 対象年度_連絡票整理番号.put(shikyuKettei.get対象年度(), 連絡票整理番号);
             }
+        }
+        return 対象年度_連絡票整理番号;
+    }
+
+    /**
+     * 連絡票整理番号_履歴番号Mapのメソッドです。
+     *
+     * @param 事業高額合算支給不支給決定List JigyoKogakuGassanShikyuFushikyuKetteiの{@code list}
+     * @return Map
+     */
+    public Map<RString, Set<RString>> put連絡票整理番号_履歴番号(List<JigyoKogakuGassanShikyuFushikyuKettei> 事業高額合算支給不支給決定List) {
+        Map<RString, Set<RString>> 連絡票整理番号_履歴番号 = new HashMap<>();
+        for (JigyoKogakuGassanShikyuFushikyuKettei shikyuKettei : 事業高額合算支給不支給決定List) {
             if (連絡票整理番号_履歴番号.containsKey(shikyuKettei.get支給申請書整理番号())) {
                 連絡票整理番号_履歴番号.get(shikyuKettei.get支給申請書整理番号()).add(new RString(shikyuKettei.get履歴番号()));
             } else {
@@ -302,11 +344,10 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
             }
 
         }
-        ViewStateHolder.put(ViewStateKeys.対象年度_連絡票整理番号Map, (Serializable) 対象年度_連絡票整理番号);
-        ViewStateHolder.put(ViewStateKeys.連絡票整理番号_履歴番号Map, (Serializable) 連絡票整理番号_履歴番号);
+        return 連絡票整理番号_履歴番号;
     }
 
-    private List<JigyoKogakuGassanShikyuFushikyuKettei> get結果(
+    private void get結果(
             List<JigyoKogakuGassanShikyuFushikyuKettei> 事業高額合算支給不支給決定List,
             List<JigyoKogakuGassanShikyuGakuKeisanKekka> 事業高額合算支給計算結果,
             JigyoKogakuGassanShikyuFushikyuKettei shikyuKettei) {
@@ -316,14 +357,11 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
                 事業高額合算支給不支給決定List.add(shikyuKettei);
                 break;
             }
-
         }
-
-        return 事業高額合算支給不支給決定List;
     }
 
     /**
-     * 前排他のンメソッドます。
+     * 前排他のンメソッドです。
      *
      * @param 被保険者番号 RString
      * @return boolean
@@ -354,7 +392,7 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
     }
 
     /**
-     * 支払予定日印字有無のセットのンメソッドます。
+     * 支払予定日印字有無のセットのンメソッドです。
      *
      * @return RString
      */
@@ -364,7 +402,6 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
         if (帳票制御汎用キー == null) {
             return null;
         }
-        ViewStateHolder.put(ViewStateKeys.支払予定日印字有無, 帳票制御汎用キー.get設定値());
         return 帳票制御汎用キー.get設定値();
     }
 
@@ -372,10 +409,10 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
      * 共同処理用受給者異動連絡票データ作成です。
      *
      * @param entity KogakuGassanShikyuKetteiTsuchisho
+     * @param 支払予定日印字有無 RString
      * @return SourceDataCollection
      */
-    public SourceDataCollection to帳票発行処理(KogakuGassanShikyuKetteiTsuchisho entity) {
-        RString 支払予定日印字有無 = ViewStateHolder.get(ViewStateKeys.支払予定日印字有無, RString.class);
+    public SourceDataCollection to帳票発行処理(KogakuGassanShikyuKetteiTsuchisho entity, RString 支払予定日印字有無) {
         if (!RSTRING_0.equals(支払予定日印字有無) && !RSTRING_1.equals(支払予定日印字有無)) {
             return null;
         }
@@ -393,10 +430,11 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
 
     /**
      * 更新完了メッセージ設定です。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @param 被保険者番号 HihokenshaNo
      */
-    public void set更新完了メッセージ() {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+    public void set更新完了メッセージ(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
         AccessLogger.log(AccessLogType.照会, personalData(識別コード, 被保険者番号.getColumnValue()));
         div.getCcdKanryoMessage().setMessage(完了メッセージメイン,
                 被保険者番号.getColumnValue(),
@@ -405,60 +443,29 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
     }
 
     /**
-     * 入力項目のチェックです。
+     * 入力のチェックです。
      *
+     * @param 支払予定日印字有無 RString
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 入力項目チェック() {
-        RString 支払予定日印字有無 = ViewStateHolder.get(ViewStateKeys.支払予定日印字有無, RString.class);
+    public boolean 入力チェック(RString 支払予定日印字有無) {
         RDate 支払予定日 = div.getTxtShiharaiYoteiYMD().getValue();
-        RDate 前回発行日 = div.getTxtZenkaiHakkoYMD().getValue();
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (RSTRING_1.equals(支払予定日印字有無) && 支払予定日 == null) {
-            validPairs = getValidationHandler().未入力チェック();
-            if (validPairs.iterator().hasNext()) {
-                return validPairs;
-            }
-        }
-        if (前回発行日 == null) {
-            validPairs = getValidationHandler().高額合算支給決定通知書発行済チェック();
-            if (validPairs.iterator().hasNext()) {
-                return validPairs;
-            }
-        }
-        return validPairs;
-    }
-
-    /**
-     * 高額合算支給情報存在エラーチェックです。
-     *
-     * @param データ有無 RString
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 高額合算支給情報存在エラーチェック(RString データ有無) {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (RSTRING_1.equals(データ有無)) {
-            validPairs = getValidationHandler().高額合算支給情報存在エラーチェック();
-            if (validPairs.iterator().hasNext()) {
-                状態2();
-                return validPairs;
-            }
-        }
-        return validPairs;
+        return RSTRING_1.equals(支払予定日印字有無) && 支払予定日 == null;
     }
 
     /**
      * 事業高額合算情報取得です。
      *
+     * @param 事業高額合算支給不支給決定 JigyoKogakuGassanShikyuFushikyuKettei
+     * @param 識別コード ShikibetsuCode
+     * @param 被保険者番号 HihokenshaNo
+     * @param 支払予定日印字有無 RString
      * @return KougakugassanShikyuketteiTsuuchishoOutputEntity
      */
-    public KougakugassanShikyuketteiTsuuchishoOutputEntity editKougakugassanShikyuketteiTsuuchisho() {
-        JigyoKogakuGassanShikyuFushikyuKettei 事業高額合算支給不支給決定 = ViewStateHolder.
-                get(ViewStateKeys.事業高額合算支給不支給決定, JigyoKogakuGassanShikyuFushikyuKettei.class);
+    public KougakugassanShikyuketteiTsuuchishoOutputEntity editKougakugassanShikyuketteiTsuuchisho(
+            JigyoKogakuGassanShikyuFushikyuKettei 事業高額合算支給不支給決定, ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号,
+            RString 支払予定日印字有無) {
         Koza koza = KougakuGassanShikyuKetteiTsuchisho.createInstance().getKozaJyoho(事業高額合算支給不支給決定.get口座ID());
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        RString 支払予定日印字有無 = ViewStateHolder.get(ViewStateKeys.支払予定日印字有無, RString.class);
         ReportId reportId;
         FlexibleDate 発行日 = div.getTxtHakkouYMD().getValue() != null
                 ? new FlexibleDate(div.getTxtHakkouYMD().getValue().toDateString()) : FlexibleDate.EMPTY;
@@ -479,7 +486,11 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
         return outputEntity;
     }
 
-    private void 状態2() {
+    /**
+     * 状態2の設定です。
+     *
+     */
+    public void 状態2() {
         div.getDdlTaishoNendo().setDisabled(true);
         div.getDdlRearakuhyoSeiriNO().setDisabled(true);
         div.getDdlRirekiNO().setDisabled(true);
@@ -487,10 +498,6 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
         div.getTxtShiharaiYoteiYMD().setDisabled(true);
         div.getCcdBunshoNO().setDisabled(true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(発行する, true);
-    }
-
-    private KogakuGassanShikyuKetteiTsuchishoPanelValidationHandler getValidationHandler() {
-        return new KogakuGassanShikyuKetteiTsuchishoPanelValidationHandler();
     }
 
 }

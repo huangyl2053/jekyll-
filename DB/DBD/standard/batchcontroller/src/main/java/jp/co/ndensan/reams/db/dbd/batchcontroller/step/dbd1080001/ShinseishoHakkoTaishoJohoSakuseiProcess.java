@@ -32,14 +32,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShinseishoHakkoTaishoJohoSakuseiProcess extends BatchProcessBase<ShinseishoHakkoTaishoJohoSakuseiEntity> {
 
-    private static final RString MYBATIS_SELECT_ID_申請_負担限度額認定 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db"
+    private static final RString MYBATIS_SELECT_ID_申請_負担認定 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db"
             + ".mapper.relate.gemmenshinseishotaishohaaku.IShinseishoHakkoTaishoJohoSakuseiMapper.get申請書発行対象者情報_負担限度額認定");
-    private static final RString MYBATIS_SELECT_ID_申請_利用者負担額減額 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db"
-            + ".mapper.relate.gemmenshinseishotaishohaaku.IShinseishoHakkoTaishoJohoSakuseiMapper.get申請書発行対象者情報_利用者負担額減額");
-    private static final RString MYBATIS_SELECT_ID_申請_訪問介護利用者 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db"
-            + ".mapper.relate.gemmenshinseishotaishohaaku.IShinseishoHakkoTaishoJohoSakuseiMapper.get申請書発行対象者情報_訪問介護利用者負担額減額");
-    private static final RString MYBATIS_SELECT_ID_申請_社会福祉法人 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db"
-            + ".mapper.relate.gemmenshinseishotaishohaaku.IShinseishoHakkoTaishoJohoSakuseiMapper.get申請書発行対象者情報_社会福祉法人等利用者負担軽減");
+    private static final RString MYBATIS_SELECT_ID_申請_利用者負担額減額 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db."
+            + "mapper.relate.gemmenshinseishotaishohaaku.IShinseishoHakkoTaishoJohoSakuseiMapper.get申請書発行対象者情報_利用者負担額減額");
+    private static final RString MYBATIS_SELECT_ID_申請_訪問介護利用者 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper"
+            + ".relate.gemmenshinseishotaishohaaku.IShinseishoHakkoTaishoJohoSakuseiMapper.get申請書発行対象者情報_訪問介護利用者負担額減額");
+    private static final RString MYBATIS_SELECT_ID_申請_社会福祉法人 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper."
+            + "relate.gemmenshinseishotaishohaaku.IShinseishoHakkoTaishoJohoSakuseiMapper.get申請書発行対象者情報_社会福祉法人等利用者負担軽減");
 
     private ShinseishoHakkoTaishoJohoSakuseiProcessParameter processParamter;
     private FlexibleDate 終了日;
@@ -76,7 +76,7 @@ public class ShinseishoHakkoTaishoJohoSakuseiProcess extends BatchProcessBase<Sh
     @Override
     protected IBatchReader createReader() {
         if (processParamter.get減免減額種類().equals(GemmenGengakuShurui.負担限度額認定)) {
-            return new BatchDbReader(MYBATIS_SELECT_ID_申請_負担限度額認定, processParamter.toShinseishoHakkoTaishoJohoSakuseiMybatisParameter(開始日, 終了日));
+            return new BatchDbReader(MYBATIS_SELECT_ID_申請_負担認定, processParamter.toShinseishoHakkoTaishoJohoSakuseiMybatisParameter(開始日, 終了日));
         } else if (processParamter.get減免減額種類().equals(GemmenGengakuShurui.利用者負担額減額)) {
             return new BatchDbReader(MYBATIS_SELECT_ID_申請_利用者負担額減額, processParamter.toShinseishoHakkoTaishoJohoSakuseiMybatisParameter(開始日, 終了日));
         } else if (processParamter.get減免減額種類().equals(GemmenGengakuShurui.訪問介護利用者負担額減額)) {

@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -260,11 +261,11 @@ public class ChoshuYuyoJuminKihon {
      * @param div ChoshuYuyoJuminKihonDiv
      * @return ResponseData
      */
-    public ResponseData<ChoshuYuyoJuminKihonDiv> onClick_btnExcute(ChoshuYuyoJuminKihonDiv div) {
+    public ResponseData<SourceDataCollection> onClick_btnExcute(ChoshuYuyoJuminKihonDiv div) {
 
         ChoshuYuyoJoho 徴収猶予の情報 = ViewStateHolder.get(ViewStateKeys.徴収猶予の情報, ChoshuYuyoJoho.class);
-        createHandler(div).onClick発行する(徴収猶予の情報.get賦課年度(), 徴収猶予の情報.get調定年度(), 徴収猶予の情報.get通知書番号());
-        return ResponseData.of(div).respond();
+        SourceDataCollection data = createHandler(div).onClick発行する(徴収猶予の情報.get賦課年度(), 徴収猶予の情報.get調定年度(), 徴収猶予の情報.get通知書番号());
+        return ResponseData.of(data).respond();
     }
 
     private ChoshuYuyoPrintinfoHandler createHandler(ChoshuYuyoJuminKihonDiv div) {

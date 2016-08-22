@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class FutanWariaiHanteiRelateEntity implements Cloneable, Serializable {
+public class FutanWariaiHanteiRelateEntity implements Serializable {
 
     private HanteiTaishoshaTempEntity 判定対象者Temp;
     private SeikatsuHogoGaitoJohoTempEntity 生活保護該当情報Temp;
@@ -56,5 +56,4 @@ public class FutanWariaiHanteiRelateEntity implements Cloneable, Serializable {
         this.介護所得情報 = 介護所得情報;
         this.判定基準日 = 判定基準日;
     }
-
 }

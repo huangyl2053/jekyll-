@@ -449,7 +449,7 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
          */
         public static boolean check状態区分の必須(JukyushaIdoRenrakuhyoDiv div) {
             RString 状態区分 = div.getYokaigoNinteiPanel().getDdlYokaigoJotaiKubun().getSelectedKey();
-            return RString.isNullOrEmpty(状態区分);
+            return (RString.isNullOrEmpty(状態区分) || 空KEY.equals(状態区分));
         }
 
         /**
@@ -461,7 +461,8 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
         public static boolean check認定期間_Fromの必須(JukyushaIdoRenrakuhyoDiv div) {
             RString 状態区分 = div.getYokaigoNinteiPanel().getDdlYokaigoJotaiKubun().getSelectedKey();
             RDate 認定期間_From = div.getYokaigoNinteiPanel().getTxtNinteiYukoKikanYMD().getFromValue();
-            return (!YokaigoJotaiKubun99.非該当.getコード().equals(状態区分) && (認定期間_From == null || 認定期間_From.toString().isEmpty()));
+            return (!YokaigoJotaiKubun99.非該当.getコード().equals(状態区分) && (認定期間_From == null
+                    || 認定期間_From.toString().isEmpty()));
         }
 
         /**
@@ -486,7 +487,7 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
          */
         public static boolean check申請種別の必須(JukyushaIdoRenrakuhyoDiv div) {
             RString 申請種別 = div.getYokaigoNinteiPanel().getRadShinseiShubetsu().getSelectedKey();
-            return RString.isNullOrEmpty(申請種別);
+            return (RString.isNullOrEmpty(申請種別) || 空KEY.equals(申請種別));
         }
 
         /**
@@ -497,7 +498,7 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
          */
         public static boolean check変更申請中区分の必須(JukyushaIdoRenrakuhyoDiv div) {
             RString 変更申請中区分 = div.getYokaigoNinteiPanel().getRadHenkoShinseichuKubun().getSelectedKey();
-            return RString.isNullOrEmpty(変更申請中区分);
+            return (RString.isNullOrEmpty(変更申請中区分) || 空KEY.equals(変更申請中区分));
         }
 
         /**
@@ -508,7 +509,7 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
          */
         public static boolean checkみなし区分の必須(JukyushaIdoRenrakuhyoDiv div) {
             RString みなし区分 = div.getYokaigoNinteiPanel().getRadMinashiYokaigoJotaiKubun().getSelectedKey();
-            return RString.isNullOrEmpty(みなし区分);
+            return (RString.isNullOrEmpty(みなし区分) || 空KEY.equals(みなし区分));
         }
 
         /**
@@ -519,7 +520,7 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
          */
         public static boolean check計画作成区分の必須(JukyushaIdoRenrakuhyoDiv div) {
             RString 計画作成区分 = div.getKyotakuServicePlanPanel().getRadKyotakuServiceSakuseiKubun().getSelectedKey();
-            return RString.isNullOrEmpty(計画作成区分);
+            return (RString.isNullOrEmpty(計画作成区分) || 空KEY.equals(計画作成区分));
         }
 
         /**
@@ -530,7 +531,7 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
          */
         public static boolean check減免申請中区分の必須(JukyushaIdoRenrakuhyoDiv div) {
             RString 減免申請中区分 = div.getGemmenGengakuPanel().getRadGemmenShinseichuKubun().getSelectedKey();
-            return RString.isNullOrEmpty(減免申請中区分);
+            return (RString.isNullOrEmpty(減免申請中区分) || 空KEY.equals(減免申請中区分));
         }
 
         /**
@@ -542,7 +543,7 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
         public static boolean check利用者負担区分の必須(JukyushaIdoRenrakuhyoDiv div) {
             RString 利用者負担区分 = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
                     getJukyushaIdoRenrakuhyoRiyoshaFutan().getRadRiyoshaFutanKubunCode().getSelectedKey();
-            return RString.isNullOrEmpty(利用者負担区分);
+            return (RString.isNullOrEmpty(利用者負担区分) || 空KEY.equals(利用者負担区分));
         }
 
         /**
@@ -552,9 +553,10 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
          * @return 「false」エラー 「true」正常
          */
         public static boolean check標準負担区分の必須(JukyushaIdoRenrakuhyoDiv div) {
-            RString 標準負担区分 = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().getJukyushaIdoRenrakuhyoHyojunFutan().
+            RString 標準負担区分 = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
+                    getJukyushaIdoRenrakuhyoHyojunFutan().
                     getRadHyojunFutanKubun().getSelectedKey();
-            return RString.isNullOrEmpty(標準負担区分);
+            return (RString.isNullOrEmpty(標準負担区分) || 空KEY.equals(標準負担区分));
         }
 
         /**
@@ -566,7 +568,7 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
         public static boolean check認定申請中区分の必須(JukyushaIdoRenrakuhyoDiv div) {
             RString 認定申請中区分 = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
                     getRadTokuteiNyushoshaNinteiShinseichuKubun().getSelectedKey();
-            return RString.isNullOrEmpty(認定申請中区分);
+            return (RString.isNullOrEmpty(認定申請中区分) || 空KEY.equals(認定申請中区分));
         }
 
         /**
@@ -578,7 +580,7 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
         public static boolean checkサービス区分の必須(JukyushaIdoRenrakuhyoDiv div) {
             RString サービス区分 = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
                     getRadTokuteiNyushoshaKaigoServiceKubun().getSelectedKey();
-            return RString.isNullOrEmpty(サービス区分);
+            return (RString.isNullOrEmpty(サービス区分) || 空KEY.equals(サービス区分));
         }
 
         /**
@@ -590,7 +592,7 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
         public static boolean check特例減額措置対象の必須(JukyushaIdoRenrakuhyoDiv div) {
             RString 特例減額措置対象 = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
                     getRadKaizeisoTokureiGengakuSochiTaishoFlag().getSelectedKey();
-            return RString.isNullOrEmpty(特例減額措置対象);
+            return (RString.isNullOrEmpty(特例減額措置対象) || 空KEY.equals(特例減額措置対象));
         }
 
         /**
@@ -601,7 +603,7 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
          */
         public static boolean check公費負担上限額減額_生活保護等の必須(JukyushaIdoRenrakuhyoDiv div) {
             RString 公費負担上限額減額_生活保護 = div.getKyufuSeigenPanel().getRadKohiFutanJogenGengakuAriFlag().getSelectedKey();
-            return RString.isNullOrEmpty(公費負担上限額減額_生活保護);
+            return (RString.isNullOrEmpty(公費負担上限額減額_生活保護) || 空KEY.equals(公費負担上限額減額_生活保護));
         }
 
         /**
@@ -612,7 +614,7 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
          */
         public static boolean check二次予防事業区分の必須(JukyushaIdoRenrakuhyoDiv div) {
             RString 二次予防事業区分 = div.getNijiyoboJigyoPanel().getRadNijiyoboJigyoKubun().getSelectedKey();
-            return RString.isNullOrEmpty(二次予防事業区分);
+            return (RString.isNullOrEmpty(二次予防事業区分) || 空KEY.equals(二次予防事業区分));
         }
 
         /**
