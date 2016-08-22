@@ -6,6 +6,10 @@
 package jp.co.ndensan.reams.db.dbu.service.core.sogosyokai;
 
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.KaigoJigyosha;
+import jp.co.ndensan.reams.db.dbx.business.core.view.HihokenshaDaichoAlive;
+import jp.co.ndensan.reams.db.dbx.business.core.view.ShisetsuNyutaishoAlive;
+import jp.co.ndensan.reams.db.dbx.business.core.view.TashichosonJushochiTokureiAlive;
+import jp.co.ndensan.reams.db.dbx.business.core.view.TekiyoJogaishaAlive;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
@@ -18,15 +22,7 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1001HihokenshaDaichoAl
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1002TekiyoJogaishaAliveDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1003TashichosonJushochiTokureiAliveDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1004ShisetsuNyutaishoAliveDac;
-import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.KaigoJogaiTokureiTaishoShisetsu;
-import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
-import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
-import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuDac;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -100,13 +96,13 @@ public class SoyoSyokaiService {
      * 被保険者台帳の取得。
      *
      * @param 被保険者番号 HihokenshaNo
-     * @return DbV1001HihokenshaDaichoEntity
+     * @return HihokenshaDaichoAlive
      */
     @Transaction
-    public HihokenshaDaicho get被保険者台帳(HihokenshaNo 被保険者番号) {
+    public HihokenshaDaichoAlive get被保険者台帳(HihokenshaNo 被保険者番号) {
         DbV1001HihokenshaDaichoEntity result = dbv1001dac.get被保険者台帳取得(被保険者番号);
         if (result != null) {
-            return new HihokenshaDaicho(new DbT1001HihokenshaDaichoEntity());
+            return new HihokenshaDaichoAlive(result);
         }
         return null;
     }
@@ -115,13 +111,13 @@ public class SoyoSyokaiService {
      * 施設入退所の取得。
      *
      * @param 識別コード ShikibetsuCode
-     * @return ShisetsuNyutaisho
+     * @return ShisetsuNyutaishoAlive
      */
     @Transaction
-    public ShisetsuNyutaisho get施設入退所(ShikibetsuCode 識別コード) {
+    public ShisetsuNyutaishoAlive get施設入退所(ShikibetsuCode 識別コード) {
         DbV1004ShisetsuNyutaishoEntity result = dbv1004dac.get施設入退所(識別コード);
         if (result != null) {
-            return new ShisetsuNyutaisho(new DbT1004ShisetsuNyutaishoEntity());
+            return new ShisetsuNyutaishoAlive(result);
         }
         return null;
     }
@@ -130,13 +126,13 @@ public class SoyoSyokaiService {
      * 他市町村住所地特例情報の取得。
      *
      * @param 識別コード ShikibetsuCode
-     * @return TashichosonJushochiTokurei
+     * @return TashichosonJushochiTokureiAlive
      */
     @Transaction
-    public TashichosonJushochiTokurei get他市町村住所地特例情報(ShikibetsuCode 識別コード) {
+    public TashichosonJushochiTokureiAlive get他市町村住所地特例情報(ShikibetsuCode 識別コード) {
         DbV1003TashichosonJushochiTokureiEntity result = dbv1003dac.get他市町村住所地特例情報(識別コード);
         if (result != null) {
-            return new TashichosonJushochiTokurei(new DbT1003TashichosonJushochiTokureiEntity());
+            return new TashichosonJushochiTokureiAlive(result);
         }
         return null;
     }
@@ -146,13 +142,13 @@ public class SoyoSyokaiService {
      *
      * @param 識別コード ShikibetsuCode
      * @param 台帳種別 DaichoType
-     * @return ShisetsuNyutaisho
+     * @return ShisetsuNyutaishoAlive
      */
     @Transaction
-    public ShisetsuNyutaisho get施設入退所Order(ShikibetsuCode 識別コード, RString 台帳種別) {
+    public ShisetsuNyutaishoAlive get施設入退所Order(ShikibetsuCode 識別コード, RString 台帳種別) {
         DbV1004ShisetsuNyutaishoEntity result = dbv1004dac.get施設入退所Order(識別コード, 台帳種別);
         if (result != null) {
-            return new ShisetsuNyutaisho(new DbT1004ShisetsuNyutaishoEntity());
+            return new ShisetsuNyutaishoAlive(result);
         }
         return null;
     }
@@ -161,13 +157,13 @@ public class SoyoSyokaiService {
      * 適用除外者情報の取得。
      *
      * @param 識別コード ShikibetsuCode
-     * @return TekiyoJogaisha
+     * @return TekiyoJogaishaAlive
      */
     @Transaction
-    public TekiyoJogaisha get適用除外者情報(ShikibetsuCode 識別コード) {
+    public TekiyoJogaishaAlive get適用除外者情報(ShikibetsuCode 識別コード) {
         DbV1002TekiyoJogaishaEntity result = dbv1002dac.get適用除外者情報(識別コード);
         if (result != null) {
-            return new TekiyoJogaisha(new DbT1002TekiyoJogaishaEntity());
+            return new TekiyoJogaishaAlive(result);
         }
         return null;
     }
@@ -191,7 +187,7 @@ public class SoyoSyokaiService {
      *
      * @param 入所施設コード RString
      * @param 住所地特例対象施設 RString
-     * @return DbV1002TekiyoJogaishaEntity
+     * @return KaigoJogaiTokureiTaishoShisetsu
      */
     @Transaction
     public KaigoJogaiTokureiTaishoShisetsu get事業者名称_住所地特例対象施設(RString 入所施設コード, RString 住所地特例対象施設) {
