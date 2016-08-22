@@ -5,10 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.dataclear.ClearSeikatsuHogoGaitoJohoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work3.HanteiTaishoshaTuikaProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work5.SeikatsuHogoGaitoJohoTempProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work6.Work6Process;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work6.FutanWariaiHanteiNenziProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHanteiUtil;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc180020.DBC180020ProcessParameter;
@@ -33,7 +32,6 @@ public class RiyoshaFutanwariaiHanteiCommonFlow extends BatchFlowBase<DBC180020_
     private static final RString BATCHID_WORK2 = new RString("SetainHakunyuryokuFlow");
     private static final RString BATCHID_WORK4 = new RString("SetainJohoTempTuikaFlow");
     private static final RString BATCHID_WORK7 = new RString("FutanWariaiHanteiGetuziShoriFlow");
-    private static final String CLEAR生活保護該当情報 = "clearSeikatsuHogoGaitoJohoTempProcess";
     private static final String FLOW_WORK2 = "work2";
     private static final String FLOW_WORK3 = "work3";
     private static final String FLOW_WORK4 = "work4";
@@ -81,11 +79,6 @@ public class RiyoshaFutanwariaiHanteiCommonFlow extends BatchFlowBase<DBC180020_
         }
     }
 
-    @Step(CLEAR生活保護該当情報)
-    IBatchFlowCommand clearSeikatsuHogoGaitoJohoTempProcess() {
-        return loopBatch(ClearSeikatsuHogoGaitoJohoTempProcess.class).arguments(loopPrm).define();
-    }
-
     @Step(FLOW_WORK2)
     IBatchFlowCommand work2() {
         return otherBatchFlow(BATCHID_WORK2, SubGyomuCode.DBC介護給付,
@@ -115,7 +108,7 @@ public class RiyoshaFutanwariaiHanteiCommonFlow extends BatchFlowBase<DBC180020_
 
     @Step(FLOW_WORK6)
     IBatchFlowCommand work6() {
-        return loopBatch(Work6Process.class).arguments(processPrm).define();
+        return loopBatch(FutanWariaiHanteiNenziProcess.class).arguments(processPrm).define();
     }
 
     @Step(FLOW_WORK7)

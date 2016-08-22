@@ -159,7 +159,7 @@ public class Work6Process extends BatchKeyBreakBase<FutanWariaiHanteiJohoEntity>
         for (int i = 0; i < レコード数; i++) {
             判定対象者 = entities.get(i).get判定対象者();
             List<SetainJohoRelateEntity> setainJohoRelateEntities = entities.get(i).get世帯員情報Entity();
-            DbV2512KaigoShotokuNewestEntity 所得管理 = setainJohoRelateEntities.isEmpty() ? null : setainJohoRelateEntities.get(i).get介護所得情報();
+            DbV2512KaigoShotokuNewestEntity 所得管理 = setainJohoRelateEntities.isEmpty() ? null : setainJohoRelateEntities.get(0).get介護所得情報();
             DbT3114RiyoshaFutanWariaiMeisaiEntity insertDbt3114Entity = new DbT3114RiyoshaFutanWariaiMeisaiEntity();
             KonkaiRiyoshaFutanWariaiJohoTempEntity insertTemp = new KonkaiRiyoshaFutanWariaiJohoTempEntity();
             insertDbt3114Entity.setNendo(nendo);
@@ -206,7 +206,7 @@ public class Work6Process extends BatchKeyBreakBase<FutanWariaiHanteiJohoEntity>
             insert3115Entity.setHihokenshaNo(判定対象者.getHihokenshaNo());
             insert3115Entity.setRirekiNo(1);
             insert3115Entity.setEdaNo(i + 1);
-            SetainJohoTempEntity 世帯員情報 = setainJohoRelateEntities.isEmpty() ? null : setainJohoRelateEntities.get(i).get世帯員情報();
+            SetainJohoTempEntity 世帯員情報 = setainJohoRelateEntities.isEmpty() ? null : setainJohoRelateEntities.get(0).get世帯員情報();
             if (世帯員情報 != null) {
                 insert3115Entity.setSetaiinHihokenshaNo(世帯員情報.getHihokenshaNo());
             }

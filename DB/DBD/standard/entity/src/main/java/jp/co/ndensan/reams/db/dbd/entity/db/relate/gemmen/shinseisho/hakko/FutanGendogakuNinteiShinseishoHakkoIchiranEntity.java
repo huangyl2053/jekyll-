@@ -7,6 +7,10 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmen.shinseisho.hakko;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -55,4 +59,10 @@ public class FutanGendogakuNinteiShinseishoHakkoIchiranEntity {
     private RString 住所地特例フラグ;
     private Decimal 非課税年金勘案額;
     private Decimal 年金収入額;
+    private YubinNo 郵便番号;
+    private TelNo 電話番号;
+    private ChoikiCode 町域コード;
+    private GyoseikuCode 行政区コード;
+    private RString 氏名カナ;
+    private FlexibleDate 生年月日;
 }

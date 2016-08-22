@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.futanwariaihanteiichiran;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.futanwariaihanteiichiran.FutanWariaiHanteiIchiranProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.futanwariaihanteiichiran.KonkaiFutanWariaiIchiranTempProcess;
+//import jp.co.ndensan.reams.db.dbc.batchcontroller.step.futanwariaihanteiichiran.KonkaiFutanWariaiIchiranTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.futanwariaihanteiichiran.MaeFutanWariaiHanteiIchiranTempProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.futanwariaiichiran.FutanWariaiIchiranBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -33,7 +33,8 @@ public class FutanWariaiIchiranFlow extends BatchFlowBase<FutanWariaiIchiranBatc
 
     @Step(今回利用者負担割合判定TEMPへ登録する)
     IBatchFlowCommand creatKonkaiFutanWariaiIchiranTemp() {
-        return loopBatch(KonkaiFutanWariaiIchiranTempProcess.class).arguments(getParameter()
+        // TODO ビルドエラーなので、KonkaiFutanWariaiIchiranTempProcess→FutanWariaiHanteiIchiranProcess　のように臨時対応。
+        return loopBatch(FutanWariaiHanteiIchiranProcess.class).arguments(getParameter()
                 .toFutanWariaiHanteiIchiranProcessParameter()).define();
     }
 

@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.NijiHanteiKekkaInputHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
@@ -202,9 +203,11 @@ public class ChosaOCRTorikomiHandler {
             認定有効期間開始日 = data.get申請日();
         }
         if (data.get申請区分() != null && NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(data.get申請区分().value())
-                && IchijiHanteiKekkaCode09.要支援2.getコード().equals(data.get一次判定結果().value()) && !data.get二次判定認定有効終了年月日().isEmpty()
+                && (YokaigoJotaiKubun.要支援1.getコード().equals(data.get二次判定要介護状態区分コード().value())
+                || YokaigoJotaiKubun.要支援2.getコード().equals(data.get二次判定要介護状態区分コード().value()))
+                && !data.get二次判定認定有効終了年月日().isEmpty()
                 && data.get申請日().isBefore(data.get二次判定認定有効終了年月日().minusDay(INDEX_60))
-                || INDEX_1.equals(data.get要支援1()) || INDEX_1.equals(data.get要支援2())) {
+                && (INDEX_1.equals(data.get要支援1()) || INDEX_1.equals(data.get要支援2()))) {
             認定有効期間開始日 = get認定有効終了年月日の次月１日(data.get二次判定認定有効終了年月日());
         }
         認定有効期間開始日 = get認定有効期間開始日1(data, 認定有効期間開始日);
@@ -229,14 +232,17 @@ public class ChosaOCRTorikomiHandler {
 
     private FlexibleDate get認定有効期間開始日1(TorikomiEntity data, FlexibleDate 認定有効期間開始日) {
         if (data.get申請区分() != null && NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(data.get申請区分().value())
-                && IchijiHanteiKekkaCode09.要支援2.getコード().equals(data.get一次判定結果().value()) && !data.get二次判定認定有効終了年月日().isEmpty()
+                && (YokaigoJotaiKubun.要支援1.getコード().equals(data.get二次判定要介護状態区分コード().value())
+                || YokaigoJotaiKubun.要支援2.getコード().equals(data.get二次判定要介護状態区分コード().value()))
+                && !data.get二次判定認定有効終了年月日().isEmpty()
                 && data.get申請日().isBefore(data.get二次判定認定有効終了年月日().minusDay(INDEX_61))
-                || INDEX_1.equals(data.get要支援1()) || INDEX_1.equals(data.get要支援2())) {
+                || (INDEX_1.equals(data.get要支援1()) || INDEX_1.equals(data.get要支援2()))) {
             認定有効期間開始日 = data.get二次判定年月日();
         }
         if (data.get申請区分() != null && NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(data.get申請区分().value())
-                && IchijiHanteiKekkaCode09.要支援2.getコード().equals(data.get一次判定結果().value())
-                || INDEX_1.equals(data.get要支援1()) || INDEX_1.equals(data.get要支援2())) {
+                && (YokaigoJotaiKubun.要支援1.getコード().equals(data.get二次判定要介護状態区分コード().value())
+                || YokaigoJotaiKubun.要支援2.getコード().equals(data.get二次判定要介護状態区分コード().value()))
+                && (INDEX_1.equals(data.get要支援1()) || INDEX_1.equals(data.get要支援2()))) {
             認定有効期間開始日 = data.get申請日();
         }
         return 認定有効期間開始日;
@@ -244,9 +250,10 @@ public class ChosaOCRTorikomiHandler {
 
     private FlexibleDate get認定有効期間開始日2(TorikomiEntity data, FlexibleDate 認定有効期間開始日) {
         if (data.get申請区分() != null && NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(data.get申請区分().value())
-                && IchijiHanteiKekkaCode09.要支援2.getコード().equals(data.get一次判定結果().value())
-                || INDEX_1.equals(data.get要介護1()) || INDEX_1.equals(data.get要介護2()) || INDEX_1.equals(data.get要介護3())
-                || INDEX_1.equals(data.get要介護4()) || INDEX_1.equals(data.get要介護5())) {
+                && (YokaigoJotaiKubun.要支援1.getコード().equals(data.get二次判定要介護状態区分コード().value())
+                || YokaigoJotaiKubun.要支援2.getコード().equals(data.get二次判定要介護状態区分コード().value()))
+                && (INDEX_1.equals(data.get要介護1()) || INDEX_1.equals(data.get要介護2()) || INDEX_1.equals(data.get要介護3())
+                || INDEX_1.equals(data.get要介護4()) || INDEX_1.equals(data.get要介護5()))) {
             認定有効期間開始日 = data.get申請日();
         }
         return 認定有効期間開始日;
@@ -254,14 +261,15 @@ public class ChosaOCRTorikomiHandler {
 
     private FlexibleDate get認定有効期間開始日3(TorikomiEntity data, FlexibleDate 認定有効期間開始日) {
         if (data.get申請区分() != null && NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(data.get申請区分().value())
-                && IchijiHanteiKekkaCode09.要介護1.getコード().equals(data.get一次判定結果().value())
-                || IchijiHanteiKekkaCode09.要介護2.getコード().equals(data.get一次判定結果().value())
-                || IchijiHanteiKekkaCode09.要介護3.getコード().equals(data.get一次判定結果().value())
-                || IchijiHanteiKekkaCode09.要介護4.getコード().equals(data.get一次判定結果().value())
-                || IchijiHanteiKekkaCode09.要介護5.getコード().equals(data.get一次判定結果().value())
+                && (YokaigoJotaiKubun.要介護1.getコード().equals(data.get二次判定要介護状態区分コード().value())
+                || YokaigoJotaiKubun.要介護2.getコード().equals(data.get二次判定要介護状態区分コード().value())
+                || YokaigoJotaiKubun.要介護3.getコード().equals(data.get二次判定要介護状態区分コード().value())
+                || YokaigoJotaiKubun.要介護4.getコード().equals(data.get二次判定要介護状態区分コード().value())
+                || YokaigoJotaiKubun.要介護5.getコード().equals(data.get二次判定要介護状態区分コード().value()))
+                && !data.get二次判定認定有効終了年月日().isEmpty()
                 && data.get申請日().isBefore(data.get二次判定認定有効終了年月日().minusDay(INDEX_60))
-                || INDEX_1.equals(data.get要介護1()) || INDEX_1.equals(data.get要介護2()) || INDEX_1.equals(data.get要介護3())
-                || INDEX_1.equals(data.get要介護4()) || INDEX_1.equals(data.get要介護5())) {
+                && (INDEX_1.equals(data.get要介護1()) || INDEX_1.equals(data.get要介護2()) || INDEX_1.equals(data.get要介護3())
+                || INDEX_1.equals(data.get要介護4()) || INDEX_1.equals(data.get要介護5()))) {
             認定有効期間開始日 = data.get二次判定年月日();
         }
         return 認定有効期間開始日;
@@ -269,14 +277,15 @@ public class ChosaOCRTorikomiHandler {
 
     private FlexibleDate get認定有効期間開始日4(TorikomiEntity data, FlexibleDate 認定有効期間開始日) {
         if (data.get申請区分() != null && NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(data.get申請区分().value())
-                && IchijiHanteiKekkaCode09.要介護1.getコード().equals(data.get一次判定結果().value())
-                || IchijiHanteiKekkaCode09.要介護2.getコード().equals(data.get一次判定結果().value())
-                || IchijiHanteiKekkaCode09.要介護3.getコード().equals(data.get一次判定結果().value())
-                || IchijiHanteiKekkaCode09.要介護4.getコード().equals(data.get一次判定結果().value())
-                || IchijiHanteiKekkaCode09.要介護5.getコード().equals(data.get一次判定結果().value())
+                && (YokaigoJotaiKubun.要介護1.getコード().equals(data.get二次判定要介護状態区分コード().value())
+                || YokaigoJotaiKubun.要介護2.getコード().equals(data.get二次判定要介護状態区分コード().value())
+                || YokaigoJotaiKubun.要介護3.getコード().equals(data.get二次判定要介護状態区分コード().value())
+                || YokaigoJotaiKubun.要介護4.getコード().equals(data.get二次判定要介護状態区分コード().value())
+                || YokaigoJotaiKubun.要介護5.getコード().equals(data.get二次判定要介護状態区分コード().value()))
+                && !data.get二次判定認定有効終了年月日().isEmpty()
                 && data.get申請日().isBefore(data.get二次判定認定有効終了年月日().minusDay(INDEX_61))
-                || INDEX_1.equals(data.get要介護1()) || INDEX_1.equals(data.get要介護2()) || INDEX_1.equals(data.get要介護3())
-                || INDEX_1.equals(data.get要介護4()) || INDEX_1.equals(data.get要介護5())) {
+                && (INDEX_1.equals(data.get要介護1()) || INDEX_1.equals(data.get要介護2()) || INDEX_1.equals(data.get要介護3())
+                || INDEX_1.equals(data.get要介護4()) || INDEX_1.equals(data.get要介護5()))) {
             認定有効期間開始日 = get認定有効終了年月日の次月１日(data.get二次判定認定有効終了年月日());
         }
         return 認定有効期間開始日;
@@ -284,13 +293,13 @@ public class ChosaOCRTorikomiHandler {
 
     private FlexibleDate get認定有効期間開始日5(TorikomiEntity data, FlexibleDate 認定有効期間開始日) {
         if (data.get申請区分() != null && NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(data.get申請区分().value())
-                && IchijiHanteiKekkaCode09.要介護1.getコード().equals(data.get一次判定結果().value())
-                || IchijiHanteiKekkaCode09.要介護2.getコード().equals(data.get一次判定結果().value())
-                || IchijiHanteiKekkaCode09.要介護3.getコード().equals(data.get一次判定結果().value())
-                || IchijiHanteiKekkaCode09.要介護4.getコード().equals(data.get一次判定結果().value())
-                || IchijiHanteiKekkaCode09.要介護5.getコード().equals(data.get一次判定結果().value())
-                || INDEX_1.equals(data.get要介護1()) || INDEX_1.equals(data.get要介護2()) || INDEX_1.equals(data.get要介護3())
-                || INDEX_1.equals(data.get要介護4()) || INDEX_1.equals(data.get要介護5())) {
+                && (YokaigoJotaiKubun.要介護1.getコード().equals(data.get二次判定要介護状態区分コード().value())
+                || YokaigoJotaiKubun.要介護2.getコード().equals(data.get二次判定要介護状態区分コード().value())
+                || YokaigoJotaiKubun.要介護3.getコード().equals(data.get二次判定要介護状態区分コード().value())
+                || YokaigoJotaiKubun.要介護4.getコード().equals(data.get二次判定要介護状態区分コード().value())
+                || YokaigoJotaiKubun.要介護5.getコード().equals(data.get二次判定要介護状態区分コード().value()))
+                && (INDEX_1.equals(data.get要介護1()) || INDEX_1.equals(data.get要介護2()) || INDEX_1.equals(data.get要介護3())
+                || INDEX_1.equals(data.get要介護4()) || INDEX_1.equals(data.get要介護5()))) {
             認定有効期間開始日 = data.get申請日();
         }
         return 認定有効期間開始日;
@@ -298,12 +307,12 @@ public class ChosaOCRTorikomiHandler {
 
     private FlexibleDate get認定有効期間開始日6(TorikomiEntity data, FlexibleDate 認定有効期間開始日) {
         if (data.get申請区分() != null && NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(data.get申請区分().value())
-                && IchijiHanteiKekkaCode09.要介護1.getコード().equals(data.get一次判定結果().value())
-                || IchijiHanteiKekkaCode09.要介護2.getコード().equals(data.get一次判定結果().value())
-                || IchijiHanteiKekkaCode09.要介護3.getコード().equals(data.get一次判定結果().value())
-                || IchijiHanteiKekkaCode09.要介護4.getコード().equals(data.get一次判定結果().value())
-                || IchijiHanteiKekkaCode09.要介護5.getコード().equals(data.get一次判定結果().value())
-                || INDEX_1.equals(data.get要支援1()) || INDEX_1.equals(data.get要支援2())) {
+                && (YokaigoJotaiKubun.要介護1.getコード().equals(data.get二次判定要介護状態区分コード().value())
+                || YokaigoJotaiKubun.要介護2.getコード().equals(data.get二次判定要介護状態区分コード().value())
+                || YokaigoJotaiKubun.要介護3.getコード().equals(data.get二次判定要介護状態区分コード().value())
+                || YokaigoJotaiKubun.要介護4.getコード().equals(data.get二次判定要介護状態区分コード().value())
+                || YokaigoJotaiKubun.要介護5.getコード().equals(data.get二次判定要介護状態区分コード().value()))
+                && (INDEX_1.equals(data.get要支援1()) || INDEX_1.equals(data.get要支援2()))) {
             認定有効期間開始日 = data.get二次判定年月日();
         }
         return 認定有効期間開始日;
@@ -311,18 +320,19 @@ public class ChosaOCRTorikomiHandler {
 
     private FlexibleDate get認定有効期間開始日7(TorikomiEntity data, FlexibleDate 認定有効期間開始日) {
         if (data.get申請区分() != null && NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(data.get申請区分().value())
-                && IchijiHanteiKekkaCode09.要支援2.getコード().equals(data.get一次判定結果().value())
-                || INDEX_1.equals(data.get要介護1()) || INDEX_1.equals(data.get要介護2()) || INDEX_1.equals(data.get要介護3())
-                || INDEX_1.equals(data.get要介護4()) || INDEX_1.equals(data.get要介護5())) {
+                && (YokaigoJotaiKubun.要支援1.getコード().equals(data.get二次判定要介護状態区分コード().value())
+                || YokaigoJotaiKubun.要支援2.getコード().equals(data.get二次判定要介護状態区分コード().value()))
+                || (INDEX_1.equals(data.get要介護1()) || INDEX_1.equals(data.get要介護2()) || INDEX_1.equals(data.get要介護3())
+                || INDEX_1.equals(data.get要介護4()) || INDEX_1.equals(data.get要介護5()))) {
             認定有効期間開始日 = get認定有効終了年月日の次月１日(data.get二次判定認定有効終了年月日());
         }
         if (data.get申請区分() != null && NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(data.get申請区分().value())
-                && IchijiHanteiKekkaCode09.要介護1.getコード().equals(data.get一次判定結果().value())
-                || IchijiHanteiKekkaCode09.要介護2.getコード().equals(data.get一次判定結果().value())
-                || IchijiHanteiKekkaCode09.要介護3.getコード().equals(data.get一次判定結果().value())
-                || IchijiHanteiKekkaCode09.要介護4.getコード().equals(data.get一次判定結果().value())
-                || IchijiHanteiKekkaCode09.要介護5.getコード().equals(data.get一次判定結果().value())
-                || INDEX_1.equals(data.get要支援1()) || INDEX_1.equals(data.get要支援2())) {
+                && (YokaigoJotaiKubun.要介護1.getコード().equals(data.get二次判定要介護状態区分コード().value())
+                || YokaigoJotaiKubun.要介護2.getコード().equals(data.get二次判定要介護状態区分コード().value())
+                || YokaigoJotaiKubun.要介護3.getコード().equals(data.get二次判定要介護状態区分コード().value())
+                || YokaigoJotaiKubun.要介護4.getコード().equals(data.get二次判定要介護状態区分コード().value())
+                || YokaigoJotaiKubun.要介護5.getコード().equals(data.get二次判定要介護状態区分コード().value()))
+                && (INDEX_1.equals(data.get要支援1()) || INDEX_1.equals(data.get要支援2()))) {
             認定有効期間開始日 = get認定有効終了年月日の次月１日(data.get二次判定認定有効終了年月日());
         }
         return 認定有効期間開始日;

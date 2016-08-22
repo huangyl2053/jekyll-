@@ -207,10 +207,6 @@ public class SokujiFukaKouseiMainHandler {
     public boolean set画面入力項目を反映(NendobunFukaList 更正前, NendobunFukaList 更正後) {
         Boolean is差異がある = Boolean.FALSE;
         FukaJoho 最新賦課の情報 = 更正後.get最新賦課の情報();
-        boolean is履歴番号採番 = !is介護期別異なる(更正前.get最新賦課の情報(), 更正後.get最新賦課の情報());
-        if (is履歴番号採番) {
-            最新賦課の情報 = get賦課の情報履歴番号採番(最新賦課の情報);
-        }
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         is差異がある = set期別金額(最新賦課の情報, NUM_1, ChoshuHohoKibetsu.特別徴収.getコード(), tablePanel.getTxtTokuchoKoseiGo04(),
                 null, is差異がある);
@@ -277,7 +273,7 @@ public class SokujiFukaKouseiMainHandler {
         if (!is過年度を反映) {
             更正後.set現年度(最新賦課の情報);
         } else {
-            更正後.set現年度(get賦課の情報履歴番号採番(更正後.get現年度()));
+            更正後.set現年度(更正後.get現年度());
         }
         return is差異がある;
     }
@@ -484,24 +480,58 @@ public class SokujiFukaKouseiMainHandler {
     private List<FukaJoho> get更新対象(NendobunFukaList 更正前, NendobunFukaList 更正後) {
         List<FukaJoho> 更新対象 = new ArrayList<>();
         if (is内容に異なる箇所がある(更正前.get現年度(), 更正後.get現年度())) {
-            更新対象.add(更正後.get現年度());
+            boolean is履歴番号採番 = is履歴番号採番(更正前.get現年度(), 更正後.get現年度());
+            FukaJoho 現年度 = 更正後.get現年度();
+            if (is履歴番号採番) {
+                現年度 = get賦課の情報履歴番号採番(現年度);
+            }
+            更新対象.add(現年度);
         }
         if (is内容に異なる箇所がある(更正前.get過年度1(), 更正後.get過年度1())) {
-            更新対象.add(更正後.get過年度1());
+            boolean is履歴番号採番 = is履歴番号採番(更正前.get過年度1(), 更正後.get過年度1());
+            FukaJoho 過年度1 = 更正後.get過年度1();
+            if (is履歴番号採番) {
+                過年度1 = get賦課の情報履歴番号採番(過年度1);
+            }
+            更新対象.add(過年度1);
         }
         if (is内容に異なる箇所がある(更正前.get過年度2(), 更正後.get過年度2())) {
-            更新対象.add(更正後.get過年度2());
+            boolean is履歴番号採番 = is履歴番号採番(更正前.get過年度2(), 更正後.get過年度2());
+            FukaJoho 過年度2 = 更正後.get過年度2();
+            if (is履歴番号採番) {
+                過年度2 = get賦課の情報履歴番号採番(過年度2);
+            }
+            更新対象.add(過年度2);
         }
         if (is内容に異なる箇所がある(更正前.get過年度3(), 更正後.get過年度3())) {
-            更新対象.add(更正後.get過年度3());
+            boolean is履歴番号採番 = is履歴番号採番(更正前.get過年度3(), 更正後.get過年度3());
+            FukaJoho 過年度3 = 更正後.get過年度3();
+            if (is履歴番号採番) {
+                過年度3 = get賦課の情報履歴番号採番(過年度3);
+            }
+            更新対象.add(過年度3);
         }
         if (is内容に異なる箇所がある(更正前.get過年度4(), 更正後.get過年度4())) {
-            更新対象.add(更正後.get過年度4());
+            boolean is履歴番号採番 = is履歴番号採番(更正前.get過年度4(), 更正後.get過年度4());
+            FukaJoho 過年度4 = 更正後.get過年度1();
+            if (is履歴番号採番) {
+                過年度4 = get賦課の情報履歴番号採番(過年度4);
+            }
+            更新対象.add(過年度4);
         }
         if (is内容に異なる箇所がある(更正前.get過年度5(), 更正後.get過年度5())) {
-            更新対象.add(更正後.get過年度5());
+            boolean is履歴番号採番 = is履歴番号採番(更正前.get過年度5(), 更正後.get過年度5());
+            FukaJoho 過年度5 = 更正後.get過年度5();
+            if (is履歴番号採番) {
+                過年度5 = get賦課の情報履歴番号採番(過年度5);
+            }
+            更新対象.add(過年度5);
         }
         return 更新対象;
+    }
+
+    private boolean is履歴番号採番(FukaJoho 更正前賦課, FukaJoho 更正後賦課) {
+        return 更正前賦課.get履歴番号() == 更正後賦課.get履歴番号();
     }
 
     private boolean is内容に異なる箇所がある(FukaJoho 更正前賦課, FukaJoho 更正後賦課) {

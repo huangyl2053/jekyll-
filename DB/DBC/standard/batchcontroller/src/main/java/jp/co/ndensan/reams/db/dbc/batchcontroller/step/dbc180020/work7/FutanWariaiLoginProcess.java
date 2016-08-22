@@ -41,23 +41,24 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
- * 利用者負担割合、利用者負担割合明細、今回利用者負担割合情報Tempの登録<br/>
+ * 利用者負担割合、利用者負担割合明細、今回利用者負担割合情報Tempの登録のクラスです。<br/>
  * 処理詳細11
  *
  * @reamsid_L DBC-4950-030 liuyang
  */
-public class Work11Process extends BatchKeyBreakBase<FutanWariaiRelateEntity> {
+public class FutanWariaiLoginProcess extends BatchKeyBreakBase<FutanWariaiRelateEntity> {
 
+    private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
-    private static final RString ZERO = new RString("0");
+    private static final RString THREE = new RString("3");
     private static final RString TABLENAME = new RString("KonkaiRiyoshaFutanWariaiJohoTemp");
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "riyoshafutanwariaihantei.IRiyoshaFutanwariaiMapper.select負担割合と明細");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("RiyoshaFutanWariaiHantei"));
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("shoriKekkaKakuninList"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private static final RString CSVFILENAME = new RString("RiyoshaFutanWariaiHantei.csv");
+    private static final RString CSVFILENAME = new RString("shoriKekkaKakuninList.csv");
     private DBC180020ProcessParameter parameter;
     private HihokenshaNo beforeNo;
     private HihokenshaNo nowNo;
@@ -99,8 +100,7 @@ public class Work11Process extends BatchKeyBreakBase<FutanWariaiRelateEntity> {
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(getEncode(文字コード)).
                 setNewLine(NewLine.CRLF).
-                hasHeader(false).build();
-        this.eucCsvWriter.writeLine(new RiyoshaFutanWariaiHanteiCsvEntity().getTitle());
+                hasHeader(true).build();
         今回利用者負担割合情報Temp
                 = new BatchEntityCreatedTempTableWriter(TABLENAME, KonkaiRiyoshaFutanWariaiJohoTempEntity.class);
         利用者負担割合Writer = new BatchPermanentTableWriter(DbT3113RiyoshaFutanWariaiEntity.class);
@@ -121,8 +121,26 @@ public class Work11Process extends BatchKeyBreakBase<FutanWariaiRelateEntity> {
         }
         List<TsukibetsuFutanWariaiTempEntity> 月別負担割合新リスト = entity.get月別負担割合新();
         List<TsukibetsuFutanWariaiTempEntity> 月別負担割合現リスト = entity.get月別負担割合現();
-        if (月別負担割合新リスト.isEmpty() || 月別負担割合現リスト.isEmpty()) {
+        if (subProcess(月別負担割合新リスト, 月別負担割合現リスト)) {
             return;
+        }
+        last = entity.get利用者負担割合明細();
+        RiyoshaFutanWariaiMeisaiTempEntity 利用者負担割合明細 = getBefore().get利用者負担割合明細();
+        beforeNo = 利用者負担割合明細.getHihokenshaNo();
+        nowNo = last.getHihokenshaNo();
+        edaNo++;
+        loopHandle(利用者負担割合明細);
+        if (!beforeNo.equals(nowNo)) {
+            rirekiNo = 1;
+        } else {
+            rirekiNo++;
+        }
+    }
+
+    private boolean subProcess(List<TsukibetsuFutanWariaiTempEntity> 月別負担割合新リスト,
+            List<TsukibetsuFutanWariaiTempEntity> 月別負担割合現リスト) {
+        if (月別負担割合新リスト.isEmpty() || 月別負担割合現リスト.isEmpty()) {
+            return true;
         }
         TsukibetsuFutanWariaiTempEntity 月別負担割合新 = 月別負担割合新リスト.get(0);
         TsukibetsuFutanWariaiTempEntity 月別負担割合現 = 月別負担割合現リスト.get(0);
@@ -130,7 +148,7 @@ public class Work11Process extends BatchKeyBreakBase<FutanWariaiRelateEntity> {
             HihokenshaNo hino = 月別負担割合新.getHihokenshaNo();
             csvEditor = new RiyoshaFutanWariaiHanteiCsvEditor(ONE, hino == null ? RString.EMPTY : hino.value());
             eucCsvWriter.writeLine(csvEditor.edit());
-            return;
+            return true;
         }
         if (ZERO.equals(月別負担割合新.getFutanwariaiKubunAug())
                 && ZERO.equals(月別負担割合新.getFutanwariaiKubunSept())
@@ -147,19 +165,9 @@ public class Work11Process extends BatchKeyBreakBase<FutanWariaiRelateEntity> {
             HihokenshaNo hino = 月別負担割合新.getHihokenshaNo();
             csvEditor = new RiyoshaFutanWariaiHanteiCsvEditor(TWO, hino == null ? RString.EMPTY : hino.value());
             eucCsvWriter.writeLine(csvEditor.edit());
-            return;
+            return true;
         }
-        last = entity.get利用者負担割合明細();
-        RiyoshaFutanWariaiMeisaiTempEntity 利用者負担割合明細 = getBefore().get利用者負担割合明細();
-        beforeNo = 利用者負担割合明細.getHihokenshaNo();
-        nowNo = last.getHihokenshaNo();
-        edaNo++;
-        loopHandle(利用者負担割合明細);
-        if (!beforeNo.equals(nowNo)) {
-            rirekiNo = 1;
-        } else {
-            rirekiNo++;
-        }
+        return false;
     }
 
     @Override
@@ -228,11 +236,13 @@ public class Work11Process extends BatchKeyBreakBase<FutanWariaiRelateEntity> {
 
     private Encode getEncode(RString sakiEncodeKeitai) {
         Encode encode = Encode.UTF_8withBOM;
-        if (new RString("2").equals(sakiEncodeKeitai)) {
+        if (TWO.equals(sakiEncodeKeitai)) {
             encode = Encode.SJIS;
-        } else if (new RString("3").equals(sakiEncodeKeitai)) {
-            encode = Encode.SJIS;
+        } else if (THREE.equals(sakiEncodeKeitai)) {
+//            QA
+            encode = Encode.JIS;
         }
         return encode;
     }
+
 }

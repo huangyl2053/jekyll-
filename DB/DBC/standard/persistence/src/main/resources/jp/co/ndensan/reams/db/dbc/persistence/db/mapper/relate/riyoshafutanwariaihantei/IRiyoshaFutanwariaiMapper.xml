@@ -17,11 +17,12 @@
             FROM
                     "HanteiTaishoshaTemp"
             LEFT JOIN
-                    rgdb."DbV1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
+                (SELECT "a".* FROM
+                    rgdb."DbV1001HihokenshaDaicho" AS "a"
+                WHERE
+                    "a"."idoYMD"<![CDATA[<=]]>#{判定基準日}) AS "DbT1001HihokenshaDaicho"
             ON
                     "HanteiTaishoshaTemp"."hihokenshaNo"="DbT1001HihokenshaDaicho"."hihokenshaNo"
-            WHERE
-                    "DbT1001HihokenshaDaicho"."idoYMD"<![CDATA[<=]]>#{判定基準日}
             ORDER BY
                     "HanteiTaishoshaTemp"."hihokenshaNo"
     </select>
@@ -32,20 +33,22 @@
             fetchSize="500">
             SELECT
                #{対象年度} AS  "SetainJohoTemp_taishoNendo",
-               #{対象月} AS "SetainJohoTemp_taishoTsuki",
+               #{対象月}    AS "SetainJohoTemp_taishoTsuki",
                 "TmpSetaiShotoku"."setaiCode" AS "SetainJohoTemp_setaiCode",
                 "TmpSetaiShotoku"."shikibetsuCode" AS "SetainJohoTemp_shikibetsuCode"
             FROM
                     "TmpSetaiShotoku"
             LEFT JOIN
-                    rgdb."DbV1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
+                    (SELECT "a".* FROM
+                        rgdb."DbV1001HihokenshaDaicho" AS "a"
+                    WHERE
+                        "a"."idoYMD"<![CDATA[<=]]>#{判定基準日}
+                        AND 
+                        "a"."hihokennshaKubunCode"= '1'
+                    ) AS "DbT1001HihokenshaDaicho"
             ON  
                     "TmpSetaiShotoku"."hihokenshaNo"="DbT1001HihokenshaDaicho"."hihokenshaNo"
             WHERE
-                    "DbT1001HihokenshaDaicho"."idoYMD"<![CDATA[<=]]>#{判定基準日}
-                    AND 
-                    "DbT1001HihokenshaDaicho"."hihokennshaKubunCode"= '1'
-                    AND 
                     NOT (EXISTS (
                     SELECT
                         "a"."hihokenshaNo"as "a_hihokenshaNo",
@@ -64,12 +67,9 @@
                         AND
                             "a"."setaiCode"="TmpSetaiShotoku"."setaiCode"
                         AND
-                            1=1
-                        OR(
-                                "TmpSetaiShotoku"."honninKubun"='1'
-                            AND
-                                "a"."honinShikibetsuCode"="TmpSetaiShotoku"."shikibetsuCode"
-                                )
+                            "TmpSetaiShotoku"."honninKubun"='1'
+                        AND
+                            "a"."honinShikibetsuCode"="TmpSetaiShotoku"."shikibetsuCode"
                         ))
     </select>
     <!--処理詳細2(4)世帯員（利用者負担割合・本人）追加-->
@@ -87,31 +87,33 @@
                 ON  
                     "TmpSetaiShotoku"."shikibetsuCode"="DbT1001HihokenshaDaicho"."shikibetsuCode"
             INNER JOIN
-                    rgdb."DbV3113RiyoshaFutanWariai" AS "DbT3113RiyoshaFutanWariai"
-                ON  
+                (SELECT "b".* FROM
+                        rgdb."DbV3113RiyoshaFutanWariai" AS "b"
+                WHERE 
+                        "b"."nendo"=#{対象年度}
+                    AND
+                        NOT (EXISTS (
+                        SELECT
+                            "a"."hihokenshaNo"
+                        FROM
+                            "HanteiTaishoshaTemp" AS "a"
+                        WHERE 
+                               "a"."hihokenshaNo"="b"."hihokenshaNo"
+                        ))
+                    AND
+                        NOT (EXISTS (
+                        SELECT
+                            "a"."hihokenshaNo"
+                        FROM
+                            "TuikaHanteiTaishoshaTemp" AS "a"
+                        WHERE 
+                                "a"."hihokenshaNo"="b"."hihokenshaNo"
+                        ))
+                ) AS "DbT3113RiyoshaFutanWariai"
+                ON
                     "DbT3113RiyoshaFutanWariai"."hihokenshaNo"="DbT1001HihokenshaDaicho"."hihokenshaNo"
             WHERE
-                    "DbT3113RiyoshaFutanWariai"."nendo"=#{対象年度}
-                AND
                     "TmpSetaiShotoku"."honninKubun"<![CDATA[<>]]>'1'
-                AND 
-                    NOT (EXISTS (
-                    SELECT
-                        "a"."hihokenshaNo"
-                    FROM
-                        "HanteiTaishoshaTemp" AS "a"
-                    WHERE 
-                           "a"."hihokenshaNo"="DbT3113RiyoshaFutanWariai"."hihokenshaNo"
-                    ))
-                AND
-                    NOT (EXISTS (
-                    SELECT
-                        "b"."hihokenshaNo"
-                    FROM
-                        "TuikaHanteiTaishoshaTemp" AS "b"
-                    WHERE 
-                            "b"."hihokenshaNo"="DbT3113RiyoshaFutanWariai"."hihokenshaNo"
-                    ))
     </select>
     <!--処理詳細3判定対象者Tempの追加-->
     <select resultOrdered="true" id="select判定対象者追加" 
@@ -154,10 +156,14 @@
                 true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
             ON "ShikibetsuTaisho"."shikibetsuCode" = "DbT1001HihokenshaDaicho"."shikibetsuCode"
             LEFT JOIN
-                    rgdb."DbV2512KaigoShotokuNewest" AS "DbV2512KaigoShotokuNewest"
+                    (SELECT * FROM
+                    rgdb."DbV2512KaigoShotokuNewest" AS "a"
+                    WHERE
+                    "a"."shotokuNendo"=#{対象年度} ) AS "DbV2512KaigoShotokuNewest"
             ON  
                     "DbV2512KaigoShotokuNewest"."shikibetsuCode"= "DbT1001HihokenshaDaicho"."shikibetsuCode"
             LEFT JOIN
+                (SELECT "b".* FROM
                     (SELECT 
                         "dbt4001"."shichosonCode" as "shichosonCode",
                         "dbt4001"."hihokenshaNo" as "hihokenshaNo",
@@ -255,7 +261,6 @@
                         "dbt4001"."logicalDeletedFlag"=FALSE
                     AND
                         "dbt4001"."yukoMukoKubun"='2'            
-                        <!--TODO QA 対象年度開始日 対象年度終了日 -->
                     AND
                         (("dbt4001"."ninteiYukoKikanKaishiYMD"<![CDATA[<=]]>#{対象年度開始日} 
                                 AND
@@ -264,48 +269,42 @@
                         ("dbt4001"."ninteiYukoKikanKaishiYMD"<![CDATA[<=]]>#{対象年度終了日} 
                             AND
                          #{対象年度終了日} <![CDATA[<=]]>"dbt4001"."ninteiYukoKikanShuryoYMD"))
-            ) AS "DbT4001JukyushaDaicho"
+            ) AS "b" WHERE "b"."dbt4001_rrkno"=1) AS "DbT4001JukyushaDaicho"
             ON  
                     "DbT4001JukyushaDaicho"."hihokenshaNo"= "TuikaHanteiTaishoshaTemp"."hihokenshaNo"
             LEFT JOIN
-            (
-                SELECT 
-                    "dbt3105"."hihokenshaNo" as "hihokenshaNo",
-                    "dbt3105"."rirekiNo" as "rirekiNo",
-                    "dbt3105"."insertDantaiCd" as "insertDantaiCd",
-                    "dbt3105"."insertTimestamp" as "insertTimestamp",
-                    "dbt3105"."insertReamsLoginId" as "insertReamsLoginId",
-                    "dbt3105"."insertContextId" as "insertContextId",
-                    "dbt3105"."isDeleted" as "isDeleted",
-                    "dbt3105"."updateCount" as "updateCount",
-                    "dbt3105"."lastUpdateTimestamp" as "lastUpdateTimestamp",
-                    "dbt3105"."lastUpdateReamsLoginId" as "lastUpdateReamsLoginId",
-                    "dbt3105"."tekiyoKaishiYMD" as "tekiyoKaishiYMD",
-                    "dbt3105"."tekiyoShuryoYMD" as "tekiyoShuryoYMD",
-                    "dbt3105"."uketsukeYMD" as "uketsukeYMD",
-                    "dbt3105"."ketteiYMD" as "ketteiYMD",
-                    "dbt3105"."checklistJisshiYMD" as "checklistJisshiYMD",
-                    row_number() OVER (PARTITION BY "dbt3105"."hihokenshaNo" ORDER BY "dbt3105"."tekiyoKaishiYMD" )AS "dbt3105_rrkno"
-                FROM
-                    rgdb."DbT3105SogoJigyoTaishosha" as "dbt3105"
-                WHERE
-                    <!--TODO QA 対象年度開始日 対象年度終了日 -->
-                    (("dbt3105"."tekiyoKaishiYMD"<![CDATA[<=]]>#{対象年度開始日} 
-                        AND
-                      #{対象年度開始日} <![CDATA[<=]]>"dbt3105"."tekiyoShuryoYMD")
-                    OR
-                    ("dbt3105"."tekiyoKaishiYMD"<![CDATA[<=]]>#{対象年度終了日} 
-                        AND
-                     #{対象年度終了日} <![CDATA[<=]]>"dbt3105"."tekiyoShuryoYMD"))                    
-            )AS "DbT3105SogoJigyoTaishosha"
+            (SELECT "b".*  FROM
+                    (SELECT 
+                            "dbt3105"."hihokenshaNo" as "hihokenshaNo",
+                            "dbt3105"."rirekiNo" as "rirekiNo",
+                            "dbt3105"."insertDantaiCd" as "insertDantaiCd",
+                            "dbt3105"."insertTimestamp" as "insertTimestamp",
+                            "dbt3105"."insertReamsLoginId" as "insertReamsLoginId",
+                            "dbt3105"."insertContextId" as "insertContextId",
+                            "dbt3105"."isDeleted" as "isDeleted",
+                            "dbt3105"."updateCount" as "updateCount",
+                            "dbt3105"."lastUpdateTimestamp" as "lastUpdateTimestamp",
+                            "dbt3105"."lastUpdateReamsLoginId" as "lastUpdateReamsLoginId",
+                            "dbt3105"."tekiyoKaishiYMD" as "tekiyoKaishiYMD",
+                            "dbt3105"."tekiyoShuryoYMD" as "tekiyoShuryoYMD",
+                            "dbt3105"."uketsukeYMD" as "uketsukeYMD",
+                            "dbt3105"."ketteiYMD" as "ketteiYMD",
+                            "dbt3105"."checklistJisshiYMD" as "checklistJisshiYMD",
+                            row_number() OVER (PARTITION BY "dbt3105"."hihokenshaNo" ORDER BY "dbt3105"."tekiyoKaishiYMD" )AS "dbt3105_rrkno"
+                        FROM
+                            rgdb."DbT3105SogoJigyoTaishosha" as "dbt3105"
+                        WHERE
+                            <!--TODO QA 対象年度開始日 対象年度終了日 -->
+                            (("dbt3105"."tekiyoKaishiYMD"<![CDATA[<=]]>#{対象年度開始日} 
+                                AND
+                              #{対象年度開始日} <![CDATA[<=]]>"dbt3105"."tekiyoShuryoYMD")
+                            OR
+                            ("dbt3105"."tekiyoKaishiYMD"<![CDATA[<=]]>#{対象年度終了日} 
+                                AND
+                             #{対象年度終了日} <![CDATA[<=]]>"dbt3105"."tekiyoShuryoYMD"))                    
+                    )AS "b" WHERE "b"."dbt3105_rrkno"=1) AS "DbT3105SogoJigyoTaishosha"
             ON  
                     "DbT3105SogoJigyoTaishosha"."hihokenshaNo"= "TuikaHanteiTaishoshaTemp"."hihokenshaNo"
-            WHERE
-                    "DbT4001JukyushaDaicho"."dbt4001_rrkno"=1
-            AND
-                    "DbT3105SogoJigyoTaishosha"."dbt3105_rrkno"=1
-            AND
-                    "DbV2512KaigoShotokuNewest"."shotokuNendo"=#{対象年度} 
     </select>
     <!--処理詳細5生活保護該当情報Tempの作成-->
     <select resultOrdered="true" id="select生活保護該当情報作成" 
@@ -346,148 +345,151 @@
             FROM
                     "HanteiTaishoshaTemp"
             LEFT JOIN
-                    rgdb."DbV1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
+                    (SELECT "b".* FROM            
+                    rgdb."DbV1001HihokenshaDaicho" AS "b" 
+                    WHERE  "b"."idoYMD"<![CDATA[<=]]>#{判定基準日}) AS "DbT1001HihokenshaDaicho"
             ON  
                     "HanteiTaishoshaTemp"."hihokenshaNo"="DbT1001HihokenshaDaicho"."hihokenshaNo"
             LEFT JOIN
-                    (SELECT 
-                        "dbt4001"."shichosonCode" as "shichosonCode",
-                        "dbt4001"."hihokenshaNo" as "hihokenshaNo",
-                        "dbt4001"."rirekiNo" as "rirekiNo",
-                        "dbt4001"."edaban" as "edaban",
-                        "dbt4001"."jukyuShinseiJiyu" as "jukyuShinseiJiyu",
-                        "dbt4001"."insertDantaiCd" as "insertDantaiCd",
-                        "dbt4001"."insertTimestamp" as "insertTimestamp",
-                        "dbt4001"."insertReamsLoginId" as "insertReamsLoginId",
-                        "dbt4001"."insertContextId" as "insertContextId",
-                        "dbt4001"."isDeleted" as "isDeleted",
-                        "dbt4001"."updateCount" as "updateCount",
-                        "dbt4001"."lastUpdateTimestamp" as "lastUpdateTimestamp",
-                        "dbt4001"."lastUpdateReamsLoginId" as "lastUpdateReamsLoginId",
-                        "dbt4001"."shinseishoKanriNo" as "shinseishoKanriNo",
-                        "dbt4001"."shinseiJokyoKubun" as "shinseiJokyoKubun",
-                        "dbt4001"."shishoCode" as "shishoCode",
-                        "dbt4001"."chokkinFlag" as "chokkinFlag",
-                        "dbt4001"."shikibetsuCode" as "shikibetsuCode",
-                        "dbt4001"."shinseiRiyu" as "shinseiRiyu",
-                        "dbt4001"."shinseishaKankeiCode" as "shinseishaKankeiCode",
-                        "dbt4001"."homninKankei" as "homninKankei",
-                        "dbt4001"."jukyuShinseiYMD" as "jukyuShinseiYMD",
-                        "dbt4001"."nigoTokuteiShippeiCode" as "nigoTokuteiShippeiCode",
-                        "dbt4001"."shinsakaiIraiYMD" as "shinsakaiIraiYMD",
-                        "dbt4001"."yokaigoJotaiKubunCode" as "yokaigoJotaiKubunCode",
-                        "dbt4001"."ninteiYukoKikanKaishiYMD" as "ninteiYukoKikanKaishiYMD",
-                        "dbt4001"."ninteiYukoKikanShuryoYMD" as "ninteiYukoKikanShuryoYMD",
-                        "dbt4001"."ninteiYMD" as "ninteiYMD",
-                        "dbt4001"."minashiCode" as "minashiCode",
-                        "dbt4001"."shiteiServiceShurui01" as "shiteiServiceShurui01",
-                        "dbt4001"."shiteiServiceShurui02" as "shiteiServiceShurui02",
-                        "dbt4001"."shiteiServiceShurui03" as "shiteiServiceShurui03",
-                        "dbt4001"."shiteiServiceShurui04" as "shiteiServiceShurui04",
-                        "dbt4001"."shiteiServiceShurui05" as "shiteiServiceShurui05",
-                        "dbt4001"."shiteiServiceShurui06" as "shiteiServiceShurui06",
-                        "dbt4001"."shiteiServiceShurui07" as "shiteiServiceShurui07",
-                        "dbt4001"."shiteiServiceShurui08" as "shiteiServiceShurui08",
-                        "dbt4001"."shiteiServiceShurui09" as "shiteiServiceShurui09",
-                        "dbt4001"."shiteiServiceShurui10" as "shiteiServiceShurui10",
-                        "dbt4001"."shiteiServiceShurui11" as "shiteiServiceShurui11",
-                        "dbt4001"."shiteiServiceShurui12" as "shiteiServiceShurui12",
-                        "dbt4001"."shiteiServiceShurui13" as "shiteiServiceShurui13",
-                        "dbt4001"."shiteiServiceShurui14" as "shiteiServiceShurui14",
-                        "dbt4001"."shiteiServiceShurui15" as "shiteiServiceShurui15",
-                        "dbt4001"."shiteiServiceShurui16" as "shiteiServiceShurui16",
-                        "dbt4001"."shiteiServiceShurui17" as "shiteiServiceShurui17",
-                        "dbt4001"."shiteiServiceShurui18" as "shiteiServiceShurui18",
-                        "dbt4001"."shiteiServiceShurui19" as "shiteiServiceShurui19",
-                        "dbt4001"."shiteiServiceShurui20" as "shiteiServiceShurui20",
-                        "dbt4001"."shiteiServiceShurui21" as "shiteiServiceShurui21",
-                        "dbt4001"."shiteiServiceShurui22" as "shiteiServiceShurui22",
-                        "dbt4001"."shiteiServiceShurui23" as "shiteiServiceShurui23",
-                        "dbt4001"."shiteiServiceShurui24" as "shiteiServiceShurui24",
-                        "dbt4001"."shiteiServiceShurui25" as "shiteiServiceShurui25",
-                        "dbt4001"."shiteiServiceShurui26" as "shiteiServiceShurui26",
-                        "dbt4001"."shiteiServiceShurui27" as "shiteiServiceShurui27",
-                        "dbt4001"."shiteiServiceShurui28" as "shiteiServiceShurui28",
-                        "dbt4001"."shiteiServiceShurui29" as "shiteiServiceShurui29",
-                        "dbt4001"."shiteiServiceShurui30" as "shiteiServiceShurui30",
-                        "dbt4001"."soshitsuYMD" as "soshitsuYMD",
-                        "dbt4001"."chokkinIdoYMD" as "chokkinIdoYMD",
-                        "dbt4001"."chokkinIdoJiyuCode" as "chokkinIdoJiyuCode",
-                        "dbt4001"."yukoMukoKubun" as "yukoMukoKubun",
-                        "dbt4001"."dataKubun" as "dataKubun",
-                        "dbt4001"."remban" as "remban",
-                        "dbt4001"."idoRiyu" as "idoRiyu",
-                        "dbt4001"."shinseishoKubun" as "shinseishoKubun",
-                        "dbt4001"."sakujoJiyuCode" as "sakujoJiyuCode",
-                        "dbt4001"."yoshienshaNinteiShinseiFlag" as "yoshienshaNinteiShinseiFlag",
-                        "dbt4001"."shikyuGendoTanisu" as "shikyuGendoTanisu",
-                        "dbt4001"."shikyuGendoKaishiYMD" as "shikyuGendoKaishiYMD",
-                        "dbt4001"."shikyuGendoShuryoYMD" as "shikyuGendoShuryoYMD",
-                        "dbt4001"."tankiSikyuGendoNissu" as "tankiSikyuGendoNissu",
-                        "dbt4001"."tankiShikyuGendoKaishiYMD" as "tankiShikyuGendoKaishiYMD",
-                        "dbt4001"."tankiShikyuGendoShuryoYMD" as "tankiShikyuGendoShuryoYMD",
-                        "dbt4001"."toshoNinteiYukoKaishiYMD" as "toshoNinteiYukoKaishiYMD",
-                        "dbt4001"."toshoNinteiYukoShuryoYMD" as "toshoNinteiYukoShuryoYMD",
-                        "dbt4001"."jukyuShikakuShomeishoHakkoYMD1" as "jukyuShikakuShomeishoHakkoYMD1",
-                        "dbt4001"."jukyuShikakuShomeishoHakkoYMD2" as "jukyuShikakuShomeishoHakkoYMD2",
-                        "dbt4001"."shindanMeireishoHakkoYMD" as "shindanMeireishoHakkoYMD",
-                        "dbt4001"."nigoShinseiJuriTsuchishoHakkoYMD" as "nigoShinseiJuriTsuchishoHakkoYMD",
-                        "dbt4001"."ninteiKekkaTsuchishoHakkoYMD" as "ninteiKekkaTsuchishoHakkoYMD",
-                        "dbt4001"."kubunHenkoTsuchishoHakkoYMD" as "kubunHenkoTsuchishoHakkoYMD",
-                        "dbt4001"."serviceHenkoTsuchishoHakkoYMD" as "serviceHenkoTsuchishoHakkoYMD",
-                        "dbt4001"."ninteiKyakkaTsuchishoHakkoYMD" as "ninteiKyakkaTsuchishoHakkoYMD",
-                        "dbt4001"."ninteiTorikeshiTsuchishoHakkoYMD" as "ninteiTorikeshiTsuchishoHakkoYMD",
-                        "dbt4001"."shikakuShutokuMaeShinseiFlag" as "shikakuShutokuMaeShinseiFlag",
-                        "dbt4001"."kyuSochishaFlag" as "kyuSochishaFlag",
-                        "dbt4001"."logicalDeletedFlag" as "logicalDeletedFlag",
-                        row_number() OVER (PARTITION BY "dbt4001"."hihokenshaNo" ORDER BY "dbt4001"."ninteiYukoKikanKaishiYMD" )AS "dbt4001_rrkno"
-                    FROM
-                        rgdb."DbT4001JukyushaDaicho" AS "dbt4001"
-                    WHERE
-                        "dbt4001"."logicalDeletedFlag"=FALSE
-                    AND
-                        "dbt4001"."yukoMukoKubun"='2'       
-                    AND     
-                        (("dbt4001"."ninteiYukoKikanKaishiYMD"<![CDATA[<=]]>#{対象年度開始日} 
-                            AND
-                          #{対象年度開始日} <![CDATA[<=]]>"dbt4001"."ninteiYukoKikanShuryoYMD")
-                            OR
-                        ("dbt4001"."ninteiYukoKikanKaishiYMD"<![CDATA[<=]]>#{対象年度終了日} 
-                            AND
-                         #{対象年度終了日} <![CDATA[<=]]>"dbt4001"."ninteiYukoKikanShuryoYMD"))
-            ) AS "DbT4001JukyushaDaicho"
+                    (SELECT "b".* FROM
+                        (SELECT 
+                            "dbt4001"."shichosonCode" as "shichosonCode",
+                            "dbt4001"."hihokenshaNo" as "hihokenshaNo",
+                            "dbt4001"."rirekiNo" as "rirekiNo",
+                            "dbt4001"."edaban" as "edaban",
+                            "dbt4001"."jukyuShinseiJiyu" as "jukyuShinseiJiyu",
+                            "dbt4001"."insertDantaiCd" as "insertDantaiCd",
+                            "dbt4001"."insertTimestamp" as "insertTimestamp",
+                            "dbt4001"."insertReamsLoginId" as "insertReamsLoginId",
+                            "dbt4001"."insertContextId" as "insertContextId",
+                            "dbt4001"."isDeleted" as "isDeleted",
+                            "dbt4001"."updateCount" as "updateCount",
+                            "dbt4001"."lastUpdateTimestamp" as "lastUpdateTimestamp",
+                            "dbt4001"."lastUpdateReamsLoginId" as "lastUpdateReamsLoginId",
+                            "dbt4001"."shinseishoKanriNo" as "shinseishoKanriNo",
+                            "dbt4001"."shinseiJokyoKubun" as "shinseiJokyoKubun",
+                            "dbt4001"."shishoCode" as "shishoCode",
+                            "dbt4001"."chokkinFlag" as "chokkinFlag",
+                            "dbt4001"."shikibetsuCode" as "shikibetsuCode",
+                            "dbt4001"."shinseiRiyu" as "shinseiRiyu",
+                            "dbt4001"."shinseishaKankeiCode" as "shinseishaKankeiCode",
+                            "dbt4001"."homninKankei" as "homninKankei",
+                            "dbt4001"."jukyuShinseiYMD" as "jukyuShinseiYMD",
+                            "dbt4001"."nigoTokuteiShippeiCode" as "nigoTokuteiShippeiCode",
+                            "dbt4001"."shinsakaiIraiYMD" as "shinsakaiIraiYMD",
+                            "dbt4001"."yokaigoJotaiKubunCode" as "yokaigoJotaiKubunCode",
+                            "dbt4001"."ninteiYukoKikanKaishiYMD" as "ninteiYukoKikanKaishiYMD",
+                            "dbt4001"."ninteiYukoKikanShuryoYMD" as "ninteiYukoKikanShuryoYMD",
+                            "dbt4001"."ninteiYMD" as "ninteiYMD",
+                            "dbt4001"."minashiCode" as "minashiCode",
+                            "dbt4001"."shiteiServiceShurui01" as "shiteiServiceShurui01",
+                            "dbt4001"."shiteiServiceShurui02" as "shiteiServiceShurui02",
+                            "dbt4001"."shiteiServiceShurui03" as "shiteiServiceShurui03",
+                            "dbt4001"."shiteiServiceShurui04" as "shiteiServiceShurui04",
+                            "dbt4001"."shiteiServiceShurui05" as "shiteiServiceShurui05",
+                            "dbt4001"."shiteiServiceShurui06" as "shiteiServiceShurui06",
+                            "dbt4001"."shiteiServiceShurui07" as "shiteiServiceShurui07",
+                            "dbt4001"."shiteiServiceShurui08" as "shiteiServiceShurui08",
+                            "dbt4001"."shiteiServiceShurui09" as "shiteiServiceShurui09",
+                            "dbt4001"."shiteiServiceShurui10" as "shiteiServiceShurui10",
+                            "dbt4001"."shiteiServiceShurui11" as "shiteiServiceShurui11",
+                            "dbt4001"."shiteiServiceShurui12" as "shiteiServiceShurui12",
+                            "dbt4001"."shiteiServiceShurui13" as "shiteiServiceShurui13",
+                            "dbt4001"."shiteiServiceShurui14" as "shiteiServiceShurui14",
+                            "dbt4001"."shiteiServiceShurui15" as "shiteiServiceShurui15",
+                            "dbt4001"."shiteiServiceShurui16" as "shiteiServiceShurui16",
+                            "dbt4001"."shiteiServiceShurui17" as "shiteiServiceShurui17",
+                            "dbt4001"."shiteiServiceShurui18" as "shiteiServiceShurui18",
+                            "dbt4001"."shiteiServiceShurui19" as "shiteiServiceShurui19",
+                            "dbt4001"."shiteiServiceShurui20" as "shiteiServiceShurui20",
+                            "dbt4001"."shiteiServiceShurui21" as "shiteiServiceShurui21",
+                            "dbt4001"."shiteiServiceShurui22" as "shiteiServiceShurui22",
+                            "dbt4001"."shiteiServiceShurui23" as "shiteiServiceShurui23",
+                            "dbt4001"."shiteiServiceShurui24" as "shiteiServiceShurui24",
+                            "dbt4001"."shiteiServiceShurui25" as "shiteiServiceShurui25",
+                            "dbt4001"."shiteiServiceShurui26" as "shiteiServiceShurui26",
+                            "dbt4001"."shiteiServiceShurui27" as "shiteiServiceShurui27",
+                            "dbt4001"."shiteiServiceShurui28" as "shiteiServiceShurui28",
+                            "dbt4001"."shiteiServiceShurui29" as "shiteiServiceShurui29",
+                            "dbt4001"."shiteiServiceShurui30" as "shiteiServiceShurui30",
+                            "dbt4001"."soshitsuYMD" as "soshitsuYMD",
+                            "dbt4001"."chokkinIdoYMD" as "chokkinIdoYMD",
+                            "dbt4001"."chokkinIdoJiyuCode" as "chokkinIdoJiyuCode",
+                            "dbt4001"."yukoMukoKubun" as "yukoMukoKubun",
+                            "dbt4001"."dataKubun" as "dataKubun",
+                            "dbt4001"."remban" as "remban",
+                            "dbt4001"."idoRiyu" as "idoRiyu",
+                            "dbt4001"."shinseishoKubun" as "shinseishoKubun",
+                            "dbt4001"."sakujoJiyuCode" as "sakujoJiyuCode",
+                            "dbt4001"."yoshienshaNinteiShinseiFlag" as "yoshienshaNinteiShinseiFlag",
+                            "dbt4001"."shikyuGendoTanisu" as "shikyuGendoTanisu",
+                            "dbt4001"."shikyuGendoKaishiYMD" as "shikyuGendoKaishiYMD",
+                            "dbt4001"."shikyuGendoShuryoYMD" as "shikyuGendoShuryoYMD",
+                            "dbt4001"."tankiSikyuGendoNissu" as "tankiSikyuGendoNissu",
+                            "dbt4001"."tankiShikyuGendoKaishiYMD" as "tankiShikyuGendoKaishiYMD",
+                            "dbt4001"."tankiShikyuGendoShuryoYMD" as "tankiShikyuGendoShuryoYMD",
+                            "dbt4001"."toshoNinteiYukoKaishiYMD" as "toshoNinteiYukoKaishiYMD",
+                            "dbt4001"."toshoNinteiYukoShuryoYMD" as "toshoNinteiYukoShuryoYMD",
+                            "dbt4001"."jukyuShikakuShomeishoHakkoYMD1" as "jukyuShikakuShomeishoHakkoYMD1",
+                            "dbt4001"."jukyuShikakuShomeishoHakkoYMD2" as "jukyuShikakuShomeishoHakkoYMD2",
+                            "dbt4001"."shindanMeireishoHakkoYMD" as "shindanMeireishoHakkoYMD",
+                            "dbt4001"."nigoShinseiJuriTsuchishoHakkoYMD" as "nigoShinseiJuriTsuchishoHakkoYMD",
+                            "dbt4001"."ninteiKekkaTsuchishoHakkoYMD" as "ninteiKekkaTsuchishoHakkoYMD",
+                            "dbt4001"."kubunHenkoTsuchishoHakkoYMD" as "kubunHenkoTsuchishoHakkoYMD",
+                            "dbt4001"."serviceHenkoTsuchishoHakkoYMD" as "serviceHenkoTsuchishoHakkoYMD",
+                            "dbt4001"."ninteiKyakkaTsuchishoHakkoYMD" as "ninteiKyakkaTsuchishoHakkoYMD",
+                            "dbt4001"."ninteiTorikeshiTsuchishoHakkoYMD" as "ninteiTorikeshiTsuchishoHakkoYMD",
+                            "dbt4001"."shikakuShutokuMaeShinseiFlag" as "shikakuShutokuMaeShinseiFlag",
+                            "dbt4001"."kyuSochishaFlag" as "kyuSochishaFlag",
+                            "dbt4001"."logicalDeletedFlag" as "logicalDeletedFlag",
+                            row_number() OVER (PARTITION BY "dbt4001"."hihokenshaNo" ORDER BY "dbt4001"."ninteiYukoKikanKaishiYMD" )AS "dbt4001_rrkno"
+                        FROM
+                            rgdb."DbT4001JukyushaDaicho" AS "dbt4001"
+                        WHERE
+                            "dbt4001"."logicalDeletedFlag"=FALSE
+                        AND
+                            "dbt4001"."yukoMukoKubun"='2'       
+                        AND     
+                            (("dbt4001"."ninteiYukoKikanKaishiYMD"<![CDATA[<=]]>#{対象年度開始日} 
+                                AND
+                              #{対象年度開始日} <![CDATA[<=]]>"dbt4001"."ninteiYukoKikanShuryoYMD")
+                                OR
+                            ("dbt4001"."ninteiYukoKikanKaishiYMD"<![CDATA[<=]]>#{対象年度終了日} 
+                                AND
+                             #{対象年度終了日} <![CDATA[<=]]>"dbt4001"."ninteiYukoKikanShuryoYMD"))
+                    ) AS "b" WHERE "b"."dbt4001_rrkno"=1) AS "DbT4001JukyushaDaicho"
             ON  
                     "DbT4001JukyushaDaicho"."hihokenshaNo"="DbT1001HihokenshaDaicho"."hihokenshaNo"
             LEFT JOIN
-            (        
-                SELECT 
-                    "dbt3105"."hihokenshaNo" as "hihokenshaNo",
-                    "dbt3105"."rirekiNo" as "rirekiNo",
-                    "dbt3105"."insertDantaiCd" as "insertDantaiCd",
-                    "dbt3105"."insertTimestamp" as "insertTimestamp",
-                    "dbt3105"."insertReamsLoginId" as "insertReamsLoginId",
-                    "dbt3105"."insertContextId" as "insertContextId",
-                    "dbt3105"."isDeleted" as "isDeleted",
-                    "dbt3105"."updateCount" as "updateCount",
-                    "dbt3105"."lastUpdateTimestamp" as "lastUpdateTimestamp",
-                    "dbt3105"."lastUpdateReamsLoginId" as "lastUpdateReamsLoginId",
-                    "dbt3105"."tekiyoKaishiYMD" as "tekiyoKaishiYMD",
-                    "dbt3105"."tekiyoShuryoYMD" as "tekiyoShuryoYMD",
-                    "dbt3105"."uketsukeYMD" as "uketsukeYMD",
-                    "dbt3105"."ketteiYMD" as "ketteiYMD",
-                    "dbt3105"."checklistJisshiYMD" as "checklistJisshiYMD",
-                    row_number() OVER (PARTITION BY "dbt3105"."hihokenshaNo" ORDER BY "dbt3105"."tekiyoKaishiYMD" )AS "dbt3105_rrkno"
-                FROM
-                    rgdb."DbT3105SogoJigyoTaishosha" as "dbt3105"
-                WHERE
-                    (("dbt3105"."tekiyoKaishiYMD"<![CDATA[<=]]>#{対象年度開始日} 
-                        AND
-                      #{対象年度開始日} <![CDATA[<=]]>"dbt3105"."tekiyoShuryoYMD")
-                    OR
-                    ("dbt3105"."tekiyoKaishiYMD"<![CDATA[<=]]>#{対象年度終了日} 
-                        AND
-                     #{対象年度終了日} <![CDATA[<=]]>"dbt3105"."tekiyoShuryoYMD"))                    
-            ) AS "DbT3105SogoJigyoTaishosha"
+                (SELECT "b".* FROM
+                    (SELECT 
+                            "dbt3105"."hihokenshaNo" as "hihokenshaNo",
+                            "dbt3105"."rirekiNo" as "rirekiNo",
+                            "dbt3105"."insertDantaiCd" as "insertDantaiCd",
+                            "dbt3105"."insertTimestamp" as "insertTimestamp",
+                            "dbt3105"."insertReamsLoginId" as "insertReamsLoginId",
+                            "dbt3105"."insertContextId" as "insertContextId",
+                            "dbt3105"."isDeleted" as "isDeleted",
+                            "dbt3105"."updateCount" as "updateCount",
+                            "dbt3105"."lastUpdateTimestamp" as "lastUpdateTimestamp",
+                            "dbt3105"."lastUpdateReamsLoginId" as "lastUpdateReamsLoginId",
+                            "dbt3105"."tekiyoKaishiYMD" as "tekiyoKaishiYMD",
+                            "dbt3105"."tekiyoShuryoYMD" as "tekiyoShuryoYMD",
+                            "dbt3105"."uketsukeYMD" as "uketsukeYMD",
+                            "dbt3105"."ketteiYMD" as "ketteiYMD",
+                            "dbt3105"."checklistJisshiYMD" as "checklistJisshiYMD",
+                            row_number() OVER (PARTITION BY "dbt3105"."hihokenshaNo" ORDER BY "dbt3105"."tekiyoKaishiYMD" )AS "dbt3105_rrkno"
+                        FROM
+                            rgdb."DbT3105SogoJigyoTaishosha" as "dbt3105"
+                        WHERE
+                            (("dbt3105"."tekiyoKaishiYMD"<![CDATA[<=]]>#{対象年度開始日} 
+                                AND
+                              #{対象年度開始日} <![CDATA[<=]]>"dbt3105"."tekiyoShuryoYMD")
+                            OR
+                            ("dbt3105"."tekiyoKaishiYMD"<![CDATA[<=]]>#{対象年度終了日} 
+                                AND
+                             #{対象年度終了日} <![CDATA[<=]]>"dbt3105"."tekiyoShuryoYMD"))                    
+                    ) AS "b" WHERE "b"."dbt3105_rrkno"=1) AS "DbT3105SogoJigyoTaishosha"
             ON  
                     "DbT3105SogoJigyoTaishosha"."hihokenshaNo"="DbT1001HihokenshaDaicho"."hihokenshaNo"
             LEFT JOIN 
@@ -496,17 +498,10 @@
                     true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
             ON "ShikibetsuTaisho"."shikibetsuCode" = "DbT1001HihokenshaDaicho"."shikibetsuCode"
             LEFT JOIN
-                    rgdb."DbV2512KaigoShotokuNewest" AS "DbV2512KaigoShotokuNewest"
+                (SELECT "b".* FROM rgdb."DbV2512KaigoShotokuNewest" AS "b" WHERE "b"."shotokuNendo"=#{対象年度} )
+                    AS "DbV2512KaigoShotokuNewest"
             ON  
                     "DbV2512KaigoShotokuNewest"."shikibetsuCode"= "DbT1001HihokenshaDaicho"."shikibetsuCode"                
-            WHERE
-                    "DbT1001HihokenshaDaicho"."idoYMD"<![CDATA[<=]]>#{判定基準日}
-            AND
-                    "DbT4001JukyushaDaicho"."dbt4001_rrkno"=1
-            AND
-                    "DbT3105SogoJigyoTaishosha"."dbt3105_rrkno"=1
-            AND
-                    "DbV2512KaigoShotokuNewest"."shotokuNendo"=#{対象年度} 
     </select>
     <!-- 処理詳細4(4)月別判定対象者Tempの作成二回目-->
     <select resultOrdered="true" id="select月別判定対象者作成二回目" 
@@ -528,163 +523,157 @@
             ON
                     "HanteiHihokenshaNoTemp"."hihokenshaNo"="DbT1001HihokenshaDaicho"."hihokenshaNo"
             LEFT JOIN
-                    (SELECT 
-                        "dbt4001"."shichosonCode" as "shichosonCode",
-                        "dbt4001"."hihokenshaNo" as "hihokenshaNo",
-                        "dbt4001"."rirekiNo" as "rirekiNo",
-                        "dbt4001"."edaban" as "edaban",
-                        "dbt4001"."jukyuShinseiJiyu" as "jukyuShinseiJiyu",
-                        "dbt4001"."insertDantaiCd" as "insertDantaiCd",
-                        "dbt4001"."insertTimestamp" as "insertTimestamp",
-                        "dbt4001"."insertReamsLoginId" as "insertReamsLoginId",
-                        "dbt4001"."insertContextId" as "insertContextId",
-                        "dbt4001"."isDeleted" as "isDeleted",
-                        "dbt4001"."updateCount" as "updateCount",
-                        "dbt4001"."lastUpdateTimestamp" as "lastUpdateTimestamp",
-                        "dbt4001"."lastUpdateReamsLoginId" as "lastUpdateReamsLoginId",
-                        "dbt4001"."shinseishoKanriNo" as "shinseishoKanriNo",
-                        "dbt4001"."shinseiJokyoKubun" as "shinseiJokyoKubun",
-                        "dbt4001"."shishoCode" as "shishoCode",
-                        "dbt4001"."chokkinFlag" as "chokkinFlag",
-                        "dbt4001"."shikibetsuCode" as "shikibetsuCode",
-                        "dbt4001"."shinseiRiyu" as "shinseiRiyu",
-                        "dbt4001"."shinseishaKankeiCode" as "shinseishaKankeiCode",
-                        "dbt4001"."homninKankei" as "homninKankei",
-                        "dbt4001"."jukyuShinseiYMD" as "jukyuShinseiYMD",
-                        "dbt4001"."nigoTokuteiShippeiCode" as "nigoTokuteiShippeiCode",
-                        "dbt4001"."shinsakaiIraiYMD" as "shinsakaiIraiYMD",
-                        "dbt4001"."yokaigoJotaiKubunCode" as "yokaigoJotaiKubunCode",
-                        "dbt4001"."ninteiYukoKikanKaishiYMD" as "ninteiYukoKikanKaishiYMD",
-                        "dbt4001"."ninteiYukoKikanShuryoYMD" as "ninteiYukoKikanShuryoYMD",
-                        "dbt4001"."ninteiYMD" as "ninteiYMD",
-                        "dbt4001"."minashiCode" as "minashiCode",
-                        "dbt4001"."shiteiServiceShurui01" as "shiteiServiceShurui01",
-                        "dbt4001"."shiteiServiceShurui02" as "shiteiServiceShurui02",
-                        "dbt4001"."shiteiServiceShurui03" as "shiteiServiceShurui03",
-                        "dbt4001"."shiteiServiceShurui04" as "shiteiServiceShurui04",
-                        "dbt4001"."shiteiServiceShurui05" as "shiteiServiceShurui05",
-                        "dbt4001"."shiteiServiceShurui06" as "shiteiServiceShurui06",
-                        "dbt4001"."shiteiServiceShurui07" as "shiteiServiceShurui07",
-                        "dbt4001"."shiteiServiceShurui08" as "shiteiServiceShurui08",
-                        "dbt4001"."shiteiServiceShurui09" as "shiteiServiceShurui09",
-                        "dbt4001"."shiteiServiceShurui10" as "shiteiServiceShurui10",
-                        "dbt4001"."shiteiServiceShurui11" as "shiteiServiceShurui11",
-                        "dbt4001"."shiteiServiceShurui12" as "shiteiServiceShurui12",
-                        "dbt4001"."shiteiServiceShurui13" as "shiteiServiceShurui13",
-                        "dbt4001"."shiteiServiceShurui14" as "shiteiServiceShurui14",
-                        "dbt4001"."shiteiServiceShurui15" as "shiteiServiceShurui15",
-                        "dbt4001"."shiteiServiceShurui16" as "shiteiServiceShurui16",
-                        "dbt4001"."shiteiServiceShurui17" as "shiteiServiceShurui17",
-                        "dbt4001"."shiteiServiceShurui18" as "shiteiServiceShurui18",
-                        "dbt4001"."shiteiServiceShurui19" as "shiteiServiceShurui19",
-                        "dbt4001"."shiteiServiceShurui20" as "shiteiServiceShurui20",
-                        "dbt4001"."shiteiServiceShurui21" as "shiteiServiceShurui21",
-                        "dbt4001"."shiteiServiceShurui22" as "shiteiServiceShurui22",
-                        "dbt4001"."shiteiServiceShurui23" as "shiteiServiceShurui23",
-                        "dbt4001"."shiteiServiceShurui24" as "shiteiServiceShurui24",
-                        "dbt4001"."shiteiServiceShurui25" as "shiteiServiceShurui25",
-                        "dbt4001"."shiteiServiceShurui26" as "shiteiServiceShurui26",
-                        "dbt4001"."shiteiServiceShurui27" as "shiteiServiceShurui27",
-                        "dbt4001"."shiteiServiceShurui28" as "shiteiServiceShurui28",
-                        "dbt4001"."shiteiServiceShurui29" as "shiteiServiceShurui29",
-                        "dbt4001"."shiteiServiceShurui30" as "shiteiServiceShurui30",
-                        "dbt4001"."soshitsuYMD" as "soshitsuYMD",
-                        "dbt4001"."chokkinIdoYMD" as "chokkinIdoYMD",
-                        "dbt4001"."chokkinIdoJiyuCode" as "chokkinIdoJiyuCode",
-                        "dbt4001"."yukoMukoKubun" as "yukoMukoKubun",
-                        "dbt4001"."dataKubun" as "dataKubun",
-                        "dbt4001"."remban" as "remban",
-                        "dbt4001"."idoRiyu" as "idoRiyu",
-                        "dbt4001"."shinseishoKubun" as "shinseishoKubun",
-                        "dbt4001"."sakujoJiyuCode" as "sakujoJiyuCode",
-                        "dbt4001"."yoshienshaNinteiShinseiFlag" as "yoshienshaNinteiShinseiFlag",
-                        "dbt4001"."shikyuGendoTanisu" as "shikyuGendoTanisu",
-                        "dbt4001"."shikyuGendoKaishiYMD" as "shikyuGendoKaishiYMD",
-                        "dbt4001"."shikyuGendoShuryoYMD" as "shikyuGendoShuryoYMD",
-                        "dbt4001"."tankiSikyuGendoNissu" as "tankiSikyuGendoNissu",
-                        "dbt4001"."tankiShikyuGendoKaishiYMD" as "tankiShikyuGendoKaishiYMD",
-                        "dbt4001"."tankiShikyuGendoShuryoYMD" as "tankiShikyuGendoShuryoYMD",
-                        "dbt4001"."toshoNinteiYukoKaishiYMD" as "toshoNinteiYukoKaishiYMD",
-                        "dbt4001"."toshoNinteiYukoShuryoYMD" as "toshoNinteiYukoShuryoYMD",
-                        "dbt4001"."jukyuShikakuShomeishoHakkoYMD1" as "jukyuShikakuShomeishoHakkoYMD1",
-                        "dbt4001"."jukyuShikakuShomeishoHakkoYMD2" as "jukyuShikakuShomeishoHakkoYMD2",
-                        "dbt4001"."shindanMeireishoHakkoYMD" as "shindanMeireishoHakkoYMD",
-                        "dbt4001"."nigoShinseiJuriTsuchishoHakkoYMD" as "nigoShinseiJuriTsuchishoHakkoYMD",
-                        "dbt4001"."ninteiKekkaTsuchishoHakkoYMD" as "ninteiKekkaTsuchishoHakkoYMD",
-                        "dbt4001"."kubunHenkoTsuchishoHakkoYMD" as "kubunHenkoTsuchishoHakkoYMD",
-                        "dbt4001"."serviceHenkoTsuchishoHakkoYMD" as "serviceHenkoTsuchishoHakkoYMD",
-                        "dbt4001"."ninteiKyakkaTsuchishoHakkoYMD" as "ninteiKyakkaTsuchishoHakkoYMD",
-                        "dbt4001"."ninteiTorikeshiTsuchishoHakkoYMD" as "ninteiTorikeshiTsuchishoHakkoYMD",
-                        "dbt4001"."shikakuShutokuMaeShinseiFlag" as "shikakuShutokuMaeShinseiFlag",
-                        "dbt4001"."kyuSochishaFlag" as "kyuSochishaFlag",
-                        "dbt4001"."logicalDeletedFlag" as "logicalDeletedFlag",
-                        row_number() OVER (PARTITION BY "dbt4001"."hihokenshaNo" ORDER BY "dbt4001"."ninteiYukoKikanKaishiYMD" )AS "dbt4001_rrkno"
-                    FROM
-                        rgdb."DbT4001JukyushaDaicho" AS "dbt4001"
-                    WHERE
-                        "dbt4001"."logicalDeletedFlag"=FALSE
-                    AND
-                        "dbt4001"."yukoMukoKubun"='2'      
-                    AND      
-                        (("dbt4001"."ninteiYukoKikanKaishiYMD"<![CDATA[<=]]>#{対象年度開始日} 
-                            AND
-                          #{対象年度開始日} <![CDATA[<=]]>"dbt4001"."ninteiYukoKikanShuryoYMD")
-                            OR
-                        ("dbt4001"."ninteiYukoKikanKaishiYMD"<![CDATA[<=]]>#{対象年度終了日} 
-                            AND
-                         #{対象年度終了日} <![CDATA[<=]]>"dbt4001"."ninteiYukoKikanShuryoYMD"))
-            ) AS "DbT4001JukyushaDaicho"
+                    (SELECT "b".* FROM
+                        (SELECT 
+                            "dbt4001"."shichosonCode" as "shichosonCode",
+                            "dbt4001"."hihokenshaNo" as "hihokenshaNo",
+                            "dbt4001"."rirekiNo" as "rirekiNo",
+                            "dbt4001"."edaban" as "edaban",
+                            "dbt4001"."jukyuShinseiJiyu" as "jukyuShinseiJiyu",
+                            "dbt4001"."insertDantaiCd" as "insertDantaiCd",
+                            "dbt4001"."insertTimestamp" as "insertTimestamp",
+                            "dbt4001"."insertReamsLoginId" as "insertReamsLoginId",
+                            "dbt4001"."insertContextId" as "insertContextId",
+                            "dbt4001"."isDeleted" as "isDeleted",
+                            "dbt4001"."updateCount" as "updateCount",
+                            "dbt4001"."lastUpdateTimestamp" as "lastUpdateTimestamp",
+                            "dbt4001"."lastUpdateReamsLoginId" as "lastUpdateReamsLoginId",
+                            "dbt4001"."shinseishoKanriNo" as "shinseishoKanriNo",
+                            "dbt4001"."shinseiJokyoKubun" as "shinseiJokyoKubun",
+                            "dbt4001"."shishoCode" as "shishoCode",
+                            "dbt4001"."chokkinFlag" as "chokkinFlag",
+                            "dbt4001"."shikibetsuCode" as "shikibetsuCode",
+                            "dbt4001"."shinseiRiyu" as "shinseiRiyu",
+                            "dbt4001"."shinseishaKankeiCode" as "shinseishaKankeiCode",
+                            "dbt4001"."homninKankei" as "homninKankei",
+                            "dbt4001"."jukyuShinseiYMD" as "jukyuShinseiYMD",
+                            "dbt4001"."nigoTokuteiShippeiCode" as "nigoTokuteiShippeiCode",
+                            "dbt4001"."shinsakaiIraiYMD" as "shinsakaiIraiYMD",
+                            "dbt4001"."yokaigoJotaiKubunCode" as "yokaigoJotaiKubunCode",
+                            "dbt4001"."ninteiYukoKikanKaishiYMD" as "ninteiYukoKikanKaishiYMD",
+                            "dbt4001"."ninteiYukoKikanShuryoYMD" as "ninteiYukoKikanShuryoYMD",
+                            "dbt4001"."ninteiYMD" as "ninteiYMD",
+                            "dbt4001"."minashiCode" as "minashiCode",
+                            "dbt4001"."shiteiServiceShurui01" as "shiteiServiceShurui01",
+                            "dbt4001"."shiteiServiceShurui02" as "shiteiServiceShurui02",
+                            "dbt4001"."shiteiServiceShurui03" as "shiteiServiceShurui03",
+                            "dbt4001"."shiteiServiceShurui04" as "shiteiServiceShurui04",
+                            "dbt4001"."shiteiServiceShurui05" as "shiteiServiceShurui05",
+                            "dbt4001"."shiteiServiceShurui06" as "shiteiServiceShurui06",
+                            "dbt4001"."shiteiServiceShurui07" as "shiteiServiceShurui07",
+                            "dbt4001"."shiteiServiceShurui08" as "shiteiServiceShurui08",
+                            "dbt4001"."shiteiServiceShurui09" as "shiteiServiceShurui09",
+                            "dbt4001"."shiteiServiceShurui10" as "shiteiServiceShurui10",
+                            "dbt4001"."shiteiServiceShurui11" as "shiteiServiceShurui11",
+                            "dbt4001"."shiteiServiceShurui12" as "shiteiServiceShurui12",
+                            "dbt4001"."shiteiServiceShurui13" as "shiteiServiceShurui13",
+                            "dbt4001"."shiteiServiceShurui14" as "shiteiServiceShurui14",
+                            "dbt4001"."shiteiServiceShurui15" as "shiteiServiceShurui15",
+                            "dbt4001"."shiteiServiceShurui16" as "shiteiServiceShurui16",
+                            "dbt4001"."shiteiServiceShurui17" as "shiteiServiceShurui17",
+                            "dbt4001"."shiteiServiceShurui18" as "shiteiServiceShurui18",
+                            "dbt4001"."shiteiServiceShurui19" as "shiteiServiceShurui19",
+                            "dbt4001"."shiteiServiceShurui20" as "shiteiServiceShurui20",
+                            "dbt4001"."shiteiServiceShurui21" as "shiteiServiceShurui21",
+                            "dbt4001"."shiteiServiceShurui22" as "shiteiServiceShurui22",
+                            "dbt4001"."shiteiServiceShurui23" as "shiteiServiceShurui23",
+                            "dbt4001"."shiteiServiceShurui24" as "shiteiServiceShurui24",
+                            "dbt4001"."shiteiServiceShurui25" as "shiteiServiceShurui25",
+                            "dbt4001"."shiteiServiceShurui26" as "shiteiServiceShurui26",
+                            "dbt4001"."shiteiServiceShurui27" as "shiteiServiceShurui27",
+                            "dbt4001"."shiteiServiceShurui28" as "shiteiServiceShurui28",
+                            "dbt4001"."shiteiServiceShurui29" as "shiteiServiceShurui29",
+                            "dbt4001"."shiteiServiceShurui30" as "shiteiServiceShurui30",
+                            "dbt4001"."soshitsuYMD" as "soshitsuYMD",
+                            "dbt4001"."chokkinIdoYMD" as "chokkinIdoYMD",
+                            "dbt4001"."chokkinIdoJiyuCode" as "chokkinIdoJiyuCode",
+                            "dbt4001"."yukoMukoKubun" as "yukoMukoKubun",
+                            "dbt4001"."dataKubun" as "dataKubun",
+                            "dbt4001"."remban" as "remban",
+                            "dbt4001"."idoRiyu" as "idoRiyu",
+                            "dbt4001"."shinseishoKubun" as "shinseishoKubun",
+                            "dbt4001"."sakujoJiyuCode" as "sakujoJiyuCode",
+                            "dbt4001"."yoshienshaNinteiShinseiFlag" as "yoshienshaNinteiShinseiFlag",
+                            "dbt4001"."shikyuGendoTanisu" as "shikyuGendoTanisu",
+                            "dbt4001"."shikyuGendoKaishiYMD" as "shikyuGendoKaishiYMD",
+                            "dbt4001"."shikyuGendoShuryoYMD" as "shikyuGendoShuryoYMD",
+                            "dbt4001"."tankiSikyuGendoNissu" as "tankiSikyuGendoNissu",
+                            "dbt4001"."tankiShikyuGendoKaishiYMD" as "tankiShikyuGendoKaishiYMD",
+                            "dbt4001"."tankiShikyuGendoShuryoYMD" as "tankiShikyuGendoShuryoYMD",
+                            "dbt4001"."toshoNinteiYukoKaishiYMD" as "toshoNinteiYukoKaishiYMD",
+                            "dbt4001"."toshoNinteiYukoShuryoYMD" as "toshoNinteiYukoShuryoYMD",
+                            "dbt4001"."jukyuShikakuShomeishoHakkoYMD1" as "jukyuShikakuShomeishoHakkoYMD1",
+                            "dbt4001"."jukyuShikakuShomeishoHakkoYMD2" as "jukyuShikakuShomeishoHakkoYMD2",
+                            "dbt4001"."shindanMeireishoHakkoYMD" as "shindanMeireishoHakkoYMD",
+                            "dbt4001"."nigoShinseiJuriTsuchishoHakkoYMD" as "nigoShinseiJuriTsuchishoHakkoYMD",
+                            "dbt4001"."ninteiKekkaTsuchishoHakkoYMD" as "ninteiKekkaTsuchishoHakkoYMD",
+                            "dbt4001"."kubunHenkoTsuchishoHakkoYMD" as "kubunHenkoTsuchishoHakkoYMD",
+                            "dbt4001"."serviceHenkoTsuchishoHakkoYMD" as "serviceHenkoTsuchishoHakkoYMD",
+                            "dbt4001"."ninteiKyakkaTsuchishoHakkoYMD" as "ninteiKyakkaTsuchishoHakkoYMD",
+                            "dbt4001"."ninteiTorikeshiTsuchishoHakkoYMD" as "ninteiTorikeshiTsuchishoHakkoYMD",
+                            "dbt4001"."shikakuShutokuMaeShinseiFlag" as "shikakuShutokuMaeShinseiFlag",
+                            "dbt4001"."kyuSochishaFlag" as "kyuSochishaFlag",
+                            "dbt4001"."logicalDeletedFlag" as "logicalDeletedFlag",
+                            row_number() OVER (PARTITION BY "dbt4001"."hihokenshaNo" ORDER BY "dbt4001"."ninteiYukoKikanKaishiYMD" )AS "dbt4001_rrkno"
+                        FROM
+                            rgdb."DbT4001JukyushaDaicho" AS "dbt4001"
+                        WHERE
+                            "dbt4001"."logicalDeletedFlag"=FALSE
+                        AND
+                            "dbt4001"."yukoMukoKubun"='2'       
+                        AND     
+                            (("dbt4001"."ninteiYukoKikanKaishiYMD"<![CDATA[<=]]>#{対象年度開始日} 
+                                AND
+                              #{対象年度開始日} <![CDATA[<=]]>"dbt4001"."ninteiYukoKikanShuryoYMD")
+                                OR
+                            ("dbt4001"."ninteiYukoKikanKaishiYMD"<![CDATA[<=]]>#{対象年度終了日} 
+                                AND
+                             #{対象年度終了日} <![CDATA[<=]]>"dbt4001"."ninteiYukoKikanShuryoYMD"))
+                    ) AS "b" WHERE "b"."dbt4001_rrkno"=1) AS "DbT4001JukyushaDaicho"
             ON  
                     "DbT4001JukyushaDaicho"."hihokenshaNo"="DbT1001HihokenshaDaicho"."hihokenshaNo"
             LEFT JOIN
-            (        
-                SELECT 
-                    "dbt3105"."hihokenshaNo" as "hihokenshaNo",
-                    "dbt3105"."rirekiNo" as "rirekiNo",
-                    "dbt3105"."insertDantaiCd" as "insertDantaiCd",
-                    "dbt3105"."insertTimestamp" as "insertTimestamp",
-                    "dbt3105"."insertReamsLoginId" as "insertReamsLoginId",
-                    "dbt3105"."insertContextId" as "insertContextId",
-                    "dbt3105"."isDeleted" as "isDeleted",
-                    "dbt3105"."updateCount" as "updateCount",
-                    "dbt3105"."lastUpdateTimestamp" as "lastUpdateTimestamp",
-                    "dbt3105"."lastUpdateReamsLoginId" as "lastUpdateReamsLoginId",
-                    "dbt3105"."tekiyoKaishiYMD" as "tekiyoKaishiYMD",
-                    "dbt3105"."tekiyoShuryoYMD" as "tekiyoShuryoYMD",
-                    "dbt3105"."uketsukeYMD" as "uketsukeYMD",
-                    "dbt3105"."ketteiYMD" as "ketteiYMD",
-                    "dbt3105"."checklistJisshiYMD" as "checklistJisshiYMD",
-                    row_number() OVER (PARTITION BY "dbt3105"."hihokenshaNo" ORDER BY "dbt3105"."tekiyoKaishiYMD" )AS "dbt3105_rrkno"
-                FROM
-                    rgdb."DbT3105SogoJigyoTaishosha" as "dbt3105"
-                WHERE
-                    (("dbt3105"."tekiyoKaishiYMD"<![CDATA[<=]]>#{対象年度開始日} 
-                        AND
-                      #{対象年度開始日} <![CDATA[<=]]>"dbt3105"."tekiyoShuryoYMD")
-                    OR
-                    ("dbt3105"."tekiyoKaishiYMD"<![CDATA[<=]]>#{対象年度終了日} 
-                        AND
-                     #{対象年度終了日} <![CDATA[<=]]>"dbt3105"."tekiyoShuryoYMD"))                    
-            )AS "DbT3105SogoJigyoTaishosha"
-            ON  
-                    "DbT3105SogoJigyoTaishosha"."hihokenshaNo"="DbT1001HihokenshaDaicho"."hihokenshaNo"
+                (SELECT "b".* FROM
+                        (SELECT 
+                                "dbt3105"."hihokenshaNo" as "hihokenshaNo",
+                                "dbt3105"."rirekiNo" as "rirekiNo",
+                                "dbt3105"."insertDantaiCd" as "insertDantaiCd",
+                                "dbt3105"."insertTimestamp" as "insertTimestamp",
+                                "dbt3105"."insertReamsLoginId" as "insertReamsLoginId",
+                                "dbt3105"."insertContextId" as "insertContextId",
+                                "dbt3105"."isDeleted" as "isDeleted",
+                                "dbt3105"."updateCount" as "updateCount",
+                                "dbt3105"."lastUpdateTimestamp" as "lastUpdateTimestamp",
+                                "dbt3105"."lastUpdateReamsLoginId" as "lastUpdateReamsLoginId",
+                                "dbt3105"."tekiyoKaishiYMD" as "tekiyoKaishiYMD",
+                                "dbt3105"."tekiyoShuryoYMD" as "tekiyoShuryoYMD",
+                                "dbt3105"."uketsukeYMD" as "uketsukeYMD",
+                                "dbt3105"."ketteiYMD" as "ketteiYMD",
+                                "dbt3105"."checklistJisshiYMD" as "checklistJisshiYMD",
+                                row_number() OVER (PARTITION BY "dbt3105"."hihokenshaNo" ORDER BY "dbt3105"."tekiyoKaishiYMD" )AS "dbt3105_rrkno"
+                            FROM
+                                rgdb."DbT3105SogoJigyoTaishosha" as "dbt3105"
+                            WHERE
+                                (("dbt3105"."tekiyoKaishiYMD"<![CDATA[<=]]>#{対象年度開始日} 
+                                    AND
+                                  #{対象年度開始日} <![CDATA[<=]]>"dbt3105"."tekiyoShuryoYMD")
+                                OR
+                                ("dbt3105"."tekiyoKaishiYMD"<![CDATA[<=]]>#{対象年度終了日} 
+                                    AND
+                                 #{対象年度終了日} <![CDATA[<=]]>"dbt3105"."tekiyoShuryoYMD"))                    
+                        ) AS "b" WHERE "b"."dbt3105_rrkno"=1) AS "DbT3105SogoJigyoTaishosha"
+                ON  
+                        "DbT3105SogoJigyoTaishosha"."hihokenshaNo"="DbT1001HihokenshaDaicho"."hihokenshaNo"
             LEFT JOIN 
                     rgua."UaFt200FindShikibetsuTaisho"('2',#{判定基準日},TRUE,'DB',FALSE,'','','','','','','','','','','',true,
                     '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
                     true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
             ON "ShikibetsuTaisho"."shikibetsuCode" = "DbT1001HihokenshaDaicho"."shikibetsuCode"
             LEFT JOIN
-                    rgdb."DbV2512KaigoShotokuNewest" AS "DbV2512KaigoShotokuNewest"
+                (SELECT "b".* FROM rgdb."DbV2512KaigoShotokuNewest" AS "b" WHERE "b"."shotokuNendo"=#{対象年度} )
+                    AS "DbV2512KaigoShotokuNewest"
             ON  
-                    "DbV2512KaigoShotokuNewest"."shikibetsuCode"= "DbT1001HihokenshaDaicho"."shikibetsuCode"                
-            WHERE
-                    "DbT1001HihokenshaDaicho"."idoYMD"<![CDATA[<=]]>#{判定基準日}
-            AND
-                    "DbT4001JukyushaDaicho"."dbt4001_rrkno"=1
-            AND
-                    "DbT3105SogoJigyoTaishosha"."dbt3105_rrkno"=1
-            AND
-                    "DbV2512KaigoShotokuNewest"."shotokuNendo"=#{対象年度} 
+                    "DbV2512KaigoShotokuNewest"."shikibetsuCode"= "DbT1001HihokenshaDaicho"."shikibetsuCode"     
     </select>
 
     <!--処理詳細6負担割合判定（年次）-->
@@ -697,7 +686,7 @@
                     ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.IHanteiTaishoshaTempMapper.allColumns_HanteiTaishoshaTemp"/>
                     ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.ISeikatsuHogoGaitoJohoTempMapper.allColumns_SeikatsuHogoGaitoJohoTemp"/>
                     ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.ISetainJohoTempMapper.allColumns_SetainJohoTemp"/>
-                    ,<include refid="allColumns_DbV2512KaigoShotokuNewest"/>
+                    ,<include refid="allColumns_DbV2512KaigoShotokuNewest" />
             FROM
                     "HanteiTaishoshaTemp"
             LEFT JOIN
@@ -709,11 +698,10 @@
             ON  
                     "HanteiTaishoshaTemp"."setaiCode"="SetainJohoTemp"."setaiCode"
             LEFT JOIN
-                    rgdb."DbV2512KaigoShotokuNewest" AS "DbV2512KaigoShotokuNewest"
+                    (SELECT "b".* FROM rgdb."DbV2512KaigoShotokuNewest" AS "b" WHERE "b"."shotokuNendo"=#{対象年度} )
+                    AS "DbV2512KaigoShotokuNewest"
             ON  
                     "SetainJohoTemp"."shikibetsuCode"="DbV2512KaigoShotokuNewest"."shikibetsuCode"
-            WHERE
-                    "DbV2512KaigoShotokuNewest"."shotokuNendo"=#{対象年度} 
     </select>
     <!--処理詳細7負担割合判定（月次）-->
         <select resultOrdered="true" id="select負担割合判定月次" 
@@ -727,29 +715,21 @@
                     ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.ISetainJohoTempMapper.allColumns_SetainJohoTemp"/>
                     ,<include refid="allColumns_DbV2512KaigoShotokuNewest"/>
             FROM
-                    "TsukibetsuHanteiTaishoshaTemp" AS "HanteiTaishoshaTemp"
+                    (SELECT "b".* FROM "TsukibetsuHanteiTaishoshaTemp" AS "b" WHERE "b"."taishoTsuki"=#{対象月}) AS "HanteiTaishoshaTemp"
             LEFT JOIN
-                    "SeikatsuHogoGaitoJohoTemp" 
+                    (SELECT "b".* FROM "SeikatsuHogoGaitoJohoTemp" AS "b" WHERE "b"."taishoTsuki"=#{対象月}) AS "SeikatsuHogoGaitoJohoTemp"
             ON  
                     "HanteiTaishoshaTemp"."shikibetsuCode"="SeikatsuHogoGaitoJohoTemp"."shikibetsuCode"
             LEFT JOIN
-                    "SetainJohoTemp"
+                    (SELECT "b".* FROM "SetainJohoTemp" AS "b" WHERE "b"."taishoTsuki"=#{対象月}) AS "SetainJohoTemp"
             ON  
                     "HanteiTaishoshaTemp"."setaiCode"="SetainJohoTemp"."setaiCode"
                         AND
                     "HanteiTaishoshaTemp"."shikibetsuCode"="SetainJohoTemp"."honinShikibetsuCode"
             LEFT JOIN
-                    rgdb."DbV2512KaigoShotokuNewest" AS "DbV2512KaigoShotokuNewest"
+                    (SELECT "b".* FROM rgdb."DbV2512KaigoShotokuNewest" AS "b" WHERE "b"."shotokuNendo"=#{対象年度}) AS "DbV2512KaigoShotokuNewest"
             ON  
                     "SetainJohoTemp"."shikibetsuCode"="DbV2512KaigoShotokuNewest"."shikibetsuCode"
-            WHERE
-                    "HanteiTaishoshaTemp"."taishoTsuki"=#{対象月}
-                AND
-                    "SeikatsuHogoGaitoJohoTemp"."taishoTsuki"=#{対象月}
-                AND
-                    "SetainJohoTemp"."taishoTsuki"=#{対象月}
-                AND
-                    "DbV2512KaigoShotokuNewest"."shotokuNendo"=#{対象年度} 
             ORDER BY 
                 "HanteiTaishoshaTemp"."hihokenshaNo"
     </select>
@@ -1107,8 +1087,9 @@
         ON
             "RiyoshaFutanWariaiKonkyoTemp"."hihokenshaNo"="TsukibetsuFutanWariaiGenTemp"."hihokenshaNo"
         LEFT JOIN
-            "DbV2512KaigoShotokuNewest"
+            rgdb."DbV2512KaigoShotokuNewest" AS "DbV2512KaigoShotokuNewest"
         ON
+          <!--QA 内部番号1272-->
             "DbV2512KaigoShotokuNewest"."shotokuNendo"=#{対象年度}
         WHERE
             "TsukibetsuFutanWariaiNewTemp"."futanwariaiKubunAug" <![CDATA[<>]]>"TsukibetsuFutanWariaiGenTemp"."futanwariaiKubunAug"

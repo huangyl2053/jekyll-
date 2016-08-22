@@ -47,7 +47,6 @@ public class RiyoshaFutanWariaiHantei {
     private static final RString 課税区分未申告 = new RString("3");
     private static final RString 課税区分所得調査中 = new RString("4");
     private static final RString 課税区分非課税 = new RString("2");
-
     private static final Integer NUM2 = 2;
     private static final Integer 西暦年の長さ = 4;
     private static final Integer 西暦年月の長さ = 6;
@@ -56,7 +55,6 @@ public class RiyoshaFutanWariaiHantei {
     private static final Integer NUM八月 = 8;
     private static final Integer NUM十二月 = 12;
     private static final Integer NUM三十一日 = 31;
-
     private static final RString 年のパターン = new RString("0000");
     private static final RString 月のパターン = new RString("00");
     private static final RString 八月 = new RString("08");
@@ -76,7 +74,6 @@ public class RiyoshaFutanWariaiHantei {
     private static final RString 二十九日 = new RString("29");
     private static final RString 三十日 = new RString("30");
     private static final RString 三十一日 = new RString("31");
-
     private static final RString 基準日がNULL = new RString("基準日がnullです。");
     private static final RString 負担割合判定情報がNULL = new RString("負担割合判定情報がnullです。");
     private static final RString 年度がNULL = new RString("年度がnullです。");
