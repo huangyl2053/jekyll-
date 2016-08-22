@@ -475,7 +475,7 @@
         , V."chukanHyokaKomoku3gun" AS zenkaiChukanHyokaKomoku3gun
         , V."chukanHyokaKomoku4gun" AS zenkaiChukanHyokaKomoku4gun
         , V."chukanHyokaKomoku5gun" AS zenkaiChukanHyokaKomoku5gun
-        , V."ichijiHnateiKeikokuCode" AS zenkaiIchijiHnateiKeikokuCode
+        , V."ichijiHnateiKeikokuCode" AS zenkaiChijiHnateiKeikokuCode
         , V."jotaiAnteiseiCode" AS zenkaiJotaiAnteiseiCode
         , V."ninchishoJiritsudoIIijoNoGaizensei" AS zenkaiNinchishoJiritsudoIIijoNoGaizensei
         , V."suiteiKyufuKubunCode" AS zenkaiSuiteiKyufuKubunCode
@@ -672,8 +672,6 @@
         WHERE A."logicalDeletedFlag" = FALSE
         AND A."shinseishoKanriNo" IN
         <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")">#{code}</foreach>
-        ORDER BY
-        A."shinseishoKanriNo" ASC
         <if test="isTennyuShiboSyuturyoku">
             UNION
             SELECT A."shinseishoKanriNo"
@@ -962,7 +960,7 @@
             , V."chukanHyokaKomoku3gun" AS zenkaiChukanHyokaKomoku3gun
             , V."chukanHyokaKomoku4gun" AS zenkaiChukanHyokaKomoku4gun
             , V."chukanHyokaKomoku5gun" AS zenkaiChukanHyokaKomoku5gun
-            , V."ichijiHnateiKeikokuCode" AS zenkaiIchijiHnateiKeikokuCode
+            , V."ichijiHnateiKeikokuCode" AS zenkaiChijiHnateiKeikokuCode
             , V."jotaiAnteiseiCode" AS zenkaiJotaiAnteiseiCode
             , V."ninchishoJiritsudoIIijoNoGaizensei" AS zenkaiNinchishoJiritsudoIIijoNoGaizensei
             , V."suiteiKyufuKubunCode" AS zenkaiSuiteiKyufuKubunCode
@@ -1169,7 +1167,7 @@
                 AND N."nijiHanteiYMD" <![CDATA[<=]]> #{nijiHanteiShuryoYMD}
             </if>
             ORDER BY
-            N."shinseishoKanriNo" ASC
+            "shinseishoKanriNo" ASC
         </if>
     </select>
 

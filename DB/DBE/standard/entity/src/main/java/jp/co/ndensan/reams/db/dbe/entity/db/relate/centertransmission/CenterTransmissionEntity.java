@@ -70,6 +70,7 @@ public class CenterTransmissionEntity {
     private JigyoshaNo jigyoshaNo;
     private RString chosaItakuKubun;
     private RString ninteiChosainCode;
+    private RString chosainShikaku;
     private FlexibleDate ichijiHanteiYMD;
     private Code ichijiHanteiKekkaCode;
     private Code ichijiHanteiKekkaNinchishoKasanCode;
@@ -315,7 +316,7 @@ public class CenterTransmissionEntity {
     private int zenkaiChukanHyokaKomoku3gun;
     private int zenkaiChukanHyokaKomoku4gun;
     private int zenkaiChukanHyokaKomoku5gun;
-    private RString zenkaIchijiHnateiKeikokuCode;
+    private RString zenkaiChijiHnateiKeikokuCode;
     private Code zenkaiJotaiAnteiseiCode;
     private Decimal zenkaiNinchishoJiritsudoIIijoNoGaizensei;
     private Code zenkaiSuiteiKyufuKubunCode;
