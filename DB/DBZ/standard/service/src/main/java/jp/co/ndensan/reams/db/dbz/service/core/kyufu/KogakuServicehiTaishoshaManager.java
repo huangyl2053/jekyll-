@@ -41,6 +41,14 @@ public class KogakuServicehiTaishoshaManager {
     private RString 高額給付根拠;
 
     /**
+     * インスタンスを生成します。
+     */
+    public KogakuServicehiTaishoshaManager() {
+        this.dac3055 = InstanceProvider.create(DbT3055KogakuKyufuTaishoshaGokeiDac.class);
+        this.dac3054 = InstanceProvider.create(DbT3054KogakuKyufuTaishoshaMeisaiDac.class);
+    }
+
+    /**
      * テスト用コンストラクタです。
      *
      * @param dac {@link KogakuServicehiTaishoshaEntity}
