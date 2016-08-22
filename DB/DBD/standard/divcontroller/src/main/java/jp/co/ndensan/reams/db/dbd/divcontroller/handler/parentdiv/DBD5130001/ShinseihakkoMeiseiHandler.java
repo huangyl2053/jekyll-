@@ -25,8 +25,13 @@ import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 要介護認定申請書発行ハンドラクラスです。
@@ -155,7 +160,7 @@ public class ShinseihakkoMeiseiHandler {
                 shinseiShoEntity.set性別女(正);
             }
             shinseiShoEntity.set被保険者名称カナ(manager.getKanaName(new ShikibetsuCode(kaigoNinteiAtenaInfoDiv.getTxtShikiBetsuCode().getValue())));
-            shinseiShoEntity.set郵便番号(kaigoNinteiAtenaInfoDiv.getTxtYubinNo().getValue().value());
+            shinseiShoEntity.set郵便番号(kaigoNinteiAtenaInfoDiv.getTxtYubinNo().getValue().getYubinNo());
             shinseiShoEntity.set電話番号(kaigoNinteiAtenaInfoDiv.getTxtTelNo().getDomain().value());
             shinseiShoEntity.set住所(kaigoNinteiAtenaInfoDiv.getTxtJusho().getDomain().value());
             Map<Integer, RString> 通知文
@@ -232,18 +237,18 @@ public class ShinseihakkoMeiseiHandler {
     }
 
     private ShinseiShoEntity set状態区分(int radPrintMeeisaiSelectIndex, ShinseiShoEntity shinseiShoEntity) {
-        shinseiShoEntity.set有効期間開始年月日(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getText());
+        shinseiShoEntity.set有効期間開始年月日(getパターン9(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getValue()));
         shinseiShoEntity.set有効開始年YYYY(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getValue().getYear().toDateString());
         shinseiShoEntity.set有効開始月MM(new RString(String.valueOf(
-                div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getValue().getMonthValue())));
+                div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getValue().getMonthValue())).padZeroToLeft(NO_2));
         shinseiShoEntity.set有効開始日DD(new RString(String.valueOf(
-                div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getValue().getDayValue())));
-        shinseiShoEntity.set有効期間終了年月日(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().getText());
+                div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getValue().getDayValue())).padZeroToLeft(NO_2));
+        shinseiShoEntity.set有効期間終了年月日(getパターン9(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().getValue()));
         shinseiShoEntity.set有効終了年YYYY(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().getValue().getYear().toDateString());
         shinseiShoEntity.set有効終了月MM(new RString(String.valueOf(
-                div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().getValue().getMonthValue())));
+                div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().getValue().getMonthValue())).padZeroToLeft(NO_2));
         shinseiShoEntity.set有効終了日DD(new RString(String.valueOf(
-                div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().getValue().getDayValue())));
+                div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().getValue().getDayValue())).padZeroToLeft(NO_2));
         shinseiShoEntity.set要介護状態区分(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue());
         if ("要介護1".equals(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue().toString())) {
             shinseiShoEntity.set要介護状態区分1(正);
@@ -260,7 +265,7 @@ public class ShinseihakkoMeiseiHandler {
         if ("要介護5".equals(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue().toString())) {
             shinseiShoEntity.set要介護状態区分5(正);
         }
-        shinseiShoEntity.set要介護状態区分(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue());
+        shinseiShoEntity.set要支援状態区分(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue());
         if ("要支援1".equals(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue().toString())) {
             shinseiShoEntity.set要支援状態区分1(正);
         }
@@ -268,6 +273,14 @@ public class ShinseihakkoMeiseiHandler {
             shinseiShoEntity.set要支援状態区分2(正);
         }
         return shinseiShoEntity;
+    }
+
+    private RString getパターン9(FlexibleDate 基準日) {
+        if (基準日 != null && !基準日.isEmpty()) {
+            return 基準日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+        }
+        return RString.EMPTY;
     }
 
 }
