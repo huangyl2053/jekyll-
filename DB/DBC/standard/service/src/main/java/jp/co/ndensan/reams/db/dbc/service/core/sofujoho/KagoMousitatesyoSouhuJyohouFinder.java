@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 過誤申立送付情報照会のクラスです。
  *
- * @reamsid_L DBC-2950-010 jinjue
+ * @reamsid_L DBC-2950-030 jinjue
  */
 public class KagoMousitatesyoSouhuJyohouFinder {
 
@@ -45,7 +45,8 @@ public class KagoMousitatesyoSouhuJyohouFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KagoMousitatesyoSouhuJyohouFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link KagoMousitatesyoSouhuJyohouFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link KagoMousitatesyoSouhuJyohouFinder}のインスタンス
      */
     public static KagoMousitatesyoSouhuJyohouFinder createInstance() {
         return InstanceProvider.create(KagoMousitatesyoSouhuJyohouFinder.class);
@@ -66,7 +67,7 @@ public class KagoMousitatesyoSouhuJyohouFinder {
             return SearchResult.of(Collections.<SofujohoBusiness>emptyList(), 0, false);
         }
         for (SofujohoRelateEntity entity : entityList) {
-            //   businessList.add(new SofujohoBusiness(entity));
+            businessList.add(new SofujohoBusiness(entity));
         }
         return SearchResult.of(businessList, 0, false);
     }

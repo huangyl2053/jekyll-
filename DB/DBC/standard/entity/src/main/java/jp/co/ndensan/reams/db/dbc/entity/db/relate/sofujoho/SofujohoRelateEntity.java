@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 過誤申立送付情報照会のRelateEntityクラスです。
  *
- * @reamsid_L DBC-2950-010 jinjue
+ * @reamsid_L DBC-2950-030 jinjue
  */
 @lombok.Getter
 @lombok.Setter

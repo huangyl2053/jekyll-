@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0070011;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.sofujoho.SofujohoBusiness;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
@@ -30,10 +31,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 public class SofujohoHandler {
 
     private final SofujohoDiv div;
-    private static final RString 広域 = new RString("111");
     private static final RString 市町村識別ID_00 = new RString("00");
-    private static final RString 市町村識別ID_01 = new RString("01");
-    private static final RString 市町村識別ID_99 = new RString("99");
     private static final RString キー = new RString("000000");
     // private static final int 連番_4 = 4;
     private static final RString 申立書区分_1 = new RString("1");
@@ -58,7 +56,7 @@ public class SofujohoHandler {
      */
     public void onLoad(ShichosonSecurityJoho 市町村情報, List<AuthorityItem> 市町村識別ID, List<KoikiZenShichosonJoho> 構成市町村) {
         List<KeyValueDataSource> list = new ArrayList<>();
-        if (広域.equals(市町村情報.get導入形態コード().value())) {
+        if (DonyuKeitaiCode.事務広域.getCode().equals(市町村情報.get導入形態コード().value())) {
             div.getDdlShichosonName().setDisplayNone(false);
             div.getDdlShichosonName().setVisible(true);
             if (!市町村識別ID.isEmpty() && 市町村識別ID_00.equals(市町村識別ID.get(0).getItemId())) {
@@ -77,8 +75,7 @@ public class SofujohoHandler {
                     list.add(key);
                 }
             }
-            if (!市町村識別ID.isEmpty() && (市町村識別ID_01.equals(市町村識別ID.get(0).getItemId())
-                    || 市町村識別ID_99.equals(市町村識別ID.get(0).getItemId()))) {
+            if (!市町村識別ID.isEmpty() && !市町村識別ID_00.equals(市町村識別ID.get(0).getItemId())) {
                 KeyValueDataSource key = new KeyValueDataSource();
                 RStringBuilder builder = new RStringBuilder();
                 builder.append(市町村情報.get市町村情報().get市町村コード().value());
@@ -99,9 +96,9 @@ public class SofujohoHandler {
     /**
      * 過誤申立送付情報照会を取得です。
      *
-     * @param 保険者Business 保険者情報
-     * @param 総合保険者Business 総合保険者情報
-     * @param 公費負担者Business 公費負担者情報
+     * @param 過誤申立書情報 過誤申立書情報
+     * @param 経過措置 経過措置
+     * @param 総合事業費過誤申立書情報 総合事業費過誤申立書情報
      *
      * @return 過誤申立送付情報照会
      */
@@ -126,9 +123,8 @@ public class SofujohoHandler {
     /**
      * 過誤申立送付情報照会を取得です。
      *
-     * @param 保険者Business 保険者情報
-     * @param 総合保険者Business 総合保険者情報
-     * @param 公費負担者Business 公費負担者情報
+     * @param 過誤申立送付情報照会 過誤申立送付情報照会
+     * @param 申立書区分 申立書区分
      *
      * @return 過誤申立送付情報照会
      */
