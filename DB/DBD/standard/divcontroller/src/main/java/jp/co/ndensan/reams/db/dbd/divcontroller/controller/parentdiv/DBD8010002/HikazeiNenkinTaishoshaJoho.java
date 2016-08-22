@@ -32,8 +32,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class HikazeiNenkinTaishoshaJoho {
 
-    private static final RString DBDMN81002 = new RString("DBDMN81002");
-
     /**
      * 画面初期化処理です。
      *

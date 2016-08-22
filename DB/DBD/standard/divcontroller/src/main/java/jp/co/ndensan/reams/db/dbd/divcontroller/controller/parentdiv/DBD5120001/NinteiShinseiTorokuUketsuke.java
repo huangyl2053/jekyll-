@@ -36,7 +36,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class NinteiShinseiTorokuUketsuke {
 
     private final RString 表示パターン_新規 = new RString("0");
-    private final RString 表示パターン_申請中 = new RString("1");
 
     /**
      * 画面初期化
