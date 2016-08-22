@@ -334,6 +334,7 @@ public class HikazeiNenkinKenJohoHandler {
         div.getBtnDelete().setDisabled(非課税年金対象情報.get被保険者番号().isNullOrEmpty());
         div.getTbGenkisoNenkinNo().setDisabled(false);
         div.getTbGenkisoNenkinNo().setReadOnly(false);
+        div.getBtnDisplay().setDisabled(true);
         if (TorokuKubun.画面登録.getコード().equals(非課税年金対象情報.get登録区分())) {
             div.getDdlTsuki().setDisabled(false);
             div.getTbKingaku().setDisabled(false);
@@ -365,6 +366,7 @@ public class HikazeiNenkinKenJohoHandler {
             div.getTbBirthday().setDisabled(true);
             div.getTbNameKanji().setDisabled(true);
             div.getTbAddressKana().setDisabled(true);
+            div.getTbAddressKanji().setDisabled(true);
         }
     }
 
