@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb031001.SetaiinProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb031001.SystemTimeHonsanteiFukaProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb031001.SystemTimeUpdateHonsanteiProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.fukajohotoroku.FukaJohoTorokuBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchTyouhyou;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
@@ -48,6 +49,8 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteifukaBatchParameter
     private static final RString 世帯員把握BATCH_ID = new RString("SetaiShotokuKazeiHanteiFlow");
     private static final RString 本算定通知書一括発行BATCH_ID = new RString("HonsanteiTsuchishoIkkatsuHakkoFlow");
     private static final ReportId 帳票分類ID = new ReportId("DBB200009_HonsanteiKekkaIcihiran");
+    private static final RString 賦課の情報登録フローBATCHID = new RString("FukaJohoTorokuFlow");
+    private static final String 賦課情報登録 = "callChoteiToroku";
 
     private HonsanteifukaBatchParameter parameter;
     private HonsanteiFukaProcessParameter processParameter;
@@ -70,6 +73,7 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteifukaBatchParameter
         executeStep(世帯員把握);
         executeStep(世帯員把握フロー);
         executeStep(賦課計算);
+        executeStep(賦課情報登録);
         for (HonsanteifukaBatchTyouhyou entity : parameter.get出力帳票一覧()) {
             if (帳票分類ID.equals(entity.get帳票分類ID())) {
                 processParameter.set出力帳票(entity);
@@ -144,6 +148,17 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteifukaBatchParameter
     @Step(賦課計算)
     protected IBatchFlowCommand caluculateFuka() {
         return simpleBatch(FukaKeisanProcess.class).arguments(processParameter).define();
+    }
+
+    /**
+     * 賦課情報登録メソッドです。
+     *
+     * @return バッチコマンド
+     */
+    @Step(賦課情報登録)
+    protected IBatchFlowCommand callChoteiToroku() {
+        return otherBatchFlow(賦課の情報登録フローBATCHID, SubGyomuCode.DBB介護賦課,
+                new FukaJohoTorokuBatchParameter(true)).define();
     }
 
     /**

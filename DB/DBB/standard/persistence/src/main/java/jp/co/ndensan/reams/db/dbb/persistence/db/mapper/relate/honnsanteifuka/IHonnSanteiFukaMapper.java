@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka.CaluculateFukaP
 import jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka.HonsenteiKeisangojohoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka.KeisanTaishoshaParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.HonSanJonTyuShutuTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.HonsenteiKeisangojohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.KakuShugyoumuJouHouEntity;
@@ -95,6 +96,18 @@ public interface IHonnSanteiFukaMapper {
      * @return List<KakuShugyoumuJouHouEntity>
      */
     List<KakuShugyoumuJouHouEntity> get賦課計算情報(CaluculateFukaParameter parameter);
+
+    /**
+     * 賦課情報一時テーブルを作成します。
+     */
+    void createDbT2002FukaJohoTemp();
+
+    /**
+     * 賦課情報一時テーブルを登録します。
+     *
+     * @param entity DbT2002FukaJohoTempTableEntity
+     */
+    void insert賦課の情報一時テーブル(DbT2002FukaJohoTempTableEntity entity);
 
     /**
      * select本算定計算後賦課情報
