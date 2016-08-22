@@ -682,6 +682,5 @@
                     AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode3" <![CDATA[<=]]> #{地区選択コードTo}
                 </if>
             </if>
-            ORDER BY ${syutsuryokujun}
     </select>
 </mapper>
