@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0071011;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.taishoshakensakubusiness.TaishoshaKensakuRelateBusiness;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
@@ -31,10 +32,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 public class KetteijohoHandler {
 
     private final KetteijohoDiv div;
-    private static final RString 広域 = new RString("111");
     private static final RString 市町村識別ID_00 = new RString("00");
-    private static final RString 市町村識別ID_01 = new RString("01");
-    private static final RString 市町村識別ID_99 = new RString("99");
     private static final RString キー = new RString("000000");
     private static final RString 保険者区分_1 = new RString("1");
     private static final RString 保険者区分_3 = new RString("3");
@@ -61,7 +59,7 @@ public class KetteijohoHandler {
      * @param 構成市町村 構成市町村
      */
     public void onLoad(ShichosonSecurityJoho 市町村情報, List<AuthorityItem> 市町村識別ID, List<KoikiZenShichosonJoho> 構成市町村) {
-        if (広域.equals(市町村情報.get導入形態コード().value())) {
+        if (DonyuKeitaiCode.事務広域.getCode().equals(市町村情報.get導入形態コード().value())) {
             div.getDdlShichosonName().setDisplayNone(false);
             div.getDdlShichosonName().setVisible(true);
         }
@@ -72,7 +70,7 @@ public class KetteijohoHandler {
             keyValue.setValue(new RString("000000 全市町村"));
             list.add(keyValue);
             for (KoikiZenShichosonJoho koikiZen : 構成市町村) {
-                if (!new RString("0").equals(koikiZen.get所得引出方法())) {
+                if (!RString.isNullOrEmpty(koikiZen.get所得引出方法()) && !new RString("0").equals(koikiZen.get所得引出方法())) {
                     KeyValueDataSource key = new KeyValueDataSource();
                     RStringBuilder builder = new RStringBuilder();
                     builder.append(koikiZen.get市町村コード().value());
@@ -84,8 +82,8 @@ public class KetteijohoHandler {
                 }
             }
         }
-        if (!市町村識別ID.isEmpty() && (市町村識別ID_01.equals(市町村識別ID.get(0).getItemId())
-                || 市町村識別ID_99.equals(市町村識別ID.get(0).getItemId()))) {
+        if (DonyuKeitaiCode.事務広域.getCode().equals(市町村情報.get導入形態コード().value())
+                && !市町村識別ID.isEmpty() && !市町村識別ID_00.equals(市町村識別ID.get(0).getItemId())) {
             KeyValueDataSource key = new KeyValueDataSource();
             RStringBuilder builder = new RStringBuilder();
             builder.append(市町村情報.get市町村情報().get市町村コード().value());
@@ -111,10 +109,10 @@ public class KetteijohoHandler {
      * 過誤申立決定情報照会を取得です。
      *
      * @param 保険者Business 保険者情報
-     * @param 総合保険者Business 総合保険者情報
-     * @param 公費負担者Business 公費負担者情報
-     * @param 経過措置Business 総合事業費経過措置保険者情報
-     * @param 総合公費負担者Business 総合公費負担者情報
+     * @param 公費負担者Business 公費負担者Business
+     * @param 経過措置Business 経過措置Business
+     * @param 総合事業費保険者Business 総合事業費保険者Business
+     * @param 総合事業費公費負担者Business 総合事業費公費負担者Business
      * @param 履歴番号Business 履歴番号情報
      * @return List<TaishoshaKensakuRelateBusiness> 過誤決定情報
      */
@@ -175,6 +173,8 @@ public class KetteijohoHandler {
         } else {
             div.getDgKagoKetteiDetail().getGridSetting().getColumn(公費受給者番号).setVisible(false);
             div.getDgKagoKetteiDetail().getGridSetting().getColumn(公費負担者番号).setVisible(false);
+            div.getLblKetteihokenshaTanisuHiyogaku().setText(new RString("単位数／費用額"));
+            div.getLblKetteihokenshaHokenshaFutangaku().setText(new RString("保険者負担額"));
         }
         if (保険者区分_3.equals(保険者区分) || 保険者区分_4.equals(保険者区分) || 保険者区分_5.equals(保険者区分)) {
             div.getLblKetteihokenshaKaigokyuhuhi().setText(new RString("介護予防・日常生活支援総合事業費"));
@@ -236,6 +236,8 @@ public class KetteijohoHandler {
         } else {
             div.getDgKagoKetteiDetail().getGridSetting().getColumn(公費受給者番号).setVisible(false);
             div.getDgKagoKetteiDetail().getGridSetting().getColumn(公費負担者番号).setVisible(false);
+            div.getLblKetteihokenshaTanisuHiyogaku().setText(new RString("単位数／費用額"));
+            div.getLblKetteihokenshaHokenshaFutangaku().setText(new RString("保険者負担額"));
         }
         if (保険者区分_3.equals(保険者区分) || 保険者区分_4.equals(保険者区分) || 保険者区分_5.equals(保険者区分)) {
             div.getLblKetteihokenshaKaigokyuhuhi().setText(new RString("介護予防・日常生活支援総合事業費"));
@@ -272,7 +274,7 @@ public class KetteijohoHandler {
             row.setTxtKohiMoshitateRiyuCode(一覧明細.get過誤申立事由コード().getColumnValue());
             row.setTxtKohiStyle(一覧明細.getコード略称());
             row.setTxtKohiMoshitateRiyu(一覧明細.get過誤申立事由());
-            row.setTxtKohiServiceTeikyoYM(一覧明細.getサービス提供年月().toDateString());
+            row.setTxtKohiServiceTeikyoYM(一覧明細.getサービス提供年月().wareki().toDateString());
             row.setTxtKohiServiceTypeCode(一覧明細.getサービス種類コード().getColumnValue());
             row.setTxtKohiServiceType(一覧明細.getサービス種類名());
             row.getTxtKohiTanisu().setValue(一覧明細.get単位数());

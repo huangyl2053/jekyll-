@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 過誤申立決定情報照会のMyBatis用パラメータクラスです。
  *
- * @reamsid_L DBC-2940-010 jinjue
+ * @reamsid_L DBC-2940-030 jinjue
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

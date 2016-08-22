@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： 過誤申立決定情報照会用XMLです。 -->
-<!-- @reamsid_L DBC-2940-010 jinjue -->
+<!-- @reamsid_L DBC-2940-030 jinjue -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.taishoshakensakumapper.ITaishoshaKensakuRelateMapper">
@@ -9,63 +9,57 @@
     <select resultOrdered="true" id="get過誤決定情報"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.taishoshakensakumybatisprm.TaishoshaKensakuMybitisParamter"
             resultMap="ResultMap_TaishoshaKensakuRelateEntity" fetchSize="500">
+        WITH T AS (
         SELECT
-        T3060."toriatsukaiYM",
-        T3060."hokenshaKubun",
-        T3060."rirekiNo",
-        T3060."kaigoKyufuhiKensu",
-        T3060."kaigoKyufuhiTanisu",
-        T3060."kaigoKyufuhiFutangaku",
-        T3060."kogakuServicehiKensu",
-        T3060."kogakuServicehiTanisu",
-        T3060."kogakuServicehiFutangaku",
-        T3060."tokuteiNyushoshaServicehiKensu",
-        T3060."tokuteiNyushoshaServicehiTanisu",
-        T3060."tokuteiNyushoshaServicehiFutangaku",
-        T3060."kohiFutanshaNo",
-        T3060."sakuseiYMD",
-        T3060."torikomiYM",
-        T3061."toriatsukaiYM" AS "取扱年月明細",
-        T3061."hokenshaKubun" AS "保険者区分明細",
-        T3061."rirekiNo" AS "履歴番号明細",
-        T3061."jigyoshoNo",
-        T3061."jigyoshoName",
-        T3061."hiHokenshaNo",
-        T3061."kohiJukyushaNo",
-        T3061."shokisaiHokenshaNo",
-        T3061."serviceTeikyoYM",
-        T3061."serviceShuruiCode",
-        T3061."serviceShuruiName",
-        T3061."kagomoushitateJiyuCode",
-        T3061."kagomoushitateJiyu",
-        T3061."tanisu",
-        T3061."hokenshaFutangaku",
-        T3061."torikomiYM" AS "取込年月明細",
-        "宛名"."meisho" AS "被保険者氏名",
-        T0007."codeRyakusho" AS "様式"
+        T3060."toriatsukaiYM"
+        , T3060."hokenshaKubun"
+        , T3060."rirekiNo"
+        , T3060."kaigoKyufuhiKensu"
+        , T3060."kaigoKyufuhiTanisu"
+        , T3060."kaigoKyufuhiFutangaku"
+        , T3060."kogakuServicehiKensu"
+        , T3060."kogakuServicehiTanisu"
+        , T3060."kogakuServicehiFutangaku"
+        , T3060."tokuteiNyushoshaServicehiKensu"
+        , T3060."tokuteiNyushoshaServicehiTanisu"
+        , T3060."tokuteiNyushoshaServicehiFutangaku"
+        , T3060."kohiFutanshaNo"
+        , T3060."sakuseiYMD"
+        , T3060."torikomiYM"
+        , T3061."toriatsukaiYM" AS "取扱年月明細"
+        , T3061."hokenshaKubun" AS "保険者区分明細"
+        , T3061."rirekiNo" AS "履歴番号明細"
+        , T3061."jigyoshoNo"
+        , T3061."jigyoshoName"
+        , T3061."hiHokenshaNo"
+        , T3061."kohiJukyushaNo"
+        , T3061."shokisaiHokenshaNo"
+        , T3061."serviceTeikyoYM"
+        , T3061."serviceShuruiCode"
+        , T3061."serviceShuruiName"
+        , T3061."kagomoushitateJiyuCode"
+        , T3061."kagomoushitateJiyu"
+        , T3061."tanisu"
+        , T3061."hokenshaFutangaku"
+        , T3061."torikomiYM" AS "取込年月明細"
+        , dbv1001."shikibetsuCode"
+        , T0007."codeRyakusho" AS "様式"
         FROM
         rgdb."DbT3060KagoKetteiShukei" AS T3060
-        LEFT JOIN
-        rgdb."DbT3061KagoKetteiMeisai" AS T3061
-        ON	T3061."toriatsukaiYM"=T3060."toriatsukaiYM"
-        AND	T3061."hokenshaKubun"=T3060."hokenshaKubun"
-        AND	T3061."rirekiNo"=T3060."rirekiNo"
+        LEFT JOIN rgdb."DbT3061KagoKetteiMeisai" AS T3061
+        ON T3061."toriatsukaiYM" = T3060."toriatsukaiYM"
+        AND T3061."hokenshaKubun" = T3060."hokenshaKubun"
+        AND T3061."rirekiNo" = T3060."rirekiNo"
         LEFT JOIN rgdb."DbV1001HihokenshaDaicho" AS dbv1001
         ON dbv1001."hihokenshaNo" = T3061."hiHokenshaNo"
-        LEFT JOIN rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',TRUE,
-        '','','','','','','',FALSE,'','','','','','','','','','','',FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,
-        FALSE,'','','','','','','','',FALSE,'','',FALSE,FALSE,FALSE,'','','','','','','','','','','','','','','','','','','{}')
-        AS 宛名
-        ON 宛名."shikibetsuCode" = dbv1001."shikibetsuCode"
-        LEFT JOIN
-        rgdb."UzT0007Code" AS T0007
-        ON	T0007."schemaName"='rgdb'
-        AND	T0007."subGyomuCode"='DBC'
-        AND	T0007."codeShubetsu"=#{コード種別}
-        AND	T0007."code" = substr(T3061."kagomoushitateJiyuCode",1,2)
+        LEFT JOIN rgdb."UzT0007Code" AS T0007
+        ON T0007."schemaName" = 'rgdb'
+        AND T0007."subGyomuCode" = 'DBC'
+        AND T0007."codeShubetsu" = #{コード種別}
+        AND T0007."code" = substr(T3061."kagomoushitateJiyuCode", 1, 2)
         WHERE
-        T3060."toriatsukaiYM" = #{取扱年月} AND
-        T3060."hokenshaKubun" = #{保険者区分}
+        T3060."toriatsukaiYM" = #{取扱年月}
+        AND T3060."hokenshaKubun" =#{保険者区分}
         <if test="履歴番号フラグ">
             AND T3060."rirekiNo" = #{履歴番号}
         </if>
@@ -79,6 +73,49 @@
         </if>
         ORDER BY
         T3061."jigyoshoNo"
+        )
+        SELECT
+        T."toriatsukaiYM"
+        , T."hokenshaKubun"
+        , T."rirekiNo"
+        , T."kaigoKyufuhiKensu"
+        , T."kaigoKyufuhiTanisu"
+        , T."kaigoKyufuhiFutangaku"
+        , T."kogakuServicehiKensu"
+        , T."kogakuServicehiTanisu"
+        , T."kogakuServicehiFutangaku"
+        , T."tokuteiNyushoshaServicehiKensu"
+        , T."tokuteiNyushoshaServicehiTanisu"
+        , T."tokuteiNyushoshaServicehiFutangaku"
+        , T."kohiFutanshaNo"
+        , T."sakuseiYMD"
+        , T."torikomiYM"
+        , T."取扱年月明細"
+        , T."保険者区分明細"
+        , T."履歴番号明細"
+        , T."jigyoshoNo"
+        , T."jigyoshoName"
+        , T."hiHokenshaNo"
+        , T."kohiJukyushaNo"
+        , T."shokisaiHokenshaNo"
+        , T."serviceTeikyoYM"
+        , T."serviceShuruiCode"
+        , T."serviceShuruiName"
+        , T."kagomoushitateJiyuCode"
+        , T."kagomoushitateJiyu"
+        , T."tanisu"
+        , T."hokenshaFutangaku"
+        , T."取込年月明細"
+        , T."shikibetsuCode"
+        , T."様式"
+        , "宛名"."meisho" AS "被保険者氏名"
+        FROM
+        T
+        LEFT JOIN rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',TRUE,
+        '','','','','','','',FALSE,'','','','','','','','','','','',FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,
+        FALSE,'','','','','','','','',FALSE,'','',FALSE,FALSE,FALSE,'','','','','','','','','','','','','','','','','','','{}')
+        AS 宛名
+        ON 宛名."shikibetsuCode" = T."shikibetsuCode"
     </select>
 
     <resultMap id="ResultMap_TaishoshaKensaku" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.taishoshakensaku.TaishoshaKensakuRelateEntity" autoMapping="true">
@@ -97,7 +134,6 @@
         </if>
         ORDER BY T3060."rirekiNo" DESC
     </select>
-
 
     <resultMap id="ResultMap_TaishoshaKensakuRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.taishoshakensaku.TaishoshaKensakuRelateEntity" autoMapping="true">
         <result property="取扱年月" column="toriatsukaiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
