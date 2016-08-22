@@ -474,7 +474,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
             RString 処理枝番,
             FlexibleYear 年度) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.selectSpecific(max(nendoNaiRenban)).
+        return accessor.selectSpecific(max(kijunTimestamp)).
                 table(DbT7022ShoriDateKanri.class).
                 where(and(
                                 eq(subGyomuCode, サブ業務コード),
