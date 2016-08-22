@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.ichijihanteizumifoutput;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteizumifoutput.ichijihanteizumi.IchijiHanteizumIfOutputBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput.NinteiChosaDataOutputResult;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.itizihanteishori.ItziHanteiShoriProcessParamter;
@@ -26,11 +28,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -56,6 +58,8 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     List<IchijiHanteizumIfOutputRelateEntity> kaigoJuminhyoEntityList = new ArrayList<>();
+    private Map<RString, IchijiHanteizumIfOutputRelateEntity> kaigoJuminhyoMap;
+    private RString koroshoIfShikibetsuCode = RString.EMPTY;
     private RString eucFilePath;
     private IchijiHanteizumIfOutputBusiness business;
     private FileSpoolManager manager;
@@ -67,6 +71,7 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), 一次判定IF文字コードファイル名);
         RString イメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate());
         paramter.setイメージ区分(イメージ区分);
+        kaigoJuminhyoMap = new HashMap();
     }
 
     @Override
@@ -76,7 +81,7 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
 
     @Override
     protected void createWriter() {
-        eucCsvWriterJunitoJugo = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+        eucCsvWriterJunitoJugo = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.SJIS).
@@ -90,27 +95,22 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
         return new BatchDbReader(MYBATIS_SELECT_ID, paramter.toItziHanteiShoriMybitisParamter());
     }
     @BatchWriter
-    private EucCsvWriter<IchijiHanteizumIfOutputEucCsvEntity> eucCsvWriterJunitoJugo;
+    private CsvWriter<IchijiHanteizumIfOutputEucCsvEntity> eucCsvWriterJunitoJugo;
 
     @Override
     protected void process(IchijiHanteizumIfOutputRelateEntity entity) {
         getファイル名(entity);
         eucCsvWriterJunitoJugo.writeLine(business.setEucCsvEntity(entity));
         new NinteiChosaDataOutputResult().getアクセスログ(entity.getShinseishoKanriNo());
-        kaigoJuminhyoEntityList.add(entity);
+        if (!entity.getKoroshoIfShikibetsuCode().equals(koroshoIfShikibetsuCode)) {
+            manager.spool(eucFilePath);
+            koroshoIfShikibetsuCode = entity.getKoroshoIfShikibetsuCode();
+        }
     }
 
     @Override
     protected void afterExecute() {
-        RString koroshoIfShikibetsuCode = RString.EMPTY;
-        for (int i = 0; i < kaigoJuminhyoEntityList.size(); i++) {
-            if (!kaigoJuminhyoEntityList.get(i).getKoroshoIfShikibetsuCode().equals(koroshoIfShikibetsuCode)) {
-                manager.spool(eucFilePath);
-                koroshoIfShikibetsuCode = kaigoJuminhyoEntityList.get(i).getKoroshoIfShikibetsuCode();
-                outputJokenhyoFactory();
-            }
-        }
-        eucCsvWriterJunitoJugo.close();
+        outputJokenhyoFactory();
     }
 
     /**
@@ -145,21 +145,20 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RStringBuilder jokenBuilder = new RStringBuilder();
         RString ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定ソフト一次判定用データ送信ファイル名09B, RDate.getNowDate());
-        jokenBuilder.append(ファイル名.replace(".csv", "_"));
+        jokenBuilder.append(ファイル名.replace(".CSV", "_"));
         jokenBuilder.append(entity.getKoroshoIfShikibetsuCode().concat(new RString(".csv")));
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), jokenBuilder.toRString());
         RString 一次判定IF文字コード = DbBusinessConfig.get(ConfigNameDBE.一次判定IF文字コード, RDate.getNowDate());
         if (new RString("1").equals(一次判定IF文字コード)) {
-            eucCsvWriterJunitoJugo = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+            eucCsvWriterJunitoJugo = new CsvWriter.InstanceBuilder(eucFilePath).
                     setDelimiter(EUC_WRITER_DELIMITER).
                     setEnclosure(EUC_WRITER_ENCLOSURE).
                     setEncode(Encode.SJIS).
                     setNewLine(NewLine.CRLF).
                     hasHeader(false).
                     build();
-        } else if (new RString(
-                "2").equals(一次判定IF文字コード)) {
-            eucCsvWriterJunitoJugo = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+        } else if (new RString("2").equals(一次判定IF文字コード)) {
+            eucCsvWriterJunitoJugo = new CsvWriter.InstanceBuilder(eucFilePath).
                     setDelimiter(EUC_WRITER_DELIMITER).
                     setEnclosure(EUC_WRITER_ENCLOSURE).
                     setEncode(Encode.UTF_8withBOM).
