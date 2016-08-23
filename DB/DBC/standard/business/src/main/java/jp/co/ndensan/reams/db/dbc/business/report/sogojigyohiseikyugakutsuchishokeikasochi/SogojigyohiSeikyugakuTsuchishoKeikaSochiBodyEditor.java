@@ -34,12 +34,12 @@ public class SogojigyohiSeikyugakuTsuchishoKeikaSochiBodyEditor implements ISogo
     @Override
     public SogojigyohiSeikyugakuTsuchishoKeikaSochiSource edit(SogojigyohiSeikyugakuTsuchishoKeikaSochiSource source) {
         if (サービス種類コード_ST.equals(帳票出力対象データ.getサービス種類コード())) {
-            source.listMeisai_1 = 帳票出力対象データ.getサービス種類名();
-            source.listMeisai_3 = doカンマ編集(帳票出力対象データ.get通常分_実日数());
-        } else {
             source.listMeisai_1 = RString.FULL_SPACE.concat(帳票出力対象データ
                     .getサービス種類名());
             source.listMeisai_3 = RString.EMPTY;
+        } else {
+            source.listMeisai_1 = 帳票出力対象データ.getサービス種類名();
+            source.listMeisai_3 = doカンマ編集(帳票出力対象データ.get通常分_実日数());
         }
         source.listMeisai_2 = doカンマ編集(帳票出力対象データ.get通常分_件数());
         source.listMeisai_4 = doカンマ編集(帳票出力対象データ.get通常分_単位数());

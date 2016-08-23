@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
  * 帳票設計_DBC200085_総合事業費過誤決定通知書情報取込一覧表帳票HeaderEditor
@@ -65,7 +66,9 @@ public class SogojigyohiKagoKetteiHokenshaHeaderEditor
         source.printTimeStamp = 作成日.concat(RString.HALF_SPACE).concat(作成時);
         source.torikomiYM = 処理年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        source.shoKisaiHokenshaNo = 帳票出力対象データ.get証記載保険者番号().getColumnValue();
+        source.hokenshaNo = getColumnValue(帳票出力対象データ.get保険者番号());
+        source.hokenshaName = 帳票出力対象データ.get保険者名();
+        source.shoKisaiHokenshaNo = getColumnValue(帳票出力対象データ.get証記載保険者番号());
         source.shoKisaiHokenshaName = 帳票出力対象データ.get証記載保険者名();
         source.shutsuryokujun1 = get並び順(KEY_並び順の２件目);
         source.shutsuryokujun2 = get並び順(KEY_並び順の３件目);
@@ -78,6 +81,12 @@ public class SogojigyohiKagoKetteiHokenshaHeaderEditor
         source.kaipage4 = RString.EMPTY;
         source.kaipage5 = RString.EMPTY;
         return source;
+    }
+    private RString getColumnValue(IDbColumnMappable entity) {
+        if (null != entity) {
+            return entity.getColumnValue();
+        }
+        return RString.EMPTY;
     }
 
     private RString get並び順(RString 並び順Key) {
