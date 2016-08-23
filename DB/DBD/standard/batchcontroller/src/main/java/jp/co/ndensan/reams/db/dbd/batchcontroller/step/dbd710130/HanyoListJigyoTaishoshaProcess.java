@@ -51,7 +51,9 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -375,36 +377,29 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
             builder.append(地方公共団体.get市町村名());
             builder.append(COMMA);
         }
-        if (null != processParamter.getKizyunnichi()) {
+        if (null != processParamter.getKizyunnichi() && !processParamter.getKizyunnichi().isEmpty()) {
             builder.append(KIZYUNNICHI);
-            builder.append(processParamter.getKizyunnichi().wareki().toDateString());
+            builder.append(processParamter.getKizyunnichi().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
             builder.append(COMMA);
         }
-        builder.append(ChushutsuKomokuKubun.toValue(processParamter.getCyusyutsukomokukubun()).get名称());
-        builder.append(SPACE);
-        builder.append(COLON);
-        builder.append(SPACE);
-        if (null != processParamter.getHitsukehanifrom()) {
-            builder.append(processParamter.getHitsukehanifrom().wareki().toDateString());
-            builder.append(SPACE);
-        }
-        builder.append(カラ);
-        if (null == processParamter.getHitsukehanito()) {
-            builder.append(SPACE);
-            builder.append(processParamter.getHitsukehanito().wareki().toDateString());
-        }
-        builder.append(COMMA);
+        builder = get日付範囲(builder);
         if (processParamter.isJigyotaishoshadatacyusyutsu()) {
             builder.append(CHOKINNOMI);
             builder.append(COMMA);
         }
-        List<RString> builderList = builder.toRString().substring(0, builder.toRString().length() - 1).split(COMMA.toString());
-        for (RString build : builderList) {
-            出力条件.add(build);
+        if (!builder.toRString().isNullOrEmpty()) {
+            List<RString> builderList = builder.toRString().substring(0, builder.toRString().length() - 1).split(COMMA.toString());
+            for (RString build : builderList) {
+                出力条件.add(build);
+            }
         }
         if (null != processParamter.getAtenacyusyutsujyoken()
                 && null != processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun()) {
-            出力条件.add(get宛名抽出区分情報());
+            RString get宛名抽出区分情報 = get宛名抽出区分情報();
+            if (!get宛名抽出区分情報.isNullOrEmpty()) {
+                出力条件.add(get宛名抽出区分情報());
+            }
         }
         if (null != processParamter.getAtenacyusyutsujyoken()
                 && null != processParamter.getAtenacyusyutsujyoken().getChiku_Kubun()) {
@@ -427,44 +422,54 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
         printer.print();
     }
 
+    private RStringBuilder get日付範囲(RStringBuilder builder) {
+        if (!processParamter.getHitsukehanifrom().isEmpty()
+                && !processParamter.getHitsukehanito().isEmpty()) {
+            builder.append(ChushutsuKomokuKubun.toValue(processParamter.getCyusyutsukomokukubun()).get名称());
+            builder.append(SPACE);
+            builder.append(COLON);
+            builder.append(SPACE);
+            builder.append(processParamter.getHitsukehanifrom().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+            builder.append(SPACE);
+            builder.append(カラ);
+            builder.append(SPACE);
+            builder.append(processParamter.getHitsukehanito().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+            builder.append(COMMA);
+        } else if (!processParamter.getHitsukehanifrom().isEmpty()
+                && processParamter.getHitsukehanito().isEmpty()) {
+            builder.append(ChushutsuKomokuKubun.toValue(processParamter.getCyusyutsukomokukubun()).get名称());
+            builder.append(SPACE);
+            builder.append(COLON);
+            builder.append(SPACE);
+            builder.append(processParamter.getHitsukehanifrom().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+            builder.append(SPACE);
+            builder.append(カラ);
+            builder.append(COMMA);
+        } else if (processParamter.getHitsukehanifrom().isEmpty()
+                && !processParamter.getHitsukehanito().isEmpty()) {
+            builder.append(ChushutsuKomokuKubun.toValue(processParamter.getCyusyutsukomokukubun()).get名称());
+            builder.append(SPACE);
+            builder.append(COLON);
+            builder.append(SPACE);
+            builder.append(カラ);
+            builder.append(SPACE);
+            builder.append(processParamter.getHitsukehanito().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+            builder.append(COMMA);
+        }
+        return builder;
+    }
+
     private RString get宛名抽出区分情報() {
         RStringBuilder builder = new RStringBuilder();
         if (NenreiSoChushutsuHoho.年齢範囲.equals(processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun())
                 && processParamter.getAtenacyusyutsujyoken().getNenreiKijunbi() != null) {
-            builder.append(NENLEI);
-            builder.append(COLON);
-            if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange()
-                    && null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom()) {
-                builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom().toString()));
-                builder.append(SAI);
-            }
-            builder.append(SPACE);
-            builder.append(カラ);
-            if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange()
-                    && null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo()) {
-                builder.append(SPACE);
-                builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo().toString()));
-                builder.append(SAI);
-            }
-            builder.append(SPACE);
-            builder.append(左記号);
-            builder.append(NENLEIKIZYUNNICHI);
-            builder.append(processParamter.getAtenacyusyutsujyoken().getNenreiKijunbi().wareki().toDateString());
-            builder.append(右記号);
+            builder = get年齢();
         } else if (NenreiSoChushutsuHoho.生年月日範囲.equals(processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun())) {
-            builder.append(SEINENGAPPI);
-            builder.append(COLON);
-            if (null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange()
-                    && null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom()) {
-                builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom().toString()));
-            }
-            builder.append(SPACE);
-            builder.append(カラ);
-            if (null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange()
-                    && null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo()) {
-                builder.append(SPACE);
-                builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo().toString()));
-            }
+            builder = get生年月日();
         }
         return builder.toRString();
     }
@@ -563,4 +568,100 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
         return builder.toRString();
     }
 
+    private RStringBuilder get年齢() {
+        RStringBuilder builder = new RStringBuilder();
+        if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange()
+                && null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom()
+                && null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo()) {
+            builder.append(NENLEI);
+            builder.append(SPACE);
+            builder.append(COLON);
+            builder.append(SPACE);
+            builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom().toString()));
+            builder.append(SAI);
+            builder.append(SPACE);
+            builder.append(カラ);
+            builder.append(SPACE);
+            builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo().toString()));
+            builder.append(SAI);
+            builder.append(SPACE);
+            builder.append(左記号);
+            builder.append(NENLEIKIZYUNNICHI);
+            builder.append(processParamter.getAtenacyusyutsujyoken().getNenreiKijunbi().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+            builder.append(右記号);
+        } else if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange()
+                && null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom()
+                && null == processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo()) {
+            builder.append(NENLEI);
+            builder.append(SPACE);
+            builder.append(COLON);
+            builder.append(SPACE);
+            builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom().toString()));
+            builder.append(SAI);
+            builder.append(SPACE);
+            builder.append(カラ);
+            builder.append(SPACE);
+            builder.append(左記号);
+            builder.append(NENLEIKIZYUNNICHI);
+            builder.append(processParamter.getAtenacyusyutsujyoken().getNenreiKijunbi().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+            builder.append(右記号);
+        } else if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange()
+                && null == processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom()
+                && null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo()) {
+            builder.append(NENLEI);
+            builder.append(SPACE);
+            builder.append(COLON);
+            builder.append(SPACE);
+            builder.append(カラ);
+            builder.append(SPACE);
+            builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo().toString()));
+            builder.append(SAI);
+            builder.append(SPACE);
+            builder.append(左記号);
+            builder.append(NENLEIKIZYUNNICHI);
+            builder.append(processParamter.getAtenacyusyutsujyoken().getNenreiKijunbi().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+            builder.append(右記号);
+        }
+        return builder;
+    }
+
+    private RStringBuilder get生年月日() {
+        RStringBuilder builder = new RStringBuilder();
+        if (null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange()
+                && null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom()
+                && null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo()) {
+            builder.append(SEINENGAPPI);
+            builder.append(COLON);
+            builder.append(processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+            builder.append(SPACE);
+            builder.append(カラ);
+            builder.append(SPACE);
+            builder.append(processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+        } else if (null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange()
+                && null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom()
+                && null == processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo()) {
+            builder.append(SEINENGAPPI);
+            builder.append(COLON);
+            builder.append(processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+            builder.append(SPACE);
+            builder.append(カラ);
+        } else if (null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange()
+                && null == processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom()
+                && null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo()) {
+            builder.append(SEINENGAPPI);
+            builder.append(COLON);
+            builder.append(SPACE);
+            builder.append(カラ);
+            builder.append(SPACE);
+            builder.append(processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+        }
+        return builder;
+    }
 }

@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * JukyushaIdoRenrakuhyoJohoShokaiPanel のクラスファイル
  *
- * @reamsid_L DBC-2102-010 lihang
+ * @reamsid_L DBC-3060-010 lihang
  */
 public class JukyushaIdoRenrakuhyoJohoShokaiPanelDiv extends Panel {
 
