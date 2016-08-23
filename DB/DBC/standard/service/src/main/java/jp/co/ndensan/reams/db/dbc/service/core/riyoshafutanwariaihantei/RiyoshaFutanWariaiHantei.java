@@ -613,21 +613,13 @@ public class RiyoshaFutanWariaiHantei {
     }
 
     private void set負担割合判定マージソット(List<RiyoshaFutanWariaiMeisaiTempEntity> 利用者負担割合明細情報) {
-
         Collections.sort(利用者負担割合明細情報, new Comparator<RiyoshaFutanWariaiMeisaiTempEntity>() {
             @Override
             public int compare(RiyoshaFutanWariaiMeisaiTempEntity o1, RiyoshaFutanWariaiMeisaiTempEntity o2) {
                 if (!o1.getHihokenshaNo().equals(o2.getHihokenshaNo())) {
-
-                    return o2.getHihokenshaNo().compareTo(o1.getHihokenshaNo());
+                    return o1.getHihokenshaNo().compareTo(o2.getHihokenshaNo());
                 }
-                return new RString(o2.getEdaNo()).compareTo(new RString(o1.getEdaNo()));
-            }
-        });
-        Collections.sort(利用者負担割合明細情報, new Comparator<RiyoshaFutanWariaiMeisaiTempEntity>() {
-            @Override
-            public int compare(RiyoshaFutanWariaiMeisaiTempEntity o1, RiyoshaFutanWariaiMeisaiTempEntity o2) {
-                return new RString(o2.getEdaNo()).compareTo(new RString(o1.getEdaNo()));
+                return new Integer(o1.getEdaNo()).compareTo(o2.getEdaNo());
             }
         });
     }
@@ -707,7 +699,8 @@ public class RiyoshaFutanWariaiHantei {
         if (entity == null) {
             return RString.EMPTY;
         }
-        return nonullRStr(entity.getHihokenshaNo()).concat(nonullRStr(entity.getFutanWariaiKubun()))
+        return nonullRStr(entity.getHihokenshaNo())
+                .concat(LINE).concat(nonullRStr(entity.getFutanWariaiKubun()))
                 .concat(LINE).concat(nonullRStr(entity.getHonninGoukeiShotokuGaku()))
                 .concat(LINE).concat(nonullRStr(entity.getSetaiIchigouHihokenshaSu()))
                 .concat(LINE).concat(nonullRStr(entity.getNenkinShunyuGoukei()))
