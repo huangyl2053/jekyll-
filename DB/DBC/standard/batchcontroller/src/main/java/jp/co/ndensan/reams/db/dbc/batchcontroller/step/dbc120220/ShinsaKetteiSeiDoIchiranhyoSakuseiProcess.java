@@ -85,6 +85,7 @@ public class ShinsaKetteiSeiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase
     private static final RString SAKUSEI = new RString("作成");
     private IOutputOrder 並び順;
     private List<RString> 改頁リスト;
+    private List<RString> 改頁項目名リスト;
     private Map<RString, RString> 出力順Map;
     private KokuhorenIchiranhyoMybatisParameter 帳票データの取得Parameter;
     private static final RString デフォルト出力順 = new RString(" ORDER BY \"DbWT1613SinsaKetteiSeikyuGokei\".\"shoKisaiHokenshaNo\" ASC ");
@@ -104,6 +105,7 @@ public class ShinsaKetteiSeiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase
     protected void initialize() {
         super.initialize();
         改頁リスト = new ArrayList<>();
+        改頁項目名リスト = new ArrayList<>();
         出力順Map = new HashMap<>();
         帳票データの取得Parameter = new KokuhorenIchiranhyoMybatisParameter();
         並び順 = get並び順(parameter.get帳票ID(), parameter.get出力順ID());
@@ -130,6 +132,7 @@ public class ShinsaKetteiSeiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase
             for (ISetSortItem item : 並び順.get設定項目リスト()) {
                 if (item.is改頁項目()) {
                     改頁リスト.add(item.get項目ID());
+                    改頁項目名リスト.add(item.get項目名());
                 }
                 if (i == INT_1) {
                     出力順Map.put(KEY_並び順の２件目, item.get項目名());
@@ -190,14 +193,14 @@ public class ShinsaKetteiSeiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase
             kyufuhiShinsaCsvEntityWriter.writeLine(output);
             if (is改頁(beforeEntity, entity)) {
                 kyufuhiShinsaKetteiInReport = new KyufuhiShinsaKetteiSeikyuMeisaihyoReport(beforeEntity,
-                        出力順Map, RDateTime.now(), true, 改頁リスト);
+                        出力順Map, RDateTime.now(), true, 改頁項目名リスト);
                 output = get帳票のCSVファイル作成(beforeEntity, true, false);
                 kyufuhiShinsaCsvEntityWriter.writeLine(output);
                 output = get帳票のCSVファイル作成(beforeEntity, true, true);
                 kyufuhiShinsaCsvEntityWriter.writeLine(output);
             } else {
                 kyufuhiShinsaKetteiInReport = new KyufuhiShinsaKetteiSeikyuMeisaihyoReport(beforeEntity,
-                        出力順Map, RDateTime.now(), false, 改頁リスト);
+                        出力順Map, RDateTime.now(), false, 改頁項目名リスト);
             }
             kyufuhiShinsaKetteiInReport.writeBy(reportSourceWriter);
         }
@@ -213,7 +216,7 @@ public class ShinsaKetteiSeiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase
             output = get帳票のCSVファイル作成(currentRecord, true, true);
             kyufuhiShinsaCsvEntityWriter.writeLine(output);
             KyufuhiShinsaKetteiSeikyuMeisaihyoReport kyufuhiShinsaKettei合計InReport = new KyufuhiShinsaKetteiSeikyuMeisaihyoReport(currentRecord,
-                    出力順Map, RDateTime.now(), true, 改頁リスト);
+                    出力順Map, RDateTime.now(), true, 改頁項目名リスト);
             kyufuhiShinsaKettei合計InReport.writeBy(reportSourceWriter);
         }
         kyufuhiShinsaCsvEntityWriter.close();
