@@ -41,6 +41,7 @@ public class KogakuJigyoShinseishoHakkoIchiranEditor implements IKogakuJigyoShin
     private static final int INDEX_6 = 6;
     private static final int INDEX_8 = 8;
     private static final RString 丸 = new RString("○");
+    private static final RString 定値_措 = new RString("措");
 
     /**
      * コンストラクタです
@@ -84,7 +85,7 @@ public class KogakuJigyoShinseishoHakkoIchiranEditor implements IKogakuJigyoShin
             source.listHakkoTaishosha_3 = 帳票出力対象データ.getServiceTeikyoYMChohyo().wareki().toDateString();
         }
         if (帳票出力対象データ.getShinseishaShimeiChohyo() != null) {
-            source.listHakkoTaishosha_4 = 帳票出力対象データ.getShinseishaShimeiChohyo().getColumnValue();
+            source.listHakkoTaishosha_4 = 帳票出力対象データ.getMeishoChohyo().getColumnValue();
         }
         if (帳票出力対象データ.getYubinNoChohyo() != null) {
             source.listHakkoTaishosha_5 = 帳票出力対象データ.getYubinNoChohyo().getColumnValue();
@@ -96,7 +97,9 @@ public class KogakuJigyoShinseishoHakkoIchiranEditor implements IKogakuJigyoShin
             source.listHakkoTaishosha_7 = 帳票出力対象データ.getGyoseikuNameChohyo();
         }
         source.listHakkoTaishosha_8 = 帳票出力対象データ.getGyoseikuNameChohyo();
-        source.listHakkoTaishosha_9 = new RString(String.valueOf(帳票出力対象データ.isKyuSochishaFlagChohyo()));
+        if (帳票出力対象データ.isKyuSochishaFlagChohyo()) {
+            source.listHakkoTaishosha_9 = 定値_措;
+        }
         if (帳票出力対象データ.getYokaigoJotaiKubunCodeChohyo() != null) {
             source.listHakkoTaishosha_10 = 帳票出力対象データ.getYokaigoJotaiKubunCodeChohyo().getColumnValue();
         }
