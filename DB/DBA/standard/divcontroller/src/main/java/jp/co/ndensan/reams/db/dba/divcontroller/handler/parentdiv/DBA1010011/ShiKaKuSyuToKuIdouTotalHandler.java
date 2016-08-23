@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1010011;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.core.exclusivekey.DbaExclusiveKey;
 import jp.co.ndensan.reams.db.dba.business.core.sikakuidouteisei.ShikakuRirekiJoho;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.ShikakuShutokuIdoTotalDiv;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
@@ -94,13 +95,7 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
      * @return 前排他キー 前排他キー
      */
     public RString get前排他キー() {
-        RStringBuilder rstrBuilder = new RStringBuilder("ShikakuShutokuIdo");
-        if (被保険者番号 == null || 被保険者番号.isEmpty()) {
-            rstrBuilder.append(被保険者番号.getColumnValue());
-        } else {
-            rstrBuilder.append("HihokenshaNo");
-        }
-        return rstrBuilder.toRString();
+        return DbaExclusiveKey.create被保険者番号排他キー(被保険者番号);
     }
 
     /**
