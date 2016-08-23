@@ -51,8 +51,8 @@ public class KinnkyuujiShisetsuRyouyouhi {
 //            RString 整理番号 = div.getCcdKyufuJissekiHeader().getTxtSeiriNo().getValue();
 //            RString 事業者 = div.getCcdKyufuJissekiHeader().getTxtJigyosha().getValue();
 //            RDate サービス提供年月 = div.getCcdKyufuJissekiHeader().getTxtTeikyoNengetsu().getValue();
-//            RString 样式番号 = div.getCcdKyufuJissekiHeader().getTxtYoshikiNo().getValue();
-//            int index = getHandler(div).get提供年月index(header2, サービス提供年月, 整理番号, 事業者, 样式番号);
+//            RString 様式番号 = div.getCcdKyufuJissekiHeader().getTxtYoshikiNo().getValue();
+//            int index = getHandler(div).get提供年月index(header2, サービス提供年月, 整理番号, 事業者, 様式番号);
 //            if ((index - 1) < 0) {
 //                div.getBtnZengetsu().setDisabled(true);
 //                div.getBtnMaeJigyosha().setDisabled(true);

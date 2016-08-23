@@ -375,16 +375,16 @@ public class KinnkyuujiShisetsuRyouyouhiHandler {
      * @param 事業者番号リスト List<KyufuJissekiHedajyoho2>
      * @param 整理番号 RString
      * @param 事業者番号 RString
-     * @param 样式番号 RString
+     * @param 様式番号 RString
      * @param サービス提供年月 RDate
      * @param 実績区分コード RString
      * @return index index
      */
-    public int get事業者番号index(List<KyufuJissekiHedajyoho2> 事業者番号リスト, RString 整理番号, RString 事業者番号, RString 样式番号, RDate サービス提供年月, RString 実績区分コード) {
+    public int get事業者番号index(List<KyufuJissekiHedajyoho2> 事業者番号リスト, RString 整理番号, RString 事業者番号, RString 様式番号, RDate サービス提供年月, RString 実績区分コード) {
         for (int index = 0; index < 事業者番号リスト.size(); index++) {
             if (事業者番号.equals(事業者番号リスト.get(index).get事業所番号().value())
                     && 整理番号.equals(事業者番号リスト.get(index).get整理番号())
-                    && 样式番号.equals(事業者番号リスト.get(index).get識別番号名称())
+                    && 様式番号.equals(事業者番号リスト.get(index).get識別番号())
                     && サービス提供年月.toDateString().equals(事業者番号リスト.get(index).getサービス提供年月().toDateString())
                     && 実績区分コード.equals(事業者番号リスト.get(index).get給付実績区分コード())) {
                 return index;
