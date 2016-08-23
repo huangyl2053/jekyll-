@@ -197,6 +197,7 @@ public class FukaKeisan {
                 choshuHoho = new ChoshuHoho(choshuHohoEntity);
             }
             if (EntityDataState.Added.equals(choshuHoho.toEntity().getState())) {
+                更正前後徴収方法.setHasChanged(true);
                 更正前後徴収方法.set更正後(choshuHoho);
                 break;
             }
