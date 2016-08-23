@@ -95,6 +95,9 @@ public class DbT4010GemmenGengakuShinseiDac implements ISaveable<DbT4010GemmenGe
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("減免減額申請エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessors.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        if (entity.getLastUpdateTimestamp() != null && !EntityDataState.Deleted.equals(entity.getState())) {
+            entity.setState(EntityDataState.Modified);
+        }
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 
