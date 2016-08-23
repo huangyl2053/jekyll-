@@ -208,7 +208,6 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
         requireNonNull(適用開始日, UrSystemErrorMessages.値がnull.getReplacedMessage(適用開始日.toString()));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(事業者番号.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        // TODO QA#No.1202確認中
         return accessor.select().
                 table(DbT7063KaigoJigyoshaShiteiService.class).
                 where(and(
