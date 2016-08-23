@@ -26,5 +26,6 @@ public class KyufuJissekiHedajyoho2 {
     private RString 整理番号;
     private JigyoshaNo 事業所番号;
     private RString 事業者名称;
+    private RString 識別番号;
     private RString 識別番号名称;
 }
