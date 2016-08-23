@@ -324,7 +324,6 @@ public class ShoriDateKanriManager {
 
         for (ShoriDateKanri 処理日付管理マスタ : 処理日付管理削除リスト) {
             DbT7022ShoriDateKanriEntity entity = 処理日付管理マスタ.toEntity();
-            entity.initializeMd5();
             entity.setState(EntityDataState.Deleted);
             if (1 != dac.saveOrDeletePhysicalBy(entity)) {
                 return false;
@@ -334,7 +333,7 @@ public class ShoriDateKanriManager {
         for (ShoriDateKanri 処理日付管理マスタ : 処理日付管理登録リスト) {
             DbT7022ShoriDateKanriEntity entity = 処理日付管理マスタ.toEntity();
             entity.setState(EntityDataState.Added);
-            if (1 != dac.save(処理日付管理マスタ.toEntity())) {
+            if (1 != dac.save(entity)) {
                 return false;
             }
         }
@@ -725,6 +724,7 @@ public class ShoriDateKanriManager {
         List<ShoriDateKanri> result = new ArrayList<>();
         List<DbT7022ShoriDateKanriEntity> entityList = dac.selectBySomeColumns(サブ業務コード, 処理名, 年度, 市町村コード);
         for (DbT7022ShoriDateKanriEntity entity : entityList) {
+            entity.initializeMd5();
             result.add(new ShoriDateKanri(entity));
         }
 

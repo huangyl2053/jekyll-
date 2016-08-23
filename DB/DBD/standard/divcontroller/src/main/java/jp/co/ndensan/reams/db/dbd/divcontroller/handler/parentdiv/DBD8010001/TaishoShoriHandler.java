@@ -209,8 +209,7 @@ public class TaishoShoriHandler {
 
         if (!編集後用登録情報.isEmpty()) {
             ShoriDateKanriManager manager = ShoriDateKanriManager.createInstance();
-            manager.delete処理日付管理リスト(編集後用削除情報);
-            manager.save処理日付管理リスト(編集後用登録情報);
+            manager.save処理日付管理リスト(編集後用登録情報, 編集後用削除情報);
         }
         return true;
     }
@@ -258,8 +257,7 @@ public class TaishoShoriHandler {
         編集後用登録情報.add(edit更新対象(更新対象, null, row));
 
         ShoriDateKanriManager manager = ShoriDateKanriManager.createInstance();
-        manager.delete処理日付管理リスト(編集後用削除情報);
-        manager.save処理日付管理リスト(編集後用登録情報);
+        manager.save処理日付管理リスト(編集後用登録情報, 編集後用削除情報);
     }
 
     private RString getFileName() {
