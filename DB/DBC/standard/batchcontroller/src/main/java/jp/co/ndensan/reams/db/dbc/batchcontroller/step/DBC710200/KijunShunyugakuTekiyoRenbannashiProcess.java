@@ -74,7 +74,7 @@ public class KijunShunyugakuTekiyoRenbannashiProcess extends BatchProcessBase<Ha
     @Override
     protected void createWriter() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("HanyoList_JigyoBunKogakuGassanShikyuKettei.csv"));
+        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("HanyoList_KijunShunyugakuTekiyo.csv"));
         eucCsvWriter = BatchWriters.csvWriter(HanyoListParamRenbannashiEUCEntity.class)
                 .filePath(eucFilePath)
                 .setDelimiter(コンマ)
