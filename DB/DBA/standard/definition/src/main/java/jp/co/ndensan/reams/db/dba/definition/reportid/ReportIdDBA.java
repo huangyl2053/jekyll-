@@ -250,6 +250,10 @@ public enum ReportIdDBA {
      */
     DBA701004(new ReportId("DBA701004_HanyoListRoreiFukushiNenkinJukyusha"), new RString("老齢福祉年金受給者")),
     /**
+     * 資格取得者不整合リストの帳票ＩＤです。
+     */
+    DBA200012(new ReportId("DBA200012_ShikakushutokushaFuseigoIchiranhyo"), new RString("資格取得者不整合リスト")),
+    /**
      * 生活保護受給者；の帳票ＩＤです。
      */
     DBA701006(new ReportId("DBA701006_HanyoListSeikatsuHogoJukyusha"), new RString("生活保護受給者"));
