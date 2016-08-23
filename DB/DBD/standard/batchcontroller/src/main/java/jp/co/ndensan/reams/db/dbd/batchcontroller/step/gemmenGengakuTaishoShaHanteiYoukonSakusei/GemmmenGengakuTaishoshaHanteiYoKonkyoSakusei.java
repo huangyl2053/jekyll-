@@ -161,7 +161,7 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
     private void setis高齢者複数世帯(TaishoShaHanteiYoukonkyoItokiTempTableEntity tempTable, ShikibetsuCode shikibetsuCode, FlexibleDate date) {
         RString up年齢範囲 = DbBusinessConfig.get(ConfigNameDBU.年齢到達基準_第１号被保険者到達基準年齢, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         Range<Integer> 年齢範囲 = new Range(Integer.parseInt(up年齢範囲.toString()), Integer.parseInt("200"));
-        if (1 < get世帯(shikibetsuCode, date).get世帯員リスト(年齢範囲, new RDate(date.toString())).size()) {
+        if (!date.isEmpty() && 1 < get世帯(shikibetsuCode, date).get世帯員リスト(年齢範囲, new RDate(date.toString())).size()) {
             tempTable.setIs高齢者複数世帯(Boolean.TRUE);
         } else {
             tempTable.setIs高齢者複数世帯(Boolean.FALSE);
