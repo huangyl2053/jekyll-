@@ -61,6 +61,10 @@
             <artifactId>UexEntity</artifactId>
         </dependency>
         <dependency>
+            <groupId>jp.co.ndensan.reams.ue.uex</groupId>
+            <artifactId>UexPersistence</artifactId>
+        </dependency>
+        <dependency>
             <groupId>jp.co.ndensan.reams.ca.cax</groupId>
             <artifactId>CaxPersistence</artifactId>
         </dependency>
