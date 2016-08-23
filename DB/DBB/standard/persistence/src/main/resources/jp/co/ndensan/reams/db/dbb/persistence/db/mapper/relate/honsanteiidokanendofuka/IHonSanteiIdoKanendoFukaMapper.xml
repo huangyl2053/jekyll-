@@ -195,9 +195,9 @@
         AND B."gyomuCode" = C."gyomuCode"
         AND B."jukyuKaishiYMD" = C."jukyuKaishiYMD"
         WHERE
-            B."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
+            #{抽出開始日時} <![CDATA[<=]]> B."lastUpdateTimestamp"
         AND B."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
-        AND C."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
+        AND #{抽出開始日時} <![CDATA[<=]]> C."lastUpdateTimestamp"
         AND C."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
     </select>
     
@@ -212,7 +212,7 @@
         ON
             A."shikibetsuCode" = B."shikibetsuCode"
         WHERE
-            A."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
+            #{抽出開始日時} <![CDATA[<=]]> A."lastUpdateTimestamp"
         AND A."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
     </select>
     
@@ -227,7 +227,7 @@
         ON
             A."hihokenshaNo" = B."hihokenshaNo"
         WHERE
-            B."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
+            #{抽出開始日時} <![CDATA[<=]]> B."lastUpdateTimestamp"
         AND B."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
     </select>
     
@@ -367,51 +367,51 @@
         LEFT JOIN rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
         ON "DbT2003Kibetsu"."dbT2003Kibetsu_choteiId" = "UrT0705ChoteiKyotsu"."choteiId"
         LEFT JOIN rgur."UrT0508SeikatsuHogoJukyusha" AS "UrT0508SeikatsuHogoJukyusha"
+            INNER JOIN 
+            rgur."UrT0526SeikatsuHogoFujoShurui" AS "UrT0526SeikatsuHogoFujoShurui"
+            ON "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "UrT0526SeikatsuHogoFujoShurui"."shikibetsuCode"
+            AND "UrT0508SeikatsuHogoJukyusha"."gyomuCode" = "UrT0526SeikatsuHogoFujoShurui"."gyomuCode"
+            AND "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD" = "UrT0526SeikatsuHogoFujoShurui"."jukyuKaishiYMD"
+            LEFT JOIN
+            rgur."UrT0528SeikatsuHogoTeishikikan" AS "UrT0528SeikatsuHogoTeishikikan"
+            ON "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "UrT0528SeikatsuHogoTeishikikan"."shikibetsuCode"
+            AND "UrT0508SeikatsuHogoJukyusha"."gyomuCode" = "UrT0528SeikatsuHogoTeishikikan"."gyomuCode"
+            AND "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD" = "UrT0528SeikatsuHogoTeishikikan"."jukyuKaishiYMD"
         ON A."dbT1001HihokenshaDaicho_shikibetsuCode" = "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode"
-        LEFT JOIN 
-        rgur."UrT0526SeikatsuHogoFujoShurui" AS "UrT0526SeikatsuHogoFujoShurui"
-        ON "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "UrT0526SeikatsuHogoFujoShurui"."shikibetsuCode"
-        AND "UrT0508SeikatsuHogoJukyusha"."gyomuCode" = "UrT0526SeikatsuHogoFujoShurui"."gyomuCode"
-        AND "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD" = "UrT0526SeikatsuHogoFujoShurui"."jukyuKaishiYMD"
-        LEFT JOIN
-        rgur."UrT0528SeikatsuHogoTeishikikan" AS "UrT0528SeikatsuHogoTeishikikan"
-        ON "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "UrT0528SeikatsuHogoTeishikikan"."shikibetsuCode"
-        AND "UrT0508SeikatsuHogoJukyusha"."gyomuCode" = "UrT0528SeikatsuHogoTeishikikan"."gyomuCode"
-        AND "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD" = "UrT0528SeikatsuHogoTeishikikan"."jukyuKaishiYMD"
         LEFT JOIN rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS "DbT7006RoreiFukushiNenkinJukyusha"
         ON A."dbT1001HihokenshaDaicho_shikibetsuCode" = "DbT7006RoreiFukushiNenkinJukyusha"."shikibetsuCode"
-        INNER JOIN 
-        (SELECT B.*
-        FROM 
-        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1006KyokaisoGaitoshaMapper.noDeleted_DbT1006KyokaisoGaitosha" />) AS B
-        INNER JOIN
-        (SELECT C."hihokenshaNo",
-        C."linkNo",
-        MAX(C."rirekiNo") as "rirekiNo"
-        FROM 
-        rgdb."DbT1006KyokaisoGaitosha" AS C
-        GROUP BY
-        C."hihokenshaNo",
-        C."linkNo"
-        ) AS A
-        ON
-        A."hihokenshaNo" = B."dbT1006KyokaisoGaitosha_hihokenshaNo"
-        AND A."linkNo" = B."dbT1006KyokaisoGaitosha_linkNo"
-        AND A."rirekiNo" = B."dbT1006KyokaisoGaitosha_rirekiNo"
-        ) AS DbT1006KyokaisoGaitosha
+        LEFT JOIN 
+            (SELECT B.*
+            FROM 
+            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1006KyokaisoGaitoshaMapper.noDeleted_DbT1006KyokaisoGaitosha" />) AS B
+            INNER JOIN
+            (SELECT C."hihokenshaNo",
+            C."linkNo",
+            MAX(C."rirekiNo") as "rirekiNo"
+            FROM 
+            rgdb."DbT1006KyokaisoGaitosha" AS C
+            GROUP BY
+            C."hihokenshaNo",
+            C."linkNo"
+            ) AS A
+            ON
+            A."hihokenshaNo" = B."dbT1006KyokaisoGaitosha_hihokenshaNo"
+            AND A."linkNo" = B."dbT1006KyokaisoGaitosha_linkNo"
+            AND A."rirekiNo" = B."dbT1006KyokaisoGaitosha_rirekiNo"
+            ) AS DbT1006KyokaisoGaitosha
+            LEFT JOIN
+            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1013KyokaisoSochiShinseiMapper.noDeleted_DbT1013KyokaisoSochiShinsei" />) AS DbT1013KyokaisoSochiShinsei
+            ON
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo" = DbT1013KyokaisoSochiShinsei."dbT1013KyokaisoSochiShinsei_hihokenshaNo" and
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo" = DbT1013KyokaisoSochiShinsei."dbT1013KyokaisoSochiShinsei_rirekiNo" and
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" = DbT1013KyokaisoSochiShinsei."dbT1013KyokaisoSochiShinsei_linkNo"
+            LEFT JOIN
+            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1007KyokaisoHokenryoDankaiMapper.noDeleted_DbT1007KyokaisoHokenryoDankai" />) AS DbT1007KyokaisoHokenryoDankai
+            ON
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_hihokenshaNo" and
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_rirekiNo" and
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_linkNo"
         ON A."dbT1001HihokenshaDaicho_hihokenshaNo"  =  DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo"
-        LEFT JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1013KyokaisoSochiShinseiMapper.noDeleted_DbT1013KyokaisoSochiShinsei" />) AS DbT1013KyokaisoSochiShinsei
-        ON
-        DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo" = DbT1013KyokaisoSochiShinsei."dbT1013KyokaisoSochiShinsei_hihokenshaNo" and
-        DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo" = DbT1013KyokaisoSochiShinsei."dbT1013KyokaisoSochiShinsei_rirekiNo" and
-        DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" = DbT1013KyokaisoSochiShinsei."dbT1013KyokaisoSochiShinsei_linkNo"
-        LEFT JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1007KyokaisoHokenryoDankaiMapper.noDeleted_DbT1007KyokaisoHokenryoDankai" />) AS DbT1007KyokaisoHokenryoDankai
-        ON
-        DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_hihokenshaNo" and
-        DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_rirekiNo" and
-        DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_linkNo"
         LEFT JOIN 
         (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
         ON A."dbT1001HihokenshaDaicho_shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
@@ -1341,38 +1341,40 @@
     </resultMap>
     <sql id="maxHihokenshaNo_DbT1001HihokenshaDaicho">
         SELECT 
-        DbT1001.*
-        FROM
-        rgdb."DbT1001HihokenshaDaicho" AS DbT1001
-        WHERE
-        (DbT1001."hihokenshaNo", DbT1001."ichigoShikakuShutokuYMD", DbT1001."shikakuSoshitsuYMD", DbT1001."idoYMD", DbT1001."edaNo")
-        IN
-        (SELECT
-        Q."hihokenshaNo",
-        Q."ichigoShikakuShutokuYMD",
-        Q."shikakuSoshitsuYMD",
-        Q."idoYMD",
-        Q."edaNo"
-        FROM 
-        rgdb."DbT1001HihokenshaDaicho" AS Q
-        INNER JOIN
-        (SELECT
-        "hihokenshaNo",
-        "ichigoShikakuShutokuYMD",
-        "shikakuSoshitsuYMD",
-        MAX("idoYMD" || "edaNo") AS max1
-        FROM
-        rgdb."DbT1001HihokenshaDaicho"
-        GROUP BY
-        "hihokenshaNo",
-        "ichigoShikakuShutokuYMD",
-        "shikakuSoshitsuYMD"
-        )AS T
-        ON
-        T."hihokenshaNo" = Q."hihokenshaNo"
-        AND T."ichigoShikakuShutokuYMD" = Q."ichigoShikakuShutokuYMD"
-        AND COALESCE(T."shikakuSoshitsuYMD",'') = COALESCE(Q."shikakuSoshitsuYMD",'')
-        AND T."max1" = (Q."idoYMD" || Q."edaNo")
-        )
+                DbT1001.*
+             FROM
+                rgdb."DbT1001HihokenshaDaicho" AS DbT1001
+             INNER JOIN
+             (SELECT
+                Q."hihokenshaNo",
+                Q."ichigoShikakuShutokuYMD",
+                Q."shikakuSoshitsuYMD",
+                Q."idoYMD",
+                Q."edaNo"
+             FROM 
+                rgdb."DbT1001HihokenshaDaicho" AS Q
+                INNER JOIN
+                (SELECT
+                    "hihokenshaNo",
+                    "ichigoShikakuShutokuYMD",
+                    "shikakuSoshitsuYMD",
+                    MAX("idoYMD" || "edaNo") AS max1
+                 FROM
+                    rgdb."DbT1001HihokenshaDaicho"
+                 GROUP BY
+                    "hihokenshaNo",
+                    "ichigoShikakuShutokuYMD",
+                    "shikakuSoshitsuYMD"
+                )AS T
+                ON
+                    T."hihokenshaNo" = Q."hihokenshaNo"
+                AND COALESCE(T."ichigoShikakuShutokuYMD",'00000000')= COALESCE(Q."ichigoShikakuShutokuYMD",'00000000')
+                AND COALESCE(T."shikakuSoshitsuYMD",'00000000') = COALESCE(Q."shikakuSoshitsuYMD",'00000000')
+                AND T."max1" = (Q."idoYMD" || Q."edaNo")
+                ) AS R
+               ON
+                  R."hihokenshaNo" = DbT1001."hihokenshaNo"
+                AND R."idoYMD" = DbT1001."idoYMD"
+                AND R."edaNo" = DbT1001."edaNo"
     </sql>
 </mapper>
