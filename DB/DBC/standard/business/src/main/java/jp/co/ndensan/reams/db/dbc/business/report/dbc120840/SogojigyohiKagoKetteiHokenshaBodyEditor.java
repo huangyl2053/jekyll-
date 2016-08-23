@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 /**
  * 帳票設計_DBC200085_総合事業費過誤決定通知書情報取込一覧表帳票BodyEditor
  *
- * @reamsid_LDBC-2550-031 jiangxiaolong
+ * @reamsid_L DBC-2550-031 jiangxiaolong
  */
 public class SogojigyohiKagoKetteiHokenshaBodyEditor
         implements ISogojigyohiKagoKetteiHokenshaBunEditor {
@@ -61,7 +61,7 @@ public class SogojigyohiKagoKetteiHokenshaBodyEditor
         if (null != 帳票出力対象データ.get被保険者番号()) {
             source.listUpper_4 = 帳票出力対象データ.get被保険者番号().getColumnValue();
         }
-        
+        source.listUpper_5 = 帳票出力対象データ.get被保険者氏名();
         source.listUpper_6 = doパターン54(帳票出力対象データ.getサービス提供年月());
         source.listUpper_7 = 帳票出力対象データ.getサービス種類コード().getColumnValue();
         source.listUpper_8 = 帳票出力対象データ.getサービス種類名();

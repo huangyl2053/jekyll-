@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 
 /**
  *総合事業費過誤決定通知書情報取込（保険者分)のパラメータ
- *@reamsid_L DBC-2550-011 cnzeng
+ *@reamsid_L DBC-2550-011 jiangxiaolong
  */
 @lombok.Getter
 @lombok.Setter
