@@ -8,14 +8,15 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd1200902;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100020.FutanGendogakuNinteishoReport;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100020.HakkoRirekiKoyuJohoDBD100020;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd1200902.FutanGenndoGakuNinnteiShouListPropery.DBD1200902_FutanGenndoGakuNinnteiShouListEnum;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1200902.FutanGenndoGakuNinnteiShouProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.FutanGenndoGakuNinnteiShouEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100020.FutanGendogakuNinteishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.report.hakkorireki.GyomuKoyuJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
@@ -35,6 +36,7 @@ import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
@@ -123,8 +125,8 @@ public class FutanGenndoGakuNinnteiShouProcess extends BatchProcessBase<FutanGen
                 psmAtesaki,
                 出力順,
                 帳票ID.getReportId().getColumnValue(),
-                HakkoRirekiKoyuJohoDBD100020.被保番号.get名称(),
-                HakkoRirekiKoyuJohoDBD100020.減免適用開始日.get名称()));
+                GyomuKoyuJoho.被保番号.getコード(),
+                GyomuKoyuJoho.減免適用開始日.getコード()));
     }
 
     @Override
@@ -137,8 +139,13 @@ public class FutanGenndoGakuNinnteiShouProcess extends BatchProcessBase<FutanGen
     }
 
     @Override
-    protected void process(FutanGenndoGakuNinnteiShouEntity t) {
-        IKojin iKojin = ShikibetsuTaishoFactory.createKojin(t.getPsmEntity());
+    protected void process(FutanGenndoGakuNinnteiShouEntity entity) {
+        IKojin iKojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
+        GemmenGengakuShinsei 減免減額申請情報 = new GemmenGengakuShinsei(entity.get減免減額申請Entity());
+        負担限度額認定.createBuilderForEdit()
+                .setGemmenGengakuShinsei(減免減額申請情報)
+                .setその他金額(entity.get介護保険負担限度額認定Entity().getSonotaKingaku())
+                .build();
         FutanGendogakuNinteishoReport.createReport(負担限度額認定, iKojin, 帳票制御共通取得(), 帳票制御汎用取得(), 地方公共団体,
                 processParamter.get認定証の交付日().toRDate(), ninshoshaSource);
 
@@ -178,15 +185,14 @@ public class FutanGenndoGakuNinnteiShouProcess extends BatchProcessBase<FutanGen
                 .concat(カラ)
                 .concat(processParamter.get対象日TO().toString()));
         出力条件.add(交付日.concat(processParamter.get認定証の交付日().toString()));
-        出力条件.add(new RString("【出力順】").concat(outputOrder.get設定項目リスト().get(0).get項目名())
-                .concat(より大きい)
-                .concat(outputOrder.get設定項目リスト().get(1).get項目名())
-                .concat(より大きい)
-                .concat(outputOrder.get設定項目リスト().get(2).get項目名())
-                .concat(より大きい)
-                .concat(outputOrder.get設定項目リスト().get(3).get項目名())
-                .concat(より大きい)
-                .concat(outputOrder.get設定項目リスト().get(4).get項目名()));
+        RString 設定項目 = RString.EMPTY;
+        for (ISetSortItem item : outputOrder.get設定項目リスト()) {
+            設定項目.concat(より大きい).concat(item.get項目名());
+        }
+        if (!設定項目.isEmpty()) {
+            設定項目 = 設定項目.substringEmptyOnError(1, 設定項目.length() - 1);
+        }
+        出力条件.add(new RString("【出力順】").concat(設定項目));
 
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 帳票ID.getReportId().value(),
