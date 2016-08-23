@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * コードマスタ取得Businessクラスです。
  *
- * @reamsid_L DBA-1230-010 yaoyahui
+ * @reamsid_L DBE-1840-011 yaoyahui
  */
 public class KoueMashite {
 
@@ -37,6 +37,8 @@ public class KoueMashite {
         for (CodeMasterEucCsvEntity codeMasterEucCsvEntity : codeMasterEucCsvEntityList) {
             csvWriter.writeLine(codeMasterEucCsvEntity);
         }
-
+        if (csvWriter.getCount() != 0) {
+            csvWriter.close();
+        }
     }
 }
