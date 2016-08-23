@@ -55,18 +55,18 @@
     </resultMap>
     
     <sql id="allColumns_SogojigyohiSaishinsaKetteiHokenshaIn">
-        DbWT3063."kokuhoRengokaiName" AS dbwt3063_kokuhoRengokaiName,
-        DbWT3063."sinsaiinkaiName" AS dbwt3063_sinsaiinkaiName,
-        DbWT3063."hdrShoHokenshaNo" AS dbwt3063_hdrShoHokenshaNo,
-        DbWT3063."hdrShoHokenshaMei" AS dbwt3063_hdrShoHokenshaMei,
-        DbWT3064."toriatsukaiYm" AS dbwt3064_toriatsukaiYm,
+        DbWT3063."kokuhorenName" AS dbwt3063_kokuhoRengokaiName,
+        DbWT3063."shinsakaiName" AS dbwt3063_sinsaiinkaiName,
+        DbWT3063."shoKisaiHokenshaNo" AS dbwt3063_hdrShoHokenshaNo,
+        DbWT3063."shoKisaiHokenshaName" AS dbwt3063_hdrShoHokenshaMei,
+        DbWT3064."toriatsukaiYM" AS dbwt3064_toriatsukaiYm,
         DbWT3064."jigyoshoNo" AS dbwt3064_jigyoshoNo,
-        DbWT3064."jigyoshoMei" AS dbwt3064_jigyoshoMei,
+        DbWT3064."jigyoshoName" AS dbwt3064_jigyoshoMei,
         DbWT0001."hihokenshaNo" AS dbwt0001_hihokenshaNo,
         DbWT0001."orgHihokenshaShimei" AS dbwt0001_orgHihokenshaShimei,
-        DbWT3064."serviceTeikyoYm" AS dbwt3064_serviceTeikyoYm,
+        DbWT3064."serviceTeikyoYM" AS dbwt3064_serviceTeikyoYm,
         DbWT3064."serviceShuruiCode" AS dbwt3064_serviceShuruiCode,
-        DbWT3064."serviceShuruiName" AS dbwt3064_serviceShuruiName,
+        DbWT3064."serviceShuruiMei" AS dbwt3064_serviceShuruiName,
         DbWT3064."kagomoushitateJiyuCode" AS dbwt3064_kagomoushitateJiyuCode,
         DbWT3064."kagomoushitateJiyu" AS dbwt3064_kagomoushitateJiyu,
         DbWT3064."toshoSeikyuTanisu" AS dbwt3064_toshoSeikyuTanisu,
@@ -88,6 +88,6 @@
         DbWT0001."shimei50onKana" AS dbwt0001_shimei50onKana,
         DbWT0001."meisho" AS dbwt0001_meisho,
         DbWT3063."hokenshaNo" AS dbwt3063_hokenshaNo,
-        DbWT3063."hokenshaMei" AS dbwt3063_hokenshaMei
+        DbWT3063."hokenshaName" AS dbwt3063_hokenshaMei
     </sql>
 </mapper>
