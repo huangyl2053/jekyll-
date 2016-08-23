@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
@@ -48,6 +48,8 @@ public class IraiJohoDataTorikomiHandler {
      */
     public void set一覧エリア(List<IraiJohoDataTorikomiCsvEntity> csvEntityList) {
         List<dgTorikomiFileIchiran_Row> rowlist = new ArrayList<>();
+        List<KeyValueDataSource> selectedKeyItems = new ArrayList<>();
+        selectedKeyItems.add(new KeyValueDataSource(new RString(0), new RString(0)));
         for (IraiJohoDataTorikomiCsvEntity csvEntity : csvEntityList) {
             dgTorikomiFileIchiran_Row row1 = new dgTorikomiFileIchiran_Row();
             row1.setHokenshaBango(csvEntity.get保険者番号());
@@ -62,10 +64,12 @@ public class IraiJohoDataTorikomiHandler {
             row1.setIryouKikanMei(csvEntity.get医療機関名());
             row1.setShuziiMei(csvEntity.get医師氏名());
             row1.setKiguusuu(new RString("1"));
+            row1.getCheckBox().setDataSource(selectedKeyItems);
             rowlist.add(row1);
             dgTorikomiFileIchiran_Row row2 = new dgTorikomiFileIchiran_Row();
             row2.setKiguusuu(new RString("0"));
-            row2.setDeleteButtonState(DataGridButtonState.Disabled);
+            row2.getCheckBox().setDataSource(selectedKeyItems);
+            row2.getCheckBox().setVisible(false);
             rowlist.add(row2);
         }
         div.getDgTorikomiFileIchiran().setDataSource(rowlist);

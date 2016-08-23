@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
@@ -31,7 +30,7 @@ public class HanteiTaishoshaTempEntity
     @TempTableColumnOrder(1)
     private FlexibleYear taishoNendo;
     @TempTableColumnOrder(2)
-    private FlexibleYearMonth taishoTsuki;
+    private RString taishoTsuki;
     @TempTableColumnOrder(3)
     private RString taishoKubun;
     @TempTableColumnOrder(4)

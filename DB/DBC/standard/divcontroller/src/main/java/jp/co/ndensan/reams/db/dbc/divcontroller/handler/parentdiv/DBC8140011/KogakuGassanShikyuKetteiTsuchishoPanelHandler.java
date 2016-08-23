@@ -119,8 +119,7 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
      */
     public List<JukyushaDaicho> get受給者台帳(HihokenshaNo 被保険者番号) {
         JukyushaDaichoManager manager = new JukyushaDaichoManager();
-        List<JukyushaDaicho> 受給者台帳 = manager.get受給者台帳情報(被保険者番号);
-        return 受給者台帳;
+        return manager.get受給者台帳情報(被保険者番号);
     }
 
     /**
@@ -131,8 +130,7 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
      */
     public List<SogoJigyoTaishosha> get総合事業対象者(HihokenshaNo 被保険者番号) {
         SogoJigyoTaishoshaManager manager = new SogoJigyoTaishoshaManager();
-        List<SogoJigyoTaishosha> 総合事業対象者 = manager.get総合事業対象者(被保険者番号);
-        return 総合事業対象者;
+        return manager.get総合事業対象者(被保険者番号);
     }
 
     /**
@@ -143,8 +141,7 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
      */
     public List<JigyoKogakuGassanShikyuFushikyuKettei> get事業高額合算支給不支給決定List(HihokenshaNo 被保険者番号) {
         JigyoKogakuGassanShikyuFushikyuKetteiManager manager = new JigyoKogakuGassanShikyuFushikyuKetteiManager();
-        List<JigyoKogakuGassanShikyuFushikyuKettei> 事業高額合算支給不支給決定List = manager.get事業高額合算支給不支給決定一覧(被保険者番号);
-        return 事業高額合算支給不支給決定List;
+        return manager.get事業高額合算支給不支給決定一覧(被保険者番号);
     }
 
     /**
