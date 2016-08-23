@@ -111,8 +111,8 @@ public class JigyoshaServiceHandler {
     public void set画面情報(List<KaigoJigyoshaShiteiService> list) {
         if (!list.isEmpty()) {
             set画面情報(list.get(0));
+            set追加情報(div);
         }
-        set追加情報(div);
     }
     
            /**
