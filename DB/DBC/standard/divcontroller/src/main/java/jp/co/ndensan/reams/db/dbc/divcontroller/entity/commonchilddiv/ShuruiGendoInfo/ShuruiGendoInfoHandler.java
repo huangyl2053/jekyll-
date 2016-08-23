@@ -41,6 +41,9 @@ public class ShuruiGendoInfoHandler {
      * @param 給付計画自己作成EntityList List<KyufuJikoSakuseiResult>
      */
     public void init(FlexibleYearMonth 利用年月, List<KyufuJikoSakuseiResult> 給付計画自己作成EntityList) {
+        if (給付計画自己作成EntityList == null || 給付計画自己作成EntityList.isEmpty()) {
+            return;
+        }
         List<ServiceTypeDetails> サービス種類詳細 = new ArrayList<>();
         for (KyufuJikoSakuseiResult result : 給付計画自己作成EntityList) {
             ServiceTypeDetails detail = new ServiceTypeDetails();

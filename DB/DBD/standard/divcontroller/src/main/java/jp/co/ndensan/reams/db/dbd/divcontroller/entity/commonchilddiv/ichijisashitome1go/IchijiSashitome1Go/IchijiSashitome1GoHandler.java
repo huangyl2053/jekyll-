@@ -181,6 +181,9 @@ public class IchijiSashitome1GoHandler {
         if (pairs.iterator().hasNext()) {
             return pairs;
         }
+        DisplayNone_控除登録用(true);
+        DisplayNone_差止登録用(false);
+        DisplayNone_照会用(true);
         div.getTxtSashitomeTorokuKubun().setDisabled(true);
         div.getTxtSashitomeTorokuYMD().setDisabled(false);
         div.getTxtSashitomeTorokuTsuchiHakkoYMD().setReadOnly(true);
@@ -278,7 +281,10 @@ public class IchijiSashitome1GoHandler {
                 div.getTxtSashitomeTorokuTsuchiHakkoYMD().setReadOnly(true);
                 div.getTxtSashitomeNofuKigenYMD().setDisabled(false);
                 div.getTxtSashitomeKaijoYMD().setDisplayNone(true);
-                div.getTxtSashitomeTorokuKubun().setValue(支払方法変更差止.get差止控除状態区分());
+                if (支払方法変更差止.get差止控除状態区分() != null && !支払方法変更差止.get差止控除状態区分().isEmpty()) {
+                    div.getTxtSashitomeTorokuKubun().setValue(ShiharaiHenkoSashitomeKojoJotaiKubun.
+                            toValue(支払方法変更差止.get差止控除状態区分()).get名称());
+                }
                 div.getTxtSashitomeTorokuYMD().setValue(支払方法変更差止.get差止決定年月日());
                 div.getTxtSashitomeTorokuTsuchiHakkoYMD().setValue(支払方法変更差止.get差止通知書発行年月日());
                 div.getTxtSashitomeNofuKigenYMD().setValue(支払方法変更差止.get差止納付期限());
@@ -551,8 +557,8 @@ public class IchijiSashitome1GoHandler {
         償還情報一覧初期表示();
         共通初期表示();
         DisplayNone_照会用(true);
-        div.getIchijiSashitome1GoKakutei().setDisabled(false);
-        div.getIchijiSashitome1GoTorikeshi().setDisabled(true);
+        div.getIchijiSashitome1GoKakutei().setDisabled(true);
+        div.getIchijiSashitome1GoTorikeshi().setDisabled(false);
     }
 
     private void setValue(RString 押下ボタン) {
@@ -564,22 +570,30 @@ public class IchijiSashitome1GoHandler {
         List<dgSashitomeKojoIchiran_Row> rowList = new ArrayList();
         dgSashitomeKojoIchiran_Row row = new dgSashitomeKojoIchiran_Row();
         div.getTxtSagakuKingakuGokei().setValue(null);
+        RString 差止控除状態区分;
         if (押下ボタン.equals(_給付一時差止登録)) {
             for (int i = 0; i < 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().size(); i++) {
                 if (支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get情報分類区分()
                         .equals(ShiharaiHenkoJohoBunruiKubun.保険料控除情報.getコード())) {
-                    row.setKojo(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除状態区分());
+                    差止控除状態区分 = 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除状態区分();
+                    if (差止控除状態区分 != null && !差止控除状態区分.isEmpty()) {
+                        row.setKojo(ShiharaiHenkoSashitomeKojoJotaiKubun.toValue(差止控除状態区分).get名称());
+                    }
                 }
                 if (支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get情報分類区分()
                         .equals(ShiharaiHenkoJohoBunruiKubun.差止情報.getコード())) {
-                    row.setSashitome(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除状態区分());
-                    row.setSashitome2(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除状態区分());
+                    差止控除状態区分 = 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除状態区分();
+                    if (差止控除状態区分 != null && !差止控除状態区分.isEmpty()) {
+                        row.setSashitome(ShiharaiHenkoSashitomeKojoJotaiKubun.toValue(差止控除状態区分).get名称());
+                        row.setSashitome2(ShiharaiHenkoSashitomeKojoJotaiKubun.toValue(差止控除状態区分).get名称());
+                    }
                     row.setSeiriNo(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止償還整理番号());
                     row.getTxtTeikyoYM().setValue(new FlexibleDate(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止サービス提供年月().toString()));
                     row.getTxtSashitomeTorokuYMD().setValue(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止決定年月日());
                     row.getTxtSashitomeKaijoYMD().setValue(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止解除年月日());
                     row.getTxtNofuKigenYMD().setValue(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止納付期限());
-                    if (支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止通知書発行年月日().isEmpty()) {
+                    if (支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止通知書発行年月日() == null
+                            || 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止通知書発行年月日().isEmpty()) {
                         row.setSashitomeTsuchi(RString.EMPTY);
                     } else {
                         row.setSashitomeTsuchi(new RString("発行済"));
@@ -606,7 +620,10 @@ public class IchijiSashitome1GoHandler {
                 row.getTxtKojoTorokuYMD().setValue(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get控除決定年月日());
                 row.getTxtShoTeishutsuKigenYMD().setValue(支払方法変更管理業務概念.get被保険者証提出期限());
                 if (支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get情報分類区分().equals(ShiharaiHenkoJohoBunruiKubun.保険料控除情報.getコード())) {
-                    row.setKojo(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除状態区分());
+                    差止控除状態区分 = 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除状態区分();
+                    if (差止控除状態区分 != null && !差止控除状態区分.isEmpty()) {
+                        row.setKojo(ShiharaiHenkoSashitomeKojoJotaiKubun.toValue(差止控除状態区分).get名称());
+                    }
                     if (支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get控除通知書発行年月日().isEmpty()) {
                         row.setKaijoTsuchi(RString.EMPTY);
                     } else {
@@ -962,8 +979,10 @@ public class IchijiSashitome1GoHandler {
         entity.setSashitome_KetteiYMD(div.getTxtSashitomeTorokuYMD().getValue());
         entity.setSashitome_TsuchiSaiHakkoFlag(false);
         entity.setSashitome_NofuYMD(div.getTxtSashitomeNofuKigenYMD().getValue());
-        entity.setSashitome_ServiceTeikyoYM(div.getDgSashitomeKojoIchiran().getClickedItem().getTxtTeikyoYM().getValue().getYearMonth());
-        entity.setSashitome_ShokanSeiriNo(div.getDgSashitomeKojoIchiran().getClickedItem().getSeiriNo());
+        if (div.getDgSashitomeKojoIchiran().getClickedItem() != null) {
+            entity.setSashitome_ServiceTeikyoYM(div.getDgSashitomeKojoIchiran().getClickedItem().getTxtTeikyoYM().getValue().getYearMonth());
+            entity.setSashitome_ShokanSeiriNo(div.getDgSashitomeKojoIchiran().getClickedItem().getSeiriNo());
+        }
         entity.setLogicalDeletedFlag(false);
         return entity;
     }
