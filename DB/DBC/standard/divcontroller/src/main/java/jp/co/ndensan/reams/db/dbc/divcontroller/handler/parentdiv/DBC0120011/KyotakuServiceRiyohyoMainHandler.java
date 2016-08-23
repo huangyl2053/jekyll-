@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.kyotakuserviceriyohyomain.Kyotaku
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuTodokede;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.HihokenshaKankeiCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -145,7 +146,8 @@ public class KyotakuServiceRiyohyoMainHandler {
         if (居宅給付計画届出.get届出者関係区分() == null) {
             div.getTodokedesha().getTxtTodokedeshaKankeiKubun().clearValue();
         } else {
-            div.getTodokedesha().getTxtTodokedeshaKankeiKubun().setValue(居宅給付計画届出.get届出者関係区分());
+            div.getTodokedesha().getTxtTodokedeshaKankeiKubun().setValue(
+                    HihokenshaKankeiCode.toValue(居宅給付計画届出.get届出者関係区分()).get名称());
         }
         if (居宅給付計画届出.get届出者電話番号() == null) {
             div.getTodokedesha().getTxtTodokedeshaTelNo().clearDomain();

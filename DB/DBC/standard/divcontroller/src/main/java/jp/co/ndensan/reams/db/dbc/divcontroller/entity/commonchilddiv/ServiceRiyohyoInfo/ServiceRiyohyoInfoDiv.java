@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
@@ -596,5 +597,35 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     public void initialize(RString 表示モード, FlexibleYearMonth 利用年月, FlexibleYearMonth 対象年月,
             HihokenshaNo 被保険者番号, RString 居宅総合事業区分, int 履歴番号) {
         ServiceRiyohyoInfoDivHandler.of(this).init(表示モード, 利用年月, 対象年月, 被保険者番号, 居宅総合事業区分, 履歴番号);
+    }
+
+    /**
+     * 届出日をセットします。
+     *
+     * @param 届出日 RDate
+     */
+    @Override
+    public void setTodokedeYMD(RDate 届出日) {
+
+    }
+
+    /**
+     * 適用期間開始日をセットします。
+     *
+     * @param 適用期間開始日 RDate
+     */
+    @Override
+    public void setTekiyoKikanFrom(RDate 適用期間開始日) {
+
+    }
+
+    /**
+     * 適用期間終日をセットします。
+     *
+     * @param 適用期間終日 RDate
+     */
+    @Override
+    public void setTekiyoKikanTo(RDate 適用期間終日) {
+
     }
 }
