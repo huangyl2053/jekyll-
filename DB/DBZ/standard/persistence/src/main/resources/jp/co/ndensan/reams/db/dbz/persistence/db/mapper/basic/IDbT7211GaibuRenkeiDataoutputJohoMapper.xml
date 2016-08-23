@@ -31,7 +31,7 @@
         "DbT7211GaibuRenkeiDataoutputJoho"."ninteiChosaIkenshoKekkaJohoChushutsuYMD" as "dbT7211GaibuRenkeiDataoutputJoho_ninteiChosaIkenshoKekkaJohoChushutsuYMD",
         "DbT7211GaibuRenkeiDataoutputJoho"."ichijihanteiChushutsuYMD" as "dbT7211GaibuRenkeiDataoutputJoho_ichijihanteiChushutsuYMD",
         "DbT7211GaibuRenkeiDataoutputJoho"."shinsakaiKekkaJohoChushutsuYMD" as "dbT7211GaibuRenkeiDataoutputJoho_shinsakaiKekkaJohoChushutsuYMD",
-        "DbT7211GaibuRenkeiDataoutputJoho"."centerSoshinChushutsuYMD" as "dbT7211GaibuRenkeiDataoutputJoho_CenterSoshinChushutsuYMD"
+        "DbT7211GaibuRenkeiDataoutputJoho"."centerSoshinChushutsuYMD" as "dbT7211GaibuRenkeiDataoutputJoho_centerSoshinChushutsuYMD"
     </sql>
 
 
@@ -51,7 +51,7 @@
         <result property="ninteiChosaIkenshoKekkaJohoChushutsuYMD" column="dbT7211GaibuRenkeiDataoutputJoho_ninteiChosaIkenshoKekkaJohoChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ichijihanteiChushutsuYMD" column="dbT7211GaibuRenkeiDataoutputJoho_ichijihanteiChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shinsakaiKekkaJohoChushutsuYMD" column="dbT7211GaibuRenkeiDataoutputJoho_shinsakaiKekkaJohoChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="CenterSoshinChushutsuYMD" column="dbT7211GaibuRenkeiDataoutputJoho_CenterSoshinChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="centerSoshinChushutsuYMD" column="dbT7211GaibuRenkeiDataoutputJoho_centerSoshinChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
 
     <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7211GaibuRenkeiDataoutputJohoEntity">

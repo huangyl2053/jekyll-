@@ -67,7 +67,7 @@
           WHERE
             dbt5101."logicalDeletedFlag" = FALSE 
             <if test="detaFlg">
-                AND dbt7211."CenterSoshinChushutsuYMD" IS NULL
+                AND dbt7211."centerSoshinChushutsuYMD" IS NULL
             </if>
             <if test="shinnseiKaishi">
                 AND #{申請日_開始} <![CDATA[<=]]> dbt5101."ninteiShinseiYMD"
