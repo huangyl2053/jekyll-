@@ -215,12 +215,12 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
-                tuutiFlag,
                 tokkiJikouFlag,
                 itiHenteiKekkaFlag,
                 tokkiPlusItiFlag,
-                RString.EMPTY,
                 ikensyoFlag,
+                RString.EMPTY,
+                tuutiFlag,
                 yobiHenteiFlag);
     }
 }
