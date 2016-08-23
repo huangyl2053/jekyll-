@@ -25,6 +25,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -59,6 +62,7 @@ public class ServiceRiyohyoInfo {
 
     private static final Decimal DECIMAL_90 = new Decimal(90);
     private static final Decimal DECIMAL_80 = new Decimal(80);
+    private static final RString 排他キー = new RString("DBCHihokenshaNo");
 
     private ServiceRiyohyoInfoDivHandler getHandler(ServiceRiyohyoInfoDiv div) {
         return new ServiceRiyohyoInfoDivHandler(div);
@@ -347,6 +351,12 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnUpdate(ServiceRiyohyoInfoDiv div) {
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        RString 前排他キー = 排他キー.concat(被保険者番号.getColumnValue());
+        LockingKey key = new LockingKey(前排他キー);
+        if (!RealInitialLocker.tryGetLock(key)) {
+            throw new PessimisticLockingException();
+        }
         RString 表示モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
         RString 居宅総合事業区分 = ViewStateHolder.get(ViewStateKeys.居宅総合事業区分, RString.class);
         TankiNyushoResult 短期入所情報 = ViewStateHolder.get(ViewStateKeys.短期入所情報, TankiNyushoResult.class);
@@ -363,6 +373,7 @@ public class ServiceRiyohyoInfo {
             return 総計チェック(div, 居宅総合事業区分, サービス利用票情報);
         }
         getHandler(div).init保存処理(居宅総合事業区分, サービス利用票情報);
+        RealInitialLocker.release(key);
         return ResponseData.of(div).respond();
     }
 
