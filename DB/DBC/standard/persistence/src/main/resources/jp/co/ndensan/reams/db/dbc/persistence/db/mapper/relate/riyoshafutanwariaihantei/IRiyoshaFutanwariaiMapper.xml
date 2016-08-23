@@ -1123,7 +1123,7 @@
         resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.IHanteiTaishoshaTempMapper.ResultMap_HanteiTaishoshaTempEntity"
         fetchSize="500">
         SELECT
-            <include refid="allColumns_HanteiTaishoshaTemp" />
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.IHanteiTaishoshaTempMapper.allColumns_HanteiTaishoshaTemp" />
         FROM
             "HanteiTaishoshaTemp"
     </select>
