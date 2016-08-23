@@ -317,7 +317,6 @@ public class SokujiFukaKouseiMain {
                 更正前後徴収方法, is本算定処理済フラグ);
         ViewStateHolder.put(ViewStateKeys.更正前, koseiZengoFuka.get更正前());
         ViewStateHolder.put(ViewStateKeys.更正後, koseiZengoFuka.get更正後());
-        ViewStateHolder.put(ViewStateKeys.通知書番号, 通知書番号);
         return getResponseData(div);
     }
 
