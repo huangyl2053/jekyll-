@@ -11,6 +11,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiJoho;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiJohoEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.yokaigoninteijoho.IYokaigoNinteiJohoMapper;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7908KaigoDonyuKeitaiDac;
@@ -24,6 +25,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5150RenrakusakiJohoDac
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -245,23 +247,21 @@ public class YokaigoNinteiJohoManager {
         return resultList;
     }
 
-//    /**
-//     * 今回前回履歴情報情報を返す。
-//     *
-//     * @param 被保険者番号 被保険者番号
-//     *
-//     * @return 今回前回履歴情報 List<YokaigoRirekiJohoEntity>
-//     */
-//    public List<YokaigoRirekiJoho> get今回前回履歴情報(RString 被保険者番号) {
-//        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-//        IYokaigoNinteiJohoMapper mapper = mapperProvider.create(IYokaigoNinteiJohoMapper.class);
-//        List<YokaigoRirekiJohoEntity> 今回前回履歴情報リスト = mapper.get今回前回履歴情報(被保険者番号);
-//        List<YokaigoRirekiJoho> resultList = new ArrayList<>();
-//        for (YokaigoRirekiJohoEntity entity : 今回前回履歴情報リスト) {
-//            entity.initializeMd5ToEntities();
-//            resultList.add(new YokaigoRirekiJoho(entity));
-//        }
-//        return resultList;
-//    }
+    /**
+     * 受給者台帳情報Max履歴番号を取得する。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 被保険者番号 被保険者番号
+     * @param 受給申請事由 受給申請事由
+     * @param 申請書管理番号 申請書管理番号
+     * @return Max履歴番号 RString
+     */
+    public RString getMax履歴番号ByKey(
+            LasdecCode 市町村コード,
+            HihokenshaNo 被保険者番号,
+            Code 受給申請事由,
+            ShinseishoKanriNo 申請書管理番号) {
+        return 受給者台帳Dac.get受給者台帳情報Max履歴番号(市町村コード, 被保険者番号, 受給申請事由, 申請書管理番号);
+    }
 
 }
